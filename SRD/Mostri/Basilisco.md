@@ -1,0 +1,62 @@
+---
+id: "srd-basilisco"
+srd_id: "basilisco"
+nome: "Basilisco"
+categoria: "srd"
+tipo: "mostro"
+stato: "pronto"
+canonico: false
+fonte: "SRD 5.2.1"
+licenza: "CC-BY-4.0"
+repository: "neokon91/DND-SRD-IT"
+generato_da: "import_srd"
+name: "Basilisco"
+tipo_creatura: "Mostruosità"
+dimensione: "Media"
+allineamento: "senza allineamento"
+classe_armatura: 15
+iniziativa: -1
+hp: 52
+hit_dice: "8d8 + 16"
+speed: "camminata: 6 m"
+cr: 3
+xp: 700
+bonus_competenza: 2
+statblock: true
+---
+# Basilisco
+
+> [!infobox|wiki]- Mostro SRD
+> Tipo: Media Mostruosità, senza allineamento
+> CA: 15
+> PF: 52 (8d8 + 16)
+> Velocita: camminata: 6 m
+> GS: 3 (PE 700; BC +2)
+
+## Caratteristiche
+
+| Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
+| --- | --- | --- | --- |
+| Forza | 16 | 3 | 3 |
+| Destrezza | 8 | -1 | -1 |
+| Costituzione | 15 | 2 | 2 |
+| Intelligenza | 2 | -4 | -4 |
+| Saggezza | 8 | -1 | -1 |
+| Carisma | 7 | -2 | -2 |
+
+## Sensi
+
+percezione_passiva: 9, scurovisione: 18 m
+
+## Lingue
+
+nessuna
+
+## Azioni
+
+### Morso
+
+*Tiro per colpire in mischia:* +5, portata 1,5 m *Colpito:* 10 (2d6 + 3) danni perforanti più 7 (2d6) danni da veleno.
+
+> [!info] Licenza
+> Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

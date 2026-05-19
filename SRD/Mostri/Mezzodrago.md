@@ -1,0 +1,80 @@
+---
+id: "srd-mezzodrago"
+srd_id: "mezzodrago"
+nome: "Mezzodrago"
+categoria: "srd"
+tipo: "mostro"
+stato: "pronto"
+canonico: false
+fonte: "SRD 5.2.1"
+licenza: "CC-BY-4.0"
+repository: "neokon91/DND-SRD-IT"
+generato_da: "import_srd"
+name: "Mezzodrago"
+tipo_creatura: "Drago"
+dimensione: "Medio"
+allineamento: "neutrale"
+classe_armatura: 18
+iniziativa: 5
+hp: 105
+hit_dice: "14d8 + 42"
+speed: "camminata: 12 m"
+cr: 5
+xp: 1800
+bonus_competenza: 3
+statblock: true
+---
+# Mezzodrago
+
+> [!infobox|wiki]- Mostro SRD
+> Tipo: Medio Drago, neutrale
+> CA: 18
+> PF: 105 (14d8 + 42)
+> Velocita: camminata: 12 m
+> GS: 5 (PE 1.800; BC +3)
+
+## Caratteristiche
+
+| Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
+| --- | --- | --- | --- |
+| Forza | 19 | 4 | 4 |
+| Destrezza | 14 | 2 | 5 |
+| Costituzione | 16 | 3 | 3 |
+| Intelligenza | 10 | 0 | 0 |
+| Saggezza | 15 | 2 | 5 |
+| Carisma | 14 | 2 | 2 |
+
+## Abilita
+
+atletica: 7, furtivita: 5, percezione: 5
+
+## Sensi
+
+percezione_passiva: 15, scurovisione: 18 m, vista_cieca: 3 m
+
+## Lingue
+
+Comune, Draconico
+
+## Tratti
+
+### Origine draconica
+
+Il mezzodrago è legato al tipo di drago associato con uno dei seguenti tipi di danno (a scelta del GM): acido, freddo, fulmine, fuoco o veleno. Questa scelta influenza gli altri aspetti della scheda delle statistiche.
+
+## Azioni
+
+### Multiattacco
+
+Il mezzodrago effettua due attacchi Artiglio.
+
+### Artiglio
+
+*Tiro per colpire in mischia:* +7, portata 3 m. *Colpito:* 6 (1d4 + 4) danni taglienti più 7 (2d6) danni del tipo scelto per il tratto Origine draconica.
+
+### Soffio del drago (ricarica 5-6)
+
+*Tiro salvezza su Destrezza:* CD 14, tutte le creature in un cono di 9 metri. *Fallimento:* 28 (8d6) danni del tipo scelto per il tratto Origine draconica. *Successo:* danni dimezzati.
+
+> [!info] Licenza
+> Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

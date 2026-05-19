@@ -1,0 +1,72 @@
+---
+id: "srd-topo_gigante"
+srd_id: "topo_gigante"
+nome: "Topo gigante"
+categoria: "srd"
+tipo: "mostro"
+stato: "pronto"
+canonico: false
+fonte: "SRD 5.2.1"
+licenza: "CC-BY-4.0"
+repository: "neokon91/DND-SRD-IT"
+generato_da: "import_srd"
+name: "Topo gigante"
+tipo_creatura: "Bestia"
+dimensione: "Piccola"
+allineamento: "senza allineamento"
+classe_armatura: 13
+iniziativa: 3
+hp: 7
+hit_dice: "2d6"
+speed: "camminata: 9 m, scalata: 9 m"
+cr: 0.125
+xp: 25
+bonus_competenza: 2
+statblock: true
+---
+# Topo gigante
+
+> [!infobox|wiki]- Mostro SRD
+> Tipo: Piccola Bestia, senza allineamento
+> CA: 13
+> PF: 7 (2d6)
+> Velocita: camminata: 9 m, scalata: 9 m
+> GS: 1/8 (PE 25; BC +2)
+
+## Caratteristiche
+
+| Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
+| --- | --- | --- | --- |
+| Forza | 7 | -2 | -2 |
+| Destrezza | 16 | 3 | 5 |
+| Costituzione | 11 | 0 | 0 |
+| Intelligenza | 2 | -4 | -4 |
+| Saggezza | 10 | 0 | 0 |
+| Carisma | 4 | -3 | -3 |
+
+## Abilita
+
+percezione: 2
+
+## Sensi
+
+percezione_passiva: 12, scurovisione: 18 m
+
+## Lingue
+
+nessuna
+
+## Tratti
+
+### Tattiche del branco
+
+Il topo dispone di vantaggio a un tiro per colpire contro una creatura se almeno uno degli alleati del topo si trova entro 1,5 metri dalla creatura e non è incapacitato.
+
+## Azioni
+
+### Morso
+
+*Tiro per colpire in mischia:* +5, portata 1,5 m. *Colpito:* 5 (1d4 + 3) danni perforanti.
+
+> [!info] Licenza
+> Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

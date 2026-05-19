@@ -1,0 +1,80 @@
+---
+id: "srd-manto_assassino"
+srd_id: "manto_assassino"
+nome: "Manto assassino"
+categoria: "srd"
+tipo: "mostro"
+stato: "pronto"
+canonico: false
+fonte: "SRD 5.2.1"
+licenza: "CC-BY-4.0"
+repository: "neokon91/DND-SRD-IT"
+generato_da: "import_srd"
+name: "Manto assassino"
+tipo_creatura: "Aberrazione"
+dimensione: "Grande"
+allineamento: "caotico neutrale"
+classe_armatura: 14
+iniziativa: 5
+hp: 91
+hit_dice: "14d10 + 14"
+speed: "camminata: 3 m, volo: 12 m"
+cr: 8
+xp: 3900
+bonus_competenza: 3
+statblock: true
+---
+# Manto assassino
+
+> [!infobox|wiki]- Mostro SRD
+> Tipo: Grande Aberrazione, caotico neutrale
+> CA: 14
+> PF: 91 (14d10 + 14)
+> Velocita: camminata: 3 m, volo: 12 m
+> GS: 8 (PE 3.900; BC +3)
+
+## Caratteristiche
+
+| Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
+| --- | --- | --- | --- |
+| Forza | 17 | 3 | 3 |
+| Destrezza | 15 | 2 | 2 |
+| Costituzione | 12 | 1 | 1 |
+| Intelligenza | 13 | 1 | 1 |
+| Saggezza | 14 | 2 | 2 |
+| Carisma | 7 | -2 | -2 |
+
+## Abilita
+
+furtivita: 5
+
+## Sensi
+
+percezione_passiva: 12, scurovisione: 36 m
+
+## Lingue
+
+Gergo delle profondità, Sottocomune
+
+## Tratti
+
+### Sensibilità alla luce
+
+Finché è esposto alla luce intensa, il manto assassino subisce svantaggio ai tiri per colpire.
+
+## Azioni
+
+### Multiattacco
+
+Il manto assassino effettua un attacco Avvinghiare e due attacchi Coda.
+
+### Avvinghiare
+
+*Tiro per colpire in mischia:* +6, portata 1,5 m. *Colpito:* 13 (3d6 + 3) danni perforanti. Se il bersaglio è una creatura di taglia Grande o inferiore, il manto si avvinghia ad essa. Finché resta avvinghiato al bersaglio, quest'ultimo è accecato, e il manto non può effettuare attacchi Avvinghiare contro altri bersagli. Inoltre, il manto assassino dimezza i danni subiti (arrotondati per difetto) e il bersaglio subisce lo stesso ammontare di danni. Il manto assassino può staccarsi da solo usando 1,5 metri di movimento. Il bersaglio o una creatura entro 1,5 metri da esso può effettuare un'azione per staccarsi il manto di dosso, superando una prova di Forza (Atletica) con CD 14.
+
+### Coda
+
+*Tiro per colpire in mischia:* +6, portata 3 m. *Colpito:* 8 (1d10 + 3) danni taglienti.
+
+> [!info] Licenza
+> Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

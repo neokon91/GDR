@@ -1,0 +1,76 @@
+---
+id: "srd-protoplasma_nero"
+srd_id: "protoplasma_nero"
+nome: "Protoplasma nero"
+categoria: "srd"
+tipo: "mostro"
+stato: "pronto"
+canonico: false
+fonte: "SRD 5.2.1"
+licenza: "CC-BY-4.0"
+repository: "neokon91/DND-SRD-IT"
+generato_da: "import_srd"
+name: "Protoplasma nero"
+tipo_creatura: "Melma"
+dimensione: "Grande"
+allineamento: "senza allineamento"
+classe_armatura: 7
+iniziativa: -3
+hp: 68
+hit_dice: "8d10 + 24"
+speed: "camminata: 6 m, scalata: 6 m"
+cr: 4
+xp: 1100
+bonus_competenza: 2
+statblock: true
+---
+# Protoplasma nero
+
+> [!infobox|wiki]- Mostro SRD
+> Tipo: Grande Melma, senza allineamento
+> CA: 7
+> PF: 68 (8d10 + 24)
+> Velocita: camminata: 6 m, scalata: 6 m
+> GS: 4 (PE 1.100; BC +2)
+
+## Caratteristiche
+
+| Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
+| --- | --- | --- | --- |
+| Forza | 16 | 3 | 3 |
+| Destrezza | 5 | -3 | -3 |
+| Costituzione | 16 | 3 | 3 |
+| Intelligenza | 1 | -5 | -5 |
+| Saggezza | 6 | -2 | -2 |
+| Carisma | 1 | -5 | -5 |
+
+## Sensi
+
+percezione_passiva: 8, vista_cieca: 18 m
+
+## Lingue
+
+nessuna
+
+## Tratti
+
+### Amorfo
+
+Il protoplasma può muoversi attraverso uno spazio stretto fino a 2,5 centimetri senza consumare movimento extra per farlo.
+
+### Forma corrosiva
+
+Una creatura che colpisce un protoplasma con un tiro per colpire in mischia subisce 4 (1d8) danni da acido. Le munizioni non magiche che colpiscono il protoplasma e infliggono danni sono distrutte. Qualsiasi arma non magica subisce una penalità cumulativa di -1 ai tiri per colpire subito dopo aver inflitto danni al protoplasma ed esservi entrata in contatto. Se la penalità arriva a -5, l'arma è distrutta. La penalità può essere rimossa lanciando l'incantesimo riparare sull'arma. In 1 minuto, il protoplasma può corrodere 60 centimetri di legno o metallo non magico.
+
+### Movimenti del ragno
+
+Il protoplasma può scalare le superfici difficili, compresi i soffitti, senza effettuare una prova di caratteristica.
+
+## Azioni
+
+### Pseudopode dissolvente
+
+*Tiro per colpire in mischia:* +5, portata 3 m. *Colpito:* 17 (4d6 + 3) danni da acido. L'armatura non magica indossata dal bersaglio subisce una penalità di -1 alla CA che fornisce. Se la penalità riduce la sua CA a 10, l'armatura si distrugge. La penalità può essere rimossa lanciando l'incantesimo riparare sull'armatura.
+
+> [!info] Licenza
+> Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

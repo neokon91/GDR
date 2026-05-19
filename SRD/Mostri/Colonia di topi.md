@@ -1,0 +1,68 @@
+---
+id: "srd-colonia_di_topi"
+srd_id: "colonia_di_topi"
+nome: "Colonia di topi"
+categoria: "srd"
+tipo: "mostro"
+stato: "pronto"
+canonico: false
+fonte: "SRD 5.2.1"
+licenza: "CC-BY-4.0"
+repository: "neokon91/DND-SRD-IT"
+generato_da: "import_srd"
+name: "Colonia di topi"
+tipo_creatura: "Sciame"
+dimensione: "Medio"
+allineamento: "senza allineamento"
+classe_armatura: 10
+iniziativa: 0
+hp: 14
+hit_dice: "4d8 - 4"
+speed: "camminata: 9 m, scalata: 9 m"
+cr: 0.25
+xp: 50
+bonus_competenza: 2
+statblock: true
+---
+# Colonia di topi
+
+> [!infobox|wiki]- Mostro SRD
+> Tipo: Medio Sciame, senza allineamento
+> CA: 10
+> PF: 14 (4d8 - 4)
+> Velocita: camminata: 9 m, scalata: 9 m
+> GS: 1/4 (PE 50; BC +2)
+
+## Caratteristiche
+
+| Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
+| --- | --- | --- | --- |
+| Forza | 9 | -1 | -1 |
+| Destrezza | 11 | 0 | 2 |
+| Costituzione | 9 | -1 | -1 |
+| Intelligenza | 2 | -4 | -4 |
+| Saggezza | 10 | 0 | 0 |
+| Carisma | 3 | -4 | -4 |
+
+## Sensi
+
+percezione_passiva: 10, scurovisione: 9 m
+
+## Lingue
+
+nessuna
+
+## Tratti
+
+### Sciame
+
+La colonia può occupare lo spazio di un'altra creatura e viceversa, e può muoversi attraverso qualsiasi apertura abbastanza grande per un topo Minuscolo. L'orda non può recuperare punti ferita o ottenere punti ferita temporanei.
+
+## Azioni
+
+### Morsi
+
+*Tiro per colpire in mischia:* +2, portata 1,5 m. *Colpito:* 5 (2d4) danni perforanti, o 2 (1d4) danni perforanti se lo sciame è sanguinante.
+
+> [!info] Licenza
+> Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

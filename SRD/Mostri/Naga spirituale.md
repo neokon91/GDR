@@ -1,0 +1,80 @@
+---
+id: "srd-naga_spirituale"
+srd_id: "naga_spirituale"
+nome: "Naga spirituale"
+categoria: "srd"
+tipo: "mostro"
+stato: "pronto"
+canonico: false
+fonte: "SRD 5.2.1"
+licenza: "CC-BY-4.0"
+repository: "neokon91/DND-SRD-IT"
+generato_da: "import_srd"
+name: "Naga spirituale"
+tipo_creatura: "Immondo"
+dimensione: "Grande"
+allineamento: "caotico malvagio"
+classe_armatura: 17
+iniziativa: 3
+hp: 135
+hit_dice: "18d10 + 36"
+speed: "camminata: 12 m"
+cr: 8
+xp: 3900
+bonus_competenza: 3
+statblock: true
+---
+# Naga spirituale
+
+> [!infobox|wiki]- Mostro SRD
+> Tipo: Grande Immondo, caotico malvagio
+> CA: 17
+> PF: 135 (18d10 + 36)
+> Velocita: camminata: 12 m
+> GS: 8 (PE 3.900; BC +3)
+
+## Caratteristiche
+
+| Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
+| --- | --- | --- | --- |
+| Forza | 18 | 4 | 4 |
+| Destrezza | 17 | 3 | 6 |
+| Costituzione | 14 | 2 | 5 |
+| Intelligenza | 16 | 3 | 3 |
+| Saggezza | 15 | 2 | 5 |
+| Carisma | 16 | 3 | 6 |
+
+## Sensi
+
+percezione_passiva: 12, scurovisione: 18 m
+
+## Lingue
+
+Abissale, Comune
+
+## Tratti
+
+### Ristoro immondo
+
+Se la naga muore, torna in vita dopo 1d6 giorni e recupera tutti i suoi punti ferita. Solo un incantesimo desiderio può impedire a questo tratto di funzionare.
+
+## Azioni
+
+### Multiattacco
+
+La naga effettua tre attacchi, usando Morso o Raggio necrotico in qualsiasi combinazione.
+
+### Morso
+
+*Tiro per colpire in mischia:* +7, portata 3 m. *Colpito:* 7 (1d6 + 4) danni perforanti più 14 (4d6) danni da veleno.
+
+### Raggio necrotico
+
+*Tiro per colpire a distanza:* +6, gittata 18 m. *Colpito:* 21 (6d6) danni necrotici.
+
+### Incantesimi
+
+La naga lancia uno dei seguenti incantesimi, senza bisogno di componenti somatiche o materiali, utilizzando Intelligenza come caratteristica da incantatore (CD del tiro salvezza sull'incantesimo 14): 2/giorno ciascuno: blocca persone (di 3º livello), individuazione dei pensieri, fulmine (di 4º livello), porta dimensionaleA volontà: illusione minore, individuazione del magico, mano magica, respirare sott'acqua
+
+> [!info] Licenza
+> Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

@@ -1,0 +1,72 @@
+---
+id: "srd-azer_sentinella"
+srd_id: "azer_sentinella"
+nome: "Azer sentinella"
+categoria: "srd"
+tipo: "mostro"
+stato: "pronto"
+canonico: false
+fonte: "SRD 5.2.1"
+licenza: "CC-BY-4.0"
+repository: "neokon91/DND-SRD-IT"
+generato_da: "import_srd"
+name: "Azer sentinella"
+tipo_creatura: "Elementale"
+dimensione: "Medio"
+allineamento: "legale neutrale"
+classe_armatura: 17
+iniziativa: 1
+hp: 39
+hit_dice: "6d8 + 12"
+speed: "camminata: 9 m"
+cr: 2
+xp: 450
+bonus_competenza: 2
+statblock: true
+---
+# Azer sentinella
+
+> [!infobox|wiki]- Mostro SRD
+> Tipo: Medio Elementale, legale neutrale
+> CA: 17
+> PF: 39 (6d8 + 12)
+> Velocita: camminata: 9 m
+> GS: 2 (PE 450; BC +2)
+
+## Caratteristiche
+
+| Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
+| --- | --- | --- | --- |
+| Forza | 17 | 3 | 3 |
+| Destrezza | 12 | 1 | 1 |
+| Costituzione | 15 | 2 | 4 |
+| Intelligenza | 12 | 1 | 1 |
+| Saggezza | 13 | 1 | 1 |
+| Carisma | 10 | 0 | 0 |
+
+## Sensi
+
+percezione_passiva: 11
+
+## Lingue
+
+Primordiale (Ignan)
+
+## Tratti
+
+### Aura di fuoco
+
+Al termine di ogni turno dell'azer, tutte le creature a scelta dell'azer che si trovano in un'emanazione di 1,5 metri di cui l'azer è il punto di origine subiscono 5 (1d10) danni da fuoco, a meno che l'azer non sia incapacitato.
+
+### Illuminazione
+
+L'azer emana luce intensa in un raggio di 3 metri e luce fioca per altri 3 metri.
+
+## Azioni
+
+### Martello ardente
+
+*Tiro per colpire in mischia:* +5, portata 1,5 m *Colpito:* 8 (1d10 + 3) danni contundenti più 3 (1d6) danni da fuoco.
+
+> [!info] Licenza
+> Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

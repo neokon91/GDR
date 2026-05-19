@@ -1,0 +1,62 @@
+---
+id: "srd-cammello"
+srd_id: "cammello"
+nome: "Cammello"
+categoria: "srd"
+tipo: "mostro"
+stato: "pronto"
+canonico: false
+fonte: "SRD 5.2.1"
+licenza: "CC-BY-4.0"
+repository: "neokon91/DND-SRD-IT"
+generato_da: "import_srd"
+name: "Cammello"
+tipo_creatura: "Bestia"
+dimensione: "Grande"
+allineamento: "senza allineamento"
+classe_armatura: 10
+iniziativa: -1
+hp: 17
+hit_dice: "2d10 + 6"
+speed: "camminata: 15 m"
+cr: 0.125
+xp: 25
+bonus_competenza: 2
+statblock: true
+---
+# Cammello
+
+> [!infobox|wiki]- Mostro SRD
+> Tipo: Grande Bestia, senza allineamento
+> CA: 10
+> PF: 17 (2d10 + 6)
+> Velocita: camminata: 15 m
+> GS: 1/8 (PE 25; BC +2)
+
+## Caratteristiche
+
+| Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
+| --- | --- | --- | --- |
+| Forza | 15 | 2 | 2 |
+| Destrezza | 8 | -1 | -1 |
+| Costituzione | 17 | 3 | 5 |
+| Intelligenza | 2 | -4 | -4 |
+| Saggezza | 11 | 0 | 0 |
+| Carisma | 5 | -3 | -3 |
+
+## Sensi
+
+percezione_passiva: 10, scurovisione: 18 m
+
+## Lingue
+
+nessuna
+
+## Azioni
+
+### Morso
+
+*Tiro per colpire in mischia:* +4, portata 1,5 m. *Colpito:* 4 (1d4 + 2) danni contundenti.
+
+> [!info] Licenza
+> Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

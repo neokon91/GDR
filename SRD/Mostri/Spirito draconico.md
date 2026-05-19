@@ -1,0 +1,79 @@
+---
+id: "srd-spirito_draconico"
+srd_id: "spirito_draconico"
+nome: "Spirito draconico"
+categoria: "srd"
+tipo: "mostro"
+stato: "pronto"
+canonico: false
+fonte: "SRD 5.2.1"
+licenza: "CC-BY-4.0"
+repository: "neokon91/DND-SRD-IT"
+generato_da: "import_srd"
+name: "Spirito draconico"
+tipo_creatura: "Drago"
+dimensione: "Grande"
+allineamento: "senza allineamento"
+classe_armatura: "14 + il livello dell'incantesimo"
+iniziativa: 2
+hp: 
+hit_dice: 
+speed: "camminata: 9 m, volo: 18 m"
+cr: 
+xp: 0
+bonus_competenza: 0
+statblock: true
+---
+# Spirito draconico
+
+> [!infobox|wiki]- Mostro SRD
+> Tipo: Grande Drago, senza allineamento
+> CA: 14 + il livello dell'incantesimo
+> PF:  ()
+> Velocita: camminata: 9 m, volo: 18 m
+> GS: nessuno (PE 0; BC pari al bonus di competenza dell'incantatore)
+
+## Caratteristiche
+
+| Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
+| --- | --- | --- | --- |
+| Forza | 18 | 4 | 4 |
+| Destrezza | 14 | 2 | 2 |
+| Costituzione | 16 | 3 | 3 |
+| Intelligenza | 10 | 0 | 0 |
+| Saggezza | 14 | 2 | 2 |
+| Carisma | 12 | 1 | 1 |
+
+## Sensi
+
+percezione_passiva: 12, scurovisione: 18 m
+
+## Lingue
+
+Draconico
+
+## Tratti
+
+### Resistenza magica
+
+Lo spirito dispone di vantaggio ai tiri salvezza contro incantesimi e altri effetti magici.
+
+## Azioni
+
+### Multiattacco
+
+Lo spirito effettua un numero di attacchi pari alla metà del livello dell'incantesimo (arrotondato per difetto).
+
+### Morso
+
+*Tiro per colpire in mischia:* bonus pari al modificatore di attacco dell'incantesimo dell'incantatore, portata 1,5 m.
+*Colpito:* 1d10 + 4 + il livello dell'incantesimo danni del tipo scelto (acido, freddo, fuoco, fulmine o veleno).
+
+### Soffio draconico (Ricarica 5-6)
+
+*Tiro salvezza su Destrezza:* CD del tiro salvezza dell'incantesimo dell'incantatore, tutte le creature in un cono di 4,5 metri.
+*Fallimento:* 2d6 + il livello dell'incantesimo danni del tipo scelto.
+*Successo:* danni dimezzati.
+
+> [!info] Licenza
+> Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

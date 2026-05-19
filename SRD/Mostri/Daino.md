@@ -1,0 +1,72 @@
+---
+id: "srd-daino"
+srd_id: "daino"
+nome: "Daino"
+categoria: "srd"
+tipo: "mostro"
+stato: "pronto"
+canonico: false
+fonte: "SRD 5.2.1"
+licenza: "CC-BY-4.0"
+repository: "neokon91/DND-SRD-IT"
+generato_da: "import_srd"
+name: "Daino"
+tipo_creatura: "Bestia"
+dimensione: "Media"
+allineamento: "senza allineamento"
+classe_armatura: 13
+iniziativa: 3
+hp: 4
+hit_dice: "1d8"
+speed: "camminata: 15 m"
+cr: 0
+xp: 10
+bonus_competenza: 2
+statblock: true
+---
+# Daino
+
+> [!infobox|wiki]- Mostro SRD
+> Tipo: Media Bestia, senza allineamento
+> CA: 13
+> PF: 4 (1d8)
+> Velocita: camminata: 15 m
+> GS: 0 (PE 10; BC +2)
+
+## Caratteristiche
+
+| Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
+| --- | --- | --- | --- |
+| Forza | 11 | 0 | 0 |
+| Destrezza | 16 | 3 | 3 |
+| Costituzione | 11 | 0 | 0 |
+| Intelligenza | 2 | -4 | -4 |
+| Saggezza | 14 | 2 | 2 |
+| Carisma | 5 | -3 | -3 |
+
+## Abilita
+
+percezione: 4
+
+## Sensi
+
+percezione_passiva: 14, scurovisione: 18 m
+
+## Lingue
+
+nessuna
+
+## Tratti
+
+### Agile
+
+Il daino non provoca attacchi di opportunità quando esce dalla portata di un nemico.
+
+## Azioni
+
+### Sfondamento
+
+*Tiro per colpire in mischia:* +2, portata 1,5 m. *Colpito:* 2 (1d4) danni contundenti.
+
+> [!info] Licenza
+> Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

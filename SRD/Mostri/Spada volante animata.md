@@ -1,0 +1,62 @@
+---
+id: "srd-spada_volante_animata"
+srd_id: "spada_volante_animata"
+nome: "Spada volante animata"
+categoria: "srd"
+tipo: "mostro"
+stato: "pronto"
+canonico: false
+fonte: "SRD 5.2.1"
+licenza: "CC-BY-4.0"
+repository: "neokon91/DND-SRD-IT"
+generato_da: "import_srd"
+name: "Spada volante animata"
+tipo_creatura: "Costrutto"
+dimensione: "Piccolo"
+allineamento: "senza allineamento"
+classe_armatura: 17
+iniziativa: 4
+hp: 14
+hit_dice: "4d6"
+speed: "camminata: 5 m, volo: 15 m (fluttuare)"
+cr: 0.25
+xp: 50
+bonus_competenza: 2
+statblock: true
+---
+# Spada volante animata
+
+> [!infobox|wiki]- Mostro SRD
+> Tipo: Piccolo Costrutto, senza allineamento
+> CA: 17
+> PF: 14 (4d6)
+> Velocita: camminata: 5 m, volo: 15 m (fluttuare)
+> GS: 1/4 (PE 50; BC +2)
+
+## Caratteristiche
+
+| Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
+| --- | --- | --- | --- |
+| Forza | 12 | 1 | 1 |
+| Destrezza | 15 | 2 | 4 |
+| Costituzione | 11 | 0 | 0 |
+| Intelligenza | 1 | -5 | -5 |
+| Saggezza | 5 | -3 | -3 |
+| Carisma | 1 | -5 | -5 |
+
+## Sensi
+
+percezione_passiva: 7, vista_cieca: 18 m
+
+## Lingue
+
+nessuna
+
+## Azioni
+
+### Fendente
+
+*Tiro per colpire in mischia:* +4, portata 1,5 m. *Colpito:* 6 (1d8 + 2) danni taglienti.
+
+> [!info] Licenza
+> Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

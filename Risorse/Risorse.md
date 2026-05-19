@@ -14,6 +14,7 @@ cssclasses:
 - [[Risorse/Plugin Attivi]]
 - [[Risorse/Integrazioni Plugin]]
 - [[Risorse/Callout GDR]]
+- [[SRD/SRD]]
 - [[Inbox/Inbox]]
 - [[Risorse/Mappe/Mappe]]
 - [[Risorse/Immagini/Immagini]]

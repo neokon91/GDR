@@ -1,0 +1,72 @@
+---
+id: "srd-piovra_gigante"
+srd_id: "piovra_gigante"
+nome: "Piovra gigante"
+categoria: "srd"
+tipo: "mostro"
+stato: "pronto"
+canonico: false
+fonte: "SRD 5.2.1"
+licenza: "CC-BY-4.0"
+repository: "neokon91/DND-SRD-IT"
+generato_da: "import_srd"
+name: "Piovra gigante"
+tipo_creatura: "Bestia"
+dimensione: "Grande"
+allineamento: "senza allineamento"
+classe_armatura: 11
+iniziativa: 1
+hp: 45
+hit_dice: "7d10 + 7"
+speed: "camminata: 3 m, nuoto: 18 m"
+cr: 1
+xp: 200
+bonus_competenza: 2
+statblock: true
+---
+# Piovra gigante
+
+> [!infobox|wiki]- Mostro SRD
+> Tipo: Grande Bestia, senza allineamento
+> CA: 11
+> PF: 45 (7d10 + 7)
+> Velocita: camminata: 3 m, nuoto: 18 m
+> GS: 1 (PE 200; BC +2)
+
+## Caratteristiche
+
+| Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
+| --- | --- | --- | --- |
+| Forza | 17 | 3 | 3 |
+| Destrezza | 13 | 1 | 1 |
+| Costituzione | 13 | 1 | 1 |
+| Intelligenza | 5 | -3 | -3 |
+| Saggezza | 10 | 0 | 0 |
+| Carisma | 4 | -3 | -3 |
+
+## Abilita
+
+furtivita: 5, percezione: 4
+
+## Sensi
+
+percezione_passiva: 14, scurovisione: 18 m
+
+## Lingue
+
+nessuna
+
+## Tratti
+
+### Respirare sott'acqua
+
+La piovra può respirare soltanto sott'acqua e può trattenere il respiro per 1 ora fuori dall'acqua.
+
+## Azioni
+
+### Tentacoli
+
+*Tiro per colpire in mischia:* +5, portata 3 m. *Colpito:* 10 (2d6 + 3) danni contundenti. Se il bersaglio è una creatura di taglia Media o inferiore, è afferrato (CD 13 per sfuggire) da tutti e otto i tentacoli. Mentre è afferrato, il bersaglio è anche trattenuto.
+
+> [!info] Licenza
+> Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

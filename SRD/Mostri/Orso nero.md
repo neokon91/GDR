@@ -1,0 +1,70 @@
+---
+id: "srd-orso_nero"
+srd_id: "orso_nero"
+nome: "Orso nero"
+categoria: "srd"
+tipo: "mostro"
+stato: "pronto"
+canonico: false
+fonte: "SRD 5.2.1"
+licenza: "CC-BY-4.0"
+repository: "neokon91/DND-SRD-IT"
+generato_da: "import_srd"
+name: "Orso nero"
+tipo_creatura: "Bestia"
+dimensione: "Media"
+allineamento: "senza allineamento"
+classe_armatura: 11
+iniziativa: 1
+hp: 19
+hit_dice: "3d8 + 6"
+speed: "camminata: 9 m, scalata: 9 m, nuoto: 9 m"
+cr: 0.5
+xp: 100
+bonus_competenza: 2
+statblock: true
+---
+# Orso nero
+
+> [!infobox|wiki]- Mostro SRD
+> Tipo: Media Bestia, senza allineamento
+> CA: 11
+> PF: 19 (3d8 + 6)
+> Velocita: camminata: 9 m, scalata: 9 m, nuoto: 9 m
+> GS: 1/2 (PE 100; BC +2)
+
+## Caratteristiche
+
+| Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
+| --- | --- | --- | --- |
+| Forza | 15 | 2 | 2 |
+| Destrezza | 12 | 1 | 1 |
+| Costituzione | 14 | 2 | 2 |
+| Intelligenza | 2 | -4 | -4 |
+| Saggezza | 12 | 1 | 1 |
+| Carisma | 7 | -2 | -2 |
+
+## Abilita
+
+percezione: 5
+
+## Sensi
+
+percezione_passiva: 15, scurovisione: 18 m
+
+## Lingue
+
+nessuna
+
+## Azioni
+
+### Multiattacco
+
+L'orso effettua due attacchi Squarcio.
+
+### Squarcio
+
+*Tiro per colpire in mischia:* +4, portata 1,5 m. *Colpito:* 5 (1d6 + 2) danni taglienti.
+
+> [!info] Licenza
+> Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.
