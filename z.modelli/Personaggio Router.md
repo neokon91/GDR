@@ -32,6 +32,13 @@
 Mondo:
 `INPUT[suggester(optionQuery("Mondi"), useLinks(partial), allowOther):mondo]`
 
+## Statblock D&D
+
+```dataviewjs
+const name = dv.current().name ?? dv.current().nome ?? dv.current().file.name;
+dv.paragraph("```statblock\nmonster: " + name + "\n```");
+```
+
 ## Personalità
 
 ## Obiettivi

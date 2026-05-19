@@ -4,6 +4,12 @@ async function png(tp) {
     const id = helpers.slugify(name);
     const role = await helpers.promptOptional(tp, "Ruolo o professione");
     const atteggiamento = await helpers.promptOptional(tp, "Atteggiamento iniziale");
+    const ac = await helpers.promptOptional(tp, "Classe Armatura", "10") || "10";
+    const hp = await helpers.promptOptional(tp, "Punti Ferita", "4") || "4";
+    const hitDice = await helpers.promptOptional(tp, "Dadi Vita", "1d8") || "1d8";
+    const speed = await helpers.promptOptional(tp, "Velocità", "9 m.") || "9 m.";
+    const cr = await helpers.promptOptional(tp, "Grado di Sfida", "0") || "0";
+    const stats = await helpers.promptOptional(tp, "Caratteristiche D&D: FOR DES COS INT SAG CAR", "10 10 10 10 10 10");
     const stato = await helpers.chooseOptional(
         tp,
         [
@@ -24,6 +30,8 @@ async function png(tp) {
 
     return `---
 id: ${id}
+statblock: true
+name: ${helpers.yamlQuote(name)}
 nome: ${helpers.yamlQuote(name)}
 categoria: personaggio
 tipo: png
@@ -35,8 +43,31 @@ fazioni: ${helpers.inlineYamlList(fazioni)}
 relazioni: ${helpers.inlineYamlList(relazioni)}
 segreto:
 atteggiamento: ${helpers.yamlQuote(atteggiamento)}
-hp_massimi:
-hp_attuali:
+type: umanoide
+size: media
+alignment:
+ac: ${helpers.yamlNumber(ac) || 10}
+hp: ${helpers.yamlNumber(hp) || 4}
+hp_massimi: ${helpers.yamlNumber(hp) || 4}
+hp_attuali: ${helpers.yamlNumber(hp) || 4}
+hit_dice: ${helpers.yamlQuote(hitDice)}
+speed: ${helpers.yamlQuote(speed)}
+cr: ${helpers.yamlQuote(cr)}
+stats: ${helpers.abilityArray(stats)}
+saves: []
+skillsaves: []
+damage_vulnerabilities:
+damage_resistances:
+damage_immunities:
+condition_immunities:
+senses:
+languages:
+traits: []
+actions: []
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 ---
 `;
 }

@@ -553,6 +553,30 @@ function inlineYamlList(values) {
     return filtered.length ? `[${filtered.join(", ")}]` : "[]";
 }
 
+function yamlNumber(value) {
+    const text = String(value ?? "").trim().replace(",", ".");
+    return /^-?\d+(\.\d+)?$/.test(text) ? text : "";
+}
+
+function parseAbilityScores(value, fallback = "10 10 10 10 10 10") {
+    const source = String(value ?? "").trim() || fallback;
+    const scores = source
+        .split(/[\s,;/|]+/)
+        .map(score => score.trim())
+        .filter(Boolean)
+        .slice(0, 6);
+
+    while (scores.length < 6) {
+        scores.push("10");
+    }
+
+    return scores.map(score => yamlNumber(score) || "10");
+}
+
+function abilityArray(value, fallback = "10 10 10 10 10 10") {
+    return `[${parseAbilityScores(value, fallback).join(", ")}]`;
+}
+
 module.exports = {
     path,
     setRoute,
@@ -566,6 +590,9 @@ module.exports = {
     collectNamedDescriptions,
     inlineYamlArray,
     inlineYamlList,
+    yamlNumber,
+    parseAbilityScores,
+    abilityArray,
     yamlQuote,
     slugify,
     normalizeText,
