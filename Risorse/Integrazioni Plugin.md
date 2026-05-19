@@ -116,12 +116,36 @@ Da fare:
 
 Fatto bene quando: il DM apre Durante il Gioco e trova subito atmosfera, immagini o dispense pronte.
 
+### 6. Generatore di Contenuti Fantasy
+
+Stato: integrazione base completata.
+
+Obiettivo: generare spunti rapidi in italiano e salvarli come bozze Markdown senza interrompere la preparazione.
+
+Fatto:
+
+- tradotta l'interfaccia principale del plugin e le impostazioni;
+- sostituite le tabelle base con contenuti italiani per citta, locande, voci, bevande, bottino, gruppi e dungeon;
+- aggiunto il pulsante `Crea nota` nella modale del generatore;
+- le note generate finiscono in `Inbox/Generati` con frontmatter minimo: `tipo`, `plugin`, `generatore`, `stato`, `creato`;
+- il comando continua a offrire anche `Copia`, utile quando il risultato deve essere incollato in una nota gia aperta.
+
+Regola: tutto cio che viene generato resta `stato: bozza` finche il DM non lo rivede e lo collega a campagna, mondo, luogo o sessione.
+
+Prossimi potenziamenti:
+
+- aggiungere preset di tono: classico, oscuro, fiabesco, urbano, marittimo;
+- creare template diversi per locande, dungeon, bottini e fazioni;
+- collegare i risultati a `Campagne`, `Mondi` e `SRD/Mostri` quando una bozza diventa canonica;
+- spostare il plugin da bundle patchato a sorgenti TypeScript mantenibili.
+
+Fatto bene quando: durante preparazione o gioco il DM puo generare una bozza, salvarla nel vault e ritrovarla senza dover copiare contenuti a mano.
+
 ## In Attesa
 
 Questi plugin restano secondari finche le integrazioni sopra non sono solide:
 
 - **Hex Cartographer**: utile dopo aver stabilito come il vault gestisce regioni e viaggi.
-- **Fantasy Content Generator**: utile per bozze e spunti, ma non deve creare contenuto canonico automaticamente.
 - **Icon Folder**: migliora orientamento visivo, ma non sostituisce indici e dashboard chiare.
 
 ## Integrazione Trasversale: Tabs

@@ -16664,14 +16664,14 @@ function generatorGroups(settings) {
       const rnd0 = Math.floor(Math.random() * adjectives2.length);
       const rnd1 = Math.floor(Math.random() * nouns2.length);
       const rnd2 = Math.floor(Math.random() * groupTypes.length);
-      names = "The " + adjectives2[rnd0] + " " + nouns2[rnd1] + " " + groupTypes[rnd2];
+      names = adjectives2[rnd0] + " " + nouns2[rnd1] + " - " + groupTypes[rnd2];
     } else if (i < 8) {
       const rnd0 = Math.floor(Math.random() * adjectives2.length);
       const rnd1 = Math.floor(Math.random() * nounsPlural.length);
       names = "The " + adjectives2[rnd0] + " " + nounsPlural[rnd1];
     } else {
       const rnd0 = Math.floor(Math.random() * singleDescriptors.length);
-      names = "The " + singleDescriptors[rnd0];
+      names = singleDescriptors[rnd0];
     }
     return names;
   }
@@ -18024,25 +18024,25 @@ function generateDungeonName(settings) {
   let result;
   if (usePrefix) {
     result = {
-      name: `${prefix[prefixIndex]} of the ${adjective[adjIndex]}  ${noun[nounIndex]}`,
+      name: `${prefix[prefixIndex]} ${adjective[adjIndex]} del ${noun[nounIndex]}`,
       description: generateDungeonDescription(locations[locIndex], prefix[prefixIndex], randomDesc[randomDescIndex])
     };
   } else {
     result = {
-      name: `The ${adjective[adjIndex]} ${noun[nounIndex]}`,
+      name: `${adjective[adjIndex]} ${noun[nounIndex]}`,
       description: generateDungeonDescription(locations[locIndex], prefix[prefixIndex], randomDesc[randomDescIndex])
     };
   }
   return `${result.name}
-Description: ${result.description}`;
+Descrizione: ${result.description}`;
 }
 function generateDungeonDescription(location, dungeonType, randomDesc) {
   const templates = [
-    `Located in ${location}, this ${dungeonType} is known for ${randomDesc}.`,
-    `A ${dungeonType} that is known for ${randomDesc}.`,
-    `In the heart of ${location} lies this ${dungeonType}, notorious for ${randomDesc}.`,
-    `Deep within ${location}, the ${dungeonType} is feared for its ${randomDesc}.`,
-    `This ${dungeonType} located in ${location} is infamous for its ${randomDesc}.`,
+    `Situato presso ${location}, questo luogo e' noto per essere ${randomDesc}.`,
+    `Un ${dungeonType} famoso per essere ${randomDesc}.`,
+    `Nel cuore di ${location} si trova questo ${dungeonType}, temuto perche' e' ${randomDesc}.`,
+    `Nel profondo di ${location}, il ${dungeonType} e' evitato da tutti perche' e' ${randomDesc}.`,
+    `Questo ${dungeonType}, nascosto presso ${location}, e' ricordato per essere ${randomDesc}.`,
     `The ${dungeonType} in ${location} is a place to be reckoned with, famous for its ${randomDesc}.`
   ];
   const templateIndex = Math.floor(Math.random() * templates.length);
@@ -18142,7 +18142,7 @@ function capitalizeFirstLetter4(string) {
 
 // editor/GeneratorModal.ts
 var races = ["none", "none", "dungeon", "inn", "settlement", "none", "airships", "drinks", "artifacts", "loot", "metals", "magicaltrees", "ship", "none", "animalgroups", "groups", "religion", "none", "aasimars", "catfolk", "fetchlings", "halfelf", "halforc", "hobgoblin", "ifrits", "kobalds", "oreads", "ratfolk", "sylphs", "tengu", "tians", "tiefling", "undines", "angel", "cavePerson", "darkelf", "demon", "dragon", "drow", "dwarf", "elf", "fairy", "gnome", "goblin", "halfdemon", "halfling", "highelf", "highfairy", "human", "ogre", "orc", "none", "plothook"];
-var racesDisplayName = ["Select a Generator to Start", "--[Settlements and Buildings]--", "Dungeons & Labryinths", "Inn's & Taverns", "Settlement", "--[Objects and Vehicles]--", "Airships", "Drinks", "Artifacts", "Loot And Treasure", "Metals", "Magical Trees", "Ship", "--[Groups and Religions]--", "Animal Groups", "Groups", "Religion", "--[Races]--", "Aasimars", "Catfolk", "Fetchlings", "Half-Elf", "Half-Orc", "Hobgoblin", "Ifrits", "Kobalds", "Oreads", "Ratfolk", "Sylphs", "Tengu", "Tians", "Tiefling", "Undines", "Angel", "Cave Person", "Dark Elf", "Demon", "Dragon", "Drow", "Dwarf", "Elf", "Fairy", "Gnome", "Goblin", "Half Demon", "Halfling", "High Elf", "High Fairy", "Human", "Ogre", "Orc", "--[Story Tools]--", "Plot & Story Hooks"];
+var racesDisplayName = ["Seleziona un generatore", "--[Insediamenti ed edifici]--", "Dungeon e labirinti", "Locande e taverne", "Insediamento", "--[Oggetti e veicoli]--", "Aeromobili", "Bevande", "Artefatti", "Bottino e tesori", "Metalli", "Alberi magici", "Nave", "--[Gruppi e religioni]--", "Gruppi animali", "Gruppi", "Religione", "--[Popoli]--", "Aasimar", "Felinoidi", "Fetchling", "Mezzelfi", "Mezzorchi", "Hobgoblin", "Ifrit", "Coboldi", "Oreadi", "Uomini ratto", "Silfidi", "Tengu", "Tiani", "Tiefling", "Ondine", "Angelo", "Primitivo", "Elfo oscuro", "Demone", "Drago", "Drow", "Nano", "Elfo", "Fata", "Gnomo", "Goblin", "Mezzo demone", "Halfling", "Alto elfo", "Alta fata", "Umano", "Ogre", "Orco", "--[Strumenti narrativi]--", "Trame e spunti narrativi"];
 var pathfinderFilter = ["aasimars", "catfolk", "fetchlings", "halfelf", "halforc", "hobgoblin", "ifrits", "kobalds", "oreads", "ratfolk", "sylphs", "tengu", "tians", "tiefling", "undines"];
 var genSettings = {
   race: "angel",
@@ -18158,9 +18158,9 @@ var GeneratorModal = class extends import_obsidian.Modal {
   onOpen() {
     const { contentEl } = this;
     const amountToGen = 1;
-    contentEl.createEl("h1", { text: "Lets Generate!" });
-    contentEl.createEl("p", { text: "Welcome to the Fantasy Content Generator! Select the Generator for the name you would like to generate below and then fill out the form." });
-    contentEl.createEl("h2", { text: "Select the Generator." });
+    contentEl.createEl("h1", { text: "Genera contenuti" });
+    contentEl.createEl("p", { text: "Scegli il generatore, imposta le opzioni e copia i risultati selezionati." });
+    contentEl.createEl("h2", { text: "Seleziona il generatore" });
     const select = new import_obsidian.DropdownComponent(contentEl);
     races.forEach((race, index) => {
       select.addOption(race, racesDisplayName[index]);
@@ -18227,23 +18227,23 @@ var GeneratorModal = class extends import_obsidian.Modal {
     };
     genSettings.race = raceSelected;
     settingsdiv.empty();
-    settingsdiv.createEl("h3", { text: "Customise The Generation" });
-    new import_obsidian.Setting(settingsdiv).setName("Male or Female?").addDropdown((drop) => {
-      drop.addOption("male", "Male");
-      drop.addOption("female", "Female");
+    settingsdiv.createEl("h3", { text: "Personalizza la generazione" });
+    new import_obsidian.Setting(settingsdiv).setName("Maschile o femminile?").addDropdown((drop) => {
+      drop.addOption("male", "Maschile");
+      drop.addOption("female", "Femminile");
       drop.onChange((value) => {
         genSettings.gender = value;
       });
     });
-    new import_obsidian.Setting(settingsdiv).setName("Family Name?").addToggle((toggle) => {
+    new import_obsidian.Setting(settingsdiv).setName("Cognome o epiteto?").addToggle((toggle) => {
       toggle.onChange((value) => {
         genSettings.multiNames = value;
       });
     });
     let fullCopy = "";
-    new import_obsidian.Setting(settingsdiv).setName("Amount").setDesc("How Many Records to Generate").addText((text) => {
+    new import_obsidian.Setting(settingsdiv).setName("Quantita").setDesc("Numero di risultati da generare").addText((text) => {
       text.onChange((value) => genAmount = Number(value));
-    }).addButton((btn) => btn.setButtonText("Generate").setCta().onClick(() => {
+    }).addButton((btn) => btn.setButtonText("Genera").setCta().onClick(() => {
       for (let index = 0; index < genAmount; index++) {
         let firstName;
         let familyName = "";
@@ -18268,29 +18268,31 @@ var GeneratorModal = class extends import_obsidian.Modal {
           }).setValue(true);
         }).setName(fullName);
       }
-    })).addButton((btn) => btn.setButtonText("Copy").setCta().onClick(() => {
+    })).addButton((btn) => btn.setButtonText("Copia").setCta().onClick(() => {
       if (fullCopy === "") {
-        this.result = new Error("Nothing Was Selected to Copy.");
+        this.result = new Error("Nessun risultato selezionato da copiare.");
       } else {
         this.result = fullCopy;
       }
       this.close();
       this.onSubmit(this.result);
+    })).addButton((btn) => btn.setButtonText("Crea nota").onClick(async () => {
+      await this.createGeneratedNote("Nomi fantasy", fullCopy, "nomi");
     }));
   }
   generatorInnSettings(settingsdiv, genAmount, generatorFunction) {
     settingsdiv.empty();
-    settingsdiv.createEl("h3", { text: "Customise The Generation" });
+    settingsdiv.createEl("h3", { text: "Personalizza la generazione" });
     genAmount = 1;
     let innList = "";
-    new import_obsidian.Setting(settingsdiv).setName("Amount to Generate").addText((text) => {
+    new import_obsidian.Setting(settingsdiv).setName("Quantita da generare").addText((text) => {
       text.onChange((value) => genAmount = Number(value));
-    }).addButton((btn) => btn.setButtonText("Generate").setCta().onClick(() => {
+    }).addButton((btn) => btn.setButtonText("Genera").setCta().onClick(() => {
       for (let index = 0; index < genAmount; index++) {
         const innName = generatorFunction(this.plugin.settings.innSettings);
         new import_obsidian.Setting(settingsdiv).addToggle((toggle) => {
           toggle.onChange((value) => {
-            const innString = innName.name + "\nDescription: " + innName.description + "\nRumors: " + innName.rumors;
+            const innString = innName.name + "\nDescrizione: " + innName.description + "\nVoci: " + innName.rumors;
             if (value === true) {
               innList += innString + "\n";
             } else {
@@ -18300,24 +18302,26 @@ var GeneratorModal = class extends import_obsidian.Modal {
           }).setValue(true);
         }).setName(innName.name);
       }
-    })).addButton((btn) => btn.setButtonText("Copy").setCta().onClick(() => {
+    })).addButton((btn) => btn.setButtonText("Copia").setCta().onClick(() => {
       if (innList === "") {
-        this.result = new Error("Nothing Was Selected to Copy.");
+        this.result = new Error("Nessun risultato selezionato da copiare.");
       } else {
         this.result = innList;
       }
       this.close();
       this.onSubmit(this.result);
+    })).addButton((btn) => btn.setButtonText("Crea nota").onClick(async () => {
+      await this.createGeneratedNote("Locande e taverne", innList, "locande");
     }));
   }
   generatorLootSettings(settingsdiv, genAmount, generatorFunction, enableCurrency, currencyFrequency, currencyTypes) {
     settingsdiv.empty();
-    settingsdiv.createEl("h3", { text: "Customise The Generation" });
+    settingsdiv.createEl("h3", { text: "Personalizza la generazione" });
     genAmount = 1;
     let list = "";
-    new import_obsidian.Setting(settingsdiv).setName("Amount to Generate").addText((text) => {
+    new import_obsidian.Setting(settingsdiv).setName("Quantita da generare").addText((text) => {
       text.onChange((value) => genAmount = Number(value));
-    }).addButton((btn) => btn.setButtonText("Generate").setCta().onClick(() => {
+    }).addButton((btn) => btn.setButtonText("Genera").setCta().onClick(() => {
       for (let index = 0; index < genAmount; index++) {
         const shipName = generatorFunction(enableCurrency, currencyFrequency, currencyTypes, this.plugin.settings.lootSettings);
         new import_obsidian.Setting(settingsdiv).addToggle((toggle) => {
@@ -18331,29 +18335,31 @@ var GeneratorModal = class extends import_obsidian.Modal {
           }).setValue(true);
         }).setName(shipName);
       }
-    })).addButton((btn) => btn.setButtonText("Copy").setCta().onClick(() => {
+    })).addButton((btn) => btn.setButtonText("Copia").setCta().onClick(() => {
       if (list === "") {
-        this.result = new Error("Nothing Was Selected to Copy.");
+        this.result = new Error("Nessun risultato selezionato da copiare.");
       } else {
         this.result = list;
       }
       this.close();
       this.onSubmit(this.result);
+    })).addButton((btn) => btn.setButtonText("Crea nota").onClick(async () => {
+      await this.createGeneratedNote("Bottino e tesori", list, "bottino");
     }));
   }
   generatorFCGSettlementSettings(settingsdiv, genAmount, generatorFunction) {
     settingsdiv.empty();
-    settingsdiv.createEl("h3", { text: "Customise The Generation" });
+    settingsdiv.createEl("h3", { text: "Personalizza la generazione" });
     genAmount = 1;
     let list = "";
-    new import_obsidian.Setting(settingsdiv).setName("Amount to Generate").addText((text) => {
+    new import_obsidian.Setting(settingsdiv).setName("Quantita da generare").addText((text) => {
       text.onChange((value) => genAmount = Number(value));
-    }).addButton((btn) => btn.setButtonText("Generate").setCta().onClick(() => {
+    }).addButton((btn) => btn.setButtonText("Genera").setCta().onClick(() => {
       for (let index = 0; index < genAmount; index++) {
         const shipName = generatorFunction();
         console.log(shipName);
         const name = generateCityName(this.plugin.settings.citySettings);
-        const settlementString = "Name: " + name + "\nPopulation: " + shipName.population + "\nType: " + this.formatString(shipName.type);
+        const settlementString = "Nome: " + name + "\nPopolazione: " + shipName.population + "\nTipo: " + this.formatString(shipName.type);
         new import_obsidian.Setting(settingsdiv).addToggle((toggle) => {
           toggle.onChange((value) => {
             if (value === true) {
@@ -18365,25 +18371,27 @@ var GeneratorModal = class extends import_obsidian.Modal {
           }).setValue(true);
         }).setName(name);
       }
-    })).addButton((btn) => btn.setButtonText("Copy").setCta().onClick(() => {
+    })).addButton((btn) => btn.setButtonText("Copia").setCta().onClick(() => {
       if (list === "") {
-        this.result = new Error("Nothing Was Selected to Copy.");
+        this.result = new Error("Nessun risultato selezionato da copiare.");
       } else {
         this.result = this.formatStringList(list);
       }
       this.close();
       this.onSubmit(this.result);
+    })).addButton((btn) => btn.setButtonText("Crea nota").onClick(async () => {
+      await this.createGeneratedNote("Insediamenti", this.formatStringList(list), "insediamenti");
     }));
   }
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   generatorCustomSettings(settingsdiv, genAmount, generatorFunction, settings) {
     settingsdiv.empty();
-    settingsdiv.createEl("h3", { text: "Customise The Generation" });
+    settingsdiv.createEl("h3", { text: "Personalizza la generazione" });
     genAmount = 1;
     let list = "";
-    new import_obsidian.Setting(settingsdiv).setName("Amount to Generate").addText((text) => {
+    new import_obsidian.Setting(settingsdiv).setName("Quantita da generare").addText((text) => {
       text.onChange((value) => genAmount = Number(value));
-    }).addButton((btn) => btn.setButtonText("Generate").setCta().onClick(() => {
+    }).addButton((btn) => btn.setButtonText("Genera").setCta().onClick(() => {
       for (let index = 0; index < genAmount; index++) {
         let shipName = "";
         if (settings !== void 0) {
@@ -18402,14 +18410,16 @@ var GeneratorModal = class extends import_obsidian.Modal {
           }).setValue(true);
         }).setName(shipName);
       }
-    })).addButton((btn) => btn.setButtonText("Copy").setCta().onClick(() => {
+    })).addButton((btn) => btn.setButtonText("Copia").setCta().onClick(() => {
       if (list === "") {
-        this.result = new Error("Nothing Was Selected to Copy.");
+        this.result = new Error("Nessun risultato selezionato da copiare.");
       } else {
         this.result = this.formatStringList(list);
       }
       this.close();
       this.onSubmit(this.result);
+    })).addButton((btn) => btn.setButtonText("Crea nota").onClick(async () => {
+      await this.createGeneratedNote("Generazione fantasy", this.formatStringList(list), "generazione");
     }));
   }
   determineLastname(race) {
@@ -18433,6 +18443,54 @@ var GeneratorModal = class extends import_obsidian.Modal {
   }
   formatString(str) {
     return str.split("_").map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()).join(" ");
+  }
+  sanitizeFileName(value) {
+    return value.replace(/[\\/#^|\[\]:]/g, "-").replace(/\s+/g, " ").trim().slice(0, 80) || "Generazione fantasy";
+  }
+  getTimestampForFile() {
+    return new Date().toISOString().replace(/[:]/g, "").replace("T", " ").slice(0, 18);
+  }
+  async ensureFolderExists(folderPath) {
+    const parts = folderPath.split("/").filter(Boolean);
+    let currentPath = "";
+    for (const part of parts) {
+      currentPath = currentPath ? currentPath + "/" + part : part;
+      if (!this.app.vault.getAbstractFileByPath(currentPath)) {
+        await this.app.vault.createFolder(currentPath);
+      }
+    }
+  }
+  formatGeneratedMarkdown(title, body, generatorType) {
+    const created = new Date().toISOString();
+    return `---
+tipo: generazione
+plugin: fantasy-content-generator
+generatore: ${generatorType}
+stato: bozza
+creato: ${created}
+---
+
+# ${title}
+
+${body.trim()}
+`;
+  }
+  async createGeneratedNote(title, body, generatorType) {
+    if (body.trim() === "") {
+      new import_obsidian.Notice("Nessun risultato selezionato da salvare.");
+      return;
+    }
+    const folderPath = "Inbox/Generati";
+    await this.ensureFolderExists(folderPath);
+    const baseName = this.sanitizeFileName(title + " " + this.getTimestampForFile());
+    let filePath = folderPath + "/" + baseName + ".md";
+    let index = 2;
+    while (this.app.vault.getAbstractFileByPath(filePath)) {
+      filePath = folderPath + "/" + baseName + " " + index + ".md";
+      index++;
+    }
+    await this.app.vault.create(filePath, this.formatGeneratedMarkdown(title, body, generatorType));
+    new import_obsidian.Notice("Nota creata: " + filePath);
   }
   onClose() {
     const { contentEl } = this;
@@ -18570,11 +18628,11 @@ var possibleOptions = [
 function importJSON(path, callback) {
   fs.readFile(path, "utf8", (error, data) => {
     if (error) {
-      new import_obsidian2.Notice("Error Importing: " + error);
+      new import_obsidian2.Notice("Errore durante l'importazione: " + error);
       return;
     }
     const jsonData = JSON.parse(data);
-    new import_obsidian2.Notice("Data Successfully Imported!");
+    new import_obsidian2.Notice("Dati importati correttamente.");
     callback(jsonData);
   });
 }
@@ -18586,7 +18644,7 @@ function exportJSON(data) {
   a.download = "data.json";
   a.href = url;
   a.click();
-  new import_obsidian2.Notice("Data Exporting!");
+  new import_obsidian2.Notice("Esportazione dati avviata.");
 }
 function weightedRandomItem(table, roll) {
   const item = table.find(({ range }) => range[0] <= roll && roll <= range[1]);
@@ -19024,7 +19082,7 @@ var InlineGeneratorSuggester = class extends import_obsidian3.EditorSuggest {
     super(app);
     //An object storing all the Generator functions used by the particular selection
     this.generators = {
-      "TradingPost": () => "Trading Post Name: " + generateCityName(this.plugin.settings.citySettings) + "\n" + generateTradingPost(),
+      "TradingPost": () => "Nome emporio: " + generateCityName(this.plugin.settings.citySettings) + "\n" + generateTradingPost(),
       "ElfMale": () => (0, import_fantasy_name_generator2.nameByRace)("elf", { gender: "male" }),
       "ElfMaleLastname": () => (0, import_fantasy_name_generator2.nameByRace)("elf", { gender: "male" }) + " " + elfFamilyNames[Math.floor(Math.random() * elfFamilyNames.length)],
       "ElfFemale": () => (0, import_fantasy_name_generator2.nameByRace)("elf", { gender: "female" }),
@@ -19042,12 +19100,12 @@ var InlineGeneratorSuggester = class extends import_obsidian3.EditorSuggest {
       "DungeonsLabryinths": () => generateDungeonName(this.plugin.settings.dungeonSettings),
       "InnsTaverns": () => {
         const innInfo = generateInn(this.plugin.settings.innSettings);
-        return innInfo.name + "\nDescription: " + innInfo.description + "\nRumors: " + innInfo.rumors;
+        return innInfo.name + "\nDescrizione: " + innInfo.description + "\nVoci: " + innInfo.rumors;
       },
       "Settlement": () => {
         const CityInfo = FCG2.Settlements.generate();
         const name = generateCityName(this.plugin.settings.citySettings);
-        return "Name: " + name + "\nPopulation: " + CityInfo.population + "\nType: " + CityInfo.type.split("_").map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()).join(" ");
+        return "Nome: " + name + "\nPopolazione: " + CityInfo.population + "\nTipo: " + CityInfo.type.split("_").map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()).join(" ");
       },
       "Airships": () => generatorAirships(),
       "Drinks": () => generatorDrinks(this.plugin.settings.drinkSettings),
@@ -19386,6 +19444,7 @@ var DEFAULT_SETTINGS = {
   },
   inlineCallout: "@"
 };
+DEFAULT_SETTINGS = {"enableCurrency":true,"citySettings":{"prefixArray":["Alba","Antica","Borgo","Castel","Colle","Costa","Fossa","Forte","Luna","Monte","Nuova","Ponte","Porto","Rocca","Selva","Torre","Valle"],"suffixArray":["argento","bruma","cervo","drago","ferro","fonte","gelo","lupo","mare","mora","nebbia","ombra","pietra","quercia","riva","rossa","soglia","spina","stella","vento"]},"innSettings":{"prefixes":["Il Vecchio","La Dorata","Il Rosso","La Quieta","Il Felice","La Stanca","Il Nobile","La Mezzanotte","Il Ramingo","La Benedetta","Il Fumante","La Sghemba"],"innType":["Locanda","Taverna","Osteria","Rifugio","Posta"],"nouns":["Drago","Grifone","Cinghiale","Corvo","Unicorno","Mantello","Calice","Martello","Viandante","Lupo","Gatto","Falcone","Gigante","Pellegrino","Mago","Re"],"desc":["nel cuore del mercato cittadino, tra bancarelle rumorose e strade sempre affollate.","ai margini di un villaggio agricolo, con stalle pulite e una sala comune scaldata dal camino.","sopra il porto, dove l'odore di salsedine si mescola a quello di zuppa speziata.","lungo una strada di pellegrinaggio, frequentata da mercanti, messaggeri e avventurieri in cerca di lavoro.","dentro le mura di una rocca di confine, sorvegliata da guardie stanche e sospettose.","all'imbocco di una foresta antica, dove i clienti parlano a bassa voce dopo il tramonto.","vicino a una miniera abbandonata, con camere economiche e molte porte rinforzate.","su una collina battuta dal vento, celebre per il sidro forte e per le mappe appese alle travi.","in un quartiere di artigiani, con tavoli lunghi, birra scura e contratti conclusi sottovoce.","presso un guado trafficato, rifugio naturale per carovane, cacciatori di taglie e contrabbandieri."],"rumors":["Un carovaniere giura di aver visto luci verdi muoversi tra le rovine oltre il vecchio ponte.","Il fabbro locale paga bene chi scopre chi ruba ferro benedetto dalla sua forgia.","Una nobile decaduta cerca una scorta discreta per raggiungere una cripta di famiglia.","Si dice che il pozzo dietro la locanda restituisca monete antiche quando la luna e' piena.","Un apprendista speziale e' scomparso dopo aver comprato una mappa macchiata di sangue.","Le guardie chiudono gli occhi su un culto che si riunisce sotto il magazzino del grano.","Un bardo ubriaco sostiene che il nuovo prete non proietta ombra al tramonto.","Ogni notte qualcuno lascia fiori freschi davanti alla casa bruciata del vecchio magistrato.","Una creatura enorme e' stata udita sotto le assi del molo, ma i pescatori negano tutto.","Un mercante offre una ricompensa per recuperare una cassa consegnata alla persona sbagliata."]},"currencyTypes":[{"name":"mo","rarity":"rare"},{"name":"mr","rarity":"common"},{"name":"ma","rarity":"common"},{"name":"mp","rarity":"rarest"}],"currencyFrequency":50,"drinkSettings":{"adj":["Ambrato","Antico","Aspro","Balsamico","Bruciante","Celestiale","Cremoso","Dolce","Dorato","Erbaceo","Fumante","Gelido","Incantato","Lunare","Mielato","Nero","Piccante","Rosso","Sacro","Selvatico","Speziato","Spettrale","Torbido","Vellutato","Verde"],"nouns":["Ale","Amaro","Birra","Brandy","Distillato","Elisir","Idromele","Infuso","Liquore","Sidro","Tisana","Tonico","Vino"]},"lootSettings":{"adj":["antico","arrugginito","benedetto","cesellato","crepato","dorato","insanguinato","lucido","misterioso","polveroso","prezioso","scheggiato"],"items":[{"item":"amuleto","weight":0.2},{"item":"anello","weight":0.2},{"item":"borsa di gemme","weight":0.1},{"item":"chiave","weight":0.4},{"item":"daga","weight":0.3},{"item":"diario","weight":0.3},{"item":"fiala","weight":0.3},{"item":"mappa","weight":0.3},{"item":"pergamena","weight":0.4},{"item":"reliquia","weight":0.1},{"item":"spada","weight":0.2},{"item":"talismano","weight":0.2}]},"groupSettings":{"adj":["Argenteo","Cremisi","Dimenticato","Dorato","Errante","Ferreo","Nascosto","Nero","Notturno","Scarlatto","Senza Volto","Silente","Spezzato","Velato","Verde"],"nouns":["Artiglio","Cerchio","Corona","Fiamma","Lama","Lancia","Mano","Maschera","Occhio","Rosa","Sigillo","Soglia","Stella","Torre","Velo"],"nounsP":["Artigli","Cerchi","Corone","Fiamme","Lame","Lance","Mani","Maschere","Occhi","Rose","Sigilli","Soglie","Stelle","Torri","Veli"],"groupTypes":["confraternita","compagnia","culto","gilda","ordine","patto","setta","societa"],"singleDescriptors":["esiliati","guardiani","mercenari","mistici","ribelli","sacerdoti","sapienti","spie","viandanti"]},"dungeonSettings":{"dungeonTypes":["Bastione","Catacomba","Cripta","Fortezza","Galleria","Labirinto","Miniera","Prigione","Rifugio","Rovina","Santuario","Tomba","Torre"],"adjectives":["Abbandonata","Antica","Arcana","Corrotta","Dimenticata","Gelida","Infestata","Maledetta","Nascosta","Oscura","Perduta","Profanata","Sepolta","Silenziosa","Spezzata"],"nouns":["Drago","Eremita","Gigante","Lich","Oracolo","Principe","Regina","Reietto","Santo","Serpente","Strega","Titano","Vampiro","Vegliardo","Wyrm"],"locations":["un castello abbandonato in una landa desolata","un tempio sotterraneo sotto le montagne","una citta dimenticata nel deserto","una rovina antica in mezzo al mare","una grotta profonda dentro una catena montuosa","un ghiacciaio ai confini del mondo","una palude buia e maledetta","un cimitero avvolto dalla nebbia","una fortezza nascosta tra le nuvole","un bosco incantato oltre il confine del regno","una miniera sigillata dopo un crollo","un monastero scavato nella scogliera","un laboratorio nascosto sotto una villa nobiliare","una cripta sotto la piazza del mercato","un santuario perduto dietro una cascata"],"randomDesc":["custodita da iscrizioni che cambiano quando nessuno le osserva","piena di passaggi segreti e stanze murate","protetta da guardiani vincolati da un antico giuramento","infestata dagli spiriti di una battaglia dimenticata","costruita con una pietra nera che assorbe la luce","sigillata da magia rituale ormai instabile","ricca di reliquie, mappe e tesori contesi","attraversata da corridoi che portano su altri piani","dominata da una creatura che non vuole essere svegliata","trasformata in rifugio da banditi, cultisti o esuli","avvolta da una nebbia che confonde memoria e direzione","nata come prigione per qualcosa che non doveva uscire"]},"inlineCallout":"@"};
 
 // settings/SettingsTab.ts
 var import_obsidian4 = require("obsidian");
@@ -19402,13 +19461,13 @@ var SettingTab = class extends import_obsidian4.PluginSettingTab {
   }
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   createSettingsBlock(containerEl, textA, arr, type, weights) {
-    new import_obsidian4.Setting(containerEl).setName(type + " being used").setDesc("Click 'remove' for any item you want removed from the Array");
-    new import_obsidian4.Setting(containerEl).setName("New Addition:").addTextArea((text) => {
+    new import_obsidian4.Setting(containerEl).setName(type + " in uso").setDesc("Usa 'Rimuovi' per eliminare una voce dall'elenco");
+    new import_obsidian4.Setting(containerEl).setName("Nuova voce:").addTextArea((text) => {
       text.onChange((value) => {
         textA = value;
       });
     }).addButton((btn) => {
-      btn.setCta().setButtonText("Add").onClick(async () => {
+      btn.setCta().setButtonText("Aggiungi").onClick(async () => {
         this.convertStringToArray(textA, arr);
         this.display();
         await this.plugin.saveSettings();
@@ -19418,7 +19477,7 @@ var SettingTab = class extends import_obsidian4.PluginSettingTab {
     foldDiv.createEl("summary", { text: type, cls: "OFCGSummary" });
     for (let index = 0; index < arr.length; index++) {
       new import_obsidian4.Setting(foldDiv).setName(weights ? JSON.stringify(arr[index]) : arr[index]).addButton(
-        (btn) => btn.setCta().setButtonText("Remove").onClick(async () => {
+        (btn) => btn.setCta().setButtonText("Rimuovi").onClick(async () => {
           arr.splice(index, 1);
           this.display();
           await this.plugin.saveSettings();
@@ -19430,16 +19489,16 @@ var SettingTab = class extends import_obsidian4.PluginSettingTab {
   display() {
     const { containerEl } = this;
     containerEl.empty();
-    containerEl.createEl("h1", { text: "Fantasy Content Generator" });
+    containerEl.createEl("h1", { text: "Generatore di Contenuti Fantasy" });
     const generalSettings = containerEl.createDiv("general");
-    new import_obsidian4.Setting(generalSettings).setName("Reset To Defaults").setDesc("Click if you would like to use the default settings again").addButton((btn) => {
-      btn.setCta().setButtonText("Reset").onClick(async () => {
+    new import_obsidian4.Setting(generalSettings).setName("Ripristina impostazioni").setDesc("Torna alle impostazioni italiane predefinite").addButton((btn) => {
+      btn.setCta().setButtonText("Ripristina").onClick(async () => {
         this.plugin.settings = DEFAULT_SETTINGS;
         this.display();
         await this.plugin.saveSettings();
       });
     });
-    new import_obsidian4.Setting(generalSettings).setName("Inline Generator Callout").setDesc("Set callout character to activate the inline Generator.").addText((text) => {
+    new import_obsidian4.Setting(generalSettings).setName("Richiamo inline").setDesc("Carattere che attiva il generatore inline").addText((text) => {
       text.setValue(String(this.plugin.settings.inlineCallout));
       text.onChange(async (value) => {
         this.plugin.settings.inlineCallout = value;
@@ -19447,8 +19506,8 @@ var SettingTab = class extends import_obsidian4.PluginSettingTab {
       });
     });
     const currencyEl = containerEl.createDiv("currencyDiv");
-    new import_obsidian4.Setting(currencyEl).setHeading().setName("Currency Settings");
-    new import_obsidian4.Setting(currencyEl).setName("Enable Currency for Loot Generation.").setDesc("If you have Currency in your World or game consider Activating this").addToggle((toggle) => {
+    new import_obsidian4.Setting(currencyEl).setHeading().setName("Impostazioni valuta");
+    new import_obsidian4.Setting(currencyEl).setName("Abilita valuta nel bottino").setDesc("Attiva se la tua ambientazione usa monete o valuta").addToggle((toggle) => {
       toggle.setValue(this.plugin.settings.enableCurrency);
       toggle.onChange(async (value) => {
         this.plugin.settings.enableCurrency = value;
@@ -19457,7 +19516,7 @@ var SettingTab = class extends import_obsidian4.PluginSettingTab {
       });
     });
     if (this.plugin.settings.enableCurrency) {
-      new import_obsidian4.Setting(currencyEl).setName("Occurance Rate:").setDesc("Set How Frequently Loot generates currency as a percentage of 100").addText((text) => {
+      new import_obsidian4.Setting(currencyEl).setName("Frequenza:").setDesc("Percentuale con cui il bottino genera valuta su 100").addText((text) => {
         text.setValue(String(this.plugin.settings.currencyFrequency));
         text.onChange(async (value) => {
           if (!isNaN(+value)) {
@@ -19467,7 +19526,7 @@ var SettingTab = class extends import_obsidian4.PluginSettingTab {
         });
       });
       if (import_obsidian4.Platform.isDesktopApp) {
-        const importExportFile = new import_obsidian4.Setting(currencyEl).setName("Import | Export").setDesc("Import A Json File With Supported information");
+        const importExportFile = new import_obsidian4.Setting(currencyEl).setName("Importa | Esporta").setDesc("Importa un file JSON compatibile");
         const inputAppfile = createEl("input", {
           attr: {
             type: "file",
@@ -19491,13 +19550,13 @@ var SettingTab = class extends import_obsidian4.PluginSettingTab {
           }
         };
         importExportFile.addButton((b) => {
-          b.setButtonText("Choose Import File").setTooltip(
-            "Import Json File for the Generator"
+          b.setButtonText("Scegli file").setTooltip(
+            "Importa un file JSON per il generatore"
           ).buttonEl.appendChild(inputAppfile);
           b.buttonEl.addClass("FCGInput");
           b.onClick(() => inputAppfile.click());
         }).addButton((b) => {
-          b.setButtonText("Export Section To File").setCta().onClick(() => {
+          b.setButtonText("Esporta sezione").setCta().onClick(() => {
             exportJSON(this.plugin.settings.currencyTypes);
           });
         });
@@ -19506,31 +19565,31 @@ var SettingTab = class extends import_obsidian4.PluginSettingTab {
         name: "",
         rarity: "common"
       };
-      new import_obsidian4.Setting(currencyEl).setName("Currency Name:").addText((text) => {
+      new import_obsidian4.Setting(currencyEl).setName("Nome valuta:").addText((text) => {
         text.onChange((value) => {
           ctext.name = value;
         });
       }).addDropdown((drop) => {
-        drop.addOption("common", "Common");
-        drop.addOption("uncommon", "Uncommon");
-        drop.addOption("rare", "Rare");
-        drop.addOption("rarest", "Rarest");
+        drop.addOption("common", "Comune");
+        drop.addOption("uncommon", "Non comune");
+        drop.addOption("rare", "Rara");
+        drop.addOption("rarest", "Rarissima");
         drop.onChange((value) => {
           ctext.rarity = value;
         });
       }).addButton((btn) => {
-        btn.setCta().setButtonText("Add").onClick(async () => {
+        btn.setCta().setButtonText("Aggiungi").onClick(async () => {
           this.plugin.settings.currencyTypes.push(ctext);
           this.display();
           await this.plugin.saveSettings();
         });
       });
-      new import_obsidian4.Setting(currencyEl).setName("Added currency").setDesc("Click Remove on a Currency you would like to Remove");
+      new import_obsidian4.Setting(currencyEl).setName("Valute aggiunte").setDesc("Usa Rimuovi sulla valuta da eliminare");
       const foldDiv = currencyEl.createEl("details", { cls: "OFCGDetails" });
-      foldDiv.createEl("summary", { text: "Currency", cls: "OFCGSummary" });
+      foldDiv.createEl("summary", { text: "Valuta", cls: "OFCGSummary" });
       for (let index = 0; index < this.plugin.settings.currencyTypes.length; index++) {
         new import_obsidian4.Setting(foldDiv).setName(this.plugin.settings.currencyTypes[index].name).addButton(
-          (btn) => btn.setCta().setButtonText("Remove").onClick(async () => {
+          (btn) => btn.setCta().setButtonText("Rimuovi").onClick(async () => {
             this.plugin.settings.currencyTypes.splice(index, 1);
             this.display();
             await this.plugin.saveSettings();
@@ -19540,10 +19599,10 @@ var SettingTab = class extends import_obsidian4.PluginSettingTab {
     }
     currencyEl.createEl("hr");
     const settlementDiv = containerEl.createDiv("settlementDiv");
-    new import_obsidian4.Setting(settlementDiv).setHeading().setName("Settlement Settings");
+    new import_obsidian4.Setting(settlementDiv).setHeading().setName("Impostazioni insediamenti");
     settlementDiv.createEl("br");
     if (import_obsidian4.Platform.isDesktopApp) {
-      const importExportFile = new import_obsidian4.Setting(settlementDiv).setName("Import | Export").setDesc("Import A Json File With Supported information");
+      const importExportFile = new import_obsidian4.Setting(settlementDiv).setName("Importa | Esporta").setDesc("Importa un file JSON compatibile");
       const inputAppfile = createEl("input", {
         attr: {
           type: "file",
@@ -19567,26 +19626,26 @@ var SettingTab = class extends import_obsidian4.PluginSettingTab {
         }
       };
       importExportFile.addButton((b) => {
-        b.setButtonText("Choose Import File").setTooltip(
-          "Import Json File for the Generator"
+        b.setButtonText("Scegli file").setTooltip(
+          "Importa un file JSON per il generatore"
         ).buttonEl.appendChild(inputAppfile);
         b.buttonEl.addClass("FCGInput");
         b.onClick(() => inputAppfile.click());
       }).addButton((b) => {
-        b.setButtonText("Export Section To File").setCta().onClick(() => {
+        b.setButtonText("Esporta sezione").setCta().onClick(() => {
           exportJSON(this.plugin.settings.citySettings);
         });
       });
     }
     const preText = "";
     const sufText = "";
-    this.createSettingsBlock(settlementDiv, preText, this.plugin.settings.citySettings.prefixArray, "Prefixes", false);
-    this.createSettingsBlock(settlementDiv, sufText, this.plugin.settings.citySettings.suffixArray, "Suffixes", false);
+    this.createSettingsBlock(settlementDiv, preText, this.plugin.settings.citySettings.prefixArray, "Prefissi", false);
+    this.createSettingsBlock(settlementDiv, sufText, this.plugin.settings.citySettings.suffixArray, "Suffissi", false);
     const innDiv = containerEl.createDiv("innDiv");
-    new import_obsidian4.Setting(innDiv).setHeading().setName("Inn Settings");
+    new import_obsidian4.Setting(innDiv).setHeading().setName("Impostazioni locande");
     innDiv.createEl("br");
     if (import_obsidian4.Platform.isDesktopApp) {
-      const importExportFile = new import_obsidian4.Setting(innDiv).setName("Import | Export").setDesc("Import A Json File With Supported information");
+      const importExportFile = new import_obsidian4.Setting(innDiv).setName("Importa | Esporta").setDesc("Importa un file JSON compatibile");
       const inputAppfile = createEl("input", {
         attr: {
           type: "file",
@@ -19610,13 +19669,13 @@ var SettingTab = class extends import_obsidian4.PluginSettingTab {
         }
       };
       importExportFile.addButton((b) => {
-        b.setButtonText("Choose Import File").setTooltip(
-          "Import Json File for the Generator"
+        b.setButtonText("Scegli file").setTooltip(
+          "Importa un file JSON per il generatore"
         ).buttonEl.appendChild(inputAppfile);
         b.buttonEl.addClass("FCGInput");
         b.onClick(() => inputAppfile.click());
       }).addButton((b) => {
-        b.setButtonText("Export Section To File").setCta().onClick(() => {
+        b.setButtonText("Esporta sezione").setCta().onClick(() => {
           exportJSON(this.plugin.settings.innSettings);
         });
       });
@@ -19626,16 +19685,16 @@ var SettingTab = class extends import_obsidian4.PluginSettingTab {
     const innNounText = "";
     const innDescText = "";
     const innRumorText = "";
-    this.createSettingsBlock(innDiv, innPreText, this.plugin.settings.innSettings.prefixes, "Prefixes", false);
-    this.createSettingsBlock(innDiv, innTypeText, this.plugin.settings.innSettings.innType, "Type's", false);
-    this.createSettingsBlock(innDiv, innNounText, this.plugin.settings.innSettings.nouns, "Nouns", false);
-    this.createSettingsBlock(innDiv, innDescText, this.plugin.settings.innSettings.desc, "Description's", false);
-    this.createSettingsBlock(innDiv, innRumorText, this.plugin.settings.innSettings.rumors, "Rumors", false);
+    this.createSettingsBlock(innDiv, innPreText, this.plugin.settings.innSettings.prefixes, "Prefissi", false);
+    this.createSettingsBlock(innDiv, innTypeText, this.plugin.settings.innSettings.innType, "Tipi", false);
+    this.createSettingsBlock(innDiv, innNounText, this.plugin.settings.innSettings.nouns, "Nomi", false);
+    this.createSettingsBlock(innDiv, innDescText, this.plugin.settings.innSettings.desc, "Descrizioni", false);
+    this.createSettingsBlock(innDiv, innRumorText, this.plugin.settings.innSettings.rumors, "Voci", false);
     const drinkDiv = containerEl.createDiv("drinkDiv");
-    new import_obsidian4.Setting(drinkDiv).setHeading().setName("Drink Settings");
+    new import_obsidian4.Setting(drinkDiv).setHeading().setName("Impostazioni bevande");
     drinkDiv.createEl("br");
     if (import_obsidian4.Platform.isDesktopApp) {
-      const importExportFile = new import_obsidian4.Setting(drinkDiv).setName("Import | Export").setDesc("Import A Json File With Supported information");
+      const importExportFile = new import_obsidian4.Setting(drinkDiv).setName("Importa | Esporta").setDesc("Importa un file JSON compatibile");
       const inputAppfile = createEl("input", {
         attr: {
           type: "file",
@@ -19659,26 +19718,26 @@ var SettingTab = class extends import_obsidian4.PluginSettingTab {
         }
       };
       importExportFile.addButton((b) => {
-        b.setButtonText("Choose Import File").setTooltip(
-          "Import Json File for the Generator"
+        b.setButtonText("Scegli file").setTooltip(
+          "Importa un file JSON per il generatore"
         ).buttonEl.appendChild(inputAppfile);
         b.buttonEl.addClass("FCGInput");
         b.onClick(() => inputAppfile.click());
       }).addButton((b) => {
-        b.setButtonText("Export Section To File").setCta().onClick(() => {
+        b.setButtonText("Esporta sezione").setCta().onClick(() => {
           exportJSON(this.plugin.settings.drinkSettings);
         });
       });
     }
     const drinkNounText = "";
     const drinkAdjText = "";
-    this.createSettingsBlock(drinkDiv, drinkAdjText, this.plugin.settings.drinkSettings.adj, "Adjectives", false);
-    this.createSettingsBlock(drinkDiv, drinkNounText, this.plugin.settings.drinkSettings.nouns, "Nouns", false);
+    this.createSettingsBlock(drinkDiv, drinkAdjText, this.plugin.settings.drinkSettings.adj, "Aggettivi", false);
+    this.createSettingsBlock(drinkDiv, drinkNounText, this.plugin.settings.drinkSettings.nouns, "Nomi", false);
     const lootDiv = containerEl.createDiv("lootDiv");
-    new import_obsidian4.Setting(lootDiv).setHeading().setName("Loot Settings");
+    new import_obsidian4.Setting(lootDiv).setHeading().setName("Impostazioni bottino");
     lootDiv.createEl("br");
     if (import_obsidian4.Platform.isDesktopApp) {
-      const importExportFile = new import_obsidian4.Setting(lootDiv).setName("Import | Export").setDesc("Import A Json File With Supported information");
+      const importExportFile = new import_obsidian4.Setting(lootDiv).setName("Importa | Esporta").setDesc("Importa un file JSON compatibile");
       const inputAppfile = createEl("input", {
         attr: {
           type: "file",
@@ -19702,26 +19761,26 @@ var SettingTab = class extends import_obsidian4.PluginSettingTab {
         }
       };
       importExportFile.addButton((b) => {
-        b.setButtonText("Choose Import File").setTooltip(
-          "Import Json File for the Generator"
+        b.setButtonText("Scegli file").setTooltip(
+          "Importa un file JSON per il generatore"
         ).buttonEl.appendChild(inputAppfile);
         b.buttonEl.addClass("FCGInput");
         b.onClick(() => inputAppfile.click());
       }).addButton((b) => {
-        b.setButtonText("Export Section To File").setCta().onClick(() => {
+        b.setButtonText("Esporta sezione").setCta().onClick(() => {
           exportJSON(this.plugin.settings.lootSettings);
         });
       });
     }
     const lootNounText = "";
     const lootAdjText = "";
-    this.createSettingsBlock(lootDiv, lootAdjText, this.plugin.settings.lootSettings.adj, "Adjectives", false);
-    this.createSettingsBlock(lootDiv, lootNounText, this.plugin.settings.lootSettings.items, "Items", true);
+    this.createSettingsBlock(lootDiv, lootAdjText, this.plugin.settings.lootSettings.adj, "Aggettivi", false);
+    this.createSettingsBlock(lootDiv, lootNounText, this.plugin.settings.lootSettings.items, "Oggetti", true);
     const groupDiv = containerEl.createDiv("groupDiv");
-    new import_obsidian4.Setting(groupDiv).setHeading().setName("Group Settings");
+    new import_obsidian4.Setting(groupDiv).setHeading().setName("Impostazioni gruppi");
     groupDiv.createEl("br");
     if (import_obsidian4.Platform.isDesktopApp) {
-      const importExportFile = new import_obsidian4.Setting(groupDiv).setName("Import | Export").setDesc("Import A Json File With Supported information");
+      const importExportFile = new import_obsidian4.Setting(groupDiv).setName("Importa | Esporta").setDesc("Importa un file JSON compatibile");
       const inputAppfile = createEl("input", {
         attr: {
           type: "file",
@@ -19745,13 +19804,13 @@ var SettingTab = class extends import_obsidian4.PluginSettingTab {
         }
       };
       importExportFile.addButton((b) => {
-        b.setButtonText("Choose Import File").setTooltip(
-          "Import Json File for the Generator"
+        b.setButtonText("Scegli file").setTooltip(
+          "Importa un file JSON per il generatore"
         ).buttonEl.appendChild(inputAppfile);
         b.buttonEl.addClass("FCGInput");
         b.onClick(() => inputAppfile.click());
       }).addButton((b) => {
-        b.setButtonText("Export Section To File").setCta().onClick(() => {
+        b.setButtonText("Esporta sezione").setCta().onClick(() => {
           exportJSON(this.plugin.settings.groupSettings);
         });
       });
@@ -19761,16 +19820,16 @@ var SettingTab = class extends import_obsidian4.PluginSettingTab {
     const groupNounsPlural = "";
     const groupTypes = "";
     const groupSingleDescriptors = "";
-    this.createSettingsBlock(groupDiv, groupAdjectives, this.plugin.settings.groupSettings.adj, "Adjectives", false);
-    this.createSettingsBlock(groupDiv, groupNouns, this.plugin.settings.groupSettings.nouns, "Nouns", false);
-    this.createSettingsBlock(groupDiv, groupNounsPlural, this.plugin.settings.groupSettings.nounsP, "Plural Nouns", false);
-    this.createSettingsBlock(groupDiv, groupTypes, this.plugin.settings.groupSettings.groupTypes, "Types", false);
-    this.createSettingsBlock(groupDiv, groupSingleDescriptors, this.plugin.settings.groupSettings.singleDescriptors, "Descriptors", false);
+    this.createSettingsBlock(groupDiv, groupAdjectives, this.plugin.settings.groupSettings.adj, "Aggettivi", false);
+    this.createSettingsBlock(groupDiv, groupNouns, this.plugin.settings.groupSettings.nouns, "Nomi", false);
+    this.createSettingsBlock(groupDiv, groupNounsPlural, this.plugin.settings.groupSettings.nounsP, "Nomi plurali", false);
+    this.createSettingsBlock(groupDiv, groupTypes, this.plugin.settings.groupSettings.groupTypes, "Tipi", false);
+    this.createSettingsBlock(groupDiv, groupSingleDescriptors, this.plugin.settings.groupSettings.singleDescriptors, "Descrittori", false);
     const dungDiv = containerEl.createDiv("dungDiv");
-    new import_obsidian4.Setting(dungDiv).setHeading().setName("Dungeon Settings");
+    new import_obsidian4.Setting(dungDiv).setHeading().setName("Impostazioni dungeon");
     dungDiv.createEl("br");
     if (import_obsidian4.Platform.isDesktopApp) {
-      const importExportFile = new import_obsidian4.Setting(dungDiv).setName("Import | Export").setDesc("Import A Json File With Supported information");
+      const importExportFile = new import_obsidian4.Setting(dungDiv).setName("Importa | Esporta").setDesc("Importa un file JSON compatibile");
       const inputAppfile = createEl("input", {
         attr: {
           type: "file",
@@ -19794,13 +19853,13 @@ var SettingTab = class extends import_obsidian4.PluginSettingTab {
         }
       };
       importExportFile.addButton((b) => {
-        b.setButtonText("Choose Import File").setTooltip(
-          "Import Json File for the Generator"
+        b.setButtonText("Scegli file").setTooltip(
+          "Importa un file JSON per il generatore"
         ).buttonEl.appendChild(inputAppfile);
         b.buttonEl.addClass("FCGInput");
         b.onClick(() => inputAppfile.click());
       }).addButton((b) => {
-        b.setButtonText("Export Section To File").setCta().onClick(() => {
+        b.setButtonText("Esporta sezione").setCta().onClick(() => {
           exportJSON(this.plugin.settings.dungeonSettings);
         });
       });
@@ -19810,11 +19869,11 @@ var SettingTab = class extends import_obsidian4.PluginSettingTab {
     const dungTypes = "";
     const dungLocations = "";
     const dungRandomDesc = "";
-    this.createSettingsBlock(dungDiv, dungAdjectives, this.plugin.settings.dungeonSettings.adjectives, "Adjectives", false);
-    this.createSettingsBlock(dungDiv, dungNouns, this.plugin.settings.groupSettings.nouns, "Nouns", false);
-    this.createSettingsBlock(dungDiv, dungLocations, this.plugin.settings.dungeonSettings.locations, "Locations", false);
-    this.createSettingsBlock(dungDiv, dungTypes, this.plugin.settings.dungeonSettings.dungeonTypes, "Types", false);
-    this.createSettingsBlock(dungDiv, dungRandomDesc, this.plugin.settings.dungeonSettings.randomDesc, "Descriptors", false);
+    this.createSettingsBlock(dungDiv, dungAdjectives, this.plugin.settings.dungeonSettings.adjectives, "Aggettivi", false);
+    this.createSettingsBlock(dungDiv, dungNouns, this.plugin.settings.groupSettings.nouns, "Nomi", false);
+    this.createSettingsBlock(dungDiv, dungLocations, this.plugin.settings.dungeonSettings.locations, "Luoghi", false);
+    this.createSettingsBlock(dungDiv, dungTypes, this.plugin.settings.dungeonSettings.dungeonTypes, "Tipi", false);
+    this.createSettingsBlock(dungDiv, dungRandomDesc, this.plugin.settings.dungeonSettings.randomDesc, "Descrittori", false);
   }
 };
 
@@ -19844,7 +19903,7 @@ var FantasyPlugin = class extends import_obsidian5.Plugin {
     });
     this.addCommand({
       id: "open-fantasy-generator",
-      name: "Open Fantasy Generator",
+      name: "Apri generatore fantasy",
       callback: () => {
         new GeneratorModal(this.app, (result) => {
           const copyContent = async () => {
@@ -19853,11 +19912,11 @@ var FantasyPlugin = class extends import_obsidian5.Plugin {
                 new import_obsidian5.Notice(`${result}`);
               } else {
                 await navigator.clipboard.writeText(result);
-                new import_obsidian5.Notice(`${result} was copied to the clipboard.`);
+                new import_obsidian5.Notice("Risultato copiato negli appunti.");
               }
             } catch (err) {
-              console.error("Failed to copy: ", err);
-              new import_obsidian5.Notice("Failed to copy, Check error in console.");
+              console.error("Copia non riuscita: ", err);
+              new import_obsidian5.Notice("Copia non riuscita. Controlla l'errore in console.");
             }
           };
           copyContent();
@@ -19865,7 +19924,7 @@ var FantasyPlugin = class extends import_obsidian5.Plugin {
       }
     });
     this.registerEditorSuggest(new InlineGeneratorSuggester(this.getOptionsForSuggest, this));
-    this.addRibbonIcon("book", "Fantasy Generators", (evt) => {
+    this.addRibbonIcon("book", "Generatori fantasy", (evt) => {
       new GeneratorModal(this.app, (result) => {
         const copyContent = async () => {
           try {
@@ -19873,18 +19932,18 @@ var FantasyPlugin = class extends import_obsidian5.Plugin {
               new import_obsidian5.Notice(`${result}`);
             } else {
               await navigator.clipboard.writeText(result);
-              new import_obsidian5.Notice(`${result} was copied to the clipboard.`);
+              new import_obsidian5.Notice("Risultato copiato negli appunti.");
             }
           } catch (err) {
-            console.error("Failed to copy: ", err);
-            new import_obsidian5.Notice("Failed to copy, Check error in console.");
+            console.error("Copia non riuscita: ", err);
+            new import_obsidian5.Notice("Copia non riuscita. Controlla l'errore in console.");
           }
         };
         copyContent();
       }, this).open();
     });
     this.addSettingTab(new SettingTab(this.app, this));
-    console.log("loaded Fantasy Content Generator");
+    console.log("Generatore di Contenuti Fantasy caricato");
   }
   onunload() {
   }

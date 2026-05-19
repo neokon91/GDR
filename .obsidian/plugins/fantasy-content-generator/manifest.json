@@ -1,9 +1,9 @@
 {
 	"id": "fantasy-content-generator",
-	"name": "Fantasy Content Generator",
+	"name": "Generatore di Contenuti Fantasy",
 	"version": "1.2.4",
 	"minAppVersion": "0.15.0",
-	"description": "A Fantasy Content Generator for Obsidian for All Your TTRPG / World Building Needs",
+	"description": "Generatore di contenuti fantasy per Obsidian, pensato per GDR, campagne e worldbuilding.",
 	"author": "Gregory Jagermeister ",
 	"isDesktopOnly": false
 }

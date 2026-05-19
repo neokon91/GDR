@@ -26,7 +26,7 @@ Questa pagina spiega cosa puoi sfruttare nel vault senza dover conoscere i detta
 
 - **Excalidraw**: disegna mappe, relazioni tra fazioni, schemi di dungeon, fronti e scene complesse.
 - **Hex Cartographer**: crea o consulta mappe esagonali per viaggi, regioni e terre selvagge.
-- **Fantasy Content Generator**: offre spunti fantasy, nomi, luoghi e dettagli utili quando devi riempire una bozza.
+- **Generatore di Contenuti Fantasy**: genera in italiano nomi, locande, insediamenti, gruppi, bottini e dungeon; puo copiare i risultati o salvarli come note bozza in `Inbox/Generati`.
 - **Icon Folder**: rende cartelle e pagine piu riconoscibili con icone.
 - **Tabs**: organizza viste, dashboard e template lunghi in schede, utile per tenere separate sezioni come scaletta, collegamenti, creature, resoconto e ricompense.
 
