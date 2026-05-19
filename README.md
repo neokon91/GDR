@@ -7,12 +7,12 @@ Apri [[1. DM Dashboard]] per preparare e giocare. Usa [[Worldbuilder Dashboard]]
 ## Primi 5 Minuti
 
 1. Apri il vault in Obsidian e vai su [[1. DM Dashboard]].
-2. Controlla [[Risorse/Installazione Plugin]] e abilita almeno i plugin obbligatori.
+2. Se Obsidian chiede conferma per i plugin community, abilitali: il vault usa plugin gia configurati per dashboard, pulsanti e tabelle.
 3. Crea o apri una campagna da [[Campagne/Campagne]].
 4. Crea una sessione con il pulsante `Nuova Sessione` dalla dashboard.
 5. Durante la partita apri [[Durante il Gioco]] per appunti, incontri, PNG, dispense e materiali pronti.
 
-Se dashboard, pulsanti o tabelle non funzionano, apri [[Risorse/Se Qualcosa Non Funziona]].
+Se dashboard, pulsanti o tabelle non funzionano, apri [[Risorse/Installazione Plugin]] e poi [[Risorse/Se Qualcosa Non Funziona]].
 
 ## Flusso Consigliato
 

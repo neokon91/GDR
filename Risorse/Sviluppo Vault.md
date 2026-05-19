@@ -90,6 +90,16 @@ Comando:
 node z.automazioni/import_srd.js
 ```
 
+## Smoke Test Locale
+
+Prima di una release o dopo modifiche a template, script e plugin, esegui:
+
+```bash
+node z.automazioni/check_vault.js
+```
+
+Il controllo verifica JSON di configurazione, plugin obbligatori inclusi e abilitati, wikilink rotti o ambigui, percorsi `templateFile` usati dai pulsanti Meta Bind, target di Icon Folder e riferimenti Obsidian obsoleti.
+
 ### Mostri E Fantasy Statblocks
 
 I mostri importati devono avere frontmatter compatibile con Fantasy Statblocks oltre ai campi italiani usati da Dataview.

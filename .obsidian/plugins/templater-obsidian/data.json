@@ -1,43 +1,20 @@
 {
-  "command_timeout": 5,
+  "command_timeout": 10,
   "templates_folder": "z.modelli",
-  "templates_pairs": [
-    [
-      "",
-      ""
-    ]
-  ],
+  "templates_pairs": [],
   "trigger_on_file_creation": false,
   "auto_jump_to_cursor": false,
   "enable_system_commands": false,
   "shell_path": "",
   "user_scripts_folder": "z.automazioni",
-  "enable_folder_templates": true,
-  "folder_templates": [
-    {
-      "folder": "",
-      "template": ""
-    }
-  ],
+  "enable_folder_templates": false,
+  "folder_templates": [],
   "enable_file_templates": false,
-  "file_templates": [
-    {
-      "regex": ".*",
-      "template": ""
-    }
-  ],
+  "file_templates": [],
   "syntax_highlighting": true,
   "syntax_highlighting_mobile": false,
-  "enabled_templates_hotkeys": [
-    ""
-  ],
-  "startup_templates": [
-    ""
-  ],
+  "enabled_templates_hotkeys": [],
+  "startup_templates": [],
   "intellisense_render": 1,
-  "ignore_folders_on_creation": [
-    {
-      "folder": ""
-    }
-  ]
+  "ignore_folders_on_creation": []
 }

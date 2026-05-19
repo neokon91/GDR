@@ -102,6 +102,7 @@ settings:
   --gdr-accent-soft: color-mix(in srgb, rgb(var(--gdr-accent-rgb)) 13%, transparent);
   --gdr-accent-line: color-mix(in srgb, rgb(var(--gdr-accent-rgb)) 48%, transparent);
   --gdr-shadow: var(--gdr-card-depth);
+  --gdr-focus-ring: 0 0 0 3px color-mix(in srgb, rgb(var(--gdr-accent-rgb)) 28%, transparent);
   --gdr-callout-density: 0.85rem;
   --gdr-callout-title-bg: color-mix(in srgb, rgb(var(--callout-color)) 14%, var(--background-secondary));
   --gdr-callout-body-bg: color-mix(in srgb, rgb(var(--callout-color)) 6%, var(--background-primary));
@@ -158,6 +159,10 @@ body.theme-dark {
   width: 100%;
 }
 
+.markdown-rendered .table-wrapper {
+  overflow-x: auto;
+}
+
 .markdown-rendered table,
 .markdown-rendered .dataview.table-view-table {
   border-collapse: separate;
@@ -202,7 +207,16 @@ body.theme-dark {
   border-radius: var(--gdr-radius) !important;
   min-height: 2.15rem;
   font-weight: 650;
+  white-space: normal;
+  overflow-wrap: anywhere;
   transition: border-color 120ms ease, background-color 120ms ease, transform 120ms ease;
+}
+
+.meta-bind-button:focus-visible,
+.mb-button:focus-visible,
+.markdown-rendered a:focus-visible {
+  outline: none;
+  box-shadow: var(--gdr-focus-ring);
 }
 
 .callout {
@@ -232,8 +246,10 @@ body.theme-dark {
 }
 
 .callout-title-inner {
+  min-width: 0;
   font-weight: 750;
   line-height: 1.25;
+  overflow-wrap: anywhere;
 }
 
 .callout-title-inner::after {
@@ -655,19 +671,20 @@ body .markdown-source-view.tavolo {
 }
 
 .gdr-stat-grid {
-  grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 9rem), 1fr));
 }
 
 .gdr-card-grid {
-  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
 }
 
 .gdr-card-grid.compact {
-  grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr));
 }
 
 .gdr-stat-card,
 .gdr-info-card {
+  min-width: 0;
   border: 1px solid var(--gdr-border);
   border-radius: var(--gdr-radius);
   background: var(--gdr-surface);
@@ -726,10 +743,18 @@ body .markdown-source-view.tavolo {
 .gdr-card-title {
   font-weight: 750;
   margin-bottom: 0.35rem;
+  overflow-wrap: anywhere;
 }
 
 .gdr-card-title a {
   text-decoration: none;
+}
+
+.gdr-card-meta,
+.gdr-card-line,
+.gdr-flow-title,
+.gdr-flow-hint {
+  overflow-wrap: anywhere;
 }
 
 .gdr-card-line {
@@ -895,6 +920,22 @@ body .markdown-source-view.tavolo {
   body .markdown-preview-view.tavolo,
   body .markdown-source-view.tavolo {
     --font-text-size: 16px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .meta-bind-button,
+  .mb-button,
+  .gdr-stat-card,
+  .gdr-info-card {
+    transition: none;
+  }
+
+  .markdown-preview-view.dashboard .meta-bind-button:hover,
+  .markdown-preview-view.dashboard .mb-button:hover,
+  .gdr-stat-card:hover,
+  .gdr-info-card:hover {
+    transform: none;
   }
 }
 

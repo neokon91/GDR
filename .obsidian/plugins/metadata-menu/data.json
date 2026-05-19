@@ -18,9 +18,19 @@
   "enableProperties": true,
   "tableViewMaxRecords": 20,
   "frontmatterListDisplay": "asArray",
-  "fileClassExcludedFolders": [],
+  "fileClassExcludedFolders": [
+    "SRD",
+    "z.automazioni",
+    "z.bacheche",
+    "z.modelli"
+  ],
   "showIndexingStatusInStatusBar": false,
-  "fileIndexingExcludedFolders": [],
+  "fileIndexingExcludedFolders": [
+    "SRD",
+    "z.automazioni",
+    "z.bacheche",
+    "z.modelli"
+  ],
   "fileIndexingExcludedExtensions": [
     ".excalidraw.md"
   ],

@@ -39,6 +39,14 @@ Prima di usare una copia come release, apri [[Risorse/Controllo Vault]] e verifi
 - nessuna data narrativa da calendarizzare, se usi Calendarium;
 - nessun link placeholder lasciato in note operative.
 
+Se stai solo usando il vault al tavolo, puoi fermarti qui. Se invece stai preparando una release o mantenendo il vault, esegui anche il controllo tecnico:
+
+```bash
+node z.automazioni/check_vault.js
+```
+
+Se fallisce, correggi prima gli errori segnalati: di solito riguardano JSON di configurazione, plugin obbligatori, wikilink, template Meta Bind o percorsi Obsidian obsoleti.
+
 ## Se Il Vault Resta Rotto
 
 - Apri [[Risorse/Plugin Attivi]] per capire quale plugin serve a quale funzione.

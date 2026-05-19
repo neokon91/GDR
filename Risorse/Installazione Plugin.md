@@ -8,7 +8,11 @@ stato: pronto
 
 # Installazione Plugin
 
-Questa pagina serve al primo avvio del vault. Installa e abilita i plugin obbligatori prima di usare dashboard, pulsanti e template.
+Questa pagina serve al primo avvio del vault.
+
+Il vault usa plugin gia configurati per far funzionare dashboard, pulsanti, tabelle, schede mostro, bacheche e campi interattivi. Se Obsidian chiede se fidarsi dei plugin community, conferma solo se hai scaricato il vault da una fonte affidabile.
+
+Prima di usare dashboard, pulsanti e template, verifica che almeno i plugin obbligatori siano abilitati.
 
 ## Obbligatori
 
@@ -58,3 +62,13 @@ Questa pagina serve al primo avvio del vault. Installa e abilita i plugin obblig
 2. Apri [[Risorse/Controllo Vault]].
 3. Se vedi errori, apri [[Risorse/Se Qualcosa Non Funziona]].
 4. Se tutto appare correttamente, crea una sessione di prova o usa le note `Prova -`.
+
+## Per Chi Mantiene Il Vault
+
+I plugin inclusi in `.obsidian/plugins` fanno parte del funzionamento custom del vault: non sono accessori da rimuovere in una copia di release.
+
+Per una release o una copia da distribuire, esegui anche questo controllo tecnico:
+
+```bash
+node z.automazioni/check_vault.js
+```
