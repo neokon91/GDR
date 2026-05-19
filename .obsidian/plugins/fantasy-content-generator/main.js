@@ -18172,37 +18172,37 @@ var GeneratorModal = class extends import_obsidian.Modal {
           this.generatorRaceSettings(optionsDiv, amountToGen, raceSelected);
           break;
         case "ship":
-          this.generatorCustomSettings(optionsDiv, amountToGen, generateShipName);
+          this.generatorCustomSettings(optionsDiv, amountToGen, generateShipName, void 0, "oggetto");
           break;
         case "dungeon":
-          this.generatorCustomSettings(optionsDiv, amountToGen, generateDungeonName, this.plugin.settings.dungeonSettings);
+          this.generatorCustomSettings(optionsDiv, amountToGen, generateDungeonName, this.plugin.settings.dungeonSettings, "dungeon");
           break;
         case "plothook":
-          this.generatorCustomSettings(optionsDiv, amountToGen, generatePlotHook);
+          this.generatorCustomSettings(optionsDiv, amountToGen, generatePlotHook, void 0, "spunto");
           break;
         case "religion":
-          this.generatorCustomSettings(optionsDiv, amountToGen, generatorReligions);
+          this.generatorCustomSettings(optionsDiv, amountToGen, generatorReligions, void 0, "religione");
           break;
         case "inn":
           this.generatorInnSettings(optionsDiv, amountToGen, generateInn);
           break;
         case "airships":
-          this.generatorCustomSettings(optionsDiv, amountToGen, generatorAirships);
+          this.generatorCustomSettings(optionsDiv, amountToGen, generatorAirships, void 0, "oggetto");
           break;
         case "drinks":
-          this.generatorCustomSettings(optionsDiv, amountToGen, generatorDrinks, this.plugin.settings.drinkSettings);
+          this.generatorCustomSettings(optionsDiv, amountToGen, generatorDrinks, this.plugin.settings.drinkSettings, "oggetto");
           break;
         case "groups":
-          this.generatorCustomSettings(optionsDiv, amountToGen, generatorGroups, this.plugin.settings.groupSettings);
+          this.generatorCustomSettings(optionsDiv, amountToGen, generatorGroups, this.plugin.settings.groupSettings, "fazione");
           break;
         case "animalgroups":
-          this.generatorCustomSettings(optionsDiv, amountToGen, generatorAnimal_groups);
+          this.generatorCustomSettings(optionsDiv, amountToGen, generatorAnimal_groups, void 0, "fazione");
           break;
         case "metals":
-          this.generatorCustomSettings(optionsDiv, amountToGen, generatorMetals);
+          this.generatorCustomSettings(optionsDiv, amountToGen, generatorMetals, void 0, "oggetto");
           break;
         case "magicaltrees":
-          this.generatorCustomSettings(optionsDiv, amountToGen, generatorMagical_trees);
+          this.generatorCustomSettings(optionsDiv, amountToGen, generatorMagical_trees, void 0, "luogo");
           break;
         case "settlement":
           this.generatorFCGSettlementSettings(optionsDiv, amountToGen, FCG.Settlements.generate);
@@ -18211,7 +18211,7 @@ var GeneratorModal = class extends import_obsidian.Modal {
           this.generatorLootSettings(optionsDiv, amountToGen, generateLoot, this.plugin.settings.enableCurrency, this.plugin.settings.currencyFrequency, this.plugin.settings.currencyTypes);
           break;
         case "artifacts":
-          this.generatorCustomSettings(optionsDiv, amountToGen, generateMiscellaneousArtifacts);
+          this.generatorCustomSettings(optionsDiv, amountToGen, generateMiscellaneousArtifacts, void 0, "oggetto magico");
           break;
         case "none":
           optionsDiv.innerHTML = "";
@@ -18277,7 +18277,7 @@ var GeneratorModal = class extends import_obsidian.Modal {
       this.close();
       this.onSubmit(this.result);
     })).addButton((btn) => btn.setButtonText("Crea nota").onClick(async () => {
-      await this.createGeneratedNote("Nomi fantasy", fullCopy, "nomi");
+      await this.createGeneratedNote("Nomi fantasy", fullCopy, "png");
     }));
   }
   generatorInnSettings(settingsdiv, genAmount, generatorFunction) {
@@ -18384,7 +18384,7 @@ var GeneratorModal = class extends import_obsidian.Modal {
     }));
   }
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  generatorCustomSettings(settingsdiv, genAmount, generatorFunction, settings) {
+  generatorCustomSettings(settingsdiv, genAmount, generatorFunction, settings, noteType = "generazione") {
     settingsdiv.empty();
     settingsdiv.createEl("h3", { text: "Personalizza la generazione" });
     genAmount = 1;
@@ -18419,7 +18419,7 @@ var GeneratorModal = class extends import_obsidian.Modal {
       this.close();
       this.onSubmit(this.result);
     })).addButton((btn) => btn.setButtonText("Crea nota").onClick(async () => {
-      await this.createGeneratedNote("Generazione fantasy", this.formatStringList(list), "generazione");
+      await this.createGeneratedNote("Generazione fantasy", this.formatStringList(list), noteType);
     }));
   }
   determineLastname(race) {
@@ -18447,6 +18447,23 @@ var GeneratorModal = class extends import_obsidian.Modal {
   sanitizeFileName(value) {
     return value.replace(/[\\/#^|\[\]:]/g, "-").replace(/\s+/g, " ").trim().slice(0, 80) || "Generazione fantasy";
   }
+  slugify(value) {
+    return String(value != null ? value : "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9\s-]/g, "").trim().replace(/\s+/g, "-") || "generazione-fantasy";
+  }
+  yamlQuote(value) {
+    return JSON.stringify(String(value != null ? value : ""));
+  }
+  yamlBlock(value) {
+    const lines = String(value != null ? value : "").trim().split("\n");
+    return lines.length ? lines.map((line) => "  " + line).join("\n") : "  ";
+  }
+  getFirstGeneratedTitle(body, fallback) {
+    const firstLine = String(body != null ? body : "").split("\n").find((line) => line.trim() !== "");
+    if (!firstLine) {
+      return fallback;
+    }
+    return firstLine.replace(/^(Nome|Name):\s*/i, "").trim().slice(0, 80) || fallback;
+  }
   getTimestampForFile() {
     return new Date().toISOString().replace(/[:]/g, "").replace("T", " ").slice(0, 18);
   }
@@ -18462,18 +18479,405 @@ var GeneratorModal = class extends import_obsidian.Modal {
   }
   formatGeneratedMarkdown(title, body, generatorType) {
     const created = new Date().toISOString();
-    return `---
-tipo: generazione
+    const noteTitle = this.getFirstGeneratedTitle(body, title);
+    const id = this.slugify(noteTitle);
+    const raw = body.trim();
+    const sourceBlock = this.yamlBlock(raw);
+    switch (generatorType) {
+      case "dungeon":
+        return `---
+id: ${id}
+nome: ${this.yamlQuote(noteTitle)}
+categoria: luogo
+tipo: dungeon
+tipologia: dungeon
+bioma:
+stato: bozza
+canonico: false
+mondo:
+luogo_padre:
+governante:
+popolazione:
+stabilita:
+pericolo:
+hp_massimi:
+hp_attuali:
+fazioni: []
+religioni: []
+risorse: []
+problemi: []
 plugin: fantasy-content-generator
 generatore: ${generatorType}
-stato: bozza
 creato: ${created}
+contenuto_generato: |-
+${sourceBlock}
+---
+# \`=this.nome\`
+
+>[!infobox|wiki]- Sala di Controllo
+> Regione:
+> \`INPUT[suggester(optionQuery("Mondi/Luoghi"), useLinks(partial), allowOther):luogo_padre]\`
+>
+> Mondo:
+> \`INPUT[suggester(optionQuery("Mondi"), useLinks(partial), allowOther):mondo]\`
+>
+> Pericolo:
+> \`INPUT[slider(minValue(0), maxValue(10), stepSize(1), addLabels):pericolo]\`
+>
+> Stato:
+> \`INPUT[inlineSelect(option(bozza, Bozza), option(pronto, Pronto), option(in gioco, In gioco), option(archiviata, Archiviata)):stato]\`
+
+> [!incontro] Premessa
+> ${raw.replace(/\n/g, "\n> ")}
+
+> [!lettura] Descrizione da leggere
+>
+
+## Ingresso
+
+> [!luogo] Ingresso
+>
+
+## Stanze
+
+## Incontri
+
+\`\`\`dataview
+TABLE type, cr
+FROM "Mondi/Creature"
+WHERE contains(luoghi, this.file.link)
+\`\`\`
+
+## Tesori
+
+> [!tesoro] Tesori
+>
+
+## Trappole
+
+> [!pericolo] Trappole
+>
+
+## Segreti
+`;
+      case "insediamenti":
+      case "locande":
+      case "luogo":
+        return `---
+id: ${id}
+nome: ${this.yamlQuote(noteTitle)}
+categoria: luogo
+tipo: ${generatorType === "insediamenti" ? "insediamento" : generatorType === "locande" ? "locanda" : ""}
+tipologia: ${generatorType === "insediamenti" ? "insediamento" : generatorType === "locande" ? "locanda" : ""}
+bioma:
+stato: bozza
+canonico: false
+mondo:
+luogo_padre:
+governante:
+popolazione:
+stabilita:
+pericolo:
+hp_massimi:
+hp_attuali:
+fazioni: []
+religioni: []
+risorse: []
+problemi: []
+plugin: fantasy-content-generator
+generatore: ${generatorType}
+creato: ${created}
+contenuto_generato: |-
+${sourceBlock}
+---
+# \`=this.nome\`
+
+>[!infobox|wiki]- Sala di Controllo
+> Governante:
+> \`INPUT[suggester(optionQuery("Mondi/Personaggi"), useLinks(partial), allowOther):governante]\`
+>
+> Regione:
+> \`INPUT[suggester(optionQuery("Mondi/Luoghi"), useLinks(partial), allowOther):luogo_padre]\`
+>
+> Mondo:
+> \`INPUT[suggester(optionQuery("Mondi"), useLinks(partial), allowOther):mondo]\`
+>
+> Popolazione:
+> \`INPUT[number:popolazione]\`
+>
+> Stato:
+> \`INPUT[inlineSelect(option(bozza, Bozza), option(pronto, Pronto), option(in gioco, In gioco), option(archiviata, Archiviata)):stato]\`
+
+> [!luogo] Descrizione
+> ${raw.replace(/\n/g, "\n> ")}
+
+> [!lettura] Prima impressione
+>
+
+## Quartieri e Luoghi Importanti
+
+## Governo
+
+## Fazioni presenti
+
+\`INPUT[inlineListSuggester(optionQuery("Mondi/Fazioni"), useLinks(partial)):fazioni]\`
+
+## Problemi attuali
+
+\`\`\`meta-bind
+INPUT[list:problemi]
+\`\`\`
+
+## Segreti
+
+> [!segreto]- Segreti
+>
+`;
+      case "fazione":
+        return `---
+id: ${id}
+nome: ${this.yamlQuote(noteTitle)}
+categoria: fazione
+tipo:
+stato: bozza
+canonico: false
+mondo:
+leader: []
+luoghi: []
+personaggi: []
+plugin: fantasy-content-generator
+generatore: ${generatorType}
+creato: ${created}
+contenuto_generato: |-
+${sourceBlock}
+---
+# \`=this.nome\`
+
+>[!infobox|wiki]- Fazione
+> Tipo:
+> \`INPUT[text:tipo]\`
+>
+> Stato:
+> \`INPUT[inlineSelect(option(bozza, Bozza), option(pronto, Pronto), option(in gioco, In Gioco), option(archiviata, Archiviata)):stato]\`
+>
+> Canonica:
+> \`INPUT[toggle:canonico]\`
+>
+> Mondo:
+> \`INPUT[suggester(optionQuery("Mondi"), useLinks(partial), allowOther):mondo]\`
+
+## Identita
+
+> [!scena] Identita pubblica
+> ${raw.replace(/\n/g, "\n> ")}
+
+## Obiettivi
+
+> [!missione] Obiettivi
+>
+
+## Leader
+
+\`INPUT[inlineListSuggester(optionQuery("Mondi/Personaggi"), useLinks(partial)):leader]\`
+
+## Luoghi controllati
+
+\`INPUT[inlineListSuggester(optionQuery("Mondi/Luoghi"), useLinks(partial)):luoghi]\`
+
+## PNG Collegati
+
+\`INPUT[inlineListSuggester(optionQuery("Mondi/Personaggi"), useLinks(partial)):personaggi]\`
+
+## Segreti
+
+> [!segreto]- Segreti
+>
+`;
+      case "oggetto":
+      case "oggetto magico":
+      case "bottino":
+        return `---
+id: ${id}
+nome: ${this.yamlQuote(noteTitle)}
+categoria: oggetto
+tipo: ${generatorType === "oggetto magico" ? "oggetto magico" : generatorType === "bottino" ? "tesoro" : ""}
+rarita:
+sintonia: false
+cariche:
+maledizione: false
+stato: bozza
+canonico: false
+mondo:
+proprietario:
+luogo:
+plugin: fantasy-content-generator
+generatore: ${generatorType}
+creato: ${created}
+contenuto_generato: |-
+${sourceBlock}
+---
+# \`=this.nome\`
+
+>[!infobox|wiki]- Oggetto
+> Tipo:
+> \`INPUT[text:tipo]\`
+>
+> Rarita:
+> \`INPUT[inlineSelect(option(comune, Comune), option(non comune, Non Comune), option(raro, Raro), option(molto raro, Molto Raro), option(leggendario, Leggendario), option(artefatto, Artefatto)):rarita]\`
+>
+> Stato:
+> \`INPUT[inlineSelect(option(bozza, Bozza), option(pronto, Pronto), option(in gioco, In Gioco), option(consegnato, Consegnato), option(archiviata, Archiviata)):stato]\`
+>
+> Canonico:
+> \`INPUT[toggle:canonico]\`
+
+> [!tesoro] Descrizione
+> ${raw.replace(/\n/g, "\n> ")}
+
+## Proprieta
+
+> [!regola] Proprieta
+>
+
+## Storia
+
+> [!indizio] Storia
+>
+
+## Proprietario
+
+\`INPUT[suggester(optionQuery("Mondi/Personaggi"), useLinks(partial), allowOther):proprietario]\`
+
+## Luogo
+
+\`INPUT[suggester(optionQuery("Mondi/Luoghi"), useLinks(partial), allowOther):luogo]\`
+
+## Segreti
+
+> [!segreto]- Segreti
+>
+`;
+      case "png":
+        return `---
+id: ${id}
+nome: ${this.yamlQuote(noteTitle)}
+categoria: personaggio
+tipo: png
+ruolo:
+stato: bozza
+mondo:
+luogo:
+fazioni: []
+relazioni: []
+segreto:
+atteggiamento:
+hp_massimi:
+hp_attuali:
+plugin: fantasy-content-generator
+generatore: ${generatorType}
+creato: ${created}
+contenuto_generato: |-
+${sourceBlock}
+---
+# \`=this.nome\`
+
+>[!infobox|wiki right]
+>**Ruolo**: \`=this.ruolo\`
+>**Stato**: \`=this.stato\`
+>**Mondo**: \`=this.mondo\`
+>**Luogo**: \`=this.luogo\`
+>**Atteggiamento**: \`=this.atteggiamento\`
+
+> [!png] Identita
+> ${raw.replace(/\n/g, "\n> ")}
+
+## Personalita
+
+> [!png] Tratti al tavolo
+>
+
+## Vuole
+
+> [!missione] Vuole
+>
+
+## Sa
+
+> [!indizio] Sa
+>
+
+## Relazioni
+
+\`INPUT[inlineListSuggester(optionQuery("Mondi/Personaggi"), useLinks(partial)):relazioni]\`
+
+## Fazioni
+
+\`INPUT[inlineListSuggester(optionQuery("Mondi/Fazioni"), useLinks(partial)):fazioni]\`
+
+## Segreto
+
+> [!segreto]- Segreto
+>
+`;
+      case "religione":
+        return `---
+id: ${id}
+nome: ${this.yamlQuote(noteTitle)}
+categoria: religione
+tipo:
+sottotipo:
+stato: bozza
+canonico: false
+mondo:
+divinita: []
+templi: []
+fazioni: []
+plugin: fantasy-content-generator
+generatore: ${generatorType}
+creato: ${created}
+contenuto_generato: |-
+${sourceBlock}
+---
+# \`=this.nome\`
+
+> [!fede] Descrizione
+> ${raw.replace(/\n/g, "\n> ")}
+
+## Dottrina
+
+## Templi
+
+\`INPUT[inlineListSuggester(optionQuery("Mondi/Luoghi"), useLinks(partial)):templi]\`
+
+## Fazioni collegate
+
+\`INPUT[inlineListSuggester(optionQuery("Mondi/Fazioni"), useLinks(partial)):fazioni]\`
+
+## Segreti
+
+> [!segreto]- Segreti
+>
+`;
+      default:
+        return `---
+id: ${id}
+nome: ${this.yamlQuote(noteTitle)}
+categoria: generazione
+tipo: ${generatorType}
+stato: bozza
+canonico: false
+plugin: fantasy-content-generator
+generatore: ${generatorType}
+creato: ${created}
+contenuto_generato: |-
+${sourceBlock}
 ---
 
-# ${title}
+# ${noteTitle}
 
-${body.trim()}
+${raw}
 `;
+    }
   }
   async createGeneratedNote(title, body, generatorType) {
     if (body.trim() === "") {
