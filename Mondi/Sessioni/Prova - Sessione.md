@@ -8,6 +8,7 @@ tipo: sessione di campagna
 data: 2026-05-19
 data_mondo: "Giorno di prova"
 stato: archiviata
+mondo: [[Prova - Mondo]]
 campagne:
   - [[Prova - Campagna]]
 luoghi:

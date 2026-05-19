@@ -2,14 +2,15 @@ async function oneShot(tp) {
     const helpers = tp.user.helpers;
     const name = await helpers.promptRequired(tp, "Nome della one-shot");
     const id = helpers.slugify(name);
-    const mondo = await helpers.chooseNoteByFrontmatter(tp, "categoria", "mondo", "Mondo della one-shot");
+    const mondo = await helpers.chooseWorld(tp, "Mondo della one-shot");
+    const context = { world: mondo };
     const livello = await helpers.promptOptional(tp, "Livello");
     const durata = await helpers.promptOptional(tp, "Durata prevista");
-    const luoghi = await helpers.chooseNotesByPath(tp, "Mondi/Luoghi", "Luoghi della one-shot");
-    const incontri = await helpers.chooseNotesByPath(tp, "Mondi/Incontri", "Incontri della one-shot");
-    const personaggi = await helpers.chooseNotesByPath(tp, "Mondi/Personaggi", "PNG o PG collegati");
+    const luoghi = await helpers.chooseLocations(tp, "Luoghi della one-shot", context);
+    const incontri = await helpers.chooseEncounters(tp, "Incontri della one-shot", context);
+    const personaggi = await helpers.choosePeople(tp, "PNG o PG collegati", context);
 
-    await tp.file.move(`Mondi/Missioni/${name}`);
+    await helpers.moveNote(tp, helpers.PATHS.missioni, name);
 
     return `---
 id: ${id}

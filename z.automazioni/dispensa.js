@@ -15,12 +15,13 @@ async function dispensa(tp) {
         ],
         "Tipo di dispensa"
     );
-    const mondo = await helpers.chooseNoteByFrontmatter(tp, "categoria", "mondo", "Mondo della dispensa");
-    const luogo = await helpers.chooseNoteByPath(tp, "Mondi/Luoghi", "Luogo collegato");
-    const personaggi = await helpers.chooseNotesByPath(tp, "Mondi/Personaggi", "Personaggi collegati");
-    const sessioni = await helpers.chooseNotesByPath(tp, "Mondi/Sessioni", "Sessioni collegate");
+    const mondo = await helpers.chooseWorld(tp, "Mondo della dispensa");
+    const context = { world: mondo };
+    const luogo = await helpers.chooseLocation(tp, "Luogo collegato", context);
+    const personaggi = await helpers.choosePeople(tp, "Personaggi collegati", context);
+    const sessioni = await helpers.chooseSessions(tp, "Sessioni collegate", context);
 
-    await tp.file.move(`Mondi/Dispense/${name}`);
+    await helpers.moveNote(tp, helpers.PATHS.dispense, name);
 
     return `---
 id: ${id}

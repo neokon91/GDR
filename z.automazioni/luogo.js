@@ -34,11 +34,12 @@ async function luogo(tp){
         ],
         "Bioma"
     );
-    const mondo = await helpers.chooseNoteByFrontmatter(tp, "categoria", "mondo", "Mondo del luogo");
-    const luogoPadre = await helpers.chooseNoteByPath(tp, "Mondi/Luoghi", "Luogo o regione superiore");
-    const governante = await helpers.chooseNoteByPath(tp, "Mondi/Personaggi", "Governante o referente");
+    const mondo = await helpers.chooseWorld(tp, "Mondo del luogo");
+    const context = { world: mondo };
+    const luogoPadre = await helpers.chooseLocation(tp, "Luogo o regione superiore", context);
+    const governante = await helpers.choosePerson(tp, "Governante o referente", context);
     const pericolo = await helpers.promptOptional(tp, "Pericolo da 0 a 10");
-    await tp.file.move(`Mondi/Luoghi/${name}`);
+    await helpers.moveNote(tp, helpers.PATHS.luoghi, name);
 
     return `---
 id: ${id}

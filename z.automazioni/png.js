@@ -14,12 +14,13 @@ async function png(tp) {
         ],
         "Stato del PNG"
     );
-    const mondo = await helpers.chooseNoteByFrontmatter(tp, "categoria", "mondo", "Mondo del PNG");
-    const luogo = await helpers.chooseNoteByPath(tp, "Mondi/Luoghi", "Luogo del PNG");
-    const fazioni = await helpers.chooseNotesByPath(tp, "Mondi/Fazioni", "Fazioni del PNG");
-    const relazioni = await helpers.chooseNotesByPath(tp, "Mondi/Personaggi", "Relazioni del PNG");
+    const mondo = await helpers.chooseWorld(tp, "Mondo del PNG");
+    const context = { world: mondo };
+    const luogo = await helpers.chooseLocation(tp, "Luogo del PNG", context);
+    const fazioni = await helpers.chooseFactions(tp, "Fazioni del PNG", context);
+    const relazioni = await helpers.choosePeople(tp, "Relazioni del PNG", context);
 
-    await tp.file.move(`Mondi/Personaggi/${name}`);
+    await helpers.moveNote(tp, helpers.PATHS.personaggi, name);
 
     return `---
 id: ${id}

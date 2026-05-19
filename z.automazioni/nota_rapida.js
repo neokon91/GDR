@@ -15,7 +15,7 @@ async function nota_rapida(tp) {
     );
     const collegamenti = await helpers.chooseNotesByPath(tp, "Mondi", "Collega a una nota del mondo");
 
-    await tp.file.move(`Inbox/${name}`);
+    await helpers.moveNote(tp, "Inbox", name);
 
     return `---
 id: ${id}

@@ -14,12 +14,13 @@ async function personaggio(tp) {
         ],
         "Stato del personaggio"
     );
-    const mondo = await helpers.chooseNoteByFrontmatter(tp, "categoria", "mondo", "Mondo del personaggio");
-    const luogo = await helpers.chooseNoteByPath(tp, "Mondi/Luoghi", "Luogo del personaggio");
-    const fazioni = await helpers.chooseNotesByPath(tp, "Mondi/Fazioni", "Fazioni del personaggio");
-    const relazioni = await helpers.chooseNotesByPath(tp, "Mondi/Personaggi", "Relazioni del personaggio");
+    const mondo = await helpers.chooseWorld(tp, "Mondo del personaggio");
+    const context = { world: mondo };
+    const luogo = await helpers.chooseLocation(tp, "Luogo del personaggio", context);
+    const fazioni = await helpers.chooseFactions(tp, "Fazioni del personaggio", context);
+    const relazioni = await helpers.choosePeople(tp, "Relazioni del personaggio", context);
 
-    await tp.file.move(`Mondi/Personaggi/${name}`);
+    await helpers.moveNote(tp, helpers.PATHS.personaggi, name);
 
     return `---
 id: ${id}

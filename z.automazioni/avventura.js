@@ -2,14 +2,15 @@ async function avventura(tp) {
     const helpers = tp.user.helpers;
     const name = await helpers.promptRequired(tp, "Nome dell'avventura");
     const id = helpers.slugify(name);
-    const mondo = await helpers.chooseNoteByFrontmatter(tp, "categoria", "mondo", "Mondo dell'avventura");
-    const campagne = await helpers.chooseNotesByPath(tp, "Campagne", "Campagne collegate");
-    const luoghi = await helpers.chooseNotesByPath(tp, "Mondi/Luoghi", "Luoghi dell'avventura");
-    const missioni = await helpers.chooseNotesByPath(tp, "Mondi/Missioni", "Missioni collegate");
-    const incontri = await helpers.chooseNotesByPath(tp, "Mondi/Incontri", "Incontri collegati");
-    const ricompense = await helpers.chooseNotesByPath(tp, "Mondi/Oggetti", "Ricompense");
+    const mondo = await helpers.chooseWorld(tp, "Mondo dell'avventura");
+    const context = { world: mondo };
+    const campagne = await helpers.chooseCampaigns(tp, "Campagne collegate", context);
+    const luoghi = await helpers.chooseLocations(tp, "Luoghi dell'avventura", context);
+    const missioni = await helpers.chooseMissions(tp, "Missioni collegate", context);
+    const incontri = await helpers.chooseEncounters(tp, "Incontri collegati", context);
+    const ricompense = await helpers.chooseObjects(tp, "Ricompense", context);
 
-    await tp.file.move(`Mondi/Missioni/${name}`);
+    await helpers.moveNote(tp, helpers.PATHS.missioni, name);
 
     return `---
 id: ${id}

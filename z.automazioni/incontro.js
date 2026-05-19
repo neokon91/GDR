@@ -18,13 +18,14 @@ async function incontro(tp) {
         ],
         "Tipo di incontro"
     );
-    const luogo = await helpers.chooseNoteByPath(tp, "Mondi/Luoghi", "Luogo dell'incontro");
+    const luogo = await helpers.chooseLocation(tp, "Luogo dell'incontro");
+    const context = { world: helpers.getWorldFromLink(luogo) };
     const pericolo = await helpers.promptOptional(tp, "Pericolo da 0 a 10");
-    const creature = await helpers.chooseNotesByPath(tp, "Mondi/Creature", "Creature coinvolte");
-    const personaggi = await helpers.chooseNotesByPath(tp, "Mondi/Personaggi", "Personaggi coinvolti");
-    const ricompense = await helpers.chooseNotesByPath(tp, "Mondi/Oggetti", "Ricompense");
+    const creature = await helpers.chooseCreatures(tp, "Creature coinvolte", context);
+    const personaggi = await helpers.choosePeople(tp, "Personaggi coinvolti", context);
+    const ricompense = await helpers.chooseObjects(tp, "Ricompense", context);
 
-    await tp.file.move(`Mondi/Incontri/${name}`);
+    await helpers.moveNote(tp, helpers.PATHS.incontri, name);
 
     return `---
 id: ${id}
@@ -32,6 +33,7 @@ nome: ${helpers.yamlQuote(name)}
 categoria: incontro
 tipo: ${selectedType?.id ?? ""}
 stato: bozza
+mondo: ${context.world}
 luogo: ${luogo}
 creature: ${helpers.inlineYamlList(creature)}
 personaggi: ${helpers.inlineYamlList(personaggi)}

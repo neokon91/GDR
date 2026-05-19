@@ -3,6 +3,8 @@ async function sessione(tp) {
     const titolo = await helpers.promptRequired(tp, "Titolo della sessione", "Sessione");
     const data = await helpers.promptOptional(tp, "Data", tp.date.now("YYYY-MM-DD")) || tp.date.now("YYYY-MM-DD");
     const id = helpers.slugify(`${data}-${titolo}`);
+    const mondo = await helpers.chooseWorld(tp, "Mondo della sessione");
+    const context = { world: mondo };
     const selectedType = await helpers.chooseOptional(
         tp,
         [
@@ -15,16 +17,16 @@ async function sessione(tp) {
         ],
         "Tipo di sessione"
     );
-    const campagne = await helpers.chooseNotesByPath(tp, "Campagne", "Campagne collegate");
-    const luoghi = await helpers.chooseNotesByPath(tp, "Mondi/Luoghi", "Luoghi in scena");
-    const personaggi = await helpers.chooseNotesByPath(tp, "Mondi/Personaggi", "Personaggi in scena");
-    const creature = await helpers.chooseNotesByPath(tp, "Mondi/Creature", "Creature in scena");
-    const incontri = await helpers.chooseNotesByPath(tp, "Mondi/Incontri", "Incontri previsti");
-    const dispense = await helpers.chooseNotesByPath(tp, "Mondi/Dispense", "Dispense previste");
-    const fazioni = await helpers.chooseNotesByPath(tp, "Mondi/Fazioni", "Fazioni in scena");
-    const oggetti = await helpers.chooseNotesByPath(tp, "Mondi/Oggetti", "Oggetti in scena");
+    const campagne = await helpers.chooseCampaigns(tp, "Campagne collegate", context);
+    const luoghi = await helpers.chooseLocations(tp, "Luoghi in scena", context);
+    const personaggi = await helpers.choosePeople(tp, "Personaggi in scena", context);
+    const creature = await helpers.chooseCreatures(tp, "Creature in scena", context);
+    const incontri = await helpers.chooseEncounters(tp, "Incontri previsti", context);
+    const dispense = await helpers.chooseHandouts(tp, "Dispense previste", context);
+    const fazioni = await helpers.chooseFactions(tp, "Fazioni in scena", context);
+    const oggetti = await helpers.chooseObjects(tp, "Oggetti in scena", context);
 
-    await tp.file.move(`Mondi/Sessioni/${data} - ${titolo}`);
+    await helpers.moveNote(tp, helpers.PATHS.sessioni, `${data} - ${titolo}`);
 
     return `---
 id: ${id}
@@ -36,6 +38,7 @@ tipo: ${selectedType?.id ?? ""}
 data: ${data}
 data_mondo:
 stato: preparazione
+mondo: ${mondo}
 campagne: ${helpers.inlineYamlList(campagne)}
 luoghi: ${helpers.inlineYamlList(luoghi)}
 personaggi: ${helpers.inlineYamlList(personaggi)}

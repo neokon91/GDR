@@ -4,6 +4,7 @@ nome: "Prova - Incontro"
 categoria: incontro
 tipo: combattimento
 stato: archiviata
+mondo: [[Prova - Mondo]]
 luogo: [[Prova - Dungeon]]
 creature:
   - [[Prova - Creatura]]

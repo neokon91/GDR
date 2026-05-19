@@ -58,8 +58,9 @@ async function creatura(tp){
         alignments,
         "Allineamento della creatura"
     );
-    const mondo = await helpers.chooseNoteByFrontmatter(tp, "categoria", "mondo", "Mondo della creatura");
-    const luoghi = await helpers.chooseNotesByPath(tp, "Mondi/Luoghi", "Luoghi o habitat collegati");
+    const mondo = await helpers.chooseWorld(tp, "Mondo della creatura");
+    const context = { world: mondo };
+    const luoghi = await helpers.chooseLocations(tp, "Luoghi o habitat collegati", context);
 
     // === STATISTICHE ===
     const ac = await helpers.promptOptional(tp, "Classe Armatura", "15") || "15";
@@ -80,9 +81,8 @@ async function creatura(tp){
     const bonusActions = await helpers.collectNamedDescriptions(tp, "azioni bonus");
     const reactions = await helpers.collectNamedDescriptions(tp, "reazioni");
 
-
-    // Rinomina file
-    await tp.file.move(`Mondi/Creature/${name}`);
+    // Crea la cartella se manca e sposta la nota nella sezione creature.
+    await helpers.moveNote(tp, helpers.PATHS.creature, name);
 
     return `---
 id: ${id}

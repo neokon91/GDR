@@ -13,11 +13,12 @@ async function culto(tp) {
         "Sottotipo"
     );
     const tipo = await helpers.promptOptional(tp, "Tipo o dominio");
-    const mondo = await helpers.chooseNoteByFrontmatter(tp, "categoria", "mondo", "Mondo della religione");
-    const templi = await helpers.chooseNotesByPath(tp, "Mondi/Luoghi", "Templi collegati");
-    const fazioni = await helpers.chooseNotesByPath(tp, "Mondi/Fazioni", "Fazioni collegate");
+    const mondo = await helpers.chooseWorld(tp, "Mondo della religione");
+    const context = { world: mondo };
+    const templi = await helpers.chooseLocations(tp, "Templi collegati", context);
+    const fazioni = await helpers.chooseFactions(tp, "Fazioni collegate", context);
 
-    await tp.file.move(`Mondi/Religioni/${name}`);
+    await helpers.moveNote(tp, helpers.PATHS.religioni, name);
 
     return `---
 id: ${id}

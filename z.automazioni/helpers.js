@@ -2,6 +2,21 @@ const SKIP_VALUE = "__SKIP__";
 const MANUAL_VALUE = "__MANUAL__";
 const DONE_VALUE = "__DONE__";
 
+const PATHS = {
+    campagne: "Campagne",
+    creature: "Mondi/Creature",
+    dispense: "Mondi/Dispense",
+    fazioni: "Mondi/Fazioni",
+    incontri: "Mondi/Incontri",
+    luoghi: "Mondi/Luoghi",
+    missioni: "Mondi/Missioni",
+    mondi: "Mondi",
+    oggetti: "Mondi/Oggetti",
+    personaggi: "Mondi/Personaggi",
+    religioni: "Mondi/Religioni",
+    sessioni: "Mondi/Sessioni"
+};
+
 function abortCreation(message = "Creazione annullata dall'utente.") {
     throw new Error(message);
 }
@@ -13,12 +28,14 @@ function isCancelled(value) {
 async function promptRequired(tp, message, defaultValue = "") {
     const value = await tp.system.prompt(message, defaultValue);
 
+    // La X della finestra annulla l'intera creazione, invece di produrre una nota incompleta.
     if (isCancelled(value)) {
         abortCreation();
     }
 
     const trimmed = String(value ?? "").trim();
 
+    // Solo il nome resta davvero obbligatorio: senza nome non sappiamo dove creare la nota.
     if (!trimmed) {
         abortCreation("Creazione annullata: manca un nome.");
     }
@@ -29,6 +46,7 @@ async function promptRequired(tp, message, defaultValue = "") {
 async function promptOptional(tp, message, defaultValue = "") {
     const value = await tp.system.prompt(`${message} (opzionale)`, defaultValue);
 
+    // Anche sui campi opzionali la X significa "ferma tutto"; lasciare vuoto significa "salta".
     if (isCancelled(value)) {
         abortCreation();
     }
@@ -148,12 +166,110 @@ function normalizeText(value) {
         .trim();
 }
 
+function getFrontmatter(file) {
+    if (!file) {
+        return {};
+    }
+
+    return app.metadataCache.getFileCache(file)?.frontmatter ?? {};
+}
+
+function getLinkTargetName(link) {
+    if (typeof link === "object" && link !== null) {
+        const objectTarget = link.path ?? link.link ?? link.display ?? "";
+        return String(objectTarget).replace(/\.md$/, "").split("/").pop();
+    }
+
+    const raw = String(link ?? "").trim();
+    const match = raw.match(/^\[\[([^|\]]+)(?:\|[^\]]+)?\]\]$/);
+    const target = match ? match[1] : raw;
+    return target.split("/").pop();
+}
+
+function frontmatterHasLink(value, link) {
+    if (!value || !link) {
+        return false;
+    }
+
+    const expected = normalizeText(getLinkTargetName(link));
+    const values = Array.isArray(value) ? value : [value];
+
+    return values.some(entry => normalizeText(getLinkTargetName(entry)).includes(expected));
+}
+
+function getFileFromLink(link) {
+    const targetName = getLinkTargetName(link);
+
+    if (!targetName) {
+        return null;
+    }
+
+    return app.vault.getMarkdownFiles().find(file => file.basename === targetName) ?? null;
+}
+
+function getWorldFromLink(link) {
+    const file = getFileFromLink(link);
+    return getFrontmatter(file)?.mondo ?? "";
+}
+
+function isHiddenFromSuggestions(file) {
+    const frontmatter = getFrontmatter(file);
+    return file.basename.startsWith("Prova -") || frontmatter.stato === "archiviata";
+}
+
+function sortFilesForSuggestions(files, context = {}) {
+    const statoRank = {
+        "in gioco": 0,
+        pronto: 1,
+        preparazione: 2,
+        proposta: 3,
+        accettata: 4,
+        "in corso": 5,
+        bozza: 6
+    };
+
+    return [...files].sort((a, b) => {
+        const aMeta = getFrontmatter(a);
+        const bMeta = getFrontmatter(b);
+        const aSameWorld = frontmatterHasLink(aMeta.mondo, context.world);
+        const bSameWorld = frontmatterHasLink(bMeta.mondo, context.world);
+
+        if (aSameWorld !== bSameWorld) {
+            return aSameWorld ? -1 : 1;
+        }
+
+        const aRank = statoRank[aMeta.stato] ?? 99;
+        const bRank = statoRank[bMeta.stato] ?? 99;
+
+        if (aRank !== bRank) {
+            return aRank - bRank;
+        }
+
+        return a.basename.localeCompare(b.basename);
+    });
+}
+
+function formatSuggestionLabel(file, context = {}) {
+    const frontmatter = getFrontmatter(file);
+    const badges = [];
+
+    if (frontmatterHasLink(frontmatter.mondo, context.world)) {
+        badges.push("stesso mondo");
+    }
+
+    if (frontmatter.stato) {
+        badges.push(frontmatter.stato);
+    }
+
+    return badges.length ? `${file.basename} · ${badges.join(" · ")}` : file.basename;
+}
+
 function getMarkdownFilesByFrontmatter(field, expectedValue) {
     const normalizedExpected = normalizeText(expectedValue);
 
+    // Usiamo la cache di Obsidian: è più stabile che leggere YAML a mano.
     return app.vault.getMarkdownFiles().filter(file => {
-        const cache = app.metadataCache.getFileCache(file);
-        const actualValue = normalizeText(cache?.frontmatter?.[field]);
+        const actualValue = normalizeText(getFrontmatter(file)?.[field]);
         return actualValue === normalizedExpected;
     });
 }
@@ -162,21 +278,70 @@ function getMarkdownFilesInPath(path) {
     const normalizedPath = String(path ?? "").replace(/\/+$/, "");
     const indexName = normalizedPath.split("/").pop();
 
+    // Esclude la nota indice della cartella, così i suggerimenti mostrano solo entità reali.
     return app.vault.getMarkdownFiles()
         .filter(file => file.path.startsWith(`${normalizedPath}/`))
         .filter(file => file.basename !== indexName)
         .sort((a, b) => a.basename.localeCompare(b.basename));
 }
 
-async function chooseNoteFromFiles(tp, files, message, noneLabel = "Nessuna") {
-    if (!files.length) {
+async function chooseNoteFromFiles(tp, files, message, noneLabel = "Nessuna", options = {}) {
+    const visibleFiles = sortFilesForSuggestions(
+        options.includeHidden ? files : files.filter(file => !isHiddenFromSuggestions(file)),
+        options
+    );
+    const hiddenFiles = files.filter(file => isHiddenFromSuggestions(file));
+    const showHiddenLabel = "Mostra anche archiviate/prove";
+
+    if (!visibleFiles.length) {
+        if (!options.includeHidden && hiddenFiles.length) {
+            const selected = await tp.system.suggester(
+                [noneLabel, "Inserisci manualmente", showHiddenLabel],
+                [SKIP_VALUE, MANUAL_VALUE, "__SHOW_HIDDEN__"],
+                false,
+                message
+            );
+
+            if (isCancelled(selected)) {
+                abortCreation();
+            }
+
+            if (selected === SKIP_VALUE) {
+                return "";
+            }
+
+            if (selected === "__SHOW_HIDDEN__") {
+                return await chooseNoteFromFiles(tp, files, message, noneLabel, { ...options, includeHidden: true });
+            }
+
+            const manual = await promptOptional(tp, `${message} manuale`);
+            return manual ? `[[${manual}]]` : "";
+        }
+
+        // Se non esistono note da scegliere, il DM può comunque scrivere un link manuale.
         const manual = await promptOptional(tp, `${message} manuale`);
         return manual ? `[[${manual}]]` : "";
     }
 
+    const labels = [
+        noneLabel,
+        "Inserisci manualmente",
+        ...visibleFiles.map(file => formatSuggestionLabel(file, options))
+    ];
+    const values = [
+        SKIP_VALUE,
+        MANUAL_VALUE,
+        ...visibleFiles.map(file => `[[${file.basename}]]`)
+    ];
+
+    if (!options.includeHidden && hiddenFiles.length) {
+        labels.splice(2, 0, showHiddenLabel);
+        values.splice(2, 0, "__SHOW_HIDDEN__");
+    }
+
     const selected = await tp.system.suggester(
-        [noneLabel, "Inserisci manualmente", ...files.map(file => file.basename)],
-        [SKIP_VALUE, MANUAL_VALUE, ...files.map(file => `[[${file.basename}]]`)],
+        labels,
+        values,
         false,
         message
     );
@@ -194,26 +359,51 @@ async function chooseNoteFromFiles(tp, files, message, noneLabel = "Nessuna") {
         return manual ? `[[${manual}]]` : "";
     }
 
+    if (selected === "__SHOW_HIDDEN__") {
+        return await chooseNoteFromFiles(tp, files, message, noneLabel, { ...options, includeHidden: true });
+    }
+
     return selected;
 }
 
-async function chooseNoteByPath(tp, path, message, noneLabel = "Nessuna") {
-    return await chooseNoteFromFiles(tp, getMarkdownFilesInPath(path), message, noneLabel);
+async function chooseNoteByPath(tp, path, message, noneLabel = "Nessuna", options = {}) {
+    return await chooseNoteFromFiles(tp, getMarkdownFilesInPath(path), message, noneLabel, options);
 }
 
-async function chooseNoteByFrontmatter(tp, field, expectedValue, message, noneLabel = "Nessuna") {
+async function chooseNoteByFrontmatter(tp, field, expectedValue, message, noneLabel = "Nessuna", options = {}) {
     const files = getMarkdownFilesByFrontmatter(field, expectedValue);
-    return await chooseNoteFromFiles(tp, files, message, noneLabel);
+    return await chooseNoteFromFiles(tp, files, message, noneLabel, options);
 }
 
-async function chooseNotesFromFiles(tp, files, message) {
+async function chooseNotesFromFiles(tp, files, message, options = {}) {
     const selectedLinks = [];
-    let availableFiles = [...files];
+    let availableFiles = sortFilesForSuggestions(
+        options.includeHidden ? files : files.filter(file => !isHiddenFromSuggestions(file)),
+        options
+    );
+    const hiddenFiles = files.filter(file => isHiddenFromSuggestions(file));
 
+    // Selezione multipla leggera: Fine chiude, X annulla, manuale copre note non ancora create.
     while (true) {
+        const labels = [
+            "Fine",
+            "Inserisci manualmente",
+            ...availableFiles.map(file => formatSuggestionLabel(file, options))
+        ];
+        const values = [
+            DONE_VALUE,
+            MANUAL_VALUE,
+            ...availableFiles.map(file => file)
+        ];
+
+        if (!options.includeHidden && hiddenFiles.length) {
+            labels.splice(2, 0, "Mostra anche archiviate/prove");
+            values.splice(2, 0, "__SHOW_HIDDEN__");
+        }
+
         const selected = await tp.system.suggester(
-            ["Fine", "Inserisci manualmente", ...availableFiles.map(file => file.basename)],
-            [DONE_VALUE, MANUAL_VALUE, ...availableFiles.map(file => file)],
+            labels,
+            values,
             false,
             message
         );
@@ -236,13 +426,89 @@ async function chooseNotesFromFiles(tp, files, message) {
             continue;
         }
 
+        if (selected === "__SHOW_HIDDEN__") {
+            const selectedWithHidden = await chooseNotesFromFiles(tp, files, message, { ...options, includeHidden: true });
+            return [...selectedLinks, ...selectedWithHidden];
+        }
+
         selectedLinks.push(`[[${selected.basename}]]`);
         availableFiles = availableFiles.filter(file => file.path !== selected.path);
     }
 }
 
-async function chooseNotesByPath(tp, path, message) {
-    return await chooseNotesFromFiles(tp, getMarkdownFilesInPath(path), message);
+async function chooseNotesByPath(tp, path, message, options = {}) {
+    return await chooseNotesFromFiles(tp, getMarkdownFilesInPath(path), message, options);
+}
+
+async function ensureFolder(path) {
+    const parts = String(path ?? "").split("/").filter(Boolean);
+    let currentPath = "";
+
+    // Crea anche eventuali cartelle madri: così un nuovo flusso può dichiarare il percorso e basta.
+    for (const part of parts) {
+        currentPath = currentPath ? `${currentPath}/${part}` : part;
+
+        if (!app.vault.getAbstractFileByPath(currentPath)) {
+            await app.vault.createFolder(currentPath);
+        }
+    }
+}
+
+async function moveNote(tp, folderPath, name) {
+    await ensureFolder(folderPath);
+    await tp.file.move(`${folderPath}/${name}`);
+}
+
+async function chooseWorld(tp, message = "Mondo di riferimento") {
+    return await chooseNoteByFrontmatter(tp, "categoria", "mondo", message);
+}
+
+async function chooseLocation(tp, message = "Luogo collegato", context = {}) {
+    return await chooseNoteByPath(tp, PATHS.luoghi, message, "Nessuno", context);
+}
+
+async function chooseLocations(tp, message = "Luoghi collegati", context = {}) {
+    return await chooseNotesByPath(tp, PATHS.luoghi, message, context);
+}
+
+async function choosePerson(tp, message = "Personaggio collegato", context = {}) {
+    return await chooseNoteByPath(tp, PATHS.personaggi, message, "Nessuno", context);
+}
+
+async function choosePeople(tp, message = "Personaggi collegati", context = {}) {
+    return await chooseNotesByPath(tp, PATHS.personaggi, message, context);
+}
+
+async function chooseFactions(tp, message = "Fazioni collegate", context = {}) {
+    return await chooseNotesByPath(tp, PATHS.fazioni, message, context);
+}
+
+async function chooseObjects(tp, message = "Oggetti collegati", context = {}) {
+    return await chooseNotesByPath(tp, PATHS.oggetti, message, context);
+}
+
+async function chooseCreatures(tp, message = "Creature collegate", context = {}) {
+    return await chooseNotesByPath(tp, PATHS.creature, message, context);
+}
+
+async function chooseEncounters(tp, message = "Incontri collegati", context = {}) {
+    return await chooseNotesByPath(tp, PATHS.incontri, message, context);
+}
+
+async function chooseMissions(tp, message = "Missioni collegate", context = {}) {
+    return await chooseNotesByPath(tp, PATHS.missioni, message, context);
+}
+
+async function chooseHandouts(tp, message = "Dispense collegate", context = {}) {
+    return await chooseNotesByPath(tp, PATHS.dispense, message, context);
+}
+
+async function chooseSessions(tp, message = "Sessioni collegate", context = {}) {
+    return await chooseNotesByPath(tp, PATHS.sessioni, message, context);
+}
+
+async function chooseCampaigns(tp, message = "Campagne collegate", context = {}) {
+    return await chooseNotesByPath(tp, PATHS.campagne, message, context);
 }
 
 function inlineYamlList(values) {
@@ -251,6 +517,7 @@ function inlineYamlList(values) {
 }
 
 module.exports = {
+    PATHS,
     abortCreation,
     promptRequired,
     promptOptional,
@@ -263,11 +530,28 @@ module.exports = {
     yamlQuote,
     slugify,
     normalizeText,
+    getFileFromLink,
+    getWorldFromLink,
     getMarkdownFilesByFrontmatter,
     getMarkdownFilesInPath,
     chooseNoteFromFiles,
     chooseNoteByPath,
     chooseNoteByFrontmatter,
     chooseNotesFromFiles,
-    chooseNotesByPath
+    chooseNotesByPath,
+    ensureFolder,
+    moveNote,
+    chooseWorld,
+    chooseLocation,
+    chooseLocations,
+    choosePerson,
+    choosePeople,
+    chooseFactions,
+    chooseObjects,
+    chooseCreatures,
+    chooseEncounters,
+    chooseMissions,
+    chooseHandouts,
+    chooseSessions,
+    chooseCampaigns
 };

@@ -7,12 +7,13 @@ async function pg(tp) {
     const livello = await helpers.promptOptional(tp, "Livello");
     const specie = await helpers.promptOptional(tp, "Specie");
     const background = await helpers.promptOptional(tp, "Background");
-    const mondo = await helpers.chooseNoteByFrontmatter(tp, "categoria", "mondo", "Mondo del PG");
-    const luogo = await helpers.chooseNoteByPath(tp, "Mondi/Luoghi", "Luogo del PG");
-    const fazioni = await helpers.chooseNotesByPath(tp, "Mondi/Fazioni", "Fazioni del PG");
-    const relazioni = await helpers.chooseNotesByPath(tp, "Mondi/Personaggi", "Relazioni del PG");
+    const mondo = await helpers.chooseWorld(tp, "Mondo del PG");
+    const context = { world: mondo };
+    const luogo = await helpers.chooseLocation(tp, "Luogo del PG", context);
+    const fazioni = await helpers.chooseFactions(tp, "Fazioni del PG", context);
+    const relazioni = await helpers.choosePeople(tp, "Relazioni del PG", context);
 
-    await tp.file.move(`Mondi/Personaggi/${name}`);
+    await helpers.moveNote(tp, helpers.PATHS.personaggi, name);
 
     return `---
 id: ${id}

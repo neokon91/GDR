@@ -4,6 +4,7 @@ nome: "Prova - Trappola"
 categoria: incontro
 tipo: trappola
 stato: archiviata
+mondo: [[Prova - Mondo]]
 luogo: [[Prova - Dungeon]]
 creature: []
 personaggi:

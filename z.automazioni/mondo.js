@@ -7,7 +7,7 @@ async function mondo(tp) {
     const tecnologia = await helpers.promptOptional(tp, "Tecnologia");
     const magia = await helpers.promptOptional(tp, "Magia");
 
-    await tp.file.move(`Mondi/${name}`);
+    await helpers.moveNote(tp, helpers.PATHS.mondi, name);
 
     return `---
 id: ${id}

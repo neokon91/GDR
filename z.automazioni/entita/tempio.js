@@ -2,8 +2,9 @@ async function tempio(tp) {
     const helpers = tp.user.helpers;
     const name = await helpers.promptRequired(tp, "Nome del tempio");
     const id = helpers.slugify(name);
-    const mondo = await helpers.chooseNoteByFrontmatter(tp, "categoria", "mondo", "Mondo del tempio");
-    const luogoPadre = await helpers.chooseNoteByPath(tp, "Mondi/Luoghi", "Regione o luogo superiore");
+    const mondo = await helpers.chooseWorld(tp, "Mondo del tempio");
+    const context = { world: mondo };
+    const luogoPadre = await helpers.chooseLocation(tp, "Regione o luogo superiore", context);
 
     const deity = await helpers.chooseNoteByFrontmatter(
         tp,
@@ -20,9 +21,9 @@ async function tempio(tp) {
         "Scegli un culto associato",
         "Nessuno"
     );
-    const fazioni = await helpers.chooseNotesByPath(tp, "Mondi/Fazioni", "Fazioni collegate al tempio");
+    const fazioni = await helpers.chooseFactions(tp, "Fazioni collegate al tempio", context);
 
-    await tp.file.move(`Mondi/Luoghi/${name}`);
+    await helpers.moveNote(tp, helpers.PATHS.luoghi, name);
 
     return `---
 id: ${id}

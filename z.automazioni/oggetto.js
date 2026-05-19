@@ -26,11 +26,12 @@ async function oggetto(tp) {
         ],
         "Rarità"
     );
-    const mondo = await helpers.chooseNoteByFrontmatter(tp, "categoria", "mondo", "Mondo dell'oggetto");
-    const proprietario = await helpers.chooseNoteByPath(tp, "Mondi/Personaggi", "Proprietario");
-    const luogo = await helpers.chooseNoteByPath(tp, "Mondi/Luoghi", "Luogo dell'oggetto");
+    const mondo = await helpers.chooseWorld(tp, "Mondo dell'oggetto");
+    const context = { world: mondo };
+    const proprietario = await helpers.choosePerson(tp, "Proprietario", context);
+    const luogo = await helpers.chooseLocation(tp, "Luogo dell'oggetto", context);
 
-    await tp.file.move(`Mondi/Oggetti/${name}`);
+    await helpers.moveNote(tp, helpers.PATHS.oggetti, name);
 
     return `---
 id: ${id}

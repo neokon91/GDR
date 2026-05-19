@@ -18,12 +18,13 @@ async function fazione(tp) {
         ],
         "Tipo di fazione"
     );
-    const mondo = await helpers.chooseNoteByFrontmatter(tp, "categoria", "mondo", "Mondo della fazione");
-    const leader = await helpers.chooseNotesByPath(tp, "Mondi/Personaggi", "Leader della fazione");
-    const luoghi = await helpers.chooseNotesByPath(tp, "Mondi/Luoghi", "Luoghi controllati o importanti");
-    const personaggi = await helpers.chooseNotesByPath(tp, "Mondi/Personaggi", "Membri, alleati o nemici come PNG");
+    const mondo = await helpers.chooseWorld(tp, "Mondo della fazione");
+    const context = { world: mondo };
+    const leader = await helpers.choosePeople(tp, "Leader della fazione", context);
+    const luoghi = await helpers.chooseLocations(tp, "Luoghi controllati o importanti", context);
+    const personaggi = await helpers.choosePeople(tp, "Membri, alleati o nemici come PNG", context);
 
-    await tp.file.move(`Mondi/Fazioni/${name}`);
+    await helpers.moveNote(tp, helpers.PATHS.fazioni, name);
 
     return `---
 id: ${id}

@@ -17,14 +17,15 @@ async function missione(tp) {
         ],
         "Tipo di missione"
     );
-    const mondo = await helpers.chooseNoteByFrontmatter(tp, "categoria", "mondo", "Mondo della missione");
-    const committente = await helpers.chooseNoteByPath(tp, "Mondi/Personaggi", "Committente");
-    const luoghi = await helpers.chooseNotesByPath(tp, "Mondi/Luoghi", "Luoghi della missione");
-    const personaggi = await helpers.chooseNotesByPath(tp, "Mondi/Personaggi", "Personaggi coinvolti");
-    const fazioni = await helpers.chooseNotesByPath(tp, "Mondi/Fazioni", "Fazioni coinvolte");
-    const ricompense = await helpers.chooseNotesByPath(tp, "Mondi/Oggetti", "Ricompense");
+    const mondo = await helpers.chooseWorld(tp, "Mondo della missione");
+    const context = { world: mondo };
+    const committente = await helpers.choosePerson(tp, "Committente", context);
+    const luoghi = await helpers.chooseLocations(tp, "Luoghi della missione", context);
+    const personaggi = await helpers.choosePeople(tp, "Personaggi coinvolti", context);
+    const fazioni = await helpers.chooseFactions(tp, "Fazioni coinvolte", context);
+    const ricompense = await helpers.chooseObjects(tp, "Ricompense", context);
 
-    await tp.file.move(`Mondi/Missioni/${name}`);
+    await helpers.moveNote(tp, helpers.PATHS.missioni, name);
 
     return `---
 id: ${id}
