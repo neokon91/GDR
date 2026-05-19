@@ -60,8 +60,9 @@ Usa questi campi in modo coerente, perché alimentano Dataview e dashboard.
 - **Media Extended**: supporta audio e video al tavolo.
 - **Excalidraw**:
 - **Advenced Tables**:
+- **Tabs**:
 - **Iconize**:
-- **Fantasy Content Generator**:
+- **Fantasy Content Generator**: generatore randomico di entità modificabile a piacimento
 - **Dice Roller**: 
 - **Initiative Tracker**:
 - **TTRPG Tolls: Maps**:
@@ -76,3 +77,8 @@ Vedi [[Risorse/Plugin Attivi]] per una lista orientata all'uso pratico.
 - Mantieni una sola lingua nei percorsi: cartelle e note indice in italiano.
 - Dopo modifiche ai template, crea una nota di prova e verifica che compaia in dashboard.
 - Per evolvere il vault senza renderlo tecnico, segui [[Risorse/Sviluppo Vault]].
+
+## Licenza
+
+- Il vault e i suoi contenuti sono rilasciati con licenza **CC BY-NC-SA 4.0**. Vedi [[LICENSE]].
+- Gli script originali in `z.automazioni` sono rilasciati con licenza **MIT**. Vedi [[z.automazioni/LICENSE]].
