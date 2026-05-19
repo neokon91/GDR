@@ -4,10 +4,11 @@ Questa guida serve a usare il vault senza pensare alla parte tecnica.
 
 ## Quando Prepari
 
-1. Apri [[1. DM Dashboard]].
-2. Apri [[Risorse/Preparazione Sessione]].
-3. Controlla le prossime sessioni.
-4. Se manca qualcosa, crea solo quello che userai davvero:
+1. Apri [[Inizia Qui]] se non sai da dove partire.
+2. Apri [[1. DM Dashboard]].
+3. Apri [[Risorse/Preparazione Sessione]].
+4. Controlla le prossime sessioni.
+5. Se manca qualcosa, crea solo quello che userai davvero:
    - un PNG se parlerà con i giocatori;
    - un luogo se verrà visitato;
    - una missione se i personaggi possono sceglierla;

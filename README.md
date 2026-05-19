@@ -1,18 +1,18 @@
 # Vault GDR
 
-Questo vault Obsidian aiuta a preparare e gestire campagne GDR: mondi, sessioni, PNG, luoghi, fazioni, missioni, incontri, oggetti e materiali da consegnare ai giocatori.
+Questo vault Obsidian aiuta a preparare e gestire campagne GDR fantasy in italiano: mondi, sessioni, PNG, luoghi, fazioni, missioni, incontri, oggetti e materiali da consegnare ai giocatori.
 
-Apri [[1. DM Dashboard]] per preparare e giocare. Usa [[Worldbuilder Dashboard]] per costruire il mondo. Durante la sessione usa [[Durante il Gioco]].
+Apri [[Inizia Qui]] per il primo avvio. Usa [[1. DM Dashboard]] per preparare, [[Worldbuilder Dashboard]] per costruire il mondo e [[Durante il Gioco]] durante la sessione.
 
 ## Primi 5 Minuti
 
-1. Apri il vault in Obsidian e vai su [[1. DM Dashboard]].
+1. Apri il vault in Obsidian e vai su [[Inizia Qui]].
 2. Se Obsidian chiede conferma per i plugin community, abilitali: il vault usa plugin gia configurati per dashboard, pulsanti e tabelle.
 3. Crea o apri una campagna da [[Campagne/Campagne]].
 4. Crea una sessione con il pulsante `Nuova Sessione` dalla dashboard.
 5. Durante la partita apri [[Durante il Gioco]] per appunti, incontri, PNG, dispense e materiali pronti.
 
-Se dashboard, pulsanti o tabelle non funzionano, apri [[Risorse/Installazione Plugin]] e poi [[Risorse/Se Qualcosa Non Funziona]].
+Se dashboard, pulsanti o tabelle non funzionano, apri [[Risorse/Installazione Plugin]], [[Risorse/FAQ]] e poi [[Risorse/Se Qualcosa Non Funziona]].
 
 ## Flusso Consigliato
 
@@ -26,6 +26,7 @@ Se dashboard, pulsanti o tabelle non funzionano, apri [[Risorse/Installazione Pl
 
 ## Dove Trovare Le Cose
 
+- `Inizia Qui`: percorso guidato per primo avvio, preparazione, gioco e worldbuilding.
 - `Campagne`: campagne attive, in pausa, concluse o archiviate.
 - `Mondi`: ambientazioni, luoghi, personaggi, fazioni, religioni, creature, oggetti e dispense.
 - `Mondi/Sessioni`: preparazione e resoconti delle sessioni.
@@ -56,8 +57,18 @@ Se dashboard, pulsanti o tabelle non funzionano, apri [[Risorse/Installazione Pl
 - Archivia invece di cancellare quando una nota ha valore storico.
 - Dopo una sessione, aggiorna missioni, PNG, luoghi visitati, ricompense e conseguenze.
 - Per controlli, template, automazioni e sviluppo del vault, vedi [[Risorse/Sviluppo Vault]].
-- Per preparare una release o una copia pulita, apri [[Risorse/Controllo Vault]] e risolvi stati anomali, campi base mancanti e materiale pronto incompleto.
+- Per preparare una release o una copia pulita, apri [[RELEASE]] e [[Risorse/Controllo Vault]].
 - Non modificare manualmente le note in `SRD` se non sai cosa stai facendo: sono generate da `z.automazioni/import_srd.js` e possono essere rigenerate.
+
+## Demo
+
+Apri [[Demo - La Reliquia Spezzata]] per vedere una mini-campagna completa gia collegata.
+
+## Per Chi E Pensato
+
+- DM e worldbuilder che vogliono preparare e giocare da Obsidian.
+- Campagne fantasy compatibili con D&D 5.2.1 o giochi simili.
+- Utenti non tecnici che preferiscono pulsanti, dashboard e campi guidati.
 
 ## SRD
 

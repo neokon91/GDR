@@ -34,6 +34,10 @@
     "debugMode": false,
     "useInternalPlugins": false
   },
+  "Inizia Qui.md": "LiCompass",
+  "VERSION.md": "LiBadgeCheck",
+  "CHANGELOG.md": "LiListChecks",
+  "RELEASE.md": "LiPackageCheck",
   "1. DM Dashboard.md": "LiHome",
   "Inbox": "LiInbox",
   "Inbox/Inbox.md": "LiInbox",
@@ -77,6 +81,7 @@
   "Risorse/Dispense/Dispense.md": "LiFiles",
   "Risorse/Callout GDR.md": "LiPanelTop",
   "Risorse/Guida DM.md": "LiBookOpen",
+  "Risorse/FAQ.md": "LiCircleHelp",
   "Risorse/Controllo Vault.md": "LiClipboardList",
   "Risorse/Sviluppo Vault.md": "LiRoute",
   "Risorse/Preparazione Sessione.md": "LiListChecks",

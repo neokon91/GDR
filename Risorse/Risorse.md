@@ -7,7 +7,12 @@ cssclasses:
 
 ## Materiale Rapido
 
+- [[Inizia Qui]]
+- [[VERSION]]
+- [[CHANGELOG]]
+- [[RELEASE]]
 - [[Risorse/Guida DM]]
+- [[Risorse/FAQ]]
 - [[Risorse/Installazione Plugin]]
 - [[Risorse/Se Qualcosa Non Funziona]]
 - [[Risorse/Controllo Vault]]

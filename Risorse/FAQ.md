@@ -1,0 +1,50 @@
+---
+cssclasses:
+  - indice
+categoria: risorsa
+tipo: faq
+stato: pronto
+---
+
+# FAQ
+
+## Devo Capire Obsidian Per Usarlo?
+
+No. Parti da [[Inizia Qui]] e usa i pulsanti. Le cartelle tecniche servono al vault, ma non devi aprirle per giocare.
+
+## Obsidian Mi Chiede Se Fidarmi Dei Plugin
+
+Conferma solo se hai scaricato il vault da una fonte affidabile. I plugin inclusi servono a dashboard, pulsanti, template, tabelle e campi interattivi.
+
+## Le Tabelle Non Si Vedono
+
+Apri [[Risorse/Installazione Plugin]] e controlla che Dataview sia abilitato. Poi riapri la nota.
+
+## I Pulsanti Non Creano Note
+
+Controlla che Meta Bind e Templater siano abilitati. Se il problema resta, apri [[Risorse/Se Qualcosa Non Funziona]].
+
+## Posso Cancellare Le Note Demo?
+
+Si, ma sono utili per capire come il vault dovrebbe apparire quando e popolato. Se vuoi una copia completamente vuota, archiviala o rimuovila solo dopo aver preso confidenza.
+
+## Che Differenza C'e Tra Demo E Prova?
+
+- Le note `Demo -` mostrano una mini-campagna giocabile.
+- Le note `Prova -` servono a collaudare template, campi e dashboard.
+
+## Posso Usarlo Senza SRD?
+
+Si. `SRD` e un riferimento regolamentare separato. Il mondo e le campagne stanno in `Mondi` e `Campagne`.
+
+## Funziona Da Mobile?
+
+Le note sono leggibili da mobile, ma creazione guidata, dashboard complesse, bacheche e alcune viste plugin sono piu comode da desktop o tablet.
+
+## Dove Scrivo Appunti Durante La Sessione?
+
+Apri [[Durante il Gioco]] oppure crea una nota rapida in [[Inbox/Inbox]].
+
+## Quando Una Nota Diventa Canonica?
+
+Quando e successa al tavolo o hai deciso che e vera nel mondo. Usa `canonico: true` solo per contenuti confermati.

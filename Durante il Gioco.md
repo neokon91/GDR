@@ -46,6 +46,36 @@ actions:
 ```
 
 ```meta-bind-button
+label: Nuovo Incontro
+style: primary
+actions:
+  - type: templaterCreateNote
+    templateFile: "z.modelli/dm/Incontro.md"
+    folderPath: "Mondi/Incontri"
+    open: true
+```
+
+```meta-bind-button
+label: Nuova Dispensa
+style: primary
+actions:
+  - type: templaterCreateNote
+    templateFile: "z.modelli/Dispensa.md"
+    folderPath: "Mondi/Dispense"
+    open: true
+```
+
+```meta-bind-button
+label: Nuovo Oggetto
+style: primary
+actions:
+  - type: templaterCreateNote
+    templateFile: "z.modelli/Oggetto.md"
+    folderPath: "Mondi/Oggetti"
+    open: true
+```
+
+```meta-bind-button
 label: Controllo Vault
 style: primary
 actions:
@@ -74,6 +104,70 @@ if (active) {
     ["Obiettivo", "Scene", "Segreti rivelabili", "Domande", "Pressioni"],
     [[active.obiettivo ?? "", active.scene ?? [], active.segreti_rivelabili ?? [], active.domande_al_tavolo ?? [], active.pressioni ?? []]]
   );
+}
+```
+
+## Quadro Di Regia
+
+```dataviewjs
+const active = dv.pages('"Mondi/Sessioni"')
+  .where(p => !String(p.file.name).startsWith("Prova -") && ["pronto", "preparazione"].includes(p.stato))
+  .sort(p => p.data ?? "0000-00-00", "desc")
+  .first();
+
+const escapeHtml = value => String(value ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "\"": "&quot;", "'": "&#39;" }[c]));
+const count = value => dv.array(value ?? []).length;
+
+if (!active) {
+  dv.paragraph("Nessuna sessione attiva da riassumere.");
+} else {
+  const cards = [
+    ["Luoghi", count(active.luoghi), "Dove puo andare la scena"],
+    ["PNG/PG", count(active.personaggi), "Persone da tenere vive"],
+    ["Incontri", count(active.incontri), "Scene pronte"],
+    ["Missioni", count(active.missioni), "Obiettivi e pressioni"],
+    ["Dispense", count(active.dispense), "Materiale da consegnare"],
+    ["Oggetti", count(active.oggetti), "Ricompense o leve"]
+  ];
+
+  const grid = dv.el("div", "", { cls: "gdr-stat-grid" });
+  grid.innerHTML = cards.map(([label, value, hint]) => `
+    <div class="gdr-stat-card">
+      <div class="gdr-stat-value">${escapeHtml(value)}</div>
+      <div class="gdr-stat-label">${escapeHtml(label)}</div>
+      <div class="gdr-stat-hint">${escapeHtml(hint)}</div>
+    </div>
+  `).join("");
+}
+```
+
+## Missioni Della Sessione
+
+```dataviewjs
+const active = dv.pages('"Mondi/Sessioni"')
+  .where(p => !String(p.file.name).startsWith("Prova -") && ["pronto", "preparazione"].includes(p.stato))
+  .sort(p => p.data ?? "0000-00-00", "desc")
+  .first();
+
+let pages = dv.array(active?.missioni ?? [])
+  .map(link => dv.page(link.path ?? link))
+  .where(Boolean)
+  .array();
+
+if (!pages.length) {
+  const activeFactions = new Set(dv.array(active?.fazioni ?? []).map(link => link.path ?? String(link)).array());
+  pages = dv.pages('"Mondi/Missioni"')
+    .where(p => !String(p.file.name).startsWith("Prova -") && ["proposta", "accettata", "in corso"].includes(p.stato))
+    .where(p => !activeFactions.size || dv.array(p.fazioni ?? []).some(link => activeFactions.has(link.path ?? String(link))))
+    .sort(p => Number(p.pressione ?? 0), "desc")
+    .limit(8)
+    .array();
+}
+
+if (!pages.length) {
+  dv.paragraph("Nessuna missione collegata alla sessione attiva.");
+} else {
+  dv.table(["Missione", "Stato", "Pressione", "Committente", "Prossima mossa"], pages.map(p => [p.file.link, p.stato ?? "", p.pressione ?? "", p.committente ?? "", p.prossima_mossa ?? ""]));
 }
 ```
 

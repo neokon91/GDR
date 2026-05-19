@@ -100,6 +100,18 @@ node z.automazioni/check_vault.js
 
 Il controllo verifica JSON di configurazione, plugin obbligatori inclusi e abilitati, wikilink rotti o ambigui, percorsi `templateFile` usati dai pulsanti Meta Bind, target di Icon Folder e riferimenti Obsidian obsoleti.
 
+## Release
+
+Per pubblicare una copia del vault:
+
+1. aggiorna [[VERSION]];
+2. aggiorna [[CHANGELOG]];
+3. segui [[RELEASE]];
+4. esegui `node z.automazioni/check_vault.js`;
+5. apri manualmente [[Inizia Qui]], [[1. DM Dashboard]], [[Durante il Gioco]] e [[Worldbuilder Dashboard]].
+
+La cartella `.obsidian/plugins` fa parte del prodotto: i plugin sono inclusi perche dashboard, template, campi e viste dipendono dalle loro configurazioni.
+
 ### Mostri E Fantasy Statblocks
 
 I mostri importati devono avere frontmatter compatibile con Fantasy Statblocks oltre ai campi italiani usati da Dataview.

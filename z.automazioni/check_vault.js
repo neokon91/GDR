@@ -17,6 +17,14 @@ const REQUIRED_PLUGINS = [
 const REQUIRED_SNIPPETS = [
     ".obsidian/snippets/gdr-vault.css"
 ];
+const REQUIRED_FILES = [
+    "Inizia Qui.md",
+    "VERSION.md",
+    "CHANGELOG.md",
+    "RELEASE.md",
+    "Risorse/FAQ.md",
+    "Campagne/Demo - La Reliquia Spezzata.md"
+];
 
 const errors = [];
 const warnings = [];
@@ -85,6 +93,12 @@ for (const plugin of REQUIRED_PLUGINS) {
 
     if (!fs.existsSync(path.join(ROOT, ".obsidian/plugins", plugin, "manifest.json"))) {
         errors.push(`Plugin obbligatorio non incluso: ${plugin}`);
+    }
+}
+
+for (const file of REQUIRED_FILES) {
+    if (!fs.existsSync(path.join(ROOT, file))) {
+        errors.push(`File release/onboarding obbligatorio mancante: ${file}`);
     }
 }
 
