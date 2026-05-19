@@ -20,6 +20,7 @@ fc-calendar: "Calendario di prova"
 fc-date: "1-1-1"
 fc-category: scadenza
 fc-display-name: "Prova - Missione"
+fc-end:
 ---
 
 # Prova - Missione

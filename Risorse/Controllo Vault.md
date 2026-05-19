@@ -177,6 +177,30 @@ if (!pages.length) {
 }
 ```
 
+### Date Da Calendarizzare
+
+```dataviewjs
+const hasText = value => String(value ?? "").trim().length > 0;
+
+const rows = [
+  ...dv.pages('"Mondi/Sessioni"')
+    .where(p => !String(p.file.name).startsWith("Prova -") && p.stato !== "archiviata" && hasText(p.data_mondo) && !hasText(p["fc-date"]))
+    .map(p => [p.file.link, "Sessione con data mondo ma senza fc-date", p.data_mondo]).array(),
+  ...dv.pages('"Mondi/Missioni"')
+    .where(p => !String(p.file.name).startsWith("Prova -") && p.stato !== "archiviata" && hasText(p.scadenza_mondo) && !hasText(p["fc-date"]))
+    .map(p => [p.file.link, "Missione con scadenza ma senza fc-date", p.scadenza_mondo]).array(),
+  ...dv.pages('"Mondi/Missioni" OR "Mondi/Sessioni"')
+    .where(p => !String(p.file.name).startsWith("Prova -") && p.stato !== "archiviata" && hasText(p["fc-date"]) && !hasText(p["fc-category"]))
+    .map(p => [p.file.link, "Evento Calendarium senza categoria", p["fc-date"]]).array()
+];
+
+if (!rows.length) {
+  dv.paragraph("Nessuna data narrativa da calendarizzare.");
+} else {
+  dv.table(["Nota", "Problema", "Data"], rows);
+}
+```
+
 ### Pronti Ma Incompleti
 
 ```dataviewjs

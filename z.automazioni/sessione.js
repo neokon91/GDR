@@ -45,6 +45,7 @@ fc-calendar:
 fc-date:
 fc-category: sessione
 fc-display-name: ${helpers.yamlQuote(titolo)}
+fc-end:
 stato: preparazione
 mondo: ${mondo}
 campagne: ${helpers.inlineYamlList(campagne)}

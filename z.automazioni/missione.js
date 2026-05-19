@@ -44,6 +44,7 @@ fc-calendar:
 fc-date:
 fc-category: scadenza
 fc-display-name: ${helpers.yamlQuote(name)}
+fc-end:
 ---
 `;
 }

@@ -8,6 +8,8 @@ cssclasses:
 ## Materiale Rapido
 
 - [[Risorse/Guida DM]]
+- [[Risorse/Installazione Plugin]]
+- [[Risorse/Se Qualcosa Non Funziona]]
 - [[Risorse/Controllo Vault]]
 - [[Risorse/Sviluppo Vault]]
 - [[Risorse/Preparazione Sessione]]

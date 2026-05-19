@@ -2,6 +2,8 @@
 
 Questa pagina spiega cosa puoi sfruttare nel vault senza dover conoscere i dettagli tecnici dei plugin. I plugin sono divisi per uso pratico: cosa serve sempre, cosa aiuta durante il gioco, cosa sostiene il worldbuilding e cosa e comodo ma non indispensabile.
 
+Per il primo avvio usa [[Risorse/Installazione Plugin]]. Se una funzione non risponde, usa [[Risorse/Se Qualcosa Non Funziona]].
+
 ## Essenziali
 
 - **Dataview**: mostra automaticamente prossime sessioni, missioni aperte, PNG in gioco, materiale pronto e bozze da completare.

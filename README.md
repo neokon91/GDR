@@ -4,6 +4,16 @@ Questo vault Obsidian aiuta a preparare e gestire campagne GDR: mondi, sessioni,
 
 Apri [[1. DM Dashboard]] per preparare e giocare. Usa [[Worldbuilder Dashboard]] per costruire il mondo. Durante la sessione usa [[Durante il Gioco]].
 
+## Primi 5 Minuti
+
+1. Apri il vault in Obsidian e vai su [[1. DM Dashboard]].
+2. Controlla [[Risorse/Installazione Plugin]] e abilita almeno i plugin obbligatori.
+3. Crea o apri una campagna da [[Campagne/Campagne]].
+4. Crea una sessione con il pulsante `Nuova Sessione` dalla dashboard.
+5. Durante la partita apri [[Durante il Gioco]] per appunti, incontri, PNG, dispense e materiali pronti.
+
+Se dashboard, pulsanti o tabelle non funzionano, apri [[Risorse/Se Qualcosa Non Funziona]].
+
 ## Flusso Consigliato
 
 1. Crea o apri una campagna da [[Campagne/Campagne]].
@@ -46,8 +56,21 @@ Apri [[1. DM Dashboard]] per preparare e giocare. Usa [[Worldbuilder Dashboard]]
 - Archivia invece di cancellare quando una nota ha valore storico.
 - Dopo una sessione, aggiorna missioni, PNG, luoghi visitati, ricompense e conseguenze.
 - Per controlli, template, automazioni e sviluppo del vault, vedi [[Risorse/Sviluppo Vault]].
+- Per preparare una release o una copia pulita, apri [[Risorse/Controllo Vault]] e risolvi stati anomali, campi base mancanti e materiale pronto incompleto.
+- Non modificare manualmente le note in `SRD` se non sai cosa stai facendo: sono generate da `z.automazioni/import_srd.js` e possono essere rigenerate.
+
+## SRD
+
+`SRD` contiene il System Reference Document 5.2.1 in italiano come archivio regolamentare separato dal contenuto del mondo. Per rigenerarlo usa:
+
+```bash
+node z.automazioni/import_srd.js
+```
+
+Le note SRD generate hanno `generato_da: import_srd`. Se vuoi preservare una modifica manuale a una nota SRD, rimuovi o cambia quel campo prima di rigenerare.
 
 ## Licenza
 
 - Il vault e i suoi contenuti sono rilasciati con licenza **CC BY-NC-SA 4.0**. Vedi [[LICENSE]].
 - Gli script originali in `z.automazioni` sono rilasciati con licenza **MIT**. Vedi [[z.automazioni/LICENSE]].
+- Il materiale in `SRD` mantiene la propria licenza **CC-BY-4.0** e non e coperto dalla licenza del vault. Vedi [[SRD/Licenza SRD]].

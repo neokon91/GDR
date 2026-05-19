@@ -45,7 +45,7 @@ Prima di lavorarci, controlla:
 | Fantasy Statblocks | integrato | creature e mostri SRD | verificare rendering visuale in Obsidian dopo import |
 | Initiative Tracker | parziale | incontri pronti | aggiungere esempi `encounter:` solo dove sono davvero utili |
 | Dice Roller | parziale | template e tabelle rapide | creare tabelle casuali usabili dal tavolo |
-| Calendarium | parziale | sessioni, missioni, dashboard | rendere `data_mondo` e `fc-date` coerenti |
+| Calendarium | integrato | sessioni, missioni, dashboard, controllo vault | mantenere coerenti date leggibili e `fc-date` |
 | Excalidraw | integrato base | `Risorse/Mappe`, Worldbuilder Dashboard, template Mondo | creare nuove mappe solo quando servono a mondo, luogo o sessione |
 | Canvas | non integrato | nessuna vista dedicata | creare una canvas per fronti/fazioni quando c'e contenuto reale |
 | Media Extended | minimo | indici audio/video | aggiungere campi `uso`, `tono`, `campagna`, `stato` |
@@ -64,18 +64,20 @@ Prima di lavorarci, controlla:
 
 ### 1. Calendarium
 
-Stato: integrazione base avviata.
+Stato: integrazione rifinita.
 
 Obiettivo: collegare le date del mondo alle sessioni, alle missioni e agli eventi futuri.
 
 Da fare:
 
 - fatto: definire in [[Mondi/Calendario]] le regole minime del calendario;
-- usare `data_mondo` nelle sessioni come campo leggibile e coerente;
+- fatto: usare `data_mondo` nelle sessioni come campo leggibile e coerente;
+- fatto: usare `scadenza_mondo` nelle missioni come campo leggibile al tavolo;
 - fatto: aggiungere nelle missioni una scadenza narrativa quando serve usando i campi Calendarium `fc-calendar`, `fc-date`, `fc-category`, `fc-display-name` e, se serve, `fc-end`;
 - fatto: usare categorie semplici per gli eventi: `sessione`, `scadenza`, `festa`, `pericolo`, `conseguenza`;
 - valutare eventi inline con `span` solo dentro note di sessione o resoconti, dove possono servire piu eventi nella stessa nota;
 - fatto: mostrare nella DM Dashboard le prossime scadenze narrative.
+- fatto: mostrare in [[Mondi/Calendario]] e [[Risorse/Controllo Vault]] le note con data leggibile ma senza `fc-date`.
 
 Fatto bene quando: il DM sa che giorno e nel mondo, cosa sta per scadere e quale sessione arriva dopo.
 

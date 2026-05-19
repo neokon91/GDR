@@ -11,6 +11,7 @@ fc-calendar: "Calendario di prova"
 fc-date: "1-1-2"
 fc-category: sessione
 fc-display-name: "Prova - Sessione"
+fc-end:
 stato: archiviata
 mondo: [[Prova - Mondo]]
 campagne:

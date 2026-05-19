@@ -28,6 +28,12 @@
 >
 > Data Calendarium:
 > `INPUT[text:fc-date]`
+>
+> Fine evento:
+> `INPUT[text:fc-end]`
+>
+> Categoria Calendarium:
+> `INPUT[inlineSelect(option(scadenza, Scadenza), option(pericolo, Pericolo), option(conseguenza, Conseguenza), option(festa, Festa), option(sessione, Sessione)):fc-category]`
 
 > [!missione] Obiettivo
 >
