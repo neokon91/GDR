@@ -2,32 +2,34 @@
 
 Questo Vault Obsidian è progettato per supportare l'utente nella preparazione e gestione di campagne GDR: mondo, sessioni, PNG, luoghi, fazioni, missioni, incontri, oggetti e materiali da consegnare ai giocatori.
 
-Apri [[1. DM Dashboard]] per lavorare. Durante la sessione usa [[Durante il Gioco]].
+Apri [[1. DM Dashboard]] per preparare e giocare. Usa [[Worldbuilder Dashboard]] per costruire il mondo. Durante la sessione usa [[Durante il Gioco]].
 
 ## Flusso Consigliato
 
 1. Crea o apri una campagna da [[Campagne/Campagne]].
-2. Prepara la prossima sessione con [[Risorse/Preparazione Sessione]].
-3. Crea solo le entità davvero utili al tavolo: PNG, luoghi, missioni, incontri, oggetti e dispense.
-4. Collega le note usando i campi interattivi Meta Bind.
-5. Durante il gioco usa [[Durante il Gioco]] per appunti, timer, PNG attivi, incontri pronti e dispense.
-6. Dopo la sessione sposta gli appunti importanti nelle note del mondo e cambia gli stati.
+2. Scegli il mondo di riferimento dalla [[Worldbuilder Dashboard]].
+3. Prepara la prossima sessione con [[Risorse/Preparazione Sessione]].
+4. Crea solo le entità davvero utili al tavolo: PNG, luoghi, missioni, incontri, oggetti e dispense.
+5. Collega le note usando i campi interattivi Meta Bind.
+6. Durante il gioco usa [[Durante il Gioco]] per appunti, timer, PNG attivi, incontri pronti e dispense.
+7. Dopo la sessione sposta gli appunti importanti nelle note del mondo e cambia gli stati.
 
 ## Struttura
 
 - `Campagne`: campagne attive, in pausa, concluse o archiviate.
-- `Mondo/Personaggi`: PG e PNG.
-- `Mondo/Luoghi`: città, dungeon, regioni, rovine, templi e punti di interesse.
-- `Mondo/Creature`: creature e mostri con statblock.
-- `Mondo/Fazioni`: gilde, casate, culti, organizzazioni e poteri.
-- `Mondo/Religioni`: religioni, culti, divinità ed entità.
-- `Mondo/Oggetti`: oggetti importanti, ricompense e oggetti magici.
-- `Mondo/Missioni`: incarichi, trame aperte e obiettivi.
-- `Mondo/Incontri`: scene di conflitto, ostacoli e combattimenti pronti.
-- `Mondo/Dispense`: testi o materiali da consegnare ai giocatori.
-- `Mondo/Sessioni`: preparazione e resoconti delle sessioni.
+- `Mondi`: ambientazioni, luoghi, personaggi, fazioni, religioni, creature, oggetti e dispense.
+- `Mondi/Sessioni`: preparazione e resoconti delle sessioni.
+- `Mondi/Missioni`: incarichi, trame aperte e obiettivi.
+- `Mondi/Incontri`: scene di conflitto, ostacoli e combattimenti pronti.
 - `Risorse`: mappe, immagini, audio, video, tabelle e dispense generiche.
 - `Inbox`: idee grezze e appunti non ancora canonici.
+
+## Mondi, Campagne e Contenuti
+
+- Un **mondo** contiene cio che esiste nell'ambientazione: luoghi, popoli, fazioni, religioni, creature, oggetti e verita canoniche.
+- Una **campagna** usa uno o piu mondi e raccoglie cio che accade al tavolo: party, sessioni, missioni, conseguenze e ricompense.
+- **Avventure** e **one-shot** stanno nella campagna quando sono legate a un gruppo o a una storia precisa.
+- Se un'avventura, una one-shot, una tabella, una mappa o una dispensa e riutilizzabile in piu campagne, trattala come risorsa generica in `Risorse`.
 
 ## Convenzioni
 

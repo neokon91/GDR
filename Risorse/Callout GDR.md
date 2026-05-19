@@ -1,5 +1,7 @@
 # Callout GDR
 
+Usa i callout per rendere leggibile una nota al tavolo. Ogni tipo deve rispondere a una domanda semplice: cosa devo leggere, cosa devono scoprire, cosa minaccia la scena, cosa cambia nel mondo.
+
 ## Scene
 
 > [!scena] Scena
@@ -47,6 +49,8 @@
 > [!handout] Dispensa
 > Testo o materiale da consegnare ai giocatori.
 
+## Scheda Rapida
+
 > [!infoboxwiki] Wiki
 > # Titolo di esempio
 > ---
@@ -58,4 +62,3 @@
 > |Prova 1|Prova 2|
 > >[!info] Callout annidato
 > >Informazioni
-

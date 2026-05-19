@@ -4,7 +4,7 @@ Questa nota guida le modifiche future al vault. Il destinatario finale è un DM 
 
 ## Principio Guida
 Ogni modifica deve rendere piu facile una di queste azioni:
-- preparare una sessione, one-shot, avventura o campagna;
+- preparare una sessione o una campagna;
 - trovare le informazioni utili facilmente durante il gioco;
 - tenere traccia di cosa è successo;
 - trasformare le idee grezze in strutture definite di un mondo giocabile;
@@ -52,7 +52,9 @@ Tutte le entità che lo richiedono avranno anche altri `stato_attuale` come, ad 
 - Appunti live: [[Durante il Gioco]]
 - Conseguenze dopo sessione: [[z.bacheche/Post Sessione]]
 - Contenuto confermato del mondo: `Mondi`
-- Materiale generico riutilizzabile: `Risorse`
+- Campagne, party e avanzamento al tavolo: `Campagne`
+- Avventure e one-shot legate a una campagna: dentro la campagna
+- Avventure, one-shot, mappe, tabelle e dispense riutilizzabili: `Risorse`
 - Strumenti e template: `z.modelli`, `z.automazioni`, `z.bacheche`
 
 ## Checklist Per Ogni Nuova Funzione

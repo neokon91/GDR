@@ -22,6 +22,8 @@ settings:
   --gdr-surface-strong: color-mix(in srgb, var(--background-secondary) 92%, var(--background-primary));
   --gdr-accent-soft: color-mix(in srgb, var(--interactive-accent) 14%, transparent);
   --gdr-callout-density: 0.85rem;
+  --gdr-callout-title-bg: color-mix(in srgb, rgb(var(--callout-color)) 14%, var(--background-secondary));
+  --gdr-callout-body-bg: color-mix(in srgb, rgb(var(--callout-color)) 6%, var(--background-primary));
 }
 
 .markdown-preview-view,
@@ -70,21 +72,42 @@ settings:
 
 .callout {
   border-radius: var(--gdr-radius);
-  border: 1px solid rgba(var(--callout-color), 0.28);
-  padding: var(--gdr-callout-density);
-  background: color-mix(in srgb, rgb(var(--callout-color)) 9%, var(--background-primary));
+  border: 1px solid rgba(var(--callout-color), 0.26);
+  border-left: 4px solid rgb(var(--callout-color));
+  padding: 0;
+  background: var(--gdr-callout-body-bg);
+  overflow: hidden;
 }
 
 .callout-title {
+  align-items: center;
   gap: 0.45rem;
+  padding: 0.5rem var(--gdr-callout-density);
+  background: var(--gdr-callout-title-bg);
+  border-bottom: 1px solid rgba(var(--callout-color), 0.18);
+}
+
+.callout-icon {
+  color: rgb(var(--callout-color));
+  opacity: 0.95;
 }
 
 .callout-title-inner {
-  font-weight: 700;
+  font-weight: 750;
+  line-height: 1.25;
 }
 
 .callout-content {
-  margin-top: 0.55rem;
+  margin-top: 0;
+  padding: 0.65rem var(--gdr-callout-density) var(--gdr-callout-density);
+}
+
+.callout-content > :first-child {
+  margin-top: 0;
+}
+
+.callout-content > :last-child {
+  margin-bottom: 0;
 }
 
 .callout[data-callout="scena"],
@@ -166,6 +189,31 @@ settings:
 .callout[data-callout="timer"] {
   --callout-color: 166, 89, 52;
   --callout-icon: lucide-clock-3;
+}
+
+.callout[data-callout="lettura"] {
+  font-size: 1.02em;
+}
+
+.callout[data-callout="lettura"] .callout-content {
+  line-height: 1.62;
+}
+
+.callout[data-callout="segreto"] {
+  border-style: dashed;
+}
+
+.callout[data-callout="segreto"] .callout-title {
+  background: color-mix(in srgb, rgb(var(--callout-color)) 18%, var(--background-secondary));
+}
+
+.callout[data-callout="pericolo"],
+.callout[data-callout="incontro"] {
+  border-left-width: 5px;
+}
+
+.callout[data-callout="tesoro"] .callout-title {
+  background: color-mix(in srgb, rgb(var(--callout-color)) 18%, var(--background-secondary));
 }
 
 .callout[data-callout="infoboxwiki"] {
@@ -272,7 +320,15 @@ body .markdown-source-view.tavolo {
 }
 
 .markdown-preview-view.tavolo .callout {
-  padding: 1rem;
+  margin-block: 1rem;
+}
+
+.markdown-preview-view.tavolo .callout-title {
+  padding: 0.7rem 1rem;
+}
+
+.markdown-preview-view.tavolo .callout-content {
+  padding: 0.85rem 1rem 1rem;
 }
 
 .markdown-preview-view.tavolo h2 {
