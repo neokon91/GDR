@@ -1,8 +1,8 @@
-async function fazione(tp) {
+async function fazione(tp, routeOptions = {}) {
     const helpers = tp.user.helpers;
     const name = await helpers.promptRequired(tp, "Nome della fazione");
     const id = helpers.slugify(name);
-    const route = tp.config.extra ?? {};
+    const route = Object.keys(routeOptions).length ? routeOptions : helpers.consumeRoute();
     const selectedType = route.tipoFazione ? { id: route.tipoFazione } : await helpers.chooseOptional(
         tp,
         [
@@ -24,7 +24,7 @@ async function fazione(tp) {
     const luoghi = await helpers.chooseLocations(tp, "Luoghi controllati o importanti", context);
     const personaggi = await helpers.choosePeople(tp, "Membri, alleati o nemici come PNG", context);
 
-    await helpers.moveNote(tp, helpers.PATHS.fazioni, name);
+    await helpers.moveNote(tp, helpers.path("fazioni"), name);
 
     return `---
 id: ${id}

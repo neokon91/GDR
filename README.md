@@ -92,6 +92,7 @@ Vedi [[Risorse/Plugin Attivi]] per una lista orientata all'uso pratico.
 - Archivia invece di cancellare quando una nota ha valore storico.
 - Mantieni una sola lingua nei percorsi: cartelle e note indice in italiano.
 - Dopo modifiche ai template, crea una nota di prova e verifica che compaia in dashboard.
+- Prima di pubblicare modifiche importanti, esegui i test con CLI Obsidian descritti in [[Risorse/Sviluppo Vault]].
 - Per evolvere il vault senza renderlo tecnico, segui [[Risorse/Sviluppo Vault]].
 
 ## Licenza

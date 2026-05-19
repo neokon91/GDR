@@ -7,6 +7,10 @@ categoria: sessione
 tipo: sessione di campagna
 data: 2026-05-19
 data_mondo: "Giorno di prova"
+fc-calendar: "Calendario di prova"
+fc-date: "1-1-2"
+fc-category: sessione
+fc-display-name: "Prova - Sessione"
 stato: archiviata
 mondo: [[Prova - Mondo]]
 campagne:

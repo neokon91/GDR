@@ -32,6 +32,9 @@
 Mondo:
 `INPUT[suggester(optionQuery("Mondi"), useLinks(partial), allowOther):mondo]`
 
+````tabs
+tab: Identità
+
 ## Personalità
 
 > [!png] Tratti al tavolo
@@ -46,6 +49,8 @@ Mondo:
 
 > [!indizio] Sa
 >
+
+tab: Collegamenti
 
 ## Relazioni
 
@@ -71,6 +76,8 @@ WHERE contains(personaggi, this.file.link) OR committente = this.file.link
 SORT stato ASC, nome ASC
 ```
 
+tab: Segreti
+
 ## Segreto
 
 > [!segreto]- Segreto
@@ -88,6 +95,8 @@ SORT stato ASC, nome ASC
 > [!scena] Uso al tavolo
 >
 
+tab: Sessioni
+
 ## Sessioni
 
 ```dataview
@@ -97,3 +106,4 @@ WHERE contains(personaggi, this.file.link)
 SORT data DESC
 LIMIT 10
 ```
+````

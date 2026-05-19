@@ -16,6 +16,12 @@
 >
 > Personaggi:
 > `INPUT[inlineListSuggester(optionQuery("Mondi/Personaggi"), useLinks(partial)):personaggi]`
+>
+> Round:
+> `INPUT[number:round]`
+>
+> Condizioni:
+> `INPUT[inlineList:condizioni]`
 
 > [!incontro] Setup
 >
@@ -31,10 +37,15 @@
 > - Danno improvvisato leggero: `dice: 1d6`
 > - Danno improvvisato serio: `dice: 2d6`
 
+````tabs
+tab: Scena
+
 ## Obiettivo Dell'Incontro
 
 > [!missione] Obiettivo
 >
+
+tab: Creature
 
 ## Creature
 
@@ -46,13 +57,51 @@ SORT cr ASC
 ```
 
 ```dataviewjs
-for (const link of dv.current().creature ?? []) {
+for (const link of dv.current().creature ?? dv.current().creatures ?? []) {
   const page = dv.page(link.path ?? link);
   if (page?.name) {
     dv.paragraph("```statblock\nmonster: " + page.name + "\n```");
   }
 }
 ```
+
+## Initiative Tracker
+
+Creature incontro:
+`INPUT[inlineList:encounter_creatures]`
+
+```dataviewjs
+const current = dv.current();
+const creatures = dv.array(current.encounter_creatures ?? [])
+  .map(value => String(value ?? "").trim())
+  .where(Boolean)
+  .array();
+
+if (!creatures.length) {
+  dv.paragraph("Aggiungi le creature dell'iniziativa nel campo sopra.");
+} else {
+  const lines = [
+    "```encounter",
+    `name: ${current.nome ?? current.file.name}`,
+    "players: true",
+    "creatures:",
+    ...creatures.map(name => `  - ${name}`),
+    "```"
+  ];
+  dv.paragraph(lines.join("\n"));
+}
+```
+
+## Round E Condizioni
+
+> [!timer] Round
+> `INPUT[number:round]`
+
+```meta-bind
+INPUT[list:condizioni]
+```
+
+tab: PNG
 
 ## PNG Coinvolti
 
@@ -63,6 +112,8 @@ WHERE contains(this.personaggi, file.link)
 SORT nome ASC
 ```
 
+tab: Tattiche
+
 ## Tattiche
 
 > [!pericolo] Tattiche
@@ -72,6 +123,8 @@ SORT nome ASC
 
 > [!luogo] Terreno
 >
+
+tab: Ricompense
 
 ## Ricompense
 
@@ -88,3 +141,4 @@ SORT rarita ASC, nome ASC
 
 > [!segreto]- Varianti
 >
+````

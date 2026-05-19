@@ -19,6 +19,15 @@
 >
 > Fazioni:
 > `INPUT[inlineListSuggester(optionQuery("Mondi/Fazioni"), useLinks(partial)):fazioni]`
+>
+> Scadenza nel mondo:
+> `INPUT[text:scadenza_mondo]`
+>
+> Calendario:
+> `INPUT[text:fc-calendar]`
+>
+> Data Calendarium:
+> `INPUT[text:fc-date]`
 
 > [!missione] Obiettivo
 >
@@ -28,6 +37,9 @@
 > - [ ]
 > - [ ]
 > - [ ]
+
+````tabs
+tab: Situazione
 
 ## Situazione
 
@@ -44,6 +56,8 @@
 > [!pericolo] Ostacoli
 >
 
+tab: Ricompense
+
 ## Ricompense
 
 `INPUT[inlineListSuggester(optionQuery("Mondi/Oggetti"), useLinks(partial), allowOther):ricompense]`
@@ -54,6 +68,8 @@ FROM "Mondi/Oggetti"
 WHERE contains(this.ricompense, file.link)
 SORT rarita ASC, nome ASC
 ```
+
+tab: Collegamenti
 
 ## Collegamenti
 
@@ -84,9 +100,12 @@ WHERE contains(this.fazioni, file.link)
 SORT nome ASC
 ```
 
+tab: Esiti
+
 ## Esiti Possibili
 
 > [!segreto]- Esiti possibili
 >
 
 ## Note
+````

@@ -23,6 +23,9 @@
 > [!scena] Premessa
 >
 
+````tabs
+tab: Tavolo
+
 ## Tono e Temi
 
 > [!regola] Paletti di campagna
@@ -35,6 +38,8 @@ TABLE giocatore, classe, livello, stato
 FROM "Mondi/Personaggi"
 WHERE tipo = "pg" AND contains(this.personaggi, file.link)
 ```
+
+tab: Mondo
 
 ## Luoghi Chiave
 
@@ -52,6 +57,8 @@ FROM "Mondi/Fazioni"
 WHERE contains(this.fazioni, file.link)
 ```
 
+tab: Sessioni
+
 ## Sessioni
 
 ```dataview
@@ -60,6 +67,8 @@ FROM "Mondi/Sessioni"
 WHERE contains(campagne, this.file.link) OR contains(this.sessioni, file.link)
 SORT data DESC
 ```
+
+tab: Trama
 
 ## Trama
 
@@ -74,6 +83,8 @@ FROM "Mondi/Missioni"
 WHERE contains(personaggi, this.file.link) OR contains(luoghi, this.file.link) OR stato = "in corso"
 SORT stato ASC, nome ASC
 ```
+
+tab: Fronti
 
 ## Fronti e Minacce
 
@@ -91,4 +102,7 @@ SORT stato ASC, nome ASC
 > [!indizio] Verita confermate
 >
 
+tab: Note
+
 ## Note
+````

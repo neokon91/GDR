@@ -1,8 +1,8 @@
-async function luogo(tp){
+async function luogo(tp, routeOptions = {}){
     const helpers = tp.user.helpers;
     const name = await helpers.promptRequired(tp, "Nome del luogo");
     const id = helpers.slugify(name);
-    const route = tp.config.extra ?? {};
+    const route = Object.keys(routeOptions).length ? routeOptions : helpers.consumeRoute();
     const selectedType = route.subtype ? { id: route.subtype } : await helpers.chooseOptional(
         tp,
         [
@@ -39,7 +39,7 @@ async function luogo(tp){
     const luogoPadre = await helpers.chooseLocation(tp, "Luogo o regione superiore", context);
     const governante = await helpers.choosePerson(tp, "Governante o referente", context);
     const pericolo = await helpers.promptOptional(tp, "Pericolo da 0 a 10");
-    await helpers.moveNote(tp, helpers.PATHS.luoghi, name);
+    await helpers.moveNote(tp, helpers.path("luoghi"), name);
 
     return `---
 id: ${id}

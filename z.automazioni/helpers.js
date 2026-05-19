@@ -17,6 +17,23 @@ const PATHS = {
     sessioni: "Mondi/Sessioni"
 };
 
+let pendingRoute = {};
+
+function path(key) {
+    return PATHS[key] ?? key;
+}
+
+function setRoute(route = {}) {
+    pendingRoute = { ...route };
+    return pendingRoute;
+}
+
+function consumeRoute() {
+    const route = { ...pendingRoute };
+    pendingRoute = {};
+    return route;
+}
+
 function abortCreation(message = "Creazione annullata dall'utente.") {
     throw new Error(message);
 }
@@ -517,7 +534,9 @@ function inlineYamlList(values) {
 }
 
 module.exports = {
-    PATHS,
+    path,
+    setRoute,
+    consumeRoute,
     abortCreation,
     promptRequired,
     promptOptional,

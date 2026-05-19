@@ -37,6 +37,10 @@ lair_actions: []
 
 # Prova - Creatura
 
+```statblock
+monster: Prova - Creatura
+```
+
 > [!incontro] Descrizione
 > Creatura di prova per statblock e incontri.
 

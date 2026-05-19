@@ -18,7 +18,7 @@ async function culto(tp) {
     const templi = await helpers.chooseLocations(tp, "Templi collegati", context);
     const fazioni = await helpers.chooseFactions(tp, "Fazioni collegate", context);
 
-    await helpers.moveNote(tp, helpers.PATHS.religioni, name);
+    await helpers.moveNote(tp, helpers.path("religioni"), name);
 
     return `---
 id: ${id}

@@ -30,6 +30,9 @@
 > [!indizio] Cosa è vero in questo mondo
 >
 
+````tabs
+tab: Luoghi
+
 ## Continenti e Regioni
 
 `INPUT[inlineListSuggester(optionQuery("Mondi/Luoghi"), useLinks(partial), allowOther):continenti]`
@@ -41,6 +44,8 @@ WHERE mondo = this.file.link
 SORT nome ASC
 LIMIT 12
 ```
+
+tab: Fazioni
 
 ## Fazioni
 
@@ -54,6 +59,8 @@ SORT nome ASC
 LIMIT 12
 ```
 
+tab: Religioni
+
 ## Religioni
 
 `INPUT[inlineListSuggester(optionQuery("Mondi/Religioni"), useLinks(partial), allowOther):religioni]`
@@ -66,6 +73,8 @@ SORT nome ASC
 LIMIT 12
 ```
 
+tab: Campagne
+
 ## Campagne In Questo Mondo
 
 `INPUT[inlineListSuggester(optionQuery("Campagne"), useLinks(partial), allowOther):campagne]`
@@ -77,7 +86,10 @@ WHERE contains(mondi, this.file.link) OR contains(mondo, this.file.link) OR cont
 SORT stato ASC, nome ASC
 ```
 
+tab: Note
+
 ## Note Di Costruzione
 
 > [!segreto]- Idee non ancora confermate
 >
+````

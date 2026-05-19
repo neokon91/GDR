@@ -21,7 +21,7 @@ async function dispensa(tp) {
     const personaggi = await helpers.choosePeople(tp, "Personaggi collegati", context);
     const sessioni = await helpers.chooseSessions(tp, "Sessioni collegate", context);
 
-    await helpers.moveNote(tp, helpers.PATHS.dispense, name);
+    await helpers.moveNote(tp, helpers.path("dispense"), name);
 
     return `---
 id: ${id}

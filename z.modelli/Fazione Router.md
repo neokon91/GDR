@@ -12,9 +12,9 @@ const selected = await helpers.chooseRequired(
   "Che tipo di fazione vuoi creare?"
 );
 
-tp.config.extra = {
+helpers.setRoute({
   tipoFazione: selected.tipo
-};
+});
 
 const includePath = String.fromCharCode(91, 91) + selected.template + String.fromCharCode(93, 93);
 tR += await tp.file.include(includePath);

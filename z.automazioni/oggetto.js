@@ -31,7 +31,7 @@ async function oggetto(tp) {
     const proprietario = await helpers.choosePerson(tp, "Proprietario", context);
     const luogo = await helpers.chooseLocation(tp, "Luogo dell'oggetto", context);
 
-    await helpers.moveNote(tp, helpers.PATHS.oggetti, name);
+    await helpers.moveNote(tp, helpers.path("oggetti"), name);
 
     return `---
 id: ${id}

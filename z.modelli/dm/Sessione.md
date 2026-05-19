@@ -8,6 +8,12 @@
 > Data nel mondo:
 > `INPUT[text:data_mondo]`
 >
+> Calendario:
+> `INPUT[text:fc-calendar]`
+>
+> Data Calendarium:
+> `INPUT[text:fc-date]`
+>
 > Stato:
 > `INPUT[inlineSelect(option(preparazione, Preparazione), option(pronto, Pronto), option(giocata, Giocata), option(archiviata, Archiviata)):stato]`
 >
@@ -46,6 +52,9 @@
 > - Incontro casuale: `dice: 1d6`
 > - Complicazione: `dice: 1d12`
 
+````tabs
+tab: Scaletta
+
 ## Scene
 
 ```meta-bind
@@ -59,6 +68,8 @@ INPUT[list:scene]
 > - [ ] Scena di pressione
 > - [ ] Scelta rilevante
 > - [ ] Chiusura
+
+tab: In Scena
 
 ## Luoghi In Scena
 
@@ -111,6 +122,8 @@ WHERE contains(this.oggetti, file.link)
 SORT nome ASC
 ```
 
+tab: Ricompense
+
 ## Ricompense
 
 > [!tesoro] Ricompense previste
@@ -124,6 +137,8 @@ INPUT[list:ricompense]
 
 > [!indizio] Appunti rapidi
 >
+
+tab: Resoconto
 
 ## Resoconto
 
@@ -149,6 +164,8 @@ INPUT[list:ricompense]
 > [!tesoro] Ricompense effettive
 >
 
+tab: Prossima
+
 ## Da Riprendere
 
 > [!segreto]- Da riprendere
@@ -160,3 +177,4 @@ INPUT[list:ricompense]
 > - [ ] Riassunto da leggere
 > - [ ] Scena iniziale
 > - [ ] Pressione attiva
+````

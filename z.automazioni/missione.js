@@ -25,7 +25,7 @@ async function missione(tp) {
     const fazioni = await helpers.chooseFactions(tp, "Fazioni coinvolte", context);
     const ricompense = await helpers.chooseObjects(tp, "Ricompense", context);
 
-    await helpers.moveNote(tp, helpers.PATHS.missioni, name);
+    await helpers.moveNote(tp, helpers.path("missioni"), name);
 
     return `---
 id: ${id}
@@ -39,6 +39,11 @@ luoghi: ${helpers.inlineYamlList(luoghi)}
 personaggi: ${helpers.inlineYamlList(personaggi)}
 fazioni: ${helpers.inlineYamlList(fazioni)}
 ricompense: ${helpers.inlineYamlList(ricompense)}
+scadenza_mondo:
+fc-calendar:
+fc-date:
+fc-category: scadenza
+fc-display-name: ${helpers.yamlQuote(name)}
 ---
 `;
 }

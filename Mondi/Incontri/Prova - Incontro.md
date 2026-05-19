@@ -14,6 +14,11 @@ personaggi:
 pericolo: 5
 ricompense:
   - [[Prova - Oggetto]]
+round: 1
+condizioni:
+  - accecato fino al round 2
+encounter_creatures:
+  - "Prova - Creatura"
 ---
 
 # Prova - Incontro
@@ -23,3 +28,12 @@ ricompense:
 
 > [!regola] Tiri rapidi
 > - Iniziativa: `dice: 1d20`
+
+## Initiative Tracker
+
+```encounter
+name: Prova - Incontro
+players: true
+creatures:
+  - Prova - Creatura
+```

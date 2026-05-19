@@ -23,6 +23,9 @@
 > Personaggi:
 > `INPUT[inlineListSuggester(optionQuery("Mondi/Personaggi"), useLinks(partial)):personaggi]`
 
+````tabs
+tab: Identità
+
 ## Identità
 
 > [!scena] Identità pubblica
@@ -32,6 +35,8 @@
 
 > [!missione] Obiettivi
 >
+
+tab: Rete
 
 ## Leader
 
@@ -54,6 +59,8 @@ WHERE contains(this.personaggi, file.link) OR contains(fazioni, this.file.link)
 SORT nome ASC
 ```
 
+tab: Missioni
+
 ## Missioni
 
 ```dataview
@@ -63,7 +70,10 @@ WHERE contains(fazioni, this.file.link)
 SORT stato ASC, nome ASC
 ```
 
+tab: Segreti
+
 ## Segreti
 
 > [!segreto]- Segreti
 >
+````

@@ -32,6 +32,9 @@
 > [!lettura] Prima impressione
 >
 
+````tabs
+tab: Mappa Locale
+
 ## Quartieri e Luoghi Importanti
 
 ```dataview
@@ -39,6 +42,8 @@ TABLE tipo, stato
 FROM "Mondi/Luoghi"
 WHERE luogo_padre = this.file.link
 ```
+
+tab: Potere
 
 ## Governo
 
@@ -48,6 +53,8 @@ WHERE luogo_padre = this.file.link
 
 `INPUT[inlineListSuggester(optionQuery("Mondi/Fazioni"), useLinks(partial)):fazioni]`
 
+tab: Persone
+
 ## PNG importanti
 
 ```dataview
@@ -55,6 +62,8 @@ TABLE ruolo, stato
 FROM "Mondi/Personaggi"
 WHERE luogo = this.file.link OR contains(fazioni, this.file.link)
 ```
+
+tab: Problemi
 
 ## Problemi attuali
 
@@ -69,3 +78,4 @@ INPUT[list:problemi]
 
 > [!segreto]- Segreti
 >
+````

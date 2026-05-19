@@ -12,6 +12,7 @@ cssclasses:
 - [[Risorse/Sviluppo Vault]]
 - [[Risorse/Preparazione Sessione]]
 - [[Risorse/Plugin Attivi]]
+- [[Risorse/Integrazioni Plugin]]
 - [[Risorse/Callout GDR]]
 - [[Inbox/Inbox]]
 - [[Risorse/Mappe/Mappe]]

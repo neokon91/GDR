@@ -1,8 +1,14 @@
-async function incontro(tp) {
+async function incontro(tp, routeOptions = {}) {
     const helpers = tp.user.helpers;
+    const encounterName = value => {
+        const raw = String(value ?? "").trim();
+        const match = raw.match(/^\[\[([^|\]]+)(?:\|[^\]]+)?\]\]$/);
+        const target = match ? match[1] : raw;
+        return target.replace(/\.md$/, "").split("/").pop();
+    };
     const name = await helpers.promptRequired(tp, "Nome dell'incontro");
     const id = helpers.slugify(name);
-    const route = tp.config.extra ?? {};
+    const route = Object.keys(routeOptions).length ? routeOptions : helpers.consumeRoute();
     const forcedType = route.tipoIncontro ?? (["trappola", "pericolo ambientale"].includes(route.contentType) ? route.contentType : "");
     const selectedType = forcedType ? { id: forcedType } : await helpers.chooseOptional(
         tp,
@@ -24,8 +30,9 @@ async function incontro(tp) {
     const creature = await helpers.chooseCreatures(tp, "Creature coinvolte", context);
     const personaggi = await helpers.choosePeople(tp, "Personaggi coinvolti", context);
     const ricompense = await helpers.chooseObjects(tp, "Ricompense", context);
+    const encounterCreatures = creature.map(link => helpers.yamlQuote(encounterName(link)));
 
-    await helpers.moveNote(tp, helpers.PATHS.incontri, name);
+    await helpers.moveNote(tp, helpers.path("incontri"), name);
 
     return `---
 id: ${id}
@@ -39,6 +46,9 @@ creature: ${helpers.inlineYamlList(creature)}
 personaggi: ${helpers.inlineYamlList(personaggi)}
 pericolo: ${pericolo}
 ricompense: ${helpers.inlineYamlList(ricompense)}
+round: 1
+condizioni: []
+encounter_creatures: ${helpers.inlineYamlList(encounterCreatures)}
 ---
 `;
 }

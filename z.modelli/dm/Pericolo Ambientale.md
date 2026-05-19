@@ -1,4 +1,4 @@
-<% tp.config.extra = { ...(tp.config.extra ?? {}), tipoIncontro: "pericolo ambientale" }; await tp.user.incontro(tp) %>
+<% await tp.user.incontro(tp, { tipoIncontro: "pericolo ambientale" }) %>
 # `=this.nome`
 
 >[!infobox|wiki]- Pericolo Ambientale

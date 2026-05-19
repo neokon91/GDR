@@ -28,7 +28,7 @@ Questa pagina spiega cosa puoi sfruttare nel vault senza dover conoscere i detta
 - **Hex Cartographer**: crea o consulta mappe esagonali per viaggi, regioni e terre selvagge.
 - **Fantasy Content Generator**: offre spunti fantasy, nomi, luoghi e dettagli utili quando devi riempire una bozza.
 - **Icon Folder**: rende cartelle e pagine piu riconoscibili con icone.
-- **Tabs**: organizza viste e dashboard in schede, utile per tenere separati DM, mondo e risorse.
+- **Tabs**: organizza viste, dashboard e template lunghi in schede, utile per tenere separate sezioni come scaletta, collegamenti, creature, resoconto e ricompense.
 
 ## Opzionali
 
@@ -55,3 +55,5 @@ Usa i plugin solo se aiutano a fare una cosa concreta:
 - improvvisare;
 - ricordare;
 - aggiornare dopo la sessione.
+
+Per decidere cosa sviluppare dopo, usa [[Risorse/Integrazioni Plugin]].

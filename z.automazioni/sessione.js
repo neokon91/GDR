@@ -26,7 +26,7 @@ async function sessione(tp) {
     const fazioni = await helpers.chooseFactions(tp, "Fazioni in scena", context);
     const oggetti = await helpers.chooseObjects(tp, "Oggetti in scena", context);
 
-    await helpers.moveNote(tp, helpers.PATHS.sessioni, `${data} - ${titolo}`);
+    await helpers.moveNote(tp, helpers.path("sessioni"), `${data} - ${titolo}`);
 
     return `---
 id: ${id}
@@ -37,6 +37,10 @@ categoria: sessione
 tipo: ${selectedType?.id ?? ""}
 data: ${data}
 data_mondo:
+fc-calendar:
+fc-date:
+fc-category: sessione
+fc-display-name: ${helpers.yamlQuote(titolo)}
 stato: preparazione
 mondo: ${mondo}
 campagne: ${helpers.inlineYamlList(campagne)}

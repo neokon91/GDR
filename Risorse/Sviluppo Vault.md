@@ -70,6 +70,51 @@ Quando aggiungi o cambi un template importante:
 - controlla che la nota di prova non compaia nelle viste operative;
 - controlla che compaia invece in [[Risorse/Prove Entità]].
 
+## Test Con CLI Obsidian
+
+Usa la CLI di Obsidian per controlli ripetibili prima di consegnare o pubblicare modifiche al vault.
+
+Prerequisiti:
+
+- Obsidian aggiornato con installer recente;
+- interfaccia CLI attiva in `Impostazioni > Generale > Avanzate`;
+- vault `GDR` aperto almeno una volta in Obsidian.
+
+Comandi consigliati:
+
+```bash
+/Applications/Obsidian.app/Contents/MacOS/Obsidian version vault=GDR
+/Applications/Obsidian.app/Contents/MacOS/Obsidian vault vault=GDR
+/Applications/Obsidian.app/Contents/MacOS/Obsidian plugins:enabled vault=GDR filter=community versions format=tsv
+/Applications/Obsidian.app/Contents/MacOS/Obsidian unresolved vault=GDR total
+```
+
+Controlli di rendering e plugin:
+
+```bash
+/Applications/Obsidian.app/Contents/MacOS/Obsidian open vault=GDR path='1. DM Dashboard.md'
+/Applications/Obsidian.app/Contents/MacOS/Obsidian dev:debug vault=GDR on
+/Applications/Obsidian.app/Contents/MacOS/Obsidian dev:dom vault=GDR selector='.workspace-leaf-content[data-type="markdown"]' text
+/Applications/Obsidian.app/Contents/MacOS/Obsidian dev:dom vault=GDR selector='.dataview-error, .dataviewjs-error, .block-language-dataview .error' total
+/Applications/Obsidian.app/Contents/MacOS/Obsidian dev:errors vault=GDR
+/Applications/Obsidian.app/Contents/MacOS/Obsidian dev:console vault=GDR level=error limit=50
+```
+
+Smoke test Meta Bind non distruttivo:
+
+```bash
+/Applications/Obsidian.app/Contents/MacOS/Obsidian eval vault=GDR code='(() => { const btn=[...document.querySelectorAll("button")].find(b => b.textContent.includes("Durante Il Gioco")); if (!btn) return "button-not-found"; btn.click(); return "clicked"; })()'
+/Applications/Obsidian.app/Contents/MacOS/Obsidian tabs vault=GDR ids
+```
+
+Esito atteso:
+
+- `unresolved` deve restituire `0`;
+- `dev:errors` deve indicare che non ci sono errori catturati;
+- `dev:console level=error` non deve mostrare errori;
+- la dashboard deve contenere i pulsanti Meta Bind e i riepiloghi Dataview;
+- lo smoke test deve aprire [[Durante il Gioco]].
+
 ## Dove Vanno Le Cose
 - Idee vaghe: [[Inbox/Inbox]]
 - Appunti live: [[Durante il Gioco]]
@@ -125,9 +170,10 @@ Prima di aggiungere una funzione, chiedi:
 - Note di prova visibili nelle viste di gioco.
 
 ## Priorita Future
-1. Worldbuilding
-2. Gestione sessione
-3. Abbellire.
+1. Integrazioni plugin che aiutano davvero al tavolo: [[Risorse/Integrazioni Plugin]].
+2. Worldbuilding.
+3. Gestione sessione.
+4. Abbellire.
 
 ## Definizione Di Fatto Bene
 Una modifica e riuscita quando il DM puo usarla senza chiedersi:

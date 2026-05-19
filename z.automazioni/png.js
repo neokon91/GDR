@@ -20,7 +20,7 @@ async function png(tp) {
     const fazioni = await helpers.chooseFactions(tp, "Fazioni del PNG", context);
     const relazioni = await helpers.choosePeople(tp, "Relazioni del PNG", context);
 
-    await helpers.moveNote(tp, helpers.PATHS.personaggi, name);
+    await helpers.moveNote(tp, helpers.path("personaggi"), name);
 
     return `---
 id: ${id}

@@ -13,7 +13,7 @@ async function pg(tp) {
     const fazioni = await helpers.chooseFactions(tp, "Fazioni del PG", context);
     const relazioni = await helpers.choosePeople(tp, "Relazioni del PG", context);
 
-    await helpers.moveNote(tp, helpers.PATHS.personaggi, name);
+    await helpers.moveNote(tp, helpers.path("personaggi"), name);
 
     return `---
 id: ${id}

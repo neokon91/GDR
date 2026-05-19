@@ -82,7 +82,7 @@ async function creatura(tp){
     const reactions = await helpers.collectNamedDescriptions(tp, "reazioni");
 
     // Crea la cartella se manca e sposta la nota nella sezione creature.
-    await helpers.moveNote(tp, helpers.PATHS.creature, name);
+    await helpers.moveNote(tp, helpers.path("creature"), name);
 
     return `---
 id: ${id}

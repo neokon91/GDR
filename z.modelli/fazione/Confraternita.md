@@ -1,4 +1,4 @@
-<% tp.config.extra = { ...(tp.config.extra ?? {}), tipoFazione: "confraternita" }; await tp.user.fazione(tp) %>
+<% await tp.user.fazione(tp, { tipoFazione: "confraternita" }) %>
 # `=this.nome`
 
 >[!infobox|wiki]- Confraternita

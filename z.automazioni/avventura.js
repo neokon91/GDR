@@ -10,7 +10,7 @@ async function avventura(tp) {
     const incontri = await helpers.chooseEncounters(tp, "Incontri collegati", context);
     const ricompense = await helpers.chooseObjects(tp, "Ricompense", context);
 
-    await helpers.moveNote(tp, helpers.PATHS.missioni, name);
+    await helpers.moveNote(tp, helpers.path("missioni"), name);
 
     return `---
 id: ${id}

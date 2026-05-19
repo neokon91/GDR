@@ -10,7 +10,7 @@ async function oneShot(tp) {
     const incontri = await helpers.chooseEncounters(tp, "Incontri della one-shot", context);
     const personaggi = await helpers.choosePeople(tp, "PNG o PG collegati", context);
 
-    await helpers.moveNote(tp, helpers.PATHS.missioni, name);
+    await helpers.moveNote(tp, helpers.path("missioni"), name);
 
     return `---
 id: ${id}

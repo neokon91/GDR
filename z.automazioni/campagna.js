@@ -8,7 +8,7 @@ async function campagna(tp) {
     const luoghi = await helpers.chooseLocations(tp, "Aggiungi luoghi principali");
     const fazioni = await helpers.chooseFactions(tp, "Aggiungi fazioni in gioco");
 
-    await helpers.moveNote(tp, helpers.PATHS.campagne, name);
+    await helpers.moveNote(tp, helpers.path("campagne"), name);
 
     return `---
 id: ${id}

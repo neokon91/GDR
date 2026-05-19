@@ -1,4 +1,4 @@
-<% tp.config.extra = { ...(tp.config.extra ?? {}), tipoFazione: "gilda" }; await tp.user.fazione(tp) %>
+<% await tp.user.fazione(tp, { tipoFazione: "gilda" }) %>
 # `=this.nome`
 
 >[!infobox|wiki]- Gilda

@@ -23,7 +23,7 @@ async function tempio(tp) {
     );
     const fazioni = await helpers.chooseFactions(tp, "Fazioni collegate al tempio", context);
 
-    await helpers.moveNote(tp, helpers.PATHS.luoghi, name);
+    await helpers.moveNote(tp, helpers.path("luoghi"), name);
 
     return `---
 id: ${id}

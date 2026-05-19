@@ -1,4 +1,4 @@
-<% tp.config.extra = { ...(tp.config.extra ?? {}), tipoIncontro: "trappola" }; await tp.user.incontro(tp) %>
+<% await tp.user.incontro(tp, { tipoIncontro: "trappola" }) %>
 # `=this.nome`
 
 >[!infobox|wiki]- Trappola
