@@ -11,6 +11,48 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Drago nero adulto"
+type: "Drago (cromatico)"
+size: "enorme"
+alignment: "caotico malvagio"
+ac: 19
+stats: [23, 14, 21, 14, 13, 19]
+saves: 
+  dex: 7
+  wis: 6
+skillsaves: 
+  furtivita: 7
+  percezione: 11
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 21, scurovisione: 36 m, vista_cieca: 18 m"
+languages: "Comune, Draconico"
+gear: []
+traits: 
+- name: "Anfibio"
+  desc: "Il drago può respirare in aria e in acqua."
+- name: "Resistenza leggendaria (3/giorno o 4/giorno nella tana)"
+  desc: "Se il drago fallisce un tiro salvezza, può scegliere di superarlo comunque."
+actions: 
+- name: "Multiattacco"
+  desc: "Il drago effettua tre attacchi Squarcio. Può sostituire un attacco con un utilizzo di Incantesimi per lanciare freccia acida (di 3º livello)."
+- name: "Squarcio"
+  desc: "*Tiro per colpire in mischia:* +11, portata 3 m. *Colpito:* 13 (2d6 + 6) danni taglienti più 4 (1d8) danni da acido."
+- name: "Incantesimi"
+  desc: "Il drago lancia uno dei seguenti incantesimi, senza bisogno di componenti materiali, utilizzando Carisma come caratteristica da incantatore (CD del tiro salvezza sull'incantesimo 17, +9 al tiro per colpire degli attacchi con incantesimo):\n\n*1/giorno ciascuno:*\n- parlare con i morti\n- sfera al vetriolo\n\n*A volontà:*\n- freccia acida (di 3º livello)\n- individuazione del magico\n- paura"
+- name: "Soffio di acido (ricarica 5-6)"
+  desc: "*Tiro salvezza su Destrezza:* CD 18, tutte le creature in una linea lunga 18 metri e larga 1,5 metri. *Fallimento:* 54 (12d8) danni da acido. *Successo:* danni dimezzati."
+bonus_actions: []
+reactions: []
+legendary_actions: 
+- name: "Balzo"
+  desc: "Il drago si muove fino a metà della sua velocità ed effettua un attacco Squarcio."
+- name: "Nugolo di insetti"
+  desc: "*Tiro salvezza su Destrezza:* CD 17, una creatura che il drago è in grado di vedere entro 36 metri. *Fallimento:* 22 (4d10) danni da veleno, e il bersaglio subisce svantaggio ai tiri salvezza per mantenere la concentrazione fino al termine del proprio turno successivo. *Fallimento o successo:* il drago non può ripetere quest'azione fino all'inizio del proprio turno successivo."
+- name: "Presenza terrificante"
+  desc: "Il drago usa Incantesimi per lanciare paura. Il drago non può ripetere quest'azione fino all'inizio del proprio turno successivo."
+lair_actions: []
 tipo_creatura: "Drago (cromatico)"
 dimensione: "Enorme"
 allineamento: "caotico malvagio"
@@ -25,6 +67,10 @@ bonus_competenza: 5
 statblock: true
 ---
 # Drago nero adulto
+
+```statblock
+monster: Drago nero adulto
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Enorme Drago (cromatico), caotico malvagio

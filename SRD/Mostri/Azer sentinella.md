@@ -11,6 +11,33 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Azer sentinella"
+type: "Elementale"
+size: "medio"
+alignment: "legale neutrale"
+ac: 17
+stats: [17, 12, 15, 12, 13, 10]
+saves: 
+  con: 4
+skillsaves: {}
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 11"
+languages: "Primordiale (Ignan)"
+gear: []
+traits: 
+- name: "Aura di fuoco"
+  desc: "Al termine di ogni turno dell'azer, tutte le creature a scelta dell'azer che si trovano in un'emanazione di 1,5 metri di cui l'azer è il punto di origine subiscono 5 (1d10) danni da fuoco, a meno che l'azer non sia incapacitato."
+- name: "Illuminazione"
+  desc: "L'azer emana luce intensa in un raggio di 3 metri e luce fioca per altri 3 metri."
+actions: 
+- name: "Martello ardente"
+  desc: "*Tiro per colpire in mischia:* +5, portata 1,5 m *Colpito:* 8 (1d10 + 3) danni contundenti più 3 (1d6) danni da fuoco."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Elementale"
 dimensione: "Medio"
 allineamento: "legale neutrale"
@@ -25,6 +52,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Azer sentinella
+
+```statblock
+monster: Azer sentinella
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Medio Elementale, legale neutrale

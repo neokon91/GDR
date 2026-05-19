@@ -11,6 +11,50 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Progenie vampirica"
+type: "Non morto"
+size: "medio o piccolo"
+alignment: "neutrale malvagio"
+ac: 16
+stats: [16, 16, 16, 11, 10, 12]
+saves: 
+  dex: 6
+  wis: 3
+skillsaves: 
+  furtivita: 6
+  percezione: 3
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 13, scurovisione: 18 m"
+languages: "Comune più un'altra lingua"
+gear: []
+traits: 
+- name: "Acqua corrente"
+  desc: "Il vampiro subisce 20 danni da acido se termina il suo turno nell'acqua corrente."
+- name: "Debolezze dei vampiri"
+  desc: "Il vampiro ha le seguenti debolezze:"
+- name: "Luce del sole"
+  desc: "Il vampiro subisce 20 danni radiosi quando inizia il suo turno alla luce del sole. Finché è esposto alla luce del sole, subisce svantaggio a tiri per colpire e prove di caratteristica."
+- name: "Movimenti del ragno"
+  desc: "Il vampiro può scalare le superfici difficili, compresi i soffitti, senza effettuare una prova di caratteristica."
+- name: "Paletto nel cuore"
+  desc: "Il vampiro viene distrutto se un'arma che infligge danni perforanti gli viene conficcata nel cuore mentre è incapacitato."
+- name: "Proibizione"
+  desc: "Il vampiro non può entrare in casa di qualcuno se non viene invitato da chi vi risiede."
+actions: 
+- name: "Multiattacco"
+  desc: "Il vampiro effettua due attacchi Artiglio e usa Morso."
+- name: "Artiglio"
+  desc: "*Tiro per colpire in mischia:* +6, portata 1,5 m.\n\n**Colpito:** 8 (2d4 + 3) danni taglienti\nSe il bersaglio è una creatura di taglia Media o inferiore, è afferrato (CD 13 per sfuggire) da uno dei due artigli."
+- name: "Morso"
+  desc: "*Tiro salvezza su Costituzione:* CD 14, una creatura entro 1,5 metri che sia consenziente, afferrata, incapacitata o trattenuta. *Fallimento:* 5 (1d4 + 3) danni perforanti più 10 (3d6) danni necrotici. I punti ferita massimi del bersaglio sono ridotti di un ammontare pari ai danni necrotici subiti, e il vampiro recupera punti ferita pari a quell'ammontare."
+bonus_actions: 
+- name: "Agilità immortale"
+  desc: "Il vampiro effettua l'azione di Disimpegno o Scatto."
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Non morto"
 dimensione: "Medio o Piccolo"
 allineamento: "neutrale malvagio"
@@ -25,6 +69,10 @@ bonus_competenza: 3
 statblock: true
 ---
 # Progenie vampirica
+
+```statblock
+monster: Progenie vampirica
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Medio o Piccolo Non morto, neutrale malvagio

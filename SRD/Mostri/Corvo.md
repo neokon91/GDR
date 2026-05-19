@@ -11,6 +11,31 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Corvo"
+type: "Bestia"
+size: "minuscola"
+alignment: "senza allineamento"
+ac: 12
+stats: [2, 14, 10, 5, 13, 6]
+saves: {}
+skillsaves: 
+  percezione: 3
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 13"
+languages: "nessuna"
+gear: []
+traits: 
+- name: "Imitare"
+  desc: "Il corvo può imitare dei suoni semplici che ha sentito, come sussurri o cinguettii. Chi li ascolta può capire che si tratta di imitazioni superando una prova di Saggezza (Intuizione) con CD 10."
+actions: 
+- name: "Becco"
+  desc: "*Tiro per colpire in mischia:* +4, portata 1,5 m. *Colpito:* 1 danno perforante."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Bestia"
 dimensione: "Minuscola"
 allineamento: "senza allineamento"
@@ -25,6 +50,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Corvo
+
+```statblock
+monster: Corvo
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Minuscola Bestia, senza allineamento

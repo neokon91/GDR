@@ -11,6 +11,34 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Salamandra"
+type: "Elementale"
+size: "grande"
+alignment: "neutrale malvagio"
+ac: 15
+stats: [18, 14, 15, 11, 10, 12]
+saves: {}
+skillsaves: {}
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 10, scurovisione: 18 m"
+languages: "Primordiale (Ignan)"
+gear: []
+traits: 
+- name: "Aura di fuoco"
+  desc: "Alla fine di ogni turno della salamandra, ciascuna creatura a sua scelta in un'emanazione di 1,5 metri di cui la salamandra è il punto di origine subisce 7 (2d6) danni da fuoco."
+actions: 
+- name: "Multiattacco"
+  desc: "La salamandra effettua due attacchi Lancia di fuoco. Può sostituire un attacco con un utilizzo di Stritolare."
+- name: "Lancia di fuoco"
+  desc: "*Tiro per colpire in mischia o a distanza:* +7, portata 1,5 m o gittata 6/18 m. *Colpito:* 13 (2d8 + 4) danni perforanti più 7 (2d6) danni da fuoco. Colpito o mancato: la lancia torna magicamente tra le mani della salamandra subito dopo un attacco a distanza."
+- name: "Stritolare"
+  desc: "*Tiro salvezza su Forza:* CD 15, una creatura di taglia Grande o inferiore che la salamandra è in grado di vedere entro 3 metri. *Fallimento:* 11 (2d6 + 4) danni contundenti più 7 (2d6) danni da fuoco. Il bersaglio è afferrato (CD 14 per sfuggire) ed è trattenuto finché la presa perdura."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Elementale"
 dimensione: "Grande"
 allineamento: "neutrale malvagio"
@@ -25,6 +53,10 @@ bonus_competenza: 3
 statblock: true
 ---
 # Salamandra
+
+```statblock
+monster: Salamandra
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Grande Elementale, neutrale malvagio

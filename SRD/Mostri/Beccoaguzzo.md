@@ -11,6 +11,28 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Beccoaguzzo"
+type: "Mostruosità"
+size: "grande"
+alignment: "senza allineamento"
+ac: 11
+stats: [14, 12, 12, 2, 10, 5]
+saves: {}
+skillsaves: {}
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 10"
+languages: "nessuna"
+gear: []
+traits: []
+actions: 
+- name: "Becco"
+  desc: "*Tiro per colpire in mischia:* +4, portata 1,5 m *Colpito:* 6 (1d8 + 2) danni taglienti"
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Mostruosità"
 dimensione: "Grande"
 allineamento: "senza allineamento"
@@ -25,6 +47,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Beccoaguzzo
+
+```statblock
+monster: Beccoaguzzo
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Grande Mostruosità, senza allineamento

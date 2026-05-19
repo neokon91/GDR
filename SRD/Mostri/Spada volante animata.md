@@ -11,6 +11,29 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Spada volante animata"
+type: "Costrutto"
+size: "piccolo"
+alignment: "senza allineamento"
+ac: 17
+stats: [12, 15, 11, 1, 5, 1]
+saves: 
+  dex: 4
+skillsaves: {}
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 7, vista_cieca: 18 m"
+languages: "nessuna"
+gear: []
+traits: []
+actions: 
+- name: "Fendente"
+  desc: "*Tiro per colpire in mischia:* +4, portata 1,5 m. *Colpito:* 6 (1d8 + 2) danni taglienti."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Costrutto"
 dimensione: "Piccolo"
 allineamento: "senza allineamento"
@@ -25,6 +48,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Spada volante animata
+
+```statblock
+monster: Spada volante animata
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Piccolo Costrutto, senza allineamento

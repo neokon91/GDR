@@ -11,6 +11,34 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Bugbear guerriero"
+type: "Folletto (goblinoide)"
+size: "medio"
+alignment: "caotico malvagio"
+ac: 14
+stats: [15, 14, 13, 8, 11, 9]
+saves: {}
+skillsaves: 
+  furtivita: 6
+  sopravvivenza: 2
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 10, scurovisione: 18 m"
+languages: "Comune, Goblin"
+gear: ["armatura di pelle", "martelli leggeri (3)"]
+traits: 
+- name: "Rapimento"
+  desc: "Il bugbear non ha bisogno di usare movimento extra per spostare una creatura che sta afferrando."
+actions: 
+- name: "Martello leggero"
+  desc: "*Tiro per colpire in mischia o a distanza:* +4 (con vantaggio se il bersaglio è afferrato dal bugbear), portata 3 m o gittata 6/18 m. *Colpito:* 9 (3d4 + 2) danni contundenti."
+- name: "Presa"
+  desc: "*Tiro per colpire in mischia:* +4, portata 3 m. *Colpito:* 9 (2d6 + 2) danni contundenti. Se il bersaglio è una creatura di taglia Media o inferiore, è afferrato (CD 12 per sfuggire)."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Folletto (goblinoide)"
 dimensione: "Medio"
 allineamento: "caotico malvagio"
@@ -25,6 +53,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Bugbear guerriero
+
+```statblock
+monster: Bugbear guerriero
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Medio Folletto (goblinoide), caotico malvagio

@@ -11,6 +11,33 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Archelon"
+type: "Bestia (dinosauro)"
+size: "enorme"
+alignment: "senza allineamento"
+ac: 17
+stats: [18, 16, 13, 4, 14, 6]
+saves: {}
+skillsaves: 
+  furtivita: 5
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 12"
+languages: "nessuna"
+gear: []
+traits: 
+- name: "Anfibio"
+  desc: "L'archelon può respirare in aria e in acqua."
+actions: 
+- name: "Multiattacco"
+  desc: "L'archelon effettua due attacchi Morso."
+- name: "Morso"
+  desc: "*Tiro per colpire in mischia:* +6, portata 1,5 m. *Colpito:* 14 (3d6 + 4) danni perforanti."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Bestia (dinosauro)"
 dimensione: "Enorme"
 allineamento: "senza allineamento"
@@ -25,6 +52,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Archelon
+
+```statblock
+monster: Archelon
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Enorme Bestia (dinosauro), senza allineamento

@@ -11,6 +11,44 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Djinni"
+type: "Elementale"
+size: "grande"
+alignment: "neutrale"
+ac: 17
+stats: [21, 15, 22, 15, 16, 20]
+saves: 
+  dex: 6
+  wis: 7
+skillsaves: {}
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 13, scurovisione: 36 m"
+languages: "Primordiale (Auran)"
+gear: []
+traits: 
+- name: "Desideri"
+  desc: "Il djinni ha una probabilità del 30% di conoscere l'incantesimo desiderio. Se il djinni lo conosce, può lanciarlo solo per conto di una creatura diversa da un genio che comunica un desiderio in un modo che il djinni è in grado di comprendere. Se il djinni lancia l'incantesimo per conto della creatura, non subisce alcuna conseguenza derivante dal lancio dell'incantesimo. Una volta che il djinni l'ha lanciato tre volte, non può farlo di nuovo per 365 giorni."
+- name: "Resistenza alla magia"
+  desc: "Il djinni dispone di vantaggio ai tiri salvezza contro incantesimi e altri effetti magici."
+- name: "Ristoro elementale"
+  desc: "Se il djinni muore al di fuori del Piano Elementale dell'Aria, il suo corpo si dissolve nell'aria ed esso ne acquisisce uno nuovo dopo 1d4 giorni, tornando in vita con tutti i suoi punti ferita da qualche parte sul Piano Elementale dell'Aria."
+actions: 
+- name: "Multiattacco"
+  desc: "Il djinni effettua tre attacchi, usando Lama burrascosa o Lampo burrascoso in qualsiasi combinazione."
+- name: "Lama burrascosa"
+  desc: "*Tiro per colpire in mischia:* +9, portata 1,5 m. *Colpito:* 12 (2d6 + 5) danni taglienti più 7 (2d6) danni da fulmine."
+- name: "Lampo burrascoso"
+  desc: "*Tiro per colpire a distanza:* +9, gittata 36 m. *Colpito:* 13 (3d8) danni da tuono. Se il bersaglio è una creatura di taglia Grande o inferiore, cade a terra prono."
+- name: "Creare vortice"
+  desc: "Il djinni evoca un vortice in un punto che è in grado di vedere entro 36 metri. Il vortice riempie un cilindro del raggio di 6 metri e alto 18 metri, centrato su quel punto, e perdura fino al termine della concentrazione del djinni su di esso. Il djinni può spostare il vortice fino a 6 metri all'inizio di ogni suo turno. Ogni volta che il vortice entra nello spazio di una creatura o una creatura entra nello spazio del vortice, la creatura è soggetta al seguente effetto.\n\n*Tiro salvezza su Forza:* CD 17 (una creatura effettua questo tiro salvezza solo una volta per turno, e il djinni non subisce alcun effetto).\n\n*Fallimento:* finché si trova nel vortice, il bersaglio è trattenuto e si sposta insieme al vortice. All'inizio di ogni suo turno, il bersaglio trattenuto subisce 21 (6d6) danni da tuono. Alla fine di ogni suo turno, il bersaglio ripete il tiro salvezza e, se lo supera, l'effetto svanisce."
+- name: "Incantesimi"
+  desc: "Il djinni lancia uno dei seguenti incantesimi, senza bisogno di componenti materiali, utilizzando Carisma come caratteristica da incantatore (CD del tiro salvezza sull'incantesimo 17):\n\n*1/giorno ciascuno:*\n- creazione\n- forma gassosa\n- immagine maggiore\n- invisibilità\n- spostamento planare\n\n*2/giorno ciascuno:*\n- camminare nel vento\n- creare cibo e acqua (è in grado di creare vino invece di acqua)\n- linguaggi\n\n*A volontà:*\n- individuazione del bene e del male\n- individuazione del magico"
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Elementale"
 dimensione: "Grande"
 allineamento: "neutrale"
@@ -25,6 +63,10 @@ bonus_competenza: 4
 statblock: true
 ---
 # Djinni
+
+```statblock
+monster: Djinni
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Grande Elementale, neutrale

@@ -11,6 +11,37 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Gorilla gigante"
+type: "Bestia"
+size: "enorme"
+alignment: "senza allineamento"
+ac: 12
+stats: [23, 14, 18, 5, 12, 7]
+saves: {}
+skillsaves: 
+  atletica: 9
+  percezione: 4
+  sopravvivenza: 4
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 14"
+languages: "nessuna"
+gear: []
+traits: []
+actions: 
+- name: "Multiattacco"
+  desc: "Il gorilla effettua due attacchi Pugno."
+- name: "Pugno"
+  desc: "*Tiro per colpire in mischia:* +9, portata 3 m. *Colpito:* 22 (3d10 + 6) danni contundenti."
+- name: "Lancio di massi (ricarica 6)"
+  desc: "Il gorilla scaglia un masso verso un punto che è in grado di vedere entro 27 metri. *Tiro salvezza su Destrezza:* CD 17, tutte le creature in una sfera dal raggio di 1,5 metri centrata su quel punto. *Fallimento:* 24 (7d6) danni contundenti. Se il bersaglio è una creatura di taglia Grande o inferiore, cade a terra prono. *Successo:* danni dimezzati."
+bonus_actions: 
+- name: "Balzo"
+  desc: "Il gorilla salta fino a 9 metri usando 3 metri di movimento."
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Bestia"
 dimensione: "Enorme"
 allineamento: "senza allineamento"
@@ -25,6 +56,10 @@ bonus_competenza: 3
 statblock: true
 ---
 # Gorilla gigante
+
+```statblock
+monster: Gorilla gigante
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Enorme Bestia, senza allineamento

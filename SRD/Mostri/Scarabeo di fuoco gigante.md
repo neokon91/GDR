@@ -11,6 +11,30 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Scarabeo di fuoco gigante"
+type: "Bestia"
+size: "piccola"
+alignment: "senza allineamento"
+ac: 13
+stats: [8, 10, 12, 1, 7, 3]
+saves: {}
+skillsaves: {}
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 8, vista_cieca: 9 m"
+languages: "nessuna"
+gear: []
+traits: 
+- name: "Illuminazione"
+  desc: "Lo scarabeo proietta luce intensa in un raggio di 3 metri e luce fioca per altri 3 metri."
+actions: 
+- name: "Morso"
+  desc: "*Tiro per colpire in mischia:* +1, portata 1,5 m. *Colpito:* 1 danno da fuoco."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Bestia"
 dimensione: "Piccola"
 allineamento: "senza allineamento"
@@ -25,6 +49,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Scarabeo di fuoco gigante
+
+```statblock
+monster: Scarabeo di fuoco gigante
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Piccola Bestia, senza allineamento

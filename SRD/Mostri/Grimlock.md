@@ -11,6 +11,31 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Grimlock"
+type: "Aberrazione"
+size: "media"
+alignment: "neutrale malvagio"
+ac: 11
+stats: [16, 12, 12, 9, 8, 6]
+saves: {}
+skillsaves: 
+  atletica: 5
+  furtivita: 5
+  percezione: 3
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 13, vista_cieca: 9 m"
+languages: "nessuna"
+gear: []
+traits: []
+actions: 
+- name: "Randello d'ossa"
+  desc: "*Tiro per colpire in mischia:* +5, portata 1,5 m *Colpito:* 6 (1d6 + 3) danni contundenti più 2 (1d4) danni psichici."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Aberrazione"
 dimensione: "Media"
 allineamento: "neutrale malvagio"
@@ -25,6 +50,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Grimlock
+
+```statblock
+monster: Grimlock
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Media Aberrazione, neutrale malvagio

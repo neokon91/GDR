@@ -26,14 +26,17 @@ Questa pagina spiega cosa puoi sfruttare nel vault senza dover conoscere i detta
 
 - **Excalidraw**: disegna mappe, relazioni tra fazioni, schemi di dungeon, fronti e scene complesse.
 - **Hex Cartographer**: crea o consulta mappe esagonali per viaggi, regioni e terre selvagge.
-- **Generatore di Contenuti Fantasy**: genera in italiano nomi, locande, insediamenti, gruppi, bottini e dungeon; puo copiare i risultati o salvarli come note bozza in `Inbox/Generati`.
+- **Generatore di Contenuti Fantasy**: genera in italiano nomi, locande, insediamenti, gruppi, bottini e dungeon; puo copiare i risultati o salvarli come note bozza in `Inbox/Generati`, gia compatibili con i campi principali dei template del vault.
 - **Icon Folder**: rende cartelle e pagine piu riconoscibili con icone.
 - **Tabs**: organizza viste, dashboard e template lunghi in schede, utile per tenere separate sezioni come scaletta, collegamenti, creature, resoconto e ricompense.
+- **TTRPG Tools: Maps**: gestisce mappe tattiche e riferimenti visuali quando servono al tavolo.
 
 ## Opzionali
 
-- **Table Editor**: rende piu comodo modificare tabelle di bottino, incontri, calendari o liste.
+- **Advanced Tables**: rende piu comodo modificare tabelle di bottino, incontri, calendari o liste.
 - **Emoji Toolbar**: aggiunge simboli quando vuoi rendere piu leggibili etichette e appunti.
+- **Style Settings**: permette di regolare aspetti visuali dei temi e degli snippet senza modificare CSS a mano.
+- **Iron Vault**: utile solo se giochi o prepari materiale per Ironsworn/Starforged; non va imposto al flusso D&D.
 - **BRAT**: permette di provare plugin non ancora installati in modo normale. Usalo solo se sai perche ti serve.
 
 ## Plugin Core Obsidian Da Sfruttare

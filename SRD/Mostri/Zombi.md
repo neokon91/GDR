@@ -11,6 +11,31 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Zombi"
+type: "Non morto"
+size: "medio"
+alignment: "neutrale malvagio"
+ac: 8
+stats: [13, 6, 16, 3, 6, 5]
+saves: 
+  wis: 0
+skillsaves: {}
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 8, scurovisione: 18 m"
+languages: "capisce il Comune più un'altra lingua ma non le parla"
+gear: []
+traits: 
+- name: "Tempra dei non morti"
+  desc: "Se i danni riducono lo zombi a 0 punti ferita, esso effettua un tiro salvezza su Costituzione (CD pari a 5 più i danni subiti), a meno che non si tratti di danni radiosi o di un colpo critico. In caso di successo, scende invece a 1 punto ferita."
+actions: 
+- name: "Schianto"
+  desc: "*Tiro per colpire in mischia:* +3, portata 1,5 m. *Colpito:* 5 (1d8 + 1) danni contundenti."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Non morto"
 dimensione: "Medio"
 allineamento: "neutrale malvagio"
@@ -25,6 +50,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Zombi
+
+```statblock
+monster: Zombi
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Medio Non morto, neutrale malvagio

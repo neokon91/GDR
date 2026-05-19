@@ -11,6 +11,34 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Elementale dell'aria"
+type: "Elementale"
+size: "grande"
+alignment: "neutrale"
+ac: 15
+stats: [14, 20, 14, 6, 10, 6]
+saves: {}
+skillsaves: {}
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 10, scurovisione: 18 m"
+languages: "Primordiale (Auran)"
+gear: []
+traits: 
+- name: "Forma d'aria"
+  desc: "L'elementale può entrare nello spazio di una creatura e fermarvisi. Può muoversi attraverso uno spazio stretto fino a 2,5 centimetri senza consumare movimento extra per farlo."
+actions: 
+- name: "Multiattacco"
+  desc: "L'elementale effettua due attacchi Schianto tonante."
+- name: "Schianto tonante"
+  desc: "*Tiro per colpire in mischia:* +8, portata 3 m. *Colpito:* 14 (2d8 + 5) danni da tuono."
+- name: "Vortice (ricarica 4-6)"
+  desc: "*Tiro salvezza su Forza:* CD 13, una creatura di taglia Media o inferiore nello spazio dell'elementale. *Fallimento:* 24 (4d10 + 2) danni da tuono, il bersaglio viene spinto fino a un massimo di 6 metri di distanza dall'elementale e cade a terra prono. *Successo:* danni dimezzati."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Elementale"
 dimensione: "Grande"
 allineamento: "neutrale"
@@ -25,6 +53,10 @@ bonus_competenza: 3
 statblock: true
 ---
 # Elementale dell'aria
+
+```statblock
+monster: Elementale dell'aria
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Grande Elementale, neutrale

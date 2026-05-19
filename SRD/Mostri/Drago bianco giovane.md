@@ -11,6 +11,38 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Drago bianco giovane"
+type: "Drago (cromatico)"
+size: "grande"
+alignment: "caotico malvagio"
+ac: 17
+stats: [18, 10, 18, 6, 11, 12]
+saves: 
+  dex: 3
+  wis: 3
+skillsaves: 
+  percezione: 6
+  furtivita: 3
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 16, scurovisione: 36 m, vista_cieca: 9 m"
+languages: "Draconico"
+gear: []
+traits: 
+- name: "Camminare sul ghiaccio"
+  desc: "Il drago può muoversi sulle superfici di ghiaccio e scalarle senza bisogno di effettuare una prova di caratteristica. Inoltre, un terreno difficile costituito da ghiaccio o neve non gli costa alcun movimento aggiuntivo."
+actions: 
+- name: "Multiattacco"
+  desc: "Il drago effettua tre attacchi Squarcio."
+- name: "Squarcio"
+  desc: "*Tiro per colpire in mischia:* +7, portata 3 m. *Colpito:* 9 (2d4 + 4) danni taglienti più 2 (1d4) danni da freddo."
+- name: "Soffio di freddo (ricarica 5-6)"
+  desc: "*Tiro salvezza su Costituzione:* CD 15, tutte le creature in un cono di 9 metri. *Fallimento:* 40 (9d8) danni da freddo. *Successo:* danni dimezzati."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Drago (cromatico)"
 dimensione: "Grande"
 allineamento: "caotico malvagio"
@@ -25,6 +57,10 @@ bonus_competenza: 3
 statblock: true
 ---
 # Drago bianco giovane
+
+```statblock
+monster: Drago bianco giovane
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Grande Drago (cromatico), caotico malvagio

@@ -11,6 +11,28 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Scheletro di cavallo da guerra"
+type: "Non morto"
+size: "grande"
+alignment: "legale malvagio"
+ac: 13
+stats: [18, 12, 15, 2, 8, 5]
+saves: {}
+skillsaves: {}
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 9, scurovisione: 18 m"
+languages: "nessuna"
+gear: []
+traits: []
+actions: 
+- name: "Zoccoli"
+  desc: "*Tiro per colpire in mischia:* +6, portata 1,5 m.\n\n**Colpito:** 7 (1d6 + 4) danni contundenti\nSe il bersaglio è una creatura di taglia Grande o inferiore e lo scheletro si è mosso di 6 metri o più in linea retta verso di esso subito prima del colpo, il bersaglio cade a terra prono."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Non morto"
 dimensione: "Grande"
 allineamento: "legale malvagio"
@@ -25,6 +47,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Scheletro di cavallo da guerra
+
+```statblock
+monster: Scheletro di cavallo da guerra
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Grande Non morto, legale malvagio

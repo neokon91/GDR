@@ -11,6 +11,28 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Coccatrice"
+type: "Mostruosità"
+size: "piccola"
+alignment: "senza allineamento"
+ac: 11
+stats: [6, 12, 12, 2, 13, 5]
+saves: {}
+skillsaves: {}
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 11, scurovisione: 18 m"
+languages: "nessuna"
+gear: []
+traits: []
+actions: 
+- name: "Morso pietrificante"
+  desc: "*Tiro per colpire in mischia:* +3, portata 1,5 m. *Colpito:* 3 (1d4 + 1) danni perforanti. Se il bersaglio è una creatura, subisce il seguente effetto. *Tiro salvezza su Costituzione:* CD 11. *Primo fallimento:* il bersaglio è trattenuto. Ripete il tiro salvezza alla fine del proprio turno successivo se è ancora trattenuto e, se lo supera, l'effetto svanisce. *Secondo fallimento:* il bersaglio è pietrificato invece che trattenuto per 24 ore."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Mostruosità"
 dimensione: "Piccola"
 allineamento: "senza allineamento"
@@ -25,6 +47,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Coccatrice
+
+```statblock
+monster: Coccatrice
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Piccola Mostruosità, senza allineamento

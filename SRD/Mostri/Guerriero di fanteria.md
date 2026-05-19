@@ -11,6 +11,30 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Guerriero di fanteria"
+type: "Umanoide"
+size: "medio o piccolo"
+alignment: "neutrale"
+ac: 13
+stats: [13, 11, 11, 8, 11, 8]
+saves: {}
+skillsaves: {}
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 10"
+languages: "Comune"
+gear: ["giaco di maglia", "lancia"]
+traits: 
+- name: "Tattiche del branco"
+  desc: "Il guerriero dispone di vantaggio a un tiro per colpire contro una creatura se almeno uno dei suoi alleati si trova entro 1,5 metri dalla creatura e non è incapacitato."
+actions: 
+- name: "Lancia"
+  desc: "*Tiro per colpire in mischia o a distanza:* +3, portata 1,5 m o gittata 6/18 m. *Colpito:* 4 (1d6 + 1) danni perforanti."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Umanoide"
 dimensione: "Medio o Piccolo"
 allineamento: "neutrale"
@@ -25,6 +49,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Guerriero di fanteria
+
+```statblock
+monster: Guerriero di fanteria
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Medio o Piccolo Umanoide, neutrale

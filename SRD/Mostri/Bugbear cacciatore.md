@@ -11,6 +11,40 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Bugbear cacciatore"
+type: "Folletto (goblinoide)"
+size: "medio"
+alignment: "caotico malvagio"
+ac: 15
+stats: [17, 14, 14, 11, 12, 11]
+saves: 
+  con: 4
+  wis: 3
+skillsaves: 
+  furtivita: 6
+  sopravvivenza: 3
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 11, scurovisione: 18 m"
+languages: "Comune, Goblin"
+gear: ["giaco di maglia", "giavellotti (6)", "mazza chiodata"]
+traits: 
+- name: "Rapimento"
+  desc: "Il bugbear non ha bisogno di usare movimento extra per spostare una creatura che sta afferrando."
+actions: 
+- name: "Multiattacco"
+  desc: "Il bugbear effettua due attacchi Giavellotto o Mazza chiodata."
+- name: "Giavellotto"
+  desc: "*Tiro per colpire in mischia o a distanza:* +5, portata 3 m o gittata 9/36 m. *Colpito:* 13 (3d6 + 3) danni perforanti."
+- name: "Mazza chiodata"
+  desc: "*Tiro per colpire in mischia:* +5 (con vantaggio se il bersaglio è afferrato dal bugbear), portata 3 m. *Colpito:* 12 (2d8 + 3) danni perforanti."
+bonus_actions: 
+- name: "Presa rapida"
+  desc: "*Tiro salvezza su Destrezza:* CD 13, una creatura di taglia Media o inferiore che il bugbear è in grado di vedere entro 3 metri da sé. *Fallimento:* il bersaglio è afferrato (CD 13 per sfuggire)."
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Folletto (goblinoide)"
 dimensione: "Medio"
 allineamento: "caotico malvagio"
@@ -25,6 +59,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Bugbear cacciatore
+
+```statblock
+monster: Bugbear cacciatore
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Medio Folletto (goblinoide), caotico malvagio

@@ -11,6 +11,42 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Deva"
+type: "Celestiale (angelo)"
+size: "medio"
+alignment: "legale buono"
+ac: 17
+stats: [18, 18, 18, 17, 20, 20]
+saves: 
+  wis: 9
+  cha: 9
+skillsaves: 
+  intuizione: 9
+  percezione: 9
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 19, scurovisione: 36 m"
+languages: "tutte, telepatia 36 m"
+gear: []
+traits: 
+- name: "Resistenza alla magia"
+  desc: "Il deva dispone di vantaggio ai tiri salvezza contro incantesimi e altri effetti magici."
+- name: "Ristoro glorioso"
+  desc: "Se il deva muore al di fuori di Monte Celestia, il suo corpo scompare ed esso ne acquisisce uno nuovo all'istante, tornando in vita con tutti i suoi punti ferita da qualche parte a Monte Celestia."
+actions: 
+- name: "Multiattacco"
+  desc: "Il deva effettua due attacchi Mazza divina."
+- name: "Mazza divina"
+  desc: "*Tiro per colpire in mischia:* +8, portata 1,5 m. *Colpito:* 7 (1d6 + 4) danni contundenti più 18 (4d8) danni radiosi."
+- name: "Incantesimi"
+  desc: "Il deva lancia uno dei seguenti incantesimi, senza bisogno di componenti materiali, utilizzando Carisma come caratteristica da incantatore (CD del tiro salvezza sull'incantesimo 17):\n\n*1/giorno ciascuno:*\n- comunione\n- rianimare morti\n\n*A volontà:*\n- individuazione del bene e del male\n- trasformazione (solo in forma di bestia o umanoide, senza punti ferita temporanei ottenuti dall'incantesimo, e senza concentrazione o punti ferita temporanei per mantenere l'incantesimo)"
+bonus_actions: 
+- name: "Aiuto divino (2/giorno)"
+  desc: "Il deva lancia cura ferite, rimuovi maledizione o ristorare inferiore, utilizzando la stessa caratteristica da incantatore di Incantesimi."
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Celestiale (angelo)"
 dimensione: "Medio"
 allineamento: "legale buono"
@@ -25,6 +61,10 @@ bonus_competenza: 4
 statblock: true
 ---
 # Deva
+
+```statblock
+monster: Deva
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Medio Celestiale (angelo), legale buono

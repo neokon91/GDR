@@ -1,9 +1,15 @@
 ---
 cssclasses:
   - indice
+categoria: risorsa
+tipo: mappe
+stato: pronto
 ---
 
 # Mappe
+
+````tabs
+tab: Relazioni
 
 ## Mappe Di Relazione
 
@@ -21,11 +27,79 @@ if (pages.length) {
 }
 ```
 
+tab: Regioni
+
+## Regioni E Viaggi
+
+> [!luogo] Convenzione
+> Usa una mappa di regione quando serve scegliere percorsi, pericoli, confini, risorse o distanze approssimative.
+
+Campi consigliati nelle note mappa:
+
+- `uso: regione`
+- `mondo`
+- `luoghi`
+- `stato`
+
+```dataview
+TABLE mondo, luoghi, stato, file.mtime AS aggiornato
+FROM "Risorse/Mappe"
+WHERE uso = "regione" AND !startswith(file.name, "Prova -")
+SORT mondo ASC, file.name ASC
+```
+
+tab: Dungeon
+
+## Dungeon E Scene
+
+> [!incontro] Convenzione
+> Usa una mappa di dungeon o scena quando aiuta a gestire entrate, ostacoli, linee di vista, aree pericolose e incontri.
+
+Campi consigliati nelle note mappa:
+
+- `uso: dungeon`
+- `luogo`
+- `incontri`
+- `stato`
+
+```dataview
+TABLE luogo, incontri, stato, file.mtime AS aggiornato
+FROM "Risorse/Mappe"
+WHERE uso = "dungeon" AND !startswith(file.name, "Prova -")
+SORT luogo ASC, file.name ASC
+```
+
+tab: Fronti
+
+## Fronti E Fazioni
+
+> [!missione] Convenzione
+> Usa una mappa di fronte quando devi vedere fazioni, PNG, obiettivi, segreti e pressioni in movimento.
+
+Campi consigliati nelle note mappa:
+
+- `uso: fronte`
+- `mondo`
+- `fazioni`
+- `personaggi`
+- `missioni`
+- `stato`
+
+```dataview
+TABLE mondo, fazioni, personaggi, missioni, stato
+FROM "Risorse/Mappe"
+WHERE uso = "fronte" AND !startswith(file.name, "Prova -")
+SORT mondo ASC, file.name ASC
+```
+
+tab: Archivio
+
 ## Archivio
 
 ```dataview
-TABLE file.mtime AS aggiornato
+TABLE uso, mondo, luogo, stato, file.mtime AS aggiornato
 FROM "Risorse/Mappe"
 WHERE file.name != "Mappe" AND !startswith(file.name, "Prova -")
-SORT file.name ASC
+SORT uso ASC, mondo ASC, file.name ASC
 ```
+````

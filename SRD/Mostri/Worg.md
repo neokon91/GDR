@@ -11,6 +11,29 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Worg"
+type: "Folletto"
+size: "grande"
+alignment: "neutrale malvagio"
+ac: 13
+stats: [16, 13, 13, 7, 11, 8]
+saves: {}
+skillsaves: 
+  percezione: 4
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 14, scurovisione: 18 m"
+languages: "Goblin, Worg"
+gear: []
+traits: []
+actions: 
+- name: "Morso"
+  desc: "*Tiro per colpire in mischia:* +5, portata 1,5 m *Colpito:* 7 (1d8 + 3) danni perforanti, e il tiro per colpire successivo effettuato contro il bersaglio prima dell'inizio del turno successivo del worg dispone di vantaggio."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Folletto"
 dimensione: "Grande"
 allineamento: "neutrale malvagio"
@@ -25,6 +48,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Worg
+
+```statblock
+monster: Worg
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Grande Folletto, neutrale malvagio

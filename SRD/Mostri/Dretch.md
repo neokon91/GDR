@@ -11,6 +11,30 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Dretch"
+type: "Immondo (demone)"
+size: "piccolo"
+alignment: "caotico malvagio"
+ac: 11
+stats: [12, 11, 12, 5, 8, 3]
+saves: {}
+skillsaves: {}
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 9, scurovisione: 18 m"
+languages: "Abissale, telepatia 18 m (funziona solo le creature che capiscono l'Abissale)"
+gear: []
+traits: []
+actions: 
+- name: "Squarcio"
+  desc: "*Tiro per colpire in mischia:* +3, portata 1,5 m. *Colpito:* 4 (1d6 + 1) danni taglienti."
+- name: "Nube fetida (1/giorno)"
+  desc: "*Tiro salvezza su Costituzione:* CD 11, tutte le creature in un'emanazione di 3 metri di cui il dretch è il punto di origine. *Fallimento:* il bersaglio è avvelenato fino al termine del proprio turno successivo. Finché è avvelenata, la creatura può effettuare nel suo turno un'azione o un'azione bonus, ma non entrambe, e non può effettuare reazioni."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Immondo (demone)"
 dimensione: "Piccolo"
 allineamento: "caotico malvagio"
@@ -25,6 +49,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Dretch
+
+```statblock
+monster: Dretch
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Piccolo Immondo (demone), caotico malvagio

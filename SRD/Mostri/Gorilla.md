@@ -11,6 +11,34 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Gorilla"
+type: "Bestia"
+size: "media"
+alignment: "senza allineamento"
+ac: 12
+stats: [16, 14, 14, 6, 12, 7]
+saves: {}
+skillsaves: 
+  atletica: 5
+  percezione: 3
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 13"
+languages: "nessuna"
+gear: []
+traits: []
+actions: 
+- name: "Multiattacco"
+  desc: "Il gorilla effettua due attacchi Pugno."
+- name: "Pugno"
+  desc: "*Tiro per colpire in mischia:* +5, portata 1,5 m. *Colpito:* 5 (1d4 + 3) danni contundenti."
+- name: "Roccia (ricarica 6)"
+  desc: "*Tiro per colpire a distanza:* +5, gittata 7,5/15 m *Colpito:* 10 (2d6 + 3) danni contundenti."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Bestia"
 dimensione: "Media"
 allineamento: "senza allineamento"
@@ -25,6 +53,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Gorilla
+
+```statblock
+monster: Gorilla
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Media Bestia, senza allineamento

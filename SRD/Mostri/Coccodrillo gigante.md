@@ -11,6 +11,35 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Coccodrillo gigante"
+type: "Bestia"
+size: "enorme"
+alignment: "senza allineamento"
+ac: 14
+stats: [21, 9, 17, 2, 10, 7]
+saves: {}
+skillsaves: 
+  furtivita: 5
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 10"
+languages: "nessuna"
+gear: []
+traits: 
+- name: "Apnea"
+  desc: "Il coccodrillo può trattenere il respiro per 1 ora."
+actions: 
+- name: "Multiattacco"
+  desc: "Il coccodrillo effettua un attacco Morso e un attacco Coda."
+- name: "Coda"
+  desc: "*Tiro per colpire in mischia:* +8, portata 3 m. *Colpito:* 18 (3d8 + 5) danni contundenti. Se il bersaglio è una creatura di taglia Grande o inferiore, cade a terra prono."
+- name: "Morso"
+  desc: "*Tiro per colpire in mischia:* +8, portata 1,5 m. *Colpito:* 21 (3d10 + 5) danni perforanti. Se il bersaglio è una creatura di taglia Grande o inferiore, è afferrato (CD 15 per sfuggire). Mentre è afferrato, il bersaglio è trattenuto e non può essere bersagliato dalla Coda del coccodrillo."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Bestia"
 dimensione: "Enorme"
 allineamento: "senza allineamento"
@@ -25,6 +54,10 @@ bonus_competenza: 3
 statblock: true
 ---
 # Coccodrillo gigante
+
+```statblock
+monster: Coccodrillo gigante
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Enorme Bestia, senza allineamento

@@ -11,6 +11,42 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Drago d'oro giovane"
+type: "Drago (metallico)"
+size: "grande"
+alignment: "legale buono"
+ac: 18
+stats: [23, 14, 21, 16, 13, 20]
+saves: 
+  dex: 6
+  wis: 5
+skillsaves: 
+  furtivita: 6
+  intuizione: 5
+  percezione: 9
+  persuasione: 9
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 19, scurovisione: 36 m, vista_cieca: 9 m"
+languages: "Comune, Draconico"
+gear: []
+traits: 
+- name: "Anfibio"
+  desc: "Il drago può respirare in aria e in acqua."
+actions: 
+- name: "Multiattacco"
+  desc: "Il drago effettua tre attacchi Squarcio. Può sostituire un attacco con un utilizzo di Soffio indebolente."
+- name: "Squarcio"
+  desc: "*Tiro per colpire in mischia:* +10, portata 3 m. *Colpito:* 17 (2d10 + 6) danni taglienti."
+- name: "Soffio di fuoco (ricarica 5-6)"
+  desc: "*Tiro salvezza su Destrezza:* CD 17, tutte le creature in un cono di 9 metri. *Fallimento:* 55 (10d10) danni da fuoco. *Successo:* danni dimezzati."
+- name: "Soffio indebolente"
+  desc: "*Tiro salvezza su Forza:* CD 17, ogni creatura che al momento non è sotto l'effetto di questo soffio in un cono di 9 metri. *Fallimento:* il bersaglio subisce svantaggio alle prove con d20 basate sulla Forza e sottrae 3 (1d6) ai tiri per i danni. La creatura ripete il tiro salvezza alla fine di ogni suo turno e, se lo supera, l'effetto svanisce. Dopo 1 minuto, il tiro viene superato automaticamente."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Drago (metallico)"
 dimensione: "Grande"
 allineamento: "legale buono"
@@ -25,6 +61,10 @@ bonus_competenza: 4
 statblock: true
 ---
 # Drago d'oro giovane
+
+```statblock
+monster: Drago d'oro giovane
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Grande Drago (metallico), legale buono

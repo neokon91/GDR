@@ -11,6 +11,34 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Cavallo degli incubi"
+type: "Immondo"
+size: "grande"
+alignment: "neutrale malvagio"
+ac: 13
+stats: [18, 15, 16, 10, 13, 15]
+saves: {}
+skillsaves: {}
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 11"
+languages: "capisce l'Abissale, il Comune e l'Infernale ma non li parla"
+gear: []
+traits: 
+- name: "Conferire resistenza al fuoco"
+  desc: "Il cavallo degli incubi può conferire resistenza ai danni da fuoco a un cavaliere finché questi si trova sul cavallo."
+- name: "Illuminazione"
+  desc: "Il cavallo degli incubi emana luce intensa in un raggio di 3 metri e luce fioca per altri 3 metri."
+actions: 
+- name: "Zoccoli"
+  desc: "*Tiro per colpire in mischia:* +6, portata 1,5 m. *Colpito:* 13 (2d8 + 4) danni contundenti più 10 (3d6) danni da fuoco."
+- name: "Passo etereo"
+  desc: "Il cavallo degli incubi e un massimo di tre creature consenzienti situate entro 1,5 metri da esso si teletrasportano dal Piano Materiale al Piano Etereo o viceversa."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Immondo"
 dimensione: "Grande"
 allineamento: "neutrale malvagio"
@@ -25,6 +53,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Cavallo degli incubi
+
+```statblock
+monster: Cavallo degli incubi
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Grande Immondo, neutrale malvagio

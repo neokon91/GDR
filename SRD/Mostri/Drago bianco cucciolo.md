@@ -11,6 +11,38 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Drago bianco cucciolo"
+type: "Drago (cromatico)"
+size: "medio"
+alignment: "caotico malvagio"
+ac: 16
+stats: [14, 10, 14, 5, 10, 11]
+saves: 
+  dex: 2
+  wis: 2
+skillsaves: 
+  furtivita: 2
+  percezione: 4
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 14, scurovisione: 18 m, vista_cieca: 3 m"
+languages: "Draconico"
+gear: []
+traits: 
+- name: "Camminare sul ghiaccio"
+  desc: "Il drago può muoversi sulle superfici di ghiaccio e scalarle senza bisogno di effettuare una prova di caratteristica. Inoltre, un terreno difficile costituito da ghiaccio o neve non gli costa alcun movimento aggiuntivo."
+actions: 
+- name: "Multiattacco"
+  desc: "Il drago effettua due attacchi Squarcio."
+- name: "Squarcio"
+  desc: "*Tiro per colpire in mischia:* +4, portata 1,5 m. *Colpito:* 6 (1d8 + 2) danni taglienti più 2 (1d4) danni da freddo."
+- name: "Soffio di freddo (ricarica 5-6)"
+  desc: "*Tiro salvezza su Costituzione:* CD 12, tutte le creature in un cono di 4,5 metri. *Fallimento:* 22 (5d8) danni da freddo. *Successo:* danni dimezzati."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Drago (cromatico)"
 dimensione: "Medio"
 allineamento: "caotico malvagio"
@@ -25,6 +57,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Drago bianco cucciolo
+
+```statblock
+monster: Drago bianco cucciolo
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Medio Drago (cromatico), caotico malvagio

@@ -11,6 +11,32 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Elefante"
+type: "Bestia"
+size: "enorme"
+alignment: "senza allineamento"
+ac: 12
+stats: [22, 9, 17, 3, 11, 6]
+saves: {}
+skillsaves: {}
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 10"
+languages: "nessuna"
+gear: []
+traits: []
+actions: 
+- name: "Multiattacco"
+  desc: "L'elefante effettua due attacchi Trafiggere."
+- name: "Trafiggere"
+  desc: "*Tiro per colpire in mischia:* +8, portata 1,5 m *Colpito:* 15 (2d8 + 6) danni perforanti. Se il bersaglio è una creatura di taglia Enorme o inferiore e l'elefante si è mosso di 6 metri o più in linea retta verso di esso subito prima del colpo, il bersaglio cade a terra prono."
+bonus_actions: 
+- name: "Calpestare"
+  desc: "*Tiro salvezza su Destrezza:* CD 16, una creatura prona entro 1,5 metri. *Fallimento:* 17 (2d10 + 6) danni contundenti. *Successo:* danni dimezzati."
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Bestia"
 dimensione: "Enorme"
 allineamento: "senza allineamento"
@@ -25,6 +51,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Elefante
+
+```statblock
+monster: Elefante
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Enorme Bestia, senza allineamento

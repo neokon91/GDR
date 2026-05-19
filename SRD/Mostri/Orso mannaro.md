@@ -11,6 +11,38 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Orso mannaro"
+type: "Mostruosità (licantropo)"
+size: "media o piccola"
+alignment: "neutrale buono"
+ac: 15
+stats: [19, 10, 17, 11, 12, 12]
+saves: {}
+skillsaves: 
+  percezione: 7
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 17, scurovisione: 18 m"
+languages: "Comune (non può parlare in forma di orso)"
+gear: ["asce (4)"]
+traits: []
+actions: 
+- name: "Multiattacco"
+  desc: "L'orso mannaro effettua due attacchi, usando Ascia o Squarcio in qualsiasi combinazione."
+- name: "Può sostituire un attacco con un attacco Morso"
+- name: "Ascia (solo in forma umanoide o ibrida)"
+  desc: "*Tiro per colpire in mischia o a distanza:* +7, portata 1,5 m o gittata 6/18 m. *Colpito:* 14 (3d6 + 4) danni taglienti."
+- name: "Morso (solo in forma di orso o ibrida)"
+  desc: "*Tiro per colpire in mischia:* +7, portata 1,5 m. *Colpito:* 17 (2d12 + 4) danni perforanti. Se il bersaglio è un umanoide, subisce il seguente effetto. *Tiro salvezza su Costituzione:* CD 14. *Fallimento:* il bersaglio è maledetto. Se il bersaglio scende a 0 punti ferita, diventa un orso mannaro sotto il controllo del GM e ha 10 punti ferita. *Successo:* il bersaglio è immune alla maledizione dell'orso mannaro per 24 ore."
+- name: "Squarcio (solo in forma di orso o ibrida)"
+  desc: "*Tiro per colpire in mischia:* +7, portata 1,5 m. *Colpito:* 13 (2d8 + 4) danni taglienti."
+bonus_actions: 
+- name: "Mutaforma"
+  desc: "L'orso mannaro si trasforma in un ibrido umanoide-orso di taglia Grande o in un orso di taglia Grande, altrimenti torna alla sua forma originale di umanoide. Le sue statistiche di gioco, a eccezione della taglia, restano le stesse in ogni forma. Nessun oggetto che indossa o trasporta viene trasformato."
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Mostruosità (licantropo)"
 dimensione: "Media o Piccola"
 allineamento: "neutrale buono"
@@ -25,6 +57,10 @@ bonus_competenza: 3
 statblock: true
 ---
 # Orso mannaro
+
+```statblock
+monster: Orso mannaro
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Media o Piccola Mostruosità (licantropo), neutrale buono

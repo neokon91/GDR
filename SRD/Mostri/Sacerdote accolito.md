@@ -11,6 +11,36 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Sacerdote accolito"
+type: "Umanoide (chierico)"
+size: "medio o piccolo"
+alignment: "neutrale"
+ac: 13
+stats: [14, 10, 12, 10, 14, 11]
+saves: {}
+skillsaves: 
+  medicina: 4
+  religione: 2
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 12"
+languages: "Comune"
+gear: ["mazza", "giaco di maglia", "simbolo sacro"]
+traits: []
+actions: 
+- name: "Mazza"
+  desc: "*Tiro per colpire in mischia:* +4, portata 1,5 m *Colpito:* 5 (1d6 + 2) danni contundenti più 2 (1d4) danni radiosi."
+- name: "Fiamma radiosa"
+  desc: "*Tiro per colpire a distanza:* +4, gittata 18 m. *Colpito:* 7 (2d6) danni radiosi."
+- name: "Incantesimi"
+  desc: "Il sacerdote lancia uno dei seguenti incantesimi, utilizzando Saggezza come caratteristica da incantatore: A volontà: Luce, taumaturgia"
+bonus_actions: 
+- name: "Aiuto divino (1/giorno)"
+  desc: "Il sacerdote lancia benedizione, parola guaritrice o santuario, utilizzando la stessa caratteristica da incantatore di Incantesimi."
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Umanoide (chierico)"
 dimensione: "Medio o Piccolo"
 allineamento: "neutrale"
@@ -25,6 +55,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Sacerdote accolito
+
+```statblock
+monster: Sacerdote accolito
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Medio o Piccolo Umanoide (chierico), neutrale

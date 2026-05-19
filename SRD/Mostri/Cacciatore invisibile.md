@@ -11,6 +11,38 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Cacciatore invisibile"
+type: "Elementale"
+size: "grande"
+alignment: "neutrale"
+ac: 14
+stats: [16, 19, 14, 10, 15, 11]
+saves: {}
+skillsaves: 
+  furtivita: 10
+  percezione: 8
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 18, scurovisione: 18 m"
+languages: "Comune, Primordiale (Auran)"
+gear: []
+traits: 
+- name: "Forma d'aria"
+  desc: "Il cacciatore invisibile può entrare nello spazio di un nemico e fermarvisi. Può muoversi attraverso uno spazio stretto fino a 2,5 centimetri senza consumare movimento extra per farlo."
+- name: "Invisibilità"
+  desc: "Il cacciatore è invisibile."
+actions: 
+- name: "Multiattacco"
+  desc: "Il cacciatore invisibile effettua tre attacchi. Può sostituire un attacco con un utilizzo di Vortice."
+- name: "Colpo di vento"
+  desc: "*Tiro per colpire in mischia:* +7, portata 1,5 m. *Colpito:* 11 (2d6 + 4) danni da forza."
+- name: "Vortice"
+  desc: "*Tiro salvezza su Costituzione:* CD 14, una creatura di taglia Grande o inferiore nello spazio del cacciatore. *Fallimento:* 7 (1d8 + 3) danni da tuono, e il bersaglio è afferrato (CD 13 per sfuggire). Finché la presa perdura, il bersaglio non può lanciare incantesimi con una componente verbale, e subisce 7 (2d6) danni da tuono all'inizio di ogni turno del cacciatore."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Elementale"
 dimensione: "Grande"
 allineamento: "neutrale"
@@ -25,6 +57,10 @@ bonus_competenza: 3
 statblock: true
 ---
 # Cacciatore invisibile
+
+```statblock
+monster: Cacciatore invisibile
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Grande Elementale, neutrale

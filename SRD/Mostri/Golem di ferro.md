@@ -11,6 +11,40 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Golem di ferro"
+type: "Costrutto"
+size: "grande"
+alignment: "senza allineamento"
+ac: 20
+stats: [24, 9, 20, 3, 11, 1]
+saves: {}
+skillsaves: {}
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 10, scurovisione: 36 m"
+languages: "capisce il Comune più altre due lingue ma non le parla"
+gear: []
+traits: 
+- name: "Assorbimento del fuoco"
+  desc: "Ogni volta che il golem subisce danni da fuoco, recupera un numero di punti ferita pari ai danni da fuoco inflitti."
+- name: "Forma immutabile"
+  desc: "Il golem non può mutare forma."
+- name: "Resistenza alla magia"
+  desc: "Il golem dispone di vantaggio ai tiri salvezza contro incantesimi e altri effetti magici."
+actions: 
+- name: "Multiattacco"
+  desc: "Il golem effettua due attacchi, usando Braccio affilato o Dardo di fuoco in qualsiasi combinazione."
+- name: "Braccio affilato"
+  desc: "*Tiro per colpire in mischia:* +12, portata 3 m. *Colpito:* 20 (3d8 + 7) danni taglienti più 10 (3d6) danni da fuoco."
+- name: "Dardo di fuoco"
+  desc: "*Tiro per colpire a distanza:* +10, gittata 36 m. *Colpito:* 36 (8d8) danni da fuoco."
+- name: "Soffio di veleno (ricarica 6)"
+  desc: "*Tiro salvezza su Costituzione:* CD 18, tutte le creature in un cono di 18 metri. *Fallimento:* 55 (10d10) danni da veleno. *Successo:* danni dimezzati."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Costrutto"
 dimensione: "Grande"
 allineamento: "senza allineamento"
@@ -25,6 +59,10 @@ bonus_competenza: 5
 statblock: true
 ---
 # Golem di ferro
+
+```statblock
+monster: Golem di ferro
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Grande Costrutto, senza allineamento

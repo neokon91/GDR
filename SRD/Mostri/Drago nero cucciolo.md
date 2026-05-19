@@ -11,6 +11,38 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Drago nero cucciolo"
+type: "Drago (cromatico)"
+size: "medio"
+alignment: "caotico malvagio"
+ac: 17
+stats: [15, 14, 13, 10, 11, 13]
+saves: 
+  dex: 4
+  wis: 2
+skillsaves: 
+  furtivita: 4
+  percezione: 4
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 14, scurovisione: 18 m, vista_cieca: 3 m"
+languages: "Draconico"
+gear: []
+traits: 
+- name: "Anfibio"
+  desc: "Il drago può respirare in aria e in acqua."
+actions: 
+- name: "Multiattacco"
+  desc: "Il drago effettua due attacchi Squarcio."
+- name: "Squarcio"
+  desc: "*Tiro per colpire in mischia:* +4, portata 1,5 m. *Colpito:* 5 (1d6 + 2) danni taglienti più 2 (1d4) danni da acido."
+- name: "Soffio di acido (ricarica 5-6)"
+  desc: "*Tiro salvezza su Destrezza:* CD 11, tutte le creature in una linea lunga 4,5 metri e larga 1,5 metri. *Fallimento:* 22 (5d8) danni da acido. *Successo:* danni dimezzati."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Drago (cromatico)"
 dimensione: "Medio"
 allineamento: "caotico malvagio"
@@ -25,6 +57,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Drago nero cucciolo
+
+```statblock
+monster: Drago nero cucciolo
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Medio Drago (cromatico), caotico malvagio

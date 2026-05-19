@@ -11,6 +11,50 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Drago verde antico"
+type: "Drago (cromatico)"
+size: "mastodontico"
+alignment: "legale malvagio"
+ac: 21
+stats: [27, 12, 25, 20, 17, 22]
+saves: 
+  dex: 8
+  wis: 10
+skillsaves: 
+  furtivita: 8
+  inganno: 13
+  percezione: 17
+  persuasione: 13
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 27, scurovisione: 36 m, vista_cieca: 18 m"
+languages: "Comune, Draconico"
+gear: []
+traits: 
+- name: "Anfibio"
+  desc: "Il drago può respirare in aria e in acqua."
+- name: "Resistenza leggendaria (4/giorno o 5/giorno nella tana)"
+  desc: "Se il drago fallisce un tiro salvezza, può scegliere di superarlo comunque."
+actions: 
+- name: "Multiattacco"
+  desc: "Il drago effettua tre attacchi Squarcio. Può sostituire un attacco con un utilizzo di Incantesimi per lanciare aculeo mentale (di 5º livello)."
+- name: "Squarcio"
+  desc: "*Tiro per colpire in mischia:* +15, portata 4,5 m. *Colpito:* 17 (2d6 + 8) danni taglienti più 10 (3d6) danni da veleno."
+- name: "Incantesimi"
+  desc: "Il drago lancia uno dei seguenti incantesimi, senza bisogno di componenti materiali, utilizzando Carisma come caratteristica da incantatore (CD del tiro salvezza sull'incantesimo 21):\n\n*1/giorno ciascuno:*\n- costrizione\n- modificare memoria\n\n*A volontà:*\n- aculeo mentale (di 5º livello)\n- individuazione del magico"
+- name: "Soffio di veleno (ricarica 5-6)"
+  desc: "*Tiro salvezza su Costituzione:* CD 22, tutte le creature in un cono di 27 metri. *Fallimento:* 77 (22d6) danni da veleno. *Successo:* danni dimezzati."
+bonus_actions: []
+reactions: []
+legendary_actions: 
+- name: "Balzo"
+  desc: "Il drago si muove fino a metà della sua velocità, ed effettua un attacco Squarcio."
+- name: "Invasione mentale"
+  desc: "Il drago usa Incantesimi per lanciare aculeo mentale (di 5º livello)."
+- name: "Miasma nocivo"
+  desc: "*Tiro salvezza su Costituzione:* CD 21, tutte le creature in una sfera di 9 metri di raggio centrata su un punto che il drago è in grado di vedere entro 27 metri. *Fallimento:* 17 (5d6) danni da veleno, e il bersaglio subisce una penalità di -2 alla CA fino al termine del proprio turno successivo. *Fallimento o successo:* il drago non può ripetere quest'azione fino all'inizio del proprio turno successivo."
+lair_actions: []
 tipo_creatura: "Drago (cromatico)"
 dimensione: "Mastodontico"
 allineamento: "legale malvagio"
@@ -25,6 +69,10 @@ bonus_competenza: 7
 statblock: true
 ---
 # Drago verde antico
+
+```statblock
+monster: Drago verde antico
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Mastodontico Drago (cromatico), legale malvagio

@@ -11,6 +11,31 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Aquila gigante"
+type: "Celestiale"
+size: "grande"
+alignment: "neutrale buono"
+ac: 13
+stats: [16, 17, 13, 8, 14, 10]
+saves: {}
+skillsaves: 
+  percezione: 6
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 16"
+languages: "Celestiale, capisce il Comune e il Primordiale (Auran) ma non li parla"
+gear: []
+traits: []
+actions: 
+- name: "Multiattacco"
+  desc: "L'aquila effettua due attacchi Squarcio."
+- name: "Squarcio"
+  desc: "*Tiro per colpire in mischia:* +5, portata 1,5 m. *Colpito:* 5 (1d4 + 3) danni taglienti più 3 (1d6) danni radiosi."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Celestiale"
 dimensione: "Grande"
 allineamento: "neutrale buono"
@@ -25,6 +50,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Aquila gigante
+
+```statblock
+monster: Aquila gigante
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Grande Celestiale, neutrale buono

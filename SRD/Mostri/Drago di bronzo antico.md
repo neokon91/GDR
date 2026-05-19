@@ -11,6 +11,51 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Drago di bronzo antico"
+type: "Drago (metallico)"
+size: "mastodontico"
+alignment: "legale buono"
+ac: 22
+stats: [29, 10, 27, 18, 17, 25]
+saves: 
+  dex: 7
+  wis: 10
+skillsaves: 
+  furtivita: 7
+  intuizione: 10
+  percezione: 17
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 27, scurovisione: 36 m, vista_cieca: 18 m"
+languages: "Comune, Draconico"
+gear: []
+traits: 
+- name: "Anfibio"
+  desc: "Il drago può respirare in aria e in acqua."
+- name: "Resistenza leggendaria (4/giorno o 5/giorno nella tana)"
+  desc: "Se il drago fallisce un tiro salvezza, può scegliere di superarlo comunque."
+actions: 
+- name: "Multiattacco"
+  desc: "Il drago effettua tre attacchi Squarcio. Può sostituire un attacco con un utilizzo di (A) Soffio repulsivo o (B) Incantesimi per lanciare dardo tracciante (di 2º livello)."
+- name: "Squarcio"
+  desc: "*Tiro per colpire in mischia:* +16, portata 4,5 m. *Colpito:* 18 (2d8 + 9) danni taglienti più 9 (2d8) danni da fulmine."
+- name: "Incantesimi"
+  desc: "Il drago lancia uno dei seguenti incantesimi, senza bisogno di componenti materiali, utilizzando Carisma come caratteristica da incantatore (CD del tiro salvezza sull'incantesimo 22, +14 al tiro per colpire degli attacchi con incantesimo):\n\n*A volontà:*\n- dardo tracciante (di 2º livello)\n- individuazione del magico\n- parlare con gli animali\n- taumaturgia\n- trasformazione (solo in forma di bestia o umanoide, senza punti ferita temporanei ottenuti dall'incantesimo, e senza concentrazione o punti ferita temporanei per mantenere l'incantesimo)\n\n*1/giorno ciascuno:*\n- controllare acqua\n- individuazione dei pensieri\n- respirare sott'acqua\n- scrutare"
+- name: "Soffio di fulmini (ricarica 5-6)"
+  desc: "*Tiro salvezza su Destrezza:* CD 23, tutte le creature in una linea lunga 36 metri e larga 3 metri. *Fallimento:* 82 (15d10) danni da fulmine. *Successo:* danni dimezzati."
+- name: "Soffio repulsivo"
+  desc: "*Tiro salvezza su Forza:* CD 23, tutte le creature in un cono di 9 metri. *Fallimento:* il bersaglio viene spinto fino a un massimo di 18 metri di distanza dal drago e cade a terra prono."
+bonus_actions: []
+reactions: []
+legendary_actions: 
+- name: "Balzo"
+  desc: "Il drago si muove fino a metà della sua velocità, ed effettua un attacco Squarcio."
+- name: "Luce guida"
+  desc: "Il drago usa Incantesimi per lanciare dardo tracciante (di 2º livello)."
+- name: "Rombo di tuono"
+  desc: "*Tiro salvezza su Costituzione:* CD 22, tutte le creature in una sfera di 6 metri di raggio centrata su un punto che il drago è in grado di vedere entro 36 metri. *Fallimento:* 13 (3d8) danni da tuono, e il bersaglio è assordato fino al termine del proprio turno successivo."
+lair_actions: []
 tipo_creatura: "Drago (metallico)"
 dimensione: "Mastodontico"
 allineamento: "legale buono"
@@ -25,6 +70,10 @@ bonus_competenza: 7
 statblock: true
 ---
 # Drago di bronzo antico
+
+```statblock
+monster: Drago di bronzo antico
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Mastodontico Drago (metallico), legale buono

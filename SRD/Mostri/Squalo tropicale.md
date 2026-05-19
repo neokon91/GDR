@@ -11,6 +11,33 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Squalo tropicale"
+type: "Bestia"
+size: "media"
+alignment: "senza allineamento"
+ac: 12
+stats: [14, 15, 13, 1, 10, 4]
+saves: {}
+skillsaves: 
+  percezione: 2
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 12, vista_cieca: 9 m"
+languages: "nessuna"
+gear: []
+traits: 
+- name: "Tattiche del branco"
+  desc: "Lo squalo dispone di vantaggio a un tiro per colpire contro una creatura se almeno uno dei suoi alleati si trova entro 1,5 metri dalla creatura e non è incapacitato."
+- name: "Respirare sott'acqua"
+  desc: "Lo squalo può respirare soltanto sott'acqua."
+actions: 
+- name: "Morso"
+  desc: "*Tiro per colpire in mischia:* +4, portata 1,5 m. *Colpito:* 7 (2d4 + 2) danni perforanti."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Bestia"
 dimensione: "Media"
 allineamento: "senza allineamento"
@@ -25,6 +52,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Squalo tropicale
+
+```statblock
+monster: Squalo tropicale
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Media Bestia, senza allineamento

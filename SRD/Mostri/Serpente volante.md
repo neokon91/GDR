@@ -11,6 +11,30 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Serpente volante"
+type: "Mostruosità"
+size: "minuscola"
+alignment: "senza allineamento"
+ac: 14
+stats: [4, 15, 11, 2, 12, 5]
+saves: {}
+skillsaves: {}
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 11, vista_cieca: 3 m"
+languages: "nessuna"
+gear: []
+traits: 
+- name: "Volo sfuggente"
+  desc: "Il serpente non provoca attacchi di opportunità quando vola oltre la portata di un nemico."
+actions: 
+- name: "Morso"
+  desc: "*Tiro per colpire in mischia:* +4, portata 1,5 m. *Colpito:* 1 danno perforante più 5 (2d4) danni da veleno."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Mostruosità"
 dimensione: "Minuscola"
 allineamento: "senza allineamento"
@@ -25,6 +49,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Serpente volante
+
+```statblock
+monster: Serpente volante
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Minuscola Mostruosità, senza allineamento

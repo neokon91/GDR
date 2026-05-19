@@ -11,6 +11,28 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Serpente velenoso"
+type: "Bestia"
+size: "minuscola"
+alignment: "senza allineamento"
+ac: 12
+stats: [2, 15, 11, 1, 10, 3]
+saves: {}
+skillsaves: {}
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 10, vista_cieca: 3 m"
+languages: "nessuna"
+gear: []
+traits: []
+actions: 
+- name: "Morso"
+  desc: "*Tiro per colpire in mischia:* +4, portata 1,5 m *Colpito:* 4 (1d4 + 2) danni perforanti più 3 (1d6) danni da veleno."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Bestia"
 dimensione: "Minuscola"
 allineamento: "senza allineamento"
@@ -25,6 +47,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Serpente velenoso
+
+```statblock
+monster: Serpente velenoso
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Minuscola Bestia, senza allineamento

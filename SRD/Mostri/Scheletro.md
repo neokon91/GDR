@@ -11,6 +11,30 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Scheletro"
+type: "Non morto"
+size: "medio"
+alignment: "legale malvagio"
+ac: 14
+stats: [10, 16, 15, 6, 8, 5]
+saves: {}
+skillsaves: {}
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 9, scurovisione: 18 m"
+languages: "capisce il Comune più un'altra lingua ma non le parla"
+gear: ["arco corto", "spada corta"]
+traits: []
+actions: 
+- name: "Spada corta"
+  desc: "*Tiro per colpire in mischia:* +5, portata 1,5 m *Colpito:* 6 (1d6 + 3) danni perforanti."
+- name: "Arco corto"
+  desc: "*Tiro per colpire a distanza:* +5, portata 24/96 m *Colpito:* 6 (1d6 + 3) danni perforanti."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Non morto"
 dimensione: "Medio"
 allineamento: "legale malvagio"
@@ -25,6 +49,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Scheletro
+
+```statblock
+monster: Scheletro
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Medio Non morto, legale malvagio

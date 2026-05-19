@@ -11,6 +11,32 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Coccodrillo"
+type: "Bestia"
+size: "grande"
+alignment: "senza allineamento"
+ac: 12
+stats: [15, 10, 13, 2, 10, 5]
+saves: 
+  con: 3
+skillsaves: 
+  furtivita: 2
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 10"
+languages: "nessuna"
+gear: []
+traits: 
+- name: "Apnea"
+  desc: "Il coccodrillo può trattenere il respiro per 1 ora."
+actions: 
+- name: "Morso"
+  desc: "*Tiro per colpire in mischia:* +4, portata 1,5 m. *Colpito:* 6 (1d8 + 2) danni perforanti. Se il bersaglio è una creatura di taglia Media o inferiore, è afferrato (CD 12 per sfuggire). Mentre è afferrato, il bersaglio è anche trattenuto."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Bestia"
 dimensione: "Grande"
 allineamento: "senza allineamento"
@@ -25,6 +51,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Coccodrillo
+
+```statblock
+monster: Coccodrillo
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Grande Bestia, senza allineamento

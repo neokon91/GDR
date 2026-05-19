@@ -11,6 +11,37 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Druido"
+type: "Umanoide"
+size: "medio o piccolo"
+alignment: "neutrale"
+ac: 13
+stats: [10, 12, 13, 12, 16, 11]
+saves: {}
+skillsaves: 
+  medicina: 5
+  natura: 3
+  percezione: 5
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 15"
+languages: "Comune, Druidico, Silvano"
+gear: ["armatura di cuoio borchiato"]
+traits: []
+actions: 
+- name: "Multiattacco"
+  desc: "Il druido effettua due attacchi, usando Bastone di rampicanti o Bagliore verdeggiante in qualsiasi combinazione."
+- name: "Bastone di rampicanti"
+  desc: "*Tiro per colpire in mischia:* +5, portata 1,5 m. *Colpito:* 7 (1d8 + 3) danni contundenti più 2 (1d4) danni da veleno."
+- name: "Bagliore verdeggiante"
+  desc: "*Tiro per colpire a distanza:* +5, gittata 27 m. *Colpito:* 10 (3d6) danni radiosi."
+- name: "Incantesimi"
+  desc: "Il druido lancia uno dei seguenti incantesimi, utilizzando Saggezza come caratteristica da incantatore (CD del tiro salvezza sull'incantesimo 13):\n\n*1/giorno ciascuno:*\n- animale messaggero\n- bagliore lunare\n- passo veloce\n\n*2/giorno ciascuno:*\n- intralciare\n- onda tonante\n\n*A volontà:*\n- artificio druidico\n- parlare con gli animali"
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Umanoide"
 dimensione: "Medio o piccolo"
 allineamento: "neutrale"
@@ -25,6 +56,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Druido
+
+```statblock
+monster: Druido
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Medio o piccolo Umanoide, neutrale

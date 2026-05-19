@@ -11,6 +11,28 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Millepiedi gigante"
+type: "Bestia"
+size: "piccola"
+alignment: "senza allineamento"
+ac: 14
+stats: [5, 14, 12, 1, 7, 3]
+saves: {}
+skillsaves: {}
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 8, vista_cieca: 9 m"
+languages: "nessuna"
+gear: []
+traits: []
+actions: 
+- name: "Morso"
+  desc: "*Tiro per colpire in mischia:* +4, portata 1,5 m *Colpito:* 4 (1d4 + 2) danni perforanti, e il bersaglio è avvelenato fino all'inizio del turno successivo del millepiedi."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Bestia"
 dimensione: "Piccola"
 allineamento: "senza allineamento"
@@ -25,6 +47,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Millepiedi gigante
+
+```statblock
+monster: Millepiedi gigante
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Piccola Bestia, senza allineamento

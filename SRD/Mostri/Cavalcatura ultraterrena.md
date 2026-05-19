@@ -11,6 +11,32 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Cavalcatura ultraterrena"
+type: "Celestiale, Folletto o Immondo (a scelta)"
+size: "grande"
+alignment: "senza allineamento"
+ac: "13 + il bonus di competenza dell'incantatore"
+stats: [18, 14, 16, 6, 12, 10]
+saves: {}
+skillsaves: {}
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 11"
+languages: "comprende le lingue dell'incantatore"
+gear: []
+traits: 
+- name: "Legame con l'incantatore"
+  desc: "La cavalcatura è sotto il controllo dell'incantatore e agisce nel suo turno. Può muoversi e usare la sua reazione autonomamente, ma esegue le azioni secondo i comandi dell'incantatore."
+- name: "Tipo ultraterreno (scelta)"
+  desc: "Quando viene evocata, scegli uno dei seguenti tipi: celestiale, folletto o immondo. Il tipo può influenzare l’aspetto e alcune interazioni magiche."
+actions: 
+- name: "Zoccoli (o attacco naturale equivalente)"
+  desc: "*Tiro per colpire in mischia:* bonus pari al modificatore di attacco dell'incantesimo dell'incantatore, portata 1,5 m.  \n*Colpito:* 1d8 + 4 + il bonus di competenza dell'incantatore danni contundenti (o altro tipo appropriato alla forma)."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Celestiale, Folletto o Immondo (a scelta)"
 dimensione: "Grande"
 allineamento: "senza allineamento"
@@ -25,6 +51,10 @@ bonus_competenza: 0
 statblock: true
 ---
 # Cavalcatura ultraterrena
+
+```statblock
+monster: Cavalcatura ultraterrena
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Grande Celestiale, Folletto o Immondo (a scelta), senza allineamento

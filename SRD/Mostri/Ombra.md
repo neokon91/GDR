@@ -11,6 +11,35 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Ombra"
+type: "Non morto"
+size: "medio"
+alignment: "caotico malvagio"
+ac: 12
+stats: [6, 14, 13, 6, 10, 8]
+saves: {}
+skillsaves: 
+  furtivita: 6
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 10, scurovisione: 18 m"
+languages: "nessuna"
+gear: []
+traits: 
+- name: "Amorfo"
+  desc: "L'ombra può muoversi attraverso uno spazio stretto fino a 2,5 centimetri senza consumare movimento extra per farlo."
+- name: "Debolezza al sole"
+  desc: "Finché è esposta alla luce del sole, l'ombra subisce svantaggio alle prove con d20."
+actions: 
+- name: "Colpo prosciugante"
+  desc: "*Tiro per colpire in mischia:* +4, portata 1,5 m *Colpito:* 5 (1d6 + 2) danni necrotici, e il punteggio di Forza del bersaglio diminuisce di 1d4. Se tale punteggio arriva a 0, il bersaglio muore. Se un umanoide viene ucciso da questo attacco, sorgerà un'ombra dal suo cadavere dopo 1d4 ore."
+bonus_actions: 
+- name: "Furtività d'ombra"
+  desc: "Finché si trova in condizioni di luce fioca o oscurità, l'ombra effettua l'azione di Nascondersi."
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Non morto"
 dimensione: "Medio"
 allineamento: "caotico malvagio"
@@ -25,6 +54,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Ombra
+
+```statblock
+monster: Ombra
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Medio Non morto, caotico malvagio

@@ -11,6 +11,28 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Cavallo da tiro"
+type: "Bestia"
+size: "grande"
+alignment: "senza allineamento"
+ac: 10
+stats: [18, 10, 15, 2, 11, 7]
+saves: {}
+skillsaves: {}
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 10"
+languages: "nessuna"
+gear: []
+traits: []
+actions: 
+- name: "Zoccoli"
+  desc: "*Tiro per colpire in mischia:* +6, portata 1,5 m. *Colpito:* 6 (1d4 + 4) danni contundenti."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Bestia"
 dimensione: "Grande"
 allineamento: "senza allineamento"
@@ -25,6 +47,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Cavallo da tiro
+
+```statblock
+monster: Cavallo da tiro
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Grande Bestia, senza allineamento

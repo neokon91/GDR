@@ -11,6 +11,39 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Famiglio del vampiro"
+type: "Umanoide"
+size: "medio o piccolo"
+alignment: "neutrale malvagio"
+ac: 15
+stats: [17, 16, 15, 10, 10, 14]
+saves: 
+  dex: 5
+  wis: 2
+skillsaves: 
+  furtivita: 7
+  percezione: 4
+  persuasione: 4
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 14, scurovisione: 18 m"
+languages: "Comune più un'altra lingua"
+gear: ["pugnali (10)"]
+traits: 
+- name: "Connessione vampirica"
+  desc: "Finché il famiglio e il suo padrone vampiro si trovano sullo stesso piano di esistenza, il vampiro può comunicare con il famiglio telepaticamente ed è in grado di percepire attraverso i sensi del famiglio."
+actions: 
+- name: "Multiattacco"
+  desc: "Il famiglio effettua due attacchi Pugnale ombroso."
+- name: "Pugnale ombroso"
+  desc: "*Tiro per colpire in mischia o a distanza:* +5, portata 1,5 m o gittata 6/18 m *Colpito:* 5 (1d4 + 3) danni perforanti più 7 (3d4) danni necrotici. Se il bersaglio viene ridotto a 0 punti ferita da questo attacco, diventa stabile ma è avvelenato per 1 ora. Finché è avvelenato, il bersaglio è anche paralizzato."
+bonus_actions: 
+- name: "Agilità immortale"
+  desc: "Il famiglio effettua l'azione di Disimpegno o Scatto."
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Umanoide"
 dimensione: "Medio o Piccolo"
 allineamento: "neutrale malvagio"
@@ -25,6 +58,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Famiglio del vampiro
+
+```statblock
+monster: Famiglio del vampiro
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Medio o Piccolo Umanoide, neutrale malvagio

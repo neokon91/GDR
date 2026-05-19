@@ -11,6 +11,34 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Capitano delle guardie"
+type: "Umanoide"
+size: "medio o piccolo"
+alignment: "neutrale"
+ac: 18
+stats: [18, 14, 16, 12, 14, 13]
+saves: {}
+skillsaves: 
+  atletica: 6
+  percezione: 4
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 14"
+languages: "comune"
+gear: ["corazza di piastre", "giavellotti (6)", "scudo", "spada lunga"]
+traits: []
+actions: 
+- name: "Multiattacco"
+  desc: "La guardia effettua due attacchi, utilizzando Giavellotto o Spada lunga in qualsiasi combinazione."
+- name: "Giavellotto"
+  desc: "*Tiro per colpire in mischia o a distanza:* +6, portata 1,5 m o gittata 9/36 m. *Colpito:* 14 (3d6 + 4) danni perforanti."
+- name: "Spada lunga"
+  desc: "*Tiro per colpire in mischia:* +6, portata 1,5 m. *Colpito:* 15 (2d10 + 4) danni taglienti."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Umanoide"
 dimensione: "Medio o Piccolo"
 allineamento: "neutrale"
@@ -25,6 +53,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Capitano delle guardie
+
+```statblock
+monster: Capitano delle guardie
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Medio o Piccolo Umanoide, neutrale

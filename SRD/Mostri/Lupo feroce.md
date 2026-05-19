@@ -11,6 +11,32 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Lupo feroce"
+type: "Bestia"
+size: "grande"
+alignment: "senza allineamento"
+ac: 14
+stats: [17, 15, 15, 3, 12, 7]
+saves: {}
+skillsaves: 
+  furtivita: 4
+  percezione: 5
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 15, scurovisione: 18 m"
+languages: "nessuna"
+gear: []
+traits: 
+- name: "Tattiche del branco"
+  desc: "Il lupo dispone di vantaggio al tiro per colpire contro una creatura se almeno uno degli alleati dell'animale si trova entro 1,5 metri dalla creatura e non è incapacitato."
+actions: 
+- name: "Morso"
+  desc: "*Tiro per colpire in mischia:* +5, portata 1,5 m. *Colpito:* 8 (1d10 + 3) danni perforanti. Se il bersaglio è una creatura di taglia Grande o inferiore, cade a terra prono."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Bestia"
 dimensione: "Grande"
 allineamento: "senza allineamento"
@@ -25,6 +51,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Lupo feroce
+
+```statblock
+monster: Lupo feroce
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Grande Bestia, senza allineamento

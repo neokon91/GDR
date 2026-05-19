@@ -11,6 +11,34 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Piovra gigante"
+type: "Bestia"
+size: "grande"
+alignment: "senza allineamento"
+ac: 11
+stats: [17, 13, 13, 5, 10, 4]
+saves: {}
+skillsaves: 
+  furtivita: 5
+  percezione: 4
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 14, scurovisione: 18 m"
+languages: "nessuna"
+gear: []
+traits: 
+- name: "Respirare sott'acqua"
+  desc: "La piovra può respirare soltanto sott'acqua e può trattenere il respiro per 1 ora fuori dall'acqua."
+actions: 
+- name: "Tentacoli"
+  desc: "*Tiro per colpire in mischia:* +5, portata 3 m. *Colpito:* 10 (2d6 + 3) danni contundenti. Se il bersaglio è una creatura di taglia Media o inferiore, è afferrato (CD 13 per sfuggire) da tutti e otto i tentacoli. Mentre è afferrato, il bersaglio è anche trattenuto."
+bonus_actions: []
+reactions: 
+- name: "Nube di inchiostro (1/Giorno)"
+  desc: "Attivazione: la piovra subisce danni finché si trova sott'acqua. Esito: la piovra rilascia abbastanza inchiostro da riempire un cubo con spigolo di 3 metri intorno a sé, e può muoversi fino alla sua velocità di nuoto massima. Il cubo è pesantemente oscurato per 1 minuto, o finché una corrente forte o un altro effetto simile non disperde l'inchiostro."
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Bestia"
 dimensione: "Grande"
 allineamento: "senza allineamento"
@@ -25,6 +53,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Piovra gigante
+
+```statblock
+monster: Piovra gigante
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Grande Bestia, senza allineamento

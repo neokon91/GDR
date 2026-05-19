@@ -11,6 +11,30 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Basilisco"
+type: "Mostruosità"
+size: "media"
+alignment: "senza allineamento"
+ac: 15
+stats: [16, 8, 15, 2, 8, 7]
+saves: {}
+skillsaves: {}
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 9, scurovisione: 18 m"
+languages: "nessuna"
+gear: []
+traits: []
+actions: 
+- name: "Morso"
+  desc: "*Tiro per colpire in mischia:* +5, portata 1,5 m *Colpito:* 10 (2d6 + 3) danni perforanti più 7 (2d6) danni da veleno."
+bonus_actions: 
+- name: "Sguardo pietrificante (ricarica 4-6)"
+  desc: "*Tiro salvezza su Costituzione:* CD 12, tutte le creature in un cono di 9 metri. Se il basilisco vede il suo riflesso nel cono, deve effettuare questo tiro salvezza. *Primo fallimento:* il bersaglio è trattenuto. Ripete il tiro salvezza al termine del proprio turno successivo se è ancora trattenuto e, se lo supera, l'effetto svanisce. *Secondo fallimento:* il bersaglio è pietrificato invece che trattenuto."
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Mostruosità"
 dimensione: "Media"
 allineamento: "senza allineamento"
@@ -25,6 +49,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Basilisco
+
+```statblock
+monster: Basilisco
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Media Mostruosità, senza allineamento

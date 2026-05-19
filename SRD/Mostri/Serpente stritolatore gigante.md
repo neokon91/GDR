@@ -11,6 +11,33 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Serpente stritolatore gigante"
+type: "Bestia"
+size: "enorme"
+alignment: "senza allineamento"
+ac: 12
+stats: [19, 14, 12, 1, 10, 3]
+saves: {}
+skillsaves: 
+  percezione: 2
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 12, vista_cieca: 3 m"
+languages: "nessuna"
+gear: []
+traits: []
+actions: 
+- name: "Multiattacco"
+  desc: "Il serpente effettua un attacco Morso e usa Stritolare."
+- name: "Morso"
+  desc: "*Tiro per colpire in mischia:* +6, portata 3 m. *Colpito:* 11 (2d6 + 4) danni perforanti."
+- name: "Stritolare"
+  desc: "*Tiro salvezza su Forza:* CD 14, una creatura di taglia Grande o inferiore che il serpente è in grado di vedere entro 3 metri. *Fallimento:* 13 (2d8 + 4) danni contundenti, e il bersaglio è afferrato (CD 14 per sfuggire)."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Bestia"
 dimensione: "Enorme"
 allineamento: "senza allineamento"
@@ -25,6 +52,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Serpente stritolatore gigante
+
+```statblock
+monster: Serpente stritolatore gigante
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Enorme Bestia, senza allineamento

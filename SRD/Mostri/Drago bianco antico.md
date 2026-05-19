@@ -11,6 +11,44 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Drago bianco antico"
+type: "Drago (cromatico)"
+size: "mastodontico"
+alignment: "caotico malvagio"
+ac: 20
+stats: [26, 10, 26, 10, 13, 18]
+saves: 
+  dex: 6
+  wis: 7
+skillsaves: 
+  furtivita: 6
+  percezione: 13
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 23, scurovisione: 36 m, vista_cieca: 18 m"
+languages: "Comune, Draconico"
+gear: []
+traits: 
+- name: "Camminare sul ghiaccio"
+  desc: "Il drago può muoversi sulle superfici di ghiaccio e scalarle senza bisogno di effettuare una prova di caratteristica. Inoltre, un terreno difficile costituito da ghiaccio o neve non gli costa alcun movimento aggiuntivo."
+actions: 
+- name: "Multiattacco"
+  desc: "Il drago effettua tre attacchi Squarcio."
+- name: "Squarcio"
+  desc: "*Tiro per colpire in mischia:* +14, portata 4,5 m. *Colpito:* 17 (2d8 + 8) danni taglienti più 7 (2d6) danni da freddo."
+- name: "Soffio di freddo (ricarica 5-6)"
+  desc: "*Tiro salvezza su Costituzione:* CD 22, tutte le creature in un cono di 27 metri. *Fallimento:* 63 (14d8) danni da freddo. *Successo:* danni dimezzati."
+bonus_actions: []
+reactions: []
+legendary_actions: 
+- name: "Esplosione congelante"
+  desc: "*Tiro salvezza su Costituzione:* CD 20, tutte le creature in una sfera di 9 metri di raggio centrata su un punto che il drago è in grado di vedere entro 36 metri. *Fallimento:* 14 (4d6) danni da freddo, e la velocità del bersaglio è pari a 0 fino al termine del turno successivo del bersaglio. *Fallimento o successo:* il drago non può ripetere quest'azione fino all'inizio del proprio turno successivo."
+- name: "Presenza terrificante"
+  desc: "Il drago lancia paura senza bisogno di componenti materiali, utilizzando Carisma come caratteristica da incantatore (CD del tiro salvezza sull'incantesimo 18). Il drago non può ripetere quest'azione fino all'inizio del proprio turno successivo."
+- name: "Balzo"
+  desc: "Il drago si muove fino a metà della sua velocità ed effettua un attacco Squarcio."
+lair_actions: []
 tipo_creatura: "Drago (cromatico)"
 dimensione: "Mastodontico"
 allineamento: "caotico malvagio"
@@ -25,6 +63,10 @@ bonus_competenza: 6
 statblock: true
 ---
 # Drago bianco antico
+
+```statblock
+monster: Drago bianco antico
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Mastodontico Drago (cromatico), caotico malvagio

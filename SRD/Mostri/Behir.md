@@ -11,6 +11,38 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Behir"
+type: "Mostruosità"
+size: "enorme"
+alignment: "neutrale malvagio"
+ac: 17
+stats: [23, 16, 18, 7, 14, 12]
+saves: {}
+skillsaves: 
+  furtivita: 7
+  percezione: 6
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 16, scurovisione: 27 m"
+languages: "Draconico"
+gear: []
+traits: []
+actions: 
+- name: "Multiattacco"
+  desc: "Il behir effettua un attacco Morso e usa Stritolare."
+- name: "Morso"
+  desc: "*Tiro per colpire in mischia:* +10, portata 3 m. *Colpito:* 19 (2d12 + 6) danni perforanti più 11 (2d10) danni da fulmine."
+- name: "Soffio di fulmini (ricarica 5-6)"
+  desc: "*Tiro salvezza su Destrezza:* CD 16, tutte le creature in una linea lunga 27 metri e larga 1,5 metri. *Fallimento:* 66 (12d10) danni da fulmine. *Successo:* danni dimezzati."
+- name: "Stritolare"
+  desc: "*Tiro salvezza su Forza:* CD 18, una creatura di taglia Grande o inferiore che il behir è in grado di vedere entro 1,5 metri. *Fallimento:* 28 (5d8 + 6) danni contundenti. Il bersaglio è afferrato (CD 16 per sfuggire) ed è trattenuto finché la presa perdura."
+bonus_actions: 
+- name: "Inghiottire"
+  desc: "*Tiro salvezza su Destrezza:* CD 18, una creatura di taglia Grande o inferiore afferrata dal behir (il behir può inghiottire solo una creatura alla volta). *Fallimento:* Il behir inghiotte il bersaglio, che non è più afferrato. Finché è inghiottita, la creatura è accecata e trattenuta, beneficia di copertura totale contro gli attacchi e altri effetti al di fuori del behir, e subisce 21 (6d6) danni da acido all'inizio di ogni turno del behir. Se il behir subisce 30 o più danni in un singolo turno dalla creatura inghiottita, deve superare un tiro salvezza su Costituzione con CD 14 alla fine di quel turno, altrimenti rigurgita la creatura, che cade prona in uno spazio entro 3 metri dal behir. Se il behir muore, la creatura inghiottita non è più trattenuta e può fuggire dal cadavere usando 4,5 metri di movimento, uscendo prona."
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Mostruosità"
 dimensione: "Enorme"
 allineamento: "neutrale malvagio"
@@ -25,6 +57,10 @@ bonus_competenza: 4
 statblock: true
 ---
 # Behir
+
+```statblock
+monster: Behir
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Enorme Mostruosità, neutrale malvagio

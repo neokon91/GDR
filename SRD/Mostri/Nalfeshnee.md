@@ -11,6 +11,44 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Nalfeshnee"
+type: "Immondo (demone)"
+size: "grande"
+alignment: "caotico malvagio"
+ac: 18
+stats: [21, 10, 22, 19, 12, 15]
+saves: 
+  con: 11
+  int: 9
+  wis: 6
+  cha: 7
+skillsaves: {}
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 11, vista_pura: 36 m"
+languages: "Abissale, telepatia 36 m"
+gear: []
+traits: 
+- name: "Resistenza alla magia"
+  desc: "Il nalfeshnee dispone di vantaggio ai tiri salvezza contro incantesimi e altri effetti magici."
+- name: "Ristoro demoniaco"
+  desc: "Se il nalfeshnee muore al di fuori dell'Abisso, il suo corpo si dissolve diventando icore e ne acquisisce uno nuovo all'istante, tornando in vita con tutti i suoi punti ferita da qualche parte nell'Abisso."
+actions: 
+- name: "Multiattacco"
+  desc: "Il nalfeshnee effettua tre attacchi Squarcio."
+- name: "Squarcio"
+  desc: "*Tiro per colpire in mischia:* +10, portata 3 m. *Colpito:* 16 (2d10 + 5) danni taglienti più 11 (2d10) danni da forza."
+- name: "Teletrasporto"
+  desc: "Il nalfeshnee si teletrasporta fino a massimo di 36 metri in uno spazio libero che è in grado di vedere."
+bonus_actions: 
+- name: "Nube di orrore (ricarica 5-6)"
+  desc: "*Tiro salvezza su Saggezza:* CD 15, tutte le creature in un'emanazione di 4,5 metri di cui il nalfeshnee è il punto di origine. *Fallimento:* 28 (8d6) danni psichici, e il bersaglio è spaventato per 1 minuto, finché non subisce danni, o finché non termina il proprio turno con il nalfeshnee fuori dal proprio campo visivo. *Successo:* il bersaglio è immune a Nube di orrore di questo nalfeshnee per 24 ore."
+reactions: 
+- name: "Inseguimento"
+  desc: "Attivazione: un'altra creatura che il nalfeshnee è in grado di vedere termina il proprio movimento entro 36 metri dal nalfeshnee. Esito: il nalfeshnee usa Teletrasporto, ma lo spazio di destinazione deve trovarsi entro 3 metri dalla creatura che ha provocato la reazione."
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Immondo (demone)"
 dimensione: "Grande"
 allineamento: "caotico malvagio"
@@ -25,6 +63,10 @@ bonus_competenza: 5
 statblock: true
 ---
 # Nalfeshnee
+
+```statblock
+monster: Nalfeshnee
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Grande Immondo (demone), caotico malvagio

@@ -11,6 +11,31 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Daino"
+type: "Bestia"
+size: "media"
+alignment: "senza allineamento"
+ac: 13
+stats: [11, 16, 11, 2, 14, 5]
+saves: {}
+skillsaves: 
+  percezione: 4
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 14, scurovisione: 18 m"
+languages: "nessuna"
+gear: []
+traits: 
+- name: "Agile"
+  desc: "Il daino non provoca attacchi di opportunità quando esce dalla portata di un nemico."
+actions: 
+- name: "Sfondamento"
+  desc: "*Tiro per colpire in mischia:* +2, portata 1,5 m. *Colpito:* 2 (1d4) danni contundenti."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Bestia"
 dimensione: "Media"
 allineamento: "senza allineamento"
@@ -25,6 +50,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Daino
+
+```statblock
+monster: Daino
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Media Bestia, senza allineamento

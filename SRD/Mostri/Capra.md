@@ -11,6 +11,30 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Capra"
+type: "Bestia"
+size: "media"
+alignment: "senza allineamento"
+ac: 10
+stats: [11, 10, 11, 2, 10, 5]
+saves: 
+  str: 2
+skillsaves: 
+  percezione: 2
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 12, scurovisione: 18 m"
+languages: "nessuna"
+gear: []
+traits: []
+actions: 
+- name: "Sfondamento"
+  desc: "*Tiro per colpire in mischia:* +2, portata 1,5 m. *Colpito:* 1 danno contundente, o 2 (1d4) danni contundenti se la capra si è mossa di 6 metri o più in linea retta verso il bersaglio subito prima del colpo."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Bestia"
 dimensione: "Media"
 allineamento: "senza allineamento"
@@ -25,6 +49,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Capra
+
+```statblock
+monster: Capra
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Media Bestia, senza allineamento

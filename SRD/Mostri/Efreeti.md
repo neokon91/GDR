@@ -11,6 +11,42 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Efreeti"
+type: "Elementale (genio)"
+size: "grande"
+alignment: "neutrale"
+ac: 17
+stats: [22, 12, 24, 16, 15, 19]
+saves: 
+  wis: 6
+  cha: 8
+skillsaves: {}
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 12, scurovisione: 36 m"
+languages: "Primordiale (Ignan)"
+gear: []
+traits: 
+- name: "Desideri"
+  desc: "L'efreeti ha una probabilità del 30% di conoscere l'incantesimo desiderio. Se l'efreeti lo conosce, può lanciarlo solo per conto di una creatura diversa da un genio che comunica un desiderio in un modo che l'efreeti è in grado di comprendere. Se l'efreeti lancia l'incantesimo per conto della creatura, non subisce alcuna conseguenza derivante dal lancio dell'incantesimo. Una volta che l'efreeti l'ha lanciato tre volte, non può farlo di nuovo per 365 giorni."
+- name: "Resistenza alla magia"
+  desc: "L'efreeti dispone di vantaggio ai tiri salvezza contro incantesimi e altri effetti magici."
+- name: "Ristoro elementale"
+  desc: "Se l'efreeti muore al di fuori del Piano Elementale del Fuoco, il suo corpo si dissolve in cenere ed esso ne acquisisce uno nuovo dopo 1d4 giorni, tornando in vita con tutti i suoi punti ferita da qualche parte sul Piano Elementale del Fuoco."
+actions: 
+- name: "Multiattacco"
+  desc: "L'efreeti effettua tre attacchi, usando Lama cocente o Scagliare fiamma in qualsiasi combinazione."
+- name: "Lama cocente"
+  desc: "*Tiro per colpire in mischia:* +10, portata 1,5 m. *Colpito:* 13 (2d6 + 6) danni taglienti più 13 (2d12) danni da fuoco."
+- name: "Scagliare fiamma"
+  desc: "*Tiro per colpire a distanza:* +8, gittata 36 m. *Colpito:* 24 (7d6) danni da fuoco."
+- name: "Incantesimi"
+  desc: "L'efreeti lancia uno dei seguenti incantesimi, senza bisogno di componenti materiali, utilizzando Carisma come caratteristica da incantatore (CD del tiro salvezza sull'incantesimo 16):\n\n*1/giorno ciascuno:*\n- forma gassosa\n- immagine maggiore\n- invisibilità\n- linguaggi\n- muro di fuoco (di 7º livello)\n- spostamento planare\n\n*A volontà:*\n- elementalismo\n- individuazione del magico"
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Elementale (genio)"
 dimensione: "Grande"
 allineamento: "neutrale"
@@ -25,6 +61,10 @@ bonus_competenza: 4
 statblock: true
 ---
 # Efreeti
+
+```statblock
+monster: Efreeti
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Grande Elementale (genio), neutrale

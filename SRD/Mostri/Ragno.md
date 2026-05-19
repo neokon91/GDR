@@ -11,6 +11,33 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Ragno"
+type: "Bestia"
+size: "minuscola"
+alignment: "senza allineamento"
+ac: 12
+stats: [2, 14, 8, 1, 10, 2]
+saves: {}
+skillsaves: 
+  furtivita: 4
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 10, scurovisione: 9 m"
+languages: "nessuna"
+gear: []
+traits: 
+- name: "Andatura sulla ragnatela"
+  desc: "Il ragno ignora le restrizioni di movimento causate dalle ragnatele e conosce l'ubicazione di qualsiasi altra creatura a contatto con la medesima ragnatela."
+- name: "Movimenti del ragno"
+  desc: "Il ragno può scalare le superfici difficili, compresi i soffitti, senza effettuare una prova di caratteristica."
+actions: 
+- name: "Morso"
+  desc: "*Tiro per colpire in mischia:* +4, portata 1,5 m *Colpito:* 1 danno perforante più 2 (1d4) danni da veleno."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Bestia"
 dimensione: "Minuscola"
 allineamento: "senza allineamento"
@@ -25,6 +52,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Ragno
+
+```statblock
+monster: Ragno
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Minuscola Bestia, senza allineamento

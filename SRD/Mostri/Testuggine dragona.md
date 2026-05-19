@@ -11,6 +11,38 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Testuggine dragona"
+type: "Drago"
+size: "mastodonico"
+alignment: "neutrale"
+ac: 20
+stats: [25, 10, 20, 10, 12, 12]
+saves: 
+  con: 11
+  wis: 7
+skillsaves: {}
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 11, scurovisione: 36 m"
+languages: "Draconico, Primordiale (Aquan)"
+gear: []
+traits: 
+- name: "Anfibio"
+  desc: "Il drago può respirare in aria e in acqua."
+actions: 
+- name: "Multiattacco"
+  desc: "La testuggine dragona effettua tre attacchi Morso. Può sostituire un attacco con un attacco Coda."
+- name: "Coda"
+  desc: "*Tiro per colpire in mischia:* +13, portata 4,5 m. *Colpito:* 18 (2d10 + 7) danni contundenti. Se il bersaglio è una creatura di taglia Enorme o inferiore, cade a terra prono."
+- name: "Morso"
+  desc: "*Tiro per colpire in mischia:* +13, portata 4,5 m. *Colpito:* 23 (3d10 + 7) danni perforanti più 7 (2d6) danni da fuoco. Trovarsi sott'acqua non conferisce alcuna resistenza contro questi danni da fuoco."
+- name: "Soffio di vapore (ricarica 5-6)"
+  desc: "*Tiro salvezza su Costituzione:* CD 19, tutte le creature in un cono di 18 metri. *Fallimento:* 56 (16d6) danni da fuoco. *Successo:* danni dimezzati. *Fallimento o successo:* trovarsi sott'acqua non conferisce alcuna resistenza contro questi danni da fuoco."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Drago"
 dimensione: "Mastodonico"
 allineamento: "neutrale"
@@ -25,6 +57,10 @@ bonus_competenza: 6
 statblock: true
 ---
 # Testuggine dragona
+
+```statblock
+monster: Testuggine dragona
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Mastodonico Drago, neutrale

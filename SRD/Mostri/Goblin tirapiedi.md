@@ -11,6 +11,31 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Goblin tirapiedi"
+type: "Folletto (goblinoide)"
+size: "piccolo"
+alignment: "caotico neutrale"
+ac: 12
+stats: [8, 15, 10, 10, 8, 8]
+saves: {}
+skillsaves: 
+  furtivita: 6
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 9, scurovisione: 18 m"
+languages: "Comune, Goblin"
+gear: ["pugnali (3)"]
+traits: []
+actions: 
+- name: "Pugnale"
+  desc: "*Tiro per colpire in mischia o a distanza:* +4, portata 1,5 m o gittata 6/18 m. *Colpito:* 4 (1d4 + 2) danni perforanti."
+bonus_actions: 
+- name: "Fuga agile"
+  desc: "Il goblin effettua l'azione di Disimpegno o Nascondersi."
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Folletto (goblinoide)"
 dimensione: "Piccolo"
 allineamento: "caotico neutrale"
@@ -25,6 +50,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Goblin tirapiedi
+
+```statblock
+monster: Goblin tirapiedi
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Piccolo Folletto (goblinoide), caotico neutrale

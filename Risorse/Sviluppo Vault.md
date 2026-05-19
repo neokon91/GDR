@@ -18,6 +18,12 @@ Il vault deve funzionare per una persona che:
 - ha bisogno di trovare informazioni rapidamente durante il gioco;
 - poter prendere appunti disordinati e sistemarli successivamente.
 
+## Documentazione
+
+- `README.md` deve restare una guida per l'utente finale: dove cliccare, dove scrivere, come usare il vault durante preparazione e gioco.
+- Questa nota contiene la documentazione di sviluppo: campi, template, automazioni, test, import generati e criteri di modifica.
+- Le istruzioni tecniche non vanno nel README se non sono necessarie per usare il vault al tavolo.
+
 ## Regole Di Progettazione
 - Una schermata per Worldbuilding e una per DM.
 - Usa parole da tavolo, non parole tecniche.
@@ -47,6 +53,72 @@ Usa pochi stati e usali sempre nello stesso modo.
 - `archiviata`: non serve piu, ma va conservata.
 
 Tutte le entità che lo richiedono avranno anche altri `stato_attuale` come, ad esempio, per PNG `morto`, `vivo` ecc.
+
+## Convenzioni Dei Campi
+
+Usa questi campi in modo coerente, perché alimentano Dataview, dashboard, Meta Bind e controlli:
+
+- `categoria`: tipo generale della nota, per esempio `sessione`, `personaggio`, `luogo`, `missione`.
+- `tipo`: sottotipo utile al gioco, per esempio `pg`, `png`, `dungeon`, `oggetto magico`.
+- `stato`: avanzamento operativo. Valori comuni: `bozza`, `preparazione`, `pronto`, `in gioco`, `usato`, `giocata`, `consegnato`, `completata`, `fallita`, `da smistare`, `smistata`, `in pausa`, `conclusa`, `archiviata`.
+- `canonico`: `true` quando il contenuto e confermato nel mondo di gioco.
+- `mondo`: collega una nota al mondo a cui appartiene.
+- `luogo`, `luoghi`, `personaggi`, `fazioni`, `ricompense`: usa link interni quando possibile.
+
+Per le note di categoria `mondo`, usa anche `tono`, `tema`, `tecnologia`, `magia`, `continenti`, `fazioni`, `religioni` e `campagne`.
+
+## Cartelle Di Servizio
+
+- `z.modelli`: template Templater. Modifica con cautela.
+- `z.automazioni`: script Templater usati dai template e script CLI di manutenzione. Se cambi un percorso qui, aggiorna anche dashboard e Dataview.
+- `z.bacheche`: bacheche Kanban per preparazione e creature.
+
+## Import SRD
+
+Lo script `z.automazioni/import_srd.js` importa il System Reference Document 5.2.1 in italiano dalla fork `neokon91/DND-SRD-IT` e genera note dentro `SRD`.
+
+Regole:
+
+- le note generate devono avere `generato_da: import_srd`;
+- una nota generata viene sovrascritta solo se contiene ancora quel campo;
+- se una nota SRD viene modificata a mano, rimuovere o cambiare `generato_da` prima di rigenerare;
+- `SRD` resta separato dal contenuto canonico del mondo.
+
+Comando:
+
+```bash
+node z.automazioni/import_srd.js
+```
+
+### Mostri E Fantasy Statblocks
+
+I mostri importati devono avere frontmatter compatibile con Fantasy Statblocks oltre ai campi italiani usati da Dataview.
+
+Campi minimi per lo statblock:
+
+- `statblock: true`
+- `name`
+- `type`
+- `size`
+- `alignment`
+- `ac`
+- `hp`
+- `hit_dice`
+- `speed`
+- `cr`
+- `stats`
+- `saves`
+- `skillsaves`
+- `senses`
+- `languages`
+- `traits`
+- `actions`
+- `bonus_actions`
+- `reactions`
+- `legendary_actions`
+- `lair_actions`
+
+I campi italiani come `nome`, `categoria`, `tipo`, `tipo_creatura`, `dimensione`, `classe_armatura`, `iniziativa` e `bonus_competenza` vanno mantenuti per dashboard, indici e leggibilita del vault.
 
 ## Note Di Prova
 

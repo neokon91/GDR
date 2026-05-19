@@ -11,6 +11,31 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Cultista"
+type: "Umanoide"
+size: "medio o piccolo"
+alignment: "neutrale"
+ac: 12
+stats: [11, 12, 10, 10, 11, 10]
+saves: 
+  wis: 2
+skillsaves: 
+  inganno: 2
+  religione: 2
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 10"
+languages: "Comune"
+gear: ["armatura di cuoio", "falcetto"]
+traits: []
+actions: 
+- name: "Falcetto rituale"
+  desc: "*Tiro per colpire in mischia:* +3, portata 1,5 m. *Colpito:* 3 (1d4 + 1) danni taglienti più 1 danno necrotico."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Umanoide"
 dimensione: "Medio o Piccolo"
 allineamento: "neutrale"
@@ -25,6 +50,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Cultista
+
+```statblock
+monster: Cultista
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Medio o Piccolo Umanoide, neutrale

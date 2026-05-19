@@ -11,6 +11,30 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Mastino"
+type: "Bestia"
+size: "media"
+alignment: "senza allineamento"
+ac: 12
+stats: [13, 14, 12, 3, 12, 7]
+saves: 
+  wis: 3
+skillsaves: 
+  percezione: 5
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 15, scurovisione: 18 m"
+languages: "nessuna"
+gear: []
+traits: []
+actions: 
+- name: "Morso"
+  desc: "*Tiro per colpire in mischia:* +3, portata 1,5 m. *Colpito:* 4 (1d6 + 1) danni perforanti. Se il bersaglio è una creatura di taglia Media o inferiore, cade a terra prono."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Bestia"
 dimensione: "Media"
 allineamento: "senza allineamento"
@@ -25,6 +49,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Mastino
+
+```statblock
+monster: Mastino
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Media Bestia, senza allineamento

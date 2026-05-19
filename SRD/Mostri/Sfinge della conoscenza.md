@@ -11,6 +11,46 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Sfinge della conoscenza"
+type: "Celestiale"
+size: "grande"
+alignment: "legale neutrale"
+ac: 17
+stats: [18, 15, 16, 18, 18, 18]
+saves: {}
+skillsaves: 
+  arcano: 12
+  percezione: 8
+  religione: 12
+  storia: 12
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 18, vista_pura: 36 m"
+languages: "Celestiale, Comune"
+gear: []
+traits: 
+- name: "Imperscrutabile"
+  desc: "Nessuna magia può consentire di osservare la sfinge da lontano o individuarne i pensieri senza il suo permesso. Le prove di Saggezza (Intuizione) effettuate per accertare le sue intenzioni o la sua sincerità subiscono svantaggio."
+- name: "Resistenza leggendaria (3/giorno o 4/giorno nella tana)"
+  desc: "Se la sfinge fallisce un tiro salvezza, può scegliere di superarlo comunque."
+actions: 
+- name: "Multiattacco"
+  desc: "La sfinge effettua tre attacchi Artiglio."
+- name: "Artiglio"
+  desc: "*Tiro per colpire in mischia:* +8, portata 1,5 m. *Colpito:* 14 (3d6 + 4) danni taglienti."
+- name: "Incantesimi"
+  desc: "La sfinge lancia uno dei seguenti incantesimi senza bisogno di componenti materiali, utilizzando Intelligenza come caratteristica da incantatore (CD del tiro salvezza sull'incantesimo 16):1/giorno ciascuno: conoscenza delle leggende, dissolvi magie, linguaggi, localizza oggetto, rimuovi maledizione, spostamento planareA volontà: identificare, illusione minore, individuazione del magico, mano magica, prestidigitazione"
+- name: "Ruggito spezza-mente (ricarica 5-6)"
+  desc: "*Tiro salvezza su Saggezza:* CD 16, tutti i nemici in un'emanazione di 90 metri di cui la sfinge è il punto di origine. *Fallimento:* 35 (10d6) danni psichici, e il bersaglio è incapacitato fino all'inizio del turno successivo della sfinge."
+bonus_actions: []
+reactions: []
+legendary_actions: 
+- name: "Agguato arcano"
+  desc: "La sfinge può teletrasportarsi fino a 9 metri in uno spazio libero che è in grado di vedere, effettuando un attacco Artiglio."
+- name: "Peso degli anni"
+  desc: "*Tiro salvezza su Costituzione:* CD 16, una creatura che la sfinge è in grado di vedere entro 36 metri. *Fallimento:* il bersaglio ottiene 1 livello di indebolimento. Finché il bersaglio ha uno o più livelli di indebolimento, apparirà più vecchio di 3d10 anni. *Fallimento o successo:* la sfinge non può ripetere quest'azione fino all'inizio del proprio turno successivo."
+lair_actions: []
 tipo_creatura: "Celestiale"
 dimensione: "Grande"
 allineamento: "legale neutrale"
@@ -25,6 +65,10 @@ bonus_competenza: 4
 statblock: true
 ---
 # Sfinge della conoscenza
+
+```statblock
+monster: Sfinge della conoscenza
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Grande Celestiale, legale neutrale

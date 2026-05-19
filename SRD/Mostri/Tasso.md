@@ -11,6 +11,29 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Tasso"
+type: "Bestia"
+size: "minuscola"
+alignment: "senza allineamento"
+ac: 11
+stats: [10, 11, 16, 2, 12, 5]
+saves: {}
+skillsaves: 
+  percezione: 3
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 13, scurovisione: 9 m"
+languages: "nessuna"
+gear: []
+traits: []
+actions: 
+- name: "Morso"
+  desc: "*Tiro per colpire in mischia:* +2, portata 1,5 m. *Colpito:* 1 danno perforante."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Bestia"
 dimensione: "Minuscola"
 allineamento: "senza allineamento"
@@ -25,6 +48,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Tasso
+
+```statblock
+monster: Tasso
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Minuscola Bestia, senza allineamento

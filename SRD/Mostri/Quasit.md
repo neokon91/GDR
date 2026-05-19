@@ -11,6 +11,37 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Quasit"
+type: "Immondo"
+size: "minuscolo"
+alignment: "caotico malvagio"
+ac: 13
+stats: [5, 17, 10, 7, 10, 10]
+saves: {}
+skillsaves: 
+  furtivita: 5
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 10, scurovisione: 36 m"
+languages: "Abissale, Comune"
+gear: []
+traits: 
+- name: "Resistenza alla magia"
+  desc: "Il quasit dispone di vantaggio ai tiri salvezza contro incantesimi e altri effetti magici."
+actions: 
+- name: "Squarcio"
+  desc: "*Tiro per colpire in mischia:* +5, portata 1,5 m *Colpito:* 5 (1d4 + 3) danni taglienti, e il bersaglio è avvelenato fino all'inizio del turno successivo del quasit."
+- name: "Invisibilità"
+  desc: "Il quasit può lanciare invisibilità su di sé senza bisogno di componenti per incantesimi e utilizzando il Carisma come caratteristica da incantatore."
+- name: "Mutaforma"
+  desc: "Il quasit può assumere la forma bestiale di un pipistrello (velocità 3 m, volo 12 m), un millepiedi (12 m, scalata 12 m) o un rospo (12 m, scalata 12 m), o tornare alla sua vera forma. Le sue statistiche di gioco restano le stesse in ogni forma, a eccezione della velocità. Nessun oggetto che indossa o trasporta viene trasformato."
+- name: "Spaventare (1/giorno)"
+  desc: "*Tiro salvezza su Saggezza:* CD 10, una creatura entro 6 metri. *Fallimento:* il bersaglio è spaventato. Alla fine di ogni suo turno, il bersaglio ripete il tiro salvezza e, se lo supera, l'effetto svanisce. Dopo 1 minuto, il tiro viene superato automaticamente."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Immondo"
 dimensione: "Minuscolo"
 allineamento: "caotico malvagio"
@@ -25,6 +56,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Quasit
+
+```statblock
+monster: Quasit
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Minuscolo Immondo, caotico malvagio

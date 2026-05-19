@@ -11,6 +11,30 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Ogre"
+type: "Gigante"
+size: "grande"
+alignment: "caotico malvagio"
+ac: 11
+stats: [19, 8, 16, 5, 7, 7]
+saves: {}
+skillsaves: {}
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 8, scurovisione: 18 m"
+languages: "Comune, Gigante"
+gear: ["giavellotti (3)", "randello pesante"]
+traits: []
+actions: 
+- name: "Giavellotto"
+  desc: "*Tiro per colpire in mischia o a distanza:* +6, portata 1,5 m o gittata 9/36 m. *Colpito:* 11 (2d6 + 4) danni perforanti."
+- name: "Randello pesante"
+  desc: "*Tiro per colpire in mischia:* +6, portata 1,5 m. *Colpito:* 13 (2d8 + 4) danni contundenti."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Gigante"
 dimensione: "Grande"
 allineamento: "caotico malvagio"
@@ -25,6 +49,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Ogre
+
+```statblock
+monster: Ogre
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Grande Gigante, caotico malvagio

@@ -11,6 +11,38 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Megera marina"
+type: "Folletto"
+size: "medio"
+alignment: "caotico malvagio"
+ac: 14
+stats: [16, 13, 16, 12, 12, 13]
+saves: {}
+skillsaves: {}
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 11, scurovisione: 18 m"
+languages: "Comune, Gigante, Primordiale (Aquan)"
+gear: []
+traits: 
+- name: "Anfibio"
+  desc: "La megera può respirare in aria e in acqua."
+- name: "Magia della congrega"
+  desc: "Finché si trova entro 9 metri da almeno due megere alleate, la megera può lanciare uno dei seguenti incantesimi senza bisogno di componenti materiali, utilizzando il normale tempo di lancio dell'incantesimo e Intelligenza come caratteristica da incantatore (CD del tiro salvezza sull'incantesimo 11): identificare, localizza oggetto, presagio, scrutare, servitore inosservato o trova famiglio. La megera deve terminare un riposo lungo prima di utilizzare questo tratto per lanciare di nuovo l'incantesimo."
+- name: "Aspetto orripilante"
+  desc: "*Tiro salvezza su Saggezza:* CD 11, qualsiasi bestia o umanoide inizi il proprio turno nel campo visivo della megera, entro un raggio di 9 metri da lei e può vederne la vera forma. *Fallimento:* il bersaglio è spaventato fino all'inizio del proprio turno successivo. *Successo:* il bersaglio è immune all'Aspetto orripilante di questa megera per 24 ore."
+actions: 
+- name: "Artiglio"
+  desc: "*Tiro per colpire in mischia:* +5, portata 1,5 m. *Colpito:* 10 (2d6 + 3) danni taglienti."
+- name: "Aspetto illusorio"
+  desc: "La megera lancia camuffare se stesso, utilizzando Costituzione come caratteristica da incantatore (CD del tiro salvezza sull'incantesimo 13). L'incantesimo dura 24 ore."
+- name: "Sguardo mortale (ricarica 5-6)"
+  desc: "*Tiro salvezza su Saggezza:* CD 11, una creatura spaventata che la megera è in grado di vedere entro 9 metri. *Fallimento:* se il bersaglio ha 20 punti ferita o meno, scende a 0 punti ferita. Altrimenti, il bersaglio subisce 13 (3d8) danni psichici."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Folletto"
 dimensione: "Medio"
 allineamento: "caotico malvagio"
@@ -25,6 +57,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Megera marina
+
+```statblock
+monster: Megera marina
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Medio Folletto, caotico malvagio

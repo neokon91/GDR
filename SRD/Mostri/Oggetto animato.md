@@ -11,6 +11,28 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Oggetto animato"
+type: "Costrutto"
+size: "enorme o inferiore"
+alignment: "senza allineamento"
+ac: 15
+stats: [16, 10, 10, 3, 3, 1]
+saves: {}
+skillsaves: {}
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 6, vista_cieca: 9 m"
+languages: "comprende le lingue parlate dal personaggio"
+gear: []
+traits: []
+actions: 
+- name: "Schianto"
+  desc: "*Tiro per colpire in mischia:* il bonus equivale al modificatore di attacco dell'incantesimo del personaggio, portata 1,5 m. *Colpito:* danni da forza pari a 1d4 + 3 (taglia Media o inferiore), 2d6 + 3 + il modificatore di caratteristica da incantatore dell'incantatore (taglia Grande) o 2d12 + 3 + il modificatore di caratteristica da incantatore dell'incantatore (taglia Enorme)."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Costrutto"
 dimensione: "Enorme o inferiore"
 allineamento: "senza allineamento"
@@ -25,6 +47,10 @@ bonus_competenza: 0
 statblock: true
 ---
 # Oggetto animato
+
+```statblock
+monster: Oggetto animato
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Enorme o inferiore Costrutto, senza allineamento

@@ -11,6 +11,37 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Idra"
+type: "Mostruosità"
+size: "enorme"
+alignment: "senza allineamento"
+ac: 15
+stats: [20, 12, 20, 2, 10, 7]
+saves: {}
+skillsaves: 
+  percezione: 6
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 16, scurovisione: 18 m"
+languages: "nessuna"
+gear: []
+traits: 
+- name: "Apnea"
+  desc: "L'idra può trattenere il respiro per 1 ora."
+- name: "Teste multiple"
+  desc: "L'idra possiede cinque teste. Ogni volta che subisce 25 o più danni in un singolo turno, una delle teste muore. Se tutte le teste muoiono, l'idra muore. Alla fine del suo turno e finché ha almeno una testa vivente, l'idra fa ricrescere due teste per ogni testa morta dal suo ultimo turno, a meno che nel corso di tale periodo non abbia subito danni da fuoco. L'idra recupera 20 punti ferita quando fa ricrescere delle nuove teste."
+- name: "Teste reattive"
+  desc: "Per ogni testa che l'idra possiede oltre la prima, riceve una reazione extra che può essere usata soltanto per gli attacchi di opportunità."
+actions: 
+- name: "Multiattacco"
+  desc: "L'idra effettua un numero di attacchi Morso pari al numero di teste che possiede."
+- name: "Morso"
+  desc: "*Tiro per colpire in mischia:* +8, portata 3 m. *Colpito:* 10 (1d10 + 5) danni perforanti."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Mostruosità"
 dimensione: "Enorme"
 allineamento: "senza allineamento"
@@ -25,6 +56,10 @@ bonus_competenza: 3
 statblock: true
 ---
 # Idra
+
+```statblock
+monster: Idra
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Enorme Mostruosità, senza allineamento

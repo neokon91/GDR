@@ -11,6 +11,30 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Scheletro di minotauro"
+type: "Non morto"
+size: "grande"
+alignment: "legale malvagio"
+ac: 12
+stats: [18, 11, 15, 6, 8, 5]
+saves: {}
+skillsaves: {}
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 9, scurovisione: 18 m"
+languages: "capisce l'Abissale ma non lo parla"
+gear: []
+traits: []
+actions: 
+- name: "Schianto"
+  desc: "*Tiro per colpire in mischia:* +6, portata 1,5 m. *Colpito:* 15 (2d10 + 4) danni contundenti."
+- name: "Trafiggere"
+  desc: "*Tiro per colpire in mischia:* +6, portata 1,5 m. *Colpito:* 11 (2d6 + 4) danni perforanti. Se il bersaglio è una creatura di taglia Grande o inferiore e lo scheletro si è mosso di 6 metri o più in linea retta verso di esso subito prima del colpo, il bersaglio subisce 9 (2d8) danni perforanti extra e cade a terra prono."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Non morto"
 dimensione: "Grande"
 allineamento: "legale malvagio"
@@ -25,6 +49,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Scheletro di minotauro
+
+```statblock
+monster: Scheletro di minotauro
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Grande Non morto, legale malvagio

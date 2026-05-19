@@ -11,6 +11,35 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Satiro"
+type: "Folletto"
+size: "medio"
+alignment: "caotico neutrale"
+ac: 13
+stats: [12, 16, 11, 12, 10, 14]
+saves: {}
+skillsaves: 
+  furtivita: 5
+  intrattenere: 6
+  percezione: 2
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 12"
+languages: "Comune, Elfico, Silvano"
+gear: []
+traits: 
+- name: "Resistenza alla magia"
+  desc: "Il satiro dispone di vantaggio ai tiri salvezza contro incantesimi e altri effetti magici."
+actions: 
+- name: "Zoccoli"
+  desc: "*Tiro per colpire in mischia:* +5, portata 1,5 m. *Colpito:* 5 (1d4 + 3) danni contundenti. Se il bersaglio è una creatura di taglia Media o inferiore, il satiro lo spinge fino a 3 metri lontano da sé."
+- name: "Derisione"
+  desc: "*Tiro salvezza su Saggezza:* CD 12, una creatura che il satiro è in grado di vedere entro 27 metri. *Fallimento:* 5 (1d6 + 2) danni psichici."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Folletto"
 dimensione: "Medio"
 allineamento: "caotico neutrale"
@@ -25,6 +54,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Satiro
+
+```statblock
+monster: Satiro
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Medio Folletto, caotico neutrale

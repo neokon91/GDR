@@ -11,6 +11,39 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Ragno-fase"
+type: "Mostruosità"
+size: "grande"
+alignment: "senza allineamento"
+ac: 14
+stats: [15, 16, 12, 6, 10, 6]
+saves: {}
+skillsaves: 
+  furtivita: 7
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 10, scurovisione: 18 m"
+languages: "nessuna"
+gear: []
+traits: 
+- name: "Andatura sulla ragnatela"
+  desc: "Il ragno ignora le restrizioni di movimento causate dalle ragnatele e conosce l'ubicazione di qualsiasi altra creatura a contatto con la medesima ragnatela."
+- name: "Movimenti del ragno"
+  desc: "Il ragno può scalare le superfici difficili, compresi i soffitti, senza effettuare una prova di caratteristica."
+- name: "Vista eterea"
+  desc: "Il ragno è in grado di vedere per 18 metri sul Piano Etereo finché si trova sul Piano Materiale e viceversa."
+actions: 
+- name: "Multiattacco"
+  desc: "Il ragno effettua due attacchi Morso."
+- name: "Morso"
+  desc: "*Tiro per colpire in mischia:* +5, portata 1,5 m *Colpito:* 8 (1d10 + 3) danni perforanti più 9 (2d8) danni da veleno. Se i danni riducono il bersaglio a 0 punti ferita, esso diventa stabile, ed è avvelenato per 1 ora. Finché è avvelenato, il bersaglio è anche paralizzato."
+bonus_actions: 
+- name: "Transizione eterea"
+  desc: "Il ragno si teletrasporta dal Piano Materiale al Piano Etereo o viceversa."
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Mostruosità"
 dimensione: "Grande"
 allineamento: "senza allineamento"
@@ -25,6 +58,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Ragno-fase
+
+```statblock
+monster: Ragno-fase
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Grande Mostruosità, senza allineamento

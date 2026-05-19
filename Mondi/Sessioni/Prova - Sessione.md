@@ -28,6 +28,11 @@ incontri:
   - [[Prova - Trappola]]
 dispense:
   - [[Prova - Dispensa]]
+mappe:
+  - [[Schema Relazioni GDR.excalidraw]]
+audio: []
+immagini: []
+video: []
 fazioni:
   - [[Prova - Fazione]]
 oggetti:

@@ -11,6 +11,35 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Sfinge della meraviglia"
+type: "Celestiale"
+size: "minuscolo"
+alignment: "legale buono"
+ac: 13
+stats: [6, 17, 13, 15, 12, 11]
+saves: {}
+skillsaves: 
+  arcano: 4
+  religione: 4
+  furtivita: 5
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 11, scurovisione: 18 m"
+languages: "Celestiale, Comune"
+gear: []
+traits: 
+- name: "Resistenza alla magia"
+  desc: "La sfinge dispone di vantaggio ai tiri salvezza contro incantesimi e altri effetti magici."
+actions: 
+- name: "Squarcio"
+  desc: "*Tiro per colpire in mischia:* +5, portata 1,5 m *Colpito:* 5 (1d4 + 3) danni taglienti più 7 (2d6) danni radiosi."
+bonus_actions: []
+reactions: 
+- name: "Impeto di ingegno (2 al giorno)"
+  desc: "Attivazione: la sfinge o un'altra creatura entro 9 metri effettua una prova di caratteristica o un tiro salvezza. Esito: la sfinge aggiunge 2 al risultato del tiro."
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Celestiale"
 dimensione: "Minuscolo"
 allineamento: "legale buono"
@@ -25,6 +54,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Sfinge della meraviglia
+
+```statblock
+monster: Sfinge della meraviglia
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Minuscolo Celestiale, legale buono

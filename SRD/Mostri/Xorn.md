@@ -11,6 +11,40 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Xorn"
+type: "Elementale"
+size: "medio"
+alignment: "neutrale"
+ac: 19
+stats: [17, 10, 22, 11, 10, 11]
+saves: {}
+skillsaves: 
+  furtivita: 6
+  percezione: 6
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 16, percezione_tellurica: 18 m, scurovisione: 18 m"
+languages: "Primordiale (Terran)"
+gear: []
+traits: 
+- name: "Percezione dei tesori"
+  desc: "Lo xorn può individuare la posizione di pietre e metalli preziosi entro 18 metri da sé."
+- name: "Scivolare nella terra"
+  desc: "Lo xorn può scavare attraverso la terra e la pietra non magiche e non lavorate, senza disturbare il materiale attraverso cui si muove."
+actions: 
+- name: "Multiattacco"
+  desc: "Lo xorn effettua un attacco Morso e tre attacchi Artiglio."
+- name: "Artiglio"
+  desc: "*Tiro per colpire in mischia:* +6, portata 1,5 m. *Colpito:* 8 (1d10 + 3) danni taglienti."
+- name: "Morso"
+  desc: "*Tiro per colpire in mischia:* +6, portata 1,5 m. *Colpito:* 17 (4d6 + 3) danni perforanti."
+bonus_actions: 
+- name: "Carica"
+  desc: "Lo xorn si muove fino al massimo della sua velocità o velocità di scavo in linea retta verso un nemico che è in grado di percepire."
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Elementale"
 dimensione: "Medio"
 allineamento: "neutrale"
@@ -25,6 +59,10 @@ bonus_competenza: 3
 statblock: true
 ---
 # Xorn
+
+```statblock
+monster: Xorn
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Medio Elementale, neutrale

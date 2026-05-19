@@ -11,6 +11,30 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Cinghiale"
+type: "Bestia"
+size: "media"
+alignment: "senza allineamento"
+ac: 11
+stats: [13, 11, 14, 2, 9, 5]
+saves: {}
+skillsaves: {}
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 9"
+languages: "nessuna"
+gear: []
+traits: 
+- name: "Furia sanguinante"
+  desc: "Se il cinghiale è sanguinante, ha vantaggio ai tiri per colpire."
+actions: 
+- name: "Trafiggere"
+  desc: "*Tiro per colpire in mischia:* +3, portata 1,5 m *Colpito:* 4 (1d6 + 1) danni perforanti. Se il bersaglio è una creatura di taglia Media o inferiore e il cinghiale si è mosso di 6 metri o più in linea retta verso di esso subito prima del colpo, il bersaglio subisce 3 (1d6) danni perforanti extra e cade a terra prono."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Bestia"
 dimensione: "Media"
 allineamento: "senza allineamento"
@@ -25,6 +49,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Cinghiale
+
+```statblock
+monster: Cinghiale
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Media Bestia, senza allineamento

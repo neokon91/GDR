@@ -11,6 +11,36 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Drago blu giovane"
+type: "Drago (cromatico)"
+size: "grande"
+alignment: "legale malvagio"
+ac: 18
+stats: [21, 10, 19, 14, 13, 17]
+saves: 
+  dex: 4
+  wis: 5
+skillsaves: 
+  furtivita: 4
+  percezione: 9
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 19, scurovisione: 36 m, vista_cieca: 9 m"
+languages: "Comune, Draconico"
+gear: []
+traits: []
+actions: 
+- name: "Multiattacco"
+  desc: "Il drago effettua tre attacchi Squarcio."
+- name: "Squarcio"
+  desc: "*Tiro per colpire in mischia:* +9, portata 3 m. *Colpito:* 12 (2d6 + 5) danni taglienti più 5 (1d10) danni da fulmine."
+- name: "Soffio di fulmini (ricarica 5-6)"
+  desc: "*Tiro salvezza su Destrezza:* CD 16, tutte le creature in una linea lunga 18 metri e larga 1,5 metri. *Fallimento:* 55 (10d10) danni da fulmine. *Successo:* danni dimezzati."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Drago (cromatico)"
 dimensione: "Grande"
 allineamento: "legale malvagio"
@@ -25,6 +55,10 @@ bonus_competenza: 4
 statblock: true
 ---
 # Drago blu giovane
+
+```statblock
+monster: Drago blu giovane
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Grande Drago (cromatico), legale malvagio

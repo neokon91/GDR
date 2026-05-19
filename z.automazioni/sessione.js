@@ -23,6 +23,10 @@ async function sessione(tp) {
     const creature = await helpers.chooseCreatures(tp, "Creature in scena", context);
     const incontri = await helpers.chooseEncounters(tp, "Incontri previsti", context);
     const dispense = await helpers.chooseHandouts(tp, "Dispense previste", context);
+    const mappe = await helpers.chooseMaps(tp, "Mappe previste", context);
+    const audio = await helpers.chooseAudio(tp, "Audio previsti", context);
+    const immagini = await helpers.chooseImages(tp, "Immagini previste", context);
+    const video = await helpers.chooseVideos(tp, "Video previsti", context);
     const fazioni = await helpers.chooseFactions(tp, "Fazioni in scena", context);
     const oggetti = await helpers.chooseObjects(tp, "Oggetti in scena", context);
 
@@ -49,6 +53,10 @@ personaggi: ${helpers.inlineYamlList(personaggi)}
 creature: ${helpers.inlineYamlList(creature)}
 incontri: ${helpers.inlineYamlList(incontri)}
 dispense: ${helpers.inlineYamlList(dispense)}
+mappe: ${helpers.inlineYamlList(mappe)}
+audio: ${helpers.inlineYamlList(audio)}
+immagini: ${helpers.inlineYamlList(immagini)}
+video: ${helpers.inlineYamlList(video)}
 fazioni: ${helpers.inlineYamlList(fazioni)}
 oggetti: ${helpers.inlineYamlList(oggetti)}
 scene: []

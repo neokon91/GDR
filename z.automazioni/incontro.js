@@ -29,6 +29,8 @@ async function incontro(tp, routeOptions = {}) {
     const pericolo = await helpers.promptOptional(tp, "Pericolo da 0 a 10");
     const creature = await helpers.chooseCreatures(tp, "Creature coinvolte", context);
     const personaggi = await helpers.choosePeople(tp, "Personaggi coinvolti", context);
+    const mappe = await helpers.chooseMaps(tp, "Mappe dell'incontro", context);
+    const audio = await helpers.chooseAudio(tp, "Audio dell'incontro", context);
     const ricompense = await helpers.chooseObjects(tp, "Ricompense", context);
     const encounterCreatures = creature.map(link => helpers.yamlQuote(encounterName(link)));
 
@@ -44,6 +46,8 @@ mondo: ${context.world}
 luogo: ${luogo}
 creature: ${helpers.inlineYamlList(creature)}
 personaggi: ${helpers.inlineYamlList(personaggi)}
+mappe: ${helpers.inlineYamlList(mappe)}
+audio: ${helpers.inlineYamlList(audio)}
 pericolo: ${pericolo}
 ricompense: ${helpers.inlineYamlList(ricompense)}
 round: 1

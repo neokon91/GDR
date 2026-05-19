@@ -11,6 +11,36 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Drago di rame cucciolo"
+type: "Drago (metallico)"
+size: "medio"
+alignment: "caotico buono"
+ac: 16
+stats: [15, 12, 13, 14, 11, 13]
+saves: 
+  dex: 3
+  wis: 2
+skillsaves: 
+  furtivita: 3
+  percezione: 4
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 14, scurovisione: 18 m, vista_cieca: 3 m"
+languages: "Draconico"
+gear: []
+traits: []
+actions: 
+- name: "Squarcio"
+  desc: "*Tiro per colpire in mischia:* +4, portata 1,5 m. *Colpito:* 7 (1d10 + 2) danni taglienti."
+- name: "Soffio di acido (ricarica 5-6)"
+  desc: "*Tiro salvezza su Destrezza:* CD 11, tutte le creature in una linea lunga 6 metri e larga 1,5 metri. *Fallimento:* 18 (4d8) danni da acido. *Successo:* danni dimezzati."
+- name: "Soffio rallentante"
+  desc: "*Tiro salvezza su Costituzione:* CD 11, tutte le creature in un cono di 4,5 metri. *Fallimento:* il bersaglio non può effettuare reazioni, la sua velocità è dimezzata e nel suo turno può effettuare un'azione o un'azione bonus, non entrambe. L'effetto dura fino al termine del proprio turno successivo."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Drago (metallico)"
 dimensione: "Medio"
 allineamento: "caotico buono"
@@ -25,6 +55,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Drago di rame cucciolo
+
+```statblock
+monster: Drago di rame cucciolo
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Medio Drago (metallico), caotico buono

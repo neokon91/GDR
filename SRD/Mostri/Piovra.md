@@ -11,6 +11,36 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Piovra"
+type: "Bestia"
+size: "piccola"
+alignment: "senza allineamento"
+ac: 12
+stats: [4, 15, 11, 3, 10, 4]
+saves: {}
+skillsaves: 
+  furtivita: 6
+  percezione: 2
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 12, scurovisione: 9 m"
+languages: "nessuna"
+gear: []
+traits: 
+- name: "Compressione"
+  desc: "La piovra può muoversi attraverso uno spazio stretto fino a 2,5 centimetri senza consumare movimento extra per farlo."
+- name: "Respirare sott'acqua"
+  desc: "La piovra può respirare soltanto sott'acqua."
+actions: 
+- name: "Tentacoli"
+  desc: "*Tiro per colpire in mischia:* +4, portata 1,5 m. *Colpito:* 1 danno contundente."
+bonus_actions: []
+reactions: 
+- name: "Nube di inchiostro (1/Giorno)"
+  desc: "Attivazione: una creatura termina il suo turno entro 1,5 metri dalla piovra sott'acqua. Esito: la piovra rilascia abbastanza inchiostro da riempire un cubo con spigolo di 1,5 metri intorno a sé e può muoversi fino alla sua velocità di nuoto massima. Il cubo è pesantemente oscurato per 1 minuto, o finché una corrente forte o un altro effetto simile non disperde l'inchiostro."
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Bestia"
 dimensione: "Piccola"
 allineamento: "senza allineamento"
@@ -25,6 +55,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Piovra
+
+```statblock
+monster: Piovra
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Piccola Bestia, senza allineamento

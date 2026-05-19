@@ -11,6 +11,32 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Ragno lupo gigante"
+type: "Bestia"
+size: "media"
+alignment: "senza allineamento"
+ac: 13
+stats: [12, 16, 13, 3, 12, 4]
+saves: {}
+skillsaves: 
+  furtivita: 7
+  percezione: 3
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 10, scurovisione: 18 m, vista_cieca: 3 m"
+languages: "nessuna"
+gear: []
+traits: 
+- name: "Movimenti del ragno"
+  desc: "Il ragno può scalare le superfici difficili, compresi i soffitti, senza effettuare una prova di caratteristica."
+actions: 
+- name: "Morso"
+  desc: "*Tiro per colpire in mischia:* +5, portata 1,5 m *Colpito:* 5 (1d4 + 3) danni perforanti più 5 (2d4) danni da veleno."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Bestia"
 dimensione: "Media"
 allineamento: "senza allineamento"
@@ -25,6 +51,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Ragno lupo gigante
+
+```statblock
+monster: Ragno lupo gigante
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Media Bestia, senza allineamento

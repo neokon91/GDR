@@ -11,6 +11,32 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Cavalluccio marino"
+type: "Bestia"
+size: "minuscola"
+alignment: "senza allineamento"
+ac: 12
+stats: [1, 12, 8, 1, 10, 2]
+saves: {}
+skillsaves: 
+  furtivita: 5
+  percezione: 2
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 12"
+languages: "nessuna"
+gear: []
+traits: 
+- name: "Respirare sott'acqua"
+  desc: "Il cavalluccio marino può respirare solo sott'acqua."
+actions: 
+- name: "Scatto acquatico"
+  desc: "Finché è sott'acqua, il cavalluccio marino può muoversi fino alla sua velocità di nuoto massima senza provocare attacchi di opportunità."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Bestia"
 dimensione: "Minuscola"
 allineamento: "senza allineamento"
@@ -25,6 +51,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Cavalluccio marino
+
+```statblock
+monster: Cavalluccio marino
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Minuscola Bestia, senza allineamento

@@ -11,6 +11,28 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Boleto stridente"
+type: "Vegetale"
+size: "medio"
+alignment: "senza allineamento"
+ac: 5
+stats: [1, 1, 10, 1, 3, 1]
+saves: {}
+skillsaves: {}
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 6, vista_cieca: 9 m"
+languages: "nessuna"
+gear: []
+traits: []
+actions: []
+bonus_actions: []
+reactions: 
+- name: "Stridio"
+  desc: "*Attivazione:* una creatura o una fonte di luce intensa si muove entro 9 metri dal boleto stridente.\n\n*Esito:* il boleto stridente emette uno stridio udibile fino a 90 metri da sé per 1 minuto o finché il boleto non muore."
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Vegetale"
 dimensione: "Medio"
 allineamento: "senza allineamento"
@@ -25,6 +47,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Boleto stridente
+
+```statblock
+monster: Boleto stridente
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Medio Vegetale, senza allineamento

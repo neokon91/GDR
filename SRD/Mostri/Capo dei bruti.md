@@ -11,6 +11,37 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Capo dei bruti"
+type: "Umanoide"
+size: "medio o piccolo"
+alignment: "neutrale"
+ac: 16
+stats: [17, 14, 16, 11, 10, 11]
+saves: 
+  str: 5
+  con: 5
+  cha: 2
+skillsaves: {}
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 10"
+languages: "Comune più un'altra lingua"
+gear: ["balestra pesante", "cotta di maglia", "martello da guerra"]
+traits: 
+- name: "Tattiche del branco"
+  desc: "Il bruto dispone di vantaggio a un tiro per colpire contro una creatura se almeno uno dei suoi alleati si trova entro 1,5 metri dalla creatura e non è incapacitato."
+actions: 
+- name: "Multiattacco"
+  desc: "Il bruto effettua due attacchi, usando Martello da guerra o Balestra pesante in qualsiasi combinazione."
+- name: "Martello da guerra"
+  desc: "*Tiro per colpire in mischia:* +5, portata 1,5 m. *Colpito:* 12 (2d8 + 3) danni contundenti. Se il bersaglio è una creatura di taglia Grande o inferiore, il bruto lo spinge fino a 3 metri lontano da sé."
+- name: "Balestra pesante"
+  desc: "*Tiro per colpire a distanza:* +4, gittata 30/120 m. *Colpito:* 13 (2d10 + 2) danni perforanti.\n\n---"
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Umanoide"
 dimensione: "Medio o Piccolo"
 allineamento: "neutrale"
@@ -25,6 +56,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Capo dei bruti
+
+```statblock
+monster: Capo dei bruti
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Medio o Piccolo Umanoide, neutrale

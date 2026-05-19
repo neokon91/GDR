@@ -11,6 +11,34 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Pirata"
+type: "Umanoide"
+size: "medio o piccolo"
+alignment: "neutrale"
+ac: 14
+stats: [10, 16, 12, 8, 12, 14]
+saves: 
+  dex: 5
+  cha: 4
+skillsaves: {}
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 11"
+languages: "Comune più un'altra lingua"
+gear: ["armatura di cuoio", "pugnali (6)"]
+traits: []
+actions: 
+- name: "Multiattacco"
+  desc: "Il pirata effettua due attacchi Pugnale. Può sostituire un attacco con un utilizzo di Baldanza irresistibile."
+- name: "Pugnale"
+  desc: "*Tiro per colpire in mischia o a distanza:* +5, portata 1,5 m o gittata 6/18 m *Colpito:* 5 (1d4 + 3) danni perforanti."
+- name: "Baldanza irresistibile"
+  desc: "*Tiro salvezza su Saggezza:* CD 12, una creatura che il pirata è in grado di vedere entro 9 metri. *Fallimento:* il bersaglio è affascinato fino all'inizio del turno successivo del pirata."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Umanoide"
 dimensione: "Medio o Piccolo"
 allineamento: "neutrale"
@@ -25,6 +53,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Pirata
+
+```statblock
+monster: Pirata
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Medio o Piccolo Umanoide, neutrale

@@ -11,6 +11,35 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Gufo gigante"
+type: "Celestiale"
+size: "grande"
+alignment: "neutrale"
+ac: 12
+stats: [13, 15, 12, 10, 14, 10]
+saves: 
+  wis: 4
+skillsaves: 
+  furtivita: 6
+  percezione: 6
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 16, scurovisione: 36 m"
+languages: "Celestiale, capisce il Comune, l'Elfico e il Silvano ma non li parla"
+gear: []
+traits: 
+- name: "Volo sfuggente"
+  desc: "Il gufo non provoca attacchi di opportunità quando vola oltre la portata di un nemico."
+actions: 
+- name: "Speroni"
+  desc: "*Tiro per colpire in mischia:* +4, portata 1,5 m. *Colpito:* 7 (1d10 + 2) danni taglienti."
+- name: "Incantesimi"
+  desc: "Il gufo lancia uno dei seguenti incantesimi, senza bisogno di componenti, utilizzando Saggezza come caratteristica da incantatore: 1/giorno: Chiaroveggenza A volontà: Individuazione del bene e del male, individuazione del magico"
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Celestiale"
 dimensione: "Grande"
 allineamento: "neutrale"
@@ -25,6 +54,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Gufo gigante
+
+```statblock
+monster: Gufo gigante
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Grande Celestiale, neutrale

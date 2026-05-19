@@ -11,6 +11,46 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Drago rosso antico"
+type: "Drago (cromatico)"
+size: "mastodontico"
+alignment: "caotico malvagio"
+ac: 22
+stats: [30, 10, 29, 18, 15, 27]
+saves: 
+  dex: 7
+  wis: 9
+skillsaves: 
+  furtivita: 7
+  percezione: 16
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 26, scurovisione: 36 m, vista_cieca: 18 m"
+languages: "Comune, Draconico"
+gear: []
+traits: 
+- name: "Resistenza leggendaria (4/giorno o 5/giorno nella tana)"
+  desc: "Se il drago fallisce un tiro salvezza, può scegliere di superarlo comunque."
+actions: 
+- name: "Multiattacco"
+  desc: "Il drago effettua tre attacchi Squarcio. Può sostituire un attacco con un utilizzo di Incantesimi per lanciare raggio rovente (di 3º livello)."
+- name: "Squarcio"
+  desc: "*Tiro per colpire in mischia:* +17, portata 4,5 m. *Colpito:* 19 (2d8 + 10) danni taglienti più 10 (3d6) danni da fuoco."
+- name: "Incantesimi"
+  desc: "Il drago lancia uno dei seguenti incantesimi, senza bisogno di componenti materiali, utilizzando Carisma come caratteristica da incantatore (CD del tiro salvezza sull'incantesimo 23, +15 al tiro per colpire degli attacchi con incantesimo):\n\n*1/giorno ciascuno:*\n- palla di fuoco (di 6º livello)\n- scrutare\n\n*A volontà:*\n- comando (di 2º livello)\n- individuazione del magico\n- raggio rovente (di 3º livello)"
+- name: "Soffio di fuoco (ricarica 5-6)"
+  desc: "*Tiro salvezza su Destrezza:* CD 24, tutte le creature in un cono di 27 metri. *Fallimento:* 91 (26d6) danni da fuoco. *Successo:* danni dimezzati."
+bonus_actions: []
+reactions: []
+legendary_actions: 
+- name: "Presenza imponente"
+  desc: "Il drago usa Incantesimi per lanciare comando (di 2º livello). Il drago non può ripetere quest'azione fino all'inizio del proprio turno successivo."
+- name: "Balzo"
+  desc: "Il drago si muove fino a metà della sua velocità ed effettua un attacco Squarcio."
+- name: "Raggi fiammeggianti"
+  desc: "Il drago usa Incantesimi per lanciare raggio rovente (di 3º livello). Il drago non può ripetere quest'azione fino all'inizio del proprio turno successivo."
+lair_actions: []
 tipo_creatura: "Drago (cromatico)"
 dimensione: "Mastodontico"
 allineamento: "caotico malvagio"
@@ -25,6 +65,10 @@ bonus_competenza: 7
 statblock: true
 ---
 # Drago rosso antico
+
+```statblock
+monster: Drago rosso antico
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Mastodontico Drago (cromatico), caotico malvagio

@@ -11,6 +11,30 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Marinide schermagliatore"
+type: "Elementale"
+size: "medio"
+alignment: "neutrale"
+ac: 11
+stats: [10, 13, 12, 11, 14, 12]
+saves: {}
+skillsaves: {}
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 12"
+languages: "Comune, Primordiale (Aquan)"
+gear: []
+traits: 
+- name: "Anfibio"
+  desc: "Il marinide può respirare in aria e in acqua."
+actions: 
+- name: "Lancia oceanica"
+  desc: "*Tiro per colpire in mischia o a distanza:* +2, portata 1,5 m o gittata 6/18 m. *Colpito:* 3 (1d6) danni perforanti più 2 (1d4) danni da freddo. Se il bersaglio è una creatura, la sua velocità è ridotta di 3 metri fino al termine del proprio turno successivo. Colpito o mancato: la lancia fa magicamente ritorno nella mano del marinide subito dopo un attacco a distanza."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Elementale"
 dimensione: "Medio"
 allineamento: "neutrale"
@@ -25,6 +49,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Marinide schermagliatore
+
+```statblock
+monster: Marinide schermagliatore
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Medio Elementale, neutrale

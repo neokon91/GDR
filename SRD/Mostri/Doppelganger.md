@@ -11,6 +11,38 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Doppelganger"
+type: "Mostruosità"
+size: "media"
+alignment: "neutrale"
+ac: 14
+stats: [11, 18, 14, 11, 12, 14]
+saves: {}
+skillsaves: 
+  inganno: 6
+  intuizione: 3
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 11, scurovisione: 18 m"
+languages: "Comune più altre tre lingue"
+gear: []
+traits: []
+actions: 
+- name: "Multiattacco"
+  desc: "Il doppelganger effettua due attacchi Schianto e usa Sembianze inquietanti."
+- name: "Schianto"
+  desc: "*Tiro per colpire in mischia:* +6 (con vantaggio durante il primo round di ogni combattimento), portata 1,5 m. *Colpito:* 11 (2d6 + 4) danni contundenti."
+- name: "Lettura del pensiero"
+  desc: "Il doppelganger lancia individuazione dei pensieri senza bisogno di componenti, utilizzando Carisma come caratteristica da incantatore (CD del tiro salvezza sull'incantesimo 12)."
+- name: "Sembianze inquietanti (ricarica 6)"
+  desc: "*Tiro salvezza su Saggezza:* CD 12, tutte le creature in grado di vedere il doppelganger e che si trovano in un'emanazione di 4,5 metri di cui il doppelganger è il punto di origine. *Fallimento:* il bersaglio è spaventato, ripete il tiro salvezza alla fine di ogni suo turno e, se lo supera, l'effetto svanisce. Dopo 1 minuto, il tiro viene superato automaticamente."
+bonus_actions: 
+- name: "Mutaforma"
+  desc: "Il doppelganger si trasforma in un umanoide di taglia Media o Piccola, oppure ritorna alla sua vera forma. Le sue statistiche di gioco, a eccezione della taglia, restano le stesse in ogni forma. Nessun oggetto che indossa o trasporta viene trasformato."
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Mostruosità"
 dimensione: "Media"
 allineamento: "neutrale"
@@ -25,6 +57,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Doppelganger
+
+```statblock
+monster: Doppelganger
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Media Mostruosità, neutrale

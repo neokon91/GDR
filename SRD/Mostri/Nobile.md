@@ -11,6 +11,33 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Nobile"
+type: "Umanoide"
+size: "medio o piccolo"
+alignment: "neutrale"
+ac: 15
+stats: [11, 12, 11, 12, 14, 16]
+saves: {}
+skillsaves: 
+  inganno: 5
+  intuizione: 4
+  persuasione: 5
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 12"
+languages: "Comune più altre due lingue"
+gear: ["corazza di piastre", "stocco"]
+traits: []
+actions: 
+- name: "Stocco"
+  desc: "*Tiro per colpire in mischia:* +3, portata 1,5 m. *Colpito:* 5 (1d8 + 1) danni perforanti."
+bonus_actions: []
+reactions: 
+- name: "Parata"
+  desc: "Attivazione: il nobile viene colpito da un tiro per colpire in mischia mentre tiene in mano un'arma. Esito: il nobile aggiunge 2 alla sua CA contro quell'attacco, aumentando le probabilità che il colpo non vada a segno."
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Umanoide"
 dimensione: "Medio o Piccolo"
 allineamento: "neutrale"
@@ -25,6 +52,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Nobile
+
+```statblock
+monster: Nobile
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Medio o Piccolo Umanoide, neutrale

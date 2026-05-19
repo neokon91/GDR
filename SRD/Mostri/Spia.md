@@ -11,6 +11,38 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Spia"
+type: "Umanoide"
+size: "medio o piccolo"
+alignment: "neutrale"
+ac: 12
+stats: [10, 15, 10, 12, 14, 16]
+saves: {}
+skillsaves: 
+  furtivita: 6
+  indagare: 5
+  inganno: 5
+  intuizione: 4
+  percezione: 6
+  rapidita_di_mano: 4
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 16"
+languages: "Comune più un'altra lingua"
+gear: ["arnesi da scasso", "balestra a mano", "spada corta"]
+traits: []
+actions: 
+- name: "Spada corta"
+  desc: "*Tiro per colpire in mischia:* +4, portata 1,5 m *Colpito:* 5 (1d6 + 2) danni perforanti più 7 (2d6) danni da veleno."
+- name: "Balestra a mano"
+  desc: "*Tiro per colpire a distanza:* +4, gittata 9/36 m. *Colpito:* 5 (1d6 + 2) danni perforanti più 7 (2d6) danni da veleno."
+bonus_actions: 
+- name: "Azione scaltra"
+  desc: "La spia effettua l'azione di Disimpegno, Nascondersi o Scatto."
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Umanoide"
 dimensione: "Medio o Piccolo"
 allineamento: "neutrale"
@@ -25,6 +57,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Spia
+
+```statblock
+monster: Spia
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Medio o Piccolo Umanoide, neutrale

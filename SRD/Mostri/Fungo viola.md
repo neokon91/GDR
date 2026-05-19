@@ -11,6 +11,30 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Fungo viola"
+type: "Vegetale"
+size: "medio"
+alignment: "senza allineamento"
+ac: 5
+stats: [3, 1, 10, 1, 3, 1]
+saves: {}
+skillsaves: {}
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 6, vista_cieca: 9 m"
+languages: "nessuna"
+gear: []
+traits: []
+actions: 
+- name: "Multiattacco"
+  desc: "Il fungo effettua due attacchi Tocco marcescente."
+- name: "Tocco marcescente"
+  desc: "*Tiro per colpire in mischia:* +2, portata 3 m. *Colpito:* 4 (1d8) danni necrotici."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Vegetale"
 dimensione: "Medio"
 allineamento: "senza allineamento"
@@ -25,6 +49,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Fungo viola
+
+```statblock
+monster: Fungo viola
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Medio Vegetale, senza allineamento

@@ -11,6 +11,33 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Orso bruno"
+type: "Bestia"
+size: "grande"
+alignment: "senza allineamento"
+ac: 11
+stats: [17, 12, 15, 2, 13, 7]
+saves: {}
+skillsaves: 
+  percezione: 3
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 13, scurovisione: 18 m"
+languages: "nessuna"
+gear: []
+traits: []
+actions: 
+- name: "Multiattacco"
+  desc: "L'orso effettua un attacco Morso e un attacco Artiglio."
+- name: "Artiglio"
+  desc: "*Tiro per colpire in mischia:* +5, portata 1,5 m. *Colpito:* 5 (1d4 + 3) danni taglienti. Se il bersaglio è una creatura di taglia Grande o inferiore, cade a terra prono."
+- name: "Morso"
+  desc: "*Tiro per colpire in mischia:* +5, portata 1,5 m. *Colpito:* 7 (1d8 + 3) danni perforanti."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Bestia"
 dimensione: "Grande"
 allineamento: "senza allineamento"
@@ -25,6 +52,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Orso bruno
+
+```statblock
+monster: Orso bruno
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Grande Bestia, senza allineamento

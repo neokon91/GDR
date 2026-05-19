@@ -11,6 +11,32 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Cane intermittente"
+type: "Folletto"
+size: "medio"
+alignment: "legale buono"
+ac: 13
+stats: [12, 17, 12, 10, 13, 11]
+saves: {}
+skillsaves: 
+  furtivita: 5
+  percezione: 5
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 15, scurovisione: 18 m"
+languages: "Cane intermittente, capisce l'Elfico e il Silvano ma non li parla"
+gear: []
+traits: []
+actions: 
+- name: "Morso"
+  desc: "*Tiro per colpire in mischia:* +5, portata 1,5 m *Colpito:* 5 (1d4 + 3) danni perforanti."
+bonus_actions: 
+- name: "Teletrasporto (ricarica 4-6)"
+  desc: "Il cane si teletrasporta fino a un massimo di 12 metri in uno spazio libero che è in grado di vedere."
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Folletto"
 dimensione: "Medio"
 allineamento: "legale buono"
@@ -25,6 +51,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Cane intermittente
+
+```statblock
+monster: Cane intermittente
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Medio Folletto, legale buono

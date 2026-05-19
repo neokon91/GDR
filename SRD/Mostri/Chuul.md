@@ -11,6 +11,37 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Chuul"
+type: "Aberrazione"
+size: "grande"
+alignment: "caotico malvagio"
+ac: 16
+stats: [19, 10, 16, 5, 11, 5]
+saves: {}
+skillsaves: 
+  percezione: 4
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 14, scurovisione: 18 m"
+languages: "capisce il Gergo delle Profondità ma non lo parla"
+gear: []
+traits: 
+- name: "Anfibio"
+  desc: "Il chuul può respirare in aria e in acqua."
+- name: "Percezione della magia"
+  desc: "Il chuul percepisce la magia entro 36 metri da sé. Sotto ogni altro aspetto, questo tratto funziona come l'incantesimo individuazione del magico, ma di per sé non è magico."
+actions: 
+- name: "Multiattacco"
+  desc: "Il chuul effettua due attacchi Tenaglia e utilizza Tentacoli paralizzanti."
+- name: "Tenaglia"
+  desc: "*Tiro per colpire in mischia:* +6, portata 3 m. *Colpito:* 9 (1d10 + 4) danni contundenti. Se il bersaglio è una creatura di taglia Grande o inferiore, è afferrato (CD 14 per sfuggire) da una delle due tenaglie."
+- name: "Tentacoli paralizzanti"
+  desc: "*Tiro salvezza su Costituzione:* CD 13, una creatura afferrata dal chuul. *Fallimento:* il bersaglio è avvelenato e ripete il tiro salvezza alla fine del suo turno successivo e, se lo supera, l'effetto svanisce. Dopo 1 minuto, il tiro viene superato automaticamente. Finché è avvelenato, il bersaglio è paralizzato."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Aberrazione"
 dimensione: "Grande"
 allineamento: "caotico malvagio"
@@ -25,6 +56,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Chuul
+
+```statblock
+monster: Chuul
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Grande Aberrazione, caotico malvagio

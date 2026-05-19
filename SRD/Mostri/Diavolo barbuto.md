@@ -11,6 +11,37 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Diavolo barbuto"
+type: "Immondo (diavolo)"
+size: "medio"
+alignment: "legale malvagio"
+ac: 13
+stats: [16, 15, 15, 9, 11, 14]
+saves: 
+  str: 5
+  con: 4
+  cha: 4
+skillsaves: {}
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 10, scurovisione_36_m_non_ostacolata_dall_oscurita_magica: true"
+languages: "Infernale, telepatia 36 m"
+gear: []
+traits: 
+- name: "Resistenza alla magia"
+  desc: "Il diavolo dispone di vantaggio ai tiri salvezza contro incantesimi e altri effetti magici."
+actions: 
+- name: "Multiattacco"
+  desc: "Il diavolo effettua un attacco Barba e un attacco Falcione infernale."
+- name: "Barba"
+  desc: "*Tiro per colpire in mischia:* +5, portata 1,5 m. *Colpito:* 7 (1d8 + 3) danni perforanti, e il bersaglio è avvelenato fino all'inizio del turno successivo del diavolo. Finché è avvelenato, il bersaglio non può recuperare punti ferita."
+- name: "Falcione infernale"
+  desc: "*Tiro per colpire in mischia:* +5, portata 3 m. *Colpito:* 8 (1d10 + 3) danni taglienti. Se il bersaglio è una creatura e non ha già una ferita infernale, subisce il seguente effetto.\n\n*Tiro salvezza su Costituzione:* CD 12.\n\n*Fallimento:* il bersaglio subisce una ferita infernale. Finché è ferito, il bersaglio perde 5 (1d10) punti ferita all'inizio di ogni suo turno. La ferita si rimargina dopo 1 minuto, dopo che un incantesimo ripristina i punti ferita del bersaglio, o dopo che il bersaglio o una creatura entro 1,5 metri effettua un'azione per tamponare la ferita superando una prova di Saggezza (Medicina) con CD 12."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Immondo (diavolo)"
 dimensione: "Medio"
 allineamento: "legale malvagio"
@@ -25,6 +56,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Diavolo barbuto
+
+```statblock
+monster: Diavolo barbuto
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Medio Immondo (diavolo), legale malvagio

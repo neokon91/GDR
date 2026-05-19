@@ -11,6 +11,9 @@ creature:
 personaggi:
   - [[Prova - PG]]
   - [[Prova - PNG]]
+mappe:
+  - [[Schema Relazioni GDR.excalidraw]]
+audio: []
 pericolo: 5
 ricompense:
   - [[Prova - Oggetto]]
@@ -29,6 +32,12 @@ encounter_creatures:
 > [!regola] Tiri rapidi
 > - Iniziativa: `dice: 1d20`
 
+## Statblock
+
+```statblock
+monster: Prova - Creatura
+```
+
 ## Initiative Tracker
 
 ```encounter
@@ -37,3 +46,11 @@ players: true
 creatures:
   - Prova - Creatura
 ```
+
+## Round E Condizioni
+
+> [!timer] Round
+> 1
+
+> [!pericolo] Condizioni
+> - accecato fino al round 2

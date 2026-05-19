@@ -11,6 +11,30 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Triceratopo"
+type: "Bestia (dinosauro)"
+size: "enorme"
+alignment: "senza allineamento"
+ac: 14
+stats: [22, 9, 17, 2, 11, 5]
+saves: {}
+skillsaves: {}
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 10"
+languages: "nessuna"
+gear: []
+traits: []
+actions: 
+- name: "Multiattacco"
+  desc: "Il triceratopo effettua due attacchi Trafiggere."
+- name: "Trafiggere"
+  desc: "*Tiro per colpire in mischia:* +9, portata 1,5 m. *Colpito:* 19 (2d12 + 6) danni perforanti. Se il bersaglio è una creatura di taglia Enorme o inferiore e il triceratopo si è mosso di 6 metri o più in linea retta verso di esso subito prima del colpo, il bersaglio subisce 9 (2d8) danni perforanti extra e cade a terra prono."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Bestia (dinosauro)"
 dimensione: "Enorme"
 allineamento: "senza allineamento"
@@ -25,6 +49,10 @@ bonus_competenza: 3
 statblock: true
 ---
 # Triceratopo
+
+```statblock
+monster: Triceratopo
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Enorme Bestia (dinosauro), senza allineamento

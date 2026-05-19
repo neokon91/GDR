@@ -11,6 +11,41 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Vrock"
+type: "Immondo (demone)"
+size: "grande"
+alignment: "caotico malvagio"
+ac: 15
+stats: [17, 15, 18, 8, 13, 8]
+saves: 
+  dex: 5
+  wis: 4
+  cha: 2
+skillsaves: {}
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 11, scurovisione: 36 m"
+languages: "Abissale, telepatia 36 m"
+gear: []
+traits: 
+- name: "Resistenza alla magia"
+  desc: "Il vrock dispone di vantaggio ai tiri salvezza contro incantesimi e altri effetti magici."
+- name: "Ristoro demoniaco"
+  desc: "Se il vrock muore al di fuori dell'Abisso, il suo corpo si dissolve diventando icore ed esso ne acquisisce uno nuovo all'istante, tornando in vita con tutti i suoi punti ferita da qualche parte nell'Abisso."
+actions: 
+- name: "Multiattacco"
+  desc: "Il vrock effettua due attacchi Sbrandellare."
+- name: "Sbrandellare"
+  desc: "*Tiro per colpire in mischia:* +6, portata 1,5 m *Colpito:* 10 (2d6 + 3) danni perforanti più 10 (3d6) danni da veleno."
+- name: "Spore (ricarica 6)"
+  desc: "*Tiro salvezza su Costituzione:* CD 15, tutte le creature in un'emanazione di 6 metri di cui il vrock è il punto di origine. *Fallimento:* il bersaglio è avvelenato e ripete il tiro salvezza alla fine del suo turno successivo e, se lo supera, l'effetto svanisce. Finché è avvelenato, il bersaglio subisce 5 (1d10) danni da veleno all'inizio di ogni suo turno. L'effetto termina anticipatamente svuotandogli addosso un'ampolla di acqua santa."
+- name: "Stridio stordente (1/giorno)"
+  desc: "*Tiro salvezza su Costituzione:* CD 15, tutte le creature in un'emanazione di 6 metri di cui il vrock è il punto di origine (i demoni superano automaticamente il tiro). *Fallimento:* 10 (3d6) danni da tuono, e il bersaglio è stordito fino al termine del turno successivo del vrock."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Immondo (demone)"
 dimensione: "Grande"
 allineamento: "caotico malvagio"
@@ -25,6 +60,10 @@ bonus_competenza: 3
 statblock: true
 ---
 # Vrock
+
+```statblock
+monster: Vrock
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Grande Immondo (demone), caotico malvagio

@@ -11,6 +11,40 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Gladiatore"
+type: "Umanoide"
+size: "medio o piccolo"
+alignment: "neutrale"
+ac: 16
+stats: [18, 15, 16, 10, 12, 15]
+saves: 
+  str: 7
+  dex: 5
+  con: 6
+  wis: 4
+skillsaves: 
+  atletica: 10
+  intrattenere: 5
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 11"
+languages: "Comune"
+gear: ["armatura di cuoio borchiato", "lance (3)", "scudo"]
+traits: []
+actions: 
+- name: "Multiattacco"
+  desc: "Il gladiatore effettua tre attacchi Lancia. Può sostituire un attacco con un utilizzo di Scudo da sfondamento."
+- name: "Lancia"
+  desc: "*Tiro per colpire in mischia o a distanza:* +7, portata 1,5 m o gittata 6/18 m. *Colpito:* 11 (2d6 + 4) danni perforanti."
+- name: "Scudo da sfondamento"
+  desc: "*Tiro salvezza su Forza:* CD 15, una creatura entro 1,5 metri che il gladiatore è in grado di vedere. *Fallimento:* 9 (2d4 + 4) danni contundenti. Se il bersaglio è una creatura di taglia Media o inferiore, cade a terra prono."
+bonus_actions: []
+reactions: 
+- name: "Parata"
+  desc: "*Attivazione:* il gladiatore viene colpito da un tiro per colpire in mischia mentre tiene in mano un'arma.\n\n*Esito:* il gladiatore aggiunge 3 alla sua CA contro quell'attacco, aumentando le probabilità che il colpo non vada a segno."
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Umanoide"
 dimensione: "Medio o Piccolo"
 allineamento: "neutrale"
@@ -25,6 +59,10 @@ bonus_competenza: 3
 statblock: true
 ---
 # Gladiatore
+
+```statblock
+monster: Gladiatore
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Medio o Piccolo Umanoide, neutrale

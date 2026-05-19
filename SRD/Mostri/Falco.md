@@ -11,6 +11,29 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Falco"
+type: "Bestia"
+size: "minuscola"
+alignment: "senza allineamento"
+ac: 13
+stats: [5, 16, 8, 2, 14, 6]
+saves: {}
+skillsaves: 
+  percezione: 6
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 16"
+languages: "nessuna"
+gear: []
+traits: []
+actions: 
+- name: "Speroni"
+  desc: "*Tiro per colpire in mischia:* +5, portata 1,5 m. *Colpito:* 1 danno tagliente."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Bestia"
 dimensione: "Minuscola"
 allineamento: "senza allineamento"
@@ -25,6 +48,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Falco
+
+```statblock
+monster: Falco
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Minuscola Bestia, senza allineamento

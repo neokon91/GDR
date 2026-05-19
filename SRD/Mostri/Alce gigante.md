@@ -11,6 +11,31 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Alce gigante"
+type: "Celestiale"
+size: "enorme"
+alignment: "neutrale buono"
+ac: 14
+stats: [19, 18, 14, 7, 14, 10]
+saves: 
+  str: 6
+  dex: 6
+skillsaves: 
+  percezione: 4
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 14, scurovisione: 27 m"
+languages: "Celestiale, capisce il Comune, l'Elfico e il Silvano ma non li parla"
+gear: []
+traits: []
+actions: 
+- name: "Sfondamento"
+  desc: "*Tiro per colpire in mischia:* +6, portata 3 m. *Colpito:* 11 (2d6 + 4) danni contundenti più 5 (2d4) danni radiosi. Se il bersaglio è una creatura di taglia Enorme o inferiore e l'alce si è mosso di 6 metri o più in linea retta verso di esso subito prima del colpo, il bersaglio subisce 5 (2d4) danni contundenti extra e cade a terra prono."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Celestiale"
 dimensione: "Enorme"
 allineamento: "neutrale buono"
@@ -25,6 +50,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Alce gigante
+
+```statblock
+monster: Alce gigante
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Enorme Celestiale, neutrale buono

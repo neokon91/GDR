@@ -11,6 +11,28 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Albero risvegliato"
+type: "Vegetale"
+size: "enorme"
+alignment: "neutrale"
+ac: 13
+stats: [19, 6, 15, 10, 10, 7]
+saves: {}
+skillsaves: {}
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 10"
+languages: "Comune più un'altra lingua"
+gear: []
+traits: []
+actions: 
+- name: "Schianto"
+  desc: "*Tiro per colpire in mischia:* +6, portata 3 m. *Colpito:* 14 (3d6 + 4) danni contundenti."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Vegetale"
 dimensione: "Enorme"
 allineamento: "neutrale"
@@ -25,6 +47,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Albero risvegliato
+
+```statblock
+monster: Albero risvegliato
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Enorme Vegetale, neutrale

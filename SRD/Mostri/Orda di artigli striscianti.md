@@ -11,6 +11,30 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Orda di artigli striscianti"
+type: "Sciame"
+size: "medio"
+alignment: "neutrale malvagio"
+ac: 12
+stats: [14, 14, 11, 5, 10, 4]
+saves: {}
+skillsaves: {}
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 10, vista_cieca: 9 m"
+languages: "capisce il Comune ma non lo parla"
+gear: []
+traits: 
+- name: "Sciame"
+  desc: "L'orda può occupare lo spazio di un'altra creatura e viceversa, e può muoversi attraverso qualsiasi apertura sufficientemente larga da far passare una creatura di taglia Minuscola. L'orda non può recuperare punti ferita o ottenere punti ferita temporanei."
+actions: 
+- name: "Orda di mani afferranti"
+  desc: "*Tiro per colpire in mischia:* +4, portata 1,5 m. *Colpito:* 20 (4d8 + 2) danni necrotici, o 11 (2d8 + 2) danni necrotici se l'orda è sanguinante. Se il bersaglio è una creatura di taglia Media o inferiore, cade a terra prono."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Sciame"
 dimensione: "Medio"
 allineamento: "neutrale malvagio"
@@ -25,6 +49,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Orda di artigli striscianti
+
+```statblock
+monster: Orda di artigli striscianti
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Medio Sciame, neutrale malvagio

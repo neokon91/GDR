@@ -11,6 +11,37 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Chimera"
+type: "Mostruosità"
+size: "grande"
+alignment: "caotico malvagio"
+ac: 14
+stats: [19, 11, 19, 3, 14, 10]
+saves: {}
+skillsaves: 
+  percezione: 8
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 18, scurovisione: 18 m"
+languages: "capisce il Draconico ma non lo parla"
+gear: []
+traits: []
+actions: 
+- name: "Multiattacco"
+  desc: "La chimera effettua un attacco Sfondamento, un attacco Morso e un attacco Artiglio. Può sostituire l'attacco Artiglio con un utilizzo di Soffio di fuoco, se disponibile."
+- name: "Artiglio"
+  desc: "*Tiro per colpire in mischia:* +7, portata 1,5 m. *Colpito:* 7 (1d6 + 4) danni taglienti"
+- name: "Morso"
+  desc: "*Tiro per colpire in mischia:* +7, portata 1,5 m. *Colpito:* 11 (2d6 + 4) danni perforanti, o 18 (4d6 + 4) danni perforanti se la chimera dispone di vantaggio al tiro per colpire."
+- name: "Sfondamento"
+  desc: "*Tiro per colpire in mischia:* +7, portata 1,5 m. *Colpito:* 10 (1d12 + 4) danni contundenti. Se il bersaglio è una creatura di taglia Media o inferiore, cade a terra prono."
+- name: "Soffio di fuoco (ricarica 5-6)"
+  desc: "*Tiro salvezza su Destrezza:* CD 15, tutte le creature in un cono di 4,5 metri. *Fallimento:* 31 (7d8) danni da fuoco. *Successo:* danni dimezzati."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Mostruosità"
 dimensione: "Grande"
 allineamento: "caotico malvagio"
@@ -25,6 +56,10 @@ bonus_competenza: 3
 statblock: true
 ---
 # Chimera
+
+```statblock
+monster: Chimera
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Grande Mostruosità, caotico malvagio

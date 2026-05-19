@@ -34,6 +34,18 @@
 >
 > Dispense:
 > `INPUT[inlineListSuggester(optionQuery("Mondi/Dispense"), useLinks(partial)):dispense]`
+>
+> Mappe:
+> `INPUT[inlineListSuggester(optionQuery("Risorse/Mappe"), useLinks(partial), allowOther):mappe]`
+>
+> Audio:
+> `INPUT[inlineListSuggester(optionQuery("Risorse/Audio"), useLinks(partial), allowOther):audio]`
+>
+> Immagini:
+> `INPUT[inlineListSuggester(optionQuery("Risorse/Immagini"), useLinks(partial), allowOther):immagini]`
+>
+> Video:
+> `INPUT[inlineListSuggester(optionQuery("Risorse/Video"), useLinks(partial), allowOther):video]`
 
 > [!scena] Apertura
 >
@@ -111,6 +123,24 @@ SORT cr ASC
 TABLE tipo, stato, luogo
 FROM "Mondi/Dispense"
 WHERE contains(this.dispense, file.link)
+```
+
+## Mappe
+
+```dataview
+TABLE uso, luogo, stato
+FROM "Risorse/Mappe"
+WHERE contains(this.mappe, file.link)
+SORT uso ASC, file.name ASC
+```
+
+## Media
+
+```dataview
+TABLE uso, tono, campagna, stato
+FROM "Risorse/Audio" OR "Risorse/Immagini" OR "Risorse/Video"
+WHERE contains(this.audio, file.link) OR contains(this.immagini, file.link) OR contains(this.video, file.link)
+SORT uso ASC, tono ASC, file.name ASC
 ```
 
 ## Oggetti In Scena

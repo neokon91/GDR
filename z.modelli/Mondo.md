@@ -17,6 +17,9 @@
 > Magia:
 > `INPUT[text:magia]`
 >
+> Mappe:
+> `INPUT[inlineListSuggester(optionQuery("Risorse/Mappe"), useLinks(partial), allowOther):mappe]`
+>
 > Canonico:
 > `INPUT[toggle:canonico]`
 
@@ -85,6 +88,22 @@ FROM "Campagne"
 WHERE contains(mondi, this.file.link) OR contains(mondo, this.file.link) OR contains(this.campagne, file.link)
 SORT stato ASC, nome ASC
 ```
+
+tab: Mappe
+
+## Mappe Del Mondo
+
+`INPUT[inlineListSuggester(optionQuery("Risorse/Mappe"), useLinks(partial), allowOther):mappe]`
+
+```dataview
+TABLE uso, luogo, stato, file.mtime AS aggiornato
+FROM "Risorse/Mappe"
+WHERE contains(this.mappe, file.link) OR mondo = this.file.link
+SORT uso ASC, file.name ASC
+```
+
+> [!luogo] Schema relazioni
+> Usa [[Risorse/Mappe/Schema Relazioni GDR.excalidraw]] come base quando il mondo ha molte fazioni, PNG o missioni collegate.
 
 tab: Note
 

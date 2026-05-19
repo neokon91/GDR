@@ -11,6 +11,36 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Rospo gigante"
+type: "Bestia"
+size: "grande"
+alignment: "senza allineamento"
+ac: 11
+stats: [15, 13, 13, 2, 10, 3]
+saves: {}
+skillsaves: {}
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 10, scurovisione: 18 m"
+languages: "nessuna"
+gear: []
+traits: 
+- name: "Anfibio"
+  desc: "Il rospo può respirare in aria e in acqua."
+- name: "Balzo da fermo"
+  desc: "Il rospo può compiere un salto in lungo di massimo 6 metri e uno in alto di massimo 3 metri, con o senza rincorsa."
+actions: 
+- name: "Morso"
+  desc: "*Tiro per colpire in mischia:* +4, portata 1,5 m *Colpito:* 5 (1d6 + 2) danni perforanti più 5 (2d4) danni da veleno. Se il bersaglio è una creatura di taglia Media o inferiore, è afferrato (CD 12 per sfuggire)."
+- name: "Inghiottire"
+  desc: "Il rospo inghiotte un bersaglio di taglia"
+- name: "Media o inferiore che sta afferrando"
+  desc: "La creatura inghiottita non è afferrata, ma è accecata e trattenuta, e beneficia di copertura totale contro attacchi e altri effetti al di fuori del rospo. Inoltre, il bersaglio subisce 10 (3d6) danni da acido al termine di ogni turno del rospo. Il rospo può inghiottire un solo bersaglio alla volta e non può usare Morso finché ha un bersaglio inghiottito. Se il rospo muore, la creatura inghiottita non è più trattenuta e può fuggire dal cadavere usando 1,5 metri di movimento, uscendo prona."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Bestia"
 dimensione: "Grande"
 allineamento: "senza allineamento"
@@ -25,6 +55,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Rospo gigante
+
+```statblock
+monster: Rospo gigante
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Grande Bestia, senza allineamento

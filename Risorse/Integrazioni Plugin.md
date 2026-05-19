@@ -29,6 +29,37 @@ Prima di lavorarci, controlla:
 - quale nota di prova verifica che funzioni;
 - cosa succede se il plugin non e installato.
 
+## Stato Reale
+
+| Plugin | Stato | Dove si vede | Prossimo passo |
+| --- | --- | --- | --- |
+| Dataview | integrato | dashboard, indici, controllo vault | mantenere query semplici e filtrare sempre `Prova -` |
+| Templater | integrato | pulsanti di creazione e `z.modelli` | non aumentare i template senza nota di prova |
+| Meta Bind | integrato | dashboard e template con campi interattivi | uniformare i campi piu usati |
+| JS Engine | integrato indiretto | viste DataviewJS e Meta Bind avanzati | usarlo solo dove evita lavoro manuale |
+| Metadata Menu | parziale | gestione campi | creare set di campi per categorie principali se serve |
+| Folder Notes | integrato | note indice di cartella | mantenere indici brevi e utili |
+| Homepage | integrato | avvio su dashboard | nessun lavoro urgente |
+| Kanban | integrato | `z.bacheche` | collegare meglio post-sessione a missioni e sessioni |
+| Callout Manager | integrato | template e note operative | mantenere pochi callout riconoscibili |
+| Fantasy Statblocks | integrato | creature e mostri SRD | verificare rendering visuale in Obsidian dopo import |
+| Initiative Tracker | parziale | incontri pronti | aggiungere esempi `encounter:` solo dove sono davvero utili |
+| Dice Roller | parziale | template e tabelle rapide | creare tabelle casuali usabili dal tavolo |
+| Calendarium | parziale | sessioni, missioni, dashboard | rendere `data_mondo` e `fc-date` coerenti |
+| Excalidraw | integrato base | `Risorse/Mappe`, Worldbuilder Dashboard, template Mondo | creare nuove mappe solo quando servono a mondo, luogo o sessione |
+| Canvas | non integrato | nessuna vista dedicata | creare una canvas per fronti/fazioni quando c'e contenuto reale |
+| Media Extended | minimo | indici audio/video | aggiungere campi `uso`, `tono`, `campagna`, `stato` |
+| Hex Cartographer | non integrato | nessuna pagina operativa | rimandare finche non esiste una procedura viaggi/regioni |
+| TTRPG Tools: Maps | non integrato | nessuna pagina operativa | rimandare finche servono mappe tattiche al tavolo |
+| Generatore di Contenuti Fantasy | integrato base | `Inbox/Generati`, comando plugin | usare le note generate come bozze, mai come canonico automatico |
+| Iconize | minimo | orientamento visuale | secondario, non deve sostituire indici chiari |
+| Tabs | parziale | template lunghi | applicare solo dove riduce scrolling reale |
+| Advanced Tables | supporto | tabelle markdown | sfruttato indirettamente nelle tabelle casuali |
+| Emoji Toolbar | opzionale | nessuna dipendenza | non integrare nel flusso base |
+| Style Settings | supporto | tema/snippet | documentare solo se si stabilizza un tema del vault |
+| Iron Vault | fuori ambito | nessuna pagina GDR D&D | non integrare nel flusso D&D; usare solo per campagne Ironsworn |
+| BRAT | manutenzione | gestione plugin | non usare nel flusso utente finale |
+
 ## Prossime Integrazioni
 
 ### 1. Calendarium
@@ -88,13 +119,13 @@ Obiettivo: rendere visibili relazioni, fronti, mappe e geografia senza duplicare
 
 Da fare:
 
-- usare [[Risorse/Mappe/Schema Relazioni GDR.excalidraw]] come prova base per relazioni tra PNG, luoghi e fazioni;
-- creare una convenzione per mappe di regione, dungeon e fronti;
+- fatto: usare [[Risorse/Mappe/Schema Relazioni GDR.excalidraw]] come prova base per relazioni tra PNG, luoghi e fazioni;
+- fatto: creare una convenzione per mappe di regione, dungeon e fronti;
 - collegare ogni mappa alla nota mondo, luogo o campagna pertinente;
 - usare Excalidraw quando servono disegno libero, annotazioni visuali, embed e link tra disegni e note;
 - usare Canvas quando serve una mappa relazionale fatta di note, media, gruppi e connessioni leggibili;
 - ricordare che Canvas salva file `.canvas` in formato JSON Canvas, quindi e adatto a mappe strutturate e durevoli;
-- mostrare in Worldbuilder Dashboard le mappe principali.
+- fatto: mostrare in Worldbuilder Dashboard le mappe principali.
 
 Fatto bene quando: una mappa aiuta a capire il mondo e rimanda alle note canoniche, invece di diventare un archivio parallelo.
 
@@ -127,15 +158,21 @@ Fatto:
 - tradotta l'interfaccia principale del plugin e le impostazioni;
 - sostituite le tabelle base con contenuti italiani per citta, locande, voci, bevande, bottino, gruppi e dungeon;
 - aggiunto il pulsante `Crea nota` nella modale del generatore;
-- le note generate finiscono in `Inbox/Generati` con frontmatter minimo: `tipo`, `plugin`, `generatore`, `stato`, `creato`;
+- le note generate finiscono in `Inbox/Generati` con frontmatter compatibile con i template del vault;
+- dungeon, locande e insediamenti producono bozze `categoria: luogo`;
+- gruppi producono bozze `categoria: fazione`;
+- bottini, bevande, navi, metalli e artefatti producono bozze `categoria: oggetto`;
+- nomi fantasy producono bozze `categoria: personaggio` e `tipo: png`;
+- religioni producono bozze `categoria: religione`;
+- ogni nota conserva il testo generato in `contenuto_generato`, oltre a `plugin`, `generatore`, `stato`, `canonico` e `creato`;
 - il comando continua a offrire anche `Copia`, utile quando il risultato deve essere incollato in una nota gia aperta.
 
-Regola: tutto cio che viene generato resta `stato: bozza` finche il DM non lo rivede e lo collega a campagna, mondo, luogo o sessione.
+Regola: il plugin non esegue Templater e non sposta note nelle cartelle canoniche. Produce bozze compatibili con i template esistenti; tutto resta `stato: bozza` e `canonico: false` finche il DM non lo rivede e lo collega a campagna, mondo, luogo o sessione.
 
 Prossimi potenziamenti:
 
 - aggiungere preset di tono: classico, oscuro, fiabesco, urbano, marittimo;
-- creare template diversi per locande, dungeon, bottini e fazioni;
+- rifinire gli adapter dei singoli generatori quando cambiano i template ufficiali del vault;
 - collegare i risultati a `Campagne`, `Mondi` e `SRD/Mostri` quando una bozza diventa canonica;
 - spostare il plugin da bundle patchato a sorgenti TypeScript mantenibili.
 
@@ -150,7 +187,7 @@ Questi plugin restano secondari finche le integrazioni sopra non sono solide:
 
 ## Integrazione Trasversale: Tabs
 
-Stato: integrazione base avviata.
+Stato: integrazione base consolidata.
 
 Uso: migliorare la navigazione nei template lunghi senza cambiare i campi o la logica delle note.
 
@@ -164,6 +201,8 @@ Applicato a:
 - [[z.modelli/personaggio/PNG]]
 - [[z.modelli/fazione/Fazione]]
 - [[z.modelli/luogo/Insediamento]]
+- [[Risorse/Mappe/Mappe]]
+- [[Worldbuilder Dashboard]]
 
 Regola: usare Tabs solo per raggruppare sezioni gia esistenti. Se il plugin non e attivo, il contenuto resta comunque leggibile come blocco markdown.
 

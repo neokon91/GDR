@@ -11,6 +11,33 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Melma Grigia"
+type: "Melma"
+size: "media"
+alignment: "senza allineamento"
+ac: 9
+stats: [12, 6, 16, 1, 6, 2]
+saves: {}
+skillsaves: 
+  furtivita: 2
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 8, vista_cieca: 18 m"
+languages: "nessuna"
+gear: []
+traits: 
+- name: "Amorfo"
+  desc: "La melma può muoversi attraverso uno spazio stretto fino a 2,5 centimetri senza consumare movimento extra per farlo."
+- name: "Forma corrosiva"
+  desc: "Le munizioni non magiche che colpiscono la melma e infliggono danni sono distrutte. Qualsiasi arma non magica subisce una penalità cumulativa di -1 ai tiri per colpire subito dopo aver inflitto danni alla melma ed essere entrata in contatto con essa. Se la penalità arriva a -5, l'arma è distrutta. La penalità può essere rimossa lanciando l'incantesimo riparare sull'arma. La melma può corrodere fino a 5 centimetri di metallo o legno non magico in 1 round."
+actions: 
+- name: "Pseudopode"
+  desc: "*Tiro per colpire in mischia:* +3, portata 1,5 m. *Colpito:* 10 (2d8 + 1) danni da acido. L'armatura non magica indossata dal bersaglio subisce una penalità di -1 alla CA che fornisce. Se la penalità riduce la sua CA a 10, l'armatura si distrugge. La penalità può essere rimossa lanciando l'incantesimo riparare sull'armatura."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Melma"
 dimensione: "Media"
 allineamento: "senza allineamento"
@@ -25,6 +52,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Melma Grigia
+
+```statblock
+monster: Melma Grigia
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Media Melma, senza allineamento

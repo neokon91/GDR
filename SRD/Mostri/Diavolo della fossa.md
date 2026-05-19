@@ -11,6 +11,48 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Diavolo della fossa"
+type: "Immondo (diavolo)"
+size: "grande"
+alignment: "legale malvagio"
+ac: 21
+stats: [26, 14, 24, 22, 18, 24]
+saves: 
+  dex: 8
+  wis: 10
+skillsaves: 
+  percezione: 10
+  persuasione: 19
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 20, vista_pura: 36 m"
+languages: "Infernale, telepatia 36 m"
+gear: []
+traits: 
+- name: "Aura di paura"
+  desc: "Il diavolo della fossa irradia un'aura in un'emanazione di 6 metri fintanto che non è incapacitato.\n\n*Tiro salvezza su Saggezza:* CD 21, qualsiasi nemico che inizi il suo turno all'interno dell'aura.\n\n*Fallimento:* il bersaglio è spaventato fino all'inizio del proprio turno successivo.\n\n*Successo:* il bersaglio è immune all'aura di questo diavolo della fossa per 24 ore."
+- name: "Resistenza alla magia"
+  desc: "Il diavolo della fossa dispone di vantaggio ai tiri salvezza contro incantesimi e altri effetti magici."
+- name: "Resistenza leggendaria (4/giorno)"
+  desc: "Se il diavolo della fossa fallisce un tiro salvezza, può scegliere di superarlo comunque."
+- name: "Ristoro diabolico"
+  desc: "Se il diavolo della fossa muore al di fuori dei Nove Inferi, il suo corpo si dissolve in fumo sulfureo e ne acquisisce uno nuovo all'istante, tornando in vita con tutti i suoi punti ferita da qualche parte nei Nove Inferi."
+actions: 
+- name: "Multiattacco"
+  desc: "Il diavolo della fossa effettua un attacco Morso, due attacchi Artiglio diabolico e un attacco Mazza fiammeggiante."
+- name: "Artiglio diabolico"
+  desc: "*Tiro per colpire in mischia:* +14, portata 3 m. *Colpito:* 26 (4d8 + 8) danni necrotici."
+- name: "Mazza fiammeggiante"
+  desc: "*Tiro per colpire in mischia:* +14, portata 3 m. *Colpito:* 22 (4d6 + 8) danni da forza più 21 (6d6) danni da fuoco."
+- name: "Morso"
+  desc: "*Tiro per colpire in mischia:* +14, portata 3 m. *Colpito:* 18 (3d6 + 8) danni perforanti. Se il bersaglio è una creatura, deve effettuare il seguente tiro salvezza.\n\n*Tiro salvezza su Costituzione:* CD 21.\n\n*Fallimento:* il bersaglio viene avvelenato. Finché è avvelenato, il bersaglio non può recuperare punti ferita e subisce 21 (6d6) danni da veleno all'inizio di ogni suo turno; il bersaglio ripete il tiro salvezza al termine di ogni suo turno e, se lo supera, l'effetto svanisce. Dopo 1 minuto, la prova viene superata automaticamente."
+- name: "Incantesimi del fuoco infernale (ricarica 4-6)"
+  desc: "Il diavolo della fossa lancia palla di fuoco (di 5º livello) due volte, senza bisogno di componenti materiali e utilizzando Carisma come caratteristica da incantatore (CD del tiro salvezza sull'incantesimo 21). Può sostituire un incantesimo palla di fuoco con blocca mostri (di 7º livello) o con muro di fuoco."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Immondo (diavolo)"
 dimensione: "Grande"
 allineamento: "legale malvagio"
@@ -25,6 +67,10 @@ bonus_competenza: 6
 statblock: true
 ---
 # Diavolo della fossa
+
+```statblock
+monster: Diavolo della fossa
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Grande Immondo (diavolo), legale malvagio

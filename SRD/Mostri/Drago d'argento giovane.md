@@ -11,6 +11,39 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Drago d'argento giovane"
+type: "Drago (metallico)"
+size: "grande"
+alignment: "legale buono"
+ac: 18
+stats: [23, 10, 21, 14, 11, 19]
+saves: 
+  dex: 4
+  wis: 4
+skillsaves: 
+  furtivita: 4
+  percezione: 8
+  storia: 6
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 18, scurovisione: 36 m, vista_cieca: 9 m"
+languages: "Comune, Draconico"
+gear: []
+traits: []
+actions: 
+- name: "Multiattacco"
+  desc: "Il drago effettua tre attacchi Squarcio. Può sostituire un attacco con un utilizzo di Soffio paralizzante."
+- name: "Squarcio"
+  desc: "*Tiro per colpire in mischia:* +10, portata 3 m. *Colpito:* 15 (2d8 + 6) danni taglienti."
+- name: "Soffio di freddo (ricarica 5-6)"
+  desc: "*Tiro salvezza su Costituzione:* CD 17, tutte le creature in un cono di 9 metri. *Fallimento:* 49 (11d8) danni da freddo. *Successo:* danni dimezzati."
+- name: "Soffio paralizzante"
+  desc: "*Tiro salvezza su Costituzione:* CD 17, tutte le creature in un cono di 9 metri.\n\n*Primo fallimento:* il bersaglio è incapacitato fino al termine del proprio turno successivo. A quel punto, ripete il tiro salvezza.\n\n*Secondo fallimento:* il bersaglio è paralizzato e ripete il tiro salvezza alla fine di ogni suo turno e, se lo supera, l'effetto svanisce. Dopo 1 minuto, il tiro viene superato automaticamente."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Drago (metallico)"
 dimensione: "Grande"
 allineamento: "legale buono"
@@ -25,6 +58,10 @@ bonus_competenza: 4
 statblock: true
 ---
 # Drago d'argento giovane
+
+```statblock
+monster: Drago d'argento giovane
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Grande Drago (metallico), legale buono

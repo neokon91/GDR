@@ -11,6 +11,30 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Armatura animata"
+type: "Costrutto"
+size: "medio"
+alignment: "senza allineamento"
+ac: 18
+stats: [14, 11, 13, 1, 3, 1]
+saves: {}
+skillsaves: {}
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 6, vista_cieca: 18 m"
+languages: "nessuna"
+gear: []
+traits: []
+actions: 
+- name: "Multiattacco"
+  desc: "L'armatura effettua due attacchi Schianto."
+- name: "Schianto"
+  desc: "*Tiro per colpire in mischia:* +4, portata 1,5 m. *Colpito:* 5 (1d6 + 2) danni contundenti."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Costrutto"
 dimensione: "Medio"
 allineamento: "senza allineamento"
@@ -25,6 +49,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Armatura animata
+
+```statblock
+monster: Armatura animata
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Medio Costrutto, senza allineamento

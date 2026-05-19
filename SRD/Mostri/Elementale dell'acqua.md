@@ -11,6 +11,36 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Elementale dell'acqua"
+type: "Elementale"
+size: "grande"
+alignment: "neutrale"
+ac: 14
+stats: [18, 14, 18, 5, 10, 8]
+saves: {}
+skillsaves: {}
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 10, scurovisione: 18 m"
+languages: "Primordiale (Aquan)"
+gear: []
+traits: 
+- name: "Congelamento"
+  desc: "Se l'elementale subisce danni da freddo, la sua velocità è ridotta di 6 metri fino al termine del suo turno successivo."
+- name: "Forma d'acqua"
+  desc: "L'elementale può entrare nello spazio di un nemico e fermarvisi. Può muoversi attraverso uno spazio stretto fino a 2,5 centimetri senza consumare movimento extra per farlo."
+actions: 
+- name: "Multiattacco"
+  desc: "L'elementale effettua due attacchi Schianto."
+- name: "Schianto"
+  desc: "*Tiro per colpire in mischia:* +7, portata 1,5 m. *Colpito:* 13 (2d8 + 4) danni contundenti. Se il bersaglio è una creatura di taglia Media o inferiore, cade a terra prono."
+- name: "Sommergere (ricarica 4-6)"
+  desc: "*Tiro salvezza su Forza:* CD 15, ogni creatura nello spazio dell'elementale. *Fallimento:* 22 (4d8 + 4) danni contundenti. Se il bersaglio è una creatura di taglia Grande o inferiore, è afferrato (CD 14 per sfuggire). Finché la presa perdura, il bersaglio è trattenuto e soffoca (a meno che non sia in grado di respirare sott'acqua) e subisce 9 (2d8) danni contundenti all'inizio di ogni turno dell'elementale. Tramite Sommergere, l'elementale può afferrare una creatura di taglia Grande o un massimo di due creature di taglia Media o inferiore contemporaneamente. Con un'azione, una creatura entro 1,5 metri dall'elementale può tirare una creatura fuori da esso superando una prova di Forza (Atletica) con CD 14. *Successo:* danni dimezzati."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Elementale"
 dimensione: "Grande"
 allineamento: "neutrale"
@@ -25,6 +55,10 @@ bonus_competenza: 3
 statblock: true
 ---
 # Elementale dell'acqua
+
+```statblock
+monster: Elementale dell'acqua
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Grande Elementale, neutrale

@@ -17,6 +17,12 @@
 > Personaggi:
 > `INPUT[inlineListSuggester(optionQuery("Mondi/Personaggi"), useLinks(partial)):personaggi]`
 >
+> Mappe:
+> `INPUT[inlineListSuggester(optionQuery("Risorse/Mappe"), useLinks(partial), allowOther):mappe]`
+>
+> Audio:
+> `INPUT[inlineListSuggester(optionQuery("Risorse/Audio"), useLinks(partial), allowOther):audio]`
+>
 > Round:
 > `INPUT[number:round]`
 >
@@ -52,12 +58,17 @@ tab: Creature
 ```dataview
 TABLE type AS tipo_statblock, size AS taglia, cr
 FROM "Mondi/Creature"
-WHERE contains(this.creature, file.link)
+WHERE contains(this.creature, file.link) OR contains(this.creatures, file.link)
 SORT cr ASC
 ```
 
 ```dataviewjs
-for (const link of dv.current().creature ?? dv.current().creatures ?? []) {
+const currentCreatureLinks = [
+  ...dv.array(dv.current().creature ?? []).array(),
+  ...dv.array(dv.current().creatures ?? []).array()
+];
+
+for (const link of currentCreatureLinks) {
   const page = dv.page(link.path ?? link);
   if (page?.name) {
     dv.paragraph("```statblock\nmonster: " + page.name + "\n```");
@@ -72,13 +83,27 @@ Creature incontro:
 
 ```dataviewjs
 const current = dv.current();
-const creatures = dv.array(current.encounter_creatures ?? [])
+let creatures = dv.array(current.encounter_creatures ?? [])
   .map(value => String(value ?? "").trim())
   .where(Boolean)
   .array();
 
 if (!creatures.length) {
-  dv.paragraph("Aggiungi le creature dell'iniziativa nel campo sopra.");
+  const linkedCreatures = [
+    ...dv.array(current.creature ?? []).array(),
+    ...dv.array(current.creatures ?? []).array()
+  ];
+
+  creatures = dv.array(linkedCreatures)
+    .map(link => dv.page(link.path ?? link))
+    .where(Boolean)
+    .map(page => page.name ?? page.nome ?? page.file.name)
+    .where(Boolean)
+    .array();
+}
+
+if (!creatures.length) {
+  dv.paragraph("Aggiungi creature all'incontro o compila il campo dell'iniziativa.");
 } else {
   const lines = [
     "```encounter",
@@ -123,6 +148,24 @@ tab: Tattiche
 
 > [!luogo] Terreno
 >
+
+## Mappe
+
+```dataview
+TABLE uso, luogo, stato
+FROM "Risorse/Mappe"
+WHERE contains(this.mappe, file.link)
+SORT uso ASC, file.name ASC
+```
+
+## Audio
+
+```dataview
+TABLE uso, tono, campagna, stato
+FROM "Risorse/Audio"
+WHERE contains(this.audio, file.link)
+SORT uso ASC, tono ASC, file.name ASC
+```
 
 tab: Ricompense
 

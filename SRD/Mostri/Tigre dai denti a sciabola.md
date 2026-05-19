@@ -11,6 +11,38 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Tigre dai denti a sciabola"
+type: "Bestia"
+size: "grande"
+alignment: "senza allineamento"
+ac: 13
+stats: [18, 17, 15, 3, 12, 8]
+saves: 
+  str: 6
+  dex: 5
+skillsaves: 
+  furtivita: 7
+  percezione: 5
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 15, scurovisione: 18 m"
+languages: "nessuna"
+gear: []
+traits: 
+- name: "Balzo in corsa"
+  desc: "Dopo una rincorsa di 3 metri, la tigre può effettuare un salto in lungo di un massimo di 7,5 metri."
+actions: 
+- name: "Multiattacco"
+  desc: "La tigre effettua due attacchi Squarcio."
+- name: "Squarcio"
+  desc: "*Tiro per colpire in mischia:* +6, portata 1,5 m. *Colpito:* 11 (2d6 + 4) danni taglienti."
+bonus_actions: 
+- name: "Fuga agile"
+  desc: "La tigre effettua l'azione di Disimpegno o Nascondersi."
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Bestia"
 dimensione: "Grande"
 allineamento: "senza allineamento"
@@ -25,6 +57,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Tigre dai denti a sciabola
+
+```statblock
+monster: Tigre dai denti a sciabola
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Grande Bestia, senza allineamento

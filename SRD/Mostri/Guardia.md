@@ -11,6 +11,29 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Guardia"
+type: "Umanoide"
+size: "medio o piccolo"
+alignment: "neutrale"
+ac: 16
+stats: [13, 12, 12, 10, 11, 10]
+saves: {}
+skillsaves: 
+  percezione: 2
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 12"
+languages: "Comune"
+gear: ["giaco di maglia", "lancia", "scudo"]
+traits: []
+actions: 
+- name: "Lancia"
+  desc: "*Tiro per colpire in mischia o a distanza:* +3, portata 1,5 m o gittata 6/18 m. *Colpito:* 4 (1d6 + 1) danni perforanti."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Umanoide"
 dimensione: "Medio o Piccolo"
 allineamento: "neutrale"
@@ -25,6 +48,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Guardia
+
+```statblock
+monster: Guardia
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Medio o Piccolo Umanoide, neutrale

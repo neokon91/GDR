@@ -11,6 +11,41 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Mago"
+type: "Umanoide"
+size: "medio o piccolo"
+alignment: "neutrale"
+ac: 15
+stats: [9, 14, 11, 17, 12, 11]
+saves: 
+  int: 6
+  wis: 4
+skillsaves: 
+  arcano: 6
+  percezione: 4
+  storia: 6
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 14"
+languages: "Comune più altre tre lingue"
+gear: ["bacchetta"]
+traits: []
+actions: 
+- name: "Multiattacco"
+  desc: "Il mago effettua tre attacchi Esplosione arcana."
+- name: "Esplosione arcana"
+  desc: "*Tiro per colpire in mischia o a distanza:* +6, portata 1,5 m o gittata 36 m. *Colpito:* 16 (3d8 + 3) danni da forza."
+- name: "Incantesimi"
+  desc: "Il mago lancia uno dei seguenti incantesimi, utilizzando Intelligenza come caratteristica da incantatore (CD del tiro salvezza sull'incantesimo 14): 1/giorno ciascuno: Cono di freddo, volare 2/giorno ciascuno: Invisibilità, palla di fuoco (di 4º livello) A volontà: Armatura magica (inclusa nella CA), individuazione del magico, luce, mano magica, prestidigitazione"
+bonus_actions: 
+- name: "Passo velato (3/giorno)"
+  desc: "Il mago lancia passo velato, utilizzando la stessa caratteristica da incantatore di Incantesimi."
+reactions: 
+- name: "Magia di protezione (3/giorno)"
+  desc: "Il mago lancia controincantesimo o scudo come risposta all'innesco dell'incantesimo, utilizzando la stessa caratteristica da incantatore di Incantesimi."
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Umanoide"
 dimensione: "Medio o Piccolo"
 allineamento: "neutrale"
@@ -25,6 +60,10 @@ bonus_competenza: 3
 statblock: true
 ---
 # Mago
+
+```statblock
+monster: Mago
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Medio o Piccolo Umanoide, neutrale

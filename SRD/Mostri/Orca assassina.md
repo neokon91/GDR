@@ -11,6 +11,32 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Orca assassina"
+type: "Bestia"
+size: "enorme"
+alignment: "senza allineamento"
+ac: 12
+stats: [19, 14, 13, 3, 12, 7]
+saves: {}
+skillsaves: 
+  furtivita: 4
+  percezione: 3
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 13, vista_cieca: 36 m"
+languages: "nessuna"
+gear: []
+traits: 
+- name: "Apnea"
+  desc: "L'orca può trattenere il respiro per 30 minuti."
+actions: 
+- name: "Morso"
+  desc: "*Tiro per colpire in mischia:* +6, portata 1,5 m. *Colpito:* 21 (5d6 + 4) danni perforanti."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Bestia"
 dimensione: "Enorme"
 allineamento: "senza allineamento"
@@ -25,6 +51,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Orca assassina
+
+```statblock
+monster: Orca assassina
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Enorme Bestia, senza allineamento

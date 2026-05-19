@@ -11,6 +11,36 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Drago rosso giovane"
+type: "Drago (cromatico)"
+size: "grande"
+alignment: "caotico malvagio"
+ac: 18
+stats: [23, 10, 21, 14, 11, 19]
+saves: 
+  dex: 4
+  wis: 4
+skillsaves: 
+  furtivita: 4
+  percezione: 8
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 18, scurovisione: 36 m, vista_cieca: 9 m"
+languages: "Comune, Draconico"
+gear: []
+traits: []
+actions: 
+- name: "Multiattacco"
+  desc: "Il drago effettua tre attacchi Squarcio."
+- name: "Squarcio"
+  desc: "*Tiro per colpire in mischia:* +10, portata 3 m. *Colpito:* 13 (2d6 + 6) danni taglienti più 3 (1d6) danni da fuoco."
+- name: "Soffio di fuoco (ricarica 5-6)"
+  desc: "*Tiro salvezza su Destrezza:* CD 17, tutte le creature in un cono di 9 metri. *Fallimento:* 56 (16d6) danni da fuoco. *Successo:* danni dimezzati."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Drago (cromatico)"
 dimensione: "Grande"
 allineamento: "caotico malvagio"
@@ -25,6 +55,10 @@ bonus_competenza: 4
 statblock: true
 ---
 # Drago rosso giovane
+
+```statblock
+monster: Drago rosso giovane
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Grande Drago (cromatico), caotico malvagio

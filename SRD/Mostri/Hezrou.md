@@ -11,6 +11,41 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Hezrou"
+type: "Immondo (demone)"
+size: "grande"
+alignment: "caotico malvagio"
+ac: 18
+stats: [19, 17, 20, 5, 12, 13]
+saves: 
+  str: 7
+  con: 8
+  wis: 4
+skillsaves: {}
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 11, scurovisione: 36 m"
+languages: "Abissale, telepatia 36 m"
+gear: []
+traits: 
+- name: "Fetore"
+  desc: "*Tiro salvezza su Costituzione:* CD 16, ogni creatura che inizi il suo turno in un'emanazione di 3 metri di cui l'hezrou è il punto di origine. *Fallimento:* il bersaglio è avvelenato fino all'inizio del proprio turno successivo."
+- name: "Resistenza alla magia"
+  desc: "L'hezrou dispone di vantaggio ai tiri salvezza contro incantesimi e altri effetti magici."
+- name: "Ristoro demoniaco"
+  desc: "Se l'hezrou muore al di fuori dell'Abisso, il suo corpo si dissolve diventando icore ed esso ne acquisisce uno nuovo all'istante, tornando in vita con tutti i suoi punti ferita da qualche parte nell'Abisso."
+actions: 
+- name: "Multiattacco"
+  desc: "L'hezrou effettua tre attacchi Squarcio."
+- name: "Squarcio"
+  desc: "*Tiro per colpire in mischia:* +7, portata 1,5 m. *Colpito:* 6 (1d4 + 4) danni taglienti più 9 (2d8) danni da veleno."
+bonus_actions: 
+- name: "Balzo"
+  desc: "L'hezrou salta fino a 9 metri usando 3 metri di movimento."
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Immondo (demone)"
 dimensione: "Grande"
 allineamento: "caotico malvagio"
@@ -25,6 +60,10 @@ bonus_competenza: 3
 statblock: true
 ---
 # Hezrou
+
+```statblock
+monster: Hezrou
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Grande Immondo (demone), caotico malvagio

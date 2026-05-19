@@ -11,6 +11,30 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Lemure"
+type: "Immondo (diavolo)"
+size: "medio"
+alignment: "legale malvagio"
+ac: 9
+stats: [10, 5, 11, 1, 11, 3]
+saves: {}
+skillsaves: {}
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 10, scurovisione_36_m_non_ostacolata_dall_oscurita_magica: true"
+languages: "capisce l'Infernale ma non lo parla"
+gear: []
+traits: 
+- name: "Ristoro immondo"
+  desc: "Se il lemure muore nei Nove Inferi, torna in vita con tutti i suoi punti ferita dopo 1d10 giorni, a meno che non venga ucciso da una creatura sotto gli effetti di un incantesimo benedizione o i suoi resti vengano spruzzati di acqua santa."
+actions: 
+- name: "Melma vile"
+  desc: "*Tiro per colpire in mischia:* +2, portata 1,5 m. *Colpito:* 2 (1d4) danni da veleno."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Immondo (diavolo)"
 dimensione: "Medio"
 allineamento: "legale malvagio"
@@ -25,6 +49,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Lemure
+
+```statblock
+monster: Lemure
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Medio Immondo (diavolo), legale malvagio

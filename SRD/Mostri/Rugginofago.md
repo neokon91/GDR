@@ -11,6 +11,38 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Rugginofago"
+type: "Mostruosità"
+size: "media"
+alignment: "senza allineamento"
+ac: 14
+stats: [13, 12, 13, 2, 13, 6]
+saves: {}
+skillsaves: {}
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 11, scurovisione: 18 m"
+languages: "nessuna"
+gear: []
+traits: 
+- name: "Fiutare il ferro"
+  desc: "Il rugginofago può individuare la precisa ubicazione di qualsiasi metallo ferroso situato entro 9 metri da esso."
+actions: 
+- name: "Multiattacco"
+  desc: "Il rugginofago effettua un attacco Morso e usa Antenne due volte."
+- name: "Morso"
+  desc: "*Tiro per colpire in mischia:* +3, portata 1,5 m. *Colpito:* 5 (1d8 + 1) danni perforanti."
+- name: "Antenne"
+  desc: "Il rugginofago prende di mira un oggetto in metallo non magico (armatura o arma) indossato o trasportato da una creatura entro 1,5 metri da sé. *Tiro salvezza su Destrezza:* CD 11, la creatura che possiede l'oggetto. *Fallimento:* l'oggetto subisce una penalità di -1 alla CA che fornisce (armatura) o ai suoi tiri per colpire (arma). L'armatura viene distrutta se la penalità riduce la sua CA a 10; l'arma viene distrutta se la sua penalità arriva a -5. La penalità può essere rimossa lanciando l'incantesimo riparare sull'armatura o sull'arma."
+- name: "Distruggere metallo"
+  desc: "Il rugginofago tocca un oggetto in metallo non magico entro 1,5 metri da sé che non è indossato o trasportato. Il tocco distrugge una porzione di oggetto pari a un cubo con spigolo di 30 centimetri."
+bonus_actions: []
+reactions: 
+- name: "Antenne riflesse"
+  desc: "Attivazione: Un tiro per colpire colpisce il rugginofago. Esito: il rugginofago usa Antenne."
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Mostruosità"
 dimensione: "Media"
 allineamento: "senza allineamento"
@@ -25,6 +57,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Rugginofago
+
+```statblock
+monster: Rugginofago
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Media Mostruosità, senza allineamento

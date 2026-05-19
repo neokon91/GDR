@@ -11,6 +11,36 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Cavaliere"
+type: "Umanoide"
+size: "medio o piccolo"
+alignment: "neutrale"
+ac: 18
+stats: [16, 11, 14, 11, 11, 15]
+saves: 
+  con: 4
+  wis: 2
+skillsaves: {}
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 10"
+languages: "Comune più un'altra lingua"
+gear: ["armatura a piastre", "balestra pesante", "spadone"]
+traits: []
+actions: 
+- name: "Multiattacco"
+  desc: "Il cavaliere effettua due attacchi, usando Spadone o Balestra pesante in qualsiasi combinazione."
+- name: "Spadone"
+  desc: "*Tiro per colpire in mischia:* +5, portata 1,5 m *Colpito:* 10 (2d6 + 3) danni taglienti più 4 (1d8) danni radiosi."
+- name: "Balestra pesante"
+  desc: "*Tiro per colpire a distanza:* +2, gittata 30/120 m. *Colpito:* 11 (2d10) danni perforanti più 4 (1d8) danni radiosi."
+bonus_actions: []
+reactions: 
+- name: "Parata"
+  desc: "*Attivazione:* il cavaliere viene colpito da un tiro per colpire in mischia mentre tiene in mano un'arma. *Esito:* il cavaliere aggiunge 2 alla sua CA contro quell'attacco, aumentando le probabilità che il colpo non vada a segno."
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Umanoide"
 dimensione: "Medio o Piccolo"
 allineamento: "neutrale"
@@ -25,6 +55,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Cavaliere
+
+```statblock
+monster: Cavaliere
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Medio o Piccolo Umanoide, neutrale

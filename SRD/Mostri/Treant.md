@@ -11,6 +11,36 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Treant"
+type: "Vegetale"
+size: "enorme"
+alignment: "caotico buono"
+ac: 16
+stats: [23, 8, 21, 12, 16, 12]
+saves: {}
+skillsaves: {}
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 13"
+languages: "Comune, Druidico, Elfico, Silvano"
+gear: []
+traits: 
+- name: "Mostro da assedio"
+  desc: "Il treant infligge danni doppi a oggetti e strutture."
+actions: 
+- name: "Multiattacco"
+  desc: "Il treant effettua due attacchi Schianto."
+- name: "Schianto"
+  desc: "*Tiro per colpire in mischia:* +10, portata 1,5 m. *Colpito:* 16 (3d6 + 6) danni contundenti."
+- name: "Proiettili di corteccia"
+  desc: "*Tiro per colpire a distanza:* +10, gittata 54 m. *Colpito:* 28 (4d10 + 6) danni perforanti."
+- name: "Animare alberi (1/giorno)"
+  desc: "Il treant anima magicamente fino a due alberi nel suo campo visivo in un raggio di 18 metri. Gli alberi usano la scheda delle statistiche del treant, fatta eccezione per i punteggi di Intelligenza e Carisma pari a 1; inoltre, non possono parlare e non possiedono quest'azione. L'albero svolge il suo turno subito dopo il treant, condivide lo stesso punteggio di iniziativa e gli obbedisce. Un albero resta animato per 1 giorno o fino alla morte, finché non muore il treant o finché non si trova a più di 36 metri da esso. Dopodiché, qualora possibile, l'albero mette radici."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Vegetale"
 dimensione: "Enorme"
 allineamento: "caotico buono"
@@ -25,6 +55,10 @@ bonus_competenza: 4
 statblock: true
 ---
 # Treant
+
+```statblock
+monster: Treant
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Enorme Vegetale, caotico buono

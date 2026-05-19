@@ -11,6 +11,30 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Bandito"
+type: "Umanoide"
+size: "medio o piccolo"
+alignment: "neutrale"
+ac: 12
+stats: [11, 12, 12, 10, 10, 10]
+saves: {}
+skillsaves: {}
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 10"
+languages: "Comune, Gergo ladresco"
+gear: ["armatura di cuoio", "balestra leggera", "scimitarra"]
+traits: []
+actions: 
+- name: "Balestra leggera"
+  desc: "*Tiro per colpire a distanza:* +3, gittata 24/96 m. *Colpito:* 5 (1d8 + 1) danni perforanti."
+- name: "Scimitarra"
+  desc: "*Tiro per colpire in mischia:* +3, portata 1,5 m. *Colpito:* 4 (1d6 + 1) danni taglienti."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Umanoide"
 dimensione: "Medio o Piccolo"
 allineamento: "neutrale"
@@ -25,6 +49,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Bandito
+
+```statblock
+monster: Bandito
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Medio o Piccolo Umanoide, neutrale

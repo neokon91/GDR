@@ -11,6 +11,31 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Grifone"
+type: "Mostruosità"
+size: "grande"
+alignment: "senza allineamento"
+ac: 12
+stats: [18, 15, 16, 2, 13, 8]
+saves: {}
+skillsaves: 
+  percezione: 5
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 15, scurovisione: 18 m"
+languages: "nessuna"
+gear: []
+traits: []
+actions: 
+- name: "Multiattacco"
+  desc: "Il grifone effettua due attacchi Squarcio."
+- name: "Squarcio"
+  desc: "*Tiro per colpire in mischia:* +6, portata 1,5 m. *Colpito:* 8 (1d8 + 4) danni perforanti. Se il bersaglio è una creatura di taglia Media o inferiore, è afferrato (CD 14 per sfuggire) da entrambi gli artigli frontali del grifone."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Mostruosità"
 dimensione: "Grande"
 allineamento: "senza allineamento"
@@ -25,6 +50,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Grifone
+
+```statblock
+monster: Grifone
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Grande Mostruosità, senza allineamento

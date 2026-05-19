@@ -11,6 +11,44 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Naga guardiana"
+type: "Celestiale"
+size: "grande"
+alignment: "legale buono"
+ac: 18
+stats: [19, 18, 16, 16, 19, 18]
+saves: 
+  dex: 8
+  con: 7
+  int: 7
+  wis: 8
+  cha: 8
+skillsaves: 
+  arcano: 11
+  religione: 11
+  storia: 11
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 14, scurovisione: 18 m"
+languages: "Celestiale, Comune"
+gear: []
+traits: 
+- name: "Ristoro celestiale"
+  desc: "Se la naga muore, torna in vita 1d6 giorni dopo e recupera tutti i suoi punti ferita, a meno che non venga lanciato dissolvi il bene e il male sui suoi resti."
+actions: 
+- name: "Multiattacco"
+  desc: "La naga effettua due attacchi Morso. Può sostituire qualsiasi attacco con un utilizzo di Sputo velenoso."
+- name: "Morso"
+  desc: "*Tiro per colpire in mischia:* +8, portata 3 m. *Colpito:* 17 (2d12 + 4) danni perforanti più 22 (4d10) danni da veleno."
+- name: "Incantesimi"
+  desc: "La naga lancia uno dei seguenti incantesimi, senza bisogno di componenti somatiche o materiali, utilizzando Saggezza come caratteristica da incantatore (CD del tiro salvezza sull'incantesimo 16): 1/giorno ciascuno: Chiaroveggenza, colpo infuocato (di 6º livello), costrizione, cura ferite (di 6º livello), visione del vero A volontà: taumaturgia"
+- name: "Sputo velenoso"
+  desc: "*Tiro salvezza su Costituzione:* CD 16, una creatura che la naga è in grado di vedere entro 18 metri. *Fallimento:* 31 (7d8) danni da veleno, e il bersaglio è accecato fino all'inizio del turno successivo della naga. *Successo:* danni dimezzati."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Celestiale"
 dimensione: "Grande"
 allineamento: "legale buono"
@@ -25,6 +63,10 @@ bonus_competenza: 4
 statblock: true
 ---
 # Naga guardiana
+
+```statblock
+monster: Naga guardiana
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Grande Celestiale, legale buono

@@ -11,6 +11,33 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Goblin guerriero"
+type: "Folletto (goblinoide)"
+size: "piccolo"
+alignment: "caotico neutrale"
+ac: 15
+stats: [8, 15, 10, 10, 8, 8]
+saves: {}
+skillsaves: 
+  furtivita: 6
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 9, scurovisione: 18 m"
+languages: "Comune, Goblin"
+gear: ["arco corto", "armatura di cuoio", "scimitarra", "scudo"]
+traits: []
+actions: 
+- name: "Scimitarra"
+  desc: "*Tiro per colpire in mischia:* +4, portata 1,5 m. *Colpito:* 5 (1d6 + 2) danni taglienti, più 2 (1d4) danni taglienti se il tiro per colpire è stato effettuato con vantaggio."
+- name: "Arco corto"
+  desc: "*Tiro per colpire a distanza:* +4, gittata 24/96 m. *Colpito:* 5 (1d6 + 2) danni perforanti, più 2 (1d4) danni perforanti se il tiro per colpire è stato effettuato con vantaggio."
+bonus_actions: 
+- name: "Fuga agile"
+  desc: "Il goblin effettua l'azione di Disimpegno o Nascondersi."
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Folletto (goblinoide)"
 dimensione: "Piccolo"
 allineamento: "caotico neutrale"
@@ -25,6 +52,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Goblin guerriero
+
+```statblock
+monster: Goblin guerriero
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Piccolo Folletto (goblinoide), caotico neutrale

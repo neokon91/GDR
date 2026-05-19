@@ -1,8 +1,18 @@
+---
+cssclasses:
+  - indice
+categoria: risorsa
+tipo: audio
+stato: pronto
+---
+
 # Audio
 
+Usa campi semplici nelle note audio quando servono: `uso`, `tono`, `campagna`, `stato`.
+
 ```dataview
-LIST
+TABLE uso, tono, campagna, stato
 FROM "Risorse/Audio"
 WHERE file.name != "Audio" AND !startswith(file.name, "Prova -")
-SORT file.name ASC
+SORT uso ASC, tono ASC, file.name ASC
 ```

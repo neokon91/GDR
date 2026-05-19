@@ -11,6 +11,33 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Viverna"
+type: "Drago"
+size: "grande"
+alignment: "senza allineamento"
+ac: 14
+stats: [19, 10, 16, 5, 12, 6]
+saves: {}
+skillsaves: 
+  percezione: 4
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 14, scurovisione: 36 m"
+languages: "nessuna"
+gear: []
+traits: []
+actions: 
+- name: "Multiattacco"
+  desc: "La viverna effettua un attacco Morso e un attacco Pungiglione."
+- name: "Morso"
+  desc: "*Tiro per colpire in mischia:* +7, portata 1,5 m. *Colpito:* 13 (2d8 + 4) danni perforanti."
+- name: "Pungiglione"
+  desc: "*Tiro per colpire in mischia:* +7, portata 3 m. *Colpito:* 11 (2d6 + 4) danni perforanti più 24 (7d6) danni da veleno, e il bersaglio è avvelenato fino all'inizio del turno successivo della viverna."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Drago"
 dimensione: "Grande"
 allineamento: "senza allineamento"
@@ -25,6 +52,10 @@ bonus_competenza: 3
 statblock: true
 ---
 # Viverna
+
+```statblock
+monster: Viverna
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Grande Drago, senza allineamento

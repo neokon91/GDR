@@ -11,6 +11,40 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Medusa"
+type: "Mostruosità"
+size: "media"
+alignment: "legale malvagio"
+ac: 15
+stats: [10, 17, 16, 12, 13, 15]
+saves: 
+  wis: 4
+skillsaves: 
+  furtivita: 6
+  inganno: 5
+  percezione: 4
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 14, scurovisione: 45 m"
+languages: "Comune più un'altra lingua"
+gear: []
+traits: []
+actions: 
+- name: "Multiattacco"
+  desc: "La medusa effettua due attacchi Artiglio e un attacco Chioma di serpenti, o tre attacchi Raggio velenoso."
+- name: "Artiglio"
+  desc: "*Tiro per colpire in mischia:* +6, portata 1,5 m. *Colpito:* 10 (2d6 + 3) danni taglienti."
+- name: "Chioma di serpenti"
+  desc: "*Tiro per colpire in mischia:* +6, portata 1,5 m *Colpito:* 5 (1d4 + 3) danni perforanti più 14 (4d6) danni da veleno."
+- name: "Raggio velenoso"
+  desc: "*Tiro per colpire a distanza:* +5, gittata 45 m. *Colpito:* 11 (2d8 + 2) danni da veleno."
+bonus_actions: 
+- name: "Sguardo pietrificante (ricarica 5-6)"
+  desc: "*Tiro salvezza su Costituzione:* CD 13, tutte le creature in un cono di 9 metri. Se la medusa vede il suo riflesso nel cono, deve effettuare questo tiro salvezza. *Primo fallimento:* il bersaglio è trattenuto. Ripete il tiro salvezza al termine del proprio turno successivo se è ancora trattenuto e, se lo supera, l'effetto svanisce. *Secondo fallimento:* il bersaglio è pietrificato invece che trattenuto."
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Mostruosità"
 dimensione: "Media"
 allineamento: "legale malvagio"
@@ -25,6 +59,10 @@ bonus_competenza: 3
 statblock: true
 ---
 # Medusa
+
+```statblock
+monster: Medusa
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Media Mostruosità, legale malvagio

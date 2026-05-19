@@ -11,6 +11,34 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Wraith"
+type: "Non morto"
+size: "medio o piccolo"
+alignment: "neutrale malvagio"
+ac: 13
+stats: [6, 16, 16, 12, 14, 15]
+saves: {}
+skillsaves: {}
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 12, scurovisione: 18 m"
+languages: "Comune più altre due lingue"
+gear: []
+traits: 
+- name: "Movimento incorporeo"
+  desc: "Il wraith può muoversi attraverso altre creature e oggetti come se fossero terreno difficile. Se termina il suo turno all'interno di un oggetto, subisce 5 (1d10) danni da forza."
+- name: "Sensibilità al sole"
+  desc: "Finché è esposto alla luce del sole, il wraith subisce svantaggio alle prove di caratteristica e ai tiri per colpire."
+actions: 
+- name: "Risucchio di vita"
+  desc: "*Tiro per colpire in mischia:* +6, portata 1,5 m. *Colpito:* 21 (4d8 + 3) danni necrotici. Se il bersaglio è una creatura, i suoi punti ferita massimi sono ridotti di una quantità pari ai danni subiti."
+- name: "Creare spettro"
+  desc: "Il wraith bersaglia il cadavere di un umanoide situato entro 3 metri da sé che non abbia perso la vita da più di 1 minuto. Lo spirito del bersaglio si anima come spettro nello spazio del suo cadavere o nello spazio libero più vicino. Lo spettro è sotto il controllo del wraith. Il wraith non può controllare più di sette spettri simultaneamente."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Non morto"
 dimensione: "Medio o Piccolo"
 allineamento: "neutrale malvagio"
@@ -25,6 +53,10 @@ bonus_competenza: 3
 statblock: true
 ---
 # Wraith
+
+```statblock
+monster: Wraith
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Medio o Piccolo Non morto, neutrale malvagio

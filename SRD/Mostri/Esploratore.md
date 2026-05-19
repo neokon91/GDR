@@ -11,6 +11,36 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Esploratore"
+type: "Umanoide"
+size: "medio o piccolo"
+alignment: "neutrale"
+ac: 13
+stats: [11, 14, 12, 11, 13, 11]
+saves: {}
+skillsaves: 
+  furtivita: 6
+  natura: 4
+  percezione: 5
+  sopravvivenza: 5
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 15"
+languages: "Comune più un'altra lingua"
+gear: ["arco lungo", "armatura di cuoio", "spada corta"]
+traits: []
+actions: 
+- name: "Multiattacco"
+  desc: "L'esploratore effettua due attacchi, usando Spada corta e Arco lungo in qualsiasi combinazione."
+- name: "Spada corta"
+  desc: "*Tiro per colpire in mischia:* +4, portata 1,5 m. *Colpito:* 5 (1d6 + 2) danni perforanti."
+- name: "Arco lungo"
+  desc: "*Tiro per colpire a distanza:* +4, gittata 45/180 m. *Colpito:* 6 (1d8 + 2) danni perforanti."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Umanoide"
 dimensione: "Medio o Piccolo"
 allineamento: "neutrale"
@@ -25,6 +55,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Esploratore
+
+```statblock
+monster: Esploratore
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Medio o Piccolo Umanoide, neutrale

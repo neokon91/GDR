@@ -11,6 +11,34 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Rana"
+type: "Bestia"
+size: "minuscola"
+alignment: "senza allineamento"
+ac: 11
+stats: [1, 13, 8, 1, 8, 3]
+saves: {}
+skillsaves: 
+  furtivita: 3
+  percezione: 1
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 11, scurovisione: 9 m"
+languages: "nessuna"
+gear: []
+traits: 
+- name: "Anfibio"
+  desc: "La rana può respirare in aria e in acqua."
+- name: "Balzo da fermo"
+  desc: "La rana può compiere un salto in lungo di un massimo di 3 metri e uno in alto di un massimo di 1,5 metri, con o senza rincorsa."
+actions: 
+- name: "Morso"
+  desc: "*Tiro per colpire in mischia:* +3, portata 1,5 m. *Colpito:* 1 danno perforante."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Bestia"
 dimensione: "Minuscola"
 allineamento: "senza allineamento"
@@ -25,6 +53,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Rana
+
+```statblock
+monster: Rana
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Minuscola Bestia, senza allineamento

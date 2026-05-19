@@ -11,6 +11,31 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Anchilosauro"
+type: "Bestia (dinosauro)"
+size: "enorme"
+alignment: "senza allineamento"
+ac: 15
+stats: [19, 11, 15, 2, 12, 5]
+saves: 
+  str: 6
+skillsaves: {}
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 11"
+languages: "nessuna"
+gear: []
+traits: []
+actions: 
+- name: "Multiattacco"
+  desc: "L'anchilosauro effettua due attacchi Coda."
+- name: "Coda"
+  desc: "*Tiro per colpire in mischia:* +6, portata 3 m. *Colpito:* 9 (1d10 + 4) danni contundenti. Se il bersaglio è una creatura di taglia Enorme o inferiore, cade a terra prono."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Bestia (dinosauro)"
 dimensione: "Enorme"
 allineamento: "senza allineamento"
@@ -25,6 +50,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Anchilosauro
+
+```statblock
+monster: Anchilosauro
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Enorme Bestia (dinosauro), senza allineamento

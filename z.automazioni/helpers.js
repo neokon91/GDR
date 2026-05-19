@@ -14,7 +14,11 @@ const PATHS = {
     oggetti: "Mondi/Oggetti",
     personaggi: "Mondi/Personaggi",
     religioni: "Mondi/Religioni",
-    sessioni: "Mondi/Sessioni"
+    sessioni: "Mondi/Sessioni",
+    mappe: "Risorse/Mappe",
+    audio: "Risorse/Audio",
+    immagini: "Risorse/Immagini",
+    video: "Risorse/Video"
 };
 
 let pendingRoute = {};
@@ -528,6 +532,22 @@ async function chooseCampaigns(tp, message = "Campagne collegate", context = {})
     return await chooseNotesByPath(tp, PATHS.campagne, message, context);
 }
 
+async function chooseMaps(tp, message = "Mappe collegate", context = {}) {
+    return await chooseNotesByPath(tp, PATHS.mappe, message, context);
+}
+
+async function chooseAudio(tp, message = "Audio collegati", context = {}) {
+    return await chooseNotesByPath(tp, PATHS.audio, message, context);
+}
+
+async function chooseImages(tp, message = "Immagini collegate", context = {}) {
+    return await chooseNotesByPath(tp, PATHS.immagini, message, context);
+}
+
+async function chooseVideos(tp, message = "Video collegati", context = {}) {
+    return await chooseNotesByPath(tp, PATHS.video, message, context);
+}
+
 function inlineYamlList(values) {
     const filtered = (values ?? []).filter(Boolean);
     return filtered.length ? `[${filtered.join(", ")}]` : "[]";
@@ -572,5 +592,9 @@ module.exports = {
     chooseMissions,
     chooseHandouts,
     chooseSessions,
-    chooseCampaigns
+    chooseCampaigns,
+    chooseMaps,
+    chooseAudio,
+    chooseImages,
+    chooseVideos
 };

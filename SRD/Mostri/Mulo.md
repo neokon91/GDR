@@ -11,6 +11,31 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Mulo"
+type: "Bestia"
+size: "media"
+alignment: "senza allineamento"
+ac: 10
+stats: [14, 10, 13, 2, 10, 5]
+saves: 
+  str: 4
+skillsaves: {}
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 10"
+languages: "nessuna"
+gear: []
+traits: 
+- name: "Bestia da soma"
+  desc: "Per determinare la sua capacità di carico, il mulo è considerato come se fosse di una categoria di taglia superiore."
+actions: 
+- name: "Zoccoli"
+  desc: "*Tiro per colpire in mischia:* +4, portata 1,5 m. *Colpito:* 4 (1d4 + 2) danni contundenti."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Bestia"
 dimensione: "Media"
 allineamento: "senza allineamento"
@@ -25,6 +50,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Mulo
+
+```statblock
+monster: Mulo
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Media Bestia, senza allineamento

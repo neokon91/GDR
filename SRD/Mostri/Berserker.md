@@ -11,6 +11,30 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Berserker"
+type: "Umanoide"
+size: "medio o piccolo"
+alignment: "neutrale"
+ac: 13
+stats: [16, 12, 17, 9, 11, 9]
+saves: {}
+skillsaves: {}
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 10"
+languages: "Comune"
+gear: ["ascia bipenne", "armatura di pelle"]
+traits: 
+- name: "Frenesia sanguinante"
+  desc: "Finché è sanguinante, il berserker dispone di vantaggio ai tiri per colpire e ai tiri salvezza."
+actions: 
+- name: "Ascia bipenne"
+  desc: "*Tiro per colpire in mischia:* +5, portata 1,5 m *Colpito:* 9 (1d12 + 3) danni taglienti."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Umanoide"
 dimensione: "Medio o Piccolo"
 allineamento: "neutrale"
@@ -25,6 +49,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Berserker
+
+```statblock
+monster: Berserker
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Medio o Piccolo Umanoide, neutrale

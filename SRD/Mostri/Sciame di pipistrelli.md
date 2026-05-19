@@ -11,6 +11,30 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Sciame di pipistrelli"
+type: "Sciame"
+size: "grande"
+alignment: "senza allineamento"
+ac: 12
+stats: [5, 15, 10, 2, 12, 4]
+saves: {}
+skillsaves: {}
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 11, vista_cieca: 18 m"
+languages: "nessuna"
+gear: []
+traits: 
+- name: "Sciame"
+  desc: "Lo sciame può occupare lo spazio di un'altra creatura e viceversa, e può muoversi attraverso qualsiasi apertura sufficientemente larga da far passare un\npipistrello di taglia Minuscola. L'orda non può recupe-rare punti ferita o ottenere punti ferita temporanei."
+actions: 
+- name: "Morsi"
+  desc: "*Tiro per colpire in mischia:* +4, portata 1,5 m. *Colpito:* 5 (2d4) danni perforanti, o 2 (1d4) danni perforanti se lo sciame è sanguinante."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Sciame"
 dimensione: "Grande"
 allineamento: "senza allineamento"
@@ -25,6 +49,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Sciame di pipistrelli
+
+```statblock
+monster: Sciame di pipistrelli
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Grande Sciame, senza allineamento

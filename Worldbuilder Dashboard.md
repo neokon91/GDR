@@ -39,6 +39,14 @@ actions:
     link: "[[Risorse/Callout GDR]]"
 ```
 
+```meta-bind-button
+label: Mappe
+style: primary
+actions:
+  - type: open
+    link: "[[Risorse/Mappe/Mappe]]"
+```
+
 ## Crea Mondo
 
 ```dataviewjs
@@ -242,3 +250,41 @@ WHERE file.name != "Oggetti" AND file.name != "Dispense" AND stato != "archiviat
 SORT categoria ASC, nome ASC
 LIMIT 16
 ```
+
+## Mappe
+
+````tabs
+tab: Principali
+
+![[Risorse/Mappe/Schema Relazioni GDR.excalidraw]]
+
+tab: Mondo
+
+```dataview
+TABLE uso, mondo, luogo, stato
+FROM "Risorse/Mappe"
+WHERE file.name != "Mappe" AND !startswith(file.name, "Prova -") AND (uso = "relazioni" OR uso = "fronte" OR uso = "regione")
+SORT uso ASC, mondo ASC, file.name ASC
+LIMIT 12
+```
+
+tab: Dungeon
+
+```dataview
+TABLE luogo, incontri, stato
+FROM "Risorse/Mappe"
+WHERE file.name != "Mappe" AND !startswith(file.name, "Prova -") AND uso = "dungeon"
+SORT luogo ASC, file.name ASC
+LIMIT 12
+```
+
+tab: Archivio
+
+```dataview
+TABLE uso, mondo, luogo, stato, file.mtime AS aggiornato
+FROM "Risorse/Mappe"
+WHERE file.name != "Mappe" AND !startswith(file.name, "Prova -")
+SORT uso ASC, file.name ASC
+LIMIT 20
+```
+````

@@ -11,6 +11,46 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Drago rosso adulto"
+type: "Drago (cromatico)"
+size: "enorme"
+alignment: "caotico malvagio"
+ac: 19
+stats: [27, 10, 25, 16, 13, 23]
+saves: 
+  dex: 6
+  wis: 7
+skillsaves: 
+  furtivita: 6
+  percezione: 13
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 23, scurovisione: 36 m, vista_cieca: 18 m"
+languages: "Comune, Draconico"
+gear: []
+traits: 
+- name: "Resistenza leggendaria (3/giorno o 4/giorno nella tana)"
+  desc: "Se il drago fallisce un tiro salvezza, può scegliere di superarlo comunque."
+actions: 
+- name: "Multiattacco"
+  desc: "Il drago effettua tre attacchi Squarcio. Può sostituire un attacco con un utilizzo di Incantesimi per lanciare raggio rovente."
+- name: "Squarcio"
+  desc: "*Tiro per colpire in mischia:* +14, portata 3 m. *Colpito:* 13 (1d10 + 8) danni taglienti più 5 (2d4) danni da fuoco."
+- name: "Incantesimi"
+  desc: "Il drago lancia uno dei seguenti incantesimi, senza bisogno di componenti materiali, utilizzando Carisma come caratteristica da incantatore (CD del tiro salvezza sull'incantesimo 20, +12 al tiro per colpire degli attacchi con incantesimo):\n\n*1/giorno:*\n- palla di fuoco\n\n*A volontà:*\n- comando (di 2º livello)\n- individuazione del magico\n- raggio rovente"
+- name: "Soffio di fuoco (ricarica 5-6)"
+  desc: "*Tiro salvezza su Destrezza:* CD 21, tutte le creature in un cono di 18 metri. *Fallimento:* 59 (17d6) danni da fuoco. *Successo:* danni dimezzati."
+bonus_actions: []
+reactions: []
+legendary_actions: 
+- name: "Balzo"
+  desc: "Il drago si muove fino a metà della sua velocità ed effettua un attacco Squarcio."
+- name: "Presenza imponente"
+  desc: "Il drago usa Incantesimi per lanciare comando (di 2º livello). Il drago non può ripetere quest'azione fino all'inizio del proprio turno successivo."
+- name: "Raggi fiammeggianti"
+  desc: "Il drago usa Incantesimi per lanciare raggio rovente. Il drago non può ripetere quest'azione fino all'inizio del proprio turno successivo."
+lair_actions: []
 tipo_creatura: "Drago (cromatico)"
 dimensione: "Enorme"
 allineamento: "caotico malvagio"
@@ -25,6 +65,10 @@ bonus_competenza: 6
 statblock: true
 ---
 # Drago rosso adulto
+
+```statblock
+monster: Drago rosso adulto
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Enorme Drago (cromatico), caotico malvagio

@@ -11,6 +11,32 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Bruto"
+type: "Umanoide"
+size: "medio o piccolo"
+alignment: "neutrale"
+ac: 12
+stats: [15, 12, 14, 10, 10, 11]
+saves: {}
+skillsaves: {}
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 10"
+languages: "Comune"
+gear: ["armatura di cuoio", "balestra pesante", "mazza"]
+traits: 
+- name: "Tattiche del branco"
+  desc: "Il bruto dispone di vantaggio a un tiro per colpire contro una creatura se almeno uno dei suoi alleati si trova entro 1,5 metri dalla creatura e non è incapacitato."
+actions: 
+- name: "Mazza"
+  desc: "*Tiro per colpire in mischia:* +4, portata 1,5 m *Colpito:* 5 (1d6 + 2) danni contundenti"
+- name: "Balestra pesante"
+  desc: "*Tiro per colpire a distanza:* +3, gittata 30/120 m. *Colpito:* 6 (1d10 + 1) danni perforanti."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Umanoide"
 dimensione: "Medio o Piccolo"
 allineamento: "neutrale"
@@ -25,6 +51,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Bruto
+
+```statblock
+monster: Bruto
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Medio o Piccolo Umanoide, neutrale

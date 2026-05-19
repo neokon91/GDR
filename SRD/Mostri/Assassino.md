@@ -11,6 +11,41 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Assassino"
+type: "Umanoide"
+size: "medio o piccolo"
+alignment: "neutrale"
+ac: 16
+stats: [11, 18, 14, 16, 11, 10]
+saves: 
+  dex: 7
+  int: 6
+skillsaves: 
+  acrobazia: 7
+  furtivita: 10
+  percezione: 6
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 16"
+languages: "Comune, Gergo ladresco"
+gear: ["armatura di cuoio borchiato", "balestra leggera", "spada corta"]
+traits: 
+- name: "Elusione"
+  desc: "Se l'assassino è soggetto a un effetto che gli consente di effettuare un tiro salvezza su Destrezza per subire danni dimezzati, non subisce alcun danno in caso di successo, e ne subisce solo metà in caso di fallimento. Non può usare questo tratto se è incapacitato."
+actions: 
+- name: "Multiattacco"
+  desc: "L'assassino effettua tre attacchi, usando Spada corta o Balestra leggera in qualsiasi combinazione."
+- name: "Balestra leggera"
+  desc: "*Tiro per colpire a distanza:* +7, gittata 24/96 m. *Colpito:* 8 (1d8 + 4) danni perforanti più 21 (6d6) danni da veleno."
+- name: "Spada corta"
+  desc: "*Tiro per colpire in mischia:* +7, portata 1,5 m. *Colpito:* 7 (1d6 + 4) danni perforanti più 17 (5d6) danni da veleno, e il bersaglio è avvelenato fino all'inizio del turno successivo dell'assassino."
+bonus_actions: 
+- name: "Azione scaltra"
+  desc: "L'assassino effettua l'azione di Disimpegno, Nascondersi o Scatto."
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Umanoide"
 dimensione: "Medio o Piccolo"
 allineamento: "neutrale"
@@ -25,6 +60,10 @@ bonus_competenza: 3
 statblock: true
 ---
 # Assassino
+
+```statblock
+monster: Assassino
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Medio o Piccolo Umanoide, neutrale

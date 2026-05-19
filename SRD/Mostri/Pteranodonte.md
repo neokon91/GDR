@@ -11,6 +11,31 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Pteranodonte"
+type: "Bestia (dinosauro)"
+size: "media"
+alignment: "senza allineamento"
+ac: 13
+stats: [12, 15, 10, 2, 9, 5]
+saves: {}
+skillsaves: 
+  percezione: 1
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 11"
+languages: "nessuna"
+gear: []
+traits: 
+- name: "Volo sfuggente"
+  desc: "Lo pteranodonte non provoca attacchi di opportunità quando vola oltre la portata di un nemico."
+actions: 
+- name: "Morso"
+  desc: "*Tiro per colpire in mischia:* +4, portata 1,5 m. *Colpito:* 6 (1d8 + 2) danni perforanti."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Bestia (dinosauro)"
 dimensione: "Media"
 allineamento: "senza allineamento"
@@ -25,6 +50,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Pteranodonte
+
+```statblock
+monster: Pteranodonte
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Media Bestia (dinosauro), senza allineamento

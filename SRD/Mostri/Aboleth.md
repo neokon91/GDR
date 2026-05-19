@@ -11,6 +11,54 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Aboleth"
+type: "Aberrazione"
+size: "grande"
+alignment: "legale malvagio"
+ac: 17
+stats: [21, 9, 15, 18, 15, 18]
+saves: 
+  dex: 3
+  con: 6
+  int: 8
+  wis: 6
+skillsaves: 
+  percezione: 10
+  storia: 12
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 20, scurovisione: 36 m"
+languages: "Gergo delle Profondità, telepatia 36 m"
+gear: []
+traits: 
+- name: "Anfibio"
+  desc: "L'aboleth può respirare in aria e in acqua."
+- name: "Nube di muco*"
+  desc: "Finché si trova sott'acqua, l'aboleth è circondato da uno strato di muco. *Tiro salvezza su Costituzione:* CD 14, tutte le creature in un'emanazione di 1,5 metri di cui l'aboleth è il punto di origine, alla fine del turno dell'aboleth. *Fallimento:* il bersaglio è maledetto. Finché la maledizione perdura, la pelle del bersaglio diventa viscida, il bersaglio può respirare in aria e in acqua e non può recuperare punti ferita finché si trova sott'acqua."
+- name: "Resistenza leggendaria (3/giorno o 4/giorno nella tana)"
+  desc: "Se l'aboleth fallisce un tiro salvezza, può scegliere di superarlo comunque."
+- name: "Ristoro occulto"
+  desc: "Se viene annientato, l'aboleth ottiene un nuovo corpo dopo 5d10 giorni, tornando in vita con tutti i suoi punti ferita nel Reame Remoto o in un altro luogo a scelta del GM."
+- name: "Sonda telepatica"
+  desc: "Se una creatura che l'aboleth è in grado di vedere comunica telepaticamente con l'aboleth, quest'ultimo apprende i più grandi desideri della creatura. Finché la creatura maledetta si trova fuori da uno specchio d'acqua, subisce 6 (1d12) danni da acido a intervalli di 10 minuti, a meno che la sua pelle non venga inumidita prima che siano trascorsi i 10 minuti."
+actions: 
+- name: "Multiattacco"
+  desc: "L'aboleth effettua due attacchi Tentacolo e usa Consuma ricordi o Domina mente, se disponibili."
+- name: "Tentacolo"
+  desc: "*Tiro per colpire in mischia:* +9, portata 4,5 m. *Colpito:* 12 (2d6 + 5) danni contundenti. Se il bersaglio è una creatura di taglia Grande o inferiore, è afferrato (CD 14 per sfuggire) da uno dei quattro tentacoli."
+- name: "Consuma ricordi"
+  desc: "*Tiro salvezza su Intelligenza:* CD 16, una creatura entro 9 metri affascinata o afferrata dall'aboleth. *Fallimento:* 10 (3d6) danni psichici. *Successo:* danni dimezzati. *Fallimento o successo:* l'aboleth acquisisce i ricordi del bersaglio se questo è un umanoide e viene ridotto a 0 punti ferita da questa azione."
+- name: "Domina mente (2/giorno)"
+  desc: "*Tiro salvezza su Saggezza:* CD 16, una creatura che l'aboleth è in grado di vedere entro 9 metri. *Fallimento:* la creatura è affascinata finché l'aboleth muore o si sposta su un piano di esistenza diverso da quello del bersaglio. Finché è affascinato, il bersaglio agisce come un alleato dell'aboleth ed è sotto il suo controllo finché si trova entro 18 metri da esso. Inoltre, l'aboleth e il bersaglio possono comunicare telepaticamente tra loro a qualsiasi distanza. Il bersaglio ripete il tiro salvezza ogni volta che subisce danni e ogni volta che trascorre 24 ore ad almeno 1,5 chilometri di distanza dall'aboleth e, se lo supera, l'effetto svanisce."
+bonus_actions: []
+reactions: []
+legendary_actions: 
+- name: "Risucchio psichico"
+  desc: "Se l'aboleth ha affascinato o afferrato almeno una creatura, utilizza Consuma ricordi e recupera 5 (1d10) punti ferita."
+- name: "Sferzata"
+  desc: "L'aboleth effettua un attacco Tentacolo."
+lair_actions: []
 tipo_creatura: "Aberrazione"
 dimensione: "Grande"
 allineamento: "legale malvagio"
@@ -25,6 +73,10 @@ bonus_competenza: 4
 statblock: true
 ---
 # Aboleth
+
+```statblock
+monster: Aboleth
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Grande Aberrazione, legale malvagio

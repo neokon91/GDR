@@ -11,6 +11,31 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Squalo cacciatore"
+type: "Bestia"
+size: "grande"
+alignment: "senza allineamento"
+ac: 12
+stats: [18, 14, 15, 1, 10, 4]
+saves: {}
+skillsaves: 
+  percezione: 2
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 12, vista_cieca: 18 m"
+languages: "nessuna"
+gear: []
+traits: 
+- name: "Respirare sott'acqua"
+  desc: "Lo squalo può respirare soltanto sott'acqua."
+actions: 
+- name: "Morso"
+  desc: "*Tiro per colpire in mischia:* +6 (con vantaggio se il bersaglio non ha tutti i punti ferita), portata 1,5 m. *Colpito:* 14 (3d6 + 4) danni perforanti."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Bestia"
 dimensione: "Grande"
 allineamento: "senza allineamento"
@@ -25,6 +50,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Squalo cacciatore
+
+```statblock
+monster: Squalo cacciatore
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Grande Bestia, senza allineamento

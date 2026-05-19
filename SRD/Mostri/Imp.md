@@ -11,6 +11,37 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Imp"
+type: "Immondo (diavolo)"
+size: "minuscolo"
+alignment: "legale malvagio"
+ac: 13
+stats: [6, 17, 13, 11, 12, 14]
+saves: {}
+skillsaves: 
+  inganno: 4
+  intuizione: 3
+  furtivita: 5
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 11, scurovisione_36_m_non_ostacolata_dall_oscurita_magica: true"
+languages: "Comune, Infernale"
+gear: []
+traits: 
+- name: "Resistenza alla magia"
+  desc: "L'imp dispone di vantaggio ai tiri salvezza contro incantesimi e altri effetti magici."
+actions: 
+- name: "Pungiglione"
+  desc: "*Tiro per colpire in mischia:* +5, portata 1,5 m *Colpito:* 6 (1d6 + 3) danni perforanti più 7 (2d6) danni da veleno."
+- name: "Invisibilità"
+  desc: "L'imp può lanciare invisibilità su di sé senza bisogno di componenti per incantesimi e utilizzando il Carisma come caratteristica da incantatore."
+- name: "Mutaforma"
+  desc: "L'imp può assumere la forma bestiale di un topo (velocità 6 m), un corvo (6 m, volo 18 m) o un ragno (6 m, scalata 6 m), o tornare alla sua vera forma. Le sue statistiche di gioco restano le stesse in ogni forma, a eccezione della velocità. Nessun oggetto che indossa o trasporta viene trasformato."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Immondo (diavolo)"
 dimensione: "Minuscolo"
 allineamento: "legale malvagio"
@@ -25,6 +56,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Imp
+
+```statblock
+monster: Imp
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Minuscolo Immondo (diavolo), legale malvagio

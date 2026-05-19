@@ -11,6 +11,31 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Falco di sangue"
+type: "Bestia"
+size: "piccola"
+alignment: "senza allineamento"
+ac: 12
+stats: [6, 14, 10, 3, 14, 5]
+saves: {}
+skillsaves: 
+  percezione: 6
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 16"
+languages: "nessuna"
+gear: []
+traits: 
+- name: "Tattiche del branco"
+  desc: "Il falco dispone di vantaggio a un tiro per colpire contro una creatura se almeno uno dei suoi alleati si trova entro 1,5 metri dalla creatura e non è incapacitato."
+actions: 
+- name: "Becco"
+  desc: "*Tiro per colpire in mischia:* +4, portata 1,5 m. *Colpito:* 4 (1d4 + 2) danni perforanti, o 6 (1d8 + 2) danni perforanti se il bersaglio è sanguinante."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Bestia"
 dimensione: "Piccola"
 allineamento: "senza allineamento"
@@ -25,6 +50,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Falco di sangue
+
+```statblock
+monster: Falco di sangue
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Piccola Bestia, senza allineamento

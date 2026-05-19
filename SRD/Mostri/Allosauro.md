@@ -11,6 +11,31 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Allosauro"
+type: "Bestia (dinosauro)"
+size: "grande"
+alignment: "senza allineamento"
+ac: 13
+stats: [19, 13, 17, 2, 12, 5]
+saves: {}
+skillsaves: 
+  percezione: 5
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 15"
+languages: "nessuna"
+gear: []
+traits: []
+actions: 
+- name: "Artigli"
+  desc: "*Tiro per colpire in mischia:* +6, portata 1,5 m. *Colpito:* 8 (1d8 + 4) danni taglienti. Se il bersaglio è una creatura di taglia Grande o inferiore e l'allosauro si è mosso di 9 metri o più in linea retta verso di esso subito prima del colpo, il bersaglio cade a terra prono e l'allosauro può effettuare un attacco Morso contro di esso."
+- name: "Morso"
+  desc: "*Tiro per colpire in mischia:* +6, portata 1,5 m. *Colpito:* 15 (2d10 + 4) danni perforanti."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Bestia (dinosauro)"
 dimensione: "Grande"
 allineamento: "senza allineamento"
@@ -25,6 +50,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Allosauro
+
+```statblock
+monster: Allosauro
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Grande Bestia (dinosauro), senza allineamento

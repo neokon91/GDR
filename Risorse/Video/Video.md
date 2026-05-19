@@ -1,8 +1,18 @@
+---
+cssclasses:
+  - indice
+categoria: risorsa
+tipo: video
+stato: pronto
+---
+
 # Video
 
+Usa campi semplici nelle note video quando servono: `uso`, `tono`, `campagna`, `stato`, `timestamp`.
+
 ```dataview
-LIST
+TABLE uso, tono, campagna, timestamp, stato
 FROM "Risorse/Video"
 WHERE file.name != "Video" AND !startswith(file.name, "Prova -")
-SORT file.name ASC
+SORT uso ASC, tono ASC, file.name ASC
 ```

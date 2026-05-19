@@ -11,6 +11,32 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Topo gigante"
+type: "Bestia"
+size: "piccola"
+alignment: "senza allineamento"
+ac: 13
+stats: [7, 16, 11, 2, 10, 4]
+saves: 
+  dex: 5
+skillsaves: 
+  percezione: 2
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 12, scurovisione: 18 m"
+languages: "nessuna"
+gear: []
+traits: 
+- name: "Tattiche del branco"
+  desc: "Il topo dispone di vantaggio a un tiro per colpire contro una creatura se almeno uno degli alleati del topo si trova entro 1,5 metri dalla creatura e non è incapacitato."
+actions: 
+- name: "Morso"
+  desc: "*Tiro per colpire in mischia:* +5, portata 1,5 m. *Colpito:* 5 (1d4 + 3) danni perforanti."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Bestia"
 dimensione: "Piccola"
 allineamento: "senza allineamento"
@@ -25,6 +51,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Topo gigante
+
+```statblock
+monster: Topo gigante
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Piccola Bestia, senza allineamento

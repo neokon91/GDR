@@ -11,6 +11,29 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Aquila"
+type: "Bestia"
+size: "piccola"
+alignment: "senza allineamento"
+ac: 12
+stats: [6, 15, 12, 2, 14, 7]
+saves: {}
+skillsaves: 
+  percezione: 6
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 16"
+languages: "nessuna"
+gear: []
+traits: []
+actions: 
+- name: "Speroni"
+  desc: "*Tiro per colpire in mischia:* +4, portata 1,5 m. *Colpito:* 4 (1d4 + 2) danni taglienti."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Bestia"
 dimensione: "Piccola"
 allineamento: "senza allineamento"
@@ -25,6 +48,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Aquila
+
+```statblock
+monster: Aquila
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Piccola Bestia, senza allineamento

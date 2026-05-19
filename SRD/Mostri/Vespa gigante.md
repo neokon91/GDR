@@ -11,6 +11,30 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Vespa gigante"
+type: "Bestia"
+size: "media"
+alignment: "senza allineamento"
+ac: 13
+stats: [10, 14, 10, 1, 10, 3]
+saves: {}
+skillsaves: {}
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 10"
+languages: "nessuna"
+gear: []
+traits: 
+- name: "Volo sfuggente"
+  desc: "La vespa non provoca attacchi di opportunità quando vola oltre la portata di un nemico."
+actions: 
+- name: "Pungiglione"
+  desc: "*Tiro per colpire in mischia:* +4, portata 1,5 m. *Colpito:* 5 (1d6 +2) danni perforanti più 5 (2d4) danni da veleno."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Bestia"
 dimensione: "Media"
 allineamento: "senza allineamento"
@@ -25,6 +49,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Vespa gigante
+
+```statblock
+monster: Vespa gigante
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Media Bestia, senza allineamento

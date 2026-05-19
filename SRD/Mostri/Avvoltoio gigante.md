@@ -11,6 +11,31 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Avvoltoio gigante"
+type: "Mostruosità"
+size: "grande"
+alignment: "neutrale malvagio"
+ac: 10
+stats: [15, 10, 16, 6, 12, 7]
+saves: {}
+skillsaves: 
+  percezione: 3
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 13, scurovisione: 18 m"
+languages: "capisce il Comune ma non lo parla"
+gear: []
+traits: 
+- name: "Tattiche del branco"
+  desc: "L'avvoltoio dispone di vantaggio a un tiro per colpire contro una creatura se almeno uno dei suoi alleati si trova entro 1,5 metri dalla creatura e non è incapacitato."
+actions: 
+- name: "Cavare"
+  desc: "*Tiro per colpire in mischia:* +4, portata 1,5 m. *Colpito:* 9 (2d6 + 2) danni perforanti, e il bersaglio è avvelenato fino al termine del proprio turno successivo."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Mostruosità"
 dimensione: "Grande"
 allineamento: "neutrale malvagio"
@@ -25,6 +50,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Avvoltoio gigante
+
+```statblock
+monster: Avvoltoio gigante
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Grande Mostruosità, neutrale malvagio

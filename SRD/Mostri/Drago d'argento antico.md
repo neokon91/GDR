@@ -11,6 +11,49 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Drago d'argento antico"
+type: "Drago (metallico)"
+size: "mastodontico"
+alignment: "legale buono"
+ac: 22
+stats: [30, 10, 29, 18, 15, 26]
+saves: 
+  dex: 7
+  wis: 9
+skillsaves: 
+  furtivita: 7
+  percezione: 16
+  storia: 11
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 26, scurovisione: 36 m, vista_cieca: 18 m"
+languages: "Comune, Draconico"
+gear: []
+traits: 
+- name: "Resistenza leggendaria (4/giorno o 5/giorno nella tana)"
+  desc: "Se il drago fallisce un tiro salvezza, può scegliere di superarlo comunque."
+actions: 
+- name: "Multiattacco"
+  desc: "Il drago effettua tre attacchi Squarcio. Può sostituire un attacco con un utilizzo di (A) Soffio paralizzante o (B) Incantesimi per lanciare coltello di ghiaccio (di 2º livello)."
+- name: "Squarcio"
+  desc: "*Tiro per colpire in mischia:* +17, portata 4,5 m. *Colpito:* 19 (2d8 + 10) danni taglienti più 9 (2d8) danni da freddo."
+- name: "Incantesimi"
+  desc: "Il drago lancia uno dei seguenti incantesimi, senza bisogno di componenti materiali, utilizzando Carisma come caratteristica da incantatore (CD del tiro salvezza sull'incantesimo 23, +15 al tiro per colpire degli attacchi con incantesimo):\n\n*1/giorno ciascuno:*\n- controllare tempo atmosferico\n- teletrasporto\n- tempesta di ghiaccio (di 7º livello)\n- zona di verità\n\n*A volontà:*\n- blocca mostri\n- coltello di ghiaccio (di 2º livello)\n- individuazione del magico\n- trasformazione (solo in forma di bestia o umanoide, senza punti ferita temporanei ottenuti dall'incantesimo, e senza richiedere concentrazione o punti ferita temporanei per mantenere l'incantesimo)"
+- name: "Soffio di freddo (ricarica 5-6)"
+  desc: "*Tiro salvezza su Costituzione:* CD 24, tutte le creature in un cono di 27 metri. *Fallimento:* 67 (15d8) danni da freddo. *Successo:* danni dimezzati."
+- name: "Soffio paralizzante"
+  desc: "*Tiro salvezza su Costituzione:* CD 24, tutte le creature in un cono di 27 metri.\n\n*Primo fallimento:* il bersaglio è incapacitato fino al termine del proprio turno successivo. A quel punto, ripete il tiro salvezza.\n\n*Secondo fallimento:* il bersaglio è paralizzato e ripete il tiro salvezza alla fine di ogni suo turno e, se lo supera, l'effetto svanisce. Dopo 1 minuto, il tiro viene superato automaticamente."
+bonus_actions: []
+reactions: []
+legendary_actions: 
+- name: "Assideramento"
+  desc: "Il drago usa Incantesimi per lanciare blocca mostri. Il drago non può ripetere quest'azione fino all'inizio del proprio turno successivo."
+- name: "Balzo"
+  desc: "Il drago si muove fino a metà della sua velocità, ed effettua un attacco Squarcio."
+- name: "Bufera"
+  desc: "*Tiro salvezza su Destrezza:* CD 23, tutte le creature in una linea lunga 18 metri e larga 3 metri. *Fallimento:* 14 (4d6) danni da freddo, e il bersaglio viene spinto in linea retta fino a un massimo di 9 metri lontano dal drago. *Successo:* danni dimezzati. *Fallimento o successo:* il drago non può ripetere quest'azione fino all'inizio del proprio turno successivo."
+lair_actions: []
 tipo_creatura: "Drago (metallico)"
 dimensione: "Mastodontico"
 allineamento: "legale buono"
@@ -25,6 +68,10 @@ bonus_competenza: 7
 statblock: true
 ---
 # Drago d'argento antico
+
+```statblock
+monster: Drago d'argento antico
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Mastodontico Drago (metallico), legale buono

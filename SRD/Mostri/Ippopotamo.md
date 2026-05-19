@@ -11,6 +11,34 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Ippopotamo"
+type: "Bestia"
+size: "grande"
+alignment: "senza allineamento"
+ac: 14
+stats: [21, 7, 15, 2, 12, 4]
+saves: 
+  str: 7
+skillsaves: 
+  percezione: 3
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 13"
+languages: "nessuna"
+gear: []
+traits: 
+- name: "Apnea"
+  desc: "L'ippopotamo può trattenere il respiro per 10 minuti."
+actions: 
+- name: "Multiattacco"
+  desc: "L'ippopotamo effettua due attacchi Morso."
+- name: "Morso"
+  desc: "*Tiro per colpire in mischia:* +7, portata 1,5 m. *Colpito:* 16 (2d10 + 5) danni perforanti."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Bestia"
 dimensione: "Grande"
 allineamento: "senza allineamento"
@@ -25,6 +53,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Ippopotamo
+
+```statblock
+monster: Ippopotamo
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Grande Bestia, senza allineamento

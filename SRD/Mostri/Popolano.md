@@ -11,6 +11,30 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Popolano"
+type: "Umanoide"
+size: "medio o piccolo"
+alignment: "neutrale"
+ac: 10
+stats: [10, 10, 10, 10, 10, 10]
+saves: {}
+skillsaves: {}
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 10"
+languages: "Comune"
+gear: ["randello"]
+traits: 
+- name: "Addestramento"
+  desc: "Il popolano ha competenza in un'abilità a scelta del GM e dispone di vantaggio ogni volta che effettua una prova di caratteristica utilizzando quell'abilità."
+actions: 
+- name: "Randello"
+  desc: "*Tiro per colpire in mischia:* +2, portata 1,5 m. *Colpito:* 2 (1d4) danni contundenti."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Umanoide"
 dimensione: "Medio o Piccolo"
 allineamento: "neutrale"
@@ -25,6 +49,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Popolano
+
+```statblock
+monster: Popolano
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Medio o Piccolo Umanoide, neutrale

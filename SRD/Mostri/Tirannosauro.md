@@ -11,6 +11,35 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Tirannosauro"
+type: "Bestia (dinosauro)"
+size: "enorme"
+alignment: "senza allineamento"
+ac: 13
+stats: [25, 10, 19, 2, 12, 9]
+saves: 
+  str: 10
+  wis: 4
+skillsaves: 
+  percezione: 4
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 14"
+languages: "nessuna"
+gear: []
+traits: []
+actions: 
+- name: "Multiattacco"
+  desc: "Il tirannosauro effettua un attacco Morso e un attacco Coda."
+- name: "Coda"
+  desc: "*Tiro per colpire in mischia:* +10, portata 4,5 m. *Colpito:* 25 (4d8 + 7) danni contundenti. Se il bersaglio è una creatura di taglia Enorme o inferiore, cade a terra prono."
+- name: "Morso"
+  desc: "*Tiro per colpire in mischia:* +10, portata 3 m. *Colpito:* 33 (4d12 + 7) danni perforanti. Se il bersaglio è una creatura di taglia Grande o inferiore, è afferrato (CD 17 per sfuggire). Mentre è afferrato, il bersaglio è trattenuto e non può essere bersagliato dalla Coda del tirannosauro."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Bestia (dinosauro)"
 dimensione: "Enorme"
 allineamento: "senza allineamento"
@@ -25,6 +54,10 @@ bonus_competenza: 3
 statblock: true
 ---
 # Tirannosauro
+
+```statblock
+monster: Tirannosauro
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Enorme Bestia (dinosauro), senza allineamento

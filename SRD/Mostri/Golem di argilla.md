@@ -11,6 +11,40 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Golem di argilla"
+type: "Costrutto"
+size: "grande"
+alignment: "senza allineamento"
+ac: 14
+stats: [20, 9, 18, 3, 8, 1]
+saves: {}
+skillsaves: {}
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 9, scurovisione: 18 m"
+languages: "Comune più un'altra lingua"
+gear: []
+traits: 
+- name: "Assorbimento dell'acido"
+  desc: "Ogni volta che il golem riceve danni da acido, non subisce danni, recuperando un numero di punti ferita pari ai danni da acido a lui inflitti."
+- name: "Berserk"
+  desc: "Ogni volta che il golem inizia il suo turno sanguinante, tira 1d6. Se esce 6, il golem entra in uno stato di berserk. A ogni suo turno, finché è in stato di berserk, il golem attacca la creatura più vicina che è in grado di vedere. Se nessuna creatura è abbastanza vicina per essere attaccata, il golem si scaglia contro un oggetto. Una volta che il golem entra in stato di berserk, rimane in questo stato finché non viene distrutto o non è più sanguinante."
+- name: "Forma immutabile"
+  desc: "Il golem non può mutare forma."
+- name: "Resistenza alla magia"
+  desc: "Il golem dispone di vantaggio ai tiri salvezza contro incantesimi e altri effetti magici."
+actions: 
+- name: "Multiattacco"
+  desc: "Il golem effettua due attacchi Schianto, o effettua tre attacchi Schianto se ha usato Fretta nello stesso turno."
+- name: "Schianto"
+  desc: "*Tiro per colpire in mischia:* +9, portata 1,5 m. *Colpito:* 10 (1d10 + 5) danni contundenti più 6 (1d12) danni da acido, e i punti ferita massimi del bersaglio sono ridotti di un ammontare pari ai danni da acido subiti."
+bonus_actions: 
+- name: "Fretta (ricarica 5-6)"
+  desc: "Il golem effettua le azioni di Disimpegno e Scatto."
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Costrutto"
 dimensione: "Grande"
 allineamento: "senza allineamento"
@@ -25,6 +59,10 @@ bonus_competenza: 4
 statblock: true
 ---
 # Golem di argilla
+
+```statblock
+monster: Golem di argilla
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Grande Costrutto, senza allineamento

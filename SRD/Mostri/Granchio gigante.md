@@ -11,6 +11,31 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Granchio gigante"
+type: "Bestia"
+size: "media"
+alignment: "senza allineamento"
+ac: 15
+stats: [13, 13, 11, 1, 9, 3]
+saves: {}
+skillsaves: 
+  furtivita: 3
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 9, vista_cieca: 9 m"
+languages: "nessuna"
+gear: []
+traits: 
+- name: "Anfibio"
+  desc: "Il granchio può respirare in aria e in acqua."
+actions: 
+- name: "Artiglio"
+  desc: "*Tiro per colpire in mischia:* +3, portata 1,5 m. *Colpito:* 4 (1d6 + 1) danni contundenti. Se il bersaglio è una creatura di taglia Media o inferiore, è afferrato (CD 11 per sfuggire) da una delle due chele."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Bestia"
 dimensione: "Media"
 allineamento: "senza allineamento"
@@ -25,6 +50,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Granchio gigante
+
+```statblock
+monster: Granchio gigante
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Media Bestia, senza allineamento

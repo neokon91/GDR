@@ -11,6 +11,40 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Tigre mannara"
+type: "Mostruosità (licantropo)"
+size: "media o piccola"
+alignment: "neutrale"
+ac: 12
+stats: [17, 15, 16, 10, 13, 11]
+saves: {}
+skillsaves: 
+  furtivita: 4
+  percezione: 5
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 15, scurovisione: 18 m"
+languages: "Comune (non può parlare in forma di tigre)"
+gear: ["arco lungo"]
+traits: []
+actions: 
+- name: "Multiattacco"
+  desc: "La tigre mannara effettua due attacchi, usando Graffio o Arco lungo in qualsiasi combinazione. Può sostituire un attacco con un attacco Morso."
+- name: "Graffio"
+  desc: "*Tiro per colpire in mischia:* +5, portata 1,5 m. *Colpito:* 10 (2d6 + 3) danni taglienti."
+- name: "Morso (solo in forma di tigre o ibrida)"
+  desc: "*Tiro per colpire in mischia:* +5, portata 1,5 m *Colpito:* 12 (2d8 + 3) danni perforanti. Se il bersaglio è un umanoide, subisce il seguente effetto. *Tiro salvezza su Costituzione:* CD 13. *Fallimento:* il bersaglio è maledetto. Se il bersaglio scende a 0 punti ferita, diventa una tigre mannara sotto il controllo del GM e ha 10 punti ferita. *Successo:* il bersaglio è immune alla maledizione della tigre mannara per 24 ore."
+- name: "Arco lungo (solo in forma umanoide o ibrida)"
+  desc: "*Tiro per colpire a distanza:* +4, gittata 45/180 m. *Colpito:* 11 (2d8 + 2) danni perforanti."
+bonus_actions: 
+- name: "Movimento predatorio (solo in forma di tigre o ibrida)"
+  desc: "La tigre mannara si muove fino alla sua velocità massima senza provocare attacchi di opportunità. Alla fine di questo movimento, può effettuare l'azione di Nascondersi."
+- name: "Mutaforma"
+  desc: "La tigre mannara si trasforma in un ibrido umanoide-tigre di taglia Grande o in una tigre di taglia Grande, altrimenti torna alla sua forma originale di umanoide. Le sue statistiche di gioco, a eccezione della taglia, restano le stesse in ogni forma. Nessun oggetto che indossa o trasporta viene trasformato."
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Mostruosità (licantropo)"
 dimensione: "Media o Piccola"
 allineamento: "neutrale"
@@ -25,6 +59,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Tigre mannara
+
+```statblock
+monster: Tigre mannara
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Media o Piccola Mostruosità (licantropo), neutrale

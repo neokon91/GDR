@@ -11,6 +11,32 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Minotauro di Baphomet"
+type: "Mostruosità"
+size: "grande"
+alignment: "caotico malvagio"
+ac: 14
+stats: [18, 11, 16, 6, 16, 9]
+saves: {}
+skillsaves: 
+  percezione: 7
+  sopravvivenza: 7
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 17, scurovisione: 18 m"
+languages: "Abissale"
+gear: []
+traits: []
+actions: 
+- name: "Falcione abissale"
+  desc: "*Tiro per colpire in mischia:* +6, portata 3 m. *Colpito:* 10 (1d12 + 4) danni taglienti più 10 (3d6) danni necrotici."
+- name: "Trafiggere (ricarica 5-6)"
+  desc: "*Tiro per colpire in mischia:* +6, portata 1,5 m. *Colpito:* 18 (4d6 + 4) danni perforanti. Se il bersaglio è una creatura di taglia Grande o inferiore e il minotauro si è mosso di 3 metri o più in linea retta verso di esso subito prima del colpo, il bersaglio subisce 10 (3d6) danni perforanti extra e cade a terra prono."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Mostruosità"
 dimensione: "Grande"
 allineamento: "caotico malvagio"
@@ -25,6 +51,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Minotauro di Baphomet
+
+```statblock
+monster: Minotauro di Baphomet
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Grande Mostruosità, caotico malvagio

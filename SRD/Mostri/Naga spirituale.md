@@ -11,6 +11,40 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Naga spirituale"
+type: "Immondo"
+size: "grande"
+alignment: "caotico malvagio"
+ac: 17
+stats: [18, 17, 14, 16, 15, 16]
+saves: 
+  dex: 6
+  con: 5
+  wis: 5
+  cha: 6
+skillsaves: {}
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 12, scurovisione: 18 m"
+languages: "Abissale, Comune"
+gear: []
+traits: 
+- name: "Ristoro immondo"
+  desc: "Se la naga muore, torna in vita dopo 1d6 giorni e recupera tutti i suoi punti ferita. Solo un incantesimo desiderio può impedire a questo tratto di funzionare."
+actions: 
+- name: "Multiattacco"
+  desc: "La naga effettua tre attacchi, usando Morso o Raggio necrotico in qualsiasi combinazione."
+- name: "Morso"
+  desc: "*Tiro per colpire in mischia:* +7, portata 3 m. *Colpito:* 7 (1d6 + 4) danni perforanti più 14 (4d6) danni da veleno."
+- name: "Raggio necrotico"
+  desc: "*Tiro per colpire a distanza:* +6, gittata 18 m. *Colpito:* 21 (6d6) danni necrotici."
+- name: "Incantesimi"
+  desc: "La naga lancia uno dei seguenti incantesimi, senza bisogno di componenti somatiche o materiali, utilizzando Intelligenza come caratteristica da incantatore (CD del tiro salvezza sull'incantesimo 14): 2/giorno ciascuno: blocca persone (di 3º livello), individuazione dei pensieri, fulmine (di 4º livello), porta dimensionaleA volontà: illusione minore, individuazione del magico, mano magica, respirare sott'acqua"
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Immondo"
 dimensione: "Grande"
 allineamento: "caotico malvagio"
@@ -25,6 +59,10 @@ bonus_competenza: 3
 statblock: true
 ---
 # Naga spirituale
+
+```statblock
+monster: Naga spirituale
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Grande Immondo, caotico malvagio

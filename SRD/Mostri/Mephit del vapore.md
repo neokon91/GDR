@@ -11,6 +11,35 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Mephit del vapore"
+type: "Elementale"
+size: "piccolo"
+alignment: "neutrale malvagio"
+ac: 10
+stats: [5, 11, 10, 11, 10, 12]
+saves: {}
+skillsaves: 
+  furtivita: 2
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 10, scurovisione: 18 m"
+languages: "Primordiale (Aquan, Ignan)"
+gear: []
+traits: 
+- name: "Esplosione mortale"
+  desc: "Il mephit esplode quando muore. *Tiro salvezza su Destrezza:* CD 10, tutte le creature in un'emanazione di 1,5 metri di cui il mephit è il punto di origine. *Fallimento:* 5 (2d4) danni da fuoco. *Successo:* danni dimezzati."
+- name: "Forma sfocata"
+  desc: "I tiri per colpire contro il mephit sono effettuati con svantaggio, a meno che il mephit non sia incapacitato."
+actions: 
+- name: "Artiglio"
+  desc: "*Tiro per colpire in mischia:* +2, portata 1,5 m. *Colpito:* 2 (1d4) danni taglienti più 2 (1d4) danni da fuoco."
+- name: "Soffio di vapore (ricarica 6)"
+  desc: "*Tiro salvezza su Costituzione:* CD 10, tutte le creature in un cono di 4,5 metri. *Fallimento:* 5 (2d4) danni da fuoco, e la velocità del bersaglio è ridotta di 3 metri fino al termine del turno successivo del mephit. *Successo:* danni dimezzati. *Fallimento o successo:* trovarsi sott'acqua non conferisce alcuna resistenza contro questi danni da fuoco."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Elementale"
 dimensione: "Piccolo"
 allineamento: "neutrale malvagio"
@@ -25,6 +54,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Mephit del vapore
+
+```statblock
+monster: Mephit del vapore
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Piccolo Elementale, neutrale malvagio

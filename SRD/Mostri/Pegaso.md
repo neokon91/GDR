@@ -11,6 +11,33 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Pegaso"
+type: "Celestiale"
+size: "grande"
+alignment: "caotico buono"
+ac: 12
+stats: [18, 15, 16, 10, 15, 13]
+saves: 
+  dex: 4
+  con: 5
+  wis: 4
+  cha: 3
+skillsaves: 
+  percezione: 6
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 16"
+languages: "capisce il Celestiale, il Comune, l'Elfico e il Silvano ma non li parla"
+gear: []
+traits: []
+actions: 
+- name: "Zoccoli"
+  desc: "*Tiro per colpire in mischia:* +6, portata 1,5 m. *Colpito:* 7 (1d6 + 4) danni contundenti più 5 (2d4) danni radiosi."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Celestiale"
 dimensione: "Grande"
 allineamento: "caotico buono"
@@ -25,6 +52,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Pegaso
+
+```statblock
+monster: Pegaso
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Grande Celestiale, caotico buono

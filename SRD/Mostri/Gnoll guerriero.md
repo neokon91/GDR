@@ -11,6 +11,32 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Gnoll guerriero"
+type: "Immondo"
+size: "medio"
+alignment: "caotico malvagio"
+ac: 15
+stats: [14, 12, 11, 6, 10, 7]
+saves: {}
+skillsaves: {}
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 10, scurovisione: 18 m"
+languages: "Gnoll"
+gear: []
+traits: []
+actions: 
+- name: "Squarcio"
+  desc: "*Tiro per colpire in mischia:* +4, portata 1,5 m. *Colpito:* 5 (1d6 + 2) danni perforanti."
+- name: "Arco d'ossa"
+  desc: "*Tiro per colpire a distanza:* +3, gittata 45/180 m. *Colpito:* 6 (1d10 + 1) danni perforanti."
+bonus_actions: 
+- name: "Furia (1/giorno)"
+  desc: "Subito dopo aver inflitto danni a una creatura già sanguinante, lo gnoll si muove fino a metà della sua velocità ed effettua un attacco Squarcio."
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Immondo"
 dimensione: "Medio"
 allineamento: "caotico malvagio"
@@ -25,6 +51,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Gnoll guerriero
+
+```statblock
+monster: Gnoll guerriero
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Medio Immondo, caotico malvagio

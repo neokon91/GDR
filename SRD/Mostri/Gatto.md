@@ -11,6 +11,33 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Gatto"
+type: "Bestia"
+size: "minuscola"
+alignment: "senza allineamento"
+ac: 12
+stats: [3, 15, 10, 3, 12, 7]
+saves: 
+  dex: 4
+skillsaves: 
+  furtivita: 4
+  percezione: 3
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 13, scurovisione: 18 m"
+languages: "nessuna"
+gear: []
+traits: 
+- name: "Saltatore"
+  desc: "La distanza dei salti del gatto è determinata dalla sua Destrezza piuttosto che dalla Forza."
+actions: 
+- name: "Graffio"
+  desc: "*Tiro per colpire in mischia:* +4, portata 1,5 m. *Colpito:* 1 danno tagliente."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Bestia"
 dimensione: "Minuscola"
 allineamento: "senza allineamento"
@@ -25,6 +52,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Gatto
+
+```statblock
+monster: Gatto
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Minuscola Bestia, senza allineamento

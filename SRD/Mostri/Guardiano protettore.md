@@ -11,6 +11,38 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Guardiano protettore"
+type: "Costrutto"
+size: "grande"
+alignment: "senza allineamento"
+ac: 17
+stats: [18, 8, 18, 7, 10, 3]
+saves: {}
+skillsaves: {}
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 10, scurovisione: 18 m, vista_cieca: 3 m"
+languages: "capisce i comandi impartiti in qualsiasi lingua, ma non è in grado di parlare"
+gear: []
+traits: 
+- name: "Incantesimo custodito"
+  desc: "Un incantatore che indossa l'amuleto del guardiano protettore può fare in modo che il guardiano custodisca un incantesimo di 4º livello o inferiore. Per farlo, il portatore deve lanciare l'incantesimo sul guardiano finché si trova entro 1,5 metri da esso. L'incantesimo non ha effetto, ma è custodito all'interno del guardiano. Quando gli viene affidato un nuovo incantesimo, quello custodito in precedenza viene sovrascritto. Il guardiano protettore può lanciare l'incantesimo custodito con qualsiasi parametro deciso dall'incantatore originale, senza bisogno di componenti e utilizzando la caratteristica da incantatore di quest'ultimo. Così facendo, l'incantesimo custodito va perduto."
+- name: "Rigenerazione"
+  desc: "Il guardiano protettore recupera 10 punti ferita all'inizio di ogni suo turno, se ha almeno 1 punto ferita."
+- name: "Vincolato"
+  desc: "Il guardiano protettore è vincolato magicamente a un amuleto. Finché il guardiano e il suo amuleto si trovano sullo stesso piano di esistenza, il portatore dell'amuleto può chiamare telepaticamente ilguardiano affinché viaggi fino a lui. Il guardiano conosce la distanza e la direzione in cui si trova l'oggetto. Se il guardiano si trova entro 18 metri dal portatore dell'amuleto, la metà dei danni (arrotondati per eccesso) che il portatore subisce viene trasferita al guardiano."
+actions: 
+- name: "Multiattacco"
+  desc: "Il guardiano effettua due attacchi Pugno."
+- name: "Pugno"
+  desc: "*Tiro per colpire in mischia:* +7, portata 3 m. *Colpito:* 11 (2d6 + 4) danni contundenti più 7 (2d6) danni da forza."
+bonus_actions: []
+reactions: 
+- name: "Protezione"
+  desc: "Attivazione: un tiro per colpire va a segno sul portatore dell'amuleto del guardiano protettore finché egli si trova entro 1,5 metri dal costrutto. Esito: il portatore dell'amuleto ottiene un bonus di +5 alla CA anche contro il tiro che ha provocato la reazione, aumentando le probabilità che il colpo non vada a segno, fino all'inizio del turno successivo del guardiano protettore."
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Costrutto"
 dimensione: "Grande"
 allineamento: "senza allineamento"
@@ -25,6 +57,10 @@ bonus_competenza: 3
 statblock: true
 ---
 # Guardiano protettore
+
+```statblock
+monster: Guardiano protettore
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Grande Costrutto, senza allineamento

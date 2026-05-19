@@ -11,6 +11,32 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Ghoul"
+type: "Non morto"
+size: "medio"
+alignment: "caotico malvagio"
+ac: 12
+stats: [13, 15, 10, 7, 10, 6]
+saves: {}
+skillsaves: {}
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 10, scurovisione: 18 m"
+languages: "Comune"
+gear: []
+traits: []
+actions: 
+- name: "Multiattacco"
+  desc: "Il ghoul effettua due attacchi Morso."
+- name: "Artiglio"
+  desc: "*Tiro per colpire in mischia:* +4, portata 1,5 m. *Colpito:* 4 (1d4 + 2) danni taglienti. Se il bersaglio è una creatura diversa da un non morto o da un elfo, subisce il seguente effetto.\n\n*Tiro salvezza su Costituzione:* CD 10. *Fallimento:* il bersaglio è paralizzato fino al termine del proprio turno successivo."
+- name: "Morso"
+  desc: "*Tiro per colpire in mischia:* +4, portata 1,5 m. *Colpito:* 5 (1d6 + 2) danni perforanti più 3 (1d6) danni necrotici."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Non morto"
 dimensione: "Medio"
 allineamento: "caotico malvagio"
@@ -25,6 +51,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Ghoul
+
+```statblock
+monster: Ghoul
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Medio Non morto, caotico malvagio

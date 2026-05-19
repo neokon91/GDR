@@ -11,6 +11,47 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Diavolo uncinato"
+type: "Immondo (diavolo)"
+size: "medio"
+alignment: "legale malvagio"
+ac: 15
+stats: [16, 17, 18, 12, 14, 14]
+saves: 
+  str: 6
+  con: 7
+  wis: 5
+  cha: 5
+skillsaves: 
+  inganno: 5
+  intuizione: 5
+  percezione: 8
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 18, scurovisione_36_m_non_ostacolata_dall_oscurita_magica: true"
+languages: "Infernale, telepatia 36 m"
+gear: []
+traits: 
+- name: "Pelle uncinata"
+  desc: "All'inizio di ogni suo turno, il diavolo infligge 5 (1d10) danni perforanti a tutte le creature che afferra o a qualsiasi creatura lo afferri."
+- name: "Resistenza alla magia"
+  desc: "Il diavolo dispone di vantaggio ai tiri salvezza contro incantesimi e altri effetti magici."
+- name: "Ristoro diabolico"
+  desc: "Se il diavolo muore al di fuori dei Nove Inferi, il suo corpo si dissolve in fumo sulfureo e ne acquisisce uno nuovo all'istante, tornando in vita con tutti i suoi punti ferita da qualche parte nei Nove Inferi."
+actions: 
+- name: "Multiattacco"
+  desc: "Il diavolo effettua un attacco Artigli e un attacco Coda, o effettua due attacchi Scagliare fiamma."
+- name: "Artigli"
+  desc: "*Tiro per colpire in mischia:* +6, portata 1,5 m. *Colpito:* 10 (2d6 + 3) danni perforanti. Se il bersaglio è una creatura di taglia Grande o inferiore, è afferrato (CD 13 per sfuggire) da entrambi gli artigli."
+- name: "Coda"
+  desc: "*Tiro per colpire in mischia:* +6, portata 3 m. *Colpito:* 14 (2d10 + 3) danni taglienti."
+- name: "Scagliare fiamma"
+  desc: "*Tiro per colpire a distanza:* +5, gittata 45 m. *Colpito:* 17 (5d6) danni da fuoco. Se il bersaglio è un oggetto infiammabile che non è indossato o trasportato, inizia a bruciare."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Immondo (diavolo)"
 dimensione: "Medio"
 allineamento: "legale malvagio"
@@ -25,6 +66,10 @@ bonus_competenza: 3
 statblock: true
 ---
 # Diavolo uncinato
+
+```statblock
+monster: Diavolo uncinato
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Medio Immondo (diavolo), legale malvagio

@@ -11,6 +11,35 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Bulette"
+type: "Mostruosità"
+size: "grande"
+alignment: "senza allineamento"
+ac: 17
+stats: [19, 11, 21, 2, 10, 5]
+saves: {}
+skillsaves: 
+  percezione: 6
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 16, percezione_tellurica: 36 m, scurovisione: 18 m"
+languages: "nessuna"
+gear: []
+traits: []
+actions: 
+- name: "Multiattacco"
+  desc: "Il bulette effettua due attacchi Morso."
+- name: "Morso"
+  desc: "*Tiro per colpire in mischia:* +7, portata 1,5 m. *Colpito:* 17 (2d12 + 4) danni perforanti."
+- name: "Balzo letale"
+  desc: "Il bulette usa 1,5 metri di movimento per saltare in uno spazio entro 4,5 metri che contiene una o più creature di taglia Grande o inferiore. *Tiro salvezza su Destrezza:* CD 15, tutte le creature nello spazio di destinazione del bulette. *Fallimento:* 19 (3d12) danni contundenti, e il bersaglio è prono. *Successo:* danni dimezzati, e il bersaglio viene spinto a 1,5 metri di distanza dal bulette."
+bonus_actions: 
+- name: "Balzo"
+  desc: "Il bulette salta fino a un massimo di 9 metri usando 3 metri di movimento."
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Mostruosità"
 dimensione: "Grande"
 allineamento: "senza allineamento"
@@ -25,6 +54,10 @@ bonus_competenza: 3
 statblock: true
 ---
 # Bulette
+
+```statblock
+monster: Bulette
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Grande Mostruosità, senza allineamento

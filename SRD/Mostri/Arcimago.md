@@ -11,6 +11,43 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Arcimago"
+type: "Umanoide"
+size: "medio o piccolo"
+alignment: "neutrale"
+ac: 17
+stats: [10, 14, 12, 20, 15, 16]
+saves: 
+  int: 9
+  wis: 6
+skillsaves: 
+  arcano: 13
+  percezione: 6
+  storia: 9
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 16"
+languages: "Comune più altre cinque lingue"
+gear: ["bacchetta"]
+traits: 
+- name: "Resistenza alla magia"
+  desc: "L'arcimago dispone di vantaggio ai tiri salvezza contro incantesimi e altri effetti magici."
+actions: 
+- name: "Multiattacco"
+  desc: "L'arcimago effettua quattro attacchi Esplosione arcana."
+- name: "Esplosione arcana"
+  desc: "*Tiro per colpire in mischia o a distanza:* +9, portata 1,5 m o gittata 45 m. *Colpito:* 27 (4d10 + 5) danni da forza."
+- name: "Incantesimi"
+  desc: "L'arcimago lancia uno dei seguenti incantesimi, utilizzando Intelligenza come caratteristica da incantatore (CD del tiro salvezza sull'incantesimo 17): 1/giorno ciascuno: Cono di freddo (di 9º livello), scrutare, teletrasporto, vuoto mentale (lanciato prima del combattimento) 2/giorno ciascuno: Fulmine (di 7º livello), volare A volontà: Armatura magica (inclusa nella CA), camuffare se stesso, individuazione dei pensieri, individuazione del magico, invisibilità, luce, mano magica, prestidigitazione"
+bonus_actions: 
+- name: "Passo velato (3/giorno)"
+  desc: "Il mago lancia passo velato, utilizzando la stessa caratteristica da incantatore di Incantesimi."
+reactions: 
+- name: "Magia di protezione (3/giorno)"
+  desc: "L'arcimago lancia controincantesimo o scudo come risposta all'innesco dell'incantesimo, utilizzando la stessa caratteristica da incantatore di Incantesimi."
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Umanoide"
 dimensione: "Medio o Piccolo"
 allineamento: "neutrale"
@@ -25,6 +62,10 @@ bonus_competenza: 4
 statblock: true
 ---
 # Arcimago
+
+```statblock
+monster: Arcimago
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Medio o Piccolo Umanoide, neutrale

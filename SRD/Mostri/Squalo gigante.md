@@ -11,6 +11,33 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Squalo gigante"
+type: "Bestia"
+size: "enorme"
+alignment: "senza allineamento"
+ac: 13
+stats: [23, 11, 21, 1, 10, 5]
+saves: {}
+skillsaves: 
+  percezione: 3
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 13, vista_cieca: 18 m"
+languages: "nessuna"
+gear: []
+traits: 
+- name: "Respirare sott'acqua"
+  desc: "Lo squalo può respirare soltanto sott'acqua."
+actions: 
+- name: "Multiattacco"
+  desc: "Lo squalo effettua due attacchi Morso."
+- name: "Morso"
+  desc: "*Tiro per colpire in mischia:* +9 (con vantaggio se il bersaglio non ha tutti i punti ferita), portata 1,5 m. *Colpito:* 22 (3d10 + 6) danni perforanti."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Bestia"
 dimensione: "Enorme"
 allineamento: "senza allineamento"
@@ -25,6 +52,10 @@ bonus_competenza: 3
 statblock: true
 ---
 # Squalo gigante
+
+```statblock
+monster: Squalo gigante
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Enorme Bestia, senza allineamento

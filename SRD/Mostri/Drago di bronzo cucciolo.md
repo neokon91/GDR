@@ -11,6 +11,40 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Drago di bronzo cucciolo"
+type: "Drago (metallico)"
+size: "medio"
+alignment: "legale buono"
+ac: 15
+stats: [17, 10, 15, 12, 11, 15]
+saves: 
+  dex: 2
+  wis: 2
+skillsaves: 
+  furtivita: 2
+  percezione: 4
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 14, scurovisione: 18 m, vista_cieca: 3 m"
+languages: "Draconico"
+gear: []
+traits: 
+- name: "Anfibio"
+  desc: "Il drago può respirare in aria e in acqua."
+actions: 
+- name: "Multiattacco"
+  desc: "Il drago effettua due attacchi Squarcio."
+- name: "Squarcio"
+  desc: "*Tiro per colpire in mischia:* +5, portata 1,5 m. *Colpito:* 8 (1d10 + 3) danni taglienti."
+- name: "Soffio di fulmini (ricarica 5-6)"
+  desc: "*Tiro salvezza su Destrezza:* CD 12, tutte le creature in una linea lunga 12 metri e larga 1,5 metri. *Fallimento:* 16 (3d10) danni da fulmine. *Successo:* danni dimezzati."
+- name: "Soffio repulsivo"
+  desc: "*Tiro salvezza su Forza:* CD 12, tutte le creature in un cono di 9 metri. *Fallimento:* il bersaglio viene spinto fino a un massimo di 9 metri di distanza dal drago e cade a terra prono."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Drago (metallico)"
 dimensione: "Medio"
 allineamento: "legale buono"
@@ -25,6 +59,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Drago di bronzo cucciolo
+
+```statblock
+monster: Drago di bronzo cucciolo
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Medio Drago (metallico), legale buono

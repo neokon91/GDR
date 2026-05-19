@@ -11,6 +11,33 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Ippogrifo"
+type: "Mostruosità"
+size: "grande"
+alignment: "senza allineamento"
+ac: 11
+stats: [17, 13, 13, 2, 12, 8]
+saves: {}
+skillsaves: 
+  percezione: 5
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 15"
+languages: "nessuna"
+gear: []
+traits: 
+- name: "Volo sfuggente"
+  desc: "L'ippogrifo non provoca attacchi d'opportunità quando vola oltre la portata di un nemico."
+actions: 
+- name: "Multiattacco"
+  desc: "L'ippogrifo effettua due attacchi Squarcio."
+- name: "Squarcio"
+  desc: "*Tiro per colpire in mischia:* +5, portata 1,5 m. *Colpito:* 7 (1d8 + 3) danni taglienti."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Mostruosità"
 dimensione: "Grande"
 allineamento: "senza allineamento"
@@ -25,6 +52,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Ippogrifo
+
+```statblock
+monster: Ippogrifo
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Grande Mostruosità, senza allineamento

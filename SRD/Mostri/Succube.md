@@ -11,6 +11,43 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Succube"
+type: "Immondo"
+size: "medio"
+alignment: "neutrale malvagio"
+ac: 15
+stats: [8, 17, 13, 15, 12, 20]
+saves: {}
+skillsaves: 
+  furtivita: 7
+  inganno: 9
+  intuizione: 5
+  percezione: 5
+  persuasione: 9
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 15, scurovisione: 18 m"
+languages: "Abissale, Comune, Infernale, telepatia 18 m"
+gear: []
+traits: 
+- name: "Forma incubo"
+  desc: "Quando la succube termina un riposo lungo, può trasformarsi in un incubo, utilizzando la relativa scheda delle statistiche al posto di questa."
+actions: 
+- name: "Multiattacco"
+  desc: "La succube effettua un attacco Tocco immondo e utilizza Fascino o Bacio prosciugante."
+- name: "Tocco immondo"
+  desc: "*Tiro per colpire in mischia:* +7, portata 1,5 m. *Colpito:* 16 (2d10 + 5) danni psichici."
+- name: "Bacio prosciugante"
+  desc: "*Tiro salvezza su Costituzione:* CD 15, una creatura affascinata dalla succube entro 1,5 metri. *Fallimento:* 13 (3d8) danni psichici. *Successo:* danni dimezzati. *Fallimento o successo:* i punti ferita massimi del bersaglio sono ridotti di un ammontare pari ai danni subiti."
+- name: "Fascino"
+  desc: "La succube lancia dominare persone (di 8º livello), senza bisogno di componenti e utilizzando Carisma come caratteristica da incantatore (CD del tiro salvezza sull'incantesimo 15)."
+bonus_actions: 
+- name: "Mutaforma"
+  desc: "La succube si trasforma in un umanoide di taglia Media o Piccola, oppure ritorna alla sua vera forma. Le sue statistiche di gioco sono le stesse in ogni forma, a eccezione della velocità di volo disponibile solo nella sua vera forma. Nessun oggetto che indossa o trasporta viene trasformato."
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Immondo"
 dimensione: "Medio"
 allineamento: "neutrale malvagio"
@@ -25,6 +62,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Succube
+
+```statblock
+monster: Succube
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Medio Immondo, neutrale malvagio

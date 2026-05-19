@@ -11,6 +11,32 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Ankheg"
+type: "Mostruosità"
+size: "grande"
+alignment: "senza allineamento"
+ac: 14
+stats: [17, 11, 14, 1, 13, 6]
+saves: {}
+skillsaves: {}
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 11, percezione_tellurica: 18 m, scurovisione: 18 m"
+languages: "nessuna"
+gear: []
+traits: 
+- name: "Scavatore di tunnel"
+  desc: "L'ankheg può scavare nella roccia a metà della sua velocità di scavo e lascia dietro di sé un tunnel del diametro di 3 metri."
+actions: 
+- name: "Morso"
+  desc: "*Tiro per colpire in mischia:* +5 (con vantaggio se il bersaglio è afferrato dall'ankheg), portata 1,5 m. *Colpito:* 10 (2d6 + 3) danni taglienti più 3 (1d6) danni da acido. Se il bersaglio è una creatura di taglia Grande o inferiore, è afferrato (CD 13 per sfuggire)."
+- name: "Spruzzo acido (ricarica 6)"
+  desc: "*Tiro salvezza su Destrezza:* CD 12, tutte le creature in una linea lunga 9 metri e larga 1,5 metri. *Fallimento:* 14 (4d6) danni da acido. *Successo:* danni dimezzati."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Mostruosità"
 dimensione: "Grande"
 allineamento: "senza allineamento"
@@ -25,6 +51,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Ankheg
+
+```statblock
+monster: Ankheg
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Grande Mostruosità, senza allineamento

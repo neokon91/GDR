@@ -11,6 +11,44 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Glabrezu"
+type: "Immondo (demone)"
+size: "grande"
+alignment: "caotico malvagio"
+ac: 17
+stats: [20, 15, 21, 19, 17, 16]
+saves: 
+  str: 9
+  con: 9
+  wis: 7
+  cha: 7
+skillsaves: 
+  inganno: 7
+  percezione: 7
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 17, vista_pura: 36 m"
+languages: "Abissale, telepatia 36 m"
+gear: []
+traits: 
+- name: "Resistenza alla magia"
+  desc: "Il glabrezu dispone di vantaggio ai tiri salvezza contro incantesimi e altri effetti magici."
+- name: "Ristoro demoniaco"
+  desc: "Se il glabrezu muore al di fuori dell'Abisso, il suo corpo si dissolve diventando icore e ne acquisisce uno nuovo all'istante, tornando in vita con tutti i suoi punti ferita da qualche parte nell'Abisso."
+actions: 
+- name: "Multiattacco"
+  desc: "Il glabrezu effettua due attacchi Tenaglia, e utilizza Pugno o Incantesimi."
+- name: "Tenaglia"
+  desc: "*Tiro per colpire in mischia:* +9, portata 3 m. *Colpito:* 16 (2d10 + 5) danni taglienti. Se il bersaglio è una creatura di taglia Media o inferiore viene afferrato (CD 15 per sfuggire) da una delle due tenaglie."
+- name: "Incantesimi"
+  desc: "Il glabrezu lancia uno dei seguenti incantesimi senza bisogno di componenti materiali, utilizzando Intelligenza come caratteristica da incantatore (CD del tiro salvezza sull'incantesimo 16):\n\n1/giorno ciascuno:\n- confusione\n- parola del potere stordire\n- volare\n\nA volontà:\n- dissolvi magie\n- individuazione del magico\n- oscurità"
+- name: "Pugno"
+  desc: "*Tiro salvezza su Destrezza:* CD 17, una creatura afferrata dal glabrezu. *Fallimento:* 15 (3d6 + 5) danni contundenti. *Successo:* danni dimezzati."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Immondo (demone)"
 dimensione: "Grande"
 allineamento: "caotico malvagio"
@@ -25,6 +63,10 @@ bonus_competenza: 4
 statblock: true
 ---
 # Glabrezu
+
+```statblock
+monster: Glabrezu
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Grande Immondo (demone), caotico malvagio

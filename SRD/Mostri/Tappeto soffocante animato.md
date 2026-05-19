@@ -11,6 +11,28 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Tappeto soffocante animato"
+type: "Costrutto"
+size: "grande"
+alignment: "senza allineamento"
+ac: 12
+stats: [17, 14, 10, 1, 3, 1]
+saves: {}
+skillsaves: {}
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 6, vista_cieca: 18 m"
+languages: "nessuna"
+gear: []
+traits: []
+actions: 
+- name: "Soffocare"
+  desc: "*Tiro per colpire in mischia:* +5, portata 1,5 m. *Colpito:* 10 (2d6 + 3) danni contundenti. Se il bersaglio è una creatura di taglia Media o inferiore, il tappeto lo afferra (CD 13 per sfuggire) invece di infliggere danni. Finché la presa perdura, il bersaglio è accecato e trattenuto, soffoca, e subisce 10 (2d6 + 3) danni contundenti all'inizio di ogni suo turno. Il tappeto può soffocare solo una creatura alla volta. Finché afferra il bersaglio, il tappeto non può effettuare questa azione e dimezza i danni subiti (arrotondati per difetto); il bersaglio subisce la stessa quantità di danni."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Costrutto"
 dimensione: "Grande"
 allineamento: "senza allineamento"
@@ -25,6 +47,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Tappeto soffocante animato
+
+```statblock
+monster: Tappeto soffocante animato
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Grande Costrutto, senza allineamento

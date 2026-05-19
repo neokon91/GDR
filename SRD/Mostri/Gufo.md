@@ -11,6 +11,32 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Gufo"
+type: "Bestia"
+size: "minuscola"
+alignment: "senza allineamento"
+ac: 11
+stats: [3, 13, 8, 2, 12, 7]
+saves: {}
+skillsaves: 
+  furtivita: 5
+  percezione: 5
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 15, scurovisione: 36 m"
+languages: "nessuna"
+gear: []
+traits: 
+- name: "Volo sfuggente"
+  desc: "Il gufo non provoca attacchi di opportunità quando vola oltre la portata di un nemico."
+actions: 
+- name: "Speroni"
+  desc: "*Tiro per colpire in mischia:* +3, portata 1,5 m. *Colpito:* 1 danno tagliente."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Bestia"
 dimensione: "Minuscola"
 allineamento: "senza allineamento"
@@ -25,6 +51,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Gufo
+
+```statblock
+monster: Gufo
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Minuscola Bestia, senza allineamento

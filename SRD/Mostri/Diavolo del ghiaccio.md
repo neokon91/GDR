@@ -11,6 +11,45 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Diavolo del ghiaccio"
+type: "Immondo (diavolo)"
+size: "grande"
+alignment: "legale malvagio"
+ac: 18
+stats: [21, 14, 18, 18, 15, 18]
+saves: 
+  dex: 7
+  con: 9
+  wis: 7
+  cha: 9
+skillsaves: 
+  intuizione: 7
+  percezione: 7
+  persuasione: 9
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 17, vista_cieca: 36 m"
+languages: "Infernale, telepatia 36 m"
+gear: []
+traits: 
+- name: "Resistenza alla magia"
+  desc: "Il diavolo dispone di vantaggio ai tiri salvezza contro incantesimi e altri effetti magici."
+- name: "Ristoro diabolico"
+  desc: "Se il diavolo muore al di fuori dei Nove Inferi, il suo corpo si dissolve in fumo sulfureo e ne acquisisce uno nuovo all'istante, tornando in vita con tutti i suoi punti ferita da qualche parte nei Nove Inferi."
+actions: 
+- name: "Multiattacco"
+  desc: "Il diavolo effettua tre attacchi Lancia di ghiaccio. Può sostituire un attacco con un attacco Coda."
+- name: "Coda"
+  desc: "*Tiro per colpire in mischia:* +10, portata 3 m. *Colpito:* 15 (3d6 + 5) danni contundenti più 18 (4d8) danni da freddo."
+- name: "Lancia di ghiaccio"
+  desc: "*Tiro per colpire in mischia o a distanza:* +10, portata 1,5 m o gittata 9/36 m. *Colpito:* 14 (2d8 + 5) danni perforanti più 10 (3d6) danni da freddo. Fino al termine del proprio turno successivo, il bersaglio non può effettuare un'azione bonus o una reazione, la sua velocità è ridotta di 3 metri e durante il suo turno può muoversi o effettuare un'azione, ma non entrambe le cose. Colpito o mancato: la lancia fa magicamente ritorno nella mano del diavolo subito dopo un attacco a distanza."
+- name: "Muro di ghiaccio (ricarica 6)"
+  desc: "Il diavolo lancia muro di ghiaccio (di 8º livello), senza bisogno di componenti e utilizzando Intelligenza come caratteristica da incantatore (CD del tiro salvezza sull'incantesimo 17)."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Immondo (diavolo)"
 dimensione: "Grande"
 allineamento: "legale malvagio"
@@ -25,6 +64,10 @@ bonus_competenza: 5
 statblock: true
 ---
 # Diavolo del ghiaccio
+
+```statblock
+monster: Diavolo del ghiaccio
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Grande Immondo (diavolo), legale malvagio

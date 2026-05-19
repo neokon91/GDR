@@ -11,6 +11,33 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Ghast"
+type: "Non morto"
+size: "medio"
+alignment: "caotico malvagio"
+ac: 13
+stats: [16, 17, 10, 11, 10, 8]
+saves: 
+  wis: 2
+skillsaves: {}
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 10, scurovisione: 18 m"
+languages: "Comune"
+gear: []
+traits: 
+- name: "Fetore"
+  desc: "*Tiro salvezza su Costituzione:* CD 10, ogni creatura che inizi il suo turno in un'emanazione di 1,5 metri di cui il ghast è il punto di origine. *Fallimento:* il bersaglio è avvelenato fino all'inizio del proprio turno successivo. *Successo:* il bersaglio è immune a Fetore di questo ghast per 24 ore."
+actions: 
+- name: "Artiglio"
+  desc: "*Tiro per colpire in mischia:* +5, portata 1,5 m. *Colpito:* 10 (2d6 + 3) danni taglienti. Se il bersaglio è una creatura diversa da un non morto, subisce il seguente effetto.\n\n*Tiro salvezza su Costituzione:* CD 10. *Fallimento:* il bersaglio è paralizzato fino al termine del proprio turno successivo."
+- name: "Morso"
+  desc: "*Tiro per colpire in mischia:* +5, portata 1,5 m. *Colpito:* 7 (1d8 + 3) danni perforanti più 9 (2d8) danni necrotici."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Non morto"
 dimensione: "Medio"
 allineamento: "caotico malvagio"
@@ -25,6 +52,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Ghast
+
+```statblock
+monster: Ghast
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Medio Non morto, caotico malvagio

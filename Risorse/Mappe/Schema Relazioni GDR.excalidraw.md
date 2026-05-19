@@ -1,5 +1,9 @@
 ---
 excalidraw-plugin: parsed
+categoria: risorsa
+tipo: mappa
+uso: relazioni
+stato: pronto
 tags:
   - excalidraw
   - mappa

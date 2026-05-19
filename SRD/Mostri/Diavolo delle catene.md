@@ -11,6 +11,40 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Diavolo delle catene"
+type: "Immondo (diavolo)"
+size: "medio"
+alignment: "legale malvagio"
+ac: 15
+stats: [18, 15, 18, 11, 12, 14]
+saves: 
+  con: 7
+  wis: 4
+skillsaves: {}
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 11, scurovisione_36_m_non_ostacolata_dall_oscurita_magica: true"
+languages: "Infernale, telepatia 36 m"
+gear: []
+traits: 
+- name: "Resistenza alla magia"
+  desc: "Il diavolo dispone di vantaggio ai tiri salvezza contro incantesimi e altri effetti magici."
+- name: "Ristoro diabolico"
+  desc: "Se il diavolo muore al di fuori dei Nove Inferi, il suo corpo si dissolve in fumo sulfureo e ne acquisisce uno nuovo all'istante, tornando in vita con tutti i suoi punti ferita da qualche parte nei Nove Inferi."
+actions: 
+- name: "Multiattacco"
+  desc: "Il diavolo effettua due attacchi Catena e utilizza Evoca catena infernale."
+- name: "Catena"
+  desc: "*Tiro per colpire in mischia:* +7, portata 3 m. *Colpito:* 11 (2d6 + 4) danni taglienti. Se il bersaglio è una creatura di taglia Grande o inferiore, è afferrato (CD 14 per sfuggire) da una delle due catene, e resta trattenuto finché la presa perdura."
+- name: "Evoca catena infernale"
+  desc: "Il diavolo evoca una catena di fuoco per legare una creatura.\n\n*Tiro salvezza su Destrezza:* CD 15, una creatura che il diavolo è in grado di vedere entro 18 metri.\n\n*Fallimento:* 9 (2d4 + 4) danni da fuoco, e il bersaglio è trattenuto fino alla fine del turno successivo del diavolo; a quel punto la catena scompare. Se il bersaglio è di taglia Grande o inferiore, il diavolo lo trascina in linea retta verso di sé fino a un massimo di 9 metri.\n\n*Successo:* la catena svanisce."
+bonus_actions: []
+reactions: 
+- name: "Sguardo snervante"
+  desc: "**Attivazione:** una creatura che il diavolo è in grado di vedere inizia il suo turno entro 9 metri da quest'ultimo e può vedere il diavolo.\n\n*Tiro salvezza su Saggezza:* CD 15, la creatura che ha provocato la reazione.\n\n*Fallimento:* il bersaglio è spaventato fino al termine del proprio turno successivo.\n\n*Successo:* il bersaglio è immune allo Sguardo snervante di questo diavolo per 24 ore."
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Immondo (diavolo)"
 dimensione: "Medio"
 allineamento: "legale malvagio"
@@ -25,6 +59,10 @@ bonus_competenza: 3
 statblock: true
 ---
 # Diavolo delle catene
+
+```statblock
+monster: Diavolo delle catene
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Medio Immondo (diavolo), legale malvagio

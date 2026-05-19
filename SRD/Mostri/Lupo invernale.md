@@ -11,6 +11,34 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Lupo invernale"
+type: "Mostruosità"
+size: "grande"
+alignment: "neutrale malvagio"
+ac: 13
+stats: [18, 13, 14, 7, 12, 8]
+saves: {}
+skillsaves: 
+  furtivita: 5
+  percezione: 5
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 15"
+languages: "Comune, Gigante"
+gear: []
+traits: 
+- name: "Tattiche del branco"
+  desc: "Il lupo dispone di vantaggio al tiro per colpire contro una creatura se almeno uno degli alleati dell'animale si trova entro 1,5 metri dalla creatura e non è incapacitato."
+actions: 
+- name: "Morso"
+  desc: "*Tiro per colpire in mischia:* +6, portata 1,5 m. *Colpito:* 11 (2d6 + 4) danni perforanti. Se il bersaglio è una creatura di taglia Grande o inferiore, cade a terra prono."
+- name: "Soffio di freddo (ricarica 5-6)"
+  desc: "*Tiro salvezza su Costituzione:* CD 12, tutte le creature in un cono di 4,5 metri. *Fallimento:* 18 (4d8) danni da freddo. *Successo:* danni dimezzati."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Mostruosità"
 dimensione: "Grande"
 allineamento: "neutrale malvagio"
@@ -25,6 +53,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Lupo invernale
+
+```statblock
+monster: Lupo invernale
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Grande Mostruosità, neutrale malvagio

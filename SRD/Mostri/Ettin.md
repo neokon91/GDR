@@ -11,6 +11,33 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Ettin"
+type: "Gigante"
+size: "grande"
+alignment: "caotico malvagio"
+ac: 12
+stats: [21, 8, 17, 6, 10, 8]
+saves: {}
+skillsaves: 
+  percezione: 4
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 14, scurovisione: 18 m"
+languages: "Gigante"
+gear: ["ascia da battaglia", "mazza chiodata"]
+traits: []
+actions: 
+- name: "Ascia da battaglia"
+  desc: "*Tiro per colpire in mischia:* +7, portata 1,5 m. *Colpito:* 14 (2d8 + 5) danni taglienti. Se il bersaglio è una creatura di taglia Grande o inferiore, cade a terra prono."
+- name: "Mazza chiodata"
+  desc: "*Tiro per colpire in mischia:* +7, portata 1,5 m. *Colpito:* 14 (2d8 + 5) danni perforanti, e il bersaglio subisce svantaggio al tiro per colpire successivo che effettua prima del termine del proprio turno successivo."
+- name: "Multiattacco"
+  desc: "L'ettin effettua un attacco Ascia da battaglia e un attacco Mazza chiodata."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Gigante"
 dimensione: "Grande"
 allineamento: "caotico malvagio"
@@ -25,6 +52,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Ettin
+
+```statblock
+monster: Ettin
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Grande Gigante, caotico malvagio

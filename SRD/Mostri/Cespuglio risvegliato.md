@@ -11,6 +11,28 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Cespuglio risvegliato"
+type: "Vegetale"
+size: "piccolo"
+alignment: "neutrale"
+ac: 9
+stats: [3, 8, 11, 10, 10, 6]
+saves: {}
+skillsaves: {}
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 10"
+languages: "Comune più un'altra lingua"
+gear: []
+traits: []
+actions: 
+- name: "Graffiare"
+  desc: "*Tiro per colpire in mischia:* +1, portata 1,5 m. *Colpito:* 1 danno tagliente."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Vegetale"
 dimensione: "Piccolo"
 allineamento: "neutrale"
@@ -25,6 +47,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Cespuglio risvegliato
+
+```statblock
+monster: Cespuglio risvegliato
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Piccolo Vegetale, neutrale

@@ -11,6 +11,44 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Unicorno"
+type: "Celestiale"
+size: "grande"
+alignment: "legale buono"
+ac: 12
+stats: [18, 14, 15, 11, 17, 16]
+saves: {}
+skillsaves: {}
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 13, scurovisione: 18 m"
+languages: "Celestiale, Elfico, Silvano, telepatia 36 m"
+gear: []
+traits: 
+- name: "Resistenza alla magia"
+  desc: "L'unicorno dispone di vantaggio ai tiri salvezza contro incantesimi e altri effetti magici."
+- name: "Resistenza leggendaria (3/giorno)"
+  desc: "Se l'unicorno fallisce un tiro salvezza, può scegliere di superarlo comunque."
+actions: 
+- name: "Multiattacco"
+  desc: "L'unicorno effettua un attacco Zoccoli e un attacco Corno radioso."
+- name: "Corno radioso"
+  desc: "*Tiro per colpire in mischia:* +7, portata 1,5 m. *Colpito:* 9 (1d10 + 4) danni radiosi."
+- name: "Zoccoli"
+  desc: "*Tiro per colpire in mischia:* +7, portata 1,5 m. *Colpito:* 11 (2d6 + 4) danni contundenti."
+- name: "Incantesimi"
+  desc: "L'unicorno lancia uno dei seguenti incantesimi senza bisogno di componenti materiali, utilizzando Carisma come caratteristica da incantatore (CD del tiro salvezza sull'incantesimo 14):1/giorno ciascuno: Calmare emozioni, dissolvi il bene e il male, intralciare, parola del ritiro, passare senza tracceA volontà: Artificio druidico, individuazione del bene e del male"
+bonus_actions: 
+- name: "Benedizione dell'unicorno (3/giorno)"
+  desc: "L'unicorno tocca un'altra creatura col suo corno e lancia cura ferite o ristorare inferiore su di essa, utilizzando la stessa caratteristica da incantatore di Incantesimi."
+reactions: []
+legendary_actions: 
+- name: "Incornata in carica"
+  desc: "L'unicorno si muove fino a metà della sua velocità senza provocare attacchi di opportunità, ed effettua un attacco Corno radioso."
+- name: "Scudo luccicante"
+  desc: "L'unicorno prende di mira se stesso o una creatura che è in grado di vedere entro 18 metri da sé. Il bersaglio ottiene 10 (3d6) punti ferita temporanei, e la sua CA aumenta di 2 fino al termine del turno successivo dell'unicorno. L'unicorno non può ripetere quest'azione fino all'inizio del proprio turno successivo."
+lair_actions: []
 tipo_creatura: "Celestiale"
 dimensione: "Grande"
 allineamento: "legale buono"
@@ -25,6 +63,10 @@ bonus_competenza: 3
 statblock: true
 ---
 # Unicorno
+
+```statblock
+monster: Unicorno
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Grande Celestiale, legale buono

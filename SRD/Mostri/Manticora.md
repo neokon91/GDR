@@ -11,6 +11,32 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Manticora"
+type: "Mostruosità"
+size: "grande"
+alignment: "legale malvagio"
+ac: 14
+stats: [17, 16, 17, 7, 12, 8]
+saves: {}
+skillsaves: {}
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 11, scurovisione: 18 m"
+languages: "Comune"
+gear: []
+traits: []
+actions: 
+- name: "Multiattacco"
+  desc: "La manticora effettua tre attacchi, usando Squarcio o Aculeo caudale in qualsiasi combinazione."
+- name: "Squarcio"
+  desc: "*Tiro per colpire in mischia:* +5, portata 1,5 m. *Colpito:* 7 (1d8 + 3) danni taglienti."
+- name: "Aculeo caudale"
+  desc: "*Tiro per colpire a distanza:* +5, gittata 30/60 m. *Colpito:* 7 (1d8 + 3) danni perforanti."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Mostruosità"
 dimensione: "Grande"
 allineamento: "legale malvagio"
@@ -25,6 +51,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Manticora
+
+```statblock
+monster: Manticora
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Grande Mostruosità, legale malvagio

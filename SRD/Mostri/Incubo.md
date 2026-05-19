@@ -11,6 +11,41 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Incubo"
+type: "Immondo"
+size: "medio"
+alignment: "neutrale malvagio"
+ac: 15
+stats: [8, 17, 13, 15, 12, 20]
+saves: {}
+skillsaves: 
+  furtivita: 7
+  inganno: 9
+  intuizione: 5
+  percezione: 5
+  persuasione: 9
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 15, scurovisione: 18 m"
+languages: "Abissale, Comune, Infernale, telepatia 18 m"
+gear: []
+traits: 
+- name: "Forma succube"
+  desc: "Quando l'incubo termina un riposo lungo, può trasformarsi in una succube, utilizzando la relativa scheda delle statistiche al posto di questa. Nessun oggetto che indossa o trasporta viene trasformato."
+actions: 
+- name: "Multiattacco"
+  desc: "L'incubo effettua due attacchi Tocco irrequieto."
+- name: "Tocco irrequieto"
+  desc: "*Tiro per colpire in mischia:* +7, portata 1,5 m. *Colpito:* 15 (3d6 + 5) danni psichici, e il bersaglio è maledetto per 24 ore o finché l'incubo non muore. Finché la maledizione perdura, il bersaglio non ottiene alcun beneficio dai riposi brevi."
+- name: "Incantesimi"
+  desc: "L'incubo lancia uno dei seguenti incantesimi, senza bisogno di componenti materiali, utilizzando Carisma come caratteristica da incantatore (CD del tiro salvezza sull'incantesimo 15): 1/giorno ciascuno: Sogno, trama ipnotica A volontà: Camuffare se stesso, forma eterea"
+bonus_actions: 
+- name: "Sogno spaventoso (ricarica 6)"
+  desc: "*Tiro salvezza su Saggezza:* CD 15, una creatura che l'incubo è in grado di vedere entro 18 metri. *Fallimento:* Se il bersaglio ha 20 punti ferita o meno, è privo di sensi per 1 ora, finché non subisce danni o un'altra creatura entro 1,5 metri da lui non usa un'azione per svegliarlo. Altrimenti, il bersaglio subisce 18 (4d8) danni psichici."
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Immondo"
 dimensione: "Medio"
 allineamento: "neutrale malvagio"
@@ -25,6 +60,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Incubo
+
+```statblock
+monster: Incubo
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Medio Immondo, neutrale malvagio

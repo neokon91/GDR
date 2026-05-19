@@ -11,6 +11,28 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Uccello stigeo"
+type: "Mostruosità"
+size: "minuscola"
+alignment: "senza allineamento"
+ac: 13
+stats: [4, 16, 11, 2, 8, 6]
+saves: {}
+skillsaves: {}
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 9, scurovisione: 18 m"
+languages: "nessuna"
+gear: []
+traits: []
+actions: 
+- name: "Proboscide"
+  desc: "*Tiro per colpire in mischia:* +5, portata 1,5 m *Colpito:* 6 (1d6 + 3) danni perforanti, e l'uccello stigeo si avvinghia al bersaglio. Finché l'uccello stigeo è attaccato in questo modo non può effettuare attacchi Proboscide, e il bersaglio subisce 5 (2d4) danni necrotici all'inizio di ogni turno dell'uccello stigeo. L'uccello stigeo può staccarsi da solo utilizzando 1,5 metri del suo movimento. Il bersaglio o una creatura entro 1,5 metri da esso può staccare l'uccello stigeo con un'azione."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Mostruosità"
 dimensione: "Minuscola"
 allineamento: "senza allineamento"
@@ -25,6 +47,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Uccello stigeo
+
+```statblock
+monster: Uccello stigeo
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Minuscola Mostruosità, senza allineamento

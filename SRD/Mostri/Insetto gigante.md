@@ -11,6 +11,29 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Insetto gigante"
+type: "Bestia"
+size: "grande o inferiore"
+alignment: "senza allineamento"
+ac: 12
+stats: [17, 13, 15, 4, 14, 3]
+saves: 
+  wis: 4
+skillsaves: {}
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva_variabile: true"
+languages: "Se evocato con incantesimo comprende le lingue parlate dal personaggio"
+gear: []
+traits: []
+actions: 
+- name: "Attacco naturale (variabile)"
+  desc: "*Tiro per colpire in mischia:* bonus variabile, portata 1,5 m (o diversa in base all’insetto). *Colpito:* danni variabili in base al tipo di insetto (per esempio morso, pungiglione, ecc.), eventualmente con effetti aggiuntivi come veleno."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Bestia"
 dimensione: "Grande o inferiore"
 allineamento: "senza allineamento"
@@ -25,6 +48,10 @@ bonus_competenza:
 statblock: true
 ---
 # Insetto gigante
+
+```statblock
+monster: Insetto gigante
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Grande o inferiore Bestia, senza allineamento

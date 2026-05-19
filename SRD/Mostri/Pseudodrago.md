@@ -11,6 +11,36 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Pseudodrago"
+type: "Drago"
+size: "minuscolo"
+alignment: "neutrale buono"
+ac: 14
+stats: [6, 15, 13, 10, 12, 10]
+saves: {}
+skillsaves: 
+  furtivita: 4
+  percezione: 5
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 15, scurovisione: 18 m, vista_cieca: 3 m"
+languages: "capisce Comune e Draconico, ma non li parla"
+gear: []
+traits: 
+- name: "Resistenza alla magia"
+  desc: "Lo pseudodrago dispone di vantaggio ai tiri salvezza contro incantesimi e altri effetti magici."
+actions: 
+- name: "Multiattacco"
+  desc: "Lo pseudodrago effettua due attacchi Morso."
+- name: "Morso"
+  desc: "*Tiro per colpire in mischia:* +4, portata 1,5 m. *Colpito:* 4 (1d4 + 2) danni perforanti."
+- name: "Pungiglione"
+  desc: "*Tiro salvezza su Costituzione:* CD 12, una creatura che lo pseudodrago è in grado di vedere entro 1,5 metri. *Fallimento:* 5 (2d4) danni da veleno, e il bersaglio è avvelenato per 1 ora. Fallimento di 5 o più: finché rimane avvelenato, il bersaglio è privo di sensi. Il bersaglio si sveglia se subisce danni o se una creatura entro 1,5 metri da esso effettua un'azione per svegliarlo."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Drago"
 dimensione: "Minuscolo"
 allineamento: "neutrale buono"
@@ -25,6 +55,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Pseudodrago
+
+```statblock
+monster: Pseudodrago
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Minuscolo Drago, neutrale buono

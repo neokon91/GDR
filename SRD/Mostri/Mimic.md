@@ -11,6 +11,35 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Mimic"
+type: "Mostruosità"
+size: "media"
+alignment: "neutrale"
+ac: 12
+stats: [17, 12, 15, 5, 13, 8]
+saves: {}
+skillsaves: 
+  furtivita: 5
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 11, scurovisione: 18 m"
+languages: "nessuna"
+gear: []
+traits: 
+- name: "Adesivo (solo in forma di oggetto)"
+  desc: "Il mimic aderisce a qualsiasi cosa tocchi. Una creatura di taglia Enorme oinferiore attaccata al mimic è afferrata (CD 13 per sfuggire). Le prove di caratteristica effettuate per sfuggire a questa presa subiscono svantaggio."
+actions: 
+- name: "Morso"
+  desc: "*Tiro per colpire in mischia:* +5 (con vantaggio se il bersaglio è afferrato dal mimic), portata 1,5 m. *Colpito:* 7 (1d8 + 3) danni perforanti, o 12 (2d8 + 3) danni perforanti se il bersaglio è afferrato dal mimic, più 4 (1d8) danni da acido."
+- name: "Pseudopode"
+  desc: "*Tiro per colpire in mischia:* +5, portata 1,5 m *Colpito:* 7 (1d8 + 3) danni contundenti più 4 (1d8) danni da acido. Se il bersaglio è una creatura di taglia Grande o inferiore, è afferrato (CD 13 per sfuggire). Le prove di caratteristica effettuate per sfuggire a questa presa subiscono svantaggio."
+bonus_actions: 
+- name: "Mutaforma"
+  desc: "Il mimic assume la forma di un oggetto Medio o Piccolo, mantenendo le proprie statistiche di gioco, o ritorna alla sua forma autentica. Nessun oggetto che indossa o trasporta viene trasformato."
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Mostruosità"
 dimensione: "Media"
 allineamento: "neutrale"
@@ -25,6 +54,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Mimic
+
+```statblock
+monster: Mimic
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Media Mostruosità, neutrale

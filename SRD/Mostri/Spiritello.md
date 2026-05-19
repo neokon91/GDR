@@ -11,6 +11,36 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Spiritello"
+type: "Folletto"
+size: "minuscolo"
+alignment: "neutrale buono"
+ac: 15
+stats: [3, 18, 10, 14, 13, 11]
+saves: {}
+skillsaves: 
+  furtivita: 8
+  percezione: 3
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 13"
+languages: "Comune, Elfico, Silvano"
+gear: []
+traits: []
+actions: 
+- name: "Ago da battaglia"
+  desc: "*Tiro per colpire in mischia:* +6, portata 1,5 m *Colpito:* 6 (1d4 + 4) danni perforanti."
+- name: "Arco ammaliante"
+  desc: "*Tiro per colpire a distanza:* +6, portata 12/48 m *Colpito:* 1 danno perforante e il bersaglio è affascinato fino all'inizio del turno successivo dello spiritello."
+- name: "Invisibilità"
+  desc: "Lo spiritello può lanciare invisibilità su di sé senza bisogno di componenti per incantesimi e utilizzando il Carisma come caratteristica da incantatore."
+- name: "Vista del cuore"
+  desc: "*Tiro salvezza su Carisma:* CD 10, una creatura entro 1,5 metri che lo spiritello è in grado di vedere (celestiali, immondi e non morti falliscono in automatico la prova). *Fallimento:* lo spiritello conosce le emozioni e l'allineamento del bersaglio. Succube"
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Folletto"
 dimensione: "Minuscolo"
 allineamento: "neutrale buono"
@@ -25,6 +55,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Spiritello
+
+```statblock
+monster: Spiritello
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Minuscolo Folletto, neutrale buono

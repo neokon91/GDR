@@ -11,6 +11,39 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Gigante del gelo"
+type: "Gigante"
+size: "enorme"
+alignment: "neutrale malvagio"
+ac: 15
+stats: [23, 9, 21, 9, 10, 12]
+saves: 
+  con: 8
+  wis: 3
+  cha: 4
+skillsaves: 
+  atletica: 9
+  percezione: 3
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 13"
+languages: "Gigante"
+gear: []
+traits: []
+actions: 
+- name: "Multiattacco"
+  desc: "Il gigante effettua due attacchi, usando Ascia del gelo o Grande arco in qualsiasi combinazione."
+- name: "Ascia del gelo"
+  desc: "*Tiro per colpire in mischia:* +9, portata 3 m. *Colpito:* 19 (2d12 + 6) danni taglienti più 9 (2d8) danni da freddo."
+- name: "Grande arco"
+  desc: "*Tiro per colpire a distanza:* +9, gittata 45/180 m. *Colpito:* 17 (2d10 + 6) danni perforanti più 7 (2d6) danni da freddo, e la velocità del bersaglio è ridotta di 3 metri fino al termine del proprio turno successivo."
+bonus_actions: 
+- name: "Grido di battaglia (ricarica 5-6)"
+  desc: "Il gigante o una creatura a sua scelta che il gigante è in grado di vedere o di sentire ottiene 16 (2d10 + 5) punti ferita temporanei e dispone di vantaggio ai tiri per colpire fino all'inizio del turno successivo del gigante."
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Gigante"
 dimensione: "Enorme"
 allineamento: "neutrale malvagio"
@@ -25,6 +58,10 @@ bonus_competenza: 3
 statblock: true
 ---
 # Gigante del gelo
+
+```statblock
+monster: Gigante del gelo
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Enorme Gigante, neutrale malvagio

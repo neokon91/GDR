@@ -11,6 +11,37 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Gigante del fuoco"
+type: "Gigante"
+size: "enorme"
+alignment: "legale malvagio"
+ac: 18
+stats: [25, 9, 23, 10, 14, 13]
+saves: 
+  dex: 3
+  con: 10
+  cha: 5
+skillsaves: 
+  atletica: 11
+  percezione: 6
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 16"
+languages: "Gigante"
+gear: []
+traits: []
+actions: 
+- name: "Multiattacco"
+  desc: "Il gigante effettua due attacchi, usando Spada di fiamme o Lancio di martello in qualsiasi combinazione."
+- name: "Spada di fiamme"
+  desc: "*Tiro per colpire in mischia:* +11, portata 3 m. *Colpito:* 21 (4d6 + 7) danni taglienti più 10 (3d6) danni da fuoco."
+- name: "Lancio di martello"
+  desc: "*Tiro per colpire a distanza:* +11, portata 18/72 m. *Colpito:* 23 (3d10 + 7) danni contundenti più 4 (1d8) danni da fuoco, il bersaglio viene spinto in linea retta fino a un massimo di 4,5 metri di distanza dal gigante, e subisce svantaggio al tiro per colpire successivo che effettua prima del termine del proprio turno successivo."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Gigante"
 dimensione: "Enorme"
 allineamento: "legale malvagio"
@@ -25,6 +56,10 @@ bonus_competenza: 4
 statblock: true
 ---
 # Gigante del fuoco
+
+```statblock
+monster: Gigante del fuoco
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Enorme Gigante, legale malvagio

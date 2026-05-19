@@ -7,12 +7,22 @@ cssclasses:
 
 ## Sessione Attiva
 
-```dataview
-TABLE data, data_mondo, stato, luoghi, personaggi, creature
-FROM "Mondi/Sessioni"
-WHERE stato = "pronto" OR stato = "preparazione"
-SORT data DESC
-LIMIT 1
+```dataviewjs
+const sessions = dv.pages('"Mondi/Sessioni"')
+  .where(p => !String(p.file.name).startsWith("Prova -") && ["pronto", "preparazione"].includes(p.stato))
+  .sort(p => p.data ?? "0000-00-00", "desc");
+
+const active = sessions.first();
+
+if (!active) {
+  dv.paragraph("Nessuna sessione attiva. Segna una sessione come `preparazione` o `pronto`.");
+} else {
+  dv.table(
+    ["Sessione", "Data", "Data mondo", "Stato", "Luoghi", "Incontri"],
+    [[active.file.link, active.data ?? "", active.data_mondo ?? "", active.stato ?? "", active.luoghi ?? [], active.incontri ?? []]]
+  );
+  dv.paragraph(`Apri: ${active.file.link}`);
+}
 ```
 
 ## Comandi Rapidi
@@ -41,6 +51,14 @@ style: primary
 actions:
   - type: open
     link: "[[Risorse/Controllo Vault]]"
+```
+
+```meta-bind-button
+label: Tabelle Rapide
+style: primary
+actions:
+  - type: open
+    link: "[[Risorse/Tabelle/Tabelle]]"
 ```
 
 ## Scena Corrente
@@ -86,13 +104,27 @@ actions:
 
 ## Persone In Scena
 
-### PNG In Gioco
+### PNG Della Sessione
 
-```dataview
-TABLE ruolo, luogo, atteggiamento
-FROM "Mondi/Personaggi"
-WHERE tipo = "png" AND stato = "in gioco"
-SORT nome ASC
+```dataviewjs
+const active = dv.pages('"Mondi/Sessioni"')
+  .where(p => !String(p.file.name).startsWith("Prova -") && ["pronto", "preparazione"].includes(p.stato))
+  .sort(p => p.data ?? "0000-00-00", "desc")
+  .first();
+
+const linked = dv.array(active?.personaggi ?? []);
+let pages = linked
+  .map(link => dv.page(link.path ?? link))
+  .where(p => p && p.tipo === "png")
+  .array();
+
+if (!pages.length) {
+  pages = dv.pages('"Mondi/Personaggi"')
+    .where(p => !String(p.file.name).startsWith("Prova -") && p.tipo === "png" && p.stato === "in gioco")
+    .array();
+}
+
+dv.table(["PNG", "Ruolo", "Luogo", "Atteggiamento"], pages.map(p => [p.file.link, p.ruolo ?? "", p.luogo ?? "", p.atteggiamento ?? ""]));
 ```
 
 ### PG
@@ -108,37 +140,168 @@ SORT nome ASC
 
 ### Incontri
 
-```dataview
-TABLE luogo, pericolo, creature
-FROM "Mondi/Incontri"
-WHERE stato = "pronto" OR stato = "in gioco"
-SORT pericolo DESC
+```dataviewjs
+const active = dv.pages('"Mondi/Sessioni"')
+  .where(p => !String(p.file.name).startsWith("Prova -") && ["pronto", "preparazione"].includes(p.stato))
+  .sort(p => p.data ?? "0000-00-00", "desc")
+  .first();
+
+let pages = dv.array(active?.incontri ?? [])
+  .map(link => dv.page(link.path ?? link))
+  .where(Boolean)
+  .array();
+
+if (!pages.length) {
+  pages = dv.pages('"Mondi/Incontri"')
+    .where(p => !String(p.file.name).startsWith("Prova -") && ["pronto", "in gioco"].includes(p.stato))
+    .sort(p => p.pericolo ?? 0, "desc")
+    .array();
+}
+
+dv.table(["Incontro", "Luogo", "Pericolo", "Creature"], pages.map(p => [p.file.link, p.luogo ?? "", p.pericolo ?? "", p.creature ?? []]));
+```
+
+### Creature
+
+```dataviewjs
+const active = dv.pages('"Mondi/Sessioni"')
+  .where(p => !String(p.file.name).startsWith("Prova -") && ["pronto", "preparazione"].includes(p.stato))
+  .sort(p => p.data ?? "0000-00-00", "desc")
+  .first();
+
+const pages = dv.array(active?.creature ?? [])
+  .map(link => dv.page(link.path ?? link))
+  .where(Boolean)
+  .array();
+
+if (!pages.length) {
+  dv.paragraph("Nessuna creatura collegata alla sessione attiva.");
+} else {
+  dv.table(["Creatura", "Tipo", "Taglia", "GS"], pages.map(p => [p.file.link, p.type ?? p.tipo ?? "", p.size ?? "", p.cr ?? ""]));
+}
 ```
 
 ### Oggetti Da Assegnare
 
-```dataview
-TABLE tipo, rarita, luogo
-FROM "Mondi/Oggetti"
-WHERE !proprietario AND stato != "archiviata"
-SORT rarita ASC
+```dataviewjs
+const active = dv.pages('"Mondi/Sessioni"')
+  .where(p => !String(p.file.name).startsWith("Prova -") && ["pronto", "preparazione"].includes(p.stato))
+  .sort(p => p.data ?? "0000-00-00", "desc")
+  .first();
+
+let pages = dv.array(active?.oggetti ?? [])
+  .map(link => dv.page(link.path ?? link))
+  .where(Boolean)
+  .array();
+
+if (!pages.length) {
+  pages = dv.pages('"Mondi/Oggetti"')
+    .where(p => !String(p.file.name).startsWith("Prova -") && !p.proprietario && p.stato !== "archiviata")
+    .sort(p => p.rarita ?? "", "asc")
+    .array();
+}
+
+dv.table(["Oggetto", "Tipo", "Rarita", "Luogo", "Proprietario"], pages.map(p => [p.file.link, p.tipo ?? "", p.rarita ?? "", p.luogo ?? "", p.proprietario ?? ""]));
 ```
 
 ### Dispense Di Scena
 
-```dataview
-TABLE tipo, luogo, personaggi
-FROM "Mondi/Dispense"
-WHERE stato = "pronto"
-SORT nome ASC
+```dataviewjs
+const active = dv.pages('"Mondi/Sessioni"')
+  .where(p => !String(p.file.name).startsWith("Prova -") && ["pronto", "preparazione"].includes(p.stato))
+  .sort(p => p.data ?? "0000-00-00", "desc")
+  .first();
+
+let pages = dv.array(active?.dispense ?? [])
+  .map(link => dv.page(link.path ?? link))
+  .where(Boolean)
+  .array();
+
+if (!pages.length) {
+  pages = dv.pages('"Mondi/Dispense"')
+    .where(p => !String(p.file.name).startsWith("Prova -") && p.stato === "pronto")
+    .sort(p => p.nome ?? p.file.name, "asc")
+    .array();
+}
+
+dv.table(["Dispensa", "Tipo", "Luogo", "Personaggi"], pages.map(p => [p.file.link, p.tipo ?? "", p.luogo ?? "", p.personaggi ?? []]));
+```
+
+### Mappe
+
+```dataviewjs
+const active = dv.pages('"Mondi/Sessioni"')
+  .where(p => !String(p.file.name).startsWith("Prova -") && ["pronto", "preparazione"].includes(p.stato))
+  .sort(p => p.data ?? "0000-00-00", "desc")
+  .first();
+
+const sessionMaps = dv.array(active?.mappe ?? []).array();
+const places = dv.array(active?.luoghi ?? []);
+const encounterPages = dv.array(active?.incontri ?? [])
+  .map(link => dv.page(link.path ?? link))
+  .where(Boolean)
+  .array();
+
+const encounterMaps = encounterPages.flatMap(p => dv.array(p.mappe ?? []).array());
+let pages = sessionMaps
+  .concat(encounterMaps)
+  .map(link => dv.page(link.path ?? link))
+  .where(Boolean)
+  .array();
+
+if (!pages.length && places.length) {
+  const placePaths = new Set(places.map(link => link.path ?? String(link)).array());
+  pages = dv.pages('"Risorse/Mappe"')
+    .where(p => !String(p.file.name).startsWith("Prova -") && p.file.name !== "Mappe" && p.luogo && placePaths.has(p.luogo.path ?? String(p.luogo)))
+    .array();
+}
+
+if (!pages.length) {
+  dv.paragraph("Nessuna mappa collegata alla sessione attiva.");
+} else {
+  dv.table(["Mappa", "Uso", "Mondo", "Luogo", "Stato"], pages.map(p => [p.file.link, p.uso ?? "", p.mondo ?? "", p.luogo ?? "", p.stato ?? ""]));
+}
 ```
 
 ### Musica e Risorse
 
-```dataview
-LIST
-FROM "Risorse/Audio" OR "Risorse/Dispense"
-SORT file.name ASC
+```dataviewjs
+const active = dv.pages('"Mondi/Sessioni"')
+  .where(p => !String(p.file.name).startsWith("Prova -") && ["pronto", "preparazione"].includes(p.stato))
+  .sort(p => p.data ?? "0000-00-00", "desc")
+  .first();
+
+const encounterPages = dv.array(active?.incontri ?? [])
+  .map(link => dv.page(link.path ?? link))
+  .where(Boolean)
+  .array();
+
+const mediaLinks = [
+  ...dv.array(active?.audio ?? []).array(),
+  ...dv.array(active?.immagini ?? []).array(),
+  ...dv.array(active?.video ?? []).array(),
+  ...encounterPages.flatMap(p => dv.array(p.audio ?? []).array()),
+  ...encounterPages.flatMap(p => dv.array(p.immagini ?? []).array()),
+  ...encounterPages.flatMap(p => dv.array(p.video ?? []).array())
+];
+
+let pages = dv.array(mediaLinks)
+  .map(link => dv.page(link.path ?? link))
+  .where(Boolean)
+  .array();
+
+if (!pages.length) {
+  pages = dv.pages('"Risorse/Audio" OR "Risorse/Video" OR "Risorse/Immagini" OR "Risorse/Dispense"')
+    .where(p => !String(p.file.name).startsWith("Prova -") && p.file.name !== "Audio" && p.file.name !== "Video" && p.file.name !== "Immagini" && p.file.name !== "Dispense" && p.stato === "pronto")
+    .sort(p => p.uso ?? "", "asc")
+    .array();
+}
+
+if (!pages.length) {
+  dv.paragraph("Nessun media pronto o collegato alla sessione attiva.");
+} else {
+  dv.table(["Risorsa", "Uso", "Tono", "Campagna", "Stato"], pages.map(p => [p.file.link, p.uso ?? "", p.tono ?? "", p.campagna ?? "", p.stato ?? ""]));
+}
 ```
 
 ### Regole e Riferimenti

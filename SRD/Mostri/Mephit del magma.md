@@ -11,6 +11,33 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Mephit del magma"
+type: "Elementale"
+size: "piccolo"
+alignment: "neutrale malvagio"
+ac: 11
+stats: [8, 12, 12, 7, 10, 10]
+saves: {}
+skillsaves: 
+  furtivita: 3
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 10, scurovisione: 18 m"
+languages: "Primordiale (Ignan, Terran)"
+gear: []
+traits: 
+- name: "Esplosione mortale"
+  desc: "Il mephit esplode quando muore. *Tiro salvezza su Destrezza:* CD 11, tutte le creature in un'emanazione di 1,5 metri di cui il mephit è il punto di origine. *Fallimento:* 7 (2d6) danni da fuoco. *Successo:* danni dimezzati."
+actions: 
+- name: "Artiglio"
+  desc: "*Tiro per colpire in mischia:* +3, portata 1,5 m. *Colpito:* 3 (1d4 + 1) danni taglienti più 3 (1d6) danni da fuoco."
+- name: "Soffio di fuoco (ricarica 6)"
+  desc: "*Tiro salvezza su Destrezza:* CD 11, tutte le creature in un cono di 4,5 metri. *Fallimento:* 7 (2d6) danni da fuoco. *Successo:* danni dimezzati."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Elementale"
 dimensione: "Piccolo"
 allineamento: "neutrale malvagio"
@@ -25,6 +52,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Mephit del magma
+
+```statblock
+monster: Mephit del magma
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Piccolo Elementale, neutrale malvagio

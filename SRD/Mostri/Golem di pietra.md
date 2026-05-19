@@ -11,6 +11,38 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Golem di pietra"
+type: "Costrutto"
+size: "grande"
+alignment: "senza allineamento"
+ac: 18
+stats: [22, 9, 20, 3, 11, 1]
+saves: {}
+skillsaves: {}
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 10, scurovisione: 36 m"
+languages: "capisce il Comune più altre due lingue ma non le parla"
+gear: []
+traits: 
+- name: "Forma immutabile"
+  desc: "Il golem non può mutare forma."
+- name: "Resistenza alla magia"
+  desc: "Il golem dispone di vantaggio ai tiri salvezza contro incantesimi e altri effetti magici."
+actions: 
+- name: "Multiattacco"
+  desc: "Il golem effettua due attacchi, usando Schianto o Dardo vigoroso in qualsiasi combinazione."
+- name: "Schianto"
+  desc: "*Tiro per colpire in mischia:* +10, portata 1,5 m. *Colpito:* 15 (2d8 + 6) danni contundenti più 9 (2d8) danni da forza."
+- name: "Dardo vigoroso"
+  desc: "*Tiro per colpire a distanza:* +9, gittata 36 m. *Colpito:* 22 (4d10) danni da forza."
+bonus_actions: 
+- name: "Lentezza (ricarica 5-6)"
+  desc: "Il golem lancia l'incantesimo lentezza, senza bisogno di componenti e utilizzando Costituzione come caratteristica da incantatore (CD del tiro salvezza sull'incantesimo 17)."
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Costrutto"
 dimensione: "Grande"
 allineamento: "senza allineamento"
@@ -25,6 +57,10 @@ bonus_competenza: 4
 statblock: true
 ---
 # Golem di pietra
+
+```statblock
+monster: Golem di pietra
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Grande Costrutto, senza allineamento

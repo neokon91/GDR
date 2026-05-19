@@ -11,6 +11,39 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Drago di rame giovane"
+type: "Drago (metallico)"
+size: "grande"
+alignment: "caotico buono"
+ac: 17
+stats: [19, 12, 17, 16, 13, 15]
+saves: 
+  dex: 4
+  wis: 4
+skillsaves: 
+  furtivita: 4
+  inganno: 5
+  percezione: 7
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 17, scurovisione: 36 m, vista_cieca: 9 m"
+languages: "Comune, Draconico"
+gear: []
+traits: []
+actions: 
+- name: "Multiattacco"
+  desc: "Il drago effettua tre attacchi Squarcio. Può sostituire un attacco con un utilizzo di Soffio rallentante."
+- name: "Squarcio"
+  desc: "*Tiro per colpire in mischia:* +7, portata 3 m. *Colpito:* 15 (2d10 + 4) danni taglienti."
+- name: "Soffio di acido (ricarica 5-6)"
+  desc: "*Tiro salvezza su Destrezza:* CD 14, tutte le creature in una linea lunga 12 metri e larga 1,5 metri. *Fallimento:* 40 (9d8) danni da acido. *Successo:* danni dimezzati."
+- name: "Soffio rallentante"
+  desc: "*Tiro salvezza su Costituzione:* CD 14, tutte le creature in un cono di 9 metri. *Fallimento:* il bersaglio non può effettuare reazioni, la sua velocità è dimezzata e nel suo turno può effettuare un'azione o un'azione bonus, non entrambe. L'effetto dura fino al termine del proprio turno successivo."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Drago (metallico)"
 dimensione: "Grande"
 allineamento: "caotico buono"
@@ -25,6 +58,10 @@ bonus_competenza: 3
 statblock: true
 ---
 # Drago di rame giovane
+
+```statblock
+monster: Drago di rame giovane
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Grande Drago (metallico), caotico buono

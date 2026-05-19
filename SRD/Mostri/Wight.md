@@ -11,6 +11,38 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Wight"
+type: "Non morto"
+size: "medio"
+alignment: "neutrale malvagio"
+ac: 14
+stats: [15, 14, 16, 10, 13, 15]
+saves: {}
+skillsaves: 
+  furtivita: 4
+  percezione: 3
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 13, scurovisione: 18 m"
+languages: "Comune più un'altra lingua"
+gear: ["armatura di cuoio borchiato"]
+traits: 
+- name: "Sensibilità al sole"
+  desc: "Finché è esposto alla luce del sole, il wight subisce svantaggio alle prove di caratteristica e ai tiri per colpire."
+actions: 
+- name: "Multiattacco"
+  desc: "Il wight effettua due attacchi, usando Spada necrotica o Arco necrotico in qualsiasi combinazione. Può sostituire un attacco con un utilizzo di Risucchio di vita."
+- name: "Spada necrotica"
+  desc: "*Tiro per colpire in mischia:* +4, portata 1,5 m *Colpito:* 6 (1d8 + 2) danni taglienti più 4 (1d8) danni necrotici."
+- name: "Arco necrotico"
+  desc: "*Tiro per colpire a distanza:* +4, gittata 45/180 m. *Colpito:* 6 (1d8 + 2) danni perforanti più 4 (1d8) danni necrotici."
+- name: "Risucchio di vita"
+  desc: "*Tiro salvezza su Costituzione:* CD 13, una creatura entro 1,5 metri. *Fallimento:* 6 (1d8 + 2) danni necrotici, e i punti ferita massimi del bersaglio sono ridotti di un ammontare pari ai danni subiti. Un umanoide ucciso da questo attacco si anima 24 ore dopo come zombi sotto il controllo del wight, a meno che l'umanoide non sia riportato in vita o il suo corpo non venga distrutto. Il wight non può controllare più di dodici zombi simultaneamente."
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Non morto"
 dimensione: "Medio"
 allineamento: "neutrale malvagio"
@@ -25,6 +57,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Wight
+
+```statblock
+monster: Wight
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Medio Non morto, neutrale malvagio

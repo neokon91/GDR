@@ -11,6 +11,42 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Capitano dei pirati"
+type: "Umanoide"
+size: "medio o piccolo"
+alignment: "neutrale"
+ac: 17
+stats: [10, 18, 14, 10, 14, 17]
+saves: 
+  str: 3
+  dex: 7
+  wis: 5
+  cha: 6
+skillsaves: 
+  acrobazia: 7
+  percezione: 5
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 15"
+languages: "Comune più un'altra lingua"
+gear: ["pistola", "stocco"]
+traits: []
+actions: 
+- name: "Multiattacco"
+  desc: "Il pirata effettua tre attacchi, usando Stocco o Pistola in qualsiasi combinazione."
+- name: "Stocco"
+  desc: "*Tiro per colpire in mischia:* +7, portata 1,5 m. *Colpito:* 13 (2d8 + 4) danni perforanti, e il pirata dispone di vantaggio al tiro per colpire successivo che effettua prima del termine del proprio turno corrente."
+- name: "Pistola"
+  desc: "*Tiro per colpire a distanza:* +7, gittata 9/27 m. *Colpito:* 15 (2d10 + 4) danni perforanti."
+bonus_actions: 
+- name: "Fascino del capitano"
+  desc: "*Tiro salvezza su Saggezza:* CD 14, una creatura che il pirata è in grado di vedere entro 9 metri. *Fallimento:* il bersaglio è affascinato fino all'inizio del turno successivo del pirata."
+reactions: 
+- name: "Replica"
+  desc: "Attivazione: il pirata viene colpito da un tiro per colpire in mischia mentre tiene in mano un'arma. Esito: il pirata aggiunge 3 alla sua CA contro quell'attacco, aumentando le probabilità che il colpo non vada a segno. Se il colpo non va a segno, il pirata effettua un attacco Stocco contro la creatura che ha provocato la reazione se si trova entro gittata."
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Umanoide"
 dimensione: "Medio o Piccolo"
 allineamento: "neutrale"
@@ -25,6 +61,10 @@ bonus_competenza: 3
 statblock: true
 ---
 # Capitano dei pirati
+
+```statblock
+monster: Capitano dei pirati
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Medio o Piccolo Umanoide, neutrale

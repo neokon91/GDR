@@ -11,6 +11,32 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 name: "Magmin"
+type: "Elementale"
+size: "piccolo"
+alignment: "caotico neutrale"
+ac: 14
+stats: [7, 15, 12, 8, 11, 10]
+saves: {}
+skillsaves: {}
+damage_vulnerabilities: 
+damage_resistances: 
+damage_immunities: 
+condition_immunities: 
+senses: "percezione_passiva: 10, scurovisione: 18 m"
+languages: "Primordiale (Ignan)"
+gear: []
+traits: 
+- name: "Esplosione mortale"
+  desc: "Il magmin esplode quando muore. *Tiro salvezza su Destrezza:* CD 11, tutte le creature in un'emanazione di 3 metri di cui il magmin è il punto di origine. *Fallimento:* 7 (2d6) danni da fuoco. *Successo:* danni dimezzati."
+actions: 
+- name: "Tocco"
+  desc: "*Tiro per colpire in mischia:* +4, portata 1,5 m. *Colpito:* 7 (2d4 + 2) danni da fuoco. Se il bersaglio è una creatura o un oggetto infiammabile che non è indossato o trasportato, prende fuoco."
+bonus_actions: 
+- name: "Illuminazione fiammeggiante"
+  desc: "Il magmin si incendia o estingue le sue fiamme. Finché è in fiamme, proietta luce intensa in un raggio di 3 metri e luce fioca per altri 3 metri."
+reactions: []
+legendary_actions: []
+lair_actions: []
 tipo_creatura: "Elementale"
 dimensione: "Piccolo"
 allineamento: "caotico neutrale"
@@ -25,6 +51,10 @@ bonus_competenza: 2
 statblock: true
 ---
 # Magmin
+
+```statblock
+monster: Magmin
+```
 
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Piccolo Elementale, caotico neutrale
