@@ -15,31 +15,36 @@
 > `INPUT[inlineListSuggester(optionQuery("Campagne"), useLinks(partial)):campagne]`
 >
 > Luoghi:
-> `INPUT[inlineListSuggester(optionQuery("Mondo/Luoghi"), useLinks(partial)):luoghi]`
+> `INPUT[inlineListSuggester(optionQuery("Mondi/Luoghi"), useLinks(partial)):luoghi]`
 >
 > Personaggi:
-> `INPUT[inlineListSuggester(optionQuery("Mondo/Personaggi"), useLinks(partial)):personaggi]`
+> `INPUT[inlineListSuggester(optionQuery("Mondi/Personaggi"), useLinks(partial)):personaggi]`
 >
 > Creature:
-> `INPUT[inlineListSuggester(optionQuery("Mondo/Creature"), useLinks(partial)):creature]`
+> `INPUT[inlineListSuggester(optionQuery("Mondi/Creature"), useLinks(partial)):creature]`
 >
 > Incontri:
-> `INPUT[inlineListSuggester(optionQuery("Mondo/Incontri"), useLinks(partial)):incontri]`
+> `INPUT[inlineListSuggester(optionQuery("Mondi/Incontri"), useLinks(partial)):incontri]`
 >
 > Dispense:
-> `INPUT[inlineListSuggester(optionQuery("Mondo/Dispense"), useLinks(partial)):dispense]`
+> `INPUT[inlineListSuggester(optionQuery("Mondi/Dispense"), useLinks(partial)):dispense]`
 
 > [!scena] Apertura
-> 
+>
 
 > [!lettura] Testo da leggere
-> 
+>
 
 > [!timer] Timer della sessione
-> - [ ] 
-> - [ ] 
-> - [ ] 
-> - [ ] 
+> - [ ]
+> - [ ]
+> - [ ]
+> - [ ]
+
+> [!regola] Tiri rapidi
+> - D20: `dice: 1d20`
+> - Incontro casuale: `dice: 1d6`
+> - Complicazione: `dice: 1d12`
 
 ## Scene
 
@@ -59,7 +64,7 @@ INPUT[list:scene]
 
 ```dataview
 TABLE tipo, pericolo
-FROM "Mondo/Luoghi"
+FROM "Mondi/Luoghi"
 WHERE contains(this.luoghi, file.link)
 ```
 
@@ -67,7 +72,7 @@ WHERE contains(this.luoghi, file.link)
 
 ```dataview
 TABLE ruolo, stato, luogo
-FROM "Mondo/Personaggi"
+FROM "Mondi/Personaggi"
 WHERE contains(this.personaggi, file.link)
 ```
 
@@ -75,7 +80,7 @@ WHERE contains(this.personaggi, file.link)
 
 ```dataview
 TABLE stato, luogo, pericolo, creature
-FROM "Mondo/Incontri"
+FROM "Mondi/Incontri"
 WHERE contains(this.incontri, file.link)
 SORT pericolo DESC
 ```
@@ -84,7 +89,7 @@ SORT pericolo DESC
 
 ```dataview
 TABLE type AS tipo_statblock, size AS taglia, cr
-FROM "Mondo/Creature"
+FROM "Mondi/Creature"
 WHERE contains(this.creature, file.link)
 SORT cr ASC
 ```
@@ -93,14 +98,23 @@ SORT cr ASC
 
 ```dataview
 TABLE tipo, stato, luogo
-FROM "Mondo/Dispense"
+FROM "Mondi/Dispense"
 WHERE contains(this.dispense, file.link)
+```
+
+## Oggetti In Scena
+
+```dataview
+TABLE tipo, rarita, stato, proprietario, luogo
+FROM "Mondi/Oggetti"
+WHERE contains(this.oggetti, file.link)
+SORT nome ASC
 ```
 
 ## Ricompense
 
 > [!tesoro] Ricompense previste
-> 
+>
 
 ```meta-bind
 INPUT[list:ricompense]
@@ -109,36 +123,36 @@ INPUT[list:ricompense]
 ## Appunti Durante Il Gioco
 
 > [!indizio] Appunti rapidi
-> 
+>
 
 ## Resoconto
 
 > [!scena] Cosa e successo
-> 
+>
 
 > [!indizio] Fatti canonici emersi
-> 
+>
 
 ## Conseguenze
 
 > [!missione] Missioni e mondo
-> 
+>
 
 > [!png] PNG cambiati
-> 
+>
 
 > [!luogo] Luoghi cambiati
-> 
+>
 
 ## Ricompense Date
 
 > [!tesoro] Ricompense effettive
-> 
+>
 
 ## Da Riprendere
 
 > [!segreto]- Da riprendere
-> 
+>
 
 ## Preparazione Prossima
 

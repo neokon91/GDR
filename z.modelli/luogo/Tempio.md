@@ -3,13 +3,16 @@
 
 >[!infobox|wiki]- Sala di Controllo
 > Regione:
-> `INPUT[suggester(optionQuery("Mondo/Luoghi"), useLinks(partial), allowOther):luogo_padre]`
+> `INPUT[suggester(optionQuery("Mondi/Luoghi"), useLinks(partial), allowOther):luogo_padre]`
+>
+> Mondo:
+> `INPUT[suggester(optionQuery("Mondi"), useLinks(partial), allowOther):mondo]`
 >
 > Divinità principale:
-> `INPUT[suggester(optionQuery("Mondo/Religioni"), useLinks(partial), allowOther):divinita_principale]`
+> `INPUT[suggester(optionQuery("Mondi/Religioni"), useLinks(partial), allowOther):divinita_principale]`
 >
 > Culto associato:
-> `INPUT[suggester(optionQuery("Mondo/Religioni"), useLinks(partial), allowOther):culto_associato]`
+> `INPUT[suggester(optionQuery("Mondi/Religioni"), useLinks(partial), allowOther):culto_associato]`
 >
 > Reliquie:
 > `INPUT[inlineList:reliquie]`
@@ -21,10 +24,10 @@
 > `INPUT[inlineSelect(option(bozza, Bozza), option(pronto, Pronto), option(in gioco, In Gioco), option(archiviata, Archiviata)):stato]`
 
 > [!luogo] Descrizione
-> 
+>
 
 > [!lettura] Descrizione da leggere
-> 
+>
 
 ## Architettura
 
@@ -39,13 +42,13 @@
 `INPUT[inlineList:reliquie]`
 
 > [!tesoro] Reliquie
-> 
+>
 
 ## PNG importanti
 
 ```dataview
 TABLE ruolo, stato, atteggiamento
-FROM "Mondo/Personaggi"
+FROM "Mondi/Personaggi"
 WHERE luogo = this.file.link
 SORT nome ASC
 ```
@@ -54,7 +57,7 @@ SORT nome ASC
 
 ```dataview
 TABLE tipo, stato
-FROM "Mondo/Luoghi"
+FROM "Mondi/Luoghi"
 WHERE luogo_padre = this.file.link
 ```
 
@@ -63,11 +66,11 @@ WHERE luogo_padre = this.file.link
 ## Misteri
 
 > [!indizio] Misteri
-> 
+>
 
 ## Segreti
 
 > [!segreto]- Segreti
-> 
+>
 
 ## Hook narrativi

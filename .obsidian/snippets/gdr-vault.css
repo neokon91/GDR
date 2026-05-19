@@ -17,10 +17,13 @@ settings:
 
 :root {
   --gdr-radius: 6px;
+  --gdr-radius-soft: 4px;
   --gdr-border: color-mix(in srgb, var(--text-muted) 22%, transparent);
   --gdr-surface: color-mix(in srgb, var(--background-secondary) 78%, transparent);
   --gdr-surface-strong: color-mix(in srgb, var(--background-secondary) 92%, var(--background-primary));
   --gdr-accent-soft: color-mix(in srgb, var(--interactive-accent) 14%, transparent);
+  --gdr-accent-line: color-mix(in srgb, var(--interactive-accent) 45%, transparent);
+  --gdr-shadow: 0 8px 22px rgba(0, 0, 0, 0.08);
   --gdr-callout-density: 0.85rem;
   --gdr-callout-title-bg: color-mix(in srgb, rgb(var(--callout-color)) 14%, var(--background-secondary));
   --gdr-callout-body-bg: color-mix(in srgb, rgb(var(--callout-color)) 6%, var(--background-primary));
@@ -50,12 +53,31 @@ settings:
   width: 100%;
 }
 
+.markdown-rendered table,
+.markdown-rendered .dataview.table-view-table {
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
 .markdown-rendered th {
   font-weight: 650;
 }
 
 .markdown-rendered .dataview.table-view-table {
   font-size: 0.92em;
+}
+
+.markdown-rendered .dataview.table-view-table th {
+  background: color-mix(in srgb, var(--background-secondary) 82%, var(--background-primary));
+  border-bottom: 1px solid var(--gdr-border);
+}
+
+.markdown-rendered .dataview.table-view-table tbody tr:nth-child(even) {
+  background: color-mix(in srgb, var(--background-secondary) 26%, transparent);
+}
+
+.markdown-rendered .dataview.table-view-table tbody tr:hover {
+  background: var(--gdr-accent-soft);
 }
 
 .markdown-rendered .block-language-dataview,
@@ -79,6 +101,10 @@ settings:
   overflow: hidden;
 }
 
+.callout:hover {
+  border-color: rgba(var(--callout-color), 0.42);
+}
+
 .callout-title {
   align-items: center;
   gap: 0.45rem;
@@ -95,6 +121,16 @@ settings:
 .callout-title-inner {
   font-weight: 750;
   line-height: 1.25;
+}
+
+.callout-title-inner::after {
+  content: "";
+  display: inline-block;
+  width: 2.5rem;
+  height: 1px;
+  margin-left: 0.55rem;
+  vertical-align: middle;
+  background: rgba(var(--callout-color), 0.35);
 }
 
 .callout-content {
@@ -195,6 +231,11 @@ settings:
   font-size: 1.02em;
 }
 
+.callout[data-callout="lettura"] .callout-title-inner::after,
+.callout[data-callout="segreto"] .callout-title-inner::after {
+  width: 4rem;
+}
+
 .callout[data-callout="lettura"] .callout-content {
   line-height: 1.62;
 }
@@ -210,6 +251,19 @@ settings:
 .callout[data-callout="pericolo"],
 .callout[data-callout="incontro"] {
   border-left-width: 5px;
+}
+
+.callout[data-callout="timer"] .callout-content ul,
+.callout[data-callout="pericolo"] .callout-content ul,
+.callout[data-callout="missione"] .callout-content ul {
+  margin-left: 0;
+  padding-left: 1.15rem;
+}
+
+.callout[data-callout="timer"] .task-list-item,
+.callout[data-callout="pericolo"] .task-list-item,
+.callout[data-callout="missione"] .task-list-item {
+  margin-block: 0.2rem;
 }
 
 .callout[data-callout="tesoro"] .callout-title {
@@ -257,6 +311,22 @@ settings:
 
 .callout[data-callout="infoboxwiki"] p {
   margin-block: 0.45rem;
+}
+
+.markdown-rendered .internal-embed.media-embed,
+.markdown-rendered .internal-embed.image-embed,
+.markdown-rendered .excalidraw-svg,
+.markdown-rendered .excalidraw {
+  border-radius: var(--gdr-radius);
+}
+
+.markdown-rendered .internal-embed[src$=".excalidraw.md"],
+.markdown-rendered .internal-embed[src$=".excalidraw"] {
+  display: block;
+  overflow: hidden;
+  border: 1px solid var(--gdr-border);
+  border-radius: var(--gdr-radius);
+  background: var(--gdr-surface);
 }
 
 .callout[data-callout="infoboxwiki"] p:first-child {
@@ -373,6 +443,13 @@ body .markdown-source-view.tavolo {
 
 .markdown-preview-view.dashboard h1 {
   margin-bottom: 0.6rem;
+  padding: 0.8rem 1rem;
+  border: 1px solid var(--gdr-border);
+  border-left: 5px solid var(--gdr-accent-line);
+  border-radius: var(--gdr-radius);
+  background:
+    linear-gradient(90deg, var(--gdr-accent-soft), transparent 55%),
+    var(--gdr-surface);
 }
 
 .markdown-preview-view.dashboard h2 {
@@ -395,10 +472,23 @@ body .markdown-source-view.tavolo {
   vertical-align: top;
 }
 
+.markdown-preview-view.dashboard :is(.block-language-meta-bind-button) + :is(.block-language-meta-bind-button) {
+  margin-left: 0.15rem;
+}
+
 .markdown-preview-view.dashboard .meta-bind-button,
 .markdown-preview-view.dashboard .mb-button {
   min-width: 10.75rem;
   justify-content: center;
+  border: 1px solid var(--gdr-border) !important;
+  background: color-mix(in srgb, var(--interactive-accent) 14%, var(--background-secondary)) !important;
+  box-shadow: none !important;
+}
+
+.markdown-preview-view.dashboard .meta-bind-button:hover,
+.markdown-preview-view.dashboard .mb-button:hover {
+  transform: translateY(-1px);
+  border-color: var(--gdr-accent-line) !important;
 }
 
 .markdown-preview-view.dashboard .callout[data-callout="scena"] {
@@ -467,6 +557,14 @@ body .markdown-source-view.tavolo {
   border: 1px solid var(--gdr-border);
   border-radius: var(--gdr-radius);
   background: var(--gdr-surface);
+  transition: border-color 120ms ease, background 120ms ease, transform 120ms ease;
+}
+
+.gdr-stat-card:hover,
+.gdr-info-card:hover {
+  border-color: var(--gdr-accent-line);
+  background: var(--gdr-surface-strong);
+  transform: translateY(-1px);
 }
 
 .gdr-stat-card {
@@ -511,6 +609,62 @@ body .markdown-source-view.tavolo {
 
 .gdr-card-line {
   margin-top: 0.3rem;
+}
+
+.gdr-flow {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+  gap: 0.65rem;
+  margin-block: 0.85rem 1.1rem;
+}
+
+.gdr-flow-step {
+  border: 1px solid var(--gdr-border);
+  border-left: 4px solid var(--gdr-accent-line);
+  border-radius: var(--gdr-radius);
+  padding: 0.7rem 0.8rem;
+  background: var(--gdr-surface);
+}
+
+.gdr-flow-label {
+  font-size: 0.76rem;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  font-weight: 750;
+}
+
+.gdr-flow-title {
+  margin-top: 0.25rem;
+  font-weight: 750;
+}
+
+.gdr-flow-hint {
+  margin-top: 0.25rem;
+  color: var(--text-muted);
+  font-size: 0.88em;
+}
+
+.gdr-map-panel {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(16rem, 0.7fr);
+  gap: 0.85rem;
+  align-items: start;
+  margin-block: 0.85rem 1.1rem;
+}
+
+.gdr-map-panel > * {
+  min-width: 0;
+}
+
+.gdr-map-card {
+  border: 1px solid var(--gdr-border);
+  border-radius: var(--gdr-radius);
+  background: var(--gdr-surface);
+  padding: 0.8rem;
+}
+
+.gdr-map-card h3 {
+  margin-top: 0;
 }
 
 .markdown-preview-view.indice .markdown-preview-sizer,
@@ -588,6 +742,10 @@ body .markdown-source-view.tavolo {
   .markdown-preview-view.indice .block-language-meta-bind-button {
     display: block;
     margin-right: 0;
+  }
+
+  .gdr-map-panel {
+    grid-template-columns: 1fr;
   }
 
   body .markdown-preview-view.tavolo,

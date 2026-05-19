@@ -10,7 +10,7 @@ label: Nuova Campagna
 style: primary
 actions:
   - type: templaterCreateNote
-    templateFile: "z.modelli/Campagna.md"
+    templateFile: "z.modelli/dm/Campagna.md"
     folderPath: "Campagne"
     open: true
 ```
@@ -20,8 +20,8 @@ label: Nuova Sessione
 style: primary
 actions:
   - type: templaterCreateNote
-    templateFile: "z.modelli/Sessione.md"
-    folderPath: "Mondo/Sessioni"
+    templateFile: "z.modelli/dm/Sessione.md"
+    folderPath: "Mondi/Sessioni"
     open: true
 ```
 
@@ -38,7 +38,7 @@ SORT stato ASC, nome ASC
 
 ```dataview
 TABLE data, data_mondo, stato, campagne, luoghi
-FROM "Mondo/Sessioni"
+FROM "Mondi/Sessioni"
 WHERE stato = "preparazione" OR stato = "pronto"
 SORT data ASC
 LIMIT 8
@@ -48,7 +48,7 @@ LIMIT 8
 
 ```dataview
 TABLE data, data_mondo, campagne
-FROM "Mondo/Sessioni"
+FROM "Mondi/Sessioni"
 WHERE stato = "giocata"
 SORT data DESC
 LIMIT 10

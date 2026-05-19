@@ -10,8 +10,8 @@ label: Nuova Missione
 style: primary
 actions:
   - type: templaterCreateNote
-    templateFile: "z.modelli/Missione.md"
-    folderPath: "Mondo/Missioni"
+    templateFile: "z.modelli/dm/Missione.md"
+    folderPath: "Mondi/Missioni"
     open: true
 ```
 
@@ -19,7 +19,7 @@ actions:
 
 ```dataview
 TABLE stato, committente, luoghi, personaggi, ricompense
-FROM "Mondo/Missioni"
+FROM "Mondi/Missioni"
 WHERE stato = "proposta" OR stato = "accettata" OR stato = "in corso"
 SORT stato ASC, nome ASC
 ```
@@ -28,7 +28,7 @@ SORT stato ASC, nome ASC
 
 ```dataview
 TABLE stato, committente, luoghi, ricompense
-FROM "Mondo/Missioni"
+FROM "Mondi/Missioni"
 WHERE stato = "completata" OR stato = "fallita"
 SORT nome ASC
 ```
@@ -37,7 +37,7 @@ SORT nome ASC
 
 ```dataview
 TABLE stato, committente, luoghi, ricompense
-FROM "Mondo/Missioni"
+FROM "Mondi/Missioni"
 WHERE file.name != "Missioni"
 SORT stato ASC, nome ASC
 ```

@@ -1,17 +1,25 @@
 async function personaggio(tp) {
     const helpers = tp.user.helpers;
-    const name = await tp.system.prompt("Nome del personaggio");
+    const name = await helpers.promptRequired(tp, "Nome del personaggio");
     const id = helpers.slugify(name);
 
-    const role = await tp.system.prompt("Ruolo o professione", "");
-    const stato = await tp.system.suggester(
-        ["Bozza", "Pronto", "In gioco", "Archiviata"],
-        ["bozza", "pronto", "in gioco", "archiviata"],
-        false,
+    const role = await helpers.promptOptional(tp, "Ruolo o professione");
+    const stato = await helpers.chooseOptional(
+        tp,
+        [
+            { label: "Bozza", id: "bozza" },
+            { label: "Pronto", id: "pronto" },
+            { label: "In gioco", id: "in gioco" },
+            { label: "Archiviata", id: "archiviata" }
+        ],
         "Stato del personaggio"
     );
+    const mondo = await helpers.chooseNoteByFrontmatter(tp, "categoria", "mondo", "Mondo del personaggio");
+    const luogo = await helpers.chooseNoteByPath(tp, "Mondi/Luoghi", "Luogo del personaggio");
+    const fazioni = await helpers.chooseNotesByPath(tp, "Mondi/Fazioni", "Fazioni del personaggio");
+    const relazioni = await helpers.chooseNotesByPath(tp, "Mondi/Personaggi", "Relazioni del personaggio");
 
-    await tp.file.move(`Mondo/Personaggi/${name}`);
+    await tp.file.move(`Mondi/Personaggi/${name}`);
 
     return `---
 id: ${id}
@@ -19,10 +27,11 @@ nome: ${helpers.yamlQuote(name)}
 categoria: personaggio
 tipo: png
 ruolo: ${helpers.yamlQuote(role)}
-stato: ${stato}
-fazioni: []
-luogo:
-relazioni: []
+stato: ${stato?.id ?? "bozza"}
+mondo: ${mondo}
+fazioni: ${helpers.inlineYamlList(fazioni)}
+luogo: ${luogo}
+relazioni: ${helpers.inlineYamlList(relazioni)}
 hp_massimi:
 hp_attuali:
 ---

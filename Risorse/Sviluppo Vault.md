@@ -36,6 +36,7 @@ Nella dashboard DM devono esserci:
 - guida DM;
 Nella dashboard Worldbuilder devono esserci:
 - pulsanti di creazione;
+- elenco dei mondi;
 - note in stato bozza da completare;
 - rapida visuale dei diversi mondi
 
@@ -57,6 +58,26 @@ Tutte le entità che lo richiedono avranno anche altri `stato_attuale` come, ad 
 - Avventure, one-shot, mappe, tabelle e dispense riutilizzabili: `Risorse`
 - Strumenti e template: `z.modelli`, `z.automazioni`, `z.bacheche`
 
+## Cartelle
+
+Le cartelle non sono vietate. Se una funzione, una categoria o una automazione ha bisogno di una cartella chiara per funzionare bene, la cartella va creata.
+
+Prima di creare una cartella, controlla solo che:
+
+- abbia un nome italiano e comprensibile al DM;
+- non dupli una cartella o un concetto già esistente;
+- sia usata da template, automazioni, dashboard o pagine indice;
+- aiuti a trovare contenuti durante preparazione o gioco.
+
+Se la cartella serve, creala insieme alla nota indice quando ha senso. Evita solo cartelle speculative che non vengono ancora usate.
+
+## Mondo e Campagna
+
+- `Mondo` è il contenitore canonico dell'ambientazione.
+- `Campagna` è l'esperienza di gioco dentro uno o più mondi.
+- Ogni nota di worldbuilding dovrebbe avere il campo `mondo` quando appartiene a una ambientazione precisa.
+- Le risorse riutilizzabili restano in `Risorse`, anche se possono essere usate in più campagne.
+
 ## Checklist Per Ogni Nuova Funzione
 
 Prima di aggiungere una funzione, chiedi:
@@ -67,6 +88,7 @@ Prima di aggiungere una funzione, chiedi:
 - Non richiede spiegazioni tecniche?
 - Ha uno stato chiaro?
 - Appare in una vista utile?
+- Crea nuove cartelle solo quando servono davvero?
 - Non crea doppioni di cartelle o concetti?
 
 ## Cosa Evitare

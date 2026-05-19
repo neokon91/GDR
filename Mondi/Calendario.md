@@ -11,7 +11,7 @@ Usa questa nota con Calendarium per tenere insieme calendario reale, date del mo
 
 ```dataview
 TABLE data, data_mondo, stato, campagne, luoghi
-FROM "Mondo/Sessioni"
+FROM "Mondi/Sessioni"
 WHERE stato = "preparazione" OR stato = "pronto"
 SORT data ASC
 LIMIT 10
@@ -21,7 +21,7 @@ LIMIT 10
 
 ```dataview
 TABLE data, data_mondo, stato, campagne
-FROM "Mondo/Sessioni"
+FROM "Mondi/Sessioni"
 WHERE file.name != "Sessioni"
 SORT data DESC
 LIMIT 20
@@ -31,7 +31,7 @@ LIMIT 20
 
 ```dataview
 TABLE stato, committente, luoghi, personaggi
-FROM "Mondo/Missioni"
+FROM "Mondi/Missioni"
 WHERE stato = "proposta" OR stato = "accettata" OR stato = "in corso"
 SORT stato ASC, nome ASC
 ```

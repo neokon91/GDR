@@ -41,6 +41,32 @@ actions:
 
 ## Crea Mondo
 
+```dataviewjs
+const steps = [
+  ["1", "Mondo", "Tono, temi e verità canoniche"],
+  ["2", "Struttura", "Luoghi, regioni e poteri"],
+  ["3", "Tavolo", "PNG, missioni e conseguenze"]
+];
+const grid = dv.el("div", "", { cls: "gdr-flow" });
+grid.innerHTML = steps.map(([label, title, hint]) => `
+  <div class="gdr-flow-step">
+    <div class="gdr-flow-label">${label}</div>
+    <div class="gdr-flow-title">${title}</div>
+    <div class="gdr-flow-hint">${hint}</div>
+  </div>
+`).join("");
+```
+
+```meta-bind-button
+label: Nuovo Mondo
+style: primary
+actions:
+  - type: templaterCreateNote
+    templateFile: "z.modelli/Mondo.md"
+    folderPath: "Mondi"
+    open: true
+```
+
 ```meta-bind-button
 label: Nuovo Personaggio
 style: primary
@@ -127,6 +153,7 @@ const escapeHtml = value => String(value ?? "").replace(/[&<>"']/g, c => ({ "&":
 const notIndex = p => p.file.name !== p.file.folder?.split("/").pop();
 
 const cards = [
+  ["Mondi", count('"Mondi"', p => p.categoria === "mondo"), "Ambientazioni"],
   ["Personaggi", count('"Mondi/Personaggi"', notIndex), "Volti e legami"],
   ["Luoghi", count('"Mondi/Luoghi"', notIndex), "Dove succedono le cose"],
   ["Fazioni", count('"Mondi/Fazioni"', notIndex), "Poteri in movimento"],

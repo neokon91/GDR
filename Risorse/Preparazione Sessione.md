@@ -12,8 +12,8 @@ label: Nuova Sessione
 style: primary
 actions:
   - type: templaterCreateNote
-    templateFile: "z.modelli/Sessione.md"
-    folderPath: "Mondo/Sessioni"
+    templateFile: "z.modelli/dm/Sessione.md"
+    folderPath: "Mondi/Sessioni"
     open: true
 ```
 
@@ -29,7 +29,7 @@ actions:
 
 ```dataview
 TABLE data, data_mondo, stato, campagne, luoghi, personaggi
-FROM "Mondo/Sessioni"
+FROM "Mondi/Sessioni"
 WHERE stato = "preparazione" OR stato = "pronto"
 SORT data ASC
 LIMIT 1
@@ -63,7 +63,7 @@ LIMIT 1
 
 ```dataview
 TABLE stato, committente, luoghi, personaggi
-FROM "Mondo/Missioni"
+FROM "Mondi/Missioni"
 WHERE stato = "proposta" OR stato = "accettata" OR stato = "in corso"
 SORT stato ASC, nome ASC
 LIMIT 8
@@ -73,7 +73,7 @@ LIMIT 8
 
 ```dataview
 TABLE ruolo, stato, luogo, atteggiamento
-FROM "Mondo/Personaggi"
+FROM "Mondi/Personaggi"
 WHERE tipo = "png" AND stato != "archiviata"
 SORT stato ASC, nome ASC
 LIMIT 10
@@ -83,7 +83,7 @@ LIMIT 10
 
 ```dataview
 TABLE luogo, pericolo, creature
-FROM "Mondo/Incontri"
+FROM "Mondi/Incontri"
 WHERE stato = "pronto"
 SORT pericolo DESC
 LIMIT 8
@@ -93,7 +93,7 @@ LIMIT 8
 
 ```dataview
 TABLE tipo, luogo, personaggi
-FROM "Mondo/Dispense"
+FROM "Mondi/Dispense"
 WHERE stato = "pronto"
 SORT nome ASC
 LIMIT 8

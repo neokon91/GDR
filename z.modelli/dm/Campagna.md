@@ -12,27 +12,27 @@
 > `INPUT[number:livello_attuale]`
 >
 > Personaggi:
-> `INPUT[inlineListSuggester(optionQuery("Mondo/Personaggi"), useLinks(partial)):personaggi]`
+> `INPUT[inlineListSuggester(optionQuery("Mondi/Personaggi"), useLinks(partial)):personaggi]`
 >
 > Luoghi principali:
-> `INPUT[inlineListSuggester(optionQuery("Mondo/Luoghi"), useLinks(partial)):luoghi]`
+> `INPUT[inlineListSuggester(optionQuery("Mondi/Luoghi"), useLinks(partial)):luoghi]`
 >
 > Fazioni:
-> `INPUT[inlineListSuggester(optionQuery("Mondo/Fazioni"), useLinks(partial)):fazioni]`
+> `INPUT[inlineListSuggester(optionQuery("Mondi/Fazioni"), useLinks(partial)):fazioni]`
 
 > [!scena] Premessa
-> 
+>
 
 ## Tono e Temi
 
 > [!regola] Paletti di campagna
-> 
+>
 
 ## Party
 
 ```dataview
 TABLE giocatore, classe, livello, stato
-FROM "Mondo/Personaggi"
+FROM "Mondi/Personaggi"
 WHERE tipo = "pg" AND contains(this.personaggi, file.link)
 ```
 
@@ -40,7 +40,7 @@ WHERE tipo = "pg" AND contains(this.personaggi, file.link)
 
 ```dataview
 TABLE tipo, pericolo
-FROM "Mondo/Luoghi"
+FROM "Mondi/Luoghi"
 WHERE contains(this.luoghi, file.link)
 ```
 
@@ -48,7 +48,7 @@ WHERE contains(this.luoghi, file.link)
 
 ```dataview
 TABLE tipo, leader
-FROM "Mondo/Fazioni"
+FROM "Mondi/Fazioni"
 WHERE contains(this.fazioni, file.link)
 ```
 
@@ -56,7 +56,7 @@ WHERE contains(this.fazioni, file.link)
 
 ```dataview
 TABLE data, data_mondo, stato
-FROM "Mondo/Sessioni"
+FROM "Mondi/Sessioni"
 WHERE contains(campagne, this.file.link) OR contains(this.sessioni, file.link)
 SORT data DESC
 ```
@@ -64,13 +64,13 @@ SORT data DESC
 ## Trama
 
 > [!missione] Trama
-> 
+>
 
 ## Missioni Aperte
 
 ```dataview
 TABLE stato, committente, luoghi
-FROM "Mondo/Missioni"
+FROM "Mondi/Missioni"
 WHERE contains(personaggi, this.file.link) OR contains(luoghi, this.file.link) OR stato = "in corso"
 SORT stato ASC, nome ASC
 ```
@@ -78,17 +78,17 @@ SORT stato ASC, nome ASC
 ## Fronti e Minacce
 
 > [!pericolo] Fronti e minacce
-> 
+>
 
 > [!timer] Orologi di campagna
-> - [ ] 
-> - [ ] 
-> - [ ] 
-> - [ ] 
+> - [ ]
+> - [ ]
+> - [ ]
+> - [ ]
 
 ## Verita Canoniche
 
 > [!indizio] Verita confermate
-> 
+>
 
 ## Note

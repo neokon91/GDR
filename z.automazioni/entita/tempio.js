@@ -1,8 +1,9 @@
 async function tempio(tp) {
     const helpers = tp.user.helpers;
-    const name = await tp.system.prompt("Nome del tempio?");
+    const name = await helpers.promptRequired(tp, "Nome del tempio");
     const id = helpers.slugify(name);
-    await tp.file.move(`Mondo/Luoghi/${name}`);
+    const mondo = await helpers.chooseNoteByFrontmatter(tp, "categoria", "mondo", "Mondo del tempio");
+    const luogoPadre = await helpers.chooseNoteByPath(tp, "Mondi/Luoghi", "Regione o luogo superiore");
 
     const deity = await helpers.chooseNoteByFrontmatter(
         tp,
@@ -19,6 +20,9 @@ async function tempio(tp) {
         "Scegli un culto associato",
         "Nessuno"
     );
+    const fazioni = await helpers.chooseNotesByPath(tp, "Mondi/Fazioni", "Fazioni collegate al tempio");
+
+    await tp.file.move(`Mondi/Luoghi/${name}`);
 
     return `---
 id: ${id}
@@ -28,11 +32,12 @@ tipo: tempio
 sottotipo: luogo di interesse
 stato: bozza
 canonico: false
-luogo_padre:
+mondo: ${mondo}
+luogo_padre: ${luogoPadre}
 divinita_principale: ${deity}
 culto_associato: ${cult}
 reliquie: []
-fazioni: []
+fazioni: ${helpers.inlineYamlList(fazioni)}
 religioni: []
 risorse: []
 problemi: []

@@ -3,10 +3,18 @@ cssclasses:
   - indice
 ---
 
-# Mondo
+# Mondi
 
 ```meta-bind-button
-label: Dashboard
+label: Worldbuilder
+style: primary
+actions:
+  - type: open
+    link: "[[Worldbuilder Dashboard]]"
+```
+
+```meta-bind-button
+label: DM Dashboard
 style: primary
 actions:
   - type: open
@@ -14,76 +22,115 @@ actions:
 ```
 
 ```meta-bind-button
-label: Durante Il Gioco
+label: Nuovo Mondo
 style: primary
 actions:
-  - type: open
-    link: "[[Durante il Gioco]]"
+  - type: templaterCreateNote
+    templateFile: "z.modelli/Mondo.md"
+    folderPath: "Mondi"
+    open: true
 ```
 
-## Stato Del Mondo
+## Tutti I Mondi
 
 ```dataview
-TABLE WITHOUT ID
-  length(filter(rows.file, (f) => contains(f.path, "Mondo/Personaggi/"))) AS personaggi,
-  length(filter(rows.file, (f) => contains(f.path, "Mondo/Luoghi/"))) AS luoghi,
-  length(filter(rows.file, (f) => contains(f.path, "Mondo/Missioni/"))) AS missioni,
-  length(filter(rows.file, (f) => contains(f.path, "Mondo/Incontri/"))) AS incontri
-FROM "Mondo"
-WHERE file.name != "Mondo"
-GROUP BY true
-```
-
-## Sessioni Recenti
-
-```dataview
-TABLE data, data_mondo, stato, campagne
-FROM "Mondo/Sessioni"
-WHERE file.name != "Sessioni"
-SORT data DESC
-LIMIT 6
-```
-
-## Missioni Aperte
-
-```dataview
-TABLE stato, committente, luoghi, personaggi
-FROM "Mondo/Missioni"
-WHERE stato = "proposta" OR stato = "accettata" OR stato = "in corso"
+TABLE stato, tono, tema, tecnologia, magia, campagne
+FROM "Mondi"
+WHERE categoria = "mondo"
 SORT stato ASC, nome ASC
 ```
 
-## Luoghi In Gioco
+## Mondi Da Completare
 
 ```dataview
-TABLE tipo, stato, pericolo, luogo_padre
-FROM "Mondo/Luoghi"
-WHERE stato = "pronto" OR stato = "in gioco" OR canonico = true
-SORT stato ASC, nome ASC
-LIMIT 12
-```
-
-## PNG In Gioco
-
-```dataview
-TABLE ruolo, luogo, atteggiamento
-FROM "Mondo/Personaggi"
-WHERE tipo = "png" AND stato = "in gioco"
+TABLE tono, tema, tecnologia, magia
+FROM "Mondi"
+WHERE categoria = "mondo" AND stato = "bozza"
 SORT nome ASC
+```
+
+## Mondi Pronti
+
+```dataview
+TABLE tono, tema, campagne, canonico
+FROM "Mondi"
+WHERE categoria = "mondo" AND stato = "pronto"
+SORT nome ASC
+```
+
+## Contenuti Collegati
+
+### Luoghi
+
+```dataview
+TABLE mondo, tipo, stato, bioma, luogo_padre
+FROM "Mondi/Luoghi"
+WHERE file.name != "Luoghi"
+SORT mondo ASC, nome ASC
+LIMIT 16
+```
+
+### Personaggi
+
+```dataview
+TABLE mondo, tipo, ruolo, stato, luogo
+FROM "Mondi/Personaggi"
+WHERE file.name != "Personaggi"
+SORT mondo ASC, nome ASC
+LIMIT 16
+```
+
+### Fazioni e Religioni
+
+```dataview
+TABLE mondo, categoria, tipo, stato
+FROM "Mondi/Fazioni" OR "Mondi/Religioni"
+WHERE file.name != "Fazioni" AND file.name != "Religioni"
+SORT mondo ASC, categoria ASC, nome ASC
+LIMIT 16
+```
+
+### Creature
+
+```dataview
+TABLE mondo, tipo, stato, cr, luoghi
+FROM "Mondi/Creature"
+WHERE file.name != "Creature"
+SORT mondo ASC, nome ASC
+LIMIT 16
+```
+
+### Oggetti e Dispense
+
+```dataview
+TABLE mondo, categoria, tipo, stato, luogo
+FROM "Mondi/Oggetti" OR "Mondi/Dispense"
+WHERE file.name != "Oggetti" AND file.name != "Dispense"
+SORT mondo ASC, categoria ASC, nome ASC
+LIMIT 16
+```
+
+### Missioni
+
+```dataview
+TABLE mondo, stato, committente, luoghi, personaggi
+FROM "Mondi/Missioni"
+WHERE file.name != "Missioni"
+SORT mondo ASC, stato ASC, nome ASC
+LIMIT 16
 ```
 
 ## Archivi
 
-- [[Mondo/Personaggi/Personaggi]]
-- [[Mondo/Luoghi/Luoghi]]
-- [[Mondo/Creature/Creature]]
-- [[Mondo/Fazioni/Fazioni]]
-- [[Mondo/Religioni/Religioni]]
-- [[Mondo/Oggetti/Oggetti]]
-- [[Mondo/Missioni/Missioni]]
-- [[Mondo/Incontri/Incontri]]
-- [[Mondo/Dispense/Dispense]]
-- [[Mondo/Sessioni/Sessioni]]
-- [[Mondo/Calendario]]
-- [[z.bacheche/Post Sessione]]
+- [[Mondi/Personaggi/Personaggi]]
+- [[Mondi/Luoghi/Luoghi]]
+- [[Mondi/Creature/Creature]]
+- [[Mondi/Fazioni/Fazioni]]
+- [[Mondi/Religioni/Religioni]]
+- [[Mondi/Oggetti/Oggetti]]
+- [[Mondi/Missioni/Missioni]]
+- [[Mondi/Incontri/Incontri]]
+- [[Mondi/Dispense/Dispense]]
+- [[Mondi/Sessioni/Sessioni]]
+- [[Mondi/Calendario]]
 - [[Inbox/Inbox]]

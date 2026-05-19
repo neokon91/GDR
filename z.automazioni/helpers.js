@@ -1,15 +1,82 @@
+const SKIP_VALUE = "__SKIP__";
+const MANUAL_VALUE = "__MANUAL__";
+const DONE_VALUE = "__DONE__";
+
+function abortCreation(message = "Creazione annullata dall'utente.") {
+    throw new Error(message);
+}
+
+function isCancelled(value) {
+    return value === null || value === undefined;
+}
+
+async function promptRequired(tp, message, defaultValue = "") {
+    const value = await tp.system.prompt(message, defaultValue);
+
+    if (isCancelled(value)) {
+        abortCreation();
+    }
+
+    const trimmed = String(value ?? "").trim();
+
+    if (!trimmed) {
+        abortCreation("Creazione annullata: manca un nome.");
+    }
+
+    return trimmed;
+}
+
+async function promptOptional(tp, message, defaultValue = "") {
+    const value = await tp.system.prompt(`${message} (opzionale)`, defaultValue);
+
+    if (isCancelled(value)) {
+        abortCreation();
+    }
+
+    return String(value ?? "").trim();
+}
+
+async function chooseRequired(tp, options, message) {
+    const selected = await tp.system.suggester(
+        options.map(e => e.label),
+        options,
+        false,
+        message
+    );
+
+    if (isCancelled(selected)) {
+        abortCreation();
+    }
+
+    return selected;
+}
+
+async function chooseOptional(tp, options, message, skipLabel = "Salta") {
+    const selected = await tp.system.suggester(
+        [skipLabel, ...options.map(e => e.label)],
+        [SKIP_VALUE, ...options],
+        false,
+        message
+    );
+
+    if (isCancelled(selected)) {
+        abortCreation();
+    }
+
+    if (selected === SKIP_VALUE) {
+        return null;
+    }
+
+    return selected;
+}
+
 async function askYesNo(tp, message) {
     const yesNoOptions = [
         { label: "Sì", id: true },
         { label: "No", id: false }
     ];
 
-    const selected = await tp.system.suggester(
-        yesNoOptions.map(e => e.label),
-        yesNoOptions,
-        false,
-        message
-    );
+    const selected = await chooseRequired(tp, yesNoOptions, message);
 
     return selected?.id === true;
 }
@@ -28,8 +95,10 @@ async function collectNamedDescriptions(tp, sectionLabel) {
     let keepAdding = true;
 
     while (keepAdding) {
-        const entryName = await tp.system.prompt(`Nome ${sectionLabel}`);
-        const entryDesc = await tp.system.prompt(`Descrizione ${sectionLabel}`);
+        const entryName = await promptOptional(tp, `Nome ${sectionLabel}`);
+        const entryDesc = entryName
+            ? await promptOptional(tp, `Descrizione ${sectionLabel}`)
+            : "";
 
         if (entryName && entryDesc) {
             entries.push({
@@ -89,32 +158,47 @@ function getMarkdownFilesByFrontmatter(field, expectedValue) {
     });
 }
 
-async function chooseNoteFromFiles(tp, files, message, noneLabel = "Nessuna") {
-    const MANUAL_VALUE = "__MANUAL__";
-    const NONE_VALUE = "__NONE__";
+function getMarkdownFilesInPath(path) {
+    const normalizedPath = String(path ?? "").replace(/\/+$/, "");
+    const indexName = normalizedPath.split("/").pop();
 
+    return app.vault.getMarkdownFiles()
+        .filter(file => file.path.startsWith(`${normalizedPath}/`))
+        .filter(file => file.basename !== indexName)
+        .sort((a, b) => a.basename.localeCompare(b.basename));
+}
+
+async function chooseNoteFromFiles(tp, files, message, noneLabel = "Nessuna") {
     if (!files.length) {
-        const manual = await tp.system.prompt(`${message} (manuale, opzionale)`);
+        const manual = await promptOptional(tp, `${message} manuale`);
         return manual ? `[[${manual}]]` : "";
     }
 
     const selected = await tp.system.suggester(
         [noneLabel, "Inserisci manualmente", ...files.map(file => file.basename)],
-        [NONE_VALUE, MANUAL_VALUE, ...files.map(file => `[[${file.basename}]]`)],
+        [SKIP_VALUE, MANUAL_VALUE, ...files.map(file => `[[${file.basename}]]`)],
         false,
         message
     );
 
-    if (!selected || selected === NONE_VALUE) {
+    if (isCancelled(selected)) {
+        abortCreation();
+    }
+
+    if (selected === SKIP_VALUE) {
         return "";
     }
 
     if (selected === MANUAL_VALUE) {
-        const manual = await tp.system.prompt(`${message} (manuale)`);
+        const manual = await promptOptional(tp, `${message} manuale`);
         return manual ? `[[${manual}]]` : "";
     }
 
     return selected;
+}
+
+async function chooseNoteByPath(tp, path, message, noneLabel = "Nessuna") {
+    return await chooseNoteFromFiles(tp, getMarkdownFilesInPath(path), message, noneLabel);
 }
 
 async function chooseNoteByFrontmatter(tp, field, expectedValue, message, noneLabel = "Nessuna") {
@@ -122,14 +206,68 @@ async function chooseNoteByFrontmatter(tp, field, expectedValue, message, noneLa
     return await chooseNoteFromFiles(tp, files, message, noneLabel);
 }
 
+async function chooseNotesFromFiles(tp, files, message) {
+    const selectedLinks = [];
+    let availableFiles = [...files];
+
+    while (true) {
+        const selected = await tp.system.suggester(
+            ["Fine", "Inserisci manualmente", ...availableFiles.map(file => file.basename)],
+            [DONE_VALUE, MANUAL_VALUE, ...availableFiles.map(file => file)],
+            false,
+            message
+        );
+
+        if (isCancelled(selected)) {
+            abortCreation();
+        }
+
+        if (selected === DONE_VALUE) {
+            return selectedLinks;
+        }
+
+        if (selected === MANUAL_VALUE) {
+            const manual = await promptOptional(tp, `${message} manuale`);
+
+            if (manual) {
+                selectedLinks.push(`[[${manual}]]`);
+            }
+
+            continue;
+        }
+
+        selectedLinks.push(`[[${selected.basename}]]`);
+        availableFiles = availableFiles.filter(file => file.path !== selected.path);
+    }
+}
+
+async function chooseNotesByPath(tp, path, message) {
+    return await chooseNotesFromFiles(tp, getMarkdownFilesInPath(path), message);
+}
+
+function inlineYamlList(values) {
+    const filtered = (values ?? []).filter(Boolean);
+    return filtered.length ? `[${filtered.join(", ")}]` : "[]";
+}
+
 module.exports = {
+    abortCreation,
+    promptRequired,
+    promptOptional,
+    chooseRequired,
+    chooseOptional,
     askYesNo,
     collectNamedDescriptions,
     inlineYamlArray,
+    inlineYamlList,
     yamlQuote,
     slugify,
     normalizeText,
     getMarkdownFilesByFrontmatter,
+    getMarkdownFilesInPath,
     chooseNoteFromFiles,
-    chooseNoteByFrontmatter
+    chooseNoteByPath,
+    chooseNoteByFrontmatter,
+    chooseNotesFromFiles,
+    chooseNotesByPath
 };

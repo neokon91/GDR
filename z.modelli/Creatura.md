@@ -9,6 +9,9 @@
 >**Habitat**: `=this.habitat`
 >**Stato**: `=this.stato`
 >
+>Mondo:
+>`INPUT[suggester(optionQuery("Mondi"), useLinks(partial), allowOther):mondo]`
+>
 >Stato:
 >`INPUT[inlineSelect(option(bozza, Bozza), option(pronto, Pronto), option(archiviata, Archiviata)):stato]`
 
@@ -26,14 +29,14 @@ monster: ${creature}
 ## Descrizione
 
 > [!incontro] Descrizione
-> 
+>
 
 ## Ecologia
 
 > [!luogo] Ecologia
-> 
+>
 
 ## Tattiche
 
 > [!pericolo] Tattiche
-> 
+>

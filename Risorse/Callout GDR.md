@@ -2,6 +2,15 @@
 
 Usa i callout per rendere leggibile una nota al tavolo. Ogni tipo deve rispondere a una domanda semplice: cosa devo leggere, cosa devono scoprire, cosa minaccia la scena, cosa cambia nel mondo.
 
+Lo snippet `gdr-vault.css` dà a ogni callout un colore e un'icona coerenti. L'idea è leggere la pagina a colpo d'occhio:
+
+- blu: scena, missione, struttura;
+- verde: luoghi e mondo fisico;
+- teal: PNG e relazioni;
+- viola: segreti e poteri nascosti;
+- rosso: pericoli e incontri;
+- oro: indizi, tesori e dispense.
+
 ## Scene
 
 > [!scena] Scena

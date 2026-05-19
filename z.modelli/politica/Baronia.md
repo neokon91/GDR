@@ -1,0 +1,43 @@
+<% await tp.user.luogo(tp) %>
+# `=this.nome`
+
+>[!infobox|wiki]- Baronia
+> Mondo:
+> `INPUT[suggester(optionQuery("Mondi"), useLinks(partial), allowOther):mondo]`
+>
+> Barone o baronessa:
+> `INPUT[suggester(optionQuery("Mondi/Personaggi"), useLinks(partial), allowOther):governante]`
+>
+> Regione superiore:
+> `INPUT[suggester(optionQuery("Mondi/Luoghi"), useLinks(partial), allowOther):luogo_padre]`
+>
+> Stabilità:
+> `INPUT[slider(minValue(0), maxValue(10), stepSize(1), addLabels):stabilita]`
+>
+> Pericolo:
+> `INPUT[slider(minValue(0), maxValue(10), stepSize(1), addLabels):pericolo]`
+>
+> Stato:
+> `INPUT[inlineSelect(option(bozza, Bozza), option(pronto, Pronto), option(in gioco, In gioco), option(archiviata, Archiviata)):stato]`
+
+> [!luogo] Dominio locale
+>
+
+## Luoghi Sotto La Baronia
+
+```dataview
+TABLE tipo, stato, pericolo
+FROM "Mondi/Luoghi"
+WHERE luogo_padre = this.file.link
+SORT nome ASC
+```
+
+## Obblighi E Tasse
+
+> [!regola] Cosa pretende il potere locale
+>
+
+## Segreti
+
+> [!segreto]- Segreti della baronia
+>

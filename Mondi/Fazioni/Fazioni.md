@@ -10,8 +10,8 @@ label: Nuova Fazione
 style: primary
 actions:
   - type: templaterCreateNote
-    templateFile: "z.modelli/Fazione.md"
-    folderPath: "Mondo/Fazioni"
+    templateFile: "z.modelli/Fazione Router.md"
+    folderPath: "Mondi/Fazioni"
     open: true
 ```
 
@@ -19,7 +19,7 @@ actions:
 
 ```dataview
 TABLE tipo, stato, leader, luoghi, alleati, nemici
-FROM "Mondo/Fazioni"
+FROM "Mondi/Fazioni"
 WHERE file.name != "Fazioni" AND stato != "archiviata"
 SORT stato ASC, nome ASC
 ```
@@ -28,7 +28,7 @@ SORT stato ASC, nome ASC
 
 ```dataview
 TABLE leader, alleati, nemici
-FROM "Mondo/Fazioni"
+FROM "Mondi/Fazioni"
 WHERE length(nemici) > 0
 SORT nome ASC
 ```

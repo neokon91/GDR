@@ -11,7 +11,7 @@ style: primary
 actions:
   - type: templaterCreateNote
     templateFile: "z.modelli/Dispensa.md"
-    folderPath: "Mondo/Dispense"
+    folderPath: "Mondi/Dispense"
     open: true
 ```
 
@@ -19,7 +19,7 @@ actions:
 
 ```dataview
 TABLE tipo, stato, luogo, personaggi, sessioni
-FROM "Mondo/Dispense"
+FROM "Mondi/Dispense"
 WHERE stato = "pronto"
 SORT nome ASC
 ```
@@ -28,7 +28,7 @@ SORT nome ASC
 
 ```dataview
 TABLE tipo, luogo, personaggi, sessioni
-FROM "Mondo/Dispense"
+FROM "Mondi/Dispense"
 WHERE stato = "consegnato"
 SORT nome ASC
 ```
@@ -37,7 +37,7 @@ SORT nome ASC
 
 ```dataview
 TABLE tipo, stato, luogo, personaggi
-FROM "Mondo/Dispense"
+FROM "Mondi/Dispense"
 WHERE file.name != "Dispense"
 SORT stato ASC, nome ASC
 ```

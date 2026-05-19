@@ -1,7 +1,19 @@
 async function nota_rapida(tp) {
     const helpers = tp.user.helpers;
-    const name = await tp.system.prompt("Titolo della nota rapida", "Nota rapida");
+    const name = await helpers.promptRequired(tp, "Titolo della nota rapida", "Nota rapida");
     const id = helpers.slugify(name);
+    const selectedType = await helpers.chooseOptional(
+        tp,
+        [
+            { label: "Idea", id: "idea" },
+            { label: "Appunto", id: "appunto" },
+            { label: "Spunto", id: "spunto" },
+            { label: "Domanda", id: "domanda" },
+            { label: "Promemoria", id: "promemoria" }
+        ],
+        "Tipo di nota rapida"
+    );
+    const collegamenti = await helpers.chooseNotesByPath(tp, "Mondi", "Collega a una nota del mondo");
 
     await tp.file.move(`Inbox/${name}`);
 
@@ -9,9 +21,9 @@ async function nota_rapida(tp) {
 id: ${id}
 nome: ${helpers.yamlQuote(name)}
 categoria: nota rapida
-tipo: idea
+tipo: ${selectedType?.id ?? "idea"}
 stato: da smistare
-collegamenti: []
+collegamenti: ${helpers.inlineYamlList(collegamenti)}
 ---
 `;
 }

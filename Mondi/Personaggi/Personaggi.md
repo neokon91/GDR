@@ -10,8 +10,8 @@ label: Nuovo PG
 style: primary
 actions:
   - type: templaterCreateNote
-    templateFile: "z.modelli/PG.md"
-    folderPath: "Mondo/Personaggi"
+    templateFile: "z.modelli/personaggio/PG.md"
+    folderPath: "Mondi/Personaggi"
     open: true
 ```
 
@@ -20,8 +20,8 @@ label: Nuovo PNG
 style: primary
 actions:
   - type: templaterCreateNote
-    templateFile: "z.modelli/PNG.md"
-    folderPath: "Mondo/Personaggi"
+    templateFile: "z.modelli/personaggio/PNG.md"
+    folderPath: "Mondi/Personaggi"
     open: true
 ```
 
@@ -29,7 +29,7 @@ actions:
 
 ```dataview
 TABLE giocatore, classe, livello, stato, luogo
-FROM "Mondo/Personaggi"
+FROM "Mondi/Personaggi"
 WHERE tipo = "pg"
 SORT nome ASC
 ```
@@ -38,7 +38,7 @@ SORT nome ASC
 
 ```dataview
 TABLE ruolo, luogo, atteggiamento, fazioni
-FROM "Mondo/Personaggi"
+FROM "Mondi/Personaggi"
 WHERE tipo = "png" AND stato = "in gioco"
 SORT nome ASC
 ```
@@ -47,7 +47,7 @@ SORT nome ASC
 
 ```dataview
 TABLE ruolo, stato, luogo, atteggiamento
-FROM "Mondo/Personaggi"
+FROM "Mondi/Personaggi"
 WHERE tipo = "png"
 SORT stato ASC, nome ASC
 ```

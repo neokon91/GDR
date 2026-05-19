@@ -1,22 +1,4 @@
-<%*
-const name = await tp.system.prompt("Nome della religione, divinità o culto");
-const id = tp.user.helpers.slugify(name);
-const title = tp.user.helpers.yamlQuote(name);
-await tp.file.move(`Mondo/Religioni/${name}`);
-tR += `---
-id: ${id}
-nome: ${title}
-categoria: religione
-tipo:
-sottotipo:
-stato: bozza
-canonico: false
-divinita: []
-templi: []
-fazioni: []
----
-`;
-%>
+<% await tp.user.culto(tp) %>
 # `=this.nome`
 
 >[!infobox|wiki]- Religione
@@ -31,11 +13,14 @@ fazioni: []
 >
 > Canonica:
 > `INPUT[toggle:canonico]`
+>
+> Mondo:
+> `INPUT[suggester(optionQuery("Mondi"), useLinks(partial), allowOther):mondo]`
 
 ## Dottrina
 
 > [!regola] Dottrina
-> 
+>
 
 ## Divinità o Entità
 
@@ -45,13 +30,13 @@ fazioni: []
 
 ## Templi
 
-`INPUT[inlineListSuggester(optionQuery("Mondo/Luoghi"), useLinks(partial)):templi]`
+`INPUT[inlineListSuggester(optionQuery("Mondi/Luoghi"), useLinks(partial)):templi]`
 
 ## Fazioni collegate
 
-`INPUT[inlineListSuggester(optionQuery("Mondo/Fazioni"), useLinks(partial)):fazioni]`
+`INPUT[inlineListSuggester(optionQuery("Mondi/Fazioni"), useLinks(partial)):fazioni]`
 
 ## Segreti
 
 > [!segreto]- Segreti
-> 
+>

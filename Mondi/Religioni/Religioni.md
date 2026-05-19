@@ -10,8 +10,8 @@ label: Nuova Religione
 style: primary
 actions:
   - type: templaterCreateNote
-    templateFile: "z.modelli/Religione.md"
-    folderPath: "Mondo/Religioni"
+    templateFile: "z.modelli/fazione/Culto.md"
+    folderPath: "Mondi/Religioni"
     open: true
 ```
 
@@ -19,7 +19,7 @@ actions:
 
 ```dataview
 TABLE tipo, sottotipo, stato, templi, fazioni
-FROM "Mondo/Religioni"
+FROM "Mondi/Religioni"
 WHERE file.name != "Religioni"
 SORT sottotipo ASC, nome ASC
 ```
@@ -28,7 +28,7 @@ SORT sottotipo ASC, nome ASC
 
 ```dataview
 TABLE tipo, stato, luogo_padre
-FROM "Mondo/Luoghi"
+FROM "Mondi/Luoghi"
 WHERE tipo = "tempio"
 SORT nome ASC
 ```

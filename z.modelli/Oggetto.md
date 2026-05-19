@@ -1,21 +1,4 @@
-<%*
-const name = await tp.system.prompt("Nome dell'oggetto");
-const id = tp.user.helpers.slugify(name);
-const title = tp.user.helpers.yamlQuote(name);
-await tp.file.move(`Mondo/Oggetti/${name}`);
-tR += `---
-id: ${id}
-nome: ${title}
-categoria: oggetto
-tipo:
-rarita:
-stato: bozza
-canonico: false
-proprietario:
-luogo:
----
-`;
-%>
+<% await tp.user.oggetto(tp) %>
 # `=this.nome`
 
 >[!infobox|wiki]- Oggetto
@@ -31,34 +14,37 @@ luogo:
 > Canonico:
 > `INPUT[toggle:canonico]`
 >
+> Mondo:
+> `INPUT[suggester(optionQuery("Mondi"), useLinks(partial), allowOther):mondo]`
+>
 > Proprietario:
-> `INPUT[suggester(optionQuery("Mondo/Personaggi"), useLinks(partial), allowOther):proprietario]`
+> `INPUT[suggester(optionQuery("Mondi/Personaggi"), useLinks(partial), allowOther):proprietario]`
 >
 > Luogo:
-> `INPUT[suggester(optionQuery("Mondo/Luoghi"), useLinks(partial), allowOther):luogo]`
+> `INPUT[suggester(optionQuery("Mondi/Luoghi"), useLinks(partial), allowOther):luogo]`
 
 > [!tesoro] Descrizione
-> 
+>
 
 ## Proprietà
 
 > [!regola] Proprietà
-> 
+>
 
 ## Storia
 
 > [!indizio] Storia
-> 
+>
 
 ## Proprietario
 
-`INPUT[suggester(optionQuery("Mondo/Personaggi"), useLinks(partial), allowOther):proprietario]`
+`INPUT[suggester(optionQuery("Mondi/Personaggi"), useLinks(partial), allowOther):proprietario]`
 
 ## Luogo
 
-`INPUT[suggester(optionQuery("Mondo/Luoghi"), useLinks(partial), allowOther):luogo]`
+`INPUT[suggester(optionQuery("Mondi/Luoghi"), useLinks(partial), allowOther):luogo]`
 
 ## Segreti
 
 > [!segreto]- Segreti
-> 
+>

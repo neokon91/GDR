@@ -3,10 +3,13 @@
 
 >[!infobox|wiki]- Sala di Controllo
 > Governante:
-> `INPUT[suggester(optionQuery("Mondo/Personaggi"), useLinks(partial), allowOther):governante]`
+> `INPUT[suggester(optionQuery("Mondi/Personaggi"), useLinks(partial), allowOther):governante]`
 >
 > Regione:
-> `INPUT[suggester(optionQuery("Mondo/Luoghi"), useLinks(partial), allowOther):luogo_padre]`
+> `INPUT[suggester(optionQuery("Mondi/Luoghi"), useLinks(partial), allowOther):luogo_padre]`
+>
+> Mondo:
+> `INPUT[suggester(optionQuery("Mondi"), useLinks(partial), allowOther):mondo]`
 >
 > Popolazione:
 > `INPUT[number:popolazione]`
@@ -24,16 +27,16 @@
 > `INPUT[inlineSelect(option(bozza, Bozza), option(pronto, Pronto), option(in gioco, In gioco), option(archiviata, Archiviata)):stato]`
 
 > [!luogo] Descrizione
-> 
+>
 
 > [!lettura] Prima impressione
-> 
+>
 
 ## Quartieri e Luoghi Importanti
 
 ```dataview
 TABLE tipo, stato
-FROM "Mondo/Luoghi"
+FROM "Mondi/Luoghi"
 WHERE luogo_padre = this.file.link
 ```
 
@@ -43,13 +46,13 @@ WHERE luogo_padre = this.file.link
 
 ## Fazioni presenti
 
-`INPUT[inlineListSuggester(optionQuery("Mondo/Fazioni"), useLinks(partial)):fazioni]`
+`INPUT[inlineListSuggester(optionQuery("Mondi/Fazioni"), useLinks(partial)):fazioni]`
 
 ## PNG importanti
 
 ```dataview
 TABLE ruolo, stato
-FROM "Mondo/Personaggi"
+FROM "Mondi/Personaggi"
 WHERE luogo = this.file.link OR contains(fazioni, this.file.link)
 ```
 
@@ -60,9 +63,9 @@ INPUT[list:problemi]
 ```
 
 > [!pericolo] Problemi attuali
-> 
+>
 
 ## Segreti
 
 > [!segreto]- Segreti
-> 
+>

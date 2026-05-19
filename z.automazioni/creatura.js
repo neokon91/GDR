@@ -37,44 +37,43 @@ async function creatura(tp){
     { label: "Caotico Malvagio", id: "caotico malvagio" }
     ];
 
-    const name = await tp.system.prompt("Nome della creatura");
     const helpers = tp.user.helpers;
+    const name = await helpers.promptRequired(tp, "Nome della creatura");
     const id = helpers.slugify(name);
 
-    const selectedType = await tp.system.suggester(
-    creatureTypes.map(e => e.label),
-    creatureTypes,
-    false,
-    "Scegli un tipo per la creatura"
+    const selectedType = await helpers.chooseOptional(
+        tp,
+        creatureTypes,
+        "Tipo della creatura"
     );
 
-    const selectedDimensions = await tp.system.suggester(
-    dimensions.map(e => e.label),
-    dimensions,
-    false,
-    "Scegli le dimensioni della creatura"
+    const selectedDimensions = await helpers.chooseOptional(
+        tp,
+        dimensions,
+        "Dimensione della creatura"
     );
 
-    const selectedAlignment = await tp.system.suggester(
-    alignments.map(e => e.label),
-    alignments,
-    false,
-    "Scegli un allineamento per la creatura"
+    const selectedAlignment = await helpers.chooseOptional(
+        tp,
+        alignments,
+        "Allineamento della creatura"
     );
+    const mondo = await helpers.chooseNoteByFrontmatter(tp, "categoria", "mondo", "Mondo della creatura");
+    const luoghi = await helpers.chooseNotesByPath(tp, "Mondi/Luoghi", "Luoghi o habitat collegati");
 
     // === STATISTICHE ===
-    const ac = await tp.system.prompt("Classe Armatura", "15");
-    const hp = await tp.system.prompt("Punti Ferita", "12");
-    const speed = await tp.system.prompt("Velocità", "9 m.");
-    const cr = await tp.system.prompt("Grado di Sfida", "1/4");
+    const ac = await helpers.promptOptional(tp, "Classe Armatura", "15") || "15";
+    const hp = await helpers.promptOptional(tp, "Punti Ferita", "12") || "12";
+    const speed = await helpers.promptOptional(tp, "Velocità", "9 m.") || "9 m.";
+    const cr = await helpers.promptOptional(tp, "Grado di Sfida", "1/4") || "1/4";
 
     // === CARATTERISTICHE ===
-    const str = await tp.system.prompt("Forza", "10");
-    const dex = await tp.system.prompt("Destrezza", "10");
-    const con = await tp.system.prompt("Costituzione", "10");
-    const int = await tp.system.prompt("Intelligenza", "10");
-    const wis = await tp.system.prompt("Saggezza", "10");
-    const cha = await tp.system.prompt("Carisma", "10");
+    const str = await helpers.promptOptional(tp, "Forza", "10") || "10";
+    const dex = await helpers.promptOptional(tp, "Destrezza", "10") || "10";
+    const con = await helpers.promptOptional(tp, "Costituzione", "10") || "10";
+    const int = await helpers.promptOptional(tp, "Intelligenza", "10") || "10";
+    const wis = await helpers.promptOptional(tp, "Saggezza", "10") || "10";
+    const cha = await helpers.promptOptional(tp, "Carisma", "10") || "10";
 
     const traits = await helpers.collectNamedDescriptions(tp, "tratti");
     const actions = await helpers.collectNamedDescriptions(tp, "azioni");
@@ -83,7 +82,7 @@ async function creatura(tp){
 
 
     // Rinomina file
-    await tp.file.move(`Mondo/Creature/${name}`);
+    await tp.file.move(`Mondi/Creature/${name}`);
 
     return `---
 id: ${id}
@@ -91,11 +90,12 @@ statblock: true
 name: ${helpers.yamlQuote(name)}
 nome: ${helpers.yamlQuote(name)}
 categoria: creatura
-type: ${selectedType.id}
-tipo: ${selectedType.id}
+type: ${selectedType?.id ?? ""}
+tipo: ${selectedType?.id ?? ""}
 stato: bozza
-size: ${selectedDimensions.id}
-alignment: ${selectedAlignment.id}
+mondo: ${mondo}
+size: ${selectedDimensions?.id ?? ""}
+alignment: ${selectedAlignment?.id ?? ""}
 ac: ${ac}
 hp: ${hp}
 speed: ${speed}
@@ -111,7 +111,7 @@ senses:
 languages:
 gear:
 habitat:
-luoghi: []
+luoghi: ${helpers.inlineYamlList(luoghi)}
 traits: ${tp.user.helpers.inlineYamlArray(traits)}
 actions: ${tp.user.helpers.inlineYamlArray(actions)}
 bonus_actions: ${tp.user.helpers.inlineYamlArray(bonusActions)}

@@ -11,7 +11,7 @@ style: primary
 actions:
   - type: templaterCreateNote
     templateFile: "z.modelli/Creatura.md"
-    folderPath: "Mondo/Creature"
+    folderPath: "Mondi/Creature"
     open: true
 ```
 
@@ -19,7 +19,7 @@ actions:
 
 ```dataview
 TABLE tipo, stato, size AS taglia, cr, luoghi
-FROM "Mondo/Creature"
+FROM "Mondi/Creature"
 WHERE file.name != "Creature" AND stato != "archiviata"
 SORT cr ASC, nome ASC
 ```
@@ -28,7 +28,7 @@ SORT cr ASC, nome ASC
 
 ```dataview
 TABLE tipo, cr, luoghi
-FROM "Mondo/Creature"
+FROM "Mondi/Creature"
 WHERE file.name != "Creature"
 SORT luoghi ASC, cr ASC
 ```

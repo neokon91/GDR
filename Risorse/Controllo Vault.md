@@ -14,11 +14,11 @@ const escapeHtml = value => String(value ?? "").replace(/[&<>"']/g, c => ({ "&":
 
 const cards = [
   ["Idee da smistare", count('"Inbox"', p => p.file.name !== "Inbox" && !["smistata", "archiviata"].includes(p.stato)), "Decidi se diventano mondo"],
-  ["Sessioni da preparare", count('"Mondo/Sessioni"', p => p.stato === "preparazione"), "Da rifinire"],
-  ["Materiale pronto", count('"Mondo/Incontri" OR "Mondo/Dispense" OR "Mondo/Oggetti"', p => p.stato === "pronto"), "Usabile subito"],
-  ["Missioni aperte", count('"Mondo/Missioni"', p => ["proposta", "accettata", "in corso"].includes(p.stato)), "Scelte vive"],
-  ["PNG in gioco", count('"Mondo/Personaggi"', p => p.tipo === "png" && p.stato === "in gioco"), "Presenze attive"],
-  ["Bozze", count('"Mondo" OR "Campagne"', p => p.stato === "bozza"), "Da completare o archiviare"]
+  ["Sessioni da preparare", count('"Mondi/Sessioni"', p => p.stato === "preparazione"), "Da rifinire"],
+  ["Materiale pronto", count('"Mondi/Incontri" OR "Mondi/Dispense" OR "Mondi/Oggetti"', p => p.stato === "pronto"), "Usabile subito"],
+  ["Missioni aperte", count('"Mondi/Missioni"', p => ["proposta", "accettata", "in corso"].includes(p.stato)), "Scelte vive"],
+  ["PNG in gioco", count('"Mondi/Personaggi"', p => p.tipo === "png" && p.stato === "in gioco"), "Presenze attive"],
+  ["Bozze", count('"Mondi" OR "Campagne"', p => p.stato === "bozza"), "Da completare o archiviare"]
 ];
 
 const grid = dv.el("div", "", { cls: "gdr-stat-grid" });
@@ -39,9 +39,9 @@ const internalLink = file => `<a class="internal-link" data-href="${escapeHtml(f
 
 const items = [
   ...dv.pages('"Inbox"').where(p => p.file.name !== "Inbox" && !["smistata", "archiviata"].includes(p.stato)).map(p => [p, "Inbox"]).array(),
-  ...dv.pages('"Mondo/Sessioni"').where(p => p.stato === "preparazione").map(p => [p, "Sessione"]).array(),
-  ...dv.pages('"Mondo/Missioni"').where(p => ["proposta", "accettata", "in corso"].includes(p.stato)).map(p => [p, "Missione"]).array(),
-  ...dv.pages('"Mondo/Incontri"').where(p => p.stato === "bozza").map(p => [p, "Incontro"]).array()
+  ...dv.pages('"Mondi/Sessioni"').where(p => p.stato === "preparazione").map(p => [p, "Sessione"]).array(),
+  ...dv.pages('"Mondi/Missioni"').where(p => ["proposta", "accettata", "in corso"].includes(p.stato)).map(p => [p, "Missione"]).array(),
+  ...dv.pages('"Mondi/Incontri"').where(p => p.stato === "bozza").map(p => [p, "Incontro"]).array()
 ].slice(0, 10);
 
 if (!items.length) {
@@ -71,7 +71,7 @@ SORT file.ctime DESC
 
 ```dataview
 TABLE data, data_mondo, stato, campagne, luoghi
-FROM "Mondo/Sessioni"
+FROM "Mondi/Sessioni"
 WHERE stato = "preparazione"
 SORT data ASC
 ```
@@ -80,7 +80,7 @@ SORT data ASC
 
 ```dataview
 TABLE categoria, tipo, stato, luogo
-FROM "Mondo/Incontri" OR "Mondo/Dispense" OR "Mondo/Oggetti"
+FROM "Mondi/Incontri" OR "Mondi/Dispense" OR "Mondi/Oggetti"
 WHERE stato = "pronto"
 SORT categoria ASC, nome ASC
 ```
@@ -89,7 +89,7 @@ SORT categoria ASC, nome ASC
 
 ```dataview
 TABLE stato, committente, luoghi, personaggi
-FROM "Mondo/Missioni"
+FROM "Mondi/Missioni"
 WHERE stato = "proposta" OR stato = "accettata" OR stato = "in corso"
 SORT stato ASC, nome ASC
 ```
@@ -98,7 +98,7 @@ SORT stato ASC, nome ASC
 
 ```dataview
 TABLE ruolo, luogo, atteggiamento
-FROM "Mondo/Personaggi"
+FROM "Mondi/Personaggi"
 WHERE tipo = "png" AND stato = "in gioco"
 SORT nome ASC
 ```
@@ -107,7 +107,7 @@ SORT nome ASC
 
 ```dataview
 TABLE categoria, tipo, stato
-FROM "Mondo" OR "Campagne"
+FROM "Mondi" OR "Campagne"
 WHERE stato = "bozza"
 SORT categoria ASC, nome ASC
 ```
@@ -143,9 +143,9 @@ const isFolderIndex = p => {
   return parts.length > 1 && parts[parts.length - 1] === parts[parts.length - 2];
 };
 
-const isServicePage = p => isFolderIndex(p) || p.file.path === "Mondo/Calendario.md";
+const isServicePage = p => isFolderIndex(p) || p.file.path === "Mondi/Calendario.md";
 
-const pages = dv.pages('"Mondo" OR "Campagne" OR "Inbox"')
+const pages = dv.pages('"Mondi" OR "Campagne" OR "Inbox"')
   .where(p => !isServicePage(p) && p.stato && !statiValidi.has(p.stato));
 
 if (!pages.length) {
@@ -164,9 +164,9 @@ const isFolderIndex = p => {
   return parts.length > 1 && parts[parts.length - 1] === parts[parts.length - 2];
 };
 
-const isServicePage = p => isFolderIndex(p) || p.file.path === "Mondo/Calendario.md";
+const isServicePage = p => isFolderIndex(p) || p.file.path === "Mondi/Calendario.md";
 
-const pages = dv.pages('"Mondo" OR "Campagne" OR "Inbox"')
+const pages = dv.pages('"Mondi" OR "Campagne" OR "Inbox"')
   .where(p => !isServicePage(p) && (!p.categoria || !p.stato));
 
 if (!pages.length) {
@@ -180,16 +180,16 @@ if (!pages.length) {
 
 ```dataviewjs
 const rows = [
-  ...dv.pages('"Mondo/Incontri"')
+  ...dv.pages('"Mondi/Incontri"')
     .where(p => p.stato === "pronto" && !dv.array(p.creature).length)
     .map(p => [p.file.link, "Incontro pronto senza creature"]).array(),
-  ...dv.pages('"Mondo/Missioni"')
+  ...dv.pages('"Mondi/Missioni"')
     .where(p => ["proposta", "accettata", "in corso"].includes(p.stato) && !p.committente)
     .map(p => [p.file.link, "Missione aperta senza committente"]).array(),
-  ...dv.pages('"Mondo/Personaggi"')
+  ...dv.pages('"Mondi/Personaggi"')
     .where(p => p.tipo === "png" && p.stato === "in gioco" && !p.luogo)
     .map(p => [p.file.link, "PNG in gioco senza luogo"]).array(),
-  ...dv.pages('"Mondo/Sessioni"')
+  ...dv.pages('"Mondi/Sessioni"')
     .where(p => p.stato === "pronto" && (!dv.array(p.luoghi).length || !dv.array(p.personaggi).length))
     .map(p => [p.file.link, "Sessione pronta senza luoghi o personaggi"]).array()
 ];

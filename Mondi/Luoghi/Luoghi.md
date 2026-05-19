@@ -11,7 +11,7 @@ style: primary
 actions:
   - type: templaterCreateNote
     templateFile: "z.modelli/Luogo Router.md"
-    folderPath: "Mondo/Luoghi"
+    folderPath: "Mondi/Luoghi"
     open: true
 ```
 
@@ -19,7 +19,7 @@ actions:
 
 ```dataview
 TABLE tipo, stato, bioma, pericolo, luogo_padre
-FROM "Mondo/Luoghi"
+FROM "Mondi/Luoghi"
 WHERE file.name != "Luoghi" AND stato != "archiviata"
 SORT stato ASC, nome ASC
 ```
@@ -28,7 +28,7 @@ SORT stato ASC, nome ASC
 
 ```dataview
 TABLE tipo, stato, pericolo, luogo_padre
-FROM "Mondo/Luoghi"
+FROM "Mondi/Luoghi"
 WHERE pericolo >= 6
 SORT pericolo DESC
 ```
@@ -37,7 +37,7 @@ SORT pericolo DESC
 
 ```dataview
 TABLE tipo, stato, luogo_padre
-FROM "Mondo/Luoghi"
+FROM "Mondi/Luoghi"
 WHERE file.name != "Luoghi"
 SORT luogo_padre ASC, nome ASC
 ```

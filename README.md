@@ -39,7 +39,10 @@ Usa questi campi in modo coerente, perché alimentano Dataview e dashboard.
 - `tipo`: sottotipo utile al gioco, per esempio `pg`, `png`, `dungeon`, `oggetto magico`.
 - `stato`: avanzamento operativo. Valori comuni: `bozza`, `preparazione`, `pronto`, `in gioco`, `usato`, `giocata`, `consegnato`, `completata`, `fallita`, `da smistare`, `smistata`, `in pausa`, `conclusa`, `archiviata`.
 - `canonico`: `true` quando il contenuto è confermato nel mondo di gioco.
+- `mondo`: collega una nota al mondo a cui appartiene.
 - `luogo`, `luoghi`, `personaggi`, `fazioni`, `ricompense`: usa link interni quando possibile.
+
+Per le note di categoria `mondo`, usa anche `tono`, `tema`, `tecnologia`, `magia`, `continenti`, `fazioni`, `religioni` e `campagne`.
 
 ## Cartelle Di Servizio
 

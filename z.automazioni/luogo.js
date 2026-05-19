@@ -1,76 +1,60 @@
 async function luogo(tp){
     const helpers = tp.user.helpers;
-    const name = await tp.system.prompt("Nome del luogo?");
+    const name = await helpers.promptRequired(tp, "Nome del luogo");
     const id = helpers.slugify(name);
     const route = tp.config.extra ?? {};
-    // Tipologie di luogo
-    const locationType = route.subtype ?? await tp.system.suggester(
-    [
-        "Città",
-        "Villaggio",
-        "Capitale",
-        "Porto",
-        "Fortezza",
-        "Rovina",
-        "Dungeon",
-        "Regione",
-        "Regno",
-        "Tempio",
-        "Foresta",
-        "Montagna"
-    ],
-    [
-        "città",
-        "villaggio",
-        "capitale",
-        "porto",
-        "fortezza",
-        "rovina",
-        "dungeon",
-        "regione",
-        "regno",
-        "tempio",
-        "foresta",
-        "montagna"
-    ]
+    const selectedType = route.subtype ? { id: route.subtype } : await helpers.chooseOptional(
+        tp,
+        [
+            { label: "Città", id: "città" },
+            { label: "Villaggio", id: "villaggio" },
+            { label: "Capitale", id: "capitale" },
+            { label: "Porto", id: "porto" },
+            { label: "Fortezza", id: "fortezza" },
+            { label: "Rovina", id: "rovina" },
+            { label: "Dungeon", id: "dungeon" },
+            { label: "Regione", id: "regione" },
+            { label: "Regno", id: "regno" },
+            { label: "Tempio", id: "tempio" },
+            { label: "Foresta", id: "foresta" },
+            { label: "Montagna", id: "montagna" }
+        ],
+        "Tipo di luogo"
     );
-    // Bioma del luogo
-    const biome = await tp.system.suggester(
-    [
-        "Foresta",
-        "Deserto",
-        "Montagna",
-        "Costa",
-        "Palude",
-        "Tundra",
-        "Sottosuolo"
-    ],
-    [
-        "foresta",
-        "deserto",
-        "montagna",
-        "costa",
-        "palude",
-        "tundra",
-        "sottosuolo"
-    ]
+    const selectedBiome = await helpers.chooseOptional(
+        tp,
+        [
+            { label: "Foresta", id: "foresta" },
+            { label: "Deserto", id: "deserto" },
+            { label: "Montagna", id: "montagna" },
+            { label: "Costa", id: "costa" },
+            { label: "Palude", id: "palude" },
+            { label: "Tundra", id: "tundra" },
+            { label: "Sottosuolo", id: "sottosuolo" }
+        ],
+        "Bioma"
     );
-    await tp.file.move(`Mondo/Luoghi/${name}`);
+    const mondo = await helpers.chooseNoteByFrontmatter(tp, "categoria", "mondo", "Mondo del luogo");
+    const luogoPadre = await helpers.chooseNoteByPath(tp, "Mondi/Luoghi", "Luogo o regione superiore");
+    const governante = await helpers.chooseNoteByPath(tp, "Mondi/Personaggi", "Governante o referente");
+    const pericolo = await helpers.promptOptional(tp, "Pericolo da 0 a 10");
+    await tp.file.move(`Mondi/Luoghi/${name}`);
 
     return `---
 id: ${id}
 nome: ${helpers.yamlQuote(name)}
 categoria: luogo
-tipo: ${locationType}
-tipologia: ${locationType}
-bioma: ${biome}
+tipo: ${selectedType?.id ?? ""}
+tipologia: ${selectedType?.id ?? ""}
+bioma: ${selectedBiome?.id ?? ""}
 stato: bozza
 canonico: false
-luogo_padre:
-governante:
+mondo: ${mondo}
+luogo_padre: ${luogoPadre}
+governante: ${governante}
 popolazione:
 stabilita:
-pericolo:
+pericolo: ${pericolo}
 hp_massimi:
 hp_attuali:
 fazioni: []

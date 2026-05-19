@@ -9,7 +9,7 @@ cssclasses:
 
 ```dataview
 TABLE data, data_mondo, stato, luoghi, personaggi, creature
-FROM "Mondo/Sessioni"
+FROM "Mondi/Sessioni"
 WHERE stato = "pronto" OR stato = "preparazione"
 SORT data DESC
 LIMIT 1
@@ -90,7 +90,7 @@ actions:
 
 ```dataview
 TABLE ruolo, luogo, atteggiamento
-FROM "Mondo/Personaggi"
+FROM "Mondi/Personaggi"
 WHERE tipo = "png" AND stato = "in gioco"
 SORT nome ASC
 ```
@@ -99,7 +99,7 @@ SORT nome ASC
 
 ```dataview
 TABLE giocatore, classe, livello, hp_attuali, hp_massimi
-FROM "Mondo/Personaggi"
+FROM "Mondi/Personaggi"
 WHERE tipo = "pg"
 SORT nome ASC
 ```
@@ -110,7 +110,7 @@ SORT nome ASC
 
 ```dataview
 TABLE luogo, pericolo, creature
-FROM "Mondo/Incontri"
+FROM "Mondi/Incontri"
 WHERE stato = "pronto" OR stato = "in gioco"
 SORT pericolo DESC
 ```
@@ -119,7 +119,7 @@ SORT pericolo DESC
 
 ```dataview
 TABLE tipo, rarita, luogo
-FROM "Mondo/Oggetti"
+FROM "Mondi/Oggetti"
 WHERE !proprietario AND stato != "archiviata"
 SORT rarita ASC
 ```
@@ -128,7 +128,7 @@ SORT rarita ASC
 
 ```dataview
 TABLE tipo, luogo, personaggi
-FROM "Mondo/Dispense"
+FROM "Mondi/Dispense"
 WHERE stato = "pronto"
 SORT nome ASC
 ```
