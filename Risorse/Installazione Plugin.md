@@ -42,12 +42,12 @@ Questa pagina serve al primo avvio del vault. Installa e abilita i plugin obblig
 | Generatore di Contenuti Fantasy | Spunti rapidi in italiano | Devi creare gli spunti a mano |
 | Icon Folder | Icone su cartelle e note | Cambia solo l'orientamento visuale |
 | Tabs | Sezioni a schede nei template lunghi | Il contenuto resta leggibile in sequenza |
+| Style Settings | Regolazioni visuali di Minimal e dello snippet GDR | Il preset funziona, ma non puoi modificarlo da interfaccia |
 
 ## Opzionali
 
 - Advanced Tables: comodo per modificare tabelle Markdown.
 - Emoji Toolbar: solo supporto visuale.
-- Style Settings: utile se vuoi regolare tema e snippet.
 - Hex Cartographer e TTRPG Tools: Maps: utili solo se usi mappe dedicate.
 - Iron Vault: usalo solo per campagne Ironsworn o Starforged.
 - BRAT: solo per manutenzione o plugin non pubblicati.

@@ -14,6 +14,7 @@ cssclasses:
 - [[Risorse/Sviluppo Vault]]
 - [[Risorse/Preparazione Sessione]]
 - [[Risorse/Plugin Attivi]]
+- [[Risorse/Aspetto Vault]]
 - [[Risorse/Integrazioni Plugin]]
 - [[Risorse/Callout GDR]]
 - [[SRD/SRD]]

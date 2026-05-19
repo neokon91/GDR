@@ -2,6 +2,75 @@
 name: GDR Vault
 id: gdr-vault
 settings:
+  - id: gdr-style
+    title: GDR Vault
+    type: heading
+    level: 1
+    collapsed: false
+  - id: gdr-palette
+    title: Palette
+    type: class-select
+    default: gdr-palette-scriptorium
+    options:
+      - label: Scriptorium
+        value: gdr-palette-scriptorium
+      - label: Bosco
+        value: gdr-palette-bosco
+      - label: Crepuscolo
+        value: gdr-palette-crepuscolo
+      - label: Minimal accent
+        value: gdr-palette-minimal
+  - id: gdr-interface
+    title: Interface
+    type: heading
+    level: 2
+    collapsed: false
+  - id: gdr-readable-width
+    title: Note width
+    type: variable-number-slider
+    default: 1120
+    format: px
+    min: 760
+    max: 1320
+    step: 40
+  - id: gdr-dashboard-density
+    title: Dashboard density
+    type: variable-select
+    default: 0.75rem
+    options:
+      - label: Compact
+        value: 0.55rem
+      - label: Comfortable
+        value: 0.75rem
+      - label: Spacious
+        value: 0.95rem
+  - id: gdr-table-density
+    title: Table density
+    type: variable-select
+    default: 0.42rem
+    options:
+      - label: Compact
+        value: 0.28rem
+      - label: Comfortable
+        value: 0.42rem
+      - label: Spacious
+        value: 0.58rem
+  - id: gdr-card-depth
+    title: Card depth
+    type: variable-select
+    default: 0 8px 22px rgba(0, 0, 0, 0.08)
+    options:
+      - label: Flat
+        value: none
+      - label: Soft
+        value: 0 8px 22px rgba(0, 0, 0, 0.08)
+      - label: Raised
+        value: 0 14px 34px rgba(0, 0, 0, 0.14)
+  - id: gdr-callouts
+    title: Callouts
+    type: heading
+    level: 2
+    collapsed: true
   - id: gdr-callout-density
     title: Callout density
     type: variable-select
@@ -18,15 +87,51 @@ settings:
 :root {
   --gdr-radius: 6px;
   --gdr-radius-soft: 4px;
-  --gdr-border: color-mix(in srgb, var(--text-muted) 22%, transparent);
+  --gdr-readable-width: 1120px;
+  --gdr-dashboard-density: 0.75rem;
+  --gdr-table-density: 0.42rem;
+  --gdr-card-depth: 0 8px 22px rgba(0, 0, 0, 0.08);
+  --gdr-accent-rgb: 74, 126, 139;
+  --gdr-warm-rgb: 177, 128, 67;
+  --gdr-danger-rgb: 174, 75, 63;
+  --gdr-nature-rgb: 91, 130, 86;
+  --gdr-mystic-rgb: 124, 94, 157;
+  --gdr-border: color-mix(in srgb, var(--text-muted) 20%, transparent);
   --gdr-surface: color-mix(in srgb, var(--background-secondary) 78%, transparent);
   --gdr-surface-strong: color-mix(in srgb, var(--background-secondary) 92%, var(--background-primary));
-  --gdr-accent-soft: color-mix(in srgb, var(--interactive-accent) 14%, transparent);
-  --gdr-accent-line: color-mix(in srgb, var(--interactive-accent) 45%, transparent);
-  --gdr-shadow: 0 8px 22px rgba(0, 0, 0, 0.08);
+  --gdr-accent-soft: color-mix(in srgb, rgb(var(--gdr-accent-rgb)) 13%, transparent);
+  --gdr-accent-line: color-mix(in srgb, rgb(var(--gdr-accent-rgb)) 48%, transparent);
+  --gdr-shadow: var(--gdr-card-depth);
   --gdr-callout-density: 0.85rem;
   --gdr-callout-title-bg: color-mix(in srgb, rgb(var(--callout-color)) 14%, var(--background-secondary));
   --gdr-callout-body-bg: color-mix(in srgb, rgb(var(--callout-color)) 6%, var(--background-primary));
+}
+
+body.gdr-palette-bosco {
+  --gdr-accent-rgb: 91, 130, 86;
+  --gdr-warm-rgb: 174, 138, 72;
+  --gdr-danger-rgb: 160, 76, 65;
+  --gdr-nature-rgb: 78, 138, 113;
+  --gdr-mystic-rgb: 112, 98, 151;
+}
+
+body.gdr-palette-crepuscolo {
+  --gdr-accent-rgb: 92, 119, 166;
+  --gdr-warm-rgb: 190, 126, 70;
+  --gdr-danger-rgb: 180, 76, 80;
+  --gdr-nature-rgb: 86, 130, 113;
+  --gdr-mystic-rgb: 132, 91, 155;
+}
+
+body.gdr-palette-minimal {
+  --gdr-accent-soft: color-mix(in srgb, var(--interactive-accent) 14%, transparent);
+  --gdr-accent-line: color-mix(in srgb, var(--interactive-accent) 45%, transparent);
+}
+
+body.theme-dark {
+  --gdr-border: color-mix(in srgb, var(--text-muted) 26%, transparent);
+  --gdr-surface: color-mix(in srgb, var(--background-secondary) 84%, transparent);
+  --gdr-surface-strong: color-mix(in srgb, var(--background-secondary) 86%, var(--background-primary));
 }
 
 .markdown-preview-view,
@@ -67,6 +172,13 @@ settings:
   font-size: 0.92em;
 }
 
+.markdown-rendered .dataview.table-view-table th,
+.markdown-rendered .dataview.table-view-table td,
+.markdown-rendered table th,
+.markdown-rendered table td {
+  padding-block: var(--gdr-table-density);
+}
+
 .markdown-rendered .dataview.table-view-table th {
   background: color-mix(in srgb, var(--background-secondary) 82%, var(--background-primary));
   border-bottom: 1px solid var(--gdr-border);
@@ -90,6 +202,7 @@ settings:
   border-radius: var(--gdr-radius) !important;
   min-height: 2.15rem;
   font-weight: 650;
+  transition: border-color 120ms ease, background-color 120ms ease, transform 120ms ease;
 }
 
 .callout {
@@ -163,22 +276,22 @@ settings:
 }
 
 .callout[data-callout="scena"] {
-  --callout-color: 83, 119, 161;
+  --callout-color: var(--gdr-accent-rgb);
   --callout-icon: lucide-clapperboard;
 }
 
 .callout[data-callout="indizio"] {
-  --callout-color: 196, 143, 54;
+  --callout-color: var(--gdr-warm-rgb);
   --callout-icon: lucide-search;
 }
 
 .callout[data-callout="segreto"] {
-  --callout-color: 127, 92, 160;
+  --callout-color: var(--gdr-mystic-rgb);
   --callout-icon: lucide-key-round;
 }
 
 .callout[data-callout="incontro"] {
-  --callout-color: 166, 72, 64;
+  --callout-color: var(--gdr-danger-rgb);
   --callout-icon: lucide-swords;
 }
 
@@ -188,17 +301,17 @@ settings:
 }
 
 .callout[data-callout="png"] {
-  --callout-color: 73, 138, 126;
+  --callout-color: var(--gdr-nature-rgb);
   --callout-icon: lucide-user-round;
 }
 
 .callout[data-callout="luogo"] {
-  --callout-color: 91, 130, 86;
+  --callout-color: var(--gdr-nature-rgb);
   --callout-icon: lucide-map-pin;
 }
 
 .callout[data-callout="missione"] {
-  --callout-color: 74, 112, 168;
+  --callout-color: var(--gdr-accent-rgb);
   --callout-icon: lucide-scroll-text;
 }
 
@@ -213,7 +326,7 @@ settings:
 }
 
 .callout[data-callout="pericolo"] {
-  --callout-color: 181, 76, 58;
+  --callout-color: var(--gdr-danger-rgb);
   --callout-icon: lucide-triangle-alert;
 }
 
@@ -437,7 +550,7 @@ body .markdown-source-view.tavolo {
 
 .markdown-preview-view.dashboard .markdown-preview-sizer,
 .markdown-source-view.dashboard .cm-contentContainer {
-  max-width: 1240px;
+  max-width: min(1240px, var(--gdr-readable-width));
   margin-inline: auto;
 }
 
@@ -448,8 +561,9 @@ body .markdown-source-view.tavolo {
   border-left: 5px solid var(--gdr-accent-line);
   border-radius: var(--gdr-radius);
   background:
-    linear-gradient(90deg, var(--gdr-accent-soft), transparent 55%),
+    linear-gradient(90deg, var(--gdr-accent-soft), transparent 58%),
     var(--gdr-surface);
+  box-shadow: var(--gdr-shadow);
 }
 
 .markdown-preview-view.dashboard h2 {
@@ -526,7 +640,7 @@ body .markdown-source-view.tavolo {
 
 .markdown-preview-view.dashboard .dataview.table-view-table th,
 .markdown-preview-view.dashboard .dataview.table-view-table td {
-  padding: 0.35rem 0.5rem;
+  padding: var(--gdr-table-density) 0.55rem;
 }
 
 .markdown-preview-view.dashboard .dataview.table-view-table tbody tr:hover {
@@ -536,7 +650,7 @@ body .markdown-source-view.tavolo {
 .gdr-stat-grid,
 .gdr-card-grid {
   display: grid;
-  gap: 0.75rem;
+  gap: var(--gdr-dashboard-density);
   margin-block: 0.75rem 1rem;
 }
 
@@ -557,6 +671,7 @@ body .markdown-source-view.tavolo {
   border: 1px solid var(--gdr-border);
   border-radius: var(--gdr-radius);
   background: var(--gdr-surface);
+  box-shadow: var(--gdr-shadow);
   transition: border-color 120ms ease, background 120ms ease, transform 120ms ease;
 }
 
@@ -568,7 +683,17 @@ body .markdown-source-view.tavolo {
 }
 
 .gdr-stat-card {
-  padding: 0.75rem;
+  position: relative;
+  overflow: hidden;
+  padding: var(--gdr-dashboard-density);
+}
+
+.gdr-stat-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 3px;
+  background: var(--gdr-accent-line);
 }
 
 .gdr-stat-value {
@@ -591,7 +716,7 @@ body .markdown-source-view.tavolo {
 }
 
 .gdr-info-card {
-  padding: 0.8rem;
+  padding: calc(var(--gdr-dashboard-density) + 0.05rem);
 }
 
 .gdr-info-card.compact {
@@ -614,7 +739,7 @@ body .markdown-source-view.tavolo {
 .gdr-flow {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
-  gap: 0.65rem;
+  gap: var(--gdr-dashboard-density);
   margin-block: 0.85rem 1.1rem;
 }
 
@@ -624,6 +749,7 @@ body .markdown-source-view.tavolo {
   border-radius: var(--gdr-radius);
   padding: 0.7rem 0.8rem;
   background: var(--gdr-surface);
+  box-shadow: var(--gdr-shadow);
 }
 
 .gdr-flow-label {
@@ -669,7 +795,7 @@ body .markdown-source-view.tavolo {
 
 .markdown-preview-view.indice .markdown-preview-sizer,
 .markdown-source-view.indice .cm-contentContainer {
-  max-width: 1120px;
+  max-width: var(--gdr-readable-width);
   margin-inline: auto;
 }
 
@@ -704,7 +830,25 @@ body .markdown-source-view.tavolo {
 
 .markdown-preview-view.indice .dataview.table-view-table th,
 .markdown-preview-view.indice .dataview.table-view-table td {
-  padding: 0.35rem 0.5rem;
+  padding: var(--gdr-table-density) 0.55rem;
+}
+
+.tabs-container {
+  border-radius: var(--gdr-radius);
+}
+
+.tabs-container:not(.tabs-innertabs) {
+  background: color-mix(in srgb, var(--background-secondary) 42%, transparent);
+}
+
+.tabs-container > .tabs-nav > .tabs-nav-item-wrapper > .tabs-nav-item {
+  font-weight: 650;
+}
+
+.workspace-leaf-content[data-type="markdown"] .view-content {
+  background:
+    linear-gradient(180deg, color-mix(in srgb, rgb(var(--gdr-accent-rgb)) 4%, transparent), transparent 18rem),
+    var(--background-primary);
 }
 
 @media (min-width: 900px) {

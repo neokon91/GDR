@@ -31,13 +31,13 @@ Per il primo avvio usa [[Risorse/Installazione Plugin]]. Se una funzione non ris
 - **Generatore di Contenuti Fantasy**: genera in italiano nomi, locande, insediamenti, gruppi, bottini e dungeon; puo copiare i risultati o salvarli come note bozza in `Inbox/Generati`, gia compatibili con i campi principali dei template del vault.
 - **Icon Folder**: rende cartelle e pagine piu riconoscibili con icone.
 - **Tabs**: organizza viste, dashboard e template lunghi in schede, utile per tenere separate sezioni come scaletta, collegamenti, creature, resoconto e ricompense.
+- **Style Settings**: regola Minimal e lo snippet `gdr-vault` senza modificare CSS a mano.
 - **TTRPG Tools: Maps**: gestisce mappe tattiche e riferimenti visuali quando servono al tavolo.
 
 ## Opzionali
 
 - **Advanced Tables**: rende piu comodo modificare tabelle di bottino, incontri, calendari o liste.
 - **Emoji Toolbar**: aggiunge simboli quando vuoi rendere piu leggibili etichette e appunti.
-- **Style Settings**: permette di regolare aspetti visuali dei temi e degli snippet senza modificare CSS a mano.
 - **Iron Vault**: utile solo se giochi o prepari materiale per Ironsworn/Starforged; non va imposto al flusso D&D.
 - **BRAT**: permette di provare plugin non ancora installati in modo normale. Usalo solo se sai perche ti serve.
 
@@ -61,4 +61,4 @@ Usa i plugin solo se aiutano a fare una cosa concreta:
 - ricordare;
 - aggiornare dopo la sessione.
 
-Per decidere cosa sviluppare dopo, usa [[Risorse/Integrazioni Plugin]].
+Per regolare l'aspetto del vault, usa [[Risorse/Aspetto Vault]]. Per decidere cosa sviluppare dopo, usa [[Risorse/Integrazioni Plugin]].
