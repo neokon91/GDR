@@ -1,34 +1,40 @@
 # Plugin Attivi
 
-Questa pagina spiega cosa puoi sfruttare nel vault senza dover conoscere i dettagli tecnici dei plugin.
+Questa pagina spiega cosa puoi sfruttare nel vault senza dover conoscere i dettagli tecnici dei plugin. I plugin sono divisi per uso pratico: cosa serve sempre, cosa aiuta durante il gioco, cosa sostiene il worldbuilding e cosa e comodo ma non indispensabile.
 
-## Per Creare Note
+## Essenziali
 
-- **Templater**: crea campagne, sessioni, PNG, luoghi, missioni, incontri, oggetti e note rapide gia strutturate.
-- **Meta Bind**: rende disponibili pulsanti, menu, liste e slider dentro le note.
-- **Homepage**: apre la dashboard all'avvio.
+- **Dataview**: mostra automaticamente prossime sessioni, missioni aperte, PNG in gioco, materiale pronto e bozze da completare.
+- **Templater**: crea note gia impostate per campagne, sessioni, PNG, luoghi, missioni, incontri, oggetti e appunti rapidi.
+- **Meta Bind**: aggiunge pulsanti, campi e selettori dentro le note, cosi puoi aggiornare il vault senza cercare menu nascosti.
+- **JS Engine**: sostiene alcune parti dinamiche delle dashboard e dei controlli del vault.
+- **Metadata Menu**: aiuta a mantenere ordinati i campi delle note, come stato, tipo, luogo e collegamenti.
+- **Folder Notes**: rende le cartelle principali consultabili come pagine indice.
+- **Homepage**: apre la dashboard principale quando avvii il vault.
 
-## Per Vedere Il Mondo
+## GDR Al Tavolo
 
-- **Dataview**: mostra tabelle, liste e carte automatiche.
-- **Folder Notes**: trasforma le cartelle principali in indici navigabili.
-- **Icon Folder**: rende cartelle e pagine piu riconoscibili con icone.
-- **Metadata Menu**: aiuta a tenere ordinati i campi delle note.
-
-## Per Giocare Al Tavolo
-
-- **Kanban**: usa bacheche per preparazione, creature e post-sessione.
-- **Callout Manager**: usa blocchi colorati per scene, indizi, segreti, incontri, pericoli e ricompense.
+- **Kanban**: gestisce bacheche per preparazione, creature e post-sessione.
+- **Callout Manager**: rende riconoscibili scene, indizi, segreti, incontri, pericoli, ricompense e testi da leggere.
 - **Fantasy Statblocks**: mostra schede creature e mostri.
-- **Media Extended**: gestisce audio e video utili durante il gioco.
-- **Calendarium**: tiene traccia di date del mondo, feste e scadenze narrative.
+- **Dice Roller**: tira dadi direttamente dal vault quando serve una prova o una tabella casuale.
+- **Initiative Tracker**: tiene l'ordine di iniziativa durante gli incontri.
+- **Media Extended**: gestisce audio e video per atmosfera, appunti multimediali e risorse da usare al tavolo.
+- **Calendarium**: tiene traccia di date del mondo, feste, scadenze narrative e passaggio del tempo.
 
-## Per Scrivere Meglio
+## Worldbuilding
 
-- **Table Editor**: modifica tabelle in modo piu comodo.
-- **Emoji Toolbar**: aggiunge simboli quando servono per etichette o note leggere.
-- **Fantasy Content Generator**: puo aiutare con spunti fantasy, nomi e materiale improvvisato.
-- **JS Engine**: supporta viste dinamiche avanzate usate dal vault.
+- **Excalidraw**: disegna mappe, relazioni tra fazioni, schemi di dungeon, fronti e scene complesse.
+- **Hex Cartographer**: crea o consulta mappe esagonali per viaggi, regioni e terre selvagge.
+- **Fantasy Content Generator**: offre spunti fantasy, nomi, luoghi e dettagli utili quando devi riempire una bozza.
+- **Icon Folder**: rende cartelle e pagine piu riconoscibili con icone.
+- **Tabs**: organizza viste e dashboard in schede, utile per tenere separati DM, mondo e risorse.
+
+## Opzionali
+
+- **Table Editor**: rende piu comodo modificare tabelle di bottino, incontri, calendari o liste.
+- **Emoji Toolbar**: aggiunge simboli quando vuoi rendere piu leggibili etichette e appunti.
+- **BRAT**: permette di provare plugin non ancora installati in modo normale. Usalo solo se sai perche ti serve.
 
 ## Plugin Core Obsidian Da Sfruttare
 
@@ -42,7 +48,7 @@ Questa pagina spiega cosa puoi sfruttare nel vault senza dover conoscere i detta
 
 ## Regola Pratica
 
-Usa i plugin solo se aiutano il DM a fare una cosa concreta:
+Usa i plugin solo se aiutano a fare una cosa concreta:
 
 - preparare;
 - trovare;
