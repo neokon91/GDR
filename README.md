@@ -22,6 +22,7 @@ Apri [[1. DM Dashboard]] per preparare e giocare. Usa [[Worldbuilder Dashboard]]
 - `Mondi/Missioni`: incarichi, trame aperte e obiettivi.
 - `Mondi/Incontri`: scene di conflitto, ostacoli e combattimenti pronti.
 - `Risorse`: mappe, immagini, audio, video, tabelle e dispense generiche.
+- `SRD`: riferimento separato al System Reference Document 5.2.1 in italiano, generato dalla fork `neokon91/DND-SRD-IT`.
 - `Inbox`: idee grezze e appunti non ancora canonici.
 
 ## Mondi, Campagne e Contenuti
@@ -91,6 +92,7 @@ Vedi [[Risorse/Plugin Attivi]] per una lista orientata all'uso pratico.
 - Non lasciare link placeholder: crea la nota o trasforma il link in testo semplice.
 - Archivia invece di cancellare quando una nota ha valore storico.
 - Mantieni una sola lingua nei percorsi: cartelle e note indice in italiano.
+- Mantieni `SRD` separato dal contenuto canonico del mondo: usalo come riferimento regolamentare, non come parte dell'ambientazione.
 - Dopo modifiche ai template, crea una nota di prova e verifica che compaia in dashboard.
 - Prima di pubblicare modifiche importanti, esegui i test con CLI Obsidian descritti in [[Risorse/Sviluppo Vault]].
 - Per evolvere il vault senza renderlo tecnico, segui [[Risorse/Sviluppo Vault]].
