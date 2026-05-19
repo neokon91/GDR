@@ -30,7 +30,7 @@ actions:
 ```dataview
 TABLE data, data_mondo, stato, campagne, luoghi, personaggi
 FROM "Mondi/Sessioni"
-WHERE stato = "preparazione" OR stato = "pronto"
+WHERE (stato = "preparazione" OR stato = "pronto") AND !startswith(file.name, "Prova -")
 SORT data ASC
 LIMIT 1
 ```
@@ -64,7 +64,7 @@ LIMIT 1
 ```dataview
 TABLE stato, committente, luoghi, personaggi
 FROM "Mondi/Missioni"
-WHERE stato = "proposta" OR stato = "accettata" OR stato = "in corso"
+WHERE (stato = "proposta" OR stato = "accettata" OR stato = "in corso") AND !startswith(file.name, "Prova -")
 SORT stato ASC, nome ASC
 LIMIT 8
 ```
@@ -74,7 +74,7 @@ LIMIT 8
 ```dataview
 TABLE ruolo, stato, luogo, atteggiamento
 FROM "Mondi/Personaggi"
-WHERE tipo = "png" AND stato != "archiviata"
+WHERE tipo = "png" AND stato != "archiviata" AND !startswith(file.name, "Prova -")
 SORT stato ASC, nome ASC
 LIMIT 10
 ```
@@ -84,7 +84,7 @@ LIMIT 10
 ```dataview
 TABLE luogo, pericolo, creature
 FROM "Mondi/Incontri"
-WHERE stato = "pronto"
+WHERE stato = "pronto" AND !startswith(file.name, "Prova -")
 SORT pericolo DESC
 LIMIT 8
 ```
@@ -94,7 +94,7 @@ LIMIT 8
 ```dataview
 TABLE tipo, luogo, personaggi
 FROM "Mondi/Dispense"
-WHERE stato = "pronto"
+WHERE stato = "pronto" AND !startswith(file.name, "Prova -")
 SORT nome ASC
 LIMIT 8
 ```

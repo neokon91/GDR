@@ -9,7 +9,8 @@ Questa pagina mostra cosa richiede attenzione. Non e un controllo tecnico: serve
 ## Colpo D'Occhio
 
 ```dataviewjs
-const count = (source, predicate) => dv.pages(source).where(predicate).length;
+const isReal = p => !String(p.file.name).startsWith("Prova -");
+const count = (source, predicate) => dv.pages(source).where(p => isReal(p) && predicate(p)).length;
 const escapeHtml = value => String(value ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "\"": "&quot;", "'": "&#39;" }[c]));
 
 const cards = [
@@ -38,10 +39,10 @@ const escapeHtml = value => String(value ?? "").replace(/[&<>"']/g, c => ({ "&":
 const internalLink = file => `<a class="internal-link" data-href="${escapeHtml(file.path)}" href="${escapeHtml(file.path)}">${escapeHtml(file.name)}</a>`;
 
 const items = [
-  ...dv.pages('"Inbox"').where(p => p.file.name !== "Inbox" && !["smistata", "archiviata"].includes(p.stato)).map(p => [p, "Inbox"]).array(),
-  ...dv.pages('"Mondi/Sessioni"').where(p => p.stato === "preparazione").map(p => [p, "Sessione"]).array(),
-  ...dv.pages('"Mondi/Missioni"').where(p => ["proposta", "accettata", "in corso"].includes(p.stato)).map(p => [p, "Missione"]).array(),
-  ...dv.pages('"Mondi/Incontri"').where(p => p.stato === "bozza").map(p => [p, "Incontro"]).array()
+  ...dv.pages('"Inbox"').where(p => !String(p.file.name).startsWith("Prova -") && p.file.name !== "Inbox" && !["smistata", "archiviata"].includes(p.stato)).map(p => [p, "Inbox"]).array(),
+  ...dv.pages('"Mondi/Sessioni"').where(p => !String(p.file.name).startsWith("Prova -") && p.stato === "preparazione").map(p => [p, "Sessione"]).array(),
+  ...dv.pages('"Mondi/Missioni"').where(p => !String(p.file.name).startsWith("Prova -") && ["proposta", "accettata", "in corso"].includes(p.stato)).map(p => [p, "Missione"]).array(),
+  ...dv.pages('"Mondi/Incontri"').where(p => !String(p.file.name).startsWith("Prova -") && p.stato === "bozza").map(p => [p, "Incontro"]).array()
 ].slice(0, 10);
 
 if (!items.length) {
@@ -63,7 +64,7 @@ if (!items.length) {
 ```dataview
 TABLE tipo, stato, collegamenti
 FROM "Inbox"
-WHERE file.name != "Inbox" AND stato != "smistata" AND stato != "archiviata"
+WHERE file.name != "Inbox" AND stato != "smistata" AND stato != "archiviata" AND !startswith(file.name, "Prova -")
 SORT file.ctime DESC
 ```
 
@@ -72,7 +73,7 @@ SORT file.ctime DESC
 ```dataview
 TABLE data, data_mondo, stato, campagne, luoghi
 FROM "Mondi/Sessioni"
-WHERE stato = "preparazione"
+WHERE stato = "preparazione" AND !startswith(file.name, "Prova -")
 SORT data ASC
 ```
 
@@ -81,7 +82,7 @@ SORT data ASC
 ```dataview
 TABLE categoria, tipo, stato, luogo
 FROM "Mondi/Incontri" OR "Mondi/Dispense" OR "Mondi/Oggetti"
-WHERE stato = "pronto"
+WHERE stato = "pronto" AND !startswith(file.name, "Prova -")
 SORT categoria ASC, nome ASC
 ```
 
@@ -90,7 +91,7 @@ SORT categoria ASC, nome ASC
 ```dataview
 TABLE stato, committente, luoghi, personaggi
 FROM "Mondi/Missioni"
-WHERE stato = "proposta" OR stato = "accettata" OR stato = "in corso"
+WHERE (stato = "proposta" OR stato = "accettata" OR stato = "in corso") AND !startswith(file.name, "Prova -")
 SORT stato ASC, nome ASC
 ```
 
@@ -99,7 +100,7 @@ SORT stato ASC, nome ASC
 ```dataview
 TABLE ruolo, luogo, atteggiamento
 FROM "Mondi/Personaggi"
-WHERE tipo = "png" AND stato = "in gioco"
+WHERE tipo = "png" AND stato = "in gioco" AND !startswith(file.name, "Prova -")
 SORT nome ASC
 ```
 
@@ -108,7 +109,7 @@ SORT nome ASC
 ```dataview
 TABLE categoria, tipo, stato
 FROM "Mondi" OR "Campagne"
-WHERE stato = "bozza"
+WHERE stato = "bozza" AND !startswith(file.name, "Prova -")
 SORT categoria ASC, nome ASC
 ```
 
@@ -143,7 +144,7 @@ const isFolderIndex = p => {
   return parts.length > 1 && parts[parts.length - 1] === parts[parts.length - 2];
 };
 
-const isServicePage = p => isFolderIndex(p) || p.file.path === "Mondi/Calendario.md";
+const isServicePage = p => isFolderIndex(p) || p.file.path === "Mondi/Calendario.md" || String(p.file.name).startsWith("Prova -");
 
 const pages = dv.pages('"Mondi" OR "Campagne" OR "Inbox"')
   .where(p => !isServicePage(p) && p.stato && !statiValidi.has(p.stato));
@@ -164,7 +165,7 @@ const isFolderIndex = p => {
   return parts.length > 1 && parts[parts.length - 1] === parts[parts.length - 2];
 };
 
-const isServicePage = p => isFolderIndex(p) || p.file.path === "Mondi/Calendario.md";
+const isServicePage = p => isFolderIndex(p) || p.file.path === "Mondi/Calendario.md" || String(p.file.name).startsWith("Prova -");
 
 const pages = dv.pages('"Mondi" OR "Campagne" OR "Inbox"')
   .where(p => !isServicePage(p) && (!p.categoria || !p.stato));
@@ -181,16 +182,16 @@ if (!pages.length) {
 ```dataviewjs
 const rows = [
   ...dv.pages('"Mondi/Incontri"')
-    .where(p => p.stato === "pronto" && !dv.array(p.creature).length)
+    .where(p => !String(p.file.name).startsWith("Prova -") && p.stato === "pronto" && !dv.array(p.creature).length)
     .map(p => [p.file.link, "Incontro pronto senza creature"]).array(),
   ...dv.pages('"Mondi/Missioni"')
-    .where(p => ["proposta", "accettata", "in corso"].includes(p.stato) && !p.committente)
+    .where(p => !String(p.file.name).startsWith("Prova -") && ["proposta", "accettata", "in corso"].includes(p.stato) && !p.committente)
     .map(p => [p.file.link, "Missione aperta senza committente"]).array(),
   ...dv.pages('"Mondi/Personaggi"')
-    .where(p => p.tipo === "png" && p.stato === "in gioco" && !p.luogo)
+    .where(p => !String(p.file.name).startsWith("Prova -") && p.tipo === "png" && p.stato === "in gioco" && !p.luogo)
     .map(p => [p.file.link, "PNG in gioco senza luogo"]).array(),
   ...dv.pages('"Mondi/Sessioni"')
-    .where(p => p.stato === "pronto" && (!dv.array(p.luoghi).length || !dv.array(p.personaggi).length))
+    .where(p => !String(p.file.name).startsWith("Prova -") && p.stato === "pronto" && (!dv.array(p.luoghi).length || !dv.array(p.personaggi).length))
     .map(p => [p.file.link, "Sessione pronta senza luoghi o personaggi"]).array()
 ];
 

@@ -20,7 +20,7 @@ actions:
 ```dataview
 TABLE tipo, stato, size AS taglia, cr, luoghi
 FROM "Mondi/Creature"
-WHERE file.name != "Creature" AND stato != "archiviata"
+WHERE file.name != "Creature" AND stato != "archiviata" AND !startswith(file.name, "Prova -")
 SORT cr ASC, nome ASC
 ```
 
@@ -29,6 +29,6 @@ SORT cr ASC, nome ASC
 ```dataview
 TABLE tipo, cr, luoghi
 FROM "Mondi/Creature"
-WHERE file.name != "Creature"
+WHERE file.name != "Creature" AND stato != "archiviata" AND !startswith(file.name, "Prova -")
 SORT luoghi ASC, cr ASC
 ```

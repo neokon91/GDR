@@ -36,7 +36,7 @@ actions:
 ```dataview
 TABLE stato, tono, tema, tecnologia, magia, campagne
 FROM "Mondi"
-WHERE categoria = "mondo"
+WHERE categoria = "mondo" AND stato != "archiviata" AND !startswith(file.name, "Prova -")
 SORT stato ASC, nome ASC
 ```
 
@@ -45,7 +45,7 @@ SORT stato ASC, nome ASC
 ```dataview
 TABLE tono, tema, tecnologia, magia
 FROM "Mondi"
-WHERE categoria = "mondo" AND stato = "bozza"
+WHERE categoria = "mondo" AND stato = "bozza" AND !startswith(file.name, "Prova -")
 SORT nome ASC
 ```
 
@@ -54,7 +54,7 @@ SORT nome ASC
 ```dataview
 TABLE tono, tema, campagne, canonico
 FROM "Mondi"
-WHERE categoria = "mondo" AND stato = "pronto"
+WHERE categoria = "mondo" AND stato = "pronto" AND !startswith(file.name, "Prova -")
 SORT nome ASC
 ```
 
@@ -65,7 +65,7 @@ SORT nome ASC
 ```dataview
 TABLE mondo, tipo, stato, bioma, luogo_padre
 FROM "Mondi/Luoghi"
-WHERE file.name != "Luoghi"
+WHERE file.name != "Luoghi" AND stato != "archiviata" AND !startswith(file.name, "Prova -")
 SORT mondo ASC, nome ASC
 LIMIT 16
 ```
@@ -75,7 +75,7 @@ LIMIT 16
 ```dataview
 TABLE mondo, tipo, ruolo, stato, luogo
 FROM "Mondi/Personaggi"
-WHERE file.name != "Personaggi"
+WHERE file.name != "Personaggi" AND stato != "archiviata" AND !startswith(file.name, "Prova -")
 SORT mondo ASC, nome ASC
 LIMIT 16
 ```
@@ -85,7 +85,7 @@ LIMIT 16
 ```dataview
 TABLE mondo, categoria, tipo, stato
 FROM "Mondi/Fazioni" OR "Mondi/Religioni"
-WHERE file.name != "Fazioni" AND file.name != "Religioni"
+WHERE file.name != "Fazioni" AND file.name != "Religioni" AND stato != "archiviata" AND !startswith(file.name, "Prova -")
 SORT mondo ASC, categoria ASC, nome ASC
 LIMIT 16
 ```
@@ -95,7 +95,7 @@ LIMIT 16
 ```dataview
 TABLE mondo, tipo, stato, cr, luoghi
 FROM "Mondi/Creature"
-WHERE file.name != "Creature"
+WHERE file.name != "Creature" AND stato != "archiviata" AND !startswith(file.name, "Prova -")
 SORT mondo ASC, nome ASC
 LIMIT 16
 ```
@@ -105,7 +105,7 @@ LIMIT 16
 ```dataview
 TABLE mondo, categoria, tipo, stato, luogo
 FROM "Mondi/Oggetti" OR "Mondi/Dispense"
-WHERE file.name != "Oggetti" AND file.name != "Dispense"
+WHERE file.name != "Oggetti" AND file.name != "Dispense" AND stato != "archiviata" AND !startswith(file.name, "Prova -")
 SORT mondo ASC, categoria ASC, nome ASC
 LIMIT 16
 ```
@@ -115,7 +115,7 @@ LIMIT 16
 ```dataview
 TABLE mondo, stato, committente, luoghi, personaggi
 FROM "Mondi/Missioni"
-WHERE file.name != "Missioni"
+WHERE file.name != "Missioni" AND stato != "archiviata" AND !startswith(file.name, "Prova -")
 SORT mondo ASC, stato ASC, nome ASC
 LIMIT 16
 ```

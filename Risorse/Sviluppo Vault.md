@@ -48,6 +48,28 @@ Usa pochi stati e usali sempre nello stesso modo.
 
 Tutte le entità che lo richiedono avranno anche altri `stato_attuale` come, ad esempio, per PNG `morto`, `vivo` ecc.
 
+## Note Di Prova
+
+Le note di prova sono contenuti finti usati per controllare che template, automazioni, Dataview, callout e CSS funzionino insieme.
+
+Regole:
+
+- nome con prefisso `Prova -`;
+- `stato: archiviata`, quando il campo esiste;
+- `canonico: false`, quando il campo ha senso;
+- collegamenti realistici tra mondo, PNG, luoghi, fazioni, missioni, incontri e oggetti;
+- raccolta centrale in [[Risorse/Prove Entità]];
+- esclusione da dashboard, indici operativi e controlli di preparazione.
+
+Le prove non devono guidare il gioco. Devono solo mostrare se una modifica rompe qualcosa o se un template produce note leggibili.
+
+Quando aggiungi o cambi un template importante:
+
+- crea una nota reale solo se serve al tavolo;
+- crea o aggiorna una nota `Prova - ...` per collaudare il formato;
+- controlla che la nota di prova non compaia nelle viste operative;
+- controlla che compaia invece in [[Risorse/Prove Entità]].
+
 ## Dove Vanno Le Cose
 - Idee vaghe: [[Inbox/Inbox]]
 - Appunti live: [[Durante il Gioco]]
@@ -90,6 +112,8 @@ Prima di aggiungere una funzione, chiedi:
 - Appare in una vista utile?
 - Crea nuove cartelle solo quando servono davvero?
 - Non crea doppioni di cartelle o concetti?
+- Esiste una nota di prova se la funzione cambia un template o una vista importante?
+- Le note di prova sono filtrate fuori da dashboard e indici operativi?
 
 ## Cosa Evitare
 
@@ -98,6 +122,7 @@ Prima di aggiungere una funzione, chiedi:
 - Template lunghi prima che il contenuto serva davvero.
 - Nomi misti italiano/inglese.
 - Automatismi invisibili che sorprendono l'utente.
+- Note di prova visibili nelle viste di gioco.
 
 ## Priorita Future
 1. Worldbuilding

@@ -20,7 +20,7 @@ actions:
 ```dataview
 TABLE tipo, sottotipo, stato, templi, fazioni
 FROM "Mondi/Religioni"
-WHERE file.name != "Religioni"
+WHERE file.name != "Religioni" AND stato != "archiviata" AND !startswith(file.name, "Prova -")
 SORT sottotipo ASC, nome ASC
 ```
 
@@ -29,6 +29,6 @@ SORT sottotipo ASC, nome ASC
 ```dataview
 TABLE tipo, stato, luogo_padre
 FROM "Mondi/Luoghi"
-WHERE tipo = "tempio"
+WHERE tipo = "tempio" AND stato != "archiviata" AND !startswith(file.name, "Prova -")
 SORT nome ASC
 ```

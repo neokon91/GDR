@@ -43,6 +43,20 @@ Campi utili solo quando servono:
 - `ricompense`
 - `sessioni`
 
+## Note Di Prova
+
+Ogni categoria importante può avere una nota `Prova - ...`. Serve a vedere subito se template, campi, collegamenti, callout, CSS e Dataview reggono.
+
+Queste note non sono contenuto di gioco:
+
+- stanno nelle cartelle reali della categoria che rappresentano;
+- usano `stato: archiviata`;
+- usano `canonico: false` quando ha senso;
+- sono raccolte in [[Risorse/Prove Entità]];
+- non devono apparire in dashboard, preparazione sessione o indici operativi.
+
+Quando una nuova categoria o un nuovo template diventa stabile, aggiungi o aggiorna la relativa nota di prova. Non serve farlo per idee speculative o template non ancora usati.
+
 ## Essenziale Ora
 
 Queste categorie sono già centrali per preparare e giocare.

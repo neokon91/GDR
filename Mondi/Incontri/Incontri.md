@@ -20,7 +20,7 @@ actions:
 ```dataview
 TABLE stato, luogo, pericolo, creature, personaggi
 FROM "Mondi/Incontri"
-WHERE stato = "pronto" OR stato = "in gioco"
+WHERE (stato = "pronto" OR stato = "in gioco") AND !startswith(file.name, "Prova -")
 SORT pericolo DESC, nome ASC
 ```
 
@@ -29,7 +29,7 @@ SORT pericolo DESC, nome ASC
 ```dataview
 TABLE luogo, pericolo, creature
 FROM "Mondi/Incontri"
-WHERE stato = "bozza"
+WHERE stato = "bozza" AND !startswith(file.name, "Prova -")
 SORT pericolo DESC, nome ASC
 ```
 
@@ -38,6 +38,6 @@ SORT pericolo DESC, nome ASC
 ```dataview
 TABLE stato, luogo, pericolo, creature
 FROM "Mondi/Incontri"
-WHERE file.name != "Incontri"
+WHERE file.name != "Incontri" AND stato != "archiviata" AND !startswith(file.name, "Prova -")
 SORT stato ASC, pericolo DESC
 ```

@@ -18,17 +18,17 @@ actions:
 ## In Gioco
 
 ```dataview
-TABLE tipo, stato, leader, luoghi, alleati, nemici
+TABLE tipo, stato, leader, luoghi, personaggi
 FROM "Mondi/Fazioni"
-WHERE file.name != "Fazioni" AND stato != "archiviata"
+WHERE file.name != "Fazioni" AND stato != "archiviata" AND !startswith(file.name, "Prova -")
 SORT stato ASC, nome ASC
 ```
 
 ## Conflitti
 
 ```dataview
-TABLE leader, alleati, nemici
+TABLE leader, personaggi, luoghi
 FROM "Mondi/Fazioni"
-WHERE length(nemici) > 0
+WHERE length(personaggi) > 0 AND stato != "archiviata" AND !startswith(file.name, "Prova -")
 SORT nome ASC
 ```

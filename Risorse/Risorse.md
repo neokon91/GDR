@@ -26,7 +26,7 @@ cssclasses:
 ```dataview
 LIST
 FROM "Risorse/Mappe"
-WHERE file.name != "Mappe"
+WHERE file.name != "Mappe" AND !startswith(file.name, "Prova -")
 SORT file.name ASC
 ```
 
@@ -35,7 +35,7 @@ SORT file.name ASC
 ```dataview
 LIST
 FROM "Risorse/Immagini"
-WHERE file.name != "Immagini"
+WHERE file.name != "Immagini" AND !startswith(file.name, "Prova -")
 SORT file.name ASC
 ```
 
@@ -44,7 +44,7 @@ SORT file.name ASC
 ```dataview
 LIST
 FROM "Risorse/Audio"
-WHERE file.name != "Audio"
+WHERE file.name != "Audio" AND !startswith(file.name, "Prova -")
 SORT file.name ASC
 ```
 
@@ -53,7 +53,7 @@ SORT file.name ASC
 ```dataview
 LIST
 FROM "Risorse/Tabelle"
-WHERE file.name != "Tabelle"
+WHERE file.name != "Tabelle" AND !startswith(file.name, "Prova -")
 SORT file.name ASC
 ```
 
@@ -62,6 +62,6 @@ SORT file.name ASC
 ```dataview
 LIST
 FROM "Risorse/Dispense"
-WHERE file.name != "Dispense"
+WHERE file.name != "Dispense" AND !startswith(file.name, "Prova -")
 SORT file.name ASC
 ```

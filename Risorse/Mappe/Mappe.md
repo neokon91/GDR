@@ -26,6 +26,6 @@ if (pages.length) {
 ```dataview
 TABLE file.mtime AS aggiornato
 FROM "Risorse/Mappe"
-WHERE file.name != "Mappe"
+WHERE file.name != "Mappe" AND !startswith(file.name, "Prova -")
 SORT file.name ASC
 ```

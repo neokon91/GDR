@@ -30,7 +30,7 @@ actions:
 ```dataview
 TABLE tipo, rarita, stato, luogo
 FROM "Mondi/Oggetti"
-WHERE !proprietario AND stato != "archiviata"
+WHERE !proprietario AND stato != "archiviata" AND !startswith(file.name, "Prova -")
 SORT rarita ASC, nome ASC
 ```
 
@@ -39,7 +39,7 @@ SORT rarita ASC, nome ASC
 ```dataview
 TABLE tipo, rarita, proprietario, luogo
 FROM "Mondi/Oggetti"
-WHERE proprietario
+WHERE proprietario AND stato != "archiviata" AND !startswith(file.name, "Prova -")
 SORT proprietario ASC, nome ASC
 ```
 
@@ -48,6 +48,6 @@ SORT proprietario ASC, nome ASC
 ```dataview
 TABLE tipo, rarita, stato, proprietario, luogo
 FROM "Mondi/Oggetti"
-WHERE file.name != "Oggetti"
+WHERE file.name != "Oggetti" AND stato != "archiviata" AND !startswith(file.name, "Prova -")
 SORT nome ASC
 ```

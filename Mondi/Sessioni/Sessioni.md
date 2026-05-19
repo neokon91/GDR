@@ -20,7 +20,7 @@ actions:
 ```dataview
 TABLE data, data_mondo, stato, campagne, luoghi
 FROM "Mondi/Sessioni"
-WHERE stato = "preparazione" OR stato = "pronto"
+WHERE (stato = "preparazione" OR stato = "pronto") AND !startswith(file.name, "Prova -")
 SORT data ASC
 ```
 
@@ -29,7 +29,7 @@ SORT data ASC
 ```dataview
 TABLE data, data_mondo, campagne, luoghi
 FROM "Mondi/Sessioni"
-WHERE stato = "giocata"
+WHERE stato = "giocata" AND !startswith(file.name, "Prova -")
 SORT data DESC
 ```
 
@@ -38,6 +38,6 @@ SORT data DESC
 ```dataview
 TABLE data, data_mondo, stato, campagne
 FROM "Mondi/Sessioni"
-WHERE file.name != "Sessioni"
+WHERE file.name != "Sessioni" AND stato != "archiviata" AND !startswith(file.name, "Prova -")
 SORT data DESC
 ```

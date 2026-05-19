@@ -30,7 +30,7 @@ actions:
 ```dataview
 TABLE stato, tono, livello_attuale, personaggi, luoghi
 FROM "Campagne"
-WHERE file.name != "Campagne" AND stato != "archiviata" AND stato != "conclusa"
+WHERE file.name != "Campagne" AND stato != "archiviata" AND stato != "conclusa" AND !startswith(file.name, "Prova -")
 SORT stato ASC, nome ASC
 ```
 
@@ -39,7 +39,7 @@ SORT stato ASC, nome ASC
 ```dataview
 TABLE data, data_mondo, stato, campagne, luoghi
 FROM "Mondi/Sessioni"
-WHERE stato = "preparazione" OR stato = "pronto"
+WHERE (stato = "preparazione" OR stato = "pronto") AND !startswith(file.name, "Prova -")
 SORT data ASC
 LIMIT 8
 ```
@@ -49,7 +49,7 @@ LIMIT 8
 ```dataview
 TABLE data, data_mondo, campagne
 FROM "Mondi/Sessioni"
-WHERE stato = "giocata"
+WHERE stato = "giocata" AND !startswith(file.name, "Prova -")
 SORT data DESC
 LIMIT 10
 ```
@@ -59,6 +59,6 @@ LIMIT 10
 ```dataview
 TABLE stato, tono, livello_attuale
 FROM "Campagne"
-WHERE file.name != "Campagne"
+WHERE file.name != "Campagne" AND stato != "archiviata" AND !startswith(file.name, "Prova -")
 SORT nome ASC
 ```

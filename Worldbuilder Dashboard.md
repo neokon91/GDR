@@ -150,16 +150,17 @@ actions:
 ```dataviewjs
 const count = (source, predicate = () => true) => dv.pages(source).where(predicate).length;
 const escapeHtml = value => String(value ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "\"": "&quot;", "'": "&#39;" }[c]));
-const notIndex = p => p.file.name !== p.file.folder?.split("/").pop();
+const isReal = p => !String(p.file.name).startsWith("Prova -");
+const notIndex = p => isReal(p) && p.file.name !== p.file.folder?.split("/").pop() && p.stato !== "archiviata";
 
 const cards = [
-  ["Mondi", count('"Mondi"', p => p.categoria === "mondo"), "Ambientazioni"],
+  ["Mondi", count('"Mondi"', p => isReal(p) && p.categoria === "mondo" && p.stato !== "archiviata"), "Ambientazioni"],
   ["Personaggi", count('"Mondi/Personaggi"', notIndex), "Volti e legami"],
   ["Luoghi", count('"Mondi/Luoghi"', notIndex), "Dove succedono le cose"],
   ["Fazioni", count('"Mondi/Fazioni"', notIndex), "Poteri in movimento"],
   ["Religioni", count('"Mondi/Religioni"', notIndex), "Culti e divinita"],
   ["Creature", count('"Mondi/Creature"', notIndex), "Minacce e presenze"],
-  ["Bozze", count('"Mondi"', p => p.stato === "bozza"), "Da completare"]
+  ["Bozze", count('"Mondi"', p => isReal(p) && p.stato === "bozza"), "Da completare"]
 ];
 
 const grid = dv.el("div", "", { cls: "gdr-stat-grid" });
@@ -177,7 +178,7 @@ grid.innerHTML = cards.map(([label, value, hint]) => `
 ```dataview
 TABLE categoria, tipo, luogo, stato
 FROM "Mondi"
-WHERE stato = "bozza"
+WHERE stato = "bozza" AND !startswith(file.name, "Prova -")
 SORT categoria ASC, nome ASC
 LIMIT 12
 ```
@@ -187,7 +188,7 @@ LIMIT 12
 ```dataview
 TABLE categoria, tipo, stato
 FROM "Mondi"
-WHERE file.name != "Mondo" AND stato != "archiviata"
+WHERE file.name != "Mondo" AND stato != "archiviata" AND !startswith(file.name, "Prova -")
 SORT categoria ASC, nome ASC
 LIMIT 16
 ```
@@ -197,7 +198,7 @@ LIMIT 16
 ```dataview
 TABLE tipo, ruolo, stato, luogo
 FROM "Mondi/Personaggi"
-WHERE file.name != "Personaggi"
+WHERE file.name != "Personaggi" AND stato != "archiviata" AND !startswith(file.name, "Prova -")
 SORT stato ASC, nome ASC
 LIMIT 12
 ```
@@ -207,7 +208,7 @@ LIMIT 12
 ```dataview
 TABLE tipo, bioma, pericolo, luogo_padre
 FROM "Mondi/Luoghi"
-WHERE file.name != "Luoghi"
+WHERE file.name != "Luoghi" AND stato != "archiviata" AND !startswith(file.name, "Prova -")
 SORT nome ASC
 LIMIT 12
 ```
@@ -217,7 +218,7 @@ LIMIT 12
 ```dataview
 TABLE categoria, tipo, stato, leader, divinita
 FROM "Mondi/Fazioni" OR "Mondi/Religioni"
-WHERE file.name != "Fazioni" AND file.name != "Religioni"
+WHERE file.name != "Fazioni" AND file.name != "Religioni" AND stato != "archiviata" AND !startswith(file.name, "Prova -")
 SORT categoria ASC, nome ASC
 LIMIT 16
 ```
@@ -227,7 +228,7 @@ LIMIT 16
 ```dataview
 TABLE tipo, stato, size AS taglia, cr, luoghi
 FROM "Mondi/Creature"
-WHERE file.name != "Creature"
+WHERE file.name != "Creature" AND stato != "archiviata" AND !startswith(file.name, "Prova -")
 SORT cr ASC, nome ASC
 LIMIT 16
 ```
@@ -237,7 +238,7 @@ LIMIT 16
 ```dataview
 TABLE categoria, tipo, stato, luogo
 FROM "Mondi/Oggetti" OR "Mondi/Dispense"
-WHERE file.name != "Oggetti" AND file.name != "Dispense"
+WHERE file.name != "Oggetti" AND file.name != "Dispense" AND stato != "archiviata" AND !startswith(file.name, "Prova -")
 SORT categoria ASC, nome ASC
 LIMIT 16
 ```

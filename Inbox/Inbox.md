@@ -22,7 +22,7 @@ actions:
 ```dataview
 TABLE tipo, stato, collegamenti
 FROM "Inbox"
-WHERE file.name != "Inbox" AND stato != "smistata" AND stato != "archiviata"
+WHERE file.name != "Inbox" AND stato != "smistata" AND stato != "archiviata" AND !startswith(file.name, "Prova -")
 SORT file.ctime DESC
 ```
 
@@ -31,6 +31,6 @@ SORT file.ctime DESC
 ```dataview
 TABLE tipo, collegamenti
 FROM "Inbox"
-WHERE stato = "smistata"
+WHERE stato = "smistata" AND !startswith(file.name, "Prova -")
 SORT file.mtime DESC
 ```

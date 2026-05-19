@@ -44,6 +44,17 @@ Usa questi campi in modo coerente, perché alimentano Dataview e dashboard.
 
 Per le note di categoria `mondo`, usa anche `tono`, `tema`, `tecnologia`, `magia`, `continenti`, `fazioni`, `religioni` e `campagne`.
 
+## Note Di Prova
+
+Le note con prefisso `Prova -` servono solo a collaudare template, campi, callout, CSS, Dataview e collegamenti.
+
+- Sono raccolte in [[Risorse/Prove Entità]].
+- Non sono contenuto canonico.
+- Usano `stato: archiviata` quando possibile.
+- Le dashboard e gli indici operativi devono escluderle.
+- Se aggiungi un nuovo template importante, crea o aggiorna una nota di prova collegata.
+- Se una nota di prova compare in una vista di gioco, va filtrata con `!startswith(file.name, "Prova -")` o con un controllo equivalente in DataviewJS.
+
 ## Cartelle Di Servizio
 
 - `z.modelli`: template Templater. Modifica con cautela.

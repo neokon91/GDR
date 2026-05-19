@@ -20,7 +20,7 @@ actions:
 ```dataview
 TABLE tipo, stato, bioma, pericolo, luogo_padre
 FROM "Mondi/Luoghi"
-WHERE file.name != "Luoghi" AND stato != "archiviata"
+WHERE file.name != "Luoghi" AND stato != "archiviata" AND !startswith(file.name, "Prova -")
 SORT stato ASC, nome ASC
 ```
 
@@ -29,7 +29,7 @@ SORT stato ASC, nome ASC
 ```dataview
 TABLE tipo, stato, pericolo, luogo_padre
 FROM "Mondi/Luoghi"
-WHERE pericolo >= 6
+WHERE pericolo >= 6 AND stato != "archiviata" AND !startswith(file.name, "Prova -")
 SORT pericolo DESC
 ```
 
@@ -38,6 +38,6 @@ SORT pericolo DESC
 ```dataview
 TABLE tipo, stato, luogo_padre
 FROM "Mondi/Luoghi"
-WHERE file.name != "Luoghi"
+WHERE file.name != "Luoghi" AND stato != "archiviata" AND !startswith(file.name, "Prova -")
 SORT luogo_padre ASC, nome ASC
 ```
