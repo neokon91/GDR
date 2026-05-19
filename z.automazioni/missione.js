@@ -24,6 +24,8 @@ async function missione(tp) {
     const personaggi = await helpers.choosePeople(tp, "Personaggi coinvolti", context);
     const fazioni = await helpers.chooseFactions(tp, "Fazioni coinvolte", context);
     const ricompense = await helpers.chooseObjects(tp, "Ricompense", context);
+    const pressione = await helpers.promptOptional(tp, "Pressione da 0 a 10", "3") || "3";
+    const prossimaMossa = await helpers.promptOptional(tp, "Prossima mossa se ignorata");
 
     await helpers.moveNote(tp, helpers.path("missioni"), name);
 
@@ -39,6 +41,13 @@ luoghi: ${helpers.inlineYamlList(luoghi)}
 personaggi: ${helpers.inlineYamlList(personaggi)}
 fazioni: ${helpers.inlineYamlList(fazioni)}
 ricompense: ${helpers.inlineYamlList(ricompense)}
+pressione: ${helpers.yamlNumber(pressione) || 3}
+prossima_mossa: ${helpers.yamlQuote(prossimaMossa)}
+domande_aperte: []
+indizi: []
+ostacoli: []
+conseguenze: []
+segreti: []
 scadenza_mondo:
 fc-calendar:
 fc-date:

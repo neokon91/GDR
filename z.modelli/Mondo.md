@@ -17,6 +17,9 @@
 > Magia:
 > `INPUT[text:magia]`
 >
+> Promessa:
+> `INPUT[text:premessa]`
+>
 > Mappe:
 > `INPUT[inlineListSuggester(optionQuery("Risorse/Mappe"), useLinks(partial), allowOther):mappe]`
 >
@@ -27,11 +30,28 @@
 
 > [!scena] Promessa del mondo
 >
+> `=this.premessa`
 
 ## Verità Canoniche
 
 > [!indizio] Cosa è vero in questo mondo
 >
+
+```meta-bind
+INPUT[list:verita]
+```
+
+## Domande Aperte
+
+```meta-bind
+INPUT[list:domande_aperte]
+```
+
+## Tensioni Attive
+
+```meta-bind
+INPUT[list:tensioni]
+```
 
 ````tabs
 tab: Luoghi
@@ -55,11 +75,20 @@ tab: Fazioni
 `INPUT[inlineListSuggester(optionQuery("Mondi/Fazioni"), useLinks(partial), allowOther):fazioni]`
 
 ```dataview
-TABLE tipo, stato, leader
+TABLE tipo, stato, leader, influenza, pressione
 FROM "Mondi/Fazioni"
 WHERE mondo = this.file.link
 SORT nome ASC
 LIMIT 12
+```
+
+## Fronti e Pressioni
+
+```dataview
+TABLE stato, pressione, prossima_mossa, scadenza_mondo
+FROM "Mondi/Missioni"
+WHERE mondo = this.file.link AND tipo = "fronte" AND stato != "archiviata"
+SORT pressione DESC, nome ASC
 ```
 
 tab: Religioni
@@ -108,6 +137,16 @@ SORT uso ASC, file.name ASC
 tab: Note
 
 ## Note Di Costruzione
+
+```meta-bind
+INPUT[list:fronti]
+```
+
+## Segreti del Mondo
+
+```meta-bind
+INPUT[list:segreti]
+```
 
 > [!segreto]- Idee non ancora confermate
 >

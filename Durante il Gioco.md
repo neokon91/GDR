@@ -63,6 +63,20 @@ actions:
 
 ## Scena Corrente
 
+```dataviewjs
+const active = dv.pages('"Mondi/Sessioni"')
+  .where(p => !String(p.file.name).startsWith("Prova -") && ["pronto", "preparazione"].includes(p.stato))
+  .sort(p => p.data ?? "0000-00-00", "desc")
+  .first();
+
+if (active) {
+  dv.table(
+    ["Obiettivo", "Scene", "Segreti rivelabili", "Domande", "Pressioni"],
+    [[active.obiettivo ?? "", active.scene ?? [], active.segreti_rivelabili ?? [], active.domande_al_tavolo ?? [], active.pressioni ?? []]]
+  );
+}
+```
+
 > [!lettura] Riassunto da leggere
 > 
 
@@ -82,6 +96,38 @@ actions:
 
 > [!segreto]- Da ricordare
 > 
+
+## Pressioni Attive
+
+```dataviewjs
+const active = dv.pages('"Mondi/Sessioni"')
+  .where(p => !String(p.file.name).startsWith("Prova -") && ["pronto", "preparazione"].includes(p.stato))
+  .sort(p => p.data ?? "0000-00-00", "desc")
+  .first();
+
+const sessionFactions = new Set(dv.array(active?.fazioni ?? []).map(link => link.path ?? String(link)).array());
+const sessionMissions = new Set(dv.array(active?.missioni ?? []).map(link => link.path ?? String(link)).array());
+const linkedMissionPages = dv.array(active?.incontri ?? [])
+  .map(link => dv.page(link.path ?? link))
+  .where(Boolean)
+  .array();
+
+const pages = dv.pages('"Mondi/Missioni" OR "Mondi/Fazioni"')
+  .where(p => !String(p.file.name).startsWith("Prova -") && p.stato !== "archiviata" && Number(p.pressione ?? 0) > 0)
+  .where(p => sessionFactions.size === 0 && sessionMissions.size === 0
+    || sessionFactions.has(p.file.path)
+    || sessionMissions.has(p.file.path)
+    || dv.array(p.fazioni ?? []).some(link => sessionFactions.has(link.path ?? String(link)))
+    || linkedMissionPages.some(enc => dv.array(enc.fazioni ?? []).some(link => (link.path ?? String(link)) === p.file.path)))
+  .sort(p => Number(p.pressione ?? 0), "desc")
+  .limit(8);
+
+if (!pages.length) {
+  dv.paragraph("Nessuna pressione collegata alla sessione attiva.");
+} else {
+  dv.table(["Fronte/Fazione", "Stato", "Pressione", "Prossima mossa"], pages.map(p => [p.file.link, p.stato ?? "", p.pressione ?? "", p.prossima_mossa ?? ""]));
+}
+```
 
 ## Improvvisazione Rapida
 

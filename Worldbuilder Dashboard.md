@@ -191,6 +191,65 @@ SORT categoria ASC, nome ASC
 LIMIT 12
 ```
 
+## Densità E Connessioni
+
+```dataviewjs
+const isReal = p => !String(p.file.name).startsWith("Prova -") && p.stato !== "archiviata";
+const asArray = value => dv.array(value ?? []).array();
+const linkCount = p => [
+  "mondo", "luogo", "luogo_padre", "governante", "committente",
+  "fazioni", "religioni", "personaggi", "luoghi", "leader", "risorse",
+  "problemi", "indizi", "segreti", "missioni", "ricompense"
+].reduce((total, key) => {
+  const value = p[key];
+  if (Array.isArray(value)) return total + asArray(value).filter(Boolean).length;
+  return total + (value ? 1 : 0);
+}, 0);
+
+const pages = dv.pages('"Mondi"')
+  .where(p => isReal(p) && p.file.name !== "Mondo" && p.categoria !== "srd")
+  .map(p => [p.file.link, p.categoria ?? "", p.tipo ?? "", p.stato ?? "", linkCount(p)])
+  .where(row => row[4] < 3)
+  .sort(row => row[4], "asc")
+  .limit(12);
+
+if (!pages.length) {
+  dv.paragraph("Nessun contenuto sottoconnesso evidente.");
+} else {
+  dv.table(["Nota", "Categoria", "Tipo", "Stato", "Connessioni"], pages);
+}
+```
+
+## Domande Aperte
+
+```dataview
+TABLE categoria, tipo, domande_aperte
+FROM "Mondi"
+WHERE domande_aperte AND length(domande_aperte) > 0 AND !startswith(file.name, "Prova -") AND stato != "archiviata"
+SORT file.mtime DESC
+LIMIT 12
+```
+
+## Segreti E Indizi Da Spendere
+
+```dataview
+TABLE categoria, tipo, segreti, indizi
+FROM "Mondi"
+WHERE ((segreti AND length(segreti) > 0) OR (indizi AND length(indizi) > 0)) AND !startswith(file.name, "Prova -") AND stato != "archiviata"
+SORT file.mtime DESC
+LIMIT 12
+```
+
+## Pressioni Del Mondo
+
+```dataview
+TABLE categoria, tipo, pressione, prossima_mossa, scadenza_mondo
+FROM "Mondi/Fazioni" OR "Mondi/Missioni"
+WHERE pressione > 0 AND !startswith(file.name, "Prova -") AND stato != "archiviata"
+SORT pressione DESC, file.name ASC
+LIMIT 12
+```
+
 ## Mondi e Archivi
 
 ```dataview

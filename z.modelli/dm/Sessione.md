@@ -52,6 +52,9 @@
 >
 > Video:
 > `INPUT[inlineListSuggester(optionQuery("Risorse/Video"), useLinks(partial), allowOther):video]`
+>
+> Obiettivo:
+> `INPUT[text:obiettivo]`
 
 > [!scena] Apertura
 >
@@ -78,6 +81,11 @@ tab: Scaletta
 ```meta-bind
 INPUT[list:scene]
 ```
+
+## Obiettivo Della Sessione
+
+> [!missione] Obiettivo
+> `=this.obiettivo`
 
 ## Scaletta
 
@@ -174,6 +182,24 @@ INPUT[list:ricompense]
 > [!indizio] Appunti rapidi
 >
 
+## Segreti Rivelabili
+
+```meta-bind
+INPUT[list:segreti_rivelabili]
+```
+
+## Domande Al Tavolo
+
+```meta-bind
+INPUT[list:domande_al_tavolo]
+```
+
+## Pressioni
+
+```meta-bind
+INPUT[list:pressioni]
+```
+
 tab: Resoconto
 
 ## Resoconto
@@ -185,6 +211,10 @@ tab: Resoconto
 >
 
 ## Conseguenze
+
+```meta-bind
+INPUT[list:conseguenze]
+```
 
 > [!missione] Missioni e mondo
 >

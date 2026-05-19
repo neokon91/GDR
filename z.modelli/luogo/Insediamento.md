@@ -25,12 +25,16 @@
 >
 > Stato:
 > `INPUT[inlineSelect(option(bozza, Bozza), option(pronto, Pronto), option(in gioco, In gioco), option(archiviata, Archiviata)):stato]`
+>
+> Prima impressione:
+> `INPUT[text:impressione]`
 
 > [!luogo] Descrizione
 >
 
 > [!lettura] Prima impressione
 >
+> `=this.impressione`
 
 ````tabs
 tab: Mappa Locale
@@ -52,6 +56,18 @@ tab: Potere
 ## Fazioni presenti
 
 `INPUT[inlineListSuggester(optionQuery("Mondi/Fazioni"), useLinks(partial)):fazioni]`
+
+## Risorse
+
+```meta-bind
+INPUT[list:risorse]
+```
+
+## Voci
+
+```meta-bind
+INPUT[list:voci]
+```
 
 tab: Persone
 
@@ -76,6 +92,22 @@ INPUT[list:problemi]
 
 ## Segreti
 
+```meta-bind
+INPUT[list:segreti]
+```
+
 > [!segreto]- Segreti
 >
+
+## Indizi
+
+```meta-bind
+INPUT[list:indizi]
+```
+
+## Scene Possibili
+
+```meta-bind
+INPUT[list:scene]
+```
 ````

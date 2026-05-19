@@ -22,6 +22,15 @@
 >
 > Personaggi:
 > `INPUT[inlineListSuggester(optionQuery("Mondi/Personaggi"), useLinks(partial)):personaggi]`
+>
+> Influenza:
+> `INPUT[text:influenza]`
+>
+> Pressione:
+> `INPUT[slider(minValue(0), maxValue(10), stepSize(1), addLabels):pressione]`
+>
+> Prossima mossa:
+> `INPUT[text:prossima_mossa]`
 
 ````tabs
 tab: Identità
@@ -33,8 +42,22 @@ tab: Identità
 
 ## Obiettivi
 
+`INPUT[text:obiettivo]`
+
 > [!missione] Obiettivi
 >
+
+## Risorse
+
+```meta-bind
+INPUT[list:risorse]
+```
+
+## Debolezze
+
+```meta-bind
+INPUT[list:debolezze]
+```
 
 tab: Rete
 
@@ -59,6 +82,14 @@ WHERE contains(this.personaggi, file.link) OR contains(fazioni, this.file.link)
 SORT nome ASC
 ```
 
+## Alleati
+
+`INPUT[inlineListSuggester(optionQuery("Mondi/Fazioni"), useLinks(partial)):alleati]`
+
+## Rivali
+
+`INPUT[inlineListSuggester(optionQuery("Mondi/Fazioni"), useLinks(partial)):rivali]`
+
 tab: Missioni
 
 ## Missioni
@@ -73,6 +104,10 @@ SORT stato ASC, nome ASC
 tab: Segreti
 
 ## Segreti
+
+```meta-bind
+INPUT[list:segreti]
+```
 
 > [!segreto]- Segreti
 >

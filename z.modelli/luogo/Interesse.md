@@ -13,12 +13,16 @@
 >
 > Stato:
 > `INPUT[inlineSelect(option(bozza, Bozza), option(pronto, Pronto), option(in gioco, In gioco), option(archiviata, Archiviata)):stato]`
+>
+> Prima impressione:
+> `INPUT[text:impressione]`
 
 > [!luogo] Descrizione
 >
 
 > [!lettura] Descrizione da leggere
 >
+> `=this.impressione`
 
 ## Funzione narrativa
 
@@ -40,7 +44,21 @@ WHERE luogo = this.file.link
 
 ## Segreti
 
+```meta-bind
+INPUT[list:segreti]
+```
+
 > [!segreto]- Segreti
 >
 
+## Indizi
+
+```meta-bind
+INPUT[list:indizi]
+```
+
 ## Hook narrativi
+
+```meta-bind
+INPUT[list:scene]
+```

@@ -13,6 +13,11 @@ Questa guida serve a usare il vault senza pensare alla parte tecnica.
    - una missione se i personaggi possono sceglierla;
    - un incontro se potrebbe andare al tavolo;
    - una dispensa se vuoi consegnare un testo o indizio.
+5. Prima di segnare la sessione come `pronto`, assicurati che abbia:
+   - un obiettivo di sessione;
+   - almeno una pressione attiva;
+   - uno o piu segreti rivelabili;
+   - una conseguenza se i PG ignorano il fronte.
 
 ## Durante Il Gioco
 
@@ -22,9 +27,22 @@ Usa quella pagina per:
 - scena corrente;
 - appunti rapidi;
 - timer e pressioni;
+- segreti rivelabili e domande aperte;
 - PNG in gioco;
 - incontri pronti;
 - oggetti e dispense.
+
+## Worldbuilding Denso
+
+Apri [[Worldbuilder Dashboard]] quando vuoi costruire il mondo senza perdere giocabilità.
+
+Usa le sezioni di densità per trovare:
+- note con poche connessioni;
+- domande aperte ancora non risolte;
+- segreti e indizi non ancora spesi;
+- fazioni e fronti con pressione alta.
+
+Un contenuto è utile quando collega almeno due tra luogo, PNG, fazione, missione, segreto o conseguenza.
 
 ## Come Leggere Le Pagine
 

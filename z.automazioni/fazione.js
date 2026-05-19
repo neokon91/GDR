@@ -23,6 +23,8 @@ async function fazione(tp, routeOptions = {}) {
     const leader = await helpers.choosePeople(tp, "Leader della fazione", context);
     const luoghi = await helpers.chooseLocations(tp, "Luoghi controllati o importanti", context);
     const personaggi = await helpers.choosePeople(tp, "Membri, alleati o nemici come PNG", context);
+    const obiettivo = await helpers.promptOptional(tp, "Obiettivo pubblico");
+    const pressione = await helpers.promptOptional(tp, "Pressione da 0 a 10");
 
     await helpers.moveNote(tp, helpers.path("fazioni"), name);
 
@@ -37,6 +39,15 @@ mondo: ${mondo}
 leader: ${helpers.inlineYamlList(leader)}
 luoghi: ${helpers.inlineYamlList(luoghi)}
 personaggi: ${helpers.inlineYamlList(personaggi)}
+obiettivo: ${helpers.yamlQuote(obiettivo)}
+influenza:
+pressione: ${helpers.yamlNumber(pressione) || 0}
+prossima_mossa:
+risorse: []
+debolezze: []
+alleati: []
+rivali: []
+segreti: []
 ---
 `;
 }

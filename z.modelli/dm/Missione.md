@@ -34,6 +34,12 @@
 >
 > Categoria Calendarium:
 > `INPUT[inlineSelect(option(scadenza, Scadenza), option(pericolo, Pericolo), option(conseguenza, Conseguenza), option(festa, Festa), option(sessione, Sessione)):fc-category]`
+>
+> Pressione:
+> `INPUT[slider(minValue(0), maxValue(10), stepSize(1), addLabels):pressione]`
+>
+> Prossima mossa:
+> `INPUT[text:prossima_mossa]`
 
 > [!missione] Obiettivo
 >
@@ -54,13 +60,27 @@ tab: Situazione
 
 ## Indizi
 
+```meta-bind
+INPUT[list:indizi]
+```
+
 > [!indizio] Indizi
 >
 
 ## Ostacoli
 
+```meta-bind
+INPUT[list:ostacoli]
+```
+
 > [!pericolo] Ostacoli
 >
+
+## Domande Aperte
+
+```meta-bind
+INPUT[list:domande_aperte]
+```
 
 tab: Ricompense
 
@@ -110,8 +130,18 @@ tab: Esiti
 
 ## Esiti Possibili
 
+```meta-bind
+INPUT[list:conseguenze]
+```
+
 > [!segreto]- Esiti possibili
 >
+
+## Segreti
+
+```meta-bind
+INPUT[list:segreti]
+```
 
 ## Note
 ````

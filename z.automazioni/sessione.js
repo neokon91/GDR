@@ -29,6 +29,7 @@ async function sessione(tp) {
     const video = await helpers.chooseVideos(tp, "Video previsti", context);
     const fazioni = await helpers.chooseFactions(tp, "Fazioni in scena", context);
     const oggetti = await helpers.chooseObjects(tp, "Oggetti in scena", context);
+    const obiettivo = await helpers.promptOptional(tp, "Obiettivo della sessione");
 
     await helpers.moveNote(tp, helpers.path("sessioni"), `${data} - ${titolo}`);
 
@@ -60,8 +61,13 @@ immagini: ${helpers.inlineYamlList(immagini)}
 video: ${helpers.inlineYamlList(video)}
 fazioni: ${helpers.inlineYamlList(fazioni)}
 oggetti: ${helpers.inlineYamlList(oggetti)}
+obiettivo: ${helpers.yamlQuote(obiettivo)}
 scene: []
 ricompense: []
+segreti_rivelabili: []
+domande_al_tavolo: []
+pressioni: []
+conseguenze: []
 ---
 `;
 }
