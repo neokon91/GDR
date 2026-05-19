@@ -1,0 +1,64 @@
+---
+cssclasses:
+  - indice
+---
+
+# Campagne
+
+```meta-bind-button
+label: Nuova Campagna
+style: primary
+actions:
+  - type: templaterCreateNote
+    templateFile: "z.modelli/Campagna.md"
+    folderPath: "Campagne"
+    open: true
+```
+
+```meta-bind-button
+label: Nuova Sessione
+style: primary
+actions:
+  - type: templaterCreateNote
+    templateFile: "z.modelli/Sessione.md"
+    folderPath: "Mondo/Sessioni"
+    open: true
+```
+
+## Campagne Attive
+
+```dataview
+TABLE stato, tono, livello_attuale, personaggi, luoghi
+FROM "Campagne"
+WHERE file.name != "Campagne" AND stato != "archiviata" AND stato != "conclusa"
+SORT stato ASC, nome ASC
+```
+
+## Prossime Sessioni
+
+```dataview
+TABLE data, data_mondo, stato, campagne, luoghi
+FROM "Mondo/Sessioni"
+WHERE stato = "preparazione" OR stato = "pronto"
+SORT data ASC
+LIMIT 8
+```
+
+## Sessioni Giocate
+
+```dataview
+TABLE data, data_mondo, campagne
+FROM "Mondo/Sessioni"
+WHERE stato = "giocata"
+SORT data DESC
+LIMIT 10
+```
+
+## Archivio Campagne
+
+```dataview
+TABLE stato, tono, livello_attuale
+FROM "Campagne"
+WHERE file.name != "Campagne"
+SORT nome ASC
+```

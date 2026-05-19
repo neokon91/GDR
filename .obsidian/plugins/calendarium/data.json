@@ -1,0 +1,34 @@
+{
+  "autoParse": false,
+  "calendars": [],
+  "configDirectory": null,
+  "dailyNotes": false,
+  "dateFormat": "YYYY-MM-DD",
+  "defaultCalendar": null,
+  "eventPreview": false,
+  "exit": {
+    "saving": false,
+    "event": false,
+    "calendar": false,
+    "savingEvent": false
+  },
+  "eventFrontmatter": false,
+  "parseDates": false,
+  "version": {
+    "major": 2,
+    "minor": 1,
+    "patch": 0,
+    "beta": null
+  },
+  "debug": false,
+  "askedToMoveFC": false,
+  "askedAboutSync": true,
+  "syncBehavior": "Always",
+  "inlineEventsTag": null,
+  "paths": [
+    [
+      "/",
+      "DEFAULT"
+    ]
+  ]
+}

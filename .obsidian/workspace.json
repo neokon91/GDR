@@ -1,0 +1,297 @@
+{
+  "main": {
+    "id": "09ef825945fab2f7",
+    "type": "split",
+    "children": [
+      {
+        "id": "3890f4d5a680fca4",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "267233faac9dfb9b",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Risorse/Callout GDR.md",
+                "mode": "preview",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Callout GDR"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "62fdcb98d6c3edbc",
+    "type": "split",
+    "children": [
+      {
+        "id": "c6cdcb336baef8e5",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "eb5c0c43433a2772",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Esplora risorse"
+            }
+          },
+          {
+            "id": "4d73e87e45174d6f",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "tag:#ai-tools",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Ricerca"
+            }
+          },
+          {
+            "id": "b2f62d057c9566e9",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Segnalibri"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 200
+  },
+  "right": {
+    "id": "bbe41eb9b1f1b677",
+    "type": "split",
+    "children": [
+      {
+        "id": "1c2708c8f68d3b37",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "b037bf105ff6024c",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "Bestiario/Prova.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Riferimenti a Prova"
+            }
+          },
+          {
+            "id": "b8e4a4242b6e1e3b",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "Bestiario/Prova.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Collegamenti in uscita da Prova"
+            }
+          },
+          {
+            "id": "e4f55d68a9615039",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Etichette"
+            }
+          },
+          {
+            "id": "660c3b667f50bec7",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "Tutte le proprietà"
+            }
+          },
+          {
+            "id": "43677798a5b42457",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Struttura"
+            }
+          },
+          {
+            "id": "e3cf78bd9dfcacaf",
+            "type": "leaf",
+            "state": {
+              "type": "file-properties",
+              "state": {
+                "file": "Risorse/Callout GDR.md"
+              },
+              "icon": "lucide-info",
+              "title": "Proprietà file per Callout GDR"
+            }
+          },
+          {
+            "id": "8c44e5a01c2c4ee8",
+            "type": "leaf",
+            "state": {
+              "type": "DICE_ROLLER_VIEW",
+              "state": {},
+              "icon": "dices",
+              "title": "Dice Tray"
+            }
+          },
+          {
+            "id": "a6d783f9d5c71b0c",
+            "type": "leaf",
+            "state": {
+              "type": "initiative-tracker-view",
+              "state": {},
+              "icon": "initiative-tracker",
+              "title": "Initiative Tracker"
+            }
+          }
+        ],
+        "currentTab": 7
+      },
+      {
+        "id": "b402ebfb660e97dd",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "bd31c951f267c801",
+            "type": "leaf",
+            "state": {
+              "type": "fantasy-statblocks-creature-pane",
+              "state": {},
+              "icon": "skull",
+              "title": "Combatant"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 200
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Apri selezione rapida": false,
+      "graph:Apri vista grafo": false,
+      "canvas:Crea nuova lavagna": false,
+      "daily-notes:Apri nota del giorno": false,
+      "templates:Inserisci modello": false,
+      "command-palette:Apri riquadro comandi": false,
+      "bases:Crea nuova Base": false,
+      "obsidian-full-calendar:Open Full Calendar": false,
+      "obsidian-5e-statblocks:Open Creature pane": false,
+      "iron-vault:Show Iron Vault commands": false,
+      "table-editor-obsidian:Advanced Tables Toolbar": false,
+      "templater-obsidian:Templater": false,
+      "obsidian-kanban:Crea nuova bacheca": false,
+      "fantasy-content-generator:Fantasy Generators": false,
+      "calendarium:Open Calendarium": false,
+      "homepage:Open homepage": false,
+      "callout-manager:Insert Callout": false,
+      "obsidian42-brat:BRAT": false,
+      "initiative-tracker:Initiative Tracker Encounter Builder": false
+    }
+  },
+  "active": "267233faac9dfb9b",
+  "lastOpenFiles": [
+    "Risorse/Risorse.md",
+    "1. DM Dashboard.md",
+    "Inbox/Inbox.md",
+    "Mondo/Mondo.md",
+    "z.modelli/Luogo Router.md",
+    "z.modelli/politica/Baronia.md",
+    "z.modelli/Creatura.md",
+    "Campagne/Campagne.md",
+    "Durante il Gioco.md",
+    "z.modelli/dm/Pericolo Ambientale.md",
+    "z.modelli/dm/Pericolo.md",
+    "z.modelli/dm/Trappola.md",
+    "z.modelli/fazione/Confraternita.md",
+    "z.modelli/fazione/Gilda.md",
+    "z.modelli/politica/Oligarchia.md",
+    "z.modelli/politica/Repubblica.md",
+    "z.modelli/politica/Ducato.md",
+    "z.modelli/politica/Contea.md",
+    "z.modelli/politica/Impero.md",
+    "z.modelli/politica/Regno.md",
+    "z.modelli/politica/Regno",
+    "z.modelli/politica",
+    "z.modelli/geografia/Isola.md",
+    "z.modelli/geografia/Regione.md",
+    "z.modelli/geografia/Continente.md",
+    "z.modelli/geografia",
+    "z.modelli/dm/One-Shot.md",
+    "z.modelli/dm/Avventura.md",
+    "z.modelli/dm/Campagna.md",
+    "z.modelli/dm",
+    "z.modelli/personaggio",
+    "z.modelli/fazione",
+    "z.automazioni/nota_rapida.js",
+    "Inbox",
+    "z.automazioni/missione.js",
+    "z.automazioni/dispensa.js",
+    "Campagna VhalTherys/03 - PNG/media/Vhal'Therys.png",
+    "Campagna VhalTherys/03 - PNG/media/Lysa Brumafosca.png",
+    "Campagna VhalTherys/03 - PNG/media/Il Custode di Ferro.png",
+    "Campagna VhalTherys/03 - PNG/media/Ardhel Miranor.png",
+    "Campagna VhalTherys 1/03 - PNG/media/Lysa Brumafosca.png",
+    "Campagna VhalTherys 1/03 - PNG/media/Vhal'Therys.png",
+    "Campagna VhalTherys 1/03 - PNG/media/Il Custode di Ferro.png",
+    "Campagna VhalTherys 1/03 - PNG/media/Ardhel Miranor.png",
+    "Senza nome 1.canvas",
+    "Senza nome.canvas",
+    "05 - Mostri/daa3l13-7c99bd51-a928-4d0e-b08b-69ddf9240895.jpg",
+    "th.jpg",
+    "Canvas Campagna VhalTherys.canvas"
+  ]
+}

@@ -1,0 +1,590 @@
+/* @settings
+name: GDR Vault
+id: gdr-vault
+settings:
+  - id: gdr-callout-density
+    title: Callout density
+    type: variable-select
+    default: 0.85rem
+    options:
+      - label: Compact
+        value: 0.65rem
+      - label: Comfortable
+        value: 0.85rem
+      - label: Spacious
+        value: 1.05rem
+*/
+
+:root {
+  --gdr-radius: 6px;
+  --gdr-border: color-mix(in srgb, var(--text-muted) 22%, transparent);
+  --gdr-surface: color-mix(in srgb, var(--background-secondary) 78%, transparent);
+  --gdr-surface-strong: color-mix(in srgb, var(--background-secondary) 92%, var(--background-primary));
+  --gdr-accent-soft: color-mix(in srgb, var(--interactive-accent) 14%, transparent);
+  --gdr-callout-density: 0.85rem;
+}
+
+.markdown-preview-view,
+.markdown-source-view.mod-cm6 {
+  --p-spacing: 0.8rem;
+  --heading-spacing: 1.2rem;
+}
+
+.markdown-rendered h1,
+.markdown-rendered h2,
+.markdown-rendered h3,
+.HyperMD-header-1,
+.HyperMD-header-2,
+.HyperMD-header-3 {
+  letter-spacing: 0;
+}
+
+.markdown-rendered h1 {
+  border-bottom: 1px solid var(--gdr-border);
+  padding-bottom: 0.25rem;
+}
+
+.markdown-rendered table {
+  width: 100%;
+}
+
+.markdown-rendered th {
+  font-weight: 650;
+}
+
+.markdown-rendered .dataview.table-view-table {
+  font-size: 0.92em;
+}
+
+.markdown-rendered .block-language-dataview,
+.markdown-rendered .block-language-dataviewjs {
+  margin-block: 0.75rem 1rem;
+}
+
+.meta-bind-button,
+.mb-button {
+  border-radius: var(--gdr-radius) !important;
+  min-height: 2.15rem;
+  font-weight: 650;
+}
+
+.callout {
+  border-radius: var(--gdr-radius);
+  border: 1px solid rgba(var(--callout-color), 0.28);
+  padding: var(--gdr-callout-density);
+  background: color-mix(in srgb, rgb(var(--callout-color)) 9%, var(--background-primary));
+}
+
+.callout-title {
+  gap: 0.45rem;
+}
+
+.callout-title-inner {
+  font-weight: 700;
+}
+
+.callout-content {
+  margin-top: 0.55rem;
+}
+
+.callout[data-callout="scena"],
+.callout[data-callout="indizio"],
+.callout[data-callout="segreto"],
+.callout[data-callout="incontro"],
+.callout[data-callout="tesoro"],
+.callout[data-callout="png"],
+.callout[data-callout="luogo"],
+.callout[data-callout="missione"],
+.callout[data-callout="handout"],
+.callout[data-callout="regola"],
+.callout[data-callout="pericolo"],
+.callout[data-callout="lettura"],
+.callout[data-callout="timer"] {
+  box-shadow: none;
+}
+
+.callout[data-callout="scena"] {
+  --callout-color: 83, 119, 161;
+  --callout-icon: lucide-clapperboard;
+}
+
+.callout[data-callout="indizio"] {
+  --callout-color: 196, 143, 54;
+  --callout-icon: lucide-search;
+}
+
+.callout[data-callout="segreto"] {
+  --callout-color: 127, 92, 160;
+  --callout-icon: lucide-key-round;
+}
+
+.callout[data-callout="incontro"] {
+  --callout-color: 166, 72, 64;
+  --callout-icon: lucide-swords;
+}
+
+.callout[data-callout="tesoro"] {
+  --callout-color: 194, 154, 70;
+  --callout-icon: lucide-gem;
+}
+
+.callout[data-callout="png"] {
+  --callout-color: 73, 138, 126;
+  --callout-icon: lucide-user-round;
+}
+
+.callout[data-callout="luogo"] {
+  --callout-color: 91, 130, 86;
+  --callout-icon: lucide-map-pin;
+}
+
+.callout[data-callout="missione"] {
+  --callout-color: 74, 112, 168;
+  --callout-icon: lucide-scroll-text;
+}
+
+.callout[data-callout="handout"] {
+  --callout-color: 143, 112, 72;
+  --callout-icon: lucide-file-text;
+}
+
+.callout[data-callout="regola"] {
+  --callout-color: 88, 115, 137;
+  --callout-icon: lucide-scale;
+}
+
+.callout[data-callout="pericolo"] {
+  --callout-color: 181, 76, 58;
+  --callout-icon: lucide-triangle-alert;
+}
+
+.callout[data-callout="lettura"] {
+  --callout-color: 119, 97, 77;
+  --callout-icon: lucide-book-open-text;
+}
+
+.callout[data-callout="timer"] {
+  --callout-color: 166, 89, 52;
+  --callout-icon: lucide-clock-3;
+}
+
+.callout[data-callout="infoboxwiki"] {
+  --callout-color: 120, 120, 120;
+  --callout-icon: lucide-book-marked;
+  float: right;
+  clear: right;
+  width: min(320px, 42%);
+  margin: 0 0 1rem 1.25rem;
+  padding: 0;
+  overflow: hidden;
+  background: var(--background-secondary);
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 2px;
+  box-shadow: none;
+  font-size: 0.92em;
+}
+
+.callout[data-callout="infoboxwiki"] .callout-title {
+  justify-content: center;
+  padding: 0.45rem 0.65rem;
+  background: color-mix(in srgb, rgb(var(--callout-color)) 16%, var(--background-secondary));
+  border-bottom: 1px solid var(--background-modifier-border);
+  text-align: center;
+}
+
+.callout[data-callout="infoboxwiki"] .callout-icon {
+  display: none;
+}
+
+.callout[data-callout="infoboxwiki"] .callout-title-inner {
+  font-size: 1.05em;
+  font-weight: 750;
+  line-height: 1.2;
+}
+
+.callout[data-callout="infoboxwiki"] .callout-content {
+  padding: 0.65rem;
+  margin-top: 0;
+}
+
+.callout[data-callout="infoboxwiki"] p {
+  margin-block: 0.45rem;
+}
+
+.callout[data-callout="infoboxwiki"] p:first-child {
+  margin-top: 0;
+}
+
+.callout[data-callout="infoboxwiki"] p:last-child {
+  margin-bottom: 0;
+}
+
+.callout[data-callout="infoboxwiki"] img {
+  display: block;
+  width: 100%;
+  margin: 0 0 0.55rem 0;
+  border-radius: 0;
+}
+
+.callout[data-callout="infoboxwiki"] table {
+  width: 100%;
+  margin: 0.5rem 0 0;
+  border-collapse: collapse;
+  font-size: 0.95em;
+}
+
+.callout[data-callout="infoboxwiki"] th,
+.callout[data-callout="infoboxwiki"] td {
+  padding: 0.32rem 0.35rem;
+  border-bottom: 1px solid var(--background-modifier-border);
+  vertical-align: top;
+}
+
+.callout[data-callout="infoboxwiki"] th {
+  width: 38%;
+  color: var(--text-muted);
+  font-weight: 700;
+  text-align: left;
+}
+
+.callout[data-callout="infoboxwiki"] tr:last-child th,
+.callout[data-callout="infoboxwiki"] tr:last-child td {
+  border-bottom: none;
+}
+
+body .markdown-preview-view.tavolo,
+body .markdown-source-view.tavolo {
+  --font-text-size: 18px;
+  --line-height-normal: 1.55;
+}
+
+.markdown-preview-view.tavolo .markdown-preview-sizer,
+.markdown-source-view.tavolo .cm-contentContainer {
+  max-width: 980px;
+  margin-inline: auto;
+}
+
+.markdown-preview-view.tavolo h1,
+.markdown-preview-view.tavolo h2,
+.markdown-source-view.tavolo .HyperMD-header-1,
+.markdown-source-view.tavolo .HyperMD-header-2 {
+  margin-top: 1rem;
+}
+
+.markdown-preview-view.tavolo .callout {
+  padding: 1rem;
+}
+
+.markdown-preview-view.tavolo h2 {
+  border-bottom: 1px solid var(--gdr-border);
+  padding-bottom: 0.25rem;
+}
+
+.markdown-preview-view.tavolo .block-language-dataview {
+  border: 1px solid var(--gdr-border);
+  border-radius: var(--gdr-radius);
+  padding: 0.35rem;
+  background: var(--gdr-surface);
+}
+
+.markdown-preview-view.tavolo .dataview.table-view-table {
+  font-size: 0.95em;
+}
+
+.markdown-preview-view.tavolo .metadata-container,
+.markdown-source-view.tavolo .metadata-container {
+  display: none;
+}
+
+.kanban-plugin__lane {
+  border-radius: var(--gdr-radius);
+}
+
+.kanban-plugin__item {
+  border-radius: var(--gdr-radius);
+  border-color: var(--gdr-border);
+}
+
+.markdown-rendered .statblock {
+  border-radius: var(--gdr-radius);
+}
+
+.markdown-preview-view.dashboard .markdown-preview-sizer,
+.markdown-source-view.dashboard .cm-contentContainer {
+  max-width: 1240px;
+  margin-inline: auto;
+}
+
+.markdown-preview-view.dashboard h1 {
+  margin-bottom: 0.6rem;
+}
+
+.markdown-preview-view.dashboard h2 {
+  margin-top: 1.6rem;
+  padding-bottom: 0.35rem;
+  border-bottom: 1px solid var(--gdr-border);
+}
+
+.markdown-preview-view.dashboard h3 {
+  margin-top: 1.15rem;
+  color: var(--text-muted);
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0;
+}
+
+.markdown-preview-view.dashboard .block-language-meta-bind-button {
+  display: inline-block;
+  margin: 0.2rem 0.2rem 0.2rem 0;
+  vertical-align: top;
+}
+
+.markdown-preview-view.dashboard .meta-bind-button,
+.markdown-preview-view.dashboard .mb-button {
+  min-width: 10.75rem;
+  justify-content: center;
+}
+
+.markdown-preview-view.dashboard .callout[data-callout="scena"] {
+  border-color: color-mix(in srgb, rgb(var(--callout-color)) 45%, transparent);
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, rgb(var(--callout-color)) 12%, var(--background-primary)),
+    var(--background-primary)
+  );
+}
+
+.markdown-preview-view.dashboard .callout[data-callout="scena"] .callout-content {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.2rem;
+}
+
+.markdown-preview-view.dashboard h2 + h3,
+.markdown-preview-view.dashboard h2 + .block-language-dataview,
+.markdown-preview-view.dashboard h2 + .callout {
+  margin-top: 0.7rem;
+}
+
+.markdown-preview-view.dashboard .block-language-dataview {
+  border: 1px solid var(--gdr-border);
+  border-radius: var(--gdr-radius);
+  padding: 0.35rem;
+  background: var(--gdr-surface);
+  overflow-x: auto;
+}
+
+.markdown-preview-view.dashboard .dataview.table-view-table {
+  font-size: 0.9em;
+}
+
+.markdown-preview-view.dashboard .dataview.table-view-table th,
+.markdown-preview-view.dashboard .dataview.table-view-table td {
+  padding: 0.35rem 0.5rem;
+}
+
+.markdown-preview-view.dashboard .dataview.table-view-table tbody tr:hover {
+  background: var(--gdr-accent-soft);
+}
+
+.gdr-stat-grid,
+.gdr-card-grid {
+  display: grid;
+  gap: 0.75rem;
+  margin-block: 0.75rem 1rem;
+}
+
+.gdr-stat-grid {
+  grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
+}
+
+.gdr-card-grid {
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+}
+
+.gdr-card-grid.compact {
+  grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+}
+
+.gdr-stat-card,
+.gdr-info-card {
+  border: 1px solid var(--gdr-border);
+  border-radius: var(--gdr-radius);
+  background: var(--gdr-surface);
+}
+
+.gdr-stat-card {
+  padding: 0.75rem;
+}
+
+.gdr-stat-value {
+  font-size: 1.8rem;
+  line-height: 1;
+  font-weight: 750;
+  color: var(--text-normal);
+}
+
+.gdr-stat-label {
+  margin-top: 0.35rem;
+  font-weight: 700;
+}
+
+.gdr-stat-hint,
+.gdr-card-meta,
+.gdr-card-line {
+  color: var(--text-muted);
+  font-size: 0.88em;
+}
+
+.gdr-info-card {
+  padding: 0.8rem;
+}
+
+.gdr-info-card.compact {
+  padding: 0.65rem;
+}
+
+.gdr-card-title {
+  font-weight: 750;
+  margin-bottom: 0.35rem;
+}
+
+.gdr-card-title a {
+  text-decoration: none;
+}
+
+.gdr-card-line {
+  margin-top: 0.3rem;
+}
+
+.markdown-preview-view.indice .markdown-preview-sizer,
+.markdown-source-view.indice .cm-contentContainer {
+  max-width: 1120px;
+  margin-inline: auto;
+}
+
+.markdown-preview-view.indice h2 {
+  margin-top: 1.35rem;
+  padding-bottom: 0.25rem;
+  border-bottom: 1px solid var(--gdr-border);
+}
+
+.markdown-preview-view.indice .block-language-meta-bind-button {
+  display: inline-block;
+  margin: 0.2rem 0.2rem 0.2rem 0;
+}
+
+.markdown-preview-view.indice .meta-bind-button,
+.markdown-preview-view.indice .mb-button {
+  min-width: 10.75rem;
+  justify-content: center;
+}
+
+.markdown-preview-view.indice .block-language-dataview {
+  border: 1px solid var(--gdr-border);
+  border-radius: var(--gdr-radius);
+  padding: 0.35rem;
+  background: var(--gdr-surface);
+  overflow-x: auto;
+}
+
+.markdown-preview-view.indice .dataview.table-view-table {
+  font-size: 0.92em;
+}
+
+.markdown-preview-view.indice .dataview.table-view-table th,
+.markdown-preview-view.indice .dataview.table-view-table td {
+  padding: 0.35rem 0.5rem;
+}
+
+@media (min-width: 900px) {
+  .markdown-preview-view.dashboard h2:nth-of-type(2) ~ h3,
+  .markdown-preview-view.dashboard h2:nth-of-type(2) ~ .block-language-dataview {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 720px) {
+  .callout[data-callout="infoboxwiki"] {
+    float: none;
+    clear: both;
+    width: 100%;
+    margin: 0 0 1rem 0;
+  }
+
+  .markdown-preview-view.dashboard .meta-bind-button,
+  .markdown-preview-view.dashboard .mb-button {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .markdown-preview-view.dashboard .block-language-meta-bind-button {
+    display: block;
+    margin-right: 0;
+  }
+
+  .markdown-preview-view.indice .meta-bind-button,
+  .markdown-preview-view.indice .mb-button {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .markdown-preview-view.indice .block-language-meta-bind-button {
+    display: block;
+    margin-right: 0;
+  }
+
+  body .markdown-preview-view.tavolo,
+  body .markdown-source-view.tavolo {
+    --font-text-size: 16px;
+  }
+}
+
+@media print {
+  body {
+    --font-text-size: 12pt;
+    --line-height-normal: 1.35;
+  }
+
+  .workspace-ribbon,
+  .workspace-tab-header-container,
+  .view-header,
+  .status-bar,
+  .metadata-container,
+  .frontmatter-container,
+  .block-language-meta-bind-button,
+  .metadata-properties,
+  .cm-active,
+  .mod-header {
+    display: none !important;
+  }
+
+  .markdown-preview-view {
+    padding: 0 !important;
+  }
+
+  .markdown-preview-sizer {
+    max-width: none !important;
+    margin: 0 !important;
+  }
+
+  .callout {
+    break-inside: avoid;
+    background: transparent !important;
+    border: 1px solid rgba(var(--callout-color), 0.45);
+  }
+
+  .callout[data-callout="segreto"] {
+    display: none;
+  }
+
+  .markdown-rendered table {
+    font-size: 10pt;
+    break-inside: avoid;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+}
