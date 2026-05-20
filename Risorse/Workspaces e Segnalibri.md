@@ -32,7 +32,7 @@ Questi tre workspace sono gia salvati in `.obsidian/workspaces.json`:
 I segnalibri sono divisi in:
 
 - **Al Tavolo**: [[Durante il Gioco]], [[Risorse/Preparazione Sessione]], [[Risorse/Task DM]], [[Risorse/Iniziativa e Combattimenti]].
-- **Manutenzione**: [[Risorse/Controllo Vault]], [[Risorse/Linter e Sviluppo]], [[Risorse/Recap Plugin Installati]].
+- **Manutenzione**: [[Risorse/Controllo Vault]], [[Dev/Linter e Sviluppo]], [[Dev/Recap Plugin Installati]].
 
 ## Regola Operativa
 

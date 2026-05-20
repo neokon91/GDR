@@ -16,7 +16,7 @@ npm run check
 ```
 
 8. Aggiorna [[VERSION]].
-9. Aggiorna [[CHANGELOG]].
+9. Aggiorna [[Dev/CHANGELOG]].
 10. Crea la release utente:
 
 ```bash
@@ -55,6 +55,6 @@ Non contiene materiali di sviluppo repository, issue template GitHub, roadmap in
 ## Dopo La Release
 
 - Aggiorna il changelog con eventuali fix.
-- Tieni le modifiche tecniche documentate in [[Risorse/Sviluppo Vault]].
+- Tieni le modifiche tecniche documentate in [[Dev/Sviluppo Vault]].
 - Pubblica lo ZIP generato da `dist/vault-gdr-clean.zip`.
 - Per sviluppo e manutenzione usa il repository Git, non uno ZIP.

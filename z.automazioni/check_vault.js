@@ -20,8 +20,19 @@ const REQUIRED_SNIPPETS = [
 const REQUIRED_FILES = [
     "Inizia Qui.md",
     "VERSION.md",
-    "CHANGELOG.md",
-    "RELEASE.md",
+    "Dev/README.md",
+    "Dev/CHANGELOG.md",
+    "Dev/CONTRIBUTING.md",
+    "Dev/Repository.md",
+    "Dev/RELEASE.md",
+    "Dev/Sviluppo Vault.md",
+    "Dev/Integrazioni Plugin.md",
+    "Dev/Plugin Technical Reference.md",
+    "Dev/TemplateFactory/README.md",
+    "Dev/TemplateFactory/modules/fields_core.yaml",
+    "Dev/TemplateFactory/modules/plugin_bindings.yaml",
+    "Dev/TemplateFactory/modules/template_blueprints.yaml",
+    "Dev/TemplateFactory/modules/workflows.yaml",
     "Hub/1. DM Dashboard.md",
     "Hub/Atlante del Mondo.md",
     "Hub/Bibbia del Mondo.md",
@@ -39,12 +50,26 @@ const REQUIRED_FILES = [
     "Hub/Vista Giocatori.md",
     "Hub/Worldbuilder Dashboard.md",
     "Risorse/FAQ.md",
-    "Risorse/Release Pulita.md",
-    "Risorse/Plugin Layer Interno.md",
-    "Risorse/Roadmap/Roadmap.md",
-    "Risorse/Indice Connettore GPT.md",
+    "Dev/Confine Release Repository.md",
+    "Dev/Release Pulita.md",
+    "Dev/Smoke 1.0 Professionale.md",
+    "Dev/Plugin Layer Interno.md",
+    "Dev/Roadmap/1.0 Professionale.md",
+    "Dev/Roadmap/Roadmap.md",
+    "Dev/Indice Connettore GPT.md",
     "Risorse/Smistamento Bozze Generate.md",
-    "Mondi/Societa/Societa.md"
+    "Mondi/Societa/Societa.md",
+    "z.bacheche/Manutenzione Vault.md"
+];
+const REQUIRED_BASE_FILES = [
+    "z.bases/Atlante Mappe.base",
+    "z.bases/Economia.base",
+    "z.bases/Fazioni.base",
+    "z.bases/Incontri.base",
+    "z.bases/Luoghi.base",
+    "z.bases/Missioni.base",
+    "z.bases/PNG.base",
+    "z.bases/Worldbuilding.base"
 ];
 const REQUIRED_LAYER_FILES = [
     "z.automazioni/helpers.js",
@@ -464,9 +489,9 @@ function isIndexLikeNote(fileRel) {
     return isFolderIndex(fileRel) || [
         "Mondi/Mondo.md",
         "Mondi/Stato del Mondo.md",
-        "Risorse/Indice Connettore GPT.md",
+        "Dev/Indice Connettore GPT.md",
+        "Dev/Sviluppo Vault.md",
         "Risorse/Smistamento Bozze Generate.md",
-        "Risorse/Sviluppo Vault.md",
         "Risorse/Guida DM.md",
         "Risorse/Controllo Vault.md",
         "Hub/1. DM Dashboard.md",
@@ -568,9 +593,22 @@ for (const file of REQUIRED_FILES) {
     }
 }
 
+for (const file of REQUIRED_BASE_FILES) {
+    if (!fs.existsSync(path.join(ROOT, file))) {
+        errors.push(`Base operativa mancante: ${file}`);
+    }
+}
+
 for (const file of REQUIRED_LAYER_FILES) {
     if (!fs.existsSync(path.join(ROOT, file))) {
         errors.push(`Plugin layer interno: file obbligatorio mancante ${file}`);
+    }
+}
+
+for (const file of walk(ROOT, file => file.endsWith(".base"))) {
+    const source = fs.readFileSync(file, "utf8");
+    if (/[^\n]properties:/.test(source)) {
+        errors.push(`${rel(file)}: properties incollato alla riga precedente`);
     }
 }
 
@@ -602,6 +640,15 @@ for (const snippet of REQUIRED_SNIPPETS) {
 const wikiLinkPattern = /!?\[\[([^\]|#]+)(?:#[^\]|]+)?(?:\|[^\]]*)?\]\]/g;
 for (const file of markdownFiles) {
     const text = fs.readFileSync(file, "utf8");
+    const fileRel = rel(file);
+    const taskLines = text.split(/\r?\n/).filter(line => /^\s*[-*]\s+\[[ xX]\]/.test(line));
+
+    for (const line of taskLines) {
+        if (line.includes("#task") && line.includes("🔁") && fileRel !== "z.bacheche/Manutenzione Vault.md") {
+            errors.push(`${fileRel}: task ricorrente fuori dalla bacheca manutenzione`);
+        }
+    }
+
     let match;
 
     while ((match = wikiLinkPattern.exec(text))) {
@@ -768,9 +815,9 @@ if (activeSessions.length > 1) {
     errors.push(`Sessioni multiple attive: ${activeSessions.map(([fileRel]) => fileRel).join(", ")}`);
 }
 
-const gptConnectorIndex = markdownMeta.get("Risorse/Indice Connettore GPT.md");
+const gptConnectorIndex = markdownMeta.get("Dev/Indice Connettore GPT.md");
 if (gptConnectorIndex?.is_code_search_indexed !== true) {
-    errors.push("Risorse/Indice Connettore GPT.md: manca is_code_search_indexed: true");
+    errors.push("Dev/Indice Connettore GPT.md: manca is_code_search_indexed: true");
 }
 
 const startHereText = fs.existsSync(path.join(ROOT, "Inizia Qui.md"))
@@ -794,9 +841,9 @@ if (calendariumCalendars.length) {
     }
 }
 
-const gptIndexPath = path.join(ROOT, "Risorse/Indice Connettore GPT.md");
+const gptIndexPath = path.join(ROOT, "Dev/Indice Connettore GPT.md");
 if (!fs.existsSync(gptIndexPath)) {
-    errors.push("Risorse/Indice Connettore GPT.md: file mancante");
+    errors.push("Dev/Indice Connettore GPT.md: file mancante");
 } else {
     const gptIndexText = fs.readFileSync(gptIndexPath, "utf8");
     const codePathPattern = /`([^`\n]+\.(?:md|js|json|css))`/g;
@@ -805,7 +852,7 @@ if (!fs.existsSync(gptIndexPath)) {
     while ((match = codePathPattern.exec(gptIndexText))) {
         const referenced = match[1].trim();
         if (!fs.existsSync(path.join(ROOT, referenced))) {
-            errors.push(`Risorse/Indice Connettore GPT.md: percorso citato mancante ${referenced}`);
+            errors.push(`Dev/Indice Connettore GPT.md: percorso citato mancante ${referenced}`);
         }
     }
 }

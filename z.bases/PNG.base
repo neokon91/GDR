@@ -1,7 +1,8 @@
 filters:
   and:
     - file.folder == "Mondi/Personaggi"
-    - tipo == "png"properties:
+    - tipo == "png"
+properties:
   nome:
     displayName: Nome
   stato:

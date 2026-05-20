@@ -1,0 +1,186 @@
+filters:
+  or:
+    - file.folder == "Mondi/Culture"
+    - file.folder == "Mondi/Religioni"
+    - file.folder == "Mondi/Societa"
+    - file.folder == "Mondi/Cosmologia"
+formulas:
+  prontezza: 'if(stato == "archiviata", "archivio", if(mondo, if(uso_al_tavolo, if(player_safe, if(connessioni, "pronta", "manca connessioni"), "manca player-safe"), "manca uso"), "manca mondo"))'
+properties:
+  formula.prontezza:
+    displayName: Prontezza
+  nome:
+    displayName: Nome
+  categoria:
+    displayName: Categoria
+  tipo:
+    displayName: Tipo
+  famiglia_creativa:
+    displayName: Famiglia creativa
+  stato:
+    displayName: Stato
+  mondo:
+    displayName: Mondo
+  gancio:
+    displayName: Gancio
+  identita:
+    displayName: Identita
+  uso_al_tavolo:
+    displayName: Uso al tavolo
+  player_safe:
+    displayName: Player-safe
+  pubblico:
+    displayName: Pubblico
+  canonico:
+    displayName: Canonico
+  pressione:
+    displayName: Pressione
+  prossima_mossa:
+    displayName: Prossima mossa
+  connessioni:
+    displayName: Connessioni
+  luoghi:
+    displayName: Luoghi
+  fazioni:
+    displayName: Fazioni
+  relazioni:
+    displayName: Relazioni
+  entita_impattate:
+    displayName: Entita impattate
+  propaga_a:
+    displayName: Propaga a
+  templi:
+    displayName: Templi
+  luoghi_sacri:
+    displayName: Luoghi sacri
+  divinita:
+    displayName: Divinita
+views:
+  - type: table
+    name: Codex vivo
+    limit: 40
+    groupBy:
+      property: formula.prontezza
+      direction: ASC
+    filters:
+      and:
+        - file.name != "Culture"
+        - file.name != "Religioni"
+        - file.name != "Societa"
+        - file.name != "Cosmologia"
+        - stato != "archiviata"
+    order:
+      - nome
+      - categoria
+      - tipo
+      - stato
+      - formula.prontezza
+      - mondo
+      - gancio
+      - uso_al_tavolo
+      - player_safe
+    sort:
+      - property: mondo
+        direction: ASC
+      - property: categoria
+        direction: ASC
+      - property: nome
+        direction: ASC
+  - type: table
+    name: Da collegare
+    limit: 30
+    groupBy:
+      property: formula.prontezza
+      direction: ASC
+    filters:
+      and:
+        - file.name != "Culture"
+        - file.name != "Religioni"
+        - file.name != "Societa"
+        - file.name != "Cosmologia"
+        - stato != "archiviata"
+    order:
+      - nome
+      - categoria
+      - tipo
+      - mondo
+      - formula.prontezza
+      - connessioni
+      - luoghi
+      - fazioni
+      - relazioni
+    sort:
+      - property: mondo
+        direction: ASC
+      - property: categoria
+        direction: ASC
+  - type: table
+    name: Pubblicabili
+    filters:
+      and:
+        - file.name != "Culture"
+        - file.name != "Religioni"
+        - file.name != "Societa"
+        - file.name != "Cosmologia"
+        - stato != "archiviata"
+    order:
+      - nome
+      - categoria
+      - pubblico
+      - formula.prontezza
+      - player_safe
+      - canonico
+      - uso_al_tavolo
+    sort:
+      - property: pubblico
+        direction: DESC
+      - property: nome
+        direction: ASC
+  - type: table
+    name: Pressione e propagazione
+    limit: 30
+    groupBy:
+      property: formula.prontezza
+      direction: ASC
+    filters:
+      and:
+        - file.name != "Culture"
+        - file.name != "Religioni"
+        - file.name != "Societa"
+        - file.name != "Cosmologia"
+        - stato != "archiviata"
+    order:
+      - nome
+      - categoria
+      - pressione
+      - formula.prontezza
+      - prossima_mossa
+      - entita_impattate
+      - propaga_a
+      - connessioni
+    sort:
+      - property: pressione
+        direction: DESC
+      - property: prossima_mossa
+        direction: ASC
+  - type: table
+    name: Sacro e arcano
+    filters:
+      and:
+        - stato != "archiviata"
+    order:
+      - nome
+      - categoria
+      - tipo
+      - mondo
+      - formula.prontezza
+      - divinita
+      - templi
+      - luoghi_sacri
+      - luoghi
+      - prossima_mossa
+    sort:
+      - property: categoria
+        direction: ASC
+      - property: nome
+        direction: ASC

@@ -15,8 +15,20 @@ Questa vista raccoglie solo le checklist operative marcate `#task`. Tasks usa `#
 ```tasks
 not done
 path includes z.bacheche
-sort by path
+group by due
+sort by urgency
+sort by due
 sort by description
+```
+
+## Priorita Tasks
+
+```tasks
+not done
+path includes z.bacheche
+sort by priority
+sort by urgency
+sort by path
 ```
 
 ## Completate Tasks

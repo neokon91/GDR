@@ -120,10 +120,10 @@ Se dashboard, pulsanti o tabelle non funzionano, apri [[Risorse/Primo Avvio Stru
 - Non lasciare link placeholder: crea la nota o trasforma il link in testo semplice.
 - Archivia invece di cancellare quando una nota ha valore storico.
 - Dopo una sessione, aggiorna missioni, tracciati, PNG, luoghi visitati, ricompense e conseguenze da [[Risorse/Post Sessione Guidato]].
-- Il layer operativo interno e documentato in [[Risorse/Plugin Layer Interno]]: input Meta Bind, pulsanti, wizard, JS views e fileClass.
-- Per controlli e sviluppo del vault, vedi [[Risorse/Sviluppo Vault]].
-- Per preparare una release o una copia pulita, apri [[RELEASE]] e [[Risorse/Controllo Vault]].
-- Per creare una copia consegnabile, apri [[Risorse/Release Pulita]] o usa `npm run release:clean`.
+- Il layer operativo interno e documentato in [[Dev/Plugin Layer Interno]]: input Meta Bind, pulsanti, wizard, JS views e fileClass.
+- Per controlli e sviluppo del vault, vedi [[Dev/Sviluppo Vault]].
+- Per preparare una release o una copia pulita, apri [[Dev/RELEASE]] e [[Risorse/Controllo Vault]].
+- Per creare una copia consegnabile, apri [[Dev/Release Pulita]] o usa `npm run release:clean`.
 - Per importare mappe esterne come bozze, apri [[Risorse/Importare Mappe]] o usa `npm run import:azgaar`.
 - Non modificare manualmente le note in `SRD`: sono un riferimento regolamentare separato e possono essere rigenerate.
 
@@ -154,7 +154,7 @@ npm run release:clean
 
 `SRD` contiene il System Reference Document 5.2.1 in italiano come archivio regolamentare separato dal contenuto del mondo. Per rigenerarlo usa:
 
-La rigenerazione dello SRD e una procedura tecnica documentata in [[Risorse/Sviluppo Vault]].
+La rigenerazione dello SRD e una procedura tecnica documentata in [[Dev/Sviluppo Vault]].
 
 ## Licenza
 

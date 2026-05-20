@@ -1,7 +1,8 @@
 filters:
   and:
     - file.folder == "Mondi/Luoghi"
-    - file.name != "Luoghi"properties:
+    - file.name != "Luoghi"
+properties:
   nome:
     displayName: Nome
   stato:

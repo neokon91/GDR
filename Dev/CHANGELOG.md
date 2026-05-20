@@ -2,7 +2,29 @@
 
 ## Unreleased
 
-Nessuna modifica non rilasciata.
+### Aggiunto
+
+- [[z.bases/Fazioni.base]] per correggere rapidamente fazioni in movimento, pressione, relazioni, mondo e archivio.
+- [[z.bases/Economia.base]] per lavorare in tabella su risorse, rotte, mercati e pressioni economiche.
+- [[z.bases/Worldbuilding.base]] per modificare culture, religioni, societa e cosmologia senza toccare query Dataview.
+- [[Dev/Roadmap/1.0.0]] ora include una fase dedicata a Tasks e Bases avanzate.
+- [[Dev/Roadmap/1.0 Professionale]] come nuova roadmap attiva a Punto 0 per la vera 1.0.
+- [[Dev/Confine Release Repository]] per chiarire cosa entra nella ZIP utente e cosa resta nel repository.
+- [[Dev/Smoke 1.0 Professionale]] come checklist visuale completa dei flussi pre-release.
+- [[Dev/Integrazioni Plugin]] ora classifica tutti i plugin/strumenti installati per la 1.0 professionale.
+- Cartella `Dev/` per concentrare roadmap, changelog, audit, release notes, smoke, sviluppo e documentazione tecnica.
+- `Dev/TemplateFactory/` con moduli YAML iniziali per generazione futura di template Jinja2 integrati con Templater e plugin.
+- [[Dev/Plugin Technical Reference]] con riferimenti tecnici a funzioni, sintassi e configurazioni dei plugin installati.
+
+### Migliorato
+
+- Normalizzato il formato dei file `.base` esistenti e aggiunto un controllo che segnala `properties:` incollato alla riga precedente.
+- [[Risorse/Task DM]] raggruppa le task operative per scadenza e ordina per urgenza/priorita.
+- Le bacheche operative usano priorita Tasks solo su lavoro reale del DM e [[z.bacheche/Manutenzione Vault]] contiene ricorrenze mensili di manutenzione.
+- Le basi Missioni, Fazioni, Worldbuilding ed Economia espongono formule leggere di stato operativo o prontezza.
+- Le viste Bases prioritarie usano `groupBy` e `limit`, mentre gli archivi restano completi.
+- Rimossi gli artefatti di release generati da `dist/` dal workspace locale.
+- Spostato il materiale di sviluppo fuori da `Risorse/` e dalla root, aggiornando controlli e riferimenti.
 
 ## 1.0.0 - 2026-05-20
 
@@ -29,7 +51,7 @@ Nessuna modifica non rilasciata.
 
 - [[Hub/Party Control]] per PG, HP, missioni, inventario e flags durante la sessione.
 - [[Risorse/Quality Report]] come dashboard analytics per copertura, buchi operativi, sicurezza pubblicazione e materiale screenshot-ready.
-- [[Risorse/Roadmap/1.0.0]] come roadmap completa e fonte unica per direzione prodotto, UX operativa e backlog attivo.
+- [[Dev/Roadmap/1.0.0]] come roadmap completa e fonte unica per direzione prodotto, UX operativa e backlog attivo.
 
 ### Migliorato
 
@@ -77,7 +99,7 @@ Nessuna modifica non rilasciata.
 
 - `CONTRIBUTING.md` e issue template GitHub per bug e feature request.
 - [[Risorse/Importare Mappe]] e import GeoJSON Azgaar verso bozze di luoghi.
-- [[Risorse/Roadmap/0.8.0|Roadmap 0.8.0]] per completamento prodotto prima della release ZIP iniziale.
+- [[Dev/Roadmap/0.8.0|Roadmap 0.8.0]] per completamento prodotto prima della release ZIP iniziale.
 - Tabelle Dice Roller per viaggio, scoperte esagono, reazioni fazione e conseguenze post-sessione.
 
 ### Migliorato
@@ -95,13 +117,13 @@ Nessuna modifica non rilasciata.
 
 - [[Vista Giocatori]] per materiale condivisibile: recap, obiettivi, PNG, luoghi e dispense note.
 - [[Giocatori/Giocatori]] come indice dell'area giocatori.
-- [[Risorse/Release Pulita]] per preparare una copia consegnabile del vault.
+- [[Dev/Release Pulita]] per preparare una copia consegnabile del vault.
 - Script `npm run release:clean` per creare `dist/vault-gdr-clean` e, se disponibile, `dist/vault-gdr-clean.zip`.
 
 ### Migliorato
 
 - [[Inizia Qui]] resta la pagina introduttiva all'apertura e mostra una prossima azione senza creare contenuti automaticamente.
-- [[Risorse/Roadmap/0.7.0|Roadmap 0.7.0]] registra le decisioni di esperienza utente confermate.
+- [[Dev/Roadmap/0.7.0|Roadmap 0.7.0]] registra le decisioni di esperienza utente confermate.
 
 ## 0.6.0 - 2026-05-20
 
@@ -113,7 +135,7 @@ Nessuna modifica non rilasciata.
 - [[Risorse/Opportunità Di Avventura]] per trovare elementi dell'ambientazione pronti a diventare missioni.
 - [[Risorse/Fronti Di Campagna]] per pressioni, prossime mosse e scadenze.
 - [[Risorse/Generare Campagna Da Ambientazione]] come guida non tecnica.
-- [[Risorse/Roadmap/0.7.0|Roadmap 0.7.0]] con proposta e domande sul comportamento atteso del vault.
+- [[Dev/Roadmap/0.7.0|Roadmap 0.7.0]] con proposta e domande sul comportamento atteso del vault.
 
 ### Migliorato
 
@@ -129,7 +151,7 @@ Nessuna modifica non rilasciata.
 - Nuove aree per [[Mondi/Culture/Culture]], [[Mondi/Lingue/Lingue]], [[Mondi/Storia/Storia]], [[Mondi/Conflitti/Conflitti]] e [[Mondi/Cosmologia/Cosmologia]].
 - Modelli guidati per cultura, lingua, era storica, conflitto e cosmologia.
 - [[Risorse/Worldbuilding Tassonomico]] come guida non tecnica alla costruzione di mondi ricchi.
-- [[Risorse/Roadmap/0.5.0|Roadmap 0.5.0]] completata e [[Risorse/Roadmap/0.6.0|Roadmap 0.6.0]] preparata.
+- [[Dev/Roadmap/0.5.0|Roadmap 0.5.0]] completata e [[Dev/Roadmap/0.6.0|Roadmap 0.6.0]] preparata.
 
 ### Migliorato
 
@@ -147,7 +169,7 @@ Nessuna modifica non rilasciata.
 - [[Risorse/Profili Campagna]] per fantasy classico, investigativo, sandbox e one-shot.
 - [[Risorse/Materiali Al Tavolo]] per controllare dispense, mappe, media, incontri e creature della sessione attiva.
 - [[Risorse/Preset Calendario]] per usare date del mondo senza spiegare configurazioni interne.
-- [[Risorse/Roadmap/0.4.0|Roadmap 0.4.0]] completata come tracciamento della versione.
+- [[Dev/Roadmap/0.4.0|Roadmap 0.4.0]] completata come tracciamento della versione.
 
 ### Migliorato
 
@@ -177,7 +199,7 @@ Nessuna modifica non rilasciata.
 - [[z.modelli/Lore Capture]] per catturare eventi, dialoghi, luoghi, PNG improvvisati e conseguenze dalla sessione.
 - [[Mondi/Timeline/Timeline]] e [[z.modelli/Evento Storico]] per storicizzare eventi canonici, rumor, leggende, segreti e fatti dimenticati.
 - [[Mondi/Stato del Mondo]] per vedere conseguenze da applicare, PNG cambiati, luoghi in crisi, fazioni in movimento e missioni influenzate.
-- [[Risorse/Roadmap/0.2.0|Roadmap 0.2.0]] per tracciare lo stato della roadmap Runtime + Lore Engine.
+- [[Dev/Roadmap/0.2.0|Roadmap 0.2.0]] per tracciare lo stato della roadmap Runtime + Lore Engine.
 - Import SRD esteso a Background, Equipaggiamento, Talenti, Lingue e Specie dalla fonte JSON aggiornata.
 - Filtri opzionali per mondo e campagna su [[Worldbuilder Dashboard]] e [[Mondi/Stato del Mondo]].
 
@@ -199,7 +221,7 @@ Nessuna modifica non rilasciata.
 - Nota [[Inizia Qui]] come onboarding non tecnico.
 - [[Risorse/FAQ]] per supporto non tecnico.
 - Smoke test tecnico `node z.automazioni/check_vault.js`.
-- Documentazione di release in [[RELEASE]].
+- Documentazione di release in [[Dev/RELEASE]].
 - File [[VERSION]] con versione corrente del vault.
 
 ### Migliorato

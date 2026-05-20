@@ -21,5 +21,5 @@ Template usati dai pulsanti Meta Bind e dai router Templater.
 - Non rinominare un template senza aggiornare i blocchi `templateFile` nelle dashboard.
 - Non rinominare una chiamata `tp.user.*` senza rinominare anche lo script in `z.automazioni/`.
 - I template in `azioni/` e `wizard/` devono restare minimi: niente logica duplicata, solo chiamate allo script centrale.
-- Mantieni frontmatter e campi coerenti con [[Risorse/Sviluppo Vault]].
+- Mantieni frontmatter e campi coerenti con [[Dev/Sviluppo Vault]].
 - Dopo ogni modifica esegui `npm run check` dal root.

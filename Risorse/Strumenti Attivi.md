@@ -9,7 +9,7 @@ Per il primo avvio usa [[Risorse/Primo Avvio Strumenti]]. Se qualcosa non rispon
 ## Sempre Utili
 
 - **Dashboard e tabelle automatiche**: mostrano sessioni, missioni, PNG, bozze, materiali pronti e problemi da controllare.
-- **Viste modificabili**: le viste Bases in `z.bases` permettono di correggere campi principali senza modificare query. Apri [[z.bases/Missioni.base]], [[z.bases/PNG.base]], [[z.bases/Luoghi.base]], [[z.bases/Incontri.base]] o [[z.bases/Atlante Mappe.base]] quando vuoi lavorare in tabella.
+- **Viste modificabili**: le viste Bases in `z.bases` permettono di correggere campi principali senza modificare query. Apri [[z.bases/Missioni.base]], [[z.bases/Worldbuilding.base]], [[z.bases/Fazioni.base]], [[z.bases/Economia.base]], [[z.bases/PNG.base]], [[z.bases/Luoghi.base]], [[z.bases/Incontri.base]] o [[z.bases/Atlante Mappe.base]] quando vuoi lavorare in tabella.
 - **Segnalibri e workspace**: [[Risorse/Workspaces e Segnalibri]] organizza accessi rapidi per tavolo, worldbuilding e manutenzione.
 - **Pulsanti di creazione**: creano sessioni, missioni, PNG, luoghi, incontri, oggetti e appunti gia impostati.
 - **Campi guidati**: aiutano a compilare stato, tipo, mondo, luoghi, fazioni e collegamenti senza ricordare la struttura.
@@ -19,7 +19,7 @@ Per il primo avvio usa [[Risorse/Primo Avvio Strumenti]]. Se qualcosa non rispon
 ## Al Tavolo
 
 - **Bacheche**: aiutano a preparare e chiudere una sessione.
-- **Task DM**: [[Risorse/Task DM]] raccoglie le checklist operative `#task`; il plugin Tasks resta installabile dopo, se serve.
+- **Task DM**: [[Risorse/Task DM]] raccoglie le checklist operative `#task` dalle bacheche e le ordina per scadenza, urgenza e priorita.
 - **Blocchi colorati**: distinguono scene, indizi, segreti, pericoli, ricompense e testi da leggere.
 - **Schede creatura**: mostrano mostri e creature in formato leggibile.
 - **Tiri rapidi**: permettono prove, dadi e tabelle casuali dentro le note.
@@ -41,7 +41,7 @@ Per il primo avvio usa [[Risorse/Primo Avvio Strumenti]]. Se qualcosa non rispon
 - **Icone**: rendono cartelle e pagine piu riconoscibili.
 - **Schede nelle note lunghe**: riducono lo scrolling in dashboard e template complessi.
 - **Aspetto del vault**: permette piccole regolazioni visuali senza toccare codice.
-- **Linter manuale**: [[Risorse/Linter e Sviluppo]] aiuta a ripulire note selezionate senza riscrivere SRD, mappe o configurazioni.
+- **Linter manuale**: [[Dev/Linter e Sviluppo]] aiuta a ripulire note selezionate senza riscrivere SRD, mappe o configurazioni.
 
 ## Regola Pratica
 

@@ -36,7 +36,7 @@ Conteggio su file Markdown del vault, escluso `dist`.
 | `encounter` | 3 blocchi, 5 inline | Sottoutilizzato: utile solo per combattimenti pronti. |
 | `fc-date` | 39 | Calendarium presente ma ancora leggero. |
 | `tabs` | 369 | Molto sfruttato, soprattutto su note lunghe e mostri. |
-| `.base` | 5 basi, 20 viste tabellari | Bases ora usa viste diverse per priorita, archivio, relazioni e dati marker. |
+| `.base` | 8 basi, 37 viste tabellari | Bases ora usa viste diverse per priorita, archivio, relazioni, worldbuilding, economia e dati marker. |
 | `#task` | 0 prima del pilota | Ora usato come filtro globale Tasks. |
 
 ## Stato Dopo Il Pilota
@@ -44,6 +44,9 @@ Conteggio su file Markdown del vault, escluso `dist`.
 Implementato:
 
 - `z.bases/Missioni.base`;
+- `z.bases/Worldbuilding.base`;
+- `z.bases/Fazioni.base`;
+- `z.bases/Economia.base`;
 - `z.bases/PNG.base`;
 - `z.bases/Luoghi.base`;
 - `z.bases/Incontri.base`;
@@ -51,9 +54,10 @@ Implementato:
 - `z.bases/README.md`;
 - `#task` sulle checklist delle bacheche in `z.bacheche`.
 - [[Risorse/Task DM]] come vista Tasks dei task operativi, con fallback Dataview.
+- [[z.bacheche/Manutenzione Vault]] come unica bacheca con ricorrenze periodiche.
 - `.obsidian/plugins/obsidian-tasks-plugin/data.json` con global filter `#task`.
 
-Le viste Bases sono volutamente semplici: leggono frontmatter, permettono correzioni rapide e non duplicano logiche complesse. Ogni base importante ha piu viste tabellari per separare lavoro attivo, pressione, archivio e controllo dei dati.
+Le viste Bases sono volutamente semplici: leggono frontmatter, permettono correzioni rapide e non duplicano logiche complesse. Ogni base importante ha piu viste tabellari per separare lavoro attivo, pressione, archivio, relazioni, worldbuilding, economia e controllo dei dati.
 
 ## Cosa Imparare Da Altri Vault
 
@@ -84,6 +88,8 @@ Usare Bases per:
 - viste tabellari alternative sullo stesso dataset, per esempio aperte/archivio, pressione/segreti, per mondo/per sessione;
 - viste cards leggere per PNG, risorse o compendium;
 - correzione rapida di `stato`, `pressione`, `prossima_mossa`, `luogo`, `fazioni`;
+- formule leggere di `stato_operativo`, `prontezza` o `mancanze` quando evitano controlli manuali ripetitivi;
+- `groupBy` e `limit` solo nelle viste prioritarie, mai come sostituto degli archivi completi;
 - viste mappa future solo quando `lat`, `lon`, `coordinate`, `tile` o campi equivalenti saranno stabili.
 
 Non usare Bases per:
@@ -91,6 +97,7 @@ Non usare Bases per:
 - dashboard con card HTML e calcoli complessi;
 - controlli di qualita con molte condizioni;
 - viste che devono leggere task interni, paragrafi o contenuto non in frontmatter;
+- formule basate su `file.backlinks`, perche sono pesanti e non sempre si aggiornano subito;
 - logiche gia gestite bene da DataviewJS.
 
 ## Tasks
@@ -103,6 +110,8 @@ Configurazione attiva:
 - usare Tasks solo su `z.bacheche`, preparazione, post-sessione e manutenzione;
 - lasciare senza `#task` checklist narrative, checklist di pubblicazione e checklist guida;
 - usare scadenze solo quando servono davvero, per esempio preparazione entro la prossima sessione.
+- usare grouping e sort per scadenza, priorita e urgenza in [[Risorse/Task DM]];
+- usare ricorrenze solo per manutenzione periodica, non per eventi narrativi.
 
 Query candidata:
 

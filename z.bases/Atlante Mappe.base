@@ -1,7 +1,8 @@
 filters:
   and:
     - file.folder == "Mondi/Luoghi"
-    - note.coordinatesproperties:
+    - note.coordinates
+properties:
   file.name:
     displayName: Luogo
   note.stato:

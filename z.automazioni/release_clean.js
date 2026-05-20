@@ -31,11 +31,12 @@ const INCLUDED_ROOT_FILES = new Set([
     "VERSION.md",
 ]);
 
-const EXCLUDED_DIRS = new Set([".git", ".github", "dist", "docs", "Import", "node_modules"]);
+const EXCLUDED_DIRS = new Set([".git", ".github", "Dev", "dist", "docs", "Import", "node_modules"]);
 const EXCLUDED_ROOT_FILES = new Set([".gitignore", "CHANGELOG.md", "CONTRIBUTING.md", "RELEASE.md", "Repository.md", "package.json"]);
 const EXCLUDED_RISORSE = new Set([
     "Callout GDR.md",
     "Checklist Lore Professionale.md",
+    "Confine Release Repository.md",
     "Consegna Nuovo DM.md",
     "Guida Lore Professionale.md",
     "Indice Connettore GPT.md",
@@ -48,6 +49,7 @@ const EXCLUDED_RISORSE = new Set([
     "Recap Plugin Installati.md",
     "Release Pulita.md",
     "Roadmap",
+    "Smoke 1.0 Professionale.md",
     "Strumenti Attivi.md",
     "Studio Iron Vault.md",
     "Sviluppo Vault.md",

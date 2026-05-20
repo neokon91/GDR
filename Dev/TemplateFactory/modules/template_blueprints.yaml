@@ -1,0 +1,96 @@
+id: template_blueprints
+purpose: Blueprint iniziali per generare template Markdown/Templater con Jinja2.
+version: 0.1.0
+blueprints:
+  world_entity:
+    target_family:
+      - cultura
+      - religione
+      - societa
+      - cosmologia
+      - risorsa
+      - creatura
+      - evento storico
+    jinja_template: ../jinja/entity_template.md.j2
+    templater_entry: "<% await tp.user.world_entity(tp) %>"
+    required_modules:
+      - fields_core
+      - plugin_bindings
+    sections:
+      - identita
+      - uso_al_tavolo
+      - connessioni
+      - propagazione
+      - player_safe
+      - controllo
+    plugin_features:
+      - templater
+      - meta_bind
+      - dataview
+      - metadata_menu
+      - bases
+  session:
+    target_family:
+      - sessione
+    jinja_template: ../jinja/session_template.md.j2
+    templater_entry: "<% await tp.user.sessione(tp) %>"
+    sections:
+      - obiettivo
+      - prima_scena
+      - scelta
+      - pressione
+      - materiali
+      - incontri
+      - media
+      - post_sessione
+    plugin_features:
+      - templater
+      - meta_bind
+      - dataview
+      - tasks
+      - dice_roller
+      - initiative_tracker
+      - media_extended
+  map_asset:
+    target_family:
+      - mappa
+      - fronte
+      - territorio
+      - dungeon
+    jinja_template: ../jinja/map_template.md.j2
+    sections:
+      - cosa_mostra
+      - layer_dm
+      - layer_pubblico
+      - pin
+      - note_collegate
+      - fallback_markdown
+    plugin_features:
+      - excalidraw
+      - canvas
+      - maps
+      - ttrpg_maps
+      - hex_cartographer
+      - dataview
+  creature_encounter:
+    target_family:
+      - creatura
+      - incontro
+    jinja_template: ../jinja/encounter_template.md.j2
+    sections:
+      - statblock
+      - encounter
+      - terreno
+      - obiettivo
+      - complicazioni
+      - ricompense
+    plugin_features:
+      - fantasy_statblocks
+      - initiative_tracker
+      - dice_roller
+      - callout_manager
+outputs:
+  markdown_templates: z.modelli
+  fileclasses: z.fileclass
+  bases: z.bases
+  checks: z.automazioni/check_vault.js

@@ -1,0 +1,118 @@
+id: fields_core
+purpose: Campi canonici condivisi da template, fileClass, Bases, Dataview e controlli.
+version: 0.1.0
+fields:
+  identity:
+    - name: id
+      type: text
+      required: true
+      source: templater
+      use: slug stabile della nota
+    - name: nome
+      type: text
+      required: true
+      source: templater
+      use: titolo leggibile
+    - name: categoria
+      type: select
+      required: true
+      source: taxonomy
+      use: famiglia principale della nota
+    - name: tipo
+      type: select
+      required: true
+      source: taxonomy
+      use: sottotipo giocabile
+    - name: stato
+      type: select
+      required: true
+      source: metadata_menu
+      use: avanzamento operativo
+  world_links:
+    - name: mondo
+      type: wikilink
+      required: true
+      source: meta_bind
+      use: mondo di riferimento
+    - name: luoghi
+      type: wikilink_list
+      required: false
+      source: meta_bind
+      use: ancore geografiche
+    - name: fazioni
+      type: wikilink_list
+      required: false
+      source: meta_bind
+      use: poteri coinvolti
+    - name: missioni
+      type: wikilink_list
+      required: false
+      source: meta_bind
+      use: trasformazione in gioco
+    - name: connessioni
+      type: wikilink_list
+      required: false
+      source: meta_bind
+      use: rete generale del Codex
+  table_use:
+    - name: gancio
+      type: text
+      required: false
+      source: meta_bind
+      use: perche entra in gioco
+    - name: uso_al_tavolo
+      type: text
+      required: false
+      source: meta_bind
+      use: come usarlo in sessione
+    - name: player_safe
+      type: text
+      required: false
+      source: meta_bind
+      use: testo condivisibile
+    - name: segreto
+      type: text
+      required: false
+      source: meta_bind
+      use: informazione DM
+  pressure:
+    - name: pressione
+      type: number
+      required: false
+      source: meta_bind
+      use: urgenza fictionale
+    - name: prossima_mossa
+      type: text
+      required: false
+      source: meta_bind
+      use: cosa accade se ignorato
+    - name: conseguenze
+      type: wikilink_list
+      required: false
+      source: meta_bind
+      use: risultati o impatti
+    - name: entita_impattate
+      type: wikilink_list
+      required: false
+      source: meta_bind
+      use: bersagli diretti della conseguenza
+    - name: propaga_a
+      type: wikilink_list
+      required: false
+      source: meta_bind
+      use: propagazione futura
+  public_safety:
+    - name: pubblico
+      type: boolean
+      required: false
+      source: meta_bind
+      use: ammissibile in vista giocatori
+    - name: canonico
+      type: boolean
+      required: false
+      source: meta_bind
+      use: confermato nel mondo
+checks:
+  - check_vault_required_fields
+  - public_secret_scan
+  - live_note_session_world_links

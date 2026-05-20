@@ -1,0 +1,78 @@
+id: workflows
+purpose: Flussi principali da coprire con template generati e integrazioni plugin.
+version: 0.1.0
+workflows:
+  crea_mondo:
+    user_goal: Creare un mondo homebrew senza sapere quali file servono.
+    entry_points:
+      - Inizia Qui.md
+      - z.modelli/wizard/Nuovo Mondo Homebrew.md
+    required_plugins:
+      - Templater
+      - Meta Bind
+      - Dataview
+      - Metadata Menu
+      - Folder Notes
+    outputs:
+      - Mondi
+      - luoghi
+      - fazioni
+      - culture
+      - mistero
+      - pressione
+  espandi_mondo:
+    user_goal: Aggiungere entita vive collegate e giocabili.
+    required_plugins:
+      - Templater
+      - Meta Bind
+      - Bases
+      - Maps
+      - Excalidraw
+      - Advanced Canvas
+      - Iconize
+  prepara_sessione:
+    user_goal: Preparare una sessione radicata nel mondo.
+    required_plugins:
+      - Templater
+      - Dataview
+      - Tasks
+      - Kanban
+      - Dice Roller
+      - Initiative Tracker
+      - Fantasy Statblocks
+      - Media Extended
+  gioca_live:
+    user_goal: Gestire sessione, tiri, incontri, media e appunti live da una schermata.
+    required_plugins:
+      - Meta Bind
+      - Dataview
+      - Dice Roller
+      - Initiative Tracker
+      - Fantasy Statblocks
+      - Media Extended
+      - Callout Manager
+  post_sessione:
+    user_goal: Trasformare appunti e conseguenze in mondo aggiornato.
+    required_plugins:
+      - Templater
+      - Meta Bind
+      - Tasks
+      - Kanban
+      - Dataview
+      - Calendarium
+  vista_giocatori:
+    user_goal: Mostrare solo materiale sicuro e leggibile ai giocatori.
+    required_plugins:
+      - Dataview
+      - JS Engine
+      - Callout Manager
+      - Maps
+      - Excalidraw
+  manutenzione:
+    user_goal: Tenere il vault pulito e rilasciabile.
+    required_plugins:
+      - Linter
+      - BRAT
+      - Style Settings
+      - Tasks
+      - Bases

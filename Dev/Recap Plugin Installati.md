@@ -9,7 +9,7 @@ aggiornato: 2026-05-20
 
 # Recap Plugin Installati
 
-Questa pagina riassume i plugin community presenti nel vault, come sono configurati e come usarli meglio. Per il primo avvio resta valida [[Risorse/Primo Avvio Strumenti]]. Per le priorita di sviluppo usa [[Risorse/Integrazioni Plugin]].
+Questa pagina riassume i plugin community presenti nel vault, come sono configurati e come usarli meglio. Per il primo avvio resta valida [[Risorse/Primo Avvio Strumenti]]. Per le priorita di sviluppo usa [[Dev/Integrazioni Plugin]].
 
 ## Sintesi
 
@@ -192,7 +192,7 @@ Beneficia soprattutto: DM che usa musica, immagini, handout o video-reference.
 2. Fatto: create FileClass Metadata Menu aggiuntive per `incontro`, `rotta`, `risorsa`, `mercato`, `compendium`, `ricorrenza`, `mappa` e `media`.
 4. Fatto: Hex Cartographer resta opzionale guidato per `regione -> esagoni -> incontri -> conseguenze`.
 5. Fatto: Media Extended e collegato a [[Durante il Gioco]] tramite media con `stato: pronto`.
-8. Fatto: Linter configurato come supporto sviluppo manuale in [[Risorse/Linter e Sviluppo]].
+8. Fatto: Linter configurato come supporto sviluppo manuale in [[Dev/Linter e Sviluppo]].
 9. Fatto: Workspaces e Bookmarks collegati a [[Risorse/Workspaces e Segnalibri]].
 10. Fatto: Maps per Bases installato e collegato a [[z.bases/Atlante Mappe.base]] e [[Risorse/Mappe Bases]].
-11. Tenere Iron Vault fuori dal bundle: usare [[Risorse/Studio Iron Vault]] solo come studio di design.
+11. Tenere Iron Vault fuori dal bundle: usare [[Dev/Studio Iron Vault]] solo come studio di design.

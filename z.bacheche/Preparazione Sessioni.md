@@ -10,19 +10,19 @@ kanban-plugin: board
 
 ## Da Preparare
 
-- [ ] Luoghi #task
-- [ ] PNG #task
-- [ ] Incontri #task
+- [ ] Luoghi #task 🔼
+- [ ] PNG #task 🔼
+- [ ] Incontri #task 🔼
 - [ ] Ricompense #task
 
 ## Pronto Per Il Tavolo
 
-- [ ] Prossima sessione #task
+- [ ] Prossima sessione #task 🔺
 
 ## Dopo Sessione
 
-- [ ] Aggiornare conseguenze #task
-- [ ] Spostare appunti nelle note del mondo #task
+- [ ] Aggiornare conseguenze #task 🔺
+- [ ] Spostare appunti nelle note del mondo #task 🔼
 
 
 %% kanban:settings

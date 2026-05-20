@@ -1,0 +1,165 @@
+filters:
+  or:
+    - file.folder == "Mondi/Risorse"
+    - file.folder == "Mondi/Rotte"
+    - file.folder == "Mondi/Mercati"
+formulas:
+  stato_operativo: 'if(stato == "archiviata" || stato == "ignorata" || stato == "conclusa", "chiusa", if(pressione, if(prossima_mossa, "pressione", "manca mossa"), "stabile"))'
+properties:
+  formula.stato_operativo:
+    displayName: Stato operativo
+  nome:
+    displayName: Nome
+  stato:
+    displayName: Stato
+  tipo:
+    displayName: Tipo
+  mondo:
+    displayName: Mondo
+  pressione:
+    displayName: Pressione
+  prossima_mossa:
+    displayName: Prossima mossa
+  luoghi:
+    displayName: Luoghi
+  luogo:
+    displayName: Luogo
+  fazioni_controllanti:
+    displayName: Fazioni controllanti
+  risorse:
+    displayName: Risorse
+  rotte:
+    displayName: Rotte
+  mercati:
+    displayName: Mercati
+  scarsita:
+    displayName: Scarsita
+  uso_narrativo:
+    displayName: Uso narrativo
+  stato_rotta:
+    displayName: Stato rotta
+  partenza:
+    displayName: Partenza
+  arrivo:
+    displayName: Arrivo
+  risorse_trasportate:
+    displayName: Risorse trasportate
+  pedaggi:
+    displayName: Pedaggi
+  rischi:
+    displayName: Rischi
+views:
+  - type: table
+    name: Pressioni economiche
+    limit: 30
+    groupBy:
+      property: formula.stato_operativo
+      direction: ASC
+    filters:
+      and:
+        - file.name != "Risorse"
+        - file.name != "Rotte"
+        - file.name != "Mercati"
+        - stato != "archiviata"
+    order:
+      - nome
+      - tipo
+      - stato
+      - formula.stato_operativo
+      - pressione
+      - prossima_mossa
+      - luoghi
+      - fazioni_controllanti
+    sort:
+      - property: pressione
+        direction: DESC
+      - property: nome
+        direction: ASC
+  - type: table
+    name: Risorse
+    filters:
+      and:
+        - file.folder == "Mondi/Risorse"
+        - file.name != "Risorse"
+        - stato != "archiviata"
+    order:
+      - nome
+      - stato
+      - formula.stato_operativo
+      - luoghi
+      - fazioni_controllanti
+      - scarsita
+      - uso_narrativo
+      - rotte
+      - mercati
+      - pressione
+      - prossima_mossa
+    sort:
+      - property: pressione
+        direction: DESC
+      - property: nome
+        direction: ASC
+  - type: table
+    name: Rotte
+    filters:
+      and:
+        - file.folder == "Mondi/Rotte"
+        - file.name != "Rotte"
+        - stato != "archiviata"
+    order:
+      - nome
+      - stato_rotta
+      - formula.stato_operativo
+      - partenza
+      - arrivo
+      - risorse_trasportate
+      - fazioni_controllanti
+      - pressione
+      - prossima_mossa
+    sort:
+      - property: stato_rotta
+        direction: ASC
+      - property: pressione
+        direction: DESC
+  - type: table
+    name: Mercati
+    filters:
+      and:
+        - file.folder == "Mondi/Mercati"
+        - file.name != "Mercati"
+        - stato != "archiviata"
+    order:
+      - nome
+      - luogo
+      - formula.stato_operativo
+      - fazioni_controllanti
+      - risorse
+      - rotte
+      - pedaggi
+      - rischi
+      - pressione
+      - prossima_mossa
+    sort:
+      - property: pressione
+        direction: DESC
+      - property: nome
+        direction: ASC
+  - type: table
+    name: Archivio
+    filters:
+      or:
+        - stato == "archiviata"
+        - stato == "ignorata"
+        - stato == "conclusa"
+    order:
+      - nome
+      - tipo
+      - stato
+      - formula.stato_operativo
+      - mondo
+      - prossima_mossa
+    sort:
+      - property: stato
+        direction: ASC
+      - property: nome
+        direction: ASC

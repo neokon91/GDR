@@ -1,15 +1,15 @@
 # Sviluppo Vault
 
-Questa nota contiene convenzioni tecniche per mantenere il vault: campi, template, automazioni, plugin, controlli e release. La direzione prodotto e UX operativa attiva stanno in [[Risorse/Roadmap/1.0.0]].
+Questa nota contiene convenzioni tecniche per mantenere il vault: campi, template, automazioni, plugin, controlli e release. La direzione prodotto e UX operativa attiva stanno in [[Dev/Roadmap/1.0 Professionale]].
 
 ## Documentazione
 
 - `README.md` deve restare una guida per l'utente finale: dove cliccare, dove scrivere, come usare il vault durante preparazione e gioco.
-- [[Repository]] deve restare la mappa tecnica della repo: cartelle, confini, comandi e cosa non spostare alla leggera.
+- [[Dev/Repository]] deve restare la mappa tecnica della repo: cartelle, confini, comandi e cosa non spostare alla leggera.
 - [[Risorse/Guida DM]] deve spiegare il flusso operativo senza dettagli tecnici: preparazione, gioco, Inbox Live, post-sessione e canonizzazione.
-- [[Risorse/Indice Connettore GPT]] deve restare un indice sintetico per code search e connettori GPT, marcato con `is_code_search_indexed: true`.
+- [[Dev/Indice Connettore GPT]] deve restare un indice sintetico per code search e connettori GPT, marcato con `is_code_search_indexed: true`.
 - Questa nota contiene la documentazione tecnica di sviluppo: campi, template, automazioni, test, import generati e criteri di modifica.
-- [[Risorse/Roadmap/1.0.0]] contiene la direzione prodotto e UX operativa attiva. Se c'e conflitto, prevale la roadmap attiva.
+- [[Dev/Roadmap/1.0 Professionale]] contiene la direzione prodotto e UX operativa attiva. [[Dev/Roadmap/1.0.0]] resta fondazione storica. Se c'e conflitto, prevale la roadmap attiva.
 - Le istruzioni tecniche non vanno nel README se non sono necessarie per usare il vault al tavolo.
 
 ## Stati delle Note Consigliati
@@ -181,8 +181,8 @@ npm run clean:repo
 Per pubblicare una copia del vault:
 
 1. aggiorna [[VERSION]];
-2. aggiorna [[CHANGELOG]];
-3. segui [[RELEASE]];
+2. aggiorna [[Dev/CHANGELOG]];
+3. segui [[Dev/RELEASE]];
 4. esegui `npm run check`;
 5. apri manualmente [[Inizia Qui]], [[1. DM Dashboard]], [[Durante il Gioco]] e [[Worldbuilder Dashboard]].
 

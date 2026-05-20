@@ -28,7 +28,7 @@ Questa nota e tecnica. Serve solo a chi cura il vault, non al DM che lo usa per 
 | `Inbox/` | appunti grezzi e live | Qui entra cio che non e ancora canonico. |
 | `Mondi/` | ambientazioni canoniche | Qui stanno luoghi, PNG, fazioni, relazioni, missioni, incontri e timeline. |
 | `Risorse/` | guide, strumenti, mappe, media, tabelle | Materiale riutilizzabile e documentazione del vault. |
-| `Risorse/Roadmap/` | roadmap storiche | Archivio manutenzione, non percorso primario del DM. |
+| `Dev/Roadmap/` | roadmap attiva e storiche | Archivio manutenzione, non percorso primario del DM. |
 | `SRD/` | riferimento regolamentare generato | Non trattare come contenuto canonico del mondo. |
 | `z.modelli/` | template Templater | Percorsi richiamati da pulsanti Meta Bind. |
 | `z.modelli/azioni/` | template azione Meta Bind | Deve restare sottile: solo chiamate a `meta_actions.js`. |

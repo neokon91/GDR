@@ -1,0 +1,113 @@
+id: plugin_bindings
+purpose: Binding tecnici dei plugin usati dai template generati.
+version: 0.1.0
+bindings:
+  templater:
+    runtime: true
+    entry_syntax:
+      - "<% await tp.user.nome_script(tp) %>"
+      - "<%* codice JS Templater %>"
+    local_scripts: z.automazioni
+    output_targets:
+      - z.modelli
+      - z.modelli/wizard
+      - z.modelli/azioni
+  meta_bind:
+    runtime: true
+    inline_inputs:
+      - "INPUT[text:campo]"
+      - "INPUT[toggle:campo]"
+      - "INPUT[slider(minValue(0), maxValue(10), stepSize(1), addLabels):pressione]"
+      - "INPUT[inlineListSuggester(optionQuery(\"Mondi\"), useLinks(partial), allowOther):connessioni]"
+    button_syntax:
+      - "BUTTON[id-template]"
+    config_path: .obsidian/plugins/obsidian-meta-bind-plugin/data.json
+  dataview:
+    runtime: true
+    codeblocks:
+      - "```dataview"
+      - "```dataviewjs"
+    use_for:
+      - indici
+      - dashboard
+      - controlli leggibili
+  js_engine:
+    runtime: true
+    use_for:
+      - viste riusabili
+      - componenti dashboard complessi
+    local_modules:
+      - z.engine/gdr_views.js
+  metadata_menu:
+    runtime: true
+    config_path: .obsidian/plugins/metadata-menu/data.json
+    output_targets:
+      - z.fileclass
+  bases:
+    runtime: true
+    extension: .base
+    use_for:
+      - correzione tabellare frontmatter
+      - mappe con Maps per Bases
+      - formule leggere
+  tasks:
+    runtime: true
+    global_filter: "#task"
+    use_for:
+      - lavoro operativo DM
+      - manutenzione
+  calendarium:
+    runtime: true
+    fields:
+      - fc-calendar
+      - fc-date
+      - fc-category
+      - fc-display-name
+      - fc-end
+  statblocks:
+    runtime: true
+    fields:
+      - statblock
+      - name
+      - source
+    codeblock: statblock
+  initiative_tracker:
+    runtime: true
+    codeblock: encounter
+  dice_roller:
+    runtime: true
+    inline_syntax:
+      - "dice: 1d20"
+      - "dice: [[Risorse/Tabelle/Tabelle#^id-tabella]]"
+  excalidraw:
+    runtime: true
+    output_folder: Risorse/Mappe
+    extension: .excalidraw.md
+  canvas:
+    runtime: true
+    extension: .canvas
+  media_extended:
+    runtime: true
+    fields:
+      - media
+      - timestamp
+      - scena
+  iconize:
+    runtime: true
+    config_path: .obsidian/plugins/obsidian-icon-folder/data.json
+  tabs:
+    runtime: true
+    codeblock: tabs
+  callout_manager:
+    runtime: true
+    syntax: "> [!tipo]"
+  style_settings:
+    runtime: true
+    config_path: .obsidian/plugins/obsidian-style-settings/data.json
+  linter:
+    runtime: false
+    config_path: .obsidian/plugins/obsidian-linter/data.json
+  brat:
+    runtime: false
+    use_for:
+      - manutenzione plugin

@@ -7,7 +7,7 @@ cssclasses:
 
 Questa pagina decide quali plugin integrare per primi nel vault. Non e una lista di installazione: e una coda di lavoro per trasformare plugin gia scelti in funzioni utili al DM.
 
-Per il recap completo dei plugin installati, con versioni, stato reale, fonti ufficiali e beneficiari, vedi [[Risorse/Recap Plugin Installati]].
+Per il recap completo dei plugin installati, con versioni, stato reale, fonti ufficiali e beneficiari, vedi [[Dev/Recap Plugin Installati]].
 
 ## Fonti Ufficiali Consultate
 
@@ -67,27 +67,64 @@ Prima di lavorarci, controlla:
 | Iron Vault | non incluso | nessuna pagina GDR D&D | tenere fuori dal bundle; usare solo come studio di design |
 | BRAT | manutenzione essenziale | gestione plugin non ufficiali | tenere attivo ma fuori dal flusso utente finale |
 
-## Plugin Da Valutare
+## Classificazione 1.0 Professionale
 
-Questa non e una lista di installazione. E una coda di prodotto: un candidato entra solo se migliora una pagina operativa gia esistente o riduce complessita per l'utente non tecnico.
+Nessun plugin installato e candidato alla rimozione senza prova concreta. Ogni plugin deve essere core, supporto, opzionale guidato o manutenzione.
+
+| Plugin installato | Classe 1.0 | Uso obbligatorio prima della release |
+| --- | --- | --- |
+| Dataview | core | Dashboard, controlli, indici decisionali. |
+| Templater | core | Wizard e creazione guidata senza YAML manuale. |
+| Meta Bind | core | Pulsanti, input e campi editabili nel corpo nota. |
+| JS Engine | core tecnico | Helper riusabili per viste complesse. |
+| Metadata Menu | core dati | FileClass e campi guidati per contenuti principali. |
+| Folder Notes | core navigazione | Ogni cartella importante deve aprire un indice utile. |
+| Homepage | core onboarding | Apertura non tecnica su [[Inizia Qui]]. |
+| Callout Manager | core lettura | Callout stabili e riconoscibili per gioco e worldbuilding. |
+| Fantasy Statblocks | core combattimento | Creature e mostri pronti per schede al tavolo. |
+| Excalidraw | core mappe visuali | Fronti, territori, indizi, scene e mappe linkate. |
+| Kanban | supporto DM | Bacheche operative, non archivio lore. |
+| Tasks | supporto DM | Task operative con priorita, scadenze e manutenzione. |
+| Bases core | supporto editing | Correzione tabellare di metadati stabili. |
+| Maps per Bases | supporto mappe | Marker e viste mappa da campi `coordinates`, `icon`, `color`. |
+| Initiative Tracker | supporto tavolo | Combattimenti preparati con creature linkate. |
+| Dice Roller | supporto tavolo | Tabelle e tiri immediatamente giocabili. |
+| Calendarium | supporto tempo | Calendari selezionabili per mondo/campagna. |
+| Advanced Canvas | supporto reti vive | Reti navigabili di note, gruppi, archi e fronti. |
+| Media Extended | supporto tavolo | Media pronti con timestamp e scene collegate. |
+| Fantasy Content Generator | opzionale guidato | Bozze da smistare, mai canone automatico. |
+| Iconize | supporto orientamento | Icone coerenti per navigazione, non sostituto degli indici. |
+| Tabs | supporto UX | Riduzione scrolling solo in note lunghe. |
+| Style Settings | supporto visuale | Opzioni visuali stabili e documentate. |
+| Advanced Tables | supporto editing | Tabelle manuali e tabelle casuali leggibili. |
+| TTRPG Tools: Maps | supporto mappe tavolo | Mappe zoomabili con pin linkati alle note. |
+| Hex Cartographer | supporto esplorazione | Hexcrawl collegato a territori, incontri e conseguenze. |
+| Linter | manutenzione | Pulizia manuale controllata, mai lint on save distruttivo. |
+| BRAT | manutenzione | Gestione plugin beta/non ufficiali, invisibile al DM. |
+
+## Estensioni Non Installate Da Valutare
+
+Questa non e una lista di rimozione. I 27 plugin installati vanno sfruttati. Questa sezione riguarda solo estensioni non installate o alternative sovrapposte: entrano solo se migliorano una pagina operativa gia esistente o riducono complessita per l'utente non tecnico.
 
 | Candidato | Priorita | Decisione provvisoria | Dove avrebbe senso | Motivo |
 | --- | --- | --- | --- | --- |
 | Bases core | alta | integrare senza sostituire Dataview | dashboard di controllo, elenchi missioni, PNG, luoghi, materiali | E gia abilitato tra i core plugin e puo offrire viste modificabili piu accessibili dei blocchi Dataview. Dataview resta necessario per query complesse, aggregazioni e viste gia mature. |
 | Maps per Bases | media | installato e supportato | [[z.bases/Atlante Mappe.base]], [[Risorse/Mappe Bases]] | Plugin ufficiale Obsidian per viste mappa basate su Bases. Utile solo per note con `coordinates`; non sostituisce mappe fantasy visuali. |
 | Tasks | supportato | lavoro DM, non lore | preparazione sessione, post-sessione, backlog manutenzione | Installato con global filter `#task`. Forte per task con scadenze, ricorrenze, filtri e completamento da vista. Da evitare per missioni narrative: quelle restano note strutturate, non checkbox. |
-| QuickAdd | bassa | evitare per ora | catture rapide e macro | Potente, ma sovrappone Templater, Meta Bind e gli script `z.automazioni`. Entra solo se risolve una cattura che oggi richiede troppi click. |
-| Commander | bassa | opzionale UX | toolbar comandi per DM e mobile | Utile per esporre comandi senza far aprire la command palette. Non aggiunge contenuto o modello dati, quindi non e core. |
-| Leaflet | bassa | non integrare in release base | mappe fantasy con immagine e marker | Funzionalmente vicino a TTRPG Tools: Maps e risulta in maintenance mode. Ha senso solo per compatibilita con vault esistenti o mappe gia scritte in sintassi Leaflet. |
+| QuickAdd | bassa | non installato, evitare per ora | catture rapide e macro | Potente, ma sovrappone Templater, Meta Bind e gli script `z.automazioni`. Entra solo se risolve una cattura che oggi richiede troppi click. |
+| Commander | bassa | non installato, opzionale UX | toolbar comandi per DM e mobile | Utile per esporre comandi senza far aprire la command palette. Non aggiunge contenuto o modello dati, quindi non e core. |
+| Leaflet | bassa | non installato, alternativa mappe | mappe fantasy con immagine e marker | Funzionalmente vicino a TTRPG Tools: Maps. Ha senso solo per compatibilita con vault esistenti o mappe gia scritte in sintassi Leaflet. |
 
-Dettaglio audit: [[Risorse/Audit Plugin Bases Tasks]].
+Dettaglio audit: [[Dev/Audit Plugin Bases Tasks]].
 
 ### Prova Consigliata Per Bases
 
 Prima integrazione a basso rischio, avviata in `z.bases`:
 
 - fatto: creare una vista Bases per `Mondi/Missioni` filtrata per `stato`, `mondo`, `pressione` e `scadenza_mondo`;
+- fatto: creare una vista Bases per worldbuilding (`Mondi/Culture`, `Mondi/Religioni`, `Mondi/Societa`, `Mondi/Cosmologia`);
 - fatto: creare una vista Bases per `Mondi/Personaggi` con `tipo: png`, filtrata per `stato`, `fazione`, `luogo` e prossima mossa;
+- fatto: creare viste Bases per `Mondi/Fazioni` e per economia (`Mondi/Risorse`, `Mondi/Rotte`, `Mondi/Mercati`);
 - fatto: creare viste Bases pilota per `Mondi/Luoghi` e `Mondi/Incontri`;
 - fatto: aggiungere viste tabellari multiple per pressione, archivio, campagna, mondo, sessione, completamento dati e marker mappa;
 - linkare le viste da [[1. DM Dashboard]] come alternativa leggibile, non come sostituzione delle query Dataview;
@@ -103,6 +140,8 @@ Configurazione:
 
 - global filter impostato su `#task`;
 - usare [[Risorse/Task DM]] come vista operativa Tasks, con fallback Dataview;
+- query Tasks ordinate per scadenza, urgenza e priorita;
+- [[z.bacheche/Manutenzione Vault]] usa ricorrenze solo per controlli periodici del vault;
 - non taggare checklist narrative, checklist di pubblicazione o checklist guida;
 - non convertire missioni, clock o conseguenze in task.
 
@@ -213,7 +252,7 @@ Da fare:
 - fatto: mantenere `lintOnSave` e `lintOnFileChange` disattivati;
 - fatto: attivare solo regole a basso rischio: riga vuota dopo YAML, righe vuote consecutive, newline finale e trailing spaces;
 - fatto: ignorare `SRD`, `Risorse/Mappe` e `.obsidian`;
-- fatto: documentare uso e limiti in [[Risorse/Linter e Sviluppo]].
+- fatto: documentare uso e limiti in [[Dev/Linter e Sviluppo]].
 
 Fatto bene quando: il manutentore usa Linter su singole note o cartelle piccole e controlla sempre il diff.
 

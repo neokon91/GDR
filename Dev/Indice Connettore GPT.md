@@ -30,13 +30,15 @@ Questa nota orienta un connettore GPT o un indice code search sul vault. Non e u
 
 ## Entry Point Sviluppo
 
-- [[Risorse/Sviluppo Vault]]
+- [[Dev/Sviluppo Vault]]
 - [[Risorse/Controllo Vault]]
 - [[Risorse/Strumenti Attivi]]
-- [[Risorse/Integrazioni Plugin]]
-- [[CHANGELOG]]
+- [[Dev/Integrazioni Plugin]]
+- [[Dev/CHANGELOG]]
 - [[VERSION]]
-- [[RELEASE]]
+- [[Dev/RELEASE]]
+- [[Dev/Plugin Technical Reference]]
+- [[Dev/TemplateFactory/README]]
 
 ## Runtime E Automazioni
 
