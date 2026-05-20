@@ -263,6 +263,51 @@
     panel.innerHTML = rows.map(([title, body]) => cardHtml({ title, body, cls: "gdr-info-card compact" })).join("");
   }
 
+  function preparationTarget(dv) {
+    const explicit = activeSession(dv);
+    if (explicit) return explicit;
+
+    return dv.pages('"Mondi/Sessioni"')
+      .where(p => isReal(p) && ["preparazione", "bozza", "pronto"].includes(p.stato))
+      .sort(p => p.data ?? "9999-99-99", "asc")
+      .first();
+  }
+
+  function renderPreparationFocus(dv) {
+    const session = preparationTarget(dv);
+    if (!session) {
+      dv.paragraph("Nessuna sessione da preparare. Crea una sessione, poi torna qui e riempi i cinque blocchi sotto.");
+      return;
+    }
+
+    const checks = [
+      ["Obiettivo", hasText(session.obiettivo), fieldText(session.obiettivo) || "Scrivi cosa devono ottenere o decidere i personaggi."],
+      ["Prima scena", hasLinks(session.scene) || hasLinks(session.scenes) || hasText(session.apertura), fieldText(session.scene ?? session.scenes ?? session.apertura) || "Prepara dove si apre la sessione e cosa succede subito."],
+      ["Scelta", hasLinks(session.domande_al_tavolo) || hasText(session.scelta), fieldText(session.domande_al_tavolo ?? session.scelta) || "Formula una scelta concreta, non una lista di lore."],
+      ["Pressione", hasLinks(session.pressioni) || hasLinks(session.tracciati), fieldText(session.pressioni ?? session.tracciati) || "Collega un clock, una missione o una fazione che avanza se il party esita."],
+      ["Materiale", hasLinks(session.incontri) || hasLinks(session.dispense) || hasLinks(session.mappe), fieldText([...(asArray(session.incontri)), ...(asArray(session.dispense)), ...(asArray(session.mappe))]) || "Collega almeno un incontro, handout o mappa pronta."]
+    ];
+
+    const ready = checks.filter(([, ok]) => ok).length;
+    const title = `${session.file.name} · ${ready}/5 blocchi pronti`;
+    dv.paragraph(`Sessione da preparare: ${internalLink(session.file)} · ${escapeHtml(session.stato ?? "senza stato")}`);
+
+    const grid = dv.el("div", "", { cls: "gdr-card-grid compact" });
+    grid.innerHTML = checks.map(([label, ok, body]) => cardHtml({
+      title: `${ok ? "OK" : "Manca"} · ${label}`,
+      meta: title,
+      body,
+      link: session.file.path,
+      cls: `gdr-info-card compact ${ok ? "gdr-kind-ready" : "gdr-kind-missing"}`
+    })).join("");
+
+    if (ready >= 5) {
+      dv.paragraph("Output concreto: la sessione ha i cinque blocchi minimi. Segna `stato: pronto`, poi apri Durante il Gioco.");
+    } else {
+      dv.paragraph("Output concreto richiesto: apri la sessione linkata e completa solo i blocchi segnati come Manca.");
+    }
+  }
+
   function publicRows(dv, source, category, limit = 8) {
     return dv.pages(source)
       .where(p => publicCandidate(p, category))
@@ -417,6 +462,7 @@
     publicCandidate,
     renderActions,
     renderHome,
+    renderPreparationFocus,
     renderTableCockpit,
     renderPartyControl,
     renderPlayerRecap,

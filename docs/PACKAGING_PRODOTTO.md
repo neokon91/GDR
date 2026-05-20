@@ -10,7 +10,7 @@ Vault Obsidian italiano per DM e worldbuilder: workflow di sessione, mondo vivo,
 
 | Feature | Screenshot consigliato | Cosa deve comunicare |
 | --- | --- | --- |
-| Primo avvio | `Inizia Qui` | L'utente sa subito dove cliccare. |
+| Primo avvio | `Inizia Qui` | L'utente vede solo Prepara, Gioca, Aggiorna il mondo. |
 | Portale giocatori | `Vista Giocatori` | Materiale condivisibile senza segreti DM. |
 | Party control | `Hub/Party Control` | PG, HP, missioni e flags durante la sessione. |
 | Atlante | `Atlante del Mondo` tab Mappa | Mappe, territori, rotte e luoghi collegati. |
@@ -19,8 +19,8 @@ Vault Obsidian italiano per DM e worldbuilder: workflow di sessione, mondo vivo,
 
 ## GIF Brevi
 
-1. Primo avvio: `Inizia Qui` -> `Setup Guidato` -> `Prima Sessione In 15 Minuti`.
-2. Sessione: `DM Dashboard` -> `Durante il Gioco` -> `Party Control`.
+1. Flusso base: `Inizia Qui` -> `Preparazione Sessione` -> `Durante il Gioco` -> `Cosa Succede Fuori Scena`.
+2. Sessione: `Preparazione Sessione` -> cinque blocchi pronti -> `Durante il Gioco`.
 3. Condivisione: `Vista Giocatori` -> mappa pubblica -> handout.
 4. Worldbuilding: `Atlante del Mondo` -> mappa -> rotte -> buchi ambientazione.
 5. Release: `Quality Report` -> `Controllo Vault` -> `RELEASE`.

@@ -16,7 +16,7 @@ const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_conte
 const active = gdr.activeSession(dv);
 
 if (!active) {
-  dv.paragraph("Nessuna sessione attiva. Apri [[1. DM Dashboard]] e crea o prepara una sessione.");
+  dv.paragraph("Nessuna sessione attiva. Apri [[Risorse/Preparazione Sessione]] e rendi pronta una sessione.");
 } else {
   dv.paragraph(`Sessione: ${active.file.link} · ${active.data ?? "data non indicata"} · ${active.stato ?? "senza stato"}`);
   gdr.renderTableCockpit(dv);
@@ -31,31 +31,38 @@ if (!active) {
 
 `BUTTON[evento-lore-z-modelli-lore-capture-md]`
 
-`BUTTON[nuovo-png-z-modelli-personaggio-png-md]`
-
-`BUTTON[nuovo-luogo-z-modelli-luogo-router-md]`
-
-`BUTTON[nuova-missione-z-modelli-dm-missione-md]`
-
 `BUTTON[nuovo-clock-z-modelli-dm-tracciato-md]`
-
-`BUTTON[nuova-fazione-z-modelli-fazione-router-md]`
 
 `BUTTON[nuovo-incontro-z-modelli-dm-incontro-md]`
 
-`BUTTON[iniziativa-risorse-iniziativa-e-combattimenti]`
-
 `BUTTON[nuova-dispensa-z-modelli-dispensa-md]`
 
-`BUTTON[nuovo-oggetto-z-modelli-oggetto-md]`
+`BUTTON[party-control-hub-party-control]`
 
-`BUTTON[evento-storico-z-modelli-evento-storico-md]`
+`BUTTON[vista-giocatori-hub-vista-giocatori-vista-giocatori]`
 
-`BUTTON[stato-mondo-mondi-stato-del-mondo]`
+`BUTTON[post-sessione-guidato-risorse-post-sessione-guidato]`
 
-`BUTTON[controllo-vault-risorse-controllo-vault]`
-
-`BUTTON[tabelle-rapide-risorse-tabelle-tabelle]`
+> [!regia]- Strumenti avanzati
+> `BUTTON[nuovo-png-z-modelli-personaggio-png-md]`
+>
+> `BUTTON[nuovo-luogo-z-modelli-luogo-router-md]`
+>
+> `BUTTON[nuova-missione-z-modelli-dm-missione-md]`
+>
+> `BUTTON[nuova-fazione-z-modelli-fazione-router-md]`
+>
+> `BUTTON[iniziativa-risorse-iniziativa-e-combattimenti]`
+>
+> `BUTTON[nuovo-oggetto-z-modelli-oggetto-md]`
+>
+> `BUTTON[evento-storico-z-modelli-evento-storico-md]`
+>
+> `BUTTON[stato-mondo-mondi-stato-del-mondo]`
+>
+> `BUTTON[controllo-vault-risorse-controllo-vault]`
+>
+> `BUTTON[tabelle-rapide-risorse-tabelle-tabelle]`
 
 ## Scena Corrente
 

@@ -12,8 +12,9 @@ Vault GDR e un vault Obsidian per preparare sessioni, gestire campagne, costruir
 
 ## Cosa Ottieni
 
-- **Primo avvio guidato**: apri `Inizia Qui` e segui il percorso.
+- **Primo avvio guidato**: apri `Inizia Qui` e scegli solo tra Prepara, Gioca, Aggiorna il mondo.
 - **DM Dashboard**: campagne, sessioni, missioni, clock, incontri e materiali.
+- **Preparazione concreta**: una sessione e pronta solo quando ha obiettivo, prima scena, scelta, pressione e materiale.
 - **Durante il Gioco**: vista da tavolo per sessione attiva, appunti live e materiali pronti.
 - **Party Control**: PG, HP, missioni, inventario, ricompense e flags.
 - **Vista Giocatori**: recap, PNG noti, luoghi scoperti, handout e mappe pubbliche.

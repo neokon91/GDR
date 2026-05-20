@@ -2,9 +2,9 @@
 
 Un vault Obsidian professionale per DM e worldbuilder italiani: prepara sessioni, costruisce ambientazioni ricche, trasforma mondi in campagne, controlla il party e offre un portale dedicato ai giocatori.
 
-L'obiettivo e farlo sembrare una app locale dentro Obsidian, non una cartella di appunti: l'utente apre [[Inizia Qui]], sceglie cosa fare e usa dashboard, pulsanti e viste gia pronte.
+L'obiettivo e farlo sembrare una app locale dentro Obsidian, non una cartella di appunti: l'utente apre [[Inizia Qui]] e segue tre azioni concrete, **Prepara -> Gioca -> Aggiorna il mondo**.
 
-Apri [[Inizia Qui]] per il primo avvio. Usa [[1. DM Dashboard]] per preparare, [[Atlante del Mondo]] per costruire ambientazioni ricche, [[Geopolitical Dashboard]] per stati e relazioni diplomatiche, [[Motore Mondo Vivo]] per continuita, causalita e propagazione, [[Campagna da Ambientazione]] per trasformarle in gioco, [[Durante il Gioco]] durante la sessione, [[Hub/Party Control]] per PG/HP/flags e [[Vista Giocatori]] per materiale condivisibile.
+Apri [[Inizia Qui]] per il primo avvio. Il flusso principale e [[Risorse/Preparazione Sessione]] per produrre una sessione pronta, [[Durante il Gioco]] per giocarla e [[Cosa Succede Fuori Scena]] per aggiornare conseguenze, missioni e prossime mosse. Le dashboard avanzate restano strumenti di supporto, non tappe obbligatorie.
 
 ## Perche Usarlo
 
@@ -24,9 +24,9 @@ Apri [[Inizia Qui]] per il primo avvio. Usa [[1. DM Dashboard]] per preparare, [
 3. Vai su [[Inizia Qui]].
 4. Se Obsidian chiede conferma per gli strumenti inclusi nel vault, abilitali solo se hai scaricato da fonte affidabile.
 5. Apri [[Risorse/Setup Guidato]].
-6. Apri [[Risorse/Prima Sessione In 15 Minuti]] se vuoi partire subito.
-7. Apri [[Risorse/Creazione Guidata Entità]] se vuoi capire cosa compilare subito e cosa rimandare.
-8. Apri [[Risorse/Quality Report]] quando vuoi capire cosa manca prima di mostrare o pubblicare il vault.
+6. Clicca **Prepara** in [[Inizia Qui]].
+7. Completa i cinque blocchi minimi della sessione.
+8. Apri **Gioca** quando vai al tavolo.
 
 Guida dettagliata: [docs/INSTALLAZIONE.md](docs/INSTALLAZIONE.md).
 
@@ -42,10 +42,11 @@ Lo snippet non aggiunge dipendenze: migliora dashboard, callout, card, pulsanti 
 ## Flusso Rapido
 
 1. Apri il vault in Obsidian e vai su [[Inizia Qui]].
-2. Se Obsidian chiede conferma per gli strumenti inclusi nel vault, abilitali: servono per dashboard, pulsanti e tabelle.
-3. Crea o apri una campagna da [[Campagne/Campagne]].
-4. Crea una sessione con il pulsante `Nuova Sessione` dalla dashboard.
-5. Durante la partita apri [[Durante il Gioco]] per appunti live, incontri, PNG, dispense e materiali pronti.
+2. Clicca **Prepara**.
+3. Crea o apri una sessione.
+4. Completa: obiettivo, prima scena, scelta, pressione, materiale.
+5. Clicca **Gioca**.
+6. Dopo la partita clicca **Aggiorna il mondo**.
 
 Se dashboard, pulsanti o tabelle non funzionano, apri [[Risorse/Primo Avvio Strumenti]], [[Risorse/FAQ]] e poi [[Risorse/Se Qualcosa Non Funziona]].
 
@@ -63,7 +64,7 @@ Se dashboard, pulsanti o tabelle non funzionano, apri [[Risorse/Primo Avvio Stru
 
 ## Dove Trovare Le Cose
 
-- `Inizia Qui`: percorso guidato per primo avvio, preparazione, gioco e worldbuilding.
+- `Inizia Qui`: tre azioni concrete, Prepara -> Gioca -> Aggiorna il mondo.
 - `Hub/Party Control`: controllo party, HP, obiettivi, ricompense, missioni e flags.
 - `Campagne`: campagne attive, in pausa, concluse o archiviate.
 - `Mondi`: ambientazioni, luoghi, culture, lingue, storia, conflitti, religioni, relazioni, creature, oggetti e dispense.

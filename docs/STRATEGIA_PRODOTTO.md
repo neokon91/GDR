@@ -10,12 +10,12 @@ Il prodotto deve essere percepito come una app locale in Obsidian: dashboard, pu
 
 **Categoria:** Obsidian TTRPG Operating System per DM non tecnici.
 
-**Promessa:** apri il vault, scegli cosa vuoi fare, prepara o gioca usando dashboard guidate.
+**Promessa:** apri il vault e segui un percorso unico: prepara una sessione concreta, giocala, aggiorna il mondo.
 
 **Differenziazione:**
 
 - esperienza in italiano;
-- onboarding non tecnico;
+- onboarding non tecnico con tre sole azioni principali;
 - flusso completo da mondo a campagna a sessione;
 - worldbuilding sistemico: tassonomia, relazioni, canone, geopolitica e mondo vivo;
 - vista giocatori dedicata;

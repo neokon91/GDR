@@ -1,97 +1,78 @@
 ---
 cssclasses:
-  - indice
+  - dashboard
+  - gdr-prep-flow
+categoria: risorsa
+tipo: preparazione
+stato: pronto
 ---
 
 # Preparazione Sessione
 
-Usa questa pagina quando devi preparare la prossima sessione senza perderti nei dettagli.
+Questa pagina deve produrre una sessione giocabile. Non leggere tutto: completa i cinque blocchi minimi e vai al tavolo.
 
 `BUTTON[nuova-sessione-z-modelli-dm-sessione-md]`
 
 `BUTTON[durante-il-gioco-durante-il-gioco]`
 
-`BUTTON[materiali-al-tavolo-risorse-materiali-al-tavolo]`
+## Sessione Da Rendere Giocabile
 
-`BUTTON[mondo-vivo-motore-mondo-vivo-2]`
-
-## Sessione Da Preparare
-
-```dataview
-TABLE data, data_mondo, stato, campagne, luoghi, personaggi
-FROM "Mondi/Sessioni"
-WHERE (stato = "preparazione" OR stato = "pronto") AND !startswith(file.name, "Prova -")
-SORT data ASC
-LIMIT 1
+```dataviewjs
+const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));
+gdr.renderPreparationFocus(dv);
 ```
 
-## Checklist Del DM
+## I Cinque Blocchi
 
-> [!scena] Apertura
-> - [ ] Riassunto da leggere
-> - [ ] Prima scena chiara
-> - [ ] Una scelta immediata per i giocatori
+> [!scena] 1. Obiettivo
+> Scrivi una frase: cosa devono ottenere, scoprire o decidere i personaggi entro fine sessione.
 
-> [!png] Presenze
-> - [ ] PNG importanti pronti
-> - [ ] Motivazione dei PNG chiara
-> - [ ] Reazione se i PG fanno qualcosa di inatteso
+> [!luogo] 2. Prima Scena
+> Dove si apre la sessione, chi e presente, cosa sta gia succedendo.
 
-> [!indizio] Informazioni
-> - [ ] Almeno 3 indizi
-> - [ ] Un segreto scopribile
-> - [ ] Una conseguenza se ignorano il problema
-> - [ ] Una domanda aperta da risolvere al tavolo
+> [!missione] 3. Scelta
+> Una decisione reale per i giocatori. Se non cambia nulla, non e una scelta.
 
-> [!incontro] Tavolo
-> - [ ] Incontro o ostacolo pronto
-> - [ ] Ricompensa o informazione utile
-> - [ ] Piano B se i PG cambiano direzione
-> - [ ] Pressione attiva chiara se i PG esitano
+> [!timer] 4. Pressione
+> Una missione, fazione, relazione o clock che avanza se il party perde tempo.
 
-## Materiale Pronto
+> [!handout] 5. Materiale
+> Almeno una cosa pronta da usare: incontro, mappa, handout, PNG o oggetto.
 
-### Missioni Aperte
+## Prendi Materiale Senza Cercare
+
+````tabs
+tab: Missioni
 
 ```dataview
 TABLE stato, pressione, prossima_mossa, committente, luoghi, personaggi
 FROM "Mondi/Missioni"
 WHERE (stato = "proposta" OR stato = "accettata" OR stato = "in corso") AND !startswith(file.name, "Prova -")
 SORT pressione DESC, stato ASC, nome ASC
-LIMIT 8
+LIMIT 6
 ```
 
-### Pressioni Di Mondo
+tab: Pressioni
 
 ```dataview
-TABLE categoria, tipo, pressione, prossima_mossa, soggetti, entita_impattate
+TABLE categoria, tipo, pressione, progress_value, progress_max, prossima_mossa
 FROM "Mondi/Relazioni" OR "Mondi/Luoghi" OR "Mondi/Fazioni" OR "Mondi/Tracciati"
 WHERE stato != "archiviata" AND !startswith(file.name, "Prova -") AND (pressione >= 6 OR progress_value >= progress_max - 1)
 SORT pressione DESC, progress_value DESC
-LIMIT 10
-```
-
-### Segreti E Indizi
-
-```dataview
-TABLE categoria, tipo, segreti, indizi
-FROM "Mondi/Missioni" OR "Mondi/Luoghi" OR "Mondi/Personaggi" OR "Mondi/Fazioni"
-WHERE ((segreti AND length(segreti) > 0) OR (indizi AND length(indizi) > 0)) AND stato != "archiviata" AND !startswith(file.name, "Prova -")
-SORT file.mtime DESC
 LIMIT 8
 ```
 
-### PNG Utilizzabili
+tab: PNG
 
 ```dataview
 TABLE ruolo, stato, luogo, atteggiamento
 FROM "Mondi/Personaggi"
 WHERE tipo = "png" AND stato != "archiviata" AND !startswith(file.name, "Prova -")
 SORT stato ASC, nome ASC
-LIMIT 10
+LIMIT 8
 ```
 
-### Incontri Pronti
+tab: Scene
 
 ```dataview
 TABLE luogo, pericolo, creature
@@ -101,35 +82,22 @@ SORT pericolo DESC
 LIMIT 8
 ```
 
-### Dispense Pronte
+tab: Handout
 
 ```dataview
-TABLE tipo, luogo, personaggi
+TABLE tipo, luogo, personaggi, pubblico
 FROM "Mondi/Dispense"
 WHERE stato = "pronto" AND !startswith(file.name, "Prova -")
-SORT nome ASC
+SORT pubblico DESC, nome ASC
 LIMIT 8
 ```
+````
 
-## Improvvisazione
+## Fatto
 
-> [!timer] Se serve una complicazione
-> - Qualcuno arriva prima del previsto.
-> - Una risorsa viene consumata o persa.
-> - Un PNG cambia posizione.
-> - Una minaccia avanza di un passo.
+Quando i cinque blocchi sono completi:
 
-> [!luogo] Dettagli sensoriali
-> - Rumore:
-> - Odore:
-> - Traccia:
-> - Cosa stona:
-
-> [!segreto]- Verita dietro la scena
-> 
-
-## Dopo La Preparazione
-
-- [ ] Segna la sessione come `pronto`.
-- [ ] Apri [[Durante il Gioco]] prima del tavolo.
-- [ ] Dopo il tavolo apri [[Risorse/Post Sessione Guidato]].
+1. apri la nota sessione;
+2. imposta `stato: pronto`;
+3. imposta `attiva: true` se e la prossima al tavolo;
+4. apri [[Durante il Gioco]].

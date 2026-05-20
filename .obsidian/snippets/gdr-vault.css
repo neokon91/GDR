@@ -1064,6 +1064,14 @@ body .markdown-source-view.tavolo {
   border-left: 4px solid rgb(var(--gdr-warm-rgb));
 }
 
+.gdr-kind-ready {
+  border-left: 4px solid rgb(var(--gdr-nature-rgb));
+}
+
+.gdr-kind-missing {
+  border-left: 4px solid rgb(var(--gdr-danger-rgb));
+}
+
 .markdown-preview-view.gdr-player-view .gdr-stat-card {
   background: linear-gradient(180deg, var(--gdr-surface-strong), var(--gdr-surface));
 }
