@@ -47,6 +47,22 @@ actions:
     link: "[[Mondi/Stato del Mondo]]"
 ```
 
+```meta-bind-button
+label: Mondo Vivo
+style: primary
+actions:
+  - type: open
+    link: "[[Motore Mondo Vivo]]"
+```
+
+```meta-bind-button
+label: Geopolitica
+style: primary
+actions:
+  - type: open
+    link: "[[Geopolitical Dashboard]]"
+```
+
 ## Tutti I Mondi
 
 ```dataview
@@ -106,6 +122,16 @@ SORT mondo ASC, categoria ASC, nome ASC
 LIMIT 16
 ```
 
+### Relazioni
+
+```dataview
+TABLE mondo, tipo, stato, soggetti, pressione, prossima_mossa
+FROM "Mondi/Relazioni"
+WHERE file.name != "Relazioni" AND stato != "archiviata" AND !startswith(file.name, "Prova -")
+SORT mondo ASC, pressione DESC, nome ASC
+LIMIT 16
+```
+
 ### Creature
 
 ```dataview
@@ -153,6 +179,7 @@ LIMIT 16
 - [[Mondi/Creature/Creature]]
 - [[Mondi/Fazioni/Fazioni]]
 - [[Mondi/Religioni/Religioni]]
+- [[Mondi/Relazioni/Relazioni]]
 - [[Mondi/Oggetti/Oggetti]]
 - [[Mondi/Missioni/Missioni]]
 - [[Mondi/Incontri/Incontri]]

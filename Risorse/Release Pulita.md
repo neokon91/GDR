@@ -23,6 +23,9 @@ Questa pagina serve a preparare una copia consegnabile del vault.
 | [[Inizia Qui]] | Pagina introduttiva all'apertura. |
 | [[Vista Giocatori]] | Vista condivisibile per i giocatori. |
 | [[Atlante del Mondo]] | Worldbuilding avanzato. |
+| [[Bibbia del Mondo]] | Coerenza di tono, temi, verita e limiti. |
+| [[Motore Mondo Vivo]] | Propagazione, causalita e continuita narrativa. |
+| [[Geopolitical Dashboard]] | Territori politici, risorse e relazioni diplomatiche. |
 | [[Campagna da Ambientazione]] | Da mondo a campagna. |
 | [[Demo - La Reliquia Spezzata]] | Esempio e test del vault. |
 

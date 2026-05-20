@@ -19,16 +19,22 @@ const INCLUDED_ROOTS = new Set([
     "SRD",
     "z.automazioni",
     "z.bacheche",
+    "z.fileclass",
     "z.modelli"
 ]);
 
 const INCLUDED_ROOT_FILES = new Set([
     "1. DM Dashboard.md",
     "Atlante del Mondo.md",
+    "Bibbia del Mondo.md",
     "Campagna da Ambientazione.md",
+    "Controllo Canone.md",
     "Durante il Gioco.md",
+    "Geopolitical Dashboard.md",
     "Inizia Qui.md",
     "LICENSE.md",
+    "Motore Mondo Vivo.md",
+    "Revisione Lore.md",
     "VERSION.md",
     "Vista Giocatori.md",
     "Worldbuilder Dashboard.md"

@@ -1,10 +1,10 @@
 # Versione Vault
 
-Versione: `0.8.0`
+Versione: `0.9.0`
 
 Data: 2026-05-20
 
-Stato: release ZIP iniziale pronta con plugin TTRPG utili integrati, BRAT di manutenzione attivo e strumenti fuori flusso non inclusi nel bundle.
+Stato: living world e geopolitica integrati sopra il workflow DM esistente. Prossima fase: QA visuale, release community e materiali pubblici.
 
 ## Compatibilità
 

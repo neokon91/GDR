@@ -19,6 +19,9 @@ Questa pagina raccoglie guide e materiali riutilizzabili. Se vuoi preparare o gi
 | [[Risorse/Consegna Nuovo DM]] | Quando devi dare il vault a una persona non tecnica. |
 | [[Risorse/Guida DM]] | Quando vuoi il flusso DM senza dettagli tecnici. |
 | [[Atlante del Mondo]] | Quando vuoi costruire un'ambientazione ricca e collegata. |
+| [[Bibbia del Mondo]] | Quando vuoi vedere tono, promesse, verita, rumor e limiti del mondo. |
+| [[Motore Mondo Vivo]] | Quando vuoi controllare propagazione, relazioni, canone e continuita narrativa. |
+| [[Geopolitical Dashboard]] | Quando vuoi controllare stati, confini, risorse, vassalli e relazioni diplomatiche. |
 | [[Campagna da Ambientazione]] | Quando vuoi trasformare mondo, regione o conflitto in campagna. |
 | [[Risorse/Generare Campagna Da Ambientazione]] | Guida passo passo per passare da ambientazione a gioco. |
 | [[Vista Giocatori]] | Vista dedicata a materiale condivisibile con i giocatori. |
@@ -58,11 +61,14 @@ Questa pagina raccoglie guide e materiali riutilizzabili. Se vuoi preparare o gi
 | Pagina | Uso |
 | --- | --- |
 | [[Risorse/Controllo Vault]] | Controlli pratici su note incomplete, sessioni attive e materiale pronto. |
+| [[Revisione Lore]] | Lore incompleta, scollegata o non ancora giocabile. |
+| [[Controllo Canone]] | Verita, rumor, leggende, retcon e provenienza del canone. |
 | [[Mondi/Calendario]] | Date del mondo, sessioni, scadenze e cose da calendarizzare. |
 | [[Mondi/Culture/Culture]] | Popoli, usanze, tabù e identità culturali. |
 | [[Mondi/Lingue/Lingue]] | Lingue, dialetti, parole note e scritture. |
 | [[Mondi/Storia/Storia]] | Ere, guerre, catastrofi e fondazioni. |
 | [[Mondi/Conflitti/Conflitti]] | Conflitti vivi tra poteri, popoli e luoghi. |
+| [[Mondi/Relazioni/Relazioni]] | Alleanze, rivalita, trattati, faide, debiti e vassallaggi. |
 | [[Mondi/Cosmologia/Cosmologia]] | Piani, reami, aldilà e principi cosmici. |
 | [[Risorse/Opportunità Di Avventura]] | Elementi del mondo pronti a diventare missioni. |
 | [[Risorse/Fronti Di Campagna]] | Pressioni, prossime mosse e scadenze della campagna. |

@@ -41,3 +41,12 @@ FROM "Mondi/Luoghi"
 WHERE file.name != "Luoghi" AND stato != "archiviata" AND !startswith(file.name, "Prova -")
 SORT luogo_padre ASC, nome ASC
 ```
+
+## Territori Politici
+
+```dataview
+TABLE tipo, stato, stabilita, pressione, capitale, governante, relazioni, risorse_strategiche
+FROM "Mondi/Luoghi"
+WHERE contains(list("regno", "impero", "repubblica", "oligarchia", "ducato", "contea", "baronia", "marca", "protettorato"), tipo) AND stato != "archiviata" AND !startswith(file.name, "Prova -")
+SORT pressione DESC, nome ASC
+```

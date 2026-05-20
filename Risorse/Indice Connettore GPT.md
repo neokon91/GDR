@@ -18,6 +18,12 @@ Questa nota orienta un connettore GPT o un indice code search sul vault. Non e u
 - [[1. DM Dashboard]]
 - [[Durante il Gioco]]
 - [[Worldbuilder Dashboard]]
+- [[Atlante del Mondo]]
+- [[Geopolitical Dashboard]]
+- [[Motore Mondo Vivo]]
+- [[Bibbia del Mondo]]
+- [[Revisione Lore]]
+- [[Controllo Canone]]
 - [[Inbox/Inbox]]
 - [[Mondi/Stato del Mondo]]
 - [[z.bacheche/Post Sessione]]
@@ -39,6 +45,7 @@ Questa nota orienta un connettore GPT o un indice code search sul vault. Non e u
 - `z.automazioni/check_vault.js`: controllo qualita locale del vault, inclusi indice GPT, template, campi minimi, sessioni attive e note live.
 - `z.automazioni/import_srd.js`: rigenerazione SRD; i mostri mantengono frontmatter `statblock: true` parsabile da Fantasy Statblocks.
 - `z.automazioni/lore_capture.js`: creazione lore post-sessione e appunti live strutturati.
+- `z.automazioni/relazione.js`: creazione guidata di alleanze, rivalita, trattati, debiti, faide e vassallaggi.
 - `z.automazioni/live_evento.js`
 - `z.automazioni/live_conseguenza.js`
 - `z.automazioni/live_png.js`
@@ -58,6 +65,8 @@ Questa nota orienta un connettore GPT o un indice code search sul vault. Non e u
 - [[z.modelli/Personaggio Router]]
 - [[z.modelli/Luogo Router]]
 - [[z.modelli/Fazione Router]]
+- [[z.modelli/worldbuilding/Relazione]]
+- [[z.modelli/worldbuilding/Segreto o Mistero]]
 
 ## Convenzioni Critiche
 
@@ -71,11 +80,16 @@ Questa nota orienta un connettore GPT o un indice code search sul vault. Non e u
 
 ## Worldbuilding Engine
 
-- [[Worldbuilder Dashboard]]: Atlante del Mondo, Poteri in Movimento, Relazioni PNG, Timeline Causale e Buchi Di Mondo.
-- [[Mondi/Stato del Mondo]]: vista operativa filtrabile per mondo/campagna su eventi canonici, conseguenze aperte e problemi pratici.
+- [[Worldbuilder Dashboard]]: porta operativa per creazione mondo, canone, pressioni, relazioni e buchi.
+- [[Atlante del Mondo]]: vista strutturale su geografia, culture, lingue, poteri, storia, conflitti e cosmologia.
+- [[Motore Mondo Vivo]]: event propagation, faction dynamics, relationship graph, historical causality e continuita narrativa.
+- [[Geopolitical Dashboard]]: territori politici, confini, vassalli, risorse strategiche e relazioni diplomatiche.
+- [[Mondi/Stato del Mondo]]: vista operativa filtrabile per mondo/campagna su eventi canonici, conseguenze aperte, propagazioni e problemi pratici.
+- [[Bibbia del Mondo]], [[Revisione Lore]] e [[Controllo Canone]]: tono, promesse, canone, retcon e lore da rendere giocabile.
 - [[Mondi/Mondo]]: indice generale del contenuto canonico.
 - [[Mondi/Luoghi/Luoghi]]: archivio luoghi.
 - [[Mondi/Fazioni/Fazioni]] e [[Mondi/Religioni/Religioni]]: poteri politici, sociali e religiosi.
+- [[Mondi/Relazioni/Relazioni]]: alleanze, rivalita, trattati, faide, debiti e vassallaggi.
 - [[Mondi/Personaggi/Personaggi]]: PNG, PG e relazioni.
 - [[Mondi/Timeline/Timeline]]: eventi storicizzati e conseguenze.
 
@@ -88,6 +102,7 @@ Questa nota orienta un connettore GPT o un indice code search sul vault. Non e u
 - `Mondi/Personaggi`: PG e PNG.
 - `Mondi/Luoghi`: luoghi, regioni, insediamenti, dungeon.
 - `Mondi/Fazioni` e `Mondi/Religioni`: poteri e fronti.
+- `Mondi/Relazioni`: legami dinamici tra poteri, luoghi, culture, religioni e PNG.
 - `Mondi/Timeline`: eventi canonici, rumor, leggende e conseguenze.
 - `Inbox`: appunti grezzi e cattura live.
 - `Risorse`: guide, mappe, media, tabelle e documentazione.

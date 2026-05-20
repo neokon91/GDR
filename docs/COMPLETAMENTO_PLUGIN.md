@@ -14,7 +14,7 @@ La release iniziale non deve dimostrare tutti i plugin. Deve dimostrare un prodo
 | Templater | core | Creazione guidata. |
 | Meta Bind | core | Pulsanti e campi interattivi. |
 | JS Engine | core tecnico | Supporto logiche avanzate. |
-| Metadata Menu | core leggero | FileClass per sessione, missione, tracciato, PNG, luogo e fazione. |
+| Metadata Menu | core leggero | FileClass per sessione, missione, tracciato, PNG, luogo, fazione e relazione. |
 | Homepage | core | Apertura su `Inizia Qui`. |
 | Folder Notes | core | Indici di cartella. |
 | Tabs | core UX | Note lunghe più leggibili. |
@@ -65,6 +65,6 @@ La release ZIP e pronta quando:
 - `npm run check` passa;
 - `npm run import:azgaar -- "Import/Azgaar/Prova - Azgaar.geojson" --world "Demo - Terre della Soglia" --dry-run` passa;
 - `npm run release:clean` genera lo ZIP utente;
-- la demo copre onboarding, dashboard, sessione, post-sessione, vista giocatori e import mappa demo;
+- la demo copre onboarding, dashboard, sessione, post-sessione, mondo vivo, geopolitica, vista giocatori e import mappa demo;
 - le FileClass principali sono presenti in `z.fileclass`;
 - i plugin opzionali non bloccano il percorso principale.

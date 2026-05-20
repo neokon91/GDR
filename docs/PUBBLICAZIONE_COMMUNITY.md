@@ -15,7 +15,7 @@ Questa nota separa la release ZIP per utenti dalla pubblicazione del progetto in
 - `npm run check` passa.
 - `npm run release:clean` genera ZIP e cartella pulita.
 - Lo ZIP si apre in Obsidian e parte da `Inizia Qui`.
-- La demo mostra: sessione attiva, clock visibile, conseguenza canonizzata, timeline aggiornata e Stato Campagna.
+- La demo mostra: sessione attiva, clock visibile, conseguenza canonizzata, timeline aggiornata, Stato Campagna, relazione peggiorata, territorio politico nato e prossima sessione influenzata.
 - README spiega il prodotto, non dettagli interni.
 - `docs/INSTALLAZIONE.md` copre installazione da ZIP e da repository.
 - Licenze chiare: vault, script, SRD e plugin di terze parti.
@@ -24,14 +24,14 @@ Questa nota separa la release ZIP per utenti dalla pubblicazione del progetto in
 
 Descrizione breve:
 
-> Vault GDR e un vault Obsidian per DM e worldbuilder italiani: prepara sessioni, gestisce missioni e clock, consolida il post-sessione e mantiene un mondo vivo con dashboard operative.
+> Vault GDR e un vault Obsidian per DM e worldbuilder italiani: prepara sessioni, gestisce missioni e clock, consolida il post-sessione e mantiene un mondo vivo con fazioni, relazioni, geopolitica e dashboard operative.
 
 Punti da evidenziare:
 
 - pensato per DM non tecnici;
 - Markdown-first, contenuti dell'utente sempre leggibili;
 - demo inclusa;
-- supporto per sessioni, missioni, tracciati, PNG, luoghi, fazioni, timeline e materiali;
+- supporto per sessioni, missioni, tracciati, PNG, luoghi, fazioni, relazioni, territori politici, timeline e materiali;
 - non richiede Iron Vault.
 
 ## Limiti Da Dichiarare
@@ -44,7 +44,7 @@ Punti da evidenziare:
 
 ## Checklist Release Community
 
-- [ ] Preparare screenshot o GIF di `Inizia Qui`, `Durante il Gioco`, `Stato Campagna`, tracciato demo.
+- [ ] Preparare screenshot o GIF di `Inizia Qui`, `Durante il Gioco`, `Stato Campagna`, `Motore Mondo Vivo`, `Geopolitical Dashboard`, tracciato demo e relazione demo.
 - [ ] Creare release GitHub con ZIP generato.
 - [ ] Inserire link a installazione, licenze e changelog.
 - [ ] Aprire issue template e CONTRIBUTING.

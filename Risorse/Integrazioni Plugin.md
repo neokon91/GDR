@@ -200,7 +200,7 @@ Questi plugin restano secondari o fuori dal flusso base della release ZIP:
 
 ## Import Mappe Esterne
 
-Stato: base avviata per 0.8.0.
+Stato: base avviata e mantenuta come import controllato.
 
 Decisione:
 

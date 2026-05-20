@@ -2,24 +2,29 @@
 
 ## Unreleased
 
+### Prossima Fase
+
+- QA visuale delle dashboard principali e preparazione release community 1.0.
+
+## 0.9.0 - 2026-05-20
+
 ### Aggiunto
 
-- [[Mondi/Tracciati/Tracciati]] per clock e progress track Markdown-first, senza dipendere da Iron Vault.
-- Template e automazione `Tracciato` per fronti, missioni, rituali, minacce, viaggi e progetti.
-- Tracciati demo collegati a [[Demo - La Reliquia Spezzata]].
-- Pulsanti rapidi per avanzare, ridurre o completare un tracciato.
-- FileClass Metadata Menu per `sessione`, `missione`, `tracciato`, `png`, `luogo` e `fazione`.
-- [[Risorse/Come Usare I Clock]] con esempi per minaccia, viaggio e rituale.
-- [docs/PUBBLICAZIONE_COMMUNITY.md](docs/PUBBLICAZIONE_COMMUNITY.md) per separare release ZIP e pubblicazione community.
+- [[Motore Mondo Vivo]] come dashboard per propagazione eventi, dinamiche di fazione, relationship graph, causalita storica e continuita narrativa.
+- [[Geopolitical Dashboard]] per territori politici, confini, vassalli, risorse strategiche, relazioni diplomatiche e buchi geopolitici.
+- [[Bibbia del Mondo]], [[Revisione Lore]] e [[Controllo Canone]] per mantenere coerenza narrativa, fonte, canone e retcon.
+- Nuova area [[Mondi/Relazioni/Relazioni]] con template [[z.modelli/worldbuilding/Relazione]] e automazione `relazione`.
+- Template e automazioni per lore persistence, event propagation, stato del mondo e causalita storica.
+- Demo geopolitica con [[Demo - Marca della Soglia]] e [[Demo - Custodi e Brumafonda]].
+- [[Risorse/Guida Lore Professionale]] e [[Risorse/Checklist Lore Professionale]].
 
 ### Migliorato
 
-- [[Durante il Gioco]] ora mostra i clock della sessione attiva e li include nelle pressioni.
-- [[Mondi/Stato del Mondo]] diventa una vista Stato Campagna piu operativa: missioni aperte, clock attivi, PNG mossi fuori scena e conseguenze recenti.
-- [[Risorse/Post Sessione Guidato]] include lavorazione appunti, clock mossi, PNG fuori scena e aggiornamento pressioni.
-- Template sessione e missione collegano i tracciati e mostrano avanzamento visibile.
-- Il controllo vault segnala missioni/fazioni ad alta pressione senza tracciato e tracciati vicini al completamento senza conseguenze.
-- [[Demo - La Reliquia Spezzata]] ora include un percorso end-to-end: sessione attiva, clock, conseguenza, timeline e Stato Campagna.
+- [[Worldbuilder Dashboard]], [[Atlante del Mondo]], [[Mondi/Stato del Mondo]], [[Risorse/Preparazione Sessione]] e [[Risorse/Post Sessione Guidato]] ora leggono anche propagazione, relazioni e geopolitica.
+- I template politici sono operativi: regni, imperi, repubbliche, oligarchie, ducati, contee, baronie e regioni tracciano confini, legittimita, risorse e crisi.
+- Cultura e religione producono scelte, tabu, autorita, rituali, eresie, luoghi sacri e propagazione.
+- [[Demo - La Reliquia Spezzata]] mostra una catena end-to-end: evento storico -> fazione si muove -> relazione peggiora -> territorio politico nasce -> prossima sessione.
+- Il controllo vault segnala geopolitica debole, relazioni senza conseguenze, religioni senza luoghi sacri, culture senza tensioni, eventi senza causa e lore non propagata.
 
 ## 0.8.0 - 2026-05-20
 

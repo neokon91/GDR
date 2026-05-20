@@ -17,7 +17,7 @@ Il prodotto deve essere percepito come una app locale in Obsidian: dashboard, pu
 - esperienza in italiano;
 - onboarding non tecnico;
 - flusso completo da mondo a campagna a sessione;
-- worldbuilding tassonomico;
+- worldbuilding sistemico: tassonomia, relazioni, canone, geopolitica e mondo vivo;
 - vista giocatori dedicata;
 - release pulita;
 - contenuti Markdown posseduti dall'utente.
@@ -46,7 +46,8 @@ Il prodotto deve essere percepito come una app locale in Obsidian: dashboard, pu
 
 - Dashboard e flussi gia operativi.
 - Forte differenziazione italiana.
-- Worldbuilding profondo e collegato.
+- Worldbuilding profondo, persistente e collegato al tavolo.
+- Motore Mondo Vivo e Geopolitical Dashboard gia presenti come differenziazione forte.
 - Release pulita e controlli automatici.
 - Vista giocatori gia presente.
 
@@ -73,14 +74,13 @@ Il prodotto deve essere percepito come una app locale in Obsidian: dashboard, pu
 
 1. Release ZIP ufficiale e visibile.
 2. Screenshot/GIF delle dashboard.
-3. README piu commerciale.
-4. Matrice strumenti: essenziali, consigliati, opzionali.
-5. CONTRIBUTING e issue template.
-6. Export vista giocatori.
-7. Controllo anti-segreti pubblici.
-8. Demo video breve.
-9. Branding piu memorabile di "Vault GDR".
-10. Strategia core open source + moduli premium.
+3. Screenshot/GIF di Motore Mondo Vivo e Geopolitical Dashboard.
+4. README piu commerciale.
+5. Export vista giocatori.
+6. Controllo anti-segreti pubblici.
+7. Demo video breve.
+8. Branding piu memorabile di "Vault GDR".
+9. Strategia core open source + moduli premium.
 
 ## Roadmap Strategica
 
@@ -88,6 +88,7 @@ Il prodotto deve essere percepito come una app locale in Obsidian: dashboard, pu
 
 - Release ZIP su GitHub.
 - Screenshot principali.
+- Demo visuale della catena evento -> fazione -> relazione -> territorio -> prossima sessione.
 - README prodotto.
 - CONTRIBUTING e issue template.
 - Matrice strumenti.

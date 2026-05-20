@@ -5,7 +5,7 @@ Questa checklist serve a preparare una copia pubblicabile del vault.
 ## Prima Della Release
 
 1. Apri [[Inizia Qui]] e verifica che i pulsanti portino alle pagine giuste.
-2. Apri [[1. DM Dashboard]], [[Durante il Gioco]], [[Atlante del Mondo]], [[Campagna da Ambientazione]] e [[Vista Giocatori]].
+2. Apri [[1. DM Dashboard]], [[Durante il Gioco]], [[Atlante del Mondo]], [[Geopolitical Dashboard]], [[Motore Mondo Vivo]], [[Campagna da Ambientazione]] e [[Vista Giocatori]].
 3. Apri [[Risorse/Controllo Vault]] e risolvi problemi operativi importanti.
 4. Controlla che la demo [[Demo - La Reliquia Spezzata]] sia navigabile.
 5. Esegui:
@@ -43,8 +43,10 @@ Non contiene materiali di sviluppo repository, issue template GitHub, roadmap in
 - Le dashboard non mostrano errori Dataview.
 - I pulsanti Meta Bind aprono o creano note.
 - La vista `Durante il Gioco` mostra una sessione attiva se esiste una sessione con `attiva`, `in corso`, `pronto` o `preparazione`.
-- [[Mondi/Stato del Mondo]] mostra conseguenze, PNG cambiati, luoghi in crisi, fazioni in movimento e missioni influenzate senza errori Dataview.
+- [[Mondi/Stato del Mondo]] mostra conseguenze, PNG cambiati, luoghi in crisi, fazioni in movimento, relazioni, propagazione e missioni influenzate senza errori Dataview.
 - [[Mondi/Timeline/Timeline]] mostra eventi canonici e lore da sessione.
+- [[Geopolitical Dashboard]] mostra territori politici, relazioni diplomatiche, risorse strategiche e buchi geopolitici senza errori Dataview.
+- [[Motore Mondo Vivo]] mostra event propagation, faction dynamics, relationship graph e continuita aperte senza errori Dataview.
 - Le note demo non sono confuse con le note `Prova -`: la demo e contenuto dimostrativo, le prove sono collaudi tecnici.
 - Il README resta leggibile per utenti non tecnici.
 - [docs/INSTALLAZIONE.md](docs/INSTALLAZIONE.md) e [docs/STRUMENTI.md](docs/STRUMENTI.md) sono aggiornati.

@@ -60,9 +60,13 @@ Usa **Poteri In Movimento** per leggere chi sta agendo: pressione, prossima moss
 
 Usa **Clock E Progress Track Attivi** in [[Mondi/Stato del Mondo]] per vedere cosa sta per scattare. Un tracciato utile ha un innesco chiaro, una posta, una prossima mossa e almeno un collegamento a missione, fazione o luogo.
 
+Apri [[Motore Mondo Vivo]] quando una conseguenza deve propagarsi: eventi, fazioni, relazioni, territori, missioni e prossime sessioni devono mostrare cosa cambia.
+
+Apri [[Geopolitical Dashboard]] quando il problema e politico: confini, capitale, legittimita, vassalli, risorse strategiche, relazioni diplomatiche e crisi interne.
+
 Apri [[Risorse/Come Usare I Clock]] quando vuoi decidere se una pressione merita davvero un tracciato.
 
-Usa **Buchi Di Mondo** come lista pratica di manutenzione: mondi senza tono o fazioni, luoghi pronti senza pericolo, missioni senza fazioni, PNG in gioco senza luogo o relazione, eventi canonici senza conseguenze e lore da smistare.
+Usa **Buchi Di Mondo** e **Buchi Geopolitici** come liste pratiche di manutenzione: mondi senza tono o fazioni, luoghi pronti senza pericolo, missioni senza fazioni, PNG in gioco senza luogo o relazione, eventi canonici senza conseguenze, relazioni senza posta e territori senza risorse.
 
 La **Timeline Causale** serve a distinguere:
 - Lore Capture: appunto nato al tavolo o in post-sessione;
@@ -89,6 +93,7 @@ Fai solo queste cose:
 - smista gli appunti live in [[Inbox/Inbox]];
 - canonizza eventi veri o archivia quelli irrilevanti;
 - aggiorna PNG, luoghi, fazioni e missioni cambiati;
+- aggiorna relazioni, territori politici e stato del mondo se la sessione ha cambiato potere, confini, legittimita o risorse;
 - aggiorna clock e progress track mossi durante la sessione;
 - segna ricompense e dispense consegnate;
 - togli `attiva: true` alla sessione giocata e prepara la prossima sessione attiva;
@@ -101,6 +106,8 @@ Fai solo queste cose:
 | Preparare | [[1. DM Dashboard]] |
 | Giocare | [[Durante il Gioco]] |
 | Costruire il mondo | [[Worldbuilder Dashboard]] |
+| Controllare mondo vivo | [[Motore Mondo Vivo]] |
+| Controllare geopolitica | [[Geopolitical Dashboard]] |
 | Smistare appunti | [[Inbox/Inbox]] |
 | Controllare problemi | [[Risorse/Controllo Vault]] |
 | Trovare materiali o guide | [[Risorse/Risorse]] |
