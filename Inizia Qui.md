@@ -44,6 +44,14 @@ actions:
     link: "[[Risorse/FAQ]]"
 ```
 
+```meta-bind-button
+label: Roadmap 0.2
+style: default
+actions:
+  - type: open
+    link: "[[Risorse/Roadmap 0.2.0]]"
+```
+
 ## Primo Avvio
 
 1. Se Obsidian chiede se fidarsi dei plugin community, conferma solo se hai scaricato il vault da una fonte affidabile.
@@ -65,6 +73,7 @@ actions:
 - Preparazione e gestione del tavolo: [[1. DM Dashboard]].
 - Appunti durante la sessione: [[Durante il Gioco]].
 - Mondo, luoghi, PNG e fazioni: [[Worldbuilder Dashboard]].
+- Stato dinamico del mondo: [[Mondi/Stato del Mondo]].
 - Regole e riferimento D&D: [[SRD/SRD]].
 - Domande frequenti: [[Risorse/FAQ]].
 

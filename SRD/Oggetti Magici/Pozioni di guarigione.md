@@ -27,5 +27,10 @@ A prescindere dalla sua potenza, il liquido rosso della pozione brilla quando vi
 
 ## Pozione PF recuperati Rarità
 
+**Pozione di guarigione** 2d4 + 2 Comune
+**Pozione di guarigione (maggiore)** 4d4 + 4 Non comune
+**Pozione di guarigione (superiore)** 8d4 + 8 Rara
+**Pozione di guarigione (suprema)** 10d4 + 20 Molto rara
+
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

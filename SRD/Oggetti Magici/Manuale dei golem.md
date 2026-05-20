@@ -28,5 +28,10 @@ Una volta terminato il processo di creazione del golem, il libro viene consumato
 
 ## 1d20 Golem Tempo Costo
 
+**1–5** Golem di argilla 30 giorni 65.000 mo
+**6–17** Golem di carne 60 giorni 50.000 mo
+**18** Golem di ferro 120 giorni 100.000 mo
+**19–20** Golem di pietra 90 giorni 80.000 mo
+
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

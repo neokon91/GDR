@@ -31,6 +31,22 @@ actions:
     open: true
 ```
 
+```meta-bind-button
+label: Timeline
+style: primary
+actions:
+  - type: open
+    link: "[[Mondi/Timeline/Timeline]]"
+```
+
+```meta-bind-button
+label: Stato Mondo
+style: primary
+actions:
+  - type: open
+    link: "[[Mondi/Stato del Mondo]]"
+```
+
 ## Tutti I Mondi
 
 ```dataview
@@ -120,6 +136,16 @@ SORT mondo ASC, stato ASC, nome ASC
 LIMIT 16
 ```
 
+### Timeline
+
+```dataview
+TABLE mondo, data_mondo, stato_canonico, luoghi, fazioni, sessioni
+FROM "Mondi/Timeline"
+WHERE file.name != "Timeline" AND stato_canonico != "archiviata" AND !startswith(file.name, "Prova -")
+SORT mondo ASC, data_mondo ASC, nome ASC
+LIMIT 16
+```
+
 ## Archivi
 
 - [[Mondi/Personaggi/Personaggi]]
@@ -132,5 +158,7 @@ LIMIT 16
 - [[Mondi/Incontri/Incontri]]
 - [[Mondi/Dispense/Dispense]]
 - [[Mondi/Sessioni/Sessioni]]
+- [[Mondi/Timeline/Timeline]]
+- [[Mondi/Stato del Mondo]]
 - [[Mondi/Calendario]]
 - [[Inbox/Inbox]]

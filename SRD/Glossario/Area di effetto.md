@@ -20,5 +20,14 @@ Molti incantesimi e privilegi indicano un'area di effetto. Ogni area ha un punto
 
 ## Forme
 
+| Forma | Tipo |
+| --- | --- |
+| Cilindro | area di effetto |
+| Cono | area di effetto |
+| Cubo | area di effetto |
+| Emanazione | area di effetto |
+| Linea | area di effetto |
+| Sfera | area di effetto |
+
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

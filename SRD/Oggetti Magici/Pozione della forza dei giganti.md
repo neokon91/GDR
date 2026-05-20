@@ -26,5 +26,11 @@ Quando il personaggio beve questa pozione, il suo punteggio di Forza cambia per 
 
 ## Pozione per Rarità
 
+**Pozione della forza dei giganti (delle colline)** 21 Non comune
+**Pozione della forza dei giganti (del gelo o delle pietre)** 23 Rara
+**Pozione della forza dei giganti (del fuoco)** 25 Rara
+**Pozione della forza dei giganti (delle nuvole)** 27 Molto rara
+**Pozione della forza dei giganti (delle tempeste)** 29 Leggendaria
+
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

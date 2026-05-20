@@ -12,7 +12,7 @@ generato_da: import_srd
 Totale note generate: 153.
 
 ```dataview
-TABLE tipo, livello, scuola, cr, rarita, descrittore
+TABLE tipo, categoria_oggetto, categoria_talento, categoria_lingua, livello, scuola, cr, rarita, descrittore
 FROM "SRD/Glossario"
 WHERE file.name != "Glossario"
 SORT nome ASC

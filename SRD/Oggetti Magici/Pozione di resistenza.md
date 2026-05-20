@@ -26,5 +26,16 @@ Quando beve questa pozione, il personaggio ottiene resistenza per 1 ora a un tip
 
 ## 1d10 Tipo di danno
 
+**1** Acido
+**2** Forza
+**3** Freddo
+**4** Fulmine
+**5** Fuoco
+**6** Necrotico
+**7** Psichico
+**8** Radioso
+**9** Tuono
+**10** Veleno
+
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

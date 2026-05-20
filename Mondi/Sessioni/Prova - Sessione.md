@@ -13,6 +13,7 @@ fc-category: sessione
 fc-display-name: "Prova - Sessione"
 fc-end:
 stato: archiviata
+attiva: false
 mondo: [[Prova - Mondo]]
 campagne:
   - [[Prova - Campagna]]

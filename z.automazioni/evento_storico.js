@@ -1,0 +1,38 @@
+async function evento_storico(tp) {
+    const helpers = tp.user.helpers;
+    const name = await helpers.promptRequired(tp, "Titolo evento storico", "Evento storico");
+    const id = helpers.slugify(name);
+    const mondo = await helpers.chooseWorld(tp, "Mondo dell'evento");
+    const context = { world: mondo };
+    const luoghi = await helpers.chooseLocations(tp, "Luoghi coinvolti", context);
+    const personaggi = await helpers.choosePeople(tp, "Personaggi coinvolti", context);
+    const fazioni = await helpers.chooseFactions(tp, "Fazioni coinvolte", context);
+    const sessioni = await helpers.chooseSessions(tp, "Sessioni collegate", context);
+    const dataMondo = await helpers.promptOptional(tp, "Data nel mondo");
+
+    await helpers.moveNote(tp, "Mondi/Timeline", name);
+
+    return `---
+id: ${id}
+nome: ${helpers.yamlQuote(name)}
+categoria: evento storico
+tipo: evento
+stato: canonico
+stato_canonico: canonico
+canonico: true
+mondo: ${mondo}
+data_mondo: ${helpers.yamlQuote(dataMondo)}
+fc-calendar:
+fc-date:
+fc-category: conseguenza
+fc-display-name: ${helpers.yamlQuote(name)}
+luoghi: ${helpers.inlineYamlList(luoghi)}
+personaggi: ${helpers.inlineYamlList(personaggi)}
+fazioni: ${helpers.inlineYamlList(fazioni)}
+sessioni: ${helpers.inlineYamlList(sessioni)}
+conseguenze: []
+---
+`;
+}
+
+module.exports = evento_storico;

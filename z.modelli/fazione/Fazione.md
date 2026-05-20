@@ -6,7 +6,7 @@
 > `INPUT[text:tipo]`
 >
 > Stato:
-> `INPUT[inlineSelect(option(bozza, Bozza), option(pronto, Pronto), option(in gioco, In Gioco), option(archiviata, Archiviata)):stato]`
+> `INPUT[inlineSelect(option(bozza, Bozza), option(pronto, Pronto), option(in gioco, In Gioco), option(ostile, Ostile), option(in guerra, In Guerra), option(archiviata, Archiviata)):stato]`
 >
 > Canonica:
 > `INPUT[toggle:canonico]`
@@ -57,6 +57,12 @@ INPUT[list:risorse]
 
 ```meta-bind
 INPUT[list:debolezze]
+```
+
+## Conseguenze
+
+```meta-bind
+INPUT[list:conseguenze]
 ```
 
 tab: Rete

@@ -34,5 +34,9 @@ Se la sfera entra in contatto con un portale planare, come quello creato dall'in
 
 ## 1d100 Risultato
 
+**01–50** La sfera è distrutta.
+**51–85** La sfera si muove attraverso il portale o nello spazio extradimensionale.
+**86–00** Uno squarcio nello spazio trascina la sfera e ogni creatura e oggetto entro 54 metri da essa su un piano di esistenza casuale.
+
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

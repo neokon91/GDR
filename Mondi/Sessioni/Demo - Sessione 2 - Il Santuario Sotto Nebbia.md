@@ -12,7 +12,8 @@ fc-date:
 fc-category: sessione
 fc-display-name: "Demo - Sessione 2"
 fc-end:
-stato: preparazione
+stato: in corso
+attiva: true
 mondo: [[Demo - Terre della Soglia]]
 campagne:
   - [[Demo - La Reliquia Spezzata]]
@@ -46,10 +47,16 @@ domande_al_tavolo:
   - vi fidate dei Custodi?
 pressioni:
   - la nebbia raggiunge il villaggio
-conseguenze: []
+conseguenze:
+  - La nebbia viva ha preso il Ponte delle Campane.
+  - I Custodi dichiarano il coprifuoco.
+  - La reliquia e stata riconosciuta come serratura.
 ---
 
 # Demo - Sessione 2 - Il Santuario Sotto Nebbia
 
 > [!scena] Preparazione
 > Questa sessione mostra come una sessione in `preparazione` compare nelle dashboard e nel DM Screen.
+
+> [!missione] Conseguenza demo
+> La sessione e marcata `attiva` per mostrare il Session Context Engine. La conseguenza e stata trasformata in [[Demo - La Nebbia Ha Preso il Ponte]] e storicizzata in [[Demo - La Seconda Nebbia]].

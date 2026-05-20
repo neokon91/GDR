@@ -30,7 +30,9 @@ node z.automazioni/check_vault.js
 
 - Le dashboard non mostrano errori Dataview.
 - I pulsanti Meta Bind aprono o creano note.
-- La vista `Durante il Gioco` mostra una sessione attiva se esiste una sessione `pronto` o `preparazione`.
+- La vista `Durante il Gioco` mostra una sessione attiva se esiste una sessione con `attiva`, `in corso`, `pronto` o `preparazione`.
+- [[Mondi/Stato del Mondo]] mostra conseguenze, PNG cambiati, luoghi in crisi, fazioni in movimento e missioni influenzate senza errori Dataview.
+- [[Mondi/Timeline/Timeline]] mostra eventi canonici e lore da sessione.
 - Le note demo non sono confuse con le note `Prova -`: la demo e contenuto dimostrativo, le prove sono collaudi tecnici.
 - Il README resta leggibile per utenti non tecnici.
 

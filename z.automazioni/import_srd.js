@@ -11,11 +11,39 @@ const GENERATED_BY = "import_srd";
 
 const SOURCES = [
     {
+        key: "backgrounds",
+        file: "srd_5_2_1_backgrounds.json",
+        dir: "Background",
+        tipo: "background",
+        title: "Background"
+    },
+    {
         key: "classes",
         file: "srd_5_2_1_classes.json",
         dir: "Classi",
         tipo: "classe",
         title: "Classi"
+    },
+    {
+        key: "equipment",
+        file: "srd_5_2_1_equipment.json",
+        dir: "Equipaggiamento",
+        tipo: "equipaggiamento",
+        title: "Equipaggiamento"
+    },
+    {
+        key: "feats",
+        file: "srd_5_2_1_feats.json",
+        dir: "Talenti",
+        tipo: "talento",
+        title: "Talenti"
+    },
+    {
+        key: "languages",
+        file: "srd_5_2_1_languages.json",
+        dir: "Lingue",
+        tipo: "lingua",
+        title: "Lingue"
     },
     {
         key: "spells",
@@ -51,6 +79,13 @@ const SOURCES = [
         dir: "Glossario",
         tipo: "glossario",
         title: "Glossario"
+    },
+    {
+        key: "species",
+        file: "srd_5_2_1_species.json",
+        dir: "Specie",
+        tipo: "specie",
+        title: "Specie"
     }
 ];
 
@@ -159,6 +194,9 @@ function sectionsToMarkdown(sections = []) {
         if (Array.isArray(section.blocchi)) {
             return `${title}${section.blocchi.map(block => `### ${block.nome}\n\n${paragraph(block.descrizione)}`).join("\n\n")}`;
         }
+        if (section.descrizione) {
+            return `${title}${paragraph(section.descrizione)}`;
+        }
         return title.trim();
     }).filter(Boolean).join("\n\n");
 }
@@ -234,6 +272,25 @@ function statblockBlocks(blocks) {
         : [];
 }
 
+function renderBackground(item) {
+    const fields = baseFields(item, "background", {
+        capitolo: item.capitolo,
+        pagine_sorgente: item.pagine_sorgente,
+        punteggi_caratteristica: item.punteggi_caratteristica ?? [],
+        talento_origine: item.talento_origine,
+        competenze: item.competenze ?? {},
+        equipaggiamento_alternativo: item.equipaggiamento_alternativo
+    });
+
+    return frontmatter(fields) + [
+        `# ${item.nome}`,
+        `> [!infobox|wiki]- Background\n> Caratteristiche: ${(item.punteggi_caratteristica ?? []).join(", ")}\n> Talento: ${item.talento_origine ?? ""}\n> Equipaggiamento alternativo: ${item.equipaggiamento_alternativo ?? ""}`,
+        paragraph(item.descrizione),
+        sectionsToMarkdown(item.sezioni),
+        attribution()
+    ].filter(Boolean).join("\n\n");
+}
+
 function renderClass(item) {
     const fields = baseFields(item, "classe", {
         capitolo: item.capitolo,
@@ -255,6 +312,71 @@ function renderClass(item) {
     ].filter(Boolean).join("\n\n");
 }
 
+function renderEquipment(item) {
+    const fields = baseFields(item, "equipaggiamento", {
+        capitolo: item.capitolo,
+        pagine_sorgente: item.pagine_sorgente,
+        tipo_oggetto: item.tipo,
+        categoria_oggetto: item.categoria,
+        costo: item.costo,
+        peso: item.peso,
+        danni: item.danni,
+        proprieta: item.proprieta ?? [],
+        padronanza: item.padronanza,
+        classe_armatura: item.classe_armatura,
+        forza: item.forza,
+        furtivita: item.furtivita,
+        velocita: item.velocita,
+        punti_ferita: item.punti_ferita,
+        soglia_danno: item.soglia_danno,
+        valore_in_mo: item.valore_in_mo
+    });
+
+    return frontmatter(fields) + [
+        `# ${item.nome}`,
+        `> [!infobox|wiki]- Equipaggiamento\n> Tipo: ${item.tipo ?? ""}\n> Categoria: ${item.categoria ?? ""}\n> Costo: ${item.costo ?? ""}\n> Peso: ${item.peso ?? ""}`,
+        paragraph(item.descrizione),
+        sectionsToMarkdown(item.sezioni),
+        attribution()
+    ].filter(Boolean).join("\n\n");
+}
+
+function renderFeat(item) {
+    const fields = baseFields(item, "talento", {
+        capitolo: item.capitolo,
+        pagine_sorgente: item.pagine_sorgente,
+        categoria_talento: item.categoria,
+        prerequisito: item.prerequisito,
+        ripetibile: item.ripetibile,
+        beneficio: item.beneficio
+    });
+
+    return frontmatter(fields) + [
+        `# ${item.nome}`,
+        `> [!infobox|wiki]- Talento\n> Categoria: ${item.categoria ?? ""}\n> Prerequisito: ${item.prerequisito ?? ""}\n> Ripetibile: ${item.ripetibile ? "si" : "no"}`,
+        paragraph(item.descrizione),
+        sectionsToMarkdown(item.sezioni),
+        attribution()
+    ].filter(Boolean).join("\n\n");
+}
+
+function renderLanguage(item) {
+    const fields = baseFields(item, "lingua", {
+        capitolo: item.capitolo,
+        pagine_sorgente: item.pagine_sorgente,
+        categoria_lingua: item.categoria,
+        tiro_casuale: item.tiro_casuale
+    });
+
+    return frontmatter(fields) + [
+        `# ${item.nome}`,
+        `> [!infobox|wiki]- Lingua\n> Categoria: ${item.categoria ?? ""}\n> Tiro casuale: ${item.tiro_casuale ?? ""}`,
+        paragraph(item.descrizione),
+        sectionsToMarkdown(item.sezioni),
+        attribution()
+    ].filter(Boolean).join("\n\n");
+}
+
 function renderSpell(item) {
     const fields = baseFields(item, "incantesimo", {
         livello: item.livello,
@@ -272,6 +394,25 @@ function renderSpell(item) {
         `> [!infobox|wiki]- Incantesimo\n> Livello: ${item.livello}\n> Scuola: ${item.scuola}\n> Tempo di lancio: ${item.tempo_lancio}\n> Gittata: ${item.gittata}\n> Componenti: ${item.componenti}\n> Durata: ${item.durata}`,
         paragraph(item.descrizione),
         namedBlocks("Slot Di Livello Superiore", item.scaling),
+        attribution()
+    ].filter(Boolean).join("\n\n");
+}
+
+function renderSpecies(item) {
+    const fields = baseFields(item, "specie", {
+        capitolo: item.capitolo,
+        pagine_sorgente: item.pagine_sorgente,
+        tipo_creatura: item.tipo_creatura,
+        taglia: item.taglia,
+        velocita: item.velocita,
+        tratti_sintesi: item.tratti_sintesi
+    });
+
+    return frontmatter(fields) + [
+        `# ${item.nome}`,
+        `> [!infobox|wiki]- Specie\n> Tipo creatura: ${item.tipo_creatura ?? ""}\n> Taglia: ${item.taglia ?? ""}\n> Velocita: ${item.velocita ?? ""}`,
+        paragraph(item.descrizione),
+        sectionsToMarkdown(item.sezioni),
         attribution()
     ].filter(Boolean).join("\n\n");
 }
@@ -410,12 +551,17 @@ function attribution() {
 
 function rendererFor(key) {
     return {
+        backgrounds: renderBackground,
         classes: renderClass,
+        equipment: renderEquipment,
+        feats: renderFeat,
+        languages: renderLanguage,
         spells: renderSpell,
         monsters: renderMonster,
         magic_items: renderMagicItem,
         rules: renderRule,
-        rules_glossary: renderGlossary
+        rules_glossary: renderGlossary,
+        species: renderSpecies
     }[key];
 }
 
@@ -445,7 +591,7 @@ function writeIndex(source, count) {
         `Totale note generate: ${count}.`,
         "",
         "```dataview",
-        "TABLE tipo, livello, scuola, cr, rarita, descrittore",
+        "TABLE tipo, categoria_oggetto, categoria_talento, categoria_lingua, livello, scuola, cr, rarita, descrittore",
         `FROM "SRD/${source.dir}"`,
         `WHERE file.name != "${source.dir}"`,
         "SORT nome ASC",

@@ -34,5 +34,13 @@ Se il mostro esita, serve una prova di caratteristica con CD 15 o pari all'Intel
 
 ## Prove di Influenza
 
+| Prova | Interazione |
+| --- | --- |
+| Carisma (Inganno) | Ingannare un mostro che capisce il personaggio |
+| Carisma (Intimidire) | Intimidire un mostro |
+| Carisma (Intrattenere) | Intrattenere un mostro |
+| Carisma (Persuasione) | Persuadere un mostro che capisce il personaggio |
+| Saggezza (Addestrare animali) | Persuadere gentilmente una bestia o una mostruosità |
+
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

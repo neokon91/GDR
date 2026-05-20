@@ -17,8 +17,8 @@ fazioni:
   - [[Demo - Custodi della Soglia]]
 ricompense:
   - [[Demo - Frammento della Soglia]]
-pressione: 7
-prossima_mossa: "I Custodi dichiarano il coprifuoco e interrogano Odran."
+pressione: 9
+prossima_mossa: "I Custodi dichiarano il coprifuoco, interrogano Odran e cercano il frammento nella campana."
 domande_aperte:
   - chi ha rotto la reliquia?
   - cosa succede se viene ricomposta male?
@@ -28,7 +28,9 @@ indizi:
 ostacoli:
   - nebbia viva
   - Custodi ostili
-conseguenze: []
+conseguenze:
+  - Dopo la Seconda Nebbia il ponte e minacciato e la missione diventa urgente.
+  - Se i personaggi aspettano, i Custodi trovano il frammento nascosto da Odran.
 segreti:
   - la reliquia e una serratura
 scadenza_mondo: "Terza notte di nebbia"

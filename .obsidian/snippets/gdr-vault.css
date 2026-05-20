@@ -519,15 +519,15 @@ body .markdown-source-view.tavolo {
 }
 
 .markdown-preview-view.tavolo .callout {
-  margin-block: 1rem;
+  margin-block: 0.75rem;
 }
 
 .markdown-preview-view.tavolo .callout-title {
-  padding: 0.7rem 1rem;
+  padding: 0.58rem 0.8rem;
 }
 
 .markdown-preview-view.tavolo .callout-content {
-  padding: 0.85rem 1rem 1rem;
+  padding: 0.7rem 0.8rem 0.85rem;
 }
 
 .markdown-preview-view.tavolo h2 {
@@ -543,7 +543,32 @@ body .markdown-source-view.tavolo {
 }
 
 .markdown-preview-view.tavolo .dataview.table-view-table {
-  font-size: 0.95em;
+  font-size: 0.9em;
+}
+
+.markdown-preview-view.tavolo .block-language-meta-bind-button {
+  display: inline-block;
+  margin: 0.15rem 0.15rem 0.15rem 0;
+  vertical-align: top;
+}
+
+.markdown-preview-view.tavolo .meta-bind-button,
+.markdown-preview-view.tavolo .mb-button {
+  min-width: 8.5rem;
+  min-height: 2rem;
+  padding-inline: 0.7rem;
+  font-size: 0.9em;
+  justify-content: center;
+}
+
+.markdown-preview-view.tavolo h2 {
+  margin-top: 1.15rem;
+}
+
+.markdown-preview-view.tavolo h3 {
+  margin-top: 0.85rem;
+  color: var(--text-muted);
+  font-size: 0.95rem;
 }
 
 .markdown-preview-view.tavolo .metadata-container,

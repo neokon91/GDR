@@ -3,7 +3,7 @@ id: demo-custodi-della-soglia
 nome: "Demo - Custodi della Soglia"
 categoria: fazione
 tipo: ordine rituale
-stato: in gioco
+stato: ostile
 canonico: true
 mondo: [[Demo - Terre della Soglia]]
 leader:
@@ -13,8 +13,11 @@ luoghi:
 personaggi:
   - [[Demo - Sella Neraluce]]
   - [[Demo - Odran il Campanaro]]
-pressione: 6
-prossima_mossa: "Sigillare il ponte e requisire ogni frammento trovato."
+pressione: 8
+prossima_mossa: "Dichiarare il coprifuoco, sigillare il ponte e requisire ogni frammento trovato."
+conseguenze:
+  - La Seconda Nebbia permette ai Custodi di prendere controllo pubblico del ponte.
+  - Sella puo accusare chiunque nasconda frammenti di mettere la valle in pericolo.
 ---
 
 # Demo - Custodi della Soglia

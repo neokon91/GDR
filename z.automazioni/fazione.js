@@ -47,6 +47,7 @@ risorse: []
 debolezze: []
 alleati: []
 rivali: []
+conseguenze: []
 segreti: []
 ---
 `;

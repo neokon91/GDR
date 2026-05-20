@@ -45,5 +45,10 @@ L'anello ha 5 cariche e recupera 1d4 + 1 cariche consumate all'alba di ogni gior
 
 ## Piano Incantesimi (cariche)
 
+**Acqua** Camminare sull'acqua (2 cariche), creare o distruggere acqua (1 carica), muro di ghiaccio (3 cariche), tempesta di ghiaccio (2 cariche), tsunami (5 cariche)
+**Aria** Caduta morbida (0 cariche), catena di fulmini (3 cariche), folata di vento (2 cariche), muro di vento (1 carica)
+**Fuoco** Mani brucianti (1 carica), muro di fuoco (3 cariche), palla di fuoco (2 cariche), tempesta di fuoco (4 cariche)
+**Terra** Muro di pietra (3 cariche), pelle di pietra (3 cariche), scolpire pietra (2 cariche),  terremoto (5 cariche)
+
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

@@ -20,6 +20,16 @@ Gli oggetti possono essere danneggiati da attacchi o incantesimi. Un oggetto fra
 
 ## Classe Armatura degli oggetti
 
+| Materiale | CA |
+| --- | --- |
+| Stoffa, carta, corda | 11 |
+| Cristallo, vetro, ghiaccio | 13 |
+| Legno | 15 |
+| Pietra | 17 |
+| Ferro, acciaio | 19 |
+| Mithral | 21 |
+| Adamantio | 23 |
+
 ## Punti ferita degli oggetti
 
 | chiave | valore |

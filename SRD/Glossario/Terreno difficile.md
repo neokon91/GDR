@@ -20,5 +20,14 @@ In terreno difficile, ogni 30 centimetri di movimento costano 30 centimetri extr
 
 ## Esempi
 
+| Elemento | Effetto |
+| --- | --- |
+| Creatura non minuscola o non alleata | Rende difficile lo spazio |
+| Mobili grandi | Rendono difficile lo spazio |
+| Neve alta, ghiaccio, detriti o sottobosco | Rendono difficile lo spazio |
+| Liquido fino agli stinchi o alla vita | Rende difficile lo spazio |
+| Apertura stretta | Rende difficile lo spazio |
+| Pendenza di 20 gradi o più | Rende difficile lo spazio |
+
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

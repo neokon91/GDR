@@ -1,11 +1,20 @@
 ---
 cssclasses:
   - dashboard
+mondo_attivo:
+campagne_attive: []
 ---
 
 # Worldbuilder Dashboard
 
 ## Mondo
+
+> [!scena] Filtro
+> Mondo:
+> `INPUT[suggester(optionQuery("Mondi"), useLinks(partial), allowOther):mondo_attivo]`
+>
+> Campagne:
+> `INPUT[inlineListSuggester(optionQuery("Campagne"), useLinks(partial)):campagne_attive]`
 
 ```meta-bind-button
 label: DM Dashboard
@@ -45,6 +54,22 @@ style: primary
 actions:
   - type: open
     link: "[[Risorse/Mappe/Mappe]]"
+```
+
+```meta-bind-button
+label: Timeline
+style: primary
+actions:
+  - type: open
+    link: "[[Mondi/Timeline/Timeline]]"
+```
+
+```meta-bind-button
+label: Stato Mondo
+style: primary
+actions:
+  - type: open
+    link: "[[Mondi/Stato del Mondo]]"
 ```
 
 ## Crea Mondo
@@ -146,6 +171,16 @@ actions:
 ```
 
 ```meta-bind-button
+label: Evento Storico
+style: primary
+actions:
+  - type: templaterCreateNote
+    templateFile: "z.modelli/Evento Storico.md"
+    folderPath: "Mondi/Timeline"
+    open: true
+```
+
+```meta-bind-button
 label: Dispense
 style: primary
 actions:
@@ -168,6 +203,7 @@ const cards = [
   ["Fazioni", count('"Mondi/Fazioni"', notIndex), "Poteri in movimento"],
   ["Religioni", count('"Mondi/Religioni"', notIndex), "Culti e divinita"],
   ["Creature", count('"Mondi/Creature"', notIndex), "Minacce e presenze"],
+  ["Timeline", count('"Mondi/Timeline"', notIndex), "Eventi canonici"],
   ["Bozze", count('"Mondi"', p => isReal(p) && p.stato === "bozza"), "Da completare"]
 ];
 
@@ -186,9 +222,34 @@ grid.innerHTML = cards.map(([label, value, hint]) => `
 ```dataview
 TABLE categoria, tipo, luogo, stato
 FROM "Mondi"
-WHERE stato = "bozza" AND !startswith(file.name, "Prova -")
+WHERE stato = "bozza" AND !startswith(file.name, "Prova -") AND (!this.mondo_attivo OR mondo = this.mondo_attivo OR file.link = this.mondo_attivo)
 SORT categoria ASC, nome ASC
 LIMIT 12
+```
+
+## Campagna Filtrata
+
+```dataviewjs
+const current = dv.current();
+const campaigns = new Set(dv.array(current.campagne_attive ?? []).map(link => link.path ?? String(link)).array());
+const world = current.mondo_attivo?.path ?? String(current.mondo_attivo ?? "");
+const linkKey = link => link?.path ?? String(link ?? "");
+const matchesCampaign = p => !campaigns.size || dv.array(p.campagne ?? p.campagne_attive ?? []).some(link => campaigns.has(linkKey(link)));
+const matchesWorld = p => !world || linkKey(p.mondo) === world || p.file.path === world;
+
+const pages = dv.pages('"Campagne" OR "Mondi/Sessioni" OR "Mondi/Missioni"')
+  .where(p => !String(p.file.name).startsWith("Prova -") && p.stato !== "archiviata")
+  .where(p => matchesWorld(p) && matchesCampaign(p))
+  .sort(p => p.data ?? p.file.mtime, "desc")
+  .limit(16);
+
+if (!campaigns.size && !world) {
+  dv.paragraph("Imposta un mondo o una campagna nel filtro per isolare il lavoro corrente.");
+} else if (!pages.length) {
+  dv.paragraph("Nessun contenuto trovato per il filtro corrente.");
+} else {
+  dv.table(["Nota", "Categoria", "Stato", "Mondo", "Campagne"], pages.map(p => [p.file.link, p.categoria ?? "", p.stato ?? "", p.mondo ?? "", p.campagne ?? []]));
+}
 ```
 
 ## Densità E Connessioni
@@ -225,7 +286,7 @@ if (!pages.length) {
 ```dataview
 TABLE categoria, tipo, domande_aperte
 FROM "Mondi"
-WHERE domande_aperte AND length(domande_aperte) > 0 AND !startswith(file.name, "Prova -") AND stato != "archiviata"
+WHERE domande_aperte AND length(domande_aperte) > 0 AND !startswith(file.name, "Prova -") AND stato != "archiviata" AND (!this.mondo_attivo OR mondo = this.mondo_attivo OR file.link = this.mondo_attivo)
 SORT file.mtime DESC
 LIMIT 12
 ```
@@ -235,7 +296,7 @@ LIMIT 12
 ```dataview
 TABLE categoria, tipo, segreti, indizi
 FROM "Mondi"
-WHERE ((segreti AND length(segreti) > 0) OR (indizi AND length(indizi) > 0)) AND !startswith(file.name, "Prova -") AND stato != "archiviata"
+WHERE ((segreti AND length(segreti) > 0) OR (indizi AND length(indizi) > 0)) AND !startswith(file.name, "Prova -") AND stato != "archiviata" AND (!this.mondo_attivo OR mondo = this.mondo_attivo OR file.link = this.mondo_attivo)
 SORT file.mtime DESC
 LIMIT 12
 ```
@@ -245,9 +306,39 @@ LIMIT 12
 ```dataview
 TABLE categoria, tipo, pressione, prossima_mossa, scadenza_mondo
 FROM "Mondi/Fazioni" OR "Mondi/Missioni"
-WHERE pressione > 0 AND !startswith(file.name, "Prova -") AND stato != "archiviata"
+WHERE pressione > 0 AND !startswith(file.name, "Prova -") AND stato != "archiviata" AND (!this.mondo_attivo OR mondo = this.mondo_attivo)
 SORT pressione DESC, file.name ASC
 LIMIT 12
+```
+
+## Timeline Narrativa
+
+```dataview
+TABLE data_mondo, stato_canonico, mondo, luoghi, fazioni, sessioni
+FROM "Mondi/Timeline"
+WHERE file.name != "Timeline" AND stato_canonico != "archiviata" AND !startswith(file.name, "Prova -") AND (!this.mondo_attivo OR mondo = this.mondo_attivo)
+SORT data_mondo ASC, file.name ASC
+LIMIT 16
+```
+
+## Lore Da Canonizzare
+
+```dataview
+TABLE tipo, stato, stato_canonico, sessioni, collegamenti, impatto
+FROM "Inbox"
+WHERE categoria = "lore capture" AND stato != "archiviata" AND stato != "ignorata" AND !startswith(file.name, "Prova -") AND (!this.mondo_attivo OR mondo = this.mondo_attivo)
+SORT file.mtime DESC
+LIMIT 12
+```
+
+## Stato Canonico
+
+```dataview
+TABLE categoria, tipo, stato_canonico, canonico, mondo
+FROM "Mondi" OR "Inbox"
+WHERE stato_canonico AND !startswith(file.name, "Prova -") AND stato != "archiviata" AND stato != "ignorata" AND (!this.mondo_attivo OR mondo = this.mondo_attivo)
+SORT stato_canonico ASC, file.mtime DESC
+LIMIT 16
 ```
 
 ## Mondi e Archivi
@@ -255,7 +346,7 @@ LIMIT 12
 ```dataview
 TABLE categoria, tipo, stato
 FROM "Mondi"
-WHERE file.name != "Mondo" AND stato != "archiviata" AND !startswith(file.name, "Prova -")
+WHERE file.name != "Mondo" AND stato != "archiviata" AND !startswith(file.name, "Prova -") AND (!this.mondo_attivo OR mondo = this.mondo_attivo OR file.link = this.mondo_attivo)
 SORT categoria ASC, nome ASC
 LIMIT 16
 ```
@@ -265,7 +356,7 @@ LIMIT 16
 ```dataview
 TABLE tipo, ruolo, stato, luogo
 FROM "Mondi/Personaggi"
-WHERE file.name != "Personaggi" AND stato != "archiviata" AND !startswith(file.name, "Prova -")
+WHERE file.name != "Personaggi" AND stato != "archiviata" AND !startswith(file.name, "Prova -") AND (!this.mondo_attivo OR mondo = this.mondo_attivo)
 SORT stato ASC, nome ASC
 LIMIT 12
 ```
@@ -275,7 +366,7 @@ LIMIT 12
 ```dataview
 TABLE tipo, bioma, pericolo, luogo_padre
 FROM "Mondi/Luoghi"
-WHERE file.name != "Luoghi" AND stato != "archiviata" AND !startswith(file.name, "Prova -")
+WHERE file.name != "Luoghi" AND stato != "archiviata" AND !startswith(file.name, "Prova -") AND (!this.mondo_attivo OR mondo = this.mondo_attivo)
 SORT nome ASC
 LIMIT 12
 ```
@@ -285,7 +376,7 @@ LIMIT 12
 ```dataview
 TABLE categoria, tipo, stato, leader, divinita
 FROM "Mondi/Fazioni" OR "Mondi/Religioni"
-WHERE file.name != "Fazioni" AND file.name != "Religioni" AND stato != "archiviata" AND !startswith(file.name, "Prova -")
+WHERE file.name != "Fazioni" AND file.name != "Religioni" AND stato != "archiviata" AND !startswith(file.name, "Prova -") AND (!this.mondo_attivo OR mondo = this.mondo_attivo)
 SORT categoria ASC, nome ASC
 LIMIT 16
 ```
@@ -295,7 +386,7 @@ LIMIT 16
 ```dataview
 TABLE tipo, stato, size AS taglia, cr, luoghi
 FROM "Mondi/Creature"
-WHERE file.name != "Creature" AND stato != "archiviata" AND !startswith(file.name, "Prova -")
+WHERE file.name != "Creature" AND stato != "archiviata" AND !startswith(file.name, "Prova -") AND (!this.mondo_attivo OR mondo = this.mondo_attivo)
 SORT cr ASC, nome ASC
 LIMIT 16
 ```
@@ -305,7 +396,7 @@ LIMIT 16
 ```dataview
 TABLE categoria, tipo, stato, luogo
 FROM "Mondi/Oggetti" OR "Mondi/Dispense"
-WHERE file.name != "Oggetti" AND file.name != "Dispense" AND stato != "archiviata" AND !startswith(file.name, "Prova -")
+WHERE file.name != "Oggetti" AND file.name != "Dispense" AND stato != "archiviata" AND !startswith(file.name, "Prova -") AND (!this.mondo_attivo OR mondo = this.mondo_attivo)
 SORT categoria ASC, nome ASC
 LIMIT 16
 ```

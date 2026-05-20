@@ -17,6 +17,9 @@ async function personaggio(tp) {
             { label: "Bozza", id: "bozza" },
             { label: "Pronto", id: "pronto" },
             { label: "In gioco", id: "in gioco" },
+            { label: "Ostile", id: "ostile" },
+            { label: "Scomparso", id: "scomparso" },
+            { label: "Morto", id: "morto" },
             { label: "Archiviata", id: "archiviata" }
         ],
         "Stato del personaggio"
@@ -44,6 +47,7 @@ mondo: ${mondo}
 fazioni: ${helpers.inlineYamlList(fazioni)}
 luogo: ${luogo}
 relazioni: ${helpers.inlineYamlList(relazioni)}
+conseguenze: []
 type: umanoide
 size: media
 ac: ${helpers.yamlNumber(ac) || 10}

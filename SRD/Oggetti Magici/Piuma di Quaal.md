@@ -44,5 +44,12 @@ Se il personaggio si trova su una barca o una nave, può effettuare un'azione di
 
 ## 1d100 Piuma Rarità
 
+**01–25** Albero Non comune
+**26–45** Ancora Non comune
+**46–60** Barca cigno Rara
+**61–70** Frusta Rara
+**71–85** Uccello Rara
+**86–00** Ventaglio Non comune
+
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

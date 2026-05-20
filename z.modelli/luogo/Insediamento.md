@@ -24,7 +24,7 @@
 > `INPUT[toggle:canonico]`
 >
 > Stato:
-> `INPUT[inlineSelect(option(bozza, Bozza), option(pronto, Pronto), option(in gioco, In gioco), option(archiviata, Archiviata)):stato]`
+> `INPUT[inlineSelect(option(bozza, Bozza), option(pronto, Pronto), option(in gioco, In gioco), option(minacciato, Minacciato), option(distrutto, Distrutto), option(archiviata, Archiviata)):stato]`
 >
 > Prima impressione:
 > `INPUT[text:impressione]`
@@ -89,6 +89,12 @@ INPUT[list:problemi]
 
 > [!pericolo] Problemi attuali
 >
+
+## Conseguenze
+
+```meta-bind
+INPUT[list:conseguenze]
+```
 
 ## Segreti
 

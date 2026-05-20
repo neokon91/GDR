@@ -13,6 +13,7 @@ fc-category: sessione
 fc-display-name: "Demo - Sessione 1"
 fc-end:
 stato: pronto
+attiva: false
 mondo: [[Demo - Terre della Soglia]]
 campagne:
   - [[Demo - La Reliquia Spezzata]]

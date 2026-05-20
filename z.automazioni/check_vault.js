@@ -61,6 +61,68 @@ function readJson(file) {
     }
 }
 
+function parseScalar(value) {
+    const trimmed = String(value ?? "").trim();
+    if (trimmed === "true") return true;
+    if (trimmed === "false") return false;
+    if (trimmed === "[]") return [];
+    if (/^-?\d+(\.\d+)?$/.test(trimmed)) return Number(trimmed);
+    return trimmed.replace(/^["']|["']$/g, "");
+}
+
+function parseFrontmatter(text) {
+    if (!text.startsWith("---\n")) return {};
+
+    const end = text.indexOf("\n---", 4);
+    if (end === -1) return {};
+
+    const yaml = text.slice(4, end).split(/\r?\n/);
+    const data = {};
+    let currentKey = null;
+
+    for (const line of yaml) {
+        const listMatch = line.match(/^\s+-\s+(.+)$/);
+
+        if (listMatch && currentKey) {
+            if (!Array.isArray(data[currentKey])) data[currentKey] = [];
+            data[currentKey].push(parseScalar(listMatch[1]));
+            continue;
+        }
+
+        const keyMatch = line.match(/^([A-Za-z0-9_-]+):\s*(.*)$/);
+        if (!keyMatch) continue;
+
+        currentKey = keyMatch[1];
+        const value = keyMatch[2] ?? "";
+
+        if (!value.trim()) {
+            data[currentKey] = "";
+        } else if (/^\[.*\]$/.test(value.trim())) {
+            const inner = value.trim().slice(1, -1).trim();
+            data[currentKey] = inner ? inner.split(",").map(entry => parseScalar(entry.trim())) : [];
+        } else {
+            data[currentKey] = parseScalar(value);
+        }
+    }
+
+    return data;
+}
+
+function hasValue(value) {
+    if (Array.isArray(value)) return value.length > 0;
+    if (typeof value === "number") return Number.isFinite(value) && value !== 0;
+    return String(value ?? "").trim().length > 0;
+}
+
+function hasAny(frontmatter, fields) {
+    return fields.some(field => hasValue(frontmatter[field]));
+}
+
+function isFolderIndex(fileRel) {
+    const parsed = path.parse(fileRel);
+    return parsed.name === path.basename(parsed.dir);
+}
+
 function targetPath(target) {
     const normalized = String(target ?? "").replace(/\\/g, "/").trim();
     if (!normalized) return "";
@@ -70,6 +132,7 @@ function targetPath(target) {
 const markdownFiles = walk(ROOT, file => file.endsWith(".md"));
 const markdownByPath = new Set();
 const markdownByBasename = new Map();
+const markdownMeta = new Map();
 
 for (const file of markdownFiles) {
     const fileRel = rel(file);
@@ -79,6 +142,7 @@ for (const file of markdownFiles) {
     markdownByPath.add(stem);
     if (!markdownByBasename.has(basename)) markdownByBasename.set(basename, []);
     markdownByBasename.get(basename).push(fileRel);
+    markdownMeta.set(fileRel, parseFrontmatter(fs.readFileSync(file, "utf8")));
 }
 
 for (const file of walk(ROOT, file => file.endsWith(".json"))) {
@@ -173,6 +237,51 @@ if (workspace) {
         if (serialized.includes(stalePath)) {
             errors.push(`Configurazione Obsidian contiene percorso obsoleto: ${stalePath}`);
         }
+    }
+}
+
+const realEntries = [...markdownMeta.entries()]
+    .filter(([fileRel]) => !path.basename(fileRel, ".md").startsWith("Prova -"))
+    .filter(([fileRel]) => !isFolderIndex(fileRel));
+
+const activeSessions = realEntries
+    .filter(([fileRel, fm]) => fileRel.startsWith("Mondi/Sessioni/") && fm.categoria === "sessione" && fm.attiva === true);
+
+if (activeSessions.length > 1) {
+    errors.push(`Sessioni multiple attive: ${activeSessions.map(([fileRel]) => fileRel).join(", ")}`);
+}
+
+for (const [fileRel, fm] of realEntries) {
+    if (fileRel.startsWith("Mondi/Sessioni/") && fm.categoria === "sessione" && !Object.prototype.hasOwnProperty.call(fm, "attiva")) {
+        warnings.push(`${fileRel}: sessione senza campo esplicito attiva`);
+    }
+
+    if (fm.stato === "pronto") {
+        const requiredByCategory = {
+            sessione: ["mondo", "campagne", "luoghi", "missioni"],
+            missione: ["mondo", "luoghi", "fazioni", "committente"],
+            incontro: ["luogo", "creature", "missioni", "fazioni"],
+            png: ["mondo", "luogo", "fazioni"],
+            luogo: ["mondo", "luogo_padre", "fazioni"],
+            fazione: ["mondo", "luoghi", "rivali"]
+        };
+        const fields = requiredByCategory[fm.categoria] ?? null;
+
+        if (fields && !hasAny(fm, fields)) {
+            warnings.push(`${fileRel}: nota pronta senza collegamenti minimi (${fields.join(", ")})`);
+        }
+    }
+
+    if (fileRel.startsWith("Mondi/Missioni/") && fm.stato !== "archiviata" && !hasValue(fm.prossima_mossa)) {
+        warnings.push(`${fileRel}: missione senza prossima_mossa`);
+    }
+
+    if (fileRel.startsWith("Mondi/Personaggi/") && fm.tipo === "png" && fm.stato === "in gioco" && !hasValue(fm.luogo)) {
+        warnings.push(`${fileRel}: PNG in gioco senza luogo`);
+    }
+
+    if ((fileRel.startsWith("Mondi/Fazioni/") || fileRel.startsWith("Mondi/Religioni/")) && Number(fm.pressione ?? 0) > 0 && !hasValue(fm.prossima_mossa)) {
+        warnings.push(`${fileRel}: fazione con pressione senza prossima_mossa`);
     }
 }
 

@@ -20,5 +20,14 @@ Una creatura che beve meno della metà dell'acqua necessaria in un giorno ottien
 
 ## Fabbisogno d'acqua giornaliero
 
+| Taglia | Acqua |
+| --- | --- |
+| Minuscola | 1 litro |
+| Piccola | 4 litri |
+| Media | 4 litri |
+| Grande | 16 litri |
+| Enorme | 64 litri |
+| Mastodontica | 256 litri |
+
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

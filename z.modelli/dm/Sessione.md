@@ -21,7 +21,10 @@
 > `INPUT[inlineSelect(option(sessione, Sessione), option(scadenza, Scadenza), option(festa, Festa), option(pericolo, Pericolo), option(conseguenza, Conseguenza)):fc-category]`
 >
 > Stato:
-> `INPUT[inlineSelect(option(preparazione, Preparazione), option(pronto, Pronto), option(giocata, Giocata), option(archiviata, Archiviata)):stato]`
+> `INPUT[inlineSelect(option(preparazione, Preparazione), option(pronto, Pronto), option(in corso, In corso), option(giocata, Giocata), option(archiviata, Archiviata)):stato]`
+>
+> Sessione attiva:
+> `INPUT[toggle:attiva]`
 >
 > Campagne:
 > `INPUT[inlineListSuggester(optionQuery("Campagne"), useLinks(partial)):campagne]`
@@ -31,6 +34,9 @@
 >
 > Personaggi:
 > `INPUT[inlineListSuggester(optionQuery("Mondi/Personaggi"), useLinks(partial)):personaggi]`
+>
+> Missioni:
+> `INPUT[inlineListSuggester(optionQuery("Mondi/Missioni"), useLinks(partial)):missioni]`
 >
 > Creature:
 > `INPUT[inlineListSuggester(optionQuery("Mondi/Creature"), useLinks(partial)):creature]`
@@ -111,6 +117,15 @@ WHERE contains(this.luoghi, file.link)
 TABLE ruolo, stato, luogo
 FROM "Mondi/Personaggi"
 WHERE contains(this.personaggi, file.link)
+```
+
+## Missioni Vive
+
+```dataview
+TABLE stato, pressione, committente, prossima_mossa
+FROM "Mondi/Missioni"
+WHERE contains(this.missioni, file.link)
+SORT pressione DESC, nome ASC
 ```
 
 ## Incontri

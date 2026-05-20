@@ -20,5 +20,12 @@ Con l'azione di Ricerca effettui una prova di Saggezza per discernere qualcosa c
 
 ## Ricerca
 
+| Abilità | Elemento da individuare |
+| --- | --- |
+| Intuizione | Stato mentale di una creatura |
+| Medicina | Malattia o causa di morte di una creatura |
+| Percezione | Creature o oggetti nascosti |
+| Sopravvivenza | Tracce o cibo |
+
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

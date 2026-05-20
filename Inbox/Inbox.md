@@ -17,20 +17,91 @@ actions:
     open: true
 ```
 
+```meta-bind-button
+label: Nuovo Evento / Lore
+style: primary
+actions:
+  - type: templaterCreateNote
+    templateFile: "z.modelli/Lore Capture.md"
+    folderPath: "Inbox"
+    open: true
+```
+
+## Inbox Live
+
+```meta-bind-button
+label: Evento Live
+style: primary
+actions:
+  - type: templaterCreateNote
+    templateFile: "z.modelli/Lore Capture.md"
+    folderPath: "Inbox"
+    open: true
+```
+
+```meta-bind-button
+label: PNG Improvvisato
+style: primary
+actions:
+  - type: templaterCreateNote
+    templateFile: "z.modelli/personaggio/PNG.md"
+    folderPath: "Mondi/Personaggi"
+    open: true
+```
+
+```meta-bind-button
+label: Luogo Improvvisato
+style: primary
+actions:
+  - type: templaterCreateNote
+    templateFile: "z.modelli/Luogo Router.md"
+    folderPath: "Mondi/Luoghi"
+    open: true
+```
+
+```meta-bind-button
+label: Nota Grezza
+style: primary
+actions:
+  - type: templaterCreateNote
+    templateFile: "z.modelli/Nota Rapida.md"
+    folderPath: "Inbox"
+    open: true
+```
+
+```meta-bind-button
+label: Conseguenza
+style: primary
+actions:
+  - type: templaterCreateNote
+    templateFile: "z.modelli/Lore Capture.md"
+    folderPath: "Inbox"
+    open: true
+```
+
 ## Da Smistare
 
 ```dataview
-TABLE tipo, stato, collegamenti
+TABLE tipo, stato, stato_canonico, sessioni, collegamenti
 FROM "Inbox"
-WHERE file.name != "Inbox" AND stato != "smistata" AND stato != "archiviata" AND !startswith(file.name, "Prova -")
+WHERE file.name != "Inbox" AND stato != "smistata" AND stato != "archiviata" AND stato != "ignorata" AND !startswith(file.name, "Prova -")
 SORT file.ctime DESC
+```
+
+## Lore Capture
+
+```dataview
+TABLE tipo, stato, stato_canonico, sessioni, collegamenti, impatto
+FROM "Inbox"
+WHERE categoria = "lore capture" AND stato != "archiviata" AND stato != "ignorata" AND !startswith(file.name, "Prova -")
+SORT file.mtime DESC
 ```
 
 ## Smistate
 
 ```dataview
-TABLE tipo, collegamenti
+TABLE tipo, stato_canonico, collegamenti
 FROM "Inbox"
-WHERE stato = "smistata" AND !startswith(file.name, "Prova -")
+WHERE (stato = "smistata" OR stato = "collegata" OR stato = "canonica") AND !startswith(file.name, "Prova -")
 SORT file.mtime DESC
 ```

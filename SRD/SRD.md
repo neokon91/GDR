@@ -13,12 +13,17 @@ Archivio separato di note generate dalla fork [neokon91/DND-SRD-IT](https://gith
 
 | Sezione | Note |
 | --- | ---: |
+| [[SRD/Background/Background|Background]] | 4 |
 | [[SRD/Classi/Classi|Classi]] | 12 |
+| [[SRD/Equipaggiamento/Equipaggiamento|Equipaggiamento]] | 197 |
+| [[SRD/Talenti/Talenti|Talenti]] | 17 |
+| [[SRD/Lingue/Lingue|Lingue]] | 19 |
 | [[SRD/Incantesimi/Incantesimi|Incantesimi]] | 339 |
 | [[SRD/Mostri/Mostri|Mostri]] | 334 |
 | [[SRD/Oggetti Magici/Oggetti Magici|Oggetti Magici]] | 256 |
-| [[SRD/Regole/Regole|Regole]] | 49 |
+| [[SRD/Regole/Regole|Regole]] | 47 |
 | [[SRD/Glossario/Glossario|Glossario]] | 153 |
+| [[SRD/Specie/Specie|Specie]] | 9 |
 
 ## Attribuzione
 

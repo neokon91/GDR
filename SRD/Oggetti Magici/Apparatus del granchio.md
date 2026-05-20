@@ -29,5 +29,18 @@ Una creatura all'interno dell'abitacolo può usare un'azione di Utilizzo per muo
 
 ## Leva Su Giù
 
+**1** Le zampe si estendono, permettendo all'apparatus di camminare e nuotare.Le zampe dell'apparatus si ritirano, riducendo la sua velocità normale e quella di nuoto a 0 e impedendogli di beneficiare di bonus alla velocità.
+**2** La saracinesca dell'oblò anteriore si apre. La saracinesca dell'oblò anteriore si chiude.
+**3** Le saracinesche degli oblò laterali si aprono (due per lato).
+Le saracinesche degli oblò laterali si chiudono (due per lato).
+**4** Dalla zona anteriore dell'apparatus si estendono due chele.Le chele si ritraggono
+**5** Ognuna delle chele estese effettua il seguente attacco in mischia: +8 al tiro per colpire, portata 1,5 metri. Colpito: 7 (2d6) danni contundenti.
+Ognuna delle chele estese effettua il seguente attacco in mischia: +8 al tiro per colpire, portata 1,5 metri. Colpito: Il bersaglio ha la condizione afferrato (CD 15 per sfuggire).
+**6** L'apparatus cammina o nuota in avanti a condizione che le zampe siano estese.L'apparatus cammina o nuota all'indietro a condizione che le zampe siano estese.
+**7** L'apparatus ruota di 90 gradi in senso antiorario a condizione che le zampe siano estese.L'apparatus ruota di 90 gradi in senso orario a condizione che le zampe siano estese.
+**8** Strutture simili a occhi proiettano luce intensa in un raggio di 9 metri e luce fioca per altri 9 metri. Le luci si spengono.
+**9** L'apparatus affonda fino a 6 metri se è immerso in un liquido. L'apparatus risale per 6 metri nel liquido in cui si trova.
+**10** Lo sportello posteriore si sblocca e si apre. Lo sportello posteriore si chiude e sigilla l'abitacolo.
+
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

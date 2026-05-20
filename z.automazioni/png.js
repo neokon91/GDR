@@ -16,6 +16,9 @@ async function png(tp) {
             { label: "Bozza", id: "bozza" },
             { label: "Pronto", id: "pronto" },
             { label: "In gioco", id: "in gioco" },
+            { label: "Ostile", id: "ostile" },
+            { label: "Scomparso", id: "scomparso" },
+            { label: "Morto", id: "morto" },
             { label: "Archiviata", id: "archiviata" }
         ],
         "Stato del PNG"
@@ -43,6 +46,7 @@ fazioni: ${helpers.inlineYamlList(fazioni)}
 relazioni: ${helpers.inlineYamlList(relazioni)}
 segreto:
 atteggiamento: ${helpers.yamlQuote(atteggiamento)}
+conseguenze: []
 type: umanoide
 size: media
 alignment:

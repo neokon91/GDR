@@ -32,6 +32,9 @@
 Mondo:
 `INPUT[suggester(optionQuery("Mondi"), useLinks(partial), allowOther):mondo]`
 
+Stato:
+`INPUT[inlineSelect(option(bozza, Bozza), option(pronto, Pronto), option(in gioco, In gioco), option(ostile, Ostile), option(scomparso, Scomparso), option(morto, Morto), option(archiviata, Archiviata)):stato]`
+
 ## Statblock D&D
 
 ```dataviewjs
@@ -96,6 +99,12 @@ tab: Segreti
 > - [ ]
 > - [ ]
 > - [ ]
+
+## Conseguenze
+
+```meta-bind
+INPUT[list:conseguenze]
+```
 
 ## Uso Al Tavolo
 

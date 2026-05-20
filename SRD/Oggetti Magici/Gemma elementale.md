@@ -26,5 +26,10 @@ Questa gemma contiene un frammento di energia elementale. Quando si effettua un'
 
 ## Gemma Elementale richiamato
 
+**Corindone rosso** Elementale del fuoco
+**Diamante giallo** Elementale della terra
+**Smeraldo** Elementale dell'acqua
+**Zaffiro blu** Elementale dell'aria
+
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

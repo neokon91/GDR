@@ -20,5 +20,14 @@ Una creatura che consuma meno della metà del cibo richiesto in un giorno deve s
 
 ## Fabbisogno di cibo giornaliero
 
+| Taglia | Cibo |
+| --- | --- |
+| Minuscola | 125 grammi |
+| Piccola | 0,5 chili |
+| Media | 0,5 chili |
+| Grande | 2 chili |
+| Enorme | 8 chili |
+| Mastodontica | 32 chili |
+
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

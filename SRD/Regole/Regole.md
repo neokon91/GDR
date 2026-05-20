@@ -9,10 +9,10 @@ generato_da: import_srd
 
 # Regole
 
-Totale note generate: 49.
+Totale note generate: 47.
 
 ```dataview
-TABLE tipo, livello, scuola, cr, rarita, descrittore
+TABLE tipo, categoria_oggetto, categoria_talento, categoria_lingua, livello, scuola, cr, rarita, descrittore
 FROM "SRD/Regole"
 WHERE file.name != "Regole"
 SORT nome ASC

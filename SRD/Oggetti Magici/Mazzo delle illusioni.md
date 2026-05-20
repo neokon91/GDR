@@ -29,5 +29,39 @@ Ogni interazione fisica con la creatura illusoria ne rivela la falsità, in quan
 
 ## 1d100 Illusione*
 
+**01–03** Arcimago
+**04–06** Assassino
+**07–09** Basilisco
+**10–12** Berserker
+**13–15** Capitano bandito
+**16–18** Cavaliere
+**19–21** Drago rosso adulto
+**22–24** Druido
+**25–27** Erinni
+**28–30** Ettin
+**31–33** Gigante del fuoco
+**34–36** Gigante del gelo
+**37–39** Gigante delle colline
+**40–42** Gigante delle nuvole
+**43–45** Golem di ferro
+**46–48** Guerriero bugbear
+**49–51** Guerriero coboldo
+**52–54** Guerriero gnoll
+**55–57** Guerriero goblin
+**58–60** Guerriero hobgoblin
+**61–63** Guerriero veterano
+**64–66** Incubo
+**67–69** Lich
+**70–72** Medusa
+**73–75** Megera notturna
+*76–78* Naga guardiana
+**79–81** Ogre
+**82–84** Oni
+**85–87** Sacerdote
+*88–90* Succube
+**91–93** Troll
+**94–96** Viverna
+**97–00** Il personaggio*Le schede delle statistiche per queste creature (eccetto il personaggio) sono disponibili nel capitolo "Mostri".
+
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

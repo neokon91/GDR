@@ -20,6 +20,7 @@ async function sessione(tp) {
     const campagne = await helpers.chooseCampaigns(tp, "Campagne collegate", context);
     const luoghi = await helpers.chooseLocations(tp, "Luoghi in scena", context);
     const personaggi = await helpers.choosePeople(tp, "Personaggi in scena", context);
+    const missioni = await helpers.chooseMissions(tp, "Missioni vive", context);
     const creature = await helpers.chooseCreatures(tp, "Creature in scena", context);
     const incontri = await helpers.chooseEncounters(tp, "Incontri previsti", context);
     const dispense = await helpers.chooseHandouts(tp, "Dispense previste", context);
@@ -48,10 +49,12 @@ fc-category: sessione
 fc-display-name: ${helpers.yamlQuote(titolo)}
 fc-end:
 stato: preparazione
+attiva: false
 mondo: ${mondo}
 campagne: ${helpers.inlineYamlList(campagne)}
 luoghi: ${helpers.inlineYamlList(luoghi)}
 personaggi: ${helpers.inlineYamlList(personaggi)}
+missioni: ${helpers.inlineYamlList(missioni)}
 creature: ${helpers.inlineYamlList(creature)}
 incontri: ${helpers.inlineYamlList(incontri)}
 dispense: ${helpers.inlineYamlList(dispense)}
