@@ -1,10 +1,10 @@
 # Versione Vault
 
-Versione: `0.7.0`
+Versione: `0.8.0`
 
 Data: 2026-05-20
 
-Stato: esperienza iniziale professionale, vista giocatori e release pulita pronte.
+Stato: release ZIP iniziale pronta con plugin TTRPG utili integrati, BRAT di manutenzione attivo e strumenti fuori flusso accantonati.
 
 ## Compatibilità
 

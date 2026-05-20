@@ -24,10 +24,12 @@ kanban-plugin: board
 - [ ] Aggiornare PNG cambiati
 - [ ] Aggiornare luoghi cambiati
 - [ ] Aggiornare fazioni in movimento
+- [ ] Scrivere cosa fanno fuori scena i PNG importanti
 
 ## Missioni e Ricompense
 
 - [ ] Aggiornare stati, pressione e prossima_mossa delle missioni
+- [ ] Aggiornare clock e progress track in [[Mondi/Tracciati/Tracciati]]
 - [ ] Segnare oggetti consegnati o promessi
 - [ ] Segnare dispense consegnate
 - [ ] Annotare conseguenze aperte sulle missioni coinvolte
@@ -43,7 +45,7 @@ kanban-plugin: board
 
 - [ ] Scrivere riassunto da leggere
 - [ ] Preparare scena iniziale
-- [ ] Preparare timer o pressione
+- [ ] Preparare clock o pressione
 - [ ] Eseguire [[Risorse/Controllo Vault]]
 
 

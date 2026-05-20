@@ -1,6 +1,5 @@
 [
   "obsidian-icon-folder",
-  "obsidian-emoji-toolbar",
   "media-extended",
   "obsidian-5e-statblocks",
   "dataview",
@@ -20,6 +19,7 @@
   "initiative-tracker",
   "obsidian-excalidraw-plugin",
   "hex-cartographer",
+  "zoom-map",
   "obsidian-style-settings",
   "tabs"
 ]

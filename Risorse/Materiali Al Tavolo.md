@@ -48,7 +48,7 @@ if (!active) {
 }
 ```
 
-## Audio E Immagini
+## Media E Scene
 
 ```dataviewjs
 const active = dv.pages('"Mondi/Sessioni"').where(p => p.attiva === true && !String(p.file.name).startsWith("Prova -")).first();
@@ -65,6 +65,8 @@ if (!active) {
   dv.table(["Materiale", "Tipo"], rows);
 }
 ```
+
+Vedi anche [[Risorse/Media Scene]] per cue con timestamp e scene.
 
 ## Incontri E Creature
 

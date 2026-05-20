@@ -16,8 +16,8 @@ if (!active) {
   dv.paragraph("Nessuna sessione attiva. Attiva una sessione con il toggle `attiva`, oppure usa il fallback `pronto` o `preparazione`.");
 } else {
   dv.table(
-    ["Sessione", "Data", "Data mondo", "Stato", "Campagne", "Luoghi", "Missioni", "Incontri"],
-    [[active.file.link, active.data ?? "", active.data_mondo ?? "", active.stato ?? "", active.campagne ?? [], active.luoghi ?? [], active.missioni ?? [], active.incontri ?? []]]
+    ["Sessione", "Data", "Data mondo", "Stato", "Campagne", "Luoghi", "Missioni", "Tracciati", "Incontri"],
+    [[active.file.link, active.data ?? "", active.data_mondo ?? "", active.stato ?? "", active.campagne ?? [], active.luoghi ?? [], active.missioni ?? [], active.tracciati ?? [], active.incontri ?? []]]
   );
   dv.paragraph(`Apri: ${active.file.link}`);
 }
@@ -80,6 +80,16 @@ actions:
   - type: templaterCreateNote
     templateFile: "z.modelli/dm/Missione.md"
     folderPath: "Mondi/Missioni"
+    open: true
+```
+
+```meta-bind-button
+label: Nuovo Clock
+style: primary
+actions:
+  - type: templaterCreateNote
+    templateFile: "z.modelli/dm/Tracciato.md"
+    folderPath: "Mondi/Tracciati"
     open: true
 ```
 
@@ -165,8 +175,8 @@ const active = gdr.activeSession(dv);
 
 if (active) {
   dv.table(
-    ["Obiettivo", "Scene", "Segreti rivelabili", "Domande", "Pressioni"],
-    [[active.obiettivo ?? "", active.scene ?? [], active.segreti_rivelabili ?? [], active.domande_al_tavolo ?? [], active.pressioni ?? []]]
+    ["Obiettivo", "Scene", "Segreti rivelabili", "Domande", "Pressioni", "Tracciati"],
+    [[active.obiettivo ?? "", active.scene ?? [], active.segreti_rivelabili ?? [], active.domande_al_tavolo ?? [], active.pressioni ?? [], active.tracciati ?? []]]
   );
 }
 ```
@@ -187,6 +197,7 @@ if (!active) {
     ["PNG/PG", count(active.personaggi), "Persone da tenere vive"],
     ["Incontri", count(active.incontri), "Scene pronte"],
     ["Missioni", count(active.missioni), "Obiettivi e pressioni"],
+    ["Clock", count(active.tracciati), "Avanzamento visibile"],
     ["Dispense", count(active.dispense), "Materiale da consegnare"],
     ["Oggetti", count(active.oggetti), "Ricompense o leve"]
   ];
@@ -276,7 +287,58 @@ if (!pages.length) {
 if (!pages.length) {
   dv.paragraph("Nessuna missione collegata alla sessione attiva.");
 } else {
-  dv.table(["Missione", "Stato", "Pressione", "Committente", "Prossima mossa"], pages.map(p => [p.file.link, p.stato ?? "", p.pressione ?? "", p.committente ?? "", p.prossima_mossa ?? ""]));
+  dv.table(["Missione", "Stato", "Avanzamento", "Pressione", "Committente", "Prossima mossa"], pages.map(p => {
+    const value = Number(p.progress_value ?? 0);
+    const max = Number(p.progress_max ?? 6);
+    return [p.file.link, p.stato ?? "", `${value}/${max}`, p.pressione ?? "", p.committente ?? "", p.prossima_mossa ?? ""];
+  }));
+}
+```
+
+### Clock Della Sessione
+
+```dataviewjs
+const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));
+const active = gdr.activeSession(dv);
+
+const linked = dv.array(active?.tracciati ?? [])
+  .map(link => dv.page(link.path ?? link))
+  .where(Boolean)
+  .array();
+
+let pages = linked;
+
+if (!pages.length) {
+  const sessionMissions = new Set(dv.array(active?.missioni ?? []).map(link => link.path ?? String(link)).array());
+  const sessionFactions = new Set(dv.array(active?.fazioni ?? []).map(link => link.path ?? String(link)).array());
+  pages = dv.pages('"Mondi/Tracciati"')
+    .where(p => !String(p.file.name).startsWith("Prova -") && !["archiviata", "completato", "fallito"].includes(p.stato))
+    .where(p => sessionMissions.size === 0 && sessionFactions.size === 0
+      || dv.array(p.missioni ?? []).some(link => sessionMissions.has(link.path ?? String(link)))
+      || dv.array(p.fazioni ?? []).some(link => sessionFactions.has(link.path ?? String(link))))
+    .sort(p => Number(p.pressione ?? 0), "desc")
+    .limit(8)
+    .array();
+}
+
+if (!pages.length) {
+  dv.paragraph("Nessun clock collegato alla sessione attiva.");
+} else {
+  const grid = dv.el("div", "", { cls: "gdr-card-grid compact" });
+  grid.innerHTML = pages.map(p => {
+    const value = Math.max(0, Number(p.progress_value ?? 0));
+    const max = Math.max(1, Number(p.progress_max ?? 6));
+    const pct = Math.round((Math.min(value, max) / max) * 100);
+    return `
+      <div class="gdr-info-card compact">
+        <div class="gdr-card-title">${gdr.internalLink(p.file)}</div>
+        <div class="gdr-card-meta">${gdr.escapeHtml(p.tipo ?? "clock")} · ${gdr.escapeHtml(p.stato ?? "senza stato")} · pressione ${gdr.escapeHtml(p.pressione ?? 0)}</div>
+        <div class="gdr-track-bar"><span style="width: ${pct}%"></span></div>
+        <div class="gdr-card-line">${value}/${max} · ${gdr.escapeHtml(p.innesco ?? "innesco non indicato")}</div>
+        <div class="gdr-card-line">${gdr.escapeHtml(p.prossima_mossa ?? "prossima mossa non indicata")}</div>
+      </div>
+    `;
+  }).join("");
 }
 ```
 
@@ -397,12 +459,13 @@ const linkedMissionPages = dv.array(active?.incontri ?? [])
   .where(Boolean)
   .array();
 
-const pages = dv.pages('"Mondi/Missioni" OR "Mondi/Fazioni"')
+const pages = dv.pages('"Mondi/Missioni" OR "Mondi/Fazioni" OR "Mondi/Tracciati"')
   .where(p => !String(p.file.name).startsWith("Prova -") && p.stato !== "archiviata" && Number(p.pressione ?? 0) > 0)
   .where(p => sessionFactions.size === 0 && sessionMissions.size === 0
     || sessionFactions.has(p.file.path)
     || sessionMissions.has(p.file.path)
     || dv.array(p.fazioni ?? []).some(link => sessionFactions.has(link.path ?? String(link)))
+    || dv.array(p.missioni ?? []).some(link => sessionMissions.has(link.path ?? String(link)))
     || linkedMissionPages.some(enc => dv.array(enc.fazioni ?? []).some(link => (link.path ?? String(link)) === p.file.path)))
   .sort(p => Number(p.pressione ?? 0), "desc")
   .limit(8);
@@ -410,7 +473,10 @@ const pages = dv.pages('"Mondi/Missioni" OR "Mondi/Fazioni"')
 if (!pages.length) {
   dv.paragraph("Nessuna pressione collegata alla sessione attiva.");
 } else {
-  dv.table(["Fronte/Fazione", "Stato", "Pressione", "Prossima mossa"], pages.map(p => [p.file.link, p.stato ?? "", p.pressione ?? "", p.prossima_mossa ?? ""]));
+  dv.table(["Fronte/Fazione/Clock", "Stato", "Avanzamento", "Pressione", "Prossima mossa"], pages.map(p => {
+    const progress = p.categoria === "tracciato" ? `${Number(p.progress_value ?? 0)}/${Number(p.progress_max ?? 6)}` : "";
+    return [p.file.link, p.stato ?? "", progress, p.pressione ?? "", p.prossima_mossa ?? ""];
+  }));
 }
 ```
 
@@ -646,6 +712,7 @@ actions:
 > - [ ] Aggiornare missioni
 > - [ ] Aggiornare PNG e relazioni
 > - [ ] Aggiornare luoghi visitati
+> - [ ] Aggiornare clock e progress track
 > - [ ] Spostare appunti nelle note giuste
 
 > [!tesoro] Ricompense e promesse

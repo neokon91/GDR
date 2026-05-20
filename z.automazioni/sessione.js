@@ -21,6 +21,7 @@ async function sessione(tp) {
     const luoghi = await helpers.chooseLocations(tp, "Luoghi in scena", context);
     const personaggi = await helpers.choosePeople(tp, "Personaggi in scena", context);
     const missioni = await helpers.chooseMissions(tp, "Missioni vive", context);
+    const tracciati = await helpers.chooseTracks(tp, "Clock e tracciati attivi", context);
     const creature = await helpers.chooseCreatures(tp, "Creature in scena", context);
     const incontri = await helpers.chooseEncounters(tp, "Incontri previsti", context);
     const dispense = await helpers.chooseHandouts(tp, "Dispense previste", context);
@@ -55,6 +56,7 @@ campagne: ${helpers.inlineYamlList(campagne)}
 luoghi: ${helpers.inlineYamlList(luoghi)}
 personaggi: ${helpers.inlineYamlList(personaggi)}
 missioni: ${helpers.inlineYamlList(missioni)}
+tracciati: ${helpers.inlineYamlList(tracciati)}
 creature: ${helpers.inlineYamlList(creature)}
 incontri: ${helpers.inlineYamlList(incontri)}
 dispense: ${helpers.inlineYamlList(dispense)}
@@ -69,6 +71,7 @@ scene: []
 ricompense: []
 segreti_rivelabili: []
 domande_al_tavolo: []
+decisioni_attese: []
 pressioni: []
 conseguenze: []
 ---

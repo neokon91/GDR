@@ -29,13 +29,20 @@ dispense:
   - [[Demo - Lettera Macchiata di Nebbia]]
 mappe:
   - [[Demo - Mappa Relazioni]]
-audio: []
+  - [[Demo - Mappa Zoomabile]]
+  - [[Demo - Brumafonda.hexcartographer]]
+audio:
+  - [[Demo - Nebbia Sul Ponte]]
 immagini: []
 video: []
 fazioni:
   - [[Demo - Custodi della Soglia]]
 missioni:
   - [[Demo - Recuperare i Frammenti]]
+tracciati:
+  - [[Demo - I Custodi Chiudono il Ponte]]
+  - [[Demo - La Soglia Si Apre]]
+  - [[Demo - Attraversare Brumafonda]]
 oggetti:
   - [[Demo - Frammento della Soglia]]
 obiettivo: "Entrare nel santuario e capire cosa protegge davvero la reliquia."

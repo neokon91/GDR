@@ -48,13 +48,13 @@ Prima di lavorarci, controlla:
 | Callout Manager | integrato | template e note operative | mantenere pochi callout riconoscibili |
 | Fantasy Statblocks | integrato | creature e mostri SRD | verificare rendering visuale in Obsidian dopo import |
 | Initiative Tracker | parziale | incontri pronti | aggiungere esempi `encounter:` solo dove sono davvero utili |
-| Dice Roller | parziale | template e tabelle rapide | creare tabelle casuali usabili dal tavolo |
+| Dice Roller | supportato | template e tabelle rapide | mantenere tabelle brevi, richiamabili e stabili |
 | Calendarium | pronto, da configurare | sessioni, missioni, dashboard, controllo vault | creare almeno un calendario in Calendarium; poi mantenere coerenti date leggibili e `fc-date` |
 | Excalidraw | integrato base | `Risorse/Mappe`, Worldbuilder Dashboard, template Mondo | creare nuove mappe solo quando servono a mondo, luogo o sessione |
 | Canvas | non integrato | nessuna vista dedicata | creare una canvas per fronti/fazioni quando c'e contenuto reale |
-| Media Extended | minimo | indici audio/video | aggiungere campi `uso`, `tono`, `campagna`, `stato` |
-| Hex Cartographer | non integrato | nessuna pagina operativa | rimandare finche non esiste una procedura viaggi/regioni |
-| TTRPG Tools: Maps | non integrato | nessuna pagina operativa | creare una nota prova `zoommap` prima di usarlo in sessione |
+| Media Extended | supportato leggero | indici audio/video, Durante il Gioco | usare timestamp e scene solo per materiali pronti |
+| Hex Cartographer | opzionale guidato | Risorse/Mappe | usare per regioni, viaggi e hexcrawl quando le distanze contano |
+| TTRPG Tools: Maps | opzionale guidato | Risorse/Mappe, Durante il Gioco | usare per mappe zoomabili con base locale e pin |
 | Generatore di Contenuti Fantasy | integrato base | `Inbox/Generati`, comando plugin | usare le note generate come bozze, mai come canonico automatico |
 | Iconize | minimo | orientamento visuale | secondario, non deve sostituire indici chiari |
 | Tabs | parziale | template lunghi | applicare solo dove riduce scrolling reale |
@@ -62,7 +62,7 @@ Prima di lavorarci, controlla:
 | Emoji Toolbar | opzionale | nessuna dipendenza | non integrare nel flusso base |
 | Style Settings | supporto | tema/snippet | documentare solo se si stabilizza un tema del vault |
 | Iron Vault | fuori ambito | nessuna pagina GDR D&D | non integrare nel flusso D&D; usare solo per campagne Ironsworn |
-| BRAT | manutenzione | gestione plugin | non usare nel flusso utente finale |
+| BRAT | manutenzione essenziale | gestione plugin non ufficiali | tenere attivo ma fuori dal flusso utente finale |
 
 ## Prossime Integrazioni
 
@@ -111,12 +111,12 @@ Obiettivo: rendere tabelle e procedure casuali usabili senza uscire dal vault.
 
 Da fare:
 
-- creare tabelle riutilizzabili in [[Risorse/Tabelle/Tabelle]] con block id stabili;
-- aggiungere tiri rapidi inline con sintassi `dice:`, per esempio `dice: 1d20`;
-- usare table rollers con block id, per esempio `dice: [[Risorse/Tabelle/Tabelle#^umore-png]]`;
-- usare lookup table a due colonne quando il risultato dipende da un tiro specifico, per esempio `1-2`, `3-4`, `15-20`;
+- fatto: creare tabelle riutilizzabili in [[Risorse/Tabelle/Tabelle]] con block id stabili;
+- fatto: aggiungere tiri rapidi inline con sintassi `dice:`, per esempio `dice: 1d20`;
+- fatto: usare table rollers con block id, per esempio `dice: [[Risorse/Tabelle/Tabelle#^umore-png]]`;
+- fatto: usare lookup table a due colonne quando il risultato dipende da un tiro specifico, per esempio `1-2`, `3-4`, `15-20`;
+- fatto: collegare tabelle utili a viaggio, esagoni, reazioni di fazione e post-sessione;
 - usare risultati annidati solo quando rimandano a tabelle gia leggibili;
-- collegare i tiri alle pagine dove servono davvero, non a una pagina tecnica separata;
 - evitare tabelle troppo grandi prima che siano utili al tavolo.
 
 Fatto bene quando: durante preparazione o gioco il DM puo generare un risultato e usarlo subito.
@@ -129,11 +129,13 @@ Da fare:
 
 - fatto: usare [[Risorse/Mappe/Schema Relazioni GDR.excalidraw]] come prova base per relazioni tra PNG, luoghi e fazioni;
 - fatto: creare una convenzione per mappe di regione, dungeon e fronti;
-- collegare ogni mappa alla nota mondo, luogo o campagna pertinente;
+- fatto: collegare ogni mappa demo alla nota mondo, luogo o campagna pertinente;
 - usare Excalidraw quando servono disegno libero, annotazioni visuali, embed, link tra disegni e note o riferimenti `area=`/`group=` a parti del disegno;
 - usare Canvas quando serve una mappa relazionale fatta di note, media, gruppi e connessioni leggibili;
 - ricordare che Canvas salva file `.canvas` in formato JSON Canvas, quindi e adatto a mappe strutturate e durevoli;
 - fatto: mostrare in Worldbuilder Dashboard le mappe principali.
+- fatto: aggiungere [[Demo - Brumafonda.hexcartographer]] come mappa esagonale di regione/viaggio;
+- fatto: aggiungere [[Demo - Mappa Zoomabile]] come mappa TTRPG Tools: Maps con base SVG locale.
 
 Fatto bene quando: una mappa aiuta a capire il mondo e rimanda alle note canoniche, invece di diventare un archivio parallelo.
 
@@ -145,12 +147,13 @@ Nota: la documentazione ufficiale indica che Media Extended puo accedere a media
 
 Da fare:
 
-- ordinare [[Risorse/Audio/Audio]], [[Risorse/Video/Video]] e [[Risorse/Immagini/Immagini]] per uso pratico;
-- aggiungere campi come `uso`, `tono`, `campagna` e `stato` solo dove servono;
-- usare timestamp e link a momenti precisi per video, audio e registrazioni;
+- fatto: ordinare [[Risorse/Audio/Audio]], [[Risorse/Video/Video]] e [[Risorse/Immagini/Immagini]] per uso pratico;
+- fatto: aggiungere campi come `uso`, `tono`, `campagna`, `scena`, `timestamp` e `stato` dove servono;
+- fatto: usare timestamp e link a momenti precisi per video, audio e registrazioni;
 - usare screenshot da video solo quando diventano dispense o riferimenti di scena;
 - evitare dipendenze da URL remoti per materiale indispensabile alla sessione;
-- mostrare materiale pronto in [[Durante il Gioco]];
+- fatto: mostrare materiale pronto in [[Durante il Gioco]];
+- fatto: aggiungere [[Risorse/Media Scene]] e [[Demo - Nebbia Sul Ponte]] come struttura cue pronta;
 - collegare dispense e scene ai media collegati.
 
 Fatto bene quando: il DM apre Durante il Gioco e trova subito atmosfera, immagini o dispense pronte.
@@ -188,12 +191,12 @@ Fatto bene quando: durante preparazione o gioco il DM puo generare una bozza, sa
 
 ## In Attesa
 
-Questi plugin restano secondari finche le integrazioni sopra non sono solide:
+Questi plugin restano secondari o fuori dal flusso base della release ZIP:
 
-- **Hex Cartographer**: ora documentato in [[Risorse/Mappe/Mappe]] come supporto opzionale per esagoni e viaggi.
-- **TTRPG Tools: Maps**: ora documentato in [[Risorse/Mappe/Mappe]] come supporto opzionale per mappe zoomabili e pin.
 - **Iconize**: migliora orientamento visivo, ma non sostituisce indici e dashboard chiare.
-- **Iron Vault**: fuori dal flusso base D&D/fantasy classico; non va mostrato all'utente finale nella release ZIP iniziale.
+- **Iron Vault**: fuori dal flusso base D&D/fantasy classico; studiarne progress track, clock, oracoli e note attive per replicare funzioni utili nel vault senza imporre Ironsworn/Starforged.
+- **BRAT**: manutenzione plugin essenziale per strumenti non ufficiali o beta; resta attivo ma non entra nel percorso del DM.
+- **Emoji Toolbar**: opzionale, disattivato nella release base.
 
 ## Import Mappe Esterne
 

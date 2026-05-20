@@ -38,6 +38,9 @@
 > Missioni:
 > `INPUT[inlineListSuggester(optionQuery("Mondi/Missioni"), useLinks(partial)):missioni]`
 >
+> Clock e tracciati:
+> `INPUT[inlineListSuggester(optionQuery("Mondi/Tracciati"), useLinks(partial)):tracciati]`
+>
 > Creature:
 > `INPUT[inlineListSuggester(optionQuery("Mondi/Creature"), useLinks(partial)):creature]`
 >
@@ -63,17 +66,16 @@
 > `INPUT[text:obiettivo]`
 
 > [!scena] Al tavolo
-> Apertura, testo da leggere, timer e tiri stanno qui per non disperdere la preparazione.
+> Apertura, testo da leggere, pressione e tiri stanno qui per non disperdere la preparazione.
 >
 > > [!lettura]- Testo da leggere
 > >
-> > 
+> >
 >
-> > [!timer]- Timer della sessione
-> > - [ ]
-> > - [ ]
-> > - [ ]
-> > - [ ]
+> > [!timer]- Pressione visibile
+> > - Clock: `=this.tracciati`
+> > - Missioni: `=this.missioni`
+> > - Domanda: quale scelta deve pesare entro fine sessione?
 >
 > > [!regola]- Tiri rapidi
 > > - D20: `dice: 1d20`
@@ -123,10 +125,19 @@ WHERE contains(this.personaggi, file.link)
 ## Missioni Vive
 
 ```dataview
-TABLE stato, pressione, committente, prossima_mossa
+TABLE stato, pressione, progress_value, progress_max, committente, prossima_mossa
 FROM "Mondi/Missioni"
 WHERE contains(this.missioni, file.link)
 SORT pressione DESC, nome ASC
+```
+
+## Clock E Tracciati
+
+```dataview
+TABLE tipo, stato, progress_value, progress_max, pressione, innesco, prossima_mossa
+FROM "Mondi/Tracciati"
+WHERE contains(this.tracciati, file.link)
+SORT pressione DESC, progress_value DESC, nome ASC
 ```
 
 ## Incontri
@@ -184,7 +195,7 @@ SORT nome ASC
 
 tab: Ricompense
 
-## Ricompense
+## Materiale Pronto
 
 > [!tesoro] Ricompense previste
 >
@@ -216,6 +227,12 @@ INPUT[list:domande_al_tavolo]
 INPUT[list:pressioni]
 ```
 
+## Decisioni Attese
+
+```meta-bind
+INPUT[list:decisioni_attese]
+```
+
 tab: Resoconto
 
 ## Resoconto
@@ -231,6 +248,9 @@ tab: Resoconto
 ```meta-bind
 INPUT[list:conseguenze]
 ```
+
+> [!timer]- Clock aggiornati
+> -
 
 > [!missione]- Missioni e mondo
 >
@@ -258,5 +278,6 @@ tab: Prossima
 > [!timer] Apertura prossima sessione
 > - [ ] Riassunto da leggere
 > - [ ] Scena iniziale
+> - [ ] Clock o pressione da mostrare subito
 > - [ ] Pressione attiva
 ````

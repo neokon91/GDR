@@ -8,9 +8,9 @@ mondo_attivo:
 campagne_attive: []
 ---
 
-# Stato Del Mondo
+# Stato Campagna
 
-Questa vista raccoglie le conseguenze che devono influenzare il tavolo: PNG fuori scena, luoghi in crisi, fazioni sotto pressione, missioni cambiate e lore da rendere canonica.
+Questa vista raccoglie cio che deve influenzare il tavolo: missioni aperte, fazioni sotto pressione, clock attivi, PNG mossi fuori scena, conseguenze recenti e lore da rendere canonica.
 
 > [!scena] Filtro
 > Mondo:
@@ -90,6 +90,42 @@ function issueRows(source, checks) {
     .map(check => [p.file.link, check.label, p.mondo ?? "", p.stato ?? ""])
   );
 }
+
+function progressText(p) {
+  const value = Math.max(0, Number(p.progress_value ?? 0));
+  const max = Math.max(1, Number(p.progress_max ?? 6));
+  return `${Math.min(value, max)}/${max}`;
+}
+
+table(
+  "Missioni Aperte",
+  ["Missione", "Stato", "Avanzamento", "Pressione", "Scadenza", "Prossima mossa", "Fazioni"],
+  pages('"Mondi/Missioni"', p => ["proposta", "accettata", "in corso", "pronto"].includes(p.stato))
+    .sort(p => Number(p.pressione ?? 0), "desc")
+    .limit(16)
+    .map(p => [p.file.link, p.stato ?? "", progressText(p), p.pressione ?? "", p.scadenza_mondo ?? "", p.prossima_mossa ?? "", p.fazioni ?? []])
+    .array()
+);
+
+table(
+  "Clock E Progress Track Attivi",
+  ["Tracciato", "Tipo", "Stato", "Avanzamento", "Pressione", "Innesco", "Prossima mossa", "Collegamenti"],
+  pages('"Mondi/Tracciati"', p => !["archiviata", "completato", "fallito"].includes(p.stato))
+    .sort(p => Number(p.pressione ?? 0), "desc")
+    .limit(20)
+    .map(p => [p.file.link, p.tipo ?? "", p.stato ?? "", progressText(p), p.pressione ?? "", p.innesco ?? "", p.prossima_mossa ?? "", [...asArray(p.missioni), ...asArray(p.fazioni), ...asArray(p.luoghi)]])
+    .array()
+);
+
+table(
+  "PNG Mossi Fuori Scena",
+  ["PNG", "Stato", "Luogo", "Fazioni", "Prossima mossa", "Missioni", "Relazioni"],
+  pages('"Mondi/Personaggi"', p => p.tipo === "png" && (hasValue(p.prossima_mossa) || ["scomparso", "ostile", "morto", "in gioco"].includes(String(p.stato ?? ""))))
+    .sort(p => p.file.mtime, "desc")
+    .limit(16)
+    .map(p => [p.file.link, p.stato ?? "", p.luogo ?? "", p.fazioni ?? [], p.prossima_mossa ?? "", p.missioni ?? [], p.relazioni ?? []])
+    .array()
+);
 
 table(
   "Eventi Canonici Recenti",
@@ -176,6 +212,11 @@ const worldChecks = [
   ]),
   ...issueRows('"Mondi/Missioni"', [
     { label: "missione senza fazioni", test: p => !hasLinks(p.fazioni) }
+  ]),
+  ...issueRows('"Mondi/Tracciati"', [
+    { label: "tracciato senza innesco", test: p => p.categoria === "tracciato" && !hasValue(p.innesco) },
+    { label: "tracciato senza prossima_mossa", test: p => p.categoria === "tracciato" && !hasValue(p.prossima_mossa) },
+    { label: "tracciato senza collegamenti", test: p => p.categoria === "tracciato" && !hasLinks(p.missioni) && !hasLinks(p.fazioni) && !hasLinks(p.luoghi) }
   ]),
   ...issueRows('"Mondi/Timeline"', [
     { label: "evento canonico senza conseguenze", test: p => (p.canonico === true || p.stato_canonico === "canonico") && !hasLinks(p.conseguenze) },

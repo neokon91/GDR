@@ -786,6 +786,64 @@ body .markdown-source-view.tavolo {
   margin-top: 0.3rem;
 }
 
+.gdr-track-card {
+  min-width: 0;
+  margin-block: 0.75rem 1rem;
+  border: 1px solid var(--gdr-border);
+  border-radius: var(--gdr-radius);
+  background: var(--gdr-surface);
+  padding: 0.75rem;
+}
+
+.gdr-track-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  color: var(--text-muted);
+  font-size: 0.9em;
+}
+
+.gdr-track-top strong {
+  color: var(--text-normal);
+  overflow-wrap: anywhere;
+}
+
+.gdr-track-bar {
+  height: 0.55rem;
+  margin-top: 0.55rem;
+  overflow: hidden;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--background-modifier-border) 70%, transparent);
+}
+
+.gdr-track-bar > span {
+  display: block;
+  height: 100%;
+  min-width: 0.2rem;
+  border-radius: inherit;
+  background: linear-gradient(90deg, rgb(var(--gdr-accent-rgb)), rgb(var(--gdr-warm-rgb)));
+}
+
+.gdr-track-ticks {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(0.65rem, 1fr));
+  gap: 0.25rem;
+  margin-top: 0.5rem;
+}
+
+.gdr-track-tick {
+  display: block;
+  height: 0.38rem;
+  border: 1px solid var(--gdr-border);
+  border-radius: 999px;
+  background: var(--background-primary);
+}
+
+.gdr-track-tick.filled {
+  border-color: color-mix(in srgb, rgb(var(--gdr-accent-rgb)) 60%, transparent);
+  background: rgb(var(--gdr-accent-rgb));
+}
+
 .gdr-flow {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));

@@ -45,9 +45,9 @@ La release iniziale non deve dimostrare tutti i plugin. Deve dimostrare un prodo
 
 | Strumento | Decisione |
 | --- | --- |
-| Iron Vault | Fuori dal flusso D&D/fantasy classico. Può restare installato ma non va mostrato all'utente base. |
-| BRAT | Solo manutenzione. Non e parte dell'esperienza utente. |
-| Emoji Toolbar | Opzionale. Non blocca nessun workflow. |
+| Iron Vault | Fuori dal flusso D&D/fantasy classico. Accantonato come plugin utente, ma da studiare per replicare funzioni utili nel vault. |
+| BRAT | Manutenzione essenziale per plugin non ufficiali o versioni beta. Resta attivo, ma non fa parte del percorso del DM. |
+| Emoji Toolbar | Opzionale. Disattivato nella release base per ridurre rumore al primo avvio. |
 
 ## Import Esterni
 
@@ -64,6 +64,6 @@ La release ZIP e pronta quando:
 
 - `npm run check` passa;
 - `npm run import:azgaar -- "Import/Azgaar/Prova - Azgaar.geojson" --world "Demo - Terre della Soglia" --dry-run` passa;
-- `npm run release:clean` genera ZIP;
+- `npm run release:clean` genera lo ZIP utente;
 - la demo copre onboarding, dashboard, sessione, post-sessione, vista giocatori e import mappa demo;
 - i plugin opzionali non bloccano il percorso principale.

@@ -23,6 +23,7 @@ async function missione(tp) {
     const luoghi = await helpers.chooseLocations(tp, "Luoghi della missione", context);
     const personaggi = await helpers.choosePeople(tp, "Personaggi coinvolti", context);
     const fazioni = await helpers.chooseFactions(tp, "Fazioni coinvolte", context);
+    const tracciati = await helpers.chooseTracks(tp, "Clock o tracciati collegati", context);
     const ricompense = await helpers.chooseObjects(tp, "Ricompense", context);
     const pressione = await helpers.promptOptional(tp, "Pressione da 0 a 10", "3") || "3";
     const prossimaMossa = await helpers.promptOptional(tp, "Prossima mossa se ignorata");
@@ -46,12 +47,17 @@ committente: ${committente}
 luoghi: ${helpers.inlineYamlList(luoghi)}
 personaggi: ${helpers.inlineYamlList(personaggi)}
 fazioni: ${helpers.inlineYamlList(fazioni)}
+tracciati: ${helpers.inlineYamlList(tracciati)}
 ricompense: ${helpers.inlineYamlList(ricompense)}
+progress_value: 0
+progress_max: 6
 pressione: ${helpers.yamlNumber(pressione) || 3}
 prossima_mossa: ${helpers.yamlQuote(prossimaMossa)}
 domande_aperte: ${helpers.inlineYamlTextList([domandaAperta])}
 indizi: ${helpers.inlineYamlTextList([indizio])}
 ostacoli: ${helpers.inlineYamlTextList([ostacolo])}
+scene_pronte: []
+decisioni: []
 conseguenze: ${helpers.inlineYamlTextList([conseguenza])}
 segreti: ${helpers.inlineYamlTextList([segreto])}
 scadenza_mondo: ${helpers.yamlQuote(scadenzaMondo)}

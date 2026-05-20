@@ -20,6 +20,9 @@
 > Fazioni:
 > `INPUT[inlineListSuggester(optionQuery("Mondi/Fazioni"), useLinks(partial)):fazioni]`
 >
+> Clock e tracciati:
+> `INPUT[inlineListSuggester(optionQuery("Mondi/Tracciati"), useLinks(partial)):tracciati]`
+>
 > Scadenza nel mondo:
 > `INPUT[text:scadenza_mondo]`
 >
@@ -38,17 +41,37 @@
 > Pressione:
 > `INPUT[slider(minValue(0), maxValue(10), stepSize(1), addLabels):pressione]`
 >
+> Avanzamento:
+> `INPUT[slider(minValue(0), maxValue(12), stepSize(1), addLabels):progress_value]`
+>
+> Segmenti:
+> `INPUT[number:progress_max]`
+>
 > Prossima mossa:
 > `INPUT[text:prossima_mossa]`
 
 > [!missione] Obiettivo
 >
 
-> [!timer]- Progressione
-> - [ ]
-> - [ ]
-> - [ ]
-> - [ ]
+```dataviewjs
+const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));
+const current = dv.current();
+const value = Math.max(0, Number(current.progress_value ?? 0));
+const max = Math.max(1, Number(current.progress_max ?? 6));
+const filled = Math.min(value, max);
+const pct = Math.round((filled / max) * 100);
+const ticks = Array.from({ length: max }, (_, index) => `<span class="gdr-track-tick ${index < filled ? "filled" : ""}"></span>`).join("");
+dv.el("div", `
+  <div class="gdr-track-card">
+    <div class="gdr-track-top">
+      <strong>${gdr.escapeHtml(current.nome ?? current.file.name)}</strong>
+      <span>${filled}/${max} · ${pct}%</span>
+    </div>
+    <div class="gdr-track-bar"><span style="width: ${pct}%"></span></div>
+    <div class="gdr-track-ticks">${ticks}</div>
+  </div>
+`);
+```
 
 ````tabs
 tab: Situazione
@@ -61,6 +84,12 @@ tab: Situazione
 > > Prossima mossa: `=this.prossima_mossa`
 > >
 > > Scadenza: `=this.scadenza_mondo`
+
+## Scene Pronte
+
+```meta-bind
+INPUT[list:scene_pronte]
+```
 
 ## Indizi
 
@@ -79,6 +108,12 @@ INPUT[list:ostacoli]
 
 > [!pericolo]- Ostacoli
 >
+
+## Decisioni
+
+```meta-bind
+INPUT[list:decisioni]
+```
 
 ## Domande Aperte
 
@@ -128,6 +163,15 @@ TABLE tipo, stato, leader
 FROM "Mondi/Fazioni"
 WHERE contains(this.fazioni, file.link)
 SORT nome ASC
+```
+
+### Clock E Tracciati
+
+```dataview
+TABLE tipo, stato, progress_value, progress_max, pressione, innesco, prossima_mossa
+FROM "Mondi/Tracciati"
+WHERE contains(this.tracciati, file.link)
+SORT pressione DESC, progress_value DESC, nome ASC
 ```
 
 tab: Esiti

@@ -8,10 +8,10 @@ stato: pronto
 
 # Audio
 
-Usa campi semplici nelle note audio quando servono: `uso`, `tono`, `campagna`, `stato`.
+Usa campi semplici nelle note audio quando servono: `uso`, `tono`, `campagna`, `scena`, `timestamp`, `stato`.
 
 ```dataview
-TABLE uso, tono, campagna, stato
+TABLE uso, tono, campagna, scena, timestamp, stato
 FROM "Risorse/Audio"
 WHERE file.name != "Audio" AND !startswith(file.name, "Prova -")
 SORT uso ASC, tono ASC, file.name ASC

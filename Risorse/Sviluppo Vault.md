@@ -76,12 +76,15 @@ Usa questi campi in modo coerente, perché alimentano Dataview, dashboard, Meta 
 - `luogo`, `luoghi`, `personaggi`, `fazioni`, `missioni`, `ricompense`, `relazioni`: usa link interni quando possibile.
 - `data_mondo`: campo testuale unico per date leggibili al tavolo in sessioni, lore capture ed eventi storici.
 - `pressione`, `prossima_mossa`, `leader`, `rivali`, `luoghi`, `missioni`: alimentano Poteri In Movimento e Buchi Di Mondo.
+- `progress_value`, `progress_max`, `innesco`, `posta`: alimentano clock e progress track. Usali su `categoria: tracciato` e, quando serve, sulle missioni.
 - `causa`, `conseguenze`, `luoghi`, `fazioni`, `missioni`: alimentano Timeline Causale.
 - `vuole`, `sa`, `leva`, `segreto`, `segreti`, `indizi`, `voci`, `domande_aperte`, `tensione`, `funzione_narrativa`: campi di profondita lore. Devono restare brevi e giocabili, non saggi enciclopedici.
 
 Per le note di categoria `mondo`, usa anche `tono`, `tema`, `tecnologia`, `magia`, `continenti`, `fazioni`, `religioni` e `campagne`.
 
 Per i luoghi pronti, usa `mondo`, `luogo_padre` quando ha senso, `fazioni`, `pericolo`, `stabilita` e `pressione`. Per i PNG in gioco, usa `luogo` e almeno uno tra `fazioni` e `relazioni`.
+
+Per i tracciati, usa `categoria: tracciato` e `tipo` tra `clock`, `progress track`, `fronte`, `rituale`, `minaccia`, `viaggio` e `progetto`. Un tracciato utile deve avere almeno un collegamento operativo tra `missioni`, `fazioni` e `luoghi`, un `innesco` chiaro e una `prossima_mossa`.
 
 ## Router E Creazione Guidata
 
@@ -102,6 +105,7 @@ Regole per le automazioni di creazione:
 - per fazioni, chiedi almeno `leader`, `luoghi`, `personaggi`, `missioni`, `alleati`, `rivali`;
 - per PNG, chiedi almeno `luogo`, `fazioni`, `relazioni`, `missioni`;
 - per missioni, chiedi almeno `committente`, `luoghi`, `personaggi`, `fazioni`, `ricompense`;
+- per tracciati, chiedi almeno `mondo`, `missioni`, `fazioni`, `luoghi`, `progress_max`, `innesco`, `prossima_mossa`;
 - i campi lore opzionali devono essere brevi: una frase per `vuole`, `sa`, `leva`, `tensione`, `segreto`, `prossima_mossa`, `scadenza_mondo`;
 - non creare collegamenti reciproci modificando automaticamente note gia esistenti, a meno che l'utente lo chieda: e facile sovrascrivere lavoro manuale. Le viste Dataview devono ricostruire i backlink operativi leggendo i campi della nota nuova.
 

@@ -23,4 +23,4 @@ npm run check
 npm run release:clean
 ```
 
-`npm run release:clean` genera una copia consegnabile in `dist/vault-gdr-clean` e, se disponibile, uno ZIP.
+`npm run release:clean` genera una copia consegnabile per utenti in `dist/vault-gdr-clean` e, se disponibile, `dist/vault-gdr-clean.zip`.

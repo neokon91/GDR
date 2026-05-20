@@ -7,6 +7,7 @@ Template usati dai pulsanti Meta Bind e dai router Templater.
 | Percorso | Contiene |
 | --- | --- |
 | `dm/` | Campagne, sessioni, missioni, incontri, avventure e one-shot. |
+| `dm/Tracciato.md` | Clock e progress track per fronti, missioni, rituali, minacce e viaggi. |
 | `fazione/` | Fazioni specializzate. |
 | `geografia/` | Continenti, isole e regioni. |
 | `luogo/` | Dungeon, insediamenti, rovine, templi e punti di interesse. |

@@ -15,6 +15,10 @@ stato: pronto
 > - Umore PNG: `dice: [[Risorse/Tabelle/Tabelle#^umore-png]]`
 > - Bottino minore: `dice: [[Risorse/Tabelle/Tabelle#^bottino-minore]]`
 > - Dettaglio sensoriale: `dice: [[Risorse/Tabelle/Tabelle#^dettagli-sensoriali]]`
+> - Incontro viaggio: `dice: [[Risorse/Tabelle/Tabelle#^incontri-viaggio]]`
+> - Scoperta esagono: `dice: [[Risorse/Tabelle/Tabelle#^scoperte-esagono]]`
+> - Reazione fazione: `dice: [[Risorse/Tabelle/Tabelle#^reazioni-fazione]]`
+> - Conseguenza post-sessione: `dice: [[Risorse/Tabelle/Tabelle#^conseguenze-post-sessione]]`
 
 ## Complicazioni
 
@@ -69,6 +73,65 @@ stato: pronto
 | 9 | Piccolo animale, insetto o presenza naturale che reagisce. |
 | 10 | Dettaglio bello ma inquietante. |
 ^dettagli-sensoriali
+
+## Incontri Viaggio
+
+| dice: 1d12 | Risultato |
+| --- | --- |
+| 1 | Traccia fresca di una creatura piu grande del previsto. |
+| 2 | Pattuglia o viaggiatori che hanno fretta e nascondono qualcosa. |
+| 3 | Ostacolo naturale: frana, piena, nebbia fitta o sentiero crollato. |
+| 4 | Segno di una fazione: sigillo, stendardo, cadavere, avviso o offerta. |
+| 5 | Riparo utile ma gia occupato. |
+| 6 | Mercante, pellegrino o messaggero con una notizia urgente. |
+| 7 | Scena inquietante senza nemico visibile. |
+| 8 | Opportunita di scorciatoia con costo chiaro. |
+| 9 | Conflitto tra due PNG minori. |
+| 10 | Risorsa rara: acqua pulita, erbe, carburante, cavalcatura o guida. |
+| 11 | Pericolo legato al meteo o al terreno. |
+| 12 | Indizio diretto verso missione, luogo o antagonista. |
+^incontri-viaggio
+
+## Scoperte Esagono
+
+| dice: 1d10 | Risultato |
+| --- | --- |
+| 1 | Rovina piccola con un simbolo leggibile. |
+| 2 | Punto panoramico che rivela un percorso o una minaccia. |
+| 3 | Fonte, guado, grotta o riparo sicuro. |
+| 4 | Confine conteso tra fazioni. |
+| 5 | Traccia di magia recente. |
+| 6 | Insediamento minore o accampamento provvisorio. |
+| 7 | Luogo sacro trascurato. |
+| 8 | Resti di uno scontro. |
+| 9 | Risorsa strategica contesa. |
+| 10 | Segreto del mondo collegato a una missione attiva. |
+^scoperte-esagono
+
+## Reazioni Fazione
+
+| dice: 2d6 | Risultato |
+| --- | --- |
+| 2-3 | Ostile: blocca, minaccia o pretende una concessione. |
+| 4-5 | Diffidente: concede poco e chiede garanzie. |
+| 6-8 | Pragmatica: tratta se il vantaggio e chiaro. |
+| 9-10 | Collaborativa: offre aiuto limitato. |
+| 11-12 | Interessata: propone alleanza, favore o informazione forte. |
+^reazioni-fazione
+
+## Conseguenze Post-Sessione
+
+| dice: 1d8 | Risultato |
+| --- | --- |
+| 1 | Una fazione interpreta male le azioni dei PG. |
+| 2 | Un PNG chiede protezione, pagamento o vendetta. |
+| 3 | Un luogo cambia stato: chiuso, occupato, danneggiato o rivelato. |
+| 4 | Una risorsa diventa scarsa. |
+| 5 | Un segreto trapela a chi non doveva saperlo. |
+| 6 | Una missione avanza anche senza intervento dei PG. |
+| 7 | Qualcuno offre una scorciatoia rischiosa. |
+| 8 | Una vittoria crea un nuovo obbligo. |
+^conseguenze-post-sessione
 
 ## Archivio
 

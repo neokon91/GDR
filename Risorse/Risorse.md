@@ -19,7 +19,6 @@ Questa pagina raccoglie guide e materiali riutilizzabili. Se vuoi preparare o gi
 | [[Risorse/Consegna Nuovo DM]] | Quando devi dare il vault a una persona non tecnica. |
 | [[Risorse/Guida DM]] | Quando vuoi il flusso DM senza dettagli tecnici. |
 | [[Atlante del Mondo]] | Quando vuoi costruire un'ambientazione ricca e collegata. |
-| [[Risorse/Worldbuilding Tassonomico]] | Metodo semplice per creare mondi grandi senza perdersi. |
 | [[Campagna da Ambientazione]] | Quando vuoi trasformare mondo, regione o conflitto in campagna. |
 | [[Risorse/Generare Campagna Da Ambientazione]] | Guida passo passo per passare da ambientazione a gioco. |
 | [[Vista Giocatori]] | Vista dedicata a materiale condivisibile con i giocatori. |
@@ -58,8 +57,6 @@ Questa pagina raccoglie guide e materiali riutilizzabili. Se vuoi preparare o gi
 | Pagina | Uso |
 | --- | --- |
 | [[Risorse/Controllo Vault]] | Controlli pratici su note incomplete, sessioni attive e materiale pronto. |
-| [[Risorse/Roadmap/Roadmap]] | Archivio roadmap di versione. |
-| [[Repository]] | Struttura tecnica del repository per chi mantiene il vault. |
 | [[Mondi/Calendario]] | Date del mondo, sessioni, scadenze e cose da calendarizzare. |
 | [[Mondi/Culture/Culture]] | Popoli, usanze, tabù e identità culturali. |
 | [[Mondi/Lingue/Lingue]] | Lingue, dialetti, parole note e scritture. |
@@ -68,21 +65,9 @@ Questa pagina raccoglie guide e materiali riutilizzabili. Se vuoi preparare o gi
 | [[Mondi/Cosmologia/Cosmologia]] | Piani, reami, aldilà e principi cosmici. |
 | [[Risorse/Opportunità Di Avventura]] | Elementi del mondo pronti a diventare missioni. |
 | [[Risorse/Fronti Di Campagna]] | Pressioni, prossime mosse e scadenze della campagna. |
-| [[Risorse/Release Pulita]] | Preparare una copia consegnabile del vault. |
 | [[Risorse/Preset Calendario]] | Modi semplici per segnare il tempo del mondo. |
 | [[Risorse/Profili Campagna]] | Strutture consigliate per fantasy classico, investigativo, sandbox e one-shot. |
-| [[Risorse/Prove Entità]] | Esempi per capire come dovrebbero apparire le note. |
 | [[VERSION]] | Versione corrente del vault. |
-| [[CHANGELOG]] | Cronologia modifiche. |
-
-## Prodotto E Community
-
-| Documento | Uso |
-| --- | --- |
-| [Strategia Prodotto](../docs/STRATEGIA_PRODOTTO.md) | Positioning, competitor, SWOT e monetizzazione. |
-| [Installazione](../docs/INSTALLAZIONE.md) | Guida per installare il vault da release. |
-| [Matrice Strumenti](../docs/STRUMENTI.md) | Strumenti essenziali, consigliati e opzionali. |
-| [Contribuire](../CONTRIBUTING.md) | Regole per proporre modifiche e contributi. |
 
 ## Archivio Mappe
 

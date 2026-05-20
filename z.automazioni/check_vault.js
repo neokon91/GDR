@@ -53,6 +53,7 @@ const ALLOWED_CATEGORIES = new Set([
     "religione",
     "risorsa",
     "sessione",
+    "tracciato",
     "srd"
 ]);
 const ALLOWED_STATES = new Set([
@@ -62,10 +63,14 @@ const ALLOWED_STATES = new Set([
     "canonico",
     "canonica",
     "collegata",
+    "completato",
     "conclusa",
     "da smistare",
     "giocata",
     "ignorata",
+    "attivo",
+    "fallito",
+    "in pausa",
     "in corso",
     "in gioco",
     "in guerra",
@@ -93,7 +98,8 @@ const ALLOWED_TYPES_BY_CATEGORY = {
     oggetto: new Set(["oggetto", "oggetto magico", "chiave"]),
     personaggio: new Set(["pg", "png"]),
     religione: new Set(["divinità", "soglia"]),
-    sessione: new Set(["sessione di campagna"])
+    sessione: new Set(["sessione di campagna", "sessione zero", "interludio", "downtime", "finale", "one-shot"]),
+    tracciato: new Set(["clock", "progress track", "fronte", "rituale", "minaccia", "viaggio", "progetto"])
 };
 const REQUIRED_FIELDS_BY_CATEGORY = {
     campagna: ["stato"],
@@ -115,7 +121,8 @@ const REQUIRED_FIELDS_BY_CATEGORY = {
     personaggio: ["stato"],
     religione: ["stato", "mondo"],
     risorsa: ["stato"],
-    sessione: ["stato", "attiva", "mondo"]
+    sessione: ["stato", "attiva", "mondo"],
+    tracciato: ["stato", "mondo", "progress_value", "progress_max", "prossima_mossa"]
 };
 
 const errors = [];
@@ -433,7 +440,8 @@ for (const [fileRel, fm] of realEntries) {
             incontro: ["luogo", "creature", "missioni", "fazioni"],
             png: ["mondo", "luogo", "fazioni"],
             luogo: ["mondo", "luogo_padre", "fazioni"],
-            fazione: ["mondo", "luoghi", "rivali"]
+            fazione: ["mondo", "luoghi", "rivali"],
+            tracciato: ["mondo", "missioni", "fazioni", "luoghi"]
         };
         const fields = requiredByCategory[fm.tipo] ?? requiredByCategory[fm.categoria] ?? null;
 
@@ -455,6 +463,10 @@ for (const [fileRel, fm] of realEntries) {
         warnings.push(`${fileRel}: missione senza prossima_mossa`);
     }
 
+    if (fileRel.startsWith("Mondi/Missioni/") && !path.basename(fileRel).startsWith("Prova -") && fm.stato !== "archiviata" && Number(fm.pressione ?? 0) >= 7 && !hasValue(fm.tracciati)) {
+        warnings.push(`${fileRel}: missione ad alta pressione senza tracciato collegato`);
+    }
+
     if (fileRel.startsWith("Mondi/Personaggi/") && fm.tipo === "png" && fm.stato === "in gioco" && !hasValue(fm.luogo)) {
         warnings.push(`${fileRel}: PNG in gioco senza luogo`);
     }
@@ -465,6 +477,22 @@ for (const [fileRel, fm] of realEntries) {
 
     if ((fileRel.startsWith("Mondi/Fazioni/") || fileRel.startsWith("Mondi/Religioni/")) && Number(fm.pressione ?? 0) > 0 && !hasValue(fm.prossima_mossa)) {
         warnings.push(`${fileRel}: fazione con pressione senza prossima_mossa`);
+    }
+
+    if ((fileRel.startsWith("Mondi/Fazioni/") || fileRel.startsWith("Mondi/Religioni/")) && !path.basename(fileRel).startsWith("Prova -") && Number(fm.pressione ?? 0) >= 7 && !hasValue(fm.tracciati)) {
+        warnings.push(`${fileRel}: fazione ad alta pressione senza tracciato collegato`);
+    }
+
+    if (fileRel.startsWith("Mondi/Tracciati/") && fm.categoria === "tracciato" && fm.stato !== "archiviata") {
+        if (!hasValue(fm.innesco)) {
+            warnings.push(`${fileRel}: tracciato senza innesco`);
+        }
+        if (!hasAny(fm, ["missioni", "fazioni", "luoghi"])) {
+            warnings.push(`${fileRel}: tracciato senza collegamenti operativi`);
+        }
+        if (Number(fm.progress_max ?? 0) > 0 && Number(fm.progress_value ?? 0) >= Number(fm.progress_max) - 1 && !hasValue(fm.conseguenze)) {
+            warnings.push(`${fileRel}: tracciato vicino al completamento senza conseguenze`);
+        }
     }
 
     if (fileRel.startsWith("Mondi/Timeline/") && fm.categoria === "evento storico" && (fm.canonico === true || fm.stato_canonico === "canonico") && !hasValue(fm.conseguenze)) {

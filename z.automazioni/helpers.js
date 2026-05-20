@@ -23,7 +23,8 @@ const PATHS = {
     lingue: "Mondi/Lingue",
     storia: "Mondi/Storia",
     conflitti: "Mondi/Conflitti",
-    cosmologia: "Mondi/Cosmologia"
+    cosmologia: "Mondi/Cosmologia",
+    tracciati: "Mondi/Tracciati"
 };
 
 let pendingRoute = {};
@@ -565,6 +566,10 @@ async function chooseMissions(tp, message = "Missioni collegate", context = {}) 
     return await chooseNotesByPath(tp, PATHS.missioni, message, context);
 }
 
+async function chooseTracks(tp, message = "Tracciati collegati", context = {}) {
+    return await chooseNotesByPath(tp, PATHS.tracciati, message, context);
+}
+
 async function chooseHandouts(tp, message = "Dispense collegate", context = {}) {
     return await chooseNotesByPath(tp, PATHS.dispense, message, context);
 }
@@ -676,6 +681,7 @@ module.exports = {
     chooseCreatures,
     chooseEncounters,
     chooseMissions,
+    chooseTracks,
     chooseHandouts,
     chooseSessions,
     chooseCampaigns,

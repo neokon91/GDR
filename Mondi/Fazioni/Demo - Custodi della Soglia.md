@@ -15,6 +15,9 @@ personaggi:
   - [[Demo - Odran il Campanaro]]
 pressione: 8
 prossima_mossa: "Dichiarare il coprifuoco, sigillare il ponte e requisire ogni frammento trovato."
+tracciati:
+  - [[Demo - I Custodi Chiudono il Ponte]]
+  - [[Demo - La Soglia Si Apre]]
 conseguenze:
   - La Seconda Nebbia permette ai Custodi di prendere controllo pubblico del ponte.
   - Sella puo accusare chiunque nasconda frammenti di mettere la valle in pericolo.

@@ -34,6 +34,10 @@ npm run release:clean
 
 Il comando crea una cartella `dist/vault-gdr-clean` e, se disponibile il comando `zip`, anche `dist/vault-gdr-clean.zip`.
 
+Lo ZIP contiene solo percorso utente, demo, SRD, plugin abilitati e runtime necessario ai pulsanti. Esclude documentazione manutentore, roadmap interne, script CLI di sviluppo e plugin non abilitati.
+
+Per sviluppo e manutenzione si usa il repository Git, non uno ZIP.
+
 ## Documentazione Release
 
 - [Installazione](../docs/INSTALLAZIONE.md)

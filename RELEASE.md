@@ -16,13 +16,19 @@ npm run check
 
 6. Aggiorna [[VERSION]].
 7. Aggiorna [[CHANGELOG]].
-8. Crea la release pulita:
+8. Crea la release utente:
 
 ```bash
 npm run release:clean
 ```
 
 9. Crea tag o GitHub Release solo dopo controlli puliti.
+
+## ZIP Utente
+
+`dist/vault-gdr-clean.zip` e l'unico ZIP di release. Contiene solo il vault per l'utente: dashboard, demo, contenuti giocabili, SRD, plugin abilitati, template e automazioni necessarie ai pulsanti.
+
+Non contiene materiali di sviluppo repository, issue template GitHub, roadmap interne, script CLI di import/release o plugin non abilitati. Per sviluppo e manutenzione si lavora tramite Git.
 
 ## Cosa Non Rimuovere
 
@@ -49,3 +55,4 @@ npm run release:clean
 - Tieni le modifiche tecniche documentate in [[Risorse/Sviluppo Vault]].
 - Se cambi template importanti, aggiorna almeno una nota demo o una nota `Prova -`.
 - Pubblica lo ZIP generato da `dist/vault-gdr-clean.zip`.
+- Per sviluppo e manutenzione usa il repository Git, non uno ZIP.

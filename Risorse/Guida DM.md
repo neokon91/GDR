@@ -12,6 +12,7 @@ Questa guida serve a usare il vault senza pensare a strumenti interni, cartelle 
    - un PNG se parlerà con i giocatori;
    - un luogo se verrà visitato;
    - una missione se i personaggi possono sceglierla;
+   - un clock se una minaccia, un viaggio o un rituale deve avanzare;
    - un incontro se potrebbe andare al tavolo;
    - una dispensa se vuoi consegnare un testo o indizio.
 6. Prima di segnare la sessione come `pronto`, assicurati che abbia:
@@ -33,7 +34,7 @@ Usa quella pagina per:
 - luoghi improvvisati;
 - conseguenze;
 - appunti grezzi;
-- timer e pressioni;
+- clock, timer e pressioni;
 - segreti rivelabili e domande aperte;
 - PNG in gioco;
 - incontri pronti;
@@ -47,7 +48,7 @@ Usa le sezioni di densità per trovare:
 - note con poche connessioni;
 - domande aperte ancora non risolte;
 - segreti e indizi non ancora spesi;
-- fazioni e fronti con pressione alta.
+- fazioni, fronti e tracciati con pressione alta.
 
 Un contenuto è utile quando collega almeno due tra luogo, PNG, fazione, missione, segreto o conseguenza.
 
@@ -57,12 +58,14 @@ Usa **Atlante Del Mondo** per controllare luoghi, regioni, insediamenti, dungeon
 
 Usa **Poteri In Movimento** per leggere chi sta agendo: pressione, prossima mossa, leader, rivali, luoghi controllati e missioni collegate. Una fazione con pressione ma senza prossima mossa e una pressione che non produce gioco.
 
+Usa **Clock E Progress Track Attivi** in [[Mondi/Stato del Mondo]] per vedere cosa sta per scattare. Un tracciato utile ha un innesco chiaro, una posta, una prossima mossa e almeno un collegamento a missione, fazione o luogo.
+
 Usa **Buchi Di Mondo** come lista pratica di manutenzione: mondi senza tono o fazioni, luoghi pronti senza pericolo, missioni senza fazioni, PNG in gioco senza luogo o relazione, eventi canonici senza conseguenze e lore da smistare.
 
 La **Timeline Causale** serve a distinguere:
 - Lore Capture: appunto nato al tavolo o in post-sessione;
 - Evento Storico: fatto storicizzato in `Mondi/Timeline`;
-- Conseguenza: effetto ancora aperto che deve cambiare note, missioni, luoghi o fazioni;
+- Conseguenza: effetto ancora aperto che deve cambiare note, missioni, tracciati, luoghi o fazioni;
 - Timeline: archivio ordinato degli eventi canonici.
 
 ## Come Leggere Le Pagine
@@ -84,6 +87,7 @@ Fai solo queste cose:
 - smista gli appunti live in [[Inbox/Inbox]];
 - canonizza eventi veri o archivia quelli irrilevanti;
 - aggiorna PNG, luoghi, fazioni e missioni cambiati;
+- aggiorna clock e progress track mossi durante la sessione;
 - segna ricompense e dispense consegnate;
 - togli `attiva: true` alla sessione giocata e prepara la prossima sessione attiva;
 - prepara la prima scena della prossima sessione.

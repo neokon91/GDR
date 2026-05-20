@@ -76,14 +76,6 @@ actions:
     link: "[[Risorse/Setup Guidato]]"
 ```
 
-```meta-bind-button
-label: Roadmap
-style: default
-actions:
-  - type: open
-    link: "[[Risorse/Roadmap/0.7.0]]"
-```
-
 ## Prossima Azione
 
 ```dataviewjs
@@ -108,7 +100,7 @@ if (active.length) {
 2. Apri [[Risorse/Setup Guidato]] per vedere se pulsanti, tabelle, creature, tiri e calendario sono pronti.
 3. Apri [[Risorse/Consegna Nuovo DM]] se stai ricevendo il vault gia pronto.
 4. Apri [[Risorse/Primo Avvio Strumenti]] solo se qualcosa non funziona.
-5. Apri [[1. DM Dashboard]] per creare campagne, sessioni, missioni e incontri.
+5. Apri [[1. DM Dashboard]] per creare campagne, sessioni, missioni, clock e incontri.
 6. Apri una sessione e usa il toggle `attiva` per indicare quale e al tavolo.
 7. Apri [[Durante il Gioco]] quando sei al tavolo.
 8. Apri [[Risorse/Post Sessione Guidato]] dopo la partita.
@@ -135,6 +127,7 @@ if (active.length) {
 - Mondo, luoghi, PNG e fazioni: [[Worldbuilder Dashboard]].
 - Ambientazioni grandi, culture, lingue e storia: [[Atlante del Mondo]].
 - Stato dinamico del mondo: [[Mondi/Stato del Mondo]].
+- Clock e progress track: [[Mondi/Tracciati/Tracciati]].
 - Profili per nuove campagne: [[Risorse/Profili Campagna]].
 - Guide, mappe, media, tabelle e aiuto: [[Risorse/Risorse]].
 - Controllo iniziale del vault: [[Risorse/Setup Guidato]].
@@ -143,7 +136,7 @@ if (active.length) {
 
 ## Vuoi Vedere Un Esempio?
 
-Apri [[Demo - La Reliquia Spezzata]]. E una mini-campagna gia collegata a mondo, sessioni, PNG, luoghi, fazione, missione, incontro, oggetto e dispensa.
+Apri [[Demo - La Reliquia Spezzata]]. E una mini-campagna gia collegata a mondo, sessioni, PNG, luoghi, fazione, missione, tracciati, incontro, oggetto e dispensa.
 
 ## Cosa Ignorare All'Inizio
 

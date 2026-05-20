@@ -42,11 +42,3 @@ Il vault usa il tema **Minimal** con lo snippet `gdr-vault.css`. Le regolazioni 
 ## Regola Pratica
 
 Mantieni l'interfaccia leggibile al tavolo: dashboard più dense, callout riconoscibili, tabelle compatte e niente decorazioni che rallentino la lettura.
-
-## Controllo Prima Di Release
-
-Per verificare che lo snippet sia presente e che la configurazione base del vault sia coerente:
-
-```bash
-node z.automazioni/check_vault.js
-```

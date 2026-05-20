@@ -31,13 +31,19 @@ actions:
 Scrivi prima in modo grezzo. Non serve sistemare tutto subito.
 
 > [!scena] Fatti della sessione
-> - 
+> -
 
 > [!indizio] Segreti rivelati
-> - 
+> -
 
 > [!timer] Conseguenze aperte
-> - 
+> -
+
+> [!timer] Clock mossi
+> -
+
+> [!png] PNG fuori scena
+> -
 
 ## 2. Cosa Diventa Vero Nel Mondo
 
@@ -50,8 +56,31 @@ Usa questa sezione per decidere cosa resta canonico.
 | Luogo cambiato | Aggiorna la nota del luogo. |
 | Fazione in movimento | Aggiorna pressione e prossima mossa. |
 | Missione cambiata | Aggiorna stato, pressione, ricompense e conseguenze. |
+| Clock o tracciato | Aggiorna `progress_value`, `pressione`, `prossima_mossa` e conseguenze. |
 
-## 3. Sessioni Attive
+## 3. Lavorazione Seria
+
+Trasforma ogni appunto live in una decisione operativa: canonico, rumor, conseguenza aperta o materiale da archiviare.
+
+```dataview
+TABLE tipo, stato, sessioni, collegamenti, impatto, azioni
+FROM "Inbox"
+WHERE file.name != "Inbox" AND stato != "smistata" AND stato != "archiviata" AND !startswith(file.name, "Prova -")
+SORT file.ctime DESC
+LIMIT 12
+```
+
+## 4. Aggiorna Pressioni
+
+```dataview
+TABLE categoria, tipo, stato, progress_value, progress_max, pressione, prossima_mossa
+FROM "Mondi/Tracciati" OR "Mondi/Missioni" OR "Mondi/Fazioni"
+WHERE stato != "archiviata" AND !startswith(file.name, "Prova -") AND (pressione > 0 OR progress_value > 0)
+SORT pressione DESC, progress_value DESC
+LIMIT 12
+```
+
+## 5. Sessioni Attive
 
 ```dataview
 TABLE data, data_mondo, stato, campagne
@@ -67,7 +96,7 @@ Quando hai finito:
 - scegli o crea la prossima sessione;
 - metti `attiva: true` solo sulla prossima sessione.
 
-## 4. Cosa Preparare Dopo
+## 6. Cosa Preparare Dopo
 
 ```dataview
 TABLE stato, pressione, scadenza_mondo, prossima_mossa
@@ -77,10 +106,11 @@ SORT pressione DESC, scadenza_mondo ASC
 LIMIT 8
 ```
 
-## 5. Chiusura Rapida
+## 7. Chiusura Rapida
 
 - [ ] Appunti live smistati o lasciati in [[Inbox/Inbox]] con un nome chiaro.
-- [ ] Conseguenze importanti aggiunte a mondo, PNG, luoghi, fazioni o missioni.
+- [ ] Conseguenze importanti aggiunte a mondo, PNG, luoghi, fazioni, missioni o tracciati.
+- [ ] Clock e progress track aggiornati.
 - [ ] Ricompense e dispense segnate.
 - [ ] Prossima sessione scelta.
 - [ ] [[Risorse/Controllo Vault]] aperto almeno una volta.

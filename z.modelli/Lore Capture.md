@@ -41,6 +41,9 @@
 > Aggiorna missione:
 > `INPUT[toggle:aggiorna_missione]`
 >
+> Aggiorna tracciato:
+> `INPUT[toggle:aggiorna_tracciato]`
+>
 > Archivia appunto:
 > `INPUT[toggle:archivia_appunto]`
 
@@ -114,6 +117,16 @@ style: primary
 actions:
   - type: updateMetadata
     bindTarget: aggiorna_missione
+    evaluate: false
+    value: true
+```
+
+```meta-bind-button
+label: Aggiorna Tracciato
+style: primary
+actions:
+  - type: updateMetadata
+    bindTarget: aggiorna_tracciato
     evaluate: false
     value: true
 ```

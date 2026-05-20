@@ -4,15 +4,41 @@
 
 ### Aggiunto
 
+- [[Mondi/Tracciati/Tracciati]] per clock e progress track Markdown-first, senza dipendere da Iron Vault.
+- Template e automazione `Tracciato` per fronti, missioni, rituali, minacce, viaggi e progetti.
+- Tracciati demo collegati a [[Demo - La Reliquia Spezzata]].
+- Pulsanti rapidi per avanzare, ridurre o completare un tracciato.
+
+### Migliorato
+
+- [[Durante il Gioco]] ora mostra i clock della sessione attiva e li include nelle pressioni.
+- [[Mondi/Stato del Mondo]] diventa una vista Stato Campagna piu operativa: missioni aperte, clock attivi, PNG mossi fuori scena e conseguenze recenti.
+- [[Risorse/Post Sessione Guidato]] include lavorazione appunti, clock mossi, PNG fuori scena e aggiornamento pressioni.
+- Template sessione e missione collegano i tracciati e mostrano avanzamento visibile.
+- Il controllo vault segnala missioni/fazioni ad alta pressione senza tracciato e tracciati vicini al completamento senza conseguenze.
+
+## 0.8.0 - 2026-05-20
+
+### Aggiunto
+
 - Documentazione prodotto in `docs/`: strategia, installazione e matrice strumenti.
 - `CONTRIBUTING.md` e issue template GitHub per bug e feature request.
 - [[Risorse/Importare Mappe]] e import GeoJSON Azgaar verso bozze di luoghi.
 - [[Risorse/Roadmap/0.8.0|Roadmap 0.8.0]] per completamento prodotto prima della release ZIP iniziale.
+- [[Demo - Brumafonda.hexcartographer]] per regioni, viaggi ed esplorazione a esagoni.
+- [[Demo - Mappa Zoomabile]] con blocco `zoommap` e base SVG locale per TTRPG Tools: Maps.
+- [[Risorse/Media Scene]] e [[Demo - Nebbia Sul Ponte]] per cue con timestamp e scene.
+- Tabelle Dice Roller per viaggio, scoperte esagono, reazioni fazione e conseguenze post-sessione.
 
 ### Migliorato
 
 - README riposizionato come pagina prodotto e non solo guida interna al vault.
 - Checklist release aggiornata per ZIP pulito e documentazione community.
+- Media, mappe e tabelle sono collegati alla demo e a [[Durante il Gioco]].
+- TTRPG Tools: Maps e Hex Cartographer sono guidati ma non bloccano il percorso base.
+- BRAT resta attivo come strumento essenziale di manutenzione per plugin non ufficiali; Iron Vault ed Emoji Toolbar restano fuori dal flusso base.
+- Aggiunta nota di studio su Iron Vault per replicare nel vault funzioni utili senza imporre il plugin.
+- `npm run release:clean` ora genera l'unico ZIP di release, destinato agli utenti e senza materiali di sviluppo repository.
 
 ## 0.7.0 - 2026-05-20
 

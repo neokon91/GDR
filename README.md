@@ -42,7 +42,8 @@ Se dashboard, pulsanti o tabelle non funzionano, apri [[Risorse/Primo Avvio Stru
 4. Crea solo le entita davvero utili al tavolo: PNG, luoghi, missioni, incontri, oggetti e dispense.
 5. Collega le note usando i campi interattivi.
 6. Durante il gioco usa [[Durante il Gioco]] per appunti, timer, PNG attivi, incontri pronti, dispense e Inbox Live.
-7. Dopo la sessione apri [[Risorse/Post Sessione Guidato]]: canonizza eventi, aggiorna mondo/missioni e scegli la prossima sessione attiva.
+7. Usa clock e progress track in [[Mondi/Tracciati/Tracciati]] quando una minaccia, un viaggio o un rituale deve avanzare in modo visibile.
+8. Dopo la sessione apri [[Risorse/Post Sessione Guidato]]: canonizza eventi, aggiorna mondo/missioni/tracciati e scegli la prossima sessione attiva.
 
 ## Dove Trovare Le Cose
 
@@ -52,6 +53,7 @@ Se dashboard, pulsanti o tabelle non funzionano, apri [[Risorse/Primo Avvio Stru
 - `Mondi/Sessioni`: preparazione e resoconti delle sessioni.
 - `Mondi/Timeline`: eventi canonici, rumor, leggende e conseguenze storicizzate.
 - `Mondi/Missioni`: incarichi, trame aperte e obiettivi.
+- `Mondi/Tracciati`: clock e progress track per fronti, missioni, rituali, minacce e viaggi.
 - `Mondi/Incontri`: scene di conflitto, ostacoli e combattimenti pronti.
 - `Risorse`: mappe, immagini, audio, video, tabelle e dispense generiche.
 - `SRD`: riferimento separato al System Reference Document 5.2.1 in italiano.
@@ -68,7 +70,7 @@ Se dashboard, pulsanti o tabelle non funzionano, apri [[Risorse/Primo Avvio Stru
 - [[Worldbuilder Dashboard]] mostra ora Atlante del Mondo, Poteri in Movimento, Relazioni PNG, Timeline Causale e Buchi Di Mondo: usali per trovare collegamenti mancanti, pressioni senza prossima mossa e lore canonica non ancora storicizzata.
 - [[Atlante del Mondo]] e la vista principale per worldbuilding tassonomico: geografia, culture, lingue, poteri, storia, conflitti e cosmologia.
 - [[Campagna da Ambientazione]] trasforma regioni e conflitti in campagne, archi narrativi, fronti e opportunita di avventura.
-- [[Mondi/Stato del Mondo]] resta la vista operativa delle conseguenze: filtra per mondo o campagna e mostra cosa deve cambiare al tavolo.
+- [[Mondi/Stato del Mondo]] e la vista Stato Campagna: filtra per mondo o campagna e mostra missioni aperte, clock attivi, PNG mossi fuori scena, pressioni e conseguenze.
 
 ## Uso Quotidiano
 
@@ -80,13 +82,14 @@ Se dashboard, pulsanti o tabelle non funzionano, apri [[Risorse/Primo Avvio Stru
 - Quando crei luoghi, PNG, fazioni o missioni dai pulsanti guidati, compila subito i collegamenti richiesti: il vault usera quei campi per mostrare fronti, segreti, pressioni e materiale pronto nelle dashboard.
 - Nelle schede lunghe, guarda prima il riquadro in alto: tab e callout chiusi servono a tenere separati dettagli, segreti, materiali e post-sessione.
 - Usa Inbox Live per catturare eventi, conseguenze, PNG improvvisati, luoghi improvvisati e note grezze senza interrompere il gioco.
+- Usa `Nuovo Clock` per creare un tracciato quando una pressione deve avanzare a segmenti invece di restare una nota testuale.
 - Mantieni `SRD` separato dal contenuto canonico: e riferimento regolamentare, non ambientazione.
 
 ## Manutenzione Leggera
 
 - Non lasciare link placeholder: crea la nota o trasforma il link in testo semplice.
 - Archivia invece di cancellare quando una nota ha valore storico.
-- Dopo una sessione, aggiorna missioni, PNG, luoghi visitati, ricompense e conseguenze da [[Risorse/Post Sessione Guidato]].
+- Dopo una sessione, aggiorna missioni, tracciati, PNG, luoghi visitati, ricompense e conseguenze da [[Risorse/Post Sessione Guidato]].
 - Per controlli e sviluppo del vault, vedi [[Risorse/Sviluppo Vault]].
 - Per preparare una release o una copia pulita, apri [[RELEASE]] e [[Risorse/Controllo Vault]].
 - Per creare una copia consegnabile, apri [[Risorse/Release Pulita]] o usa `npm run release:clean`.

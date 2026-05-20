@@ -57,11 +57,14 @@ tab: Esagoni
 > [!luogo] Quando usarli
 > Usa Hex Cartographer quando il viaggio, la distanza o l'esplorazione esagonale contano davvero.
 
+Apri [[Demo - Brumafonda.hexcartographer]] come prova pronta. Il file si apre nell'editor Hex Cartographer e contiene gia colori, fiume, strada, confine di pericolo e link alle note luogo.
+
 Regola di prodotto:
 
 - prima crea o importa i luoghi come note;
 - poi usa la mappa esagonale come supporto visuale;
 - non rendere la mappa l'unica fonte del canone.
+- dopo ogni viaggio aggiorna conseguenze, missioni e luoghi visitati.
 
 ```dataview
 TABLE mondo, luoghi, stato, file.mtime AS aggiornato
@@ -76,6 +79,8 @@ tab: Zoom
 
 > [!scena] Quando usarle
 > Usa TTRPG Tools: Maps per mappe grandi, immagini con pin, mappe da mostrare al tavolo o riferimenti con livelli.
+
+Apri [[Demo - Mappa Zoomabile]] come prova pronta con blocco `zoommap` e base SVG locale.
 
 Regola di prodotto:
 

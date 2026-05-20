@@ -28,20 +28,20 @@ Plugin community abilitati: 23.
 | Callout Manager | 1.1.1 | integrato | DM, giocatori | Callout GDR coerenti per scene, indizi, segreti, pericoli e letture. |
 | Fantasy Statblocks | 4.10.3 | integrato | DM | Schede mostro e creature richiamabili da note e incontri. |
 | Initiative Tracker | 13.0.21 | parziale | DM al tavolo | Combattimenti con blocchi `encounter` e creature da Fantasy Statblocks. |
-| Dice Roller | 11.4.2 | parziale | DM, giocatori | Tiri inline, tabelle casuali e lookup table da note Markdown. |
+| Dice Roller | 11.4.2 | supportato | DM, giocatori | Tiri inline, tabelle casuali e lookup table da note Markdown. |
 | Calendarium | 2.1.0 | pronto, da configurare | DM, worldbuilder | Calendario fantasy, eventi, scadenze e timeline del mondo. |
 | Excalidraw | 2.23.3 | integrato base | worldbuilder, DM | Mappe relazionali, fronti, dungeon, schemi e disegni collegati a note. |
-| Media Extended | 4.2.4 | minimo | DM al tavolo | Audio/video con timestamp e riferimenti a momenti precisi. Desktop only. |
+| Media Extended | 4.2.4 | supportato leggero | DM al tavolo | Audio/video con timestamp e riferimenti a momenti precisi. Desktop only. |
 | Generatore di Contenuti Fantasy | 1.2.4 | integrato custom | DM, worldbuilder | Spunti rapidi in italiano salvati come bozze in `Inbox/Generati`. |
 | Iconize | 2.14.7 | integrato visuale | tutti | Icone per orientamento in file explorer, link e note. |
 | Tabs | 1.1.8 | integrato | tutti | Sezioni a schede in dashboard, template lunghi e mostri SRD. |
 | Style Settings | 1.0.9 | integrato visuale | manutentore | Regolazione dello snippet `gdr-vault` senza modificare CSS. |
 | Advanced Tables | 0.23.2 | supporto | DM, manutentore | Editing veloce di tabelle Markdown e tabelle casuali. |
 | Emoji Toolbar | 1.0.0 | opzionale | tutti | Inserimento rapido di emoji, senza dipendenze del vault. |
-| TTRPG Tools: Maps | 1.9.5 | installato, non integrato | DM al tavolo | Mappe zoomabili con marker, layer, misure e note collegate. |
-| Hex Cartographer | 1.0.2 | installato, non integrato | worldbuilder | Mappe esagonali per regioni, viaggi e hexcrawl. |
-| Iron Vault | 1.108.1 | fuori flusso D&D | giocatori Ironsworn | VTT e strumenti per Ironsworn/Starforged, da non imporre al vault D&D. |
-| BRAT | 2.0.4 | manutenzione | manutentore | Installazione/test di plugin beta da repository GitHub. |
+| TTRPG Tools: Maps | 1.9.5 | opzionale guidato | DM al tavolo | Mappe zoomabili con marker, layer, misure e note collegate. |
+| Hex Cartographer | 1.0.2 | opzionale guidato | worldbuilder | Mappe esagonali per regioni, viaggi e hexcrawl. |
+| Iron Vault | 1.108.1 | studio struttura | giocatori Ironsworn | VTT e strumenti per Ironsworn/Starforged, da non imporre al vault D&D ma utile come riferimento di design. |
+| BRAT | 2.0.4 | manutenzione essenziale | manutentore | Installazione/test di plugin beta o non ufficiali da repository GitHub. |
 
 Nota: `table-editor-obsidian` e il plugin mostrato come **Advanced Tables**; `obsidian-icon-folder` e oggi **Iconize**; `zoom-map` e **TTRPG Tools: Maps**.
 
@@ -118,8 +118,8 @@ Usa insieme Excalidraw, Canvas core, Iconize, Folder Notes, Tabs, Hex Cartograph
 - Iconize aiuta a orientarsi, ma non sostituisce indici e dashboard.
 - Folder Notes mantiene ogni cartella leggibile come pagina.
 - Tabs riduce lo scrolling di dashboard e template lunghi.
-- Hex Cartographer va attivato davvero solo quando il vault avra una procedura per regioni, viaggi o hexcrawl.
-- TTRPG Tools: Maps e piu adatto a mappe tattiche o regionali con marker, misure, layer e link.
+- Hex Cartographer e guidato da [[Risorse/Mappe/Mappe]] e dalla demo [[Demo - Brumafonda.hexcartographer]].
+- TTRPG Tools: Maps e guidato da [[Demo - Mappa Zoomabile]] per mappe tattiche o regionali con marker, misure, layer e link.
 
 Beneficia soprattutto: worldbuilder e DM che gestisce luoghi, fazioni e viaggi.
 
@@ -155,7 +155,7 @@ Beneficia soprattutto: DM che usa musica, immagini, handout o video-reference.
 - Crea FileClass Metadata Menu per i tipi principali: `sessione`, `missione`, `png`, `luogo`, `incontro`, `mappa`, `media`.
 - Mantieni le query Dataview semplici e filtra sempre le note `Prova -` nelle viste operative.
 - Prima di cambiare un campo YAML, cerca il campo in dashboard, template, `z.automazioni` e controlli.
-- Conserva BRAT solo per manutenzione: non deve essere parte del flusso utente finale.
+- Conserva BRAT attivo per manutenzione e plugin non ufficiali: non deve essere parte del flusso utente finale.
 
 ### Per Giocatori O Co-DM
 
@@ -167,7 +167,7 @@ Beneficia soprattutto: DM che usa musica, immagini, handout o video-reference.
 
 1. Configurare almeno un calendario in Calendarium, perche il plugin e installato ma `calendars` e vuoto.
 2. Creare FileClass Metadata Menu per i campi piu usati, iniziando da `sessione`, `missione`, `png`, `luogo`, `incontro`.
-3. Aggiungere una nota prova per TTRPG Tools: Maps con un blocco `zoommap` e marker locali.
-4. Decidere se Hex Cartographer serve davvero al flusso viaggi; se si, creare una procedura `regione -> esagoni -> incontri -> conseguenze`.
-5. Collegare Media Extended a [[Durante il Gioco]] mostrando solo audio/video con `stato: pronto`.
-6. Tenere Iron Vault separato: utile per Ironsworn/Starforged, non per il flusso D&D di base.
+3. Fatto: aggiunta [[Demo - Mappa Zoomabile]] con blocco `zoommap` e base locale.
+4. Fatto: Hex Cartographer resta opzionale guidato per `regione -> esagoni -> incontri -> conseguenze`.
+5. Fatto: Media Extended e collegato a [[Durante il Gioco]] tramite media con `stato: pronto`.
+6. Tenere Iron Vault separato come plugin, ma studiarne struttura per replicare funzioni utili nel vault.

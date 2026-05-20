@@ -7,6 +7,7 @@ async function dm(tp) {
             [
                 { label: "Sessione", id: "sessione" },
                 { label: "Missione", id: "missione" },
+                { label: "Clock o tracciato", id: "tracciato" },
                 { label: "Incontro", id: "incontro" },
                 { label: "Trappola", id: "trappola" },
                 { label: "Pericolo ambientale", id: "pericolo ambientale" },
@@ -23,6 +24,7 @@ async function dm(tp) {
     function getContentTemplate(contentType) {
         if (contentType === "sessione") return "z.modelli/dm/Sessione";
         if (contentType === "missione") return "z.modelli/dm/Missione";
+        if (contentType === "tracciato") return "z.modelli/dm/Tracciato";
         if (contentType === "incontro") return "z.modelli/dm/Incontro";
         if (contentType === "trappola") return "z.modelli/dm/Trappola";
         if (contentType === "pericolo ambientale") return "z.modelli/dm/Pericolo Ambientale";

@@ -52,6 +52,7 @@ collega_al_mondo: false
 aggiorna_png: false
 aggiorna_luogo: false
 aggiorna_missione: false
+aggiorna_tracciato: false
 archivia_appunto: false
 ---
 `;

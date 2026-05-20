@@ -15,8 +15,14 @@ personaggi:
   - [[Demo - Sella Neraluce]]
 fazioni:
   - [[Demo - Custodi della Soglia]]
+tracciati:
+  - [[Demo - I Custodi Chiudono il Ponte]]
+  - [[Demo - La Soglia Si Apre]]
+  - [[Demo - Attraversare Brumafonda]]
 ricompense:
   - [[Demo - Frammento della Soglia]]
+progress_value: 3
+progress_max: 6
 pressione: 9
 prossima_mossa: "I Custodi dichiarano il coprifuoco, interrogano Odran e cercano il frammento nella campana."
 domande_aperte:
