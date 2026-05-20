@@ -25,6 +25,7 @@
 - `release:clean` genera un `LEGGIMI.md` utente piu completo e la documentazione include una pagina release pubblica pronta.
 - Roadmap, strategia prodotto e sviluppo vault ora mettono la riduzione della navigazione sopra nuove feature.
 - README, Repository, Release e Risorse/Release Pulita non linkano piu documenti superflui.
+- [[Risorse/Roadmap/1.0.0]] riscritta come backlog operativo per prodotto professionale: sessione chiusa, post-sessione, codex mondo, atlante, player portal, party control, polish e demo.
 
 ## 0.9.0 - 2026-05-20
 
