@@ -7,6 +7,9 @@ Script usati da Templater, dashboard e manutenzione del vault.
 | File | Uso |
 | --- | --- |
 | `check_vault.js` | Smoke test locale della struttura del vault, del plugin layer interno e degli script JS. |
+| `check_template_factory.py` | Valida moduli YAML, blueprint e rendering Jinja in memoria. |
+| `render_template_factory.py` | Renderizza anteprime TemplateFactory in `Dev/TemplateFactory/examples/generated/`. |
+| `audit_template_migration.py` | Confronta preview TemplateFactory e template reali, generando un report di migrazione. |
 | `check_js.js` | Controllo sintattico ricorsivo degli script in `z.automazioni/` e `z.engine/`. |
 | `repo_hygiene.js` | Controllo repository: artefatti locali, note di prova residue e script npm essenziali. |
 | `import_srd.js` | Rigenera il riferimento SRD in `SRD/`. |
@@ -18,9 +21,17 @@ Script usati da Templater, dashboard e manutenzione del vault.
 | File | Uso |
 | --- | --- |
 | `helpers.js` | Funzioni comuni per template Templater. |
-| `session_context.js` | Funzioni condivise per dashboard e DataviewJS. |
+| `session_context.js` | Compatibilita legacy per viste dashboard gia referenziate dai template esistenti. Le nuove viste devono passare da `z.engine/session_views.js`. |
 | `meta_actions.js` | Libreria azioni Meta Bind: canone, rumor, archiviazione, conseguenze, clock, sessione attiva, propagazione e recap pubblico. |
 | `wizard_layer.js` | Wizard centralizzati: nuova entita viva, appunto live, conseguenza, fine sessione e sessione da output precedente. |
+| `template_router.js` | Router Templater sottili: sostituisce blocchi `<%* ... %>` nei router con una sola entry `tp.user.template_router`. |
+
+## Runtime Di Vista
+
+| File | Uso |
+| --- | --- |
+| `z.engine/session_views.js` | Entry point per DataviewJS in template, hub e dashboard. |
+| `z.engine/gdr_views.js` | Componenti di vista piccoli e riusabili. |
 
 ## Script Di Creazione
 
@@ -35,6 +46,8 @@ Esempio: `z.modelli/dm/Sessione.md` usa `tp.user.sessione`, quindi lo script dev
 - Se aggiungi un preset Metadata Menu, aggiorna `REQUIRED_METADATA_MENU_PRESETS`.
 - Se aggiungi un file essenziale al layer, aggiorna `REQUIRED_LAYER_FILES`.
 - Mantieni le azioni distruttive o di propagazione in `meta_actions.js`, non nei singoli template.
+- Mantieni rendering e feedback DataviewJS in `z.engine/`; `z.automazioni/session_context.js` resta ponte legacy fino alla migrazione completa.
+- I router in `z.modelli/*Router.md` devono avere una sola chiamata Templater iniziale.
 
 ## Controllo
 
@@ -42,6 +55,9 @@ Dal root della repo:
 
 ```bash
 npm run check
+npm run check:templates
+npm run render:templates
+npm run audit:templates
 npm run check:repo
 npm run clean:repo
 ```

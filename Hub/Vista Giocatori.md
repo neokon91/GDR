@@ -16,21 +16,21 @@ pubblico: true
 ## Recap
 
 ```dataviewjs
-const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));
+const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
 gdr.renderPlayerRecap(dv);
 ```
 
 ## Mappa
 
 ```dataviewjs
-const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));
+const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
 gdr.renderPlayerMap(dv);
 ```
 
 ## Mondo Conosciuto
 
 ```dataviewjs
-const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));
+const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
 gdr.renderPlayerView(dv);
 ```
 
@@ -47,6 +47,6 @@ LIMIT 8
 ## Controllo Sicurezza
 
 ```dataviewjs
-const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));
+const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
 gdr.renderPublicSafety(dv);
 ```

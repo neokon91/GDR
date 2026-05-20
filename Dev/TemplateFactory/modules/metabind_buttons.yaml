@@ -1,0 +1,56 @@
+id: metabind_buttons
+purpose: Pulsanti Meta Bind canonici e azioni runtime collegate.
+version: 0.1.0
+buttons:
+  nuova_sessione:
+    id: nuova-sessione-z-modelli-dm-sessione-md
+    label: Nuova Sessione
+    action: templaterCreateNote
+    template: z.modelli/dm/Sessione.md
+    fallback: '[[z.modelli/dm/Sessione]]'
+  nuovo_mondo_homebrew:
+    id: nuovo-mondo-homebrew
+    label: Nuovo Mondo
+    action: runTemplaterFile
+    template: z.modelli/wizard/Nuovo Mondo Homebrew.md
+    fallback: '[[z.modelli/wizard/Nuovo Mondo Homebrew]]'
+  wizard_nuova_entita_viva:
+    id: wizard-nuova-entita-viva
+    label: Nuova Entita
+    action: runTemplaterFile
+    template: z.modelli/wizard/Nuova Entita Viva.md
+    fallback: '[[z.modelli/wizard/Nuova Entita Viva]]'
+  durante_il_gioco:
+    id: durante-il-gioco-durante-il-gioco
+    label: Durante Il Gioco
+    action: open
+    link: '[[Hub/Durante il Gioco]]'
+    fallback: '[[Hub/Durante il Gioco]]'
+  marca_canonico:
+    id: marca-canonico
+    label: Marca Canonico
+    action: runTemplaterFile
+    template: z.modelli/azioni/Marca Canonico.md
+    fallback: 'Azione manuale: impostare canonico: true'
+  marca_rumor:
+    id: marca-rumor
+    label: Marca Rumor
+    action: runTemplaterFile
+    template: z.modelli/azioni/Marca Rumor.md
+    fallback: 'Azione manuale: impostare stato_canonico: rumor'
+  archivia:
+    id: archivia-nota
+    label: Archivia
+    action: runTemplaterFile
+    template: z.modelli/azioni/Archivia.md
+    fallback: 'Azione manuale: impostare stato: archiviata'
+  avanza_clock:
+    id: avanza-clock
+    label: Avanza Clock
+    action: runTemplaterFile
+    template: z.modelli/azioni/Avanza Clock.md
+    fallback: 'Azione manuale: aumentare pressione/progress_value'
+contracts:
+  button_ids_must_match_meta_bind_config: .obsidian/plugins/obsidian-meta-bind-plugin/data.json
+  generated_syntax: '`BUTTON[{{ id }}]`'
+  fallback_required: true

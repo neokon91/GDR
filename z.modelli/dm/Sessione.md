@@ -89,7 +89,7 @@ tab: Dopo
 > `BUTTON[durante-il-gioco-durante-il-gioco]`
 
 ```dataviewjs
-const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));
+const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
 const current = dv.current();
 const checks = [
   ["Obiettivo", current.obiettivo],
@@ -107,7 +107,7 @@ dv.paragraph(ready === 5 ? "Pronta: imposta stato `pronto` e gioca." : `Mancano 
 > Output concreto della preparazione: questa e la traccia da usare al tavolo.
 
 ```dataviewjs
-const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));
+const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
 gdr.renderPlayableOutline(dv, dv.current());
 ```
 
@@ -115,7 +115,7 @@ gdr.renderPlayableOutline(dv, dv.current());
 > Per andare al tavolo lascia `attiva: true` solo su questa sessione. Spegnilo sulle altre sessioni.
 
 ```dataviewjs
-const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));
+const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
 gdr.renderActiveSessionBanner(dv);
 ```
 
@@ -328,7 +328,7 @@ WHERE contains(this.dispense, file.link)
 ## Mappe
 
 ```dataviewjs
-const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));
+const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
 gdr.renderSessionMapCards(dv);
 ```
 

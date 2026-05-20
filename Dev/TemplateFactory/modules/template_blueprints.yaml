@@ -1,6 +1,6 @@
 id: template_blueprints
 purpose: Blueprint iniziali per generare template Markdown/Templater con Jinja2.
-version: 0.1.0
+version: 0.2.0
 blueprints:
   world_entity:
     target_family:
@@ -16,6 +16,12 @@ blueprints:
     required_modules:
       - fields_core
       - plugin_bindings
+      - sections
+      - callouts
+      - tabs
+      - dataview_blocks
+      - metabind_inputs
+      - metabind_buttons
     sections:
       - identita
       - uso_al_tavolo
@@ -29,11 +35,25 @@ blueprints:
       - dataview
       - metadata_menu
       - bases
+    output:
+      folder: z.modelli/worldbuilding
+      fallback: markdown_sections
+    comparison_targets:
+      - z.modelli/worldbuilding/Entita Worldbuilding.md
   session:
     target_family:
       - sessione
     jinja_template: ../jinja/session_template.md.j2
     templater_entry: "<% await tp.user.sessione(tp) %>"
+    required_modules:
+      - fields_core
+      - plugin_bindings
+      - sections
+      - callouts
+      - tabs
+      - dataview_blocks
+      - metabind_inputs
+      - metabind_buttons
     sections:
       - obiettivo
       - prima_scena
@@ -51,6 +71,11 @@ blueprints:
       - dice_roller
       - initiative_tracker
       - media_extended
+    output:
+      folder: z.modelli/dm
+      fallback: markdown_checklist
+    comparison_targets:
+      - z.modelli/dm/Sessione.md
   map_asset:
     target_family:
       - mappa
@@ -58,6 +83,16 @@ blueprints:
       - territorio
       - dungeon
     jinja_template: ../jinja/map_template.md.j2
+    templater_entry: "<% await tp.user.mappa(tp) %>"
+    required_modules:
+      - fields_core
+      - plugin_bindings
+      - sections
+      - callouts
+      - tabs
+      - dataview_blocks
+      - metabind_inputs
+      - bases_views
     sections:
       - cosa_mostra
       - layer_dm
@@ -72,11 +107,26 @@ blueprints:
       - ttrpg_maps
       - hex_cartographer
       - dataview
+    output:
+      folder: z.modelli/mappe
+      fallback: markdown_marker_table
+    comparison_targets:
+      - z.modelli/mappe/Mappa Zoom.md
+      - z.modelli/mappe/Mappa Excalidraw Fronti.excalidraw.md
   creature_encounter:
     target_family:
       - creatura
       - incontro
     jinja_template: ../jinja/encounter_template.md.j2
+    templater_entry: "<% await tp.user.incontro(tp) %>"
+    required_modules:
+      - fields_core
+      - plugin_bindings
+      - sections
+      - callouts
+      - tabs
+      - dataview_blocks
+      - metabind_inputs
     sections:
       - statblock
       - encounter
@@ -89,8 +139,25 @@ blueprints:
       - initiative_tracker
       - dice_roller
       - callout_manager
+    output:
+      folder: z.modelli/dm
+      fallback: markdown_encounter_table
+    comparison_targets:
+      - z.modelli/dm/Incontro.md
+      - z.modelli/Creatura.md
 outputs:
   markdown_templates: z.modelli
   fileclasses: z.fileclass
   bases: z.bases
   checks: z.automazioni/check_vault.js
+jinja_contract:
+  role: generatore_statico
+  allowed:
+    - scegliere sezioni da YAML
+    - comporre callout, tabs, input Meta Bind e blocchi Dataview
+    - emettere una sola entry Templater iniziale
+    - emettere fallback Markdown leggibile
+  forbidden:
+    - richiedere Jinja nel vault utente
+    - inserire logica Jinja da eseguire in Obsidian
+    - duplicare responsabilita degli script in z.automazioni

@@ -85,7 +85,7 @@ tab: Mappa
 
 
 ```dataviewjs
-const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));
+const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
 gdr.renderAtlasMapCards(dv, dv.current().mondo_attivo);
 ```
 

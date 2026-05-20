@@ -21,7 +21,7 @@ stato: pronto
 ## Sessione Da Processare
 
 ```dataviewjs
-const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));
+const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
 gdr.renderActiveSessionBanner(dv);
 gdr.renderPostSessionFocus(dv);
 ```
@@ -42,7 +42,7 @@ gdr.renderPostSessionFocus(dv);
 Trasforma solo cio che resta vero nel mondo. Il resto resta rumor, bozza o appunto archiviato.
 
 ```dataviewjs
-const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));
+const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
 gdr.renderCanonDecisionCards(dv);
 ```
 
@@ -54,7 +54,7 @@ gdr.renderCanonDecisionCards(dv);
 ## 3. Conseguenze Da Applicare
 
 ```dataviewjs
-const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));
+const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
 gdr.renderConsequenceCards(dv);
 ```
 
@@ -74,14 +74,14 @@ Apri [[Cosa Succede Fuori Scena]] solo per decidere cosa si muove prima della pr
 Missioni, clock e fazioni toccate dalle conseguenze devono avere una `prossima_mossa` aggiornata prima di chiudere il post-sessione.
 
 ```dataviewjs
-const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));
+const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
 gdr.renderImpactedNextMoveCards(dv);
 ```
 
 ### Pressioni Aperte
 
 ```dataviewjs
-const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));
+const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
 gdr.renderNextMoveCards(dv);
 ```
 

@@ -1,6 +1,6 @@
 id: fields_core
 purpose: Campi canonici condivisi da template, fileClass, Bases, Dataview e controlli.
-version: 0.1.0
+version: 0.2.0
 fields:
   identity:
     - name: id
@@ -28,6 +28,23 @@ fields:
       required: true
       source: metadata_menu
       use: avanzamento operativo
+      values:
+        - bozza
+        - preparazione
+        - pronto
+        - in corso
+        - in gioco
+        - giocata
+        - da smistare
+        - collegata
+        - canonica
+        - archiviata
+        - ignorata
+    - name: fileClass
+      type: text
+      required: false
+      source: metadata_menu
+      use: fileClass Metadata Menu da applicare alla famiglia nota
   world_links:
     - name: mondo
       type: wikilink
@@ -55,6 +72,11 @@ fields:
       source: meta_bind
       use: rete generale del Codex
   table_use:
+    - name: identita
+      type: text
+      required: false
+      source: meta_bind
+      use: identita narrativa breve
     - name: gancio
       type: text
       required: false
@@ -75,6 +97,21 @@ fields:
       required: false
       source: meta_bind
       use: informazione DM
+    - name: abitante_sa
+      type: list
+      required: false
+      source: meta_bind
+      use: versione diegetica leggibile nel mondo
+    - name: dm_sa
+      type: list
+      required: false
+      source: meta_bind
+      use: informazioni private per il DM
+    - name: cambia_al_tavolo
+      type: list
+      required: false
+      source: meta_bind
+      use: impatto concreto durante la sessione
   pressure:
     - name: pressione
       type: number
@@ -101,6 +138,11 @@ fields:
       required: false
       source: meta_bind
       use: propagazione futura
+    - name: conseguenza_potenziale
+      type: text
+      required: false
+      source: meta_bind
+      use: risultato se la pressione non viene risolta
   public_safety:
     - name: pubblico
       type: boolean
@@ -112,7 +154,201 @@ fields:
       required: false
       source: meta_bind
       use: confermato nel mondo
+    - name: stato_canonico
+      type: select
+      required: false
+      source: metadata_menu
+      use: qualita canonica dell'informazione
+      values:
+        - canonico
+        - rumor
+        - leggenda
+        - falso
+        - retcon
+  session:
+    - name: data
+      type: date
+      required: false
+      source: meta_bind
+      use: data reale della sessione
+    - name: data_mondo
+      type: text
+      required: false
+      source: meta_bind
+      use: data diegetica leggibile
+    - name: attiva
+      type: boolean
+      required: false
+      source: meta_bind
+      use: sessione attiva al tavolo
+    - name: obiettivo
+      type: text
+      required: false
+      source: meta_bind
+      use: obiettivo giocabile della sessione
+    - name: apertura
+      type: text
+      required: false
+      source: meta_bind
+      use: prima scena
+    - name: scelta
+      type: text
+      required: false
+      source: meta_bind
+      use: scelta concreta da offrire ai giocatori
+    - name: pressioni
+      type: list
+      required: false
+      source: meta_bind
+      use: pressioni attive in sessione
+    - name: materiale_pronto
+      type: list
+      required: false
+      source: meta_bind
+      use: materiali preparati per il tavolo
+    - name: recap_pubblico
+      type: list
+      required: false
+      source: meta_bind
+      use: riepilogo condivisibile
+    - name: recap_dm
+      type: list
+      required: false
+      source: meta_bind
+      use: note private post-sessione
+    - name: dispense
+      type: wikilink_list
+      required: false
+      source: meta_bind
+      use: dispense collegate alla sessione
+    - name: mappe
+      type: wikilink_list
+      required: false
+      source: meta_bind
+      use: mappe collegate alla sessione
+    - name: audio
+      type: wikilink_list
+      required: false
+      source: meta_bind
+      use: audio collegati alla sessione
+    - name: immagini
+      type: wikilink_list
+      required: false
+      source: meta_bind
+      use: immagini collegate alla sessione
+    - name: video
+      type: wikilink_list
+      required: false
+      source: meta_bind
+      use: video collegati alla sessione
+  calendarium:
+    - name: fc-calendar
+      type: text
+      required: false
+      source: calendarium
+      use: calendario diegetico configurato
+    - name: fc-date
+      type: text
+      required: false
+      source: calendarium
+      use: data evento nel calendario diegetico
+    - name: fc-category
+      type: select
+      required: false
+      source: calendarium
+      use: categoria evento calendario
+      values:
+        - sessione
+        - scadenza
+        - festa
+        - pericolo
+        - conseguenza
+    - name: fc-display-name
+      type: text
+      required: false
+      source: calendarium
+      use: nome mostrato nel calendario
+    - name: fc-end
+      type: text
+      required: false
+      source: calendarium
+      use: fine evento nel calendario diegetico
+  maps:
+    - name: cosa_mostra
+      type: text
+      required: false
+      source: meta_bind
+      use: descrizione visibile della mappa
+    - name: layer_dm
+      type: list
+      required: false
+      source: meta_bind
+      use: elementi nascosti o solo DM
+    - name: layer_pubblico
+      type: list
+      required: false
+      source: meta_bind
+      use: elementi mostrabili ai giocatori
+    - name: cosa_nascondere
+      type: text
+      required: false
+      source: meta_bind
+      use: contenuto da non mostrare ai giocatori
+    - name: coordinates
+      type: coordinates
+      required: false
+      source: bases_maps
+      use: coordinate marker mappa
+    - name: icon
+      type: text
+      required: false
+      source: bases_maps
+      use: icona marker mappa
+    - name: color
+      type: text
+      required: false
+      source: bases_maps
+      use: colore marker mappa
+  encounter:
+    - name: creature
+      type: wikilink_list
+      required: false
+      source: meta_bind
+      use: creature coinvolte
+    - name: incontri
+      type: wikilink_list
+      required: false
+      source: meta_bind
+      use: incontri collegati
+    - name: statblock
+      type: boolean
+      required: false
+      source: fantasy_statblocks
+      use: abilita rendering statblock
+    - name: name
+      type: text
+      required: false
+      source: fantasy_statblocks
+      use: nome tecnico letto da Fantasy Statblocks
+    - name: terreno
+      type: text
+      required: false
+      source: meta_bind
+      use: terreno o situazione tattica
+    - name: complicazioni
+      type: list
+      required: false
+      source: dice_roller
+      use: complicazioni casuali o preparate
+    - name: ricompense
+      type: list
+      required: false
+      source: meta_bind
+      use: ricompense, indizi o conseguenze positive
 checks:
   - check_vault_required_fields
   - public_secret_scan
   - live_note_session_world_links
+contracts:
+  shared_field_rule: Ogni campo usato in tre o piu template deve essere definito qui, in Meta Bind, in Metadata Menu e nelle Bases pertinenti.
+  yaml_shape_rule: Liste di wikilink come array YAML; booleani come true/false; numeri senza virgolette.

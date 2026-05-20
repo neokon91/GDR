@@ -26,7 +26,7 @@ mondo_attivo: ""
 `BUTTON[economia-e-rotte-economia-e-rotte]`
 
 ```dataviewjs
-const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));
+const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
 const current = dv.current();
 const world = gdr.linkKey(current.mondo_attivo);
 const asArray = value => dv.array(value ?? []).array();
@@ -130,7 +130,7 @@ if (!issueRows.length) {
 ## Controllo Strutturale Vault
 
 ```dataviewjs
-const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));
+const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
 const current = dv.current();
 const world = gdr.linkKey(current.mondo_attivo);
 const asArray = value => dv.array(value ?? []).array();

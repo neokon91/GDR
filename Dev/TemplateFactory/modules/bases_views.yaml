@@ -1,0 +1,54 @@
+id: bases_views
+purpose: Contratti per viste Bases generate o mantenute da TemplateFactory.
+version: 0.1.0
+views:
+  worldbuilding_codex:
+    file: z.bases/Worldbuilding.base
+    source_folders:
+      - Mondi/Culture
+      - Mondi/Religioni
+      - Mondi/Societa
+      - Mondi/Cosmologia
+    required_fields:
+      - nome
+      - categoria
+      - tipo
+      - stato
+      - mondo
+      - uso_al_tavolo
+      - player_safe
+      - connessioni
+    formulas:
+      - prontezza
+    fallback_dataview_block: linked_connections_table
+  atlas_maps:
+    file: z.bases/Atlante Mappe.base
+    source_folders:
+      - Risorse/Mappe
+      - Mondi/Luoghi
+    required_fields:
+      - nome
+      - tipo
+      - stato
+      - coordinates
+      - luoghi
+      - icon
+      - color
+    map_view: true
+    fallback_dataview_block: map_assets
+  sessions:
+    file: z.bases/Incontri.base
+    source_folders:
+      - Mondi/Incontri
+    required_fields:
+      - nome
+      - stato
+      - mondo
+      - creature
+      - luoghi
+      - missioni
+    fallback_markdown: encounter
+contracts:
+  base_fields_must_exist_in_fields_core_or_domain_module: true
+  every_map_view_needs_markdown_table_fallback: true
+  formulas_should_remain_lightweight: true

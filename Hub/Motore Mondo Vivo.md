@@ -34,7 +34,7 @@ campagne_attive: []
 `BUTTON[economia-e-rotte-economia-e-rotte-2]`
 
 ```dataviewjs
-const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));
+const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
 const current = dv.current();
 const world = gdr.linkKey(current.mondo_attivo);
 const campaigns = new Set(dv.array(current.campagne_attive ?? []).map(gdr.linkKey).array());

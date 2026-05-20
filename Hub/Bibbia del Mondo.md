@@ -23,7 +23,7 @@ Mondo:
 ## Identità
 
 ```dataviewjs
-const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));
+const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
 const worldPath = gdr.linkKey(dv.current().mondo_attivo);
 const worlds = dv.pages('"Mondi"')
   .where(p => gdr.isReal(p) && p.categoria === "mondo" && p.stato !== "archiviata")
@@ -56,28 +56,28 @@ if (!worlds.length) {
 ## Articoli Del Mondo
 
 ```dataviewjs
-const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));
+const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
 gdr.renderCodexEditorial(dv, dv.current().mondo_attivo);
 ```
 
 ## Pronti Da Mostrare
 
 ```dataviewjs
-const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));
+const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
 gdr.renderCodexReadyShowcase(dv, dv.current().mondo_attivo);
 ```
 
 ## Pronti Da Giocare
 
 ```dataviewjs
-const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));
+const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
 gdr.renderCodexReadyToPlay(dv, dv.current().mondo_attivo);
 ```
 
 ## Buchi Del Codex
 
 ```dataviewjs
-const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));
+const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
 const worldPath = gdr.linkKey(dv.current().mondo_attivo);
 const has = value => Array.isArray(value) ? value.length > 0 : String(value ?? "").trim().length > 0;
 const rows = [];

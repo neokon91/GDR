@@ -19,7 +19,7 @@ mondo_attivo: ""
 `BUTTON[lore-capture-z-modelli-lore-capture-md]`
 
 ```dataviewjs
-const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));
+const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
 const current = dv.current();
 const world = gdr.linkKey(current.mondo_attivo);
 const asArray = value => dv.array(value ?? []).array();

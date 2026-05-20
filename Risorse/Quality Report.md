@@ -57,7 +57,7 @@ else dv.table(["Nota", "Problema", "Stato"], rows.slice(0, 40));
 ## Pubblicazione Giocatori
 
 ```dataviewjs
-const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));
+const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
 gdr.renderPublicSafety(dv);
 ```
 

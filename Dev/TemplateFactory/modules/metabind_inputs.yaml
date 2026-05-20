@@ -1,0 +1,88 @@
+id: metabind_inputs
+purpose: Input Meta Bind canonici generabili nei template Jinja.
+version: 0.1.0
+inputs:
+  mondo:
+    field: mondo
+    template_name: mondo
+    syntax: '`INPUT[mondo][:mondo]`'
+    fallback: 'Mondo: [[Mondi/Mondo]]'
+  stato:
+    field: stato
+    template_name: stato
+    syntax: '`INPUT[stato][:stato]`'
+    fallback: 'Stato: bozza'
+  stato_base:
+    field: stato
+    template_name: stato base
+    syntax: '`INPUT[stato base][:stato]`'
+    fallback: 'Stato: bozza'
+  canonico:
+    field: canonico
+    template_name: canonico
+    syntax: '`INPUT[canonico][:canonico]`'
+    fallback: 'Canonico: false'
+  pubblico:
+    field: pubblico
+    inline_syntax: '`INPUT[toggle:pubblico]`'
+    fallback: 'Pubblico: false'
+  pressione:
+    field: pressione
+    template_name: pressione
+    syntax: '`INPUT[pressione][:pressione]`'
+    fallback: 'Pressione: 0'
+  prossima_mossa:
+    field: prossima_mossa
+    template_name: prossima_mossa
+    syntax: '`INPUT[prossima_mossa][:prossima_mossa]`'
+    fallback: 'Prossima mossa:'
+  player_safe:
+    field: player_safe
+    template_name: player_safe
+    syntax: '`INPUT[player_safe][:player_safe]`'
+    fallback: 'Player-safe:'
+  connessioni:
+    field: connessioni
+    template_name: connessioni
+    syntax: '`INPUT[connessioni][:connessioni]`'
+    fallback: 'Connessioni:'
+  luoghi:
+    field: luoghi
+    template_name: luoghi
+    syntax: '`INPUT[luoghi][:luoghi]`'
+    fallback: 'Luoghi:'
+  fazioni:
+    field: fazioni
+    template_name: fazioni
+    syntax: '`INPUT[fazioni][:fazioni]`'
+    fallback: 'Fazioni:'
+  missioni:
+    field: missioni
+    template_name: missioni
+    syntax: '`INPUT[missioni][:missioni]`'
+    fallback: 'Missioni:'
+  tracciati:
+    field: tracciati
+    template_name: tracciati
+    syntax: '`INPUT[tracciati][:tracciati]`'
+    fallback: 'Clock e tracciati:'
+  entita_impattate:
+    field: entita_impattate
+    template_name: entita_impattate
+    syntax: '`INPUT[entita_impattate][:entita_impattate]`'
+    fallback: 'Entita impattate:'
+  propaga_a:
+    field: propaga_a
+    template_name: propaga_a
+    syntax: '`INPUT[propaga_a][:propaga_a]`'
+    fallback: 'Propaga a:'
+  list_block:
+    syntax: |-
+      ```meta-bind
+      INPUT[list:{{ field }}]
+      ```
+    fallback: '- Voce da compilare'
+contracts:
+  field_must_exist_in: fields_core
+  generated_inputs_must_be_listed_in: plugin_bindings.meta_bind
+  fallback_required: true

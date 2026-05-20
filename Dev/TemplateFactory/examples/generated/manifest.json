@@ -1,0 +1,27 @@
+{
+  "generated_at": "2026-05-20T21:29:35.379516+00:00",
+  "source": "Dev/TemplateFactory",
+  "mode": "preview",
+  "files": [
+    {
+      "blueprint": "creature_encounter",
+      "path": "Dev/TemplateFactory/examples/generated/creature_encounter.preview.md",
+      "bytes": 509
+    },
+    {
+      "blueprint": "map_asset",
+      "path": "Dev/TemplateFactory/examples/generated/map_asset.preview.md",
+      "bytes": 573
+    },
+    {
+      "blueprint": "session",
+      "path": "Dev/TemplateFactory/examples/generated/session.preview.md",
+      "bytes": 1322
+    },
+    {
+      "blueprint": "world_entity",
+      "path": "Dev/TemplateFactory/examples/generated/world_entity.preview.md",
+      "bytes": 1079
+    }
+  ]
+}

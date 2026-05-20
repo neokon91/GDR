@@ -1,0 +1,68 @@
+id: dataview_blocks
+purpose: Blocchi Dataview e DataviewJS riusabili nei template generati.
+version: 0.1.0
+blocks:
+  linked_connections_table:
+    type: dataview
+    use_for:
+      - connessioni
+      - world_entity
+    code: |-
+      TABLE categoria, tipo, stato, pressione, prossima_mossa
+      FROM "Mondi"
+      WHERE contains(this.connessioni, file.link)
+      SORT categoria ASC, file.name ASC
+    fallback: |-
+      | Nota | Categoria | Stato | Pressione | Prossima mossa |
+      | --- | --- | --- | --- | --- |
+  feedback_creazione:
+    type: dataviewjs
+    use_for:
+      - controllo
+      - world_entity
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      gdr.renderCreationFeedback(dv);
+    fallback: |-
+      - Verificare mondo.
+      - Verificare uso al tavolo.
+      - Verificare player-safe.
+      - Verificare almeno due connessioni.
+  pressure_list:
+    type: dataviewjs
+    use_for:
+      - dashboard
+      - session
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/gdr_views.js"));
+      gdr.renderPressureList(dv);
+    fallback: |-
+      | Nota | Tipo | Stato | Pressione | Prossima mossa |
+      | --- | --- | --- | --- | --- |
+  session_output:
+    type: dataviewjs
+    use_for:
+      - session
+      - post_sessione
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/gdr_views.js"));
+      gdr.renderSessionOutput(dv, dv.current());
+    fallback: |-
+      | Tipo | Voce |
+      | --- | --- |
+  map_assets:
+    type: dataview
+    use_for:
+      - map_asset
+    code: |-
+      TABLE tipo, stato, coordinates, luoghi
+      FROM "Risorse/Mappe"
+      WHERE stato != "archiviata"
+      SORT file.name ASC
+    fallback: |-
+      | Mappa | Tipo | Coordinate | Luoghi |
+      | --- | --- | --- | --- |
+contracts:
+  dataviewjs_has_no_file_writes: true
+  empty_state_required: true
+  fallback_required: true

@@ -1,0 +1,82 @@
+id: tabs
+purpose: Layout tabs riusabili con fallback leggibile.
+version: 0.1.0
+layouts:
+  world_entity:
+    syntax: tabs
+    tabs:
+      - id: crea
+        label: Crea
+        sections:
+          - identita
+          - uso_al_tavolo
+      - id: connessioni
+        label: Connessioni
+        sections:
+          - connessioni
+          - propagazione
+      - id: articolo
+        label: Articolo
+        sections:
+          - player_safe
+          - segreto
+          - cambia_al_tavolo
+      - id: controllo
+        label: Controllo
+        sections:
+          - feedback_creazione
+  session:
+    syntax: tabs
+    tabs:
+      - id: prepara
+        label: Prepara
+        sections:
+          - obiettivo
+          - apertura
+          - scelta
+          - pressioni
+      - id: ancore
+        label: Ancore
+        sections:
+          - mondo
+          - luoghi
+          - fazioni
+          - missioni
+      - id: live
+        label: Live
+        sections:
+          - cockpit
+          - appunti_live
+      - id: dopo
+        label: Dopo
+        sections:
+          - conseguenze
+          - recap_pubblico
+          - recap_dm
+  map_asset:
+    syntax: tabs
+    tabs:
+      - id: mappa
+        label: Mappa
+        sections:
+          - cosa_mostra
+          - pin
+      - id: dm
+        label: DM
+        sections:
+          - layer_dm
+      - id: pubblico
+        label: Pubblico
+        sections:
+          - layer_pubblico
+      - id: fallback
+        label: Fallback
+        sections:
+          - fallback_markdown
+syntax:
+  open: '````tabs'
+  tab_marker: 'tab: {{ label }}'
+  close: '````'
+contracts:
+  use_four_backticks_when_nested_codeblocks: true
+  each_tab_needs_markdown_fallback: true

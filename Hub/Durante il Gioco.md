@@ -12,7 +12,7 @@ cssclasses:
 ## Sessione Attiva
 
 ```dataviewjs
-const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));
+const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
 const active = gdr.activeSession(dv);
 gdr.renderActiveSessionBanner(dv);
 
@@ -79,7 +79,7 @@ if (!active) {
 ## Quadro Di Regia
 
 ```dataviewjs
-const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));
+const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
 const active = gdr.activeSession(dv);
 
 const count = value => dv.array(value ?? []).length;
@@ -117,7 +117,7 @@ tab: Scena
 ### Contesto Mondo
 
 ```dataviewjs
-const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));
+const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
 const active = gdr.activeSession(dv);
 
 if (!active) {
@@ -133,21 +133,21 @@ if (!active) {
 ### Lore Collegata
 
 ```dataviewjs
-const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));
+const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
 gdr.renderSessionLoreCards(dv);
 ```
 
 ### Missioni Della Sessione
 
 ```dataviewjs
-const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));
+const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
 gdr.renderSessionMissionCards(dv);
 ```
 
 ### Clock Della Sessione
 
 ```dataviewjs
-const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));
+const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
 gdr.renderSessionClockCards(dv);
 ```
 
@@ -218,7 +218,7 @@ tab: Pressioni
 ### Pressioni Attive
 
 ```dataviewjs
-const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));
+const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
 const active = gdr.activeSession(dv);
 
 const sessionFactions = new Set(dv.array(active?.fazioni ?? []).map(link => link.path ?? String(link)).array());
@@ -275,7 +275,7 @@ tab: Persone
 #### PNG Della Sessione
 
 ```dataviewjs
-const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));
+const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
 const active = gdr.activeSession(dv);
 
 const linked = dv.array(active?.personaggi ?? []);
@@ -309,7 +309,7 @@ tab: Materiali
 #### Incontri
 
 ```dataviewjs
-const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));
+const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
 const active = gdr.activeSession(dv);
 
 let pages = dv.array(active?.incontri ?? [])
@@ -333,7 +333,7 @@ dv.table(
 #### Creature
 
 ```dataviewjs
-const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));
+const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
 const active = gdr.activeSession(dv);
 
 const pages = dv.array(active?.creature ?? [])
@@ -351,7 +351,7 @@ if (!pages.length) {
 #### Oggetti Da Assegnare
 
 ```dataviewjs
-const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));
+const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
 const active = gdr.activeSession(dv);
 
 let pages = dv.array(active?.oggetti ?? [])
@@ -372,7 +372,7 @@ dv.table(["Oggetto", "Tipo", "Rarita", "Luogo", "Proprietario"], pages.map(p => 
 #### Dispense Di Scena
 
 ```dataviewjs
-const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));
+const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
 const active = gdr.activeSession(dv);
 
 let pages = dv.array(active?.dispense ?? [])
@@ -394,14 +394,14 @@ dv.table(["Dispensa", "Tipo", "Luogo", "Personaggi"], pages.map(p => [p.file.lin
 
 
 ```dataviewjs
-const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));
+const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
 gdr.renderSessionMapCards(dv);
 ```
 
 #### Musica e Risorse
 
 ```dataviewjs
-const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));
+const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
 const active = gdr.activeSession(dv);
 
 const encounterPages = dv.array(active?.incontri ?? [])

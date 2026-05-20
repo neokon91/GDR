@@ -84,14 +84,14 @@ SORT categoria ASC, file.name ASC
 ### Feedback Creazione
 
 ```dataviewjs
-const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));
+const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
 gdr.renderCreationFeedback(dv);
 ```
 
 ### Mappe Del Luogo
 
 ```dataviewjs
-const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));
+const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
 gdr.renderPlaceMapCards(dv);
 ```
 

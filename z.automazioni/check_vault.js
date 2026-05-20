@@ -32,6 +32,13 @@ const REQUIRED_FILES = [
     "Dev/TemplateFactory/modules/fields_core.yaml",
     "Dev/TemplateFactory/modules/plugin_bindings.yaml",
     "Dev/TemplateFactory/modules/template_blueprints.yaml",
+    "Dev/TemplateFactory/modules/sections.yaml",
+    "Dev/TemplateFactory/modules/callouts.yaml",
+    "Dev/TemplateFactory/modules/tabs.yaml",
+    "Dev/TemplateFactory/modules/dataview_blocks.yaml",
+    "Dev/TemplateFactory/modules/metabind_inputs.yaml",
+    "Dev/TemplateFactory/modules/metabind_buttons.yaml",
+    "Dev/TemplateFactory/modules/bases_views.yaml",
     "Dev/TemplateFactory/modules/workflows.yaml",
     "Hub/1. DM Dashboard.md",
     "Hub/Atlante del Mondo.md",
@@ -73,13 +80,19 @@ const REQUIRED_BASE_FILES = [
 ];
 const REQUIRED_LAYER_FILES = [
     "z.automazioni/helpers.js",
+    "z.automazioni/audit_template_migration.py",
+    "z.automazioni/check_template_factory.py",
+    "z.automazioni/render_template_factory.py",
     "z.automazioni/session_context.js",
     "z.automazioni/meta_actions.js",
+    "z.automazioni/template_router.js",
     "z.automazioni/wizard_layer.js",
     "z.automazioni/world_taxonomy.js",
     "z.automazioni/world_entity.js",
     "z.automazioni/nuovo_mondo_homebrew.js",
+    "z.engine/README.md",
     "z.engine/gdr_views.js",
+    "z.engine/session_views.js",
     "z.modelli/azioni/Marca Canonico.md",
     "z.modelli/azioni/Marca Rumor.md",
     "z.modelli/azioni/Archivia.md",
@@ -774,6 +787,25 @@ for (const file of markdownFiles.filter(file => rel(file).startsWith("z.modelli/
         if (!automationNames.has(helper)) {
             errors.push(`${rel(file)}: helper Templater senza script in z.automazioni (${helper}.js)`);
         }
+    }
+}
+
+for (const file of markdownFiles.filter(file => /(^|\/)[^/]*Router\.md$/.test(rel(file)))) {
+    const text = fs.readFileSync(file, "utf8");
+    const fileRel = rel(file);
+    if (/^<%\*/m.test(text)) {
+        errors.push(`${fileRel}: router con blocco Templater multilinea; usare tp.user.template_router`);
+    }
+    if (!text.trimStart().startsWith("<% await tp.user.")) {
+        errors.push(`${fileRel}: router senza singola entry Templater iniziale`);
+    }
+}
+
+const operationalViewRoots = /^(z\.modelli|Hub|Risorse|Mondi)\//;
+for (const file of markdownFiles.filter(file => operationalViewRoots.test(rel(file)))) {
+    const text = fs.readFileSync(file, "utf8");
+    if (text.includes('z.automazioni/session_context.js')) {
+        errors.push(`${rel(file)}: vista operativa punta a session_context.js; usare z.engine/session_views.js`);
     }
 }
 

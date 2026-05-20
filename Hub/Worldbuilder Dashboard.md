@@ -56,7 +56,7 @@ campagne_attive: []
 ## Crea Il Tuo Mondo
 
 ```dataviewjs
-const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));
+const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
 const steps = [
   ["1", "Identità", "Tono, temi, promessa e verità canoniche"],
   ["2", "Struttura", "Geografia, culture, poteri, storia e cosmologia"],
@@ -146,7 +146,7 @@ tab: Mappe
 ## Panoramica Del Mondo
 
 ```dataviewjs
-const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));
+const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
 const count = (source, predicate = () => true) => dv.pages(source).where(predicate).length;
 const notIndex = p => gdr.isReal(p) && p.file.name !== p.file.folder?.split("/").pop() && p.stato !== "archiviata";
 
@@ -199,7 +199,7 @@ tab: Campagna
 ### Campagna Filtrata
 
 ```dataviewjs
-const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));
+const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
 const current = dv.current();
 const campaigns = new Set(dv.array(current.campagne_attive ?? []).map(link => link.path ?? String(link)).array());
 const world = current.mondo_attivo?.path ?? String(current.mondo_attivo ?? "");
@@ -226,7 +226,7 @@ tab: Connessioni
 ### Densità E Connessioni
 
 ```dataviewjs
-const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));
+const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
 const isReal = p => gdr.isReal(p) && p.stato !== "archiviata";
 const asArray = value => dv.array(value ?? []).array();
 const linkCount = p => [
@@ -286,7 +286,7 @@ tab: Atlante
 ### Atlante Del Mondo
 
 ```dataviewjs
-const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));
+const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
 const current = dv.current();
 const world = gdr.linkKey(current.mondo_attivo);
 const campaigns = new Set(dv.array(current.campagne_attive ?? []).map(gdr.linkKey).array());
@@ -313,7 +313,7 @@ tab: Poteri
 ### Poteri In Movimento
 
 ```dataviewjs
-const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));
+const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
 const current = dv.current();
 const world = gdr.linkKey(current.mondo_attivo);
 const real = p => gdr.isReal(p) && p.stato !== "archiviata";
@@ -334,7 +334,7 @@ tab: PNG
 ### Relazioni PNG
 
 ```dataviewjs
-const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));
+const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
 const current = dv.current();
 const world = gdr.linkKey(current.mondo_attivo);
 const real = p => gdr.isReal(p) && p.stato !== "archiviata";
@@ -446,7 +446,7 @@ tab: Buchi
 ### Buchi Di Mondo
 
 ```dataviewjs
-const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));
+const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
 const current = dv.current();
 const world = gdr.linkKey(current.mondo_attivo);
 const real = p => gdr.isReal(p) && p.stato !== "archiviata";

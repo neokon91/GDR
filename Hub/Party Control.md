@@ -23,7 +23,7 @@ Cockpit rapido per party, HP, condizioni, risorse, inventario, loot, quest perso
 ## Party
 
 ```dataviewjs
-const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));
+const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
 gdr.renderPartyControl(dv);
 ```
 

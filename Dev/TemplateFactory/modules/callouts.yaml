@@ -1,0 +1,74 @@
+id: callouts
+purpose: Callout GDR riusabili nei template generati.
+version: 0.1.0
+callouts:
+  infobox:
+    type: infoboxwiki
+    title: Codex
+    collapsible: true
+    use_for:
+      - metadata rapidi
+      - riepilogo laterale
+    fallback_heading: Scheda rapida
+  scena:
+    type: scena
+    title: Scena
+    use_for:
+      - apertura sessione
+      - blocchi giocabili
+    fallback_heading: Scena
+  lettura:
+    type: lettura
+    title: Versione pubblica
+    collapsible: true
+    use_for:
+      - player_safe
+      - recap_pubblico
+    fallback_heading: Versione pubblica
+  segreto:
+    type: segreto
+    title: Livello DM
+    collapsible: true
+    use_for:
+      - segreti
+      - recap_dm
+    fallback_heading: Note DM
+  timer:
+    type: timer
+    title: Pressione
+    collapsible: true
+    use_for:
+      - prossima_mossa
+      - conseguenze
+      - clock
+    fallback_heading: Pressione
+  regia:
+    type: regia
+    title: Regia
+    use_for:
+      - cockpit
+      - controlli live
+    fallback_heading: Regia
+  missione:
+    type: missione
+    title: Uso al tavolo
+    use_for:
+      - gancio
+      - uso_al_tavolo
+    fallback_heading: Uso al tavolo
+  conflitto:
+    type: conflitto
+    title: Conflitto
+    collapsible: true
+    use_for:
+      - prossima_mossa
+      - posta
+    fallback_heading: Conflitto
+syntax:
+  standard: '> [!{{ type }}] {{ title }}'
+  collapsible: '> [!{{ type }}]- {{ title }}'
+  nested_prefix: '> >'
+contracts:
+  nested_callouts_allowed: true
+  fallback_required: true
+  avoid_plugin_only_content: true

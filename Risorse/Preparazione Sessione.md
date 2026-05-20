@@ -20,14 +20,14 @@ Questa pagina serve a trasformare un mondo gia costruito in una sessione live. S
 ## Sessione Attiva
 
 ```dataviewjs
-const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));
+const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
 gdr.renderActiveSessionBanner(dv);
 ```
 
 ## Sessione Da Rendere Giocabile
 
 ```dataviewjs
-const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));
+const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
 gdr.renderPreparationFocus(dv);
 ```
 

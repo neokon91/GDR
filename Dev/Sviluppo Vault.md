@@ -76,7 +76,7 @@ Regole per le automazioni di creazione:
 - `z.modelli/azioni`: template sottili usati dai pulsanti Meta Bind operativi. La logica deve stare in `z.automazioni/meta_actions.js`.
 - `z.modelli/wizard`: wizard centralizzati. La logica deve stare in `z.automazioni/wizard_layer.js`.
 - `z.automazioni`: script Templater usati dai template e script CLI di manutenzione. Se cambi un percorso qui, aggiorna anche dashboard e Dataview.
-- `z.engine`: componenti JS riusabili per viste operative. Nuova logica complessa va qui o in `session_context.js`, non copiata in blocchi DataviewJS sparsi.
+- `z.engine`: componenti JS riusabili per viste operative. Nuova logica complessa va qui, non copiata in blocchi DataviewJS sparsi.
 - `z.bacheche`: bacheche Kanban per preparazione e creature.
 
 ## Plugin Layer Interno
@@ -96,12 +96,12 @@ Regole:
 - non mettere logica lunga dentro un pulsante Meta Bind;
 - non duplicare azioni di canone, propagazione, clock o recap nei template;
 - quando un campo diventa ricorrente, aggiungilo a Meta Bind input template, Metadata Menu preset e fileClass rilevanti;
-- quando una vista DataviewJS supera poche righe, spostala in `z.engine` o `session_context.js`;
+- quando una vista DataviewJS supera poche righe, spostala in `z.engine`;
 - ogni nuovo file essenziale del layer va aggiunto a `REQUIRED_LAYER_FILES` in `z.automazioni/check_vault.js`.
 
 ## Runtime Live E Session Context
 
-La logica comune di runtime sta in `z.automazioni/session_context.js`.
+La logica comune di runtime viene richiamata da `z.engine/session_views.js`. Il file `z.automazioni/session_context.js` resta come implementazione legacy dietro il bridge, per non rompere le funzioni esistenti durante la migrazione.
 
 Responsabilita:
 
