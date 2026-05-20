@@ -20,6 +20,16 @@ properties:
     displayName: Scadenza
   prossima_mossa:
     displayName: Prossima mossa
+  campagna:
+    displayName: Campagna
+  campagne:
+    displayName: Campagne
+  luoghi:
+    displayName: Luoghi
+  fazioni:
+    displayName: Fazioni
+  ricompense:
+    displayName: Ricompense
 views:
   - type: table
     name: Aperte
@@ -41,6 +51,67 @@ views:
       - property: pressione
         direction: DESC
       - property: scadenza_mondo
+        direction: ASC
+  - type: table
+    name: Sotto pressione
+    filters:
+      and:
+        - stato != "archiviata"
+        - stato != "completata"
+        - stato != "fallita"
+        - pressione
+    order:
+      - nome
+      - stato
+      - pressione
+      - scadenza_mondo
+      - prossima_mossa
+      - fazioni
+      - luoghi
+    sort:
+      - property: pressione
+        direction: DESC
+      - property: prossima_mossa
+        direction: ASC
+  - type: table
+    name: Per campagna
+    filters:
+      and:
+        - stato != "archiviata"
+    order:
+      - nome
+      - stato
+      - campagna
+      - campagne
+      - mondo
+      - committente
+      - luoghi
+      - fazioni
+    sort:
+      - property: campagna
+        direction: ASC
+      - property: stato
+        direction: ASC
+      - property: nome
+        direction: ASC
+  - type: table
+    name: Chiusura
+    filters:
+      or:
+        - stato == "completata"
+        - stato == "fallita"
+        - stato == "archiviata"
+    order:
+      - nome
+      - stato
+      - tipo
+      - mondo
+      - ricompense
+      - prossima_mossa
+    sort:
+      - property: stato
+        direction: ASC
+      - property: nome
         direction: ASC
   - type: table
     name: Tutte

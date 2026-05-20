@@ -90,6 +90,7 @@ Prima integrazione a basso rischio, avviata in `z.bases`:
 - fatto: creare una vista Bases per `Mondi/Missioni` filtrata per `stato`, `mondo`, `pressione` e `scadenza_mondo`;
 - fatto: creare una vista Bases per `Mondi/Personaggi` con `tipo: png`, filtrata per `stato`, `fazione`, `luogo` e prossima mossa;
 - fatto: creare viste Bases pilota per `Mondi/Luoghi` e `Mondi/Incontri`;
+- fatto: aggiungere viste tabellari multiple per pressione, archivio, campagna, mondo, sessione, completamento dati e marker mappa;
 - linkare le viste da [[1. DM Dashboard]] come alternativa leggibile, non come sostituzione delle query Dataview;
 - verificare che una release senza uso diretto di Bases continui a funzionare.
 
@@ -121,7 +122,7 @@ Configurazione:
 | BRAT | tecnico | Tenere fuori dal percorso DM e dalla release pulita come funzione di manutenzione. |
 | Linter | supporto sviluppo | Configurato manuale e prudente; niente lint on save, SRD e mappe ignorati. |
 | Workspaces/Bookmarks | supportato | Workspaces core abilitato, tre layout salvati e segnalibri pronti per tavolo, worldbuilding e manutenzione. |
-| Maps per Bases | supportato | Plugin `maps` installato, base pilota e coordinate demo aggiunte. |
+| Maps per Bases | supportato | Plugin `maps` installato, base pilota, coordinate demo e viste tabellari per layer/marker aggiunte. |
 
 ## Prossime Integrazioni
 

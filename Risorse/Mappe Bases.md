@@ -13,9 +13,9 @@ plugin:
 
 Maps per Bases aggiunge una vista mappa ai file `.base`. Il plugin community `maps` e installato nel vault come **Maps 0.1.6**.
 
-## Vista Pilota
+## Viste
 
-Apri [[z.bases/Atlante Mappe.base]]. La prima vista e `Mappa`; la seconda e `Tabella` come fallback controllabile.
+Apri [[z.bases/Atlante Mappe.base]]. La vista `Mappa` mostra i marker; `Tabella` resta il fallback controllabile. `Per layer` serve a verificare politica, religione, commercio e conflitti. `Dati marker` isola coordinate, icone e colori quando devi correggere la resa sulla mappa.
 
 La base usa:
 

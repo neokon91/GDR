@@ -20,6 +20,16 @@ properties:
     displayName: Prossima mossa
   segreto:
     displayName: Segreto
+  vuole:
+    displayName: Vuole
+  sa:
+    displayName: Sa
+  leva:
+    displayName: Leva
+  relazioni:
+    displayName: Relazioni
+  missioni:
+    displayName: Missioni
 views:
   - type: table
     name: In gioco
@@ -34,6 +44,61 @@ views:
       - fazioni
       - pressione
       - prossima_mossa
+    sort:
+      - property: stato
+        direction: ASC
+      - property: nome
+        direction: ASC
+  - type: table
+    name: Pressione
+    filters:
+      and:
+        - stato != "archiviata"
+        - pressione
+    order:
+      - nome
+      - stato
+      - pressione
+      - vuole
+      - leva
+      - prossima_mossa
+      - missioni
+    sort:
+      - property: pressione
+        direction: DESC
+      - property: stato
+        direction: ASC
+  - type: table
+    name: Segreti e leve
+    filters:
+      and:
+        - stato != "archiviata"
+    order:
+      - nome
+      - ruolo
+      - sa
+      - segreto
+      - leva
+      - relazioni
+    sort:
+      - property: ruolo
+        direction: ASC
+      - property: nome
+        direction: ASC
+  - type: table
+    name: Archivio
+    filters:
+      or:
+        - stato == "archiviata"
+        - stato == "morto"
+        - stato == "scomparso"
+    order:
+      - nome
+      - stato
+      - ruolo
+      - luogo
+      - fazioni
+      - relazioni
     sort:
       - property: stato
         direction: ASC

@@ -22,6 +22,16 @@ properties:
     displayName: Pressione
   governante:
     displayName: Governante
+  fazioni:
+    displayName: Fazioni
+  personaggi:
+    displayName: Personaggi
+  missioni:
+    displayName: Missioni
+  promessa_al_tavolo:
+    displayName: Promessa al tavolo
+  prossima_mossa:
+    displayName: Prossima mossa
 views:
   - type: table
     name: Attivi
@@ -40,6 +50,46 @@ views:
     sort:
       - property: pericolo
         direction: DESC
+      - property: nome
+        direction: ASC
+  - type: table
+    name: Pericolosi
+    filters:
+      and:
+        - stato != "archiviata"
+        - pericolo
+    order:
+      - nome
+      - stato
+      - tipo
+      - pericolo
+      - pressione
+      - prossima_mossa
+      - missioni
+      - personaggi
+    sort:
+      - property: pericolo
+        direction: DESC
+      - property: pressione
+        direction: DESC
+  - type: table
+    name: Per mondo
+    filters:
+      and:
+        - stato != "archiviata"
+    order:
+      - nome
+      - mondo
+      - tipo
+      - luogo_padre
+      - fazioni
+      - governante
+      - promessa_al_tavolo
+    sort:
+      - property: mondo
+        direction: ASC
+      - property: luogo_padre
+        direction: ASC
       - property: nome
         direction: ASC
   - type: table

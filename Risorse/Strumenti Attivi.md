@@ -9,7 +9,7 @@ Per il primo avvio usa [[Risorse/Primo Avvio Strumenti]]. Se qualcosa non rispon
 ## Sempre Utili
 
 - **Dashboard e tabelle automatiche**: mostrano sessioni, missioni, PNG, bozze, materiali pronti e problemi da controllare.
-- **Viste modificabili**: le viste Bases pilota in `z.bases` permettono di correggere campi principali senza modificare query.
+- **Viste modificabili**: le viste Bases in `z.bases` permettono di correggere campi principali senza modificare query. Apri [[z.bases/Missioni.base]], [[z.bases/PNG.base]], [[z.bases/Luoghi.base]], [[z.bases/Incontri.base]] o [[z.bases/Atlante Mappe.base]] quando vuoi lavorare in tabella.
 - **Segnalibri e workspace**: [[Risorse/Workspaces e Segnalibri]] organizza accessi rapidi per tavolo, worldbuilding e manutenzione.
 - **Pulsanti di creazione**: creano sessioni, missioni, PNG, luoghi, incontri, oggetti e appunti gia impostati.
 - **Campi guidati**: aiutano a compilare stato, tipo, mondo, luoghi, fazioni e collegamenti senza ricordare la struttura.

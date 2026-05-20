@@ -6,9 +6,10 @@ Queste viste non sostituiscono Dataview: servono come layer modificabile sopra i
 
 | Base | Uso |
 | --- | --- |
-| `Missioni.base` | Missioni aperte, stato, pressione e prossima mossa. |
-| `PNG.base` | PNG in gioco, ruolo, luogo, fazioni e prossima mossa. |
-| `Luoghi.base` | Luoghi attivi, pericolo, gerarchia e governanti. |
-| `Incontri.base` | Incontri pronti, luogo, pericolo, creature e personaggi. |
+| `Missioni.base` | Missioni aperte, sotto pressione, per campagna, chiusura e vista completa. |
+| `PNG.base` | PNG in gioco, pressione, segreti/leve, archivio e schede rapide. |
+| `Luoghi.base` | Luoghi attivi, pericolosi, per mondo e gerarchia. |
+| `Incontri.base` | Incontri pronti, pericolo alto, per sessione e da completare. |
+| `Atlante Mappe.base` | Mappa, tabella, layer e dati marker. |
 
 Regola: aggiungere qui solo viste su frontmatter gia stabile. Le viste aggregate, i controlli complessi e le card operative restano in Dataview/DataviewJS.

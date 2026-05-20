@@ -49,3 +49,32 @@ views:
         direction: ASC
       - property: file.name
         direction: ASC
+  - type: table
+    name: Per layer
+    order:
+      - note.layer_mappa
+      - file.name
+      - note.tipo
+      - note.stato
+      - note.mondo
+      - note.coordinates
+    sort:
+      - property: note.layer_mappa
+        direction: ASC
+      - property: note.tipo
+        direction: ASC
+      - property: file.name
+        direction: ASC
+  - type: table
+    name: Dati marker
+    order:
+      - file.name
+      - note.coordinates
+      - note.icon
+      - note.color
+      - note.layer_mappa
+    sort:
+      - property: note.icon
+        direction: ASC
+      - property: file.name
+        direction: ASC

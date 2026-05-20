@@ -37,7 +37,7 @@ Conteggio su file Markdown del vault, escluso `dist`.
 | `fc-date` | 39 | Calendarium presente ma ancora leggero. |
 | `tabs` | 369 | Molto sfruttato, soprattutto su note lunghe e mostri. |
 | `zoommap` | 1 | Demo funzionante, non ancora uso esteso. |
-| `.base` | 0 prima del pilota | Bases era abilitato ma non usato. |
+| `.base` | 5 basi, 20 viste tabellari | Bases ora usa viste diverse per priorita, archivio, relazioni e dati marker. |
 | `#task` | 0 prima del pilota | Ora usato come filtro globale Tasks. |
 
 ## Stato Dopo Il Pilota
@@ -48,12 +48,13 @@ Implementato:
 - `z.bases/PNG.base`;
 - `z.bases/Luoghi.base`;
 - `z.bases/Incontri.base`;
+- `z.bases/Atlante Mappe.base`;
 - `z.bases/README.md`;
 - `#task` sulle checklist delle bacheche in `z.bacheche`.
 - [[Risorse/Task DM]] come vista Tasks dei task operativi, con fallback Dataview.
 - `.obsidian/plugins/obsidian-tasks-plugin/data.json` con global filter `#task`.
 
-Le viste Bases sono volutamente semplici: leggono frontmatter, permettono correzioni rapide e non duplicano logiche complesse.
+Le viste Bases sono volutamente semplici: leggono frontmatter, permettono correzioni rapide e non duplicano logiche complesse. Ogni base importante ha piu viste tabellari per separare lavoro attivo, pressione, archivio e controllo dei dati.
 
 ## Cosa Imparare Da Altri Vault
 
@@ -80,7 +81,8 @@ Pattern utili:
 
 Usare Bases per:
 
-- tabelle modificabili di Missioni, PNG, Luoghi e Incontri;
+- tabelle modificabili di Missioni, PNG, Luoghi, Incontri e mappe;
+- viste tabellari alternative sullo stesso dataset, per esempio aperte/archivio, pressione/segreti, per mondo/per sessione;
 - viste cards leggere per PNG, risorse o compendium;
 - correzione rapida di `stato`, `pressione`, `prossima_mossa`, `luogo`, `fazioni`;
 - viste mappa future solo quando `lat`, `lon`, `coordinate`, `tile` o campi equivalenti saranno stabili.
@@ -126,7 +128,7 @@ Non trasformare missioni e clock in task. Una missione ha stato, posta, pression
 ## Priorita Prossime
 
 1. Aprire le `.base` in Obsidian e verificare resa visuale, filtri e ordinamento.
-2. Linkare `z.bases/Missioni.base`, `z.bases/PNG.base`, `z.bases/Luoghi.base` e `z.bases/Incontri.base` da [[Risorse/Strumenti Attivi]] o da una nuova pagina operativa se risultano comode.
+2. Valutare se collegare le basi piu usate anche dalle dashboard, senza sostituire Dataview.
 3. Verificare in Obsidian che [[Risorse/Task DM]] mostri solo checklist operative e non checklist di documentazione.
 4. Valutare Maps per Bases solo dopo aver deciso campi coordinate per luoghi, rotte e mercati.
 5. Non aggiungere QuickAdd o Commander finche non emerge un attrito concreto nei test manuali.

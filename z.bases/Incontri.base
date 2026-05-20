@@ -20,6 +20,14 @@ properties:
     displayName: Creature
   personaggi:
     displayName: Personaggi
+  sessioni:
+    displayName: Sessioni
+  mappe:
+    displayName: Mappe
+  ricompense:
+    displayName: Ricompense
+  prossima_mossa:
+    displayName: Prossima mossa
 views:
   - type: table
     name: Pronti
@@ -40,3 +48,60 @@ views:
         direction: ASC
       - property: pericolo
         direction: DESC
+  - type: table
+    name: Pericolo alto
+    filters:
+      and:
+        - stato != "archiviata"
+        - pericolo
+    order:
+      - nome
+      - stato
+      - pericolo
+      - pressione
+      - luogo
+      - creature
+      - prossima_mossa
+    sort:
+      - property: pericolo
+        direction: DESC
+      - property: pressione
+        direction: DESC
+  - type: table
+    name: Per sessione
+    filters:
+      and:
+        - stato != "archiviata"
+    order:
+      - nome
+      - stato
+      - sessioni
+      - luogo
+      - mappe
+      - personaggi
+      - ricompense
+    sort:
+      - property: sessioni
+        direction: ASC
+      - property: stato
+        direction: ASC
+  - type: table
+    name: Da completare
+    filters:
+      or:
+        - '!creature'
+        - '!luogo'
+        - stato == "bozza"
+    order:
+      - nome
+      - stato
+      - tipo
+      - luogo
+      - creature
+      - mappe
+      - prossima_mossa
+    sort:
+      - property: stato
+        direction: ASC
+      - property: nome
+        direction: ASC
