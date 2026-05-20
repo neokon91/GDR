@@ -107,6 +107,8 @@ settings:
   --gdr-border: color-mix(in srgb, var(--text-muted) 20%, transparent);
   --gdr-surface: color-mix(in srgb, var(--background-secondary) 78%, transparent);
   --gdr-surface-strong: color-mix(in srgb, var(--background-secondary) 92%, var(--background-primary));
+  --gdr-sidebar-bg: color-mix(in srgb, var(--background-primary) 94%, var(--text-normal) 6%);
+  --gdr-sidebar-header-bg: color-mix(in srgb, var(--background-primary) 90%, var(--text-normal) 10%);
   --gdr-accent-soft: color-mix(in srgb, rgb(var(--gdr-accent-rgb)) 13%, transparent);
   --gdr-accent-line: color-mix(in srgb, rgb(var(--gdr-accent-rgb)) 48%, transparent);
   --gdr-shadow: var(--gdr-card-depth);
@@ -157,6 +159,57 @@ body.theme-dark {
   --gdr-border: color-mix(in srgb, var(--text-muted) 26%, transparent);
   --gdr-surface: color-mix(in srgb, var(--background-secondary) 84%, transparent);
   --gdr-surface-strong: color-mix(in srgb, var(--background-secondary) 86%, var(--background-primary));
+  --gdr-sidebar-bg: color-mix(in srgb, var(--background-primary) 92%, white 8%);
+  --gdr-sidebar-header-bg: color-mix(in srgb, var(--background-primary) 86%, white 14%);
+}
+
+.workspace-ribbon,
+.workspace-split.mod-left-split,
+.workspace-split.mod-right-split {
+  background: var(--gdr-sidebar-bg) !important;
+}
+
+.workspace-ribbon {
+  border-right: 1px solid var(--background-modifier-border);
+}
+
+.workspace .mod-left-split,
+.workspace .mod-right-split,
+.workspace .mod-sidedock,
+.workspace-sidedock-vault-profile {
+  background: var(--gdr-sidebar-bg) !important;
+}
+
+.workspace-split.mod-left-split .workspace-tabs,
+.workspace-split.mod-right-split .workspace-tabs,
+.workspace-split.mod-left-split .workspace-leaf,
+.workspace-split.mod-right-split .workspace-leaf,
+.workspace-split.mod-left-split .workspace-leaf-content,
+.workspace-split.mod-right-split .workspace-leaf-content {
+  background: var(--gdr-sidebar-bg) !important;
+}
+
+.workspace-split.mod-left-split .workspace-tab-header-container,
+.workspace-split.mod-right-split .workspace-tab-header-container,
+.workspace-split.mod-left-split .nav-header,
+.workspace-split.mod-right-split .nav-header {
+  background: var(--gdr-sidebar-header-bg) !important;
+}
+
+.nav-folder-title,
+.nav-file-title,
+.workspace-ribbon .side-dock-ribbon-action {
+  color: var(--text-muted) !important;
+}
+
+.nav-folder-title:hover,
+.nav-file-title:hover,
+.nav-folder-title.is-active,
+.nav-file-title.is-active,
+.workspace-ribbon .side-dock-ribbon-action:hover,
+.workspace-ribbon .side-dock-ribbon-action.is-active {
+  color: var(--text-normal) !important;
+  background: var(--gdr-accent-soft) !important;
 }
 
 .markdown-preview-view,
