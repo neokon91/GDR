@@ -12,7 +12,7 @@ fieldsOrder:
   - missioni
   - layer_mappa
   - tipo_mappa
-  - coordinate
+  - coordinates
 fields:
   - name: nome
     id: nome
@@ -72,9 +72,8 @@ fields:
     id: tipo_mappa
     type: Input
     options: {}
-  - name: coordinate
-    id: coordinate
+  - name: coordinates
+    id: coordinates
     type: Input
     options: {}
 ---
-

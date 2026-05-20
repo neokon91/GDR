@@ -36,13 +36,42 @@ tab: Crea
 tab: Connessioni
 
 > [!regia] Collegala Subito
+> Una voce isolata resta enciclopedia. Scegli almeno due note vive.
+>
 > `INPUT[inlineListSuggester(optionQuery("Mondi"), useLinks(partial), allowOther):connessioni]`
+
+```dataview
+{{ modules.dataview_blocks.blocks.linked_connections_table.code }}
+```
+
+> [!timer]- Propagazione
+> Entita impattate:
+> `INPUT[inlineListSuggester(optionQuery("Mondi"), useLinks(partial), allowOther):entita_impattate]`
+>
+> Propaga a:
+> `INPUT[inlineListSuggester(optionQuery("Mondi"), useLinks(partial), allowOther):propaga_a]`
+
+tab: Articolo
+
+> [!lettura] Cosa Sa Un Abitante
+> ```meta-bind
+> INPUT[list:abitante_sa]
+> ```
+
+> [!segreto]- Cosa Sa Il DM
+> ```meta-bind
+> INPUT[list:dm_sa]
+> ```
+
+> [!scena] Cosa Cambia Al Tavolo
+> ```meta-bind
+> INPUT[list:cambia_al_tavolo]
+> ```
 
 tab: Controllo
 
 ```dataviewjs
-const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
-gdr.renderCreationFeedback(dv);
+{{ modules.dataview_blocks.blocks.feedback_creazione.code }}
 ```
 ````
 
@@ -53,4 +82,8 @@ gdr.renderCreationFeedback(dv);
 | Identita |  |
 | Uso al tavolo |  |
 | Connessioni |  |
+| Entita impattate |  |
+| Propaga a |  |
 | Versione pubblica |  |
+| Cosa sa il DM |  |
+| Cosa cambia al tavolo |  |

@@ -78,3 +78,16 @@ const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js")
 gdr.renderCreationFeedback(dv);
 ```
 ````
+
+## Fallback Markdown
+
+| Blocco | Valore |
+| --- | --- |
+| Identita |  |
+| Uso al tavolo |  |
+| Connessioni |  |
+| Entita impattate |  |
+| Propaga a |  |
+| Versione pubblica |  |
+| Cosa sa il DM |  |
+| Cosa cambia al tavolo |  |

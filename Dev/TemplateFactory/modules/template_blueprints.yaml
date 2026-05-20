@@ -63,6 +63,16 @@ blueprints:
       - incontri
       - media
       - post_sessione
+    preserved_sections:
+      - ancore_mondo
+      - cockpit_live
+      - calendario_sessione
+      - scaletta_giocabile
+      - output_sessione
+      - ricompense
+      - resoconto
+      - prossima_sessione
+    migration_rule: estrarre sezioni riusabili dalla Sessione reale; non sostituire il template finche preview e target non coprono cockpit, calendario, output e resoconto.
     plugin_features:
       - templater
       - meta_bind
@@ -134,6 +144,16 @@ blueprints:
       - obiettivo
       - complicazioni
       - ricompense
+    preserved_sections:
+      - infobox_incontro
+      - tiri_rapidi
+      - gestione_incontro
+      - rete_png
+      - round_condizioni
+      - mappe_audio
+      - tattiche_varianti
+      - esiti
+    migration_rule: usare TemplateFactory per componenti riusabili; non sostituire Incontro reale finche preview non copre tracker, rete, media tattici ed esiti.
     plugin_features:
       - fantasy_statblocks
       - initiative_tracker

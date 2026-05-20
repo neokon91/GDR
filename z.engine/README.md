@@ -10,6 +10,15 @@ Runtime di rendering per DataviewJS e JS Engine. I file qui dentro devono produr
 - La creazione e lo spostamento delle note restano in funzioni Templater dentro `z.automazioni/`.
 - Le nuove note operative non devono puntare direttamente a `z.automazioni/session_context.js`.
 
+## Migrazione Da session_context
+
+`session_views.js` carica ancora il runtime legacy come fallback, ma queste famiglie di rendering sono migrate nel layer `z.engine`:
+
+- creation feedback
+- dashboard sessione essenziale: sessione attiva, cockpit e scaletta giocabile
+- mappe: atlante, luogo e sessione
+- player view: statistiche pubbliche, recap, mappa e controllo sicurezza pubblico
+
 ## Uso
 
 ```dataviewjs

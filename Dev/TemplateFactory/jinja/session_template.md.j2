@@ -58,8 +58,7 @@ tab: Dopo
 ````
 
 ```dataviewjs
-const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
-gdr.renderPlayableOutline(dv, dv.current());
+{{ modules.dataview_blocks.blocks.playable_outline.code }}
 ```
 
 ## Fallback Markdown

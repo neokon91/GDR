@@ -43,7 +43,7 @@ Scegli una cosa sola. Il vault serve prima a creare un mondo homebrew giocabile,
 ## Prossima Azione
 
 ```dataviewjs
-const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));
+const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
 gdr.renderActiveSessionBanner(dv);
 gdr.renderActions(dv);
 ```

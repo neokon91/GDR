@@ -28,6 +28,22 @@ blocks:
       - Verificare uso al tavolo.
       - Verificare player-safe.
       - Verificare almeno due connessioni.
+  playable_outline:
+    type: dataviewjs
+    use_for:
+      - session
+      - scaletta
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      gdr.renderPlayableOutline(dv, dv.current());
+    fallback: |-
+      | Blocco | Valore |
+      | --- | --- |
+      | Apertura |  |
+      | Obiettivo |  |
+      | Scelta |  |
+      | Pressione |  |
+      | Materiale pronto |  |
   pressure_list:
     type: dataviewjs
     use_for:

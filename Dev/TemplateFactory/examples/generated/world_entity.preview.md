@@ -1,7 +1,7 @@
 <% await tp.user.world_entity(tp) %>
 # `=this.nome`
 
-> [!infoboxwiki]- World Entity
+> [!infoboxwiki]- Codex
 > Mondo: `INPUT[mondo][:mondo]`
 >
 > Stato: `INPUT[stato base][:stato]`
@@ -36,7 +36,40 @@ tab: Crea
 tab: Connessioni
 
 > [!regia] Collegala Subito
+> Una voce isolata resta enciclopedia. Scegli almeno due note vive.
+>
 > `INPUT[inlineListSuggester(optionQuery("Mondi"), useLinks(partial), allowOther):connessioni]`
+
+```dataview
+TABLE categoria, tipo, stato, pressione, prossima_mossa
+FROM "Mondi"
+WHERE contains(this.connessioni, file.link)
+SORT categoria ASC, file.name ASC
+```
+
+> [!timer]- Propagazione
+> Entita impattate:
+> `INPUT[inlineListSuggester(optionQuery("Mondi"), useLinks(partial), allowOther):entita_impattate]`
+>
+> Propaga a:
+> `INPUT[inlineListSuggester(optionQuery("Mondi"), useLinks(partial), allowOther):propaga_a]`
+
+tab: Articolo
+
+> [!lettura] Cosa Sa Un Abitante
+> ```meta-bind
+> INPUT[list:abitante_sa]
+> ```
+
+> [!segreto]- Cosa Sa Il DM
+> ```meta-bind
+> INPUT[list:dm_sa]
+> ```
+
+> [!scena] Cosa Cambia Al Tavolo
+> ```meta-bind
+> INPUT[list:cambia_al_tavolo]
+> ```
 
 tab: Controllo
 
@@ -53,4 +86,8 @@ gdr.renderCreationFeedback(dv);
 | Identita |  |
 | Uso al tavolo |  |
 | Connessioni |  |
+| Entita impattate |  |
+| Propaga a |  |
 | Versione pubblica |  |
+| Cosa sa il DM |  |
+| Cosa cambia al tavolo |  |

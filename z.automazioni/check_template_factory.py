@@ -128,6 +128,7 @@ def validate_rendering(modules: dict[str, dict], errors: list[str]) -> None:
                 templater_function=blueprint.get("templater_entry", "").split("tp.user.")[-1].split("(")[0],
                 label=name.replace("_", " ").title(),
                 monster="Creatura",
+                modules=modules,
             )
         except Exception as exc:  # noqa: BLE001
             fail(f"blueprint {name}: render Jinja fallito ({exc})", errors)

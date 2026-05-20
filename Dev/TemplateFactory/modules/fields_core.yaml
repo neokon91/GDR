@@ -71,6 +71,31 @@ fields:
       required: false
       source: meta_bind
       use: rete generale del Codex
+    - name: campagne
+      type: wikilink_list
+      required: false
+      source: meta_bind
+      use: campagne collegate
+    - name: personaggi
+      type: wikilink_list
+      required: false
+      source: meta_bind
+      use: PNG o personaggi coinvolti
+    - name: tracciati
+      type: wikilink_list
+      required: false
+      source: meta_bind
+      use: clock, fronti o progress track collegati
+    - name: sessioni
+      type: wikilink_list
+      required: false
+      source: meta_bind
+      use: sessioni in cui la nota entra in gioco
+    - name: luogo
+      type: wikilink
+      required: false
+      source: meta_bind
+      use: luogo principale collegato
   table_use:
     - name: identita
       type: text
@@ -143,6 +168,31 @@ fields:
       required: false
       source: meta_bind
       use: risultato se la pressione non viene risolta
+    - name: progress_value
+      type: number
+      required: false
+      source: meta_bind
+      use: avanzamento corrente di clock, missioni o tracciati
+    - name: progress_max
+      type: number
+      required: false
+      source: meta_bind
+      use: soglia massima di clock, missioni o tracciati
+    - name: innesco
+      type: text
+      required: false
+      source: meta_bind
+      use: evento che fa partire o avanzare la pressione
+    - name: posta
+      type: text
+      required: false
+      source: meta_bind
+      use: cosa si perde o si guadagna se la situazione cambia
+    - name: scadenza_mondo
+      type: text
+      required: false
+      source: meta_bind
+      use: scadenza diegetica della pressione
   public_safety:
     - name: pubblico
       type: boolean
@@ -241,6 +291,66 @@ fields:
       required: false
       source: meta_bind
       use: video collegati alla sessione
+    - name: scena_corrente
+      type: text
+      required: false
+      source: meta_bind
+      use: scena attualmente al tavolo
+    - name: appunti_live
+      type: wikilink_list
+      required: false
+      source: meta_bind
+      use: appunti catturati durante il gioco
+    - name: scene
+      type: list
+      required: false
+      source: meta_bind
+      use: scaletta o scene previste
+    - name: segreti_rivelabili
+      type: list
+      required: false
+      source: meta_bind
+      use: segreti che possono emergere al tavolo
+    - name: decisioni_prese
+      type: list
+      required: false
+      source: meta_bind
+      use: decisioni effettive dei giocatori
+    - name: prossima_apertura
+      type: text
+      required: false
+      source: meta_bind
+      use: apertura pronta per la sessione seguente
+    - name: output_sessione
+      type: list
+      required: false
+      source: meta_bind
+      use: risultati finali pronti da riportare nel mondo
+    - name: oggetti
+      type: wikilink_list
+      required: false
+      source: meta_bind
+      use: oggetti entrati in scena
+    - name: domande_al_tavolo
+      type: list
+      required: false
+      source: meta_bind
+      use: domande aperte da porre ai giocatori
+    - name: decisioni_attese
+      type: list
+      required: false
+      source: meta_bind
+      use: decisioni che la preparazione vuole ottenere
+    - name: fatti_canonici
+      type: list
+      required: false
+      source: meta_bind
+      use: fatti emersi da rendere canonici
+    - name: prossime_mosse_fuori_scena
+      type: list
+      required: false
+      source: meta_bind
+      use: mosse del mondo dopo la sessione
   calendarium:
     - name: fc-calendar
       type: text
@@ -309,6 +419,21 @@ fields:
       required: false
       source: bases_maps
       use: colore marker mappa
+    - name: uso
+      type: select
+      required: false
+      source: metadata_menu
+      use: uso operativo della risorsa o mappa
+    - name: layer_mappa
+      type: text
+      required: false
+      source: bases_maps
+      use: layer o gruppo visuale della mappa
+    - name: tipo_mappa
+      type: text
+      required: false
+      source: metadata_menu
+      use: tipo tecnico o narrativo della mappa
   encounter:
     - name: creature
       type: wikilink_list
@@ -345,6 +470,333 @@ fields:
       required: false
       source: meta_bind
       use: ricompense, indizi o conseguenze positive
+    - name: pericolo
+      type: number
+      required: false
+      source: meta_bind
+      use: intensita di rischio dell'incontro o luogo
+    - name: round
+      type: number
+      required: false
+      source: meta_bind
+      use: round corrente dell'incontro
+    - name: condizioni
+      type: list
+      required: false
+      source: meta_bind
+      use: condizioni tattiche attive
+    - name: encounter_creatures
+      type: list
+      required: false
+      source: initiative_tracker
+      use: creature testuali passate a Initiative Tracker
+  media:
+    - name: tono
+      type: text
+      required: false
+      source: metadata_menu
+      use: tono della risorsa media
+    - name: campagna
+      type: wikilink
+      required: false
+      source: metadata_menu
+      use: campagna collegata alla risorsa
+    - name: scena
+      type: text
+      required: false
+      source: metadata_menu
+      use: scena suggerita per la risorsa
+    - name: timestamp
+      type: text
+      required: false
+      source: metadata_menu
+      use: punto temporale utile nel media
+    - name: file
+      type: text
+      required: false
+      source: metadata_menu
+      use: percorso file locale o allegato
+    - name: url
+      type: text
+      required: false
+      source: metadata_menu
+      use: URL esterno della risorsa
+  domain_specific:
+    - name: cultura
+      type: wikilink
+      required: false
+      source: metadata_menu
+      use: cultura collegata
+    - name: culture
+      type: wikilink_list
+      required: false
+      source: metadata_menu
+      use: culture collegate
+    - name: religioni
+      type: wikilink_list
+      required: false
+      source: metadata_menu
+      use: religioni o culti collegati
+    - name: regioni
+      type: wikilink_list
+      required: false
+      source: metadata_menu
+      use: regioni collegate
+    - name: risorse
+      type: wikilink_list
+      required: false
+      source: metadata_menu
+      use: risorse materiali o narrative collegate
+    - name: eventi_storici
+      type: wikilink_list
+      required: false
+      source: metadata_menu
+      use: eventi storici collegati
+    - name: uso_narrativo
+      type: text
+      required: false
+      source: metadata_menu
+      use: funzione narrativa o scenica
+    - name: segreti
+      type: list
+      required: false
+      source: metadata_menu
+      use: segreti collegati o non ancora rivelati
+    - name: leader
+      type: wikilink
+      required: false
+      source: metadata_menu
+      use: leader o riferimento principale della fazione
+    - name: obiettivo_nascosto
+      type: text
+      required: false
+      source: metadata_menu
+      use: obiettivo privato o non dichiarato
+    - name: rivali
+      type: wikilink_list
+      required: false
+      source: metadata_menu
+      use: rivali o oppositori collegati
+    - name: famiglia_luogo
+      type: select
+      required: false
+      source: metadata_menu
+      use: famiglia operativa del luogo
+    - name: luogo_padre
+      type: wikilink
+      required: false
+      source: metadata_menu
+      use: luogo contenitore o gerarchico
+    - name: governante
+      type: wikilink
+      required: false
+      source: metadata_menu
+      use: autorita o governo locale
+    - name: stabilita
+      type: number
+      required: false
+      source: metadata_menu
+      use: stabilita politica o sociale del luogo
+    - name: impressione
+      type: text
+      required: false
+      source: metadata_menu
+      use: prima impressione al tavolo
+    - name: tensione
+      type: text
+      required: false
+      source: metadata_menu
+      use: tensione o problema visibile
+    - name: fazioni_controllanti
+      type: wikilink_list
+      required: false
+      source: metadata_menu
+      use: fazioni che controllano risorsa, rotta o mercato
+    - name: rotte
+      type: wikilink_list
+      required: false
+      source: metadata_menu
+      use: rotte collegate
+    - name: mercati
+      type: wikilink_list
+      required: false
+      source: metadata_menu
+      use: mercati collegati
+    - name: pedaggi
+      type: list
+      required: false
+      source: metadata_menu
+      use: costi, tasse o vincoli di transito
+    - name: rischi
+      type: list
+      required: false
+      source: metadata_menu
+      use: rischi operativi o ambientali
+    - name: committente
+      type: wikilink
+      required: false
+      source: metadata_menu
+      use: committente della missione
+    - name: ruolo
+      type: text
+      required: false
+      source: metadata_menu
+      use: ruolo del PNG o della risorsa
+    - name: relazioni
+      type: wikilink_list
+      required: false
+      source: metadata_menu
+      use: relazioni collegate
+    - name: vuole
+      type: text
+      required: false
+      source: metadata_menu
+      use: desiderio o obiettivo del PNG
+    - name: sa
+      type: text
+      required: false
+      source: metadata_menu
+      use: informazione nota al PNG
+    - name: leva
+      type: text
+      required: false
+      source: metadata_menu
+      use: leva sociale o negoziale
+    - name: atteggiamento
+      type: select
+      required: false
+      source: metadata_menu
+      use: atteggiamento verso il party o una fazione
+    - name: soggetti
+      type: wikilink_list
+      required: false
+      source: metadata_menu
+      use: soggetti coinvolti nella relazione
+    - name: intensita
+      type: number
+      required: false
+      source: metadata_menu
+      use: intensita della relazione o tensione
+    - name: origine
+      type: text
+      required: false
+      source: metadata_menu
+      use: origine della relazione o conflitto
+    - name: eventi
+      type: wikilink_list
+      required: false
+      source: metadata_menu
+      use: eventi collegati
+    - name: mese
+      type: text
+      required: false
+      source: calendarium
+      use: mese diegetico
+    - name: stagione
+      type: text
+      required: false
+      source: calendarium
+      use: stagione diegetica
+    - name: festa
+      type: text
+      required: false
+      source: calendarium
+      use: festa o ricorrenza
+    - name: tabu_stagionali
+      type: list
+      required: false
+      source: calendarium
+      use: tabu o vincoli stagionali
+    - name: scadenze_rituali
+      type: list
+      required: false
+      source: calendarium
+      use: scadenze rituali o culturali
+    - name: conseguenze_data_passata
+      type: list
+      required: false
+      source: calendarium
+      use: conseguenze se la data passa
+    - name: pressioni_da_avanzare
+      type: wikilink_list
+      required: false
+      source: calendarium
+      use: pressioni o clock da avanzare alla data
+    - name: scarsita
+      type: number
+      required: false
+      source: metadata_menu
+      use: livello di scarsita della risorsa
+    - name: luoghi_dipendenti
+      type: wikilink_list
+      required: false
+      source: metadata_menu
+      use: luoghi dipendenti dalla risorsa
+    - name: stato_rotta
+      type: select
+      required: false
+      source: metadata_menu
+      use: stato specifico di apertura della rotta
+    - name: partenza
+      type: wikilink
+      required: false
+      source: metadata_menu
+      use: punto di partenza della rotta
+    - name: arrivo
+      type: wikilink
+      required: false
+      source: metadata_menu
+      use: punto di arrivo della rotta
+    - name: risorse_trasportate
+      type: wikilink_list
+      required: false
+      source: metadata_menu
+      use: risorse trasportate dalla rotta
+    - name: conseguenze_se_bloccata
+      type: list
+      required: false
+      source: metadata_menu
+      use: conseguenze se la rotta si interrompe
+    - name: agenda
+      type: list
+      required: false
+      source: bases
+      use: agenda operativa mostrata nelle viste
+    - name: alleati
+      type: wikilink_list
+      required: false
+      source: bases
+      use: alleati collegati
+    - name: divinita
+      type: wikilink_list
+      required: false
+      source: bases
+      use: divinita collegate
+    - name: famiglia_creativa
+      type: text
+      required: false
+      source: bases
+      use: raggruppamento creativo per worldbuilding
+    - name: luoghi_sacri
+      type: wikilink_list
+      required: false
+      source: bases
+      use: luoghi sacri collegati
+    - name: promessa_al_tavolo
+      type: text
+      required: false
+      source: bases
+      use: promessa pratica da portare in sessione
+    - name: templi
+      type: wikilink_list
+      required: false
+      source: bases
+      use: templi collegati
+    - name: tipologia
+      type: text
+      required: false
+      source: bases
+      use: tipologia descrittiva usata in viste esistenti
 checks:
   - check_vault_required_fields
   - public_secret_scan

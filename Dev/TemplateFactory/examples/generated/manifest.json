@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-20T21:29:35.379516+00:00",
+  "generated_at": "2026-05-20T21:41:39.956977+00:00",
   "source": "Dev/TemplateFactory",
   "mode": "preview",
   "files": [
@@ -21,7 +21,7 @@
     {
       "blueprint": "world_entity",
       "path": "Dev/TemplateFactory/examples/generated/world_entity.preview.md",
-      "bytes": 1079
+      "bytes": 1905
     }
   ]
 }

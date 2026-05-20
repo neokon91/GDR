@@ -1,6 +1,6 @@
 # TemplateFactory Migration Audit
 
-Generated: 2026-05-20T21:29:35.578705+00:00
+Generated: 2026-05-20T21:41:40.149400+00:00
 
 Questo report confronta le preview generate da `Dev/TemplateFactory` con i template reali in `z.modelli`. Non modifica i template reali.
 
@@ -8,7 +8,7 @@ Questo report confronta le preview generate da `Dev/TemplateFactory` con i templ
 
 | Blueprint | Target | Similarita | Preview/Target righe | Raccomandazione | Motivo |
 | --- | --- | ---: | ---: | --- | --- |
-| world_entity | `z.modelli/worldbuilding/Entita Worldbuilding.md` | 0.676 | 56/80 | migrare parziale | Serve confronto manuale di sezioni e marker plugin. |
+| world_entity | `z.modelli/worldbuilding/Entita Worldbuilding.md` | 1.000 | 93/93 | candidato merge | Preview molto vicina al target e fallback presente. |
 | session | `z.modelli/dm/Sessione.md` | 0.195 | 73/501 | non sostituire | Preview piu piccola: usarla come base, ma il target contiene sezioni operative da preservare. |
 | map_asset | `z.modelli/mappe/Mappa Zoom.md` | 0.180 | 40/93 | non sostituire | Preview piu piccola: usarla come base, ma il target contiene sezioni operative da preservare. |
 | map_asset | `z.modelli/mappe/Mappa Excalidraw Fronti.excalidraw.md` | 0.208 | 40/56 | migrare parziale | Serve confronto manuale di sezioni e marker plugin. |
@@ -21,26 +21,26 @@ Questo report confronta le preview generate da `Dev/TemplateFactory` con i templ
 
 - Preview: `Dev/TemplateFactory/examples/generated/world_entity.preview.md`
 - Target esiste: `True`
-- Similarita: `0.676`
-- Raccomandazione: **migrare parziale**
-- Motivo: Serve confronto manuale di sezioni e marker plugin.
-- Marker presenti solo nel target: dataview
-- Marker nuovi nella preview: fallback
+- Similarita: `1.0`
+- Raccomandazione: **candidato merge**
+- Motivo: Preview molto vicina al target e fallback presente.
+- Marker presenti solo nel target: nessuno
+- Marker nuovi nella preview: nessuno
 
 | Marker | Preview | Target |
 | --- | ---: | ---: |
 | `templater` | 1 | 1 |
 | `templater_multiline` | 0 | 0 |
-| `meta_bind_input` | 11 | 16 |
+| `meta_bind_input` | 16 | 16 |
 | `meta_bind_button` | 0 | 0 |
-| `dataview` | 0 | 1 |
+| `dataview` | 1 | 1 |
 | `dataviewjs` | 1 | 1 |
 | `tabs` | 1 | 1 |
-| `callout` | 8 | 12 |
+| `callout` | 12 | 12 |
 | `statblock` | 0 | 0 |
 | `encounter` | 0 | 0 |
 | `dice` | 0 | 0 |
-| `fallback` | 1 | 0 |
+| `fallback` | 1 | 1 |
 | `session_views` | 1 | 1 |
 | `legacy_session_context` | 0 | 0 |
 

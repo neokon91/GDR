@@ -18,6 +18,7 @@ FACTORY = ROOT / "Dev" / "TemplateFactory"
 MODULES = FACTORY / "modules"
 JINJA = FACTORY / "jinja"
 DEFAULT_OUTPUT = FACTORY / "examples" / "generated"
+EXAMPLES = FACTORY / "examples"
 
 
 def load_yaml(path: Path) -> dict:
@@ -41,18 +42,29 @@ def templater_function(entry: str) -> str:
     return match.group(1) if match else "world_entity"
 
 
-def render_blueprint(env: Environment, name: str, blueprint: dict) -> str:
+def load_context(name: str) -> dict:
+    path = EXAMPLES / f"{name}.context.yaml"
+    if not path.exists():
+        return {}
+    return load_yaml(path)
+
+
+def render_blueprint(env: Environment, name: str, blueprint: dict, modules: dict[str, dict]) -> str:
     template_ref = Path(str(blueprint["jinja_template"])).name
     template = env.get_template(template_ref)
     entry = str(blueprint.get("templater_entry", ""))
-    return template.render(
-        blueprint_id=name,
-        blueprint=blueprint,
-        templater_entry=entry,
-        templater_function=templater_function(entry),
-        label=name.replace("_", " ").title(),
-        monster="Creatura",
-    )
+    context = load_context(name)
+    render_context = {
+        "blueprint_id": name,
+        "blueprint": blueprint,
+        "templater_entry": entry,
+        "templater_function": templater_function(entry),
+        "label": name.replace("_", " ").title(),
+        "monster": "Creatura",
+        "modules": modules,
+    }
+    render_context.update(context)
+    return template.render(**render_context)
 
 
 def validate_rendered(name: str, rendered: str) -> list[str]:
@@ -118,7 +130,7 @@ def main() -> int:
     errors: list[str] = []
 
     for name, blueprint in blueprints.items():
-        rendered = render_blueprint(env, name, blueprint)
+        rendered = render_blueprint(env, name, blueprint, modules)
         errors.extend(validate_rendered(name, rendered))
         rendered_by_name[name] = rendered
 
