@@ -41,5 +41,5 @@ Prima di usare una copia come release, apri [[Risorse/Controllo Vault]] e verifi
 
 ## Se Il Vault Resta Rotto
 
-- Apri [[Risorse/Strumenti Attivi]] per capire quale strumento serve a quale funzione.
+- Apri [[Risorse/Primo Avvio Strumenti]] e verifica che gli strumenti richiesti risultino abilitati.
 - Se hai modificato manualmente file in `SRD`, controlla [[SRD/Licenza SRD]] e rigenera solo quando sai che le modifiche non verranno perse.

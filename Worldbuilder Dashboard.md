@@ -77,14 +77,6 @@ actions:
 ```
 
 ```meta-bind-button
-label: Callout GDR
-style: primary
-actions:
-  - type: open
-    link: "[[Risorse/Callout GDR]]"
-```
-
-```meta-bind-button
 label: Mappe
 style: primary
 actions:

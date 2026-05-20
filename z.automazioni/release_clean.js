@@ -43,13 +43,22 @@ const INCLUDED_ROOT_FILES = new Set([
 const EXCLUDED_DIRS = new Set([".git", ".github", "dist", "docs", "Import", "node_modules"]);
 const EXCLUDED_ROOT_FILES = new Set([".gitignore", "CHANGELOG.md", "CONTRIBUTING.md", "RELEASE.md", "Repository.md", "package.json"]);
 const EXCLUDED_RISORSE = new Set([
+    "Callout GDR.md",
+    "Checklist Lore Professionale.md",
+    "Consegna Nuovo DM.md",
+    "Guida Lore Professionale.md",
     "Indice Connettore GPT.md",
+    "Importare Mappe.md",
     "Integrazioni Plugin.md",
+    "Media Scene.md",
     "Modello Entità.md",
+    "Preset Calendario.md",
+    "Profili Campagna.md",
     "Prove Entità.md",
     "Recap Plugin Installati.md",
     "Release Pulita.md",
     "Roadmap",
+    "Strumenti Attivi.md",
     "Studio Iron Vault.md",
     "Sviluppo Vault.md",
     "Worldbuilding Tassonomico.md"
@@ -91,6 +100,7 @@ function shouldIncludeRoot(relPath, entry) {
 
 function shouldSkip(relPath, entry) {
     if (EXCLUDED_FILES.has(entry.name)) return true;
+    if (entry.isFile() && entry.name.startsWith("Prova - ") && entry.name.endsWith(".md")) return true;
     const top = topSegment(relPath);
     if (EXCLUDED_DIRS.has(top)) return true;
     if (!shouldIncludeRoot(relPath, entry)) return true;

@@ -66,8 +66,6 @@ if (!active) {
 }
 ```
 
-Vedi anche [[Risorse/Media Scene]] per cue con timestamp e scene.
-
 ## Incontri E Creature
 
 ```dataviewjs

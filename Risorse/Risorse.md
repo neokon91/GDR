@@ -8,7 +8,7 @@ stato: pronto
 
 # Risorse
 
-Questa pagina raccoglie guide e materiali riutilizzabili. Se vuoi preparare o giocare, parti da [[Inizia Qui]], [[1. DM Dashboard]] o [[Durante il Gioco]].
+Questa pagina raccoglie solo le guide utili mentre prepari o giochi. Le note tecniche, le prove e la manutenzione restano fuori dal percorso principale.
 
 ## Uso Quotidiano
 
@@ -16,23 +16,27 @@ Questa pagina raccoglie guide e materiali riutilizzabili. Se vuoi preparare o gi
 | --- | --- |
 | [[Inizia Qui]] | Quando non sai da dove partire. |
 | [[Risorse/Setup Guidato]] | Quando vuoi sapere se il vault e pronto. |
-| [[Risorse/Consegna Nuovo DM]] | Quando devi dare il vault a una persona non tecnica. |
 | [[Risorse/Guida DM]] | Quando vuoi il flusso DM senza dettagli tecnici. |
-| [[Atlante del Mondo]] | Quando vuoi costruire un'ambientazione ricca e collegata. |
-| [[Bibbia del Mondo]] | Quando vuoi vedere tono, promesse, verita, rumor e limiti del mondo. |
-| [[Motore Mondo Vivo]] | Quando vuoi controllare propagazione, relazioni, canone e continuita narrativa. |
-| [[Geopolitical Dashboard]] | Quando vuoi controllare stati, confini, risorse, vassalli e relazioni diplomatiche. |
-| [[Campagna da Ambientazione]] | Quando vuoi trasformare mondo, regione o conflitto in campagna. |
-| [[Risorse/Generare Campagna Da Ambientazione]] | Guida passo passo per passare da ambientazione a gioco. |
-| [[Vista Giocatori]] | Vista dedicata a materiale condivisibile con i giocatori. |
-| [[Risorse/Importare Mappe]] | Importare mappe esterne come bozze controllate. |
 | [[Risorse/Preparazione Sessione]] | Prima di una sessione. |
 | [[Durante il Gioco]] | Durante la partita. |
 | [[Risorse/Post Sessione Guidato]] | Subito dopo la partita. |
 | [[Risorse/Come Usare I Clock]] | Quando vuoi usare clock per minacce, viaggi o rituali. |
 | [[Risorse/Tabelle/Tabelle]] | Quando serve improvvisare con tiri e tabelle. |
-| [[Inbox/Inbox]] | Quando devi smistare idee grezze. |
 | [[Risorse/FAQ]] | Quando hai un dubbio d'uso. |
+
+## Mondo E Campagna
+
+| Pagina | Quando aprirla |
+| --- | --- |
+| [[Atlante del Mondo]] | Quando vuoi costruire un'ambientazione ricca e collegata. |
+| [[Bibbia del Mondo]] | Quando vuoi vedere tono, promesse, verita, rumor e limiti del mondo. |
+| [[Campagna da Ambientazione]] | Quando vuoi trasformare mondo, regione o conflitto in campagna. |
+| [[Risorse/Generare Campagna Da Ambientazione]] | Guida passo passo per passare da ambientazione a gioco. |
+| [[Risorse/Opportunità Di Avventura]] | Elementi del mondo pronti a diventare missioni. |
+| [[Risorse/Fronti Di Campagna]] | Pressioni, prossime mosse e scadenze della campagna. |
+| [[Motore Mondo Vivo]] | Propagazione, relazioni, canone e continuita narrativa. |
+| [[Geopolitical Dashboard]] | Stati, confini, risorse, vassalli e relazioni diplomatiche. |
+| [[Vista Giocatori]] | Materiale condivisibile con i giocatori. |
 
 ## Materiali Al Tavolo
 
@@ -46,34 +50,17 @@ Questa pagina raccoglie guide e materiali riutilizzabili. Se vuoi preparare o gi
 | [[Risorse/Materiali Al Tavolo]] | Controllo dei materiali collegati alla sessione attiva. |
 | [[SRD/SRD]] | Riferimento regolamentare, separato dal mondo canonico. |
 
-## Strumenti E Aspetto
+## Aiuto E Controlli
 
 | Pagina | Uso |
 | --- | --- |
 | [[Risorse/Primo Avvio Strumenti]] | Cosa fare se Obsidian chiede di abilitare gli strumenti inclusi. |
-| [[Risorse/Strumenti Attivi|Strumenti Attivi]] | Quali strumenti sono disponibili nel vault, spiegati per uso pratico. |
-| [[Risorse/Callout GDR]] | Callout disponibili per scene, PNG, luoghi, fazioni, missioni, timeline, segreti, pericoli e ricompense. |
-| [[Risorse/Aspetto Vault]] | Regolazioni visuali semplici. |
 | [[Risorse/Se Qualcosa Non Funziona]] | Diagnosi rapida quando pulsanti, tabelle o viste non rispondono. |
-
-## Controllo Del Vault
-
-| Pagina | Uso |
-| --- | --- |
 | [[Risorse/Controllo Vault]] | Controlli pratici su note incomplete, sessioni attive e materiale pronto. |
+| [[Risorse/Aspetto Vault]] | Regolazioni visuali semplici. |
 | [[Revisione Lore]] | Lore incompleta, scollegata o non ancora giocabile. |
 | [[Controllo Canone]] | Verita, rumor, leggende, retcon e provenienza del canone. |
 | [[Mondi/Calendario]] | Date del mondo, sessioni, scadenze e cose da calendarizzare. |
-| [[Mondi/Culture/Culture]] | Popoli, usanze, tabù e identità culturali. |
-| [[Mondi/Lingue/Lingue]] | Lingue, dialetti, parole note e scritture. |
-| [[Mondi/Storia/Storia]] | Ere, guerre, catastrofi e fondazioni. |
-| [[Mondi/Conflitti/Conflitti]] | Conflitti vivi tra poteri, popoli e luoghi. |
-| [[Mondi/Relazioni/Relazioni]] | Alleanze, rivalita, trattati, faide, debiti e vassallaggi. |
-| [[Mondi/Cosmologia/Cosmologia]] | Piani, reami, aldilà e principi cosmici. |
-| [[Risorse/Opportunità Di Avventura]] | Elementi del mondo pronti a diventare missioni. |
-| [[Risorse/Fronti Di Campagna]] | Pressioni, prossime mosse e scadenze della campagna. |
-| [[Risorse/Preset Calendario]] | Modi semplici per segnare il tempo del mondo. |
-| [[Risorse/Profili Campagna]] | Strutture consigliate per fantasy classico, investigativo, sandbox e one-shot. |
 | [[VERSION]] | Versione corrente del vault. |
 
 ## Archivio Mappe

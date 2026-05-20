@@ -692,11 +692,6 @@ if (!pages.length) {
 }
 ```
 
-#### Regole e Riferimenti
-
-- [[Risorse/Callout GDR]]
-- [[Risorse/Strumenti Attivi]]
-
 tab: Post
 
 ### Post-Sessione

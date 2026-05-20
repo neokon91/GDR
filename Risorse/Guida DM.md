@@ -82,7 +82,6 @@ La **Timeline Causale** serve a distinguere:
 - I tab separano modalita diverse: scena, cattura, pressioni, persone, materiali e post-sessione.
 - I callout chiusi contengono dettagli da aprire solo quando servono: segreti, timer secondari, note GM, esiti possibili e lore profonda.
 - I pulsanti creano note o aprono pagine operative.
-- [[Risorse/Strumenti Attivi|Strumenti Attivi]] spiega quali strumenti sono disponibili, ma puoi ignorarla se il vault funziona.
 - [[Risorse/Risorse]] raccoglie guide, mappe, media, tabelle e aiuto.
 
 ## Dopo Il Gioco
@@ -111,7 +110,6 @@ Fai solo queste cose:
 | Smistare appunti | [[Inbox/Inbox]] |
 | Controllare problemi | [[Risorse/Controllo Vault]] |
 | Trovare materiali o guide | [[Risorse/Risorse]] |
-| Capire gli strumenti disponibili | [[Risorse/Strumenti Attivi|Strumenti Attivi]] |
 
 ## Dove Metto Le Idee Grezze?
 

@@ -34,8 +34,6 @@ tab: Regioni
 > [!luogo] Convenzione
 > Usa una mappa di regione quando serve scegliere percorsi, pericoli, confini, risorse o distanze approssimative.
 
-Apri [[Risorse/Importare Mappe]] quando parti da Azgaar o da altri generatori esterni.
-
 Campi consigliati nelle note mappa:
 
 - `uso: regione`
