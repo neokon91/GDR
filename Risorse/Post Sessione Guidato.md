@@ -23,8 +23,11 @@ stato: pronto
 ```dataviewjs
 const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
 gdr.renderActiveSessionBanner(dv);
+gdr.renderPostSessionCommandCenter(dv);
 gdr.renderPostSessionFocus(dv);
 ```
+
+`BUTTON[wizard-fine-sessione]`
 
 ## 1. Decisioni Prese
 

@@ -9,6 +9,14 @@ views:
       - Mondi/Religioni
       - Mondi/Societa
       - Mondi/Cosmologia
+      - Mondi/Conflitti
+      - Mondi/Creature
+      - Mondi/Lingue
+      - Mondi/Mercati
+      - Mondi/Relazioni
+      - Mondi/Risorse
+      - Mondi/Rotte
+      - Mondi/Timeline
     required_fields:
       - nome
       - categoria

@@ -29,6 +29,14 @@ Questa pagina serve a preparare una copia consegnabile del vault.
 
 ## Comando
 
+Prima verifica il repository:
+
+```bash
+npm run check
+```
+
+Poi genera la copia utente:
+
 ```bash
 npm run release:clean
 ```

@@ -15,6 +15,7 @@ async function mondo(tp) {
 id: ${id}
 nome: ${helpers.yamlQuote(name)}
 categoria: mondo
+fileClass: mondo
 stato: bozza
 tono: ${helpers.yamlQuote(tono)}
 tema: ${helpers.yamlQuote(tema)}

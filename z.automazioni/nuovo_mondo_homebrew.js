@@ -44,6 +44,11 @@ async function nuovo_mondo_homebrew(tp) {
 
     async function createSeed(folderKey, seedName, category, type, extra = {}) {
         const folder = helpers.path(folderKey);
+        const fileClassByCategory = {
+            cultura: "compendium",
+            fazione: "fazione",
+            luogo: "luogo"
+        };
         await helpers.ensureFolder(folder);
         const filePath = `${folder}/${seedName}.md`;
         if (app.vault.getAbstractFileByPath(filePath)) return `[[${seedName}]]`;
@@ -52,6 +57,7 @@ async function nuovo_mondo_homebrew(tp) {
             "---",
             `nome: ${helpers.yamlQuote(seedName)}`,
             `categoria: ${helpers.yamlQuote(category)}`,
+            `fileClass: ${helpers.yamlQuote(fileClassByCategory[category] ?? "compendium")}`,
             `tipo: ${helpers.yamlQuote(type)}`,
             "stato: bozza",
             `mondo: "[[${name}]]"`,
@@ -100,6 +106,7 @@ async function nuovo_mondo_homebrew(tp) {
 id: ${helpers.yamlQuote(helpers.slugify(name))}
 nome: ${helpers.yamlQuote(name)}
 categoria: mondo
+fileClass: mondo
 stato: bozza
 tono: ${helpers.yamlQuote(tone)}
 tema: ${helpers.yamlQuote(preset.id)}

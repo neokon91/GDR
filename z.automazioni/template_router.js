@@ -8,14 +8,15 @@ async function template_router(tp, route = "") {
 
     const routeCreative = async kind => {
         const wb = await tp.user.worldbuilding(tp);
+        let routeInfo;
 
         if (kind === "luogo") {
-            await wb.chooseLocation();
+            routeInfo = await wb.chooseLocation();
         } else {
-            await wb.chooseCreative(kind);
+            routeInfo = await wb.chooseCreative(kind);
         }
 
-        return await includeTemplate(wb.getCreativeTemplate());
+        return await includeTemplate(wb.getCreativeTemplate(routeInfo));
     };
 
     const routeFaction = async () => {

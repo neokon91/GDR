@@ -50,6 +50,8 @@ async function wizard_layer(tp, wizard = "") {
 
         const recapPubblico = await helpers.promptOptional(tp, "Recap pubblico");
         const recapDm = await helpers.promptOptional(tp, "Recap DM");
+        const conseguenza = await helpers.promptOptional(tp, "Conseguenza principale da applicare");
+        const prossimaApertura = await helpers.promptOptional(tp, "Prossima apertura");
         const output = await helpers.promptOptional(tp, "Output utile per la prossima sessione");
 
         await helpers.processFrontmatter(session.file, fm => {
@@ -57,10 +59,13 @@ async function wizard_layer(tp, wizard = "") {
             fm.attiva = false;
             fm.recap_pubblico = helpers.normalizeFieldArray(fm.recap_pubblico);
             fm.recap_dm = helpers.normalizeFieldArray(fm.recap_dm);
+            fm.conseguenze = helpers.normalizeFieldArray(fm.conseguenze);
             fm.output_sessione = helpers.normalizeFieldArray(fm.output_sessione);
 
             if (recapPubblico) fm.recap_pubblico.push(recapPubblico);
             if (recapDm) fm.recap_dm.push(recapDm);
+            if (conseguenza) fm.conseguenze.push(conseguenza);
+            if (prossimaApertura) fm.prossima_apertura = prossimaApertura;
             if (output) fm.output_sessione.push(output);
         });
 

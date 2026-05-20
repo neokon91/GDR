@@ -46,6 +46,13 @@ if (!active) {
 >
 > `BUTTON[post-sessione-guidato-risorse-post-sessione-guidato]`
 
+## Cockpit Unico
+
+```dataviewjs
+const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+gdr.renderLiveCommandCenter(dv);
+```
+
 > [!regia]- Strumenti al tavolo
 > `BUTTON[preparazione-sessione-risorse-preparazione-sessione]`
 >

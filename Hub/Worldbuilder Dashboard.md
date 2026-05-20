@@ -75,6 +75,13 @@ grid.innerHTML = steps.map(([label, title, hint]) => `
 
 `BUTTON[nuovo-mondo-homebrew]`
 
+### Prontezza Del Mondo
+
+```dataviewjs
+const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+gdr.renderWorldCreationStatus(dv, dv.current().mondo_attivo);
+```
+
 ````tabs
 tab: Fondamenta
 

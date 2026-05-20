@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-20T21:56:20.821033+00:00",
+  "generated_at": "2026-05-20T22:01:08.329443+00:00",
   "source": "Dev/TemplateFactory",
   "mode": "preview",
   "files": [
@@ -406,7 +406,7 @@
     {
       "blueprint": "session",
       "path": "Dev/TemplateFactory/examples/generated/session.preview.md",
-      "bytes": 1322
+      "bytes": 2604
     },
     {
       "blueprint": "tracciato",

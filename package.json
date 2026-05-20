@@ -4,7 +4,7 @@
   "private": true,
   "description": "Vault Obsidian per preparare e gestire campagne GDR fantasy in italiano.",
   "scripts": {
-    "check": "node z.automazioni/check_vault.js && npm run check:templates && npm run check:repo && npm run check:js",
+    "check": "node z.automazioni/check_vault.js && npm run check:templates && npm run check:repo && npm run check:js && npm run check:diff",
     "check:layer": "node z.automazioni/check_vault.js",
     "check:templates": "python3 z.automazioni/check_template_factory.py",
     "render:templates": "python3 z.automazioni/render_template_factory.py",
@@ -12,6 +12,7 @@
     "audit:templates": "python3 z.automazioni/audit_template_migration.py",
     "check:repo": "node z.automazioni/repo_hygiene.js",
     "check:js": "node z.automazioni/check_js.js",
+    "check:diff": "git diff --check",
     "clean:repo": "node z.automazioni/repo_hygiene.js --fix",
     "import:srd": "node z.automazioni/import_srd.js",
     "import:azgaar": "node z.automazioni/import_azgaar_geojson.js",

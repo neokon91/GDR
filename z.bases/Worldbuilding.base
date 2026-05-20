@@ -4,6 +4,14 @@ filters:
     - file.folder == "Mondi/Religioni"
     - file.folder == "Mondi/Societa"
     - file.folder == "Mondi/Cosmologia"
+    - file.folder == "Mondi/Conflitti"
+    - file.folder == "Mondi/Creature"
+    - file.folder == "Mondi/Lingue"
+    - file.folder == "Mondi/Mercati"
+    - file.folder == "Mondi/Relazioni"
+    - file.folder == "Mondi/Risorse"
+    - file.folder == "Mondi/Rotte"
+    - file.folder == "Mondi/Timeline"
 formulas:
   prontezza: 'if(stato == "archiviata", "archivio", if(mondo, if(uso_al_tavolo, if(player_safe, if(connessioni, "pronta", "manca connessioni"), "manca player-safe"), "manca uso"), "manca mondo"))'
 properties:
@@ -68,6 +76,14 @@ views:
         - file.name != "Religioni"
         - file.name != "Societa"
         - file.name != "Cosmologia"
+        - file.name != "Conflitti"
+        - file.name != "Creature"
+        - file.name != "Lingue"
+        - file.name != "Mercati"
+        - file.name != "Relazioni"
+        - file.name != "Risorse"
+        - file.name != "Rotte"
+        - file.name != "Timeline"
         - stato != "archiviata"
     order:
       - nome
@@ -98,6 +114,14 @@ views:
         - file.name != "Religioni"
         - file.name != "Societa"
         - file.name != "Cosmologia"
+        - file.name != "Conflitti"
+        - file.name != "Creature"
+        - file.name != "Lingue"
+        - file.name != "Mercati"
+        - file.name != "Relazioni"
+        - file.name != "Risorse"
+        - file.name != "Rotte"
+        - file.name != "Timeline"
         - stato != "archiviata"
     order:
       - nome
@@ -122,6 +146,14 @@ views:
         - file.name != "Religioni"
         - file.name != "Societa"
         - file.name != "Cosmologia"
+        - file.name != "Conflitti"
+        - file.name != "Creature"
+        - file.name != "Lingue"
+        - file.name != "Mercati"
+        - file.name != "Relazioni"
+        - file.name != "Risorse"
+        - file.name != "Rotte"
+        - file.name != "Timeline"
         - stato != "archiviata"
     order:
       - nome
@@ -148,6 +180,14 @@ views:
         - file.name != "Religioni"
         - file.name != "Societa"
         - file.name != "Cosmologia"
+        - file.name != "Conflitti"
+        - file.name != "Creature"
+        - file.name != "Lingue"
+        - file.name != "Mercati"
+        - file.name != "Relazioni"
+        - file.name != "Risorse"
+        - file.name != "Rotte"
+        - file.name != "Timeline"
         - stato != "archiviata"
     order:
       - nome

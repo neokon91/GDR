@@ -10,6 +10,7 @@ async function worldbuilding(tp) {
   }
 
   function getLocationTemplate(category, subtype) {
+    if (subtype === "insediamento") return "z.modelli/luogo/Insediamento";
     if (category === "insediamento") return "z.modelli/luogo/Insediamento";
     if (subtype === "tempio") return "z.modelli/luogo/Tempio";
     if (subtype === "dungeon") return "z.modelli/luogo/Dungeon";
@@ -69,7 +70,21 @@ async function worldbuilding(tp) {
     };
   }
 
-  function getCreativeTemplate() {
+  function getCreativeTemplate(route = {}) {
+    if (route.kind === "luogo") return getLocationTemplate(route.category, route.subtype);
+    if (route.kind === "cultura") return "z.modelli/worldbuilding/Cultura";
+    if (route.kind === "religione") return "z.modelli/fazione/Culto";
+    if (route.kind === "magia") return "z.modelli/worldbuilding/Cosmologia";
+    if (route.kind === "storia") return route.subtype === "eta mitica"
+      ? "z.modelli/worldbuilding/Era Storica"
+      : "z.modelli/Evento Storico";
+    if (route.kind === "ecologia") return "z.modelli/Creatura";
+    if (route.kind === "economia") {
+      if (String(route.subtype ?? "").includes("rotta")) return "z.modelli/worldbuilding/Rotta";
+      if (String(route.subtype ?? "").includes("mercato")) return "z.modelli/worldbuilding/Mercato o Nodo Commerciale";
+      return "z.modelli/worldbuilding/Risorsa";
+    }
+
     return "z.modelli/worldbuilding/Entita Worldbuilding";
   }
 

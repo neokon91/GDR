@@ -14,6 +14,12 @@ fieldsOrder:
   - missioni
   - tracciati
   - incontri
+  - dispense
+  - mappe
+  - audio
+  - immagini
+  - video
+  - materiale_pronto
   - pressione
   - prossima_mossa
   - connessioni
@@ -86,6 +92,30 @@ fields:
     options: {}
   - name: incontri
     id: incontri
+    type: MultiFile
+    options: {}
+  - name: dispense
+    id: dispense
+    type: MultiFile
+    options: {}
+  - name: mappe
+    id: mappe
+    type: MultiFile
+    options: {}
+  - name: audio
+    id: audio
+    type: MultiFile
+    options: {}
+  - name: immagini
+    id: immagini
+    type: MultiFile
+    options: {}
+  - name: video
+    id: video
+    type: MultiFile
+    options: {}
+  - name: materiale_pronto
+    id: materiale_pronto
     type: MultiFile
     options: {}
   - name: pressione

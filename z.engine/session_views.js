@@ -176,6 +176,49 @@
     });
   }
 
+  function renderWorldCreationStatus(dv, worldLink = "") {
+    const selectedPath = linkKey(worldLink);
+    const worlds = dv.pages('"Mondi"')
+      .where(p => isReal(p) && p.categoria === "mondo" && p.stato !== "archiviata")
+      .where(p => !selectedPath || p.file.path === selectedPath)
+      .sort(p => p.file.mtime, "desc")
+      .limit(selectedPath ? 1 : 4)
+      .array();
+
+    if (!worlds.length) {
+      renderEmptyState(dv, {
+        title: "Nessun mondo attivo",
+        action: "Crea un mondo homebrew dal wizard e poi selezionalo nel filtro.",
+        button: "BUTTON[nuovo-mondo-homebrew]"
+      });
+      return;
+    }
+
+    const required = [
+      ["Identita", p => hasText(p.tono) && hasText(p.tema) && hasText(p.premessa), "Tono, tema e promessa sono compilati."],
+      ["Conflitto", p => hasText(p.conflitto_centrale), "Il mondo ha un conflitto centrale giocabile."],
+      ["Luoghi", p => hasLinks(p.luoghi_iconici), "Almeno un luogo fondativo e collegato."],
+      ["Poteri", p => hasLinks(p.fazioni_principali), "Almeno una fazione o potere e collegato."],
+      ["Culture", p => hasLinks(p.culture_fondative), "Almeno una cultura fondativa e collegata."],
+      ["Mistero", p => hasText(p.misteri_pubblici) || hasLinks(p.misteri_pubblici), "C'e un mistero pubblico da usare al tavolo."]
+    ];
+
+    const cards = worlds.flatMap(world => required.map(([label, test, readyText]) => {
+      const ok = test(world);
+      return cardHtml({
+        title: `${ok ? "OK" : "Manca"} · ${label}`,
+        meta: pageTitle(world),
+        body: ok ? readyText : "Completa questo punto prima di usare il mondo come base per una campagna.",
+        importa: fieldText(world.prossime_entita_consigliate) || "Quando i sei blocchi sono verdi, passa a mappe, relazioni e prima sessione.",
+        link: world.file.path,
+        cls: `gdr-info-card compact ${ok ? "gdr-kind-ready" : "gdr-kind-missing"}`
+      });
+    }));
+
+    const grid = dv.el("div", "", { cls: "gdr-card-grid compact" });
+    grid.innerHTML = cards.join("");
+  }
+
   function mapCard(page, options = {}) {
     const show = fieldText(page.player_safe ?? page.cosa_mostrare ?? page.luoghi ?? page.luogo) || "Mostra solo i luoghi e i riferimenti gia sicuri.";
     const hide = page.pubblico === true
@@ -374,6 +417,162 @@
     panel.innerHTML = rows.map(([title, body]) => cardHtml({ title, body, cls: "gdr-info-card compact" })).join("");
   }
 
+  function renderLiveCommandCenter(dv) {
+    const active = activeSession(dv);
+    if (!active) {
+      renderEmptyState(dv, {
+        title: "Nessuna sessione live",
+        action: "Apri Preparazione Sessione, scegli una sessione pronta e imposta attiva.",
+        link: "Risorse/Preparazione Sessione.md",
+        button: "BUTTON[nuova-sessione-z-modelli-dm-sessione-md]"
+      });
+      return;
+    }
+
+    const linkedCount = field => dv.array(active?.[field] ?? []).length;
+    const liveNotes = pagesFromLinks(dv, active.appunti_live ?? [])
+      .array()
+      .filter(p => p.stato !== "archiviata" && p.stato !== "ignorata");
+    const encounterPages = pagesFromLinks(dv, active.incontri ?? []).array();
+    const mapPages = pagesFromLinks(dv, active.mappe ?? []).array();
+    const mediaCount = linkedCount("audio") + linkedCount("immagini") + linkedCount("video");
+    const party = dv.pages('"Mondi/Personaggi"')
+      .where(p => isReal(p) && p.tipo === "pg" && p.stato !== "archiviata")
+      .sort(p => p.giocatore ?? p.nome ?? p.file.name, "asc")
+      .array();
+    const partyStatus = party.length
+      ? party.map(p => `${pageTitle(p)} ${p.hp_attuali ?? "?"}/${p.hp_massimi ?? "?"}${p.condizioni ? ` ${fieldText(p.condizioni)}` : ""}`).join(" · ")
+      : "Nessun PG configurato in Party Control.";
+
+    const cards = [
+      {
+        title: "Scena",
+        meta: [active.file.name, active.stato].filter(Boolean).join(" · "),
+        body: fieldText(active.scena_corrente ?? active.apertura) || "Aggiorna la scena corrente prima di iniziare.",
+        link: active.file.path,
+        cls: hasText(active.scena_corrente ?? active.apertura) ? "gdr-kind-ready" : "gdr-kind-missing"
+      },
+      {
+        title: "Appunti live",
+        meta: `${liveNotes.length} da risolvere`,
+        body: liveNotes.map(pageTitle).join(", ") || "Cattura eventi, PNG, luoghi o conseguenze mentre emergono.",
+        link: "Inbox",
+        cls: liveNotes.length ? "gdr-kind-ready" : ""
+      },
+      {
+        title: "Incontri e tiri",
+        meta: `${encounterPages.length} incontri collegati`,
+        body: encounterPages.map(pageTitle).join(", ") || "Apri un incontro o usa tabelle rapide quando serve una scena risolta subito.",
+        link: encounterPages[0]?.file?.path ?? "Risorse/Iniziativa e Combattimenti.md",
+        cls: encounterPages.length ? "gdr-kind-ready" : "gdr-kind-missing"
+      },
+      {
+        title: "Mappe",
+        meta: `${mapPages.length} mappe collegate`,
+        body: mapPages.map(pageTitle).join(", ") || "Collega una mappa alla sessione, all'incontro o al luogo della scena.",
+        link: mapPages[0]?.file?.path ?? "Risorse/Mappe/Mappe.md",
+        cls: mapPages.length ? "gdr-kind-ready" : "gdr-kind-missing"
+      },
+      {
+        title: "Media",
+        meta: `${mediaCount} risorse collegate`,
+        body: fieldText([...(active.audio ?? []), ...(active.immagini ?? []), ...(active.video ?? [])]) || "Audio, immagini e video restano opzionali ma devono essere pronti prima del tavolo.",
+        link: "Risorse/Media Scene.md",
+        cls: mediaCount ? "gdr-kind-ready" : ""
+      },
+      {
+        title: "Party",
+        meta: `${party.length} PG`,
+        body: partyStatus,
+        link: "Hub/Party Control.md",
+        cls: party.length ? "gdr-kind-ready" : "gdr-kind-missing"
+      }
+    ];
+
+    const grid = dv.el("div", "", { cls: "gdr-card-grid compact" });
+    grid.innerHTML = cards.map(card => cardHtml({
+      title: card.title,
+      meta: card.meta,
+      body: card.body,
+      link: card.link,
+      cls: `gdr-info-card compact ${card.cls}`
+    })).join("");
+
+    dv.paragraph("Sequenza live: aggiorna scena -> cattura decisione o appunto -> usa incontro, tiro, mappa o media -> registra conseguenza.");
+  }
+
+  function renderPostSessionCommandCenter(dv) {
+    const session = activeSession(dv)
+      ?? dv.pages('"Mondi/Sessioni"')
+        .where(p => isReal(p) && ["in corso", "pronto", "giocata"].includes(p.stato))
+        .sort(p => p.file.mtime, "desc")
+        .first();
+
+    if (!session) {
+      renderEmptyState(dv, {
+        title: "Nessuna sessione da chiudere",
+        action: "Apri Durante il Gioco o scegli una sessione giocata.",
+        link: "Hub/Durante il Gioco.md"
+      });
+      return;
+    }
+
+    const liveNotes = pagesFromLinks(dv, session.appunti_live ?? [])
+      .array()
+      .filter(p => p.stato !== "archiviata" && p.stato !== "ignorata");
+    const unresolved = liveNotes.filter(p => !p.canonico && !p.stato_canonico && !hasLinks(p.entita_impattate) && !hasLinks(p.propaga_a));
+    const impacted = [
+      ...pagesFromLinks(dv, session.missioni ?? []).array(),
+      ...pagesFromLinks(dv, session.tracciati ?? []).array(),
+      ...pagesFromLinks(dv, session.fazioni ?? []).array(),
+      ...pagesFromLinks(dv, session.luoghi ?? []).array()
+    ].filter(p => p.stato !== "archiviata");
+
+    const cards = [
+      {
+        title: "Canone e rumor",
+        body: unresolved.length
+          ? `${unresolved.length} appunti senza decisione: ${unresolved.map(pageTitle).join(", ")}`
+          : "Ogni appunto collegato ha una direzione o non ci sono appunti live.",
+        cls: unresolved.length ? "gdr-kind-missing" : "gdr-kind-ready",
+        link: session.file.path
+      },
+      {
+        title: "Conseguenze",
+        body: fieldText(session.conseguenze) || fieldText(liveNotes.flatMap(p => asArray(p.conseguenze ?? p.impatto))) || "Registra almeno una conseguenza se qualcosa e cambiato nel mondo.",
+        cls: hasLinks(session.conseguenze) || hasText(session.conseguenze) ? "gdr-kind-ready" : "gdr-kind-missing",
+        link: session.file.path
+      },
+      {
+        title: "Missioni e clock",
+        body: impacted.map(p => `${pageTitle(p)}${p.prossima_mossa ? `: ${fieldText(p.prossima_mossa)}` : ""}`).join(" · ") || "Collega o aggiorna missioni, clock, fazioni e luoghi toccati.",
+        cls: impacted.length ? "gdr-kind-ready" : "gdr-kind-missing",
+        link: "Hub/Cosa Succede Fuori Scena.md"
+      },
+      {
+        title: "Recap pubblico",
+        body: fieldText(session.recap_pubblico) || "Prepara un recap leggibile e senza segreti per i giocatori.",
+        cls: hasText(session.recap_pubblico) || hasLinks(session.recap_pubblico) ? "gdr-kind-ready" : "gdr-kind-missing",
+        link: session.file.path
+      },
+      {
+        title: "Prossima apertura",
+        body: fieldText(session.prossima_apertura ?? session.output_sessione) || "Scrivi l'apertura o l'output utile per la prossima preparazione.",
+        cls: hasText(session.prossima_apertura) || hasLinks(session.output_sessione) || hasText(session.output_sessione) ? "gdr-kind-ready" : "gdr-kind-missing",
+        link: session.file.path
+      }
+    ];
+
+    const grid = dv.el("div", "", { cls: "gdr-card-grid compact" });
+    grid.innerHTML = cards.map(card => cardHtml({
+      title: card.title,
+      meta: session.file.name,
+      body: card.body,
+      link: card.link,
+      cls: `gdr-info-card compact ${card.cls}`
+    })).join("");
+  }
+
   function renderPlayableOutline(dv, source = null) {
     const session = source ?? dv.current();
     const rows = [
@@ -514,6 +713,37 @@
     dv.table(["Nota", "Rischio"], risky.map(p => [p.file.link, "pubblico: true con campi segreti/prossima mossa/pressioni"]));
   }
 
+  function renderPlayerPortalStatus(dv) {
+    const risky = dv.pages('"Mondi" OR "Risorse/Mappe"')
+      .where(p => isReal(p) && p.pubblico === true && hasPrivateFields(p))
+      .array();
+    const missingSafeText = dv.pages('"Mondi" OR "Risorse/Mappe"')
+      .where(p => isReal(p) && p.pubblico === true && !hasText(p.player_safe) && !hasText(p.recap_pubblico) && p.categoria !== "sessione")
+      .array();
+    const sessionsWithoutRecap = dv.pages('"Mondi/Sessioni"')
+      .where(p => isReal(p) && p.stato === "giocata" && !hasText(p.recap_pubblico))
+      .array();
+    const publicMapsWithoutText = dv.pages('"Risorse/Mappe"')
+      .where(p => isReal(p) && p.pubblico === true && !hasText(p.player_safe) && !hasLinks(p.luoghi) && !hasText(p.cosa_mostrare))
+      .array();
+    const deliveredHandouts = publicRows(dv, '"Mondi/Dispense"', "dispensa", 99);
+
+    const checks = [
+      ["Anti-segreti", !risky.length, risky.map(pageTitle).join(", ") || "Nessuna nota pubblica contiene campi DM evidenti."],
+      ["Testo player-safe", !missingSafeText.length, missingSafeText.map(pageTitle).join(", ") || "Le note pubbliche hanno testo mostrabile o recap."],
+      ["Recap", !sessionsWithoutRecap.length, sessionsWithoutRecap.map(pageTitle).join(", ") || "Le sessioni giocate hanno recap pubblico o non sono esposte."],
+      ["Mappe", !publicMapsWithoutText.length, publicMapsWithoutText.map(pageTitle).join(", ") || "Le mappe pubbliche hanno descrizione, luoghi o cosa mostrare."],
+      ["Dispense", deliveredHandouts.length > 0, deliveredHandouts.map(pageTitle).join(", ") || "Nessun handout consegnato ancora visibile."]
+    ];
+
+    const grid = dv.el("div", "", { cls: "gdr-card-grid compact" });
+    grid.innerHTML = checks.map(([label, ok, body]) => cardHtml({
+      title: `${ok ? "OK" : "Manca"} · ${label}`,
+      body,
+      cls: `gdr-info-card compact gdr-card-player ${ok ? "gdr-kind-ready" : "gdr-kind-missing"}`
+    })).join("");
+  }
+
   function renderPlayerView(dv) {
     renderPublicStats(dv);
 
@@ -542,14 +772,18 @@
     renderAtlasMapCards,
     renderCreationFeedback,
     renderEmptyState,
+    renderLiveCommandCenter,
     renderPlaceMapCards,
     renderPlayableOutline,
     renderPlayerMap,
+    renderPlayerPortalStatus,
     renderPlayerRecap,
     renderPlayerView,
     renderPublicSafety,
     renderPublicStats,
+    renderPostSessionCommandCenter,
     renderWorldImpact,
+    renderWorldCreationStatus,
     renderSessionMapCards,
     renderTableCockpit
   };

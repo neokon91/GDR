@@ -66,6 +66,7 @@ const REQUIRED_FILES = [
     "Dev/Indice Connettore GPT.md",
     "Risorse/Smistamento Bozze Generate.md",
     "Mondi/Societa/Societa.md",
+    "z.fileclass/mondo.md",
     "z.bacheche/Manutenzione Vault.md"
 ];
 const REQUIRED_BASE_FILES = [
@@ -964,8 +965,13 @@ for (const [fileRel, fm] of realEntries) {
         warnings.push(`${fileRel}: sessione senza campo esplicito attiva`);
     }
 
+    if (fileRel.startsWith("Mondi/") && fm.categoria === "mondo" && fm.fileClass !== "mondo") {
+        warnings.push(`${fileRel}: mondo senza fileClass mondo`);
+    }
+
     if (fm.stato === "pronto") {
         const requiredByCategory = {
+            mondo: ["luoghi_iconici", "fazioni_principali", "culture_fondative", "misteri_pubblici"],
             sessione: ["mondo", "campagne", "luoghi", "missioni"],
             missione: ["mondo", "luoghi", "fazioni", "committente"],
             incontro: ["luogo", "creature", "missioni", "fazioni"],

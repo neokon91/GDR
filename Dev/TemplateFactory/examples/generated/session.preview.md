@@ -16,6 +16,19 @@ tab: Prepara
 >
 > > [!lettura]- Materiale pronto
 > > `INPUT[inlineList:materiale_pronto]`
+>
+> Incontri: `INPUT[inlineListSuggester(optionQuery("Mondi/Incontri"), useLinks(partial), allowOther):incontri]`
+>
+> Mappe: `INPUT[inlineListSuggester(optionQuery("Risorse/Mappe"), useLinks(partial), allowOther):mappe]`
+>
+> Dispense: `INPUT[inlineListSuggester(optionQuery("Mondi/Dispense"), useLinks(partial), allowOther):dispense]`
+
+> [!incontro]- Crea Materiale
+> `BUTTON[nuovo-incontro-z-modelli-dm-incontro-md-default]`
+>
+> `BUTTON[nuova-mappa-zoom-z-modelli-mappe-mappa-zoom-md]`
+>
+> `BUTTON[nuova-dispensa-z-modelli-dispensa-md-default]`
 
 tab: Ancore
 
@@ -29,6 +42,22 @@ tab: Ancore
 > Missioni: `INPUT[missioni][:missioni]`
 >
 > Clock: `INPUT[tracciati][:tracciati]`
+>
+> PNG: `INPUT[inlineListSuggester(optionQuery("Mondi/Personaggi"), useLinks(partial), allowOther):personaggi]`
+
+tab: Media
+
+> [!lettura] Supporti Al Tavolo
+> Audio: `INPUT[inlineListSuggester(optionQuery("Risorse/Audio"), useLinks(partial), allowOther):audio]`
+>
+> Immagini: `INPUT[inlineListSuggester(optionQuery("Risorse/Immagini"), useLinks(partial), allowOther):immagini]`
+>
+> Video: `INPUT[inlineListSuggester(optionQuery("Risorse/Video"), useLinks(partial), allowOther):video]`
+
+> [!todo] Task Preparazione
+> - [ ] Completa obiettivo, apertura e scelta #task
+> - [ ] Collega almeno tre ancore mondo #task
+> - [ ] Prepara almeno un incontro, handout, mappa o media #task
 
 tab: Live
 
@@ -71,3 +100,7 @@ gdr.renderPlayableOutline(dv, dv.current());
 | Scelta concreta |  |
 | Pressioni |  |
 | Materiale pronto |  |
+| Incontri |  |
+| Mappe |  |
+| Dispense |  |
+| Media |  |

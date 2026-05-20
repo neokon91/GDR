@@ -12,8 +12,11 @@ kanban-plugin: board
 
 ## Release
 
-- [ ] Eseguire `git diff --check` prima di preparare ZIP o commit #task 🔺
+- [ ] Eseguire `npm run check` prima di preparare ZIP o commit #task 🔺
+- [ ] Eseguire `npm run check:diff` se hai modifiche Markdown o YAML estese #task 🔺
+- [ ] Verificare [[Dev/Smoke 1.0 Professionale]] sui flussi toccati #task 🔼
 - [ ] Aggiornare [[Dev/CHANGELOG]] dopo modifiche strutturali #task 🔼
+- [ ] Eseguire `npm run release:clean` e aprire `dist/vault-gdr-clean/LEGGIMI.md` prima di pubblicare ZIP #task 🔼
 
 
 %% kanban:settings

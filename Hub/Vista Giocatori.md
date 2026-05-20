@@ -13,6 +13,13 @@ pubblico: true
 > [!lettura] Portale condivisibile
 > Mostra solo materiale emerso al tavolo o marcato `pubblico: true`. I link diretti compaiono solo quando la nota non contiene campi DM evidenti.
 
+## Stato Portale
+
+```dataviewjs
+const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+gdr.renderPlayerPortalStatus(dv);
+```
+
 ## Recap
 
 ```dataviewjs
