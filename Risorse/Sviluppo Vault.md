@@ -3,12 +3,13 @@
 Questa nota guida le modifiche future al vault. Il destinatario finale è un DM o worldbuilder che vuole preparare e giocare meglio, non una persona tecnica.
 
 ## Principio Guida
-Ogni modifica deve rendere piu facile una di queste azioni:
-- preparare una sessione o una campagna;
-- trovare le informazioni utili facilmente durante il gioco;
-- tenere traccia di cosa è successo;
-- trasformare le idee grezze in strutture definite di un mondo giocabile;
-- mantenere continuità tra sessioni.
+Ogni modifica deve rendere piu facile il flusso principale:
+
+1. preparare una sessione concreta;
+2. giocarla senza cercare materiale in dieci note;
+3. aggiornare il mondo dopo il tavolo.
+
+Se una modifica non accorcia, chiarisce o automatizza questo flusso, va rimandata.
 
 ## Utente Finale
 Il vault deve funzionare per una persona che:
@@ -28,7 +29,10 @@ Il vault deve funzionare per una persona che:
 - Le istruzioni tecniche non vanno nel README se non sono necessarie per usare il vault al tavolo.
 
 ## Regole Di Progettazione
-- Una schermata per Worldbuilding e una per DM.
+- Nessuna nuova dashboard entra nel percorso principale se non sostituisce o riduce una schermata esistente.
+- `Inizia Qui` deve restare una pagina a tre azioni: Prepara, Gioca, Aggiorna il mondo.
+- Ogni pagina operativa deve dichiarare quale output produce.
+- Gli strumenti avanzati devono restare collassati o fuori dal flusso base.
 - Usa parole da tavolo, non parole tecniche.
 - Inserire pulsanti dove l'utente prende decisioni.
 - Usare card per attenzione immediata.
@@ -40,17 +44,18 @@ Il vault deve funzionare per una persona che:
 - Usare callout annidati solo quando il dettaglio appartiene chiaramente alla sezione madre; evita annidamenti profondi oltre un livello.
 - Lascia i dettagli tecnici in `z.modelli`, `z.automazioni` e CSS.
 
+Vedi anche [docs/UX_OPERATIVA.md](../docs/UX_OPERATIVA.md). Se c'e conflitto, prevale la UX operativa.
+
 ## Cosa Deve Essere Sempre Visibile
-Nella dashboard DM devono esserci:
-- campagne in corso;
-- prossime sessioni;
-- idee da smistare/completare;
-- guida DM;
-Nella dashboard Worldbuilder devono esserci:
-- pulsanti di creazione;
-- elenco dei mondi;
-- note in stato bozza da completare;
-- rapida visuale dei diversi mondi
+
+Nel flusso base devono essere sempre visibili:
+
+- cosa fare adesso;
+- quale output ottenere;
+- cosa manca per completarlo;
+- il pulsante per passare allo step successivo.
+
+Dashboard DM, Worldbuilder, Atlante e report sono strumenti avanzati: utili, ma non devono competere con il percorso principale.
 
 ## Stati delle Note Consigliati
 Usa pochi stati e usali sempre nello stesso modo.

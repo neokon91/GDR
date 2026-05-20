@@ -4,7 +4,7 @@
 
 Vault GDR e un vault Obsidian professionale per DM e worldbuilder italiani che vogliono preparare campagne, costruire ambientazioni profonde e giocare senza dover capire plugin, template o automazioni.
 
-Il prodotto deve essere percepito come una app locale in Obsidian: dashboard, pulsanti, viste operative, controlli e release pulita. Non come un vault personale copiato da qualcuno.
+Il prodotto deve essere percepito come una app locale in Obsidian: poche azioni, output chiari, viste operative e release pulita. Non come un vault personale copiato da qualcuno e non come una rete di dashboard da attraversare.
 
 ## Positioning
 
@@ -17,6 +17,7 @@ Il prodotto deve essere percepito come una app locale in Obsidian: dashboard, pu
 - esperienza in italiano;
 - onboarding non tecnico con tre sole azioni principali;
 - flusso completo da mondo a campagna a sessione;
+- UX operativa: meno navigazione, piu output concreto;
 - worldbuilding sistemico: tassonomia, relazioni, canone, geopolitica e mondo vivo;
 - vista giocatori dedicata;
 - release pulita;
@@ -53,6 +54,7 @@ Il prodotto deve essere percepito come una app locale in Obsidian: dashboard, pu
 
 ### Punti Deboli
 
+- Rischio di troppe dashboard e percorsi paralleli.
 - Installazione ancora da rendere consumer-grade.
 - Mancano screenshot e video.
 - Dipendenza da molti strumenti Obsidian.
@@ -72,23 +74,23 @@ Il prodotto deve essere percepito come una app locale in Obsidian: dashboard, pu
 
 ## Gaps Principali
 
-1. Release ZIP ufficiale e visibile.
-2. Screenshot/GIF delle dashboard.
-3. Screenshot/GIF di Motore Mondo Vivo e Geopolitical Dashboard.
-4. README piu commerciale.
+1. Flusso operativo ancora da testare brutalmente con utenti reali.
+2. Troppe viste avanzate percepite come tappe obbligatorie.
+3. Release ZIP ufficiale e visibile.
+4. Screenshot/GIF del flusso base, non solo delle dashboard.
 5. Export vista giocatori.
-6. Controllo anti-segreti pubblici.
-7. Demo video breve.
-8. Branding piu memorabile di "Vault GDR".
-9. Strategia core open source + moduli premium.
+6. Demo video breve.
+7. Branding piu memorabile di "Vault GDR".
+8. Strategia core open source + moduli premium.
 
 ## Roadmap Strategica
 
 ### Breve Termine
 
+- QA operativo del flusso Prepara -> Gioca -> Aggiorna il mondo.
+- Riduzione dei percorsi paralleli e dei pulsanti non essenziali.
 - Release ZIP su GitHub.
-- Screenshot principali.
-- Demo visuale della catena evento -> fazione -> relazione -> territorio -> prossima sessione.
+- Screenshot e GIF del flusso base.
 - README prodotto.
 - CONTRIBUTING e issue template.
 - Matrice strumenti.

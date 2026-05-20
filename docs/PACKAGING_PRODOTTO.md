@@ -4,7 +4,7 @@ Questa pagina serve a trasformare il vault da strumento potente a prodotto leggi
 
 ## Posizionamento
 
-Vault Obsidian italiano per DM e worldbuilder: workflow di sessione, mondo vivo, atlante, portale giocatori, party control e quality report in Markdown.
+Vault Obsidian italiano per DM e worldbuilder: prepara una sessione, giocala, aggiorna il mondo. Atlante, portale giocatori, party control e quality report restano strumenti di supporto, non il percorso principale.
 
 ## Feature Da Mostrare
 
@@ -19,7 +19,7 @@ Vault Obsidian italiano per DM e worldbuilder: workflow di sessione, mondo vivo,
 
 ## GIF Brevi
 
-1. Flusso base: `Inizia Qui` -> `Preparazione Sessione` -> `Durante il Gioco` -> `Cosa Succede Fuori Scena`.
+1. Flusso base obbligatorio: `Inizia Qui` -> `Preparazione Sessione` -> `Durante il Gioco` -> `Cosa Succede Fuori Scena`.
 2. Sessione: `Preparazione Sessione` -> cinque blocchi pronti -> `Durante il Gioco`.
 3. Condivisione: `Vista Giocatori` -> mappa pubblica -> handout.
 4. Worldbuilding: `Atlante del Mondo` -> mappa -> rotte -> buchi ambientazione.
@@ -44,6 +44,8 @@ Il core vendibile e composto da:
 
 - [ ] `npm run check` pulito.
 - [ ] `npm run release:clean` genera `dist/vault-gdr-clean.zip`.
+- [ ] Test manuale UX: nuovo utente capisce il prossimo click in 30 secondi.
+- [ ] Test manuale UX: la preparazione mostra cosa manca in una schermata.
 - [ ] Lo ZIP contiene `Hub/Vista Giocatori.md`, `Hub/Party Control.md`, `Risorse/Quality Report.md` e `LEGGIMI.md`.
 - [ ] `Vista Giocatori` senza segreti esposti.
 - [ ] `Quality Report` senza buchi bloccanti.
