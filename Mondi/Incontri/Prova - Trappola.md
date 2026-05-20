@@ -4,14 +4,14 @@ nome: "Prova - Trappola"
 categoria: incontro
 tipo: trappola
 stato: archiviata
-mondo: [[Prova - Mondo]]
-luogo: [[Prova - Dungeon]]
+mondo: "[[Prova - Mondo]]"
+luogo: "[[Prova - Dungeon]]"
 creature: []
 personaggi:
-  - [[Prova - PG]]
+  - "[[Prova - PG]]"
 pericolo: 6
 ricompense:
-  - [[Prova - Oggetto]]
+  - "[[Prova - Oggetto]]"
 ---
 
 # Prova - Trappola

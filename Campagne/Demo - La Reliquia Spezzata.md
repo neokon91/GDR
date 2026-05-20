@@ -7,23 +7,23 @@ stato: preparazione
 tono: "mistero, viaggio, scelte morali"
 livello_attuale: 3
 personaggi:
-  - [[Demo - Mira Ventofermo]]
-  - [[Demo - Odran il Campanaro]]
-  - [[Demo - Sella Neraluce]]
+  - "[[Demo - Mira Ventofermo]]"
+  - "[[Demo - Odran il Campanaro]]"
+  - "[[Demo - Sella Neraluce]]"
 luoghi:
-  - [[Demo - Ponte delle Campane]]
-  - [[Demo - Santuario della Prima Pietra]]
+  - "[[Demo - Ponte delle Campane]]"
+  - "[[Demo - Santuario della Prima Pietra]]"
 fazioni:
-  - [[Demo - Custodi della Soglia]]
+  - "[[Demo - Custodi della Soglia]]"
 sessioni:
-  - [[Demo - Sessione 1 - La Campana Senza Vento]]
-  - [[Demo - Sessione 2 - Il Santuario Sotto Nebbia]]
+  - "[[Demo - Sessione 1 - La Campana Senza Vento]]"
+  - "[[Demo - Sessione 2 - Il Santuario Sotto Nebbia]]"
 missioni:
-  - [[Demo - Recuperare i Frammenti]]
+  - "[[Demo - Recuperare i Frammenti]]"
 tracciati:
-  - [[Demo - I Custodi Chiudono il Ponte]]
-  - [[Demo - La Soglia Si Apre]]
-  - [[Demo - Attraversare Brumafonda]]
+  - "[[Demo - I Custodi Chiudono il Ponte]]"
+  - "[[Demo - La Soglia Si Apre]]"
+  - "[[Demo - Attraversare Brumafonda]]"
 ---
 
 # Demo - La Reliquia Spezzata

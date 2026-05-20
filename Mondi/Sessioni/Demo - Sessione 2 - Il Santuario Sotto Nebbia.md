@@ -15,40 +15,40 @@ fc-display-name: "Sessione 2"
 fc-end:
 stato: in corso
 attiva: true
-mondo: [[Demo - Terre della Soglia]]
+mondo: "[[Demo - Terre della Soglia]]"
 campagne:
-  - [[Demo - La Reliquia Spezzata]]
+  - "[[Demo - La Reliquia Spezzata]]"
 luoghi:
-  - [[Demo - Santuario della Prima Pietra]]
-  - [[Demo - Marca della Soglia]]
+  - "[[Demo - Santuario della Prima Pietra]]"
+  - "[[Demo - Marca della Soglia]]"
 personaggi:
-  - [[Demo - Sella Neraluce]]
-  - [[Demo - Mira Ventofermo]]
+  - "[[Demo - Sella Neraluce]]"
+  - "[[Demo - Mira Ventofermo]]"
 creature: []
 incontri:
-  - [[Demo - Nebbia al Ponte]]
+  - "[[Demo - Nebbia al Ponte]]"
 dispense:
-  - [[Demo - Lettera Macchiata di Nebbia]]
+  - "[[Demo - Lettera Macchiata di Nebbia]]"
 mappe:
-  - [[Demo - Mappa Relazioni]]
-  - [[Demo - Mappa Zoomabile]]
-  - [[Demo - Brumafonda.hexcartographer]]
+  - "[[Demo - Mappa Relazioni]]"
+  - "[[Demo - Mappa Zoomabile]]"
+  - "[[Demo - Brumafonda.hexcartographer]]"
 audio:
-  - [[Demo - Nebbia Sul Ponte]]
+  - "[[Demo - Nebbia Sul Ponte]]"
 immagini: []
 video: []
 fazioni:
-  - [[Demo - Custodi della Soglia]]
+  - "[[Demo - Custodi della Soglia]]"
 relazioni:
-  - [[Demo - Custodi e Brumafonda]]
+  - "[[Demo - Custodi e Brumafonda]]"
 missioni:
-  - [[Demo - Recuperare i Frammenti]]
+  - "[[Demo - Recuperare i Frammenti]]"
 tracciati:
-  - [[Demo - I Custodi Chiudono il Ponte]]
-  - [[Demo - La Soglia Si Apre]]
-  - [[Demo - Attraversare Brumafonda]]
+  - "[[Demo - I Custodi Chiudono il Ponte]]"
+  - "[[Demo - La Soglia Si Apre]]"
+  - "[[Demo - Attraversare Brumafonda]]"
 oggetti:
-  - [[Demo - Frammento della Soglia]]
+  - "[[Demo - Frammento della Soglia]]"
 obiettivo: "Entrare nel santuario e capire cosa protegge davvero la reliquia."
 scene:
   - negoziare con Sella

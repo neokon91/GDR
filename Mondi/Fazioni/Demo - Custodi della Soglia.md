@@ -6,29 +6,29 @@ fileClass: fazione
 tipo: ordine rituale
 stato: ostile
 canonico: true
-mondo: [[Demo - Terre della Soglia]]
+mondo: "[[Demo - Terre della Soglia]]"
 leader:
-  - [[Demo - Sella Neraluce]]
+  - "[[Demo - Sella Neraluce]]"
 luoghi:
-  - [[Demo - Santuario della Prima Pietra]]
-  - [[Demo - Marca della Soglia]]
+  - "[[Demo - Santuario della Prima Pietra]]"
+  - "[[Demo - Marca della Soglia]]"
 personaggi:
-  - [[Demo - Sella Neraluce]]
-  - [[Demo - Odran il Campanaro]]
+  - "[[Demo - Sella Neraluce]]"
+  - "[[Demo - Odran il Campanaro]]"
 agenda: "Trasformare la crisi mistica in autorità politica sulla valle."
 pressione: 8
 prossima_mossa: "Dichiarare il coprifuoco, sigillare il ponte e requisire ogni frammento trovato."
 rivali:
-  - [[Demo - Mira Ventofermo]]
+  - "[[Demo - Mira Ventofermo]]"
 relazioni:
-  - [[Demo - Custodi e Brumafonda]]
+  - "[[Demo - Custodi e Brumafonda]]"
 propaga_a:
-  - [[Demo - Custodi e Brumafonda]]
-  - [[Demo - Recuperare i Frammenti]]
-  - [[Demo - Marca della Soglia]]
+  - "[[Demo - Custodi e Brumafonda]]"
+  - "[[Demo - Recuperare i Frammenti]]"
+  - "[[Demo - Marca della Soglia]]"
 tracciati:
-  - [[Demo - I Custodi Chiudono il Ponte]]
-  - [[Demo - La Soglia Si Apre]]
+  - "[[Demo - I Custodi Chiudono il Ponte]]"
+  - "[[Demo - La Soglia Si Apre]]"
 conseguenze:
   - La Seconda Nebbia permette ai Custodi di prendere controllo pubblico del ponte.
   - Sella puo accusare chiunque nasconda frammenti di mettere la valle in pericolo.

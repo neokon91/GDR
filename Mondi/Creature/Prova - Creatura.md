@@ -7,7 +7,7 @@ categoria: creatura
 type: bestia
 tipo: bestia
 stato: archiviata
-mondo: [[Prova - Mondo]]
+mondo: "[[Prova - Mondo]]"
 size: media
 alignment: neutrale
 ac: 13
@@ -26,7 +26,7 @@ languages:
 gear:
 habitat: foresta
 luoghi:
-  - [[Prova - Regione Naturale]]
+  - "[[Prova - Regione Naturale]]"
 traits: []
 actions: []
 bonus_actions: []

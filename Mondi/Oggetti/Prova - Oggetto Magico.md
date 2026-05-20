@@ -9,9 +9,9 @@ cariche: 3
 maledizione: false
 stato: archiviata
 canonico: false
-mondo: [[Prova - Mondo]]
-proprietario: [[Prova - PG]]
-luogo: [[Prova - Dungeon]]
+mondo: "[[Prova - Mondo]]"
+proprietario: "[[Prova - PG]]"
+luogo: "[[Prova - Dungeon]]"
 ---
 
 # Prova - Oggetto Magico

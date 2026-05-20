@@ -7,16 +7,16 @@ tipologia: villaggio
 bioma: foresta
 stato: archiviata
 canonico: false
-mondo: [[Prova - Mondo]]
-luogo_padre: [[Prova - Regione]]
-governante: [[Prova - PNG]]
+mondo: "[[Prova - Mondo]]"
+luogo_padre: "[[Prova - Regione]]"
+governante: "[[Prova - PNG]]"
 popolazione: 240
 stabilita: 6
 pericolo: 3
 fazioni:
-  - [[Prova - Gilda]]
+  - "[[Prova - Gilda]]"
 religioni:
-  - [[Prova - Divinità]]
+  - "[[Prova - Divinità]]"
 risorse:
   - legname
 problemi:

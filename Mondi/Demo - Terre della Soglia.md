@@ -8,14 +8,14 @@ tema: "un antico patto sta cedendo"
 tecnologia: "medievale fantastica"
 magia: "rara, rituale e temuta"
 continenti:
-  - [[Demo - Valle di Brumafonda]]
+  - "[[Demo - Valle di Brumafonda]]"
 territori_politici:
-  - [[Demo - Marca della Soglia]]
+  - "[[Demo - Marca della Soglia]]"
 fazioni:
-  - [[Demo - Custodi della Soglia]]
+  - "[[Demo - Custodi della Soglia]]"
 religioni: []
 relazioni_chiave:
-  - [[Demo - Custodi e Brumafonda]]
+  - "[[Demo - Custodi e Brumafonda]]"
 stato_mondo:
   - Dopo la Seconda Nebbia il ponte e una frontiera politica.
   - I Custodi possono imporre coprifuoco e requisizioni in nome della sicurezza.
@@ -23,7 +23,7 @@ stato_mondo:
 continuita:
   - La prossima sessione deve aprire con il costo politico del coprifuoco.
 campagne:
-  - [[Demo - La Reliquia Spezzata]]
+  - "[[Demo - La Reliquia Spezzata]]"
 canonico: true
 ---
 

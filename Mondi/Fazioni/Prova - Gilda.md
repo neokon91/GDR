@@ -5,13 +5,13 @@ categoria: fazione
 tipo: gilda
 stato: archiviata
 canonico: false
-mondo: [[Prova - Mondo]]
+mondo: "[[Prova - Mondo]]"
 leader:
-  - [[Prova - PNG]]
+  - "[[Prova - PNG]]"
 luoghi:
-  - [[Prova - Insediamento]]
+  - "[[Prova - Insediamento]]"
 personaggi:
-  - [[Prova - PNG]]
+  - "[[Prova - PNG]]"
 servizi:
   - informazioni
   - scorte

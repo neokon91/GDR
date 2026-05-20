@@ -4,12 +4,12 @@ nome: "Prova - Pericolo Ambientale"
 categoria: incontro
 tipo: pericolo ambientale
 stato: archiviata
-mondo: [[Prova - Mondo]]
-luogo: [[Prova - Regione Naturale]]
+mondo: "[[Prova - Mondo]]"
+luogo: "[[Prova - Regione Naturale]]"
 creature:
-  - [[Prova - Creatura]]
+  - "[[Prova - Creatura]]"
 personaggi:
-  - [[Prova - PG]]
+  - "[[Prova - PG]]"
 pericolo: 4
 ricompense: []
 ---

@@ -2,7 +2,7 @@
 cssclasses:
   - dashboard
   - gdr-worldbuilder-dashboard
-mondo_attivo:
+mondo_attivo: ""
 campagne_attive: []
 ---
 

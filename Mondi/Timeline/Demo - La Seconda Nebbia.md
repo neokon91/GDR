@@ -6,42 +6,42 @@ tipo: evento
 stato: canonico
 stato_canonico: canonico
 canonico: true
-mondo: [[Demo - Terre della Soglia]]
+mondo: "[[Demo - Terre della Soglia]]"
 data_mondo: "Seconda notte di nebbia"
 fc-calendar: "Brumafonda"
 fc-date: "1-1-2"
 fc-category: conseguenza
 fc-display-name: "La Seconda Nebbia"
 luoghi:
-  - [[Demo - Ponte delle Campane]]
-  - [[Demo - Santuario della Prima Pietra]]
+  - "[[Demo - Ponte delle Campane]]"
+  - "[[Demo - Santuario della Prima Pietra]]"
 personaggi:
-  - [[Demo - Mira Ventofermo]]
-  - [[Demo - Sella Neraluce]]
+  - "[[Demo - Mira Ventofermo]]"
+  - "[[Demo - Sella Neraluce]]"
 fazioni:
-  - [[Demo - Custodi della Soglia]]
+  - "[[Demo - Custodi della Soglia]]"
 tracciati:
-  - [[Demo - I Custodi Chiudono il Ponte]]
+  - "[[Demo - I Custodi Chiudono il Ponte]]"
 sessioni:
-  - [[Demo - Sessione 2 - Il Santuario Sotto Nebbia]]
+  - "[[Demo - Sessione 2 - Il Santuario Sotto Nebbia]]"
 causa: "La reliquia e stata avvicinata al santuario mentre la soglia era gia instabile."
 cause:
-  - [[Demo - La Nebbia Ha Preso il Ponte]]
+  - "[[Demo - La Nebbia Ha Preso il Ponte]]"
 effetti:
-  - [[Demo - I Custodi Chiudono il Ponte]]
-  - [[Demo - Custodi e Brumafonda]]
-  - [[Demo - Marca della Soglia]]
+  - "[[Demo - I Custodi Chiudono il Ponte]]"
+  - "[[Demo - Custodi e Brumafonda]]"
+  - "[[Demo - Marca della Soglia]]"
 entita_impattate:
-  - [[Demo - Ponte delle Campane]]
-  - [[Demo - Custodi della Soglia]]
-  - [[Demo - Recuperare i Frammenti]]
-  - [[Demo - Custodi e Brumafonda]]
-  - [[Demo - Marca della Soglia]]
+  - "[[Demo - Ponte delle Campane]]"
+  - "[[Demo - Custodi della Soglia]]"
+  - "[[Demo - Recuperare i Frammenti]]"
+  - "[[Demo - Custodi e Brumafonda]]"
+  - "[[Demo - Marca della Soglia]]"
 propaga_a:
-  - [[Demo - I Custodi Chiudono il Ponte]]
-  - [[Demo - Recuperare i Frammenti]]
-  - [[Demo - Custodi e Brumafonda]]
-  - [[Demo - Marca della Soglia]]
+  - "[[Demo - I Custodi Chiudono il Ponte]]"
+  - "[[Demo - Recuperare i Frammenti]]"
+  - "[[Demo - Custodi e Brumafonda]]"
+  - "[[Demo - Marca della Soglia]]"
 stato_mondo:
   - La valle tratta la nebbia come crisi politica oltre che mistica.
 conseguenze:

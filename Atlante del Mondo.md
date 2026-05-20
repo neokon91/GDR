@@ -5,7 +5,7 @@ cssclasses:
 categoria: risorsa
 tipo: dashboard
 stato: pronto
-mondo_attivo:
+mondo_attivo: ""
 ---
 
 # Atlante Del Mondo

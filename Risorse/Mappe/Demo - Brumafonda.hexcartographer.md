@@ -1,11 +1,11 @@
 ---
 type: hexcartographer
 uso: esagoni
-mondo: [[Demo - Terre della Soglia]]
+mondo: "[[Demo - Terre della Soglia]]"
 luoghi:
-  - [[Demo - Valle di Brumafonda]]
-  - [[Demo - Ponte delle Campane]]
-  - [[Demo - Santuario della Prima Pietra]]
+  - "[[Demo - Valle di Brumafonda]]"
+  - "[[Demo - Ponte delle Campane]]"
+  - "[[Demo - Santuario della Prima Pietra]]"
 stato: pronto
 ---
 

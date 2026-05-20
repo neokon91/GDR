@@ -6,12 +6,12 @@ tipo: rivalità
 stato: in gioco
 canonico: true
 stato_canonico: canonico
-mondo: [[Demo - Terre della Soglia]]
+mondo: "[[Demo - Terre della Soglia]]"
 soggetti:
-  - [[Demo - Custodi della Soglia]]
-  - [[Demo - Marca della Soglia]]
-  - [[Demo - Valle di Brumafonda]]
-  - [[Demo - Ponte delle Campane]]
+  - "[[Demo - Custodi della Soglia]]"
+  - "[[Demo - Marca della Soglia]]"
+  - "[[Demo - Valle di Brumafonda]]"
+  - "[[Demo - Ponte delle Campane]]"
 origine: "I Custodi proteggevano la valle, ma la Seconda Nebbia ha trasformato la tutela in controllo armato."
 posta: "Chi decide cosa e sicurezza e cosa e tirannia quando la Soglia minaccia di aprirsi."
 intensita: 7
@@ -20,20 +20,20 @@ stabilita: 3
 prossima_mossa: "I Custodi impongono posti di blocco al ponte e chiedono ostaggi rituali alle famiglie vicine alla campana."
 innesco: "Peggiora se i PG mostrano un frammento, difendono Odran o lasciano passare una notte senza agire."
 eventi:
-  - [[Demo - La Seconda Nebbia]]
+  - "[[Demo - La Seconda Nebbia]]"
 trattati: []
 conseguenze:
   - Il ponte diventa frontiera politica.
   - La missione dei frammenti smette di essere segreta.
   - Mira deve scegliere se mediare o guidare opposizione locale.
 entita_impattate:
-  - [[Demo - Recuperare i Frammenti]]
-  - [[Demo - I Custodi Chiudono il Ponte]]
-  - [[Demo - Mira Ventofermo]]
-  - [[Demo - Marca della Soglia]]
+  - "[[Demo - Recuperare i Frammenti]]"
+  - "[[Demo - I Custodi Chiudono il Ponte]]"
+  - "[[Demo - Mira Ventofermo]]"
+  - "[[Demo - Marca della Soglia]]"
 propaga_a:
-  - [[Demo - Sessione 2 - Il Santuario Sotto Nebbia]]
-  - [[Demo - Marca della Soglia]]
+  - "[[Demo - Sessione 2 - Il Santuario Sotto Nebbia]]"
+  - "[[Demo - Marca della Soglia]]"
 scelte:
   - negoziare il coprifuoco
   - sabotare il blocco del ponte

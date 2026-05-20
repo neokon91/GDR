@@ -7,8 +7,8 @@ tipologia: luogo di interesse
 bioma: pianura
 stato: archiviata
 canonico: false
-mondo: [[Prova - Mondo]]
-luogo_padre: [[Prova - Regione]]
+mondo: "[[Prova - Mondo]]"
+luogo_padre: "[[Prova - Regione]]"
 pericolo: 2
 fazioni: []
 religioni: []

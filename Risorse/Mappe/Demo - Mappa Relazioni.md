@@ -5,8 +5,8 @@ categoria: risorsa
 tipo: mappa relazionale
 stato: pronto
 uso: "relazioni demo"
-mondo: [[Demo - Terre della Soglia]]
-luogo: [[Demo - Ponte delle Campane]]
+mondo: "[[Demo - Terre della Soglia]]"
+luogo: "[[Demo - Ponte delle Campane]]"
 ---
 
 # Demo - Mappa Relazioni

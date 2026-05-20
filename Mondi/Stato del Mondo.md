@@ -4,7 +4,7 @@ cssclasses:
 categoria: risorsa
 tipo: stato mondo
 stato: pronto
-mondo_attivo:
+mondo_attivo: ""
 campagne_attive: []
 ---
 

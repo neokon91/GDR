@@ -4,17 +4,17 @@ nome: "Prova - Missione"
 categoria: missione
 tipo: incarico
 stato: archiviata
-mondo: [[Prova - Mondo]]
-committente: [[Prova - PNG]]
+mondo: "[[Prova - Mondo]]"
+committente: "[[Prova - PNG]]"
 luoghi:
-  - [[Prova - Dungeon]]
+  - "[[Prova - Dungeon]]"
 personaggi:
-  - [[Prova - PG]]
-  - [[Prova - PNG]]
+  - "[[Prova - PG]]"
+  - "[[Prova - PNG]]"
 fazioni:
-  - [[Prova - Fazione]]
+  - "[[Prova - Fazione]]"
 ricompense:
-  - [[Prova - Oggetto Magico]]
+  - "[[Prova - Oggetto Magico]]"
 scadenza_mondo: "Giorno di prova"
 fc-calendar: "Calendario di prova"
 fc-date: "1-1-1"

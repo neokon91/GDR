@@ -4,8 +4,8 @@ cssclasses:
 categoria: risorsa
 tipo: mappa
 uso: zoom
-mondo: [[Demo - Terre della Soglia]]
-luogo: [[Demo - Valle di Brumafonda]]
+mondo: "[[Demo - Terre della Soglia]]"
+luogo: "[[Demo - Valle di Brumafonda]]"
 stato: pronto
 ---
 

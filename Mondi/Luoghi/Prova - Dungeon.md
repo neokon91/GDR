@@ -7,8 +7,8 @@ tipologia: dungeon
 bioma: sottosuolo
 stato: archiviata
 canonico: false
-mondo: [[Prova - Mondo]]
-luogo_padre: [[Prova - Regione]]
+mondo: "[[Prova - Mondo]]"
+luogo_padre: "[[Prova - Regione]]"
 pericolo: 7
 fazioni: []
 religioni: []

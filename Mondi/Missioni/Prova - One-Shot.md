@@ -4,15 +4,15 @@ nome: "Prova - One-Shot"
 categoria: avventura
 tipo: one-shot
 stato: archiviata
-mondo: [[Prova - Mondo]]
+mondo: "[[Prova - Mondo]]"
 livello: 3
 durata: "3 ore"
 luoghi:
-  - [[Prova - Isola]]
+  - "[[Prova - Isola]]"
 incontri:
-  - [[Prova - Pericolo Ambientale]]
+  - "[[Prova - Pericolo Ambientale]]"
 personaggi:
-  - [[Prova - PNG]]
+  - "[[Prova - PNG]]"
 ---
 
 # Prova - One-Shot

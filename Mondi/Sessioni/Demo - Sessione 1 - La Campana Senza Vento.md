@@ -15,43 +15,43 @@ fc-display-name: "Sessione 1"
 fc-end:
 stato: pronto
 attiva: false
-mondo: [[Demo - Terre della Soglia]]
+mondo: "[[Demo - Terre della Soglia]]"
 campagne:
-  - [[Demo - La Reliquia Spezzata]]
+  - "[[Demo - La Reliquia Spezzata]]"
 luoghi:
-  - [[Demo - Ponte delle Campane]]
+  - "[[Demo - Ponte delle Campane]]"
 personaggi:
-  - [[Demo - Mira Ventofermo]]
-  - [[Demo - Odran il Campanaro]]
-  - [[Demo - Sella Neraluce]]
+  - "[[Demo - Mira Ventofermo]]"
+  - "[[Demo - Odran il Campanaro]]"
+  - "[[Demo - Sella Neraluce]]"
 creature: []
 incontri:
-  - [[Demo - Nebbia al Ponte]]
+  - "[[Demo - Nebbia al Ponte]]"
 dispense:
-  - [[Demo - Lettera Macchiata di Nebbia]]
+  - "[[Demo - Lettera Macchiata di Nebbia]]"
 mappe:
-  - [[Demo - Mappa Relazioni]]
-  - [[Demo - Mappa Zoomabile]]
+  - "[[Demo - Mappa Relazioni]]"
+  - "[[Demo - Mappa Zoomabile]]"
 audio:
-  - [[Demo - Nebbia Sul Ponte]]
+  - "[[Demo - Nebbia Sul Ponte]]"
 immagini: []
 video: []
 fazioni:
-  - [[Demo - Custodi della Soglia]]
+  - "[[Demo - Custodi della Soglia]]"
 missioni:
-  - [[Demo - Recuperare i Frammenti]]
+  - "[[Demo - Recuperare i Frammenti]]"
 tracciati:
-  - [[Demo - I Custodi Chiudono il Ponte]]
-  - [[Demo - La Soglia Si Apre]]
+  - "[[Demo - I Custodi Chiudono il Ponte]]"
+  - "[[Demo - La Soglia Si Apre]]"
 oggetti:
-  - [[Demo - Frammento della Soglia]]
+  - "[[Demo - Frammento della Soglia]]"
 obiettivo: "Scoprire perche la campana suona senza vento."
 scene:
   - arrivo al ponte
   - interrogare Odran
   - trovare il frammento
 ricompense:
-  - [[Demo - Frammento della Soglia]]
+  - "[[Demo - Frammento della Soglia]]"
 segreti_rivelabili:
   - Odran ha il frammento
   - Sella mente sul santuario

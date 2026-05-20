@@ -9,9 +9,9 @@ cariche: 1
 maledizione: false
 stato: pronto
 canonico: true
-mondo: [[Demo - Terre della Soglia]]
+mondo: "[[Demo - Terre della Soglia]]"
 proprietario:
-luogo: [[Demo - Ponte delle Campane]]
+luogo: "[[Demo - Ponte delle Campane]]"
 ---
 
 # Demo - Frammento della Soglia

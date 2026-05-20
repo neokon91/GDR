@@ -5,18 +5,18 @@ categoria: tracciato
 fileClass: tracciato
 tipo: minaccia
 stato: attivo
-mondo: [[Demo - Terre della Soglia]]
+mondo: "[[Demo - Terre della Soglia]]"
 campagne:
-  - [[Demo - La Reliquia Spezzata]]
+  - "[[Demo - La Reliquia Spezzata]]"
 missioni:
-  - [[Demo - Recuperare i Frammenti]]
+  - "[[Demo - Recuperare i Frammenti]]"
 fazioni:
-  - [[Demo - Custodi della Soglia]]
+  - "[[Demo - Custodi della Soglia]]"
 luoghi:
-  - [[Demo - Santuario della Prima Pietra]]
-  - [[Demo - Ponte delle Campane]]
+  - "[[Demo - Santuario della Prima Pietra]]"
+  - "[[Demo - Ponte delle Campane]]"
 personaggi:
-  - [[Demo - Sella Neraluce]]
+  - "[[Demo - Sella Neraluce]]"
 progress_value: 2
 progress_max: 8
 pressione: 6

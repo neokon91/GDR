@@ -7,16 +7,16 @@ tipologia: luogo di interesse
 bioma: fiume e pietra
 stato: minacciato
 canonico: true
-mondo: [[Demo - Terre della Soglia]]
-luogo_padre: [[Demo - Valle di Brumafonda]]
-governante: [[Demo - Odran il Campanaro]]
+mondo: "[[Demo - Terre della Soglia]]"
+luogo_padre: "[[Demo - Valle di Brumafonda]]"
+governante: "[[Demo - Odran il Campanaro]]"
 pericolo: 8
 stabilita: 3
 conseguenze:
   - La nebbia viva ha preso il ponte durante la seconda notte.
   - Attraversare senza guida richiama voci dalla Soglia.
 fazioni:
-  - [[Demo - Custodi della Soglia]]
+  - "[[Demo - Custodi della Soglia]]"
 ---
 
 # Demo - Ponte delle Campane

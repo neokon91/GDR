@@ -5,12 +5,12 @@ categoria: personaggio
 tipo: png
 ruolo: "voce dei Custodi"
 stato: in gioco
-mondo: [[Demo - Terre della Soglia]]
-luogo: [[Demo - Santuario della Prima Pietra]]
+mondo: "[[Demo - Terre della Soglia]]"
+luogo: "[[Demo - Santuario della Prima Pietra]]"
 fazioni:
-  - [[Demo - Custodi della Soglia]]
+  - "[[Demo - Custodi della Soglia]]"
 relazioni:
-  - [[Demo - Odran il Campanaro]]
+  - "[[Demo - Odran il Campanaro]]"
 segreto: "Vuole aprire la Soglia abbastanza da negoziare con cio che sta oltre."
 atteggiamento: "calma, autoritaria, sincera a meta"
 hp_massimi: 18

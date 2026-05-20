@@ -5,12 +5,12 @@ categoria: personaggio
 tipo: png
 ruolo: "Alleato di prova"
 stato: archiviata
-mondo: [[Prova - Mondo]]
-luogo: [[Prova - Insediamento]]
+mondo: "[[Prova - Mondo]]"
+luogo: "[[Prova - Insediamento]]"
 fazioni:
-  - [[Prova - Gilda]]
+  - "[[Prova - Gilda]]"
 relazioni:
-  - [[Prova - PG]]
+  - "[[Prova - PG]]"
 segreto: "Conosce la posizione del dungeon."
 atteggiamento: "collaborativo"
 hp_massimi: 12

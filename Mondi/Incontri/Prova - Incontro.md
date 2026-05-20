@@ -4,19 +4,19 @@ nome: "Prova - Incontro"
 categoria: incontro
 tipo: combattimento
 stato: archiviata
-mondo: [[Prova - Mondo]]
-luogo: [[Prova - Dungeon]]
+mondo: "[[Prova - Mondo]]"
+luogo: "[[Prova - Dungeon]]"
 creature:
-  - [[Prova - Creatura]]
+  - "[[Prova - Creatura]]"
 personaggi:
-  - [[Prova - PG]]
-  - [[Prova - PNG]]
+  - "[[Prova - PG]]"
+  - "[[Prova - PNG]]"
 mappe:
-  - [[Schema Relazioni GDR.excalidraw]]
+  - "[[Schema Relazioni GDR.excalidraw]]"
 audio: []
 pericolo: 5
 ricompense:
-  - [[Prova - Oggetto]]
+  - "[[Prova - Oggetto]]"
 round: 1
 condizioni:
   - accecato fino al round 2

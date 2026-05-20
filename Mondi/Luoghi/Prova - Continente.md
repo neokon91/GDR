@@ -7,7 +7,7 @@ tipologia: geografia
 bioma:
 stato: archiviata
 canonico: false
-mondo: [[Prova - Mondo]]
+mondo: "[[Prova - Mondo]]"
 luogo_padre:
 pericolo: 4
 fazioni: []

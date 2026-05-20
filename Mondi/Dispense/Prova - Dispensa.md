@@ -4,12 +4,12 @@ nome: "Prova - Dispensa"
 categoria: dispensa
 tipo: lettera
 stato: archiviata
-mondo: [[Prova - Mondo]]
-luogo: [[Prova - Tempio]]
+mondo: "[[Prova - Mondo]]"
+luogo: "[[Prova - Tempio]]"
 personaggi:
-  - [[Prova - PNG]]
+  - "[[Prova - PNG]]"
 sessioni:
-  - [[Prova - Sessione]]
+  - "[[Prova - Sessione]]"
 ---
 
 # Prova - Dispensa

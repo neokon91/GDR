@@ -4,18 +4,18 @@ nome: "Prova - Avventura"
 categoria: avventura
 tipo: avventura
 stato: archiviata
-mondo: [[Prova - Mondo]]
+mondo: "[[Prova - Mondo]]"
 campagne:
-  - [[Prova - Campagna]]
+  - "[[Prova - Campagna]]"
 luoghi:
-  - [[Prova - Insediamento]]
-  - [[Prova - Dungeon]]
+  - "[[Prova - Insediamento]]"
+  - "[[Prova - Dungeon]]"
 missioni:
-  - [[Prova - Missione]]
+  - "[[Prova - Missione]]"
 incontri:
-  - [[Prova - Incontro]]
+  - "[[Prova - Incontro]]"
 ricompense:
-  - [[Prova - Oggetto Magico]]
+  - "[[Prova - Oggetto Magico]]"
 ---
 
 # Prova - Avventura

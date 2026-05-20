@@ -7,14 +7,14 @@ stato: archiviata
 tono: "avventuroso"
 livello_attuale: 3
 personaggi:
-  - [[Prova - PG]]
-  - [[Prova - PNG]]
+  - "[[Prova - PG]]"
+  - "[[Prova - PNG]]"
 luoghi:
-  - [[Prova - Insediamento]]
+  - "[[Prova - Insediamento]]"
 fazioni:
-  - [[Prova - Fazione]]
+  - "[[Prova - Fazione]]"
 sessioni:
-  - [[Prova - Sessione]]
+  - "[[Prova - Sessione]]"
 ---
 
 # Prova - Campagna

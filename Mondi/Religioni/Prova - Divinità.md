@@ -6,12 +6,12 @@ tipo: soglia
 sottotipo: divinità
 stato: archiviata
 canonico: false
-mondo: [[Prova - Mondo]]
+mondo: "[[Prova - Mondo]]"
 divinita: []
 templi:
-  - [[Prova - Tempio]]
+  - "[[Prova - Tempio]]"
 fazioni:
-  - [[Prova - Confraternita]]
+  - "[[Prova - Confraternita]]"
 ---
 
 # Prova - Divinità

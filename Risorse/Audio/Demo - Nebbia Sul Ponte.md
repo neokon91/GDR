@@ -5,7 +5,7 @@ categoria: risorsa
 tipo: audio
 uso: atmosfera
 tono: inquieto
-campagna: [[Demo - La Reliquia Spezzata]]
+campagna: "[[Demo - La Reliquia Spezzata]]"
 scena: arrivo al ponte
 timestamp: "00:00,00:45,01:20"
 stato: pronto

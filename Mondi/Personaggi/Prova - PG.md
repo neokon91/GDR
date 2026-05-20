@@ -9,12 +9,12 @@ livello: 3
 specie: "Umano"
 background: "Eroe locale"
 stato: archiviata
-mondo: [[Prova - Mondo]]
-luogo: [[Prova - Insediamento]]
+mondo: "[[Prova - Mondo]]"
+luogo: "[[Prova - Insediamento]]"
 fazioni:
-  - [[Prova - Fazione]]
+  - "[[Prova - Fazione]]"
 relazioni:
-  - [[Prova - PNG]]
+  - "[[Prova - PNG]]"
 hp_massimi: 28
 hp_attuali: 20
 ---

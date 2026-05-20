@@ -5,13 +5,13 @@ categoria: fazione
 tipo: confraternita
 stato: archiviata
 canonico: false
-mondo: [[Prova - Mondo]]
+mondo: "[[Prova - Mondo]]"
 leader:
-  - [[Prova - PNG]]
+  - "[[Prova - PNG]]"
 luoghi:
-  - [[Prova - Tempio]]
+  - "[[Prova - Tempio]]"
 personaggi:
-  - [[Prova - PNG]]
+  - "[[Prova - PNG]]"
 ---
 
 # Prova - Confraternita

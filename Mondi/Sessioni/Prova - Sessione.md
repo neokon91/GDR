@@ -14,35 +14,35 @@ fc-display-name: "Prova - Sessione"
 fc-end:
 stato: archiviata
 attiva: false
-mondo: [[Prova - Mondo]]
+mondo: "[[Prova - Mondo]]"
 campagne:
-  - [[Prova - Campagna]]
+  - "[[Prova - Campagna]]"
 luoghi:
-  - [[Prova - Insediamento]]
-  - [[Prova - Dungeon]]
+  - "[[Prova - Insediamento]]"
+  - "[[Prova - Dungeon]]"
 personaggi:
-  - [[Prova - PG]]
-  - [[Prova - PNG]]
+  - "[[Prova - PG]]"
+  - "[[Prova - PNG]]"
 creature:
-  - [[Prova - Creatura]]
+  - "[[Prova - Creatura]]"
 incontri:
-  - [[Prova - Incontro]]
-  - [[Prova - Trappola]]
+  - "[[Prova - Incontro]]"
+  - "[[Prova - Trappola]]"
 dispense:
-  - [[Prova - Dispensa]]
+  - "[[Prova - Dispensa]]"
 mappe:
-  - [[Schema Relazioni GDR.excalidraw]]
+  - "[[Schema Relazioni GDR.excalidraw]]"
 audio: []
 immagini: []
 video: []
 fazioni:
-  - [[Prova - Fazione]]
+  - "[[Prova - Fazione]]"
 oggetti:
-  - [[Prova - Oggetto Magico]]
+  - "[[Prova - Oggetto Magico]]"
 scene:
   - apertura di prova
 ricompense:
-  - [[Prova - Oggetto]]
+  - "[[Prova - Oggetto]]"
 ---
 
 # Prova - Sessione

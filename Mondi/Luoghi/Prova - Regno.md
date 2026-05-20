@@ -7,16 +7,16 @@ tipologia: politica
 bioma:
 stato: archiviata
 canonico: false
-mondo: [[Prova - Mondo]]
-luogo_padre: [[Prova - Continente]]
-governante: [[Prova - PNG]]
-capitale: [[Prova - Insediamento]]
+mondo: "[[Prova - Mondo]]"
+luogo_padre: "[[Prova - Continente]]"
+governante: "[[Prova - PNG]]"
+capitale: "[[Prova - Insediamento]]"
 stabilita: 5
 pericolo: 6
 fazioni:
-  - [[Prova - Fazione]]
+  - "[[Prova - Fazione]]"
 religioni:
-  - [[Prova - Divinità]]
+  - "[[Prova - Divinità]]"
 risorse: []
 problemi: []
 ---

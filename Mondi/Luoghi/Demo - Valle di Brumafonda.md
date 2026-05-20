@@ -7,15 +7,15 @@ tipologia: valle
 bioma: colline e boschi umidi
 stato: pronto
 canonico: true
-mondo: [[Demo - Terre della Soglia]]
+mondo: "[[Demo - Terre della Soglia]]"
 luogo_padre:
 pericolo: 5
 stabilita: 4
 pressione: 7
 relazioni:
-  - [[Demo - Custodi e Brumafonda]]
+  - "[[Demo - Custodi e Brumafonda]]"
 fazioni:
-  - [[Demo - Custodi della Soglia]]
+  - "[[Demo - Custodi della Soglia]]"
 risorse:
   - legname
   - pietra rituale

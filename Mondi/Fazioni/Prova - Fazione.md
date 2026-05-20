@@ -5,13 +5,13 @@ categoria: fazione
 tipo: fazione generica
 stato: archiviata
 canonico: false
-mondo: [[Prova - Mondo]]
+mondo: "[[Prova - Mondo]]"
 leader:
-  - [[Prova - PNG]]
+  - "[[Prova - PNG]]"
 luoghi:
-  - [[Prova - Regno]]
+  - "[[Prova - Regno]]"
 personaggi:
-  - [[Prova - PNG]]
+  - "[[Prova - PNG]]"
 ---
 
 # Prova - Fazione

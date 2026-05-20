@@ -5,7 +5,7 @@ cssclasses:
 categoria: risorsa
 tipo: bibbia del mondo
 stato: pronto
-mondo_attivo:
+mondo_attivo: ""
 ---
 
 # Bibbia Del Mondo

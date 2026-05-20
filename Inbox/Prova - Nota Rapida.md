@@ -5,7 +5,7 @@ categoria: nota rapida
 tipo: idea
 stato: archiviata
 collegamenti:
-  - [[Prova - Mondo]]
+  - "[[Prova - Mondo]]"
 ---
 
 # Prova - Nota Rapida

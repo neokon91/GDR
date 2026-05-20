@@ -4,12 +4,12 @@ nome: "Demo - Lettera Macchiata di Nebbia"
 categoria: dispensa
 tipo: lettera
 stato: pronto
-mondo: [[Demo - Terre della Soglia]]
-luogo: [[Demo - Santuario della Prima Pietra]]
+mondo: "[[Demo - Terre della Soglia]]"
+luogo: "[[Demo - Santuario della Prima Pietra]]"
 personaggi:
-  - [[Demo - Sella Neraluce]]
+  - "[[Demo - Sella Neraluce]]"
 sessioni:
-  - [[Demo - Sessione 1 - La Campana Senza Vento]]
+  - "[[Demo - Sessione 1 - La Campana Senza Vento]]"
 ---
 
 # Demo - Lettera Macchiata di Nebbia

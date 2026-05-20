@@ -6,9 +6,9 @@ tipo: chiave
 rarita: comune
 stato: archiviata
 canonico: false
-mondo: [[Prova - Mondo]]
-proprietario: [[Prova - PNG]]
-luogo: [[Prova - Tempio]]
+mondo: "[[Prova - Mondo]]"
+proprietario: "[[Prova - PNG]]"
+luogo: "[[Prova - Tempio]]"
 ---
 
 # Prova - Oggetto

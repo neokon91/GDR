@@ -4,18 +4,18 @@ nome: "Demo - Nebbia al Ponte"
 categoria: incontro
 tipo: esplorazione
 stato: pronto
-mondo: [[Demo - Terre della Soglia]]
-luogo: [[Demo - Ponte delle Campane]]
+mondo: "[[Demo - Terre della Soglia]]"
+luogo: "[[Demo - Ponte delle Campane]]"
 creature: []
 personaggi:
-  - [[Demo - Mira Ventofermo]]
-  - [[Demo - Odran il Campanaro]]
+  - "[[Demo - Mira Ventofermo]]"
+  - "[[Demo - Odran il Campanaro]]"
 mappe:
-  - [[Demo - Mappa Relazioni]]
+  - "[[Demo - Mappa Relazioni]]"
 audio: []
 pericolo: 4
 ricompense:
-  - [[Demo - Frammento della Soglia]]
+  - "[[Demo - Frammento della Soglia]]"
 round: 1
 condizioni:
   - visibilita ridotta oltre 9 metri

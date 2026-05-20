@@ -5,12 +5,12 @@ categoria: personaggio
 tipo: png
 ruolo: "custode del ponte"
 stato: in gioco
-mondo: [[Demo - Terre della Soglia]]
-luogo: [[Demo - Ponte delle Campane]]
+mondo: "[[Demo - Terre della Soglia]]"
+luogo: "[[Demo - Ponte delle Campane]]"
 fazioni:
-  - [[Demo - Custodi della Soglia]]
+  - "[[Demo - Custodi della Soglia]]"
 relazioni:
-  - [[Demo - Mira Ventofermo]]
+  - "[[Demo - Mira Ventofermo]]"
 segreto: "Nasconde un frammento della reliquia nella campana incrinata."
 atteggiamento: "gentile, evasivo, superstizioso"
 hp_massimi: 9

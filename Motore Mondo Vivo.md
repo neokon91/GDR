@@ -5,7 +5,7 @@ cssclasses:
 categoria: risorsa
 tipo: motore mondo vivo
 stato: pronto
-mondo_attivo:
+mondo_attivo: ""
 campagne_attive: []
 ---
 

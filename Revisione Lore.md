@@ -5,7 +5,7 @@ cssclasses:
 categoria: risorsa
 tipo: lore review
 stato: pronto
-mondo_attivo:
+mondo_attivo: ""
 ---
 
 # Revisione Lore

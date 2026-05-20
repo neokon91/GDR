@@ -5,18 +5,18 @@ categoria: tracciato
 fileClass: tracciato
 tipo: viaggio
 stato: attivo
-mondo: [[Demo - Terre della Soglia]]
+mondo: "[[Demo - Terre della Soglia]]"
 campagne:
-  - [[Demo - La Reliquia Spezzata]]
+  - "[[Demo - La Reliquia Spezzata]]"
 missioni:
-  - [[Demo - Recuperare i Frammenti]]
+  - "[[Demo - Recuperare i Frammenti]]"
 fazioni:
-  - [[Demo - Custodi della Soglia]]
+  - "[[Demo - Custodi della Soglia]]"
 luoghi:
-  - [[Demo - Valle di Brumafonda]]
-  - [[Demo - Santuario della Prima Pietra]]
+  - "[[Demo - Valle di Brumafonda]]"
+  - "[[Demo - Santuario della Prima Pietra]]"
 personaggi:
-  - [[Demo - Mira Ventofermo]]
+  - "[[Demo - Mira Ventofermo]]"
 progress_value: 1
 progress_max: 6
 pressione: 4

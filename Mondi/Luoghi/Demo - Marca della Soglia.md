@@ -10,27 +10,27 @@ tipologia: marca di confine
 stato: in gioco
 canonico: true
 stato_canonico: canonico
-mondo: [[Demo - Terre della Soglia]]
-luogo_padre: [[Demo - Valle di Brumafonda]]
-governante: [[Demo - Sella Neraluce]]
-capitale: [[Demo - Ponte delle Campane]]
+mondo: "[[Demo - Terre della Soglia]]"
+luogo_padre: "[[Demo - Valle di Brumafonda]]"
+governante: "[[Demo - Sella Neraluce]]"
+capitale: "[[Demo - Ponte delle Campane]]"
 stabilita: 4
 pericolo: 7
 pressione: 8
 legittimita: "I Custodi rivendicano autorità rituale, ma non hanno consenso politico pieno."
 confini:
-  - [[Demo - Ponte delle Campane]]
-  - [[Demo - Santuario della Prima Pietra]]
+  - "[[Demo - Ponte delle Campane]]"
+  - "[[Demo - Santuario della Prima Pietra]]"
 vassalli: []
 alleati:
-  - [[Demo - Custodi della Soglia]]
+  - "[[Demo - Custodi della Soglia]]"
 rivali:
-  - [[Demo - Mira Ventofermo]]
+  - "[[Demo - Mira Ventofermo]]"
 relazioni:
-  - [[Demo - Custodi e Brumafonda]]
+  - "[[Demo - Custodi e Brumafonda]]"
 culture: []
 religioni:
-  - [[Demo - Custodi della Soglia]]
+  - "[[Demo - Custodi della Soglia]]"
 risorse:
   - controllo del ponte
   - campane rituali
@@ -45,10 +45,10 @@ prossima_mossa: "Trasformare il coprifuoco in giurisdizione stabile sulla valle.
 conseguenze:
   - La prossima sessione parte da un blocco politico del ponte.
 entita_impattate:
-  - [[Demo - Recuperare i Frammenti]]
-  - [[Demo - Custodi e Brumafonda]]
+  - "[[Demo - Recuperare i Frammenti]]"
+  - "[[Demo - Custodi e Brumafonda]]"
 propaga_a:
-  - [[Demo - Sessione 2 - Il Santuario Sotto Nebbia]]
+  - "[[Demo - Sessione 2 - Il Santuario Sotto Nebbia]]"
 ---
 
 # Demo - Marca della Soglia

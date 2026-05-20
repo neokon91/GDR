@@ -6,13 +6,13 @@ tipo: conseguenza
 stato: canonica
 stato_canonico: canonico
 canonico: true
-mondo: [[Demo - Terre della Soglia]]
+mondo: "[[Demo - Terre della Soglia]]"
 sessioni:
-  - [[Demo - Sessione 2 - Il Santuario Sotto Nebbia]]
+  - "[[Demo - Sessione 2 - Il Santuario Sotto Nebbia]]"
 collegamenti:
-  - [[Demo - Ponte delle Campane]]
-  - [[Demo - Custodi della Soglia]]
-  - [[Demo - Recuperare i Frammenti]]
+  - "[[Demo - Ponte delle Campane]]"
+  - "[[Demo - Custodi della Soglia]]"
+  - "[[Demo - Recuperare i Frammenti]]"
 data_mondo: "Seconda notte di nebbia"
 fc-calendar:
 fc-date:

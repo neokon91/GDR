@@ -6,7 +6,7 @@ tipo: tabella
 stato: archiviata
 uso: "collaudo"
 collegamenti:
-  - [[Prova - Mondo]]
+  - "[[Prova - Mondo]]"
 ---
 
 # Prova - Risorsa Riutilizzabile

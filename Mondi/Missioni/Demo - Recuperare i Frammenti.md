@@ -5,25 +5,25 @@ categoria: missione
 fileClass: missione
 tipo: mistero
 stato: accettata
-mondo: [[Demo - Terre della Soglia]]
-committente: [[Demo - Mira Ventofermo]]
+mondo: "[[Demo - Terre della Soglia]]"
+committente: "[[Demo - Mira Ventofermo]]"
 luoghi:
-  - [[Demo - Ponte delle Campane]]
-  - [[Demo - Santuario della Prima Pietra]]
+  - "[[Demo - Ponte delle Campane]]"
+  - "[[Demo - Santuario della Prima Pietra]]"
 personaggi:
-  - [[Demo - Mira Ventofermo]]
-  - [[Demo - Odran il Campanaro]]
-  - [[Demo - Sella Neraluce]]
+  - "[[Demo - Mira Ventofermo]]"
+  - "[[Demo - Odran il Campanaro]]"
+  - "[[Demo - Sella Neraluce]]"
 fazioni:
-  - [[Demo - Custodi della Soglia]]
+  - "[[Demo - Custodi della Soglia]]"
 relazioni:
-  - [[Demo - Custodi e Brumafonda]]
+  - "[[Demo - Custodi e Brumafonda]]"
 tracciati:
-  - [[Demo - I Custodi Chiudono il Ponte]]
-  - [[Demo - La Soglia Si Apre]]
-  - [[Demo - Attraversare Brumafonda]]
+  - "[[Demo - I Custodi Chiudono il Ponte]]"
+  - "[[Demo - La Soglia Si Apre]]"
+  - "[[Demo - Attraversare Brumafonda]]"
 ricompense:
-  - [[Demo - Frammento della Soglia]]
+  - "[[Demo - Frammento della Soglia]]"
 progress_value: 3
 progress_max: 6
 pressione: 9
@@ -41,9 +41,9 @@ conseguenze:
   - Dopo la Seconda Nebbia il ponte e minacciato e la missione diventa urgente.
   - Se i personaggi aspettano, i Custodi trovano il frammento nascosto da Odran.
 entita_impattate:
-  - [[Demo - Custodi e Brumafonda]]
+  - "[[Demo - Custodi e Brumafonda]]"
 propaga_a:
-  - [[Demo - Sessione 2 - Il Santuario Sotto Nebbia]]
+  - "[[Demo - Sessione 2 - Il Santuario Sotto Nebbia]]"
 segreti:
   - la reliquia e una serratura
 scadenza_mondo: "Terza notte di nebbia"

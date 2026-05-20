@@ -5,7 +5,7 @@ cssclasses:
 categoria: risorsa
 tipo: dashboard geopolitica
 stato: pronto
-mondo_attivo:
+mondo_attivo: ""
 ---
 
 # Geopolitical Dashboard

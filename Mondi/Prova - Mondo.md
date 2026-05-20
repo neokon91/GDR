@@ -8,14 +8,14 @@ tema: "confini instabili"
 tecnologia: "medievale fantastica"
 magia: "diffusa ma sorvegliata"
 continenti:
-  - [[Prova - Continente]]
+  - "[[Prova - Continente]]"
 fazioni:
-  - [[Prova - Fazione]]
-  - [[Prova - Gilda]]
+  - "[[Prova - Fazione]]"
+  - "[[Prova - Gilda]]"
 religioni:
-  - [[Prova - Divinità]]
+  - "[[Prova - Divinità]]"
 campagne:
-  - [[Prova - Campagna]]
+  - "[[Prova - Campagna]]"
 canonico: false
 ---
 

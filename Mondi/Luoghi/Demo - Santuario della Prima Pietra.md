@@ -6,10 +6,10 @@ tipo: tempio
 tipologia: santuario
 stato: pronto
 canonico: true
-mondo: [[Demo - Terre della Soglia]]
-luogo_padre: [[Demo - Valle di Brumafonda]]
+mondo: "[[Demo - Terre della Soglia]]"
+luogo_padre: "[[Demo - Valle di Brumafonda]]"
 divinita_principale:
-culto_associato: [[Demo - Custodi della Soglia]]
+culto_associato: "[[Demo - Custodi della Soglia]]"
 pericolo: 7
 segreti:
   - la reliquia e una serratura, non una benedizione

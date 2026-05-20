@@ -7,11 +7,11 @@ tipologia: geografia
 bioma: colline
 stato: archiviata
 canonico: false
-mondo: [[Prova - Mondo]]
-luogo_padre: [[Prova - Continente]]
+mondo: "[[Prova - Mondo]]"
+luogo_padre: "[[Prova - Continente]]"
 pericolo: 4
 fazioni:
-  - [[Prova - Fazione]]
+  - "[[Prova - Fazione]]"
 religioni: []
 risorse:
   - miniere

@@ -7,8 +7,8 @@ tipologia: luogo di interesse
 bioma: collina
 stato: archiviata
 canonico: false
-mondo: [[Prova - Mondo]]
-luogo_padre: [[Prova - Regione]]
+mondo: "[[Prova - Mondo]]"
+luogo_padre: "[[Prova - Regione]]"
 pericolo: 4
 fazioni: []
 religioni: []

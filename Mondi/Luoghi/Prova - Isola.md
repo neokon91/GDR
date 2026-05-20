@@ -7,8 +7,8 @@ tipologia: geografia
 bioma: costa
 stato: archiviata
 canonico: false
-mondo: [[Prova - Mondo]]
-luogo_padre: [[Prova - Continente]]
+mondo: "[[Prova - Mondo]]"
+luogo_padre: "[[Prova - Continente]]"
 pericolo: 5
 fazioni: []
 religioni: []

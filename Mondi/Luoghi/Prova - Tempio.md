@@ -6,16 +6,16 @@ tipo: tempio
 sottotipo: luogo di interesse
 stato: archiviata
 canonico: false
-mondo: [[Prova - Mondo]]
-luogo_padre: [[Prova - Insediamento]]
-divinita_principale: [[Prova - Divinità]]
-culto_associato: [[Prova - Divinità]]
+mondo: "[[Prova - Mondo]]"
+luogo_padre: "[[Prova - Insediamento]]"
+divinita_principale: "[[Prova - Divinità]]"
+culto_associato: "[[Prova - Divinità]]"
 reliquie:
   - chiave d'argento
 fazioni:
-  - [[Prova - Confraternita]]
+  - "[[Prova - Confraternita]]"
 religioni:
-  - [[Prova - Divinità]]
+  - "[[Prova - Divinità]]"
 risorse: []
 problemi: []
 ---

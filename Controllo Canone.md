@@ -5,7 +5,7 @@ cssclasses:
 categoria: risorsa
 tipo: canon control
 stato: pronto
-mondo_attivo:
+mondo_attivo: ""
 ---
 
 # Controllo Canone
