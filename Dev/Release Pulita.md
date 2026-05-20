@@ -41,7 +41,7 @@ Poi genera la copia utente:
 npm run release:clean
 ```
 
-Il comando crea una cartella `dist/vault-gdr-clean` e, se disponibile il comando `zip`, anche `dist/vault-gdr-clean.zip`.
+Il comando crea una cartella `dist/vault-gdr-clean`, verifica che contenga i file utente obbligatori e che non includa materiali di sviluppo, poi crea `dist/vault-gdr-clean.zip` se il comando `zip` e disponibile.
 
 
 Per sviluppo e manutenzione si usa il repository Git, non uno ZIP.
@@ -52,6 +52,7 @@ Per sviluppo e manutenzione si usa il repository Git, non uno ZIP.
 
 - `npm run check` passato senza warning.
 - `npm run release:clean` ha creato `dist/vault-gdr-clean`.
+- `npm run release:clean` ha verificato i file obbligatori e l'assenza di percorsi di sviluppo nella release pulita.
 - `npm run release:clean` ha creato `dist/vault-gdr-clean.zip`.
 - `dist/` resta artefatto locale ignorato da Git.
 

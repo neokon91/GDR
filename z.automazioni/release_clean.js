@@ -65,6 +65,37 @@ const EXCLUDED_AUTOMAZIONI = new Set([
     "README.md"
 ]);
 const EXCLUDED_FILES = new Set([".DS_Store"]);
+const REQUIRED_RELEASE_FILES = [
+    "Inizia Qui.md",
+    "VERSION.md",
+    "LEGGIMI.md",
+    ".obsidian/community-plugins.json",
+    ".obsidian/snippets/gdr-vault.css",
+    "Hub/Vista Giocatori.md",
+    "Hub/Atlante del Mondo.md",
+    "Hub/Durante il Gioco.md",
+    "Risorse/Setup Guidato.md",
+    "Risorse/Controllo Vault.md",
+    "Risorse/Quality Report.md",
+    "Mondi/Brumafonda Demo.md",
+    "Campagne/Campagna - Sale Sotto La Nebbia.md",
+    "Mondi/Sessioni/2026-05-28 - La Campana Nella Nebbia.md",
+    "Risorse/Mappe/Mappa Pubblica Di Brumafonda.md",
+    "z.engine/session_views.js",
+    "z.automazioni/helpers.js",
+    "z.modelli/.templatefactory-manifest.json"
+];
+const FORBIDDEN_RELEASE_PATHS = [
+    ".git",
+    ".github",
+    "Dev",
+    "dist",
+    "docs",
+    "Import",
+    "node_modules",
+    "package.json",
+    ".gitignore"
+];
 
 function readJson(file, fallback) {
     try {
@@ -171,6 +202,56 @@ function writeUserReadme() {
     fs.writeFileSync(path.join(OUT, "LEGGIMI.md"), note);
 }
 
+function walkRelease(dir, files = []) {
+    for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+        const fullPath = path.join(dir, entry.name);
+        const relPath = path.relative(OUT, fullPath).replace(/\\/g, "/");
+        files.push(relPath);
+        if (entry.isDirectory()) {
+            walkRelease(fullPath, files);
+        }
+    }
+    return files;
+}
+
+function validateRelease() {
+    const errors = [];
+
+    for (const file of REQUIRED_RELEASE_FILES) {
+        if (!fs.existsSync(path.join(OUT, file))) {
+            errors.push(`file release obbligatorio mancante: ${file}`);
+        }
+    }
+
+    const releaseEntries = walkRelease(OUT);
+    for (const forbidden of FORBIDDEN_RELEASE_PATHS) {
+        if (releaseEntries.some(entry => entry === forbidden || entry.startsWith(`${forbidden}/`))) {
+            errors.push(`percorso non ammesso nella release pulita: ${forbidden}`);
+        }
+    }
+
+    const pluginRoot = path.join(OUT, ".obsidian/plugins");
+    if (fs.existsSync(pluginRoot)) {
+        const bundledPlugins = fs.readdirSync(pluginRoot, { withFileTypes: true })
+            .filter(entry => entry.isDirectory())
+            .map(entry => entry.name);
+
+        for (const pluginId of bundledPlugins) {
+            if (!enabledPlugins.has(pluginId)) {
+                errors.push(`plugin non abilitato incluso nella release: ${pluginId}`);
+            }
+        }
+    }
+
+    if (errors.length) {
+        console.error("Release pulita non valida:");
+        for (const error of errors) console.error(`- ${error}`);
+        process.exit(1);
+    }
+
+    console.log(`Release pulita verificata: ${releaseEntries.length} percorsi controllati.`);
+}
+
 function zipIfAvailable() {
     try {
         if (fs.existsSync(ZIP)) fs.rmSync(ZIP);
@@ -185,6 +266,7 @@ fs.rmSync(OUT, { recursive: true, force: true });
 fs.mkdirSync(DIST, { recursive: true });
 copyDir(ROOT, OUT, ROOT);
 writeUserReadme();
+validateRelease();
 
 const zipped = zipIfAvailable();
 console.log(`Release utente creata: ${rel(OUT)}`);
