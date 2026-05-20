@@ -959,6 +959,13 @@ if (calendariumCalendars.length) {
             warnings.push(`${fileRel}: fc-calendar non configurato in Calendarium (${fm["fc-calendar"]})`);
         }
     }
+
+    for (const [fileRel, fm] of realEntries) {
+        if (!["mondo", "campagna"].includes(fm.categoria)) continue;
+        if (hasValue(fm.calendario) && !calendariumNames.has(String(fm.calendario).toLowerCase())) {
+            warnings.push(`${fileRel}: calendario preferito non configurato in Calendarium (${fm.calendario})`);
+        }
+    }
 }
 
 const gptIndexPath = path.join(ROOT, "Dev/Indice Connettore GPT.md");

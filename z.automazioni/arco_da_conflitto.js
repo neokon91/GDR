@@ -13,6 +13,7 @@ async function arcoDaConflitto(tp) {
     const posta = await helpers.promptOptional(tp, "Cosa c'è in gioco");
     const prossimaMossa = await helpers.promptOptional(tp, "Prossima mossa se i PG non intervengono");
     const scadenzaMondo = await helpers.promptOptional(tp, "Scadenza nel mondo");
+    const calendario = await helpers.promptCalendar(tp, { world: mondo, campaigns: campagna ? [campagna] : [] });
 
     await helpers.moveNote(tp, helpers.path("missioni"), name);
 
@@ -40,7 +41,7 @@ indizi: []
 ostacoli: []
 conseguenze: []
 segreti: []
-fc-calendar:
+fc-calendar: ${helpers.yamlQuote(calendario)}
 fc-date:
 fc-category: scadenza
 fc-display-name: ${helpers.yamlQuote(name)}

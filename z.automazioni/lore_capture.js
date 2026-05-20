@@ -32,6 +32,7 @@ async function lore_capture(tp, routeOptions = {}) {
     const propagaA = selectedType?.id === "conseguenza"
         ? await helpers.chooseConnections(tp, "Dove deve propagarsi", context)
         : [];
+    const calendario = await helpers.promptCalendar(tp, { world: mondo });
 
     const created = await helpers.moveNote(tp, "Inbox", name);
     // Gli eventi live devono tornare nella sessione attiva per il post-sessione e la canonizzazione.
@@ -59,7 +60,7 @@ entita_impattate: ${helpers.inlineYamlList(entitaImpattate)}
 propaga_a: ${helpers.inlineYamlList(propagaA)}
 data_mondo:
 data_reale:
-fc-calendar:
+fc-calendar: ${helpers.yamlQuote(calendario)}
 fc-date:
 fc-category: conseguenza
 fc-display-name: ${helpers.yamlQuote(name)}

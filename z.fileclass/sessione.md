@@ -5,6 +5,9 @@ fieldsOrder:
   - tipo
   - data
   - data_mondo
+  - fc-calendar
+  - fc-date
+  - fc-category
   - stato
   - attiva
   - mondo
@@ -49,6 +52,18 @@ fields:
     options: {}
   - name: data_mondo
     id: data_mondo
+    type: Input
+    options: {}
+  - name: fc-calendar
+    id: fc-calendar
+    type: Input
+    options: {}
+  - name: fc-date
+    id: fc-date
+    type: Input
+    options: {}
+  - name: fc-category
+    id: fc-category
     type: Input
     options: {}
   - name: stato

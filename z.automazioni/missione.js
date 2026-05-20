@@ -35,6 +35,7 @@ async function missione(tp) {
     const tracciati = creazioneCompleta ? await helpers.chooseTracks(tp, "Clock o tracciati collegati", context) : [];
     const ricompense = creazioneCompleta ? await helpers.chooseObjects(tp, "Ricompense", context) : [];
     const scadenzaMondo = creazioneCompleta ? await helpers.promptOptional(tp, "Scadenza nel mondo") : "";
+    const calendario = await helpers.promptCalendar(tp, { world: mondo });
     const ostacolo = creazioneCompleta ? await helpers.promptOptional(tp, "Ostacolo principale") : "";
     const segreto = await helpers.promptOptional(tp, "Segreto dietro la missione");
     const domandaAperta = creazioneCompleta ? await helpers.promptOptional(tp, "Domanda aperta della missione") : "";
@@ -79,7 +80,7 @@ conseguenze: ${helpers.inlineYamlTextList([conseguenza])}
 segreti: ${helpers.inlineYamlTextList([segreto])}
 connessioni: ${helpers.inlineYamlList(connessioni)}
 scadenza_mondo: ${helpers.yamlQuote(scadenzaMondo)}
-fc-calendar:
+fc-calendar: ${helpers.yamlQuote(calendario)}
 fc-date:
 fc-category: scadenza
 fc-display-name: ${helpers.yamlQuote(name)}

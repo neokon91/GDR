@@ -8,6 +8,7 @@ async function ricorrenza_calendario(tp) {
     const religioni = await helpers.chooseReligions(tp, "Religioni collegate", context);
     const luoghi = await helpers.chooseLocations(tp, "Luoghi collegati", context);
     const dataMondo = await helpers.promptOptional(tp, "Data leggibile nel mondo");
+    const calendario = await helpers.promptCalendar(tp, { world: mondo });
     const conseguenza = await helpers.promptOptional(tp, "Conseguenza se la data passa");
 
     await helpers.moveNote(tp, helpers.path("calendario_diegetico"), name);
@@ -36,7 +37,7 @@ conseguenze: ${helpers.inlineYamlTextList([conseguenza])}
 pressioni_da_avanzare: []
 pressione: 0
 prossima_mossa:
-fc-calendar:
+fc-calendar: ${helpers.yamlQuote(calendario)}
 fc-date:
 fc-category: festa
 fc-display-name: ${helpers.yamlQuote(name)}

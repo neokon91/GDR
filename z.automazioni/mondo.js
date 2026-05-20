@@ -6,6 +6,7 @@ async function mondo(tp) {
     const tema = await helpers.promptOptional(tp, "Tema");
     const tecnologia = await helpers.promptOptional(tp, "Tecnologia");
     const magia = await helpers.promptOptional(tp, "Magia");
+    const calendario = await helpers.promptOptional(tp, "Calendario Calendarium del mondo");
     const premessa = await helpers.promptOptional(tp, "Promessa del mondo");
     const conflittoCentrale = await helpers.promptOptional(tp, "Conflitto centrale");
 
@@ -26,6 +27,7 @@ ispirazioni: []
 non_vogliamo: []
 tecnologia: ${helpers.yamlQuote(tecnologia)}
 magia: ${helpers.yamlQuote(magia)}
+calendario: ${helpers.yamlQuote(calendario)}
 premessa: ${helpers.yamlQuote(premessa)}
 gancio: ${helpers.yamlQuote(premessa)}
 conflitto_centrale: ${helpers.yamlQuote(conflittoCentrale)}

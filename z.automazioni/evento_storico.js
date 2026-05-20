@@ -14,6 +14,7 @@ async function evento_storico(tp) {
         activeContext.link
     );
     const dataMondo = await helpers.promptOptional(tp, "Data nel mondo");
+    const calendario = await helpers.promptCalendar(tp, { world: mondo });
     const causa = await helpers.promptOptional(tp, "Causa principale");
     const gancio = await helpers.promptOptional(tp, "Gancio giocabile dell'evento");
     const usoAlTavolo = await helpers.promptOptional(tp, "Uso al tavolo");
@@ -46,7 +47,7 @@ retcon_motivo:
 mondo: ${mondo}
 data_mondo: ${helpers.yamlQuote(dataMondo)}
 data_reale:
-fc-calendar:
+fc-calendar: ${helpers.yamlQuote(calendario)}
 fc-date:
 fc-category: conseguenza
 fc-display-name: ${helpers.yamlQuote(name)}

@@ -23,6 +23,7 @@ async function sessione(tp) {
     const apertura = await helpers.promptOptional(tp, "Prima scena / apertura");
     const scelta = await helpers.promptOptional(tp, "Scelta concreta per i giocatori");
     const campagne = creazioneCompleta ? await helpers.chooseCampaigns(tp, "Campagne collegate", context) : [];
+    const calendario = await helpers.promptCalendar(tp, { world: mondo, campaigns: campagne });
     const luoghi = creazioneCompleta ? await helpers.chooseLocations(tp, "Luoghi in scena", context) : [];
     const personaggi = creazioneCompleta ? await helpers.choosePeople(tp, "Personaggi in scena", context) : [];
     const missioni = creazioneCompleta ? await helpers.chooseMissions(tp, "Missioni vive", context) : [];
@@ -49,7 +50,7 @@ fileClass: sessione
 tipo: ${selectedType?.id ?? ""}
 data: ${data}
 data_mondo:
-fc-calendar:
+fc-calendar: ${helpers.yamlQuote(calendario)}
 fc-date:
 fc-category: sessione
 fc-display-name: ${helpers.yamlQuote(titolo)}

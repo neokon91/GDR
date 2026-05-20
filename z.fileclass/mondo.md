@@ -9,6 +9,7 @@ fieldsOrder:
   - genere
   - scala
   - magia
+  - calendario
   - premessa
   - conflitto_centrale
   - vincoli
@@ -58,6 +59,10 @@ fields:
     options: {}
   - name: magia
     id: magia
+    type: Input
+    options: {}
+  - name: calendario
+    id: calendario
     type: Input
     options: {}
   - name: premessa

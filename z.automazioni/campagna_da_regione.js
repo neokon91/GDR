@@ -22,6 +22,7 @@ async function campagnaDaRegione(tp) {
     const conflitti = await helpers.chooseNotesByPath(tp, helpers.path("conflitti"), "Conflitti collegati", context);
     const tono = await helpers.promptOptional(tp, "Tono della campagna");
     const promessa = await helpers.promptOptional(tp, "Promessa al tavolo");
+    const calendario = await helpers.promptCalendar(tp, { world: mondo }, "Calendario Calendarium della campagna");
 
     await helpers.moveNote(tp, helpers.path("campagne"), name);
 
@@ -34,6 +35,7 @@ stato: preparazione
 profilo: ${helpers.yamlQuote(profilo?.id ?? "")}
 tono: ${helpers.yamlQuote(tono)}
 promessa: ${helpers.yamlQuote(promessa)}
+calendario: ${helpers.yamlQuote(calendario)}
 mondo: ${mondo}
 regione: ${regione}
 luoghi: [${regione}]

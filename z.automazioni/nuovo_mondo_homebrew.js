@@ -17,6 +17,7 @@ async function nuovo_mondo_homebrew(tp) {
     const tone = await helpers.promptRequired(tp, "Tono");
     const genre = await helpers.promptOptional(tp, "Genere o contaminazione");
     const magic = await helpers.promptRequired(tp, "Livello magia");
+    const calendar = await helpers.promptOptional(tp, "Calendario Calendarium del mondo");
     const scale = await helpers.promptRequired(tp, "Scala iniziale");
     const conflict = await helpers.promptRequired(tp, "Conflitto centrale");
     const constraints = await helpers.promptOptional(tp, "Vincoli creativi");
@@ -113,6 +114,7 @@ tema: ${helpers.yamlQuote(preset.id)}
 genere: ${helpers.yamlQuote(genre)}
 scala: ${helpers.yamlQuote(scale)}
 magia: ${helpers.yamlQuote(magic)}
+calendario: ${helpers.yamlQuote(calendar)}
 premessa: ${helpers.yamlQuote(promise)}
 gancio: ${helpers.yamlQuote(promise)}
 conflitto_centrale: ${helpers.yamlQuote(conflict)}

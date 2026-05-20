@@ -352,6 +352,11 @@ fields:
       source: meta_bind
       use: mosse del mondo dopo la sessione
   calendarium:
+    - name: calendario
+      type: text
+      required: false
+      source: calendarium
+      use: calendario preferito su mondo o campagna
     - name: fc-calendar
       type: text
       required: false

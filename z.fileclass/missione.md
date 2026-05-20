@@ -15,6 +15,9 @@ fieldsOrder:
   - pressione
   - prossima_mossa
   - scadenza_mondo
+  - fc-calendar
+  - fc-date
+  - fc-category
   - stato_canonico
   - canonico
   - sessioni
@@ -96,6 +99,18 @@ fields:
     options: {}
   - name: scadenza_mondo
     id: scadenza_mondo
+    type: Input
+    options: {}
+  - name: fc-calendar
+    id: fc-calendar
+    type: Input
+    options: {}
+  - name: fc-date
+    id: fc-date
+    type: Input
+    options: {}
+  - name: fc-category
+    id: fc-category
     type: Input
     options: {}
   - name: stato_canonico

@@ -16,6 +16,24 @@ Il vault segnala sotto cosa manca da sistemare. Non serve capire gli strumenti i
 
 `BUTTON[nuova-ricorrenza-z-modelli-worldbuilding-ricorrenza-calendario-md]`
 
+## Calendari Selezionati
+
+```dataview
+TABLE calendario, stato, campagne
+FROM "Mondi"
+WHERE categoria = "mondo" AND file.name != "Mondi"
+SORT calendario ASC, file.name ASC
+```
+
+```dataview
+TABLE calendario, mondo, stato
+FROM "Campagne"
+WHERE categoria = "campagna"
+SORT calendario ASC, file.name ASC
+```
+
+Lascia `calendario` vuoto per usare il default di Calendarium. Compilalo su un mondo o su una campagna quando quella linea di gioco usa un calendario diverso; i template generati propongono quel valore in `fc-calendar`, ma puoi cambiarlo sulla singola nota.
+
 ## Oggi Nel Mondo
 
 ```dataviewjs
@@ -119,15 +137,27 @@ if (data) {
   const names = new Set(calendars.flatMap(c => [c.name, c.id]).filter(Boolean).map(x => String(x).toLowerCase()));
   const events = dv.pages('"Mondi" OR "Campagne" OR "Inbox"')
     .where(p => p.stato !== "archiviata" && hasText(p["fc-date"]));
+  const selectors = dv.pages('"Mondi" OR "Campagne"')
+    .where(p => hasText(p.calendario));
   const unmatched = calendars.length
     ? events.where(p => hasText(p["fc-calendar"]) && !names.has(String(p["fc-calendar"]).toLowerCase()))
       .map(p => [p.file.link, p["fc-calendar"], p["fc-date"], p["fc-category"] ?? ""])
+      .array()
+    : [];
+  const unmatchedSelectors = calendars.length
+    ? selectors.where(p => !names.has(String(p.calendario).toLowerCase()))
+      .map(p => [p.file.link, p.calendario, p.categoria ?? ""])
       .array()
     : [];
 
   if (unmatched.length) {
     dv.header(3, "Eventi Con Calendario Non Configurato");
     dv.table(["Nota", "fc-calendar", "fc-date", "Categoria"], unmatched);
+  }
+
+  if (unmatchedSelectors.length) {
+    dv.header(3, "Mondi O Campagne Con Calendario Non Configurato");
+    dv.table(["Nota", "calendario", "Categoria"], unmatchedSelectors);
   }
 }
 ```
@@ -210,6 +240,7 @@ Questa sezione serve solo a chi prepara il vault. Il DM puo ignorarla.
 | --- | --- |
 | `data_mondo` | Data leggibile al tavolo per sessioni, eventi e timeline. |
 | `scadenza_mondo` | Scadenza leggibile per missioni, pericoli e conseguenze. |
+| `calendario` | Calendario preferito di mondo o campagna; i template lo propongono come `fc-calendar`. |
 | `fc-calendar` | Nome del calendario interno. |
 | `fc-date` | Data tecnica per la vista calendario. |
 | `fc-category` | Tipo di evento: `sessione`, `scadenza`, `festa`, `pericolo`, `conseguenza`. |
