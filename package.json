@@ -1,10 +1,11 @@
 {
   "name": "vault-gdr",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "private": true,
   "description": "Vault Obsidian per preparare e gestire campagne GDR fantasy in italiano.",
   "scripts": {
     "check": "node z.automazioni/check_vault.js",
-    "import:srd": "node z.automazioni/import_srd.js"
+    "import:srd": "node z.automazioni/import_srd.js",
+    "release:clean": "node z.automazioni/release_clean.js"
   }
 }

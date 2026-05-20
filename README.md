@@ -2,7 +2,7 @@
 
 Questo vault Obsidian aiuta a preparare e gestire campagne GDR fantasy in italiano: mondi, sessioni, PNG, luoghi, fazioni, missioni, incontri, oggetti e materiali da consegnare ai giocatori.
 
-Apri [[Inizia Qui]] per il primo avvio. Usa [[1. DM Dashboard]] per preparare, [[Atlante del Mondo]] per costruire ambientazioni ricche, [[Campagna da Ambientazione]] per trasformarle in gioco e [[Durante il Gioco]] durante la sessione.
+Apri [[Inizia Qui]] per il primo avvio. Usa [[1. DM Dashboard]] per preparare, [[Atlante del Mondo]] per costruire ambientazioni ricche, [[Campagna da Ambientazione]] per trasformarle in gioco, [[Durante il Gioco]] durante la sessione e [[Vista Giocatori]] per materiale condivisibile.
 
 ## Primi 5 Minuti
 
@@ -36,6 +36,7 @@ Se dashboard, pulsanti o tabelle non funzionano, apri [[Risorse/Primo Avvio Stru
 - `Risorse`: mappe, immagini, audio, video, tabelle e dispense generiche.
 - `SRD`: riferimento separato al System Reference Document 5.2.1 in italiano.
 - `Inbox`: idee grezze e appunti non ancora sistemati.
+- `Giocatori`: area dedicata a materiale condivisibile.
 - `Post Sessione Guidato`: percorso per consolidare quello che e successo al tavolo.
 
 ## Mondo, Campagna E Risorse
@@ -68,6 +69,7 @@ Se dashboard, pulsanti o tabelle non funzionano, apri [[Risorse/Primo Avvio Stru
 - Dopo una sessione, aggiorna missioni, PNG, luoghi visitati, ricompense e conseguenze da [[Risorse/Post Sessione Guidato]].
 - Per controlli e sviluppo del vault, vedi [[Risorse/Sviluppo Vault]].
 - Per preparare una release o una copia pulita, apri [[RELEASE]] e [[Risorse/Controllo Vault]].
+- Per creare una copia consegnabile, apri [[Risorse/Release Pulita]] o usa `npm run release:clean`.
 - Non modificare manualmente le note in `SRD`: sono un riferimento regolamentare separato e possono essere rigenerate.
 
 ## Demo

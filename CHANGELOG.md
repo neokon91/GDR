@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.7.0 - 2026-05-20
+
+### Aggiunto
+
+- [[Vista Giocatori]] per materiale condivisibile: recap, obiettivi, PNG, luoghi e dispense note.
+- [[Giocatori/Giocatori]] come indice dell'area giocatori.
+- [[Risorse/Release Pulita]] per preparare una copia consegnabile del vault.
+- Script `npm run release:clean` per creare `dist/vault-gdr-clean` e, se disponibile, `dist/vault-gdr-clean.zip`.
+
+### Migliorato
+
+- [[Inizia Qui]] resta la pagina introduttiva all'apertura e mostra una prossima azione senza creare contenuti automaticamente.
+- [[Risorse/Roadmap 0.7.0]] registra le decisioni di esperienza utente confermate.
+
 ## 0.6.0 - 2026-05-20
 
 ### Aggiunto

@@ -1,10 +1,10 @@
 # Versione Vault
 
-Versione: `0.6.0`
+Versione: `0.7.0`
 
 Data: 2026-05-20
 
-Stato: ambientazioni trasformabili in campagne, archi narrativi, fronti e opportunità di avventura.
+Stato: esperienza iniziale professionale, vista giocatori e release pulita pronte.
 
 ## Compatibilità
 

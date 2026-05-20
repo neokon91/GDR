@@ -8,7 +8,7 @@ stato: pronto
 
 # Inizia Qui
 
-Questa e la porta d'ingresso del vault. Parti da qui se vuoi preparare una sessione, giocare o costruire il mondo senza capire strumenti interni, cartelle tecniche o automazioni.
+Questa e la pagina introduttiva del vault. Da qui scegli cosa fare: preparare, giocare, costruire il mondo, creare una campagna dall'ambientazione o aprire la vista giocatori.
 
 ## Cosa Vuoi Fare?
 
@@ -34,6 +34,14 @@ style: primary
 actions:
   - type: open
     link: "[[Durante il Gioco]]"
+```
+
+```meta-bind-button
+label: Vista Giocatori
+style: primary
+actions:
+  - type: open
+    link: "[[Vista Giocatori]]"
 ```
 
 ```meta-bind-button
@@ -73,7 +81,25 @@ label: Roadmap
 style: default
 actions:
   - type: open
-    link: "[[Risorse/Roadmap 0.6.0]]"
+    link: "[[Risorse/Roadmap 0.7.0]]"
+```
+
+## Prossima Azione
+
+```dataviewjs
+const active = dv.pages('"Mondi/Sessioni"').where(p => p.attiva === true && p.stato !== "archiviata" && !String(p.file.name).startsWith("Prova -")).array();
+const prep = dv.pages('"Mondi/Sessioni"').where(p => p.stato === "preparazione" && !String(p.file.name).startsWith("Prova -")).array();
+const openLore = dv.pages('"Inbox"').where(p => p.file.name !== "Inbox" && !["smistata", "archiviata", "ignorata"].includes(p.stato)).array();
+
+if (active.length) {
+  dv.paragraph(`Sessione attiva trovata: ${active[0].file.link}. Apri [[Durante il Gioco]].`);
+} else if (prep.length) {
+  dv.paragraph(`Hai una sessione da preparare: ${prep[0].file.link}. Apri [[Risorse/Preparazione Sessione]].`);
+} else if (openLore.length) {
+  dv.paragraph(`Ci sono appunti da smistare. Apri [[Inbox/Inbox]] o [[Risorse/Post Sessione Guidato]].`);
+} else {
+  dv.paragraph("Scegli un percorso qui sopra. Il vault non crea contenuti da solo: sei tu a decidere cosa aprire o generare.");
+}
 ```
 
 ## Primo Avvio
@@ -101,6 +127,7 @@ actions:
 - Idee vaghe o appunti rapidi: [[Inbox/Inbox]].
 - Preparazione e gestione del tavolo: [[1. DM Dashboard]].
 - Trasformare ambientazione in campagna: [[Campagna da Ambientazione]].
+- Vista condivisibile con i giocatori: [[Vista Giocatori]].
 - Appunti durante la sessione: [[Durante il Gioco]].
 - Eventi live, PNG improvvisati, luoghi improvvisati e conseguenze: sezione Inbox Live in [[Durante il Gioco]] o [[Inbox/Inbox]].
 - Consolidamento dopo sessione: [[Risorse/Post Sessione Guidato]].

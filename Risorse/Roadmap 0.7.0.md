@@ -3,32 +3,33 @@ cssclasses:
   - indice
 categoria: risorsa
 tipo: roadmap
-stato: bozza
+stato: pronto
 ---
 
 # Roadmap 0.7.0
 
-Proposta: rendere il vault piu assistivo, quasi come un copilota da DM, senza esporre complessità tecnica.
+Obiettivo: rendere il vault una app professionale per DM e worldbuilder non tecnici, con apertura chiara, scelta esplicita dell'utente, vista giocatori e release pulita.
 
-## Ipotesi Di Direzione
+## Decisioni Confermate
 
-- [ ] Home dinamica che suggerisce cosa fare adesso: preparare, giocare, chiudere sessione, sistemare mondo.
-- [ ] "Prossima Azione Consigliata" in base allo stato del vault.
-- [ ] Percorsi guidati per tipo di utente: nuovo DM, DM esperto, worldbuilder, one-shot.
-- [ ] Modalità semplificata che nasconde viste tecniche e mostra solo dashboard operative.
-- [ ] Controlli narrativi: troppi segreti non usati, troppe fazioni senza conflitto, missioni senza ricompensa.
-- [ ] Assistente di continuità: cosa ricordare dalla sessione precedente e cosa non dimenticare.
-- [ ] Pacchetto esportazione/consegna: cosa dare ai giocatori, cosa tenere segreto.
+- All'apertura deve comparire una pagina introduttiva.
+- La creazione dei contenuti resta sempre scelta dell'utente.
+- L'esperienza deve sembrare una app professionale, sfruttando strumenti e funzioni gia installati.
+- I giocatori devono avere una vista dedicata.
+- La demo resta esempio/test e materiale utile per una release pulita.
 
-## Domande Da Decidere
+## Completato
 
-1. Quando l'utente apre il vault, deve vedere una home statica o una home che gli dice cosa fare adesso?
-2. Il vault deve spingere l'utente verso una sola prossima azione o mostrare sempre tutte le opzioni?
-3. Per un DM non tecnico, quali parole vanno evitate oltre a plugin, repository, frontmatter e automazioni?
-4. Il vault deve creare più cose automaticamente o deve sempre chiedere conferma prima?
-5. Quando mancano collegamenti, il vault deve segnalare il problema o proporre direttamente una soluzione?
-6. L'esperienza deve essere più da "strumento professionale" o più da "procedura guidata passo passo"?
-7. I giocatori avranno accesso a una copia/area del vault o il vault resta solo per il DM?
-8. Vuoi una modalità "preparazione rapida in 30 minuti" distinta dalla preparazione profonda?
-9. Vuoi che la demo diventi una campagna breve completa o resti un esempio minimo?
-10. Il vault deve supportare ambientazioni multiple nello stesso spazio o spingere a una copia per ogni grande mondo?
+- [x] [[Inizia Qui]] confermata come pagina introduttiva all'apertura.
+- [x] Prossima azione leggibile senza creazione automatica di contenuti.
+- [x] [[Vista Giocatori]] come area dedicata e condivisibile.
+- [x] [[Giocatori/Giocatori]] come indice dell'area giocatori.
+- [x] [[Risorse/Release Pulita]] per preparare una copia consegnabile.
+- [x] Script `npm run release:clean` per creare cartella e zip di release quando possibile.
+
+## Prossime Idee Per 0.8.0
+
+- Modalità "preparazione rapida in 30 minuti".
+- Controlli narrativi avanzati: segreti inutilizzati, fazioni senza conflitto, missioni senza ricompensa.
+- Area giocatori esportabile separata dalla copia DM.
+- Assistente continuità tra una sessione e la successiva.
