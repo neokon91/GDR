@@ -58,6 +58,7 @@ Questa pagina raccoglie guide e materiali riutilizzabili. Se vuoi preparare o gi
 | --- | --- |
 | [[Risorse/Controllo Vault]] | Controlli pratici su note incomplete, sessioni attive e materiale pronto. |
 | [[Risorse/Roadmap/Roadmap]] | Archivio roadmap di versione. |
+| [[Repository]] | Struttura tecnica del repository per chi mantiene il vault. |
 | [[Mondi/Calendario]] | Date del mondo, sessioni, scadenze e cose da calendarizzare. |
 | [[Mondi/Culture/Culture]] | Popoli, usanze, tabù e identità culturali. |
 | [[Mondi/Lingue/Lingue]] | Lingue, dialetti, parole note e scritture. |
@@ -72,6 +73,15 @@ Questa pagina raccoglie guide e materiali riutilizzabili. Se vuoi preparare o gi
 | [[Risorse/Prove Entità]] | Esempi per capire come dovrebbero apparire le note. |
 | [[VERSION]] | Versione corrente del vault. |
 | [[CHANGELOG]] | Cronologia modifiche. |
+
+## Prodotto E Community
+
+| Documento | Uso |
+| --- | --- |
+| [Strategia Prodotto](../docs/STRATEGIA_PRODOTTO.md) | Positioning, competitor, SWOT e monetizzazione. |
+| [Installazione](../docs/INSTALLAZIONE.md) | Guida per installare il vault da release. |
+| [Matrice Strumenti](../docs/STRUMENTI.md) | Strumenti essenziali, consigliati e opzionali. |
+| [Contribuire](../CONTRIBUTING.md) | Regole per proporre modifiche e contributi. |
 
 ## Archivio Mappe
 

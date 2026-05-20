@@ -1,10 +1,30 @@
 # Vault GDR
 
-Questo vault Obsidian aiuta a preparare e gestire campagne GDR fantasy in italiano: mondi, sessioni, PNG, luoghi, fazioni, missioni, incontri, oggetti e materiali da consegnare ai giocatori.
+Un vault Obsidian professionale per DM e worldbuilder italiani: prepara sessioni, costruisce ambientazioni ricche, trasforma mondi in campagne e offre una vista dedicata ai giocatori.
+
+L'obiettivo e farlo sembrare una app locale dentro Obsidian, non una cartella di appunti: l'utente apre [[Inizia Qui]], sceglie cosa fare e usa dashboard, pulsanti e viste gia pronte.
 
 Apri [[Inizia Qui]] per il primo avvio. Usa [[1. DM Dashboard]] per preparare, [[Atlante del Mondo]] per costruire ambientazioni ricche, [[Campagna da Ambientazione]] per trasformarle in gioco, [[Durante il Gioco]] durante la sessione e [[Vista Giocatori]] per materiale condivisibile.
 
+## Perche Usarlo
+
+- **Non tecnico**: l'utente usa pulsanti, dashboard e guide, non configurazioni.
+- **Completo**: mondo, campagna, sessione, post-sessione e vista giocatori.
+- **Worldbuilding profondo**: culture, lingue, storia, conflitti, cosmologia e luoghi connessi.
+- **Markdown-first**: i contenuti restano nel vault dell'utente.
+- **Release pulita**: il vault puo generare una copia consegnabile con `npm run release:clean`.
+
 ## Primi 5 Minuti
+
+1. Scarica lo ZIP della release o clona il repository.
+2. Apri la cartella in Obsidian.
+3. Vai su [[Inizia Qui]].
+4. Se Obsidian chiede conferma per gli strumenti inclusi nel vault, abilitali solo se hai scaricato da fonte affidabile.
+5. Apri [[Risorse/Setup Guidato]].
+
+Guida dettagliata: [docs/INSTALLAZIONE.md](docs/INSTALLAZIONE.md).
+
+## Flusso Rapido
 
 1. Apri il vault in Obsidian e vai su [[Inizia Qui]].
 2. Se Obsidian chiede conferma per gli strumenti inclusi nel vault, abilitali: servono per dashboard, pulsanti e tabelle.
@@ -71,6 +91,13 @@ Se dashboard, pulsanti o tabelle non funzionano, apri [[Risorse/Primo Avvio Stru
 - Per preparare una release o una copia pulita, apri [[RELEASE]] e [[Risorse/Controllo Vault]].
 - Per creare una copia consegnabile, apri [[Risorse/Release Pulita]] o usa `npm run release:clean`.
 - Non modificare manualmente le note in `SRD`: sono un riferimento regolamentare separato e possono essere rigenerate.
+
+## Prodotto E Community
+
+- Strategia prodotto: [docs/STRATEGIA_PRODOTTO.md](docs/STRATEGIA_PRODOTTO.md).
+- Installazione: [docs/INSTALLAZIONE.md](docs/INSTALLAZIONE.md).
+- Matrice strumenti: [docs/STRUMENTI.md](docs/STRUMENTI.md).
+- Contribuire: [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Demo
 

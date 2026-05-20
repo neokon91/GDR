@@ -1,5 +1,17 @@
 # Changelog
 
+## Unreleased
+
+### Aggiunto
+
+- Documentazione prodotto in `docs/`: strategia, installazione e matrice strumenti.
+- `CONTRIBUTING.md` e issue template GitHub per bug e feature request.
+
+### Migliorato
+
+- README riposizionato come pagina prodotto e non solo guida interna al vault.
+- Checklist release aggiornata per ZIP pulito e documentazione community.
+
 ## 0.7.0 - 2026-05-20
 
 ### Aggiunto

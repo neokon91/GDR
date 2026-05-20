@@ -5,18 +5,24 @@ Questa checklist serve a preparare una copia pubblicabile del vault.
 ## Prima Della Release
 
 1. Apri [[Inizia Qui]] e verifica che i pulsanti portino alle pagine giuste.
-2. Apri [[1. DM Dashboard]], [[Durante il Gioco]] e [[Worldbuilder Dashboard]].
+2. Apri [[1. DM Dashboard]], [[Durante il Gioco]], [[Atlante del Mondo]], [[Campagna da Ambientazione]] e [[Vista Giocatori]].
 3. Apri [[Risorse/Controllo Vault]] e risolvi problemi operativi importanti.
 4. Controlla che la demo [[Demo - La Reliquia Spezzata]] sia navigabile.
 5. Esegui:
 
 ```bash
-node z.automazioni/check_vault.js
+npm run check
 ```
 
 6. Aggiorna [[VERSION]].
 7. Aggiorna [[CHANGELOG]].
-8. Crea tag o zip della release solo dopo controlli puliti.
+8. Crea la release pulita:
+
+```bash
+npm run release:clean
+```
+
+9. Crea tag o GitHub Release solo dopo controlli puliti.
 
 ## Cosa Non Rimuovere
 
@@ -35,9 +41,11 @@ node z.automazioni/check_vault.js
 - [[Mondi/Timeline/Timeline]] mostra eventi canonici e lore da sessione.
 - Le note demo non sono confuse con le note `Prova -`: la demo e contenuto dimostrativo, le prove sono collaudi tecnici.
 - Il README resta leggibile per utenti non tecnici.
+- [docs/INSTALLAZIONE.md](docs/INSTALLAZIONE.md) e [docs/STRUMENTI.md](docs/STRUMENTI.md) sono aggiornati.
 
 ## Dopo La Release
 
 - Aggiorna il changelog con eventuali fix.
 - Tieni le modifiche tecniche documentate in [[Risorse/Sviluppo Vault]].
 - Se cambi template importanti, aggiorna almeno una nota demo o una nota `Prova -`.
+- Pubblica lo ZIP generato da `dist/vault-gdr-clean.zip`.

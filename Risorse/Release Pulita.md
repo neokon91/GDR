@@ -33,3 +33,9 @@ npm run release:clean
 ```
 
 Il comando crea una cartella `dist/vault-gdr-clean` e, se disponibile il comando `zip`, anche `dist/vault-gdr-clean.zip`.
+
+## Documentazione Release
+
+- [Installazione](../docs/INSTALLAZIONE.md)
+- [Strategia Prodotto](../docs/STRATEGIA_PRODOTTO.md)
+- [Matrice Strumenti](../docs/STRUMENTI.md)
