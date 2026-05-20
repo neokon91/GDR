@@ -9,6 +9,8 @@ Questa pagina decide quali plugin integrare per primi nel vault. Non e una lista
 
 Per il recap completo dei plugin installati, con versioni, stato reale, fonti ufficiali e beneficiari, vedi [[Dev/Recap Plugin Installati]].
 
+Per il contratto verificato della 1.0, vedi [[Dev/Matrice Plugin 1.0]]. La matrice e duplicata in forma leggibile da macchina in `Dev/plugin_matrix.json`; `npm run check` fallisce se un plugin abilitato non ha funzione, guida, pagina operativa e smoke.
+
 ## Fonti Ufficiali Consultate
 
 - [Calendarium](https://plugins.javalent.com/calendarium) e [eventi Calendarium](https://plugins.javalent.com/calendarium/events)

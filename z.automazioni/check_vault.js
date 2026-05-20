@@ -27,6 +27,8 @@ const REQUIRED_FILES = [
     "Dev/RELEASE.md",
     "Dev/Sviluppo Vault.md",
     "Dev/Integrazioni Plugin.md",
+    "Dev/Matrice Plugin 1.0.md",
+    "Dev/plugin_matrix.json",
     "Dev/Plugin Technical Reference.md",
     "Dev/TemplateFactory/README.md",
     "Dev/TemplateFactory/modules/fields_core.yaml",
@@ -652,6 +654,43 @@ for (const file of REQUIRED_BASE_FILES) {
 for (const file of REQUIRED_LAYER_FILES) {
     if (!fs.existsSync(path.join(ROOT, file))) {
         errors.push(`Plugin layer interno: file obbligatorio mancante ${file}`);
+    }
+}
+
+const pluginMatrixPath = path.join(ROOT, "Dev/plugin_matrix.json");
+const pluginMatrix = readJson(pluginMatrixPath) ?? [];
+const pluginMatrixById = new Map();
+const requiredPluginMatrixFields = ["id", "name", "class", "function", "guide", "operational", "smoke"];
+if (!Array.isArray(pluginMatrix)) {
+    errors.push("Dev/plugin_matrix.json: root deve essere un array");
+} else {
+    for (const entry of pluginMatrix) {
+        for (const field of requiredPluginMatrixFields) {
+            if (!hasValue(entry?.[field])) {
+                errors.push(`Dev/plugin_matrix.json: entry plugin senza campo ${field}`);
+            }
+        }
+
+        if (!entry?.id) continue;
+        if (pluginMatrixById.has(entry.id)) {
+            errors.push(`Dev/plugin_matrix.json: plugin duplicato ${entry.id}`);
+        }
+        pluginMatrixById.set(entry.id, entry);
+
+        for (const field of ["guide", "operational", "smoke"]) {
+            const target = String(entry[field] ?? "");
+            if (!target) continue;
+            const targetWithExtension = /\.(md|base|js|json|excalidraw)$/i.test(target) ? target : targetPath(target);
+            if (!fs.existsSync(path.join(ROOT, targetWithExtension)) && !isGeneratedTemplatePath(targetWithExtension)) {
+                errors.push(`Dev/plugin_matrix.json: ${entry.id} ${field} mancante ${targetWithExtension}`);
+            }
+        }
+    }
+}
+
+for (const plugin of communityPlugins) {
+    if (!pluginMatrixById.has(plugin)) {
+        errors.push(`Plugin matrix: plugin abilitato non mappato ${plugin}`);
     }
 }
 

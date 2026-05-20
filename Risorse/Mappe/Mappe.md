@@ -8,6 +8,16 @@ stato: pronto
 
 # Mappe
 
+## Scelta Rapida
+
+| Bisogno | Plugin | Usa quando | Output minimo |
+| --- | --- | --- | --- |
+| Fronte, indizi, relazioni mobili | Excalidraw | Devi disegnare, annotare e spostare idee mentre prepari. | Mappa in `Risorse/Mappe` con link a note canoniche. |
+| Rete stabile di note | Canvas / Advanced Canvas | Vuoi una mappa fatta di note, gruppi e connessioni durevoli. | Canvas con nodi che aprono luoghi, PNG, fazioni, missioni o clock. |
+| Marker geografici editabili | Maps per Bases | Hai `coordinates`, `icon`, `color` e vuoi correggere dati in tabella. | [[z.bases/Atlante Mappe.base]] con vista mappa e fallback tabellare. |
+| Mappa grande al tavolo | TTRPG Tools: Maps | Servono zoom, pin, layer, misure o una base immagine. | Nota mappa zoom con pin collegati e versione player-safe se pubblica. |
+| Esplorazione a esagoni | Hex Cartographer | Distanze, regioni, viaggi e incontri dipendono dalla posizione. | Regione a esagoni collegata a luoghi, incontri, risorse e conseguenze. |
+
 ````tabs
 tab: Relazioni
 
