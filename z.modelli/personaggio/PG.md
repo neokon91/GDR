@@ -59,6 +59,8 @@ Mondo:
 | Iniziativa | `INPUT[number:iniziativa]` |
 | Velocità | `INPUT[text:velocita]` |
 | PF temporanei | `INPUT[number:hp_temporanei]` |
+| Condizioni | `INPUT[inlineList:condizioni]` |
+| Risorse rapide | `INPUT[inlineList:risorse_rapide]` |
 | Dadi vita | `INPUT[text:dadi_vita_totali]` |
 | Dadi vita spesi | `INPUT[number:dadi_vita_spesi]` |
 | Ispirazione | `INPUT[toggle:ispirazione]` |
@@ -106,12 +108,29 @@ SORT nome ASC
 ## Al Tavolo
 
 > [!scena] Spotlight
+> `INPUT[text:spotlight]`
+
+> [!timer] Condizioni E Risorse
+> Condizioni: `INPUT[inlineList:condizioni]`
 >
+> Risorse rapide: `INPUT[inlineList:risorse_rapide]`
 
 ## Obiettivi
 
 > [!missione] Obiettivi
->
+> `INPUT[inlineList:quest_personali]`
+
+## Inventario Rapido
+
+```meta-bind
+INPUT[list:inventario_rapido]
+```
+
+## Loot Da Assegnare
+
+```meta-bind
+INPUT[list:loot_da_assegnare]
+```
 
 ## Segreti
 

@@ -577,7 +577,7 @@
     const cards = party.map(p => {
       const hp = `${p.hp_attuali ?? "?"}/${p.hp_massimi ?? "?"}`;
       const meta = [p.giocatore, p.classe, p.livello ? `livello ${p.livello}` : ""].filter(Boolean).join(" · ");
-      const body = `HP ${hp}${p.hp_temporanei ? ` · temp ${p.hp_temporanei}` : ""}${p.ispirazione ? " · ispirazione" : ""}`;
+      const body = `HP ${hp}${p.hp_temporanei ? ` · temp ${p.hp_temporanei}` : ""}${p.condizioni ? ` · ${fieldText(p.condizioni)}` : ""}${p.spotlight ? ` · spotlight ${p.spotlight}` : ""}${p.ispirazione ? " · ispirazione" : ""}`;
       return cardHtml({ title: pageTitle(p), meta, body, link: p.file.path, cls: "gdr-info-card compact gdr-kind-party" });
     });
 
