@@ -25,7 +25,8 @@ Il vault deve funzionare per una persona che:
 - [[Repository]] deve restare la mappa tecnica della repo: cartelle, confini, comandi e cosa non spostare alla leggera.
 - [[Risorse/Guida DM]] deve spiegare il flusso operativo senza dettagli tecnici: preparazione, gioco, Inbox Live, post-sessione e canonizzazione.
 - [[Risorse/Indice Connettore GPT]] deve restare un indice sintetico per code search e connettori GPT, marcato con `is_code_search_indexed: true`.
-- Questa nota contiene la documentazione di sviluppo: campi, template, automazioni, test, import generati e criteri di modifica.
+- Questa nota contiene la documentazione tecnica di sviluppo: campi, template, automazioni, test, import generati e criteri di modifica.
+- [[Risorse/Roadmap/1.0.0]] contiene la direzione prodotto e UX operativa attiva. Se c'e conflitto, prevale la roadmap attiva.
 - Le istruzioni tecniche non vanno nel README se non sono necessarie per usare il vault al tavolo.
 
 ## Regole Di Progettazione
@@ -43,8 +44,6 @@ Il vault deve funzionare per una persona che:
 - Usare callout collassati (`> [!tipo]- Titolo`) per dettagli non immediati: segreti, note GM, esiti possibili, timer secondari, lore profonda e riferimenti.
 - Usare callout annidati solo quando il dettaglio appartiene chiaramente alla sezione madre; evita annidamenti profondi oltre un livello.
 - Lascia i dettagli tecnici in `z.modelli`, `z.automazioni` e CSS.
-
-Vedi anche [docs/UX_OPERATIVA.md](../docs/UX_OPERATIVA.md). Se c'e conflitto, prevale la UX operativa.
 
 ## Cosa Deve Essere Sempre Visibile
 

@@ -4,18 +4,18 @@
 
 ### Prossima Fase
 
-- QA visuale delle dashboard principali e preparazione release community 1.0.
+- Entita vive, creazione guidata con connessioni, card funzionali e demo professionale prima della release 1.0.
 
 ### Aggiunto
 
-- `docs/UX_OPERATIVA.md` come direzione vincolante: niente nuove dashboard se non migliorano Prepara -> Gioca -> Aggiorna il mondo.
 - [[Hub/Party Control]] per PG, HP, missioni, inventario e flags durante la sessione.
 - [[Risorse/Quality Report]] come dashboard analytics per copertura, buchi operativi, sicurezza pubblicazione e materiale screenshot-ready.
-- Rimossa documentazione prodotto ridondante: resta solo `docs/UX_OPERATIVA.md` come regola di sviluppo.
+- [[Risorse/Roadmap/1.0.0]] come roadmap completa e fonte unica per direzione prodotto, UX operativa e backlog attivo.
 
 ### Migliorato
 
 - Correzione strutturale Obsidian-native: i wizard Templater di luogo, fazione, missione e PNG cercano connessioni vive tra note esistenti e i template core espongono sezioni Meta Bind modificabili dal corpo nota per gancio, uso al tavolo, player-safe, pressione, prossima mossa e connessioni.
+- Eliminato `docs/UX_OPERATIVA.md`: le regole UX sono state incorporate nella roadmap attiva e `Risorse/Sviluppo Vault` resta solo documentazione tecnica.
 - Chiuso il flusso sessione: la nota sessione genera una scaletta giocabile dai cinque campi, le viste operative mostrano la sessione attiva e [[Durante il Gioco]] apre come cockpit con Fine sessione visibile.
 - [[Risorse/Post Sessione Guidato]] ora e un flusso unico con appunti live della sessione, canone da confermare, conseguenze, prossime mosse, prossima sessione e recap pubblico/DM separati.
 - [[Bibbia del Mondo]] e il template mondo sono stati rafforzati come Codex locale: home mondo, indice per categoria/pubblico e controlli su articoli senza gancio, collegamenti o uso al tavolo.
