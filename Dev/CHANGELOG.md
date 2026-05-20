@@ -4,6 +4,11 @@
 
 ### Aggiunto
 
+- [[Dev/Demo Finale]] con scenario demo completo [[Brumafonda Demo]]: mondo, campagna, cultura, fazione, culto, luogo, economia, mappa, dispensa, missione, sessione e conseguenza.
+- [[Dev/Smoke Demo Finale]] come checklist manuale di smoke visuale, player-safe e raccolta evidenze screenshot/GIF.
+- Gate statico M3 in `npm run check` per verificare presenza demo, recap pubblico, mappa/dispensa pubbliche, player-safe e controlli di [[Vista Giocatori]].
+- [[Dev/Matrice Plugin 1.0]] e `Dev/plugin_matrix.json` per mappare ogni plugin installato a funzione, guida, pagina operativa e smoke.
+- Azioni Meta Bind generate per smistare e canonizzare bozze del Generatore di Contenuti Fantasy.
 - [[z.bases/Fazioni.base]] per correggere rapidamente fazioni in movimento, pressione, relazioni, mondo e archivio.
 - [[z.bases/Economia.base]] per lavorare in tabella su risorse, rotte, mercati e pressioni economiche.
 - [[z.bases/Worldbuilding.base]] per modificare culture, religioni, societa e cosmologia senza toccare query Dataview.
@@ -18,6 +23,11 @@
 
 ### Migliorato
 
+- TemplateFactory ora copre i template generati, router, wizard e azioni operative materializzate in `z.modelli`.
+- Calendarium e selezionabile per mondo/campagna con propagazione controllata verso `fc-calendar` nei template generati.
+- [[Risorse/Smistamento Bozze Generate]] ora gestisce il ciclo bozza -> aggancio -> smistamento -> canonizzazione.
+- [[Mondi/Calendario]] mostra calendari selezionati per mondo/campagna e segnala valori non configurati.
+- `npm run release:clean` e stato verificato su artefatto reale: `dist/vault-gdr-clean` e `dist/vault-gdr-clean.zip`.
 - Normalizzato il formato dei file `.base` esistenti e aggiunto un controllo che segnala `properties:` incollato alla riga precedente.
 - [[Risorse/Task DM]] raggruppa le task operative per scadenza e ordina per urgenza/priorita.
 - Le bacheche operative usano priorita Tasks solo su lavoro reale del DM e [[z.bacheche/Manutenzione Vault]] contiene ricorrenze mensili di manutenzione.
@@ -25,6 +35,12 @@
 - Le viste Bases prioritarie usano `groupBy` e `limit`, mentre gli archivi restano completi.
 - Rimossi gli artefatti di release generati da `dist/` dal workspace locale.
 - Spostato il materiale di sviluppo fuori da `Risorse/` e dalla root, aggiornando controlli e riferimenti.
+
+### Verificato
+
+- `npm run check`
+- `npm run release:clean`
+- `dist/vault-gdr-clean.zip` creato localmente come artefatto ignorato da Git.
 
 ## 1.0.0 - 2026-05-20
 

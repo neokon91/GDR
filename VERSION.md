@@ -2,7 +2,7 @@
 
 Versione: `1.0.0`
 
-Data: 2026-05-20
+Data: 2026-05-21
 
 
 ## Compatibilità
