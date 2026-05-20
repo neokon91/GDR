@@ -1025,6 +1025,33 @@ body .markdown-source-view.tavolo {
   padding: 0.65rem;
 }
 
+.markdown-preview-view:is(.gdr-prep-flow, .gdr-post-session-flow, .gdr-tavolo-dashboard, .gdr-party-control, .gdr-player-view) > .markdown-preview-sizer > div:first-child ~ .block-language-dataviewjs:first-of-type,
+.markdown-preview-view:is(.gdr-prep-flow, .gdr-post-session-flow, .gdr-tavolo-dashboard, .gdr-party-control, .gdr-player-view) .gdr-card-grid:first-of-type {
+  margin-top: 0.4rem;
+}
+
+.markdown-preview-view:is(.gdr-prep-flow, .gdr-post-session-flow, .gdr-tavolo-dashboard, .gdr-party-control, .gdr-player-view) h2 {
+  margin-top: 1.15rem;
+}
+
+.markdown-preview-view:is(.gdr-prep-flow, .gdr-post-session-flow, .gdr-tavolo-dashboard, .gdr-party-control) .block-language-meta-bind-button {
+  display: inline-flex;
+  margin: 0 0.35rem 0.45rem 0;
+}
+
+.markdown-preview-view:is(.gdr-prep-flow, .gdr-post-session-flow, .gdr-tavolo-dashboard, .gdr-party-control) .callout[data-callout="regia"].is-collapsible,
+.markdown-preview-view:is(.gdr-prep-flow, .gdr-post-session-flow, .gdr-tavolo-dashboard, .gdr-party-control) .callout[data-callout="segreto"].is-collapsible {
+  opacity: 0.92;
+}
+
+.markdown-preview-view:is(.gdr-prep-flow, .gdr-post-session-flow, .gdr-tavolo-dashboard, .gdr-party-control, .gdr-player-view) .block-language-dataview p {
+  color: var(--text-muted);
+  border: 1px dashed var(--gdr-border);
+  border-radius: var(--gdr-radius);
+  padding: 0.65rem 0.75rem;
+  background: color-mix(in srgb, var(--background-secondary) 46%, transparent);
+}
+
 .gdr-card-title {
   font-weight: 750;
   margin-bottom: 0.35rem;
