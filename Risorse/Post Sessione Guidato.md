@@ -1,165 +1,126 @@
 ---
 cssclasses:
-  - indice
+  - dashboard
+  - gdr-post-session-flow
 categoria: risorsa
-tipo: guida
+tipo: post-sessione
 stato: pronto
 ---
 
 # Post Sessione Guidato
 
-Apri questa pagina subito dopo la partita. Serve a chiudere la sessione senza dimenticare conseguenze, ricompense e prossima apertura.
-
-`BUTTON[apri-bacheca-post-sessione-z-bacheche-post-sessione]`
-
-`BUTTON[controllo-vault-risorse-controllo-vault-2]`
-
-`BUTTON[smistamento-bozze-generate-risorse-smistamento-bozze-generate]`
-
-`BUTTON[motore-mondo-vivo-motore-mondo-vivo]`
+> [!missione] Output
+> Trasforma la sessione appena giocata in mondo aggiornato: decisioni, conseguenze, missioni, PNG, luoghi, clock, recap pubblico, recap DM e prossima sessione.
 
 `BUTTON[cosa-succede-fuori-scena-cosa-succede-fuori-scena]`
-
-## 1. Cosa E Successo
-
-Scrivi prima in modo grezzo. Non serve sistemare tutto subito.
-
-> [!scena] Fatti della sessione
-> -
-
-> [!indizio] Segreti rivelati
-> -
-
-> [!timer] Conseguenze aperte
-> -
-
-> [!timer] Clock mossi
-> -
-
-> [!png] PNG fuori scena
-> -
-
-## 2. Cosa Diventa Vero Nel Mondo
-
-Usa questa sezione per decidere cosa resta canonico.
-
-| Tipo | Cosa fare |
-| --- | --- |
-| Evento importante | Crea o aggiorna una nota in [[Mondi/Timeline/Timeline]]. |
-| PNG cambiato | Aggiorna la nota del PNG. |
-| Luogo cambiato | Aggiorna la nota del luogo. |
-| Fazione in movimento | Aggiorna pressione e prossima mossa. |
-| Missione cambiata | Aggiorna stato, pressione, ricompense e conseguenze. |
-| Clock o tracciato | Aggiorna `progress_value`, `pressione`, `prossima_mossa` e conseguenze. |
-
-## 3. Lavorazione Seria
-
-Trasforma ogni appunto live in una decisione operativa: canonico, rumor, conseguenza aperta o materiale da archiviare.
-
-```dataview
-TABLE tipo, stato, sessioni, collegamenti, impatto, azioni
-FROM "Inbox"
-WHERE file.name != "Inbox" AND stato != "smistata" AND stato != "archiviata" AND !startswith(file.name, "Prova -")
-SORT file.ctime DESC
-LIMIT 12
-```
-
-## 4. Percorso Conseguenza
-
-Usa questa sequenza per non perdere continuita.
-
-| Passo | Azione |
-| --- | --- |
-| Appunto live | Apri la nota in [[Inbox/Inbox]] e decidi se e canonica. |
-| Conseguenza | Se cambia il mondo, crea o aggiorna una nota `Conseguenza`. |
-| Evento storico | Se e successo davvero, crea o aggiorna una nota in [[Mondi/Timeline/Timeline]]. |
-| Tracciato | Se produce pressione futura, crea o aggiorna un clock in [[Mondi/Tracciati/Tracciati]]. |
-| Propagazione | Se cambia fazioni, luoghi, missioni, relazioni o stato del mondo, compila `entita_impattate`, `propaga_a`, `conseguenze` e `prossima_mossa`. |
-| Geopolitica | Se cambia autorita, confini, risorse o legittimita, aggiorna il territorio politico e [[Geopolitical Dashboard]]. |
-| Stato Campagna | Riapri [[Mondi/Stato del Mondo]] e controlla che compaia nella vista operativa. |
-| Mondo Vivo | Apri [[Motore Mondo Vivo]] e chiudi le continuita aperte prima della prossima prep. |
-
-`BUTTON[nuova-conseguenza-z-modelli-live-conseguenza-md]`
 
 `BUTTON[nuovo-evento-storico-z-modelli-evento-storico-md]`
 
 `BUTTON[nuovo-clock-z-modelli-dm-tracciato-md]`
 
-## 5. Aggiorna Pressioni
+## Sessione Da Processare
 
-```dataview
-TABLE categoria, tipo, stato, progress_value, progress_max, pressione, prossima_mossa
-FROM "Mondi/Tracciati" OR "Mondi/Missioni" OR "Mondi/Fazioni"
-WHERE stato != "archiviata" AND !startswith(file.name, "Prova -") AND (pressione > 0 OR progress_value > 0)
-SORT pressione DESC, progress_value DESC
-LIMIT 12
+```dataviewjs
+const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));
+gdr.renderActiveSessionBanner(dv);
+gdr.renderPostSessionFocus(dv);
 ```
 
-## 6. Propagazione Mondo Vivo
+## 1. Decisioni Prese
+
+> [!scena] Cosa hanno scelto i giocatori
+> -
+
+> [!indizio] Informazioni emerse
+> -
+
+> [!tesoro] Materiale usato o consegnato
+> -
+
+## 2. Canonico Da Confermare
+
+Trasforma solo cio che resta vero nel mondo. Il resto resta rumor, bozza o appunto archiviato.
 
 ```dataview
-TABLE categoria, tipo, stato, entita_impattate, propaga_a, conseguenze, prossima_mossa
-FROM "Mondi" OR "Inbox"
-WHERE stato != "archiviata" AND stato != "ignorata" AND !startswith(file.name, "Prova -") AND (entita_impattate OR propaga_a OR conseguenze OR prossima_mossa)
+TABLE tipo, stato, stato_canonico, sessioni, collegamenti, impatto
+FROM "Inbox" OR "Mondi/Timeline"
+WHERE stato != "archiviata" AND stato != "ignorata" AND !startswith(file.name, "Prova -") AND (categoria = "lore capture" OR categoria = "evento storico" OR stato_canonico OR canonico != null)
 SORT file.mtime DESC
 LIMIT 12
 ```
 
-## 7. Cosa Succede Fuori Scena
+> [!regia] Conferma canone
+> - [ ] Evento vero creato o aggiornato in [[Mondi/Timeline/Timeline]].
+> - [ ] PNG, luogo, fazione o missione aggiornati se sono cambiati.
+> - [ ] Appunti non canonici marcati rumor, leggenda, segreto, falso, archiviata o ignorata.
 
-Questa sezione trasforma la chiusura sessione in prossime mosse. Ogni riga dovrebbe uscire da qui con una decisione: aggiornare una nota, creare un clock, portare un segreto al tavolo o archiviare.
+## 3. Conseguenze Da Applicare
 
 ```dataview
-TABLE categoria, tipo, stato, pressione, progress_value, progress_max, innesco, prossima_mossa, conseguenze
+TABLE categoria, tipo, stato, entita_impattate, propaga_a, conseguenze, prossima_mossa
+FROM "Mondi" OR "Inbox"
+WHERE stato != "archiviata" AND stato != "ignorata" AND !startswith(file.name, "Prova -") AND (conseguenze OR entita_impattate OR propaga_a OR prossima_mossa)
+SORT file.mtime DESC
+LIMIT 16
+```
+
+> [!timer] Applicazione
+> - [ ] Missioni: stato, pressione, ricompense, prossima mossa.
+> - [ ] PNG: atteggiamento, luogo, segreti rivelati, conseguenze.
+> - [ ] Luoghi: stato, pericolo, controllo, accesso.
+> - [ ] Clock: `progress_value`, `pressione`, `innesco`, `prossima_mossa`.
+> - [ ] Fazioni: obiettivo, pressione, relazione, propagazione.
+
+## 4. Prossime Mosse
+
+Apri [[Cosa Succede Fuori Scena]] solo per decidere cosa si muove prima della prossima preparazione.
+
+```dataview
+TABLE categoria, tipo, stato, pressione, progress_value, progress_max, innesco, prossima_mossa
 FROM "Mondi/Fazioni" OR "Mondi/Religioni" OR "Mondi/Personaggi" OR "Mondi/Tracciati" OR "Mondi/Missioni" OR "Mondi/Conflitti"
 WHERE stato != "archiviata" AND stato != "ignorata" AND !startswith(file.name, "Prova -") AND (pressione >= 5 OR progress_value >= 3 OR prossima_mossa OR innesco)
 SORT pressione DESC, progress_value DESC, file.mtime DESC
-LIMIT 16
+LIMIT 12
 ```
 
-```dataview
-TABLE categoria, tipo, stato, entita_impattate, propaga_a, conseguenze, prossima_mossa
-FROM "Mondi" OR "Inbox"
-WHERE stato != "archiviata" AND stato != "ignorata" AND !startswith(file.name, "Prova -") AND (conseguenze OR entita_impattate OR propaga_a) AND (!entita_impattate OR !propaga_a OR !prossima_mossa)
-SORT file.mtime DESC
-LIMIT 16
-```
-
-## 8. Sessioni Attive
+## 5. Prossima Sessione
 
 ```dataview
-TABLE data, data_mondo, stato, campagne
+TABLE data, data_mondo, stato, attiva, obiettivo, apertura, scelta
 FROM "Mondi/Sessioni"
-WHERE attiva = true AND !startswith(file.name, "Prova -")
-SORT data DESC
-```
-
-Quando hai finito:
-
-- porta la sessione giocata a `giocata`;
-- togli `attiva: true` alla sessione chiusa;
-- scegli o crea la prossima sessione;
-- metti `attiva: true` solo sulla prossima sessione.
-
-## 9. Cosa Preparare Dopo
-
-```dataview
-TABLE stato, pressione, scadenza_mondo, prossima_mossa
-FROM "Mondi/Missioni"
-WHERE (stato = "proposta" OR stato = "accettata" OR stato = "in corso") AND !startswith(file.name, "Prova -")
-SORT pressione DESC, scadenza_mondo ASC
+WHERE !startswith(file.name, "Prova -") AND (attiva = true OR stato = "preparazione" OR stato = "pronto")
+SORT attiva DESC, data DESC, file.mtime DESC
 LIMIT 8
 ```
 
-## 10. Chiusura Rapida
+> [!scena] Passaggio di consegne
+> - [ ] Sessione giocata: `stato: giocata`, `attiva: false`.
+> - [ ] Prossima sessione scelta o creata.
+> - [ ] Prossima sessione: `attiva: true` solo su una nota.
+> - [ ] Prima scena della prossima sessione compilata.
 
-- [ ] Appunti live smistati o lasciati in [[Inbox/Inbox]] con un nome chiaro.
-- [ ] Bozze generate utili collegate o archiviate in [[Risorse/Smistamento Bozze Generate]].
-- [ ] Conseguenze importanti aggiunte a mondo, PNG, luoghi, fazioni, missioni o tracciati.
-- [ ] Propagazione compilata su eventi, fazioni, luoghi, missioni o relazioni toccate dalla sessione.
-- [ ] Territori politici, confini, risorse o legittimita aggiornati se il potere e cambiato.
-- [ ] Clock e progress track aggiornati.
-- [ ] Ricompense e dispense segnate.
-- [ ] Prossima sessione scelta.
-- [ ] [[Motore Mondo Vivo]] controllato per continuita aperte, faction dynamics e causalita storica.
-- [ ] [[Risorse/Controllo Vault]] aperto almeno una volta.
+## 6. Recap Pubblico
+
+> [!lettura] Testo mostrabile ai giocatori
+> - Cosa e successo:
+> - Cosa sanno tutti:
+> - Missioni aggiornate:
+> - PNG o luoghi ora noti:
+> - Prossimo aggancio pubblico:
+
+## 7. Recap DM
+
+> [!segreto] Note private
+> - Verita dietro gli eventi:
+> - Conseguenze non viste:
+> - Fazioni che reagiscono:
+> - Segreti ancora nascosti:
+> - Apertura consigliata:
+
+## Chiusura
+
+- [ ] Ogni appunto live ha una decisione: canonico, conseguenza, rumor o archiviato.
+- [ ] Conseguenze applicate a missioni, PNG, luoghi, fazioni o clock.
+- [ ] Recap pubblico compilato senza segreti.
+- [ ] Recap DM compilato con prossime mosse reali.
+- [ ] Una sola sessione ha `attiva: true`.

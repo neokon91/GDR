@@ -347,6 +347,50 @@
     dv.paragraph("Sequenza giocabile: apertura -> pressione -> scelta -> conseguenza -> appunto per il post-sessione.");
   }
 
+  function renderPostSessionFocus(dv) {
+    const session = activeSession(dv)
+      ?? dv.pages('"Mondi/Sessioni"')
+        .where(p => isReal(p) && ["in corso", "pronto", "giocata"].includes(p.stato))
+        .sort(p => p.file.mtime, "desc")
+        .first();
+
+    if (!session) {
+      dv.paragraph("Nessuna sessione da chiudere. Apri Durante il Gioco o seleziona una sessione giocata.");
+      return;
+    }
+
+    const liveNotes = dv.array(session.appunti_live ?? [])
+      .map(link => pageFromLink(dv, link))
+      .where(Boolean)
+      .array();
+
+    const cards = [
+      ["Sessione da chiudere", session.file.name, "Porta questa nota a `giocata` quando il recap e pronto.", session.file.path],
+      ["Appunti live", liveNotes.length || fieldText(session.appunti_live) || "0", "Decidi cosa diventa canonico, conseguenza o rumor.", ""],
+      ["Decisioni", fieldText(session.decisioni_prese ?? session.decisioni_attese ?? session.scelta) || "Compila le decisioni prese al tavolo.", ""],
+      ["Clock", fieldText(session.tracciati) || fieldText(session.pressioni) || "Aggiorna almeno una pressione se e avanzata.", ""],
+      ["Materiale usato", fieldText(session.dispense ?? session.materiale_pronto) || "Segna handout consegnati, mappe usate e ricompense.", ""],
+      ["Prossima apertura", fieldText(session.prossima_apertura ?? session.prossime_mosse_fuori_scena) || "Scrivi cosa apre la prossima sessione.", ""]
+    ];
+
+    const grid = dv.el("div", "", { cls: "gdr-card-grid compact" });
+    grid.innerHTML = cards.map(([title, body, meta, link]) => cardHtml({
+      title,
+      meta,
+      body,
+      link,
+      cls: "gdr-info-card compact"
+    })).join("");
+
+    if (liveNotes.length) {
+      dv.header(3, "Appunti Live Da Processare");
+      dv.table(
+        ["Nota", "Tipo", "Stato", "Canone", "Collegamenti"],
+        liveNotes.map(p => [p.file.link, p.tipo ?? p.categoria ?? "", p.stato ?? "", p.stato_canonico ?? p.canonico ?? "", p.collegamenti ?? p.luoghi ?? p.fazioni ?? []])
+      );
+    }
+  }
+
   function preparationTarget(dv) {
     const explicit = activeSession(dv);
     if (explicit) return explicit;
@@ -551,6 +595,7 @@
     renderPreparationFocus,
     renderTableCockpit,
     renderPlayableOutline,
+    renderPostSessionFocus,
     renderPartyControl,
     renderPlayerRecap,
     renderPublicSafety,
