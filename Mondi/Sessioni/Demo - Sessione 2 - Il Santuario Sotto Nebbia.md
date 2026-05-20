@@ -7,10 +7,10 @@ categoria: sessione
 tipo: sessione di campagna
 data:
 data_mondo: "Seconda notte di nebbia"
-fc-calendar:
-fc-date:
+fc-calendar: "Brumafonda"
+fc-date: "1-1-2"
 fc-category: sessione
-fc-display-name: "Demo - Sessione 2"
+fc-display-name: "Sessione 2"
 fc-end:
 stato: in corso
 attiva: true

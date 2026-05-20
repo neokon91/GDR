@@ -5,29 +5,41 @@ cssclasses:
 
 # Calendario
 
-Usa questa nota con Calendarium per tenere insieme calendario reale, date del mondo, feste, scadenze narrative e continuità tra sessioni.
+Questa e la pagina del tempo del mondo: mostra cosa e gia successo, cosa sta per succedere e quali note hanno una data scritta ma non sono ancora entrate nel calendario.
 
-## Regole Minime
+Per usarla basta compilare nelle note una data leggibile:
 
-- `data_mondo`: testo leggibile al tavolo per le sessioni, per esempio "3 Brumaio 1491".
-- `scadenza_mondo`: testo leggibile al tavolo per missioni, pericoli e conseguenze.
-- `fc-calendar`: nome del calendario Calendarium; se vuoto usa il calendario predefinito.
-- `fc-date`: data nel formato impostato in Calendarium.
-- `fc-category`: categoria evento. Usa valori semplici: `sessione`, `scadenza`, `festa`, `pericolo`, `conseguenza`.
-- `fc-display-name`: nome breve mostrato nel calendario.
-- `fc-end`: opzionale, solo per eventi su piu giorni.
+- nelle sessioni: `data_mondo`, per esempio "Seconda notte di nebbia";
+- nelle missioni o nei pericoli: `scadenza_mondo`, per esempio "Entro il prossimo plenilunio".
 
-Regola pratica: `data_mondo` e `scadenza_mondo` sono per leggere velocemente al tavolo; `fc-date` e `fc-end` sono per Calendarium. Una nota con una data leggibile ma senza `fc-date` non compare nel calendario.
+Il vault segnala sotto cosa manca da sistemare. Non serve capire gli strumenti interni per usare questa pagina al tavolo.
 
-## Categorie Eventi
+## Oggi Nel Mondo
 
-| Categoria | Uso |
-| --- | --- |
-| sessione | Sessioni preparate o giocate |
-| scadenza | Missioni con una pressione temporale |
-| festa | Ricorrenze, feste, mercati, rituali |
-| pericolo | Eventi ostili che avanzano se ignorati |
-| conseguenza | Esiti emersi dopo una sessione |
+```dataviewjs
+const hasText = value => String(value ?? "").trim().length > 0;
+
+const active = dv.pages('"Mondi/Sessioni"')
+  .where(p => p.attiva === true && p.stato !== "archiviata")
+  .sort(p => p.data ?? "", "desc")
+  .limit(1)
+  .array();
+
+if (!active.length) {
+  dv.paragraph("Nessuna sessione attiva. Apri una sessione e imposta `attiva: true` per usarla come riferimento.");
+} else {
+  const s = active[0];
+  dv.table(
+    ["Sessione", "Data del mondo", "Stato", "Campagna"],
+    [[
+      s.file.link,
+      hasText(s.data_mondo) ? s.data_mondo : "Da decidere",
+      s.stato ?? "",
+      (s.campagne ?? []).join(", ")
+    ]]
+  );
+}
+```
 
 ## Prossime Sessioni
 
@@ -39,44 +51,32 @@ SORT data ASC
 LIMIT 10
 ```
 
-## Timeline Sessioni
-
-```dataview
-TABLE data, data_mondo, stato, campagne
-FROM "Mondi/Sessioni"
-WHERE file.name != "Sessioni" AND stato != "archiviata" AND !startswith(file.name, "Prova -")
-SORT data DESC
-LIMIT 20
-```
-
 ## Missioni Con Pressione
 
 ```dataview
-TABLE stato, scadenza_mondo, committente, luoghi, personaggi
+TABLE stato, pressione, scadenza_mondo, prossima_mossa, luoghi
 FROM "Mondi/Missioni"
 WHERE (stato = "proposta" OR stato = "accettata" OR stato = "in corso") AND !startswith(file.name, "Prova -")
-SORT scadenza_mondo ASC, stato ASC, nome ASC
+SORT pressione DESC, scadenza_mondo ASC, stato ASC, nome ASC
 ```
 
-## Scadenze Narrative
+## Calendario Narrativo
 
 ```dataviewjs
 const hasText = value => String(value ?? "").trim().length > 0;
 
-const pages = dv.pages('"Mondi/Missioni" OR "Mondi/Sessioni"')
+const pages = dv.pages('"Mondi/Missioni" OR "Mondi/Sessioni" OR "Mondi/Timeline"')
   .where(p => !String(p.file.name).startsWith("Prova -") && hasText(p["fc-date"]) && p.stato !== "archiviata")
   .sort(p => `${p["fc-calendar"] ?? ""} ${p["fc-date"] ?? ""}`, "asc");
 
 if (!pages.length) {
-  dv.paragraph("Nessun evento calendarizzato.");
+  dv.paragraph("Nessun evento pronto per la vista calendario.");
 } else {
   dv.table(
-    ["Nota", "Calendario", "Data", "Fine", "Categoria", "Nel mondo", "Stato"],
+    ["Evento", "Quando", "Tipo", "Nel mondo", "Stato"],
     pages.map(p => [
       p.file.link,
-      p["fc-calendar"] ?? "predefinito",
-      p["fc-date"],
-      p["fc-end"] ?? "",
+      p["fc-display-name"] ?? p["fc-date"],
       p["fc-category"] ?? "evento",
       p.scadenza_mondo ?? p.data_mondo ?? "",
       p.stato ?? ""
@@ -85,7 +85,7 @@ if (!pages.length) {
 }
 ```
 
-## Da Calendarizzare
+## Da Sistemare
 
 ```dataviewjs
 const hasText = value => String(value ?? "").trim().length > 0;
@@ -100,10 +100,20 @@ const pages = [
 ];
 
 if (!pages.length) {
-  dv.paragraph("Nessuna data leggibile senza data Calendarium.");
+  dv.paragraph("Tutte le date leggibili sono gia pronte per il calendario.");
 } else {
-  dv.table(["Nota", "Categoria", "Nel mondo", "Stato"], pages);
+  dv.table(["Nota", "Tipo", "Data scritta", "Stato"], pages);
 }
+```
+
+## Timeline Sessioni
+
+```dataview
+TABLE data, data_mondo, stato, campagne
+FROM "Mondi/Sessioni"
+WHERE file.name != "Sessioni" AND stato != "archiviata" AND !startswith(file.name, "Prova -")
+SORT data DESC
+LIMIT 20
 ```
 
 ## Eventi Del Mondo
@@ -120,3 +130,17 @@ if (!pages.length) {
 
 > [!indizio] Eventi confermati
 > - 
+
+## Per Chi Cura Il Calendario
+
+Questa sezione serve solo a chi prepara il vault. Il DM puo ignorarla.
+
+| Campo | A cosa serve |
+| --- | --- |
+| `data_mondo` | Data leggibile al tavolo per sessioni, eventi e timeline. |
+| `scadenza_mondo` | Scadenza leggibile per missioni, pericoli e conseguenze. |
+| `fc-calendar` | Nome del calendario interno. |
+| `fc-date` | Data tecnica per la vista calendario. |
+| `fc-category` | Tipo di evento: `sessione`, `scadenza`, `festa`, `pericolo`, `conseguenza`. |
+| `fc-display-name` | Nome breve da mostrare nella vista calendario. |
+| `fc-end` | Fine evento, solo se dura piu giorni. |

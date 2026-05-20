@@ -15,6 +15,7 @@ Questa pagina raccoglie guide e materiali riutilizzabili. Se vuoi preparare o gi
 | Pagina | Quando aprirla |
 | --- | --- |
 | [[Inizia Qui]] | Quando non sai da dove partire. |
+| [[Risorse/Setup Guidato]] | Quando vuoi sapere se il vault e pronto. |
 | [[Risorse/Guida DM]] | Quando vuoi il flusso DM senza dettagli tecnici. |
 | [[Risorse/Preparazione Sessione]] | Prima di una sessione. |
 | [[Durante il Gioco]] | Durante la partita. |
@@ -48,7 +49,9 @@ Questa pagina raccoglie guide e materiali riutilizzabili. Se vuoi preparare o gi
 | Pagina | Uso |
 | --- | --- |
 | [[Risorse/Controllo Vault]] | Controlli pratici su note incomplete, sessioni attive e materiale pronto. |
+| [[Mondi/Calendario]] | Date del mondo, sessioni, scadenze e cose da calendarizzare. |
 | [[Risorse/Prove Entità]] | Esempi per capire come dovrebbero apparire le note. |
+| [[Risorse/Roadmap 0.4.0]] | Prossime integrazioni orientate a DM non tecnici. |
 | [[VERSION]] | Versione corrente del vault. |
 | [[CHANGELOG]] | Cronologia modifiche. |
 

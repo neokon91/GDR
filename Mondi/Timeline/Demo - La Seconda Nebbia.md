@@ -8,10 +8,10 @@ stato_canonico: canonico
 canonico: true
 mondo: [[Demo - Terre della Soglia]]
 data_mondo: "Seconda notte di nebbia"
-fc-calendar:
-fc-date:
+fc-calendar: "Brumafonda"
+fc-date: "1-1-2"
 fc-category: conseguenza
-fc-display-name: "Demo - La Seconda Nebbia"
+fc-display-name: "La Seconda Nebbia"
 luoghi:
   - [[Demo - Ponte delle Campane]]
   - [[Demo - Santuario della Prima Pietra]]

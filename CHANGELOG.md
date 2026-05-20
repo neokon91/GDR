@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.4.0 - in sviluppo
+
+### Aggiunto
+
+- [[Risorse/Setup Guidato]] per verificare lo stato del vault senza leggere impostazioni interne.
+- [[Risorse/Roadmap 0.4.0]] con le prossime integrazioni orientate a DM non tecnici.
+
+### Migliorato
+
+- [[Mondi/Calendario]] ora parte da oggi nel mondo, prossime sessioni, missioni con pressione e date da sistemare.
+- Demo aggiornata con date narrative gia pronte per calendario, sessioni, scadenze e timeline.
+
 ## 0.3.0 - 2026-05-20
 
 ### Aggiunto

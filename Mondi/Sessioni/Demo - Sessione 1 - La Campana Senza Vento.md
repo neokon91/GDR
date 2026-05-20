@@ -7,10 +7,10 @@ categoria: sessione
 tipo: sessione di campagna
 data: 2026-05-19
 data_mondo: "Prima notte di nebbia"
-fc-calendar:
-fc-date:
+fc-calendar: "Brumafonda"
+fc-date: "1-1-1"
 fc-category: sessione
-fc-display-name: "Demo - Sessione 1"
+fc-display-name: "Sessione 1"
 fc-end:
 stato: pronto
 attiva: false

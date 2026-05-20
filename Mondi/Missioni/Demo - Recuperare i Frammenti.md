@@ -34,10 +34,10 @@ conseguenze:
 segreti:
   - la reliquia e una serratura
 scadenza_mondo: "Terza notte di nebbia"
-fc-calendar:
-fc-date:
+fc-calendar: "Brumafonda"
+fc-date: "1-1-3"
 fc-category: scadenza
-fc-display-name: "Demo - Recuperare i Frammenti"
+fc-display-name: "Scadenza: Frammenti"
 fc-end:
 ---
 

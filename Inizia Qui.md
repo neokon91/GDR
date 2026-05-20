@@ -53,22 +53,31 @@ actions:
 ```
 
 ```meta-bind-button
+label: Setup Guidato
+style: default
+actions:
+  - type: open
+    link: "[[Risorse/Setup Guidato]]"
+```
+
+```meta-bind-button
 label: Roadmap
 style: default
 actions:
   - type: open
-    link: "[[Risorse/Roadmap 0.2.0]]"
+    link: "[[Risorse/Roadmap 0.4.0]]"
 ```
 
 ## Primo Avvio
 
 1. Se Obsidian chiede se fidarsi degli strumenti inclusi nel vault, conferma solo se hai scaricato il vault da una fonte affidabile.
-2. Apri [[Risorse/Primo Avvio Strumenti]] se pulsanti, tabelle o dashboard non funzionano.
-3. Apri [[1. DM Dashboard]] per creare campagne, sessioni, missioni e incontri.
-4. Apri una sessione e usa il toggle `attiva` per indicare quale e al tavolo.
-5. Apri [[Durante il Gioco]] quando sei al tavolo.
-6. Apri [[Worldbuilder Dashboard]] quando vuoi creare mondi, luoghi, PNG, fazioni, creature e oggetti.
-7. Apri [[Risorse/Risorse]] quando cerchi guide, mappe, immagini, audio, video, tabelle o aiuto.
+2. Apri [[Risorse/Setup Guidato]] per vedere se pulsanti, tabelle, creature, tiri e calendario sono pronti.
+3. Apri [[Risorse/Primo Avvio Strumenti]] solo se qualcosa non funziona.
+4. Apri [[1. DM Dashboard]] per creare campagne, sessioni, missioni e incontri.
+5. Apri una sessione e usa il toggle `attiva` per indicare quale e al tavolo.
+6. Apri [[Durante il Gioco]] quando sei al tavolo.
+7. Apri [[Worldbuilder Dashboard]] quando vuoi creare mondi, luoghi, PNG, fazioni, creature e oggetti.
+8. Apri [[Risorse/Risorse]] quando cerchi guide, mappe, immagini, audio, video, tabelle o aiuto.
 
 ## Se Vedi Questo, Sei Pronto
 
@@ -87,6 +96,7 @@ actions:
 - Mondo, luoghi, PNG e fazioni: [[Worldbuilder Dashboard]].
 - Stato dinamico del mondo: [[Mondi/Stato del Mondo]].
 - Guide, mappe, media, tabelle e aiuto: [[Risorse/Risorse]].
+- Controllo iniziale del vault: [[Risorse/Setup Guidato]].
 - Regole e riferimento D&D: [[SRD/SRD]].
 - Domande frequenti: [[Risorse/FAQ]].
 
