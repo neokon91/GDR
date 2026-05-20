@@ -116,6 +116,8 @@ const REQUIRED_META_BIND_BUTTONS = [
     "marca-canonico",
     "marca-rumor",
     "archivia-nota",
+    "smista-bozza-generata",
+    "canonizza-bozza-generata",
     "applica-conseguenza",
     "avanza-clock",
     "collega-sessione-attiva",
@@ -1210,7 +1212,10 @@ for (const [fileRel, fm] of realEntries) {
 
     if (isGeneratedFantasyDraft(fileRel, fm)) {
         if (fm.canonico === true) {
-            warnings.push(`${fileRel}: bozza generata marcata canonica prima dello smistamento`);
+            errors.push(`${fileRel}: bozza generata marcata canonica prima dello smistamento`);
+        }
+        if (fm.stato !== "bozza" && fm.stato !== "archiviata") {
+            warnings.push(`${fileRel}: bozza generata non spostata dopo lo smistamento (${fm.stato})`);
         }
         if (!hasAny(fm, ["mondo", "luogo", "campagne", "sessioni"])) {
             warnings.push(`${fileRel}: bozza generata senza aggancio a mondo, luogo, campagna o sessione`);
@@ -1219,6 +1224,15 @@ for (const [fileRel, fm] of realEntries) {
         const age = daysSince(fm.creato);
         if (fm.stato === "bozza" && age !== null && age >= 14) {
             warnings.push(`${fileRel}: bozza generata ferma da ${age} giorni`);
+        }
+    }
+
+    if (fm.plugin === "fantasy-content-generator" && !fileRel.startsWith("Inbox/Generati/")) {
+        if (!hasAny(fm, ["smistato_il", "canonizzato_il"])) {
+            warnings.push(`${fileRel}: contenuto generato fuori coda senza data di smistamento`);
+        }
+        if (fm.canonico === true && fm.stato_canonico !== "canonico") {
+            warnings.push(`${fileRel}: contenuto generato canonico senza stato_canonico: canonico`);
         }
     }
 

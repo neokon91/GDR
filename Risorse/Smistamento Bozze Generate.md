@@ -16,10 +16,14 @@ Questa pagina trasforma gli output del Generatore di Contenuti Fantasy in decisi
 
 `BUTTON[inbox-inbox-inbox-2]`
 
+`BUTTON[smista-bozza-generata]`
+
+`BUTTON[canonizza-bozza-generata]`
+
 ## Coda Di Lavoro
 
 ```dataview
-TABLE categoria, tipo, generatore, mondo, luogo, stato, creato
+TABLE categoria, tipo, generatore, mondo, luogo, campagne, sessioni, stato, creato
 FROM "Inbox/Generati"
 WHERE plugin = "fantasy-content-generator" AND stato = "bozza"
 SORT creato ASC, file.ctime ASC
@@ -47,11 +51,13 @@ SORT creato ASC, file.ctime ASC
 
 | Se la bozza e... | Azione |
 | --- | --- |
-| utile subito | collega `mondo`, `luogo` o `sessioni`, poi porta `stato` a `pronto` |
+| utile subito | collega `mondo`, `luogo`, `campagne` o `sessioni`, poi usa `Smista Bozza` |
 | interessante ma non canonica | lascia `canonico: false`, collega a mondo o campagna e tienila come spunto |
-| diventata vera al tavolo | spostala o ricreala nella cartella canonica corretta e imposta `canonico: true` |
+| diventata vera al tavolo | collega un aggancio e usa `Canonizza Bozza` |
 | solo rumore | imposta `stato: archiviata` |
 | doppione | collega la nota migliore e archivia questa |
+
+Le azioni automatiche rifiutano una bozza senza aggancio. Il flusso corretto e: generatore -> `Inbox/Generati` -> aggancio -> smistamento -> eventuale canonizzazione.
 
 ## Destinazione Consigliata
 
@@ -86,3 +92,13 @@ if (!rows.length) {
 - aggiorna [[Risorse/Controllo Vault]] per verificare che non resti tra le bozze generate;
 - se nasce una scena giocabile, collega anche mappa, incontro, dispensa o tabella;
 - se produce conseguenze, aggiorna tracciati, missioni o [[Cosa Succede Fuori Scena]].
+
+## Smistate Dal Generatore
+
+```dataview
+TABLE categoria, tipo, stato, canonico, stato_canonico, smistato_il, canonizzato_il, origine_bozza
+FROM "Mondi" OR "Inbox"
+WHERE plugin = "fantasy-content-generator" AND file.folder != "Inbox/Generati"
+SORT smistato_il DESC, file.mtime DESC
+LIMIT 20
+```

@@ -279,7 +279,7 @@ Fatto bene quando: il DM apre Durante il Gioco e trova subito atmosfera, immagin
 
 ### 7. Generatore di Contenuti Fantasy
 
-Stato: integrazione base completata.
+Stato: flusso bozze -> smistamento -> canonizzazione completato.
 
 Obiettivo: generare spunti rapidi in italiano e salvarli come bozze Markdown senza interrompere la preparazione.
 
@@ -295,6 +295,10 @@ Fatto:
 - nomi fantasy producono bozze `categoria: personaggio` e `tipo: png`;
 - religioni producono bozze `categoria: religione`;
 - ogni nota conserva il testo generato in `contenuto_generato`, oltre a `plugin`, `generatore`, `stato`, `canonico` e `creato`;
+- ogni nota generata mostra i pulsanti `Smista Bozza`, `Canonizza Bozza` e `Archivia`;
+- `Smista Bozza` sposta la nota nella cartella canonica suggerita e la lascia non canonica;
+- `Canonizza Bozza` sposta la nota nella cartella canonica suggerita, imposta `canonico: true`, `stato_canonico: canonico` e registra `canonizzato_il`;
+- le azioni rifiutano bozze senza aggancio a `mondo`, `luogo`, `campagne` o `sessioni`;
 - il comando continua a offrire anche `Copia`, utile quando il risultato deve essere incollato in una nota gia aperta.
 
 Regola: il plugin non esegue Templater e non sposta note nelle cartelle canoniche. Produce bozze compatibili con i template esistenti; tutto resta `stato: bozza` e `canonico: false` finche il DM non lo rivede e lo collega a campagna, mondo, luogo o sessione.
@@ -303,7 +307,6 @@ Prossimi potenziamenti:
 
 - aggiungere preset di tono: classico, oscuro, fiabesco, urbano, marittimo;
 - rifinire gli adapter dei singoli generatori quando cambiano i template ufficiali del vault;
-- collegare i risultati a `Campagne`, `Mondi` e `SRD/Mostri` quando una bozza diventa canonica;
 - spostare il plugin da bundle patchato a sorgenti TypeScript mantenibili.
 
 Fatto bene quando: durante preparazione o gioco il DM puo generare una bozza, salvarla nel vault e ritrovarla senza dover copiare contenuti a mano.

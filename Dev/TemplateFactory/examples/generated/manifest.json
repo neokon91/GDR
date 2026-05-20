@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-20T22:01:08.329443+00:00",
+  "generated_at": "2026-05-20T22:12:40.487649+00:00",
   "source": "Dev/TemplateFactory",
   "mode": "preview",
   "files": [
@@ -22,6 +22,11 @@
       "blueprint": "azione_avanza_clock",
       "path": "Dev/TemplateFactory/examples/generated/azione_avanza_clock.preview.md",
       "bytes": 162
+    },
+    {
+      "blueprint": "azione_canonizza_bozza_generata",
+      "path": "Dev/TemplateFactory/examples/generated/azione_canonizza_bozza_generata.preview.md",
+      "bytes": 174
     },
     {
       "blueprint": "azione_collega_sessione_attiva",
@@ -47,6 +52,11 @@
       "blueprint": "azione_propaga_entita",
       "path": "Dev/TemplateFactory/examples/generated/azione_propaga_entita.preview.md",
       "bytes": 164
+    },
+    {
+      "blueprint": "azione_smista_bozza_generata",
+      "path": "Dev/TemplateFactory/examples/generated/azione_smista_bozza_generata.preview.md",
+      "bytes": 171
     },
     {
       "blueprint": "campagna",

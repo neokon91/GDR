@@ -44,6 +44,18 @@ buttons:
     action: runTemplaterFile
     template: z.modelli/azioni/Archivia.md
     fallback: 'Azione manuale: impostare stato: archiviata'
+  smista_bozza_generata:
+    id: smista-bozza-generata
+    label: Smista Bozza
+    action: runTemplaterFile
+    template: z.modelli/azioni/Smista Bozza Generata.md
+    fallback: 'Azione manuale: spostare la bozza generata nella cartella canonica e impostare stato: pronto'
+  canonizza_bozza_generata:
+    id: canonizza-bozza-generata
+    label: Canonizza Bozza
+    action: runTemplaterFile
+    template: z.modelli/azioni/Canonizza Bozza Generata.md
+    fallback: 'Azione manuale: spostare la bozza generata nella cartella canonica e impostare canonico: true'
   avanza_clock:
     id: avanza-clock
     label: Avanza Clock

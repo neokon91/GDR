@@ -2442,6 +2442,74 @@ blueprints:
       fallback: markdown_sections
     comparison_targets:
     - z.modelli/azioni/Avanza Clock.md
+  azione_smista_bozza_generata:
+    target_family:
+    - azione
+    jinja_template: ../jinja/action_template.md.j2
+    templater_entry: <% await tp.user.meta_actions(tp, "smista_bozza_generata") %>
+    required_modules:
+    - fields_core
+    - plugin_bindings
+    - sections
+    - callouts
+    - tabs
+    - dataview_blocks
+    - metabind_inputs
+    - metabind_buttons
+    sections:
+    - identita
+    - uso_al_tavolo
+    - connessioni
+    - propagazione
+    - player_safe
+    - controllo
+    plugin_features:
+    - templater
+    - meta_bind
+    - dataview
+    template_title: Smista Bozza Generata
+    world_impact: false
+    output:
+      folder: z.modelli/azioni
+      files:
+      - Smista Bozza Generata.md
+      fallback: markdown_sections
+    comparison_targets:
+    - z.modelli/azioni/Smista Bozza Generata.md
+  azione_canonizza_bozza_generata:
+    target_family:
+    - azione
+    jinja_template: ../jinja/action_template.md.j2
+    templater_entry: <% await tp.user.meta_actions(tp, "canonizza_bozza_generata") %>
+    required_modules:
+    - fields_core
+    - plugin_bindings
+    - sections
+    - callouts
+    - tabs
+    - dataview_blocks
+    - metabind_inputs
+    - metabind_buttons
+    sections:
+    - identita
+    - uso_al_tavolo
+    - connessioni
+    - propagazione
+    - player_safe
+    - controllo
+    plugin_features:
+    - templater
+    - meta_bind
+    - dataview
+    template_title: Canonizza Bozza Generata
+    world_impact: false
+    output:
+      folder: z.modelli/azioni
+      files:
+      - Canonizza Bozza Generata.md
+      fallback: markdown_sections
+    comparison_targets:
+    - z.modelli/azioni/Canonizza Bozza Generata.md
   azione_collega_sessione_attiva:
     target_family:
     - azione

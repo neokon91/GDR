@@ -42,6 +42,13 @@ Ogni voce va verificata in Obsidian, non solo con `npm run check`. L'obiettivo e
 - [ ] Le mappe Excalidraw rimandano a note canoniche.
 - [ ] Le mappe zoomabili o esagonali hanno fallback Markdown leggibile.
 
+## Plugin Guidati
+
+- [ ] [[Risorse/Smistamento Bozze Generate]] mostra bozze Fantasy Content Generator, pronte da collegare e senza aggancio.
+- [ ] Una bozza generata non puo diventare canonica mentre resta in `Inbox/Generati`.
+- [ ] `Smista Bozza` sposta una bozza agganciata nella cartella canonica e registra `smistato_il`.
+- [ ] `Canonizza Bozza` sposta una bozza agganciata, imposta `canonico: true` e registra `canonizzato_il`.
+
 ## Prepara Sessione
 
 - [ ] [[Risorse/Preparazione Sessione]] richiede mondo e almeno tre ancore.

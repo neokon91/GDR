@@ -9,6 +9,10 @@ Usa questa cartella per idee grezze, appunti presi al volo e materiale non ancor
 
 `BUTTON[smistamento-bozze-generate-risorse-smistamento-bozze-generate-2]`
 
+`BUTTON[smista-bozza-generata]`
+
+`BUTTON[canonizza-bozza-generata]`
+
 `BUTTON[nuova-nota-rapida-z-modelli-nota-rapida-md]`
 
 `BUTTON[nuovo-evento-lore-z-modelli-lore-capture-md]`
@@ -37,7 +41,7 @@ SORT file.ctime DESC
 ## Bozze Generate
 
 ```dataview
-TABLE categoria, tipo, generatore, mondo, luogo, creato
+TABLE categoria, tipo, generatore, mondo, luogo, campagne, sessioni, creato
 FROM "Inbox/Generati"
 WHERE plugin = "fantasy-content-generator" AND stato = "bozza"
 SORT creato ASC, file.ctime ASC

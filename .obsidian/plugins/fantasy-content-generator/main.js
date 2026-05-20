@@ -18467,6 +18467,16 @@ var GeneratorModal = class extends import_obsidian.Modal {
   getTimestampForFile() {
     return new Date().toISOString().replace(/[:]/g, "").replace("T", " ").slice(0, 18);
   }
+  generatedWorkflowBlock() {
+    return `## Smistamento
+
+\`BUTTON[smista-bozza-generata]\`
+
+\`BUTTON[canonizza-bozza-generata]\`
+
+\`BUTTON[archivia-nota]\`
+`;
+  }
   async ensureFolderExists(folderPath) {
     const parts = folderPath.split("/").filter(Boolean);
     let currentPath = "";
@@ -18513,6 +18523,8 @@ contenuto_generato: |-
 ${sourceBlock}
 ---
 # \`=this.nome\`
+
+${this.generatedWorkflowBlock()}
 
 >[!infobox|wiki]- Sala di Controllo
 > Regione:
@@ -18592,6 +18604,8 @@ ${sourceBlock}
 ---
 # \`=this.nome\`
 
+${this.generatedWorkflowBlock()}
+
 >[!infobox|wiki]- Sala di Controllo
 > Governante:
 > \`INPUT[suggester(optionQuery("Mondi/Personaggi"), useLinks(partial), allowOther):governante]\`
@@ -18652,6 +18666,8 @@ contenuto_generato: |-
 ${sourceBlock}
 ---
 # \`=this.nome\`
+
+${this.generatedWorkflowBlock()}
 
 >[!infobox|wiki]- Fazione
 > Tipo:
@@ -18718,6 +18734,8 @@ ${sourceBlock}
 ---
 # \`=this.nome\`
 
+${this.generatedWorkflowBlock()}
+
 >[!infobox|wiki]- Oggetto
 > Tipo:
 > \`INPUT[text:tipo]\`
@@ -18781,6 +18799,8 @@ ${sourceBlock}
 ---
 # \`=this.nome\`
 
+${this.generatedWorkflowBlock()}
+
 >[!infobox|wiki right]
 >**Ruolo**: \`=this.ruolo\`
 >**Stato**: \`=this.stato\`
@@ -18840,6 +18860,8 @@ ${sourceBlock}
 ---
 # \`=this.nome\`
 
+${this.generatedWorkflowBlock()}
+
 > [!fede] Descrizione
 > ${raw.replace(/\n/g, "\n> ")}
 
@@ -18874,6 +18896,8 @@ ${sourceBlock}
 ---
 
 # ${noteTitle}
+
+${this.generatedWorkflowBlock()}
 
 ${raw}
 `;

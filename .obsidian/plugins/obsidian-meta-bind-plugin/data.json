@@ -1700,6 +1700,28 @@
       "id": "smistamento-bozze-generate-risorse-smistamento-bozze-generate-2"
     },
     {
+      "label": "Smista Bozza",
+      "style": "primary",
+      "actions": [
+        {
+          "type": "runTemplaterFile",
+          "templateFile": "z.modelli/azioni/Smista Bozza Generata.md"
+        }
+      ],
+      "id": "smista-bozza-generata"
+    },
+    {
+      "label": "Canonizza Bozza",
+      "style": "primary",
+      "actions": [
+        {
+          "type": "runTemplaterFile",
+          "templateFile": "z.modelli/azioni/Canonizza Bozza Generata.md"
+        }
+      ],
+      "id": "canonizza-bozza-generata"
+    },
+    {
       "label": "Stato Campagna",
       "style": "primary",
       "actions": [
