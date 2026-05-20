@@ -32,7 +32,6 @@ Questi tre workspace sono gia salvati in `.obsidian/workspaces.json`:
 I segnalibri sono divisi in:
 
 - **Al Tavolo**: [[Durante il Gioco]], [[Risorse/Preparazione Sessione]], [[Risorse/Task DM]], [[Risorse/Iniziativa e Combattimenti]].
-- **Worldbuilding**: [[Worldbuilder Dashboard]], [[Risorse/Mappe/Mappe]], [[Demo - Canvas Fronti.canvas]], [[z.bases/Atlante Mappe.base]].
 - **Manutenzione**: [[Risorse/Controllo Vault]], [[Risorse/Linter e Sviluppo]], [[Risorse/Recap Plugin Installati]].
 
 ## Regola Operativa

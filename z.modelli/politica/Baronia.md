@@ -1,7 +1,7 @@
 <% await tp.user.luogo(tp) %>
 # `=this.nome`
 
->[!infobox|wiki]- Baronia
+>[!infoboxwiki]- Baronia
 > Mondo:
 > `INPUT[mondo][:mondo]`
 >

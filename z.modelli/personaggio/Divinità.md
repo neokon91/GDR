@@ -1,7 +1,7 @@
 <% await tp.user.culto(tp) %>
 # `=this.nome`
 
->[!infobox|wiki]- Divinità
+>[!infoboxwiki]- Divinità
 > Dominio o tipo:
 > `INPUT[text:tipo]`
 >

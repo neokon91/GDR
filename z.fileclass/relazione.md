@@ -16,6 +16,14 @@ fieldsOrder:
   - conseguenze
   - entita_impattate
   - propaga_a
+  - canonico
+  - sessioni
+  - connessioni
+  - player_safe
+  - luoghi
+  - fazioni
+  - missioni
+  - tracciati
 fields:
   - name: nome
     id: nome
@@ -94,6 +102,38 @@ fields:
     options: {}
   - name: propaga_a
     id: propaga_a
+    type: MultiFile
+    options: {}
+  - name: canonico
+    id: canonico
+    type: Boolean
+    options: {}
+  - name: sessioni
+    id: sessioni
+    type: MultiFile
+    options: {}
+  - name: connessioni
+    id: connessioni
+    type: MultiFile
+    options: {}
+  - name: player_safe
+    id: player_safe
+    type: Input
+    options: {}
+  - name: luoghi
+    id: luoghi
+    type: MultiFile
+    options: {}
+  - name: fazioni
+    id: fazioni
+    type: MultiFile
+    options: {}
+  - name: missioni
+    id: missioni
+    type: MultiFile
+    options: {}
+  - name: tracciati
+    id: tracciati
     type: MultiFile
     options: {}
 ---

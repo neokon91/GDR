@@ -9,9 +9,11 @@ stato: pronto
 
 # Preparazione Sessione
 
-Questa pagina serve solo a trovare o creare la sessione da compilare. La preparazione vera sta nella nota sessione, in alto, nei cinque campi operativi.
+Questa pagina serve a trasformare un mondo gia costruito in una sessione live. Se non hai almeno un mondo, un luogo e una pressione/fazione/missione, torna prima al [[Worldbuilder Dashboard]]: una sessione non deve nascere nel vuoto.
 
 `BUTTON[nuova-sessione-z-modelli-dm-sessione-md]`
+
+`BUTTON[worldbuilder-worldbuilder-dashboard-2]`
 
 `BUTTON[durante-il-gioco-durante-il-gioco]`
 
@@ -29,9 +31,18 @@ const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_conte
 gdr.renderPreparationFocus(dv);
 ```
 
-## I Cinque Blocchi
+## Ancore Mondo Prima Dei Cinque Blocchi
 
-Apri la sessione indicata sopra e compila i cinque campi in cima alla nota. Quando sono tutti pieni, imposta `stato: pronto` e lascia `attiva: true` solo su quella sessione.
+Apri la sessione indicata sopra e collega almeno tre ancore:
+
+- mondo;
+- luogo;
+- fazione, religione, PNG o altro potere;
+- missione o avventura;
+- clock, minaccia, fronte o relazione in pressione;
+- mappa, scena, incontro o materiale pronto.
+
+Solo dopo compila i cinque campi di gioco.
 
 > [!scena] 1. Obiettivo
 > Scrivi una frase: cosa devono ottenere, scoprire o decidere i personaggi entro fine sessione.
@@ -56,7 +67,7 @@ tab: Missioni
 ```dataview
 TABLE stato, pressione, prossima_mossa, committente, luoghi, personaggi
 FROM "Mondi/Missioni"
-WHERE (stato = "proposta" OR stato = "accettata" OR stato = "in corso") AND !startswith(file.name, "Prova -")
+WHERE (stato = "proposta" OR stato = "accettata" OR stato = "in corso")
 SORT pressione DESC, stato ASC, nome ASC
 LIMIT 6
 ```
@@ -66,7 +77,7 @@ tab: Pressioni
 ```dataview
 TABLE categoria, tipo, pressione, progress_value, progress_max, prossima_mossa
 FROM "Mondi/Relazioni" OR "Mondi/Luoghi" OR "Mondi/Fazioni" OR "Mondi/Tracciati"
-WHERE stato != "archiviata" AND !startswith(file.name, "Prova -") AND (pressione >= 6 OR progress_value >= progress_max - 1)
+WHERE stato != "archiviata" AND (pressione >= 6 OR progress_value >= progress_max - 1)
 SORT pressione DESC, progress_value DESC
 LIMIT 8
 ```
@@ -76,7 +87,7 @@ tab: PNG
 ```dataview
 TABLE ruolo, stato, luogo, atteggiamento
 FROM "Mondi/Personaggi"
-WHERE tipo = "png" AND stato != "archiviata" AND !startswith(file.name, "Prova -")
+WHERE tipo = "png" AND stato != "archiviata"
 SORT stato ASC, nome ASC
 LIMIT 8
 ```
@@ -86,7 +97,7 @@ tab: Scene
 ```dataview
 TABLE luogo, pericolo, creature
 FROM "Mondi/Incontri"
-WHERE stato = "pronto" AND !startswith(file.name, "Prova -")
+WHERE stato = "pronto"
 SORT pericolo DESC
 LIMIT 8
 ```
@@ -96,7 +107,7 @@ tab: Handout
 ```dataview
 TABLE tipo, luogo, personaggi, pubblico
 FROM "Mondi/Dispense"
-WHERE stato = "pronto" AND !startswith(file.name, "Prova -")
+WHERE stato = "pronto"
 SORT pubblico DESC, nome ASC
 LIMIT 8
 ```
@@ -104,7 +115,7 @@ LIMIT 8
 
 ## Fatto
 
-Quando i cinque blocchi sono completi:
+Quando le ancore mondo e i cinque blocchi sono completi:
 
 1. apri la nota sessione;
 2. imposta `stato: pronto`;

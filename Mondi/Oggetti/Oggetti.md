@@ -14,7 +14,7 @@ cssclasses:
 ```dataview
 TABLE tipo, rarita, stato, luogo
 FROM "Mondi/Oggetti"
-WHERE !proprietario AND stato != "archiviata" AND !startswith(file.name, "Prova -")
+WHERE !proprietario AND stato != "archiviata"
 SORT rarita ASC, nome ASC
 ```
 
@@ -23,7 +23,7 @@ SORT rarita ASC, nome ASC
 ```dataview
 TABLE tipo, rarita, proprietario, luogo
 FROM "Mondi/Oggetti"
-WHERE proprietario AND stato != "archiviata" AND !startswith(file.name, "Prova -")
+WHERE proprietario AND stato != "archiviata"
 SORT proprietario ASC, nome ASC
 ```
 
@@ -32,6 +32,6 @@ SORT proprietario ASC, nome ASC
 ```dataview
 TABLE tipo, rarita, stato, proprietario, luogo
 FROM "Mondi/Oggetti"
-WHERE file.name != "Oggetti" AND stato != "archiviata" AND !startswith(file.name, "Prova -")
+WHERE file.name != "Oggetti" AND stato != "archiviata"
 SORT nome ASC
 ```

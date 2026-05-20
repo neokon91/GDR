@@ -1,7 +1,7 @@
 <% await tp.user.live_conseguenza(tp) %>
 # `=this.nome`
 
->[!infobox|wiki]- Conseguenza
+>[!infoboxwiki]- Conseguenza
 > Stato:
 > `INPUT[inlineSelect(option(da smistare, Da smistare), option(collegata, Collegata), option(canonica, Canonica), option(archiviata, Archiviata), option(ignorata, Ignorata)):stato]`
 >
@@ -16,6 +16,12 @@
 >
 > Collegamenti:
 > `INPUT[inlineListSuggester(optionQuery("Mondi"), useLinks(partial), allowOther):collegamenti]`
+>
+> Entità impattate:
+> `INPUT[inlineListSuggester(optionQuery("Mondi"), useLinks(partial), allowOther):entita_impattate]`
+>
+> Propaga a:
+> `INPUT[inlineListSuggester(optionQuery("Mondi"), useLinks(partial), allowOther):propaga_a]`
 >
 > Data mondo:
 > `INPUT[text:data_mondo]`
@@ -35,6 +41,13 @@
 > - [ ] Luogo
 > - [ ] Fazione
 > - [ ] Clock o tracciato
+
+> [!missione] Propagazione
+> Entità impattate:
+> `INPUT[inlineListSuggester(optionQuery("Mondi"), useLinks(partial), allowOther):entita_impattate]`
+>
+> Propaga a:
+> `INPUT[inlineListSuggester(optionQuery("Mondi"), useLinks(partial), allowOther):propaga_a]`
 
 ## Gestione
 

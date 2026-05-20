@@ -1,7 +1,7 @@
 <% await tp.user.luogo(tp) %>
 # `=this.nome`
 
->[!infobox|wiki]- Sala di Controllo
+>[!infoboxwiki]- Sala di Controllo
 > Bioma:
 > `VIEW[{bioma}]`
 >

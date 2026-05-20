@@ -52,11 +52,12 @@ async function luogo(tp, routeOptions = {}){
     const funzioneNarrativa = creazioneCompleta ? await helpers.promptOptional(tp, "Funzione narrativa del luogo") : "";
     const veritaNascosta = creazioneCompleta ? await helpers.promptOptional(tp, "Verità nascosta o segreto") : "";
     const domandaAperta = creazioneCompleta ? await helpers.promptOptional(tp, "Domanda aperta da esplorare al tavolo") : "";
-    const connessioni = creazioneCompleta ? await helpers.chooseConnections(tp, "Connessioni vive del luogo", context) : [];
+    const connessioni = await helpers.chooseConnections(tp, "Connessioni vive del luogo", context);
     const sessioni = activeContext.link ? [activeContext.link] : [];
     const created = await helpers.moveNote(tp, helpers.path("luoghi"), name);
     // Un luogo creato al volo viene collegato alla sessione per ritrovarlo nel cockpit.
     await helpers.linkCreatedNoteToActiveSession(created, { sessionField: "luoghi" });
+    await helpers.linkCreatedNoteToConnections(created, connessioni);
 
     return `---
 id: ${id}

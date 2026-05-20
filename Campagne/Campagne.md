@@ -14,7 +14,7 @@ cssclasses:
 ```dataview
 TABLE stato, tono, livello_attuale, personaggi, luoghi
 FROM "Campagne"
-WHERE file.name != "Campagne" AND stato != "archiviata" AND stato != "conclusa" AND !startswith(file.name, "Prova -")
+WHERE file.name != "Campagne" AND stato != "archiviata" AND stato != "conclusa"
 SORT stato ASC, nome ASC
 ```
 
@@ -23,7 +23,7 @@ SORT stato ASC, nome ASC
 ```dataview
 TABLE data, data_mondo, stato, campagne, luoghi
 FROM "Mondi/Sessioni"
-WHERE (stato = "preparazione" OR stato = "pronto") AND !startswith(file.name, "Prova -")
+WHERE (stato = "preparazione" OR stato = "pronto")
 SORT data ASC
 LIMIT 8
 ```
@@ -33,7 +33,7 @@ LIMIT 8
 ```dataview
 TABLE data, data_mondo, campagne
 FROM "Mondi/Sessioni"
-WHERE stato = "giocata" AND !startswith(file.name, "Prova -")
+WHERE stato = "giocata"
 SORT data DESC
 LIMIT 10
 ```
@@ -43,6 +43,6 @@ LIMIT 10
 ```dataview
 TABLE stato, tono, livello_attuale
 FROM "Campagne"
-WHERE file.name != "Campagne" AND stato != "archiviata" AND !startswith(file.name, "Prova -")
+WHERE file.name != "Campagne" AND stato != "archiviata"
 SORT nome ASC
 ```

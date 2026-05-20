@@ -32,6 +32,68 @@ const ready = checks.filter(([, value]) => ok(value)).length;
 dv.paragraph(ready === 6 ? "Codex pronto: puoi costruire articoli, mappe e timeline." : `Mancano ${6 - ready} blocchi del codex. Completa questi campi prima di creare altro.`);
 ```
 
+````tabs
+tab: Fondamenta
+
+> [!scena] Identita Giocabile
+> Gancio: `INPUT[text:gancio]`
+>
+> > [!regia]- Tono e promessa
+> > Tono: `INPUT[text:tono]`
+> >
+> > Promessa: `INPUT[text:premessa]`
+>
+> > [!conflitto]- Conflitto centrale
+> > `INPUT[text:conflitto_centrale]`
+
+> [!magia] Regole Del Mondo
+> Magia: `INPUT[text:magia]`
+>
+> Tecnologia: `INPUT[text:tecnologia]`
+>
+> ```meta-bind
+> INPUT[list:principi_realta]
+> ```
+
+tab: Codex
+
+> [!luogo] Spina Dorsale
+> Luoghi: `INPUT[inlineListSuggester(optionQuery("Mondi/Luoghi"), useLinks(partial), allowOther):luoghi_iconici]`
+>
+> Poteri: `INPUT[inlineListSuggester(optionQuery("Mondi/Fazioni"), useLinks(partial), allowOther):fazioni_principali]`
+>
+> Misteri: `INPUT[inlineList:misteri_pubblici]`
+
+> [!cultura] Culture E Societa
+> Culture: `INPUT[inlineListSuggester(optionQuery("Mondi/Culture"), useLinks(partial), allowOther):culture_fondative]`
+>
+> Societa: `INPUT[inlineListSuggester(optionQuery("Mondi/Societa"), useLinks(partial), allowOther):societa_fondative]`
+
+tab: Tavolo
+
+> [!missione] Trasforma In Gioco
+> Campagne: `INPUT[inlineListSuggester(optionQuery("Campagne"), useLinks(partial), allowOther):campagne]`
+>
+> Fronti: `INPUT[inlineListSuggester(optionQuery("Mondi/Tracciati"), useLinks(partial), allowOther):fronti]`
+>
+> > [!timer]- Pressioni aperte
+> > ```meta-bind
+> > INPUT[list:tensioni]
+> > ```
+
+tab: Segreti
+
+> [!segreto]- Livello DM
+> ```meta-bind
+> INPUT[list:segreti]
+> ```
+>
+> > [!indizio]- Domande aperte
+> > ```meta-bind
+> > INPUT[list:domande_aperte]
+> > ```
+````
+
 ## Home Del Mondo
 
 > [!scena] Gancio
@@ -52,7 +114,7 @@ dv.paragraph(ready === 6 ? "Codex pronto: puoi costruire articoli, mappe e timel
 > [!segreto]- DM
 > Segreti del mondo, verita nascoste e prossime mosse restano qui o nelle note collegate, non nella vista giocatori.
 
->[!infobox|wiki]- Mondo
+>[!infoboxwiki]- Mondo
 > Stato:
 > `INPUT[inlineSelect(option(bozza, Bozza), option(pronto, Pronto), option(archiviata, Archiviata)):stato]`
 >

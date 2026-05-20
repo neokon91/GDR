@@ -1,7 +1,7 @@
 <% await tp.user.lingua(tp) %>
 # `=this.nome`
 
->[!infobox|wiki]- Lingua
+>[!infoboxwiki]- Lingua
 > Mondo:
 > `INPUT[mondo][:mondo]`
 >

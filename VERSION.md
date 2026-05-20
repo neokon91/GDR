@@ -1,10 +1,9 @@
 # Versione Vault
 
-Versione: `0.9.0`
+Versione: `1.0.0`
 
 Data: 2026-05-20
 
-Stato: living world e geopolitica integrati sopra il workflow DM esistente. Prossima fase: QA visuale, release community e materiali pubblici.
 
 ## Compatibilità
 

@@ -1,7 +1,7 @@
 <% await tp.user.luogo(tp) %>
 # `=this.nome`
 
->[!infobox|wiki]- Sala di Controllo
+>[!infoboxwiki]- Sala di Controllo
 > Regione:
 > `INPUT[suggester(optionQuery("Mondi/Luoghi"), useLinks(partial), allowOther):luogo_padre]`
 >

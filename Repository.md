@@ -24,7 +24,6 @@ Questa nota e tecnica. Serve solo a chi cura il vault, non al DM che lo usa per 
 | `Hub/Vista Giocatori.md` | materiale condivisibile | Non deve mostrare segreti o prossime mosse DM. |
 | `Hub/Worldbuilder Dashboard.md` | costruzione mondo avanzata | Deve mostrare relazioni, buchi e pressioni, non solo archivi. |
 | `Hub/Motore Mondo Vivo.md` | stato sistemico del mondo | Deve mostrare propagazione, causalita, faction dynamics e continuita narrativa. |
-| `Campagne/` | campagne e demo | Contenuto giocabile legato a party e sessioni. |
 | `Giocatori/` | indice area giocatori | Area pubblica o condivisibile. |
 | `Inbox/` | appunti grezzi e live | Qui entra cio che non e ancora canonico. |
 | `Mondi/` | ambientazioni canoniche | Qui stanno luoghi, PNG, fazioni, relazioni, missioni, incontri e timeline. |
@@ -32,7 +31,10 @@ Questa nota e tecnica. Serve solo a chi cura il vault, non al DM che lo usa per 
 | `Risorse/Roadmap/` | roadmap storiche | Archivio manutenzione, non percorso primario del DM. |
 | `SRD/` | riferimento regolamentare generato | Non trattare come contenuto canonico del mondo. |
 | `z.modelli/` | template Templater | Percorsi richiamati da pulsanti Meta Bind. |
+| `z.modelli/azioni/` | template azione Meta Bind | Deve restare sottile: solo chiamate a `meta_actions.js`. |
+| `z.modelli/wizard/` | wizard Templater centralizzati | Deve restare sottile: solo chiamate a `wizard_layer.js`. |
 | `z.automazioni/` | script Templater e CLI | Cambiare nomi rompe template e controlli. |
+| `z.engine/` | componenti JS riusabili | Viste operative da richiamare da DataviewJS o JS Engine. |
 | `z.bacheche/` | board Kanban | Workflow operativo, non archivio permanente. |
 | `.obsidian/` | configurazione Obsidian e plugin | Parte del prodotto: non e solo preferenza locale. |
 
@@ -47,6 +49,9 @@ Questa nota e tecnica. Serve solo a chi cura il vault, non al DM che lo usa per 
 
 - `z.modelli`: Templater e Meta Bind usano percorsi espliciti come `templateFile`.
 - `z.automazioni`: i template chiamano helper con `tp.user.nome_script`.
+- `z.engine`: le dashboard possono importare componenti JS da qui; non duplicare logica lunga nei blocchi DataviewJS.
+- `.obsidian/plugins/obsidian-meta-bind-plugin/data.json`: contiene input template e button template operativi.
+- `.obsidian/plugins/metadata-menu/data.json` e `z.fileclass/`: insieme definiscono lo schema operativo.
 - `.obsidian/plugins`: il vault include plugin e configurazioni necessarie.
 - `SRD`: puo essere rigenerato da `z.automazioni/import_srd.js`.
 - `Inizia Qui.md` resta l'unica dashboard root: le altre viste principali stanno in `Hub/`.
@@ -55,6 +60,8 @@ Questa nota e tecnica. Serve solo a chi cura il vault, non al DM che lo usa per 
 
 ```bash
 npm run check
+npm run check:repo
+npm run clean:repo
 npm run import:srd
 npm run release:clean
 ```
@@ -63,6 +70,8 @@ Se `npm` non e disponibile, usa direttamente:
 
 ```bash
 node z.automazioni/check_vault.js
+node z.automazioni/repo_hygiene.js
+node z.automazioni/repo_hygiene.js --fix
 node z.automazioni/import_srd.js
 node z.automazioni/release_clean.js
 ```
@@ -74,6 +83,8 @@ Ogni modifica strutturale deve passare:
 ```bash
 npm run check
 ```
+
+Usa `npm run check:repo` prima di riprendere la roadmap quando vuoi verificare che non ci siano artefatti locali, note fittizie residue o script npm mancanti. Usa `npm run clean:repo` solo per rimuovere file locali di sistema e temporanei ignorati, non per archiviare contenuti del vault.
 
 Poi apri manualmente in Obsidian:
 

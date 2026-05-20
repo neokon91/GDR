@@ -1,7 +1,7 @@
 <% await tp.user.conflitto(tp) %>
 # `=this.nome`
 
->[!infobox|wiki]- Conflitto
+>[!infoboxwiki]- Conflitto
 > Mondo:
 > `INPUT[mondo][:mondo]`
 >

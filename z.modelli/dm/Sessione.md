@@ -1,8 +1,78 @@
 <% await tp.user.sessione(tp) %>
 # `=this.nome`
 
-> [!scena] Preparazione In 5 Campi
-> Compila questi campi. Quando sono pieni, la sessione e giocabile.
+````tabs
+tab: Prepara
+
+> [!scena] Cinque Blocchi
+> Obiettivo: `INPUT[text:obiettivo]`
+>
+> Prima scena: `INPUT[text:apertura]`
+>
+> Scelta concreta: `INPUT[text:scelta]`
+>
+> > [!timer]- Pressioni
+> > `INPUT[inlineList:pressioni]`
+>
+> > [!handout]- Materiale pronto
+> > `INPUT[inlineList:materiale_pronto]`
+
+tab: Ancore
+
+> [!luogo] Tre Ancore Minime
+> Mondo: `INPUT[mondo][:mondo]`
+>
+> Luoghi: `INPUT[inlineListSuggester(optionQuery("Mondi/Luoghi"), useLinks(partial)):luoghi]`
+>
+> Fazioni: `INPUT[inlineListSuggester(optionQuery("Mondi/Fazioni"), useLinks(partial)):fazioni]`
+>
+> PNG: `INPUT[inlineListSuggester(optionQuery("Mondi/Personaggi"), useLinks(partial)):personaggi]`
+>
+> Missioni: `INPUT[inlineListSuggester(optionQuery("Mondi/Missioni"), useLinks(partial)):missioni]`
+>
+> Clock: `INPUT[inlineListSuggester(optionQuery("Mondi/Tracciati"), useLinks(partial)):tracciati]`
+
+tab: Live
+
+> [!regia] Cockpit
+> Attiva al tavolo: `INPUT[toggle:attiva]`
+>
+> Scena corrente: `INPUT[text:scena_corrente]`
+>
+> `BUTTON[durante-il-gioco-durante-il-gioco]`
+>
+> > [!indizio]- Appunti live
+> > `INPUT[inlineListSuggester(optionQuery("Inbox"), useLinks(partial), allowOther):appunti_live]`
+
+tab: Dopo
+
+> [!timer] Delta Del Mondo
+> ```meta-bind
+> INPUT[list:conseguenze]
+> ```
+>
+> > [!lettura]- Recap pubblico
+> > ```meta-bind
+> > INPUT[list:recap_pubblico]
+> > ```
+>
+> > [!segreto]- Recap DM
+> > ```meta-bind
+> > INPUT[list:recap_dm]
+> > ```
+````
+
+> [!scena] Sessione Radicata Nel Mondo
+> Una sessione non parte dal vuoto. Prima collega almeno tre ancore mondo, poi completa i cinque campi di gioco.
+>
+> | Ancora | Campo |
+> | --- | --- |
+> | Mondo | `INPUT[mondo][:mondo]` |
+> | Luoghi | `INPUT[inlineListSuggester(optionQuery("Mondi/Luoghi"), useLinks(partial)):luoghi]` |
+> | Poteri | `INPUT[inlineListSuggester(optionQuery("Mondi/Fazioni"), useLinks(partial)):fazioni]` |
+> | PNG | `INPUT[inlineListSuggester(optionQuery("Mondi/Personaggi"), useLinks(partial)):personaggi]` |
+> | Missioni | `INPUT[inlineListSuggester(optionQuery("Mondi/Missioni"), useLinks(partial)):missioni]` |
+> | Clock | `INPUT[inlineListSuggester(optionQuery("Mondi/Tracciati"), useLinks(partial)):tracciati]` |
 >
 > | Blocco | Campo |
 > | --- | --- |
@@ -49,7 +119,7 @@ const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_conte
 gdr.renderActiveSessionBanner(dv);
 ```
 
->[!infobox|wiki]- Sessione
+>[!infoboxwiki]- Sessione
 > Data:
 > `INPUT[date:data]`
 >
@@ -182,6 +252,19 @@ INPUT[list:segreti_rivelabili]
 
 tab: In Scena
 
+## Cockpit Live
+
+> [!scena] Scena Corrente
+> `INPUT[text:scena_corrente]`
+
+> [!missione] Decisioni Prese
+> ```meta-bind
+> INPUT[list:decisioni_prese]
+> ```
+
+> [!indizio] Appunti Live
+> `INPUT[inlineListSuggester(optionQuery("Inbox"), useLinks(partial), allowOther):appunti_live]`
+
 ## Luoghi In Scena
 
 ```dataview
@@ -244,11 +327,9 @@ WHERE contains(this.dispense, file.link)
 
 ## Mappe
 
-```dataview
-TABLE uso, luogo, stato
-FROM "Risorse/Mappe"
-WHERE contains(this.mappe, file.link)
-SORT uso ASC, file.name ASC
+```dataviewjs
+const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));
+gdr.renderSessionMapCards(dv);
 ```
 
 ## Media
@@ -258,6 +339,42 @@ TABLE uso, tono, campagna, stato
 FROM "Risorse/Audio" OR "Risorse/Immagini" OR "Risorse/Video"
 WHERE contains(this.audio, file.link) OR contains(this.immagini, file.link) OR contains(this.video, file.link)
 SORT uso ASC, tono ASC, file.name ASC
+```
+
+tab: Output Sessione
+
+## Decisioni
+
+```meta-bind
+INPUT[list:decisioni_prese]
+```
+
+## Conseguenze
+
+```meta-bind
+INPUT[list:conseguenze]
+```
+
+## Recap Pubblico
+
+```meta-bind
+INPUT[list:recap_pubblico]
+```
+
+## Recap DM
+
+```meta-bind
+INPUT[list:recap_dm]
+```
+
+## Prossima Apertura
+
+`INPUT[text:prossima_apertura]`
+
+## Output Pronto
+
+```meta-bind
+INPUT[list:output_sessione]
 ```
 
 ## Oggetti In Scena

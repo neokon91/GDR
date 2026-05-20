@@ -20,7 +20,7 @@ Report visuale per capire cosa rende il vault pronto da giocare, da condividere 
 ## Copertura
 
 ```dataviewjs
-const count = (source, pred = () => true) => dv.pages(source).where(p => !String(p.file.name).startsWith("Prova -") && p.stato !== "archiviata" && pred(p)).length;
+const count = (source, pred = () => true) => dv.pages(source).where(p => p.stato !== "archiviata" && pred(p)).length;
 const esc = v => String(v ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "\"": "&quot;", "'": "&#39;" }[c]));
 const cards = [
   ["Mondi", count('"Mondi"', p => p.categoria === "mondo"), "ambientazioni"],
@@ -42,7 +42,7 @@ grid.innerHTML = cards.map(([label, value, hint]) => `<div class="gdr-stat-card"
 const hasText = v => String(v ?? "").trim().length > 0;
 const hasLinks = v => dv.array(v ?? []).length > 0;
 const rows = [];
-const real = p => !String(p.file.name).startsWith("Prova -") && p.stato !== "archiviata";
+const real = p => p.stato !== "archiviata";
 const add = (source, label, pred) => dv.pages(source).where(p => real(p) && pred(p)).forEach(p => rows.push([p.file.link, label, p.stato ?? ""]));
 add('"Mondi/Personaggi"', "PNG senza scena/luogo", p => p.tipo === "png" && !hasText(p.luogo) && !hasLinks(p.luoghi) && !hasText(p.ruolo));
 add('"Mondi/Luoghi"', "Luogo senza mappa o parent", p => !hasLinks(p.mappe) && !hasText(p.luogo_padre) && p.tipo !== "continente");
@@ -66,7 +66,6 @@ gdr.renderPublicSafety(dv);
 ```dataview
 TABLE tipo, uso, pubblico, stato, mondo, luogo
 FROM "Risorse/Mappe" OR "Mondi/Dispense" OR "Campagne" OR "Hub"
-WHERE !startswith(file.name, "Prova -") AND stato != "archiviata" AND (pubblico = true OR contains(cssclasses, "dashboard") OR contains(file.name, "Demo"))
 SORT pubblico DESC, file.name ASC
 LIMIT 30
 ```

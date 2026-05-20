@@ -25,6 +25,12 @@ if (!active) {
 
 ## Comandi Rapidi
 
+`BUTTON[aggiorna-scena-z-modelli-dm-aggiorna-scena-corrente-md]`
+
+`BUTTON[aggiungi-decisione-z-modelli-dm-aggiungi-decisione-live-md]`
+
+`BUTTON[collega-appunto-z-modelli-dm-collega-appunto-live-md]`
+
 `BUTTON[nota-rapida-z-modelli-nota-rapida-md]`
 
 `BUTTON[evento-lore-z-modelli-lore-capture-md]`
@@ -128,108 +134,21 @@ if (!active) {
 
 ```dataviewjs
 const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));
-const active = gdr.activeSession(dv);
-
-const world = gdr.linkKey(active?.mondo);
-const places = new Set(dv.array(active?.luoghi ?? []).map(gdr.linkKey).array());
-const factions = new Set(dv.array(active?.fazioni ?? []).map(gdr.linkKey).array());
-const sessions = new Set(active ? [active.file.path] : []);
-
-const pages = dv.pages('"Mondi/Timeline" OR "Inbox"')
-  .where(p => !String(p.file.name).startsWith("Prova -") && p.stato !== "archiviata" && p.stato !== "ignorata")
-  .where(p => p.categoria === "evento storico" || p.categoria === "lore capture")
-  .where(p => !active
-    || gdr.linkKey(p.mondo) === world
-    || dv.array(p.luoghi ?? []).some(link => places.has(gdr.linkKey(link)))
-    || dv.array(p.fazioni ?? []).some(link => factions.has(gdr.linkKey(link)))
-    || dv.array(p.sessioni ?? []).some(link => sessions.has(gdr.linkKey(link))))
-  .sort(p => p.data_mondo ?? p.file.mtime, "desc")
-  .limit(8);
-
-if (!pages.length) {
-  dv.paragraph("Nessuna lore collegata alla sessione attiva.");
-} else {
-  dv.table(["Lore", "Stato", "Canon", "Data mondo", "Collegamenti"], pages.map(p => [p.file.link, p.stato ?? "", p.stato_canonico ?? "", p.data_mondo ?? "", p.collegamenti ?? p.luoghi ?? []]));
-}
+gdr.renderSessionLoreCards(dv);
 ```
 
 ### Missioni Della Sessione
 
 ```dataviewjs
 const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));
-const active = gdr.activeSession(dv);
-
-let pages = dv.array(active?.missioni ?? [])
-  .map(link => dv.page(link.path ?? link))
-  .where(Boolean)
-  .array();
-
-if (!pages.length) {
-  const activeFactions = new Set(dv.array(active?.fazioni ?? []).map(link => link.path ?? String(link)).array());
-  pages = dv.pages('"Mondi/Missioni"')
-    .where(p => !String(p.file.name).startsWith("Prova -") && ["proposta", "accettata", "in corso"].includes(p.stato))
-    .where(p => !activeFactions.size || dv.array(p.fazioni ?? []).some(link => activeFactions.has(link.path ?? String(link))))
-    .sort(p => Number(p.pressione ?? 0), "desc")
-    .limit(8)
-    .array();
-}
-
-if (!pages.length) {
-  dv.paragraph("Nessuna missione collegata alla sessione attiva.");
-} else {
-  dv.table(["Missione", "Stato", "Avanzamento", "Pressione", "Committente", "Prossima mossa"], pages.map(p => {
-    const value = Number(p.progress_value ?? 0);
-    const max = Number(p.progress_max ?? 6);
-    return [p.file.link, p.stato ?? "", `${value}/${max}`, p.pressione ?? "", p.committente ?? "", p.prossima_mossa ?? ""];
-  }));
-}
+gdr.renderSessionMissionCards(dv);
 ```
 
 ### Clock Della Sessione
 
 ```dataviewjs
 const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));
-const active = gdr.activeSession(dv);
-
-const linked = dv.array(active?.tracciati ?? [])
-  .map(link => dv.page(link.path ?? link))
-  .where(Boolean)
-  .array();
-
-let pages = linked;
-
-if (!pages.length) {
-  const sessionMissions = new Set(dv.array(active?.missioni ?? []).map(link => link.path ?? String(link)).array());
-  const sessionFactions = new Set(dv.array(active?.fazioni ?? []).map(link => link.path ?? String(link)).array());
-  pages = dv.pages('"Mondi/Tracciati"')
-    .where(p => !String(p.file.name).startsWith("Prova -") && !["archiviata", "completato", "fallito"].includes(p.stato))
-    .where(p => sessionMissions.size === 0 && sessionFactions.size === 0
-      || dv.array(p.missioni ?? []).some(link => sessionMissions.has(link.path ?? String(link)))
-      || dv.array(p.fazioni ?? []).some(link => sessionFactions.has(link.path ?? String(link))))
-    .sort(p => Number(p.pressione ?? 0), "desc")
-    .limit(8)
-    .array();
-}
-
-if (!pages.length) {
-  dv.paragraph("Nessun clock collegato alla sessione attiva.");
-} else {
-  const grid = dv.el("div", "", { cls: "gdr-card-grid compact" });
-  grid.innerHTML = pages.map(p => {
-    const value = Math.max(0, Number(p.progress_value ?? 0));
-    const max = Math.max(1, Number(p.progress_max ?? 6));
-    const pct = Math.round((Math.min(value, max) / max) * 100);
-    return `
-      <div class="gdr-info-card compact">
-        <div class="gdr-card-title">${gdr.internalLink(p.file)}</div>
-        <div class="gdr-card-meta">${gdr.escapeHtml(p.tipo ?? "clock")} · ${gdr.escapeHtml(p.stato ?? "senza stato")} · pressione ${gdr.escapeHtml(p.pressione ?? 0)}</div>
-        <div class="gdr-track-bar"><span style="width: ${pct}%"></span></div>
-        <div class="gdr-card-line">${value}/${max} · ${gdr.escapeHtml(p.innesco ?? "innesco non indicato")}</div>
-        <div class="gdr-card-line">${gdr.escapeHtml(p.prossima_mossa ?? "prossima mossa non indicata")}</div>
-      </div>
-    `;
-  }).join("");
-}
+gdr.renderSessionClockCards(dv);
 ```
 
 > [!lettura] Riassunto da leggere
@@ -276,7 +195,7 @@ LIMIT 12
 TABLE stato, stato_canonico, data_mondo, sessioni, collegamenti
 FROM "Inbox" OR "Mondi/Timeline"
 WHERE categoria = "lore capture" OR categoria = "evento storico"
-WHERE stato != "archiviata" AND stato != "ignorata" AND !startswith(file.name, "Prova -")
+WHERE stato != "archiviata" AND stato != "ignorata"
 SORT file.mtime DESC
 LIMIT 12
 ```
@@ -310,7 +229,7 @@ const linkedMissionPages = dv.array(active?.incontri ?? [])
   .array();
 
 const pages = dv.pages('"Mondi/Missioni" OR "Mondi/Fazioni" OR "Mondi/Tracciati"')
-  .where(p => !String(p.file.name).startsWith("Prova -") && p.stato !== "archiviata" && Number(p.pressione ?? 0) > 0)
+  .where(p => p.stato !== "archiviata" && Number(p.pressione ?? 0) > 0)
   .where(p => sessionFactions.size === 0 && sessionMissions.size === 0
     || sessionFactions.has(p.file.path)
     || sessionMissions.has(p.file.path)
@@ -367,7 +286,7 @@ let pages = linked
 
 if (!pages.length) {
   pages = dv.pages('"Mondi/Personaggi"')
-    .where(p => !String(p.file.name).startsWith("Prova -") && p.tipo === "png" && p.stato === "in gioco")
+    .where(p => p.tipo === "png" && p.stato === "in gioco")
     .array();
 }
 
@@ -400,7 +319,7 @@ let pages = dv.array(active?.incontri ?? [])
 
 if (!pages.length) {
   pages = dv.pages('"Mondi/Incontri"')
-    .where(p => !String(p.file.name).startsWith("Prova -") && ["pronto", "in gioco"].includes(p.stato))
+    .where(p => ["pronto", "in gioco"].includes(p.stato))
     .sort(p => p.pericolo ?? 0, "desc")
     .array();
 }
@@ -442,7 +361,7 @@ let pages = dv.array(active?.oggetti ?? [])
 
 if (!pages.length) {
   pages = dv.pages('"Mondi/Oggetti"')
-    .where(p => !String(p.file.name).startsWith("Prova -") && !p.proprietario && p.stato !== "archiviata")
+    .where(p => !p.proprietario && p.stato !== "archiviata")
     .sort(p => p.rarita ?? "", "asc")
     .array();
 }
@@ -463,7 +382,7 @@ let pages = dv.array(active?.dispense ?? [])
 
 if (!pages.length) {
   pages = dv.pages('"Mondi/Dispense"')
-    .where(p => !String(p.file.name).startsWith("Prova -") && p.stato === "pronto")
+    .where(p => p.stato === "pronto")
     .sort(p => p.nome ?? p.file.name, "asc")
     .array();
 }
@@ -473,67 +392,10 @@ dv.table(["Dispensa", "Tipo", "Luogo", "Personaggi"], pages.map(p => [p.file.lin
 
 #### Mappe
 
-![[Risorse/Mappe/Demo - Scena Ponte.excalidraw]]
 
 ```dataviewjs
 const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));
-const active = gdr.activeSession(dv);
-
-const linkKey = value => value?.path ?? String(value ?? "");
-const hasAnyLink = (value, keys) => dv.array(value ?? []).array().some(link => keys.has(linkKey(link)));
-
-const sessionMaps = dv.array(active?.mappe ?? []).array();
-const places = dv.array(active?.luoghi ?? []);
-const placePaths = new Set(places.map(linkKey).array());
-const worldKey = linkKey(active?.mondo);
-const encounterPages = dv.array(active?.incontri ?? [])
-  .map(link => dv.page(link.path ?? link))
-  .where(Boolean)
-  .array();
-
-const encounterMaps = encounterPages.flatMap(p => dv.array(p.mappe ?? []).array());
-const seen = new Set();
-let pages = sessionMaps
-  .concat(encounterMaps)
-  .map(link => dv.page(link.path ?? link))
-  .where(Boolean)
-  .filter(p => {
-    if (seen.has(p.file.path)) return false;
-    seen.add(p.file.path);
-    return true;
-  })
-  .array();
-
-if (!pages.length && places.length) {
-  pages = dv.pages('"Risorse/Mappe"')
-    .where(p => !String(p.file.name).startsWith("Prova -") && p.file.name !== "Mappe" && p.stato !== "archiviata")
-    .where(p => placePaths.has(linkKey(p.luogo)) || hasAnyLink(p.luoghi, placePaths))
-    .sort(p => p.stato === "pronto" ? 0 : 1, "asc")
-    .sort(p => p.uso ?? "", "asc")
-    .array();
-}
-
-if (!pages.length) {
-  pages = dv.pages('"Risorse/Mappe"')
-    .where(p => !String(p.file.name).startsWith("Prova -") && p.file.name !== "Mappe" && p.stato === "pronto")
-    .where(p => worldKey && linkKey(p.mondo) === worldKey)
-    .sort(p => p.uso ?? "", "asc")
-    .array();
-}
-
-if (!pages.length) {
-  pages = dv.pages('"Risorse/Mappe"')
-    .where(p => !String(p.file.name).startsWith("Prova -") && p.file.name !== "Mappe" && p.stato === "pronto" && ["zoom", "esagoni", "scena", "dungeon"].includes(p.uso))
-    .sort(p => p.file.mtime, "desc")
-    .limit(6)
-    .array();
-}
-
-if (!pages.length) {
-  dv.paragraph("Nessuna mappa pronta o collegata alla sessione attiva.");
-} else {
-  dv.table(["Mappa", "Uso", "Mondo", "Luogo/Luoghi", "Stato"], pages.map(p => [p.file.link, p.uso ?? "", p.mondo ?? "", p.luogo ?? p.luoghi ?? "", p.stato ?? ""]));
-}
+gdr.renderSessionMapCards(dv);
 ```
 
 #### Musica e Risorse
@@ -563,7 +425,7 @@ let pages = dv.array(mediaLinks)
 
 if (!pages.length) {
   pages = dv.pages('"Risorse/Audio" OR "Risorse/Video" OR "Risorse/Immagini" OR "Risorse/Dispense"')
-    .where(p => !String(p.file.name).startsWith("Prova -") && p.file.name !== "Audio" && p.file.name !== "Video" && p.file.name !== "Immagini" && p.file.name !== "Dispense" && p.stato === "pronto")
+    .where(p => p.file.name !== "Audio" && p.file.name !== "Video" && p.file.name !== "Immagini" && p.file.name !== "Dispense" && p.stato === "pronto")
     .sort(p => p.uso ?? "", "asc")
     .array();
 }

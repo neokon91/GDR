@@ -9,8 +9,14 @@ async function risorsa_mondo(tp) {
     const uso = await helpers.promptOptional(tp, "Uso narrativo o strategico");
     const scarsita = await helpers.promptOptional(tp, "Scarsita, monopolio o problema");
     const conseguenza = await helpers.promptOptional(tp, "Conseguenza se manca");
+    const gancio = await helpers.promptOptional(tp, "Gancio giocabile della risorsa");
+    const usoAlTavolo = await helpers.promptOptional(tp, "Uso al tavolo");
+    const playerSafe = await helpers.promptOptional(tp, "Versione player-safe");
+    const prossimaMossa = await helpers.promptOptional(tp, "Prossima mossa");
+    const connessioni = await helpers.chooseConnections(tp, "Connessioni vive della risorsa", context);
 
-    await helpers.moveNote(tp, helpers.path("risorse_mondo"), name);
+    const created = await helpers.moveNote(tp, helpers.path("risorse_mondo"), name);
+    await helpers.linkCreatedNoteToConnections(created, connessioni);
 
     return `---
 id: ${id}
@@ -35,7 +41,11 @@ mercati: []
 conseguenze_se_bloccata: ${helpers.inlineYamlTextList([conseguenza])}
 conseguenze: ${helpers.inlineYamlTextList([conseguenza])}
 pressione: 0
-prossima_mossa:
+gancio: ${helpers.yamlQuote(gancio)}
+uso_al_tavolo: ${helpers.yamlQuote(usoAlTavolo)}
+player_safe: ${helpers.yamlQuote(playerSafe)}
+prossima_mossa: ${helpers.yamlQuote(prossimaMossa)}
+connessioni: ${helpers.inlineYamlList(connessioni)}
 missioni: []
 conflitti: []
 sessioni: []

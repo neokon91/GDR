@@ -1,7 +1,7 @@
 <% await tp.user.culto(tp) %>
 # `=this.nome`
 
->[!infobox|wiki]- Religione
+>[!infoboxwiki]- Religione
 > Tipo:
 > `INPUT[text:tipo]`
 >

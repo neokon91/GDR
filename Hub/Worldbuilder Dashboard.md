@@ -44,7 +44,6 @@ campagne_attive: []
 
 `BUTTON[nuova-mappa-fronti-z-modelli-mappe-mappa-excalidraw-fronti-excalidraw-md]`
 
-`BUTTON[canvas-fronti-demo-canvas-fronti-canvas]`
 
 `BUTTON[timeline-mondi-timeline-timeline]`
 
@@ -54,14 +53,15 @@ campagne_attive: []
 
 `BUTTON[stato-mondo-mondi-stato-del-mondo]`
 
-## Crea Mondo
+## Crea Il Tuo Mondo
 
 ```dataviewjs
 const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));
 const steps = [
-  ["1", "Mondo", "Tono, temi e verità canoniche"],
-  ["2", "Struttura", "Luoghi, regioni e poteri"],
-  ["3", "Tavolo", "PNG, missioni e conseguenze"]
+  ["1", "Identità", "Tono, temi, promessa e verità canoniche"],
+  ["2", "Struttura", "Geografia, culture, poteri, storia e cosmologia"],
+  ["3", "Connessioni", "Relazioni, rotte, risorse, conflitti e misteri"],
+  ["4", "Gioco", "Campagne, avventure, sessioni live e conseguenze"]
 ];
 const grid = dv.el("div", "", { cls: "gdr-flow" });
 grid.innerHTML = steps.map(([label, title, hint]) => `
@@ -73,15 +73,40 @@ grid.innerHTML = steps.map(([label, title, hint]) => `
 `).join("");
 ```
 
-`BUTTON[nuovo-mondo-z-modelli-mondo-md]`
+`BUTTON[nuovo-mondo-homebrew]`
 
-`BUTTON[nuovo-personaggio-z-modelli-personaggio-router-md]`
+````tabs
+tab: Fondamenta
 
 `BUTTON[nuovo-luogo-z-modelli-luogo-router-md]`
+
+`BUTTON[wizard-nuova-entita-viva]`
+
+`BUTTON[nuova-cultura-z-modelli-worldbuilding-cultura-md]`
+
+`BUTTON[nuova-lingua-z-modelli-worldbuilding-lingua-md]`
+
+`BUTTON[evento-storico-z-modelli-evento-storico-md]`
+
+`BUTTON[nuova-era-z-modelli-worldbuilding-era-storica-md]`
+
+tab: Poteri
 
 `BUTTON[nuova-fazione-z-modelli-fazione-router-md]`
 
 `BUTTON[nuovo-culto-z-modelli-fazione-culto-md]`
+
+`BUTTON[nuovo-personaggio-z-modelli-personaggio-router-md]`
+
+`BUTTON[nuova-relazione-z-modelli-worldbuilding-relazione-md]`
+
+`BUTTON[nuovo-conflitto-z-modelli-worldbuilding-conflitto-md]`
+
+tab: Mito E Mistero
+
+`BUTTON[cosmologia-z-modelli-worldbuilding-cosmologia-md]`
+
+`BUTTON[segreto-o-mistero-z-modelli-worldbuilding-segreto-o-mistero-md]`
 
 `BUTTON[nuova-creatura-z-modelli-creatura-md]`
 
@@ -89,15 +114,7 @@ grid.innerHTML = steps.map(([label, title, hint]) => `
 
 `BUTTON[nuovo-oggetto-magico-z-modelli-oggetto-magico-md]`
 
-`BUTTON[evento-storico-z-modelli-evento-storico-md]`
-
-`BUTTON[segreto-o-mistero-z-modelli-worldbuilding-segreto-o-mistero-md]`
-
-`BUTTON[nuova-cultura-z-modelli-worldbuilding-cultura-md]`
-
-`BUTTON[nuova-lingua-z-modelli-worldbuilding-lingua-md]`
-
-`BUTTON[nuovo-conflitto-z-modelli-worldbuilding-conflitto-md]`
+tab: Economia
 
 `BUTTON[nuova-rotta-z-modelli-worldbuilding-rotta-md]`
 
@@ -105,9 +122,26 @@ grid.innerHTML = steps.map(([label, title, hint]) => `
 
 `BUTTON[nuovo-mercato-z-modelli-worldbuilding-mercato-o-nodo-commerciale-md]`
 
-`BUTTON[nuova-relazione-z-modelli-worldbuilding-relazione-md]`
+tab: Tavolo
+
+`BUTTON[campagna-da-ambientazione-campagna-da-ambientazione]`
+
+`BUTTON[nuova-missione-z-modelli-dm-missione-md]`
+
+`BUTTON[nuovo-clock-z-modelli-dm-tracciato-md]`
+
+`BUTTON[nuovo-incontro-z-modelli-dm-incontro-md-default]`
 
 `BUTTON[dispense-mondi-dispense-dispense]`
+
+tab: Mappe
+
+`BUTTON[atlante-del-mondo-atlante-del-mondo]`
+
+`BUTTON[nuova-mappa-zoom-z-modelli-mappe-mappa-zoom-md]`
+
+`BUTTON[nuova-mappa-fronti-z-modelli-mappe-mappa-excalidraw-fronti-excalidraw-md]`
+````
 
 ## Panoramica Del Mondo
 
@@ -155,7 +189,7 @@ tab: Bozze
 ```dataview
 TABLE categoria, tipo, luogo, stato
 FROM "Mondi"
-WHERE stato = "bozza" AND !startswith(file.name, "Prova -") AND (!this.mondo_attivo OR mondo = this.mondo_attivo OR file.link = this.mondo_attivo)
+WHERE stato = "bozza" AND (!this.mondo_attivo OR mondo = this.mondo_attivo OR file.link = this.mondo_attivo)
 SORT categoria ASC, nome ASC
 LIMIT 12
 ```
@@ -226,7 +260,7 @@ tab: Domande
 ```dataview
 TABLE categoria, tipo, domande_aperte
 FROM "Mondi"
-WHERE domande_aperte AND length(domande_aperte) > 0 AND !startswith(file.name, "Prova -") AND stato != "archiviata" AND (!this.mondo_attivo OR mondo = this.mondo_attivo OR file.link = this.mondo_attivo)
+WHERE domande_aperte AND length(domande_aperte) > 0 AND stato != "archiviata" AND (!this.mondo_attivo OR mondo = this.mondo_attivo OR file.link = this.mondo_attivo)
 SORT file.mtime DESC
 LIMIT 12
 ```
@@ -238,7 +272,7 @@ tab: Segreti
 ```dataview
 TABLE categoria, tipo, segreti, indizi
 FROM "Mondi"
-WHERE ((segreti AND length(segreti) > 0) OR (indizi AND length(indizi) > 0)) AND !startswith(file.name, "Prova -") AND stato != "archiviata" AND (!this.mondo_attivo OR mondo = this.mondo_attivo OR file.link = this.mondo_attivo)
+WHERE ((segreti AND length(segreti) > 0) OR (indizi AND length(indizi) > 0)) AND stato != "archiviata" AND (!this.mondo_attivo OR mondo = this.mondo_attivo OR file.link = this.mondo_attivo)
 SORT file.mtime DESC
 LIMIT 12
 ```
@@ -322,12 +356,11 @@ tab: Mappa
 
 ![[Risorse/Mappe/Schema Relazioni GDR.excalidraw]]
 
-![[Risorse/Mappe/Demo - Fronte Custodi.excalidraw]]
 
 ```dataview
 TABLE uso, mondo, luogo, stato, file.mtime AS aggiornato
 FROM "Risorse/Mappe"
-WHERE file.name != "Mappe" AND !startswith(file.name, "Prova -") AND (uso = "relazioni" OR uso = "fronte" OR uso = "indizi")
+WHERE file.name != "Mappe" AND (uso = "relazioni" OR uso = "fronte" OR uso = "indizi")
 SORT uso ASC, mondo ASC, file.name ASC
 LIMIT 12
 ```
@@ -343,7 +376,7 @@ tab: Pressioni
 ```dataview
 TABLE categoria, tipo, pressione, prossima_mossa, scadenza_mondo
 FROM "Mondi/Fazioni" OR "Mondi/Missioni"
-WHERE pressione > 0 AND !startswith(file.name, "Prova -") AND stato != "archiviata" AND (!this.mondo_attivo OR mondo = this.mondo_attivo)
+WHERE pressione > 0 AND stato != "archiviata" AND (!this.mondo_attivo OR mondo = this.mondo_attivo)
 SORT pressione DESC, file.name ASC
 LIMIT 12
 ```
@@ -355,7 +388,7 @@ tab: Timeline
 ```dataview
 TABLE data_mondo AS "Data", stato_canonico AS "Canone", mondo AS "Mondo", luoghi AS "Luoghi", fazioni AS "Fazioni", sessioni AS "Sessioni"
 FROM "Mondi/Timeline"
-WHERE file.name != "Timeline" AND stato_canonico != "archiviata" AND !startswith(file.name, "Prova -") AND (!this.mondo_attivo OR mondo = this.mondo_attivo)
+WHERE file.name != "Timeline" AND stato_canonico != "archiviata" AND (!this.mondo_attivo OR mondo = this.mondo_attivo)
 SORT data_mondo ASC, file.name ASC
 LIMIT 16
 ```
@@ -367,7 +400,7 @@ tab: Cause
 ```dataview
 TABLE data_mondo, cause, causa, effetti, conseguenze, propaga_a, luoghi, fazioni, missioni
 FROM "Mondi/Timeline"
-WHERE file.name != "Timeline" AND stato_canonico != "archiviata" AND !startswith(file.name, "Prova -") AND (!this.mondo_attivo OR mondo = this.mondo_attivo)
+WHERE file.name != "Timeline" AND stato_canonico != "archiviata" AND (!this.mondo_attivo OR mondo = this.mondo_attivo)
 SORT data_mondo ASC, file.name ASC
 LIMIT 16
 ```
@@ -379,7 +412,7 @@ tab: Propagazione
 ```dataview
 TABLE categoria, tipo, stato, propaga_a, entita_impattate, conseguenze, prossima_mossa
 FROM "Mondi" OR "Inbox"
-WHERE (propaga_a OR entita_impattate OR conseguenze OR prossima_mossa) AND stato != "archiviata" AND stato != "ignorata" AND !startswith(file.name, "Prova -") AND (!this.mondo_attivo OR mondo = this.mondo_attivo OR file.link = this.mondo_attivo)
+WHERE (propaga_a OR entita_impattate OR conseguenze OR prossima_mossa) AND stato != "archiviata" AND stato != "ignorata" AND (!this.mondo_attivo OR mondo = this.mondo_attivo OR file.link = this.mondo_attivo)
 SORT file.mtime DESC
 LIMIT 18
 ```
@@ -391,7 +424,7 @@ tab: Relazioni
 ```dataview
 TABLE categoria, tipo, relazioni, alleati, rivali, fazioni, luoghi, missioni
 FROM "Mondi/Personaggi" OR "Mondi/Fazioni" OR "Mondi/Religioni" OR "Mondi/Luoghi" OR "Mondi/Relazioni"
-WHERE (relazioni OR alleati OR rivali OR fazioni OR luoghi OR missioni) AND stato != "archiviata" AND !startswith(file.name, "Prova -") AND (!this.mondo_attivo OR mondo = this.mondo_attivo OR file.link = this.mondo_attivo)
+WHERE (relazioni OR alleati OR rivali OR fazioni OR luoghi OR missioni) AND stato != "archiviata" AND (!this.mondo_attivo OR mondo = this.mondo_attivo OR file.link = this.mondo_attivo)
 SORT categoria ASC, nome ASC
 LIMIT 24
 ```
@@ -403,7 +436,7 @@ tab: Lore
 ```dataview
 TABLE tipo AS "Tipo", stato AS "Stato", stato_canonico AS "Canone", data_mondo AS "Data", sessioni AS "Sessioni", collegamenti AS "Collegamenti", impatto AS "Impatto"
 FROM "Inbox"
-WHERE categoria = "lore capture" AND stato != "archiviata" AND stato != "ignorata" AND !startswith(file.name, "Prova -") AND (!this.mondo_attivo OR mondo = this.mondo_attivo)
+WHERE categoria = "lore capture" AND stato != "archiviata" AND stato != "ignorata" AND (!this.mondo_attivo OR mondo = this.mondo_attivo)
 SORT file.mtime DESC
 LIMIT 12
 ```
@@ -465,7 +498,7 @@ tab: Stato
 ```dataview
 TABLE categoria AS "Categoria", tipo AS "Tipo", stato_canonico AS "Canone", canonico AS "Confermato", mondo AS "Mondo"
 FROM "Mondi" OR "Inbox"
-WHERE stato_canonico AND !startswith(file.name, "Prova -") AND stato != "archiviata" AND stato != "ignorata" AND (!this.mondo_attivo OR mondo = this.mondo_attivo)
+WHERE stato_canonico AND stato != "archiviata" AND stato != "ignorata" AND (!this.mondo_attivo OR mondo = this.mondo_attivo)
 SORT stato_canonico ASC, file.mtime DESC
 LIMIT 16
 ```
@@ -481,7 +514,7 @@ tab: Mondi
 ```dataview
 TABLE categoria, tipo, stato
 FROM "Mondi"
-WHERE file.name != "Mondo" AND stato != "archiviata" AND !startswith(file.name, "Prova -") AND (!this.mondo_attivo OR mondo = this.mondo_attivo OR file.link = this.mondo_attivo)
+WHERE file.name != "Mondo" AND stato != "archiviata" AND (!this.mondo_attivo OR mondo = this.mondo_attivo OR file.link = this.mondo_attivo)
 SORT categoria ASC, nome ASC
 LIMIT 16
 ```
@@ -493,7 +526,7 @@ tab: Personaggi
 ```dataview
 TABLE tipo, ruolo, stato, luogo
 FROM "Mondi/Personaggi"
-WHERE file.name != "Personaggi" AND stato != "archiviata" AND !startswith(file.name, "Prova -") AND (!this.mondo_attivo OR mondo = this.mondo_attivo)
+WHERE file.name != "Personaggi" AND stato != "archiviata" AND (!this.mondo_attivo OR mondo = this.mondo_attivo)
 SORT stato ASC, nome ASC
 LIMIT 12
 ```
@@ -505,7 +538,7 @@ tab: Luoghi
 ```dataview
 TABLE tipo, bioma, pericolo, luogo_padre
 FROM "Mondi/Luoghi"
-WHERE file.name != "Luoghi" AND stato != "archiviata" AND !startswith(file.name, "Prova -") AND (!this.mondo_attivo OR mondo = this.mondo_attivo)
+WHERE file.name != "Luoghi" AND stato != "archiviata" AND (!this.mondo_attivo OR mondo = this.mondo_attivo)
 SORT nome ASC
 LIMIT 12
 ```
@@ -517,7 +550,7 @@ tab: Fazioni
 ```dataview
 TABLE categoria, tipo, stato, leader, divinita
 FROM "Mondi/Fazioni" OR "Mondi/Religioni"
-WHERE file.name != "Fazioni" AND file.name != "Religioni" AND stato != "archiviata" AND !startswith(file.name, "Prova -") AND (!this.mondo_attivo OR mondo = this.mondo_attivo)
+WHERE file.name != "Fazioni" AND file.name != "Religioni" AND stato != "archiviata" AND (!this.mondo_attivo OR mondo = this.mondo_attivo)
 SORT categoria ASC, nome ASC
 LIMIT 16
 ```
@@ -529,7 +562,7 @@ tab: Creature
 ```dataview
 TABLE tipo, stato, size AS taglia, cr, luoghi
 FROM "Mondi/Creature"
-WHERE file.name != "Creature" AND stato != "archiviata" AND !startswith(file.name, "Prova -") AND (!this.mondo_attivo OR mondo = this.mondo_attivo)
+WHERE file.name != "Creature" AND stato != "archiviata" AND (!this.mondo_attivo OR mondo = this.mondo_attivo)
 SORT cr ASC, nome ASC
 LIMIT 16
 ```
@@ -541,7 +574,7 @@ tab: Oggetti
 ```dataview
 TABLE categoria, tipo, stato, luogo
 FROM "Mondi/Oggetti" OR "Mondi/Dispense"
-WHERE file.name != "Oggetti" AND file.name != "Dispense" AND stato != "archiviata" AND !startswith(file.name, "Prova -") AND (!this.mondo_attivo OR mondo = this.mondo_attivo)
+WHERE file.name != "Oggetti" AND file.name != "Dispense" AND stato != "archiviata" AND (!this.mondo_attivo OR mondo = this.mondo_attivo)
 SORT categoria ASC, nome ASC
 LIMIT 16
 ```
@@ -554,14 +587,13 @@ tab: Principali
 
 ![[Risorse/Mappe/Schema Relazioni GDR.excalidraw]]
 
-![[Risorse/Mappe/Demo - Fronte Custodi.excalidraw]]
 
 tab: Mondo
 
 ```dataview
 TABLE uso, mondo, luogo, stato
 FROM "Risorse/Mappe"
-WHERE file.name != "Mappe" AND !startswith(file.name, "Prova -") AND (uso = "relazioni" OR uso = "fronte" OR uso = "regione" OR uso = "indizi")
+WHERE file.name != "Mappe" AND (uso = "relazioni" OR uso = "fronte" OR uso = "regione" OR uso = "indizi")
 SORT uso ASC, mondo ASC, file.name ASC
 LIMIT 12
 ```
@@ -571,7 +603,7 @@ tab: Dungeon
 ```dataview
 TABLE luogo, incontri, stato
 FROM "Risorse/Mappe"
-WHERE file.name != "Mappe" AND !startswith(file.name, "Prova -") AND uso = "dungeon"
+WHERE file.name != "Mappe" AND uso = "dungeon"
 SORT luogo ASC, file.name ASC
 LIMIT 12
 ```
@@ -581,7 +613,7 @@ tab: Archivio
 ```dataview
 TABLE uso, mondo, luogo, stato, file.mtime AS aggiornato
 FROM "Risorse/Mappe"
-WHERE file.name != "Mappe" AND !startswith(file.name, "Prova -")
+WHERE file.name != "Mappe"
 SORT uso ASC, file.name ASC
 LIMIT 20
 ```

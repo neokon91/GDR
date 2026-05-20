@@ -1,7 +1,7 @@
 <% await tp.user.cosmologia(tp) %>
 # `=this.nome`
 
->[!infobox|wiki]- Cosmologia
+>[!infoboxwiki]- Cosmologia
 > Mondo:
 > `INPUT[mondo][:mondo]`
 >

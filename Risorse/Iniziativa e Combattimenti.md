@@ -23,7 +23,7 @@ Questa pagina tiene separati gli incontri di combattimento dagli incontri social
 ```dataview
 TABLE luogo, pericolo, creature, encounter_creatures AS iniziativa, mappe, condizioni
 FROM "Mondi/Incontri"
-WHERE tipo = "combattimento" AND contains(list("pronto", "in gioco"), stato) AND !startswith(file.name, "Prova -")
+WHERE tipo = "combattimento" AND contains(list("pronto", "in gioco"), stato)
 SORT pericolo DESC, file.name ASC
 ```
 
@@ -32,7 +32,7 @@ SORT pericolo DESC, file.name ASC
 ```dataview
 TABLE stato, luogo, creature, encounter_creatures AS iniziativa
 FROM "Mondi/Incontri"
-WHERE tipo = "combattimento" AND !encounter_creatures AND !startswith(file.name, "Prova -")
+WHERE tipo = "combattimento" AND !encounter_creatures
 SORT file.name ASC
 ```
 
@@ -42,7 +42,3 @@ SORT file.name ASC
 - Gli incontri `esplorazione` o `sociale` possono avere creature e pericoli, ma non devono forzare Initiative Tracker.
 - I nomi in `encounter_creatures` devono corrispondere al campo `name` dello statblock, per esempio `Lupo`.
 - Usa quantita esplicite quando serve: `2: Lupo`, `1d4: Scheletro`, `3: Goblin`.
-
-## Demo
-
-- [[Demo - Agguato dei Lupi]] mostra il flusso completo: creatura SRD, mappa Excalidraw, audio e blocco `encounter`.

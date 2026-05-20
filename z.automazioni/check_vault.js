@@ -40,10 +40,83 @@ const REQUIRED_FILES = [
     "Hub/Worldbuilder Dashboard.md",
     "Risorse/FAQ.md",
     "Risorse/Release Pulita.md",
+    "Risorse/Plugin Layer Interno.md",
     "Risorse/Roadmap/Roadmap.md",
     "Risorse/Indice Connettore GPT.md",
     "Risorse/Smistamento Bozze Generate.md",
-    "Campagne/Demo - La Reliquia Spezzata.md"
+    "Mondi/Societa/Societa.md"
+];
+const REQUIRED_LAYER_FILES = [
+    "z.automazioni/helpers.js",
+    "z.automazioni/session_context.js",
+    "z.automazioni/meta_actions.js",
+    "z.automazioni/wizard_layer.js",
+    "z.automazioni/world_taxonomy.js",
+    "z.automazioni/world_entity.js",
+    "z.automazioni/nuovo_mondo_homebrew.js",
+    "z.engine/gdr_views.js",
+    "z.modelli/azioni/Marca Canonico.md",
+    "z.modelli/azioni/Marca Rumor.md",
+    "z.modelli/azioni/Archivia.md",
+    "z.modelli/azioni/Applica Conseguenza.md",
+    "z.modelli/azioni/Avanza Clock.md",
+    "z.modelli/azioni/Collega Sessione Attiva.md",
+    "z.modelli/azioni/Propaga A Entita.md",
+    "z.modelli/azioni/Prepara Recap Pubblico.md",
+    "z.modelli/wizard/Nuova Entita Viva.md",
+    "z.modelli/wizard/Nuovo Mondo Homebrew.md",
+    "z.modelli/wizard/Appunto Live.md",
+    "z.modelli/wizard/Conseguenza.md",
+    "z.modelli/wizard/Fine Sessione.md",
+    "z.modelli/wizard/Nuova Sessione Da Output Precedente.md"
+];
+const REQUIRED_META_BIND_INPUT_TEMPLATES = [
+    "mondo",
+    "stato",
+    "pressione",
+    "prossima_mossa",
+    "connessioni",
+    "player_safe",
+    "entita_impattate",
+    "propaga_a",
+    "sessioni",
+    "luoghi",
+    "fazioni",
+    "missioni",
+    "tracciati"
+];
+const REQUIRED_META_BIND_BUTTONS = [
+    "marca-canonico",
+    "marca-rumor",
+    "archivia-nota",
+    "applica-conseguenza",
+    "avanza-clock",
+    "collega-sessione-attiva",
+    "propaga-a-entita",
+    "prepara-recap-pubblico",
+    "nuovo-mondo-homebrew",
+    "wizard-nuova-entita-viva",
+    "wizard-appunto-live",
+    "wizard-conseguenza",
+    "wizard-fine-sessione",
+    "wizard-sessione-da-output"
+];
+const REQUIRED_METADATA_MENU_PRESETS = [
+    "mondo",
+    "stato",
+    "stato_canonico",
+    "canonico",
+    "pressione",
+    "prossima_mossa",
+    "connessioni",
+    "player_safe",
+    "entita_impattate",
+    "propaga_a",
+    "sessioni",
+    "luoghi",
+    "fazioni",
+    "missioni",
+    "tracciati"
 ];
 const ALLOWED_CATEGORIES = new Set([
     "avventura",
@@ -68,6 +141,7 @@ const ALLOWED_CATEGORIES = new Set([
     "relazione",
     "risorsa",
     "sessione",
+    "societa",
     "tracciato",
     "srd"
 ]);
@@ -99,12 +173,13 @@ const ALLOWED_STATES = new Set([
     "smistata"
 ]);
 const ALLOWED_TYPES_BY_CATEGORY = {
-    campagna: new Set(["demo", "campagna"]),
+    campagna: new Set(["campagna"]),
     conflitto: new Set(["conflitto", "guerra", "crisi", "rivalità"]),
-    cosmologia: new Set(["piano", "reame divino", "aldilà", "principio cosmico", "soglia"]),
-    cultura: new Set(["cultura", "popolo", "etnia", "tradizione"]),
+    cosmologia: new Set(["piano", "reame divino", "aldilà", "principio cosmico", "soglia", "legge arcana", "scuola o tradizione magica", "risorsa magica", "fenomeno magico", "patto", "contaminazione", "soglia o portale", "anomalia", "piano reame o aldila", "mistero arcano"]),
+    creatura: new Set(["habitat", "migrazione", "catena alimentare", "variante regionale", "creatura sacra", "mostro sociale", "specie senziente", "predatore territoriale", "piaga sciame o invasione", "ecosistema da definire"]),
+    cultura: new Set(["cultura", "popolo", "etnia", "tradizione", "festa o calendario rituale", "tabu", "rito di passaggio", "costume quotidiano", "cucina e ospitalita", "matrimonio famiglia e parentela", "funerali e memoria", "duello onore e vendetta", "arte musica teatro moda", "cultura da definire"]),
     dispensa: new Set(["lettera", "mappa", "documento", "indizio", "dispensa"]),
-    "evento storico": new Set(["evento", "conseguenza", "rumor", "leggenda", "era", "epoca", "guerra", "catastrofe", "fondazione"]),
+    "evento storico": new Set(["evento", "conseguenza", "rumor", "leggenda", "era", "epoca", "guerra", "catastrofe", "fondazione", "dinastia", "migrazione", "rivoluzione", "scoperta", "trattato", "eta mitica", "cronologia concorrente", "evento da definire"]),
     fazione: new Set(["fazione generica", "confraternita", "culto", "gilda", "ordine rituale"]),
     incontro: new Set(["combattimento", "esplorazione", "pericolo ambientale", "trappola"]),
     lingua: new Set(["lingua", "dialetto", "scrittura", "lingua antica"]),
@@ -112,9 +187,11 @@ const ALLOWED_TYPES_BY_CATEGORY = {
     missione: new Set(["incarico", "ricerca", "mistero", "salvataggio", "caccia", "viaggio", "fronte", "trama personale", "missione di fazione", "arco narrativo", "missione"]),
     oggetto: new Set(["oggetto", "oggetto magico", "chiave"]),
     personaggio: new Set(["pg", "png"]),
-    religione: new Set(["divinità", "soglia"]),
+    religione: new Set(["divinità", "soglia", "pantheon", "divinita", "santo profeta o eroe mitico", "eresia", "ordine religioso", "reliquia", "luogo sacro", "profezia", "pratica quotidiana", "mito da definire"]),
     relazione: new Set(["relazione", "alleanza", "rivalità", "guerra fredda", "vassallaggio", "trattato", "debito", "faida", "patto religioso", "tradimento"]),
+    risorsa: new Set(["risorsa", "merce", "materia prima", "reliquia", "rotta", "mercato", "merce strategica", "miniera cava foresta o fonte", "porto mercato fiera o caravanserraglio", "monopolio", "rotta illegale", "debito o banca", "carestia", "tecnologia produttiva", "oggetto di prestigio", "leva economica da definire"]),
     sessione: new Set(["sessione di campagna", "sessione zero", "interludio", "downtime", "finale", "one-shot"]),
+    societa: new Set(["ceto sociale", "clan casata o famiglia", "istituzione civile", "legge o codice", "crimine organizzato", "accademia o scuola", "burocrazia", "gilda non economica", "movimento popolare", "societa da definire"]),
     tracciato: new Set(["clock", "progress track", "fronte", "rituale", "minaccia", "viaggio", "progetto"])
 };
 const REQUIRED_FIELDS_BY_CATEGORY = {
@@ -139,6 +216,7 @@ const REQUIRED_FIELDS_BY_CATEGORY = {
     relazione: ["stato", "mondo", "soggetti"],
     risorsa: ["stato"],
     sessione: ["stato", "attiva", "mondo"],
+    societa: ["stato", "mondo"],
     tracciato: ["stato", "mondo", "progress_value", "progress_max", "prossima_mossa"]
 };
 
@@ -239,6 +317,65 @@ function hasAny(frontmatter, fields) {
     return fields.some(field => hasValue(frontmatter[field]));
 }
 
+function flatText(value) {
+    if (Array.isArray(value)) return value.map(flatText).join(" ");
+    if (value && typeof value === "object") return Object.values(value).map(flatText).join(" ");
+    return String(value ?? "");
+}
+
+function normalizedText(value) {
+    return flatText(value)
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/\s+/g, " ")
+        .trim();
+}
+
+function hasPrivatePublicText(value) {
+    const text = normalizedText(value);
+    return /\b(dm|segreto|segreti|nascost[oaie]?|verita|prossima mossa|mosse segrete|retroscena|non rivelare)\b/.test(text);
+}
+
+function hasOperationalLinks(frontmatter) {
+    return hasAny(frontmatter, [
+        "connessioni",
+        "luoghi",
+        "luogo",
+        "luogo_padre",
+        "fazioni",
+        "personaggi",
+        "missioni",
+        "tracciati",
+        "relazioni",
+        "mondo"
+    ]);
+}
+
+function hasCodexIdentity(frontmatter) {
+    return hasAny(frontmatter, ["gancio", "impressione", "identita", "descrizione", "vuole", "agenda", "tipo"]);
+}
+
+function hasCodexTableUse(frontmatter) {
+    return hasAny(frontmatter, ["uso_al_tavolo", "promessa_al_tavolo", "prossima_mossa", "scene", "innesco", "posta"]);
+}
+
+function hasCodexDmLayer(frontmatter) {
+    if (frontmatter.pubblico === true) return true;
+    return hasAny(frontmatter, ["segreto", "segreti", "verita_nascosta", "prossima_mossa", "propaga_a", "entita_impattate"]);
+}
+
+function sessionWorldAnchorCount(frontmatter) {
+    return [
+        hasAny(frontmatter, ["mondo"]),
+        hasAny(frontmatter, ["luoghi", "luogo"]),
+        hasAny(frontmatter, ["fazioni", "personaggi"]),
+        hasAny(frontmatter, ["missioni"]),
+        hasAny(frontmatter, ["tracciati", "pressioni"]),
+        hasAny(frontmatter, ["mappe", "incontri", "materiale_pronto"])
+    ].filter(Boolean).length;
+}
+
 function daysSince(value) {
     const timestamp = Date.parse(value);
     if (!Number.isFinite(timestamp)) return null;
@@ -284,6 +421,12 @@ function isIndexLikeNote(fileRel) {
 
 function isOperationalNote(fileRel) {
     return !isSrdNote(fileRel) && (/^(Campagne|Inbox|Mondi|Risorse|z\.modelli)\//.test(fileRel) || !fileRel.includes("/"));
+}
+
+function isLiveEntityNote(fileRel) {
+    return /^(Mondi\/(Luoghi|Personaggi|Fazioni|Missioni|Timeline|Oggetti|Tracciati|Relazioni|Rotte|Risorse|Mercati|Culture|Religioni|Societa)|Risorse\/Mappe)\//.test(fileRel)
+        && !isIndexLikeNote(fileRel)
+        && !fileRel.startsWith("z.modelli/");
 }
 
 function isGeneratedFantasyDraft(fileRel, frontmatter) {
@@ -356,6 +499,21 @@ for (const file of REQUIRED_FILES) {
     }
 }
 
+for (const file of REQUIRED_LAYER_FILES) {
+    if (!fs.existsSync(path.join(ROOT, file))) {
+        errors.push(`Plugin layer interno: file obbligatorio mancante ${file}`);
+    }
+}
+
+for (const file of walk(ROOT, file => /^(z\.automazioni|z\.engine)\//.test(rel(file)) && file.endsWith(".js"))) {
+    try {
+        const source = fs.readFileSync(file, "utf8").replace(/^#!.*\n/, "");
+        new Function(source);
+    } catch (error) {
+        errors.push(`${rel(file)}: JavaScript non parsabile (${error.message})`);
+    }
+}
+
 for (const snippet of REQUIRED_SNIPPETS) {
     const snippetPath = path.join(ROOT, snippet);
     if (!fs.existsSync(snippetPath)) {
@@ -413,7 +571,15 @@ const metaBindConfigPath = path.join(ROOT, ".obsidian/plugins/obsidian-meta-bind
 const metaBindConfig = readJson(metaBindConfigPath);
 if (metaBindConfig) {
     const buttonTemplates = Array.isArray(metaBindConfig.buttonTemplates) ? metaBindConfig.buttonTemplates : [];
+    const inputTemplates = Array.isArray(metaBindConfig.inputFieldTemplates) ? metaBindConfig.inputFieldTemplates : [];
     const buttonIds = new Set();
+    const inputTemplateNames = new Set(inputTemplates.map(template => template?.name).filter(Boolean));
+
+    for (const name of REQUIRED_META_BIND_INPUT_TEMPLATES) {
+        if (!inputTemplateNames.has(name)) {
+            errors.push(`Meta Bind: input template operativo mancante (${name})`);
+        }
+    }
 
     for (const button of buttonTemplates) {
         if (!button?.id) {
@@ -427,7 +593,7 @@ if (metaBindConfig) {
         buttonIds.add(button.id);
 
         for (const action of button.actions ?? []) {
-            if (action.type === "templaterCreateNote" && action.templateFile) {
+            if ((action.type === "templaterCreateNote" || action.type === "runTemplaterFile") && action.templateFile) {
                 const template = targetPath(action.templateFile);
                 if (!fs.existsSync(path.join(ROOT, template))) {
                     errors.push(`Meta Bind: button template ${button.id} usa template mancante ${template}`);
@@ -437,6 +603,12 @@ if (metaBindConfig) {
             if (action.type === "updateMetadata") {
                 warnings.push(`Meta Bind: button template ${button.id} modifica frontmatter; usare INPUT inline/blocco`);
             }
+        }
+    }
+
+    for (const id of REQUIRED_META_BIND_BUTTONS) {
+        if (!buttonIds.has(id)) {
+            errors.push(`Meta Bind: button operativo mancante (${id})`);
         }
     }
 
@@ -450,6 +622,17 @@ if (metaBindConfig) {
             if (!buttonIds.has(match[1])) {
                 errors.push(`${rel(file)}: BUTTON senza template Meta Bind (${match[1]})`);
             }
+        }
+    }
+}
+
+const metadataMenuConfig = readJson(path.join(ROOT, ".obsidian/plugins/metadata-menu/data.json"));
+if (metadataMenuConfig) {
+    const presetNames = new Set((metadataMenuConfig.presetFields ?? []).map(field => field?.name).filter(Boolean));
+
+    for (const name of REQUIRED_METADATA_MENU_PRESETS) {
+        if (!presetNames.has(name)) {
+            errors.push(`Metadata Menu: preset field operativo mancante (${name})`);
         }
     }
 }
@@ -500,7 +683,6 @@ if (workspace) {
 }
 
 const realEntries = [...markdownMeta.entries()]
-    .filter(([fileRel]) => !path.basename(fileRel, ".md").startsWith("Prova -"))
     .filter(([fileRel]) => !isFolderIndex(fileRel));
 
 const generatedDrafts = realEntries
@@ -520,6 +702,15 @@ if (activeSessions.length > 1) {
 const gptConnectorIndex = markdownMeta.get("Risorse/Indice Connettore GPT.md");
 if (gptConnectorIndex?.is_code_search_indexed !== true) {
     errors.push("Risorse/Indice Connettore GPT.md: manca is_code_search_indexed: true");
+}
+
+const startHereText = fs.existsSync(path.join(ROOT, "Inizia Qui.md"))
+    ? fs.readFileSync(path.join(ROOT, "Inizia Qui.md"), "utf8")
+    : "";
+const worldbuildingIndex = startHereText.indexOf("Crea Il Mondo");
+const sessionIndex = startHereText.indexOf("Trasforma In Gioco");
+if (worldbuildingIndex === -1 || sessionIndex === -1 || worldbuildingIndex > sessionIndex) {
+    errors.push("Inizia Qui.md: il flusso deve esporre Crea Il Mondo prima di sessione/gioco");
 }
 
 const datedForCalendarium = realEntries.filter(([, fm]) => hasValue(fm["fc-date"]) && fm["fc-ignore"] !== true);
@@ -607,7 +798,7 @@ for (const [fileRel, fm] of realEntries) {
         warnings.push(`${fileRel}: missione senza prossima_mossa`);
     }
 
-    if (fileRel.startsWith("Mondi/Missioni/") && !path.basename(fileRel).startsWith("Prova -") && fm.stato !== "archiviata" && Number(fm.pressione ?? 0) >= 7 && !hasValue(fm.tracciati)) {
+    if (fileRel.startsWith("Mondi/Missioni/") && fm.stato !== "archiviata" && Number(fm.pressione ?? 0) >= 7 && !hasValue(fm.tracciati)) {
         warnings.push(`${fileRel}: missione ad alta pressione senza tracciato collegato`);
     }
 
@@ -670,7 +861,7 @@ for (const [fileRel, fm] of realEntries) {
         }
     }
 
-    if ((fileRel.startsWith("Mondi/Fazioni/") || fileRel.startsWith("Mondi/Religioni/")) && !path.basename(fileRel).startsWith("Prova -") && Number(fm.pressione ?? 0) >= 7 && !hasValue(fm.tracciati)) {
+    if ((fileRel.startsWith("Mondi/Fazioni/") || fileRel.startsWith("Mondi/Religioni/")) && Number(fm.pressione ?? 0) >= 7 && !hasValue(fm.tracciati)) {
         warnings.push(`${fileRel}: fazione ad alta pressione senza tracciato collegato`);
     }
 
@@ -713,6 +904,62 @@ for (const [fileRel, fm] of realEntries) {
         warnings.push(`${fileRel}: luogo pronto senza pericolo, stabilita o pressione`);
     }
 
+    const liveCategories = new Set(["luogo", "personaggio", "fazione", "missione", "evento storico", "oggetto", "tracciato", "relazione", "risorsa", "cultura", "religione", "societa"]);
+    if (isLiveEntityNote(fileRel) && liveCategories.has(String(fm.categoria ?? "")) && fm.stato !== "archiviata") {
+        if (!hasAny(fm, ["gancio", "uso_al_tavolo", "player_safe", "prossima_mossa", "connessioni"])) {
+            warnings.push(`${fileRel}: entita viva senza gancio, uso al tavolo, player_safe, prossima_mossa o connessioni`);
+        }
+        if (text.includes("## Scheda Viva") && !hasAny(fm, ["gancio", "uso_al_tavolo", "player_safe"])) {
+            warnings.push(`${fileRel}: Scheda Viva presente ma campi vivi vuoti`);
+        }
+    }
+
+    if (fm.pubblico === true && !hasValue(fm.player_safe) && isLiveEntityNote(fileRel)) {
+        warnings.push(`${fileRel}: pubblico true ma player_safe vuoto`);
+    }
+
+    if (fm.pubblico === true && isLiveEntityNote(fileRel) && hasAny(fm, ["segreto", "segreti", "verita_nascosta", "prossima_mossa", "mosse_segrete"])) {
+        warnings.push(`${fileRel}: pubblico true con campi DM evidenti`);
+    }
+
+    const codexCategories = new Set(["luogo", "personaggio", "fazione", "missione", "tracciato", "relazione", "evento storico", "oggetto", "cultura", "religione", "societa"]);
+    if (isLiveEntityNote(fileRel) && codexCategories.has(String(fm.categoria ?? "")) && fm.stato !== "archiviata") {
+        const missingCodex = [];
+        if (!hasCodexIdentity(fm)) missingCodex.push("identita");
+        if (!hasCodexTableUse(fm)) missingCodex.push("al tavolo");
+        if (!hasValue(fm.player_safe)) missingCodex.push("player_safe");
+        if (!hasCodexDmLayer(fm)) missingCodex.push("DM");
+        if (!hasOperationalLinks(fm)) missingCodex.push("connessioni vive");
+
+        if (missingCodex.length) {
+            warnings.push(`${fileRel}: articolo Codex incompleto (${missingCodex.join(", ")})`);
+        }
+    }
+
+    if (fileRel.startsWith("Mondi/Sessioni/") && fm.categoria === "sessione" && ["preparazione", "pronto", "in corso"].includes(String(fm.stato ?? ""))) {
+        const playableFields = ["gancio", "scelta", "pressioni", "tracciati", "materiale_pronto", "conseguenze", "recap_pubblico"];
+        if (!hasAny(fm, playableFields)) {
+            warnings.push(`${fileRel}: sessione non verificabile come giocabile (gancio, scelta, pressione, materiale o output mancanti)`);
+        }
+
+        const anchorCount = sessionWorldAnchorCount(fm);
+        if (anchorCount < 3) {
+            warnings.push(`${fileRel}: sessione senza almeno 3 ancore mondo (${anchorCount}/3 tra mondo, luoghi, poteri/PNG, missioni, clock, mappe/scena)`);
+        }
+    }
+
+    if (fileRel.startsWith("Mondi/Sessioni/") && fm.categoria === "sessione" && hasValue(fm.recap_pubblico)) {
+        if (hasPrivatePublicText(fm.recap_pubblico)) {
+            warnings.push(`${fileRel}: recap_pubblico contiene termini da DM o segreti`);
+        }
+
+        const publicRecap = normalizedText(fm.recap_pubblico);
+        const dmRecap = normalizedText(fm.recap_dm);
+        if (publicRecap && dmRecap && publicRecap === dmRecap) {
+            warnings.push(`${fileRel}: recap_pubblico identico a recap_dm`);
+        }
+    }
+
     if (isGeneratedFantasyDraft(fileRel, fm)) {
         if (fm.canonico === true) {
             warnings.push(`${fileRel}: bozza generata marcata canonica prima dello smistamento`);
@@ -731,6 +978,18 @@ for (const [fileRel, fm] of realEntries) {
         const playableMapUses = new Set(["zoom", "esagoni", "dungeon", "scena"]);
         const structuredMapUses = new Set(["fronte", "indizi", "regione"]);
         const mapUse = String(fm.uso ?? "");
+
+        if (!hasAny(fm, ["uso_al_tavolo", "gancio"])) {
+            warnings.push(`${fileRel}: mappa senza uso al tavolo o gancio operativo`);
+        }
+
+        if (!hasAny(fm, ["player_safe", "cosa_mostrare", "luoghi", "luogo"])) {
+            warnings.push(`${fileRel}: mappa senza cosa mostrare o luoghi collegati`);
+        }
+
+        if (fm.pubblico !== true && !hasAny(fm, ["cosa_nascondere", "prossima_mossa", "segreti", "versione_giocatori"])) {
+            warnings.push(`${fileRel}: mappa DM senza cosa nascondere, prossima_mossa o versione giocatori`);
+        }
 
         if (playableMapUses.has(mapUse) && fm.stato === "pronto") {
             if (!hasValue(fm.mondo)) {

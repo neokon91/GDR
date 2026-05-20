@@ -16,7 +16,7 @@ mondo_attivo: ""
 Mondo:
 `INPUT[mondo][:mondo_attivo]`
 
-`BUTTON[nuovo-mondo-z-modelli-mondo-md]`
+`BUTTON[nuovo-mondo-homebrew]`
 
 `BUTTON[atlante-del-mondo-atlante-del-mondo]`
 
@@ -55,67 +55,24 @@ if (!worlds.length) {
 
 ## Articoli Del Mondo
 
-````tabs
-tab: Luoghi
-
-```dataview
-TABLE tipo, luogo_padre, pericolo, fazioni, stato
-FROM "Mondi/Luoghi"
-WHERE stato != "archiviata" AND !startswith(file.name, "Prova -") AND (!this.mondo_attivo OR mondo = this.mondo_attivo)
-SORT tipo ASC, nome ASC
-LIMIT 24
+```dataviewjs
+const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));
+gdr.renderCodexEditorial(dv, dv.current().mondo_attivo);
 ```
 
-tab: Fazioni
+## Pronti Da Mostrare
 
-```dataview
-TABLE tipo, leader, luoghi, pressione, prossima_mossa, stato
-FROM "Mondi/Fazioni" OR "Mondi/Religioni"
-WHERE stato != "archiviata" AND !startswith(file.name, "Prova -") AND (!this.mondo_attivo OR mondo = this.mondo_attivo)
-SORT pressione DESC, nome ASC
-LIMIT 24
+```dataviewjs
+const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));
+gdr.renderCodexReadyShowcase(dv, dv.current().mondo_attivo);
 ```
 
-tab: Personaggi
+## Pronti Da Giocare
 
-```dataview
-TABLE tipo, ruolo, luogo, fazioni, atteggiamento, stato
-FROM "Mondi/Personaggi"
-WHERE stato != "archiviata" AND !startswith(file.name, "Prova -") AND (!this.mondo_attivo OR mondo = this.mondo_attivo)
-SORT tipo ASC, nome ASC
-LIMIT 24
+```dataviewjs
+const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));
+gdr.renderCodexReadyToPlay(dv, dv.current().mondo_attivo);
 ```
-
-tab: Timeline
-
-```dataview
-TABLE tipo, data_mondo, causa, conseguenze, luoghi, fazioni
-FROM "Mondi/Storia" OR "Mondi/Timeline"
-WHERE stato != "archiviata" AND !startswith(file.name, "Prova -") AND (!this.mondo_attivo OR mondo = this.mondo_attivo)
-SORT data_mondo ASC, nome ASC
-LIMIT 24
-```
-
-tab: Player Safe
-
-```dataview
-TABLE categoria, tipo, stato, mondo, luogo
-FROM "Mondi" OR "Risorse/Mappe"
-WHERE pubblico = true AND stato != "archiviata" AND !startswith(file.name, "Prova -") AND (!this.mondo_attivo OR mondo = this.mondo_attivo OR file.link = this.mondo_attivo)
-SORT categoria ASC, nome ASC
-LIMIT 30
-```
-
-tab: Indice Codex
-
-```dataview
-TABLE categoria, tipo, stato, pubblico, mondo, luoghi, fazioni
-FROM "Mondi" OR "Risorse/Mappe"
-WHERE file.name != "Mondi" AND stato != "archiviata" AND !startswith(file.name, "Prova -") AND (!this.mondo_attivo OR mondo = this.mondo_attivo OR file.link = this.mondo_attivo)
-SORT categoria ASC, pubblico DESC, stato ASC, file.name ASC
-LIMIT 80
-```
-````
 
 ## Buchi Del Codex
 

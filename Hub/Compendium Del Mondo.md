@@ -45,7 +45,7 @@ tab: Archivio
 ```dataview
 TABLE tipo, culture, regioni, risorse, fazioni, missioni, uso_narrativo
 FROM "Mondi/Compendium"
-WHERE file.name != "Compendium" AND !startswith(file.name, "Prova -") AND stato != "archiviata" AND (!this.mondo_attivo OR mondo = this.mondo_attivo)
+WHERE file.name != "Compendium" AND stato != "archiviata" AND (!this.mondo_attivo OR mondo = this.mondo_attivo)
 SORT tipo ASC, file.name ASC
 ```
 
@@ -54,7 +54,7 @@ tab: Senza Uso
 ```dataview
 TABLE tipo, culture, regioni, risorse, fazioni, missioni
 FROM "Mondi/Compendium"
-WHERE file.name != "Compendium" AND !startswith(file.name, "Prova -") AND stato != "archiviata" AND (!uso_narrativo AND (!missioni OR length(missioni) = 0)) AND (!this.mondo_attivo OR mondo = this.mondo_attivo)
+WHERE file.name != "Compendium" AND stato != "archiviata" AND (!uso_narrativo AND (!missioni OR length(missioni) = 0)) AND (!this.mondo_attivo OR mondo = this.mondo_attivo)
 SORT tipo ASC, file.name ASC
 ```
 
@@ -63,7 +63,7 @@ tab: Collegamenti Storici
 ```dataview
 TABLE tipo, eventi_storici, conseguenze, segreti
 FROM "Mondi/Compendium"
-WHERE file.name != "Compendium" AND !startswith(file.name, "Prova -") AND stato != "archiviata" AND (eventi_storici OR eventi OR conseguenze OR segreti) AND (!this.mondo_attivo OR mondo = this.mondo_attivo)
+WHERE file.name != "Compendium" AND stato != "archiviata" AND (eventi_storici OR eventi OR conseguenze OR segreti) AND (!this.mondo_attivo OR mondo = this.mondo_attivo)
 SORT file.mtime DESC
 ```
 ````

@@ -13,6 +13,6 @@ stato: pronto
 ```dataview
 TABLE tipo, mondo, culture, regioni, risorse, fazioni, uso_narrativo, missioni
 FROM "Mondi/Compendium"
-WHERE file.name != "Compendium" AND !startswith(file.name, "Prova -") AND stato != "archiviata"
+WHERE file.name != "Compendium" AND stato != "archiviata"
 SORT tipo ASC, file.name ASC
 ```

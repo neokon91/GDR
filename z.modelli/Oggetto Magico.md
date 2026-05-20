@@ -1,7 +1,7 @@
 <% await tp.user.oggetto_magico(tp) %>
 # `=this.nome`
 
->[!infobox|wiki]- Oggetto Magico
+>[!infoboxwiki]- Oggetto Magico
 > Rarità:
 > `INPUT[inlineSelect(option(comune, Comune), option(non comune, Non comune), option(raro, Raro), option(molto raro, Molto raro), option(leggendario, Leggendario), option(artefatto, Artefatto)):rarita]`
 >

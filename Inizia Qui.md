@@ -8,33 +8,37 @@ stato: pronto
 ---
 # Inizia Qui
 
-Scegli una cosa sola. Il vault deve farti produrre una sessione, giocarla o aggiornare il mondo dopo il tavolo.
+Scegli una cosa sola. Il vault serve prima a creare un mondo homebrew giocabile, poi a trasformarlo in campagne, avventure, sessioni live e conseguenze persistenti.
 
 ## Flusso Principale
 
-> [!scena] 1. Prepara
-> Output: una sessione con obiettivo, prima scena, scelta, pressione e materiale pronto.
+> [!luogo] 1. Crea Il Mondo
+> Output: un Codex homebrew con identità, luoghi, poteri, culture, misteri, mappe e connessioni vive.
+>
+> `BUTTON[nuovo-mondo-homebrew]`
+>
+> `BUTTON[worldbuilder-worldbuilder-dashboard-2]`
+>
+> `BUTTON[bibbia-del-mondo-bibbia-del-mondo-2]`
+
+> [!scena] 2. Trasforma In Gioco
+> Output: campagna, avventura o sessione radicata in almeno tre ancore del mondo.
+>
+> `BUTTON[campagna-da-ambientazione-campagna-da-ambientazione]`
 >
 > `BUTTON[nuova-sessione-z-modelli-dm-sessione-md]`
 >
 > `BUTTON[preparazione-sessione-risorse-preparazione-sessione]`
 
-> [!incontro] 2. Gioca
+> [!incontro] 3. Gioca Live
 > Output: appunti live, clock aggiornati, handout consegnati e decisioni prese al tavolo.
 >
 > `BUTTON[gioca-hub-durante-il-gioco-durante-il-gioco]`
 
-> [!timer] 3. Aggiorna Il Mondo
-> Output: conseguenze canonizzate, missioni aggiornate, prossime mosse e prossima sessione.
+> [!timer] 4. Aggiorna Il Mondo
+> Output: conseguenze canonizzate, missioni aggiornate, prossime mosse, Codex aggiornato e prossima sessione.
 >
 > `BUTTON[fuori-scena-hub-cosa-succede-fuori-scena-cosa-succede-fuori-scena]`
-
-> [!luogo] Codex Mondo
-> Output: mondo consultabile con gancio, tono, conflitto, luoghi, fazioni e misteri.
->
-> `BUTTON[nuovo-mondo-z-modelli-mondo-md]`
->
-> `BUTTON[bibbia-del-mondo-bibbia-del-mondo-2]`
 
 ## Prossima Azione
 
@@ -50,7 +54,6 @@ gdr.renderActions(dv);
 const checks = [
   ["Plugin base", app.plugins.enabledPlugins.has("dataview") && app.plugins.enabledPlugins.has("obsidian-meta-bind-plugin") && app.plugins.enabledPlugins.has("templater-obsidian"), "Se non e pronto, apri Setup Guidato."],
   ["Aspetto", app.vault.getAbstractFileByPath(".obsidian/snippets/gdr-vault.css"), "Attiva lo snippet `gdr-vault` nelle impostazioni Aspetto."],
-  ["Demo", !!app.vault.getAbstractFileByPath("Campagne/Demo - La Reliquia Spezzata.md"), "Apri la demo solo se vuoi vedere un esempio gia compilato."]
 ];
 
 dv.table(["Controllo", "Stato", "Azione"], checks.map(([label, ok, text]) => [label, ok ? "Pronto" : "Da fare", text]));
@@ -73,6 +76,4 @@ dv.table(["Controllo", "Stato", "Azione"], checks.map(([label, ok, text]) => [la
 
 ## Se Parti Da Zero
 
-Apri [[Risorse/Setup Guidato]] solo per controllare che gli strumenti funzionino. Poi torna qui e usa **Prepara**.
-
-La demo [[Demo - La Reliquia Spezzata]] serve a capire il risultato finale, non a navigare il vault ogni volta.
+Apri [[Risorse/Setup Guidato]] solo per controllare che gli strumenti funzionino. Poi torna qui e usa **Crea Il Mondo**.

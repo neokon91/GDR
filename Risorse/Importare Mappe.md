@@ -48,10 +48,9 @@ Per provare senza creare note:
 npm run import:azgaar -- "Import/Azgaar/mappa.geojson" --world "Nome Mondo" --dry-run
 ```
 
-Esempio incluso:
+Esempio di dry-run:
 
 ```bash
-npm run import:azgaar -- "Import/Azgaar/Prova - Azgaar.geojson" --world "Demo - Terre della Soglia" --dry-run
 ```
 
 ## Dopo L'Import

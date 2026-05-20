@@ -1,7 +1,7 @@
 <% await tp.user.arco_da_conflitto(tp) %>
 # `=this.nome`
 
->[!infobox|wiki]- Arco narrativo
+>[!infoboxwiki]- Arco narrativo
 > Stato:
 > `INPUT[inlineSelect(option(proposta, Proposta), option(accettata, Accettata), option(in corso, In Corso), option(conclusa, Conclusa), option(archiviata, Archiviata)):stato]`
 >

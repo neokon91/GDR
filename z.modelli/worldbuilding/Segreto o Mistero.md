@@ -26,7 +26,7 @@ rivelato: false
 ---
 # `=this.nome`
 
->[!infobox|wiki]- Segreto O Mistero
+>[!infoboxwiki]- Segreto O Mistero
 > Tipo:
 > `INPUT[inlineSelect(option(segreto, Segreto), option(mistero, Mistero), option(indizio, Indizio), option(verità nascosta, Verità nascosta), option(falso indizio, Falso indizio)):tipo]`
 >

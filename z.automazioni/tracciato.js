@@ -22,6 +22,9 @@ async function tracciato(tp) {
     const progressMax = await helpers.promptOptional(tp, "Segmenti totali", "6") || "6";
     const progressValue = await helpers.promptOptional(tp, "Segmenti gia segnati", "0") || "0";
     const posta = await helpers.promptOptional(tp, "Cosa succede quando si riempie");
+    const gancio = await helpers.promptOptional(tp, "Gancio giocabile");
+    const usoAlTavolo = await helpers.promptOptional(tp, "Uso al tavolo");
+    const playerSafe = await helpers.promptOptional(tp, "Versione player-safe");
     const prossimaMossa = await helpers.promptOptional(tp, "Prossima mossa");
     const innesco = await helpers.promptOptional(tp, "Quando avanza");
     const campagne = creazioneCompleta ? await helpers.chooseCampaigns(tp, "Campagne collegate", context) : [];
@@ -29,11 +32,13 @@ async function tracciato(tp) {
     const fazioni = creazioneCompleta ? await helpers.chooseFactions(tp, "Fazioni collegate", context) : [];
     const luoghi = creazioneCompleta ? await helpers.chooseLocations(tp, "Luoghi collegati", context) : [];
     const personaggi = creazioneCompleta ? await helpers.choosePeople(tp, "PNG o PG collegati", context) : [];
+    const connessioni = await helpers.chooseConnections(tp, "Connessioni vive del tracciato", context);
 
     const sessioni = activeContext.link ? [activeContext.link] : [];
     const created = await helpers.moveNote(tp, helpers.path("tracciati"), name);
     // Un clock creato al tavolo deve comparire tra le pressioni della sessione senza lavoro manuale.
     await helpers.linkCreatedNoteToActiveSession(created, { sessionField: "tracciati" });
+    await helpers.linkCreatedNoteToConnections(created, connessioni);
 
     return `---
 id: ${id}
@@ -52,9 +57,13 @@ sessioni: ${helpers.inlineYamlList(sessioni)}
 progress_value: ${helpers.yamlNumber(progressValue) || 0}
 progress_max: ${helpers.yamlNumber(progressMax) || 6}
 pressione: 0
+gancio: ${helpers.yamlQuote(gancio)}
+uso_al_tavolo: ${helpers.yamlQuote(usoAlTavolo)}
+player_safe: ${helpers.yamlQuote(playerSafe)}
 posta: ${helpers.yamlQuote(posta)}
 prossima_mossa: ${helpers.yamlQuote(prossimaMossa)}
 innesco: ${helpers.yamlQuote(innesco)}
+connessioni: ${helpers.inlineYamlList(connessioni)}
 evento_scatenante:
 esito_parziale:
 esito_finale:

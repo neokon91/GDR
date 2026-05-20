@@ -38,12 +38,13 @@ async function missione(tp) {
     const ostacolo = creazioneCompleta ? await helpers.promptOptional(tp, "Ostacolo principale") : "";
     const segreto = await helpers.promptOptional(tp, "Segreto dietro la missione");
     const domandaAperta = creazioneCompleta ? await helpers.promptOptional(tp, "Domanda aperta della missione") : "";
-    const connessioni = creazioneCompleta ? await helpers.chooseConnections(tp, "Connessioni vive della missione", context) : [];
+    const connessioni = await helpers.chooseConnections(tp, "Connessioni vive della missione", context);
 
     const sessioni = activeContext.link ? [activeContext.link] : [];
     const created = await helpers.moveNote(tp, helpers.path("missioni"), name);
     // Una missione creata mentre prepari o giochi entra subito tra le missioni della sessione attiva.
     await helpers.linkCreatedNoteToActiveSession(created, { sessionField: "missioni" });
+    await helpers.linkCreatedNoteToConnections(created, connessioni);
 
     return `---
 id: ${id}

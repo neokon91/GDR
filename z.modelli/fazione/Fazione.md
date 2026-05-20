@@ -1,7 +1,7 @@
 <% await tp.user.fazione(tp) %>
 # `=this.nome`
 
->[!infobox|wiki]- Fazione
+>[!infoboxwiki]- Fazione
 > Tipo:
 > `INPUT[text:tipo]`
 >
@@ -116,6 +116,13 @@ TABLE categoria, tipo, stato, pressione, prossima_mossa
 FROM "Mondi"
 WHERE contains(this.connessioni, file.link)
 SORT categoria ASC, file.name ASC
+```
+
+### Feedback Creazione
+
+```dataviewjs
+const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));
+gdr.renderCreationFeedback(dv);
 ```
 
 ````tabs

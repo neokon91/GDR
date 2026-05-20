@@ -1,9 +1,7 @@
 filters:
   and:
     - file.folder == "Mondi/Incontri"
-    - file.name != "Incontri"
-    - '!file.name.startsWith("Prova -")'
-properties:
+    - file.name != "Incontri"properties:
   nome:
     displayName: Nome
   stato:

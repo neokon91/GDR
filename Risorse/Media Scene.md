@@ -15,7 +15,7 @@ Questa pagina raccoglie i materiali con timestamp pronti per scene, recap, refer
 ```dataview
 TABLE uso, tono, campagna, scena, timestamp, stato
 FROM "Risorse/Audio" OR "Risorse/Video"
-WHERE file.name != "Audio" AND file.name != "Video" AND !startswith(file.name, "Prova -")
+WHERE file.name != "Audio" AND file.name != "Video"
 SORT campagna ASC, uso ASC, scena ASC, file.name ASC
 ```
 

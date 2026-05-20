@@ -47,7 +47,6 @@ Il DM puo ignorare questi campi: [[Mondi/Calendario]] mostra comunque le date le
 
 | Calendario | Uso consigliato |
 | --- | --- |
-| `Brumafonda` | Calendario custom del vault e default per le campagne demo. |
 | `Calendar of Harptos` | Riferimento Forgotten Realms o campagne con mesi di Faerûn. |
 | `Gregorian Calendar` | Campagne moderne, storiche o calendario reale. |
 | `Calendar of Greyhawk` | Riferimento Greyhawk. |

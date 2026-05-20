@@ -32,15 +32,15 @@ Prima di lavorarci, controlla:
 - quale azione del DM rende piu veloce;
 - quale nota o dashboard deve mostrarlo;
 - quali campi servono davvero;
-- quale nota di prova verifica che funzioni;
+- quale controllo automatico o smoke manuale verifica che funzioni;
 - cosa succede se il plugin non e installato.
 
 ## Stato Reale
 
 | Plugin | Stato | Dove si vede | Prossimo passo |
 | --- | --- | --- | --- |
-| Dataview | integrato | dashboard, indici, controllo vault | mantenere query semplici e filtrare sempre `Prova -` |
-| Templater | integrato | pulsanti di creazione e `z.modelli` | non aumentare i template senza nota di prova |
+| Dataview | integrato | dashboard, indici, controllo vault | mantenere query semplici e senza filtri fittizi |
+| Templater | integrato | pulsanti di creazione e `z.modelli` | non aumentare i template senza controllo automatico |
 | Meta Bind | integrato | dashboard e template con campi interattivi | uniformare i campi piu usati |
 | JS Engine | integrato indiretto | viste DataviewJS e Meta Bind avanzati | usarlo solo dove evita lavoro manuale |
 | Metadata Menu | integrato base | gestione campi | FileClass presenti per `sessione`, `missione`, `tracciato`, `png`, `luogo`, `fazione`; estendere poi a `incontro`, `mappa`, `media` |
@@ -53,7 +53,6 @@ Prima di lavorarci, controlla:
 | Dice Roller | supportato | template e tabelle rapide | mantenere tabelle brevi, richiamabili e stabili |
 | Calendarium | integrato | sessioni, missioni, dashboard, controllo vault | usare `Brumafonda` come calendario custom e i default come riferimenti disponibili |
 | Excalidraw | integrato | `Risorse/Mappe`, Worldbuilder Dashboard, Durante il Gioco, [[Risorse/Excalidraw Per GDR]] | usare per fronti, indizi e scene; nuove mappe in `Risorse/Mappe` con template dedicato |
-| Canvas / Advanced Canvas | supportato | [[Demo - Canvas Fronti.canvas]], [[Risorse/Canvas Per GDR]] | usare per reti di note canoniche, non per schizzi liberi |
 | Workspaces | supportato | [[Risorse/Workspaces e Segnalibri]] | salvare layout DM, worldbuilding e manutenzione |
 | Bookmarks | supportato | barra laterale Segnalibri | accesso rapido a pagine vive, non archivio parallelo |
 | Media Extended | supportato leggero | indici audio/video, Durante il Gioco | usare timestamp e scene solo per materiali pronti |
@@ -114,15 +113,12 @@ Configurazione:
 | Dashboard e automazioni | ben sfruttate | Dataview, DataviewJS, Meta Bind e Templater sono la spina dorsale del vault. |
 | Metadata Menu | migliorato | Aggiunte FileClass per `incontro`, `rotta`, `risorsa`, `mercato`, `compendium`, `ricorrenza`, `mappa` e `media`. |
 | Calendarium | integrato con default e custom | Importati i calendari default del plugin e aggiunto `Brumafonda` come calendario custom del vault. |
-| Initiative Tracker | supportato | Aggiunta vista operativa, demo combattimento e configurazione per Dice Roller + link Statblocks. |
 | Statblocks | base funzionante | Creature con `statblock: true`; ora il flusso incontro -> creatura -> iniziativa e documentato. |
-| Mappe | buono | Excalidraw, Hex Cartographer e Zoom Map hanno demo e dashboard; Leaflet resta opzionale. |
 | Media Extended | leggero | Audio/video/immagini sono indicizzati; usarlo meglio solo con media reali di campagna. |
 | Kanban | base | Le bacheche esistono; prossimo passo utile: collegare task a sessioni e missioni reali. |
 | BRAT | tecnico | Tenere fuori dal percorso DM e dalla release pulita come funzione di manutenzione. |
 | Linter | supporto sviluppo | Configurato manuale e prudente; niente lint on save, SRD e mappe ignorati. |
 | Workspaces/Bookmarks | supportato | Workspaces core abilitato, tre layout salvati e segnalibri pronti per tavolo, worldbuilding e manutenzione. |
-| Maps per Bases | supportato | Plugin `maps` installato, base pilota, coordinate demo e viste tabellari per layer/marker aggiunte. |
 
 ## Prossime Integrazioni
 
@@ -166,8 +162,7 @@ Da fare:
 - usare incontri inline `encounter:` nelle note di sessione solo per gruppi semplici o incontri casuali;
 - mantenere i nomi creature identici tra frontmatter `name`, blocchi `statblock` e blocchi `encounter`;
 - distinguere incontri sociali, esplorativi e combattimenti;
-- fatto: creare una nota `Prova - Incontro` che mostri anche creature e iniziativa.
-- fatto: aggiungere [[Demo - Agguato dei Lupi]] come combattimento pronto con `2: Lupo`, mappa Excalidraw e audio.
+- fatto: coprire il flusso incontro con template, controlli e vista operativa.
 - fatto: aggiungere [[Risorse/Iniziativa e Combattimenti]] per controllare incontri di combattimento e missing `encounter_creatures`.
 - fatto: configurare Initiative Tracker per usare Dice Roller e preferire link Statblocks.
 
@@ -196,19 +191,14 @@ Obiettivo: rendere visibili relazioni, fronti, mappe e geografia senza duplicare
 Da fare:
 
 - fatto: usare [[Risorse/Mappe/Schema Relazioni GDR.excalidraw]] come prova base per relazioni tra PNG, luoghi e fazioni;
-- fatto: aggiungere [[Demo - Canvas Fronti.canvas]] e [[Risorse/Canvas Per GDR]] come integrazione Canvas/Advanced Canvas;
-- fatto: aggiungere [[Demo - Fronte Custodi.excalidraw]], [[Demo - Rete Indizi Reliquia.excalidraw]] e [[Demo - Scena Ponte.excalidraw]];
 - fatto: configurare Excalidraw per salvare nuove mappe in `Risorse/Mappe` e usare il template `z.modelli/mappe/Mappa Excalidraw Fronti.excalidraw.md`;
 - fatto: attivare rendering degli embed Excalidraw in Markdown reading mode e hover preview senza Ctrl;
 - fatto: creare una convenzione per mappe di regione, dungeon e fronti;
-- fatto: collegare ogni mappa demo alla nota mondo, luogo o campagna pertinente;
 - fatto: aggiungere viste integrate politica, commerciale, religiosa e conflitti in [[Risorse/Mappe/Mappe]];
 - usare Excalidraw quando servono disegno libero, annotazioni visuali, embed, link tra disegni e note o riferimenti `area=`/`group=` a parti del disegno;
 - usare Canvas quando serve una mappa relazionale fatta di note, media, gruppi e connessioni leggibili;
 - ricordare che Canvas salva file `.canvas` in formato JSON Canvas, quindi e adatto a mappe strutturate e durevoli;
 - fatto: mostrare in Worldbuilder Dashboard le mappe principali.
-- fatto: aggiungere [[Demo - Brumafonda.hexcartographer]] come mappa esagonale di regione/viaggio;
-- fatto: aggiungere [[Demo - Mappa Zoomabile]] come mappa TTRPG Tools: Maps con base SVG locale.
 
 Fatto bene quando: una mappa aiuta a capire il mondo e rimanda alle note canoniche, invece di diventare un archivio parallelo.
 
@@ -241,7 +231,6 @@ Da fare:
 - usare screenshot da video solo quando diventano dispense o riferimenti di scena;
 - evitare dipendenze da URL remoti per materiale indispensabile alla sessione;
 - fatto: mostrare materiale pronto in [[Durante il Gioco]];
-- fatto: aggiungere [[Risorse/Media Scene]] e [[Demo - Nebbia Sul Ponte]] come struttura cue pronta;
 - collegare dispense e scene ai media collegati.
 - da fare solo con materiale reale: usare timestamp precisi e media locali per scene ricorrenti.
 
@@ -302,7 +291,6 @@ Implementato:
 
 - [[Risorse/Importare Mappe]];
 - `npm run import:azgaar`;
-- esempio `Import/Azgaar/Prova - Azgaar.geojson`;
 - creazione di bozze in `Mondi/Luoghi` con `fonte: azgaar`.
 
 ## Integrazione Trasversale: Tabs

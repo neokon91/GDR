@@ -13,6 +13,6 @@ stato: pronto
 ```dataview
 TABLE stato_rotta, partenza, arrivo, regioni, fazioni_controllanti, risorse_trasportate, pressione, prossima_mossa
 FROM "Mondi/Rotte"
-WHERE file.name != "Rotte" AND !startswith(file.name, "Prova -") AND stato != "archiviata"
+WHERE file.name != "Rotte" AND stato != "archiviata"
 SORT stato_rotta ASC, pressione DESC, file.name ASC
 ```

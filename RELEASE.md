@@ -7,7 +7,6 @@ Questa checklist serve a preparare una copia pubblicabile del vault.
 1. Apri [[Inizia Qui]] e verifica che i pulsanti portino alle pagine giuste.
 2. Apri [[1. DM Dashboard]], [[Durante il Gioco]], [[Hub/Party Control]], [[Atlante del Mondo]], [[Geopolitical Dashboard]], [[Motore Mondo Vivo]], [[Campagna da Ambientazione]] e [[Vista Giocatori]].
 3. Apri [[Risorse/Controllo Vault]] e [[Risorse/Quality Report]] e risolvi problemi operativi importanti.
-4. Controlla che la demo [[Demo - La Reliquia Spezzata]] sia navigabile.
 5. Acquisisci almeno cinque screenshot: `Inizia Qui`, `Vista Giocatori`, `Atlante del Mondo`, `Party Control`, `Quality Report`.
 6. Registra una GIF breve del flusso `Inizia Qui` -> `Durante il Gioco` -> `Vista Giocatori`.
 7. Esegui:
@@ -28,7 +27,6 @@ npm run release:clean
 
 ## ZIP Utente
 
-`dist/vault-gdr-clean.zip` e l'unico ZIP di release. Contiene solo il vault per l'utente: dashboard, demo, contenuti giocabili, SRD, plugin abilitati, template e automazioni necessarie ai pulsanti.
 
 Non contiene materiali di sviluppo repository, issue template GitHub, roadmap interne, script CLI di import/release o plugin non abilitati. Per sviluppo e manutenzione si lavora tramite Git.
 
@@ -52,13 +50,11 @@ Non contiene materiali di sviluppo repository, issue template GitHub, roadmap in
 - [[Mondi/Timeline/Timeline]] mostra eventi canonici e lore da sessione.
 - [[Geopolitical Dashboard]] mostra territori politici, relazioni diplomatiche, risorse strategiche e buchi geopolitici senza errori Dataview.
 - [[Motore Mondo Vivo]] mostra event propagation, faction dynamics, relationship graph e continuita aperte senza errori Dataview.
-- Le note demo non sono confuse con le note `Prova -`: la demo e contenuto dimostrativo, le prove sono collaudi tecnici.
 - Il README resta leggibile per utenti non tecnici.
 
 ## Dopo La Release
 
 - Aggiorna il changelog con eventuali fix.
 - Tieni le modifiche tecniche documentate in [[Risorse/Sviluppo Vault]].
-- Se cambi template importanti, aggiorna almeno una nota demo o una nota `Prova -`.
 - Pubblica lo ZIP generato da `dist/vault-gdr-clean.zip`.
 - Per sviluppo e manutenzione usa il repository Git, non uno ZIP.

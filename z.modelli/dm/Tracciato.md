@@ -1,7 +1,7 @@
 <% await tp.user.tracciato(tp) %>
 # `=this.nome`
 
->[!infobox|wiki]- Tracciato
+>[!infoboxwiki]- Tracciato
 > Tipo:
 > `INPUT[inlineSelect(option(clock, Clock), option(progress track, Progress track), option(fronte, Fronte), option(rituale, Rituale), option(minaccia, Minaccia), option(viaggio, Viaggio), option(progetto, Progetto)):tipo]`
 >
@@ -84,6 +84,39 @@ dv.el("div", `
 
 > [!timer] Posta
 > `=this.posta`
+
+## Scheda Viva
+
+> [!scena] Gancio
+> `INPUT[text:gancio]`
+
+> [!pericolo] Al Tavolo
+> Uso al tavolo: `INPUT[text:uso_al_tavolo]`
+>
+> Cosa cambia se ignorato: `INPUT[text:prossima_mossa]`
+>
+> Player-safe: `INPUT[text:player_safe]`
+
+> [!segreto]- DM
+> `INPUT[text:segreto]`
+
+### Connessioni Vive
+
+`INPUT[inlineListSuggester(optionQuery("Mondi"), useLinks(partial), allowOther):connessioni]`
+
+```dataview
+TABLE categoria, tipo, stato, pressione, prossima_mossa
+FROM "Mondi"
+WHERE contains(this.connessioni, file.link)
+SORT categoria ASC, file.name ASC
+```
+
+### Feedback Creazione
+
+```dataviewjs
+const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));
+gdr.renderCreationFeedback(dv);
+```
 
 ## Essenziale Al Tavolo
 

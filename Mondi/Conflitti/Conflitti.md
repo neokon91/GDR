@@ -11,6 +11,6 @@ stato: pronto
 ```dataview
 TABLE mondo, pressione, posta, prossima_mossa, fazioni, luoghi, stato
 FROM "Mondi/Conflitti"
-WHERE file.name != "Conflitti" AND !startswith(file.name, "Prova -")
+WHERE file.name != "Conflitti"
 SORT pressione DESC, mondo ASC, nome ASC
 ```

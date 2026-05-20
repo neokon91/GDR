@@ -20,7 +20,6 @@ tab: Relazioni
 
 ![[Schema Relazioni GDR.excalidraw]]
 
-![[Demo - Fronte Custodi.excalidraw]]
 
 ```dataviewjs
 const pages = dv.pages('"Risorse/Mappe"')
@@ -48,7 +47,7 @@ Campi consigliati nelle note mappa:
 ```dataview
 TABLE mondo, luoghi, stato, file.mtime AS aggiornato
 FROM "Risorse/Mappe"
-WHERE uso = "regione" AND !startswith(file.name, "Prova -")
+WHERE uso = "regione"
 SORT mondo ASC, file.name ASC
 ```
 
@@ -59,7 +58,6 @@ tab: Esagoni
 > [!luogo] Quando usarli
 > Usa Hex Cartographer quando il viaggio, la distanza o l'esplorazione esagonale contano davvero.
 
-Apri [[Demo - Brumafonda.hexcartographer]] come prova pronta. Il file si apre nell'editor Hex Cartographer e contiene gia colori, fiume, strada, confine di pericolo e link alle note luogo.
 
 Regola di prodotto:
 
@@ -71,7 +69,7 @@ Regola di prodotto:
 ```dataview
 TABLE mondo, luoghi, stato, file.mtime AS aggiornato
 FROM "Risorse/Mappe"
-WHERE uso = "esagoni" AND !startswith(file.name, "Prova -")
+WHERE uso = "esagoni"
 SORT mondo ASC, file.name ASC
 ```
 
@@ -82,7 +80,6 @@ tab: Zoom
 > [!scena] Quando usarle
 > Usa TTRPG Tools: Maps per mappe grandi, immagini con pin, mappe da mostrare al tavolo o riferimenti con livelli.
 
-Apri [[Demo - Mappa Zoomabile]] come prova pronta con blocco `zoommap` e base SVG locale. La versione condivisibile e [[Demo - Mappa Zoomabile Giocatori]].
 
 `BUTTON[nuova-mappa-zoom-z-modelli-mappe-mappa-zoom-md-2]`
 
@@ -95,7 +92,7 @@ Regola di prodotto:
 ```dataview
 TABLE mondo, luogo, stato, file.mtime AS aggiornato
 FROM "Risorse/Mappe"
-WHERE uso = "zoom" AND !startswith(file.name, "Prova -")
+WHERE uso = "zoom"
 SORT mondo ASC, file.name ASC
 ```
 
@@ -106,7 +103,6 @@ tab: Dungeon
 > [!incontro] Convenzione
 > Usa una mappa di dungeon o scena quando aiuta a gestire entrate, ostacoli, linee di vista, aree pericolose e incontri.
 
-![[Demo - Scena Ponte.excalidraw]]
 
 Campi consigliati nelle note mappa:
 
@@ -118,7 +114,7 @@ Campi consigliati nelle note mappa:
 ```dataview
 TABLE luogo, incontri, stato, file.mtime AS aggiornato
 FROM "Risorse/Mappe"
-WHERE (uso = "dungeon" OR uso = "scena") AND !startswith(file.name, "Prova -")
+WHERE (uso = "dungeon" OR uso = "scena")
 SORT luogo ASC, file.name ASC
 ```
 
@@ -129,9 +125,7 @@ tab: Fronti
 > [!missione] Convenzione
 > Usa una mappa di fronte quando devi vedere fazioni, PNG, obiettivi, segreti e pressioni in movimento.
 
-![[Demo - Fronte Custodi.excalidraw]]
 
-Apri anche [[Demo - Canvas Fronti.canvas]] quando vuoi una rete strutturale di note, gruppi e connessioni apribili.
 
 Campi consigliati nelle note mappa:
 
@@ -145,7 +139,7 @@ Campi consigliati nelle note mappa:
 ```dataview
 TABLE mondo, fazioni, personaggi, missioni, stato
 FROM "Risorse/Mappe"
-WHERE uso = "fronte" AND !startswith(file.name, "Prova -")
+WHERE uso = "fronte"
 SORT mondo ASC, file.name ASC
 ```
 
@@ -156,7 +150,6 @@ tab: Canvas
 > [!luogo] Quando usarli
 > Usa Canvas per mappe fatte di note vere: campagna, mondo, fazioni, PNG, luoghi, missioni, clock e incontri.
 
-Apri [[Demo - Canvas Fronti.canvas]] come prova pronta del fronte dei Custodi.
 
 Regola di prodotto:
 
@@ -167,7 +160,7 @@ Regola di prodotto:
 ```dataview
 TABLE file.mtime AS aggiornato
 FROM "Risorse/Mappe"
-WHERE contains(file.name, "Canvas") AND !startswith(file.name, "Prova -")
+WHERE contains(file.name, "Canvas")
 SORT file.mtime DESC
 ```
 
@@ -178,7 +171,6 @@ tab: Indizi
 > [!indizio] Convenzione
 > Usa una mappa Excalidraw di indizi quando un mistero deve mostrare piste, fonti, verita nascoste e falsi collegamenti senza trasformarsi in una tabella.
 
-![[Demo - Rete Indizi Reliquia.excalidraw]]
 
 Campi consigliati nelle note mappa:
 
@@ -191,7 +183,7 @@ Campi consigliati nelle note mappa:
 ```dataview
 TABLE mondo, luogo, missioni, stato, file.mtime AS aggiornato
 FROM "Risorse/Mappe"
-WHERE uso = "indizi" AND !startswith(file.name, "Prova -")
+WHERE uso = "indizi"
 SORT mondo ASC, file.name ASC
 ```
 
@@ -207,7 +199,7 @@ Apri [[z.bases/Atlante Mappe.base]] per la vista Bases pronta. Il plugin communi
 ```dataview
 TABLE tipo, mappa, coordinate, layer_mappa, tipo_mappa, mondo
 FROM "Mondi/Luoghi" OR "Mondi/Rotte" OR "Mondi/Risorse" OR "Mondi/Mercati" OR "Mondi/Compendium"
-WHERE (mappa OR coordinate OR layer_mappa OR tipo_mappa) AND !startswith(file.name, "Prova -") AND stato != "archiviata"
+WHERE (mappa OR coordinate OR layer_mappa OR tipo_mappa) AND stato != "archiviata"
 SORT layer_mappa ASC, tipo ASC, file.name ASC
 LIMIT 40
 ```
@@ -217,7 +209,7 @@ LIMIT 40
 ```dataview
 TABLE tipo, governante, fazioni, confini, mappa, coordinate
 FROM "Mondi/Luoghi"
-WHERE (layer_mappa = "politica" OR tipo_mappa = "politica" OR governante OR confini) AND !startswith(file.name, "Prova -") AND stato != "archiviata"
+WHERE (layer_mappa = "politica" OR tipo_mappa = "politica" OR governante OR confini) AND stato != "archiviata"
 SORT mondo ASC, file.name ASC
 LIMIT 20
 ```
@@ -227,7 +219,7 @@ LIMIT 20
 ```dataview
 TABLE tipo, stato_rotta, partenza, arrivo, luogo, risorse, fazioni_controllanti, mappa, coordinate
 FROM "Mondi/Rotte" OR "Mondi/Risorse" OR "Mondi/Mercati"
-WHERE !startswith(file.name, "Prova -") AND stato != "archiviata"
+WHERE stato != "archiviata"
 SORT pressione DESC, file.name ASC
 LIMIT 24
 ```
@@ -237,7 +229,7 @@ LIMIT 24
 ```dataview
 TABLE tipo, luoghi, luoghi_sacri, religioni, mappa, coordinate
 FROM "Mondi/Religioni" OR "Mondi/Luoghi" OR "Mondi/Calendario Diegetico"
-WHERE (religioni OR luoghi_sacri OR tipo = "ricorrenza" OR layer_mappa = "religiosa") AND !startswith(file.name, "Prova -") AND stato != "archiviata"
+WHERE (religioni OR luoghi_sacri OR tipo = "ricorrenza" OR layer_mappa = "religiosa") AND stato != "archiviata"
 SORT mondo ASC, file.name ASC
 LIMIT 24
 ```
@@ -247,7 +239,7 @@ LIMIT 24
 ```dataview
 TABLE tipo, pressione, luoghi, fazioni, conflitti, mappa, coordinate
 FROM "Mondi/Conflitti" OR "Mondi/Rotte" OR "Mondi/Missioni"
-WHERE (pressione > 0 OR conflitti OR layer_mappa = "conflitti") AND !startswith(file.name, "Prova -") AND stato != "archiviata"
+WHERE (pressione > 0 OR conflitti OR layer_mappa = "conflitti") AND stato != "archiviata"
 SORT pressione DESC, file.name ASC
 LIMIT 24
 ```
@@ -259,7 +251,7 @@ tab: Archivio
 ```dataview
 TABLE uso, mondo, luogo, stato, file.mtime AS aggiornato
 FROM "Risorse/Mappe"
-WHERE file.name != "Mappe" AND !startswith(file.name, "Prova -")
+WHERE file.name != "Mappe"
 SORT uso ASC, mondo ASC, file.name ASC
 ```
 ````

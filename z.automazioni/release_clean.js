@@ -19,6 +19,7 @@ const INCLUDED_ROOTS = new Set([
     "Risorse",
     "SRD",
     "z.automazioni",
+    "z.engine",
     "z.bacheche",
     "z.fileclass",
     "z.modelli"
@@ -44,7 +45,6 @@ const EXCLUDED_RISORSE = new Set([
     "Modello Entità.md",
     "Preset Calendario.md",
     "Profili Campagna.md",
-    "Prove Entità.md",
     "Recap Plugin Installati.md",
     "Release Pulita.md",
     "Roadmap",
@@ -91,7 +91,6 @@ function shouldIncludeRoot(relPath, entry) {
 
 function shouldSkip(relPath, entry) {
     if (EXCLUDED_FILES.has(entry.name)) return true;
-    if (entry.isFile() && entry.name.startsWith("Prova - ") && entry.name.endsWith(".md")) return true;
     const top = topSegment(relPath);
     if (EXCLUDED_DIRS.has(top)) return true;
     if (!shouldIncludeRoot(relPath, entry)) return true;
@@ -148,7 +147,6 @@ function writeUserReadme() {
         "## Cosa Include",
         "",
         "- dashboard operative per preparazione, sessione, post-sessione e worldbuilding;",
-        "- demo giocabile `Demo - La Reliquia Spezzata`;",
         "- `Vista Giocatori` per recap, handout, mappe pubbliche e materiale condivisibile;",
         "- `Party Control` per PG, HP, missioni, inventario e flags;",
         "- `Quality Report` per copertura, buchi operativi e controllo anti-segreti;",

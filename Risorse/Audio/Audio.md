@@ -13,6 +13,6 @@ Usa campi semplici nelle note audio quando servono: `uso`, `tono`, `campagna`, `
 ```dataview
 TABLE uso, tono, campagna, scena, timestamp, stato
 FROM "Risorse/Audio"
-WHERE file.name != "Audio" AND !startswith(file.name, "Prova -")
+WHERE file.name != "Audio"
 SORT uso ASC, tono ASC, file.name ASC
 ```

@@ -13,6 +13,6 @@ Usa campi semplici nelle note immagine quando servono: `uso`, `tono`, `campagna`
 ```dataview
 TABLE uso, tono, campagna, luogo, stato
 FROM "Risorse/Immagini"
-WHERE file.name != "Immagini" AND !startswith(file.name, "Prova -")
+WHERE file.name != "Immagini"
 SORT uso ASC, tono ASC, file.name ASC
 ```

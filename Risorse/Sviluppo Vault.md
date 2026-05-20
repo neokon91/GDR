@@ -1,23 +1,6 @@
 # Sviluppo Vault
 
-Questa nota guida le modifiche future al vault. Il destinatario finale è un DM o worldbuilder che vuole preparare e giocare meglio, non una persona tecnica.
-
-## Principio Guida
-Ogni modifica deve rendere piu facile il flusso principale:
-
-1. preparare una sessione concreta;
-2. giocarla senza cercare materiale in dieci note;
-3. aggiornare il mondo dopo il tavolo.
-
-Se una modifica non accorcia, chiarisce o automatizza questo flusso, va rimandata.
-
-## Utente Finale
-Il vault deve funzionare per una persona che:
-- non vuole leggere codice;
-- non vuole comprendere Dataview, Templater o Meta Bind;
-- ragiona da worldbuilder e DM;
-- ha bisogno di trovare informazioni rapidamente durante il gioco;
-- poter prendere appunti disordinati e sistemarli successivamente.
+Questa nota contiene convenzioni tecniche per mantenere il vault: campi, template, automazioni, plugin, controlli e release. La direzione prodotto e UX operativa attiva stanno in [[Risorse/Roadmap/1.0.0]].
 
 ## Documentazione
 
@@ -28,33 +11,6 @@ Il vault deve funzionare per una persona che:
 - Questa nota contiene la documentazione tecnica di sviluppo: campi, template, automazioni, test, import generati e criteri di modifica.
 - [[Risorse/Roadmap/1.0.0]] contiene la direzione prodotto e UX operativa attiva. Se c'e conflitto, prevale la roadmap attiva.
 - Le istruzioni tecniche non vanno nel README se non sono necessarie per usare il vault al tavolo.
-
-## Regole Di Progettazione
-- Nessuna nuova dashboard entra nel percorso principale se non sostituisce o riduce una schermata esistente.
-- `Inizia Qui` deve restare una pagina a tre azioni: Prepara, Gioca, Aggiorna il mondo.
-- Ogni pagina operativa deve dichiarare quale output produce.
-- Gli strumenti avanzati devono restare collassati o fuori dal flusso base.
-- Usa parole da tavolo, non parole tecniche.
-- Inserire pulsanti dove l'utente prende decisioni.
-- Usare card per attenzione immediata.
-- Usare tabelle per archivi e confronto.
-- Usare liste per risorse semplici.
-- Usare callout customizzati per testo da leggere, indizi, segreti, pericoli e ricompense.
-- Usare `tabs` quando una nota lunga alterna modalita diverse di lavoro, per esempio scena, rete, segreti, materiali e post-sessione.
-- Usare callout collassati (`> [!tipo]- Titolo`) per dettagli non immediati: segreti, note GM, esiti possibili, timer secondari, lore profonda e riferimenti.
-- Usare callout annidati solo quando il dettaglio appartiene chiaramente alla sezione madre; evita annidamenti profondi oltre un livello.
-- Lascia i dettagli tecnici in `z.modelli`, `z.automazioni` e CSS.
-
-## Cosa Deve Essere Sempre Visibile
-
-Nel flusso base devono essere sempre visibili:
-
-- cosa fare adesso;
-- quale output ottenere;
-- cosa manca per completarlo;
-- il pulsante per passare allo step successivo.
-
-Dashboard DM, Worldbuilder, Atlante e report sono strumenti avanzati: utili, ma non devono competere con il percorso principale.
 
 ## Stati delle Note Consigliati
 Usa pochi stati e usali sempre nello stesso modo.
@@ -116,8 +72,31 @@ Regole per le automazioni di creazione:
 ## Cartelle Di Servizio
 
 - `z.modelli`: template Templater. Modifica con cautela.
+- `z.modelli/azioni`: template sottili usati dai pulsanti Meta Bind operativi. La logica deve stare in `z.automazioni/meta_actions.js`.
+- `z.modelli/wizard`: wizard centralizzati. La logica deve stare in `z.automazioni/wizard_layer.js`.
 - `z.automazioni`: script Templater usati dai template e script CLI di manutenzione. Se cambi un percorso qui, aggiorna anche dashboard e Dataview.
+- `z.engine`: componenti JS riusabili per viste operative. Nuova logica complessa va qui o in `session_context.js`, non copiata in blocchi DataviewJS sparsi.
 - `z.bacheche`: bacheche Kanban per preparazione e creature.
+
+## Plugin Layer Interno
+
+Il vault usa un layer interno sopra Meta Bind, Templater, JS Engine e Metadata Menu. Non e un plugin Obsidian separato: e un contratto di file e configurazioni verificato da `npm run check`.
+
+Componenti:
+
+- Meta Bind Design System: input template globali in `.obsidian/plugins/obsidian-meta-bind-plugin/data.json`.
+- Meta Bind Action Library: pulsanti globali che chiamano template in `z.modelli/azioni`.
+- Templater Wizard Layer: wizard in `z.modelli/wizard` e logica in `z.automazioni/wizard_layer.js`.
+- JS Engine Views: componenti riusabili in `z.engine/gdr_views.js`.
+- Metadata Menu/fileClass: preset field in `.obsidian/plugins/metadata-menu/data.json` e schema operativo in `z.fileclass`.
+
+Regole:
+
+- non mettere logica lunga dentro un pulsante Meta Bind;
+- non duplicare azioni di canone, propagazione, clock o recap nei template;
+- quando un campo diventa ricorrente, aggiungilo a Meta Bind input template, Metadata Menu preset e fileClass rilevanti;
+- quando una vista DataviewJS supera poche righe, spostala in `z.engine` o `session_context.js`;
+- ogni nuovo file essenziale del layer va aggiunto a `REQUIRED_LAYER_FILES` in `z.automazioni/check_vault.js`.
 
 ## Runtime Live E Session Context
 
@@ -180,12 +159,20 @@ Prima di una release o dopo modifiche a template, script e plugin, esegui:
 npm run check
 ```
 
-Il controllo verifica JSON di configurazione, plugin obbligatori inclusi e abilitati, wikilink rotti o ambigui, percorsi `templateFile` usati dai pulsanti Meta Bind, helper Templater con script esistente in `z.automazioni`, target di Iconize, riferimenti Obsidian obsoleti, sessioni multiple attive, indice GPT, frontmatter operativo, categorie/stati/tipi ragionevoli, note live senza sessione o mondo e campi minimi per categoria. SRD e note indice sono esclusi dai controlli che produrrebbero falsi positivi.
+Il controllo verifica JSON di configurazione, plugin obbligatori inclusi e abilitati, wikilink rotti o ambigui, percorsi `templateFile` usati dai pulsanti Meta Bind, helper Templater con script esistente in `z.automazioni`, target di Iconize, riferimenti Obsidian obsoleti, sessioni multiple attive, indice GPT, frontmatter operativo, categorie/stati/tipi ragionevoli, note live senza sessione o mondo, campi minimi per categoria, file essenziali del plugin layer interno, input template Meta Bind, button template operativi, preset Metadata Menu, igiene repository e sintassi JS in `z.automazioni` e `z.engine`. SRD e note indice sono esclusi dai controlli che produrrebbero falsi positivi.
 
 Se `npm` non e disponibile, il comando equivalente e:
 
 ```bash
 node z.automazioni/check_vault.js
+node z.automazioni/repo_hygiene.js
+node z.automazioni/check_js.js
+```
+
+Per rimuovere solo file locali ignorati, come `.DS_Store` o temporanei editor, usa:
+
+```bash
+npm run clean:repo
 ```
 
 ## Release
@@ -272,14 +259,14 @@ Sintassi base:
 name: Ponte delle Campane
 creatures:
  - 3: Goblin
- - Prova - Creatura
+ - Lupo
 ```
 ````
 
 Sintassi inline utile per tabelle casuali o note rapide:
 
 ```markdown
-`encounter: 3: Goblin, 1d4: Scheletro, Prova - Creatura`
+`encounter: 3: Goblin, 1d4: Scheletro, 1: Lupo`
 ```
 
 Usa il blocco `encounter` per incontri preparati; usa inline `encounter:` solo per gruppi semplici o risultati generati da Dice Roller.
@@ -367,27 +354,15 @@ Pulsanti inline:
 
 Non cambiare `templateFile`, `folderPath` o il nome dei campi scritti dagli input senza aggiornare anche `z.automazioni/check_vault.js`, dashboard, template e helper Templater. Evita input Meta Bind per campi complessi dei mostri SRD se rischiano di semplificare o riscrivere il frontmatter usato da Fantasy Statblocks.
 
-## Note Di Prova
+## Collaudo Senza Note Fittizie
 
-Le note di prova sono contenuti finti usati per controllare che template, automazioni, Dataview, callout e CSS funzionino insieme.
+Il vault sorgente non deve contenere note fittizie di collaudo nelle cartelle operative. Il controllo dei template passa da:
 
-Regole:
+- `npm run check`, `npm run check:repo` e `npm run check:js`;
+- smoke manuale delle viste principali in Obsidian;
+- aggiornamento di un contenuto reale solo quando serve al tavolo.
 
-- nome con prefisso `Prova -`;
-- `stato: archiviata`, quando il campo esiste;
-- `canonico: false`, quando il campo ha senso;
-- collegamenti realistici tra mondo, PNG, luoghi, fazioni, missioni, incontri e oggetti;
-- raccolta centrale in [[Risorse/Prove Entità]];
-- esclusione da dashboard, indici operativi e controlli di preparazione.
-
-Le prove non devono guidare il gioco. Devono solo mostrare se una modifica rompe qualcosa o se un template produce note leggibili.
-
-Quando aggiungi o cambi un template importante:
-
-- crea una nota reale solo se serve al tavolo;
-- crea o aggiorna una nota `Prova - ...` per collaudare il formato;
-- controlla che la nota di prova non compaia nelle viste operative;
-- controlla che compaia invece in [[Risorse/Prove Entità]].
+Se una modifica richiede fixture tecniche, tienile fuori dal vault consegnabile o genera dati temporanei in una copia locale, poi rimuovili prima del check finale.
 
 ## Test Con CLI Obsidian
 
@@ -463,41 +438,3 @@ Se la cartella serve, creala insieme alla nota indice quando ha senso. Evita sol
 - `Campagna` è l'esperienza di gioco dentro uno o più mondi.
 - Ogni nota di worldbuilding dovrebbe avere il campo `mondo` quando appartiene a una ambientazione precisa.
 - Le risorse riutilizzabili restano in `Risorse`, anche se possono essere usate in più campagne.
-
-## Checklist Per Ogni Nuova Funzione
-
-Prima di aggiungere una funzione, chiedi:
-
-- Il DM capisce a cosa serve dal nome?
-- Si usa dalla dashboard o da una pagina indice?
-- Funziona anche se ci sono poche note?
-- Non richiede spiegazioni tecniche?
-- Ha uno stato chiaro?
-- Appare in una vista utile?
-- Crea nuove cartelle solo quando servono davvero?
-- Non crea doppioni di cartelle o concetti?
-- Esiste una nota di prova se la funzione cambia un template o una vista importante?
-- Le note di prova sono filtrate fuori da dashboard e indici operativi?
-
-## Cosa Evitare
-
-- Campi obbligatori che il DM non sa compilare.
-- Pagine piene di query ma senza scopo.
-- Template lunghi prima che il contenuto serva davvero.
-- Nomi misti italiano/inglese.
-- Automatismi invisibili che sorprendono l'utente.
-- Note di prova visibili nelle viste di gioco.
-
-## Priorita Future
-1. Integrazioni plugin che aiutano davvero al tavolo: [[Risorse/Integrazioni Plugin]].
-2. Worldbuilding.
-3. Gestione sessione.
-4. Abbellire.
-
-## Definizione Di Fatto Bene
-Una modifica e riuscita quando il DM puo usarla senza chiedersi:
-- dove devo cliccare?
-- dove devo scrivere?
-- questa cosa è canonica?
-- cosa devo preparare adesso?
-- cosa devo aggiornare dopo la sessione?

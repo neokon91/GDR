@@ -9,15 +9,21 @@ async function cultura(tp) {
     const fazioni = creazioneCompleta ? await helpers.chooseFactions(tp, "Fazioni collegate", context) : [];
     const religioni = creazioneCompleta ? await helpers.chooseReligions(tp, "Religioni collegate", context) : [];
     const tratto = await helpers.promptOptional(tp, "Cosa rende riconoscibile questa cultura");
+    const gancio = await helpers.promptOptional(tp, "Gancio giocabile della cultura");
+    const usoAlTavolo = await helpers.promptOptional(tp, "Uso al tavolo");
+    const playerSafe = await helpers.promptOptional(tp, "Versione player-safe");
     const tensione = await helpers.promptOptional(tp, "Tensione interna o problema");
     const segreto = await helpers.promptOptional(tp, "Verità nascosta o tabù");
+    const prossimaMossa = await helpers.promptOptional(tp, "Prossima mossa culturale");
+    const connessioni = await helpers.chooseConnections(tp, "Connessioni vive della cultura", context);
     const mitoOrigine = creazioneCompleta ? await helpers.promptOptional(tp, "Mito d'origine") : "";
     const sacro = creazioneCompleta ? await helpers.promptOptional(tp, "Cosa considera sacro") : "";
     const proibito = creazioneCompleta ? await helpers.promptOptional(tp, "Cosa considera proibito o mostruoso") : "";
     const vitaQuotidiana = creazioneCompleta ? await helpers.promptOptional(tp, "Dettaglio di vita quotidiana") : "";
     const rapportoStranieri = creazioneCompleta ? await helpers.promptOptional(tp, "Rapporto con stranieri o vicini") : "";
 
-    await helpers.moveNote(tp, helpers.path("culture"), name);
+    const created = await helpers.moveNote(tp, helpers.path("culture"), name);
+    await helpers.linkCreatedNoteToConnections(created, connessioni);
 
     return `---
 id: ${id}
@@ -53,6 +59,11 @@ rapporto_stranieri: ${helpers.inlineYamlTextList([rapportoStranieri])}
 relazioni_esterne: []
 conflitti_interni: []
 relazioni: []
+gancio: ${helpers.yamlQuote(gancio)}
+uso_al_tavolo: ${helpers.yamlQuote(usoAlTavolo)}
+player_safe: ${helpers.yamlQuote(playerSafe)}
+tratto_distintivo: ${helpers.yamlQuote(tratto)}
+connessioni: ${helpers.inlineYamlList(connessioni)}
 propaga_a: []
 entita_impattate: []
 promesse_al_tavolo: []
@@ -62,7 +73,7 @@ indizi: []
 png_coinvolti: []
 ricompense: []
 conseguenze: []
-prossima_mossa:
+prossima_mossa: ${helpers.yamlQuote(prossimaMossa)}
 leggi: []
 risorse: []
 tensioni: ${helpers.inlineYamlTextList([tensione])}

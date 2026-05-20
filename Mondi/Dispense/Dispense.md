@@ -12,7 +12,7 @@ cssclasses:
 ```dataview
 TABLE tipo, stato, luogo, personaggi, sessioni
 FROM "Mondi/Dispense"
-WHERE stato = "pronto" AND !startswith(file.name, "Prova -")
+WHERE stato = "pronto"
 SORT nome ASC
 ```
 
@@ -21,7 +21,7 @@ SORT nome ASC
 ```dataview
 TABLE tipo, luogo, personaggi, sessioni
 FROM "Mondi/Dispense"
-WHERE stato = "consegnato" AND !startswith(file.name, "Prova -")
+WHERE stato = "consegnato"
 SORT nome ASC
 ```
 
@@ -30,6 +30,6 @@ SORT nome ASC
 ```dataview
 TABLE tipo, stato, luogo, personaggi
 FROM "Mondi/Dispense"
-WHERE file.name != "Dispense" AND stato != "archiviata" AND !startswith(file.name, "Prova -")
+WHERE file.name != "Dispense" AND stato != "archiviata"
 SORT stato ASC, nome ASC
 ```

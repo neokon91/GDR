@@ -1,7 +1,7 @@
 <% await tp.user.lore_capture(tp) %>
 # `=this.nome`
 
->[!infobox|wiki]- Lore Capture
+>[!infoboxwiki]- Lore Capture
 > Tipo:
 > `INPUT[inlineSelect(option(evento, Evento), option(png improvvisato, PNG improvvisato), option(luogo improvvisato, Luogo improvvisato), option(dialogo, Dialogo), option(conseguenza, Conseguenza), option(idea, Idea)):tipo]`
 >

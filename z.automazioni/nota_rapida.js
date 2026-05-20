@@ -15,13 +15,14 @@ async function nota_rapida(tp) {
         "Tipo di nota rapida"
     );
     const collegamenti = helpers.appendUniqueLink(
-        await helpers.chooseNotesByPath(tp, "Mondi", "Collega a una nota del mondo"),
+        await helpers.chooseCoreConnection(tp, "Collega a luogo, PNG, fazione, missione, clock o mappa"),
         activeContext.link
     );
 
     const created = await helpers.moveNote(tp, "Inbox", name);
     // La nota rapida nasce gia nel contesto della sessione, cosi non resta un appunto isolato.
     await helpers.linkCreatedNoteToActiveSession(created, { sessionField: "appunti_live" });
+    await helpers.linkCreatedNoteToConnections(created, collegamenti);
 
     return `---
 id: ${id}
@@ -32,6 +33,12 @@ stato: da smistare
 mondo: ${activeContext.world ?? ""}
 sessioni: ${helpers.inlineYamlList(activeContext.link ? [activeContext.link] : [])}
 collegamenti: ${helpers.inlineYamlList(collegamenti)}
+entita_impattate: []
+propaga_a: []
+canonizza_evento: false
+marca_rumor: false
+crea_conseguenza: false
+archivia_appunto: false
 ---
 `;
 }

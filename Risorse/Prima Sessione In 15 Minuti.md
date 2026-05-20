@@ -20,11 +20,8 @@ Questa guida serve per giocare subito senza capire tutta la struttura del vault.
 
 Se i pulsanti funzionano e le tabelle mostrano testo leggibile, puoi proseguire.
 
-## 2. Guarda La Demo
 
-`BUTTON[apri-demo-demo-la-reliquia-spezzata]`
 
-Usa la demo come esempio, non come manuale. Guarda soprattutto:
 
 - una campagna con sessioni, PNG, luoghi, missione e clock gia collegati;
 - una sessione attiva visibile in [[Durante il Gioco]];
@@ -36,7 +33,6 @@ Usa la demo come esempio, non come manuale. Guarda soprattutto:
 
 `BUTTON[dm-dashboard-1-dm-dashboard]`
 
-Da [[1. DM Dashboard]] puoi creare una nuova campagna oppure usare la demo per provare. Per una prima sessione reale basta avere:
 
 - una campagna;
 - una sessione;

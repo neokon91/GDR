@@ -1,7 +1,7 @@
 <% await tp.user.ricorrenza_calendario(tp) %>
 # `=this.nome`
 
->[!infobox|wiki]- Ricorrenza
+>[!infoboxwiki]- Ricorrenza
 > Mondo:
 > `INPUT[mondo][:mondo]`
 >

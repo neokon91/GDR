@@ -1,9 +1,7 @@
 filters:
   and:
     - file.folder == "Mondi/Luoghi"
-    - note.coordinates
-    - '!file.name.startsWith("Prova -")'
-properties:
+    - note.coordinatesproperties:
   file.name:
     displayName: Luogo
   note.stato:

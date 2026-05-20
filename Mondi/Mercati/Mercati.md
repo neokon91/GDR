@@ -13,6 +13,6 @@ stato: pronto
 ```dataview
 TABLE luogo, fazioni_controllanti, risorse, rotte, pedaggi, rischi, pressione, prossima_mossa
 FROM "Mondi/Mercati"
-WHERE file.name != "Mercati" AND !startswith(file.name, "Prova -") AND stato != "archiviata"
+WHERE file.name != "Mercati" AND stato != "archiviata"
 SORT pressione DESC, file.name ASC
 ```

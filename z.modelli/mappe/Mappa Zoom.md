@@ -19,7 +19,7 @@ versione_giocatori:
 
 # `=this.file.name`
 
->[!infobox|wiki]- Mappa Zoom
+>[!infoboxwiki]- Mappa Zoom
 > Stato:
 > `INPUT[inlineSelect(option(bozza, Bozza), option(pronto, Pronto), option(in gioco, In gioco), option(archiviata, Archiviata)):stato]`
 >

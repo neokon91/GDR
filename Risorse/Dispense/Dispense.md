@@ -3,6 +3,6 @@
 ```dataview
 LIST
 FROM "Risorse/Dispense"
-WHERE file.name != "Dispense" AND !startswith(file.name, "Prova -")
+WHERE file.name != "Dispense"
 SORT file.name ASC
 ```

@@ -12,7 +12,11 @@ async function rotta(tp) {
     const rischio = await helpers.promptOptional(tp, "Rischio principale");
     const pedaggio = await helpers.promptOptional(tp, "Pedaggio o costo di passaggio");
     const conseguenza = await helpers.promptOptional(tp, "Conseguenza se bloccata");
+    const gancio = await helpers.promptOptional(tp, "Gancio giocabile della rotta");
+    const usoAlTavolo = await helpers.promptOptional(tp, "Uso al tavolo");
+    const playerSafe = await helpers.promptOptional(tp, "Versione player-safe");
     const prossimaMossa = await helpers.promptOptional(tp, "Prossima mossa della rotta");
+    const connessioni = await helpers.chooseConnections(tp, "Connessioni vive della rotta", context);
     const statoRotta = await helpers.chooseRequired(
         tp,
         [
@@ -25,7 +29,8 @@ async function rotta(tp) {
         "Stato della rotta"
     );
 
-    await helpers.moveNote(tp, helpers.path("rotte"), name);
+    const created = await helpers.moveNote(tp, helpers.path("rotte"), name);
+    await helpers.linkCreatedNoteToConnections(created, connessioni);
 
     return `---
 id: ${id}
@@ -49,7 +54,11 @@ pedaggi: ${helpers.inlineYamlTextList([pedaggio])}
 conseguenze_se_bloccata: ${helpers.inlineYamlTextList([conseguenza])}
 conseguenze: ${helpers.inlineYamlTextList([conseguenza])}
 pressione: 0
+gancio: ${helpers.yamlQuote(gancio)}
+uso_al_tavolo: ${helpers.yamlQuote(usoAlTavolo)}
+player_safe: ${helpers.yamlQuote(playerSafe)}
 prossima_mossa: ${helpers.yamlQuote(prossimaMossa)}
+connessioni: ${helpers.inlineYamlList(connessioni)}
 missioni: []
 conflitti: []
 sessioni: []

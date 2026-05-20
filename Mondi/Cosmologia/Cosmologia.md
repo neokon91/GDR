@@ -11,6 +11,6 @@ stato: pronto
 ```dataview
 TABLE mondo, tipo, regola, pericolo, divinita, creature, stato
 FROM "Mondi/Cosmologia"
-WHERE file.name != "Cosmologia" AND !startswith(file.name, "Prova -")
+WHERE file.name != "Cosmologia"
 SORT mondo ASC, tipo ASC, nome ASC
 ```

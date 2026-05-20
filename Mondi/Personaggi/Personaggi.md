@@ -14,7 +14,7 @@ cssclasses:
 ```dataview
 TABLE giocatore, classe, livello, stato, luogo
 FROM "Mondi/Personaggi"
-WHERE tipo = "pg" AND stato != "archiviata" AND !startswith(file.name, "Prova -")
+WHERE tipo = "pg" AND stato != "archiviata"
 SORT nome ASC
 ```
 
@@ -23,7 +23,7 @@ SORT nome ASC
 ```dataview
 TABLE ruolo, luogo, atteggiamento, fazioni
 FROM "Mondi/Personaggi"
-WHERE tipo = "png" AND stato = "in gioco" AND !startswith(file.name, "Prova -")
+WHERE tipo = "png" AND stato = "in gioco"
 SORT nome ASC
 ```
 
@@ -32,6 +32,6 @@ SORT nome ASC
 ```dataview
 TABLE ruolo, stato, luogo, atteggiamento
 FROM "Mondi/Personaggi"
-WHERE tipo = "png" AND stato != "archiviata" AND !startswith(file.name, "Prova -")
+WHERE tipo = "png" AND stato != "archiviata"
 SORT stato ASC, nome ASC
 ```

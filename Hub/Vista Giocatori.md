@@ -39,7 +39,7 @@ gdr.renderPlayerView(dv);
 ```dataview
 TABLE data, data_mondo, luoghi, missioni
 FROM "Mondi/Sessioni"
-WHERE (pubblico = true OR stato = "giocata") AND !startswith(file.name, "Prova -")
+WHERE (pubblico = true OR stato = "giocata")
 SORT data DESC
 LIMIT 8
 ```

@@ -1,7 +1,7 @@
 <% await tp.user.campagna_da_regione(tp) %>
 # `=this.nome`
 
->[!infobox|wiki]- Campagna da regione
+>[!infoboxwiki]- Campagna da regione
 > Stato:
 > `INPUT[inlineSelect(option(preparazione, Preparazione), option(in gioco, In Gioco), option(in pausa, In Pausa), option(conclusa, Conclusa), option(archiviata, Archiviata)):stato]`
 >

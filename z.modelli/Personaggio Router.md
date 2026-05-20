@@ -1,6 +1,6 @@
 <% await tp.user.personaggio(tp) %>
 # `=this.nome`
->[!infobox|wiki right]
+>[!infoboxwiki] right
 >**Ruolo**: `=this.ruolo`
 >**Stato**: `=this.stato`
 >**Mondo**: `=this.mondo`

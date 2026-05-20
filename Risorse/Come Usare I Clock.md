@@ -28,7 +28,6 @@ Non creare un clock per una nota statica, un segreto, una descrizione o una cosa
 
 ## Caso 1: Minaccia
 
-Esempio: [[Demo - La Soglia Si Apre]].
 
 | Campo | Cosa scrivere |
 | --- | --- |
@@ -44,7 +43,6 @@ Quando si riempie, non punire a caso: applica la posta che avevi scritto. Poi cr
 
 ## Caso 2: Viaggio
 
-Esempio: [[Demo - Attraversare Brumafonda]].
 
 Un viaggio usa il clock per mostrare progresso, fatica e complicazioni.
 

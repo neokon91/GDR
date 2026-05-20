@@ -36,7 +36,6 @@ Conteggio su file Markdown del vault, escluso `dist`.
 | `encounter` | 3 blocchi, 5 inline | Sottoutilizzato: utile solo per combattimenti pronti. |
 | `fc-date` | 39 | Calendarium presente ma ancora leggero. |
 | `tabs` | 369 | Molto sfruttato, soprattutto su note lunghe e mostri. |
-| `zoommap` | 1 | Demo funzionante, non ancora uso esteso. |
 | `.base` | 5 basi, 20 viste tabellari | Bases ora usa viste diverse per priorita, archivio, relazioni e dati marker. |
 | `#task` | 0 prima del pilota | Ora usato come filtro globale Tasks. |
 

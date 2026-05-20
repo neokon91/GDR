@@ -12,7 +12,7 @@ cssclasses:
 ```dataview
 TABLE stato, committente, luoghi, personaggi, ricompense
 FROM "Mondi/Missioni"
-WHERE (stato = "proposta" OR stato = "accettata" OR stato = "in corso") AND !startswith(file.name, "Prova -")
+WHERE (stato = "proposta" OR stato = "accettata" OR stato = "in corso")
 SORT stato ASC, nome ASC
 ```
 
@@ -21,7 +21,7 @@ SORT stato ASC, nome ASC
 ```dataview
 TABLE stato, committente, luoghi, ricompense
 FROM "Mondi/Missioni"
-WHERE (stato = "completata" OR stato = "fallita") AND !startswith(file.name, "Prova -")
+WHERE (stato = "completata" OR stato = "fallita")
 SORT nome ASC
 ```
 
@@ -30,6 +30,6 @@ SORT nome ASC
 ```dataview
 TABLE stato, committente, luoghi, ricompense
 FROM "Mondi/Missioni"
-WHERE file.name != "Missioni" AND stato != "archiviata" AND !startswith(file.name, "Prova -")
+WHERE file.name != "Missioni" AND stato != "archiviata"
 SORT stato ASC, nome ASC
 ```

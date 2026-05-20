@@ -15,7 +15,7 @@ Questa pagina controlla cosa e pronto per la sessione attiva: dispense, mappe, i
 ```dataview
 TABLE data, data_mondo, stato, dispense, mappe, immagini, audio, incontri
 FROM "Mondi/Sessioni"
-WHERE attiva = true AND !startswith(file.name, "Prova -")
+WHERE attiva = true
 SORT data DESC
 LIMIT 1
 ```
@@ -23,7 +23,7 @@ LIMIT 1
 ## Dispense Da Consegnare
 
 ```dataviewjs
-const active = dv.pages('"Mondi/Sessioni"').where(p => p.attiva === true && !String(p.file.name).startsWith("Prova -")).first();
+const active = dv.pages('"Mondi/Sessioni"').where(p => p.attiva === true).first();
 const links = dv.array(active?.dispense ?? []).array();
 if (!active) {
   dv.paragraph("Nessuna sessione attiva.");
@@ -37,7 +37,7 @@ if (!active) {
 ## Mappe E Schemi
 
 ```dataviewjs
-const active = dv.pages('"Mondi/Sessioni"').where(p => p.attiva === true && !String(p.file.name).startsWith("Prova -")).first();
+const active = dv.pages('"Mondi/Sessioni"').where(p => p.attiva === true).first();
 const links = dv.array(active?.mappe ?? []).array();
 if (!active) {
   dv.paragraph("Nessuna sessione attiva.");
@@ -51,7 +51,7 @@ if (!active) {
 ## Media E Scene
 
 ```dataviewjs
-const active = dv.pages('"Mondi/Sessioni"').where(p => p.attiva === true && !String(p.file.name).startsWith("Prova -")).first();
+const active = dv.pages('"Mondi/Sessioni"').where(p => p.attiva === true).first();
 const rows = [
   ...dv.array(active?.audio ?? []).array().map(x => [x, "Audio"]),
   ...dv.array(active?.immagini ?? []).array().map(x => [x, "Immagine"]),
@@ -69,7 +69,7 @@ if (!active) {
 ## Incontri E Creature
 
 ```dataviewjs
-const active = dv.pages('"Mondi/Sessioni"').where(p => p.attiva === true && !String(p.file.name).startsWith("Prova -")).first();
+const active = dv.pages('"Mondi/Sessioni"').where(p => p.attiva === true).first();
 const encounterLinks = dv.array(active?.incontri ?? []).array();
 const encounterNames = new Set(encounterLinks.map(l => String(l.path ?? l).replace(/\.md$/, "").split("/").pop()));
 const encounters = dv.pages('"Mondi/Incontri"').where(p => encounterNames.has(p.file.name)).array();

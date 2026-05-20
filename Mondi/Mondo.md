@@ -24,7 +24,7 @@ cssclasses:
 ```dataview
 TABLE stato, tono, tema, tecnologia, magia, campagne
 FROM "Mondi"
-WHERE categoria = "mondo" AND stato != "archiviata" AND !startswith(file.name, "Prova -")
+WHERE categoria = "mondo" AND stato != "archiviata"
 SORT stato ASC, nome ASC
 ```
 
@@ -33,7 +33,7 @@ SORT stato ASC, nome ASC
 ```dataview
 TABLE tono, tema, tecnologia, magia
 FROM "Mondi"
-WHERE categoria = "mondo" AND stato = "bozza" AND !startswith(file.name, "Prova -")
+WHERE categoria = "mondo" AND stato = "bozza"
 SORT nome ASC
 ```
 
@@ -42,7 +42,7 @@ SORT nome ASC
 ```dataview
 TABLE tono, tema, campagne, canonico
 FROM "Mondi"
-WHERE categoria = "mondo" AND stato = "pronto" AND !startswith(file.name, "Prova -")
+WHERE categoria = "mondo" AND stato = "pronto"
 SORT nome ASC
 ```
 
@@ -53,7 +53,7 @@ SORT nome ASC
 ```dataview
 TABLE mondo, tipo, stato, bioma, luogo_padre
 FROM "Mondi/Luoghi"
-WHERE file.name != "Luoghi" AND stato != "archiviata" AND !startswith(file.name, "Prova -")
+WHERE file.name != "Luoghi" AND stato != "archiviata"
 SORT mondo ASC, nome ASC
 LIMIT 16
 ```
@@ -63,7 +63,7 @@ LIMIT 16
 ```dataview
 TABLE mondo, tipo, ruolo, stato, luogo
 FROM "Mondi/Personaggi"
-WHERE file.name != "Personaggi" AND stato != "archiviata" AND !startswith(file.name, "Prova -")
+WHERE file.name != "Personaggi" AND stato != "archiviata"
 SORT mondo ASC, nome ASC
 LIMIT 16
 ```
@@ -73,7 +73,7 @@ LIMIT 16
 ```dataview
 TABLE mondo, categoria, tipo, stato
 FROM "Mondi/Fazioni" OR "Mondi/Religioni"
-WHERE file.name != "Fazioni" AND file.name != "Religioni" AND stato != "archiviata" AND !startswith(file.name, "Prova -")
+WHERE file.name != "Fazioni" AND file.name != "Religioni" AND stato != "archiviata"
 SORT mondo ASC, categoria ASC, nome ASC
 LIMIT 16
 ```
@@ -83,7 +83,7 @@ LIMIT 16
 ```dataview
 TABLE mondo, tipo, stato, soggetti, pressione, prossima_mossa
 FROM "Mondi/Relazioni"
-WHERE file.name != "Relazioni" AND stato != "archiviata" AND !startswith(file.name, "Prova -")
+WHERE file.name != "Relazioni" AND stato != "archiviata"
 SORT mondo ASC, pressione DESC, nome ASC
 LIMIT 16
 ```
@@ -93,7 +93,7 @@ LIMIT 16
 ```dataview
 TABLE mondo, tipo, stato, cr, luoghi
 FROM "Mondi/Creature"
-WHERE file.name != "Creature" AND stato != "archiviata" AND !startswith(file.name, "Prova -")
+WHERE file.name != "Creature" AND stato != "archiviata"
 SORT mondo ASC, nome ASC
 LIMIT 16
 ```
@@ -103,7 +103,7 @@ LIMIT 16
 ```dataview
 TABLE mondo, categoria, tipo, stato, luogo
 FROM "Mondi/Oggetti" OR "Mondi/Dispense"
-WHERE file.name != "Oggetti" AND file.name != "Dispense" AND stato != "archiviata" AND !startswith(file.name, "Prova -")
+WHERE file.name != "Oggetti" AND file.name != "Dispense" AND stato != "archiviata"
 SORT mondo ASC, categoria ASC, nome ASC
 LIMIT 16
 ```
@@ -113,7 +113,7 @@ LIMIT 16
 ```dataview
 TABLE mondo, stato, committente, luoghi, personaggi
 FROM "Mondi/Missioni"
-WHERE file.name != "Missioni" AND stato != "archiviata" AND !startswith(file.name, "Prova -")
+WHERE file.name != "Missioni" AND stato != "archiviata"
 SORT mondo ASC, stato ASC, nome ASC
 LIMIT 16
 ```
@@ -123,7 +123,7 @@ LIMIT 16
 ```dataview
 TABLE mondo, data_mondo, stato_canonico, luoghi, fazioni, sessioni
 FROM "Mondi/Timeline"
-WHERE file.name != "Timeline" AND stato_canonico != "archiviata" AND !startswith(file.name, "Prova -")
+WHERE file.name != "Timeline" AND stato_canonico != "archiviata"
 SORT mondo ASC, data_mondo ASC, nome ASC
 LIMIT 16
 ```

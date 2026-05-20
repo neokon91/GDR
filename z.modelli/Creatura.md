@@ -1,6 +1,6 @@
 <% await tp.user.creatura(tp) %>
 # `=this.name`
->[!infobox|wiki wfull]
+>[!infoboxwiki wfull]
 >{img.placeholder}
 >**Nome**: `=this.name`
 >**Tipo**: `=this.type`

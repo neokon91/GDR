@@ -21,14 +21,19 @@ async function relazione(tp) {
     const mondo = await helpers.chooseWorld(tp, "Mondo della relazione");
     const context = { world: mondo };
     const soggetti = creazioneCompleta ? await helpers.chooseNotesByPath(tp, "Mondi", "Soggetti coinvolti", context) : [];
+    const connessioni = await helpers.chooseConnections(tp, "Connessioni vive della relazione", context);
     const origine = await helpers.promptOptional(tp, "Origine della relazione");
     const posta = await helpers.promptOptional(tp, "Cosa c'è in gioco");
+    const gancio = await helpers.promptOptional(tp, "Gancio giocabile della relazione");
+    const usoAlTavolo = await helpers.promptOptional(tp, "Uso al tavolo");
+    const playerSafe = await helpers.promptOptional(tp, "Versione player-safe");
     const prossimaMossa = await helpers.promptOptional(tp, "Prossimo deterioramento o sviluppo");
     const versione = creazioneCompleta ? await helpers.promptOptional(tp, "Come la raccontano in modo diverso le parti") : "";
     const dipendenza = creazioneCompleta ? await helpers.promptOptional(tp, "Dipendenza materiale o politica") : "";
     const ferita = creazioneCompleta ? await helpers.promptOptional(tp, "Ferita aperta") : "";
 
-    await helpers.moveNote(tp, helpers.path("relazioni"), name);
+    const created = await helpers.moveNote(tp, helpers.path("relazioni"), name);
+    await helpers.linkCreatedNoteToConnections(created, connessioni);
 
     return `---
 id: ${id}
@@ -42,6 +47,10 @@ mondo: ${mondo}
 soggetti: ${helpers.inlineYamlList(soggetti)}
 origine: ${helpers.yamlQuote(origine)}
 posta: ${helpers.yamlQuote(posta)}
+gancio: ${helpers.yamlQuote(gancio)}
+uso_al_tavolo: ${helpers.yamlQuote(usoAlTavolo)}
+player_safe: ${helpers.yamlQuote(playerSafe)}
+connessioni: ${helpers.inlineYamlList(connessioni)}
 origine_storica: ${helpers.inlineYamlTextList([origine])}
 versioni_contrapposte: ${helpers.inlineYamlTextList([versione])}
 simboli_riti_trattati: []

@@ -1,7 +1,7 @@
 <% await tp.user.fazione(tp, { tipoFazione: "gilda" }) %>
 # `=this.nome`
 
->[!infobox|wiki]- Gilda
+>[!infoboxwiki]- Gilda
 > Tipo:
 > `INPUT[text:tipo]`
 >

@@ -30,7 +30,7 @@ Usa questa cartella per idee grezze, appunti presi al volo e materiale non ancor
 ```dataview
 TABLE tipo, stato, stato_canonico, data_mondo, sessioni, collegamenti
 FROM "Inbox"
-WHERE file.name != "Inbox" AND stato != "smistata" AND stato != "archiviata" AND stato != "ignorata" AND !startswith(file.name, "Prova -")
+WHERE file.name != "Inbox" AND stato != "smistata" AND stato != "archiviata" AND stato != "ignorata"
 SORT file.ctime DESC
 ```
 
@@ -39,7 +39,7 @@ SORT file.ctime DESC
 ```dataview
 TABLE categoria, tipo, generatore, mondo, luogo, creato
 FROM "Inbox/Generati"
-WHERE plugin = "fantasy-content-generator" AND stato = "bozza" AND !startswith(file.name, "Prova -")
+WHERE plugin = "fantasy-content-generator" AND stato = "bozza"
 SORT creato ASC, file.ctime ASC
 ```
 
@@ -48,7 +48,7 @@ SORT creato ASC, file.ctime ASC
 ```dataview
 TABLE tipo, stato, stato_canonico, sessioni, collegamenti, impatto
 FROM "Inbox"
-WHERE categoria = "lore capture" AND stato != "archiviata" AND stato != "ignorata" AND !startswith(file.name, "Prova -")
+WHERE categoria = "lore capture" AND stato != "archiviata" AND stato != "ignorata"
 SORT file.mtime DESC
 ```
 
@@ -57,6 +57,6 @@ SORT file.mtime DESC
 ```dataview
 TABLE tipo, stato_canonico, collegamenti
 FROM "Inbox"
-WHERE (stato = "smistata" OR stato = "collegata" OR stato = "canonica") AND !startswith(file.name, "Prova -")
+WHERE (stato = "smistata" OR stato = "collegata" OR stato = "canonica")
 SORT file.mtime DESC
 ```

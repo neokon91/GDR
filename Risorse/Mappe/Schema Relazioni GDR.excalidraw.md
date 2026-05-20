@@ -4,6 +4,12 @@ categoria: risorsa
 tipo: mappa
 uso: relazioni
 stato: pronto
+gancio: "Schema generico per trasformare relazioni sparse in decisioni di scena."
+uso_al_tavolo: "Duplicalo quando una rete di luoghi, PNG, fazioni e missioni deve diventare mappa giocabile."
+cosa_mostrare: "Mostra solo nodi gia noti o utili alla prossima scena: luoghi, fazioni, PNG, missioni e tensioni."
+player_safe: ""
+prossima_mossa: "Scegli il nodo piu instabile e trasformalo in pressione o missione."
+connessioni: []
 tags:
   - excalidraw
   - mappa

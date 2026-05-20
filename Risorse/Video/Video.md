@@ -13,6 +13,6 @@ Usa campi semplici nelle note video quando servono: `uso`, `tono`, `campagna`, `
 ```dataview
 TABLE uso, tono, campagna, scena, timestamp, stato
 FROM "Risorse/Video"
-WHERE file.name != "Video" AND !startswith(file.name, "Prova -")
+WHERE file.name != "Video"
 SORT uso ASC, tono ASC, file.name ASC
 ```

@@ -36,9 +36,10 @@ async function fazione(tp, routeOptions = {}) {
     const rivali = creazioneCompleta ? await helpers.chooseFactions(tp, "Fazioni rivali o nemiche", context) : [];
     const scadenzaMondo = creazioneCompleta ? await helpers.promptOptional(tp, "Scadenza nel mondo") : "";
     const domandaAperta = creazioneCompleta ? await helpers.promptOptional(tp, "Domanda aperta sulla fazione") : "";
-    const connessioni = creazioneCompleta ? await helpers.chooseConnections(tp, "Connessioni vive della fazione", context) : [];
+    const connessioni = await helpers.chooseConnections(tp, "Connessioni vive della fazione", context);
 
-    await helpers.moveNote(tp, helpers.path("fazioni"), name);
+    const created = await helpers.moveNote(tp, helpers.path("fazioni"), name);
+    await helpers.linkCreatedNoteToConnections(created, connessioni);
 
     return `---
 id: ${id}

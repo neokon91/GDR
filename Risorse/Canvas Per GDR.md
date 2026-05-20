@@ -13,9 +13,7 @@ plugin:
 
 Canvas serve quando vuoi vedere note vere collegate tra loro: campagna, mondo, fazioni, PNG, luoghi, missioni, clock e incontri. Excalidraw resta migliore per disegnare, annotare e ragionare liberamente; Canvas resta migliore quando la mappa deve essere una rete di note apribili.
 
-## Demo
 
-Apri [[Demo - Canvas Fronti.canvas]] per una rete pronta del fronte dei Custodi.
 
 ## Regola Operativa
 
@@ -29,6 +27,6 @@ Apri [[Demo - Canvas Fronti.canvas]] per una rete pronta del fronte dei Custodi.
 ```dataview
 TABLE file.mtime AS aggiornato
 FROM "Risorse/Mappe"
-WHERE contains(file.name, "Canvas") AND !startswith(file.name, "Prova -")
+WHERE contains(file.name, "Canvas")
 SORT file.mtime DESC
 ```

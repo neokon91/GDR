@@ -1,7 +1,7 @@
 <% await tp.user.compendium_mondo(tp) %>
 # `=this.nome`
 
->[!infobox|wiki]- Compendium
+>[!infoboxwiki]- Compendium
 > Tipo:
 > `INPUT[inlineSelect(option(materiale, Materiale), option(pianta, Pianta), option(malattia, Malattia), option(moneta, Moneta), option(tecnologia, Tecnologia), option(cibo, Cibo), option(superstizione, Superstizione), option(professione, Professione), option(creatura regionale, Creatura Regionale)):tipo]`
 >

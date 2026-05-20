@@ -70,7 +70,7 @@ Questa pagina raccoglie solo le guide utili mentre prepari o giochi. Le note tec
 ```dataview
 LIST
 FROM "Risorse/Mappe"
-WHERE file.name != "Mappe" AND !startswith(file.name, "Prova -")
+WHERE file.name != "Mappe"
 SORT file.name ASC
 ```
 
@@ -79,7 +79,7 @@ SORT file.name ASC
 ```dataview
 LIST
 FROM "Risorse/Immagini"
-WHERE file.name != "Immagini" AND !startswith(file.name, "Prova -")
+WHERE file.name != "Immagini"
 SORT file.name ASC
 ```
 
@@ -88,7 +88,7 @@ SORT file.name ASC
 ```dataview
 LIST
 FROM "Risorse/Audio"
-WHERE file.name != "Audio" AND !startswith(file.name, "Prova -")
+WHERE file.name != "Audio"
 SORT file.name ASC
 ```
 
@@ -97,7 +97,7 @@ SORT file.name ASC
 ```dataview
 LIST
 FROM "Risorse/Video"
-WHERE file.name != "Video" AND !startswith(file.name, "Prova -")
+WHERE file.name != "Video"
 SORT file.name ASC
 ```
 
@@ -106,7 +106,7 @@ SORT file.name ASC
 ```dataview
 LIST
 FROM "Risorse/Tabelle"
-WHERE file.name != "Tabelle" AND !startswith(file.name, "Prova -")
+WHERE file.name != "Tabelle"
 SORT file.name ASC
 ```
 
@@ -115,6 +115,6 @@ SORT file.name ASC
 ```dataview
 LIST
 FROM "Risorse/Dispense"
-WHERE file.name != "Dispense" AND !startswith(file.name, "Prova -")
+WHERE file.name != "Dispense"
 SORT file.name ASC
 ```

@@ -30,7 +30,7 @@ Questa pagina serve a trasformare una regione, un conflitto o una cultura in gio
 
 ```dataviewjs
 const world = dv.current().mondo_attivo?.path ?? String(dv.current().mondo_attivo ?? "");
-const isReal = p => !String(p.file.name).startsWith("Prova -") && p.stato !== "archiviata";
+const isReal = p => p.stato !== "archiviata";
 const matchesWorld = p => !world || String(p.mondo?.path ?? p.mondo ?? "") === world || p.file.path === world;
 const count = source => dv.pages(source).where(p => isReal(p) && matchesWorld(p)).length;
 const esc = value => String(value ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "\"": "&quot;", "'": "&#39;" }[c]));
@@ -60,7 +60,7 @@ grid.innerHTML = cards.map(([label, value, hint]) => `
 const hasText = value => String(value ?? "").trim().length > 0;
 const hasLinks = value => dv.array(value ?? []).length > 0;
 const world = dv.current().mondo_attivo?.path ?? String(dv.current().mondo_attivo ?? "");
-const real = p => !String(p.file.name).startsWith("Prova -") && p.stato !== "archiviata";
+const real = p => p.stato !== "archiviata";
 const matchesWorld = p => !world || String(p.mondo?.path ?? p.mondo ?? "") === world || p.file.path === world;
 
 const rows = [
@@ -87,7 +87,7 @@ if (!rows.length) {
 ```dataview
 TABLE tipo, pressione, prossima_mossa, scadenza_mondo, fazioni, luoghi
 FROM "Mondi/Conflitti" OR "Mondi/Missioni" OR "Mondi/Fazioni"
-WHERE stato != "archiviata" AND !startswith(file.name, "Prova -") AND pressione > 0 AND (!this.mondo_attivo OR mondo = this.mondo_attivo)
+WHERE stato != "archiviata" AND pressione > 0 AND (!this.mondo_attivo OR mondo = this.mondo_attivo)
 SORT pressione DESC, scadenza_mondo ASC, nome ASC
 LIMIT 20
 ```
@@ -97,6 +97,6 @@ LIMIT 20
 ```dataview
 TABLE stato, profilo, regione, culture, fazioni, conflitti
 FROM "Campagne"
-WHERE file.name != "Campagne" AND stato != "archiviata" AND !startswith(file.name, "Prova -")
+WHERE file.name != "Campagne" AND stato != "archiviata"
 SORT stato ASC, nome ASC
 ```

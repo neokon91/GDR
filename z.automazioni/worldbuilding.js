@@ -2,97 +2,11 @@
 
 async function worldbuilding(tp) {
   const helpers = tp.user.helpers;
+  const taxonomy = require("./world_taxonomy.js");
 
   /// Selezione per Luogo
   async function chooseLocation() {
-    const category = await helpers.chooseRequired(
-      tp,
-      [
-        { label: "Insediamento", id: "insediamento" },
-        { label: "Luogo di interesse", id: "luogo di interesse" },
-        { label: "Regione naturale", id: "regione naturale" },
-        { label: "Geografia grande", id: "geografia" },
-        { label: "Territorio politico", id: "politica" }
-      ],
-      "Che tipo di luogo vuoi creare?"
-    );
-
-    let subtype = "";
-
-    if (category.id === "insediamento") {
-      subtype = await helpers.chooseRequired(
-        tp,
-        [
-          { label: "Amleto", id: "amleto" },
-          { label: "Villaggio", id: "villaggio" },
-          { label: "Città", id: "città" },
-          { label: "Capitale", id: "capitale" },
-          { label: "Porto", id: "porto" },
-          { label: "Fortezza", id: "fortezza" }
-        ],
-        "Che tipo di insediamento?"
-      );
-    }
-
-    if (category.id === "luogo di interesse") {
-      subtype = await helpers.chooseRequired(
-        tp,
-        [
-          { label: "Tempio", id: "tempio" },
-          { label: "Dungeon", id: "dungeon" },
-          { label: "Rovina", id: "rovina" },
-          { label: "Torre", id: "torre" },
-          { label: "Santuario", id: "santuario" },
-          { label: "Accampamento", id: "accampamento" }
-        ],
-        "Che luogo di interesse?"
-      );
-    }
-
-    if (category.id === "regione naturale") {
-      subtype = await helpers.chooseRequired(
-        tp,
-        [
-          { label: "Foresta", id: "foresta" },
-          { label: "Montagna", id: "montagna" },
-          { label: "Palude", id: "palude" },
-          { label: "Deserto", id: "deserto" },
-          { label: "Lago", id: "lago" },
-          { label: "Caverna", id: "caverna" }
-        ],
-        "Che regione naturale?"
-      );
-    }
-
-    if (category.id === "geografia") {
-      subtype = await helpers.chooseRequired(
-        tp,
-        [
-          { label: "Continente", id: "continente" },
-          { label: "Regione", id: "regione" },
-          { label: "Isola", id: "isola" }
-        ],
-        "Che elemento geografico?"
-      );
-    }
-
-    if (category.id === "politica") {
-      subtype = await helpers.chooseRequired(
-        tp,
-        [
-          { label: "Regno", id: "regno" },
-          { label: "Impero", id: "impero" },
-          { label: "Repubblica", id: "repubblica" },
-          { label: "Oligarchia", id: "oligarchia" },
-          { label: "Ducato", id: "ducato" },
-          { label: "Contea", id: "contea" },
-          { label: "Baronia", id: "baronia" }
-        ],
-        "Che territorio politico?"
-      );
-    }
-
-    return { category: category.id, subtype: subtype.id };
+    return chooseCreative("luogo");
   }
 
   function getLocationTemplate(category, subtype) {
@@ -115,9 +29,55 @@ async function worldbuilding(tp) {
     return "z.modelli/luogo/Interesse";
   }
 
+  async function chooseCreative(kind) {
+    const group = taxonomy.getTaxonomy(kind);
+
+    if (!group) {
+      helpers.abortCreation(`Router non configurato: ${kind}`);
+    }
+
+    const family = await helpers.chooseRequired(
+      tp,
+      group.families.map(entry => ({
+        label: entry.label,
+        id: entry.id,
+        folder: entry.folder,
+        category: entry.category
+      })),
+      `Che famiglia di ${group.label.toLowerCase()} vuoi creare?`
+    );
+    const familyConfig = group.families.find(entry => entry.id === family.id);
+    const subtype = await helpers.chooseRequired(
+      tp,
+      familyConfig.items.map(([id, label]) => ({ id, label })),
+      "Che cosa stai immaginando?"
+    );
+
+    helpers.setRoute({
+      kind,
+      family: family.id,
+      folder: familyConfig.folder ?? group.defaultFolder,
+      category: familyConfig.category,
+      subtype: subtype.id
+    });
+
+    return {
+      category: family.id,
+      subtype: subtype.id,
+      folder: familyConfig.folder ?? group.defaultFolder,
+      frontmatterCategory: familyConfig.category
+    };
+  }
+
+  function getCreativeTemplate() {
+    return "z.modelli/worldbuilding/Entita Worldbuilding";
+  }
+
   return {
     chooseLocation,
-    getLocationTemplate
+    getLocationTemplate,
+    chooseCreative,
+    getCreativeTemplate
   };
 }
 

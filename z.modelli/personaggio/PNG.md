@@ -1,7 +1,51 @@
 <% await tp.user.png(tp) %>
 # `=this.nome`
 
->[!infobox|wiki right]
+````tabs
+tab: Tavolo
+
+> [!png] Cosa Serve In Scena
+> Vuole: `INPUT[text:vuole]`
+>
+> Sa: `INPUT[text:sa]`
+>
+> Leva: `INPUT[text:leva]`
+>
+> Uso al tavolo: `INPUT[text:uso_al_tavolo]`
+>
+> > [!lettura]- Player-safe
+> > `INPUT[text:player_safe]`
+>
+> > [!segreto]- Segreto
+> > `INPUT[text:segreto]`
+
+tab: Rete
+
+> [!regia] Appartenenze
+> Mondo: `INPUT[mondo][:mondo]`
+>
+> Luogo: `INPUT[suggester(optionQuery("Mondi/Luoghi"), useLinks(partial), allowOther):luogo]`
+>
+> Fazioni: `INPUT[inlineListSuggester(optionQuery("Mondi/Fazioni"), useLinks(partial)):fazioni]`
+>
+> Relazioni: `INPUT[inlineListSuggester(optionQuery("Mondi/Personaggi"), useLinks(partial)):relazioni]`
+>
+> Missioni: `INPUT[inlineListSuggester(optionQuery("Mondi/Missioni"), useLinks(partial)):missioni]`
+
+tab: Pressione
+
+> [!timer] Se Ignorato
+> Pressione: `INPUT[slider(minValue(0), maxValue(10), stepSize(1), addLabels):pressione]`
+>
+> Prossima mossa: `INPUT[text:prossima_mossa]`
+>
+> > [!conflitto]- Conseguenze
+> > ```meta-bind
+> > INPUT[list:conseguenze]
+> > ```
+````
+
+>[!infoboxwiki] right
 >**Ruolo**: `=this.ruolo`
 >**Stato**: `=this.stato`
 >**Mondo**: `=this.mondo`
@@ -75,6 +119,13 @@ TABLE categoria, tipo, stato, pressione, prossima_mossa
 FROM "Mondi"
 WHERE contains(this.connessioni, file.link)
 SORT categoria ASC, file.name ASC
+```
+
+### Feedback Creazione
+
+```dataviewjs
+const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));
+gdr.renderCreationFeedback(dv);
 ```
 
 ```dataviewjs

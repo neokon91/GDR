@@ -17,6 +17,13 @@ fieldsOrder:
   - posta
   - prossima_mossa
   - conseguenze
+  - stato_canonico
+  - canonico
+  - sessioni
+  - connessioni
+  - player_safe
+  - entita_impattate
+  - propaga_a
 fields:
   - name: nome
     id: nome
@@ -96,6 +103,41 @@ fields:
     options: {}
   - name: conseguenze
     id: conseguenze
+    type: MultiFile
+    options: {}
+  - name: stato_canonico
+    id: stato_canonico
+    type: Select
+    options:
+      sourceType: ValuesList
+      valuesList:
+        "0": canonico
+        "1": rumor
+        "2": leggenda
+        "3": falso
+        "4": retcon
+  - name: canonico
+    id: canonico
+    type: Boolean
+    options: {}
+  - name: sessioni
+    id: sessioni
+    type: MultiFile
+    options: {}
+  - name: connessioni
+    id: connessioni
+    type: MultiFile
+    options: {}
+  - name: player_safe
+    id: player_safe
+    type: Input
+    options: {}
+  - name: entita_impattate
+    id: entita_impattate
+    type: MultiFile
+    options: {}
+  - name: propaga_a
+    id: propaga_a
     type: MultiFile
     options: {}
 ---

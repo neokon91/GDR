@@ -63,7 +63,7 @@ tab: Segnali
 ```dataview
 TABLE categoria, tipo, stato, pressione, prossima_mossa
 FROM "Mondi"
-WHERE !startswith(file.name, "Prova -") AND stato != "archiviata" AND (pressione > 0 OR prossima_mossa) AND (!this.mondo_attivo OR mondo = this.mondo_attivo OR file.link = this.mondo_attivo)
+WHERE stato != "archiviata" AND (pressione > 0 OR prossima_mossa) AND (!this.mondo_attivo OR mondo = this.mondo_attivo OR file.link = this.mondo_attivo)
 SORT pressione DESC, file.mtime DESC
 LIMIT 20
 ```
@@ -73,7 +73,7 @@ tab: Culture
 ```dataview
 TABLE luoghi, lingue, religioni, tensioni, feste
 FROM "Mondi/Culture"
-WHERE !startswith(file.name, "Prova -") AND stato != "archiviata" AND (!this.mondo_attivo OR mondo = this.mondo_attivo)
+WHERE stato != "archiviata" AND (!this.mondo_attivo OR mondo = this.mondo_attivo)
 SORT file.name ASC
 LIMIT 20
 ```
@@ -83,7 +83,7 @@ tab: Potere
 ```dataview
 TABLE tipo, luoghi, pressione, agenda, prossima_mossa
 FROM "Mondi/Fazioni" OR "Mondi/Religioni"
-WHERE !startswith(file.name, "Prova -") AND stato != "archiviata" AND (!this.mondo_attivo OR mondo = this.mondo_attivo)
+WHERE stato != "archiviata" AND (!this.mondo_attivo OR mondo = this.mondo_attivo)
 SORT pressione DESC, file.name ASC
 LIMIT 20
 ```
@@ -93,7 +93,7 @@ tab: Misteri
 ```dataview
 TABLE verita_profonda, indizi_deboli, indizi_forti, prove_decisive, propaga_a
 FROM "Mondi/Segreti"
-WHERE !startswith(file.name, "Prova -") AND stato != "archiviata" AND (!this.mondo_attivo OR mondo = this.mondo_attivo)
+WHERE stato != "archiviata" AND (!this.mondo_attivo OR mondo = this.mondo_attivo)
 SORT file.mtime DESC
 LIMIT 20
 ```
@@ -103,7 +103,7 @@ tab: Mappe
 ```dataview
 TABLE uso, mondo, luogo, luoghi, stato
 FROM "Risorse/Mappe"
-WHERE file.name != "Mappe" AND !startswith(file.name, "Prova -") AND (!this.mondo_attivo OR mondo = this.mondo_attivo)
+WHERE file.name != "Mappe" AND (!this.mondo_attivo OR mondo = this.mondo_attivo)
 SORT uso ASC, file.name ASC
 ```
 
@@ -112,7 +112,7 @@ tab: Oggetti E Risorse
 ```dataview
 TABLE tipo, luoghi, regioni, risorse, fazioni, uso_narrativo
 FROM "Mondi/Oggetti" OR "Mondi/Risorse" OR "Mondi/Compendium"
-WHERE !startswith(file.name, "Prova -") AND stato != "archiviata" AND (!this.mondo_attivo OR mondo = this.mondo_attivo)
+WHERE stato != "archiviata" AND (!this.mondo_attivo OR mondo = this.mondo_attivo)
 SORT tipo ASC, file.name ASC
 LIMIT 24
 ```

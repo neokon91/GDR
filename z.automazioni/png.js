@@ -36,11 +36,13 @@ async function png(tp) {
     const speed = creazioneCompleta ? await helpers.promptOptional(tp, "Velocità", "9 m.") || "9 m." : "9 m.";
     const cr = creazioneCompleta ? await helpers.promptOptional(tp, "Grado di Sfida", "0") || "0" : "0";
     const stats = creazioneCompleta ? await helpers.promptOptional(tp, "Caratteristiche D&D: FOR DES COS INT SAG CAR", "10 10 10 10 10 10") : "10 10 10 10 10 10";
+    const connessioni = await helpers.chooseConnections(tp, "Connessioni vive del PNG", context);
 
     const sessioni = activeContext.link ? [activeContext.link] : [];
     const created = await helpers.moveNote(tp, helpers.path("personaggi"), name);
     // Un PNG creato durante la sessione entra subito nel cast attivo.
     await helpers.linkCreatedNoteToActiveSession(created, { sessionField: "personaggi" });
+    await helpers.linkCreatedNoteToConnections(created, connessioni);
 
     return `---
 id: ${id}
@@ -58,6 +60,7 @@ fazioni: ${helpers.inlineYamlList(fazioni)}
 relazioni: ${helpers.inlineYamlList(relazioni)}
 missioni: ${helpers.inlineYamlList(missioni)}
 sessioni: ${helpers.inlineYamlList(sessioni)}
+connessioni: ${helpers.inlineYamlList(connessioni)}
 vuole: ${helpers.yamlQuote(vuole)}
 sa: ${helpers.yamlQuote(sa)}
 leva: ${helpers.yamlQuote(leva)}

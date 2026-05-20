@@ -1,7 +1,7 @@
 <% await tp.user.incontro(tp, { tipoIncontro: "trappola" }) %>
 # `=this.nome`
 
->[!infobox|wiki]- Trappola
+>[!infoboxwiki]- Trappola
 > Stato:
 > `INPUT[inlineSelect(option(bozza, Bozza), option(pronto, Pronto), option(in gioco, In gioco), option(usato, Usato), option(archiviata, Archiviata)):stato]`
 >

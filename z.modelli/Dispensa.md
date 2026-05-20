@@ -1,7 +1,7 @@
 <% await tp.user.dispensa(tp) %>
 # `=this.nome`
 
->[!infobox|wiki]- Dispensa
+>[!infoboxwiki]- Dispensa
 > Tipo:
 > `INPUT[text:tipo]`
 >

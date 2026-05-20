@@ -39,7 +39,8 @@ async function personaggio(tp) {
     const domandaAperta = await helpers.promptOptional(tp, "Domanda aperta sul personaggio");
     const connessioni = await helpers.chooseConnections(tp, "Connessioni vive del personaggio", context);
 
-    await helpers.moveNote(tp, helpers.path("personaggi"), name);
+    const created = await helpers.moveNote(tp, helpers.path("personaggi"), name);
+    await helpers.linkCreatedNoteToConnections(created, connessioni);
 
     return `---
 id: ${id}

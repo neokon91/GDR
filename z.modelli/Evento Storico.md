@@ -1,7 +1,7 @@
 <% await tp.user.evento_storico(tp) %>
 # `=this.nome`
 
->[!infobox|wiki]- Evento Storico
+>[!infoboxwiki]- Evento Storico
 > Stato:
 > `INPUT[inlineSelect(option(canonico, Canonico), option(rumor, Rumor), option(leggenda, Leggenda), option(segreto, Segreto), option(falso, Falso), option(retcon, Retcon), option(dimenticato, Dimenticato), option(archiviata, Archiviata)):stato_canonico]`
 >
@@ -80,6 +80,13 @@ TABLE categoria, tipo, stato, pressione, prossima_mossa
 FROM "Mondi"
 WHERE contains(this.connessioni, file.link)
 SORT categoria ASC, file.name ASC
+```
+
+### Feedback Creazione
+
+```dataviewjs
+const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));
+gdr.renderCreationFeedback(dv);
 ```
 
 ## Lettura Storica

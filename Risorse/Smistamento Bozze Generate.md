@@ -21,7 +21,7 @@ Questa pagina trasforma gli output del Generatore di Contenuti Fantasy in decisi
 ```dataview
 TABLE categoria, tipo, generatore, mondo, luogo, stato, creato
 FROM "Inbox/Generati"
-WHERE plugin = "fantasy-content-generator" AND stato = "bozza" AND !startswith(file.name, "Prova -")
+WHERE plugin = "fantasy-content-generator" AND stato = "bozza"
 SORT creato ASC, file.ctime ASC
 ```
 
@@ -30,7 +30,7 @@ SORT creato ASC, file.ctime ASC
 ```dataview
 TABLE categoria, tipo, generatore, mondo, luogo, campagne, sessioni
 FROM "Inbox/Generati"
-WHERE plugin = "fantasy-content-generator" AND stato = "bozza" AND !startswith(file.name, "Prova -") AND (mondo OR luogo OR campagne OR sessioni)
+WHERE plugin = "fantasy-content-generator" AND stato = "bozza" AND (mondo OR luogo OR campagne OR sessioni)
 SORT categoria ASC, tipo ASC, file.name ASC
 ```
 
@@ -39,7 +39,7 @@ SORT categoria ASC, tipo ASC, file.name ASC
 ```dataview
 TABLE categoria, tipo, generatore, creato
 FROM "Inbox/Generati"
-WHERE plugin = "fantasy-content-generator" AND stato = "bozza" AND !startswith(file.name, "Prova -") AND !mondo AND !luogo AND !campagne AND !sessioni
+WHERE plugin = "fantasy-content-generator" AND stato = "bozza" AND !mondo AND !luogo AND !campagne AND !sessioni
 SORT creato ASC, file.ctime ASC
 ```
 
@@ -57,7 +57,7 @@ SORT creato ASC, file.ctime ASC
 
 ```dataviewjs
 const rows = dv.pages('"Inbox/Generati"')
-  .where(p => p.plugin === "fantasy-content-generator" && p.stato === "bozza" && !String(p.file.name).startsWith("Prova -"))
+  .where(p => p.plugin === "fantasy-content-generator" && p.stato === "bozza")
   .map(p => {
     const category = String(p.categoria ?? "");
     const type = String(p.tipo ?? "");

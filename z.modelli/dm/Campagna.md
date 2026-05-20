@@ -1,7 +1,7 @@
 <% await tp.user.campagna(tp) %>
 # `=this.nome`
 
->[!infobox|wiki]- Campagna
+>[!infoboxwiki]- Campagna
 > Stato:
 > `INPUT[inlineSelect(option(preparazione, Preparazione), option(in gioco, In gioco), option(in pausa, In pausa), option(conclusa, Conclusa), option(archiviata, Archiviata)):stato]`
 >

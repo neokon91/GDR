@@ -14,6 +14,7 @@ const PATHS = {
     oggetti: "Mondi/Oggetti",
     personaggi: "Mondi/Personaggi",
     religioni: "Mondi/Religioni",
+    societa: "Mondi/Societa",
     relazioni: "Mondi/Relazioni",
     sessioni: "Mondi/Sessioni",
     mappe: "Risorse/Mappe",
@@ -305,7 +306,6 @@ function getFileByPathOrBasename(pathOrName) {
 function getActiveSessionFile() {
     const sessions = app.vault.getMarkdownFiles()
         .filter(file => file.path.startsWith(`${PATHS.sessioni}/`))
-        .filter(file => !file.basename.startsWith("Prova -"))
         .map(file => ({ file, frontmatter: getFrontmatter(file) }));
 
     const explicit = sessions
@@ -336,7 +336,7 @@ function getActiveSessionContext() {
 
 function isHiddenFromSuggestions(file) {
     const frontmatter = getFrontmatter(file);
-    return file.basename.startsWith("Prova -") || frontmatter.stato === "archiviata";
+    return frontmatter.stato === "archiviata";
 }
 
 function sortFilesForSuggestions(files, context = {}) {
@@ -355,6 +355,12 @@ function sortFilesForSuggestions(files, context = {}) {
         const bMeta = getFrontmatter(b);
         const aSameWorld = frontmatterHasLink(aMeta.mondo, context.world);
         const bSameWorld = frontmatterHasLink(bMeta.mondo, context.world);
+        const aSameSession = frontmatterHasLink(aMeta.sessioni, context.session);
+        const bSameSession = frontmatterHasLink(bMeta.sessioni, context.session);
+
+        if (aSameSession !== bSameSession) {
+            return aSameSession ? -1 : 1;
+        }
 
         if (aSameWorld !== bSameWorld) {
             return aSameWorld ? -1 : 1;
@@ -374,6 +380,10 @@ function sortFilesForSuggestions(files, context = {}) {
 function formatSuggestionLabel(file, context = {}) {
     const frontmatter = getFrontmatter(file);
     const badges = [];
+
+    if (frontmatterHasLink(frontmatter.sessioni, context.session)) {
+        badges.push("sessione attiva");
+    }
 
     if (frontmatterHasLink(frontmatter.mondo, context.world)) {
         badges.push("stesso mondo");
@@ -535,6 +545,17 @@ async function chooseNotesFromFiles(tp, files, message, options = {}) {
         }
 
         if (selected === DONE_VALUE) {
+            if (options.requireOne && !selectedLinks.length) {
+                const manual = await promptOptional(tp, `${message}: scegli almeno una connessione o scrivila manualmente`);
+
+                if (manual) {
+                    selectedLinks.push(`[[${manual}]]`);
+                    return selectedLinks;
+                }
+
+                continue;
+            }
+
             return selectedLinks;
         }
 
@@ -578,6 +599,13 @@ function getMarkdownFilesInPaths(paths) {
 }
 
 async function chooseConnections(tp, message = "Connessioni vive", context = {}) {
+    const activeContext = getActiveSessionContext();
+    const enrichedContext = {
+        session: activeContext.link,
+        world: context.world ?? activeContext.world,
+        ...context
+    };
+
     return await chooseNotesFromFiles(
         tp,
         getMarkdownFilesInPaths([
@@ -585,14 +613,42 @@ async function chooseConnections(tp, message = "Connessioni vive", context = {})
             PATHS.personaggi,
             PATHS.fazioni,
             PATHS.religioni,
+            PATHS.societa,
             PATHS.missioni,
             PATHS.tracciati,
             PATHS.relazioni,
+            PATHS.rotte,
+            PATHS.risorse_mondo,
+            PATHS.mercati,
             PATHS.oggetti,
+            PATHS.mappe,
+            PATHS.culture,
+            PATHS.storia
+        ]),
+        message,
+        { requireOne: true, ...enrichedContext }
+    );
+}
+
+async function chooseCoreConnection(tp, message = "Collega almeno un elemento operativo", context = {}) {
+    const activeContext = getActiveSessionContext();
+    return await chooseNotesFromFiles(
+        tp,
+        getMarkdownFilesInPaths([
+            PATHS.luoghi,
+            PATHS.personaggi,
+            PATHS.fazioni,
+            PATHS.missioni,
+            PATHS.tracciati,
             PATHS.mappe
         ]),
         message,
-        context
+        {
+            requireOne: true,
+            session: activeContext.link,
+            world: context.world ?? activeContext.world,
+            ...context
+        }
     );
 }
 
@@ -668,6 +724,59 @@ async function linkCreatedNoteToActiveSession(createdFile, options = {}) {
     }
 
     return { linked: true, session: sessionLink, note: createdLink, sessionField };
+}
+
+function frontmatterFieldForCategory(frontmatter = {}) {
+    const category = String(frontmatter.categoria ?? "");
+    const type = String(frontmatter.tipo ?? "");
+
+    if (category === "personaggio") return "personaggi";
+    if (category === "luogo") return "luoghi";
+    if (category === "fazione" || category === "religione") return "fazioni";
+    if (category === "societa") return "societa";
+    if (category === "missione") return "missioni";
+    if (category === "tracciato") return "tracciati";
+    if (category === "oggetto") return "oggetti";
+    if (category === "relazione") return "relazioni";
+    if (category === "cultura") return "culture";
+    if (category === "evento storico") return "eventi";
+    if (category === "risorsa" && type === "rotta") return "rotte";
+    if (category === "risorsa" && type === "mercato") return "mercati";
+    if (category === "risorsa") return "risorse";
+    return "connessioni";
+}
+
+async function linkCreatedNoteToConnections(createdFile, links = []) {
+    if (!createdFile || !links?.length) {
+        return { linked: 0 };
+    }
+
+    const createdLink = fileLink(createdFile);
+    const createdMeta = getFrontmatter(createdFile);
+    const typedField = frontmatterFieldForCategory(createdMeta);
+    let linked = 0;
+
+    for (const link of normalizeFieldArray(links)) {
+        const targetFile = getFileFromLink(link);
+
+        if (!targetFile || targetFile.path === createdFile.path) {
+            continue;
+        }
+
+        await processFrontmatter(targetFile, fm => {
+            fm.connessioni = appendUniqueLink(fm.connessioni, createdLink);
+            fm[typedField] = appendUniqueLink(fm[typedField], createdLink);
+        });
+        linked += 1;
+    }
+
+    await processFrontmatter(createdFile, fm => {
+        fm.feedback_creazione = linked > 0
+            ? `Collegata a ${linked} note esistenti.`
+            : "Manca connessione viva.";
+    });
+
+    return { linked };
 }
 
 async function chooseWorld(tp, message = "Mondo di riferimento") {
@@ -823,6 +932,7 @@ module.exports = {
     getFileFromLink,
     getFileByPathOrBasename,
     getWorldFromLink,
+    normalizeFieldArray,
     getActiveSessionFile,
     getActiveSessionContext,
     processFrontmatter,
@@ -838,8 +948,10 @@ module.exports = {
     chooseNotesFromFiles,
     chooseNotesByPath,
     chooseConnections,
+    chooseCoreConnection,
     ensureFolder,
     moveNote,
+    linkCreatedNoteToConnections,
     chooseWorld,
     chooseLocation,
     chooseLocations,

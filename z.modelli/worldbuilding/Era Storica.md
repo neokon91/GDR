@@ -1,7 +1,7 @@
 <% await tp.user.era_storica(tp) %>
 # `=this.nome`
 
->[!infobox|wiki]- Storia
+>[!infoboxwiki]- Storia
 > Mondo:
 > `INPUT[mondo][:mondo]`
 >

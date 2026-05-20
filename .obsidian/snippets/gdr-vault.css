@@ -407,6 +407,13 @@ body.theme-dark {
 .callout[data-callout="luogo"],
 .callout[data-callout="fazione"],
 .callout[data-callout="missione"],
+.callout[data-callout="cultura"],
+.callout[data-callout="societa"],
+.callout[data-callout="religione"],
+.callout[data-callout="economia"],
+.callout[data-callout="magia"],
+.callout[data-callout="ecologia"],
+.callout[data-callout="conflitto"],
 .callout[data-callout="handout"],
 .callout[data-callout="regola"],
 .callout[data-callout="pericolo"],
@@ -469,6 +476,41 @@ body.theme-dark {
 .callout[data-callout="missione"] {
   --callout-color: var(--gdr-missione-rgb);
   --callout-icon: lucide-scroll-text;
+}
+
+.callout[data-callout="cultura"] {
+  --callout-color: 134, 92, 153;
+  --callout-icon: lucide-theater;
+}
+
+.callout[data-callout="societa"] {
+  --callout-color: 90, 116, 153;
+  --callout-icon: lucide-users-round;
+}
+
+.callout[data-callout="religione"] {
+  --callout-color: 151, 116, 63;
+  --callout-icon: lucide-sparkles;
+}
+
+.callout[data-callout="economia"] {
+  --callout-color: 82, 128, 94;
+  --callout-icon: lucide-coins;
+}
+
+.callout[data-callout="magia"] {
+  --callout-color: 98, 93, 170;
+  --callout-icon: lucide-wand-sparkles;
+}
+
+.callout[data-callout="ecologia"] {
+  --callout-color: 83, 132, 111;
+  --callout-icon: lucide-leaf;
+}
+
+.callout[data-callout="conflitto"] {
+  --callout-color: var(--gdr-danger-rgb);
+  --callout-icon: lucide-flame;
 }
 
 .callout[data-callout="handout"] {
@@ -1071,6 +1113,53 @@ body .markdown-source-view.tavolo {
 
 .gdr-card-line {
   margin-top: 0.3rem;
+  line-height: 1.35;
+}
+
+.gdr-card-line strong {
+  color: var(--text-normal);
+  font-weight: 700;
+}
+
+.gdr-card-badge {
+  display: inline-flex;
+  width: fit-content;
+  max-width: 100%;
+  min-height: 1.45rem;
+  align-items: center;
+  padding: 0.12rem 0.42rem;
+  border: 1px solid var(--gdr-border);
+  border-radius: 999px;
+  background: var(--gdr-surface-strong);
+  color: var(--text-muted);
+  font-size: 0.72rem;
+  font-weight: 750;
+  line-height: 1.2;
+}
+
+.gdr-card-operative {
+  background: linear-gradient(180deg, color-mix(in srgb, rgb(var(--gdr-accent-rgb)) 6%, transparent), transparent 60%), var(--gdr-surface);
+}
+
+.gdr-card-post {
+  background: linear-gradient(180deg, color-mix(in srgb, rgb(var(--gdr-warm-rgb)) 8%, transparent), transparent 62%), var(--gdr-surface);
+}
+
+.gdr-card-player {
+  background: linear-gradient(180deg, color-mix(in srgb, rgb(var(--gdr-nature-rgb)) 8%, transparent), transparent 62%), var(--gdr-surface);
+}
+
+.gdr-card-archive {
+  opacity: 0.78;
+  background: color-mix(in srgb, var(--background-secondary) 55%, transparent);
+}
+
+.gdr-card-archivio {
+  border-left-color: var(--text-faint);
+}
+
+.gdr-empty-state {
+  border-style: dashed;
 }
 
 .gdr-kind-missione {
@@ -1092,6 +1181,29 @@ body .markdown-source-view.tavolo {
 }
 
 .gdr-kind-mondo {
+  border-left: 4px solid rgb(var(--gdr-timeline-rgb));
+}
+
+.gdr-kind-fazione,
+.gdr-kind-religione,
+.gdr-kind-relazione {
+  border-left: 4px solid rgb(var(--gdr-fazione-rgb));
+}
+
+.gdr-kind-tracciato,
+.gdr-kind-conflitto {
+  border-left: 4px solid rgb(var(--gdr-incontro-rgb));
+}
+
+.gdr-kind-oggetto,
+.gdr-kind-risorsa,
+.gdr-kind-rotta,
+.gdr-kind-mercato {
+  border-left: 4px solid rgb(var(--gdr-ricompensa-rgb));
+}
+
+.gdr-kind-cultura,
+.gdr-kind-evento {
   border-left: 4px solid rgb(var(--gdr-timeline-rgb));
 }
 
@@ -1265,6 +1377,85 @@ body .markdown-source-view.tavolo {
   margin-top: 0.25rem;
   color: var(--text-muted);
   font-size: 0.88em;
+}
+
+.gdr-action-bar,
+.gdr-plugin-layer-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  align-items: center;
+  margin: 0.7rem 0 1rem;
+}
+
+.gdr-action-bar .block-language-meta-bind-button,
+.gdr-plugin-layer-actions .block-language-meta-bind-button {
+  display: inline-block;
+  margin: 0;
+}
+
+.gdr-action-bar .meta-bind-button,
+.gdr-action-bar .mb-button,
+.gdr-plugin-layer-actions .meta-bind-button,
+.gdr-plugin-layer-actions .mb-button {
+  min-height: 2rem;
+  min-width: 0;
+  border-radius: var(--gdr-radius-soft);
+}
+
+.gdr-schema-row,
+.gdr-runtime-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  align-items: center;
+  margin-block: 0.35rem;
+}
+
+.gdr-schema-badge,
+.gdr-runtime-badge {
+  display: inline-flex;
+  align-items: center;
+  max-width: 100%;
+  min-height: 1.65rem;
+  padding: 0.16rem 0.48rem;
+  border: 1px solid var(--gdr-border);
+  border-radius: 999px;
+  background: var(--gdr-surface);
+  color: var(--text-muted);
+  font-size: 0.78rem;
+  font-weight: 650;
+  line-height: 1.2;
+  white-space: normal;
+}
+
+.gdr-schema-badge.is-live,
+.gdr-runtime-badge.is-live {
+  border-color: var(--gdr-accent-line);
+  background: var(--gdr-accent-soft);
+  color: var(--text-normal);
+}
+
+.gdr-schema-badge.is-danger,
+.gdr-runtime-badge.is-danger {
+  border-color: color-mix(in srgb, rgb(var(--gdr-danger-rgb)) 55%, transparent);
+  background: color-mix(in srgb, rgb(var(--gdr-danger-rgb)) 12%, transparent);
+  color: var(--text-normal);
+}
+
+.gdr-js-view,
+.gdr-engine-view {
+  border: 1px solid var(--gdr-border);
+  border-radius: var(--gdr-radius);
+  background: var(--gdr-surface);
+  padding: 0.75rem;
+  margin-block: 0.75rem 1rem;
+  overflow-x: auto;
+}
+
+.gdr-js-view table,
+.gdr-engine-view table {
+  margin-block: 0;
 }
 
 .gdr-map-panel {

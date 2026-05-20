@@ -26,7 +26,6 @@ const checks = [
   ["Calendario", enabled("calendarium"), "Date del mondo e scadenze narrative sono disponibili."],
   ["Mappe e schemi", enabled("obsidian-excalidraw-plugin"), "Mappe, fronti, indizi e scene sono modificabili."],
   ["Pagina iniziale", enabled("homepage"), "Il vault puo aprirsi da Inizia Qui."],
-  ["Demo", exists("Campagne/Demo - La Reliquia Spezzata.md"), "La demo e disponibile per capire il flusso."],
   ["Prima sessione", exists("Risorse/Prima Sessione In 15 Minuti.md"), "Percorso pratico per giocare subito."],
   ["Creazione entità", exists("Risorse/Creazione Guidata Entità.md"), "Spiega cosa compilare subito e cosa aggiungere dopo."],
   ["Worldbuilding profondo", exists("Risorse/Worldbuilding Profondo.md"), "Guida per passare da schede giocabili a schede di ambientazione."],
@@ -44,13 +43,11 @@ dv.table(
 1. Apri [[Inizia Qui]].
 2. Apri [[Risorse/Prima Sessione In 15 Minuti]] se vuoi giocare subito.
 3. Apri [[Risorse/Creazione Guidata Entità]] se vuoi capire quali campi compilare subito.
-4. Apri [[Demo - La Reliquia Spezzata]] se vuoi vedere un esempio completo.
 5. Apri [[1. DM Dashboard]] per preparare.
 6. Apri [[Hub/Party Control]] per controllare PG, HP, obiettivi, inventario e flags.
 7. Apri [[Durante il Gioco]] quando sei al tavolo.
 8. Apri [[Hub/Vista Giocatori]] per controllare cosa puoi mostrare o pubblicare.
 9. Apri [[Cosa Succede Fuori Scena]] dopo la sessione per scegliere le reazioni del mondo.
-10. Apri [[Risorse/Quality Report]] prima di preparare screenshot, demo o release.
 
 ## Se Qualcosa E Da Controllare
 

@@ -12,7 +12,7 @@ cssclasses:
 ```dataview
 TABLE tipo, stato, size AS taglia, cr, luoghi
 FROM "Mondi/Creature"
-WHERE file.name != "Creature" AND stato != "archiviata" AND !startswith(file.name, "Prova -")
+WHERE file.name != "Creature" AND stato != "archiviata"
 SORT cr ASC, nome ASC
 ```
 
@@ -21,6 +21,6 @@ SORT cr ASC, nome ASC
 ```dataview
 TABLE tipo, cr, luoghi
 FROM "Mondi/Creature"
-WHERE file.name != "Creature" AND stato != "archiviata" AND !startswith(file.name, "Prova -")
+WHERE file.name != "Creature" AND stato != "archiviata"
 SORT luoghi ASC, cr ASC
 ```

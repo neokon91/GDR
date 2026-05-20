@@ -14,9 +14,6 @@ Excalidraw nel vault serve per mappe vive: fronti, relazioni, indizi, scene e du
 
 | Uso | Quando serve | Esempio |
 | --- | --- | --- |
-| `fronte` | Fazioni, PNG, missioni e pressioni si influenzano. | [[Demo - Fronte Custodi.excalidraw]] |
-| `indizi` | Un mistero ha piste, fonti e verita da scoprire. | [[Demo - Rete Indizi Reliquia.excalidraw]] |
-| `scena` | Al tavolo servono posizione, ostacoli, entrate e aree. | [[Demo - Scena Ponte.excalidraw]] |
 | `relazioni` | Serve una rete generale tra mondo, luoghi, fazioni e missioni. | [[Schema Relazioni GDR.excalidraw]] |
 
 ## Regola Operativa
@@ -32,7 +29,7 @@ Excalidraw nel vault serve per mappe vive: fronti, relazioni, indizi, scene e du
 ```dataview
 TABLE uso, mondo, luogo, fazioni, personaggi, missioni, stato, file.mtime AS aggiornato
 FROM "Risorse/Mappe"
-WHERE contains(tags, "excalidraw") AND file.name != "Mappe" AND !startswith(file.name, "Prova -")
+WHERE contains(tags, "excalidraw") AND file.name != "Mappe"
 SORT uso ASC, mondo ASC, file.name ASC
 ```
 

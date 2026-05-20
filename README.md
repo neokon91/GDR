@@ -1,8 +1,8 @@
 # Vault GDR
 
-Un vault Obsidian professionale per DM e worldbuilder italiani: prepara sessioni, costruisce ambientazioni ricche, trasforma mondi in campagne, controlla il party e offre un portale dedicato ai giocatori.
+Un vault Obsidian professionale per DM e worldbuilder italiani: costruisce ambientazioni profonde, trasforma mondi complessi in campagne, prepara sessioni radicate nel Codex, controlla il party e offre un portale dedicato ai giocatori.
 
-L'obiettivo e farlo sembrare una app locale dentro Obsidian, non una cartella di appunti: l'utente apre [[Inizia Qui]] e segue tre azioni concrete, **Prepara -> Gioca -> Aggiorna il mondo**.
+L'obiettivo e farlo sembrare una app locale dentro Obsidian, non una cartella di appunti: il punto di forza e il **Codex del Mondo**, poi il flusso operativo porta quel mondo al tavolo con **Prepara -> Gioca -> Aggiorna il mondo**.
 
 Apri [[Inizia Qui]] per il primo avvio. Il flusso principale e [[Risorse/Preparazione Sessione]] per produrre una sessione pronta, [[Durante il Gioco]] per giocarla e [[Cosa Succede Fuori Scena]] per aggiornare conseguenze, missioni e prossime mosse. Le dashboard avanzate restano strumenti di supporto, non tappe obbligatorie.
 
@@ -24,9 +24,11 @@ Apri [[Inizia Qui]] per il primo avvio. Il flusso principale e [[Risorse/Prepara
 3. Vai su [[Inizia Qui]].
 4. Se Obsidian chiede conferma per gli strumenti inclusi nel vault, abilitali solo se hai scaricato da fonte affidabile.
 5. Apri [[Risorse/Setup Guidato]].
-6. Clicca **Prepara** in [[Inizia Qui]].
-7. Completa i cinque blocchi minimi della sessione.
-8. Apri **Gioca** quando vai al tavolo.
+6. Clicca **Crea Il Mondo** in [[Inizia Qui]].
+7. Crea o scegli un mondo homebrew e compila Codex, Atlante e prime entità.
+8. Trasforma quel mondo in campagna, avventura o sessione.
+9. Collega almeno tre ancore mondo alla sessione: mondo, luogo, potere/PNG, missione, clock, mappa o scena.
+10. Apri **Gioca** quando vai al tavolo.
 
 ## Attivare L'Aspetto GDR
 
@@ -40,25 +42,27 @@ Lo snippet non aggiunge dipendenze: migliora dashboard, callout, card, pulsanti 
 ## Flusso Rapido
 
 1. Apri il vault in Obsidian e vai su [[Inizia Qui]].
-2. Clicca **Prepara**.
-3. Crea o apri una sessione.
-4. Completa: obiettivo, prima scena, scelta, pressione, materiale.
-5. Clicca **Gioca**.
-6. Dopo la partita clicca **Aggiorna il mondo**.
+2. Clicca **Crea Il Mondo**.
+3. Crea o apri il Codex del mondo.
+4. Clicca **Trasforma In Gioco** per derivare campagna, avventura o sessione.
+5. Collega almeno tre ancore mondo, poi completa: obiettivo, prima scena, scelta, pressione, materiale.
+6. Clicca **Gioca**.
+7. Dopo la partita clicca **Aggiorna il mondo**.
 
 Se dashboard, pulsanti o tabelle non funzionano, apri [[Risorse/Primo Avvio Strumenti]], [[Risorse/FAQ]] e poi [[Risorse/Se Qualcosa Non Funziona]].
 
 ## Flusso Consigliato
 
-1. Crea o apri una campagna da [[Campagne/Campagne]].
-2. Scegli il mondo di riferimento dalla [[Worldbuilder Dashboard]].
-3. Prepara la prossima sessione con [[Risorse/Preparazione Sessione]].
-4. Crea solo le entita davvero utili al tavolo: PNG, luoghi, missioni, incontri, oggetti e dispense.
-5. Collega le note usando i campi interattivi.
-6. Durante il gioco usa [[Durante il Gioco]] per appunti, timer, PNG attivi, incontri pronti, dispense e Inbox Live.
-7. Usa clock e progress track in [[Mondi/Tracciati/Tracciati]] quando una minaccia, un viaggio o un rituale deve avanzare in modo visibile.
-8. Dopo la sessione apri [[Risorse/Post Sessione Guidato]]: canonizza eventi, aggiorna mondo/missioni/tracciati e scegli la prossima sessione attiva.
-9. Apri [[Cosa Succede Fuori Scena]] per decidere quali PNG, fazioni, missioni e clock reagiscono prima della sessione successiva.
+1. Crea o apri un mondo dalla [[Worldbuilder Dashboard]].
+2. Costruisci il Codex: luoghi, culture, lingue, storia, poteri, religioni, relazioni, risorse, mappe e misteri.
+3. Trasforma il mondo in campagna o avventura da [[Campagna da Ambientazione]].
+4. Prepara la prossima sessione con [[Risorse/Preparazione Sessione]] solo quando ha almeno tre ancore mondo.
+5. Crea entita utili al mondo e al tavolo: PNG, luoghi, missioni, incontri, oggetti, dispense, culture, conflitti, rotte, risorse e relazioni.
+6. Collega le note usando i campi interattivi.
+7. Durante il gioco usa [[Durante il Gioco]] per appunti, timer, PNG attivi, incontri pronti, dispense e Inbox Live.
+8. Usa clock e progress track in [[Mondi/Tracciati/Tracciati]] quando una minaccia, un viaggio o un rituale deve avanzare in modo visibile.
+9. Dopo la sessione apri [[Risorse/Post Sessione Guidato]]: canonizza eventi, aggiorna mondo/missioni/tracciati e scegli la prossima sessione attiva.
+10. Apri [[Cosa Succede Fuori Scena]] per decidere quali PNG, fazioni, missioni e clock reagiscono prima della sessione successiva.
 
 ## Dove Trovare Le Cose
 
@@ -101,6 +105,7 @@ Se dashboard, pulsanti o tabelle non funzionano, apri [[Risorse/Primo Avvio Stru
 - Usa `attiva: true` su una sola sessione alla volta. Se nessuna sessione e attiva, le viste usano come fallback l'ultima sessione `pronto` o `preparazione`.
 - Usa `archiviata` per contenuti da conservare ma non piu attivi.
 - Usa `canonico: true` solo quando un contenuto e confermato nel mondo di gioco.
+- Usa i pulsanti operativi quando possibile: **Marca Canonico**, **Marca Rumor**, **Archivia**, **Applica Conseguenza**, **Avanza Clock**, **Collega Sessione Attiva**, **Propaga A Entita** e **Prepara Recap Pubblico**. Sono azioni centralizzate: modificano YAML e collegamenti in modo coerente.
 - Quando crei luoghi, PNG, fazioni o missioni dai pulsanti guidati, compila subito i collegamenti richiesti: il vault usera quei campi per mostrare fronti, segreti, pressioni e materiale pronto nelle dashboard.
 - Nelle schede lunghe, guarda prima il riquadro in alto: tab e callout chiusi servono a tenere separati dettagli, segreti, materiali e post-sessione.
 - Usa Inbox Live per catturare eventi, conseguenze, PNG improvvisati, luoghi improvvisati e note grezze senza interrompere il gioco.
@@ -115,15 +120,29 @@ Se dashboard, pulsanti o tabelle non funzionano, apri [[Risorse/Primo Avvio Stru
 - Non lasciare link placeholder: crea la nota o trasforma il link in testo semplice.
 - Archivia invece di cancellare quando una nota ha valore storico.
 - Dopo una sessione, aggiorna missioni, tracciati, PNG, luoghi visitati, ricompense e conseguenze da [[Risorse/Post Sessione Guidato]].
+- Il layer operativo interno e documentato in [[Risorse/Plugin Layer Interno]]: input Meta Bind, pulsanti, wizard, JS views e fileClass.
 - Per controlli e sviluppo del vault, vedi [[Risorse/Sviluppo Vault]].
 - Per preparare una release o una copia pulita, apri [[RELEASE]] e [[Risorse/Controllo Vault]].
 - Per creare una copia consegnabile, apri [[Risorse/Release Pulita]] o usa `npm run release:clean`.
 - Per importare mappe esterne come bozze, apri [[Risorse/Importare Mappe]] o usa `npm run import:azgaar`.
 - Non modificare manualmente le note in `SRD`: sono un riferimento regolamentare separato e possono essere rigenerate.
 
-## Demo
+## Sviluppo
 
-Apri [[Demo - La Reliquia Spezzata]] per vedere una mini-campagna completa gia collegata. Segui il suo Tutorial Operativo per provare il flusso: durante il gioco, post-sessione, mondo vivo e fuori scena.
+Comandi principali dal root del vault:
+
+```bash
+npm run check
+npm run check:repo
+npm run clean:repo
+npm run import:srd
+npm run import:azgaar
+npm run release:clean
+```
+
+`npm run check` valida plugin obbligatori, link, template Meta Bind, helper Templater, file del plugin layer interno, input template, pulsanti, preset Metadata Menu, igiene repository e sintassi degli script in `z.automazioni` e `z.engine`. `npm run clean:repo` rimuove solo artefatti locali e temporanei ignorati.
+
+
 
 ## Per Chi E Pensato
 

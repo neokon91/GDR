@@ -32,7 +32,7 @@ gdr.renderPartyControl(dv);
 ```dataview
 TABLE giocatore, classe, livello, hp_attuali, hp_massimi, hp_temporanei, condizioni, risorse_rapide, ispirazione, stato
 FROM "Mondi/Personaggi"
-WHERE tipo = "pg" AND stato != "archiviata" AND !startswith(file.name, "Prova -")
+WHERE tipo = "pg" AND stato != "archiviata"
 SORT giocatore ASC, nome ASC
 ```
 
@@ -43,7 +43,7 @@ Apri la card del PG per modificare HP, condizioni e risorse con gli input del te
 ```dataview
 TABLE quest_personali, vuole, leva, relazioni, fazioni, spotlight
 FROM "Mondi/Personaggi"
-WHERE tipo = "pg" AND stato != "archiviata" AND !startswith(file.name, "Prova -")
+WHERE tipo = "pg" AND stato != "archiviata"
 SORT giocatore ASC, nome ASC
 ```
 
@@ -52,7 +52,7 @@ SORT giocatore ASC, nome ASC
 ```dataview
 TABLE stato, committente, luoghi, personaggi, pressione, prossima_mossa
 FROM "Mondi/Missioni"
-WHERE stato != "archiviata" AND !startswith(file.name, "Prova -") AND (stato = "accettata" OR stato = "in corso" OR stato = "proposta")
+WHERE stato != "archiviata" AND (stato = "accettata" OR stato = "in corso" OR stato = "proposta")
 SORT pressione DESC, stato ASC, nome ASC
 LIMIT 16
 ```
@@ -62,7 +62,7 @@ LIMIT 16
 ```dataview
 TABLE tipo, stato, luogo, possessore, proprietario, valore, uso
 FROM "Mondi/Oggetti"
-WHERE stato != "archiviata" AND !startswith(file.name, "Prova -") AND (!possessore OR !proprietario OR contains(string(possessore), "party") OR contains(string(proprietario), "party"))
+WHERE stato != "archiviata" AND (!possessore OR !proprietario OR contains(string(possessore), "party") OR contains(string(proprietario), "party"))
 SORT possessore ASC, proprietario ASC, nome ASC
 LIMIT 20
 ```
@@ -72,7 +72,7 @@ LIMIT 20
 ```dataview
 TABLE inventario_rapido, loot_da_assegnare
 FROM "Mondi/Personaggi"
-WHERE tipo = "pg" AND stato != "archiviata" AND !startswith(file.name, "Prova -") AND (inventario_rapido OR loot_da_assegnare)
+WHERE tipo = "pg" AND stato != "archiviata" AND (inventario_rapido OR loot_da_assegnare)
 SORT giocatore ASC, nome ASC
 ```
 
@@ -81,7 +81,7 @@ SORT giocatore ASC, nome ASC
 ```dataview
 TABLE stato, progress_value, progress_max, innesco, conseguenze
 FROM "Mondi/Tracciati"
-WHERE stato != "archiviata" AND !startswith(file.name, "Prova -")
+WHERE stato != "archiviata"
 SORT progress_value DESC, file.mtime DESC
 LIMIT 12
 ```

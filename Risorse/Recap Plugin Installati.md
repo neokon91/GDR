@@ -90,15 +90,12 @@ Nota: `table-editor-obsidian` e il plugin mostrato come **Advanced Tables**; `ob
 | Tabs | usato in template e dashboard lunghe | sfruttato bene, da non abusare |
 | Dice Roller | tiri inline e tabelle con block id | sfruttato bene |
 | Calendarium | default importati e `Brumafonda` custom attivo | sfruttato per leggere `fc-*` e dare un calendario diegetico coerente |
-| Initiative Tracker | vista operativa, demo combattimento e blocchi `encounter` mirati | supportato per combattimenti pronti, senza forzare scene sociali/esplorative |
 | Fantasy Statblocks | creature con `statblock: true` e blocchi `statblock` | buono, ora collegato meglio agli incontri di combattimento |
-| Excalidraw / Canvas / Hex / Zoom Map | demo, template, dashboard mappe e scene | Excalidraw per disegno libero, Canvas per reti di note, Hex/Zoom per mappe giocabili |
 | Media Extended | indici media e timestamp | leggero, sufficiente finche non ci sono media reali di campagna |
 | Kanban | tre bacheche operative | base, migliorabile con task piu collegati |
 | Tasks | global filter `#task` e [[Risorse/Task DM]] | supportato per lavoro operativo del DM |
 | Linter | configurazione manuale e note guida | supporto sviluppo, non workflow utente finale |
 | Workspaces/Bookmarks | core attivi e guida dedicata | supportati per navigazione e cambio contesto |
-| Maps per Bases | [[z.bases/Atlante Mappe.base]] e coordinate demo | supportato leggero; plugin `maps` installato |
 
 ### Dashboard Operative
 
@@ -146,8 +143,6 @@ Usa insieme Excalidraw, Canvas core, Advanced Canvas, Iconize, Folder Notes, Tab
 - Iconize aiuta a orientarsi, ma non sostituisce indici e dashboard.
 - Folder Notes mantiene ogni cartella leggibile come pagina.
 - Tabs riduce lo scrolling di dashboard e template lunghi.
-- Hex Cartographer e guidato da [[Risorse/Mappe/Mappe]] e dalla demo [[Demo - Brumafonda.hexcartographer]].
-- TTRPG Tools: Maps e guidato da [[Demo - Mappa Zoomabile]] per mappe tattiche o regionali con marker, misure, layer e link.
 
 Beneficia soprattutto: worldbuilder e DM che gestisce luoghi, fazioni e viaggi.
 
@@ -181,7 +176,7 @@ Beneficia soprattutto: DM che usa musica, immagini, handout o video-reference.
 ### Per Il Manutentore
 
 - Crea FileClass Metadata Menu per i tipi principali: `sessione`, `missione`, `png`, `luogo`, `incontro`, `mappa`, `media`.
-- Mantieni le query Dataview semplici e filtra sempre le note `Prova -` nelle viste operative.
+- Mantieni le query Dataview semplici e lascia il collaudo agli script automatici, non a note fittizie.
 - Prima di cambiare un campo YAML, cerca il campo in dashboard, template, `z.automazioni` e controlli.
 - Conserva BRAT attivo per manutenzione e plugin non ufficiali: non deve essere parte del flusso utente finale.
 
@@ -195,11 +190,8 @@ Beneficia soprattutto: DM che usa musica, immagini, handout o video-reference.
 
 1. Rifinire mesi, feste e stagioni di `Brumafonda` quando il calendario diegetico della campagna diventa canonico.
 2. Fatto: create FileClass Metadata Menu aggiuntive per `incontro`, `rotta`, `risorsa`, `mercato`, `compendium`, `ricorrenza`, `mappa` e `media`.
-3. Fatto: aggiunta [[Demo - Mappa Zoomabile]] con blocco `zoommap` e base locale.
 4. Fatto: Hex Cartographer resta opzionale guidato per `regione -> esagoni -> incontri -> conseguenze`.
 5. Fatto: Media Extended e collegato a [[Durante il Gioco]] tramite media con `stato: pronto`.
-6. Fatto: Initiative Tracker e collegato a [[Demo - Agguato dei Lupi]] e [[Risorse/Iniziativa e Combattimenti]].
-7. Fatto: Advanced Canvas e collegato a [[Demo - Canvas Fronti.canvas]] e [[Risorse/Canvas Per GDR]].
 8. Fatto: Linter configurato come supporto sviluppo manuale in [[Risorse/Linter e Sviluppo]].
 9. Fatto: Workspaces e Bookmarks collegati a [[Risorse/Workspaces e Segnalibri]].
 10. Fatto: Maps per Bases installato e collegato a [[z.bases/Atlante Mappe.base]] e [[Risorse/Mappe Bases]].

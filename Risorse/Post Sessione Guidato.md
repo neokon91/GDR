@@ -41,12 +41,9 @@ gdr.renderPostSessionFocus(dv);
 
 Trasforma solo cio che resta vero nel mondo. Il resto resta rumor, bozza o appunto archiviato.
 
-```dataview
-TABLE tipo, stato, stato_canonico, sessioni, collegamenti, impatto
-FROM "Inbox" OR "Mondi/Timeline"
-WHERE stato != "archiviata" AND stato != "ignorata" AND !startswith(file.name, "Prova -") AND (categoria = "lore capture" OR categoria = "evento storico" OR stato_canonico OR canonico != null)
-SORT file.mtime DESC
-LIMIT 12
+```dataviewjs
+const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));
+gdr.renderCanonDecisionCards(dv);
 ```
 
 > [!regia] Conferma canone
@@ -56,12 +53,9 @@ LIMIT 12
 
 ## 3. Conseguenze Da Applicare
 
-```dataview
-TABLE categoria, tipo, stato, entita_impattate, propaga_a, conseguenze, prossima_mossa
-FROM "Mondi" OR "Inbox"
-WHERE stato != "archiviata" AND stato != "ignorata" AND !startswith(file.name, "Prova -") AND (conseguenze OR entita_impattate OR propaga_a OR prossima_mossa)
-SORT file.mtime DESC
-LIMIT 16
+```dataviewjs
+const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));
+gdr.renderConsequenceCards(dv);
 ```
 
 > [!timer] Applicazione
@@ -75,12 +69,20 @@ LIMIT 16
 
 Apri [[Cosa Succede Fuori Scena]] solo per decidere cosa si muove prima della prossima preparazione.
 
-```dataview
-TABLE categoria, tipo, stato, pressione, progress_value, progress_max, innesco, prossima_mossa
-FROM "Mondi/Fazioni" OR "Mondi/Religioni" OR "Mondi/Personaggi" OR "Mondi/Tracciati" OR "Mondi/Missioni" OR "Mondi/Conflitti"
-WHERE stato != "archiviata" AND stato != "ignorata" AND !startswith(file.name, "Prova -") AND (pressione >= 5 OR progress_value >= 3 OR prossima_mossa OR innesco)
-SORT pressione DESC, progress_value DESC, file.mtime DESC
-LIMIT 12
+### Entità Impattate
+
+Missioni, clock e fazioni toccate dalle conseguenze devono avere una `prossima_mossa` aggiornata prima di chiudere il post-sessione.
+
+```dataviewjs
+const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));
+gdr.renderImpactedNextMoveCards(dv);
+```
+
+### Pressioni Aperte
+
+```dataviewjs
+const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));
+gdr.renderNextMoveCards(dv);
 ```
 
 ## 5. Prossima Sessione
@@ -88,7 +90,7 @@ LIMIT 12
 ```dataview
 TABLE data, data_mondo, stato, attiva, obiettivo, apertura, scelta
 FROM "Mondi/Sessioni"
-WHERE !startswith(file.name, "Prova -") AND (attiva = true OR stato = "preparazione" OR stato = "pronto")
+WHERE (attiva = true OR stato = "preparazione" OR stato = "pronto")
 SORT attiva DESC, data DESC, file.mtime DESC
 LIMIT 8
 ```
@@ -102,11 +104,15 @@ LIMIT 8
 ## 6. Recap Pubblico
 
 > [!lettura] Testo mostrabile ai giocatori
+> `BUTTON[prepara-recap-pubblico]`
+>
 > - Cosa e successo:
 > - Cosa sanno tutti:
 > - Missioni aggiornate:
 > - PNG o luoghi ora noti:
 > - Prossimo aggancio pubblico:
+>
+> Non copiare da recap DM, segreti, prossime mosse o campi nascosti. Il controllo `npm run check` segnala formule private evidenti nel recap pubblico.
 
 ## 7. Recap DM
 

@@ -73,7 +73,6 @@ Questa nota orienta un connettore GPT o un indice code search sul vault. Non e u
 - Una sola sessione dovrebbe avere `attiva: true`.
 - Se nessuna sessione e attiva, il runtime usa come fallback l'ultima sessione `pronto` o `preparazione`.
 - `data_mondo` e il campo unico per date leggibili al tavolo in sessioni, lore capture ed eventi storici.
-- Le note `Prova -` sono collaudi tecnici e non devono guidare il gioco.
 - `Inbox` contiene appunti non canonici, lore da smistare e note live.
 - `Mondi/Timeline` contiene eventi storicizzati.
 - `SRD` e riferimento regolamentare generato, non contenuto canonico del mondo.

@@ -15,7 +15,7 @@ Questa pagina mostra le cose che avanzano se i personaggi non intervengono.
 ```dataview
 TABLE categoria, tipo, pressione, prossima_mossa, scadenza_mondo, fazioni, luoghi
 FROM "Mondi/Conflitti" OR "Mondi/Missioni" OR "Mondi/Fazioni"
-WHERE stato != "archiviata" AND !startswith(file.name, "Prova -") AND pressione > 0
+WHERE stato != "archiviata" AND pressione > 0
 SORT pressione DESC, scadenza_mondo ASC, nome ASC
 LIMIT 30
 ```
@@ -25,7 +25,7 @@ LIMIT 30
 ```dataview
 TABLE categoria, tipo, pressione, fazioni, luoghi
 FROM "Mondi/Conflitti" OR "Mondi/Missioni" OR "Mondi/Fazioni"
-WHERE stato != "archiviata" AND !startswith(file.name, "Prova -") AND pressione > 0 AND !prossima_mossa
+WHERE stato != "archiviata" AND pressione > 0 AND !prossima_mossa
 SORT pressione DESC, nome ASC
 ```
 
@@ -34,6 +34,6 @@ SORT pressione DESC, nome ASC
 ```dataview
 TABLE categoria, tipo, pressione, scadenza_mondo, prossima_mossa
 FROM "Mondi/Conflitti" OR "Mondi/Missioni"
-WHERE stato != "archiviata" AND !startswith(file.name, "Prova -") AND scadenza_mondo
+WHERE stato != "archiviata" AND scadenza_mondo
 SORT scadenza_mondo ASC, pressione DESC
 ```

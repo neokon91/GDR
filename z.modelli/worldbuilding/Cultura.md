@@ -1,7 +1,68 @@
 <% await tp.user.cultura(tp) %>
 # `=this.nome`
 
->[!infobox|wiki]- Cultura
+````tabs
+tab: Identita
+
+> [!cultura] Cosa Si Nota
+> Gancio: `INPUT[text:gancio]`
+>
+> Player-safe: `INPUT[text:player_safe]`
+>
+> > [!segreto]- Contraddizione nascosta
+> > `INPUT[text:segreto]`
+
+> [!scena] Al Tavolo
+> Uso: `INPUT[text:uso_al_tavolo]`
+>
+> Contraddizione visibile: `INPUT[text:contraddizione_visibile]`
+>
+> Prossima mossa culturale: `INPUT[text:prossima_mossa]`
+
+tab: Pratiche
+
+> [!religione] Riti, Tabu, Feste
+> ```meta-bind
+> INPUT[list:usi]
+> ```
+>
+> > [!pericolo]- Tabu
+> > ```meta-bind
+> > INPUT[list:tabu]
+> > ```
+>
+> > [!timer]- Feste e calendario
+> > ```meta-bind
+> > INPUT[list:feste]
+> > ```
+
+tab: Rete
+
+> [!regia] Connessioni
+> Mondo: `INPUT[mondo][:mondo]`
+>
+> Luoghi: `INPUT[inlineListSuggester(optionQuery("Mondi/Luoghi"), useLinks(partial)):luoghi]`
+>
+> Religioni: `INPUT[inlineListSuggester(optionQuery("Mondi/Religioni"), useLinks(partial)):religioni]`
+>
+> Fazioni: `INPUT[inlineListSuggester(optionQuery("Mondi/Fazioni"), useLinks(partial)):fazioni]`
+>
+> Relazioni: `INPUT[inlineListSuggester(optionQuery("Mondi/Relazioni"), useLinks(partial), allowOther):relazioni]`
+
+tab: Conflitto
+
+> [!conflitto] Tensioni
+> ```meta-bind
+> INPUT[list:tensioni]
+> ```
+>
+> > [!timer]- Propagazione
+> > Entita impattate: `INPUT[inlineListSuggester(optionQuery("Mondi"), useLinks(partial), allowOther):entita_impattate]`
+> >
+> > Propaga a: `INPUT[inlineListSuggester(optionQuery("Mondi"), useLinks(partial), allowOther):propaga_a]`
+````
+
+>[!infoboxwiki]- Cultura
 > Mondo:
 > `INPUT[mondo][:mondo]`
 >
@@ -61,6 +122,13 @@ TABLE categoria, tipo, stato, pressione, prossima_mossa
 FROM "Mondi"
 WHERE contains(this.connessioni, file.link)
 SORT categoria ASC, file.name ASC
+```
+
+### Feedback Creazione
+
+```dataviewjs
+const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));
+gdr.renderCreationFeedback(dv);
 ```
 
 ## Nucleo Culturale

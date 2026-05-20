@@ -32,9 +32,90 @@
     {
       "name": "stato canonico",
       "declaration": "INPUT[inlineSelect(option(canonico, Canonico), option(rumor, Rumor), option(leggenda, Leggenda), option(falso, Falso), option(retcon, Retcon))]"
+    },
+    {
+      "name": "stato",
+      "declaration": "INPUT[inlineSelect(option(bozza, Bozza), option(preparazione, Preparazione), option(pronto, Pronto), option(in corso, In Corso), option(in gioco, In Gioco), option(giocata, Giocata), option(da smistare, Da smistare), option(collegata, Collegata), option(canonica, Canonica), option(archiviata, Archiviata), option(ignorata, Ignorata))]"
+    },
+    {
+      "name": "pressione",
+      "declaration": "INPUT[slider(minValue(0), maxValue(10), stepSize(1), addLabels)]"
+    },
+    {
+      "name": "prossima_mossa",
+      "declaration": "INPUT[text]"
+    },
+    {
+      "name": "connessioni",
+      "declaration": "INPUT[inlineListSuggester(optionQuery(\"Mondi\"), useLinks(partial), allowOther)]"
+    },
+    {
+      "name": "player_safe",
+      "declaration": "INPUT[text]"
+    },
+    {
+      "name": "entita_impattate",
+      "declaration": "INPUT[inlineListSuggester(optionQuery(\"Mondi\"), useLinks(partial), allowOther)]"
+    },
+    {
+      "name": "propaga_a",
+      "declaration": "INPUT[inlineListSuggester(optionQuery(\"Mondi\"), useLinks(partial), allowOther)]"
+    },
+    {
+      "name": "sessioni",
+      "declaration": "INPUT[inlineListSuggester(optionQuery(\"Mondi/Sessioni\"), useLinks(partial), allowOther)]"
+    },
+    {
+      "name": "luoghi",
+      "declaration": "INPUT[inlineListSuggester(optionQuery(\"Mondi/Luoghi\"), useLinks(partial), allowOther)]"
+    },
+    {
+      "name": "fazioni",
+      "declaration": "INPUT[inlineListSuggester(optionQuery(\"Mondi/Fazioni\"), useLinks(partial), allowOther)]"
+    },
+    {
+      "name": "missioni",
+      "declaration": "INPUT[inlineListSuggester(optionQuery(\"Mondi/Missioni\"), useLinks(partial), allowOther)]"
+    },
+    {
+      "name": "tracciati",
+      "declaration": "INPUT[inlineListSuggester(optionQuery(\"Mondi/Tracciati\"), useLinks(partial), allowOther)]"
     }
   ],
   "buttonTemplates": [
+    {
+      "label": "Aggiorna Scena",
+      "style": "primary",
+      "actions": [
+        {
+          "type": "runTemplaterFile",
+          "templateFile": "z.modelli/dm/Aggiorna Scena Corrente.md"
+        }
+      ],
+      "id": "aggiorna-scena-z-modelli-dm-aggiorna-scena-corrente-md"
+    },
+    {
+      "label": "Aggiungi Decisione",
+      "style": "primary",
+      "actions": [
+        {
+          "type": "runTemplaterFile",
+          "templateFile": "z.modelli/dm/Aggiungi Decisione Live.md"
+        }
+      ],
+      "id": "aggiungi-decisione-z-modelli-dm-aggiungi-decisione-live-md"
+    },
+    {
+      "label": "Collega Appunto",
+      "style": "primary",
+      "actions": [
+        {
+          "type": "runTemplaterFile",
+          "templateFile": "z.modelli/dm/Collega Appunto Live.md"
+        }
+      ],
+      "id": "collega-appunto-z-modelli-dm-collega-appunto-live-md"
+    },
     {
       "label": "Aiuto",
       "style": "default",
@@ -1267,6 +1348,19 @@
       "id": "nuovo-mondo-z-modelli-mondo-md"
     },
     {
+      "label": "Nuovo Mondo Homebrew",
+      "style": "primary",
+      "actions": [
+        {
+          "type": "templaterCreateNote",
+          "templateFile": "z.modelli/wizard/Nuovo Mondo Homebrew.md",
+          "folderPath": "Mondi",
+          "openNote": true
+        }
+      ],
+      "id": "nuovo-mondo-homebrew"
+    },
+    {
       "label": "Nuovo Oggetto Magico",
       "style": "primary",
       "actions": [
@@ -1747,6 +1841,155 @@
         }
       ],
       "id": "worldbuilding-profondo-risorse-worldbuilding-profondo-2"
+    },
+    {
+      "label": "Marca Canonico",
+      "style": "primary",
+      "actions": [
+        {
+          "type": "runTemplaterFile",
+          "templateFile": "z.modelli/azioni/Marca Canonico.md"
+        }
+      ],
+      "id": "marca-canonico"
+    },
+    {
+      "label": "Marca Rumor",
+      "style": "default",
+      "actions": [
+        {
+          "type": "runTemplaterFile",
+          "templateFile": "z.modelli/azioni/Marca Rumor.md"
+        }
+      ],
+      "id": "marca-rumor"
+    },
+    {
+      "label": "Archivia",
+      "style": "destructive",
+      "actions": [
+        {
+          "type": "runTemplaterFile",
+          "templateFile": "z.modelli/azioni/Archivia.md"
+        }
+      ],
+      "id": "archivia-nota"
+    },
+    {
+      "label": "Applica Conseguenza",
+      "style": "primary",
+      "actions": [
+        {
+          "type": "runTemplaterFile",
+          "templateFile": "z.modelli/azioni/Applica Conseguenza.md"
+        }
+      ],
+      "id": "applica-conseguenza"
+    },
+    {
+      "label": "Avanza Clock",
+      "style": "primary",
+      "actions": [
+        {
+          "type": "runTemplaterFile",
+          "templateFile": "z.modelli/azioni/Avanza Clock.md"
+        }
+      ],
+      "id": "avanza-clock"
+    },
+    {
+      "label": "Collega Sessione Attiva",
+      "style": "default",
+      "actions": [
+        {
+          "type": "runTemplaterFile",
+          "templateFile": "z.modelli/azioni/Collega Sessione Attiva.md"
+        }
+      ],
+      "id": "collega-sessione-attiva"
+    },
+    {
+      "label": "Propaga A Entita",
+      "style": "primary",
+      "actions": [
+        {
+          "type": "runTemplaterFile",
+          "templateFile": "z.modelli/azioni/Propaga A Entita.md"
+        }
+      ],
+      "id": "propaga-a-entita"
+    },
+    {
+      "label": "Prepara Recap Pubblico",
+      "style": "primary",
+      "actions": [
+        {
+          "type": "runTemplaterFile",
+          "templateFile": "z.modelli/azioni/Prepara Recap Pubblico.md"
+        }
+      ],
+      "id": "prepara-recap-pubblico"
+    },
+    {
+      "label": "Nuova Entita Viva",
+      "style": "primary",
+      "actions": [
+        {
+          "type": "runTemplaterFile",
+          "templateFile": "z.modelli/wizard/Nuova Entita Viva.md"
+        }
+      ],
+      "id": "wizard-nuova-entita-viva"
+    },
+    {
+      "label": "Appunto Live",
+      "style": "primary",
+      "actions": [
+        {
+          "type": "templaterCreateNote",
+          "templateFile": "z.modelli/wizard/Appunto Live.md",
+          "folderPath": "Inbox",
+          "openNote": true
+        }
+      ],
+      "id": "wizard-appunto-live"
+    },
+    {
+      "label": "Conseguenza",
+      "style": "primary",
+      "actions": [
+        {
+          "type": "templaterCreateNote",
+          "templateFile": "z.modelli/wizard/Conseguenza.md",
+          "folderPath": "Inbox",
+          "openNote": true
+        }
+      ],
+      "id": "wizard-conseguenza"
+    },
+    {
+      "label": "Fine Sessione",
+      "style": "primary",
+      "actions": [
+        {
+          "type": "runTemplaterFile",
+          "templateFile": "z.modelli/wizard/Fine Sessione.md"
+        }
+      ],
+      "id": "wizard-fine-sessione"
+    },
+    {
+      "label": "Sessione Da Output",
+      "style": "primary",
+      "actions": [
+        {
+          "type": "templaterCreateNote",
+          "templateFile": "z.modelli/wizard/Nuova Sessione Da Output Precedente.md",
+          "folderPath": "Mondi/Sessioni",
+          "openNote": true
+        }
+      ],
+      "id": "wizard-sessione-da-output"
     }
   ],
   "excludedFolders": [

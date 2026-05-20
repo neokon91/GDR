@@ -15,13 +15,19 @@ async function evento_storico(tp) {
     );
     const dataMondo = await helpers.promptOptional(tp, "Data nel mondo");
     const causa = await helpers.promptOptional(tp, "Causa principale");
+    const gancio = await helpers.promptOptional(tp, "Gancio giocabile dell'evento");
+    const usoAlTavolo = await helpers.promptOptional(tp, "Uso al tavolo");
+    const playerSafe = await helpers.promptOptional(tp, "Versione player-safe");
     const memoria = creazioneCompleta ? await helpers.promptOptional(tp, "Come viene ricordato") : "";
     const cambiamento = await helpers.promptOptional(tp, "Cosa cambia nella vita quotidiana");
     const versione = creazioneCompleta ? await helpers.promptOptional(tp, "Versione alternativa o contestata") : "";
+    const prossimaMossa = await helpers.promptOptional(tp, "Prossima mossa o conseguenza pendente");
+    const connessioni = await helpers.chooseConnections(tp, "Connessioni vive dell'evento", context);
 
     const created = await helpers.moveNote(tp, "Mondi/Timeline", name);
     // Un evento storico creato dal gioco diventa conseguenza della sessione attiva.
     await helpers.linkCreatedNoteToActiveSession(created, { sessionField: "conseguenze" });
+    await helpers.linkCreatedNoteToConnections(created, connessioni);
 
     return `---
 id: ${id}
@@ -51,6 +57,10 @@ missioni: []
 tracciati: []
 sessioni: ${helpers.inlineYamlList(sessioni)}
 causa: ${helpers.yamlQuote(causa)}
+gancio: ${helpers.yamlQuote(gancio)}
+uso_al_tavolo: ${helpers.yamlQuote(usoAlTavolo)}
+player_safe: ${helpers.yamlQuote(playerSafe)}
+connessioni: ${helpers.inlineYamlList(connessioni)}
 cause: []
 effetti: []
 entita_impattate: []
@@ -62,7 +72,7 @@ versioni_alternative: ${helpers.inlineYamlTextList([versione])}
 cambiamenti_quotidiani: ${helpers.inlineYamlTextList([cambiamento])}
 eredita_materiali: []
 conseguenze: ${helpers.inlineYamlTextList([cambiamento])}
-prossima_mossa:
+prossima_mossa: ${helpers.yamlQuote(prossimaMossa)}
 giocabile: false
 scelte: []
 rischi: []

@@ -48,7 +48,7 @@ if (!active.length) {
 ```dataview
 TABLE data, data_mondo, stato, campagne, luoghi
 FROM "Mondi/Sessioni"
-WHERE (stato = "preparazione" OR stato = "pronto") AND !startswith(file.name, "Prova -")
+WHERE (stato = "preparazione" OR stato = "pronto")
 SORT data ASC
 LIMIT 10
 ```
@@ -58,7 +58,7 @@ LIMIT 10
 ```dataview
 TABLE stato, pressione, scadenza_mondo, prossima_mossa, luoghi
 FROM "Mondi/Missioni"
-WHERE (stato = "proposta" OR stato = "accettata" OR stato = "in corso") AND !startswith(file.name, "Prova -")
+WHERE (stato = "proposta" OR stato = "accettata" OR stato = "in corso")
 SORT pressione DESC, scadenza_mondo ASC, stato ASC, nome ASC
 ```
 
@@ -68,7 +68,7 @@ SORT pressione DESC, scadenza_mondo ASC, stato ASC, nome ASC
 const hasText = value => String(value ?? "").trim().length > 0;
 
 const pages = dv.pages('"Mondi/Missioni" OR "Mondi/Sessioni" OR "Mondi/Timeline" OR "Mondi/Calendario Diegetico"')
-  .where(p => !String(p.file.name).startsWith("Prova -") && hasText(p["fc-date"]) && p.stato !== "archiviata")
+  .where(p => hasText(p["fc-date"]) && p.stato !== "archiviata")
   .sort(p => `${p["fc-calendar"] ?? ""} ${p["fc-date"] ?? ""}`, "asc");
 
 if (!pages.length) {
@@ -118,7 +118,7 @@ if (data) {
 
   const names = new Set(calendars.flatMap(c => [c.name, c.id]).filter(Boolean).map(x => String(x).toLowerCase()));
   const events = dv.pages('"Mondi" OR "Campagne" OR "Inbox"')
-    .where(p => !String(p.file.name).startsWith("Prova -") && p.stato !== "archiviata" && hasText(p["fc-date"]));
+    .where(p => p.stato !== "archiviata" && hasText(p["fc-date"]));
   const unmatched = calendars.length
     ? events.where(p => hasText(p["fc-calendar"]) && !names.has(String(p["fc-calendar"]).toLowerCase()))
       .map(p => [p.file.link, p["fc-calendar"], p["fc-date"], p["fc-category"] ?? ""])
@@ -136,7 +136,7 @@ if (data) {
 
 ```dataviewjs
 const rows = dv.pages('"Mondi/Calendario Diegetico"')
-  .where(p => p.file.name !== "Calendario Diegetico" && !String(p.file.name).startsWith("Prova -") && p.stato !== "archiviata")
+  .where(p => p.file.name !== "Calendario Diegetico" && p.stato !== "archiviata")
   .sort(p => `${p.mese ?? ""} ${p.data_mondo ?? ""}`, "asc")
   .map(p => [p.file.link, p.data_mondo ?? "", p.mese ?? "", p.stagione ?? "", p.culture ?? [], p.religioni ?? [], p.luoghi ?? []]);
 
@@ -152,7 +152,7 @@ if (!rows.length) {
 ```dataview
 TABLE data_mondo, mese, stagione, conseguenze_data_passata, pressioni_da_avanzare, prossima_mossa
 FROM "Mondi/Calendario Diegetico"
-WHERE file.name != "Calendario Diegetico" AND !startswith(file.name, "Prova -") AND stato != "archiviata" AND (pressione > 0 OR conseguenze_data_passata OR pressioni_da_avanzare)
+WHERE file.name != "Calendario Diegetico" AND stato != "archiviata" AND (pressione > 0 OR conseguenze_data_passata OR pressioni_da_avanzare)
 SORT mese ASC, data_mondo ASC
 ```
 
@@ -163,10 +163,10 @@ const hasText = value => String(value ?? "").trim().length > 0;
 
 const pages = [
   ...dv.pages('"Mondi/Sessioni"')
-    .where(p => !String(p.file.name).startsWith("Prova -") && p.stato !== "archiviata" && hasText(p.data_mondo) && !hasText(p["fc-date"]))
+    .where(p => p.stato !== "archiviata" && hasText(p.data_mondo) && !hasText(p["fc-date"]))
     .map(p => [p.file.link, "sessione", p.data_mondo, p.stato ?? ""]).array(),
   ...dv.pages('"Mondi/Missioni"')
-    .where(p => !String(p.file.name).startsWith("Prova -") && p.stato !== "archiviata" && hasText(p.scadenza_mondo) && !hasText(p["fc-date"]))
+    .where(p => p.stato !== "archiviata" && hasText(p.scadenza_mondo) && !hasText(p["fc-date"]))
     .map(p => [p.file.link, p["fc-category"] ?? "scadenza", p.scadenza_mondo, p.stato ?? ""]).array()
 ];
 
@@ -182,7 +182,7 @@ if (!pages.length) {
 ```dataview
 TABLE data, data_mondo, stato, campagne
 FROM "Mondi/Sessioni"
-WHERE file.name != "Sessioni" AND stato != "archiviata" AND !startswith(file.name, "Prova -")
+WHERE file.name != "Sessioni" AND stato != "archiviata"
 SORT data DESC
 LIMIT 20
 ```

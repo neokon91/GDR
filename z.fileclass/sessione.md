@@ -14,6 +14,12 @@ fieldsOrder:
   - missioni
   - tracciati
   - incontri
+  - pressione
+  - prossima_mossa
+  - connessioni
+  - player_safe
+  - entita_impattate
+  - propaga_a
 fields:
   - name: nome
     id: nome
@@ -80,6 +86,30 @@ fields:
     options: {}
   - name: incontri
     id: incontri
+    type: MultiFile
+    options: {}
+  - name: pressione
+    id: pressione
+    type: Number
+    options: {}
+  - name: prossima_mossa
+    id: prossima_mossa
+    type: Input
+    options: {}
+  - name: connessioni
+    id: connessioni
+    type: MultiFile
+    options: {}
+  - name: player_safe
+    id: player_safe
+    type: Input
+    options: {}
+  - name: entita_impattate
+    id: entita_impattate
+    type: MultiFile
+    options: {}
+  - name: propaga_a
+    id: propaga_a
     type: MultiFile
     options: {}
 ---

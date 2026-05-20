@@ -1,7 +1,7 @@
 <% await tp.user.one_shot(tp) %>
 # `=this.nome`
 
->[!infobox|wiki]- One-Shot
+>[!infoboxwiki]- One-Shot
 > Stato:
 > `INPUT[inlineSelect(option(bozza, Bozza), option(preparazione, Preparazione), option(pronto, Pronto), option(giocata, Giocata), option(archiviata, Archiviata)):stato]`
 >

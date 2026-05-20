@@ -2,9 +2,28 @@
 
 ## Unreleased
 
-### Prossima Fase
+Nessuna modifica non rilasciata.
 
-- Entita vive, creazione guidata con connessioni, card funzionali e demo professionale prima della release 1.0.
+## 1.0.0 - 2026-05-20
+
+### Aggiunto
+
+- Wizard [[z.modelli/wizard/Nuovo Mondo Homebrew]] con preset creativi, promessa, tono, magia, scala, conflitto, vincoli, temi da evitare e spina dorsale iniziale.
+- Registro tassonomico profondo in `z.automazioni/world_taxonomy.js` per geografia, societa, cultura, religione, magia, economia, ecologia e storia.
+- Router creativi per societa, cultura, religione, economia, magia, storia ed ecologia, più template generico [[z.modelli/worldbuilding/Entita Worldbuilding]].
+
+### Migliorato
+
+- [[Inizia Qui]], [[Worldbuilder Dashboard]], [[Bibbia del Mondo]] e [[Risorse/Guida DM]] ora partono da Crea Il Mondo e trattano sessioni e campagne come derivati del Codex.
+- `npm run check` controlla il layer 1.0.0, il nuovo wizard mondo, i file tassonomici e l'ordine worldbuilding-first di [[Inizia Qui]].
+- `release:clean` include anche `z.engine`, cosi le viste JS usate dal vault restano nella release utente.
+
+### Verificato
+
+- `npm run check`
+- `git diff --check`
+- `npm run release:clean`
+- `unzip -tq dist/vault-gdr-clean.zip`
 
 ### Aggiunto
 
@@ -20,11 +39,9 @@
 - [[Risorse/Post Sessione Guidato]] ora e un flusso unico con appunti live della sessione, canone da confermare, conseguenze, prossime mosse, prossima sessione e recap pubblico/DM separati.
 - [[Bibbia del Mondo]] e il template mondo sono stati rafforzati come Codex locale: home mondo, indice per categoria/pubblico e controlli su articoli senza gancio, collegamenti o uso al tavolo.
 - Gli articoli core di luogo, fazione, PNG, cultura, religione e timeline separano meglio contenuto player-safe e note DM.
-- [[Atlante del Mondo]] ora tratta le mappe come atlante operativo: mappa DM demo, mappa player-safe demo, campi `layer`/`pin`, controllo mappe-luoghi e rotte/territori/fazioni collegati.
 - [[Vista Giocatori]] e stata ripulita come portale player-facing con recap ordinati, mappa pubblica centrale, card per mondo conosciuto e controllo anti-segreti.
 - [[Hub/Party Control]] ora concentra HP, condizioni, risorse rapide, inventario, loot non assegnato, quest personali, legami e spotlight.
 - Polish UX mirato per pagine operative: primo schermo piu leggibile, pulsanti compatti, card/empty state piu chiari e strumenti secondari meno rumorosi.
-- Demo prodotto completata: sessione attiva con cinque campi pieni, conseguenze propagate, codex demo completo, player portal popolato, mappe DM/player-safe e party demo con tre PG.
 - [[Vista Giocatori]] ora funziona come portale player-facing con recap, diario visibile, atlante condiviso, handout e controllo anti-segreti.
 - [[Inizia Qui]] e stato ridotto al flusso principale Prepara -> Gioca -> Aggiorna il mondo, con strumenti avanzati separati.
 - [[Risorse/Preparazione Sessione]] ora richiede cinque blocchi concreti: obiettivo, prima scena, scelta, pressione e materiale.
@@ -35,7 +52,6 @@
 - `release:clean` genera un `LEGGIMI.md` utente piu completo e la documentazione include una pagina release pubblica pronta.
 - Roadmap, strategia prodotto e sviluppo vault ora mettono la riduzione della navigazione sopra nuove feature.
 - README, Repository, Release e Risorse/Release Pulita non linkano piu documenti superflui.
-- [[Risorse/Roadmap/1.0.0]] riscritta come backlog operativo per prodotto professionale: sessione chiusa, post-sessione, codex mondo, atlante, player portal, party control, polish e demo.
 
 ## 0.9.0 - 2026-05-20
 
@@ -46,7 +62,6 @@
 - [[Bibbia del Mondo]], [[Revisione Lore]] e [[Controllo Canone]] per mantenere coerenza narrativa, fonte, canone e retcon.
 - Nuova area [[Mondi/Relazioni/Relazioni]] con template [[z.modelli/worldbuilding/Relazione]] e automazione `relazione`.
 - Template e automazioni per lore persistence, event propagation, stato del mondo e causalita storica.
-- Demo geopolitica con [[Demo - Marca della Soglia]] e [[Demo - Custodi e Brumafonda]].
 - [[Risorse/Guida Lore Professionale]] e [[Risorse/Checklist Lore Professionale]].
 
 ### Migliorato
@@ -54,7 +69,6 @@
 - [[Worldbuilder Dashboard]], [[Atlante del Mondo]], [[Mondi/Stato del Mondo]], [[Risorse/Preparazione Sessione]] e [[Risorse/Post Sessione Guidato]] ora leggono anche propagazione, relazioni e geopolitica.
 - I template politici sono operativi: regni, imperi, repubbliche, oligarchie, ducati, contee, baronie e regioni tracciano confini, legittimita, risorse e crisi.
 - Cultura e religione producono scelte, tabu, autorita, rituali, eresie, luoghi sacri e propagazione.
-- [[Demo - La Reliquia Spezzata]] mostra una catena end-to-end: evento storico -> fazione si muove -> relazione peggiora -> territorio politico nasce -> prossima sessione.
 - Il controllo vault segnala geopolitica debole, relazioni senza conseguenze, religioni senza luoghi sacri, culture senza tensioni, eventi senza causa e lore non propagata.
 
 ## 0.8.0 - 2026-05-20
@@ -64,16 +78,12 @@
 - `CONTRIBUTING.md` e issue template GitHub per bug e feature request.
 - [[Risorse/Importare Mappe]] e import GeoJSON Azgaar verso bozze di luoghi.
 - [[Risorse/Roadmap/0.8.0|Roadmap 0.8.0]] per completamento prodotto prima della release ZIP iniziale.
-- [[Demo - Brumafonda.hexcartographer]] per regioni, viaggi ed esplorazione a esagoni.
-- [[Demo - Mappa Zoomabile]] con blocco `zoommap` e base SVG locale per TTRPG Tools: Maps.
-- [[Risorse/Media Scene]] e [[Demo - Nebbia Sul Ponte]] per cue con timestamp e scene.
 - Tabelle Dice Roller per viaggio, scoperte esagono, reazioni fazione e conseguenze post-sessione.
 
 ### Migliorato
 
 - README riposizionato come pagina prodotto e non solo guida interna al vault.
 - Checklist release aggiornata per ZIP pulito e documentazione community.
-- Media, mappe e tabelle sono collegati alla demo e a [[Durante il Gioco]].
 - TTRPG Tools: Maps e Hex Cartographer sono guidati ma non bloccano il percorso base.
 - BRAT resta attivo come strumento essenziale di manutenzione per plugin non ufficiali; Iron Vault ed Emoji Toolbar restano fuori dal flusso base.
 - Aggiunta nota di studio su Iron Vault per replicare nel vault funzioni utili senza imporre il plugin.
@@ -142,7 +152,6 @@
 ### Migliorato
 
 - [[Mondi/Calendario]] ora parte da oggi nel mondo, prossime sessioni, missioni con pressione e date da sistemare.
-- Demo aggiornata con date narrative gia pronte per calendario, sessioni, scadenze e timeline.
 - [[Inizia Qui]] e [[Risorse/Risorse]] collegano il percorso di consegna, preparazione, gioco e post-sessione.
 
 ## 0.3.0 - 2026-05-20
@@ -170,7 +179,6 @@
 - [[Mondi/Stato del Mondo]] per vedere conseguenze da applicare, PNG cambiati, luoghi in crisi, fazioni in movimento e missioni influenzate.
 - [[Risorse/Roadmap/0.2.0|Roadmap 0.2.0]] per tracciare lo stato della roadmap Runtime + Lore Engine.
 - Import SRD esteso a Background, Equipaggiamento, Talenti, Lingue e Specie dalla fonte JSON aggiornata.
-- Demo aggiornata con Lore Capture canonizzata, evento storico e conseguenze applicate a luogo, fazione e missione.
 - Filtri opzionali per mondo e campagna su [[Worldbuilder Dashboard]] e [[Mondi/Stato del Mondo]].
 
 ### Migliorato
@@ -190,7 +198,6 @@
 
 - Nota [[Inizia Qui]] come onboarding non tecnico.
 - [[Risorse/FAQ]] per supporto non tecnico.
-- Mini-campagna demo [[Demo - La Reliquia Spezzata]] con mondo, sessioni, PNG, luoghi, fazione, missione, incontro, oggetto, dispensa e mappa relazionale.
 - Smoke test tecnico `node z.automazioni/check_vault.js`.
 - Documentazione di release in [[RELEASE]].
 - File [[VERSION]] con versione corrente del vault.

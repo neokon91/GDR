@@ -1,7 +1,7 @@
 <% await tp.user.incontro(tp, { tipoIncontro: "pericolo ambientale" }) %>
 # `=this.nome`
 
->[!infobox|wiki]- Pericolo Ambientale
+>[!infoboxwiki]- Pericolo Ambientale
 > Stato:
 > `INPUT[inlineSelect(option(bozza, Bozza), option(pronto, Pronto), option(in gioco, In gioco), option(usato, Usato), option(archiviata, Archiviata)):stato]`
 >

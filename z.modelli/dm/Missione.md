@@ -1,6 +1,67 @@
 <% await tp.user.missione(tp) %>
 # `=this.nome`
 
+````tabs
+tab: Giocabile
+
+> [!missione] Promessa, Posta, Scelta
+> Gancio: `INPUT[text:gancio]`
+>
+> Posta: `INPUT[text:posta]`
+>
+> Scelta concreta: `INPUT[text:scelta]`
+>
+> > [!lettura]- Player-safe
+> > `INPUT[text:player_safe]`
+
+> [!timer] Se Nessuno Interviene
+> Pressione: `INPUT[slider(minValue(0), maxValue(10), stepSize(1), addLabels):pressione]`
+>
+> Prossima mossa: `INPUT[text:prossima_mossa]`
+>
+> Scadenza: `INPUT[text:scadenza_mondo]`
+
+tab: Tavolo
+
+> [!scena] Scene Pronte
+> ```meta-bind
+> INPUT[list:scene_pronte]
+> ```
+>
+> > [!indizio]- Indizi
+> > ```meta-bind
+> > INPUT[list:indizi]
+> > ```
+>
+> > [!pericolo]- Ostacoli
+> > ```meta-bind
+> > INPUT[list:ostacoli]
+> > ```
+
+tab: Rete
+
+> [!regia] Collegamenti
+> Mondo: `INPUT[mondo][:mondo]`
+>
+> Luoghi: `INPUT[inlineListSuggester(optionQuery("Mondi/Luoghi"), useLinks(partial)):luoghi]`
+>
+> Fazioni: `INPUT[inlineListSuggester(optionQuery("Mondi/Fazioni"), useLinks(partial)):fazioni]`
+>
+> PNG: `INPUT[inlineListSuggester(optionQuery("Mondi/Personaggi"), useLinks(partial)):personaggi]`
+>
+> Clock: `INPUT[inlineListSuggester(optionQuery("Mondi/Tracciati"), useLinks(partial)):tracciati]`
+
+tab: Esiti
+
+> [!ricompensa] Ricompense
+> `INPUT[inlineListSuggester(optionQuery("Mondi/Oggetti"), useLinks(partial), allowOther):ricompense]`
+>
+> > [!conflitto]- Conseguenze
+> > ```meta-bind
+> > INPUT[list:conseguenze]
+> > ```
+````
+
 ## Scheda Viva
 
 > [!scena] Gancio
@@ -33,7 +94,14 @@ WHERE contains(this.connessioni, file.link)
 SORT categoria ASC, file.name ASC
 ```
 
->[!infobox|wiki]- Missione
+### Feedback Creazione
+
+```dataviewjs
+const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));
+gdr.renderCreationFeedback(dv);
+```
+
+>[!infoboxwiki]- Missione
 > Stato:
 > `INPUT[inlineSelect(option(proposta, Proposta), option(accettata, Accettata), option(in corso, In corso), option(completata, Completata), option(fallita, Fallita), option(archiviata, Archiviata)):stato]`
 >

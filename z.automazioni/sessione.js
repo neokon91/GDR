@@ -1,5 +1,6 @@
 async function sessione(tp) {
     const helpers = tp.user.helpers;
+    const route = helpers.consumeRoute();
     const titolo = await helpers.promptRequired(tp, "Titolo della sessione", "Sessione");
     const data = await helpers.promptOptional(tp, "Data", tp.date.now("YYYY-MM-DD")) || tp.date.now("YYYY-MM-DD");
     const id = helpers.slugify(`${data}-${titolo}`);
@@ -18,7 +19,7 @@ async function sessione(tp) {
         ],
         "Tipo di sessione"
     );
-    const obiettivo = await helpers.promptOptional(tp, "Obiettivo della sessione");
+    const obiettivo = await helpers.promptOptional(tp, "Obiettivo della sessione", route.obiettivo ?? "");
     const apertura = await helpers.promptOptional(tp, "Prima scena / apertura");
     const scelta = await helpers.promptOptional(tp, "Scelta concreta per i giocatori");
     const campagne = creazioneCompleta ? await helpers.chooseCampaigns(tp, "Campagne collegate", context) : [];
@@ -71,6 +72,8 @@ video: ${helpers.inlineYamlList(video)}
 fazioni: ${helpers.inlineYamlList(fazioni)}
 oggetti: ${helpers.inlineYamlList(oggetti)}
 appunti_live: []
+scena_corrente: ${helpers.yamlQuote(apertura)}
+decisioni_prese: []
 obiettivo: ${helpers.yamlQuote(obiettivo)}
 apertura: ${helpers.yamlQuote(apertura)}
 scelta: ${helpers.yamlQuote(scelta)}
@@ -82,6 +85,10 @@ decisioni_attese: []
 pressioni: []
 materiale_pronto: []
 conseguenze: []
+recap_pubblico: []
+recap_dm: []
+prossima_apertura:
+output_sessione: []
 ---
 `;
 }

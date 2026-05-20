@@ -31,11 +31,17 @@ async function oggetto(tp) {
     const context = { world: mondo };
     const proprietario = await helpers.choosePerson(tp, "Proprietario", context);
     const luogo = await helpers.chooseLocation(tp, "Luogo dell'oggetto", context);
+    const gancio = await helpers.promptOptional(tp, "Gancio giocabile dell'oggetto");
+    const usoAlTavolo = await helpers.promptOptional(tp, "Uso al tavolo");
+    const playerSafe = await helpers.promptOptional(tp, "Versione player-safe");
+    const prossimaMossa = await helpers.promptOptional(tp, "Cosa cambia se viene usato, perso o ignorato");
+    const connessioni = await helpers.chooseConnections(tp, "Connessioni vive dell'oggetto", context);
 
     const sessioni = activeContext.link ? [activeContext.link] : [];
     const created = await helpers.moveNote(tp, helpers.path("oggetti"), name);
     // Oggetti e ricompense creati al tavolo restano collegati alla sessione che li ha introdotti.
     await helpers.linkCreatedNoteToActiveSession(created, { sessionField: "oggetti" });
+    await helpers.linkCreatedNoteToConnections(created, connessioni);
 
     return `---
 id: ${id}
@@ -48,6 +54,12 @@ canonico: false
 mondo: ${mondo}
 proprietario: ${proprietario}
 luogo: ${luogo}
+gancio: ${helpers.yamlQuote(gancio)}
+uso_al_tavolo: ${helpers.yamlQuote(usoAlTavolo)}
+player_safe: ${helpers.yamlQuote(playerSafe)}
+pressione: 0
+prossima_mossa: ${helpers.yamlQuote(prossimaMossa)}
+connessioni: ${helpers.inlineYamlList(connessioni)}
 sessioni: ${helpers.inlineYamlList(sessioni)}
 ---
 `;

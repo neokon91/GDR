@@ -15,7 +15,7 @@ Questa pagina mostra cosa dell'ambientazione può diventare una missione, un arc
 ```dataview
 TABLE mondo, tipo, pericolo, tensione, problemi, segreti, fazioni
 FROM "Mondi/Luoghi"
-WHERE stato != "archiviata" AND !startswith(file.name, "Prova -") AND (pericolo > 0 OR tensione OR problemi OR segreti)
+WHERE stato != "archiviata" AND (pericolo > 0 OR tensione OR problemi OR segreti)
 SORT pericolo DESC, nome ASC
 LIMIT 20
 ```
@@ -25,7 +25,7 @@ LIMIT 20
 ```dataview
 TABLE mondo, luoghi, lingue, religioni, fazioni, tensioni, segreti
 FROM "Mondi/Culture"
-WHERE stato != "archiviata" AND !startswith(file.name, "Prova -") AND (tensioni OR segreti)
+WHERE stato != "archiviata" AND (tensioni OR segreti)
 SORT mondo ASC, nome ASC
 LIMIT 20
 ```
@@ -35,7 +35,7 @@ LIMIT 20
 ```dataview
 TABLE mondo, pressione, posta, prossima_mossa, fazioni, luoghi
 FROM "Mondi/Conflitti"
-WHERE stato != "archiviata" AND !startswith(file.name, "Prova -")
+WHERE stato != "archiviata"
 SORT pressione DESC, nome ASC
 LIMIT 20
 ```
@@ -45,7 +45,7 @@ LIMIT 20
 ```dataview
 TABLE categoria, tipo, mondo, segreti, indizi, luoghi, fazioni
 FROM "Mondi"
-WHERE stato != "archiviata" AND !startswith(file.name, "Prova -") AND (segreti OR indizi)
+WHERE stato != "archiviata" AND (segreti OR indizi)
 SORT file.mtime DESC
 LIMIT 20
 ```

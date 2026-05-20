@@ -1,7 +1,7 @@
 <% await tp.user.luogo(tp) %>
 # `=this.nome`
 
->[!infobox|wiki]- Sala di Controllo
+>[!infoboxwiki]- Sala di Controllo
 > Governante:
 > `INPUT[suggester(optionQuery("Mondi/Personaggi"), useLinks(partial), allowOther):governante]`
 >
@@ -79,6 +79,20 @@ TABLE categoria, tipo, stato, pressione, prossima_mossa
 FROM "Mondi"
 WHERE contains(this.connessioni, file.link)
 SORT categoria ASC, file.name ASC
+```
+
+### Feedback Creazione
+
+```dataviewjs
+const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));
+gdr.renderCreationFeedback(dv);
+```
+
+### Mappe Del Luogo
+
+```dataviewjs
+const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));
+gdr.renderPlaceMapCards(dv);
 ```
 
 ````tabs

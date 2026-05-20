@@ -1,7 +1,7 @@
 <% await tp.user.avventura(tp) %>
 # `=this.nome`
 
->[!infobox|wiki]- Avventura
+>[!infoboxwiki]- Avventura
 > Stato:
 > `INPUT[inlineSelect(option(bozza, Bozza), option(preparazione, Preparazione), option(pronto, Pronto), option(in gioco, In gioco), option(conclusa, Conclusa), option(archiviata, Archiviata)):stato]`
 >

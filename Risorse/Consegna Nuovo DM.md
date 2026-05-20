@@ -16,7 +16,6 @@ Questa pagina serve quando il vault viene dato a una persona che deve usarlo, no
 | --- | --- |
 | Primo avvio | [[Inizia Qui]] |
 | Controllo iniziale | [[Risorse/Setup Guidato]] |
-| Esempio completo | [[Demo - La Reliquia Spezzata]] |
 | Preparare | [[1. DM Dashboard]] |
 | Giocare | [[Durante il Gioco]] |
 | Dopo la partita | [[Risorse/Post Sessione Guidato]] |
@@ -42,7 +41,6 @@ Questa pagina serve quando il vault viene dato a una persona che deve usarlo, no
 
 1. Apri [[Inizia Qui]].
 2. Apri [[Risorse/Setup Guidato]] e controlla che sia tutto pronto.
-3. Apri [[Demo - La Reliquia Spezzata]].
 4. Apri [[Durante il Gioco]] per vedere come appare una sessione al tavolo.
 5. Apri [[Risorse/Post Sessione Guidato]] per capire cosa succede dopo.
 

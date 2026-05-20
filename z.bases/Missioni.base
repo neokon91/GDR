@@ -1,9 +1,7 @@
 filters:
   and:
     - file.folder == "Mondi/Missioni"
-    - file.name != "Missioni"
-    - '!file.name.startsWith("Prova -")'
-properties:
+    - file.name != "Missioni"properties:
   nome:
     displayName: Nome
   stato:

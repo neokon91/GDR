@@ -43,19 +43,14 @@ Campi utili solo quando servono:
 - `ricompense`
 - `sessioni`
 
-## Note Di Prova
+## Collaudo Template
 
-Ogni categoria importante può avere una nota `Prova - ...`. Serve a vedere subito se template, campi, collegamenti, callout, CSS e Dataview reggono.
+Il vault non mantiene piu note fittizie di prova nelle cartelle operative. I template si collaudano con:
 
-Queste note non sono contenuto di gioco:
+- `npm run check`, per link, campi, plugin, pulsanti e file del layer interno;
+- smoke manuale delle viste principali in Obsidian.
 
-- stanno nelle cartelle reali della categoria che rappresentano;
-- usano `stato: archiviata`;
-- usano `canonico: false` quando ha senso;
-- sono raccolte in [[Risorse/Prove Entità]];
-- non devono apparire in dashboard, preparazione sessione o indici operativi.
-
-Quando una nuova categoria o un nuovo template diventa stabile, aggiungi o aggiorna la relativa nota di prova. Non serve farlo per idee speculative o template non ancora usati.
+Non creare contenuti finti nelle cartelle `Mondi`, `Campagne`, `Inbox` o `Risorse` solo per testare un template: diventano rumore nelle dashboard e nel vault consegnabile.
 
 ## Essenziale Ora
 

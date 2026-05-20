@@ -1,9 +1,7 @@
 filters:
   and:
     - file.folder == "Mondi/Personaggi"
-    - tipo == "png"
-    - '!file.name.startsWith("Prova -")'
-properties:
+    - tipo == "png"properties:
   nome:
     displayName: Nome
   stato:

@@ -55,4 +55,3 @@ npm run check
 - Refactor estetici non necessari.
 - Nuovi plugin senza motivazione forte.
 - Contenuti protetti da copyright.
-- Note demo confuse con contenuto reale dell'utente.

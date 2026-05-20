@@ -11,6 +11,6 @@ stato: pronto
 ```dataview
 TABLE mondo, culture, luoghi, origine, stato
 FROM "Mondi/Lingue"
-WHERE file.name != "Lingue" AND !startswith(file.name, "Prova -")
+WHERE file.name != "Lingue"
 SORT mondo ASC, nome ASC
 ```

@@ -25,11 +25,18 @@ async function lore_capture(tp, routeOptions = {}) {
     const sessioni = route.useActiveSession && activeContext.link
         ? [activeContext.link]
         : await helpers.chooseSessions(tp, "Sessione collegata", context);
-    const collegamenti = await helpers.chooseNotesByPath(tp, "Mondi", "Collega a mondo, PNG, luogo, missione o fazione", context);
+    const collegamenti = await helpers.chooseCoreConnection(tp, "Collega l'appunto a luogo, PNG, fazione, missione, clock o mappa", context);
+    const entitaImpattate = selectedType?.id === "conseguenza"
+        ? await helpers.chooseConnections(tp, "Entita impattate dalla conseguenza", context)
+        : collegamenti;
+    const propagaA = selectedType?.id === "conseguenza"
+        ? await helpers.chooseConnections(tp, "Dove deve propagarsi", context)
+        : [];
 
     const created = await helpers.moveNote(tp, "Inbox", name);
     // Gli eventi live devono tornare nella sessione attiva per il post-sessione e la canonizzazione.
     await helpers.linkCreatedNoteToActiveSession(created, { sessionField: "appunti_live" });
+    await helpers.linkCreatedNoteToConnections(created, [...collegamenti, ...entitaImpattate, ...propagaA]);
 
     return `---
 id: ${id}
@@ -48,8 +55,8 @@ retcon_motivo:
 mondo: ${mondo}
 sessioni: ${helpers.inlineYamlList(sessioni)}
 collegamenti: ${helpers.inlineYamlList(collegamenti)}
-entita_impattate: []
-propaga_a: []
+entita_impattate: ${helpers.inlineYamlList(entitaImpattate)}
+propaga_a: ${helpers.inlineYamlList(propagaA)}
 data_mondo:
 data_reale:
 fc-calendar:

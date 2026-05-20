@@ -1,7 +1,7 @@
 <% await tp.user.relazione(tp) %>
 # `=this.nome`
 
->[!infobox|wiki]- Relazione
+>[!infoboxwiki]- Relazione
 > Tipo:
 > `INPUT[inlineSelect(option(alleanza, Alleanza), option(rivalità, Rivalità), option(guerra fredda, Guerra Fredda), option(vassallaggio, Vassallaggio), option(trattato, Trattato), option(debito, Debito), option(faida, Faida), option(patto religioso, Patto Religioso), option(tradimento, Tradimento), option(relazione, Relazione)):tipo]`
 >
@@ -29,6 +29,39 @@
 > Posta: `=this.posta`
 >
 > Prossimo deterioramento: `=this.prossima_mossa`
+
+## Scheda Viva
+
+> [!scena] Gancio
+> `INPUT[text:gancio]`
+
+> [!missione] Al Tavolo
+> Uso al tavolo: `INPUT[text:uso_al_tavolo]`
+>
+> Cosa cambia se ignorata: `INPUT[text:prossima_mossa]`
+>
+> Versione player-safe: `INPUT[text:player_safe]`
+
+> [!segreto]- DM
+> `INPUT[text:segreto]`
+
+### Connessioni Vive
+
+`INPUT[inlineListSuggester(optionQuery("Mondi"), useLinks(partial), allowOther):connessioni]`
+
+```dataview
+TABLE categoria, tipo, stato, pressione, prossima_mossa
+FROM "Mondi"
+WHERE contains(this.connessioni, file.link)
+SORT categoria ASC, file.name ASC
+```
+
+### Feedback Creazione
+
+```dataviewjs
+const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));
+gdr.renderCreationFeedback(dv);
+```
 
 ## Lettura Worldbuilding
 

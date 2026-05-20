@@ -13,6 +13,6 @@ stato: pronto
 ```dataview
 TABLE data_mondo, mese, stagione, festa, culture, religioni, luoghi, pressione, prossima_mossa
 FROM "Mondi/Calendario Diegetico"
-WHERE file.name != "Calendario Diegetico" AND !startswith(file.name, "Prova -") AND stato != "archiviata"
+WHERE file.name != "Calendario Diegetico" AND stato != "archiviata"
 SORT mese ASC, data_mondo ASC, file.name ASC
 ```

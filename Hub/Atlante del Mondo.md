@@ -47,7 +47,7 @@ Questa e la vista per usare il mondo nello spazio: mappa DM, mappa giocatori, lu
 
 ```dataviewjs
 const world = dv.current().mondo_attivo?.path ?? String(dv.current().mondo_attivo ?? "");
-const isReal = p => !String(p.file.name).startsWith("Prova -") && p.stato !== "archiviata";
+const isReal = p => p.stato !== "archiviata";
 const matchesWorld = p => !world || String(p.mondo?.path ?? p.mondo ?? "") === world || p.file.path === world;
 const count = source => dv.pages(source).where(p => isReal(p) && matchesWorld(p)).length;
 const esc = value => String(value ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "\"": "&quot;", "'": "&#39;" }[c]));
@@ -83,21 +83,17 @@ tab: Mappa
 
 ### Mappa Principale
 
-> [!luogo] Demo vendibile
-> Parti da [[Demo - Mappa Zoomabile]] per la regia e da [[Demo - Mappa Zoomabile Giocatori]] per la versione condivisibile. Mantieni una nota mappa pubblica separata da quella DM.
 
-```dataview
-TABLE uso, pubblico, mondo, luogo, luoghi, layer, pin, stato, versione_giocatori
-FROM "Risorse/Mappe"
-WHERE file.name != "Mappe" AND stato != "archiviata" AND !startswith(file.name, "Prova -") AND (!this.mondo_attivo OR mondo = this.mondo_attivo)
-SORT pubblico DESC, uso ASC, file.name ASC
+```dataviewjs
+const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));
+gdr.renderAtlasMapCards(dv, dv.current().mondo_attivo);
 ```
 
 ### Controllo Atlante
 
 ```dataviewjs
 const world = dv.current().mondo_attivo?.path ?? String(dv.current().mondo_attivo ?? "");
-const real = p => !String(p.file.name).startsWith("Prova -") && p.stato !== "archiviata";
+const real = p => p.stato !== "archiviata";
 const key = value => value?.path ?? String(value ?? "");
 const matchesWorld = p => !world || key(p.mondo) === world || p.file.path === world;
 const rows = [];
@@ -126,7 +122,7 @@ else dv.table(["Nota", "Problema"], rows);
 ```dataview
 TABLE tipo, luogo_padre, coordinates, layer_mappa, tipo_mappa, color, icon
 FROM "Mondi/Luoghi"
-WHERE stato != "archiviata" AND !startswith(file.name, "Prova -") AND (!this.mondo_attivo OR mondo = this.mondo_attivo) AND (coordinates OR layer_mappa OR tipo_mappa)
+WHERE stato != "archiviata" AND (!this.mondo_attivo OR mondo = this.mondo_attivo) AND (coordinates OR layer_mappa OR tipo_mappa)
 SORT layer_mappa ASC, tipo ASC, nome ASC
 LIMIT 24
 ```
@@ -136,7 +132,7 @@ LIMIT 24
 ```dataview
 TABLE stato_rotta, partenza, arrivo, regioni, fazioni_controllanti, risorse_trasportate, pressione
 FROM "Mondi/Rotte" OR "Mondi/Luoghi" OR "Mondi/Fazioni"
-WHERE stato != "archiviata" AND !startswith(file.name, "Prova -") AND (!this.mondo_attivo OR mondo = this.mondo_attivo)
+WHERE stato != "archiviata" AND (!this.mondo_attivo OR mondo = this.mondo_attivo)
 SORT pressione DESC, nome ASC
 LIMIT 20
 ```
@@ -148,7 +144,7 @@ tab: Profondità
 ```dataview
 TABLE mito_origine, cose_sacre, cose_proibite, famiglia_casa_ruoli, economia_mestieri
 FROM "Mondi/Culture"
-WHERE stato != "archiviata" AND !startswith(file.name, "Prova -") AND (!this.mondo_attivo OR mondo = this.mondo_attivo)
+WHERE stato != "archiviata" AND (!this.mondo_attivo OR mondo = this.mondo_attivo)
 SORT file.mtime DESC
 LIMIT 16
 ```
@@ -158,7 +154,7 @@ LIMIT 16
 ```dataview
 TABLE data_mondo, memoria_pubblica, cambiamenti_quotidiani, conseguenze, propaga_a
 FROM "Mondi/Storia" OR "Mondi/Timeline"
-WHERE stato != "archiviata" AND !startswith(file.name, "Prova -") AND (!this.mondo_attivo OR mondo = this.mondo_attivo)
+WHERE stato != "archiviata" AND (!this.mondo_attivo OR mondo = this.mondo_attivo)
 SORT data_mondo ASC, file.name ASC
 LIMIT 16
 ```
@@ -168,7 +164,7 @@ LIMIT 16
 ```dataview
 TABLE cause_profonde, ferite_storiche, risorse_contese, origine_storica, versioni_contrapposte, ferite_aperte
 FROM "Mondi/Conflitti" OR "Mondi/Relazioni"
-WHERE stato != "archiviata" AND !startswith(file.name, "Prova -") AND (!this.mondo_attivo OR mondo = this.mondo_attivo)
+WHERE stato != "archiviata" AND (!this.mondo_attivo OR mondo = this.mondo_attivo)
 SORT pressione DESC, intensita DESC, file.name ASC
 LIMIT 16
 ```
@@ -178,7 +174,7 @@ tab: Geografia
 ```dataview
 TABLE tipo, luogo_padre, governante, fazioni, pericolo
 FROM "Mondi/Luoghi"
-WHERE stato != "archiviata" AND !startswith(file.name, "Prova -") AND (!this.mondo_attivo OR mondo = this.mondo_attivo)
+WHERE stato != "archiviata" AND (!this.mondo_attivo OR mondo = this.mondo_attivo)
 SORT tipo ASC, nome ASC
 LIMIT 20
 ```
@@ -188,7 +184,7 @@ tab: Popoli
 ```dataview
 TABLE luoghi, lingue, religioni, fazioni, tensioni
 FROM "Mondi/Culture"
-WHERE stato != "archiviata" AND !startswith(file.name, "Prova -") AND (!this.mondo_attivo OR mondo = this.mondo_attivo)
+WHERE stato != "archiviata" AND (!this.mondo_attivo OR mondo = this.mondo_attivo)
 SORT nome ASC
 LIMIT 20
 ```
@@ -198,7 +194,7 @@ tab: Lingue
 ```dataview
 TABLE culture, luoghi, origine, usi
 FROM "Mondi/Lingue"
-WHERE stato != "archiviata" AND !startswith(file.name, "Prova -") AND (!this.mondo_attivo OR mondo = this.mondo_attivo)
+WHERE stato != "archiviata" AND (!this.mondo_attivo OR mondo = this.mondo_attivo)
 SORT nome ASC
 LIMIT 20
 ```
@@ -208,7 +204,7 @@ tab: Poteri
 ```dataview
 TABLE tipo, pressione, prossima_mossa, leader, luoghi, rivali
 FROM "Mondi/Fazioni" OR "Mondi/Religioni" OR "Mondi/Conflitti"
-WHERE stato != "archiviata" AND !startswith(file.name, "Prova -") AND (!this.mondo_attivo OR mondo = this.mondo_attivo)
+WHERE stato != "archiviata" AND (!this.mondo_attivo OR mondo = this.mondo_attivo)
 SORT pressione DESC, nome ASC
 LIMIT 20
 ```
@@ -218,7 +214,7 @@ tab: Relazioni
 ```dataview
 TABLE tipo, stato, soggetti, intensita, pressione, prossima_mossa, conseguenze
 FROM "Mondi/Relazioni"
-WHERE file.name != "Relazioni" AND stato != "archiviata" AND !startswith(file.name, "Prova -") AND (!this.mondo_attivo OR mondo = this.mondo_attivo)
+WHERE file.name != "Relazioni" AND stato != "archiviata" AND (!this.mondo_attivo OR mondo = this.mondo_attivo)
 SORT pressione DESC, intensita DESC, nome ASC
 LIMIT 20
 ```
@@ -228,7 +224,7 @@ tab: Storia
 ```dataview
 TABLE tipo, data_mondo, causa, conseguenze, luoghi, fazioni, culture
 FROM "Mondi/Storia" OR "Mondi/Timeline"
-WHERE stato != "archiviata" AND !startswith(file.name, "Prova -") AND (!this.mondo_attivo OR mondo = this.mondo_attivo)
+WHERE stato != "archiviata" AND (!this.mondo_attivo OR mondo = this.mondo_attivo)
 SORT data_mondo ASC, nome ASC
 LIMIT 20
 ```
@@ -238,7 +234,7 @@ tab: Cosmologia
 ```dataview
 TABLE tipo, regola, pericolo, divinita, creature, luoghi_collegati
 FROM "Mondi/Cosmologia"
-WHERE stato != "archiviata" AND !startswith(file.name, "Prova -") AND (!this.mondo_attivo OR mondo = this.mondo_attivo)
+WHERE stato != "archiviata" AND (!this.mondo_attivo OR mondo = this.mondo_attivo)
 SORT tipo ASC, nome ASC
 LIMIT 20
 ```
@@ -248,7 +244,7 @@ tab: Rotte
 ```dataview
 TABLE stato_rotta, partenza, arrivo, regioni, fazioni_controllanti, risorse_trasportate, pressione, prossima_mossa
 FROM "Mondi/Rotte"
-WHERE stato != "archiviata" AND !startswith(file.name, "Prova -") AND (!this.mondo_attivo OR mondo = this.mondo_attivo)
+WHERE stato != "archiviata" AND (!this.mondo_attivo OR mondo = this.mondo_attivo)
 SORT pressione DESC, nome ASC
 LIMIT 20
 ```
@@ -258,7 +254,7 @@ tab: Risorse
 ```dataview
 TABLE tipo, luoghi, fazioni_controllanti, uso_narrativo, rotte, mercati, pressione
 FROM "Mondi/Risorse" OR "Mondi/Mercati" OR "Mondi/Compendium"
-WHERE stato != "archiviata" AND !startswith(file.name, "Prova -") AND (!this.mondo_attivo OR mondo = this.mondo_attivo)
+WHERE stato != "archiviata" AND (!this.mondo_attivo OR mondo = this.mondo_attivo)
 SORT tipo ASC, nome ASC
 LIMIT 24
 ```
@@ -270,7 +266,7 @@ LIMIT 24
 const hasText = value => String(value ?? "").trim().length > 0;
 const hasLinks = value => dv.array(value ?? []).length > 0;
 const world = dv.current().mondo_attivo?.path ?? String(dv.current().mondo_attivo ?? "");
-const real = p => !String(p.file.name).startsWith("Prova -") && p.stato !== "archiviata";
+const real = p => p.stato !== "archiviata";
 const matchesWorld = p => !world || String(p.mondo?.path ?? p.mondo ?? "") === world || p.file.path === world;
 const rows = [];
 const add = (source, checks) => {

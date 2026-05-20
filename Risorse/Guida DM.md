@@ -2,25 +2,36 @@
 
 Questa guida serve a usare il vault senza pensare a strumenti interni, cartelle tecniche o automazioni.
 
+## Flusso Worldbuilding-First
+
+1. Apri [[Inizia Qui]].
+2. Crea o scegli un mondo con **Crea Il Mondo**.
+3. Completa identita, tono, conflitto centrale, tre luoghi, tre poteri, due culture, un mistero e una pressione.
+4. Apri [[Bibbia del Mondo]] per leggere il Codex come atlante consultabile.
+5. Apri [[Worldbuilder Dashboard]] per espandere il mondo con luoghi, societa, culture, religioni, economia, magia, ecologia e storia.
+6. Trasforma solo dopo il mondo in gioco: campagna, avventura, missione o sessione devono usare almeno tre ancore esistenti.
+7. Durante e dopo il tavolo aggiorna il Codex, non solo il recap.
+
 ## Quando Prepari
 
-1. Apri [[Inizia Qui]] se non sai da dove partire.
-2. Apri [[1. DM Dashboard]].
-3. Apri [[Risorse/Preparazione Sessione]].
-4. Controlla le prossime sessioni.
-5. Se manca qualcosa, crea solo quello che userai davvero:
+1. Apri [[1. DM Dashboard]].
+2. Apri [[Risorse/Preparazione Sessione]].
+3. Controlla quale mondo e quale sessione sono attivi.
+4. Se manca qualcosa, crea solo quello che userai davvero:
    - un PNG se parlerà con i giocatori;
    - un luogo se verrà visitato;
+   - una societa, cultura, religione, risorsa o evento storico se cambia una scelta al tavolo;
    - una missione se i personaggi possono sceglierla;
    - un clock se una minaccia, un viaggio o un rituale deve avanzare;
    - un incontro se potrebbe andare al tavolo;
    - una dispensa se vuoi consegnare un testo o indizio.
-6. Prima di segnare la sessione come `pronto`, assicurati che abbia:
+5. Prima di segnare la sessione come `pronto`, assicurati che abbia:
    - un obiettivo di sessione;
+   - almeno tre ancore mondo tra mondo, luoghi, poteri, PNG, missioni, clock, mappe o scena;
    - almeno una pressione attiva;
    - uno o piu segreti rivelabili;
    - una conseguenza se i PG ignorano il fronte.
-7. Quando la sessione va al tavolo, usa `attiva: true`. Tieni una sola sessione attiva alla volta.
+6. Quando la sessione va al tavolo, usa `attiva: true`. Tieni una sola sessione attiva alla volta.
 
 ## Durante Il Gioco
 

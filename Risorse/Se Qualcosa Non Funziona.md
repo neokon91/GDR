@@ -28,7 +28,6 @@ Usa questa pagina quando dashboard, pulsanti, tabelle o statblock non si comport
 | Le note create sono vuote o sbagliate | Creazione guidata non attiva | Controlla gli strumenti necessari in [[Risorse/Primo Avvio Strumenti]] |
 | `Durante il Gioco` non mostra la sessione giusta | Nessuna sessione attiva o troppe sessioni attive | Apri la sessione corretta e lascia `attiva` acceso solo li |
 | `Cosa Succede Fuori Scena` e vuota | Mancano pressione, prossima mossa o conseguenze sulle note | Compila `pressione`, `innesco`, `prossima_mossa` o `conseguenze` su missioni, PNG, fazioni e clock |
-| La demo non mostra materiale nella vista tavolo | Sessione demo non attiva o filtri modificati | Apri [[Demo - La Reliquia Spezzata]] e segui il Tutorial Operativo |
 | I mostri non appaiono come schede | Schede creatura non attive | Controlla gli strumenti necessari e riapri la nota creatura |
 | I tiri `dice:` restano testo | Tiri rapidi non attivi | Controlla gli strumenti necessari |
 | Le date non compaiono nel calendario | Calendario non attivo o data mancante | Controlla gli strumenti necessari e compila la data del mondo |

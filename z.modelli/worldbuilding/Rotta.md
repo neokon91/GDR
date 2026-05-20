@@ -1,7 +1,20 @@
 <% await tp.user.rotta(tp) %>
 # `=this.nome`
 
->[!infobox|wiki]- Rotta
+> [!economia] Rotta In Gioco
+> Stato: `INPUT[inlineSelect(option(aperta, Aperta), option(chiusa, Chiusa), option(contesa, Contesa), option(maledetta, Maledetta), option(interrotta, Interrotta)):stato_rotta]`
+>
+> Uso al tavolo: `INPUT[text:uso_al_tavolo]`
+>
+> > [!luogo]- Da dove a dove
+> > Partenza: `INPUT[suggester(optionQuery("Mondi/Luoghi"), useLinks(partial), allowOther):partenza]`
+> >
+> > Arrivo: `INPUT[suggester(optionQuery("Mondi/Luoghi"), useLinks(partial), allowOther):arrivo]`
+>
+> > [!conflitto]- Rischio
+> > Prossima mossa: `INPUT[text:prossima_mossa]`
+
+>[!infoboxwiki]- Rotta
 > Stato rotta:
 > `INPUT[inlineSelect(option(aperta, Aperta), option(chiusa, Chiusa), option(contesa, Contesa), option(maledetta, Maledetta), option(interrotta, Interrotta)):stato_rotta]`
 >
@@ -33,6 +46,39 @@
 > `=this.stato_rotta` · pressione `=this.pressione`
 >
 > Prossima mossa: `=this.prossima_mossa`
+
+## Scheda Viva
+
+> [!scena] Gancio
+> `INPUT[text:gancio]`
+
+> [!pericolo] Al Tavolo
+> Uso al tavolo: `INPUT[text:uso_al_tavolo]`
+>
+> Cosa cambia se ignorata: `INPUT[text:prossima_mossa]`
+>
+> Versione player-safe: `INPUT[text:player_safe]`
+
+> [!segreto]- DM
+> `INPUT[text:segreto]`
+
+### Connessioni Vive
+
+`INPUT[inlineListSuggester(optionQuery("Mondi"), useLinks(partial), allowOther):connessioni]`
+
+```dataview
+TABLE categoria, tipo, stato, pressione, prossima_mossa
+FROM "Mondi"
+WHERE contains(this.connessioni, file.link)
+SORT categoria ASC, file.name ASC
+```
+
+### Feedback Creazione
+
+```dataviewjs
+const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));
+gdr.renderCreationFeedback(dv);
+```
 
 ````tabs
 tab: Rotta

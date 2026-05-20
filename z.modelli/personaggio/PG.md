@@ -1,7 +1,7 @@
 <% await tp.user.pg(tp) %>
 # `=this.nome`
 
->[!infobox|wiki right]
+>[!infoboxwiki] right
 >**Giocatore**: `=this.giocatore`
 >**Classe**: `=this.classe`
 >**Sottoclasse**: `=this.sottoclasse`

@@ -12,7 +12,7 @@ cssclasses:
 ```dataview
 TABLE tipo, sottotipo, stato, templi, fazioni
 FROM "Mondi/Religioni"
-WHERE file.name != "Religioni" AND stato != "archiviata" AND !startswith(file.name, "Prova -")
+WHERE file.name != "Religioni" AND stato != "archiviata"
 SORT sottotipo ASC, nome ASC
 ```
 
@@ -21,6 +21,6 @@ SORT sottotipo ASC, nome ASC
 ```dataview
 TABLE tipo, stato, luogo_padre
 FROM "Mondi/Luoghi"
-WHERE tipo = "tempio" AND stato != "archiviata" AND !startswith(file.name, "Prova -")
+WHERE tipo = "tempio" AND stato != "archiviata"
 SORT nome ASC
 ```
