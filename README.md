@@ -1,15 +1,18 @@
 # Vault GDR
 
-Un vault Obsidian professionale per DM e worldbuilder italiani: prepara sessioni, costruisce ambientazioni ricche, trasforma mondi in campagne e offre una vista dedicata ai giocatori.
+Un vault Obsidian professionale per DM e worldbuilder italiani: prepara sessioni, costruisce ambientazioni ricche, trasforma mondi in campagne, controlla il party e offre un portale dedicato ai giocatori.
 
 L'obiettivo e farlo sembrare una app locale dentro Obsidian, non una cartella di appunti: l'utente apre [[Inizia Qui]], sceglie cosa fare e usa dashboard, pulsanti e viste gia pronte.
 
-Apri [[Inizia Qui]] per il primo avvio. Usa [[1. DM Dashboard]] per preparare, [[Atlante del Mondo]] per costruire ambientazioni ricche, [[Geopolitical Dashboard]] per stati e relazioni diplomatiche, [[Motore Mondo Vivo]] per continuita, causalita e propagazione, [[Campagna da Ambientazione]] per trasformarle in gioco, [[Durante il Gioco]] durante la sessione e [[Vista Giocatori]] per materiale condivisibile.
+Apri [[Inizia Qui]] per il primo avvio. Usa [[1. DM Dashboard]] per preparare, [[Atlante del Mondo]] per costruire ambientazioni ricche, [[Geopolitical Dashboard]] per stati e relazioni diplomatiche, [[Motore Mondo Vivo]] per continuita, causalita e propagazione, [[Campagna da Ambientazione]] per trasformarle in gioco, [[Durante il Gioco]] durante la sessione, [[Hub/Party Control]] per PG/HP/flags e [[Vista Giocatori]] per materiale condivisibile.
 
 ## Perche Usarlo
 
 - **Non tecnico**: l'utente usa pulsanti, dashboard e guide, non configurazioni.
 - **Completo**: mondo, campagna, sessione, post-sessione e vista giocatori.
+- **Player portal**: recap, PNG noti, luoghi scoperti, handout, mappe condivise e controllo anti-segreti.
+- **Party control**: PG, HP, inventario, obiettivi e flags in una schermata da sessione.
+- **Quality report**: copertura, buchi operativi, sicurezza pubblicazione e materiale screenshot-ready.
 - **Worldbuilding sistemico**: culture, lingue, storia, conflitti, cosmologia, fazioni, relazioni, causalita e conseguenze persistenti.
 - **Markdown-first**: i contenuti restano nel vault dell'utente.
 - **Release pulita**: il vault puo generare una copia consegnabile con `npm run release:clean`.
@@ -23,6 +26,7 @@ Apri [[Inizia Qui]] per il primo avvio. Usa [[1. DM Dashboard]] per preparare, [
 5. Apri [[Risorse/Setup Guidato]].
 6. Apri [[Risorse/Prima Sessione In 15 Minuti]] se vuoi partire subito.
 7. Apri [[Risorse/Creazione Guidata Entità]] se vuoi capire cosa compilare subito e cosa rimandare.
+8. Apri [[Risorse/Quality Report]] quando vuoi capire cosa manca prima di mostrare o pubblicare il vault.
 
 Guida dettagliata: [docs/INSTALLAZIONE.md](docs/INSTALLAZIONE.md).
 
@@ -60,6 +64,7 @@ Se dashboard, pulsanti o tabelle non funzionano, apri [[Risorse/Primo Avvio Stru
 ## Dove Trovare Le Cose
 
 - `Inizia Qui`: percorso guidato per primo avvio, preparazione, gioco e worldbuilding.
+- `Hub/Party Control`: controllo party, HP, obiettivi, ricompense, missioni e flags.
 - `Campagne`: campagne attive, in pausa, concluse o archiviate.
 - `Mondi`: ambientazioni, luoghi, culture, lingue, storia, conflitti, religioni, relazioni, creature, oggetti e dispense.
 - `Mondi/Sessioni`: preparazione e resoconti delle sessioni.
@@ -71,6 +76,8 @@ Se dashboard, pulsanti o tabelle non funzionano, apri [[Risorse/Primo Avvio Stru
 - `SRD`: riferimento separato al System Reference Document 5.2.1 in italiano.
 - `Inbox`: idee grezze e appunti non ancora sistemati.
 - `Giocatori`: area dedicata a materiale condivisibile.
+- `Vista Giocatori`: portale player-facing safe-by-default, pronto per tavolo, stream o pubblicazione selettiva.
+- `Quality Report`: analytics visuale per copertura, note incomplete e materiale screenshot-ready.
 - `Post Sessione Guidato`: percorso per consolidare quello che e successo al tavolo.
 
 ## Mondo, Campagna E Risorse
@@ -80,7 +87,7 @@ Se dashboard, pulsanti o tabelle non funzionano, apri [[Risorse/Primo Avvio Stru
 - **Avventure** e **one-shot** stanno nella campagna quando sono legate a un gruppo o a una storia precisa.
 - Tabelle, mappe, dispense e materiali riutilizzabili in piu campagne stanno in `Risorse`.
 - [[Worldbuilder Dashboard]] mostra ora Atlante del Mondo, Poteri in Movimento, Relazioni PNG, Timeline Causale e Buchi Di Mondo: usali per trovare collegamenti mancanti, pressioni senza prossima mossa e lore canonica non ancora storicizzata.
-- [[Atlante del Mondo]] e la vista principale per worldbuilding strutturale: geografia, culture, lingue, poteri, storia, conflitti e cosmologia.
+- [[Atlante del Mondo]] e la vista principale per worldbuilding strutturale: geografia, culture, lingue, poteri, storia, conflitti, cosmologia, mappe, layer, territori e rotte.
 - [[Geopolitical Dashboard]] mostra territori politici, confini, vassalli, risorse strategiche, relazioni diplomatiche e buchi geopolitici.
 - [[Motore Mondo Vivo]] e il layer sistemico sopra gli strumenti DM: mostra propagazione eventi, dinamiche di fazione, relationship graph, causalita storica e continuita da chiudere prima della prossima sessione.
 - [[Cosa Succede Fuori Scena]] e la vista pratica per il dopo sessione: mostra pressioni urgenti, clock quasi pieni, missioni in stallo, segreti da collegare e conseguenze non propagate.
@@ -102,6 +109,7 @@ Se dashboard, pulsanti o tabelle non funzionano, apri [[Risorse/Primo Avvio Stru
 - Usa `Nuovo Clock` per creare un tracciato quando una pressione deve avanzare a segmenti invece di restare una nota testuale.
 - Apri [[Risorse/Come Usare I Clock]] se vuoi tre esempi pratici: minaccia, viaggio e rituale.
 - Mantieni `SRD` separato dal contenuto canonico: e riferimento regolamentare, non ambientazione.
+- Mantieni il core system-neutral in `Mondi`, `Campagne`, `Hub` e `Risorse`; usa `SRD` come modulo regolamentare opzionale per campagne D&D-like.
 
 ## Manutenzione Leggera
 
@@ -117,6 +125,7 @@ Se dashboard, pulsanti o tabelle non funzionano, apri [[Risorse/Primo Avvio Stru
 ## Prodotto E Community
 
 - Strategia prodotto: [docs/STRATEGIA_PRODOTTO.md](docs/STRATEGIA_PRODOTTO.md).
+- Packaging e asset: [docs/PACKAGING_PRODOTTO.md](docs/PACKAGING_PRODOTTO.md).
 - Installazione: [docs/INSTALLAZIONE.md](docs/INSTALLAZIONE.md).
 - Matrice strumenti: [docs/STRUMENTI.md](docs/STRUMENTI.md).
 - Completamento plugin per release ZIP: [docs/COMPLETAMENTO_PLUGIN.md](docs/COMPLETAMENTO_PLUGIN.md).
@@ -130,7 +139,7 @@ Apri [[Demo - La Reliquia Spezzata]] per vedere una mini-campagna completa gia c
 ## Per Chi E Pensato
 
 - DM e worldbuilder che vogliono preparare e giocare da Obsidian.
-- Campagne fantasy compatibili con D&D 5.2.1 o giochi simili.
+- Campagne fantasy system-neutral, con modulo SRD 5.2.1 italiano separato per giochi D&D-like.
 - Utenti non tecnici che preferiscono pulsanti, dashboard e campi guidati.
 
 ## SRD

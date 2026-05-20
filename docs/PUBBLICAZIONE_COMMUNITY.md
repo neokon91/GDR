@@ -24,28 +24,33 @@ Questa nota separa la release ZIP per utenti dalla pubblicazione del progetto in
 
 Descrizione breve:
 
-> Vault GDR e un vault Obsidian per DM e worldbuilder italiani: prepara sessioni, gestisce missioni e clock, consolida il post-sessione e mantiene un mondo vivo con fazioni, relazioni, geopolitica e dashboard operative.
+> Vault GDR e un vault Obsidian per DM e worldbuilder italiani: prepara sessioni, gestisce party, missioni e clock, mantiene un mondo vivo con fazioni, relazioni e geopolitica, e offre un portale giocatori sicuro per recap, handout e mappe pubbliche.
 
 Punti da evidenziare:
 
 - pensato per DM non tecnici;
 - Markdown-first, contenuti dell'utente sempre leggibili;
 - demo inclusa;
-- supporto per sessioni, missioni, tracciati, PNG, luoghi, fazioni, relazioni, territori politici, timeline e materiali;
+- supporto per sessioni, missioni, tracciati, PNG, luoghi, fazioni, relazioni, territori politici, timeline, party control, quality report e materiali;
+- portale giocatori safe-by-default con controllo anti-segreti;
+- core system-neutral con SRD separato;
 - non richiede Iron Vault.
 
 ## Limiti Da Dichiarare
 
 - Alcuni plugin Obsidian vanno abilitati al primo avvio.
-- Il vault e pensato per fantasy/D&D-like, non per un sistema specifico obbligatorio.
+- Il vault e pensato per fantasy system-neutral e D&D-like, non per un sistema specifico obbligatorio.
 - Lo SRD e riferimento separato e mantiene la sua licenza.
 - Le automazioni non modificano automaticamente note collegate per evitare sovrascritture: il DM conferma in post-sessione.
 - Alcune viste avanzate dipendono da Dataview, Meta Bind, Templater e JS Engine.
+- L'export statico dedicato dell'area giocatori resta un obiettivo successivo.
 
 ## Checklist Release Community
 
-- [ ] Preparare screenshot o GIF di `Inizia Qui`, `Durante il Gioco`, `Stato Campagna`, `Motore Mondo Vivo`, `Geopolitical Dashboard`, tracciato demo e relazione demo.
+- [ ] Preparare screenshot o GIF di `Inizia Qui`, `Vista Giocatori`, `Party Control`, `Quality Report`, `Durante il Gioco`, `Stato Campagna`, `Motore Mondo Vivo`, `Geopolitical Dashboard`, tracciato demo e relazione demo.
 - [ ] Creare release GitHub con ZIP generato.
 - [ ] Inserire link a installazione, licenze e changelog.
 - [ ] Aprire issue template e CONTRIBUTING.
 - [ ] Annotare limiti noti e prossima roadmap.
+
+Per il testo lungo della release, usa [PAGINA_RELEASE.md](PAGINA_RELEASE.md).

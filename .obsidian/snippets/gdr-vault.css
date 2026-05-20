@@ -618,6 +618,21 @@ body.theme-dark {
   border-radius: 0;
 }
 
+.markdown-preview-view.gdr-player-view .markdown-preview-sizer,
+.markdown-preview-view.gdr-party-control .markdown-preview-sizer,
+.markdown-preview-view.gdr-quality-report .markdown-preview-sizer,
+.markdown-source-view.gdr-player-view .cm-contentContainer,
+.markdown-source-view.gdr-party-control .cm-contentContainer,
+.markdown-source-view.gdr-quality-report .cm-contentContainer {
+  max-width: min(1180px, calc(100vw - 2rem));
+}
+
+.markdown-preview-view.gdr-player-view h1,
+.markdown-preview-view.gdr-party-control h1,
+.markdown-preview-view.gdr-quality-report h1 {
+  border-bottom-color: color-mix(in srgb, rgb(var(--gdr-accent-rgb)) 55%, transparent);
+}
+
 .callout[data-callout="infoboxwiki"] table {
   width: 100%;
   margin: 0.5rem 0 0;
@@ -1029,6 +1044,32 @@ body .markdown-source-view.tavolo {
 
 .gdr-card-line {
   margin-top: 0.3rem;
+}
+
+.gdr-kind-missione {
+  border-left: 4px solid rgb(var(--gdr-missione-rgb));
+}
+
+.gdr-kind-personaggio,
+.gdr-kind-party {
+  border-left: 4px solid rgb(var(--gdr-png-rgb));
+}
+
+.gdr-kind-luogo,
+.gdr-kind-mappa {
+  border-left: 4px solid rgb(var(--gdr-luogo-rgb));
+}
+
+.gdr-kind-dispensa {
+  border-left: 4px solid rgb(var(--gdr-warm-rgb));
+}
+
+.markdown-preview-view.gdr-player-view .gdr-stat-card {
+  background: linear-gradient(180deg, var(--gdr-surface-strong), var(--gdr-surface));
+}
+
+.markdown-preview-view.gdr-quality-report .gdr-stat-value {
+  color: rgb(var(--gdr-timeline-rgb));
 }
 
 .gdr-badge-row {

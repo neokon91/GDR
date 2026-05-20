@@ -7,6 +7,7 @@ tipologia: luogo di interesse
 bioma: fiume e pietra
 stato: minacciato
 canonico: true
+pubblico: true
 mondo: "[[Demo - Terre della Soglia]]"
 luogo_padre: "[[Demo - Valle di Brumafonda]]"
 coordinates:

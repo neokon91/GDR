@@ -78,6 +78,40 @@ grid.innerHTML = cards.map(([label, value, hint]) => `
 ## Costruzione
 
 ````tabs
+tab: Mappa
+
+### Atlante Operativo
+
+> [!luogo] Demo vendibile
+> Parti da [[Demo - Mappa Zoomabile]] per la regia e da [[Demo - Mappa Zoomabile Giocatori]] per la versione condivisibile. Mantieni una nota mappa pubblica separata da quella DM.
+
+```dataview
+TABLE uso, pubblico, mondo, luogo, luoghi, stato, versione_giocatori
+FROM "Risorse/Mappe"
+WHERE file.name != "Mappe" AND stato != "archiviata" AND !startswith(file.name, "Prova -") AND (!this.mondo_attivo OR mondo = this.mondo_attivo)
+SORT pubblico DESC, uso ASC, file.name ASC
+```
+
+### Luoghi Con Coordinate O Layer
+
+```dataview
+TABLE tipo, luogo_padre, coordinates, layer_mappa, tipo_mappa, color, icon
+FROM "Mondi/Luoghi"
+WHERE stato != "archiviata" AND !startswith(file.name, "Prova -") AND (!this.mondo_attivo OR mondo = this.mondo_attivo) AND (coordinates OR layer_mappa OR tipo_mappa)
+SORT layer_mappa ASC, tipo ASC, nome ASC
+LIMIT 24
+```
+
+### Rotte E Territori
+
+```dataview
+TABLE stato_rotta, partenza, arrivo, regioni, fazioni_controllanti, risorse_trasportate, pressione
+FROM "Mondi/Rotte"
+WHERE stato != "archiviata" AND !startswith(file.name, "Prova -") AND (!this.mondo_attivo OR mondo = this.mondo_attivo)
+SORT pressione DESC, nome ASC
+LIMIT 20
+```
+
 tab: Profondità
 
 ### Culture Da Approfondire

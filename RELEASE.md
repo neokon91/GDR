@@ -5,18 +5,20 @@ Questa checklist serve a preparare una copia pubblicabile del vault.
 ## Prima Della Release
 
 1. Apri [[Inizia Qui]] e verifica che i pulsanti portino alle pagine giuste.
-2. Apri [[1. DM Dashboard]], [[Durante il Gioco]], [[Atlante del Mondo]], [[Geopolitical Dashboard]], [[Motore Mondo Vivo]], [[Campagna da Ambientazione]] e [[Vista Giocatori]].
-3. Apri [[Risorse/Controllo Vault]] e risolvi problemi operativi importanti.
+2. Apri [[1. DM Dashboard]], [[Durante il Gioco]], [[Hub/Party Control]], [[Atlante del Mondo]], [[Geopolitical Dashboard]], [[Motore Mondo Vivo]], [[Campagna da Ambientazione]] e [[Vista Giocatori]].
+3. Apri [[Risorse/Controllo Vault]] e [[Risorse/Quality Report]] e risolvi problemi operativi importanti.
 4. Controlla che la demo [[Demo - La Reliquia Spezzata]] sia navigabile.
-5. Esegui:
+5. Acquisisci almeno cinque screenshot: `Inizia Qui`, `Vista Giocatori`, `Atlante del Mondo`, `Party Control`, `Quality Report`.
+6. Registra una GIF breve del flusso `Inizia Qui` -> `Durante il Gioco` -> `Vista Giocatori`.
+7. Esegui:
 
 ```bash
 npm run check
 ```
 
-6. Aggiorna [[VERSION]].
-7. Aggiorna [[CHANGELOG]].
-8. Crea la release utente:
+8. Aggiorna [[VERSION]].
+9. Aggiorna [[CHANGELOG]].
+10. Crea la release utente:
 
 ```bash
 npm run release:clean
@@ -43,6 +45,9 @@ Non contiene materiali di sviluppo repository, issue template GitHub, roadmap in
 - Le dashboard non mostrano errori Dataview.
 - I pulsanti Meta Bind aprono o creano note.
 - La vista `Durante il Gioco` mostra una sessione attiva se esiste una sessione con `attiva`, `in corso`, `pronto` o `preparazione`.
+- [[Hub/Party Control]] mostra PG, HP, missioni, ricompense e flags senza errori Dataview.
+- [[Vista Giocatori]] mostra solo materiale pubblico, emerso o consegnato e il controllo sicurezza non segnala segreti esposti.
+- [[Risorse/Quality Report]] mostra copertura, buchi operativi e materiale screenshot-ready.
 - [[Mondi/Stato del Mondo]] mostra conseguenze, PNG cambiati, luoghi in crisi, fazioni in movimento, relazioni, propagazione e missioni influenzate senza errori Dataview.
 - [[Mondi/Timeline/Timeline]] mostra eventi canonici e lore da sessione.
 - [[Geopolitical Dashboard]] mostra territori politici, relazioni diplomatiche, risorse strategiche e buchi geopolitici senza errori Dataview.

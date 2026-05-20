@@ -28,7 +28,11 @@ gdr.renderHome(dv);
 
 `BUTTON[vista-giocatori-hub-vista-giocatori-vista-giocatori]`
 
+`BUTTON[party-control-hub-party-control]`
+
 `BUTTON[costruisci-mondo-hub-atlante-del-mondo-atlante-del-mondo]`
+
+`BUTTON[quality-report-risorse-quality-report]`
 
 `BUTTON[fuori-scena-hub-cosa-succede-fuori-scena-cosa-succede-fuori-scena]`
 
@@ -44,20 +48,26 @@ gdr.renderHome(dv);
 
 ## Primo Avvio
 
-1. Se Obsidian chiede se fidarsi degli strumenti inclusi nel vault, conferma solo se hai scaricato il vault da una fonte affidabile.
-2. Vai in **Impostazioni > Aspetto > Snippet CSS** e attiva `gdr-vault`; se non compare, ricarica gli snippet.
-3. Apri [[Risorse/Setup Guidato]] per vedere se pulsanti, tabelle, creature, tiri e calendario sono pronti.
-4. Apri [[Risorse/Primo Avvio Strumenti]] solo se qualcosa non funziona.
-5. Apri [[Risorse/Prima Sessione In 15 Minuti]] se vuoi un percorso pratico senza leggere tutta la documentazione.
-6. Apri [[Hub/1. DM Dashboard|1. DM Dashboard]] per creare campagne, sessioni, missioni, clock e incontri.
-7. Apri una sessione e usa il toggle `attiva` per indicare quale e al tavolo.
-8. Apri [[Hub/Durante il Gioco|Durante il Gioco]] quando sei al tavolo.
-9. Apri [[Risorse/Post Sessione Guidato]] dopo la partita.
-10. Apri [[Cosa Succede Fuori Scena]] per decidere chi reagisce, quali clock avanzano e cosa entra nella prossima sessione.
-11. Apri [[Hub/Worldbuilder Dashboard|Worldbuilder Dashboard]] quando vuoi creare mondi, luoghi, PNG, fazioni, creature e oggetti.
-12. Apri [[Motore Mondo Vivo]] quando una scelta, una guerra, una religione, una fazione o un evento storico deve propagarsi nel mondo e pesare sulle prossime sessioni.
-13. Apri [[Geopolitical Dashboard]] quando il conflitto riguarda stati, confini, risorse strategiche, trattati o legittimita politica.
-14. Apri [[Risorse/Risorse]] quando cerchi guide, mappe, immagini, audio, video, tabelle o aiuto.
+```dataviewjs
+const checks = [
+  ["Fiducia vault", true, "Conferma gli strumenti inclusi solo se hai scaricato il vault da una fonte affidabile."],
+  ["Snippet CSS", app.vault.getAbstractFileByPath(".obsidian/snippets/gdr-vault.css") && document.body.className.includes("gdr-"), "Attiva `gdr-vault` in Impostazioni > Aspetto > Snippet CSS."],
+  ["Plugin pronti", app.plugins.enabledPlugins.has("dataview") && app.plugins.enabledPlugins.has("obsidian-meta-bind-plugin") && app.plugins.enabledPlugins.has("templater-obsidian"), "Apri Setup Guidato se pulsanti o tabelle non rispondono."],
+  ["Demo disponibile", !!app.vault.getAbstractFileByPath("Campagne/Demo - La Reliquia Spezzata.md"), "Apri la demo clonabile per vedere il flusso completo."],
+  ["Portale giocatori", !!app.vault.getAbstractFileByPath("Hub/Vista Giocatori.md"), "Controlla cosa e condivisibile prima di esportare o mostrare lo schermo."],
+  ["Quality report", !!app.vault.getAbstractFileByPath("Risorse/Quality Report.md"), "Usalo per trovare buchi, note incomplete e materiale screenshot-ready."]
+];
+
+dv.table(["Step", "Stato", "Prossima azione"], checks.map(([label, ok, text]) => [label, ok ? "Pronto" : "Da fare", text]));
+```
+
+1. Apri [[Risorse/Setup Guidato]] per vedere se pulsanti, tabelle, creature, tiri e calendario sono pronti.
+2. Apri [[Risorse/Prima Sessione In 15 Minuti]] se vuoi un percorso pratico senza leggere tutta la documentazione.
+3. Apri [[Demo - La Reliquia Spezzata]] come campagna dimostrativa gia collegata.
+4. Apri [[Hub/1. DM Dashboard|1. DM Dashboard]] per creare campagne, sessioni, missioni, clock e incontri.
+5. Apri [[Hub/Party Control]] per tenere il party sotto mano.
+6. Apri [[Hub/Vista Giocatori]] per controllare materiale pubblico e handout.
+7. Apri [[Risorse/Quality Report]] prima di pubblicare screenshot, demo o release.
 
 ## Se Vedi Questo, Sei Pronto
 

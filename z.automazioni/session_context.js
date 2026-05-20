@@ -129,9 +129,12 @@
     // Regola conservativa: mostra solo cio che e pubblico o gia emerso chiaramente in gioco.
     if (!isReal(page) || page?.stato === "archiviata") return false;
     if (page?.pubblico === true) return true;
-    if (category === "missione") return ["accettata", "in corso", "completato"].includes(page?.stato);
+    if (category === "missione") return ["accettata", "in corso", "completata"].includes(page?.stato);
     if (category === "personaggio" || category === "luogo") return page?.stato === "in gioco";
     if (category === "dispensa") return page?.stato === "consegnato";
+    if (category === "mappa") return page?.pubblico === true;
+    if (category === "sessione") return page?.pubblico === true || page?.stato === "giocata";
+    if (category === "tracciato") return page?.pubblico === true;
     return false;
   }
 
@@ -268,6 +271,14 @@
       .array();
   }
 
+  function publicMapRows(dv, limit = 4) {
+    return dv.pages('"Risorse/Mappe"')
+      .where(p => publicCandidate(p, "mappa"))
+      .sort(p => p.file.mtime, "desc")
+      .limit(limit)
+      .array();
+  }
+
   function publicCard(page, category) {
     // Le card pubbliche evitano link diretti quando la nota contiene campi privati.
     const title = pageTitle(page);
@@ -283,13 +294,72 @@
     return cardHtml({ title, meta, body, link: safeLink, cls: `gdr-info-card compact gdr-kind-${category}` });
   }
 
+  function renderPublicStats(dv) {
+    const stats = [
+      ["Missioni", publicRows(dv, '"Mondi/Missioni"', "missione", 99).length, "obiettivi visibili"],
+      ["PNG", publicRows(dv, '"Mondi/Personaggi"', "personaggio", 99).length, "volti noti"],
+      ["Luoghi", publicRows(dv, '"Mondi/Luoghi"', "luogo", 99).length, "posti scoperti"],
+      ["Handout", publicRows(dv, '"Mondi/Dispense"', "dispensa", 99).length, "materiali consegnati"],
+      ["Mappe", publicMapRows(dv, 99).length, "atlante condiviso"]
+    ];
+
+    const grid = dv.el("div", "", { cls: "gdr-stat-grid gdr-player-stats" });
+    grid.innerHTML = stats.map(([label, value, hint]) => `
+      <div class="gdr-stat-card">
+        <div class="gdr-stat-value">${escapeHtml(value)}</div>
+        <div class="gdr-stat-label">${escapeHtml(label)}</div>
+        <div class="gdr-stat-hint">${escapeHtml(hint)}</div>
+      </div>
+    `).join("");
+  }
+
+  function renderPlayerRecap(dv) {
+    const latest = dv.pages('"Mondi/Sessioni"')
+      .where(p => isReal(p) && (p.pubblico === true || p.stato === "giocata"))
+      .sort(p => p.data ?? "0000-00-00", "desc")
+      .first();
+
+    if (!latest) {
+      dv.paragraph("Nessun recap pubblico ancora disponibile.");
+      return;
+    }
+
+    const rows = [
+      ["Ultima sessione", latest.file.name],
+      ["Quando", latest.data ?? latest.data_mondo ?? "data non indicata"],
+      ["Dove", fieldText(latest.luoghi) || fieldText(latest.mondo) || "luogo non indicato"],
+      ["Cosa resta aperto", fieldText(latest.domande_al_tavolo) || fieldText(latest.missioni) || "nessun obiettivo pubblico collegato"]
+    ];
+
+    const panel = dv.el("div", "", { cls: "gdr-card-grid compact" });
+    panel.innerHTML = rows.map(([title, body]) => cardHtml({ title, body, cls: "gdr-info-card compact" })).join("");
+  }
+
+  function renderPublicSafety(dv) {
+    const risky = dv.pages('"Mondi" OR "Risorse/Mappe"')
+      .where(p => isReal(p) && p.pubblico === true && hasPrivateFields(p))
+      .sort(p => p.file.path, "asc")
+      .limit(12)
+      .array();
+
+    if (!risky.length) {
+      dv.paragraph("Controllo pubblico pulito: nessuna nota marcata pubblica contiene campi DM evidenti.");
+      return;
+    }
+
+    dv.table(["Nota", "Rischio"], risky.map(p => [p.file.link, "pubblico: true con campi segreti/prossima mossa/pressioni"]));
+  }
+
   function renderPlayerView(dv) {
-    // Vista giocatori: card semplici, sezioni fisse e nessuna tabella gestionale.
+    // Vista giocatori: portale safe-by-default, card semplici e link solo quando la nota e marcata pubblica.
+    renderPublicStats(dv);
+
     const sections = [
       ["Obiettivi", publicRows(dv, '"Mondi/Missioni"', "missione"), "missione"],
       ["PNG conosciuti", publicRows(dv, '"Mondi/Personaggi"', "personaggio"), "personaggio"],
       ["Luoghi scoperti", publicRows(dv, '"Mondi/Luoghi"', "luogo"), "luogo"],
-      ["Dispense", publicRows(dv, '"Mondi/Dispense"', "dispensa"), "dispensa"]
+      ["Handout", publicRows(dv, '"Mondi/Dispense"', "dispensa"), "dispensa"],
+      ["Mappe condivise", publicMapRows(dv), "mappa"]
     ];
 
     for (const [title, pages, category] of sections) {
@@ -301,6 +371,28 @@
       const grid = dv.el("div", "", { cls: "gdr-card-grid compact" });
       grid.innerHTML = pages.map(page => publicCard(page, category)).join("");
     }
+  }
+
+  function renderPartyControl(dv) {
+    const party = dv.pages('"Mondi/Personaggi"')
+      .where(p => isReal(p) && p.tipo === "pg" && p.stato !== "archiviata")
+      .sort(p => p.giocatore ?? p.nome ?? p.file.name, "asc")
+      .array();
+
+    if (!party.length) {
+      dv.paragraph("Nessun PG in gioco. Crea un PG da Personaggi o collega il party alla campagna.");
+      return;
+    }
+
+    const cards = party.map(p => {
+      const hp = `${p.hp_attuali ?? "?"}/${p.hp_massimi ?? "?"}`;
+      const meta = [p.giocatore, p.classe, p.livello ? `livello ${p.livello}` : ""].filter(Boolean).join(" · ");
+      const body = `HP ${hp}${p.hp_temporanei ? ` · temp ${p.hp_temporanei}` : ""}${p.ispirazione ? " · ispirazione" : ""}`;
+      return cardHtml({ title: pageTitle(p), meta, body, link: p.file.path, cls: "gdr-info-card compact gdr-kind-party" });
+    });
+
+    const grid = dv.el("div", "", { cls: "gdr-card-grid compact" });
+    grid.innerHTML = cards.join("");
   }
 
   return {
@@ -326,6 +418,9 @@
     renderActions,
     renderHome,
     renderTableCockpit,
+    renderPartyControl,
+    renderPlayerRecap,
+    renderPublicSafety,
     renderPlayerView
   };
 })()

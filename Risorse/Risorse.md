@@ -19,6 +19,7 @@ Questa pagina raccoglie solo le guide utili mentre prepari o giochi. Le note tec
 | [[Risorse/Guida DM]] | Quando vuoi il flusso DM senza dettagli tecnici. |
 | [[Risorse/Preparazione Sessione]] | Prima di una sessione. |
 | [[Durante il Gioco]] | Durante la partita. |
+| [[Hub/Party Control]] | Quando vuoi controllare party, HP, obiettivi e flags. |
 | [[Risorse/Post Sessione Guidato]] | Subito dopo la partita. |
 | [[Risorse/Come Usare I Clock]] | Quando vuoi usare clock per minacce, viaggi o rituali. |
 | [[Risorse/Tabelle/Tabelle]] | Quando serve improvvisare con tiri e tabelle. |
@@ -36,7 +37,7 @@ Questa pagina raccoglie solo le guide utili mentre prepari o giochi. Le note tec
 | [[Risorse/Fronti Di Campagna]] | Pressioni, prossime mosse e scadenze della campagna. |
 | [[Motore Mondo Vivo]] | Propagazione, relazioni, canone e continuita narrativa. |
 | [[Geopolitical Dashboard]] | Stati, confini, risorse, vassalli e relazioni diplomatiche. |
-| [[Vista Giocatori]] | Materiale condivisibile con i giocatori. |
+| [[Vista Giocatori]] | Portale condivisibile con recap, PNG noti, luoghi, handout e mappe pubbliche. |
 
 ## Materiali Al Tavolo
 
@@ -57,6 +58,7 @@ Questa pagina raccoglie solo le guide utili mentre prepari o giochi. Le note tec
 | [[Risorse/Primo Avvio Strumenti]] | Cosa fare se Obsidian chiede di abilitare gli strumenti inclusi. |
 | [[Risorse/Se Qualcosa Non Funziona]] | Diagnosi rapida quando pulsanti, tabelle o viste non rispondono. |
 | [[Risorse/Controllo Vault]] | Controlli pratici su note incomplete, sessioni attive e materiale pronto. |
+| [[Risorse/Quality Report]] | Report visuale su copertura, buchi, sicurezza pubblicazione e screenshot-ready. |
 | [[Risorse/Aspetto Vault]] | Regolazioni visuali semplici. |
 | [[Revisione Lore]] | Lore incompleta, scollegata o non ancora giocabile. |
 | [[Controllo Canone]] | Verita, rumor, leggende, retcon e provenienza del canone. |

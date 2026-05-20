@@ -46,8 +46,11 @@ dv.table(
 3. Apri [[Risorse/Creazione Guidata Entità]] se vuoi capire quali campi compilare subito.
 4. Apri [[Demo - La Reliquia Spezzata]] se vuoi vedere un esempio completo.
 5. Apri [[1. DM Dashboard]] per preparare.
-6. Apri [[Durante il Gioco]] quando sei al tavolo.
-7. Apri [[Cosa Succede Fuori Scena]] dopo la sessione per scegliere le reazioni del mondo.
+6. Apri [[Hub/Party Control]] per controllare PG, HP, obiettivi, inventario e flags.
+7. Apri [[Durante il Gioco]] quando sei al tavolo.
+8. Apri [[Hub/Vista Giocatori]] per controllare cosa puoi mostrare o pubblicare.
+9. Apri [[Cosa Succede Fuori Scena]] dopo la sessione per scegliere le reazioni del mondo.
+10. Apri [[Risorse/Quality Report]] prima di preparare screenshot, demo o release.
 
 ## Se Qualcosa E Da Controllare
 
@@ -63,6 +66,9 @@ dv.table(
 | I pulsanti aprono pagine | [[Inizia Qui]] |
 | Le dashboard mostrano tabelle o carte | [[1. DM Dashboard]] |
 | Il tavolo mostra una sessione o un messaggio chiaro | [[Durante il Gioco]] |
+| Il party mostra PG e HP | [[Hub/Party Control]] |
+| Il portale giocatori non espone campi DM | [[Hub/Vista Giocatori]] |
+| Il report qualita mostra copertura e buchi | [[Risorse/Quality Report]] |
 | Il mondo vivo mostra pressioni e prossime mosse | [[Cosa Succede Fuori Scena]] |
 | Il calendario mostra date o cose da calendarizzare | [[Mondi/Calendario]] |
 | I tiri rapidi sono leggibili | [[Risorse/Tabelle/Tabelle]] |

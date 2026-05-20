@@ -1661,6 +1661,39 @@
       "id": "timeline-mondi-timeline-timeline"
     },
     {
+      "label": "Party Control",
+      "style": "primary",
+      "actions": [
+        {
+          "type": "open",
+          "link": "[[Hub/Party Control]]"
+        }
+      ],
+      "id": "party-control-hub-party-control"
+    },
+    {
+      "label": "Personaggi",
+      "style": "default",
+      "actions": [
+        {
+          "type": "open",
+          "link": "[[Mondi/Personaggi/Personaggi]]"
+        }
+      ],
+      "id": "personaggi-mondi-personaggi-personaggi"
+    },
+    {
+      "label": "Quality Report",
+      "style": "primary",
+      "actions": [
+        {
+          "type": "open",
+          "link": "[[Risorse/Quality Report]]"
+        }
+      ],
+      "id": "quality-report-risorse-quality-report"
+    },
+    {
       "label": "Vista Giocatori",
       "style": "primary",
       "actions": [

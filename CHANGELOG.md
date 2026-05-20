@@ -6,6 +6,20 @@
 
 - QA visuale delle dashboard principali e preparazione release community 1.0.
 
+### Aggiunto
+
+- [[Hub/Party Control]] per PG, HP, missioni, inventario e flags durante la sessione.
+- [[Risorse/Quality Report]] come dashboard analytics per copertura, buchi operativi, sicurezza pubblicazione e materiale screenshot-ready.
+- `docs/PACKAGING_PRODOTTO.md` per screenshot, GIF, posizionamento e separazione core system-neutral / modulo SRD.
+
+### Migliorato
+
+- [[Vista Giocatori]] ora funziona come portale player-facing con recap, diario visibile, atlante condiviso, handout e controllo anti-segreti.
+- [[Inizia Qui]] ha un primo avvio piu guidato con stato interattivo e link a portale giocatori, party control e quality report.
+- [[Atlante del Mondo]] include una tab mappa con mappe pubbliche/DM, luoghi con coordinate/layer e rotte.
+- README e checklist release evidenziano player portal, party control, quality report, screenshot e GIF.
+- `release:clean` genera un `LEGGIMI.md` utente piu completo e la documentazione include una pagina release pubblica pronta.
+
 ## 0.9.0 - 2026-05-20
 
 ### Aggiunto

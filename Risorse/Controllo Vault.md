@@ -6,6 +6,10 @@ cssclasses:
 
 Questa pagina mostra cosa richiede attenzione. Non e un controllo tecnico: serve a capire cosa manca prima o dopo una sessione.
 
+`BUTTON[quality-report-risorse-quality-report]`
+
+`BUTTON[vista-giocatori-hub-vista-giocatori-vista-giocatori]`
+
 ## Colpo D'Occhio
 
 ```dataviewjs
