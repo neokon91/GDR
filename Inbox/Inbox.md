@@ -34,7 +34,7 @@ label: Evento Live
 style: primary
 actions:
   - type: templaterCreateNote
-    templateFile: "z.modelli/Lore Capture.md"
+    templateFile: "z.modelli/Live Evento.md"
     folderPath: "Inbox"
     open: true
 ```
@@ -44,7 +44,7 @@ label: PNG Improvvisato
 style: primary
 actions:
   - type: templaterCreateNote
-    templateFile: "z.modelli/personaggio/PNG.md"
+    templateFile: "z.modelli/Live PNG.md"
     folderPath: "Mondi/Personaggi"
     open: true
 ```
@@ -54,7 +54,7 @@ label: Luogo Improvvisato
 style: primary
 actions:
   - type: templaterCreateNote
-    templateFile: "z.modelli/Luogo Router.md"
+    templateFile: "z.modelli/Live Luogo.md"
     folderPath: "Mondi/Luoghi"
     open: true
 ```
@@ -64,7 +64,7 @@ label: Nota Grezza
 style: primary
 actions:
   - type: templaterCreateNote
-    templateFile: "z.modelli/Nota Rapida.md"
+    templateFile: "z.modelli/Live Nota Grezza.md"
     folderPath: "Inbox"
     open: true
 ```
@@ -74,7 +74,7 @@ label: Conseguenza
 style: primary
 actions:
   - type: templaterCreateNote
-    templateFile: "z.modelli/Lore Capture.md"
+    templateFile: "z.modelli/Live Conseguenza.md"
     folderPath: "Inbox"
     open: true
 ```

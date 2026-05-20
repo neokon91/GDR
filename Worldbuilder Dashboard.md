@@ -75,6 +75,7 @@ actions:
 ## Crea Mondo
 
 ```dataviewjs
+const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));
 const steps = [
   ["1", "Mondo", "Tono, temi e verità canoniche"],
   ["2", "Struttura", "Luoghi, regioni e poteri"],
@@ -191,28 +192,27 @@ actions:
 ## Panoramica Del Mondo
 
 ```dataviewjs
+const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));
 const count = (source, predicate = () => true) => dv.pages(source).where(predicate).length;
-const escapeHtml = value => String(value ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "\"": "&quot;", "'": "&#39;" }[c]));
-const isReal = p => !String(p.file.name).startsWith("Prova -");
-const notIndex = p => isReal(p) && p.file.name !== p.file.folder?.split("/").pop() && p.stato !== "archiviata";
+const notIndex = p => gdr.isReal(p) && p.file.name !== p.file.folder?.split("/").pop() && p.stato !== "archiviata";
 
 const cards = [
-  ["Mondi", count('"Mondi"', p => isReal(p) && p.categoria === "mondo" && p.stato !== "archiviata"), "Ambientazioni"],
+  ["Mondi", count('"Mondi"', p => gdr.isReal(p) && p.categoria === "mondo" && p.stato !== "archiviata"), "Ambientazioni"],
   ["Personaggi", count('"Mondi/Personaggi"', notIndex), "Volti e legami"],
   ["Luoghi", count('"Mondi/Luoghi"', notIndex), "Dove succedono le cose"],
   ["Fazioni", count('"Mondi/Fazioni"', notIndex), "Poteri in movimento"],
   ["Religioni", count('"Mondi/Religioni"', notIndex), "Culti e divinita"],
   ["Creature", count('"Mondi/Creature"', notIndex), "Minacce e presenze"],
   ["Timeline", count('"Mondi/Timeline"', notIndex), "Eventi canonici"],
-  ["Bozze", count('"Mondi"', p => isReal(p) && p.stato === "bozza"), "Da completare"]
+  ["Bozze", count('"Mondi"', p => gdr.isReal(p) && p.stato === "bozza"), "Da completare"]
 ];
 
 const grid = dv.el("div", "", { cls: "gdr-stat-grid" });
 grid.innerHTML = cards.map(([label, value, hint]) => `
   <div class="gdr-stat-card">
-    <div class="gdr-stat-value">${escapeHtml(value)}</div>
-    <div class="gdr-stat-label">${escapeHtml(label)}</div>
-    <div class="gdr-stat-hint">${escapeHtml(hint)}</div>
+    <div class="gdr-stat-value">${gdr.escapeHtml(value)}</div>
+    <div class="gdr-stat-label">${gdr.escapeHtml(label)}</div>
+    <div class="gdr-stat-hint">${gdr.escapeHtml(hint)}</div>
   </div>
 `).join("");
 ```
@@ -230,15 +230,15 @@ LIMIT 12
 ## Campagna Filtrata
 
 ```dataviewjs
+const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));
 const current = dv.current();
 const campaigns = new Set(dv.array(current.campagne_attive ?? []).map(link => link.path ?? String(link)).array());
 const world = current.mondo_attivo?.path ?? String(current.mondo_attivo ?? "");
-const linkKey = link => link?.path ?? String(link ?? "");
-const matchesCampaign = p => !campaigns.size || dv.array(p.campagne ?? p.campagne_attive ?? []).some(link => campaigns.has(linkKey(link)));
-const matchesWorld = p => !world || linkKey(p.mondo) === world || p.file.path === world;
+const matchesCampaign = p => !campaigns.size || dv.array(p.campagne ?? p.campagne_attive ?? []).some(link => campaigns.has(gdr.linkKey(link)));
+const matchesWorld = p => !world || gdr.linkKey(p.mondo) === world || p.file.path === world;
 
 const pages = dv.pages('"Campagne" OR "Mondi/Sessioni" OR "Mondi/Missioni"')
-  .where(p => !String(p.file.name).startsWith("Prova -") && p.stato !== "archiviata")
+  .where(p => gdr.isReal(p) && p.stato !== "archiviata")
   .where(p => matchesWorld(p) && matchesCampaign(p))
   .sort(p => p.data ?? p.file.mtime, "desc")
   .limit(16);
@@ -255,7 +255,8 @@ if (!campaigns.size && !world) {
 ## Densità E Connessioni
 
 ```dataviewjs
-const isReal = p => !String(p.file.name).startsWith("Prova -") && p.stato !== "archiviata";
+const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));
+const isReal = p => gdr.isReal(p) && p.stato !== "archiviata";
 const asArray = value => dv.array(value ?? []).array();
 const linkCount = p => [
   "mondo", "luogo", "luogo_padre", "governante", "committente",

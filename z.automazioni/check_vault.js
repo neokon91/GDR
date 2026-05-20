@@ -23,8 +23,70 @@ const REQUIRED_FILES = [
     "CHANGELOG.md",
     "RELEASE.md",
     "Risorse/FAQ.md",
+    "Risorse/Indice Connettore GPT.md",
     "Campagne/Demo - La Reliquia Spezzata.md"
 ];
+const ALLOWED_CATEGORIES = new Set([
+    "avventura",
+    "campagna",
+    "creatura",
+    "dispensa",
+    "evento storico",
+    "fazione",
+    "incontro",
+    "lore capture",
+    "luogo",
+    "missione",
+    "mondo",
+    "nota rapida",
+    "oggetto",
+    "personaggio",
+    "religione",
+    "risorsa",
+    "sessione",
+    "srd"
+]);
+const ALLOWED_STATES = new Set([
+    "accettata",
+    "archiviata",
+    "bozza",
+    "canonico",
+    "canonica",
+    "collegata",
+    "conclusa",
+    "da smistare",
+    "giocata",
+    "ignorata",
+    "in corso",
+    "in gioco",
+    "in guerra",
+    "minacciato",
+    "morto",
+    "ostile",
+    "preparazione",
+    "pronto",
+    "proposta",
+    "scomparso",
+    "smistata"
+]);
+const REQUIRED_FIELDS_BY_CATEGORY = {
+    campagna: ["stato"],
+    creatura: ["stato"],
+    dispensa: ["stato"],
+    "evento storico": ["stato", "mondo"],
+    fazione: ["stato", "mondo"],
+    incontro: ["stato"],
+    "lore capture": ["stato", "mondo"],
+    luogo: ["stato", "mondo"],
+    missione: ["stato", "mondo"],
+    mondo: ["stato"],
+    "nota rapida": ["stato"],
+    oggetto: ["stato"],
+    personaggio: ["stato"],
+    religione: ["stato", "mondo"],
+    risorsa: ["stato"],
+    sessione: ["stato", "attiva", "mondo"]
+};
 
 const errors = [];
 const warnings = [];
@@ -121,6 +183,10 @@ function hasAny(frontmatter, fields) {
 function isFolderIndex(fileRel) {
     const parsed = path.parse(fileRel);
     return parsed.name === path.basename(parsed.dir);
+}
+
+function isOperationalNote(fileRel) {
+    return /^(Campagne|Inbox|Mondi|Risorse|z\.modelli)\//.test(fileRel) || !fileRel.includes("/");
 }
 
 function targetPath(target) {
@@ -251,7 +317,27 @@ if (activeSessions.length > 1) {
     errors.push(`Sessioni multiple attive: ${activeSessions.map(([fileRel]) => fileRel).join(", ")}`);
 }
 
+const gptConnectorIndex = markdownMeta.get("Risorse/Indice Connettore GPT.md");
+if (gptConnectorIndex?.is_code_search_indexed !== true) {
+    errors.push("Risorse/Indice Connettore GPT.md: manca is_code_search_indexed: true");
+}
+
 for (const [fileRel, fm] of realEntries) {
+    if (isOperationalNote(fileRel) && hasValue(fm.categoria) && !ALLOWED_CATEGORIES.has(String(fm.categoria))) {
+        warnings.push(`${fileRel}: categoria non prevista (${fm.categoria})`);
+    }
+
+    if (isOperationalNote(fileRel) && hasValue(fm.stato) && !ALLOWED_STATES.has(String(fm.stato))) {
+        warnings.push(`${fileRel}: stato non previsto (${fm.stato})`);
+    }
+
+    const requiredFields = REQUIRED_FIELDS_BY_CATEGORY[fm.categoria] ?? [];
+    for (const field of requiredFields) {
+        if (!Object.prototype.hasOwnProperty.call(fm, field) || !hasValue(fm[field])) {
+            warnings.push(`${fileRel}: campo frontmatter mancante o vuoto (${field})`);
+        }
+    }
+
     if (fileRel.startsWith("Mondi/Sessioni/") && fm.categoria === "sessione" && !Object.prototype.hasOwnProperty.call(fm, "attiva")) {
         warnings.push(`${fileRel}: sessione senza campo esplicito attiva`);
     }

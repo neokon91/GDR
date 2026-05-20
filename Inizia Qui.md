@@ -45,7 +45,7 @@ actions:
 ```
 
 ```meta-bind-button
-label: Roadmap 0.2
+label: Roadmap
 style: default
 actions:
   - type: open
@@ -57,8 +57,9 @@ actions:
 1. Se Obsidian chiede se fidarsi dei plugin community, conferma solo se hai scaricato il vault da una fonte affidabile.
 2. Apri [[Risorse/Installazione Plugin]] se pulsanti, tabelle o dashboard non funzionano.
 3. Apri [[1. DM Dashboard]] per creare campagne, sessioni, missioni e incontri.
-4. Apri [[Durante il Gioco]] quando sei al tavolo.
-5. Apri [[Worldbuilder Dashboard]] quando vuoi creare mondi, luoghi, PNG, fazioni, creature e oggetti.
+4. Apri una sessione e usa il toggle `attiva` per indicare quale e al tavolo.
+5. Apri [[Durante il Gioco]] quando sei al tavolo.
+6. Apri [[Worldbuilder Dashboard]] quando vuoi creare mondi, luoghi, PNG, fazioni, creature e oggetti.
 
 ## Se Vedi Questo, Sei Pronto
 
@@ -72,6 +73,8 @@ actions:
 - Idee vaghe o appunti rapidi: [[Inbox/Inbox]].
 - Preparazione e gestione del tavolo: [[1. DM Dashboard]].
 - Appunti durante la sessione: [[Durante il Gioco]].
+- Eventi live, PNG improvvisati, luoghi improvvisati e conseguenze: sezione Inbox Live in [[Durante il Gioco]] o [[Inbox/Inbox]].
+- Consolidamento dopo sessione: [[z.bacheche/Post Sessione]].
 - Mondo, luoghi, PNG e fazioni: [[Worldbuilder Dashboard]].
 - Stato dinamico del mondo: [[Mondi/Stato del Mondo]].
 - Regole e riferimento D&D: [[SRD/SRD]].

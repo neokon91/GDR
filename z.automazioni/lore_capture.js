@@ -1,8 +1,12 @@
-async function lore_capture(tp) {
+async function lore_capture(tp, routeOptions = {}) {
     const helpers = tp.user.helpers;
-    const name = await helpers.promptRequired(tp, "Titolo evento o appunto lore", "Evento emerso");
+    const route = Object.keys(routeOptions).length ? routeOptions : helpers.consumeRoute();
+    const activeContext = helpers.getActiveSessionContext();
+    const name = await helpers.promptRequired(tp, "Titolo evento o appunto lore", route.defaultName ?? "Evento emerso");
     const id = helpers.slugify(name);
-    const selectedType = await helpers.chooseOptional(
+    const selectedType = route.tipo
+        ? { id: route.tipo }
+        : await helpers.chooseOptional(
         tp,
         [
             { label: "Evento", id: "evento" },
@@ -14,9 +18,13 @@ async function lore_capture(tp) {
         ],
         "Tipo di lore"
     );
-    const mondo = await helpers.chooseWorld(tp, "Mondo di riferimento");
+    const mondo = route.useActiveSession && activeContext.world
+        ? activeContext.world
+        : await helpers.chooseWorld(tp, "Mondo di riferimento");
     const context = { world: mondo };
-    const sessioni = await helpers.chooseSessions(tp, "Sessione collegata", context);
+    const sessioni = route.useActiveSession && activeContext.link
+        ? [activeContext.link]
+        : await helpers.chooseSessions(tp, "Sessione collegata", context);
     const collegamenti = await helpers.chooseNotesByPath(tp, "Mondi", "Collega a mondo, PNG, luogo, missione o fazione", context);
 
     await helpers.moveNote(tp, "Inbox", name);

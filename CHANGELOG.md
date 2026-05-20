@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.3.0 - 2026-05-20
+
+### Aggiunto
+
+- Template live dedicati per evento, conseguenza, PNG improvvisato, luogo improvvisato e nota grezza.
+- Automazioni live che provano a collegare automaticamente mondo e sessione attiva.
+- Checklist post-sessione guidata per chiudere sessione, canonizzare lore e preparare la prossima apertura.
+- Validazione frontmatter per categorie, stati e campi operativi minimi.
+
+### Migliorato
+
+- [[1. DM Dashboard]] e [[Worldbuilder Dashboard]] usano gli helper condivisi del Session Context.
+- [[Durante il Gioco]] e [[Inbox/Inbox]] creano note live piu specifiche invece di usare sempre template generici.
+- `z.automazioni/check_vault.js` distingue meglio warning utili da rumore su note indice o risorse.
+
 ## 0.2.0 - 2026-05-19
 
 ### Aggiunto

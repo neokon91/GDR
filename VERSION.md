@@ -1,10 +1,10 @@
 # Versione Vault
 
-Versione: `0.2.0`
+Versione: `0.3.0`
 
-Data: 2026-05-19
+Data: 2026-05-20
 
-Stato: runtime e lore engine pronti per collaudo.
+Stato: runtime live, post-sessione e controlli qualita pronti per collaudo.
 
 ## Compatibilità
 

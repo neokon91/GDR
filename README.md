@@ -10,7 +10,7 @@ Apri [[Inizia Qui]] per il primo avvio. Usa [[1. DM Dashboard]] per preparare, [
 2. Se Obsidian chiede conferma per i plugin community, abilitali: il vault usa plugin gia configurati per dashboard, pulsanti e tabelle.
 3. Crea o apri una campagna da [[Campagne/Campagne]].
 4. Crea una sessione con il pulsante `Nuova Sessione` dalla dashboard.
-5. Durante la partita apri [[Durante il Gioco]] per appunti, incontri, PNG, dispense e materiali pronti.
+5. Durante la partita apri [[Durante il Gioco]] per appunti live, incontri, PNG, dispense e materiali pronti.
 
 Se dashboard, pulsanti o tabelle non funzionano, apri [[Risorse/Installazione Plugin]], [[Risorse/FAQ]] e poi [[Risorse/Se Qualcosa Non Funziona]].
 
@@ -21,8 +21,8 @@ Se dashboard, pulsanti o tabelle non funzionano, apri [[Risorse/Installazione Pl
 3. Prepara la prossima sessione con [[Risorse/Preparazione Sessione]].
 4. Crea solo le entita davvero utili al tavolo: PNG, luoghi, missioni, incontri, oggetti e dispense.
 5. Collega le note usando i campi interattivi.
-6. Durante il gioco usa [[Durante il Gioco]] per appunti, timer, PNG attivi, incontri pronti e dispense.
-7. Dopo la sessione sposta gli appunti importanti nelle note giuste e aggiorna gli stati.
+6. Durante il gioco usa [[Durante il Gioco]] per appunti, timer, PNG attivi, incontri pronti, dispense e Inbox Live.
+7. Dopo la sessione apri [[z.bacheche/Post Sessione]]: canonizza eventi, aggiorna mondo/missioni e scegli la prossima sessione attiva.
 
 ## Dove Trovare Le Cose
 
@@ -30,11 +30,13 @@ Se dashboard, pulsanti o tabelle non funzionano, apri [[Risorse/Installazione Pl
 - `Campagne`: campagne attive, in pausa, concluse o archiviate.
 - `Mondi`: ambientazioni, luoghi, personaggi, fazioni, religioni, creature, oggetti e dispense.
 - `Mondi/Sessioni`: preparazione e resoconti delle sessioni.
+- `Mondi/Timeline`: eventi canonici, rumor, leggende e conseguenze storicizzate.
 - `Mondi/Missioni`: incarichi, trame aperte e obiettivi.
 - `Mondi/Incontri`: scene di conflitto, ostacoli e combattimenti pronti.
 - `Risorse`: mappe, immagini, audio, video, tabelle e dispense generiche.
 - `SRD`: riferimento separato al System Reference Document 5.2.1 in italiano.
 - `Inbox`: idee grezze e appunti non ancora sistemati.
+- `z.bacheche/Post Sessione`: checklist per consolidare quello che e successo al tavolo.
 
 ## Mondo, Campagna E Risorse
 
@@ -47,15 +49,17 @@ Se dashboard, pulsanti o tabelle non funzionano, apri [[Risorse/Installazione Pl
 
 - Usa `bozza` per contenuti incompleti.
 - Usa `pronto` per materiale utilizzabile al tavolo.
+- Usa `attiva: true` su una sola sessione alla volta. Se nessuna sessione e attiva, le viste usano come fallback l'ultima sessione `pronto` o `preparazione`.
 - Usa `archiviata` per contenuti da conservare ma non piu attivi.
 - Usa `canonico: true` solo quando un contenuto e confermato nel mondo di gioco.
+- Usa Inbox Live per catturare eventi, conseguenze, PNG improvvisati, luoghi improvvisati e note grezze senza interrompere il gioco.
 - Mantieni `SRD` separato dal contenuto canonico: e riferimento regolamentare, non ambientazione.
 
 ## Manutenzione Leggera
 
 - Non lasciare link placeholder: crea la nota o trasforma il link in testo semplice.
 - Archivia invece di cancellare quando una nota ha valore storico.
-- Dopo una sessione, aggiorna missioni, PNG, luoghi visitati, ricompense e conseguenze.
+- Dopo una sessione, aggiorna missioni, PNG, luoghi visitati, ricompense e conseguenze da [[z.bacheche/Post Sessione]].
 - Per controlli, template, automazioni e sviluppo del vault, vedi [[Risorse/Sviluppo Vault]].
 - Per preparare una release o una copia pulita, apri [[RELEASE]] e [[Risorse/Controllo Vault]].
 - Non modificare manualmente le note in `SRD` se non sai cosa stai facendo: sono generate da `z.automazioni/import_srd.js` e possono essere rigenerate.

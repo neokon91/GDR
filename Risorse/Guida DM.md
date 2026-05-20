@@ -14,11 +14,12 @@ Questa guida serve a usare il vault senza pensare alla parte tecnica.
    - una missione se i personaggi possono sceglierla;
    - un incontro se potrebbe andare al tavolo;
    - una dispensa se vuoi consegnare un testo o indizio.
-5. Prima di segnare la sessione come `pronto`, assicurati che abbia:
+6. Prima di segnare la sessione come `pronto`, assicurati che abbia:
    - un obiettivo di sessione;
    - almeno una pressione attiva;
    - uno o piu segreti rivelabili;
    - una conseguenza se i PG ignorano il fronte.
+7. Quando la sessione va al tavolo, usa `attiva: true`. Tieni una sola sessione attiva alla volta.
 
 ## Durante Il Gioco
 
@@ -26,7 +27,12 @@ Apri [[Durante il Gioco]].
 
 Usa quella pagina per:
 - scena corrente;
-- appunti rapidi;
+- Inbox Live;
+- eventi live;
+- PNG improvvisati;
+- luoghi improvvisati;
+- conseguenze;
+- appunti grezzi;
 - timer e pressioni;
 - segreti rivelabili e domande aperte;
 - PNG in gioco;
@@ -58,9 +64,11 @@ Un contenuto è utile quando collega almeno due tra luogo, PNG, fazione, mission
 Apri [[z.bacheche/Post Sessione]].
 
 Fai solo queste cose:
-- sposta gli appunti importanti nella sessione giocata;
-- aggiorna PNG, luoghi e missioni cambiati;
+- smista gli appunti live in [[Inbox/Inbox]];
+- canonizza eventi veri o archivia quelli irrilevanti;
+- aggiorna PNG, luoghi, fazioni e missioni cambiati;
 - segna ricompense e dispense consegnate;
+- togli `attiva: true` alla sessione giocata e prepara la prossima sessione attiva;
 - prepara la prima scena della prossima sessione.
 
 ## Dove Metto Le Idee Grezze?
@@ -68,6 +76,15 @@ Fai solo queste cose:
 Usa [[Inbox/Inbox]].
 
 La Inbox e per idee non ancora canoniche. Non metterle subito nel mondo se non sei sicuro che esistano davvero nella campagna.
+
+Usa i pulsanti live quando sei al tavolo:
+- `Evento Live` per qualcosa che succede adesso;
+- `PNG Improvvisato` per un volto creato sul momento;
+- `Luogo Improvvisato` per un posto nato in gioco;
+- `Nota Grezza` per testo non ancora strutturato;
+- `Conseguenza` per effetti che dovranno cambiare il mondo.
+
+Le note live provano a collegarsi automaticamente alla sessione attiva e al suo mondo.
 
 ## Quando Una Nota E Canonica?
 

@@ -233,6 +233,42 @@ function getWorldFromLink(link) {
     return getFrontmatter(file)?.mondo ?? "";
 }
 
+function fileLink(file) {
+    return file ? `[[${file.basename}]]` : "";
+}
+
+function getActiveSessionFile() {
+    const sessions = app.vault.getMarkdownFiles()
+        .filter(file => file.path.startsWith(`${PATHS.sessioni}/`))
+        .filter(file => !file.basename.startsWith("Prova -"))
+        .map(file => ({ file, frontmatter: getFrontmatter(file) }));
+
+    const explicit = sessions
+        .filter(entry => entry.frontmatter.attiva === true)
+        .sort((a, b) => String(b.frontmatter.data ?? "").localeCompare(String(a.frontmatter.data ?? "")))[0];
+
+    if (explicit) {
+        return explicit.file;
+    }
+
+    return sessions
+        .filter(entry => ["pronto", "preparazione"].includes(entry.frontmatter.stato))
+        .sort((a, b) => String(b.frontmatter.data ?? "").localeCompare(String(a.frontmatter.data ?? "")))[0]?.file ?? null;
+}
+
+function getActiveSessionContext() {
+    const file = getActiveSessionFile();
+    const frontmatter = getFrontmatter(file);
+
+    return {
+        file,
+        link: fileLink(file),
+        world: frontmatter.mondo ?? "",
+        campaigns: frontmatter.campagne ?? [],
+        frontmatter
+    };
+}
+
 function isHiddenFromSuggestions(file) {
     const frontmatter = getFrontmatter(file);
     return file.basename.startsWith("Prova -") || frontmatter.stato === "archiviata";
@@ -598,6 +634,9 @@ module.exports = {
     normalizeText,
     getFileFromLink,
     getWorldFromLink,
+    getActiveSessionFile,
+    getActiveSessionContext,
+    fileLink,
     getMarkdownFilesByFrontmatter,
     getMarkdownFilesInPath,
     chooseNoteFromFiles,

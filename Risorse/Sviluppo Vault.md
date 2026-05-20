@@ -21,6 +21,8 @@ Il vault deve funzionare per una persona che:
 ## Documentazione
 
 - `README.md` deve restare una guida per l'utente finale: dove cliccare, dove scrivere, come usare il vault durante preparazione e gioco.
+- [[Risorse/Guida DM]] deve spiegare il flusso operativo senza dettagli tecnici: preparazione, gioco, Inbox Live, post-sessione e canonizzazione.
+- [[Risorse/Indice Connettore GPT]] deve restare un indice sintetico per code search e connettori GPT, marcato con `is_code_search_indexed: true`.
 - Questa nota contiene la documentazione di sviluppo: campi, template, automazioni, test, import generati e criteri di modifica.
 - Le istruzioni tecniche non vanno nel README se non sono necessarie per usare il vault al tavolo.
 
@@ -60,7 +62,8 @@ Usa questi campi in modo coerente, perché alimentano Dataview, dashboard, Meta 
 
 - `categoria`: tipo generale della nota, per esempio `sessione`, `personaggio`, `luogo`, `missione`.
 - `tipo`: sottotipo utile al gioco, per esempio `pg`, `png`, `dungeon`, `oggetto magico`.
-- `stato`: avanzamento operativo. Valori comuni: `bozza`, `preparazione`, `pronto`, `in gioco`, `usato`, `giocata`, `consegnato`, `completata`, `fallita`, `da smistare`, `smistata`, `in pausa`, `conclusa`, `archiviata`.
+- `stato`: avanzamento operativo. Valori comuni validati: `bozza`, `preparazione`, `pronto`, `in corso`, `in gioco`, `giocata`, `da smistare`, `smistata`, `collegata`, `canonica`, `canonico`, `accettata`, `proposta`, `conclusa`, `archiviata`, `ignorata`.
+- `attiva`: booleano usato dalle sessioni. Deve essere `true` su una sola sessione alla volta. Se manca una sessione attiva, gli helper usano come fallback l'ultima sessione `pronto` o `preparazione`.
 - `canonico`: `true` quando il contenuto e confermato nel mondo di gioco.
 - `mondo`: collega una nota al mondo a cui appartiene.
 - `luogo`, `luoghi`, `personaggi`, `fazioni`, `ricompense`: usa link interni quando possibile.
@@ -72,6 +75,39 @@ Per le note di categoria `mondo`, usa anche `tono`, `tema`, `tecnologia`, `magia
 - `z.modelli`: template Templater. Modifica con cautela.
 - `z.automazioni`: script Templater usati dai template e script CLI di manutenzione. Se cambi un percorso qui, aggiorna anche dashboard e Dataview.
 - `z.bacheche`: bacheche Kanban per preparazione e creature.
+
+## Runtime Live E Session Context
+
+La logica comune di runtime sta in `z.automazioni/session_context.js`.
+
+Responsabilita:
+
+- trovare la sessione attiva tramite `attiva: true`;
+- applicare fallback a sessioni `pronto` o `preparazione`;
+- esporre helper DataviewJS condivisi come `escapeHtml`, `isReal`, `linkKey`, `internalLink`, `sessionCandidates` e `linkedPages`;
+- ridurre duplicazione nei blocchi DataviewJS delle dashboard.
+
+Le automazioni Templater usano invece `z.automazioni/helpers.js`. Per la creazione live sono disponibili `getActiveSessionFile()` e `getActiveSessionContext()`, usati per precompilare mondo e sessione nelle note create durante il gioco.
+
+## Template Live
+
+I template live sono pensati per catturare contenuto al tavolo senza costringere il DM a decidere subito la struttura definitiva:
+
+- `z.modelli/Live Evento.md`
+- `z.modelli/Live Conseguenza.md`
+- `z.modelli/Live PNG.md`
+- `z.modelli/Live Luogo.md`
+- `z.modelli/Live Nota Grezza.md`
+
+Automazioni corrispondenti:
+
+- `z.automazioni/live_evento.js`
+- `z.automazioni/live_conseguenza.js`
+- `z.automazioni/live_png.js`
+- `z.automazioni/live_luogo.js`
+- `z.automazioni/live_nota.js`
+
+Regola: questi template creano note in `Inbox` e devono provare a collegare automaticamente la sessione attiva e il mondo della sessione. La canonizzazione avviene dopo, da [[z.bacheche/Post Sessione]] e [[Mondi/Stato del Mondo]].
 
 ## Import SRD
 
@@ -98,7 +134,7 @@ Prima di una release o dopo modifiche a template, script e plugin, esegui:
 node z.automazioni/check_vault.js
 ```
 
-Il controllo verifica JSON di configurazione, plugin obbligatori inclusi e abilitati, wikilink rotti o ambigui, percorsi `templateFile` usati dai pulsanti Meta Bind, target di Icon Folder e riferimenti Obsidian obsoleti.
+Il controllo verifica JSON di configurazione, plugin obbligatori inclusi e abilitati, wikilink rotti o ambigui, percorsi `templateFile` usati dai pulsanti Meta Bind, target di Icon Folder, riferimenti Obsidian obsoleti, sessioni multiple attive, frontmatter operativo, stati non previsti e campi minimi per categoria.
 
 ## Release
 
