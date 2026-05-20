@@ -12,6 +12,7 @@ Archivio delle roadmap di versione. Serve a chi mantiene il vault; chi usa il va
 
 | Versione | Stato | Focus |
 | --- | --- | --- |
+| [[Risorse/Roadmap/1.0.0|1.0.0]] | attiva | Codex homebrew worldbuilding-first, trasformazione mondo -> gioco e release solida. |
 | [[Risorse/Roadmap/0.9.0|0.9.0]] | storica | Living world engine, geopolitica, relazioni e continuità narrativa. |
 | [[Risorse/Roadmap/0.8.0|0.8.0]] | storica | Completamento prodotto per release ZIP iniziale. |
 | [[Risorse/Roadmap/0.7.0|0.7.0]] | storica | App professionale, vista giocatori e release pulita. |
