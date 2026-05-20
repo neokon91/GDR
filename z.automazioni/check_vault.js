@@ -62,6 +62,7 @@ const REQUIRED_FILES = [
     "Dev/Confine Release Repository.md",
     "Dev/Release Pulita.md",
     "Dev/Smoke 1.0 Professionale.md",
+    "Dev/Smoke Demo Finale.md",
     "Dev/Plugin Layer Interno.md",
     "Dev/Roadmap/1.0 Professionale.md",
     "Dev/Roadmap/Roadmap.md",

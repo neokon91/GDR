@@ -91,3 +91,4 @@ Ogni voce va verificata in Obsidian, non solo con `npm run check`. L'obiettivo e
 - [ ] La demo e creata solo dopo il completamento dei flussi precedenti.
 - [ ] Ogni nota demo usa template ufficiali.
 - [ ] Ogni elemento demo passa controlli, mappe, player-safe e smoke visuale.
+- [ ] [[Dev/Smoke Demo Finale]] passa in Obsidian e ha screenshot/GIF di evidenza.

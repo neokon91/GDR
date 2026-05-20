@@ -38,7 +38,7 @@ Scenario demo creato dopo M1 e M2 per verificare che il vault 1.0 funzioni con t
 - [x] Copre mondo, cultura, potere, culto, economia, mappa, campagna, sessione e conseguenza.
 - [x] Include recap, mappa e dispensa pubblici per [[Vista Giocatori]].
 - [x] `npm run check` passa con gate statico M3 su presenza demo e player-safe.
-- [ ] Smoke visuale manuale in Obsidian.
+- [ ] Smoke visuale manuale in Obsidian: [[Dev/Smoke Demo Finale]].
 
 ## Gate Statico M3
 

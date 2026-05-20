@@ -7,6 +7,7 @@ Questa checklist serve a preparare una copia pubblicabile del vault.
 1. Apri [[Inizia Qui]] e verifica che i pulsanti portino alle pagine giuste.
 2. Apri [[1. DM Dashboard]], [[Durante il Gioco]], [[Hub/Party Control]], [[Atlante del Mondo]], [[Geopolitical Dashboard]], [[Motore Mondo Vivo]], [[Campagna da Ambientazione]] e [[Vista Giocatori]].
 3. Apri [[Risorse/Controllo Vault]] e [[Risorse/Quality Report]] e risolvi problemi operativi importanti.
+4. Esegui [[Dev/Smoke Demo Finale]] se stai preparando la release 1.0 con demo inclusa.
 5. Acquisisci almeno cinque screenshot: `Inizia Qui`, `Vista Giocatori`, `Atlante del Mondo`, `Party Control`, `Quality Report`.
 6. Registra una GIF breve del flusso `Inizia Qui` -> `Durante il Gioco` -> `Vista Giocatori`.
 7. Esegui:
@@ -23,7 +24,7 @@ npm run check
 npm run release:clean
 ```
 
-9. Crea tag o GitHub Release solo dopo controlli puliti.
+11. Crea tag o GitHub Release solo dopo controlli puliti.
 
 ## ZIP Utente
 
