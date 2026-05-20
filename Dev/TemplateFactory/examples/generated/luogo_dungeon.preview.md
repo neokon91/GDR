@@ -1,7 +1,7 @@
-<% await tp.user.world_entity(tp) %>
+<% await tp.user.luogo(tp, { subtype: "dungeon" }) %>
 # `=this.nome`
 
-> [!infoboxwiki]- Entita Worldbuilding
+> [!infoboxwiki]- Dungeon
 > Mondo: `INPUT[mondo][:mondo]`
 >
 > Stato: `INPUT[stato][:stato]`

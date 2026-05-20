@@ -1,7 +1,7 @@
-<% await tp.user.world_entity(tp) %>
+<% await tp.user.wizard_layer(tp, "appunto_live") %>
 # `=this.nome`
 
-> [!infoboxwiki]- Entita Worldbuilding
+> [!infoboxwiki]- Appunto Live
 > Mondo: `INPUT[mondo][:mondo]`
 >
 > Stato: `INPUT[stato][:stato]`

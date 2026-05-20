@@ -1,7 +1,7 @@
-<% await tp.user.world_entity(tp) %>
+<% await tp.user.rotta(tp) %>
 # `=this.nome`
 
-> [!infoboxwiki]- Entita Worldbuilding
+> [!infoboxwiki]- Rotta
 > Mondo: `INPUT[mondo][:mondo]`
 >
 > Stato: `INPUT[stato][:stato]`

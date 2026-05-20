@@ -1,7 +1,7 @@
-<% await tp.user.world_entity(tp) %>
+<% await tp.user.live_evento(tp) %>
 # `=this.nome`
 
-> [!infoboxwiki]- Entita Worldbuilding
+> [!infoboxwiki]- Live Evento
 > Mondo: `INPUT[mondo][:mondo]`
 >
 > Stato: `INPUT[stato][:stato]`

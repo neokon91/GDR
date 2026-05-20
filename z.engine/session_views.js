@@ -128,19 +128,25 @@
 
   function renderWorldImpact(dv, source = null) {
     const page = source ?? dv.current();
-    const directRows = [
-      ["Prossima mossa", page.prossima_mossa, "Scrivi cosa accade se nessuno interviene."],
-      ["Conseguenza potenziale", page.conseguenza_potenziale, "Definisci cosa cambia nel mondo."],
-      ["Entita impattate", page.entita_impattate, "Collega almeno una nota che subisce l'effetto."],
-      ["Propaga a", page.propaga_a, "Collega dove arriva l'onda lunga."],
-      ["Connessioni vive", page.connessioni, "Collega note operative, non solo archivio."],
-      ["Sessioni", page.sessioni, "Collega quando e entrata o entrera al tavolo."]
+    const playerAction = fieldText(page.azione_giocatori ?? page.scelta ?? page.scelte ?? page.decisioni ?? page.output_sessione)
+      || "Annota la scelta o azione dei giocatori che ha mosso il mondo.";
+    const consequence = fieldText(page.conseguenza_potenziale ?? page.conseguenza ?? page.conseguenze ?? page.impatto)
+      || "Definisci la conseguenza concreta prodotta dall'azione.";
+    const propagation = fieldText(page.entita_impattate ?? page.propaga_a)
+      || "Collega le entita impattate e dove si propaga l'effetto.";
+    const nextMove = fieldText(page.prossima_mossa)
+      || "Scrivi cosa accade se nessuno interviene.";
+    const chainRows = [
+      ["1. Azione giocatori", playerAction, page.azione_giocatori ?? page.scelta ?? page.scelte ?? page.decisioni ?? page.output_sessione],
+      ["2. Conseguenza", consequence, page.conseguenza_potenziale ?? page.conseguenza ?? page.conseguenze ?? page.impatto],
+      ["3. Propagazione", propagation, page.entita_impattate ?? page.propaga_a],
+      ["4. Prossima mossa", nextMove, page.prossima_mossa]
     ];
 
     const grid = dv.el("div", "", { cls: "gdr-card-grid compact" });
-    grid.innerHTML = directRows.map(([title, value, fallback]) => cardHtml({
+    grid.innerHTML = chainRows.map(([title, body, value]) => cardHtml({
       title,
-      body: fieldText(value) || fallback,
+      body,
       cls: `gdr-info-card compact ${fieldText(value) ? "gdr-kind-ready" : "gdr-kind-missing"}`
     })).join("");
 
@@ -152,7 +158,7 @@
       .array();
 
     if (!incoming.length) {
-      dv.paragraph("Nessuna nota sta ancora reagendo a questa. Collega entita impattate, propagazione o connessioni vive.");
+      dv.paragraph("Nessuna nota sta ancora reagendo a questa. Collega entita impattate, propaga_a o connessioni vive.");
       return;
     }
 

@@ -130,6 +130,8 @@ def validate_rendering(modules: dict[str, dict], errors: list[str]) -> None:
         try:
             template = env.get_template(template_ref)
             rendered = template.render(
+                blueprint_id=name,
+                blueprint=blueprint,
                 templater_entry=blueprint.get("templater_entry", ""),
                 templater_function=blueprint.get("templater_entry", "").split("tp.user.")[-1].split("(")[0],
                 label=name.replace("_", " ").title(),

@@ -43,8 +43,23 @@ async function template_router(tp, route = "") {
         return await includeTemplate(templatePath);
     };
 
+    const routePersonaggio = async () => {
+        const selected = await helpers.chooseRequired(
+            tp,
+            [
+                { label: "PNG", template: "z.modelli/personaggio/PNG" },
+                { label: "PG", template: "z.modelli/personaggio/PG" },
+                { label: "Divinità o entità", template: "z.modelli/personaggio/Divinità" }
+            ],
+            "Che tipo di personaggio vuoi creare?"
+        );
+
+        return await includeTemplate(selected.template);
+    };
+
     if (route === "fazione") return await routeFaction();
     if (route === "dm") return await routeDm();
+    if (route === "personaggio") return await routePersonaggio();
 
     const creativeRoutes = new Set([
         "cultura",

@@ -1,4 +1,4 @@
-<% await tp.user.{{ templater_function | default("world_entity") }}(tp) %>
+{{ templater_entry | default("<% await tp.user.world_entity(tp) %>") }}
 # `=this.nome`
 
 > [!infoboxwiki]- {{ label | default("Codex") }}

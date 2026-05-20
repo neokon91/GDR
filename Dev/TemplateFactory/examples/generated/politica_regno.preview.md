@@ -1,7 +1,7 @@
-<% await tp.user.world_entity(tp) %>
+<% await tp.user.luogo(tp, { category: "politica", subtype: "regno" }) %>
 # `=this.nome`
 
-> [!infoboxwiki]- Entita Worldbuilding
+> [!infoboxwiki]- Regno
 > Mondo: `INPUT[mondo][:mondo]`
 >
 > Stato: `INPUT[stato][:stato]`

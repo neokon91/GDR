@@ -1,7 +1,7 @@
-<% await tp.user.world_entity(tp) %>
+<% await tp.user.dispensa(tp) %>
 # `=this.nome`
 
-> [!infoboxwiki]- Entita Worldbuilding
+> [!infoboxwiki]- Dispensa
 > Mondo: `INPUT[mondo][:mondo]`
 >
 > Stato: `INPUT[stato][:stato]`
@@ -54,11 +54,6 @@ const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js")
 gdr.renderCreationFeedback(dv);
 ```
 
-
-```dataviewjs
-const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
-gdr.renderWorldImpact(dv);
-```
 
 ````
 

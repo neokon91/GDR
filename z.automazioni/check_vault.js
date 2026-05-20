@@ -532,9 +532,54 @@ function targetPath(target) {
     return normalized.endsWith(".md") ? normalized : `${normalized}.md`;
 }
 
+const generatedTemplatePaths = new Set();
+
+function addGeneratedTemplatePath(templatePath) {
+    const normalized = String(templatePath ?? "").replace(/\\/g, "/");
+    if (!normalized) return;
+    generatedTemplatePaths.add(normalized);
+    generatedTemplatePaths.add(normalized.replace(/\.md$/, ""));
+}
+
+const templateFactoryManifest = readOptionalJson(path.join(ROOT, "z.modelli/.templatefactory-manifest.json"));
+for (const entry of templateFactoryManifest?.files ?? []) {
+    addGeneratedTemplatePath(entry?.path);
+}
+
+const templateBlueprintsPath = path.join(ROOT, "Dev/TemplateFactory/modules/template_blueprints.yaml");
+if (fs.existsSync(templateBlueprintsPath)) {
+    const lines = fs.readFileSync(templateBlueprintsPath, "utf8").split(/\r?\n/);
+    let outputFolder = "";
+    let inFiles = false;
+
+    for (const line of lines) {
+        const folderMatch = line.match(/^ {6}folder:\s*(.+?)\s*$/);
+        if (folderMatch) {
+            outputFolder = folderMatch[1].replace(/^["']|["']$/g, "");
+            inFiles = false;
+            continue;
+        }
+
+        if (/^ {6}files:\s*$/.test(line)) {
+            inFiles = true;
+            continue;
+        }
+
+        const fileMatch = inFiles ? line.match(/^ {6}-\s*(.+?)\s*$/) : null;
+        if (fileMatch && outputFolder) {
+            addGeneratedTemplatePath(path.posix.normalize(`${outputFolder}/${fileMatch[1].replace(/^["']|["']$/g, "")}`));
+            continue;
+        }
+
+        if (inFiles && !/^ {6}-\s*/.test(line) && !/^\s*$/.test(line)) {
+            inFiles = false;
+        }
+    }
+}
+
 function isGeneratedTemplatePath(fileRel) {
     const normalized = String(fileRel ?? "").replace(/\\/g, "/");
-    return normalized === "z.modelli" || normalized.startsWith("z.modelli/");
+    return generatedTemplatePaths.has(normalized) || generatedTemplatePaths.has(targetPath(normalized));
 }
 
 const markdownFiles = walk(ROOT, file => file.endsWith(".md"));
@@ -682,6 +727,10 @@ for (const file of markdownFiles) {
 
     while ((match = templatePattern.exec(text))) {
         const template = targetPath(match[1]);
+        if (template.startsWith("z.modelli/") && !isGeneratedTemplatePath(template)) {
+            errors.push(`${rel(file)}: template Meta Bind non generabile da TemplateFactory ${template}`);
+            continue;
+        }
         if (isGeneratedTemplatePath(template)) continue;
         if (!fs.existsSync(path.join(ROOT, template))) {
             errors.push(`${rel(file)}: template Meta Bind mancante ${template}`);
@@ -717,6 +766,10 @@ if (metaBindConfig) {
         for (const action of button.actions ?? []) {
             if ((action.type === "templaterCreateNote" || action.type === "runTemplaterFile") && action.templateFile) {
                 const template = targetPath(action.templateFile);
+                if (template.startsWith("z.modelli/") && !isGeneratedTemplatePath(template)) {
+                    errors.push(`Meta Bind: button template ${button.id} usa template non generabile da TemplateFactory ${template}`);
+                    continue;
+                }
                 if (isGeneratedTemplatePath(template)) continue;
                 if (!fs.existsSync(path.join(ROOT, template))) {
                     errors.push(`Meta Bind: button template ${button.id} usa template mancante ${template}`);

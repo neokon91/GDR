@@ -1,7 +1,7 @@
-<% await tp.user.world_entity(tp) %>
+{{ templater_entry }}
 # `=this.nome`
 
-> [!infoboxwiki]- Entita Worldbuilding
+> [!infoboxwiki]- {{ blueprint.get("template_title", label) }}
 > Mondo: `INPUT[mondo][:mondo]`
 >
 > Stato: `INPUT[stato][:stato]`
@@ -41,25 +41,20 @@ tab: Connessioni
 > Propaga a: `INPUT[propaga_a][:propaga_a]`
 
 ```dataview
-TABLE categoria, tipo, stato, pressione, prossima_mossa
-FROM "Mondi"
-WHERE contains(this.connessioni, file.link)
-SORT categoria ASC, file.name ASC
+{{ modules.dataview_blocks.blocks.linked_connections_table.code }}
 ```
 
 tab: Controllo
 
 ```dataviewjs
-const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
-gdr.renderCreationFeedback(dv);
+{{ modules.dataview_blocks.blocks.feedback_creazione.code }}
 ```
 
-
+{% if blueprint.get("world_impact", true) %}
 ```dataviewjs
-const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
-gdr.renderWorldImpact(dv);
+{{ modules.dataview_blocks.blocks.world_impact.code }}
 ```
-
+{% endif %}
 ````
 
 ## Fallback Markdown
