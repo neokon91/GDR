@@ -96,7 +96,7 @@ actions:
 10. Apri [[Worldbuilder Dashboard]] quando vuoi creare mondi, luoghi, PNG, fazioni, creature e oggetti.
 11. Apri [[Motore Mondo Vivo]] quando una scelta, una guerra, una religione, una fazione o un evento storico deve propagarsi nel mondo e pesare sulle prossime sessioni.
 12. Apri [[Geopolitical Dashboard]] quando il conflitto riguarda stati, confini, risorse strategiche, trattati o legittimita politica.
-11. Apri [[Risorse/Risorse]] quando cerchi guide, mappe, immagini, audio, video, tabelle o aiuto.
+13. Apri [[Risorse/Risorse]] quando cerchi guide, mappe, immagini, audio, video, tabelle o aiuto.
 
 ## Se Vedi Questo, Sei Pronto
 
