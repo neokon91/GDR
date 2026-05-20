@@ -17,12 +17,14 @@
 > Prima impressione:
 > `INPUT[text:impressione]`
 
-> [!luogo] Descrizione
->
-
-> [!lettura] Descrizione da leggere
->
+> [!luogo] Al primo sguardo
 > `=this.impressione`
+>
+> > [!pericolo]- Tensione locale
+> > `=this.tensione`
+
+````tabs
+tab: Uso
 
 ## Storia Antica
 
@@ -30,10 +32,14 @@
 
 ## Punti di Interesse
 
+tab: Presenze
+
 ## Presenze
 
-> [!incontro] Presenze
+> [!incontro]- Presenze
 >
+
+tab: Segreti
 
 ## Segreti
 
@@ -55,3 +61,4 @@ INPUT[list:scene]
 ```meta-bind
 INPUT[list:indizi]
 ```
+````

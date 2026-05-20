@@ -44,7 +44,7 @@
 > [!missione] Obiettivo
 >
 
-> [!timer] Progressione
+> [!timer]- Progressione
 > - [ ]
 > - [ ]
 > - [ ]
@@ -57,6 +57,10 @@ tab: Situazione
 
 > [!scena] Situazione
 >
+> > [!timer]- Se ignorata
+> > Prossima mossa: `=this.prossima_mossa`
+> >
+> > Scadenza: `=this.scadenza_mondo`
 
 ## Indizi
 
@@ -64,7 +68,7 @@ tab: Situazione
 INPUT[list:indizi]
 ```
 
-> [!indizio] Indizi
+> [!indizio]- Indizi
 >
 
 ## Ostacoli
@@ -73,7 +77,7 @@ INPUT[list:indizi]
 INPUT[list:ostacoli]
 ```
 
-> [!pericolo] Ostacoli
+> [!pericolo]- Ostacoli
 >
 
 ## Domande Aperte
@@ -142,6 +146,9 @@ INPUT[list:conseguenze]
 ```meta-bind
 INPUT[list:segreti]
 ```
+
+> [!segreto]- Segreti
+>
 
 ## Note
 ````

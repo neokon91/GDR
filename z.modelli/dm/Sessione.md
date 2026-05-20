@@ -62,22 +62,23 @@
 > Obiettivo:
 > `INPUT[text:obiettivo]`
 
-> [!scena] Apertura
+> [!scena] Al tavolo
+> Apertura, testo da leggere, timer e tiri stanno qui per non disperdere la preparazione.
 >
-
-> [!lettura] Testo da leggere
+> > [!lettura]- Testo da leggere
+> >
+> > 
 >
-
-> [!timer] Timer della sessione
-> - [ ]
-> - [ ]
-> - [ ]
-> - [ ]
-
-> [!regola] Tiri rapidi
-> - D20: `dice: 1d20`
-> - Incontro casuale: `dice: 1d6`
-> - Complicazione: `dice: 1d12`
+> > [!timer]- Timer della sessione
+> > - [ ]
+> > - [ ]
+> > - [ ]
+> > - [ ]
+>
+> > [!regola]- Tiri rapidi
+> > - D20: `dice: 1d20`
+> > - Complicazione: `dice: [[Risorse/Tabelle/Tabelle#^complicazioni]]`
+> > - Umore PNG: `dice: [[Risorse/Tabelle/Tabelle#^umore-png]]`
 
 ````tabs
 tab: Scaletta
@@ -95,7 +96,7 @@ INPUT[list:scene]
 
 ## Scaletta
 
-> [!scena] Battute previste
+> [!scena]- Battute previste
 > - [ ] Apertura
 > - [ ] Scena di pressione
 > - [ ] Scelta rilevante
@@ -219,10 +220,10 @@ tab: Resoconto
 
 ## Resoconto
 
-> [!scena] Cosa e successo
+> [!scena]- Cosa e successo
 >
 
-> [!indizio] Fatti canonici emersi
+> [!indizio]- Fatti canonici emersi
 >
 
 ## Conseguenze
@@ -231,18 +232,18 @@ tab: Resoconto
 INPUT[list:conseguenze]
 ```
 
-> [!missione] Missioni e mondo
+> [!missione]- Missioni e mondo
 >
 
-> [!png] PNG cambiati
+> [!png]- PNG cambiati
 >
 
-> [!luogo] Luoghi cambiati
+> [!luogo]- Luoghi cambiati
 >
 
 ## Ricompense Date
 
-> [!tesoro] Ricompense effettive
+> [!tesoro]- Ricompense effettive
 >
 
 tab: Prossima

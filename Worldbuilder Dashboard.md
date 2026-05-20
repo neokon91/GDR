@@ -217,7 +217,12 @@ grid.innerHTML = cards.map(([label, value, hint]) => `
 `).join("");
 ```
 
-## Bozze Da Completare
+## Focus Operativo
+
+````tabs
+tab: Bozze
+
+### Bozze Da Completare
 
 ```dataview
 TABLE categoria, tipo, luogo, stato
@@ -227,7 +232,9 @@ SORT categoria ASC, nome ASC
 LIMIT 12
 ```
 
-## Campagna Filtrata
+tab: Campagna
+
+### Campagna Filtrata
 
 ```dataviewjs
 const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));
@@ -252,7 +259,9 @@ if (!campaigns.size && !world) {
 }
 ```
 
-## Densità E Connessioni
+tab: Connessioni
+
+### Densità E Connessioni
 
 ```dataviewjs
 const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));
@@ -282,7 +291,9 @@ if (!pages.length) {
 }
 ```
 
-## Domande Aperte
+tab: Domande
+
+### Domande Aperte
 
 ```dataview
 TABLE categoria, tipo, domande_aperte
@@ -292,7 +303,9 @@ SORT file.mtime DESC
 LIMIT 12
 ```
 
-## Segreti E Indizi Da Spendere
+tab: Segreti
+
+### Segreti E Indizi Da Spendere
 
 ```dataview
 TABLE categoria, tipo, segreti, indizi
@@ -301,6 +314,7 @@ WHERE ((segreti AND length(segreti) > 0) OR (indizi AND length(indizi) > 0)) AND
 SORT file.mtime DESC
 LIMIT 12
 ```
+````
 
 ## Worldbuilding Operativo
 
@@ -389,7 +403,12 @@ LIMIT 12
 ```
 ````
 
-## Pressioni Del Mondo
+## Canone E Pressioni
+
+````tabs
+tab: Pressioni
+
+### Pressioni Del Mondo
 
 ```dataview
 TABLE categoria, tipo, pressione, prossima_mossa, scadenza_mondo
@@ -399,7 +418,9 @@ SORT pressione DESC, file.name ASC
 LIMIT 12
 ```
 
-## Timeline Narrativa
+tab: Timeline
+
+### Timeline Narrativa
 
 ```dataview
 TABLE data_mondo, stato_canonico, mondo, luoghi, fazioni, sessioni
@@ -409,7 +430,9 @@ SORT data_mondo ASC, file.name ASC
 LIMIT 16
 ```
 
-## Timeline Causale
+tab: Cause
+
+### Timeline Causale
 
 ```dataview
 TABLE data_mondo, causa, conseguenze, luoghi, fazioni, missioni
@@ -419,7 +442,9 @@ SORT data_mondo ASC, file.name ASC
 LIMIT 16
 ```
 
-## Lore Da Canonizzare
+tab: Lore
+
+### Lore Da Canonizzare
 
 ```dataview
 TABLE tipo, stato, stato_canonico, data_mondo, sessioni, collegamenti, impatto
@@ -429,7 +454,9 @@ SORT file.mtime DESC
 LIMIT 12
 ```
 
-## Buchi Di Mondo
+tab: Buchi
+
+### Buchi Di Mondo
 
 ```dataviewjs
 const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));
@@ -477,7 +504,9 @@ if (!rows.length) {
 }
 ```
 
-## Stato Canonico
+tab: Stato
+
+### Stato Canonico
 
 ```dataview
 TABLE categoria, tipo, stato_canonico, canonico, mondo
@@ -486,8 +515,14 @@ WHERE stato_canonico AND !startswith(file.name, "Prova -") AND stato != "archivi
 SORT stato_canonico ASC, file.mtime DESC
 LIMIT 16
 ```
+````
 
-## Mondi e Archivi
+## Archivi
+
+````tabs
+tab: Mondi
+
+### Mondi e Archivi
 
 ```dataview
 TABLE categoria, tipo, stato
@@ -496,6 +531,8 @@ WHERE file.name != "Mondo" AND stato != "archiviata" AND !startswith(file.name, 
 SORT categoria ASC, nome ASC
 LIMIT 16
 ```
+
+tab: Personaggi
 
 ### Personaggi
 
@@ -507,6 +544,8 @@ SORT stato ASC, nome ASC
 LIMIT 12
 ```
 
+tab: Luoghi
+
 ### Luoghi
 
 ```dataview
@@ -516,6 +555,8 @@ WHERE file.name != "Luoghi" AND stato != "archiviata" AND !startswith(file.name,
 SORT nome ASC
 LIMIT 12
 ```
+
+tab: Fazioni
 
 ### Fazioni e Religioni
 
@@ -527,6 +568,8 @@ SORT categoria ASC, nome ASC
 LIMIT 16
 ```
 
+tab: Creature
+
 ### Creature
 
 ```dataview
@@ -537,6 +580,8 @@ SORT cr ASC, nome ASC
 LIMIT 16
 ```
 
+tab: Oggetti
+
 ### Oggetti e Dispense
 
 ```dataview
@@ -546,6 +591,7 @@ WHERE file.name != "Oggetti" AND file.name != "Dispense" AND stato != "archiviat
 SORT categoria ASC, nome ASC
 LIMIT 16
 ```
+````
 
 ## Mappe
 

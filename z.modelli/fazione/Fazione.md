@@ -35,19 +35,27 @@
 > Scadenza nel mondo:
 > `INPUT[text:scadenza_mondo]`
 
+> [!timer] Fronte attivo
+> Pressione: `=this.pressione`
+>
+> Prossima mossa: `=this.prossima_mossa`
+>
+> > [!segreto]- Obiettivo nascosto
+> > `=this.obiettivo_nascosto`
+
 ````tabs
 tab: Identità
 
 ## Identità
 
-> [!scena] Identità pubblica
+> [!scena]- Identità pubblica
 >
 
 ## Obiettivi
 
 `INPUT[text:obiettivo]`
 
-> [!missione] Obiettivi
+> [!missione]- Obiettivi
 >
 
 ## Obiettivo Nascosto
@@ -74,6 +82,9 @@ INPUT[list:debolezze]
 ```meta-bind
 INPUT[list:conseguenze]
 ```
+
+> [!pericolo]- Conseguenze possibili
+>
 
 tab: Rete
 

@@ -26,8 +26,16 @@
 >return engine.markdown.create(slider);
 >```
 
-> [!png] Identità
+> [!png] Al tavolo
+> Vuole: `=this.vuole`
 >
+> Sa: `=this.sa`
+>
+> > [!scena]- Leva
+> > `=this.leva`
+>
+> > [!segreto]- Segreto
+> > `=this.segreto`
 
 Mondo:
 `INPUT[suggester(optionQuery("Mondi"), useLinks(partial), allowOther):mondo]`
@@ -47,14 +55,14 @@ tab: Identità
 
 ## Personalità
 
-> [!png] Tratti al tavolo
+> [!png]- Tratti al tavolo
 >
 
 ## Vuole
 
 `INPUT[text:vuole]`
 
-> [!missione] Vuole
+> [!missione]- Vuole
 > `=this.vuole`
 >
 
@@ -62,7 +70,7 @@ tab: Identità
 
 `INPUT[text:sa]`
 
-> [!indizio] Sa
+> [!indizio]- Sa
 > `=this.sa`
 >
 
@@ -115,7 +123,7 @@ tab: Segreti
 
 ## Pressione
 
-> [!timer] Se ignorato
+> [!timer]- Se ignorato
 > - [ ]
 > - [ ]
 > - [ ]
@@ -128,7 +136,7 @@ INPUT[list:conseguenze]
 
 ## Uso Al Tavolo
 
-> [!scena] Uso al tavolo
+> [!scena]- Uso al tavolo
 >
 
 tab: Sessioni

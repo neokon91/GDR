@@ -17,18 +17,22 @@
 > Prima impressione:
 > `INPUT[text:impressione]`
 
-> [!luogo] Descrizione
->
-
-> [!lettura] Primo sguardo
->
+> [!luogo] Primo sguardo
 > `=this.impressione`
+>
+> > [!pericolo]- Tensione locale
+> > `=this.tensione`
+
+````tabs
+tab: Territorio
 
 ## Geografia
 
 ## Clima
 
 ## Flora e Fauna
+
+tab: Rete
 
 ## Luoghi contenuti
 
@@ -38,14 +42,18 @@ FROM "Mondi/Luoghi"
 WHERE luogo_padre = this.file.link
 ```
 
+tab: Uso
+
 ## Incontri
 
-> [!incontro] Incontri
+> [!incontro]- Incontri
 >
 
 ## Risorse
 
 `INPUT[inlineList:risorse]`
+
+tab: Segreti
 
 ## Segreti
 
@@ -65,3 +73,4 @@ INPUT[list:indizi]
 ```meta-bind
 INPUT[list:voci]
 ```
+````

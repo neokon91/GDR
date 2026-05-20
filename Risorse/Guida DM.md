@@ -70,6 +70,8 @@ La **Timeline Causale** serve a distinguere:
 - Le carte mostrano cosa richiede attenzione subito.
 - Le tabelle servono per confrontare e cercare negli archivi.
 - Le liste servono per risorse semplici come mappe, audio, immagini e dispense.
+- I tab separano modalita diverse: scena, cattura, pressioni, persone, materiali e post-sessione.
+- I callout chiusi contengono dettagli da aprire solo quando servono: segreti, timer secondari, note GM, esiti possibili e lore profonda.
 - I pulsanti creano note o aprono pagine operative.
 - [[Risorse/Plugin Attivi]] spiega quali strumenti sono disponibili e quando usarli.
 

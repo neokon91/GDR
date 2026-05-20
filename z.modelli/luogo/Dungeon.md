@@ -17,16 +17,21 @@
 > Prima impressione:
 > `INPUT[text:impressione]`
 
-> [!incontro] Premessa
->
-
-> [!lettura] Descrizione da leggere
->
+> [!luogo] Al primo sguardo
 > `=this.impressione`
+>
+> > [!scena]- Premessa
+> >
+>
+> > [!pericolo]- Tensione locale
+> > `=this.tensione`
+
+````tabs
+tab: Uso
 
 ## Ingresso
 
-> [!luogo] Ingresso
+> [!luogo]- Ingresso
 >
 
 ## Stanze
@@ -34,6 +39,8 @@
 ```meta-bind
 INPUT[list:scene]
 ```
+
+tab: Incontri
 
 ## Incontri
 
@@ -43,15 +50,19 @@ FROM "Mondi/Creature"
 WHERE contains(luoghi, this.file.link)
 ```
 
+tab: Pericoli
+
 ## Tesori
 
-> [!tesoro] Tesori
+> [!tesoro]- Tesori
 >
 
 ## Trappole
 
-> [!pericolo] Trappole
+> [!pericolo]- Trappole
 >
+
+tab: Segreti
 
 ## Segreti
 
@@ -64,3 +75,4 @@ INPUT[list:segreti]
 ```meta-bind
 INPUT[list:indizi]
 ```
+````

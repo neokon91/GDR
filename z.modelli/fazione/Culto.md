@@ -17,16 +17,29 @@
 > Mondo:
 > `INPUT[suggester(optionQuery("Mondi"), useLinks(partial), allowOther):mondo]`
 
+> [!regola] Al tavolo
+> Dottrina, rituali e misteri sono separati per tenerlo leggibile durante la preparazione.
+
+````tabs
+tab: Dottrina
+
 ## Dottrina
 
-> [!regola] Dottrina
+> [!regola]- Dottrina
 >
 
 ## Divinità o Entità
 
 ## Simboli
 
+tab: Rituali
+
 ## Rituali
+
+> [!timer]- Cerimonie e scadenze
+>
+
+tab: Rete
 
 ## Templi
 
@@ -36,7 +49,10 @@
 
 `INPUT[inlineListSuggester(optionQuery("Mondi/Fazioni"), useLinks(partial)):fazioni]`
 
+tab: Segreti
+
 ## Segreti
 
 > [!segreto]- Segreti
 >
+````

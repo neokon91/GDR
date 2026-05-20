@@ -29,12 +29,14 @@
 > Prima impressione:
 > `INPUT[text:impressione]`
 
-> [!luogo] Descrizione
->
-
-> [!lettura] Prima impressione
->
+> [!luogo] Al primo sguardo
 > `=this.impressione`
+>
+> > [!scena]- Funzione narrativa
+> > `=this.funzione_narrativa`
+>
+> > [!pericolo]- Tensione locale
+> > `=this.tensione`
 
 ````tabs
 tab: Mappa Locale
@@ -52,6 +54,9 @@ tab: Potere
 ## Governo
 
 ## Economia
+
+> [!scena]- Contesto politico
+>
 
 ## Fazioni presenti
 
@@ -87,7 +92,7 @@ tab: Problemi
 INPUT[list:problemi]
 ```
 
-> [!pericolo] Problemi attuali
+> [!pericolo]- Problemi attuali
 >
 
 ## Conseguenze
@@ -102,7 +107,7 @@ INPUT[list:conseguenze]
 INPUT[list:segreti]
 ```
 
-> [!segreto]- Segreti
+> [!segreto]- Segreti e verita nascoste
 >
 
 ## Indizi

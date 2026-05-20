@@ -202,7 +202,12 @@ if (!active) {
 }
 ```
 
-## Contesto Mondo
+## Tavolo Operativo
+
+````tabs
+tab: Scena
+
+### Contesto Mondo
 
 ```dataviewjs
 const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));
@@ -247,7 +252,7 @@ if (!pages.length) {
 }
 ```
 
-## Missioni Della Sessione
+### Missioni Della Sessione
 
 ```dataviewjs
 const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));
@@ -287,7 +292,9 @@ if (!pages.length) {
 > - [ ] 
 > - [ ] 
 
-## Inbox Live
+tab: Cattura
+
+### Inbox Live
 
 ```meta-bind-button
 label: Evento Live
@@ -351,7 +358,7 @@ LIMIT 12
 > Scrivi qui solo se non vale ancora una nota. Se diventa importante, crea un evento/lore e collegalo alla sessione attiva.
 > - 
 
-## Lore Capture
+### Lore Capture
 
 ```dataview
 TABLE stato, stato_canonico, data_mondo, sessioni, collegamenti
@@ -367,7 +374,7 @@ LIMIT 12
 > - `rumor`, `leggenda`, `segreto`: esiste nel mondo ma non e verita pubblica.
 > - `archiviata` o `ignorata`: non deve piu occupare la schermata da tavolo.
 
-## Appunti Rapidi
+### Appunti Rapidi
 
 > [!indizio] Dettagli emersi
 > 
@@ -375,7 +382,9 @@ LIMIT 12
 > [!segreto]- Da ricordare
 > 
 
-## Pressioni Attive
+tab: Pressioni
+
+### Pressioni Attive
 
 ```dataviewjs
 const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));
@@ -405,7 +414,7 @@ if (!pages.length) {
 }
 ```
 
-## Improvvisazione Rapida
+### Improvvisazione Rapida
 
 > [!png] Nome o volto al volo
 > - Nome:
@@ -424,9 +433,11 @@ if (!pages.length) {
 > - [ ] Qualcuno arriva
 > - [ ] Qualcosa costa piu del previsto
 
-## Persone In Scena
+tab: Persone
 
-### PNG Della Sessione
+### Persone In Scena
+
+#### PNG Della Sessione
 
 ```dataviewjs
 const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));
@@ -447,7 +458,7 @@ if (!pages.length) {
 dv.table(["PNG", "Ruolo", "Luogo", "Atteggiamento"], pages.map(p => [p.file.link, p.ruolo ?? "", p.luogo ?? "", p.atteggiamento ?? ""]));
 ```
 
-### PG
+#### PG
 
 ```dataview
 TABLE giocatore, classe, livello, hp_attuali, hp_massimi
@@ -456,9 +467,11 @@ WHERE tipo = "pg"
 SORT nome ASC
 ```
 
-## Materiale Pronto
+tab: Materiali
 
-### Incontri
+### Materiale Pronto
+
+#### Incontri
 
 ```dataviewjs
 const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));
@@ -479,7 +492,7 @@ if (!pages.length) {
 dv.table(["Incontro", "Luogo", "Pericolo", "Creature"], pages.map(p => [p.file.link, p.luogo ?? "", p.pericolo ?? "", p.creature ?? []]));
 ```
 
-### Creature
+#### Creature
 
 ```dataviewjs
 const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));
@@ -497,7 +510,7 @@ if (!pages.length) {
 }
 ```
 
-### Oggetti Da Assegnare
+#### Oggetti Da Assegnare
 
 ```dataviewjs
 const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));
@@ -518,7 +531,7 @@ if (!pages.length) {
 dv.table(["Oggetto", "Tipo", "Rarita", "Luogo", "Proprietario"], pages.map(p => [p.file.link, p.tipo ?? "", p.rarita ?? "", p.luogo ?? "", p.proprietario ?? ""]));
 ```
 
-### Dispense Di Scena
+#### Dispense Di Scena
 
 ```dataviewjs
 const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));
@@ -539,7 +552,7 @@ if (!pages.length) {
 dv.table(["Dispensa", "Tipo", "Luogo", "Personaggi"], pages.map(p => [p.file.link, p.tipo ?? "", p.luogo ?? "", p.personaggi ?? []]));
 ```
 
-### Mappe
+#### Mappe
 
 ```dataviewjs
 const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));
@@ -573,7 +586,7 @@ if (!pages.length) {
 }
 ```
 
-### Musica e Risorse
+#### Musica e Risorse
 
 ```dataviewjs
 const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));
@@ -612,12 +625,14 @@ if (!pages.length) {
 }
 ```
 
-### Regole e Riferimenti
+#### Regole e Riferimenti
 
 - [[Risorse/Callout GDR]]
 - [[Risorse/Plugin Attivi]]
 
-## Post-Sessione
+tab: Post
+
+### Post-Sessione
 
 ```meta-bind-button
 label: Bacheca Post Sessione
@@ -635,3 +650,4 @@ actions:
 
 > [!tesoro] Ricompense e promesse
 > 
+````

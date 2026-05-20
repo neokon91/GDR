@@ -55,6 +55,7 @@ Se dashboard, pulsanti o tabelle non funzionano, apri [[Risorse/Installazione Pl
 - Usa `archiviata` per contenuti da conservare ma non piu attivi.
 - Usa `canonico: true` solo quando un contenuto e confermato nel mondo di gioco.
 - Quando crei luoghi, PNG, fazioni o missioni dai pulsanti guidati, compila subito i collegamenti richiesti: il vault usera quei campi per mostrare fronti, segreti, pressioni e materiale pronto nelle dashboard.
+- Nelle schede lunghe, guarda prima il riquadro in alto: tab e callout chiusi servono a tenere separati dettagli, segreti, materiali e post-sessione.
 - Usa Inbox Live per catturare eventi, conseguenze, PNG improvvisati, luoghi improvvisati e note grezze senza interrompere il gioco.
 - Mantieni `SRD` separato dal contenuto canonico: e riferimento regolamentare, non ambientazione.
 

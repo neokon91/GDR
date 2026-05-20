@@ -34,6 +34,9 @@ Il vault deve funzionare per una persona che:
 - Usare tabelle per archivi e confronto.
 - Usare liste per risorse semplici.
 - Usare callout customizzati per testo da leggere, indizi, segreti, pericoli e ricompense.
+- Usare `tabs` quando una nota lunga alterna modalita diverse di lavoro, per esempio scena, rete, segreti, materiali e post-sessione.
+- Usare callout collassati (`> [!tipo]- Titolo`) per dettagli non immediati: segreti, note GM, esiti possibili, timer secondari, lore profonda e riferimenti.
+- Usare callout annidati solo quando il dettaglio appartiene chiaramente alla sezione madre; evita annidamenti profondi oltre un livello.
 - Lascia i dettagli tecnici in `z.modelli`, `z.automazioni` e CSS.
 
 ## Cosa Deve Essere Sempre Visibile
@@ -168,7 +171,7 @@ Prima di una release o dopo modifiche a template, script e plugin, esegui:
 node z.automazioni/check_vault.js
 ```
 
-Il controllo verifica JSON di configurazione, plugin obbligatori inclusi e abilitati, wikilink rotti o ambigui, percorsi `templateFile` usati dai pulsanti Meta Bind, helper Templater con script esistente in `z.automazioni`, target di Icon Folder, riferimenti Obsidian obsoleti, sessioni multiple attive, indice GPT, frontmatter operativo, categorie/stati/tipi ragionevoli, note live senza sessione o mondo e campi minimi per categoria. SRD e note indice sono esclusi dai controlli che produrrebbero falsi positivi.
+Il controllo verifica JSON di configurazione, plugin obbligatori inclusi e abilitati, wikilink rotti o ambigui, percorsi `templateFile` usati dai pulsanti Meta Bind, helper Templater con script esistente in `z.automazioni`, target di Iconize, riferimenti Obsidian obsoleti, sessioni multiple attive, indice GPT, frontmatter operativo, categorie/stati/tipi ragionevoli, note live senza sessione o mondo e campi minimi per categoria. SRD e note indice sono esclusi dai controlli che produrrebbero falsi positivi.
 
 ## Release
 

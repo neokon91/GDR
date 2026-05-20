@@ -7,6 +7,8 @@ cssclasses:
 
 Questa pagina decide quali plugin integrare per primi nel vault. Non e una lista di installazione: e una coda di lavoro per trasformare plugin gia scelti in funzioni utili al DM.
 
+Per il recap completo dei plugin installati, con versioni, stato reale, fonti ufficiali e beneficiari, vedi [[Risorse/Recap Plugin Installati]].
+
 ## Fonti Ufficiali Consultate
 
 - [Calendarium](https://plugins.javalent.com/calendarium) e [eventi Calendarium](https://plugins.javalent.com/calendarium/events)
@@ -16,6 +18,8 @@ Questa pagina decide quali plugin integrare per primi nel vault. Non e una lista
 - [Obsidian Excalidraw Plugin](https://github.com/zsviczian/obsidian-excalidraw-plugin)
 - [Obsidian Canvas](https://obsidian.md/help/plugins/canvas)
 - [Media Extended](https://github.com/aidenlx/media-extended)
+- [Meta Bind](https://www.moritzjung.dev/obsidian-meta-bind-plugin-docs/), [JS Engine](https://www.moritzjung.dev/obsidian-js-engine-plugin-docs/) e [Metadata Menu](https://mdelobelle.github.io/metadatamenu/)
+- [Folder Notes](https://lostpaul.github.io/obsidian-folder-notes/), [Kanban](https://publish.obsidian.md/kanban/Obsidian+Kanban+Plugin), [Tabs](https://xhuajin.github.io/obsidian-tabs/) e [TTRPG Tools: Maps](https://ttrpg-tools-obsidian.org/)
 
 ## Criterio
 
@@ -37,7 +41,7 @@ Prima di lavorarci, controlla:
 | Templater | integrato | pulsanti di creazione e `z.modelli` | non aumentare i template senza nota di prova |
 | Meta Bind | integrato | dashboard e template con campi interattivi | uniformare i campi piu usati |
 | JS Engine | integrato indiretto | viste DataviewJS e Meta Bind avanzati | usarlo solo dove evita lavoro manuale |
-| Metadata Menu | parziale | gestione campi | creare set di campi per categorie principali se serve |
+| Metadata Menu | installato, poco sfruttato | gestione campi | creare FileClass per `sessione`, `missione`, `png`, `luogo`, `incontro`, `mappa` |
 | Folder Notes | integrato | note indice di cartella | mantenere indici brevi e utili |
 | Homepage | integrato | avvio su dashboard | nessun lavoro urgente |
 | Kanban | integrato | `z.bacheche` | collegare meglio post-sessione a missioni e sessioni |
@@ -45,12 +49,12 @@ Prima di lavorarci, controlla:
 | Fantasy Statblocks | integrato | creature e mostri SRD | verificare rendering visuale in Obsidian dopo import |
 | Initiative Tracker | parziale | incontri pronti | aggiungere esempi `encounter:` solo dove sono davvero utili |
 | Dice Roller | parziale | template e tabelle rapide | creare tabelle casuali usabili dal tavolo |
-| Calendarium | integrato | sessioni, missioni, dashboard, controllo vault | mantenere coerenti date leggibili e `fc-date` |
+| Calendarium | pronto, da configurare | sessioni, missioni, dashboard, controllo vault | creare almeno un calendario in Calendarium; poi mantenere coerenti date leggibili e `fc-date` |
 | Excalidraw | integrato base | `Risorse/Mappe`, Worldbuilder Dashboard, template Mondo | creare nuove mappe solo quando servono a mondo, luogo o sessione |
 | Canvas | non integrato | nessuna vista dedicata | creare una canvas per fronti/fazioni quando c'e contenuto reale |
 | Media Extended | minimo | indici audio/video | aggiungere campi `uso`, `tono`, `campagna`, `stato` |
 | Hex Cartographer | non integrato | nessuna pagina operativa | rimandare finche non esiste una procedura viaggi/regioni |
-| TTRPG Tools: Maps | non integrato | nessuna pagina operativa | rimandare finche servono mappe tattiche al tavolo |
+| TTRPG Tools: Maps | non integrato | nessuna pagina operativa | creare una nota prova `zoommap` prima di usarlo in sessione |
 | Generatore di Contenuti Fantasy | integrato base | `Inbox/Generati`, comando plugin | usare le note generate come bozze, mai come canonico automatico |
 | Iconize | minimo | orientamento visuale | secondario, non deve sostituire indici chiari |
 | Tabs | parziale | template lunghi | applicare solo dove riduce scrolling reale |
@@ -187,7 +191,7 @@ Fatto bene quando: durante preparazione o gioco il DM puo generare una bozza, sa
 Questi plugin restano secondari finche le integrazioni sopra non sono solide:
 
 - **Hex Cartographer**: utile dopo aver stabilito come il vault gestisce regioni e viaggi.
-- **Icon Folder**: migliora orientamento visivo, ma non sostituisce indici e dashboard chiare.
+- **Iconize**: migliora orientamento visivo, ma non sostituisce indici e dashboard chiare.
 
 ## Integrazione Trasversale: Tabs
 

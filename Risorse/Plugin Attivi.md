@@ -4,6 +4,8 @@ Questa pagina spiega cosa puoi sfruttare nel vault senza dover conoscere i detta
 
 Per il primo avvio usa [[Risorse/Installazione Plugin]]. Se una funzione non risponde, usa [[Risorse/Se Qualcosa Non Funziona]].
 
+Per un recap tecnico-pratico con versioni, stato reale, fonti ufficiali e spunti per DM, worldbuilder, manutentore e giocatori usa [[Risorse/Recap Plugin Installati]].
+
 ## Essenziali
 
 - **Dataview**: mostra automaticamente prossime sessioni, missioni aperte, PNG in gioco, materiale pronto e bozze da completare.
@@ -22,17 +24,17 @@ Per il primo avvio usa [[Risorse/Installazione Plugin]]. Se una funzione non ris
 - **Dice Roller**: tira dadi direttamente dal vault quando serve una prova o una tabella casuale.
 - **Initiative Tracker**: tiene l'ordine di iniziativa durante gli incontri.
 - **Media Extended**: gestisce audio e video per atmosfera, appunti multimediali e risorse da usare al tavolo.
-- **Calendarium**: tiene traccia di date del mondo, feste, scadenze narrative e passaggio del tempo.
+- **Calendarium**: tiene traccia di date del mondo, feste, scadenze narrative e passaggio del tempo. Nel vault e installato e documentato, ma va configurato almeno un calendario prima di considerarlo pienamente operativo.
 
 ## Worldbuilding
 
 - **Excalidraw**: disegna mappe, relazioni tra fazioni, schemi di dungeon, fronti e scene complesse.
 - **Hex Cartographer**: crea o consulta mappe esagonali per viaggi, regioni e terre selvagge.
 - **Generatore di Contenuti Fantasy**: genera in italiano nomi, locande, insediamenti, gruppi, bottini e dungeon; puo copiare i risultati o salvarli come note bozza in `Inbox/Generati`, gia compatibili con i campi principali dei template del vault.
-- **Icon Folder**: rende cartelle e pagine piu riconoscibili con icone.
+- **Iconize**: rende cartelle, link e pagine piu riconoscibili con icone.
 - **Tabs**: organizza viste, dashboard e template lunghi in schede, utile per tenere separate sezioni come scaletta, collegamenti, creature, resoconto e ricompense.
 - **Style Settings**: regola Minimal e lo snippet `gdr-vault` senza modificare CSS a mano.
-- **TTRPG Tools: Maps**: gestisce mappe tattiche e riferimenti visuali quando servono al tavolo.
+- **TTRPG Tools: Maps**: gestisce mappe zoomabili con marker, layer, misure e riferimenti visuali quando servono al tavolo.
 
 ## Opzionali
 

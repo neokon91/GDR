@@ -1,0 +1,173 @@
+---
+cssclasses:
+  - indice
+categoria: risorsa
+tipo: plugin
+stato: pronto
+aggiornato: 2026-05-20
+---
+
+# Recap Plugin Installati
+
+Questa pagina riassume i plugin community presenti nel vault, come sono configurati e come usarli meglio. Per il primo avvio resta valida [[Risorse/Installazione Plugin]]. Per le priorita di sviluppo usa [[Risorse/Integrazioni Plugin]].
+
+## Sintesi
+
+Plugin community abilitati: 23.
+
+| Plugin | Versione nel vault | Stato nel vault | Chi ne beneficia | Uso migliore |
+| --- | ---: | --- | --- | --- |
+| Dataview | 0.5.68 | integrato | DM, manutentore | Dashboard, indici, controlli e viste operative automatiche. |
+| Templater | 2.20.4 | integrato | DM, worldbuilder | Creazione guidata di sessioni, missioni, PNG, luoghi e note live. |
+| Meta Bind | 1.4.10 | integrato | DM, giocatori al tavolo | Pulsanti, toggle, input e campi modificabili dentro le note. |
+| JS Engine | 0.3.5 | supporto avanzato | manutentore | JavaScript in-note dove DataviewJS o Meta Bind non bastano. |
+| Metadata Menu | 0.8.12 | installato, poco sfruttato | manutentore, worldbuilder | FileClass e campi guidati per migliorare la qualita dei metadati. |
+| Folder Notes | 1.8.19 | integrato | tutti | Cartelle principali apribili come note indice. |
+| Homepage | 4.4.2 | integrato | tutti | Apertura automatica di [[Inizia Qui]]. |
+| Kanban | 2.0.51 | integrato base | DM | Bacheche Markdown per preparazione, post-sessione e creature. |
+| Callout Manager | 1.1.1 | integrato | DM, giocatori | Callout GDR coerenti per scene, indizi, segreti, pericoli e letture. |
+| Fantasy Statblocks | 4.10.3 | integrato | DM | Schede mostro e creature richiamabili da note e incontri. |
+| Initiative Tracker | 13.0.21 | parziale | DM al tavolo | Combattimenti con blocchi `encounter` e creature da Fantasy Statblocks. |
+| Dice Roller | 11.4.2 | parziale | DM, giocatori | Tiri inline, tabelle casuali e lookup table da note Markdown. |
+| Calendarium | 2.1.0 | pronto, da configurare | DM, worldbuilder | Calendario fantasy, eventi, scadenze e timeline del mondo. |
+| Excalidraw | 2.23.3 | integrato base | worldbuilder, DM | Mappe relazionali, fronti, dungeon, schemi e disegni collegati a note. |
+| Media Extended | 4.2.4 | minimo | DM al tavolo | Audio/video con timestamp e riferimenti a momenti precisi. Desktop only. |
+| Generatore di Contenuti Fantasy | 1.2.4 | integrato custom | DM, worldbuilder | Spunti rapidi in italiano salvati come bozze in `Inbox/Generati`. |
+| Iconize | 2.14.7 | integrato visuale | tutti | Icone per orientamento in file explorer, link e note. |
+| Tabs | 1.1.8 | integrato | tutti | Sezioni a schede in dashboard, template lunghi e mostri SRD. |
+| Style Settings | 1.0.9 | integrato visuale | manutentore | Regolazione dello snippet `gdr-vault` senza modificare CSS. |
+| Advanced Tables | 0.23.2 | supporto | DM, manutentore | Editing veloce di tabelle Markdown e tabelle casuali. |
+| Emoji Toolbar | 1.0.0 | opzionale | tutti | Inserimento rapido di emoji, senza dipendenze del vault. |
+| TTRPG Tools: Maps | 1.9.5 | installato, non integrato | DM al tavolo | Mappe zoomabili con marker, layer, misure e note collegate. |
+| Hex Cartographer | 1.0.2 | installato, non integrato | worldbuilder | Mappe esagonali per regioni, viaggi e hexcrawl. |
+| Iron Vault | 1.108.1 | fuori flusso D&D | giocatori Ironsworn | VTT e strumenti per Ironsworn/Starforged, da non imporre al vault D&D. |
+| BRAT | 2.0.4 | manutenzione | manutentore | Installazione/test di plugin beta da repository GitHub. |
+
+Nota: `table-editor-obsidian` e il plugin mostrato come **Advanced Tables**; `obsidian-icon-folder` e oggi **Iconize**; `zoom-map` e **TTRPG Tools: Maps**.
+
+## Fonti Ufficiali Consultate
+
+- [Dataview](https://blacksmithgu.github.io/obsidian-dataview/) e [repository](https://github.com/blacksmithgu/obsidian-dataview)
+- [Templater](https://silentvoid13.github.io/Templater/)
+- [Meta Bind](https://www.moritzjung.dev/obsidian-meta-bind-plugin-docs/)
+- [JS Engine](https://www.moritzjung.dev/obsidian-js-engine-plugin-docs/)
+- [Metadata Menu](https://mdelobelle.github.io/metadatamenu/)
+- [Folder Notes](https://lostpaul.github.io/obsidian-folder-notes/)
+- [Kanban](https://publish.obsidian.md/kanban/Obsidian+Kanban+Plugin)
+- [Callout Manager](https://github.com/eth-p/obsidian-callout-manager)
+- [Calendarium](https://plugins.javalent.com/calendarium)
+- [Initiative Tracker](https://plugins.javalent.com/it)
+- [Fantasy Statblocks](https://plugins.javalent.com/statblocks)
+- [Dice Roller](https://plugins.javalent.com/dice)
+- [Excalidraw](https://github.com/zsviczian/obsidian-excalidraw-plugin)
+- [Media Extended v4](https://mx.aidenlx.site/docs/v4/load-media)
+- [Iconize](https://florianwoelki.github.io/obsidian-iconize/)
+- [Advanced Tables](https://github.com/tgrosinger/advanced-tables-obsidian)
+- [Style Settings](https://github.com/mgmeyers/obsidian-style-settings)
+- [Tabs](https://xhuajin.github.io/obsidian-tabs/)
+- [TTRPG Tools: Maps](https://ttrpg-tools-obsidian.org/)
+- [Iron Vault](https://ironvault.quest/) e [repository](https://github.com/iron-vault-plugin/iron-vault)
+- [BRAT](https://tfthacker.com/BRAT)
+- [Fantasy Content Generator](https://github.com/Gregory-Jagermeister/Fantasy-Content-Generator)
+- [Emoji Toolbar](https://github.com/oliveryh/obsidian-emoji-toolbar)
+
+## Combinazioni Da Sfruttare
+
+### Dashboard Operative
+
+Usa insieme Dataview, Meta Bind, Templater, JS Engine e Homepage.
+
+- Dataview legge stato, categoria, collegamenti, date e liste.
+- Meta Bind offre pulsanti e input direttamente in dashboard.
+- Templater crea note gia coerenti con i campi del vault.
+- JS Engine va riservato a widget complessi o output che DataviewJS rende troppo verbosi.
+- Homepage deve restare puntata a [[Inizia Qui]], perche e la porta non tecnica.
+
+Beneficia soprattutto: DM che prepara e gioca spesso, manutentore del vault.
+
+### Combattimento Al Tavolo
+
+Usa insieme Fantasy Statblocks, Initiative Tracker, Dice Roller e Callout Manager.
+
+- La creatura deve avere `statblock: true` e `name` coerente.
+- Il blocco `statblock` richiama il nome esatto del mostro.
+- Il blocco `encounter` usa gli stessi nomi per avviare l'iniziativa.
+- Dice Roller copre tiri rapidi e tabelle casuali.
+- I callout `incontro`, `pericolo`, `timer` e `regola` separano cio che va letto, deciso o tracciato.
+
+Beneficia soprattutto: DM durante combattimenti e scene con pressione.
+
+### Preparazione Sessione
+
+Usa insieme Kanban, Templater, Dataview, Metadata Menu e Advanced Tables.
+
+- Kanban mantiene la coda di lavoro in `z.bacheche`.
+- Templater crea la sessione e i materiali.
+- Dataview mostra cosa e pronto o incompleto.
+- Metadata Menu puo diventare utile creando FileClass per `sessione`, `missione`, `png`, `luogo`, `incontro`.
+- Advanced Tables rende veloci tabelle di incontri, bottini, rumor e conseguenze.
+
+Beneficia soprattutto: DM che prepara a blocchi e vuole ridurre controllo manuale.
+
+### Worldbuilding
+
+Usa insieme Excalidraw, Canvas core, Iconize, Folder Notes, Tabs, Hex Cartographer e TTRPG Tools: Maps.
+
+- Excalidraw e adatto a relazioni vive: fazioni, fronti, dungeon, indizi e mappe ragionate.
+- Canvas core e meglio quando vuoi una mappa fatta di note, media e gruppi strutturati.
+- Iconize aiuta a orientarsi, ma non sostituisce indici e dashboard.
+- Folder Notes mantiene ogni cartella leggibile come pagina.
+- Tabs riduce lo scrolling di dashboard e template lunghi.
+- Hex Cartographer va attivato davvero solo quando il vault avra una procedura per regioni, viaggi o hexcrawl.
+- TTRPG Tools: Maps e piu adatto a mappe tattiche o regionali con marker, misure, layer e link.
+
+Beneficia soprattutto: worldbuilder e DM che gestisce luoghi, fazioni e viaggi.
+
+### Media E Atmosfera
+
+Usa insieme Media Extended, Templater, Dataview e Durante il Gioco.
+
+- Media Extended serve per aprire media locali o esterni e lavorare con timestamp.
+- Le note in [[Risorse/Audio/Audio]], [[Risorse/Video/Video]] e [[Risorse/Immagini/Immagini]] dovrebbero avere almeno `uso`, `tono`, `campagna`, `stato`.
+- Le risorse indispensabili alla sessione dovrebbero essere locali, non solo URL remoti.
+- Durante il Gioco deve mostrare solo media pronti, non archivi generici.
+
+Beneficia soprattutto: DM che usa musica, immagini, handout o video-reference.
+
+## Spunti Di Miglior Uso
+
+### Per Il DM
+
+- Usa [[Durante il Gioco]] come unica schermata al tavolo: sessione attiva, scene, incontri, tabelle e note live.
+- Prepara ogni combattimento serio con blocco `encounter`; usa `encounter:` inline solo per gruppi semplici.
+- Porta le tabelle casuali in [[Risorse/Tabelle/Tabelle]] con block id stabili, poi richiamale con Dice Roller.
+- Dopo sessione, usa [[z.bacheche/Post Sessione]] prima di aggiornare il mondo canonico.
+
+### Per Il Worldbuilder
+
+- Usa Excalidraw per fronti e relazioni, TTRPG Tools: Maps per mappe giocabili, Hex Cartographer per regioni a esagoni.
+- Ogni mappa deve rimandare a note canoniche, non diventare un archivio parallelo.
+- Usa Iconize e Folder Notes solo per orientamento; la conoscenza deve restare in note, campi e link.
+- Usa Tabs in dashboard grandi, non in note piccole.
+
+### Per Il Manutentore
+
+- Crea FileClass Metadata Menu per i tipi principali: `sessione`, `missione`, `png`, `luogo`, `incontro`, `mappa`, `media`.
+- Mantieni le query Dataview semplici e filtra sempre le note `Prova -` nelle viste operative.
+- Prima di cambiare un campo YAML, cerca il campo in dashboard, template, `z.automazioni` e controlli.
+- Conserva BRAT solo per manutenzione: non deve essere parte del flusso utente finale.
+
+### Per Giocatori O Co-DM
+
+- Possono usare [[Inizia Qui]], [[Durante il Gioco]], [[Risorse/Tabelle/Tabelle]] e le dispense senza conoscere i plugin.
+- Possono beneficiare di Dice Roller, Callout Manager, Statblocks e Media Extended solo se il DM prepara le note prima.
+- Non dovrebbero toccare `z.modelli`, `z.automazioni`, BRAT o impostazioni plugin.
+
+## Prossime Azioni Consigliate
+
+1. Configurare almeno un calendario in Calendarium, perche il plugin e installato ma `calendars` e vuoto.
+2. Creare FileClass Metadata Menu per i campi piu usati, iniziando da `sessione`, `missione`, `png`, `luogo`, `incontro`.
+3. Aggiungere una nota prova per TTRPG Tools: Maps con un blocco `zoommap` e marker locali.
+4. Decidere se Hex Cartographer serve davvero al flusso viaggi; se si, creare una procedura `regione -> esagoni -> incontri -> conseguenze`.
+5. Collegare Media Extended a [[Durante il Gioco]] mostrando solo audio/video con `stato: pronto`.
+6. Tenere Iron Vault separato: utile per Ironsworn/Starforged, non per il flusso D&D di base.

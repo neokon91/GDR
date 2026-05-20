@@ -26,12 +26,14 @@
 > Prima impressione:
 > `INPUT[text:impressione]`
 
-> [!luogo] Descrizione
->
-
-> [!lettura] Descrizione da leggere
->
+> [!luogo] Al primo sguardo
 > `=this.impressione`
+>
+> > [!scena]- Funzione narrativa
+> > `=this.funzione_narrativa`
+
+````tabs
+tab: Culto
 
 ## Architettura
 
@@ -41,12 +43,16 @@
 
 ## Gerarchia clericale
 
+tab: Reliquie
+
 ## Reliquie
 
 `INPUT[inlineList:reliquie]`
 
-> [!tesoro] Reliquie
+> [!tesoro]- Reliquie
 >
+
+tab: Rete
 
 ## PNG importanti
 
@@ -65,11 +71,13 @@ FROM "Mondi/Luoghi"
 WHERE luogo_padre = this.file.link
 ```
 
+tab: Misteri
+
 ## Storia
 
 ## Misteri
 
-> [!indizio] Misteri
+> [!indizio]- Misteri
 >
 
 ## Segreti
@@ -86,3 +94,4 @@ INPUT[list:segreti]
 ```meta-bind
 INPUT[list:scene]
 ```
+````

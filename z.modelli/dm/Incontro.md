@@ -29,19 +29,19 @@
 > Condizioni:
 > `INPUT[inlineList:condizioni]`
 
-> [!incontro] Setup
+> [!incontro] Al tavolo
 >
+> > [!timer]- Pressione
+> > - [ ]
+> > - [ ]
+> > - [ ]
+>
+> > [!regola]- Tiri rapidi
+> > - Iniziativa: `dice: 1d20`
+> > - Percezione o indagine: `dice: 1d20`
+> > - Danno improvvisato leggero: `dice: 1d6`
+> > - Danno improvvisato serio: `dice: 2d6`
 
-> [!timer] Pressione
-> - [ ]
-> - [ ]
-> - [ ]
-
-> [!regola] Tiri rapidi
-> - Iniziativa: `dice: 1d20`
-> - Percezione o indagine: `dice: 1d20`
-> - Danno improvvisato leggero: `dice: 1d6`
-> - Danno improvvisato serio: `dice: 2d6`
 
 ````tabs
 tab: Scena
@@ -53,7 +53,9 @@ tab: Scena
 
 tab: Creature
 
-## Creature
+tab: Creature
+
+## Statblock
 
 ```dataview
 TABLE type AS tipo_statblock, size AS taglia, cr
@@ -119,14 +121,14 @@ if (!creatures.length) {
 
 ## Round E Condizioni
 
-> [!timer] Round
+> [!timer]- Round
 > `INPUT[number:round]`
 
 ```meta-bind
 INPUT[list:condizioni]
 ```
 
-tab: PNG
+tab: Rete
 
 ## PNG Coinvolti
 
@@ -141,13 +143,20 @@ tab: Tattiche
 
 ## Tattiche
 
-> [!pericolo] Tattiche
+> [!pericolo]- Tattiche
 >
 
 ## Terreno
 
-> [!luogo] Terreno
+> [!luogo]- Terreno
 >
+
+## Varianti
+
+> [!segreto]- Varianti
+>
+
+tab: Mappe
 
 ## Mappe
 
@@ -180,8 +189,8 @@ WHERE contains(this.ricompense, file.link)
 SORT rarita ASC, nome ASC
 ```
 
-## Varianti
+## Esiti
 
-> [!segreto]- Varianti
+> [!missione]- Conseguenze possibili
 >
 ````

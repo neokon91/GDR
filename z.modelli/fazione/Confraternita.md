@@ -26,28 +26,40 @@
 > Scadenza nel mondo:
 > `INPUT[text:scadenza_mondo]`
 
+> [!timer] Fronte attivo
+> Prossima mossa: `=this.prossima_mossa`
+>
+> Scadenza: `=this.scadenza_mondo`
+
+````tabs
+tab: Identità
+
 ## Giuramento
 
-> [!regola] Principi
+> [!regola]- Principi
 >
 
 ## Obiettivi
 
 `INPUT[text:obiettivo]`
 
-> [!missione] Cosa persegue
+> [!missione]- Cosa persegue
 > `=this.obiettivo`
 >
+
+tab: Pressione
 
 ## Pressione
 
 `INPUT[text:prossima_mossa]`
 
-> [!timer] Se nessuno interviene
+> [!timer]- Se nessuno interviene
 > `=this.prossima_mossa`
 > - [ ]
 > - [ ]
 > - [ ]
+
+tab: Rete
 
 ## Membri
 
@@ -58,6 +70,8 @@ WHERE contains(this.personaggi, file.link) OR contains(fazioni, this.file.link)
 SORT nome ASC
 ```
 
+tab: Segreti
+
 ## Segreti
 
 ```meta-bind
@@ -66,3 +80,4 @@ INPUT[list:segreti]
 
 > [!segreto]- Verità della confraternita
 >
+````

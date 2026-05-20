@@ -17,17 +17,30 @@
 > Prima impressione:
 > `INPUT[text:impressione]`
 
-> [!luogo] Descrizione
->
-
-> [!lettura] Descrizione da leggere
->
+> [!luogo] Al primo sguardo
 > `=this.impressione`
-
-## Funzione narrativa
-
-> [!scena] Funzione narrativa
 >
+> > [!scena]- Funzione narrativa
+> > `=this.funzione_narrativa`
+>
+> > [!pericolo]- Tensione locale
+> > `=this.tensione`
+
+````tabs
+tab: Uso
+
+## Uso Al Tavolo
+
+> [!scena]- Funzione narrativa
+>
+
+## Hook narrativi
+
+```meta-bind
+INPUT[list:scene]
+```
+
+tab: Rete
 
 ## PNG collegati
 
@@ -39,8 +52,10 @@ WHERE luogo = this.file.link
 
 ## Eventi
 
-> [!scena] Eventi
+> [!scena]- Eventi
 >
+
+tab: Segreti
 
 ## Segreti
 
@@ -57,8 +72,4 @@ INPUT[list:segreti]
 INPUT[list:indizi]
 ```
 
-## Hook narrativi
-
-```meta-bind
-INPUT[list:scene]
-```
+````

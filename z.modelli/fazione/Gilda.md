@@ -23,11 +23,19 @@
 > Scadenza nel mondo:
 > `INPUT[text:scadenza_mondo]`
 
+> [!timer] Fronte attivo
+> Prossima mossa: `=this.prossima_mossa`
+>
+> Scadenza: `=this.scadenza_mondo`
+
+````tabs
+tab: Identità
+
 ## Scopo
 
 `INPUT[text:obiettivo]`
 
-> [!missione] Cosa vuole la gilda
+> [!missione]- Cosa vuole la gilda
 > `=this.obiettivo`
 >
 
@@ -35,8 +43,10 @@
 
 `INPUT[text:prossima_mossa]`
 
-> [!timer] Se nessuno interviene
+> [!timer]- Se nessuno interviene
 > `=this.prossima_mossa`
+
+tab: Servizi
 
 ## Servizi
 
@@ -46,8 +56,10 @@ INPUT[list:servizi]
 
 ## Regole E Prezzi
 
-> [!regola] Come funziona
+> [!regola]- Come funziona
 >
+
+tab: Rete
 
 ## PNG Della Gilda
 
@@ -67,6 +79,8 @@ WHERE contains(this.luoghi, file.link)
 SORT nome ASC
 ```
 
+tab: Segreti
+
 ## Segreti
 
 ```meta-bind
@@ -75,3 +89,4 @@ INPUT[list:segreti]
 
 > [!segreto]- Cosa non dicono
 >
+````

@@ -14,6 +14,8 @@ Il vault usa plugin gia configurati per far funzionare dashboard, pulsanti, tabe
 
 Prima di usare dashboard, pulsanti e template, verifica che almeno i plugin obbligatori siano abilitati.
 
+Per sapere quali plugin sono installati, che versione hanno e come sfruttarli nel flusso GDR, apri [[Risorse/Recap Plugin Installati]].
+
 ## Obbligatori
 
 | Plugin | Serve per | Se manca |
@@ -44,7 +46,7 @@ Prima di usare dashboard, pulsanti e template, verifica che almeno i plugin obbl
 | Excalidraw | Mappe, relazioni e schemi visuali | Le mappe Excalidraw non sono modificabili |
 | Media Extended | Audio e video da usare al tavolo | I media restano semplici link o file |
 | Generatore di Contenuti Fantasy | Spunti rapidi in italiano | Devi creare gli spunti a mano |
-| Icon Folder | Icone su cartelle e note | Cambia solo l'orientamento visuale |
+| Iconize | Icone su cartelle e note | Cambia solo l'orientamento visuale |
 | Tabs | Sezioni a schede nei template lunghi | Il contenuto resta leggibile in sequenza |
 | Style Settings | Regolazioni visuali di Minimal e dello snippet GDR | Il preset funziona, ma non puoi modificarlo da interfaccia |
 
