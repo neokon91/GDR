@@ -282,10 +282,10 @@
 
     const checks = [
       ["Obiettivo", hasText(session.obiettivo), fieldText(session.obiettivo) || "Scrivi cosa devono ottenere o decidere i personaggi."],
-      ["Prima scena", hasLinks(session.scene) || hasLinks(session.scenes) || hasText(session.apertura), fieldText(session.scene ?? session.scenes ?? session.apertura) || "Prepara dove si apre la sessione e cosa succede subito."],
-      ["Scelta", hasLinks(session.domande_al_tavolo) || hasText(session.scelta), fieldText(session.domande_al_tavolo ?? session.scelta) || "Formula una scelta concreta, non una lista di lore."],
+      ["Prima scena", hasText(session.apertura) || hasLinks(session.scene) || hasLinks(session.scenes), fieldText(session.apertura ?? session.scene ?? session.scenes) || "Prepara dove si apre la sessione e cosa succede subito."],
+      ["Scelta", hasText(session.scelta) || hasLinks(session.domande_al_tavolo), fieldText(session.scelta ?? session.domande_al_tavolo) || "Formula una scelta concreta, non una lista di lore."],
       ["Pressione", hasLinks(session.pressioni) || hasLinks(session.tracciati), fieldText(session.pressioni ?? session.tracciati) || "Collega un clock, una missione o una fazione che avanza se il party esita."],
-      ["Materiale", hasLinks(session.incontri) || hasLinks(session.dispense) || hasLinks(session.mappe), fieldText([...(asArray(session.incontri)), ...(asArray(session.dispense)), ...(asArray(session.mappe))]) || "Collega almeno un incontro, handout o mappa pronta."]
+      ["Materiale", hasLinks(session.materiale_pronto) || hasLinks(session.incontri) || hasLinks(session.dispense) || hasLinks(session.mappe), fieldText(session.materiale_pronto ?? [...(asArray(session.incontri)), ...(asArray(session.dispense)), ...(asArray(session.mappe))]) || "Collega almeno un incontro, handout o mappa pronta."]
     ];
 
     const ready = checks.filter(([, ok]) => ok).length;

@@ -1,6 +1,38 @@
 <% await tp.user.sessione(tp) %>
 # `=this.nome`
 
+> [!scena] Preparazione In 5 Campi
+> Compila questi campi. Quando sono pieni, la sessione e giocabile.
+>
+> | Blocco | Campo |
+> | --- | --- |
+> | Obiettivo | `INPUT[text:obiettivo]` |
+> | Prima scena | `INPUT[text:apertura]` |
+> | Scelta concreta | `INPUT[text:scelta]` |
+> | Pressione | `INPUT[inlineList:pressioni]` |
+> | Materiale pronto | `INPUT[inlineList:materiale_pronto]` |
+>
+> Stato: `INPUT[inlineSelect(option(preparazione, Preparazione), option(pronto, Pronto), option(in corso, In corso), option(giocata, Giocata), option(archiviata, Archiviata)):stato]`
+>
+> Attiva al tavolo: `INPUT[toggle:attiva]`
+>
+> `BUTTON[durante-il-gioco-durante-il-gioco]`
+
+```dataviewjs
+const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));
+const current = dv.current();
+const checks = [
+  ["Obiettivo", current.obiettivo],
+  ["Prima scena", current.apertura],
+  ["Scelta", current.scelta],
+  ["Pressione", current.pressioni],
+  ["Materiale", current.materiale_pronto?.length ? current.materiale_pronto : [...(current.incontri ?? []), ...(current.dispense ?? []), ...(current.mappe ?? [])]]
+];
+const ok = value => Array.isArray(value) ? value.length > 0 : String(value ?? "").trim().length > 0;
+const ready = checks.filter(([, value]) => ok(value)).length;
+dv.paragraph(ready === 5 ? "Pronta: imposta stato `pronto` e gioca." : `Mancano ${5 - ready} blocchi. Non aprire altro: completa i campi qui sopra.`);
+```
+
 >[!infobox|wiki]- Sessione
 > Data:
 > `INPUT[date:data]`
@@ -63,19 +95,18 @@
 > `INPUT[inlineListSuggester(optionQuery("Risorse/Video"), useLinks(partial), allowOther):video]`
 >
 > Obiettivo:
-> `INPUT[text:obiettivo]`
+> `=this.obiettivo`
 
 > [!scena] Al tavolo
 > Apertura, testo da leggere, pressione e tiri stanno qui per non disperdere la preparazione.
 >
 > > [!lettura]- Testo da leggere
-> >
-> >
+> > `=this.apertura`
 >
 > > [!timer]- Pressione visibile
 > > - Clock: `=this.tracciati`
 > > - Missioni: `=this.missioni`
-> > - Domanda: quale scelta deve pesare entro fine sessione?
+> > - Scelta: `=this.scelta`
 >
 > > [!regola]- Tiri rapidi
 > > - D20: `dice: 1d20`

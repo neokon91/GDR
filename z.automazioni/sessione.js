@@ -19,6 +19,8 @@ async function sessione(tp) {
         "Tipo di sessione"
     );
     const obiettivo = await helpers.promptOptional(tp, "Obiettivo della sessione");
+    const apertura = await helpers.promptOptional(tp, "Prima scena / apertura");
+    const scelta = await helpers.promptOptional(tp, "Scelta concreta per i giocatori");
     const campagne = creazioneCompleta ? await helpers.chooseCampaigns(tp, "Campagne collegate", context) : [];
     const luoghi = creazioneCompleta ? await helpers.chooseLocations(tp, "Luoghi in scena", context) : [];
     const personaggi = creazioneCompleta ? await helpers.choosePeople(tp, "Personaggi in scena", context) : [];
@@ -70,12 +72,15 @@ fazioni: ${helpers.inlineYamlList(fazioni)}
 oggetti: ${helpers.inlineYamlList(oggetti)}
 appunti_live: []
 obiettivo: ${helpers.yamlQuote(obiettivo)}
+apertura: ${helpers.yamlQuote(apertura)}
+scelta: ${helpers.yamlQuote(scelta)}
 scene: []
 ricompense: []
 segreti_rivelabili: []
 domande_al_tavolo: []
 decisioni_attese: []
 pressioni: []
+materiale_pronto: []
 conseguenze: []
 ---
 `;

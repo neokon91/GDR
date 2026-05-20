@@ -9,7 +9,7 @@ stato: pronto
 
 # Preparazione Sessione
 
-Questa pagina deve produrre una sessione giocabile. Non leggere tutto: completa i cinque blocchi minimi e vai al tavolo.
+Questa pagina serve solo a trovare o creare la sessione da compilare. La preparazione vera sta nella nota sessione, in alto, nei cinque campi operativi.
 
 `BUTTON[nuova-sessione-z-modelli-dm-sessione-md]`
 
@@ -23,6 +23,8 @@ gdr.renderPreparationFocus(dv);
 ```
 
 ## I Cinque Blocchi
+
+Apri la sessione indicata sopra e compila i cinque campi in cima alla nota. Quando sono tutti pieni, imposta `stato: pronto` e `attiva: true`.
 
 > [!scena] 1. Obiettivo
 > Scrivi una frase: cosa devono ottenere, scoprire o decidere i personaggi entro fine sessione.

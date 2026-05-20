@@ -15,6 +15,8 @@ Scegli una cosa sola. Il vault deve farti produrre una sessione, giocarla o aggi
 > [!scena] 1. Prepara
 > Output: una sessione con obiettivo, prima scena, scelta, pressione e materiale pronto.
 >
+> `BUTTON[nuova-sessione-z-modelli-dm-sessione-md]`
+>
 > `BUTTON[preparazione-sessione-risorse-preparazione-sessione]`
 
 > [!incontro] 2. Gioca
