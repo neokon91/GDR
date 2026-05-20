@@ -10,7 +10,7 @@ mondo_attivo: ""
 
 # Atlante Del Mondo
 
-Questa e la vista per costruire ambientazioni grandi: luoghi, popoli, lingue, regni, religioni, storia, conflitti e cosmologia.
+Questa e la vista per usare il mondo nello spazio: mappa DM, mappa giocatori, luoghi, rotte, territori e buchi cartografici.
 
 > [!timeline] Atlante operativo
 > Usa questa pagina per vedere struttura, storia e buchi dell'ambientazione senza aprire archivi separati.
@@ -25,17 +25,18 @@ Questa e la vista per costruire ambientazioni grandi: luoghi, popoli, lingue, re
 
 `BUTTON[cosmologia-z-modelli-worldbuilding-cosmologia-md]`
 
-`BUTTON[worldbuilder-worldbuilder-dashboard-2]`
-
-`BUTTON[controllo-worldbuilding-controllo-worldbuilding]`
-
-`BUTTON[worldbuilding-profondo-risorse-worldbuilding-profondo]`
-
-`BUTTON[geopolitica-geopolitical-dashboard]`
-
-`BUTTON[economia-e-rotte-economia-e-rotte]`
-
-`BUTTON[lore-hub-lore-hub]`
+> [!regia]- Strumenti mondo avanzati
+> `BUTTON[worldbuilder-worldbuilder-dashboard-2]`
+>
+> `BUTTON[controllo-worldbuilding-controllo-worldbuilding]`
+>
+> `BUTTON[worldbuilding-profondo-risorse-worldbuilding-profondo]`
+>
+> `BUTTON[geopolitica-geopolitical-dashboard]`
+>
+> `BUTTON[economia-e-rotte-economia-e-rotte]`
+>
+> `BUTTON[lore-hub-lore-hub]`
 
 ## Filtro
 
@@ -80,16 +81,44 @@ grid.innerHTML = cards.map(([label, value, hint]) => `
 ````tabs
 tab: Mappa
 
-### Atlante Operativo
+### Mappa Principale
 
 > [!luogo] Demo vendibile
 > Parti da [[Demo - Mappa Zoomabile]] per la regia e da [[Demo - Mappa Zoomabile Giocatori]] per la versione condivisibile. Mantieni una nota mappa pubblica separata da quella DM.
 
 ```dataview
-TABLE uso, pubblico, mondo, luogo, luoghi, stato, versione_giocatori
+TABLE uso, pubblico, mondo, luogo, luoghi, layer, pin, stato, versione_giocatori
 FROM "Risorse/Mappe"
 WHERE file.name != "Mappe" AND stato != "archiviata" AND !startswith(file.name, "Prova -") AND (!this.mondo_attivo OR mondo = this.mondo_attivo)
 SORT pubblico DESC, uso ASC, file.name ASC
+```
+
+### Controllo Atlante
+
+```dataviewjs
+const world = dv.current().mondo_attivo?.path ?? String(dv.current().mondo_attivo ?? "");
+const real = p => !String(p.file.name).startsWith("Prova -") && p.stato !== "archiviata";
+const key = value => value?.path ?? String(value ?? "");
+const matchesWorld = p => !world || key(p.mondo) === world || p.file.path === world;
+const rows = [];
+dv.pages('"Mondi/Luoghi"')
+  .where(p => real(p) && matchesWorld(p))
+  .where(p => !p.mappe && !p.mappa && !p.coordinates)
+  .limit(20)
+  .forEach(p => rows.push([p.file.link, "luogo senza mappa o coordinate"]));
+dv.pages('"Risorse/Mappe"')
+  .where(p => real(p) && p.file.name !== "Mappe" && matchesWorld(p))
+  .where(p => !p.luogo && (!Array.isArray(p.luoghi) || !p.luoghi.length))
+  .limit(20)
+  .forEach(p => rows.push([p.file.link, "mappa senza luoghi collegati"]));
+dv.pages('"Risorse/Mappe"')
+  .where(p => real(p) && p.file.name !== "Mappe" && matchesWorld(p))
+  .where(p => p.pubblico !== true && !p.versione_giocatori)
+  .limit(20)
+  .forEach(p => rows.push([p.file.link, "mappa DM senza versione giocatori"]));
+
+if (!rows.length) dv.paragraph("Atlante coerente: mappe e luoghi hanno collegamenti minimi.");
+else dv.table(["Nota", "Problema"], rows);
 ```
 
 ### Luoghi Con Coordinate O Layer
@@ -106,7 +135,7 @@ LIMIT 24
 
 ```dataview
 TABLE stato_rotta, partenza, arrivo, regioni, fazioni_controllanti, risorse_trasportate, pressione
-FROM "Mondi/Rotte"
+FROM "Mondi/Rotte" OR "Mondi/Luoghi" OR "Mondi/Fazioni"
 WHERE stato != "archiviata" AND !startswith(file.name, "Prova -") AND (!this.mondo_attivo OR mondo = this.mondo_attivo)
 SORT pressione DESC, nome ASC
 LIMIT 20

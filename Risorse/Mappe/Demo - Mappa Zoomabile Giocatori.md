@@ -7,12 +7,23 @@ uso: zoom
 pubblico: true
 mondo: "[[Demo - Terre della Soglia]]"
 luogo: "[[Demo - Valle di Brumafonda]]"
+luoghi:
+  - "[[Demo - Valle di Brumafonda]]"
+  - "[[Demo - Ponte delle Campane]]"
+  - "[[Demo - Santuario della Prima Pietra]]"
+layer:
+  - Pubblico
+pin:
+  - Ponte delle Campane
+  - Santuario della Prima Pietra
 stato: pronto
 ---
 
 # Demo - Mappa Zoomabile Giocatori
 
 Mappa pubblica della valle. Contiene solo riferimenti mostrabili al tavolo.
+
+Questa e la mappa player-safe demo: non contiene segreti DM, aree nascoste o prossime mosse.
 
 ```zoommap
 image: Risorse/Mappe/Asset/Demo - Valle di Brumafonda.svg

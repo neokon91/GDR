@@ -12,6 +12,8 @@ luoghi: []
 incontri: []
 missioni: []
 asset_mappa:
+layer: []
+pin: []
 versione_giocatori:
 ---
 
@@ -42,6 +44,12 @@ versione_giocatori:
 > Asset:
 > `INPUT[text:asset_mappa]`
 >
+> Layer:
+> `INPUT[inlineList:layer]`
+>
+> Pin:
+> `INPUT[inlineList:pin]`
+>
 > Versione giocatori:
 > `INPUT[suggester(optionQuery("Risorse/Mappe"), useLinks(partial), allowOther):versione_giocatori]`
 
@@ -65,6 +73,8 @@ render: dom
 
 - [ ] L'immagine non contiene segreti del GM.
 - [ ] I marker visibili sono gia rivelati o sicuri da mostrare.
+- [ ] `luoghi`, `layer` e `pin` descrivono cosa appare davvero in mappa.
+- [ ] La mappa ha una `versione_giocatori` se contiene note DM.
 - [ ] `pubblico: true` solo se la nota puo comparire in [[Vista Giocatori]].
 - [ ] La versione GM rimanda alla versione giocatori tramite `versione_giocatori`.
 

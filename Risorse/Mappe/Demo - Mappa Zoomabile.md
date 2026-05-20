@@ -7,6 +7,18 @@ uso: zoom
 pubblico: false
 mondo: "[[Demo - Terre della Soglia]]"
 luogo: "[[Demo - Valle di Brumafonda]]"
+luoghi:
+  - "[[Demo - Valle di Brumafonda]]"
+  - "[[Demo - Ponte delle Campane]]"
+  - "[[Demo - Santuario della Prima Pietra]]"
+layer:
+  - Regia DM
+  - Nebbia
+  - Vie sicure
+pin:
+  - Ponte delle Campane
+  - Santuario della Prima Pietra
+  - Brumafonda
 versione_giocatori: "[[Demo - Mappa Zoomabile Giocatori]]"
 stato: pronto
 ---
@@ -14,6 +26,8 @@ stato: pronto
 # Demo - Mappa Zoomabile
 
 Usa questa nota per provare TTRPG Tools: Maps con una mappa grande, zoomabile e pronta al tavolo. I pin e i layer si modificano dal menu della mappa; la base visuale resta un file locale nel vault.
+
+Questa e la mappa principale demo del mondo per il DM. La versione mostrabile ai giocatori e [[Demo - Mappa Zoomabile Giocatori]].
 
 ```zoommap
 image: Risorse/Mappe/Asset/Demo - Valle di Brumafonda.svg
