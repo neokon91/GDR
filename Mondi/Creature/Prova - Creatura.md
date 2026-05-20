@@ -1,48 +1,28 @@
 ---
 id: prova-creatura
-statblock: true
-name: "Prova - Creatura"
 nome: "Prova - Creatura"
 categoria: creatura
-type: bestia
-tipo: bestia
-stato: archiviata
+tipo: creatura
+stato: bozza
 mondo: "[[Prova - Mondo]]"
+luoghi: ["[[Prova - Dungeon]]", "[[Prova - Cosmologia]]"]
+origine: "eco di un testimone cancellato"
+ruolo_narrativo: "custode involontario di una versione della storia"
+statblock: true
+name: "Prova - Creatura"
+type: costrutto
 size: media
 alignment: neutrale
 ac: 13
-hp: 18
-speed: 9 m.
-cr: 1/2
-stats: [12, 14, 12, 3, 12, 6]
-saves: []
-skillsaves: []
-damage_vulnerabilities:
-damage_resistances:
-damage_immunities:
-condition_immunities:
-senses:
-languages:
-gear:
-habitat: foresta
-luoghi:
-  - "[[Prova - Regione Naturale]]"
-traits: []
-actions: []
-bonus_actions: []
-reactions: []
-legendary_actions: []
-lair_actions: []
+hp: 22
+hp_massimi: 22
+hp_attuali: 22
+hit_dice: "5d8"
+speed: "9 m."
+cr: "1"
+stats: [12, 12, 12, 8, 14, 10]
+traits: [{name: "Memoria Riflessa", desc: "Ripete una frase storica quando subisce danno."}]
+actions: [{name: "Taglio di Vetro", desc: "Attacco corpo a corpo simbolico per test."}]
+segreti: ["non e ostile se viene chiamata col nome vero"]
 ---
-
 # Prova - Creatura
-
-```statblock
-monster: Prova - Creatura
-```
-
-> [!incontro] Descrizione
-> Creatura di prova per statblock e incontri.
-
-> [!pericolo] Tattiche
-> Attacca se il nido viene minacciato.

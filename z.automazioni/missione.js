@@ -3,6 +3,7 @@ async function missione(tp) {
     const activeContext = helpers.getActiveSessionContext();
     const name = await helpers.promptRequired(tp, "Nome della missione");
     const id = helpers.slugify(name);
+    const creazioneCompleta = await helpers.askYesNo(tp, "Vuoi compilare collegamenti e dettagli ora? Scegli No per una missione rapida.");
     const selectedType = await helpers.chooseOptional(
         tp,
         [
@@ -20,20 +21,20 @@ async function missione(tp) {
     );
     const mondo = await helpers.chooseWorld(tp, "Mondo della missione");
     const context = { world: mondo };
-    const committente = await helpers.choosePerson(tp, "Committente", context);
-    const luoghi = await helpers.chooseLocations(tp, "Luoghi della missione", context);
-    const personaggi = await helpers.choosePeople(tp, "Personaggi coinvolti", context);
-    const fazioni = await helpers.chooseFactions(tp, "Fazioni coinvolte", context);
-    const tracciati = await helpers.chooseTracks(tp, "Clock o tracciati collegati", context);
-    const ricompense = await helpers.chooseObjects(tp, "Ricompense", context);
     const pressione = await helpers.promptOptional(tp, "Pressione da 0 a 10", "3") || "3";
     const prossimaMossa = await helpers.promptOptional(tp, "Prossima mossa se ignorata");
-    const scadenzaMondo = await helpers.promptOptional(tp, "Scadenza nel mondo");
     const indizio = await helpers.promptOptional(tp, "Indizio iniziale");
-    const ostacolo = await helpers.promptOptional(tp, "Ostacolo principale");
     const conseguenza = await helpers.promptOptional(tp, "Conseguenza se fallisce o viene ignorata");
+    const committente = creazioneCompleta ? await helpers.choosePerson(tp, "Committente", context) : "";
+    const luoghi = creazioneCompleta ? await helpers.chooseLocations(tp, "Luoghi della missione", context) : [];
+    const personaggi = creazioneCompleta ? await helpers.choosePeople(tp, "Personaggi coinvolti", context) : [];
+    const fazioni = creazioneCompleta ? await helpers.chooseFactions(tp, "Fazioni coinvolte", context) : [];
+    const tracciati = creazioneCompleta ? await helpers.chooseTracks(tp, "Clock o tracciati collegati", context) : [];
+    const ricompense = creazioneCompleta ? await helpers.chooseObjects(tp, "Ricompense", context) : [];
+    const scadenzaMondo = creazioneCompleta ? await helpers.promptOptional(tp, "Scadenza nel mondo") : "";
+    const ostacolo = creazioneCompleta ? await helpers.promptOptional(tp, "Ostacolo principale") : "";
     const segreto = await helpers.promptOptional(tp, "Segreto dietro la missione");
-    const domandaAperta = await helpers.promptOptional(tp, "Domanda aperta della missione");
+    const domandaAperta = creazioneCompleta ? await helpers.promptOptional(tp, "Domanda aperta della missione") : "";
 
     const sessioni = activeContext.link ? [activeContext.link] : [];
     const created = await helpers.moveNote(tp, helpers.path("missioni"), name);

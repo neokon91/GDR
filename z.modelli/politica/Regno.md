@@ -32,6 +32,44 @@
 > [!scena] Identità politica
 >
 
+## Struttura Del Potere
+
+### Mito Di Legittimità
+
+```meta-bind
+INPUT[list:mito_legittimita]
+```
+
+### Chi Comanda Davvero
+
+```meta-bind
+INPUT[list:potere_reale]
+```
+
+### Come Si Mantiene L'Ordine
+
+```meta-bind
+INPUT[list:ordine_pubblico]
+```
+
+### Come Vive La Gente Comune
+
+```meta-bind
+INPUT[list:vita_comune]
+```
+
+### Tasse, Obblighi E Protezioni
+
+```meta-bind
+INPUT[list:tasse_obblighi_protezioni]
+```
+
+### Fratture Interne
+
+```meta-bind
+INPUT[list:fratture_interne]
+```
+
 ## Territori
 
 ```dataview
@@ -89,11 +127,17 @@ INPUT[list:crisi_interne]
 ## Tensioni
 
 > [!timer] Cosa cambia se nessuno interviene
-> - [ ]
-> - [ ]
-> - [ ]
+> `=this.prossima_mossa`
+
+```meta-bind
+INPUT[list:tensioni]
+```
 
 ## Segreti
 
 > [!segreto]- Segreti del regno
 >
+
+```meta-bind
+INPUT[list:segreti]
+```

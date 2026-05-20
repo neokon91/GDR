@@ -47,10 +47,56 @@ actions:
 > [!missione] Cosa cambia se qualcuno vince
 >
 
+## Anatomia Del Conflitto
+
+### Causa Profonda
+
+```meta-bind
+INPUT[list:cause_profonde]
+```
+
+### Pretesto Pubblico
+
+```meta-bind
+INPUT[list:pretesti_pubblici]
+```
+
+### Ferite Storiche
+
+```meta-bind
+INPUT[list:ferite_storiche]
+```
+
+### Risorse Contese
+
+```meta-bind
+INPUT[list:risorse_contese]
+```
+
+### Popolazioni Coinvolte
+
+```meta-bind
+INPUT[list:popolazioni_coinvolte]
+```
+
 ## Prossima Mossa
 
 > [!timer] Se nessuno interviene
 > `=this.prossima_mossa`
+
+## Evoluzione Storica
+
+```meta-bind
+INPUT[list:fasi_del_conflitto]
+```
+
+```meta-bind
+INPUT[list:punti_di_non_ritorno]
+```
+
+```meta-bind
+INPUT[list:possibili_paci]
+```
 
 ## Conseguenze Possibili
 

@@ -3,6 +3,7 @@ async function luogo(tp, routeOptions = {}){
     const activeContext = helpers.getActiveSessionContext();
     const name = await helpers.promptRequired(tp, "Nome del luogo");
     const id = helpers.slugify(name);
+    const creazioneCompleta = await helpers.askYesNo(tp, "Vuoi compilare collegamenti e lore ora? Scegli No per un luogo rapido.");
     const route = Object.keys(routeOptions).length ? routeOptions : helpers.consumeRoute();
     const selectedType = route.subtype ? { id: route.subtype } : await helpers.chooseOptional(
         tp,
@@ -22,7 +23,7 @@ async function luogo(tp, routeOptions = {}){
         ],
         "Tipo di luogo"
     );
-    const selectedBiome = await helpers.chooseOptional(
+    const selectedBiome = creazioneCompleta ? await helpers.chooseOptional(
         tp,
         [
             { label: "Foresta", id: "foresta" },
@@ -34,21 +35,20 @@ async function luogo(tp, routeOptions = {}){
             { label: "Sottosuolo", id: "sottosuolo" }
         ],
         "Bioma"
-    );
+    ) : null;
     const mondo = await helpers.chooseWorld(tp, "Mondo del luogo");
     const context = { world: mondo };
-    const luogoPadre = await helpers.chooseLocation(tp, "Luogo o regione superiore", context);
-    const governante = await helpers.choosePerson(tp, "Governante o referente", context);
-    const fazioni = await helpers.chooseFactions(tp, "Fazioni presenti o interessate", context);
-    const personaggi = await helpers.choosePeople(tp, "PNG collegati al luogo", context);
-    const missioni = await helpers.chooseMissions(tp, "Missioni collegate al luogo", context);
     const pericolo = await helpers.promptOptional(tp, "Pericolo da 0 a 10");
     const impressione = await helpers.promptOptional(tp, "Prima impressione");
-    const addLore = await helpers.askYesNo(tp, "Vuoi aggiungere profondità lore al luogo?");
-    const funzioneNarrativa = addLore ? await helpers.promptOptional(tp, "Funzione narrativa del luogo") : "";
-    const tensione = addLore ? await helpers.promptOptional(tp, "Tensione o conflitto locale") : "";
-    const veritaNascosta = addLore ? await helpers.promptOptional(tp, "Verità nascosta o segreto") : "";
-    const domandaAperta = addLore ? await helpers.promptOptional(tp, "Domanda aperta da esplorare al tavolo") : "";
+    const tensione = await helpers.promptOptional(tp, "Tensione o conflitto locale");
+    const luogoPadre = creazioneCompleta ? await helpers.chooseLocation(tp, "Luogo o regione superiore", context) : "";
+    const governante = creazioneCompleta ? await helpers.choosePerson(tp, "Governante o referente", context) : "";
+    const fazioni = creazioneCompleta ? await helpers.chooseFactions(tp, "Fazioni presenti o interessate", context) : [];
+    const personaggi = creazioneCompleta ? await helpers.choosePeople(tp, "PNG collegati al luogo", context) : [];
+    const missioni = creazioneCompleta ? await helpers.chooseMissions(tp, "Missioni collegate al luogo", context) : [];
+    const funzioneNarrativa = creazioneCompleta ? await helpers.promptOptional(tp, "Funzione narrativa del luogo") : "";
+    const veritaNascosta = creazioneCompleta ? await helpers.promptOptional(tp, "Verità nascosta o segreto") : "";
+    const domandaAperta = creazioneCompleta ? await helpers.promptOptional(tp, "Domanda aperta da esplorare al tavolo") : "";
     const sessioni = activeContext.link ? [activeContext.link] : [];
     const created = await helpers.moveNote(tp, helpers.path("luoghi"), name);
     // Un luogo creato al volo viene collegato alla sessione per ritrovarlo nel cockpit.

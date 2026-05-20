@@ -38,6 +38,38 @@
 > [!luogo] Descrizione
 >
 
+## Identità Geografica
+
+### Paesaggio Dominante
+
+```meta-bind
+INPUT[list:paesaggi_dominanti]
+```
+
+### Clima, Stagioni E Vie Di Movimento
+
+```meta-bind
+INPUT[list:clima_stagioni_vie]
+```
+
+### Come La Regione Plasma Chi Ci Vive
+
+```meta-bind
+INPUT[list:influenza_sugli_abitanti]
+```
+
+### Memoria Del Territorio
+
+```meta-bind
+INPUT[list:memoria_del_territorio]
+```
+
+### Cambiamenti In Corso
+
+```meta-bind
+INPUT[list:cambiamenti_in_corso]
+```
+
 ## Luoghi Contenuti
 
 ```dataview
@@ -110,3 +142,7 @@ INPUT[list:conseguenze]
 
 > [!segreto]- Segreti
 >
+
+```meta-bind
+INPUT[list:segreti]
+```

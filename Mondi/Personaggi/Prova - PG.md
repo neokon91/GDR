@@ -3,26 +3,18 @@ id: prova-pg
 nome: "Prova - PG"
 categoria: personaggio
 tipo: pg
-giocatore: "Giocatore di prova"
-classe: "Guerriero"
-livello: 3
-specie: "Umano"
-background: "Eroe locale"
-stato: archiviata
+stato: in gioco
 mondo: "[[Prova - Mondo]]"
 luogo: "[[Prova - Insediamento]]"
-fazioni:
-  - "[[Prova - Fazione]]"
-relazioni:
-  - "[[Prova - PNG]]"
-hp_massimi: 28
-hp_attuali: 20
+relazioni: ["[[Prova - PNG]]"]
+missioni: ["[[Prova - Missione]]"]
+fazioni: []
+giocatore: "Tester"
+classe: "esploratore"
+livello: 3
+vuole: "trovare una rotta sicura per il proprio gruppo"
+sa: "una campana suona solo quando qualcuno mente"
+leva: "deve un favore alla Gilda"
+segreto: "porta un frammento di mappa viva"
 ---
-
 # Prova - PG
-
-> [!png] Identità
-> Personaggio giocante di prova.
-
-> [!missione] Obiettivi
-> Verificare campi PG, relazioni, missioni e sessioni.

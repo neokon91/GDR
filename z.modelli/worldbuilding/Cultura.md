@@ -34,6 +34,32 @@
 > [!scena] Cosa si nota subito
 >
 
+## Nucleo Culturale
+
+### Mito D'origine
+
+```meta-bind
+INPUT[list:mito_origine]
+```
+
+### Cosa Questa Cultura Considera Sacro
+
+```meta-bind
+INPUT[list:cose_sacre]
+```
+
+### Cosa Considera Mostruoso O Inaccettabile
+
+```meta-bind
+INPUT[list:cose_proibite]
+```
+
+### Contraddizione Interna
+
+```meta-bind
+INPUT[list:contraddizioni_interne]
+```
+
 ## Al Tavolo
 
 ### Pratiche Visibili
@@ -68,6 +94,38 @@ INPUT[list:tabu_sociali]
 
 ```meta-bind
 INPUT[list:feste]
+```
+
+## Vita Quotidiana
+
+### Famiglia, Casa E Ruoli Sociali
+
+```meta-bind
+INPUT[list:famiglia_casa_ruoli]
+```
+
+### Cibo, Vestiario E Materiali
+
+```meta-bind
+INPUT[list:cibo_vestiario_materiali]
+```
+
+### Educazione, Memoria E Trasmissione
+
+```meta-bind
+INPUT[list:educazione_memoria]
+```
+
+### Economia E Mestieri
+
+```meta-bind
+INPUT[list:economia_mestieri]
+```
+
+### Rapporto Con Stranieri E Vicini
+
+```meta-bind
+INPUT[list:rapporto_stranieri]
 ```
 
 ## Valori, Estetica E Promessa Al Tavolo
@@ -157,3 +215,7 @@ INPUT[list:conseguenze]
 
 > [!segreto]- Verità culturali
 >
+
+```meta-bind
+INPUT[list:segreti]
+```

@@ -53,6 +53,38 @@
 > [!lettura] Evento
 >
 
+## Lettura Storica
+
+### Cosa Accadde Davvero
+
+```meta-bind
+INPUT[list:fatti_accertati]
+```
+
+### Come Viene Ricordato
+
+```meta-bind
+INPUT[list:memoria_pubblica]
+```
+
+### Chi Lo Racconta Diversamente
+
+```meta-bind
+INPUT[list:versioni_alternative]
+```
+
+### Cosa Ha Cambiato Nella Vita Quotidiana
+
+```meta-bind
+INPUT[list:cambiamenti_quotidiani]
+```
+
+### Eredità Materiali
+
+```meta-bind
+INPUT[list:eredita_materiali]
+```
+
 ## Causalità
 
 > [!scena] Causa

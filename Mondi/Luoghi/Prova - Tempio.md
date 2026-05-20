@@ -2,28 +2,22 @@
 id: prova-tempio
 nome: "Prova - Tempio"
 categoria: luogo
+fileClass: luogo
+famiglia_luogo: luogo
 tipo: tempio
-sottotipo: luogo di interesse
-stato: archiviata
-canonico: false
+sottotipo: tempio
+tipologia: tempio
+stato: bozza
 mondo: "[[Prova - Mondo]]"
 luogo_padre: "[[Prova - Insediamento]]"
-divinita_principale: "[[Prova - Divinità]]"
-culto_associato: "[[Prova - Divinità]]"
-reliquie:
-  - chiave d'argento
-fazioni:
-  - "[[Prova - Confraternita]]"
-religioni:
-  - "[[Prova - Divinità]]"
-risorse: []
-problemi: []
+pericolo: 3
+pressione: 4
+impressione: "Un tempio senza porte, con tende di corda e campane mute."
+funzione_narrativa: "luogo dove religione, legge e memoria si sovrappongono"
+tensione: "la sacerdotessa rifiuta la versione ufficiale del Patto"
+fazioni: ["[[Prova - Culto]]", "[[Prova - Fazione]]"]
+religioni: ["[[Prova - Divinità]]"]
+scene: ["rito pubblico in cui manca una quarta risposta"]
+segreti: ["il tempio conserva preghiere per il quarto firmatario"]
 ---
-
 # Prova - Tempio
-
-> [!luogo] Descrizione
-> Tempio di prova collegato alla divinità e alla confraternita.
-
-> [!indizio] Misteri
-> Una porta murata pulsa di luce verde.

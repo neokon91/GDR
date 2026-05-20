@@ -21,6 +21,8 @@ Apri [[Inizia Qui]] per il primo avvio. Usa [[1. DM Dashboard]] per preparare, [
 3. Vai su [[Inizia Qui]].
 4. Se Obsidian chiede conferma per gli strumenti inclusi nel vault, abilitali solo se hai scaricato da fonte affidabile.
 5. Apri [[Risorse/Setup Guidato]].
+6. Apri [[Risorse/Prima Sessione In 15 Minuti]] se vuoi partire subito.
+7. Apri [[Risorse/Creazione Guidata Entità]] se vuoi capire cosa compilare subito e cosa rimandare.
 
 Guida dettagliata: [docs/INSTALLAZIONE.md](docs/INSTALLAZIONE.md).
 
@@ -53,6 +55,7 @@ Se dashboard, pulsanti o tabelle non funzionano, apri [[Risorse/Primo Avvio Stru
 6. Durante il gioco usa [[Durante il Gioco]] per appunti, timer, PNG attivi, incontri pronti, dispense e Inbox Live.
 7. Usa clock e progress track in [[Mondi/Tracciati/Tracciati]] quando una minaccia, un viaggio o un rituale deve avanzare in modo visibile.
 8. Dopo la sessione apri [[Risorse/Post Sessione Guidato]]: canonizza eventi, aggiorna mondo/missioni/tracciati e scegli la prossima sessione attiva.
+9. Apri [[Cosa Succede Fuori Scena]] per decidere quali PNG, fazioni, missioni e clock reagiscono prima della sessione successiva.
 
 ## Dove Trovare Le Cose
 
@@ -80,6 +83,7 @@ Se dashboard, pulsanti o tabelle non funzionano, apri [[Risorse/Primo Avvio Stru
 - [[Atlante del Mondo]] e la vista principale per worldbuilding strutturale: geografia, culture, lingue, poteri, storia, conflitti e cosmologia.
 - [[Geopolitical Dashboard]] mostra territori politici, confini, vassalli, risorse strategiche, relazioni diplomatiche e buchi geopolitici.
 - [[Motore Mondo Vivo]] e il layer sistemico sopra gli strumenti DM: mostra propagazione eventi, dinamiche di fazione, relationship graph, causalita storica e continuita da chiudere prima della prossima sessione.
+- [[Cosa Succede Fuori Scena]] e la vista pratica per il dopo sessione: mostra pressioni urgenti, clock quasi pieni, missioni in stallo, segreti da collegare e conseguenze non propagate.
 - `Mondi/Relazioni` contiene alleanze, rivalita, trattati, vassallaggi, debiti e faide quando un legame deve avere stato, intensita, conseguenze e propagazione propria.
 - [[Campagna da Ambientazione]] trasforma regioni e conflitti in campagne, archi narrativi, fronti e opportunita di avventura.
 - [[Mondi/Stato del Mondo]] e la vista Stato Campagna: filtra per mondo o campagna e mostra missioni aperte, clock attivi, PNG mossi fuori scena, pressioni e conseguenze.
@@ -94,6 +98,7 @@ Se dashboard, pulsanti o tabelle non funzionano, apri [[Risorse/Primo Avvio Stru
 - Quando crei luoghi, PNG, fazioni o missioni dai pulsanti guidati, compila subito i collegamenti richiesti: il vault usera quei campi per mostrare fronti, segreti, pressioni e materiale pronto nelle dashboard.
 - Nelle schede lunghe, guarda prima il riquadro in alto: tab e callout chiusi servono a tenere separati dettagli, segreti, materiali e post-sessione.
 - Usa Inbox Live per catturare eventi, conseguenze, PNG improvvisati, luoghi improvvisati e note grezze senza interrompere il gioco.
+- Quando crei una nuova entità, scegli la creazione rapida se ti serve giocare subito: i collegamenti e i dettagli opzionali si aggiungono dopo dalla scheda. Vedi [[Risorse/Creazione Guidata Entità]].
 - Usa `Nuovo Clock` per creare un tracciato quando una pressione deve avanzare a segmenti invece di restare una nota testuale.
 - Apri [[Risorse/Come Usare I Clock]] se vuoi tre esempi pratici: minaccia, viaggio e rituale.
 - Mantieni `SRD` separato dal contenuto canonico: e riferimento regolamentare, non ambientazione.
@@ -120,7 +125,7 @@ Se dashboard, pulsanti o tabelle non funzionano, apri [[Risorse/Primo Avvio Stru
 
 ## Demo
 
-Apri [[Demo - La Reliquia Spezzata]] per vedere una mini-campagna completa gia collegata.
+Apri [[Demo - La Reliquia Spezzata]] per vedere una mini-campagna completa gia collegata. Segui il suo Tutorial Operativo per provare il flusso: durante il gioco, post-sessione, mondo vivo e fuori scena.
 
 ## Per Chi E Pensato
 

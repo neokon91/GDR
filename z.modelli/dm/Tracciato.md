@@ -110,6 +110,17 @@ dv.el("div", `
 > [!timer] Posta
 > `=this.posta`
 
+## Essenziale Al Tavolo
+
+> [!pericolo] Quando avanza
+> `INPUT[text:innesco]`
+
+> [!scena] Cosa succede adesso
+> `INPUT[text:prossima_mossa]`
+
+> [!missione] Cosa cambia quando si riempie
+> `INPUT[text:posta]`
+
 ````tabs
 tab: Uso
 
@@ -128,6 +139,10 @@ tab: Uso
 ```meta-bind
 INPUT[list:mosse]
 ```
+
+## Creazione Rapida
+
+Compila questi tre campi prima dei collegamenti: innesco, prossima mossa e posta. Missioni, fazioni e luoghi possono essere collegati dopo.
 
 ## Segmenti
 

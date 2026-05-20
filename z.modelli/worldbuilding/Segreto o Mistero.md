@@ -59,10 +59,58 @@ rivelato: false
 > [!segreto]- Cosa è davvero successo
 >
 
+## Struttura Del Mistero
+
+### Verità Profonda
+
+```meta-bind
+INPUT[list:verita_profonda]
+```
+
+### Versione Pubblica
+
+```meta-bind
+INPUT[list:versione_pubblica]
+```
+
+### Chi Sa, Chi Mente, Chi Si Sbaglia
+
+```meta-bind
+INPUT[list:portatori_verita]
+```
+
+```meta-bind
+INPUT[list:bugiardi]
+```
+
+```meta-bind
+INPUT[list:persone_in_errore]
+```
+
+### Perché È Rimasto Nascosto
+
+```meta-bind
+INPUT[list:ragioni_del_segreto]
+```
+
 ## Indizi
 
 ```meta-bind
 INPUT[list:indizi]
+```
+
+## Livelli Di Rivelazione
+
+```meta-bind
+INPUT[list:indizi_deboli]
+```
+
+```meta-bind
+INPUT[list:indizi_forti]
+```
+
+```meta-bind
+INPUT[list:prove_decisive]
 ```
 
 ## Scelte E Rischi

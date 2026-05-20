@@ -3,6 +3,7 @@ async function tracciato(tp) {
     const activeContext = helpers.getActiveSessionContext();
     const name = await helpers.promptRequired(tp, "Nome del clock o tracciato");
     const id = helpers.slugify(name);
+    const creazioneCompleta = await helpers.askYesNo(tp, "Vuoi collegare subito missioni, fazioni, luoghi e PNG? Scegli No per un clock rapido.");
     const selectedType = await helpers.chooseOptional(
         tp,
         [
@@ -18,16 +19,16 @@ async function tracciato(tp) {
     );
     const mondo = await helpers.chooseWorld(tp, "Mondo del tracciato");
     const context = { world: mondo };
-    const campagne = await helpers.chooseCampaigns(tp, "Campagne collegate", context);
-    const missioni = await helpers.chooseMissions(tp, "Missioni collegate", context);
-    const fazioni = await helpers.chooseFactions(tp, "Fazioni collegate", context);
-    const luoghi = await helpers.chooseLocations(tp, "Luoghi collegati", context);
-    const personaggi = await helpers.choosePeople(tp, "PNG o PG collegati", context);
     const progressMax = await helpers.promptOptional(tp, "Segmenti totali", "6") || "6";
     const progressValue = await helpers.promptOptional(tp, "Segmenti gia segnati", "0") || "0";
     const posta = await helpers.promptOptional(tp, "Cosa succede quando si riempie");
     const prossimaMossa = await helpers.promptOptional(tp, "Prossima mossa");
     const innesco = await helpers.promptOptional(tp, "Quando avanza");
+    const campagne = creazioneCompleta ? await helpers.chooseCampaigns(tp, "Campagne collegate", context) : [];
+    const missioni = creazioneCompleta ? await helpers.chooseMissions(tp, "Missioni collegate", context) : [];
+    const fazioni = creazioneCompleta ? await helpers.chooseFactions(tp, "Fazioni collegate", context) : [];
+    const luoghi = creazioneCompleta ? await helpers.chooseLocations(tp, "Luoghi collegati", context) : [];
+    const personaggi = creazioneCompleta ? await helpers.choosePeople(tp, "PNG o PG collegati", context) : [];
 
     const sessioni = activeContext.link ? [activeContext.link] : [];
     const created = await helpers.moveNote(tp, helpers.path("tracciati"), name);

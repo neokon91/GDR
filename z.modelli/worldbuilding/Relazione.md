@@ -30,6 +30,38 @@
 >
 > Prossimo deterioramento: `=this.prossima_mossa`
 
+## Lettura Worldbuilding
+
+### Origine Storica
+
+```meta-bind
+INPUT[list:origine_storica]
+```
+
+### Come La Racconta Ogni Parte
+
+```meta-bind
+INPUT[list:versioni_contrapposte]
+```
+
+### Simboli, Riti O Trattati
+
+```meta-bind
+INPUT[list:simboli_riti_trattati]
+```
+
+### Dipendenze Materiali
+
+```meta-bind
+INPUT[list:dipendenze_materiali]
+```
+
+### Ferite Aperte
+
+```meta-bind
+INPUT[list:ferite_aperte]
+```
+
 ````tabs
 tab: Nodi
 

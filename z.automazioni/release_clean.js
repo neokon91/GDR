@@ -29,6 +29,8 @@ const INCLUDED_ROOT_FILES = new Set([
     "Bibbia del Mondo.md",
     "Campagna da Ambientazione.md",
     "Controllo Canone.md",
+    "Controllo Worldbuilding.md",
+    "Cosa Succede Fuori Scena.md",
     "Durante il Gioco.md",
     "Geopolitical Dashboard.md",
     "Inizia Qui.md",

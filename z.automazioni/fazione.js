@@ -2,6 +2,7 @@ async function fazione(tp, routeOptions = {}) {
     const helpers = tp.user.helpers;
     const name = await helpers.promptRequired(tp, "Nome della fazione");
     const id = helpers.slugify(name);
+    const creazioneCompleta = await helpers.askYesNo(tp, "Vuoi compilare rete, luoghi e relazioni ora? Scegli No per una fazione rapida.");
     const route = Object.keys(routeOptions).length ? routeOptions : helpers.consumeRoute();
     const selectedType = route.tipoFazione ? { id: route.tipoFazione } : await helpers.chooseOptional(
         tp,
@@ -20,19 +21,19 @@ async function fazione(tp, routeOptions = {}) {
     );
     const mondo = await helpers.chooseWorld(tp, "Mondo della fazione");
     const context = { world: mondo };
-    const leader = await helpers.choosePeople(tp, "Leader della fazione", context);
-    const luoghi = await helpers.chooseLocations(tp, "Luoghi controllati o importanti", context);
-    const personaggi = await helpers.choosePeople(tp, "Membri, alleati o nemici come PNG", context);
-    const missioni = await helpers.chooseMissions(tp, "Missioni collegate alla fazione", context);
-    const alleati = await helpers.chooseFactions(tp, "Fazioni alleate", context);
-    const rivali = await helpers.chooseFactions(tp, "Fazioni rivali o nemiche", context);
     const obiettivo = await helpers.promptOptional(tp, "Obiettivo pubblico");
     const obiettivoNascosto = await helpers.promptOptional(tp, "Obiettivo nascosto");
     const pressione = await helpers.promptOptional(tp, "Pressione da 0 a 10");
     const prossimaMossa = await helpers.promptOptional(tp, "Prossima mossa se nessuno interviene");
-    const scadenzaMondo = await helpers.promptOptional(tp, "Scadenza nel mondo");
     const segreto = await helpers.promptOptional(tp, "Segreto o verità scomoda");
-    const domandaAperta = await helpers.promptOptional(tp, "Domanda aperta sulla fazione");
+    const leader = creazioneCompleta ? await helpers.choosePeople(tp, "Leader della fazione", context) : [];
+    const luoghi = creazioneCompleta ? await helpers.chooseLocations(tp, "Luoghi controllati o importanti", context) : [];
+    const personaggi = creazioneCompleta ? await helpers.choosePeople(tp, "Membri, alleati o nemici come PNG", context) : [];
+    const missioni = creazioneCompleta ? await helpers.chooseMissions(tp, "Missioni collegate alla fazione", context) : [];
+    const alleati = creazioneCompleta ? await helpers.chooseFactions(tp, "Fazioni alleate", context) : [];
+    const rivali = creazioneCompleta ? await helpers.chooseFactions(tp, "Fazioni rivali o nemiche", context) : [];
+    const scadenzaMondo = creazioneCompleta ? await helpers.promptOptional(tp, "Scadenza nel mondo") : "";
+    const domandaAperta = creazioneCompleta ? await helpers.promptOptional(tp, "Domanda aperta sulla fazione") : "";
 
     await helpers.moveNote(tp, helpers.path("fazioni"), name);
 

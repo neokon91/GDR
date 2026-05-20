@@ -32,6 +32,38 @@
 > [!luogo] Carattere della contea
 >
 
+## Tessuto Locale
+
+### Chi Detiene Autorità
+
+```meta-bind
+INPUT[list:autorita_locale]
+```
+
+### Famiglie, Casate O Gruppi Dominanti
+
+```meta-bind
+INPUT[list:gruppi_dominanti]
+```
+
+### Economia Quotidiana
+
+```meta-bind
+INPUT[list:economia_quotidiana]
+```
+
+### Vecchi Debiti E Faide
+
+```meta-bind
+INPUT[list:debiti_faide]
+```
+
+### Cosa La Popolazione Teme
+
+```meta-bind
+INPUT[list:paure_popolari]
+```
+
 ## Insediamenti
 
 ```dataview
@@ -76,3 +108,7 @@ INPUT[list:risorse_strategiche]
 
 > [!segreto]- Segreti della contea
 >
+
+```meta-bind
+INPUT[list:segreti]
+```

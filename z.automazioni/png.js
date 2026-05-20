@@ -3,14 +3,9 @@ async function png(tp) {
     const activeContext = helpers.getActiveSessionContext();
     const name = await helpers.promptRequired(tp, "Nome del PNG");
     const id = helpers.slugify(name);
+    const creazioneCompleta = await helpers.askYesNo(tp, "Vuoi compilare collegamenti, statblock e dettagli ora? Scegli No per una scheda rapida.");
     const role = await helpers.promptOptional(tp, "Ruolo o professione");
     const atteggiamento = await helpers.promptOptional(tp, "Atteggiamento iniziale");
-    const ac = await helpers.promptOptional(tp, "Classe Armatura", "10") || "10";
-    const hp = await helpers.promptOptional(tp, "Punti Ferita", "4") || "4";
-    const hitDice = await helpers.promptOptional(tp, "Dadi Vita", "1d8") || "1d8";
-    const speed = await helpers.promptOptional(tp, "Velocità", "9 m.") || "9 m.";
-    const cr = await helpers.promptOptional(tp, "Grado di Sfida", "0") || "0";
-    const stats = await helpers.promptOptional(tp, "Caratteristiche D&D: FOR DES COS INT SAG CAR", "10 10 10 10 10 10");
     const stato = await helpers.chooseOptional(
         tp,
         [
@@ -26,15 +21,21 @@ async function png(tp) {
     );
     const mondo = await helpers.chooseWorld(tp, "Mondo del PNG");
     const context = { world: mondo };
-    const luogo = await helpers.chooseLocation(tp, "Luogo del PNG", context);
-    const fazioni = await helpers.chooseFactions(tp, "Fazioni del PNG", context);
-    const relazioni = await helpers.choosePeople(tp, "Relazioni del PNG", context);
-    const missioni = await helpers.chooseMissions(tp, "Missioni collegate al PNG", context);
     const vuole = await helpers.promptOptional(tp, "Cosa vuole");
     const sa = await helpers.promptOptional(tp, "Cosa sa di utile");
     const segreto = await helpers.promptOptional(tp, "Segreto o contraddizione");
     const leva = await helpers.promptOptional(tp, "Leva per coinvolgerlo al tavolo");
-    const domandaAperta = await helpers.promptOptional(tp, "Domanda aperta sul PNG");
+    const luogo = creazioneCompleta ? await helpers.chooseLocation(tp, "Luogo del PNG", context) : "";
+    const fazioni = creazioneCompleta ? await helpers.chooseFactions(tp, "Fazioni del PNG", context) : [];
+    const relazioni = creazioneCompleta ? await helpers.choosePeople(tp, "Relazioni del PNG", context) : [];
+    const missioni = creazioneCompleta ? await helpers.chooseMissions(tp, "Missioni collegate al PNG", context) : [];
+    const domandaAperta = creazioneCompleta ? await helpers.promptOptional(tp, "Domanda aperta sul PNG") : "";
+    const ac = creazioneCompleta ? await helpers.promptOptional(tp, "Classe Armatura", "10") || "10" : "10";
+    const hp = creazioneCompleta ? await helpers.promptOptional(tp, "Punti Ferita", "4") || "4" : "4";
+    const hitDice = creazioneCompleta ? await helpers.promptOptional(tp, "Dadi Vita", "1d8") || "1d8" : "1d8";
+    const speed = creazioneCompleta ? await helpers.promptOptional(tp, "Velocità", "9 m.") || "9 m." : "9 m.";
+    const cr = creazioneCompleta ? await helpers.promptOptional(tp, "Grado di Sfida", "0") || "0" : "0";
+    const stats = creazioneCompleta ? await helpers.promptOptional(tp, "Caratteristiche D&D: FOR DES COS INT SAG CAR", "10 10 10 10 10 10") : "10 10 10 10 10 10";
 
     const sessioni = activeContext.link ? [activeContext.link] : [];
     const created = await helpers.moveNote(tp, helpers.path("personaggi"), name);

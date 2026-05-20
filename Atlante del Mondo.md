@@ -74,6 +74,22 @@ actions:
 ```
 
 ```meta-bind-button
+label: Controllo Worldbuilding
+style: primary
+actions:
+  - type: open
+    link: "[[Controllo Worldbuilding]]"
+```
+
+```meta-bind-button
+label: Worldbuilding Profondo
+style: default
+actions:
+  - type: open
+    link: "[[Risorse/Worldbuilding Profondo]]"
+```
+
+```meta-bind-button
 label: Geopolitica
 style: default
 actions:
@@ -120,6 +136,38 @@ grid.innerHTML = cards.map(([label, value, hint]) => `
 ## Costruzione
 
 ````tabs
+tab: Profondità
+
+### Culture Da Approfondire
+
+```dataview
+TABLE mito_origine, cose_sacre, cose_proibite, famiglia_casa_ruoli, economia_mestieri
+FROM "Mondi/Culture"
+WHERE stato != "archiviata" AND !startswith(file.name, "Prova -") AND (!this.mondo_attivo OR mondo = this.mondo_attivo)
+SORT file.mtime DESC
+LIMIT 16
+```
+
+### Eventi Che Devono Pesare Sul Mondo
+
+```dataview
+TABLE data_mondo, memoria_pubblica, cambiamenti_quotidiani, conseguenze, propaga_a
+FROM "Mondi/Storia" OR "Mondi/Timeline"
+WHERE stato != "archiviata" AND !startswith(file.name, "Prova -") AND (!this.mondo_attivo OR mondo = this.mondo_attivo)
+SORT data_mondo ASC, file.name ASC
+LIMIT 16
+```
+
+### Conflitti E Relazioni Con Radici
+
+```dataview
+TABLE cause_profonde, ferite_storiche, risorse_contese, origine_storica, versioni_contrapposte, ferite_aperte
+FROM "Mondi/Conflitti" OR "Mondi/Relazioni"
+WHERE stato != "archiviata" AND !startswith(file.name, "Prova -") AND (!this.mondo_attivo OR mondo = this.mondo_attivo)
+SORT pressione DESC, intensita DESC, file.name ASC
+LIMIT 16
+```
+
 tab: Geografia
 
 ```dataview

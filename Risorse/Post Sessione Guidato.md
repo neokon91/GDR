@@ -34,6 +34,14 @@ actions:
     link: "[[Motore Mondo Vivo]]"
 ```
 
+```meta-bind-button
+label: Cosa Succede Fuori Scena
+style: primary
+actions:
+  - type: open
+    link: "[[Cosa Succede Fuori Scena]]"
+```
+
 ## 1. Cosa E Successo
 
 Scrivi prima in modo grezzo. Non serve sistemare tutto subito.
@@ -143,7 +151,27 @@ SORT file.mtime DESC
 LIMIT 12
 ```
 
-## 7. Sessioni Attive
+## 7. Cosa Succede Fuori Scena
+
+Questa sezione trasforma la chiusura sessione in prossime mosse. Ogni riga dovrebbe uscire da qui con una decisione: aggiornare una nota, creare un clock, portare un segreto al tavolo o archiviare.
+
+```dataview
+TABLE categoria, tipo, stato, pressione, progress_value, progress_max, innesco, prossima_mossa, conseguenze
+FROM "Mondi/Fazioni" OR "Mondi/Religioni" OR "Mondi/Personaggi" OR "Mondi/Tracciati" OR "Mondi/Missioni" OR "Mondi/Conflitti"
+WHERE stato != "archiviata" AND stato != "ignorata" AND !startswith(file.name, "Prova -") AND (pressione >= 5 OR progress_value >= 3 OR prossima_mossa OR innesco)
+SORT pressione DESC, progress_value DESC, file.mtime DESC
+LIMIT 16
+```
+
+```dataview
+TABLE categoria, tipo, stato, entita_impattate, propaga_a, conseguenze, prossima_mossa
+FROM "Mondi" OR "Inbox"
+WHERE stato != "archiviata" AND stato != "ignorata" AND !startswith(file.name, "Prova -") AND (conseguenze OR entita_impattate OR propaga_a) AND (!entita_impattate OR !propaga_a OR !prossima_mossa)
+SORT file.mtime DESC
+LIMIT 16
+```
+
+## 8. Sessioni Attive
 
 ```dataview
 TABLE data, data_mondo, stato, campagne
@@ -159,7 +187,7 @@ Quando hai finito:
 - scegli o crea la prossima sessione;
 - metti `attiva: true` solo sulla prossima sessione.
 
-## 8. Cosa Preparare Dopo
+## 9. Cosa Preparare Dopo
 
 ```dataview
 TABLE stato, pressione, scadenza_mondo, prossima_mossa
@@ -169,7 +197,7 @@ SORT pressione DESC, scadenza_mondo ASC
 LIMIT 8
 ```
 
-## 9. Chiusura Rapida
+## 10. Chiusura Rapida
 
 - [ ] Appunti live smistati o lasciati in [[Inbox/Inbox]] con un nome chiaro.
 - [ ] Conseguenze importanti aggiunte a mondo, PNG, luoghi, fazioni, missioni o tracciati.

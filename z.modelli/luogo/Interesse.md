@@ -29,6 +29,32 @@
 ````tabs
 tab: Uso
 
+## Identità Del Punto D'Interesse
+
+### Perché Esiste
+
+```meta-bind
+INPUT[list:origine_funzione]
+```
+
+### Cosa Lo Rende Memorabile
+
+```meta-bind
+INPUT[list:dettagli_memorabili]
+```
+
+### Tracce Del Passato
+
+```meta-bind
+INPUT[list:tracce_passato]
+```
+
+### Cosa Sta Cambiando
+
+```meta-bind
+INPUT[list:cambiamenti]
+```
+
 ## Uso Al Tavolo
 
 > [!scena]- Funzione narrativa

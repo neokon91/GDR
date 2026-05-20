@@ -1,24 +1,20 @@
 ---
 id: prova-avventura
 nome: "Prova - Avventura"
-categoria: avventura
+categoria: missione
 tipo: avventura
-stato: archiviata
+stato: preparazione
 mondo: "[[Prova - Mondo]]"
-campagne:
-  - "[[Prova - Campagna]]"
-luoghi:
-  - "[[Prova - Insediamento]]"
-  - "[[Prova - Dungeon]]"
-missioni:
-  - "[[Prova - Missione]]"
-incontri:
-  - "[[Prova - Incontro]]"
-ricompense:
-  - "[[Prova - Oggetto Magico]]"
+campagne: ["[[Prova - Campagna]]"]
+missioni: ["[[Prova - Missione]]"]
+luoghi: ["[[Prova - Regione]]", "[[Prova - Dungeon]]"]
+personaggi: ["[[Prova - PNG]]"]
+fazioni: ["[[Prova - Fazione]]", "[[Prova - Gilda]]"]
+tracciati: ["[[Prova - Tracciato]]"]
+pressione: 5
+prossima_mossa: "la prova viene spostata nel dungeon"
+scene: ["arrivo al villaggio", "mercato sotto accusa", "rovina sommersa", "scelta sul Patto"]
+poste: ["verita storica", "sicurezza della regione"]
+conseguenze: ["nuova fase del conflitto"]
 ---
-
 # Prova - Avventura
-
-> [!scena] Premessa
-> Avventura di prova che collega missione, incontri e ricompense.

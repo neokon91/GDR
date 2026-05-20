@@ -3,16 +3,21 @@ async function evento_storico(tp) {
     const activeContext = helpers.getActiveSessionContext();
     const name = await helpers.promptRequired(tp, "Titolo evento storico", "Evento storico");
     const id = helpers.slugify(name);
+    const creazioneCompleta = await helpers.askYesNo(tp, "Vuoi compilare memoria, versioni e conseguenze storiche ora? Scegli No per un evento rapido.");
     const mondo = await helpers.chooseWorld(tp, "Mondo dell'evento");
     const context = { world: mondo };
-    const luoghi = await helpers.chooseLocations(tp, "Luoghi coinvolti", context);
-    const personaggi = await helpers.choosePeople(tp, "Personaggi coinvolti", context);
-    const fazioni = await helpers.chooseFactions(tp, "Fazioni coinvolte", context);
+    const luoghi = creazioneCompleta ? await helpers.chooseLocations(tp, "Luoghi coinvolti", context) : [];
+    const personaggi = creazioneCompleta ? await helpers.choosePeople(tp, "Personaggi coinvolti", context) : [];
+    const fazioni = creazioneCompleta ? await helpers.chooseFactions(tp, "Fazioni coinvolte", context) : [];
     const sessioni = helpers.appendUniqueLink(
-        await helpers.chooseSessions(tp, "Sessioni collegate", context),
+        creazioneCompleta ? await helpers.chooseSessions(tp, "Sessioni collegate", context) : [],
         activeContext.link
     );
     const dataMondo = await helpers.promptOptional(tp, "Data nel mondo");
+    const causa = await helpers.promptOptional(tp, "Causa principale");
+    const memoria = creazioneCompleta ? await helpers.promptOptional(tp, "Come viene ricordato") : "";
+    const cambiamento = await helpers.promptOptional(tp, "Cosa cambia nella vita quotidiana");
+    const versione = creazioneCompleta ? await helpers.promptOptional(tp, "Versione alternativa o contestata") : "";
 
     const created = await helpers.moveNote(tp, "Mondi/Timeline", name);
     // Un evento storico creato dal gioco diventa conseguenza della sessione attiva.
@@ -45,13 +50,18 @@ fazioni: ${helpers.inlineYamlList(fazioni)}
 missioni: []
 tracciati: []
 sessioni: ${helpers.inlineYamlList(sessioni)}
-causa:
+causa: ${helpers.yamlQuote(causa)}
 cause: []
 effetti: []
 entita_impattate: []
 propaga_a: []
 stato_mondo: []
-conseguenze: []
+fatti_accertati: []
+memoria_pubblica: ${helpers.inlineYamlTextList([memoria])}
+versioni_alternative: ${helpers.inlineYamlTextList([versione])}
+cambiamenti_quotidiani: ${helpers.inlineYamlTextList([cambiamento])}
+eredita_materiali: []
+conseguenze: ${helpers.inlineYamlTextList([cambiamento])}
 prossima_mossa:
 giocabile: false
 scelte: []

@@ -44,6 +44,32 @@
 >
 > `=this.premessa`
 
+## Fondamenta Del Mondo
+
+### Principi Di Realtà
+
+```meta-bind
+INPUT[list:principi_realta]
+```
+
+### Cosa Rende Questo Mondo Diverso
+
+```meta-bind
+INPUT[list:differenze_distintive]
+```
+
+### Contraddizioni Centrali
+
+```meta-bind
+INPUT[list:contraddizioni_centrali]
+```
+
+### Cosa La Gente Crede Vero
+
+```meta-bind
+INPUT[list:credenze_comuni]
+```
+
 ## Verità Canoniche
 
 > [!indizio] Cosa è vero in questo mondo
@@ -118,6 +144,46 @@ INPUT[list:tensioni]
 ```
 
 ````tabs
+tab: Fondamenta
+
+## Geografia Che Plasma La Storia
+
+```meta-bind
+INPUT[list:geografia_fondativa]
+```
+
+## Economia E Risorse
+
+```meta-bind
+INPUT[list:economia]
+```
+
+```meta-bind
+INPUT[list:risorse_contese]
+```
+
+## Tecnologia, Magia E Limiti
+
+```meta-bind
+INPUT[list:regole_magia]
+```
+
+```meta-bind
+INPUT[list:limiti_tecnologici]
+```
+
+## Vita Quotidiana
+
+```meta-bind
+INPUT[list:vita_quotidiana]
+```
+
+## Domande Da Tenere Aperte
+
+```meta-bind
+INPUT[list:domande_di_mondo]
+```
+
 tab: Luoghi
 
 ## Continenti e Regioni

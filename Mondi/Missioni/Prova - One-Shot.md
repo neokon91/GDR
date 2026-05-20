@@ -1,24 +1,17 @@
 ---
 id: prova-one-shot
 nome: "Prova - One-Shot"
-categoria: avventura
+categoria: missione
 tipo: one-shot
-stato: archiviata
+stato: pronto
 mondo: "[[Prova - Mondo]]"
-livello: 3
-durata: "3 ore"
-luoghi:
-  - "[[Prova - Isola]]"
-incontri:
-  - "[[Prova - Pericolo Ambientale]]"
-personaggi:
-  - "[[Prova - PNG]]"
+luoghi: ["[[Prova - Insediamento]]", "[[Prova - Interesse]]"]
+personaggi: ["[[Prova - PNG]]"]
+fazioni: ["[[Prova - Gilda]]"]
+pressione: 4
+prossima_mossa: "la soglia si apre durante il mercato"
+scene: ["mercato", "campana muta", "arco di sale", "negoziazione finale"]
+segreti: ["il pagamento richiesto e un ricordo"]
+conseguenze: ["un PNG cambia alleanza"]
 ---
-
 # Prova - One-Shot
-
-> [!scena] Pitch
-> Una prova breve per controllare struttura e ritmo.
-
-> [!lettura] Apertura
-> La nebbia si apre e l'isola appare davanti alla prua.

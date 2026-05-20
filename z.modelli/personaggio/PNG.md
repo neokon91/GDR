@@ -43,6 +43,33 @@ Mondo:
 Stato:
 `INPUT[inlineSelect(option(bozza, Bozza), option(pronto, Pronto), option(in gioco, In gioco), option(ostile, Ostile), option(scomparso, Scomparso), option(morto, Morto), option(archiviata, Archiviata)):stato]`
 
+Pressione:
+`INPUT[slider(minValue(0), maxValue(10), stepSize(1), addLabels):pressione]`
+
+Innesco:
+`INPUT[text:innesco]`
+
+Prossima mossa:
+`INPUT[text:prossima_mossa]`
+
+## Essenziale Al Tavolo
+
+> [!scena] Prima scena utile
+> Vuole: `INPUT[text:vuole]`
+>
+> Sa: `INPUT[text:sa]`
+>
+> Leva: `INPUT[text:leva]`
+>
+> Segreto: `INPUT[text:segreto]`
+
+> [!timer] Se ignorato
+> Pressione: `=this.pressione`
+>
+> Innesco: `=this.innesco`
+>
+> Prossima mossa: `=this.prossima_mossa`
+
 ## Statblock D&D
 
 ```dataviewjs
@@ -52,6 +79,18 @@ dv.paragraph("```statblock\nmonster: " + name + "\n```");
 
 ````tabs
 tab: Identità
+
+## Creazione Rapida
+
+Compila questi campi prima di aggiungere statblock, relazioni o dettagli lunghi.
+
+```meta-bind
+INPUT[list:scene]
+```
+
+```meta-bind
+INPUT[list:voci]
+```
 
 ## Personalità
 
@@ -124,9 +163,11 @@ tab: Segreti
 ## Pressione
 
 > [!timer]- Se ignorato
-> - [ ]
-> - [ ]
-> - [ ]
+> Innesco: `=this.innesco`
+>
+> Prossima mossa: `=this.prossima_mossa`
+>
+> Pressione: `=this.pressione`
 
 ## Conseguenze
 
@@ -134,10 +175,28 @@ tab: Segreti
 INPUT[list:conseguenze]
 ```
 
+## Entità Impattate
+
+`INPUT[inlineListSuggester(optionQuery("Mondi"), useLinks(partial), allowOther):entita_impattate]`
+
+## Propaga A
+
+`INPUT[inlineListSuggester(optionQuery("Mondi"), useLinks(partial), allowOther):propaga_a]`
+
 ## Uso Al Tavolo
 
 > [!scena]- Uso al tavolo
 >
+
+## Arricchisci Dopo
+
+```meta-bind
+INPUT[list:mosse_visibili]
+```
+
+```meta-bind
+INPUT[list:domande_aperte]
+```
 
 tab: Sessioni
 

@@ -3,6 +3,7 @@ async function sessione(tp) {
     const titolo = await helpers.promptRequired(tp, "Titolo della sessione", "Sessione");
     const data = await helpers.promptOptional(tp, "Data", tp.date.now("YYYY-MM-DD")) || tp.date.now("YYYY-MM-DD");
     const id = helpers.slugify(`${data}-${titolo}`);
+    const creazioneCompleta = await helpers.askYesNo(tp, "Vuoi collegare subito cast, luoghi, materiali e media? Scegli No per una sessione rapida.");
     const mondo = await helpers.chooseWorld(tp, "Mondo della sessione");
     const context = { world: mondo };
     const selectedType = await helpers.chooseOptional(
@@ -17,21 +18,21 @@ async function sessione(tp) {
         ],
         "Tipo di sessione"
     );
-    const campagne = await helpers.chooseCampaigns(tp, "Campagne collegate", context);
-    const luoghi = await helpers.chooseLocations(tp, "Luoghi in scena", context);
-    const personaggi = await helpers.choosePeople(tp, "Personaggi in scena", context);
-    const missioni = await helpers.chooseMissions(tp, "Missioni vive", context);
-    const tracciati = await helpers.chooseTracks(tp, "Clock e tracciati attivi", context);
-    const creature = await helpers.chooseCreatures(tp, "Creature in scena", context);
-    const incontri = await helpers.chooseEncounters(tp, "Incontri previsti", context);
-    const dispense = await helpers.chooseHandouts(tp, "Dispense previste", context);
-    const mappe = await helpers.chooseMaps(tp, "Mappe previste", context);
-    const audio = await helpers.chooseAudio(tp, "Audio previsti", context);
-    const immagini = await helpers.chooseImages(tp, "Immagini previste", context);
-    const video = await helpers.chooseVideos(tp, "Video previsti", context);
-    const fazioni = await helpers.chooseFactions(tp, "Fazioni in scena", context);
-    const oggetti = await helpers.chooseObjects(tp, "Oggetti in scena", context);
     const obiettivo = await helpers.promptOptional(tp, "Obiettivo della sessione");
+    const campagne = creazioneCompleta ? await helpers.chooseCampaigns(tp, "Campagne collegate", context) : [];
+    const luoghi = creazioneCompleta ? await helpers.chooseLocations(tp, "Luoghi in scena", context) : [];
+    const personaggi = creazioneCompleta ? await helpers.choosePeople(tp, "Personaggi in scena", context) : [];
+    const missioni = creazioneCompleta ? await helpers.chooseMissions(tp, "Missioni vive", context) : [];
+    const tracciati = creazioneCompleta ? await helpers.chooseTracks(tp, "Clock e tracciati attivi", context) : [];
+    const creature = creazioneCompleta ? await helpers.chooseCreatures(tp, "Creature in scena", context) : [];
+    const incontri = creazioneCompleta ? await helpers.chooseEncounters(tp, "Incontri previsti", context) : [];
+    const dispense = creazioneCompleta ? await helpers.chooseHandouts(tp, "Dispense previste", context) : [];
+    const mappe = creazioneCompleta ? await helpers.chooseMaps(tp, "Mappe previste", context) : [];
+    const audio = creazioneCompleta ? await helpers.chooseAudio(tp, "Audio previsti", context) : [];
+    const immagini = creazioneCompleta ? await helpers.chooseImages(tp, "Immagini previste", context) : [];
+    const video = creazioneCompleta ? await helpers.chooseVideos(tp, "Video previsti", context) : [];
+    const fazioni = creazioneCompleta ? await helpers.chooseFactions(tp, "Fazioni in scena", context) : [];
+    const oggetti = creazioneCompleta ? await helpers.chooseObjects(tp, "Oggetti in scena", context) : [];
 
     await helpers.moveNote(tp, helpers.path("sessioni"), `${data} - ${titolo}`);
 

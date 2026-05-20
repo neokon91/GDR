@@ -96,6 +96,26 @@ INPUT[list:scene]
 > [!missione] Obiettivo
 > `=this.obiettivo`
 
+## Essenziale Al Tavolo
+
+### Apertura
+
+```meta-bind
+INPUT[list:scene]
+```
+
+### Pressione Da Mostrare
+
+```meta-bind
+INPUT[list:pressioni]
+```
+
+### Segreti Rivelabili
+
+```meta-bind
+INPUT[list:segreti_rivelabili]
+```
+
 ## Scaletta
 
 > [!scena]- Battute previste
@@ -233,6 +253,12 @@ INPUT[list:pressioni]
 INPUT[list:decisioni_attese]
 ```
 
+## Arricchisci Dopo
+
+```meta-bind
+INPUT[list:voci]
+```
+
 tab: Resoconto
 
 ## Resoconto
@@ -247,6 +273,24 @@ tab: Resoconto
 
 ```meta-bind
 INPUT[list:conseguenze]
+```
+
+## Canone E Propagazione
+
+```meta-bind
+INPUT[list:fatti_canonici]
+```
+
+```meta-bind
+INPUT[list:entita_impattate]
+```
+
+```meta-bind
+INPUT[list:propaga_a]
+```
+
+```meta-bind
+INPUT[list:prossime_mosse_fuori_scena]
 ```
 
 > [!timer]- Clock aggiornati
@@ -280,4 +324,5 @@ tab: Prossima
 > - [ ] Scena iniziale
 > - [ ] Clock o pressione da mostrare subito
 > - [ ] Pressione attiva
+> - [ ] Una reazione fuori scena da [[Cosa Succede Fuori Scena]]
 ````

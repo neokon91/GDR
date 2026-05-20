@@ -49,6 +49,9 @@
 >
 > Agenda:
 > `INPUT[text:agenda]`
+>
+> Posta:
+> `INPUT[text:posta]`
 
 > [!timer] Fronte attivo
 > Pressione: `=this.pressione`
@@ -57,6 +60,18 @@
 >
 > > [!segreto]- Obiettivo nascosto
 > > `=this.obiettivo_nascosto`
+
+## Essenziale Al Tavolo
+
+> [!missione] Cosa vuole
+> Obiettivo: `INPUT[text:obiettivo]`
+>
+> Posta: `INPUT[text:posta]`
+
+> [!timer] Se nessuno interviene
+> Innesco: `INPUT[text:innesco]`
+>
+> Prossima mossa: `=this.prossima_mossa`
 
 ```meta-bind-button
 label: Avanza Clock
@@ -70,6 +85,18 @@ actions:
 
 ````tabs
 tab: Identità
+
+## Creazione Rapida
+
+Questi campi bastano per usarla al tavolo; rete politica, trattati e risorse possono arrivare dopo.
+
+```meta-bind
+INPUT[list:mosse_visibili]
+```
+
+```meta-bind
+INPUT[list:voci]
+```
 
 ## Identità
 
@@ -120,10 +147,20 @@ INPUT[list:debolezze]
 INPUT[list:conseguenze]
 ```
 
+## Entità Impattate
+
+`INPUT[inlineListSuggester(optionQuery("Mondi"), useLinks(partial), allowOther):entita_impattate]`
+
 ## Escalation
 
 ```meta-bind
 INPUT[list:escalation]
+```
+
+## Arricchisci Dopo
+
+```meta-bind
+INPUT[list:domande_aperte]
 ```
 
 > [!pericolo]- Conseguenze possibili

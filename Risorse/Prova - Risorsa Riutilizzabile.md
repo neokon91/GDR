@@ -3,22 +3,18 @@ id: prova-risorsa-riutilizzabile
 nome: "Prova - Risorsa Riutilizzabile"
 categoria: risorsa
 tipo: tabella
-stato: archiviata
-uso: "collaudo"
-collegamenti:
-  - "[[Prova - Mondo]]"
+stato: pronto
+uso: "test manuale di risorse generiche"
+tono: "mistero di confine"
+mondo: "[[Prova - Mondo]]"
 ---
-
 # Prova - Risorsa Riutilizzabile
 
-> [!regola] Uso
-> Risorsa generica non legata a una sola campagna.
-
-| d6 | Spunto |
-|---:|---|
-| 1 | Una chiave si spezza |
-| 2 | Un PNG mente |
-| 3 | Una fazione arriva prima |
-| 4 | Una porta cambia posto |
-| 5 | Una creatura segue il gruppo |
-| 6 | Il tempio si chiude |
+| d6 | Dettaglio di soglia |
+| --- | --- |
+| 1 | Una campana vibra senza suono. |
+| 2 | Una mappa mostra una strada cancellata. |
+| 3 | Un anziano conta quattro firme dove tutti ne vedono tre. |
+| 4 | La nebbia evita un nome inciso. |
+| 5 | Una corda ha un nodo nascosto. |
+| 6 | Il sale forma una freccia verso casa. |

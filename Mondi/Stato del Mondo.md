@@ -28,6 +28,14 @@ actions:
 ```
 
 ```meta-bind-button
+label: Cosa Succede Fuori Scena
+style: primary
+actions:
+  - type: open
+    link: "[[Cosa Succede Fuori Scena]]"
+```
+
+```meta-bind-button
 label: Timeline
 style: primary
 actions:

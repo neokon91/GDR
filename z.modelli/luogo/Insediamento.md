@@ -39,6 +39,35 @@
 > > `=this.tensione`
 
 ````tabs
+tab: Essenziale
+
+## Creazione Rapida
+
+Questi campi bastano per portare il luogo al tavolo.
+
+> [!luogo] Prima impressione
+> `INPUT[text:impressione]`
+
+> [!pericolo] Tensione locale
+> `INPUT[text:tensione]`
+
+> [!scena] Promessa al tavolo
+> `INPUT[text:promessa_al_tavolo]`
+
+## Scene, Voci E Scelte
+
+```meta-bind
+INPUT[list:scene]
+```
+
+```meta-bind
+INPUT[list:voci]
+```
+
+```meta-bind
+INPUT[list:scelte]
+```
+
 tab: Mappa Locale
 
 ## Quartieri e Luoghi Importanti

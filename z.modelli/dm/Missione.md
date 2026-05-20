@@ -47,11 +47,32 @@
 > Segmenti:
 > `INPUT[number:progress_max]`
 >
+> Innesco:
+> `INPUT[text:innesco]`
+>
+> Posta:
+> `INPUT[text:posta]`
+>
 > Prossima mossa:
 > `INPUT[text:prossima_mossa]`
 
 > [!missione] Obiettivo
 >
+
+## Essenziale Al Tavolo
+
+> [!scena] Perché i PG dovrebbero agire
+> Posta: `INPUT[text:posta]`
+>
+> Innesco: `INPUT[text:innesco]`
+>
+> Prossima mossa: `=this.prossima_mossa`
+
+## Primo Aggancio
+
+```meta-bind
+INPUT[list:indizi]
+```
 
 ```dataviewjs
 const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));
@@ -75,6 +96,18 @@ dv.el("div", `
 
 ````tabs
 tab: Situazione
+
+## Creazione Rapida
+
+Prima rendila giocabile; collega fazioni, luoghi e ricompense dopo.
+
+```meta-bind
+INPUT[list:scene_pronte]
+```
+
+```meta-bind
+INPUT[list:decisioni]
+```
 
 ## Situazione
 
@@ -119,6 +152,12 @@ INPUT[list:decisioni]
 
 ```meta-bind
 INPUT[list:domande_aperte]
+```
+
+## Arricchisci Dopo
+
+```meta-bind
+INPUT[list:voci]
 ```
 
 tab: Ricompense
@@ -181,6 +220,25 @@ tab: Esiti
 ```meta-bind
 INPUT[list:conseguenze]
 ```
+
+## Propagazione
+
+### Entita Impattate
+
+`INPUT[inlineListSuggester(optionQuery("Mondi"), useLinks(partial), allowOther):entita_impattate]`
+
+### Propaga A
+
+`INPUT[inlineListSuggester(optionQuery("Mondi"), useLinks(partial), allowOther):propaga_a]`
+
+### Se Ignorata
+
+> [!timer] Mossa fuori scena
+> Innesco: `=this.innesco`
+>
+> Prossima mossa: `=this.prossima_mossa`
+>
+> Posta: `=this.posta`
 
 > [!segreto]- Esiti possibili
 >
