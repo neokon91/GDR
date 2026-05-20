@@ -20,13 +20,13 @@ saves:
   dex: 6
   wis: 7
 skillsaves: {}
-damage_vulnerabilities: 
-damage_resistances: 
-damage_immunities: 
-condition_immunities: 
+damage_vulnerabilities:
+damage_resistances:
+damage_immunities:
+condition_immunities:
 senses: "percezione_passiva: 13, scurovisione: 36 m"
 languages: "Primordiale (Auran)"
-gear: []
+cr: 11
 traits: 
 - name: "Desideri"
   desc: "Il djinni ha una probabilità del 30% di conoscere l'incantesimo desiderio. Se il djinni lo conosce, può lanciarlo solo per conto di una creatura diversa da un genio che comunica un desiderio in un modo che il djinni è in grado di comprendere. Se il djinni lancia l'incantesimo per conto della creatura, non subisce alcuna conseguenza derivante dal lancio dell'incantesimo. Una volta che il djinni l'ha lanciato tre volte, non può farlo di nuovo per 365 giorni."
@@ -57,26 +57,25 @@ iniziativa: 2
 hp: 218
 hit_dice: "19d10 + 114"
 speed: "camminata: 9 m, volo: 27 m (fluttuare)"
-cr: 11
 xp: 7200
 bonus_competenza: 4
 statblock: true
 ---
 # Djinni
 
+````tabs
+tab: Scheda
 ```statblock
 monster: Djinni
 ```
-
+tab: Dettagli
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Grande Elementale, neutrale
 > CA: 17
 > PF: 218 (19d10 + 114)
 > Velocita: camminata: 9 m, volo: 27 m (fluttuare)
 > GS: 11 (PE 7.200; BC +4)
-
 ## Caratteristiche
-
 | Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
 | --- | --- | --- | --- |
 | Forza | 21 | 5 | 5 |
@@ -85,15 +84,13 @@ monster: Djinni
 | Intelligenza | 15 | 2 | 2 |
 | Saggezza | 16 | 3 | 7 |
 | Carisma | 20 | 5 | 5 |
-
 ## Sensi
 
 percezione_passiva: 13, scurovisione: 36 m
-
 ## Lingue
 
 Primordiale (Auran)
-
+tab: Azioni
 ## Tratti
 
 ### Desideri
@@ -107,7 +104,6 @@ Il djinni dispone di vantaggio ai tiri salvezza contro incantesimi e altri effet
 ### Ristoro elementale
 
 Se il djinni muore al di fuori del Piano Elementale dell'Aria, il suo corpo si dissolve nell'aria ed esso ne acquisisce uno nuovo dopo 1d4 giorni, tornando in vita con tutti i suoi punti ferita da qualche parte sul Piano Elementale dell'Aria.
-
 ## Azioni
 
 ### Multiattacco
@@ -149,6 +145,7 @@ Il djinni lancia uno dei seguenti incantesimi, senza bisogno di componenti mater
 *A volontà:*
 - individuazione del bene e del male
 - individuazione del magico
+````
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

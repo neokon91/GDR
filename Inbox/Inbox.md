@@ -45,7 +45,7 @@ style: primary
 actions:
   - type: templaterCreateNote
     templateFile: "z.modelli/Live PNG.md"
-    folderPath: "Mondi/Personaggi"
+    folderPath: "Inbox"
     open: true
 ```
 
@@ -55,7 +55,7 @@ style: primary
 actions:
   - type: templaterCreateNote
     templateFile: "z.modelli/Live Luogo.md"
-    folderPath: "Mondi/Luoghi"
+    folderPath: "Inbox"
     open: true
 ```
 
@@ -82,7 +82,7 @@ actions:
 ## Da Smistare
 
 ```dataview
-TABLE tipo, stato, stato_canonico, sessioni, collegamenti
+TABLE tipo, stato, stato_canonico, data_mondo, sessioni, collegamenti
 FROM "Inbox"
 WHERE file.name != "Inbox" AND stato != "smistata" AND stato != "archiviata" AND stato != "ignorata" AND !startswith(file.name, "Prova -")
 SORT file.ctime DESC

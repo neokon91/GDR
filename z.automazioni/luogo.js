@@ -38,15 +38,25 @@ async function luogo(tp, routeOptions = {}){
     const context = { world: mondo };
     const luogoPadre = await helpers.chooseLocation(tp, "Luogo o regione superiore", context);
     const governante = await helpers.choosePerson(tp, "Governante o referente", context);
+    const fazioni = await helpers.chooseFactions(tp, "Fazioni presenti o interessate", context);
+    const personaggi = await helpers.choosePeople(tp, "PNG collegati al luogo", context);
+    const missioni = await helpers.chooseMissions(tp, "Missioni collegate al luogo", context);
     const pericolo = await helpers.promptOptional(tp, "Pericolo da 0 a 10");
     const impressione = await helpers.promptOptional(tp, "Prima impressione");
+    const addLore = await helpers.askYesNo(tp, "Vuoi aggiungere profondità lore al luogo?");
+    const funzioneNarrativa = addLore ? await helpers.promptOptional(tp, "Funzione narrativa del luogo") : "";
+    const tensione = addLore ? await helpers.promptOptional(tp, "Tensione o conflitto locale") : "";
+    const veritaNascosta = addLore ? await helpers.promptOptional(tp, "Verità nascosta o segreto") : "";
+    const domandaAperta = addLore ? await helpers.promptOptional(tp, "Domanda aperta da esplorare al tavolo") : "";
     await helpers.moveNote(tp, helpers.path("luoghi"), name);
 
     return `---
 id: ${id}
 nome: ${helpers.yamlQuote(name)}
 categoria: luogo
+famiglia_luogo: ${route.category ?? ""}
 tipo: ${selectedType?.id ?? ""}
+sottotipo: ${selectedType?.id ?? ""}
 tipologia: ${selectedType?.id ?? ""}
 bioma: ${selectedBiome?.id ?? ""}
 stato: bozza
@@ -58,17 +68,22 @@ popolazione:
 stabilita:
 pericolo: ${pericolo}
 impressione: ${helpers.yamlQuote(impressione)}
+funzione_narrativa: ${helpers.yamlQuote(funzioneNarrativa)}
+tensione: ${helpers.yamlQuote(tensione)}
 hp_massimi:
 hp_attuali:
-fazioni: []
+fazioni: ${helpers.inlineYamlList(fazioni)}
 religioni: []
+personaggi: ${helpers.inlineYamlList(personaggi)}
+missioni: ${helpers.inlineYamlList(missioni)}
 risorse: []
 problemi: []
 conseguenze: []
-segreti: []
+segreti: ${helpers.inlineYamlTextList([veritaNascosta])}
 indizi: []
 voci: []
 scene: []
+domande_aperte: ${helpers.inlineYamlTextList([domandaAperta])}
 collegamenti_mancanti: []
 ---
 `

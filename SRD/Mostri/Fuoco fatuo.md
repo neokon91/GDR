@@ -18,13 +18,13 @@ ac: 19
 stats: [1, 28, 10, 13, 14, 11]
 saves: {}
 skillsaves: {}
-damage_vulnerabilities: 
-damage_resistances: 
-damage_immunities: 
-condition_immunities: 
+damage_vulnerabilities:
+damage_resistances:
+damage_immunities:
+condition_immunities:
 senses: "percezione_passiva: 12, scurovisione: 36 m"
 languages: "Comune più un'altra lingua"
-gear: []
+cr: 2
 traits: 
 - name: "Effimero"
   desc: "Il fuoco fatuo non può indossare o trasportare niente."
@@ -51,26 +51,25 @@ iniziativa: 9
 hp: 27
 hit_dice: "11d4"
 speed: "camminata: 5 m, volo: 15 m (fluttuare)"
-cr: 2
 xp: 450
 bonus_competenza: 2
 statblock: true
 ---
 # Fuoco fatuo
 
+````tabs
+tab: Scheda
 ```statblock
 monster: Fuoco fatuo
 ```
-
+tab: Dettagli
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Minuscolo Non morto, caotico malvagio
 > CA: 19
 > PF: 27 (11d4)
 > Velocita: camminata: 5 m, volo: 15 m (fluttuare)
 > GS: 2 (PE 450; BC +2)
-
 ## Caratteristiche
-
 | Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
 | --- | --- | --- | --- |
 | Forza | 1 | -5 | -5 |
@@ -79,15 +78,13 @@ monster: Fuoco fatuo
 | Intelligenza | 13 | 1 | 1 |
 | Saggezza | 14 | 2 | 2 |
 | Carisma | 11 | 0 | 0 |
-
 ## Sensi
 
 percezione_passiva: 12, scurovisione: 36 m
-
 ## Lingue
 
 Comune più un'altra lingua
-
+tab: Azioni
 ## Tratti
 
 ### Effimero
@@ -101,12 +98,12 @@ Il fuoco fatuo emana luce intensa in un raggio di 6 metri e luce fioca per altri
 ### Movimento incorporeo
 
 Il fuoco fatuo può muoversi attraverso altre creature e oggetti come se fossero terreno difficile. Se termina il suo turno all'interno di un oggetto, subisce 5 (1d10) danni da forza.
-
 ## Azioni
 
 ### Folgore
 
 *Tiro per colpire in mischia:* +4, portata 1,5 m. *Colpito:* 11 (2d8 + 2) danni da fulmine.
+````
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

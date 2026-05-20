@@ -19,13 +19,13 @@ peso: "3 kg"
 danni: "2d6 taglienti"
 proprieta: ["due mani", "pesante"]
 padronanza: "Colpo di striscio"
-classe_armatura: 
-forza: 
-furtivita: 
-velocita: 
-punti_ferita: 
-soglia_danno: 
-valore_in_mo: 
+classe_armatura:
+forza:
+furtivita:
+velocita:
+punti_ferita:
+soglia_danno:
+valore_in_mo:
 ---
 # Spadone
 

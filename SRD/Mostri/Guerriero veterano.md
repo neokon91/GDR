@@ -20,13 +20,13 @@ saves: {}
 skillsaves: 
   atletica: 5
   percezione: 2
-damage_vulnerabilities: 
-damage_resistances: 
-damage_immunities: 
-condition_immunities: 
+damage_vulnerabilities:
+damage_resistances:
+damage_immunities:
+condition_immunities:
 senses: "percezione_passiva: 12"
 languages: "Comune più un'altra lingua"
-gear: ["balestra pesante", "corazza a strisce", "spadone"]
+cr: 3
 traits: []
 actions: 
 - name: "Multiattacco"
@@ -49,26 +49,25 @@ iniziativa: 3
 hp: 65
 hit_dice: "10d8 + 20"
 speed: "camminata: 9 m"
-cr: 3
 xp: 700
 bonus_competenza: 2
 statblock: true
 ---
 # Guerriero veterano
 
+````tabs
+tab: Scheda
 ```statblock
 monster: Guerriero veterano
 ```
-
+tab: Dettagli
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Medio o Piccolo Umanoide, neutrale
 > CA: 17
 > PF: 65 (10d8 + 20)
 > Velocita: camminata: 9 m
 > GS: 3 (PE 700; BC +2)
-
 ## Caratteristiche
-
 | Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
 | --- | --- | --- | --- |
 | Forza | 16 | 3 | 3 |
@@ -77,19 +76,16 @@ monster: Guerriero veterano
 | Intelligenza | 10 | 0 | 0 |
 | Saggezza | 11 | 0 | 0 |
 | Carisma | 10 | 0 | 0 |
-
 ## Abilita
 
 atletica: 5, percezione: 2
-
 ## Sensi
 
 percezione_passiva: 12
-
 ## Lingue
 
 Comune più un'altra lingua
-
+tab: Azioni
 ## Azioni
 
 ### Multiattacco
@@ -103,6 +99,7 @@ Il guerriero effettua due attacchi Spadone o Balestra pesante.
 ### Balestra pesante
 
 *Tiro per colpire a distanza:* +3, gittata 30/120 m. *Colpito:* 12 (2d10 + 1) danni perforanti.
+````
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

@@ -19,13 +19,13 @@ stats: [20, 12, 17, 3, 12, 7]
 saves: {}
 skillsaves: 
   percezione: 5
-damage_vulnerabilities: 
-damage_resistances: 
-damage_immunities: 
-condition_immunities: 
+damage_vulnerabilities:
+damage_resistances:
+damage_immunities:
+condition_immunities:
 senses: "percezione_passiva: 15, scurovisione: 18 m"
 languages: "nessuna"
-gear: []
+cr: 3
 traits: []
 actions: 
 - name: "Multiattacco"
@@ -44,26 +44,25 @@ iniziativa: 1
 hp: 59
 hit_dice: "7d10 + 21"
 speed: "camminata: 12 m, scalata: 12 m"
-cr: 3
 xp: 700
 bonus_competenza: 2
 statblock: true
 ---
 # Orsogufo
 
+````tabs
+tab: Scheda
 ```statblock
 monster: Orsogufo
 ```
-
+tab: Dettagli
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Grande Mostruosità, senza allineamento
 > CA: 13
 > PF: 59 (7d10 + 21)
 > Velocita: camminata: 12 m, scalata: 12 m
 > GS: 3 (PE 700; BC +2)
-
 ## Caratteristiche
-
 | Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
 | --- | --- | --- | --- |
 | Forza | 20 | 5 | 5 |
@@ -72,19 +71,16 @@ monster: Orsogufo
 | Intelligenza | 3 | -4 | -4 |
 | Saggezza | 12 | 1 | 1 |
 | Carisma | 7 | -2 | -2 |
-
 ## Abilita
 
 percezione: 5
-
 ## Sensi
 
 percezione_passiva: 15, scurovisione: 18 m
-
 ## Lingue
 
 nessuna
-
+tab: Azioni
 ## Azioni
 
 ### Multiattacco
@@ -94,6 +90,7 @@ L'orsogufo effettua due attacchi Squarcio.
 ### Squarcio
 
 *Tiro per colpire in mischia:* +7, portata 1,5 m. *Colpito:* 14 (2d8 + 5) danni taglienti.
+````
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

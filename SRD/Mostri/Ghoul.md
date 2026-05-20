@@ -18,13 +18,13 @@ ac: 12
 stats: [13, 15, 10, 7, 10, 6]
 saves: {}
 skillsaves: {}
-damage_vulnerabilities: 
-damage_resistances: 
-damage_immunities: 
-condition_immunities: 
+damage_vulnerabilities:
+damage_resistances:
+damage_immunities:
+condition_immunities:
 senses: "percezione_passiva: 10, scurovisione: 18 m"
 languages: "Comune"
-gear: []
+cr: 1
 traits: []
 actions: 
 - name: "Multiattacco"
@@ -45,26 +45,25 @@ iniziativa: 2
 hp: 22
 hit_dice: "5d8"
 speed: "camminata: 9 m"
-cr: 1
 xp: 200
 bonus_competenza: 2
 statblock: true
 ---
 # Ghoul
 
+````tabs
+tab: Scheda
 ```statblock
 monster: Ghoul
 ```
-
+tab: Dettagli
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Medio Non morto, caotico malvagio
 > CA: 12
 > PF: 22 (5d8)
 > Velocita: camminata: 9 m
 > GS: 1 (PE 200; BC +2)
-
 ## Caratteristiche
-
 | Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
 | --- | --- | --- | --- |
 | Forza | 13 | 1 | 1 |
@@ -73,15 +72,13 @@ monster: Ghoul
 | Intelligenza | 7 | -2 | -2 |
 | Saggezza | 10 | 0 | 0 |
 | Carisma | 6 | -2 | -2 |
-
 ## Sensi
 
 percezione_passiva: 10, scurovisione: 18 m
-
 ## Lingue
 
 Comune
-
+tab: Azioni
 ## Azioni
 
 ### Multiattacco
@@ -97,6 +94,7 @@ Il ghoul effettua due attacchi Morso.
 ### Morso
 
 *Tiro per colpire in mischia:* +4, portata 1,5 m. *Colpito:* 5 (1d6 + 2) danni perforanti più 3 (1d6) danni necrotici.
+````
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

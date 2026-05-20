@@ -18,13 +18,13 @@ ac: 14
 stats: [20, 9, 18, 3, 8, 1]
 saves: {}
 skillsaves: {}
-damage_vulnerabilities: 
-damage_resistances: 
-damage_immunities: 
-condition_immunities: 
+damage_vulnerabilities:
+damage_resistances:
+damage_immunities:
+condition_immunities:
 senses: "percezione_passiva: 9, scurovisione: 18 m"
 languages: "Comune più un'altra lingua"
-gear: []
+cr: 9
 traits: 
 - name: "Assorbimento dell'acido"
   desc: "Ogni volta che il golem riceve danni da acido, non subisce danni, recuperando un numero di punti ferita pari ai danni da acido a lui inflitti."
@@ -53,26 +53,25 @@ iniziativa: 3
 hp: 123
 hit_dice: "13d10 + 52"
 speed: "camminata: 9 m"
-cr: 9
 xp: 5000
 bonus_competenza: 4
 statblock: true
 ---
 # Golem di argilla
 
+````tabs
+tab: Scheda
 ```statblock
 monster: Golem di argilla
 ```
-
+tab: Dettagli
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Grande Costrutto, senza allineamento
 > CA: 14
 > PF: 123 (13d10 + 52)
 > Velocita: camminata: 9 m
 > GS: 9 (PE 5.000; BC +4)
-
 ## Caratteristiche
-
 | Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
 | --- | --- | --- | --- |
 | Forza | 20 | 5 | 5 |
@@ -81,15 +80,13 @@ monster: Golem di argilla
 | Intelligenza | 3 | -4 | -4 |
 | Saggezza | 8 | -1 | -1 |
 | Carisma | 1 | -5 | -5 |
-
 ## Sensi
 
 percezione_passiva: 9, scurovisione: 18 m
-
 ## Lingue
 
 Comune più un'altra lingua
-
+tab: Azioni
 ## Tratti
 
 ### Assorbimento dell'acido
@@ -107,7 +104,6 @@ Il golem non può mutare forma.
 ### Resistenza alla magia
 
 Il golem dispone di vantaggio ai tiri salvezza contro incantesimi e altri effetti magici.
-
 ## Azioni
 
 ### Multiattacco
@@ -117,6 +113,7 @@ Il golem effettua due attacchi Schianto, o effettua tre attacchi Schianto se ha 
 ### Schianto
 
 *Tiro per colpire in mischia:* +9, portata 1,5 m. *Colpito:* 10 (1d10 + 5) danni contundenti più 6 (1d12) danni da acido, e i punti ferita massimi del bersaglio sono ridotti di un ammontare pari ai danni da acido subiti.
+````
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

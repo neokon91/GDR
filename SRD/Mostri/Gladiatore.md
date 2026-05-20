@@ -24,13 +24,13 @@ saves:
 skillsaves: 
   atletica: 10
   intrattenere: 5
-damage_vulnerabilities: 
-damage_resistances: 
-damage_immunities: 
-condition_immunities: 
+damage_vulnerabilities:
+damage_resistances:
+damage_immunities:
+condition_immunities:
 senses: "percezione_passiva: 11"
 languages: "Comune"
-gear: ["armatura di cuoio borchiato", "lance (3)", "scudo"]
+cr: 5
 traits: []
 actions: 
 - name: "Multiattacco"
@@ -53,26 +53,25 @@ iniziativa: 5
 hp: 112
 hit_dice: "15d8 + 45"
 speed: "camminata: 9 m"
-cr: 5
 xp: 1800
 bonus_competenza: 3
 statblock: true
 ---
 # Gladiatore
 
+````tabs
+tab: Scheda
 ```statblock
 monster: Gladiatore
 ```
-
+tab: Dettagli
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Medio o Piccolo Umanoide, neutrale
 > CA: 16
 > PF: 112 (15d8 + 45)
 > Velocita: camminata: 9 m
 > GS: 5 (PE 1.800; BC +3)
-
 ## Caratteristiche
-
 | Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
 | --- | --- | --- | --- |
 | Forza | 18 | 4 | 7 |
@@ -81,19 +80,16 @@ monster: Gladiatore
 | Intelligenza | 10 | 0 | 0 |
 | Saggezza | 12 | 1 | 4 |
 | Carisma | 15 | 2 | 2 |
-
 ## Abilita
 
 atletica: 10, intrattenere: 5
-
 ## Sensi
 
 percezione_passiva: 11
-
 ## Lingue
 
 Comune
-
+tab: Azioni
 ## Azioni
 
 ### Multiattacco
@@ -107,6 +103,7 @@ Il gladiatore effettua tre attacchi Lancia. Può sostituire un attacco con un ut
 ### Scudo da sfondamento
 
 *Tiro salvezza su Forza:* CD 15, una creatura entro 1,5 metri che il gladiatore è in grado di vedere. *Fallimento:* 9 (2d4 + 4) danni contundenti. Se il bersaglio è una creatura di taglia Media o inferiore, cade a terra prono.
+````
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

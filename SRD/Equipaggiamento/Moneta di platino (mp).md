@@ -14,17 +14,17 @@ capitolo: "Equipaggiamento"
 pagine_sorgente: 101
 tipo_oggetto: "moneta"
 categoria_oggetto: "Valuta"
-costo: 
-peso: 
-danni: 
+costo:
+peso:
+danni:
 proprieta: []
-padronanza: 
-classe_armatura: 
-forza: 
-furtivita: 
-velocita: 
-punti_ferita: 
-soglia_danno: 
+padronanza:
+classe_armatura:
+forza:
+furtivita:
+velocita:
+punti_ferita:
+soglia_danno:
 valore_in_mo: "10"
 ---
 # Moneta di platino (mp)

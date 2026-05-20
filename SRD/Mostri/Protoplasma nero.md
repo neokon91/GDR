@@ -18,13 +18,13 @@ ac: 7
 stats: [16, 5, 16, 1, 6, 1]
 saves: {}
 skillsaves: {}
-damage_vulnerabilities: 
-damage_resistances: 
-damage_immunities: 
-condition_immunities: 
+damage_vulnerabilities:
+damage_resistances:
+damage_immunities:
+condition_immunities:
 senses: "percezione_passiva: 8, vista_cieca: 18 m"
 languages: "nessuna"
-gear: []
+cr: 4
 traits: 
 - name: "Amorfo"
   desc: "Il protoplasma può muoversi attraverso uno spazio stretto fino a 2,5 centimetri senza consumare movimento extra per farlo."
@@ -49,26 +49,25 @@ iniziativa: -3
 hp: 68
 hit_dice: "8d10 + 24"
 speed: "camminata: 6 m, scalata: 6 m"
-cr: 4
 xp: 1100
 bonus_competenza: 2
 statblock: true
 ---
 # Protoplasma nero
 
+````tabs
+tab: Scheda
 ```statblock
 monster: Protoplasma nero
 ```
-
+tab: Dettagli
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Grande Melma, senza allineamento
 > CA: 7
 > PF: 68 (8d10 + 24)
 > Velocita: camminata: 6 m, scalata: 6 m
 > GS: 4 (PE 1.100; BC +2)
-
 ## Caratteristiche
-
 | Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
 | --- | --- | --- | --- |
 | Forza | 16 | 3 | 3 |
@@ -77,15 +76,13 @@ monster: Protoplasma nero
 | Intelligenza | 1 | -5 | -5 |
 | Saggezza | 6 | -2 | -2 |
 | Carisma | 1 | -5 | -5 |
-
 ## Sensi
 
 percezione_passiva: 8, vista_cieca: 18 m
-
 ## Lingue
 
 nessuna
-
+tab: Azioni
 ## Tratti
 
 ### Amorfo
@@ -99,12 +96,12 @@ Una creatura che colpisce un protoplasma con un tiro per colpire in mischia subi
 ### Movimenti del ragno
 
 Il protoplasma può scalare le superfici difficili, compresi i soffitti, senza effettuare una prova di caratteristica.
-
 ## Azioni
 
 ### Pseudopode dissolvente
 
 *Tiro per colpire in mischia:* +5, portata 3 m. *Colpito:* 17 (4d6 + 3) danni da acido. L'armatura non magica indossata dal bersaglio subisce una penalità di -1 alla CA che fornisce. Se la penalità riduce la sua CA a 10, l'armatura si distrugge. La penalità può essere rimossa lanciando l'incantesimo riparare sull'armatura.
+````
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

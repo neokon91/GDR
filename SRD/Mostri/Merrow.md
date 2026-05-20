@@ -18,13 +18,13 @@ ac: 13
 stats: [18, 15, 15, 8, 10, 9]
 saves: {}
 skillsaves: {}
-damage_vulnerabilities: 
-damage_resistances: 
-damage_immunities: 
-condition_immunities: 
+damage_vulnerabilities:
+damage_resistances:
+damage_immunities:
+condition_immunities:
 senses: "percezione_passiva: 10, scurovisione: 18 m"
 languages: "Abissale, Primordiale (Aquan)"
-gear: []
+cr: 2
 traits: 
 - name: "Anfibio"
   desc: "Il merrow può respirare in aria e in acqua."
@@ -49,26 +49,25 @@ iniziativa: 2
 hp: 45
 hit_dice: "6d10 + 12"
 speed: "camminata: 3 m, nuoto: 12 m"
-cr: 2
 xp: 450
 bonus_competenza: 2
 statblock: true
 ---
 # Merrow
 
+````tabs
+tab: Scheda
 ```statblock
 monster: Merrow
 ```
-
+tab: Dettagli
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Grande Mostruosità, caotico malvagio
 > CA: 13
 > PF: 45 (6d10 + 12)
 > Velocita: camminata: 3 m, nuoto: 12 m
 > GS: 2 (PE 450; BC +2)
-
 ## Caratteristiche
-
 | Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
 | --- | --- | --- | --- |
 | Forza | 18 | 4 | 4 |
@@ -77,21 +76,18 @@ monster: Merrow
 | Intelligenza | 8 | -1 | -1 |
 | Saggezza | 10 | 0 | 0 |
 | Carisma | 9 | -1 | -1 |
-
 ## Sensi
 
 percezione_passiva: 10, scurovisione: 18 m
-
 ## Lingue
 
 Abissale, Primordiale (Aquan)
-
+tab: Azioni
 ## Tratti
 
 ### Anfibio
 
 Il merrow può respirare in aria e in acqua.
-
 ## Azioni
 
 ### Multiattacco
@@ -109,6 +105,7 @@ Il merrow effettua due attacchi, usando Morso, Artiglio o Arpione in qualsiasi c
 ### Morso
 
 *Tiro per colpire in mischia:* +6, portata 1,5 m. *Colpito:* 6 (1d4 + 4) danni perforanti, e il bersaglio è avvelenato fino al termine del turno successivo del merrow.
+````
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

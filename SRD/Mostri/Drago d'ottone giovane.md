@@ -23,13 +23,13 @@ skillsaves:
   furtivita: 3
   percezione: 6
   persuasione: 5
-damage_vulnerabilities: 
-damage_resistances: 
-damage_immunities: 
-condition_immunities: 
+damage_vulnerabilities:
+damage_resistances:
+damage_immunities:
+condition_immunities:
 senses: "percezione_passiva: 16, scurovisione: 36 m, vista_cieca: 9 m"
 languages: "Comune, Draconico"
-gear: []
+cr: 6
 traits: []
 actions: 
 - name: "Multiattacco"
@@ -52,26 +52,25 @@ iniziativa: 3
 hp: 110
 hit_dice: "13d10 + 39"
 speed: "camminata: scavo 6 m, volo: 24 m"
-cr: 6
 xp: 2300
 bonus_competenza: 3
 statblock: true
 ---
 # Drago d'ottone giovane
 
+````tabs
+tab: Scheda
 ```statblock
 monster: Drago d'ottone giovane
 ```
-
+tab: Dettagli
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Grande Drago (metallico), caotico buono
 > CA: 17
 > PF: 110 (13d10 + 39)
 > Velocita: camminata: scavo 6 m, volo: 24 m
 > GS: 6 (PE 2.300; BC +3)
-
 ## Caratteristiche
-
 | Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
 | --- | --- | --- | --- |
 | Forza | 19 | 4 | 4 |
@@ -80,19 +79,16 @@ monster: Drago d'ottone giovane
 | Intelligenza | 12 | 1 | 1 |
 | Saggezza | 11 | 0 | 3 |
 | Carisma | 15 | 2 | 2 |
-
 ## Abilita
 
 furtivita: 3, percezione: 6, persuasione: 5
-
 ## Sensi
 
 percezione_passiva: 16, scurovisione: 36 m, vista_cieca: 9 m
-
 ## Lingue
 
 Comune, Draconico
-
+tab: Azioni
 ## Azioni
 
 ### Multiattacco
@@ -112,6 +108,7 @@ Il drago effettua tre attacchi Squarcio. Può sostituire due attacchi con un uti
 *Tiro salvezza su Costituzione:* CD 14, tutte le creature in un cono di 9 metri. *Fallimento:* il bersaglio è incapacitato fino al termine del proprio turno successivo, a quel punto ripete il tiro salvezza.
 
 *Secondo fallimento:* il bersaglio cade privo di sensi per 1 minuto. Questo effetto termina se il bersaglio subisce danni o se una creatura entro 1,5 metri da esso esegue un'azione per svegliarlo.
+````
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

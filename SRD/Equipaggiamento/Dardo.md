@@ -19,13 +19,13 @@ peso: "0,125 kg"
 danni: "1d4 perforanti"
 proprieta: ["accurata", "lancio 6/18"]
 padronanza: "Vessazione"
-classe_armatura: 
-forza: 
-furtivita: 
-velocita: 
-punti_ferita: 
-soglia_danno: 
-valore_in_mo: 
+classe_armatura:
+forza:
+furtivita:
+velocita:
+punti_ferita:
+soglia_danno:
+valore_in_mo:
 ---
 # Dardo
 

@@ -25,13 +25,13 @@ skillsaves:
   arcano: 5
   inganno: 8
   percezione: 4
-damage_vulnerabilities: 
-damage_resistances: 
-damage_immunities: 
-condition_immunities: 
+damage_vulnerabilities:
+damage_resistances:
+damage_immunities:
+condition_immunities:
 senses: "percezione_passiva: 14, scurovisione: 18 m"
 languages: "Comune, Gigante"
-gear: []
+cr: 7
 traits: 
 - name: "Rigenerazione"
   desc: "L'oni recupera 10 punti ferita all'inizio di ogni suo turno, se ha almeno 1 punto ferita."
@@ -60,26 +60,25 @@ iniziativa: 0
 hp: 119
 hit_dice: "14d10 + 42"
 speed: "camminata: 9 m, volo: 9 m (fluttuare)"
-cr: 7
 xp: 2900
 bonus_competenza: 3
 statblock: true
 ---
 # Oni
 
+````tabs
+tab: Scheda
 ```statblock
 monster: Oni
 ```
-
+tab: Dettagli
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Grande Immondo, legale malvagio
 > CA: 17
 > PF: 119 (14d10 + 42)
 > Velocita: camminata: 9 m, volo: 9 m (fluttuare)
 > GS: 7 (PE 2.900; BC +3)
-
 ## Caratteristiche
-
 | Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
 | --- | --- | --- | --- |
 | Forza | 19 | 4 | 4 |
@@ -88,25 +87,21 @@ monster: Oni
 | Intelligenza | 14 | 2 | 2 |
 | Saggezza | 12 | 1 | 4 |
 | Carisma | 15 | 2 | 5 |
-
 ## Abilita
 
 arcano: 5, inganno: 8, percezione: 4
-
 ## Sensi
 
 percezione_passiva: 14, scurovisione: 18 m
-
 ## Lingue
 
 Comune, Gigante
-
+tab: Azioni
 ## Tratti
 
 ### Rigenerazione
 
 L'oni recupera 10 punti ferita all'inizio di ogni suo turno, se ha almeno 1 punto ferita.
-
 ## Azioni
 
 ### Multiattacco
@@ -128,6 +123,7 @@ L'oni lancia uno dei seguenti incantesimi, senza bisogno di componenti materiali
 ### Mutaforma
 
 L'oni si trasforma in un umanoide di taglia Piccola o Media, o in un gigante di taglia Grande, oppure torna alla sua vera forma. A eccezione della taglia, le sue statistiche di gioco restano le stesse in ogni forma. Nessun oggetto che indossa o trasporta viene trasformato.
+````
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

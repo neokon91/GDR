@@ -19,13 +19,13 @@ peso: "2,5 kg"
 danni: "1d8 perforanti"
 proprieta: ["due mani", "munizioni 24/96", "ricarica"]
 padronanza: "Lentezza"
-classe_armatura: 
-forza: 
-furtivita: 
-velocita: 
-punti_ferita: 
-soglia_danno: 
-valore_in_mo: 
+classe_armatura:
+forza:
+furtivita:
+velocita:
+punti_ferita:
+soglia_danno:
+valore_in_mo:
 ---
 # Balestra leggera
 

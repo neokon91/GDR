@@ -18,13 +18,13 @@ ac: 15
 stats: [14, 12, 11, 6, 10, 7]
 saves: {}
 skillsaves: {}
-damage_vulnerabilities: 
-damage_resistances: 
-damage_immunities: 
-condition_immunities: 
+damage_vulnerabilities:
+damage_resistances:
+damage_immunities:
+condition_immunities:
 senses: "percezione_passiva: 10, scurovisione: 18 m"
 languages: "Gnoll"
-gear: []
+cr: 0.5
 traits: []
 actions: 
 - name: "Squarcio"
@@ -45,26 +45,25 @@ iniziativa: 1
 hp: 27
 hit_dice: "6d8"
 speed: "camminata: 9 m"
-cr: 0.5
 xp: 100
 bonus_competenza: 2
 statblock: true
 ---
 # Gnoll guerriero
 
+````tabs
+tab: Scheda
 ```statblock
 monster: Gnoll guerriero
 ```
-
+tab: Dettagli
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Medio Immondo, caotico malvagio
 > CA: 15
 > PF: 27 (6d8)
 > Velocita: camminata: 9 m
 > GS: 1/2 (PE 100; BC +2)
-
 ## Caratteristiche
-
 | Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
 | --- | --- | --- | --- |
 | Forza | 14 | 2 | 2 |
@@ -73,15 +72,13 @@ monster: Gnoll guerriero
 | Intelligenza | 6 | -2 | -2 |
 | Saggezza | 10 | 0 | 0 |
 | Carisma | 7 | -2 | -2 |
-
 ## Sensi
 
 percezione_passiva: 10, scurovisione: 18 m
-
 ## Lingue
 
 Gnoll
-
+tab: Azioni
 ## Azioni
 
 ### Squarcio
@@ -91,6 +88,7 @@ Gnoll
 ### Arco d'ossa
 
 *Tiro per colpire a distanza:* +3, gittata 45/180 m. *Colpito:* 6 (1d10 + 1) danni perforanti.
+````
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

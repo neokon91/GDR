@@ -62,13 +62,44 @@ Usa questi campi in modo coerente, perché alimentano Dataview, dashboard, Meta 
 
 - `categoria`: tipo generale della nota, per esempio `sessione`, `personaggio`, `luogo`, `missione`.
 - `tipo`: sottotipo utile al gioco, per esempio `pg`, `png`, `dungeon`, `oggetto magico`.
+- `sottotipo`: specializzazione creata dai router quando serve distinguere una scelta guidata senza rompere le query basate su `tipo`.
+- `famiglia_luogo`: macro-famiglia scelta da `Luogo Router`, per esempio `insediamento`, `luogo di interesse`, `regione naturale`, `geografia`, `politica`.
 - `stato`: avanzamento operativo. Valori comuni validati: `bozza`, `preparazione`, `pronto`, `in corso`, `in gioco`, `giocata`, `da smistare`, `smistata`, `collegata`, `canonica`, `canonico`, `accettata`, `proposta`, `conclusa`, `archiviata`, `ignorata`.
+- `stato_attuale`: stato fictionale nel mondo, da usare solo quando serve separarlo da `stato`. Esempi: PNG `vivo`, `scomparso`, `morto`; luogo `conteso`, `occupato`, `in rovina`; fazione `attiva`, `in crisi`, `nascosta`.
 - `attiva`: booleano usato dalle sessioni. Deve essere `true` su una sola sessione alla volta. Se manca una sessione attiva, gli helper usano come fallback l'ultima sessione `pronto` o `preparazione`.
 - `canonico`: `true` quando il contenuto e confermato nel mondo di gioco.
 - `mondo`: collega una nota al mondo a cui appartiene.
-- `luogo`, `luoghi`, `personaggi`, `fazioni`, `ricompense`: usa link interni quando possibile.
+- `luogo`, `luoghi`, `personaggi`, `fazioni`, `missioni`, `ricompense`, `relazioni`: usa link interni quando possibile.
+- `data_mondo`: campo testuale unico per date leggibili al tavolo in sessioni, lore capture ed eventi storici.
+- `pressione`, `prossima_mossa`, `leader`, `rivali`, `luoghi`, `missioni`: alimentano Poteri In Movimento e Buchi Di Mondo.
+- `causa`, `conseguenze`, `luoghi`, `fazioni`, `missioni`: alimentano Timeline Causale.
+- `vuole`, `sa`, `leva`, `segreto`, `segreti`, `indizi`, `voci`, `domande_aperte`, `tensione`, `funzione_narrativa`: campi di profondita lore. Devono restare brevi e giocabili, non saggi enciclopedici.
 
 Per le note di categoria `mondo`, usa anche `tono`, `tema`, `tecnologia`, `magia`, `continenti`, `fazioni`, `religioni` e `campagne`.
+
+Per i luoghi pronti, usa `mondo`, `luogo_padre` quando ha senso, `fazioni`, `pericolo`, `stabilita` e `pressione`. Per i PNG in gioco, usa `luogo` e almeno uno tra `fazioni` e `relazioni`.
+
+## Router E Creazione Guidata
+
+I router devono fare scegliere al DM una categoria comprensibile e poi includere il template corretto. Non devono esporre nomi di file o dettagli tecnici come scelta primaria.
+
+Router principali:
+
+- `z.modelli/Luogo Router.md` usa `z.automazioni/worldbuilding.js` e passa `famiglia_luogo` e `sottotipo` a `z.automazioni/luogo.js`.
+- `z.modelli/Fazione Router.md` passa `tipoFazione` a `z.automazioni/fazione.js`.
+- `z.modelli/Personaggio Router.md` crea un PNG generico tramite `z.automazioni/personaggio.js`.
+- `z.modelli/dm/DM Router.md` passa `contentType` ai template DM.
+
+Regole per le automazioni di creazione:
+
+- chiedi sempre `mondo` prima delle altre connessioni, cosi i suggerimenti possono ordinare le note dello stesso mondo;
+- crea connessioni nel frontmatter al momento della creazione, non solo nel corpo della nota;
+- per luoghi, chiedi almeno `luogo_padre`, `fazioni`, `personaggi`, `missioni`;
+- per fazioni, chiedi almeno `leader`, `luoghi`, `personaggi`, `missioni`, `alleati`, `rivali`;
+- per PNG, chiedi almeno `luogo`, `fazioni`, `relazioni`, `missioni`;
+- per missioni, chiedi almeno `committente`, `luoghi`, `personaggi`, `fazioni`, `ricompense`;
+- i campi lore opzionali devono essere brevi: una frase per `vuole`, `sa`, `leva`, `tensione`, `segreto`, `prossima_mossa`, `scadenza_mondo`;
+- non creare collegamenti reciproci modificando automaticamente note gia esistenti, a meno che l'utente lo chieda: e facile sovrascrivere lavoro manuale. Le viste Dataview devono ricostruire i backlink operativi leggendo i campi della nota nuova.
 
 ## Cartelle Di Servizio
 
@@ -116,6 +147,9 @@ Lo script `z.automazioni/import_srd.js` importa il System Reference Document 5.2
 Regole:
 
 - le note generate devono avere `generato_da: import_srd`;
+- i mostri SRD devono restare parsabili da Fantasy Statblocks come creature: mantieni `statblock: true` e i campi YAML completi nel frontmatter;
+- il fatto che Obsidian Properties mostri alcune proprieta annidate come difficili da editare e accettato per mostri e creature, perche quel frontmatter alimenta Fantasy Statblocks e Initiative Tracker;
+- per note SRD non mostro, preferisci frontmatter semplice e leggibile da Properties;
 - una nota generata viene sovrascritta solo se contiene ancora quel campo;
 - se una nota SRD viene modificata a mano, rimuovere o cambiare `generato_da` prima di rigenerare;
 - `SRD` resta separato dal contenuto canonico del mondo.
@@ -134,7 +168,7 @@ Prima di una release o dopo modifiche a template, script e plugin, esegui:
 node z.automazioni/check_vault.js
 ```
 
-Il controllo verifica JSON di configurazione, plugin obbligatori inclusi e abilitati, wikilink rotti o ambigui, percorsi `templateFile` usati dai pulsanti Meta Bind, target di Icon Folder, riferimenti Obsidian obsoleti, sessioni multiple attive, frontmatter operativo, stati non previsti e campi minimi per categoria.
+Il controllo verifica JSON di configurazione, plugin obbligatori inclusi e abilitati, wikilink rotti o ambigui, percorsi `templateFile` usati dai pulsanti Meta Bind, helper Templater con script esistente in `z.automazioni`, target di Icon Folder, riferimenti Obsidian obsoleti, sessioni multiple attive, indice GPT, frontmatter operativo, categorie/stati/tipi ragionevoli, note live senza sessione o mondo e campi minimi per categoria. SRD e note indice sono esclusi dai controlli che produrrebbero falsi positivi.
 
 ## Release
 
@@ -150,7 +184,7 @@ La cartella `.obsidian/plugins` fa parte del prodotto: i plugin sono inclusi per
 
 ### Mostri E Fantasy Statblocks
 
-I mostri importati devono avere frontmatter compatibile con Fantasy Statblocks oltre ai campi italiani usati da Dataview.
+I mostri importati e le creature create dal vault devono avere frontmatter compatibile con Fantasy Statblocks oltre ai campi italiani usati da Dataview. La documentazione del plugin indica che una nota con `statblock: true` puo essere parsata dal frontmatter quando l'opzione o il comando di parse frontmatter e attivo; non spostare i campi dello statblock solo nel corpo Markdown se la creatura deve entrare nel bestiario del plugin.
 
 Campi minimi per lo statblock:
 
@@ -177,6 +211,144 @@ Campi minimi per lo statblock:
 - `lair_actions`
 
 I campi italiani come `nome`, `categoria`, `tipo`, `tipo_creatura`, `dimensione`, `classe_armatura`, `iniziativa` e `bonus_competenza` vanno mantenuti per dashboard, indici e leggibilita del vault.
+
+Sintassi da preservare:
+
+```yaml
+---
+statblock: true
+name: "Nome creatura"
+type: bestia
+size: media
+alignment: neutrale
+ac: 13
+hp: 18
+speed: 9 m.
+cr: 1/2
+stats: [12, 14, 12, 3, 12, 6]
+traits: []
+actions: []
+bonus_actions: []
+reactions: []
+legendary_actions: []
+lair_actions: []
+---
+```
+
+Nel corpo della nota usa un blocco `statblock` che richiama il nome della creatura gia parsata:
+
+````markdown
+```statblock
+monster: Nome creatura
+```
+````
+
+### Initiative Tracker
+
+Initiative Tracker usa blocchi `encounter` per lanciare combattimenti direttamente dalle note. Il plugin puo lavorare con creature sincronizzate da Fantasy Statblocks, quindi i nomi usati negli encounter devono corrispondere ai nomi del bestiario.
+
+Sintassi base:
+
+````markdown
+```encounter
+name: Ponte delle Campane
+creatures:
+ - 3: Goblin
+ - Prova - Creatura
+```
+````
+
+Sintassi inline utile per tabelle casuali o note rapide:
+
+```markdown
+`encounter: 3: Goblin, 1d4: Scheletro, Prova - Creatura`
+```
+
+Usa il blocco `encounter` per incontri preparati; usa inline `encounter:` solo per gruppi semplici o risultati generati da Dice Roller.
+
+### Dice Roller
+
+Dice Roller usa inline code `dice:` per tiri e table roller. Le tabelle casuali del vault devono avere block id stabili se vengono richiamate da altre note.
+
+Esempi da preservare:
+
+```markdown
+`dice: 1d20`
+`dice: [[Risorse/Tabelle/Tabelle#^umore-png]]`
+`dice: 1d4[[Risorse/Tabelle/Tabelle#^complicazioni]]`
+```
+
+Per lookup table, la prima colonna deve contenere la formula o gli intervalli del tiro e la tabella deve avere due colonne.
+
+### Tabs
+
+Tabs usa code block `tabs`; ogni `tab:` apre una sezione. Poiche il contenuto resta dentro un code block dal punto di vista Markdown, non usarlo per task che devono essere indicizzati come checklist da plugin esterni. E invece adatto per dashboard, archivi lunghi, mostri SRD e viste con Dataview.
+
+````markdown
+````tabs
+tab: Scheda
+Contenuto
+
+tab: Archivio
+Contenuto
+````
+````
+
+### Excalidraw
+
+Excalidraw salva disegni come Markdown e permette frontmatter, link, embed e riferimenti a parti del disegno. Nel vault va usato per mappe vive e relazioni, non come immagine decorativa.
+
+Regole pratiche:
+
+- una mappa Excalidraw deve avere frontmatter con `categoria: risorsa`, `tipo: mappa`, `uso`, `stato` e, quando serve, `mondo`, `luogo`, `fazioni`, `personaggi`, `missioni`;
+- usa embed standard come `![[Risorse/Mappe/Schema Relazioni GDR.excalidraw]]` nelle dashboard operative;
+- usa link interni nel disegno verso note canoniche quando la mappa rappresenta fronti, PNG, luoghi o missioni;
+- usa riferimenti `area=` o `group=` solo quando serve incorporare una porzione specifica del disegno in una nota.
+
+### Calendarium
+
+Calendarium legge campi `fc-*` dal frontmatter. Nel vault i campi Calendarium non sostituiscono `data_mondo`: servono a far apparire sessioni, scadenze e conseguenze nel calendario fantasy.
+
+Campi da mantenere:
+
+- `data_mondo`: testo leggibile al tavolo, usato da dashboard e timeline.
+- `scadenza_mondo`: testo leggibile per pressioni, missioni e fazioni.
+- `fc-calendar`: calendario Calendarium di riferimento, vuoto se si usa quello predefinito.
+- `fc-date`: data parsabile dal calendario fantasy.
+- `fc-end`: fine evento, solo se serve.
+- `fc-category`: categoria operativa, per esempio `sessione`, `scadenza`, `festa`, `pericolo`, `conseguenza`.
+- `fc-display-name`: nome breve dell'evento nel calendario.
+
+Non rinominare i campi `fc-*` e non usare `fc-date` come unica data narrativa: senza `data_mondo` o `scadenza_mondo` le viste operative restano meno leggibili durante il gioco.
+
+### Meta Bind
+
+Meta Bind alimenta pulsanti, input e toggle nelle dashboard e nei template. Le query e gli helper presuppongono che questi input scrivano negli stessi campi YAML documentati sopra.
+
+Sintassi usata nel vault:
+
+```markdown
+`INPUT[toggle:attiva]`
+`INPUT[text:data_mondo]`
+`INPUT[inlineList:condizioni]`
+`INPUT[inlineListSuggester(optionQuery("Mondi/Personaggi"), useLinks(partial)):personaggi]`
+```
+
+Pulsanti di creazione:
+
+````markdown
+```meta-bind-button
+label: Nuova Sessione
+style: primary
+actions:
+  - type: templaterCreateNote
+    templateFile: "z.modelli/dm/Sessione.md"
+    folderPath: "Mondi/Sessioni"
+    open: true
+```
+````
+
+Non cambiare `templateFile`, `folderPath` o il nome dei campi scritti dagli input senza aggiornare anche `z.automazioni/check_vault.js`, dashboard, template e helper Templater. Evita input Meta Bind per campi complessi dei mostri SRD se rischiano di semplificare o riscrivere il frontmatter usato da Fantasy Statblocks.
 
 ## Note Di Prova
 

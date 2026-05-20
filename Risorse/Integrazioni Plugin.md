@@ -91,9 +91,11 @@ Da fare:
 
 - fatto: completare il template incontro con blocchi per creature, iniziativa, terreno, round e condizioni;
 - fatto: collegare le creature di [[Mondi/Creature/Creature]] agli incontri;
-- usare Fantasy Statblocks per le creature con blocchi `statblock` in YAML, mantenendo l'indentazione semplice e verificabile;
+- fatto: usare Fantasy Statblocks per le creature con `statblock: true` e campi YAML nel frontmatter, cosi il plugin puo parsarle nel bestiario;
 - fatto: usare Initiative Tracker per combattimenti veri, dato che gestisce iniziativa, turni, PF, CA, condizioni, stati a durata e creature da Fantasy Statblocks;
+- usare blocchi `encounter` nelle note incontro/sessione quando il combattimento e preparato;
 - usare incontri inline `encounter:` nelle note di sessione solo per gruppi semplici o incontri casuali;
+- mantenere i nomi creature identici tra frontmatter `name`, blocchi `statblock` e blocchi `encounter`;
 - distinguere incontri sociali, esplorativi e combattimenti;
 - fatto: creare una nota `Prova - Incontro` che mostri anche creature e iniziativa.
 
@@ -105,9 +107,9 @@ Obiettivo: rendere tabelle e procedure casuali usabili senza uscire dal vault.
 
 Da fare:
 
-- creare tabelle riutilizzabili in [[Risorse/Tabelle/Tabelle]];
+- creare tabelle riutilizzabili in [[Risorse/Tabelle/Tabelle]] con block id stabili;
 - aggiungere tiri rapidi inline con sintassi `dice:`, per esempio `dice: 1d20`;
-- usare table rollers con block id per incontri casuali, complicazioni, bottino e umore PNG;
+- usare table rollers con block id, per esempio `dice: [[Risorse/Tabelle/Tabelle#^umore-png]]`;
 - usare lookup table a due colonne quando il risultato dipende da un tiro specifico, per esempio `1-2`, `3-4`, `15-20`;
 - usare risultati annidati solo quando rimandano a tabelle gia leggibili;
 - collegare i tiri alle pagine dove servono davvero, non a una pagina tecnica separata;
@@ -124,7 +126,7 @@ Da fare:
 - fatto: usare [[Risorse/Mappe/Schema Relazioni GDR.excalidraw]] come prova base per relazioni tra PNG, luoghi e fazioni;
 - fatto: creare una convenzione per mappe di regione, dungeon e fronti;
 - collegare ogni mappa alla nota mondo, luogo o campagna pertinente;
-- usare Excalidraw quando servono disegno libero, annotazioni visuali, embed e link tra disegni e note;
+- usare Excalidraw quando servono disegno libero, annotazioni visuali, embed, link tra disegni e note o riferimenti `area=`/`group=` a parti del disegno;
 - usare Canvas quando serve una mappa relazionale fatta di note, media, gruppi e connessioni leggibili;
 - ricordare che Canvas salva file `.canvas` in formato JSON Canvas, quindi e adatto a mappe strutturate e durevoli;
 - fatto: mostrare in Worldbuilder Dashboard le mappe principali.

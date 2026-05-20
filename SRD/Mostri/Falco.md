@@ -19,13 +19,13 @@ stats: [5, 16, 8, 2, 14, 6]
 saves: {}
 skillsaves: 
   percezione: 6
-damage_vulnerabilities: 
-damage_resistances: 
-damage_immunities: 
-condition_immunities: 
+damage_vulnerabilities:
+damage_resistances:
+damage_immunities:
+condition_immunities:
 senses: "percezione_passiva: 16"
 languages: "nessuna"
-gear: []
+cr: 0
 traits: []
 actions: 
 - name: "Speroni"
@@ -42,26 +42,25 @@ iniziativa: 3
 hp: 1
 hit_dice: "1d4 - 1"
 speed: "camminata: 3 m, volo: 18 m"
-cr: 0
 xp: 10
 bonus_competenza: 2
 statblock: true
 ---
 # Falco
 
+````tabs
+tab: Scheda
 ```statblock
 monster: Falco
 ```
-
+tab: Dettagli
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Minuscola Bestia, senza allineamento
 > CA: 13
 > PF: 1 (1d4 - 1)
 > Velocita: camminata: 3 m, volo: 18 m
 > GS: 0 (PE 10; BC +2)
-
 ## Caratteristiche
-
 | Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
 | --- | --- | --- | --- |
 | Forza | 5 | -3 | -3 |
@@ -70,24 +69,22 @@ monster: Falco
 | Intelligenza | 2 | -4 | -4 |
 | Saggezza | 14 | 2 | 2 |
 | Carisma | 6 | -2 | -2 |
-
 ## Abilita
 
 percezione: 6
-
 ## Sensi
 
 percezione_passiva: 16
-
 ## Lingue
 
 nessuna
-
+tab: Azioni
 ## Azioni
 
 ### Speroni
 
 *Tiro per colpire in mischia:* +5, portata 1,5 m. *Colpito:* 1 danno tagliente.
+````
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

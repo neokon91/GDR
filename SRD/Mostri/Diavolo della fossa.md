@@ -22,13 +22,13 @@ saves:
 skillsaves: 
   percezione: 10
   persuasione: 19
-damage_vulnerabilities: 
-damage_resistances: 
-damage_immunities: 
-condition_immunities: 
+damage_vulnerabilities:
+damage_resistances:
+damage_immunities:
+condition_immunities:
 senses: "percezione_passiva: 20, vista_pura: 36 m"
 languages: "Infernale, telepatia 36 m"
-gear: []
+cr: 20
 traits: 
 - name: "Aura di paura"
   desc: "Il diavolo della fossa irradia un'aura in un'emanazione di 6 metri fintanto che non è incapacitato.\n\n*Tiro salvezza su Saggezza:* CD 21, qualsiasi nemico che inizi il suo turno all'interno dell'aura.\n\n*Fallimento:* il bersaglio è spaventato fino all'inizio del proprio turno successivo.\n\n*Successo:* il bersaglio è immune all'aura di questo diavolo della fossa per 24 ore."
@@ -61,26 +61,25 @@ iniziativa: 14
 hp: 337
 hit_dice: "27d10 + 189"
 speed: "camminata: 9 m, volo: 18 m"
-cr: 20
 xp: 25000
 bonus_competenza: 6
 statblock: true
 ---
 # Diavolo della fossa
 
+````tabs
+tab: Scheda
 ```statblock
 monster: Diavolo della fossa
 ```
-
+tab: Dettagli
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Grande Immondo (diavolo), legale malvagio
 > CA: 21
 > PF: 337 (27d10 + 189)
 > Velocita: camminata: 9 m, volo: 18 m
 > GS: 20 (PE 25.000; BC +6)
-
 ## Caratteristiche
-
 | Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
 | --- | --- | --- | --- |
 | Forza | 26 | 8 | 8 |
@@ -89,19 +88,16 @@ monster: Diavolo della fossa
 | Intelligenza | 22 | 6 | 6 |
 | Saggezza | 18 | 4 | 10 |
 | Carisma | 24 | 7 | 7 |
-
 ## Abilita
 
 percezione: 10, persuasione: 19
-
 ## Sensi
 
 percezione_passiva: 20, vista_pura: 36 m
-
 ## Lingue
 
 Infernale, telepatia 36 m
-
+tab: Azioni
 ## Tratti
 
 ### Aura di paura
@@ -125,7 +121,6 @@ Se il diavolo della fossa fallisce un tiro salvezza, può scegliere di superarlo
 ### Ristoro diabolico
 
 Se il diavolo della fossa muore al di fuori dei Nove Inferi, il suo corpo si dissolve in fumo sulfureo e ne acquisisce uno nuovo all'istante, tornando in vita con tutti i suoi punti ferita da qualche parte nei Nove Inferi.
-
 ## Azioni
 
 ### Multiattacco
@@ -151,6 +146,7 @@ Il diavolo della fossa effettua un attacco Morso, due attacchi Artiglio diabolic
 ### Incantesimi del fuoco infernale (ricarica 4-6)
 
 Il diavolo della fossa lancia palla di fuoco (di 5º livello) due volte, senza bisogno di componenti materiali e utilizzando Carisma come caratteristica da incantatore (CD del tiro salvezza sull'incantesimo 21). Può sostituire un incantesimo palla di fuoco con blocca mostri (di 7º livello) o con muro di fuoco.
+````
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

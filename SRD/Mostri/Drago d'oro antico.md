@@ -24,13 +24,13 @@ skillsaves:
   intuizione: 10
   percezione: 17
   persuasione: 16
-damage_vulnerabilities: 
-damage_resistances: 
-damage_immunities: 
-condition_immunities: 
+damage_vulnerabilities:
+damage_resistances:
+damage_immunities:
+condition_immunities:
 senses: "percezione_passiva: 27, scurovisione: 36 m, vista_cieca: 18 m"
 languages: "Comune, Draconico"
-gear: []
+cr: 24
 traits: 
 - name: "Anfibio"
   desc: "Il drago può respirare in aria e in acqua."
@@ -65,26 +65,25 @@ iniziativa: 16
 hp: 546
 hit_dice: "28d20 + 252"
 speed: "camminata: 12 m, nuoto: 12 m, volo: 24 m"
-cr: 24
 xp: 62000
 bonus_competenza: 7
 statblock: true
 ---
 # Drago d'oro antico
 
+````tabs
+tab: Scheda
 ```statblock
 monster: Drago d'oro antico
 ```
-
+tab: Dettagli
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Mastodontico Drago (metallico), legale buono
 > CA: 22
 > PF: 546 (28d20 + 252)
 > Velocita: camminata: 12 m, nuoto: 12 m, volo: 24 m
 > GS: 24 (PE 62.000, o 75.000 nella tana; BC +7)
-
 ## Caratteristiche
-
 | Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
 | --- | --- | --- | --- |
 | Forza | 30 | 10 | 10 |
@@ -93,19 +92,16 @@ monster: Drago d'oro antico
 | Intelligenza | 18 | 4 | 4 |
 | Saggezza | 17 | 3 | 10 |
 | Carisma | 28 | 9 | 9 |
-
 ## Abilita
 
 furtivita: 9, intuizione: 10, percezione: 17, persuasione: 16
-
 ## Sensi
 
 percezione_passiva: 27, scurovisione: 36 m, vista_cieca: 18 m
-
 ## Lingue
 
 Comune, Draconico
-
+tab: Azioni
 ## Tratti
 
 ### Anfibio
@@ -115,7 +111,6 @@ Il drago può respirare in aria e in acqua.
 ### Resistenza leggendaria (4/giorno o 5/giorno nella tana)
 
 Se il drago fallisce un tiro salvezza, può scegliere di superarlo comunque.
-
 ## Azioni
 
 ### Multiattacco
@@ -147,7 +142,6 @@ Il drago lancia uno dei seguenti incantesimi, senza bisogno di componenti materi
 ### Soffio indebolente
 
 *Tiro salvezza su Forza:* CD 24, ogni creatura che al momento non è sotto l'effetto di questo soffio in un cono di 27 metri. *Fallimento:* il bersaglio subisce svantaggio alle prove con d20 basate sulla Forza e sottrae 5 (1d10) ai tiri per i danni. La creatura ripete il tiro salvezza alla fine di ogni suo turno e, se lo supera, l'effetto svanisce. Dopo 1 minuto, il tiro viene superato automaticamente.
-
 ## Azioni Leggendarie
 
 Subito dopo il turno di un'altra creatura, il drago può consumare un utilizzo per effettuare una delle seguenti azioni. Il drago recupera tutti gli utilizzi consumati all'inizio di ogni suo turno.
@@ -165,6 +159,7 @@ Il drago usa Incantesimi per lanciare dardo tracciante (di 4º livello).
 ### Ostracismo
 
 *Tiro salvezza su Carisma:* CD 24, una creatura che il drago è in grado di vedere entro 36 metri. *Fallimento:* 24 (7d6) danni da forza, il bersaglio è incapacitato e viene trasportato su un semipiano sicuro fino all'inizio del turno successivo del drago, durante cui riappare in uno spazio libero a scelta del drago entro 36 metri da quest'ultimo. *Fallimento o successo:* il drago non può ripetere quest'azione fino all'inizio del proprio turno successivo.
+````
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

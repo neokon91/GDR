@@ -16,16 +16,16 @@ tipo_oggetto: "armatura"
 categoria_oggetto: "Leggera"
 costo: "45 mo"
 peso: "6,5 kg"
-danni: 
+danni:
 proprieta: []
-padronanza: 
+padronanza:
 classe_armatura: "12 + Des"
 forza: "-"
 furtivita: "-"
-velocita: 
-punti_ferita: 
-soglia_danno: 
-valore_in_mo: 
+velocita:
+punti_ferita:
+soglia_danno:
+valore_in_mo:
 ---
 # Armatura di cuoio borchiato
 

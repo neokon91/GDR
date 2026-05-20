@@ -243,7 +243,7 @@ const pages = dv.pages('"Mondi/Timeline" OR "Inbox"')
 if (!pages.length) {
   dv.paragraph("Nessuna lore collegata alla sessione attiva.");
 } else {
-  dv.table(["Lore", "Stato", "Canon", "Data mondo", "Collegamenti"], pages.map(p => [p.file.link, p.stato ?? "", p.stato_canonico ?? "", p.data_mondo ?? p.evento_mondo ?? "", p.collegamenti ?? p.luoghi ?? []]));
+  dv.table(["Lore", "Stato", "Canon", "Data mondo", "Collegamenti"], pages.map(p => [p.file.link, p.stato ?? "", p.stato_canonico ?? "", p.data_mondo ?? "", p.collegamenti ?? p.luoghi ?? []]));
 }
 ```
 
@@ -305,7 +305,7 @@ style: primary
 actions:
   - type: templaterCreateNote
     templateFile: "z.modelli/Live PNG.md"
-    folderPath: "Mondi/Personaggi"
+    folderPath: "Inbox"
     open: true
 ```
 
@@ -315,7 +315,7 @@ style: primary
 actions:
   - type: templaterCreateNote
     templateFile: "z.modelli/Live Luogo.md"
-    folderPath: "Mondi/Luoghi"
+    folderPath: "Inbox"
     open: true
 ```
 
@@ -354,7 +354,7 @@ LIMIT 12
 ## Lore Capture
 
 ```dataview
-TABLE stato, stato_canonico, evento_mondo, sessioni, collegamenti
+TABLE stato, stato_canonico, data_mondo, sessioni, collegamenti
 FROM "Inbox" OR "Mondi/Timeline"
 WHERE categoria = "lore capture" OR categoria = "evento storico"
 WHERE stato != "archiviata" AND stato != "ignorata" AND !startswith(file.name, "Prova -")

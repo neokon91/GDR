@@ -19,13 +19,13 @@ peso: "2,5 kg"
 danni: "1d8 contundenti"
 proprieta: ["versatile 1d10"]
 padronanza: "Spinta"
-classe_armatura: 
-forza: 
-furtivita: 
-velocita: 
-punti_ferita: 
-soglia_danno: 
-valore_in_mo: 
+classe_armatura:
+forza:
+furtivita:
+velocita:
+punti_ferita:
+soglia_danno:
+valore_in_mo:
 ---
 # Martello da guerra
 

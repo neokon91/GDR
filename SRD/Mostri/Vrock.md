@@ -21,13 +21,13 @@ saves:
   wis: 4
   cha: 2
 skillsaves: {}
-damage_vulnerabilities: 
-damage_resistances: 
-damage_immunities: 
-condition_immunities: 
+damage_vulnerabilities:
+damage_resistances:
+damage_immunities:
+condition_immunities:
 senses: "percezione_passiva: 11, scurovisione: 36 m"
 languages: "Abissale, telepatia 36 m"
-gear: []
+cr: 6
 traits: 
 - name: "Resistenza alla magia"
   desc: "Il vrock dispone di vantaggio ai tiri salvezza contro incantesimi e altri effetti magici."
@@ -54,26 +54,25 @@ iniziativa: 2
 hp: 152
 hit_dice: "16d10 + 64"
 speed: "camminata: 12 m, volo: 18 m"
-cr: 6
 xp: 2300
 bonus_competenza: 3
 statblock: true
 ---
 # Vrock
 
+````tabs
+tab: Scheda
 ```statblock
 monster: Vrock
 ```
-
+tab: Dettagli
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Grande Immondo (demone), caotico malvagio
 > CA: 15
 > PF: 152 (16d10 + 64)
 > Velocita: camminata: 12 m, volo: 18 m
 > GS: 6 (PE 2.300; BC +3)
-
 ## Caratteristiche
-
 | Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
 | --- | --- | --- | --- |
 | Forza | 17 | 3 | 3 |
@@ -82,15 +81,13 @@ monster: Vrock
 | Intelligenza | 8 | -1 | -1 |
 | Saggezza | 13 | 1 | 4 |
 | Carisma | 8 | -1 | 2 |
-
 ## Sensi
 
 percezione_passiva: 11, scurovisione: 36 m
-
 ## Lingue
 
 Abissale, telepatia 36 m
-
+tab: Azioni
 ## Tratti
 
 ### Resistenza alla magia
@@ -100,7 +97,6 @@ Il vrock dispone di vantaggio ai tiri salvezza contro incantesimi e altri effett
 ### Ristoro demoniaco
 
 Se il vrock muore al di fuori dell'Abisso, il suo corpo si dissolve diventando icore ed esso ne acquisisce uno nuovo all'istante, tornando in vita con tutti i suoi punti ferita da qualche parte nell'Abisso.
-
 ## Azioni
 
 ### Multiattacco
@@ -118,6 +114,7 @@ Il vrock effettua due attacchi Sbrandellare.
 ### Stridio stordente (1/giorno)
 
 *Tiro salvezza su Costituzione:* CD 15, tutte le creature in un'emanazione di 6 metri di cui il vrock è il punto di origine (i demoni superano automaticamente il tiro). *Fallimento:* 10 (3d6) danni da tuono, e il bersaglio è stordito fino al termine del turno successivo del vrock.
+````
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

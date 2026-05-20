@@ -16,16 +16,16 @@ tipo_oggetto: "equipaggiamento_avventura"
 categoria_oggetto: "Equipaggiamento d'avventura"
 costo: "40 mo"
 peso: "11 kg"
-danni: 
+danni:
 proprieta: []
-padronanza: 
-classe_armatura: 
-forza: 
-furtivita: 
-velocita: 
-punti_ferita: 
-soglia_danno: 
-valore_in_mo: 
+padronanza:
+classe_armatura:
+forza:
+furtivita:
+velocita:
+punti_ferita:
+soglia_danno:
+valore_in_mo:
 ---
 # Dotazione da studioso
 

@@ -22,13 +22,13 @@ saves:
 skillsaves: 
   furtivita: 6
   percezione: 13
-damage_vulnerabilities: 
-damage_resistances: 
-damage_immunities: 
-condition_immunities: 
+damage_vulnerabilities:
+damage_resistances:
+damage_immunities:
+condition_immunities:
 senses: "percezione_passiva: 23, scurovisione: 36 m, vista_cieca: 18 m"
 languages: "Comune, Draconico"
-gear: []
+cr: 17
 traits: 
 - name: "Resistenza leggendaria (3/giorno o 4/giorno nella tana)"
   desc: "Se il drago fallisce un tiro salvezza, può scegliere di superarlo comunque."
@@ -59,26 +59,25 @@ iniziativa: 12
 hp: 256
 hit_dice: "19d12 + 133"
 speed: "camminata: 12 m, scalata: 12 m, volo: 24 m"
-cr: 17
 xp: 18000
 bonus_competenza: 6
 statblock: true
 ---
 # Drago rosso adulto
 
+````tabs
+tab: Scheda
 ```statblock
 monster: Drago rosso adulto
 ```
-
+tab: Dettagli
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Enorme Drago (cromatico), caotico malvagio
 > CA: 19
 > PF: 256 (19d12 + 133)
 > Velocita: camminata: 12 m, scalata: 12 m, volo: 24 m
 > GS: 17 (PE 18.000, o 20.000 nella tana; BC +6)
-
 ## Caratteristiche
-
 | Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
 | --- | --- | --- | --- |
 | Forza | 27 | 8 | 8 |
@@ -87,25 +86,21 @@ monster: Drago rosso adulto
 | Intelligenza | 16 | 3 | 3 |
 | Saggezza | 13 | 1 | 7 |
 | Carisma | 23 | 6 | 6 |
-
 ## Abilita
 
 furtivita: 6, percezione: 13
-
 ## Sensi
 
 percezione_passiva: 23, scurovisione: 36 m, vista_cieca: 18 m
-
 ## Lingue
 
 Comune, Draconico
-
+tab: Azioni
 ## Tratti
 
 ### Resistenza leggendaria (3/giorno o 4/giorno nella tana)
 
 Se il drago fallisce un tiro salvezza, può scegliere di superarlo comunque.
-
 ## Azioni
 
 ### Multiattacco
@@ -131,7 +126,6 @@ Il drago lancia uno dei seguenti incantesimi, senza bisogno di componenti materi
 ### Soffio di fuoco (ricarica 5-6)
 
 *Tiro salvezza su Destrezza:* CD 21, tutte le creature in un cono di 18 metri. *Fallimento:* 59 (17d6) danni da fuoco. *Successo:* danni dimezzati.
-
 ## Azioni Leggendarie
 
 Subito dopo il turno di un'altra creatura, il drago può consumare un utilizzo per effettuare una delle seguenti azioni. Il drago recupera tutti gli utilizzi consumati all'inizio di ogni suo turno.
@@ -149,6 +143,7 @@ Il drago usa Incantesimi per lanciare comando (di 2º livello). Il drago non pu�
 ### Raggi fiammeggianti
 
 Il drago usa Incantesimi per lanciare raggio rovente. Il drago non può ripetere quest'azione fino all'inizio del proprio turno successivo.
+````
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

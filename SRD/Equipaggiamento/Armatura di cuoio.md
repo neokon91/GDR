@@ -16,16 +16,16 @@ tipo_oggetto: "armatura"
 categoria_oggetto: "Leggera"
 costo: "10 mo"
 peso: "5 kg"
-danni: 
+danni:
 proprieta: []
-padronanza: 
+padronanza:
 classe_armatura: "11 + Des"
 forza: "-"
 furtivita: "-"
-velocita: 
-punti_ferita: 
-soglia_danno: 
-valore_in_mo: 
+velocita:
+punti_ferita:
+soglia_danno:
+valore_in_mo:
 ---
 # Armatura di cuoio
 

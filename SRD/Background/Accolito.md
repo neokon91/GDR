@@ -14,9 +14,8 @@ capitolo: "Origini dei personaggi"
 pagine_sorgente: 93
 punteggi_caratteristica: ["Intelligenza", "Saggezza", "Carisma"]
 talento_origine: "Iniziato alla magia (chierico)"
-competenze: 
-  abilita:["Intuizione", "Religione"]
-  strumenti: "scorte da calligrafo."
+competenze_abilita: ["Intuizione", "Religione"]
+competenze_strumenti: "scorte da calligrafo."
 equipaggiamento_alternativo: "50 mo"
 ---
 # Accolito

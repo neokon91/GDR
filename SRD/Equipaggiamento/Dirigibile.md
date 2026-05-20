@@ -15,17 +15,17 @@ pagine_sorgente: "113-114"
 tipo_oggetto: "veicolo"
 categoria_oggetto: "Veicoli aerei e imbarcazioni"
 costo: "40.000 mo"
-peso: 
-danni: 
+peso:
+danni:
 proprieta: []
-padronanza: 
+padronanza:
 classe_armatura: "13"
-forza: 
-furtivita: 
+forza:
+furtivita:
 velocita: "12 km/h"
 punti_ferita: "300"
 soglia_danno: "-"
-valore_in_mo: 
+valore_in_mo:
 ---
 # Dirigibile
 

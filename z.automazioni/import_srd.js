@@ -145,7 +145,10 @@ function yamlBlock(value, indent = 0) {
             if (!entries.length) return `${pad}- {}`;
             return entries.map(([k, v], index) => {
                 const prefix = index === 0 ? `${pad}- ${yamlKey(k)}:` : `${pad}  ${yamlKey(k)}:`;
-                if (typeof v === "object" && v !== null) return `${prefix}${yamlBlock(v, indent + 4)}`;
+                if (typeof v === "object" && v !== null) {
+                    const rendered = yamlBlock(v, indent + 4);
+                    return rendered.startsWith("\n") ? `${prefix}${rendered}` : `${prefix} ${rendered}`;
+                }
                 return `${prefix} ${yamlScalar(v)}`;
             }).join("\n");
         }).join("\n");
@@ -155,7 +158,10 @@ function yamlBlock(value, indent = 0) {
     if (!entries.length) return "{}";
     return "\n" + entries.map(([k, v]) => {
         const prefix = `${pad}${yamlKey(k)}:`;
-        if (typeof v === "object" && v !== null) return `${prefix}${yamlBlock(v, indent + 2)}`;
+        if (typeof v === "object" && v !== null) {
+            const rendered = yamlBlock(v, indent + 2);
+            return rendered.startsWith("\n") ? `${prefix}${rendered}` : `${prefix} ${rendered}`;
+        }
         return `${prefix} ${yamlScalar(v)}`;
     }).join("\n");
 }
@@ -164,7 +170,8 @@ function frontmatter(fields) {
     const lines = ["---"];
     for (const [key, value] of Object.entries(fields)) {
         const indent = value && typeof value === "object" && !Array.isArray(value) ? 2 : 0;
-        lines.push(`${key}: ${yamlBlock(value, indent)}`);
+        const rendered = yamlBlock(value, indent);
+        lines.push(rendered === "" ? `${key}:` : `${key}: ${rendered}`);
     }
     lines.push("---", "");
     return lines.join("\n");
@@ -273,12 +280,14 @@ function statblockBlocks(blocks) {
 }
 
 function renderBackground(item) {
+    const competenze = item.competenze ?? {};
     const fields = baseFields(item, "background", {
         capitolo: item.capitolo,
         pagine_sorgente: item.pagine_sorgente,
         punteggi_caratteristica: item.punteggi_caratteristica ?? [],
         talento_origine: item.talento_origine,
-        competenze: item.competenze ?? {},
+        competenze_abilita: competenze.abilita ?? [],
+        competenze_strumenti: competenze.strumenti,
         equipaggiamento_alternativo: item.equipaggiamento_alternativo
     });
 
@@ -436,7 +445,7 @@ function renderMonster(item) {
         condition_immunities: "",
         senses: objectText(item.sensi),
         languages: Array.isArray(item.lingue) ? item.lingue.join(", ") : item.lingue,
-        gear: item.equipaggiamento ?? [],
+        cr: cr.valore,
         traits: statblockBlocks(item.tratti),
         actions: statblockBlocks(item.azioni),
         bonus_actions: statblockBlocks(item.azioni_bonus),
@@ -457,18 +466,32 @@ function renderMonster(item) {
         statblock: true
     });
 
-    return frontmatter(fields) + [
-        `# ${item.nome}`,
+    const tabs = [
+        "````tabs",
+        "tab: Scheda",
+        "",
         `\`\`\`statblock\nmonster: ${item.nome}\n\`\`\``,
+        "",
+        "tab: Dettagli",
+        "",
         `> [!infobox|wiki]- Mostro SRD\n> Tipo: ${item.dimensione} ${item.tipo}, ${item.allineamento}\n> CA: ${item.classe_armatura}\n> PF: ${hp.media ?? ""} (${hp.formula ?? ""})\n> Velocita: ${speedText(item.velocita)}\n> GS: ${cr.raw ?? cr.valore ?? ""}`,
         "## Caratteristiche",
         statTable(item),
         item.abilita ? `## Abilita\n\n${objectText(item.abilita)}` : "",
         item.sensi ? `## Sensi\n\n${objectText(item.sensi)}` : "",
         Array.isArray(item.lingue) && item.lingue.length ? `## Lingue\n\n${item.lingue.join(", ")}` : "",
+        "",
+        "tab: Azioni",
+        "",
         namedBlocks("Tratti", item.tratti),
         namedBlocks("Azioni", item.azioni),
         item.azioni_leggendarie ? renderLegendary(item.azioni_leggendarie) : "",
+        "````",
+    ].filter(Boolean).join("\n");
+
+    return frontmatter(fields) + [
+        `# ${item.nome}`,
+        tabs,
         attribution()
     ].filter(Boolean).join("\n\n");
 }

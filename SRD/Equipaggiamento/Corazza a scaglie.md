@@ -16,16 +16,16 @@ tipo_oggetto: "armatura"
 categoria_oggetto: "Media"
 costo: "50 mo"
 peso: "22,5 kg"
-danni: 
+danni:
 proprieta: []
-padronanza: 
+padronanza:
 classe_armatura: "14 + Des max 2"
 forza: "-"
 furtivita: "Svantaggio"
-velocita: 
-punti_ferita: 
-soglia_danno: 
-valore_in_mo: 
+velocita:
+punti_ferita:
+soglia_danno:
+valore_in_mo:
 ---
 # Corazza a scaglie
 

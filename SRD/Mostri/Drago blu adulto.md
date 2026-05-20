@@ -22,13 +22,13 @@ saves:
 skillsaves: 
   furtivita: 5
   percezione: 12
-damage_vulnerabilities: 
-damage_resistances: 
-damage_immunities: 
-condition_immunities: 
+damage_vulnerabilities:
+damage_resistances:
+damage_immunities:
+condition_immunities:
 senses: "percezione_passiva: 22, scurovisione: 36 m, vista_cieca: 18 m"
 languages: "Comune, Draconico"
-gear: []
+cr: 16
 traits: 
 - name: "Resistenza leggendaria (3/giorno o 4/giorno nella tana)"
   desc: "Se il drago fallisce un tiro salvezza, può scegliere di superarlo comunque."
@@ -59,26 +59,25 @@ iniziativa: 10
 hp: 212
 hit_dice: "17d12 + 102"
 speed: "camminata: scavo 9 m, volo: 24 m"
-cr: 16
 xp: 15000
 bonus_competenza: 5
 statblock: true
 ---
 # Drago blu adulto
 
+````tabs
+tab: Scheda
 ```statblock
 monster: Drago blu adulto
 ```
-
+tab: Dettagli
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Enorme Drago (cromatico), legale malvagio
 > CA: 19
 > PF: 212 (17d12 + 102)
 > Velocita: camminata: scavo 9 m, volo: 24 m
 > GS: 16 (PE 15.000, o 18.000 nella tana; BC +5)
-
 ## Caratteristiche
-
 | Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
 | --- | --- | --- | --- |
 | Forza | 25 | 7 | 7 |
@@ -87,25 +86,21 @@ monster: Drago blu adulto
 | Intelligenza | 16 | 3 | 3 |
 | Saggezza | 15 | 2 | 7 |
 | Carisma | 20 | 5 | 5 |
-
 ## Abilita
 
 furtivita: 5, percezione: 12
-
 ## Sensi
 
 percezione_passiva: 22, scurovisione: 36 m, vista_cieca: 18 m
-
 ## Lingue
 
 Comune, Draconico
-
+tab: Azioni
 ## Tratti
 
 ### Resistenza leggendaria (3/giorno o 4/giorno nella tana)
 
 Se il drago fallisce un tiro salvezza, può scegliere di superarlo comunque.
-
 ## Azioni
 
 ### Multiattacco
@@ -133,7 +128,6 @@ A volontà:
 ### Soffio di fulmini (ricarica 5-6)
 
 *Tiro salvezza su Destrezza:* CD 19, tutte le creature in una linea lunga 27 metri e larga 1,5 metri. *Fallimento:* 60 (11d10) danni da fulmine. *Successo:* danni dimezzati.
-
 ## Azioni Leggendarie
 
 Subito dopo il turno di un'altra creatura, il drago può consumare un utilizzo per effettuare una delle seguenti azioni. Il drago recupera tutti gli utilizzi consumati all'inizio di ogni suo turno.
@@ -151,6 +145,7 @@ Il drago effettua un attacco Squarcio.
 ### Volo celato
 
 Il drago usa Incantesimi per lanciare invisibilità su se stesso, e può volare fino a metà della sua velocità di volo. Il drago non può ripetere quest'azione fino all'inizio del proprio turno successivo.
+````
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

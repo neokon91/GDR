@@ -19,13 +19,13 @@ stats: [14, 10, 13, 2, 10, 5]
 saves: 
   str: 4
 skillsaves: {}
-damage_vulnerabilities: 
-damage_resistances: 
-damage_immunities: 
-condition_immunities: 
+damage_vulnerabilities:
+damage_resistances:
+damage_immunities:
+condition_immunities:
 senses: "percezione_passiva: 10"
 languages: "nessuna"
-gear: []
+cr: 0.125
 traits: 
 - name: "Bestia da soma"
   desc: "Per determinare la sua capacità di carico, il mulo è considerato come se fosse di una categoria di taglia superiore."
@@ -44,26 +44,25 @@ iniziativa: 0
 hp: 11
 hit_dice: "2d8 + 2"
 speed: "camminata: 12 m"
-cr: 0.125
 xp: 25
 bonus_competenza: 2
 statblock: true
 ---
 # Mulo
 
+````tabs
+tab: Scheda
 ```statblock
 monster: Mulo
 ```
-
+tab: Dettagli
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Media Bestia, senza allineamento
 > CA: 10
 > PF: 11 (2d8 + 2)
 > Velocita: camminata: 12 m
 > GS: 1/8 (PE 25; BC +2)
-
 ## Caratteristiche
-
 | Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
 | --- | --- | --- | --- |
 | Forza | 14 | 2 | 4 |
@@ -72,26 +71,24 @@ monster: Mulo
 | Intelligenza | 2 | -4 | -4 |
 | Saggezza | 10 | 0 | 0 |
 | Carisma | 5 | -3 | -3 |
-
 ## Sensi
 
 percezione_passiva: 10
-
 ## Lingue
 
 nessuna
-
+tab: Azioni
 ## Tratti
 
 ### Bestia da soma
 
 Per determinare la sua capacità di carico, il mulo è considerato come se fosse di una categoria di taglia superiore.
-
 ## Azioni
 
 ### Zoccoli
 
 *Tiro per colpire in mischia:* +4, portata 1,5 m. *Colpito:* 4 (1d4 + 2) danni contundenti.
+````
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

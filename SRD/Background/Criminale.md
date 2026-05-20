@@ -14,9 +14,8 @@ capitolo: "Origini dei personaggi"
 pagine_sorgente: 93
 punteggi_caratteristica: ["Destrezza", "Costituzione", "Intelligenza"]
 talento_origine: "Allerta"
-competenze: 
-  abilita:["Rapidita di mano", "Furtivita"]
-  strumenti: "arnesi da scasso."
+competenze_abilita: ["Rapidita di mano", "Furtivita"]
+competenze_strumenti: "arnesi da scasso."
 equipaggiamento_alternativo: "50 mo"
 ---
 # Criminale

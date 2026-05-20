@@ -21,13 +21,13 @@ skillsaves:
   furtivita: 5
   inganno: 6
   intuizione: 5
-damage_vulnerabilities: 
-damage_resistances: 
-damage_immunities: 
-condition_immunities: 
+damage_vulnerabilities:
+damage_resistances:
+damage_immunities:
+condition_immunities:
 senses: "percezione_passiva: 15, scurovisione: 36 m"
 languages: "Abissale, Comune, Infernale, Primordiale"
-gear: []
+cr: 5
 traits: 
 - name: "Borsa dell'anima"
   desc: "La megera ha una borsa dell'anima. Finché impugna o trasporta la borsa, può usarne l'azione Infestare incubi. La borsa ha CA 15, 20 PF e resistenza a tutti i danni, e si trasforma in polvere se ridotta a 0 punti ferita. Se la borsa viene distrutta, qualsiasi anima al suo interno viene liberata. La megera può creare una nuova borsa dopo 7 giorni."
@@ -58,26 +58,25 @@ iniziativa: 5
 hp: 112
 hit_dice: "15d8 + 45"
 speed: "camminata: 9 m"
-cr: 5
 xp: 1800
 bonus_competenza: 3
 statblock: true
 ---
 # Megera notturna
 
+````tabs
+tab: Scheda
 ```statblock
 monster: Megera notturna
 ```
-
+tab: Dettagli
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Medio Immondo, neutrale malvagio
 > CA: 17
 > PF: 112 (15d8 + 45)
 > Velocita: camminata: 9 m
 > GS: 5 (PE 1.800; BC +3)
-
 ## Caratteristiche
-
 | Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
 | --- | --- | --- | --- |
 | Forza | 18 | 4 | 4 |
@@ -86,19 +85,16 @@ monster: Megera notturna
 | Intelligenza | 16 | 3 | 3 |
 | Saggezza | 14 | 2 | 2 |
 | Carisma | 16 | 3 | 3 |
-
 ## Abilita
 
 furtivita: 5, inganno: 6, intuizione: 5
-
 ## Sensi
 
 percezione_passiva: 15, scurovisione: 36 m
-
 ## Lingue
 
 Abissale, Comune, Infernale, Primordiale
-
+tab: Azioni
 ## Tratti
 
 ### Borsa dell'anima
@@ -112,7 +108,6 @@ Finché si trova entro 9 metri da almeno due megere alleate, la megera può lanc
 ### Resistenza alla magia
 
 La megera dispone di vantaggio ai tiri salvezza contro incantesimi e altri effetti magici.
-
 ## Azioni
 
 ### Multiattacco
@@ -130,6 +125,7 @@ La megera lancia uno dei seguenti incantesimi senza bisogno di componenti materi
 ### Infestare incubi (1/giorno; richiede Borsa dell'anima)
 
 Finché si trova sul Piano Etereo, la megera lancia sogno, utilizzando la stessa caratteristica da incantatore di Incantesimi. Soltanto la megera può agire da messaggera dell'incantesimo, e il bersaglio deve essere una creatura che la megera è in grado di vedere sul Piano Materiale. L'incantesimo fallisce ed è sprecato se il bersaglio è sotto l'effetto dell'incantesimo protezione dal bene e dal male o se si trova nel raggio dell'incantesimo cerchio magico. Se il bersaglio subisce danni dall'incantesimo sogno, i punti ferita massimi del bersaglio sono ridotti di un ammontare pari ai danni subiti. Se l'incantesimo uccide il bersaglio, la sua anima resta intrappolata nella borsa dell'anima della megera, e il bersaglio non può essere resuscitato finché la sua anima non viene liberata.
+````
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

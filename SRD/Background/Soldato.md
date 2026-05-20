@@ -14,9 +14,8 @@ capitolo: "Origini dei personaggi"
 pagine_sorgente: 93
 punteggi_caratteristica: ["Forza", "Destrezza", "Costituzione"]
 talento_origine: "Aggressore selvaggio"
-competenze: 
-  abilita:["Atletica", "Intimidire"]
-  strumenti: "un gioco a scelta."
+competenze_abilita: ["Atletica", "Intimidire"]
+competenze_strumenti: "un gioco a scelta."
 equipaggiamento_alternativo: "50 mo"
 ---
 # Soldato

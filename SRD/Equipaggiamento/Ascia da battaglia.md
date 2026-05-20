@@ -19,13 +19,13 @@ peso: "2 kg"
 danni: "1d8 taglienti"
 proprieta: ["versatile 1d10"]
 padronanza: "Rovesciamento"
-classe_armatura: 
-forza: 
-furtivita: 
-velocita: 
-punti_ferita: 
-soglia_danno: 
-valore_in_mo: 
+classe_armatura:
+forza:
+furtivita:
+velocita:
+punti_ferita:
+soglia_danno:
+valore_in_mo:
 ---
 # Ascia da battaglia
 

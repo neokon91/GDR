@@ -23,13 +23,13 @@ skillsaves:
   atletica: 7
   furtivita: 5
   percezione: 5
-damage_vulnerabilities: 
-damage_resistances: 
-damage_immunities: 
-condition_immunities: 
+damage_vulnerabilities:
+damage_resistances:
+damage_immunities:
+condition_immunities:
 senses: "percezione_passiva: 15, scurovisione: 18 m, vista_cieca: 3 m"
 languages: "Comune, Draconico"
-gear: []
+cr: 5
 traits: 
 - name: "Origine draconica"
   desc: "Il mezzodrago è legato al tipo di drago associato con uno dei seguenti tipi di danno (a scelta del GM): acido, freddo, fulmine, fuoco o veleno. Questa scelta influenza gli altri aspetti della scheda delle statistiche."
@@ -54,26 +54,25 @@ iniziativa: 5
 hp: 105
 hit_dice: "14d8 + 42"
 speed: "camminata: 12 m"
-cr: 5
 xp: 1800
 bonus_competenza: 3
 statblock: true
 ---
 # Mezzodrago
 
+````tabs
+tab: Scheda
 ```statblock
 monster: Mezzodrago
 ```
-
+tab: Dettagli
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Medio Drago, neutrale
 > CA: 18
 > PF: 105 (14d8 + 42)
 > Velocita: camminata: 12 m
 > GS: 5 (PE 1.800; BC +3)
-
 ## Caratteristiche
-
 | Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
 | --- | --- | --- | --- |
 | Forza | 19 | 4 | 4 |
@@ -82,25 +81,21 @@ monster: Mezzodrago
 | Intelligenza | 10 | 0 | 0 |
 | Saggezza | 15 | 2 | 5 |
 | Carisma | 14 | 2 | 2 |
-
 ## Abilita
 
 atletica: 7, furtivita: 5, percezione: 5
-
 ## Sensi
 
 percezione_passiva: 15, scurovisione: 18 m, vista_cieca: 3 m
-
 ## Lingue
 
 Comune, Draconico
-
+tab: Azioni
 ## Tratti
 
 ### Origine draconica
 
 Il mezzodrago è legato al tipo di drago associato con uno dei seguenti tipi di danno (a scelta del GM): acido, freddo, fulmine, fuoco o veleno. Questa scelta influenza gli altri aspetti della scheda delle statistiche.
-
 ## Azioni
 
 ### Multiattacco
@@ -114,6 +109,7 @@ Il mezzodrago effettua due attacchi Artiglio.
 ### Soffio del drago (ricarica 5-6)
 
 *Tiro salvezza su Destrezza:* CD 14, tutte le creature in un cono di 9 metri. *Fallimento:* 28 (8d6) danni del tipo scelto per il tratto Origine draconica. *Successo:* danni dimezzati.
+````
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

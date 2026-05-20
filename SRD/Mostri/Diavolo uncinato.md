@@ -25,13 +25,13 @@ skillsaves:
   inganno: 5
   intuizione: 5
   percezione: 8
-damage_vulnerabilities: 
-damage_resistances: 
-damage_immunities: 
-condition_immunities: 
+damage_vulnerabilities:
+damage_resistances:
+damage_immunities:
+condition_immunities:
 senses: "percezione_passiva: 18, scurovisione_36_m_non_ostacolata_dall_oscurita_magica: true"
 languages: "Infernale, telepatia 36 m"
-gear: []
+cr: 5
 traits: 
 - name: "Pelle uncinata"
   desc: "All'inizio di ogni suo turno, il diavolo infligge 5 (1d10) danni perforanti a tutte le creature che afferra o a qualsiasi creatura lo afferri."
@@ -60,26 +60,25 @@ iniziativa: 3
 hp: 110
 hit_dice: "13d8 + 52"
 speed: "camminata: 9 m, scalata: 9 m"
-cr: 5
 xp: 1800
 bonus_competenza: 3
 statblock: true
 ---
 # Diavolo uncinato
 
+````tabs
+tab: Scheda
 ```statblock
 monster: Diavolo uncinato
 ```
-
+tab: Dettagli
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Medio Immondo (diavolo), legale malvagio
 > CA: 15
 > PF: 110 (13d8 + 52)
 > Velocita: camminata: 9 m, scalata: 9 m
 > GS: 5 (PE 1.800; BC +3)
-
 ## Caratteristiche
-
 | Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
 | --- | --- | --- | --- |
 | Forza | 16 | 3 | 6 |
@@ -88,19 +87,16 @@ monster: Diavolo uncinato
 | Intelligenza | 12 | 1 | 1 |
 | Saggezza | 14 | 2 | 5 |
 | Carisma | 14 | 2 | 5 |
-
 ## Abilita
 
 inganno: 5, intuizione: 5, percezione: 8
-
 ## Sensi
 
 percezione_passiva: 18, scurovisione_36_m_non_ostacolata_dall_oscurita_magica: true
-
 ## Lingue
 
 Infernale, telepatia 36 m
-
+tab: Azioni
 ## Tratti
 
 ### Pelle uncinata
@@ -114,7 +110,6 @@ Il diavolo dispone di vantaggio ai tiri salvezza contro incantesimi e altri effe
 ### Ristoro diabolico
 
 Se il diavolo muore al di fuori dei Nove Inferi, il suo corpo si dissolve in fumo sulfureo e ne acquisisce uno nuovo all'istante, tornando in vita con tutti i suoi punti ferita da qualche parte nei Nove Inferi.
-
 ## Azioni
 
 ### Multiattacco
@@ -132,6 +127,7 @@ Il diavolo effettua un attacco Artigli e un attacco Coda, o effettua due attacch
 ### Scagliare fiamma
 
 *Tiro per colpire a distanza:* +5, gittata 45 m. *Colpito:* 17 (5d6) danni da fuoco. Se il bersaglio è un oggetto infiammabile che non è indossato o trasportato, inizia a bruciare.
+````
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

@@ -22,13 +22,13 @@ saves:
 skillsaves: 
   furtivita: 2
   percezione: 4
-damage_vulnerabilities: 
-damage_resistances: 
-damage_immunities: 
-condition_immunities: 
+damage_vulnerabilities:
+damage_resistances:
+damage_immunities:
+condition_immunities:
 senses: "percezione_passiva: 14, scurovisione: 18 m, vista_cieca: 3 m"
 languages: "Draconico"
-gear: []
+cr: 1
 traits: []
 actions: 
 - name: "Squarcio"
@@ -49,26 +49,25 @@ iniziativa: 2
 hp: 22
 hit_dice: "4d8 + 4"
 speed: "camminata: 5 m, volo: 18 m"
-cr: 1
 xp: 200
 bonus_competenza: 2
 statblock: true
 ---
 # Drago d'ottone cucciolo
 
+````tabs
+tab: Scheda
 ```statblock
 monster: Drago d'ottone cucciolo
 ```
-
+tab: Dettagli
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Medio Drago (metallico), caotico buono
 > CA: 15
 > PF: 22 (4d8 + 4)
 > Velocita: camminata: 5 m, volo: 18 m
 > GS: 1 (PE 200; BC +2)
-
 ## Caratteristiche
-
 | Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
 | --- | --- | --- | --- |
 | Forza | 15 | 2 | 2 |
@@ -77,19 +76,16 @@ monster: Drago d'ottone cucciolo
 | Intelligenza | 10 | 0 | 0 |
 | Saggezza | 11 | 0 | 2 |
 | Carisma | 13 | 1 | 1 |
-
 ## Abilita
 
 furtivita: 2, percezione: 4
-
 ## Sensi
 
 percezione_passiva: 14, scurovisione: 18 m, vista_cieca: 3 m
-
 ## Lingue
 
 Draconico
-
+tab: Azioni
 ## Azioni
 
 ### Squarcio
@@ -105,6 +101,7 @@ Draconico
 *Tiro salvezza su Costituzione:* CD 11, tutte le creature in un cono di 4,5 metri. *Fallimento:* il bersaglio è incapacitato fino al termine del proprio turno successivo, a quel punto ripete il tiro salvezza.
 
 *Secondo fallimento:* il bersaglio cade privo di sensi per 1 minuto. Questo effetto termina se il bersaglio subisce danni o se una creatura entro 1,5 metri da esso esegue un'azione per svegliarlo.
+````
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

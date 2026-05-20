@@ -23,13 +23,13 @@ skillsaves:
   furtivita: 6
   inganno: 9
   percezione: 12
-damage_vulnerabilities: 
-damage_resistances: 
-damage_immunities: 
-condition_immunities: 
+damage_vulnerabilities:
+damage_resistances:
+damage_immunities:
+condition_immunities:
 senses: "percezione_passiva: 22, scurovisione: 36 m, vista_cieca: 18 m"
 languages: "Comune, Draconico"
-gear: []
+cr: 14
 traits: 
 - name: "Resistenza leggendaria (3/giorno o 4/giorno nella tana)"
   desc: "Se il drago fallisce un tiro salvezza, può scegliere di superarlo comunque."
@@ -62,26 +62,25 @@ iniziativa: 11
 hp: 184
 hit_dice: "16d12 + 80"
 speed: "camminata: 12 m, scalata: 12 m, volo: 24 m"
-cr: 14
 xp: 11500
 bonus_competenza: 5
 statblock: true
 ---
 # Drago di rame adulto
 
+````tabs
+tab: Scheda
 ```statblock
 monster: Drago di rame adulto
 ```
-
+tab: Dettagli
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Enorme Drago (metallico), caotico buono
 > CA: 18
 > PF: 184 (16d12 + 80)
 > Velocita: camminata: 12 m, scalata: 12 m, volo: 24 m
 > GS: 14 (PE 11.500, o 13.000 nella tana; BC +5)
-
 ## Caratteristiche
-
 | Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
 | --- | --- | --- | --- |
 | Forza | 23 | 6 | 6 |
@@ -90,25 +89,21 @@ monster: Drago di rame adulto
 | Intelligenza | 18 | 4 | 4 |
 | Saggezza | 15 | 2 | 7 |
 | Carisma | 18 | 4 | 4 |
-
 ## Abilita
 
 furtivita: 6, inganno: 9, percezione: 12
-
 ## Sensi
 
 percezione_passiva: 22, scurovisione: 36 m, vista_cieca: 18 m
-
 ## Lingue
 
 Comune, Draconico
-
+tab: Azioni
 ## Tratti
 
 ### Resistenza leggendaria (3/giorno o 4/giorno nella tana)
 
 Se il drago fallisce un tiro salvezza, può scegliere di superarlo comunque.
-
 ## Azioni
 
 ### Multiattacco
@@ -140,7 +135,6 @@ Il drago lancia uno dei seguenti incantesimi, senza bisogno di componenti materi
 ### Soffio rallentante
 
 *Tiro salvezza su Costituzione:* CD 18, tutte le creature in un cono di 18 metri. *Fallimento:* il bersaglio non può effettuare reazioni, la sua velocità è dimezzata e nel suo turno può effettuare un'azione o un'azione bonus, non entrambe. L'effetto dura fino al termine del proprio turno successivo.
-
 ## Azioni Leggendarie
 
 Subito dopo il turno di un'altra creatura, il drago può consumare un utilizzo per effettuare una delle seguenti azioni. Il drago recupera tutti gli utilizzi consumati all'inizio di ogni suo turno.
@@ -158,6 +152,7 @@ Il drago si muove fino a metà della sua velocità, ed effettua un attacco Squar
 ### Scossa mentale
 
 Il drago usa Incantesimi per lanciare aculeo mentale (di 4º livello). Il drago non può ripetere quest'azione fino all'inizio del proprio turno successivo.
+````
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

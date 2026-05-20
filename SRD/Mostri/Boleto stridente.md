@@ -18,13 +18,13 @@ ac: 5
 stats: [1, 1, 10, 1, 3, 1]
 saves: {}
 skillsaves: {}
-damage_vulnerabilities: 
-damage_resistances: 
-damage_immunities: 
-condition_immunities: 
+damage_vulnerabilities:
+damage_resistances:
+damage_immunities:
+condition_immunities:
 senses: "percezione_passiva: 6, vista_cieca: 9 m"
 languages: "nessuna"
-gear: []
+cr: 0
 traits: []
 actions: []
 bonus_actions: []
@@ -41,26 +41,25 @@ iniziativa: -5
 hp: 13
 hit_dice: "3d8"
 speed: "camminata: 5 m"
-cr: 0
 xp: 0
 bonus_competenza: 2
 statblock: true
 ---
 # Boleto stridente
 
+````tabs
+tab: Scheda
 ```statblock
 monster: Boleto stridente
 ```
-
+tab: Dettagli
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Medio Vegetale, senza allineamento
 > CA: 5
 > PF: 13 (3d8)
 > Velocita: camminata: 5 m
 > GS: 0 (PE 0; BC +2)
-
 ## Caratteristiche
-
 | Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
 | --- | --- | --- | --- |
 | Forza | 1 | -5 | -5 |
@@ -69,14 +68,14 @@ monster: Boleto stridente
 | Intelligenza | 1 | -5 | -5 |
 | Saggezza | 3 | -4 | -4 |
 | Carisma | 1 | -5 | -5 |
-
 ## Sensi
 
 percezione_passiva: 6, vista_cieca: 9 m
-
 ## Lingue
 
 nessuna
+tab: Azioni
+````
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

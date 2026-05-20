@@ -15,17 +15,17 @@ pagine_sorgente: "113-114"
 tipo_oggetto: "veicolo"
 categoria_oggetto: "Veicoli aerei e imbarcazioni"
 costo: "50 mo"
-peso: 
-danni: 
+peso:
+danni:
 proprieta: []
-padronanza: 
+padronanza:
 classe_armatura: "11"
-forza: 
-furtivita: 
+forza:
+furtivita:
 velocita: "2,25 km/h"
 punti_ferita: "50"
 soglia_danno: "-"
-valore_in_mo: 
+valore_in_mo:
 ---
 # Barca a remi
 

@@ -25,13 +25,13 @@ skillsaves:
   intuizione: 7
   percezione: 7
   persuasione: 9
-damage_vulnerabilities: 
-damage_resistances: 
-damage_immunities: 
-condition_immunities: 
+damage_vulnerabilities:
+damage_resistances:
+damage_immunities:
+condition_immunities:
 senses: "percezione_passiva: 17, vista_cieca: 36 m"
 languages: "Infernale, telepatia 36 m"
-gear: []
+cr: 14
 traits: 
 - name: "Resistenza alla magia"
   desc: "Il diavolo dispone di vantaggio ai tiri salvezza contro incantesimi e altri effetti magici."
@@ -58,26 +58,25 @@ iniziativa: 7
 hp: 228
 hit_dice: "24d10 + 96"
 speed: "camminata: 12 m"
-cr: 14
 xp: 11500
 bonus_competenza: 5
 statblock: true
 ---
 # Diavolo del ghiaccio
 
+````tabs
+tab: Scheda
 ```statblock
 monster: Diavolo del ghiaccio
 ```
-
+tab: Dettagli
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Grande Immondo (diavolo), legale malvagio
 > CA: 18
 > PF: 228 (24d10 + 96)
 > Velocita: camminata: 12 m
 > GS: 14 (PE 11.500; BC +5)
-
 ## Caratteristiche
-
 | Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
 | --- | --- | --- | --- |
 | Forza | 21 | 5 | 5 |
@@ -86,19 +85,16 @@ monster: Diavolo del ghiaccio
 | Intelligenza | 18 | 4 | 4 |
 | Saggezza | 15 | 2 | 7 |
 | Carisma | 18 | 4 | 9 |
-
 ## Abilita
 
 intuizione: 7, percezione: 7, persuasione: 9
-
 ## Sensi
 
 percezione_passiva: 17, vista_cieca: 36 m
-
 ## Lingue
 
 Infernale, telepatia 36 m
-
+tab: Azioni
 ## Tratti
 
 ### Resistenza alla magia
@@ -108,7 +104,6 @@ Il diavolo dispone di vantaggio ai tiri salvezza contro incantesimi e altri effe
 ### Ristoro diabolico
 
 Se il diavolo muore al di fuori dei Nove Inferi, il suo corpo si dissolve in fumo sulfureo e ne acquisisce uno nuovo all'istante, tornando in vita con tutti i suoi punti ferita da qualche parte nei Nove Inferi.
-
 ## Azioni
 
 ### Multiattacco
@@ -126,6 +121,7 @@ Il diavolo effettua tre attacchi Lancia di ghiaccio. Può sostituire un attacco 
 ### Muro di ghiaccio (ricarica 6)
 
 Il diavolo lancia muro di ghiaccio (di 8º livello), senza bisogno di componenti e utilizzando Intelligenza come caratteristica da incantatore (CD del tiro salvezza sull'incantesimo 17).
+````
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

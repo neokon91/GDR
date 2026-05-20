@@ -19,13 +19,13 @@ peso: "1,5 kg"
 danni: "1d4 taglienti"
 proprieta: ["accurata", "portata"]
 padronanza: "Lentezza"
-classe_armatura: 
-forza: 
-furtivita: 
-velocita: 
-punti_ferita: 
-soglia_danno: 
-valore_in_mo: 
+classe_armatura:
+forza:
+furtivita:
+velocita:
+punti_ferita:
+soglia_danno:
+valore_in_mo:
 ---
 # Frusta
 

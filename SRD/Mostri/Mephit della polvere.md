@@ -20,13 +20,13 @@ saves: {}
 skillsaves: 
   furtivita: 4
   percezione: 2
-damage_vulnerabilities: 
-damage_resistances: 
-damage_immunities: 
-condition_immunities: 
+damage_vulnerabilities:
+damage_resistances:
+damage_immunities:
+condition_immunities:
 senses: "percezione_passiva: 12, scurovisione: 18 m"
 languages: "Primordiale (Auran, Terran)"
-gear: []
+cr: 0.5
 traits: 
 - name: "Esplosione mortale"
   desc: "Il mephit esplode quando muore. *Tiro salvezza su Destrezza:* CD 10, tutte le creature in un'emanazione di 1,5 metri di cui il mephit è il punto di origine. *Fallimento:* 5 (2d4) danni contundenti. *Successo:* danni dimezzati."
@@ -49,26 +49,25 @@ iniziativa: 2
 hp: 17
 hit_dice: "5d6"
 speed: "camminata: 9 m, volo: 9 m"
-cr: 0.5
 xp: 100
 bonus_competenza: 2
 statblock: true
 ---
 # Mephit della polvere
 
+````tabs
+tab: Scheda
 ```statblock
 monster: Mephit della polvere
 ```
-
+tab: Dettagli
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Piccolo Elementale, neutrale malvagio
 > CA: 12
 > PF: 17 (5d6)
 > Velocita: camminata: 9 m, volo: 9 m
 > GS: 1/2 (PE 100; BC +2)
-
 ## Caratteristiche
-
 | Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
 | --- | --- | --- | --- |
 | Forza | 5 | -3 | -3 |
@@ -77,25 +76,21 @@ monster: Mephit della polvere
 | Intelligenza | 9 | -1 | -1 |
 | Saggezza | 11 | 0 | 0 |
 | Carisma | 10 | 0 | 0 |
-
 ## Abilita
 
 furtivita: 4, percezione: 2
-
 ## Sensi
 
 percezione_passiva: 12, scurovisione: 18 m
-
 ## Lingue
 
 Primordiale (Auran, Terran)
-
+tab: Azioni
 ## Tratti
 
 ### Esplosione mortale
 
 Il mephit esplode quando muore. *Tiro salvezza su Destrezza:* CD 10, tutte le creature in un'emanazione di 1,5 metri di cui il mephit è il punto di origine. *Fallimento:* 5 (2d4) danni contundenti. *Successo:* danni dimezzati.
-
 ## Azioni
 
 ### Artiglio
@@ -109,6 +104,7 @@ Il mephit esplode quando muore. *Tiro salvezza su Destrezza:* CD 10, tutte le cr
 ### Sonno (1/giorno)
 
 Il mephit lancia sonno senza bisogno di componenti, utilizzando Carisma come caratteristica da incantatore (CD del tiro salvezza sull'incantesimo 10).
+````
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

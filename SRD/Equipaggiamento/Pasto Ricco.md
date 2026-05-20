@@ -15,17 +15,17 @@ pagine_sorgente: "114-115"
 tipo_oggetto: "vitto_alloggio"
 categoria_oggetto: "Vitto e alloggio"
 costo: "3 ma"
-peso: 
-danni: 
+peso:
+danni:
 proprieta: []
-padronanza: 
-classe_armatura: 
-forza: 
-furtivita: 
-velocita: 
-punti_ferita: 
-soglia_danno: 
-valore_in_mo: 
+padronanza:
+classe_armatura:
+forza:
+furtivita:
+velocita:
+punti_ferita:
+soglia_danno:
+valore_in_mo:
 ---
 # Pasto Ricco
 

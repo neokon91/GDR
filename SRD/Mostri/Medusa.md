@@ -22,13 +22,13 @@ skillsaves:
   furtivita: 6
   inganno: 5
   percezione: 4
-damage_vulnerabilities: 
-damage_resistances: 
-damage_immunities: 
-condition_immunities: 
+damage_vulnerabilities:
+damage_resistances:
+damage_immunities:
+condition_immunities:
 senses: "percezione_passiva: 14, scurovisione: 45 m"
 languages: "Comune più un'altra lingua"
-gear: []
+cr: 6
 traits: []
 actions: 
 - name: "Multiattacco"
@@ -53,26 +53,25 @@ iniziativa: 6
 hp: 127
 hit_dice: "17d8 + 51"
 speed: "camminata: 9 m"
-cr: 6
 xp: 2300
 bonus_competenza: 3
 statblock: true
 ---
 # Medusa
 
+````tabs
+tab: Scheda
 ```statblock
 monster: Medusa
 ```
-
+tab: Dettagli
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Media Mostruosità, legale malvagio
 > CA: 15
 > PF: 127 (17d8 + 51)
 > Velocita: camminata: 9 m
 > GS: 6 (PE 2.300; BC +3)
-
 ## Caratteristiche
-
 | Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
 | --- | --- | --- | --- |
 | Forza | 10 | 0 | 0 |
@@ -81,19 +80,16 @@ monster: Medusa
 | Intelligenza | 12 | 1 | 1 |
 | Saggezza | 13 | 1 | 4 |
 | Carisma | 15 | 2 | 2 |
-
 ## Abilita
 
 furtivita: 6, inganno: 5, percezione: 4
-
 ## Sensi
 
 percezione_passiva: 14, scurovisione: 45 m
-
 ## Lingue
 
 Comune più un'altra lingua
-
+tab: Azioni
 ## Azioni
 
 ### Multiattacco
@@ -111,6 +107,7 @@ La medusa effettua due attacchi Artiglio e un attacco Chioma di serpenti, o tre 
 ### Raggio velenoso
 
 *Tiro per colpire a distanza:* +5, gittata 45 m. *Colpito:* 11 (2d8 + 2) danni da veleno.
+````
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

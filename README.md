@@ -44,6 +44,8 @@ Se dashboard, pulsanti o tabelle non funzionano, apri [[Risorse/Installazione Pl
 - Una **campagna** raccoglie cio che accade al tavolo: party, sessioni, missioni, conseguenze e ricompense.
 - **Avventure** e **one-shot** stanno nella campagna quando sono legate a un gruppo o a una storia precisa.
 - Tabelle, mappe, dispense e materiali riutilizzabili in piu campagne stanno in `Risorse`.
+- [[Worldbuilder Dashboard]] mostra ora Atlante del Mondo, Poteri in Movimento, Relazioni PNG, Timeline Causale e Buchi Di Mondo: usali per trovare collegamenti mancanti, pressioni senza prossima mossa e lore canonica non ancora storicizzata.
+- [[Mondi/Stato del Mondo]] resta la vista operativa delle conseguenze: filtra per mondo o campagna e mostra cosa deve cambiare al tavolo.
 
 ## Uso Quotidiano
 
@@ -52,6 +54,7 @@ Se dashboard, pulsanti o tabelle non funzionano, apri [[Risorse/Installazione Pl
 - Usa `attiva: true` su una sola sessione alla volta. Se nessuna sessione e attiva, le viste usano come fallback l'ultima sessione `pronto` o `preparazione`.
 - Usa `archiviata` per contenuti da conservare ma non piu attivi.
 - Usa `canonico: true` solo quando un contenuto e confermato nel mondo di gioco.
+- Quando crei luoghi, PNG, fazioni o missioni dai pulsanti guidati, compila subito i collegamenti richiesti: il vault usera quei campi per mostrare fronti, segreti, pressioni e materiale pronto nelle dashboard.
 - Usa Inbox Live per catturare eventi, conseguenze, PNG improvvisati, luoghi improvvisati e note grezze senza interrompere il gioco.
 - Mantieni `SRD` separato dal contenuto canonico: e riferimento regolamentare, non ambientazione.
 

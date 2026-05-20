@@ -20,13 +20,13 @@ saves: {}
 skillsaves: 
   furtivita: 4
   percezione: 4
-damage_vulnerabilities: 
-damage_resistances: 
-damage_immunities: 
-condition_immunities: 
+damage_vulnerabilities:
+damage_resistances:
+damage_immunities:
+condition_immunities:
 senses: "percezione_passiva: 14, scurovisione: 18 m"
 languages: "Comune (non può parlare quando ha le sembianze di un lupo)"
-gear: ["arco lungo"]
+cr: 3
 traits: 
 - name: "Tattiche del branco"
   desc: "Il lupo mannaro dispone di vantaggio a un tiro per colpire contro una creatura se almeno uno dei suoi alleati si trova entro 1,5 metri dalla creatura e non è incapacitato."
@@ -53,26 +53,25 @@ iniziativa: 4
 hp: 71
 hit_dice: "11d8 + 22"
 speed: "camminata: 12 m (solo in forma di lupo)"
-cr: 3
 xp: 700
 bonus_competenza: 2
 statblock: true
 ---
 # Lupo mannaro
 
+````tabs
+tab: Scheda
 ```statblock
 monster: Lupo mannaro
 ```
-
+tab: Dettagli
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Media o Piccola Mostruosità (licantropo), caotico malvagio
 > CA: 15
 > PF: 71 (11d8 + 22)
 > Velocita: camminata: 12 m (solo in forma di lupo)
 > GS: 3 (PE 700; BC +2)
-
 ## Caratteristiche
-
 | Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
 | --- | --- | --- | --- |
 | Forza | 16 | 3 | 3 |
@@ -81,25 +80,21 @@ monster: Lupo mannaro
 | Intelligenza | 10 | 0 | 0 |
 | Saggezza | 11 | 0 | 0 |
 | Carisma | 10 | 0 | 0 |
-
 ## Abilita
 
 furtivita: 4, percezione: 4
-
 ## Sensi
 
 percezione_passiva: 14, scurovisione: 18 m
-
 ## Lingue
 
 Comune (non può parlare quando ha le sembianze di un lupo)
-
+tab: Azioni
 ## Tratti
 
 ### Tattiche del branco
 
 Il lupo mannaro dispone di vantaggio a un tiro per colpire contro una creatura se almeno uno dei suoi alleati si trova entro 1,5 metri dalla creatura e non è incapacitato.
-
 ## Azioni
 
 ### Multiattacco
@@ -117,6 +112,7 @@ Il lupo mannaro effettua due attacchi, usando Graffio o Arco lungo in qualsiasi 
 ### Arco lungo (solo in forma umanoide o ibrida)
 
 *Tiro per colpire a distanza:* +4, gittata 45/180 m. *Colpito:* 11 (2d8 + 2) danni perforanti.
+````
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

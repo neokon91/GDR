@@ -19,13 +19,13 @@ stats: [19, 10, 17, 11, 12, 12]
 saves: {}
 skillsaves: 
   percezione: 7
-damage_vulnerabilities: 
-damage_resistances: 
-damage_immunities: 
-condition_immunities: 
+damage_vulnerabilities:
+damage_resistances:
+damage_immunities:
+condition_immunities:
 senses: "percezione_passiva: 17, scurovisione: 18 m"
 languages: "Comune (non può parlare in forma di orso)"
-gear: ["asce (4)"]
+cr: 5
 traits: []
 actions: 
 - name: "Multiattacco"
@@ -51,26 +51,25 @@ iniziativa: 3
 hp: 135
 hit_dice: "18d8 + 54"
 speed: "camminata: 12 m (solo in forma di orso), scalata: 9 m"
-cr: 5
 xp: 1800
 bonus_competenza: 3
 statblock: true
 ---
 # Orso mannaro
 
+````tabs
+tab: Scheda
 ```statblock
 monster: Orso mannaro
 ```
-
+tab: Dettagli
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Media o Piccola Mostruosità (licantropo), neutrale buono
 > CA: 15
 > PF: 135 (18d8 + 54)
 > Velocita: camminata: 12 m (solo in forma di orso), scalata: 9 m
 > GS: 5 (PE 1.800; BC +3)
-
 ## Caratteristiche
-
 | Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
 | --- | --- | --- | --- |
 | Forza | 19 | 4 | 4 |
@@ -79,19 +78,16 @@ monster: Orso mannaro
 | Intelligenza | 11 | 0 | 0 |
 | Saggezza | 12 | 1 | 1 |
 | Carisma | 12 | 1 | 1 |
-
 ## Abilita
 
 percezione: 7
-
 ## Sensi
 
 percezione_passiva: 17, scurovisione: 18 m
-
 ## Lingue
 
 Comune (non può parlare in forma di orso)
-
+tab: Azioni
 ## Azioni
 
 ### Multiattacco
@@ -113,6 +109,7 @@ L'orso mannaro effettua due attacchi, usando Ascia o Squarcio in qualsiasi combi
 ### Squarcio (solo in forma di orso o ibrida)
 
 *Tiro per colpire in mischia:* +7, portata 1,5 m. *Colpito:* 13 (2d8 + 4) danni taglienti.
+````
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

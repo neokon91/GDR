@@ -19,13 +19,13 @@ peso: "3 kg"
 danni: "1d10 perforanti"
 proprieta: ["due mani eccetto in sella", "pesante", "portata"]
 padronanza: "Rovesciamento"
-classe_armatura: 
-forza: 
-furtivita: 
-velocita: 
-punti_ferita: 
-soglia_danno: 
-valore_in_mo: 
+classe_armatura:
+forza:
+furtivita:
+velocita:
+punti_ferita:
+soglia_danno:
+valore_in_mo:
 ---
 # Lancia da cavaliere
 

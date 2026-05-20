@@ -23,13 +23,13 @@ skillsaves:
   percezione: 9
   religione: 5
   storia: 5
-damage_vulnerabilities: 
-damage_resistances: 
-damage_immunities: 
-condition_immunities: 
+damage_vulnerabilities:
+damage_resistances:
+damage_immunities:
+condition_immunities:
 senses: "percezione_passiva: 19, vista_pura: 18 m"
 languages: "Comune più altre tre lingue"
-gear: []
+cr: 15
 traits: 
 - name: "Resistenza alla magia"
   desc: "Il signore delle mummie dispone di vantaggio ai tiri salvezza contro incantesimi e altri effetti magici."
@@ -68,26 +68,25 @@ iniziativa: 10
 hp: 187
 hit_dice: "25d8 + 75"
 speed: "camminata: 9 m"
-cr: 15
 xp: 13000
 bonus_competenza: 5
 statblock: true
 ---
 # Signore delle mummie
 
+````tabs
+tab: Scheda
 ```statblock
 monster: Signore delle mummie
 ```
-
+tab: Dettagli
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Medio o Piccolo Non morto (chierico), legale malvagio
 > CA: 17
 > PF: 187 (25d8 + 75)
 > Velocita: camminata: 9 m
 > GS: 15 (PE 13.000, o 15.000 nella tana; BC +5)
-
 ## Caratteristiche
-
 | Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
 | --- | --- | --- | --- |
 | Forza | 18 | 4 | 4 |
@@ -96,19 +95,16 @@ monster: Signore delle mummie
 | Intelligenza | 11 | 0 | 5 |
 | Saggezza | 19 | 4 | 9 |
 | Carisma | 16 | 3 | 3 |
-
 ## Abilita
 
 percezione: 9, religione: 5, storia: 5
-
 ## Sensi
 
 percezione_passiva: 19, vista_pura: 18 m
-
 ## Lingue
 
 Comune più altre tre lingue
-
+tab: Azioni
 ## Tratti
 
 ### Resistenza alla magia
@@ -122,7 +118,6 @@ Se il signore delle mummie fallisce un tiro salvezza, può scegliere di superarl
 ### Ristoro non morto
 
 Se annientata, la mummia acquisisce un nuovo corpo dopo 24 ore se il suo cuore è intatto, tornando in vita con tutti i suoi punti ferita. Il nuovo corpo appare in uno spazio libero all'interno della tana della mummia. Il cuore è un oggetto di taglia Minuscola con CA 17, PF 10 e immunità a tutti i danni, eccetto ai danni da fuoco.
-
 ## Azioni
 
 ### Multiattacco
@@ -144,7 +139,6 @@ Il signore delle mummie lancia uno dei seguenti incantesimi, senza bisogno di co
 ### Sguardo funesto
 
 *Tiro salvezza su Saggezza:* CD 17, una creatura che la mummia è in grado di vedere entro 18 metri. *Fallimento:* 25 (6d6 + 4) danni psichici, e il bersaglio è paralizzato fino al termine del turno successivo della mummia.
-
 ## Azioni Leggendarie
 
 Subito dopo il turno di un'altra creatura, la mummia può consumare un utilizzo per effettuare una delle seguenti azioni. La mummia recupera tutti gli utilizzi consumati all'inizio di ogni suo turno.
@@ -162,6 +156,7 @@ La mummia lancia comando (di 2º livello), utilizzando la stessa caratteristica 
 ### Sguardo
 
 La mummia usa Sguardo funesto. Non può ripetere quest'azione fino all'inizio del proprio turno successivo.
+````
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

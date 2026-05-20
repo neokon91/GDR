@@ -19,13 +19,13 @@ stats: [19, 11, 19, 3, 14, 10]
 saves: {}
 skillsaves: 
   percezione: 8
-damage_vulnerabilities: 
-damage_resistances: 
-damage_immunities: 
-condition_immunities: 
+damage_vulnerabilities:
+damage_resistances:
+damage_immunities:
+condition_immunities:
 senses: "percezione_passiva: 18, scurovisione: 18 m"
 languages: "capisce il Draconico ma non lo parla"
-gear: []
+cr: 6
 traits: []
 actions: 
 - name: "Multiattacco"
@@ -50,26 +50,25 @@ iniziativa: 0
 hp: 114
 hit_dice: "12d10 + 48"
 speed: "camminata: 9 m, volo: 18 m"
-cr: 6
 xp: 2300
 bonus_competenza: 3
 statblock: true
 ---
 # Chimera
 
+````tabs
+tab: Scheda
 ```statblock
 monster: Chimera
 ```
-
+tab: Dettagli
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Grande Mostruosità, caotico malvagio
 > CA: 14
 > PF: 114 (12d10 + 48)
 > Velocita: camminata: 9 m, volo: 18 m
 > GS: 6 (PE 2.300; BC +3)
-
 ## Caratteristiche
-
 | Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
 | --- | --- | --- | --- |
 | Forza | 19 | 4 | 4 |
@@ -78,19 +77,16 @@ monster: Chimera
 | Intelligenza | 3 | -4 | -4 |
 | Saggezza | 14 | 2 | 2 |
 | Carisma | 10 | 0 | 0 |
-
 ## Abilita
 
 percezione: 8
-
 ## Sensi
 
 percezione_passiva: 18, scurovisione: 18 m
-
 ## Lingue
 
 capisce il Draconico ma non lo parla
-
+tab: Azioni
 ## Azioni
 
 ### Multiattacco
@@ -112,6 +108,7 @@ La chimera effettua un attacco Sfondamento, un attacco Morso e un attacco Artigl
 ### Soffio di fuoco (ricarica 5-6)
 
 *Tiro salvezza su Destrezza:* CD 15, tutte le creature in un cono di 4,5 metri. *Fallimento:* 31 (7d8) danni da fuoco. *Successo:* danni dimezzati.
+````
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

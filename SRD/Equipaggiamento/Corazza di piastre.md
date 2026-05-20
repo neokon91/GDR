@@ -16,16 +16,16 @@ tipo_oggetto: "armatura"
 categoria_oggetto: "Media"
 costo: "400 mo"
 peso: "10 kg"
-danni: 
+danni:
 proprieta: []
-padronanza: 
+padronanza:
 classe_armatura: "14 + Des max 2"
 forza: "-"
 furtivita: "-"
-velocita: 
-punti_ferita: 
-soglia_danno: 
-valore_in_mo: 
+velocita:
+punti_ferita:
+soglia_danno:
+valore_in_mo:
 ---
 # Corazza di piastre
 

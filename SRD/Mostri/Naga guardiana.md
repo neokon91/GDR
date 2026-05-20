@@ -26,13 +26,13 @@ skillsaves:
   arcano: 11
   religione: 11
   storia: 11
-damage_vulnerabilities: 
-damage_resistances: 
-damage_immunities: 
-condition_immunities: 
+damage_vulnerabilities:
+damage_resistances:
+damage_immunities:
+condition_immunities:
 senses: "percezione_passiva: 14, scurovisione: 18 m"
 languages: "Celestiale, Comune"
-gear: []
+cr: 10
 traits: 
 - name: "Ristoro celestiale"
   desc: "Se la naga muore, torna in vita 1d6 giorni dopo e recupera tutti i suoi punti ferita, a meno che non venga lanciato dissolvi il bene e il male sui suoi resti."
@@ -57,26 +57,25 @@ iniziativa: 4
 hp: 136
 hit_dice: "16d10 + 48"
 speed: "camminata: 12 m, nuoto: 12 m, scalata: 12 m"
-cr: 10
 xp: 5900
 bonus_competenza: 4
 statblock: true
 ---
 # Naga guardiana
 
+````tabs
+tab: Scheda
 ```statblock
 monster: Naga guardiana
 ```
-
+tab: Dettagli
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Grande Celestiale, legale buono
 > CA: 18
 > PF: 136 (16d10 + 48)
 > Velocita: camminata: 12 m, nuoto: 12 m, scalata: 12 m
 > GS: 10 (PE 5.900; BC +4)
-
 ## Caratteristiche
-
 | Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
 | --- | --- | --- | --- |
 | Forza | 19 | 4 | 4 |
@@ -85,25 +84,21 @@ monster: Naga guardiana
 | Intelligenza | 16 | 3 | 7 |
 | Saggezza | 19 | 4 | 8 |
 | Carisma | 18 | 4 | 8 |
-
 ## Abilita
 
 arcano: 11, religione: 11, storia: 11
-
 ## Sensi
 
 percezione_passiva: 14, scurovisione: 18 m
-
 ## Lingue
 
 Celestiale, Comune
-
+tab: Azioni
 ## Tratti
 
 ### Ristoro celestiale
 
 Se la naga muore, torna in vita 1d6 giorni dopo e recupera tutti i suoi punti ferita, a meno che non venga lanciato dissolvi il bene e il male sui suoi resti.
-
 ## Azioni
 
 ### Multiattacco
@@ -121,6 +116,7 @@ La naga lancia uno dei seguenti incantesimi, senza bisogno di componenti somatic
 ### Sputo velenoso
 
 *Tiro salvezza su Costituzione:* CD 16, una creatura che la naga è in grado di vedere entro 18 metri. *Fallimento:* 31 (7d8) danni da veleno, e il bersaglio è accecato fino all'inizio del turno successivo della naga. *Successo:* danni dimezzati.
+````
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

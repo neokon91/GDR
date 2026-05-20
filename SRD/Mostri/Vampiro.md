@@ -24,13 +24,13 @@ saves:
 skillsaves: 
   furtivita: 9
   percezione: 7
-damage_vulnerabilities: 
-damage_resistances: 
-damage_immunities: 
-condition_immunities: 
+damage_vulnerabilities:
+damage_resistances:
+damage_immunities:
+condition_immunities:
 senses: "percezione_passiva: 17, scurovisione: 36 m"
 languages: "Comune più altre due lingue"
-gear: []
+cr: 13
 traits: 
 - name: "Acqua corrente"
   desc: "Il vampiro subisce 20 danni da acido se termina il suo turno nell'acqua corrente."
@@ -77,26 +77,25 @@ iniziativa: 14
 hp: 195
 hit_dice: "23d8 + 92"
 speed: "camminata: 12 m, scalata: 12 m"
-cr: 13
 xp: 10000
 bonus_competenza: 5
 statblock: true
 ---
 # Vampiro
 
+````tabs
+tab: Scheda
 ```statblock
 monster: Vampiro
 ```
-
+tab: Dettagli
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Medio o Piccolo Non morto, legale malvagio
 > CA: 16
 > PF: 195 (23d8 + 92)
 > Velocita: camminata: 12 m, scalata: 12 m
 > GS: 13 (PE 10.000, o 11.500 nella tana; BC +5)
-
 ## Caratteristiche
-
 | Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
 | --- | --- | --- | --- |
 | Forza | 18 | 4 | 4 |
@@ -105,19 +104,16 @@ monster: Vampiro
 | Intelligenza | 17 | 3 | 3 |
 | Saggezza | 15 | 2 | 7 |
 | Carisma | 18 | 4 | 9 |
-
 ## Abilita
 
 furtivita: 9, percezione: 7
-
 ## Sensi
 
 percezione_passiva: 17, scurovisione: 36 m
-
 ## Lingue
 
 Comune più altre due lingue
-
+tab: Azioni
 ## Tratti
 
 ### Acqua corrente
@@ -151,7 +147,6 @@ Il vampiro non può entrare in casa di qualcuno se non viene invitato da chi vi 
 ### Resistenza leggendaria (3/giorno o 4/giorno nella tana)
 
 Se il vampiro fallisce un tiro salvezza, può scegliere di superarlo comunque.
-
 ## Azioni
 
 ### Multiattacco (solo in forma di vampiro)
@@ -165,7 +160,6 @@ Il vampiro effettua due attacchi Colpo tombale e usa Morso.
 ### Morso (solo in forma di pipistrello o vampiro)
 
 *Tiro salvezza su Costituzione:* CD 17, una creatura entro 1,5 metri che sia consenziente, afferrata, incapacitata o trattenuta. *Fallimento:* 6 (1d4 + 4) danni perforanti più 13 (3d8) danni necrotici. I punti ferita massimi del bersaglio sono ridotti di un ammontare pari ai danni necrotici subiti, e il vampiro recupera punti ferita pari a quell'ammontare. Un umanoide ridotto a 0 punti ferita da questi danni e poi sepolto, risorge al tramonto seguente in forma di progenie vampirica controllata dal vampiro.
-
 ## Azioni Leggendarie
 
 Subito dopo il turno di un'altra creatura, il vampiro può consumare un utilizzo per effettuare una delle seguenti azioni. Il vampiro recupera tutti gli utilizzi consumati all'inizio di ogni suo turno.
@@ -179,6 +173,7 @@ Il vampiro si muove fino a metà della sua velocità, ed effettua un attacco Col
 ### Incantare
 
 Il vampiro lancia comando senza bisogno di componenti, utilizzando Carisma come caratteristica da incantatore (CD del tiro salvezza sull'incantesimo 17). Il vampiro non può ripetere quest'azione fino all'inizio del proprio turno successivo.
+````
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

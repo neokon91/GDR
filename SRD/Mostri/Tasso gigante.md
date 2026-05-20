@@ -19,13 +19,13 @@ stats: [13, 10, 17, 2, 12, 5]
 saves: {}
 skillsaves: 
   percezione: 3
-damage_vulnerabilities: 
-damage_resistances: 
-damage_immunities: 
-condition_immunities: 
+damage_vulnerabilities:
+damage_resistances:
+damage_immunities:
+condition_immunities:
 senses: "percezione_passiva: 13, scurovisione: 18 m"
 languages: "nessuna"
-gear: []
+cr: 0.25
 traits: []
 actions: 
 - name: "Morso"
@@ -42,26 +42,25 @@ iniziativa: 0
 hp: 15
 hit_dice: "2d8 + 6"
 speed: "camminata: scavo 3 m"
-cr: 0.25
 xp: 50
 bonus_competenza: 2
 statblock: true
 ---
 # Tasso gigante
 
+````tabs
+tab: Scheda
 ```statblock
 monster: Tasso gigante
 ```
-
+tab: Dettagli
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Media Bestia, senza allineamento
 > CA: 13
 > PF: 15 (2d8 + 6)
 > Velocita: camminata: scavo 3 m
 > GS: 1/4 (PE 50; BC +2)
-
 ## Caratteristiche
-
 | Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
 | --- | --- | --- | --- |
 | Forza | 13 | 1 | 1 |
@@ -70,24 +69,22 @@ monster: Tasso gigante
 | Intelligenza | 2 | -4 | -4 |
 | Saggezza | 12 | 1 | 1 |
 | Carisma | 5 | -3 | -3 |
-
 ## Abilita
 
 percezione: 3
-
 ## Sensi
 
 percezione_passiva: 13, scurovisione: 18 m
-
 ## Lingue
 
 nessuna
-
+tab: Azioni
 ## Azioni
 
 ### Morso
 
 *Tiro per colpire in mischia:* +3, portata 1,5 m. *Colpito:* 6 (2d4 + 1) danni perforanti.
+````
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

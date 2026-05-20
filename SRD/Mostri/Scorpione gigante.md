@@ -18,13 +18,13 @@ ac: 15
 stats: [16, 13, 15, 1, 9, 3]
 saves: {}
 skillsaves: {}
-damage_vulnerabilities: 
-damage_resistances: 
-damage_immunities: 
-condition_immunities: 
+damage_vulnerabilities:
+damage_resistances:
+damage_immunities:
+condition_immunities:
 senses: "percezione_passiva: 9, vista_cieca: 18 m"
 languages: "nessuna"
-gear: []
+cr: 3
 traits: []
 actions: 
 - name: "Multiattacco"
@@ -45,26 +45,25 @@ iniziativa: 1
 hp: 52
 hit_dice: "7d10 + 14"
 speed: "camminata: 12 m"
-cr: 3
 xp: 700
 bonus_competenza: 2
 statblock: true
 ---
 # Scorpione gigante
 
+````tabs
+tab: Scheda
 ```statblock
 monster: Scorpione gigante
 ```
-
+tab: Dettagli
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Grande Bestia, senza allineamento
 > CA: 15
 > PF: 52 (7d10 + 14)
 > Velocita: camminata: 12 m
 > GS: 3 (PE 700; BC +2)
-
 ## Caratteristiche
-
 | Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
 | --- | --- | --- | --- |
 | Forza | 16 | 3 | 3 |
@@ -73,15 +72,13 @@ monster: Scorpione gigante
 | Intelligenza | 1 | -5 | -5 |
 | Saggezza | 9 | -1 | -1 |
 | Carisma | 3 | -4 | -4 |
-
 ## Sensi
 
 percezione_passiva: 9, vista_cieca: 18 m
-
 ## Lingue
 
 nessuna
-
+tab: Azioni
 ## Azioni
 
 ### Multiattacco
@@ -95,6 +92,7 @@ Lo scorpione effettua due attacchi Artiglio e un attacco Pungiglione.
 ### Pungiglione
 
 *Tiro per colpire in mischia:* +5, portata 1,5 m *Colpito:* 7 (1d8 + 3) danni perforanti più 11 (2d10) danni da veleno.
+````
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

@@ -25,13 +25,13 @@ skillsaves:
   arcano: 9
   percezione: 12
   religione: 15
-damage_vulnerabilities: 
-damage_resistances: 
-damage_immunities: 
-condition_immunities: 
+damage_vulnerabilities:
+damage_resistances:
+damage_immunities:
+condition_immunities:
 senses: "percezione_passiva: 22, vista_pura: 36 m"
 languages: "Celestiale, Comune"
-gear: []
+cr: 17
 traits: 
 - name: "Imperscrutabile"
   desc: "Nessuna magia può consentire di osservare la sfinge da lontano o individuarne i pensieri senza il suo permesso. Le prove di Saggezza (Intuizione) effettuate per accertare le sue intenzioni o la sua sincerità subiscono svantaggio."
@@ -68,26 +68,25 @@ iniziativa: 12
 hp: 199
 hit_dice: "19d10 + 95"
 speed: "camminata: 12 m, volo: 18 m"
-cr: 17
 xp: 18000
 bonus_competenza: 6
 statblock: true
 ---
 # Sfinge del valore
 
+````tabs
+tab: Scheda
 ```statblock
 monster: Sfinge del valore
 ```
-
+tab: Dettagli
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Grande Celestiale, legale neutrale
 > CA: 17
 > PF: 199 (19d10 + 95)
 > Velocita: camminata: 12 m, volo: 18 m
 > GS: 17 (PE 18.000, o 20.000 nella tana; BC +6)
-
 ## Caratteristiche
-
 | Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
 | --- | --- | --- | --- |
 | Forza | 22 | 6 | 6 |
@@ -96,19 +95,16 @@ monster: Sfinge del valore
 | Intelligenza | 16 | 3 | 9 |
 | Saggezza | 23 | 6 | 12 |
 | Carisma | 18 | 4 | 4 |
-
 ## Abilita
 
 arcano: 9, percezione: 12, religione: 15
-
 ## Sensi
 
 percezione_passiva: 22, vista_pura: 36 m
-
 ## Lingue
 
 Celestiale, Comune
-
+tab: Azioni
 ## Tratti
 
 ### Imperscrutabile
@@ -118,7 +114,6 @@ Nessuna magia può consentire di osservare la sfinge da lontano o individuarne i
 ### Resistenza leggendaria (3/giorno o 4/giorno nella tana)
 
 Se la sfinge fallisce un tiro salvezza, può scegliere di superarlo comunque.
-
 ## Azioni
 
 ### Multiattacco
@@ -148,7 +143,6 @@ La sfinge emette un ruggito magico. Ogni suo ruggito sortisce un effetto diverso
 ### Terzo ruggito
 
 *Tiro salvezza su Costituzione:* CD 20, tutti i nemici in un'emanazione di 150 metri di cui la sfinge è il punto di origine. *Fallimento:* 44 (8d10) danni da tuono, e il bersaglio cade a terra prono. *Successo:* danni dimezzati.
-
 ## Azioni Leggendarie
 
 Subito dopo il turno di un'altra creatura, la sfinge può consumare un utilizzo per effettuare una delle seguenti azioni. La sfinge recupera tutti gli utilizzi consumati all'inizio di ogni suo turno.
@@ -162,6 +156,7 @@ La sfinge può teletrasportarsi fino a 9 metri in uno spazio libero che è in gr
 ### Peso degli anni
 
 *Tiro salvezza su Costituzione:* CD 16, una creatura che la sfinge è in grado di vedere entro 36 metri. *Fallimento:* il bersaglio ottiene 1 livello di indebolimento. Finché il bersaglio ha uno o più livelli di indebolimento, apparirà più vecchio di 3d10 anni. *Fallimento o successo:* la sfinge non può ripetere quest'azione fino all'inizio del proprio turno successivo.
+````
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

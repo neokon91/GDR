@@ -19,13 +19,13 @@ stats: [17, 15, 12, 13, 14, 7]
 saves: {}
 skillsaves: 
   furtivita: 5
-damage_vulnerabilities: 
-damage_resistances: 
-damage_immunities: 
-condition_immunities: 
+damage_vulnerabilities:
+damage_resistances:
+damage_immunities:
+condition_immunities:
 senses: "percezione_passiva: 12, scurovisione: 36 m"
 languages: "Gergo delle profondità, Sottocomune"
-gear: []
+cr: 8
 traits: 
 - name: "Sensibilità alla luce"
   desc: "Finché è esposto alla luce intensa, il manto assassino subisce svantaggio ai tiri per colpire."
@@ -52,26 +52,25 @@ iniziativa: 5
 hp: 91
 hit_dice: "14d10 + 14"
 speed: "camminata: 3 m, volo: 12 m"
-cr: 8
 xp: 3900
 bonus_competenza: 3
 statblock: true
 ---
 # Manto assassino
 
+````tabs
+tab: Scheda
 ```statblock
 monster: Manto assassino
 ```
-
+tab: Dettagli
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Grande Aberrazione, caotico neutrale
 > CA: 14
 > PF: 91 (14d10 + 14)
 > Velocita: camminata: 3 m, volo: 12 m
 > GS: 8 (PE 3.900; BC +3)
-
 ## Caratteristiche
-
 | Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
 | --- | --- | --- | --- |
 | Forza | 17 | 3 | 3 |
@@ -80,25 +79,21 @@ monster: Manto assassino
 | Intelligenza | 13 | 1 | 1 |
 | Saggezza | 14 | 2 | 2 |
 | Carisma | 7 | -2 | -2 |
-
 ## Abilita
 
 furtivita: 5
-
 ## Sensi
 
 percezione_passiva: 12, scurovisione: 36 m
-
 ## Lingue
 
 Gergo delle profondità, Sottocomune
-
+tab: Azioni
 ## Tratti
 
 ### Sensibilità alla luce
 
 Finché è esposto alla luce intensa, il manto assassino subisce svantaggio ai tiri per colpire.
-
 ## Azioni
 
 ### Multiattacco
@@ -112,6 +107,7 @@ Il manto assassino effettua un attacco Avvinghiare e due attacchi Coda.
 ### Coda
 
 *Tiro per colpire in mischia:* +6, portata 3 m. *Colpito:* 8 (1d10 + 3) danni taglienti.
+````
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

@@ -16,16 +16,16 @@ tipo_oggetto: "armatura"
 categoria_oggetto: "Pesante"
 costo: "75 mo"
 peso: "27,5 kg"
-danni: 
+danni:
 proprieta: []
-padronanza: 
+padronanza:
 classe_armatura: "16"
 forza: "For 13"
 furtivita: "Svantaggio"
-velocita: 
-punti_ferita: 
-soglia_danno: 
-valore_in_mo: 
+velocita:
+punti_ferita:
+soglia_danno:
+valore_in_mo:
 ---
 # Cotta di maglia
 

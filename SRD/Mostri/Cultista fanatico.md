@@ -22,13 +22,13 @@ skillsaves:
   inganno: 3
   persuasione: 3
   religione: 2
-damage_vulnerabilities: 
-damage_resistances: 
-damage_immunities: 
-condition_immunities: 
+damage_vulnerabilities:
+damage_resistances:
+damage_immunities:
+condition_immunities:
 senses: "percezione_passiva: 12"
 languages: "Comune"
-gear: ["armatura di cuoio", "simbolo sacro"]
+cr: 2
 traits: []
 actions: 
 - name: "Lama del patto"
@@ -49,26 +49,25 @@ iniziativa: 2
 hp: 44
 hit_dice: "8d8 + 8"
 speed: "camminata: 9 m"
-cr: 2
 xp: 450
 bonus_competenza: 2
 statblock: true
 ---
 # Cultista fanatico
 
+````tabs
+tab: Scheda
 ```statblock
 monster: Cultista fanatico
 ```
-
+tab: Dettagli
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Medio o Piccolo Umanoide, neutrale
 > CA: 13
 > PF: 44 (8d8 + 8)
 > Velocita: camminata: 9 m
 > GS: 2 (PE 450; BC +2)
-
 ## Caratteristiche
-
 | Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
 | --- | --- | --- | --- |
 | Forza | 11 | 0 | 0 |
@@ -77,19 +76,16 @@ monster: Cultista fanatico
 | Intelligenza | 10 | 0 | 0 |
 | Saggezza | 14 | 2 | 4 |
 | Carisma | 13 | 1 | 1 |
-
 ## Abilita
 
 inganno: 3, persuasione: 3, religione: 2
-
 ## Sensi
 
 percezione_passiva: 12
-
 ## Lingue
 
 Comune
-
+tab: Azioni
 ## Azioni
 
 ### Lama del patto
@@ -109,6 +105,7 @@ Il cultista lancia uno dei seguenti incantesimi, utilizzando Saggezza come carat
 *A volontà:*
 - luce
 - taumaturgia
+````
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

@@ -15,17 +15,17 @@ pagine_sorgente: "114-115"
 tipo_oggetto: "servizio"
 categoria_oggetto: "Gregari"
 costo: "2 ma al giorno"
-peso: 
-danni: 
+peso:
+danni:
 proprieta: []
-padronanza: 
-classe_armatura: 
-forza: 
-furtivita: 
-velocita: 
-punti_ferita: 
-soglia_danno: 
-valore_in_mo: 
+padronanza:
+classe_armatura:
+forza:
+furtivita:
+velocita:
+punti_ferita:
+soglia_danno:
+valore_in_mo:
 ---
 # Gregario inesperto
 

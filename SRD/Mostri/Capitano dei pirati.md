@@ -24,13 +24,13 @@ saves:
 skillsaves: 
   acrobazia: 7
   percezione: 5
-damage_vulnerabilities: 
-damage_resistances: 
-damage_immunities: 
-condition_immunities: 
+damage_vulnerabilities:
+damage_resistances:
+damage_immunities:
+condition_immunities:
 senses: "percezione_passiva: 15"
 languages: "Comune più un'altra lingua"
-gear: ["pistola", "stocco"]
+cr: 6
 traits: []
 actions: 
 - name: "Multiattacco"
@@ -55,26 +55,25 @@ iniziativa: 7
 hp: 84
 hit_dice: "13d8 + 26"
 speed: "camminata: 9 m"
-cr: 6
 xp: 2300
 bonus_competenza: 3
 statblock: true
 ---
 # Capitano dei pirati
 
+````tabs
+tab: Scheda
 ```statblock
 monster: Capitano dei pirati
 ```
-
+tab: Dettagli
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Medio o Piccolo Umanoide, neutrale
 > CA: 17
 > PF: 84 (13d8 + 26)
 > Velocita: camminata: 9 m
 > GS: 6 (PE 2.300; BC +3)
-
 ## Caratteristiche
-
 | Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
 | --- | --- | --- | --- |
 | Forza | 10 | 0 | 3 |
@@ -83,19 +82,16 @@ monster: Capitano dei pirati
 | Intelligenza | 10 | 0 | 0 |
 | Saggezza | 14 | 2 | 5 |
 | Carisma | 17 | 3 | 6 |
-
 ## Abilita
 
 acrobazia: 7, percezione: 5
-
 ## Sensi
 
 percezione_passiva: 15
-
 ## Lingue
 
 Comune più un'altra lingua
-
+tab: Azioni
 ## Azioni
 
 ### Multiattacco
@@ -109,6 +105,7 @@ Il pirata effettua tre attacchi, usando Stocco o Pistola in qualsiasi combinazio
 ### Pistola
 
 *Tiro per colpire a distanza:* +7, gittata 9/27 m. *Colpito:* 15 (2d10 + 4) danni perforanti.
+````
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

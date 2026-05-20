@@ -18,13 +18,13 @@ ac: 15
 stats: [18, 14, 15, 11, 10, 12]
 saves: {}
 skillsaves: {}
-damage_vulnerabilities: 
-damage_resistances: 
-damage_immunities: 
-condition_immunities: 
+damage_vulnerabilities:
+damage_resistances:
+damage_immunities:
+condition_immunities:
 senses: "percezione_passiva: 10, scurovisione: 18 m"
 languages: "Primordiale (Ignan)"
-gear: []
+cr: 5
 traits: 
 - name: "Aura di fuoco"
   desc: "Alla fine di ogni turno della salamandra, ciascuna creatura a sua scelta in un'emanazione di 1,5 metri di cui la salamandra è il punto di origine subisce 7 (2d6) danni da fuoco."
@@ -47,26 +47,25 @@ iniziativa: 2
 hp: 90
 hit_dice: "12d10 + 24"
 speed: "camminata: 9 m, scalata: 9 m"
-cr: 5
 xp: 1800
 bonus_competenza: 3
 statblock: true
 ---
 # Salamandra
 
+````tabs
+tab: Scheda
 ```statblock
 monster: Salamandra
 ```
-
+tab: Dettagli
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Grande Elementale, neutrale malvagio
 > CA: 15
 > PF: 90 (12d10 + 24)
 > Velocita: camminata: 9 m, scalata: 9 m
 > GS: 5 (PE 1.800; BC +3)
-
 ## Caratteristiche
-
 | Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
 | --- | --- | --- | --- |
 | Forza | 18 | 4 | 4 |
@@ -75,21 +74,18 @@ monster: Salamandra
 | Intelligenza | 11 | 0 | 0 |
 | Saggezza | 10 | 0 | 0 |
 | Carisma | 12 | 1 | 1 |
-
 ## Sensi
 
 percezione_passiva: 10, scurovisione: 18 m
-
 ## Lingue
 
 Primordiale (Ignan)
-
+tab: Azioni
 ## Tratti
 
 ### Aura di fuoco
 
 Alla fine di ogni turno della salamandra, ciascuna creatura a sua scelta in un'emanazione di 1,5 metri di cui la salamandra è il punto di origine subisce 7 (2d6) danni da fuoco.
-
 ## Azioni
 
 ### Multiattacco
@@ -103,6 +99,7 @@ La salamandra effettua due attacchi Lancia di fuoco. Può sostituire un attacco 
 ### Stritolare
 
 *Tiro salvezza su Forza:* CD 15, una creatura di taglia Grande o inferiore che la salamandra è in grado di vedere entro 3 metri. *Fallimento:* 11 (2d6 + 4) danni contundenti più 7 (2d6) danni da fuoco. Il bersaglio è afferrato (CD 14 per sfuggire) ed è trattenuto finché la presa perdura.
+````
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

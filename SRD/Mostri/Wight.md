@@ -20,13 +20,13 @@ saves: {}
 skillsaves: 
   furtivita: 4
   percezione: 3
-damage_vulnerabilities: 
-damage_resistances: 
-damage_immunities: 
-condition_immunities: 
+damage_vulnerabilities:
+damage_resistances:
+damage_immunities:
+condition_immunities:
 senses: "percezione_passiva: 13, scurovisione: 18 m"
 languages: "Comune più un'altra lingua"
-gear: ["armatura di cuoio borchiato"]
+cr: 3
 traits: 
 - name: "Sensibilità al sole"
   desc: "Finché è esposto alla luce del sole, il wight subisce svantaggio alle prove di caratteristica e ai tiri per colpire."
@@ -51,26 +51,25 @@ iniziativa: 4
 hp: 82
 hit_dice: "11d8 + 33"
 speed: "camminata: 9 m"
-cr: 3
 xp: 700
 bonus_competenza: 2
 statblock: true
 ---
 # Wight
 
+````tabs
+tab: Scheda
 ```statblock
 monster: Wight
 ```
-
+tab: Dettagli
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Medio Non morto, neutrale malvagio
 > CA: 14
 > PF: 82 (11d8 + 33)
 > Velocita: camminata: 9 m
 > GS: 3 (PE 700; BC +2)
-
 ## Caratteristiche
-
 | Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
 | --- | --- | --- | --- |
 | Forza | 15 | 2 | 2 |
@@ -79,25 +78,21 @@ monster: Wight
 | Intelligenza | 10 | 0 | 0 |
 | Saggezza | 13 | 1 | 1 |
 | Carisma | 15 | 2 | 2 |
-
 ## Abilita
 
 furtivita: 4, percezione: 3
-
 ## Sensi
 
 percezione_passiva: 13, scurovisione: 18 m
-
 ## Lingue
 
 Comune più un'altra lingua
-
+tab: Azioni
 ## Tratti
 
 ### Sensibilità al sole
 
 Finché è esposto alla luce del sole, il wight subisce svantaggio alle prove di caratteristica e ai tiri per colpire.
-
 ## Azioni
 
 ### Multiattacco
@@ -115,6 +110,7 @@ Il wight effettua due attacchi, usando Spada necrotica o Arco necrotico in quals
 ### Risucchio di vita
 
 *Tiro salvezza su Costituzione:* CD 13, una creatura entro 1,5 metri. *Fallimento:* 6 (1d8 + 2) danni necrotici, e i punti ferita massimi del bersaglio sono ridotti di un ammontare pari ai danni subiti. Un umanoide ucciso da questo attacco si anima 24 ore dopo come zombi sotto il controllo del wight, a meno che l'umanoide non sia riportato in vita o il suo corpo non venga distrutto. Il wight non può controllare più di dodici zombi simultaneamente.
+````
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

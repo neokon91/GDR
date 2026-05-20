@@ -16,16 +16,16 @@ tipo_oggetto: "armatura"
 categoria_oggetto: "Pesante"
 costo: "1.500 mo"
 peso: "32,5 kg"
-danni: 
+danni:
 proprieta: []
-padronanza: 
+padronanza:
 classe_armatura: "18"
 forza: "For 15"
 furtivita: "Svantaggio"
-velocita: 
-punti_ferita: 
-soglia_danno: 
-valore_in_mo: 
+velocita:
+punti_ferita:
+soglia_danno:
+valore_in_mo:
 ---
 # Armatura a piastre
 

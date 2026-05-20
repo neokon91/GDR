@@ -19,13 +19,13 @@ stats: [17, 12, 15, 2, 13, 7]
 saves: {}
 skillsaves: 
   percezione: 3
-damage_vulnerabilities: 
-damage_resistances: 
-damage_immunities: 
-condition_immunities: 
+damage_vulnerabilities:
+damage_resistances:
+damage_immunities:
+condition_immunities:
 senses: "percezione_passiva: 13, scurovisione: 18 m"
 languages: "nessuna"
-gear: []
+cr: 1
 traits: []
 actions: 
 - name: "Multiattacco"
@@ -46,26 +46,25 @@ iniziativa: 1
 hp: 22
 hit_dice: "3d10 + 6"
 speed: "camminata: 12 m, scalata: 9 m"
-cr: 1
 xp: 200
 bonus_competenza: 2
 statblock: true
 ---
 # Orso bruno
 
+````tabs
+tab: Scheda
 ```statblock
 monster: Orso bruno
 ```
-
+tab: Dettagli
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Grande Bestia, senza allineamento
 > CA: 11
 > PF: 22 (3d10 + 6)
 > Velocita: camminata: 12 m, scalata: 9 m
 > GS: 1 (PE 200; BC +2)
-
 ## Caratteristiche
-
 | Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
 | --- | --- | --- | --- |
 | Forza | 17 | 3 | 3 |
@@ -74,19 +73,16 @@ monster: Orso bruno
 | Intelligenza | 2 | -4 | -4 |
 | Saggezza | 13 | 1 | 1 |
 | Carisma | 7 | -2 | -2 |
-
 ## Abilita
 
 percezione: 3
-
 ## Sensi
 
 percezione_passiva: 13, scurovisione: 18 m
-
 ## Lingue
 
 nessuna
-
+tab: Azioni
 ## Azioni
 
 ### Multiattacco
@@ -100,6 +96,7 @@ L'orso effettua un attacco Morso e un attacco Artiglio.
 ### Morso
 
 *Tiro per colpire in mischia:* +5, portata 1,5 m. *Colpito:* 7 (1d8 + 3) danni perforanti.
+````
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

@@ -1,1 +1,13 @@
+# Local operating-system files
 .DS_Store
+Thumbs.db
+
+# Local Obsidian workspace state
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+
+# Temporary/editor files
+*.tmp
+*.bak
+*.orig
+*~

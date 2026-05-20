@@ -18,13 +18,13 @@ ac: 12
 stats: [5, 15, 10, 2, 12, 4]
 saves: {}
 skillsaves: {}
-damage_vulnerabilities: 
-damage_resistances: 
-damage_immunities: 
-condition_immunities: 
+damage_vulnerabilities:
+damage_resistances:
+damage_immunities:
+condition_immunities:
 senses: "percezione_passiva: 11, vista_cieca: 18 m"
 languages: "nessuna"
-gear: []
+cr: 0.25
 traits: 
 - name: "Sciame"
   desc: "Lo sciame può occupare lo spazio di un'altra creatura e viceversa, e può muoversi attraverso qualsiasi apertura sufficientemente larga da far passare un\npipistrello di taglia Minuscola. L'orda non può recupe-rare punti ferita o ottenere punti ferita temporanei."
@@ -43,26 +43,25 @@ iniziativa: 2
 hp: 11
 hit_dice: "2d10"
 speed: "camminata: 5 m, volo: 9 m"
-cr: 0.25
 xp: 50
 bonus_competenza: 2
 statblock: true
 ---
 # Sciame di pipistrelli
 
+````tabs
+tab: Scheda
 ```statblock
 monster: Sciame di pipistrelli
 ```
-
+tab: Dettagli
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Grande Sciame, senza allineamento
 > CA: 12
 > PF: 11 (2d10)
 > Velocita: camminata: 5 m, volo: 9 m
 > GS: 1/4 (PE 50; BC +2)
-
 ## Caratteristiche
-
 | Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
 | --- | --- | --- | --- |
 | Forza | 5 | -3 | -3 |
@@ -71,27 +70,25 @@ monster: Sciame di pipistrelli
 | Intelligenza | 2 | -4 | -4 |
 | Saggezza | 12 | 1 | 1 |
 | Carisma | 4 | -3 | -3 |
-
 ## Sensi
 
 percezione_passiva: 11, vista_cieca: 18 m
-
 ## Lingue
 
 nessuna
-
+tab: Azioni
 ## Tratti
 
 ### Sciame
 
 Lo sciame può occupare lo spazio di un'altra creatura e viceversa, e può muoversi attraverso qualsiasi apertura sufficientemente larga da far passare un
 pipistrello di taglia Minuscola. L'orda non può recupe-rare punti ferita o ottenere punti ferita temporanei.
-
 ## Azioni
 
 ### Morsi
 
 *Tiro per colpire in mischia:* +4, portata 1,5 m. *Colpito:* 5 (2d4) danni perforanti, o 2 (1d4) danni perforanti se lo sciame è sanguinante.
+````
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

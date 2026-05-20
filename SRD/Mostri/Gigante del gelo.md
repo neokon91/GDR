@@ -23,13 +23,13 @@ saves:
 skillsaves: 
   atletica: 9
   percezione: 3
-damage_vulnerabilities: 
-damage_resistances: 
-damage_immunities: 
-condition_immunities: 
+damage_vulnerabilities:
+damage_resistances:
+damage_immunities:
+condition_immunities:
 senses: "percezione_passiva: 13"
 languages: "Gigante"
-gear: []
+cr: 8
 traits: []
 actions: 
 - name: "Multiattacco"
@@ -52,26 +52,25 @@ iniziativa: 2
 hp: 149
 hit_dice: "13d12 + 65"
 speed: "camminata: 12 m"
-cr: 8
 xp: 3900
 bonus_competenza: 3
 statblock: true
 ---
 # Gigante del gelo
 
+````tabs
+tab: Scheda
 ```statblock
 monster: Gigante del gelo
 ```
-
+tab: Dettagli
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Enorme Gigante, neutrale malvagio
 > CA: 15
 > PF: 149 (13d12 + 65)
 > Velocita: camminata: 12 m
 > GS: 8 (PE 3.900; BC +3)
-
 ## Caratteristiche
-
 | Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
 | --- | --- | --- | --- |
 | Forza | 23 | 6 | 6 |
@@ -80,19 +79,16 @@ monster: Gigante del gelo
 | Intelligenza | 9 | -1 | -1 |
 | Saggezza | 10 | 0 | 3 |
 | Carisma | 12 | 1 | 4 |
-
 ## Abilita
 
 atletica: 9, percezione: 3
-
 ## Sensi
 
 percezione_passiva: 13
-
 ## Lingue
 
 Gigante
-
+tab: Azioni
 ## Azioni
 
 ### Multiattacco
@@ -106,6 +102,7 @@ Il gigante effettua due attacchi, usando Ascia del gelo o Grande arco in qualsia
 ### Grande arco
 
 *Tiro per colpire a distanza:* +9, gittata 45/180 m. *Colpito:* 17 (2d10 + 6) danni perforanti più 7 (2d6) danni da freddo, e la velocità del bersaglio è ridotta di 3 metri fino al termine del proprio turno successivo.
+````
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

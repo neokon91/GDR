@@ -22,13 +22,13 @@ saves:
 skillsaves: 
   furtivita: 2
   percezione: 4
-damage_vulnerabilities: 
-damage_resistances: 
-damage_immunities: 
-condition_immunities: 
+damage_vulnerabilities:
+damage_resistances:
+damage_immunities:
+condition_immunities:
 senses: "percezione_passiva: 14, scurovisione: 18 m, vista_cieca: 3 m"
 languages: "Draconico"
-gear: []
+cr: 4
 traits: []
 actions: 
 - name: "Multiattacco"
@@ -49,26 +49,25 @@ iniziativa: 2
 hp: 75
 hit_dice: "10d8 + 30"
 speed: "camminata: 9 m, scalata: 9 m, volo: 18 m"
-cr: 4
 xp: 1100
 bonus_competenza: 2
 statblock: true
 ---
 # Drago rosso cucciolo
 
+````tabs
+tab: Scheda
 ```statblock
 monster: Drago rosso cucciolo
 ```
-
+tab: Dettagli
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Medio Drago (cromatico), caotico malvagio
 > CA: 17
 > PF: 75 (10d8 + 30)
 > Velocita: camminata: 9 m, scalata: 9 m, volo: 18 m
 > GS: 4 (PE 1.100; BC +2)
-
 ## Caratteristiche
-
 | Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
 | --- | --- | --- | --- |
 | Forza | 19 | 4 | 4 |
@@ -77,19 +76,16 @@ monster: Drago rosso cucciolo
 | Intelligenza | 12 | 1 | 1 |
 | Saggezza | 11 | 0 | 2 |
 | Carisma | 15 | 2 | 2 |
-
 ## Abilita
 
 furtivita: 2, percezione: 4
-
 ## Sensi
 
 percezione_passiva: 14, scurovisione: 18 m, vista_cieca: 3 m
-
 ## Lingue
 
 Draconico
-
+tab: Azioni
 ## Azioni
 
 ### Multiattacco
@@ -103,6 +99,7 @@ Il drago effettua due attacchi Squarcio.
 ### Soffio di fuoco (ricarica 5-6)
 
 *Tiro salvezza su Destrezza:* CD 13, tutte le creature in un cono di 4,5 metri. *Fallimento:* 24 (7d6) danni da fuoco. *Successo:* danni dimezzati.
+````
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

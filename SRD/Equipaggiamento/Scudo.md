@@ -16,16 +16,16 @@ tipo_oggetto: "scudo"
 categoria_oggetto: "Scudo"
 costo: "10 mo"
 peso: "3 kg"
-danni: 
+danni:
 proprieta: []
-padronanza: 
+padronanza:
 classe_armatura: "+2"
 forza: "-"
 furtivita: "-"
-velocita: 
-punti_ferita: 
-soglia_danno: 
-valore_in_mo: 
+velocita:
+punti_ferita:
+soglia_danno:
+valore_in_mo:
 ---
 # Scudo
 

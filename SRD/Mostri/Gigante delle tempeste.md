@@ -26,13 +26,13 @@ skillsaves:
   atletica: 14
   percezione: 10
   storia: 8
-damage_vulnerabilities: 
-damage_resistances: 
-damage_immunities: 
-condition_immunities: 
+damage_vulnerabilities:
+damage_resistances:
+damage_immunities:
+condition_immunities:
 senses: "percezione_passiva: 20, scurovisione: 36 m, vista_pura: 9 m"
 languages: "Comune, Gigante"
-gear: []
+cr: 13
 traits: []
 actions: 
 - name: "Multiattacco"
@@ -57,26 +57,25 @@ iniziativa: 7
 hp: 230
 hit_dice: "20d12 + 100"
 speed: "camminata: 5 m (fluttuare), nuoto: 15 m, volo: 7"
-cr: 13
 xp: 10000
 bonus_competenza: 5
 statblock: true
 ---
 # Gigante delle tempeste
 
+````tabs
+tab: Scheda
 ```statblock
 monster: Gigante delle tempeste
 ```
-
+tab: Dettagli
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Enorme Gigante, caotico buono
 > CA: 16
 > PF: 230 (20d12 + 100)
 > Velocita: camminata: 5 m (fluttuare), nuoto: 15 m, volo: 7
 > GS: 13 (PE 10.000; BC +5)
-
 ## Caratteristiche
-
 | Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
 | --- | --- | --- | --- |
 | Forza | 29 | 9 | 14 |
@@ -85,19 +84,16 @@ monster: Gigante delle tempeste
 | Intelligenza | 16 | 3 | 3 |
 | Saggezza | 20 | 5 | 10 |
 | Carisma | 18 | 4 | 9 |
-
 ## Abilita
 
 arcano: 8, atletica: 14, percezione: 10, storia: 8
-
 ## Sensi
 
 percezione_passiva: 20, scurovisione: 36 m, vista_pura: 9 m
-
 ## Lingue
 
 Comune, Gigante
-
+tab: Azioni
 ## Azioni
 
 ### Multiattacco
@@ -126,6 +122,7 @@ Il gigante lancia uno dei seguenti incantesimi, senza bisogno di componenti mate
 ### Tempesta di fulmini (ricarica 5-6)
 
 *Tiro salvezza su Destrezza:* CD 18, ogni creatura in un cilindro di 3 metri di raggio e 12 metri d'altezza in un punto che il gigante è in grado di vedere entro 150 metri. *Fallimento:* 55 (10d10) danni da fulmine. *Successo:* danni dimezzati.
+````
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

@@ -19,13 +19,13 @@ stats: [15, 12, 13, 2, 10, 5]
 saves: 
   dex: 3
 skillsaves: {}
-damage_vulnerabilities: 
-damage_resistances: 
-damage_immunities: 
-condition_immunities: 
+damage_vulnerabilities:
+damage_resistances:
+damage_immunities:
+condition_immunities:
 senses: "percezione_passiva: 10, scurovisione: 18 m"
 languages: "nessuna"
-gear: []
+cr: 0.25
 traits: 
 - name: "Movimenti del ragno"
   desc: "La lucertola può scalare le superfici difficili, compresi i soffitti, senza effettuare una prova di caratteristica."
@@ -44,26 +44,25 @@ iniziativa: 1
 hp: 19
 hit_dice: "3d10 + 3"
 speed: "camminata: 12 m, scalata: 12 m"
-cr: 0.25
 xp: 50
 bonus_competenza: 2
 statblock: true
 ---
 # Lucertola gigante
 
+````tabs
+tab: Scheda
 ```statblock
 monster: Lucertola gigante
 ```
-
+tab: Dettagli
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Grande Bestia, senza allineamento
 > CA: 12
 > PF: 19 (3d10 + 3)
 > Velocita: camminata: 12 m, scalata: 12 m
 > GS: 1/4 (PE 50; BC +2)
-
 ## Caratteristiche
-
 | Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
 | --- | --- | --- | --- |
 | Forza | 15 | 2 | 2 |
@@ -72,26 +71,24 @@ monster: Lucertola gigante
 | Intelligenza | 2 | -4 | -4 |
 | Saggezza | 10 | 0 | 0 |
 | Carisma | 5 | -3 | -3 |
-
 ## Sensi
 
 percezione_passiva: 10, scurovisione: 18 m
-
 ## Lingue
 
 nessuna
-
+tab: Azioni
 ## Tratti
 
 ### Movimenti del ragno
 
 La lucertola può scalare le superfici difficili, compresi i soffitti, senza effettuare una prova di caratteristica.
-
 ## Azioni
 
 ### Morso
 
 *Tiro per colpire in mischia:* +4, portata 1,5 m. *Colpito:* 6 (1d8 + 2) danni perforanti.
+````
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

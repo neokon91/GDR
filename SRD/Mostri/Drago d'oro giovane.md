@@ -24,13 +24,13 @@ skillsaves:
   intuizione: 5
   percezione: 9
   persuasione: 9
-damage_vulnerabilities: 
-damage_resistances: 
-damage_immunities: 
-condition_immunities: 
+damage_vulnerabilities:
+damage_resistances:
+damage_immunities:
+condition_immunities:
 senses: "percezione_passiva: 19, scurovisione: 36 m, vista_cieca: 9 m"
 languages: "Comune, Draconico"
-gear: []
+cr: 10
 traits: 
 - name: "Anfibio"
   desc: "Il drago può respirare in aria e in acqua."
@@ -55,26 +55,25 @@ iniziativa: 6
 hp: 178
 hit_dice: "17d10 + 85"
 speed: "camminata: 12 m, nuoto: 12 m, volo: 24 m"
-cr: 10
 xp: 5900
 bonus_competenza: 4
 statblock: true
 ---
 # Drago d'oro giovane
 
+````tabs
+tab: Scheda
 ```statblock
 monster: Drago d'oro giovane
 ```
-
+tab: Dettagli
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Grande Drago (metallico), legale buono
 > CA: 18
 > PF: 178 (17d10 + 85)
 > Velocita: camminata: 12 m, nuoto: 12 m, volo: 24 m
 > GS: 10 (PE 5.900; BC +4)
-
 ## Caratteristiche
-
 | Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
 | --- | --- | --- | --- |
 | Forza | 23 | 6 | 6 |
@@ -83,25 +82,21 @@ monster: Drago d'oro giovane
 | Intelligenza | 16 | 3 | 3 |
 | Saggezza | 13 | 1 | 5 |
 | Carisma | 20 | 5 | 5 |
-
 ## Abilita
 
 furtivita: 6, intuizione: 5, percezione: 9, persuasione: 9
-
 ## Sensi
 
 percezione_passiva: 19, scurovisione: 36 m, vista_cieca: 9 m
-
 ## Lingue
 
 Comune, Draconico
-
+tab: Azioni
 ## Tratti
 
 ### Anfibio
 
 Il drago può respirare in aria e in acqua.
-
 ## Azioni
 
 ### Multiattacco
@@ -119,6 +114,7 @@ Il drago effettua tre attacchi Squarcio. Può sostituire un attacco con un utili
 ### Soffio indebolente
 
 *Tiro salvezza su Forza:* CD 17, ogni creatura che al momento non è sotto l'effetto di questo soffio in un cono di 9 metri. *Fallimento:* il bersaglio subisce svantaggio alle prove con d20 basate sulla Forza e sottrae 3 (1d6) ai tiri per i danni. La creatura ripete il tiro salvezza alla fine di ogni suo turno e, se lo supera, l'effetto svanisce. Dopo 1 minuto, il tiro viene superato automaticamente.
+````
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

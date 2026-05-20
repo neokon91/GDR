@@ -19,13 +19,13 @@ peso: "5 kg"
 danni: "2d6 contundenti"
 proprieta: ["due mani", "pesante"]
 padronanza: "Rovesciamento"
-classe_armatura: 
-forza: 
-furtivita: 
-velocita: 
-punti_ferita: 
-soglia_danno: 
-valore_in_mo: 
+classe_armatura:
+forza:
+furtivita:
+velocita:
+punti_ferita:
+soglia_danno:
+valore_in_mo:
 ---
 # Maglio
 

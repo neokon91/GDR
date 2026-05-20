@@ -19,13 +19,13 @@ peso: "3,5 kg"
 danni: "1d12 taglienti"
 proprieta: ["due mani", "pesante"]
 padronanza: "Doppio fendente"
-classe_armatura: 
-forza: 
-furtivita: 
-velocita: 
-punti_ferita: 
-soglia_danno: 
-valore_in_mo: 
+classe_armatura:
+forza:
+furtivita:
+velocita:
+punti_ferita:
+soglia_danno:
+valore_in_mo:
 ---
 # Ascia bipenne
 

@@ -19,13 +19,13 @@ peso: "1 kg"
 danni: "1d8 perforanti"
 proprieta: ["versatile 1d10"]
 padronanza: "Fiaccare"
-classe_armatura: 
-forza: 
-furtivita: 
-velocita: 
-punti_ferita: 
-soglia_danno: 
-valore_in_mo: 
+classe_armatura:
+forza:
+furtivita:
+velocita:
+punti_ferita:
+soglia_danno:
+valore_in_mo:
 ---
 # Piccone da guerra
 

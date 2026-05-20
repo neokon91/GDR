@@ -19,13 +19,13 @@ stats: [19, 10, 16, 5, 11, 5]
 saves: {}
 skillsaves: 
   percezione: 4
-damage_vulnerabilities: 
-damage_resistances: 
-damage_immunities: 
-condition_immunities: 
+damage_vulnerabilities:
+damage_resistances:
+damage_immunities:
+condition_immunities:
 senses: "percezione_passiva: 14, scurovisione: 18 m"
 languages: "capisce il Gergo delle Profondità ma non lo parla"
-gear: []
+cr: 4
 traits: 
 - name: "Anfibio"
   desc: "Il chuul può respirare in aria e in acqua."
@@ -50,26 +50,25 @@ iniziativa: 0
 hp: 76
 hit_dice: "9d10 + 27"
 speed: "camminata: 9 m, nuoto: 9 m"
-cr: 4
 xp: 1100
 bonus_competenza: 2
 statblock: true
 ---
 # Chuul
 
+````tabs
+tab: Scheda
 ```statblock
 monster: Chuul
 ```
-
+tab: Dettagli
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Grande Aberrazione, caotico malvagio
 > CA: 16
 > PF: 76 (9d10 + 27)
 > Velocita: camminata: 9 m, nuoto: 9 m
 > GS: 4 (PE 1.100; BC +2)
-
 ## Caratteristiche
-
 | Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
 | --- | --- | --- | --- |
 | Forza | 19 | 4 | 4 |
@@ -78,19 +77,16 @@ monster: Chuul
 | Intelligenza | 5 | -3 | -3 |
 | Saggezza | 11 | 0 | 0 |
 | Carisma | 5 | -3 | -3 |
-
 ## Abilita
 
 percezione: 4
-
 ## Sensi
 
 percezione_passiva: 14, scurovisione: 18 m
-
 ## Lingue
 
 capisce il Gergo delle Profondità ma non lo parla
-
+tab: Azioni
 ## Tratti
 
 ### Anfibio
@@ -100,7 +96,6 @@ Il chuul può respirare in aria e in acqua.
 ### Percezione della magia
 
 Il chuul percepisce la magia entro 36 metri da sé. Sotto ogni altro aspetto, questo tratto funziona come l'incantesimo individuazione del magico, ma di per sé non è magico.
-
 ## Azioni
 
 ### Multiattacco
@@ -114,6 +109,7 @@ Il chuul effettua due attacchi Tenaglia e utilizza Tentacoli paralizzanti.
 ### Tentacoli paralizzanti
 
 *Tiro salvezza su Costituzione:* CD 13, una creatura afferrata dal chuul. *Fallimento:* il bersaglio è avvelenato e ripete il tiro salvezza alla fine del suo turno successivo e, se lo supera, l'effetto svanisce. Dopo 1 minuto, il tiro viene superato automaticamente. Finché è avvelenato, il bersaglio è paralizzato.
+````
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

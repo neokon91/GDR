@@ -16,16 +16,16 @@ tipo_oggetto: "armatura"
 categoria_oggetto: "Leggera"
 costo: "5 mo"
 peso: "4 kg"
-danni: 
+danni:
 proprieta: []
-padronanza: 
+padronanza:
 classe_armatura: "11 + Des"
 forza: "-"
 furtivita: "Svantaggio"
-velocita: 
-punti_ferita: 
-soglia_danno: 
-valore_in_mo: 
+velocita:
+punti_ferita:
+soglia_danno:
+valore_in_mo:
 ---
 # Armatura imbottita
 

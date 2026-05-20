@@ -18,13 +18,13 @@ ac: 11
 stats: [7, 13, 10, 10, 12, 17]
 saves: {}
 skillsaves: {}
-damage_vulnerabilities: 
-damage_resistances: 
-damage_immunities: 
-condition_immunities: 
+damage_vulnerabilities:
+damage_resistances:
+damage_immunities:
+condition_immunities:
 senses: "percezione_passiva: 11, scurovisione: 18 m"
 languages: "Comune più un'altra lingua"
-gear: []
+cr: 4
 traits: 
 - name: "Movimento incorporeo"
   desc: "Il fantasma può muoversi attraverso altri oggetti o creature come se fossero terreno difficile. Se termina il suo turno all'interno di un oggetto, subisce 5 (1d10) danni da forza."
@@ -53,26 +53,25 @@ iniziativa: 1
 hp: 45
 hit_dice: "10d8"
 speed: "camminata: 5 m, volo: 12 m (fluttuare)"
-cr: 4
 xp: 1100
 bonus_competenza: 2
 statblock: true
 ---
 # Fantasma
 
+````tabs
+tab: Scheda
 ```statblock
 monster: Fantasma
 ```
-
+tab: Dettagli
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Medio Non morto, neutrale
 > CA: 11
 > PF: 45 (10d8)
 > Velocita: camminata: 5 m, volo: 12 m (fluttuare)
 > GS: 4 (PE 1.100; BC +2)
-
 ## Caratteristiche
-
 | Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
 | --- | --- | --- | --- |
 | Forza | 7 | -2 | -2 |
@@ -81,15 +80,13 @@ monster: Fantasma
 | Intelligenza | 10 | 0 | 0 |
 | Saggezza | 12 | 1 | 1 |
 | Carisma | 17 | 3 | 3 |
-
 ## Sensi
 
 percezione_passiva: 11, scurovisione: 18 m
-
 ## Lingue
 
 Comune più un'altra lingua
-
+tab: Azioni
 ## Tratti
 
 ### Movimento incorporeo
@@ -99,7 +96,6 @@ Il fantasma può muoversi attraverso altri oggetti o creature come se fossero te
 ### Vista eterea
 
 Quando si trova sul Piano Materiale, il fantasma è in grado di vedere per 18 metri sul Piano Etereo.
-
 ## Azioni
 
 ### Multiattacco
@@ -121,6 +117,7 @@ Il fantasma lancia l'incantesimo forma eterea, senza bisogno di componenti, util
 ### Volto terrificante
 
 *Tiro salvezza su Saggezza:* CD 13, tutte le creature in un cono di 18 metri in grado di vedere il fantasma e diverse da un non morto. *Fallimento:* 10 (2d6 + 3) danni psichici, e il bersaglio è spaventato fino all'inizio del turno successivo del fantasma. *Successo:* Il bersaglio è immune al Volto terrificante di questo fantasma per 24 ore.
+````
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

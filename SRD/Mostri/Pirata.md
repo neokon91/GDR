@@ -20,13 +20,13 @@ saves:
   dex: 5
   cha: 4
 skillsaves: {}
-damage_vulnerabilities: 
-damage_resistances: 
-damage_immunities: 
-condition_immunities: 
+damage_vulnerabilities:
+damage_resistances:
+damage_immunities:
+condition_immunities:
 senses: "percezione_passiva: 11"
 languages: "Comune più un'altra lingua"
-gear: ["armatura di cuoio", "pugnali (6)"]
+cr: 1
 traits: []
 actions: 
 - name: "Multiattacco"
@@ -47,26 +47,25 @@ iniziativa: 5
 hp: 33
 hit_dice: "6d8 + 6"
 speed: "camminata: 9 m"
-cr: 1
 xp: 200
 bonus_competenza: 2
 statblock: true
 ---
 # Pirata
 
+````tabs
+tab: Scheda
 ```statblock
 monster: Pirata
 ```
-
+tab: Dettagli
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Medio o Piccolo Umanoide, neutrale
 > CA: 14
 > PF: 33 (6d8 + 6)
 > Velocita: camminata: 9 m
 > GS: 1 (PE 200; BC +2)
-
 ## Caratteristiche
-
 | Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
 | --- | --- | --- | --- |
 | Forza | 10 | 0 | 0 |
@@ -75,15 +74,13 @@ monster: Pirata
 | Intelligenza | 8 | -1 | -1 |
 | Saggezza | 12 | 1 | 1 |
 | Carisma | 14 | 2 | 4 |
-
 ## Sensi
 
 percezione_passiva: 11
-
 ## Lingue
 
 Comune più un'altra lingua
-
+tab: Azioni
 ## Azioni
 
 ### Multiattacco
@@ -97,6 +94,7 @@ Il pirata effettua due attacchi Pugnale. Può sostituire un attacco con un utili
 ### Baldanza irresistibile
 
 *Tiro salvezza su Saggezza:* CD 12, una creatura che il pirata è in grado di vedere entro 9 metri. *Fallimento:* il bersaglio è affascinato fino all'inizio del turno successivo del pirata.
+````
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

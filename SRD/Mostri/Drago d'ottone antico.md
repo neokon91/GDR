@@ -24,13 +24,13 @@ skillsaves:
   percezione: 14
   persuasione: 12
   storia: 9
-damage_vulnerabilities: 
-damage_resistances: 
-damage_immunities: 
-condition_immunities: 
+damage_vulnerabilities:
+damage_resistances:
+damage_immunities:
+condition_immunities:
 senses: "percezione_passiva: 24, scurovisione: 36 m, vista_cieca: 18 m"
 languages: "Comune, Draconico"
-gear: []
+cr: 20
 traits: 
 - name: "Resistenza leggendaria (4/giorno o 5/giorno nella tana)"
   desc: "Se il drago fallisce un tiro salvezza, può scegliere di superarlo comunque."
@@ -63,26 +63,25 @@ iniziativa: 12
 hp: 332
 hit_dice: "19d20 + 133"
 speed: "camminata: scavo 12 m, volo: 24 m"
-cr: 20
 xp: 25000
 bonus_competenza: 6
 statblock: true
 ---
 # Drago d'ottone antico
 
+````tabs
+tab: Scheda
 ```statblock
 monster: Drago d'ottone antico
 ```
-
+tab: Dettagli
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Mastodontico Drago (metallico), caotico buono
 > CA: 20
 > PF: 332 (19d20 + 133)
 > Velocita: camminata: scavo 12 m, volo: 24 m
 > GS: 20 (PE 25.000, o 33.000 nella tana; BC +6)
-
 ## Caratteristiche
-
 | Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
 | --- | --- | --- | --- |
 | Forza | 27 | 8 | 8 |
@@ -91,25 +90,21 @@ monster: Drago d'ottone antico
 | Intelligenza | 16 | 3 | 3 |
 | Saggezza | 15 | 2 | 8 |
 | Carisma | 22 | 6 | 6 |
-
 ## Abilita
 
 furtivita: 6, percezione: 14, persuasione: 12, storia: 9
-
 ## Sensi
 
 percezione_passiva: 24, scurovisione: 36 m, vista_cieca: 18 m
-
 ## Lingue
 
 Comune, Draconico
-
+tab: Azioni
 ## Tratti
 
 ### Resistenza leggendaria (4/giorno o 5/giorno nella tana)
 
 Se il drago fallisce un tiro salvezza, può scegliere di superarlo comunque.
-
 ## Azioni
 
 ### Multiattacco
@@ -144,7 +139,6 @@ Il drago lancia uno dei seguenti incantesimi, senza bisogno di componenti materi
 *Tiro salvezza su Costituzione:* CD 21, tutte le creature in un cono di 27 metri. *Fallimento:* il bersaglio è incapacitato fino al termine del proprio turno successivo, a quel punto ripete il tiro salvezza.
 
 *Secondo fallimento:* il bersaglio cade privo di sensi per 10 minuti. Questo effetto termina se il bersaglio subisce danni o se una creatura entro 1,5 metri da esso esegue un'azione per svegliarlo.
-
 ## Azioni Leggendarie
 
 3 (4 nella tana). Subito dopo il turno di un'altra creatura, il drago può consumare un utilizzo per effettuare una delle seguenti azioni. Il drago recupera tutti gli utilizzi consumati all'inizio di ogni suo turno.
@@ -162,6 +156,7 @@ Il drago usa Incantesimi per lanciare raggio rovente (di 3º livello).
 ### Sabbie roventi
 
 *Tiro salvezza su Destrezza:* CD 20, una creatura che il drago è in grado di vedere entro 36 metri. *Fallimento:* 36 (8d8) danni da fuoco, e la velocità del bersaglio è dimezzata fino al termine del proprio turno successivo. *Fallimento o successo:* il drago non può ripetere quest'azione fino all'inizio del proprio turno successivo.
+````
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

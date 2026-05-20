@@ -19,13 +19,13 @@ peso: "0,5 kg"
 danni: "1 perforante"
 proprieta: ["munizioni 7/30", "ricarica"]
 padronanza: "Vessazione"
-classe_armatura: 
-forza: 
-furtivita: 
-velocita: 
-punti_ferita: 
-soglia_danno: 
-valore_in_mo: 
+classe_armatura:
+forza:
+furtivita:
+velocita:
+punti_ferita:
+soglia_danno:
+valore_in_mo:
 ---
 # Cerbottana
 

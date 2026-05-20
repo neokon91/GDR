@@ -21,13 +21,13 @@ saves:
 skillsaves: 
   furtivita: 4
   percezione: 3
-damage_vulnerabilities: 
-damage_resistances: 
-damage_immunities: 
-condition_immunities: 
+damage_vulnerabilities:
+damage_resistances:
+damage_immunities:
+condition_immunities:
 senses: "percezione_passiva: 13, scurovisione: 18 m"
 languages: "nessuna"
-gear: []
+cr: 0
 traits: 
 - name: "Saltatore"
   desc: "La distanza dei salti del gatto è determinata dalla sua Destrezza piuttosto che dalla Forza."
@@ -46,26 +46,25 @@ iniziativa: 2
 hp: 2
 hit_dice: "1d4"
 speed: "camminata: 12 m, scalata: 12 m"
-cr: 0
 xp: 10
 bonus_competenza: 2
 statblock: true
 ---
 # Gatto
 
+````tabs
+tab: Scheda
 ```statblock
 monster: Gatto
 ```
-
+tab: Dettagli
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Minuscola Bestia, senza allineamento
 > CA: 12
 > PF: 2 (1d4)
 > Velocita: camminata: 12 m, scalata: 12 m
 > GS: 0 (PE 10; BC +2)
-
 ## Caratteristiche
-
 | Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
 | --- | --- | --- | --- |
 | Forza | 3 | -4 | -4 |
@@ -74,30 +73,27 @@ monster: Gatto
 | Intelligenza | 3 | -4 | -4 |
 | Saggezza | 12 | 1 | 1 |
 | Carisma | 7 | -2 | -2 |
-
 ## Abilita
 
 furtivita: 4, percezione: 3
-
 ## Sensi
 
 percezione_passiva: 13, scurovisione: 18 m
-
 ## Lingue
 
 nessuna
-
+tab: Azioni
 ## Tratti
 
 ### Saltatore
 
 La distanza dei salti del gatto è determinata dalla sua Destrezza piuttosto che dalla Forza.
-
 ## Azioni
 
 ### Graffio
 
 *Tiro per colpire in mischia:* +4, portata 1,5 m. *Colpito:* 1 danno tagliente.
+````
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

@@ -20,13 +20,13 @@ saves: {}
 skillsaves: 
   furtivita: 5
   percezione: 5
-damage_vulnerabilities: 
-damage_resistances: 
-damage_immunities: 
-condition_immunities: 
+damage_vulnerabilities:
+damage_resistances:
+damage_immunities:
+condition_immunities:
 senses: "percezione_passiva: 15, scurovisione: 18 m"
 languages: "Cane intermittente, capisce l'Elfico e il Silvano ma non li parla"
-gear: []
+cr: 0.25
 traits: []
 actions: 
 - name: "Morso"
@@ -45,26 +45,25 @@ iniziativa: 3
 hp: 22
 hit_dice: "4d8 + 4"
 speed: "camminata: 12 m"
-cr: 0.25
 xp: 50
 bonus_competenza: 2
 statblock: true
 ---
 # Cane intermittente
 
+````tabs
+tab: Scheda
 ```statblock
 monster: Cane intermittente
 ```
-
+tab: Dettagli
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Medio Folletto, legale buono
 > CA: 13
 > PF: 22 (4d8 + 4)
 > Velocita: camminata: 12 m
 > GS: 1/4 (PE 50; BC +2)
-
 ## Caratteristiche
-
 | Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
 | --- | --- | --- | --- |
 | Forza | 12 | 1 | 1 |
@@ -73,24 +72,22 @@ monster: Cane intermittente
 | Intelligenza | 10 | 0 | 0 |
 | Saggezza | 13 | 1 | 1 |
 | Carisma | 11 | 0 | 0 |
-
 ## Abilita
 
 furtivita: 5, percezione: 5
-
 ## Sensi
 
 percezione_passiva: 15, scurovisione: 18 m
-
 ## Lingue
 
 Cane intermittente, capisce l'Elfico e il Silvano ma non li parla
-
+tab: Azioni
 ## Azioni
 
 ### Morso
 
 *Tiro per colpire in mischia:* +5, portata 1,5 m *Colpito:* 5 (1d4 + 3) danni perforanti.
+````
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

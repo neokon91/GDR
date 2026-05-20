@@ -23,13 +23,13 @@ saves:
 skillsaves: 
   atletica: 4
   inganno: 4
-damage_vulnerabilities: 
-damage_resistances: 
-damage_immunities: 
-condition_immunities: 
+damage_vulnerabilities:
+damage_resistances:
+damage_immunities:
+condition_immunities:
 senses: "percezione_passiva: 10"
 languages: "Comune, Gergo ladresco"
-gear: ["armatura di cuoio borchiato", "pistola", "scimitarra"]
+cr: 2
 traits: []
 actions: 
 - name: "Multiattacco"
@@ -52,26 +52,25 @@ iniziativa: 3
 hp: 52
 hit_dice: "8d8 + 16"
 speed: "camminata: 9 m"
-cr: 2
 xp: 450
 bonus_competenza: 2
 statblock: true
 ---
 # Capo dei banditi
 
+````tabs
+tab: Scheda
 ```statblock
 monster: Capo dei banditi
 ```
-
+tab: Dettagli
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Medio o Piccolo Umanoide, neutrale
 > CA: 15
 > PF: 52 (8d8 + 16)
 > Velocita: camminata: 9 m
 > GS: 2 (PE 450; BC +2)
-
 ## Caratteristiche
-
 | Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
 | --- | --- | --- | --- |
 | Forza | 15 | 2 | 4 |
@@ -80,19 +79,16 @@ monster: Capo dei banditi
 | Intelligenza | 14 | 2 | 2 |
 | Saggezza | 11 | 0 | 2 |
 | Carisma | 14 | 2 | 2 |
-
 ## Abilita
 
 atletica: 4, inganno: 4
-
 ## Sensi
 
 percezione_passiva: 10
-
 ## Lingue
 
 Comune, Gergo ladresco
-
+tab: Azioni
 ## Azioni
 
 ### Multiattacco
@@ -106,6 +102,7 @@ Il bandito effettua due attacchi, usando Scimitarra e Pistola in qualsiasi combi
 ### Scimitarra
 
 *Tiro per colpire in mischia:* +5, portata 1,5 m. *Colpito:* 6 (1d6 + 3) danni taglienti.
+````
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

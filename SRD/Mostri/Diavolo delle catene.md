@@ -20,13 +20,13 @@ saves:
   con: 7
   wis: 4
 skillsaves: {}
-damage_vulnerabilities: 
-damage_resistances: 
-damage_immunities: 
-condition_immunities: 
+damage_vulnerabilities:
+damage_resistances:
+damage_immunities:
+condition_immunities:
 senses: "percezione_passiva: 11, scurovisione_36_m_non_ostacolata_dall_oscurita_magica: true"
 languages: "Infernale, telepatia 36 m"
-gear: []
+cr: 8
 traits: 
 - name: "Resistenza alla magia"
   desc: "Il diavolo dispone di vantaggio ai tiri salvezza contro incantesimi e altri effetti magici."
@@ -53,26 +53,25 @@ iniziativa: 5
 hp: 85
 hit_dice: "10d8 + 40"
 speed: "camminata: 9 m"
-cr: 8
 xp: 3900
 bonus_competenza: 3
 statblock: true
 ---
 # Diavolo delle catene
 
+````tabs
+tab: Scheda
 ```statblock
 monster: Diavolo delle catene
 ```
-
+tab: Dettagli
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Medio Immondo (diavolo), legale malvagio
 > CA: 15
 > PF: 85 (10d8 + 40)
 > Velocita: camminata: 9 m
 > GS: 8 (PE 3.900; BC +3)
-
 ## Caratteristiche
-
 | Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
 | --- | --- | --- | --- |
 | Forza | 18 | 4 | 4 |
@@ -81,15 +80,13 @@ monster: Diavolo delle catene
 | Intelligenza | 11 | 0 | 0 |
 | Saggezza | 12 | 1 | 4 |
 | Carisma | 14 | 2 | 2 |
-
 ## Sensi
 
 percezione_passiva: 11, scurovisione_36_m_non_ostacolata_dall_oscurita_magica: true
-
 ## Lingue
 
 Infernale, telepatia 36 m
-
+tab: Azioni
 ## Tratti
 
 ### Resistenza alla magia
@@ -99,7 +96,6 @@ Il diavolo dispone di vantaggio ai tiri salvezza contro incantesimi e altri effe
 ### Ristoro diabolico
 
 Se il diavolo muore al di fuori dei Nove Inferi, il suo corpo si dissolve in fumo sulfureo e ne acquisisce uno nuovo all'istante, tornando in vita con tutti i suoi punti ferita da qualche parte nei Nove Inferi.
-
 ## Azioni
 
 ### Multiattacco
@@ -119,6 +115,7 @@ Il diavolo evoca una catena di fuoco per legare una creatura.
 *Fallimento:* 9 (2d4 + 4) danni da fuoco, e il bersaglio è trattenuto fino alla fine del turno successivo del diavolo; a quel punto la catena scompare. Se il bersaglio è di taglia Grande o inferiore, il diavolo lo trascina in linea retta verso di sé fino a un massimo di 9 metri.
 
 *Successo:* la catena svanisce.
+````
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

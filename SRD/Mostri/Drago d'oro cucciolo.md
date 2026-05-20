@@ -22,13 +22,13 @@ saves:
 skillsaves: 
   furtivita: 4
   percezione: 4
-damage_vulnerabilities: 
-damage_resistances: 
-damage_immunities: 
-condition_immunities: 
+damage_vulnerabilities:
+damage_resistances:
+damage_immunities:
+condition_immunities:
 senses: "percezione_passiva: 14, scurovisione: 18 m, vista_cieca: 3 m"
 languages: "Draconico"
-gear: []
+cr: 3
 traits: 
 - name: "Anfibio"
   desc: "Il drago può respirare in aria e in acqua."
@@ -53,26 +53,25 @@ iniziativa: 4
 hp: 60
 hit_dice: "8d8 + 24"
 speed: "camminata: 9 m, nuoto: 9 m, volo: 18 m"
-cr: 3
 xp: 700
 bonus_competenza: 2
 statblock: true
 ---
 # Drago d'oro cucciolo
 
+````tabs
+tab: Scheda
 ```statblock
 monster: Drago d'oro cucciolo
 ```
-
+tab: Dettagli
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Medio Drago (metallico), legale buono
 > CA: 17
 > PF: 60 (8d8 + 24)
 > Velocita: camminata: 9 m, nuoto: 9 m, volo: 18 m
 > GS: 3 (PE 700; BC +2)
-
 ## Caratteristiche
-
 | Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
 | --- | --- | --- | --- |
 | Forza | 19 | 4 | 4 |
@@ -81,25 +80,21 @@ monster: Drago d'oro cucciolo
 | Intelligenza | 14 | 2 | 2 |
 | Saggezza | 11 | 0 | 2 |
 | Carisma | 16 | 3 | 3 |
-
 ## Abilita
 
 furtivita: 4, percezione: 4
-
 ## Sensi
 
 percezione_passiva: 14, scurovisione: 18 m, vista_cieca: 3 m
-
 ## Lingue
 
 Draconico
-
+tab: Azioni
 ## Tratti
 
 ### Anfibio
 
 Il drago può respirare in aria e in acqua.
-
 ## Azioni
 
 ### Multiattacco
@@ -117,6 +112,7 @@ Il drago effettua due attacchi Squarcio.
 ### Soffio indebolente
 
 *Tiro salvezza su Forza:* CD 13, ogni creatura che al momento non è sotto l'effetto di questo soffio in un cono di 4,5 metri. *Fallimento:* il bersaglio subisce svantaggio alle prove con d20 basate sulla Forza e sottrae 2 (1d4) ai tiri per i danni. La creatura ripete il tiro salvezza alla fine di ogni suo turno e, se lo supera, l'effetto svanisce. Dopo 1 minuto, il tiro viene superato automaticamente.
+````
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

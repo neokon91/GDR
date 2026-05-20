@@ -13,7 +13,7 @@ generato_da: "import_srd"
 capitolo: "Talenti"
 pagine_sorgente: "98-99"
 categoria_talento: "Origini"
-prerequisito: 
+prerequisito:
 ripetibile: false
 beneficio: "Una volta per turno, quando colpisci con un'arma, tiri due volte i danni dell'arma e scegli il risultato."
 ---

@@ -18,13 +18,13 @@ ac: 12
 stats: [18, 14, 15, 11, 17, 16]
 saves: {}
 skillsaves: {}
-damage_vulnerabilities: 
-damage_resistances: 
-damage_immunities: 
-condition_immunities: 
+damage_vulnerabilities:
+damage_resistances:
+damage_immunities:
+condition_immunities:
 senses: "percezione_passiva: 13, scurovisione: 18 m"
 languages: "Celestiale, Elfico, Silvano, telepatia 36 m"
-gear: []
+cr: 5
 traits: 
 - name: "Resistenza alla magia"
   desc: "L'unicorno dispone di vantaggio ai tiri salvezza contro incantesimi e altri effetti magici."
@@ -57,26 +57,25 @@ iniziativa: 8
 hp: 97
 hit_dice: "13d10 + 26"
 speed: "camminata: 15 m"
-cr: 5
 xp: 1800
 bonus_competenza: 3
 statblock: true
 ---
 # Unicorno
 
+````tabs
+tab: Scheda
 ```statblock
 monster: Unicorno
 ```
-
+tab: Dettagli
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Grande Celestiale, legale buono
 > CA: 12
 > PF: 97 (13d10 + 26)
 > Velocita: camminata: 15 m
 > GS: 5 (PE 1.800; BC +3)
-
 ## Caratteristiche
-
 | Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
 | --- | --- | --- | --- |
 | Forza | 18 | 4 | 4 |
@@ -85,15 +84,13 @@ monster: Unicorno
 | Intelligenza | 11 | 0 | 0 |
 | Saggezza | 17 | 3 | 3 |
 | Carisma | 16 | 3 | 3 |
-
 ## Sensi
 
 percezione_passiva: 13, scurovisione: 18 m
-
 ## Lingue
 
 Celestiale, Elfico, Silvano, telepatia 36 m
-
+tab: Azioni
 ## Tratti
 
 ### Resistenza alla magia
@@ -103,7 +100,6 @@ L'unicorno dispone di vantaggio ai tiri salvezza contro incantesimi e altri effe
 ### Resistenza leggendaria (3/giorno)
 
 Se l'unicorno fallisce un tiro salvezza, può scegliere di superarlo comunque.
-
 ## Azioni
 
 ### Multiattacco
@@ -121,7 +117,6 @@ L'unicorno effettua un attacco Zoccoli e un attacco Corno radioso.
 ### Incantesimi
 
 L'unicorno lancia uno dei seguenti incantesimi senza bisogno di componenti materiali, utilizzando Carisma come caratteristica da incantatore (CD del tiro salvezza sull'incantesimo 14):1/giorno ciascuno: Calmare emozioni, dissolvi il bene e il male, intralciare, parola del ritiro, passare senza tracceA volontà: Artificio druidico, individuazione del bene e del male
-
 ## Azioni Leggendarie
 
 ## Opzioni
@@ -133,6 +128,7 @@ L'unicorno si muove fino a metà della sua velocità senza provocare attacchi di
 ### Scudo luccicante
 
 L'unicorno prende di mira se stesso o una creatura che è in grado di vedere entro 18 metri da sé. Il bersaglio ottiene 10 (3d6) punti ferita temporanei, e la sua CA aumenta di 2 fino al termine del turno successivo dell'unicorno. L'unicorno non può ripetere quest'azione fino all'inizio del proprio turno successivo.
+````
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

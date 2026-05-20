@@ -69,17 +69,30 @@ const ALLOWED_STATES = new Set([
     "scomparso",
     "smistata"
 ]);
+const ALLOWED_TYPES_BY_CATEGORY = {
+    campagna: new Set(["demo", "campagna"]),
+    dispensa: new Set(["lettera", "mappa", "documento", "indizio", "dispensa"]),
+    "evento storico": new Set(["evento", "conseguenza", "rumor", "leggenda"]),
+    fazione: new Set(["fazione generica", "confraternita", "culto", "gilda", "ordine rituale"]),
+    incontro: new Set(["combattimento", "esplorazione", "pericolo ambientale", "trappola"]),
+    "lore capture": new Set(["evento", "png improvvisato", "luogo improvvisato", "dialogo", "conseguenza", "idea"]),
+    missione: new Set(["incarico", "mistero", "missione"]),
+    oggetto: new Set(["oggetto", "oggetto magico", "chiave"]),
+    personaggio: new Set(["pg", "png"]),
+    religione: new Set(["divinità", "soglia"]),
+    sessione: new Set(["sessione di campagna"])
+};
 const REQUIRED_FIELDS_BY_CATEGORY = {
     campagna: ["stato"],
     creatura: ["stato"],
     dispensa: ["stato"],
-    "evento storico": ["stato", "mondo"],
-    fazione: ["stato", "mondo"],
+    "evento storico": ["stato", "mondo", "data_mondo"],
+    fazione: ["stato", "mondo", "pressione"],
     incontro: ["stato"],
-    "lore capture": ["stato", "mondo"],
-    luogo: ["stato", "mondo"],
-    missione: ["stato", "mondo"],
-    mondo: ["stato"],
+    "lore capture": ["stato", "mondo", "data_mondo"],
+    luogo: ["stato", "mondo", "tipo"],
+    missione: ["stato", "mondo", "prossima_mossa"],
+    mondo: ["stato", "tono", "tema"],
     "nota rapida": ["stato"],
     oggetto: ["stato"],
     personaggio: ["stato"],
@@ -185,8 +198,23 @@ function isFolderIndex(fileRel) {
     return parsed.name === path.basename(parsed.dir);
 }
 
+function isSrdNote(fileRel) {
+    return fileRel.startsWith("SRD/");
+}
+
+function isIndexLikeNote(fileRel) {
+    return isFolderIndex(fileRel) || [
+        "Mondi/Mondo.md",
+        "Mondi/Stato del Mondo.md",
+        "Risorse/Indice Connettore GPT.md",
+        "Risorse/Sviluppo Vault.md",
+        "Risorse/Guida DM.md",
+        "Risorse/Controllo Vault.md"
+    ].includes(fileRel);
+}
+
 function isOperationalNote(fileRel) {
-    return /^(Campagne|Inbox|Mondi|Risorse|z\.modelli)\//.test(fileRel) || !fileRel.includes("/");
+    return !isSrdNote(fileRel) && (/^(Campagne|Inbox|Mondi|Risorse|z\.modelli)\//.test(fileRel) || !fileRel.includes("/"));
 }
 
 function targetPath(target) {
@@ -204,11 +232,12 @@ for (const file of markdownFiles) {
     const fileRel = rel(file);
     const stem = fileRel.replace(/\.md$/, "");
     const basename = path.basename(stem);
+    const text = fs.readFileSync(file, "utf8");
 
     markdownByPath.add(stem);
     if (!markdownByBasename.has(basename)) markdownByBasename.set(basename, []);
     markdownByBasename.get(basename).push(fileRel);
-    markdownMeta.set(fileRel, parseFrontmatter(fs.readFileSync(file, "utf8")));
+    markdownMeta.set(fileRel, parseFrontmatter(text));
 }
 
 for (const file of walk(ROOT, file => file.endsWith(".json"))) {
@@ -285,6 +314,23 @@ for (const file of markdownFiles) {
     }
 }
 
+const automationDir = path.join(ROOT, "z.automazioni");
+const automationNames = fs.existsSync(automationDir)
+    ? new Set(walk(automationDir, file => file.endsWith(".js")).map(file => path.basename(file, ".js")))
+    : new Set();
+const templaterUserPattern = /tp\.user\.([A-Za-z0-9_]+)/g;
+for (const file of markdownFiles.filter(file => rel(file).startsWith("z.modelli/"))) {
+    const text = fs.readFileSync(file, "utf8");
+    let match;
+
+    while ((match = templaterUserPattern.exec(text))) {
+        const helper = match[1];
+        if (!automationNames.has(helper)) {
+            errors.push(`${rel(file)}: helper Templater senza script in z.automazioni (${helper}.js)`);
+        }
+    }
+}
+
 const iconConfig = readJson(path.join(ROOT, ".obsidian/plugins/obsidian-icon-folder/data.json"));
 if (iconConfig) {
     for (const key of Object.keys(iconConfig)) {
@@ -322,16 +368,37 @@ if (gptConnectorIndex?.is_code_search_indexed !== true) {
     errors.push("Risorse/Indice Connettore GPT.md: manca is_code_search_indexed: true");
 }
 
+const gptIndexPath = path.join(ROOT, "Risorse/Indice Connettore GPT.md");
+if (!fs.existsSync(gptIndexPath)) {
+    errors.push("Risorse/Indice Connettore GPT.md: file mancante");
+} else {
+    const gptIndexText = fs.readFileSync(gptIndexPath, "utf8");
+    const codePathPattern = /`([^`\n]+\.(?:md|js|json|css))`/g;
+    let match;
+
+    while ((match = codePathPattern.exec(gptIndexText))) {
+        const referenced = match[1].trim();
+        if (!fs.existsSync(path.join(ROOT, referenced))) {
+            errors.push(`Risorse/Indice Connettore GPT.md: percorso citato mancante ${referenced}`);
+        }
+    }
+}
+
 for (const [fileRel, fm] of realEntries) {
     if (isOperationalNote(fileRel) && hasValue(fm.categoria) && !ALLOWED_CATEGORIES.has(String(fm.categoria))) {
         warnings.push(`${fileRel}: categoria non prevista (${fm.categoria})`);
+    }
+
+    const allowedTypes = ALLOWED_TYPES_BY_CATEGORY[fm.categoria];
+    if (isOperationalNote(fileRel) && allowedTypes && hasValue(fm.tipo) && !allowedTypes.has(String(fm.tipo))) {
+        warnings.push(`${fileRel}: tipo non previsto per categoria ${fm.categoria} (${fm.tipo})`);
     }
 
     if (isOperationalNote(fileRel) && hasValue(fm.stato) && !ALLOWED_STATES.has(String(fm.stato))) {
         warnings.push(`${fileRel}: stato non previsto (${fm.stato})`);
     }
 
-    const requiredFields = REQUIRED_FIELDS_BY_CATEGORY[fm.categoria] ?? [];
+    const requiredFields = isIndexLikeNote(fileRel) ? [] : REQUIRED_FIELDS_BY_CATEGORY[fm.categoria] ?? [];
     for (const field of requiredFields) {
         if (!Object.prototype.hasOwnProperty.call(fm, field) || !hasValue(fm[field])) {
             warnings.push(`${fileRel}: campo frontmatter mancante o vuoto (${field})`);
@@ -351,10 +418,19 @@ for (const [fileRel, fm] of realEntries) {
             luogo: ["mondo", "luogo_padre", "fazioni"],
             fazione: ["mondo", "luoghi", "rivali"]
         };
-        const fields = requiredByCategory[fm.categoria] ?? null;
+        const fields = requiredByCategory[fm.tipo] ?? requiredByCategory[fm.categoria] ?? null;
 
         if (fields && !hasAny(fm, fields)) {
             warnings.push(`${fileRel}: nota pronta senza collegamenti minimi (${fields.join(", ")})`);
+        }
+    }
+
+    if (fileRel.startsWith("Inbox/") && fm.categoria === "lore capture" && ["evento", "png improvvisato", "luogo improvvisato", "conseguenza"].includes(String(fm.tipo ?? ""))) {
+        if (!hasValue(fm.sessioni)) {
+            warnings.push(`${fileRel}: nota live senza sessione collegata`);
+        }
+        if (!hasValue(fm.mondo)) {
+            warnings.push(`${fileRel}: nota live senza mondo collegato`);
         }
     }
 
@@ -366,8 +442,20 @@ for (const [fileRel, fm] of realEntries) {
         warnings.push(`${fileRel}: PNG in gioco senza luogo`);
     }
 
+    if (fileRel.startsWith("Mondi/Personaggi/") && fm.tipo === "png" && fm.stato === "in gioco" && !hasAny(fm, ["fazioni", "relazioni"])) {
+        warnings.push(`${fileRel}: PNG in gioco senza fazione o relazione`);
+    }
+
     if ((fileRel.startsWith("Mondi/Fazioni/") || fileRel.startsWith("Mondi/Religioni/")) && Number(fm.pressione ?? 0) > 0 && !hasValue(fm.prossima_mossa)) {
         warnings.push(`${fileRel}: fazione con pressione senza prossima_mossa`);
+    }
+
+    if (fileRel.startsWith("Mondi/Timeline/") && fm.categoria === "evento storico" && (fm.canonico === true || fm.stato_canonico === "canonico") && !hasValue(fm.conseguenze)) {
+        warnings.push(`${fileRel}: evento canonico senza conseguenze`);
+    }
+
+    if (fileRel.startsWith("Mondi/Luoghi/") && fm.stato === "pronto" && !hasAny(fm, ["pericolo", "stabilita", "pressione"])) {
+        warnings.push(`${fileRel}: luogo pronto senza pericolo, stabilita o pressione`);
     }
 }
 

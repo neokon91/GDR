@@ -21,13 +21,13 @@ skillsaves:
   arcano: 4
   religione: 4
   furtivita: 5
-damage_vulnerabilities: 
-damage_resistances: 
-damage_immunities: 
-condition_immunities: 
+damage_vulnerabilities:
+damage_resistances:
+damage_immunities:
+condition_immunities:
 senses: "percezione_passiva: 11, scurovisione: 18 m"
 languages: "Celestiale, Comune"
-gear: []
+cr: 1
 traits: 
 - name: "Resistenza alla magia"
   desc: "La sfinge dispone di vantaggio ai tiri salvezza contro incantesimi e altri effetti magici."
@@ -48,26 +48,25 @@ iniziativa: 3
 hp: 24
 hit_dice: "7d4 + 7"
 speed: "camminata: 6 m, volo: 12 m"
-cr: 1
 xp: 200
 bonus_competenza: 2
 statblock: true
 ---
 # Sfinge della meraviglia
 
+````tabs
+tab: Scheda
 ```statblock
 monster: Sfinge della meraviglia
 ```
-
+tab: Dettagli
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Minuscolo Celestiale, legale buono
 > CA: 13
 > PF: 24 (7d4 + 7)
 > Velocita: camminata: 6 m, volo: 12 m
 > GS: 1 (PE 200; BC +2)
-
 ## Caratteristiche
-
 | Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
 | --- | --- | --- | --- |
 | Forza | 6 | -2 | -2 |
@@ -76,30 +75,27 @@ monster: Sfinge della meraviglia
 | Intelligenza | 15 | 2 | 2 |
 | Saggezza | 12 | 1 | 1 |
 | Carisma | 11 | 0 | 0 |
-
 ## Abilita
 
 arcano: 4, religione: 4, furtivita: 5
-
 ## Sensi
 
 percezione_passiva: 11, scurovisione: 18 m
-
 ## Lingue
 
 Celestiale, Comune
-
+tab: Azioni
 ## Tratti
 
 ### Resistenza alla magia
 
 La sfinge dispone di vantaggio ai tiri salvezza contro incantesimi e altri effetti magici.
-
 ## Azioni
 
 ### Squarcio
 
 *Tiro per colpire in mischia:* +5, portata 1,5 m *Colpito:* 5 (1d4 + 3) danni taglienti più 7 (2d6) danni radiosi.
+````
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

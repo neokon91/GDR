@@ -19,13 +19,13 @@ stats: [23, 11, 21, 1, 10, 5]
 saves: {}
 skillsaves: 
   percezione: 3
-damage_vulnerabilities: 
-damage_resistances: 
-damage_immunities: 
-condition_immunities: 
+damage_vulnerabilities:
+damage_resistances:
+damage_immunities:
+condition_immunities:
 senses: "percezione_passiva: 13, vista_cieca: 18 m"
 languages: "nessuna"
-gear: []
+cr: 5
 traits: 
 - name: "Respirare sott'acqua"
   desc: "Lo squalo può respirare soltanto sott'acqua."
@@ -46,26 +46,25 @@ iniziativa: 3
 hp: 92
 hit_dice: "8d12 + 40"
 speed: "camminata: 5 metri, nuoto: 18 metri"
-cr: 5
 xp: 1800
 bonus_competenza: 3
 statblock: true
 ---
 # Squalo gigante
 
+````tabs
+tab: Scheda
 ```statblock
 monster: Squalo gigante
 ```
-
+tab: Dettagli
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Enorme Bestia, senza allineamento
 > CA: 13
 > PF: 92 (8d12 + 40)
 > Velocita: camminata: 5 metri, nuoto: 18 metri
 > GS: 5 (PE 1.800; BC +3)
-
 ## Caratteristiche
-
 | Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
 | --- | --- | --- | --- |
 | Forza | 23 | 6 | 6 |
@@ -74,25 +73,21 @@ monster: Squalo gigante
 | Intelligenza | 1 | -5 | -5 |
 | Saggezza | 10 | 0 | 0 |
 | Carisma | 5 | -3 | -3 |
-
 ## Abilita
 
 percezione: 3
-
 ## Sensi
 
 percezione_passiva: 13, vista_cieca: 18 m
-
 ## Lingue
 
 nessuna
-
+tab: Azioni
 ## Tratti
 
 ### Respirare sott'acqua
 
 Lo squalo può respirare soltanto sott'acqua.
-
 ## Azioni
 
 ### Multiattacco
@@ -102,6 +97,7 @@ Lo squalo effettua due attacchi Morso.
 ### Morso
 
 *Tiro per colpire in mischia:* +9 (con vantaggio se il bersaglio non ha tutti i punti ferita), portata 1,5 m. *Colpito:* 22 (3d10 + 6) danni perforanti.
+````
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

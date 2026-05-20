@@ -18,13 +18,13 @@ ac: 11
 stats: [15, 13, 13, 2, 10, 3]
 saves: {}
 skillsaves: {}
-damage_vulnerabilities: 
-damage_resistances: 
-damage_immunities: 
-condition_immunities: 
+damage_vulnerabilities:
+damage_resistances:
+damage_immunities:
+condition_immunities:
 senses: "percezione_passiva: 10, scurovisione: 18 m"
 languages: "nessuna"
-gear: []
+cr: 1
 traits: 
 - name: "Anfibio"
   desc: "Il rospo può respirare in aria e in acqua."
@@ -49,26 +49,25 @@ iniziativa: 1
 hp: 39
 hit_dice: "6d10 + 6"
 speed: "camminata: 9 m, nuoto: 9 m"
-cr: 1
 xp: 200
 bonus_competenza: 2
 statblock: true
 ---
 # Rospo gigante
 
+````tabs
+tab: Scheda
 ```statblock
 monster: Rospo gigante
 ```
-
+tab: Dettagli
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Grande Bestia, senza allineamento
 > CA: 11
 > PF: 39 (6d10 + 6)
 > Velocita: camminata: 9 m, nuoto: 9 m
 > GS: 1 (PE 200; BC +2)
-
 ## Caratteristiche
-
 | Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
 | --- | --- | --- | --- |
 | Forza | 15 | 2 | 2 |
@@ -77,15 +76,13 @@ monster: Rospo gigante
 | Intelligenza | 2 | -4 | -4 |
 | Saggezza | 10 | 0 | 0 |
 | Carisma | 3 | -4 | -4 |
-
 ## Sensi
 
 percezione_passiva: 10, scurovisione: 18 m
-
 ## Lingue
 
 nessuna
-
+tab: Azioni
 ## Tratti
 
 ### Anfibio
@@ -95,7 +92,6 @@ Il rospo può respirare in aria e in acqua.
 ### Balzo da fermo
 
 Il rospo può compiere un salto in lungo di massimo 6 metri e uno in alto di massimo 3 metri, con o senza rincorsa.
-
 ## Azioni
 
 ### Morso
@@ -109,6 +105,7 @@ Il rospo inghiotte un bersaglio di taglia
 ### Media o inferiore che sta afferrando
 
 La creatura inghiottita non è afferrata, ma è accecata e trattenuta, e beneficia di copertura totale contro attacchi e altri effetti al di fuori del rospo. Inoltre, il bersaglio subisce 10 (3d6) danni da acido al termine di ogni turno del rospo. Il rospo può inghiottire un solo bersaglio alla volta e non può usare Morso finché ha un bersaglio inghiottito. Se il rospo muore, la creatura inghiottita non è più trattenuta e può fuggire dal cadavere usando 1,5 metri di movimento, uscendo prona.
+````
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

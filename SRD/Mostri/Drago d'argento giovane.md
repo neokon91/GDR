@@ -23,13 +23,13 @@ skillsaves:
   furtivita: 4
   percezione: 8
   storia: 6
-damage_vulnerabilities: 
-damage_resistances: 
-damage_immunities: 
-condition_immunities: 
+damage_vulnerabilities:
+damage_resistances:
+damage_immunities:
+condition_immunities:
 senses: "percezione_passiva: 18, scurovisione: 36 m, vista_cieca: 9 m"
 languages: "Comune, Draconico"
-gear: []
+cr: 9
 traits: []
 actions: 
 - name: "Multiattacco"
@@ -52,26 +52,25 @@ iniziativa: 4
 hp: 168
 hit_dice: "16d10 + 80"
 speed: "camminata: 12 m, volo: 24 m"
-cr: 9
 xp: 5000
 bonus_competenza: 4
 statblock: true
 ---
 # Drago d'argento giovane
 
+````tabs
+tab: Scheda
 ```statblock
 monster: Drago d'argento giovane
 ```
-
+tab: Dettagli
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Grande Drago (metallico), legale buono
 > CA: 18
 > PF: 168 (16d10 + 80)
 > Velocita: camminata: 12 m, volo: 24 m
 > GS: 9 (PE 5.000; BC +4)
-
 ## Caratteristiche
-
 | Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
 | --- | --- | --- | --- |
 | Forza | 23 | 6 | 6 |
@@ -80,19 +79,16 @@ monster: Drago d'argento giovane
 | Intelligenza | 14 | 2 | 2 |
 | Saggezza | 11 | 0 | 4 |
 | Carisma | 19 | 4 | 4 |
-
 ## Abilita
 
 furtivita: 4, percezione: 8, storia: 6
-
 ## Sensi
 
 percezione_passiva: 18, scurovisione: 36 m, vista_cieca: 9 m
-
 ## Lingue
 
 Comune, Draconico
-
+tab: Azioni
 ## Azioni
 
 ### Multiattacco
@@ -114,6 +110,7 @@ Il drago effettua tre attacchi Squarcio. Può sostituire un attacco con un utili
 *Primo fallimento:* il bersaglio è incapacitato fino al termine del proprio turno successivo. A quel punto, ripete il tiro salvezza.
 
 *Secondo fallimento:* il bersaglio è paralizzato e ripete il tiro salvezza alla fine di ogni suo turno e, se lo supera, l'effetto svanisce. Dopo 1 minuto, il tiro viene superato automaticamente.
+````
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

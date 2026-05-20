@@ -13,7 +13,7 @@ generato_da: "import_srd"
 capitolo: "Origini dei personaggi"
 pagine_sorgente: "21-23"
 categoria_lingua: "Rara"
-tiro_casuale: 
+tiro_casuale:
 ---
 # Gergo delle profondita
 

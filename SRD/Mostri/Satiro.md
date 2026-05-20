@@ -21,13 +21,13 @@ skillsaves:
   furtivita: 5
   intrattenere: 6
   percezione: 2
-damage_vulnerabilities: 
-damage_resistances: 
-damage_immunities: 
-condition_immunities: 
+damage_vulnerabilities:
+damage_resistances:
+damage_immunities:
+condition_immunities:
 senses: "percezione_passiva: 12"
 languages: "Comune, Elfico, Silvano"
-gear: []
+cr: 0.5
 traits: 
 - name: "Resistenza alla magia"
   desc: "Il satiro dispone di vantaggio ai tiri salvezza contro incantesimi e altri effetti magici."
@@ -48,26 +48,25 @@ iniziativa: 3
 hp: 31
 hit_dice: "7d8"
 speed: "camminata: 12 m"
-cr: 0.5
 xp: 100
 bonus_competenza: 2
 statblock: true
 ---
 # Satiro
 
+````tabs
+tab: Scheda
 ```statblock
 monster: Satiro
 ```
-
+tab: Dettagli
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Medio Folletto, caotico neutrale
 > CA: 13
 > PF: 31 (7d8)
 > Velocita: camminata: 12 m
 > GS: 1/2 (PE 100; BC +2)
-
 ## Caratteristiche
-
 | Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
 | --- | --- | --- | --- |
 | Forza | 12 | 1 | 1 |
@@ -76,25 +75,21 @@ monster: Satiro
 | Intelligenza | 12 | 1 | 1 |
 | Saggezza | 10 | 0 | 0 |
 | Carisma | 14 | 2 | 2 |
-
 ## Abilita
 
 furtivita: 5, intrattenere: 6, percezione: 2
-
 ## Sensi
 
 percezione_passiva: 12
-
 ## Lingue
 
 Comune, Elfico, Silvano
-
+tab: Azioni
 ## Tratti
 
 ### Resistenza alla magia
 
 Il satiro dispone di vantaggio ai tiri salvezza contro incantesimi e altri effetti magici.
-
 ## Azioni
 
 ### Zoccoli
@@ -104,6 +99,7 @@ Il satiro dispone di vantaggio ai tiri salvezza contro incantesimi e altri effet
 ### Derisione
 
 *Tiro salvezza su Saggezza:* CD 12, una creatura che il satiro è in grado di vedere entro 27 metri. *Fallimento:* 5 (1d6 + 2) danni psichici.
+````
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

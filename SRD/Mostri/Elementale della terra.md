@@ -18,13 +18,13 @@ ac: 17
 stats: [20, 8, 20, 5, 10, 5]
 saves: {}
 skillsaves: {}
-damage_vulnerabilities: 
-damage_resistances: 
-damage_immunities: 
-condition_immunities: 
+damage_vulnerabilities:
+damage_resistances:
+damage_immunities:
+condition_immunities:
 senses: "percezione_passiva: 10, percezione_tellurica: 18 m, scurovisione: 18 m"
 languages: "Primordiale (Terran)"
-gear: []
+cr: 5
 traits: 
 - name: "Mostro da assedio"
   desc: "L'elementale infligge danni doppi a oggetti e strutture."
@@ -49,26 +49,25 @@ iniziativa: -1
 hp: 147
 hit_dice: "14d10 + 70"
 speed: "camminata: scavo 9 m"
-cr: 5
 xp: 1800
 bonus_competenza: 3
 statblock: true
 ---
 # Elementale della terra
 
+````tabs
+tab: Scheda
 ```statblock
 monster: Elementale della terra
 ```
-
+tab: Dettagli
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Grande Elementale, neutrale
 > CA: 17
 > PF: 147 (14d10 + 70)
 > Velocita: camminata: scavo 9 m
 > GS: 5 (PE 1.800; BC +3)
-
 ## Caratteristiche
-
 | Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
 | --- | --- | --- | --- |
 | Forza | 20 | 5 | 5 |
@@ -77,15 +76,13 @@ monster: Elementale della terra
 | Intelligenza | 5 | -3 | -3 |
 | Saggezza | 10 | 0 | 0 |
 | Carisma | 5 | -3 | -3 |
-
 ## Sensi
 
 percezione_passiva: 10, percezione_tellurica: 18 m, scurovisione: 18 m
-
 ## Lingue
 
 Primordiale (Terran)
-
+tab: Azioni
 ## Tratti
 
 ### Mostro da assedio
@@ -95,7 +92,6 @@ L'elementale infligge danni doppi a oggetti e strutture.
 ### Scivolare nella terra
 
 L'elementale può scavare attraverso la terra e la pietra non magiche e non lavorate, senza disturbare il materiale attraverso cui si muove.
-
 ## Azioni
 
 ### Multiattacco
@@ -109,6 +105,7 @@ L'elementale effettua due attacchi, usando Schianto o Lancio di roccia in qualsi
 ### Lancio di roccia
 
 *Tiro per colpire a distanza:* +8, gittata 18 m. *Colpito:* 8 (1d6 + 5) danni contundenti. Se il bersaglio è una creatura di taglia Grande o inferiore, cade a terra prono.
+````
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

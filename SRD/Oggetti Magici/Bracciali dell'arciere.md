@@ -12,7 +12,7 @@ repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 tipo_oggetto: "Oggetto meraviglioso"
 tipo_base: "Oggetto meraviglioso"
-rarita: 
+rarita:
 richiede_sintonia: true
 ---
 # Bracciali dell'arciere

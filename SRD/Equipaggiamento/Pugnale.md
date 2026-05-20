@@ -19,13 +19,13 @@ peso: "0,5 kg"
 danni: "1d4 perforanti"
 proprieta: ["accurata", "lancio 6/18", "leggera"]
 padronanza: "Graffio"
-classe_armatura: 
-forza: 
-furtivita: 
-velocita: 
-punti_ferita: 
-soglia_danno: 
-valore_in_mo: 
+classe_armatura:
+forza:
+furtivita:
+velocita:
+punti_ferita:
+soglia_danno:
+valore_in_mo:
 ---
 # Pugnale
 

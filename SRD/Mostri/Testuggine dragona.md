@@ -20,13 +20,13 @@ saves:
   con: 11
   wis: 7
 skillsaves: {}
-damage_vulnerabilities: 
-damage_resistances: 
-damage_immunities: 
-condition_immunities: 
+damage_vulnerabilities:
+damage_resistances:
+damage_immunities:
+condition_immunities:
 senses: "percezione_passiva: 11, scurovisione: 36 m"
 languages: "Draconico, Primordiale (Aquan)"
-gear: []
+cr: 17
 traits: 
 - name: "Anfibio"
   desc: "Il drago può respirare in aria e in acqua."
@@ -51,26 +51,25 @@ iniziativa: 6
 hp: 356
 hit_dice: "23d20 + 115"
 speed: "camminata: 6 m, nuoto: 15 m"
-cr: 17
 xp: 18000
 bonus_competenza: 6
 statblock: true
 ---
 # Testuggine dragona
 
+````tabs
+tab: Scheda
 ```statblock
 monster: Testuggine dragona
 ```
-
+tab: Dettagli
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Mastodonico Drago, neutrale
 > CA: 20
 > PF: 356 (23d20 + 115)
 > Velocita: camminata: 6 m, nuoto: 15 m
 > GS: 17 (PE 18.000; BC +6)
-
 ## Caratteristiche
-
 | Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
 | --- | --- | --- | --- |
 | Forza | 25 | 7 | 7 |
@@ -79,21 +78,18 @@ monster: Testuggine dragona
 | Intelligenza | 10 | 0 | 0 |
 | Saggezza | 12 | 1 | 7 |
 | Carisma | 12 | 1 | 1 |
-
 ## Sensi
 
 percezione_passiva: 11, scurovisione: 36 m
-
 ## Lingue
 
 Draconico, Primordiale (Aquan)
-
+tab: Azioni
 ## Tratti
 
 ### Anfibio
 
 Il drago può respirare in aria e in acqua.
-
 ## Azioni
 
 ### Multiattacco
@@ -111,6 +107,7 @@ La testuggine dragona effettua tre attacchi Morso. Può sostituire un attacco co
 ### Soffio di vapore (ricarica 5-6)
 
 *Tiro salvezza su Costituzione:* CD 19, tutte le creature in un cono di 18 metri. *Fallimento:* 56 (16d6) danni da fuoco. *Successo:* danni dimezzati. *Fallimento o successo:* trovarsi sott'acqua non conferisce alcuna resistenza contro questi danni da fuoco.
+````
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

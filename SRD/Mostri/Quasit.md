@@ -19,13 +19,13 @@ stats: [5, 17, 10, 7, 10, 10]
 saves: {}
 skillsaves: 
   furtivita: 5
-damage_vulnerabilities: 
-damage_resistances: 
-damage_immunities: 
-condition_immunities: 
+damage_vulnerabilities:
+damage_resistances:
+damage_immunities:
+condition_immunities:
 senses: "percezione_passiva: 10, scurovisione: 36 m"
 languages: "Abissale, Comune"
-gear: []
+cr: 1
 traits: 
 - name: "Resistenza alla magia"
   desc: "Il quasit dispone di vantaggio ai tiri salvezza contro incantesimi e altri effetti magici."
@@ -50,26 +50,25 @@ iniziativa: 3
 hp: 25
 hit_dice: "10d4"
 speed: "camminata: 12 m"
-cr: 1
 xp: 200
 bonus_competenza: 2
 statblock: true
 ---
 # Quasit
 
+````tabs
+tab: Scheda
 ```statblock
 monster: Quasit
 ```
-
+tab: Dettagli
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Minuscolo Immondo, caotico malvagio
 > CA: 13
 > PF: 25 (10d4)
 > Velocita: camminata: 12 m
 > GS: 1 (PE 200; BC +2)
-
 ## Caratteristiche
-
 | Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
 | --- | --- | --- | --- |
 | Forza | 5 | -3 | -3 |
@@ -78,25 +77,21 @@ monster: Quasit
 | Intelligenza | 7 | -2 | -2 |
 | Saggezza | 10 | 0 | 0 |
 | Carisma | 10 | 0 | 0 |
-
 ## Abilita
 
 furtivita: 5
-
 ## Sensi
 
 percezione_passiva: 10, scurovisione: 36 m
-
 ## Lingue
 
 Abissale, Comune
-
+tab: Azioni
 ## Tratti
 
 ### Resistenza alla magia
 
 Il quasit dispone di vantaggio ai tiri salvezza contro incantesimi e altri effetti magici.
-
 ## Azioni
 
 ### Squarcio
@@ -114,6 +109,7 @@ Il quasit può assumere la forma bestiale di un pipistrello (velocità 3 m, volo
 ### Spaventare (1/giorno)
 
 *Tiro salvezza su Saggezza:* CD 10, una creatura entro 6 metri. *Fallimento:* il bersaglio è spaventato. Alla fine di ogni suo turno, il bersaglio ripete il tiro salvezza e, se lo supera, l'effetto svanisce. Dopo 1 minuto, il tiro viene superato automaticamente.
+````
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

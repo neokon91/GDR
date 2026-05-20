@@ -11,10 +11,10 @@ stato: pronto
 ## Tiri Rapidi
 
 > [!scena] Al tavolo
-> - Complicazione: `dice: 1d6`
-> - Umore PNG: `dice: 1d6`
-> - Bottino minore: `dice: 1d8`
-> - Dettaglio sensoriale: `dice: 1d10`
+> - Complicazione: `dice: [[Risorse/Tabelle/Tabelle#^complicazioni]]`
+> - Umore PNG: `dice: [[Risorse/Tabelle/Tabelle#^umore-png]]`
+> - Bottino minore: `dice: [[Risorse/Tabelle/Tabelle#^bottino-minore]]`
+> - Dettaglio sensoriale: `dice: [[Risorse/Tabelle/Tabelle#^dettagli-sensoriali]]`
 
 ## Complicazioni
 

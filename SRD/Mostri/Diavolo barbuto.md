@@ -21,13 +21,13 @@ saves:
   con: 4
   cha: 4
 skillsaves: {}
-damage_vulnerabilities: 
-damage_resistances: 
-damage_immunities: 
-condition_immunities: 
+damage_vulnerabilities:
+damage_resistances:
+damage_immunities:
+condition_immunities:
 senses: "percezione_passiva: 10, scurovisione_36_m_non_ostacolata_dall_oscurita_magica: true"
 languages: "Infernale, telepatia 36 m"
-gear: []
+cr: 3
 traits: 
 - name: "Resistenza alla magia"
   desc: "Il diavolo dispone di vantaggio ai tiri salvezza contro incantesimi e altri effetti magici."
@@ -50,26 +50,25 @@ iniziativa: 2
 hp: 58
 hit_dice: "9d8 + 18"
 speed: "camminata: 9 m"
-cr: 3
 xp: 700
 bonus_competenza: 2
 statblock: true
 ---
 # Diavolo barbuto
 
+````tabs
+tab: Scheda
 ```statblock
 monster: Diavolo barbuto
 ```
-
+tab: Dettagli
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Medio Immondo (diavolo), legale malvagio
 > CA: 13
 > PF: 58 (9d8 + 18)
 > Velocita: camminata: 9 m
 > GS: 3 (PE 700; BC +2)
-
 ## Caratteristiche
-
 | Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
 | --- | --- | --- | --- |
 | Forza | 16 | 3 | 5 |
@@ -78,21 +77,18 @@ monster: Diavolo barbuto
 | Intelligenza | 9 | -1 | -1 |
 | Saggezza | 11 | 0 | 0 |
 | Carisma | 14 | 2 | 4 |
-
 ## Sensi
 
 percezione_passiva: 10, scurovisione_36_m_non_ostacolata_dall_oscurita_magica: true
-
 ## Lingue
 
 Infernale, telepatia 36 m
-
+tab: Azioni
 ## Tratti
 
 ### Resistenza alla magia
 
 Il diavolo dispone di vantaggio ai tiri salvezza contro incantesimi e altri effetti magici.
-
 ## Azioni
 
 ### Multiattacco
@@ -110,6 +106,7 @@ Il diavolo effettua un attacco Barba e un attacco Falcione infernale.
 *Tiro salvezza su Costituzione:* CD 12.
 
 *Fallimento:* il bersaglio subisce una ferita infernale. Finché è ferito, il bersaglio perde 5 (1d10) punti ferita all'inizio di ogni suo turno. La ferita si rimargina dopo 1 minuto, dopo che un incantesimo ripristina i punti ferita del bersaglio, o dopo che il bersaglio o una creatura entro 1,5 metri effettua un'azione per tamponare la ferita superando una prova di Saggezza (Medicina) con CD 12.
+````
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

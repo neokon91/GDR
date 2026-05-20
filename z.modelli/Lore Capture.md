@@ -24,7 +24,7 @@
 > `INPUT[inlineListSuggester(optionQuery("Mondi"), useLinks(partial), allowOther):collegamenti]`
 >
 > Data mondo:
-> `INPUT[text:evento_mondo]`
+> `INPUT[text:data_mondo]`
 >
 > Canonizza evento:
 > `INPUT[toggle:canonizza_evento]`

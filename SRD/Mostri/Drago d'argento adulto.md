@@ -23,13 +23,13 @@ skillsaves:
   furtivita: 5
   percezione: 11
   storia: 8
-damage_vulnerabilities: 
-damage_resistances: 
-damage_immunities: 
-condition_immunities: 
+damage_vulnerabilities:
+damage_resistances:
+damage_immunities:
+condition_immunities:
 senses: "percezione_passiva: 21, scurovisione: 36 m, vista_cieca: 18 m"
 languages: "Comune, Draconico"
-gear: []
+cr: 16
 traits: 
 - name: "Resistenza leggendaria (3/giorno o 4/giorno nella tana)"
   desc: "Se il drago fallisce un tiro salvezza, può scegliere di superarlo comunque."
@@ -62,26 +62,25 @@ iniziativa: 10
 hp: 216
 hit_dice: "16d12 + 112"
 speed: "camminata: 12 m, volo: 24 m"
-cr: 16
 xp: 15000
 bonus_competenza: 5
 statblock: true
 ---
 # Drago d'argento adulto
 
+````tabs
+tab: Scheda
 ```statblock
 monster: Drago d'argento adulto
 ```
-
+tab: Dettagli
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Enorme Drago (metallico), legale buono
 > CA: 19
 > PF: 216 (16d12 + 112)
 > Velocita: camminata: 12 m, volo: 24 m
 > GS: 16 (PE 15.000, o 18.000 nella tana; BC +5)
-
 ## Caratteristiche
-
 | Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
 | --- | --- | --- | --- |
 | Forza | 27 | 8 | 8 |
@@ -90,25 +89,21 @@ monster: Drago d'argento adulto
 | Intelligenza | 16 | 3 | 3 |
 | Saggezza | 13 | 1 | 6 |
 | Carisma | 22 | 6 | 6 |
-
 ## Abilita
 
 furtivita: 5, percezione: 11, storia: 8
-
 ## Sensi
 
 percezione_passiva: 21, scurovisione: 36 m, vista_cieca: 18 m
-
 ## Lingue
 
 Comune, Draconico
-
+tab: Azioni
 ## Tratti
 
 ### Resistenza leggendaria (3/giorno o 4/giorno nella tana)
 
 Se il drago fallisce un tiro salvezza, può scegliere di superarlo comunque.
-
 ## Azioni
 
 ### Multiattacco
@@ -144,7 +139,6 @@ Il drago lancia uno dei seguenti incantesimi, senza bisogno di componenti materi
 *Primo fallimento:* il bersaglio è incapacitato fino al termine del proprio turno successivo. A quel punto, ripete il tiro salvezza.
 
 *Secondo fallimento:* il bersaglio è paralizzato e ripete il tiro salvezza alla fine di ogni suo turno e, se lo supera, l'effetto svanisce. Dopo 1 minuto, il tiro viene superato automaticamente.
-
 ## Azioni Leggendarie
 
 Subito dopo il turno di un'altra creatura, il drago può consumare un utilizzo per effettuare una delle seguenti azioni. Il drago recupera tutti gli utilizzi consumati all'inizio di ogni suo turno.
@@ -162,6 +156,7 @@ Il drago si muove fino a metà della sua velocità, ed effettua un attacco Squar
 ### Bufera
 
 *Tiro salvezza su Destrezza:* CD 19, tutte le creature in una linea lunga 18 metri e larga 3 metri. *Fallimento:* 14 (4d6) danni da freddo, e il bersaglio viene spinto in linea retta fino a un massimo di 9 metri lontano dal drago. *Successo:* danni dimezzati. *Fallimento o successo:* il drago non può ripetere quest'azione fino all'inizio del proprio turno successivo.
+````
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

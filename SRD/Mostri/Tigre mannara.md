@@ -20,13 +20,13 @@ saves: {}
 skillsaves: 
   furtivita: 4
   percezione: 5
-damage_vulnerabilities: 
-damage_resistances: 
-damage_immunities: 
-condition_immunities: 
+damage_vulnerabilities:
+damage_resistances:
+damage_immunities:
+condition_immunities:
 senses: "percezione_passiva: 15, scurovisione: 18 m"
 languages: "Comune (non può parlare in forma di tigre)"
-gear: ["arco lungo"]
+cr: 4
 traits: []
 actions: 
 - name: "Multiattacco"
@@ -53,26 +53,25 @@ iniziativa: 2
 hp: 120
 hit_dice: "16d8 + 48"
 speed: "camminata: 12 m (solo in forma di tigre)"
-cr: 4
 xp: 1100
 bonus_competenza: 2
 statblock: true
 ---
 # Tigre mannara
 
+````tabs
+tab: Scheda
 ```statblock
 monster: Tigre mannara
 ```
-
+tab: Dettagli
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Media o Piccola Mostruosità (licantropo), neutrale
 > CA: 12
 > PF: 120 (16d8 + 48)
 > Velocita: camminata: 12 m (solo in forma di tigre)
 > GS: 4 (PE 1.100; BC +2)
-
 ## Caratteristiche
-
 | Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
 | --- | --- | --- | --- |
 | Forza | 17 | 3 | 3 |
@@ -81,19 +80,16 @@ monster: Tigre mannara
 | Intelligenza | 10 | 0 | 0 |
 | Saggezza | 13 | 1 | 1 |
 | Carisma | 11 | 0 | 0 |
-
 ## Abilita
 
 furtivita: 4, percezione: 5
-
 ## Sensi
 
 percezione_passiva: 15, scurovisione: 18 m
-
 ## Lingue
 
 Comune (non può parlare in forma di tigre)
-
+tab: Azioni
 ## Azioni
 
 ### Multiattacco
@@ -111,6 +107,7 @@ La tigre mannara effettua due attacchi, usando Graffio o Arco lungo in qualsiasi
 ### Arco lungo (solo in forma umanoide o ibrida)
 
 *Tiro per colpire a distanza:* +4, gittata 45/180 m. *Colpito:* 11 (2d8 + 2) danni perforanti.
+````
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

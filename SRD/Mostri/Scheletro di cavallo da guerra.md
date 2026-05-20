@@ -18,13 +18,13 @@ ac: 13
 stats: [18, 12, 15, 2, 8, 5]
 saves: {}
 skillsaves: {}
-damage_vulnerabilities: 
-damage_resistances: 
-damage_immunities: 
-condition_immunities: 
+damage_vulnerabilities:
+damage_resistances:
+damage_immunities:
+condition_immunities:
 senses: "percezione_passiva: 9, scurovisione: 18 m"
 languages: "nessuna"
-gear: []
+cr: 0.5
 traits: []
 actions: 
 - name: "Zoccoli"
@@ -41,26 +41,25 @@ iniziativa: 1
 hp: 22
 hit_dice: "3d10 + 6"
 speed: "camminata: 18 m"
-cr: 0.5
 xp: 100
 bonus_competenza: 2
 statblock: true
 ---
 # Scheletro di cavallo da guerra
 
+````tabs
+tab: Scheda
 ```statblock
 monster: Scheletro di cavallo da guerra
 ```
-
+tab: Dettagli
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Grande Non morto, legale malvagio
 > CA: 13
 > PF: 22 (3d10 + 6)
 > Velocita: camminata: 18 m
 > GS: 1/2 (PE 100; BC +2)
-
 ## Caratteristiche
-
 | Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
 | --- | --- | --- | --- |
 | Forza | 18 | 4 | 4 |
@@ -69,15 +68,13 @@ monster: Scheletro di cavallo da guerra
 | Intelligenza | 2 | -4 | -4 |
 | Saggezza | 8 | -1 | -1 |
 | Carisma | 5 | -3 | -3 |
-
 ## Sensi
 
 percezione_passiva: 9, scurovisione: 18 m
-
 ## Lingue
 
 nessuna
-
+tab: Azioni
 ## Azioni
 
 ### Zoccoli
@@ -86,6 +83,7 @@ nessuna
 
 **Colpito:** 7 (1d6 + 4) danni contundenti
 Se il bersaglio è una creatura di taglia Grande o inferiore e lo scheletro si è mosso di 6 metri o più in linea retta verso di esso subito prima del colpo, il bersaglio cade a terra prono.
+````
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

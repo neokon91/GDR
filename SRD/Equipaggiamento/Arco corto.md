@@ -19,13 +19,13 @@ peso: "1 kg"
 danni: "1d6 perforanti"
 proprieta: ["due mani", "munizioni 24/96"]
 padronanza: "Vessazione"
-classe_armatura: 
-forza: 
-furtivita: 
-velocita: 
-punti_ferita: 
-soglia_danno: 
-valore_in_mo: 
+classe_armatura:
+forza:
+furtivita:
+velocita:
+punti_ferita:
+soglia_danno:
+valore_in_mo:
 ---
 # Arco corto
 

@@ -19,13 +19,13 @@ peso: "5 kg"
 danni: "1d12 perforanti"
 proprieta: ["due mani", "munizioni 12/36", "ricarica"]
 padronanza: "Lentezza"
-classe_armatura: 
-forza: 
-furtivita: 
-velocita: 
-punti_ferita: 
-soglia_danno: 
-valore_in_mo: 
+classe_armatura:
+forza:
+furtivita:
+velocita:
+punti_ferita:
+soglia_danno:
+valore_in_mo:
 ---
 # Moschetto
 

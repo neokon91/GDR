@@ -18,13 +18,13 @@ ac: 17
 stats: [18, 8, 18, 7, 10, 3]
 saves: {}
 skillsaves: {}
-damage_vulnerabilities: 
-damage_resistances: 
-damage_immunities: 
-condition_immunities: 
+damage_vulnerabilities:
+damage_resistances:
+damage_immunities:
+condition_immunities:
 senses: "percezione_passiva: 10, scurovisione: 18 m, vista_cieca: 3 m"
 languages: "capisce i comandi impartiti in qualsiasi lingua, ma non è in grado di parlare"
-gear: []
+cr: 7
 traits: 
 - name: "Incantesimo custodito"
   desc: "Un incantatore che indossa l'amuleto del guardiano protettore può fare in modo che il guardiano custodisca un incantesimo di 4º livello o inferiore. Per farlo, il portatore deve lanciare l'incantesimo sul guardiano finché si trova entro 1,5 metri da esso. L'incantesimo non ha effetto, ma è custodito all'interno del guardiano. Quando gli viene affidato un nuovo incantesimo, quello custodito in precedenza viene sovrascritto. Il guardiano protettore può lanciare l'incantesimo custodito con qualsiasi parametro deciso dall'incantatore originale, senza bisogno di componenti e utilizzando la caratteristica da incantatore di quest'ultimo. Così facendo, l'incantesimo custodito va perduto."
@@ -51,26 +51,25 @@ iniziativa: -1
 hp: 142
 hit_dice: "15d10 + 60"
 speed: "camminata: 9 m"
-cr: 7
 xp: 2900
 bonus_competenza: 3
 statblock: true
 ---
 # Guardiano protettore
 
+````tabs
+tab: Scheda
 ```statblock
 monster: Guardiano protettore
 ```
-
+tab: Dettagli
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Grande Costrutto, senza allineamento
 > CA: 17
 > PF: 142 (15d10 + 60)
 > Velocita: camminata: 9 m
 > GS: 7 (PE 2.900; BC +3)
-
 ## Caratteristiche
-
 | Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
 | --- | --- | --- | --- |
 | Forza | 18 | 4 | 4 |
@@ -79,15 +78,13 @@ monster: Guardiano protettore
 | Intelligenza | 7 | -2 | -2 |
 | Saggezza | 10 | 0 | 0 |
 | Carisma | 3 | -4 | -4 |
-
 ## Sensi
 
 percezione_passiva: 10, scurovisione: 18 m, vista_cieca: 3 m
-
 ## Lingue
 
 capisce i comandi impartiti in qualsiasi lingua, ma non è in grado di parlare
-
+tab: Azioni
 ## Tratti
 
 ### Incantesimo custodito
@@ -101,7 +98,6 @@ Il guardiano protettore recupera 10 punti ferita all'inizio di ogni suo turno, s
 ### Vincolato
 
 Il guardiano protettore è vincolato magicamente a un amuleto. Finché il guardiano e il suo amuleto si trovano sullo stesso piano di esistenza, il portatore dell'amuleto può chiamare telepaticamente ilguardiano affinché viaggi fino a lui. Il guardiano conosce la distanza e la direzione in cui si trova l'oggetto. Se il guardiano si trova entro 18 metri dal portatore dell'amuleto, la metà dei danni (arrotondati per eccesso) che il portatore subisce viene trasferita al guardiano.
-
 ## Azioni
 
 ### Multiattacco
@@ -111,6 +107,7 @@ Il guardiano effettua due attacchi Pugno.
 ### Pugno
 
 *Tiro per colpire in mischia:* +7, portata 3 m. *Colpito:* 11 (2d6 + 4) danni contundenti più 7 (2d6) danni da forza.
+````
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

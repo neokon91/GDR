@@ -29,6 +29,12 @@ async function personaggio(tp) {
     const luogo = await helpers.chooseLocation(tp, "Luogo del personaggio", context);
     const fazioni = await helpers.chooseFactions(tp, "Fazioni del personaggio", context);
     const relazioni = await helpers.choosePeople(tp, "Relazioni del personaggio", context);
+    const missioni = await helpers.chooseMissions(tp, "Missioni collegate al personaggio", context);
+    const vuole = await helpers.promptOptional(tp, "Cosa vuole");
+    const sa = await helpers.promptOptional(tp, "Cosa sa di utile");
+    const segreto = await helpers.promptOptional(tp, "Segreto o contraddizione");
+    const leva = await helpers.promptOptional(tp, "Leva per coinvolgerlo al tavolo");
+    const domandaAperta = await helpers.promptOptional(tp, "Domanda aperta sul personaggio");
 
     await helpers.moveNote(tp, helpers.path("personaggi"), name);
 
@@ -47,6 +53,12 @@ mondo: ${mondo}
 fazioni: ${helpers.inlineYamlList(fazioni)}
 luogo: ${luogo}
 relazioni: ${helpers.inlineYamlList(relazioni)}
+missioni: ${helpers.inlineYamlList(missioni)}
+vuole: ${helpers.yamlQuote(vuole)}
+sa: ${helpers.yamlQuote(sa)}
+leva: ${helpers.yamlQuote(leva)}
+segreto: ${helpers.yamlQuote(segreto)}
+domande_aperte: ${helpers.inlineYamlTextList([domandaAperta])}
 conseguenze: []
 type: umanoide
 size: media

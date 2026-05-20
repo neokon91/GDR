@@ -43,9 +43,25 @@ dv.paragraph("```statblock\nmonster: " + name + "\n```");
 
 ## Obiettivi
 
+`INPUT[text:vuole]`
+
+> [!missione] Vuole
+> `=this.vuole`
+
+## Cosa Sa
+
+`INPUT[text:sa]`
+
+> [!indizio] Sa
+> `=this.sa`
+
 ## Relazioni
 
 `INPUT[inlineListSuggester(optionQuery("Mondi/Personaggi"), useLinks(partial)):relazioni]`
+
+## Missioni
+
+`INPUT[inlineListSuggester(optionQuery("Mondi/Missioni"), useLinks(partial)):missioni]`
 
 ## Fazioni
 
@@ -79,7 +95,17 @@ LIMIT 10
 
 ## Segreti
 
+`INPUT[text:segreto]`
+
 > [!segreto]- Segreti
+> `=this.segreto`
 >
+
+## Leva Al Tavolo
+
+`INPUT[text:leva]`
+
+> [!scena] Leva
+> `=this.leva`
 
 ## Note GM

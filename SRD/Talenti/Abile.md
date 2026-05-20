@@ -13,7 +13,7 @@ generato_da: "import_srd"
 capitolo: "Talenti"
 pagine_sorgente: "98-99"
 categoria_talento: "Origini"
-prerequisito: 
+prerequisito:
 ripetibile: true
 beneficio: "Ottieni competenza in una combinazione di tre abilita o strumenti a scelta; ripetibile."
 ---

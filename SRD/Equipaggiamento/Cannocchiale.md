@@ -16,16 +16,16 @@ tipo_oggetto: "equipaggiamento_avventura"
 categoria_oggetto: "Equipaggiamento d'avventura"
 costo: "1.000 mo"
 peso: "0,5 kg"
-danni: 
+danni:
 proprieta: []
-padronanza: 
-classe_armatura: 
-forza: 
-furtivita: 
-velocita: 
-punti_ferita: 
-soglia_danno: 
-valore_in_mo: 
+padronanza:
+classe_armatura:
+forza:
+furtivita:
+velocita:
+punti_ferita:
+soglia_danno:
+valore_in_mo:
 ---
 # Cannocchiale
 

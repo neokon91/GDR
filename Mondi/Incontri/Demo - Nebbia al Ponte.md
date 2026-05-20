@@ -19,7 +19,8 @@ ricompense:
 round: 1
 condizioni:
   - visibilita ridotta oltre 9 metri
-encounter_creatures: []
+encounter_creatures:
+  - Lupo
 ---
 
 # Demo - Nebbia al Ponte
@@ -31,6 +32,13 @@ encounter_creatures: []
 > - Odran prova a nascondere il frammento.
 > - Mira vuole arrestare chiunque tocchi la campana.
 > - Una voce nella nebbia ripete il nome di un personaggio.
+
+```encounter
+name: Demo - Nebbia al Ponte
+players: true
+creatures:
+  - Lupo
+```
 
 > [!tesoro] Ricompensa
 > [[Demo - Frammento della Soglia]]

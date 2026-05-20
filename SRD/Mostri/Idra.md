@@ -19,13 +19,13 @@ stats: [20, 12, 20, 2, 10, 7]
 saves: {}
 skillsaves: 
   percezione: 6
-damage_vulnerabilities: 
-damage_resistances: 
-damage_immunities: 
-condition_immunities: 
+damage_vulnerabilities:
+damage_resistances:
+damage_immunities:
+condition_immunities:
 senses: "percezione_passiva: 16, scurovisione: 18 m"
 languages: "nessuna"
-gear: []
+cr: 8
 traits: 
 - name: "Apnea"
   desc: "L'idra può trattenere il respiro per 1 ora."
@@ -50,26 +50,25 @@ iniziativa: 4
 hp: 184
 hit_dice: "16d12 + 80"
 speed: "camminata: 12 m, nuoto: 12 m"
-cr: 8
 xp: 3900
 bonus_competenza: 3
 statblock: true
 ---
 # Idra
 
+````tabs
+tab: Scheda
 ```statblock
 monster: Idra
 ```
-
+tab: Dettagli
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Enorme Mostruosità, senza allineamento
 > CA: 15
 > PF: 184 (16d12 + 80)
 > Velocita: camminata: 12 m, nuoto: 12 m
 > GS: 8 (PE 3.900; BC +3)
-
 ## Caratteristiche
-
 | Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
 | --- | --- | --- | --- |
 | Forza | 20 | 5 | 5 |
@@ -78,19 +77,16 @@ monster: Idra
 | Intelligenza | 2 | -4 | -4 |
 | Saggezza | 10 | 0 | 0 |
 | Carisma | 7 | -2 | -2 |
-
 ## Abilita
 
 percezione: 6
-
 ## Sensi
 
 percezione_passiva: 16, scurovisione: 18 m
-
 ## Lingue
 
 nessuna
-
+tab: Azioni
 ## Tratti
 
 ### Apnea
@@ -104,7 +100,6 @@ L'idra possiede cinque teste. Ogni volta che subisce 25 o più danni in un singo
 ### Teste reattive
 
 Per ogni testa che l'idra possiede oltre la prima, riceve una reazione extra che può essere usata soltanto per gli attacchi di opportunità.
-
 ## Azioni
 
 ### Multiattacco
@@ -114,6 +109,7 @@ L'idra effettua un numero di attacchi Morso pari al numero di teste che possiede
 ### Morso
 
 *Tiro per colpire in mischia:* +8, portata 3 m. *Colpito:* 10 (1d10 + 5) danni perforanti.
+````
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

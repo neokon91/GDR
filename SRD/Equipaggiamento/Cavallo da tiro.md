@@ -15,17 +15,17 @@ pagine_sorgente: "113-114"
 tipo_oggetto: "cavalcatura"
 categoria_oggetto: "Cavalcature"
 costo: "50 mo"
-peso: 
-danni: 
+peso:
+danni:
 proprieta: []
-padronanza: 
-classe_armatura: 
-forza: 
-furtivita: 
-velocita: 
-punti_ferita: 
-soglia_danno: 
-valore_in_mo: 
+padronanza:
+classe_armatura:
+forza:
+furtivita:
+velocita:
+punti_ferita:
+soglia_danno:
+valore_in_mo:
 ---
 # Cavallo da tiro
 

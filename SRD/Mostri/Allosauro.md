@@ -19,13 +19,13 @@ stats: [19, 13, 17, 2, 12, 5]
 saves: {}
 skillsaves: 
   percezione: 5
-damage_vulnerabilities: 
-damage_resistances: 
-damage_immunities: 
-condition_immunities: 
+damage_vulnerabilities:
+damage_resistances:
+damage_immunities:
+condition_immunities:
 senses: "percezione_passiva: 15"
 languages: "nessuna"
-gear: []
+cr: 2
 traits: []
 actions: 
 - name: "Artigli"
@@ -44,26 +44,25 @@ iniziativa: 1
 hp: 51
 hit_dice: "6d10 + 18"
 speed: "camminata: 18 m"
-cr: 2
 xp: 450
 bonus_competenza: 2
 statblock: true
 ---
 # Allosauro
 
+````tabs
+tab: Scheda
 ```statblock
 monster: Allosauro
 ```
-
+tab: Dettagli
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Grande Bestia (dinosauro), senza allineamento
 > CA: 13
 > PF: 51 (6d10 + 18)
 > Velocita: camminata: 18 m
 > GS: 2 (PE 450; BC +2)
-
 ## Caratteristiche
-
 | Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
 | --- | --- | --- | --- |
 | Forza | 19 | 4 | 4 |
@@ -72,19 +71,16 @@ monster: Allosauro
 | Intelligenza | 2 | -4 | -4 |
 | Saggezza | 12 | 1 | 1 |
 | Carisma | 5 | -3 | -3 |
-
 ## Abilita
 
 percezione: 5
-
 ## Sensi
 
 percezione_passiva: 15
-
 ## Lingue
 
 nessuna
-
+tab: Azioni
 ## Azioni
 
 ### Artigli
@@ -94,6 +90,7 @@ nessuna
 ### Morso
 
 *Tiro per colpire in mischia:* +6, portata 1,5 m. *Colpito:* 15 (2d10 + 4) danni perforanti.
+````
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

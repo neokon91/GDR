@@ -589,6 +589,14 @@ function inlineYamlList(values) {
     return filtered.length ? `[${filtered.join(", ")}]` : "[]";
 }
 
+function inlineYamlTextList(values) {
+    const filtered = (values ?? [])
+        .map(value => String(value ?? "").trim())
+        .filter(Boolean);
+
+    return filtered.length ? `[${filtered.map(yamlQuote).join(", ")}]` : "[]";
+}
+
 function yamlNumber(value) {
     const text = String(value ?? "").trim().replace(",", ".");
     return /^-?\d+(\.\d+)?$/.test(text) ? text : "";
@@ -626,6 +634,7 @@ module.exports = {
     collectNamedDescriptions,
     inlineYamlArray,
     inlineYamlList,
+    inlineYamlTextList,
     yamlNumber,
     parseAbilityScores,
     abilityArray,

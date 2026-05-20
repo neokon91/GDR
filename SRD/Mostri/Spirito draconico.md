@@ -18,13 +18,13 @@ ac: "14 + il livello dell'incantesimo"
 stats: [18, 14, 16, 10, 14, 12]
 saves: {}
 skillsaves: {}
-damage_vulnerabilities: 
-damage_resistances: 
-damage_immunities: 
-condition_immunities: 
+damage_vulnerabilities:
+damage_resistances:
+damage_immunities:
+condition_immunities:
 senses: "percezione_passiva: 12, scurovisione: 18 m"
 languages: "Draconico"
-gear: []
+cr:
 traits: 
 - name: "Resistenza magica"
   desc: "Lo spirito dispone di vantaggio ai tiri salvezza contro incantesimi e altri effetti magici."
@@ -44,29 +44,28 @@ dimensione: "Grande"
 allineamento: "senza allineamento"
 classe_armatura: "14 + il livello dell'incantesimo"
 iniziativa: 2
-hp: 
-hit_dice: 
+hp:
+hit_dice:
 speed: "camminata: 9 m, volo: 18 m"
-cr: 
 xp: 0
 bonus_competenza: 0
 statblock: true
 ---
 # Spirito draconico
 
+````tabs
+tab: Scheda
 ```statblock
 monster: Spirito draconico
 ```
-
+tab: Dettagli
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Grande Drago, senza allineamento
 > CA: 14 + il livello dell'incantesimo
 > PF:  ()
 > Velocita: camminata: 9 m, volo: 18 m
 > GS: nessuno (PE 0; BC pari al bonus di competenza dell'incantatore)
-
 ## Caratteristiche
-
 | Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
 | --- | --- | --- | --- |
 | Forza | 18 | 4 | 4 |
@@ -75,21 +74,18 @@ monster: Spirito draconico
 | Intelligenza | 10 | 0 | 0 |
 | Saggezza | 14 | 2 | 2 |
 | Carisma | 12 | 1 | 1 |
-
 ## Sensi
 
 percezione_passiva: 12, scurovisione: 18 m
-
 ## Lingue
 
 Draconico
-
+tab: Azioni
 ## Tratti
 
 ### Resistenza magica
 
 Lo spirito dispone di vantaggio ai tiri salvezza contro incantesimi e altri effetti magici.
-
 ## Azioni
 
 ### Multiattacco
@@ -106,6 +102,7 @@ Lo spirito effettua un numero di attacchi pari alla metà del livello dell'incan
 *Tiro salvezza su Destrezza:* CD del tiro salvezza dell'incantesimo dell'incantatore, tutte le creature in un cono di 4,5 metri.
 *Fallimento:* 2d6 + il livello dell'incantesimo danni del tipo scelto.
 *Successo:* danni dimezzati.
+````
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

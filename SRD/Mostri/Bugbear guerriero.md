@@ -20,13 +20,13 @@ saves: {}
 skillsaves: 
   furtivita: 6
   sopravvivenza: 2
-damage_vulnerabilities: 
-damage_resistances: 
-damage_immunities: 
-condition_immunities: 
+damage_vulnerabilities:
+damage_resistances:
+damage_immunities:
+condition_immunities:
 senses: "percezione_passiva: 10, scurovisione: 18 m"
 languages: "Comune, Goblin"
-gear: ["armatura di pelle", "martelli leggeri (3)"]
+cr: 1
 traits: 
 - name: "Rapimento"
   desc: "Il bugbear non ha bisogno di usare movimento extra per spostare una creatura che sta afferrando."
@@ -47,26 +47,25 @@ iniziativa: 2
 hp: 33
 hit_dice: "6d8 + 6"
 speed: "camminata: 9 m"
-cr: 1
 xp: 200
 bonus_competenza: 2
 statblock: true
 ---
 # Bugbear guerriero
 
+````tabs
+tab: Scheda
 ```statblock
 monster: Bugbear guerriero
 ```
-
+tab: Dettagli
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Medio Folletto (goblinoide), caotico malvagio
 > CA: 14
 > PF: 33 (6d8 + 6)
 > Velocita: camminata: 9 m
 > GS: 1 (PE 200; BC +2)
-
 ## Caratteristiche
-
 | Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
 | --- | --- | --- | --- |
 | Forza | 15 | 2 | 2 |
@@ -75,25 +74,21 @@ monster: Bugbear guerriero
 | Intelligenza | 8 | -1 | -1 |
 | Saggezza | 11 | 0 | 0 |
 | Carisma | 9 | -1 | -1 |
-
 ## Abilita
 
 furtivita: 6, sopravvivenza: 2
-
 ## Sensi
 
 percezione_passiva: 10, scurovisione: 18 m
-
 ## Lingue
 
 Comune, Goblin
-
+tab: Azioni
 ## Tratti
 
 ### Rapimento
 
 Il bugbear non ha bisogno di usare movimento extra per spostare una creatura che sta afferrando.
-
 ## Azioni
 
 ### Martello leggero
@@ -103,6 +98,7 @@ Il bugbear non ha bisogno di usare movimento extra per spostare una creatura che
 ### Presa
 
 *Tiro per colpire in mischia:* +4, portata 3 m. *Colpito:* 9 (2d6 + 2) danni contundenti. Se il bersaglio è una creatura di taglia Media o inferiore, è afferrato (CD 12 per sfuggire).
+````
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

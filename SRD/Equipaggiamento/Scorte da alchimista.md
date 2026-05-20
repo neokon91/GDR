@@ -14,18 +14,18 @@ capitolo: "Equipaggiamento"
 pagine_sorgente: "105-107"
 tipo_oggetto: "strumento"
 categoria_oggetto: "Strumenti"
-costo: 
-peso: 
-danni: 
+costo:
+peso:
+danni:
 proprieta: []
-padronanza: 
-classe_armatura: 
-forza: 
-furtivita: 
-velocita: 
-punti_ferita: 
-soglia_danno: 
-valore_in_mo: 
+padronanza:
+classe_armatura:
+forza:
+furtivita:
+velocita:
+punti_ferita:
+soglia_danno:
+valore_in_mo:
 ---
 # Scorte da alchimista
 

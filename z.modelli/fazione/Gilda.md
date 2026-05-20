@@ -19,11 +19,24 @@
 >
 > PNG:
 > `INPUT[inlineListSuggester(optionQuery("Mondi/Personaggi"), useLinks(partial)):personaggi]`
+>
+> Scadenza nel mondo:
+> `INPUT[text:scadenza_mondo]`
 
 ## Scopo
 
+`INPUT[text:obiettivo]`
+
 > [!missione] Cosa vuole la gilda
+> `=this.obiettivo`
 >
+
+## Prossima Mossa
+
+`INPUT[text:prossima_mossa]`
+
+> [!timer] Se nessuno interviene
+> `=this.prossima_mossa`
 
 ## Servizi
 
@@ -55,6 +68,10 @@ SORT nome ASC
 ```
 
 ## Segreti
+
+```meta-bind
+INPUT[list:segreti]
+```
 
 > [!segreto]- Cosa non dicono
 >

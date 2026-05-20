@@ -22,13 +22,13 @@ saves:
 skillsaves: 
   intuizione: 7
   percezione: 11
-damage_vulnerabilities: 
-damage_resistances: 
-damage_immunities: 
-condition_immunities: 
+damage_vulnerabilities:
+damage_resistances:
+damage_immunities:
+condition_immunities:
 senses: "percezione_passiva: 21"
 languages: "Comune, Gigante"
-gear: []
+cr: 9
 traits: []
 actions: 
 - name: "Multiattacco"
@@ -53,26 +53,25 @@ iniziativa: 4
 hp: 200
 hit_dice: "16d12 + 96"
 speed: "camminata: 12 m, volo: 6 m (fluttuare)"
-cr: 9
 xp: 5000
 bonus_competenza: 4
 statblock: true
 ---
 # Gigante delle nuvole
 
+````tabs
+tab: Scheda
 ```statblock
 monster: Gigante delle nuvole
 ```
-
+tab: Dettagli
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Enorme Gigante, neutrale
 > CA: 14
 > PF: 200 (16d12 + 96)
 > Velocita: camminata: 12 m, volo: 6 m (fluttuare)
 > GS: 9 (PE 5.000; BC +4)
-
 ## Caratteristiche
-
 | Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
 | --- | --- | --- | --- |
 | Forza | 27 | 8 | 8 |
@@ -81,19 +80,16 @@ monster: Gigante delle nuvole
 | Intelligenza | 12 | 1 | 1 |
 | Saggezza | 16 | 3 | 7 |
 | Carisma | 16 | 3 | 3 |
-
 ## Abilita
 
 intuizione: 7, percezione: 11
-
 ## Sensi
 
 percezione_passiva: 21
-
 ## Lingue
 
 Comune, Gigante
-
+tab: Azioni
 ## Azioni
 
 ### Multiattacco
@@ -121,6 +117,7 @@ A volontà:
 - individuazione del magico
 - luce
 - nube di nebbia
+````
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

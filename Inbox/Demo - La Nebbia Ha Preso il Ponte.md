@@ -13,7 +13,7 @@ collegamenti:
   - [[Demo - Ponte delle Campane]]
   - [[Demo - Custodi della Soglia]]
   - [[Demo - Recuperare i Frammenti]]
-evento_mondo: "Seconda notte di nebbia"
+data_mondo: "Seconda notte di nebbia"
 fc-calendar:
 fc-date:
 fc-category: conseguenza

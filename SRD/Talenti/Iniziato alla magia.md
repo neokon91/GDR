@@ -13,7 +13,7 @@ generato_da: "import_srd"
 capitolo: "Talenti"
 pagine_sorgente: "98-99"
 categoria_talento: "Origini"
-prerequisito: 
+prerequisito:
 ripetibile: false
 beneficio: "Scegli lista da chierico, druido o mago; ottieni due trucchetti, un incantesimo di 1º livello e possibilita di sostituirli salendo di livello."
 ---

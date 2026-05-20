@@ -22,6 +22,9 @@
 >
 > Luoghi:
 > `INPUT[inlineListSuggester(optionQuery("Mondi/Luoghi"), useLinks(partial)):luoghi]`
+>
+> Scadenza nel mondo:
+> `INPUT[text:scadenza_mondo]`
 
 ## Giuramento
 
@@ -30,12 +33,18 @@
 
 ## Obiettivi
 
+`INPUT[text:obiettivo]`
+
 > [!missione] Cosa persegue
+> `=this.obiettivo`
 >
 
 ## Pressione
 
+`INPUT[text:prossima_mossa]`
+
 > [!timer] Se nessuno interviene
+> `=this.prossima_mossa`
 > - [ ]
 > - [ ]
 > - [ ]
@@ -50,6 +59,10 @@ SORT nome ASC
 ```
 
 ## Segreti
+
+```meta-bind
+INPUT[list:segreti]
+```
 
 > [!segreto]- Verità della confraternita
 >

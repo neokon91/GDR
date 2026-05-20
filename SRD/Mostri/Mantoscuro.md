@@ -19,13 +19,13 @@ stats: [16, 12, 13, 2, 10, 5]
 saves: {}
 skillsaves: 
   furtivita: 3
-damage_vulnerabilities: 
-damage_resistances: 
-damage_immunities: 
-condition_immunities: 
+damage_vulnerabilities:
+damage_resistances:
+damage_immunities:
+condition_immunities:
 senses: "percezione_passiva: 10, vista_cieca: 18 m"
 languages: "nessuna"
-gear: []
+cr: 0.5
 traits: []
 actions: 
 - name: "Schiacciare"
@@ -44,26 +44,25 @@ iniziativa: 3
 hp: 22
 hit_dice: "5d6 + 5"
 speed: "camminata: 3 m, volo: 9 m"
-cr: 0.5
 xp: 100
 bonus_competenza: 2
 statblock: true
 ---
 # Mantoscuro
 
+````tabs
+tab: Scheda
 ```statblock
 monster: Mantoscuro
 ```
-
+tab: Dettagli
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Piccola Aberrazione, senza allineamento
 > CA: 11
 > PF: 22 (5d6 + 5)
 > Velocita: camminata: 3 m, volo: 9 m
 > GS: 1/2 (PE 100; BC +2)
-
 ## Caratteristiche
-
 | Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
 | --- | --- | --- | --- |
 | Forza | 16 | 3 | 3 |
@@ -72,19 +71,16 @@ monster: Mantoscuro
 | Intelligenza | 2 | -4 | -4 |
 | Saggezza | 10 | 0 | 0 |
 | Carisma | 5 | -3 | -3 |
-
 ## Abilita
 
 furtivita: 3
-
 ## Sensi
 
 percezione_passiva: 10, vista_cieca: 18 m
-
 ## Lingue
 
 nessuna
-
+tab: Azioni
 ## Azioni
 
 ### Schiacciare
@@ -94,6 +90,7 @@ nessuna
 ### Aura di oscurità (1/giorno)
 
 L'oscurità magica riempie un'emanazione di 4,5 metri di cui il mantoscuro è il punto di origine. Questo effetto dura finché il mantoscuro mantiene la concentrazione su di esso, fino a 10 minuti. La scurovisione non può penetrare in quest'area e nessuna luce può illuminarla.
+````
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

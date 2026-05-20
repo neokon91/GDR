@@ -19,13 +19,13 @@ stats: [17, 10, 15, 10, 11, 8]
 saves: {}
 skillsaves: 
   percezione: 2
-damage_vulnerabilities: 
-damage_resistances: 
-damage_immunities: 
-condition_immunities: 
+damage_vulnerabilities:
+damage_resistances:
+damage_immunities:
+condition_immunities:
 senses: "percezione_passiva: 12"
 languages: "Comune (non può parlare in forma di cinghiale)"
-gear: ["giavellotti (6)"]
+cr: 4
 traits: []
 actions: 
 - name: "Multiattacco"
@@ -50,26 +50,25 @@ iniziativa: 2
 hp: 97
 hit_dice: "15d8 + 30"
 speed: "camminata: 12 m (solo in forma di cinghiale)"
-cr: 4
 xp: 1100
 bonus_competenza: 2
 statblock: true
 ---
 # Cinghiale mannaro
 
+````tabs
+tab: Scheda
 ```statblock
 monster: Cinghiale mannaro
 ```
-
+tab: Dettagli
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Media o Piccola Mostruosità (licantropo), neutrale malvagio
 > CA: 15
 > PF: 97 (15d8 + 30)
 > Velocita: camminata: 12 m (solo in forma di cinghiale)
 > GS: 4 (PE 1.100; BC +2)
-
 ## Caratteristiche
-
 | Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
 | --- | --- | --- | --- |
 | Forza | 17 | 3 | 3 |
@@ -78,19 +77,16 @@ monster: Cinghiale mannaro
 | Intelligenza | 10 | 0 | 0 |
 | Saggezza | 11 | 0 | 0 |
 | Carisma | 8 | -1 | -1 |
-
 ## Abilita
 
 percezione: 2
-
 ## Sensi
 
 percezione_passiva: 12
-
 ## Lingue
 
 Comune (non può parlare in forma di cinghiale)
-
+tab: Azioni
 ## Azioni
 
 ### Multiattacco
@@ -108,6 +104,7 @@ Il cinghiale mannaro effettua due attacchi, usando Giavellotto o Zanne in qualsi
 ### Zanne (solo in forma di cinghiale o ibrida)
 
 *Tiro per colpire in mischia:* +5, portata 1,5 m *Colpito:* 10 (2d6 + 3) danni perforanti. Se il bersaglio è una creatura di taglia Media o inferiore e il cinghiale mannaro si è mosso di 6 metri o più in linea retta verso di esso subito prima del colpo, il bersaglio subisce 7 (2d6) danni perforanti extra e cade a terra prono.
+````
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

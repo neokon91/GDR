@@ -20,13 +20,13 @@ saves:
   wis: 3
 skillsaves: 
   percezione: 5
-damage_vulnerabilities: 
-damage_resistances: 
-damage_immunities: 
-condition_immunities: 
+damage_vulnerabilities:
+damage_resistances:
+damage_immunities:
+condition_immunities:
 senses: "percezione_passiva: 15, scurovisione: 18 m"
 languages: "nessuna"
-gear: []
+cr: 0.125
 traits: []
 actions: 
 - name: "Morso"
@@ -43,26 +43,25 @@ iniziativa: 2
 hp: 5
 hit_dice: "1d8 + 1"
 speed: "camminata: 12 m"
-cr: 0.125
 xp: 25
 bonus_competenza: 2
 statblock: true
 ---
 # Mastino
 
+````tabs
+tab: Scheda
 ```statblock
 monster: Mastino
 ```
-
+tab: Dettagli
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Media Bestia, senza allineamento
 > CA: 12
 > PF: 5 (1d8 + 1)
 > Velocita: camminata: 12 m
 > GS: 1/8 (PE 25; BC +2)
-
 ## Caratteristiche
-
 | Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
 | --- | --- | --- | --- |
 | Forza | 13 | 1 | 1 |
@@ -71,24 +70,22 @@ monster: Mastino
 | Intelligenza | 3 | -4 | -4 |
 | Saggezza | 12 | 1 | 3 |
 | Carisma | 7 | -2 | -2 |
-
 ## Abilita
 
 percezione: 5
-
 ## Sensi
 
 percezione_passiva: 15, scurovisione: 18 m
-
 ## Lingue
 
 nessuna
-
+tab: Azioni
 ## Azioni
 
 ### Morso
 
 *Tiro per colpire in mischia:* +3, portata 1,5 m. *Colpito:* 4 (1d6 + 1) danni perforanti. Se il bersaglio è una creatura di taglia Media o inferiore, cade a terra prono.
+````
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

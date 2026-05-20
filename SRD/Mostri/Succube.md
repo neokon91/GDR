@@ -23,13 +23,13 @@ skillsaves:
   intuizione: 5
   percezione: 5
   persuasione: 9
-damage_vulnerabilities: 
-damage_resistances: 
-damage_immunities: 
-condition_immunities: 
+damage_vulnerabilities:
+damage_resistances:
+damage_immunities:
+condition_immunities:
 senses: "percezione_passiva: 15, scurovisione: 18 m"
 languages: "Abissale, Comune, Infernale, telepatia 18 m"
-gear: []
+cr: 4
 traits: 
 - name: "Forma incubo"
   desc: "Quando la succube termina un riposo lungo, può trasformarsi in un incubo, utilizzando la relativa scheda delle statistiche al posto di questa."
@@ -56,26 +56,25 @@ iniziativa: 3
 hp: 71
 hit_dice: "13d8 + 13"
 speed: "camminata: 9 m, volo: 18 m"
-cr: 4
 xp: 1100
 bonus_competenza: 2
 statblock: true
 ---
 # Succube
 
+````tabs
+tab: Scheda
 ```statblock
 monster: Succube
 ```
-
+tab: Dettagli
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Medio Immondo, neutrale malvagio
 > CA: 15
 > PF: 71 (13d8 + 13)
 > Velocita: camminata: 9 m, volo: 18 m
 > GS: 4 (PE 1.100; BC +2)
-
 ## Caratteristiche
-
 | Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
 | --- | --- | --- | --- |
 | Forza | 8 | -1 | -1 |
@@ -84,25 +83,21 @@ monster: Succube
 | Intelligenza | 15 | 2 | 2 |
 | Saggezza | 12 | 1 | 1 |
 | Carisma | 20 | 5 | 5 |
-
 ## Abilita
 
 furtivita: 7, inganno: 9, intuizione: 5, percezione: 5, persuasione: 9
-
 ## Sensi
 
 percezione_passiva: 15, scurovisione: 18 m
-
 ## Lingue
 
 Abissale, Comune, Infernale, telepatia 18 m
-
+tab: Azioni
 ## Tratti
 
 ### Forma incubo
 
 Quando la succube termina un riposo lungo, può trasformarsi in un incubo, utilizzando la relativa scheda delle statistiche al posto di questa.
-
 ## Azioni
 
 ### Multiattacco
@@ -120,6 +115,7 @@ La succube effettua un attacco Tocco immondo e utilizza Fascino o Bacio prosciug
 ### Fascino
 
 La succube lancia dominare persone (di 8º livello), senza bisogno di componenti e utilizzando Carisma come caratteristica da incantatore (CD del tiro salvezza sull'incantesimo 15).
+````
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

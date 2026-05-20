@@ -22,13 +22,13 @@ saves:
 skillsaves: 
   furtivita: 6
   percezione: 13
-damage_vulnerabilities: 
-damage_resistances: 
-damage_immunities: 
-condition_immunities: 
+damage_vulnerabilities:
+damage_resistances:
+damage_immunities:
+condition_immunities:
 senses: "percezione_passiva: 23, scurovisione: 36 m, vista_cieca: 18 m"
 languages: "Comune, Draconico"
-gear: []
+cr: 20
 traits: 
 - name: "Camminare sul ghiaccio"
   desc: "Il drago può muoversi sulle superfici di ghiaccio e scalarle senza bisogno di effettuare una prova di caratteristica. Inoltre, un terreno difficile costituito da ghiaccio o neve non gli costa alcun movimento aggiuntivo."
@@ -57,26 +57,25 @@ iniziativa: 12
 hp: 333
 hit_dice: "18d20 + 144"
 speed: "camminata: scavo 12 m, nuoto: 12 m, volo: 24 m"
-cr: 20
 xp: 25000
 bonus_competenza: 6
 statblock: true
 ---
 # Drago bianco antico
 
+````tabs
+tab: Scheda
 ```statblock
 monster: Drago bianco antico
 ```
-
+tab: Dettagli
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Mastodontico Drago (cromatico), caotico malvagio
 > CA: 20
 > PF: 333 (18d20 + 144)
 > Velocita: camminata: scavo 12 m, nuoto: 12 m, volo: 24 m
 > GS: 20 (PE 25.000, o 33.000 nella tana; BC +6)
-
 ## Caratteristiche
-
 | Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
 | --- | --- | --- | --- |
 | Forza | 26 | 8 | 8 |
@@ -85,25 +84,21 @@ monster: Drago bianco antico
 | Intelligenza | 10 | 0 | 0 |
 | Saggezza | 13 | 1 | 7 |
 | Carisma | 18 | 4 | 4 |
-
 ## Abilita
 
 furtivita: 6, percezione: 13
-
 ## Sensi
 
 percezione_passiva: 23, scurovisione: 36 m, vista_cieca: 18 m
-
 ## Lingue
 
 Comune, Draconico
-
+tab: Azioni
 ## Tratti
 
 ### Camminare sul ghiaccio
 
 Il drago può muoversi sulle superfici di ghiaccio e scalarle senza bisogno di effettuare una prova di caratteristica. Inoltre, un terreno difficile costituito da ghiaccio o neve non gli costa alcun movimento aggiuntivo.
-
 ## Azioni
 
 ### Multiattacco
@@ -117,7 +112,6 @@ Il drago effettua tre attacchi Squarcio.
 ### Soffio di freddo (ricarica 5-6)
 
 *Tiro salvezza su Costituzione:* CD 22, tutte le creature in un cono di 27 metri. *Fallimento:* 63 (14d8) danni da freddo. *Successo:* danni dimezzati.
-
 ## Azioni Leggendarie
 
 Subito dopo il turno di un'altra creatura, il drago può consumare un utilizzo per effettuare una delle seguenti azioni. Il drago recupera tutti gli utilizzi consumati all'inizio di ogni suo turno.
@@ -135,6 +129,7 @@ Il drago lancia paura senza bisogno di componenti materiali, utilizzando Carisma
 ### Balzo
 
 Il drago si muove fino a metà della sua velocità ed effettua un attacco Squarcio.
+````
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

@@ -20,13 +20,13 @@ saves: {}
 skillsaves: 
   inganno: 6
   intuizione: 3
-damage_vulnerabilities: 
-damage_resistances: 
-damage_immunities: 
-condition_immunities: 
+damage_vulnerabilities:
+damage_resistances:
+damage_immunities:
+condition_immunities:
 senses: "percezione_passiva: 11, scurovisione: 18 m"
 languages: "Comune più altre tre lingue"
-gear: []
+cr: 3
 traits: []
 actions: 
 - name: "Multiattacco"
@@ -51,26 +51,25 @@ iniziativa: 4
 hp: 52
 hit_dice: "8d8 + 16"
 speed: "camminata: 9 m"
-cr: 3
 xp: 700
 bonus_competenza: 2
 statblock: true
 ---
 # Doppelganger
 
+````tabs
+tab: Scheda
 ```statblock
 monster: Doppelganger
 ```
-
+tab: Dettagli
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Media Mostruosità, neutrale
 > CA: 14
 > PF: 52 (8d8 + 16)
 > Velocita: camminata: 9 m
 > GS: 3 (PE 700; BC +2)
-
 ## Caratteristiche
-
 | Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
 | --- | --- | --- | --- |
 | Forza | 11 | 0 | 0 |
@@ -79,19 +78,16 @@ monster: Doppelganger
 | Intelligenza | 11 | 0 | 0 |
 | Saggezza | 12 | 1 | 1 |
 | Carisma | 14 | 2 | 2 |
-
 ## Abilita
 
 inganno: 6, intuizione: 3
-
 ## Sensi
 
 percezione_passiva: 11, scurovisione: 18 m
-
 ## Lingue
 
 Comune più altre tre lingue
-
+tab: Azioni
 ## Azioni
 
 ### Multiattacco
@@ -109,6 +105,7 @@ Il doppelganger lancia individuazione dei pensieri senza bisogno di componenti, 
 ### Sembianze inquietanti (ricarica 6)
 
 *Tiro salvezza su Saggezza:* CD 12, tutte le creature in grado di vedere il doppelganger e che si trovano in un'emanazione di 4,5 metri di cui il doppelganger è il punto di origine. *Fallimento:* il bersaglio è spaventato, ripete il tiro salvezza alla fine di ogni suo turno e, se lo supera, l'effetto svanisce. Dopo 1 minuto, il tiro viene superato automaticamente.
+````
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

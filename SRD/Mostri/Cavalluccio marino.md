@@ -20,13 +20,13 @@ saves: {}
 skillsaves: 
   furtivita: 5
   percezione: 2
-damage_vulnerabilities: 
-damage_resistances: 
-damage_immunities: 
-condition_immunities: 
+damage_vulnerabilities:
+damage_resistances:
+damage_immunities:
+condition_immunities:
 senses: "percezione_passiva: 12"
 languages: "nessuna"
-gear: []
+cr: 0
 traits: 
 - name: "Respirare sott'acqua"
   desc: "Il cavalluccio marino può respirare solo sott'acqua."
@@ -45,26 +45,25 @@ iniziativa: 1
 hp: 1
 hit_dice: "1d4 - 1"
 speed: "camminata: 5 m, nuoto: 6 m"
-cr: 0
 xp: 0
 bonus_competenza: 2
 statblock: true
 ---
 # Cavalluccio marino
 
+````tabs
+tab: Scheda
 ```statblock
 monster: Cavalluccio marino
 ```
-
+tab: Dettagli
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Minuscola Bestia, senza allineamento
 > CA: 12
 > PF: 1 (1d4 - 1)
 > Velocita: camminata: 5 m, nuoto: 6 m
 > GS: 0 (PE 0; BC +2)
-
 ## Caratteristiche
-
 | Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
 | --- | --- | --- | --- |
 | Forza | 1 | -5 | -5 |
@@ -73,30 +72,27 @@ monster: Cavalluccio marino
 | Intelligenza | 1 | -5 | -5 |
 | Saggezza | 10 | 0 | 0 |
 | Carisma | 2 | -4 | -4 |
-
 ## Abilita
 
 furtivita: 5, percezione: 2
-
 ## Sensi
 
 percezione_passiva: 12
-
 ## Lingue
 
 nessuna
-
+tab: Azioni
 ## Tratti
 
 ### Respirare sott'acqua
 
 Il cavalluccio marino può respirare solo sott'acqua.
-
 ## Azioni
 
 ### Scatto acquatico
 
 Finché è sott'acqua, il cavalluccio marino può muoversi fino alla sua velocità di nuoto massima senza provocare attacchi di opportunità.
+````
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

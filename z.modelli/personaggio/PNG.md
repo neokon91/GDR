@@ -52,12 +52,18 @@ tab: Identità
 
 ## Vuole
 
+`INPUT[text:vuole]`
+
 > [!missione] Vuole
+> `=this.vuole`
 >
 
 ## Sa
 
+`INPUT[text:sa]`
+
 > [!indizio] Sa
+> `=this.sa`
 >
 
 tab: Collegamenti
@@ -65,6 +71,10 @@ tab: Collegamenti
 ## Relazioni
 
 `INPUT[inlineListSuggester(optionQuery("Mondi/Personaggi"), useLinks(partial)):relazioni]`
+
+## Missioni
+
+`INPUT[inlineListSuggester(optionQuery("Mondi/Missioni"), useLinks(partial)):missioni]`
 
 ## Fazioni
 
@@ -90,8 +100,18 @@ tab: Segreti
 
 ## Segreto
 
+`INPUT[text:segreto]`
+
 > [!segreto]- Segreto
+> `=this.segreto`
 >
+
+## Leva Al Tavolo
+
+`INPUT[text:leva]`
+
+> [!scena] Leva
+> `=this.leva`
 
 ## Pressione
 

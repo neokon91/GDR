@@ -28,6 +28,12 @@ async function png(tp) {
     const luogo = await helpers.chooseLocation(tp, "Luogo del PNG", context);
     const fazioni = await helpers.chooseFactions(tp, "Fazioni del PNG", context);
     const relazioni = await helpers.choosePeople(tp, "Relazioni del PNG", context);
+    const missioni = await helpers.chooseMissions(tp, "Missioni collegate al PNG", context);
+    const vuole = await helpers.promptOptional(tp, "Cosa vuole");
+    const sa = await helpers.promptOptional(tp, "Cosa sa di utile");
+    const segreto = await helpers.promptOptional(tp, "Segreto o contraddizione");
+    const leva = await helpers.promptOptional(tp, "Leva per coinvolgerlo al tavolo");
+    const domandaAperta = await helpers.promptOptional(tp, "Domanda aperta sul PNG");
 
     await helpers.moveNote(tp, helpers.path("personaggi"), name);
 
@@ -44,7 +50,12 @@ mondo: ${mondo}
 luogo: ${luogo}
 fazioni: ${helpers.inlineYamlList(fazioni)}
 relazioni: ${helpers.inlineYamlList(relazioni)}
-segreto:
+missioni: ${helpers.inlineYamlList(missioni)}
+vuole: ${helpers.yamlQuote(vuole)}
+sa: ${helpers.yamlQuote(sa)}
+leva: ${helpers.yamlQuote(leva)}
+segreto: ${helpers.yamlQuote(segreto)}
+domande_aperte: ${helpers.inlineYamlTextList([domandaAperta])}
 atteggiamento: ${helpers.yamlQuote(atteggiamento)}
 conseguenze: []
 type: umanoide

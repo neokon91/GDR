@@ -18,13 +18,13 @@ ac: 15
 stats: [14, 20, 14, 6, 10, 6]
 saves: {}
 skillsaves: {}
-damage_vulnerabilities: 
-damage_resistances: 
-damage_immunities: 
-condition_immunities: 
+damage_vulnerabilities:
+damage_resistances:
+damage_immunities:
+condition_immunities:
 senses: "percezione_passiva: 10, scurovisione: 18 m"
 languages: "Primordiale (Auran)"
-gear: []
+cr: 5
 traits: 
 - name: "Forma d'aria"
   desc: "L'elementale può entrare nello spazio di una creatura e fermarvisi. Può muoversi attraverso uno spazio stretto fino a 2,5 centimetri senza consumare movimento extra per farlo."
@@ -47,26 +47,25 @@ iniziativa: 5
 hp: 90
 hit_dice: "12d10 + 24"
 speed: "camminata: 3 m, volo: 27 m (fluttuare)"
-cr: 5
 xp: 1800
 bonus_competenza: 3
 statblock: true
 ---
 # Elementale dell'aria
 
+````tabs
+tab: Scheda
 ```statblock
 monster: Elementale dell'aria
 ```
-
+tab: Dettagli
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Grande Elementale, neutrale
 > CA: 15
 > PF: 90 (12d10 + 24)
 > Velocita: camminata: 3 m, volo: 27 m (fluttuare)
 > GS: 5 (PE 1.800; BC +3)
-
 ## Caratteristiche
-
 | Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
 | --- | --- | --- | --- |
 | Forza | 14 | 2 | 2 |
@@ -75,21 +74,18 @@ monster: Elementale dell'aria
 | Intelligenza | 6 | -2 | -2 |
 | Saggezza | 10 | 0 | 0 |
 | Carisma | 6 | -2 | -2 |
-
 ## Sensi
 
 percezione_passiva: 10, scurovisione: 18 m
-
 ## Lingue
 
 Primordiale (Auran)
-
+tab: Azioni
 ## Tratti
 
 ### Forma d'aria
 
 L'elementale può entrare nello spazio di una creatura e fermarvisi. Può muoversi attraverso uno spazio stretto fino a 2,5 centimetri senza consumare movimento extra per farlo.
-
 ## Azioni
 
 ### Multiattacco
@@ -103,6 +99,7 @@ L'elementale effettua due attacchi Schianto tonante.
 ### Vortice (ricarica 4-6)
 
 *Tiro salvezza su Forza:* CD 13, una creatura di taglia Media o inferiore nello spazio dell'elementale. *Fallimento:* 24 (4d10 + 2) danni da tuono, il bersaglio viene spinto fino a un massimo di 6 metri di distanza dall'elementale e cade a terra prono. *Successo:* danni dimezzati.
+````
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

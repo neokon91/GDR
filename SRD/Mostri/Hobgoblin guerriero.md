@@ -18,13 +18,13 @@ ac: 18
 stats: [13, 12, 12, 10, 10, 9]
 saves: {}
 skillsaves: {}
-damage_vulnerabilities: 
-damage_resistances: 
-damage_immunities: 
-condition_immunities: 
+damage_vulnerabilities:
+damage_resistances:
+damage_immunities:
+condition_immunities:
 senses: "percezione_passiva: 10, scurovisione: 18 m"
 languages: "Comune, Goblin"
-gear: ["arco lungo", "mezza armatura", "scudo", "spada"]
+cr: 0.5
 traits: 
 - name: "Tattiche del branco"
   desc: "L'hobgoblin dispone di vantaggio a un tiro per colpire contro una creatura se almeno uno dei suoi alleati si trova entro 1,5 metri dalla creatura e l'alleato non è incapacitato."
@@ -45,26 +45,25 @@ iniziativa: 3
 hp: 11
 hit_dice: "2d8 + 2"
 speed: "camminata: 9 m"
-cr: 0.5
 xp: 100
 bonus_competenza: 2
 statblock: true
 ---
 # Hobgoblin guerriero
 
+````tabs
+tab: Scheda
 ```statblock
 monster: Hobgoblin guerriero
 ```
-
+tab: Dettagli
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Medio Folletto (goblinoide), legale malvagio
 > CA: 18
 > PF: 11 (2d8 + 2)
 > Velocita: camminata: 9 m
 > GS: 1/2 (PE 100; BC +2)
-
 ## Caratteristiche
-
 | Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
 | --- | --- | --- | --- |
 | Forza | 13 | 1 | 1 |
@@ -73,21 +72,18 @@ monster: Hobgoblin guerriero
 | Intelligenza | 10 | 0 | 0 |
 | Saggezza | 10 | 0 | 0 |
 | Carisma | 9 | -1 | -1 |
-
 ## Sensi
 
 percezione_passiva: 10, scurovisione: 18 m
-
 ## Lingue
 
 Comune, Goblin
-
+tab: Azioni
 ## Tratti
 
 ### Tattiche del branco
 
 L'hobgoblin dispone di vantaggio a un tiro per colpire contro una creatura se almeno uno dei suoi alleati si trova entro 1,5 metri dalla creatura e l'alleato non è incapacitato.
-
 ## Azioni
 
 ### Spada lunga
@@ -97,6 +93,7 @@ L'hobgoblin dispone di vantaggio a un tiro per colpire contro una creatura se al
 ### Arco lungo
 
 *Tiro per colpire a distanza:* +3, gittata 45/180 m. *Colpito:* 5 (1d8 + 1) danni perforanti più 7 (3d4) danni da veleno.
+````
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

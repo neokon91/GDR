@@ -24,13 +24,13 @@ saves:
 skillsaves: 
   percezione: 11
   storia: 13
-damage_vulnerabilities: 
-damage_resistances: 
-damage_immunities: 
-condition_immunities: 
+damage_vulnerabilities:
+damage_resistances:
+damage_immunities:
+condition_immunities:
 senses: "percezione_passiva: 21, vista_pura: 36 m"
 languages: "capisce l'Abissale, il Celestiale, l'Infernale e il Primordiale ma non li parla, telepatia 36 m"
-gear: []
+cr: 23
 traits: 
 - name: "Anfibio"
   desc: "Il kraken può respirare in aria e in acqua."
@@ -63,26 +63,25 @@ iniziativa: 14
 hp: 481
 hit_dice: "26d20 + 208"
 speed: "camminata: 9 m, nuoto: 36 m"
-cr: 23
 xp: 50000
 bonus_competenza: 7
 statblock: true
 ---
 # Kraken
 
+````tabs
+tab: Scheda
 ```statblock
 monster: Kraken
 ```
-
+tab: Dettagli
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Mastodontico Mostruosità, caotico malvagio
 > CA: 18
 > PF: 481 (26d20 + 208)
 > Velocita: camminata: 9 m, nuoto: 36 m
 > GS: 23 (PE 50.000, o 62.000 nella tana; BC +7)
-
 ## Caratteristiche
-
 | Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
 | --- | --- | --- | --- |
 | Forza | 30 | 10 | 17 |
@@ -91,19 +90,16 @@ monster: Kraken
 | Intelligenza | 22 | 6 | 6 |
 | Saggezza | 18 | 4 | 11 |
 | Carisma | 20 | 5 | 5 |
-
 ## Abilita
 
 percezione: 11, storia: 13
-
 ## Sensi
 
 percezione_passiva: 21, vista_pura: 36 m
-
 ## Lingue
 
 capisce l'Abissale, il Celestiale, l'Infernale e il Primordiale ma non li parla, telepatia 36 m
-
+tab: Azioni
 ## Tratti
 
 ### Anfibio
@@ -113,7 +109,6 @@ Il kraken può respirare in aria e in acqua.
 ### Mostro da assedio
 
 Il kraken infligge danni doppi a oggetti e strutture. Resistenza leggendaria (4/giorno o 5/giorno nella tana). Se il kraken fallisce un tiro salvezza, può scegliere di superarlo comunque.
-
 ## Azioni
 
 ### Multiattacco
@@ -138,7 +133,6 @@ Il bersaglio è afferrato (CD 20 per sfuggire) da uno dei dieci tentacoli, ed è
 ### Scagliare
 
 Il kraken scaglia una creatura di taglia Grande che ha afferrato in uno spazio che è in grado di vedere entro 18 metri da sé e che non sia in aria. *Tiro salvezza su Destrezza:* CD 25, la creatura scagliata e tutte le creature nello spazio di destinazione. *Fallimento:* 18 (4d8) danni contundenti, e il bersaglio cade a terra prono. *Successo:* danni dimezzati.
-
 ## Azioni Leggendarie
 
 Subito dopo il turno di un'altra creatura, il kraken può consumare un utilizzo per effettuare una delle seguenti azioni. Il kraken recupera tutti gli utilizzi consumati all'inizio di ogni suo turno.
@@ -152,6 +146,7 @@ Subito dopo il turno di un'altra creatura, il kraken può consumare un utilizzo 
 ### Lampo burrascoso
 
 Il kraken usa Colpo del fulmine.
+````
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

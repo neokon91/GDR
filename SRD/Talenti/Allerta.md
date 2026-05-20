@@ -13,7 +13,7 @@ generato_da: "import_srd"
 capitolo: "Talenti"
 pagine_sorgente: "98-99"
 categoria_talento: "Origini"
-prerequisito: 
+prerequisito:
 ripetibile: false
 beneficio: "Aggiungi il bonus di competenza all'iniziativa e puoi scambiare il risultato con un alleato consenziente nello stesso combattimento."
 ---

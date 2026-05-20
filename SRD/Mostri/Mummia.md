@@ -19,13 +19,13 @@ stats: [16, 8, 15, 6, 12, 12]
 saves: 
   wis: 3
 skillsaves: {}
-damage_vulnerabilities: 
-damage_resistances: 
-damage_immunities: 
-condition_immunities: 
+damage_vulnerabilities:
+damage_resistances:
+damage_immunities:
+condition_immunities:
 senses: "percezione_passiva: 11, scurovisione: 18 m"
 languages: "Comune più altre due lingue"
-gear: []
+cr: 3
 traits: []
 actions: 
 - name: "Multiattacco"
@@ -46,26 +46,25 @@ iniziativa: -1
 hp: 58
 hit_dice: "9d8 + 18"
 speed: "camminata: 6 m"
-cr: 3
 xp: 700
 bonus_competenza: 2
 statblock: true
 ---
 # Mummia
 
+````tabs
+tab: Scheda
 ```statblock
 monster: Mummia
 ```
-
+tab: Dettagli
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Medio o Piccolo Non morto, legale malvagio
 > CA: 11
 > PF: 58 (9d8 + 18)
 > Velocita: camminata: 6 m
 > GS: 3 (PE 700; BC +2)
-
 ## Caratteristiche
-
 | Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
 | --- | --- | --- | --- |
 | Forza | 16 | 3 | 3 |
@@ -74,15 +73,13 @@ monster: Mummia
 | Intelligenza | 6 | -2 | -2 |
 | Saggezza | 12 | 1 | 3 |
 | Carisma | 12 | 1 | 1 |
-
 ## Sensi
 
 percezione_passiva: 11, scurovisione: 18 m
-
 ## Lingue
 
 Comune più altre due lingue
-
+tab: Azioni
 ## Azioni
 
 ### Multiattacco
@@ -96,6 +93,7 @@ La mummia effettua due attacchi Pugno di putrefazione e usa Sguardo funesto.
 ### Sguardo funesto
 
 *Tiro salvezza su Saggezza:* CD 11, una creatura che la mummia è in grado di vedere entro 18 metri. *Fallimento:* il bersaglio è spaventato fino al termine del turno successivo della mummia. *Successo:* il bersaglio è immune allo Sguardo funesto di questa mummia per 24 ore.
+````
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

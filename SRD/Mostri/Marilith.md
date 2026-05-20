@@ -23,13 +23,13 @@ saves:
   cha: 10
 skillsaves: 
   percezione: 8
-damage_vulnerabilities: 
-damage_resistances: 
-damage_immunities: 
-condition_immunities: 
+damage_vulnerabilities:
+damage_resistances:
+damage_immunities:
+condition_immunities:
 senses: "percezione_passiva: 18, vista_pura: 36 m"
 languages: "Abissale, telepatia 36 m"
-gear: []
+cr: 16
 traits: 
 - name: "Reattiva"
   desc: "Il marilith può effettuare una reazione a ogni turno in combattimento."
@@ -60,26 +60,25 @@ iniziativa: 10
 hp: 220
 hit_dice: "21d10 + 105"
 speed: "camminata: 12 m, scalata: 12 m"
-cr: 16
 xp: 15000
 bonus_competenza: 5
 statblock: true
 ---
 # Marilith
 
+````tabs
+tab: Scheda
 ```statblock
 monster: Marilith
 ```
-
+tab: Dettagli
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Grande Immondo (demone), caotico malvagio
 > CA: 16
 > PF: 220 (21d10 + 105)
 > Velocita: camminata: 12 m, scalata: 12 m
 > GS: 16 (PE 15.000; BC +5)
-
 ## Caratteristiche
-
 | Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
 | --- | --- | --- | --- |
 | Forza | 18 | 4 | 9 |
@@ -88,19 +87,16 @@ monster: Marilith
 | Intelligenza | 18 | 4 | 4 |
 | Saggezza | 16 | 3 | 8 |
 | Carisma | 20 | 5 | 10 |
-
 ## Abilita
 
 percezione: 8
-
 ## Sensi
 
 percezione_passiva: 18, vista_pura: 36 m
-
 ## Lingue
 
 Abissale, telepatia 36 m
-
+tab: Azioni
 ## Tratti
 
 ### Reattiva
@@ -114,7 +110,6 @@ Il marilith dispone di vantaggio ai tiri salvezza contro incantesimi e altri eff
 ### Ristoro demoniaco
 
 Se il marilith muore al di fuori dell'Abisso, il suo corpo si dissolve diventando icore e ne acquisisce uno nuovo all'istante, tornando in vita con tutti i suoi punti ferita da qualche parte nell'Abisso.
-
 ## Azioni
 
 ### Multiattacco
@@ -128,6 +123,7 @@ Il marilith effettua sei attacchi Lama del patto e usa Stritolare.
 ### Stritolare
 
 *Tiro salvezza su Forza:* CD 17, una creatura di taglia Media o inferiore che il marilith è in grado di vedere entro 1,5 metri. *Fallimento:* 15 (2d10 + 4) danni contundenti. Il bersaglio è afferrato (CD 14 per sfuggire) ed è trattenuto finché la presa perdura.
+````
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

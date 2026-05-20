@@ -19,13 +19,13 @@ peso: "1 kg"
 danni: "1d4 taglienti"
 proprieta: ["leggera"]
 padronanza: "Graffio"
-classe_armatura: 
-forza: 
-furtivita: 
-velocita: 
-punti_ferita: 
-soglia_danno: 
-valore_in_mo: 
+classe_armatura:
+forza:
+furtivita:
+velocita:
+punti_ferita:
+soglia_danno:
+valore_in_mo:
 ---
 # Falcetto
 

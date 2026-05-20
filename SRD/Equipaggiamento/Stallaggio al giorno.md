@@ -16,16 +16,16 @@ tipo_oggetto: "finimento_o_servizio"
 categoria_oggetto: "Finimenti e veicoli da tiro"
 costo: "5 ma"
 peso: "-"
-danni: 
+danni:
 proprieta: []
-padronanza: 
-classe_armatura: 
-forza: 
-furtivita: 
-velocita: 
-punti_ferita: 
-soglia_danno: 
-valore_in_mo: 
+padronanza:
+classe_armatura:
+forza:
+furtivita:
+velocita:
+punti_ferita:
+soglia_danno:
+valore_in_mo:
 ---
 # Stallaggio al giorno
 

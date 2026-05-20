@@ -15,17 +15,17 @@ pagine_sorgente: "113-114"
 tipo_oggetto: "veicolo"
 categoria_oggetto: "Veicoli aerei e imbarcazioni"
 costo: "3.000 mo"
-peso: 
-danni: 
+peso:
+danni:
 proprieta: []
-padronanza: 
+padronanza:
 classe_armatura: "15"
-forza: 
-furtivita: 
+forza:
+furtivita:
 velocita: "1,5 km/h"
 punti_ferita: "100"
 soglia_danno: "10"
-valore_in_mo: 
+valore_in_mo:
 ---
 # Barcone
 

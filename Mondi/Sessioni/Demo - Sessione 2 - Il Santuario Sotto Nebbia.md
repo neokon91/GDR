@@ -23,7 +23,8 @@ personaggi:
   - [[Demo - Sella Neraluce]]
   - [[Demo - Mira Ventofermo]]
 creature: []
-incontri: []
+incontri:
+  - [[Demo - Nebbia al Ponte]]
 dispense:
   - [[Demo - Lettera Macchiata di Nebbia]]
 mappe:

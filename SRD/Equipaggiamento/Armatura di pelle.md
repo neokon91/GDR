@@ -16,16 +16,16 @@ tipo_oggetto: "armatura"
 categoria_oggetto: "Media"
 costo: "10 mo"
 peso: "6 kg"
-danni: 
+danni:
 proprieta: []
-padronanza: 
+padronanza:
 classe_armatura: "12 + Des max 2"
 forza: "-"
 furtivita: "-"
-velocita: 
-punti_ferita: 
-soglia_danno: 
-valore_in_mo: 
+velocita:
+punti_ferita:
+soglia_danno:
+valore_in_mo:
 ---
 # Armatura di pelle
 

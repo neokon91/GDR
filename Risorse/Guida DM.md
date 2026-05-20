@@ -51,6 +51,20 @@ Usa le sezioni di densità per trovare:
 
 Un contenuto è utile quando collega almeno due tra luogo, PNG, fazione, missione, segreto o conseguenza.
 
+Quando usi i pulsanti di creazione, rispondi alle domande di collegamento anche con poche informazioni: mondo, luogo, fazione, missione, PNG e segreto bastano a far comparire la nota nelle viste giuste.
+
+Usa **Atlante Del Mondo** per controllare luoghi, regioni, insediamenti, dungeon e relazioni padre/figlio. Se un luogo pronto non ha mondo, luogo padre, fazioni, pericolo, stabilita o pressione, non e ancora abbastanza utile al tavolo.
+
+Usa **Poteri In Movimento** per leggere chi sta agendo: pressione, prossima mossa, leader, rivali, luoghi controllati e missioni collegate. Una fazione con pressione ma senza prossima mossa e una pressione che non produce gioco.
+
+Usa **Buchi Di Mondo** come lista pratica di manutenzione: mondi senza tono o fazioni, luoghi pronti senza pericolo, missioni senza fazioni, PNG in gioco senza luogo o relazione, eventi canonici senza conseguenze e lore da smistare.
+
+La **Timeline Causale** serve a distinguere:
+- Lore Capture: appunto nato al tavolo o in post-sessione;
+- Evento Storico: fatto storicizzato in `Mondi/Timeline`;
+- Conseguenza: effetto ancora aperto che deve cambiare note, missioni, luoghi o fazioni;
+- Timeline: archivio ordinato degli eventi canonici.
+
 ## Come Leggere Le Pagine
 
 - Le carte mostrano cosa richiede attenzione subito.

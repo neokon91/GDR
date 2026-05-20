@@ -22,13 +22,13 @@ saves:
 skillsaves: 
   furtivita: 4
   percezione: 4
-damage_vulnerabilities: 
-damage_resistances: 
-damage_immunities: 
-condition_immunities: 
+damage_vulnerabilities:
+damage_resistances:
+damage_immunities:
+condition_immunities:
 senses: "percezione_passiva: 14, scurovisione: 18 m, vista_cieca: 3 m"
 languages: "Draconico"
-gear: []
+cr: 2
 traits: 
 - name: "Anfibio"
   desc: "Il drago può respirare in aria e in acqua."
@@ -51,26 +51,25 @@ iniziativa: 4
 hp: 33
 hit_dice: "6d8 + 6"
 speed: "camminata: 9 m, nuoto: 9 m, volo: 18 m"
-cr: 2
 xp: 450
 bonus_competenza: 2
 statblock: true
 ---
 # Drago nero cucciolo
 
+````tabs
+tab: Scheda
 ```statblock
 monster: Drago nero cucciolo
 ```
-
+tab: Dettagli
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Medio Drago (cromatico), caotico malvagio
 > CA: 17
 > PF: 33 (6d8 + 6)
 > Velocita: camminata: 9 m, nuoto: 9 m, volo: 18 m
 > GS: 2 (PE 450; BC +2)
-
 ## Caratteristiche
-
 | Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
 | --- | --- | --- | --- |
 | Forza | 15 | 2 | 2 |
@@ -79,25 +78,21 @@ monster: Drago nero cucciolo
 | Intelligenza | 10 | 0 | 0 |
 | Saggezza | 11 | 0 | 2 |
 | Carisma | 13 | 1 | 1 |
-
 ## Abilita
 
 furtivita: 4, percezione: 4
-
 ## Sensi
 
 percezione_passiva: 14, scurovisione: 18 m, vista_cieca: 3 m
-
 ## Lingue
 
 Draconico
-
+tab: Azioni
 ## Tratti
 
 ### Anfibio
 
 Il drago può respirare in aria e in acqua.
-
 ## Azioni
 
 ### Multiattacco
@@ -111,6 +106,7 @@ Il drago effettua due attacchi Squarcio.
 ### Soffio di acido (ricarica 5-6)
 
 *Tiro salvezza su Destrezza:* CD 11, tutte le creature in una linea lunga 4,5 metri e larga 1,5 metri. *Fallimento:* 22 (5d8) danni da acido. *Successo:* danni dimezzati.
+````
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

@@ -18,13 +18,13 @@ ac: 12
 stats: [22, 9, 17, 3, 11, 6]
 saves: {}
 skillsaves: {}
-damage_vulnerabilities: 
-damage_resistances: 
-damage_immunities: 
-condition_immunities: 
+damage_vulnerabilities:
+damage_resistances:
+damage_immunities:
+condition_immunities:
 senses: "percezione_passiva: 10"
 languages: "nessuna"
-gear: []
+cr: 4
 traits: []
 actions: 
 - name: "Multiattacco"
@@ -45,26 +45,25 @@ iniziativa: -1
 hp: 76
 hit_dice: "8d12 + 24"
 speed: "camminata: 12 m"
-cr: 4
 xp: 1100
 bonus_competenza: 2
 statblock: true
 ---
 # Elefante
 
+````tabs
+tab: Scheda
 ```statblock
 monster: Elefante
 ```
-
+tab: Dettagli
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Enorme Bestia, senza allineamento
 > CA: 12
 > PF: 76 (8d12 + 24)
 > Velocita: camminata: 12 m
 > GS: 4 (PE 1.100; BC +2)
-
 ## Caratteristiche
-
 | Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
 | --- | --- | --- | --- |
 | Forza | 22 | 6 | 6 |
@@ -73,15 +72,13 @@ monster: Elefante
 | Intelligenza | 3 | -4 | -4 |
 | Saggezza | 11 | 0 | 0 |
 | Carisma | 6 | -2 | -2 |
-
 ## Sensi
 
 percezione_passiva: 10
-
 ## Lingue
 
 nessuna
-
+tab: Azioni
 ## Azioni
 
 ### Multiattacco
@@ -91,6 +88,7 @@ L'elefante effettua due attacchi Trafiggere.
 ### Trafiggere
 
 *Tiro per colpire in mischia:* +8, portata 1,5 m *Colpito:* 15 (2d8 + 6) danni perforanti. Se il bersaglio è una creatura di taglia Enorme o inferiore e l'elefante si è mosso di 6 metri o più in linea retta verso di esso subito prima del colpo, il bersaglio cade a terra prono.
+````
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

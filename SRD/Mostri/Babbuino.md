@@ -18,13 +18,13 @@ ac: 12
 stats: [8, 14, 11, 4, 12, 6]
 saves: {}
 skillsaves: {}
-damage_vulnerabilities: 
-damage_resistances: 
-damage_immunities: 
-condition_immunities: 
+damage_vulnerabilities:
+damage_resistances:
+damage_immunities:
+condition_immunities:
 senses: "percezione_passiva: 11"
 languages: "nessuna"
-gear: []
+cr: 0
 traits: 
 - name: "Tattiche del branco"
   desc: "Il babbuino dispone di vantaggio a un tiro per colpire contro una creatura se almeno uno dei suoi alleati si trova entro 1,5 metri dalla creatura e non è incapacitato."
@@ -43,26 +43,25 @@ iniziativa: 2
 hp: 3
 hit_dice: "1d6"
 speed: "camminata: 9 m, scalata: 9 m"
-cr: 0
 xp: 10
 bonus_competenza: 2
 statblock: true
 ---
 # Babbuino
 
+````tabs
+tab: Scheda
 ```statblock
 monster: Babbuino
 ```
-
+tab: Dettagli
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Piccola Bestia, senza allineamento
 > CA: 12
 > PF: 3 (1d6)
 > Velocita: camminata: 9 m, scalata: 9 m
 > GS: 0 (PE 10; BC +2)
-
 ## Caratteristiche
-
 | Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
 | --- | --- | --- | --- |
 | Forza | 8 | -1 | -1 |
@@ -71,26 +70,24 @@ monster: Babbuino
 | Intelligenza | 4 | -3 | -3 |
 | Saggezza | 12 | 1 | 1 |
 | Carisma | 6 | -2 | -2 |
-
 ## Sensi
 
 percezione_passiva: 11
-
 ## Lingue
 
 nessuna
-
+tab: Azioni
 ## Tratti
 
 ### Tattiche del branco
 
 Il babbuino dispone di vantaggio a un tiro per colpire contro una creatura se almeno uno dei suoi alleati si trova entro 1,5 metri dalla creatura e non è incapacitato.
-
 ## Azioni
 
 ### Morso
 
 *Tiro per colpire in mischia:* +1, portata 1,5 m. *Colpito:* 1 (1d4 - 1) danni perforanti.
+````
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

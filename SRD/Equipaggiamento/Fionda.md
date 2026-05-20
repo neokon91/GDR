@@ -19,13 +19,13 @@ peso: "-"
 danni: "1d4 contundenti"
 proprieta: ["munizioni 9/36"]
 padronanza: "Lentezza"
-classe_armatura: 
-forza: 
-furtivita: 
-velocita: 
-punti_ferita: 
-soglia_danno: 
-valore_in_mo: 
+classe_armatura:
+forza:
+furtivita:
+velocita:
+punti_ferita:
+soglia_danno:
+valore_in_mo:
 ---
 # Fionda
 

@@ -18,13 +18,13 @@ ac: 9
 stats: [10, 8, 16, 3, 10, 6]
 saves: {}
 skillsaves: {}
-damage_vulnerabilities: 
-damage_resistances: 
-damage_immunities: 
-condition_immunities: 
+damage_vulnerabilities:
+damage_resistances:
+damage_immunities:
+condition_immunities:
 senses: "percezione_passiva: 10, scurovisione: 18 m"
 languages: "nessuna"
-gear: []
+cr: 2
 traits: 
 - name: "Gorgogliare"
   desc: "La fauce gorgoglia in modo incoerente fintanto che non è incapacitata.\n\n*Tiro salvezza su Saggezza:* CD 10, ogni creatura che inizi il suo turno entro 6 metri dalla fauce finché questa gorgoglia.\n\n*Fallimento:* il bersaglio tira 1d8 per determinare cosa fare nel turno corrente:\n- 1-4. Il bersaglio non fa nulla.\n- 5-6. Il bersaglio non effettua alcuna azione, né azione bonus, e usa tutto il suo movimento per muoversi in una direzione casuale.\n- 7-8. Il bersaglio effettua un attacco in mischia contro una creatura determinata casualmente entro la sua portata, oppure non fa nulla se non riesce a eseguire tale attacco."
@@ -47,26 +47,25 @@ iniziativa: -1
 hp: 52
 hit_dice: "7d8 + 21"
 speed: "camminata: 6 m, nuoto: 6 m"
-cr: 2
 xp: 450
 bonus_competenza: 2
 statblock: true
 ---
 # Fauce gorgogliante
 
+````tabs
+tab: Scheda
 ```statblock
 monster: Fauce gorgogliante
 ```
-
+tab: Dettagli
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Media Aberrazione, caotico neutrale
 > CA: 9
 > PF: 52 (7d8 + 21)
 > Velocita: camminata: 6 m, nuoto: 6 m
 > GS: 2 (PE 450; BC +2)
-
 ## Caratteristiche
-
 | Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
 | --- | --- | --- | --- |
 | Forza | 10 | 0 | 0 |
@@ -75,15 +74,13 @@ monster: Fauce gorgogliante
 | Intelligenza | 3 | -4 | -4 |
 | Saggezza | 10 | 0 | 0 |
 | Carisma | 6 | -2 | -2 |
-
 ## Sensi
 
 percezione_passiva: 10, scurovisione: 18 m
-
 ## Lingue
 
 nessuna
-
+tab: Azioni
 ## Tratti
 
 ### Gorgogliare
@@ -100,7 +97,6 @@ La fauce gorgoglia in modo incoerente fintanto che non è incapacitata.
 ### Terreno aberrante
 
 Il terreno in un'emanazione di 3 metri di cui la fauce gorgogliante è il punto di origine è considerato terreno difficile.
-
 ## Azioni
 
 ### Morso
@@ -112,6 +108,7 @@ Il terreno in un'emanazione di 3 metri di cui la fauce gorgogliante è il punto 
 *Tiro salvezza su Destrezza:* CD 10, tutte le creature in una sfera di 3 metri di raggio centrata su un punto entro 9 metri.
 
 *Fallimento:* 7 (2d6) danni radiosi, e il bersaglio è accecato fino al termine del turno successivo della fauce gorgogliante.
+````
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

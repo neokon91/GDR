@@ -11,7 +11,7 @@ licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
 lettera: "S"
-descrittore: 
+descrittore:
 pagine_sorgente: 214
 ---
 # Saltare

@@ -23,13 +23,13 @@ skillsaves:
   furtivita: 3
   intuizione: 4
   percezione: 7
-damage_vulnerabilities: 
-damage_resistances: 
-damage_immunities: 
-condition_immunities: 
+damage_vulnerabilities:
+damage_resistances:
+damage_immunities:
+condition_immunities:
 senses: "percezione_passiva: 17, scurovisione: 36 m, vista_cieca: 9 m"
 languages: "Comune, Draconico"
-gear: []
+cr: 8
 traits: 
 - name: "Anfibio"
   desc: "Il drago può respirare in aria e in acqua."
@@ -54,26 +54,25 @@ iniziativa: 3
 hp: 142
 hit_dice: "15d10 + 60"
 speed: "camminata: 12 m, nuoto: 12 m, volo: 24 m"
-cr: 8
 xp: 3900
 bonus_competenza: 3
 statblock: true
 ---
 # Drago di bronzo giovane
 
+````tabs
+tab: Scheda
 ```statblock
 monster: Drago di bronzo giovane
 ```
-
+tab: Dettagli
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Grande Drago (metallico), legale buono
 > CA: 17
 > PF: 142 (15d10 + 60)
 > Velocita: camminata: 12 m, nuoto: 12 m, volo: 24 m
 > GS: 8 (PE 3.900; BC +3)
-
 ## Caratteristiche
-
 | Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
 | --- | --- | --- | --- |
 | Forza | 21 | 5 | 5 |
@@ -82,25 +81,21 @@ monster: Drago di bronzo giovane
 | Intelligenza | 14 | 2 | 2 |
 | Saggezza | 13 | 1 | 4 |
 | Carisma | 17 | 3 | 3 |
-
 ## Abilita
 
 furtivita: 3, intuizione: 4, percezione: 7
-
 ## Sensi
 
 percezione_passiva: 17, scurovisione: 36 m, vista_cieca: 9 m
-
 ## Lingue
 
 Comune, Draconico
-
+tab: Azioni
 ## Tratti
 
 ### Anfibio
 
 Il drago può respirare in aria e in acqua.
-
 ## Azioni
 
 ### Multiattacco
@@ -118,6 +113,7 @@ Il drago effettua tre attacchi Squarcio. Può sostituire un attacco con un utili
 ### Soffio repulsivo
 
 *Tiro salvezza su Forza:* CD 15, tutte le creature in un cono di 9 metri. *Fallimento:* il bersaglio viene spinto fino a un massimo di 12 metri di distanza dal drago e cade a terra prono.
+````
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

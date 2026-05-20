@@ -19,13 +19,13 @@ stats: [8, 12, 12, 7, 10, 10]
 saves: {}
 skillsaves: 
   furtivita: 3
-damage_vulnerabilities: 
-damage_resistances: 
-damage_immunities: 
-condition_immunities: 
+damage_vulnerabilities:
+damage_resistances:
+damage_immunities:
+condition_immunities:
 senses: "percezione_passiva: 10, scurovisione: 18 m"
 languages: "Primordiale (Ignan, Terran)"
-gear: []
+cr: 0.5
 traits: 
 - name: "Esplosione mortale"
   desc: "Il mephit esplode quando muore. *Tiro salvezza su Destrezza:* CD 11, tutte le creature in un'emanazione di 1,5 metri di cui il mephit è il punto di origine. *Fallimento:* 7 (2d6) danni da fuoco. *Successo:* danni dimezzati."
@@ -46,26 +46,25 @@ iniziativa: 1
 hp: 18
 hit_dice: "4d6 + 4"
 speed: "camminata: 9 m, volo: 9 m"
-cr: 0.5
 xp: 100
 bonus_competenza: 2
 statblock: true
 ---
 # Mephit del magma
 
+````tabs
+tab: Scheda
 ```statblock
 monster: Mephit del magma
 ```
-
+tab: Dettagli
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Piccolo Elementale, neutrale malvagio
 > CA: 11
 > PF: 18 (4d6 + 4)
 > Velocita: camminata: 9 m, volo: 9 m
 > GS: 1/2 (PE 100; BC +2)
-
 ## Caratteristiche
-
 | Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
 | --- | --- | --- | --- |
 | Forza | 8 | -1 | -1 |
@@ -74,25 +73,21 @@ monster: Mephit del magma
 | Intelligenza | 7 | -2 | -2 |
 | Saggezza | 10 | 0 | 0 |
 | Carisma | 10 | 0 | 0 |
-
 ## Abilita
 
 furtivita: 3
-
 ## Sensi
 
 percezione_passiva: 10, scurovisione: 18 m
-
 ## Lingue
 
 Primordiale (Ignan, Terran)
-
+tab: Azioni
 ## Tratti
 
 ### Esplosione mortale
 
 Il mephit esplode quando muore. *Tiro salvezza su Destrezza:* CD 11, tutte le creature in un'emanazione di 1,5 metri di cui il mephit è il punto di origine. *Fallimento:* 7 (2d6) danni da fuoco. *Successo:* danni dimezzati.
-
 ## Azioni
 
 ### Artiglio
@@ -102,6 +97,7 @@ Il mephit esplode quando muore. *Tiro salvezza su Destrezza:* CD 11, tutte le cr
 ### Soffio di fuoco (ricarica 6)
 
 *Tiro salvezza su Destrezza:* CD 11, tutte le creature in un cono di 4,5 metri. *Fallimento:* 7 (2d6) danni da fuoco. *Successo:* danni dimezzati.
+````
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

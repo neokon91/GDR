@@ -20,13 +20,13 @@ saves: {}
 skillsaves: 
   atletica: 6
   percezione: 4
-damage_vulnerabilities: 
-damage_resistances: 
-damage_immunities: 
-condition_immunities: 
+damage_vulnerabilities:
+damage_resistances:
+damage_immunities:
+condition_immunities:
 senses: "percezione_passiva: 14"
 languages: "comune"
-gear: ["corazza di piastre", "giavellotti (6)", "scudo", "spada lunga"]
+cr: 4
 traits: []
 actions: 
 - name: "Multiattacco"
@@ -47,26 +47,25 @@ iniziativa: 4
 hp: 75
 hit_dice: "10d8 + 30"
 speed: "camminata: 9 m"
-cr: 4
 xp: 1100
 bonus_competenza: 2
 statblock: true
 ---
 # Capitano delle guardie
 
+````tabs
+tab: Scheda
 ```statblock
 monster: Capitano delle guardie
 ```
-
+tab: Dettagli
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Medio o Piccolo Umanoide, neutrale
 > CA: 18
 > PF: 75 (10d8 + 30)
 > Velocita: camminata: 9 m
 > GS: 4 (PE 1.100; BC +2)
-
 ## Caratteristiche
-
 | Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
 | --- | --- | --- | --- |
 | Forza | 18 | 4 | 4 |
@@ -75,19 +74,16 @@ monster: Capitano delle guardie
 | Intelligenza | 12 | 1 | 1 |
 | Saggezza | 14 | 2 | 2 |
 | Carisma | 13 | 1 | 1 |
-
 ## Abilita
 
 atletica: 6, percezione: 4
-
 ## Sensi
 
 percezione_passiva: 14
-
 ## Lingue
 
 comune
-
+tab: Azioni
 ## Azioni
 
 ### Multiattacco
@@ -101,6 +97,7 @@ La guardia effettua due attacchi, utilizzando Giavellotto o Spada lunga in quals
 ### Spada lunga
 
 *Tiro per colpire in mischia:* +6, portata 1,5 m. *Colpito:* 15 (2d10 + 4) danni taglienti.
+````
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

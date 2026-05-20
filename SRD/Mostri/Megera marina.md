@@ -18,13 +18,13 @@ ac: 14
 stats: [16, 13, 16, 12, 12, 13]
 saves: {}
 skillsaves: {}
-damage_vulnerabilities: 
-damage_resistances: 
-damage_immunities: 
-condition_immunities: 
+damage_vulnerabilities:
+damage_resistances:
+damage_immunities:
+condition_immunities:
 senses: "percezione_passiva: 11, scurovisione: 18 m"
 languages: "Comune, Gigante, Primordiale (Aquan)"
-gear: []
+cr: 2
 traits: 
 - name: "Anfibio"
   desc: "La megera può respirare in aria e in acqua."
@@ -51,26 +51,25 @@ iniziativa: 1
 hp: 52
 hit_dice: "7d8 + 21"
 speed: "camminata: 9 m, nuoto: 12 m"
-cr: 2
 xp: 450
 bonus_competenza: 2
 statblock: true
 ---
 # Megera marina
 
+````tabs
+tab: Scheda
 ```statblock
 monster: Megera marina
 ```
-
+tab: Dettagli
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Medio Folletto, caotico malvagio
 > CA: 14
 > PF: 52 (7d8 + 21)
 > Velocita: camminata: 9 m, nuoto: 12 m
 > GS: 2 (PE 450; BC +2)
-
 ## Caratteristiche
-
 | Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
 | --- | --- | --- | --- |
 | Forza | 16 | 3 | 3 |
@@ -79,15 +78,13 @@ monster: Megera marina
 | Intelligenza | 12 | 1 | 1 |
 | Saggezza | 12 | 1 | 1 |
 | Carisma | 13 | 1 | 1 |
-
 ## Sensi
 
 percezione_passiva: 11, scurovisione: 18 m
-
 ## Lingue
 
 Comune, Gigante, Primordiale (Aquan)
-
+tab: Azioni
 ## Tratti
 
 ### Anfibio
@@ -101,7 +98,6 @@ Finché si trova entro 9 metri da almeno due megere alleate, la megera può lanc
 ### Aspetto orripilante
 
 *Tiro salvezza su Saggezza:* CD 11, qualsiasi bestia o umanoide inizi il proprio turno nel campo visivo della megera, entro un raggio di 9 metri da lei e può vederne la vera forma. *Fallimento:* il bersaglio è spaventato fino all'inizio del proprio turno successivo. *Successo:* il bersaglio è immune all'Aspetto orripilante di questa megera per 24 ore.
-
 ## Azioni
 
 ### Artiglio
@@ -115,6 +111,7 @@ La megera lancia camuffare se stesso, utilizzando Costituzione come caratteristi
 ### Sguardo mortale (ricarica 5-6)
 
 *Tiro salvezza su Saggezza:* CD 11, una creatura spaventata che la megera è in grado di vedere entro 9 metri. *Fallimento:* se il bersaglio ha 20 punti ferita o meno, scende a 0 punti ferita. Altrimenti, il bersaglio subisce 13 (3d8) danni psichici.
+````
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

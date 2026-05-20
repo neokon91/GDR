@@ -19,13 +19,13 @@ stats: [17, 12, 15, 12, 13, 10]
 saves: 
   con: 4
 skillsaves: {}
-damage_vulnerabilities: 
-damage_resistances: 
-damage_immunities: 
-condition_immunities: 
+damage_vulnerabilities:
+damage_resistances:
+damage_immunities:
+condition_immunities:
 senses: "percezione_passiva: 11"
 languages: "Primordiale (Ignan)"
-gear: []
+cr: 2
 traits: 
 - name: "Aura di fuoco"
   desc: "Al termine di ogni turno dell'azer, tutte le creature a scelta dell'azer che si trovano in un'emanazione di 1,5 metri di cui l'azer è il punto di origine subiscono 5 (1d10) danni da fuoco, a meno che l'azer non sia incapacitato."
@@ -46,26 +46,25 @@ iniziativa: 1
 hp: 39
 hit_dice: "6d8 + 12"
 speed: "camminata: 9 m"
-cr: 2
 xp: 450
 bonus_competenza: 2
 statblock: true
 ---
 # Azer sentinella
 
+````tabs
+tab: Scheda
 ```statblock
 monster: Azer sentinella
 ```
-
+tab: Dettagli
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Medio Elementale, legale neutrale
 > CA: 17
 > PF: 39 (6d8 + 12)
 > Velocita: camminata: 9 m
 > GS: 2 (PE 450; BC +2)
-
 ## Caratteristiche
-
 | Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
 | --- | --- | --- | --- |
 | Forza | 17 | 3 | 3 |
@@ -74,15 +73,13 @@ monster: Azer sentinella
 | Intelligenza | 12 | 1 | 1 |
 | Saggezza | 13 | 1 | 1 |
 | Carisma | 10 | 0 | 0 |
-
 ## Sensi
 
 percezione_passiva: 11
-
 ## Lingue
 
 Primordiale (Ignan)
-
+tab: Azioni
 ## Tratti
 
 ### Aura di fuoco
@@ -92,12 +89,12 @@ Al termine di ogni turno dell'azer, tutte le creature a scelta dell'azer che si 
 ### Illuminazione
 
 L'azer emana luce intensa in un raggio di 3 metri e luce fioca per altri 3 metri.
-
 ## Azioni
 
 ### Martello ardente
 
 *Tiro per colpire in mischia:* +5, portata 1,5 m *Colpito:* 8 (1d10 + 3) danni contundenti più 3 (1d6) danni da fuoco.
+````
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

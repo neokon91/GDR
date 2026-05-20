@@ -23,13 +23,13 @@ skillsaves:
   arcano: 13
   percezione: 6
   storia: 9
-damage_vulnerabilities: 
-damage_resistances: 
-damage_immunities: 
-condition_immunities: 
+damage_vulnerabilities:
+damage_resistances:
+damage_immunities:
+condition_immunities:
 senses: "percezione_passiva: 16"
 languages: "Comune più altre cinque lingue"
-gear: ["bacchetta"]
+cr: 12
 traits: 
 - name: "Resistenza alla magia"
   desc: "L'arcimago dispone di vantaggio ai tiri salvezza contro incantesimi e altri effetti magici."
@@ -56,26 +56,25 @@ iniziativa: 7
 hp: 170
 hit_dice: "31d8 + 31"
 speed: "camminata: 9 m"
-cr: 12
 xp: 8000
 bonus_competenza: 4
 statblock: true
 ---
 # Arcimago
 
+````tabs
+tab: Scheda
 ```statblock
 monster: Arcimago
 ```
-
+tab: Dettagli
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Medio o Piccolo Umanoide, neutrale
 > CA: 17
 > PF: 170 (31d8 + 31)
 > Velocita: camminata: 9 m
 > GS: 12 (PE 8.000; BC +4)
-
 ## Caratteristiche
-
 | Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
 | --- | --- | --- | --- |
 | Forza | 10 | 0 | 0 |
@@ -84,25 +83,21 @@ monster: Arcimago
 | Intelligenza | 20 | 5 | 9 |
 | Saggezza | 15 | 2 | 6 |
 | Carisma | 16 | 3 | 3 |
-
 ## Abilita
 
 arcano: 13, percezione: 6, storia: 9
-
 ## Sensi
 
 percezione_passiva: 16
-
 ## Lingue
 
 Comune più altre cinque lingue
-
+tab: Azioni
 ## Tratti
 
 ### Resistenza alla magia
 
 L'arcimago dispone di vantaggio ai tiri salvezza contro incantesimi e altri effetti magici.
-
 ## Azioni
 
 ### Multiattacco
@@ -116,6 +111,7 @@ L'arcimago effettua quattro attacchi Esplosione arcana.
 ### Incantesimi
 
 L'arcimago lancia uno dei seguenti incantesimi, utilizzando Intelligenza come caratteristica da incantatore (CD del tiro salvezza sull'incantesimo 17): 1/giorno ciascuno: Cono di freddo (di 9º livello), scrutare, teletrasporto, vuoto mentale (lanciato prima del combattimento) 2/giorno ciascuno: Fulmine (di 7º livello), volare A volontà: Armatura magica (inclusa nella CA), camuffare se stesso, individuazione dei pensieri, individuazione del magico, invisibilità, luce, mano magica, prestidigitazione
+````
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

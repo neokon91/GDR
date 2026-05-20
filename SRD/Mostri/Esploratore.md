@@ -22,13 +22,13 @@ skillsaves:
   natura: 4
   percezione: 5
   sopravvivenza: 5
-damage_vulnerabilities: 
-damage_resistances: 
-damage_immunities: 
-condition_immunities: 
+damage_vulnerabilities:
+damage_resistances:
+damage_immunities:
+condition_immunities:
 senses: "percezione_passiva: 15"
 languages: "Comune più un'altra lingua"
-gear: ["arco lungo", "armatura di cuoio", "spada corta"]
+cr: 0.5
 traits: []
 actions: 
 - name: "Multiattacco"
@@ -49,26 +49,25 @@ iniziativa: 2
 hp: 16
 hit_dice: "3d8 + 3"
 speed: "camminata: 9 m"
-cr: 0.5
 xp: 100
 bonus_competenza: 2
 statblock: true
 ---
 # Esploratore
 
+````tabs
+tab: Scheda
 ```statblock
 monster: Esploratore
 ```
-
+tab: Dettagli
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Medio o Piccolo Umanoide, neutrale
 > CA: 13
 > PF: 16 (3d8 + 3)
 > Velocita: camminata: 9 m
 > GS: 1/2 (PE 100; BC +2)
-
 ## Caratteristiche
-
 | Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
 | --- | --- | --- | --- |
 | Forza | 11 | 0 | 0 |
@@ -77,19 +76,16 @@ monster: Esploratore
 | Intelligenza | 11 | 0 | 0 |
 | Saggezza | 13 | 1 | 1 |
 | Carisma | 11 | 0 | 0 |
-
 ## Abilita
 
 furtivita: 6, natura: 4, percezione: 5, sopravvivenza: 5
-
 ## Sensi
 
 percezione_passiva: 15
-
 ## Lingue
 
 Comune più un'altra lingua
-
+tab: Azioni
 ## Azioni
 
 ### Multiattacco
@@ -103,6 +99,7 @@ L'esploratore effettua due attacchi, usando Spada corta e Arco lungo in qualsias
 ### Arco lungo
 
 *Tiro per colpire a distanza:* +4, gittata 45/180 m. *Colpito:* 6 (1d8 + 2) danni perforanti.
+````
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

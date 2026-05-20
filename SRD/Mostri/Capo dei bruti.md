@@ -21,13 +21,13 @@ saves:
   con: 5
   cha: 2
 skillsaves: {}
-damage_vulnerabilities: 
-damage_resistances: 
-damage_immunities: 
-condition_immunities: 
+damage_vulnerabilities:
+damage_resistances:
+damage_immunities:
+condition_immunities:
 senses: "percezione_passiva: 10"
 languages: "Comune più un'altra lingua"
-gear: ["balestra pesante", "cotta di maglia", "martello da guerra"]
+cr: 4
 traits: 
 - name: "Tattiche del branco"
   desc: "Il bruto dispone di vantaggio a un tiro per colpire contro una creatura se almeno uno dei suoi alleati si trova entro 1,5 metri dalla creatura e non è incapacitato."
@@ -50,26 +50,25 @@ iniziativa: 2
 hp: 82
 hit_dice: "11d8 + 33"
 speed: "camminata: 9 m"
-cr: 4
 xp: 1100
 bonus_competenza: 2
 statblock: true
 ---
 # Capo dei bruti
 
+````tabs
+tab: Scheda
 ```statblock
 monster: Capo dei bruti
 ```
-
+tab: Dettagli
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Medio o Piccolo Umanoide, neutrale
 > CA: 16
 > PF: 82 (11d8 + 33)
 > Velocita: camminata: 9 m
 > GS: 4 (PE 1.100; BC +2)
-
 ## Caratteristiche
-
 | Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
 | --- | --- | --- | --- |
 | Forza | 17 | 3 | 5 |
@@ -78,21 +77,18 @@ monster: Capo dei bruti
 | Intelligenza | 11 | 0 | 0 |
 | Saggezza | 10 | 0 | 0 |
 | Carisma | 11 | 0 | 2 |
-
 ## Sensi
 
 percezione_passiva: 10
-
 ## Lingue
 
 Comune più un'altra lingua
-
+tab: Azioni
 ## Tratti
 
 ### Tattiche del branco
 
 Il bruto dispone di vantaggio a un tiro per colpire contro una creatura se almeno uno dei suoi alleati si trova entro 1,5 metri dalla creatura e non è incapacitato.
-
 ## Azioni
 
 ### Multiattacco
@@ -108,6 +104,7 @@ Il bruto effettua due attacchi, usando Martello da guerra o Balestra pesante in 
 *Tiro per colpire a distanza:* +4, gittata 30/120 m. *Colpito:* 13 (2d10 + 2) danni perforanti.
 
 ---
+````
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

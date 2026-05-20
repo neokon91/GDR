@@ -31,6 +31,9 @@
 >
 > Prossima mossa:
 > `INPUT[text:prossima_mossa]`
+>
+> Scadenza nel mondo:
+> `INPUT[text:scadenza_mondo]`
 
 ````tabs
 tab: Identità
@@ -46,6 +49,13 @@ tab: Identità
 
 > [!missione] Obiettivi
 >
+
+## Obiettivo Nascosto
+
+`INPUT[text:obiettivo_nascosto]`
+
+> [!segreto]- Obiettivo nascosto
+> `=this.obiettivo_nascosto`
 
 ## Risorse
 
@@ -100,6 +110,8 @@ tab: Missioni
 
 ## Missioni
 
+`INPUT[inlineListSuggester(optionQuery("Mondi/Missioni"), useLinks(partial)):missioni]`
+
 ```dataview
 TABLE stato, committente, luoghi
 FROM "Mondi/Missioni"
@@ -113,6 +125,12 @@ tab: Segreti
 
 ```meta-bind
 INPUT[list:segreti]
+```
+
+## Domande Aperte
+
+```meta-bind
+INPUT[list:domande_aperte]
 ```
 
 > [!segreto]- Segreti

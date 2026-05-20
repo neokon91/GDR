@@ -19,13 +19,13 @@ stats: [15, 10, 16, 6, 12, 7]
 saves: {}
 skillsaves: 
   percezione: 3
-damage_vulnerabilities: 
-damage_resistances: 
-damage_immunities: 
-condition_immunities: 
+damage_vulnerabilities:
+damage_resistances:
+damage_immunities:
+condition_immunities:
 senses: "percezione_passiva: 13, scurovisione: 18 m"
 languages: "capisce il Comune ma non lo parla"
-gear: []
+cr: 1
 traits: 
 - name: "Tattiche del branco"
   desc: "L'avvoltoio dispone di vantaggio a un tiro per colpire contro una creatura se almeno uno dei suoi alleati si trova entro 1,5 metri dalla creatura e non è incapacitato."
@@ -44,26 +44,25 @@ iniziativa: 0
 hp: 25
 hit_dice: "3d10 + 9"
 speed: "camminata: 3 m, volo: 18 m"
-cr: 1
 xp: 200
 bonus_competenza: 2
 statblock: true
 ---
 # Avvoltoio gigante
 
+````tabs
+tab: Scheda
 ```statblock
 monster: Avvoltoio gigante
 ```
-
+tab: Dettagli
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Grande Mostruosità, neutrale malvagio
 > CA: 10
 > PF: 25 (3d10 + 9)
 > Velocita: camminata: 3 m, volo: 18 m
 > GS: 1 (PE 200; BC +2)
-
 ## Caratteristiche
-
 | Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
 | --- | --- | --- | --- |
 | Forza | 15 | 2 | 2 |
@@ -72,30 +71,27 @@ monster: Avvoltoio gigante
 | Intelligenza | 6 | -2 | -2 |
 | Saggezza | 12 | 1 | 1 |
 | Carisma | 7 | -2 | -2 |
-
 ## Abilita
 
 percezione: 3
-
 ## Sensi
 
 percezione_passiva: 13, scurovisione: 18 m
-
 ## Lingue
 
 capisce il Comune ma non lo parla
-
+tab: Azioni
 ## Tratti
 
 ### Tattiche del branco
 
 L'avvoltoio dispone di vantaggio a un tiro per colpire contro una creatura se almeno uno dei suoi alleati si trova entro 1,5 metri dalla creatura e non è incapacitato.
-
 ## Azioni
 
 ### Cavare
 
 *Tiro per colpire in mischia:* +4, portata 1,5 m. *Colpito:* 9 (2d6 + 2) danni perforanti, e il bersaglio è avvelenato fino al termine del proprio turno successivo.
+````
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

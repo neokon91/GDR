@@ -18,13 +18,13 @@ ac: 14
 stats: [4, 15, 11, 2, 12, 5]
 saves: {}
 skillsaves: {}
-damage_vulnerabilities: 
-damage_resistances: 
-damage_immunities: 
-condition_immunities: 
+damage_vulnerabilities:
+damage_resistances:
+damage_immunities:
+condition_immunities:
 senses: "percezione_passiva: 11, vista_cieca: 3 m"
 languages: "nessuna"
-gear: []
+cr: 0.125
 traits: 
 - name: "Volo sfuggente"
   desc: "Il serpente non provoca attacchi di opportunità quando vola oltre la portata di un nemico."
@@ -43,26 +43,25 @@ iniziativa: 2
 hp: 5
 hit_dice: "2d4"
 speed: "camminata: 9 m, nuoto: 9 m, volo: 18 m"
-cr: 0.125
 xp: 25
 bonus_competenza: 2
 statblock: true
 ---
 # Serpente volante
 
+````tabs
+tab: Scheda
 ```statblock
 monster: Serpente volante
 ```
-
+tab: Dettagli
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Minuscola Mostruosità, senza allineamento
 > CA: 14
 > PF: 5 (2d4)
 > Velocita: camminata: 9 m, nuoto: 9 m, volo: 18 m
 > GS: 1/8 (PE 25; BC +2)
-
 ## Caratteristiche
-
 | Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
 | --- | --- | --- | --- |
 | Forza | 4 | -3 | -3 |
@@ -71,26 +70,24 @@ monster: Serpente volante
 | Intelligenza | 2 | -4 | -4 |
 | Saggezza | 12 | 1 | 1 |
 | Carisma | 5 | -3 | -3 |
-
 ## Sensi
 
 percezione_passiva: 11, vista_cieca: 3 m
-
 ## Lingue
 
 nessuna
-
+tab: Azioni
 ## Tratti
 
 ### Volo sfuggente
 
 Il serpente non provoca attacchi di opportunità quando vola oltre la portata di un nemico.
-
 ## Azioni
 
 ### Morso
 
 *Tiro per colpire in mischia:* +4, portata 1,5 m. *Colpito:* 1 danno perforante più 5 (2d4) danni da veleno.
+````
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

@@ -18,13 +18,13 @@ ac: 13
 stats: [18, 15, 16, 10, 13, 15]
 saves: {}
 skillsaves: {}
-damage_vulnerabilities: 
-damage_resistances: 
-damage_immunities: 
-condition_immunities: 
+damage_vulnerabilities:
+damage_resistances:
+damage_immunities:
+condition_immunities:
 senses: "percezione_passiva: 11"
 languages: "capisce l'Abissale, il Comune e l'Infernale ma non li parla"
-gear: []
+cr: 3
 traits: 
 - name: "Conferire resistenza al fuoco"
   desc: "Il cavallo degli incubi può conferire resistenza ai danni da fuoco a un cavaliere finché questi si trova sul cavallo."
@@ -47,26 +47,25 @@ iniziativa: 2
 hp: 68
 hit_dice: "8d10 + 24"
 speed: "camminata: 18 m, volo: 27 m (fluttuare)"
-cr: 3
 xp: 700
 bonus_competenza: 2
 statblock: true
 ---
 # Cavallo degli incubi
 
+````tabs
+tab: Scheda
 ```statblock
 monster: Cavallo degli incubi
 ```
-
+tab: Dettagli
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Grande Immondo, neutrale malvagio
 > CA: 13
 > PF: 68 (8d10 + 24)
 > Velocita: camminata: 18 m, volo: 27 m (fluttuare)
 > GS: 3 (PE 700; BC +2)
-
 ## Caratteristiche
-
 | Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
 | --- | --- | --- | --- |
 | Forza | 18 | 4 | 4 |
@@ -75,15 +74,13 @@ monster: Cavallo degli incubi
 | Intelligenza | 10 | 0 | 0 |
 | Saggezza | 13 | 1 | 1 |
 | Carisma | 15 | 2 | 2 |
-
 ## Sensi
 
 percezione_passiva: 11
-
 ## Lingue
 
 capisce l'Abissale, il Comune e l'Infernale ma non li parla
-
+tab: Azioni
 ## Tratti
 
 ### Conferire resistenza al fuoco
@@ -93,7 +90,6 @@ Il cavallo degli incubi può conferire resistenza ai danni da fuoco a un cavalie
 ### Illuminazione
 
 Il cavallo degli incubi emana luce intensa in un raggio di 3 metri e luce fioca per altri 3 metri.
-
 ## Azioni
 
 ### Zoccoli
@@ -103,6 +99,7 @@ Il cavallo degli incubi emana luce intensa in un raggio di 3 metri e luce fioca 
 ### Passo etereo
 
 Il cavallo degli incubi e un massimo di tre creature consenzienti situate entro 1,5 metri da esso si teletrasportano dal Piano Materiale al Piano Etereo o viceversa.
+````
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

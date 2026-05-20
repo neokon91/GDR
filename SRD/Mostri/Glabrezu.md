@@ -24,13 +24,13 @@ saves:
 skillsaves: 
   inganno: 7
   percezione: 7
-damage_vulnerabilities: 
-damage_resistances: 
-damage_immunities: 
-condition_immunities: 
+damage_vulnerabilities:
+damage_resistances:
+damage_immunities:
+condition_immunities:
 senses: "percezione_passiva: 17, vista_pura: 36 m"
 languages: "Abissale, telepatia 36 m"
-gear: []
+cr: 9
 traits: 
 - name: "Resistenza alla magia"
   desc: "Il glabrezu dispone di vantaggio ai tiri salvezza contro incantesimi e altri effetti magici."
@@ -57,26 +57,25 @@ iniziativa: 6
 hp: 189
 hit_dice: "18d10 + 90"
 speed: "camminata: 12 m"
-cr: 9
 xp: 5000
 bonus_competenza: 4
 statblock: true
 ---
 # Glabrezu
 
+````tabs
+tab: Scheda
 ```statblock
 monster: Glabrezu
 ```
-
+tab: Dettagli
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Grande Immondo (demone), caotico malvagio
 > CA: 17
 > PF: 189 (18d10 + 90)
 > Velocita: camminata: 12 m
 > GS: 9 (PE 5.000; BC +4)
-
 ## Caratteristiche
-
 | Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
 | --- | --- | --- | --- |
 | Forza | 20 | 5 | 9 |
@@ -85,19 +84,16 @@ monster: Glabrezu
 | Intelligenza | 19 | 4 | 4 |
 | Saggezza | 17 | 3 | 7 |
 | Carisma | 16 | 3 | 7 |
-
 ## Abilita
 
 inganno: 7, percezione: 7
-
 ## Sensi
 
 percezione_passiva: 17, vista_pura: 36 m
-
 ## Lingue
 
 Abissale, telepatia 36 m
-
+tab: Azioni
 ## Tratti
 
 ### Resistenza alla magia
@@ -107,7 +103,6 @@ Il glabrezu dispone di vantaggio ai tiri salvezza contro incantesimi e altri eff
 ### Ristoro demoniaco
 
 Se il glabrezu muore al di fuori dell'Abisso, il suo corpo si dissolve diventando icore e ne acquisisce uno nuovo all'istante, tornando in vita con tutti i suoi punti ferita da qualche parte nell'Abisso.
-
 ## Azioni
 
 ### Multiattacco
@@ -135,6 +130,7 @@ A volontà:
 ### Pugno
 
 *Tiro salvezza su Destrezza:* CD 17, una creatura afferrata dal glabrezu. *Fallimento:* 15 (3d6 + 5) danni contundenti. *Successo:* danni dimezzati.
+````
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

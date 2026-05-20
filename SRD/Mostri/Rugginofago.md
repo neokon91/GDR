@@ -18,13 +18,13 @@ ac: 14
 stats: [13, 12, 13, 2, 13, 6]
 saves: {}
 skillsaves: {}
-damage_vulnerabilities: 
-damage_resistances: 
-damage_immunities: 
-condition_immunities: 
+damage_vulnerabilities:
+damage_resistances:
+damage_immunities:
+condition_immunities:
 senses: "percezione_passiva: 11, scurovisione: 18 m"
 languages: "nessuna"
-gear: []
+cr: 0.5
 traits: 
 - name: "Fiutare il ferro"
   desc: "Il rugginofago può individuare la precisa ubicazione di qualsiasi metallo ferroso situato entro 9 metri da esso."
@@ -51,26 +51,25 @@ iniziativa: 1
 hp: 33
 hit_dice: "6d8 + 6"
 speed: "camminata: 12 m"
-cr: 0.5
 xp: 100
 bonus_competenza: 2
 statblock: true
 ---
 # Rugginofago
 
+````tabs
+tab: Scheda
 ```statblock
 monster: Rugginofago
 ```
-
+tab: Dettagli
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Media Mostruosità, senza allineamento
 > CA: 14
 > PF: 33 (6d8 + 6)
 > Velocita: camminata: 12 m
 > GS: 1/2 (PE 100; BC +2)
-
 ## Caratteristiche
-
 | Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
 | --- | --- | --- | --- |
 | Forza | 13 | 1 | 1 |
@@ -79,21 +78,18 @@ monster: Rugginofago
 | Intelligenza | 2 | -4 | -4 |
 | Saggezza | 13 | 1 | 1 |
 | Carisma | 6 | -2 | -2 |
-
 ## Sensi
 
 percezione_passiva: 11, scurovisione: 18 m
-
 ## Lingue
 
 nessuna
-
+tab: Azioni
 ## Tratti
 
 ### Fiutare il ferro
 
 Il rugginofago può individuare la precisa ubicazione di qualsiasi metallo ferroso situato entro 9 metri da esso.
-
 ## Azioni
 
 ### Multiattacco
@@ -111,6 +107,7 @@ Il rugginofago prende di mira un oggetto in metallo non magico (armatura o arma)
 ### Distruggere metallo
 
 Il rugginofago tocca un oggetto in metallo non magico entro 1,5 metri da sé che non è indossato o trasportato. Il tocco distrugge una porzione di oggetto pari a un cubo con spigolo di 30 centimetri.
+````
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

@@ -22,13 +22,13 @@ saves:
 skillsaves: 
   furtivita: 9
   percezione: 16
-damage_vulnerabilities: 
-damage_resistances: 
-damage_immunities: 
-condition_immunities: 
+damage_vulnerabilities:
+damage_resistances:
+damage_immunities:
+condition_immunities:
 senses: "percezione_passiva: 26, scurovisione: 36 m, vista_cieca: 18 m"
 languages: "Comune, Draconico"
-gear: []
+cr: 21
 traits: 
 - name: "Anfibio"
   desc: "Il drago può respirare in aria e in acqua."
@@ -61,26 +61,25 @@ iniziativa: 16
 hp: 367
 hit_dice: "21d20 + 147"
 speed: "camminata: 12 m, nuoto: 12 m, volo: 24 m"
-cr: 21
 xp: 33000
 bonus_competenza: 7
 statblock: true
 ---
 # Drago nero antico
 
+````tabs
+tab: Scheda
 ```statblock
 monster: Drago nero antico
 ```
-
+tab: Dettagli
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Mastodontico Drago (cromatico), caotico malvagio
 > CA: 22
 > PF: 367 (21d20 + 147)
 > Velocita: camminata: 12 m, nuoto: 12 m, volo: 24 m
 > GS: 21 (PE 33.000, o 41.000 nella tana; BC +7)
-
 ## Caratteristiche
-
 | Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
 | --- | --- | --- | --- |
 | Forza | 27 | 8 | 8 |
@@ -89,19 +88,16 @@ monster: Drago nero antico
 | Intelligenza | 16 | 3 | 3 |
 | Saggezza | 15 | 2 | 9 |
 | Carisma | 22 | 6 | 6 |
-
 ## Abilita
 
 furtivita: 9, percezione: 16
-
 ## Sensi
 
 percezione_passiva: 26, scurovisione: 36 m, vista_cieca: 18 m
-
 ## Lingue
 
 Comune, Draconico
-
+tab: Azioni
 ## Tratti
 
 ### Anfibio
@@ -111,7 +107,6 @@ Il drago può respirare in aria e in acqua.
 ### Resistenza leggendaria (4/giorno o 5/giorno nella tana)
 
 Se il drago fallisce un tiro salvezza, può scegliere di superarlo comunque.
-
 ## Azioni
 
 ### Multiattacco
@@ -139,7 +134,6 @@ Il drago lancia uno dei seguenti incantesimi, senza bisogno di componenti materi
 ### Soffio di acido (ricarica 5-6)
 
 *Tiro salvezza su Destrezza:* CD 22, tutte le creature in una linea lunga 27 metri e larga 3 metri. *Fallimento:* 67 (15d8) danni da acido. *Successo:* danni dimezzati.
-
 ## Azioni Leggendarie
 
 Subito dopo il turno di un'altra creatura, il drago può consumare un utilizzo per effettuare una delle seguenti azioni. Il drago recupera tutti gli utilizzi consumati all'inizio di ogni suo turno.
@@ -157,6 +151,7 @@ Il drago si muove fino a metà della sua velocità ed effettua un attacco Squarc
 ### Presenza terrificante
 
 Il drago usa Incantesimi per lanciare paura. Il drago non può ripetere quest'azione fino all'inizio del proprio turno successivo.
+````
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

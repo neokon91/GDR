@@ -18,13 +18,13 @@ ac: 9
 stats: [19, 9, 18, 6, 10, 5]
 saves: {}
 skillsaves: {}
-damage_vulnerabilities: 
-damage_resistances: 
-damage_immunities: 
-condition_immunities: 
+damage_vulnerabilities:
+damage_resistances:
+damage_immunities:
+condition_immunities:
 senses: "percezione_passiva: 10, scurovisione: 18 m"
 languages: "capisce il Comune più un'altra lingua ma non le parla"
-gear: []
+cr: 5
 traits: 
 - name: "Assorbimento del fulmine"
   desc: "Ogni volta che il golem subisce danni da fulmine, recupera un numero di punti ferita pari ai danni da fulmine inflitti."
@@ -53,26 +53,25 @@ iniziativa: -1
 hp: 127
 hit_dice: "15d8 + 60"
 speed: "camminata: 9 m"
-cr: 5
 xp: 1800
 bonus_competenza: 3
 statblock: true
 ---
 # Golem di carne
 
+````tabs
+tab: Scheda
 ```statblock
 monster: Golem di carne
 ```
-
+tab: Dettagli
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Medio Costrutto, neutrale
 > CA: 9
 > PF: 127 (15d8 + 60)
 > Velocita: camminata: 9 m
 > GS: 5 (PE 1.800; BC +3)
-
 ## Caratteristiche
-
 | Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
 | --- | --- | --- | --- |
 | Forza | 19 | 4 | 4 |
@@ -81,15 +80,13 @@ monster: Golem di carne
 | Intelligenza | 6 | -2 | -2 |
 | Saggezza | 10 | 0 | 0 |
 | Carisma | 5 | -3 | -3 |
-
 ## Sensi
 
 percezione_passiva: 10, scurovisione: 18 m
-
 ## Lingue
 
 capisce il Comune più un'altra lingua ma non le parla
-
+tab: Azioni
 ## Tratti
 
 ### Assorbimento del fulmine
@@ -111,7 +108,6 @@ Il golem non può mutare forma.
 ### Resistenza alla magia
 
 Il golem dispone di vantaggio ai tiri salvezza contro incantesimi e altri effetti magici.
-
 ## Azioni
 
 ### Multiattacco
@@ -121,6 +117,7 @@ Il golem effettua due attacchi Schianto.
 ### Schianto
 
 *Tiro per colpire in mischia:* +7, portata 1,5 m. *Colpito:* 13 (2d8 + 4) danni contundenti più 4 (1d8) danni da fulmine.
+````
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

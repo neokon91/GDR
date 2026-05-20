@@ -40,7 +40,7 @@ canonico: false
 mondo: ${mondo}
 sessioni: ${helpers.inlineYamlList(sessioni)}
 collegamenti: ${helpers.inlineYamlList(collegamenti)}
-evento_mondo:
+data_mondo:
 fc-calendar:
 fc-date:
 fc-category: conseguenza

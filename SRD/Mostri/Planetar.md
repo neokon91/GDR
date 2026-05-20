@@ -23,13 +23,13 @@ saves:
   cha: 12
 skillsaves: 
   percezione: 11
-damage_vulnerabilities: 
-damage_resistances: 
-damage_immunities: 
-condition_immunities: 
+damage_vulnerabilities:
+damage_resistances:
+damage_immunities:
+condition_immunities:
 senses: "percezione_passiva: 21, vista_pura: 36 m"
 languages: "tutte, telepatia 36 m"
-gear: []
+cr: 16
 traits: 
 - name: "Consapevolezza divina"
   desc: "Il planetar sa riconoscere le menzogne."
@@ -60,26 +60,25 @@ iniziativa: 10
 hp: 262
 hit_dice: "21d10 + 147"
 speed: "camminata: 12 m, volo: 36 m (fluttuare)"
-cr: 16
 xp: 15000
 bonus_competenza: 5
 statblock: true
 ---
 # Planetar
 
+````tabs
+tab: Scheda
 ```statblock
 monster: Planetar
 ```
-
+tab: Dettagli
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Grande Celestiale (angelo), legale buono
 > CA: 19
 > PF: 262 (21d10 + 147)
 > Velocita: camminata: 12 m, volo: 36 m (fluttuare)
 > GS: 16 (PE 15.000; BC +5)
-
 ## Caratteristiche
-
 | Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
 | --- | --- | --- | --- |
 | Forza | 24 | 7 | 12 |
@@ -88,19 +87,16 @@ monster: Planetar
 | Intelligenza | 19 | 4 | 4 |
 | Saggezza | 22 | 6 | 11 |
 | Carisma | 25 | 7 | 12 |
-
 ## Abilita
 
 percezione: 11
-
 ## Sensi
 
 percezione_passiva: 21, vista_pura: 36 m
-
 ## Lingue
 
 tutte, telepatia 36 m
-
+tab: Azioni
 ## Tratti
 
 ### Consapevolezza divina
@@ -114,7 +110,6 @@ Il planetar dispone di vantaggio ai tiri salvezza contro incantesimi e altri eff
 ### Ristoro glorioso
 
 Se il planetar muore al di fuori di Monte Celestia, il suo corpo scompare e ne acquisisce uno nuovo all'istante, tornando in vita con tutti i suoi punti ferita da qualche parte a Monte Celestia.
-
 ## Azioni
 
 ### Multiattacco
@@ -132,6 +127,7 @@ Il planetar effettua tre attacchi Spada radiosa oppure usa Conflagrazione divina
 ### Incantesimi
 
 Il planetar lancia uno dei seguenti incantesimi, senza bisogno di componenti materiali, utilizzando Carisma come caratteristica da incantatore (CD del tiro salvezza sull'incantesimo 20): A volontà: Individuazione del bene e del male1/giorno ciascuno: Comunione, controllare tempo atmosferico, dissolvi il bene e il male, rianimare morti
+````
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

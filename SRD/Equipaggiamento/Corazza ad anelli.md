@@ -16,16 +16,16 @@ tipo_oggetto: "armatura"
 categoria_oggetto: "Pesante"
 costo: "30 mo"
 peso: "20 kg"
-danni: 
+danni:
 proprieta: []
-padronanza: 
+padronanza:
 classe_armatura: "14"
 forza: "-"
 furtivita: "Svantaggio"
-velocita: 
-punti_ferita: 
-soglia_danno: 
-valore_in_mo: 
+velocita:
+punti_ferita:
+soglia_danno:
+valore_in_mo:
 ---
 # Corazza ad anelli
 

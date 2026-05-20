@@ -21,13 +21,13 @@ skillsaves:
   medicina: 7
   percezione: 5
   religione: 5
-damage_vulnerabilities: 
-damage_resistances: 
-damage_immunities: 
-condition_immunities: 
+damage_vulnerabilities:
+damage_resistances:
+damage_immunities:
+condition_immunities:
 senses: "percezione_passiva: 15"
 languages: "Comune più un'altra lingua"
-gear: ["mazza", "giaco di maglia", "simbolo sacro"]
+cr: 2
 traits: []
 actions: 
 - name: "Multiattacco"
@@ -52,26 +52,25 @@ iniziativa: 0
 hp: 38
 hit_dice: "7d8 + 7"
 speed: "camminata: 9 m"
-cr: 2
 xp: 450
 bonus_competenza: 2
 statblock: true
 ---
 # Sacerdote
 
+````tabs
+tab: Scheda
 ```statblock
 monster: Sacerdote
 ```
-
+tab: Dettagli
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Medio o Piccolo Umanoide (chierico), neutrale
 > CA: 13
 > PF: 38 (7d8 + 7)
 > Velocita: camminata: 9 m
 > GS: 2 (PE 450; BC +2)
-
 ## Caratteristiche
-
 | Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
 | --- | --- | --- | --- |
 | Forza | 16 | 3 | 3 |
@@ -80,19 +79,16 @@ monster: Sacerdote
 | Intelligenza | 13 | 1 | 1 |
 | Saggezza | 16 | 3 | 3 |
 | Carisma | 13 | 1 | 1 |
-
 ## Abilita
 
 medicina: 7, percezione: 5, religione: 5
-
 ## Sensi
 
 percezione_passiva: 15
-
 ## Lingue
 
 Comune più un'altra lingua
-
+tab: Azioni
 ## Azioni
 
 ### Multiattacco
@@ -110,6 +106,7 @@ Il sacerdote effettua due attacchi, usando Mazza o Fiamma radiosa in qualsiasi c
 ### Incantesimi
 
 Il sacerdote lancia uno dei seguenti incantesimi, utilizzando Saggezza come caratteristica da incantatore (CD del tiro salvezza sull'incantesimo 13):A volontà: Luce, taumaturgia 1/giorno: Guardiani spirituali
+````
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

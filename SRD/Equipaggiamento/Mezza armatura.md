@@ -16,16 +16,16 @@ tipo_oggetto: "armatura"
 categoria_oggetto: "Media"
 costo: "750 mo"
 peso: "20 kg"
-danni: 
+danni:
 proprieta: []
-padronanza: 
+padronanza:
 classe_armatura: "15 + Des max 2"
 forza: "-"
 furtivita: "Svantaggio"
-velocita: 
-punti_ferita: 
-soglia_danno: 
-valore_in_mo: 
+velocita:
+punti_ferita:
+soglia_danno:
+valore_in_mo:
 ---
 # Mezza armatura
 

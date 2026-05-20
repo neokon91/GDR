@@ -19,13 +19,13 @@ peso: "2 kg"
 danni: "1d6 contundenti"
 proprieta: ["versatile 1d8"]
 padronanza: "Rovesciamento"
-classe_armatura: 
-forza: 
-furtivita: 
-velocita: 
-punti_ferita: 
-soglia_danno: 
-valore_in_mo: 
+classe_armatura:
+forza:
+furtivita:
+velocita:
+punti_ferita:
+soglia_danno:
+valore_in_mo:
 ---
 # Bastone ferrato
 

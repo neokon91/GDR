@@ -22,13 +22,13 @@ skillsaves:
   furtivita: 3
   inganno: 4
   percezione: 4
-damage_vulnerabilities: 
-damage_resistances: 
-damage_immunities: 
-condition_immunities: 
+damage_vulnerabilities:
+damage_resistances:
+damage_immunities:
+condition_immunities:
 senses: "percezione_passiva: 14, scurovisione: 18 m"
 languages: "Comune, Elfico, Silvano"
-gear: []
+cr: 3
 traits: 
 - name: "Anfibio"
   desc: "La megera può respirare in aria e in acqua."
@@ -55,26 +55,25 @@ iniziativa: 1
 hp: 82
 hit_dice: "11d8 + 33"
 speed: "camminata: 9 m, nuoto: 9 m"
-cr: 3
 xp: 700
 bonus_competenza: 2
 statblock: true
 ---
 # Megera verde
 
+````tabs
+tab: Scheda
 ```statblock
 monster: Megera verde
 ```
-
+tab: Dettagli
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Medio Folletto, neutrale malvagio
 > CA: 17
 > PF: 82 (11d8 + 33)
 > Velocita: camminata: 9 m, nuoto: 9 m
 > GS: 3 (PE 700; BC +2)
-
 ## Caratteristiche
-
 | Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
 | --- | --- | --- | --- |
 | Forza | 18 | 4 | 4 |
@@ -83,19 +82,16 @@ monster: Megera verde
 | Intelligenza | 13 | 1 | 1 |
 | Saggezza | 14 | 2 | 2 |
 | Carisma | 14 | 2 | 2 |
-
 ## Abilita
 
 arcano: 5, furtivita: 3, inganno: 4, percezione: 4
-
 ## Sensi
 
 percezione_passiva: 14, scurovisione: 18 m
-
 ## Lingue
 
 Comune, Elfico, Silvano
-
+tab: Azioni
 ## Tratti
 
 ### Anfibio
@@ -109,7 +105,6 @@ La megera può imitare i versi degli animali e le voci degli umanoidi. Una creat
 ### Magia della congrega
 
 Finché si trova entro 9 metri da almeno due megere alleate, la megera può lanciare uno dei seguenti incantesimi senza bisogno di componenti materiali, utilizzando il normale tempo di lancio dell'incantesimo e Intelligenza come caratteristica da incantatore (CD del tiro salvezza sull'incantesimo 11): identificare, localizza oggetto, presagio, scrutare, servitore inosservato o trova famiglio. La megera deve terminare un riposo lungo prima di utilizzare questo tratto per lanciare di nuovo l'incantesimo.
-
 ## Azioni
 
 ### Multiattacco
@@ -123,6 +118,7 @@ La megera effettua due attacchi Artiglio.
 ### Incantesimi
 
 La megera lancia uno dei seguenti incantesimi, senza bisogno di componenti materiali, utilizzando Saggezza come caratteristica da incantatore (CD del tiro salvezza sull'incantesimo 12, +4 al tiro per colpire degli attacchi con incantesimo): A volontà: Camuffare se stesso (durata di 24 ore), illusione minore, invisibilità (solo se stessa, la megera non lascia tracce mentre è invisibile), luci danzanti, raggio di infermità (di 3º livello).
+````
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

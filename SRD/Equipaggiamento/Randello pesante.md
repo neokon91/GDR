@@ -19,13 +19,13 @@ peso: "5 kg"
 danni: "1d8 contundenti"
 proprieta: ["due mani"]
 padronanza: "Spinta"
-classe_armatura: 
-forza: 
-furtivita: 
-velocita: 
-punti_ferita: 
-soglia_danno: 
-valore_in_mo: 
+classe_armatura:
+forza:
+furtivita:
+velocita:
+punti_ferita:
+soglia_danno:
+valore_in_mo:
 ---
 # Randello pesante
 

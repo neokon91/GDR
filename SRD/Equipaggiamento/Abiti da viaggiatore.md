@@ -16,16 +16,16 @@ tipo_oggetto: "equipaggiamento_avventura"
 categoria_oggetto: "Equipaggiamento d'avventura"
 costo: "2 mo"
 peso: "2 kg"
-danni: 
+danni:
 proprieta: []
-padronanza: 
-classe_armatura: 
-forza: 
-furtivita: 
-velocita: 
-punti_ferita: 
-soglia_danno: 
-valore_in_mo: 
+padronanza:
+classe_armatura:
+forza:
+furtivita:
+velocita:
+punti_ferita:
+soglia_danno:
+valore_in_mo:
 ---
 # Abiti da viaggiatore
 

@@ -19,13 +19,13 @@ peso: "1,5 kg"
 danni: "1d10 perforanti"
 proprieta: ["munizioni 9/27", "ricarica"]
 padronanza: "Vessazione"
-classe_armatura: 
-forza: 
-furtivita: 
-velocita: 
-punti_ferita: 
-soglia_danno: 
-valore_in_mo: 
+classe_armatura:
+forza:
+furtivita:
+velocita:
+punti_ferita:
+soglia_danno:
+valore_in_mo:
 ---
 # Pistola
 

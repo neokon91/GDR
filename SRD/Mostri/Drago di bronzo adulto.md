@@ -23,13 +23,13 @@ skillsaves:
   furtivita: 5
   intuizione: 7
   percezione: 12
-damage_vulnerabilities: 
-damage_resistances: 
-damage_immunities: 
-condition_immunities: 
+damage_vulnerabilities:
+damage_resistances:
+damage_immunities:
+condition_immunities:
 senses: "percezione_passiva: 22, scurovisione: 36 m, vista_cieca: 18 m"
 languages: "Comune, Draconico"
-gear: []
+cr: 15
 traits: 
 - name: "Anfibio"
   desc: "Il drago può respirare in aria e in acqua."
@@ -64,26 +64,25 @@ iniziativa: 10
 hp: 212
 hit_dice: "17d12 + 102"
 speed: "camminata: 12 m, nuoto: 12 m, volo: 24 m"
-cr: 15
 xp: 13000
 bonus_competenza: 5
 statblock: true
 ---
 # Drago di bronzo adulto
 
+````tabs
+tab: Scheda
 ```statblock
 monster: Drago di bronzo adulto
 ```
-
+tab: Dettagli
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Enorme Drago (metallico), legale buono
 > CA: 18
 > PF: 212 (17d12 + 102)
 > Velocita: camminata: 12 m, nuoto: 12 m, volo: 24 m
 > GS: 15 (PE 13.000, o 15.000 nella tana; BC +5)
-
 ## Caratteristiche
-
 | Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
 | --- | --- | --- | --- |
 | Forza | 25 | 7 | 7 |
@@ -92,19 +91,16 @@ monster: Drago di bronzo adulto
 | Intelligenza | 16 | 3 | 3 |
 | Saggezza | 15 | 2 | 7 |
 | Carisma | 20 | 5 | 5 |
-
 ## Abilita
 
 furtivita: 5, intuizione: 7, percezione: 12
-
 ## Sensi
 
 percezione_passiva: 22, scurovisione: 36 m, vista_cieca: 18 m
-
 ## Lingue
 
 Comune, Draconico
-
+tab: Azioni
 ## Tratti
 
 ### Anfibio
@@ -114,7 +110,6 @@ Il drago può respirare in aria e in acqua.
 ### Resistenza leggendaria (3/giorno o 4/giorno nella tana)
 
 Se il drago fallisce un tiro salvezza, può scegliere di superarlo comunque.
-
 ## Azioni
 
 ### Multiattacco
@@ -147,7 +142,6 @@ Il drago lancia uno dei seguenti incantesimi, senza bisogno di componenti materi
 ### Soffio repulsivo
 
 *Tiro salvezza su Forza:* CD 19, tutte le creature in un cono di 9 metri. *Fallimento:* il bersaglio viene spinto fino a un massimo di 18 metri di distanza dal drago e cade a terra prono.
-
 ## Azioni Leggendarie
 
 Subito dopo il turno di un'altra creatura, il drago può consumare un utilizzo per effettuare una delle seguenti azioni. Il drago recupera tutti gli utilizzi consumati all'inizio di ogni suo turno.
@@ -165,6 +159,7 @@ Il drago usa Incantesimi per lanciare dardo tracciante (di 2º livello).
 ### Rombo di tuono
 
 *Tiro salvezza su Costituzione:* CD 17, tutte le creature in una sfera di 6 metri di raggio centrata su un punto che il drago è in grado di vedere entro 27 metri. *Fallimento:* 10 (3d6) danni da tuono, e il bersaglio è assordato fino al termine del proprio turno successivo.
+````
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

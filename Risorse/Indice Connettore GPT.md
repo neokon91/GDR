@@ -36,8 +36,8 @@ Questa nota orienta un connettore GPT o un indice code search sul vault. Non e u
 
 - `z.automazioni/session_context.js`: helper DataviewJS per sessione attiva, fallback, link, escape HTML e pagine collegate.
 - `z.automazioni/helpers.js`: helper Templater, selettori, spostamento note, contesto sessione attiva.
-- `z.automazioni/check_vault.js`: controllo qualita locale del vault.
-- `z.automazioni/import_srd.js`: rigenerazione SRD.
+- `z.automazioni/check_vault.js`: controllo qualita locale del vault, inclusi indice GPT, template, campi minimi, sessioni attive e note live.
+- `z.automazioni/import_srd.js`: rigenerazione SRD; i mostri mantengono frontmatter `statblock: true` parsabile da Fantasy Statblocks.
 - `z.automazioni/lore_capture.js`: creazione lore post-sessione e appunti live strutturati.
 - `z.automazioni/live_evento.js`
 - `z.automazioni/live_conseguenza.js`
@@ -63,10 +63,21 @@ Questa nota orienta un connettore GPT o un indice code search sul vault. Non e u
 
 - Una sola sessione dovrebbe avere `attiva: true`.
 - Se nessuna sessione e attiva, il runtime usa come fallback l'ultima sessione `pronto` o `preparazione`.
+- `data_mondo` e il campo unico per date leggibili al tavolo in sessioni, lore capture ed eventi storici.
 - Le note `Prova -` sono collaudi tecnici e non devono guidare il gioco.
 - `Inbox` contiene appunti non canonici, lore da smistare e note live.
 - `Mondi/Timeline` contiene eventi storicizzati.
 - `SRD` e riferimento regolamentare generato, non contenuto canonico del mondo.
+
+## Worldbuilding Engine
+
+- [[Worldbuilder Dashboard]]: Atlante del Mondo, Poteri in Movimento, Relazioni PNG, Timeline Causale e Buchi Di Mondo.
+- [[Mondi/Stato del Mondo]]: vista operativa filtrabile per mondo/campagna su eventi canonici, conseguenze aperte e problemi pratici.
+- [[Mondi/Mondo]]: indice generale del contenuto canonico.
+- [[Mondi/Luoghi/Luoghi]]: archivio luoghi.
+- [[Mondi/Fazioni/Fazioni]] e [[Mondi/Religioni/Religioni]]: poteri politici, sociali e religiosi.
+- [[Mondi/Personaggi/Personaggi]]: PNG, PG e relazioni.
+- [[Mondi/Timeline/Timeline]]: eventi storicizzati e conseguenze.
 
 ## Cartelle Operative
 

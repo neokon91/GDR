@@ -20,13 +20,13 @@ saves: {}
 skillsaves: 
   furtivita: 5
   percezione: 4
-damage_vulnerabilities: 
-damage_resistances: 
-damage_immunities: 
-condition_immunities: 
+damage_vulnerabilities:
+damage_resistances:
+damage_immunities:
+condition_immunities:
 senses: "percezione_passiva: 14, scurovisione: 18 m"
 languages: "Comune (non può parlare in forma di topo)"
-gear: ["balestra a mano"]
+cr: 2
 traits: []
 actions: 
 - name: "Multiattacco"
@@ -51,26 +51,25 @@ iniziativa: 3
 hp: 60
 hit_dice: "11d8 + 11"
 speed: "camminata: 9 m, scalata: 9 m"
-cr: 2
 xp: 450
 bonus_competenza: 2
 statblock: true
 ---
 # Topo mannaro
 
+````tabs
+tab: Scheda
 ```statblock
 monster: Topo mannaro
 ```
-
+tab: Dettagli
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Media o Piccola Mostruosità (licantropo), legale malvagio
 > CA: 13
 > PF: 60 (11d8 + 11)
 > Velocita: camminata: 9 m, scalata: 9 m
 > GS: 2 (PE 450; BC +2)
-
 ## Caratteristiche
-
 | Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
 | --- | --- | --- | --- |
 | Forza | 10 | 0 | 0 |
@@ -79,19 +78,16 @@ monster: Topo mannaro
 | Intelligenza | 11 | 0 | 0 |
 | Saggezza | 10 | 0 | 0 |
 | Carisma | 8 | -1 | -1 |
-
 ## Abilita
 
 furtivita: 5, percezione: 4
-
 ## Sensi
 
 percezione_passiva: 14, scurovisione: 18 m
-
 ## Lingue
 
 Comune (non può parlare in forma di topo)
-
+tab: Azioni
 ## Azioni
 
 ### Multiattacco
@@ -109,6 +105,7 @@ Il topo mannaro effettua due attacchi, usando Graffio o Balestra a mano in quals
 ### Balestra a mano (solo in forma umanoide o ibrida)
 
 *Tiro per colpire a distanza:* +5, portata 9/36 m. *Colpito:* 6 (1d6 + 3) danni perforanti.
+````
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

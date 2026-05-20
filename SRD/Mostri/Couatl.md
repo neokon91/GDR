@@ -20,13 +20,13 @@ saves:
   con: 5
   wis: 7
 skillsaves: {}
-damage_vulnerabilities: 
-damage_resistances: 
-damage_immunities: 
-condition_immunities: 
+damage_vulnerabilities:
+damage_resistances:
+damage_immunities:
+condition_immunities:
 senses: "percezione_passiva: 15, vista_pura: 36 m"
 languages: "tutte, telepatia 36 m"
-gear: []
+cr: 4
 traits: 
 - name: "Mente schermata"
   desc: "I pensieri del couatl non possono essere letti in alcun modo e le altre creature possono comunicare telepaticamente con lui solo se lo permette."
@@ -51,26 +51,25 @@ iniziativa: 5
 hp: 60
 hit_dice: "8d8 + 24"
 speed: "camminata: 9 m, volo: 27 m"
-cr: 4
 xp: 1100
 bonus_competenza: 2
 statblock: true
 ---
 # Couatl
 
+````tabs
+tab: Scheda
 ```statblock
 monster: Couatl
 ```
-
+tab: Dettagli
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Medio Celestiale, legale buono
 > CA: 19
 > PF: 60 (8d8 + 24)
 > Velocita: camminata: 9 m, volo: 27 m
 > GS: 4 (PE 1.100; BC +2)
-
 ## Caratteristiche
-
 | Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
 | --- | --- | --- | --- |
 | Forza | 16 | 3 | 3 |
@@ -79,21 +78,18 @@ monster: Couatl
 | Intelligenza | 18 | 4 | 4 |
 | Saggezza | 20 | 5 | 7 |
 | Carisma | 18 | 4 | 4 |
-
 ## Sensi
 
 percezione_passiva: 15, vista_pura: 36 m
-
 ## Lingue
 
 tutte, telepatia 36 m
-
+tab: Azioni
 ## Tratti
 
 ### Mente schermata
 
 I pensieri del couatl non possono essere letti in alcun modo e le altre creature possono comunicare telepaticamente con lui solo se lo permette.
-
 ## Azioni
 
 ### Morso
@@ -120,6 +116,7 @@ Il couatl lancia uno dei seguenti incantesimi, senza bisogno di componenti, util
 ### Stritolare
 
 *Tiro salvezza su Forza:* CD 15, una creatura di taglia Media o inferiore che il couatl è in grado di vedere entro 1,5 metri. *Fallimento:* 8 (1d6 + 5) danni contundenti. Il bersaglio è afferrato (CD 13 per sfuggire) ed è trattenuto finché la presa perdura.
+````
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

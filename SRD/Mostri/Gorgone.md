@@ -19,13 +19,13 @@ stats: [20, 11, 18, 2, 12, 7]
 saves: {}
 skillsaves: 
   percezione: 7
-damage_vulnerabilities: 
-damage_resistances: 
-damage_immunities: 
-condition_immunities: 
+damage_vulnerabilities:
+damage_resistances:
+damage_immunities:
+condition_immunities:
 senses: "percezione_passiva: 17, scurovisione: 18 m"
 languages: "nessuna"
-gear: []
+cr: 5
 traits: []
 actions: 
 - name: "Trafiggere"
@@ -46,26 +46,25 @@ iniziativa: 0
 hp: 114
 hit_dice: "12d10 + 48"
 speed: "camminata: 12 m"
-cr: 5
 xp: 1800
 bonus_competenza: 3
 statblock: true
 ---
 # Gorgone
 
+````tabs
+tab: Scheda
 ```statblock
 monster: Gorgone
 ```
-
+tab: Dettagli
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Grande Costrutto, senza allineamento
 > CA: 19
 > PF: 114 (12d10 + 48)
 > Velocita: camminata: 12 m
 > GS: 5 (PE 1.800; BC +3)
-
 ## Caratteristiche
-
 | Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
 | --- | --- | --- | --- |
 | Forza | 20 | 5 | 5 |
@@ -74,19 +73,16 @@ monster: Gorgone
 | Intelligenza | 2 | -4 | -4 |
 | Saggezza | 12 | 1 | 1 |
 | Carisma | 7 | -2 | -2 |
-
 ## Abilita
 
 percezione: 7
-
 ## Sensi
 
 percezione_passiva: 17, scurovisione: 18 m
-
 ## Lingue
 
 nessuna
-
+tab: Azioni
 ## Azioni
 
 ### Trafiggere
@@ -96,6 +92,7 @@ nessuna
 ### Soffio pietrificante (ricarica 5-6)
 
 *Tiro salvezza su Costituzione:* CD 15, tutte le creature in un cono di 9 metri. *Primo fallimento:* il bersaglio è trattenuto. Ripete il tiro salvezza al termine del proprio turno successivo se è ancora trattenuto e, se lo supera, l'effetto svanisce. *Secondo fallimento:* il bersaglio è pietrificato invece che trattenuto.
+````
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

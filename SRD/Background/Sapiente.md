@@ -14,9 +14,8 @@ capitolo: "Origini dei personaggi"
 pagine_sorgente: 93
 punteggi_caratteristica: ["Costituzione", "Intelligenza", "Saggezza"]
 talento_origine: "Iniziato alla magia (mago)"
-competenze: 
-  abilita:["Arcano", "Storia"]
-  strumenti: "scorte da calligrafo."
+competenze_abilita: ["Arcano", "Storia"]
+competenze_strumenti: "scorte da calligrafo."
 equipaggiamento_alternativo: "50 mo"
 ---
 # Sapiente

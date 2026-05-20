@@ -16,16 +16,16 @@ tipo_oggetto: "armatura"
 categoria_oggetto: "Pesante"
 costo: "200 mo"
 peso: "30 kg"
-danni: 
+danni:
 proprieta: []
-padronanza: 
+padronanza:
 classe_armatura: "17"
 forza: "For 15"
 furtivita: "Svantaggio"
-velocita: 
-punti_ferita: 
-soglia_danno: 
-valore_in_mo: 
+velocita:
+punti_ferita:
+soglia_danno:
+valore_in_mo:
 ---
 # Corazza a strisce
 

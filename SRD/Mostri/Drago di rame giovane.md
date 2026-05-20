@@ -23,13 +23,13 @@ skillsaves:
   furtivita: 4
   inganno: 5
   percezione: 7
-damage_vulnerabilities: 
-damage_resistances: 
-damage_immunities: 
-condition_immunities: 
+damage_vulnerabilities:
+damage_resistances:
+damage_immunities:
+condition_immunities:
 senses: "percezione_passiva: 17, scurovisione: 36 m, vista_cieca: 9 m"
 languages: "Comune, Draconico"
-gear: []
+cr: 7
 traits: []
 actions: 
 - name: "Multiattacco"
@@ -52,26 +52,25 @@ iniziativa: 4
 hp: 119
 hit_dice: "14d10 + 42"
 speed: "camminata: 12 m, scalata: 12 m, volo: 24 m"
-cr: 7
 xp: 2900
 bonus_competenza: 3
 statblock: true
 ---
 # Drago di rame giovane
 
+````tabs
+tab: Scheda
 ```statblock
 monster: Drago di rame giovane
 ```
-
+tab: Dettagli
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Grande Drago (metallico), caotico buono
 > CA: 17
 > PF: 119 (14d10 + 42)
 > Velocita: camminata: 12 m, scalata: 12 m, volo: 24 m
 > GS: 7 (PE 2.900; BC +3)
-
 ## Caratteristiche
-
 | Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
 | --- | --- | --- | --- |
 | Forza | 19 | 4 | 4 |
@@ -80,19 +79,16 @@ monster: Drago di rame giovane
 | Intelligenza | 16 | 3 | 3 |
 | Saggezza | 13 | 1 | 4 |
 | Carisma | 15 | 2 | 2 |
-
 ## Abilita
 
 furtivita: 4, inganno: 5, percezione: 7
-
 ## Sensi
 
 percezione_passiva: 17, scurovisione: 36 m, vista_cieca: 9 m
-
 ## Lingue
 
 Comune, Draconico
-
+tab: Azioni
 ## Azioni
 
 ### Multiattacco
@@ -110,6 +106,7 @@ Il drago effettua tre attacchi Squarcio. Può sostituire un attacco con un utili
 ### Soffio rallentante
 
 *Tiro salvezza su Costituzione:* CD 14, tutte le creature in un cono di 9 metri. *Fallimento:* il bersaglio non può effettuare reazioni, la sua velocità è dimezzata e nel suo turno può effettuare un'azione o un'azione bonus, non entrambe. L'effetto dura fino al termine del proprio turno successivo.
+````
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

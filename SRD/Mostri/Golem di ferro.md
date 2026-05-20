@@ -18,13 +18,13 @@ ac: 20
 stats: [24, 9, 20, 3, 11, 1]
 saves: {}
 skillsaves: {}
-damage_vulnerabilities: 
-damage_resistances: 
-damage_immunities: 
-condition_immunities: 
+damage_vulnerabilities:
+damage_resistances:
+damage_immunities:
+condition_immunities:
 senses: "percezione_passiva: 10, scurovisione: 36 m"
 languages: "capisce il Comune più altre due lingue ma non le parla"
-gear: []
+cr: 16
 traits: 
 - name: "Assorbimento del fuoco"
   desc: "Ogni volta che il golem subisce danni da fuoco, recupera un numero di punti ferita pari ai danni da fuoco inflitti."
@@ -53,26 +53,25 @@ iniziativa: 9
 hp: 252
 hit_dice: "24d10 + 120"
 speed: "camminata: 9 m"
-cr: 16
 xp: 15000
 bonus_competenza: 5
 statblock: true
 ---
 # Golem di ferro
 
+````tabs
+tab: Scheda
 ```statblock
 monster: Golem di ferro
 ```
-
+tab: Dettagli
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Grande Costrutto, senza allineamento
 > CA: 20
 > PF: 252 (24d10 + 120)
 > Velocita: camminata: 9 m
 > GS: 16 (PE 15.000; BC +5)
-
 ## Caratteristiche
-
 | Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
 | --- | --- | --- | --- |
 | Forza | 24 | 7 | 7 |
@@ -81,15 +80,13 @@ monster: Golem di ferro
 | Intelligenza | 3 | -4 | -4 |
 | Saggezza | 11 | 0 | 0 |
 | Carisma | 1 | -5 | -5 |
-
 ## Sensi
 
 percezione_passiva: 10, scurovisione: 36 m
-
 ## Lingue
 
 capisce il Comune più altre due lingue ma non le parla
-
+tab: Azioni
 ## Tratti
 
 ### Assorbimento del fuoco
@@ -103,7 +100,6 @@ Il golem non può mutare forma.
 ### Resistenza alla magia
 
 Il golem dispone di vantaggio ai tiri salvezza contro incantesimi e altri effetti magici.
-
 ## Azioni
 
 ### Multiattacco
@@ -121,6 +117,7 @@ Il golem effettua due attacchi, usando Braccio affilato o Dardo di fuoco in qual
 ### Soffio di veleno (ricarica 6)
 
 *Tiro salvezza su Costituzione:* CD 18, tutte le creature in un cono di 18 metri. *Fallimento:* 55 (10d10) danni da veleno. *Successo:* danni dimezzati.
+````
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

@@ -20,13 +20,13 @@ saves: {}
 skillsaves: 
   furtivita: 5
   percezione: 4
-damage_vulnerabilities: 
-damage_resistances: 
-damage_immunities: 
-condition_immunities: 
+damage_vulnerabilities:
+damage_resistances:
+damage_immunities:
+condition_immunities:
 senses: "percezione_passiva: 14, scurovisione: 18 m"
 languages: "Elfico, Silvano"
-gear: []
+cr: 1
 traits: 
 - name: "Parlare con bestie e vegetali"
   desc: "La driade può comunicare con le bestie e i vegetali come se condividesse con loro una lingua."
@@ -55,26 +55,25 @@ iniziativa: 1
 hp: 22
 hit_dice: "5d8"
 speed: "camminata: 9 m"
-cr: 1
 xp: 200
 bonus_competenza: 2
 statblock: true
 ---
 # Driade
 
+````tabs
+tab: Scheda
 ```statblock
 monster: Driade
 ```
-
+tab: Dettagli
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Medio Folletto, neutrale
 > CA: 16
 > PF: 22 (5d8)
 > Velocita: camminata: 9 m
 > GS: 1 (PE 200; BC +2)
-
 ## Caratteristiche
-
 | Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
 | --- | --- | --- | --- |
 | Forza | 10 | 0 | 0 |
@@ -83,19 +82,16 @@ monster: Driade
 | Intelligenza | 14 | 2 | 2 |
 | Saggezza | 15 | 2 | 2 |
 | Carisma | 18 | 4 | 4 |
-
 ## Abilita
 
 furtivita: 5, percezione: 4
-
 ## Sensi
 
 percezione_passiva: 14, scurovisione: 18 m
-
 ## Lingue
 
 Elfico, Silvano
-
+tab: Azioni
 ## Tratti
 
 ### Parlare con bestie e vegetali
@@ -105,7 +101,6 @@ La driade può comunicare con le bestie e i vegetali come se condividesse con lo
 ### Resistenza alla magia
 
 La driade dispone di vantaggio ai tiri salvezza contro incantesimi e altri effetti magici.
-
 ## Azioni
 
 ### Multiattacco
@@ -132,6 +127,7 @@ La driade lancia uno dei seguenti incantesimi, senza bisogno di componenti mater
 - amicizia con gli animali
 - artificio druidico
 - charme sui mostri (dura 24 ore; termina in anticipo se la driade lancia nuovamente l'incantesimo)
+````
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

@@ -18,13 +18,13 @@ ac: 13
 stats: [19, 6, 15, 10, 10, 7]
 saves: {}
 skillsaves: {}
-damage_vulnerabilities: 
-damage_resistances: 
-damage_immunities: 
-condition_immunities: 
+damage_vulnerabilities:
+damage_resistances:
+damage_immunities:
+condition_immunities:
 senses: "percezione_passiva: 10"
 languages: "Comune più un'altra lingua"
-gear: []
+cr: 2
 traits: []
 actions: 
 - name: "Schianto"
@@ -41,26 +41,25 @@ iniziativa: -2
 hp: 59
 hit_dice: "7d12 + 14"
 speed: "camminata: 6 m"
-cr: 2
 xp: 450
 bonus_competenza: 2
 statblock: true
 ---
 # Albero risvegliato
 
+````tabs
+tab: Scheda
 ```statblock
 monster: Albero risvegliato
 ```
-
+tab: Dettagli
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Enorme Vegetale, neutrale
 > CA: 13
 > PF: 59 (7d12 + 14)
 > Velocita: camminata: 6 m
 > GS: 2 (PE 450; BC +2)
-
 ## Caratteristiche
-
 | Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
 | --- | --- | --- | --- |
 | Forza | 19 | 4 | 4 |
@@ -69,20 +68,19 @@ monster: Albero risvegliato
 | Intelligenza | 10 | 0 | 0 |
 | Saggezza | 10 | 0 | 0 |
 | Carisma | 7 | -2 | -2 |
-
 ## Sensi
 
 percezione_passiva: 10
-
 ## Lingue
 
 Comune più un'altra lingua
-
+tab: Azioni
 ## Azioni
 
 ### Schianto
 
 *Tiro per colpire in mischia:* +6, portata 3 m. *Colpito:* 14 (3d6 + 4) danni contundenti.
+````
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

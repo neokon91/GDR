@@ -26,6 +26,12 @@ async function missione(tp) {
     const ricompense = await helpers.chooseObjects(tp, "Ricompense", context);
     const pressione = await helpers.promptOptional(tp, "Pressione da 0 a 10", "3") || "3";
     const prossimaMossa = await helpers.promptOptional(tp, "Prossima mossa se ignorata");
+    const scadenzaMondo = await helpers.promptOptional(tp, "Scadenza nel mondo");
+    const indizio = await helpers.promptOptional(tp, "Indizio iniziale");
+    const ostacolo = await helpers.promptOptional(tp, "Ostacolo principale");
+    const conseguenza = await helpers.promptOptional(tp, "Conseguenza se fallisce o viene ignorata");
+    const segreto = await helpers.promptOptional(tp, "Segreto dietro la missione");
+    const domandaAperta = await helpers.promptOptional(tp, "Domanda aperta della missione");
 
     await helpers.moveNote(tp, helpers.path("missioni"), name);
 
@@ -43,12 +49,12 @@ fazioni: ${helpers.inlineYamlList(fazioni)}
 ricompense: ${helpers.inlineYamlList(ricompense)}
 pressione: ${helpers.yamlNumber(pressione) || 3}
 prossima_mossa: ${helpers.yamlQuote(prossimaMossa)}
-domande_aperte: []
-indizi: []
-ostacoli: []
-conseguenze: []
-segreti: []
-scadenza_mondo:
+domande_aperte: ${helpers.inlineYamlTextList([domandaAperta])}
+indizi: ${helpers.inlineYamlTextList([indizio])}
+ostacoli: ${helpers.inlineYamlTextList([ostacolo])}
+conseguenze: ${helpers.inlineYamlTextList([conseguenza])}
+segreti: ${helpers.inlineYamlTextList([segreto])}
+scadenza_mondo: ${helpers.yamlQuote(scadenzaMondo)}
 fc-calendar:
 fc-date:
 fc-category: scadenza

@@ -302,6 +302,93 @@ SORT file.mtime DESC
 LIMIT 12
 ```
 
+## Worldbuilding Operativo
+
+````tabs
+tab: Atlante
+
+### Atlante Del Mondo
+
+```dataviewjs
+const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));
+const current = dv.current();
+const world = gdr.linkKey(current.mondo_attivo);
+const campaigns = new Set(dv.array(current.campagne_attive ?? []).map(gdr.linkKey).array());
+const real = p => gdr.isReal(p) && p.stato !== "archiviata";
+const matchesWorld = p => !world || gdr.linkKey(p.mondo) === world || p.file.path === world;
+const matchesCampaign = p => {
+  if (!campaigns.size) return true;
+  const links = dv.array(p.campagne ?? p.campagna ?? p.campagne_attive ?? []).array();
+  return !links.length || links.some(link => campaigns.has(gdr.linkKey(link)));
+};
+const pages = dv.pages('"Mondi/Luoghi"')
+  .where(p => real(p) && p.file.name !== "Luoghi" && matchesWorld(p) && matchesCampaign(p))
+  .sort(p => `${p.tipo ?? ""}-${p.file.name}`, "asc")
+  .limit(18);
+
+dv.table(
+  ["Luogo", "Tipo", "Mondo", "Padre", "Fazioni", "Pericolo", "Stabilita", "Pressione"],
+  pages.map(p => [p.file.link, p.tipo ?? "", p.mondo ?? "", p.luogo_padre ?? "", p.fazioni ?? [], p.pericolo ?? "", p.stabilita ?? "", p.pressione ?? ""])
+);
+```
+
+tab: Poteri
+
+### Poteri In Movimento
+
+```dataviewjs
+const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));
+const current = dv.current();
+const world = gdr.linkKey(current.mondo_attivo);
+const real = p => gdr.isReal(p) && p.stato !== "archiviata";
+const matchesWorld = p => !world || gdr.linkKey(p.mondo) === world || p.file.path === world;
+const pages = dv.pages('"Mondi/Fazioni" OR "Mondi/Religioni"')
+  .where(p => real(p) && p.file.name !== "Fazioni" && p.file.name !== "Religioni" && matchesWorld(p))
+  .sort(p => Number(p.pressione ?? 0), "desc")
+  .limit(18);
+
+dv.table(
+  ["Potere", "Pressione", "Prossima mossa", "Leader", "Rivali", "Luoghi", "Missioni"],
+  pages.map(p => [p.file.link, p.pressione ?? "", p.prossima_mossa ?? "", p.leader ?? p.divinita ?? [], p.rivali ?? [], p.luoghi ?? [], p.missioni ?? []])
+);
+```
+
+tab: PNG
+
+### Relazioni PNG
+
+```dataviewjs
+const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));
+const current = dv.current();
+const world = gdr.linkKey(current.mondo_attivo);
+const real = p => gdr.isReal(p) && p.stato !== "archiviata";
+const matchesWorld = p => !world || gdr.linkKey(p.mondo) === world || p.file.path === world;
+const pages = dv.pages('"Mondi/Personaggi"')
+  .where(p => real(p) && p.tipo === "png" && matchesWorld(p))
+  .sort(p => p.stato ?? "", "asc")
+  .limit(18);
+
+dv.table(
+  ["PNG", "Luogo", "Fazione", "Atteggiamento", "Relazioni", "Segreti", "Prossima mossa"],
+  pages.map(p => [p.file.link, p.luogo ?? "", p.fazioni ?? [], p.atteggiamento ?? "", p.relazioni ?? [], p.segreto ?? p.segreti ?? "", p.prossima_mossa ?? ""])
+);
+```
+
+tab: Mappa
+
+### Mappa Relazionale
+
+![[Risorse/Mappe/Schema Relazioni GDR.excalidraw]]
+
+```dataview
+TABLE uso, mondo, luogo, stato, file.mtime AS aggiornato
+FROM "Risorse/Mappe"
+WHERE file.name != "Mappe" AND !startswith(file.name, "Prova -") AND (uso = "relazioni" OR uso = "fronte")
+SORT uso ASC, mondo ASC, file.name ASC
+LIMIT 12
+```
+````
+
 ## Pressioni Del Mondo
 
 ```dataview
@@ -322,14 +409,72 @@ SORT data_mondo ASC, file.name ASC
 LIMIT 16
 ```
 
+## Timeline Causale
+
+```dataview
+TABLE data_mondo, causa, conseguenze, luoghi, fazioni, missioni
+FROM "Mondi/Timeline"
+WHERE file.name != "Timeline" AND stato_canonico != "archiviata" AND !startswith(file.name, "Prova -") AND (!this.mondo_attivo OR mondo = this.mondo_attivo)
+SORT data_mondo ASC, file.name ASC
+LIMIT 16
+```
+
 ## Lore Da Canonizzare
 
 ```dataview
-TABLE tipo, stato, stato_canonico, sessioni, collegamenti, impatto
+TABLE tipo, stato, stato_canonico, data_mondo, sessioni, collegamenti, impatto
 FROM "Inbox"
 WHERE categoria = "lore capture" AND stato != "archiviata" AND stato != "ignorata" AND !startswith(file.name, "Prova -") AND (!this.mondo_attivo OR mondo = this.mondo_attivo)
 SORT file.mtime DESC
 LIMIT 12
+```
+
+## Buchi Di Mondo
+
+```dataviewjs
+const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));
+const current = dv.current();
+const world = gdr.linkKey(current.mondo_attivo);
+const real = p => gdr.isReal(p) && p.stato !== "archiviata";
+const has = value => Array.isArray(value) ? value.length > 0 : String(value ?? "").trim().length > 0;
+const hasLinks = value => dv.array(value ?? []).length > 0;
+const matchesWorld = p => !world || gdr.linkKey(p.mondo) === world || p.file.path === world;
+const issueRows = (source, checks) => dv.pages(source)
+  .where(p => real(p) && matchesWorld(p))
+  .array()
+  .flatMap(p => checks.filter(check => check.test(p)).map(check => [p.file.link, check.label, p.stato ?? ""]));
+
+const rows = [
+  ...issueRows('"Mondi"', [
+    { label: "mondo senza tono/tema/fazioni", test: p => p.categoria === "mondo" && (!has(p.tono) || !has(p.tema) || !hasLinks(p.fazioni)) }
+  ]),
+  ...issueRows('"Mondi/Luoghi"', [
+    { label: "luogo pronto senza pericolo", test: p => p.stato === "pronto" && !has(p.pericolo) },
+    { label: "luogo senza fazioni", test: p => !hasLinks(p.fazioni) }
+  ]),
+  ...issueRows('"Mondi/Fazioni" OR "Mondi/Religioni"', [
+    { label: "fazione senza prossima_mossa", test: p => Number(p.pressione ?? 0) > 0 && !has(p.prossima_mossa) },
+    { label: "fazione senza leader o luoghi", test: p => !hasLinks(p.leader) || !hasLinks(p.luoghi) }
+  ]),
+  ...issueRows('"Mondi/Missioni"', [
+    { label: "missione senza fazioni", test: p => !hasLinks(p.fazioni) }
+  ]),
+  ...issueRows('"Mondi/Timeline"', [
+    { label: "evento canonico senza conseguenze", test: p => (p.canonico === true || p.stato_canonico === "canonico") && !hasLinks(p.conseguenze) }
+  ]),
+  ...issueRows('"Mondi/Personaggi"', [
+    { label: "PNG in gioco senza luogo/fazione", test: p => p.tipo === "png" && p.stato === "in gioco" && (!has(p.luogo) || !hasLinks(p.fazioni)) }
+  ]),
+  ...issueRows('"Inbox"', [
+    { label: "lore da smistare o non collegata", test: p => p.categoria === "lore capture" && (p.stato === "da smistare" || !hasLinks(p.collegamenti)) }
+  ])
+].slice(0, 20);
+
+if (!rows.length) {
+  dv.paragraph("Nessun buco pratico evidente con i filtri correnti.");
+} else {
+  dv.table(["Nota", "Problema", "Stato"], rows);
+}
 ```
 
 ## Stato Canonico

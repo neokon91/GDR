@@ -16,16 +16,16 @@ tipo_oggetto: "veicolo_da_tiro"
 categoria_oggetto: "Finimenti e veicoli da tiro"
 costo: "250 mo"
 peso: "50 kg"
-danni: 
+danni:
 proprieta: []
-padronanza: 
-classe_armatura: 
-forza: 
-furtivita: 
-velocita: 
-punti_ferita: 
-soglia_danno: 
-valore_in_mo: 
+padronanza:
+classe_armatura:
+forza:
+furtivita:
+velocita:
+punti_ferita:
+soglia_danno:
+valore_in_mo:
 ---
 # Biga
 

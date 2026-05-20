@@ -19,13 +19,13 @@ stats: [6, 14, 12, 5, 12, 6]
 saves: {}
 skillsaves: 
   percezione: 5
-damage_vulnerabilities: 
-damage_resistances: 
-damage_immunities: 
-condition_immunities: 
+damage_vulnerabilities:
+damage_resistances:
+damage_immunities:
+condition_immunities:
 senses: "percezione_passiva: 15"
 languages: "nessuna"
-gear: []
+cr: 0.25
 traits: 
 - name: "Sciame"
   desc: "Lo stormo può occupare lo spazio di un'altra creatura e viceversa, e può muoversi attraverso qualsiasi apertura abbastanza grande per un corvo Minuscolo. L'orda non può recuperare punti ferita o ottenere punti ferita temporanei."
@@ -46,26 +46,25 @@ iniziativa: 2
 hp: 11
 hit_dice: "2d8 + 2"
 speed: "camminata: 3 m, volo: 15 m"
-cr: 0.25
 xp: 50
 bonus_competenza: 2
 statblock: true
 ---
 # Stormo di corvi
 
+````tabs
+tab: Scheda
 ```statblock
 monster: Stormo di corvi
 ```
-
+tab: Dettagli
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Medio Sciame, senza allineamento
 > CA: 12
 > PF: 11 (2d8 + 2)
 > Velocita: camminata: 3 m, volo: 15 m
 > GS: 1/4 (PE 50; BC +2)
-
 ## Caratteristiche
-
 | Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
 | --- | --- | --- | --- |
 | Forza | 6 | -2 | -2 |
@@ -74,25 +73,21 @@ monster: Stormo di corvi
 | Intelligenza | 5 | -3 | -3 |
 | Saggezza | 12 | 1 | 1 |
 | Carisma | 6 | -2 | -2 |
-
 ## Abilita
 
 percezione: 5
-
 ## Sensi
 
 percezione_passiva: 15
-
 ## Lingue
 
 nessuna
-
+tab: Azioni
 ## Tratti
 
 ### Sciame
 
 Lo stormo può occupare lo spazio di un'altra creatura e viceversa, e può muoversi attraverso qualsiasi apertura abbastanza grande per un corvo Minuscolo. L'orda non può recuperare punti ferita o ottenere punti ferita temporanei.
-
 ## Azioni
 
 ### Becchi
@@ -102,6 +97,7 @@ Lo stormo può occupare lo spazio di un'altra creatura e viceversa, e può muove
 ### Cacofonia (ricarica 6)
 
 *Tiro salvezza su Saggezza:* CD 10, una creatura nello spazio dello stormo. *Fallimento:* il bersaglio è assordato fino all'inizio del turno successivo dello stormo. Quando è assordato, il bersaglio subisce svantaggio alle prove di caratteristica e ai tiri per colpire.
+````
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

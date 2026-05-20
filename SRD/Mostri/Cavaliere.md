@@ -20,13 +20,13 @@ saves:
   con: 4
   wis: 2
 skillsaves: {}
-damage_vulnerabilities: 
-damage_resistances: 
-damage_immunities: 
-condition_immunities: 
+damage_vulnerabilities:
+damage_resistances:
+damage_immunities:
+condition_immunities:
 senses: "percezione_passiva: 10"
 languages: "Comune più un'altra lingua"
-gear: ["armatura a piastre", "balestra pesante", "spadone"]
+cr: 3
 traits: []
 actions: 
 - name: "Multiattacco"
@@ -49,26 +49,25 @@ iniziativa: 0
 hp: 52
 hit_dice: "8d8 + 16"
 speed: "camminata: 9 m"
-cr: 3
 xp: 700
 bonus_competenza: 2
 statblock: true
 ---
 # Cavaliere
 
+````tabs
+tab: Scheda
 ```statblock
 monster: Cavaliere
 ```
-
+tab: Dettagli
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Medio o Piccolo Umanoide, neutrale
 > CA: 18
 > PF: 52 (8d8 + 16)
 > Velocita: camminata: 9 m
 > GS: 3 (PE 700; BC +2)
-
 ## Caratteristiche
-
 | Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
 | --- | --- | --- | --- |
 | Forza | 16 | 3 | 3 |
@@ -77,15 +76,13 @@ monster: Cavaliere
 | Intelligenza | 11 | 0 | 0 |
 | Saggezza | 11 | 0 | 2 |
 | Carisma | 15 | 2 | 2 |
-
 ## Sensi
 
 percezione_passiva: 10
-
 ## Lingue
 
 Comune più un'altra lingua
-
+tab: Azioni
 ## Azioni
 
 ### Multiattacco
@@ -99,6 +96,7 @@ Il cavaliere effettua due attacchi, usando Spadone o Balestra pesante in qualsia
 ### Balestra pesante
 
 *Tiro per colpire a distanza:* +2, gittata 30/120 m. *Colpito:* 11 (2d10) danni perforanti più 4 (1d8) danni radiosi.
+````
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

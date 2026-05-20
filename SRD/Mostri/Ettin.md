@@ -19,13 +19,13 @@ stats: [21, 8, 17, 6, 10, 8]
 saves: {}
 skillsaves: 
   percezione: 4
-damage_vulnerabilities: 
-damage_resistances: 
-damage_immunities: 
-condition_immunities: 
+damage_vulnerabilities:
+damage_resistances:
+damage_immunities:
+condition_immunities:
 senses: "percezione_passiva: 14, scurovisione: 18 m"
 languages: "Gigante"
-gear: ["ascia da battaglia", "mazza chiodata"]
+cr: 4
 traits: []
 actions: 
 - name: "Ascia da battaglia"
@@ -46,26 +46,25 @@ iniziativa: -1
 hp: 85
 hit_dice: "10d10 + 30"
 speed: "camminata: 12 m"
-cr: 4
 xp: 1100
 bonus_competenza: 2
 statblock: true
 ---
 # Ettin
 
+````tabs
+tab: Scheda
 ```statblock
 monster: Ettin
 ```
-
+tab: Dettagli
 > [!infobox|wiki]- Mostro SRD
 > Tipo: Grande Gigante, caotico malvagio
 > CA: 12
 > PF: 85 (10d10 + 30)
 > Velocita: camminata: 12 m
 > GS: 4 (PE 1.100; BC +2)
-
 ## Caratteristiche
-
 | Caratteristica | Punteggio | Modificatore | Tiro Salvezza |
 | --- | --- | --- | --- |
 | Forza | 21 | 5 | 5 |
@@ -74,19 +73,16 @@ monster: Ettin
 | Intelligenza | 6 | -2 | -2 |
 | Saggezza | 10 | 0 | 0 |
 | Carisma | 8 | -1 | -1 |
-
 ## Abilita
 
 percezione: 4
-
 ## Sensi
 
 percezione_passiva: 14, scurovisione: 18 m
-
 ## Lingue
 
 Gigante
-
+tab: Azioni
 ## Azioni
 
 ### Ascia da battaglia
@@ -100,6 +96,7 @@ Gigante
 ### Multiattacco
 
 L'ettin effettua un attacco Ascia da battaglia e un attacco Mazza chiodata.
+````
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.
