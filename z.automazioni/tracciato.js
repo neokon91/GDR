@@ -34,6 +34,7 @@ async function tracciato(tp) {
 id: ${id}
 nome: ${helpers.yamlQuote(name)}
 categoria: tracciato
+fileClass: tracciato
 tipo: ${selectedType?.id ?? "clock"}
 stato: attivo
 mondo: ${mondo}

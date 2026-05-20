@@ -2,6 +2,7 @@
 id: demo-recuperare-i-frammenti
 nome: "Demo - Recuperare i Frammenti"
 categoria: missione
+fileClass: missione
 tipo: mistero
 stato: accettata
 mondo: [[Demo - Terre della Soglia]]

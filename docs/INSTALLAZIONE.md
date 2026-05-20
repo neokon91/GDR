@@ -16,6 +16,12 @@
 - Poi apri `Risorse/Se Qualcosa Non Funziona`.
 - Se stai usando il repository GitHub invece dello ZIP release, assicurati di avere anche `.obsidian/plugins`.
 
+## ZIP Release E Repository
+
+Per giocare, usa lo ZIP della release: contiene il vault pulito, la demo e i plugin previsti dal percorso supportato.
+
+Il repository GitHub serve a sviluppo, issue, script e documentazione tecnica. Se cloni il repository, potresti vedere file di manutenzione che non sono necessari a un DM.
+
 ## Comandi Utili Per Chi Mantiene Il Vault
 
 ```bash
@@ -24,3 +30,5 @@ npm run release:clean
 ```
 
 `npm run release:clean` genera una copia consegnabile per utenti in `dist/vault-gdr-clean` e, se disponibile, `dist/vault-gdr-clean.zip`.
+
+Prima di pubblicare in community, usa anche [PUBBLICAZIONE_COMMUNITY.md](PUBBLICAZIONE_COMMUNITY.md).

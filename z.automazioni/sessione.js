@@ -41,6 +41,7 @@ nome: ${helpers.yamlQuote(titolo)}
 cssclasses:
   - tavolo
 categoria: sessione
+fileClass: sessione
 tipo: ${selectedType?.id ?? ""}
 data: ${data}
 data_mondo:

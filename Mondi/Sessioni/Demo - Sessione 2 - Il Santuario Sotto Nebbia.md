@@ -4,6 +4,7 @@ nome: "Demo - Sessione 2 - Il Santuario Sotto Nebbia"
 cssclasses:
   - tavolo
 categoria: sessione
+fileClass: sessione
 tipo: sessione di campagna
 data:
 data_mondo: "Seconda notte di nebbia"

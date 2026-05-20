@@ -11,6 +11,14 @@ stato: pronto
 Clock e progress track usati per fronti, missioni, rituali, minacce e viaggi. Sono note Markdown autonome: funzionano con Dataview e Meta Bind, senza Iron Vault.
 
 ```meta-bind-button
+label: Come Usare I Clock
+style: primary
+actions:
+  - type: open
+    link: "[[Risorse/Come Usare I Clock]]"
+```
+
+```meta-bind-button
 label: Nuovo Clock O Tracciato
 style: primary
 actions:

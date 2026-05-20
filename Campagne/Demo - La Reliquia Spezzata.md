@@ -18,6 +18,12 @@ fazioni:
 sessioni:
   - [[Demo - Sessione 1 - La Campana Senza Vento]]
   - [[Demo - Sessione 2 - Il Santuario Sotto Nebbia]]
+missioni:
+  - [[Demo - Recuperare i Frammenti]]
+tracciati:
+  - [[Demo - I Custodi Chiudono il Ponte]]
+  - [[Demo - La Soglia Si Apre]]
+  - [[Demo - Attraversare Brumafonda]]
 ---
 
 # Demo - La Reliquia Spezzata
@@ -30,4 +36,12 @@ sessioni:
 
 ## Uso Della Demo
 
-Questa campagna serve a vedere il vault in azione: dashboard, sessioni, PNG, luoghi, fazioni, missioni, incontri, oggetti e dispense sono gia collegati.
+Questa campagna serve a vedere il vault in azione: dashboard, sessioni, PNG, luoghi, fazioni, missioni, tracciati, incontri, oggetti e dispense sono gia collegati.
+
+## Percorso End-To-End
+
+1. Apri [[Durante il Gioco]]: la seconda sessione e attiva e mostra missione, materiali e clock.
+2. Apri [[Demo - I Custodi Chiudono il Ponte]]: il clock mostra una pressione quasi pronta a scattare.
+3. Apri [[Demo - La Nebbia Ha Preso il Ponte]]: la conseguenza e gia canonizzata e collegata.
+4. Apri [[Demo - La Seconda Nebbia]]: l'evento storico mostra cosa e diventato vero nella timeline.
+5. Apri [[Mondi/Stato del Mondo]]: Stato Campagna riassume missione aperta, clock attivi, PNG e conseguenze.

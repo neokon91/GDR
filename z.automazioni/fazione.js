@@ -40,6 +40,7 @@ async function fazione(tp, routeOptions = {}) {
 id: ${id}
 nome: ${helpers.yamlQuote(name)}
 categoria: fazione
+fileClass: fazione
 tipo: ${selectedType?.id ?? ""}
 stato: bozza
 canonico: false

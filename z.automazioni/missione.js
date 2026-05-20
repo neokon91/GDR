@@ -40,6 +40,7 @@ async function missione(tp) {
 id: ${id}
 nome: ${helpers.yamlQuote(name)}
 categoria: missione
+fileClass: missione
 tipo: ${selectedType?.id ?? ""}
 stato: proposta
 mondo: ${mondo}

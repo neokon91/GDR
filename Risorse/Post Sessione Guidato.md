@@ -70,7 +70,49 @@ SORT file.ctime DESC
 LIMIT 12
 ```
 
-## 4. Aggiorna Pressioni
+## 4. Percorso Conseguenza
+
+Usa questa sequenza per non perdere continuita.
+
+| Passo | Azione |
+| --- | --- |
+| Appunto live | Apri la nota in [[Inbox/Inbox]] e decidi se e canonica. |
+| Conseguenza | Se cambia il mondo, crea o aggiorna una nota `Conseguenza`. |
+| Evento storico | Se e successo davvero, crea o aggiorna una nota in [[Mondi/Timeline/Timeline]]. |
+| Tracciato | Se produce pressione futura, crea o aggiorna un clock in [[Mondi/Tracciati/Tracciati]]. |
+| Stato Campagna | Riapri [[Mondi/Stato del Mondo]] e controlla che compaia nella vista operativa. |
+
+```meta-bind-button
+label: Nuova Conseguenza
+style: primary
+actions:
+  - type: templaterCreateNote
+    templateFile: "z.modelli/Live Conseguenza.md"
+    folderPath: "Inbox"
+    open: true
+```
+
+```meta-bind-button
+label: Nuovo Evento Storico
+style: primary
+actions:
+  - type: templaterCreateNote
+    templateFile: "z.modelli/Evento Storico.md"
+    folderPath: "Mondi/Timeline"
+    open: true
+```
+
+```meta-bind-button
+label: Nuovo Clock
+style: primary
+actions:
+  - type: templaterCreateNote
+    templateFile: "z.modelli/dm/Tracciato.md"
+    folderPath: "Mondi/Tracciati"
+    open: true
+```
+
+## 5. Aggiorna Pressioni
 
 ```dataview
 TABLE categoria, tipo, stato, progress_value, progress_max, pressione, prossima_mossa
@@ -80,7 +122,7 @@ SORT pressione DESC, progress_value DESC
 LIMIT 12
 ```
 
-## 5. Sessioni Attive
+## 6. Sessioni Attive
 
 ```dataview
 TABLE data, data_mondo, stato, campagne
@@ -96,7 +138,7 @@ Quando hai finito:
 - scegli o crea la prossima sessione;
 - metti `attiva: true` solo sulla prossima sessione.
 
-## 6. Cosa Preparare Dopo
+## 7. Cosa Preparare Dopo
 
 ```dataview
 TABLE stato, pressione, scadenza_mondo, prossima_mossa
@@ -106,7 +148,7 @@ SORT pressione DESC, scadenza_mondo ASC
 LIMIT 8
 ```
 
-## 7. Chiusura Rapida
+## 8. Chiusura Rapida
 
 - [ ] Appunti live smistati o lasciati in [[Inbox/Inbox]] con un nome chiaro.
 - [ ] Conseguenze importanti aggiunte a mondo, PNG, luoghi, fazioni, missioni o tracciati.

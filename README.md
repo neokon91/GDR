@@ -83,6 +83,7 @@ Se dashboard, pulsanti o tabelle non funzionano, apri [[Risorse/Primo Avvio Stru
 - Nelle schede lunghe, guarda prima il riquadro in alto: tab e callout chiusi servono a tenere separati dettagli, segreti, materiali e post-sessione.
 - Usa Inbox Live per catturare eventi, conseguenze, PNG improvvisati, luoghi improvvisati e note grezze senza interrompere il gioco.
 - Usa `Nuovo Clock` per creare un tracciato quando una pressione deve avanzare a segmenti invece di restare una nota testuale.
+- Apri [[Risorse/Come Usare I Clock]] se vuoi tre esempi pratici: minaccia, viaggio e rituale.
 - Mantieni `SRD` separato dal contenuto canonico: e riferimento regolamentare, non ambientazione.
 
 ## Manutenzione Leggera
@@ -102,6 +103,7 @@ Se dashboard, pulsanti o tabelle non funzionano, apri [[Risorse/Primo Avvio Stru
 - Installazione: [docs/INSTALLAZIONE.md](docs/INSTALLAZIONE.md).
 - Matrice strumenti: [docs/STRUMENTI.md](docs/STRUMENTI.md).
 - Completamento plugin per release ZIP: [docs/COMPLETAMENTO_PLUGIN.md](docs/COMPLETAMENTO_PLUGIN.md).
+- Pubblicazione community: [docs/PUBBLICAZIONE_COMMUNITY.md](docs/PUBBLICAZIONE_COMMUNITY.md).
 - Contribuire: [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Demo

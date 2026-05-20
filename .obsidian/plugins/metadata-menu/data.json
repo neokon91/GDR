@@ -3,7 +3,7 @@
   "fileClassQueries": [],
   "displayFieldsInContextMenu": true,
   "globallyIgnoredFields": [],
-  "classFilesPath": null,
+  "classFilesPath": "z.fileclass/",
   "isAutosuggestEnabled": true,
   "fileClassAlias": "fileClass",
   "settingsVersion": "5.0",
@@ -22,6 +22,7 @@
     "SRD",
     "z.automazioni",
     "z.bacheche",
+    "z.fileclass",
     "z.modelli"
   ],
   "showIndexingStatusInStatusBar": false,
@@ -29,6 +30,7 @@
     "SRD",
     "z.automazioni",
     "z.bacheche",
+    "z.fileclass",
     "z.modelli"
   ],
   "fileIndexingExcludedExtensions": [

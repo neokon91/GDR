@@ -2,6 +2,7 @@
 id: demo-i-custodi-chiudono-il-ponte
 nome: "Demo - I Custodi Chiudono il Ponte"
 categoria: tracciato
+fileClass: tracciato
 tipo: clock
 stato: attivo
 mondo: [[Demo - Terre della Soglia]]

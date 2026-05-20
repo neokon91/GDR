@@ -43,6 +43,7 @@ statblock: true
 name: ${helpers.yamlQuote(name)}
 nome: ${helpers.yamlQuote(name)}
 categoria: personaggio
+fileClass: png
 tipo: png
 ruolo: ${helpers.yamlQuote(role)}
 stato: ${stato?.id ?? "bozza"}

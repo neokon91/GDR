@@ -54,6 +54,7 @@ async function luogo(tp, routeOptions = {}){
 id: ${id}
 nome: ${helpers.yamlQuote(name)}
 categoria: luogo
+fileClass: luogo
 famiglia_luogo: ${route.category ?? ""}
 tipo: ${selectedType?.id ?? ""}
 sottotipo: ${selectedType?.id ?? ""}

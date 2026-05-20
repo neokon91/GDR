@@ -2,6 +2,7 @@
 id: demo-custodi-della-soglia
 nome: "Demo - Custodi della Soglia"
 categoria: fazione
+fileClass: fazione
 tipo: ordine rituale
 stato: ostile
 canonico: true

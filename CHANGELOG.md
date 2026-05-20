@@ -8,6 +8,9 @@
 - Template e automazione `Tracciato` per fronti, missioni, rituali, minacce, viaggi e progetti.
 - Tracciati demo collegati a [[Demo - La Reliquia Spezzata]].
 - Pulsanti rapidi per avanzare, ridurre o completare un tracciato.
+- FileClass Metadata Menu per `sessione`, `missione`, `tracciato`, `png`, `luogo` e `fazione`.
+- [[Risorse/Come Usare I Clock]] con esempi per minaccia, viaggio e rituale.
+- [docs/PUBBLICAZIONE_COMMUNITY.md](docs/PUBBLICAZIONE_COMMUNITY.md) per separare release ZIP e pubblicazione community.
 
 ### Migliorato
 
@@ -16,6 +19,7 @@
 - [[Risorse/Post Sessione Guidato]] include lavorazione appunti, clock mossi, PNG fuori scena e aggiornamento pressioni.
 - Template sessione e missione collegano i tracciati e mostrano avanzamento visibile.
 - Il controllo vault segnala missioni/fazioni ad alta pressione senza tracciato e tracciati vicini al completamento senza conseguenze.
+- [[Demo - La Reliquia Spezzata]] ora include un percorso end-to-end: sessione attiva, clock, conseguenza, timeline e Stato Campagna.
 
 ## 0.8.0 - 2026-05-20
 

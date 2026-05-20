@@ -2,6 +2,7 @@
 id: demo-attraversare-brumafonda
 nome: "Demo - Attraversare Brumafonda"
 categoria: tracciato
+fileClass: tracciato
 tipo: viaggio
 stato: attivo
 mondo: [[Demo - Terre della Soglia]]

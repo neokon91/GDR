@@ -26,6 +26,7 @@ Questa pagina raccoglie guide e materiali riutilizzabili. Se vuoi preparare o gi
 | [[Risorse/Preparazione Sessione]] | Prima di una sessione. |
 | [[Durante il Gioco]] | Durante la partita. |
 | [[Risorse/Post Sessione Guidato]] | Subito dopo la partita. |
+| [[Risorse/Come Usare I Clock]] | Quando vuoi usare clock per minacce, viaggi o rituali. |
 | [[Risorse/Tabelle/Tabelle]] | Quando serve improvvisare con tiri e tabelle. |
 | [[Inbox/Inbox]] | Quando devi smistare idee grezze. |
 | [[Risorse/FAQ]] | Quando hai un dubbio d'uso. |

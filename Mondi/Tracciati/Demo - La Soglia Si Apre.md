@@ -2,6 +2,7 @@
 id: demo-la-soglia-si-apre
 nome: "Demo - La Soglia Si Apre"
 categoria: tracciato
+fileClass: tracciato
 tipo: minaccia
 stato: attivo
 mondo: [[Demo - Terre della Soglia]]

@@ -60,6 +60,8 @@ Usa **Poteri In Movimento** per leggere chi sta agendo: pressione, prossima moss
 
 Usa **Clock E Progress Track Attivi** in [[Mondi/Stato del Mondo]] per vedere cosa sta per scattare. Un tracciato utile ha un innesco chiaro, una posta, una prossima mossa e almeno un collegamento a missione, fazione o luogo.
 
+Apri [[Risorse/Come Usare I Clock]] quando vuoi decidere se una pressione merita davvero un tracciato.
+
 Usa **Buchi Di Mondo** come lista pratica di manutenzione: mondi senza tono o fazioni, luoghi pronti senza pericolo, missioni senza fazioni, PNG in gioco senza luogo o relazione, eventi canonici senza conseguenze e lore da smistare.
 
 La **Timeline Causale** serve a distinguere:

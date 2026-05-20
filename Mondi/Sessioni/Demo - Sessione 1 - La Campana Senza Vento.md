@@ -4,6 +4,7 @@ nome: "Demo - Sessione 1 - La Campana Senza Vento"
 cssclasses:
   - tavolo
 categoria: sessione
+fileClass: sessione
 tipo: sessione di campagna
 data: 2026-05-19
 data_mondo: "Prima notte di nebbia"
