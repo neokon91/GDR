@@ -15,7 +15,6 @@ fc-display-name: "Sessione 2"
 fc-end:
 stato: in corso
 attiva: true
-pubblico: true
 mondo: "[[Demo - Terre della Soglia]]"
 campagne:
   - "[[Demo - La Reliquia Spezzata]]"

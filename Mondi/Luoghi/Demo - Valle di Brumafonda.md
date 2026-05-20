@@ -7,7 +7,6 @@ tipologia: valle
 bioma: colline e boschi umidi
 stato: pronto
 canonico: true
-pubblico: true
 player_safe: "Una valle di ponti, campane votive e nebbia notturna dove ogni sentiero sembra ricordare una promessa."
 mondo: "[[Demo - Terre della Soglia]]"
 luogo_padre:
@@ -26,7 +25,6 @@ risorse_strategiche:
 problemi:
   - nebbia notturna
   - campane che suonano da sole
-prossima_mossa: "Il coprifuoco dei Custodi divide i villaggi della valle tra obbedienza e resistenza."
 mappe:
   - "[[Demo - Mappa Zoomabile]]"
   - "[[Demo - Mappa Zoomabile Giocatori]]"
@@ -39,3 +37,6 @@ mappe:
 
 > [!pericolo] Pressione
 > Ogni notte una nuova casa si sveglia con impronte bagnate sulla soglia.
+
+> [!segreto]- Prossima mossa
+> Il coprifuoco dei Custodi divide i villaggi della valle tra obbedienza e resistenza.
