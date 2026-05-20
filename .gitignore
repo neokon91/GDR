@@ -14,3 +14,7 @@ Thumbs.db
 
 # Generated release packages
 dist/
+
+# Generated Obsidian templates
+z.modelli/**/*.md
+z.modelli/.templatefactory-manifest.json

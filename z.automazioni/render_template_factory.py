@@ -5,7 +5,6 @@ from __future__ import annotations
 import argparse
 import json
 import re
-import shutil
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -86,7 +85,11 @@ def validate_rendered(name: str, rendered: str) -> list[str]:
 
 def write_rendered(output_dir: Path, rendered_by_name: dict[str, str], clean: bool) -> None:
     if clean and output_dir.exists():
-        shutil.rmtree(output_dir)
+        for path in output_dir.glob("*.preview.md"):
+            path.unlink()
+        manifest_path = output_dir / "manifest.json"
+        if manifest_path.exists():
+            manifest_path.unlink()
     output_dir.mkdir(parents=True, exist_ok=True)
 
     manifest = {
@@ -111,10 +114,56 @@ def write_rendered(output_dir: Path, rendered_by_name: dict[str, str], clean: bo
     )
 
 
+def materialized_targets(name: str, blueprint: dict) -> list[Path]:
+    output = blueprint.get("output", {})
+    folder = output.get("folder")
+    files = output.get("files") or []
+    if not folder:
+        raise ValueError(f"{name}: output.folder mancante")
+    if not files:
+        raise ValueError(f"{name}: output.files mancante")
+
+    base = (ROOT / str(folder)).resolve()
+    targets: list[Path] = []
+    for file_name in files:
+        target = (base / str(file_name)).resolve()
+        if not target.is_relative_to(ROOT):
+            raise ValueError(f"{name}: output fuori repository ({target})")
+        targets.append(target)
+    return targets
+
+
+def write_materialized(rendered_by_name: dict[str, str], blueprints: dict[str, dict]) -> None:
+    manifest = {
+        "generated_at": datetime.now(timezone.utc).isoformat(),
+        "source": "Dev/TemplateFactory",
+        "mode": "materialized",
+        "files": [],
+    }
+
+    for name, rendered in sorted(rendered_by_name.items()):
+        for target in materialized_targets(name, blueprints[name]):
+            target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_text(rendered, encoding="utf-8")
+            manifest["files"].append({
+                "blueprint": name,
+                "path": str(target.relative_to(ROOT)),
+                "bytes": len(rendered.encode("utf-8")),
+            })
+
+    manifest_path = ROOT / "z.modelli" / ".templatefactory-manifest.json"
+    manifest_path.parent.mkdir(parents=True, exist_ok=True)
+    manifest_path.write_text(
+        json.dumps(manifest, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Renderizza anteprime TemplateFactory da YAML/Jinja.")
     parser.add_argument("--output", default=str(DEFAULT_OUTPUT), help="Cartella output preview.")
     parser.add_argument("--no-clean", action="store_true", help="Non pulire la cartella output prima di scrivere.")
+    parser.add_argument("--materialize", action="store_true", help="Scrive gli output generati in z.modelli.")
     args = parser.parse_args()
 
     modules = load_modules()
@@ -144,7 +193,11 @@ def main() -> int:
     if not output_dir.is_absolute():
         output_dir = ROOT / output_dir
     write_rendered(output_dir, rendered_by_name, clean=not args.no_clean)
-    print(f"TemplateFactory render OK: {len(rendered_by_name)} preview in {output_dir.relative_to(ROOT)}.")
+    message = f"TemplateFactory render OK: {len(rendered_by_name)} preview in {output_dir.relative_to(ROOT)}"
+    if args.materialize:
+        write_materialized(rendered_by_name, blueprints)
+        message += " e output materializzati in z.modelli"
+    print(f"{message}.")
     return 0
 
 

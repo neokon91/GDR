@@ -120,6 +120,56 @@
     })).join("");
   }
 
+  function referencesPage(dv, page, target, fields) {
+    const targetKeys = new Set([target?.file?.path, target?.file?.name, linkKey(target?.file?.link)].filter(Boolean));
+    return fields.some(field => dv.array(page?.[field] ?? [])
+      .some(link => targetKeys.has(linkKey(link)) || targetKeys.has(link?.path) || targetKeys.has(String(link ?? ""))));
+  }
+
+  function renderWorldImpact(dv, source = null) {
+    const page = source ?? dv.current();
+    const directRows = [
+      ["Prossima mossa", page.prossima_mossa, "Scrivi cosa accade se nessuno interviene."],
+      ["Conseguenza potenziale", page.conseguenza_potenziale, "Definisci cosa cambia nel mondo."],
+      ["Entita impattate", page.entita_impattate, "Collega almeno una nota che subisce l'effetto."],
+      ["Propaga a", page.propaga_a, "Collega dove arriva l'onda lunga."],
+      ["Connessioni vive", page.connessioni, "Collega note operative, non solo archivio."],
+      ["Sessioni", page.sessioni, "Collega quando e entrata o entrera al tavolo."]
+    ];
+
+    const grid = dv.el("div", "", { cls: "gdr-card-grid compact" });
+    grid.innerHTML = directRows.map(([title, value, fallback]) => cardHtml({
+      title,
+      body: fieldText(value) || fallback,
+      cls: `gdr-info-card compact ${fieldText(value) ? "gdr-kind-ready" : "gdr-kind-missing"}`
+    })).join("");
+
+    const incomingFields = ["connessioni", "entita_impattate", "propaga_a", "missioni", "tracciati", "luoghi", "fazioni", "personaggi"];
+    const incoming = dv.pages('"Mondi"')
+      .where(p => isReal(p) && p.file.path !== page.file.path && referencesPage(dv, p, page, incomingFields))
+      .sort(p => Number(p.pressione ?? p.pericolo ?? 0), "desc")
+      .limit(8)
+      .array();
+
+    if (!incoming.length) {
+      dv.paragraph("Nessuna nota sta ancora reagendo a questa. Collega entita impattate, propagazione o connessioni vive.");
+      return;
+    }
+
+    renderCardGrid(dv, incoming, p => cardHtml({
+      title: pageTitle(p),
+      meta: [p.categoria ?? p.tipo, p.stato].filter(Boolean).join(" · "),
+      azione: fieldText(p.prossima_mossa ?? p.uso_al_tavolo ?? p.gancio) || "Apri la nota e definisci la reazione.",
+      importa: fieldText(p.entita_impattate ?? p.propaga_a ?? p.connessioni) || "Questa nota punta alla nota corrente.",
+      link: p.file.path,
+      badge: "Reazione",
+      cls: cardClass(p)
+    }), {
+      title: "Nessuna reazione collegata",
+      action: "Collega questa nota da missioni, fazioni, luoghi o conseguenze."
+    });
+  }
+
   function mapCard(page, options = {}) {
     const show = fieldText(page.player_safe ?? page.cosa_mostrare ?? page.luoghi ?? page.luogo) || "Mostra solo i luoghi e i riferimenti gia sicuri.";
     const hide = page.pubblico === true
@@ -493,6 +543,7 @@
     renderPlayerView,
     renderPublicSafety,
     renderPublicStats,
+    renderWorldImpact,
     renderSessionMapCards,
     renderTableCockpit
   };

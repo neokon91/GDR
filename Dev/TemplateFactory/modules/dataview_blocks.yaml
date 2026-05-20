@@ -44,6 +44,21 @@ blocks:
       | Scelta |  |
       | Pressione |  |
       | Materiale pronto |  |
+  world_impact:
+    type: dataviewjs
+    use_for:
+      - world_entity
+      - propagation
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      gdr.renderWorldImpact(dv);
+    fallback: |-
+      | Blocco | Valore |
+      | --- | --- |
+      | Prossima mossa |  |
+      | Conseguenza potenziale |  |
+      | Entita impattate |  |
+      | Propaga a |  |
   pressure_list:
     type: dataviewjs
     use_for:

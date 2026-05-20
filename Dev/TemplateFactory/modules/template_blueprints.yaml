@@ -37,6 +37,8 @@ blueprints:
       - bases
     output:
       folder: z.modelli/worldbuilding
+      files:
+        - Entita Worldbuilding.md
       fallback: markdown_sections
     comparison_targets:
       - z.modelli/worldbuilding/Entita Worldbuilding.md
@@ -83,6 +85,8 @@ blueprints:
       - media_extended
     output:
       folder: z.modelli/dm
+      files:
+        - Sessione.md
       fallback: markdown_checklist
     comparison_targets:
       - z.modelli/dm/Sessione.md
@@ -119,6 +123,9 @@ blueprints:
       - dataview
     output:
       folder: z.modelli/mappe
+      files:
+        - Mappa Zoom.md
+        - Mappa Excalidraw Fronti.excalidraw.md
       fallback: markdown_marker_table
     comparison_targets:
       - z.modelli/mappe/Mappa Zoom.md
@@ -161,6 +168,9 @@ blueprints:
       - callout_manager
     output:
       folder: z.modelli/dm
+      files:
+        - Incontro.md
+        - ../Creatura.md
       fallback: markdown_encounter_table
     comparison_targets:
       - z.modelli/dm/Incontro.md

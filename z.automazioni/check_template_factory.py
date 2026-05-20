@@ -103,6 +103,12 @@ def validate_blueprints(modules: dict[str, dict], errors: list[str]) -> None:
             if key not in plugin_bindings:
                 fail(f"blueprint {name}: plugin_feature non definita {plugin}", errors)
 
+        output = blueprint.get("output", {})
+        if not output.get("folder"):
+            fail(f"blueprint {name}: output.folder mancante", errors)
+        if not output.get("files"):
+            fail(f"blueprint {name}: output.files mancante", errors)
+
     for section_id, section in sections.items():
         for field in section.get("fields", []) or []:
             if field not in field_names:

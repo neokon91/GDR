@@ -77,6 +77,11 @@ tab: Controllo
 const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
 gdr.renderCreationFeedback(dv);
 ```
+
+```dataviewjs
+const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+gdr.renderWorldImpact(dv);
+```
 ````
 
 ## Fallback Markdown
@@ -88,6 +93,8 @@ gdr.renderCreationFeedback(dv);
 | Connessioni |  |
 | Entita impattate |  |
 | Propaga a |  |
+| Prossima mossa |  |
+| Conseguenza potenziale |  |
 | Versione pubblica |  |
 | Cosa sa il DM |  |
 | Cosa cambia al tavolo |  |

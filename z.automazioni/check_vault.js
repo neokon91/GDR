@@ -92,21 +92,7 @@ const REQUIRED_LAYER_FILES = [
     "z.automazioni/nuovo_mondo_homebrew.js",
     "z.engine/README.md",
     "z.engine/gdr_views.js",
-    "z.engine/session_views.js",
-    "z.modelli/azioni/Marca Canonico.md",
-    "z.modelli/azioni/Marca Rumor.md",
-    "z.modelli/azioni/Archivia.md",
-    "z.modelli/azioni/Applica Conseguenza.md",
-    "z.modelli/azioni/Avanza Clock.md",
-    "z.modelli/azioni/Collega Sessione Attiva.md",
-    "z.modelli/azioni/Propaga A Entita.md",
-    "z.modelli/azioni/Prepara Recap Pubblico.md",
-    "z.modelli/wizard/Nuova Entita Viva.md",
-    "z.modelli/wizard/Nuovo Mondo Homebrew.md",
-    "z.modelli/wizard/Appunto Live.md",
-    "z.modelli/wizard/Conseguenza.md",
-    "z.modelli/wizard/Fine Sessione.md",
-    "z.modelli/wizard/Nuova Sessione Da Output Precedente.md"
+    "z.engine/session_views.js"
 ];
 const REQUIRED_META_BIND_INPUT_TEMPLATES = [
     "mondo",
@@ -546,6 +532,11 @@ function targetPath(target) {
     return normalized.endsWith(".md") ? normalized : `${normalized}.md`;
 }
 
+function isGeneratedTemplatePath(fileRel) {
+    const normalized = String(fileRel ?? "").replace(/\\/g, "/");
+    return normalized === "z.modelli" || normalized.startsWith("z.modelli/");
+}
+
 const markdownFiles = walk(ROOT, file => file.endsWith(".md"));
 const linkableFiles = walk(ROOT, file => /\.(md|canvas|base)$/.test(file));
 const markdownByPath = new Set();
@@ -669,6 +660,7 @@ for (const file of markdownFiles) {
         if (!target || /^[a-z]+:\/\//i.test(target)) continue;
 
         const normalized = target.replace(/\\/g, "/").replace(/\.(md|canvas|base)$/, "");
+        if (isGeneratedTemplatePath(normalized)) continue;
         const basename = path.basename(normalized);
 
         if (linkableByPath.has(normalized)) continue;
@@ -690,6 +682,7 @@ for (const file of markdownFiles) {
 
     while ((match = templatePattern.exec(text))) {
         const template = targetPath(match[1]);
+        if (isGeneratedTemplatePath(template)) continue;
         if (!fs.existsSync(path.join(ROOT, template))) {
             errors.push(`${rel(file)}: template Meta Bind mancante ${template}`);
         }
@@ -724,6 +717,7 @@ if (metaBindConfig) {
         for (const action of button.actions ?? []) {
             if ((action.type === "templaterCreateNote" || action.type === "runTemplaterFile") && action.templateFile) {
                 const template = targetPath(action.templateFile);
+                if (isGeneratedTemplatePath(template)) continue;
                 if (!fs.existsSync(path.join(ROOT, template))) {
                     errors.push(`Meta Bind: button template ${button.id} usa template mancante ${template}`);
                 }
@@ -813,6 +807,7 @@ const iconConfig = readJson(path.join(ROOT, ".obsidian/plugins/obsidian-icon-fol
 if (iconConfig) {
     for (const key of Object.keys(iconConfig)) {
         if (key === "settings") continue;
+        if (isGeneratedTemplatePath(key)) continue;
         if (!fs.existsSync(path.join(ROOT, key)) && !fs.existsSync(path.join(ROOT, `${key}.md`))) {
             errors.push(`Iconize punta a un percorso mancante: ${key}`);
         }

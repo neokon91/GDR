@@ -8,6 +8,7 @@
     "check:layer": "node z.automazioni/check_vault.js",
     "check:templates": "python3 z.automazioni/check_template_factory.py",
     "render:templates": "python3 z.automazioni/render_template_factory.py",
+    "generate:templates": "python3 z.automazioni/render_template_factory.py --materialize",
     "audit:templates": "python3 z.automazioni/audit_template_migration.py",
     "check:repo": "node z.automazioni/repo_hygiene.js",
     "check:js": "node z.automazioni/check_js.js",
