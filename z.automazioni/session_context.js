@@ -487,25 +487,42 @@
   }
 
   function renderPlayerRecap(dv) {
-    const latest = dv.pages('"Mondi/Sessioni"')
+    const recaps = dv.pages('"Mondi/Sessioni"')
       .where(p => isReal(p) && (p.pubblico === true || p.stato === "giocata"))
       .sort(p => p.data ?? "0000-00-00", "desc")
-      .first();
+      .limit(5)
+      .array();
 
-    if (!latest) {
+    if (!recaps.length) {
       dv.paragraph("Nessun recap pubblico ancora disponibile.");
       return;
     }
 
-    const rows = [
-      ["Ultima sessione", latest.file.name],
-      ["Quando", latest.data ?? latest.data_mondo ?? "data non indicata"],
-      ["Dove", fieldText(latest.luoghi) || fieldText(latest.mondo) || "luogo non indicato"],
-      ["Cosa resta aperto", fieldText(latest.domande_al_tavolo) || fieldText(latest.missioni) || "nessun obiettivo pubblico collegato"]
-    ];
+    const panel = dv.el("div", "", { cls: "gdr-card-grid compact" });
+    panel.innerHTML = recaps.map(p => cardHtml({
+      title: p.file.name,
+      meta: p.data ?? p.data_mondo ?? "data non indicata",
+      body: fieldText(p.recap_pubblico ?? p.luoghi ?? p.missioni) || "Recap pubblico da compilare.",
+      link: p.pubblico === true && !hasPrivateFields(p) ? p.file.path : "",
+      cls: "gdr-info-card compact gdr-kind-sessione"
+    })).join("");
+  }
+
+  function renderPlayerMap(dv) {
+    const map = publicMapRows(dv, 1)[0];
+    if (!map) {
+      dv.paragraph("Nessuna mappa pubblica disponibile.");
+      return;
+    }
 
     const panel = dv.el("div", "", { cls: "gdr-card-grid compact" });
-    panel.innerHTML = rows.map(([title, body]) => cardHtml({ title, body, cls: "gdr-info-card compact" })).join("");
+    panel.innerHTML = cardHtml({
+      title: pageTitle(map),
+      meta: [map.uso, map.mondo?.path ? map.mondo.path.split("/").pop().replace(/\.md$/, "") : ""].filter(Boolean).join(" · "),
+      body: fieldText(map.luoghi ?? map.luogo) || "Mappa pubblica pronta.",
+      link: map.file.path,
+      cls: "gdr-info-card compact gdr-kind-mappa"
+    });
   }
 
   function renderPublicSafety(dv) {
@@ -598,6 +615,7 @@
     renderPostSessionFocus,
     renderPartyControl,
     renderPlayerRecap,
+    renderPlayerMap,
     renderPublicSafety,
     renderPlayerView
   };

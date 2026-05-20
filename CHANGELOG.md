@@ -20,6 +20,7 @@
 - [[Bibbia del Mondo]] e il template mondo sono stati rafforzati come Codex locale: home mondo, indice per categoria/pubblico e controlli su articoli senza gancio, collegamenti o uso al tavolo.
 - Gli articoli core di luogo, fazione, PNG, cultura, religione e timeline separano meglio contenuto player-safe e note DM.
 - [[Atlante del Mondo]] ora tratta le mappe come atlante operativo: mappa DM demo, mappa player-safe demo, campi `layer`/`pin`, controllo mappe-luoghi e rotte/territori/fazioni collegati.
+- [[Vista Giocatori]] e stata ripulita come portale player-facing con recap ordinati, mappa pubblica centrale, card per mondo conosciuto e controllo anti-segreti.
 - [[Vista Giocatori]] ora funziona come portale player-facing con recap, diario visibile, atlante condiviso, handout e controllo anti-segreti.
 - [[Inizia Qui]] e stato ridotto al flusso principale Prepara -> Gioca -> Aggiorna il mondo, con strumenti avanzati separati.
 - [[Risorse/Preparazione Sessione]] ora richiede cinque blocchi concreti: obiettivo, prima scena, scelta, pressione e materiale.
