@@ -9,16 +9,16 @@
 > `INPUT[inlineSelect(option(religione, Religione), option(culto, Culto), option(divinità, Divinità), option(entità, Entità)):sottotipo]`
 >
 > Stato:
-> `INPUT[inlineSelect(option(bozza, Bozza), option(pronto, Pronto), option(in gioco, In Gioco), option(archiviata, Archiviata)):stato]`
+> `INPUT[stato base][:stato]`
 >
 > Canonica:
-> `INPUT[toggle:canonico]`
+> `INPUT[canonico][:canonico]`
 >
 > Stato canonico:
-> `INPUT[inlineSelect(option(canonico, Canonico), option(rumor, Rumor), option(leggenda, Leggenda), option(falso, Falso), option(retcon, Retcon)):stato_canonico]`
+> `INPUT[stato canonico][:stato_canonico]`
 >
 > Mondo:
-> `INPUT[suggester(optionQuery("Mondi"), useLinks(partial), allowOther):mondo]`
+> `INPUT[mondo][:mondo]`
 >
 > Pressione:
 > `INPUT[slider(minValue(0), maxValue(10), stepSize(1), addLabels):pressione]`

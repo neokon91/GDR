@@ -5,15 +5,7 @@ cssclasses:
 
 # Missioni
 
-```meta-bind-button
-label: Nuova Missione
-style: primary
-actions:
-  - type: templaterCreateNote
-    templateFile: "z.modelli/dm/Missione.md"
-    folderPath: "Mondi/Missioni"
-    open: true
-```
+`BUTTON[nuova-missione-z-modelli-dm-missione-md]`
 
 ## Aperte
 

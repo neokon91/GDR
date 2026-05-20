@@ -409,6 +409,51 @@ for (const file of markdownFiles) {
     }
 }
 
+const metaBindConfigPath = path.join(ROOT, ".obsidian/plugins/obsidian-meta-bind-plugin/data.json");
+const metaBindConfig = readJson(metaBindConfigPath);
+if (metaBindConfig) {
+    const buttonTemplates = Array.isArray(metaBindConfig.buttonTemplates) ? metaBindConfig.buttonTemplates : [];
+    const buttonIds = new Set();
+
+    for (const button of buttonTemplates) {
+        if (!button?.id) {
+            errors.push("Meta Bind: button template senza id");
+            continue;
+        }
+
+        if (buttonIds.has(button.id)) {
+            errors.push(`Meta Bind: button template duplicato ${button.id}`);
+        }
+        buttonIds.add(button.id);
+
+        for (const action of button.actions ?? []) {
+            if (action.type === "templaterCreateNote" && action.templateFile) {
+                const template = targetPath(action.templateFile);
+                if (!fs.existsSync(path.join(ROOT, template))) {
+                    errors.push(`Meta Bind: button template ${button.id} usa template mancante ${template}`);
+                }
+            }
+
+            if (action.type === "updateMetadata") {
+                warnings.push(`Meta Bind: button template ${button.id} modifica frontmatter; usare INPUT inline/blocco`);
+            }
+        }
+    }
+
+    const inlineButtonPattern = /`BUTTON\[([^\]\n]+)\]`/g;
+    for (const file of markdownFiles) {
+        const text = fs.readFileSync(file, "utf8");
+        let match;
+
+        while ((match = inlineButtonPattern.exec(text))) {
+            if (match[1].includes("...")) continue;
+            if (!buttonIds.has(match[1])) {
+                errors.push(`${rel(file)}: BUTTON senza template Meta Bind (${match[1]})`);
+            }
+        }
+    }
+}
+
 for (const file of markdownFiles.filter(file => rel(file).startsWith("z.modelli/"))) {
     const text = fs.readFileSync(file, "utf8");
     if (/```meta-bind-button[\s\S]*?type:\s*updateMetadata[\s\S]*?```/.test(text)) {

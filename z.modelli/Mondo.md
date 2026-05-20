@@ -36,7 +36,7 @@
 > `INPUT[inlineListSuggester(optionQuery("Risorse/Mappe"), useLinks(partial), allowOther):mappe]`
 >
 > Canonico:
-> `INPUT[toggle:canonico]`
+> `INPUT[canonico][:canonico]`
 
 ## Identità
 

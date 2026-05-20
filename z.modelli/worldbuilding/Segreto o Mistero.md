@@ -40,7 +40,7 @@ rivelato: false
 > `INPUT[inlineSelect(option(prep, Prep), option(sessione, Sessione), option(player, Player), option(improvvisazione, Improvvisazione), option(retcon, Retcon)):fonte]`
 >
 > Mondo:
-> `INPUT[suggester(optionQuery("Mondi"), useLinks(partial), allowOther):mondo]`
+> `INPUT[mondo][:mondo]`
 >
 > Collegamenti:
 > `INPUT[inlineListSuggester(optionQuery("Mondi"), useLinks(partial), allowOther):collegamenti]`

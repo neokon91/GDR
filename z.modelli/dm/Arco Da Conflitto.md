@@ -12,7 +12,7 @@
 > `INPUT[text:scadenza_mondo]`
 >
 > Campagne:
-> `INPUT[inlineListSuggester(optionQuery("Campagne"), useLinks(partial)):campagne]`
+> `INPUT[campagne][:campagne]`
 >
 > Conflitti:
 > `INPUT[inlineListSuggester(optionQuery("Mondi/Conflitti"), useLinks(partial)):conflitti]`

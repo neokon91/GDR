@@ -337,31 +337,28 @@ Non rinominare i campi `fc-*` e non usare `fc-date` come unica data narrativa: s
 
 ### Meta Bind
 
-Meta Bind ha due ruoli separati nel vault. Gli input inline o in blocco (`INPUT[...]`) servono per modificare rapidamente il frontmatter nelle note gia create. I pulsanti `meta-bind-button` servono per navigare, creare nuove note, aprire dashboard o portare l'utente a un wikilink utile.
+Meta Bind ha due ruoli separati nel vault. Gli input inline o in blocco (`INPUT[...]`) servono per modificare rapidamente il frontmatter nelle note gia create. I pulsanti inline `BUTTON[...]` servono per navigare, creare nuove note, aprire dashboard o portare l'utente a un wikilink utile.
 
-Non usare `meta-bind-button` per cambiare campi YAML come `stato`, `canonico`, `progress_value` o `attiva`: per quello usa input, slider, toggle e select inline.
+La logica dei pulsanti vive in `.obsidian/plugins/obsidian-meta-bind-plugin/data.json`, dentro `buttonTemplates`. Le note devono richiamare i pulsanti per id, non duplicare blocchi `meta-bind-button` completi.
+
+Non usare pulsanti Meta Bind per cambiare campi YAML come `stato`, `canonico`, `progress_value` o `attiva`: per quello usa input, slider, toggle e select inline.
 
 Sintassi usata nel vault:
 
 ```markdown
 `INPUT[toggle:attiva]`
+`INPUT[mondo][:mondo]`
+`INPUT[canonico][:canonico]`
+`INPUT[stato base][:stato]`
 `INPUT[text:data_mondo]`
 `INPUT[inlineList:condizioni]`
 `INPUT[inlineListSuggester(optionQuery("Mondi/Personaggi"), useLinks(partial)):personaggi]`
 ```
 
-Pulsanti di creazione:
+Pulsanti inline:
 
 ````markdown
-```meta-bind-button
-label: Nuova Sessione
-style: primary
-actions:
-  - type: templaterCreateNote
-    templateFile: "z.modelli/dm/Sessione.md"
-    folderPath: "Mondi/Sessioni"
-    open: true
-```
+`BUTTON[nuova-sessione-z-modelli-dm-sessione-md]`
 ````
 
 Non cambiare `templateFile`, `folderPath` o il nome dei campi scritti dagli input senza aggiornare anche `z.automazioni/check_vault.js`, dashboard, template e helper Templater. Evita input Meta Bind per campi complessi dei mostri SRD se rischiano di semplificare o riscrivere il frontmatter usato da Fantasy Statblocks.

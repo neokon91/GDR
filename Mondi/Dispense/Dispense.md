@@ -5,15 +5,7 @@ cssclasses:
 
 # Dispense
 
-```meta-bind-button
-label: Nuova Dispensa
-style: primary
-actions:
-  - type: templaterCreateNote
-    templateFile: "z.modelli/Dispensa.md"
-    folderPath: "Mondi/Dispense"
-    open: true
-```
+`BUTTON[nuova-dispensa-z-modelli-dispensa-md]`
 
 ## Pronte
 

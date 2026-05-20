@@ -9,10 +9,10 @@
 > `INPUT[inlineSelect(option(attivo, Attivo), option(in pausa, In pausa), option(completato, Completato), option(fallito, Fallito), option(archiviata, Archiviata)):stato]`
 >
 > Mondo:
-> `INPUT[suggester(optionQuery("Mondi"), useLinks(partial), allowOther):mondo]`
+> `INPUT[mondo][:mondo]`
 >
 > Campagne:
-> `INPUT[inlineListSuggester(optionQuery("Campagne"), useLinks(partial)):campagne]`
+> `INPUT[campagne][:campagne]`
 >
 > Missioni:
 > `INPUT[inlineListSuggester(optionQuery("Mondi/Missioni"), useLinks(partial)):missioni]`
@@ -58,23 +58,9 @@
 >
 > Stato: `INPUT[inlineSelect(option(attivo, Attivo), option(in pausa, In pausa), option(completato, Completato), option(fallito, Fallito), option(archiviata, Archiviata)):stato]`
 >
-> ```meta-bind-button
-> label: Cosa Succede Fuori Scena
-> style: primary
-> actions:
->   - type: open
->     link: "[[Cosa Succede Fuori Scena]]"
-> ```
+> `BUTTON[cosa-succede-fuori-scena-cosa-succede-fuori-scena]`
 >
-> ```meta-bind-button
-> label: Nuova Conseguenza
-> style: default
-> actions:
->   - type: templaterCreateNote
->     templateFile: "z.modelli/Live Conseguenza.md"
->     folderPath: "Inbox"
->     open: true
-> ```
+> `BUTTON[nuova-conseguenza-z-modelli-live-conseguenza-md-default]`
 
 ```dataviewjs
 const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));

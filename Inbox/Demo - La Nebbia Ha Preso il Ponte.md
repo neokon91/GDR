@@ -47,23 +47,11 @@ Stato canonico:
 `INPUT[inlineSelect(option(rumor, Rumor), option(canonico, Canonico), option(leggenda, Leggenda), option(falso, Falso), option(retcon, Retcon)):stato_canonico]`
 
 Canonico:
-`INPUT[toggle:canonico]`
+`INPUT[canonico][:canonico]`
 
-```meta-bind-button
-label: Post Sessione
-style: primary
-actions:
-  - type: open
-    link: "[[Risorse/Post Sessione Guidato]]"
-```
+`BUTTON[post-sessione-risorse-post-sessione-guidato]`
 
-```meta-bind-button
-label: Cosa Succede Fuori Scena
-style: default
-actions:
-  - type: open
-    link: "[[Cosa Succede Fuori Scena]]"
-```
+`BUTTON[cosa-succede-fuori-scena-cosa-succede-fuori-scena-2]`
 
 - [x] Collegare a ponte, Custodi e missione.
 - [x] Decidere lo stato canonico.

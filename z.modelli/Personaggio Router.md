@@ -30,7 +30,7 @@
 ## Identità
 
 Mondo:
-`INPUT[suggester(optionQuery("Mondi"), useLinks(partial), allowOther):mondo]`
+`INPUT[mondo][:mondo]`
 
 ## Statblock D&D
 

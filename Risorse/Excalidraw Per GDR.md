@@ -38,14 +38,6 @@ SORT uso ASC, mondo ASC, file.name ASC
 
 ## Creazione
 
-```meta-bind-button
-label: Nuova Mappa Fronti
-style: primary
-actions:
-  - type: templaterCreateNote
-    templateFile: "z.modelli/mappe/Mappa Excalidraw Fronti.excalidraw.md"
-    folderPath: "Risorse/Mappe"
-    open: true
-```
+`BUTTON[nuova-mappa-fronti-z-modelli-mappe-mappa-excalidraw-fronti-excalidraw-md-2]`
 
 Il plugin Excalidraw e configurato per creare nuovi disegni in `Risorse/Mappe` e usare il template fronti come base.

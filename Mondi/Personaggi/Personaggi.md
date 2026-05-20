@@ -5,25 +5,9 @@ cssclasses:
 
 # Personaggi
 
-```meta-bind-button
-label: Nuovo PG
-style: primary
-actions:
-  - type: templaterCreateNote
-    templateFile: "z.modelli/personaggio/PG.md"
-    folderPath: "Mondi/Personaggi"
-    open: true
-```
+`BUTTON[nuovo-pg-z-modelli-personaggio-pg-md]`
 
-```meta-bind-button
-label: Nuovo PNG
-style: primary
-actions:
-  - type: templaterCreateNote
-    templateFile: "z.modelli/personaggio/PNG.md"
-    folderPath: "Mondi/Personaggi"
-    open: true
-```
+`BUTTON[nuovo-png-z-modelli-personaggio-png-md]`
 
 ## PG
 

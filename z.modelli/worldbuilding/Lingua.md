@@ -3,10 +3,10 @@
 
 >[!infobox|wiki]- Lingua
 > Mondo:
-> `INPUT[suggester(optionQuery("Mondi"), useLinks(partial), allowOther):mondo]`
+> `INPUT[mondo][:mondo]`
 >
 > Stato:
-> `INPUT[inlineSelect(option(bozza, Bozza), option(pronto, Pronto), option(in gioco, In Gioco), option(archiviata, Archiviata)):stato]`
+> `INPUT[stato base][:stato]`
 >
 > Culture:
 > `INPUT[inlineListSuggester(optionQuery("Mondi/Culture"), useLinks(partial)):culture]`

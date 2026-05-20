@@ -3,7 +3,7 @@
 
 >[!infobox|wiki]- Baronia
 > Mondo:
-> `INPUT[suggester(optionQuery("Mondi"), useLinks(partial), allowOther):mondo]`
+> `INPUT[mondo][:mondo]`
 >
 > Barone o baronessa:
 > `INPUT[suggester(optionQuery("Mondi/Personaggi"), useLinks(partial), allowOther):governante]`

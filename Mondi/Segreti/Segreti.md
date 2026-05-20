@@ -8,15 +8,7 @@ stato: pronto
 
 # Segreti
 
-```meta-bind-button
-label: Nuovo Segreto O Mistero
-style: primary
-actions:
-  - type: templaterCreateNote
-    templateFile: "z.modelli/worldbuilding/Segreto o Mistero.md"
-    folderPath: "Mondi/Segreti"
-    open: true
-```
+`BUTTON[nuovo-segreto-o-mistero-z-modelli-worldbuilding-segreto-o-mistero-md]`
 
 ```dataview
 TABLE mondo, tipo, stato, verita_profonda, indizi_deboli, indizi_forti, prove_decisive

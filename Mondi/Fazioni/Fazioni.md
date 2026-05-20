@@ -5,15 +5,7 @@ cssclasses:
 
 # Fazioni
 
-```meta-bind-button
-label: Nuova Fazione
-style: primary
-actions:
-  - type: templaterCreateNote
-    templateFile: "z.modelli/Fazione Router.md"
-    folderPath: "Mondi/Fazioni"
-    open: true
-```
+`BUTTON[nuova-fazione-z-modelli-fazione-router-md]`
 
 ## In Gioco
 

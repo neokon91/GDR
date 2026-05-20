@@ -8,15 +8,7 @@ stato: pronto
 
 # Compendium
 
-```meta-bind-button
-label: Nuovo Elemento
-style: primary
-actions:
-  - type: templaterCreateNote
-    templateFile: "z.modelli/worldbuilding/Compendium Del Mondo.md"
-    folderPath: "Mondi/Compendium"
-    open: true
-```
+`BUTTON[nuovo-elemento-z-modelli-worldbuilding-compendium-del-mondo-md]`
 
 ```dataview
 TABLE tipo, mondo, culture, regioni, risorse, fazioni, uso_narrativo, missioni

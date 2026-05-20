@@ -9,7 +9,7 @@
 > `INPUT[inlineSelect(option(bozza, Bozza), option(pronto, Pronto), option(consegnato, Consegnato), option(archiviata, Archiviata)):stato]`
 >
 > Mondo:
-> `INPUT[suggester(optionQuery("Mondi"), useLinks(partial), allowOther):mondo]`
+> `INPUT[mondo][:mondo]`
 >
 > Luogo:
 > `INPUT[suggester(optionQuery("Mondi/Luoghi"), useLinks(partial), allowOther):luogo]`

@@ -5,25 +5,9 @@ cssclasses:
 
 # Campagne
 
-```meta-bind-button
-label: Nuova Campagna
-style: primary
-actions:
-  - type: templaterCreateNote
-    templateFile: "z.modelli/dm/Campagna.md"
-    folderPath: "Campagne"
-    open: true
-```
+`BUTTON[nuova-campagna-z-modelli-dm-campagna-md]`
 
-```meta-bind-button
-label: Nuova Sessione
-style: primary
-actions:
-  - type: templaterCreateNote
-    templateFile: "z.modelli/dm/Sessione.md"
-    folderPath: "Mondi/Sessioni"
-    open: true
-```
+`BUTTON[nuova-sessione-z-modelli-dm-sessione-md]`
 
 ## Campagne Attive
 

@@ -14,42 +14,18 @@ Questa vista raccoglie cio che deve influenzare il tavolo: missioni aperte, fazi
 
 > [!scena] Filtro
 > Mondo:
-> `INPUT[suggester(optionQuery("Mondi"), useLinks(partial), allowOther):mondo_attivo]`
+> `INPUT[mondo][:mondo_attivo]`
 >
 > Campagne:
-> `INPUT[inlineListSuggester(optionQuery("Campagne"), useLinks(partial)):campagne_attive]`
+> `INPUT[campagne][:campagne_attive]`
 
-```meta-bind-button
-label: Durante Il Gioco
-style: primary
-actions:
-  - type: open
-    link: "[[Durante il Gioco]]"
-```
+`BUTTON[durante-il-gioco-durante-il-gioco]`
 
-```meta-bind-button
-label: Cosa Succede Fuori Scena
-style: primary
-actions:
-  - type: open
-    link: "[[Cosa Succede Fuori Scena]]"
-```
+`BUTTON[cosa-succede-fuori-scena-cosa-succede-fuori-scena]`
 
-```meta-bind-button
-label: Timeline
-style: primary
-actions:
-  - type: open
-    link: "[[Mondi/Timeline/Timeline]]"
-```
+`BUTTON[timeline-mondi-timeline-timeline]`
 
-```meta-bind-button
-label: Worldbuilder
-style: primary
-actions:
-  - type: open
-    link: "[[Worldbuilder Dashboard]]"
-```
+`BUTTON[worldbuilder-worldbuilder-dashboard]`
 
 ```dataviewjs
 const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));

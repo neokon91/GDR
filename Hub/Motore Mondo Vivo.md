@@ -16,58 +16,22 @@ campagne_attive: []
 
 > [!scena] Filtro
 > Mondo:
-> `INPUT[suggester(optionQuery("Mondi"), useLinks(partial), allowOther):mondo_attivo]`
+> `INPUT[mondo][:mondo_attivo]`
 >
 > Campagne:
-> `INPUT[inlineListSuggester(optionQuery("Campagne"), useLinks(partial)):campagne_attive]`
+> `INPUT[campagne][:campagne_attive]`
 
-```meta-bind-button
-label: Stato Campagna
-style: primary
-actions:
-  - type: open
-    link: "[[Mondi/Stato del Mondo]]"
-```
+`BUTTON[stato-campagna-mondi-stato-del-mondo]`
 
-```meta-bind-button
-label: Cosa Succede Fuori Scena
-style: primary
-actions:
-  - type: open
-    link: "[[Cosa Succede Fuori Scena]]"
-```
+`BUTTON[cosa-succede-fuori-scena-cosa-succede-fuori-scena]`
 
-```meta-bind-button
-label: Worldbuilder
-style: primary
-actions:
-  - type: open
-    link: "[[Worldbuilder Dashboard]]"
-```
+`BUTTON[worldbuilder-worldbuilder-dashboard]`
 
-```meta-bind-button
-label: Timeline
-style: primary
-actions:
-  - type: open
-    link: "[[Mondi/Timeline/Timeline]]"
-```
+`BUTTON[timeline-mondi-timeline-timeline]`
 
-```meta-bind-button
-label: Controllo Canone
-style: primary
-actions:
-  - type: open
-    link: "[[Controllo Canone]]"
-```
+`BUTTON[controllo-canone-controllo-canone]`
 
-```meta-bind-button
-label: Economia E Rotte
-style: primary
-actions:
-  - type: open
-    link: "[[Economia E Rotte]]"
-```
+`BUTTON[economia-e-rotte-economia-e-rotte-2]`
 
 ```dataviewjs
 const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));

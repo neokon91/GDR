@@ -18,101 +18,29 @@ gdr.renderHome(dv);
 
 ## Cosa Vuoi Fare?
 
-```meta-bind-button
-label: Prepara
-style: primary
-actions:
-  - type: open
-    link: "[[Hub/1. DM Dashboard|1. DM Dashboard]]"
-```
+`BUTTON[prepara-hub-1-dm-dashboard-1-dm-dashboard]`
 
-```meta-bind-button
-label: Crea Campagna
-style: primary
-actions:
-  - type: open
-    link: "[[Hub/Campagna da Ambientazione|Campagna da Ambientazione]]"
-```
+`BUTTON[crea-campagna-hub-campagna-da-ambientazione-campagna-da-ambientazione]`
 
-```meta-bind-button
-label: Prima Sessione
-style: primary
-actions:
-  - type: open
-    link: "[[Risorse/Prima Sessione In 15 Minuti]]"
-```
+`BUTTON[prima-sessione-risorse-prima-sessione-in-15-minuti]`
 
-```meta-bind-button
-label: Gioca
-style: primary
-actions:
-  - type: open
-    link: "[[Hub/Durante il Gioco|Durante il Gioco]]"
-```
+`BUTTON[gioca-hub-durante-il-gioco-durante-il-gioco]`
 
-```meta-bind-button
-label: Vista Giocatori
-style: primary
-actions:
-  - type: open
-    link: "[[Hub/Vista Giocatori|Vista Giocatori]]"
-```
+`BUTTON[vista-giocatori-hub-vista-giocatori-vista-giocatori]`
 
-```meta-bind-button
-label: Costruisci Mondo
-style: primary
-actions:
-  - type: open
-    link: "[[Hub/Atlante del Mondo|Atlante del Mondo]]"
-```
+`BUTTON[costruisci-mondo-hub-atlante-del-mondo-atlante-del-mondo]`
 
-```meta-bind-button
-label: Fuori Scena
-style: primary
-actions:
-  - type: open
-    link: "[[Hub/Cosa Succede Fuori Scena|Cosa Succede Fuori Scena]]"
-```
+`BUTTON[fuori-scena-hub-cosa-succede-fuori-scena-cosa-succede-fuori-scena]`
 
-```meta-bind-button
-label: Aiuto
-style: default
-actions:
-  - type: open
-    link: "[[Risorse/FAQ]]"
-```
+`BUTTON[aiuto-risorse-faq]`
 
-```meta-bind-button
-label: Risorse
-style: default
-actions:
-  - type: open
-    link: "[[Risorse/Risorse]]"
-```
+`BUTTON[risorse-risorse-risorse]`
 
-```meta-bind-button
-label: Setup Guidato
-style: default
-actions:
-  - type: open
-    link: "[[Risorse/Setup Guidato]]"
-```
+`BUTTON[setup-guidato-risorse-setup-guidato]`
 
-```meta-bind-button
-label: Creazione Entità
-style: default
-actions:
-  - type: open
-    link: "[[Risorse/Creazione Guidata Entità]]"
-```
+`BUTTON[creazione-entita-risorse-creazione-guidata-entita]`
 
-```meta-bind-button
-label: Worldbuilding Profondo
-style: default
-actions:
-  - type: open
-    link: "[[Risorse/Worldbuilding Profondo]]"
-```
+`BUTTON[worldbuilding-profondo-risorse-worldbuilding-profondo]`
 
 ## Primo Avvio
 

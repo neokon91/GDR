@@ -12,41 +12,17 @@ Questa guida serve per giocare subito senza capire tutta la struttura del vault.
 
 ## 1. Controlla Che Il Vault Sia Pronto
 
-```meta-bind-button
-label: Setup Guidato
-style: primary
-actions:
-  - type: open
-    link: "[[Risorse/Setup Guidato]]"
-```
+`BUTTON[setup-guidato-risorse-setup-guidato-2]`
 
-```meta-bind-button
-label: Inizia Qui
-style: default
-actions:
-  - type: open
-    link: "[[Inizia Qui]]"
-```
+`BUTTON[inizia-qui-inizia-qui]`
 
-```meta-bind-button
-label: Creazione Guidata Entità
-style: default
-actions:
-  - type: open
-    link: "[[Risorse/Creazione Guidata Entità]]"
-```
+`BUTTON[creazione-guidata-entita-risorse-creazione-guidata-entita]`
 
 Se i pulsanti funzionano e le tabelle mostrano testo leggibile, puoi proseguire.
 
 ## 2. Guarda La Demo
 
-```meta-bind-button
-label: Apri Demo
-style: primary
-actions:
-  - type: open
-    link: "[[Demo - La Reliquia Spezzata]]"
-```
+`BUTTON[apri-demo-demo-la-reliquia-spezzata]`
 
 Usa la demo come esempio, non come manuale. Guarda soprattutto:
 
@@ -58,13 +34,7 @@ Usa la demo come esempio, non come manuale. Guarda soprattutto:
 
 ## 3. Crea O Scegli Una Campagna
 
-```meta-bind-button
-label: DM Dashboard
-style: primary
-actions:
-  - type: open
-    link: "[[1. DM Dashboard]]"
-```
+`BUTTON[dm-dashboard-1-dm-dashboard]`
 
 Da [[1. DM Dashboard]] puoi creare una nuova campagna oppure usare la demo per provare. Per una prima sessione reale basta avere:
 
@@ -77,13 +47,7 @@ Da [[1. DM Dashboard]] puoi creare una nuova campagna oppure usare la demo per p
 
 ## 4. Prepara Solo Il Necessario
 
-```meta-bind-button
-label: Preparazione Sessione
-style: primary
-actions:
-  - type: open
-    link: "[[Risorse/Preparazione Sessione]]"
-```
+`BUTTON[preparazione-sessione-risorse-preparazione-sessione]`
 
 Compila solo questi elementi:
 
@@ -108,13 +72,7 @@ Tieni una sola sessione attiva alla volta.
 
 ## 6. Gioca Dal Tavolo Operativo
 
-```meta-bind-button
-label: Durante Il Gioco
-style: primary
-actions:
-  - type: open
-    link: "[[Durante il Gioco]]"
-```
+`BUTTON[durante-il-gioco-durante-il-gioco]`
 
 Durante la sessione usa questa pagina per:
 
@@ -128,13 +86,7 @@ Non sistemare tutto mentre giochi. Cattura prima, ordina dopo.
 
 ## 7. Chiudi La Sessione
 
-```meta-bind-button
-label: Post Sessione Guidato
-style: primary
-actions:
-  - type: open
-    link: "[[Risorse/Post Sessione Guidato]]"
-```
+`BUTTON[post-sessione-guidato-risorse-post-sessione-guidato]`
 
 Dopo la partita decidi:
 
@@ -147,13 +99,7 @@ Dopo la partita decidi:
 
 ## 8. Guarda Cosa Si Muove Fuori Scena
 
-```meta-bind-button
-label: Cosa Succede Fuori Scena
-style: primary
-actions:
-  - type: open
-    link: "[[Cosa Succede Fuori Scena]]"
-```
+`BUTTON[cosa-succede-fuori-scena-cosa-succede-fuori-scena]`
 
 Scegli almeno una riga da trasformare in gioco:
 

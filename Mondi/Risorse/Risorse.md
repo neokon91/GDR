@@ -8,15 +8,7 @@ stato: pronto
 
 # Risorse
 
-```meta-bind-button
-label: Nuova Risorsa
-style: primary
-actions:
-  - type: templaterCreateNote
-    templateFile: "z.modelli/worldbuilding/Risorsa.md"
-    folderPath: "Mondi/Risorse"
-    open: true
-```
+`BUTTON[nuova-risorsa-z-modelli-worldbuilding-risorsa-md]`
 
 ```dataview
 TABLE luoghi, fazioni_controllanti, uso_narrativo, scarsita, rotte, mercati, pressione, prossima_mossa

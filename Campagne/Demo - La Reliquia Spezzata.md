@@ -38,29 +38,11 @@ tracciati:
 
 Questa campagna serve a vedere il vault in azione: dashboard, sessioni, PNG, luoghi, fazioni, missioni, tracciati, incontri, oggetti e dispense sono gia collegati.
 
-```meta-bind-button
-label: Prima Sessione In 15 Minuti
-style: primary
-actions:
-  - type: open
-    link: "[[Risorse/Prima Sessione In 15 Minuti]]"
-```
+`BUTTON[prima-sessione-in-15-minuti-risorse-prima-sessione-in-15-minuti]`
 
-```meta-bind-button
-label: Durante Il Gioco
-style: primary
-actions:
-  - type: open
-    link: "[[Durante il Gioco]]"
-```
+`BUTTON[durante-il-gioco-durante-il-gioco]`
 
-```meta-bind-button
-label: Cosa Succede Fuori Scena
-style: primary
-actions:
-  - type: open
-    link: "[[Cosa Succede Fuori Scena]]"
-```
+`BUTTON[cosa-succede-fuori-scena-cosa-succede-fuori-scena]`
 
 ## Tutorial Operativo
 

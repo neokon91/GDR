@@ -6,7 +6,7 @@
 > `INPUT[inlineSelect(option(materiale, Materiale), option(pianta, Pianta), option(malattia, Malattia), option(moneta, Moneta), option(tecnologia, Tecnologia), option(cibo, Cibo), option(superstizione, Superstizione), option(professione, Professione), option(creatura regionale, Creatura Regionale)):tipo]`
 >
 > Mondo:
-> `INPUT[suggester(optionQuery("Mondi"), useLinks(partial), allowOther):mondo]`
+> `INPUT[mondo][:mondo]`
 >
 > Culture:
 > `INPUT[inlineListSuggester(optionQuery("Mondi/Culture"), useLinks(partial), allowOther):culture]`

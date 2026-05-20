@@ -16,15 +16,7 @@ tab: Relazioni
 > [!luogo] Schema pronto
 > Usa Excalidraw per relazioni tra mondo, luoghi, fazioni, PNG e missioni.
 
-```meta-bind-button
-label: Nuova Mappa Fronti
-style: primary
-actions:
-  - type: templaterCreateNote
-    templateFile: "z.modelli/mappe/Mappa Excalidraw Fronti.excalidraw.md"
-    folderPath: "Risorse/Mappe"
-    open: true
-```
+`BUTTON[nuova-mappa-fronti-z-modelli-mappe-mappa-excalidraw-fronti-excalidraw-md-2]`
 
 ![[Schema Relazioni GDR.excalidraw]]
 
@@ -92,15 +84,7 @@ tab: Zoom
 
 Apri [[Demo - Mappa Zoomabile]] come prova pronta con blocco `zoommap` e base SVG locale. La versione condivisibile e [[Demo - Mappa Zoomabile Giocatori]].
 
-```meta-bind-button
-label: Nuova Mappa Zoom
-style: primary
-actions:
-  - type: templaterCreateNote
-    templateFile: "z.modelli/mappe/Mappa Zoom.md"
-    folderPath: "Risorse/Mappe"
-    open: true
-```
+`BUTTON[nuova-mappa-zoom-z-modelli-mappe-mappa-zoom-md-2]`
 
 Regola di prodotto:
 

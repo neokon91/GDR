@@ -15,39 +15,15 @@ mondo_attivo: ""
 
 > [!scena] Filtro
 > Mondo:
-> `INPUT[suggester(optionQuery("Mondi"), useLinks(partial), allowOther):mondo_attivo]`
+> `INPUT[mondo][:mondo_attivo]`
 
-```meta-bind-button
-label: Atlante
-style: primary
-actions:
-  - type: open
-    link: "[[Atlante del Mondo]]"
-```
+`BUTTON[atlante-atlante-del-mondo-2]`
 
-```meta-bind-button
-label: Economia E Rotte
-style: primary
-actions:
-  - type: open
-    link: "[[Economia E Rotte]]"
-```
+`BUTTON[economia-e-rotte-economia-e-rotte-2]`
 
-```meta-bind-button
-label: Calendario
-style: default
-actions:
-  - type: open
-    link: "[[Mondi/Calendario]]"
-```
+`BUTTON[calendario-mondi-calendario]`
 
-```meta-bind-button
-label: Compendium
-style: default
-actions:
-  - type: open
-    link: "[[Hub/Compendium Del Mondo|Compendium Del Mondo]]"
-```
+`BUTTON[compendium-hub-compendium-del-mondo-compendium-del-mondo]`
 
 ```dataviewjs
 const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));

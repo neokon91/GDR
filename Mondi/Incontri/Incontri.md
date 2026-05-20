@@ -5,15 +5,7 @@ cssclasses:
 
 # Incontri
 
-```meta-bind-button
-label: Nuovo Incontro
-style: primary
-actions:
-  - type: templaterCreateNote
-    templateFile: "z.modelli/dm/Incontro.md"
-    folderPath: "Mondi/Incontri"
-    open: true
-```
+`BUTTON[nuovo-incontro-z-modelli-dm-incontro-md]`
 
 ## Pronti
 

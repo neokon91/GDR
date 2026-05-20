@@ -15,53 +15,17 @@ mondo_attivo: ""
 
 > [!scena] Filtro
 > Mondo:
-> `INPUT[suggester(optionQuery("Mondi"), useLinks(partial), allowOther):mondo_attivo]`
+> `INPUT[mondo][:mondo_attivo]`
 
-```meta-bind-button
-label: Nuova Rotta
-style: primary
-actions:
-  - type: templaterCreateNote
-    templateFile: "z.modelli/worldbuilding/Rotta.md"
-    folderPath: "Mondi/Rotte"
-    open: true
-```
+`BUTTON[nuova-rotta-z-modelli-worldbuilding-rotta-md]`
 
-```meta-bind-button
-label: Nuova Risorsa
-style: primary
-actions:
-  - type: templaterCreateNote
-    templateFile: "z.modelli/worldbuilding/Risorsa.md"
-    folderPath: "Mondi/Risorse"
-    open: true
-```
+`BUTTON[nuova-risorsa-z-modelli-worldbuilding-risorsa-md]`
 
-```meta-bind-button
-label: Nuovo Mercato
-style: primary
-actions:
-  - type: templaterCreateNote
-    templateFile: "z.modelli/worldbuilding/Mercato o Nodo Commerciale.md"
-    folderPath: "Mondi/Mercati"
-    open: true
-```
+`BUTTON[nuovo-mercato-z-modelli-worldbuilding-mercato-o-nodo-commerciale-md]`
 
-```meta-bind-button
-label: Geopolitica
-style: default
-actions:
-  - type: open
-    link: "[[Geopolitical Dashboard]]"
-```
+`BUTTON[geopolitica-geopolitical-dashboard]`
 
-```meta-bind-button
-label: Lore Hub
-style: default
-actions:
-  - type: open
-    link: "[[Lore Hub]]"
-```
+`BUTTON[lore-hub-lore-hub]`
 
 ```dataviewjs
 const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));

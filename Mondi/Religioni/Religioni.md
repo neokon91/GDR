@@ -5,15 +5,7 @@ cssclasses:
 
 # Religioni
 
-```meta-bind-button
-label: Nuova Religione
-style: primary
-actions:
-  - type: templaterCreateNote
-    templateFile: "z.modelli/fazione/Culto.md"
-    folderPath: "Mondi/Religioni"
-    open: true
-```
+`BUTTON[nuova-religione-z-modelli-fazione-culto-md]`
 
 ## Culti e Divinità
 

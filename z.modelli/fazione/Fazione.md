@@ -9,13 +9,13 @@
 > `INPUT[inlineSelect(option(bozza, Bozza), option(pronto, Pronto), option(in gioco, In Gioco), option(ostile, Ostile), option(in guerra, In Guerra), option(archiviata, Archiviata)):stato]`
 >
 > Canonica:
-> `INPUT[toggle:canonico]`
+> `INPUT[canonico][:canonico]`
 >
 > Stato canonico:
-> `INPUT[inlineSelect(option(canonico, Canonico), option(rumor, Rumor), option(leggenda, Leggenda), option(falso, Falso), option(retcon, Retcon)):stato_canonico]`
+> `INPUT[stato canonico][:stato_canonico]`
 >
 > Mondo:
-> `INPUT[suggester(optionQuery("Mondi"), useLinks(partial), allowOther):mondo]`
+> `INPUT[mondo][:mondo]`
 >
 > Leader:
 > `INPUT[inlineListSuggester(optionQuery("Mondi/Personaggi"), useLinks(partial)):leader]`
@@ -78,23 +78,9 @@
 >
 > Avanzamento: `INPUT[slider(minValue(0), maxValue(12), stepSize(1), addLabels):progress_value]`
 >
-> ```meta-bind-button
-> label: Nuovo Tracciato
-> style: primary
-> actions:
->   - type: templaterCreateNote
->     templateFile: "z.modelli/dm/Tracciato.md"
->     folderPath: "Mondi/Tracciati"
->     open: true
-> ```
+> `BUTTON[nuovo-tracciato-z-modelli-dm-tracciato-md]`
 >
-> ```meta-bind-button
-> label: Fuori Scena
-> style: default
-> actions:
->   - type: open
->     link: "[[Cosa Succede Fuori Scena]]"
-> ```
+> `BUTTON[fuori-scena-cosa-succede-fuori-scena-default]`
 
 ````tabs
 tab: Identità

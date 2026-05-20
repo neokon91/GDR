@@ -12,7 +12,7 @@
 > `INPUT[inlineSelect(option(canonico, Canonico), option(rumor, Rumor), option(leggenda, Leggenda), option(segreto, Segreto), option(falso, Falso), option(retcon, Retcon), option(dimenticato, Dimenticato)):stato_canonico]`
 >
 > Canonico:
-> `INPUT[toggle:canonico]`
+> `INPUT[canonico][:canonico]`
 >
 > Fonte:
 > `INPUT[inlineSelect(option(sessione, Sessione), option(prep, Prep), option(player, Player), option(improvvisazione, Improvvisazione), option(retcon, Retcon), option(import, Import)):fonte]`
@@ -21,7 +21,7 @@
 > `INPUT[inlineSelect(option(basso, Basso), option(medio, Medio), option(alto, Alto)):grado_certezza]`
 >
 > Mondo:
-> `INPUT[suggester(optionQuery("Mondi"), useLinks(partial), allowOther):mondo]`
+> `INPUT[mondo][:mondo]`
 >
 > Sessioni:
 > `INPUT[inlineListSuggester(optionQuery("Mondi/Sessioni"), useLinks(partial)):sessioni]`
@@ -145,7 +145,7 @@ Stato canonico:
 `INPUT[inlineSelect(option(rumor, Rumor), option(canonico, Canonico), option(leggenda, Leggenda), option(falso, Falso), option(retcon, Retcon)):stato_canonico]`
 
 Canonico:
-`INPUT[toggle:canonico]`
+`INPUT[canonico][:canonico]`
 
 Grado certezza:
 `INPUT[inlineSelect(option(basso, Basso), option(medio, Medio), option(alto, Alto)):grado_certezza]`
@@ -160,23 +160,9 @@ INPUT[toggle:aggiorna_tracciato]
 INPUT[toggle:archivia_appunto]
 ```
 
-```meta-bind-button
-label: Nuovo Evento Storico
-style: primary
-actions:
-  - type: templaterCreateNote
-    templateFile: "z.modelli/Evento Storico.md"
-    folderPath: "Mondi/Timeline"
-    open: true
-```
+`BUTTON[nuovo-evento-storico-z-modelli-evento-storico-md]`
 
-```meta-bind-button
-label: Post Sessione
-style: default
-actions:
-  - type: open
-    link: "[[Risorse/Post Sessione Guidato]]"
-```
+`BUTTON[post-sessione-risorse-post-sessione-guidato-2]`
 
 ## Azioni
 

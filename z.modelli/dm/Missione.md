@@ -6,7 +6,7 @@
 > `INPUT[inlineSelect(option(proposta, Proposta), option(accettata, Accettata), option(in corso, In corso), option(completata, Completata), option(fallita, Fallita), option(archiviata, Archiviata)):stato]`
 >
 > Mondo:
-> `INPUT[suggester(optionQuery("Mondi"), useLinks(partial), allowOther):mondo]`
+> `INPUT[mondo][:mondo]`
 >
 > Committente:
 > `INPUT[suggester(optionQuery("Mondi/Personaggi"), useLinks(partial), allowOther):committente]`
@@ -60,62 +60,15 @@
 >
 
 > [!regia] Gestione
-> ```meta-bind-button
-> label: Durante Il Gioco
-> style: primary
-> actions:
->   - type: open
->     link: "[[Durante il Gioco]]"
-> ```
+> `BUTTON[durante-il-gioco-durante-il-gioco]`
 >
-> ```meta-bind-button
-> label: Fuori Scena
-> style: primary
-> actions:
->   - type: open
->     link: "[[Cosa Succede Fuori Scena]]"
-> ```
+> `BUTTON[fuori-scena-cosa-succede-fuori-scena]`
 >
-> ```meta-bind-button
-> label: Nuovo Incontro
-> style: primary
-> actions:
->   - type: templaterCreateNote
->     templateFile: "z.modelli/dm/Incontro.md"
->     folderPath: "Mondi/Incontri"
->     open: true
-> ```
+> `BUTTON[nuovo-incontro-z-modelli-dm-incontro-md]`
 >
-> ```meta-bind-button
-> label: Nuova Dispensa
-> style: default
-> actions:
->   - type: templaterCreateNote
->     templateFile: "z.modelli/Dispensa.md"
->     folderPath: "Mondi/Dispense"
->     open: true
-> ```
+> `BUTTON[nuova-dispensa-z-modelli-dispensa-md-default]`
 >
-> ```meta-bind-button
-> label: Nuovo Clock
-> style: default
-> actions:
->   - type: templaterCreateNote
->     templateFile: "z.modelli/dm/Tracciato.md"
->     folderPath: "Mondi/Tracciati"
->     open: true
-> ```
-
-## Essenziale Al Tavolo
-
-> [!scena] Perché i PG dovrebbero agire
-> Posta: `INPUT[text:posta]`
->
-> Innesco: `INPUT[text:innesco]`
->
-> Prossima mossa: `=this.prossima_mossa`
-
-## Primo Aggancio
+> `BUTTON[nuovo-clock-z-modelli-dm-tracciato-md-default]`
 
 ```meta-bind
 INPUT[list:indizi]

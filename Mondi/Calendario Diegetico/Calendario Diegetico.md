@@ -8,15 +8,7 @@ stato: pronto
 
 # Calendario Diegetico
 
-```meta-bind-button
-label: Nuova Ricorrenza
-style: primary
-actions:
-  - type: templaterCreateNote
-    templateFile: "z.modelli/worldbuilding/Ricorrenza Calendario.md"
-    folderPath: "Mondi/Calendario Diegetico"
-    open: true
-```
+`BUTTON[nuova-ricorrenza-z-modelli-worldbuilding-ricorrenza-calendario-md]`
 
 ```dataview
 TABLE data_mondo, mese, stagione, festa, culture, religioni, luoghi, pressione, prossima_mossa

@@ -12,27 +12,11 @@ mondo_attivo: ""
 
 > [!scena] Filtro
 > Mondo:
-> `INPUT[suggester(optionQuery("Mondi"), useLinks(partial), allowOther):mondo_attivo]`
+> `INPUT[mondo][:mondo_attivo]`
 
-```meta-bind-button
-label: Nuovo Segreto O Mistero
-style: primary
-actions:
-  - type: templaterCreateNote
-    templateFile: "z.modelli/worldbuilding/Segreto o Mistero.md"
-    folderPath: "Mondi/Segreti"
-    open: true
-```
+`BUTTON[nuovo-segreto-o-mistero-z-modelli-worldbuilding-segreto-o-mistero-md]`
 
-```meta-bind-button
-label: Lore Capture
-style: primary
-actions:
-  - type: templaterCreateNote
-    templateFile: "z.modelli/Lore Capture.md"
-    folderPath: "Inbox"
-    open: true
-```
+`BUTTON[lore-capture-z-modelli-lore-capture-md]`
 
 ```dataviewjs
 const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));

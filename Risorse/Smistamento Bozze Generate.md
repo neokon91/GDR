@@ -10,29 +10,11 @@ stato: pronto
 
 Questa pagina trasforma gli output del Generatore di Contenuti Fantasy in decisioni operative. Le note generate restano bozze finche non hanno almeno un aggancio a mondo, luogo, campagna o sessione.
 
-```meta-bind-button
-label: Generatore Fantasy
-style: primary
-actions:
-  - type: command
-    command: fantasy-content-generator:open-generator
-```
+`BUTTON[generatore-fantasy-fantasy-content-generator-open-generator-2]`
 
-```meta-bind-button
-label: Controllo Vault
-style: default
-actions:
-  - type: open
-    link: "[[Risorse/Controllo Vault]]"
-```
+`BUTTON[controllo-vault-risorse-controllo-vault-2]`
 
-```meta-bind-button
-label: Inbox
-style: default
-actions:
-  - type: open
-    link: "[[Inbox/Inbox]]"
-```
+`BUTTON[inbox-inbox-inbox-2]`
 
 ## Coda Di Lavoro
 

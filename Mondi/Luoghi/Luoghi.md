@@ -5,15 +5,7 @@ cssclasses:
 
 # Luoghi
 
-```meta-bind-button
-label: Nuovo Luogo
-style: primary
-actions:
-  - type: templaterCreateNote
-    templateFile: "z.modelli/Luogo Router.md"
-    folderPath: "Mondi/Luoghi"
-    open: true
-```
+`BUTTON[nuovo-luogo-z-modelli-luogo-router-md]`
 
 ## Luoghi Attivi
 

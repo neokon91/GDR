@@ -15,108 +15,32 @@ Questa e la vista per costruire ambientazioni grandi: luoghi, popoli, lingue, re
 > [!timeline] Atlante operativo
 > Usa questa pagina per vedere struttura, storia e buchi dell'ambientazione senza aprire archivi separati.
 
-```meta-bind-button
-label: Nuova Cultura
-style: primary
-actions:
-  - type: templaterCreateNote
-    templateFile: "z.modelli/worldbuilding/Cultura.md"
-    folderPath: "Mondi/Culture"
-    open: true
-```
+`BUTTON[nuova-cultura-z-modelli-worldbuilding-cultura-md]`
 
-```meta-bind-button
-label: Nuova Lingua
-style: primary
-actions:
-  - type: templaterCreateNote
-    templateFile: "z.modelli/worldbuilding/Lingua.md"
-    folderPath: "Mondi/Lingue"
-    open: true
-```
+`BUTTON[nuova-lingua-z-modelli-worldbuilding-lingua-md]`
 
-```meta-bind-button
-label: Nuova Era
-style: primary
-actions:
-  - type: templaterCreateNote
-    templateFile: "z.modelli/worldbuilding/Era Storica.md"
-    folderPath: "Mondi/Storia"
-    open: true
-```
+`BUTTON[nuova-era-z-modelli-worldbuilding-era-storica-md]`
 
-```meta-bind-button
-label: Nuovo Conflitto
-style: primary
-actions:
-  - type: templaterCreateNote
-    templateFile: "z.modelli/worldbuilding/Conflitto.md"
-    folderPath: "Mondi/Conflitti"
-    open: true
-```
+`BUTTON[nuovo-conflitto-z-modelli-worldbuilding-conflitto-md]`
 
-```meta-bind-button
-label: Cosmologia
-style: primary
-actions:
-  - type: templaterCreateNote
-    templateFile: "z.modelli/worldbuilding/Cosmologia.md"
-    folderPath: "Mondi/Cosmologia"
-    open: true
-```
+`BUTTON[cosmologia-z-modelli-worldbuilding-cosmologia-md]`
 
-```meta-bind-button
-label: Worldbuilder
-style: default
-actions:
-  - type: open
-    link: "[[Worldbuilder Dashboard]]"
-```
+`BUTTON[worldbuilder-worldbuilder-dashboard-2]`
 
-```meta-bind-button
-label: Controllo Worldbuilding
-style: primary
-actions:
-  - type: open
-    link: "[[Controllo Worldbuilding]]"
-```
+`BUTTON[controllo-worldbuilding-controllo-worldbuilding]`
 
-```meta-bind-button
-label: Worldbuilding Profondo
-style: default
-actions:
-  - type: open
-    link: "[[Risorse/Worldbuilding Profondo]]"
-```
+`BUTTON[worldbuilding-profondo-risorse-worldbuilding-profondo]`
 
-```meta-bind-button
-label: Geopolitica
-style: default
-actions:
-  - type: open
-    link: "[[Geopolitical Dashboard]]"
-```
+`BUTTON[geopolitica-geopolitical-dashboard]`
 
-```meta-bind-button
-label: Economia E Rotte
-style: default
-actions:
-  - type: open
-    link: "[[Economia E Rotte]]"
-```
+`BUTTON[economia-e-rotte-economia-e-rotte]`
 
-```meta-bind-button
-label: Lore Hub
-style: default
-actions:
-  - type: open
-    link: "[[Lore Hub]]"
-```
+`BUTTON[lore-hub-lore-hub]`
 
 ## Filtro
 
 > [!scena] Mondo
-> `INPUT[suggester(optionQuery("Mondi"), useLinks(partial), allowOther):mondo_attivo]`
+> `INPUT[mondo][:mondo_attivo]`
 
 ## Colpo D'Occhio
 

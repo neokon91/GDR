@@ -5,25 +5,9 @@ cssclasses:
 
 # Oggetti
 
-```meta-bind-button
-label: Nuovo Oggetto
-style: primary
-actions:
-  - type: templaterCreateNote
-    templateFile: "z.modelli/Oggetto.md"
-    folderPath: "Mondi/Oggetti"
-    open: true
-```
+`BUTTON[nuovo-oggetto-z-modelli-oggetto-md]`
 
-```meta-bind-button
-label: Nuovo Oggetto Magico
-style: primary
-actions:
-  - type: templaterCreateNote
-    templateFile: "z.modelli/Oggetto Magico.md"
-    folderPath: "Mondi/Oggetti"
-    open: true
-```
+`BUTTON[nuovo-oggetto-magico-z-modelli-oggetto-magico-md]`
 
 ## Da Assegnare
 

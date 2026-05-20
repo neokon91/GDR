@@ -6,7 +6,7 @@
 > `INPUT[inlineSelect(option(bozza, Bozza), option(preparazione, Preparazione), option(pronto, Pronto), option(giocata, Giocata), option(archiviata, Archiviata)):stato]`
 >
 > Mondo:
-> `INPUT[suggester(optionQuery("Mondi"), useLinks(partial), allowOther):mondo]`
+> `INPUT[mondo][:mondo]`
 >
 > Livello:
 > `INPUT[number:livello]`

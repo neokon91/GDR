@@ -15,150 +15,44 @@ campagne_attive: []
 
 > [!scena] Filtro
 > Mondo:
-> `INPUT[suggester(optionQuery("Mondi"), useLinks(partial), allowOther):mondo_attivo]`
+> `INPUT[mondo][:mondo_attivo]`
 >
 > Campagne:
-> `INPUT[inlineListSuggester(optionQuery("Campagne"), useLinks(partial)):campagne_attive]`
+> `INPUT[campagne][:campagne_attive]`
 
-```meta-bind-button
-label: DM Dashboard
-style: primary
-actions:
-  - type: open
-    link: "[[1. DM Dashboard]]"
-```
+`BUTTON[dm-dashboard-1-dm-dashboard]`
 
-```meta-bind-button
-label: Indice Mondo
-style: primary
-actions:
-  - type: open
-    link: "[[Mondi/Mondo]]"
-```
+`BUTTON[indice-mondo-mondi-mondo]`
 
-```meta-bind-button
-label: Atlante Del Mondo
-style: primary
-actions:
-  - type: open
-    link: "[[Atlante del Mondo]]"
-```
+`BUTTON[atlante-del-mondo-atlante-del-mondo]`
 
-```meta-bind-button
-label: Bibbia Del Mondo
-style: primary
-actions:
-  - type: open
-    link: "[[Bibbia del Mondo]]"
-```
+`BUTTON[bibbia-del-mondo-bibbia-del-mondo-2]`
 
-```meta-bind-button
-label: Motore Mondo Vivo
-style: primary
-actions:
-  - type: open
-    link: "[[Motore Mondo Vivo]]"
-```
+`BUTTON[motore-mondo-vivo-motore-mondo-vivo]`
 
-```meta-bind-button
-label: Geopolitica
-style: primary
-actions:
-  - type: open
-    link: "[[Geopolitical Dashboard]]"
-```
+`BUTTON[geopolitica-geopolitical-dashboard-2]`
 
-```meta-bind-button
-label: Economia E Rotte
-style: primary
-actions:
-  - type: open
-    link: "[[Economia E Rotte]]"
-```
+`BUTTON[economia-e-rotte-economia-e-rotte-2]`
 
-```meta-bind-button
-label: Lore Hub
-style: primary
-actions:
-  - type: open
-    link: "[[Lore Hub]]"
-```
+`BUTTON[lore-hub-lore-hub-2]`
 
-```meta-bind-button
-label: Controllo Vault
-style: primary
-actions:
-  - type: open
-    link: "[[Risorse/Controllo Vault]]"
-```
+`BUTTON[controllo-vault-risorse-controllo-vault]`
 
-```meta-bind-button
-label: Mappe
-style: primary
-actions:
-  - type: open
-    link: "[[Risorse/Mappe/Mappe]]"
-```
+`BUTTON[mappe-risorse-mappe-mappe]`
 
-```meta-bind-button
-label: Nuova Mappa Zoom
-style: default
-actions:
-  - type: templaterCreateNote
-    templateFile: "z.modelli/mappe/Mappa Zoom.md"
-    folderPath: "Risorse/Mappe"
-    open: true
-```
+`BUTTON[nuova-mappa-zoom-z-modelli-mappe-mappa-zoom-md]`
 
-```meta-bind-button
-label: Nuova Mappa Fronti
-style: default
-actions:
-  - type: templaterCreateNote
-    templateFile: "z.modelli/mappe/Mappa Excalidraw Fronti.excalidraw.md"
-    folderPath: "Risorse/Mappe"
-    open: true
-```
+`BUTTON[nuova-mappa-fronti-z-modelli-mappe-mappa-excalidraw-fronti-excalidraw-md]`
 
-```meta-bind-button
-label: Canvas Fronti
-style: primary
-actions:
-  - type: open
-    link: "[[Demo - Canvas Fronti.canvas]]"
-```
+`BUTTON[canvas-fronti-demo-canvas-fronti-canvas]`
 
-```meta-bind-button
-label: Timeline
-style: primary
-actions:
-  - type: open
-    link: "[[Mondi/Timeline/Timeline]]"
-```
+`BUTTON[timeline-mondi-timeline-timeline]`
 
-```meta-bind-button
-label: Revisione Lore
-style: primary
-actions:
-  - type: open
-    link: "[[Revisione Lore]]"
-```
+`BUTTON[revisione-lore-revisione-lore]`
 
-```meta-bind-button
-label: Controllo Canone
-style: primary
-actions:
-  - type: open
-    link: "[[Controllo Canone]]"
-```
+`BUTTON[controllo-canone-controllo-canone]`
 
-```meta-bind-button
-label: Stato Mondo
-style: primary
-actions:
-  - type: open
-    link: "[[Mondi/Stato del Mondo]]"
-```
+`BUTTON[stato-mondo-mondi-stato-del-mondo]`
 
 ## Crea Mondo
 
@@ -179,183 +73,41 @@ grid.innerHTML = steps.map(([label, title, hint]) => `
 `).join("");
 ```
 
-```meta-bind-button
-label: Nuovo Mondo
-style: primary
-actions:
-  - type: templaterCreateNote
-    templateFile: "z.modelli/Mondo.md"
-    folderPath: "Mondi"
-    open: true
-```
+`BUTTON[nuovo-mondo-z-modelli-mondo-md]`
 
-```meta-bind-button
-label: Nuovo Personaggio
-style: primary
-actions:
-  - type: templaterCreateNote
-    templateFile: "z.modelli/Personaggio Router.md"
-    folderPath: "Mondi/Personaggi"
-    open: true
-```
+`BUTTON[nuovo-personaggio-z-modelli-personaggio-router-md]`
 
-```meta-bind-button
-label: Nuovo Luogo
-style: primary
-actions:
-  - type: templaterCreateNote
-    templateFile: "z.modelli/Luogo Router.md"
-    folderPath: "Mondi/Luoghi"
-    open: true
-```
+`BUTTON[nuovo-luogo-z-modelli-luogo-router-md]`
 
-```meta-bind-button
-label: Nuova Fazione
-style: primary
-actions:
-  - type: templaterCreateNote
-    templateFile: "z.modelli/Fazione Router.md"
-    folderPath: "Mondi/Fazioni"
-    open: true
-```
+`BUTTON[nuova-fazione-z-modelli-fazione-router-md]`
 
-```meta-bind-button
-label: Nuovo Culto
-style: primary
-actions:
-  - type: templaterCreateNote
-    templateFile: "z.modelli/fazione/Culto.md"
-    folderPath: "Mondi/Religioni"
-    open: true
-```
+`BUTTON[nuovo-culto-z-modelli-fazione-culto-md]`
 
-```meta-bind-button
-label: Nuova Creatura
-style: primary
-actions:
-  - type: templaterCreateNote
-    templateFile: "z.modelli/Creatura.md"
-    folderPath: "Mondi/Creature"
-    open: true
-```
+`BUTTON[nuova-creatura-z-modelli-creatura-md]`
 
-```meta-bind-button
-label: Nuovo Oggetto
-style: primary
-actions:
-  - type: templaterCreateNote
-    templateFile: "z.modelli/Oggetto.md"
-    folderPath: "Mondi/Oggetti"
-    open: true
-```
+`BUTTON[nuovo-oggetto-z-modelli-oggetto-md]`
 
-```meta-bind-button
-label: Nuovo Oggetto Magico
-style: primary
-actions:
-  - type: templaterCreateNote
-    templateFile: "z.modelli/Oggetto Magico.md"
-    folderPath: "Mondi/Oggetti"
-    open: true
-```
+`BUTTON[nuovo-oggetto-magico-z-modelli-oggetto-magico-md]`
 
-```meta-bind-button
-label: Evento Storico
-style: primary
-actions:
-  - type: templaterCreateNote
-    templateFile: "z.modelli/Evento Storico.md"
-    folderPath: "Mondi/Timeline"
-    open: true
-```
+`BUTTON[evento-storico-z-modelli-evento-storico-md]`
 
-```meta-bind-button
-label: Segreto O Mistero
-style: primary
-actions:
-  - type: templaterCreateNote
-    templateFile: "z.modelli/worldbuilding/Segreto o Mistero.md"
-    folderPath: "Mondi/Segreti"
-    open: true
-```
+`BUTTON[segreto-o-mistero-z-modelli-worldbuilding-segreto-o-mistero-md]`
 
-```meta-bind-button
-label: Nuova Cultura
-style: primary
-actions:
-  - type: templaterCreateNote
-    templateFile: "z.modelli/worldbuilding/Cultura.md"
-    folderPath: "Mondi/Culture"
-    open: true
-```
+`BUTTON[nuova-cultura-z-modelli-worldbuilding-cultura-md]`
 
-```meta-bind-button
-label: Nuova Lingua
-style: primary
-actions:
-  - type: templaterCreateNote
-    templateFile: "z.modelli/worldbuilding/Lingua.md"
-    folderPath: "Mondi/Lingue"
-    open: true
-```
+`BUTTON[nuova-lingua-z-modelli-worldbuilding-lingua-md]`
 
-```meta-bind-button
-label: Nuovo Conflitto
-style: primary
-actions:
-  - type: templaterCreateNote
-    templateFile: "z.modelli/worldbuilding/Conflitto.md"
-    folderPath: "Mondi/Conflitti"
-    open: true
-```
+`BUTTON[nuovo-conflitto-z-modelli-worldbuilding-conflitto-md]`
 
-```meta-bind-button
-label: Nuova Rotta
-style: primary
-actions:
-  - type: templaterCreateNote
-    templateFile: "z.modelli/worldbuilding/Rotta.md"
-    folderPath: "Mondi/Rotte"
-    open: true
-```
+`BUTTON[nuova-rotta-z-modelli-worldbuilding-rotta-md]`
 
-```meta-bind-button
-label: Nuova Risorsa
-style: primary
-actions:
-  - type: templaterCreateNote
-    templateFile: "z.modelli/worldbuilding/Risorsa.md"
-    folderPath: "Mondi/Risorse"
-    open: true
-```
+`BUTTON[nuova-risorsa-z-modelli-worldbuilding-risorsa-md]`
 
-```meta-bind-button
-label: Nuovo Mercato
-style: primary
-actions:
-  - type: templaterCreateNote
-    templateFile: "z.modelli/worldbuilding/Mercato o Nodo Commerciale.md"
-    folderPath: "Mondi/Mercati"
-    open: true
-```
+`BUTTON[nuovo-mercato-z-modelli-worldbuilding-mercato-o-nodo-commerciale-md]`
 
-```meta-bind-button
-label: Nuova Relazione
-style: primary
-actions:
-  - type: templaterCreateNote
-    templateFile: "z.modelli/worldbuilding/Relazione.md"
-    folderPath: "Mondi/Relazioni"
-    open: true
-```
+`BUTTON[nuova-relazione-z-modelli-worldbuilding-relazione-md]`
 
-```meta-bind-button
-label: Dispense
-style: primary
-actions:
-  - type: open
-    link: "[[Mondi/Dispense/Dispense]]"
-```
+`BUTTON[dispense-mondi-dispense-dispense]`
 
 ## Panoramica Del Mondo
 

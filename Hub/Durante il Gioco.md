@@ -25,155 +25,37 @@ if (!active) {
 
 ## Comandi Rapidi
 
-```meta-bind-button
-label: Preparazione Sessione
-style: primary
-actions:
-  - type: open
-    link: "[[Risorse/Preparazione Sessione]]"
-```
+`BUTTON[preparazione-sessione-risorse-preparazione-sessione]`
 
-```meta-bind-button
-label: Nota Rapida
-style: primary
-actions:
-  - type: templaterCreateNote
-    templateFile: "z.modelli/Nota Rapida.md"
-    folderPath: "Inbox"
-    open: true
-```
+`BUTTON[nota-rapida-z-modelli-nota-rapida-md]`
 
-```meta-bind-button
-label: Evento / Lore
-style: primary
-actions:
-  - type: templaterCreateNote
-    templateFile: "z.modelli/Lore Capture.md"
-    folderPath: "Inbox"
-    open: true
-```
+`BUTTON[evento-lore-z-modelli-lore-capture-md]`
 
-```meta-bind-button
-label: Nuovo PNG
-style: primary
-actions:
-  - type: templaterCreateNote
-    templateFile: "z.modelli/personaggio/PNG.md"
-    folderPath: "Mondi/Personaggi"
-    open: true
-```
+`BUTTON[nuovo-png-z-modelli-personaggio-png-md]`
 
-```meta-bind-button
-label: Nuovo Luogo
-style: primary
-actions:
-  - type: templaterCreateNote
-    templateFile: "z.modelli/Luogo Router.md"
-    folderPath: "Mondi/Luoghi"
-    open: true
-```
+`BUTTON[nuovo-luogo-z-modelli-luogo-router-md]`
 
-```meta-bind-button
-label: Nuova Missione
-style: primary
-actions:
-  - type: templaterCreateNote
-    templateFile: "z.modelli/dm/Missione.md"
-    folderPath: "Mondi/Missioni"
-    open: true
-```
+`BUTTON[nuova-missione-z-modelli-dm-missione-md]`
 
-```meta-bind-button
-label: Nuovo Clock
-style: primary
-actions:
-  - type: templaterCreateNote
-    templateFile: "z.modelli/dm/Tracciato.md"
-    folderPath: "Mondi/Tracciati"
-    open: true
-```
+`BUTTON[nuovo-clock-z-modelli-dm-tracciato-md]`
 
-```meta-bind-button
-label: Nuova Fazione
-style: primary
-actions:
-  - type: templaterCreateNote
-    templateFile: "z.modelli/Fazione Router.md"
-    folderPath: "Mondi/Fazioni"
-    open: true
-```
+`BUTTON[nuova-fazione-z-modelli-fazione-router-md]`
 
-```meta-bind-button
-label: Nuovo Incontro
-style: primary
-actions:
-  - type: templaterCreateNote
-    templateFile: "z.modelli/dm/Incontro.md"
-    folderPath: "Mondi/Incontri"
-    open: true
-```
+`BUTTON[nuovo-incontro-z-modelli-dm-incontro-md]`
 
-```meta-bind-button
-label: Iniziativa
-style: primary
-actions:
-  - type: open
-    link: "[[Risorse/Iniziativa e Combattimenti]]"
-```
+`BUTTON[iniziativa-risorse-iniziativa-e-combattimenti]`
 
-```meta-bind-button
-label: Nuova Dispensa
-style: primary
-actions:
-  - type: templaterCreateNote
-    templateFile: "z.modelli/Dispensa.md"
-    folderPath: "Mondi/Dispense"
-    open: true
-```
+`BUTTON[nuova-dispensa-z-modelli-dispensa-md]`
 
-```meta-bind-button
-label: Nuovo Oggetto
-style: primary
-actions:
-  - type: templaterCreateNote
-    templateFile: "z.modelli/Oggetto.md"
-    folderPath: "Mondi/Oggetti"
-    open: true
-```
+`BUTTON[nuovo-oggetto-z-modelli-oggetto-md]`
 
-```meta-bind-button
-label: Evento Storico
-style: primary
-actions:
-  - type: templaterCreateNote
-    templateFile: "z.modelli/Evento Storico.md"
-    folderPath: "Mondi/Timeline"
-    open: true
-```
+`BUTTON[evento-storico-z-modelli-evento-storico-md]`
 
-```meta-bind-button
-label: Stato Mondo
-style: primary
-actions:
-  - type: open
-    link: "[[Mondi/Stato del Mondo]]"
-```
+`BUTTON[stato-mondo-mondi-stato-del-mondo]`
 
-```meta-bind-button
-label: Controllo Vault
-style: primary
-actions:
-  - type: open
-    link: "[[Risorse/Controllo Vault]]"
-```
+`BUTTON[controllo-vault-risorse-controllo-vault]`
 
-```meta-bind-button
-label: Tabelle Rapide
-style: primary
-actions:
-  - type: open
-    link: "[[Risorse/Tabelle/Tabelle]]"
-```
+`BUTTON[tabelle-rapide-risorse-tabelle-tabelle]`
 
 ## Scena Corrente
 
@@ -367,55 +249,15 @@ tab: Cattura
 
 ### Inbox Live
 
-```meta-bind-button
-label: Evento Live
-style: primary
-actions:
-  - type: templaterCreateNote
-    templateFile: "z.modelli/Live Evento.md"
-    folderPath: "Inbox"
-    open: true
-```
+`BUTTON[evento-live-z-modelli-live-evento-md]`
 
-```meta-bind-button
-label: PNG Improvvisato
-style: primary
-actions:
-  - type: templaterCreateNote
-    templateFile: "z.modelli/Live PNG.md"
-    folderPath: "Inbox"
-    open: true
-```
+`BUTTON[png-improvvisato-z-modelli-live-png-md]`
 
-```meta-bind-button
-label: Luogo Improvvisato
-style: primary
-actions:
-  - type: templaterCreateNote
-    templateFile: "z.modelli/Live Luogo.md"
-    folderPath: "Inbox"
-    open: true
-```
+`BUTTON[luogo-improvvisato-z-modelli-live-luogo-md]`
 
-```meta-bind-button
-label: Nota Grezza
-style: primary
-actions:
-  - type: templaterCreateNote
-    templateFile: "z.modelli/Live Nota Grezza.md"
-    folderPath: "Inbox"
-    open: true
-```
+`BUTTON[nota-grezza-z-modelli-live-nota-grezza-md]`
 
-```meta-bind-button
-label: Conseguenza
-style: primary
-actions:
-  - type: templaterCreateNote
-    templateFile: "z.modelli/Live Conseguenza.md"
-    folderPath: "Inbox"
-    open: true
-```
+`BUTTON[conseguenza-z-modelli-live-conseguenza-md]`
 
 ```dataview
 TABLE tipo, stato, stato_canonico, sessioni, collegamenti
@@ -738,13 +580,7 @@ tab: Post
 
 ### Post-Sessione
 
-```meta-bind-button
-label: Bacheca Post Sessione
-style: primary
-actions:
-  - type: open
-    link: "[[z.bacheche/Post Sessione]]"
-```
+`BUTTON[bacheca-post-sessione-z-bacheche-post-sessione]`
 
 > [!missione] Conseguenze
 > - [ ] Aggiornare missioni

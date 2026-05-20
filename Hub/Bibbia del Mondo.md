@@ -12,17 +12,9 @@ mondo_attivo: ""
 
 > [!scena] Filtro
 > Mondo:
-> `INPUT[suggester(optionQuery("Mondi"), useLinks(partial), allowOther):mondo_attivo]`
+> `INPUT[mondo][:mondo_attivo]`
 
-```meta-bind-button
-label: Nuovo Mondo
-style: primary
-actions:
-  - type: templaterCreateNote
-    templateFile: "z.modelli/Mondo.md"
-    folderPath: "Mondi"
-    open: true
-```
+`BUTTON[nuovo-mondo-z-modelli-mondo-md]`
 
 ```dataviewjs
 const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));

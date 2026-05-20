@@ -8,15 +8,7 @@ stato: pronto
 
 # Relazioni
 
-```meta-bind-button
-label: Nuova Relazione
-style: primary
-actions:
-  - type: templaterCreateNote
-    templateFile: "z.modelli/worldbuilding/Relazione.md"
-    folderPath: "Mondi/Relazioni"
-    open: true
-```
+`BUTTON[nuova-relazione-z-modelli-worldbuilding-relazione-md]`
 
 ## Relazioni Vive
 

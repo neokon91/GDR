@@ -16,44 +16,18 @@ campagne_attive: []
 
 > [!scena] Filtro
 > Mondo:
-> `INPUT[suggester(optionQuery("Mondi"), useLinks(partial), allowOther):mondo_attivo]`
+> `INPUT[mondo][:mondo_attivo]`
 >
 > Campagne:
-> `INPUT[inlineListSuggester(optionQuery("Campagne"), useLinks(partial)):campagne_attive]`
+> `INPUT[campagne][:campagne_attive]`
 
-```meta-bind-button
-label: Post Sessione Guidato
-style: primary
-actions:
-  - type: open
-    link: "[[Risorse/Post Sessione Guidato]]"
-```
+`BUTTON[post-sessione-guidato-risorse-post-sessione-guidato]`
 
-```meta-bind-button
-label: Motore Mondo Vivo
-style: primary
-actions:
-  - type: open
-    link: "[[Motore Mondo Vivo]]"
-```
+`BUTTON[motore-mondo-vivo-motore-mondo-vivo]`
 
-```meta-bind-button
-label: Stato Campagna
-style: primary
-actions:
-  - type: open
-    link: "[[Mondi/Stato del Mondo]]"
-```
+`BUTTON[stato-campagna-mondi-stato-del-mondo]`
 
-```meta-bind-button
-label: Nuovo Clock
-style: primary
-actions:
-  - type: templaterCreateNote
-    templateFile: "z.modelli/dm/Tracciato.md"
-    folderPath: "Mondi/Tracciati"
-    open: true
-```
+`BUTTON[nuovo-clock-z-modelli-dm-tracciato-md]`
 
 ```dataviewjs
 const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));

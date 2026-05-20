@@ -10,23 +10,9 @@ stato: pronto
 
 Clock e progress track usati per fronti, missioni, rituali, minacce e viaggi. Sono note Markdown autonome: funzionano con Dataview e Meta Bind, senza Iron Vault.
 
-```meta-bind-button
-label: Come Usare I Clock
-style: primary
-actions:
-  - type: open
-    link: "[[Risorse/Come Usare I Clock]]"
-```
+`BUTTON[come-usare-i-clock-risorse-come-usare-i-clock]`
 
-```meta-bind-button
-label: Nuovo Clock O Tracciato
-style: primary
-actions:
-  - type: templaterCreateNote
-    templateFile: "z.modelli/dm/Tracciato.md"
-    folderPath: "Mondi/Tracciati"
-    open: true
-```
+`BUTTON[nuovo-clock-o-tracciato-z-modelli-dm-tracciato-md]`
 
 ## Attivi
 

@@ -8,15 +8,7 @@ stato: pronto
 
 # Mercati
 
-```meta-bind-button
-label: Nuovo Mercato O Nodo
-style: primary
-actions:
-  - type: templaterCreateNote
-    templateFile: "z.modelli/worldbuilding/Mercato o Nodo Commerciale.md"
-    folderPath: "Mondi/Mercati"
-    open: true
-```
+`BUTTON[nuovo-mercato-o-nodo-z-modelli-worldbuilding-mercato-o-nodo-commerciale-md]`
 
 ```dataview
 TABLE luogo, fazioni_controllanti, risorse, rotte, pedaggi, rischi, pressione, prossima_mossa

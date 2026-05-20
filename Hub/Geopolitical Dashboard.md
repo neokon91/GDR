@@ -15,43 +15,15 @@ mondo_attivo: ""
 
 > [!scena] Filtro
 > Mondo:
-> `INPUT[suggester(optionQuery("Mondi"), useLinks(partial), allowOther):mondo_attivo]`
+> `INPUT[mondo][:mondo_attivo]`
 
-```meta-bind-button
-label: Nuovo Territorio Politico
-style: primary
-actions:
-  - type: templaterCreateNote
-    templateFile: "z.modelli/Luogo Router.md"
-    folderPath: "Mondi/Luoghi"
-    open: true
-```
+`BUTTON[nuovo-territorio-politico-z-modelli-luogo-router-md]`
 
-```meta-bind-button
-label: Nuova Relazione
-style: primary
-actions:
-  - type: templaterCreateNote
-    templateFile: "z.modelli/worldbuilding/Relazione.md"
-    folderPath: "Mondi/Relazioni"
-    open: true
-```
+`BUTTON[nuova-relazione-z-modelli-worldbuilding-relazione-md]`
 
-```meta-bind-button
-label: Motore Mondo Vivo
-style: primary
-actions:
-  - type: open
-    link: "[[Motore Mondo Vivo]]"
-```
+`BUTTON[motore-mondo-vivo-motore-mondo-vivo]`
 
-```meta-bind-button
-label: Economia E Rotte
-style: primary
-actions:
-  - type: open
-    link: "[[Economia E Rotte]]"
-```
+`BUTTON[economia-e-rotte-economia-e-rotte-2]`
 
 ```dataviewjs
 const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));

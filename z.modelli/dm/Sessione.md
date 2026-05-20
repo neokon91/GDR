@@ -27,7 +27,7 @@
 > `INPUT[toggle:attiva]`
 >
 > Campagne:
-> `INPUT[inlineListSuggester(optionQuery("Campagne"), useLinks(partial)):campagne]`
+> `INPUT[campagne][:campagne]`
 >
 > Luoghi:
 > `INPUT[inlineListSuggester(optionQuery("Mondi/Luoghi"), useLinks(partial)):luoghi]`
@@ -83,39 +83,13 @@
 > > - Umore PNG: `dice: [[Risorse/Tabelle/Tabelle#^umore-png]]`
 
 > [!regia] Gestione
-> ```meta-bind-button
-> label: Durante Il Gioco
-> style: primary
-> actions:
->   - type: open
->     link: "[[Durante il Gioco]]"
-> ```
+> `BUTTON[durante-il-gioco-durante-il-gioco]`
 >
-> ```meta-bind-button
-> label: Materiali Al Tavolo
-> style: primary
-> actions:
->   - type: open
->     link: "[[Risorse/Materiali Al Tavolo]]"
-> ```
+> `BUTTON[materiali-al-tavolo-risorse-materiali-al-tavolo]`
 >
-> ```meta-bind-button
-> label: Nuovo Incontro
-> style: default
-> actions:
->   - type: templaterCreateNote
->     templateFile: "z.modelli/dm/Incontro.md"
->     folderPath: "Mondi/Incontri"
->     open: true
-> ```
+> `BUTTON[nuovo-incontro-z-modelli-dm-incontro-md-default]`
 >
-> ```meta-bind-button
-> label: Post Sessione
-> style: default
-> actions:
->   - type: open
->     link: "[[Risorse/Post Sessione Guidato]]"
-> ```
+> `BUTTON[post-sessione-risorse-post-sessione-guidato-2]`
 
 ````tabs
 tab: Scaletta

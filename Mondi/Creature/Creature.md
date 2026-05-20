@@ -5,15 +5,7 @@ cssclasses:
 
 # Creature
 
-```meta-bind-button
-label: Nuova Creatura
-style: primary
-actions:
-  - type: templaterCreateNote
-    templateFile: "z.modelli/Creatura.md"
-    folderPath: "Mondi/Creature"
-    open: true
-```
+`BUTTON[nuova-creatura-z-modelli-creatura-md]`
 
 ## Pronte
 

@@ -43,42 +43,11 @@
 > > - Danno improvvisato serio: `dice: 2d6`
 
 > [!regia] Gestione
-> ```meta-bind-button
-> label: Iniziativa
-> style: primary
-> actions:
->   - type: open
->     link: "[[Risorse/Iniziativa e Combattimenti]]"
-> ```
+> `BUTTON[iniziativa-risorse-iniziativa-e-combattimenti]`
 >
-> ```meta-bind-button
-> label: Durante Il Gioco
-> style: primary
-> actions:
->   - type: open
->     link: "[[Durante il Gioco]]"
-> ```
+> `BUTTON[durante-il-gioco-durante-il-gioco]`
 >
-> ```meta-bind-button
-> label: Nuova Creatura
-> style: default
-> actions:
->   - type: templaterCreateNote
->     templateFile: "z.modelli/Creatura.md"
->     folderPath: "Mondi/Creature"
->     open: true
-> ```
->
-> ```meta-bind-button
-> label: Nuova Mappa Zoom
-> style: default
-> actions:
->   - type: templaterCreateNote
->     templateFile: "z.modelli/mappe/Mappa Zoom.md"
->     folderPath: "Risorse/Mappe"
->     open: true
-> ```
-
+> `BUTTON[nuova-creatura-z-modelli-creatura-md-default]`
 
 ````tabs
 tab: Scena

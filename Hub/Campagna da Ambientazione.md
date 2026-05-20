@@ -11,54 +11,20 @@ mondo_attivo: ""
 
 Questa pagina serve a trasformare una regione, un conflitto o una cultura in gioco vero: campagne, archi narrativi, missioni e prime sessioni.
 
-```meta-bind-button
-label: Campagna Da Regione
-style: primary
-actions:
-  - type: templaterCreateNote
-    templateFile: "z.modelli/dm/Campagna Da Regione.md"
-    folderPath: "Campagne"
-    open: true
-```
+`BUTTON[campagna-da-regione-z-modelli-dm-campagna-da-regione-md]`
 
-```meta-bind-button
-label: Arco Da Conflitto
-style: primary
-actions:
-  - type: templaterCreateNote
-    templateFile: "z.modelli/dm/Arco Da Conflitto.md"
-    folderPath: "Mondi/Missioni"
-    open: true
-```
+`BUTTON[arco-da-conflitto-z-modelli-dm-arco-da-conflitto-md]`
 
-```meta-bind-button
-label: Opportunità
-style: default
-actions:
-  - type: open
-    link: "[[Risorse/Opportunità Di Avventura]]"
-```
+`BUTTON[opportunita-risorse-opportunita-di-avventura]`
 
-```meta-bind-button
-label: Fronti
-style: default
-actions:
-  - type: open
-    link: "[[Risorse/Fronti Di Campagna]]"
-```
+`BUTTON[fronti-risorse-fronti-di-campagna]`
 
-```meta-bind-button
-label: Atlante
-style: default
-actions:
-  - type: open
-    link: "[[Atlante del Mondo]]"
-```
+`BUTTON[atlante-atlante-del-mondo]`
 
 ## Filtro
 
 > [!scena] Mondo
-> `INPUT[suggester(optionQuery("Mondi"), useLinks(partial), allowOther):mondo_attivo]`
+> `INPUT[mondo][:mondo_attivo]`
 
 ## Da Ambientazione A Gioco
 

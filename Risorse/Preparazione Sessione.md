@@ -7,39 +7,13 @@ cssclasses:
 
 Usa questa pagina quando devi preparare la prossima sessione senza perderti nei dettagli.
 
-```meta-bind-button
-label: Nuova Sessione
-style: primary
-actions:
-  - type: templaterCreateNote
-    templateFile: "z.modelli/dm/Sessione.md"
-    folderPath: "Mondi/Sessioni"
-    open: true
-```
+`BUTTON[nuova-sessione-z-modelli-dm-sessione-md]`
 
-```meta-bind-button
-label: Durante Il Gioco
-style: primary
-actions:
-  - type: open
-    link: "[[Durante il Gioco]]"
-```
+`BUTTON[durante-il-gioco-durante-il-gioco]`
 
-```meta-bind-button
-label: Materiali Al Tavolo
-style: default
-actions:
-  - type: open
-    link: "[[Risorse/Materiali Al Tavolo]]"
-```
+`BUTTON[materiali-al-tavolo-risorse-materiali-al-tavolo]`
 
-```meta-bind-button
-label: Mondo Vivo
-style: default
-actions:
-  - type: open
-    link: "[[Motore Mondo Vivo]]"
-```
+`BUTTON[mondo-vivo-motore-mondo-vivo-2]`
 
 ## Sessione Da Preparare
 

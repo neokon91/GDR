@@ -10,45 +10,15 @@ stato: pronto
 
 Apri questa pagina subito dopo la partita. Serve a chiudere la sessione senza dimenticare conseguenze, ricompense e prossima apertura.
 
-```meta-bind-button
-label: Apri Bacheca Post Sessione
-style: primary
-actions:
-  - type: open
-    link: "[[z.bacheche/Post Sessione]]"
-```
+`BUTTON[apri-bacheca-post-sessione-z-bacheche-post-sessione]`
 
-```meta-bind-button
-label: Controllo Vault
-style: default
-actions:
-  - type: open
-    link: "[[Risorse/Controllo Vault]]"
-```
+`BUTTON[controllo-vault-risorse-controllo-vault-2]`
 
-```meta-bind-button
-label: Smistamento Bozze Generate
-style: default
-actions:
-  - type: open
-    link: "[[Risorse/Smistamento Bozze Generate]]"
-```
+`BUTTON[smistamento-bozze-generate-risorse-smistamento-bozze-generate]`
 
-```meta-bind-button
-label: Motore Mondo Vivo
-style: primary
-actions:
-  - type: open
-    link: "[[Motore Mondo Vivo]]"
-```
+`BUTTON[motore-mondo-vivo-motore-mondo-vivo]`
 
-```meta-bind-button
-label: Cosa Succede Fuori Scena
-style: primary
-actions:
-  - type: open
-    link: "[[Cosa Succede Fuori Scena]]"
-```
+`BUTTON[cosa-succede-fuori-scena-cosa-succede-fuori-scena]`
 
 ## 1. Cosa E Successo
 
@@ -109,35 +79,11 @@ Usa questa sequenza per non perdere continuita.
 | Stato Campagna | Riapri [[Mondi/Stato del Mondo]] e controlla che compaia nella vista operativa. |
 | Mondo Vivo | Apri [[Motore Mondo Vivo]] e chiudi le continuita aperte prima della prossima prep. |
 
-```meta-bind-button
-label: Nuova Conseguenza
-style: primary
-actions:
-  - type: templaterCreateNote
-    templateFile: "z.modelli/Live Conseguenza.md"
-    folderPath: "Inbox"
-    open: true
-```
+`BUTTON[nuova-conseguenza-z-modelli-live-conseguenza-md]`
 
-```meta-bind-button
-label: Nuovo Evento Storico
-style: primary
-actions:
-  - type: templaterCreateNote
-    templateFile: "z.modelli/Evento Storico.md"
-    folderPath: "Mondi/Timeline"
-    open: true
-```
+`BUTTON[nuovo-evento-storico-z-modelli-evento-storico-md]`
 
-```meta-bind-button
-label: Nuovo Clock
-style: primary
-actions:
-  - type: templaterCreateNote
-    templateFile: "z.modelli/dm/Tracciato.md"
-    folderPath: "Mondi/Tracciati"
-    open: true
-```
+`BUTTON[nuovo-clock-z-modelli-dm-tracciato-md]`
 
 ## 5. Aggiorna Pressioni
 

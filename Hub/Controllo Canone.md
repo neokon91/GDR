@@ -12,23 +12,11 @@ mondo_attivo: ""
 
 > [!scena] Filtro
 > Mondo:
-> `INPUT[suggester(optionQuery("Mondi"), useLinks(partial), allowOther):mondo_attivo]`
+> `INPUT[mondo][:mondo_attivo]`
 
-```meta-bind-button
-label: Timeline
-style: primary
-actions:
-  - type: open
-    link: "[[Mondi/Timeline/Timeline]]"
-```
+`BUTTON[timeline-mondi-timeline-timeline]`
 
-```meta-bind-button
-label: Revisione Lore
-style: primary
-actions:
-  - type: open
-    link: "[[Revisione Lore]]"
-```
+`BUTTON[revisione-lore-revisione-lore]`
 
 ```dataviewjs
 const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));

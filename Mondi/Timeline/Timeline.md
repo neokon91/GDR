@@ -5,15 +5,7 @@ cssclasses:
 
 # Timeline
 
-```meta-bind-button
-label: Nuovo Evento Storico
-style: primary
-actions:
-  - type: templaterCreateNote
-    templateFile: "z.modelli/Evento Storico.md"
-    folderPath: "Mondi/Timeline"
-    open: true
-```
+`BUTTON[nuovo-evento-storico-z-modelli-evento-storico-md]`
 
 ## Eventi Canonici
 

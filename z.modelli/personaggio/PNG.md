@@ -38,76 +38,13 @@
 > > `=this.segreto`
 
 > [!regia] Gestione
-> ```meta-bind-button
-> label: Durante Il Gioco
-> style: primary
-> actions:
->   - type: open
->     link: "[[Durante il Gioco]]"
-> ```
+> `BUTTON[durante-il-gioco-durante-il-gioco]`
 >
-> ```meta-bind-button
-> label: Nuova Missione
-> style: primary
-> actions:
->   - type: templaterCreateNote
->     templateFile: "z.modelli/dm/Missione.md"
->     folderPath: "Mondi/Missioni"
->     open: true
-> ```
+> `BUTTON[nuova-missione-z-modelli-dm-missione-md]`
 >
-> ```meta-bind-button
-> label: Nuovo Incontro
-> style: default
-> actions:
->   - type: templaterCreateNote
->     templateFile: "z.modelli/dm/Incontro.md"
->     folderPath: "Mondi/Incontri"
->     open: true
-> ```
+> `BUTTON[nuovo-incontro-z-modelli-dm-incontro-md-default]`
 >
-> ```meta-bind-button
-> label: Revisione Lore
-> style: default
-> actions:
->   - type: open
->     link: "[[Revisione Lore]]"
-> ```
-
-Mondo:
-`INPUT[suggester(optionQuery("Mondi"), useLinks(partial), allowOther):mondo]`
-
-Stato:
-`INPUT[inlineSelect(option(bozza, Bozza), option(pronto, Pronto), option(in gioco, In gioco), option(ostile, Ostile), option(scomparso, Scomparso), option(morto, Morto), option(archiviata, Archiviata)):stato]`
-
-Pressione:
-`INPUT[slider(minValue(0), maxValue(10), stepSize(1), addLabels):pressione]`
-
-Innesco:
-`INPUT[text:innesco]`
-
-Prossima mossa:
-`INPUT[text:prossima_mossa]`
-
-## Essenziale Al Tavolo
-
-> [!scena] Prima scena utile
-> Vuole: `INPUT[text:vuole]`
->
-> Sa: `INPUT[text:sa]`
->
-> Leva: `INPUT[text:leva]`
->
-> Segreto: `INPUT[text:segreto]`
-
-> [!timer] Se ignorato
-> Pressione: `=this.pressione`
->
-> Innesco: `=this.innesco`
->
-> Prossima mossa: `=this.prossima_mossa`
-
-## Statblock D&D
+> `BUTTON[revisione-lore-revisione-lore-default]`
 
 ```dataviewjs
 const name = dv.current().name ?? dv.current().nome ?? dv.current().file.name;

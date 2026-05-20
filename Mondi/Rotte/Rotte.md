@@ -8,15 +8,7 @@ stato: pronto
 
 # Rotte
 
-```meta-bind-button
-label: Nuova Rotta
-style: primary
-actions:
-  - type: templaterCreateNote
-    templateFile: "z.modelli/worldbuilding/Rotta.md"
-    folderPath: "Mondi/Rotte"
-    open: true
-```
+`BUTTON[nuova-rotta-z-modelli-worldbuilding-rotta-md]`
 
 ```dataview
 TABLE stato_rotta, partenza, arrivo, regioni, fazioni_controllanti, risorse_trasportate, pressione, prossima_mossa

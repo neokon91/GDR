@@ -28,8 +28,9 @@ Conteggio su file Markdown del vault, escluso `dist`.
 | --- | ---: | --- |
 | `dataview` | 354 | Molto integrato: indici, dashboard e viste operative. |
 | `dataviewjs` | 74 | Forte uso per dashboard complesse, controlli e card. |
-| `meta-bind` | 529 | Spina dorsale dei pulsanti e delle interazioni. |
-| `meta-bind-button` | 223 | Molto sfruttato per creazione guidata e navigazione. |
+| `meta-bind` | 304 | Input in blocco ancora usati dove serve una lista editabile. |
+| `BUTTON[...]` | 257 | Pulsanti spostati su template globali Meta Bind. |
+| input template Meta Bind | 103 | Campi inline ricorrenti compressi con template globali. |
 | `dice:` | 401 | Buona copertura per tiri e tabelle casuali. |
 | `statblock` | 338 blocchi, 346 frontmatter | Molto sfruttato su SRD e creature. |
 | `encounter` | 3 blocchi, 5 inline | Sottoutilizzato: utile solo per combattimenti pronti. |

@@ -9,7 +9,7 @@
 > `INPUT[suggester(optionQuery("Mondi/Luoghi"), useLinks(partial), allowOther):luogo_padre]`
 >
 > Mondo:
-> `INPUT[suggester(optionQuery("Mondi"), useLinks(partial), allowOther):mondo]`
+> `INPUT[mondo][:mondo]`
 >
 > Popolazione:
 > `INPUT[number:popolazione]`
@@ -21,7 +21,7 @@
 > `INPUT[slider(minValue(0), maxValue(10), stepSize(1), addLabels):pericolo]`
 >
 > Canonico:
-> `INPUT[toggle:canonico]`
+> `INPUT[canonico][:canonico]`
 >
 > Stato:
 > `INPUT[inlineSelect(option(bozza, Bozza), option(pronto, Pronto), option(in gioco, In gioco), option(minacciato, Minacciato), option(distrutto, Distrutto), option(archiviata, Archiviata)):stato]`
@@ -39,43 +39,13 @@
 > > `=this.tensione`
 
 > [!regia] Gestione
-> ```meta-bind-button
-> label: Atlante
-> style: primary
-> actions:
->   - type: open
->     link: "[[Atlante del Mondo]]"
-> ```
+> `BUTTON[atlante-atlante-del-mondo-2]`
 >
-> ```meta-bind-button
-> label: Nuovo PNG
-> style: primary
-> actions:
->   - type: templaterCreateNote
->     templateFile: "z.modelli/personaggio/PNG.md"
->     folderPath: "Mondi/Personaggi"
->     open: true
-> ```
+> `BUTTON[nuovo-png-z-modelli-personaggio-png-md]`
 >
-> ```meta-bind-button
-> label: Nuovo Incontro
-> style: default
-> actions:
->   - type: templaterCreateNote
->     templateFile: "z.modelli/dm/Incontro.md"
->     folderPath: "Mondi/Incontri"
->     open: true
-> ```
+> `BUTTON[nuovo-incontro-z-modelli-dm-incontro-md-default]`
 >
-> ```meta-bind-button
-> label: Nuova Mappa Zoom
-> style: default
-> actions:
->   - type: templaterCreateNote
->     templateFile: "z.modelli/mappe/Mappa Zoom.md"
->     folderPath: "Risorse/Mappe"
->     open: true
-> ```
+> `BUTTON[nuova-mappa-zoom-z-modelli-mappe-mappa-zoom-md]`
 
 ````tabs
 tab: Essenziale

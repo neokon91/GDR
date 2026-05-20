@@ -3,16 +3,16 @@
 
 >[!infobox|wiki]- Cultura
 > Mondo:
-> `INPUT[suggester(optionQuery("Mondi"), useLinks(partial), allowOther):mondo]`
+> `INPUT[mondo][:mondo]`
 >
 > Stato:
-> `INPUT[inlineSelect(option(bozza, Bozza), option(pronto, Pronto), option(in gioco, In Gioco), option(archiviata, Archiviata)):stato]`
+> `INPUT[stato base][:stato]`
 >
 > Canonica:
-> `INPUT[toggle:canonico]`
+> `INPUT[canonico][:canonico]`
 >
 > Stato canonico:
-> `INPUT[inlineSelect(option(canonico, Canonico), option(rumor, Rumor), option(leggenda, Leggenda), option(falso, Falso), option(retcon, Retcon)):stato_canonico]`
+> `INPUT[stato canonico][:stato_canonico]`
 >
 > Luoghi:
 > `INPUT[inlineListSuggester(optionQuery("Mondi/Luoghi"), useLinks(partial)):luoghi]`

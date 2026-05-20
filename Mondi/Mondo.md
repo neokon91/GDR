@@ -5,63 +5,19 @@ cssclasses:
 
 # Mondi
 
-```meta-bind-button
-label: Worldbuilder
-style: primary
-actions:
-  - type: open
-    link: "[[Worldbuilder Dashboard]]"
-```
+`BUTTON[worldbuilder-worldbuilder-dashboard]`
 
-```meta-bind-button
-label: DM Dashboard
-style: primary
-actions:
-  - type: open
-    link: "[[1. DM Dashboard]]"
-```
+`BUTTON[dm-dashboard-1-dm-dashboard]`
 
-```meta-bind-button
-label: Nuovo Mondo
-style: primary
-actions:
-  - type: templaterCreateNote
-    templateFile: "z.modelli/Mondo.md"
-    folderPath: "Mondi"
-    open: true
-```
+`BUTTON[nuovo-mondo-z-modelli-mondo-md]`
 
-```meta-bind-button
-label: Timeline
-style: primary
-actions:
-  - type: open
-    link: "[[Mondi/Timeline/Timeline]]"
-```
+`BUTTON[timeline-mondi-timeline-timeline]`
 
-```meta-bind-button
-label: Stato Mondo
-style: primary
-actions:
-  - type: open
-    link: "[[Mondi/Stato del Mondo]]"
-```
+`BUTTON[stato-mondo-mondi-stato-del-mondo]`
 
-```meta-bind-button
-label: Mondo Vivo
-style: primary
-actions:
-  - type: open
-    link: "[[Motore Mondo Vivo]]"
-```
+`BUTTON[mondo-vivo-motore-mondo-vivo]`
 
-```meta-bind-button
-label: Geopolitica
-style: primary
-actions:
-  - type: open
-    link: "[[Geopolitical Dashboard]]"
-```
+`BUTTON[geopolitica-geopolitical-dashboard-2]`
 
 ## Tutti I Mondi
 

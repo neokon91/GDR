@@ -15,25 +15,11 @@ mondo_attivo: ""
 
 > [!scena] Filtro
 > Mondo:
-> `INPUT[suggester(optionQuery("Mondi"), useLinks(partial), allowOther):mondo_attivo]`
+> `INPUT[mondo][:mondo_attivo]`
 
-```meta-bind-button
-label: Nuovo Elemento
-style: primary
-actions:
-  - type: templaterCreateNote
-    templateFile: "z.modelli/worldbuilding/Compendium Del Mondo.md"
-    folderPath: "Mondi/Compendium"
-    open: true
-```
+`BUTTON[nuovo-elemento-z-modelli-worldbuilding-compendium-del-mondo-md]`
 
-```meta-bind-button
-label: Lore Hub
-style: default
-actions:
-  - type: open
-    link: "[[Lore Hub]]"
-```
+`BUTTON[lore-hub-lore-hub]`
 
 ```dataviewjs
 const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));

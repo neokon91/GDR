@@ -6,7 +6,7 @@
 > `INPUT[inlineSelect(option(aperta, Aperta), option(chiusa, Chiusa), option(contesa, Contesa), option(maledetta, Maledetta), option(interrotta, Interrotta)):stato_rotta]`
 >
 > Mondo:
-> `INPUT[suggester(optionQuery("Mondi"), useLinks(partial), allowOther):mondo]`
+> `INPUT[mondo][:mondo]`
 >
 > Partenza:
 > `INPUT[suggester(optionQuery("Mondi/Luoghi"), useLinks(partial), allowOther):partenza]`

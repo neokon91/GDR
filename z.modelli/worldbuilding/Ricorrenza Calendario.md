@@ -3,7 +3,7 @@
 
 >[!infobox|wiki]- Ricorrenza
 > Mondo:
-> `INPUT[suggester(optionQuery("Mondi"), useLinks(partial), allowOther):mondo]`
+> `INPUT[mondo][:mondo]`
 >
 > Data nel mondo:
 > `INPUT[text:data_mondo]`

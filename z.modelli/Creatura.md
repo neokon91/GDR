@@ -10,7 +10,7 @@
 >**Stato**: `=this.stato`
 >
 >Mondo:
->`INPUT[suggester(optionQuery("Mondi"), useLinks(partial), allowOther):mondo]`
+>`INPUT[mondo][:mondo]`
 >
 >Stato:
 >`INPUT[inlineSelect(option(bozza, Bozza), option(pronto, Pronto), option(archiviata, Archiviata)):stato]`

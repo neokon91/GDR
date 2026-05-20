@@ -3,7 +3,7 @@
 
 >[!infobox|wiki]- Conflitto
 > Mondo:
-> `INPUT[suggester(optionQuery("Mondi"), useLinks(partial), allowOther):mondo]`
+> `INPUT[mondo][:mondo]`
 >
 > Pressione:
 > `INPUT[slider(minValue(0), maxValue(10), stepSize(1), addLabels):pressione]`
@@ -35,32 +35,9 @@
 > [!regia] Gestione
 > Escalation: `INPUT[slider(minValue(0), maxValue(12), stepSize(1), addLabels):progress_value]`
 >
-> ```meta-bind-button
-> label: Nuovo Tracciato
-> style: primary
-> actions:
->   - type: templaterCreateNote
->     templateFile: "z.modelli/dm/Tracciato.md"
->     folderPath: "Mondi/Tracciati"
->     open: true
-> ```
+> `BUTTON[nuovo-tracciato-z-modelli-dm-tracciato-md]`
 >
-> ```meta-bind-button
-> label: Geopolitica
-> style: default
-> actions:
->   - type: open
->     link: "[[Geopolitical Dashboard]]"
-> ```
-
-## Posta In Gioco
-
-> [!missione] Cosa cambia se qualcuno vince
->
-
-## Anatomia Del Conflitto
-
-### Causa Profonda
+> `BUTTON[geopolitica-geopolitical-dashboard]`
 
 ```meta-bind
 INPUT[list:cause_profonde]

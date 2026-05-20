@@ -72,13 +72,7 @@ SORT file.ctime DESC
 
 ## Bozze Generate
 
-```meta-bind-button
-label: Smistamento Bozze Generate
-style: primary
-actions:
-  - type: open
-    link: "[[Risorse/Smistamento Bozze Generate]]"
-```
+`BUTTON[smistamento-bozze-generate-risorse-smistamento-bozze-generate-2]`
 
 ```dataview
 TABLE categoria, tipo, generatore, mondo, luogo, creato

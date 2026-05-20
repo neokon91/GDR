@@ -14,15 +14,7 @@ Per usarla basta compilare nelle note una data leggibile:
 
 Il vault segnala sotto cosa manca da sistemare. Non serve capire gli strumenti interni per usare questa pagina al tavolo.
 
-```meta-bind-button
-label: Nuova Ricorrenza
-style: primary
-actions:
-  - type: templaterCreateNote
-    templateFile: "z.modelli/worldbuilding/Ricorrenza Calendario.md"
-    folderPath: "Mondi/Calendario Diegetico"
-    open: true
-```
+`BUTTON[nuova-ricorrenza-z-modelli-worldbuilding-ricorrenza-calendario-md]`
 
 ## Oggi Nel Mondo
 

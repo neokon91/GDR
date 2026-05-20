@@ -6,7 +6,7 @@
 > `INPUT[suggester(optionQuery("Mondi/Luoghi"), useLinks(partial), allowOther):luogo_padre]`
 >
 > Mondo:
-> `INPUT[suggester(optionQuery("Mondi"), useLinks(partial), allowOther):mondo]`
+> `INPUT[mondo][:mondo]`
 >
 > Pericolo:
 > `INPUT[slider(minValue(0), maxValue(10), stepSize(1), addLabels):pericolo]`

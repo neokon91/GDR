@@ -5,15 +5,7 @@ cssclasses:
 
 # Sessioni
 
-```meta-bind-button
-label: Nuova Sessione
-style: primary
-actions:
-  - type: templaterCreateNote
-    templateFile: "z.modelli/dm/Sessione.md"
-    folderPath: "Mondi/Sessioni"
-    open: true
-```
+`BUTTON[nuova-sessione-z-modelli-dm-sessione-md]`
 
 ## Prossime
 

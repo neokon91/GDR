@@ -14,23 +14,9 @@ plugin:
 
 Questa pagina tiene separati gli incontri di combattimento dagli incontri sociali o esplorativi. Initiative Tracker va usato quando la scena deve davvero partire in round, con creature, condizioni e mappa pronta.
 
-```meta-bind-button
-label: Durante il Gioco
-style: primary
-actions:
-  - type: open
-    link: "[[Durante il Gioco]]"
-```
+`BUTTON[durante-il-gioco-durante-il-gioco-3]`
 
-```meta-bind-button
-label: Nuovo Incontro
-style: primary
-actions:
-  - type: templaterCreateNote
-    templateFile: "z.modelli/dm/Incontro.md"
-    folderPath: "Mondi/Incontri"
-    open: true
-```
+`BUTTON[nuovo-incontro-z-modelli-dm-incontro-md]`
 
 ## Combattimenti Pronti
 

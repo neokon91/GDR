@@ -9,7 +9,7 @@
 > `INPUT[inlineSelect(option(bozza, Bozza), option(pronto, Pronto), option(in gioco, In Gioco), option(in guerra, In Guerra), option(archiviata, Archiviata)):stato]`
 >
 > Mondo:
-> `INPUT[suggester(optionQuery("Mondi"), useLinks(partial), allowOther):mondo]`
+> `INPUT[mondo][:mondo]`
 >
 > Soggetti:
 > `INPUT[inlineListSuggester(optionQuery("Mondi"), useLinks(partial), allowOther):soggetti]`

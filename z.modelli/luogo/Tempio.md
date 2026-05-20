@@ -6,7 +6,7 @@
 > `INPUT[suggester(optionQuery("Mondi/Luoghi"), useLinks(partial), allowOther):luogo_padre]`
 >
 > Mondo:
-> `INPUT[suggester(optionQuery("Mondi"), useLinks(partial), allowOther):mondo]`
+> `INPUT[mondo][:mondo]`
 >
 > Divinità principale:
 > `INPUT[suggester(optionQuery("Mondi/Religioni"), useLinks(partial), allowOther):divinita_principale]`
@@ -18,10 +18,10 @@
 > `INPUT[inlineList:reliquie]`
 >
 > Canonico:
-> `INPUT[toggle:canonico]`
+> `INPUT[canonico][:canonico]`
 >
 > Stato:
-> `INPUT[inlineSelect(option(bozza, Bozza), option(pronto, Pronto), option(in gioco, In Gioco), option(archiviata, Archiviata)):stato]`
+> `INPUT[stato base][:stato]`
 >
 > Prima impressione:
 > `INPUT[text:impressione]`

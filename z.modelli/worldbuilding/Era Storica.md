@@ -3,7 +3,7 @@
 
 >[!infobox|wiki]- Storia
 > Mondo:
-> `INPUT[suggester(optionQuery("Mondi"), useLinks(partial), allowOther):mondo]`
+> `INPUT[mondo][:mondo]`
 >
 > Data del mondo:
 > `INPUT[text:data_mondo]`
