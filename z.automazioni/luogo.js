@@ -66,15 +66,32 @@ tipologia: ${selectedType?.id ?? ""}
 bioma: ${selectedBiome?.id ?? ""}
 stato: bozza
 canonico: false
+stato_canonico: canonico
 mondo: ${mondo}
 luogo_padre: ${luogoPadre}
 governante: ${governante}
 popolazione:
 stabilita:
 pericolo: ${pericolo}
+pressione: 0
+legittimita:
+capitale:
 impressione: ${helpers.yamlQuote(impressione)}
 funzione_narrativa: ${helpers.yamlQuote(funzioneNarrativa)}
 tensione: ${helpers.yamlQuote(tensione)}
+promessa_al_tavolo:
+confini: []
+vassalli: []
+alleati: []
+rivali: []
+relazioni: []
+culture: []
+risorse_strategiche: []
+eserciti: []
+crisi_interne: []
+scelte: []
+rischi: []
+ricompense: []
 hp_massimi:
 hp_attuali:
 fazioni: ${helpers.inlineYamlList(fazioni)}
@@ -89,6 +106,7 @@ segreti: ${helpers.inlineYamlTextList([veritaNascosta])}
 indizi: []
 voci: []
 scene: []
+prossima_mossa:
 domande_aperte: ${helpers.inlineYamlTextList([domandaAperta])}
 collegamenti_mancanti: []
 ---

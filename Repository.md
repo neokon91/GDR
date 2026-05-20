@@ -18,13 +18,15 @@ Questa nota e tecnica. Serve solo a chi cura il vault, non al DM che lo usa per 
 | `1. DM Dashboard.md` | preparazione e vista DM | Non spostare senza aggiornare link, Homepage e documentazione. |
 | `Durante il Gioco.md` | schermata al tavolo | Deve restare rapida, non enciclopedica. |
 | `Atlante del Mondo.md` | worldbuilding tassonomico | Porta principale per ambientazioni grandi. |
+| `Geopolitical Dashboard.md` | geopolitica operativa | Stati, confini, risorse e relazioni diplomatiche. |
 | `Campagna da Ambientazione.md` | da mondo a campagna | Collega regioni e conflitti al gioco. |
 | `Vista Giocatori.md` | materiale condivisibile | Non deve mostrare segreti o prossime mosse DM. |
 | `Worldbuilder Dashboard.md` | costruzione mondo avanzata | Deve mostrare relazioni, buchi e pressioni, non solo archivi. |
+| `Motore Mondo Vivo.md` | stato sistemico del mondo | Deve mostrare propagazione, causalita, faction dynamics e continuita narrativa. |
 | `Campagne/` | campagne e demo | Contenuto giocabile legato a party e sessioni. |
 | `Giocatori/` | indice area giocatori | Area pubblica o condivisibile. |
 | `Inbox/` | appunti grezzi e live | Qui entra cio che non e ancora canonico. |
-| `Mondi/` | ambientazioni canoniche | Qui stanno luoghi, PNG, fazioni, missioni, incontri e timeline. |
+| `Mondi/` | ambientazioni canoniche | Qui stanno luoghi, PNG, fazioni, relazioni, missioni, incontri e timeline. |
 | `Risorse/` | guide, strumenti, mappe, media, tabelle | Materiale riutilizzabile e documentazione del vault. |
 | `Risorse/Roadmap/` | roadmap storiche | Archivio manutenzione, non percorso primario del DM. |
 | `SRD/` | riferimento regolamentare generato | Non trattare come contenuto canonico del mondo. |

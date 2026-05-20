@@ -26,8 +26,15 @@ tipo: evento
 stato: canonico
 stato_canonico: canonico
 canonico: true
+fonte: prep
+fonte_note:
+grado_certezza: alto
+contraddice: []
+retcon_di: []
+retcon_motivo:
 mondo: ${mondo}
 data_mondo: ${helpers.yamlQuote(dataMondo)}
+data_reale:
 fc-calendar:
 fc-date:
 fc-category: conseguenza
@@ -35,8 +42,23 @@ fc-display-name: ${helpers.yamlQuote(name)}
 luoghi: ${helpers.inlineYamlList(luoghi)}
 personaggi: ${helpers.inlineYamlList(personaggi)}
 fazioni: ${helpers.inlineYamlList(fazioni)}
+missioni: []
+tracciati: []
 sessioni: ${helpers.inlineYamlList(sessioni)}
+causa:
+cause: []
+effetti: []
+entita_impattate: []
+propaga_a: []
+stato_mondo: []
 conseguenze: []
+prossima_mossa:
+giocabile: false
+scelte: []
+rischi: []
+indizi: []
+png_coinvolti: []
+ricompense: []
 ---
 `;
 }

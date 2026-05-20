@@ -11,11 +11,21 @@ leader:
   - [[Demo - Sella Neraluce]]
 luoghi:
   - [[Demo - Santuario della Prima Pietra]]
+  - [[Demo - Marca della Soglia]]
 personaggi:
   - [[Demo - Sella Neraluce]]
   - [[Demo - Odran il Campanaro]]
+agenda: "Trasformare la crisi mistica in autorità politica sulla valle."
 pressione: 8
 prossima_mossa: "Dichiarare il coprifuoco, sigillare il ponte e requisire ogni frammento trovato."
+rivali:
+  - [[Demo - Mira Ventofermo]]
+relazioni:
+  - [[Demo - Custodi e Brumafonda]]
+propaga_a:
+  - [[Demo - Custodi e Brumafonda]]
+  - [[Demo - Recuperare i Frammenti]]
+  - [[Demo - Marca della Soglia]]
 tracciati:
   - [[Demo - I Custodi Chiudono il Ponte]]
   - [[Demo - La Soglia Si Apre]]

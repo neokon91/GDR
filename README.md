@@ -4,13 +4,13 @@ Un vault Obsidian professionale per DM e worldbuilder italiani: prepara sessioni
 
 L'obiettivo e farlo sembrare una app locale dentro Obsidian, non una cartella di appunti: l'utente apre [[Inizia Qui]], sceglie cosa fare e usa dashboard, pulsanti e viste gia pronte.
 
-Apri [[Inizia Qui]] per il primo avvio. Usa [[1. DM Dashboard]] per preparare, [[Atlante del Mondo]] per costruire ambientazioni ricche, [[Campagna da Ambientazione]] per trasformarle in gioco, [[Durante il Gioco]] durante la sessione e [[Vista Giocatori]] per materiale condivisibile.
+Apri [[Inizia Qui]] per il primo avvio. Usa [[1. DM Dashboard]] per preparare, [[Atlante del Mondo]] per costruire ambientazioni ricche, [[Geopolitical Dashboard]] per stati e relazioni diplomatiche, [[Motore Mondo Vivo]] per continuita, causalita e propagazione, [[Campagna da Ambientazione]] per trasformarle in gioco, [[Durante il Gioco]] durante la sessione e [[Vista Giocatori]] per materiale condivisibile.
 
 ## Perche Usarlo
 
 - **Non tecnico**: l'utente usa pulsanti, dashboard e guide, non configurazioni.
 - **Completo**: mondo, campagna, sessione, post-sessione e vista giocatori.
-- **Worldbuilding profondo**: culture, lingue, storia, conflitti, cosmologia e luoghi connessi.
+- **Worldbuilding sistemico**: culture, lingue, storia, conflitti, cosmologia, fazioni, relazioni, causalita e conseguenze persistenti.
 - **Markdown-first**: i contenuti restano nel vault dell'utente.
 - **Release pulita**: il vault puo generare una copia consegnabile con `npm run release:clean`.
 
@@ -58,7 +58,7 @@ Se dashboard, pulsanti o tabelle non funzionano, apri [[Risorse/Primo Avvio Stru
 
 - `Inizia Qui`: percorso guidato per primo avvio, preparazione, gioco e worldbuilding.
 - `Campagne`: campagne attive, in pausa, concluse o archiviate.
-- `Mondi`: ambientazioni, luoghi, culture, lingue, storia, conflitti, religioni, creature, oggetti e dispense.
+- `Mondi`: ambientazioni, luoghi, culture, lingue, storia, conflitti, religioni, relazioni, creature, oggetti e dispense.
 - `Mondi/Sessioni`: preparazione e resoconti delle sessioni.
 - `Mondi/Timeline`: eventi canonici, rumor, leggende e conseguenze storicizzate.
 - `Mondi/Missioni`: incarichi, trame aperte e obiettivi.
@@ -78,6 +78,9 @@ Se dashboard, pulsanti o tabelle non funzionano, apri [[Risorse/Primo Avvio Stru
 - Tabelle, mappe, dispense e materiali riutilizzabili in piu campagne stanno in `Risorse`.
 - [[Worldbuilder Dashboard]] mostra ora Atlante del Mondo, Poteri in Movimento, Relazioni PNG, Timeline Causale e Buchi Di Mondo: usali per trovare collegamenti mancanti, pressioni senza prossima mossa e lore canonica non ancora storicizzata.
 - [[Atlante del Mondo]] e la vista principale per worldbuilding tassonomico: geografia, culture, lingue, poteri, storia, conflitti e cosmologia.
+- [[Geopolitical Dashboard]] mostra territori politici, confini, vassalli, risorse strategiche, relazioni diplomatiche e buchi geopolitici.
+- [[Motore Mondo Vivo]] e il layer sistemico sopra gli strumenti DM: mostra propagazione eventi, dinamiche di fazione, relationship graph, causalita storica e continuita da chiudere prima della prossima sessione.
+- `Mondi/Relazioni` contiene alleanze, rivalita, trattati, vassallaggi, debiti e faide quando un legame deve avere stato, intensita, conseguenze e propagazione propria.
 - [[Campagna da Ambientazione]] trasforma regioni e conflitti in campagne, archi narrativi, fronti e opportunita di avventura.
 - [[Mondi/Stato del Mondo]] e la vista Stato Campagna: filtra per mondo o campagna e mostra missioni aperte, clock attivi, PNG mossi fuori scena, pressioni e conseguenze.
 

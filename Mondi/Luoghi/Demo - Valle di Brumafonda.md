@@ -10,12 +10,21 @@ canonico: true
 mondo: [[Demo - Terre della Soglia]]
 luogo_padre:
 pericolo: 5
+stabilita: 4
+pressione: 7
+relazioni:
+  - [[Demo - Custodi e Brumafonda]]
+fazioni:
+  - [[Demo - Custodi della Soglia]]
 risorse:
   - legname
   - pietra rituale
+risorse_strategiche:
+  - pietra rituale delle soglie
 problemi:
   - nebbia notturna
   - campane che suonano da sole
+prossima_mossa: "Il coprifuoco dei Custodi divide i villaggi della valle tra obbedienza e resistenza."
 ---
 
 # Demo - Valle di Brumafonda

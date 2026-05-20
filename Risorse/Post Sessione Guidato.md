@@ -26,6 +26,14 @@ actions:
     link: "[[Risorse/Controllo Vault]]"
 ```
 
+```meta-bind-button
+label: Motore Mondo Vivo
+style: primary
+actions:
+  - type: open
+    link: "[[Motore Mondo Vivo]]"
+```
+
 ## 1. Cosa E Successo
 
 Scrivi prima in modo grezzo. Non serve sistemare tutto subito.
@@ -80,7 +88,10 @@ Usa questa sequenza per non perdere continuita.
 | Conseguenza | Se cambia il mondo, crea o aggiorna una nota `Conseguenza`. |
 | Evento storico | Se e successo davvero, crea o aggiorna una nota in [[Mondi/Timeline/Timeline]]. |
 | Tracciato | Se produce pressione futura, crea o aggiorna un clock in [[Mondi/Tracciati/Tracciati]]. |
+| Propagazione | Se cambia fazioni, luoghi, missioni, relazioni o stato del mondo, compila `entita_impattate`, `propaga_a`, `conseguenze` e `prossima_mossa`. |
+| Geopolitica | Se cambia autorita, confini, risorse o legittimita, aggiorna il territorio politico e [[Geopolitical Dashboard]]. |
 | Stato Campagna | Riapri [[Mondi/Stato del Mondo]] e controlla che compaia nella vista operativa. |
+| Mondo Vivo | Apri [[Motore Mondo Vivo]] e chiudi le continuita aperte prima della prossima prep. |
 
 ```meta-bind-button
 label: Nuova Conseguenza
@@ -122,7 +133,17 @@ SORT pressione DESC, progress_value DESC
 LIMIT 12
 ```
 
-## 6. Sessioni Attive
+## 6. Propagazione Mondo Vivo
+
+```dataview
+TABLE categoria, tipo, stato, entita_impattate, propaga_a, conseguenze, prossima_mossa
+FROM "Mondi" OR "Inbox"
+WHERE stato != "archiviata" AND stato != "ignorata" AND !startswith(file.name, "Prova -") AND (entita_impattate OR propaga_a OR conseguenze OR prossima_mossa)
+SORT file.mtime DESC
+LIMIT 12
+```
+
+## 7. Sessioni Attive
 
 ```dataview
 TABLE data, data_mondo, stato, campagne
@@ -138,7 +159,7 @@ Quando hai finito:
 - scegli o crea la prossima sessione;
 - metti `attiva: true` solo sulla prossima sessione.
 
-## 7. Cosa Preparare Dopo
+## 8. Cosa Preparare Dopo
 
 ```dataview
 TABLE stato, pressione, scadenza_mondo, prossima_mossa
@@ -148,11 +169,14 @@ SORT pressione DESC, scadenza_mondo ASC
 LIMIT 8
 ```
 
-## 8. Chiusura Rapida
+## 9. Chiusura Rapida
 
 - [ ] Appunti live smistati o lasciati in [[Inbox/Inbox]] con un nome chiaro.
 - [ ] Conseguenze importanti aggiunte a mondo, PNG, luoghi, fazioni, missioni o tracciati.
+- [ ] Propagazione compilata su eventi, fazioni, luoghi, missioni o relazioni toccate dalla sessione.
+- [ ] Territori politici, confini, risorse o legittimita aggiornati se il potere e cambiato.
 - [ ] Clock e progress track aggiornati.
 - [ ] Ricompense e dispense segnate.
 - [ ] Prossima sessione scelta.
+- [ ] [[Motore Mondo Vivo]] controllato per continuita aperte, faction dynamics e causalita storica.
 - [ ] [[Risorse/Controllo Vault]] aperto almeno una volta.

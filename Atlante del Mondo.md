@@ -73,6 +73,14 @@ actions:
     link: "[[Worldbuilder Dashboard]]"
 ```
 
+```meta-bind-button
+label: Geopolitica
+style: default
+actions:
+  - type: open
+    link: "[[Geopolitical Dashboard]]"
+```
+
 ## Filtro
 
 > [!scena] Mondo
@@ -92,6 +100,7 @@ const cards = [
   ["Culture", count('"Mondi/Culture"'), "Popoli e usanze"],
   ["Lingue", count('"Mondi/Lingue"'), "Parlate e scritture"],
   ["Poteri", count('"Mondi/Fazioni" OR "Mondi/Religioni"'), "Regni, chiese, gilde"],
+  ["Relazioni", count('"Mondi/Relazioni"'), "Alleanze e rivalità"],
   ["Storia", count('"Mondi/Storia" OR "Mondi/Timeline"'), "Ere ed eventi"],
   ["Conflitti", count('"Mondi/Conflitti"'), "Guerre e tensioni"],
   ["Cosmologia", count('"Mondi/Cosmologia"'), "Piani e reami"],
@@ -148,6 +157,16 @@ TABLE tipo, pressione, prossima_mossa, leader, luoghi, rivali
 FROM "Mondi/Fazioni" OR "Mondi/Religioni" OR "Mondi/Conflitti"
 WHERE stato != "archiviata" AND !startswith(file.name, "Prova -") AND (!this.mondo_attivo OR mondo = this.mondo_attivo)
 SORT pressione DESC, nome ASC
+LIMIT 20
+```
+
+tab: Relazioni
+
+```dataview
+TABLE tipo, stato, soggetti, intensita, pressione, prossima_mossa, conseguenze
+FROM "Mondi/Relazioni"
+WHERE file.name != "Relazioni" AND stato != "archiviata" AND !startswith(file.name, "Prova -") AND (!this.mondo_attivo OR mondo = this.mondo_attivo)
+SORT pressione DESC, intensita DESC, nome ASC
 LIMIT 20
 ```
 

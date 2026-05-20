@@ -22,11 +22,23 @@ mondo: ${mondo}
 pressione: 5
 posta: ${helpers.yamlQuote(posta)}
 prossima_mossa: ${helpers.yamlQuote(prossimaMossa)}
+progress_value: 0
+progress_max: 6
+innesco: "una fazione ottiene un vantaggio, i PG falliscono o passa tempo"
+cause: []
+effetti: []
+entita_impattate: []
+propaga_a: []
 fazioni: ${helpers.inlineYamlList(fazioni)}
 luoghi: ${helpers.inlineYamlList(luoghi)}
 culture: []
 religioni: []
 missioni: []
+scelte: []
+rischi: []
+indizi: []
+png_coinvolti: []
+ricompense: []
 conseguenze: []
 segreti: []
 domande_aperte: []

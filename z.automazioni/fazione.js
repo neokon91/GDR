@@ -44,6 +44,7 @@ fileClass: fazione
 tipo: ${selectedType?.id ?? ""}
 stato: bozza
 canonico: false
+stato_canonico: canonico
 mondo: ${mondo}
 leader: ${helpers.inlineYamlList(leader)}
 luoghi: ${helpers.inlineYamlList(luoghi)}
@@ -51,14 +52,30 @@ personaggi: ${helpers.inlineYamlList(personaggi)}
 missioni: ${helpers.inlineYamlList(missioni)}
 obiettivo: ${helpers.yamlQuote(obiettivo)}
 obiettivo_nascosto: ${helpers.yamlQuote(obiettivoNascosto)}
+agenda: ${helpers.yamlQuote(obiettivo)}
 influenza:
 pressione: ${helpers.yamlNumber(pressione) || 0}
 prossima_mossa: ${helpers.yamlQuote(prossimaMossa)}
 scadenza_mondo: ${helpers.yamlQuote(scadenzaMondo)}
+progress_value: 0
+progress_max: 6
+innesco: ${helpers.yamlQuote(prossimaMossa ? "Tempo, fallimento dei PG o vantaggio della fazione" : "")}
+escalation: []
+posta: ${helpers.yamlQuote(obiettivo)}
+mosse_visibili: []
+mosse_segrete: []
+scelte: []
+rischi: []
+indizi: []
+ricompense: []
 risorse: []
 debolezze: []
 alleati: ${helpers.inlineYamlList(alleati)}
 rivali: ${helpers.inlineYamlList(rivali)}
+trattati: []
+relazioni: []
+eventi: []
+propaga_a: []
 conseguenze: []
 segreti: ${helpers.inlineYamlTextList([segreto])}
 domande_aperte: ${helpers.inlineYamlTextList([domandaAperta])}

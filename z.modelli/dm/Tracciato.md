@@ -40,6 +40,18 @@
 >
 > Prossima mossa:
 > `INPUT[text:prossima_mossa]`
+>
+> Evento scatenante:
+> `INPUT[text:evento_scatenante]`
+>
+> Esito parziale:
+> `INPUT[text:esito_parziale]`
+>
+> Esito finale:
+> `INPUT[text:esito_finale]`
+>
+> Propaga a:
+> `INPUT[inlineListSuggester(optionQuery("Mondi"), useLinks(partial), allowOther):propaga_a]`
 
 ```meta-bind-button
 label: Avanza
@@ -111,6 +123,12 @@ tab: Uso
 > [!scena] Mossa
 > `=this.prossima_mossa`
 
+## Mosse Di Escalation
+
+```meta-bind
+INPUT[list:mosse]
+```
+
 ## Segmenti
 
 - [ ] 1
@@ -155,6 +173,38 @@ tab: Conseguenze
 
 ```meta-bind
 INPUT[list:conseguenze]
+```
+
+## Propagazione
+
+### Entità Impattate
+
+`INPUT[inlineListSuggester(optionQuery("Mondi"), useLinks(partial), allowOther):entita_impattate]`
+
+### Propaga A
+
+`INPUT[inlineListSuggester(optionQuery("Mondi"), useLinks(partial), allowOther):propaga_a]`
+
+## Rendere Giocabile
+
+```meta-bind
+INPUT[list:scelte]
+```
+
+```meta-bind
+INPUT[list:rischi]
+```
+
+```meta-bind
+INPUT[list:indizi]
+```
+
+```meta-bind
+INPUT[list:png_coinvolti]
+```
+
+```meta-bind
+INPUT[list:ricompense]
 ```
 
 > [!segreto]- Cosa cambia quando si riempie

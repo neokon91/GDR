@@ -16,6 +16,31 @@
 >
 > Luoghi:
 > `INPUT[inlineListSuggester(optionQuery("Mondi/Luoghi"), useLinks(partial)):luoghi]`
+>
+> Avanzamento:
+> `INPUT[slider(minValue(0), maxValue(12), stepSize(1), addLabels):progress_value]`
+>
+> Segmenti:
+> `INPUT[number:progress_max]`
+>
+> Innesco:
+> `INPUT[text:innesco]`
+>
+> Cause:
+> `INPUT[inlineListSuggester(optionQuery("Mondi"), useLinks(partial), allowOther):cause]`
+>
+> Propaga a:
+> `INPUT[inlineListSuggester(optionQuery("Mondi"), useLinks(partial), allowOther):propaga_a]`
+
+```meta-bind-button
+label: Avanza Escalation
+style: primary
+actions:
+  - type: updateMetadata
+    bindTarget: progress_value
+    evaluate: true
+    value: Math.min(Number(x ?? 0) + 1, Number(getMetadata('progress_max') ?? 6))
+```
 
 ## Posta In Gioco
 
@@ -31,6 +56,46 @@
 
 ```meta-bind
 INPUT[list:conseguenze]
+```
+
+## Causalità E Propagazione
+
+### Cause
+
+`INPUT[inlineListSuggester(optionQuery("Mondi"), useLinks(partial), allowOther):cause]`
+
+### Eventi Generati
+
+`INPUT[inlineListSuggester(optionQuery("Mondi/Timeline"), useLinks(partial), allowOther):effetti]`
+
+### Entità Impattate
+
+`INPUT[inlineListSuggester(optionQuery("Mondi"), useLinks(partial), allowOther):entita_impattate]`
+
+### Propaga A
+
+`INPUT[inlineListSuggester(optionQuery("Mondi"), useLinks(partial), allowOther):propaga_a]`
+
+## Rendere Giocabile
+
+```meta-bind
+INPUT[list:scelte]
+```
+
+```meta-bind
+INPUT[list:rischi]
+```
+
+```meta-bind
+INPUT[list:indizi]
+```
+
+```meta-bind
+INPUT[list:png_coinvolti]
+```
+
+```meta-bind
+INPUT[list:ricompense]
 ```
 
 ## Segreti

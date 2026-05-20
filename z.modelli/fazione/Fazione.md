@@ -11,6 +11,9 @@
 > Canonica:
 > `INPUT[toggle:canonico]`
 >
+> Stato canonico:
+> `INPUT[inlineSelect(option(canonico, Canonico), option(rumor, Rumor), option(leggenda, Leggenda), option(falso, Falso), option(retcon, Retcon)):stato_canonico]`
+>
 > Mondo:
 > `INPUT[suggester(optionQuery("Mondi"), useLinks(partial), allowOther):mondo]`
 >
@@ -34,6 +37,18 @@
 >
 > Scadenza nel mondo:
 > `INPUT[text:scadenza_mondo]`
+>
+> Clock:
+> `INPUT[slider(minValue(0), maxValue(12), stepSize(1), addLabels):progress_value]`
+>
+> Segmenti:
+> `INPUT[number:progress_max]`
+>
+> Innesco escalation:
+> `INPUT[text:innesco]`
+>
+> Agenda:
+> `INPUT[text:agenda]`
 
 > [!timer] Fronte attivo
 > Pressione: `=this.pressione`
@@ -42,6 +57,16 @@
 >
 > > [!segreto]- Obiettivo nascosto
 > > `=this.obiettivo_nascosto`
+
+```meta-bind-button
+label: Avanza Clock
+style: primary
+actions:
+  - type: updateMetadata
+    bindTarget: progress_value
+    evaluate: true
+    value: Math.min(Number(x ?? 0) + 1, Number(getMetadata('progress_max') ?? 6))
+```
 
 ````tabs
 tab: Identità
@@ -71,6 +96,18 @@ tab: Identità
 INPUT[list:risorse]
 ```
 
+## Mosse Visibili
+
+```meta-bind
+INPUT[list:mosse_visibili]
+```
+
+## Mosse Segrete
+
+```meta-bind
+INPUT[list:mosse_segrete]
+```
+
 ## Debolezze
 
 ```meta-bind
@@ -81,6 +118,12 @@ INPUT[list:debolezze]
 
 ```meta-bind
 INPUT[list:conseguenze]
+```
+
+## Escalation
+
+```meta-bind
+INPUT[list:escalation]
 ```
 
 > [!pericolo]- Conseguenze possibili
@@ -117,6 +160,24 @@ SORT nome ASC
 
 `INPUT[inlineListSuggester(optionQuery("Mondi/Fazioni"), useLinks(partial)):rivali]`
 
+## Trattati E Debiti
+
+`INPUT[inlineListSuggester(optionQuery("Mondi"), useLinks(partial), allowOther):trattati]`
+
+## Relazioni Rilevanti
+
+`INPUT[inlineListSuggester(optionQuery("Mondi"), useLinks(partial), allowOther):relazioni]`
+
+## Propagazione Politica
+
+### Eventi Che Hanno Cambiato La Fazione
+
+`INPUT[inlineListSuggester(optionQuery("Mondi/Timeline"), useLinks(partial), allowOther):eventi]`
+
+### Entità Che Cambiano Se La Fazione Si Muove
+
+`INPUT[inlineListSuggester(optionQuery("Mondi"), useLinks(partial), allowOther):propaga_a]`
+
 tab: Missioni
 
 ## Missioni
@@ -128,6 +189,32 @@ TABLE stato, committente, luoghi
 FROM "Mondi/Missioni"
 WHERE contains(fazioni, this.file.link)
 SORT stato ASC, nome ASC
+```
+
+## Giocabilità
+
+### Scelte
+
+```meta-bind
+INPUT[list:scelte]
+```
+
+### Rischi
+
+```meta-bind
+INPUT[list:rischi]
+```
+
+### Indizi
+
+```meta-bind
+INPUT[list:indizi]
+```
+
+### Ricompense
+
+```meta-bind
+INPUT[list:ricompense]
 ```
 
 tab: Segreti

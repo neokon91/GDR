@@ -172,11 +172,21 @@ table(
 
 table(
   "Timeline Causale",
-  ["Evento", "Data mondo", "Causa", "Conseguenze", "Luoghi", "Fazioni", "Missioni"],
+  ["Evento", "Data mondo", "Cause", "Effetti", "Propaga a", "Luoghi", "Fazioni", "Missioni"],
   pages('"Mondi/Timeline"', p => p.file.name !== "Timeline")
     .sort(p => p.data_mondo ?? p.file.name, "asc")
     .limit(24)
-    .map(p => [p.file.link, p.data_mondo ?? "", p.causa ?? p.cause ?? "", p.conseguenze ?? [], p.luoghi ?? [], p.fazioni ?? [], p.missioni ?? []])
+    .map(p => [p.file.link, p.data_mondo ?? "", p.cause ?? p.causa ?? "", p.effetti ?? p.conseguenze ?? [], p.propaga_a ?? [], p.luoghi ?? [], p.fazioni ?? [], p.missioni ?? []])
+    .array()
+);
+
+table(
+  "Propagazione Mondo Vivo",
+  ["Origine", "Tipo", "Stato", "Entità impattate", "Propaga a", "Conseguenze", "Prossima mossa"],
+  pages('"Mondi" OR "Inbox"', p => hasLinks(p.entita_impattate) || hasLinks(p.propaga_a) || hasLinks(p.conseguenze) || hasValue(p.prossima_mossa))
+    .sort(p => p.file.mtime, "desc")
+    .limit(24)
+    .map(p => [p.file.link, p.categoria ?? p.tipo ?? "", p.stato ?? p.stato_canonico ?? "", p.entita_impattate ?? p.collegamenti ?? [], p.propaga_a ?? [], p.conseguenze ?? [], p.prossima_mossa ?? ""])
     .array()
 );
 
@@ -220,6 +230,7 @@ const worldChecks = [
   ]),
   ...issueRows('"Mondi/Timeline"', [
     { label: "evento canonico senza conseguenze", test: p => (p.canonico === true || p.stato_canonico === "canonico") && !hasLinks(p.conseguenze) },
+    { label: "evento canonico senza causa", test: p => (p.canonico === true || p.stato_canonico === "canonico") && !hasValue(p.causa) && !hasLinks(p.cause) },
     { label: "conseguenza aperta senza collegamenti", test: p => p.tipo === "conseguenza" && !hasLinks(p.luoghi) && !hasLinks(p.fazioni) && !hasLinks(p.missioni) }
   ]),
   ...issueRows('"Mondi/Personaggi"', [
@@ -229,7 +240,8 @@ const worldChecks = [
   ]),
   ...issueRows('"Inbox"', [
     { label: "lore canonica non storicizzata", test: p => p.categoria === "lore capture" && (p.canonico === true || p.stato === "canonica") && !hasValue(p.timeline) },
-    { label: "lore vecchia da smistare o non collegata", test: p => p.categoria === "lore capture" && (p.stato === "da smistare" || !hasLinks(p.collegamenti)) }
+    { label: "lore vecchia da smistare o non collegata", test: p => p.categoria === "lore capture" && (p.stato === "da smistare" || !hasLinks(p.collegamenti)) },
+    { label: "lore con impatto non propagato", test: p => p.categoria === "lore capture" && (hasLinks(p.impatto) || hasLinks(p.conseguenze)) && !hasLinks(p.entita_impattate) && !hasLinks(p.propaga_a) }
   ])
 ];
 

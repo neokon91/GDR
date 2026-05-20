@@ -25,6 +25,15 @@ prossima_mossa: "Sella impone il coprifuoco e manda pattuglie a cercare framment
 innesco: "Avanza quando i personaggi perdono tempo, mostrano un frammento in pubblico o lasciano ai Custodi l'iniziativa."
 conseguenze:
   - [[Demo - La Nebbia Ha Preso il Ponte]]
+entita_impattate:
+  - [[Demo - Ponte delle Campane]]
+  - [[Demo - Mira Ventofermo]]
+  - [[Demo - Recuperare i Frammenti]]
+  - [[Demo - Custodi e Brumafonda]]
+propaga_a:
+  - [[Demo - La Seconda Nebbia]]
+  - [[Demo - Recuperare i Frammenti]]
+  - [[Demo - Custodi e Brumafonda]]
 ---
 
 # Demo - I Custodi Chiudono il Ponte

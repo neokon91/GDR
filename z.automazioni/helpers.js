@@ -14,6 +14,7 @@ const PATHS = {
     oggetti: "Mondi/Oggetti",
     personaggi: "Mondi/Personaggi",
     religioni: "Mondi/Religioni",
+    relazioni: "Mondi/Relazioni",
     sessioni: "Mondi/Sessioni",
     mappe: "Risorse/Mappe",
     audio: "Risorse/Audio",

@@ -51,6 +51,7 @@ const ALLOWED_CATEGORIES = new Set([
     "oggetto",
     "personaggio",
     "religione",
+    "relazione",
     "risorsa",
     "sessione",
     "tracciato",
@@ -98,6 +99,7 @@ const ALLOWED_TYPES_BY_CATEGORY = {
     oggetto: new Set(["oggetto", "oggetto magico", "chiave"]),
     personaggio: new Set(["pg", "png"]),
     religione: new Set(["divinità", "soglia"]),
+    relazione: new Set(["relazione", "alleanza", "rivalità", "guerra fredda", "vassallaggio", "trattato", "debito", "faida", "patto religioso", "tradimento"]),
     sessione: new Set(["sessione di campagna", "sessione zero", "interludio", "downtime", "finale", "one-shot"]),
     tracciato: new Set(["clock", "progress track", "fronte", "rituale", "minaccia", "viaggio", "progetto"])
 };
@@ -120,6 +122,7 @@ const REQUIRED_FIELDS_BY_CATEGORY = {
     oggetto: ["stato"],
     personaggio: ["stato"],
     religione: ["stato", "mondo"],
+    relazione: ["stato", "mondo", "soggetti"],
     risorsa: ["stato"],
     sessione: ["stato", "attiva", "mondo"],
     tracciato: ["stato", "mondo", "progress_value", "progress_max", "prossima_mossa"]
@@ -484,6 +487,53 @@ for (const [fileRel, fm] of realEntries) {
         warnings.push(`${fileRel}: fazione con pressione senza prossima_mossa`);
     }
 
+    if ((fileRel.startsWith("Mondi/Fazioni/") || fileRel.startsWith("Mondi/Religioni/")) && Number(fm.pressione ?? 0) > 0 && !hasAny(fm, ["rivali", "alleati", "relazioni"])) {
+        warnings.push(`${fileRel}: potere in pressione senza rivali, alleati o relazioni`);
+    }
+
+    if ((fileRel.startsWith("Mondi/Fazioni/") || fileRel.startsWith("Mondi/Religioni/")) && Number(fm.pressione ?? 0) > 0 && !hasAny(fm, ["propaga_a", "conseguenze", "missioni", "tracciati"])) {
+        warnings.push(`${fileRel}: fazione in movimento senza propagazione, conseguenze o agganci di campagna`);
+    }
+
+    if (fileRel.startsWith("Mondi/Culture/") && fm.categoria === "cultura" && fm.stato !== "archiviata" && !hasAny(fm, ["tensioni", "conflitti_interni", "relazioni_esterne", "relazioni"])) {
+        warnings.push(`${fileRel}: cultura senza tensioni o relazioni culturali`);
+    }
+
+    if (fileRel.startsWith("Mondi/Religioni/") && fm.categoria === "religione" && fm.stato !== "archiviata" && !hasAny(fm, ["luoghi_sacri", "templi"])) {
+        warnings.push(`${fileRel}: religione senza luoghi sacri o templi`);
+    }
+
+    if (fileRel.startsWith("Mondi/Relazioni/") && fm.categoria === "relazione" && fm.stato !== "archiviata" && !hasAny(fm, ["conseguenze", "propaga_a", "entita_impattate"])) {
+        warnings.push(`${fileRel}: relazione senza conseguenze o propagazione`);
+    }
+
+    if (fileRel.startsWith("Mondi/Relazioni/") && fm.categoria === "relazione" && fm.stato !== "archiviata" && Number(fm.pressione ?? 0) >= 6 && !hasValue(fm.prossima_mossa)) {
+        warnings.push(`${fileRel}: relazione ad alta pressione senza prossima_mossa`);
+    }
+
+    if (fileRel.startsWith("Mondi/Culture/") && fm.categoria === "cultura" && fm.stato === "pronto" && !hasAny(fm, ["tabu", "tabu_sociali", "scelte"])) {
+        warnings.push(`${fileRel}: cultura pronta senza tabu o scelte giocabili`);
+    }
+
+    if (fileRel.startsWith("Mondi/Religioni/") && fm.categoria === "religione" && fm.stato === "pronto" && !hasAny(fm, ["eresie", "rituali", "calendario_rituale"])) {
+        warnings.push(`${fileRel}: religione pronta senza eresie, rituali o calendario rituale`);
+    }
+
+    if (fileRel.startsWith("Mondi/Luoghi/") && fm.categoria === "luogo" && ["regno", "impero", "repubblica", "oligarchia", "ducato", "contea", "baronia", "marca", "protettorato"].includes(String(fm.tipo ?? "")) && fm.stato !== "archiviata") {
+        if (["regno", "impero", "repubblica", "oligarchia"].includes(String(fm.tipo ?? "")) && !hasValue(fm.capitale)) {
+            warnings.push(`${fileRel}: territorio politico maggiore senza capitale`);
+        }
+        if (!hasAny(fm, ["governante", "fazioni"])) {
+            warnings.push(`${fileRel}: territorio politico senza governante o fazioni di potere`);
+        }
+        if (!hasAny(fm, ["confini", "luogo_padre"])) {
+            warnings.push(`${fileRel}: territorio politico senza confini o territorio superiore`);
+        }
+        if (!hasAny(fm, ["risorse_strategiche", "risorse"])) {
+            warnings.push(`${fileRel}: territorio politico senza risorse strategiche`);
+        }
+    }
+
     if ((fileRel.startsWith("Mondi/Fazioni/") || fileRel.startsWith("Mondi/Religioni/")) && !path.basename(fileRel).startsWith("Prova -") && Number(fm.pressione ?? 0) >= 7 && !hasValue(fm.tracciati)) {
         warnings.push(`${fileRel}: fazione ad alta pressione senza tracciato collegato`);
     }
@@ -498,10 +548,29 @@ for (const [fileRel, fm] of realEntries) {
         if (Number(fm.progress_max ?? 0) > 0 && Number(fm.progress_value ?? 0) >= Number(fm.progress_max) - 1 && !hasValue(fm.conseguenze)) {
             warnings.push(`${fileRel}: tracciato vicino al completamento senza conseguenze`);
         }
+        if (hasValue(fm.conseguenze) && !hasAny(fm, ["entita_impattate", "propaga_a"])) {
+            warnings.push(`${fileRel}: tracciato con conseguenze senza entita_impattate o propaga_a`);
+        }
     }
 
     if (fileRel.startsWith("Mondi/Timeline/") && fm.categoria === "evento storico" && (fm.canonico === true || fm.stato_canonico === "canonico") && !hasValue(fm.conseguenze)) {
         warnings.push(`${fileRel}: evento canonico senza conseguenze`);
+    }
+
+    if (fileRel.startsWith("Mondi/Timeline/") && fm.categoria === "evento storico" && (fm.canonico === true || fm.stato_canonico === "canonico") && !hasAny(fm, ["causa", "cause"])) {
+        warnings.push(`${fileRel}: evento canonico senza causa`);
+    }
+
+    if (fileRel.startsWith("Mondi/Timeline/") && fm.categoria === "evento storico" && hasAny(fm, ["conseguenze", "effetti"]) && !hasAny(fm, ["entita_impattate", "propaga_a", "tracciati"])) {
+        warnings.push(`${fileRel}: evento con effetti senza propagazione verso entita o tracciati`);
+    }
+
+    if (fileRel.startsWith("Mondi/Timeline/") && fm.categoria === "evento storico" && hasAny(fm, ["effetti", "conseguenze"]) && !hasAny(fm, ["relazioni", "propaga_a", "entita_impattate"])) {
+        warnings.push(`${fileRel}: evento con effetti senza relazione o territorio impattato`);
+    }
+
+    if (fileRel.startsWith("Inbox/") && fm.categoria === "lore capture" && hasAny(fm, ["impatto", "conseguenze"]) && !hasAny(fm, ["entita_impattate", "propaga_a", "collegamenti"])) {
+        warnings.push(`${fileRel}: lore con impatto senza propagazione o collegamenti`);
     }
 
     if (fileRel.startsWith("Mondi/Luoghi/") && fm.stato === "pronto" && !hasAny(fm, ["pericolo", "stabilita", "pressione"])) {

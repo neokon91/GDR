@@ -33,6 +33,14 @@ actions:
     link: "[[Risorse/Materiali Al Tavolo]]"
 ```
 
+```meta-bind-button
+label: Mondo Vivo
+style: default
+actions:
+  - type: open
+    link: "[[Motore Mondo Vivo]]"
+```
+
 ## Sessione Da Preparare
 
 ```dataview
@@ -77,6 +85,16 @@ FROM "Mondi/Missioni"
 WHERE (stato = "proposta" OR stato = "accettata" OR stato = "in corso") AND !startswith(file.name, "Prova -")
 SORT pressione DESC, stato ASC, nome ASC
 LIMIT 8
+```
+
+### Pressioni Di Mondo
+
+```dataview
+TABLE categoria, tipo, pressione, prossima_mossa, soggetti, entita_impattate
+FROM "Mondi/Relazioni" OR "Mondi/Luoghi" OR "Mondi/Fazioni" OR "Mondi/Tracciati"
+WHERE stato != "archiviata" AND !startswith(file.name, "Prova -") AND (pressione >= 6 OR progress_value >= progress_max - 1)
+SORT pressione DESC, progress_value DESC
+LIMIT 10
 ```
 
 ### Segreti E Indizi

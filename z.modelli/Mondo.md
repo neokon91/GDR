@@ -11,6 +11,9 @@
 > Tema:
 > `INPUT[text:tema]`
 >
+> Temi:
+> `INPUT[list:temi]`
+>
 > Tecnologia:
 > `INPUT[text:tecnologia]`
 >
@@ -19,6 +22,15 @@
 >
 > Promessa:
 > `INPUT[text:premessa]`
+>
+> Promesse narrative:
+> `INPUT[list:promesse_narrative]`
+>
+> Limiti:
+> `INPUT[list:limiti]`
+>
+> Ispirazioni:
+> `INPUT[list:ispirazioni]`
 >
 > Mappe:
 > `INPUT[inlineListSuggester(optionQuery("Risorse/Mappe"), useLinks(partial), allowOther):mappe]`
@@ -39,6 +51,58 @@
 
 ```meta-bind
 INPUT[list:verita]
+```
+
+## Stato Del Mondo
+
+```meta-bind
+INPUT[list:stato_mondo]
+```
+
+## Continuità Viva
+
+```meta-bind
+INPUT[list:continuita]
+```
+
+## Relazioni Chiave
+
+`INPUT[inlineListSuggester(optionQuery("Mondi"), useLinks(partial), allowOther):relazioni_chiave]`
+
+## Bibbia Del Mondo
+
+### Tono E Promesse
+
+```meta-bind
+INPUT[list:promesse_narrative]
+```
+
+### Temi Da Cercare
+
+```meta-bind
+INPUT[list:temi]
+```
+
+### Limiti E Cose Da Evitare
+
+```meta-bind
+INPUT[list:limiti]
+```
+
+```meta-bind
+INPUT[list:non_vogliamo]
+```
+
+### Ispirazioni
+
+```meta-bind
+INPUT[list:ispirazioni]
+```
+
+### Domande Guida
+
+```meta-bind
+INPUT[list:domande_guida]
 ```
 
 ## Domande Aperte
@@ -80,6 +144,16 @@ FROM "Mondi/Fazioni"
 WHERE mondo = this.file.link
 SORT nome ASC
 LIMIT 12
+```
+
+## Dinamiche Di Potere
+
+```dataview
+TABLE pressione, progress_value, progress_max, agenda, prossima_mossa, alleati, rivali, propaga_a
+FROM "Mondi/Fazioni" OR "Mondi/Religioni" OR "Mondi/Conflitti"
+WHERE mondo = this.file.link AND stato != "archiviata"
+SORT pressione DESC, nome ASC
+LIMIT 16
 ```
 
 ## Fronti e Pressioni
@@ -150,4 +224,26 @@ INPUT[list:segreti]
 
 > [!segreto]- Idee non ancora confermate
 >
+
+tab: Mondo Vivo
+
+## Eventi Che Cambiano Il Mondo
+
+```dataview
+TABLE data_mondo, causa, cause, effetti, conseguenze, propaga_a, prossima_mossa
+FROM "Mondi/Timeline"
+WHERE mondo = this.file.link AND stato_canonico != "archiviata"
+SORT data_mondo ASC, file.name ASC
+LIMIT 20
+```
+
+## Propagazioni Aperte
+
+```dataview
+TABLE categoria, tipo, stato, entita_impattate, propaga_a, conseguenze, prossima_mossa
+FROM "Mondi" OR "Inbox"
+WHERE mondo = this.file.link AND stato != "archiviata" AND stato != "ignorata" AND (entita_impattate OR propaga_a OR conseguenze OR prossima_mossa)
+SORT file.mtime DESC
+LIMIT 20
+```
 ````

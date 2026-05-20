@@ -17,18 +17,29 @@ categoria: mondo
 stato: bozza
 tono: ${helpers.yamlQuote(tono)}
 tema: ${helpers.yamlQuote(tema)}
+temi: []
+promesse_narrative: []
+limiti: []
+ispirazioni: []
+non_vogliamo: []
 tecnologia: ${helpers.yamlQuote(tecnologia)}
 magia: ${helpers.yamlQuote(magia)}
 premessa: ${helpers.yamlQuote(premessa)}
+domande_guida: []
 continenti: []
 fazioni: []
 religioni: []
 campagne: []
 verita: []
+rumor_attivi: []
+stato_mondo: []
+continuita: []
+relazioni_chiave: []
 domande_aperte: []
 tensioni: []
 fronti: []
 segreti: []
+checklist_lore: []
 canonico: false
 ---
 `;

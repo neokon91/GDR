@@ -39,14 +39,33 @@ tipo: ${selectedType?.id ?? "evento"}
 stato: da smistare
 stato_canonico: rumor
 canonico: false
+fonte: sessione
+fonte_note:
+grado_certezza: medio
+contraddice: []
+retcon_di: []
+retcon_motivo:
 mondo: ${mondo}
 sessioni: ${helpers.inlineYamlList(sessioni)}
 collegamenti: ${helpers.inlineYamlList(collegamenti)}
+entita_impattate: []
+propaga_a: []
 data_mondo:
+data_reale:
 fc-calendar:
 fc-date:
 fc-category: conseguenza
 fc-display-name: ${helpers.yamlQuote(name)}
+giocabile: false
+causa:
+stato_mondo: []
+scelte: []
+rischi: []
+indizi: []
+png_coinvolti: []
+ricompense: []
+conseguenze: []
+prossima_mossa:
 impatto: []
 azioni: []
 canonizza_evento: false

@@ -9,9 +9,19 @@ tecnologia: "medievale fantastica"
 magia: "rara, rituale e temuta"
 continenti:
   - [[Demo - Valle di Brumafonda]]
+territori_politici:
+  - [[Demo - Marca della Soglia]]
 fazioni:
   - [[Demo - Custodi della Soglia]]
 religioni: []
+relazioni_chiave:
+  - [[Demo - Custodi e Brumafonda]]
+stato_mondo:
+  - Dopo la Seconda Nebbia il ponte e una frontiera politica.
+  - I Custodi possono imporre coprifuoco e requisizioni in nome della sicurezza.
+  - La Marca della Soglia sta nascendo come potere politico non riconosciuto.
+continuita:
+  - La prossima sessione deve aprire con il costo politico del coprifuoco.
 campagne:
   - [[Demo - La Reliquia Spezzata]]
 canonico: true

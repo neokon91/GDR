@@ -54,6 +54,17 @@ pressione: 0
 posta: ${helpers.yamlQuote(posta)}
 prossima_mossa: ${helpers.yamlQuote(prossimaMossa)}
 innesco: ${helpers.yamlQuote(innesco)}
+evento_scatenante:
+esito_parziale:
+esito_finale:
+entita_impattate: []
+propaga_a: []
+mosse: []
+scelte: []
+rischi: []
+indizi: []
+png_coinvolti: []
+ricompense: []
 conseguenze: []
 ---
 `;

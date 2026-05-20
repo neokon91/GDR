@@ -45,6 +45,30 @@ actions:
 ```
 
 ```meta-bind-button
+label: Bibbia Del Mondo
+style: primary
+actions:
+  - type: open
+    link: "[[Bibbia del Mondo]]"
+```
+
+```meta-bind-button
+label: Motore Mondo Vivo
+style: primary
+actions:
+  - type: open
+    link: "[[Motore Mondo Vivo]]"
+```
+
+```meta-bind-button
+label: Geopolitica
+style: primary
+actions:
+  - type: open
+    link: "[[Geopolitical Dashboard]]"
+```
+
+```meta-bind-button
 label: Controllo Vault
 style: primary
 actions:
@@ -74,6 +98,22 @@ style: primary
 actions:
   - type: open
     link: "[[Mondi/Timeline/Timeline]]"
+```
+
+```meta-bind-button
+label: Revisione Lore
+style: primary
+actions:
+  - type: open
+    link: "[[Revisione Lore]]"
+```
+
+```meta-bind-button
+label: Controllo Canone
+style: primary
+actions:
+  - type: open
+    link: "[[Controllo Canone]]"
 ```
 
 ```meta-bind-button
@@ -194,6 +234,16 @@ actions:
 ```
 
 ```meta-bind-button
+label: Segreto O Mistero
+style: primary
+actions:
+  - type: templaterCreateNote
+    templateFile: "z.modelli/worldbuilding/Segreto o Mistero.md"
+    folderPath: "Mondi/Segreti"
+    open: true
+```
+
+```meta-bind-button
 label: Nuova Cultura
 style: primary
 actions:
@@ -224,6 +274,16 @@ actions:
 ```
 
 ```meta-bind-button
+label: Nuova Relazione
+style: primary
+actions:
+  - type: templaterCreateNote
+    templateFile: "z.modelli/worldbuilding/Relazione.md"
+    folderPath: "Mondi/Relazioni"
+    open: true
+```
+
+```meta-bind-button
 label: Dispense
 style: primary
 actions:
@@ -245,6 +305,7 @@ const cards = [
   ["Culture", count('"Mondi/Culture"', notIndex), "Popoli e usanze"],
   ["Lingue", count('"Mondi/Lingue"', notIndex), "Parlate e scritture"],
   ["Fazioni", count('"Mondi/Fazioni"', notIndex), "Poteri in movimento"],
+  ["Relazioni", count('"Mondi/Relazioni"', notIndex), "Alleanze, rivalità e patti"],
   ["Religioni", count('"Mondi/Religioni"', notIndex), "Culti e divinita"],
   ["Conflitti", count('"Mondi/Conflitti"', notIndex), "Guerre e crisi"],
   ["Cosmologia", count('"Mondi/Cosmologia"', notIndex), "Piani e reami"],
@@ -469,7 +530,7 @@ tab: Timeline
 ### Timeline Narrativa
 
 ```dataview
-TABLE data_mondo, stato_canonico, mondo, luoghi, fazioni, sessioni
+TABLE data_mondo AS "Data", stato_canonico AS "Canone", mondo AS "Mondo", luoghi AS "Luoghi", fazioni AS "Fazioni", sessioni AS "Sessioni"
 FROM "Mondi/Timeline"
 WHERE file.name != "Timeline" AND stato_canonico != "archiviata" AND !startswith(file.name, "Prova -") AND (!this.mondo_attivo OR mondo = this.mondo_attivo)
 SORT data_mondo ASC, file.name ASC
@@ -481,11 +542,35 @@ tab: Cause
 ### Timeline Causale
 
 ```dataview
-TABLE data_mondo, causa, conseguenze, luoghi, fazioni, missioni
+TABLE data_mondo, cause, causa, effetti, conseguenze, propaga_a, luoghi, fazioni, missioni
 FROM "Mondi/Timeline"
 WHERE file.name != "Timeline" AND stato_canonico != "archiviata" AND !startswith(file.name, "Prova -") AND (!this.mondo_attivo OR mondo = this.mondo_attivo)
 SORT data_mondo ASC, file.name ASC
 LIMIT 16
+```
+
+tab: Propagazione
+
+### Propagazione Eventi
+
+```dataview
+TABLE categoria, tipo, stato, propaga_a, entita_impattate, conseguenze, prossima_mossa
+FROM "Mondi" OR "Inbox"
+WHERE (propaga_a OR entita_impattate OR conseguenze OR prossima_mossa) AND stato != "archiviata" AND stato != "ignorata" AND !startswith(file.name, "Prova -") AND (!this.mondo_attivo OR mondo = this.mondo_attivo OR file.link = this.mondo_attivo)
+SORT file.mtime DESC
+LIMIT 18
+```
+
+tab: Relazioni
+
+### Grafo Relazionale
+
+```dataview
+TABLE categoria, tipo, relazioni, alleati, rivali, fazioni, luoghi, missioni
+FROM "Mondi/Personaggi" OR "Mondi/Fazioni" OR "Mondi/Religioni" OR "Mondi/Luoghi" OR "Mondi/Relazioni"
+WHERE (relazioni OR alleati OR rivali OR fazioni OR luoghi OR missioni) AND stato != "archiviata" AND !startswith(file.name, "Prova -") AND (!this.mondo_attivo OR mondo = this.mondo_attivo OR file.link = this.mondo_attivo)
+SORT categoria ASC, nome ASC
+LIMIT 24
 ```
 
 tab: Lore
@@ -493,7 +578,7 @@ tab: Lore
 ### Lore Da Canonizzare
 
 ```dataview
-TABLE tipo, stato, stato_canonico, data_mondo, sessioni, collegamenti, impatto
+TABLE tipo AS "Tipo", stato AS "Stato", stato_canonico AS "Canone", data_mondo AS "Data", sessioni AS "Sessioni", collegamenti AS "Collegamenti", impatto AS "Impatto"
 FROM "Inbox"
 WHERE categoria = "lore capture" AND stato != "archiviata" AND stato != "ignorata" AND !startswith(file.name, "Prova -") AND (!this.mondo_attivo OR mondo = this.mondo_attivo)
 SORT file.mtime DESC
@@ -555,7 +640,7 @@ tab: Stato
 ### Stato Canonico
 
 ```dataview
-TABLE categoria, tipo, stato_canonico, canonico, mondo
+TABLE categoria AS "Categoria", tipo AS "Tipo", stato_canonico AS "Canone", canonico AS "Confermato", mondo AS "Mondo"
 FROM "Mondi" OR "Inbox"
 WHERE stato_canonico AND !startswith(file.name, "Prova -") AND stato != "archiviata" AND stato != "ignorata" AND (!this.mondo_attivo OR mondo = this.mondo_attivo)
 SORT stato_canonico ASC, file.mtime DESC

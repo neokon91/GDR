@@ -9,10 +9,16 @@
 > `INPUT[inlineSelect(option(da smistare, Da smistare), option(collegata, Collegata), option(canonica, Canonica), option(archiviata, Archiviata), option(ignorata, Ignorata)):stato]`
 >
 > Stato canonico:
-> `INPUT[inlineSelect(option(canonico, Canonico), option(rumor, Rumor), option(leggenda, Leggenda), option(segreto, Segreto), option(dimenticato, Dimenticato)):stato_canonico]`
+> `INPUT[inlineSelect(option(canonico, Canonico), option(rumor, Rumor), option(leggenda, Leggenda), option(segreto, Segreto), option(falso, Falso), option(retcon, Retcon), option(dimenticato, Dimenticato)):stato_canonico]`
 >
 > Canonico:
 > `INPUT[toggle:canonico]`
+>
+> Fonte:
+> `INPUT[inlineSelect(option(sessione, Sessione), option(prep, Prep), option(player, Player), option(improvvisazione, Improvvisazione), option(retcon, Retcon), option(import, Import)):fonte]`
+>
+> Grado certezza:
+> `INPUT[inlineSelect(option(basso, Basso), option(medio, Medio), option(alto, Alto)):grado_certezza]`
 >
 > Mondo:
 > `INPUT[suggester(optionQuery("Mondi"), useLinks(partial), allowOther):mondo]`
@@ -23,8 +29,20 @@
 > Collegamenti:
 > `INPUT[inlineListSuggester(optionQuery("Mondi"), useLinks(partial), allowOther):collegamenti]`
 >
+> Entità impattate:
+> `INPUT[inlineListSuggester(optionQuery("Mondi"), useLinks(partial), allowOther):entita_impattate]`
+>
+> Propaga a:
+> `INPUT[inlineListSuggester(optionQuery("Mondi"), useLinks(partial), allowOther):propaga_a]`
+>
 > Data mondo:
 > `INPUT[text:data_mondo]`
+>
+> Pronta al tavolo:
+> `INPUT[toggle:giocabile]`
+>
+> Prossima mossa:
+> `INPUT[text:prossima_mossa]`
 >
 > Canonizza evento:
 > `INPUT[toggle:canonizza_evento]`
@@ -53,6 +71,71 @@
 > [!missione] Impatto sul mondo
 > `INPUT[list:impatto]`
 
+## Continuità Narrativa
+
+> [!timeline] Da non perdere
+> Causa:
+> `INPUT[text:causa]`
+>
+> Entità impattate:
+> `INPUT[inlineListSuggester(optionQuery("Mondi"), useLinks(partial), allowOther):entita_impattate]`
+>
+> Propaga a:
+> `INPUT[inlineListSuggester(optionQuery("Mondi"), useLinks(partial), allowOther):propaga_a]`
+>
+> Stato mondo:
+> `INPUT[list:stato_mondo]`
+
+## Controllo Canone
+
+> [!warning] Contraddizioni e retcon
+> Contraddice:
+> `INPUT[inlineListSuggester(optionQuery("Mondi"), useLinks(partial), allowOther):contraddice]`
+>
+> Retcon di:
+> `INPUT[inlineListSuggester(optionQuery("Mondi"), useLinks(partial), allowOther):retcon_di]`
+>
+> Motivo retcon:
+> `INPUT[text:retcon_motivo]`
+
+## Rendere Giocabile
+
+### Scelte
+
+```meta-bind
+INPUT[list:scelte]
+```
+
+### Rischi
+
+```meta-bind
+INPUT[list:rischi]
+```
+
+### Indizi
+
+```meta-bind
+INPUT[list:indizi]
+```
+
+### PNG Coinvolti
+
+```meta-bind
+INPUT[list:png_coinvolti]
+```
+
+### Ricompense
+
+```meta-bind
+INPUT[list:ricompense]
+```
+
+### Conseguenze
+
+```meta-bind
+INPUT[list:conseguenze]
+```
+
 ## Azioni Guidate
 
 ```meta-bind-button
@@ -75,6 +158,10 @@ actions:
     bindTarget: canonico
     evaluate: false
     value: true
+  - type: updateMetadata
+    bindTarget: grado_certezza
+    evaluate: false
+    value: alto
 ```
 
 ```meta-bind-button

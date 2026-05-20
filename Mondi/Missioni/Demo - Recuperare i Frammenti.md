@@ -16,6 +16,8 @@ personaggi:
   - [[Demo - Sella Neraluce]]
 fazioni:
   - [[Demo - Custodi della Soglia]]
+relazioni:
+  - [[Demo - Custodi e Brumafonda]]
 tracciati:
   - [[Demo - I Custodi Chiudono il Ponte]]
   - [[Demo - La Soglia Si Apre]]
@@ -38,6 +40,10 @@ ostacoli:
 conseguenze:
   - Dopo la Seconda Nebbia il ponte e minacciato e la missione diventa urgente.
   - Se i personaggi aspettano, i Custodi trovano il frammento nascosto da Odran.
+entita_impattate:
+  - [[Demo - Custodi e Brumafonda]]
+propaga_a:
+  - [[Demo - Sessione 2 - Il Santuario Sotto Nebbia]]
 segreti:
   - la reliquia e una serratura
 scadenza_mondo: "Terza notte di nebbia"

@@ -20,6 +20,7 @@ campagne:
   - [[Demo - La Reliquia Spezzata]]
 luoghi:
   - [[Demo - Santuario della Prima Pietra]]
+  - [[Demo - Marca della Soglia]]
 personaggi:
   - [[Demo - Sella Neraluce]]
   - [[Demo - Mira Ventofermo]]
@@ -38,6 +39,8 @@ immagini: []
 video: []
 fazioni:
   - [[Demo - Custodi della Soglia]]
+relazioni:
+  - [[Demo - Custodi e Brumafonda]]
 missioni:
   - [[Demo - Recuperare i Frammenti]]
 tracciati:
@@ -56,10 +59,13 @@ domande_al_tavolo:
   - vi fidate dei Custodi?
 pressioni:
   - la nebbia raggiunge il villaggio
+  - i Custodi trasformano il ponte in frontiera politica
 conseguenze:
   - La nebbia viva ha preso il Ponte delle Campane.
   - I Custodi dichiarano il coprifuoco.
   - La reliquia e stata riconosciuta come serratura.
+continuita:
+  - Aprire la prossima sessione con il blocco del ponte e la scelta politica: riconoscere la Marca della Soglia, negoziare, forzare il passaggio o consegnare un frammento.
 ---
 
 # Demo - Sessione 2 - Il Santuario Sotto Nebbia

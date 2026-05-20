@@ -20,6 +20,7 @@ categoria: cultura
 tipo: cultura
 stato: bozza
 canonico: false
+stato_canonico: canonico
 mondo: ${mondo}
 luoghi: ${helpers.inlineYamlList(luoghi)}
 lingue: []
@@ -28,6 +29,25 @@ fazioni: ${helpers.inlineYamlList(fazioni)}
 usi: []
 tabu: []
 feste: []
+valori: []
+estetica: []
+onore:
+tabu_sociali: []
+autorita_riconosciute: []
+pratiche_visibili: []
+relazioni_esterne: []
+conflitti_interni: []
+relazioni: []
+propaga_a: []
+entita_impattate: []
+promesse_al_tavolo: []
+scelte: []
+rischi: []
+indizi: []
+png_coinvolti: []
+ricompense: []
+conseguenze: []
+prossima_mossa:
 leggi: []
 risorse: []
 tensioni: ${helpers.inlineYamlTextList([tensione])}

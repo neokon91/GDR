@@ -11,11 +11,23 @@
 > Pericolo:
 > `INPUT[slider(minValue(0), maxValue(10), stepSize(1), addLabels):pericolo]`
 >
+> Canonica:
+> `INPUT[toggle:canonico]`
+>
+> Stato canonico:
+> `INPUT[inlineSelect(option(canonico, Canonico), option(rumor, Rumor), option(leggenda, Leggenda), option(falso, Falso), option(retcon, Retcon)):stato_canonico]`
+>
 > Stato:
 > `INPUT[inlineSelect(option(bozza, Bozza), option(pronto, Pronto), option(in gioco, In gioco), option(archiviata, Archiviata)):stato]`
 >
 > Prima impressione:
 > `INPUT[text:impressione]`
+>
+> Promessa al tavolo:
+> `INPUT[text:promessa_al_tavolo]`
+>
+> Prossima mossa:
+> `INPUT[text:prossima_mossa]`
 
 > [!luogo] Primo sguardo
 > `=this.impressione`
@@ -31,6 +43,14 @@ tab: Territorio
 ## Clima
 
 ## Flora e Fauna
+
+## Culture Presenti
+
+`INPUT[inlineListSuggester(optionQuery("Mondi/Culture"), useLinks(partial)):culture]`
+
+## Fazioni Presenti
+
+`INPUT[inlineListSuggester(optionQuery("Mondi/Fazioni"), useLinks(partial)):fazioni]`
 
 tab: Rete
 
@@ -52,6 +72,24 @@ tab: Uso
 ## Risorse
 
 `INPUT[inlineList:risorse]`
+
+## Scelte
+
+```meta-bind
+INPUT[list:scelte]
+```
+
+## Rischi
+
+```meta-bind
+INPUT[list:rischi]
+```
+
+## Ricompense
+
+```meta-bind
+INPUT[list:ricompense]
+```
 
 tab: Segreti
 
