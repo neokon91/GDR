@@ -45,3 +45,12 @@ Il comando crea una cartella `dist/vault-gdr-clean` e, se disponibile il comando
 
 
 Per sviluppo e manutenzione si usa il repository Git, non uno ZIP.
+
+## Ultima Verifica Automatica
+
+2026-05-21:
+
+- `npm run check` passato senza warning.
+- `npm run release:clean` ha creato `dist/vault-gdr-clean`.
+- `npm run release:clean` ha creato `dist/vault-gdr-clean.zip`.
+- `dist/` resta artefatto locale ignorato da Git.
