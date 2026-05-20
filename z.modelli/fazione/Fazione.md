@@ -88,6 +88,36 @@
 >
 > `BUTTON[fuori-scena-cosa-succede-fuori-scena-default]`
 
+## Scheda Viva
+
+> [!scena] Gancio
+> `INPUT[text:gancio]`
+
+> [!missione] Posta
+> Obiettivo pubblico: `INPUT[text:obiettivo]`
+>
+> Posta: `INPUT[text:posta]`
+>
+> Uso al tavolo: `INPUT[text:uso_al_tavolo]`
+
+> [!timer] Pressione
+> Pressione: `INPUT[slider(minValue(0), maxValue(10), stepSize(1), addLabels):pressione]`
+>
+> Avanzamento: `INPUT[slider(minValue(0), maxValue(12), stepSize(1), addLabels):progress_value]`
+>
+> Prossima mossa: `INPUT[text:prossima_mossa]`
+
+### Connessioni Vive
+
+`INPUT[inlineListSuggester(optionQuery("Mondi"), useLinks(partial), allowOther):connessioni]`
+
+```dataview
+TABLE categoria, tipo, stato, pressione, prossima_mossa
+FROM "Mondi"
+WHERE contains(this.connessioni, file.link)
+SORT categoria ASC, file.name ASC
+```
+
 ````tabs
 tab: Identità
 

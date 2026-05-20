@@ -59,6 +59,29 @@
 > [!segreto]- DM
 > Causa reale, colpevoli o retcon: `INPUT[text:segreto]`
 
+## Scheda Viva
+
+> [!scena] Gancio
+> `INPUT[text:gancio]`
+
+> [!timeline] Causa -> Conseguenza
+> Causa: `INPUT[text:causa]`
+>
+> Uso al tavolo: `INPUT[text:uso_al_tavolo]`
+>
+> Prossima mossa: `INPUT[text:prossima_mossa]`
+
+### Connessioni Vive
+
+`INPUT[inlineListSuggester(optionQuery("Mondi"), useLinks(partial), allowOther):connessioni]`
+
+```dataview
+TABLE categoria, tipo, stato, pressione, prossima_mossa
+FROM "Mondi"
+WHERE contains(this.connessioni, file.link)
+SORT categoria ASC, file.name ASC
+```
+
 ## Lettura Storica
 
 ### Cosa Accadde Davvero

@@ -22,6 +22,9 @@ async function missione(tp) {
     const mondo = await helpers.chooseWorld(tp, "Mondo della missione");
     const context = { world: mondo };
     const pressione = await helpers.promptOptional(tp, "Pressione da 0 a 10", "3") || "3";
+    const posta = await helpers.promptOptional(tp, "Posta: cosa cambia se riesce o fallisce?");
+    const scelta = await helpers.promptOptional(tp, "Scelta concreta per i giocatori");
+    const playerSafe = await helpers.promptOptional(tp, "Versione player-safe dell'obiettivo");
     const prossimaMossa = await helpers.promptOptional(tp, "Prossima mossa se ignorata");
     const indizio = await helpers.promptOptional(tp, "Indizio iniziale");
     const conseguenza = await helpers.promptOptional(tp, "Conseguenza se fallisce o viene ignorata");
@@ -35,6 +38,7 @@ async function missione(tp) {
     const ostacolo = creazioneCompleta ? await helpers.promptOptional(tp, "Ostacolo principale") : "";
     const segreto = await helpers.promptOptional(tp, "Segreto dietro la missione");
     const domandaAperta = creazioneCompleta ? await helpers.promptOptional(tp, "Domanda aperta della missione") : "";
+    const connessioni = creazioneCompleta ? await helpers.chooseConnections(tp, "Connessioni vive della missione", context) : [];
 
     const sessioni = activeContext.link ? [activeContext.link] : [];
     const created = await helpers.moveNote(tp, helpers.path("missioni"), name);
@@ -59,6 +63,11 @@ sessioni: ${helpers.inlineYamlList(sessioni)}
 progress_value: 0
 progress_max: 6
 pressione: ${helpers.yamlNumber(pressione) || 3}
+posta: ${helpers.yamlQuote(posta)}
+scelta: ${helpers.yamlQuote(scelta)}
+gancio: ${helpers.yamlQuote(playerSafe || indizio)}
+uso_al_tavolo: ${helpers.yamlQuote(scelta || prossimaMossa)}
+player_safe: ${helpers.yamlQuote(playerSafe)}
 prossima_mossa: ${helpers.yamlQuote(prossimaMossa)}
 domande_aperte: ${helpers.inlineYamlTextList([domandaAperta])}
 indizi: ${helpers.inlineYamlTextList([indizio])}
@@ -67,6 +76,7 @@ scene_pronte: []
 decisioni: []
 conseguenze: ${helpers.inlineYamlTextList([conseguenza])}
 segreti: ${helpers.inlineYamlTextList([segreto])}
+connessioni: ${helpers.inlineYamlList(connessioni)}
 scadenza_mondo: ${helpers.yamlQuote(scadenzaMondo)}
 fc-calendar:
 fc-date:

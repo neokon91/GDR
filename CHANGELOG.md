@@ -15,6 +15,7 @@
 
 ### Migliorato
 
+- Correzione strutturale Obsidian-native: i wizard Templater di luogo, fazione, missione e PNG cercano connessioni vive tra note esistenti e i template core espongono sezioni Meta Bind modificabili dal corpo nota per gancio, uso al tavolo, player-safe, pressione, prossima mossa e connessioni.
 - Chiuso il flusso sessione: la nota sessione genera una scaletta giocabile dai cinque campi, le viste operative mostrano la sessione attiva e [[Durante il Gioco]] apre come cockpit con Fine sessione visibile.
 - [[Risorse/Post Sessione Guidato]] ora e un flusso unico con appunti live della sessione, canone da confermare, conseguenze, prossime mosse, prossima sessione e recap pubblico/DM separati.
 - [[Bibbia del Mondo]] e il template mondo sono stati rafforzati come Codex locale: home mondo, indice per categoria/pubblico e controlli su articoli senza gancio, collegamenti o uso al tavolo.

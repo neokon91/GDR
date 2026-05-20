@@ -562,6 +562,40 @@ async function chooseNotesByPath(tp, path, message, options = {}) {
     return await chooseNotesFromFiles(tp, getMarkdownFilesInPath(path), message, options);
 }
 
+function getMarkdownFilesInPaths(paths) {
+    const seen = new Set();
+    const files = [];
+
+    for (const folder of paths) {
+        for (const file of getMarkdownFilesInPath(folder)) {
+            if (seen.has(file.path)) continue;
+            seen.add(file.path);
+            files.push(file);
+        }
+    }
+
+    return files.sort((a, b) => a.basename.localeCompare(b.basename));
+}
+
+async function chooseConnections(tp, message = "Connessioni vive", context = {}) {
+    return await chooseNotesFromFiles(
+        tp,
+        getMarkdownFilesInPaths([
+            PATHS.luoghi,
+            PATHS.personaggi,
+            PATHS.fazioni,
+            PATHS.religioni,
+            PATHS.missioni,
+            PATHS.tracciati,
+            PATHS.relazioni,
+            PATHS.oggetti,
+            PATHS.mappe
+        ]),
+        message,
+        context
+    );
+}
+
 async function ensureFolder(path) {
     const parts = String(path ?? "").split("/").filter(Boolean);
     let currentPath = "";
@@ -797,11 +831,13 @@ module.exports = {
     fileLink,
     getMarkdownFilesByFrontmatter,
     getMarkdownFilesInPath,
+    getMarkdownFilesInPaths,
     chooseNoteFromFiles,
     chooseNoteByPath,
     chooseNoteByFrontmatter,
     chooseNotesFromFiles,
     chooseNotesByPath,
+    chooseConnections,
     ensureFolder,
     moveNote,
     chooseWorld,

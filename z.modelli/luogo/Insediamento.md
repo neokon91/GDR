@@ -53,6 +53,34 @@
 >
 > `BUTTON[nuova-mappa-zoom-z-modelli-mappe-mappa-zoom-md]`
 
+## Scheda Viva
+
+> [!scena] Gancio
+> `INPUT[text:gancio]`
+
+> [!luogo] Al tavolo
+> Prima impressione: `INPUT[text:impressione]`
+>
+> Uso al tavolo: `INPUT[text:uso_al_tavolo]`
+>
+> Tensione: `INPUT[text:tensione]`
+
+> [!timer] Se Nessuno Interviene
+> Pressione: `INPUT[slider(minValue(0), maxValue(10), stepSize(1), addLabels):pressione]`
+>
+> Prossima mossa: `INPUT[text:prossima_mossa]`
+
+### Connessioni Vive
+
+`INPUT[inlineListSuggester(optionQuery("Mondi"), useLinks(partial), allowOther):connessioni]`
+
+```dataview
+TABLE categoria, tipo, stato, pressione, prossima_mossa
+FROM "Mondi"
+WHERE contains(this.connessioni, file.link)
+SORT categoria ASC, file.name ASC
+```
+
 ````tabs
 tab: Essenziale
 

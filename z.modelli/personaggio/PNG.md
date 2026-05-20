@@ -52,6 +52,31 @@
 >
 > `BUTTON[revisione-lore-revisione-lore-default]`
 
+## Scheda Viva
+
+> [!scena] Gancio
+> `INPUT[text:gancio]`
+
+> [!png] Al tavolo
+> Vuole: `INPUT[text:vuole]`
+>
+> Sa: `INPUT[text:sa]`
+>
+> Leva: `INPUT[text:leva]`
+>
+> Uso al tavolo: `INPUT[text:uso_al_tavolo]`
+
+### Connessioni Vive
+
+`INPUT[inlineListSuggester(optionQuery("Mondi"), useLinks(partial), allowOther):connessioni]`
+
+```dataview
+TABLE categoria, tipo, stato, pressione, prossima_mossa
+FROM "Mondi"
+WHERE contains(this.connessioni, file.link)
+SORT categoria ASC, file.name ASC
+```
+
 ```dataviewjs
 const name = dv.current().name ?? dv.current().nome ?? dv.current().file.name;
 dv.paragraph("```statblock\nmonster: " + name + "\n```");

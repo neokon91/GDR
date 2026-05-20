@@ -31,6 +31,29 @@
 > [!segreto]- DM
 > Verita divina, eresie o prezzo nascosto: `INPUT[text:segreto]`
 
+## Scheda Viva
+
+> [!scena] Gancio
+> `INPUT[text:gancio]`
+
+> [!missione] Fede In Gioco
+> Uso al tavolo: `INPUT[text:uso_al_tavolo]`
+>
+> Cosa chiede ai fedeli: `INPUT[text:richiesta_ai_fedeli]`
+>
+> Prossima mossa: `INPUT[text:prossima_mossa]`
+
+### Connessioni Vive
+
+`INPUT[inlineListSuggester(optionQuery("Mondi"), useLinks(partial), allowOther):connessioni]`
+
+```dataview
+TABLE categoria, tipo, stato, pressione, prossima_mossa
+FROM "Mondi"
+WHERE contains(this.connessioni, file.link)
+SORT categoria ASC, file.name ASC
+```
+
 ## Segni E Simboli
 
 > [!indizio] Come si manifesta

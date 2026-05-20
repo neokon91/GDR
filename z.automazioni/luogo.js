@@ -39,8 +39,11 @@ async function luogo(tp, routeOptions = {}){
     const mondo = await helpers.chooseWorld(tp, "Mondo del luogo");
     const context = { world: mondo };
     const pericolo = await helpers.promptOptional(tp, "Pericolo da 0 a 10");
+    const gancio = await helpers.promptOptional(tp, "Gancio giocabile: perche questo luogo importa adesso?");
     const impressione = await helpers.promptOptional(tp, "Prima impressione");
     const tensione = await helpers.promptOptional(tp, "Tensione o conflitto locale");
+    const usoAlTavolo = await helpers.promptOptional(tp, "Uso al tavolo: scelta, rischio o scena che produce");
+    const playerSafe = await helpers.promptOptional(tp, "Versione player-safe mostrabile");
     const luogoPadre = creazioneCompleta ? await helpers.chooseLocation(tp, "Luogo o regione superiore", context) : "";
     const governante = creazioneCompleta ? await helpers.choosePerson(tp, "Governante o referente", context) : "";
     const fazioni = creazioneCompleta ? await helpers.chooseFactions(tp, "Fazioni presenti o interessate", context) : [];
@@ -49,6 +52,7 @@ async function luogo(tp, routeOptions = {}){
     const funzioneNarrativa = creazioneCompleta ? await helpers.promptOptional(tp, "Funzione narrativa del luogo") : "";
     const veritaNascosta = creazioneCompleta ? await helpers.promptOptional(tp, "Verità nascosta o segreto") : "";
     const domandaAperta = creazioneCompleta ? await helpers.promptOptional(tp, "Domanda aperta da esplorare al tavolo") : "";
+    const connessioni = creazioneCompleta ? await helpers.chooseConnections(tp, "Connessioni vive del luogo", context) : [];
     const sessioni = activeContext.link ? [activeContext.link] : [];
     const created = await helpers.moveNote(tp, helpers.path("luoghi"), name);
     // Un luogo creato al volo viene collegato alla sessione per ritrovarlo nel cockpit.
@@ -77,6 +81,9 @@ pressione: 0
 legittimita:
 capitale:
 impressione: ${helpers.yamlQuote(impressione)}
+gancio: ${helpers.yamlQuote(gancio)}
+uso_al_tavolo: ${helpers.yamlQuote(usoAlTavolo)}
+player_safe: ${helpers.yamlQuote(playerSafe)}
 funzione_narrativa: ${helpers.yamlQuote(funzioneNarrativa)}
 tensione: ${helpers.yamlQuote(tensione)}
 promessa_al_tavolo:
@@ -108,6 +115,7 @@ voci: []
 scene: []
 prossima_mossa:
 domande_aperte: ${helpers.inlineYamlTextList([domandaAperta])}
+connessioni: ${helpers.inlineYamlList(connessioni)}
 collegamenti_mancanti: []
 ---
 `

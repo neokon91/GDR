@@ -32,9 +32,12 @@ async function personaggio(tp) {
     const missioni = await helpers.chooseMissions(tp, "Missioni collegate al personaggio", context);
     const vuole = await helpers.promptOptional(tp, "Cosa vuole");
     const sa = await helpers.promptOptional(tp, "Cosa sa di utile");
+    const gancio = await helpers.promptOptional(tp, "Gancio giocabile: perche entra in scena ora?");
+    const playerSafe = await helpers.promptOptional(tp, "Versione player-safe mostrabile");
     const segreto = await helpers.promptOptional(tp, "Segreto o contraddizione");
     const leva = await helpers.promptOptional(tp, "Leva per coinvolgerlo al tavolo");
     const domandaAperta = await helpers.promptOptional(tp, "Domanda aperta sul personaggio");
+    const connessioni = await helpers.chooseConnections(tp, "Connessioni vive del personaggio", context);
 
     await helpers.moveNote(tp, helpers.path("personaggi"), name);
 
@@ -57,8 +60,12 @@ missioni: ${helpers.inlineYamlList(missioni)}
 vuole: ${helpers.yamlQuote(vuole)}
 sa: ${helpers.yamlQuote(sa)}
 leva: ${helpers.yamlQuote(leva)}
+gancio: ${helpers.yamlQuote(gancio)}
+uso_al_tavolo: ${helpers.yamlQuote(leva || vuole)}
+player_safe: ${helpers.yamlQuote(playerSafe)}
 segreto: ${helpers.yamlQuote(segreto)}
 domande_aperte: ${helpers.inlineYamlTextList([domandaAperta])}
+connessioni: ${helpers.inlineYamlList(connessioni)}
 conseguenze: []
 type: umanoide
 size: media

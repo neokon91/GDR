@@ -1,6 +1,38 @@
 <% await tp.user.missione(tp) %>
 # `=this.nome`
 
+## Scheda Viva
+
+> [!scena] Gancio
+> `INPUT[text:gancio]`
+
+> [!missione] Obiettivo E Posta
+> Obiettivo player-safe: `INPUT[text:player_safe]`
+>
+> Posta: `INPUT[text:posta]`
+>
+> Scelta concreta: `INPUT[text:scelta]`
+>
+> Uso al tavolo: `INPUT[text:uso_al_tavolo]`
+
+> [!timer] Pressione
+> Pressione: `INPUT[slider(minValue(0), maxValue(10), stepSize(1), addLabels):pressione]`
+>
+> Avanzamento: `INPUT[slider(minValue(0), maxValue(12), stepSize(1), addLabels):progress_value]`
+>
+> Prossima mossa: `INPUT[text:prossima_mossa]`
+
+### Connessioni Vive
+
+`INPUT[inlineListSuggester(optionQuery("Mondi"), useLinks(partial), allowOther):connessioni]`
+
+```dataview
+TABLE categoria, tipo, stato, pressione, prossima_mossa
+FROM "Mondi"
+WHERE contains(this.connessioni, file.link)
+SORT categoria ASC, file.name ASC
+```
+
 >[!infobox|wiki]- Missione
 > Stato:
 > `INPUT[inlineSelect(option(proposta, Proposta), option(accettata, Accettata), option(in corso, In corso), option(completata, Completata), option(fallita, Fallita), option(archiviata, Archiviata)):stato]`

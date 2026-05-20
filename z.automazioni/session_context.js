@@ -457,12 +457,12 @@
     const title = pageTitle(page);
     const meta = [category, page.stato, page.tipo].filter(Boolean).join(" · ");
     const body = category === "missione"
-      ? fieldText(page.obiettivo ?? page.posta ?? page.committente ?? page.luoghi)
+      ? fieldText(page.player_safe ?? page.obiettivo ?? page.posta ?? page.committente ?? page.luoghi)
       : category === "personaggio"
-        ? fieldText(page.ruolo ?? page.luogo ?? page.atteggiamento)
+        ? fieldText(page.player_safe ?? page.ruolo ?? page.luogo ?? page.atteggiamento)
         : category === "luogo"
-          ? fieldText(page.impressione ?? page.bioma ?? page.tipo)
-          : fieldText(page.tipo ?? page.luogo ?? page.personaggi);
+          ? fieldText(page.player_safe ?? page.impressione ?? page.gancio ?? page.bioma ?? page.tipo)
+          : fieldText(page.player_safe ?? page.uso_al_tavolo ?? page.tipo ?? page.luogo ?? page.personaggi);
     const safeLink = page.pubblico === true && !hasPrivateFields(page) ? page.file.path : "";
     return cardHtml({ title, meta, body, link: safeLink, cls: `gdr-info-card compact gdr-kind-${category}` });
   }

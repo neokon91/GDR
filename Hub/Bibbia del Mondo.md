@@ -150,7 +150,8 @@ dv.pages('"Mondi/Luoghi" OR "Mondi/Fazioni" OR "Mondi/Personaggi" OR "Mondi/Cult
       ...(Array.isArray(p.fazioni) ? p.fazioni : []),
       ...(Array.isArray(p.personaggi) ? p.personaggi : []),
       ...(Array.isArray(p.missioni) ? p.missioni : []),
-      ...(Array.isArray(p.sessioni) ? p.sessioni : [])
+      ...(Array.isArray(p.sessioni) ? p.sessioni : []),
+      ...(Array.isArray(p.connessioni) ? p.connessioni : [])
     ];
     if (!has(p.gancio) && !has(p.impressione) && !has(p.vuole) && !has(p.obiettivo) && !has(p.causa)) rows.push([title, "senza gancio o uso narrativo"]);
     if (!links.length && p.categoria !== "mondo") rows.push([title, "senza collegamenti operativi"]);

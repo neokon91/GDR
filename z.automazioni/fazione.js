@@ -22,6 +22,8 @@ async function fazione(tp, routeOptions = {}) {
     const mondo = await helpers.chooseWorld(tp, "Mondo della fazione");
     const context = { world: mondo };
     const obiettivo = await helpers.promptOptional(tp, "Obiettivo pubblico");
+    const gancio = await helpers.promptOptional(tp, "Gancio giocabile: perche questa fazione entra in scena?");
+    const playerSafe = await helpers.promptOptional(tp, "Versione player-safe mostrabile");
     const obiettivoNascosto = await helpers.promptOptional(tp, "Obiettivo nascosto");
     const pressione = await helpers.promptOptional(tp, "Pressione da 0 a 10");
     const prossimaMossa = await helpers.promptOptional(tp, "Prossima mossa se nessuno interviene");
@@ -34,6 +36,7 @@ async function fazione(tp, routeOptions = {}) {
     const rivali = creazioneCompleta ? await helpers.chooseFactions(tp, "Fazioni rivali o nemiche", context) : [];
     const scadenzaMondo = creazioneCompleta ? await helpers.promptOptional(tp, "Scadenza nel mondo") : "";
     const domandaAperta = creazioneCompleta ? await helpers.promptOptional(tp, "Domanda aperta sulla fazione") : "";
+    const connessioni = creazioneCompleta ? await helpers.chooseConnections(tp, "Connessioni vive della fazione", context) : [];
 
     await helpers.moveNote(tp, helpers.path("fazioni"), name);
 
@@ -52,6 +55,9 @@ luoghi: ${helpers.inlineYamlList(luoghi)}
 personaggi: ${helpers.inlineYamlList(personaggi)}
 missioni: ${helpers.inlineYamlList(missioni)}
 obiettivo: ${helpers.yamlQuote(obiettivo)}
+gancio: ${helpers.yamlQuote(gancio)}
+uso_al_tavolo: ${helpers.yamlQuote(prossimaMossa || obiettivo)}
+player_safe: ${helpers.yamlQuote(playerSafe)}
 obiettivo_nascosto: ${helpers.yamlQuote(obiettivoNascosto)}
 agenda: ${helpers.yamlQuote(obiettivo)}
 influenza:
@@ -80,6 +86,7 @@ propaga_a: []
 conseguenze: []
 segreti: ${helpers.inlineYamlTextList([segreto])}
 domande_aperte: ${helpers.inlineYamlTextList([domandaAperta])}
+connessioni: ${helpers.inlineYamlList(connessioni)}
 ---
 `;
 }
