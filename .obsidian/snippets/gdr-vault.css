@@ -96,6 +96,14 @@ settings:
   --gdr-danger-rgb: 174, 75, 63;
   --gdr-nature-rgb: 91, 130, 86;
   --gdr-mystic-rgb: 124, 94, 157;
+  --gdr-png-rgb: 91, 130, 86;
+  --gdr-luogo-rgb: 69, 126, 132;
+  --gdr-fazione-rgb: 136, 98, 68;
+  --gdr-missione-rgb: 74, 126, 139;
+  --gdr-incontro-rgb: 174, 75, 63;
+  --gdr-timeline-rgb: 92, 119, 166;
+  --gdr-segreto-rgb: 124, 94, 157;
+  --gdr-ricompensa-rgb: 194, 154, 70;
   --gdr-border: color-mix(in srgb, var(--text-muted) 20%, transparent);
   --gdr-surface: color-mix(in srgb, var(--background-secondary) 78%, transparent);
   --gdr-surface-strong: color-mix(in srgb, var(--background-secondary) 92%, var(--background-primary));
@@ -114,6 +122,14 @@ body.gdr-palette-bosco {
   --gdr-danger-rgb: 160, 76, 65;
   --gdr-nature-rgb: 78, 138, 113;
   --gdr-mystic-rgb: 112, 98, 151;
+  --gdr-png-rgb: 78, 138, 113;
+  --gdr-luogo-rgb: 74, 128, 103;
+  --gdr-fazione-rgb: 145, 112, 68;
+  --gdr-missione-rgb: 91, 130, 86;
+  --gdr-incontro-rgb: 160, 76, 65;
+  --gdr-timeline-rgb: 88, 116, 142;
+  --gdr-segreto-rgb: 112, 98, 151;
+  --gdr-ricompensa-rgb: 184, 146, 76;
 }
 
 body.gdr-palette-crepuscolo {
@@ -122,6 +138,14 @@ body.gdr-palette-crepuscolo {
   --gdr-danger-rgb: 180, 76, 80;
   --gdr-nature-rgb: 86, 130, 113;
   --gdr-mystic-rgb: 132, 91, 155;
+  --gdr-png-rgb: 86, 130, 113;
+  --gdr-luogo-rgb: 92, 119, 166;
+  --gdr-fazione-rgb: 164, 104, 82;
+  --gdr-missione-rgb: 92, 119, 166;
+  --gdr-incontro-rgb: 180, 76, 80;
+  --gdr-timeline-rgb: 118, 107, 166;
+  --gdr-segreto-rgb: 132, 91, 155;
+  --gdr-ricompensa-rgb: 190, 142, 76;
 }
 
 body.gdr-palette-minimal {
@@ -276,17 +300,21 @@ body.theme-dark {
 }
 
 .callout[data-callout="scena"],
+.callout[data-callout="regia"],
 .callout[data-callout="indizio"],
 .callout[data-callout="segreto"],
 .callout[data-callout="incontro"],
 .callout[data-callout="tesoro"],
+.callout[data-callout="ricompensa"],
 .callout[data-callout="png"],
 .callout[data-callout="luogo"],
+.callout[data-callout="fazione"],
 .callout[data-callout="missione"],
 .callout[data-callout="handout"],
 .callout[data-callout="regola"],
 .callout[data-callout="pericolo"],
 .callout[data-callout="lettura"],
+.callout[data-callout="timeline"],
 .callout[data-callout="timer"] {
   box-shadow: none;
 }
@@ -296,38 +324,53 @@ body.theme-dark {
   --callout-icon: lucide-clapperboard;
 }
 
+.callout[data-callout="regia"] {
+  --callout-color: var(--gdr-missione-rgb);
+  --callout-icon: lucide-screen-share;
+}
+
 .callout[data-callout="indizio"] {
   --callout-color: var(--gdr-warm-rgb);
   --callout-icon: lucide-search;
 }
 
 .callout[data-callout="segreto"] {
-  --callout-color: var(--gdr-mystic-rgb);
+  --callout-color: var(--gdr-segreto-rgb);
   --callout-icon: lucide-key-round;
 }
 
 .callout[data-callout="incontro"] {
-  --callout-color: var(--gdr-danger-rgb);
+  --callout-color: var(--gdr-incontro-rgb);
   --callout-icon: lucide-swords;
 }
 
 .callout[data-callout="tesoro"] {
-  --callout-color: 194, 154, 70;
+  --callout-color: var(--gdr-ricompensa-rgb);
   --callout-icon: lucide-gem;
 }
 
+.callout[data-callout="ricompensa"] {
+  --callout-color: var(--gdr-ricompensa-rgb);
+  --callout-icon: lucide-package-check;
+}
+
 .callout[data-callout="png"] {
-  --callout-color: var(--gdr-nature-rgb);
+  --callout-color: var(--gdr-png-rgb);
   --callout-icon: lucide-user-round;
 }
 
 .callout[data-callout="luogo"] {
-  --callout-color: var(--gdr-nature-rgb);
+  --callout-color: var(--gdr-luogo-rgb);
   --callout-icon: lucide-map-pin;
 }
 
+.callout[data-callout="fazione"] {
+  --callout-color: var(--gdr-fazione-rgb);
+  --callout-icon: lucide-landmark;
+}
+
 .callout[data-callout="missione"] {
-  --callout-color: var(--gdr-accent-rgb);
+  --callout-color: var(--gdr-missione-rgb);
   --callout-icon: lucide-scroll-text;
 }
 
@@ -349,6 +392,11 @@ body.theme-dark {
 .callout[data-callout="lettura"] {
   --callout-color: 119, 97, 77;
   --callout-icon: lucide-book-open-text;
+}
+
+.callout[data-callout="timeline"] {
+  --callout-color: var(--gdr-timeline-rgb);
+  --callout-icon: lucide-git-branch;
 }
 
 .callout[data-callout="timer"] {
@@ -607,6 +655,57 @@ body .markdown-source-view.tavolo {
   box-shadow: var(--gdr-shadow);
 }
 
+.markdown-preview-view:is(.gdr-dm-dashboard, .gdr-tavolo-dashboard) {
+  --gdr-accent-rgb: var(--gdr-missione-rgb);
+}
+
+.markdown-preview-view.gdr-worldbuilder-dashboard {
+  --gdr-accent-rgb: var(--gdr-luogo-rgb);
+}
+
+.markdown-preview-view.gdr-atlante-dashboard {
+  --gdr-accent-rgb: var(--gdr-timeline-rgb);
+}
+
+.markdown-preview-view.gdr-player-view {
+  --gdr-accent-rgb: var(--gdr-png-rgb);
+}
+
+.markdown-preview-view:is(.gdr-dm-dashboard, .gdr-worldbuilder-dashboard, .gdr-atlante-dashboard, .gdr-player-view) h1 {
+  position: relative;
+  overflow: hidden;
+}
+
+.markdown-preview-view:is(.gdr-dm-dashboard, .gdr-worldbuilder-dashboard, .gdr-atlante-dashboard, .gdr-player-view) h1::after {
+  content: "";
+  position: absolute;
+  right: 1rem;
+  bottom: 0.65rem;
+  width: clamp(5rem, 14vw, 11rem);
+  height: 2px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, transparent, var(--gdr-accent-line));
+}
+
+.markdown-preview-view.gdr-player-view h1 {
+  background:
+    linear-gradient(90deg, color-mix(in srgb, rgb(var(--gdr-png-rgb)) 13%, transparent), transparent 58%),
+    var(--gdr-surface);
+}
+
+.markdown-preview-view.gdr-player-view .callout[data-callout="warning"] {
+  --callout-color: var(--gdr-danger-rgb);
+}
+
+.markdown-preview-view.gdr-tavolo-dashboard h1 {
+  padding: 0.75rem 0;
+  border-bottom: 2px solid var(--gdr-accent-line);
+}
+
+.markdown-preview-view.gdr-tavolo-dashboard .callout[data-callout="scena"] {
+  border-left-width: 5px;
+}
+
 .markdown-preview-view.dashboard h2 {
   margin-top: 1.6rem;
   padding-bottom: 0.35rem;
@@ -738,6 +837,55 @@ body .markdown-source-view.tavolo {
   background: var(--gdr-accent-line);
 }
 
+.markdown-preview-view.gdr-dm-dashboard .gdr-stat-card:nth-child(1)::before,
+.gdr-kind-campagna::before {
+  background: color-mix(in srgb, rgb(var(--gdr-missione-rgb)) 72%, transparent);
+}
+
+.markdown-preview-view.gdr-dm-dashboard .gdr-stat-card:nth-child(2)::before,
+.gdr-kind-sessione::before {
+  background: color-mix(in srgb, rgb(var(--gdr-timeline-rgb)) 72%, transparent);
+}
+
+.markdown-preview-view.gdr-dm-dashboard .gdr-stat-card:nth-child(3)::before,
+.gdr-kind-missione::before {
+  background: color-mix(in srgb, rgb(var(--gdr-missione-rgb)) 72%, transparent);
+}
+
+.markdown-preview-view.gdr-dm-dashboard .gdr-stat-card:nth-child(4)::before,
+.gdr-kind-clock::before {
+  background: color-mix(in srgb, rgb(var(--gdr-incontro-rgb)) 72%, transparent);
+}
+
+.markdown-preview-view.gdr-dm-dashboard .gdr-stat-card:nth-child(5)::before,
+.gdr-kind-ricompensa::before {
+  background: color-mix(in srgb, rgb(var(--gdr-ricompensa-rgb)) 72%, transparent);
+}
+
+.markdown-preview-view.gdr-worldbuilder-dashboard .gdr-stat-card:nth-child(1)::before,
+.markdown-preview-view.gdr-atlante-dashboard .gdr-stat-card:nth-child(1)::before,
+.gdr-kind-luogo::before {
+  background: color-mix(in srgb, rgb(var(--gdr-luogo-rgb)) 72%, transparent);
+}
+
+.markdown-preview-view.gdr-worldbuilder-dashboard .gdr-stat-card:nth-child(2)::before,
+.markdown-preview-view.gdr-atlante-dashboard .gdr-stat-card:nth-child(2)::before,
+.gdr-kind-png::before {
+  background: color-mix(in srgb, rgb(var(--gdr-png-rgb)) 72%, transparent);
+}
+
+.markdown-preview-view.gdr-worldbuilder-dashboard .gdr-stat-card:nth-child(3)::before,
+.markdown-preview-view.gdr-atlante-dashboard .gdr-stat-card:nth-child(4)::before,
+.gdr-kind-fazione::before {
+  background: color-mix(in srgb, rgb(var(--gdr-fazione-rgb)) 72%, transparent);
+}
+
+.markdown-preview-view.gdr-worldbuilder-dashboard .gdr-stat-card:nth-child(4)::before,
+.markdown-preview-view.gdr-atlante-dashboard .gdr-stat-card:nth-child(5)::before,
+.gdr-kind-timeline::before {
+  background: color-mix(in srgb, rgb(var(--gdr-timeline-rgb)) 72%, transparent);
+}
+
 .gdr-stat-value {
   font-size: 1.8rem;
   line-height: 1;
@@ -784,6 +932,70 @@ body .markdown-source-view.tavolo {
 
 .gdr-card-line {
   margin-top: 0.3rem;
+}
+
+.gdr-badge-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-block: 0.45rem 0.15rem;
+}
+
+.gdr-badge,
+.gdr-status {
+  display: inline-flex;
+  align-items: center;
+  min-height: 1.35rem;
+  max-width: 100%;
+  border: 1px solid color-mix(in srgb, rgb(var(--gdr-badge-rgb, var(--gdr-accent-rgb))) 35%, transparent);
+  border-radius: 999px;
+  padding: 0.12rem 0.52rem;
+  background: color-mix(in srgb, rgb(var(--gdr-badge-rgb, var(--gdr-accent-rgb))) 11%, transparent);
+  color: var(--text-normal);
+  font-size: 0.78rem;
+  font-weight: 700;
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+}
+
+.gdr-badge.png,
+.gdr-status.png {
+  --gdr-badge-rgb: var(--gdr-png-rgb);
+}
+
+.gdr-badge.luogo,
+.gdr-status.luogo {
+  --gdr-badge-rgb: var(--gdr-luogo-rgb);
+}
+
+.gdr-badge.fazione,
+.gdr-status.fazione {
+  --gdr-badge-rgb: var(--gdr-fazione-rgb);
+}
+
+.gdr-badge.missione,
+.gdr-status.missione {
+  --gdr-badge-rgb: var(--gdr-missione-rgb);
+}
+
+.gdr-badge.incontro,
+.gdr-status.incontro {
+  --gdr-badge-rgb: var(--gdr-incontro-rgb);
+}
+
+.gdr-badge.timeline,
+.gdr-status.timeline {
+  --gdr-badge-rgb: var(--gdr-timeline-rgb);
+}
+
+.gdr-badge.segreto,
+.gdr-status.segreto {
+  --gdr-badge-rgb: var(--gdr-segreto-rgb);
+}
+
+.gdr-badge.ricompensa,
+.gdr-status.ricompensa {
+  --gdr-badge-rgb: var(--gdr-ricompensa-rgb);
 }
 
 .gdr-track-card {

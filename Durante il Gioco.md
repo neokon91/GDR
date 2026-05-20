@@ -1,25 +1,25 @@
 ---
 cssclasses:
   - tavolo
+  - gdr-tavolo-dashboard
 ---
 
 # Durante Il Gioco
+
+> [!scena] Schermo del DM
+> Vista rapida per sessione attiva, scena corrente, PNG, incontri, missioni, clock e appunti live.
 
 ## Sessione Attiva
 
 ```dataviewjs
 const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));
-const sessions = gdr.sessionCandidates(dv);
 const active = gdr.activeSession(dv);
 
 if (!active) {
-  dv.paragraph("Nessuna sessione attiva. Attiva una sessione con il toggle `attiva`, oppure usa il fallback `pronto` o `preparazione`.");
+  dv.paragraph("Nessuna sessione attiva. Apri [[1. DM Dashboard]] e crea o prepara una sessione.");
 } else {
-  dv.table(
-    ["Sessione", "Data", "Data mondo", "Stato", "Campagne", "Luoghi", "Missioni", "Tracciati", "Incontri"],
-    [[active.file.link, active.data ?? "", active.data_mondo ?? "", active.stato ?? "", active.campagne ?? [], active.luoghi ?? [], active.missioni ?? [], active.tracciati ?? [], active.incontri ?? []]]
-  );
-  dv.paragraph(`Apri: ${active.file.link}`);
+  dv.paragraph(`Sessione: ${active.file.link} · ${active.data ?? "data non indicata"} · ${active.stato ?? "senza stato"}`);
+  gdr.renderTableCockpit(dv);
 }
 ```
 
@@ -199,7 +199,8 @@ if (!active) {
     ["Missioni", count(active.missioni), "Obiettivi e pressioni"],
     ["Clock", count(active.tracciati), "Avanzamento visibile"],
     ["Dispense", count(active.dispense), "Materiale da consegnare"],
-    ["Oggetti", count(active.oggetti), "Ricompense o leve"]
+    ["Oggetti", count(active.oggetti), "Ricompense o leve"],
+    ["Appunti", count(active.appunti_live), "Catture da risolvere"]
   ];
 
   const grid = dv.el("div", "", { cls: "gdr-stat-grid" });

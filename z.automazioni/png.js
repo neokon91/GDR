@@ -1,5 +1,6 @@
 async function png(tp) {
     const helpers = tp.user.helpers;
+    const activeContext = helpers.getActiveSessionContext();
     const name = await helpers.promptRequired(tp, "Nome del PNG");
     const id = helpers.slugify(name);
     const role = await helpers.promptOptional(tp, "Ruolo o professione");
@@ -35,7 +36,10 @@ async function png(tp) {
     const leva = await helpers.promptOptional(tp, "Leva per coinvolgerlo al tavolo");
     const domandaAperta = await helpers.promptOptional(tp, "Domanda aperta sul PNG");
 
-    await helpers.moveNote(tp, helpers.path("personaggi"), name);
+    const sessioni = activeContext.link ? [activeContext.link] : [];
+    const created = await helpers.moveNote(tp, helpers.path("personaggi"), name);
+    // Un PNG creato durante la sessione entra subito nel cast attivo.
+    await helpers.linkCreatedNoteToActiveSession(created, { sessionField: "personaggi" });
 
     return `---
 id: ${id}
@@ -52,6 +56,7 @@ luogo: ${luogo}
 fazioni: ${helpers.inlineYamlList(fazioni)}
 relazioni: ${helpers.inlineYamlList(relazioni)}
 missioni: ${helpers.inlineYamlList(missioni)}
+sessioni: ${helpers.inlineYamlList(sessioni)}
 vuole: ${helpers.yamlQuote(vuole)}
 sa: ${helpers.yamlQuote(sa)}
 leva: ${helpers.yamlQuote(leva)}

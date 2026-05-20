@@ -59,9 +59,9 @@ Prima di lavorarci, controlla:
 | Iconize | minimo | orientamento visuale | secondario, non deve sostituire indici chiari |
 | Tabs | parziale | template lunghi | applicare solo dove riduce scrolling reale |
 | Advanced Tables | supporto | tabelle markdown | sfruttato indirettamente nelle tabelle casuali |
-| Emoji Toolbar | opzionale | nessuna dipendenza | non integrare nel flusso base |
+| Emoji Toolbar | non incluso | nessuna dipendenza | non integrare nel flusso base |
 | Style Settings | supporto | tema/snippet | documentare solo se si stabilizza un tema del vault |
-| Iron Vault | fuori ambito | nessuna pagina GDR D&D | non integrare nel flusso D&D; usare solo per campagne Ironsworn |
+| Iron Vault | non incluso | nessuna pagina GDR D&D | tenere fuori dal bundle; usare solo come studio di design |
 | BRAT | manutenzione essenziale | gestione plugin non ufficiali | tenere attivo ma fuori dal flusso utente finale |
 
 ## Prossime Integrazioni
@@ -194,9 +194,9 @@ Fatto bene quando: durante preparazione o gioco il DM puo generare una bozza, sa
 Questi plugin restano secondari o fuori dal flusso base della release ZIP:
 
 - **Iconize**: migliora orientamento visivo, ma non sostituisce indici e dashboard chiare.
-- **Iron Vault**: fuori dal flusso base D&D/fantasy classico; studiarne progress track, clock, oracoli e note attive per replicare funzioni utili nel vault senza imporre Ironsworn/Starforged.
+- **Iron Vault**: fuori dal bundle e dal flusso base D&D/fantasy classico; studiarne progress track, clock, oracoli e note attive per replicare funzioni utili nel vault senza imporre Ironsworn/Starforged.
 - **BRAT**: manutenzione plugin essenziale per strumenti non ufficiali o beta; resta attivo ma non entra nel percorso del DM.
-- **Emoji Toolbar**: opzionale, disattivato nella release base.
+- **Emoji Toolbar**: opzionale, non incluso nella release base.
 
 ## Import Mappe Esterne
 

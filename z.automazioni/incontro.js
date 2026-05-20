@@ -1,5 +1,6 @@
 async function incontro(tp, routeOptions = {}) {
     const helpers = tp.user.helpers;
+    const activeContext = helpers.getActiveSessionContext();
     const encounterName = value => {
         const raw = String(value ?? "").trim();
         const match = raw.match(/^\[\[([^|\]]+)(?:\|[^\]]+)?\]\]$/);
@@ -34,7 +35,10 @@ async function incontro(tp, routeOptions = {}) {
     const ricompense = await helpers.chooseObjects(tp, "Ricompense", context);
     const encounterCreatures = creature.map(link => helpers.yamlQuote(encounterName(link)));
 
-    await helpers.moveNote(tp, helpers.path("incontri"), name);
+    const sessioni = activeContext.link ? [activeContext.link] : [];
+    const created = await helpers.moveNote(tp, helpers.path("incontri"), name);
+    // L'incontro appena creato diventa subito disponibile in Durante il Gioco.
+    await helpers.linkCreatedNoteToActiveSession(created, { sessionField: "incontri" });
 
     return `---
 id: ${id}
@@ -48,6 +52,7 @@ creature: ${helpers.inlineYamlList(creature)}
 personaggi: ${helpers.inlineYamlList(personaggi)}
 mappe: ${helpers.inlineYamlList(mappe)}
 audio: ${helpers.inlineYamlList(audio)}
+sessioni: ${helpers.inlineYamlList(sessioni)}
 pericolo: ${pericolo}
 ricompense: ${helpers.inlineYamlList(ricompense)}
 round: 1

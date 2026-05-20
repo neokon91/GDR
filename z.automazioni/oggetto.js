@@ -1,5 +1,6 @@
 async function oggetto(tp) {
     const helpers = tp.user.helpers;
+    const activeContext = helpers.getActiveSessionContext();
     const name = await helpers.promptRequired(tp, "Nome dell'oggetto");
     const id = helpers.slugify(name);
     const selectedType = await helpers.chooseOptional(
@@ -31,7 +32,10 @@ async function oggetto(tp) {
     const proprietario = await helpers.choosePerson(tp, "Proprietario", context);
     const luogo = await helpers.chooseLocation(tp, "Luogo dell'oggetto", context);
 
-    await helpers.moveNote(tp, helpers.path("oggetti"), name);
+    const sessioni = activeContext.link ? [activeContext.link] : [];
+    const created = await helpers.moveNote(tp, helpers.path("oggetti"), name);
+    // Oggetti e ricompense creati al tavolo restano collegati alla sessione che li ha introdotti.
+    await helpers.linkCreatedNoteToActiveSession(created, { sessionField: "oggetti" });
 
     return `---
 id: ${id}
@@ -44,6 +48,7 @@ canonico: false
 mondo: ${mondo}
 proprietario: ${proprietario}
 luogo: ${luogo}
+sessioni: ${helpers.inlineYamlList(sessioni)}
 ---
 `;
 }

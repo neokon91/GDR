@@ -1,5 +1,6 @@
 async function missione(tp) {
     const helpers = tp.user.helpers;
+    const activeContext = helpers.getActiveSessionContext();
     const name = await helpers.promptRequired(tp, "Nome della missione");
     const id = helpers.slugify(name);
     const selectedType = await helpers.chooseOptional(
@@ -34,7 +35,10 @@ async function missione(tp) {
     const segreto = await helpers.promptOptional(tp, "Segreto dietro la missione");
     const domandaAperta = await helpers.promptOptional(tp, "Domanda aperta della missione");
 
-    await helpers.moveNote(tp, helpers.path("missioni"), name);
+    const sessioni = activeContext.link ? [activeContext.link] : [];
+    const created = await helpers.moveNote(tp, helpers.path("missioni"), name);
+    // Una missione creata mentre prepari o giochi entra subito tra le missioni della sessione attiva.
+    await helpers.linkCreatedNoteToActiveSession(created, { sessionField: "missioni" });
 
     return `---
 id: ${id}
@@ -50,6 +54,7 @@ personaggi: ${helpers.inlineYamlList(personaggi)}
 fazioni: ${helpers.inlineYamlList(fazioni)}
 tracciati: ${helpers.inlineYamlList(tracciati)}
 ricompense: ${helpers.inlineYamlList(ricompense)}
+sessioni: ${helpers.inlineYamlList(sessioni)}
 progress_value: 0
 progress_max: 6
 pressione: ${helpers.yamlNumber(pressione) || 3}

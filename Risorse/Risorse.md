@@ -49,7 +49,7 @@ Questa pagina raccoglie guide e materiali riutilizzabili. Se vuoi preparare o gi
 | --- | --- |
 | [[Risorse/Primo Avvio Strumenti]] | Cosa fare se Obsidian chiede di abilitare gli strumenti inclusi. |
 | [[Risorse/Strumenti Attivi|Strumenti Attivi]] | Quali strumenti sono disponibili nel vault, spiegati per uso pratico. |
-| [[Risorse/Callout GDR]] | Callout disponibili per scene, indizi, segreti e pericoli. |
+| [[Risorse/Callout GDR]] | Callout disponibili per scene, PNG, luoghi, fazioni, missioni, timeline, segreti, pericoli e ricompense. |
 | [[Risorse/Aspetto Vault]] | Regolazioni visuali semplici. |
 | [[Risorse/Se Qualcosa Non Funziona]] | Diagnosi rapida quando pulsanti, tabelle o viste non rispondono. |
 

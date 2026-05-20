@@ -1,6 +1,7 @@
 ---
 cssclasses:
   - dashboard
+  - gdr-atlante-dashboard
 categoria: risorsa
 tipo: dashboard
 stato: pronto
@@ -10,6 +11,9 @@ mondo_attivo:
 # Atlante Del Mondo
 
 Questa e la vista per costruire ambientazioni grandi: luoghi, popoli, lingue, regni, religioni, storia, conflitti e cosmologia.
+
+> [!timeline] Atlante operativo
+> Usa questa pagina per vedere struttura, storia e buchi dell'ambientazione senza aprire archivi separati.
 
 ```meta-bind-button
 label: Nuova Cultura

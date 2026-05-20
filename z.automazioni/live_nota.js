@@ -5,7 +5,9 @@ async function live_nota(tp) {
     const id = helpers.slugify(name);
     const collegamenti = activeContext.link ? [activeContext.link] : [];
 
-    await helpers.moveNote(tp, "Inbox", name);
+    const created = await helpers.moveNote(tp, "Inbox", name);
+    // La nota grezza resta in Inbox, ma viene richiamata dalla sessione per non perderla.
+    await helpers.linkCreatedNoteToActiveSession(created, { sessionField: "appunti_live" });
 
     return `---
 id: ${id}

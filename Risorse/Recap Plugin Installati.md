@@ -25,7 +25,7 @@ Plugin community abilitati: 23.
 | Folder Notes | 1.8.19 | integrato | tutti | Cartelle principali apribili come note indice. |
 | Homepage | 4.4.2 | integrato | tutti | Apertura automatica di [[Inizia Qui]]. |
 | Kanban | 2.0.51 | integrato base | DM | Bacheche Markdown per preparazione, post-sessione e creature. |
-| Callout Manager | 1.1.1 | integrato | DM, giocatori | Callout GDR coerenti per scene, indizi, segreti, pericoli e letture. |
+| Callout Manager | 1.1.1 | integrato | DM, giocatori | Callout GDR coerenti per scene, PNG, luoghi, fazioni, missioni, timeline, segreti, pericoli e ricompense. |
 | Fantasy Statblocks | 4.10.3 | integrato | DM | Schede mostro e creature richiamabili da note e incontri. |
 | Initiative Tracker | 13.0.21 | parziale | DM al tavolo | Combattimenti con blocchi `encounter` e creature da Fantasy Statblocks. |
 | Dice Roller | 11.4.2 | supportato | DM, giocatori | Tiri inline, tabelle casuali e lookup table da note Markdown. |
@@ -37,13 +37,11 @@ Plugin community abilitati: 23.
 | Tabs | 1.1.8 | integrato | tutti | Sezioni a schede in dashboard, template lunghi e mostri SRD. |
 | Style Settings | 1.0.9 | integrato visuale | manutentore | Regolazione dello snippet `gdr-vault` senza modificare CSS. |
 | Advanced Tables | 0.23.2 | supporto | DM, manutentore | Editing veloce di tabelle Markdown e tabelle casuali. |
-| Emoji Toolbar | 1.0.0 | opzionale | tutti | Inserimento rapido di emoji, senza dipendenze del vault. |
 | TTRPG Tools: Maps | 1.9.5 | opzionale guidato | DM al tavolo | Mappe zoomabili con marker, layer, misure e note collegate. |
 | Hex Cartographer | 1.0.2 | opzionale guidato | worldbuilder | Mappe esagonali per regioni, viaggi e hexcrawl. |
-| Iron Vault | 1.108.1 | studio struttura | giocatori Ironsworn | VTT e strumenti per Ironsworn/Starforged, da non imporre al vault D&D ma utile come riferimento di design. |
 | BRAT | 2.0.4 | manutenzione essenziale | manutentore | Installazione/test di plugin beta o non ufficiali da repository GitHub. |
 
-Nota: `table-editor-obsidian` e il plugin mostrato come **Advanced Tables**; `obsidian-icon-folder` e oggi **Iconize**; `zoom-map` e **TTRPG Tools: Maps**.
+Nota: `table-editor-obsidian` e il plugin mostrato come **Advanced Tables**; `obsidian-icon-folder` e oggi **Iconize**; `zoom-map` e **TTRPG Tools: Maps**. Iron Vault ed Emoji Toolbar non sono inclusi nel bundle del vault.
 
 ## Fonti Ufficiali Consultate
 
@@ -66,10 +64,8 @@ Nota: `table-editor-obsidian` e il plugin mostrato come **Advanced Tables**; `ob
 - [Style Settings](https://github.com/mgmeyers/obsidian-style-settings)
 - [Tabs](https://xhuajin.github.io/obsidian-tabs/)
 - [TTRPG Tools: Maps](https://ttrpg-tools-obsidian.org/)
-- [Iron Vault](https://ironvault.quest/) e [repository](https://github.com/iron-vault-plugin/iron-vault)
 - [BRAT](https://tfthacker.com/BRAT)
 - [Fantasy Content Generator](https://github.com/Gregory-Jagermeister/Fantasy-Content-Generator)
-- [Emoji Toolbar](https://github.com/oliveryh/obsidian-emoji-toolbar)
 
 ## Combinazioni Da Sfruttare
 
@@ -170,4 +166,4 @@ Beneficia soprattutto: DM che usa musica, immagini, handout o video-reference.
 3. Fatto: aggiunta [[Demo - Mappa Zoomabile]] con blocco `zoommap` e base locale.
 4. Fatto: Hex Cartographer resta opzionale guidato per `regione -> esagoni -> incontri -> conseguenze`.
 5. Fatto: Media Extended e collegato a [[Durante il Gioco]] tramite media con `stato: pronto`.
-6. Tenere Iron Vault separato come plugin, ma studiarne struttura per replicare funzioni utili nel vault.
+6. Tenere Iron Vault fuori dal bundle: usare [[Risorse/Studio Iron Vault]] solo come studio di design.

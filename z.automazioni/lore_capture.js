@@ -27,7 +27,9 @@ async function lore_capture(tp, routeOptions = {}) {
         : await helpers.chooseSessions(tp, "Sessione collegata", context);
     const collegamenti = await helpers.chooseNotesByPath(tp, "Mondi", "Collega a mondo, PNG, luogo, missione o fazione", context);
 
-    await helpers.moveNote(tp, "Inbox", name);
+    const created = await helpers.moveNote(tp, "Inbox", name);
+    // Gli eventi live devono tornare nella sessione attiva per il post-sessione e la canonizzazione.
+    await helpers.linkCreatedNoteToActiveSession(created, { sessionField: "appunti_live" });
 
     return `---
 id: ${id}

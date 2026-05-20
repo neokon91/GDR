@@ -21,24 +21,25 @@ Questa pagina spiega quali strumenti Obsidian sono necessari al prodotto.
 | Iconize | Icone e leggibilita della struttura. |
 | Folder Notes | Indici di cartella. |
 | Style Settings | Regolazioni visuali. |
-| Minimal Theme Settings | Aspetto coerente con tema Minimal. |
+| Callout Manager | Callout GDR tematici. |
 
 ## Specifici TTRPG
 
 | Strumento | Serve per |
 | --- | --- |
 | Dice Roller | Tiri rapidi e tabelle casuali. |
-| 5e Statblocks | Schede creature. |
 | Fantasy Statblocks | Compatibilita statblock fantasy. |
 | Initiative Tracker | Supporto incontri. |
 | Calendarium | Date del mondo e scadenze narrative. |
-| Leaflet | Mappe interattive se configurate. |
+| TTRPG Tools: Maps | Mappe interattive se configurate. |
+| Hex Cartographer | Mappe esagonali per regioni e viaggi. |
 
 ## Opzionali
 
 | Strumento | Serve per |
 | --- | --- |
 | Excalidraw | Mappe relazionali e schemi. |
+| Media Extended | Audio e video con timestamp. |
 | Advanced Tables | Editing tabelle piu comodo. |
 | BRAT | Test di strumenti beta. |
 

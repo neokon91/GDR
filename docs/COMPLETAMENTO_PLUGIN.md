@@ -45,9 +45,9 @@ La release iniziale non deve dimostrare tutti i plugin. Deve dimostrare un prodo
 
 | Strumento | Decisione |
 | --- | --- |
-| Iron Vault | Fuori dal flusso D&D/fantasy classico. Accantonato come plugin utente, ma da studiare per replicare funzioni utili nel vault. |
+| Iron Vault | Non incluso nel bundle. Fuori dal flusso D&D/fantasy classico; resta solo come studio di design in documentazione. |
 | BRAT | Manutenzione essenziale per plugin non ufficiali o versioni beta. Resta attivo, ma non fa parte del percorso del DM. |
-| Emoji Toolbar | Opzionale. Disattivato nella release base per ridurre rumore al primo avvio. |
+| Emoji Toolbar | Non incluso. Opzionale per il singolo utente, ma fuori dalla release base per ridurre rumore al primo avvio. |
 
 ## Import Esterni
 

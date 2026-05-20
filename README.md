@@ -24,6 +24,15 @@ Apri [[Inizia Qui]] per il primo avvio. Usa [[1. DM Dashboard]] per preparare, [
 
 Guida dettagliata: [docs/INSTALLAZIONE.md](docs/INSTALLAZIONE.md).
 
+## Attivare L'Aspetto GDR
+
+1. Apri **Impostazioni > Aspetto > Snippet CSS**.
+2. Attiva `gdr-vault`.
+3. Se non lo vedi, ricarica gli snippet CSS dalla stessa sezione.
+4. Consigliato: tema **Minimal** e pannello **Style Settings > GDR Vault** per palette, densita di dashboard, tabelle e callout.
+
+Lo snippet non aggiunge dipendenze: migliora dashboard, callout, card, pulsanti e viste giocatori usando classi CSS compatibili con Obsidian, Dataview e Meta Bind.
+
 ## Flusso Rapido
 
 1. Apri il vault in Obsidian e vai su [[Inizia Qui]].

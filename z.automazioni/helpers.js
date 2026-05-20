@@ -243,6 +243,59 @@ function fileLink(file) {
     return file ? `[[${file.basename}]]` : "";
 }
 
+function normalizeFieldArray(value) {
+    if (!value) return [];
+    return Array.isArray(value) ? value.filter(Boolean) : [value].filter(Boolean);
+}
+
+function linkEquals(a, b) {
+    return normalizeText(getLinkTargetName(a)) === normalizeText(getLinkTargetName(b));
+}
+
+function appendUniqueLink(value, link) {
+    if (!link) return normalizeFieldArray(value);
+    const entries = normalizeFieldArray(value);
+    return entries.some(entry => linkEquals(entry, link)) ? entries : [...entries, link];
+}
+
+// Scrive frontmatter usando l'API Obsidian quando disponibile; il fallback serve per test o ambienti ridotti.
+async function processFrontmatter(file, updater) {
+    if (!file) return;
+
+    if (app.fileManager?.processFrontMatter) {
+        await app.fileManager.processFrontMatter(file, updater);
+        return;
+    }
+
+    const text = await app.vault.read(file);
+    const match = text.match(/^---\n([\s\S]*?)\n---\n?/);
+    const fm = getFrontmatter(file);
+    updater(fm);
+
+    const yaml = Object.entries(fm)
+        .map(([key, value]) => {
+            if (Array.isArray(value)) {
+                return value.length
+                    ? `${key}:\n${value.map(entry => `  - ${entry}`).join("\n")}`
+                    : `${key}: []`;
+            }
+
+            return `${key}: ${typeof value === "string" ? value : JSON.stringify(value)}`;
+        })
+        .join("\n");
+
+    const body = match ? text.slice(match[0].length) : text;
+    await app.vault.modify(file, `---\n${yaml}\n---\n${body}`);
+}
+
+function getFileByPathOrBasename(pathOrName) {
+    const raw = String(pathOrName ?? "").replace(/\.md$/, "");
+    const withExt = `${raw}.md`;
+    return app.vault.getAbstractFileByPath(withExt)
+        ?? app.vault.getMarkdownFiles().find(file => file.basename === raw.split("/").pop())
+        ?? null;
+}
+
 function getActiveSessionFile() {
     const sessions = app.vault.getMarkdownFiles()
         .filter(file => file.path.startsWith(`${PATHS.sessioni}/`))
@@ -520,6 +573,61 @@ async function ensureFolder(path) {
 async function moveNote(tp, folderPath, name) {
     await ensureFolder(folderPath);
     await tp.file.move(`${folderPath}/${name}`);
+    return getFileByPathOrBasename(`${folderPath}/${name}`);
+}
+
+function activeContextPatch(context) {
+    const patch = {};
+
+    if (context.world) {
+        patch.mondo = context.world;
+    }
+
+    if (normalizeFieldArray(context.campaigns).length) {
+        patch.campagne = normalizeFieldArray(context.campaigns);
+    }
+
+    return patch;
+}
+
+async function linkCreatedNoteToActiveSession(createdFile, options = {}) {
+    // Questo e il collegamento automatico centrale: ogni nota creata da un pulsante rientra nella sessione attiva.
+    const context = getActiveSessionContext();
+    const sessionFile = context.file;
+
+    if (!createdFile || !sessionFile || createdFile.path === sessionFile.path) {
+        return { linked: false, reason: "no-active-session" };
+    }
+
+    const createdLink = fileLink(createdFile);
+    const sessionLink = fileLink(sessionFile);
+    const sessionField = options.sessionField ?? "appunti_live";
+    const noteSessionField = options.noteSessionField ?? "sessioni";
+    const inheritWorld = options.inheritWorld !== false;
+    const inheritCampaigns = options.inheritCampaigns !== false;
+    const updateCreated = options.updateCreated === true;
+
+    await processFrontmatter(sessionFile, fm => {
+        // Aggiorna il campo giusto della sessione: missioni, incontri, PNG, luoghi, appunti live, ecc.
+        fm[sessionField] = appendUniqueLink(fm[sessionField], createdLink);
+    });
+
+    if (updateCreated) {
+        await processFrontmatter(createdFile, fm => {
+            // Opzionale: utile solo se la nota appena creata non ha gia scritto sessione/mondo nel template.
+            fm[noteSessionField] = appendUniqueLink(fm[noteSessionField], sessionLink);
+
+            if (inheritWorld && context.world && !fm.mondo) {
+                fm.mondo = context.world;
+            }
+
+            if (inheritCampaigns && normalizeFieldArray(context.campaigns).length && !normalizeFieldArray(fm.campagne).length) {
+                fm.campagne = normalizeFieldArray(context.campaigns);
+            }
+        });
+    }
+
+    return { linked: true, session: sessionLink, note: createdLink, sessionField };
 }
 
 async function chooseWorld(tp, message = "Mondo di riferimento") {
@@ -657,9 +765,13 @@ module.exports = {
     normalizeText,
     getLinkTargetName,
     getFileFromLink,
+    getFileByPathOrBasename,
     getWorldFromLink,
     getActiveSessionFile,
     getActiveSessionContext,
+    processFrontmatter,
+    appendUniqueLink,
+    linkCreatedNoteToActiveSession,
     fileLink,
     getMarkdownFilesByFrontmatter,
     getMarkdownFilesInPath,

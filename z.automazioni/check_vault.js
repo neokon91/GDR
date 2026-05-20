@@ -160,6 +160,11 @@ function readJson(file) {
     }
 }
 
+function readOptionalJson(file) {
+    if (!fs.existsSync(file)) return null;
+    return readJson(file);
+}
+
 function parseScalar(value) {
     const trimmed = String(value ?? "").trim();
     if (trimmed === "true") return true;
@@ -365,7 +370,7 @@ if (iconConfig) {
     }
 }
 
-const workspace = readJson(path.join(ROOT, ".obsidian/workspace.json"));
+const workspace = readOptionalJson(path.join(ROOT, ".obsidian/workspace.json"));
 if (workspace) {
     const serialized = JSON.stringify(workspace);
     const stalePaths = ["Bestiario/Prova.md", "\"Mondo/"];

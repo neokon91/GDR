@@ -5,10 +5,16 @@ categoria: risorsa
 tipo: onboarding
 stato: pronto
 ---
-
 # Inizia Qui
 
-Questa e la pagina introduttiva del vault. Da qui scegli cosa fare: preparare, giocare, costruire il mondo, creare una campagna dall'ambientazione o aprire la vista giocatori.
+Apri, scegli, gioca. Questa e la home dell'app: mostra lo stato reale del vault e la prossima azione sensata.
+
+## Stato App
+
+```dataviewjs
+const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));
+gdr.renderHome(dv);
+```
 
 ## Cosa Vuoi Fare?
 
@@ -76,36 +82,19 @@ actions:
     link: "[[Risorse/Setup Guidato]]"
 ```
 
-## Prossima Azione
-
-```dataviewjs
-const active = dv.pages('"Mondi/Sessioni"').where(p => p.attiva === true && p.stato !== "archiviata" && !String(p.file.name).startsWith("Prova -")).array();
-const prep = dv.pages('"Mondi/Sessioni"').where(p => p.stato === "preparazione" && !String(p.file.name).startsWith("Prova -")).array();
-const openLore = dv.pages('"Inbox"').where(p => p.file.name !== "Inbox" && !["smistata", "archiviata", "ignorata"].includes(p.stato)).array();
-
-if (active.length) {
-  dv.paragraph(`Sessione attiva trovata: ${active[0].file.link}. Apri [[Durante il Gioco]].`);
-} else if (prep.length) {
-  dv.paragraph(`Hai una sessione da preparare: ${prep[0].file.link}. Apri [[Risorse/Preparazione Sessione]].`);
-} else if (openLore.length) {
-  dv.paragraph(`Ci sono appunti da smistare. Apri [[Inbox/Inbox]] o [[Risorse/Post Sessione Guidato]].`);
-} else {
-  dv.paragraph("Scegli un percorso qui sopra. Il vault non crea contenuti da solo: sei tu a decidere cosa aprire o generare.");
-}
-```
-
 ## Primo Avvio
 
 1. Se Obsidian chiede se fidarsi degli strumenti inclusi nel vault, conferma solo se hai scaricato il vault da una fonte affidabile.
-2. Apri [[Risorse/Setup Guidato]] per vedere se pulsanti, tabelle, creature, tiri e calendario sono pronti.
-3. Apri [[Risorse/Consegna Nuovo DM]] se stai ricevendo il vault gia pronto.
-4. Apri [[Risorse/Primo Avvio Strumenti]] solo se qualcosa non funziona.
-5. Apri [[1. DM Dashboard]] per creare campagne, sessioni, missioni, clock e incontri.
-6. Apri una sessione e usa il toggle `attiva` per indicare quale e al tavolo.
-7. Apri [[Durante il Gioco]] quando sei al tavolo.
-8. Apri [[Risorse/Post Sessione Guidato]] dopo la partita.
-9. Apri [[Worldbuilder Dashboard]] quando vuoi creare mondi, luoghi, PNG, fazioni, creature e oggetti.
-10. Apri [[Risorse/Risorse]] quando cerchi guide, mappe, immagini, audio, video, tabelle o aiuto.
+2. Vai in **Impostazioni > Aspetto > Snippet CSS** e attiva `gdr-vault`; se non compare, ricarica gli snippet.
+3. Apri [[Risorse/Setup Guidato]] per vedere se pulsanti, tabelle, creature, tiri e calendario sono pronti.
+4. Apri [[Risorse/Consegna Nuovo DM]] se stai ricevendo il vault gia pronto.
+5. Apri [[Risorse/Primo Avvio Strumenti]] solo se qualcosa non funziona.
+6. Apri [[1. DM Dashboard]] per creare campagne, sessioni, missioni, clock e incontri.
+7. Apri una sessione e usa il toggle `attiva` per indicare quale e al tavolo.
+8. Apri [[Durante il Gioco]] quando sei al tavolo.
+9. Apri [[Risorse/Post Sessione Guidato]] dopo la partita.
+10. Apri [[Worldbuilder Dashboard]] quando vuoi creare mondi, luoghi, PNG, fazioni, creature e oggetti.
+11. Apri [[Risorse/Risorse]] quando cerchi guide, mappe, immagini, audio, video, tabelle o aiuto.
 
 ## Se Vedi Questo, Sei Pronto
 
@@ -113,26 +102,6 @@ if (active.length) {
 - Le tabelle nelle dashboard mostrano righe o messaggi leggibili.
 - Le pagine `Prova -` compaiono solo nelle aree di test e non nelle viste operative.
 - [[Risorse/Controllo Vault]] non segnala problemi importanti.
-
-## Dove Scrivere
-
-- Idee vaghe o appunti rapidi: [[Inbox/Inbox]].
-- Preparazione e gestione del tavolo: [[1. DM Dashboard]].
-- Trasformare ambientazione in campagna: [[Campagna da Ambientazione]].
-- Vista condivisibile con i giocatori: [[Vista Giocatori]].
-- Appunti durante la sessione: [[Durante il Gioco]].
-- Eventi live, PNG improvvisati, luoghi improvvisati e conseguenze: sezione Inbox Live in [[Durante il Gioco]] o [[Inbox/Inbox]].
-- Consolidamento dopo sessione: [[Risorse/Post Sessione Guidato]].
-- Materiali della sessione attiva: [[Risorse/Materiali Al Tavolo]].
-- Mondo, luoghi, PNG e fazioni: [[Worldbuilder Dashboard]].
-- Ambientazioni grandi, culture, lingue e storia: [[Atlante del Mondo]].
-- Stato dinamico del mondo: [[Mondi/Stato del Mondo]].
-- Clock e progress track: [[Mondi/Tracciati/Tracciati]].
-- Profili per nuove campagne: [[Risorse/Profili Campagna]].
-- Guide, mappe, media, tabelle e aiuto: [[Risorse/Risorse]].
-- Controllo iniziale del vault: [[Risorse/Setup Guidato]].
-- Regole e riferimento D&D: [[SRD/SRD]].
-- Domande frequenti: [[Risorse/FAQ]].
 
 ## Vuoi Vedere Un Esempio?
 

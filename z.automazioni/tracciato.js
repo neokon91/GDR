@@ -1,5 +1,6 @@
 async function tracciato(tp) {
     const helpers = tp.user.helpers;
+    const activeContext = helpers.getActiveSessionContext();
     const name = await helpers.promptRequired(tp, "Nome del clock o tracciato");
     const id = helpers.slugify(name);
     const selectedType = await helpers.chooseOptional(
@@ -28,7 +29,10 @@ async function tracciato(tp) {
     const prossimaMossa = await helpers.promptOptional(tp, "Prossima mossa");
     const innesco = await helpers.promptOptional(tp, "Quando avanza");
 
-    await helpers.moveNote(tp, helpers.path("tracciati"), name);
+    const sessioni = activeContext.link ? [activeContext.link] : [];
+    const created = await helpers.moveNote(tp, helpers.path("tracciati"), name);
+    // Un clock creato al tavolo deve comparire tra le pressioni della sessione senza lavoro manuale.
+    await helpers.linkCreatedNoteToActiveSession(created, { sessionField: "tracciati" });
 
     return `---
 id: ${id}
@@ -43,6 +47,7 @@ missioni: ${helpers.inlineYamlList(missioni)}
 fazioni: ${helpers.inlineYamlList(fazioni)}
 luoghi: ${helpers.inlineYamlList(luoghi)}
 personaggi: ${helpers.inlineYamlList(personaggi)}
+sessioni: ${helpers.inlineYamlList(sessioni)}
 progress_value: ${helpers.yamlNumber(progressValue) || 0}
 progress_max: ${helpers.yamlNumber(progressMax) || 6}
 pressione: 0

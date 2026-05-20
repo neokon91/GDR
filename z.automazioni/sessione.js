@@ -67,6 +67,7 @@ immagini: ${helpers.inlineYamlList(immagini)}
 video: ${helpers.inlineYamlList(video)}
 fazioni: ${helpers.inlineYamlList(fazioni)}
 oggetti: ${helpers.inlineYamlList(oggetti)}
+appunti_live: []
 obiettivo: ${helpers.yamlQuote(obiettivo)}
 scene: []
 ricompense: []

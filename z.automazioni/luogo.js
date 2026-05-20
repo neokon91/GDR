@@ -1,5 +1,6 @@
 async function luogo(tp, routeOptions = {}){
     const helpers = tp.user.helpers;
+    const activeContext = helpers.getActiveSessionContext();
     const name = await helpers.promptRequired(tp, "Nome del luogo");
     const id = helpers.slugify(name);
     const route = Object.keys(routeOptions).length ? routeOptions : helpers.consumeRoute();
@@ -48,7 +49,10 @@ async function luogo(tp, routeOptions = {}){
     const tensione = addLore ? await helpers.promptOptional(tp, "Tensione o conflitto locale") : "";
     const veritaNascosta = addLore ? await helpers.promptOptional(tp, "Verità nascosta o segreto") : "";
     const domandaAperta = addLore ? await helpers.promptOptional(tp, "Domanda aperta da esplorare al tavolo") : "";
-    await helpers.moveNote(tp, helpers.path("luoghi"), name);
+    const sessioni = activeContext.link ? [activeContext.link] : [];
+    const created = await helpers.moveNote(tp, helpers.path("luoghi"), name);
+    // Un luogo creato al volo viene collegato alla sessione per ritrovarlo nel cockpit.
+    await helpers.linkCreatedNoteToActiveSession(created, { sessionField: "luoghi" });
 
     return `---
 id: ${id}
@@ -77,6 +81,7 @@ fazioni: ${helpers.inlineYamlList(fazioni)}
 religioni: []
 personaggi: ${helpers.inlineYamlList(personaggi)}
 missioni: ${helpers.inlineYamlList(missioni)}
+sessioni: ${helpers.inlineYamlList(sessioni)}
 risorse: []
 problemi: []
 conseguenze: []

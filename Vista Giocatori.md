@@ -1,6 +1,7 @@
 ---
 cssclasses:
   - dashboard
+  - gdr-player-view
 categoria: risorsa
 tipo: dashboard
 stato: pronto
@@ -8,10 +9,10 @@ stato: pronto
 
 # Vista Giocatori
 
-Questa pagina e pensata per condividere solo materiale utile ai giocatori: recap, PNG conosciuti, luoghi scoperti, dispense consegnate e prossimi obiettivi.
+Vista pubblica semplice: mostra solo materiale giocabile e condivisibile.
 
 > [!warning] Area pubblica
-> Non scrivere qui segreti, verità nascoste, prossime mosse o appunti del DM.
+> Non scrivere qui segreti, verità nascoste, prossime mosse o appunti del DM. Le card linkano una nota solo quando e marcata `pubblico: true` e non contiene campi privati evidenti.
 
 ```meta-bind-button
 label: Durante Il Gioco
@@ -34,43 +35,9 @@ actions:
 > [!lettura] Da leggere ai giocatori
 > 
 
-## Obiettivi Conosciuti
-
-```dataview
-TABLE stato, scadenza_mondo, committente, luoghi
-FROM "Mondi/Missioni"
-WHERE stato != "archiviata" AND !startswith(file.name, "Prova -") AND (pubblico = true OR stato = "accettata" OR stato = "in corso")
-SORT pressione DESC, scadenza_mondo ASC, nome ASC
-LIMIT 10
-```
-
-## PNG Conosciuti
-
-```dataview
-TABLE ruolo, luogo, atteggiamento
-FROM "Mondi/Personaggi"
-WHERE tipo = "png" AND stato != "archiviata" AND !startswith(file.name, "Prova -") AND (pubblico = true OR stato = "in gioco")
-SORT nome ASC
-LIMIT 12
-```
-
-## Luoghi Scoperti
-
-```dataview
-TABLE tipo, bioma, luogo_padre
-FROM "Mondi/Luoghi"
-WHERE stato != "archiviata" AND !startswith(file.name, "Prova -") AND (pubblico = true OR stato = "in gioco")
-SORT nome ASC
-LIMIT 12
-```
-
-## Dispense Consegnate
-
-```dataview
-TABLE tipo, luogo, personaggi
-FROM "Mondi/Dispense"
-WHERE stato != "archiviata" AND !startswith(file.name, "Prova -") AND (pubblico = true OR stato = "consegnato")
-SORT nome ASC
+```dataviewjs
+const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));
+gdr.renderPlayerView(dv);
 ```
 
 ## Note Per La Prossima Sessione

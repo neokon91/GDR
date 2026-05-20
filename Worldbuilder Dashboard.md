@@ -1,11 +1,15 @@
 ---
 cssclasses:
   - dashboard
+  - gdr-worldbuilder-dashboard
 mondo_attivo:
 campagne_attive: []
 ---
 
 # Worldbuilder Dashboard
+
+> [!luogo] Scriptorium del Mondo
+> Costruisci ambientazioni giocabili: luoghi, PNG, fazioni, storia e pressioni devono restare collegati a cio che puo arrivare al tavolo.
 
 ## Mondo
 

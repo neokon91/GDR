@@ -4,12 +4,13 @@ Usa i callout per rendere leggibile una nota al tavolo. Ogni tipo deve risponder
 
 Lo snippet `gdr-vault.css` dà a ogni callout un colore e un'icona coerenti. L'idea è leggere la pagina a colpo d'occhio:
 
-- blu: scena, missione, struttura;
-- verde: luoghi e mondo fisico;
-- teal: PNG e relazioni;
+- blu: scena, regia, missioni e timeline;
+- teal: luoghi e mondo fisico;
+- verde: PNG e relazioni;
+- bronzo: fazioni e poteri organizzati;
 - viola: segreti e poteri nascosti;
 - rosso: pericoli e incontri;
-- oro: indizi, tesori e dispense.
+- oro: indizi, tesori, ricompense e dispense.
 
 ## Scene
 
@@ -21,6 +22,9 @@ Lo snippet `gdr-vault.css` dà a ogni callout un colore e un'icona coerenti. L'i
 
 > [!timer] Timer
 > Orologi, pressioni e conseguenze in arrivo.
+
+> [!regia] Regia
+> Note operative per il DM, priorità e decisioni da prendere.
 
 ## Informazioni
 
@@ -44,6 +48,12 @@ Lo snippet `gdr-vault.css` dà a ogni callout un colore e un'icona coerenti. L'i
 > [!missione] Missione
 > Obiettivo, incarico o filo narrativo.
 
+> [!fazione] Fazione
+> Potere organizzato, agenda, pressione o prossima mossa.
+
+> [!timeline] Timeline
+> Evento, conseguenza storica o collegamento causale.
+
 ## Pericoli e Ricompense
 
 > [!incontro] Incontro
@@ -54,6 +64,9 @@ Lo snippet `gdr-vault.css` dà a ogni callout un colore e un'icona coerenti. L'i
 
 > [!tesoro] Tesoro
 > Ricompense, oggetti, indizi fisici o bottino.
+
+> [!ricompensa] Ricompensa
+> Premio, leva negoziale, favore, informazione o bottino significativo.
 
 > [!handout] Dispensa
 > Testo o materiale da consegnare ai giocatori.
