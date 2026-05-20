@@ -57,6 +57,7 @@ Questa pagina raccoglie guide e materiali riutilizzabili. Se vuoi preparare o gi
 | Pagina | Uso |
 | --- | --- |
 | [[Risorse/Controllo Vault]] | Controlli pratici su note incomplete, sessioni attive e materiale pronto. |
+| [[Risorse/Roadmap/Roadmap]] | Archivio roadmap di versione. |
 | [[Mondi/Calendario]] | Date del mondo, sessioni, scadenze e cose da calendarizzare. |
 | [[Mondi/Culture/Culture]] | Popoli, usanze, tabù e identità culturali. |
 | [[Mondi/Lingue/Lingue]] | Lingue, dialetti, parole note e scritture. |
@@ -69,10 +70,6 @@ Questa pagina raccoglie guide e materiali riutilizzabili. Se vuoi preparare o gi
 | [[Risorse/Preset Calendario]] | Modi semplici per segnare il tempo del mondo. |
 | [[Risorse/Profili Campagna]] | Strutture consigliate per fantasy classico, investigativo, sandbox e one-shot. |
 | [[Risorse/Prove Entità]] | Esempi per capire come dovrebbero apparire le note. |
-| [[Risorse/Roadmap 0.4.0]] | Stato completo della versione 0.4.0. |
-| [[Risorse/Roadmap 0.5.0]] | Stato completo della versione Atlante del Mondo. |
-| [[Risorse/Roadmap 0.6.0]] | Stato completo della versione Campagna da Ambientazione. |
-| [[Risorse/Roadmap 0.7.0]] | Stato completo della versione app professionale e vista giocatori. |
 | [[VERSION]] | Versione corrente del vault. |
 | [[CHANGELOG]] | Cronologia modifiche. |
 

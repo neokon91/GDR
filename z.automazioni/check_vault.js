@@ -4,7 +4,7 @@ const fs = require("fs");
 const path = require("path");
 
 const ROOT = process.cwd();
-const IGNORED_DIRS = new Set([".git", "node_modules"]);
+const IGNORED_DIRS = new Set([".git", "node_modules", "dist"]);
 const REQUIRED_PLUGINS = [
     "dataview",
     "templater-obsidian",
@@ -22,7 +22,12 @@ const REQUIRED_FILES = [
     "VERSION.md",
     "CHANGELOG.md",
     "RELEASE.md",
+    "Atlante del Mondo.md",
+    "Campagna da Ambientazione.md",
+    "Vista Giocatori.md",
     "Risorse/FAQ.md",
+    "Risorse/Release Pulita.md",
+    "Risorse/Roadmap/Roadmap.md",
     "Risorse/Indice Connettore GPT.md",
     "Campagne/Demo - La Reliquia Spezzata.md"
 ];

@@ -12,7 +12,7 @@
 ### Migliorato
 
 - [[Inizia Qui]] resta la pagina introduttiva all'apertura e mostra una prossima azione senza creare contenuti automaticamente.
-- [[Risorse/Roadmap 0.7.0]] registra le decisioni di esperienza utente confermate.
+- [[Risorse/Roadmap/0.7.0|Roadmap 0.7.0]] registra le decisioni di esperienza utente confermate.
 
 ## 0.6.0 - 2026-05-20
 
@@ -24,7 +24,7 @@
 - [[Risorse/Opportunità Di Avventura]] per trovare elementi dell'ambientazione pronti a diventare missioni.
 - [[Risorse/Fronti Di Campagna]] per pressioni, prossime mosse e scadenze.
 - [[Risorse/Generare Campagna Da Ambientazione]] come guida non tecnica.
-- [[Risorse/Roadmap 0.7.0]] con proposta e domande sul comportamento atteso del vault.
+- [[Risorse/Roadmap/0.7.0|Roadmap 0.7.0]] con proposta e domande sul comportamento atteso del vault.
 
 ### Migliorato
 
@@ -40,7 +40,7 @@
 - Nuove aree per [[Mondi/Culture/Culture]], [[Mondi/Lingue/Lingue]], [[Mondi/Storia/Storia]], [[Mondi/Conflitti/Conflitti]] e [[Mondi/Cosmologia/Cosmologia]].
 - Modelli guidati per cultura, lingua, era storica, conflitto e cosmologia.
 - [[Risorse/Worldbuilding Tassonomico]] come guida non tecnica alla costruzione di mondi ricchi.
-- [[Risorse/Roadmap 0.5.0]] completata e [[Risorse/Roadmap 0.6.0]] preparata.
+- [[Risorse/Roadmap/0.5.0|Roadmap 0.5.0]] completata e [[Risorse/Roadmap/0.6.0|Roadmap 0.6.0]] preparata.
 
 ### Migliorato
 
@@ -58,7 +58,7 @@
 - [[Risorse/Profili Campagna]] per fantasy classico, investigativo, sandbox e one-shot.
 - [[Risorse/Materiali Al Tavolo]] per controllare dispense, mappe, media, incontri e creature della sessione attiva.
 - [[Risorse/Preset Calendario]] per usare date del mondo senza spiegare configurazioni interne.
-- [[Risorse/Roadmap 0.4.0]] completata come tracciamento della versione.
+- [[Risorse/Roadmap/0.4.0|Roadmap 0.4.0]] completata come tracciamento della versione.
 
 ### Migliorato
 
@@ -89,7 +89,7 @@
 - [[z.modelli/Lore Capture]] per catturare eventi, dialoghi, luoghi, PNG improvvisati e conseguenze dalla sessione.
 - [[Mondi/Timeline/Timeline]] e [[z.modelli/Evento Storico]] per storicizzare eventi canonici, rumor, leggende, segreti e fatti dimenticati.
 - [[Mondi/Stato del Mondo]] per vedere conseguenze da applicare, PNG cambiati, luoghi in crisi, fazioni in movimento e missioni influenzate.
-- [[Risorse/Roadmap 0.2.0]] per tracciare lo stato della roadmap Runtime + Lore Engine.
+- [[Risorse/Roadmap/0.2.0|Roadmap 0.2.0]] per tracciare lo stato della roadmap Runtime + Lore Engine.
 - Import SRD esteso a Background, Equipaggiamento, Talenti, Lingue e Specie dalla fonte JSON aggiornata.
 - Demo aggiornata con Lore Capture canonizzata, evento storico e conseguenze applicate a luogo, fazione e missione.
 - Filtri opzionali per mondo e campagna su [[Worldbuilder Dashboard]] e [[Mondi/Stato del Mondo]].

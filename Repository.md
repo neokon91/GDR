@@ -17,11 +17,16 @@ Questa nota e tecnica. Serve solo a chi cura il vault, non al DM che lo usa per 
 | `Inizia Qui.md` | onboarding non tecnico | Deve restare la porta d'ingresso. |
 | `1. DM Dashboard.md` | preparazione e vista DM | Non spostare senza aggiornare link, Homepage e documentazione. |
 | `Durante il Gioco.md` | schermata al tavolo | Deve restare rapida, non enciclopedica. |
-| `Worldbuilder Dashboard.md` | costruzione mondo | Deve mostrare relazioni, buchi e pressioni, non solo archivi. |
+| `Atlante del Mondo.md` | worldbuilding tassonomico | Porta principale per ambientazioni grandi. |
+| `Campagna da Ambientazione.md` | da mondo a campagna | Collega regioni e conflitti al gioco. |
+| `Vista Giocatori.md` | materiale condivisibile | Non deve mostrare segreti o prossime mosse DM. |
+| `Worldbuilder Dashboard.md` | costruzione mondo avanzata | Deve mostrare relazioni, buchi e pressioni, non solo archivi. |
 | `Campagne/` | campagne e demo | Contenuto giocabile legato a party e sessioni. |
+| `Giocatori/` | indice area giocatori | Area pubblica o condivisibile. |
 | `Inbox/` | appunti grezzi e live | Qui entra cio che non e ancora canonico. |
 | `Mondi/` | ambientazioni canoniche | Qui stanno luoghi, PNG, fazioni, missioni, incontri e timeline. |
-| `Risorse/` | guide, plugin, mappe, media, tabelle | Materiale riutilizzabile e documentazione del vault. |
+| `Risorse/` | guide, strumenti, mappe, media, tabelle | Materiale riutilizzabile e documentazione del vault. |
+| `Risorse/Roadmap/` | roadmap storiche | Archivio manutenzione, non percorso primario del DM. |
 | `SRD/` | riferimento regolamentare generato | Non trattare come contenuto canonico del mondo. |
 | `z.modelli/` | template Templater | Percorsi richiamati da pulsanti Meta Bind. |
 | `z.automazioni/` | script Templater e CLI | Cambiare nomi rompe template e controlli. |
@@ -48,6 +53,7 @@ Questa nota e tecnica. Serve solo a chi cura il vault, non al DM che lo usa per 
 ```bash
 npm run check
 npm run import:srd
+npm run release:clean
 ```
 
 Se `npm` non e disponibile, usa direttamente:
@@ -55,6 +61,7 @@ Se `npm` non e disponibile, usa direttamente:
 ```bash
 node z.automazioni/check_vault.js
 node z.automazioni/import_srd.js
+node z.automazioni/release_clean.js
 ```
 
 ## Regola Di Chiusura
@@ -70,4 +77,7 @@ Poi apri manualmente in Obsidian:
 - [[Inizia Qui]]
 - [[1. DM Dashboard]]
 - [[Durante il Gioco]]
+- [[Atlante del Mondo]]
+- [[Campagna da Ambientazione]]
+- [[Vista Giocatori]]
 - [[Worldbuilder Dashboard]]

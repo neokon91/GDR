@@ -81,7 +81,7 @@ label: Roadmap
 style: default
 actions:
   - type: open
-    link: "[[Risorse/Roadmap 0.7.0]]"
+    link: "[[Risorse/Roadmap/0.7.0]]"
 ```
 
 ## Prossima Azione
