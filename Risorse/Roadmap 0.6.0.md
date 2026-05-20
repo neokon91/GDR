@@ -3,22 +3,23 @@ cssclasses:
   - indice
 categoria: risorsa
 tipo: roadmap
-stato: bozza
+stato: pronto
 ---
 
 # Roadmap 0.6.0
 
 Obiettivo: trasformare un'ambientazione ricca in campagne, archi narrativi, missioni e sessioni giocabili.
 
-## Prossime Integrazioni
+## Completato
 
-- [ ] Generatore guidato "Crea Campagna Da Regione".
-- [ ] Generatore guidato "Crea Arco Narrativo Da Conflitto".
-- [ ] Vista "Opportunità Di Avventura": luoghi, culture, fazioni e segreti pronti a diventare missioni.
-- [ ] Vista "Fronti Di Campagna": pressioni, prossime mosse, scadenze e conseguenze.
-- [ ] Collegamento automatico suggerito tra conflitti, missioni, PNG, sessioni e ricompense.
-- [ ] Profilo campagna derivato dall'ambientazione: sandbox, investigativo, politico, esplorazione, guerra.
-- [ ] Demo espansa: da micro-ambientazione a prima campagna pronta.
+- [x] [[Campagna da Ambientazione]] come dashboard per trasformare mondo, regione o conflitto in gioco.
+- [x] Generatore guidato "Campagna Da Regione".
+- [x] Generatore guidato "Arco Da Conflitto".
+- [x] [[Risorse/Opportunità Di Avventura]]: luoghi, culture, fazioni e segreti pronti a diventare missioni.
+- [x] [[Risorse/Fronti Di Campagna]]: pressioni, prossime mosse, scadenze e conseguenze.
+- [x] Collegamenti guidati tra conflitti, missioni, campagne, luoghi, fazioni e ricompense.
+- [x] Profilo campagna derivato dall'ambientazione: sandbox, investigativo, politico, esplorazione, guerra.
+- [x] [[Risorse/Generare Campagna Da Ambientazione]] come guida non tecnica.
 
 ## Criterio Di Qualita
 

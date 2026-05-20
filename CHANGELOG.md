@@ -1,5 +1,23 @@
 # Changelog
 
+## 0.6.0 - 2026-05-20
+
+### Aggiunto
+
+- [[Campagna da Ambientazione]] per trasformare regioni, culture e conflitti in campagne e archi narrativi.
+- Generatore guidato "Campagna Da Regione".
+- Generatore guidato "Arco Da Conflitto".
+- [[Risorse/Opportunità Di Avventura]] per trovare elementi dell'ambientazione pronti a diventare missioni.
+- [[Risorse/Fronti Di Campagna]] per pressioni, prossime mosse e scadenze.
+- [[Risorse/Generare Campagna Da Ambientazione]] come guida non tecnica.
+- [[Risorse/Roadmap 0.7.0]] con proposta e domande sul comportamento atteso del vault.
+
+### Migliorato
+
+- [[1. DM Dashboard]], [[Inizia Qui]], [[Risorse/Risorse]] e README collegano il nuovo percorso da ambientazione a gioco.
+- Le campagne generate da regione includono profilo, culture, fazioni, conflitti e domande di campagna.
+- Gli archi da conflitto collegano conflitti, campagne, luoghi, fazioni, ricompense e fronti.
+
 ## 0.5.0 - 2026-05-20
 
 ### Aggiunto

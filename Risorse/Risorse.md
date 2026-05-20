@@ -20,6 +20,8 @@ Questa pagina raccoglie guide e materiali riutilizzabili. Se vuoi preparare o gi
 | [[Risorse/Guida DM]] | Quando vuoi il flusso DM senza dettagli tecnici. |
 | [[Atlante del Mondo]] | Quando vuoi costruire un'ambientazione ricca e collegata. |
 | [[Risorse/Worldbuilding Tassonomico]] | Metodo semplice per creare mondi grandi senza perdersi. |
+| [[Campagna da Ambientazione]] | Quando vuoi trasformare mondo, regione o conflitto in campagna. |
+| [[Risorse/Generare Campagna Da Ambientazione]] | Guida passo passo per passare da ambientazione a gioco. |
 | [[Risorse/Preparazione Sessione]] | Prima di una sessione. |
 | [[Durante il Gioco]] | Durante la partita. |
 | [[Risorse/Post Sessione Guidato]] | Subito dopo la partita. |
@@ -60,12 +62,15 @@ Questa pagina raccoglie guide e materiali riutilizzabili. Se vuoi preparare o gi
 | [[Mondi/Storia/Storia]] | Ere, guerre, catastrofi e fondazioni. |
 | [[Mondi/Conflitti/Conflitti]] | Conflitti vivi tra poteri, popoli e luoghi. |
 | [[Mondi/Cosmologia/Cosmologia]] | Piani, reami, aldilà e principi cosmici. |
+| [[Risorse/Opportunità Di Avventura]] | Elementi del mondo pronti a diventare missioni. |
+| [[Risorse/Fronti Di Campagna]] | Pressioni, prossime mosse e scadenze della campagna. |
 | [[Risorse/Preset Calendario]] | Modi semplici per segnare il tempo del mondo. |
 | [[Risorse/Profili Campagna]] | Strutture consigliate per fantasy classico, investigativo, sandbox e one-shot. |
 | [[Risorse/Prove Entità]] | Esempi per capire come dovrebbero apparire le note. |
 | [[Risorse/Roadmap 0.4.0]] | Stato completo della versione 0.4.0. |
 | [[Risorse/Roadmap 0.5.0]] | Stato completo della versione Atlante del Mondo. |
-| [[Risorse/Roadmap 0.6.0]] | Prossima fase: campagne generate dall'ambientazione. |
+| [[Risorse/Roadmap 0.6.0]] | Stato completo della versione Campagna da Ambientazione. |
+| [[Risorse/Roadmap 0.7.0]] | Proposta per rendere il vault piu assistivo e fluido. |
 | [[VERSION]] | Versione corrente del vault. |
 | [[CHANGELOG]] | Cronologia modifiche. |
 

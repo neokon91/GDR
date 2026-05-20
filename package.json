@@ -1,6 +1,6 @@
 {
   "name": "vault-gdr",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "private": true,
   "description": "Vault Obsidian per preparare e gestire campagne GDR fantasy in italiano.",
   "scripts": {

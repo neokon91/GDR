@@ -21,6 +21,14 @@ actions:
 ```
 
 ```meta-bind-button
+label: Crea Campagna
+style: primary
+actions:
+  - type: open
+    link: "[[Campagna da Ambientazione]]"
+```
+
+```meta-bind-button
 label: Gioca
 style: primary
 actions:
@@ -92,6 +100,7 @@ actions:
 
 - Idee vaghe o appunti rapidi: [[Inbox/Inbox]].
 - Preparazione e gestione del tavolo: [[1. DM Dashboard]].
+- Trasformare ambientazione in campagna: [[Campagna da Ambientazione]].
 - Appunti durante la sessione: [[Durante il Gioco]].
 - Eventi live, PNG improvvisati, luoghi improvvisati e conseguenze: sezione Inbox Live in [[Durante il Gioco]] o [[Inbox/Inbox]].
 - Consolidamento dopo sessione: [[Risorse/Post Sessione Guidato]].

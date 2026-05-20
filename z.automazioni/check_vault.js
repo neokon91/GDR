@@ -84,7 +84,7 @@ const ALLOWED_TYPES_BY_CATEGORY = {
     incontro: new Set(["combattimento", "esplorazione", "pericolo ambientale", "trappola"]),
     lingua: new Set(["lingua", "dialetto", "scrittura", "lingua antica"]),
     "lore capture": new Set(["evento", "png improvvisato", "luogo improvvisato", "dialogo", "conseguenza", "idea"]),
-    missione: new Set(["incarico", "mistero", "missione"]),
+    missione: new Set(["incarico", "ricerca", "mistero", "salvataggio", "caccia", "viaggio", "fronte", "trama personale", "missione di fazione", "arco narrativo", "missione"]),
     oggetto: new Set(["oggetto", "oggetto magico", "chiave"]),
     personaggio: new Set(["pg", "png"]),
     religione: new Set(["divinità", "soglia"]),

@@ -650,6 +650,7 @@ module.exports = {
     yamlQuote,
     slugify,
     normalizeText,
+    getLinkTargetName,
     getFileFromLink,
     getWorldFromLink,
     getActiveSessionFile,

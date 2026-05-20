@@ -1,10 +1,10 @@
 # Versione Vault
 
-Versione: `0.5.0`
+Versione: `0.6.0`
 
 Data: 2026-05-20
 
-Stato: atlante tassonomico, culture, lingue, storia, conflitti e cosmologia pronti.
+Stato: ambientazioni trasformabili in campagne, archi narrativi, fronti e opportunità di avventura.
 
 ## Compatibilità
 

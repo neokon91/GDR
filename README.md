@@ -2,7 +2,7 @@
 
 Questo vault Obsidian aiuta a preparare e gestire campagne GDR fantasy in italiano: mondi, sessioni, PNG, luoghi, fazioni, missioni, incontri, oggetti e materiali da consegnare ai giocatori.
 
-Apri [[Inizia Qui]] per il primo avvio. Usa [[1. DM Dashboard]] per preparare, [[Atlante del Mondo]] per costruire ambientazioni ricche e [[Durante il Gioco]] durante la sessione.
+Apri [[Inizia Qui]] per il primo avvio. Usa [[1. DM Dashboard]] per preparare, [[Atlante del Mondo]] per costruire ambientazioni ricche, [[Campagna da Ambientazione]] per trasformarle in gioco e [[Durante il Gioco]] durante la sessione.
 
 ## Primi 5 Minuti
 
@@ -46,6 +46,7 @@ Se dashboard, pulsanti o tabelle non funzionano, apri [[Risorse/Primo Avvio Stru
 - Tabelle, mappe, dispense e materiali riutilizzabili in piu campagne stanno in `Risorse`.
 - [[Worldbuilder Dashboard]] mostra ora Atlante del Mondo, Poteri in Movimento, Relazioni PNG, Timeline Causale e Buchi Di Mondo: usali per trovare collegamenti mancanti, pressioni senza prossima mossa e lore canonica non ancora storicizzata.
 - [[Atlante del Mondo]] e la vista principale per worldbuilding tassonomico: geografia, culture, lingue, poteri, storia, conflitti e cosmologia.
+- [[Campagna da Ambientazione]] trasforma regioni e conflitti in campagne, archi narrativi, fronti e opportunita di avventura.
 - [[Mondi/Stato del Mondo]] resta la vista operativa delle conseguenze: filtra per mondo o campagna e mostra cosa deve cambiare al tavolo.
 
 ## Uso Quotidiano
