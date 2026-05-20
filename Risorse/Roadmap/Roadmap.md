@@ -12,6 +12,7 @@ Archivio delle roadmap di versione. Serve a chi mantiene il vault; chi usa il va
 
 | Versione | Stato | Focus |
 | --- | --- | --- |
+| [[Risorse/Roadmap/0.8.0|0.8.0]] | bozza | Completamento prodotto per release ZIP iniziale. |
 | [[Risorse/Roadmap/0.7.0|0.7.0]] | pronta | App professionale, vista giocatori e release pulita. |
 | [[Risorse/Roadmap/0.6.0|0.6.0]] | pronta | Campagne da ambientazione. |
 | [[Risorse/Roadmap/0.5.0|0.5.0]] | pronta | Atlante tassonomico del mondo. |

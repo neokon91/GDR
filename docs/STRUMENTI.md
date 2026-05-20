@@ -42,6 +42,10 @@ Questa pagina spiega quali strumenti Obsidian sono necessari al prodotto.
 | Advanced Tables | Editing tabelle piu comodo. |
 | BRAT | Test di strumenti beta. |
 
+## Release ZIP
+
+Per decidere cosa e supportato nella prima release, vedi [COMPLETAMENTO_PLUGIN.md](COMPLETAMENTO_PLUGIN.md).
+
 ## Regola Di Prodotto
 
 L'utente finale non deve conoscere questa matrice per usare il vault. Serve a chi mantiene il prodotto, prepara release o aiuta altri utenti.

@@ -23,6 +23,7 @@ Questa pagina raccoglie guide e materiali riutilizzabili. Se vuoi preparare o gi
 | [[Campagna da Ambientazione]] | Quando vuoi trasformare mondo, regione o conflitto in campagna. |
 | [[Risorse/Generare Campagna Da Ambientazione]] | Guida passo passo per passare da ambientazione a gioco. |
 | [[Vista Giocatori]] | Vista dedicata a materiale condivisibile con i giocatori. |
+| [[Risorse/Importare Mappe]] | Importare mappe esterne come bozze controllate. |
 | [[Risorse/Preparazione Sessione]] | Prima di una sessione. |
 | [[Durante il Gioco]] | Durante la partita. |
 | [[Risorse/Post Sessione Guidato]] | Subito dopo la partita. |

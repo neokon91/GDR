@@ -34,6 +34,8 @@ tab: Regioni
 > [!luogo] Convenzione
 > Usa una mappa di regione quando serve scegliere percorsi, pericoli, confini, risorse o distanze approssimative.
 
+Apri [[Risorse/Importare Mappe]] quando parti da Azgaar o da altri generatori esterni.
+
 Campi consigliati nelle note mappa:
 
 - `uso: regione`
@@ -45,6 +47,46 @@ Campi consigliati nelle note mappa:
 TABLE mondo, luoghi, stato, file.mtime AS aggiornato
 FROM "Risorse/Mappe"
 WHERE uso = "regione" AND !startswith(file.name, "Prova -")
+SORT mondo ASC, file.name ASC
+```
+
+tab: Esagoni
+
+## Esagoni E Viaggio
+
+> [!luogo] Quando usarli
+> Usa Hex Cartographer quando il viaggio, la distanza o l'esplorazione esagonale contano davvero.
+
+Regola di prodotto:
+
+- prima crea o importa i luoghi come note;
+- poi usa la mappa esagonale come supporto visuale;
+- non rendere la mappa l'unica fonte del canone.
+
+```dataview
+TABLE mondo, luoghi, stato, file.mtime AS aggiornato
+FROM "Risorse/Mappe"
+WHERE uso = "esagoni" AND !startswith(file.name, "Prova -")
+SORT mondo ASC, file.name ASC
+```
+
+tab: Zoom
+
+## Mappe Zoomabili
+
+> [!scena] Quando usarle
+> Usa TTRPG Tools: Maps per mappe grandi, immagini con pin, mappe da mostrare al tavolo o riferimenti con livelli.
+
+Regola di prodotto:
+
+- usa immagini o SVG come base;
+- collega i pin a note reali;
+- usa [[Vista Giocatori]] solo per mappe senza segreti.
+
+```dataview
+TABLE mondo, luogo, stato, file.mtime AS aggiornato
+FROM "Risorse/Mappe"
+WHERE uso = "zoom" AND !startswith(file.name, "Prova -")
 SORT mondo ASC, file.name ASC
 ```
 

@@ -6,6 +6,7 @@
   "scripts": {
     "check": "node z.automazioni/check_vault.js",
     "import:srd": "node z.automazioni/import_srd.js",
+    "import:azgaar": "node z.automazioni/import_azgaar_geojson.js",
     "release:clean": "node z.automazioni/release_clean.js"
   }
 }

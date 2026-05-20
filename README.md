@@ -90,6 +90,7 @@ Se dashboard, pulsanti o tabelle non funzionano, apri [[Risorse/Primo Avvio Stru
 - Per controlli e sviluppo del vault, vedi [[Risorse/Sviluppo Vault]].
 - Per preparare una release o una copia pulita, apri [[RELEASE]] e [[Risorse/Controllo Vault]].
 - Per creare una copia consegnabile, apri [[Risorse/Release Pulita]] o usa `npm run release:clean`.
+- Per importare mappe esterne come bozze, apri [[Risorse/Importare Mappe]] o usa `npm run import:azgaar`.
 - Non modificare manualmente le note in `SRD`: sono un riferimento regolamentare separato e possono essere rigenerate.
 
 ## Prodotto E Community
@@ -97,6 +98,7 @@ Se dashboard, pulsanti o tabelle non funzionano, apri [[Risorse/Primo Avvio Stru
 - Strategia prodotto: [docs/STRATEGIA_PRODOTTO.md](docs/STRATEGIA_PRODOTTO.md).
 - Installazione: [docs/INSTALLAZIONE.md](docs/INSTALLAZIONE.md).
 - Matrice strumenti: [docs/STRUMENTI.md](docs/STRUMENTI.md).
+- Completamento plugin per release ZIP: [docs/COMPLETAMENTO_PLUGIN.md](docs/COMPLETAMENTO_PLUGIN.md).
 - Contribuire: [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Demo

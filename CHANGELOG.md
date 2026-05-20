@@ -6,6 +6,8 @@
 
 - Documentazione prodotto in `docs/`: strategia, installazione e matrice strumenti.
 - `CONTRIBUTING.md` e issue template GitHub per bug e feature request.
+- [[Risorse/Importare Mappe]] e import GeoJSON Azgaar verso bozze di luoghi.
+- [[Risorse/Roadmap/0.8.0|Roadmap 0.8.0]] per completamento prodotto prima della release ZIP iniziale.
 
 ### Migliorato
 

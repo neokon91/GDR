@@ -190,8 +190,28 @@ Fatto bene quando: durante preparazione o gioco il DM puo generare una bozza, sa
 
 Questi plugin restano secondari finche le integrazioni sopra non sono solide:
 
-- **Hex Cartographer**: utile dopo aver stabilito come il vault gestisce regioni e viaggi.
+- **Hex Cartographer**: ora documentato in [[Risorse/Mappe/Mappe]] come supporto opzionale per esagoni e viaggi.
+- **TTRPG Tools: Maps**: ora documentato in [[Risorse/Mappe/Mappe]] come supporto opzionale per mappe zoomabili e pin.
 - **Iconize**: migliora orientamento visivo, ma non sostituisce indici e dashboard chiare.
+- **Iron Vault**: fuori dal flusso base D&D/fantasy classico; non va mostrato all'utente finale nella release ZIP iniziale.
+
+## Import Mappe Esterne
+
+Stato: base avviata per 0.8.0.
+
+Decisione:
+
+- non importare direttamente `.map` di Azgaar nella release iniziale;
+- usare `.map` come salvataggio da riaprire in Azgaar;
+- usare GeoJSON/CSV/SVG/PNG come sorgenti per il vault;
+- importare dati come bozze, mai come canone automatico.
+
+Implementato:
+
+- [[Risorse/Importare Mappe]];
+- `npm run import:azgaar`;
+- esempio `Import/Azgaar/Prova - Azgaar.geojson`;
+- creazione di bozze in `Mondi/Luoghi` con `fonte: azgaar`.
 
 ## Integrazione Trasversale: Tabs
 
