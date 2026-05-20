@@ -26,6 +26,7 @@ Usa questi campi in modo coerente, perché alimentano Dataview, dashboard, Meta 
 
 - `categoria`: tipo generale della nota, per esempio `sessione`, `personaggio`, `luogo`, `missione`.
 - `tipo`: sottotipo utile al gioco, per esempio `pg`, `png`, `dungeon`, `oggetto magico`.
+- `categoria: risorsa` copre sia risorse economiche del mondo sia note di supporto del vault. I controlli distinguono i due gruppi tramite `tipo`, non tramite una nuova categoria tecnica.
 - `sottotipo`: specializzazione creata dai router quando serve distinguere una scelta guidata senza rompere le query basate su `tipo`.
 - `famiglia_luogo`: macro-famiglia scelta da `Luogo Router`, per esempio `insediamento`, `luogo di interesse`, `regione naturale`, `geografia`, `politica`.
 - `stato`: avanzamento operativo. Valori comuni validati: `bozza`, `preparazione`, `pronto`, `in corso`, `in gioco`, `giocata`, `da smistare`, `smistata`, `collegata`, `canonica`, `canonico`, `accettata`, `proposta`, `conclusa`, `archiviata`, `ignorata`.
