@@ -54,3 +54,5 @@ Per sviluppo e manutenzione si usa il repository Git, non uno ZIP.
 - `npm run release:clean` ha creato `dist/vault-gdr-clean`.
 - `npm run release:clean` ha creato `dist/vault-gdr-clean.zip`.
 - `dist/` resta artefatto locale ignorato da Git.
+
+Questa sezione e verificata da `npm run check`: se versione, changelog o verifica release non sono allineati, il controllo fallisce.
