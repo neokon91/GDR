@@ -15,6 +15,7 @@ fc-display-name: "Sessione 2"
 fc-end:
 stato: in corso
 attiva: true
+pubblico: true
 mondo: "[[Demo - Terre della Soglia]]"
 campagne:
   - "[[Demo - La Reliquia Spezzata]]"
@@ -22,6 +23,9 @@ luoghi:
   - "[[Demo - Santuario della Prima Pietra]]"
   - "[[Demo - Marca della Soglia]]"
 personaggi:
+  - "[[Demo - Asha delle Campane]]"
+  - "[[Demo - Borin Pietragrigia]]"
+  - "[[Demo - Lio Vetroverde]]"
   - "[[Demo - Sella Neraluce]]"
   - "[[Demo - Mira Ventofermo]]"
 creature:
@@ -30,6 +34,7 @@ incontri:
   - "[[Demo - Nebbia al Ponte]]"
   - "[[Demo - Agguato dei Lupi]]"
 dispense:
+  - "[[Demo - Estratto Pubblico Della Lettera]]"
   - "[[Demo - Lettera Macchiata di Nebbia]]"
 mappe:
   - "[[Demo - Mappa Relazioni]]"
@@ -52,6 +57,12 @@ tracciati:
 oggetti:
   - "[[Demo - Frammento della Soglia]]"
 obiettivo: "Entrare nel santuario e capire cosa protegge davvero la reliquia."
+apertura: "La nebbia copre il Ponte delle Campane mentre Sella Neraluce offre un patto: consegnare il frammento o restare chiusi fuori dal santuario."
+scelta: "Riconoscere l'autorita dei Custodi, forzare il passaggio, negoziare con Mira o usare il frammento senza rito."
+materiale_pronto:
+  - "[[Demo - Mappa Zoomabile]]"
+  - "[[Demo - Lettera Macchiata di Nebbia]]"
+  - "[[Demo - Nebbia al Ponte]]"
 scene:
   - negoziare con Sella
   - leggere le incisioni scalpellate
@@ -68,6 +79,15 @@ conseguenze:
   - La reliquia e stata riconosciuta come serratura.
 continuita:
   - Aprire la prossima sessione con il blocco del ponte e la scelta politica: riconoscere la Marca della Soglia, negoziare, forzare il passaggio o consegnare un frammento.
+recap_pubblico:
+  - La nebbia ha preso il Ponte delle Campane.
+  - I Custodi hanno imposto un coprifuoco temporaneo.
+  - La reliquia sembra una serratura, non una benedizione.
+recap_dm:
+  - Sella vuole controllare la Soglia, non chiuderla.
+  - Odran nasconde un frammento nella campana incrinata.
+  - Mira puo diventare alleata se il party le offre prove contro i Custodi.
+prossima_apertura: "Il villaggio si sveglia con il ponte chiuso e i Custodi che cercano frammenti casa per casa."
 ---
 
 # Demo - Sessione 2 - Il Santuario Sotto Nebbia

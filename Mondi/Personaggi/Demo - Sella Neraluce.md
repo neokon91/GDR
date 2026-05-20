@@ -5,6 +5,7 @@ categoria: personaggio
 tipo: png
 ruolo: "voce dei Custodi"
 stato: in gioco
+player_safe: "Portavoce calma dei Custodi della Soglia, convinta che solo l'ordine possa salvare la valle."
 mondo: "[[Demo - Terre della Soglia]]"
 luogo: "[[Demo - Santuario della Prima Pietra]]"
 fazioni:

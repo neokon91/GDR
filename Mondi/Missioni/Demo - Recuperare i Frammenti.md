@@ -5,6 +5,7 @@ categoria: missione
 fileClass: missione
 tipo: mistero
 stato: accettata
+player_safe: "Trovare i frammenti della reliquia prima che i Custodi li requisiscano."
 mondo: "[[Demo - Terre della Soglia]]"
 committente: "[[Demo - Mira Ventofermo]]"
 luoghi:

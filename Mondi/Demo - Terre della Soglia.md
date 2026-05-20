@@ -3,8 +3,20 @@ id: demo-terre-della-soglia
 nome: "Demo - Terre della Soglia"
 categoria: mondo
 stato: pronto
+gancio: "Una reliquia spezzata teneva chiusa una soglia antica; ogni frammento recuperato puo salvare la valle o consegnarla ai Custodi."
 tono: "avventura di confine"
 tema: "un antico patto sta cedendo"
+conflitto_centrale: "Proteggere la valle collaborando con i Custodi o impedire che la crisi diventi occupazione politica."
+luoghi_iconici:
+  - "[[Demo - Valle di Brumafonda]]"
+  - "[[Demo - Ponte delle Campane]]"
+  - "[[Demo - Santuario della Prima Pietra]]"
+fazioni_principali:
+  - "[[Demo - Custodi della Soglia]]"
+misteri_pubblici:
+  - Perche la campana suona senza vento?
+  - Chi ha rotto la reliquia?
+  - Cosa c'e oltre la Soglia?
 tecnologia: "medievale fantastica"
 magia: "rara, rituale e temuta"
 continenti:
@@ -25,6 +37,7 @@ continuita:
 campagne:
   - "[[Demo - La Reliquia Spezzata]]"
 canonico: true
+pubblico: true
 ---
 
 # Demo - Terre della Soglia

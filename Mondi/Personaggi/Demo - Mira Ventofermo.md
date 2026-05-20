@@ -5,6 +5,7 @@ categoria: personaggio
 tipo: png
 ruolo: "capitana della milizia"
 stato: in gioco
+player_safe: "Capitana della milizia di Brumafonda, stanca di segreti e pronta a collaborare con chi protegge davvero la valle."
 mondo: "[[Demo - Terre della Soglia]]"
 luogo: "[[Demo - Ponte delle Campane]]"
 fazioni: []

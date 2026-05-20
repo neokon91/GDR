@@ -6,6 +6,7 @@ tipo: tempio
 tipologia: santuario
 stato: pronto
 canonico: true
+player_safe: "Santuario antico costruito attorno a una pietra nera; le incisioni cancellate indicano che qualcuno ha nascosto la verita sulla reliquia."
 mondo: "[[Demo - Terre della Soglia]]"
 luogo_padre: "[[Demo - Valle di Brumafonda]]"
 coordinates:
@@ -20,6 +21,8 @@ culto_associato: "[[Demo - Custodi della Soglia]]"
 pericolo: 7
 segreti:
   - la reliquia e una serratura, non una benedizione
+mappe:
+  - "[[Demo - Mappa Zoomabile]]"
 ---
 
 # Demo - Santuario della Prima Pietra

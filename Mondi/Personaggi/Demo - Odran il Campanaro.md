@@ -5,6 +5,7 @@ categoria: personaggio
 tipo: png
 ruolo: "custode del ponte"
 stato: in gioco
+player_safe: "Campanaro del ponte, superstizioso e gentile, sa piu di quanto riesca a dire senza tremare."
 mondo: "[[Demo - Terre della Soglia]]"
 luogo: "[[Demo - Ponte delle Campane]]"
 fazioni:
