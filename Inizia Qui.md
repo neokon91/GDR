@@ -40,6 +40,7 @@ Scegli una cosa sola. Il vault deve farti produrre una sessione, giocarla o aggi
 
 ```dataviewjs
 const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));
+gdr.renderActiveSessionBanner(dv);
 gdr.renderActions(dv);
 ```
 

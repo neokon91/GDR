@@ -7,25 +7,23 @@ cssclasses:
 # Durante Il Gioco
 
 > [!scena] Schermo del DM
-> Vista rapida per sessione attiva, scena corrente, PNG, incontri, missioni, clock e appunti live.
+> Output: appunti live, decisioni prese, clock aggiornati e materiale usato nella sessione attiva.
 
 ## Sessione Attiva
 
 ```dataviewjs
 const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));
 const active = gdr.activeSession(dv);
+gdr.renderActiveSessionBanner(dv);
 
 if (!active) {
   dv.paragraph("Nessuna sessione attiva. Apri [[Risorse/Preparazione Sessione]] e rendi pronta una sessione.");
 } else {
-  dv.paragraph(`Sessione: ${active.file.link} · ${active.data ?? "data non indicata"} · ${active.stato ?? "senza stato"}`);
   gdr.renderTableCockpit(dv);
 }
 ```
 
 ## Comandi Rapidi
-
-`BUTTON[preparazione-sessione-risorse-preparazione-sessione]`
 
 `BUTTON[nota-rapida-z-modelli-nota-rapida-md]`
 
@@ -33,15 +31,23 @@ if (!active) {
 
 `BUTTON[nuovo-clock-z-modelli-dm-tracciato-md]`
 
-`BUTTON[nuovo-incontro-z-modelli-dm-incontro-md]`
-
 `BUTTON[nuova-dispensa-z-modelli-dispensa-md]`
 
-`BUTTON[party-control-hub-party-control]`
-
-`BUTTON[vista-giocatori-hub-vista-giocatori-vista-giocatori]`
-
 `BUTTON[post-sessione-guidato-risorse-post-sessione-guidato]`
+
+> [!missione] Fine Sessione
+> Quando il tavolo si chiude, apri il post-sessione e trasforma appunti, decisioni e clock in conseguenze.
+>
+> `BUTTON[post-sessione-guidato-risorse-post-sessione-guidato]`
+
+> [!regia]- Strumenti al tavolo
+> `BUTTON[preparazione-sessione-risorse-preparazione-sessione]`
+>
+> `BUTTON[nuovo-incontro-z-modelli-dm-incontro-md]`
+>
+> `BUTTON[party-control-hub-party-control]`
+>
+> `BUTTON[vista-giocatori-hub-vista-giocatori-vista-giocatori]`
 
 > [!regia]- Strumenti avanzati
 > `BUTTON[nuovo-png-z-modelli-personaggio-png-md]`
@@ -63,20 +69,6 @@ if (!active) {
 > `BUTTON[controllo-vault-risorse-controllo-vault]`
 >
 > `BUTTON[tabelle-rapide-risorse-tabelle-tabelle]`
-
-## Scena Corrente
-
-```dataviewjs
-const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));
-const active = gdr.activeSession(dv);
-
-if (active) {
-  dv.table(
-    ["Obiettivo", "Scene", "Segreti rivelabili", "Domande", "Pressioni", "Tracciati"],
-    [[active.obiettivo ?? "", active.scene ?? [], active.segreti_rivelabili ?? [], active.domande_al_tavolo ?? [], active.pressioni ?? [], active.tracciati ?? []]]
-  );
-}
-```
 
 ## Quadro Di Regia
 

@@ -33,6 +33,22 @@ const ready = checks.filter(([, value]) => ok(value)).length;
 dv.paragraph(ready === 5 ? "Pronta: imposta stato `pronto` e gioca." : `Mancano ${5 - ready} blocchi. Non aprire altro: completa i campi qui sopra.`);
 ```
 
+> [!scena] Scaletta Giocabile
+> Output concreto della preparazione: questa e la traccia da usare al tavolo.
+
+```dataviewjs
+const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));
+gdr.renderPlayableOutline(dv, dv.current());
+```
+
+> [!regia] Sessione Attiva
+> Per andare al tavolo lascia `attiva: true` solo su questa sessione. Spegnilo sulle altre sessioni.
+
+```dataviewjs
+const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));
+gdr.renderActiveSessionBanner(dv);
+```
+
 >[!infobox|wiki]- Sessione
 > Data:
 > `INPUT[date:data]`

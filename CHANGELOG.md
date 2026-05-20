@@ -15,6 +15,7 @@
 
 ### Migliorato
 
+- Chiuso il flusso sessione: la nota sessione genera una scaletta giocabile dai cinque campi, le viste operative mostrano la sessione attiva e [[Durante il Gioco]] apre come cockpit con Fine sessione visibile.
 - [[Vista Giocatori]] ora funziona come portale player-facing con recap, diario visibile, atlante condiviso, handout e controllo anti-segreti.
 - [[Inizia Qui]] e stato ridotto al flusso principale Prepara -> Gioca -> Aggiorna il mondo, con strumenti avanzati separati.
 - [[Risorse/Preparazione Sessione]] ora richiede cinque blocchi concreti: obiettivo, prima scena, scelta, pressione e materiale.

@@ -56,6 +56,12 @@
       .first();
   }
 
+  function activeSessions(dv) {
+    return dv.pages('"Mondi/Sessioni"')
+      .where(p => isReal(p) && p.attiva === true)
+      .sort(p => p.data ?? "0000-00-00", "desc");
+  }
+
   function sessionCandidates(dv) {
     return dv.pages('"Mondi/Sessioni"')
       .where(p => isReal(p) && (p.attiva === true || PLAY_STATES.includes(p.stato)))
@@ -199,7 +205,7 @@
     } else if (prep) {
       actions.push({ title: "Finisci la preparazione", meta: prep.file.name, body: "C'e una sessione in preparazione.", link: "Risorse/Preparazione Sessione.md" });
     } else {
-      actions.push({ title: "Crea una sessione", meta: "Nessuna sessione attiva", body: "Parti dalla DM Dashboard.", link: "Hub/1. DM Dashboard.md" });
+      actions.push({ title: "Crea una sessione", meta: "Nessuna sessione attiva", body: "Parti da Preparazione Sessione.", link: "Risorse/Preparazione Sessione.md" });
     }
 
     if (inbox.length) {
@@ -215,6 +221,64 @@
 
     const container = dv.el("div", "", { cls: "gdr-card-grid compact" });
     container.innerHTML = actions.slice(0, 6).map(cardHtml).join("");
+  }
+
+  function renderActiveSessionBanner(dv) {
+    const activeList = activeSessions(dv).array();
+    const active = activeSession(dv);
+    const candidates = sessionCandidates(dv).limit(4).array();
+
+    if (activeList.length > 1) {
+      const grid = dv.el("div", "", { cls: "gdr-card-grid compact" });
+      grid.innerHTML = activeList.map(p => cardHtml({
+        title: pageTitle(p),
+        meta: p.data ?? p.stato ?? "sessione attiva",
+        body: "Lascia `attiva: true` solo sulla sessione che stai per giocare.",
+        link: p.file.path,
+        cls: "gdr-info-card compact gdr-kind-missing"
+      })).join("");
+      dv.paragraph(`Attenzione: ci sono ${activeList.length} sessioni con \`attiva: true\`.`);
+      return;
+    }
+
+    if (activeList.length === 1) {
+      const p = activeList[0];
+      const grid = dv.el("div", "", { cls: "gdr-card-grid compact" });
+      grid.innerHTML = cardHtml({
+        title: "Sessione attiva",
+        meta: [p.file.name, p.data ?? "", p.stato ?? ""].filter(Boolean).join(" · "),
+        body: "Questa e la sessione usata da Preparazione, Durante il Gioco e Post-Sessione.",
+        link: p.file.path,
+        cls: "gdr-info-card compact gdr-kind-ready"
+      });
+      return;
+    }
+
+    if (active) {
+      const grid = dv.el("div", "", { cls: "gdr-card-grid compact" });
+      grid.innerHTML = cardHtml({
+        title: "Nessuna sessione marcata attiva",
+        meta: active.file.name,
+        body: "Fallback automatico. Apri questa sessione e imposta `attiva: true` se va al tavolo.",
+        link: active.file.path,
+        cls: "gdr-info-card compact gdr-kind-missing"
+      });
+      return;
+    }
+
+    if (candidates.length) {
+      const grid = dv.el("div", "", { cls: "gdr-card-grid compact" });
+      grid.innerHTML = candidates.map(p => cardHtml({
+        title: pageTitle(p),
+        meta: p.stato ?? "sessione",
+        body: "Scegli una sola sessione e imposta `attiva: true`.",
+        link: p.file.path,
+        cls: "gdr-info-card compact"
+      })).join("");
+      return;
+    }
+
+    dv.paragraph("Nessuna sessione pronta. Crea una sessione da Preparazione Sessione.");
   }
 
   function renderHome(dv) {
@@ -246,21 +310,41 @@
     // Prima schermata da tavolo: solo cio che serve nei prossimi minuti di gioco.
     const active = activeSession(dv);
     if (!active) {
-      dv.paragraph("Nessuna sessione attiva. Apri la DM Dashboard e crea o prepara una sessione.");
+      dv.paragraph("Nessuna sessione attiva. Apri Preparazione Sessione e crea o prepara una sessione.");
       return;
     }
 
     const rows = [
-      ["Obiettivo", active.obiettivo ?? "Non indicato"],
-      ["Scena", fieldText(active.scene) || "Nessuna scena pronta"],
-      ["Domande", fieldText(active.domande_al_tavolo) || "Nessuna domanda"],
-      ["Segreti rivelabili", fieldText(active.segreti_rivelabili) || "Nessuno"],
-      ["Pressioni", fieldText(active.pressioni) || fieldText(active.tracciati) || "Nessuna pressione collegata"],
-      ["Appunti live", fieldText(active.appunti_live) || "Nessun appunto collegato"]
+      ["Scena corrente", fieldText(active.scena_corrente ?? active.apertura ?? active.scene) || "Apri la sessione e scrivi la prima scena."],
+      ["Appunti live", fieldText(active.appunti_live) || "Usa Cattura live o scrivi negli appunti rapidi."],
+      ["Decisione da ottenere", fieldText(active.scelta ?? active.decisioni_attese ?? active.domande_al_tavolo) || "Manca una scelta concreta."],
+      ["Clock e pressione", fieldText(active.pressioni) || fieldText(active.tracciati) || "Nessuna pressione collegata."],
+      ["Handout e materiali", fieldText(active.dispense) || fieldText(active.materiale_pronto) || "Nessun handout pronto."],
+      ["PNG presenti", fieldText(active.personaggi) || "Nessun PNG collegato."]
     ];
 
     const panel = dv.el("div", "", { cls: "gdr-card-grid" });
     panel.innerHTML = rows.map(([title, body]) => cardHtml({ title, body, cls: "gdr-info-card compact" })).join("");
+  }
+
+  function renderPlayableOutline(dv, source = null) {
+    const session = source ?? dv.current();
+    const rows = [
+      ["Apertura", session.apertura, "Leggi o parafrasa la prima scena."],
+      ["Obiettivo", session.obiettivo, "Ricorda cosa deve produrre la sessione."],
+      ["Scelta", session.scelta, "Metti davanti ai giocatori una decisione che cambia qualcosa."],
+      ["Pressione", session.pressioni ?? session.tracciati, "Fai avanzare questa cosa se il party esita."],
+      ["Materiale pronto", session.materiale_pronto ?? [...asArray(session.incontri), ...asArray(session.dispense), ...asArray(session.mappe)], "Usa almeno un elemento preparato al tavolo."]
+    ];
+
+    const grid = dv.el("div", "", { cls: "gdr-card-grid compact" });
+    grid.innerHTML = rows.map(([title, value, fallback]) => cardHtml({
+      title,
+      body: fieldText(value) || fallback,
+      cls: `gdr-info-card compact ${fieldText(value) ? "gdr-kind-ready" : "gdr-kind-missing"}`
+    })).join("");
+
+    dv.paragraph("Sequenza giocabile: apertura -> pressione -> scelta -> conseguenza -> appunto per il post-sessione.");
   }
 
   function preparationTarget(dv) {
@@ -450,6 +534,7 @@
     pageFromLink,
     pagesFromLinks,
     activeSession,
+    activeSessions,
     sessionCandidates,
     currentCampaign,
     linkedPages,
@@ -461,9 +546,11 @@
     hasPrivateFields,
     publicCandidate,
     renderActions,
+    renderActiveSessionBanner,
     renderHome,
     renderPreparationFocus,
     renderTableCockpit,
+    renderPlayableOutline,
     renderPartyControl,
     renderPlayerRecap,
     renderPublicSafety,

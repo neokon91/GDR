@@ -15,6 +15,13 @@ Questa pagina serve solo a trovare o creare la sessione da compilare. La prepara
 
 `BUTTON[durante-il-gioco-durante-il-gioco]`
 
+## Sessione Attiva
+
+```dataviewjs
+const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));
+gdr.renderActiveSessionBanner(dv);
+```
+
 ## Sessione Da Rendere Giocabile
 
 ```dataviewjs
@@ -24,7 +31,7 @@ gdr.renderPreparationFocus(dv);
 
 ## I Cinque Blocchi
 
-Apri la sessione indicata sopra e compila i cinque campi in cima alla nota. Quando sono tutti pieni, imposta `stato: pronto` e `attiva: true`.
+Apri la sessione indicata sopra e compila i cinque campi in cima alla nota. Quando sono tutti pieni, imposta `stato: pronto` e lascia `attiva: true` solo su quella sessione.
 
 > [!scena] 1. Obiettivo
 > Scrivi una frase: cosa devono ottenere, scoprire o decidere i personaggi entro fine sessione.
@@ -101,5 +108,6 @@ Quando i cinque blocchi sono completi:
 
 1. apri la nota sessione;
 2. imposta `stato: pronto`;
-3. imposta `attiva: true` se e la prossima al tavolo;
-4. apri [[Durante il Gioco]].
+3. spegni `attiva` sulle altre sessioni;
+4. imposta `attiva: true` solo su questa se e la prossima al tavolo;
+5. apri [[Durante il Gioco]].
