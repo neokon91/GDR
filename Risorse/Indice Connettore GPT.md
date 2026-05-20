@@ -26,7 +26,7 @@ Questa nota orienta un connettore GPT o un indice code search sul vault. Non e u
 
 - [[Risorse/Sviluppo Vault]]
 - [[Risorse/Controllo Vault]]
-- [[Risorse/Plugin Attivi]]
+- [[Risorse/Strumenti Attivi]]
 - [[Risorse/Integrazioni Plugin]]
 - [[CHANGELOG]]
 - [[VERSION]]

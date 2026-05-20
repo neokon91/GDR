@@ -628,7 +628,7 @@ if (!pages.length) {
 #### Regole e Riferimenti
 
 - [[Risorse/Callout GDR]]
-- [[Risorse/Plugin Attivi]]
+- [[Risorse/Strumenti Attivi]]
 
 tab: Post
 

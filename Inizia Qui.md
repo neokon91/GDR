@@ -8,7 +8,7 @@ stato: pronto
 
 # Inizia Qui
 
-Questa e la porta d'ingresso del vault. Parti da qui se vuoi preparare una sessione, giocare o costruire il mondo senza occuparti della parte tecnica.
+Questa e la porta d'ingresso del vault. Parti da qui se vuoi preparare una sessione, giocare o costruire il mondo senza capire strumenti interni, cartelle tecniche o automazioni.
 
 ## Cosa Vuoi Fare?
 
@@ -45,6 +45,14 @@ actions:
 ```
 
 ```meta-bind-button
+label: Risorse
+style: default
+actions:
+  - type: open
+    link: "[[Risorse/Risorse]]"
+```
+
+```meta-bind-button
 label: Roadmap
 style: default
 actions:
@@ -54,12 +62,13 @@ actions:
 
 ## Primo Avvio
 
-1. Se Obsidian chiede se fidarsi dei plugin community, conferma solo se hai scaricato il vault da una fonte affidabile.
-2. Apri [[Risorse/Installazione Plugin]] se pulsanti, tabelle o dashboard non funzionano.
+1. Se Obsidian chiede se fidarsi degli strumenti inclusi nel vault, conferma solo se hai scaricato il vault da una fonte affidabile.
+2. Apri [[Risorse/Primo Avvio Strumenti]] se pulsanti, tabelle o dashboard non funzionano.
 3. Apri [[1. DM Dashboard]] per creare campagne, sessioni, missioni e incontri.
 4. Apri una sessione e usa il toggle `attiva` per indicare quale e al tavolo.
 5. Apri [[Durante il Gioco]] quando sei al tavolo.
 6. Apri [[Worldbuilder Dashboard]] quando vuoi creare mondi, luoghi, PNG, fazioni, creature e oggetti.
+7. Apri [[Risorse/Risorse]] quando cerchi guide, mappe, immagini, audio, video, tabelle o aiuto.
 
 ## Se Vedi Questo, Sei Pronto
 
@@ -74,9 +83,10 @@ actions:
 - Preparazione e gestione del tavolo: [[1. DM Dashboard]].
 - Appunti durante la sessione: [[Durante il Gioco]].
 - Eventi live, PNG improvvisati, luoghi improvvisati e conseguenze: sezione Inbox Live in [[Durante il Gioco]] o [[Inbox/Inbox]].
-- Consolidamento dopo sessione: [[z.bacheche/Post Sessione]].
+- Consolidamento dopo sessione: [[z.bacheche/Post Sessione|Post Sessione]].
 - Mondo, luoghi, PNG e fazioni: [[Worldbuilder Dashboard]].
 - Stato dinamico del mondo: [[Mondi/Stato del Mondo]].
+- Guide, mappe, media, tabelle e aiuto: [[Risorse/Risorse]].
 - Regole e riferimento D&D: [[SRD/SRD]].
 - Domande frequenti: [[Risorse/FAQ]].
 
@@ -86,7 +96,6 @@ Apri [[Demo - La Reliquia Spezzata]]. E una mini-campagna gia collegata a mondo,
 
 ## Cosa Ignorare All'Inizio
 
-- `z.modelli`: template usati dai pulsanti.
-- `z.automazioni`: script che creano e controllano note.
+- Cartelle `z.*`: sono il motore interno del vault. Ignorale.
 - `SRD`: riferimento regolamentare, non contenuto canonico della tua campagna.
 - Note `Prova -`: esempi e controlli, non materiale da giocare.

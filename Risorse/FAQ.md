@@ -12,17 +12,17 @@ stato: pronto
 
 No. Parti da [[Inizia Qui]] e usa i pulsanti. Le cartelle tecniche servono al vault, ma non devi aprirle per giocare.
 
-## Obsidian Mi Chiede Se Fidarmi Dei Plugin
+## Obsidian Mi Chiede Se Fidarmi Degli Strumenti
 
-Conferma solo se hai scaricato il vault da una fonte affidabile. I plugin inclusi servono a dashboard, pulsanti, template, tabelle e campi interattivi.
+Conferma solo se hai scaricato il vault da una fonte affidabile. Gli strumenti inclusi servono a dashboard, pulsanti, tabelle e campi interattivi.
 
 ## Le Tabelle Non Si Vedono
 
-Apri [[Risorse/Installazione Plugin]] e controlla che Dataview sia abilitato. Poi riapri la nota.
+Apri [[Risorse/Primo Avvio Strumenti]] e controlla che gli strumenti per le tabelle siano attivi. Poi riapri la nota.
 
 ## I Pulsanti Non Creano Note
 
-Controlla che Meta Bind e Templater siano abilitati. Se il problema resta, apri [[Risorse/Se Qualcosa Non Funziona]].
+Apri [[Risorse/Primo Avvio Strumenti]] e controlla gli strumenti per pulsanti e creazione guidata. Se il problema resta, apri [[Risorse/Se Qualcosa Non Funziona]].
 
 ## Posso Cancellare Le Note Demo?
 
@@ -39,7 +39,7 @@ Si. `SRD` e un riferimento regolamentare separato. Il mondo e le campagne stanno
 
 ## Funziona Da Mobile?
 
-Le note sono leggibili da mobile, ma creazione guidata, dashboard complesse, bacheche e alcune viste plugin sono piu comode da desktop o tablet.
+Le note sono leggibili da mobile, ma creazione guidata, dashboard complesse e bacheche sono piu comode da desktop o tablet.
 
 ## Dove Scrivo Appunti Durante La Sessione?
 

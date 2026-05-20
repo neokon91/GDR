@@ -9,7 +9,7 @@ aggiornato: 2026-05-20
 
 # Recap Plugin Installati
 
-Questa pagina riassume i plugin community presenti nel vault, come sono configurati e come usarli meglio. Per il primo avvio resta valida [[Risorse/Installazione Plugin]]. Per le priorita di sviluppo usa [[Risorse/Integrazioni Plugin]].
+Questa pagina riassume i plugin community presenti nel vault, come sono configurati e come usarli meglio. Per il primo avvio resta valida [[Risorse/Primo Avvio Strumenti]]. Per le priorita di sviluppo usa [[Risorse/Integrazioni Plugin]].
 
 ## Sintesi
 

@@ -21,6 +21,7 @@ Il vault deve funzionare per una persona che:
 ## Documentazione
 
 - `README.md` deve restare una guida per l'utente finale: dove cliccare, dove scrivere, come usare il vault durante preparazione e gioco.
+- [[Repository]] deve restare la mappa tecnica della repo: cartelle, confini, comandi e cosa non spostare alla leggera.
 - [[Risorse/Guida DM]] deve spiegare il flusso operativo senza dettagli tecnici: preparazione, gioco, Inbox Live, post-sessione e canonizzazione.
 - [[Risorse/Indice Connettore GPT]] deve restare un indice sintetico per code search e connettori GPT, marcato con `is_code_search_indexed: true`.
 - Questa nota contiene la documentazione di sviluppo: campi, template, automazioni, test, import generati e criteri di modifica.
@@ -168,10 +169,16 @@ node z.automazioni/import_srd.js
 Prima di una release o dopo modifiche a template, script e plugin, esegui:
 
 ```bash
-node z.automazioni/check_vault.js
+npm run check
 ```
 
 Il controllo verifica JSON di configurazione, plugin obbligatori inclusi e abilitati, wikilink rotti o ambigui, percorsi `templateFile` usati dai pulsanti Meta Bind, helper Templater con script esistente in `z.automazioni`, target di Iconize, riferimenti Obsidian obsoleti, sessioni multiple attive, indice GPT, frontmatter operativo, categorie/stati/tipi ragionevoli, note live senza sessione o mondo e campi minimi per categoria. SRD e note indice sono esclusi dai controlli che produrrebbero falsi positivi.
+
+Se `npm` non e disponibile, il comando equivalente e:
+
+```bash
+node z.automazioni/check_vault.js
+```
 
 ## Release
 
@@ -180,7 +187,7 @@ Per pubblicare una copia del vault:
 1. aggiorna [[VERSION]];
 2. aggiorna [[CHANGELOG]];
 3. segui [[RELEASE]];
-4. esegui `node z.automazioni/check_vault.js`;
+4. esegui `npm run check`;
 5. apri manualmente [[Inizia Qui]], [[1. DM Dashboard]], [[Durante il Gioco]] e [[Worldbuilder Dashboard]].
 
 La cartella `.obsidian/plugins` fa parte del prodotto: i plugin sono inclusi perche dashboard, template, campi e viste dipendono dalle loro configurazioni.

@@ -1,6 +1,6 @@
 # Guida DM
 
-Questa guida serve a usare il vault senza pensare alla parte tecnica.
+Questa guida serve a usare il vault senza pensare a strumenti interni, cartelle tecniche o automazioni.
 
 ## Quando Prepari
 
@@ -73,11 +73,12 @@ La **Timeline Causale** serve a distinguere:
 - I tab separano modalita diverse: scena, cattura, pressioni, persone, materiali e post-sessione.
 - I callout chiusi contengono dettagli da aprire solo quando servono: segreti, timer secondari, note GM, esiti possibili e lore profonda.
 - I pulsanti creano note o aprono pagine operative.
-- [[Risorse/Plugin Attivi]] spiega quali strumenti sono disponibili e quando usarli.
+- [[Risorse/Strumenti Attivi|Strumenti Attivi]] spiega quali strumenti sono disponibili, ma puoi ignorarla se il vault funziona.
+- [[Risorse/Risorse]] raccoglie guide, mappe, media, tabelle e aiuto.
 
 ## Dopo Il Gioco
 
-Apri [[z.bacheche/Post Sessione]].
+Apri [[z.bacheche/Post Sessione|Post Sessione]].
 
 Fai solo queste cose:
 - smista gli appunti live in [[Inbox/Inbox]];
@@ -86,6 +87,18 @@ Fai solo queste cose:
 - segna ricompense e dispense consegnate;
 - togli `attiva: true` alla sessione giocata e prepara la prossima sessione attiva;
 - prepara la prima scena della prossima sessione.
+
+## Dove Aprire Cosa
+
+| Bisogno | Apri |
+| --- | --- |
+| Preparare | [[1. DM Dashboard]] |
+| Giocare | [[Durante il Gioco]] |
+| Costruire il mondo | [[Worldbuilder Dashboard]] |
+| Smistare appunti | [[Inbox/Inbox]] |
+| Controllare problemi | [[Risorse/Controllo Vault]] |
+| Trovare materiali o guide | [[Risorse/Risorse]] |
+| Capire gli strumenti disponibili | [[Risorse/Strumenti Attivi|Strumenti Attivi]] |
 
 ## Dove Metto Le Idee Grezze?
 

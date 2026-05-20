@@ -7,12 +7,12 @@ Apri [[Inizia Qui]] per il primo avvio. Usa [[1. DM Dashboard]] per preparare, [
 ## Primi 5 Minuti
 
 1. Apri il vault in Obsidian e vai su [[Inizia Qui]].
-2. Se Obsidian chiede conferma per i plugin community, abilitali: il vault usa plugin gia configurati per dashboard, pulsanti e tabelle.
+2. Se Obsidian chiede conferma per gli strumenti inclusi nel vault, abilitali: servono per dashboard, pulsanti e tabelle.
 3. Crea o apri una campagna da [[Campagne/Campagne]].
 4. Crea una sessione con il pulsante `Nuova Sessione` dalla dashboard.
 5. Durante la partita apri [[Durante il Gioco]] per appunti live, incontri, PNG, dispense e materiali pronti.
 
-Se dashboard, pulsanti o tabelle non funzionano, apri [[Risorse/Installazione Plugin]], [[Risorse/FAQ]] e poi [[Risorse/Se Qualcosa Non Funziona]].
+Se dashboard, pulsanti o tabelle non funzionano, apri [[Risorse/Primo Avvio Strumenti]], [[Risorse/FAQ]] e poi [[Risorse/Se Qualcosa Non Funziona]].
 
 ## Flusso Consigliato
 
@@ -22,7 +22,7 @@ Se dashboard, pulsanti o tabelle non funzionano, apri [[Risorse/Installazione Pl
 4. Crea solo le entita davvero utili al tavolo: PNG, luoghi, missioni, incontri, oggetti e dispense.
 5. Collega le note usando i campi interattivi.
 6. Durante il gioco usa [[Durante il Gioco]] per appunti, timer, PNG attivi, incontri pronti, dispense e Inbox Live.
-7. Dopo la sessione apri [[z.bacheche/Post Sessione]]: canonizza eventi, aggiorna mondo/missioni e scegli la prossima sessione attiva.
+7. Dopo la sessione apri [[z.bacheche/Post Sessione|Post Sessione]]: canonizza eventi, aggiorna mondo/missioni e scegli la prossima sessione attiva.
 
 ## Dove Trovare Le Cose
 
@@ -36,7 +36,7 @@ Se dashboard, pulsanti o tabelle non funzionano, apri [[Risorse/Installazione Pl
 - `Risorse`: mappe, immagini, audio, video, tabelle e dispense generiche.
 - `SRD`: riferimento separato al System Reference Document 5.2.1 in italiano.
 - `Inbox`: idee grezze e appunti non ancora sistemati.
-- `z.bacheche/Post Sessione`: checklist per consolidare quello che e successo al tavolo.
+- `Post Sessione`: checklist per consolidare quello che e successo al tavolo.
 
 ## Mondo, Campagna E Risorse
 
@@ -63,10 +63,10 @@ Se dashboard, pulsanti o tabelle non funzionano, apri [[Risorse/Installazione Pl
 
 - Non lasciare link placeholder: crea la nota o trasforma il link in testo semplice.
 - Archivia invece di cancellare quando una nota ha valore storico.
-- Dopo una sessione, aggiorna missioni, PNG, luoghi visitati, ricompense e conseguenze da [[z.bacheche/Post Sessione]].
-- Per controlli, template, automazioni e sviluppo del vault, vedi [[Risorse/Sviluppo Vault]].
+- Dopo una sessione, aggiorna missioni, PNG, luoghi visitati, ricompense e conseguenze da [[z.bacheche/Post Sessione|Post Sessione]].
+- Per controlli e sviluppo del vault, vedi [[Risorse/Sviluppo Vault]].
 - Per preparare una release o una copia pulita, apri [[RELEASE]] e [[Risorse/Controllo Vault]].
-- Non modificare manualmente le note in `SRD` se non sai cosa stai facendo: sono generate da `z.automazioni/import_srd.js` e possono essere rigenerate.
+- Non modificare manualmente le note in `SRD`: sono un riferimento regolamentare separato e possono essere rigenerate.
 
 ## Demo
 
@@ -82,11 +82,7 @@ Apri [[Demo - La Reliquia Spezzata]] per vedere una mini-campagna completa gia c
 
 `SRD` contiene il System Reference Document 5.2.1 in italiano come archivio regolamentare separato dal contenuto del mondo. Per rigenerarlo usa:
 
-```bash
-node z.automazioni/import_srd.js
-```
-
-Le note SRD generate hanno `generato_da: import_srd`. Se vuoi preservare una modifica manuale a una nota SRD, rimuovi o cambia quel campo prima di rigenerare.
+La rigenerazione dello SRD e una procedura tecnica documentata in [[Risorse/Sviluppo Vault]].
 
 ## Licenza
 

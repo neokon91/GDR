@@ -336,7 +336,7 @@ if (iconConfig) {
     for (const key of Object.keys(iconConfig)) {
         if (key === "settings") continue;
         if (!fs.existsSync(path.join(ROOT, key)) && !fs.existsSync(path.join(ROOT, `${key}.md`))) {
-            errors.push(`Icon Folder punta a un percorso mancante: ${key}`);
+            errors.push(`Iconize punta a un percorso mancante: ${key}`);
         }
     }
 }

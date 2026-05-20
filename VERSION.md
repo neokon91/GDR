@@ -16,5 +16,5 @@ Stato: runtime live, post-sessione e controlli qualita pronti per collaudo.
 ## Controllo
 
 ```bash
-node z.automazioni/check_vault.js
+npm run check
 ```
