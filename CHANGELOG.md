@@ -1,16 +1,22 @@
 # Changelog
 
-## 0.4.0 - in sviluppo
+## 0.4.0 - 2026-05-20
 
 ### Aggiunto
 
 - [[Risorse/Setup Guidato]] per verificare lo stato del vault senza leggere impostazioni interne.
-- [[Risorse/Roadmap 0.4.0]] con le prossime integrazioni orientate a DM non tecnici.
+- [[Risorse/Post Sessione Guidato]] per chiudere la partita con passaggi leggibili.
+- [[Risorse/Consegna Nuovo DM]] per consegnare il vault senza spiegazioni tecniche.
+- [[Risorse/Profili Campagna]] per fantasy classico, investigativo, sandbox e one-shot.
+- [[Risorse/Materiali Al Tavolo]] per controllare dispense, mappe, media, incontri e creature della sessione attiva.
+- [[Risorse/Preset Calendario]] per usare date del mondo senza spiegare configurazioni interne.
+- [[Risorse/Roadmap 0.4.0]] completata come tracciamento della versione.
 
 ### Migliorato
 
 - [[Mondi/Calendario]] ora parte da oggi nel mondo, prossime sessioni, missioni con pressione e date da sistemare.
 - Demo aggiornata con date narrative gia pronte per calendario, sessioni, scadenze e timeline.
+- [[Inizia Qui]] e [[Risorse/Risorse]] collegano il percorso di consegna, preparazione, gioco e post-sessione.
 
 ## 0.3.0 - 2026-05-20
 

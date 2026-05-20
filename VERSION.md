@@ -1,10 +1,10 @@
 # Versione Vault
 
-Versione: `0.3.0`
+Versione: `0.4.0`
 
 Data: 2026-05-20
 
-Stato: runtime live, post-sessione e controlli qualita pronti per collaudo.
+Stato: onboarding non tecnico, consegna DM, calendario narrativo e materiali al tavolo pronti.
 
 ## Compatibilità
 

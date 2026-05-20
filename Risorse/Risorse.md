@@ -16,9 +16,11 @@ Questa pagina raccoglie guide e materiali riutilizzabili. Se vuoi preparare o gi
 | --- | --- |
 | [[Inizia Qui]] | Quando non sai da dove partire. |
 | [[Risorse/Setup Guidato]] | Quando vuoi sapere se il vault e pronto. |
+| [[Risorse/Consegna Nuovo DM]] | Quando devi dare il vault a una persona non tecnica. |
 | [[Risorse/Guida DM]] | Quando vuoi il flusso DM senza dettagli tecnici. |
 | [[Risorse/Preparazione Sessione]] | Prima di una sessione. |
 | [[Durante il Gioco]] | Durante la partita. |
+| [[Risorse/Post Sessione Guidato]] | Subito dopo la partita. |
 | [[Risorse/Tabelle/Tabelle]] | Quando serve improvvisare con tiri e tabelle. |
 | [[Inbox/Inbox]] | Quando devi smistare idee grezze. |
 | [[Risorse/FAQ]] | Quando hai un dubbio d'uso. |
@@ -32,6 +34,7 @@ Questa pagina raccoglie guide e materiali riutilizzabili. Se vuoi preparare o gi
 | [[Risorse/Audio/Audio]] | Musica, atmosfera e audio da sessione. |
 | [[Risorse/Video/Video]] | Video, reference e timestamp utili. |
 | [[Risorse/Dispense/Dispense]] | Materiali generici da consegnare o riusare. |
+| [[Risorse/Materiali Al Tavolo]] | Controllo dei materiali collegati alla sessione attiva. |
 | [[SRD/SRD]] | Riferimento regolamentare, separato dal mondo canonico. |
 
 ## Strumenti E Aspetto
@@ -50,8 +53,10 @@ Questa pagina raccoglie guide e materiali riutilizzabili. Se vuoi preparare o gi
 | --- | --- |
 | [[Risorse/Controllo Vault]] | Controlli pratici su note incomplete, sessioni attive e materiale pronto. |
 | [[Mondi/Calendario]] | Date del mondo, sessioni, scadenze e cose da calendarizzare. |
+| [[Risorse/Preset Calendario]] | Modi semplici per segnare il tempo del mondo. |
+| [[Risorse/Profili Campagna]] | Strutture consigliate per fantasy classico, investigativo, sandbox e one-shot. |
 | [[Risorse/Prove Entità]] | Esempi per capire come dovrebbero apparire le note. |
-| [[Risorse/Roadmap 0.4.0]] | Prossime integrazioni orientate a DM non tecnici. |
+| [[Risorse/Roadmap 0.4.0]] | Stato completo della versione 0.4.0. |
 | [[VERSION]] | Versione corrente del vault. |
 | [[CHANGELOG]] | Cronologia modifiche. |
 

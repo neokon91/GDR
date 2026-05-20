@@ -22,7 +22,7 @@ Se dashboard, pulsanti o tabelle non funzionano, apri [[Risorse/Primo Avvio Stru
 4. Crea solo le entita davvero utili al tavolo: PNG, luoghi, missioni, incontri, oggetti e dispense.
 5. Collega le note usando i campi interattivi.
 6. Durante il gioco usa [[Durante il Gioco]] per appunti, timer, PNG attivi, incontri pronti, dispense e Inbox Live.
-7. Dopo la sessione apri [[z.bacheche/Post Sessione|Post Sessione]]: canonizza eventi, aggiorna mondo/missioni e scegli la prossima sessione attiva.
+7. Dopo la sessione apri [[Risorse/Post Sessione Guidato]]: canonizza eventi, aggiorna mondo/missioni e scegli la prossima sessione attiva.
 
 ## Dove Trovare Le Cose
 
@@ -36,7 +36,7 @@ Se dashboard, pulsanti o tabelle non funzionano, apri [[Risorse/Primo Avvio Stru
 - `Risorse`: mappe, immagini, audio, video, tabelle e dispense generiche.
 - `SRD`: riferimento separato al System Reference Document 5.2.1 in italiano.
 - `Inbox`: idee grezze e appunti non ancora sistemati.
-- `Post Sessione`: checklist per consolidare quello che e successo al tavolo.
+- `Post Sessione Guidato`: percorso per consolidare quello che e successo al tavolo.
 
 ## Mondo, Campagna E Risorse
 
@@ -63,7 +63,7 @@ Se dashboard, pulsanti o tabelle non funzionano, apri [[Risorse/Primo Avvio Stru
 
 - Non lasciare link placeholder: crea la nota o trasforma il link in testo semplice.
 - Archivia invece di cancellare quando una nota ha valore storico.
-- Dopo una sessione, aggiorna missioni, PNG, luoghi visitati, ricompense e conseguenze da [[z.bacheche/Post Sessione|Post Sessione]].
+- Dopo una sessione, aggiorna missioni, PNG, luoghi visitati, ricompense e conseguenze da [[Risorse/Post Sessione Guidato]].
 - Per controlli e sviluppo del vault, vedi [[Risorse/Sviluppo Vault]].
 - Per preparare una release o una copia pulita, apri [[RELEASE]] e [[Risorse/Controllo Vault]].
 - Non modificare manualmente le note in `SRD`: sono un riferimento regolamentare separato e possono essere rigenerate.

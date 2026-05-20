@@ -3,7 +3,7 @@ cssclasses:
   - indice
 categoria: risorsa
 tipo: roadmap
-stato: bozza
+stato: pronto
 ---
 
 # Roadmap 0.4.0
@@ -16,13 +16,13 @@ Obiettivo: rendere il vault piu facile da consegnare a un DM non tecnico, con co
 - [x] [[Mondi/Calendario]] riscritto come calendario narrativo: oggi nel mondo, prossime sessioni, missioni con pressione e date da sistemare.
 - [x] Demo aggiornata con date del mondo e scadenze narrative gia visibili.
 
-## Prossime Integrazioni
+## Integrazioni Completate
 
-- [ ] Flusso post-sessione ancora piu guidato: cosa e successo, cosa diventa canonico, cosa preparare dopo.
-- [ ] Pacchetto di consegna per nuovo DM: cosa aprire, cosa ignorare, cosa non toccare.
-- [ ] Profili di campagna: fantasy classico, investigativo, sandbox, one-shot.
-- [ ] Controllo materiali al tavolo: dispense, mappe, immagini, audio e creature pronti per la sessione attiva.
-- [ ] Preset calendario del mondo configurabile senza spiegare campi tecnici.
+- [x] [[Risorse/Post Sessione Guidato]]: cosa e successo, cosa diventa canonico, cosa preparare dopo.
+- [x] [[Risorse/Consegna Nuovo DM]]: cosa aprire, cosa ignorare, cosa non toccare.
+- [x] [[Risorse/Profili Campagna]]: fantasy classico, investigativo, sandbox, one-shot.
+- [x] [[Risorse/Materiali Al Tavolo]]: dispense, mappe, immagini, audio, incontri e creature della sessione attiva.
+- [x] [[Risorse/Preset Calendario]]: modi semplici per segnare il tempo senza spiegare campi tecnici.
 
 ## Criterio Di Qualita
 

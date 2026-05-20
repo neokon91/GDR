@@ -25,6 +25,14 @@ actions:
     link: "[[Durante il Gioco]]"
 ```
 
+```meta-bind-button
+label: Materiali Al Tavolo
+style: default
+actions:
+  - type: open
+    link: "[[Risorse/Materiali Al Tavolo]]"
+```
+
 ## Sessione Da Preparare
 
 ```dataview
@@ -132,4 +140,4 @@ LIMIT 8
 
 - [ ] Segna la sessione come `pronto`.
 - [ ] Apri [[Durante il Gioco]] prima del tavolo.
-- [ ] Dopo il tavolo apri [[z.bacheche/Post Sessione]].
+- [ ] Dopo il tavolo apri [[Risorse/Post Sessione Guidato]].

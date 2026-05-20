@@ -4,6 +4,11 @@ kanban-plugin: board
 
 ---
 
+## Guida Rapida
+
+- [ ] Aprire [[Risorse/Post Sessione Guidato]] se vuoi il percorso passo passo
+- [ ] Aprire [[Risorse/Materiali Al Tavolo]] se devi verificare cosa e stato usato o consegnato
+
 ## Appunti Da Smistare
 
 - [ ] Aprire [[Durante il Gioco]] e copiare gli appunti grezzi nella sessione giocata
@@ -44,6 +49,6 @@ kanban-plugin: board
 
 %% kanban:settings
 ```
-{"kanban-plugin":"board","list-collapse":[false,false,false,false,false]}
+{"kanban-plugin":"board","list-collapse":[false,false,false,false,false,false]}
 ```
 %%
