@@ -18,7 +18,12 @@ const PATHS = {
     mappe: "Risorse/Mappe",
     audio: "Risorse/Audio",
     immagini: "Risorse/Immagini",
-    video: "Risorse/Video"
+    video: "Risorse/Video",
+    culture: "Mondi/Culture",
+    lingue: "Mondi/Lingue",
+    storia: "Mondi/Storia",
+    conflitti: "Mondi/Conflitti",
+    cosmologia: "Mondi/Cosmologia"
 };
 
 let pendingRoute = {};
@@ -540,6 +545,10 @@ async function chooseFactions(tp, message = "Fazioni collegate", context = {}) {
     return await chooseNotesByPath(tp, PATHS.fazioni, message, context);
 }
 
+async function chooseReligions(tp, message = "Religioni collegate", context = {}) {
+    return await chooseNotesByPath(tp, PATHS.religioni, message, context);
+}
+
 async function chooseObjects(tp, message = "Oggetti collegati", context = {}) {
     return await chooseNotesByPath(tp, PATHS.oggetti, message, context);
 }
@@ -661,6 +670,7 @@ module.exports = {
     choosePerson,
     choosePeople,
     chooseFactions,
+    chooseReligions,
     chooseObjects,
     chooseCreatures,
     chooseEncounters,

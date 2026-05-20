@@ -33,6 +33,14 @@ actions:
 ```
 
 ```meta-bind-button
+label: Atlante Del Mondo
+style: primary
+actions:
+  - type: open
+    link: "[[Atlante del Mondo]]"
+```
+
+```meta-bind-button
 label: Controllo Vault
 style: primary
 actions:
@@ -182,6 +190,36 @@ actions:
 ```
 
 ```meta-bind-button
+label: Nuova Cultura
+style: primary
+actions:
+  - type: templaterCreateNote
+    templateFile: "z.modelli/worldbuilding/Cultura.md"
+    folderPath: "Mondi/Culture"
+    open: true
+```
+
+```meta-bind-button
+label: Nuova Lingua
+style: primary
+actions:
+  - type: templaterCreateNote
+    templateFile: "z.modelli/worldbuilding/Lingua.md"
+    folderPath: "Mondi/Lingue"
+    open: true
+```
+
+```meta-bind-button
+label: Nuovo Conflitto
+style: primary
+actions:
+  - type: templaterCreateNote
+    templateFile: "z.modelli/worldbuilding/Conflitto.md"
+    folderPath: "Mondi/Conflitti"
+    open: true
+```
+
+```meta-bind-button
 label: Dispense
 style: primary
 actions:
@@ -200,8 +238,12 @@ const cards = [
   ["Mondi", count('"Mondi"', p => gdr.isReal(p) && p.categoria === "mondo" && p.stato !== "archiviata"), "Ambientazioni"],
   ["Personaggi", count('"Mondi/Personaggi"', notIndex), "Volti e legami"],
   ["Luoghi", count('"Mondi/Luoghi"', notIndex), "Dove succedono le cose"],
+  ["Culture", count('"Mondi/Culture"', notIndex), "Popoli e usanze"],
+  ["Lingue", count('"Mondi/Lingue"', notIndex), "Parlate e scritture"],
   ["Fazioni", count('"Mondi/Fazioni"', notIndex), "Poteri in movimento"],
   ["Religioni", count('"Mondi/Religioni"', notIndex), "Culti e divinita"],
+  ["Conflitti", count('"Mondi/Conflitti"', notIndex), "Guerre e crisi"],
+  ["Cosmologia", count('"Mondi/Cosmologia"', notIndex), "Piani e reami"],
   ["Creature", count('"Mondi/Creature"', notIndex), "Minacce e presenze"],
   ["Timeline", count('"Mondi/Timeline"', notIndex), "Eventi canonici"],
   ["Bozze", count('"Mondi"', p => gdr.isReal(p) && p.stato === "bozza"), "Da completare"]

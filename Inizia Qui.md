@@ -33,7 +33,7 @@ label: Costruisci Mondo
 style: primary
 actions:
   - type: open
-    link: "[[Worldbuilder Dashboard]]"
+    link: "[[Atlante del Mondo]]"
 ```
 
 ```meta-bind-button
@@ -65,7 +65,7 @@ label: Roadmap
 style: default
 actions:
   - type: open
-    link: "[[Risorse/Roadmap 0.4.0]]"
+    link: "[[Risorse/Roadmap 0.6.0]]"
 ```
 
 ## Primo Avvio
@@ -97,6 +97,7 @@ actions:
 - Consolidamento dopo sessione: [[Risorse/Post Sessione Guidato]].
 - Materiali della sessione attiva: [[Risorse/Materiali Al Tavolo]].
 - Mondo, luoghi, PNG e fazioni: [[Worldbuilder Dashboard]].
+- Ambientazioni grandi, culture, lingue e storia: [[Atlante del Mondo]].
 - Stato dinamico del mondo: [[Mondi/Stato del Mondo]].
 - Profili per nuove campagne: [[Risorse/Profili Campagna]].
 - Guide, mappe, media, tabelle e aiuto: [[Risorse/Risorse]].

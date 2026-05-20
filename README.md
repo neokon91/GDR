@@ -2,7 +2,7 @@
 
 Questo vault Obsidian aiuta a preparare e gestire campagne GDR fantasy in italiano: mondi, sessioni, PNG, luoghi, fazioni, missioni, incontri, oggetti e materiali da consegnare ai giocatori.
 
-Apri [[Inizia Qui]] per il primo avvio. Usa [[1. DM Dashboard]] per preparare, [[Worldbuilder Dashboard]] per costruire il mondo e [[Durante il Gioco]] durante la sessione.
+Apri [[Inizia Qui]] per il primo avvio. Usa [[1. DM Dashboard]] per preparare, [[Atlante del Mondo]] per costruire ambientazioni ricche e [[Durante il Gioco]] durante la sessione.
 
 ## Primi 5 Minuti
 
@@ -28,7 +28,7 @@ Se dashboard, pulsanti o tabelle non funzionano, apri [[Risorse/Primo Avvio Stru
 
 - `Inizia Qui`: percorso guidato per primo avvio, preparazione, gioco e worldbuilding.
 - `Campagne`: campagne attive, in pausa, concluse o archiviate.
-- `Mondi`: ambientazioni, luoghi, personaggi, fazioni, religioni, creature, oggetti e dispense.
+- `Mondi`: ambientazioni, luoghi, culture, lingue, storia, conflitti, religioni, creature, oggetti e dispense.
 - `Mondi/Sessioni`: preparazione e resoconti delle sessioni.
 - `Mondi/Timeline`: eventi canonici, rumor, leggende e conseguenze storicizzate.
 - `Mondi/Missioni`: incarichi, trame aperte e obiettivi.
@@ -45,6 +45,7 @@ Se dashboard, pulsanti o tabelle non funzionano, apri [[Risorse/Primo Avvio Stru
 - **Avventure** e **one-shot** stanno nella campagna quando sono legate a un gruppo o a una storia precisa.
 - Tabelle, mappe, dispense e materiali riutilizzabili in piu campagne stanno in `Risorse`.
 - [[Worldbuilder Dashboard]] mostra ora Atlante del Mondo, Poteri in Movimento, Relazioni PNG, Timeline Causale e Buchi Di Mondo: usali per trovare collegamenti mancanti, pressioni senza prossima mossa e lore canonica non ancora storicizzata.
+- [[Atlante del Mondo]] e la vista principale per worldbuilding tassonomico: geografia, culture, lingue, poteri, storia, conflitti e cosmologia.
 - [[Mondi/Stato del Mondo]] resta la vista operativa delle conseguenze: filtra per mondo o campagna e mostra cosa deve cambiare al tavolo.
 
 ## Uso Quotidiano

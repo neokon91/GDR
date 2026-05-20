@@ -1,5 +1,21 @@
 # Changelog
 
+## 0.5.0 - 2026-05-20
+
+### Aggiunto
+
+- [[Atlante del Mondo]] per worldbuilding tassonomico e ambientazioni grandi.
+- Nuove aree per [[Mondi/Culture/Culture]], [[Mondi/Lingue/Lingue]], [[Mondi/Storia/Storia]], [[Mondi/Conflitti/Conflitti]] e [[Mondi/Cosmologia/Cosmologia]].
+- Modelli guidati per cultura, lingua, era storica, conflitto e cosmologia.
+- [[Risorse/Worldbuilding Tassonomico]] come guida non tecnica alla costruzione di mondi ricchi.
+- [[Risorse/Roadmap 0.5.0]] completata e [[Risorse/Roadmap 0.6.0]] preparata.
+
+### Migliorato
+
+- [[Worldbuilder Dashboard]] collega l'Atlante e mostra conteggi per culture, lingue, conflitti e cosmologia.
+- [[Inizia Qui]] porta il worldbuilding avanzato su [[Atlante del Mondo]].
+- Controllo qualità aggiornato per le nuove categorie di ambientazione.
+
 ## 0.4.0 - 2026-05-20
 
 ### Aggiunto

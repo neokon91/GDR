@@ -1,10 +1,10 @@
 # Versione Vault
 
-Versione: `0.4.0`
+Versione: `0.5.0`
 
 Data: 2026-05-20
 
-Stato: onboarding non tecnico, consegna DM, calendario narrativo e materiali al tavolo pronti.
+Stato: atlante tassonomico, culture, lingue, storia, conflitti e cosmologia pronti.
 
 ## Compatibilità
 
