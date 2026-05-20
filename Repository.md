@@ -67,14 +67,6 @@ node z.automazioni/import_srd.js
 node z.automazioni/release_clean.js
 ```
 
-## Documenti Prodotto
-
-- [docs/STRATEGIA_PRODOTTO.md](docs/STRATEGIA_PRODOTTO.md)
-- [docs/INSTALLAZIONE.md](docs/INSTALLAZIONE.md)
-- [docs/STRUMENTI.md](docs/STRUMENTI.md)
-- [docs/COMPLETAMENTO_PLUGIN.md](docs/COMPLETAMENTO_PLUGIN.md)
-- [CONTRIBUTING.md](CONTRIBUTING.md)
-
 ## Regola Di Chiusura
 
 Ogni modifica strutturale deve passare:

@@ -11,7 +11,7 @@
 - `docs/UX_OPERATIVA.md` come direzione vincolante: niente nuove dashboard se non migliorano Prepara -> Gioca -> Aggiorna il mondo.
 - [[Hub/Party Control]] per PG, HP, missioni, inventario e flags durante la sessione.
 - [[Risorse/Quality Report]] come dashboard analytics per copertura, buchi operativi, sicurezza pubblicazione e materiale screenshot-ready.
-- `docs/PACKAGING_PRODOTTO.md` per screenshot, GIF, posizionamento e separazione core system-neutral / modulo SRD.
+- Rimossa documentazione prodotto ridondante: resta solo `docs/UX_OPERATIVA.md` come regola di sviluppo.
 
 ### Migliorato
 
@@ -22,6 +22,7 @@
 - README e checklist release evidenziano player portal, party control, quality report, screenshot e GIF.
 - `release:clean` genera un `LEGGIMI.md` utente piu completo e la documentazione include una pagina release pubblica pronta.
 - Roadmap, strategia prodotto e sviluppo vault ora mettono la riduzione della navigazione sopra nuove feature.
+- README, Repository, Release e Risorse/Release Pulita non linkano piu documenti superflui.
 
 ## 0.9.0 - 2026-05-20
 
@@ -47,7 +48,6 @@
 
 ### Aggiunto
 
-- Documentazione prodotto in `docs/`: strategia, installazione e matrice strumenti.
 - `CONTRIBUTING.md` e issue template GitHub per bug e feature request.
 - [[Risorse/Importare Mappe]] e import GeoJSON Azgaar verso bozze di luoghi.
 - [[Risorse/Roadmap/0.8.0|Roadmap 0.8.0]] per completamento prodotto prima della release ZIP iniziale.

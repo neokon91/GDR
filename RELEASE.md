@@ -54,7 +54,6 @@ Non contiene materiali di sviluppo repository, issue template GitHub, roadmap in
 - [[Motore Mondo Vivo]] mostra event propagation, faction dynamics, relationship graph e continuita aperte senza errori Dataview.
 - Le note demo non sono confuse con le note `Prova -`: la demo e contenuto dimostrativo, le prove sono collaudi tecnici.
 - Il README resta leggibile per utenti non tecnici.
-- [docs/INSTALLAZIONE.md](docs/INSTALLAZIONE.md) e [docs/STRUMENTI.md](docs/STRUMENTI.md) sono aggiornati.
 
 ## Dopo La Release
 

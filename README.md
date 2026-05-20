@@ -28,8 +28,6 @@ Apri [[Inizia Qui]] per il primo avvio. Il flusso principale e [[Risorse/Prepara
 7. Completa i cinque blocchi minimi della sessione.
 8. Apri **Gioca** quando vai al tavolo.
 
-Guida dettagliata: [docs/INSTALLAZIONE.md](docs/INSTALLAZIONE.md).
-
 ## Attivare L'Aspetto GDR
 
 1. Apri **Impostazioni > Aspetto > Snippet CSS**.
@@ -122,16 +120,6 @@ Se dashboard, pulsanti o tabelle non funzionano, apri [[Risorse/Primo Avvio Stru
 - Per creare una copia consegnabile, apri [[Risorse/Release Pulita]] o usa `npm run release:clean`.
 - Per importare mappe esterne come bozze, apri [[Risorse/Importare Mappe]] o usa `npm run import:azgaar`.
 - Non modificare manualmente le note in `SRD`: sono un riferimento regolamentare separato e possono essere rigenerate.
-
-## Prodotto E Community
-
-- Strategia prodotto: [docs/STRATEGIA_PRODOTTO.md](docs/STRATEGIA_PRODOTTO.md).
-- Packaging e asset: [docs/PACKAGING_PRODOTTO.md](docs/PACKAGING_PRODOTTO.md).
-- Installazione: [docs/INSTALLAZIONE.md](docs/INSTALLAZIONE.md).
-- Matrice strumenti: [docs/STRUMENTI.md](docs/STRUMENTI.md).
-- Completamento plugin per release ZIP: [docs/COMPLETAMENTO_PLUGIN.md](docs/COMPLETAMENTO_PLUGIN.md).
-- Pubblicazione community: [docs/PUBBLICAZIONE_COMMUNITY.md](docs/PUBBLICAZIONE_COMMUNITY.md).
-- Contribuire: [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Demo
 
