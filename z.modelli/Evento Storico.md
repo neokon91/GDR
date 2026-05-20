@@ -53,6 +53,12 @@
 > [!lettura] Evento
 >
 
+> [!lettura] Player Safe
+> Versione pubblica o raccontabile: `INPUT[text:player_safe]`
+
+> [!segreto]- DM
+> Causa reale, colpevoli o retcon: `INPUT[text:segreto]`
+
 ## Lettura Storica
 
 ### Cosa Accadde Davvero

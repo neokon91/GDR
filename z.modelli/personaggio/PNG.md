@@ -37,6 +37,12 @@
 > > [!segreto]- Segreto
 > > `=this.segreto`
 
+> [!lettura] Player Safe
+> Cosa i personaggi possono sapere: `INPUT[text:player_safe]`
+
+> [!segreto]- DM
+> Verita privata o leva nascosta: `INPUT[text:segreto]`
+
 > [!regia] Gestione
 > `BUTTON[durante-il-gioco-durante-il-gioco]`
 >

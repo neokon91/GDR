@@ -34,6 +34,12 @@
 > [!scena] Cosa si nota subito
 >
 
+> [!lettura] Player Safe
+> Cosa e noto a chi vive nel mondo: `INPUT[text:player_safe]`
+
+> [!segreto]- DM
+> Tabu, contraddizioni nascoste o verita scomode: `INPUT[text:segreto]`
+
 ## Nucleo Culturale
 
 ### Mito D'origine

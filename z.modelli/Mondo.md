@@ -32,6 +32,26 @@ const ready = checks.filter(([, value]) => ok(value)).length;
 dv.paragraph(ready === 6 ? "Codex pronto: puoi costruire articoli, mappe e timeline." : `Mancano ${6 - ready} blocchi del codex. Completa questi campi prima di creare altro.`);
 ```
 
+## Home Del Mondo
+
+> [!scena] Gancio
+> `=this.gancio`
+
+> [!regia] Tono E Conflitto
+> Tono: `=this.tono`
+>
+> Conflitto centrale: `=this.conflitto_centrale`
+
+> [!luogo] Codex Consultabile
+> Luoghi iconici: `=this.luoghi_iconici`
+>
+> Fazioni principali: `=this.fazioni_principali`
+>
+> Misteri pubblici: `=this.misteri_pubblici`
+
+> [!segreto]- DM
+> Segreti del mondo, verita nascoste e prossime mosse restano qui o nelle note collegate, non nella vista giocatori.
+
 >[!infobox|wiki]- Mondo
 > Stato:
 > `INPUT[inlineSelect(option(bozza, Bozza), option(pronto, Pronto), option(archiviata, Archiviata)):stato]`

@@ -38,6 +38,12 @@
 > > [!pericolo]- Tensione locale
 > > `=this.tensione`
 
+> [!lettura] Player Safe
+> Cosa si puo dire ai giocatori: `INPUT[text:player_safe]`
+
+> [!segreto]- DM
+> Segreti, verita nascoste e prossime mosse: `INPUT[text:segreto]`
+
 > [!regia] Gestione
 > `BUTTON[atlante-atlante-del-mondo-2]`
 >

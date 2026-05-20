@@ -25,6 +25,12 @@
 > [!regola] Cosa insegna
 >
 
+> [!lettura] Player Safe
+> Culto, simboli e precetti noti: `INPUT[text:player_safe]`
+
+> [!segreto]- DM
+> Verita divina, eresie o prezzo nascosto: `INPUT[text:segreto]`
+
 ## Segni E Simboli
 
 > [!indizio] Come si manifesta

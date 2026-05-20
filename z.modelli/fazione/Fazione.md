@@ -68,6 +68,12 @@
 >
 > Posta: `INPUT[text:posta]`
 
+> [!lettura] Player Safe
+> Volto pubblico: `INPUT[text:player_safe]`
+
+> [!segreto]- DM
+> Obiettivo nascosto: `INPUT[text:obiettivo_nascosto]`
+
 > [!timer] Se nessuno interviene
 > Innesco: `INPUT[text:innesco]`
 >

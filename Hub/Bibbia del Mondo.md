@@ -105,6 +105,16 @@ WHERE pubblico = true AND stato != "archiviata" AND !startswith(file.name, "Prov
 SORT categoria ASC, nome ASC
 LIMIT 30
 ```
+
+tab: Indice Codex
+
+```dataview
+TABLE categoria, tipo, stato, pubblico, mondo, luoghi, fazioni
+FROM "Mondi" OR "Risorse/Mappe"
+WHERE file.name != "Mondi" AND stato != "archiviata" AND !startswith(file.name, "Prova -") AND (!this.mondo_attivo OR mondo = this.mondo_attivo OR file.link = this.mondo_attivo)
+SORT categoria ASC, pubblico DESC, stato ASC, file.name ASC
+LIMIT 80
+```
 ````
 
 ## Buchi Del Codex
@@ -128,6 +138,23 @@ dv.pages('"Mondi"')
     ].forEach(([label, value]) => {
       if (!has(value)) rows.push([p.file.link, label]);
     });
+  });
+
+dv.pages('"Mondi/Luoghi" OR "Mondi/Fazioni" OR "Mondi/Personaggi" OR "Mondi/Culture" OR "Mondi/Religioni" OR "Mondi/Timeline"')
+  .where(p => gdr.isReal(p) && p.stato !== "archiviata")
+  .where(p => !worldPath || gdr.linkKey(p.mondo) === worldPath)
+  .forEach(p => {
+    const title = p.file.link;
+    const links = [
+      ...(Array.isArray(p.luoghi) ? p.luoghi : []),
+      ...(Array.isArray(p.fazioni) ? p.fazioni : []),
+      ...(Array.isArray(p.personaggi) ? p.personaggi : []),
+      ...(Array.isArray(p.missioni) ? p.missioni : []),
+      ...(Array.isArray(p.sessioni) ? p.sessioni : [])
+    ];
+    if (!has(p.gancio) && !has(p.impressione) && !has(p.vuole) && !has(p.obiettivo) && !has(p.causa)) rows.push([title, "senza gancio o uso narrativo"]);
+    if (!links.length && p.categoria !== "mondo") rows.push([title, "senza collegamenti operativi"]);
+    if (!has(p.uso_al_tavolo) && !has(p.promessa_al_tavolo) && !has(p.prossima_mossa) && !has(p.scene)) rows.push([title, "senza uso al tavolo"]);
   });
 
 if (!rows.length) dv.paragraph("Codex essenziale completo.");
