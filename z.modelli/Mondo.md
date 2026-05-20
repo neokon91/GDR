@@ -1,6 +1,37 @@
 <% await tp.user.mondo(tp) %>
 # `=this.nome`
 
+> [!scena] Codex In 6 Campi
+> Compila questi campi prima di aprire atlanti, timeline o fazioni. Se non sono chiari, il mondo non e ancora giocabile.
+>
+> | Blocco | Campo |
+> | --- | --- |
+> | Gancio | `INPUT[text:gancio]` |
+> | Tono | `INPUT[text:tono]` |
+> | Conflitto centrale | `INPUT[text:conflitto_centrale]` |
+> | Luoghi iconici | `INPUT[inlineList:luoghi_iconici]` |
+> | Fazioni principali | `INPUT[inlineList:fazioni_principali]` |
+> | Misteri pubblici | `INPUT[inlineList:misteri_pubblici]` |
+>
+> Stato: `INPUT[inlineSelect(option(bozza, Bozza), option(pronto, Pronto), option(archiviata, Archiviata)):stato]`
+>
+> `BUTTON[atlante-del-mondo-atlante-del-mondo]`
+
+```dataviewjs
+const current = dv.current();
+const checks = [
+  ["Gancio", current.gancio],
+  ["Tono", current.tono],
+  ["Conflitto", current.conflitto_centrale],
+  ["Luoghi", current.luoghi_iconici],
+  ["Fazioni", current.fazioni_principali],
+  ["Misteri", current.misteri_pubblici]
+];
+const ok = value => Array.isArray(value) ? value.length > 0 : String(value ?? "").trim().length > 0;
+const ready = checks.filter(([, value]) => ok(value)).length;
+dv.paragraph(ready === 6 ? "Codex pronto: puoi costruire articoli, mappe e timeline." : `Mancano ${6 - ready} blocchi del codex. Completa questi campi prima di creare altro.`);
+```
+
 >[!infobox|wiki]- Mondo
 > Stato:
 > `INPUT[inlineSelect(option(bozza, Bozza), option(pronto, Pronto), option(archiviata, Archiviata)):stato]`
@@ -22,6 +53,12 @@
 >
 > Promessa:
 > `INPUT[text:premessa]`
+>
+> Gancio:
+> `=this.gancio`
+>
+> Conflitto centrale:
+> `=this.conflitto_centrale`
 >
 > Promesse narrative:
 > `INPUT[list:promesse_narrative]`

@@ -29,6 +29,13 @@ Scegli una cosa sola. Il vault deve farti produrre una sessione, giocarla o aggi
 >
 > `BUTTON[fuori-scena-hub-cosa-succede-fuori-scena-cosa-succede-fuori-scena]`
 
+> [!luogo] Codex Mondo
+> Output: mondo consultabile con gancio, tono, conflitto, luoghi, fazioni e misteri.
+>
+> `BUTTON[nuovo-mondo-z-modelli-mondo-md]`
+>
+> `BUTTON[bibbia-del-mondo-bibbia-del-mondo-2]`
+
 ## Prossima Azione
 
 ```dataviewjs
@@ -56,8 +63,6 @@ dv.table(["Controllo", "Stato", "Azione"], checks.map(([label, ok, text]) => [la
 > `BUTTON[vista-giocatori-hub-vista-giocatori-vista-giocatori]`
 >
 > `BUTTON[party-control-hub-party-control]`
->
-> `BUTTON[costruisci-mondo-hub-atlante-del-mondo-atlante-del-mondo]`
 >
 > `BUTTON[quality-report-risorse-quality-report]`
 >

@@ -19,6 +19,7 @@
 - [[Inizia Qui]] e stato ridotto al flusso principale Prepara -> Gioca -> Aggiorna il mondo, con strumenti avanzati separati.
 - [[Risorse/Preparazione Sessione]] ora richiede cinque blocchi concreti: obiettivo, prima scena, scelta, pressione e materiale.
 - Il template [[z.modelli/dm/Sessione]] ora apre subito con i cinque campi compilabili e un controllo che dice cosa manca senza rimandare ad altre note.
+- Il template [[z.modelli/Mondo]] ora apre con un Codex in 6 campi e [[Bibbia del Mondo]] diventa un Codex consultabile tipo World Anvil locale.
 - [[Atlante del Mondo]] include una tab mappa con mappe pubbliche/DM, luoghi con coordinate/layer e rotte.
 - README e checklist release evidenziano player portal, party control, quality report, screenshot e GIF.
 - `release:clean` genera un `LEGGIMI.md` utente piu completo e la documentazione include una pagina release pubblica pronta.

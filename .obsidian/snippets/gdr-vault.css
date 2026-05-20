@@ -1064,6 +1064,10 @@ body .markdown-source-view.tavolo {
   border-left: 4px solid rgb(var(--gdr-warm-rgb));
 }
 
+.gdr-kind-mondo {
+  border-left: 4px solid rgb(var(--gdr-timeline-rgb));
+}
+
 .gdr-kind-ready {
   border-left: 4px solid rgb(var(--gdr-nature-rgb));
 }
