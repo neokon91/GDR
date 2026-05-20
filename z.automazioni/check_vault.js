@@ -97,6 +97,26 @@ const REQUIRED_LAYER_FILES = [
     "z.engine/gdr_views.js",
     "z.engine/session_views.js"
 ];
+const DEMO_REQUIRED_FILES = [
+    "Dev/Demo Finale.md",
+    "Mondi/Brumafonda Demo.md",
+    "Campagne/Campagna - Sale Sotto La Nebbia.md",
+    "Mondi/Culture/Custodi Delle Saline.md",
+    "Mondi/Fazioni/Consorzio Del Sale Nero.md",
+    "Mondi/Religioni/Culto Della Lanterna Bassa.md",
+    "Mondi/Luoghi/Porto Di Brumafonda.md",
+    "Mondi/Mercati/Mercato Del Sale Nero.md",
+    "Risorse/Mappe/Mappa Pubblica Di Brumafonda.md",
+    "Mondi/Dispense/Avviso Della Dogana Di Brumafonda.md",
+    "Mondi/Missioni/Recuperare La Campana Sommersa.md",
+    "Mondi/Sessioni/2026-05-28 - La Campana Nella Nebbia.md",
+    "Mondi/Timeline/La Marea Ha Preso Il Faro Vecchio.md"
+];
+const DEMO_PUBLIC_FILES = [
+    "Risorse/Mappe/Mappa Pubblica Di Brumafonda.md",
+    "Mondi/Dispense/Avviso Della Dogana Di Brumafonda.md",
+    "Mondi/Sessioni/2026-05-28 - La Campana Nella Nebbia.md"
+];
 const REQUIRED_META_BIND_INPUT_TEMPLATES = [
     "mondo",
     "stato",
@@ -928,6 +948,63 @@ const generatedDrafts = realEntries
 
 if (generatedDrafts.length > 12) {
     warnings.push(`Inbox/Generati: ${generatedDrafts.length} bozze generate da smistare`);
+}
+
+for (const fileRel of DEMO_REQUIRED_FILES) {
+    if (!markdownMeta.has(fileRel)) {
+        errors.push(`Demo finale: file mancante ${fileRel}`);
+    }
+}
+
+const demoSession = markdownMeta.get("Mondi/Sessioni/2026-05-28 - La Campana Nella Nebbia.md");
+if (demoSession) {
+    if (demoSession.pubblico !== true) {
+        errors.push("Demo finale: la sessione demo deve essere pubblica per Vista Giocatori");
+    }
+    if (!hasValue(demoSession.recap_pubblico)) {
+        errors.push("Demo finale: la sessione demo non ha recap_pubblico");
+    }
+    if (hasPrivatePublicText(demoSession.recap_pubblico)) {
+        errors.push("Demo finale: recap_pubblico della sessione contiene termini da DM");
+    }
+    if (!hasAny(demoSession, ["mappe", "dispense", "missioni", "luoghi"])) {
+        errors.push("Demo finale: la sessione non collega mappa, dispensa, missione o luogo");
+    }
+}
+
+const demoMap = markdownMeta.get("Risorse/Mappe/Mappa Pubblica Di Brumafonda.md");
+if (demoMap) {
+    if (demoMap.pubblico !== true) {
+        errors.push("Demo finale: la mappa demo deve essere pubblica");
+    }
+    if (!hasAny(demoMap, ["player_safe", "cosa_mostrare", "luoghi", "luogo"])) {
+        errors.push("Demo finale: la mappa pubblica non ha testo o luoghi player-safe");
+    }
+}
+
+const demoHandout = markdownMeta.get("Mondi/Dispense/Avviso Della Dogana Di Brumafonda.md");
+if (demoHandout) {
+    if (demoHandout.pubblico !== true || demoHandout.stato !== "pronto") {
+        errors.push("Demo finale: la dispensa demo deve essere pronta e pubblica");
+    }
+    if (!hasValue(demoHandout.player_safe)) {
+        errors.push("Demo finale: la dispensa pubblica non ha player_safe");
+    }
+}
+
+for (const fileRel of DEMO_PUBLIC_FILES) {
+    const fm = markdownMeta.get(fileRel);
+    if (!fm) continue;
+    if (hasAny(fm, ["segreti", "prossima_mossa", "mosse_segrete", "verita_nascosta"])) {
+        errors.push(`Demo finale: file pubblico con campi DM evidenti ${fileRel}`);
+    }
+}
+
+const playerViewText = fs.existsSync(path.join(ROOT, "Hub/Vista Giocatori.md"))
+    ? fs.readFileSync(path.join(ROOT, "Hub/Vista Giocatori.md"), "utf8")
+    : "";
+if (!playerViewText.includes("renderPlayerPortalStatus") || !playerViewText.includes("renderPublicSafety")) {
+    errors.push("Demo finale: Vista Giocatori non espone stato portale e controllo sicurezza");
 }
 
 const activeSessions = realEntries
