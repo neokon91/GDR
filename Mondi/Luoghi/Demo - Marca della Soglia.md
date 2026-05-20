@@ -12,6 +12,13 @@ canonico: true
 stato_canonico: canonico
 mondo: "[[Demo - Terre della Soglia]]"
 luogo_padre: "[[Demo - Valle di Brumafonda]]"
+coordinates:
+  - "45.4468"
+  - "12.3255"
+icon: "shield"
+color: "#f59e0b"
+layer_mappa: politica
+tipo_mappa: territorio
 governante: "[[Demo - Sella Neraluce]]"
 capitale: "[[Demo - Ponte delle Campane]]"
 stabilita: 4

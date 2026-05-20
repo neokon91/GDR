@@ -42,6 +42,43 @@
 > > - Danno improvvisato leggero: `dice: 1d6`
 > > - Danno improvvisato serio: `dice: 2d6`
 
+> [!regia] Gestione
+> ```meta-bind-button
+> label: Iniziativa
+> style: primary
+> actions:
+>   - type: open
+>     link: "[[Risorse/Iniziativa e Combattimenti]]"
+> ```
+>
+> ```meta-bind-button
+> label: Durante Il Gioco
+> style: primary
+> actions:
+>   - type: open
+>     link: "[[Durante il Gioco]]"
+> ```
+>
+> ```meta-bind-button
+> label: Nuova Creatura
+> style: default
+> actions:
+>   - type: templaterCreateNote
+>     templateFile: "z.modelli/Creatura.md"
+>     folderPath: "Mondi/Creature"
+>     open: true
+> ```
+>
+> ```meta-bind-button
+> label: Nuova Mappa Zoom
+> style: default
+> actions:
+>   - type: templaterCreateNote
+>     templateFile: "z.modelli/mappe/Mappa Zoom.md"
+>     folderPath: "Risorse/Mappe"
+>     open: true
+> ```
+
 
 ````tabs
 tab: Scena
@@ -50,8 +87,6 @@ tab: Scena
 
 > [!missione] Obiettivo
 >
-
-tab: Creature
 
 tab: Creature
 

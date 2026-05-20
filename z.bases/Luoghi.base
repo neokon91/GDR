@@ -1,0 +1,57 @@
+filters:
+  and:
+    - file.folder == "Mondi/Luoghi"
+    - file.name != "Luoghi"
+    - '!file.name.startsWith("Prova -")'
+properties:
+  nome:
+    displayName: Nome
+  stato:
+    displayName: Stato
+  tipo:
+    displayName: Tipo
+  tipologia:
+    displayName: Tipologia
+  mondo:
+    displayName: Mondo
+  luogo_padre:
+    displayName: Luogo padre
+  pericolo:
+    displayName: Pericolo
+  pressione:
+    displayName: Pressione
+  governante:
+    displayName: Governante
+views:
+  - type: table
+    name: Attivi
+    filters:
+      and:
+        - stato != "archiviata"
+    order:
+      - nome
+      - stato
+      - tipo
+      - tipologia
+      - pericolo
+      - pressione
+      - luogo_padre
+      - governante
+    sort:
+      - property: pericolo
+        direction: DESC
+      - property: nome
+        direction: ASC
+  - type: table
+    name: Gerarchia
+    order:
+      - nome
+      - tipo
+      - stato
+      - luogo_padre
+      - mondo
+    sort:
+      - property: luogo_padre
+        direction: ASC
+      - property: nome
+        direction: ASC

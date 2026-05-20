@@ -15,6 +15,7 @@ const escapeHtml = value => String(value ?? "").replace(/[&<>"']/g, c => ({ "&":
 
 const cards = [
   ["Idee da smistare", count('"Inbox"', p => p.file.name !== "Inbox" && !["smistata", "archiviata"].includes(p.stato)), "Decidi se diventano mondo"],
+  ["Bozze generate", count('"Inbox/Generati"', p => p.plugin === "fantasy-content-generator" && p.stato === "bozza"), "Spunti da rivedere"],
   ["Sessioni da preparare", count('"Mondi/Sessioni"', p => p.stato === "preparazione"), "Da rifinire"],
   ["Materiale pronto", count('"Mondi/Incontri" OR "Mondi/Dispense" OR "Mondi/Oggetti"', p => p.stato === "pronto"), "Usabile subito"],
   ["Missioni aperte", count('"Mondi/Missioni"', p => ["proposta", "accettata", "in corso"].includes(p.stato)), "Scelte vive"],
@@ -39,6 +40,7 @@ const escapeHtml = value => String(value ?? "").replace(/[&<>"']/g, c => ({ "&":
 const internalLink = file => `<a class="internal-link" data-href="${escapeHtml(file.path)}" href="${escapeHtml(file.path)}">${escapeHtml(file.name)}</a>`;
 
 const items = [
+  ...dv.pages('"Inbox/Generati"').where(p => !String(p.file.name).startsWith("Prova -") && p.plugin === "fantasy-content-generator" && p.stato === "bozza").map(p => [p, "Bozza generata"]).array(),
   ...dv.pages('"Inbox"').where(p => !String(p.file.name).startsWith("Prova -") && p.file.name !== "Inbox" && !["smistata", "archiviata"].includes(p.stato)).map(p => [p, "Inbox"]).array(),
   ...dv.pages('"Mondi/Sessioni"').where(p => !String(p.file.name).startsWith("Prova -") && p.stato === "preparazione").map(p => [p, "Sessione"]).array(),
   ...dv.pages('"Mondi/Missioni"').where(p => !String(p.file.name).startsWith("Prova -") && ["proposta", "accettata", "in corso"].includes(p.stato)).map(p => [p, "Missione"]).array(),
@@ -66,6 +68,32 @@ TABLE tipo, stato, collegamenti
 FROM "Inbox"
 WHERE file.name != "Inbox" AND stato != "smistata" AND stato != "archiviata" AND !startswith(file.name, "Prova -")
 SORT file.ctime DESC
+```
+
+## Bozze Generate
+
+```meta-bind-button
+label: Smistamento Bozze Generate
+style: primary
+actions:
+  - type: open
+    link: "[[Risorse/Smistamento Bozze Generate]]"
+```
+
+```dataview
+TABLE categoria, tipo, generatore, mondo, luogo, creato
+FROM "Inbox/Generati"
+WHERE plugin = "fantasy-content-generator" AND stato = "bozza" AND !startswith(file.name, "Prova -")
+SORT creato ASC, file.ctime ASC
+```
+
+## Mappe Da Rendere Giocabili
+
+```dataview
+TABLE uso, stato, mondo, luogo, luoghi
+FROM "Risorse/Mappe"
+WHERE file.name != "Mappe" AND !startswith(file.name, "Prova -") AND stato != "archiviata" AND (uso = "zoom" OR uso = "esagoni" OR uso = "dungeon" OR uso = "scena") AND (stato != "pronto" OR (!luogo AND !luoghi))
+SORT uso ASC, file.mtime DESC
 ```
 
 ## Sessioni Da Preparare
@@ -201,10 +229,52 @@ if (!rows.length) {
 }
 ```
 
+### Configurazione Calendarium
+
+```dataviewjs
+const hasText = value => String(value ?? "").trim().length > 0;
+let data = null;
+try {
+  data = JSON.parse(await app.vault.adapter.read(".obsidian/plugins/calendarium/data.json"));
+} catch (error) {
+  dv.paragraph("Configurazione Calendarium non leggibile.");
+}
+
+if (data) {
+  const calendars = Array.isArray(data.calendars) ? data.calendars : Object.values(data.calendars ?? {});
+  const names = new Set(calendars.flatMap(c => [c.name, c.id]).filter(Boolean).map(x => String(x).toLowerCase()));
+  const dated = dv.pages('"Mondi" OR "Campagne" OR "Inbox"')
+    .where(p => !String(p.file.name).startsWith("Prova -") && p.stato !== "archiviata" && hasText(p["fc-date"]));
+  const issues = [];
+
+  if (!calendars.length && dated.length) {
+    issues.push(["Calendarium", "nessun calendario salvato nella configurazione plugin", `${dated.length} note hanno fc-date`]);
+  }
+
+  if (calendars.length) {
+    dated
+      .where(p => hasText(p["fc-calendar"]) && !names.has(String(p["fc-calendar"]).toLowerCase()))
+      .forEach(p => issues.push([p.file.link, "fc-calendar non presente in Calendarium", p["fc-calendar"]]));
+  }
+
+  if (!issues.length) {
+    dv.paragraph("Calendarium allineato con le note datate.");
+  } else {
+    dv.table(["Elemento", "Problema", "Dettaglio"], issues);
+  }
+}
+```
+
 ### Pronti Ma Incompleti
 
 ```dataviewjs
 const rows = [
+  ...dv.pages('"Inbox/Generati"')
+    .where(p => !String(p.file.name).startsWith("Prova -") && p.plugin === "fantasy-content-generator" && p.stato === "bozza" && (!p.mondo && !p.luogo))
+    .map(p => [p.file.link, "Bozza generata senza mondo o luogo"]).array(),
+  ...dv.pages('"Risorse/Mappe"')
+    .where(p => !String(p.file.name).startsWith("Prova -") && p.file.name !== "Mappe" && ["zoom", "esagoni", "dungeon", "scena"].includes(p.uso) && p.stato === "pronto" && (!p.mondo || (!p.luogo && !dv.array(p.luoghi).length)))
+    .map(p => [p.file.link, "Mappa pronta senza mondo o luogo/luoghi"]).array(),
   ...dv.pages('"Mondi/Incontri"')
     .where(p => !String(p.file.name).startsWith("Prova -") && p.stato === "pronto" && !dv.array(p.creature).length)
     .map(p => [p.file.link, "Incontro pronto senza creature"]).array(),

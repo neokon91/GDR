@@ -12,6 +12,8 @@ Questa pagina spiega quali strumenti Obsidian sono necessari al prodotto.
 | JS Engine | Alcuni blocchi e logiche avanzate. |
 | Metadata Menu | Campi guidati e modifica piu semplice. |
 | Homepage | Apertura su `Inizia Qui`. |
+| Workspaces | Layout di lavoro per tavolo, worldbuilding e manutenzione. |
+| Bookmarks | Accesso rapido alle pagine vive. |
 
 ## Consigliati
 
@@ -29,7 +31,7 @@ Questa pagina spiega quali strumenti Obsidian sono necessari al prodotto.
 | --- | --- |
 | Dice Roller | Tiri rapidi e tabelle casuali. |
 | Fantasy Statblocks | Compatibilita statblock fantasy. |
-| Initiative Tracker | Supporto incontri. |
+| Initiative Tracker | Incontri di combattimento pronti con blocchi `encounter`, vista operativa e Statblocks. |
 | Calendarium | Date del mondo e scadenze narrative. |
 | TTRPG Tools: Maps | Mappe interattive se configurate. |
 | Hex Cartographer | Mappe esagonali per regioni e viaggi. |
@@ -38,10 +40,23 @@ Questa pagina spiega quali strumenti Obsidian sono necessari al prodotto.
 
 | Strumento | Serve per |
 | --- | --- |
-| Excalidraw | Mappe relazionali e schemi. |
+| Excalidraw | Mappe relazionali, fronti, reti di indizi e scene modificabili. |
+| Advanced Canvas | Canvas strutturali di note, gruppi e connessioni. |
 | Media Extended | Audio e video con timestamp. |
+| Linter | Supporto sviluppo manuale per pulizia note controllata. |
 | Advanced Tables | Editing tabelle piu comodo. |
 | BRAT | Test di strumenti beta. |
+
+## Candidati Da Valutare
+
+| Strumento | Decisione |
+| --- | --- |
+| Bases | Pilota avviato in `z.bases` come vista accessibile sopra i metadati del vault, senza sostituire Dataview. |
+| Maps per Bases | Installato come `maps` e collegato a `z.bases/Atlante Mappe.base` per marker basati su coordinate. |
+| Tasks | Incluso come supportato per preparazione, post-sessione e backlog DM; usa global filter `#task` e non sostituisce missioni narrative o clock. |
+| QuickAdd | Evitare per ora: sovrappone Templater, Meta Bind e script interni. |
+| Commander | Opzionale UX per esporre comandi utili nella toolbar, non core. |
+| Leaflet | Non prioritario: vicino a TTRPG Tools: Maps e meno adatto alla release base. |
 
 ## Release ZIP
 

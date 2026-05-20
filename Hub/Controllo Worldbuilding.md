@@ -41,6 +41,14 @@ actions:
     link: "[[Bibbia del Mondo]]"
 ```
 
+```meta-bind-button
+label: Economia E Rotte
+style: default
+actions:
+  - type: open
+    link: "[[Economia E Rotte]]"
+```
+
 ```dataviewjs
 const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));
 const current = dv.current();
@@ -104,8 +112,28 @@ add('"Mondi/Segreti"', [
   { area: "Segreti", label: "segreto senza verità profonda", test: p => !hasLinks(p.verita_profonda) },
   { area: "Segreti", label: "segreto senza livelli di rivelazione", test: p => !hasLinks(p.indizi_deboli) && !hasLinks(p.indizi_forti) && !hasLinks(p.prove_decisive) }
 ]);
+add('"Mondi/Rotte"', [
+  { area: "Rotte", label: "rotta senza rischio", test: p => !hasLinks(p.rischi) },
+  { area: "Rotte", label: "rotta senza controllore", test: p => !hasLinks(p.fazioni_controllanti) && !hasLinks(p.fazioni) },
+  { area: "Rotte", label: "rotta senza risorse", test: p => !hasLinks(p.risorse_trasportate) && !hasLinks(p.risorse) },
+  { area: "Rotte", label: "rotta bloccata senza conseguenze", test: p => ["chiusa", "interrotta", "maledetta", "contesa"].includes(String(p.stato_rotta ?? "")) && !hasLinks(p.conseguenze_se_bloccata) && !hasLinks(p.conseguenze) }
+]);
+add('"Mondi/Risorse"', [
+  { area: "Risorse", label: "risorsa senza luogo", test: p => !hasLinks(p.luoghi) && !hasLinks(p.regioni) },
+  { area: "Risorse", label: "risorsa senza controllore", test: p => !hasLinks(p.fazioni_controllanti) && !hasLinks(p.fazioni) },
+  { area: "Risorse", label: "risorsa senza uso narrativo", test: p => !has(p.uso_narrativo) && !hasLinks(p.usi) }
+]);
+add('"Mondi/Mercati"', [
+  { area: "Mercati", label: "mercato senza luogo", test: p => !has(p.luogo) && !hasLinks(p.luoghi) },
+  { area: "Mercati", label: "mercato senza risorse", test: p => !hasLinks(p.risorse) },
+  { area: "Mercati", label: "mercato senza rischio o pedaggio", test: p => !hasLinks(p.rischi) && !hasLinks(p.pedaggi) }
+]);
+add('"Mondi/Compendium"', [
+  { area: "Compendium", label: "elemento senza cultura o regione", test: p => !hasLinks(p.culture) && !hasLinks(p.regioni) && !hasLinks(p.luoghi) },
+  { area: "Compendium", label: "elemento senza uso narrativo", test: p => !has(p.uso_narrativo) && !hasLinks(p.usi) && !hasLinks(p.missioni) }
+]);
 
-const stats = ["Mondo", "Culture", "Lingue", "Luoghi", "Cosmologia", "Storia", "Conflitti", "Relazioni", "Segreti"]
+const stats = ["Mondo", "Culture", "Lingue", "Luoghi", "Cosmologia", "Storia", "Conflitti", "Relazioni", "Segreti", "Rotte", "Risorse", "Mercati", "Compendium"]
   .map(area => [area, countIssues(area), "Buchi di profondità"]);
 const grid = dv.el("div", "", { cls: "gdr-stat-grid" });
 grid.innerHTML = stats.map(([label, value, hint]) => `
@@ -121,4 +149,94 @@ if (!issueRows.length) {
 } else {
   dv.table(["Nota", "Area", "Cosa manca", "Stato"], issueRows.slice(0, 80));
 }
+```
+
+## Controllo Strutturale Vault
+
+```dataviewjs
+const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));
+const current = dv.current();
+const world = gdr.linkKey(current.mondo_attivo);
+const asArray = value => dv.array(value ?? []).array();
+const has = value => Array.isArray(value) ? value.length > 0 : String(value ?? "").trim().length > 0;
+const real = p => gdr.isReal(p) && p.stato !== "archiviata" && p.stato !== "ignorata";
+const matchesWorld = p => !world || gdr.linkKey(p.mondo) === world || p.file.path === world;
+const pages = dv.pages('"Mondi" OR "Inbox"').where(p => real(p) && matchesWorld(p));
+const linkFields = ["mondo", "luogo", "luogo_padre", "partenza", "arrivo", "luoghi", "regioni", "culture", "lingue", "religioni", "fazioni", "fazioni_controllanti", "personaggi", "missioni", "conflitti", "sessioni", "relazioni", "risorse", "risorse_trasportate", "rotte", "mercati", "propaga_a", "entita_impattate", "indizi", "segreti"];
+const linkCount = p => linkFields.reduce((total, key) => total + asArray(p[key]).length + (!Array.isArray(p[key]) && has(p[key]) ? 1 : 0), 0);
+const unresolved = app.metadataCache.unresolvedLinks ?? {};
+const unresolvedRows = Object.entries(unresolved)
+  .flatMap(([source, targets]) => Object.keys(targets).map(target => [dv.fileLink(source), target, targets[target]]))
+  .filter(row => !String(row[0]).includes("SRD/"))
+  .slice(0, 40);
+const table = (title, columns, rows, empty = "Nessun problema evidente.") => {
+  dv.header(3, title);
+  if (!rows.length) dv.paragraph(empty);
+  else dv.table(columns, rows);
+};
+
+table(
+  "Note Isolate O Poco Collegate",
+  ["Nota", "Categoria", "Tipo", "Connessioni", "Stato"],
+  pages
+    .where(p => p.file.name !== "Mondo" && linkCount(p) < 2)
+    .sort(p => linkCount(p), "asc")
+    .limit(30)
+    .map(p => [p.file.link, p.categoria ?? "", p.tipo ?? "", linkCount(p), p.stato ?? ""])
+    .array()
+);
+
+table(
+  "Link Non Creati",
+  ["Origine", "Link mancante", "Occorrenze"],
+  unresolvedRows,
+  "Nessun link non creato rilevato dalla cache Dataview/Obsidian."
+);
+
+table(
+  "Schede Senza Mondo",
+  ["Nota", "Categoria", "Tipo", "Stato"],
+  pages
+    .where(p => !has(p.mondo) && !["risorsa", "srd"].includes(String(p.categoria ?? "")) && !["Mondo", "Stato del Mondo"].includes(p.file.name))
+    .limit(30)
+    .map(p => [p.file.link, p.categoria ?? "", p.tipo ?? "", p.stato ?? ""])
+    .array()
+);
+
+table(
+  "Elementi Pronti Ma Mai Usati",
+  ["Nota", "Categoria", "Tipo", "Stato"],
+  pages
+    .where(p => p.stato === "pronto" && !has(p.sessioni) && !has(p.missioni) && !has(p.conflitti) && !has(p.propaga_a))
+    .limit(30)
+    .map(p => [p.file.link, p.categoria ?? "", p.tipo ?? "", p.stato ?? ""])
+    .array()
+);
+
+table(
+  "Segreti Senza Indizi",
+  ["Segreto", "Verità", "Stato"],
+  dv.pages('"Mondi/Segreti"')
+    .where(p => real(p) && matchesWorld(p) && !has(p.indizi_deboli) && !has(p.indizi_forti) && !has(p.prove_decisive) && !has(p.indizi))
+    .map(p => [p.file.link, p.verita_profonda ?? p.segreti ?? "", p.stato ?? ""])
+    .array()
+);
+
+table(
+  "Eventi Senza Conseguenze",
+  ["Evento", "Data", "Cause", "Stato"],
+  dv.pages('"Mondi/Timeline" OR "Mondi/Storia"')
+    .where(p => real(p) && matchesWorld(p) && (p.categoria === "evento storico" || has(p.data_mondo)) && !has(p.conseguenze) && !has(p.effetti))
+    .map(p => [p.file.link, p.data_mondo ?? "", p.cause ?? p.causa ?? "", p.stato ?? p.stato_canonico ?? ""])
+    .array()
+);
+
+table(
+  "Culture Senza Luoghi, Lingue O Religioni",
+  ["Cultura", "Luoghi", "Lingue", "Religioni"],
+  dv.pages('"Mondi/Culture"')
+    .where(p => real(p) && matchesWorld(p) && (!has(p.luoghi) || !has(p.lingue) || !has(p.religioni)))
+    .map(p => [p.file.link, p.luoghi ?? [], p.lingue ?? [], p.religioni ?? []])
+    .array()
+);
 ```

@@ -19,6 +19,9 @@ stato: pronto
 > - Scoperta esagono: `dice: [[Risorse/Tabelle/Tabelle#^scoperte-esagono]]`
 > - Reazione fazione: `dice: [[Risorse/Tabelle/Tabelle#^reazioni-fazione]]`
 > - Conseguenza post-sessione: `dice: [[Risorse/Tabelle/Tabelle#^conseguenze-post-sessione]]`
+> - Festa locale: `dice: [[Risorse/Tabelle/Worldbuilding Generatori#^festa-locale]]`
+> - Rumor politico: `dice: [[Risorse/Tabelle/Worldbuilding Generatori#^rumor-politico]]`
+> - Problema commerciale: `dice: [[Risorse/Tabelle/Worldbuilding Generatori#^problema-commerciale]]`
 
 ## Complicazioni
 

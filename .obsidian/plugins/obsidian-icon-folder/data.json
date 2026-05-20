@@ -38,7 +38,7 @@
   "VERSION.md": "LiBadgeCheck",
   "CHANGELOG.md": "LiListChecks",
   "RELEASE.md": "LiPackageCheck",
-  "1. DM Dashboard.md": "LiHome",
+  "Hub/1. DM Dashboard.md": "LiHome",
   "Inbox": "LiInbox",
   "Inbox/Inbox.md": "LiInbox",
   "Campagne": "LiScrollText",

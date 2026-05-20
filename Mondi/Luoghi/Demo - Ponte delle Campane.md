@@ -9,6 +9,13 @@ stato: minacciato
 canonico: true
 mondo: "[[Demo - Terre della Soglia]]"
 luogo_padre: "[[Demo - Valle di Brumafonda]]"
+coordinates:
+  - "45.4408"
+  - "12.3155"
+icon: "landmark"
+color: "#ef4444"
+layer_mappa: politica
+tipo_mappa: luogo
 governante: "[[Demo - Odran il Campanaro]]"
 pericolo: 8
 stabilita: 3

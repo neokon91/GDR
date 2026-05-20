@@ -15,14 +15,15 @@ Questa nota e tecnica. Serve solo a chi cura il vault, non al DM che lo usa per 
 | Percorso | Contiene | Regola pratica |
 | --- | --- | --- |
 | `Inizia Qui.md` | onboarding non tecnico | Deve restare la porta d'ingresso. |
-| `1. DM Dashboard.md` | preparazione e vista DM | Non spostare senza aggiornare link, Homepage e documentazione. |
-| `Durante il Gioco.md` | schermata al tavolo | Deve restare rapida, non enciclopedica. |
-| `Atlante del Mondo.md` | worldbuilding strutturale | Porta principale per ambientazioni grandi. |
-| `Geopolitical Dashboard.md` | geopolitica operativa | Stati, confini, risorse e relazioni diplomatiche. |
-| `Campagna da Ambientazione.md` | da mondo a campagna | Collega regioni e conflitti al gioco. |
-| `Vista Giocatori.md` | materiale condivisibile | Non deve mostrare segreti o prossime mosse DM. |
-| `Worldbuilder Dashboard.md` | costruzione mondo avanzata | Deve mostrare relazioni, buchi e pressioni, non solo archivi. |
-| `Motore Mondo Vivo.md` | stato sistemico del mondo | Deve mostrare propagazione, causalita, faction dynamics e continuita narrativa. |
+| `Hub/` | dashboard e viste principali | Tiene la root pulita senza nascondere gli ingressi operativi. |
+| `Hub/1. DM Dashboard.md` | preparazione e vista DM | Non spostare senza aggiornare link, Homepage e documentazione. |
+| `Hub/Durante il Gioco.md` | schermata al tavolo | Deve restare rapida, non enciclopedica. |
+| `Hub/Atlante del Mondo.md` | worldbuilding strutturale | Porta principale per ambientazioni grandi. |
+| `Hub/Geopolitical Dashboard.md` | geopolitica operativa | Stati, confini, risorse e relazioni diplomatiche. |
+| `Hub/Campagna da Ambientazione.md` | da mondo a campagna | Collega regioni e conflitti al gioco. |
+| `Hub/Vista Giocatori.md` | materiale condivisibile | Non deve mostrare segreti o prossime mosse DM. |
+| `Hub/Worldbuilder Dashboard.md` | costruzione mondo avanzata | Deve mostrare relazioni, buchi e pressioni, non solo archivi. |
+| `Hub/Motore Mondo Vivo.md` | stato sistemico del mondo | Deve mostrare propagazione, causalita, faction dynamics e continuita narrativa. |
 | `Campagne/` | campagne e demo | Contenuto giocabile legato a party e sessioni. |
 | `Giocatori/` | indice area giocatori | Area pubblica o condivisibile. |
 | `Inbox/` | appunti grezzi e live | Qui entra cio che non e ancora canonico. |
@@ -48,7 +49,7 @@ Questa nota e tecnica. Serve solo a chi cura il vault, non al DM che lo usa per 
 - `z.automazioni`: i template chiamano helper con `tp.user.nome_script`.
 - `.obsidian/plugins`: il vault include plugin e configurazioni necessarie.
 - `SRD`: puo essere rigenerato da `z.automazioni/import_srd.js`.
-- Note dashboard root: sono linkate da onboarding, plugin Homepage e documentazione.
+- `Inizia Qui.md` resta l'unica dashboard root: le altre viste principali stanno in `Hub/`.
 
 ## Comandi
 

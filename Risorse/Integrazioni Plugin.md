@@ -17,9 +17,11 @@ Per il recap completo dei plugin installati, con versioni, stato reale, fonti uf
 - [Dice Roller](https://plugins.javalent.com/dice) e [table rollers](https://plugins.javalent.com/dice/rollers/table)
 - [Obsidian Excalidraw Plugin](https://github.com/zsviczian/obsidian-excalidraw-plugin)
 - [Obsidian Canvas](https://obsidian.md/help/plugins/canvas)
+- Advanced Canvas 6.1.6 e Linter 1.31.2 verificati dai manifest locali del vault.
 - [Media Extended](https://github.com/aidenlx/media-extended)
 - [Meta Bind](https://www.moritzjung.dev/obsidian-meta-bind-plugin-docs/), [JS Engine](https://www.moritzjung.dev/obsidian-js-engine-plugin-docs/) e [Metadata Menu](https://mdelobelle.github.io/metadatamenu/)
 - [Folder Notes](https://lostpaul.github.io/obsidian-folder-notes/), [Kanban](https://publish.obsidian.md/kanban/Obsidian+Kanban+Plugin), [Tabs](https://xhuajin.github.io/obsidian-tabs/) e [TTRPG Tools: Maps](https://ttrpg-tools-obsidian.org/)
+- [Obsidian Bases](https://obsidian.md/help/bases), [Maps per Bases](https://community.obsidian.md/plugins/maps), [Tasks](https://community.obsidian.md/plugins/obsidian-tasks-plugin), [QuickAdd](https://community.obsidian.md/plugins/quickadd), [Commander](https://community.obsidian.md/plugins/cmdr) e [Leaflet](https://community.obsidian.md/plugins/obsidian-leaflet-plugin)
 
 ## Criterio
 
@@ -47,11 +49,13 @@ Prima di lavorarci, controlla:
 | Kanban | integrato | `z.bacheche` | collegare meglio post-sessione a missioni e sessioni |
 | Callout Manager | integrato | template e note operative | mantenere pochi callout riconoscibili |
 | Fantasy Statblocks | integrato | creature e mostri SRD | verificare rendering visuale in Obsidian dopo import |
-| Initiative Tracker | parziale | incontri pronti | aggiungere esempi `encounter:` solo dove sono davvero utili |
+| Initiative Tracker | supportato | incontri pronti, [[Risorse/Iniziativa e Combattimenti]] | mantenere `encounter` solo sui combattimenti preparati |
 | Dice Roller | supportato | template e tabelle rapide | mantenere tabelle brevi, richiamabili e stabili |
-| Calendarium | pronto, da configurare | sessioni, missioni, dashboard, controllo vault | creare almeno un calendario in Calendarium; poi mantenere coerenti date leggibili e `fc-date` |
-| Excalidraw | integrato base | `Risorse/Mappe`, Worldbuilder Dashboard, template Mondo | creare nuove mappe solo quando servono a mondo, luogo o sessione |
-| Canvas | non integrato | nessuna vista dedicata | creare una canvas per fronti/fazioni quando c'e contenuto reale |
+| Calendarium | integrato | sessioni, missioni, dashboard, controllo vault | usare `Brumafonda` come calendario custom e i default come riferimenti disponibili |
+| Excalidraw | integrato | `Risorse/Mappe`, Worldbuilder Dashboard, Durante il Gioco, [[Risorse/Excalidraw Per GDR]] | usare per fronti, indizi e scene; nuove mappe in `Risorse/Mappe` con template dedicato |
+| Canvas / Advanced Canvas | supportato | [[Demo - Canvas Fronti.canvas]], [[Risorse/Canvas Per GDR]] | usare per reti di note canoniche, non per schizzi liberi |
+| Workspaces | supportato | [[Risorse/Workspaces e Segnalibri]] | salvare layout DM, worldbuilding e manutenzione |
+| Bookmarks | supportato | barra laterale Segnalibri | accesso rapido a pagine vive, non archivio parallelo |
 | Media Extended | supportato leggero | indici audio/video, Durante il Gioco | usare timestamp e scene solo per materiali pronti |
 | Hex Cartographer | opzionale guidato | Risorse/Mappe | usare per regioni, viaggi e hexcrawl quando le distanze contano |
 | TTRPG Tools: Maps | opzionale guidato | Risorse/Mappe, Durante il Gioco | usare per mappe zoomabili con base locale e pin |
@@ -64,11 +68,66 @@ Prima di lavorarci, controlla:
 | Iron Vault | non incluso | nessuna pagina GDR D&D | tenere fuori dal bundle; usare solo come studio di design |
 | BRAT | manutenzione essenziale | gestione plugin non ufficiali | tenere attivo ma fuori dal flusso utente finale |
 
+## Plugin Da Valutare
+
+Questa non e una lista di installazione. E una coda di prodotto: un candidato entra solo se migliora una pagina operativa gia esistente o riduce complessita per l'utente non tecnico.
+
+| Candidato | Priorita | Decisione provvisoria | Dove avrebbe senso | Motivo |
+| --- | --- | --- | --- | --- |
+| Bases core | alta | integrare senza sostituire Dataview | dashboard di controllo, elenchi missioni, PNG, luoghi, materiali | E gia abilitato tra i core plugin e puo offrire viste modificabili piu accessibili dei blocchi Dataview. Dataview resta necessario per query complesse, aggregazioni e viste gia mature. |
+| Maps per Bases | media | installato e supportato | [[z.bases/Atlante Mappe.base]], [[Risorse/Mappe Bases]] | Plugin ufficiale Obsidian per viste mappa basate su Bases. Utile solo per note con `coordinates`; non sostituisce mappe fantasy visuali. |
+| Tasks | supportato | lavoro DM, non lore | preparazione sessione, post-sessione, backlog manutenzione | Installato con global filter `#task`. Forte per task con scadenze, ricorrenze, filtri e completamento da vista. Da evitare per missioni narrative: quelle restano note strutturate, non checkbox. |
+| QuickAdd | bassa | evitare per ora | catture rapide e macro | Potente, ma sovrappone Templater, Meta Bind e gli script `z.automazioni`. Entra solo se risolve una cattura che oggi richiede troppi click. |
+| Commander | bassa | opzionale UX | toolbar comandi per DM e mobile | Utile per esporre comandi senza far aprire la command palette. Non aggiunge contenuto o modello dati, quindi non e core. |
+| Leaflet | bassa | non integrare in release base | mappe fantasy con immagine e marker | Funzionalmente vicino a TTRPG Tools: Maps e risulta in maintenance mode. Ha senso solo per compatibilita con vault esistenti o mappe gia scritte in sintassi Leaflet. |
+
+Dettaglio audit: [[Risorse/Audit Plugin Bases Tasks]].
+
+### Prova Consigliata Per Bases
+
+Prima integrazione a basso rischio, avviata in `z.bases`:
+
+- fatto: creare una vista Bases per `Mondi/Missioni` filtrata per `stato`, `mondo`, `pressione` e `scadenza_mondo`;
+- fatto: creare una vista Bases per `Mondi/Personaggi` con `tipo: png`, filtrata per `stato`, `fazione`, `luogo` e prossima mossa;
+- fatto: creare viste Bases pilota per `Mondi/Luoghi` e `Mondi/Incontri`;
+- linkare le viste da [[1. DM Dashboard]] come alternativa leggibile, non come sostituzione delle query Dataview;
+- verificare che una release senza uso diretto di Bases continui a funzionare.
+
+Fatto bene quando: un DM non tecnico puo correggere stato, urgenza o collegamenti da una vista tabellare senza toccare una query.
+
+### Prova Consigliata Per Tasks
+
+Tasks e installato nel vault. La preparazione usa `#task` sulle sole checklist operative in `z.bacheche`.
+
+Configurazione:
+
+- global filter impostato su `#task`;
+- usare [[Risorse/Task DM]] come vista operativa Tasks, con fallback Dataview;
+- non taggare checklist narrative, checklist di pubblicazione o checklist guida;
+- non convertire missioni, clock o conseguenze in task.
+
+## Verifica 2026-05-20
+
+| Area | Esito | Azione |
+| --- | --- | --- |
+| Dashboard e automazioni | ben sfruttate | Dataview, DataviewJS, Meta Bind e Templater sono la spina dorsale del vault. |
+| Metadata Menu | migliorato | Aggiunte FileClass per `incontro`, `rotta`, `risorsa`, `mercato`, `compendium`, `ricorrenza`, `mappa` e `media`. |
+| Calendarium | integrato con default e custom | Importati i calendari default del plugin e aggiunto `Brumafonda` come calendario custom del vault. |
+| Initiative Tracker | supportato | Aggiunta vista operativa, demo combattimento e configurazione per Dice Roller + link Statblocks. |
+| Statblocks | base funzionante | Creature con `statblock: true`; ora il flusso incontro -> creatura -> iniziativa e documentato. |
+| Mappe | buono | Excalidraw, Hex Cartographer e Zoom Map hanno demo e dashboard; Leaflet resta opzionale. |
+| Media Extended | leggero | Audio/video/immagini sono indicizzati; usarlo meglio solo con media reali di campagna. |
+| Kanban | base | Le bacheche esistono; prossimo passo utile: collegare task a sessioni e missioni reali. |
+| BRAT | tecnico | Tenere fuori dal percorso DM e dalla release pulita come funzione di manutenzione. |
+| Linter | supporto sviluppo | Configurato manuale e prudente; niente lint on save, SRD e mappe ignorati. |
+| Workspaces/Bookmarks | supportato | Workspaces core abilitato, tre layout salvati e segnalibri pronti per tavolo, worldbuilding e manutenzione. |
+| Maps per Bases | supportato | Plugin `maps` installato, base pilota e coordinate demo aggiunte. |
+
 ## Prossime Integrazioni
 
 ### 1. Calendarium
 
-Stato: integrazione rifinita.
+Stato: integrazione Markdown rifinita e configurazione plugin attiva.
 
 Obiettivo: collegare le date del mondo alle sessioni, alle missioni e agli eventi futuri.
 
@@ -82,12 +141,17 @@ Da fare:
 - valutare eventi inline con `span` solo dentro note di sessione o resoconti, dove possono servire piu eventi nella stessa nota;
 - fatto: mostrare nella DM Dashboard le prossime scadenze narrative.
 - fatto: mostrare in [[Mondi/Calendario]] e [[Risorse/Controllo Vault]] le note con data leggibile ma senza `fc-date`.
+- fatto: portati nel vault principale i calendari default del plugin: Harptos, Gregorian, Greyhawk, Galifar e Barovian.
+- fatto: aggiunto `Brumafonda` come calendario custom basato sul layout dei template Calendarium.
+- fatto: impostato `Brumafonda` come calendario predefinito per `Mondi`, `Campagne` e `Inbox`.
+- fatto: [[Mondi/Calendario]] legge la configurazione Calendarium e mostra calendari, categorie, eventi interni e data corrente.
+- fatto: [[Risorse/Controllo Vault]] segnala note `fc-date` con `fc-calendar` non presente nella configurazione plugin.
 
 Fatto bene quando: il DM sa che giorno e nel mondo, cosa sta per scadere e quale sessione arriva dopo.
 
 ### 2. Initiative Tracker E Fantasy Statblocks
 
-Stato: integrazione base avviata.
+Stato: integrazione supportata per combattimenti pronti.
 
 Obiettivo: rendere gli incontri pronti davvero giocabili al tavolo.
 
@@ -97,11 +161,14 @@ Da fare:
 - fatto: collegare le creature di [[Mondi/Creature/Creature]] agli incontri;
 - fatto: usare Fantasy Statblocks per le creature con `statblock: true` e campi YAML nel frontmatter, cosi il plugin puo parsarle nel bestiario;
 - fatto: usare Initiative Tracker per combattimenti veri, dato che gestisce iniziativa, turni, PF, CA, condizioni, stati a durata e creature da Fantasy Statblocks;
-- usare blocchi `encounter` nelle note incontro/sessione quando il combattimento e preparato;
+- fatto: usare blocchi `encounter` nelle note incontro/sessione quando il combattimento e preparato;
 - usare incontri inline `encounter:` nelle note di sessione solo per gruppi semplici o incontri casuali;
 - mantenere i nomi creature identici tra frontmatter `name`, blocchi `statblock` e blocchi `encounter`;
 - distinguere incontri sociali, esplorativi e combattimenti;
 - fatto: creare una nota `Prova - Incontro` che mostri anche creature e iniziativa.
+- fatto: aggiungere [[Demo - Agguato dei Lupi]] come combattimento pronto con `2: Lupo`, mappa Excalidraw e audio.
+- fatto: aggiungere [[Risorse/Iniziativa e Combattimenti]] per controllare incontri di combattimento e missing `encounter_creatures`.
+- fatto: configurare Initiative Tracker per usare Dice Roller e preferire link Statblocks.
 
 Fatto bene quando: aprendo un incontro pronto il DM puo iniziare la scena senza cercare schede altrove.
 
@@ -128,8 +195,13 @@ Obiettivo: rendere visibili relazioni, fronti, mappe e geografia senza duplicare
 Da fare:
 
 - fatto: usare [[Risorse/Mappe/Schema Relazioni GDR.excalidraw]] come prova base per relazioni tra PNG, luoghi e fazioni;
+- fatto: aggiungere [[Demo - Canvas Fronti.canvas]] e [[Risorse/Canvas Per GDR]] come integrazione Canvas/Advanced Canvas;
+- fatto: aggiungere [[Demo - Fronte Custodi.excalidraw]], [[Demo - Rete Indizi Reliquia.excalidraw]] e [[Demo - Scena Ponte.excalidraw]];
+- fatto: configurare Excalidraw per salvare nuove mappe in `Risorse/Mappe` e usare il template `z.modelli/mappe/Mappa Excalidraw Fronti.excalidraw.md`;
+- fatto: attivare rendering degli embed Excalidraw in Markdown reading mode e hover preview senza Ctrl;
 - fatto: creare una convenzione per mappe di regione, dungeon e fronti;
 - fatto: collegare ogni mappa demo alla nota mondo, luogo o campagna pertinente;
+- fatto: aggiungere viste integrate politica, commerciale, religiosa e conflitti in [[Risorse/Mappe/Mappe]];
 - usare Excalidraw quando servono disegno libero, annotazioni visuali, embed, link tra disegni e note o riferimenti `area=`/`group=` a parti del disegno;
 - usare Canvas quando serve una mappa relazionale fatta di note, media, gruppi e connessioni leggibili;
 - ricordare che Canvas salva file `.canvas` in formato JSON Canvas, quindi e adatto a mappe strutturate e durevoli;
@@ -139,7 +211,22 @@ Da fare:
 
 Fatto bene quando: una mappa aiuta a capire il mondo e rimanda alle note canoniche, invece di diventare un archivio parallelo.
 
-### 5. Media Extended
+### 5. Linter
+
+Stato: supporto sviluppo configurato.
+
+Obiettivo: pulire note selezionate senza produrre diff enormi o rompere metadati speciali.
+
+Da fare:
+
+- fatto: mantenere `lintOnSave` e `lintOnFileChange` disattivati;
+- fatto: attivare solo regole a basso rischio: riga vuota dopo YAML, righe vuote consecutive, newline finale e trailing spaces;
+- fatto: ignorare `SRD`, `Risorse/Mappe` e `.obsidian`;
+- fatto: documentare uso e limiti in [[Risorse/Linter e Sviluppo]].
+
+Fatto bene quando: il manutentore usa Linter su singole note o cartelle piccole e controlla sempre il diff.
+
+### 6. Media Extended
 
 Obiettivo: preparare audio, video e immagini da usare al tavolo senza interrompere la sessione.
 
@@ -155,10 +242,11 @@ Da fare:
 - fatto: mostrare materiale pronto in [[Durante il Gioco]];
 - fatto: aggiungere [[Risorse/Media Scene]] e [[Demo - Nebbia Sul Ponte]] come struttura cue pronta;
 - collegare dispense e scene ai media collegati.
+- da fare solo con materiale reale: usare timestamp precisi e media locali per scene ricorrenti.
 
 Fatto bene quando: il DM apre Durante il Gioco e trova subito atmosfera, immagini o dispense pronte.
 
-### 6. Generatore di Contenuti Fantasy
+### 7. Generatore di Contenuti Fantasy
 
 Stato: integrazione base completata.
 
@@ -234,6 +322,8 @@ Applicato a:
 - [[z.modelli/luogo/Insediamento]]
 - [[Risorse/Mappe/Mappe]]
 - [[Worldbuilder Dashboard]]
+- [[Lore Hub]]
+- [[Economia E Rotte]]
 
 Regola: usare Tabs solo per raggruppare sezioni gia esistenti. Se il plugin non e attivo, il contenuto resta comunque leggibile come blocco markdown.
 

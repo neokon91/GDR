@@ -21,5 +21,9 @@
   "hex-cartographer",
   "zoom-map",
   "obsidian-style-settings",
-  "tabs"
+  "tabs",
+  "obsidian-tasks-plugin",
+  "advanced-canvas",
+  "obsidian-linter",
+  "maps"
 ]

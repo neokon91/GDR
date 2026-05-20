@@ -13,6 +13,7 @@ const INCLUDED_ROOTS = new Set([
     ".obsidian",
     "Campagne",
     "Giocatori",
+    "Hub",
     "Inbox",
     "Mondi",
     "Risorse",
@@ -24,22 +25,9 @@ const INCLUDED_ROOTS = new Set([
 ]);
 
 const INCLUDED_ROOT_FILES = new Set([
-    "1. DM Dashboard.md",
-    "Atlante del Mondo.md",
-    "Bibbia del Mondo.md",
-    "Campagna da Ambientazione.md",
-    "Controllo Canone.md",
-    "Controllo Worldbuilding.md",
-    "Cosa Succede Fuori Scena.md",
-    "Durante il Gioco.md",
-    "Geopolitical Dashboard.md",
     "Inizia Qui.md",
     "LICENSE.md",
-    "Motore Mondo Vivo.md",
-    "Revisione Lore.md",
     "VERSION.md",
-    "Vista Giocatori.md",
-    "Worldbuilder Dashboard.md"
 ]);
 
 const EXCLUDED_DIRS = new Set([".git", ".github", "dist", "docs", "Import", "node_modules"]);
@@ -69,6 +57,7 @@ const EXCLUDED_AUTOMAZIONI = new Set([
     "check_vault.js",
     "import_azgaar_geojson.js",
     "import_srd.js",
+    "LICENSE.md",
     "release_beta.js",
     "release_clean.js",
     "README.md"

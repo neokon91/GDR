@@ -30,6 +30,8 @@ Questa pagina evita di spiegare campi tecnici al DM. Scegli un modo semplice per
 
 ## Se Vuoi Una Vista Calendario
 
+Il vault include i calendari default di Calendarium e usa `Brumafonda` come calendario custom predefinito per `Mondi`, `Campagne` e `Inbox`.
+
 Chi prepara il vault puo compilare anche:
 
 | Campo | Esempio semplice |
@@ -40,6 +42,17 @@ Chi prepara il vault puo compilare anche:
 | `fc-display-name` | "Sessione 1" |
 
 Il DM puo ignorare questi campi: [[Mondi/Calendario]] mostra comunque le date leggibili e segnala cosa manca.
+
+## Calendari Disponibili
+
+| Calendario | Uso consigliato |
+| --- | --- |
+| `Brumafonda` | Calendario custom del vault e default per le campagne demo. |
+| `Calendar of Harptos` | Riferimento Forgotten Realms o campagne con mesi di Faerûn. |
+| `Gregorian Calendar` | Campagne moderne, storiche o calendario reale. |
+| `Calendar of Greyhawk` | Riferimento Greyhawk. |
+| `Calendar of Galifar` | Riferimento Eberron. |
+| `Barovian Calendar` | Riferimento Ravenloft/Barovia. |
 
 ## Categorie Consigliate
 

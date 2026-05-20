@@ -40,6 +40,24 @@ const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_conte
 gdr.renderPlayerView(dv);
 ```
 
+## Mappe Pubbliche
+
+```dataview
+TABLE uso, mondo, luogo, luoghi
+FROM "Risorse/Mappe"
+WHERE pubblico = true AND stato != "archiviata" AND !startswith(file.name, "Prova -")
+SORT uso ASC, file.name ASC
+```
+
+## Dispense Pubbliche
+
+```dataview
+TABLE tipo, mondo, luogo, stato
+FROM "Mondi/Dispense"
+WHERE pubblico = true AND stato != "archiviata" AND !startswith(file.name, "Prova -")
+SORT luogo ASC, file.name ASC
+```
+
 ## Note Per La Prossima Sessione
 
 - 

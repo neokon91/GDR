@@ -24,7 +24,7 @@ const checks = [
   ["Creature", enabled("obsidian-5e-statblocks"), "Mostri e creature possono apparire come schede."],
   ["Tiri rapidi", enabled("obsidian-dice-roller"), "I tiri `dice:` e le tabelle casuali funzionano."],
   ["Calendario", enabled("calendarium"), "Date del mondo e scadenze narrative sono disponibili."],
-  ["Mappe e schemi", enabled("obsidian-excalidraw-plugin"), "Mappe, fronti e relazioni sono modificabili."],
+  ["Mappe e schemi", enabled("obsidian-excalidraw-plugin"), "Mappe, fronti, indizi e scene sono modificabili."],
   ["Pagina iniziale", enabled("homepage"), "Il vault puo aprirsi da Inizia Qui."],
   ["Demo", exists("Campagne/Demo - La Reliquia Spezzata.md"), "La demo e disponibile per capire il flusso."],
   ["Prima sessione", exists("Risorse/Prima Sessione In 15 Minuti.md"), "Percorso pratico per giocare subito."],

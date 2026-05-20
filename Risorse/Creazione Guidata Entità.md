@@ -17,6 +17,9 @@ Questa pagina spiega come creare note senza bloccare il gioco. La regola e sempl
 | PNG | Vuole, sa, leva, segreto | Produce dialogo, scelta o sospetto. |
 | Luogo | Prima impressione, tensione, pericolo | Produce atmosfera e problema. |
 | Fazione | Obiettivo, pressione, prossima mossa | Produce reazione fuori scena. |
+| Rotta | Partenza, arrivo, stato, rischio, risorsa | Produce viaggio, costo e blocco. |
+| Risorsa | Luogo, controllore, uso, dipendenza | Produce economia e posta politica. |
+| Mercato | Luogo, rotte, risorse, pedaggi | Produce scambi, strozzature e fazioni. |
 | Missione | Obiettivo, indizio, prossima mossa, conseguenza | Produce direzione e costo. |
 | Clock | Innesco, posta, prossima mossa | Produce urgenza visibile. |
 | Sessione | Obiettivo, apertura, pressione, segreti rivelabili | Produce gioco al tavolo. |
@@ -29,6 +32,8 @@ Questa pagina spiega come creare note senza bloccare il gioco. La regola e sempl
 | Fazioni collegate | Quando il conflitto supera la scena locale. |
 | Timeline | Quando un fatto diventa canonico. |
 | Geopolitica | Quando cambiano potere, confini, risorse o legittimità. |
+| Economia e rotte | Quando una risorsa, un mercato o un passaggio cambia le scelte dei PNG. |
+| Calendario diegetico | Quando una data, festa o stagione obbliga il mondo a reagire. |
 | Statblock completo | Quando sai che andra in combattimento. |
 | Media e mappe | Quando devono essere mostrati al tavolo. |
 

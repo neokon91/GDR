@@ -24,9 +24,11 @@ luoghi:
 personaggi:
   - "[[Demo - Sella Neraluce]]"
   - "[[Demo - Mira Ventofermo]]"
-creature: []
+creature:
+  - "[[SRD/Mostri/Lupo|Lupo]]"
 incontri:
   - "[[Demo - Nebbia al Ponte]]"
+  - "[[Demo - Agguato dei Lupi]]"
 dispense:
   - "[[Demo - Lettera Macchiata di Nebbia]]"
 mappe:

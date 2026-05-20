@@ -8,6 +8,13 @@ stato: pronto
 canonico: true
 mondo: "[[Demo - Terre della Soglia]]"
 luogo_padre: "[[Demo - Valle di Brumafonda]]"
+coordinates:
+  - "45.4528"
+  - "12.3345"
+icon: "church"
+color: "#8b5cf6"
+layer_mappa: religiosa
+tipo_mappa: luogo
 divinita_principale:
 culto_associato: "[[Demo - Custodi della Soglia]]"
 pericolo: 7

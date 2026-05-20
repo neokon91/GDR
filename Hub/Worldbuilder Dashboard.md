@@ -69,6 +69,22 @@ actions:
 ```
 
 ```meta-bind-button
+label: Economia E Rotte
+style: primary
+actions:
+  - type: open
+    link: "[[Economia E Rotte]]"
+```
+
+```meta-bind-button
+label: Lore Hub
+style: primary
+actions:
+  - type: open
+    link: "[[Lore Hub]]"
+```
+
+```meta-bind-button
 label: Controllo Vault
 style: primary
 actions:
@@ -82,6 +98,34 @@ style: primary
 actions:
   - type: open
     link: "[[Risorse/Mappe/Mappe]]"
+```
+
+```meta-bind-button
+label: Nuova Mappa Zoom
+style: default
+actions:
+  - type: templaterCreateNote
+    templateFile: "z.modelli/mappe/Mappa Zoom.md"
+    folderPath: "Risorse/Mappe"
+    open: true
+```
+
+```meta-bind-button
+label: Nuova Mappa Fronti
+style: default
+actions:
+  - type: templaterCreateNote
+    templateFile: "z.modelli/mappe/Mappa Excalidraw Fronti.excalidraw.md"
+    folderPath: "Risorse/Mappe"
+    open: true
+```
+
+```meta-bind-button
+label: Canvas Fronti
+style: primary
+actions:
+  - type: open
+    link: "[[Demo - Canvas Fronti.canvas]]"
 ```
 
 ```meta-bind-button
@@ -266,6 +310,36 @@ actions:
 ```
 
 ```meta-bind-button
+label: Nuova Rotta
+style: primary
+actions:
+  - type: templaterCreateNote
+    templateFile: "z.modelli/worldbuilding/Rotta.md"
+    folderPath: "Mondi/Rotte"
+    open: true
+```
+
+```meta-bind-button
+label: Nuova Risorsa
+style: primary
+actions:
+  - type: templaterCreateNote
+    templateFile: "z.modelli/worldbuilding/Risorsa.md"
+    folderPath: "Mondi/Risorse"
+    open: true
+```
+
+```meta-bind-button
+label: Nuovo Mercato
+style: primary
+actions:
+  - type: templaterCreateNote
+    templateFile: "z.modelli/worldbuilding/Mercato o Nodo Commerciale.md"
+    folderPath: "Mondi/Mercati"
+    open: true
+```
+
+```meta-bind-button
 label: Nuova Relazione
 style: primary
 actions:
@@ -298,6 +372,9 @@ const cards = [
   ["Lingue", count('"Mondi/Lingue"', notIndex), "Parlate e scritture"],
   ["Fazioni", count('"Mondi/Fazioni"', notIndex), "Poteri in movimento"],
   ["Relazioni", count('"Mondi/Relazioni"', notIndex), "Alleanze, rivalità e patti"],
+  ["Rotte", count('"Mondi/Rotte"', notIndex), "Vie commerciali e blocchi"],
+  ["Risorse", count('"Mondi/Risorse"', notIndex), "Merci e dipendenze"],
+  ["Mercati", count('"Mondi/Mercati"', notIndex), "Nodi commerciali"],
   ["Religioni", count('"Mondi/Religioni"', notIndex), "Culti e divinita"],
   ["Conflitti", count('"Mondi/Conflitti"', notIndex), "Guerre e crisi"],
   ["Cosmologia", count('"Mondi/Cosmologia"', notIndex), "Piani e reami"],
@@ -493,10 +570,12 @@ tab: Mappa
 
 ![[Risorse/Mappe/Schema Relazioni GDR.excalidraw]]
 
+![[Risorse/Mappe/Demo - Fronte Custodi.excalidraw]]
+
 ```dataview
 TABLE uso, mondo, luogo, stato, file.mtime AS aggiornato
 FROM "Risorse/Mappe"
-WHERE file.name != "Mappe" AND !startswith(file.name, "Prova -") AND (uso = "relazioni" OR uso = "fronte")
+WHERE file.name != "Mappe" AND !startswith(file.name, "Prova -") AND (uso = "relazioni" OR uso = "fronte" OR uso = "indizi")
 SORT uso ASC, mondo ASC, file.name ASC
 LIMIT 12
 ```
@@ -723,12 +802,14 @@ tab: Principali
 
 ![[Risorse/Mappe/Schema Relazioni GDR.excalidraw]]
 
+![[Risorse/Mappe/Demo - Fronte Custodi.excalidraw]]
+
 tab: Mondo
 
 ```dataview
 TABLE uso, mondo, luogo, stato
 FROM "Risorse/Mappe"
-WHERE file.name != "Mappe" AND !startswith(file.name, "Prova -") AND (uso = "relazioni" OR uso = "fronte" OR uso = "regione")
+WHERE file.name != "Mappe" AND !startswith(file.name, "Prova -") AND (uso = "relazioni" OR uso = "fronte" OR uso = "regione" OR uso = "indizi")
 SORT uso ASC, mondo ASC, file.name ASC
 LIMIT 12
 ```

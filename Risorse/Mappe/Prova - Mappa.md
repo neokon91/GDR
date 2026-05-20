@@ -2,6 +2,7 @@
 id: prova-mappa
 nome: "Prova - Mappa"
 categoria: risorsa
+fileClass: mappa
 tipo: mappa
 stato: pronto
 mondo: "[[Prova - Mondo]]"

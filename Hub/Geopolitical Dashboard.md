@@ -45,6 +45,14 @@ actions:
     link: "[[Motore Mondo Vivo]]"
 ```
 
+```meta-bind-button
+label: Economia E Rotte
+style: primary
+actions:
+  - type: open
+    link: "[[Economia E Rotte]]"
+```
+
 ```dataviewjs
 const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));
 const current = dv.current();
@@ -67,7 +75,9 @@ const stats = [
   ["Territori", territories.length, "Stati e domini politici"],
   ["Relazioni", pages('"Mondi/Relazioni"', p => p.file.name !== "Relazioni").length, "Patti, rivalita, trattati"],
   ["Crisi", territories.where(p => Number(p.pressione ?? 0) > 0 || hasLinks(p.crisi_interne)).length, "Pressioni territoriali"],
-  ["Risorse", territories.where(p => hasLinks(p.risorse_strategiche) || hasLinks(p.risorse)).length, "Leve economiche o rituali"]
+  ["Risorse", territories.where(p => hasLinks(p.risorse_strategiche) || hasLinks(p.risorse)).length, "Leve economiche o rituali"],
+  ["Rotte", pages('"Mondi/Rotte"', p => p.file.name !== "Rotte").length, "Vie commerciali e confini"],
+  ["Mercati", pages('"Mondi/Mercati"', p => p.file.name !== "Mercati").length, "Nodi di potere economico"]
 ];
 const grid = dv.el("div", "", { cls: "gdr-stat-grid" });
 grid.innerHTML = stats.map(([label, value, hint]) => `
@@ -108,6 +118,19 @@ table(
     .limit(30)
     .map(p => [p.file.link, p.risorse_strategiche ?? p.risorse ?? [], p.fazioni ?? [], p.culture ?? [], p.religioni ?? [], p.crisi_interne ?? []])
     .array()
+);
+
+table(
+  "Rotte E Nodi Commerciali",
+  ["Elemento", "Tipo", "Stato", "Luoghi", "Controllori", "Risorse", "Pressione"],
+  [
+    ...pages('"Mondi/Rotte"', p => p.file.name !== "Rotte")
+      .map(p => [p.file.link, "rotta", p.stato_rotta ?? p.stato ?? "", [p.partenza, p.arrivo, ...(asArray(p.regioni))].filter(Boolean), p.fazioni_controllanti ?? p.fazioni ?? [], p.risorse_trasportate ?? p.risorse ?? [], p.pressione ?? ""])
+      .array(),
+    ...pages('"Mondi/Mercati"', p => p.file.name !== "Mercati")
+      .map(p => [p.file.link, "mercato", p.stato ?? "", p.luogo ?? p.luoghi ?? [], p.fazioni_controllanti ?? p.fazioni ?? [], p.risorse ?? [], p.pressione ?? ""])
+      .array()
+  ].sort((a, b) => Number(b[6] || 0) - Number(a[6] || 0)).slice(0, 30)
 );
 
 table(

@@ -6,19 +6,19 @@ kanban-plugin: board
 
 ## Idee
 
-- [ ] Nuova creatura
+- [ ] Nuova creatura #task
 
 ## Da Preparare
 
-- [ ] Statblock
+- [ ] Statblock #task
 
 ## Pronte
 
-- [ ] Incontro pronto
+- [ ] Incontro pronto #task
 
 ## Usate
 
-- [ ] Da archiviare o riutilizzare
+- [ ] Da archiviare o riutilizzare #task
 
 
 %% kanban:settings

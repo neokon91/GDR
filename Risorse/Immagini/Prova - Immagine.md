@@ -2,6 +2,7 @@
 id: prova-immagine
 nome: "Prova - Immagine"
 categoria: risorsa
+fileClass: media
 tipo: immagine
 stato: pronto
 campagna: "[[Prova - Campagna]]"

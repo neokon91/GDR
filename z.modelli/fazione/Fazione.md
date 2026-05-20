@@ -73,15 +73,28 @@
 >
 > Prossima mossa: `=this.prossima_mossa`
 
-```meta-bind-button
-label: Avanza Clock
-style: primary
-actions:
-  - type: updateMetadata
-    bindTarget: progress_value
-    evaluate: true
-    value: Math.min(Number(x ?? 0) + 1, Number(getMetadata('progress_max') ?? 6))
-```
+> [!regia] Gestione
+> Pressione: `INPUT[slider(minValue(0), maxValue(10), stepSize(1), addLabels):pressione]`
+>
+> Avanzamento: `INPUT[slider(minValue(0), maxValue(12), stepSize(1), addLabels):progress_value]`
+>
+> ```meta-bind-button
+> label: Nuovo Tracciato
+> style: primary
+> actions:
+>   - type: templaterCreateNote
+>     templateFile: "z.modelli/dm/Tracciato.md"
+>     folderPath: "Mondi/Tracciati"
+>     open: true
+> ```
+>
+> ```meta-bind-button
+> label: Fuori Scena
+> style: default
+> actions:
+>   - type: open
+>     link: "[[Cosa Succede Fuori Scena]]"
+> ```
 
 ````tabs
 tab: Identità

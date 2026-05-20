@@ -192,11 +192,11 @@
 
     const actions = [];
     if (active) {
-      actions.push({ title: "Gioca la sessione attiva", meta: active.file.name, body: "Apri il cockpit del tavolo.", link: "Durante il Gioco.md" });
+      actions.push({ title: "Gioca la sessione attiva", meta: active.file.name, body: "Apri il cockpit del tavolo.", link: "Hub/Durante il Gioco.md" });
     } else if (prep) {
       actions.push({ title: "Finisci la preparazione", meta: prep.file.name, body: "C'e una sessione in preparazione.", link: "Risorse/Preparazione Sessione.md" });
     } else {
-      actions.push({ title: "Crea una sessione", meta: "Nessuna sessione attiva", body: "Parti dalla DM Dashboard.", link: "1. DM Dashboard.md" });
+      actions.push({ title: "Crea una sessione", meta: "Nessuna sessione attiva", body: "Parti dalla DM Dashboard.", link: "Hub/1. DM Dashboard.md" });
     }
 
     if (inbox.length) {

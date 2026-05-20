@@ -114,6 +114,14 @@ actions:
 ```
 
 ```meta-bind-button
+label: Iniziativa
+style: primary
+actions:
+  - type: open
+    link: "[[Risorse/Iniziativa e Combattimenti]]"
+```
+
+```meta-bind-button
 label: Nuova Dispensa
 style: primary
 actions:
@@ -556,7 +564,10 @@ if (!pages.length) {
     .array();
 }
 
-dv.table(["Incontro", "Luogo", "Pericolo", "Creature"], pages.map(p => [p.file.link, p.luogo ?? "", p.pericolo ?? "", p.creature ?? []]));
+dv.table(
+  ["Incontro", "Tipo", "Luogo", "Pericolo", "Creature", "Iniziativa"],
+  pages.map(p => [p.file.link, p.tipo ?? "", p.luogo ?? "", p.pericolo ?? "", p.creature ?? [], p.encounter_creatures ?? []])
+);
 ```
 
 #### Creature
@@ -621,35 +632,66 @@ dv.table(["Dispensa", "Tipo", "Luogo", "Personaggi"], pages.map(p => [p.file.lin
 
 #### Mappe
 
+![[Risorse/Mappe/Demo - Scena Ponte.excalidraw]]
+
 ```dataviewjs
 const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));
 const active = gdr.activeSession(dv);
 
+const linkKey = value => value?.path ?? String(value ?? "");
+const hasAnyLink = (value, keys) => dv.array(value ?? []).array().some(link => keys.has(linkKey(link)));
+
 const sessionMaps = dv.array(active?.mappe ?? []).array();
 const places = dv.array(active?.luoghi ?? []);
+const placePaths = new Set(places.map(linkKey).array());
+const worldKey = linkKey(active?.mondo);
 const encounterPages = dv.array(active?.incontri ?? [])
   .map(link => dv.page(link.path ?? link))
   .where(Boolean)
   .array();
 
 const encounterMaps = encounterPages.flatMap(p => dv.array(p.mappe ?? []).array());
+const seen = new Set();
 let pages = sessionMaps
   .concat(encounterMaps)
   .map(link => dv.page(link.path ?? link))
   .where(Boolean)
+  .filter(p => {
+    if (seen.has(p.file.path)) return false;
+    seen.add(p.file.path);
+    return true;
+  })
   .array();
 
 if (!pages.length && places.length) {
-  const placePaths = new Set(places.map(link => link.path ?? String(link)).array());
   pages = dv.pages('"Risorse/Mappe"')
-    .where(p => !String(p.file.name).startsWith("Prova -") && p.file.name !== "Mappe" && p.luogo && placePaths.has(p.luogo.path ?? String(p.luogo)))
+    .where(p => !String(p.file.name).startsWith("Prova -") && p.file.name !== "Mappe" && p.stato !== "archiviata")
+    .where(p => placePaths.has(linkKey(p.luogo)) || hasAnyLink(p.luoghi, placePaths))
+    .sort(p => p.stato === "pronto" ? 0 : 1, "asc")
+    .sort(p => p.uso ?? "", "asc")
     .array();
 }
 
 if (!pages.length) {
-  dv.paragraph("Nessuna mappa collegata alla sessione attiva.");
+  pages = dv.pages('"Risorse/Mappe"')
+    .where(p => !String(p.file.name).startsWith("Prova -") && p.file.name !== "Mappe" && p.stato === "pronto")
+    .where(p => worldKey && linkKey(p.mondo) === worldKey)
+    .sort(p => p.uso ?? "", "asc")
+    .array();
+}
+
+if (!pages.length) {
+  pages = dv.pages('"Risorse/Mappe"')
+    .where(p => !String(p.file.name).startsWith("Prova -") && p.file.name !== "Mappe" && p.stato === "pronto" && ["zoom", "esagoni", "scena", "dungeon"].includes(p.uso))
+    .sort(p => p.file.mtime, "desc")
+    .limit(6)
+    .array();
+}
+
+if (!pages.length) {
+  dv.paragraph("Nessuna mappa pronta o collegata alla sessione attiva.");
 } else {
-  dv.table(["Mappa", "Uso", "Mondo", "Luogo", "Stato"], pages.map(p => [p.file.link, p.uso ?? "", p.mondo ?? "", p.luogo ?? "", p.stato ?? ""]));
+  dv.table(["Mappa", "Uso", "Mondo", "Luogo/Luoghi", "Stato"], pages.map(p => [p.file.link, p.uso ?? "", p.mondo ?? "", p.luogo ?? p.luoghi ?? "", p.stato ?? ""]));
 }
 ```
 

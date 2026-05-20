@@ -4,8 +4,10 @@ cssclasses:
 categoria: risorsa
 tipo: mappa
 uso: zoom
+pubblico: false
 mondo: "[[Demo - Terre della Soglia]]"
 luogo: "[[Demo - Valle di Brumafonda]]"
+versione_giocatori: "[[Demo - Mappa Zoomabile Giocatori]]"
 stato: pronto
 ---
 
@@ -38,3 +40,4 @@ render: dom
 - [[Demo - Santuario della Prima Pietra]]
 - [[Demo - Valle di Brumafonda]]
 - [[Demo - Nebbia al Ponte]]
+- [[Demo - Mappa Zoomabile Giocatori]]

@@ -23,7 +23,7 @@ label: Prepara
 style: primary
 actions:
   - type: open
-    link: "[[1. DM Dashboard]]"
+    link: "[[Hub/1. DM Dashboard|1. DM Dashboard]]"
 ```
 
 ```meta-bind-button
@@ -31,7 +31,7 @@ label: Crea Campagna
 style: primary
 actions:
   - type: open
-    link: "[[Campagna da Ambientazione]]"
+    link: "[[Hub/Campagna da Ambientazione|Campagna da Ambientazione]]"
 ```
 
 ```meta-bind-button
@@ -47,7 +47,7 @@ label: Gioca
 style: primary
 actions:
   - type: open
-    link: "[[Durante il Gioco]]"
+    link: "[[Hub/Durante il Gioco|Durante il Gioco]]"
 ```
 
 ```meta-bind-button
@@ -55,7 +55,7 @@ label: Vista Giocatori
 style: primary
 actions:
   - type: open
-    link: "[[Vista Giocatori]]"
+    link: "[[Hub/Vista Giocatori|Vista Giocatori]]"
 ```
 
 ```meta-bind-button
@@ -63,7 +63,7 @@ label: Costruisci Mondo
 style: primary
 actions:
   - type: open
-    link: "[[Atlante del Mondo]]"
+    link: "[[Hub/Atlante del Mondo|Atlante del Mondo]]"
 ```
 
 ```meta-bind-button
@@ -71,7 +71,7 @@ label: Fuori Scena
 style: primary
 actions:
   - type: open
-    link: "[[Cosa Succede Fuori Scena]]"
+    link: "[[Hub/Cosa Succede Fuori Scena|Cosa Succede Fuori Scena]]"
 ```
 
 ```meta-bind-button
@@ -121,12 +121,12 @@ actions:
 3. Apri [[Risorse/Setup Guidato]] per vedere se pulsanti, tabelle, creature, tiri e calendario sono pronti.
 4. Apri [[Risorse/Primo Avvio Strumenti]] solo se qualcosa non funziona.
 5. Apri [[Risorse/Prima Sessione In 15 Minuti]] se vuoi un percorso pratico senza leggere tutta la documentazione.
-6. Apri [[1. DM Dashboard]] per creare campagne, sessioni, missioni, clock e incontri.
+6. Apri [[Hub/1. DM Dashboard|1. DM Dashboard]] per creare campagne, sessioni, missioni, clock e incontri.
 7. Apri una sessione e usa il toggle `attiva` per indicare quale e al tavolo.
-8. Apri [[Durante il Gioco]] quando sei al tavolo.
+8. Apri [[Hub/Durante il Gioco|Durante il Gioco]] quando sei al tavolo.
 9. Apri [[Risorse/Post Sessione Guidato]] dopo la partita.
 10. Apri [[Cosa Succede Fuori Scena]] per decidere chi reagisce, quali clock avanzano e cosa entra nella prossima sessione.
-11. Apri [[Worldbuilder Dashboard]] quando vuoi creare mondi, luoghi, PNG, fazioni, creature e oggetti.
+11. Apri [[Hub/Worldbuilder Dashboard|Worldbuilder Dashboard]] quando vuoi creare mondi, luoghi, PNG, fazioni, creature e oggetti.
 12. Apri [[Motore Mondo Vivo]] quando una scelta, una guerra, una religione, una fazione o un evento storico deve propagarsi nel mondo e pesare sulle prossime sessioni.
 13. Apri [[Geopolitical Dashboard]] quando il conflitto riguarda stati, confini, risorse strategiche, trattati o legittimita politica.
 14. Apri [[Risorse/Risorse]] quando cerchi guide, mappe, immagini, audio, video, tabelle o aiuto.

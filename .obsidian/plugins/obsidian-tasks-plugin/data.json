@@ -1,0 +1,6 @@
+{
+  "globalFilter": "#task",
+  "removeGlobalFilter": false,
+  "globalQuery": "",
+  "taskFormat": "tasksPluginEmoji"
+}

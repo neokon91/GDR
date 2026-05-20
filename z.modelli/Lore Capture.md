@@ -136,114 +136,46 @@ INPUT[list:ricompense]
 INPUT[list:conseguenze]
 ```
 
-## Azioni Guidate
+## Gestione
 
-```meta-bind-button
-label: Canonizza
-style: primary
-actions:
-  - type: updateMetadata
-    bindTarget: canonizza_evento
-    evaluate: false
-    value: true
-  - type: updateMetadata
-    bindTarget: stato
-    evaluate: false
-    value: canonica
-  - type: updateMetadata
-    bindTarget: stato_canonico
-    evaluate: false
-    value: canonico
-  - type: updateMetadata
-    bindTarget: canonico
-    evaluate: false
-    value: true
-  - type: updateMetadata
-    bindTarget: grado_certezza
-    evaluate: false
-    value: alto
+Stato:
+`INPUT[inlineSelect(option(da smistare, Da smistare), option(collegata, Collegata), option(canonica, Canonica), option(archiviata, Archiviata), option(ignorata, Ignorata)):stato]`
+
+Stato canonico:
+`INPUT[inlineSelect(option(rumor, Rumor), option(canonico, Canonico), option(leggenda, Leggenda), option(falso, Falso), option(retcon, Retcon)):stato_canonico]`
+
+Canonico:
+`INPUT[toggle:canonico]`
+
+Grado certezza:
+`INPUT[inlineSelect(option(basso, Basso), option(medio, Medio), option(alto, Alto)):grado_certezza]`
+
+```meta-bind
+INPUT[toggle:canonizza_evento]
+INPUT[toggle:collega_al_mondo]
+INPUT[toggle:aggiorna_png]
+INPUT[toggle:aggiorna_luogo]
+INPUT[toggle:aggiorna_missione]
+INPUT[toggle:aggiorna_tracciato]
+INPUT[toggle:archivia_appunto]
 ```
 
 ```meta-bind-button
-label: Collega Al Mondo
+label: Nuovo Evento Storico
 style: primary
 actions:
-  - type: updateMetadata
-    bindTarget: collega_al_mondo
-    evaluate: false
-    value: true
-  - type: updateMetadata
-    bindTarget: stato
-    evaluate: false
-    value: collegata
+  - type: templaterCreateNote
+    templateFile: "z.modelli/Evento Storico.md"
+    folderPath: "Mondi/Timeline"
+    open: true
 ```
 
 ```meta-bind-button
-label: Aggiorna PNG
-style: primary
-actions:
-  - type: updateMetadata
-    bindTarget: aggiorna_png
-    evaluate: false
-    value: true
-```
-
-```meta-bind-button
-label: Aggiorna Luogo
-style: primary
-actions:
-  - type: updateMetadata
-    bindTarget: aggiorna_luogo
-    evaluate: false
-    value: true
-```
-
-```meta-bind-button
-label: Aggiorna Missione
-style: primary
-actions:
-  - type: updateMetadata
-    bindTarget: aggiorna_missione
-    evaluate: false
-    value: true
-```
-
-```meta-bind-button
-label: Aggiorna Tracciato
-style: primary
-actions:
-  - type: updateMetadata
-    bindTarget: aggiorna_tracciato
-    evaluate: false
-    value: true
-```
-
-```meta-bind-button
-label: Archivia Appunto
+label: Post Sessione
 style: default
 actions:
-  - type: updateMetadata
-    bindTarget: archivia_appunto
-    evaluate: false
-    value: true
-  - type: updateMetadata
-    bindTarget: stato
-    evaluate: false
-    value: archiviata
-```
-
-```meta-bind-button
-label: Ignora
-style: default
-actions:
-  - type: updateMetadata
-    bindTarget: stato
-    evaluate: false
-    value: ignorata
-  - type: updateMetadata
-    bindTarget: canonico
-    evaluate: false
-    value: false
+  - type: open
+    link: "[[Risorse/Post Sessione Guidato]]"
 ```
 
 ## Azioni

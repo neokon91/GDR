@@ -97,6 +97,22 @@ actions:
     link: "[[Geopolitical Dashboard]]"
 ```
 
+```meta-bind-button
+label: Economia E Rotte
+style: default
+actions:
+  - type: open
+    link: "[[Economia E Rotte]]"
+```
+
+```meta-bind-button
+label: Lore Hub
+style: default
+actions:
+  - type: open
+    link: "[[Lore Hub]]"
+```
+
 ## Filtro
 
 > [!scena] Mondo
@@ -119,6 +135,8 @@ const cards = [
   ["Relazioni", count('"Mondi/Relazioni"'), "Alleanze e rivalità"],
   ["Storia", count('"Mondi/Storia" OR "Mondi/Timeline"'), "Ere ed eventi"],
   ["Conflitti", count('"Mondi/Conflitti"'), "Guerre e tensioni"],
+  ["Rotte", count('"Mondi/Rotte"'), "Vie e strozzature"],
+  ["Risorse", count('"Mondi/Risorse" OR "Mondi/Mercati"'), "Merci, nodi e dipendenze"],
   ["Cosmologia", count('"Mondi/Cosmologia"'), "Piani e reami"],
   ["Missioni", count('"Mondi/Missioni"'), "Uso al tavolo"]
 ];
@@ -236,6 +254,26 @@ FROM "Mondi/Cosmologia"
 WHERE stato != "archiviata" AND !startswith(file.name, "Prova -") AND (!this.mondo_attivo OR mondo = this.mondo_attivo)
 SORT tipo ASC, nome ASC
 LIMIT 20
+```
+
+tab: Rotte
+
+```dataview
+TABLE stato_rotta, partenza, arrivo, regioni, fazioni_controllanti, risorse_trasportate, pressione, prossima_mossa
+FROM "Mondi/Rotte"
+WHERE stato != "archiviata" AND !startswith(file.name, "Prova -") AND (!this.mondo_attivo OR mondo = this.mondo_attivo)
+SORT pressione DESC, nome ASC
+LIMIT 20
+```
+
+tab: Risorse
+
+```dataview
+TABLE tipo, luoghi, fazioni_controllanti, uso_narrativo, rotte, mercati, pressione
+FROM "Mondi/Risorse" OR "Mondi/Mercati" OR "Mondi/Compendium"
+WHERE stato != "archiviata" AND !startswith(file.name, "Prova -") AND (!this.mondo_attivo OR mondo = this.mondo_attivo)
+SORT tipo ASC, nome ASC
+LIMIT 24
 ```
 ````
 

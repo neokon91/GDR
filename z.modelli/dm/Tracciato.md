@@ -53,39 +53,28 @@
 > Propaga a:
 > `INPUT[inlineListSuggester(optionQuery("Mondi"), useLinks(partial), allowOther):propaga_a]`
 
-```meta-bind-button
-label: Avanza
-style: primary
-actions:
-  - type: updateMetadata
-    bindTarget: progress_value
-    evaluate: true
-    value: Math.min(Number(x ?? 0) + 1, Number(getMetadata('progress_max') ?? 6))
-```
-
-```meta-bind-button
-label: Riduci
-style: default
-actions:
-  - type: updateMetadata
-    bindTarget: progress_value
-    evaluate: true
-    value: Math.max(Number(x ?? 0) - 1, 0)
-```
-
-```meta-bind-button
-label: Completa
-style: primary
-actions:
-  - type: updateMetadata
-    bindTarget: progress_value
-    evaluate: true
-    value: Number(getMetadata('progress_max') ?? 6)
-  - type: updateMetadata
-    bindTarget: stato
-    evaluate: false
-    value: completato
-```
+> [!regia] Gestione
+> Avanzamento: `INPUT[slider(minValue(0), maxValue(12), stepSize(1), addLabels):progress_value]`
+>
+> Stato: `INPUT[inlineSelect(option(attivo, Attivo), option(in pausa, In pausa), option(completato, Completato), option(fallito, Fallito), option(archiviata, Archiviata)):stato]`
+>
+> ```meta-bind-button
+> label: Cosa Succede Fuori Scena
+> style: primary
+> actions:
+>   - type: open
+>     link: "[[Cosa Succede Fuori Scena]]"
+> ```
+>
+> ```meta-bind-button
+> label: Nuova Conseguenza
+> style: default
+> actions:
+>   - type: templaterCreateNote
+>     templateFile: "z.modelli/Live Conseguenza.md"
+>     folderPath: "Inbox"
+>     open: true
+> ```
 
 ```dataviewjs
 const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));

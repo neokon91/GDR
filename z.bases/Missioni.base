@@ -1,0 +1,59 @@
+filters:
+  and:
+    - file.folder == "Mondi/Missioni"
+    - file.name != "Missioni"
+    - '!file.name.startsWith("Prova -")'
+properties:
+  nome:
+    displayName: Nome
+  stato:
+    displayName: Stato
+  tipo:
+    displayName: Tipo
+  mondo:
+    displayName: Mondo
+  committente:
+    displayName: Committente
+  pressione:
+    displayName: Pressione
+  scadenza_mondo:
+    displayName: Scadenza
+  prossima_mossa:
+    displayName: Prossima mossa
+views:
+  - type: table
+    name: Aperte
+    filters:
+      and:
+        - stato != "archiviata"
+        - stato != "completata"
+        - stato != "fallita"
+    order:
+      - nome
+      - stato
+      - tipo
+      - pressione
+      - scadenza_mondo
+      - prossima_mossa
+      - mondo
+      - committente
+    sort:
+      - property: pressione
+        direction: DESC
+      - property: scadenza_mondo
+        direction: ASC
+  - type: table
+    name: Tutte
+    order:
+      - nome
+      - stato
+      - tipo
+      - mondo
+      - pressione
+      - scadenza_mondo
+      - prossima_mossa
+    sort:
+      - property: stato
+        direction: ASC
+      - property: nome
+        direction: ASC

@@ -37,6 +37,43 @@
 > > [!segreto]- Segreto
 > > `=this.segreto`
 
+> [!regia] Gestione
+> ```meta-bind-button
+> label: Durante Il Gioco
+> style: primary
+> actions:
+>   - type: open
+>     link: "[[Durante il Gioco]]"
+> ```
+>
+> ```meta-bind-button
+> label: Nuova Missione
+> style: primary
+> actions:
+>   - type: templaterCreateNote
+>     templateFile: "z.modelli/dm/Missione.md"
+>     folderPath: "Mondi/Missioni"
+>     open: true
+> ```
+>
+> ```meta-bind-button
+> label: Nuovo Incontro
+> style: default
+> actions:
+>   - type: templaterCreateNote
+>     templateFile: "z.modelli/dm/Incontro.md"
+>     folderPath: "Mondi/Incontri"
+>     open: true
+> ```
+>
+> ```meta-bind-button
+> label: Revisione Lore
+> style: default
+> actions:
+>   - type: open
+>     link: "[[Revisione Lore]]"
+> ```
+
 Mondo:
 `INPUT[suggester(optionQuery("Mondi"), useLinks(partial), allowOther):mondo]`
 

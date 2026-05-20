@@ -2,6 +2,7 @@
 id: demo-nebbia-al-ponte
 nome: "Demo - Nebbia al Ponte"
 categoria: incontro
+fileClass: incontro
 tipo: esplorazione
 stato: pronto
 mondo: "[[Demo - Terre della Soglia]]"
@@ -12,6 +13,7 @@ personaggi:
   - "[[Demo - Odran il Campanaro]]"
 mappe:
   - "[[Demo - Mappa Relazioni]]"
+  - "[[Demo - Scena Ponte.excalidraw]]"
 audio: []
 pericolo: 4
 ricompense:
@@ -19,8 +21,6 @@ ricompense:
 round: 1
 condizioni:
   - visibilita ridotta oltre 9 metri
-encounter_creatures:
-  - Lupo
 ---
 
 # Demo - Nebbia al Ponte
@@ -32,13 +32,6 @@ encounter_creatures:
 > - Odran prova a nascondere il frammento.
 > - Mira vuole arrestare chiunque tocchi la campana.
 > - Una voce nella nebbia ripete il nome di un personaggio.
-
-```encounter
-name: Demo - Nebbia al Ponte
-players: true
-creatures:
-  - Lupo
-```
 
 > [!tesoro] Ricompensa
 > [[Demo - Frammento della Soglia]]

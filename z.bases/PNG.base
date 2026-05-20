@@ -1,0 +1,53 @@
+filters:
+  and:
+    - file.folder == "Mondi/Personaggi"
+    - tipo == "png"
+    - '!file.name.startsWith("Prova -")'
+properties:
+  nome:
+    displayName: Nome
+  stato:
+    displayName: Stato
+  ruolo:
+    displayName: Ruolo
+  luogo:
+    displayName: Luogo
+  fazioni:
+    displayName: Fazioni
+  pressione:
+    displayName: Pressione
+  prossima_mossa:
+    displayName: Prossima mossa
+  segreto:
+    displayName: Segreto
+views:
+  - type: table
+    name: In gioco
+    filters:
+      and:
+        - stato != "archiviata"
+    order:
+      - nome
+      - stato
+      - ruolo
+      - luogo
+      - fazioni
+      - pressione
+      - prossima_mossa
+    sort:
+      - property: stato
+        direction: ASC
+      - property: nome
+        direction: ASC
+  - type: cards
+    name: Schede rapide
+    filters:
+      and:
+        - stato != "archiviata"
+    order:
+      - nome
+      - ruolo
+      - luogo
+      - fazioni
+      - prossima_mossa
+    cardSize: 240

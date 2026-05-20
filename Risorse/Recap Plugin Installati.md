@@ -13,7 +13,7 @@ Questa pagina riassume i plugin community presenti nel vault, come sono configur
 
 ## Sintesi
 
-Plugin community abilitati: 23.
+Plugin community abilitati: 27.
 
 | Plugin | Versione nel vault | Stato nel vault | Chi ne beneficia | Uso migliore |
 | --- | ---: | --- | --- | --- |
@@ -21,21 +21,27 @@ Plugin community abilitati: 23.
 | Templater | 2.20.4 | integrato | DM, worldbuilder | Creazione guidata di sessioni, missioni, PNG, luoghi e note live. |
 | Meta Bind | 1.4.10 | integrato | DM, giocatori al tavolo | Pulsanti, toggle, input e campi modificabili dentro le note. |
 | JS Engine | 0.3.5 | supporto avanzato | manutentore | JavaScript in-note dove DataviewJS o Meta Bind non bastano. |
-| Metadata Menu | 0.8.12 | installato, poco sfruttato | manutentore, worldbuilder | FileClass e campi guidati per migliorare la qualita dei metadati. |
+| Metadata Menu | 0.8.12 | integrato, da estendere sui contenuti reali | manutentore, worldbuilder | FileClass e campi guidati per migliorare la qualita dei metadati. |
 | Folder Notes | 1.8.19 | integrato | tutti | Cartelle principali apribili come note indice. |
 | Homepage | 4.4.2 | integrato | tutti | Apertura automatica di [[Inizia Qui]]. |
+| Workspaces core | core abilitato | DM, worldbuilder, manutentore | Tre layout salvati: `DM al tavolo`, `Worldbuilding`, `Manutenzione`. |
+| Bookmarks core | core abilitato | tutti | Segnalibri raggruppati per accesso rapido alle pagine vive. |
 | Kanban | 2.0.51 | integrato base | DM | Bacheche Markdown per preparazione, post-sessione e creature. |
+| Tasks | 8.0.0 | supportato | DM | Vista globale dei task operativi con global filter `#task`; non sostituisce missioni, clock o lore. |
+| Maps | 0.1.6 | supportato leggero | worldbuilder, manutentore | Vista mappa per Bases usando `coordinates`, `icon` e `color`. |
 | Callout Manager | 1.1.1 | integrato | DM, giocatori | Callout GDR coerenti per scene, PNG, luoghi, fazioni, missioni, timeline, segreti, pericoli e ricompense. |
 | Fantasy Statblocks | 4.10.3 | integrato | DM | Schede mostro e creature richiamabili da note e incontri. |
-| Initiative Tracker | 13.0.21 | parziale | DM al tavolo | Combattimenti con blocchi `encounter` e creature da Fantasy Statblocks. |
+| Initiative Tracker | 13.0.21 | supportato | DM al tavolo | Combattimenti con blocchi `encounter`, vista [[Risorse/Iniziativa e Combattimenti]] e creature da Fantasy Statblocks. |
 | Dice Roller | 11.4.2 | supportato | DM, giocatori | Tiri inline, tabelle casuali e lookup table da note Markdown. |
-| Calendarium | 2.1.0 | pronto, da configurare | DM, worldbuilder | Calendario fantasy, eventi, scadenze e timeline del mondo. |
-| Excalidraw | 2.23.3 | integrato base | worldbuilder, DM | Mappe relazionali, fronti, dungeon, schemi e disegni collegati a note. |
+| Calendarium | 2.1.0 | integrato con default e custom | DM, worldbuilder | Calendario fantasy, eventi, scadenze e timeline del mondo. |
+| Excalidraw | 2.23.3 | integrato | worldbuilder, DM | Mappe relazionali, fronti, reti di indizi, scene e dungeon collegati a note. |
+| Advanced Canvas | 6.1.6 | supportato | worldbuilder, DM | Canvas strutturali di note, gruppi e connessioni per fronti e archi di campagna. |
 | Media Extended | 4.2.4 | supportato leggero | DM al tavolo | Audio/video con timestamp e riferimenti a momenti precisi. Desktop only. |
 | Generatore di Contenuti Fantasy | 1.2.4 | integrato custom | DM, worldbuilder | Spunti rapidi in italiano salvati come bozze in `Inbox/Generati`. |
 | Iconize | 2.14.7 | integrato visuale | tutti | Icone per orientamento in file explorer, link e note. |
 | Tabs | 1.1.8 | integrato | tutti | Sezioni a schede in dashboard, template lunghi e mostri SRD. |
 | Style Settings | 1.0.9 | integrato visuale | manutentore | Regolazione dello snippet `gdr-vault` senza modificare CSS. |
+| Linter | 1.31.2 | supporto sviluppo | manutentore | Pulizia manuale e prudente delle note, senza lint on save. |
 | Advanced Tables | 0.23.2 | supporto | DM, manutentore | Editing veloce di tabelle Markdown e tabelle casuali. |
 | TTRPG Tools: Maps | 1.9.5 | opzionale guidato | DM al tavolo | Mappe zoomabili con marker, layer, misure e note collegate. |
 | Hex Cartographer | 1.0.2 | opzionale guidato | worldbuilder | Mappe esagonali per regioni, viaggi e hexcrawl. |
@@ -52,22 +58,47 @@ Nota: `table-editor-obsidian` e il plugin mostrato come **Advanced Tables**; `ob
 - [Metadata Menu](https://mdelobelle.github.io/metadatamenu/)
 - [Folder Notes](https://lostpaul.github.io/obsidian-folder-notes/)
 - [Kanban](https://publish.obsidian.md/kanban/Obsidian+Kanban+Plugin)
+- [Tasks](https://publish.obsidian.md/tasks/)
+- Maps 0.1.6 verificato dal manifest locale; documentazione Obsidian: Map view per Bases.
 - [Callout Manager](https://github.com/eth-p/obsidian-callout-manager)
 - [Calendarium](https://plugins.javalent.com/calendarium)
 - [Initiative Tracker](https://plugins.javalent.com/it)
 - [Fantasy Statblocks](https://plugins.javalent.com/statblocks)
 - [Dice Roller](https://plugins.javalent.com/dice)
 - [Excalidraw](https://github.com/zsviczian/obsidian-excalidraw-plugin)
+- Advanced Canvas 6.1.6 verificato dal manifest locale.
 - [Media Extended v4](https://mx.aidenlx.site/docs/v4/load-media)
 - [Iconize](https://florianwoelki.github.io/obsidian-iconize/)
 - [Advanced Tables](https://github.com/tgrosinger/advanced-tables-obsidian)
 - [Style Settings](https://github.com/mgmeyers/obsidian-style-settings)
+- Linter 1.31.2 verificato dal manifest locale.
 - [Tabs](https://xhuajin.github.io/obsidian-tabs/)
 - [TTRPG Tools: Maps](https://ttrpg-tools-obsidian.org/)
 - [BRAT](https://tfthacker.com/BRAT)
 - [Fantasy Content Generator](https://github.com/Gregory-Jagermeister/Fantasy-Content-Generator)
 
 ## Combinazioni Da Sfruttare
+
+## Verifica Uso Reale
+
+| Plugin | Segnale nel vault | Valutazione |
+| --- | --- | --- |
+| Dataview | centinaia di blocchi `dataview` e `dataviewjs` | sfruttato bene |
+| Meta Bind | molti pulsanti e input nei template/dashboard | sfruttato bene |
+| Templater | template e script in `z.modelli`/`z.automazioni` | sfruttato bene |
+| Metadata Menu | FileClass in `z.fileclass` | migliorato con nuove classi per incontri, mappe, media, rotte e risorse |
+| Tabs | usato in template e dashboard lunghe | sfruttato bene, da non abusare |
+| Dice Roller | tiri inline e tabelle con block id | sfruttato bene |
+| Calendarium | default importati e `Brumafonda` custom attivo | sfruttato per leggere `fc-*` e dare un calendario diegetico coerente |
+| Initiative Tracker | vista operativa, demo combattimento e blocchi `encounter` mirati | supportato per combattimenti pronti, senza forzare scene sociali/esplorative |
+| Fantasy Statblocks | creature con `statblock: true` e blocchi `statblock` | buono, ora collegato meglio agli incontri di combattimento |
+| Excalidraw / Canvas / Hex / Zoom Map | demo, template, dashboard mappe e scene | Excalidraw per disegno libero, Canvas per reti di note, Hex/Zoom per mappe giocabili |
+| Media Extended | indici media e timestamp | leggero, sufficiente finche non ci sono media reali di campagna |
+| Kanban | tre bacheche operative | base, migliorabile con task piu collegati |
+| Tasks | global filter `#task` e [[Risorse/Task DM]] | supportato per lavoro operativo del DM |
+| Linter | configurazione manuale e note guida | supporto sviluppo, non workflow utente finale |
+| Workspaces/Bookmarks | core attivi e guida dedicata | supportati per navigazione e cambio contesto |
+| Maps per Bases | [[z.bases/Atlante Mappe.base]] e coordinate demo | supportato leggero; plugin `maps` installato |
 
 ### Dashboard Operative
 
@@ -88,6 +119,7 @@ Usa insieme Fantasy Statblocks, Initiative Tracker, Dice Roller e Callout Manage
 - La creatura deve avere `statblock: true` e `name` coerente.
 - Il blocco `statblock` richiama il nome esatto del mostro.
 - Il blocco `encounter` usa gli stessi nomi per avviare l'iniziativa.
+- [[Risorse/Iniziativa e Combattimenti]] mostra i combattimenti pronti e quelli senza `encounter_creatures`.
 - Dice Roller copre tiri rapidi e tabelle casuali.
 - I callout `incontro`, `pericolo`, `timer` e `regola` separano cio che va letto, deciso o tracciato.
 
@@ -107,10 +139,10 @@ Beneficia soprattutto: DM che prepara a blocchi e vuole ridurre controllo manual
 
 ### Worldbuilding
 
-Usa insieme Excalidraw, Canvas core, Iconize, Folder Notes, Tabs, Hex Cartographer e TTRPG Tools: Maps.
+Usa insieme Excalidraw, Canvas core, Advanced Canvas, Iconize, Folder Notes, Tabs, Hex Cartographer e TTRPG Tools: Maps.
 
 - Excalidraw e adatto a relazioni vive: fazioni, fronti, dungeon, indizi e mappe ragionate.
-- Canvas core e meglio quando vuoi una mappa fatta di note, media e gruppi strutturati.
+- Canvas core e Advanced Canvas sono meglio quando vuoi una mappa fatta di note, media e gruppi strutturati.
 - Iconize aiuta a orientarsi, ma non sostituisce indici e dashboard.
 - Folder Notes mantiene ogni cartella leggibile come pagina.
 - Tabs riduce lo scrolling di dashboard e template lunghi.
@@ -161,9 +193,14 @@ Beneficia soprattutto: DM che usa musica, immagini, handout o video-reference.
 
 ## Prossime Azioni Consigliate
 
-1. Configurare almeno un calendario in Calendarium, perche il plugin e installato ma `calendars` e vuoto.
-2. Creare FileClass Metadata Menu per i campi piu usati, iniziando da `sessione`, `missione`, `png`, `luogo`, `incontro`.
+1. Rifinire mesi, feste e stagioni di `Brumafonda` quando il calendario diegetico della campagna diventa canonico.
+2. Fatto: create FileClass Metadata Menu aggiuntive per `incontro`, `rotta`, `risorsa`, `mercato`, `compendium`, `ricorrenza`, `mappa` e `media`.
 3. Fatto: aggiunta [[Demo - Mappa Zoomabile]] con blocco `zoommap` e base locale.
 4. Fatto: Hex Cartographer resta opzionale guidato per `regione -> esagoni -> incontri -> conseguenze`.
 5. Fatto: Media Extended e collegato a [[Durante il Gioco]] tramite media con `stato: pronto`.
-6. Tenere Iron Vault fuori dal bundle: usare [[Risorse/Studio Iron Vault]] solo come studio di design.
+6. Fatto: Initiative Tracker e collegato a [[Demo - Agguato dei Lupi]] e [[Risorse/Iniziativa e Combattimenti]].
+7. Fatto: Advanced Canvas e collegato a [[Demo - Canvas Fronti.canvas]] e [[Risorse/Canvas Per GDR]].
+8. Fatto: Linter configurato come supporto sviluppo manuale in [[Risorse/Linter e Sviluppo]].
+9. Fatto: Workspaces e Bookmarks collegati a [[Risorse/Workspaces e Segnalibri]].
+10. Fatto: Maps per Bases installato e collegato a [[z.bases/Atlante Mappe.base]] e [[Risorse/Mappe Bases]].
+11. Tenere Iron Vault fuori dal bundle: usare [[Risorse/Studio Iron Vault]] solo come studio di design.

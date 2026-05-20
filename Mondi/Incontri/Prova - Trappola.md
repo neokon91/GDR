@@ -2,6 +2,7 @@
 id: prova-trappola
 nome: "Prova - Trappola"
 categoria: incontro
+fileClass: incontro
 tipo: trappola
 stato: pronto
 mondo: "[[Prova - Mondo]]"

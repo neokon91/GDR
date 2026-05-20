@@ -82,6 +82,41 @@
 > > - Complicazione: `dice: [[Risorse/Tabelle/Tabelle#^complicazioni]]`
 > > - Umore PNG: `dice: [[Risorse/Tabelle/Tabelle#^umore-png]]`
 
+> [!regia] Gestione
+> ```meta-bind-button
+> label: Durante Il Gioco
+> style: primary
+> actions:
+>   - type: open
+>     link: "[[Durante il Gioco]]"
+> ```
+>
+> ```meta-bind-button
+> label: Materiali Al Tavolo
+> style: primary
+> actions:
+>   - type: open
+>     link: "[[Risorse/Materiali Al Tavolo]]"
+> ```
+>
+> ```meta-bind-button
+> label: Nuovo Incontro
+> style: default
+> actions:
+>   - type: templaterCreateNote
+>     templateFile: "z.modelli/dm/Incontro.md"
+>     folderPath: "Mondi/Incontri"
+>     open: true
+> ```
+>
+> ```meta-bind-button
+> label: Post Sessione
+> style: default
+> actions:
+>   - type: open
+>     link: "[[Risorse/Post Sessione Guidato]]"
+> ```
+
 ````tabs
 tab: Scaletta
 

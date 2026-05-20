@@ -16,18 +16,21 @@ La release iniziale non deve dimostrare tutti i plugin. Deve dimostrare un prodo
 | JS Engine | core tecnico | Supporto logiche avanzate. |
 | Metadata Menu | core leggero | FileClass per sessione, missione, tracciato, PNG, luogo, fazione e relazione. |
 | Homepage | core | Apertura su `Inizia Qui`. |
+| Workspaces | core UX | Layout consigliati per cambio contesto. |
+| Bookmarks | core UX | Segnalibri per pagine operative. |
 | Folder Notes | core | Indici di cartella. |
 | Tabs | core UX | Note lunghe più leggibili. |
 | Callout Manager | core UX | Blocchi riconoscibili. |
 | Style Settings | core UX | Regolazioni visuali. |
+| Tasks | supportato operativo | Backlog DM, preparazione e post-sessione filtrati con `#task`; non sostituisce missioni, clock o lore. |
 
 ## TTRPG Supportati Nella Release
 
 | Strumento | Stato release | Uso |
 | --- | --- | --- |
 | Dice Roller | supportato | Tiri rapidi e tabelle casuali. |
-| Fantasy Statblocks | supportato | Creature e statblock. |
-| Initiative Tracker | supportato | Incontri pronti. |
+| Fantasy Statblocks | supportato | Creature e statblock collegati agli incontri. |
+| Initiative Tracker | supportato | Combattimenti pronti con blocchi `encounter` e vista [[../Risorse/Iniziativa e Combattimenti|Iniziativa e Combattimenti]]. |
 | Calendarium | supportato | Calendario narrativo e scadenze. |
 | Kanban | supportato | Preparazione e post-sessione. |
 
@@ -35,11 +38,14 @@ La release iniziale non deve dimostrare tutti i plugin. Deve dimostrare un prodo
 
 | Strumento | Stato release | Uso |
 | --- | --- | --- |
-| Excalidraw | supportato | Schemi, relazioni e mappe ragionate. |
+| Excalidraw | supportato | Schemi, relazioni, fronti, reti di indizi e scene al tavolo. |
+| Advanced Canvas | supportato leggero | Canvas strutturali di note per fronti e archi di campagna. |
+| Maps per Bases | supportato leggero | Base pilota con coordinate e plugin community `maps` installato. |
 | Hex Cartographer | opzionale guidato | Mappe esagonali e viaggio. |
 | TTRPG Tools: Maps | opzionale guidato | Mappe zoomabili al tavolo. |
 | Media Extended | supportato leggero | Audio/video con timestamp e materiali. |
 | Advanced Tables | supporto editoriale | Editing tabelle. |
+| Linter | supporto sviluppo | Pulizia manuale controllata; niente lint automatico nella release base. |
 
 ## Fuori Dal Flusso Base
 

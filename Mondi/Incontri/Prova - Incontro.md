@@ -2,6 +2,7 @@
 id: prova-incontro
 nome: "Prova - Incontro"
 categoria: incontro
+fileClass: incontro
 tipo: combattimento
 stato: pronto
 mondo: "[[Prova - Mondo]]"

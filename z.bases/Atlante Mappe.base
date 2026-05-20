@@ -1,0 +1,51 @@
+filters:
+  and:
+    - file.folder == "Mondi/Luoghi"
+    - note.coordinates
+    - '!file.name.startsWith("Prova -")'
+properties:
+  file.name:
+    displayName: Luogo
+  note.stato:
+    displayName: Stato
+  note.tipo:
+    displayName: Tipo
+  note.mondo:
+    displayName: Mondo
+  note.coordinates:
+    displayName: Coordinate
+  note.layer_mappa:
+    displayName: Layer
+  note.icon:
+    displayName: Icona
+  note.color:
+    displayName: Colore
+views:
+  - type: map
+    name: Mappa
+    order:
+      - file.name
+      - note.tipo
+      - note.stato
+      - note.mondo
+      - note.layer_mappa
+    coordinates: note.coordinates
+    markerIcon: note.icon
+    markerColor: note.color
+    defaultZoom: 13
+  - type: table
+    name: Tabella
+    order:
+      - file.name
+      - note.tipo
+      - note.stato
+      - note.mondo
+      - note.coordinates
+      - note.layer_mappa
+      - note.icon
+      - note.color
+    sort:
+      - property: note.layer_mappa
+        direction: ASC
+      - property: file.name
+        direction: ASC

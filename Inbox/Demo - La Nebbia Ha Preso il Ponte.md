@@ -40,56 +40,29 @@ azioni:
 
 ## Azioni
 
+Stato:
+`INPUT[inlineSelect(option(da smistare, Da smistare), option(collegata, Collegata), option(canonica, Canonica), option(archiviata, Archiviata), option(ignorata, Ignorata)):stato]`
+
+Stato canonico:
+`INPUT[inlineSelect(option(rumor, Rumor), option(canonico, Canonico), option(leggenda, Leggenda), option(falso, Falso), option(retcon, Retcon)):stato_canonico]`
+
+Canonico:
+`INPUT[toggle:canonico]`
+
 ```meta-bind-button
-label: Canonizza
+label: Post Sessione
 style: primary
 actions:
-  - type: updateMetadata
-    bindTarget: stato
-    evaluate: false
-    value: canonica
-  - type: updateMetadata
-    bindTarget: stato_canonico
-    evaluate: false
-    value: canonico
-  - type: updateMetadata
-    bindTarget: canonico
-    evaluate: false
-    value: true
+  - type: open
+    link: "[[Risorse/Post Sessione Guidato]]"
 ```
 
 ```meta-bind-button
-label: Collega
-style: primary
-actions:
-  - type: updateMetadata
-    bindTarget: stato
-    evaluate: false
-    value: collegata
-```
-
-```meta-bind-button
-label: Archivia
+label: Cosa Succede Fuori Scena
 style: default
 actions:
-  - type: updateMetadata
-    bindTarget: stato
-    evaluate: false
-    value: archiviata
-```
-
-```meta-bind-button
-label: Ignora
-style: default
-actions:
-  - type: updateMetadata
-    bindTarget: stato
-    evaluate: false
-    value: ignorata
-  - type: updateMetadata
-    bindTarget: canonico
-    evaluate: false
-    value: false
+  - type: open
+    link: "[[Cosa Succede Fuori Scena]]"
 ```
 
 - [x] Collegare a ponte, Custodi e missione.

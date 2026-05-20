@@ -1,0 +1,42 @@
+filters:
+  and:
+    - file.folder == "Mondi/Incontri"
+    - file.name != "Incontri"
+    - '!file.name.startsWith("Prova -")'
+properties:
+  nome:
+    displayName: Nome
+  stato:
+    displayName: Stato
+  tipo:
+    displayName: Tipo
+  luogo:
+    displayName: Luogo
+  pericolo:
+    displayName: Pericolo
+  pressione:
+    displayName: Pressione
+  creature:
+    displayName: Creature
+  personaggi:
+    displayName: Personaggi
+views:
+  - type: table
+    name: Pronti
+    filters:
+      and:
+        - stato != "archiviata"
+    order:
+      - nome
+      - stato
+      - tipo
+      - luogo
+      - pericolo
+      - pressione
+      - creature
+      - personaggi
+    sort:
+      - property: stato
+        direction: ASC
+      - property: pericolo
+        direction: DESC

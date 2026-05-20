@@ -51,7 +51,7 @@ Il vault include strumenti gia configurati. Servono a far funzionare dashboard, 
 ## Dopo Il Primo Avvio
 
 1. Apri [[Inizia Qui]].
-2. Apri [[1. DM Dashboard]].
+2. Apri [[Hub/1. DM Dashboard|1. DM Dashboard]].
 3. Apri [[Risorse/Controllo Vault]].
 4. Se vedi problemi, apri [[Risorse/Se Qualcosa Non Funziona]].
 5. Se tutto appare correttamente, crea una sessione di prova o apri la demo [[Demo - La Reliquia Spezzata]].

@@ -9,6 +9,8 @@ Per il primo avvio usa [[Risorse/Primo Avvio Strumenti]]. Se qualcosa non rispon
 ## Sempre Utili
 
 - **Dashboard e tabelle automatiche**: mostrano sessioni, missioni, PNG, bozze, materiali pronti e problemi da controllare.
+- **Viste modificabili**: le viste Bases pilota in `z.bases` permettono di correggere campi principali senza modificare query.
+- **Segnalibri e workspace**: [[Risorse/Workspaces e Segnalibri]] organizza accessi rapidi per tavolo, worldbuilding e manutenzione.
 - **Pulsanti di creazione**: creano sessioni, missioni, PNG, luoghi, incontri, oggetti e appunti gia impostati.
 - **Campi guidati**: aiutano a compilare stato, tipo, mondo, luoghi, fazioni e collegamenti senza ricordare la struttura.
 - **Indici di cartella**: rendono le cartelle principali consultabili come pagine.
@@ -17,6 +19,7 @@ Per il primo avvio usa [[Risorse/Primo Avvio Strumenti]]. Se qualcosa non rispon
 ## Al Tavolo
 
 - **Bacheche**: aiutano a preparare e chiudere una sessione.
+- **Task DM**: [[Risorse/Task DM]] raccoglie le checklist operative `#task`; il plugin Tasks resta installabile dopo, se serve.
 - **Blocchi colorati**: distinguono scene, indizi, segreti, pericoli, ricompense e testi da leggere.
 - **Schede creatura**: mostrano mostri e creature in formato leggibile.
 - **Tiri rapidi**: permettono prove, dadi e tabelle casuali dentro le note.
@@ -27,11 +30,18 @@ Per il primo avvio usa [[Risorse/Primo Avvio Strumenti]]. Se qualcosa non rispon
 ## Worldbuilding
 
 - **Mappe e schemi**: servono per relazioni tra fazioni, PNG, luoghi, dungeon e fronti.
+- **Excalidraw operativo**: [[Risorse/Excalidraw Per GDR]] raccoglie fronti, indizi e scene modificabili.
+- **Canvas operativo**: [[Risorse/Canvas Per GDR]] usa reti di note vere per fronti, fazioni e archi di campagna.
 - **Mappe esagonali o zoomabili**: utili quando il viaggio o la posizione contano davvero.
+- **Mappe da Bases**: [[Risorse/Mappe Bases]] prepara `coordinates`, marker e [[z.bases/Atlante Mappe.base]] per il plugin Maps.
+- **Rotte, risorse e mercati guidati**: aiutano a collegare economia, controllori, dipendenze e conseguenze.
+- **Compendium originale**: raccoglie materiali, piante, malattie, monete, tecnologie, cibi, superstizioni, professioni e creature regionali.
+- **Calendario diegetico**: mantiene feste, tabù stagionali, scadenze rituali e pressioni legate alle date anche senza configurare Calendarium.
 - **Generatore fantasy**: crea spunti rapidi in italiano e li salva come bozze.
 - **Icone**: rendono cartelle e pagine piu riconoscibili.
 - **Schede nelle note lunghe**: riducono lo scrolling in dashboard e template complessi.
 - **Aspetto del vault**: permette piccole regolazioni visuali senza toccare codice.
+- **Linter manuale**: [[Risorse/Linter e Sviluppo]] aiuta a ripulire note selezionate senza riscrivere SRD, mappe o configurazioni.
 
 ## Regola Pratica
 

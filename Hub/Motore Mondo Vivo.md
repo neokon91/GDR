@@ -61,6 +61,14 @@ actions:
     link: "[[Controllo Canone]]"
 ```
 
+```meta-bind-button
+label: Economia E Rotte
+style: primary
+actions:
+  - type: open
+    link: "[[Economia E Rotte]]"
+```
+
 ```dataviewjs
 const gdr = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));
 const current = dv.current();
@@ -89,6 +97,7 @@ const progress = p => `${Number(p.progress_value ?? 0)}/${Number(p.progress_max 
 const statRows = [
   ["Canone vivo", pages('"Mondi" OR "Inbox"', p => p.canonico === true || p.stato_canonico === "canonico").length, "Verita che vincolano il mondo"],
   ["Pressioni", pages('"Mondi/Fazioni" OR "Mondi/Religioni" OR "Mondi/Conflitti" OR "Mondi/Tracciati"', p => Number(p.pressione ?? 0) > 0 || Number(p.progress_value ?? 0) > 0).length, "Attori che possono muoversi"],
+  ["Pressioni economiche", pages('"Mondi/Rotte" OR "Mondi/Risorse" OR "Mondi/Mercati"', p => Number(p.pressione ?? 0) > 0 || has(p.prossima_mossa)).length, "Rotte, risorse e nodi"],
   ["Eventi causali", pages('"Mondi/Timeline"', p => p.file.name !== "Timeline" && (has(p.causa) || hasLinks(p.cause) || hasLinks(p.effetti))).length, "Storia con causa o effetto"],
   ["Propagazioni aperte", pages('"Mondi" OR "Inbox"', p => hasLinks(p.propaga_a) || hasLinks(p.entita_impattate) || hasLinks(p.conseguenze)).length, "Cambiamenti da riflettere"]
 ];
@@ -119,6 +128,16 @@ table(
     .sort(p => Number(p.pressione ?? 0), "desc")
     .limit(24)
     .map(p => [p.file.link, p.pressione ?? "", progress(p), p.agenda ?? p.obiettivo ?? p.posta ?? "", p.alleati ?? [], p.rivali ?? [], p.trattati ?? [], p.prossima_mossa ?? ""])
+    .array()
+);
+
+table(
+  "Economic Pressure",
+  ["Nodo", "Tipo", "Stato", "Pressione", "Controllori", "Risorse", "Conseguenze", "Prossima mossa"],
+  pages('"Mondi/Rotte" OR "Mondi/Risorse" OR "Mondi/Mercati"', p => p.file.name !== "Rotte" && p.file.name !== "Risorse" && p.file.name !== "Mercati")
+    .sort(p => Number(p.pressione ?? 0), "desc")
+    .limit(24)
+    .map(p => [p.file.link, p.tipo ?? "", p.stato_rotta ?? p.stato ?? "", p.pressione ?? "", p.fazioni_controllanti ?? p.fazioni ?? [], p.risorse_trasportate ?? p.risorse ?? [], p.conseguenze ?? p.conseguenze_se_bloccata ?? [], p.prossima_mossa ?? ""])
     .array()
 );
 

@@ -36,32 +36,34 @@
 > - [ ] Fazione
 > - [ ] Clock o tracciato
 
-## Azioni Guidate
+## Gestione
+
+Stato:
+`INPUT[inlineSelect(option(da smistare, Da smistare), option(collegata, Collegata), option(canonica, Canonica), option(archiviata, Archiviata), option(ignorata, Ignorata)):stato]`
+
+Stato canonico:
+`INPUT[inlineSelect(option(rumor, Rumor), option(canonico, Canonico), option(leggenda, Leggenda), option(falso, Falso), option(retcon, Retcon)):stato_canonico]`
+
+Canonico:
+`INPUT[toggle:canonico]`
+
+Aggiorna tracciato:
+`INPUT[toggle:aggiorna_tracciato]`
 
 ```meta-bind-button
-label: Canonizza
+label: Nuovo Tracciato
 style: primary
 actions:
-  - type: updateMetadata
-    bindTarget: stato
-    evaluate: false
-    value: canonica
-  - type: updateMetadata
-    bindTarget: stato_canonico
-    evaluate: false
-    value: canonico
-  - type: updateMetadata
-    bindTarget: canonico
-    evaluate: false
-    value: true
+  - type: templaterCreateNote
+    templateFile: "z.modelli/dm/Tracciato.md"
+    folderPath: "Mondi/Tracciati"
+    open: true
 ```
 
 ```meta-bind-button
-label: Tracciato Da Aggiornare
-style: primary
+label: Post Sessione
+style: default
 actions:
-  - type: updateMetadata
-    bindTarget: aggiorna_tracciato
-    evaluate: false
-    value: true
+  - type: open
+    link: "[[Risorse/Post Sessione Guidato]]"
 ```

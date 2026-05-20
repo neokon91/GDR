@@ -22,18 +22,27 @@ const REQUIRED_FILES = [
     "VERSION.md",
     "CHANGELOG.md",
     "RELEASE.md",
-    "Atlante del Mondo.md",
-    "Bibbia del Mondo.md",
-    "Campagna da Ambientazione.md",
-    "Controllo Canone.md",
-    "Geopolitical Dashboard.md",
-    "Motore Mondo Vivo.md",
-    "Revisione Lore.md",
-    "Vista Giocatori.md",
+    "Hub/1. DM Dashboard.md",
+    "Hub/Atlante del Mondo.md",
+    "Hub/Bibbia del Mondo.md",
+    "Hub/Campagna da Ambientazione.md",
+    "Hub/Compendium Del Mondo.md",
+    "Hub/Controllo Canone.md",
+    "Hub/Controllo Worldbuilding.md",
+    "Hub/Cosa Succede Fuori Scena.md",
+    "Hub/Durante il Gioco.md",
+    "Hub/Economia E Rotte.md",
+    "Hub/Geopolitical Dashboard.md",
+    "Hub/Lore Hub.md",
+    "Hub/Motore Mondo Vivo.md",
+    "Hub/Revisione Lore.md",
+    "Hub/Vista Giocatori.md",
+    "Hub/Worldbuilder Dashboard.md",
     "Risorse/FAQ.md",
     "Risorse/Release Pulita.md",
     "Risorse/Roadmap/Roadmap.md",
     "Risorse/Indice Connettore GPT.md",
+    "Risorse/Smistamento Bozze Generate.md",
     "Campagne/Demo - La Reliquia Spezzata.md"
 ];
 const ALLOWED_CATEGORIES = new Set([
@@ -230,6 +239,12 @@ function hasAny(frontmatter, fields) {
     return fields.some(field => hasValue(frontmatter[field]));
 }
 
+function daysSince(value) {
+    const timestamp = Date.parse(value);
+    if (!Number.isFinite(timestamp)) return null;
+    return Math.floor((Date.now() - timestamp) / 86400000);
+}
+
 function isFolderIndex(fileRel) {
     const parsed = path.parse(fileRel);
     return parsed.name === path.basename(parsed.dir);
@@ -244,14 +259,35 @@ function isIndexLikeNote(fileRel) {
         "Mondi/Mondo.md",
         "Mondi/Stato del Mondo.md",
         "Risorse/Indice Connettore GPT.md",
+        "Risorse/Smistamento Bozze Generate.md",
         "Risorse/Sviluppo Vault.md",
         "Risorse/Guida DM.md",
-        "Risorse/Controllo Vault.md"
+        "Risorse/Controllo Vault.md",
+        "Hub/1. DM Dashboard.md",
+        "Hub/Atlante del Mondo.md",
+        "Hub/Bibbia del Mondo.md",
+        "Hub/Campagna da Ambientazione.md",
+        "Hub/Compendium Del Mondo.md",
+        "Hub/Controllo Canone.md",
+        "Hub/Controllo Worldbuilding.md",
+        "Hub/Cosa Succede Fuori Scena.md",
+        "Hub/Durante il Gioco.md",
+        "Hub/Economia E Rotte.md",
+        "Hub/Geopolitical Dashboard.md",
+        "Hub/Lore Hub.md",
+        "Hub/Motore Mondo Vivo.md",
+        "Hub/Revisione Lore.md",
+        "Hub/Vista Giocatori.md",
+        "Hub/Worldbuilder Dashboard.md"
     ].includes(fileRel);
 }
 
 function isOperationalNote(fileRel) {
     return !isSrdNote(fileRel) && (/^(Campagne|Inbox|Mondi|Risorse|z\.modelli)\//.test(fileRel) || !fileRel.includes("/"));
+}
+
+function isGeneratedFantasyDraft(fileRel, frontmatter) {
+    return fileRel.startsWith("Inbox/Generati/") && frontmatter.plugin === "fantasy-content-generator";
 }
 
 function targetPath(target) {
@@ -261,9 +297,22 @@ function targetPath(target) {
 }
 
 const markdownFiles = walk(ROOT, file => file.endsWith(".md"));
+const linkableFiles = walk(ROOT, file => /\.(md|canvas|base)$/.test(file));
 const markdownByPath = new Set();
 const markdownByBasename = new Map();
+const linkableByPath = new Set();
+const linkableByBasename = new Map();
 const markdownMeta = new Map();
+
+for (const file of linkableFiles) {
+    const fileRel = rel(file);
+    const stem = fileRel.replace(/\.(md|canvas|base)$/, "");
+    const basename = path.basename(stem);
+
+    linkableByPath.add(stem);
+    if (!linkableByBasename.has(basename)) linkableByBasename.set(basename, []);
+    linkableByBasename.get(basename).push(fileRel);
+}
 
 for (const file of markdownFiles) {
     const fileRel = rel(file);
@@ -282,6 +331,15 @@ for (const file of walk(ROOT, file => file.endsWith(".json"))) {
 }
 
 const communityPlugins = readJson(path.join(ROOT, ".obsidian/community-plugins.json")) ?? [];
+const calendariumData = readOptionalJson(path.join(ROOT, ".obsidian/plugins/calendarium/data.json")) ?? {};
+const calendariumCalendars = Array.isArray(calendariumData.calendars)
+    ? calendariumData.calendars
+    : Object.values(calendariumData.calendars ?? {});
+const calendariumNames = new Set(calendariumCalendars
+    .flatMap(calendar => [calendar?.name, calendar?.id])
+    .filter(Boolean)
+    .map(value => String(value).toLowerCase()));
+
 for (const plugin of REQUIRED_PLUGINS) {
     if (!communityPlugins.includes(plugin)) {
         errors.push(`Plugin obbligatorio non abilitato: ${plugin}`);
@@ -323,12 +381,12 @@ for (const file of markdownFiles) {
         const target = match[1].trim();
         if (!target || /^[a-z]+:\/\//i.test(target)) continue;
 
-        const normalized = target.replace(/\\/g, "/").replace(/\.md$/, "");
+        const normalized = target.replace(/\\/g, "/").replace(/\.(md|canvas|base)$/, "");
         const basename = path.basename(normalized);
 
-        if (markdownByPath.has(normalized)) continue;
+        if (linkableByPath.has(normalized)) continue;
 
-        const matches = markdownByBasename.get(basename) ?? [];
+        const matches = linkableByBasename.get(basename) ?? [];
 
         if (!matches.length) {
             errors.push(`${rel(file)}: wikilink rotto ${match[0]}`);
@@ -348,6 +406,13 @@ for (const file of markdownFiles) {
         if (!fs.existsSync(path.join(ROOT, template))) {
             errors.push(`${rel(file)}: template Meta Bind mancante ${template}`);
         }
+    }
+}
+
+for (const file of markdownFiles.filter(file => rel(file).startsWith("z.modelli/"))) {
+    const text = fs.readFileSync(file, "utf8");
+    if (/```meta-bind-button[\s\S]*?type:\s*updateMetadata[\s\S]*?```/.test(text)) {
+        warnings.push(`${rel(file)}: meta-bind-button modifica frontmatter; usare INPUT inline/blocco`);
     }
 }
 
@@ -393,6 +458,13 @@ const realEntries = [...markdownMeta.entries()]
     .filter(([fileRel]) => !path.basename(fileRel, ".md").startsWith("Prova -"))
     .filter(([fileRel]) => !isFolderIndex(fileRel));
 
+const generatedDrafts = realEntries
+    .filter(([fileRel, fm]) => isGeneratedFantasyDraft(fileRel, fm) && fm.stato === "bozza");
+
+if (generatedDrafts.length > 12) {
+    warnings.push(`Inbox/Generati: ${generatedDrafts.length} bozze generate da smistare`);
+}
+
 const activeSessions = realEntries
     .filter(([fileRel, fm]) => fileRel.startsWith("Mondi/Sessioni/") && fm.categoria === "sessione" && fm.attiva === true);
 
@@ -403,6 +475,18 @@ if (activeSessions.length > 1) {
 const gptConnectorIndex = markdownMeta.get("Risorse/Indice Connettore GPT.md");
 if (gptConnectorIndex?.is_code_search_indexed !== true) {
     errors.push("Risorse/Indice Connettore GPT.md: manca is_code_search_indexed: true");
+}
+
+const datedForCalendarium = realEntries.filter(([, fm]) => hasValue(fm["fc-date"]) && fm["fc-ignore"] !== true);
+if (communityPlugins.includes("calendarium") && !calendariumCalendars.length && datedForCalendarium.length) {
+    warnings.push(`Calendarium installato ma senza calendari salvati; ${datedForCalendarium.length} note hanno fc-date`);
+}
+if (calendariumCalendars.length) {
+    for (const [fileRel, fm] of datedForCalendarium) {
+        if (hasValue(fm["fc-calendar"]) && !calendariumNames.has(String(fm["fc-calendar"]).toLowerCase())) {
+            warnings.push(`${fileRel}: fc-calendar non configurato in Calendarium (${fm["fc-calendar"]})`);
+        }
+    }
 }
 
 const gptIndexPath = path.join(ROOT, "Risorse/Indice Connettore GPT.md");
@@ -422,6 +506,8 @@ if (!fs.existsSync(gptIndexPath)) {
 }
 
 for (const [fileRel, fm] of realEntries) {
+    const text = fs.readFileSync(path.join(ROOT, fileRel), "utf8");
+
     if (isOperationalNote(fileRel) && hasValue(fm.categoria) && !ALLOWED_CATEGORIES.has(String(fm.categoria))) {
         warnings.push(`${fileRel}: categoria non prevista (${fm.categoria})`);
     }
@@ -580,6 +666,71 @@ for (const [fileRel, fm] of realEntries) {
 
     if (fileRel.startsWith("Mondi/Luoghi/") && fm.stato === "pronto" && !hasAny(fm, ["pericolo", "stabilita", "pressione"])) {
         warnings.push(`${fileRel}: luogo pronto senza pericolo, stabilita o pressione`);
+    }
+
+    if (isGeneratedFantasyDraft(fileRel, fm)) {
+        if (fm.canonico === true) {
+            warnings.push(`${fileRel}: bozza generata marcata canonica prima dello smistamento`);
+        }
+        if (!hasAny(fm, ["mondo", "luogo", "campagne", "sessioni"])) {
+            warnings.push(`${fileRel}: bozza generata senza aggancio a mondo, luogo, campagna o sessione`);
+        }
+
+        const age = daysSince(fm.creato);
+        if (fm.stato === "bozza" && age !== null && age >= 14) {
+            warnings.push(`${fileRel}: bozza generata ferma da ${age} giorni`);
+        }
+    }
+
+    if (fileRel.startsWith("Risorse/Mappe/") && fileRel !== "Risorse/Mappe/Mappe.md" && fm.stato !== "archiviata") {
+        const playableMapUses = new Set(["zoom", "esagoni", "dungeon", "scena"]);
+        const structuredMapUses = new Set(["fronte", "indizi", "regione"]);
+        const mapUse = String(fm.uso ?? "");
+
+        if (playableMapUses.has(mapUse) && fm.stato === "pronto") {
+            if (!hasValue(fm.mondo)) {
+                warnings.push(`${fileRel}: mappa pronta senza mondo`);
+            }
+            if (!hasAny(fm, ["luogo", "luoghi", "incontri", "missioni"])) {
+                warnings.push(`${fileRel}: mappa pronta senza luogo, luoghi, incontri o missioni`);
+            }
+        }
+
+        if (structuredMapUses.has(mapUse) && fm.stato === "pronto" && !hasAny(fm, ["mondo", "fazioni", "personaggi", "missioni", "luoghi"])) {
+            warnings.push(`${fileRel}: mappa strutturale pronta senza collegamenti canonici`);
+        }
+
+        if (mapUse === "zoom") {
+            const zoomMatch = text.match(/```zoommap([\s\S]*?)```/);
+            if (!zoomMatch) {
+                warnings.push(`${fileRel}: mappa zoom senza blocco zoommap`);
+            } else {
+                const imageMatch = zoomMatch[1].match(/^\s*image:\s*(.+?)\s*$/m);
+                if (!imageMatch) {
+                    warnings.push(`${fileRel}: blocco zoommap senza image`);
+                } else if (!fs.existsSync(path.join(ROOT, imageMatch[1].trim()))) {
+                    warnings.push(`${fileRel}: immagine zoommap mancante (${imageMatch[1].trim()})`);
+                }
+            }
+        }
+
+        if (fileRel.endsWith(".hexcartographer.md")) {
+            if (fm.type !== "hexcartographer") {
+                warnings.push(`${fileRel}: file Hex Cartographer senza type: hexcartographer`);
+            }
+            if (!/```json[\s\S]*?```/.test(text)) {
+                warnings.push(`${fileRel}: file Hex Cartographer senza blocco JSON`);
+            }
+        }
+
+        if (fm.pubblico === true) {
+            if (hasAny(fm, ["segreti", "prossima_mossa", "mosse_segrete"])) {
+                warnings.push(`${fileRel}: mappa pubblica con campi da GM`);
+            }
+            if (/\[!segreto\]/i.test(text)) {
+                warnings.push(`${fileRel}: mappa pubblica con callout segreto`);
+            }
+        }
     }
 }
 

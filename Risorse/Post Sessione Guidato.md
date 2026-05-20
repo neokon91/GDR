@@ -27,6 +27,14 @@ actions:
 ```
 
 ```meta-bind-button
+label: Smistamento Bozze Generate
+style: default
+actions:
+  - type: open
+    link: "[[Risorse/Smistamento Bozze Generate]]"
+```
+
+```meta-bind-button
 label: Motore Mondo Vivo
 style: primary
 actions:
@@ -200,6 +208,7 @@ LIMIT 8
 ## 10. Chiusura Rapida
 
 - [ ] Appunti live smistati o lasciati in [[Inbox/Inbox]] con un nome chiaro.
+- [ ] Bozze generate utili collegate o archiviate in [[Risorse/Smistamento Bozze Generate]].
 - [ ] Conseguenze importanti aggiunte a mondo, PNG, luoghi, fazioni, missioni o tracciati.
 - [ ] Propagazione compilata su eventi, fazioni, luoghi, missioni o relazioni toccate dalla sessione.
 - [ ] Territori politici, confini, risorse o legittimita aggiornati se il potere e cambiato.

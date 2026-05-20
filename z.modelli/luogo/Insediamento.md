@@ -38,6 +38,45 @@
 > > [!pericolo]- Tensione locale
 > > `=this.tensione`
 
+> [!regia] Gestione
+> ```meta-bind-button
+> label: Atlante
+> style: primary
+> actions:
+>   - type: open
+>     link: "[[Atlante del Mondo]]"
+> ```
+>
+> ```meta-bind-button
+> label: Nuovo PNG
+> style: primary
+> actions:
+>   - type: templaterCreateNote
+>     templateFile: "z.modelli/personaggio/PNG.md"
+>     folderPath: "Mondi/Personaggi"
+>     open: true
+> ```
+>
+> ```meta-bind-button
+> label: Nuovo Incontro
+> style: default
+> actions:
+>   - type: templaterCreateNote
+>     templateFile: "z.modelli/dm/Incontro.md"
+>     folderPath: "Mondi/Incontri"
+>     open: true
+> ```
+>
+> ```meta-bind-button
+> label: Nuova Mappa Zoom
+> style: default
+> actions:
+>   - type: templaterCreateNote
+>     templateFile: "z.modelli/mappe/Mappa Zoom.md"
+>     folderPath: "Risorse/Mappe"
+>     open: true
+> ```
+
 ````tabs
 tab: Essenziale
 

@@ -6,23 +6,23 @@ kanban-plugin: board
 
 ## Idee
 
-- [ ] Spunto di scena
+- [ ] Spunto di scena #task
 
 ## Da Preparare
 
-- [ ] Luoghi
-- [ ] PNG
-- [ ] Incontri
-- [ ] Ricompense
+- [ ] Luoghi #task
+- [ ] PNG #task
+- [ ] Incontri #task
+- [ ] Ricompense #task
 
 ## Pronto Per Il Tavolo
 
-- [ ] Prossima sessione
+- [ ] Prossima sessione #task
 
 ## Dopo Sessione
 
-- [ ] Aggiornare conseguenze
-- [ ] Spostare appunti nelle note del mondo
+- [ ] Aggiornare conseguenze #task
+- [ ] Spostare appunti nelle note del mondo #task
 
 
 %% kanban:settings

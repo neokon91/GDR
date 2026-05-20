@@ -59,6 +59,53 @@
 > [!missione] Obiettivo
 >
 
+> [!regia] Gestione
+> ```meta-bind-button
+> label: Durante Il Gioco
+> style: primary
+> actions:
+>   - type: open
+>     link: "[[Durante il Gioco]]"
+> ```
+>
+> ```meta-bind-button
+> label: Fuori Scena
+> style: primary
+> actions:
+>   - type: open
+>     link: "[[Cosa Succede Fuori Scena]]"
+> ```
+>
+> ```meta-bind-button
+> label: Nuovo Incontro
+> style: primary
+> actions:
+>   - type: templaterCreateNote
+>     templateFile: "z.modelli/dm/Incontro.md"
+>     folderPath: "Mondi/Incontri"
+>     open: true
+> ```
+>
+> ```meta-bind-button
+> label: Nuova Dispensa
+> style: default
+> actions:
+>   - type: templaterCreateNote
+>     templateFile: "z.modelli/Dispensa.md"
+>     folderPath: "Mondi/Dispense"
+>     open: true
+> ```
+>
+> ```meta-bind-button
+> label: Nuovo Clock
+> style: default
+> actions:
+>   - type: templaterCreateNote
+>     templateFile: "z.modelli/dm/Tracciato.md"
+>     folderPath: "Mondi/Tracciati"
+>     open: true
+> ```
+
 ## Essenziale Al Tavolo
 
 > [!scena] Perché i PG dovrebbero agire

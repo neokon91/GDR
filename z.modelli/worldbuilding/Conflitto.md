@@ -32,15 +32,26 @@
 > Propaga a:
 > `INPUT[inlineListSuggester(optionQuery("Mondi"), useLinks(partial), allowOther):propaga_a]`
 
-```meta-bind-button
-label: Avanza Escalation
-style: primary
-actions:
-  - type: updateMetadata
-    bindTarget: progress_value
-    evaluate: true
-    value: Math.min(Number(x ?? 0) + 1, Number(getMetadata('progress_max') ?? 6))
-```
+> [!regia] Gestione
+> Escalation: `INPUT[slider(minValue(0), maxValue(12), stepSize(1), addLabels):progress_value]`
+>
+> ```meta-bind-button
+> label: Nuovo Tracciato
+> style: primary
+> actions:
+>   - type: templaterCreateNote
+>     templateFile: "z.modelli/dm/Tracciato.md"
+>     folderPath: "Mondi/Tracciati"
+>     open: true
+> ```
+>
+> ```meta-bind-button
+> label: Geopolitica
+> style: default
+> actions:
+>   - type: open
+>     link: "[[Geopolitical Dashboard]]"
+> ```
 
 ## Posta In Gioco
 

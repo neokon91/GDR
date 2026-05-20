@@ -25,7 +25,12 @@ const PATHS = {
     storia: "Mondi/Storia",
     conflitti: "Mondi/Conflitti",
     cosmologia: "Mondi/Cosmologia",
-    tracciati: "Mondi/Tracciati"
+    tracciati: "Mondi/Tracciati",
+    rotte: "Mondi/Rotte",
+    risorse_mondo: "Mondi/Risorse",
+    mercati: "Mondi/Mercati",
+    compendium: "Mondi/Compendium",
+    calendario_diegetico: "Mondi/Calendario Diegetico"
 };
 
 let pendingRoute = {};
@@ -679,6 +684,22 @@ async function chooseTracks(tp, message = "Tracciati collegati", context = {}) {
     return await chooseNotesByPath(tp, PATHS.tracciati, message, context);
 }
 
+async function chooseRoutes(tp, message = "Rotte collegate", context = {}) {
+    return await chooseNotesByPath(tp, PATHS.rotte, message, context);
+}
+
+async function chooseWorldResources(tp, message = "Risorse collegate", context = {}) {
+    return await chooseNotesByPath(tp, PATHS.risorse_mondo, message, context);
+}
+
+async function chooseMarkets(tp, message = "Mercati o nodi commerciali collegati", context = {}) {
+    return await chooseNotesByPath(tp, PATHS.mercati, message, context);
+}
+
+async function chooseCompendium(tp, message = "Elementi del compendium collegati", context = {}) {
+    return await chooseNotesByPath(tp, PATHS.compendium, message, context);
+}
+
 async function chooseHandouts(tp, message = "Dispense collegate", context = {}) {
     return await chooseNotesByPath(tp, PATHS.dispense, message, context);
 }
@@ -795,6 +816,10 @@ module.exports = {
     chooseEncounters,
     chooseMissions,
     chooseTracks,
+    chooseRoutes,
+    chooseWorldResources,
+    chooseMarkets,
+    chooseCompendium,
     chooseHandouts,
     chooseSessions,
     chooseCampaigns,

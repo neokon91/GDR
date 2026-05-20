@@ -8,6 +8,14 @@ cssclasses:
 Usa questa cartella per idee grezze, appunti presi al volo e materiale non ancora deciso. Quando un'idea diventa utile al tavolo, trasformala in una nota del mondo.
 
 ```meta-bind-button
+label: Smistamento Bozze Generate
+style: primary
+actions:
+  - type: open
+    link: "[[Risorse/Smistamento Bozze Generate]]"
+```
+
+```meta-bind-button
 label: Nuova Nota Rapida
 style: primary
 actions:
@@ -86,6 +94,15 @@ TABLE tipo, stato, stato_canonico, data_mondo, sessioni, collegamenti
 FROM "Inbox"
 WHERE file.name != "Inbox" AND stato != "smistata" AND stato != "archiviata" AND stato != "ignorata" AND !startswith(file.name, "Prova -")
 SORT file.ctime DESC
+```
+
+## Bozze Generate
+
+```dataview
+TABLE categoria, tipo, generatore, mondo, luogo, creato
+FROM "Inbox/Generati"
+WHERE plugin = "fantasy-content-generator" AND stato = "bozza" AND !startswith(file.name, "Prova -")
+SORT creato ASC, file.ctime ASC
 ```
 
 ## Lore Capture

@@ -337,7 +337,9 @@ Non rinominare i campi `fc-*` e non usare `fc-date` come unica data narrativa: s
 
 ### Meta Bind
 
-Meta Bind alimenta pulsanti, input e toggle nelle dashboard e nei template. Le query e gli helper presuppongono che questi input scrivano negli stessi campi YAML documentati sopra.
+Meta Bind ha due ruoli separati nel vault. Gli input inline o in blocco (`INPUT[...]`) servono per modificare rapidamente il frontmatter nelle note gia create. I pulsanti `meta-bind-button` servono per navigare, creare nuove note, aprire dashboard o portare l'utente a un wikilink utile.
+
+Non usare `meta-bind-button` per cambiare campi YAML come `stato`, `canonico`, `progress_value` o `attiva`: per quello usa input, slider, toggle e select inline.
 
 Sintassi usata nel vault:
 
