@@ -101,7 +101,6 @@ const REQUIRED_LAYER_FILES = [
     "z.engine/session_views.js"
 ];
 const DEMO_REQUIRED_FILES = [
-    "Dev/Demo Finale.md",
     "Mondi/Brumafonda Demo.md",
     "Campagne/Campagna - Sale Sotto La Nebbia.md",
     "Mondi/Culture/Custodi Delle Saline.md",

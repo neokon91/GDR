@@ -7,7 +7,7 @@ const ROOT = process.cwd();
 const RELEASE_EXPECTED_VERSION = "1.0.0";
 const RELEASE_EXPECTED_DATE = "2026-05-21";
 const RELEASE_CHANGELOG_MARKERS = [
-    "[[Dev/Demo Finale]]",
+    "Demo Brumafonda.md",
     "[[Dev/Smoke Demo Finale]]",
     "Gate statico M3",
     "TemplateFactory ora copre",

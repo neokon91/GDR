@@ -7,7 +7,6 @@ const ROOT = process.cwd();
 const errors = [];
 
 const DEMO_REQUIRED_FILES = [
-    "Dev/Demo Finale.md",
     "Hub/Vista Giocatori.md",
     "Mondi/Brumafonda Demo.md",
     "Campagne/Campagna - Sale Sotto La Nebbia.md",
@@ -84,10 +83,10 @@ for (const relPath of DEMO_REQUIRED_FILES) {
     }
 }
 
-const demoDoc = fs.existsSync(filePath("Dev/Demo Finale.md")) ? read("Dev/Demo Finale.md") : "";
-for (const marker of ["[[Brumafonda Demo]]", "[[Campagna - Sale Sotto La Nebbia]]", "[[2026-05-28 - La Campana Nella Nebbia]]", "[[Vista Giocatori]]"]) {
-    if (!demoDoc.includes(marker)) {
-        errors.push(`Smoke demo: Dev/Demo Finale.md non contiene ${marker}`);
+const demoWorld = fs.existsSync(filePath("Mondi/Brumafonda Demo.md")) ? read("Mondi/Brumafonda Demo.md") : "";
+for (const marker of ["[[Campagna - Sale Sotto La Nebbia]]", "[[Mappa Pubblica Di Brumafonda]]"]) {
+    if (!demoWorld.includes(marker)) {
+        errors.push(`Smoke demo: Brumafonda Demo non contiene ${marker}`);
     }
 }
 
@@ -154,4 +153,4 @@ if (errors.length) {
     process.exit(1);
 }
 
-console.log(`Smoke statico OK: ${DEMO_REQUIRED_FILES.length} file demo, ${PUBLIC_DEMO_FILES.length} file pubblici controllati.`);
+console.log(`Smoke statico OK: ${DEMO_REQUIRED_FILES.length} file demo sorgente, ${PUBLIC_DEMO_FILES.length} file pubblici controllati.`);

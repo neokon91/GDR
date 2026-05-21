@@ -4,7 +4,7 @@
 
 ### Aggiunto
 
-- [[Dev/Demo Finale]] con scenario demo completo [[Brumafonda Demo]]: mondo, campagna, cultura, fazione, culto, luogo, economia, mappa, dispensa, missione, sessione e conseguenza.
+- Scenario demo completo [[Brumafonda Demo]] con mondo, campagna, cultura, fazione, culto, luogo, economia, mappa, dispensa, missione, sessione e conseguenza.
 - [[Dev/Smoke Demo Finale]] come checklist manuale di smoke visuale, player-safe e raccolta evidenze screenshot/GIF.
 - Gate statico M3 in `npm run check` per verificare presenza demo, recap pubblico, mappa/dispensa pubbliche, player-safe e controlli di [[Vista Giocatori]].
 - `npm run check:smoke` come gate dedicato per la parte automatizzabile dello smoke demo finale.
