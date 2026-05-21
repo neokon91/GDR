@@ -97,6 +97,7 @@ const REQUIRED_LAYER_FILES = [
     "z.automazioni/audit_template_migration.py",
     "z.automazioni/check_template_factory.py",
     "z.automazioni/render_template_factory.py",
+    "z.automazioni/template_factory_utils.py",
     "z.automazioni/session_context.js",
     "z.automazioni/meta_actions.js",
     "z.automazioni/template_router.js",

@@ -4,83 +4,34 @@ from __future__ import annotations
 
 import argparse
 import json
-import re
 from datetime import datetime, timezone
 from pathlib import Path
 
-import yaml
-from jinja2 import Environment, FileSystemLoader, StrictUndefined
+from template_factory_utils import (
+    FACTORY,
+    ROOT,
+    build_jinja_env,
+    load_modules,
+    render_context,
+    resolved_blueprints,
+    validate_rendered,
+)
 
 
-ROOT = Path.cwd()
-FACTORY = ROOT / "Dev" / "TemplateFactory"
-MODULES = FACTORY / "modules"
-JINJA = FACTORY / "jinja"
 DEFAULT_OUTPUT = FACTORY / "examples" / "generated"
-EXAMPLES = FACTORY / "examples"
 
 
-def load_yaml(path: Path) -> dict:
-    with path.open("r", encoding="utf-8") as handle:
-        data = yaml.safe_load(handle) or {}
-    if not isinstance(data, dict):
-        raise ValueError(f"{path}: YAML root non e un oggetto")
-    return data
-
-
-def load_modules() -> dict[str, dict]:
-    modules: dict[str, dict] = {}
-    for path in sorted(MODULES.glob("*.yaml")):
-        data = load_yaml(path)
-        modules[str(data.get("id", path.stem))] = data
-    return modules
-
-
-def templater_function(entry: str) -> str:
-    match = re.search(r"tp\.user\.([A-Za-z0-9_]+)\(", entry)
-    return match.group(1) if match else "world_entity"
-
-
-def load_context(name: str) -> dict:
-    path = EXAMPLES / f"{name}.context.yaml"
-    if not path.exists():
-        return {}
-    return load_yaml(path)
-
-
-def render_blueprint(env: Environment, name: str, blueprint: dict, modules: dict[str, dict]) -> str:
+def render_blueprint(env, name: str, blueprint: dict, modules: dict[str, dict]) -> str:
     template_ref = Path(str(blueprint["jinja_template"])).name
     template = env.get_template(template_ref)
-    entry = str(blueprint.get("templater_entry", ""))
-    context = load_context(name)
-    render_context = {
-        "blueprint_id": name,
-        "blueprint": blueprint,
-        "templater_entry": entry,
-        "templater_function": templater_function(entry),
-        "label": name.replace("_", " ").title(),
-        "monster": "Creatura",
-        "modules": modules,
-    }
-    render_context.update(context)
-    return template.render(**render_context)
+    return template.render(**render_context(name, blueprint, modules))
 
 
-def validate_rendered(name: str, rendered: str) -> list[str]:
-    errors: list[str] = []
-    stripped = rendered.lstrip()
-    templater_tags = re.findall(r"<%[\s\S]*?%>", rendered)
-
-    if not stripped.startswith("<% await tp.user."):
-        errors.append(f"{name}: output senza entry Templater iniziale")
-    if "<%*" in rendered:
-        errors.append(f"{name}: output contiene blocco Templater multilinea")
-    if len(templater_tags) != 1:
-        errors.append(f"{name}: output contiene {len(templater_tags)} tag Templater invece di 1")
-    if "Fallback" not in rendered and "fallback" not in rendered:
-        errors.append(f"{name}: output senza fallback Markdown esplicito")
-
-    return errors
+def display_path(path: Path) -> str:
+    try:
+        return str(path.relative_to(ROOT))
+    except ValueError:
+        return str(path)
 
 
 def write_rendered(output_dir: Path, rendered_by_name: dict[str, str], clean: bool) -> None:
@@ -104,7 +55,7 @@ def write_rendered(output_dir: Path, rendered_by_name: dict[str, str], clean: bo
         target.write_text(rendered, encoding="utf-8")
         manifest["files"].append({
             "blueprint": name,
-            "path": str(target.relative_to(ROOT)),
+            "path": display_path(target),
             "bytes": len(rendered.encode("utf-8")),
         })
 
@@ -167,13 +118,8 @@ def main() -> int:
     args = parser.parse_args()
 
     modules = load_modules()
-    blueprints = modules["template_blueprints"]["blueprints"]
-    env = Environment(
-        loader=FileSystemLoader(str(JINJA)),
-        undefined=StrictUndefined,
-        autoescape=False,
-        keep_trailing_newline=True,
-    )
+    blueprints = resolved_blueprints(modules)
+    env = build_jinja_env()
 
     rendered_by_name: dict[str, str] = {}
     errors: list[str] = []
@@ -193,7 +139,7 @@ def main() -> int:
     if not output_dir.is_absolute():
         output_dir = ROOT / output_dir
     write_rendered(output_dir, rendered_by_name, clean=not args.no_clean)
-    message = f"TemplateFactory render OK: {len(rendered_by_name)} preview in {output_dir.relative_to(ROOT)}"
+    message = f"TemplateFactory render OK: {len(rendered_by_name)} preview in {display_path(output_dir)}"
     if args.materialize:
         write_materialized(rendered_by_name, blueprints)
         message += " e output materializzati in z.modelli"

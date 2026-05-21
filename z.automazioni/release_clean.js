@@ -66,7 +66,8 @@ const EXCLUDED_AUTOMAZIONI = new Set([
     "node_utils.js",
     "release_beta.js",
     "release_clean.js",
-    "README.md"
+    "README.md",
+    "template_factory_utils.py"
 ]);
 const EXCLUDED_FILES = new Set([".DS_Store"]);
 const REQUIRED_RELEASE_FILES = [

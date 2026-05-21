@@ -2,18 +2,21 @@
 
 from __future__ import annotations
 
-import re
 import sys
+import re
 from pathlib import Path
 
-import yaml
-from jinja2 import Environment, FileSystemLoader, StrictUndefined
+from template_factory_utils import (
+    FACTORY,
+    MODULES,
+    build_jinja_env,
+    load_modules,
+    render_context,
+    resolved_blueprints,
+    validate_rendered,
+)
 
 
-ROOT = Path.cwd()
-FACTORY = ROOT / "Dev" / "TemplateFactory"
-MODULES = FACTORY / "modules"
-JINJA = FACTORY / "jinja"
 GENERATED = FACTORY / "examples" / "generated"
 REQUIRED_MODULES = {
     "fields_core",
@@ -28,15 +31,6 @@ REQUIRED_MODULES = {
     "bases_views",
     "workflows",
 }
-
-
-def load_yaml(path: Path) -> dict:
-    with path.open("r", encoding="utf-8") as handle:
-        data = yaml.safe_load(handle) or {}
-    if not isinstance(data, dict):
-        raise ValueError(f"{path}: YAML root non e un oggetto")
-    return data
-
 
 def fail(message: str, errors: list[str]) -> None:
     errors.append(message)
@@ -71,7 +65,11 @@ def validate_modules(modules: dict[str, dict], errors: list[str]) -> None:
 
 
 def validate_blueprints(modules: dict[str, dict], errors: list[str]) -> None:
-    blueprints = modules["template_blueprints"].get("blueprints", {})
+    try:
+        blueprints = resolved_blueprints(modules)
+    except ValueError as exc:
+        fail(str(exc), errors)
+        return
     sections = modules["sections"].get("sections", {})
     bindings = modules["plugin_bindings"]
     plugin_bindings = bindings.get("bindings", {})
@@ -118,40 +116,19 @@ def validate_blueprints(modules: dict[str, dict], errors: list[str]) -> None:
 
 
 def validate_rendering(modules: dict[str, dict], errors: list[str]) -> None:
-    env = Environment(
-        loader=FileSystemLoader(str(JINJA)),
-        undefined=StrictUndefined,
-        autoescape=False,
-        keep_trailing_newline=True,
-    )
+    env = build_jinja_env()
 
-    for name, blueprint in modules["template_blueprints"].get("blueprints", {}).items():
+    for name, blueprint in resolved_blueprints(modules).items():
         template_ref = Path(str(blueprint["jinja_template"])).name
         try:
             template = env.get_template(template_ref)
-            rendered = template.render(
-                blueprint_id=name,
-                blueprint=blueprint,
-                templater_entry=blueprint.get("templater_entry", ""),
-                templater_function=blueprint.get("templater_entry", "").split("tp.user.")[-1].split("(")[0],
-                label=name.replace("_", " ").title(),
-                monster="Creatura",
-                modules=modules,
-            )
+            rendered = template.render(**render_context(name, blueprint, modules))
         except Exception as exc:  # noqa: BLE001
             fail(f"blueprint {name}: render Jinja fallito ({exc})", errors)
             continue
 
-        stripped = rendered.lstrip()
-        if not stripped.startswith("<% await tp.user."):
-            fail(f"blueprint {name}: output renderizzato senza entry Templater iniziale", errors)
-        if "<%*" in rendered:
-            fail(f"blueprint {name}: output renderizzato contiene blocco Templater multilinea", errors)
-        templater_tags = re.findall(r"<%[\s\S]*?%>", rendered)
-        if len(templater_tags) != 1:
-            fail(f"blueprint {name}: output renderizzato contiene {len(templater_tags)} tag Templater invece di 1", errors)
-        if "Fallback" not in rendered and "fallback" not in rendered:
-            fail(f"blueprint {name}: output renderizzato senza fallback Markdown esplicito", errors)
+        for error in validate_rendered(name, rendered):
+            fail(f"blueprint {error}", errors)
 
 
 def validate_generated_previews(modules: dict[str, dict], errors: list[str]) -> None:
@@ -160,7 +137,7 @@ def validate_generated_previews(modules: dict[str, dict], errors: list[str]) -> 
 
     expected = {
         f"{name}.preview.md"
-        for name in modules["template_blueprints"].get("blueprints", {})
+        for name in resolved_blueprints(modules)
     }
     actual = {path.name for path in GENERATED.glob("*.preview.md")}
 
@@ -176,15 +153,11 @@ def validate_generated_previews(modules: dict[str, dict], errors: list[str]) -> 
 
 def main() -> int:
     errors: list[str] = []
-    modules: dict[str, dict] = {}
-
-    for path in sorted(MODULES.glob("*.yaml")):
-        try:
-            data = load_yaml(path)
-            module_id = str(data.get("id", path.stem))
-            modules[module_id] = data
-        except Exception as exc:  # noqa: BLE001
-            fail(f"{path}: YAML non valido ({exc})", errors)
+    try:
+        modules = load_modules()
+    except Exception as exc:  # noqa: BLE001
+        fail(f"TemplateFactory YAML non valido ({exc})", errors)
+        modules = {}
 
     if not errors:
         validate_modules(modules, errors)

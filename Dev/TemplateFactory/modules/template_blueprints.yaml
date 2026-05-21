@@ -1,12 +1,9 @@
 id: template_blueprints
 purpose: Blueprint per generare tutti i template operativi Markdown/Templater da TemplateFactory.
 version: 0.3.0
-blueprints:
-  mondo:
-    target_family:
-    - mondo
+blueprint_profiles:
+  generic:
     jinja_template: ../jinja/generic_template.md.j2
-    templater_entry: <% await tp.user.mondo(tp) %>
     required_modules:
     - fields_core
     - plugin_bindings
@@ -27,20 +24,8 @@ blueprints:
     - templater
     - meta_bind
     - dataview
-    template_title: Mondo
-    world_impact: true
-    output:
-      folder: z.modelli
-      files:
-      - Mondo.md
-      fallback: markdown_sections
-    comparison_targets:
-    - z.modelli/Mondo.md
-  world_entity:
-    target_family:
-    - entita worldbuilding
-    jinja_template: ../jinja/generic_template.md.j2
-    templater_entry: <% await tp.user.world_entity(tp) %>
+  action:
+    jinja_template: ../jinja/action_template.md.j2
     required_modules:
     - fields_core
     - plugin_bindings
@@ -61,20 +46,8 @@ blueprints:
     - templater
     - meta_bind
     - dataview
-    template_title: Entita Worldbuilding
-    world_impact: true
-    output:
-      folder: z.modelli/worldbuilding
-      files:
-      - Entita Worldbuilding.md
-      fallback: markdown_sections
-    comparison_targets:
-    - z.modelli/worldbuilding/Entita Worldbuilding.md
-  cultura:
-    target_family:
-    - cultura
-    jinja_template: ../jinja/generic_template.md.j2
-    templater_entry: <% await tp.user.cultura(tp) %>
+  encounter:
+    jinja_template: ../jinja/encounter_template.md.j2
     required_modules:
     - fields_core
     - plugin_bindings
@@ -85,31 +58,19 @@ blueprints:
     - metabind_inputs
     - metabind_buttons
     sections:
-    - identita
-    - uso_al_tavolo
-    - connessioni
-    - propagazione
-    - player_safe
-    - controllo
+    - statblock
+    - encounter
+    - terreno
+    - obiettivo
+    - complicazioni
+    - ricompense
     plugin_features:
-    - templater
-    - meta_bind
-    - dataview
-    template_title: Cultura
-    world_impact: true
-    output:
-      folder: z.modelli/worldbuilding
-      files:
-      - Cultura.md
-      fallback: markdown_sections
-    comparison_targets:
-    - z.modelli/worldbuilding/Cultura.md
-  religione_culto:
-    target_family:
-    - religione
-    - culto
-    jinja_template: ../jinja/generic_template.md.j2
-    templater_entry: <% await tp.user.culto(tp) %>
+    - fantasy_statblocks
+    - initiative_tracker
+    - dice_roller
+    - callout_manager
+  map:
+    jinja_template: ../jinja/map_template.md.j2
     required_modules:
     - fields_core
     - plugin_bindings
@@ -120,234 +81,21 @@ blueprints:
     - metabind_inputs
     - metabind_buttons
     sections:
-    - identita
-    - uso_al_tavolo
-    - connessioni
-    - propagazione
-    - player_safe
-    - controllo
+    - cosa_mostra
+    - layer_dm
+    - layer_pubblico
+    - pin
+    - note_collegate
+    - fallback_markdown
     plugin_features:
-    - templater
-    - meta_bind
+    - excalidraw
+    - canvas
+    - maps
+    - ttrpg_maps
+    - hex_cartographer
     - dataview
-    template_title: Religione o Culto
-    world_impact: true
-    output:
-      folder: z.modelli/fazione
-      files:
-      - Culto.md
-      fallback: markdown_sections
-    comparison_targets:
-    - z.modelli/fazione/Culto.md
-  fazione:
-    target_family:
-    - fazione
-    jinja_template: ../jinja/generic_template.md.j2
-    templater_entry: <% await tp.user.fazione(tp) %>
-    required_modules:
-    - fields_core
-    - plugin_bindings
-    - sections
-    - callouts
-    - tabs
-    - dataview_blocks
-    - metabind_inputs
-    - metabind_buttons
-    sections:
-    - identita
-    - uso_al_tavolo
-    - connessioni
-    - propagazione
-    - player_safe
-    - controllo
-    plugin_features:
-    - templater
-    - meta_bind
-    - dataview
-    template_title: Fazione
-    world_impact: true
-    output:
-      folder: z.modelli/fazione
-      files:
-      - Fazione.md
-      fallback: markdown_sections
-    comparison_targets:
-    - z.modelli/fazione/Fazione.md
-  luogo:
-    target_family:
-    - luogo
-    jinja_template: ../jinja/generic_template.md.j2
-    templater_entry: <% await tp.user.luogo(tp) %>
-    required_modules:
-    - fields_core
-    - plugin_bindings
-    - sections
-    - callouts
-    - tabs
-    - dataview_blocks
-    - metabind_inputs
-    - metabind_buttons
-    sections:
-    - identita
-    - uso_al_tavolo
-    - connessioni
-    - propagazione
-    - player_safe
-    - controllo
-    plugin_features:
-    - templater
-    - meta_bind
-    - dataview
-    template_title: Luogo
-    world_impact: true
-    output:
-      folder: z.modelli/luogo
-      files:
-      - Interesse.md
-      fallback: markdown_sections
-    comparison_targets:
-    - z.modelli/luogo/Interesse.md
-  missione:
-    target_family:
-    - missione
-    jinja_template: ../jinja/generic_template.md.j2
-    templater_entry: <% await tp.user.missione(tp) %>
-    required_modules:
-    - fields_core
-    - plugin_bindings
-    - sections
-    - callouts
-    - tabs
-    - dataview_blocks
-    - metabind_inputs
-    - metabind_buttons
-    sections:
-    - identita
-    - uso_al_tavolo
-    - connessioni
-    - propagazione
-    - player_safe
-    - controllo
-    plugin_features:
-    - templater
-    - meta_bind
-    - dataview
-    template_title: Missione
-    world_impact: true
-    output:
-      folder: z.modelli/dm
-      files:
-      - Missione.md
-      fallback: markdown_sections
-    comparison_targets:
-    - z.modelli/dm/Missione.md
-  tracciato:
-    target_family:
-    - tracciato
-    jinja_template: ../jinja/generic_template.md.j2
-    templater_entry: <% await tp.user.tracciato(tp) %>
-    required_modules:
-    - fields_core
-    - plugin_bindings
-    - sections
-    - callouts
-    - tabs
-    - dataview_blocks
-    - metabind_inputs
-    - metabind_buttons
-    sections:
-    - identita
-    - uso_al_tavolo
-    - connessioni
-    - propagazione
-    - player_safe
-    - controllo
-    plugin_features:
-    - templater
-    - meta_bind
-    - dataview
-    template_title: Tracciato
-    world_impact: true
-    output:
-      folder: z.modelli/dm
-      files:
-      - Tracciato.md
-      fallback: markdown_sections
-    comparison_targets:
-    - z.modelli/dm/Tracciato.md
-  relazione:
-    target_family:
-    - relazione
-    jinja_template: ../jinja/generic_template.md.j2
-    templater_entry: <% await tp.user.relazione(tp) %>
-    required_modules:
-    - fields_core
-    - plugin_bindings
-    - sections
-    - callouts
-    - tabs
-    - dataview_blocks
-    - metabind_inputs
-    - metabind_buttons
-    sections:
-    - identita
-    - uso_al_tavolo
-    - connessioni
-    - propagazione
-    - player_safe
-    - controllo
-    plugin_features:
-    - templater
-    - meta_bind
-    - dataview
-    template_title: Relazione
-    world_impact: true
-    output:
-      folder: z.modelli/worldbuilding
-      files:
-      - Relazione.md
-      fallback: markdown_sections
-    comparison_targets:
-    - z.modelli/worldbuilding/Relazione.md
-  conseguenza:
-    target_family:
-    - conseguenza
-    jinja_template: ../jinja/generic_template.md.j2
-    templater_entry: <% await tp.user.live_conseguenza(tp) %>
-    required_modules:
-    - fields_core
-    - plugin_bindings
-    - sections
-    - callouts
-    - tabs
-    - dataview_blocks
-    - metabind_inputs
-    - metabind_buttons
-    sections:
-    - identita
-    - uso_al_tavolo
-    - connessioni
-    - propagazione
-    - player_safe
-    - controllo
-    plugin_features:
-    - templater
-    - meta_bind
-    - dataview
-    template_title: Conseguenza
-    world_impact: true
-    output:
-      folder: z.modelli
-      files:
-      - Live Conseguenza.md
-      fallback: markdown_sections
-    comparison_targets:
-    - z.modelli/Live Conseguenza.md
   session:
-    target_family:
-    - sessione
     jinja_template: ../jinja/session_template.md.j2
-    templater_entry: <% await tp.user.sessione(tp) %>
     required_modules:
     - fields_core
     - plugin_bindings
@@ -374,6 +122,152 @@ blueprints:
     - dice_roller
     - initiative_tracker
     - media_extended
+blueprints:
+  mondo:
+    target_family:
+    - mondo
+    templater_entry: <% await tp.user.mondo(tp) %>
+    template_title: Mondo
+    world_impact: true
+    output:
+      folder: z.modelli
+      files:
+      - Mondo.md
+      fallback: markdown_sections
+    comparison_targets:
+    - z.modelli/Mondo.md
+    profile: generic
+  world_entity:
+    target_family:
+    - entita worldbuilding
+    templater_entry: <% await tp.user.world_entity(tp) %>
+    template_title: Entita Worldbuilding
+    world_impact: true
+    output:
+      folder: z.modelli/worldbuilding
+      files:
+      - Entita Worldbuilding.md
+      fallback: markdown_sections
+    comparison_targets:
+    - z.modelli/worldbuilding/Entita Worldbuilding.md
+    profile: generic
+  cultura:
+    target_family:
+    - cultura
+    templater_entry: <% await tp.user.cultura(tp) %>
+    template_title: Cultura
+    world_impact: true
+    output:
+      folder: z.modelli/worldbuilding
+      files:
+      - Cultura.md
+      fallback: markdown_sections
+    comparison_targets:
+    - z.modelli/worldbuilding/Cultura.md
+    profile: generic
+  religione_culto:
+    target_family:
+    - religione
+    - culto
+    templater_entry: <% await tp.user.culto(tp) %>
+    template_title: Religione o Culto
+    world_impact: true
+    output:
+      folder: z.modelli/fazione
+      files:
+      - Culto.md
+      fallback: markdown_sections
+    comparison_targets:
+    - z.modelli/fazione/Culto.md
+    profile: generic
+  fazione:
+    target_family:
+    - fazione
+    templater_entry: <% await tp.user.fazione(tp) %>
+    template_title: Fazione
+    world_impact: true
+    output:
+      folder: z.modelli/fazione
+      files:
+      - Fazione.md
+      fallback: markdown_sections
+    comparison_targets:
+    - z.modelli/fazione/Fazione.md
+    profile: generic
+  luogo:
+    target_family:
+    - luogo
+    templater_entry: <% await tp.user.luogo(tp) %>
+    template_title: Luogo
+    world_impact: true
+    output:
+      folder: z.modelli/luogo
+      files:
+      - Interesse.md
+      fallback: markdown_sections
+    comparison_targets:
+    - z.modelli/luogo/Interesse.md
+    profile: generic
+  missione:
+    target_family:
+    - missione
+    templater_entry: <% await tp.user.missione(tp) %>
+    template_title: Missione
+    world_impact: true
+    output:
+      folder: z.modelli/dm
+      files:
+      - Missione.md
+      fallback: markdown_sections
+    comparison_targets:
+    - z.modelli/dm/Missione.md
+    profile: generic
+  tracciato:
+    target_family:
+    - tracciato
+    templater_entry: <% await tp.user.tracciato(tp) %>
+    template_title: Tracciato
+    world_impact: true
+    output:
+      folder: z.modelli/dm
+      files:
+      - Tracciato.md
+      fallback: markdown_sections
+    comparison_targets:
+    - z.modelli/dm/Tracciato.md
+    profile: generic
+  relazione:
+    target_family:
+    - relazione
+    templater_entry: <% await tp.user.relazione(tp) %>
+    template_title: Relazione
+    world_impact: true
+    output:
+      folder: z.modelli/worldbuilding
+      files:
+      - Relazione.md
+      fallback: markdown_sections
+    comparison_targets:
+    - z.modelli/worldbuilding/Relazione.md
+    profile: generic
+  conseguenza:
+    target_family:
+    - conseguenza
+    templater_entry: <% await tp.user.live_conseguenza(tp) %>
+    template_title: Conseguenza
+    world_impact: true
+    output:
+      folder: z.modelli
+      files:
+      - Live Conseguenza.md
+      fallback: markdown_sections
+    comparison_targets:
+    - z.modelli/Live Conseguenza.md
+    profile: generic
+  session:
+    target_family:
+    - sessione
+    templater_entry: <% await tp.user.sessione(tp) %>
     template_title: Sessione
     world_impact: false
     output:
@@ -383,32 +277,11 @@ blueprints:
       fallback: markdown_sections
     comparison_targets:
     - z.modelli/dm/Sessione.md
+    profile: session
   incontro:
     target_family:
     - incontro
-    jinja_template: ../jinja/encounter_template.md.j2
     templater_entry: <% await tp.user.incontro(tp) %>
-    required_modules:
-    - fields_core
-    - plugin_bindings
-    - sections
-    - callouts
-    - tabs
-    - dataview_blocks
-    - metabind_inputs
-    - metabind_buttons
-    sections:
-    - statblock
-    - encounter
-    - terreno
-    - obiettivo
-    - complicazioni
-    - ricompense
-    plugin_features:
-    - fantasy_statblocks
-    - initiative_tracker
-    - dice_roller
-    - callout_manager
     template_title: Incontro
     world_impact: false
     output:
@@ -418,32 +291,11 @@ blueprints:
       fallback: markdown_sections
     comparison_targets:
     - z.modelli/dm/Incontro.md
+    profile: encounter
   creatura:
     target_family:
     - creatura
-    jinja_template: ../jinja/encounter_template.md.j2
     templater_entry: <% await tp.user.creatura(tp) %>
-    required_modules:
-    - fields_core
-    - plugin_bindings
-    - sections
-    - callouts
-    - tabs
-    - dataview_blocks
-    - metabind_inputs
-    - metabind_buttons
-    sections:
-    - statblock
-    - encounter
-    - terreno
-    - obiettivo
-    - complicazioni
-    - ricompense
-    plugin_features:
-    - fantasy_statblocks
-    - initiative_tracker
-    - dice_roller
-    - callout_manager
     template_title: Creatura
     world_impact: false
     output:
@@ -453,34 +305,11 @@ blueprints:
       fallback: markdown_sections
     comparison_targets:
     - z.modelli/Creatura.md
+    profile: encounter
   mappa_zoom:
     target_family:
     - mappa
-    jinja_template: ../jinja/map_template.md.j2
     templater_entry: <% await tp.user.mappa(tp) %>
-    required_modules:
-    - fields_core
-    - plugin_bindings
-    - sections
-    - callouts
-    - tabs
-    - dataview_blocks
-    - metabind_inputs
-    - metabind_buttons
-    sections:
-    - cosa_mostra
-    - layer_dm
-    - layer_pubblico
-    - pin
-    - note_collegate
-    - fallback_markdown
-    plugin_features:
-    - excalidraw
-    - canvas
-    - maps
-    - ttrpg_maps
-    - hex_cartographer
-    - dataview
     template_title: Mappa Zoom
     world_impact: false
     output:
@@ -490,35 +319,12 @@ blueprints:
       fallback: markdown_sections
     comparison_targets:
     - z.modelli/mappe/Mappa Zoom.md
+    profile: map
   mappa_excalidraw_fronti:
     target_family:
     - mappa
     - fronte
-    jinja_template: ../jinja/map_template.md.j2
     templater_entry: <% await tp.user.mappa(tp) %>
-    required_modules:
-    - fields_core
-    - plugin_bindings
-    - sections
-    - callouts
-    - tabs
-    - dataview_blocks
-    - metabind_inputs
-    - metabind_buttons
-    sections:
-    - cosa_mostra
-    - layer_dm
-    - layer_pubblico
-    - pin
-    - note_collegate
-    - fallback_markdown
-    plugin_features:
-    - excalidraw
-    - canvas
-    - maps
-    - ttrpg_maps
-    - hex_cartographer
-    - dataview
     template_title: Mappa Excalidraw Fronti
     world_impact: false
     output:
@@ -528,31 +334,11 @@ blueprints:
       fallback: markdown_sections
     comparison_targets:
     - z.modelli/mappe/Mappa Excalidraw Fronti.excalidraw.md
+    profile: map
   dispensa:
     target_family:
     - dispensa
-    jinja_template: ../jinja/generic_template.md.j2
     templater_entry: <% await tp.user.dispensa(tp) %>
-    required_modules:
-    - fields_core
-    - plugin_bindings
-    - sections
-    - callouts
-    - tabs
-    - dataview_blocks
-    - metabind_inputs
-    - metabind_buttons
-    sections:
-    - identita
-    - uso_al_tavolo
-    - connessioni
-    - propagazione
-    - player_safe
-    - controllo
-    plugin_features:
-    - templater
-    - meta_bind
-    - dataview
     template_title: Dispensa
     world_impact: false
     output:
@@ -562,31 +348,11 @@ blueprints:
       fallback: markdown_sections
     comparison_targets:
     - z.modelli/Dispensa.md
+    profile: generic
   evento_storico:
     target_family:
     - evento storico
-    jinja_template: ../jinja/generic_template.md.j2
     templater_entry: <% await tp.user.evento_storico(tp) %>
-    required_modules:
-    - fields_core
-    - plugin_bindings
-    - sections
-    - callouts
-    - tabs
-    - dataview_blocks
-    - metabind_inputs
-    - metabind_buttons
-    sections:
-    - identita
-    - uso_al_tavolo
-    - connessioni
-    - propagazione
-    - player_safe
-    - controllo
-    plugin_features:
-    - templater
-    - meta_bind
-    - dataview
     template_title: Evento Storico
     world_impact: true
     output:
@@ -596,31 +362,11 @@ blueprints:
       fallback: markdown_sections
     comparison_targets:
     - z.modelli/Evento Storico.md
+    profile: generic
   live_evento:
     target_family:
     - live evento
-    jinja_template: ../jinja/generic_template.md.j2
     templater_entry: <% await tp.user.live_evento(tp) %>
-    required_modules:
-    - fields_core
-    - plugin_bindings
-    - sections
-    - callouts
-    - tabs
-    - dataview_blocks
-    - metabind_inputs
-    - metabind_buttons
-    sections:
-    - identita
-    - uso_al_tavolo
-    - connessioni
-    - propagazione
-    - player_safe
-    - controllo
-    plugin_features:
-    - templater
-    - meta_bind
-    - dataview
     template_title: Live Evento
     world_impact: true
     output:
@@ -630,31 +376,11 @@ blueprints:
       fallback: markdown_sections
     comparison_targets:
     - z.modelli/Live Evento.md
+    profile: generic
   live_luogo:
     target_family:
     - live luogo
-    jinja_template: ../jinja/generic_template.md.j2
     templater_entry: <% await tp.user.live_luogo(tp) %>
-    required_modules:
-    - fields_core
-    - plugin_bindings
-    - sections
-    - callouts
-    - tabs
-    - dataview_blocks
-    - metabind_inputs
-    - metabind_buttons
-    sections:
-    - identita
-    - uso_al_tavolo
-    - connessioni
-    - propagazione
-    - player_safe
-    - controllo
-    plugin_features:
-    - templater
-    - meta_bind
-    - dataview
     template_title: Live Luogo
     world_impact: true
     output:
@@ -664,31 +390,11 @@ blueprints:
       fallback: markdown_sections
     comparison_targets:
     - z.modelli/Live Luogo.md
+    profile: generic
   live_nota_grezza:
     target_family:
     - live nota grezza
-    jinja_template: ../jinja/generic_template.md.j2
     templater_entry: <% await tp.user.live_nota(tp) %>
-    required_modules:
-    - fields_core
-    - plugin_bindings
-    - sections
-    - callouts
-    - tabs
-    - dataview_blocks
-    - metabind_inputs
-    - metabind_buttons
-    sections:
-    - identita
-    - uso_al_tavolo
-    - connessioni
-    - propagazione
-    - player_safe
-    - controllo
-    plugin_features:
-    - templater
-    - meta_bind
-    - dataview
     template_title: Live Nota Grezza
     world_impact: false
     output:
@@ -698,31 +404,11 @@ blueprints:
       fallback: markdown_sections
     comparison_targets:
     - z.modelli/Live Nota Grezza.md
+    profile: generic
   live_png:
     target_family:
     - live png
-    jinja_template: ../jinja/generic_template.md.j2
     templater_entry: <% await tp.user.live_png(tp) %>
-    required_modules:
-    - fields_core
-    - plugin_bindings
-    - sections
-    - callouts
-    - tabs
-    - dataview_blocks
-    - metabind_inputs
-    - metabind_buttons
-    sections:
-    - identita
-    - uso_al_tavolo
-    - connessioni
-    - propagazione
-    - player_safe
-    - controllo
-    plugin_features:
-    - templater
-    - meta_bind
-    - dataview
     template_title: Live PNG
     world_impact: true
     output:
@@ -732,31 +418,11 @@ blueprints:
       fallback: markdown_sections
     comparison_targets:
     - z.modelli/Live PNG.md
+    profile: generic
   lore_capture:
     target_family:
     - lore capture
-    jinja_template: ../jinja/generic_template.md.j2
     templater_entry: <% await tp.user.lore_capture(tp) %>
-    required_modules:
-    - fields_core
-    - plugin_bindings
-    - sections
-    - callouts
-    - tabs
-    - dataview_blocks
-    - metabind_inputs
-    - metabind_buttons
-    sections:
-    - identita
-    - uso_al_tavolo
-    - connessioni
-    - propagazione
-    - player_safe
-    - controllo
-    plugin_features:
-    - templater
-    - meta_bind
-    - dataview
     template_title: Lore Capture
     world_impact: true
     output:
@@ -766,31 +432,11 @@ blueprints:
       fallback: markdown_sections
     comparison_targets:
     - z.modelli/Lore Capture.md
+    profile: generic
   nota_rapida:
     target_family:
     - nota rapida
-    jinja_template: ../jinja/generic_template.md.j2
     templater_entry: <% await tp.user.nota_rapida(tp) %>
-    required_modules:
-    - fields_core
-    - plugin_bindings
-    - sections
-    - callouts
-    - tabs
-    - dataview_blocks
-    - metabind_inputs
-    - metabind_buttons
-    sections:
-    - identita
-    - uso_al_tavolo
-    - connessioni
-    - propagazione
-    - player_safe
-    - controllo
-    plugin_features:
-    - templater
-    - meta_bind
-    - dataview
     template_title: Nota Rapida
     world_impact: false
     output:
@@ -800,31 +446,11 @@ blueprints:
       fallback: markdown_sections
     comparison_targets:
     - z.modelli/Nota Rapida.md
+    profile: generic
   oggetto:
     target_family:
     - oggetto
-    jinja_template: ../jinja/generic_template.md.j2
     templater_entry: <% await tp.user.oggetto(tp) %>
-    required_modules:
-    - fields_core
-    - plugin_bindings
-    - sections
-    - callouts
-    - tabs
-    - dataview_blocks
-    - metabind_inputs
-    - metabind_buttons
-    sections:
-    - identita
-    - uso_al_tavolo
-    - connessioni
-    - propagazione
-    - player_safe
-    - controllo
-    plugin_features:
-    - templater
-    - meta_bind
-    - dataview
     template_title: Oggetto
     world_impact: false
     output:
@@ -834,31 +460,11 @@ blueprints:
       fallback: markdown_sections
     comparison_targets:
     - z.modelli/Oggetto.md
+    profile: generic
   oggetto_magico:
     target_family:
     - oggetto magico
-    jinja_template: ../jinja/generic_template.md.j2
     templater_entry: <% await tp.user.oggetto_magico(tp) %>
-    required_modules:
-    - fields_core
-    - plugin_bindings
-    - sections
-    - callouts
-    - tabs
-    - dataview_blocks
-    - metabind_inputs
-    - metabind_buttons
-    sections:
-    - identita
-    - uso_al_tavolo
-    - connessioni
-    - propagazione
-    - player_safe
-    - controllo
-    plugin_features:
-    - templater
-    - meta_bind
-    - dataview
     template_title: Oggetto Magico
     world_impact: false
     output:
@@ -868,31 +474,11 @@ blueprints:
       fallback: markdown_sections
     comparison_targets:
     - z.modelli/Oggetto Magico.md
+    profile: generic
   arco_da_conflitto:
     target_family:
     - arco da conflitto
-    jinja_template: ../jinja/generic_template.md.j2
     templater_entry: <% await tp.user.arco_da_conflitto(tp) %>
-    required_modules:
-    - fields_core
-    - plugin_bindings
-    - sections
-    - callouts
-    - tabs
-    - dataview_blocks
-    - metabind_inputs
-    - metabind_buttons
-    sections:
-    - identita
-    - uso_al_tavolo
-    - connessioni
-    - propagazione
-    - player_safe
-    - controllo
-    plugin_features:
-    - templater
-    - meta_bind
-    - dataview
     template_title: Arco Da Conflitto
     world_impact: true
     output:
@@ -902,31 +488,11 @@ blueprints:
       fallback: markdown_sections
     comparison_targets:
     - z.modelli/dm/Arco Da Conflitto.md
+    profile: generic
   campagna:
     target_family:
     - campagna
-    jinja_template: ../jinja/generic_template.md.j2
     templater_entry: <% await tp.user.campagna(tp) %>
-    required_modules:
-    - fields_core
-    - plugin_bindings
-    - sections
-    - callouts
-    - tabs
-    - dataview_blocks
-    - metabind_inputs
-    - metabind_buttons
-    sections:
-    - identita
-    - uso_al_tavolo
-    - connessioni
-    - propagazione
-    - player_safe
-    - controllo
-    plugin_features:
-    - templater
-    - meta_bind
-    - dataview
     template_title: Campagna
     world_impact: true
     output:
@@ -936,31 +502,11 @@ blueprints:
       fallback: markdown_sections
     comparison_targets:
     - z.modelli/dm/Campagna.md
+    profile: generic
   campagna_da_regione:
     target_family:
     - campagna da regione
-    jinja_template: ../jinja/generic_template.md.j2
     templater_entry: <% await tp.user.campagna_da_regione(tp) %>
-    required_modules:
-    - fields_core
-    - plugin_bindings
-    - sections
-    - callouts
-    - tabs
-    - dataview_blocks
-    - metabind_inputs
-    - metabind_buttons
-    sections:
-    - identita
-    - uso_al_tavolo
-    - connessioni
-    - propagazione
-    - player_safe
-    - controllo
-    plugin_features:
-    - templater
-    - meta_bind
-    - dataview
     template_title: Campagna Da Regione
     world_impact: true
     output:
@@ -970,31 +516,11 @@ blueprints:
       fallback: markdown_sections
     comparison_targets:
     - z.modelli/dm/Campagna Da Regione.md
+    profile: generic
   pg:
     target_family:
     - pg
-    jinja_template: ../jinja/generic_template.md.j2
     templater_entry: <% await tp.user.pg(tp) %>
-    required_modules:
-    - fields_core
-    - plugin_bindings
-    - sections
-    - callouts
-    - tabs
-    - dataview_blocks
-    - metabind_inputs
-    - metabind_buttons
-    sections:
-    - identita
-    - uso_al_tavolo
-    - connessioni
-    - propagazione
-    - player_safe
-    - controllo
-    plugin_features:
-    - templater
-    - meta_bind
-    - dataview
     template_title: PG
     world_impact: true
     output:
@@ -1004,31 +530,11 @@ blueprints:
       fallback: markdown_sections
     comparison_targets:
     - z.modelli/personaggio/PG.md
+    profile: generic
   png:
     target_family:
     - png
-    jinja_template: ../jinja/generic_template.md.j2
     templater_entry: <% await tp.user.png(tp) %>
-    required_modules:
-    - fields_core
-    - plugin_bindings
-    - sections
-    - callouts
-    - tabs
-    - dataview_blocks
-    - metabind_inputs
-    - metabind_buttons
-    sections:
-    - identita
-    - uso_al_tavolo
-    - connessioni
-    - propagazione
-    - player_safe
-    - controllo
-    plugin_features:
-    - templater
-    - meta_bind
-    - dataview
     template_title: PNG
     world_impact: true
     output:
@@ -1038,31 +544,11 @@ blueprints:
       fallback: markdown_sections
     comparison_targets:
     - z.modelli/personaggio/PNG.md
+    profile: generic
   compendium_del_mondo:
     target_family:
     - compendium del mondo
-    jinja_template: ../jinja/generic_template.md.j2
     templater_entry: <% await tp.user.compendium_mondo(tp) %>
-    required_modules:
-    - fields_core
-    - plugin_bindings
-    - sections
-    - callouts
-    - tabs
-    - dataview_blocks
-    - metabind_inputs
-    - metabind_buttons
-    sections:
-    - identita
-    - uso_al_tavolo
-    - connessioni
-    - propagazione
-    - player_safe
-    - controllo
-    plugin_features:
-    - templater
-    - meta_bind
-    - dataview
     template_title: Compendium Del Mondo
     world_impact: true
     output:
@@ -1072,31 +558,11 @@ blueprints:
       fallback: markdown_sections
     comparison_targets:
     - z.modelli/worldbuilding/Compendium Del Mondo.md
+    profile: generic
   conflitto:
     target_family:
     - conflitto
-    jinja_template: ../jinja/generic_template.md.j2
     templater_entry: <% await tp.user.conflitto(tp) %>
-    required_modules:
-    - fields_core
-    - plugin_bindings
-    - sections
-    - callouts
-    - tabs
-    - dataview_blocks
-    - metabind_inputs
-    - metabind_buttons
-    sections:
-    - identita
-    - uso_al_tavolo
-    - connessioni
-    - propagazione
-    - player_safe
-    - controllo
-    plugin_features:
-    - templater
-    - meta_bind
-    - dataview
     template_title: Conflitto
     world_impact: true
     output:
@@ -1106,31 +572,11 @@ blueprints:
       fallback: markdown_sections
     comparison_targets:
     - z.modelli/worldbuilding/Conflitto.md
+    profile: generic
   cosmologia:
     target_family:
     - cosmologia
-    jinja_template: ../jinja/generic_template.md.j2
     templater_entry: <% await tp.user.cosmologia(tp) %>
-    required_modules:
-    - fields_core
-    - plugin_bindings
-    - sections
-    - callouts
-    - tabs
-    - dataview_blocks
-    - metabind_inputs
-    - metabind_buttons
-    sections:
-    - identita
-    - uso_al_tavolo
-    - connessioni
-    - propagazione
-    - player_safe
-    - controllo
-    plugin_features:
-    - templater
-    - meta_bind
-    - dataview
     template_title: Cosmologia
     world_impact: true
     output:
@@ -1140,31 +586,11 @@ blueprints:
       fallback: markdown_sections
     comparison_targets:
     - z.modelli/worldbuilding/Cosmologia.md
+    profile: generic
   era_storica:
     target_family:
     - era storica
-    jinja_template: ../jinja/generic_template.md.j2
     templater_entry: <% await tp.user.era_storica(tp) %>
-    required_modules:
-    - fields_core
-    - plugin_bindings
-    - sections
-    - callouts
-    - tabs
-    - dataview_blocks
-    - metabind_inputs
-    - metabind_buttons
-    sections:
-    - identita
-    - uso_al_tavolo
-    - connessioni
-    - propagazione
-    - player_safe
-    - controllo
-    plugin_features:
-    - templater
-    - meta_bind
-    - dataview
     template_title: Era Storica
     world_impact: true
     output:
@@ -1174,31 +600,11 @@ blueprints:
       fallback: markdown_sections
     comparison_targets:
     - z.modelli/worldbuilding/Era Storica.md
+    profile: generic
   lingua:
     target_family:
     - lingua
-    jinja_template: ../jinja/generic_template.md.j2
     templater_entry: <% await tp.user.lingua(tp) %>
-    required_modules:
-    - fields_core
-    - plugin_bindings
-    - sections
-    - callouts
-    - tabs
-    - dataview_blocks
-    - metabind_inputs
-    - metabind_buttons
-    sections:
-    - identita
-    - uso_al_tavolo
-    - connessioni
-    - propagazione
-    - player_safe
-    - controllo
-    plugin_features:
-    - templater
-    - meta_bind
-    - dataview
     template_title: Lingua
     world_impact: false
     output:
@@ -1208,31 +614,11 @@ blueprints:
       fallback: markdown_sections
     comparison_targets:
     - z.modelli/worldbuilding/Lingua.md
+    profile: generic
   mercato:
     target_family:
     - mercato o nodo commerciale
-    jinja_template: ../jinja/generic_template.md.j2
     templater_entry: <% await tp.user.mercato(tp) %>
-    required_modules:
-    - fields_core
-    - plugin_bindings
-    - sections
-    - callouts
-    - tabs
-    - dataview_blocks
-    - metabind_inputs
-    - metabind_buttons
-    sections:
-    - identita
-    - uso_al_tavolo
-    - connessioni
-    - propagazione
-    - player_safe
-    - controllo
-    plugin_features:
-    - templater
-    - meta_bind
-    - dataview
     template_title: Mercato o Nodo Commerciale
     world_impact: true
     output:
@@ -1242,31 +628,11 @@ blueprints:
       fallback: markdown_sections
     comparison_targets:
     - z.modelli/worldbuilding/Mercato o Nodo Commerciale.md
+    profile: generic
   ricorrenza_calendario:
     target_family:
     - ricorrenza calendario
-    jinja_template: ../jinja/generic_template.md.j2
     templater_entry: <% await tp.user.ricorrenza_calendario(tp) %>
-    required_modules:
-    - fields_core
-    - plugin_bindings
-    - sections
-    - callouts
-    - tabs
-    - dataview_blocks
-    - metabind_inputs
-    - metabind_buttons
-    sections:
-    - identita
-    - uso_al_tavolo
-    - connessioni
-    - propagazione
-    - player_safe
-    - controllo
-    plugin_features:
-    - templater
-    - meta_bind
-    - dataview
     template_title: Ricorrenza Calendario
     world_impact: false
     output:
@@ -1276,31 +642,11 @@ blueprints:
       fallback: markdown_sections
     comparison_targets:
     - z.modelli/worldbuilding/Ricorrenza Calendario.md
+    profile: generic
   risorsa:
     target_family:
     - risorsa
-    jinja_template: ../jinja/generic_template.md.j2
     templater_entry: <% await tp.user.risorsa_mondo(tp) %>
-    required_modules:
-    - fields_core
-    - plugin_bindings
-    - sections
-    - callouts
-    - tabs
-    - dataview_blocks
-    - metabind_inputs
-    - metabind_buttons
-    sections:
-    - identita
-    - uso_al_tavolo
-    - connessioni
-    - propagazione
-    - player_safe
-    - controllo
-    plugin_features:
-    - templater
-    - meta_bind
-    - dataview
     template_title: Risorsa
     world_impact: true
     output:
@@ -1310,31 +656,11 @@ blueprints:
       fallback: markdown_sections
     comparison_targets:
     - z.modelli/worldbuilding/Risorsa.md
+    profile: generic
   rotta:
     target_family:
     - rotta
-    jinja_template: ../jinja/generic_template.md.j2
     templater_entry: <% await tp.user.rotta(tp) %>
-    required_modules:
-    - fields_core
-    - plugin_bindings
-    - sections
-    - callouts
-    - tabs
-    - dataview_blocks
-    - metabind_inputs
-    - metabind_buttons
-    sections:
-    - identita
-    - uso_al_tavolo
-    - connessioni
-    - propagazione
-    - player_safe
-    - controllo
-    plugin_features:
-    - templater
-    - meta_bind
-    - dataview
     template_title: Rotta
     world_impact: true
     output:
@@ -1344,31 +670,11 @@ blueprints:
       fallback: markdown_sections
     comparison_targets:
     - z.modelli/worldbuilding/Rotta.md
+    profile: generic
   segreto_o_mistero:
     target_family:
     - segreto o mistero
-    jinja_template: ../jinja/generic_template.md.j2
     templater_entry: <% await tp.user.world_entity(tp) %>
-    required_modules:
-    - fields_core
-    - plugin_bindings
-    - sections
-    - callouts
-    - tabs
-    - dataview_blocks
-    - metabind_inputs
-    - metabind_buttons
-    sections:
-    - identita
-    - uso_al_tavolo
-    - connessioni
-    - propagazione
-    - player_safe
-    - controllo
-    plugin_features:
-    - templater
-    - meta_bind
-    - dataview
     template_title: Segreto o Mistero
     world_impact: true
     output:
@@ -1378,32 +684,12 @@ blueprints:
       fallback: markdown_sections
     comparison_targets:
     - z.modelli/worldbuilding/Segreto o Mistero.md
+    profile: generic
   router_luogo:
     target_family:
     - router
     - luogo
-    jinja_template: ../jinja/action_template.md.j2
     templater_entry: <% await tp.user.template_router(tp, "luogo") %>
-    required_modules:
-    - fields_core
-    - plugin_bindings
-    - sections
-    - callouts
-    - tabs
-    - dataview_blocks
-    - metabind_inputs
-    - metabind_buttons
-    sections:
-    - identita
-    - uso_al_tavolo
-    - connessioni
-    - propagazione
-    - player_safe
-    - controllo
-    plugin_features:
-    - templater
-    - meta_bind
-    - dataview
     template_title: Luogo Router
     world_impact: false
     output:
@@ -1413,32 +699,12 @@ blueprints:
       fallback: markdown_sections
     comparison_targets:
     - z.modelli/Luogo Router.md
+    profile: action
   router_fazione:
     target_family:
     - router
     - fazione
-    jinja_template: ../jinja/action_template.md.j2
     templater_entry: <% await tp.user.template_router(tp, "fazione") %>
-    required_modules:
-    - fields_core
-    - plugin_bindings
-    - sections
-    - callouts
-    - tabs
-    - dataview_blocks
-    - metabind_inputs
-    - metabind_buttons
-    sections:
-    - identita
-    - uso_al_tavolo
-    - connessioni
-    - propagazione
-    - player_safe
-    - controllo
-    plugin_features:
-    - templater
-    - meta_bind
-    - dataview
     template_title: Fazione Router
     world_impact: false
     output:
@@ -1448,32 +714,12 @@ blueprints:
       fallback: markdown_sections
     comparison_targets:
     - z.modelli/Fazione Router.md
+    profile: action
   router_dm:
     target_family:
     - router
     - dm
-    jinja_template: ../jinja/action_template.md.j2
     templater_entry: <% await tp.user.template_router(tp, "dm") %>
-    required_modules:
-    - fields_core
-    - plugin_bindings
-    - sections
-    - callouts
-    - tabs
-    - dataview_blocks
-    - metabind_inputs
-    - metabind_buttons
-    sections:
-    - identita
-    - uso_al_tavolo
-    - connessioni
-    - propagazione
-    - player_safe
-    - controllo
-    plugin_features:
-    - templater
-    - meta_bind
-    - dataview
     template_title: DM Router
     world_impact: false
     output:
@@ -1483,32 +729,12 @@ blueprints:
       fallback: markdown_sections
     comparison_targets:
     - z.modelli/dm/DM Router.md
+    profile: action
   router_cultura:
     target_family:
     - router
     - cultura
-    jinja_template: ../jinja/action_template.md.j2
     templater_entry: <% await tp.user.template_router(tp, "cultura") %>
-    required_modules:
-    - fields_core
-    - plugin_bindings
-    - sections
-    - callouts
-    - tabs
-    - dataview_blocks
-    - metabind_inputs
-    - metabind_buttons
-    sections:
-    - identita
-    - uso_al_tavolo
-    - connessioni
-    - propagazione
-    - player_safe
-    - controllo
-    plugin_features:
-    - templater
-    - meta_bind
-    - dataview
     template_title: Cultura Router
     world_impact: false
     output:
@@ -1518,32 +744,12 @@ blueprints:
       fallback: markdown_sections
     comparison_targets:
     - z.modelli/Cultura Router.md
+    profile: action
   router_religione:
     target_family:
     - router
     - religione
-    jinja_template: ../jinja/action_template.md.j2
     templater_entry: <% await tp.user.template_router(tp, "religione") %>
-    required_modules:
-    - fields_core
-    - plugin_bindings
-    - sections
-    - callouts
-    - tabs
-    - dataview_blocks
-    - metabind_inputs
-    - metabind_buttons
-    sections:
-    - identita
-    - uso_al_tavolo
-    - connessioni
-    - propagazione
-    - player_safe
-    - controllo
-    plugin_features:
-    - templater
-    - meta_bind
-    - dataview
     template_title: Religione Router
     world_impact: false
     output:
@@ -1553,32 +759,12 @@ blueprints:
       fallback: markdown_sections
     comparison_targets:
     - z.modelli/Religione Router.md
+    profile: action
   router_economia:
     target_family:
     - router
     - economia
-    jinja_template: ../jinja/action_template.md.j2
     templater_entry: <% await tp.user.template_router(tp, "economia") %>
-    required_modules:
-    - fields_core
-    - plugin_bindings
-    - sections
-    - callouts
-    - tabs
-    - dataview_blocks
-    - metabind_inputs
-    - metabind_buttons
-    sections:
-    - identita
-    - uso_al_tavolo
-    - connessioni
-    - propagazione
-    - player_safe
-    - controllo
-    plugin_features:
-    - templater
-    - meta_bind
-    - dataview
     template_title: Economia Router
     world_impact: false
     output:
@@ -1588,32 +774,12 @@ blueprints:
       fallback: markdown_sections
     comparison_targets:
     - z.modelli/Economia Router.md
+    profile: action
   router_magia:
     target_family:
     - router
     - magia
-    jinja_template: ../jinja/action_template.md.j2
     templater_entry: <% await tp.user.template_router(tp, "magia") %>
-    required_modules:
-    - fields_core
-    - plugin_bindings
-    - sections
-    - callouts
-    - tabs
-    - dataview_blocks
-    - metabind_inputs
-    - metabind_buttons
-    sections:
-    - identita
-    - uso_al_tavolo
-    - connessioni
-    - propagazione
-    - player_safe
-    - controllo
-    plugin_features:
-    - templater
-    - meta_bind
-    - dataview
     template_title: Magia Router
     world_impact: false
     output:
@@ -1623,32 +789,12 @@ blueprints:
       fallback: markdown_sections
     comparison_targets:
     - z.modelli/Magia Router.md
+    profile: action
   router_storia:
     target_family:
     - router
     - storia
-    jinja_template: ../jinja/action_template.md.j2
     templater_entry: <% await tp.user.template_router(tp, "storia") %>
-    required_modules:
-    - fields_core
-    - plugin_bindings
-    - sections
-    - callouts
-    - tabs
-    - dataview_blocks
-    - metabind_inputs
-    - metabind_buttons
-    sections:
-    - identita
-    - uso_al_tavolo
-    - connessioni
-    - propagazione
-    - player_safe
-    - controllo
-    plugin_features:
-    - templater
-    - meta_bind
-    - dataview
     template_title: Storia Router
     world_impact: false
     output:
@@ -1658,32 +804,12 @@ blueprints:
       fallback: markdown_sections
     comparison_targets:
     - z.modelli/Storia Router.md
+    profile: action
   router_ecologia:
     target_family:
     - router
     - ecologia
-    jinja_template: ../jinja/action_template.md.j2
     templater_entry: <% await tp.user.template_router(tp, "ecologia") %>
-    required_modules:
-    - fields_core
-    - plugin_bindings
-    - sections
-    - callouts
-    - tabs
-    - dataview_blocks
-    - metabind_inputs
-    - metabind_buttons
-    sections:
-    - identita
-    - uso_al_tavolo
-    - connessioni
-    - propagazione
-    - player_safe
-    - controllo
-    plugin_features:
-    - templater
-    - meta_bind
-    - dataview
     template_title: Ecologia Router
     world_impact: false
     output:
@@ -1693,32 +819,12 @@ blueprints:
       fallback: markdown_sections
     comparison_targets:
     - z.modelli/Ecologia Router.md
+    profile: action
   router_societa:
     target_family:
     - router
     - societa
-    jinja_template: ../jinja/action_template.md.j2
     templater_entry: <% await tp.user.template_router(tp, "societa") %>
-    required_modules:
-    - fields_core
-    - plugin_bindings
-    - sections
-    - callouts
-    - tabs
-    - dataview_blocks
-    - metabind_inputs
-    - metabind_buttons
-    sections:
-    - identita
-    - uso_al_tavolo
-    - connessioni
-    - propagazione
-    - player_safe
-    - controllo
-    plugin_features:
-    - templater
-    - meta_bind
-    - dataview
     template_title: Societa Router
     world_impact: false
     output:
@@ -1728,31 +834,11 @@ blueprints:
       fallback: markdown_sections
     comparison_targets:
     - z.modelli/Societa Router.md
+    profile: action
   fazione_gilda:
     target_family:
     - gilda
-    jinja_template: ../jinja/generic_template.md.j2
     templater_entry: '<% await tp.user.fazione(tp, { tipoFazione: "gilda" }) %>'
-    required_modules:
-    - fields_core
-    - plugin_bindings
-    - sections
-    - callouts
-    - tabs
-    - dataview_blocks
-    - metabind_inputs
-    - metabind_buttons
-    sections:
-    - identita
-    - uso_al_tavolo
-    - connessioni
-    - propagazione
-    - player_safe
-    - controllo
-    plugin_features:
-    - templater
-    - meta_bind
-    - dataview
     template_title: Gilda
     world_impact: true
     output:
@@ -1762,31 +848,11 @@ blueprints:
       fallback: markdown_sections
     comparison_targets:
     - z.modelli/fazione/Gilda.md
+    profile: generic
   fazione_confraternita:
     target_family:
     - confraternita
-    jinja_template: ../jinja/generic_template.md.j2
     templater_entry: '<% await tp.user.fazione(tp, { tipoFazione: "confraternita" }) %>'
-    required_modules:
-    - fields_core
-    - plugin_bindings
-    - sections
-    - callouts
-    - tabs
-    - dataview_blocks
-    - metabind_inputs
-    - metabind_buttons
-    sections:
-    - identita
-    - uso_al_tavolo
-    - connessioni
-    - propagazione
-    - player_safe
-    - controllo
-    plugin_features:
-    - templater
-    - meta_bind
-    - dataview
     template_title: Confraternita
     world_impact: true
     output:
@@ -1796,31 +862,11 @@ blueprints:
       fallback: markdown_sections
     comparison_targets:
     - z.modelli/fazione/Confraternita.md
+    profile: generic
   luogo_insediamento:
     target_family:
     - insediamento
-    jinja_template: ../jinja/generic_template.md.j2
     templater_entry: '<% await tp.user.luogo(tp, { category: "insediamento" }) %>'
-    required_modules:
-    - fields_core
-    - plugin_bindings
-    - sections
-    - callouts
-    - tabs
-    - dataview_blocks
-    - metabind_inputs
-    - metabind_buttons
-    sections:
-    - identita
-    - uso_al_tavolo
-    - connessioni
-    - propagazione
-    - player_safe
-    - controllo
-    plugin_features:
-    - templater
-    - meta_bind
-    - dataview
     template_title: Insediamento
     world_impact: true
     output:
@@ -1830,31 +876,11 @@ blueprints:
       fallback: markdown_sections
     comparison_targets:
     - z.modelli/luogo/Insediamento.md
+    profile: generic
   luogo_tempio:
     target_family:
     - tempio
-    jinja_template: ../jinja/generic_template.md.j2
     templater_entry: '<% await tp.user.luogo(tp, { subtype: "tempio" }) %>'
-    required_modules:
-    - fields_core
-    - plugin_bindings
-    - sections
-    - callouts
-    - tabs
-    - dataview_blocks
-    - metabind_inputs
-    - metabind_buttons
-    sections:
-    - identita
-    - uso_al_tavolo
-    - connessioni
-    - propagazione
-    - player_safe
-    - controllo
-    plugin_features:
-    - templater
-    - meta_bind
-    - dataview
     template_title: Tempio
     world_impact: true
     output:
@@ -1864,31 +890,11 @@ blueprints:
       fallback: markdown_sections
     comparison_targets:
     - z.modelli/luogo/Tempio.md
+    profile: generic
   luogo_dungeon:
     target_family:
     - dungeon
-    jinja_template: ../jinja/generic_template.md.j2
     templater_entry: '<% await tp.user.luogo(tp, { subtype: "dungeon" }) %>'
-    required_modules:
-    - fields_core
-    - plugin_bindings
-    - sections
-    - callouts
-    - tabs
-    - dataview_blocks
-    - metabind_inputs
-    - metabind_buttons
-    sections:
-    - identita
-    - uso_al_tavolo
-    - connessioni
-    - propagazione
-    - player_safe
-    - controllo
-    plugin_features:
-    - templater
-    - meta_bind
-    - dataview
     template_title: Dungeon
     world_impact: true
     output:
@@ -1898,31 +904,11 @@ blueprints:
       fallback: markdown_sections
     comparison_targets:
     - z.modelli/luogo/Dungeon.md
+    profile: generic
   luogo_rovina:
     target_family:
     - rovina
-    jinja_template: ../jinja/generic_template.md.j2
     templater_entry: '<% await tp.user.luogo(tp, { subtype: "rovina" }) %>'
-    required_modules:
-    - fields_core
-    - plugin_bindings
-    - sections
-    - callouts
-    - tabs
-    - dataview_blocks
-    - metabind_inputs
-    - metabind_buttons
-    sections:
-    - identita
-    - uso_al_tavolo
-    - connessioni
-    - propagazione
-    - player_safe
-    - controllo
-    plugin_features:
-    - templater
-    - meta_bind
-    - dataview
     template_title: Rovina
     world_impact: true
     output:
@@ -1932,31 +918,11 @@ blueprints:
       fallback: markdown_sections
     comparison_targets:
     - z.modelli/luogo/Rovina.md
+    profile: generic
   luogo_regione_naturale:
     target_family:
     - regione naturale
-    jinja_template: ../jinja/generic_template.md.j2
     templater_entry: '<% await tp.user.luogo(tp, { category: "regione naturale" }) %>'
-    required_modules:
-    - fields_core
-    - plugin_bindings
-    - sections
-    - callouts
-    - tabs
-    - dataview_blocks
-    - metabind_inputs
-    - metabind_buttons
-    sections:
-    - identita
-    - uso_al_tavolo
-    - connessioni
-    - propagazione
-    - player_safe
-    - controllo
-    plugin_features:
-    - templater
-    - meta_bind
-    - dataview
     template_title: Regione Naturale
     world_impact: true
     output:
@@ -1966,31 +932,11 @@ blueprints:
       fallback: markdown_sections
     comparison_targets:
     - z.modelli/luogo/Regione Naturale.md
+    profile: generic
   geografia_continente:
     target_family:
     - continente
-    jinja_template: ../jinja/generic_template.md.j2
     templater_entry: '<% await tp.user.luogo(tp, { category: "geografia", subtype: "continente" }) %>'
-    required_modules:
-    - fields_core
-    - plugin_bindings
-    - sections
-    - callouts
-    - tabs
-    - dataview_blocks
-    - metabind_inputs
-    - metabind_buttons
-    sections:
-    - identita
-    - uso_al_tavolo
-    - connessioni
-    - propagazione
-    - player_safe
-    - controllo
-    plugin_features:
-    - templater
-    - meta_bind
-    - dataview
     template_title: Continente
     world_impact: true
     output:
@@ -2000,31 +946,11 @@ blueprints:
       fallback: markdown_sections
     comparison_targets:
     - z.modelli/geografia/Continente.md
+    profile: generic
   geografia_isola:
     target_family:
     - isola
-    jinja_template: ../jinja/generic_template.md.j2
     templater_entry: '<% await tp.user.luogo(tp, { category: "geografia", subtype: "isola" }) %>'
-    required_modules:
-    - fields_core
-    - plugin_bindings
-    - sections
-    - callouts
-    - tabs
-    - dataview_blocks
-    - metabind_inputs
-    - metabind_buttons
-    sections:
-    - identita
-    - uso_al_tavolo
-    - connessioni
-    - propagazione
-    - player_safe
-    - controllo
-    plugin_features:
-    - templater
-    - meta_bind
-    - dataview
     template_title: Isola
     world_impact: true
     output:
@@ -2034,31 +960,11 @@ blueprints:
       fallback: markdown_sections
     comparison_targets:
     - z.modelli/geografia/Isola.md
+    profile: generic
   geografia_regione:
     target_family:
     - regione
-    jinja_template: ../jinja/generic_template.md.j2
     templater_entry: '<% await tp.user.luogo(tp, { category: "geografia" }) %>'
-    required_modules:
-    - fields_core
-    - plugin_bindings
-    - sections
-    - callouts
-    - tabs
-    - dataview_blocks
-    - metabind_inputs
-    - metabind_buttons
-    sections:
-    - identita
-    - uso_al_tavolo
-    - connessioni
-    - propagazione
-    - player_safe
-    - controllo
-    plugin_features:
-    - templater
-    - meta_bind
-    - dataview
     template_title: Regione
     world_impact: true
     output:
@@ -2068,31 +974,11 @@ blueprints:
       fallback: markdown_sections
     comparison_targets:
     - z.modelli/geografia/Regione.md
+    profile: generic
   politica_regno:
     target_family:
     - regno
-    jinja_template: ../jinja/generic_template.md.j2
     templater_entry: '<% await tp.user.luogo(tp, { category: "politica", subtype: "regno" }) %>'
-    required_modules:
-    - fields_core
-    - plugin_bindings
-    - sections
-    - callouts
-    - tabs
-    - dataview_blocks
-    - metabind_inputs
-    - metabind_buttons
-    sections:
-    - identita
-    - uso_al_tavolo
-    - connessioni
-    - propagazione
-    - player_safe
-    - controllo
-    plugin_features:
-    - templater
-    - meta_bind
-    - dataview
     template_title: Regno
     world_impact: true
     output:
@@ -2102,31 +988,11 @@ blueprints:
       fallback: markdown_sections
     comparison_targets:
     - z.modelli/politica/Regno.md
+    profile: generic
   politica_impero:
     target_family:
     - impero
-    jinja_template: ../jinja/generic_template.md.j2
     templater_entry: '<% await tp.user.luogo(tp, { category: "politica", subtype: "impero" }) %>'
-    required_modules:
-    - fields_core
-    - plugin_bindings
-    - sections
-    - callouts
-    - tabs
-    - dataview_blocks
-    - metabind_inputs
-    - metabind_buttons
-    sections:
-    - identita
-    - uso_al_tavolo
-    - connessioni
-    - propagazione
-    - player_safe
-    - controllo
-    plugin_features:
-    - templater
-    - meta_bind
-    - dataview
     template_title: Impero
     world_impact: true
     output:
@@ -2136,31 +1002,11 @@ blueprints:
       fallback: markdown_sections
     comparison_targets:
     - z.modelli/politica/Impero.md
+    profile: generic
   politica_repubblica:
     target_family:
     - repubblica
-    jinja_template: ../jinja/generic_template.md.j2
     templater_entry: '<% await tp.user.luogo(tp, { category: "politica", subtype: "repubblica" }) %>'
-    required_modules:
-    - fields_core
-    - plugin_bindings
-    - sections
-    - callouts
-    - tabs
-    - dataview_blocks
-    - metabind_inputs
-    - metabind_buttons
-    sections:
-    - identita
-    - uso_al_tavolo
-    - connessioni
-    - propagazione
-    - player_safe
-    - controllo
-    plugin_features:
-    - templater
-    - meta_bind
-    - dataview
     template_title: Repubblica
     world_impact: true
     output:
@@ -2170,31 +1016,11 @@ blueprints:
       fallback: markdown_sections
     comparison_targets:
     - z.modelli/politica/Repubblica.md
+    profile: generic
   politica_oligarchia:
     target_family:
     - oligarchia
-    jinja_template: ../jinja/generic_template.md.j2
     templater_entry: '<% await tp.user.luogo(tp, { category: "politica", subtype: "oligarchia" }) %>'
-    required_modules:
-    - fields_core
-    - plugin_bindings
-    - sections
-    - callouts
-    - tabs
-    - dataview_blocks
-    - metabind_inputs
-    - metabind_buttons
-    sections:
-    - identita
-    - uso_al_tavolo
-    - connessioni
-    - propagazione
-    - player_safe
-    - controllo
-    plugin_features:
-    - templater
-    - meta_bind
-    - dataview
     template_title: Oligarchia
     world_impact: true
     output:
@@ -2204,31 +1030,11 @@ blueprints:
       fallback: markdown_sections
     comparison_targets:
     - z.modelli/politica/Oligarchia.md
+    profile: generic
   politica_ducato:
     target_family:
     - ducato
-    jinja_template: ../jinja/generic_template.md.j2
     templater_entry: '<% await tp.user.luogo(tp, { category: "politica", subtype: "ducato" }) %>'
-    required_modules:
-    - fields_core
-    - plugin_bindings
-    - sections
-    - callouts
-    - tabs
-    - dataview_blocks
-    - metabind_inputs
-    - metabind_buttons
-    sections:
-    - identita
-    - uso_al_tavolo
-    - connessioni
-    - propagazione
-    - player_safe
-    - controllo
-    plugin_features:
-    - templater
-    - meta_bind
-    - dataview
     template_title: Ducato
     world_impact: true
     output:
@@ -2238,31 +1044,11 @@ blueprints:
       fallback: markdown_sections
     comparison_targets:
     - z.modelli/politica/Ducato.md
+    profile: generic
   politica_contea:
     target_family:
     - contea
-    jinja_template: ../jinja/generic_template.md.j2
     templater_entry: '<% await tp.user.luogo(tp, { category: "politica", subtype: "contea" }) %>'
-    required_modules:
-    - fields_core
-    - plugin_bindings
-    - sections
-    - callouts
-    - tabs
-    - dataview_blocks
-    - metabind_inputs
-    - metabind_buttons
-    sections:
-    - identita
-    - uso_al_tavolo
-    - connessioni
-    - propagazione
-    - player_safe
-    - controllo
-    plugin_features:
-    - templater
-    - meta_bind
-    - dataview
     template_title: Contea
     world_impact: true
     output:
@@ -2272,31 +1058,11 @@ blueprints:
       fallback: markdown_sections
     comparison_targets:
     - z.modelli/politica/Contea.md
+    profile: generic
   politica_baronia:
     target_family:
     - baronia
-    jinja_template: ../jinja/generic_template.md.j2
     templater_entry: '<% await tp.user.luogo(tp, { category: "politica", subtype: "baronia" }) %>'
-    required_modules:
-    - fields_core
-    - plugin_bindings
-    - sections
-    - callouts
-    - tabs
-    - dataview_blocks
-    - metabind_inputs
-    - metabind_buttons
-    sections:
-    - identita
-    - uso_al_tavolo
-    - connessioni
-    - propagazione
-    - player_safe
-    - controllo
-    plugin_features:
-    - templater
-    - meta_bind
-    - dataview
     template_title: Baronia
     world_impact: true
     output:
@@ -2306,31 +1072,11 @@ blueprints:
       fallback: markdown_sections
     comparison_targets:
     - z.modelli/politica/Baronia.md
+    profile: generic
   personaggio_divinita:
     target_family:
     - divinità
-    jinja_template: ../jinja/generic_template.md.j2
     templater_entry: '<% await tp.user.personaggio(tp, { tipoPersonaggio: "divinita" }) %>'
-    required_modules:
-    - fields_core
-    - plugin_bindings
-    - sections
-    - callouts
-    - tabs
-    - dataview_blocks
-    - metabind_inputs
-    - metabind_buttons
-    sections:
-    - identita
-    - uso_al_tavolo
-    - connessioni
-    - propagazione
-    - player_safe
-    - controllo
-    plugin_features:
-    - templater
-    - meta_bind
-    - dataview
     template_title: Divinità
     world_impact: true
     output:
@@ -2340,31 +1086,11 @@ blueprints:
       fallback: markdown_sections
     comparison_targets:
     - z.modelli/personaggio/Divinità.md
+    profile: generic
   azione_applica_conseguenza:
     target_family:
     - azione
-    jinja_template: ../jinja/action_template.md.j2
     templater_entry: <% await tp.user.meta_actions(tp, "applica_conseguenza") %>
-    required_modules:
-    - fields_core
-    - plugin_bindings
-    - sections
-    - callouts
-    - tabs
-    - dataview_blocks
-    - metabind_inputs
-    - metabind_buttons
-    sections:
-    - identita
-    - uso_al_tavolo
-    - connessioni
-    - propagazione
-    - player_safe
-    - controllo
-    plugin_features:
-    - templater
-    - meta_bind
-    - dataview
     template_title: Applica Conseguenza
     world_impact: false
     output:
@@ -2374,31 +1100,11 @@ blueprints:
       fallback: markdown_sections
     comparison_targets:
     - z.modelli/azioni/Applica Conseguenza.md
+    profile: action
   azione_archivia:
     target_family:
     - azione
-    jinja_template: ../jinja/action_template.md.j2
     templater_entry: <% await tp.user.meta_actions(tp, "archivia") %>
-    required_modules:
-    - fields_core
-    - plugin_bindings
-    - sections
-    - callouts
-    - tabs
-    - dataview_blocks
-    - metabind_inputs
-    - metabind_buttons
-    sections:
-    - identita
-    - uso_al_tavolo
-    - connessioni
-    - propagazione
-    - player_safe
-    - controllo
-    plugin_features:
-    - templater
-    - meta_bind
-    - dataview
     template_title: Archivia
     world_impact: false
     output:
@@ -2408,31 +1114,11 @@ blueprints:
       fallback: markdown_sections
     comparison_targets:
     - z.modelli/azioni/Archivia.md
+    profile: action
   azione_avanza_clock:
     target_family:
     - azione
-    jinja_template: ../jinja/action_template.md.j2
     templater_entry: <% await tp.user.meta_actions(tp, "avanza_clock") %>
-    required_modules:
-    - fields_core
-    - plugin_bindings
-    - sections
-    - callouts
-    - tabs
-    - dataview_blocks
-    - metabind_inputs
-    - metabind_buttons
-    sections:
-    - identita
-    - uso_al_tavolo
-    - connessioni
-    - propagazione
-    - player_safe
-    - controllo
-    plugin_features:
-    - templater
-    - meta_bind
-    - dataview
     template_title: Avanza Clock
     world_impact: false
     output:
@@ -2442,31 +1128,11 @@ blueprints:
       fallback: markdown_sections
     comparison_targets:
     - z.modelli/azioni/Avanza Clock.md
+    profile: action
   azione_smista_bozza_generata:
     target_family:
     - azione
-    jinja_template: ../jinja/action_template.md.j2
     templater_entry: <% await tp.user.meta_actions(tp, "smista_bozza_generata") %>
-    required_modules:
-    - fields_core
-    - plugin_bindings
-    - sections
-    - callouts
-    - tabs
-    - dataview_blocks
-    - metabind_inputs
-    - metabind_buttons
-    sections:
-    - identita
-    - uso_al_tavolo
-    - connessioni
-    - propagazione
-    - player_safe
-    - controllo
-    plugin_features:
-    - templater
-    - meta_bind
-    - dataview
     template_title: Smista Bozza Generata
     world_impact: false
     output:
@@ -2476,31 +1142,11 @@ blueprints:
       fallback: markdown_sections
     comparison_targets:
     - z.modelli/azioni/Smista Bozza Generata.md
+    profile: action
   azione_canonizza_bozza_generata:
     target_family:
     - azione
-    jinja_template: ../jinja/action_template.md.j2
     templater_entry: <% await tp.user.meta_actions(tp, "canonizza_bozza_generata") %>
-    required_modules:
-    - fields_core
-    - plugin_bindings
-    - sections
-    - callouts
-    - tabs
-    - dataview_blocks
-    - metabind_inputs
-    - metabind_buttons
-    sections:
-    - identita
-    - uso_al_tavolo
-    - connessioni
-    - propagazione
-    - player_safe
-    - controllo
-    plugin_features:
-    - templater
-    - meta_bind
-    - dataview
     template_title: Canonizza Bozza Generata
     world_impact: false
     output:
@@ -2510,31 +1156,11 @@ blueprints:
       fallback: markdown_sections
     comparison_targets:
     - z.modelli/azioni/Canonizza Bozza Generata.md
+    profile: action
   azione_collega_sessione_attiva:
     target_family:
     - azione
-    jinja_template: ../jinja/action_template.md.j2
     templater_entry: <% await tp.user.meta_actions(tp, "collega_sessione_attiva") %>
-    required_modules:
-    - fields_core
-    - plugin_bindings
-    - sections
-    - callouts
-    - tabs
-    - dataview_blocks
-    - metabind_inputs
-    - metabind_buttons
-    sections:
-    - identita
-    - uso_al_tavolo
-    - connessioni
-    - propagazione
-    - player_safe
-    - controllo
-    plugin_features:
-    - templater
-    - meta_bind
-    - dataview
     template_title: Collega Sessione Attiva
     world_impact: false
     output:
@@ -2544,31 +1170,11 @@ blueprints:
       fallback: markdown_sections
     comparison_targets:
     - z.modelli/azioni/Collega Sessione Attiva.md
+    profile: action
   azione_marca_canonico:
     target_family:
     - azione
-    jinja_template: ../jinja/action_template.md.j2
     templater_entry: <% await tp.user.meta_actions(tp, "marca_canonico") %>
-    required_modules:
-    - fields_core
-    - plugin_bindings
-    - sections
-    - callouts
-    - tabs
-    - dataview_blocks
-    - metabind_inputs
-    - metabind_buttons
-    sections:
-    - identita
-    - uso_al_tavolo
-    - connessioni
-    - propagazione
-    - player_safe
-    - controllo
-    plugin_features:
-    - templater
-    - meta_bind
-    - dataview
     template_title: Marca Canonico
     world_impact: false
     output:
@@ -2578,31 +1184,11 @@ blueprints:
       fallback: markdown_sections
     comparison_targets:
     - z.modelli/azioni/Marca Canonico.md
+    profile: action
   azione_marca_rumor:
     target_family:
     - azione
-    jinja_template: ../jinja/action_template.md.j2
     templater_entry: <% await tp.user.meta_actions(tp, "marca_rumor") %>
-    required_modules:
-    - fields_core
-    - plugin_bindings
-    - sections
-    - callouts
-    - tabs
-    - dataview_blocks
-    - metabind_inputs
-    - metabind_buttons
-    sections:
-    - identita
-    - uso_al_tavolo
-    - connessioni
-    - propagazione
-    - player_safe
-    - controllo
-    plugin_features:
-    - templater
-    - meta_bind
-    - dataview
     template_title: Marca Rumor
     world_impact: false
     output:
@@ -2612,31 +1198,11 @@ blueprints:
       fallback: markdown_sections
     comparison_targets:
     - z.modelli/azioni/Marca Rumor.md
+    profile: action
   azione_prepara_recap_pubblico:
     target_family:
     - azione
-    jinja_template: ../jinja/action_template.md.j2
     templater_entry: <% await tp.user.meta_actions(tp, "prepara_recap_pubblico") %>
-    required_modules:
-    - fields_core
-    - plugin_bindings
-    - sections
-    - callouts
-    - tabs
-    - dataview_blocks
-    - metabind_inputs
-    - metabind_buttons
-    sections:
-    - identita
-    - uso_al_tavolo
-    - connessioni
-    - propagazione
-    - player_safe
-    - controllo
-    plugin_features:
-    - templater
-    - meta_bind
-    - dataview
     template_title: Prepara Recap Pubblico
     world_impact: false
     output:
@@ -2646,31 +1212,11 @@ blueprints:
       fallback: markdown_sections
     comparison_targets:
     - z.modelli/azioni/Prepara Recap Pubblico.md
+    profile: action
   azione_propaga_entita:
     target_family:
     - azione
-    jinja_template: ../jinja/action_template.md.j2
     templater_entry: <% await tp.user.meta_actions(tp, "propaga_entita") %>
-    required_modules:
-    - fields_core
-    - plugin_bindings
-    - sections
-    - callouts
-    - tabs
-    - dataview_blocks
-    - metabind_inputs
-    - metabind_buttons
-    sections:
-    - identita
-    - uso_al_tavolo
-    - connessioni
-    - propagazione
-    - player_safe
-    - controllo
-    plugin_features:
-    - templater
-    - meta_bind
-    - dataview
     template_title: Propaga A Entita
     world_impact: false
     output:
@@ -2680,31 +1226,11 @@ blueprints:
       fallback: markdown_sections
     comparison_targets:
     - z.modelli/azioni/Propaga A Entita.md
+    profile: action
   dm_aggiorna_scena:
     target_family:
     - azione
-    jinja_template: ../jinja/action_template.md.j2
     templater_entry: <% await tp.user.session_live_update(tp, "scena") %>
-    required_modules:
-    - fields_core
-    - plugin_bindings
-    - sections
-    - callouts
-    - tabs
-    - dataview_blocks
-    - metabind_inputs
-    - metabind_buttons
-    sections:
-    - identita
-    - uso_al_tavolo
-    - connessioni
-    - propagazione
-    - player_safe
-    - controllo
-    plugin_features:
-    - templater
-    - meta_bind
-    - dataview
     template_title: Aggiorna Scena Corrente
     world_impact: false
     output:
@@ -2714,31 +1240,11 @@ blueprints:
       fallback: markdown_sections
     comparison_targets:
     - z.modelli/dm/Aggiorna Scena Corrente.md
+    profile: action
   dm_aggiungi_decisione:
     target_family:
     - azione
-    jinja_template: ../jinja/action_template.md.j2
     templater_entry: <% await tp.user.session_live_update(tp, "decisione") %>
-    required_modules:
-    - fields_core
-    - plugin_bindings
-    - sections
-    - callouts
-    - tabs
-    - dataview_blocks
-    - metabind_inputs
-    - metabind_buttons
-    sections:
-    - identita
-    - uso_al_tavolo
-    - connessioni
-    - propagazione
-    - player_safe
-    - controllo
-    plugin_features:
-    - templater
-    - meta_bind
-    - dataview
     template_title: Aggiungi Decisione Live
     world_impact: false
     output:
@@ -2748,31 +1254,11 @@ blueprints:
       fallback: markdown_sections
     comparison_targets:
     - z.modelli/dm/Aggiungi Decisione Live.md
+    profile: action
   dm_collega_appunto:
     target_family:
     - azione
-    jinja_template: ../jinja/action_template.md.j2
     templater_entry: <% await tp.user.session_live_update(tp, "appunto") %>
-    required_modules:
-    - fields_core
-    - plugin_bindings
-    - sections
-    - callouts
-    - tabs
-    - dataview_blocks
-    - metabind_inputs
-    - metabind_buttons
-    sections:
-    - identita
-    - uso_al_tavolo
-    - connessioni
-    - propagazione
-    - player_safe
-    - controllo
-    plugin_features:
-    - templater
-    - meta_bind
-    - dataview
     template_title: Collega Appunto Live
     world_impact: false
     output:
@@ -2782,31 +1268,11 @@ blueprints:
       fallback: markdown_sections
     comparison_targets:
     - z.modelli/dm/Collega Appunto Live.md
+    profile: action
   wizard_appunto_live:
     target_family:
     - wizard
-    jinja_template: ../jinja/generic_template.md.j2
     templater_entry: <% await tp.user.wizard_layer(tp, "appunto_live") %>
-    required_modules:
-    - fields_core
-    - plugin_bindings
-    - sections
-    - callouts
-    - tabs
-    - dataview_blocks
-    - metabind_inputs
-    - metabind_buttons
-    sections:
-    - identita
-    - uso_al_tavolo
-    - connessioni
-    - propagazione
-    - player_safe
-    - controllo
-    plugin_features:
-    - templater
-    - meta_bind
-    - dataview
     template_title: Appunto Live
     world_impact: true
     output:
@@ -2816,31 +1282,11 @@ blueprints:
       fallback: markdown_sections
     comparison_targets:
     - z.modelli/wizard/Appunto Live.md
+    profile: generic
   wizard_conseguenza:
     target_family:
     - wizard
-    jinja_template: ../jinja/generic_template.md.j2
     templater_entry: <% await tp.user.wizard_layer(tp, "conseguenza") %>
-    required_modules:
-    - fields_core
-    - plugin_bindings
-    - sections
-    - callouts
-    - tabs
-    - dataview_blocks
-    - metabind_inputs
-    - metabind_buttons
-    sections:
-    - identita
-    - uso_al_tavolo
-    - connessioni
-    - propagazione
-    - player_safe
-    - controllo
-    plugin_features:
-    - templater
-    - meta_bind
-    - dataview
     template_title: Conseguenza
     world_impact: true
     output:
@@ -2850,31 +1296,11 @@ blueprints:
       fallback: markdown_sections
     comparison_targets:
     - z.modelli/wizard/Conseguenza.md
+    profile: generic
   wizard_fine_sessione:
     target_family:
     - wizard
-    jinja_template: ../jinja/action_template.md.j2
     templater_entry: <% await tp.user.wizard_layer(tp, "fine_sessione") %>
-    required_modules:
-    - fields_core
-    - plugin_bindings
-    - sections
-    - callouts
-    - tabs
-    - dataview_blocks
-    - metabind_inputs
-    - metabind_buttons
-    sections:
-    - identita
-    - uso_al_tavolo
-    - connessioni
-    - propagazione
-    - player_safe
-    - controllo
-    plugin_features:
-    - templater
-    - meta_bind
-    - dataview
     template_title: Fine Sessione
     world_impact: false
     output:
@@ -2884,31 +1310,11 @@ blueprints:
       fallback: markdown_sections
     comparison_targets:
     - z.modelli/wizard/Fine Sessione.md
+    profile: action
   wizard_nuova_entita_viva:
     target_family:
     - wizard
-    jinja_template: ../jinja/action_template.md.j2
     templater_entry: <% await tp.user.wizard_layer(tp, "nuova_entita_viva") %>
-    required_modules:
-    - fields_core
-    - plugin_bindings
-    - sections
-    - callouts
-    - tabs
-    - dataview_blocks
-    - metabind_inputs
-    - metabind_buttons
-    sections:
-    - identita
-    - uso_al_tavolo
-    - connessioni
-    - propagazione
-    - player_safe
-    - controllo
-    plugin_features:
-    - templater
-    - meta_bind
-    - dataview
     template_title: Nuova Entita Viva
     world_impact: false
     output:
@@ -2918,31 +1324,11 @@ blueprints:
       fallback: markdown_sections
     comparison_targets:
     - z.modelli/wizard/Nuova Entita Viva.md
+    profile: action
   wizard_sessione_output:
     target_family:
     - wizard
-    jinja_template: ../jinja/generic_template.md.j2
     templater_entry: <% await tp.user.wizard_layer(tp, "nuova_sessione_da_output_precedente") %>
-    required_modules:
-    - fields_core
-    - plugin_bindings
-    - sections
-    - callouts
-    - tabs
-    - dataview_blocks
-    - metabind_inputs
-    - metabind_buttons
-    sections:
-    - identita
-    - uso_al_tavolo
-    - connessioni
-    - propagazione
-    - player_safe
-    - controllo
-    plugin_features:
-    - templater
-    - meta_bind
-    - dataview
     template_title: Nuova Sessione Da Output Precedente
     world_impact: true
     output:
@@ -2952,32 +1338,12 @@ blueprints:
       fallback: markdown_sections
     comparison_targets:
     - z.modelli/wizard/Nuova Sessione Da Output Precedente.md
+    profile: generic
   wizard_nuovo_mondo_homebrew:
     target_family:
     - wizard
     - mondo
-    jinja_template: ../jinja/generic_template.md.j2
     templater_entry: <% await tp.user.nuovo_mondo_homebrew(tp) %>
-    required_modules:
-    - fields_core
-    - plugin_bindings
-    - sections
-    - callouts
-    - tabs
-    - dataview_blocks
-    - metabind_inputs
-    - metabind_buttons
-    sections:
-    - identita
-    - uso_al_tavolo
-    - connessioni
-    - propagazione
-    - player_safe
-    - controllo
-    plugin_features:
-    - templater
-    - meta_bind
-    - dataview
     template_title: Nuovo Mondo Homebrew
     world_impact: true
     output:
@@ -2987,31 +1353,11 @@ blueprints:
       fallback: markdown_sections
     comparison_targets:
     - z.modelli/wizard/Nuovo Mondo Homebrew.md
+    profile: generic
   router_personaggio:
     target_family:
     - personaggio router
-    jinja_template: ../jinja/action_template.md.j2
     templater_entry: <% await tp.user.template_router(tp, "personaggio") %>
-    required_modules:
-    - fields_core
-    - plugin_bindings
-    - sections
-    - callouts
-    - tabs
-    - dataview_blocks
-    - metabind_inputs
-    - metabind_buttons
-    sections:
-    - identita
-    - uso_al_tavolo
-    - connessioni
-    - propagazione
-    - player_safe
-    - controllo
-    plugin_features:
-    - templater
-    - meta_bind
-    - dataview
     template_title: Personaggio Router
     world_impact: false
     output:
@@ -3021,31 +1367,11 @@ blueprints:
       fallback: markdown_sections
     comparison_targets:
     - z.modelli/Personaggio Router.md
+    profile: action
   dm_one_shot:
     target_family:
     - one-shot
-    jinja_template: ../jinja/generic_template.md.j2
     templater_entry: <% await tp.user.one_shot(tp) %>
-    required_modules:
-    - fields_core
-    - plugin_bindings
-    - sections
-    - callouts
-    - tabs
-    - dataview_blocks
-    - metabind_inputs
-    - metabind_buttons
-    sections:
-    - identita
-    - uso_al_tavolo
-    - connessioni
-    - propagazione
-    - player_safe
-    - controllo
-    plugin_features:
-    - templater
-    - meta_bind
-    - dataview
     template_title: One-Shot
     world_impact: true
     output:
@@ -3055,31 +1381,11 @@ blueprints:
       fallback: markdown_sections
     comparison_targets:
     - z.modelli/dm/One-Shot.md
+    profile: generic
   dm_trappola:
     target_family:
     - trappola
-    jinja_template: ../jinja/generic_template.md.j2
     templater_entry: <% await tp.user.world_entity(tp) %>
-    required_modules:
-    - fields_core
-    - plugin_bindings
-    - sections
-    - callouts
-    - tabs
-    - dataview_blocks
-    - metabind_inputs
-    - metabind_buttons
-    sections:
-    - identita
-    - uso_al_tavolo
-    - connessioni
-    - propagazione
-    - player_safe
-    - controllo
-    plugin_features:
-    - templater
-    - meta_bind
-    - dataview
     template_title: Trappola
     world_impact: true
     output:
@@ -3089,31 +1395,11 @@ blueprints:
       fallback: markdown_sections
     comparison_targets:
     - z.modelli/dm/Trappola.md
+    profile: generic
   dm_pericolo_ambientale:
     target_family:
     - pericolo ambientale
-    jinja_template: ../jinja/generic_template.md.j2
     templater_entry: <% await tp.user.world_entity(tp) %>
-    required_modules:
-    - fields_core
-    - plugin_bindings
-    - sections
-    - callouts
-    - tabs
-    - dataview_blocks
-    - metabind_inputs
-    - metabind_buttons
-    sections:
-    - identita
-    - uso_al_tavolo
-    - connessioni
-    - propagazione
-    - player_safe
-    - controllo
-    plugin_features:
-    - templater
-    - meta_bind
-    - dataview
     template_title: Pericolo Ambientale
     world_impact: true
     output:
@@ -3123,6 +1409,7 @@ blueprints:
       fallback: markdown_sections
     comparison_targets:
     - z.modelli/dm/Pericolo Ambientale.md
+    profile: generic
 outputs:
   markdown_templates: z.modelli
   fileclasses: z.fileclass
