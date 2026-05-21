@@ -85,6 +85,7 @@ const REQUIRED_BASE_FILES = [
 const REQUIRED_LAYER_FILES = [
     "z.automazioni/helpers.js",
     "z.automazioni/check_smoke.js",
+    "z.automazioni/check_release.js",
     "z.automazioni/audit_template_migration.py",
     "z.automazioni/check_template_factory.py",
     "z.automazioni/render_template_factory.py",
@@ -118,25 +119,6 @@ const DEMO_PUBLIC_FILES = [
     "Risorse/Mappe/Mappa Pubblica Di Brumafonda.md",
     "Mondi/Dispense/Avviso Della Dogana Di Brumafonda.md",
     "Mondi/Sessioni/2026-05-28 - La Campana Nella Nebbia.md"
-];
-const RELEASE_EXPECTED_VERSION = "1.0.0";
-const RELEASE_EXPECTED_DATE = "2026-05-21";
-const RELEASE_CHANGELOG_MARKERS = [
-    "[[Dev/Demo Finale]]",
-    "[[Dev/Smoke Demo Finale]]",
-    "Gate statico M3",
-    "TemplateFactory ora copre",
-    "Calendarium e selezionabile",
-    "smistamento -> canonizzazione",
-    "dist/vault-gdr-clean.zip"
-];
-const RELEASE_VERIFICATION_MARKERS = [
-    "## Ultima Verifica Automatica",
-    RELEASE_EXPECTED_DATE,
-    "`npm run check` passato senza warning",
-    "`npm run release:clean` ha creato `dist/vault-gdr-clean`",
-    "`npm run release:clean` ha creato `dist/vault-gdr-clean.zip`",
-    "`dist/` resta artefatto locale ignorato da Git"
 ];
 const REQUIRED_META_BIND_INPUT_TEMPLATES = [
     "mondo",
@@ -1038,34 +1020,6 @@ if (activeSessions.length > 1) {
 const gptConnectorIndex = markdownMeta.get("Dev/Indice Connettore GPT.md");
 if (gptConnectorIndex?.is_code_search_indexed !== true) {
     errors.push("Dev/Indice Connettore GPT.md: manca is_code_search_indexed: true");
-}
-
-const versionText = fs.existsSync(path.join(ROOT, "VERSION.md"))
-    ? fs.readFileSync(path.join(ROOT, "VERSION.md"), "utf8")
-    : "";
-if (!versionText.includes(`Versione: \`${RELEASE_EXPECTED_VERSION}\``)) {
-    errors.push(`VERSION.md: versione attesa ${RELEASE_EXPECTED_VERSION}`);
-}
-if (!versionText.includes(`Data: ${RELEASE_EXPECTED_DATE}`)) {
-    errors.push(`VERSION.md: data attesa ${RELEASE_EXPECTED_DATE}`);
-}
-
-const changelogText = fs.existsSync(path.join(ROOT, "Dev/CHANGELOG.md"))
-    ? fs.readFileSync(path.join(ROOT, "Dev/CHANGELOG.md"), "utf8")
-    : "";
-for (const marker of RELEASE_CHANGELOG_MARKERS) {
-    if (!changelogText.includes(marker)) {
-        errors.push(`Dev/CHANGELOG.md: marker release mancante (${marker})`);
-    }
-}
-
-const cleanReleaseText = fs.existsSync(path.join(ROOT, "Dev/Release Pulita.md"))
-    ? fs.readFileSync(path.join(ROOT, "Dev/Release Pulita.md"), "utf8")
-    : "";
-for (const marker of RELEASE_VERIFICATION_MARKERS) {
-    if (!cleanReleaseText.includes(marker)) {
-        errors.push(`Dev/Release Pulita.md: verifica release mancante (${marker})`);
-    }
 }
 
 const startHereText = fs.existsSync(path.join(ROOT, "Inizia Qui.md"))

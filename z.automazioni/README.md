@@ -9,6 +9,7 @@ Script usati da Templater, dashboard e manutenzione del vault.
 | `check_vault.js` | Smoke test locale della struttura del vault, del plugin layer interno e degli script JS. |
 | `check_template_factory.py` | Valida moduli YAML, blueprint e rendering Jinja in memoria. |
 | `check_smoke.js` | Valida il gate statico della demo finale e del player-safe prima dello smoke visuale. |
+| `check_release.js` | Valida versione, changelog e verifica automatica della release pulita. |
 | `render_template_factory.py` | Renderizza anteprime TemplateFactory in `Dev/TemplateFactory/examples/generated/`. |
 | `audit_template_migration.py` | Confronta preview TemplateFactory e template reali, generando un report di migrazione. |
 | `check_js.js` | Controllo sintattico ricorsivo degli script in `z.automazioni/` e `z.engine/`. |
