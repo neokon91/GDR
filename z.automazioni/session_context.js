@@ -1,6 +1,7 @@
 (() => {
   const ACTIVE_STATES = ["pronto", "preparazione"];
   const PLAY_STATES = ["in corso", ...ACTIVE_STATES];
+  const CLOSED_STATES = ["archiviata", "ignorata"];
   const LINK_FIELDS = [
     "campagne",
     "luoghi",
@@ -28,10 +29,12 @@
 
   const linkKey = link => link?.path ?? String(link ?? "");
   const isReal = page => Boolean(page);
+  const isOpen = page => isReal(page) && !CLOSED_STATES.includes(page.stato);
   const pageFromLink = (dv, link) => dv.page(link?.path ?? link);
   const pagesFromLinks = (dv, links) => dv.array(links ?? []).map(link => pageFromLink(dv, link)).where(Boolean);
   const internalLink = file => `<a class="internal-link" data-href="${escapeHtml(file.path)}" href="${escapeHtml(file.path)}">${escapeHtml(file.name)}</a>`;
   const asArray = value => Array.isArray(value) ? value : value ? [value] : [];
+  const linkSet = (dv, links) => new Set(dv.array(links ?? []).map(linkKey).array());
   const hasText = value => String(value ?? "").trim().length > 0;
   const hasLinks = value => asArray(value).length > 0;
   const pageTitle = page => page?.nome ?? page?.name ?? page?.file?.name ?? "";
@@ -76,9 +79,8 @@
     return pagesFromLinks(dv, source?.[field] ?? []);
   }
 
-  function linkedPageSet(dv, source, field) {
-    return new Set(dv.array(source?.[field] ?? []).map(linkKey).array());
-  }
+  const linkedPageSet = (dv, source, field) => linkSet(dv, source?.[field]);
+  const worldPredicate = (worldLink = "") => page => !linkKey(worldLink) || linkKey(page.mondo) === linkKey(worldLink) || page.file.path === linkKey(worldLink);
 
   function sessionContext(dv) {
     const active = activeSession(dv);
@@ -326,11 +328,11 @@
     }
 
     const world = linkKey(active.mondo);
-    const places = new Set(dv.array(active.luoghi ?? []).map(linkKey).array());
-    const factions = new Set(dv.array(active.fazioni ?? []).map(linkKey).array());
+    const places = linkSet(dv, active.luoghi);
+    const factions = linkSet(dv, active.fazioni);
     const sessions = new Set([active.file.path]);
     const pages = dv.pages('"Mondi/Timeline" OR "Inbox"')
-      .where(p => isReal(p) && p.stato !== "archiviata" && p.stato !== "ignorata")
+      .where(isOpen)
       .where(p => p.categoria === "evento storico" || p.categoria === "lore capture")
       .where(p => linkKey(p.mondo) === world
         || dv.array(p.luoghi ?? []).some(link => places.has(linkKey(link)))
@@ -354,14 +356,14 @@
 
   function renderSessionMissionCards(dv) {
     const active = activeSession(dv);
-    const activeFactions = new Set(dv.array(active?.fazioni ?? []).map(link => link.path ?? String(link)).array());
+    const activeFactions = linkSet(dv, active?.fazioni);
     const pages = sessionLinkedOrFallback(
       dv,
       active,
       "missioni",
       '"Mondi/Missioni"',
       p => ["proposta", "accettata", "in corso"].includes(p.stato)
-        && (!activeFactions.size || dv.array(p.fazioni ?? []).some(link => activeFactions.has(link.path ?? String(link)))),
+        && (!activeFactions.size || dv.array(p.fazioni ?? []).some(link => activeFactions.has(linkKey(link)))),
       8
     );
 
@@ -379,8 +381,8 @@
 
   function renderSessionClockCards(dv) {
     const active = activeSession(dv);
-    const sessionMissions = new Set(dv.array(active?.missioni ?? []).map(link => link.path ?? String(link)).array());
-    const sessionFactions = new Set(dv.array(active?.fazioni ?? []).map(link => link.path ?? String(link)).array());
+    const sessionMissions = linkSet(dv, active?.missioni);
+    const sessionFactions = linkSet(dv, active?.fazioni);
     const pages = sessionLinkedOrFallback(
       dv,
       active,
@@ -388,8 +390,8 @@
       '"Mondi/Tracciati"',
       p => !["archiviata", "completato", "fallito"].includes(p.stato)
         && (sessionMissions.size === 0 && sessionFactions.size === 0
-          || dv.array(p.missioni ?? []).some(link => sessionMissions.has(link.path ?? String(link)))
-          || dv.array(p.fazioni ?? []).some(link => sessionFactions.has(link.path ?? String(link)))),
+          || dv.array(p.missioni ?? []).some(link => sessionMissions.has(linkKey(link)))
+          || dv.array(p.fazioni ?? []).some(link => sessionFactions.has(linkKey(link)))),
       8
     );
 
@@ -416,7 +418,7 @@
 
   function renderCanonDecisionCards(dv) {
     const pages = dv.pages('"Inbox" OR "Mondi/Timeline"')
-      .where(p => isReal(p) && p.stato !== "archiviata" && p.stato !== "ignorata")
+      .where(isOpen)
       .where(p => p.categoria === "lore capture" || p.categoria === "evento storico" || p.stato_canonico || p.canonico !== undefined)
       .sort(p => p.file.mtime, "desc")
       .limit(12)
@@ -436,7 +438,7 @@
 
   function renderConsequenceCards(dv) {
     const pages = dv.pages('"Mondi" OR "Inbox"')
-      .where(p => isReal(p) && p.stato !== "archiviata" && p.stato !== "ignorata")
+      .where(isOpen)
       .where(p => hasLinks(p.conseguenze) || hasLinks(p.entita_impattate) || hasLinks(p.propaga_a) || hasText(p.prossima_mossa))
       .sort(p => p.file.mtime, "desc")
       .limit(16)
@@ -454,7 +456,7 @@
 
   function renderNextMoveCards(dv) {
     const pages = dv.pages('"Mondi/Fazioni" OR "Mondi/Religioni" OR "Mondi/Personaggi" OR "Mondi/Tracciati" OR "Mondi/Missioni" OR "Mondi/Conflitti"')
-      .where(p => isReal(p) && p.stato !== "archiviata" && p.stato !== "ignorata")
+      .where(isOpen)
       .where(p => pressure(p) >= 5 || Number(p.progress_value ?? 0) >= 3 || hasText(p.prossima_mossa) || hasText(p.innesco))
       .sort(p => pressure(p), "desc")
       .limit(12)
@@ -474,7 +476,7 @@
   function renderImpactedNextMoveCards(dv) {
     const targetKeys = new Set();
     dv.pages('"Mondi" OR "Inbox"')
-      .where(p => isReal(p) && p.stato !== "archiviata" && p.stato !== "ignorata")
+      .where(isOpen)
       .where(p => hasLinks(p.conseguenze) || hasLinks(p.entita_impattate) || hasLinks(p.propaga_a))
       .forEach(p => {
         [...asArray(p.entita_impattate), ...asArray(p.propaga_a)].forEach(link => targetKeys.add(linkKey(link)));
@@ -571,8 +573,7 @@
   }
 
   function renderCodexEditorial(dv, worldLink = "") {
-    const worldPath = linkKey(worldLink);
-    const inWorld = p => !worldPath || linkKey(p.mondo) === worldPath || p.file.path === worldPath;
+    const inWorld = worldPredicate(worldLink);
     const sections = [
       ["Luoghi iconici", '"Mondi/Luoghi"', "luogo", p => hasText(p.player_safe) || hasText(p.gancio) || hasText(p.impressione)],
       ["Poteri in movimento", '"Mondi/Fazioni" OR "Mondi/Religioni"', "fazione", p => pressure(p) > 0 || hasText(p.prossima_mossa)],
@@ -584,7 +585,7 @@
     for (const [title, source, category, predicate] of sections) {
       dv.header(3, title);
       const pages = dv.pages(source)
-        .where(p => isReal(p) && p.stato !== "archiviata" && inWorld(p) && predicate(p))
+        .where(p => isOpen(p) && inWorld(p) && predicate(p))
         .sort(p => Number(p.pressione ?? 0), "desc")
         .limit(8)
         .array();
@@ -598,10 +599,9 @@
   }
 
   function renderCodexReadyShowcase(dv, worldLink = "") {
-    const worldPath = linkKey(worldLink);
-    const inWorld = p => !worldPath || linkKey(p.mondo) === worldPath || p.file.path === worldPath;
+    const inWorld = worldPredicate(worldLink);
     const pages = dv.pages('"Mondi" OR "Risorse/Mappe"')
-      .where(p => isReal(p) && p.stato !== "archiviata" && inWorld(p))
+      .where(p => isOpen(p) && inWorld(p))
       .where(p => p.pubblico === true && hasText(p.player_safe) && !hasPrivateFields(p))
       .sort(p => p.file.mtime, "desc")
       .limit(10)
@@ -623,11 +623,10 @@
   }
 
   function renderCodexReadyToPlay(dv, worldLink = "") {
-    const worldPath = linkKey(worldLink);
-    const inWorld = p => !worldPath || linkKey(p.mondo) === worldPath || p.file.path === worldPath;
+    const inWorld = worldPredicate(worldLink);
     const playableCategories = new Set(["luogo", "personaggio", "fazione", "missione", "tracciato", "relazione", "evento storico", "oggetto", "cultura", "religione"]);
     const pages = dv.pages('"Mondi"')
-      .where(p => isReal(p) && p.stato !== "archiviata" && inWorld(p))
+      .where(p => isOpen(p) && inWorld(p))
       .where(p => playableCategories.has(String(p.categoria ?? "")))
       .where(p => hasCodexIdentity(p) && hasCodexTableUse(p) && hasCodexConnections(p))
       .sort(p => pressure(p), "desc")
