@@ -3,12 +3,12 @@
 const fs = require("fs");
 const path = require("path");
 const { execFileSync } = require("child_process");
-const { readJson, rel: relativePath } = require("./node_utils");
+const { readJson, rel: relativePath, repoPath } = require("./node_utils");
 
 const ROOT = process.cwd();
-const DIST = path.join(ROOT, "dist");
-const OUT = path.join(DIST, "vault-gdr-clean");
-const ZIP = path.join(DIST, "vault-gdr-clean.zip");
+const DIST = repoPath(ROOT, "dist");
+const OUT = repoPath(DIST, "vault-gdr-clean");
+const ZIP = repoPath(DIST, "vault-gdr-clean.zip");
 
 const INCLUDED_ROOTS = new Set([
     ".obsidian",
@@ -160,7 +160,7 @@ Questa pagina esiste solo nella release utente. Serve a provare il vault senza a
 `
 };
 
-const enabledPlugins = new Set(readJson(path.join(ROOT, ".obsidian/community-plugins.json"), []));
+const enabledPlugins = new Set(readJson(repoPath(ROOT, ".obsidian/community-plugins.json"), []));
 
 function rel(file) {
     return relativePath(ROOT, file);
@@ -226,7 +226,7 @@ function copyDir(source, target, base = source) {
 
 function writeGeneratedReleaseNotes() {
     for (const [file, text] of Object.entries(GENERATED_RELEASE_NOTES)) {
-        fs.writeFileSync(path.join(OUT, file), text);
+        fs.writeFileSync(repoPath(OUT, file), text);
     }
 }
 
@@ -246,7 +246,7 @@ function validateRelease() {
     const errors = [];
 
     for (const file of REQUIRED_RELEASE_FILES) {
-        if (!fs.existsSync(path.join(OUT, file))) {
+        if (!fs.existsSync(repoPath(OUT, file))) {
             errors.push(`file release obbligatorio mancante: ${file}`);
         }
     }
@@ -258,7 +258,7 @@ function validateRelease() {
         }
     }
 
-    const pluginRoot = path.join(OUT, ".obsidian/plugins");
+    const pluginRoot = repoPath(OUT, ".obsidian/plugins");
     if (fs.existsSync(pluginRoot)) {
         const bundledPlugins = fs.readdirSync(pluginRoot, { withFileTypes: true })
             .filter(entry => entry.isDirectory())
