@@ -1,6 +1,7 @@
 ---
 cssclasses:
   - dashboard
+  - gdr-campaign-builder
 categoria: risorsa
 tipo: dashboard
 stato: pronto

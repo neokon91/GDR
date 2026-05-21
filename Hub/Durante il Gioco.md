@@ -1,7 +1,11 @@
 ---
 cssclasses:
+  - dashboard
   - tavolo
   - gdr-tavolo-dashboard
+categoria: risorsa
+tipo: dashboard
+stato: pronto
 ---
 
 # Durante Il Gioco

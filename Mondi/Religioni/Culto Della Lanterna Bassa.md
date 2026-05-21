@@ -8,6 +8,7 @@ stato: pronto
 canonico: true
 stato_canonico: canonico
 mondo: "[[Brumafonda Demo]]"
+campagne: ["[[Sale Sotto La Nebbia]]"]
 divinita: []
 templi: ["[[Porto Di Brumafonda]]"]
 luoghi_sacri: ["[[Porto Di Brumafonda]]"]

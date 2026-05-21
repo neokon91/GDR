@@ -6,6 +6,7 @@ fileClass: missione
 tipo: incarico
 stato: accettata
 mondo: "[[Brumafonda Demo]]"
+campagne: ["[[Sale Sotto La Nebbia]]"]
 committente:
 luoghi: ["[[Porto Di Brumafonda]]"]
 personaggi: []

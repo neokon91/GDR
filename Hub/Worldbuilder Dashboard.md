@@ -2,6 +2,9 @@
 cssclasses:
   - dashboard
   - gdr-worldbuilder-dashboard
+categoria: risorsa
+tipo: dashboard
+stato: pronto
 mondo_attivo: ""
 campagne_attive: []
 ---

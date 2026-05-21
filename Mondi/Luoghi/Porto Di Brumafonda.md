@@ -12,6 +12,7 @@ stato: pronto
 canonico: true
 stato_canonico: canonico
 mondo: "[[Brumafonda Demo]]"
+campagne: ["[[Sale Sotto La Nebbia]]"]
 luogo_padre: "[[Brumafonda Demo]]"
 governante:
 popolazione: 4800

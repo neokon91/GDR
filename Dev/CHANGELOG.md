@@ -34,6 +34,7 @@
 - Gate pagine utente chiave: setup, aiuto, prima sessione, materiali al tavolo, import mappe e guida mappe devono restare plugin-native.
 - Filtro navigazione release: cartelle tecniche `z.*` e compendio `SRD/` restano inclusi ma nascosti dal file explorer utente.
 - Dossier campagna demo `Campagne/Sale Sotto La Nebbia/Sale Sotto La Nebbia.md`, con struttura finale da campagna giocabile invece di nota sparsa.
+- Gate esperienza hub: `check_vault.js` verifica ruolo, classe visuale, callout, viste/input/azioni plugin-native e marker funzionali degli hub principali.
 
 ### Migliorato
 
@@ -62,6 +63,7 @@
 - Rimossi gli artefatti di release generati da `dist/` dal workspace locale.
 - Spostato il materiale di sviluppo fuori da `Risorse/` e dalla root, aggiornando controlli e riferimenti.
 - `Demo Brumafonda.md` nella release utente ora e un dossier plugin-native con tabs, callout operativi, DataviewJS, Tasks e fallback Markdown.
+- Le note del pacchetto demo dichiarano la campagna `[[Sale Sotto La Nebbia]]` per rendere affidabili filtri, hub e viste Dataview.
 
 ### Verificato
 

@@ -7,6 +7,7 @@ stato: pronto
 canonico: true
 stato_canonico: canonico
 mondo: "[[Brumafonda Demo]]"
+campagne: ["[[Sale Sotto La Nebbia]]"]
 luoghi: ["[[Porto Di Brumafonda]]"]
 lingue: []
 religioni: ["[[Culto Della Lanterna Bassa]]"]

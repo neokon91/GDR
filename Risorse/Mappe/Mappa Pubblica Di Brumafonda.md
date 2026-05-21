@@ -6,6 +6,7 @@ tipo: "mappa"
 uso: "scena"
 stato: pronto
 mondo: "[[Brumafonda Demo]]"
+campagne: ["[[Sale Sotto La Nebbia]]"]
 luogo: "[[Porto Di Brumafonda]]"
 luoghi: ["[[Porto Di Brumafonda]]"]
 fazioni: ["[[Consorzio Del Sale Nero]]"]

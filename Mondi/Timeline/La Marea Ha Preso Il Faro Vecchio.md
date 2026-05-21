@@ -13,6 +13,7 @@ contraddice: []
 retcon_di: []
 retcon_motivo:
 mondo: "[[Brumafonda Demo]]"
+campagne: ["[[Sale Sotto La Nebbia]]"]
 data_mondo: "Tre notti prima della Lanterna Bassa"
 data_reale: 2026-05-28
 fc-calendar: "Brumafonda"

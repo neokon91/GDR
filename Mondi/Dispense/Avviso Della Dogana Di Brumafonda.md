@@ -6,6 +6,7 @@ tipo: documento
 stato: pronto
 pubblico: true
 mondo: "[[Brumafonda Demo]]"
+campagne: ["[[Sale Sotto La Nebbia]]"]
 luogo: "[[Porto Di Brumafonda]]"
 personaggi: []
 sessioni: ["[[2026-05-28 - La Campana Nella Nebbia]]"]

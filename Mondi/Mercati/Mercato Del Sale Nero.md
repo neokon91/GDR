@@ -6,6 +6,7 @@ fileClass: mercato
 tipo: mercato
 stato: pronto
 mondo: "[[Brumafonda Demo]]"
+campagne: ["[[Sale Sotto La Nebbia]]"]
 luogo: "[[Porto Di Brumafonda]]"
 luoghi: ["[[Porto Di Brumafonda]]"]
 regioni: []
