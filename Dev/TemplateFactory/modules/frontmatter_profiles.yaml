@@ -254,6 +254,24 @@ field_catalog:
   - distretti
   - edifici
   - stanze
+  - beneficio
+  - cd
+  - classi
+  - componenti
+  - contromisure
+  - danno
+  - destinazione
+  - gittata
+  - livello_incantesimo
+  - merci
+  - prerequisito
+  - scuola
+  - segnali
+  - talento
+  - tempo_lancio
+  - tesoro
+  - tratti
+  - valore
   plugin_fields:
     calendarium:
     - fc-calendar
@@ -2662,6 +2680,309 @@ profiles:
       value: connessioni
     - key: sessioni
       value: sessioni
+  incantesimo:
+    sample_values: []
+    fields:
+    - key: id
+      value: id
+    - key: nome
+      value: nome
+    - key: categoria
+      default: incantesimo
+    - key: tipo
+      value: tipo
+    - key: stato
+      default: bozza
+    - key: fonte
+      value: fonte
+    - key: livello_incantesimo
+      value: livello_incantesimo
+    - key: scuola
+      value: scuola
+    - key: tempo_lancio
+      value: tempo_lancio
+    - key: gittata
+      value: gittata
+    - key: componenti
+      value: componenti
+    - key: durata
+      value: durata
+    - key: classi
+      value: classi
+    - key: effetti
+      value: effetti
+    - key: limiti
+      value: limiti
+    - key: mondo
+      value: mondo
+    - key: culture
+      value: culture
+    - key: fazioni
+      value: fazioni
+    - key: uso_al_tavolo
+      value: uso_al_tavolo
+    - key: player_safe
+      value: player_safe
+    - key: connessioni
+      value: connessioni
+  classe_dnd:
+    sample_values: []
+    fields:
+    - key: id
+      value: id
+    - key: nome
+      value: nome
+    - key: categoria
+      default: classe
+    - key: tipo
+      value: tipo
+    - key: stato
+      default: bozza
+    - key: fonte
+      value: fonte
+    - key: classe
+      value: classe
+    - key: sottoclasse
+      value: sottoclasse
+    - key: level
+      value: level
+    - key: privilegi
+      value: privilegi
+    - key: competenze
+      value: competenze
+    - key: equipaggiamento
+      value: equipaggiamento
+    - key: incantesimi
+      value: incantesimi
+    - key: mondo
+      value: mondo
+    - key: culture
+      value: culture
+    - key: fazioni
+      value: fazioni
+    - key: uso_al_tavolo
+      value: uso_al_tavolo
+    - key: player_safe
+      value: player_safe
+  specie_dnd:
+    sample_values: []
+    fields:
+    - key: id
+      value: id
+    - key: nome
+      value: nome
+    - key: categoria
+      default: specie
+    - key: tipo
+      value: tipo
+    - key: stato
+      default: bozza
+    - key: fonte
+      value: fonte
+    - key: specie
+      value: specie
+    - key: tratti
+      value: tratti
+    - key: lingue
+      value: lingue
+    - key: mondo
+      value: mondo
+    - key: culture
+      value: culture
+    - key: luoghi
+      value: luoghi
+    - key: habitat
+      value: habitat
+    - key: uso_al_tavolo
+      value: uso_al_tavolo
+    - key: player_safe
+      value: player_safe
+  background_dnd:
+    sample_values: []
+    fields:
+    - key: id
+      value: id
+    - key: nome
+      value: nome
+    - key: categoria
+      default: background
+    - key: tipo
+      value: tipo
+    - key: stato
+      default: bozza
+    - key: fonte
+      value: fonte
+    - key: background
+      value: background
+    - key: competenze
+      value: competenze
+    - key: strumenti
+      value: strumenti
+    - key: equipaggiamento
+      value: equipaggiamento
+    - key: mondo
+      value: mondo
+    - key: fazioni
+      value: fazioni
+    - key: culture
+      value: culture
+    - key: luoghi
+      value: luoghi
+    - key: uso_al_tavolo
+      value: uso_al_tavolo
+    - key: player_safe
+      value: player_safe
+  talento_dnd:
+    sample_values: []
+    fields:
+    - key: id
+      value: id
+    - key: nome
+      value: nome
+    - key: categoria
+      default: talento
+    - key: tipo
+      value: tipo
+    - key: stato
+      default: bozza
+    - key: fonte
+      value: fonte
+    - key: talento
+      value: talento
+    - key: prerequisito
+      value: prerequisito
+    - key: beneficio
+      value: beneficio
+    - key: mondo
+      value: mondo
+    - key: culture
+      value: culture
+    - key: fazioni
+      value: fazioni
+    - key: uso_al_tavolo
+      value: uso_al_tavolo
+    - key: player_safe
+      value: player_safe
+  regola_dnd:
+    sample_values: []
+    fields:
+    - key: id
+      value: id
+    - key: nome
+      value: nome
+    - key: categoria
+      default: regola
+    - key: tipo
+      value: tipo
+    - key: stato
+      default: bozza
+    - key: fonte
+      value: fonte
+    - key: regola
+      value: regola
+    - key: limiti
+      value: limiti
+    - key: effetti
+      value: effetti
+    - key: uso_al_tavolo
+      value: uso_al_tavolo
+    - key: player_safe
+      value: player_safe
+  trappola:
+    sample_values: []
+    fields:
+    - key: id
+      value: id
+    - key: nome
+      value: nome
+    - key: categoria
+      default: trappola
+    - key: tipo
+      value: tipo
+    - key: stato
+      default: bozza
+    - key: fonte
+      value: fonte
+    - key: pericolo
+      value: pericolo
+    - key: innesco
+      value: innesco
+    - key: cd
+      value: cd
+    - key: danno
+      value: danno
+    - key: contromisure
+      value: contromisure
+    - key: conseguenze
+      value: conseguenze
+    - key: luogo
+      value: luogo
+    - key: uso_al_tavolo
+      value: uso_al_tavolo
+    - key: player_safe
+      value: player_safe
+  pericolo_ambientale:
+    sample_values: []
+    fields:
+    - key: id
+      value: id
+    - key: nome
+      value: nome
+    - key: categoria
+      default: pericolo ambientale
+    - key: tipo
+      value: tipo
+    - key: stato
+      default: bozza
+    - key: bioma
+      value: bioma
+    - key: pericolo
+      value: pericolo
+    - key: cd
+      value: cd
+    - key: danno
+      value: danno
+    - key: segnali
+      value: segnali
+    - key: contromisure
+      value: contromisure
+    - key: conseguenze
+      value: conseguenze
+    - key: luoghi
+      value: luoghi
+    - key: uso_al_tavolo
+      value: uso_al_tavolo
+    - key: player_safe
+      value: player_safe
+  tesoro:
+    sample_values: []
+    fields:
+    - key: id
+      value: id
+    - key: nome
+      value: nome
+    - key: categoria
+      default: tesoro
+    - key: tipo
+      value: tipo
+    - key: stato
+      default: bozza
+    - key: fonte
+      value: fonte
+    - key: rarita
+      value: rarita
+    - key: valore
+      value: valore
+    - key: ricompense
+      value: ricompense
+    - key: proprietario
+      value: proprietario
+    - key: luogo
+      value: luogo
+    - key: gancio
+      value: gancio
+    - key: player_safe
+      value: player_safe
   pg:
     sample_values: []
     fields:

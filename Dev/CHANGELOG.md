@@ -38,6 +38,7 @@
 - Gate Plugin Surface YAML: TemplateFactory blocca input Meta Bind, bottoni, callout, runtime DataviewJS e Bases usati nei Jinja se non sono dichiarati nei moduli YAML.
 - [[Dev/Prossima Discussione - YAML Entita Fantasy]] prepara la prossima fase su profondita delle entita fantasy governata da YAML.
 - `entity_depth.yaml` introduce contratti YAML per profondita fantasy di luogo, fazione, missione e tracciato: campi, prompt runtime, sezioni, tabs e superfici plugin obbligatorie.
+- `taxonomy_depth.yaml` introduce contratti verificati per D&D 5.5 e worldbuilding: opzioni giocatore, magia/regole, encounter tools, societa/economia, religione/cosmologia e storia/geografia/ecologia.
 
 ### Migliorato
 
@@ -69,6 +70,7 @@
 - Le note del pacchetto demo dichiarano la campagna `[[Sale Sotto La Nebbia]]` per rendere affidabili filtri, hub e viste Dataview.
 - `bases_views.yaml`, `callouts.yaml`, `dataview_blocks.yaml`, `metabind_buttons.yaml` e `frontmatter_profiles.yaml` ora coprono le superfici plugin-native usate dai template generati.
 - I generatori `luogo`, `fazione`, `missione` e `tracciato` raccolgono profondita narrativa da prompt YAML e la scrivono nel frontmatter senza logica strutturale hardcoded.
+- Aggiunti profili YAML minimi per incantesimi, classi, specie, background, talenti, regole, trappole, pericoli ambientali e tesori, così lo SRD puo diventare contenuto collegabile al mondo e non solo compendio statico.
 
 ### Verificato
 

@@ -604,6 +604,109 @@ profiles:
       prossima_mossa: Cosa cambia se viene usato, perso o ignorato
       connessioni: Connessioni a missioni, luoghi, PNG o fazioni
       sessioni: Sessioni collegate
+  incantesimo:
+    name_prompt: Nome dell'incantesimo
+    prompts:
+      fonte: Fonte SRD o homebrew
+      livello_incantesimo: Livello dell'incantesimo
+      scuola: Scuola di magia
+      tempo_lancio: Tempo di lancio
+      gittata: Gittata
+      componenti: Componenti
+      durata: Durata
+      classi: Classi che lo usano
+      effetti: Effetti meccanici e fictionali
+      limiti: Limiti, costi o rischi
+      uso_al_tavolo: Uso concreto al tavolo
+      player_safe: Descrizione mostrabile ai giocatori
+  classe_dnd:
+    name_prompt: Nome della classe D&D
+    prompts:
+      fonte: Fonte SRD o homebrew
+      classe: Nome tecnico della classe
+      privilegi: Privilegi chiave
+      competenze: Competenze iniziali
+      equipaggiamento: Equipaggiamento iniziale
+      incantesimi: Regole di magia o lista incantesimi
+      culture: Culture o societa dove e comune
+      uso_al_tavolo: Promessa di gioco
+      player_safe: Descrizione mostrabile ai giocatori
+  specie_dnd:
+    name_prompt: Nome della specie D&D
+    prompts:
+      fonte: Fonte SRD o homebrew
+      specie: Nome tecnico della specie
+      tratti: Tratti meccanici
+      lingue: Lingue tipiche
+      culture: Culture collegate
+      luoghi: Luoghi o regioni di origine
+      uso_al_tavolo: Promessa di gioco
+      player_safe: Descrizione mostrabile ai giocatori
+  background_dnd:
+    name_prompt: Nome del background D&D
+    prompts:
+      fonte: Fonte SRD o homebrew
+      background: Nome tecnico del background
+      competenze: Competenze
+      strumenti: Strumenti
+      equipaggiamento: Equipaggiamento
+      fazioni: Fazioni collegate
+      culture: Culture collegate
+      uso_al_tavolo: Gancio per campagna
+      player_safe: Descrizione mostrabile ai giocatori
+  talento_dnd:
+    name_prompt: Nome del talento D&D
+    prompts:
+      fonte: Fonte SRD o homebrew
+      talento: Nome tecnico del talento
+      prerequisito: Prerequisito
+      beneficio: Beneficio meccanico
+      culture: Culture dove e comune
+      fazioni: Fazioni che lo insegnano
+      uso_al_tavolo: Uso concreto al tavolo
+      player_safe: Descrizione mostrabile ai giocatori
+  regola_dnd:
+    name_prompt: Nome della regola D&D
+    prompts:
+      fonte: Fonte SRD o homebrew
+      regola: Regola sintetica
+      limiti: Limiti o interpretazioni
+      effetti: Effetti pratici
+      uso_al_tavolo: Quando serve al tavolo
+      player_safe: Versione leggibile ai giocatori
+  trappola:
+    name_prompt: Nome della trappola
+    prompts:
+      fonte: Fonte SRD o homebrew
+      pericolo: Pericolo da 0 a 10
+      innesco: Innesco
+      cd: CD per notarla, evitarla o disattivarla
+      danno: Danno o effetto
+      contromisure: Contromisure
+      conseguenze: Conseguenze
+      uso_al_tavolo: Uso concreto al tavolo
+  pericolo_ambientale:
+    name_prompt: Nome del pericolo ambientale
+    prompts:
+      bioma: Bioma o ambiente
+      pericolo: Pericolo da 0 a 10
+      cd: CD rilevante
+      danno: Danno o effetto
+      segnali: Segnali percepibili prima del rischio
+      contromisure: Contromisure
+      conseguenze: Conseguenze
+      uso_al_tavolo: Uso concreto al tavolo
+  tesoro:
+    name_prompt: Nome del tesoro
+    prompts:
+      fonte: Fonte SRD o homebrew
+      rarita: Rarita
+      valore: Valore
+      ricompense: Ricompense contenute
+      proprietario: Proprietario attuale o legittimo
+      luogo: Luogo dove si trova
+      gancio: Perche interessa ai PG
+      player_safe: Descrizione mostrabile ai giocatori
   pg:
     name_prompt: Nome
     prompts: {}

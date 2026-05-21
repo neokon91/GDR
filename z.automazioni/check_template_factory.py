@@ -37,6 +37,7 @@ REQUIRED_MODULES = {
     "frontmatter_profiles",
     "runtime_profiles",
     "entity_depth",
+    "taxonomy_depth",
     "workflows",
 }
 CRITICAL_RENDERED_GENERATORS = {
@@ -526,6 +527,68 @@ def validate_entity_depth_contracts(modules: dict[str, dict], errors: list[str])
                 fail(f"entity_depth.{family_id}: plugin surface non dichiarata ({plugin})", errors)
 
 
+def validate_taxonomy_depth_contracts(modules: dict[str, dict], errors: list[str]) -> None:
+    families = modules["taxonomy_depth"].get("families", {})
+    if not families:
+        fail("taxonomy_depth: nessuna famiglia definita", errors)
+        return
+
+    frontmatter_profiles = modules["frontmatter_profiles"].get("profiles", {})
+    runtime_profiles = modules["runtime_profiles"].get("profiles", {})
+    known_fields = known_frontmatter_fields(modules)
+    sections = modules["sections"].get("sections", {})
+    layouts = modules["tabs"].get("layouts", {})
+    bindings = modules["plugin_bindings"]
+    plugin_bindings = bindings.get("bindings", {})
+
+    for family_id, family in families.items():
+        for folder in family.get("source_folders", []) or []:
+            if not (ROOT / str(folder)).exists():
+                fail(f"taxonomy_depth.{family_id}: cartella sorgente mancante ({folder})", errors)
+
+        for section in family.get("required_sections", []) or []:
+            section = str(section)
+            if section not in sections:
+                fail(f"taxonomy_depth.{family_id}: sezione richiesta mancante ({section})", errors)
+
+        for layout in family.get("required_tabs", []) or []:
+            layout = str(layout)
+            if layout not in layouts:
+                fail(f"taxonomy_depth.{family_id}: layout tabs richiesto mancante ({layout})", errors)
+
+        for plugin in family.get("plugin_surfaces", []) or []:
+            plugin = str(plugin)
+            key = plugin_key(plugin, bindings)
+            if key not in plugin_bindings:
+                fail(f"taxonomy_depth.{family_id}: plugin surface non dichiarata ({plugin})", errors)
+
+        profile_contracts = family.get("profile_contracts", {}) or {}
+        if not profile_contracts:
+            fail(f"taxonomy_depth.{family_id}: nessun profile_contract dichiarato", errors)
+            continue
+
+        for profile_id, contract in profile_contracts.items():
+            profile_id = str(profile_id)
+            if profile_id not in frontmatter_profiles:
+                fail(f"taxonomy_depth.{family_id}: profilo frontmatter mancante ({profile_id})", errors)
+                continue
+            if profile_id not in runtime_profiles:
+                fail(f"taxonomy_depth.{family_id}: profilo runtime mancante ({profile_id})", errors)
+                continue
+
+            profile_fields = {
+                str(field.get("key"))
+                for field in frontmatter_profiles[profile_id].get("fields", [])
+                if isinstance(field, dict) and field.get("key")
+            }
+            for field in contract.get("required_frontmatter_fields", []) or []:
+                field = str(field)
+                if field not in known_fields:
+                    fail(f"taxonomy_depth.{family_id}.{profile_id}: campo non catalogato ({field})", errors)
+                if field not in profile_fields:
+                    fail(f"taxonomy_depth.{family_id}.{profile_id}: campo non esposto dal profilo ({field})", errors)
+
+
 def validate_generated_previews(modules: dict[str, dict], errors: list[str]) -> None:
     if not GENERATED.exists():
         return
@@ -570,6 +633,8 @@ def main() -> int:
         validate_plugin_surface_contracts(modules, errors)
     if not errors:
         validate_entity_depth_contracts(modules, errors)
+    if not errors:
+        validate_taxonomy_depth_contracts(modules, errors)
     if not errors:
         validate_rendering(modules, errors)
     if not errors:

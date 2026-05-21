@@ -62,6 +62,7 @@ Gli script in `z.automazioni/` devono restare sottili:
 - `runtime_profiles.yaml` dichiara prompt, opzioni e default.
 - `frontmatter_profiles.yaml` dichiara ordine, campi, default e integrazioni plugin del frontmatter.
 - `entity_depth.yaml` dichiara quali famiglie fantasy devono esporre profondita lore, giocabilita, continuita, tabs e superfici plugin.
+- `taxonomy_depth.yaml` dichiara la copertura tassonomica minima per categorie D&D 5.5 e worldbuilding profondo.
 - Un generatore Templater non deve restituire blocchi `---` inline: deve usare `helpers.renderFrontmatter("profilo", valori)`.
 - Gli importer CLI possono usare un renderer locale equivalente solo quando non girano dentro Obsidian, ma il profilo resta dichiarato in `frontmatter_profiles.yaml`.
 
@@ -87,6 +88,12 @@ La conseguenza pratica: YAML decide cosa esiste; Jinja assembla; JS esegue funzi
 
 `npm run check:templates` blocca una famiglia se un campo non e catalogato, se il profilo frontmatter non lo espone, se manca un prompt runtime, se tabs/sezioni non esistono o se una superficie plugin richiesta non e dichiarata in `plugin_bindings.yaml`.
 
+## Regola Taxonomy Depth
+
+`taxonomy_depth.yaml` impedisce che SRD e worldbuilding restino materiale sparso. Le famiglie D&D 5.5 coprono opzioni giocatore, magia/regole e strumenti encounter; le famiglie worldbuilding coprono societa/economia, religione/cosmologia e storia/geografia/ecologia.
+
+`npm run check:templates` blocca una categoria tassonomica se manca la cartella SRD sorgente dichiarata, se manca il profilo runtime/frontmatter, se un campo obbligatorio non e catalogato o se il profilo non lo espone.
+
 ## Moduli
 
 | Modulo | Responsabilita |
@@ -104,6 +111,7 @@ La conseguenza pratica: YAML decide cosa esiste; Jinja assembla; JS esegue funzi
 | `frontmatter_profiles.yaml` | Ordine, default e chiavi del frontmatter generato dagli script. |
 | `runtime_profiles.yaml` | Prompt, opzioni e default usati dagli script Templater sottili. |
 | `entity_depth.yaml` | Contratti di profondita per famiglie fantasy governate da YAML. |
+| `taxonomy_depth.yaml` | Copertura minima verificata per categorie D&D 5.5 e worldbuilding. |
 
 `frontmatter_profiles.yaml` distingue campi core, campi di dominio e campi legati a plugin come Calendarium o Maps. `check:templates` renderizza un campione per ogni profilo e verifica che il frontmatter risultante sia YAML valido.
 
