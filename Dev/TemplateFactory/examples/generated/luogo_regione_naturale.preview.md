@@ -1,6 +1,14 @@
 <% await tp.user.luogo(tp, { category: "regione naturale" }) %>
 # `=this.nome`
 
+
+
+
+
+
+
+
+
 ````tabs
 tab: Stato
 
@@ -72,6 +80,37 @@ tab: Connessioni
 > - [[z.bases/Missioni.base]]
 > - [[z.bases/PNG.base]]
 > - [[Risorse/Mappe/Schema Relazioni GDR.excalidraw]]
+
+
+tab: Territorio
+
+> [!mappa] Mappa E Presenza
+> Coordinate: `INPUT[text:coordinates]`
+>
+> Mappe: `INPUT[inlineListSuggester(optionQuery("Risorse/Mappe"), useLinks(partial), allowOther):mappe]`
+>
+> Layer mappa: `INPUT[text:layer_mappa]`
+>
+> Icona: `INPUT[text:icon]`
+>
+> Colore marker: `INPUT[text:color]`
+
+> [!lettura]- Strumenti Cartografici
+> - [[z.bases/Atlante Mappe.base]] apre la vista Maps per Bases sui marker con `coordinates`.
+> - [[Risorse/Mappe/Schema Relazioni GDR.excalidraw]] collega il luogo ai fronti visuali.
+> - [[Risorse/Canvas Per GDR]] serve per reti di quartiere, dungeon, rotte o fronti territoriali.
+
+> [!regia]- Stato Luogo
+> ```dataviewjs
+> const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+> gdr.renderM7FamilyCards(dv, dv.current(), "luogo");
+> ```
+
+
+
+
+
+
 
 
 

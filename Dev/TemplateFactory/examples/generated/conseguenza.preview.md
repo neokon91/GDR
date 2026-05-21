@@ -1,6 +1,14 @@
 <% await tp.user.live_conseguenza(tp) %>
 # `=this.nome`
 
+
+
+
+
+
+
+
+
 ````tabs
 tab: Stato
 
@@ -80,6 +88,37 @@ tab: Connessioni
 > - [[z.bases/Missioni.base]]
 > - [[z.bases/PNG.base]]
 > - [[Risorse/Mappe/Schema Relazioni GDR.excalidraw]]
+
+
+
+
+
+
+
+tab: Continuita
+
+> [!timer] Causa Effetto
+> Causa: `INPUT[text:causa]`
+>
+> Effetti: `INPUT[list:effetti]`
+>
+> Entita impattate: `INPUT[entita_impattate][:entita_impattate]`
+>
+> Aggiornamenti richiesti: `INPUT[list:aggiornamenti_richiesti]`
+>
+> Stato propagazione: `INPUT[text:propagazione_stato]`
+
+> [!lettura]- Pubblicazione
+> Memoria pubblica: `INPUT[text:memoria_pubblica]`
+>
+> Versione player-safe: `INPUT[text:versione_player_safe]`
+
+> [!regia]- Stato Continuita
+> ```dataviewjs
+> const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+> gdr.renderM7FamilyCards(dv, dv.current(), "continuita");
+> ```
+
 
 
 

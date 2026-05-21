@@ -1,6 +1,14 @@
 <% await tp.user.relazione(tp) %>
 # `=this.nome`
 
+
+
+
+
+
+
+
+
 ````tabs
 tab: Stato
 
@@ -72,6 +80,32 @@ tab: Connessioni
 > - [[z.bases/Missioni.base]]
 > - [[z.bases/PNG.base]]
 > - [[Risorse/Mappe/Schema Relazioni GDR.excalidraw]]
+
+
+
+
+
+tab: Legame
+
+> [!conflitto] Relazione Operativa
+> Parti: `INPUT[inlineListSuggester(optionQuery("Mondi"), useLinks(partial), allowOther):parti]`
+>
+> Stato relazione: `INPUT[text:stato_relazione]`
+>
+> Tensione: `INPUT[pressione][:pressione]`
+>
+> Cosa rompe il legame: `INPUT[text:rottura]`
+>
+> Cosa lo rafforza: `INPUT[text:rinforzo]`
+
+> [!regia]- Stato Relazione
+> ```dataviewjs
+> const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+> gdr.renderM7FamilyCards(dv, dv.current(), "relazione");
+> ```
+
+
+
 
 
 

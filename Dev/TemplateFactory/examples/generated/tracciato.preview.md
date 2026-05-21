@@ -1,6 +1,14 @@
 <% await tp.user.tracciato(tp) %>
 # `=this.nome`
 
+
+
+
+
+
+
+
+
 ````tabs
 tab: Stato
 
@@ -72,6 +80,39 @@ tab: Connessioni
 > - [[z.bases/Missioni.base]]
 > - [[z.bases/PNG.base]]
 > - [[Risorse/Mappe/Schema Relazioni GDR.excalidraw]]
+
+
+
+
+
+
+tab: Clock
+
+> [!timer] Tracciato
+> Pressione: `INPUT[pressione][:pressione]`
+>
+> Soglia: `INPUT[text:soglia]`
+>
+> Progresso: `INPUT[text:progress_value]`
+>
+> Innesco avanzamento: `INPUT[text:innesco]`
+>
+> `BUTTON[avanza-clock]`
+
+> [!todo]- Task Clock
+> ```tasks
+> not done
+> path includes Mondi/Tracciati
+> sort by due
+> ```
+
+> [!regia]- Stato Tracciato
+> ```dataviewjs
+> const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+> gdr.renderM7FamilyCards(dv, dv.current(), "tracciato");
+> ```
+
+
 
 
 

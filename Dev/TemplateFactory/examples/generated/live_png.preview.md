@@ -1,6 +1,14 @@
 <% await tp.user.live_png(tp) %>
 # `=this.nome`
 
+
+
+
+
+
+
+
+
 ````tabs
 tab: Stato
 
@@ -72,6 +80,32 @@ tab: Connessioni
 > - [[z.bases/Missioni.base]]
 > - [[z.bases/PNG.base]]
 > - [[Risorse/Mappe/Schema Relazioni GDR.excalidraw]]
+
+
+
+
+tab: PNG
+
+> [!scena] Persona Al Tavolo
+> Motivazione: `INPUT[text:motivazione]`
+>
+> Atteggiamento: `INPUT[text:atteggiamento]`
+>
+> Luogo attuale: `INPUT[inlineListSuggester(optionQuery("Mondi/Luoghi"), useLinks(partial), allowOther):luoghi]`
+>
+> Fazioni: `INPUT[fazioni][:fazioni]`
+>
+> Segreti rivelati: `INPUT[list:segreti_rivelati]`
+
+> [!regia]- Stato PNG
+> ```dataviewjs
+> const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+> gdr.renderM7FamilyCards(dv, dv.current(), "png");
+> ```
+
+
+
+
 
 
 

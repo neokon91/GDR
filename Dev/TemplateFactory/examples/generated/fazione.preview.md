@@ -1,6 +1,14 @@
 <% await tp.user.fazione(tp) %>
 # `=this.nome`
 
+
+
+
+
+
+
+
+
 ````tabs
 tab: Stato
 
@@ -72,6 +80,32 @@ tab: Connessioni
 > - [[z.bases/Missioni.base]]
 > - [[z.bases/PNG.base]]
 > - [[Risorse/Mappe/Schema Relazioni GDR.excalidraw]]
+
+
+
+tab: Potere
+
+> [!conflitto] Agenda E Pressione
+> Obiettivo: `INPUT[text:obiettivo]`
+>
+> Risorse: `INPUT[inlineList:risorse]`
+>
+> Rivali: `INPUT[inlineListSuggester(optionQuery("Mondi/Fazioni"), useLinks(partial), allowOther):rivali]`
+>
+> Luoghi controllati: `INPUT[inlineListSuggester(optionQuery("Mondi/Luoghi"), useLinks(partial), allowOther):luoghi_controllati]`
+>
+> Pressione: `INPUT[pressione][:pressione]`
+
+> [!regia]- Stato Fazione
+> ```dataviewjs
+> const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+> gdr.renderM7FamilyCards(dv, dv.current(), "fazione");
+> ```
+
+
+
+
+
 
 
 

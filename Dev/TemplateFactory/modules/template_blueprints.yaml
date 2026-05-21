@@ -21,9 +21,17 @@ blueprint_profiles:
     - player_safe
     - controllo
     plugin_features:
+    - tabs
+    - callouts
     - templater
     - meta_bind
     - dataview
+    - js_engine
+    - bases
+    - tasks
+    - excalidraw
+    - canvas
+    - maps
   action:
     jinja_template: ../jinja/action_template.md.j2
     required_modules:
@@ -115,12 +123,18 @@ blueprint_profiles:
     - media
     - post_sessione
     plugin_features:
+    - tabs
+    - callouts
     - templater
     - meta_bind
     - dataview
+    - js_engine
+    - bases
     - tasks
     - dice_roller
-    - initiative_tracker
+    - excalidraw
+    - canvas
+    - maps
     - media_extended
 blueprints:
   mondo:

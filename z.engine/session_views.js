@@ -407,12 +407,12 @@
     });
   }
 
-  function renderSessionMapCards(dv) {
-    const active = activeSession(dv);
+  function renderSessionMapCards(dv, source = null) {
+    const active = source ?? activeSession(dv);
     if (!active) {
       renderEmptyState(dv, {
-        title: "Nessuna sessione attiva",
-        action: "Rendi attiva una sessione prima di scegliere le mappe al tavolo.",
+        title: "Nessuna sessione disponibile",
+        action: "Apri o crea una sessione prima di scegliere le mappe al tavolo.",
         link: "Risorse/Preparazione Sessione.md"
       });
       return;
@@ -458,6 +458,154 @@
       action: "Collega una mappa alla sessione, a un incontro o a un luogo della sessione.",
       button: "BUTTON[nuova-mappa-zoom-z-modelli-mappe-mappa-zoom-md]"
     });
+  }
+
+  function renderSessionAnchorCards(dv, source = null) {
+    const session = source ?? dv.current();
+    const anchors = [
+      ["Mondo", session.mondo, "Collega il mondo o la campagna di riferimento."],
+      ["Luoghi", session.luoghi, "Scegli almeno un luogo che possa cambiare stato."],
+      ["Fazioni", session.fazioni, "Collega chi vuole qualcosa durante o dopo la sessione."],
+      ["Missioni", session.missioni, "Collega obiettivi che i giocatori possono avanzare o compromettere."],
+      ["Clock", session.tracciati, "Collega pressione, timer o fronti che avanzano fuori scena."],
+      ["PNG", session.personaggi, "Collega PNG che possono reagire alle scelte del tavolo."]
+    ];
+    const ready = anchors.filter(([, value]) => fieldText(value)).length;
+    const grid = dv.el("div", "", { cls: "gdr-card-grid compact" });
+
+    grid.innerHTML = anchors.map(([title, value, fallback]) => cardHtml({
+      title,
+      meta: `${ready}/${anchors.length} ancore collegate`,
+      body: fieldText(value) || fallback,
+      cls: `gdr-info-card compact ${fieldText(value) ? "gdr-kind-ready" : "gdr-kind-missing"}`
+    })).join("");
+
+    dv.paragraph("Le ancore trasformano la sessione in continuita: ogni scelta dovrebbe poter toccare almeno una di queste note.");
+  }
+
+  function renderSessionMaterialCards(dv, source = null) {
+    const session = source ?? dv.current();
+    const groups = [
+      ["Incontri", session.incontri, "Collega o crea incontri pronti da giocare.", "BUTTON[nuovo-incontro-z-modelli-dm-incontro-md-default]"],
+      ["Dispense", session.dispense, "Collega handout, indizi o testi da consegnare.", "BUTTON[nuova-dispensa-z-modelli-dispensa-md-default]"],
+      ["Mappe", session.mappe, "Collega una mappa zoom, pubblica o DM.", "BUTTON[nuova-mappa-zoom-z-modelli-mappe-mappa-zoom-md]"],
+      ["Media", [...asArray(session.audio), ...asArray(session.immagini), ...asArray(session.video)], "Audio, immagini e video restano opzionali ma devono essere pronti prima del tavolo.", ""]
+    ];
+    const grid = dv.el("div", "", { cls: "gdr-card-grid compact" });
+
+    grid.innerHTML = groups.map(([title, value, fallback, button]) => cardHtml({
+      title,
+      body: fieldText(value) || fallback,
+      importa: button || "Controlla i link media prima della sessione.",
+      cls: `gdr-info-card compact ${fieldText(value) ? "gdr-kind-ready" : "gdr-kind-missing"}`
+    })).join("");
+  }
+
+  function renderSessionLiveCards(dv, source = null) {
+    const session = source ?? dv.current();
+    const cards = [
+      ["Attiva", session.attiva === true ? "Sessione marcata attiva." : "Attiva la sessione solo quando e quella al tavolo.", session.attiva === true],
+      ["Scena corrente", fieldText(session.scena_corrente) || "Scrivi dove si trovano ora i personaggi.", hasText(session.scena_corrente)],
+      ["Decisioni", fieldText(session.decisioni_prese) || "Cattura le scelte che cambiano mondo, relazioni o missioni.", hasLinks(session.decisioni_prese) || hasText(session.decisioni_prese)],
+      ["Output", fieldText(session.output_sessione) || "Segna appunti live, indizi rivelati e materiale da smistare.", hasLinks(session.output_sessione) || hasText(session.output_sessione)],
+      ["Propagazione", fieldText(session.propaga_a) || "Collega subito dove la scelta dovra propagarsi.", hasLinks(session.propaga_a)]
+    ];
+    const grid = dv.el("div", "", { cls: "gdr-card-grid compact" });
+
+    grid.innerHTML = cards.map(([title, body, ok]) => cardHtml({
+      title,
+      body,
+      link: session.file?.path ?? "",
+      cls: `gdr-info-card compact ${ok ? "gdr-kind-ready" : "gdr-kind-missing"}`
+    })).join("");
+  }
+
+  function renderSessionPostCards(dv, source = null) {
+    const session = source ?? dv.current();
+    const issues = continuityIssues(session);
+    const cards = [
+      ["Conseguenze", fieldText(session.conseguenze) || "Registra cio che e cambiato nel mondo.", hasLinks(session.conseguenze) || hasText(session.conseguenze)],
+      ["Entita impattate", fieldText(session.entita_impattate ?? session.propaga_a) || "Collega bersagli reali: luoghi, fazioni, PNG, missioni o clock.", hasLinks(session.entita_impattate) || hasLinks(session.propaga_a)],
+      ["Stato propagazione", fieldText(session.propagazione_stato) || "Imposta aperta, applicata, propagata o da verificare.", hasText(session.propagazione_stato)],
+      ["Recap pubblico", fieldText(session.recap_pubblico) || "Scrivi un recap player-safe senza segreti.", hasText(session.recap_pubblico) || hasLinks(session.recap_pubblico)],
+      ["Recap DM", fieldText(session.recap_dm) || "Annota segreti, retcon, prossime mosse e materiali da non mostrare.", hasText(session.recap_dm) || hasLinks(session.recap_dm)],
+      ["Gap M6", issues.length ? issues.join(", ") : "Nessun gap evidente sulla sessione.", issues.length === 0]
+    ];
+    const grid = dv.el("div", "", { cls: "gdr-card-grid compact" });
+
+    grid.innerHTML = cards.map(([title, body, ok]) => cardHtml({
+      title,
+      body,
+      link: session.file?.path ?? "",
+      cls: `gdr-info-card compact ${ok ? "gdr-kind-ready" : "gdr-kind-missing"}`
+    })).join("");
+  }
+
+  function renderM7FamilyCards(dv, source = null, family = "generica") {
+    const page = source ?? dv.current();
+    const definitions = {
+      luogo: [
+        ["Coordinate", page.coordinates, "Compila coordinate se il luogo deve apparire in Atlante Mappe."],
+        ["Mappe", page.mappe ?? page.mappa, "Collega una mappa zoom, pubblica o DM."],
+        ["Controllo", page.fazioni ?? page.fazioni_controllanti, "Collega chi controlla, minaccia o usa questo luogo."],
+        ["Missioni", page.missioni, "Collega missioni che possono cambiare lo stato del luogo."],
+        ["Prossima mossa", page.prossima_mossa, "Definisci cosa succede qui se nessuno interviene."]
+      ],
+      fazione: [
+        ["Obiettivo", page.obiettivo ?? page.agenda, "Scrivi cosa vuole ottenere la fazione."],
+        ["Pressione", page.pressione, "Dai un peso operativo alla prossima mossa."],
+        ["Luoghi controllati", page.luoghi_controllati ?? page.luoghi, "Collega territori, basi o luoghi contesi."],
+        ["Rivali", page.rivali ?? page.connessioni, "Collega alleati, nemici o concorrenti."],
+        ["Prossima mossa", page.prossima_mossa, "Definisci cosa fa la fazione fuori scena."]
+      ],
+      png: [
+        ["Motivazione", page.motivazione ?? page.obiettivo, "Scrivi cosa vuole ora questo PNG."],
+        ["Atteggiamento", page.atteggiamento, "Segna come tratta il party o le fazioni coinvolte."],
+        ["Luogo", page.luoghi ?? page.luogo, "Collega dove puo essere trovato o dove agisce."],
+        ["Fazioni", page.fazioni, "Collega appartenenze, debiti o patroni."],
+        ["Segreti", page.segreti_rivelati ?? page.segreto, "Distingui cio che e stato rivelato da cio che resta DM."]
+      ],
+      relazione: [
+        ["Parti", page.parti ?? page.connessioni, "Collega le note che questa relazione tiene insieme."],
+        ["Stato", page.stato_relazione ?? page.stato, "Definisci se il legame e stabile, teso, rotto o segreto."],
+        ["Tensione", page.pressione, "Misura quanto il legame e vicino a cambiare."],
+        ["Rottura", page.rottura, "Scrivi cosa spezza o peggiora la relazione."],
+        ["Rinforzo", page.rinforzo, "Scrivi cosa puo stabilizzarla o renderla utile."]
+      ],
+      tracciato: [
+        ["Pressione", page.pressione, "Misura quanto il fronte e vicino a muoversi."],
+        ["Soglia", page.soglia, "Definisci quando il clock produce un cambio di stato."],
+        ["Progresso", page.progress_value ?? page.progresso, "Segna il punto attuale del tracciato."],
+        ["Innesco", page.innesco, "Scrivi cosa lo fa avanzare."],
+        ["Prossima mossa", page.prossima_mossa, "Definisci cosa accade al prossimo avanzamento."]
+      ],
+      continuita: [
+        ["Causa", page.causa ?? page.cause, "Collega o descrivi cosa ha generato l'evento."],
+        ["Effetti", page.effetti ?? page.conseguenze, "Scrivi cosa cambia in modo persistente."],
+        ["Bersagli", page.entita_impattate ?? page.propaga_a, "Collega le note che devono reagire."],
+        ["Aggiornamenti", page.aggiornamenti_richiesti, "Specifica quali campi o stati vanno aggiornati."],
+        ["Stato propagazione", page.propagazione_stato, "Imposta aperta, applicata, propagata o da verificare."]
+      ]
+    };
+    const rows = definitions[family] ?? definitions.continuita;
+    const ready = rows.filter(([, value]) => fieldText(value)).length;
+    const grid = dv.el("div", "", { cls: "gdr-card-grid compact" });
+
+    grid.innerHTML = rows.map(([title, value, fallback]) => cardHtml({
+      title,
+      meta: `${ready}/${rows.length} controlli pronti`,
+      body: fieldText(value) || fallback,
+      link: page.file?.path ?? "",
+      cls: `gdr-info-card compact ${fieldText(value) ? "gdr-kind-ready" : "gdr-kind-missing"}`
+    })).join("");
+
+    if (family === "luogo") {
+      dv.paragraph("Usa Atlante Mappe per controllare marker e coordinate; usa Excalidraw o Canvas quando il luogo diventa rete di fronti o scene.");
+    } else if (family === "tracciato") {
+      dv.paragraph("Un tracciato e utile quando pressione, innesco e prossima mossa trasformano tempo in conseguenze.");
+    } else {
+      dv.paragraph("Questa vista misura se la scheda produce gioco, connessioni e continuita invece di restare descrizione isolata.");
+    }
   }
 
   function renderActiveSessionBanner(dv) {
@@ -971,7 +1119,12 @@
     renderPlayerView,
     renderPublicSafety,
     renderPublicStats,
+    renderM7FamilyCards,
+    renderSessionAnchorCards,
+    renderSessionLiveCards,
+    renderSessionMaterialCards,
     renderPostSessionCommandCenter,
+    renderSessionPostCards,
     renderContinuityGaps,
     renderContinuityQueue,
     renderPropagationTargets,

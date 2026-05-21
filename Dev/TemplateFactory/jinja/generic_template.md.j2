@@ -1,5 +1,13 @@
 {{ templater_entry }}
 # `=this.nome`
+{% set families = blueprint.get("target_family", []) %}
+{% set blueprint_name = blueprint_id | default("") %}
+{% set is_place = "luogo" in families or blueprint_name.startswith("luogo_") or blueprint_name.startswith("geografia_") or blueprint_name.startswith("politica_") or "live luogo" in families %}
+{% set is_faction = "fazione" in families or "religione" in families or "culto" in families or blueprint_name.startswith("fazione_") or blueprint_name.startswith("religione_") %}
+{% set is_png = "png" in families or "live png" in families or blueprint_name in ["png", "pg", "live_png", "personaggio_divinita"] or "personaggio" in families %}
+{% set is_relation = "relazione" in families %}
+{% set is_track = "tracciato" in families %}
+{% set is_continuity = blueprint.get("continuity_fields", false) or "conseguenza" in families or "evento storico" in families or blueprint_name == "wizard_conseguenza" %}
 
 ````tabs
 tab: Stato
@@ -78,6 +86,149 @@ tab: Connessioni
 > - [[z.bases/PNG.base]]
 > - [[Risorse/Mappe/Schema Relazioni GDR.excalidraw]]
 
+{% if is_place %}
+tab: Territorio
+
+> [!mappa] Mappa E Presenza
+> Coordinate: `INPUT[text:coordinates]`
+>
+> Mappe: `INPUT[inlineListSuggester(optionQuery("Risorse/Mappe"), useLinks(partial), allowOther):mappe]`
+>
+> Layer mappa: `INPUT[text:layer_mappa]`
+>
+> Icona: `INPUT[text:icon]`
+>
+> Colore marker: `INPUT[text:color]`
+
+> [!lettura]- Strumenti Cartografici
+> - [[z.bases/Atlante Mappe.base]] apre la vista Maps per Bases sui marker con `coordinates`.
+> - [[Risorse/Mappe/Schema Relazioni GDR.excalidraw]] collega il luogo ai fronti visuali.
+> - [[Risorse/Canvas Per GDR]] serve per reti di quartiere, dungeon, rotte o fronti territoriali.
+
+> [!regia]- Stato Luogo
+> ```dataviewjs
+> const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+> gdr.renderM7FamilyCards(dv, dv.current(), "luogo");
+> ```
+
+{% endif %}
+{% if is_faction %}
+tab: Potere
+
+> [!conflitto] Agenda E Pressione
+> Obiettivo: `INPUT[text:obiettivo]`
+>
+> Risorse: `INPUT[inlineList:risorse]`
+>
+> Rivali: `INPUT[inlineListSuggester(optionQuery("Mondi/Fazioni"), useLinks(partial), allowOther):rivali]`
+>
+> Luoghi controllati: `INPUT[inlineListSuggester(optionQuery("Mondi/Luoghi"), useLinks(partial), allowOther):luoghi_controllati]`
+>
+> Pressione: `INPUT[pressione][:pressione]`
+
+> [!regia]- Stato Fazione
+> ```dataviewjs
+> const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+> gdr.renderM7FamilyCards(dv, dv.current(), "fazione");
+> ```
+
+{% endif %}
+{% if is_png %}
+tab: PNG
+
+> [!scena] Persona Al Tavolo
+> Motivazione: `INPUT[text:motivazione]`
+>
+> Atteggiamento: `INPUT[text:atteggiamento]`
+>
+> Luogo attuale: `INPUT[inlineListSuggester(optionQuery("Mondi/Luoghi"), useLinks(partial), allowOther):luoghi]`
+>
+> Fazioni: `INPUT[fazioni][:fazioni]`
+>
+> Segreti rivelati: `INPUT[list:segreti_rivelati]`
+
+> [!regia]- Stato PNG
+> ```dataviewjs
+> const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+> gdr.renderM7FamilyCards(dv, dv.current(), "png");
+> ```
+
+{% endif %}
+{% if is_relation %}
+tab: Legame
+
+> [!conflitto] Relazione Operativa
+> Parti: `INPUT[inlineListSuggester(optionQuery("Mondi"), useLinks(partial), allowOther):parti]`
+>
+> Stato relazione: `INPUT[text:stato_relazione]`
+>
+> Tensione: `INPUT[pressione][:pressione]`
+>
+> Cosa rompe il legame: `INPUT[text:rottura]`
+>
+> Cosa lo rafforza: `INPUT[text:rinforzo]`
+
+> [!regia]- Stato Relazione
+> ```dataviewjs
+> const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+> gdr.renderM7FamilyCards(dv, dv.current(), "relazione");
+> ```
+
+{% endif %}
+{% if is_track %}
+tab: Clock
+
+> [!timer] Tracciato
+> Pressione: `INPUT[pressione][:pressione]`
+>
+> Soglia: `INPUT[text:soglia]`
+>
+> Progresso: `INPUT[text:progress_value]`
+>
+> Innesco avanzamento: `INPUT[text:innesco]`
+>
+> `BUTTON[avanza-clock]`
+
+> [!todo]- Task Clock
+> ```tasks
+> not done
+> path includes Mondi/Tracciati
+> sort by due
+> ```
+
+> [!regia]- Stato Tracciato
+> ```dataviewjs
+> const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+> gdr.renderM7FamilyCards(dv, dv.current(), "tracciato");
+> ```
+
+{% endif %}
+{% if is_continuity %}
+tab: Continuita
+
+> [!timer] Causa Effetto
+> Causa: `INPUT[text:causa]`
+>
+> Effetti: `INPUT[list:effetti]`
+>
+> Entita impattate: `INPUT[entita_impattate][:entita_impattate]`
+>
+> Aggiornamenti richiesti: `INPUT[list:aggiornamenti_richiesti]`
+>
+> Stato propagazione: `INPUT[text:propagazione_stato]`
+
+> [!lettura]- Pubblicazione
+> Memoria pubblica: `INPUT[text:memoria_pubblica]`
+>
+> Versione player-safe: `INPUT[text:versione_player_safe]`
+
+> [!regia]- Stato Continuita
+> ```dataviewjs
+> const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+> gdr.renderM7FamilyCards(dv, dv.current(), "continuita");
+> ```
+
+{% endif %}
 
 {% if blueprint.get("publication_fields", false) %}
 tab: Pubblicazione

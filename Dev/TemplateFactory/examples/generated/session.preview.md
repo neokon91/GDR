@@ -15,18 +15,11 @@ tab: Prepara
 >
 > Materiale pronto: `INPUT[inlineList:materiale_pronto]`
 
-> [!incontro]- Materiale Da Creare
-> Incontri: `INPUT[inlineListSuggester(optionQuery("Mondi/Incontri"), useLinks(partial), allowOther):incontri]`
->
-> Mappe: `INPUT[inlineListSuggester(optionQuery("Risorse/Mappe"), useLinks(partial), allowOther):mappe]`
->
-> Dispense: `INPUT[inlineListSuggester(optionQuery("Mondi/Dispense"), useLinks(partial), allowOther):dispense]`
->
-> `BUTTON[nuovo-incontro-z-modelli-dm-incontro-md-default]`
->
-> `BUTTON[nuova-mappa-zoom-z-modelli-mappe-mappa-zoom-md]`
->
-> `BUTTON[nuova-dispensa-z-modelli-dispensa-md-default]`
+> [!regia]- Check Prep
+> ```dataviewjs
+> const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+> gdr.renderPlayableOutline(dv, dv.current());
+> ```
 
 tab: Ancore
 
@@ -43,25 +36,71 @@ tab: Ancore
 >
 > PNG: `INPUT[inlineListSuggester(optionQuery("Mondi/Personaggi"), useLinks(partial), allowOther):personaggi]`
 
-> [!regia]- Controllo Ancore
+> [!regia]- Rete Sessione
 > ```dataviewjs
 > const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
-> gdr.renderPlayableOutline(dv, dv.current());
+> gdr.renderSessionAnchorCards(dv, dv.current());
 > ```
 
-tab: Media
+> [!lettura]- Bases Per Correzione
+> Apri la base coerente quando devi correggere piu note collegate alla sessione:
+>
+> - [[z.bases/Missioni.base]]
+> - [[z.bases/Luoghi.base]]
+> - [[z.bases/Fazioni.base]]
+> - [[z.bases/PNG.base]]
 
-> [!lettura] Supporti Al Tavolo
+tab: Tavolo
+
+> [!incontro] Materiale Al Tavolo
+> Incontri: `INPUT[inlineListSuggester(optionQuery("Mondi/Incontri"), useLinks(partial), allowOther):incontri]`
+>
+> Dispense: `INPUT[inlineListSuggester(optionQuery("Mondi/Dispense"), useLinks(partial), allowOther):dispense]`
+>
 > Audio: `INPUT[inlineListSuggester(optionQuery("Risorse/Audio"), useLinks(partial), allowOther):audio]`
 >
 > Immagini: `INPUT[inlineListSuggester(optionQuery("Risorse/Immagini"), useLinks(partial), allowOther):immagini]`
 >
 > Video: `INPUT[inlineListSuggester(optionQuery("Risorse/Video"), useLinks(partial), allowOther):video]`
 
-> [!todo] Task Preparazione
+> [!regia]- Vista Materiali
+> ```dataviewjs
+> const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+> gdr.renderSessionMaterialCards(dv, dv.current());
+> ```
+
+> [!todo]- Task Preparazione
+> ```tasks
+> not done
+> path includes Mondi/Sessioni
+> sort by priority
+> ```
+>
 > - [ ] Completa obiettivo, apertura e scelta #task
 > - [ ] Collega almeno tre ancore mondo #task
 > - [ ] Prepara almeno un incontro, handout, mappa o media #task
+
+tab: Mappa
+
+> [!mappa] Mappe E Scene Visuali
+> Mappe: `INPUT[inlineListSuggester(optionQuery("Risorse/Mappe"), useLinks(partial), allowOther):mappe]`
+>
+> Luogo corrente: `INPUT[text:luogo_corrente]`
+>
+> `BUTTON[nuova-mappa-zoom-z-modelli-mappe-mappa-zoom-md]`
+>
+> `BUTTON[nuova-mappa-fronti-z-modelli-mappe-mappa-excalidraw-fronti-excalidraw-md-2]`
+
+> [!lettura]- Atlante E Fronti
+> - [[z.bases/Atlante Mappe.base]] usa Maps per Bases sui marker con `coordinates`.
+> - [[Risorse/Mappe/Schema Relazioni GDR.excalidraw]] mantiene lo schema visuale dei fronti.
+> - [[Risorse/Canvas Per GDR]] definisce quando usare Canvas per reti di scena con nodi canonici.
+
+> [!regia]- Mappe Sessione
+> ```dataviewjs
+> const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+> gdr.renderSessionMapCards(dv, dv.current());
+> ```
 
 tab: Live
 
@@ -69,6 +108,8 @@ tab: Live
 > Attiva al tavolo: `INPUT[toggle:attiva]`
 >
 > Scena corrente: `INPUT[text:scena_corrente]`
+>
+> Tiro rapido: `dice: 1d20`
 >
 > `BUTTON[durante-il-gioco-durante-il-gioco]`
 
@@ -79,6 +120,12 @@ tab: Live
 >
 > Propaga a: `INPUT[propaga_a][:propaga_a]`
 
+> [!regia]- Stato Live
+> ```dataviewjs
+> const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+> gdr.renderSessionLiveCards(dv, dv.current());
+> ```
+
 tab: Dopo
 
 > [!timer] Delta Del Mondo
@@ -86,7 +133,11 @@ tab: Dopo
 > INPUT[list:conseguenze]
 > ```
 >
+> Entita impattate: `INPUT[entita_impattate][:entita_impattate]`
+>
 > Stato propagazione: `INPUT[text:propagazione_stato]`
+>
+> Prossima apertura: `INPUT[text:prossima_apertura]`
 >
 > `BUTTON[applica-conseguenza]`
 >
@@ -100,6 +151,12 @@ tab: Dopo
 > [!segreto]- Recap DM
 > ```meta-bind
 > INPUT[list:recap_dm]
+> ```
+
+> [!regia]- Chiusura Sessione
+> ```dataviewjs
+> const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+> gdr.renderSessionPostCards(dv, dv.current());
 > ```
 ````
 
@@ -116,8 +173,10 @@ gdr.renderPlayableOutline(dv, dv.current());
 | Prima scena |  |
 | Scelta concreta |  |
 | Pressioni |  |
-| Materiale pronto |  |
+| Ancore mondo |  |
 | Incontri |  |
 | Mappe |  |
 | Dispense |  |
 | Media |  |
+| Decisioni |  |
+| Conseguenze |  |

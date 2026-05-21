@@ -101,5 +101,115 @@ def validate_rendered(name: str, rendered: str) -> list[str]:
         errors.append(f"{name}: output contiene {len(templater_tags)} tag Templater invece di 1")
     if "Fallback" not in rendered and "fallback" not in rendered:
         errors.append(f"{name}: output senza fallback Markdown esplicito")
+    errors.extend(validate_plugin_native_sheet(name, rendered))
+
+    return errors
+
+
+def validate_plugin_native_sheet(name: str, rendered: str) -> list[str]:
+    errors: list[str] = []
+    is_long_sheet = len(rendered) > 1600 and not name.startswith(("azione_", "router_"))
+    dynamic_markers = ("INPUT[", "BUTTON[", "```dataview", "```dataviewjs", "```tasks", "```meta-bind")
+
+    if is_long_sheet:
+        if "````tabs" not in rendered:
+            errors.append(f"{name}: scheda lunga senza Tabs")
+        if "> [!" not in rendered:
+            errors.append(f"{name}: scheda lunga senza callout funzionali")
+        if not any(marker in rendered for marker in dynamic_markers):
+            errors.append(f"{name}: scheda lunga senza blocchi dinamici o controlli plugin")
+        if "## Fallback Markdown" not in rendered:
+            errors.append(f"{name}: scheda lunga senza fallback Markdown strutturato")
+
+        callout_headers = list(re.finditer(r"(?m)^> \[![^\]]+\].*$", rendered))
+        for index, match in enumerate(callout_headers):
+            start = match.end()
+            end = callout_headers[index + 1].start() if index + 1 < len(callout_headers) else len(rendered)
+            body = rendered[start:end]
+            has_body = any(
+                line.startswith(">") and line[1:].strip()
+                for line in body.splitlines()
+            )
+            if not has_body:
+                errors.append(f"{name}: callout vuoto ({match.group(0).strip()})")
+
+    if name == "session":
+        required_tabs = ("Prepara", "Ancore", "Tavolo", "Mappa", "Live", "Dopo")
+        for tab in required_tabs:
+            if f"tab: {tab}" not in rendered:
+                errors.append(f"{name}: tab M7 mancante ({tab})")
+
+        tab_chunks = re.split(r"(?m)^tab: ", rendered)
+        for chunk in tab_chunks[1:]:
+            tab_name, _, body = chunk.partition("\n")
+            if not any(marker in body for marker in dynamic_markers) and not any(
+                link in body for link in ("[[z.bases/", ".excalidraw", "Canvas")
+            ):
+                errors.append(f"{name}: tab senza funzione plugin reale ({tab_name.strip()})")
+
+        required_runtime_views = (
+            "renderPlayableOutline",
+            "renderSessionAnchorCards",
+            "renderSessionMaterialCards",
+            "renderSessionMapCards",
+            "renderSessionLiveCards",
+            "renderSessionPostCards",
+        )
+        for view in required_runtime_views:
+            if view not in rendered:
+                errors.append(f"{name}: vista DataviewJS M7 mancante ({view})")
+
+        required_plugins = ("```tasks", "[[z.bases/", "Atlante Mappe.base", ".excalidraw", "Canvas", "dice: 1d20")
+        for marker in required_plugins:
+            if marker not in rendered:
+                errors.append(f"{name}: integrazione plugin M7 mancante ({marker})")
+
+    family_contracts = [
+        (
+            "luogo",
+            name == "luogo" or name == "live_luogo" or name.startswith(("luogo_", "geografia_", "politica_")),
+            "Territorio",
+            ("renderM7FamilyCards", '"luogo"', "Atlante Mappe.base", ".excalidraw", "Canvas"),
+        ),
+        (
+            "fazione",
+            name == "fazione" or name.startswith("fazione_") or name == "religione_culto",
+            "Potere",
+            ("renderM7FamilyCards", '"fazione"', "INPUT[pressione]", "luoghi_controllati"),
+        ),
+        (
+            "png",
+            name in {"png", "pg", "live_png", "personaggio_divinita"},
+            "PNG",
+            ("renderM7FamilyCards", '"png"', "motivazione", "segreti_rivelati"),
+        ),
+        (
+            "relazione",
+            name == "relazione",
+            "Legame",
+            ("renderM7FamilyCards", '"relazione"', "stato_relazione", "rottura", "rinforzo"),
+        ),
+        (
+            "tracciato",
+            name == "tracciato",
+            "Clock",
+            ("renderM7FamilyCards", '"tracciato"', "```tasks", "BUTTON[avanza-clock]"),
+        ),
+        (
+            "continuita",
+            name in {"conseguenza", "evento_storico", "wizard_conseguenza"},
+            "Continuita",
+            ("renderM7FamilyCards", '"continuita"', "aggiornamenti_richiesti", "propagazione_stato"),
+        ),
+    ]
+
+    for family, applies, tab, markers in family_contracts:
+        if not applies:
+            continue
+        if f"tab: {tab}" not in rendered:
+            errors.append(f"{name}: tab M7 {family} mancante ({tab})")
+        for marker in markers:
+            if marker not in rendered:
+                errors.append(f"{name}: marker M7 {family} mancante ({marker})")
 
     return errors
