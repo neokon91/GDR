@@ -13,6 +13,7 @@ FACTORY = ROOT / "Dev" / "TemplateFactory"
 MODULES = FACTORY / "modules"
 JINJA = FACTORY / "jinja"
 EXAMPLES = FACTORY / "examples"
+GENERATED = EXAMPLES / "generated"
 
 
 def load_yaml(path: Path) -> dict[str, Any]:
@@ -38,6 +39,13 @@ def build_jinja_env() -> Environment:
         autoescape=False,
         keep_trailing_newline=True,
     )
+
+
+def display_path(path: Path) -> str:
+    try:
+        return str(path.relative_to(ROOT))
+    except ValueError:
+        return str(path)
 
 
 def templater_function(entry: str) -> str:

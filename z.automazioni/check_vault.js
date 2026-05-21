@@ -507,37 +507,6 @@ for (const entry of templateFactoryManifest?.files ?? []) {
     addGeneratedTemplatePath(entry?.path);
 }
 
-const templateBlueprintsPath = path.join(ROOT, "Dev/TemplateFactory/modules/template_blueprints.yaml");
-if (fs.existsSync(templateBlueprintsPath)) {
-    const lines = fs.readFileSync(templateBlueprintsPath, "utf8").split(/\r?\n/);
-    let outputFolder = "";
-    let inFiles = false;
-
-    for (const line of lines) {
-        const folderMatch = line.match(/^ {6}folder:\s*(.+?)\s*$/);
-        if (folderMatch) {
-            outputFolder = folderMatch[1].replace(/^["']|["']$/g, "");
-            inFiles = false;
-            continue;
-        }
-
-        if (/^ {6}files:\s*$/.test(line)) {
-            inFiles = true;
-            continue;
-        }
-
-        const fileMatch = inFiles ? line.match(/^ {6}-\s*(.+?)\s*$/) : null;
-        if (fileMatch && outputFolder) {
-            addGeneratedTemplatePath(path.posix.normalize(`${outputFolder}/${fileMatch[1].replace(/^["']|["']$/g, "")}`));
-            continue;
-        }
-
-        if (inFiles && !/^ {6}-\s*/.test(line) && !/^\s*$/.test(line)) {
-            inFiles = false;
-        }
-    }
-}
-
 function isGeneratedTemplatePath(fileRel) {
     const normalized = String(fileRel ?? "").replace(/\\/g, "/");
     return generatedTemplatePaths.has(normalized) || generatedTemplatePaths.has(targetPath(normalized));

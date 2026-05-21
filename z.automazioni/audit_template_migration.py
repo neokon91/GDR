@@ -9,13 +9,16 @@ import re
 from datetime import datetime, timezone
 from pathlib import Path
 
-import yaml
+from template_factory_utils import (
+    FACTORY,
+    GENERATED,
+    ROOT,
+    display_path,
+    load_modules,
+    resolved_blueprints,
+)
 
 
-ROOT = Path.cwd()
-FACTORY = ROOT / "Dev" / "TemplateFactory"
-MODULES = FACTORY / "modules"
-GENERATED = FACTORY / "examples" / "generated"
 DEFAULT_REPORT = FACTORY / "examples" / "generated" / "migration_audit.md"
 
 MARKERS = {
@@ -34,14 +37,6 @@ MARKERS = {
     "session_views": r"z\.engine/session_views\.js",
     "legacy_session_context": r"z\.automazioni/session_context\.js",
 }
-
-
-def load_yaml(path: Path) -> dict:
-    with path.open("r", encoding="utf-8") as handle:
-        data = yaml.safe_load(handle) or {}
-    if not isinstance(data, dict):
-        raise ValueError(f"{path}: YAML root non e un oggetto")
-    return data
 
 
 def count_markers(text: str) -> dict[str, int]:
@@ -147,7 +142,7 @@ def main() -> int:
     parser.add_argument("--json", default="", help="Path opzionale report JSON.")
     args = parser.parse_args()
 
-    blueprints = load_yaml(MODULES / "template_blueprints.yaml")["blueprints"]
+    blueprints = resolved_blueprints(load_modules())
     rows: list[dict] = []
 
     for name, blueprint in blueprints.items():
@@ -170,7 +165,7 @@ def main() -> int:
             json_path = ROOT / json_path
         json_path.write_text(json.dumps(rows, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
-    print(f"TemplateFactory migration audit OK: {len(rows)} confronti in {report_path.relative_to(ROOT)}.")
+    print(f"TemplateFactory migration audit OK: {len(rows)} confronti in {display_path(report_path)}.")
     return 0
 
 

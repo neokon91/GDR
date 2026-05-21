@@ -11,6 +11,7 @@ from template_factory_utils import (
     FACTORY,
     ROOT,
     build_jinja_env,
+    display_path,
     load_modules,
     render_context,
     resolved_blueprints,
@@ -25,13 +26,6 @@ def render_blueprint(env, name: str, blueprint: dict, modules: dict[str, dict]) 
     template_ref = Path(str(blueprint["jinja_template"])).name
     template = env.get_template(template_ref)
     return template.render(**render_context(name, blueprint, modules))
-
-
-def display_path(path: Path) -> str:
-    try:
-        return str(path.relative_to(ROOT))
-    except ValueError:
-        return str(path)
 
 
 def write_rendered(output_dir: Path, rendered_by_name: dict[str, str], clean: bool) -> None:
