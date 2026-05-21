@@ -25,7 +25,7 @@ domande_guida: ["Chi controlla davvero il prezzo del sale nero?", "Cosa resta so
 continenti: []
 fazioni: ["[[Consorzio Del Sale Nero]]"]
 religioni: ["[[Culto Della Lanterna Bassa]]"]
-campagne: ["[[Campagna - Sale Sotto La Nebbia]]"]
+campagne: ["[[Sale Sotto La Nebbia]]"]
 verita: []
 rumor_attivi: ["I barcaioli sentono una campana sotto la banchina al cambio di marea."]
 stato_mondo: ["Il faro vecchio e perso; il porto cerca una nuova rotta sicura."]

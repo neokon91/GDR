@@ -17,7 +17,7 @@ stato: giocata
 attiva: false
 pubblico: true
 mondo: "[[Brumafonda Demo]]"
-campagne: ["[[Campagna - Sale Sotto La Nebbia]]"]
+campagne: ["[[Sale Sotto La Nebbia]]"]
 luoghi: ["[[Porto Di Brumafonda]]"]
 personaggi: []
 missioni: ["[[Recuperare La Campana Sommersa]]"]

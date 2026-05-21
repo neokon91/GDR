@@ -33,6 +33,7 @@
 - Gate release-content: le note contenuto in `Mondi/` e `Campagne/` devono avere scheda plugin-native con tabs, callout, controlli dinamici e fallback Markdown.
 - Gate pagine utente chiave: setup, aiuto, prima sessione, materiali al tavolo, import mappe e guida mappe devono restare plugin-native.
 - Filtro navigazione release: cartelle tecniche `z.*` e compendio `SRD/` restano inclusi ma nascosti dal file explorer utente.
+- Dossier campagna demo `Campagne/Sale Sotto La Nebbia/Sale Sotto La Nebbia.md`, con struttura finale da campagna giocabile invece di nota sparsa.
 
 ### Migliorato
 
@@ -60,6 +61,7 @@
 - Le viste Bases prioritarie usano `groupBy` e `limit`, mentre gli archivi restano completi.
 - Rimossi gli artefatti di release generati da `dist/` dal workspace locale.
 - Spostato il materiale di sviluppo fuori da `Risorse/` e dalla root, aggiornando controlli e riferimenti.
+- `Demo Brumafonda.md` nella release utente ora e un dossier plugin-native con tabs, callout operativi, DataviewJS, Tasks e fallback Markdown.
 
 ### Verificato
 

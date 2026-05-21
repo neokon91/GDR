@@ -8,7 +8,7 @@ const errors = [];
 const DEMO_REQUIRED_FILES = [
     "Hub/Vista Giocatori.md",
     "Mondi/Brumafonda Demo.md",
-    "Campagne/Campagna - Sale Sotto La Nebbia.md",
+    "Campagne/Sale Sotto La Nebbia/Sale Sotto La Nebbia.md",
     "Mondi/Culture/Custodi Delle Saline.md",
     "Mondi/Fazioni/Consorzio Del Sale Nero.md",
     "Mondi/Religioni/Culto Della Lanterna Bassa.md",
@@ -41,7 +41,7 @@ for (const relPath of DEMO_REQUIRED_FILES) {
 }
 
 const demoWorld = readTextRel(ROOT, "Mondi/Brumafonda Demo.md");
-for (const marker of ["[[Campagna - Sale Sotto La Nebbia]]", "[[Mappa Pubblica Di Brumafonda]]"]) {
+for (const marker of ["[[Sale Sotto La Nebbia]]", "[[Mappa Pubblica Di Brumafonda]]"]) {
     if (!demoWorld.includes(marker)) {
         errors.push(`Smoke demo: Brumafonda Demo non contiene ${marker}`);
     }

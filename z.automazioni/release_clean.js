@@ -89,7 +89,7 @@ const REQUIRED_RELEASE_FILES = [
     "Risorse/Controllo Vault.md",
     "Risorse/Quality Report.md",
     "Mondi/Brumafonda Demo.md",
-    "Campagne/Campagna - Sale Sotto La Nebbia.md",
+    "Campagne/Sale Sotto La Nebbia/Sale Sotto La Nebbia.md",
     "Mondi/Sessioni/2026-05-28 - La Campana Nella Nebbia.md",
     "Risorse/Mappe/Mappa Pubblica Di Brumafonda.md",
     "z.engine/session_views.js",
@@ -153,30 +153,63 @@ pubblico: true
 
 Questa pagina esiste solo nella release utente. Serve a provare il vault senza aprire documentazione di sviluppo.
 
-## Percorso Demo
+\`\`\`\`tabs
+tab: Inizia
 
-1. Apri [[Brumafonda Demo]] per vedere il mondo demo.
-2. Apri [[Campagna - Sale Sotto La Nebbia]] per vedere come il mondo diventa campagna.
-3. Apri [[2026-05-28 - La Campana Nella Nebbia]] per vedere una sessione demo gia giocata.
-4. Apri [[Mappa Pubblica Di Brumafonda]] e [[Avviso Della Dogana Di Brumafonda]] per controllare materiale player-safe.
-5. Apri [[Vista Giocatori]] per vedere recap, mappa e materiale condivisibile.
+> [!regia] Percorso Demo
+> 1. Apri [[Sale Sotto La Nebbia]]: apre il dossier campagna ordinato come materiale finale.
+> 2. Dal dossier apri mondo, missione, sessione, mappa, dispensa e conseguenza.
+> 3. Apri [[Vista Giocatori]] per vedere recap, mappa e materiale condivisibile.
 
-## Pagine Da Provare
+tab: Dossier
 
-- [[Inizia Qui]]
-- [[Worldbuilder Dashboard]]
-- [[Atlante del Mondo]]
-- [[Campagna da Ambientazione]]
-- [[Durante il Gioco]]
-- [[Vista Giocatori]]
-- [[Risorse/Controllo Vault]]
+> [!missione] Campagna Pronta
+> - [[Sale Sotto La Nebbia]]
+> - [[Brumafonda Demo]]
+> - [[Porto Di Brumafonda]]
+> - [[Recuperare La Campana Sommersa]]
+> - [[2026-05-28 - La Campana Nella Nebbia]]
+> - [[La Marea Ha Preso Il Faro Vecchio]]
 
-## Cosa Verificare
+tab: Player-Safe
 
-- Nessun blocco Dataview o DataviewJS mostra errori.
-- I pulsanti principali sono visibili.
-- La vista giocatori non mostra campi DM o segreti.
-- La mappa e la dispensa pubblica sono raggiungibili.
+> [!lettura] Materiale Condivisibile
+> - [[Mappa Pubblica Di Brumafonda]]
+> - [[Avviso Della Dogana Di Brumafonda]]
+> - [[Vista Giocatori]]
+
+> [!regia]- Controllo
+> \`\`\`dataviewjs
+> const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+> gdr.renderPlayerPortalStatus(dv);
+> \`\`\`
+
+tab: Smoke
+
+> [!todo] Cosa Verificare
+> - [ ] Nessun blocco Dataview o DataviewJS mostra errori. #task
+> - [ ] I pulsanti principali sono visibili. #task
+> - [ ] La vista giocatori non mostra campi DM o segreti. #task
+> - [ ] La mappa e la dispensa pubblica sono raggiungibili. #task
+
+tab: Strumenti
+
+> [!regia] Pagine Da Provare
+> - [[Inizia Qui]]
+> - [[Worldbuilder Dashboard]]
+> - [[Atlante del Mondo]]
+> - [[Campagna da Ambientazione]]
+> - [[Durante il Gioco]]
+> - [[Risorse/Controllo Vault]]
+\`\`\`\`
+
+## Fallback Markdown
+
+| Blocco | Apri |
+| --- | --- |
+| Dossier campagna | [[Sale Sotto La Nebbia]] |
+| Portale giocatori | [[Vista Giocatori]] |
+| Mappa pubblica | [[Mappa Pubblica Di Brumafonda]] |
 `
 };
 
@@ -299,6 +332,10 @@ function validateRelease() {
     }
 
     const releaseEntries = walkRelease(OUT);
+    const releaseDemoText = fs.readFileSync(repoPath(OUT, "Demo Brumafonda.md"), "utf8");
+    if (!hasPluginNativeReleasePage(releaseDemoText)) {
+        errors.push("Demo Brumafonda.md: la pagina demo release deve essere un dossier plugin-native");
+    }
     const releaseAppConfig = readJson(repoPath(OUT, ".obsidian/app.json"), {});
     const ignoredFilters = new Set(releaseAppConfig.userIgnoreFilters ?? []);
     for (const filter of REQUIRED_USER_IGNORE_FILTERS) {
@@ -343,6 +380,13 @@ function validateRelease() {
     }
 
     console.log(`Release pulita verificata: ${releaseEntries.length} percorsi controllati.`);
+}
+
+function hasPluginNativeReleasePage(text) {
+    return text.includes("````tabs")
+        && /> \[![^\]]+\]/.test(text)
+        && /```dataview|```dataviewjs|```tasks|INPUT\[|BUTTON\[|#task/.test(text)
+        && /Fallback Markdown/i.test(text);
 }
 
 function zipIfAvailable() {

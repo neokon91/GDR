@@ -130,7 +130,7 @@ const REQUIRED_PLUGIN_NATIVE_USER_PAGES = [
 ];
 const DEMO_REQUIRED_FILES = [
     "Mondi/Brumafonda Demo.md",
-    "Campagne/Campagna - Sale Sotto La Nebbia.md",
+    "Campagne/Sale Sotto La Nebbia/Sale Sotto La Nebbia.md",
     "Mondi/Culture/Custodi Delle Saline.md",
     "Mondi/Fazioni/Consorzio Del Sale Nero.md",
     "Mondi/Religioni/Culto Della Lanterna Bassa.md",

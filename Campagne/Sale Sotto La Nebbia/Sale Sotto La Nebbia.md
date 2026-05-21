@@ -1,6 +1,6 @@
 ---
 id: campagna-sale-sotto-la-nebbia
-nome: "Campagna - Sale Sotto La Nebbia"
+nome: "Sale Sotto La Nebbia"
 categoria: campagna
 tipo: campagna
 stato: preparazione
@@ -20,14 +20,14 @@ ricompense: []
 domande_campagna: ["Chi diventa padrone del faro nuovo?"]
 ---
 
-# Campagna - Sale Sotto La Nebbia
+# Sale Sotto La Nebbia
 
-Demo di campagna breve: il gruppo entra in una citta portuale dove commercio, culto e memoria pubblica si contendono la stessa campana.
+Dossier campagna demo. Il Codex resta organizzato per mondo, luoghi, fazioni, missioni e timeline; questa pagina e il pacchetto giocabile che tiene insieme il materiale finale.
 
 ````tabs
-tab: Stato
+tab: Dossier
 
-> [!infoboxwiki] Campagna
+> [!infoboxwiki] Sale Sotto La Nebbia
 > Mondo: `INPUT[mondo][:mondo]`
 >
 > Profilo: `INPUT[text:profilo]`
@@ -42,7 +42,7 @@ tab: Stato
 > gdr.renderM7FamilyCards(dv, dv.current(), "campagna");
 > ```
 
-tab: Gioco
+tab: Giocare
 
 > [!missione] Da Mondo A Sessioni
 > Regione: `INPUT[inlineListSuggester(optionQuery("Mondi/Luoghi"), useLinks(partial), allowOther):regione]`
@@ -61,14 +61,39 @@ tab: Gioco
 > SORT pressione DESC, file.name ASC
 > ```
 
-tab: Strumenti
+tab: Kit
 
-> [!regia] Correzione Rapida
+> [!scena] Materiale Di Campagna
+> - [[Brumafonda Demo]]
+> - [[Porto Di Brumafonda]]
+> - [[Consorzio Del Sale Nero]]
+> - [[Culto Della Lanterna Bassa]]
+> - [[Custodi Delle Saline]]
+> - [[Mercato Del Sale Nero]]
+> - [[Recuperare La Campana Sommersa]]
+> - [[2026-05-28 - La Campana Nella Nebbia]]
+> - [[La Marea Ha Preso Il Faro Vecchio]]
+
+> [!mappa]- Player-Safe
+> - [[Mappa Pubblica Di Brumafonda]]
+> - [[Avviso Della Dogana Di Brumafonda]]
+> - [[Vista Giocatori]]
+
+tab: Regia
+
+> [!regia] Flusso Operativo
 > - [[Campagna da Ambientazione]]
 > - [[Risorse/Preparazione Sessione]]
+> - [[Durante il Gioco]]
+> - [[Risorse/Post Sessione Guidato]]
+> - [[Motore Mondo Vivo]]
+> - [[Cosa Succede Fuori Scena]]
+
+> [!regia]- Correzione Rapida
 > - [[z.bases/Missioni.base]]
 > - [[z.bases/Luoghi.base]]
 > - [[z.bases/Fazioni.base]]
+> - [[z.bases/Atlante Mappe.base]]
 ````
 
 ## Fallback Markdown

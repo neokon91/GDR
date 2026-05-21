@@ -28,7 +28,7 @@ Apri queste pagine in ordine e verifica che non compaiano errori Dataview, JS En
 | 2 | [[Brumafonda Demo]] | `Demo Brumafonda.md` | Il nucleo demo copre mondo, campagna, sessione, missione e conseguenza. |
 | 3 | [[Worldbuilder Dashboard]] | [[Worldbuilder Dashboard]] | [[Brumafonda Demo]] e le entita collegate emergono nelle viste worldbuilding. |
 | 4 | [[Atlante del Mondo]] | [[Atlante del Mondo]] | [[Porto Di Brumafonda]] e [[Mappa Pubblica Di Brumafonda]] sono raggiungibili. |
-| 5 | [[Campagna da Ambientazione]] | [[Campagna da Ambientazione]] | [[Campagna - Sale Sotto La Nebbia]] collega mondo, luogo, fazione, missione e sessione. |
+| 5 | [[Sale Sotto La Nebbia]] | [[Sale Sotto La Nebbia]] | Il dossier campagna collega mondo, luogo, fazione, missione, sessione e materiale player-safe. |
 | 6 | [[Durante il Gioco]] | [[Durante il Gioco]] | La sessione demo non rompe il cockpit anche senza essere attiva. |
 | 7 | [[Vista Giocatori]] | [[Vista Giocatori]] | Recap, mappa e dispensa pubblica sono leggibili senza campi DM. |
 | 8 | [[Risorse/Controllo Vault]] | [[Risorse/Controllo Vault]] | Non compaiono blocchi critici legati alla demo. |
