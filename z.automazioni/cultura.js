@@ -27,62 +27,27 @@ async function cultura(tp) {
     const created = await helpers.moveNote(tp, helpers.path("culture"), name);
     await helpers.linkCreatedNoteToConnections(created, connessioni);
 
-    return `---
-id: ${id}
-nome: ${helpers.yamlQuote(name)}
-categoria: cultura
-tipo: cultura
-stato: bozza
-canonico: false
-stato_canonico: canonico
-mondo: ${mondo}
-luoghi: ${helpers.inlineYamlList(luoghi)}
-lingue: []
-religioni: ${helpers.inlineYamlList(religioni)}
-fazioni: ${helpers.inlineYamlList(fazioni)}
-usi: []
-tabu: []
-feste: []
-valori: []
-estetica: []
-onore:
-tabu_sociali: []
-autorita_riconosciute: []
-pratiche_visibili: []
-mito_origine: ${helpers.inlineYamlTextList([mitoOrigine])}
-cose_sacre: ${helpers.inlineYamlTextList([sacro])}
-cose_proibite: ${helpers.inlineYamlTextList([proibito])}
-contraddizioni_interne: []
-famiglia_casa_ruoli: ${helpers.inlineYamlTextList([vitaQuotidiana])}
-cibo_vestiario_materiali: []
-educazione_memoria: []
-economia_mestieri: []
-rapporto_stranieri: ${helpers.inlineYamlTextList([rapportoStranieri])}
-relazioni_esterne: []
-conflitti_interni: []
-relazioni: []
-gancio: ${helpers.yamlQuote(gancio)}
-uso_al_tavolo: ${helpers.yamlQuote(usoAlTavolo)}
-player_safe: ${helpers.yamlQuote(playerSafe)}
-tratto_distintivo: ${helpers.yamlQuote(tratto)}
-connessioni: ${helpers.inlineYamlList(connessioni)}
-propaga_a: []
-entita_impattate: []
-promesse_al_tavolo: []
-scelte: []
-rischi: []
-indizi: []
-png_coinvolti: []
-ricompense: []
-conseguenze: []
-prossima_mossa: ${helpers.yamlQuote(prossimaMossa)}
-leggi: []
-risorse: []
-tensioni: ${helpers.inlineYamlTextList([tensione])}
-segreti: ${helpers.inlineYamlTextList([segreto])}
-domande_aperte: []
----
-
+    return `${await helpers.renderFrontmatter("cultura", {
+        id,
+        nome: helpers.yamlQuote(name),
+        mondo,
+        luoghi: helpers.inlineYamlList(luoghi),
+        religioni: helpers.inlineYamlList(religioni),
+        fazioni: helpers.inlineYamlList(fazioni),
+        mito_origine: helpers.inlineYamlTextList([mitoOrigine]),
+        cose_sacre: helpers.inlineYamlTextList([sacro]),
+        cose_proibite: helpers.inlineYamlTextList([proibito]),
+        famiglia_casa_ruoli: helpers.inlineYamlTextList([vitaQuotidiana]),
+        rapporto_stranieri: helpers.inlineYamlTextList([rapportoStranieri]),
+        gancio: helpers.yamlQuote(gancio),
+        uso_al_tavolo: helpers.yamlQuote(usoAlTavolo),
+        player_safe: helpers.yamlQuote(playerSafe),
+        tratto_distintivo: helpers.yamlQuote(tratto),
+        connessioni: helpers.inlineYamlList(connessioni),
+        prossima_mossa: helpers.yamlQuote(prossimaMossa),
+        tensioni: helpers.inlineYamlTextList([tensione]),
+        segreti: helpers.inlineYamlTextList([segreto])
+    })}
 `;
 }
 

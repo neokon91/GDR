@@ -1,8 +1,319 @@
 id: frontmatter_profiles
 purpose: Profili dichiarativi per ordinare e renderizzare frontmatter generato dagli script Templater.
-version: 0.1.0
+version: 0.2.0
+field_catalog:
+  domain_fields:
+    - agenda
+    - autorita_riconosciute
+    - bioma
+    - capitale
+    - cibo_vestiario_materiali
+    - collegamenti_mancanti
+    - confini
+    - conflitti
+    - conflitti_interni
+    - contraddizioni_interne
+    - cose_proibite
+    - cose_sacre
+    - crisi_interne
+    - debolezze
+    - decisioni
+    - dipendenze
+    - dipendenze_materiali
+    - domande_aperte
+    - economia_mestieri
+    - educazione_memoria
+    - eserciti
+    - escalation
+    - esito_finale
+    - esito_parziale
+    - estetica
+    - evento_scatenante
+    - famiglia_casa_ruoli
+    - ferite_aperte
+    - feste
+    - funzione_narrativa
+    - hp_attuali
+    - hp_massimi
+    - indizi
+    - influenza
+    - leggi
+    - legittimita
+    - lingue
+    - mappa
+    - mito_origine
+    - mosse
+    - mosse_segrete
+    - mosse_visibili
+    - obiettivo_nascosto
+    - onore
+    - origine_storica
+    - ostacoli
+    - popolazione
+    - png_coinvolti
+    - pratiche_visibili
+    - problemi
+    - proprietario
+    - promesse_al_tavolo
+    - rapporto_stranieri
+    - rarita
+    - relazioni_esterne
+    - risorse_strategiche
+    - scene_pronte
+    - scelte
+    - simboli_riti_trattati
+    - sottotipo
+    - tabu
+    - tabu_sociali
+    - tensioni
+    - tratto_distintivo
+    - trattati
+    - usi
+    - valori
+    - vassalli
+    - versioni_contrapposte
+    - voci
+  plugin_fields:
+    calendarium:
+      - fc-calendar
+      - fc-date
+      - fc-category
+      - fc-display-name
+      - fc-end
+    maps:
+      - coordinate
+      - mappa
+      - layer_mappa
+      - tipo_mappa
 profiles:
+  fazione:
+    sample_values:
+      - id
+      - nome
+      - tipo
+      - mondo
+    fields:
+      - key: id
+        value: id
+      - key: nome
+        value: nome
+      - key: categoria
+        default: fazione
+      - key: fileClass
+        default: fazione
+      - key: tipo
+        value: tipo
+      - key: stato
+        default: bozza
+      - key: canonico
+        default: false
+      - key: stato_canonico
+        default: canonico
+      - key: mondo
+        value: mondo
+      - key: leader
+        value: leader
+      - key: luoghi
+        value: luoghi
+      - key: personaggi
+        value: personaggi
+      - key: missioni
+        value: missioni
+      - key: obiettivo
+        value: obiettivo
+      - key: gancio
+        value: gancio
+      - key: uso_al_tavolo
+        value: uso_al_tavolo
+      - key: player_safe
+        value: player_safe
+      - key: obiettivo_nascosto
+        value: obiettivo_nascosto
+      - key: agenda
+        value: agenda
+      - key: influenza
+        default: ""
+      - key: pressione
+        value: pressione
+      - key: prossima_mossa
+        value: prossima_mossa
+      - key: scadenza_mondo
+        value: scadenza_mondo
+      - key: progress_value
+        default: 0
+      - key: progress_max
+        default: 6
+      - key: innesco
+        value: innesco
+      - key: escalation
+        default: []
+      - key: posta
+        value: posta
+      - key: mosse_visibili
+        default: []
+      - key: mosse_segrete
+        default: []
+      - key: scelte
+        default: []
+      - key: rischi
+        default: []
+      - key: indizi
+        default: []
+      - key: ricompense
+        default: []
+      - key: risorse
+        default: []
+      - key: debolezze
+        default: []
+      - key: alleati
+        value: alleati
+      - key: rivali
+        value: rivali
+      - key: trattati
+        default: []
+      - key: relazioni
+        default: []
+      - key: eventi
+        default: []
+      - key: propaga_a
+        default: []
+      - key: conseguenze
+        default: []
+      - key: segreti
+        value: segreti
+      - key: domande_aperte
+        value: domande_aperte
+      - key: connessioni
+        value: connessioni
+  luogo:
+    sample_values:
+      - id
+      - nome
+      - tipo
+      - mondo
+    fields:
+      - key: id
+        value: id
+      - key: nome
+        value: nome
+      - key: categoria
+        default: luogo
+      - key: fileClass
+        default: luogo
+      - key: famiglia_luogo
+        value: famiglia_luogo
+      - key: tipo
+        value: tipo
+      - key: sottotipo
+        value: sottotipo
+      - key: tipologia
+        value: tipologia
+      - key: bioma
+        value: bioma
+      - key: stato
+        default: bozza
+      - key: canonico
+        default: false
+      - key: stato_canonico
+        default: canonico
+      - key: mondo
+        value: mondo
+      - key: luogo_padre
+        value: luogo_padre
+      - key: governante
+        value: governante
+      - key: popolazione
+        default: ""
+      - key: stabilita
+        default: ""
+      - key: pericolo
+        value: pericolo
+      - key: pressione
+        default: 0
+      - key: legittimita
+        default: ""
+      - key: capitale
+        default: ""
+      - key: impressione
+        value: impressione
+      - key: gancio
+        value: gancio
+      - key: uso_al_tavolo
+        value: uso_al_tavolo
+      - key: player_safe
+        value: player_safe
+      - key: funzione_narrativa
+        value: funzione_narrativa
+      - key: tensione
+        value: tensione
+      - key: promessa_al_tavolo
+        default: ""
+      - key: confini
+        default: []
+      - key: vassalli
+        default: []
+      - key: alleati
+        default: []
+      - key: rivali
+        default: []
+      - key: relazioni
+        default: []
+      - key: culture
+        default: []
+      - key: risorse_strategiche
+        default: []
+      - key: eserciti
+        default: []
+      - key: crisi_interne
+        default: []
+      - key: scelte
+        default: []
+      - key: rischi
+        default: []
+      - key: ricompense
+        default: []
+      - key: hp_massimi
+        default: ""
+      - key: hp_attuali
+        default: ""
+      - key: fazioni
+        value: fazioni
+      - key: religioni
+        default: []
+      - key: personaggi
+        value: personaggi
+      - key: missioni
+        value: missioni
+      - key: sessioni
+        value: sessioni
+      - key: risorse
+        default: []
+      - key: problemi
+        default: []
+      - key: conseguenze
+        default: []
+      - key: segreti
+        value: segreti
+      - key: indizi
+        default: []
+      - key: voci
+        default: []
+      - key: scene
+        default: []
+      - key: prossima_mossa
+        default: ""
+      - key: domande_aperte
+        value: domande_aperte
+      - key: connessioni
+        value: connessioni
+      - key: collegamenti_mancanti
+        default: []
   missione:
+    sample_values:
+      - id
+      - nome
+      - tipo
+      - mondo
     fields:
       - key: id
         value: id
@@ -70,11 +381,487 @@ profiles:
         value: scadenza_mondo
       - key: fc-calendar
         value: fc_calendar
+        plugin: calendarium
       - key: fc-date
         default: ""
+        plugin: calendarium
       - key: fc-category
         default: scadenza
+        plugin: calendarium
       - key: fc-display-name
         value: fc_display_name
+        plugin: calendarium
       - key: fc-end
         default: ""
+        plugin: calendarium
+  tracciato:
+    sample_values:
+      - id
+      - nome
+      - tipo
+      - mondo
+    fields:
+      - key: id
+        value: id
+      - key: nome
+        value: nome
+      - key: categoria
+        default: tracciato
+      - key: fileClass
+        default: tracciato
+      - key: tipo
+        value: tipo
+      - key: stato
+        default: attivo
+      - key: mondo
+        value: mondo
+      - key: campagne
+        value: campagne
+      - key: missioni
+        value: missioni
+      - key: fazioni
+        value: fazioni
+      - key: luoghi
+        value: luoghi
+      - key: personaggi
+        value: personaggi
+      - key: sessioni
+        value: sessioni
+      - key: progress_value
+        value: progress_value
+      - key: progress_max
+        value: progress_max
+      - key: pressione
+        default: 0
+      - key: gancio
+        value: gancio
+      - key: uso_al_tavolo
+        value: uso_al_tavolo
+      - key: player_safe
+        value: player_safe
+      - key: posta
+        value: posta
+      - key: prossima_mossa
+        value: prossima_mossa
+      - key: innesco
+        value: innesco
+      - key: connessioni
+        value: connessioni
+      - key: evento_scatenante
+        default: ""
+      - key: esito_parziale
+        default: ""
+      - key: esito_finale
+        default: ""
+      - key: entita_impattate
+        default: []
+      - key: propaga_a
+        default: []
+      - key: mosse
+        default: []
+      - key: scelte
+        default: []
+      - key: rischi
+        default: []
+      - key: indizi
+        default: []
+      - key: png_coinvolti
+        default: []
+      - key: ricompense
+        default: []
+      - key: conseguenze
+        default: []
+  relazione:
+    sample_values:
+      - id
+      - nome
+      - tipo
+      - mondo
+    fields:
+      - key: id
+        value: id
+      - key: nome
+        value: nome
+      - key: categoria
+        default: relazione
+      - key: tipo
+        value: tipo
+      - key: stato
+        default: bozza
+      - key: canonico
+        default: false
+      - key: stato_canonico
+        default: canonico
+      - key: mondo
+        value: mondo
+      - key: soggetti
+        value: soggetti
+      - key: origine
+        value: origine
+      - key: posta
+        value: posta
+      - key: gancio
+        value: gancio
+      - key: uso_al_tavolo
+        value: uso_al_tavolo
+      - key: player_safe
+        value: player_safe
+      - key: connessioni
+        value: connessioni
+      - key: origine_storica
+        value: origine_storica
+      - key: versioni_contrapposte
+        value: versioni_contrapposte
+      - key: simboli_riti_trattati
+        default: []
+      - key: dipendenze_materiali
+        value: dipendenze_materiali
+      - key: ferite_aperte
+        value: ferite_aperte
+      - key: intensita
+        default: 3
+      - key: pressione
+        default: 0
+      - key: stabilita
+        default: ""
+      - key: prossima_mossa
+        value: prossima_mossa
+      - key: innesco
+        default: ""
+      - key: eventi
+        default: []
+      - key: trattati
+        default: []
+      - key: conseguenze
+        default: []
+      - key: entita_impattate
+        default: []
+      - key: propaga_a
+        default: []
+      - key: scelte
+        default: []
+      - key: rischi
+        default: []
+      - key: indizi
+        default: []
+      - key: segreti
+        default: []
+  oggetto:
+    sample_values:
+      - id
+      - nome
+      - tipo
+      - mondo
+    fields:
+      - key: id
+        value: id
+      - key: nome
+        value: nome
+      - key: categoria
+        default: oggetto
+      - key: tipo
+        value: tipo
+      - key: rarita
+        value: rarita
+      - key: stato
+        default: bozza
+      - key: canonico
+        default: false
+      - key: mondo
+        value: mondo
+      - key: proprietario
+        value: proprietario
+      - key: luogo
+        value: luogo
+      - key: gancio
+        value: gancio
+      - key: uso_al_tavolo
+        value: uso_al_tavolo
+      - key: player_safe
+        value: player_safe
+      - key: pressione
+        default: 0
+      - key: prossima_mossa
+        value: prossima_mossa
+      - key: connessioni
+        value: connessioni
+      - key: sessioni
+        value: sessioni
+  mercato:
+    sample_values:
+      - id
+      - nome
+      - mondo
+    fields:
+      - key: id
+        value: id
+      - key: nome
+        value: nome
+      - key: categoria
+        default: risorsa
+      - key: fileClass
+        default: mercato
+      - key: tipo
+        default: mercato
+      - key: stato
+        default: bozza
+      - key: mondo
+        value: mondo
+      - key: luogo
+        value: luogo
+      - key: luoghi
+        value: luoghi
+      - key: regioni
+        default: []
+      - key: fazioni_controllanti
+        value: fazioni_controllanti
+      - key: fazioni
+        value: fazioni
+      - key: risorse
+        value: risorse
+      - key: rotte
+        default: []
+      - key: pedaggi
+        default: []
+      - key: rischi
+        value: rischi
+      - key: dipendenze
+        default: []
+      - key: pressione
+        default: 0
+      - key: gancio
+        value: gancio
+      - key: uso_al_tavolo
+        value: uso_al_tavolo
+      - key: player_safe
+        value: player_safe
+      - key: prossima_mossa
+        value: prossima_mossa
+      - key: connessioni
+        value: connessioni
+      - key: missioni
+        default: []
+      - key: conflitti
+        default: []
+      - key: sessioni
+        default: []
+      - key: mappe
+        default: []
+      - key: coordinate
+        default: ""
+        plugin: maps
+      - key: mappa
+        default: ""
+        plugin: maps
+      - key: layer_mappa
+        default: commerciale
+        plugin: maps
+      - key: tipo_mappa
+        default: commerciale
+        plugin: maps
+      - key: propaga_a
+        default: []
+      - key: entita_impattate
+        default: []
+      - key: conseguenze
+        default: []
+      - key: domande_aperte
+        default: []
+  rotta:
+    sample_values:
+      - id
+      - nome
+      - mondo
+    fields:
+      - key: id
+        value: id
+      - key: nome
+        value: nome
+      - key: categoria
+        default: risorsa
+      - key: fileClass
+        default: rotta
+      - key: tipo
+        default: rotta
+      - key: stato
+        default: bozza
+      - key: stato_rotta
+        value: stato_rotta
+      - key: mondo
+        value: mondo
+      - key: partenza
+        value: partenza
+      - key: arrivo
+        value: arrivo
+      - key: regioni
+        value: regioni
+      - key: luoghi
+        value: luoghi
+      - key: fazioni_controllanti
+        value: fazioni_controllanti
+      - key: fazioni
+        value: fazioni
+      - key: risorse_trasportate
+        value: risorse_trasportate
+      - key: risorse
+        value: risorse
+      - key: rischi
+        value: rischi
+      - key: pedaggi
+        value: pedaggi
+      - key: conseguenze_se_bloccata
+        value: conseguenze_se_bloccata
+      - key: conseguenze
+        value: conseguenze
+      - key: pressione
+        default: 0
+      - key: gancio
+        value: gancio
+      - key: uso_al_tavolo
+        value: uso_al_tavolo
+      - key: player_safe
+        value: player_safe
+      - key: prossima_mossa
+        value: prossima_mossa
+      - key: connessioni
+        value: connessioni
+      - key: missioni
+        default: []
+      - key: conflitti
+        default: []
+      - key: sessioni
+        default: []
+      - key: mercati
+        default: []
+      - key: mappe
+        default: []
+      - key: coordinate
+        default: ""
+        plugin: maps
+      - key: mappa
+        default: ""
+        plugin: maps
+      - key: layer_mappa
+        default: commerciale
+        plugin: maps
+      - key: tipo_mappa
+        default: commerciale
+        plugin: maps
+      - key: propaga_a
+        default: []
+      - key: entita_impattate
+        default: []
+      - key: domande_aperte
+        default: []
+  cultura:
+    sample_values:
+      - id
+      - nome
+      - mondo
+    fields:
+      - key: id
+        value: id
+      - key: nome
+        value: nome
+      - key: categoria
+        default: cultura
+      - key: tipo
+        default: cultura
+      - key: stato
+        default: bozza
+      - key: canonico
+        default: false
+      - key: stato_canonico
+        default: canonico
+      - key: mondo
+        value: mondo
+      - key: luoghi
+        value: luoghi
+      - key: lingue
+        default: []
+      - key: religioni
+        value: religioni
+      - key: fazioni
+        value: fazioni
+      - key: usi
+        default: []
+      - key: tabu
+        default: []
+      - key: feste
+        default: []
+      - key: valori
+        default: []
+      - key: estetica
+        default: []
+      - key: onore
+        default: ""
+      - key: tabu_sociali
+        default: []
+      - key: autorita_riconosciute
+        default: []
+      - key: pratiche_visibili
+        default: []
+      - key: mito_origine
+        value: mito_origine
+      - key: cose_sacre
+        value: cose_sacre
+      - key: cose_proibite
+        value: cose_proibite
+      - key: contraddizioni_interne
+        default: []
+      - key: famiglia_casa_ruoli
+        value: famiglia_casa_ruoli
+      - key: cibo_vestiario_materiali
+        default: []
+      - key: educazione_memoria
+        default: []
+      - key: economia_mestieri
+        default: []
+      - key: rapporto_stranieri
+        value: rapporto_stranieri
+      - key: relazioni_esterne
+        default: []
+      - key: conflitti_interni
+        default: []
+      - key: relazioni
+        default: []
+      - key: gancio
+        value: gancio
+      - key: uso_al_tavolo
+        value: uso_al_tavolo
+      - key: player_safe
+        value: player_safe
+      - key: tratto_distintivo
+        value: tratto_distintivo
+      - key: connessioni
+        value: connessioni
+      - key: propaga_a
+        default: []
+      - key: entita_impattate
+        default: []
+      - key: promesse_al_tavolo
+        default: []
+      - key: scelte
+        default: []
+      - key: rischi
+        default: []
+      - key: indizi
+        default: []
+      - key: png_coinvolti
+        default: []
+      - key: ricompense
+        default: []
+      - key: conseguenze
+        default: []
+      - key: prossima_mossa
+        value: prossima_mossa
+      - key: leggi
+        default: []
+      - key: risorse
+        default: []
+      - key: tensioni
+        value: tensioni
+      - key: segreti
+        value: segreti
+      - key: domande_aperte
+        default: []

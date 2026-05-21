@@ -36,67 +36,32 @@ async function luogo(tp, routeOptions = {}){
     await helpers.linkCreatedNoteToActiveSession(created, { sessionField: "luoghi" });
     await helpers.linkCreatedNoteToConnections(created, connessioni);
 
-    return `---
-id: ${id}
-nome: ${helpers.yamlQuote(name)}
-categoria: luogo
-fileClass: luogo
-famiglia_luogo: ${route.category ?? ""}
-tipo: ${selectedType?.id ?? ""}
-sottotipo: ${selectedType?.id ?? ""}
-tipologia: ${selectedType?.id ?? ""}
-bioma: ${selectedBiome?.id ?? ""}
-stato: bozza
-canonico: false
-stato_canonico: canonico
-mondo: ${mondo}
-luogo_padre: ${luogoPadre}
-governante: ${governante}
-popolazione:
-stabilita:
-pericolo: ${pericolo}
-pressione: 0
-legittimita:
-capitale:
-impressione: ${helpers.yamlQuote(impressione)}
-gancio: ${helpers.yamlQuote(gancio)}
-uso_al_tavolo: ${helpers.yamlQuote(usoAlTavolo)}
-player_safe: ${helpers.yamlQuote(playerSafe)}
-funzione_narrativa: ${helpers.yamlQuote(funzioneNarrativa)}
-tensione: ${helpers.yamlQuote(tensione)}
-promessa_al_tavolo:
-confini: []
-vassalli: []
-alleati: []
-rivali: []
-relazioni: []
-culture: []
-risorse_strategiche: []
-eserciti: []
-crisi_interne: []
-scelte: []
-rischi: []
-ricompense: []
-hp_massimi:
-hp_attuali:
-fazioni: ${helpers.inlineYamlList(fazioni)}
-religioni: []
-personaggi: ${helpers.inlineYamlList(personaggi)}
-missioni: ${helpers.inlineYamlList(missioni)}
-sessioni: ${helpers.inlineYamlList(sessioni)}
-risorse: []
-problemi: []
-conseguenze: []
-segreti: ${helpers.inlineYamlTextList([veritaNascosta])}
-indizi: []
-voci: []
-scene: []
-prossima_mossa:
-domande_aperte: ${helpers.inlineYamlTextList([domandaAperta])}
-connessioni: ${helpers.inlineYamlList(connessioni)}
-collegamenti_mancanti: []
----
-`
+    return await helpers.renderFrontmatter("luogo", {
+        id,
+        nome: helpers.yamlQuote(name),
+        famiglia_luogo: route.category ?? "",
+        tipo: selectedType?.id ?? "",
+        sottotipo: selectedType?.id ?? "",
+        tipologia: selectedType?.id ?? "",
+        bioma: selectedBiome?.id ?? "",
+        mondo,
+        luogo_padre: luogoPadre,
+        governante,
+        pericolo,
+        impressione: helpers.yamlQuote(impressione),
+        gancio: helpers.yamlQuote(gancio),
+        uso_al_tavolo: helpers.yamlQuote(usoAlTavolo),
+        player_safe: helpers.yamlQuote(playerSafe),
+        funzione_narrativa: helpers.yamlQuote(funzioneNarrativa),
+        tensione: helpers.yamlQuote(tensione),
+        fazioni: helpers.inlineYamlList(fazioni),
+        personaggi: helpers.inlineYamlList(personaggi),
+        missioni: helpers.inlineYamlList(missioni),
+        sessioni: helpers.inlineYamlList(sessioni),
+        segreti: helpers.inlineYamlTextList([veritaNascosta]),
+        domande_aperte: helpers.inlineYamlTextList([domandaAperta]),
+        connessioni: helpers.inlineYamlList(connessioni)
+    });
 }
 
 module.exports = luogo;

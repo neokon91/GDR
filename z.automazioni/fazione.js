@@ -29,55 +29,32 @@ async function fazione(tp, routeOptions = {}) {
     const created = await helpers.moveNote(tp, helpers.path("fazioni"), name);
     await helpers.linkCreatedNoteToConnections(created, connessioni);
 
-    return `---
-id: ${id}
-nome: ${helpers.yamlQuote(name)}
-categoria: fazione
-fileClass: fazione
-tipo: ${selectedType?.id ?? ""}
-stato: bozza
-canonico: false
-stato_canonico: canonico
-mondo: ${mondo}
-leader: ${helpers.inlineYamlList(leader)}
-luoghi: ${helpers.inlineYamlList(luoghi)}
-personaggi: ${helpers.inlineYamlList(personaggi)}
-missioni: ${helpers.inlineYamlList(missioni)}
-obiettivo: ${helpers.yamlQuote(obiettivo)}
-gancio: ${helpers.yamlQuote(gancio)}
-uso_al_tavolo: ${helpers.yamlQuote(prossimaMossa || obiettivo)}
-player_safe: ${helpers.yamlQuote(playerSafe)}
-obiettivo_nascosto: ${helpers.yamlQuote(obiettivoNascosto)}
-agenda: ${helpers.yamlQuote(obiettivo)}
-influenza:
-pressione: ${helpers.yamlNumber(pressione) || 0}
-prossima_mossa: ${helpers.yamlQuote(prossimaMossa)}
-scadenza_mondo: ${helpers.yamlQuote(scadenzaMondo)}
-progress_value: 0
-progress_max: 6
-innesco: ${helpers.yamlQuote(prossimaMossa ? "Tempo, fallimento dei PG o vantaggio della fazione" : "")}
-escalation: []
-posta: ${helpers.yamlQuote(obiettivo)}
-mosse_visibili: []
-mosse_segrete: []
-scelte: []
-rischi: []
-indizi: []
-ricompense: []
-risorse: []
-debolezze: []
-alleati: ${helpers.inlineYamlList(alleati)}
-rivali: ${helpers.inlineYamlList(rivali)}
-trattati: []
-relazioni: []
-eventi: []
-propaga_a: []
-conseguenze: []
-segreti: ${helpers.inlineYamlTextList([segreto])}
-domande_aperte: ${helpers.inlineYamlTextList([domandaAperta])}
-connessioni: ${helpers.inlineYamlList(connessioni)}
----
-`;
+    return await helpers.renderFrontmatter("fazione", {
+        id,
+        nome: helpers.yamlQuote(name),
+        tipo: selectedType?.id ?? "",
+        mondo,
+        leader: helpers.inlineYamlList(leader),
+        luoghi: helpers.inlineYamlList(luoghi),
+        personaggi: helpers.inlineYamlList(personaggi),
+        missioni: helpers.inlineYamlList(missioni),
+        obiettivo: helpers.yamlQuote(obiettivo),
+        gancio: helpers.yamlQuote(gancio),
+        uso_al_tavolo: helpers.yamlQuote(prossimaMossa || obiettivo),
+        player_safe: helpers.yamlQuote(playerSafe),
+        obiettivo_nascosto: helpers.yamlQuote(obiettivoNascosto),
+        agenda: helpers.yamlQuote(obiettivo),
+        pressione: helpers.yamlNumber(pressione) || 0,
+        prossima_mossa: helpers.yamlQuote(prossimaMossa),
+        scadenza_mondo: helpers.yamlQuote(scadenzaMondo),
+        innesco: helpers.yamlQuote(prossimaMossa ? "Tempo, fallimento dei PG o vantaggio della fazione" : ""),
+        posta: helpers.yamlQuote(obiettivo),
+        alleati: helpers.inlineYamlList(alleati),
+        rivali: helpers.inlineYamlList(rivali),
+        segreti: helpers.inlineYamlTextList([segreto]),
+        domande_aperte: helpers.inlineYamlTextList([domandaAperta]),
+        connessioni: helpers.inlineYamlList(connessioni)
+    });
 }
 
 module.exports = fazione;

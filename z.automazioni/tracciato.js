@@ -30,44 +30,27 @@ async function tracciato(tp) {
     await helpers.linkCreatedNoteToActiveSession(created, { sessionField: "tracciati" });
     await helpers.linkCreatedNoteToConnections(created, connessioni);
 
-    return `---
-id: ${id}
-nome: ${helpers.yamlQuote(name)}
-categoria: tracciato
-fileClass: tracciato
-tipo: ${selectedType?.id ?? "clock"}
-stato: attivo
-mondo: ${mondo}
-campagne: ${helpers.inlineYamlList(campagne)}
-missioni: ${helpers.inlineYamlList(missioni)}
-fazioni: ${helpers.inlineYamlList(fazioni)}
-luoghi: ${helpers.inlineYamlList(luoghi)}
-personaggi: ${helpers.inlineYamlList(personaggi)}
-sessioni: ${helpers.inlineYamlList(sessioni)}
-progress_value: ${helpers.yamlNumber(progressValue) || 0}
-progress_max: ${helpers.yamlNumber(progressMax) || 6}
-pressione: 0
-gancio: ${helpers.yamlQuote(gancio)}
-uso_al_tavolo: ${helpers.yamlQuote(usoAlTavolo)}
-player_safe: ${helpers.yamlQuote(playerSafe)}
-posta: ${helpers.yamlQuote(posta)}
-prossima_mossa: ${helpers.yamlQuote(prossimaMossa)}
-innesco: ${helpers.yamlQuote(innesco)}
-connessioni: ${helpers.inlineYamlList(connessioni)}
-evento_scatenante:
-esito_parziale:
-esito_finale:
-entita_impattate: []
-propaga_a: []
-mosse: []
-scelte: []
-rischi: []
-indizi: []
-png_coinvolti: []
-ricompense: []
-conseguenze: []
----
-`;
+    return await helpers.renderFrontmatter("tracciato", {
+        id,
+        nome: helpers.yamlQuote(name),
+        tipo: selectedType?.id ?? "clock",
+        mondo,
+        campagne: helpers.inlineYamlList(campagne),
+        missioni: helpers.inlineYamlList(missioni),
+        fazioni: helpers.inlineYamlList(fazioni),
+        luoghi: helpers.inlineYamlList(luoghi),
+        personaggi: helpers.inlineYamlList(personaggi),
+        sessioni: helpers.inlineYamlList(sessioni),
+        progress_value: helpers.yamlNumber(progressValue) || 0,
+        progress_max: helpers.yamlNumber(progressMax) || 6,
+        gancio: helpers.yamlQuote(gancio),
+        uso_al_tavolo: helpers.yamlQuote(usoAlTavolo),
+        player_safe: helpers.yamlQuote(playerSafe),
+        posta: helpers.yamlQuote(posta),
+        prossima_mossa: helpers.yamlQuote(prossimaMossa),
+        innesco: helpers.yamlQuote(innesco),
+        connessioni: helpers.inlineYamlList(connessioni)
+    });
 }
 
 module.exports = tracciato;

@@ -64,3 +64,5 @@ Il resto del file e Markdown statico generato da Jinja: tabs, callout, Meta Bind
 | `bases_views.yaml` | Contratti per viste `.base`. |
 | `frontmatter_profiles.yaml` | Ordine, default e chiavi del frontmatter generato dagli script. |
 | `runtime_profiles.yaml` | Prompt, opzioni e default usati dagli script Templater sottili. |
+
+`frontmatter_profiles.yaml` distingue campi core, campi di dominio e campi legati a plugin come Calendarium o Maps. `check:templates` renderizza un campione per ogni profilo e verifica che il frontmatter risultante sia YAML valido.

@@ -27,26 +27,21 @@ async function oggetto(tp) {
     await helpers.linkCreatedNoteToActiveSession(created, { sessionField: "oggetti" });
     await helpers.linkCreatedNoteToConnections(created, connessioni);
 
-    return `---
-id: ${id}
-nome: ${helpers.yamlQuote(name)}
-categoria: oggetto
-tipo: ${selectedType?.id ?? ""}
-rarita: ${selectedRarity?.id ?? ""}
-stato: bozza
-canonico: false
-mondo: ${mondo}
-proprietario: ${proprietario}
-luogo: ${luogo}
-gancio: ${helpers.yamlQuote(gancio)}
-uso_al_tavolo: ${helpers.yamlQuote(usoAlTavolo)}
-player_safe: ${helpers.yamlQuote(playerSafe)}
-pressione: 0
-prossima_mossa: ${helpers.yamlQuote(prossimaMossa)}
-connessioni: ${helpers.inlineYamlList(connessioni)}
-sessioni: ${helpers.inlineYamlList(sessioni)}
----
-`;
+    return await helpers.renderFrontmatter("oggetto", {
+        id,
+        nome: helpers.yamlQuote(name),
+        tipo: selectedType?.id ?? "",
+        rarita: selectedRarity?.id ?? "",
+        mondo,
+        proprietario,
+        luogo,
+        gancio: helpers.yamlQuote(gancio),
+        uso_al_tavolo: helpers.yamlQuote(usoAlTavolo),
+        player_safe: helpers.yamlQuote(playerSafe),
+        prossima_mossa: helpers.yamlQuote(prossimaMossa),
+        connessioni: helpers.inlineYamlList(connessioni),
+        sessioni: helpers.inlineYamlList(sessioni)
+    });
 }
 
 module.exports = oggetto;

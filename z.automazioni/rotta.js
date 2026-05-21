@@ -28,47 +28,29 @@ async function rotta(tp) {
     const created = await helpers.moveNote(tp, helpers.path("rotte"), name);
     await helpers.linkCreatedNoteToConnections(created, connessioni);
 
-    return `---
-id: ${id}
-nome: ${helpers.yamlQuote(name)}
-categoria: risorsa
-fileClass: rotta
-tipo: rotta
-stato: bozza
-stato_rotta: ${statoRotta.id}
-mondo: ${mondo}
-partenza: ${partenza}
-arrivo: ${arrivo}
-regioni: ${helpers.inlineYamlList(regioni)}
-luoghi: ${helpers.inlineYamlList([partenza, arrivo, ...regioni])}
-fazioni_controllanti: ${helpers.inlineYamlList(fazioni)}
-fazioni: ${helpers.inlineYamlList(fazioni)}
-risorse_trasportate: ${helpers.inlineYamlList(risorse)}
-risorse: ${helpers.inlineYamlList(risorse)}
-rischi: ${helpers.inlineYamlTextList([rischio])}
-pedaggi: ${helpers.inlineYamlTextList([pedaggio])}
-conseguenze_se_bloccata: ${helpers.inlineYamlTextList([conseguenza])}
-conseguenze: ${helpers.inlineYamlTextList([conseguenza])}
-pressione: 0
-gancio: ${helpers.yamlQuote(gancio)}
-uso_al_tavolo: ${helpers.yamlQuote(usoAlTavolo)}
-player_safe: ${helpers.yamlQuote(playerSafe)}
-prossima_mossa: ${helpers.yamlQuote(prossimaMossa)}
-connessioni: ${helpers.inlineYamlList(connessioni)}
-missioni: []
-conflitti: []
-sessioni: []
-mercati: []
-mappe: []
-coordinate:
-mappa:
-layer_mappa: commerciale
-tipo_mappa: commerciale
-propaga_a: []
-entita_impattate: []
-domande_aperte: []
----
-
+    return `${await helpers.renderFrontmatter("rotta", {
+        id,
+        nome: helpers.yamlQuote(name),
+        stato_rotta: statoRotta.id,
+        mondo,
+        partenza,
+        arrivo,
+        regioni: helpers.inlineYamlList(regioni),
+        luoghi: helpers.inlineYamlList([partenza, arrivo, ...regioni]),
+        fazioni_controllanti: helpers.inlineYamlList(fazioni),
+        fazioni: helpers.inlineYamlList(fazioni),
+        risorse_trasportate: helpers.inlineYamlList(risorse),
+        risorse: helpers.inlineYamlList(risorse),
+        rischi: helpers.inlineYamlTextList([rischio]),
+        pedaggi: helpers.inlineYamlTextList([pedaggio]),
+        conseguenze_se_bloccata: helpers.inlineYamlTextList([conseguenza]),
+        conseguenze: helpers.inlineYamlTextList([conseguenza]),
+        gancio: helpers.yamlQuote(gancio),
+        uso_al_tavolo: helpers.yamlQuote(usoAlTavolo),
+        player_safe: helpers.yamlQuote(playerSafe),
+        prossima_mossa: helpers.yamlQuote(prossimaMossa),
+        connessioni: helpers.inlineYamlList(connessioni)
+    })}
 `;
 }
 

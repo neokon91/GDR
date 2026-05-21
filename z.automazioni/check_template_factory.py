@@ -6,6 +6,8 @@ import sys
 import re
 from pathlib import Path
 
+import yaml
+
 sys.dont_write_bytecode = True
 
 from template_factory_utils import (
@@ -145,16 +147,31 @@ def validate_runtime_profiles(modules: dict[str, dict], errors: list[str]) -> No
 
 
 def validate_frontmatter_profiles(modules: dict[str, dict], errors: list[str]) -> None:
-    profiles = modules["frontmatter_profiles"].get("profiles", {})
+    frontmatter = modules["frontmatter_profiles"]
+    profiles = frontmatter.get("profiles", {})
     if not profiles:
         fail("frontmatter_profiles: nessun profilo definito", errors)
         return
+    field_names = collect_field_names(modules["fields_core"])
+    plugin_fields = {
+        field
+        for binding in modules["plugin_bindings"].get("bindings", {}).values()
+        for field in binding.get("fields", []) or []
+    }
+    declared_plugin_fields = {
+        field
+        for fields in frontmatter.get("field_catalog", {}).get("plugin_fields", {}).values()
+        for field in fields or []
+    }
+    domain_fields = set(frontmatter.get("field_catalog", {}).get("domain_fields", []) or [])
+    known_fields = field_names | plugin_fields | declared_plugin_fields | domain_fields
 
     for profile_id, profile in profiles.items():
         fields = profile.get("fields", [])
         if not isinstance(fields, list) or not fields:
             fail(f"frontmatter_profiles.{profile_id}: fields mancante o vuoto", errors)
             continue
+        sample_values = set(profile.get("sample_values", []) or [])
 
         seen: set[str] = set()
         for index, field in enumerate(fields):
@@ -169,6 +186,48 @@ def validate_frontmatter_profiles(modules: dict[str, dict], errors: list[str]) -
 
             if "value" not in field and "default" not in field:
                 fail(f"frontmatter_profiles.{profile_id}.{key}: richiede value o default", errors)
+            if key not in known_fields:
+                fail(f"frontmatter_profiles.{profile_id}.{key}: campo non presente in fields_core/plugin/domain catalog", errors)
+            if field.get("plugin") and key not in declared_plugin_fields and key not in plugin_fields:
+                fail(f"frontmatter_profiles.{profile_id}.{key}: plugin field non dichiarato ({field.get('plugin')})", errors)
+            if field.get("value") and field["value"] in sample_values:
+                sample_values.remove(field["value"])
+
+        for missing in sorted(sample_values):
+            fail(f"frontmatter_profiles.{profile_id}: sample value non usato ({missing})", errors)
+
+        validate_frontmatter_sample(profile_id, profile, errors)
+
+
+def render_frontmatter_sample(profile: dict) -> str:
+    sample_values = {key: f"sample_{key}" for key in profile.get("sample_values", []) or []}
+    lines = []
+    for field in profile.get("fields", []) or []:
+        value_key = field.get("value")
+        value = sample_values.get(value_key, field.get("default", ""))
+        if isinstance(value, list):
+            rendered = "[]"
+        elif isinstance(value, bool):
+            rendered = "true" if value else "false"
+        else:
+            rendered = str(value)
+        lines.append(f"{field.get('key')}: {rendered}")
+    return "---\n" + "\n".join(lines) + "\n---\n"
+
+
+def validate_frontmatter_sample(profile_id: str, profile: dict, errors: list[str]) -> None:
+    rendered = render_frontmatter_sample(profile)
+    match = re.match(r"^---\n([\s\S]*?)\n---\n?$", rendered)
+    if not match:
+        fail(f"frontmatter_profiles.{profile_id}: sample frontmatter senza delimitatori validi", errors)
+        return
+    try:
+        parsed = yaml.safe_load(match.group(1)) or {}
+    except yaml.YAMLError as exc:
+        fail(f"frontmatter_profiles.{profile_id}: sample frontmatter YAML non valido ({exc})", errors)
+        return
+    if not isinstance(parsed, dict):
+        fail(f"frontmatter_profiles.{profile_id}: sample frontmatter non produce un oggetto YAML", errors)
 
 
 def validate_rendering(modules: dict[str, dict], errors: list[str]) -> None:
