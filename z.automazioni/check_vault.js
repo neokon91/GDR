@@ -120,6 +120,14 @@ const REQUIRED_LAYER_FILES = [
     "z.engine/gdr_views.js",
     "z.engine/session_views.js"
 ];
+const REQUIRED_PLUGIN_NATIVE_USER_PAGES = [
+    "Risorse/Setup Guidato.md",
+    "Risorse/Se Qualcosa Non Funziona.md",
+    "Risorse/Prima Sessione In 15 Minuti.md",
+    "Risorse/Materiali Al Tavolo.md",
+    "Risorse/Importare Mappe.md",
+    "Risorse/Mappe/Mappe.md"
+];
 const DEMO_REQUIRED_FILES = [
     "Mondi/Brumafonda Demo.md",
     "Campagne/Campagna - Sale Sotto La Nebbia.md",
@@ -681,6 +689,13 @@ const realEntries = [...markdownMeta.entries()]
 
 const generatedDrafts = realEntries
     .filter(([fileRel, fm]) => isGeneratedFantasyDraft(fileRel, fm) && fm.stato === "bozza");
+
+for (const fileRel of REQUIRED_PLUGIN_NATIVE_USER_PAGES) {
+    const text = readRel(fileRel);
+    if (!hasPluginNativeSheet(text)) {
+        warnings.push(`${fileRel}: pagina utente chiave senza struttura plugin-native completa`);
+    }
+}
 
 if (generatedDrafts.length > 12) {
     warnings.push(`Inbox/Generati: ${generatedDrafts.length} bozze generate da smistare`);

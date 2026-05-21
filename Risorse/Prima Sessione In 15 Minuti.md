@@ -10,6 +10,57 @@ stato: pronto
 
 Questa guida serve per giocare subito senza capire tutta la struttura del vault. Segui i passi in ordine: prepari una sessione minima, la rendi attiva, giochi, poi trasformi quello che succede in conseguenze.
 
+````tabs
+tab: Parti
+
+> [!regia] Avvio Rapido
+> `BUTTON[setup-guidato-risorse-setup-guidato-2]`
+>
+> `BUTTON[inizia-qui-inizia-qui]`
+>
+> `BUTTON[preparazione-sessione-risorse-preparazione-sessione]`
+>
+> `BUTTON[durante-il-gioco-durante-il-gioco]`
+
+tab: Sessione
+
+> [!scena] Minimo Giocabile
+> Obiettivo, apertura, PNG, luogo, missione, clock e 1-3 segreti bastano per iniziare.
+>
+> ```dataviewjs
+> const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+> gdr.renderActiveSessionBanner(dv);
+> ```
+
+tab: Dopo
+
+> [!timer] Chiusura
+> `BUTTON[post-sessione-guidato-risorse-post-sessione-guidato]`
+>
+> ```dataviewjs
+> const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+> gdr.renderPostSessionCommandCenter(dv);
+> ```
+
+tab: Checklist
+
+> [!todo] Fine Giro
+> - [ ] Una sola sessione ha `attiva: true`. #task
+> - [ ] La sessione giocata ha un breve resoconto. #task
+> - [ ] I fatti veri sono segnati come canonici o collegati. #task
+> - [ ] Missioni e clock hanno stato aggiornato. #task
+> - [ ] Almeno una conseguenza ha `entita_impattate` o `propaga_a`. #task
+> - [ ] La prossima sessione ha una prima scena. #task
+````
+
+## Fallback Markdown
+
+| Passo | Dove |
+| --- | --- |
+| Preparare | [[Risorse/Preparazione Sessione]] |
+| Giocare | [[Durante il Gioco]] |
+| Chiudere | [[Risorse/Post Sessione Guidato]] |
+
 ## 1. Controlla Che Il Vault Sia Pronto
 
 `BUTTON[setup-guidato-risorse-setup-guidato-2]`

@@ -10,6 +10,50 @@ stato: pronto
 
 Usa questa pagina dopo aver aperto il vault per la prima volta. Non serve capire gli strumenti interni: guarda cosa e pronto e cosa richiede attenzione.
 
+````tabs
+tab: Stato
+
+> [!regia] Controllo Plugin
+> ```dataviewjs
+> const enabled = id => app.plugins.enabledPlugins.has(id);
+> const checks = [
+>   ["Pulsanti", enabled("obsidian-meta-bind-plugin") && enabled("templater-obsidian")],
+>   ["Tabelle", enabled("dataview")],
+>   ["Campi guidati", enabled("metadata-menu")],
+>   ["Mappe e schemi", enabled("obsidian-excalidraw-plugin")],
+>   ["Tiri rapidi", enabled("obsidian-dice-roller")],
+>   ["Calendario", enabled("calendarium")]
+> ];
+> dv.table(["Area", "Stato"], checks.map(([label, ok]) => [label, ok ? "Pronto" : "Da controllare"]));
+> ```
+
+tab: Apri
+
+> [!scena] Percorso Utente
+> `BUTTON[inizia-qui-inizia-qui]`
+>
+> `BUTTON[prima-sessione-in-15-minuti-risorse-prima-sessione-in-15-minuti]`
+>
+> `BUTTON[dm-dashboard-1-dm-dashboard]`
+>
+> `BUTTON[durante-il-gioco-durante-il-gioco]`
+
+tab: Se Non Va
+
+> [!todo] Ripristino
+> - [ ] Apri [[Risorse/Primo Avvio Strumenti]]. #task
+> - [ ] Riavvia Obsidian. #task
+> - [ ] Riapri questa pagina. #task
+> - [ ] Se il problema resta, apri [[Risorse/Se Qualcosa Non Funziona]]. #task
+````
+
+## Fallback Markdown
+
+| Area | Azione |
+| --- | --- |
+| Setup | Apri [[Risorse/Primo Avvio Strumenti]] |
+| Giocare subito | Apri [[Risorse/Prima Sessione In 15 Minuti]] |
+
 ## Stato Del Vault
 
 ```dataviewjs

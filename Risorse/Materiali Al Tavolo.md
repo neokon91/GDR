@@ -10,6 +10,57 @@ stato: pronto
 
 Questa pagina controlla cosa e pronto per la sessione attiva: dispense, mappe, immagini, audio, incontri e creature.
 
+````tabs
+tab: Pronto Ora
+
+> [!regia] Sessione Attiva
+> ```dataviewjs
+> const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+> gdr.renderLiveCommandCenter(dv);
+> ```
+
+tab: Materiali
+
+> [!lettura] Dispense E Media
+> ```dataviewjs
+> const active = dv.pages('"Mondi/Sessioni"').where(p => p.attiva === true).first();
+> const rows = [
+>   ...dv.array(active?.dispense ?? []).array().map(x => [x, "Dispensa"]),
+>   ...dv.array(active?.audio ?? []).array().map(x => [x, "Audio"]),
+>   ...dv.array(active?.immagini ?? []).array().map(x => [x, "Immagine"]),
+>   ...dv.array(active?.video ?? []).array().map(x => [x, "Video"])
+> ];
+> if (!active) dv.paragraph("Nessuna sessione attiva.");
+> else if (!rows.length) dv.paragraph("Nessun materiale collegato alla sessione attiva.");
+> else dv.table(["Materiale", "Tipo"], rows);
+> ```
+
+tab: Mappe
+
+> [!mappa] Mappe Sessione
+> ```dataviewjs
+> const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+> gdr.renderSessionMapCards(dv);
+> ```
+
+tab: Azioni
+
+> [!todo] Controllo Finale
+> - [ ] Una sessione e attiva. #task
+> - [ ] Le dispense da mostrare sono collegate. #task
+> - [ ] Mappe e schemi sono apribili. #task
+> - [ ] Incontri e creature sono pronti. #task
+> - [ ] Audio, immagini o video sono collegati solo se servono davvero. #task
+````
+
+## Fallback Markdown
+
+| Area | Controllo |
+| --- | --- |
+| Sessione | Una sola sessione attiva |
+| Mappe | Collegate alla sessione o agli incontri |
+| Dispense | Player-safe se consegnate |
+
 ## Sessione Attiva
 
 ```dataview

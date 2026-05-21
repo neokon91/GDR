@@ -10,6 +10,52 @@ stato: pronto
 
 Usa questa pagina quando dashboard, pulsanti, tabelle o statblock non si comportano come previsto.
 
+````tabs
+tab: Diagnosi
+
+> [!regia] Prima Verifica
+> ```dataviewjs
+> const enabled = id => app.plugins.enabledPlugins.has(id);
+> const checks = [
+>   ["Dataview", enabled("dataview"), "Tabelle e DataviewJS"],
+>   ["Templater", enabled("templater-obsidian"), "Wizard e creazione note"],
+>   ["Meta Bind", enabled("obsidian-meta-bind-plugin"), "Input e pulsanti"],
+>   ["Tasks", enabled("obsidian-tasks-plugin"), "Checklist operative"],
+>   ["CSS", true, "Attiva snippet gdr-vault se la grafica e piatta"]
+> ];
+> dv.table(["Strumento", "Stato", "Serve per"], checks.map(([a,b,c]) => [a, b ? "Pronto" : "Da controllare", c]));
+> ```
+
+tab: Ripara
+
+> [!todo] Percorso Rapido
+> - [ ] Riavvia Obsidian. #task
+> - [ ] Apri [[Risorse/Setup Guidato]]. #task
+> - [ ] Apri [[Risorse/Primo Avvio Strumenti]]. #task
+> - [ ] Riprova da [[Risorse/Prima Sessione In 15 Minuti]]. #task
+
+tab: Sintomi
+
+> [!lettura] Problemi Comuni
+> Le tabelle richiedono Dataview; i pulsanti richiedono Meta Bind e Templater; i tiri `dice:` richiedono Dice Roller; le schede creatura richiedono Fantasy Statblocks.
+
+tab: Qualita
+
+> [!regia] Controlli
+> - [[Risorse/Controllo Vault]]
+> - [[Risorse/Quality Report]]
+> - `npm run check` nel repository sorgente
+> - `npm run release:clean` prima di creare lo ZIP utente
+````
+
+## Fallback Markdown
+
+| Sintomo | Prima azione |
+| --- | --- |
+| Tabelle vuote | Controlla Dataview |
+| Pulsanti rotti | Controlla Meta Bind e Templater |
+| Grafica piatta | Attiva snippet `gdr-vault` |
+
 ## Prima Verifica
 
 1. Controlla gli strumenti necessari in [[Risorse/Primo Avvio Strumenti]].

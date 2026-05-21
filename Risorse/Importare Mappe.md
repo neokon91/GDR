@@ -10,6 +10,56 @@ stato: pronto
 
 Questa pagina serve a portare mappe esterne nel vault senza trasformarle automaticamente in canone.
 
+````tabs
+tab: Scegli
+
+> [!mappa] Fonte
+> | Fonte | Quando usarla | Comando |
+> | --- | --- | --- |
+> | Azgaar GeoJSON | Continenti, stati, regioni, burg e geografia ampia. | `npm run import:azgaar` |
+> | Watabou City JSON | Una citta o insediamento dettagliato. | `npm run import:watabou:city` |
+> | Watabou One Page Dungeon JSON | Un dungeon rapido da rifinire. | `npm run import:watabou:dungeon` |
+
+tab: Dry Run
+
+> [!regia] Prova Senza Scrivere
+> ```bash
+> npm run import:azgaar -- "Import/Azgaar/mappa.geojson" --world "Nome Mondo" --dry-run
+> npm run import:watabou:city -- "Import/Watabou/citta.json" --world "Nome Mondo" --dry-run
+> npm run import:watabou:dungeon -- "Import/Watabou/dungeon.json" --world "Nome Mondo" --dry-run
+> ```
+
+tab: Dopo
+
+> [!todo] Canonizza Solo Cio Che Serve
+> ```tasks
+> not done
+> path includes Inbox/Generati
+> sort by priority
+> ```
+>
+> - [ ] Apri [[Mondi/Luoghi/Luoghi]]. #task
+> - [ ] Collega mondo, fazioni, culture e missioni. #task
+> - [ ] Porta a `pronto` solo cio che userai. #task
+> - [ ] Lascia il resto in `bozza` o archivialo. #task
+
+tab: Viste
+
+> [!regia] Dove Controllare
+> - [[Atlante del Mondo]]
+> - [[z.bases/Atlante Mappe.base]]
+> - [[Risorse/Mappe/Mappe]]
+> - [[Risorse/Smistamento Bozze Generate]]
+````
+
+## Fallback Markdown
+
+| Fonte | Output |
+| --- | --- |
+| Azgaar | Bozze luogo/geografia |
+| Watabou City | Bozza insediamento + mappa |
+| Watabou Dungeon | Bozza dungeon |
+
 ## Regola
 
 La mappa esterna produce bozze. Il DM decide cosa tenere, collegare e rendere canonico.
