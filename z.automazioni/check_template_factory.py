@@ -38,6 +38,7 @@ REQUIRED_MODULES = {
     "runtime_profiles",
     "entity_depth",
     "taxonomy_depth",
+    "dnd55_options",
     "workflows",
 }
 CRITICAL_RENDERED_GENERATORS = {
@@ -144,7 +145,26 @@ def validate_runtime_profiles(modules: dict[str, dict], errors: list[str]) -> No
         if "prompts" not in profile or not isinstance(profile.get("prompts"), dict):
             fail(f"runtime_profiles.{profile_id}: prompts mancante o non oggetto", errors)
 
-        for option_group in ("type_options", "biome_options", "rarity_options", "status_options"):
+        for option_group in (
+            "type_options",
+            "biome_options",
+            "rarity_options",
+            "status_options",
+            "size_options",
+            "alignment_options",
+            "level_options",
+            "school_options",
+            "casting_time_options",
+            "component_options",
+            "range_options",
+            "duration_options",
+            "class_options",
+            "species_options",
+            "background_options",
+            "difficulty_options",
+            "damage_options",
+            "condition_options",
+        ):
             options = profile.get(option_group, [])
             if options and not isinstance(options, list):
                 fail(f"runtime_profiles.{profile_id}.{option_group}: deve essere una lista", errors)
@@ -155,6 +175,20 @@ def validate_runtime_profiles(modules: dict[str, dict], errors: list[str]) -> No
 
         if profile.get("type_options") and not profile.get("type_prompt"):
             fail(f"runtime_profiles.{profile_id}: type_prompt mancante con type_options presenti", errors)
+
+        option_sources = profile.get("option_sources", {}) or {}
+        if option_sources and not isinstance(option_sources, dict):
+            fail(f"runtime_profiles.{profile_id}: option_sources deve essere un oggetto", errors)
+            continue
+        dnd55_groups = modules.get("dnd55_options", {}).get("groups", {})
+        for source_key, source_ref in option_sources.items():
+            source_ref = str(source_ref)
+            if not source_ref.startswith("dnd55_options."):
+                fail(f"runtime_profiles.{profile_id}.{source_key}: option_source non supportata ({source_ref})", errors)
+                continue
+            group_id = source_ref.split(".", 1)[1]
+            if group_id not in dnd55_groups:
+                fail(f"runtime_profiles.{profile_id}.{source_key}: gruppo dnd55_options mancante ({group_id})", errors)
 
 
 def validate_profile_symmetry(modules: dict[str, dict], errors: list[str]) -> None:
@@ -540,6 +574,7 @@ def validate_taxonomy_depth_contracts(modules: dict[str, dict], errors: list[str
     layouts = modules["tabs"].get("layouts", {})
     bindings = modules["plugin_bindings"]
     plugin_bindings = bindings.get("bindings", {})
+    dnd55_option_groups = set(modules["dnd55_options"].get("groups", {}))
 
     for family_id, family in families.items():
         for folder in family.get("source_folders", []) or []:
@@ -588,6 +623,75 @@ def validate_taxonomy_depth_contracts(modules: dict[str, dict], errors: list[str
                 if field not in profile_fields:
                     fail(f"taxonomy_depth.{family_id}.{profile_id}: campo non esposto dal profilo ({field})", errors)
 
+            for option_group in contract.get("option_groups", []) or []:
+                option_group = str(option_group)
+                if option_group not in dnd55_option_groups:
+                    fail(f"taxonomy_depth.{family_id}.{profile_id}: option_group D&D 5.5 mancante ({option_group})", errors)
+
+
+def validate_dnd55_options(modules: dict[str, dict], errors: list[str]) -> None:
+    options = modules["dnd55_options"]
+    if options.get("language") != "it":
+        fail("dnd55_options: language deve essere it", errors)
+
+    groups = options.get("groups", {})
+    if not isinstance(groups, dict) or not groups:
+        fail("dnd55_options: nessun gruppo valori definito", errors)
+        return
+
+    required_groups = {
+        "livelli_incantesimo",
+        "scuole_magia",
+        "tempi_lancio",
+        "componenti_incantesimo",
+        "gittate_incantesimo",
+        "durate_incantesimo",
+        "classi",
+        "specie",
+        "background",
+        "tipi_creatura",
+        "taglie",
+        "allineamenti",
+        "rarita",
+        "azioni",
+        "caratteristiche",
+        "tiri_salvezza",
+        "grado_sfida",
+        "difficolta_cd",
+        "dadi_danno",
+        "tipi_danno",
+        "condizioni",
+        "categorie_equipaggiamento",
+        "proprieta_armi",
+    }
+    for group in sorted(required_groups - set(groups)):
+        fail(f"dnd55_options: gruppo obbligatorio mancante ({group})", errors)
+
+    for group_id, group in groups.items():
+        if not isinstance(group, dict):
+            fail(f"dnd55_options.{group_id}: gruppo non oggetto", errors)
+            continue
+        if not group.get("field"):
+            fail(f"dnd55_options.{group_id}: field mancante", errors)
+        values = group.get("values", [])
+        if not isinstance(values, list) or not values:
+            fail(f"dnd55_options.{group_id}: values mancante o vuoto", errors)
+            continue
+        seen: set[str] = set()
+        for index, value in enumerate(values):
+            if not isinstance(value, dict):
+                fail(f"dnd55_options.{group_id}[{index}]: valore non oggetto", errors)
+                continue
+            value_id = str(value.get("id", ""))
+            label = str(value.get("label", ""))
+            if not value_id or not label:
+                fail(f"dnd55_options.{group_id}[{index}]: richiede id e label", errors)
+            if value_id in seen:
+                fail(f"dnd55_options.{group_id}: id duplicato ({value_id})", errors)
+            seen.add(value_id)
+            if label.lower() in {"action", "bonus action", "reaction", "tiny", "small", "medium", "large"}:
+                fail(f"dnd55_options.{group_id}[{index}]: label non localizzata in italiano ({label})", errors)
+
 
 def validate_generated_previews(modules: dict[str, dict], errors: list[str]) -> None:
     if not GENERATED.exists():
@@ -635,6 +739,8 @@ def main() -> int:
         validate_entity_depth_contracts(modules, errors)
     if not errors:
         validate_taxonomy_depth_contracts(modules, errors)
+    if not errors:
+        validate_dnd55_options(modules, errors)
     if not errors:
         validate_rendering(modules, errors)
     if not errors:

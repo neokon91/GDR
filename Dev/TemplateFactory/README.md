@@ -63,6 +63,7 @@ Gli script in `z.automazioni/` devono restare sottili:
 - `frontmatter_profiles.yaml` dichiara ordine, campi, default e integrazioni plugin del frontmatter.
 - `entity_depth.yaml` dichiara quali famiglie fantasy devono esporre profondita lore, giocabilita, continuita, tabs e superfici plugin.
 - `taxonomy_depth.yaml` dichiara la copertura tassonomica minima per categorie D&D 5.5 e worldbuilding profondo.
+- `dnd55_options.yaml` dichiara opzioni e valori D&D 5.5 localizzati in italiano.
 - Un generatore Templater non deve restituire blocchi `---` inline: deve usare `helpers.renderFrontmatter("profilo", valori)`.
 - Gli importer CLI possono usare un renderer locale equivalente solo quando non girano dentro Obsidian, ma il profilo resta dichiarato in `frontmatter_profiles.yaml`.
 
@@ -94,6 +95,12 @@ La conseguenza pratica: YAML decide cosa esiste; Jinja assembla; JS esegue funzi
 
 `npm run check:templates` blocca una categoria tassonomica se manca la cartella SRD sorgente dichiarata, se manca il profilo runtime/frontmatter, se un campo obbligatorio non e catalogato o se il profilo non lo espone.
 
+## Regola Italiano D&D 5.5
+
+`dnd55_options.yaml` e la fonte per valori selezionabili e label visibili al DM. I valori utente devono essere in italiano; le chiavi tecniche possono restare compatibili con plugin e renderer quando necessario.
+
+`npm run check:templates` blocca il vault se mancano gruppi obbligatori come scuole di magia, livelli incantesimo, taglie, tipi creatura, rarita, azioni, condizioni, CD, danni, classi, specie e background, oppure se i profili runtime puntano a gruppi inesistenti.
+
 ## Moduli
 
 | Modulo | Responsabilita |
@@ -112,6 +119,7 @@ La conseguenza pratica: YAML decide cosa esiste; Jinja assembla; JS esegue funzi
 | `runtime_profiles.yaml` | Prompt, opzioni e default usati dagli script Templater sottili. |
 | `entity_depth.yaml` | Contratti di profondita per famiglie fantasy governate da YAML. |
 | `taxonomy_depth.yaml` | Copertura minima verificata per categorie D&D 5.5 e worldbuilding. |
+| `dnd55_options.yaml` | Valori D&D 5.5 localizzati in italiano per creazione homebrew. |
 
 `frontmatter_profiles.yaml` distingue campi core, campi di dominio e campi legati a plugin come Calendarium o Maps. `check:templates` renderizza un campione per ogni profilo e verifica che il frontmatter risultante sia YAML valido.
 

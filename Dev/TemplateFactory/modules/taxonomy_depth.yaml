@@ -21,6 +21,8 @@ families:
       - bases
     profile_contracts:
       classe_dnd:
+        option_groups:
+          - classi
         required_frontmatter_fields:
           - nome
           - categoria
@@ -34,6 +36,8 @@ families:
           - player_safe
           - uso_al_tavolo
       specie_dnd:
+        option_groups:
+          - specie
         required_frontmatter_fields:
           - nome
           - categoria
@@ -46,6 +50,8 @@ families:
           - player_safe
           - uso_al_tavolo
       background_dnd:
+        option_groups:
+          - background
         required_frontmatter_fields:
           - nome
           - categoria
@@ -100,6 +106,14 @@ families:
       - bases
     profile_contracts:
       incantesimo:
+        option_groups:
+          - livelli_incantesimo
+          - scuole_magia
+          - tempi_lancio
+          - componenti_incantesimo
+          - gittate_incantesimo
+          - durate_incantesimo
+          - classi
         required_frontmatter_fields:
           - nome
           - categoria
@@ -116,6 +130,8 @@ families:
           - uso_al_tavolo
           - player_safe
       oggetto_magico:
+        option_groups:
+          - rarita
         required_frontmatter_fields:
           - nome
           - categoria
@@ -156,6 +172,15 @@ families:
       - initiative_tracker
     profile_contracts:
       creatura:
+        option_groups:
+          - tipi_creatura
+          - taglie
+          - allineamenti
+          - grado_sfida
+          - caratteristiche
+          - tiri_salvezza
+          - tipi_danno
+          - condizioni
         required_frontmatter_fields:
           - nome
           - categoria
@@ -178,6 +203,10 @@ families:
           - ricompense
           - pressione
       trappola:
+        option_groups:
+          - difficolta_cd
+          - dadi_danno
+          - tipi_danno
         required_frontmatter_fields:
           - nome
           - categoria
@@ -190,6 +219,11 @@ families:
           - conseguenze
           - uso_al_tavolo
       pericolo_ambientale:
+        option_groups:
+          - difficolta_cd
+          - dadi_danno
+          - tipi_danno
+          - condizioni
         required_frontmatter_fields:
           - nome
           - categoria
@@ -202,6 +236,9 @@ families:
           - conseguenze
           - uso_al_tavolo
       tesoro:
+        option_groups:
+          - rarita
+          - categorie_equipaggiamento
         required_frontmatter_fields:
           - nome
           - categoria

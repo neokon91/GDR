@@ -1,0 +1,311 @@
+id: dnd55_options
+purpose: Opzioni e valori D&D 5.5 localizzati in italiano per creazione homebrew compatibile.
+version: 0.1.0
+language: it
+ruleset: D&D 5.5 SRD
+groups:
+  livelli_incantesimo:
+    field: livello_incantesimo
+    values:
+      - {id: trucchetto, label: Trucchetto, value: 0}
+      - {id: livello 1, label: Livello 1, value: 1}
+      - {id: livello 2, label: Livello 2, value: 2}
+      - {id: livello 3, label: Livello 3, value: 3}
+      - {id: livello 4, label: Livello 4, value: 4}
+      - {id: livello 5, label: Livello 5, value: 5}
+      - {id: livello 6, label: Livello 6, value: 6}
+      - {id: livello 7, label: Livello 7, value: 7}
+      - {id: livello 8, label: Livello 8, value: 8}
+      - {id: livello 9, label: Livello 9, value: 9}
+  scuole_magia:
+    field: scuola
+    values:
+      - {id: abiurazione, label: Abiurazione}
+      - {id: ammaliamento, label: Ammaliamento}
+      - {id: divinazione, label: Divinazione}
+      - {id: evocazione, label: Evocazione}
+      - {id: illusione, label: Illusione}
+      - {id: invocazione, label: Invocazione}
+      - {id: necromanzia, label: Necromanzia}
+      - {id: trasmutazione, label: Trasmutazione}
+  tempi_lancio:
+    field: tempo_lancio
+    values:
+      - {id: azione, label: Azione}
+      - {id: azione bonus, label: Azione bonus}
+      - {id: reazione, label: Reazione}
+      - {id: minuto 1, label: 1 minuto}
+      - {id: minuti 10, label: 10 minuti}
+      - {id: ora 1, label: 1 ora}
+      - {id: ore 8, label: 8 ore}
+      - {id: ore 12, label: 12 ore}
+      - {id: ore 24, label: 24 ore}
+  componenti_incantesimo:
+    field: componenti
+    values:
+      - {id: V, label: Verbale}
+      - {id: S, label: Somatica}
+      - {id: M, label: Materiale}
+      - {id: V S, label: Verbale, somatica}
+      - {id: V M, label: Verbale, materiale}
+      - {id: S M, label: Somatica, materiale}
+      - {id: V S M, label: Verbale, somatica, materiale}
+  gittate_incantesimo:
+    field: gittata
+    values:
+      - {id: personale, label: Personale}
+      - {id: contatto, label: Contatto}
+      - {id: metri 1,5, label: 1,5 metri}
+      - {id: metri 3, label: 3 metri}
+      - {id: metri 9, label: 9 metri}
+      - {id: metri 18, label: 18 metri}
+      - {id: metri 27, label: 27 metri}
+      - {id: metri 36, label: 36 metri}
+      - {id: metri 45, label: 45 metri}
+      - {id: metri 90, label: 90 metri}
+      - {id: vista, label: A vista}
+      - {id: illimitata, label: Illimitata}
+  durate_incantesimo:
+    field: durata
+    values:
+      - {id: istantanea, label: Istantanea}
+      - {id: round 1, label: 1 round}
+      - {id: minuto 1, label: 1 minuto}
+      - {id: minuti 10, label: 10 minuti}
+      - {id: ora 1, label: 1 ora}
+      - {id: ore 8, label: 8 ore}
+      - {id: ore 24, label: 24 ore}
+      - {id: permanente, label: Permanente}
+      - {id: concentrazione, label: Concentrazione}
+  classi:
+    field: classe
+    values:
+      - {id: barbaro, label: Barbaro}
+      - {id: bardo, label: Bardo}
+      - {id: chierico, label: Chierico}
+      - {id: druido, label: Druido}
+      - {id: guerriero, label: Guerriero}
+      - {id: ladro, label: Ladro}
+      - {id: mago, label: Mago}
+      - {id: monaco, label: Monaco}
+      - {id: paladino, label: Paladino}
+      - {id: ranger, label: Ranger}
+      - {id: stregone, label: Stregone}
+      - {id: warlock, label: Warlock}
+  specie:
+    field: specie
+    values:
+      - {id: umano, label: Umano}
+      - {id: elfo, label: Elfo}
+      - {id: nano, label: Nano}
+      - {id: halfling, label: Halfling}
+      - {id: gnomo, label: Gnomo}
+      - {id: dragonide, label: Dragonide}
+      - {id: tiefling, label: Tiefling}
+      - {id: aasimar, label: Aasimar}
+      - {id: goliath, label: Goliath}
+      - {id: orco, label: Orco}
+  background:
+    field: background
+    values:
+      - {id: accolito, label: Accolito}
+      - {id: criminale, label: Criminale}
+      - {id: sapiente, label: Sapiente}
+      - {id: soldato, label: Soldato}
+  tipi_creatura:
+    field: type
+    values:
+      - {id: aberrazione, label: Aberrazione}
+      - {id: bestia, label: Bestia}
+      - {id: celestiale, label: Celestiale}
+      - {id: costrutto, label: Costrutto}
+      - {id: drago, label: Drago}
+      - {id: elementale, label: Elementale}
+      - {id: folletto, label: Folletto}
+      - {id: gigante, label: Gigante}
+      - {id: immondo, label: Immondo}
+      - {id: melma, label: Melma}
+      - {id: mostruosita, label: Mostruosita}
+      - {id: non morto, label: Non morto}
+      - {id: umanoide, label: Umanoide}
+      - {id: vegetale, label: Vegetale}
+  taglie:
+    field: size
+    values:
+      - {id: minuscola, label: Minuscola}
+      - {id: piccola, label: Piccola}
+      - {id: media, label: Media}
+      - {id: grande, label: Grande}
+      - {id: enorme, label: Enorme}
+      - {id: mastodontica, label: Mastodontica}
+  allineamenti:
+    field: alignment
+    values:
+      - {id: legale buono, label: Legale buono}
+      - {id: neutrale buono, label: Neutrale buono}
+      - {id: caotico buono, label: Caotico buono}
+      - {id: legale neutrale, label: Legale neutrale}
+      - {id: neutrale, label: Neutrale}
+      - {id: caotico neutrale, label: Caotico neutrale}
+      - {id: legale malvagio, label: Legale malvagio}
+      - {id: neutrale malvagio, label: Neutrale malvagio}
+      - {id: caotico malvagio, label: Caotico malvagio}
+      - {id: senza allineamento, label: Senza allineamento}
+  rarita:
+    field: rarita
+    values:
+      - {id: comune, label: Comune}
+      - {id: non comune, label: Non comune}
+      - {id: raro, label: Raro}
+      - {id: molto raro, label: Molto raro}
+      - {id: leggendario, label: Leggendario}
+      - {id: artefatto, label: Artefatto}
+  azioni:
+    field: actions
+    values:
+      - {id: azione, label: Azione}
+      - {id: azione bonus, label: Azione bonus}
+      - {id: reazione, label: Reazione}
+      - {id: azione leggendaria, label: Azione leggendaria}
+      - {id: azione di tana, label: Azione di tana}
+  caratteristiche:
+    field: stats
+    values:
+      - {id: for, label: Forza}
+      - {id: des, label: Destrezza}
+      - {id: cos, label: Costituzione}
+      - {id: int, label: Intelligenza}
+      - {id: sag, label: Saggezza}
+      - {id: car, label: Carisma}
+  tiri_salvezza:
+    field: saves
+    values:
+      - {id: forza, label: Forza}
+      - {id: destrezza, label: Destrezza}
+      - {id: costituzione, label: Costituzione}
+      - {id: intelligenza, label: Intelligenza}
+      - {id: saggezza, label: Saggezza}
+      - {id: carisma, label: Carisma}
+  grado_sfida:
+    field: cr
+    values:
+      - {id: "0", label: "0"}
+      - {id: "1/8", label: "1/8"}
+      - {id: "1/4", label: "1/4"}
+      - {id: "1/2", label: "1/2"}
+      - {id: "1", label: "1"}
+      - {id: "2", label: "2"}
+      - {id: "3", label: "3"}
+      - {id: "4", label: "4"}
+      - {id: "5", label: "5"}
+      - {id: "6", label: "6"}
+      - {id: "7", label: "7"}
+      - {id: "8", label: "8"}
+      - {id: "9", label: "9"}
+      - {id: "10", label: "10"}
+      - {id: "11", label: "11"}
+      - {id: "12", label: "12"}
+      - {id: "13", label: "13"}
+      - {id: "14", label: "14"}
+      - {id: "15", label: "15"}
+      - {id: "16", label: "16"}
+      - {id: "17", label: "17"}
+      - {id: "18", label: "18"}
+      - {id: "19", label: "19"}
+      - {id: "20", label: "20"}
+      - {id: "21", label: "21"}
+      - {id: "22", label: "22"}
+      - {id: "23", label: "23"}
+      - {id: "24", label: "24"}
+      - {id: "25", label: "25"}
+      - {id: "26", label: "26"}
+      - {id: "27", label: "27"}
+      - {id: "28", label: "28"}
+      - {id: "29", label: "29"}
+      - {id: "30", label: "30"}
+  difficolta_cd:
+    field: cd
+    values:
+      - {id: molto facile, label: Molto facile, value: 5}
+      - {id: facile, label: Facile, value: 10}
+      - {id: media, label: Media, value: 15}
+      - {id: difficile, label: Difficile, value: 20}
+      - {id: molto difficile, label: Molto difficile, value: 25}
+      - {id: quasi impossibile, label: Quasi impossibile, value: 30}
+  dadi_danno:
+    field: danno
+    values:
+      - {id: 1d4, label: 1d4}
+      - {id: 1d6, label: 1d6}
+      - {id: 1d8, label: 1d8}
+      - {id: 1d10, label: 1d10}
+      - {id: 1d12, label: 1d12}
+      - {id: 2d6, label: 2d6}
+      - {id: 3d6, label: 3d6}
+      - {id: 4d6, label: 4d6}
+      - {id: 6d6, label: 6d6}
+      - {id: 8d6, label: 8d6}
+  tipi_danno:
+    field: danno
+    values:
+      - {id: acido, label: Acido}
+      - {id: contundente, label: Contundente}
+      - {id: freddo, label: Freddo}
+      - {id: fuoco, label: Fuoco}
+      - {id: forza, label: Forza}
+      - {id: fulmine, label: Fulmine}
+      - {id: necrotico, label: Necrotico}
+      - {id: perforante, label: Perforante}
+      - {id: psichico, label: Psichico}
+      - {id: radioso, label: Radioso}
+      - {id: tagliente, label: Tagliente}
+      - {id: tuono, label: Tuono}
+      - {id: veleno, label: Veleno}
+  condizioni:
+    field: condizioni
+    values:
+      - {id: accecato, label: Accecato}
+      - {id: affascinato, label: Affascinato}
+      - {id: afferrato, label: Afferrato}
+      - {id: assordato, label: Assordato}
+      - {id: avvelenato, label: Avvelenato}
+      - {id: incapacitato, label: Incapacitato}
+      - {id: invisibile, label: Invisibile}
+      - {id: paralizzato, label: Paralizzato}
+      - {id: pietrificato, label: Pietrificato}
+      - {id: privo di sensi, label: Privo di sensi}
+      - {id: prono, label: Prono}
+      - {id: spaventato, label: Spaventato}
+      - {id: trattenuto, label: Trattenuto}
+      - {id: stordito, label: Stordito}
+      - {id: esausto, label: Esausto}
+  categorie_equipaggiamento:
+    field: tipo
+    values:
+      - {id: arma, label: Arma}
+      - {id: armatura, label: Armatura}
+      - {id: strumento, label: Strumento}
+      - {id: dotazione, label: Dotazione}
+      - {id: cavalcatura, label: Cavalcatura}
+      - {id: veicolo, label: Veicolo}
+      - {id: merce, label: Merce}
+      - {id: servizio, label: Servizio}
+  proprieta_armi:
+    field: proprieta
+    values:
+      - {id: accurata, label: Accurata}
+      - {id: a due mani, label: A due mani}
+      - {id: gittata, label: Gittata}
+      - {id: leggera, label: Leggera}
+      - {id: lancio, label: Lancio}
+      - {id: munizioni, label: Munizioni}
+      - {id: pesante, label: Pesante}
+      - {id: portata, label: Portata}
+      - {id: ricarica, label: Ricarica}
+      - {id: speciale, label: Speciale}
+      - {id: versatile, label: Versatile}
+contracts:
+  labels_are_italian: true
+  ids_are_stable_yaml_values: true
+  user_visible_text_must_use_label: true
+  technical_fields_may_remain_plugin_compatible: true

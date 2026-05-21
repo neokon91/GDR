@@ -39,6 +39,7 @@
 - [[Dev/Prossima Discussione - YAML Entita Fantasy]] prepara la prossima fase su profondita delle entita fantasy governata da YAML.
 - `entity_depth.yaml` introduce contratti YAML per profondita fantasy di luogo, fazione, missione e tracciato: campi, prompt runtime, sezioni, tabs e superfici plugin obbligatorie.
 - `taxonomy_depth.yaml` introduce contratti verificati per D&D 5.5 e worldbuilding: opzioni giocatore, magia/regole, encounter tools, societa/economia, religione/cosmologia e storia/geografia/ecologia.
+- `dnd55_options.yaml` introduce valori D&D 5.5 localizzati in italiano per livelli incantesimo, scuole, tempi, componenti, classi, specie, tipi creatura, taglie, rarita, condizioni, CD, danni e proprieta equipaggiamento.
 
 ### Migliorato
 
@@ -71,6 +72,7 @@
 - `bases_views.yaml`, `callouts.yaml`, `dataview_blocks.yaml`, `metabind_buttons.yaml` e `frontmatter_profiles.yaml` ora coprono le superfici plugin-native usate dai template generati.
 - I generatori `luogo`, `fazione`, `missione` e `tracciato` raccolgono profondita narrativa da prompt YAML e la scrivono nel frontmatter senza logica strutturale hardcoded.
 - Aggiunti profili YAML minimi per incantesimi, classi, specie, background, talenti, regole, trappole, pericoli ambientali e tesori, così lo SRD puo diventare contenuto collegabile al mondo e non solo compendio statico.
+- I profili runtime D&D 5.5 puntano a sorgenti opzioni italiane, mantenendo chiavi tecniche solo quando servono compatibilita con plugin e renderer.
 
 ### Verificato
 

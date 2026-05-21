@@ -501,6 +501,13 @@ profiles:
   creatura:
     name_prompt: Nome della creatura
     type_prompt: Tipo della creatura
+    option_sources:
+      type_options: dnd55_options.tipi_creatura
+      size_options: dnd55_options.taglie
+      alignment_options: dnd55_options.allineamenti
+      cr_options: dnd55_options.grado_sfida
+      damage_options: dnd55_options.tipi_danno
+      condition_options: dnd55_options.condizioni
     type_options:
     - {label: Aberrazione, id: aberrazione}
     - {label: Bestia, id: bestia}
@@ -579,6 +586,8 @@ profiles:
     prompts: {}
   oggetto_magico:
     name_prompt: Nome dell'oggetto magico
+    option_sources:
+      rarity_options: dnd55_options.rarita
     rarity_options:
     - {label: Comune, id: comune}
     - {label: Non comune, id: non comune}
@@ -606,6 +615,14 @@ profiles:
       sessioni: Sessioni collegate
   incantesimo:
     name_prompt: Nome dell'incantesimo
+    option_sources:
+      level_options: dnd55_options.livelli_incantesimo
+      school_options: dnd55_options.scuole_magia
+      casting_time_options: dnd55_options.tempi_lancio
+      component_options: dnd55_options.componenti_incantesimo
+      range_options: dnd55_options.gittate_incantesimo
+      duration_options: dnd55_options.durate_incantesimo
+      class_options: dnd55_options.classi
     prompts:
       fonte: Fonte SRD o homebrew
       livello_incantesimo: Livello dell'incantesimo
@@ -621,6 +638,8 @@ profiles:
       player_safe: Descrizione mostrabile ai giocatori
   classe_dnd:
     name_prompt: Nome della classe D&D
+    option_sources:
+      class_options: dnd55_options.classi
     prompts:
       fonte: Fonte SRD o homebrew
       classe: Nome tecnico della classe
@@ -633,6 +652,8 @@ profiles:
       player_safe: Descrizione mostrabile ai giocatori
   specie_dnd:
     name_prompt: Nome della specie D&D
+    option_sources:
+      species_options: dnd55_options.specie
     prompts:
       fonte: Fonte SRD o homebrew
       specie: Nome tecnico della specie
@@ -644,6 +665,8 @@ profiles:
       player_safe: Descrizione mostrabile ai giocatori
   background_dnd:
     name_prompt: Nome del background D&D
+    option_sources:
+      background_options: dnd55_options.background
     prompts:
       fonte: Fonte SRD o homebrew
       background: Nome tecnico del background
@@ -676,6 +699,9 @@ profiles:
       player_safe: Versione leggibile ai giocatori
   trappola:
     name_prompt: Nome della trappola
+    option_sources:
+      difficulty_options: dnd55_options.difficolta_cd
+      damage_options: dnd55_options.tipi_danno
     prompts:
       fonte: Fonte SRD o homebrew
       pericolo: Pericolo da 0 a 10
@@ -687,6 +713,10 @@ profiles:
       uso_al_tavolo: Uso concreto al tavolo
   pericolo_ambientale:
     name_prompt: Nome del pericolo ambientale
+    option_sources:
+      difficulty_options: dnd55_options.difficolta_cd
+      damage_options: dnd55_options.tipi_danno
+      condition_options: dnd55_options.condizioni
     prompts:
       bioma: Bioma o ambiente
       pericolo: Pericolo da 0 a 10
@@ -698,6 +728,8 @@ profiles:
       uso_al_tavolo: Uso concreto al tavolo
   tesoro:
     name_prompt: Nome del tesoro
+    option_sources:
+      rarity_options: dnd55_options.rarita
     prompts:
       fonte: Fonte SRD o homebrew
       rarita: Rarita
