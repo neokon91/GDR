@@ -558,6 +558,8 @@ function markdownText(file) {
     return markdownTextByPath.get(fileRel) ?? fs.readFileSync(file, "utf8");
 }
 
+const modelMarkdownFiles = markdownFiles.filter(file => rel(file).startsWith("z.modelli/"));
+
 for (const file of walk(ROOT, file => file.endsWith(".json"))) {
     readJson(file);
 }
@@ -719,9 +721,9 @@ for (const file of markdownFiles) {
         const matches = linkableByBasename.get(basename) ?? [];
 
         if (!matches.length) {
-            errors.push(`${rel(file)}: wikilink rotto ${match[0]}`);
+            errors.push(`${fileRel}: wikilink rotto ${match[0]}`);
         } else if (matches.length > 1) {
-            warnings.push(`${rel(file)}: wikilink ambiguo ${match[0]} -> ${matches.join(", ")}`);
+            warnings.push(`${fileRel}: wikilink ambiguo ${match[0]} -> ${matches.join(", ")}`);
         }
     }
 }
@@ -740,11 +742,12 @@ function validateMetaBindTemplate(templateRef, context) {
 }
 
 for (const file of markdownFiles) {
+    const fileRel = rel(file);
     const text = markdownText(file);
     let match;
 
     while ((match = templatePattern.exec(text))) {
-        validateMetaBindTemplate(match[1], `${rel(file)}: template Meta Bind`);
+        validateMetaBindTemplate(match[1], `${fileRel}: template Meta Bind`);
     }
 }
 
@@ -792,13 +795,14 @@ if (metaBindConfig) {
 
     const inlineButtonPattern = /`BUTTON\[([^\]\n]+)\]`/g;
     for (const file of markdownFiles) {
+        const fileRel = rel(file);
         const text = markdownText(file);
         let match;
 
         while ((match = inlineButtonPattern.exec(text))) {
             if (match[1].includes("...")) continue;
             if (!buttonIds.has(match[1])) {
-                errors.push(`${rel(file)}: BUTTON senza template Meta Bind (${match[1]})`);
+                errors.push(`${fileRel}: BUTTON senza template Meta Bind (${match[1]})`);
             }
         }
     }
@@ -815,10 +819,11 @@ if (metadataMenuConfig) {
     }
 }
 
-for (const file of markdownFiles.filter(file => rel(file).startsWith("z.modelli/"))) {
+for (const file of modelMarkdownFiles) {
+    const fileRel = rel(file);
     const text = markdownText(file);
     if (/```meta-bind-button[\s\S]*?type:\s*updateMetadata[\s\S]*?```/.test(text)) {
-        warnings.push(`${rel(file)}: meta-bind-button modifica frontmatter; usare INPUT inline/blocco`);
+        warnings.push(`${fileRel}: meta-bind-button modifica frontmatter; usare INPUT inline/blocco`);
     }
 }
 
@@ -827,14 +832,15 @@ const automationNames = fs.existsSync(automationDir)
     ? new Set(walk(automationDir, file => file.endsWith(".js")).map(file => path.basename(file, ".js")))
     : new Set();
 const templaterUserPattern = /tp\.user\.([A-Za-z0-9_]+)/g;
-for (const file of markdownFiles.filter(file => rel(file).startsWith("z.modelli/"))) {
+for (const file of modelMarkdownFiles) {
+    const fileRel = rel(file);
     const text = markdownText(file);
     let match;
 
     while ((match = templaterUserPattern.exec(text))) {
         const helper = match[1];
         if (!automationNames.has(helper)) {
-            errors.push(`${rel(file)}: helper Templater senza script in z.automazioni (${helper}.js)`);
+            errors.push(`${fileRel}: helper Templater senza script in z.automazioni (${helper}.js)`);
         }
     }
 }
@@ -852,9 +858,10 @@ for (const file of markdownFiles.filter(file => /(^|\/)[^/]*Router\.md$/.test(re
 
 const operationalViewRoots = /^(z\.modelli|Hub|Risorse|Mondi)\//;
 for (const file of markdownFiles.filter(file => operationalViewRoots.test(rel(file)))) {
+    const fileRel = rel(file);
     const text = markdownText(file);
     if (text.includes('z.automazioni/session_context.js')) {
-        errors.push(`${rel(file)}: vista operativa punta a session_context.js; usare z.engine/session_views.js`);
+        errors.push(`${fileRel}: vista operativa punta a session_context.js; usare z.engine/session_views.js`);
     }
 }
 
