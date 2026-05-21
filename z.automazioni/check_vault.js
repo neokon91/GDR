@@ -7,6 +7,7 @@ const {
     hasValue,
     parseFrontmatter,
     readJson: readJsonFile,
+    readTextIfExists,
     rel: relativePath,
     walk: walkFiles
 } = require("./node_utils");
@@ -360,16 +361,18 @@ function walk(dir, predicate = () => true) {
     return walkFiles(dir, { ignoredDirs: IGNORED_DIRS, predicate });
 }
 
+const repoPath = (...parts) => path.join(ROOT, ...parts);
+const existsRel = file => fs.existsSync(repoPath(file));
+const readRel = (file, fallback = "") => readTextIfExists(repoPath(file), fallback);
+
 function readJson(file) {
     return readJsonFile(file, null, error => {
         errors.push(`${rel(file)}: JSON non valido (${error.message})`);
     });
 }
 
-function readOptionalJson(file) {
-    if (!fs.existsSync(file)) return null;
-    return readJson(file);
-}
+const readOptionalJson = file => fs.existsSync(file) ? readJson(file) : null;
+const readOptionalJsonRel = file => readOptionalJson(repoPath(file));
 
 function flatText(value) {
     if (Array.isArray(value)) return value.map(flatText).join(" ");
@@ -502,7 +505,7 @@ function addGeneratedTemplatePath(templatePath) {
     generatedTemplatePaths.add(normalized.replace(/\.md$/, ""));
 }
 
-const templateFactoryManifest = readOptionalJson(path.join(ROOT, "z.modelli/.templatefactory-manifest.json"));
+const templateFactoryManifest = readOptionalJsonRel("z.modelli/.templatefactory-manifest.json");
 for (const entry of templateFactoryManifest?.files ?? []) {
     addGeneratedTemplatePath(entry?.path);
 }
@@ -546,9 +549,9 @@ for (const file of walk(ROOT, file => file.endsWith(".json"))) {
     readJson(file);
 }
 
-const communityPlugins = readJson(path.join(ROOT, ".obsidian/community-plugins.json")) ?? [];
-const tasksConfig = readOptionalJson(path.join(ROOT, ".obsidian/plugins/obsidian-tasks-plugin/data.json")) ?? {};
-const calendariumData = readOptionalJson(path.join(ROOT, ".obsidian/plugins/calendarium/data.json")) ?? {};
+const communityPlugins = readJson(repoPath(".obsidian/community-plugins.json")) ?? [];
+const tasksConfig = readOptionalJsonRel(".obsidian/plugins/obsidian-tasks-plugin/data.json") ?? {};
+const calendariumData = readOptionalJsonRel(".obsidian/plugins/calendarium/data.json") ?? {};
 const calendariumCalendars = Array.isArray(calendariumData.calendars)
     ? calendariumData.calendars
     : Object.values(calendariumData.calendars ?? {});
@@ -562,7 +565,7 @@ for (const plugin of REQUIRED_PLUGINS) {
         errors.push(`Plugin obbligatorio non abilitato: ${plugin}`);
     }
 
-    if (!fs.existsSync(path.join(ROOT, ".obsidian/plugins", plugin, "manifest.json"))) {
+    if (!fs.existsSync(repoPath(".obsidian/plugins", plugin, "manifest.json"))) {
         errors.push(`Plugin obbligatorio non incluso: ${plugin}`);
     }
 }
@@ -576,7 +579,7 @@ if (communityPlugins.includes("obsidian-tasks-plugin")) {
     }
 }
 
-const hexCartographerMain = path.join(ROOT, ".obsidian/plugins/hex-cartographer/main.js");
+const hexCartographerMain = repoPath(".obsidian/plugins/hex-cartographer/main.js");
 if (communityPlugins.includes("hex-cartographer") && fs.existsSync(hexCartographerMain)) {
     const hexSource = fs.readFileSync(hexCartographerMain, "utf8");
     if (!hexSource.includes("const activeFilePath = leaf.view.file.path")) {
@@ -585,24 +588,24 @@ if (communityPlugins.includes("hex-cartographer") && fs.existsSync(hexCartograph
 }
 
 for (const file of REQUIRED_FILES) {
-    if (!fs.existsSync(path.join(ROOT, file))) {
+    if (!existsRel(file)) {
         errors.push(`File release/onboarding obbligatorio mancante: ${file}`);
     }
 }
 
 for (const file of REQUIRED_BASE_FILES) {
-    if (!fs.existsSync(path.join(ROOT, file))) {
+    if (!existsRel(file)) {
         errors.push(`Base operativa mancante: ${file}`);
     }
 }
 
 for (const file of REQUIRED_LAYER_FILES) {
-    if (!fs.existsSync(path.join(ROOT, file))) {
+    if (!existsRel(file)) {
         errors.push(`Plugin layer interno: file obbligatorio mancante ${file}`);
     }
 }
 
-const pluginMatrixPath = path.join(ROOT, "Dev/plugin_matrix.json");
+const pluginMatrixPath = repoPath("Dev/plugin_matrix.json");
 const pluginMatrix = readJson(pluginMatrixPath) ?? [];
 const pluginMatrixById = new Map();
 const requiredPluginMatrixFields = ["id", "name", "class", "function", "guide", "operational", "smoke"];
@@ -626,7 +629,7 @@ if (!Array.isArray(pluginMatrix)) {
             const target = String(entry[field] ?? "");
             if (!target) continue;
             const targetWithExtension = /\.(md|base|js|json|excalidraw)$/i.test(target) ? target : targetPath(target);
-            if (!fs.existsSync(path.join(ROOT, targetWithExtension)) && !isGeneratedTemplatePath(targetWithExtension)) {
+            if (!existsRel(targetWithExtension) && !isGeneratedTemplatePath(targetWithExtension)) {
                 errors.push(`Dev/plugin_matrix.json: ${entry.id} ${field} mancante ${targetWithExtension}`);
             }
         }
@@ -656,7 +659,7 @@ for (const file of walk(ROOT, file => /^(z\.automazioni|z\.engine)\//.test(rel(f
 }
 
 for (const snippet of REQUIRED_SNIPPETS) {
-    const snippetPath = path.join(ROOT, snippet);
+    const snippetPath = repoPath(snippet);
     if (!fs.existsSync(snippetPath)) {
         errors.push(`Snippet CSS obbligatorio mancante: ${snippet}`);
         continue;
@@ -722,13 +725,13 @@ for (const file of markdownFiles) {
             continue;
         }
         if (isGeneratedTemplatePath(template)) continue;
-        if (!fs.existsSync(path.join(ROOT, template))) {
+        if (!existsRel(template)) {
             errors.push(`${rel(file)}: template Meta Bind mancante ${template}`);
         }
     }
 }
 
-const metaBindConfigPath = path.join(ROOT, ".obsidian/plugins/obsidian-meta-bind-plugin/data.json");
+const metaBindConfigPath = repoPath(".obsidian/plugins/obsidian-meta-bind-plugin/data.json");
 const metaBindConfig = readJson(metaBindConfigPath);
 if (metaBindConfig) {
     const buttonTemplates = Array.isArray(metaBindConfig.buttonTemplates) ? metaBindConfig.buttonTemplates : [];
@@ -761,7 +764,7 @@ if (metaBindConfig) {
                     continue;
                 }
                 if (isGeneratedTemplatePath(template)) continue;
-                if (!fs.existsSync(path.join(ROOT, template))) {
+                if (!existsRel(template)) {
                     errors.push(`Meta Bind: button template ${button.id} usa template mancante ${template}`);
                 }
             }
@@ -792,7 +795,7 @@ if (metaBindConfig) {
     }
 }
 
-const metadataMenuConfig = readJson(path.join(ROOT, ".obsidian/plugins/metadata-menu/data.json"));
+const metadataMenuConfig = readJson(repoPath(".obsidian/plugins/metadata-menu/data.json"));
 if (metadataMenuConfig) {
     const presetNames = new Set((metadataMenuConfig.presetFields ?? []).map(field => field?.name).filter(Boolean));
 
@@ -810,7 +813,7 @@ for (const file of markdownFiles.filter(file => rel(file).startsWith("z.modelli/
     }
 }
 
-const automationDir = path.join(ROOT, "z.automazioni");
+const automationDir = repoPath("z.automazioni");
 const automationNames = fs.existsSync(automationDir)
     ? new Set(walk(automationDir, file => file.endsWith(".js")).map(file => path.basename(file, ".js")))
     : new Set();
@@ -846,18 +849,18 @@ for (const file of markdownFiles.filter(file => operationalViewRoots.test(rel(fi
     }
 }
 
-const iconConfig = readJson(path.join(ROOT, ".obsidian/plugins/obsidian-icon-folder/data.json"));
+const iconConfig = readJson(repoPath(".obsidian/plugins/obsidian-icon-folder/data.json"));
 if (iconConfig) {
     for (const key of Object.keys(iconConfig)) {
         if (key === "settings") continue;
         if (isGeneratedTemplatePath(key)) continue;
-        if (!fs.existsSync(path.join(ROOT, key)) && !fs.existsSync(path.join(ROOT, `${key}.md`))) {
+        if (!existsRel(key) && !existsRel(`${key}.md`)) {
             errors.push(`Iconize punta a un percorso mancante: ${key}`);
         }
     }
 }
 
-const workspace = readOptionalJson(path.join(ROOT, ".obsidian/workspace.json"));
+const workspace = readOptionalJsonRel(".obsidian/workspace.json");
 if (workspace) {
     const serialized = JSON.stringify(workspace);
     const stalePaths = ["Bestiario/Prova.md", "\"Mondo/"];
@@ -928,9 +931,7 @@ for (const fileRel of DEMO_PUBLIC_FILES) {
     }
 }
 
-const playerViewText = fs.existsSync(path.join(ROOT, "Hub/Vista Giocatori.md"))
-    ? fs.readFileSync(path.join(ROOT, "Hub/Vista Giocatori.md"), "utf8")
-    : "";
+const playerViewText = readRel("Hub/Vista Giocatori.md");
 if (!playerViewText.includes("renderPlayerPortalStatus") || !playerViewText.includes("renderPublicSafety")) {
     errors.push("Demo finale: Vista Giocatori non espone stato portale e controllo sicurezza");
 }
@@ -947,9 +948,7 @@ if (gptConnectorIndex?.is_code_search_indexed !== true) {
     errors.push("Dev/Indice Connettore GPT.md: manca is_code_search_indexed: true");
 }
 
-const startHereText = fs.existsSync(path.join(ROOT, "Inizia Qui.md"))
-    ? fs.readFileSync(path.join(ROOT, "Inizia Qui.md"), "utf8")
-    : "";
+const startHereText = readRel("Inizia Qui.md");
 const worldbuildingIndex = startHereText.indexOf("Crea Il Mondo");
 const sessionIndex = startHereText.indexOf("Trasforma In Gioco");
 if (worldbuildingIndex === -1 || sessionIndex === -1 || worldbuildingIndex > sessionIndex) {
@@ -975,24 +974,24 @@ if (calendariumCalendars.length) {
     }
 }
 
-const gptIndexPath = path.join(ROOT, "Dev/Indice Connettore GPT.md");
-if (!fs.existsSync(gptIndexPath)) {
+const gptIndexRel = "Dev/Indice Connettore GPT.md";
+if (!existsRel(gptIndexRel)) {
     errors.push("Dev/Indice Connettore GPT.md: file mancante");
 } else {
-    const gptIndexText = fs.readFileSync(gptIndexPath, "utf8");
+    const gptIndexText = readRel(gptIndexRel);
     const codePathPattern = /`([^`\n]+\.(?:md|js|json|css))`/g;
     let match;
 
     while ((match = codePathPattern.exec(gptIndexText))) {
         const referenced = match[1].trim();
-        if (!fs.existsSync(path.join(ROOT, referenced))) {
+        if (!existsRel(referenced)) {
             errors.push(`Dev/Indice Connettore GPT.md: percorso citato mancante ${referenced}`);
         }
     }
 }
 
 for (const [fileRel, fm] of realEntries) {
-    const text = fs.readFileSync(path.join(ROOT, fileRel), "utf8");
+    const text = readRel(fileRel);
 
     if (isOperationalNote(fileRel) && hasValue(fm.categoria) && !ALLOWED_CATEGORIES.has(String(fm.categoria))) {
         warnings.push(`${fileRel}: categoria non prevista (${fm.categoria})`);
@@ -1279,7 +1278,7 @@ for (const [fileRel, fm] of realEntries) {
                 const imageMatch = zoomMatch[1].match(/^\s*image:\s*(.+?)\s*$/m);
                 if (!imageMatch) {
                     warnings.push(`${fileRel}: blocco zoommap senza image`);
-                } else if (!fs.existsSync(path.join(ROOT, imageMatch[1].trim()))) {
+                } else if (!existsRel(imageMatch[1].trim())) {
                     warnings.push(`${fileRel}: immagine zoommap mancante (${imageMatch[1].trim()})`);
                 }
             }
