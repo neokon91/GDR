@@ -104,9 +104,15 @@ tab: Potere
 >
 > Risorse: `INPUT[inlineList:risorse]`
 >
-> Rivali: `INPUT[inlineListSuggester(optionQuery("Mondi/Fazioni"), useLinks(partial), allowOther):rivali]`
+> Rivali:
+> ```meta-bind
+> INPUT[inlineListSuggester(optionQuery("Mondi/Fazioni"), useLinks(partial), allowOther):rivali]
+> ```
 >
-> Luoghi controllati: `INPUT[inlineListSuggester(optionQuery("Mondi/Luoghi"), useLinks(partial), allowOther):luoghi_controllati]`
+> Luoghi controllati:
+> ```meta-bind
+> INPUT[inlineListSuggester(optionQuery("Mondi/Luoghi"), useLinks(partial), allowOther):luoghi_controllati]
+> ```
 >
 > Pressione: `INPUT[pressione][:pressione]`
 

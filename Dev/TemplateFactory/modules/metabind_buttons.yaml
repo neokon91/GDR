@@ -68,6 +68,12 @@ buttons:
     action: runTemplaterFile
     template: z.modelli/azioni/Applica Conseguenza.md
     fallback: 'Azione manuale: registrare conseguenza, entita_impattate e propagazione_stato'
+  registra_scelta_mondo:
+    id: registra-scelta-mondo
+    label: Registra Scelta Mondo
+    action: runTemplaterFile
+    template: z.modelli/azioni/Registra Scelta Mondo.md
+    fallback: 'Azione manuale: registrare scelta, conseguenza, entita_impattate, applicata_a e propagazione_stato'
   collega_sessione_attiva:
     id: collega-sessione-attiva
     label: Collega Sessione Attiva

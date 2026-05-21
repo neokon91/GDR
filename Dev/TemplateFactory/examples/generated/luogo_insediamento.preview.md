@@ -101,7 +101,10 @@ tab: Territorio
 > [!mappa] Mappa E Presenza
 > Coordinate: `INPUT[text:coordinates]`
 >
-> Mappe: `INPUT[inlineListSuggester(optionQuery("Risorse/Mappe"), useLinks(partial), allowOther):mappe]`
+> Mappe:
+> ```meta-bind
+> INPUT[inlineListSuggester(optionQuery("Risorse/Mappe"), useLinks(partial), allowOther):mappe]
+> ```
 >
 > Layer mappa: `INPUT[text:layer_mappa]`
 >

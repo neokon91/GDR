@@ -13,6 +13,7 @@ Questa nota contiene convenzioni tecniche per mantenere il vault: campi, templat
 - Le istruzioni tecniche non vanno nel README se non sono necessarie per usare il vault al tavolo.
 - Il profilo regolamentare principale e D&D 5.5/SRD: i campi di creature, incontri, oggetti, ricompense, party e session prep devono restare compatibili con questo uso, mentre il Codex del mondo resta separato dal regolamento.
 - La linea architetturale e vincolante: YAML dichiara contratti e profili, Jinja/TemplateFactory genera Markdown statico, JS del vault contiene runtime e automazioni. Non aggiungere logica fragile nel corpo dei template.
+- [[Dev/README]] e l'indice canonico della documentazione di sviluppo: prima di creare una nuova nota tecnica, verifica se la modifica appartiene a roadmap, handoff, sviluppo, plugin layer, release o TemplateFactory.
 
 ## Stati delle Note Consigliati
 Usa pochi stati e usali sempre nello stesso modo.
@@ -41,9 +42,10 @@ Usa questi campi in modo coerente, perché alimentano Dataview, dashboard, Meta 
 - `pressione`, `prossima_mossa`, `leader`, `rivali`, `luoghi`, `missioni`: alimentano Poteri In Movimento e Buchi Di Mondo.
 - `progress_value`, `progress_max`, `innesco`, `posta`: alimentano clock e progress track. Usali su `categoria: tracciato` e, quando serve, sulle missioni.
 - `causa`, `conseguenze`, `luoghi`, `fazioni`, `missioni`: alimentano Timeline Causale.
+- `entita_impattate`, `propaga_a`, `applicata_a`, `propagato_da`, `aggiornamenti_richiesti`, `propagazione_stato`, `ultima_propagazione`: alimentano il motore di continuita. Sono il contratto YAML tra scelta dei giocatori, conseguenza, propagazione e dashboard operative.
 - `vuole`, `sa`, `leva`, `segreto`, `segreti`, `indizi`, `voci`, `domande_aperte`, `tensione`, `funzione_narrativa`: campi di profondita lore. Devono restare brevi e giocabili, non saggi enciclopedici.
 - `fonti`, `riferimenti_srd`, `riferimenti_regola`: usano wikilink precisi a note, sezioni o block id quando una scheda dipende da una fonte specifica.
-- `sezioni_collegate`: usa solo link a sezioni, per esempio `[[Mondi/Sessioni/2026-05-28 - La Campana Nella Nebbia#Apertura]]`.
+- `sezioni_collegate`: usa solo link a sezioni, per esempio un wikilink a `Mondi/Sessioni/Nome Sessione#Apertura`.
 - `blocchi_collegati` e `tabelle_collegate`: usano block id Obsidian, per esempio `[[Risorse/Tabelle/Tabelle#^complicazioni]]`.
 - `tags`: opzionale e controllato. La tassonomia principale resta `categoria`, `tipo` e `stato`; i tag servono solo a marcatori trasversali semplici e italiani.
 
@@ -82,8 +84,8 @@ Il vault deve sfruttare il frontmatter come grafo Obsidian, non solo come tabell
 
 Regole:
 
-- link a nota intera: `[[Mondi/Luoghi/Porto Di Brumafonda]]`;
-- link a sezione: `[[Mondi/Sessioni/2026-05-28 - La Campana Nella Nebbia#Apertura]]`;
+- link a nota intera: wikilink a `Mondi/Luoghi/Nome Luogo`;
+- link a sezione: wikilink a `Mondi/Sessioni/Nome Sessione#Apertura`;
 - link a blocco: `[[Risorse/Tabelle/Tabelle#^complicazioni]]`;
 - non mettere link granulari casuali in campi generici se esiste un campo dedicato;
 - i tag devono essere pochi, italiani, minuscoli e dichiarati in `Dev/TemplateFactory/modules/tag_rules.yaml`;
@@ -300,7 +302,7 @@ Usa il blocco `encounter` per incontri preparati; usa inline `encounter:` solo p
 
 ### Dice Roller
 
-Dice Roller usa inline code `dice:` per tiri e table roller. Le tabelle casuali del vault devono avere block id stabili se vengono richiamate da altre note.
+Dice Roller usa codice inline `dice:` per tiri e tabelle casuali. Le tabelle casuali del vault devono avere block id stabili se vengono richiamate da altre note.
 
 Esempi da preservare:
 
@@ -355,23 +357,26 @@ Non rinominare i campi `fc-*` e non usare `fc-date` come unica data narrativa: s
 
 ### Meta Bind
 
-Meta Bind ha due ruoli separati nel vault. Gli input inline o in blocco (`INPUT[...]`) servono per modificare rapidamente il frontmatter nelle note gia create. I pulsanti inline `BUTTON[...]` servono per navigare, creare nuove note, aprire dashboard o portare l'utente a un wikilink utile.
+Meta Bind ha due ruoli separati nel vault. Gli input (`INPUT[...]`) modificano rapidamente il frontmatter nelle note già create. I pulsanti (`BUTTON[...]`) servono per navigare, creare nuove note, aprire dashboard o portare l'utente a un wikilink utile.
 
 La logica dei pulsanti vive in `.obsidian/plugins/obsidian-meta-bind-plugin/data.json`, dentro `buttonTemplates`. Le note devono richiamare i pulsanti per id, non duplicare blocchi `meta-bind-button` completi.
 
-Non usare pulsanti Meta Bind per cambiare campi YAML come `stato`, `canonico`, `progress_value` o `attiva`: per quello usa input, slider, toggle e select inline.
+Non usare pulsanti Meta Bind per cambiare campi YAML come `stato`, `canonico`, `progress_value` o `attiva`: per quello usa input, slider, toggle e select. Gli input semplici possono restare in riga dentro backtick; gli input con funzioni Meta Bind (`optionQuery`, `useLinks`, `allowOther`, suggester) devono usare un blocco `meta-bind`. Questa forma evita errori di parsing nelle versioni del plugin che non supportano funzioni dentro input inline.
 
-Sintassi usata nel vault:
+Sintassi corretta:
 
-```markdown
+````markdown
 `INPUT[toggle:attiva]`
 `INPUT[mondo][:mondo]`
 `INPUT[canonico][:canonico]`
 `INPUT[stato base][:stato]`
 `INPUT[text:data_mondo]`
 `INPUT[inlineList:condizioni]`
-`INPUT[inlineListSuggester(optionQuery("Mondi/Personaggi"), useLinks(partial)):personaggi]`
+
+```meta-bind
+INPUT[inlineListSuggester(optionQuery("Mondi/Personaggi"), useLinks(partial)):personaggi]
 ```
+````
 
 Pulsanti inline:
 

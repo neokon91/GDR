@@ -1210,6 +1210,20 @@ blueprints:
     comparison_targets:
     - z.modelli/azioni/Applica Conseguenza.md
     profile: action
+  azione_registra_scelta_mondo:
+    target_family:
+    - azione
+    templater_entry: <% await tp.user.meta_actions(tp, "registra_scelta_mondo") %>
+    template_title: Registra Scelta Mondo
+    world_impact: true
+    output:
+      folder: z.modelli/azioni
+      files:
+      - Registra Scelta Mondo.md
+      fallback: markdown_sections
+    comparison_targets:
+    - z.modelli/azioni/Registra Scelta Mondo.md
+    profile: action
   azione_archivia:
     target_family:
     - azione

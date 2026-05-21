@@ -7,12 +7,12 @@
 - M6 Continuity Engine: azioni Meta Bind per applicare conseguenze e propagare entita con stato esplicito, backlink, aggiornamenti richiesti, pressione e prossima mossa opzionale.
 - Viste runtime riusabili `renderContinuityQueue`, `renderPropagationTargets` e `renderContinuityGaps` in `z.engine/session_views.js`.
 - TemplateFactory genera schede con tabs logici e callout funzionali che contengono Meta Bind, Dataview, DataviewJS, riferimenti Bases ed Excalidraw.
-- Scenario demo completo [[Brumafonda Demo]] con mondo, campagna, cultura, fazione, culto, luogo, economia, mappa, dispensa, missione, sessione e conseguenza.
-- [[Dev/Smoke Demo Finale]] come checklist manuale di smoke visuale, player-safe e raccolta evidenze screenshot/GIF.
+- Scenario demo storico rimosso dal sorgente: la demo finale verrà generata da script quando template e runtime saranno stabili.
+- [[Dev/Smoke Demo Finale]] come checklist manuale di collaudo visuale, sicurezza per i giocatori e raccolta evidenze screenshot/GIF.
 - Gate statico M3 in `npm run check` per verificare presenza demo, recap pubblico, mappa/dispensa pubbliche, player-safe e controlli di [[Vista Giocatori]].
 - `npm run check:smoke` come gate dedicato per la parte automatizzabile dello smoke demo finale.
 - `npm run check:release` come gate dedicato per versione, changelog e verifica release pulita.
-- `Demo Brumafonda.md` generata solo nella release utente come indice demo, senza includere `Dev/`.
+- La release non include più una demo manuale mantenuta nota per nota.
 - [[Dev/Matrice Plugin 1.0]] e `Dev/plugin_matrix.json` per mappare ogni plugin installato a funzione, guida, pagina operativa e smoke.
 - Azioni Meta Bind generate per smistare e canonizzare bozze del Generatore di Contenuti Fantasy.
 - [[z.bases/Fazioni.base]] per correggere rapidamente fazioni in movimento, pressione, relazioni, mondo e archivio.
@@ -33,7 +33,18 @@
 - Gate release-content: le note contenuto in `Mondi/` e `Campagne/` devono avere scheda plugin-native con tabs, callout, controlli dinamici e fallback Markdown.
 - Gate pagine utente chiave: setup, aiuto, prima sessione, materiali al tavolo, import mappe e guida mappe devono restare plugin-native.
 - Filtro navigazione release: cartelle tecniche `z.*` e compendio `SRD/` restano inclusi ma nascosti dal file explorer utente.
-- Dossier campagna demo `Campagne/Sale Sotto La Nebbia/Sale Sotto La Nebbia.md`, con struttura finale da campagna giocabile invece di nota sparsa.
+- M9 Riduzione Attrito: [[Inizia Qui]] espone un percorso minimo prima delle dashboard avanzate.
+- Gate anti-segreti globale: ogni nota `pubblico: true` con campi DM evidenti blocca `npm run check`.
+- Evidenze M9 raccolte su release rigenerata: `Dev/Evidenze Smoke M9/release-attiva/`.
+- Proprietà collassate di default su dashboard e indici, con espansione su hover/focus per editing e screenshot più leggibili.
+- Contratto architetturale consolidato in [[Dev/README]]: Markdown contenuto umano, YAML stato persistente, Dataview query layer, Meta Bind interfaccia, Templater generazione, `z.engine`/`z.automazioni` runtime.
+- `workflows.yaml` ora documenta regole dichiarative di continuità con trigger, condizioni, effetti e propagazioni, eseguite dal runtime esistente.
+- `prepara-recap-pubblico` non marca più pubblica l'intera nota sessione; il gate impedisce regressioni su questa azione.
+- [[Dev/Prossima Discussione - YAML Entita Fantasy]] ora e un brief operativo M11 con tre interventi concreti: entita vive end-to-end, pipeline homebrew D&D 5.5 collegata al mondo e simulazione narrativa leggera.
+- [[Dev/NEXT_PHASE_HANDOFF]] punta a M11 invece di restare su M9, con priorita tecniche e vincoli coerenti con il sistema operativo narrativo in Obsidian.
+- M11 avviata con runtime reale: `registra_scelta_mondo` registra scelta, conseguenza, bersagli, propagazione, pressione e avanzamento tracciati sui target collegati.
+- `renderM11ContinuityChain` espone nelle viste operative la catena scelta -> conseguenza -> bersagli -> stato -> prossima apertura.
+- Rimossa la demo manuale dal sorgente: i contenuti dimostrativi devono nascere da generatore dedicato a fine ciclo.
 - Gate esperienza hub: `check_vault.js` verifica ruolo, classe visuale, callout, viste/input/azioni plugin-native e marker funzionali degli hub principali.
 - Gate Plugin Surface YAML: TemplateFactory blocca input Meta Bind, bottoni, callout, runtime DataviewJS e Bases usati nei Jinja se non sono dichiarati nei moduli YAML.
 - [[Dev/Prossima Discussione - YAML Entita Fantasy]] prepara la prossima fase su profondita delle entita fantasy governata da YAML.
@@ -45,8 +56,8 @@
 ### Migliorato
 
 - [[Dev/NEXT_PHASE_HANDOFF]] chiarisce che M6 e completato e che la prossima fase deve concentrarsi su schede plugin-native, non su nuove dashboard.
-- [[Dev/NEXT_PHASE_HANDOFF]] aggiornato dopo M7 e chiusura warning demo: la prossima fase e M8 Release Evidence And Zero-Warning Discipline.
-- Le note demo Brumafonda sono state convertite da frontmatter/testo piatto a schede operative con Meta Bind, Dataview/DataviewJS, Bases, mappe e fallback.
+- [[Dev/NEXT_PHASE_HANDOFF]] aggiornato dopo M7 e chiusura warning: la prossima fase e M8 Release Evidence And Zero-Warning Discipline.
+- Le note demo manuali storiche sono state eliminate dal sorgente per evitare manutenzione nota per nota.
 - Le guide utente più esposte sono state portate a tab funzionali con controlli, azioni, Dataview/DataviewJS, Tasks e fallback leggibile.
 - `release:clean` verifica che la release mantenga nascosti runtime, template, fileClass, Bases, bacheche tecniche e SRD dalla navigazione normale.
 - [[Motore Mondo Vivo]] e [[Cosa Succede Fuori Scena]] mostrano coda di continuita, bersagli da verificare e buchi di propagazione senza duplicare dashboard.
@@ -68,13 +79,18 @@
 - Le viste Bases prioritarie usano `groupBy` e `limit`, mentre gli archivi restano completi.
 - Rimossi gli artefatti di release generati da `dist/` dal workspace locale.
 - Spostato il materiale di sviluppo fuori da `Risorse/` e dalla root, aggiornando controlli e riferimenti.
-- `Demo Brumafonda.md` nella release utente ora e un dossier plugin-native con tabs, callout operativi, DataviewJS, Tasks e fallback Markdown.
-- Le note del pacchetto demo dichiarano la campagna `[[Sale Sotto La Nebbia]]` per rendere affidabili filtri, hub e viste Dataview.
+- La demo finale sarà un artefatto generato, non contenuto sorgente stabile.
 - `bases_views.yaml`, `callouts.yaml`, `dataview_blocks.yaml`, `metabind_buttons.yaml` e `frontmatter_profiles.yaml` ora coprono le superfici plugin-native usate dai template generati.
 - I generatori `luogo`, `fazione`, `missione` e `tracciato` raccolgono profondita narrativa da prompt YAML e la scrivono nel frontmatter senza logica strutturale hardcoded.
 - Aggiunti profili YAML minimi per incantesimi, classi, specie, background, talenti, regole, trappole, pericoli ambientali e tesori, così lo SRD puo diventare contenuto collegabile al mondo e non solo compendio statico.
 - I profili runtime D&D 5.5 puntano a sorgenti opzioni italiane, mantenendo chiavi tecniche solo quando servono compatibilita con plugin e renderer.
 - `npm run check` ora segnala tag non dichiarati e link granulari malformati nei campi `fonti`, `riferimenti_srd`, `riferimenti_regola`, `sezioni_collegate`, `blocchi_collegati` e `tabelle_collegate`.
+- [[Dev/Roadmap/1.0 Professionale]] non mantiene piu aperto il blocker Templater runtime dopo il check zero-warning e punta esplicitamente a M8.
+- `check:release` ora blocca anche una roadmap attiva obsoleta rispetto a handoff M8, evidenze release e disciplina zero-warning.
+- Gli input Meta Bind con funzioni (`optionQuery`, `useLinks`, `allowOther`, suggester) ora usano blocchi `meta-bind` invece di codice inline.
+- `check_vault.js` blocca gli input Meta Bind complessi lasciati in forma inline.
+- Lo snippet `gdr-vault.css` riduce fusioni trasparenti, gradienti sovrapposti e accenti troppo saturi per una resa più pulita con temi chiari e scuri.
+- Le guide utente principali usano termini italiani più chiari per vista giocatori, controllo qualità, versioni leggibili senza plugin e collaudo visuale.
 
 ### Verificato
 

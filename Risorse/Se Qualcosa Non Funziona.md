@@ -8,7 +8,7 @@ stato: pronto
 
 # Se Qualcosa Non Funziona
 
-Usa questa pagina quando dashboard, pulsanti, tabelle o statblock non si comportano come previsto.
+Usa questa pagina quando dashboard, pulsanti, tabelle o schede creatura non si comportano come previsto.
 
 ````tabs
 tab: Diagnosi
@@ -21,7 +21,7 @@ tab: Diagnosi
 >   ["Templater", enabled("templater-obsidian"), "Wizard e creazione note"],
 >   ["Meta Bind", enabled("obsidian-meta-bind-plugin"), "Input e pulsanti"],
 >   ["Tasks", enabled("obsidian-tasks-plugin"), "Checklist operative"],
->   ["CSS", true, "Attiva snippet gdr-vault se la grafica e piatta"]
+>   ["CSS", true, "Attiva lo snippet gdr-vault se la grafica è piatta o poco leggibile"]
 > ];
 > dv.table(["Strumento", "Stato", "Serve per"], checks.map(([a,b,c]) => [a, b ? "Pronto" : "Da controllare", c]));
 > ```
@@ -39,16 +39,16 @@ tab: Sintomi
 > [!lettura] Problemi Comuni
 > Le tabelle richiedono Dataview; i pulsanti richiedono Meta Bind e Templater; i tiri `dice:` richiedono Dice Roller; le schede creatura richiedono Fantasy Statblocks.
 
-tab: Qualita
+tab: Qualità
 
 > [!regia] Controlli
 > - [[Risorse/Controllo Vault]]
-> - [[Risorse/Quality Report]]
+> - [[Risorse/Quality Report|Quality Report - controllo qualità]]
 > - `npm run check` nel repository sorgente
 > - `npm run release:clean` prima di creare lo ZIP utente
 ````
 
-## Fallback Markdown
+## Fallback Markdown - Versione Leggibile Senza Plugin
 
 | Sintomo | Prima azione |
 | --- | --- |
@@ -72,8 +72,8 @@ tab: Qualita
 | I pulsanti non funzionano | Meta Bind o Templater disattivati | Abilita entrambi e riprova |
 | Il pulsante crea una nota ma non compila i campi | Templater non e attivo o non ha accesso agli script | Abilita Templater, controlla la cartella script e riprova da [[1. DM Dashboard]] |
 | Le note create sono vuote o sbagliate | Creazione guidata non attiva | Controlla gli strumenti necessari in [[Risorse/Primo Avvio Strumenti]] |
-| `Durante il Gioco` non mostra la sessione giusta | Nessuna sessione attiva o troppe sessioni attive | Apri la sessione corretta e lascia `attiva` acceso solo li |
-| `Cosa Succede Fuori Scena` e vuota | Mancano pressione, prossima mossa o conseguenze sulle note | Compila `pressione`, `innesco`, `prossima_mossa` o `conseguenze` su missioni, PNG, fazioni e clock |
+| `Durante il Gioco` non mostra la sessione giusta | Nessuna sessione attiva o troppe sessioni attive | Apri la sessione corretta e lascia `attiva` acceso solo lì |
+| `Cosa Succede Fuori Scena` è vuota | Mancano pressione, prossima mossa o conseguenze sulle note | Compila `pressione`, `innesco`, `prossima_mossa` o `conseguenze` su missioni, PNG, fazioni e clock |
 | I mostri non appaiono come schede | Schede creatura non attive | Controlla gli strumenti necessari e riapri la nota creatura |
 | I tiri `dice:` restano testo | Tiri rapidi non attivi | Controlla gli strumenti necessari |
 | Le date non compaiono nel calendario | Calendario non attivo o data mancante | Controlla gli strumenti necessari e compila la data del mondo |
@@ -90,7 +90,7 @@ tab: Qualita
 5. Se il problema riguarda una sessione, controlla che una sola sessione abbia `attiva: true`.
 6. Se il problema riguarda il mondo vivo, aggiungi almeno una `prossima_mossa` o una `pressione` a una missione, fazione, PNG o tracciato.
 
-## Controlli Di Qualita
+## Controlli Di Qualità
 
 Prima di usare una copia come release, apri [[Risorse/Controllo Vault]] e verifica:
 

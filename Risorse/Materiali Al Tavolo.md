@@ -35,6 +35,12 @@ tab: Materiali
 > else dv.table(["Materiale", "Tipo"], rows);
 > ```
 
+> [!encounter] Pipeline D&D 5.5
+> ```dataviewjs
+> const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+> gdr.renderDnd55MaterialPipeline(dv);
+> ```
+
 tab: Mappe
 
 > [!mappa] Mappe Sessione
@@ -120,27 +126,8 @@ if (!active) {
 ## Incontri E Creature
 
 ```dataviewjs
-const active = dv.pages('"Mondi/Sessioni"').where(p => p.attiva === true).first();
-const encounterLinks = dv.array(active?.incontri ?? []).array();
-const encounterNames = new Set(encounterLinks.map(l => String(l.path ?? l).replace(/\.md$/, "").split("/").pop()));
-const encounters = dv.pages('"Mondi/Incontri"').where(p => encounterNames.has(p.file.name)).array();
-const rows = encounters.map(p => [
-  p.file.link,
-  p.tipo ?? "",
-  p.stato ?? "",
-  dv.array(p.creature ?? []).join(", "),
-  dv.array(p.encounter_creatures ?? []).join(", "),
-  dv.array(p.mappe ?? []).join(", "),
-  p.pericolo ?? ""
-]);
-
-if (!active) {
-  dv.paragraph("Nessuna sessione attiva.");
-} else if (!rows.length) {
-  dv.paragraph("Nessun incontro collegato alla sessione attiva.");
-} else {
-  dv.table(["Incontro", "Tipo", "Stato", "Creature", "Iniziativa", "Mappe", "Pericolo"], rows);
-}
+const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+gdr.renderDnd55MaterialPipeline(dv);
 ```
 
 ## Controllo Finale

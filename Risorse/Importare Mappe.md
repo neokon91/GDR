@@ -54,7 +54,7 @@ tab: Viste
 
 ## Fallback Markdown
 
-| Fonte | Output |
+| Fonte | Risultato |
 | --- | --- |
 | Azgaar | Bozze luogo/geografia |
 | Watabou City | Bozza insediamento + mappa |

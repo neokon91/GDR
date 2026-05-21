@@ -174,6 +174,9 @@ table(
     .array()
 );
 
+dv.header(2, "Catena M11 - Scelta, Conseguenza, Propagazione");
+gdr.renderM11ContinuityChain(dv);
+
 table(
   "Conseguenze Aperte",
   ["Lore", "Tipo", "Data mondo", "Stato", "Collegamenti", "Impatto", "Azioni"],

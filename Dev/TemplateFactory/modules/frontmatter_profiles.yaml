@@ -835,6 +835,10 @@ profiles:
       value: mondo
     - key: luogo
       value: luogo
+    - key: missioni
+      value: missioni
+    - key: fazioni
+      value: fazioni
     - key: creature
       value: creature
     - key: personaggi
@@ -849,10 +853,16 @@ profiles:
       value: pericolo
     - key: ricompense
       value: ricompense
+    - key: gancio
+      value: gancio
+    - key: uso_al_tavolo
+      value: uso_al_tavolo
+    - key: player_safe
+      value: player_safe
     - key: pressione
       default: 0
     - key: prossima_mossa
-      default: ''
+      value: prossima_mossa
     - key: round
       default: 1
     - key: condizioni
@@ -2015,6 +2025,22 @@ profiles:
       value: habitat
     - key: luoghi
       value: luoghi
+    - key: fazioni
+      value: fazioni
+    - key: missioni
+      value: missioni
+    - key: gancio
+      value: gancio
+    - key: uso_al_tavolo
+      value: uso_al_tavolo
+    - key: player_safe
+      value: player_safe
+    - key: prossima_mossa
+      value: prossima_mossa
+    - key: connessioni
+      value: connessioni
+    - key: sessioni
+      value: sessioni
     - key: traits
       value: traits
     - key: actions

@@ -91,31 +91,31 @@ settings:
   --gdr-dashboard-density: 0.75rem;
   --gdr-table-density: 0.42rem;
   --gdr-card-depth: 0 8px 22px rgba(0, 0, 0, 0.08);
-  --gdr-accent-rgb: 74, 126, 139;
-  --gdr-warm-rgb: 177, 128, 67;
-  --gdr-danger-rgb: 174, 75, 63;
-  --gdr-nature-rgb: 91, 130, 86;
-  --gdr-mystic-rgb: 124, 94, 157;
-  --gdr-png-rgb: 91, 130, 86;
-  --gdr-luogo-rgb: 69, 126, 132;
-  --gdr-fazione-rgb: 136, 98, 68;
-  --gdr-missione-rgb: 74, 126, 139;
-  --gdr-incontro-rgb: 174, 75, 63;
-  --gdr-timeline-rgb: 92, 119, 166;
-  --gdr-segreto-rgb: 124, 94, 157;
-  --gdr-ricompensa-rgb: 194, 154, 70;
-  --gdr-border: color-mix(in srgb, var(--text-muted) 20%, transparent);
-  --gdr-surface: color-mix(in srgb, var(--background-secondary) 78%, transparent);
-  --gdr-surface-strong: color-mix(in srgb, var(--background-secondary) 92%, var(--background-primary));
-  --gdr-sidebar-bg: color-mix(in srgb, var(--background-primary) 94%, var(--text-normal) 6%);
-  --gdr-sidebar-header-bg: color-mix(in srgb, var(--background-primary) 90%, var(--text-normal) 10%);
-  --gdr-accent-soft: color-mix(in srgb, rgb(var(--gdr-accent-rgb)) 13%, transparent);
-  --gdr-accent-line: color-mix(in srgb, rgb(var(--gdr-accent-rgb)) 48%, transparent);
+  --gdr-accent-rgb: 62, 116, 128;
+  --gdr-warm-rgb: 150, 107, 58;
+  --gdr-danger-rgb: 156, 67, 58;
+  --gdr-nature-rgb: 75, 120, 78;
+  --gdr-mystic-rgb: 104, 82, 137;
+  --gdr-png-rgb: 75, 120, 78;
+  --gdr-luogo-rgb: 58, 113, 120;
+  --gdr-fazione-rgb: 124, 86, 60;
+  --gdr-missione-rgb: 62, 116, 128;
+  --gdr-incontro-rgb: 156, 67, 58;
+  --gdr-timeline-rgb: 80, 105, 145;
+  --gdr-segreto-rgb: 104, 82, 137;
+  --gdr-ricompensa-rgb: 166, 129, 55;
+  --gdr-border: color-mix(in srgb, var(--text-muted) 24%, var(--background-primary));
+  --gdr-surface: var(--background-secondary);
+  --gdr-surface-strong: color-mix(in srgb, var(--background-secondary) 72%, var(--background-primary));
+  --gdr-sidebar-bg: var(--background-secondary);
+  --gdr-sidebar-header-bg: color-mix(in srgb, var(--background-secondary) 82%, var(--background-primary));
+  --gdr-accent-soft: color-mix(in srgb, rgb(var(--gdr-accent-rgb)) 10%, var(--background-secondary));
+  --gdr-accent-line: color-mix(in srgb, rgb(var(--gdr-accent-rgb)) 62%, var(--background-modifier-border));
   --gdr-shadow: var(--gdr-card-depth);
   --gdr-focus-ring: 0 0 0 3px color-mix(in srgb, rgb(var(--gdr-accent-rgb)) 28%, transparent);
   --gdr-callout-density: 0.85rem;
-  --gdr-callout-title-bg: color-mix(in srgb, rgb(var(--callout-color)) 14%, var(--background-secondary));
-  --gdr-callout-body-bg: color-mix(in srgb, rgb(var(--callout-color)) 6%, var(--background-primary));
+  --gdr-callout-title-bg: color-mix(in srgb, rgb(var(--callout-color)) 9%, var(--background-secondary));
+  --gdr-callout-body-bg: color-mix(in srgb, rgb(var(--callout-color)) 3%, var(--background-primary));
 }
 
 body.gdr-palette-bosco {
@@ -156,11 +156,11 @@ body.gdr-palette-minimal {
 }
 
 body.theme-dark {
-  --gdr-border: color-mix(in srgb, var(--text-muted) 26%, transparent);
-  --gdr-surface: color-mix(in srgb, var(--background-secondary) 84%, transparent);
-  --gdr-surface-strong: color-mix(in srgb, var(--background-secondary) 86%, var(--background-primary));
-  --gdr-sidebar-bg: color-mix(in srgb, var(--background-primary) 92%, white 8%);
-  --gdr-sidebar-header-bg: color-mix(in srgb, var(--background-primary) 86%, white 14%);
+  --gdr-border: color-mix(in srgb, var(--text-muted) 30%, var(--background-primary));
+  --gdr-surface: var(--background-secondary);
+  --gdr-surface-strong: color-mix(in srgb, var(--background-secondary) 78%, var(--background-primary));
+  --gdr-sidebar-bg: var(--background-secondary);
+  --gdr-sidebar-header-bg: color-mix(in srgb, var(--background-secondary) 76%, var(--background-primary));
 }
 
 .workspace-ribbon,
@@ -200,6 +200,17 @@ body.theme-dark {
 .nav-file-title,
 .workspace-ribbon .side-dock-ribbon-action {
   color: var(--text-muted) !important;
+}
+
+/* Release UX: runtime and reference folders stay available to plugins, but out of the normal user navigation. */
+.nav-folder:has(> .nav-folder-title[data-path="SRD"]),
+.nav-folder:has(> .nav-folder-title[data-path="z.automazioni"]),
+.nav-folder:has(> .nav-folder-title[data-path="z.bacheche"]),
+.nav-folder:has(> .nav-folder-title[data-path="z.bases"]),
+.nav-folder:has(> .nav-folder-title[data-path="z.engine"]),
+.nav-folder:has(> .nav-folder-title[data-path="z.fileclass"]),
+.nav-folder:has(> .nav-folder-title[data-path="z.modelli"]) {
+  display: none !important;
 }
 
 .nav-folder-title:hover,
@@ -803,9 +814,7 @@ body .markdown-source-view.tavolo {
   border: 1px solid var(--gdr-border);
   border-left: 5px solid var(--gdr-accent-line);
   border-radius: var(--gdr-radius);
-  background:
-    linear-gradient(90deg, var(--gdr-accent-soft), transparent 58%),
-    var(--gdr-surface);
+  background: var(--gdr-surface);
   box-shadow: var(--gdr-shadow);
 }
 
@@ -838,13 +847,11 @@ body .markdown-source-view.tavolo {
   width: clamp(5rem, 14vw, 11rem);
   height: 2px;
   border-radius: 999px;
-  background: linear-gradient(90deg, transparent, var(--gdr-accent-line));
+  background: var(--gdr-accent-line);
 }
 
 .markdown-preview-view.gdr-player-view h1 {
-  background:
-    linear-gradient(90deg, color-mix(in srgb, rgb(var(--gdr-png-rgb)) 13%, transparent), transparent 58%),
-    var(--gdr-surface);
+  background: color-mix(in srgb, rgb(var(--gdr-png-rgb)) 7%, var(--gdr-surface));
 }
 
 .markdown-preview-view.gdr-player-view .callout[data-callout="warning"] {
@@ -889,7 +896,7 @@ body .markdown-source-view.tavolo {
   min-width: 10.75rem;
   justify-content: center;
   border: 1px solid var(--gdr-border) !important;
-  background: color-mix(in srgb, var(--interactive-accent) 14%, var(--background-secondary)) !important;
+  background: var(--gdr-surface-strong) !important;
   box-shadow: none !important;
 }
 
@@ -901,11 +908,7 @@ body .markdown-source-view.tavolo {
 
 .markdown-preview-view.dashboard .callout[data-callout="scena"] {
   border-color: color-mix(in srgb, rgb(var(--callout-color)) 45%, transparent);
-  background: linear-gradient(
-    180deg,
-    color-mix(in srgb, rgb(var(--callout-color)) 12%, var(--background-primary)),
-    var(--background-primary)
-  );
+  background: color-mix(in srgb, rgb(var(--callout-color)) 5%, var(--background-primary));
 }
 
 .markdown-preview-view.dashboard .callout[data-callout="scena"] .callout-content {
@@ -993,51 +996,51 @@ body .markdown-source-view.tavolo {
 
 .markdown-preview-view.gdr-dm-dashboard .gdr-stat-card:nth-child(1)::before,
 .gdr-kind-campagna::before {
-  background: color-mix(in srgb, rgb(var(--gdr-missione-rgb)) 72%, transparent);
+  background: rgb(var(--gdr-missione-rgb));
 }
 
 .markdown-preview-view.gdr-dm-dashboard .gdr-stat-card:nth-child(2)::before,
 .gdr-kind-sessione::before {
-  background: color-mix(in srgb, rgb(var(--gdr-timeline-rgb)) 72%, transparent);
+  background: rgb(var(--gdr-timeline-rgb));
 }
 
 .markdown-preview-view.gdr-dm-dashboard .gdr-stat-card:nth-child(3)::before,
 .gdr-kind-missione::before {
-  background: color-mix(in srgb, rgb(var(--gdr-missione-rgb)) 72%, transparent);
+  background: rgb(var(--gdr-missione-rgb));
 }
 
 .markdown-preview-view.gdr-dm-dashboard .gdr-stat-card:nth-child(4)::before,
 .gdr-kind-clock::before {
-  background: color-mix(in srgb, rgb(var(--gdr-incontro-rgb)) 72%, transparent);
+  background: rgb(var(--gdr-incontro-rgb));
 }
 
 .markdown-preview-view.gdr-dm-dashboard .gdr-stat-card:nth-child(5)::before,
 .gdr-kind-ricompensa::before {
-  background: color-mix(in srgb, rgb(var(--gdr-ricompensa-rgb)) 72%, transparent);
+  background: rgb(var(--gdr-ricompensa-rgb));
 }
 
 .markdown-preview-view.gdr-worldbuilder-dashboard .gdr-stat-card:nth-child(1)::before,
 .markdown-preview-view.gdr-atlante-dashboard .gdr-stat-card:nth-child(1)::before,
 .gdr-kind-luogo::before {
-  background: color-mix(in srgb, rgb(var(--gdr-luogo-rgb)) 72%, transparent);
+  background: rgb(var(--gdr-luogo-rgb));
 }
 
 .markdown-preview-view.gdr-worldbuilder-dashboard .gdr-stat-card:nth-child(2)::before,
 .markdown-preview-view.gdr-atlante-dashboard .gdr-stat-card:nth-child(2)::before,
 .gdr-kind-png::before {
-  background: color-mix(in srgb, rgb(var(--gdr-png-rgb)) 72%, transparent);
+  background: rgb(var(--gdr-png-rgb));
 }
 
 .markdown-preview-view.gdr-worldbuilder-dashboard .gdr-stat-card:nth-child(3)::before,
 .markdown-preview-view.gdr-atlante-dashboard .gdr-stat-card:nth-child(4)::before,
 .gdr-kind-fazione::before {
-  background: color-mix(in srgb, rgb(var(--gdr-fazione-rgb)) 72%, transparent);
+  background: rgb(var(--gdr-fazione-rgb));
 }
 
 .markdown-preview-view.gdr-worldbuilder-dashboard .gdr-stat-card:nth-child(4)::before,
 .markdown-preview-view.gdr-atlante-dashboard .gdr-stat-card:nth-child(5)::before,
 .gdr-kind-timeline::before {
-  background: color-mix(in srgb, rgb(var(--gdr-timeline-rgb)) 72%, transparent);
+  background: rgb(var(--gdr-timeline-rgb));
 }
 
 .gdr-stat-value {
@@ -1138,15 +1141,15 @@ body .markdown-source-view.tavolo {
 }
 
 .gdr-card-operative {
-  background: linear-gradient(180deg, color-mix(in srgb, rgb(var(--gdr-accent-rgb)) 6%, transparent), transparent 60%), var(--gdr-surface);
+  background: color-mix(in srgb, rgb(var(--gdr-accent-rgb)) 5%, var(--gdr-surface));
 }
 
 .gdr-card-post {
-  background: linear-gradient(180deg, color-mix(in srgb, rgb(var(--gdr-warm-rgb)) 8%, transparent), transparent 62%), var(--gdr-surface);
+  background: color-mix(in srgb, rgb(var(--gdr-warm-rgb)) 5%, var(--gdr-surface));
 }
 
 .gdr-card-player {
-  background: linear-gradient(180deg, color-mix(in srgb, rgb(var(--gdr-nature-rgb)) 8%, transparent), transparent 62%), var(--gdr-surface);
+  background: color-mix(in srgb, rgb(var(--gdr-nature-rgb)) 5%, var(--gdr-surface));
 }
 
 .gdr-card-archive {
@@ -1216,7 +1219,7 @@ body .markdown-source-view.tavolo {
 }
 
 .markdown-preview-view.gdr-player-view .gdr-stat-card {
-  background: linear-gradient(180deg, var(--gdr-surface-strong), var(--gdr-surface));
+  background: var(--gdr-surface-strong);
 }
 
 .markdown-preview-view.gdr-quality-report .gdr-stat-value {
@@ -1314,7 +1317,7 @@ body .markdown-source-view.tavolo {
   margin-top: 0.55rem;
   overflow: hidden;
   border-radius: 999px;
-  background: color-mix(in srgb, var(--background-modifier-border) 70%, transparent);
+  background: var(--background-modifier-border);
 }
 
 .gdr-track-bar > span {
@@ -1322,7 +1325,7 @@ body .markdown-source-view.tavolo {
   height: 100%;
   min-width: 0.2rem;
   border-radius: inherit;
-  background: linear-gradient(90deg, rgb(var(--gdr-accent-rgb)), rgb(var(--gdr-warm-rgb)));
+  background: rgb(var(--gdr-accent-rgb));
 }
 
 .gdr-track-ticks {
@@ -1526,17 +1529,37 @@ body .markdown-source-view.tavolo {
 }
 
 .tabs-container:not(.tabs-innertabs) {
-  background: color-mix(in srgb, var(--background-secondary) 42%, transparent);
+  border: 1px solid var(--gdr-border);
+  background: var(--gdr-surface) !important;
+  color: var(--text-normal) !important;
+  overflow: hidden;
 }
 
 .tabs-container > .tabs-nav > .tabs-nav-item-wrapper > .tabs-nav-item {
+  background: transparent !important;
+  color: var(--text-muted) !important;
   font-weight: 650;
 }
 
+.tabs-container > .tabs-nav {
+  border-bottom: 1px solid var(--gdr-border);
+  background: var(--gdr-surface-strong) !important;
+}
+
+.tabs-container > .tabs-nav > .tabs-nav-item-wrapper > .tabs-nav-item.is-active,
+.tabs-container > .tabs-nav > .tabs-nav-item-wrapper > .tabs-nav-item.active,
+.tabs-container > .tabs-nav > .tabs-nav-item-wrapper > .tabs-nav-item:hover {
+  color: var(--text-normal) !important;
+  background: var(--gdr-accent-soft) !important;
+}
+
+.tabs-container :is(.tabs-content, .tabs-tab-content, .tabs-content-container, .tabs-pane, .tabs-tab) {
+  background: var(--background-primary) !important;
+  color: var(--text-normal) !important;
+}
+
 .workspace-leaf-content[data-type="markdown"] .view-content {
-  background:
-    linear-gradient(180deg, color-mix(in srgb, rgb(var(--gdr-accent-rgb)) 4%, transparent), transparent 18rem),
-    var(--background-primary);
+  background: var(--background-primary);
 }
 
 @media (min-width: 900px) {
@@ -1600,6 +1623,25 @@ body .markdown-source-view.tavolo {
   .gdr-info-card:hover {
     transform: none;
   }
+}
+
+/* Dashboard screenshots should open on the note body, not on the editable properties table. */
+.markdown-preview-view:is(.dashboard, .indice) .metadata-container,
+.markdown-source-view:is(.dashboard, .indice) .metadata-container {
+  margin-block-end: 1.25rem;
+  padding-block: 0.25rem;
+}
+
+.markdown-preview-view:is(.dashboard, .indice) .metadata-container > :not(.metadata-properties-heading),
+.markdown-source-view:is(.dashboard, .indice) .metadata-container > :not(.metadata-properties-heading) {
+  display: none;
+}
+
+.markdown-preview-view:is(.dashboard, .indice) .metadata-container:hover > :not(.metadata-properties-heading),
+.markdown-preview-view:is(.dashboard, .indice) .metadata-container:focus-within > :not(.metadata-properties-heading),
+.markdown-source-view:is(.dashboard, .indice) .metadata-container:hover > :not(.metadata-properties-heading),
+.markdown-source-view:is(.dashboard, .indice) .metadata-container:focus-within > :not(.metadata-properties-heading) {
+  display: block;
 }
 
 @media print {

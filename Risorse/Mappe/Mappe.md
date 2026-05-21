@@ -10,7 +10,7 @@ stato: pronto
 
 ## Scelta Rapida
 
-| Bisogno | Plugin | Usa quando | Output minimo |
+| Bisogno | Plugin | Usa quando | Risultato minimo |
 | --- | --- | --- | --- |
 | Fronte, indizi, relazioni mobili | Excalidraw | Devi disegnare, annotare e spostare idee mentre prepari. | Mappa in `Risorse/Mappe` con link a note canoniche. |
 | Rete stabile di note | Canvas / Advanced Canvas | Vuoi una mappa fatta di note, gruppi e connessioni durevoli. | Canvas con nodi che aprono luoghi, PNG, fazioni, missioni o clock. |

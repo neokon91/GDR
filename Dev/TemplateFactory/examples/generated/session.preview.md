@@ -34,7 +34,10 @@ tab: Ancore
 >
 > Clock: `INPUT[tracciati][:tracciati]`
 >
-> PNG: `INPUT[inlineListSuggester(optionQuery("Mondi/Personaggi"), useLinks(partial), allowOther):personaggi]`
+> PNG:
+> ```meta-bind
+> INPUT[inlineListSuggester(optionQuery("Mondi/Personaggi"), useLinks(partial), allowOther):personaggi]
+> ```
 >
 > Fonti: `INPUT[fonti][:fonti]`
 >
@@ -57,15 +60,30 @@ tab: Ancore
 tab: Tavolo
 
 > [!incontro] Materiale Al Tavolo
-> Incontri: `INPUT[inlineListSuggester(optionQuery("Mondi/Incontri"), useLinks(partial), allowOther):incontri]`
+> Incontri:
+> ```meta-bind
+> INPUT[inlineListSuggester(optionQuery("Mondi/Incontri"), useLinks(partial), allowOther):incontri]
+> ```
 >
-> Dispense: `INPUT[inlineListSuggester(optionQuery("Mondi/Dispense"), useLinks(partial), allowOther):dispense]`
+> Dispense:
+> ```meta-bind
+> INPUT[inlineListSuggester(optionQuery("Mondi/Dispense"), useLinks(partial), allowOther):dispense]
+> ```
 >
-> Audio: `INPUT[inlineListSuggester(optionQuery("Risorse/Audio"), useLinks(partial), allowOther):audio]`
+> Audio:
+> ```meta-bind
+> INPUT[inlineListSuggester(optionQuery("Risorse/Audio"), useLinks(partial), allowOther):audio]
+> ```
 >
-> Immagini: `INPUT[inlineListSuggester(optionQuery("Risorse/Immagini"), useLinks(partial), allowOther):immagini]`
+> Immagini:
+> ```meta-bind
+> INPUT[inlineListSuggester(optionQuery("Risorse/Immagini"), useLinks(partial), allowOther):immagini]
+> ```
 >
-> Video: `INPUT[inlineListSuggester(optionQuery("Risorse/Video"), useLinks(partial), allowOther):video]`
+> Video:
+> ```meta-bind
+> INPUT[inlineListSuggester(optionQuery("Risorse/Video"), useLinks(partial), allowOther):video]
+> ```
 >
 > Riferimenti SRD: `INPUT[riferimenti_srd][:riferimenti_srd]`
 >
@@ -97,7 +115,10 @@ tab: Tavolo
 tab: Mappa
 
 > [!mappa] Mappe E Scene Visuali
-> Mappe: `INPUT[inlineListSuggester(optionQuery("Risorse/Mappe"), useLinks(partial), allowOther):mappe]`
+> Mappe:
+> ```meta-bind
+> INPUT[inlineListSuggester(optionQuery("Risorse/Mappe"), useLinks(partial), allowOther):mappe]
+> ```
 >
 > Luogo corrente: `INPUT[text:luogo_corrente]`
 >

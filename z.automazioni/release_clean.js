@@ -79,7 +79,6 @@ const REQUIRED_RELEASE_FILES = [
     "Inizia Qui.md",
     "VERSION.md",
     "LEGGIMI.md",
-    "Demo Brumafonda.md",
     ".obsidian/community-plugins.json",
     ".obsidian/snippets/gdr-vault.css",
     "Hub/Vista Giocatori.md",
@@ -88,10 +87,6 @@ const REQUIRED_RELEASE_FILES = [
     "Risorse/Setup Guidato.md",
     "Risorse/Controllo Vault.md",
     "Risorse/Quality Report.md",
-    "Mondi/Brumafonda Demo.md",
-    "Campagne/Sale Sotto La Nebbia/Sale Sotto La Nebbia.md",
-    "Mondi/Sessioni/2026-05-28 - La Campana Nella Nebbia.md",
-    "Risorse/Mappe/Mappa Pubblica Di Brumafonda.md",
     "z.engine/session_views.js",
     "z.automazioni/helpers.js",
     "z.bases/Atlante Mappe.base",
@@ -133,83 +128,11 @@ Le cartelle tecniche e il compendio SRD sono inclusi per far funzionare automazi
 2. Scegli \`Apri cartella come vault\`.
 3. Se Obsidian chiede conferma per gli strumenti inclusi, abilitali solo se hai scaricato il vault dalla release ufficiale.
 4. Apri \`Inizia Qui.md\`.
-5. Se vuoi vedere una demo gia pronta, apri \`Demo Brumafonda.md\`.
-6. Apri \`Risorse/Setup Guidato.md\` per controllare plugin, pulsanti e dashboard.
+5. Apri \`Risorse/Setup Guidato.md\` per controllare plugin, pulsanti e dashboard.
 
 ## Cosa Non Include
 
 Questa copia contiene solo il vault pronto da aprire in Obsidian. Non include roadmap interne, strumenti di sviluppo o materiali sorgente non necessari al gioco.
-`,
-    "Demo Brumafonda.md": `---
-cssclasses:
-  - dashboard
-categoria: risorsa
-tipo: demo
-stato: pronto
-pubblico: true
----
-
-# Demo Brumafonda
-
-Questa pagina esiste solo nella release utente. Serve a provare il vault senza aprire documentazione di sviluppo.
-
-\`\`\`\`tabs
-tab: Inizia
-
-> [!regia] Percorso Demo
-> 1. Apri [[Sale Sotto La Nebbia]]: apre il dossier campagna ordinato come materiale finale.
-> 2. Dal dossier apri mondo, missione, sessione, mappa, dispensa e conseguenza.
-> 3. Apri [[Vista Giocatori]] per vedere recap, mappa e materiale condivisibile.
-
-tab: Dossier
-
-> [!missione] Campagna Pronta
-> - [[Sale Sotto La Nebbia]]
-> - [[Brumafonda Demo]]
-> - [[Porto Di Brumafonda]]
-> - [[Recuperare La Campana Sommersa]]
-> - [[2026-05-28 - La Campana Nella Nebbia]]
-> - [[La Marea Ha Preso Il Faro Vecchio]]
-
-tab: Player-Safe
-
-> [!lettura] Materiale Condivisibile
-> - [[Mappa Pubblica Di Brumafonda]]
-> - [[Avviso Della Dogana Di Brumafonda]]
-> - [[Vista Giocatori]]
-
-> [!regia]- Controllo
-> \`\`\`dataviewjs
-> const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
-> gdr.renderPlayerPortalStatus(dv);
-> \`\`\`
-
-tab: Smoke
-
-> [!todo] Cosa Verificare
-> - [ ] Nessun blocco Dataview o DataviewJS mostra errori. #task
-> - [ ] I pulsanti principali sono visibili. #task
-> - [ ] La vista giocatori non mostra campi DM o segreti. #task
-> - [ ] La mappa e la dispensa pubblica sono raggiungibili. #task
-
-tab: Strumenti
-
-> [!regia] Pagine Da Provare
-> - [[Inizia Qui]]
-> - [[Worldbuilder Dashboard]]
-> - [[Atlante del Mondo]]
-> - [[Campagna da Ambientazione]]
-> - [[Durante il Gioco]]
-> - [[Risorse/Controllo Vault]]
-\`\`\`\`
-
-## Fallback Markdown
-
-| Blocco | Apri |
-| --- | --- |
-| Dossier campagna | [[Sale Sotto La Nebbia]] |
-| Portale giocatori | [[Vista Giocatori]] |
-| Mappa pubblica | [[Mappa Pubblica Di Brumafonda]] |
 `
 };
 
@@ -332,10 +255,6 @@ function validateRelease() {
     }
 
     const releaseEntries = walkRelease(OUT);
-    const releaseDemoText = fs.readFileSync(repoPath(OUT, "Demo Brumafonda.md"), "utf8");
-    if (!hasPluginNativeReleasePage(releaseDemoText)) {
-        errors.push("Demo Brumafonda.md: la pagina demo release deve essere un dossier plugin-native");
-    }
     const releaseAppConfig = readJson(repoPath(OUT, ".obsidian/app.json"), {});
     const ignoredFilters = new Set(releaseAppConfig.userIgnoreFilters ?? []);
     for (const filter of REQUIRED_USER_IGNORE_FILTERS) {

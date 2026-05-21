@@ -147,8 +147,8 @@ async function meta_actions(tp, action = "") {
         text ? `impatto: ${text}` : "",
         nextMove ? `prossima mossa: ${nextMove}` : ""
     ].filter(Boolean).join(" | ");
-    const applyContinuityImpact = async (targetFile, { sourceLink, targetLink, consequenceText, nextMove, pressureDelta = 0, mode = "propagazione" }) => {
-        if (!targetFile || targetFile.path === currentFile().path) return;
+    const applyContinuityImpact = async (targetFile, { sourceFile = currentFile(), sourceLink, targetLink, consequenceText, nextMove, pressureDelta = 0, trackStep = 0, mode = "propagazione" }) => {
+        if (!targetFile || targetFile.path === sourceFile?.path) return;
 
         await helpers.processFrontmatter(targetFile, fm => {
             fm.propagato_da = helpers.appendUniqueLink(fm.propagato_da, sourceLink);
@@ -180,6 +180,16 @@ async function meta_actions(tp, action = "") {
                 const currentPressure = Number.parseInt(fm.pressione ?? 0, 10) || 0;
                 fm.pressione = Math.max(0, currentPressure + pressureDelta);
             }
+
+            if (trackStep !== 0 && String(fm.categoria ?? "") === "tracciato") {
+                const currentProgress = Number.parseInt(fm.progress_value ?? 0, 10) || 0;
+                const maxProgress = Number.parseInt(fm.progress_max ?? 0, 10) || 0;
+                fm.progress_value = Math.max(0, currentProgress + trackStep);
+                fm.avanzato_il = today;
+                if (maxProgress > 0 && fm.progress_value >= maxProgress && fm.stato !== "archiviata") {
+                    fm.stato = "completato";
+                }
+            }
         });
 
         const targetMeta = app.metadataCache.getFileCache(targetFile)?.frontmatter ?? {};
@@ -189,7 +199,7 @@ async function meta_actions(tp, action = "") {
 
         for (const subject of helpers.normalizeFieldArray(targetMeta.soggetti)) {
             const subjectFile = helpers.getFileFromLink(subject);
-            if (!subjectFile || subjectFile.path === targetFile.path || subjectFile.path === currentFile().path) continue;
+            if (!subjectFile || subjectFile.path === targetFile.path || subjectFile.path === sourceFile?.path) continue;
 
             await helpers.processFrontmatter(subjectFile, fm => {
                 fm.relazioni = helpers.appendUniqueLink(fm.relazioni, targetLink);
@@ -206,6 +216,15 @@ async function meta_actions(tp, action = "") {
             });
         }
     };
+    const appendUniqueLinks = (value, links) => helpers.normalizeFieldArray(links)
+        .reduce((acc, link) => helpers.appendUniqueLink(acc, link), value);
+    const continuityEntry = ({ choice, consequenceText, targets, nextMove }) => [
+        today,
+        choice ? `scelta: ${choice}` : "",
+        consequenceText ? `conseguenza: ${consequenceText}` : "",
+        helpers.normalizeFieldArray(targets).length ? `bersagli: ${helpers.normalizeFieldArray(targets).join(", ")}` : "",
+        nextMove ? `prossima mossa: ${nextMove}` : ""
+    ].filter(Boolean).join(" | ");
 
     if (!currentFile()) {
         notice("Nessuna nota attiva.");
@@ -320,6 +339,64 @@ async function meta_actions(tp, action = "") {
         return "";
     }
 
+    if (action === "registra_scelta_mondo") {
+        const session = currentMeta().categoria === "sessione"
+            ? { file: currentFile(), frontmatter: currentMeta() }
+            : helpers.getActiveSessionContext();
+        const sourceFile = session.file ?? currentFile();
+        const sourceMeta = session.file ? (session.frontmatter ?? app.metadataCache.getFileCache(session.file)?.frontmatter ?? {}) : currentMeta();
+
+        if (!sourceFile) {
+            notice("Nessuna sessione o nota sorgente da aggiornare.");
+            return "";
+        }
+
+        const choice = await helpers.promptOptional(tp, "Scelta dei giocatori", sourceMeta.scelta ?? "");
+        if (!choice) return "";
+
+        const consequenceText = await helpers.promptOptional(tp, "Conseguenza concreta nel mondo", sourceMeta.conseguenza_potenziale ?? sourceMeta.impatto ?? "");
+        const targets = await choosePropagationTargets(sourceMeta);
+        if (!targets.length) {
+            notice("Scelta non registrata: servono entita impattate o propaga_a.");
+            return "";
+        }
+
+        const nextMove = await helpers.promptOptional(tp, "Prossima mossa suggerita ai bersagli", sourceMeta.prossima_mossa ?? sourceMeta.prossima_apertura ?? "");
+        const pressureDelta = await promptPressureDelta();
+        const trackStepText = await helpers.promptOptional(tp, "Avanzamento tracciati bersaglio", "1");
+        const trackStep = Number.parseInt(trackStepText || "0", 10);
+        const noteLink = helpers.fileLink(sourceFile);
+        const entry = continuityEntry({ choice, consequenceText, targets, nextMove });
+
+        for (const target of targets) {
+            const targetFile = helpers.getFileFromLink(target);
+            await applyContinuityImpact(targetFile, {
+                sourceFile,
+                sourceLink: noteLink,
+                targetLink: target,
+                consequenceText: consequenceText || choice,
+                nextMove,
+                pressureDelta,
+                trackStep: Number.isFinite(trackStep) ? trackStep : 0,
+                mode: "conseguenza"
+            });
+        }
+
+        await helpers.processFrontmatter(sourceFile, fm => {
+            fm.decisioni_prese = appendUniqueText(fm.decisioni_prese, choice);
+            fm.output_sessione = appendUniqueText(fm.output_sessione, entry);
+            fm.conseguenze = appendUniqueText(fm.conseguenze, consequenceText || choice);
+            fm.entita_impattate = appendUniqueLinks(fm.entita_impattate, targets);
+            fm.applicata_a = appendUniqueLinks(fm.applicata_a, targets);
+            fm.propagazione_stato = "applicata";
+            fm.ultima_propagazione = today;
+            if (nextMove && !fm.prossima_mossa) fm.prossima_mossa = nextMove;
+        });
+
+        notice("Scelta registrata e propagata nel mondo.");
+        return "";
+    }
+
     if (action === "propaga_entita") {
         const meta = currentMeta();
         const targets = await choosePropagationTargets(meta);
@@ -371,7 +448,7 @@ async function meta_actions(tp, action = "") {
         await helpers.processFrontmatter(session.file, fm => {
             fm.recap_pubblico = helpers.normalizeFieldArray(fm.recap_pubblico);
             if (!fm.recap_pubblico.includes(recap)) fm.recap_pubblico.push(recap);
-            fm.pubblico = true;
+            fm.recap_pubblico_preparato_il = today;
         });
         notice("Recap pubblico preparato.");
         return "";

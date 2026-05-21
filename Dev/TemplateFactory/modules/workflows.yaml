@@ -76,3 +76,77 @@ workflows:
       - Style Settings
       - Tasks
       - Bases
+continuity_rules:
+  player_choice_to_world_state:
+    trigger: BUTTON[registra-scelta-mondo]
+    action: registra_scelta_mondo
+    executor: z.automazioni/meta_actions.js
+    entry_points:
+      - Risorse/Post Sessione Guidato.md
+      - Hub/Durante il Gioco.md
+      - z.automazioni/meta_actions.js
+    conditions:
+      - field: conseguenze
+        required_when: la scelta cambia il mondo
+      - field: entita_impattate
+        required_when: la scelta tocca note concrete
+      - field: propaga_a
+        required_when: la scelta deve produrre reazioni future
+    effects:
+      - field: propagazione_stato
+        value: aperta
+      - field: aggiornamenti_richiesti
+        value: descrizione breve del cambiamento da verificare
+      - field: output_sessione
+        value: continuita utile alla prossima preparazione
+      - target_field: propagato_da
+      - target_field: aggiornamenti_richiesti
+      - target_field: progress_value
+        when: target.categoria == tracciato
+    propagation:
+      action: registra_scelta_mondo
+      target_fields:
+        - luoghi
+        - personaggi
+        - fazioni
+        - missioni
+        - relazioni
+        - tracciati
+  apply_consequence:
+    trigger: BUTTON[applica-conseguenza]
+    action: applica_conseguenza
+    executor: z.automazioni/meta_actions.js
+    conditions:
+      - source_has: entita_impattate or propaga_a
+      - source_has: conseguenze or impatto or conseguenza_potenziale
+    effects:
+      - source_field: applicata_il
+      - source_field: applicata_a
+      - source_field: propagazione_stato
+        value: applicata
+      - target_field: propagato_da
+      - target_field: aggiornamenti_richiesti
+      - target_field: conseguenze
+    propagation:
+      target_status: da verificare
+      dashboard:
+        - Mondi/Stato del Mondo.md
+        - Hub/Cosa Succede Fuori Scena.md
+        - Risorse/Post Sessione Guidato.md
+  propagate_entity:
+    trigger: BUTTON[propaga-a-entita]
+    action: propaga_entita
+    executor: z.automazioni/meta_actions.js
+    conditions:
+      - source_has: propaga_a or entita_impattate
+    effects:
+      - source_field: propagato_il
+      - source_field: propaga_a
+      - source_field: propagazione_stato
+        value: propagata
+      - target_field: connessioni
+      - target_field: propagato_da
+      - target_field: aggiornamenti_richiesti
+    propagation:
+      target_status: da verificare
+      relation_subjects: update_relazioni_when_target_is_relation

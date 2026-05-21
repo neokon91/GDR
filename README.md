@@ -1,22 +1,22 @@
 # Vault GDR
 
-Un vault Obsidian professionale per DM e worldbuilder italiani: costruisce ambientazioni profonde, trasforma mondi complessi in campagne, prepara sessioni radicate nel Codex, controlla il party e offre un portale dedicato ai giocatori.
+Un vault Obsidian professionale per DM e worldbuilder italiani. Aiuta a costruire ambientazioni profonde, trasformarle in campagne, preparare sessioni radicate nel Codex del mondo, controllare il party e mostrare ai giocatori solo materiale sicuro.
 
-L'obiettivo e farlo sembrare una app locale dentro Obsidian, non una cartella di appunti: il punto di forza e il **Codex del Mondo**, poi il flusso operativo porta quel mondo al tavolo con **Prepara -> Gioca -> Aggiorna il mondo**.
+L'obiettivo è farlo sembrare un'app locale dentro Obsidian, non una cartella di appunti. Il centro è il **Codex del Mondo**; il flusso operativo porta quel mondo al tavolo con **Prepara -> Gioca -> Aggiorna il mondo**.
 
-Apri [[Inizia Qui]] per il primo avvio. Il flusso principale e [[Risorse/Preparazione Sessione]] per produrre una sessione pronta, [[Durante il Gioco]] per giocarla e [[Cosa Succede Fuori Scena]] per aggiornare conseguenze, missioni e prossime mosse. Le dashboard avanzate restano strumenti di supporto, non tappe obbligatorie.
+Apri [[Inizia Qui]] per il primo avvio. Il percorso principale passa da [[Risorse/Preparazione Sessione]] per preparare una sessione, [[Durante il Gioco]] per giocarla e [[Cosa Succede Fuori Scena]] per aggiornare conseguenze, missioni e prossime mosse. Le dashboard avanzate sono strumenti di supporto, non tappe obbligatorie.
 
 ## Perche Usarlo
 
 - **Non tecnico**: l'utente usa pulsanti, dashboard e guide, non configurazioni.
 - **Completo**: mondo, campagna, sessione, post-sessione e vista giocatori.
-- **Player portal**: recap, PNG noti, luoghi scoperti, handout, mappe condivise e controllo anti-segreti.
-- **Party control**: PG, HP, inventario, obiettivi e flags in una schermata da sessione.
-- **Quality report**: copertura, buchi operativi, sicurezza pubblicazione e materiale screenshot-ready.
-- **Worldbuilding sistemico**: culture, lingue, storia, conflitti, cosmologia, fazioni, relazioni, causalita e conseguenze persistenti.
+- **Vista giocatori**: recap, PNG noti, luoghi scoperti, dispense, mappe condivise e controllo anti-segreti.
+- **Controllo party**: PG, HP, inventario, obiettivi e flag in una schermata da sessione.
+- **Controllo qualità**: copertura, buchi operativi, sicurezza della pubblicazione e materiale pronto per screenshot.
+- **Worldbuilding sistemico**: culture, lingue, storia, conflitti, cosmologia, fazioni, relazioni, causalità e conseguenze persistenti.
 - **D&D 5.5 come profilo principale**: creature, incontri, oggetti, party e SRD sono ottimizzati per fantasy D&D-like, senza mescolare il regolamento con il canone del mondo.
 - **Markdown-first**: i contenuti restano nel vault dell'utente.
-- **Release pulita**: il vault puo generare una copia consegnabile con `npm run release:clean`.
+- **Release pulita**: il vault può generare una copia consegnabile con `npm run release:clean`.
 
 ## Primi 5 Minuti
 
@@ -36,9 +36,9 @@ Apri [[Inizia Qui]] per il primo avvio. Il flusso principale e [[Risorse/Prepara
 1. Apri **Impostazioni > Aspetto > Snippet CSS**.
 2. Attiva `gdr-vault`.
 3. Se non lo vedi, ricarica gli snippet CSS dalla stessa sezione.
-4. Consigliato: tema **Minimal** e pannello **Style Settings > GDR Vault** per palette, densita di dashboard, tabelle e callout.
+4. Consigliato: tema **Minimal** e pannello **Style Settings > GDR Vault** per palette, densità di dashboard, tabelle e callout.
 
-Lo snippet non aggiunge dipendenze: migliora dashboard, callout, card, pulsanti e viste giocatori usando classi CSS compatibili con Obsidian, Dataview e Meta Bind.
+Lo snippet non aggiunge dipendenze. Migliora dashboard, callout, card, pulsanti e Vista Giocatori usando classi CSS compatibili con Obsidian, Dataview e Meta Bind.
 
 ## Flusso Rapido
 
@@ -80,14 +80,14 @@ Se dashboard, pulsanti o tabelle non funzionano, apri [[Risorse/Primo Avvio Stru
 - `SRD`: riferimento separato al System Reference Document 5.2.1 in italiano.
 - `Inbox`: idee grezze e appunti non ancora sistemati.
 - `Giocatori`: area dedicata a materiale condivisibile.
-- `Vista Giocatori`: portale player-facing safe-by-default, pronto per tavolo, stream o pubblicazione selettiva.
-- `Quality Report`: analytics visuale per copertura, note incomplete e materiale screenshot-ready.
+- `Vista Giocatori`: portale sicuro per i giocatori, pronto per tavolo, stream o pubblicazione selettiva.
+- `Quality Report`: controllo visuale di copertura, note incomplete e materiale pronto per screenshot.
 - `Post Sessione Guidato`: percorso per consolidare quello che e successo al tavolo.
 
 ## Mondo, Campagna E Risorse
 
-- Un **mondo** contiene cio che esiste nell'ambientazione: luoghi, popoli, fazioni, religioni, creature, oggetti e verita canoniche.
-- Una **campagna** raccoglie cio che accade al tavolo: party, sessioni, missioni, conseguenze e ricompense.
+- Un **mondo** contiene ciò che esiste nell'ambientazione: luoghi, popoli, fazioni, religioni, creature, oggetti e verità canoniche.
+- Una **campagna** raccoglie ciò che accade al tavolo: party, sessioni, missioni, conseguenze e ricompense.
 - **Avventure** e **one-shot** stanno nella campagna quando sono legate a un gruppo o a una storia precisa.
 - Tabelle, mappe, dispense e materiali riutilizzabili in piu campagne stanno in `Risorse`.
 - [[Worldbuilder Dashboard]] mostra ora Atlante del Mondo, Poteri in Movimento, Relazioni PNG, Timeline Causale e Buchi Di Mondo: usali per trovare collegamenti mancanti, pressioni senza prossima mossa e lore canonica non ancora storicizzata.
@@ -113,7 +113,7 @@ Se dashboard, pulsanti o tabelle non funzionano, apri [[Risorse/Primo Avvio Stru
 - Quando crei una nuova entità, scegli la creazione rapida se ti serve giocare subito: i collegamenti e i dettagli opzionali si aggiungono dopo dalla scheda. Vedi [[Risorse/Creazione Guidata Entità]].
 - Usa `Nuovo Clock` per creare un tracciato quando una pressione deve avanzare a segmenti invece di restare una nota testuale.
 - Apri [[Risorse/Come Usare I Clock]] se vuoi tre esempi pratici: minaccia, viaggio e rituale.
-- Mantieni `SRD` separato dal contenuto canonico: e riferimento regolamentare, non ambientazione.
+- Mantieni `SRD` separato dal contenuto canonico: è riferimento regolamentare, non ambientazione.
 - Mantieni il worldbuilding portabile in `Mondi`, `Campagne`, `Hub` e `Risorse`, ma considera D&D 5.5/SRD il profilo regolamentare principale per creature, incontri, oggetti, party e prep.
 
 ## Manutenzione Leggera
@@ -141,7 +141,7 @@ npm run import:azgaar
 npm run release:clean
 ```
 
-`npm run check` valida plugin obbligatori, link, template Meta Bind, helper Templater, file del plugin layer interno, input template, pulsanti, preset Metadata Menu, igiene repository e sintassi degli script in `z.automazioni` e `z.engine`. `npm run release:clean` rigenera i template runtime da TemplateFactory prima di creare la copia consegnabile. `npm run clean:repo` rimuove solo artefatti locali e temporanei ignorati.
+`npm run check` valida plugin obbligatori, link, template Meta Bind, helper Templater, file del layer interno, input template, pulsanti, preset Metadata Menu, igiene del repository e sintassi degli script in `z.automazioni` e `z.engine`. `npm run release:clean` rigenera i template runtime da TemplateFactory prima di creare la copia consegnabile. `npm run clean:repo` rimuove solo artefatti locali e temporanei ignorati.
 
 
 

@@ -105,7 +105,10 @@ tab: PNG
 >
 > Atteggiamento: `INPUT[text:atteggiamento]`
 >
-> Luogo attuale: `INPUT[inlineListSuggester(optionQuery("Mondi/Luoghi"), useLinks(partial), allowOther):luoghi]`
+> Luogo attuale:
+> ```meta-bind
+> INPUT[inlineListSuggester(optionQuery("Mondi/Luoghi"), useLinks(partial), allowOther):luoghi]
+> ```
 >
 > Fazioni: `INPUT[fazioni][:fazioni]`
 >

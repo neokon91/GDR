@@ -6,7 +6,6 @@ const ROOT = process.cwd();
 const RELEASE_EXPECTED_VERSION = "1.0.0";
 const RELEASE_EXPECTED_DATE = "2026-05-21";
 const RELEASE_CHANGELOG_MARKERS = [
-    "Demo Brumafonda.md",
     "[[Dev/Smoke Demo Finale]]",
     "Gate statico M3",
     "TemplateFactory ora copre",
@@ -29,9 +28,25 @@ const RELEASE_IMPORT_DOC_MARKERS = [
 ];
 const RELEASE_HANDOFF_MARKERS = [
     "Warning noti: **nessuno**",
-    "M8 Release Evidence And Zero-Warning Discipline",
-    "disciplina zero-warning",
+    "M11 Pipeline Homebrew D&D 5.5 E Continuita Di Mondo",
+    "scelta dei giocatori -> evento -> conseguenza -> propagazione -> dashboard -> prossima sessione",
     "`npm run check` deve restare senza warning"
+];
+const RELEASE_ROADMAP_MARKERS = [
+    "Confermare che non ci sono blocker Templater runtime noti",
+    "Preparare la fase M8 su release evidence e disciplina zero-warning",
+    "Raccogliere evidenze visuali in [[Dev/Smoke Demo Finale]]",
+    "Rafforzare i gate automatici contro materiale pubblico con campi DM evidenti",
+    "M9 - Riduzione Attrito E Sicurezza Player-Facing",
+    "M10 - Consolidamento Sistema Operativo Narrativo",
+    "M11 - Pipeline Homebrew D&D 5.5 E Continuita Di Mondo",
+    "Avviare M11 su missione + tracciato + fazione + luogo"
+];
+const RELEASE_NEXT_DISCUSSION_MARKERS = [
+    "Intervento 1 - Contratto Entita Vive End-To-End",
+    "Intervento 2 - Pipeline Homebrew D&D 5.5 Collegata Al Mondo",
+    "Intervento 3 - Simulazione Narrativa Leggera",
+    "Definition Of Done M11"
 ];
 
 const errors = [];
@@ -68,11 +83,28 @@ for (const marker of RELEASE_IMPORT_DOC_MARKERS) {
 const handoffText = readTextRel(ROOT, "Dev/NEXT_PHASE_HANDOFF.md");
 for (const marker of RELEASE_HANDOFF_MARKERS) {
     if (!handoffText.includes(marker)) {
-        errors.push(`Dev/NEXT_PHASE_HANDOFF.md: handoff M8 obsoleto o incompleto (${marker})`);
+        errors.push(`Dev/NEXT_PHASE_HANDOFF.md: handoff M11 obsoleto o incompleto (${marker})`);
     }
 }
 if (/Warning noti:\s*\n\s*-/i.test(handoffText)) {
     errors.push("Dev/NEXT_PHASE_HANDOFF.md: non deve elencare warning noti dopo la disciplina zero-warning");
+}
+
+const roadmapText = readTextRel(ROOT, "Dev/Roadmap/1.0 Professionale.md");
+for (const marker of RELEASE_ROADMAP_MARKERS) {
+    if (!roadmapText.includes(marker)) {
+        errors.push(`Dev/Roadmap/1.0 Professionale.md: roadmap M11 obsoleta o incompleta (${marker})`);
+    }
+}
+if (roadmapText.includes("- [ ] Correggere blocker Templater runtime")) {
+    errors.push("Dev/Roadmap/1.0 Professionale.md: non deve mantenere aperto il blocker Templater runtime dopo check zero-warning");
+}
+
+const nextDiscussionText = readTextRel(ROOT, "Dev/Prossima Discussione - YAML Entita Fantasy.md");
+for (const marker of RELEASE_NEXT_DISCUSSION_MARKERS) {
+    if (!nextDiscussionText.includes(marker)) {
+        errors.push(`Dev/Prossima Discussione - YAML Entita Fantasy.md: brief M11 incompleto (${marker})`);
+    }
 }
 
 const releaseCleanText = readTextRel(ROOT, "z.automazioni/release_clean.js");

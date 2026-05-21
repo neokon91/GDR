@@ -501,6 +501,130 @@
     })).join("");
   }
 
+  function materialReadiness(page, kind = "materiale") {
+    const issues = [];
+    if (!page) return ["manca nota"];
+
+    if (kind === "incontro") {
+      if (!hasLinks(page.luogo)) issues.push("manca luogo");
+      if (!hasLinks(page.missioni) && !hasLinks(page.fazioni) && !hasLinks(page.sessioni)) issues.push("non agganciato a missione/fazione/sessione");
+      if (String(page.tipo ?? "") === "combattimento" && !hasLinks(page.creature)) issues.push("combattimento senza creature");
+      if (String(page.tipo ?? "") === "combattimento" && !hasLinks(page.encounter_creatures) && !hasText(page.encounter_creatures)) issues.push("manca Initiative Tracker");
+      if (!hasText(page.uso_al_tavolo) && !hasText(page.gancio)) issues.push("manca uso al tavolo");
+      if (!hasText(page.prossima_mossa)) issues.push("manca esito se ignorato");
+    }
+
+    if (kind === "creatura") {
+      if (!hasLinks(page.luoghi) && !hasText(page.habitat)) issues.push("manca habitat/luogo");
+      if (!hasLinks(page.missioni) && !hasLinks(page.fazioni) && !hasLinks(page.sessioni) && !hasLinks(page.connessioni)) issues.push("isolata dal mondo");
+      if (!hasText(page.uso_al_tavolo) && !hasText(page.gancio)) issues.push("manca uso al tavolo");
+      if (!hasText(page.player_safe)) issues.push("manca versione player-safe");
+    }
+
+    if (kind === "oggetto") {
+      if (!hasLinks(page.luogo) && !hasLinks(page.proprietario)) issues.push("manca luogo/proprietario");
+      if (!hasLinks(page.missioni) && !hasLinks(page.sessioni) && !hasLinks(page.connessioni)) issues.push("isolato da missione/sessione/mondo");
+      if (!hasText(page.uso_al_tavolo) && !hasText(page.gancio)) issues.push("manca uso al tavolo");
+      if (!hasText(page.player_safe)) issues.push("manca versione player-safe");
+    }
+
+    return issues;
+  }
+
+  function linkedUniquePages(dv, links) {
+    const seen = new Set();
+    return pagesFromLinks(dv, links ?? [])
+      .array()
+      .filter(page => {
+        if (!page?.file?.path || seen.has(page.file.path)) return false;
+        seen.add(page.file.path);
+        return true;
+      });
+  }
+
+  function renderDnd55MaterialPipeline(dv, source = null) {
+    const session = source ?? activeSession(dv);
+    if (!session) {
+      renderEmptyState(dv, {
+        title: "Nessuna sessione attiva",
+        action: "Attiva o apri una sessione prima di controllare incontri, creature e ricompense.",
+        link: "Risorse/Preparazione Sessione.md"
+      });
+      return;
+    }
+
+    const encounters = linkedUniquePages(dv, session.incontri);
+    const directCreatures = linkedUniquePages(dv, session.creature);
+    const encounterCreatures = encounters.flatMap(encounter => linkedUniquePages(dv, encounter.creature));
+    const directObjects = linkedUniquePages(dv, session.oggetti ?? session.ricompense);
+    const encounterObjects = encounters.flatMap(encounter => linkedUniquePages(dv, encounter.ricompense));
+    const creatures = linkedUniquePages(dv, [...directCreatures.map(p => p.file.link), ...encounterCreatures.map(p => p.file.link)]);
+    const objects = linkedUniquePages(dv, [...directObjects.map(p => p.file.link), ...encounterObjects.map(p => p.file.link)]);
+
+    const rows = [
+      ...encounters.map(page => ({ page, kind: "incontro", badge: "Incontro" })),
+      ...creatures.map(page => ({ page, kind: "creatura", badge: "Creatura" })),
+      ...objects.map(page => ({ page, kind: "oggetto", badge: "Oggetto" }))
+    ];
+
+    if (!rows.length) {
+      renderEmptyState(dv, {
+        title: "Materiale D&D non collegato",
+        action: "Collega almeno un incontro, creatura o oggetto alla sessione o a un incontro della sessione.",
+        button: "BUTTON[nuovo-incontro-z-modelli-dm-incontro-md]"
+      });
+      return;
+    }
+
+    renderCardGrid(dv, rows, ({ page, kind, badge }) => {
+      const issues = materialReadiness(page, kind);
+      const body = kind === "incontro"
+        ? fieldText(page.uso_al_tavolo ?? page.gancio ?? page.creature)
+        : fieldText(page.uso_al_tavolo ?? page.gancio ?? page.player_safe);
+      const why = issues.length
+        ? `Gap: ${issues.join(", ")}`
+        : fieldText(page.missioni ?? page.fazioni ?? page.luoghi ?? page.luogo ?? page.sessioni ?? page.connessioni);
+
+      return cardHtml({
+        title: pageTitle(page),
+        meta: [page.categoria ?? kind, page.tipo, page.stato].filter(Boolean).join(" · "),
+        azione: body || "Apri e completa uso al tavolo, agganci e conseguenze.",
+        importa: why,
+        link: page.file.path,
+        badge,
+        cls: cardClass(page, "gdr-info-card compact", issues.length ? "gdr-kind-missing" : "gdr-kind-ready")
+      });
+    }, {
+      title: "Nessun materiale D&D pronto",
+      action: "Crea o collega materiale D&D alla sessione."
+    });
+  }
+
+  function renderCombatReadiness(dv, source = '"Mondi/Incontri"', limit = 24) {
+    const rows = dv.pages(source)
+      .where(p => isReal(p) && p.stato !== "archiviata" && String(p.tipo ?? "") === "combattimento")
+      .sort(p => Number(p.pericolo ?? p.pressione ?? 0), "desc")
+      .limit(limit)
+      .array();
+
+    renderCardGrid(dv, rows, page => {
+      const issues = materialReadiness(page, "incontro");
+      return cardHtml({
+        title: pageTitle(page),
+        meta: [page.stato, page.luogo ? fieldText(page.luogo) : "", `pericolo ${page.pericolo ?? 0}`].filter(Boolean).join(" · "),
+        azione: fieldText(page.creature ?? page.encounter_creatures) || "Collega creature e Initiative Tracker.",
+        importa: issues.length ? `Gap: ${issues.join(", ")}` : fieldText(page.missioni ?? page.fazioni ?? page.sessioni),
+        link: page.file.path,
+        badge: "Combattimento",
+        cls: cardClass(page, "gdr-info-card compact", issues.length ? "gdr-kind-missing" : "gdr-kind-ready")
+      });
+    }, {
+      title: "Nessun combattimento pronto",
+      action: "Crea un incontro di combattimento solo quando serve round-by-round.",
+      button: "BUTTON[nuovo-incontro-z-modelli-dm-incontro-md]"
+    });
+  }
+
   function renderSessionLiveCards(dv, source = null) {
     const session = source ?? dv.current();
     const cards = [
@@ -964,6 +1088,74 @@
     });
   }
 
+  function renderM11ContinuityChain(dv, source = null) {
+    const session = source ?? activeSession(dv) ?? dv.current();
+    const targetLinks = [
+      ...asArray(session?.missioni),
+      ...asArray(session?.tracciati),
+      ...asArray(session?.fazioni),
+      ...asArray(session?.luoghi),
+      ...asArray(session?.entita_impattate),
+      ...asArray(session?.propaga_a),
+      ...asArray(session?.applicata_a)
+    ];
+    const targetKeys = new Set(targetLinks.map(linkKey).filter(Boolean));
+    const pages = dv.pages('"Mondi"')
+      .where(p => isReal(p) && p.stato !== "archiviata")
+      .where(p => targetKeys.has(p.file.path) || targetKeys.has(p.file.name))
+      .sort(p => {
+        const order = { missione: 0, tracciato: 1, fazione: 2, luogo: 3, religione: 4, relazione: 5 };
+        return order[p.categoria] ?? 9;
+      }, "asc")
+      .limit(16)
+      .array();
+    const sourceCards = [
+      ["Scelta", session?.scelta ?? session?.decisioni_prese, "Registra una scelta che cambia missione, luogo, fazione o clock."],
+      ["Conseguenza", session?.conseguenze ?? session?.output_sessione, "Scrivi cosa cambia nel mondo."],
+      ["Bersagli", session?.entita_impattate ?? session?.propaga_a ?? session?.applicata_a, "Collega le entita che devono reagire."],
+      ["Stato", session?.propagazione_stato, "Usa aperta, applicata, propagata o da verificare."],
+      ["Prossima apertura", session?.prossima_apertura ?? session?.prossima_mossa, "Trasforma la continuita nella prossima scena."]
+    ];
+    const grid = dv.el("div", "", { cls: "gdr-card-grid compact" });
+    grid.innerHTML = sourceCards.map(([title, value, fallback]) => cardHtml({
+      title,
+      body: fieldText(value) || fallback,
+      link: session?.file?.path ?? "",
+      cls: `gdr-info-card compact ${fieldText(value) ? "gdr-kind-ready" : "gdr-kind-missing"}`
+    })).join("");
+
+    if (!pages.length) {
+      renderEmptyState(dv, {
+        title: "Catena M11 non collegata",
+        action: "Collega missione, tracciato, fazione e luogo alla sessione o alla conseguenza.",
+        button: "BUTTON[registra-scelta-mondo]"
+      });
+      return;
+    }
+
+    renderCardGrid(dv, pages, p => {
+      const issues = continuityIssues(p);
+      const progress = p.categoria === "tracciato"
+        ? `${Number(p.progress_value ?? 0)}/${Math.max(1, Number(p.progress_max ?? 6))}`
+        : "";
+      return cardHtml({
+        title: pageTitle(p),
+        meta: [p.categoria ?? p.tipo, continuityStatus(p) || p.stato, progress].filter(Boolean).join(" · "),
+        azione: fieldText(p.prossima_mossa ?? p.innesco ?? p.uso_al_tavolo) || "Definisci la reazione concreta.",
+        importa: issues.length
+          ? `Gap: ${issues.join(", ")}`
+          : fieldText(p.aggiornamenti_richiesti ?? p.conseguenze ?? p.entita_impattate ?? p.propaga_a ?? p.connessioni),
+        link: p.file.path,
+        badge: "M11",
+        cls: cardClass(p, "gdr-info-card compact", issues.length ? "gdr-kind-missing" : "gdr-kind-ready")
+      });
+    }, {
+      title: "Nessun bersaglio M11",
+      action: "Registra una scelta mondo e scegli bersagli reali.",
+      button: "BUTTON[registra-scelta-mondo]"
+    });
+  }
+
   function publicRows(dv, source, category, limit = 8) {
     return dv.pages(source)
       .where(p => publicCandidate(p, category))
@@ -1155,6 +1347,9 @@
     renderPublicSafety,
     renderPublicStats,
     renderM7FamilyCards,
+    renderM11ContinuityChain,
+    renderCombatReadiness,
+    renderDnd55MaterialPipeline,
     renderSessionAnchorCards,
     renderSessionLiveCards,
     renderSessionMaterialCards,

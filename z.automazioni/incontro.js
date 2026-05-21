@@ -21,11 +21,17 @@ async function incontro(tp, routeOptions = {}) {
     const luogo = await helpers.chooseLocation(tp, prompts.luogo ?? "Luogo dell'incontro");
     const context = { world: helpers.getWorldFromLink(luogo) };
     const pericolo = await helpers.promptOptional(tp, prompts.pericolo ?? "Pericolo da 0 a 10");
+    const missioni = await helpers.chooseMissions(tp, prompts.missioni ?? "Missioni collegate", context);
+    const fazioni = await helpers.chooseFactions(tp, prompts.fazioni ?? "Fazioni collegate", context);
     const creature = await helpers.chooseCreatures(tp, prompts.creature ?? "Creature coinvolte", context);
     const personaggi = await helpers.choosePeople(tp, prompts.personaggi ?? "Personaggi coinvolti", context);
     const mappe = await helpers.chooseMaps(tp, prompts.mappe ?? "Mappe dell'incontro", context);
     const audio = await helpers.chooseAudio(tp, prompts.audio ?? "Audio dell'incontro", context);
     const ricompense = await helpers.chooseObjects(tp, prompts.ricompense ?? "Ricompense", context);
+    const gancio = await helpers.promptOptional(tp, prompts.gancio ?? "Perche questo incontro entra in scena");
+    const usoAlTavolo = await helpers.promptOptional(tp, prompts.uso_al_tavolo ?? "Uso al tavolo");
+    const playerSafe = await helpers.promptOptional(tp, prompts.player_safe ?? "Versione player-safe");
+    const prossimaMossa = await helpers.promptOptional(tp, prompts.prossima_mossa ?? "Cosa cambia se l'incontro viene evitato, perso o vinto");
     const riferimentiRegola = await helpers.promptWikilinkTargets(tp, prompts.riferimenti_regola ?? "Riferimenti regola dell'incontro");
     const encounterCreatures = creature.map(link => helpers.yamlQuote(encounterName(link)));
 
@@ -33,6 +39,7 @@ async function incontro(tp, routeOptions = {}) {
     const created = await helpers.moveNote(tp, helpers.path("incontri"), name);
     // L'incontro appena creato diventa subito disponibile in Durante il Gioco.
     await helpers.linkCreatedNoteToActiveSession(created, { sessionField: "incontri" });
+    await helpers.linkCreatedNoteToConnections(created, [luogo, ...missioni, ...fazioni, ...creature, ...ricompense].filter(Boolean));
 
     return await helpers.renderFrontmatter("incontro", {
         id,
@@ -40,6 +47,8 @@ async function incontro(tp, routeOptions = {}) {
         tipo: selectedType?.id ?? "",
         mondo: context.world,
         luogo,
+        missioni: helpers.inlineYamlList(missioni),
+        fazioni: helpers.inlineYamlList(fazioni),
         creature: helpers.inlineYamlList(creature),
         personaggi: helpers.inlineYamlList(personaggi),
         mappe: helpers.inlineYamlList(mappe),
@@ -47,8 +56,12 @@ async function incontro(tp, routeOptions = {}) {
         sessioni: helpers.inlineYamlList(sessioni),
         pericolo,
         ricompense: helpers.inlineYamlList(ricompense),
+        gancio: helpers.yamlQuote(gancio),
+        uso_al_tavolo: helpers.yamlQuote(usoAlTavolo),
+        player_safe: helpers.yamlQuote(playerSafe),
+        prossima_mossa: helpers.yamlQuote(prossimaMossa),
         encounter_creatures: helpers.inlineYamlList(encounterCreatures),
-        fonti: helpers.inlineYamlWikilinkList([...sessioni, luogo, ...mappe]),
+        fonti: helpers.inlineYamlWikilinkList([...sessioni, luogo, ...missioni, ...fazioni, ...mappe]),
         riferimenti_srd: '[]',
         riferimenti_regola: helpers.inlineYamlWikilinkList(riferimentiRegola),
         sezioni_collegate: '[]',

@@ -20,11 +20,9 @@ Questa pagina tiene separati gli incontri di combattimento dagli incontri social
 
 ## Combattimenti Pronti
 
-```dataview
-TABLE luogo, pericolo, creature, encounter_creatures AS iniziativa, mappe, condizioni
-FROM "Mondi/Incontri"
-WHERE tipo = "combattimento" AND contains(list("pronto", "in gioco"), stato)
-SORT pericolo DESC, file.name ASC
+```dataviewjs
+const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+gdr.renderCombatReadiness(dv);
 ```
 
 ## Controllo Initiative Tracker

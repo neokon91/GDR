@@ -125,6 +125,14 @@ const REQUIRED_LAYER_FILES = [
     "z.engine/gdr_views.js",
     "z.engine/session_views.js"
 ];
+const REQUIRED_DEV_ARCHITECTURE_MARKERS = [
+    "Markdown = contenuto umano",
+    "YAML = stato persistente e regole dichiarative",
+    "Dataview = query layer",
+    "Meta Bind = interfaccia",
+    "Templater = generazione",
+    "z.engine + z.automazioni = runtime/logica/esecuzione"
+];
 const REQUIRED_PLUGIN_NATIVE_USER_PAGES = [
     "Risorse/Setup Guidato.md",
     "Risorse/Se Qualcosa Non Funziona.md",
@@ -152,7 +160,7 @@ const REQUIRED_HUB_EXPERIENCE = [
     ["Hub/Economia E Rotte.md", "gdr-economia-rotte", ["Sistema commerciale", "INPUT[", "dataviewjs"]],
     ["Hub/Compendium Del Mondo.md", "gdr-compendium-dashboard", ["Originale, non-SRD", "Compendium", "tab:"]]
 ];
-const DEMO_REQUIRED_FILES = [
+const FORBIDDEN_MANUAL_DEMO_FILES = [
     "Mondi/Brumafonda Demo.md",
     "Campagne/Sale Sotto La Nebbia/Sale Sotto La Nebbia.md",
     "Mondi/Culture/Custodi Delle Saline.md",
@@ -166,11 +174,14 @@ const DEMO_REQUIRED_FILES = [
     "Mondi/Sessioni/2026-05-28 - La Campana Nella Nebbia.md",
     "Mondi/Timeline/La Marea Ha Preso Il Faro Vecchio.md"
 ];
-const DEMO_CAMPAIGN_ANCHORED_FILES = DEMO_REQUIRED_FILES.filter(file => file !== "Campagne/Sale Sotto La Nebbia/Sale Sotto La Nebbia.md");
-const DEMO_PUBLIC_FILES = [
-    "Risorse/Mappe/Mappa Pubblica Di Brumafonda.md",
-    "Mondi/Dispense/Avviso Della Dogana Di Brumafonda.md",
-    "Mondi/Sessioni/2026-05-28 - La Campana Nella Nebbia.md"
+const PUBLIC_PRIVATE_FIELDS = [
+    "segreti",
+    "segreto",
+    "prossima_mossa",
+    "mosse_segrete",
+    "verita_nascosta",
+    "segreti_rivelabili",
+    "pressioni"
 ];
 const REQUIRED_META_BIND_INPUT_TEMPLATES = [
     "mondo",
@@ -194,6 +205,7 @@ const REQUIRED_META_BIND_BUTTONS = [
     "smista-bozza-generata",
     "canonizza-bozza-generata",
     "applica-conseguenza",
+    "registra-scelta-mondo",
     "avanza-clock",
     "collega-sessione-attiva",
     "propaga-a-entita",
@@ -805,67 +817,41 @@ if (generatedDrafts.length > 12) {
     warnings.push(`Inbox/Generati: ${generatedDrafts.length} bozze generate da smistare`);
 }
 
-for (const fileRel of DEMO_REQUIRED_FILES) {
-    if (!markdownMeta.has(fileRel)) {
-        errors.push(`Demo finale: file mancante ${fileRel}`);
-    }
-}
-
-for (const fileRel of DEMO_CAMPAIGN_ANCHORED_FILES) {
-    const fm = markdownMeta.get(fileRel);
-    if (!fm) continue;
-    if (!flatText(fm.campagne).includes("[[Sale Sotto La Nebbia]]")) {
-        warnings.push(`Demo finale: ${fileRel} non dichiara campagne: [[Sale Sotto La Nebbia]]`);
-    }
-}
-
-const demoSession = markdownMeta.get("Mondi/Sessioni/2026-05-28 - La Campana Nella Nebbia.md");
-if (demoSession) {
-    if (demoSession.pubblico !== true) {
-        errors.push("Demo finale: la sessione demo deve essere pubblica per Vista Giocatori");
-    }
-    if (!hasValue(demoSession.recap_pubblico)) {
-        errors.push("Demo finale: la sessione demo non ha recap_pubblico");
-    }
-    if (hasPrivatePublicText(demoSession.recap_pubblico)) {
-        errors.push("Demo finale: recap_pubblico della sessione contiene termini da DM");
-    }
-    if (!hasAny(demoSession, ["mappe", "dispense", "missioni", "luoghi"])) {
-        errors.push("Demo finale: la sessione non collega mappa, dispensa, missione o luogo");
-    }
-}
-
-const demoMap = markdownMeta.get("Risorse/Mappe/Mappa Pubblica Di Brumafonda.md");
-if (demoMap) {
-    if (demoMap.pubblico !== true) {
-        errors.push("Demo finale: la mappa demo deve essere pubblica");
-    }
-    if (!hasAny(demoMap, ["player_safe", "cosa_mostrare", "luoghi", "luogo"])) {
-        errors.push("Demo finale: la mappa pubblica non ha testo o luoghi player-safe");
-    }
-}
-
-const demoHandout = markdownMeta.get("Mondi/Dispense/Avviso Della Dogana Di Brumafonda.md");
-if (demoHandout) {
-    if (demoHandout.pubblico !== true || demoHandout.stato !== "pronto") {
-        errors.push("Demo finale: la dispensa demo deve essere pronta e pubblica");
-    }
-    if (!hasValue(demoHandout.player_safe)) {
-        errors.push("Demo finale: la dispensa pubblica non ha player_safe");
-    }
-}
-
-for (const fileRel of DEMO_PUBLIC_FILES) {
-    const fm = markdownMeta.get(fileRel);
-    if (!fm) continue;
-    if (hasAny(fm, ["segreti", "prossima_mossa", "mosse_segrete", "verita_nascosta"])) {
-        errors.push(`Demo finale: file pubblico con campi DM evidenti ${fileRel}`);
+for (const fileRel of FORBIDDEN_MANUAL_DEMO_FILES) {
+    if (markdownMeta.has(fileRel)) {
+        errors.push(`Demo sorgente vietata: ${fileRel}. La demo va generata da script solo a fine ciclo.`);
     }
 }
 
 const playerViewText = readRel("Hub/Vista Giocatori.md");
 if (!playerViewText.includes("renderPlayerPortalStatus") || !playerViewText.includes("renderPublicSafety")) {
     errors.push("Demo finale: Vista Giocatori non espone stato portale e controllo sicurezza");
+}
+
+const metaActionsText = readRel("z.automazioni/meta_actions.js");
+const recapActionMatch = metaActionsText.match(/if \(action === "prepara_recap_pubblico"\) \{[\s\S]*?notice\("Recap pubblico preparato\."\);/);
+if (!recapActionMatch) {
+    errors.push("meta_actions.js: azione prepara_recap_pubblico mancante o non verificabile");
+} else if (/fm\.pubblico\s*=\s*true/.test(recapActionMatch[0])) {
+    errors.push("meta_actions.js: prepara_recap_pubblico non deve marcare pubblica la nota sessione");
+}
+
+const devReadmeText = readRel("Dev/README.md");
+for (const marker of REQUIRED_DEV_ARCHITECTURE_MARKERS) {
+    if (!devReadmeText.includes(marker)) {
+        errors.push(`Dev/README.md: contratto architetturale mancante (${marker})`);
+    }
+}
+
+const workflowsText = readRel("Dev/TemplateFactory/modules/workflows.yaml");
+for (const marker of ["continuity_rules:", "trigger:", "conditions:", "effects:", "propagation:", "registra_scelta_mondo", "applica_conseguenza", "propaga_entita"]) {
+    if (!workflowsText.includes(marker)) {
+        errors.push(`workflows.yaml: contratto continuita dichiarativa mancante (${marker})`);
+    }
+}
+
+if (!metaActionsText.includes('action === "registra_scelta_mondo"') || !metaActionsText.includes("trackStep")) {
+    errors.push("meta_actions.js: azione M11 registra_scelta_mondo mancante o senza avanzamento tracciati");
 }
 
 const activeSessions = realEntries
@@ -1137,6 +1123,10 @@ for (const [fileRel, fm] of realEntries) {
         warnings.push(`${fileRel}: propagazione da verificare senza aggiornamento richiesto`);
     }
 
+    if (String(fm.propagazione_stato ?? "") === "applicata" && !hasAny(fm, ["ultima_propagazione", "applicata_il"])) {
+        warnings.push(`${fileRel}: propagazione applicata senza data di applicazione o ultima_propagazione`);
+    }
+
     if (fileRel.startsWith("Mondi/Luoghi/") && fm.stato === "pronto" && !hasAny(fm, ["pericolo", "stabilita", "pressione"])) {
         warnings.push(`${fileRel}: luogo pronto senza pericolo, stabilita o pressione`);
     }
@@ -1154,8 +1144,8 @@ for (const [fileRel, fm] of realEntries) {
         warnings.push(`${fileRel}: pubblico true ma player_safe vuoto`);
     }
 
-    if (fm.pubblico === true && isLiveEntityNote(fileRel) && hasAny(fm, ["segreto", "segreti", "verita_nascosta", "prossima_mossa", "mosse_segrete"])) {
-        warnings.push(`${fileRel}: pubblico true con campi DM evidenti`);
+    if (fm.pubblico === true && isLiveEntityNote(fileRel) && hasAny(fm, PUBLIC_PRIVATE_FIELDS)) {
+        errors.push(`${fileRel}: pubblico true con campi DM evidenti`);
     }
 
     if (isLiveEntityNote(fileRel) && CODEX_CATEGORIES.has(String(fm.categoria ?? "")) && fm.stato !== "archiviata") {
@@ -1192,6 +1182,45 @@ for (const [fileRel, fm] of realEntries) {
         const dmRecap = normalizedText(fm.recap_dm);
         if (publicRecap && dmRecap && publicRecap === dmRecap) {
             warnings.push(`${fileRel}: recap_pubblico identico a recap_dm`);
+        }
+    }
+
+    if (fileRel.startsWith("Mondi/Incontri/") && fm.categoria === "incontro" && fm.stato !== "archiviata") {
+        if (!hasAny(fm, ["luogo", "luoghi"])) {
+            warnings.push(`${fileRel}: incontro senza luogo`);
+        }
+        if (!hasAny(fm, ["missioni", "fazioni", "sessioni"])) {
+            warnings.push(`${fileRel}: incontro isolato da missione, fazione o sessione`);
+        }
+        if (!hasAny(fm, ["gancio", "uso_al_tavolo"])) {
+            warnings.push(`${fileRel}: incontro senza gancio o uso_al_tavolo`);
+        }
+        if (String(fm.tipo ?? "") === "combattimento" && !hasAny(fm, ["creature", "encounter_creatures"])) {
+            warnings.push(`${fileRel}: combattimento senza creature o encounter_creatures`);
+        }
+    }
+
+    if (fileRel.startsWith("Mondi/Creature/") && fm.categoria === "creatura" && fm.stato !== "archiviata") {
+        if (!hasAny(fm, ["luoghi", "habitat"])) {
+            warnings.push(`${fileRel}: creatura senza habitat o luoghi`);
+        }
+        if (!hasAny(fm, ["missioni", "fazioni", "sessioni", "connessioni"])) {
+            warnings.push(`${fileRel}: creatura D&D isolata da mondo, missione, fazione o sessione`);
+        }
+        if (!hasAny(fm, ["gancio", "uso_al_tavolo"])) {
+            warnings.push(`${fileRel}: creatura senza gancio o uso_al_tavolo`);
+        }
+    }
+
+    if (fileRel.startsWith("Mondi/Oggetti/") && fm.categoria === "oggetto" && fm.stato !== "archiviata") {
+        if (!hasAny(fm, ["luogo", "proprietario"])) {
+            warnings.push(`${fileRel}: oggetto senza luogo o proprietario`);
+        }
+        if (!hasAny(fm, ["missioni", "sessioni", "connessioni"])) {
+            warnings.push(`${fileRel}: oggetto isolato da missione, sessione o connessioni`);
+        }
+        if (!hasAny(fm, ["gancio", "uso_al_tavolo"])) {
+            warnings.push(`${fileRel}: oggetto senza gancio o uso_al_tavolo`);
         }
     }
 
@@ -1273,13 +1302,23 @@ for (const [fileRel, fm] of realEntries) {
         }
 
         if (fm.pubblico === true) {
-            if (hasAny(fm, ["segreti", "prossima_mossa", "mosse_segrete"])) {
-                warnings.push(`${fileRel}: mappa pubblica con campi da GM`);
+            if (hasAny(fm, PUBLIC_PRIVATE_FIELDS)) {
+                errors.push(`${fileRel}: mappa pubblica con campi da GM`);
             }
             if (/\[!segreto\]/i.test(text)) {
                 warnings.push(`${fileRel}: mappa pubblica con callout segreto`);
             }
         }
+    }
+}
+
+for (const [fileRel, fm] of realEntries) {
+    if (fm.pubblico !== true || fileRel.startsWith("Dev/")) continue;
+    if (hasAny(fm, PUBLIC_PRIVATE_FIELDS)) {
+        errors.push(`${fileRel}: nota pubblica con campi DM evidenti (${PUBLIC_PRIVATE_FIELDS.filter(field => hasValue(fm[field])).join(", ")})`);
+    }
+    if (hasPrivatePublicText(fm.player_safe) || hasPrivatePublicText(fm.recap_pubblico) || hasPrivatePublicText(fm.cosa_mostrare)) {
+        errors.push(`${fileRel}: testo pubblico/player-safe contiene termini da DM o segreti`);
     }
 }
 

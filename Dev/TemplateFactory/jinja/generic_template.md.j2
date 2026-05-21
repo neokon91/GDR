@@ -106,7 +106,10 @@ tab: Territorio
 > [!mappa] Mappa E Presenza
 > Coordinate: `INPUT[text:coordinates]`
 >
-> Mappe: `INPUT[inlineListSuggester(optionQuery("Risorse/Mappe"), useLinks(partial), allowOther):mappe]`
+> Mappe:
+> ```meta-bind
+> INPUT[inlineListSuggester(optionQuery("Risorse/Mappe"), useLinks(partial), allowOther):mappe]
+> ```
 >
 > Layer mappa: `INPUT[text:layer_mappa]`
 >
@@ -134,9 +137,15 @@ tab: Potere
 >
 > Risorse: `INPUT[inlineList:risorse]`
 >
-> Rivali: `INPUT[inlineListSuggester(optionQuery("Mondi/Fazioni"), useLinks(partial), allowOther):rivali]`
+> Rivali:
+> ```meta-bind
+> INPUT[inlineListSuggester(optionQuery("Mondi/Fazioni"), useLinks(partial), allowOther):rivali]
+> ```
 >
-> Luoghi controllati: `INPUT[inlineListSuggester(optionQuery("Mondi/Luoghi"), useLinks(partial), allowOther):luoghi_controllati]`
+> Luoghi controllati:
+> ```meta-bind
+> INPUT[inlineListSuggester(optionQuery("Mondi/Luoghi"), useLinks(partial), allowOther):luoghi_controllati]
+> ```
 >
 > Pressione: `INPUT[pressione][:pressione]`
 
@@ -155,7 +164,10 @@ tab: PNG
 >
 > Atteggiamento: `INPUT[text:atteggiamento]`
 >
-> Luogo attuale: `INPUT[inlineListSuggester(optionQuery("Mondi/Luoghi"), useLinks(partial), allowOther):luoghi]`
+> Luogo attuale:
+> ```meta-bind
+> INPUT[inlineListSuggester(optionQuery("Mondi/Luoghi"), useLinks(partial), allowOther):luoghi]
+> ```
 >
 > Fazioni: `INPUT[fazioni][:fazioni]`
 >
@@ -172,7 +184,10 @@ tab: PNG
 tab: Legame
 
 > [!conflitto] Relazione Operativa
-> Parti: `INPUT[inlineListSuggester(optionQuery("Mondi"), useLinks(partial), allowOther):parti]`
+> Parti:
+> ```meta-bind
+> INPUT[inlineListSuggester(optionQuery("Mondi"), useLinks(partial), allowOther):parti]
+> ```
 >
 > Stato relazione: `INPUT[text:stato_relazione]`
 >

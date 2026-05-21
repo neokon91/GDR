@@ -10,7 +10,7 @@ stato: pronto
 
 Questa pagina serve quando apri il vault per la prima volta o quando pulsanti, tabelle e dashboard non funzionano.
 
-Il vault include strumenti gia configurati. Servono a far funzionare dashboard, pulsanti, tabelle, schede creatura, bacheche e campi guidati. Se Obsidian chiede se vuoi fidarti degli strumenti inclusi, conferma solo se hai scaricato il vault da una fonte affidabile.
+Il vault include strumenti già configurati. Servono a far funzionare dashboard, pulsanti, tabelle, schede creatura, bacheche e campi guidati. Se Obsidian chiede se vuoi fidarti degli strumenti inclusi, conferma solo se hai scaricato il vault da una fonte affidabile.
 
 ## Controllo Rapido
 
@@ -30,8 +30,8 @@ Il vault include strumenti gia configurati. Servono a far funzionare dashboard, 
 | Dashboard automatiche | Riepiloghi, controlli e viste operative. |
 | Creazione guidata | Nuove sessioni, missioni, PNG, luoghi e incontri. |
 | Campi interattivi | Pulsanti, toggle, selettori e campi dentro le note. |
-| Gestione campi | Stato, categoria, tipo e collegamenti piu coerenti. |
-| Indici di cartella | Cartelle principali piu facili da aprire. |
+| Gestione campi | Stato, categoria, tipo e collegamenti più coerenti. |
+| Indici di cartella | Cartelle principali più facili da aprire. |
 | Pagina iniziale | Apertura automatica su [[Inizia Qui]]. |
 
 ## Strumenti Consigliati
@@ -46,7 +46,7 @@ Il vault include strumenti gia configurati. Servono a far funzionare dashboard, 
 | Calendario | Date del mondo e scadenze narrative. |
 | Mappe e schemi | Relazioni, dungeon, fronti e riferimenti visuali. |
 | Audio e video | Materiale da sessione. |
-| Icone e aspetto | Orientamento visuale e leggibilita. |
+| Icone e aspetto | Orientamento visuale e leggibilità. |
 
 ## Dopo Il Primo Avvio
 

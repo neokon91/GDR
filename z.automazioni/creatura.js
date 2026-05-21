@@ -2,6 +2,7 @@ async function creatura(tp){
     const helpers = tp.user.helpers;
     const profile = await helpers.runtimeProfile("creatura");
     const prompts = profile.prompts ?? {};
+    const activeContext = helpers.getActiveSessionContext();
     const creatureTypes = profile.type_options ?? [
     { label: "Aberrazione", id: "aberrazione" },
     { label: "Bestia", id: "bestia" },
@@ -63,6 +64,13 @@ async function creatura(tp){
     const mondo = await helpers.chooseWorld(tp, prompts.mondo ?? "Mondo della creatura");
     const context = { world: mondo };
     const luoghi = await helpers.chooseLocations(tp, prompts.luoghi ?? "Luoghi o habitat collegati", context);
+    const fazioni = await helpers.chooseFactions(tp, prompts.fazioni ?? "Fazioni, culti o poteri collegati", context);
+    const missioni = await helpers.chooseMissions(tp, prompts.missioni ?? "Missioni o fronti collegati", context);
+    const gancio = await helpers.promptOptional(tp, prompts.gancio ?? "Gancio giocabile della creatura");
+    const usoAlTavolo = await helpers.promptOptional(tp, prompts.uso_al_tavolo ?? "Uso al tavolo");
+    const playerSafe = await helpers.promptOptional(tp, prompts.player_safe ?? "Versione player-safe");
+    const prossimaMossa = await helpers.promptOptional(tp, prompts.prossima_mossa ?? "Cosa cambia se la creatura viene ignorata");
+    const connessioni = await helpers.chooseConnections(tp, prompts.connessioni ?? "Connessioni vive della creatura", context);
     const fonti = await helpers.promptWikilinkTargets(tp, prompts.fonti ?? "Fonti granulari (wikilink, anche Nota#Sezione o Nota#^blocco)");
     const riferimentiRegola = await helpers.promptWikilinkTargets(tp, prompts.riferimenti_regola ?? "Riferimenti regola per statblock e GS");
 
@@ -86,7 +94,10 @@ async function creatura(tp){
     const reactions = await helpers.collectNamedDescriptions(tp, "reazioni");
 
     // Crea la cartella se manca e sposta la nota nella sezione creature.
-    await helpers.moveNote(tp, helpers.path("creature"), name);
+    const sessioni = activeContext.link ? [activeContext.link] : [];
+    const created = await helpers.moveNote(tp, helpers.path("creature"), name);
+    await helpers.linkCreatedNoteToActiveSession(created, { sessionField: "creature" });
+    await helpers.linkCreatedNoteToConnections(created, [...luoghi, ...fazioni, ...missioni, ...connessioni]);
 
     return await helpers.renderFrontmatter("creatura", {
         id: id,
@@ -116,6 +127,14 @@ async function creatura(tp){
         gear: "",
         habitat: "",
         luoghi: helpers.inlineYamlList(luoghi),
+        fazioni: helpers.inlineYamlList(fazioni),
+        missioni: helpers.inlineYamlList(missioni),
+        gancio: helpers.yamlQuote(gancio),
+        uso_al_tavolo: helpers.yamlQuote(usoAlTavolo),
+        player_safe: helpers.yamlQuote(playerSafe),
+        prossima_mossa: helpers.yamlQuote(prossimaMossa),
+        connessioni: helpers.inlineYamlList(connessioni),
+        sessioni: helpers.inlineYamlList(sessioni),
         traits: tp.user.helpers.inlineYamlArray(traits),
         actions: tp.user.helpers.inlineYamlArray(actions),
         bonus_actions: tp.user.helpers.inlineYamlArray(bonusActions),

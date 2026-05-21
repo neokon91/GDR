@@ -4,7 +4,7 @@ Prima infrastruttura per generare template Obsidian a partire da moduli YAML e r
 
 ## Obiettivo
 
-Centralizzare definizioni ripetute: frontmatter, campi Meta Bind, router Templater, Dataview, Bases, Tasks, Calendarium, mappe, statblock, incontri e fallback Markdown.
+Centralizzare definizioni ripetute: frontmatter, campi Meta Bind, router Templater, Dataview, Bases, Tasks, Calendarium, mappe, schede creatura, incontri e versioni Markdown leggibili senza plugin.
 
 La generazione deve servire il profilo principale D&D 5.5/SRD senza legare il Codex del mondo al regolamento: i template regolamentari espongono campi utili a creature, incontri, oggetti e party; le entita di mondo restano giocabili anche quando non contengono statistiche.
 
@@ -20,11 +20,11 @@ La generazione deve servire il profilo principale D&D 5.5/SRD senza legare il Co
 
 1. Leggere `modules/*.yaml`.
 2. Validare chiavi obbligatorie: `id`, `purpose`, `version`.
-3. Comporre sezioni, callout, tabs, Meta Bind input/button, Dataview block e fallback.
+3. Comporre sezioni, callout, tab, input/pulsanti Meta Bind, blocchi Dataview e versioni Markdown leggibili.
 4. Renderizzare template sorgente con Jinja2.
 5. Scrivere in `z.modelli/`, `z.fileclass/` o `z.bases/` solo dopo review.
 6. Eseguire `npm run check`.
-7. Verificare in Obsidian con smoke visuale.
+7. Verificare in Obsidian con un collaudo visuale.
 
 ## Comandi
 
@@ -52,7 +52,7 @@ Ogni template generato deve avere una sola funzione Templater iniziale, ad esemp
 <% await tp.user.crea_entita(tp) %>
 ```
 
-Il resto del file e Markdown statico generato da Jinja: tabs, callout, Meta Bind input, Meta Bind button, Dataview/DataviewJS, blocchi plugin specifici e fallback Markdown.
+Il resto del file è Markdown statico generato da Jinja: tab, callout, input Meta Bind, pulsanti Meta Bind, Dataview/DataviewJS, blocchi plugin specifici e una versione Markdown leggibile senza plugin.
 
 ## Regola Generator
 
@@ -78,6 +78,7 @@ La logica di scheda deve vivere nei moduli YAML. I file Jinja possono comporre M
 `npm run check:templates` blocca:
 
 - `INPUT[...]` Meta Bind su campi non presenti in `fields_core.yaml`, `frontmatter_profiles.yaml` o nei campi plugin dichiarati;
+- `INPUT[...]` Meta Bind con funzioni lasciati in forma inline invece che in un blocco `meta-bind`;
 - `BUTTON[...]` non dichiarati in `metabind_buttons.yaml`;
 - callout non dichiarati in `callouts.yaml`;
 - chiamate `gdr.render...` non dichiarate in `dataview_blocks.yaml`;

@@ -12,6 +12,8 @@ fieldsOrder:
 - stato
 - mondo
 - luogo
+- missioni
+- fazioni
 - creature
 - personaggi
 - mappe
@@ -19,6 +21,9 @@ fieldsOrder:
 - sessioni
 - pericolo
 - ricompense
+- gancio
+- uso_al_tavolo
+- player_safe
 - pressione
 - prossima_mossa
 - round
@@ -77,6 +82,14 @@ fields:
   id: luogo
   type: File
   options: {}
+- name: missioni
+  id: missioni
+  type: MultiFile
+  options: {}
+- name: fazioni
+  id: fazioni
+  type: MultiFile
+  options: {}
 - name: creature
   id: creature
   type: MultiFile
@@ -104,6 +117,18 @@ fields:
 - name: ricompense
   id: ricompense
   type: Multi
+  options: {}
+- name: gancio
+  id: gancio
+  type: Input
+  options: {}
+- name: uso_al_tavolo
+  id: uso_al_tavolo
+  type: Input
+  options: {}
+- name: player_safe
+  id: player_safe
+  type: Input
   options: {}
 - name: pressione
   id: pressione

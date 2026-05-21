@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-21T12:01:27.455718+00:00",
+  "generated_at": "2026-05-21T15:40:32.542116+00:00",
   "source": "Dev/TemplateFactory",
   "mode": "preview",
   "files": [
@@ -52,6 +52,11 @@
       "blueprint": "azione_propaga_entita",
       "path": "Dev/TemplateFactory/examples/generated/azione_propaga_entita.preview.md",
       "bytes": 164
+    },
+    {
+      "blueprint": "azione_registra_scelta_mondo",
+      "path": "Dev/TemplateFactory/examples/generated/azione_registra_scelta_mondo.preview.md",
+      "bytes": 171
     },
     {
       "blueprint": "azione_smista_bozza_generata",
@@ -156,32 +161,32 @@
     {
       "blueprint": "fazione",
       "path": "Dev/TemplateFactory/examples/generated/fazione.preview.md",
-      "bytes": 3394
+      "bytes": 3436
     },
     {
       "blueprint": "fazione_confraternita",
       "path": "Dev/TemplateFactory/examples/generated/fazione_confraternita.preview.md",
-      "bytes": 3434
+      "bytes": 3476
     },
     {
       "blueprint": "fazione_gilda",
       "path": "Dev/TemplateFactory/examples/generated/fazione_gilda.preview.md",
-      "bytes": 3418
+      "bytes": 3460
     },
     {
       "blueprint": "geografia_continente",
       "path": "Dev/TemplateFactory/examples/generated/geografia_continente.preview.md",
-      "bytes": 3653
+      "bytes": 3674
     },
     {
       "blueprint": "geografia_isola",
       "path": "Dev/TemplateFactory/examples/generated/geografia_isola.preview.md",
-      "bytes": 3643
+      "bytes": 3664
     },
     {
       "blueprint": "geografia_regione",
       "path": "Dev/TemplateFactory/examples/generated/geografia_regione.preview.md",
-      "bytes": 3627
+      "bytes": 3648
     },
     {
       "blueprint": "incantesimo",
@@ -206,7 +211,7 @@
     {
       "blueprint": "live_luogo",
       "path": "Dev/TemplateFactory/examples/generated/live_luogo.preview.md",
-      "bytes": 3608
+      "bytes": 3629
     },
     {
       "blueprint": "live_nota_grezza",
@@ -216,7 +221,7 @@
     {
       "blueprint": "live_png",
       "path": "Dev/TemplateFactory/examples/generated/live_png.preview.md",
-      "bytes": 3311
+      "bytes": 3332
     },
     {
       "blueprint": "lore_capture",
@@ -226,32 +231,32 @@
     {
       "blueprint": "luogo",
       "path": "Dev/TemplateFactory/examples/generated/luogo.preview.md",
-      "bytes": 3598
+      "bytes": 3619
     },
     {
       "blueprint": "luogo_dungeon",
       "path": "Dev/TemplateFactory/examples/generated/luogo_dungeon.preview.md",
-      "bytes": 3624
+      "bytes": 3645
     },
     {
       "blueprint": "luogo_insediamento",
       "path": "Dev/TemplateFactory/examples/generated/luogo_insediamento.preview.md",
-      "bytes": 3635
+      "bytes": 3656
     },
     {
       "blueprint": "luogo_regione_naturale",
       "path": "Dev/TemplateFactory/examples/generated/luogo_regione_naturale.preview.md",
-      "bytes": 3643
+      "bytes": 3664
     },
     {
       "blueprint": "luogo_rovina",
       "path": "Dev/TemplateFactory/examples/generated/luogo_rovina.preview.md",
-      "bytes": 3622
+      "bytes": 3643
     },
     {
       "blueprint": "luogo_tempio",
       "path": "Dev/TemplateFactory/examples/generated/luogo_tempio.preview.md",
-      "bytes": 3622
+      "bytes": 3643
     },
     {
       "blueprint": "mappa_excalidraw_fronti",
@@ -296,52 +301,52 @@
     {
       "blueprint": "personaggio_divinita",
       "path": "Dev/TemplateFactory/examples/generated/personaggio_divinita.preview.md",
-      "bytes": 3348
+      "bytes": 3369
     },
     {
       "blueprint": "pg",
       "path": "Dev/TemplateFactory/examples/generated/pg.preview.md",
-      "bytes": 3299
+      "bytes": 3320
     },
     {
       "blueprint": "png",
       "path": "Dev/TemplateFactory/examples/generated/png.preview.md",
-      "bytes": 3301
+      "bytes": 3322
     },
     {
       "blueprint": "politica_baronia",
       "path": "Dev/TemplateFactory/examples/generated/politica_baronia.preview.md",
-      "bytes": 3646
+      "bytes": 3667
     },
     {
       "blueprint": "politica_contea",
       "path": "Dev/TemplateFactory/examples/generated/politica_contea.preview.md",
-      "bytes": 3644
+      "bytes": 3665
     },
     {
       "blueprint": "politica_ducato",
       "path": "Dev/TemplateFactory/examples/generated/politica_ducato.preview.md",
-      "bytes": 3644
+      "bytes": 3665
     },
     {
       "blueprint": "politica_impero",
       "path": "Dev/TemplateFactory/examples/generated/politica_impero.preview.md",
-      "bytes": 3644
+      "bytes": 3665
     },
     {
       "blueprint": "politica_oligarchia",
       "path": "Dev/TemplateFactory/examples/generated/politica_oligarchia.preview.md",
-      "bytes": 3652
+      "bytes": 3673
     },
     {
       "blueprint": "politica_regno",
       "path": "Dev/TemplateFactory/examples/generated/politica_regno.preview.md",
-      "bytes": 3642
+      "bytes": 3663
     },
     {
       "blueprint": "politica_repubblica",
       "path": "Dev/TemplateFactory/examples/generated/politica_repubblica.preview.md",
-      "bytes": 3652
+      "bytes": 3673
     },
     {
       "blueprint": "regola_dnd",
@@ -351,12 +356,12 @@
     {
       "blueprint": "relazione",
       "path": "Dev/TemplateFactory/examples/generated/relazione.preview.md",
-      "bytes": 3324
+      "bytes": 3345
     },
     {
       "blueprint": "religione_culto",
       "path": "Dev/TemplateFactory/examples/generated/religione_culto.preview.md",
-      "bytes": 3402
+      "bytes": 3444
     },
     {
       "blueprint": "ricorrenza_calendario",
@@ -436,7 +441,7 @@
     {
       "blueprint": "session",
       "path": "Dev/TemplateFactory/examples/generated/session.preview.md",
-      "bytes": 5203
+      "bytes": 5350
     },
     {
       "blueprint": "specie_dnd",

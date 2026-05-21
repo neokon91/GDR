@@ -35,6 +35,8 @@ Pulsanti globali:
 
 Le azioni passano da `z.automazioni/meta_actions.js`, cosi i pulsanti restano dichiarativi e il comportamento vive in un punto solo.
 
+`prepara-recap-pubblico` aggiunge testo a `recap_pubblico`, ma non deve mai marcare pubblica l'intera sessione: una sessione puo contenere recap mostrabile e campi DM nello stesso frontmatter.
+
 ## Templater Wizard Layer
 
 Wizard centralizzati:
@@ -82,3 +84,4 @@ Quando estendi il layer:
 - aggiungi pulsanti a `REQUIRED_META_BIND_BUTTONS`;
 - aggiungi preset a `REQUIRED_METADATA_MENU_PRESETS`;
 - aggiorna README, CSS e fileClass nello stesso blocco di lavoro.
+- se un'azione modifica continuita, deve scrivere YAML verificabile e apparire nelle viste di `z.engine/session_views.js`.

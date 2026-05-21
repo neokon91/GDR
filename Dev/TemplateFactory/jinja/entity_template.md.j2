@@ -38,7 +38,9 @@ tab: Connessioni
 > [!regia] Collegala Subito
 > Una voce isolata resta enciclopedia. Scegli almeno due note vive.
 >
-> `INPUT[inlineListSuggester(optionQuery("Mondi"), useLinks(partial), allowOther):connessioni]`
+> ```meta-bind
+> INPUT[inlineListSuggester(optionQuery("Mondi"), useLinks(partial), allowOther):connessioni]
+> ```
 
 ```dataview
 {{ modules.dataview_blocks.blocks.linked_connections_table.code }}
@@ -46,10 +48,14 @@ tab: Connessioni
 
 > [!timer]- Propagazione
 > Entita impattate:
-> `INPUT[inlineListSuggester(optionQuery("Mondi"), useLinks(partial), allowOther):entita_impattate]`
+> ```meta-bind
+> INPUT[inlineListSuggester(optionQuery("Mondi"), useLinks(partial), allowOther):entita_impattate]
+> ```
 >
 > Propaga a:
-> `INPUT[inlineListSuggester(optionQuery("Mondi"), useLinks(partial), allowOther):propaga_a]`
+> ```meta-bind
+> INPUT[inlineListSuggester(optionQuery("Mondi"), useLinks(partial), allowOther):propaga_a]
+> ```
 
 tab: Articolo
 

@@ -9,7 +9,7 @@ stato: pronto
 
 # Post Sessione Guidato
 
-> [!missione] Output
+> [!missione] Risultato
 > Trasforma la sessione appena giocata in mondo aggiornato: decisioni, conseguenze, missioni, PNG, luoghi, clock, recap pubblico, recap DM e prossima sessione.
 
 `BUTTON[cosa-succede-fuori-scena-cosa-succede-fuori-scena]`
@@ -56,12 +56,15 @@ gdr.renderCanonDecisionCards(dv);
 
 ## 3. Conseguenze Da Applicare
 
+`BUTTON[registra-scelta-mondo]`
+
 `BUTTON[applica-conseguenza]`
 
 `BUTTON[propaga-a-entita]`
 
 ```dataviewjs
 const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+gdr.renderM11ContinuityChain(dv);
 gdr.renderConsequenceCards(dv);
 ```
 

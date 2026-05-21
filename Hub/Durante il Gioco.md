@@ -11,7 +11,7 @@ stato: pronto
 # Durante Il Gioco
 
 > [!scena] Schermo del DM
-> Output: appunti live, decisioni prese, clock aggiornati e materiale usato nella sessione attiva.
+> Risultato: appunti live, decisioni prese, clock aggiornati e materiale usato nella sessione attiva.
 
 ## Sessione Attiva
 
@@ -41,6 +41,8 @@ if (!active) {
 
 `BUTTON[conseguenza-z-modelli-live-conseguenza-md]`
 
+`BUTTON[registra-scelta-mondo]`
+
 `BUTTON[nuovo-clock-z-modelli-dm-tracciato-md]`
 
 `BUTTON[nuova-dispensa-z-modelli-dispensa-md]`
@@ -57,6 +59,13 @@ if (!active) {
 ```dataviewjs
 const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
 gdr.renderLiveCommandCenter(dv);
+```
+
+## Catena Mondo Vivo
+
+```dataviewjs
+const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+gdr.renderM11ContinuityChain(dv);
 ```
 
 > [!regia]- Strumenti al tavolo

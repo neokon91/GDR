@@ -27,6 +27,8 @@ Completato:
 - TemplateFactory aggiornata per sessione, luogo, fazione, PNG, relazione, tracciato ed evento/conseguenza con tabs logici, callout funzionali, Meta Bind, Dataview, DataviewJS, Bases, Tasks, Maps, Excalidraw e Canvas dove utile;
 - check automatici M7 sui template generati: schede lunghe con tabs, callout non vuoti, blocchi dinamici e fallback Markdown;
 - disciplina zero-warning: `npm run check` deve fallire se `check_vault.js` produce warning.
+- M8/M9 hanno chiuso release evidence, sicurezza player-facing, percorso minimo di [[Inizia Qui]], proprietà collassate su dashboard/indici e gate anti-segreti globale.
+- M10 ha consolidato il contratto architetturale in [[Dev/README]], reso [[Dev/README]] indice canonico di sviluppo, dichiarato `continuity_rules` in `workflows.yaml` e separato recap pubblico da pubblicazione della sessione.
 
 Warning noti: **nessuno**.
 
@@ -44,25 +46,25 @@ Ogni modifica deve servire almeno uno di questi assi. Evitare dashboard decorati
 
 Focus: [[Prossima Discussione - YAML Entita Fantasy]].
 
-Scopo: concentrare la prossima sessione di lavoro sulla profondita delle entita fantasy governata da YAML: campi, profili frontmatter, prompt runtime, sezioni, tabs, callout, Meta Bind, Dataview, Bases, mappe e fallback devono essere contratti leggibili prima di diventare template o runtime.
+Scopo: entrare nella prossima sessione con interventi concreti, non micro-polish. La discussione deve scegliere come implementare M11: entita vive end-to-end, pipeline homebrew D&D 5.5 collegata al mondo e simulazione narrativa leggera.
 
-Prima famiglia consigliata: **luogo + fazione + missione + tracciato**, per collegare worldbuilding, gioco al tavolo e continuita.
+Prima catena consigliata: **missione + tracciato + fazione + luogo**, usando fixture o demo generata da script, non note demo mantenute a mano.
 
 Regola: niente nuove dashboard; migliorare prima il layer dichiarativo e poi materializzare.
 
 ## Prossima Fase Consigliata
 
-Fase stretta: **M8 Release Evidence And Zero-Warning Discipline**.
+Fase stretta: **M11 Pipeline Homebrew D&D 5.5 E Continuita Di Mondo**.
 
-Scopo: rendere la 1.0 verificabile come prodotto consegnabile, non solo come repo che passa test statici.
+Scopo: rendere verificabile la catena scelta dei giocatori -> evento -> conseguenza -> propagazione -> dashboard -> prossima sessione, senza cambiare architettura e senza sistemi fuori Obsidian.
 
 Priorita:
 
-1. Rendere ogni warning un blocker, senza eccezioni silenziose.
-2. Aggiornare [[Dev/Smoke Demo Finale]] con evidenze reali dei flussi: Inizia Qui, crea mondo, prepara sessione, gioca live, post-sessione, vista giocatori, mappe.
-3. Aggiungere controlli automatici contro handoff o changelog obsoleti quando una milestone viene chiusa.
-4. Collegare le evidenze visuali a una release pulita verificabile con `npm run release:clean`.
-5. Tenere M8 fuori da nuove dashboard: deve rafforzare affidabilita, consegna e regressioni.
+1. Chiudere il contratto YAML end-to-end per missione, tracciato, fazione e luogo.
+2. Collegare creature, incontri, oggetti e ricompense D&D 5.5 a mondo, missione, luogo, fazione e sessione.
+3. Estendere `workflows.yaml` e runtime esistente per propagazioni verificabili e non hardcoded.
+4. Aggiornare `Stato del Mondo`, `Cosa Succede Fuori Scena`, `Preparazione Sessione`, `Durante il Gioco` e `Post Sessione Guidato` senza creare nuove dashboard.
+5. Aggiungere gate che blocchino entita con conseguenze senza bersagli, stato propagazione incoerente o materiale D&D isolato dal mondo.
 
 ## Vincoli Tecnici
 
@@ -82,6 +84,8 @@ Priorita:
 - Non usare tabs come cosmetica: ogni tab deve contenere una funzione distinta.
 - Non trasformare il vault in project management generico.
 - Non degradare warning a rumore accettato.
+- Non trattare homebrew D&D 5.5 come compendio scollegato dal mondo.
+- Non introdurre mini linguaggi custom in YAML.
 
 ## Debito Separato
 

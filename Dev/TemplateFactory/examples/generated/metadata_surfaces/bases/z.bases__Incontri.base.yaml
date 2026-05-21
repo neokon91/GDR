@@ -19,6 +19,8 @@ profile_fields:
 - stato
 - mondo
 - luogo
+- missioni
+- fazioni
 - creature
 - personaggi
 - mappe
@@ -26,6 +28,9 @@ profile_fields:
 - sessioni
 - pericolo
 - ricompense
+- gancio
+- uso_al_tavolo
+- player_safe
 - pressione
 - prossima_mossa
 - round

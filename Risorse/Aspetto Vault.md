@@ -8,7 +8,7 @@ stato: pronto
 
 # Aspetto Vault
 
-Il vault usa il tema **Minimal** con lo snippet `gdr-vault.css`. Le regolazioni principali sono esposte in **Style Settings > GDR Vault**.
+Il vault usa il tema **Minimal** con lo snippet `gdr-vault.css`. Le regolazioni principali sono in **Style Settings > GDR Vault**.
 
 ## Controlli Principali
 
@@ -23,13 +23,14 @@ Il vault usa il tema **Minimal** con lo snippet `gdr-vault.css`. Le regolazioni 
 
 ## Cosa Cura Lo Snippet
 
-- Dashboard e indici hanno card compatte, griglie responsive e pulsanti leggibili anche con titoli lunghi.
+- Dashboard e indici hanno card compatte, griglie adattive e pulsanti leggibili anche con titoli lunghi.
 - Le viste principali hanno accenti dedicati: DM Dashboard, Worldbuilder Dashboard, Atlante, Durante il Gioco e Vista Giocatori.
-- PNG, luoghi, fazioni, missioni, incontri, timeline, segreti e ricompense usano colori coerenti in callout, card e badge CSS riutilizzabili.
+- PNG, luoghi, fazioni, missioni, incontri, timeline, segreti e ricompense usano colori coerenti in callout, card ed etichette CSS riutilizzabili.
 - Le tabelle Dataview e Markdown restano dense e scorrono lateralmente quando sono troppo larghe.
 - I callout GDR hanno colori e icone coerenti per scena, regia, indizio, segreto, incontro, tesoro, ricompensa, PNG, luogo, fazione, missione, handout, regola, pericolo, lettura, timeline e timer.
 - La vista `tavolo` aumenta leggibilità e nasconde i metadati, utile durante la sessione.
-- La stampa rimuove elementi dell'interfaccia e nasconde i callout `segreto`.
+- La stampa rimuove gli elementi dell'interfaccia e nasconde i callout `segreto`.
+- I colori sono volutamente sobri: niente gradienti decorativi, niente velature sovrapposte e accenti abbastanza chiari da restare leggibili con temi chiari e scuri.
 - Il focus da tastiera resta visibile su pulsanti e link; le animazioni rispettano la preferenza di movimento ridotto del sistema.
 
 ## Attivare Lo Stile
@@ -44,7 +45,7 @@ Il vault usa il tema **Minimal** con lo snippet `gdr-vault.css`. Le regolazioni 
 - Dashboard operative: usa `cssclasses: [dashboard]` nel frontmatter.
 - Schermata da tavolo: usa `cssclasses: [tavolo]`.
 - Vista giocatori: usa `cssclasses: [dashboard, gdr-player-view]`.
-- Badge riutilizzabili in HTML/DataviewJS: `gdr-badge png`, `gdr-badge luogo`, `gdr-badge fazione`, `gdr-badge missione`, `gdr-badge incontro`, `gdr-badge timeline`, `gdr-badge segreto`, `gdr-badge ricompensa`.
+- Etichette riutilizzabili in HTML/DataviewJS: `gdr-badge png`, `gdr-badge luogo`, `gdr-badge fazione`, `gdr-badge missione`, `gdr-badge incontro`, `gdr-badge timeline`, `gdr-badge segreto`, `gdr-badge ricompensa`.
 - Callout tematici: `[!regia]`, `[!scena]`, `[!png]`, `[!luogo]`, `[!fazione]`, `[!missione]`, `[!incontro]`, `[!timeline]`, `[!segreto]`, `[!ricompensa]`, `[!lettura]`, `[!timer]`.
 
 ## Preset Consigliato
@@ -58,4 +59,4 @@ Il vault usa il tema **Minimal** con lo snippet `gdr-vault.css`. Le regolazioni 
 
 ## Regola Pratica
 
-Mantieni l'interfaccia leggibile al tavolo: dashboard più dense, callout riconoscibili, tabelle compatte e niente decorazioni che rallentino la lettura.
+Mantieni l'interfaccia leggibile al tavolo: dashboard dense ma ordinate, callout riconoscibili, tabelle compatte e nessuna decorazione che rallenti la lettura.

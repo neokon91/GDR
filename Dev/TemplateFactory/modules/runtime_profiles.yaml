@@ -369,11 +369,17 @@ profiles:
     prompts:
       luogo: Luogo dell'incontro
       pericolo: Pericolo da 0 a 10
+      missioni: Missioni collegate
+      fazioni: Fazioni collegate
       creature: Creature coinvolte
       personaggi: Personaggi coinvolti
       mappe: Mappe dell'incontro
       audio: Audio dell'incontro
       ricompense: Ricompense
+      gancio: Perche questo incontro entra in scena
+      uso_al_tavolo: Uso al tavolo
+      player_safe: Versione player-safe
+      prossima_mossa: Cosa cambia se l'incontro viene evitato, perso o vinto
       riferimenti_regola: Riferimenti regola dell'incontro
   oggetto:
     name_prompt: Nome dell'oggetto
@@ -546,6 +552,13 @@ profiles:
     prompts:
       mondo: Mondo della creatura
       luoghi: Luoghi o habitat collegati
+      fazioni: Fazioni, culti o poteri collegati
+      missioni: Missioni o fronti collegati
+      gancio: Gancio giocabile della creatura
+      uso_al_tavolo: Uso al tavolo
+      player_safe: Versione player-safe
+      prossima_mossa: Cosa cambia se la creatura viene ignorata
+      connessioni: Connessioni vive della creatura
       ac: Classe Armatura
       hp: Punti Ferita
       speed: Velocita

@@ -102,7 +102,10 @@ tab: Connessioni
 tab: Legame
 
 > [!conflitto] Relazione Operativa
-> Parti: `INPUT[inlineListSuggester(optionQuery("Mondi"), useLinks(partial), allowOther):parti]`
+> Parti:
+> ```meta-bind
+> INPUT[inlineListSuggester(optionQuery("Mondi"), useLinks(partial), allowOther):parti]
+> ```
 >
 > Stato relazione: `INPUT[text:stato_relazione]`
 >
