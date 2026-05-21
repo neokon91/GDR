@@ -15,7 +15,7 @@ const JUNK_FILE_PATTERNS = [
     /\.orig$/i,
     /\.swp$/i
 ];
-const REQUIRED_NPM_SCRIPTS = ["check", "check:repo", "check:js", "check:diff", "release:clean"];
+const REQUIRED_NPM_SCRIPTS = ["check", "check:repo", "check:js", "check:smoke", "check:diff", "release:clean"];
 const errors = [];
 const fixed = [];
 

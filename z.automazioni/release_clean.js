@@ -57,6 +57,7 @@ const EXCLUDED_RISORSE = new Set([
 ]);
 const EXCLUDED_AUTOMAZIONI = new Set([
     "check_vault.js",
+    "check_smoke.js",
     "import_azgaar_geojson.js",
     "import_srd.js",
     "LICENSE.md",

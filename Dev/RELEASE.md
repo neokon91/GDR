@@ -16,15 +16,16 @@ Questa checklist serve a preparare una copia pubblicabile del vault.
 npm run check
 ```
 
-8. Aggiorna [[VERSION]].
-9. Aggiorna [[Dev/CHANGELOG]].
-10. Crea la release utente:
+8. Se la release include la demo, il comando deve includere e superare anche `npm run check:smoke`.
+9. Aggiorna [[VERSION]].
+10. Aggiorna [[Dev/CHANGELOG]].
+11. Crea la release utente:
 
 ```bash
 npm run release:clean
 ```
 
-11. Crea tag o GitHub Release solo dopo controlli puliti.
+12. Crea tag o GitHub Release solo dopo controlli puliti.
 
 ## ZIP Utente
 

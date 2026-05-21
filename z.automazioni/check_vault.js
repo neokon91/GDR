@@ -84,6 +84,7 @@ const REQUIRED_BASE_FILES = [
 ];
 const REQUIRED_LAYER_FILES = [
     "z.automazioni/helpers.js",
+    "z.automazioni/check_smoke.js",
     "z.automazioni/audit_template_migration.py",
     "z.automazioni/check_template_factory.py",
     "z.automazioni/render_template_factory.py",

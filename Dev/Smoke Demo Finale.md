@@ -12,9 +12,9 @@ Checklist manuale per validare la demo [[Brumafonda Demo]] in Obsidian dopo il g
 
 ## Prima Di Aprire Obsidian
 
-- [ ] `npm run check` passa senza errori.
-- [ ] [[Dev/Demo Finale]] mostra tutte le note del nucleo demo.
-- [ ] [[Vista Giocatori]] contiene stato portale, recap, mappa, mondo conosciuto, diario pubblico e controllo sicurezza.
+- [x] `npm run check` passa senza errori.
+- [x] [[Dev/Demo Finale]] mostra tutte le note del nucleo demo.
+- [x] [[Vista Giocatori]] contiene stato portale, recap, mappa, mondo conosciuto, diario pubblico e controllo sicurezza.
 
 ## Percorso Visuale
 
@@ -33,11 +33,11 @@ Apri queste pagine in ordine e verifica che non compaiano errori Dataview, JS En
 
 ## Controllo Player-Safe
 
-- [ ] [[2026-05-28 - La Campana Nella Nebbia]] mostra un recap pubblico leggibile.
-- [ ] [[Mappa Pubblica Di Brumafonda]] e pubblica e non contiene callout segreti.
-- [ ] [[Avviso Della Dogana Di Brumafonda]] e consegnabile ai giocatori.
-- [ ] [[Vista Giocatori]] segnala controllo sicurezza pulito.
-- [ ] Nessuna nota demo pubblica espone `segreti`, `prossima_mossa`, `mosse_segrete` o `verita_nascosta`.
+- [x] [[2026-05-28 - La Campana Nella Nebbia]] mostra un recap pubblico leggibile.
+- [x] [[Mappa Pubblica Di Brumafonda]] e pubblica e non contiene callout segreti.
+- [x] [[Avviso Della Dogana Di Brumafonda]] e consegnabile ai giocatori.
+- [x] [[Vista Giocatori]] segnala controllo sicurezza pulito.
+- [x] Nessuna nota demo pubblica espone `segreti`, `prossima_mossa`, `mosse_segrete` o `verita_nascosta`.
 
 ## Evidenze Release
 
@@ -58,5 +58,6 @@ Apri queste pagine in ordine e verifica che non compaiano errori Dataview, JS En
 - [x] `npm run check` eseguito e passato.
 - [x] `npm run release:clean` eseguito e passato.
 - [x] Controllo player-safe statico della demo passato dentro `npm run check`.
+- [x] `npm run check:smoke` aggiunto come gate statico dedicato per demo finale e player-safe.
 - [ ] Smoke visuale Obsidian ancora da eseguire sulle pagine del percorso visuale.
 - [ ] Screenshot/GIF di evidenza ancora da acquisire.
