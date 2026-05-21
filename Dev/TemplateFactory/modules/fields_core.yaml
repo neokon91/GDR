@@ -137,6 +137,52 @@ fields:
       required: false
       source: meta_bind
       use: impatto concreto durante la sessione
+  entity_depth:
+    - name: origine
+      type: text
+      required: false
+      source: meta_bind
+      use: origine narrativa, politica o fisica dell'entita
+    - name: causa
+      type: text
+      required: false
+      source: meta_bind
+      use: causa che spiega perche la situazione esiste
+    - name: tensione
+      type: text
+      required: false
+      source: meta_bind
+      use: conflitto interno o pressione locale
+    - name: dipendenze
+      type: list
+      required: false
+      source: meta_bind
+      use: risorse, persone o istituzioni da cui dipende
+    - name: simboli_visibili
+      type: list
+      required: false
+      source: meta_bind
+      use: segnali estetici o culturali visibili al tavolo
+    - name: bisogno_quotidiano
+      type: text
+      required: false
+      source: meta_bind
+      use: necessita concreta che rende l'entita viva
+    - name: costo_sociale
+      type: text
+      required: false
+      source: meta_bind
+      use: costo sociale se la situazione cambia o viene ignorata
+    - name: evoluzione_se_ignorata
+      type: text
+      required: false
+      source: meta_bind
+      use: sviluppo automatico se i PG non intervengono
+    - name: versione_player_safe
+      type: text
+      required: false
+      source: meta_bind
+      use: formulazione pubblicabile o condivisibile senza segreti
   pressure:
     - name: pressione
       type: number
@@ -193,6 +239,20 @@ fields:
       required: false
       source: meta_bind
       use: scadenza diegetica della pressione
+    - name: aggiornamenti_richiesti
+      type: list
+      required: false
+      source: meta_bind
+      use: note da aggiornare dopo una conseguenza
+    - name: propagazione_stato
+      type: select
+      required: false
+      source: metadata_menu
+      use: stato operativo della propagazione
+      values:
+        - da propagare
+        - propagata
+        - ignorata
   public_safety:
     - name: pubblico
       type: boolean
@@ -246,6 +306,16 @@ fields:
       required: false
       source: meta_bind
       use: scelta concreta da offrire ai giocatori
+    - name: scene_pronte
+      type: list
+      required: false
+      source: meta_bind
+      use: scene gia spendibili al tavolo
+    - name: ostacoli
+      type: list
+      required: false
+      source: meta_bind
+      use: ostacoli pronti per missioni, viaggi o conflitti
     - name: pressioni
       type: list
       required: false

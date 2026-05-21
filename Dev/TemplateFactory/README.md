@@ -61,6 +61,7 @@ Gli script in `z.automazioni/` devono restare sottili:
 - JS raccoglie input, sceglie file esistenti, calcola valori e collega note.
 - `runtime_profiles.yaml` dichiara prompt, opzioni e default.
 - `frontmatter_profiles.yaml` dichiara ordine, campi, default e integrazioni plugin del frontmatter.
+- `entity_depth.yaml` dichiara quali famiglie fantasy devono esporre profondita lore, giocabilita, continuita, tabs e superfici plugin.
 - Un generatore Templater non deve restituire blocchi `---` inline: deve usare `helpers.renderFrontmatter("profilo", valori)`.
 - Gli importer CLI possono usare un renderer locale equivalente solo quando non girano dentro Obsidian, ma il profilo resta dichiarato in `frontmatter_profiles.yaml`.
 
@@ -80,6 +81,12 @@ La logica di scheda deve vivere nei moduli YAML. I file Jinja possono comporre M
 
 La conseguenza pratica: YAML decide cosa esiste; Jinja assembla; JS esegue funzioni atomiche e viste riusabili. Se un DM/lore builder vuole cambiare comportamento, prima deve poter leggere il contratto in YAML.
 
+## Regola Entity Depth
+
+`entity_depth.yaml` e il contratto di profondita per famiglie fantasy. Per `luogo`, `fazione`, `missione` e `tracciato` dichiara campi frontmatter, prompt runtime, sezioni, layout tabs e superfici plugin obbligatorie.
+
+`npm run check:templates` blocca una famiglia se un campo non e catalogato, se il profilo frontmatter non lo espone, se manca un prompt runtime, se tabs/sezioni non esistono o se una superficie plugin richiesta non e dichiarata in `plugin_bindings.yaml`.
+
 ## Moduli
 
 | Modulo | Responsabilita |
@@ -96,6 +103,7 @@ La conseguenza pratica: YAML decide cosa esiste; Jinja assembla; JS esegue funzi
 | `bases_views.yaml` | Contratti per viste `.base`. |
 | `frontmatter_profiles.yaml` | Ordine, default e chiavi del frontmatter generato dagli script. |
 | `runtime_profiles.yaml` | Prompt, opzioni e default usati dagli script Templater sottili. |
+| `entity_depth.yaml` | Contratti di profondita per famiglie fantasy governate da YAML. |
 
 `frontmatter_profiles.yaml` distingue campi core, campi di dominio e campi legati a plugin come Calendarium o Maps. `check:templates` renderizza un campione per ogni profilo e verifica che il frontmatter risultante sia YAML valido.
 

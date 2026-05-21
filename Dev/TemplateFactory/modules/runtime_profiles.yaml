@@ -30,6 +30,12 @@ profiles:
       id: culto politico
     prompts:
       obiettivo: Obiettivo pubblico
+      origine: Origine, fondazione o trauma che spiega la fazione
+      tensione: Tensione interna o conflitto politico attivo
+      dipendenze: Dipendenze materiali, sociali o magiche della fazione
+      simboli_visibili: Simboli, uniformi, pratiche o segni riconoscibili
+      costo_sociale: Chi paga il prezzo dell'agenda della fazione
+      evoluzione_se_ignorata: Come evolve se i PG non intervengono
       gancio: 'Gancio giocabile: perche questa fazione entra in scena?'
       player_safe: Versione player-safe mostrabile
       obiettivo_nascosto: Obiettivo nascosto
@@ -94,9 +100,15 @@ profiles:
       id: sottosuolo
     prompts:
       pericolo: Pericolo da 0 a 10
+      origine: Origine storica, fisica o mitica del luogo
       gancio: 'Gancio giocabile: perche questo luogo importa adesso?'
       impressione: Prima impressione
       tensione: Tensione o conflitto locale
+      dipendenze: Dipendenze materiali, politiche o naturali del luogo
+      simboli_visibili: Segni visibili, suoni, rituali o architetture distintive
+      bisogno_quotidiano: Bisogno quotidiano che rende vivo il luogo
+      costo_sociale: Chi soffre se il luogo cambia o resta com'e
+      evoluzione_se_ignorata: Come evolve se nessuno interviene
       uso_al_tavolo: 'Uso al tavolo: scelta, rischio o scena che produce'
       player_safe: Versione player-safe mostrabile
       luogo_padre: Luogo o regione superiore
@@ -135,6 +147,11 @@ profiles:
       id: missione di fazione
     prompts:
       pressione: Pressione da 0 a 10
+      origine: Origine della missione
+      causa: Causa concreta che ha prodotto il problema
+      tensione: Tensione morale, politica o pratica della missione
+      costo_sociale: Prezzo sociale del successo, fallimento o rinvio
+      evoluzione_se_ignorata: Come peggiora se viene ignorata
       posta: 'Posta: cosa cambia se riesce o fallisce?'
       scelta: Scelta concreta per i giocatori
       player_safe: Versione player-safe dell'obiettivo
@@ -150,6 +167,9 @@ profiles:
       scadenza_mondo: Scadenza nel mondo
       calendario: Calendario Calendarium
       ostacolo: Ostacolo principale
+      rischi: Rischio principale per i PG o per il mondo
+      entita_impattate: Entita direttamente impattate dalla missione
+      propaga_a: Note a cui propagare conseguenze o aggiornamenti
       segreto: Segreto dietro la missione
       domanda_aperta: Domanda aperta della missione
   tracciato:
@@ -178,6 +198,11 @@ profiles:
     prompts:
       progress_max: Segmenti totali
       progress_value: Segmenti gia segnati
+      origine: Origine del clock o della pressione
+      causa: Causa che lo ha messo in movimento
+      tensione: Tensione che rende il tracciato instabile
+      costo_sociale: Prezzo sociale quando avanza
+      evoluzione_se_ignorata: Cosa accade se nessuno lo ferma
       posta: Cosa succede quando si riempie
       gancio: Gancio giocabile
       uso_al_tavolo: Uso al tavolo
@@ -189,6 +214,8 @@ profiles:
       fazioni: Fazioni collegate
       luoghi: Luoghi collegati
       personaggi: PNG o PG collegati
+      entita_impattate: Entita direttamente impattate dal tracciato
+      propaga_a: Note a cui propagare conseguenze o aggiornamenti
   relazione:
     name_prompt: Nome della relazione, patto o rivalità
     completion_prompt: Vuoi compilare storia, versioni e dipendenze della relazione ora? Scegli No per una relazione rapida.

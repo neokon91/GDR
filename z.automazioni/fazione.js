@@ -10,6 +10,12 @@ async function fazione(tp, routeOptions = {}) {
     const mondo = await helpers.chooseWorld(tp, profile.world_prompt ?? "Mondo della fazione");
     const context = { world: mondo };
     const obiettivo = await helpers.promptOptional(tp, prompts.obiettivo ?? "Obiettivo pubblico");
+    const origine = await helpers.promptOptional(tp, prompts.origine ?? "Origine, fondazione o trauma che spiega la fazione");
+    const tensione = await helpers.promptOptional(tp, prompts.tensione ?? "Tensione interna o conflitto politico attivo");
+    const dipendenze = creazioneCompleta ? await helpers.promptOptional(tp, prompts.dipendenze ?? "Dipendenze materiali, sociali o magiche della fazione") : "";
+    const simboliVisibili = creazioneCompleta ? await helpers.promptOptional(tp, prompts.simboli_visibili ?? "Simboli, uniformi, pratiche o segni riconoscibili") : "";
+    const costoSociale = await helpers.promptOptional(tp, prompts.costo_sociale ?? "Chi paga il prezzo dell'agenda della fazione");
+    const evoluzioneSeIgnorata = await helpers.promptOptional(tp, prompts.evoluzione_se_ignorata ?? "Come evolve se i PG non intervengono");
     const gancio = await helpers.promptOptional(tp, prompts.gancio ?? "Gancio giocabile: perche questa fazione entra in scena?");
     const playerSafe = await helpers.promptOptional(tp, prompts.player_safe ?? "Versione player-safe mostrabile");
     const obiettivoNascosto = await helpers.promptOptional(tp, prompts.obiettivo_nascosto ?? "Obiettivo nascosto");
@@ -44,6 +50,12 @@ async function fazione(tp, routeOptions = {}) {
         player_safe: helpers.yamlQuote(playerSafe),
         obiettivo_nascosto: helpers.yamlQuote(obiettivoNascosto),
         agenda: helpers.yamlQuote(obiettivo),
+        origine: helpers.yamlQuote(origine),
+        tensione: helpers.yamlQuote(tensione),
+        dipendenze: helpers.inlineYamlTextList([dipendenze]),
+        simboli_visibili: helpers.inlineYamlTextList([simboliVisibili]),
+        costo_sociale: helpers.yamlQuote(costoSociale),
+        evoluzione_se_ignorata: helpers.yamlQuote(evoluzioneSeIgnorata),
         pressione: helpers.yamlNumber(pressione) || 0,
         prossima_mossa: helpers.yamlQuote(prossimaMossa),
         scadenza_mondo: helpers.yamlQuote(scadenzaMondo),

@@ -19,6 +19,16 @@ properties:
     displayName: Pericolo
   pressione:
     displayName: Pressione
+  origine:
+    displayName: Origine
+  tensione:
+    displayName: Tensione
+  bisogno_quotidiano:
+    displayName: Bisogno quotidiano
+  costo_sociale:
+    displayName: Costo sociale
+  evoluzione_se_ignorata:
+    displayName: Evoluzione se ignorata
   governante:
     displayName: Governante
   fazioni:
@@ -65,6 +75,9 @@ views:
       - tipo
       - pericolo
       - pressione
+      - origine
+      - tensione
+      - bisogno_quotidiano
       - prossima_mossa
       - missioni
       - personaggi

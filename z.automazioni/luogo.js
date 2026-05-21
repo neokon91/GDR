@@ -16,9 +16,15 @@ async function luogo(tp, routeOptions = {}){
     const mondo = await helpers.chooseWorld(tp, profile.world_prompt ?? "Mondo del luogo");
     const context = { world: mondo };
     const pericolo = await helpers.promptOptional(tp, prompts.pericolo ?? "Pericolo da 0 a 10");
+    const origine = await helpers.promptOptional(tp, prompts.origine ?? "Origine storica, fisica o mitica del luogo");
     const gancio = await helpers.promptOptional(tp, prompts.gancio ?? "Gancio giocabile: perche questo luogo importa adesso?");
     const impressione = await helpers.promptOptional(tp, prompts.impressione ?? "Prima impressione");
     const tensione = await helpers.promptOptional(tp, prompts.tensione ?? "Tensione o conflitto locale");
+    const dipendenze = creazioneCompleta ? await helpers.promptOptional(tp, prompts.dipendenze ?? "Dipendenze materiali, politiche o naturali del luogo") : "";
+    const simboliVisibili = creazioneCompleta ? await helpers.promptOptional(tp, prompts.simboli_visibili ?? "Segni visibili, suoni, rituali o architetture distintive") : "";
+    const bisognoQuotidiano = await helpers.promptOptional(tp, prompts.bisogno_quotidiano ?? "Bisogno quotidiano che rende vivo il luogo");
+    const costoSociale = await helpers.promptOptional(tp, prompts.costo_sociale ?? "Chi soffre se il luogo cambia o resta com'e");
+    const evoluzioneSeIgnorata = await helpers.promptOptional(tp, prompts.evoluzione_se_ignorata ?? "Come evolve se nessuno interviene");
     const usoAlTavolo = await helpers.promptOptional(tp, prompts.uso_al_tavolo ?? "Uso al tavolo: scelta, rischio o scena che produce");
     const playerSafe = await helpers.promptOptional(tp, prompts.player_safe ?? "Versione player-safe mostrabile");
     const luogoPadre = creazioneCompleta ? await helpers.chooseLocation(tp, prompts.luogo_padre ?? "Luogo o regione superiore", context) : "";
@@ -49,11 +55,17 @@ async function luogo(tp, routeOptions = {}){
         governante,
         pericolo,
         impressione: helpers.yamlQuote(impressione),
+        origine: helpers.yamlQuote(origine),
         gancio: helpers.yamlQuote(gancio),
         uso_al_tavolo: helpers.yamlQuote(usoAlTavolo),
         player_safe: helpers.yamlQuote(playerSafe),
         funzione_narrativa: helpers.yamlQuote(funzioneNarrativa),
         tensione: helpers.yamlQuote(tensione),
+        dipendenze: helpers.inlineYamlTextList([dipendenze]),
+        simboli_visibili: helpers.inlineYamlTextList([simboliVisibili]),
+        bisogno_quotidiano: helpers.yamlQuote(bisognoQuotidiano),
+        costo_sociale: helpers.yamlQuote(costoSociale),
+        evoluzione_se_ignorata: helpers.yamlQuote(evoluzioneSeIgnorata),
         fazioni: helpers.inlineYamlList(fazioni),
         personaggi: helpers.inlineYamlList(personaggi),
         missioni: helpers.inlineYamlList(missioni),

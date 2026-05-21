@@ -40,6 +40,82 @@ sections:
       - Luoghi:
       - Fazioni:
       - Missioni:
+  profondita_lore:
+    title: Profondita Fantasy
+    callout: scena
+    fields:
+      - origine
+      - causa
+      - tensione
+      - dipendenze
+      - simboli_visibili
+      - bisogno_quotidiano
+      - costo_sociale
+    fallback: |-
+      ### Profondita fantasy
+      - Origine:
+      - Causa:
+      - Tensione:
+      - Dipendenze:
+      - Simboli visibili:
+      - Bisogno quotidiano:
+      - Costo sociale:
+  giocabilita:
+    title: Giocabilita
+    callout: missione
+    fields:
+      - gancio
+      - scelta
+      - posta
+      - rischi
+      - ricompense
+      - scene_pronte
+      - ostacoli
+    fallback: |-
+      ### Giocabilita
+      - Gancio:
+      - Scelta:
+      - Posta:
+      - Rischi:
+      - Ricompense:
+      - Scene pronte:
+      - Ostacoli:
+  continuita:
+    title: Continuita
+    callout: timer
+    fields:
+      - evoluzione_se_ignorata
+      - conseguenze
+      - entita_impattate
+      - propaga_a
+      - aggiornamenti_richiesti
+      - propagazione_stato
+    fallback: |-
+      ### Continuita
+      - Evoluzione se ignorata:
+      - Conseguenze:
+      - Entita impattate:
+      - Propaga a:
+      - Aggiornamenti richiesti:
+      - Stato propagazione:
+  pubblicazione:
+    title: Pubblicazione
+    callout: lettura
+    fields:
+      - player_safe
+      - versione_player_safe
+      - pubblico
+      - canonico
+      - stato_canonico
+      - segreto
+    fallback: |-
+      ### Pubblicazione
+      - Player-safe:
+      - Versione player-safe:
+      - Pubblico:
+      - Canonico:
+      - Stato canonico:
+      - Note DM:
   propagazione:
     title: Propagazione
     callout: timer

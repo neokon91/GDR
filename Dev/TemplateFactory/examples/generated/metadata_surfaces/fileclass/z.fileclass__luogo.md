@@ -26,11 +26,17 @@ fieldsOrder:
 - legittimita
 - capitale
 - impressione
+- origine
 - gancio
 - uso_al_tavolo
 - player_safe
 - funzione_narrativa
 - tensione
+- dipendenze
+- simboli_visibili
+- bisogno_quotidiano
+- costo_sociale
+- evoluzione_se_ignorata
 - promessa_al_tavolo
 - confini
 - vassalli
@@ -165,6 +171,10 @@ fields:
   id: impressione
   type: Input
   options: {}
+- name: origine
+  id: origine
+  type: Input
+  options: {}
 - name: gancio
   id: gancio
   type: Input
@@ -183,6 +193,26 @@ fields:
   options: {}
 - name: tensione
   id: tensione
+  type: Input
+  options: {}
+- name: dipendenze
+  id: dipendenze
+  type: Multi
+  options: {}
+- name: simboli_visibili
+  id: simboli_visibili
+  type: Multi
+  options: {}
+- name: bisogno_quotidiano
+  id: bisogno_quotidiano
+  type: Input
+  options: {}
+- name: costo_sociale
+  id: costo_sociale
+  type: Input
+  options: {}
+- name: evoluzione_se_ignorata
+  id: evoluzione_se_ignorata
   type: Input
   options: {}
 - name: promessa_al_tavolo

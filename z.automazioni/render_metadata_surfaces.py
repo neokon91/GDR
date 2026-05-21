@@ -182,13 +182,14 @@ def check_outputs(outputs: dict[Path, str]) -> list[str]:
             continue
         actual = path.read_text(encoding="utf-8")
         if actual != expected:
-            diff = "\n".join(difflib.unified_diff(
+            diff_lines = list(difflib.unified_diff(
                 actual.splitlines(),
                 expected.splitlines(),
                 fromfile=str(path.relative_to(ROOT)),
                 tofile=f"{path.relative_to(ROOT)}.expected",
                 lineterm="",
-            )[:40])
+            ))
+            diff = "\n".join(diff_lines[:40])
             errors.append(f"{path.relative_to(ROOT)}: anteprima non aggiornata\n{diff}")
     return errors
 

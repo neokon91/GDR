@@ -9,6 +9,10 @@ required_fields:
 - pressione
 - prossima_mossa
 - obiettivo
+- origine
+- tensione
+- costo_sociale
+- evoluzione_se_ignorata
 - connessioni
 profile_fields:
 - id
@@ -30,6 +34,12 @@ profile_fields:
 - player_safe
 - obiettivo_nascosto
 - agenda
+- origine
+- tensione
+- dipendenze
+- simboli_visibili
+- costo_sociale
+- evoluzione_se_ignorata
 - influenza
 - pressione
 - prossima_mossa

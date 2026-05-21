@@ -13,6 +13,14 @@ fieldsOrder:
   - progress_value
   - progress_max
   - pressione
+  - origine
+  - causa
+  - tensione
+  - costo_sociale
+  - evoluzione_se_ignorata
+  - posta
+  - scelta
+  - rischi
   - prossima_mossa
   - scadenza_mondo
   - fc-calendar
@@ -92,6 +100,38 @@ fields:
   - name: pressione
     id: pressione
     type: Number
+    options: {}
+  - name: origine
+    id: origine
+    type: Input
+    options: {}
+  - name: causa
+    id: causa
+    type: Input
+    options: {}
+  - name: tensione
+    id: tensione
+    type: Input
+    options: {}
+  - name: costo_sociale
+    id: costo_sociale
+    type: Input
+    options: {}
+  - name: evoluzione_se_ignorata
+    id: evoluzione_se_ignorata
+    type: Input
+    options: {}
+  - name: posta
+    id: posta
+    type: Input
+    options: {}
+  - name: scelta
+    id: scelta
+    type: Input
+    options: {}
+  - name: rischi
+    id: rischi
+    type: Multi
     options: {}
   - name: prossima_mossa
     id: prossima_mossa

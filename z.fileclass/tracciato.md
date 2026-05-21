@@ -13,6 +13,11 @@ fieldsOrder:
   - progress_value
   - progress_max
   - pressione
+  - origine
+  - causa
+  - tensione
+  - costo_sociale
+  - evoluzione_se_ignorata
   - innesco
   - posta
   - prossima_mossa
@@ -88,6 +93,26 @@ fields:
   - name: pressione
     id: pressione
     type: Number
+    options: {}
+  - name: origine
+    id: origine
+    type: Input
+    options: {}
+  - name: causa
+    id: causa
+    type: Input
+    options: {}
+  - name: tensione
+    id: tensione
+    type: Input
+    options: {}
+  - name: costo_sociale
+    id: costo_sociale
+    type: Input
+    options: {}
+  - name: evoluzione_se_ignorata
+    id: evoluzione_se_ignorata
+    type: Input
     options: {}
   - name: innesco
     id: innesco

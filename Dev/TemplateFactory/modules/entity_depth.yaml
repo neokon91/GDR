@@ -1,0 +1,161 @@
+id: entity_depth
+purpose: Contratti YAML per aumentare profondita, giocabilita e continuita delle entita fantasy senza spostare logica in JS.
+version: 0.1.0
+families:
+  luogo:
+    reason: Il luogo deve produrre esplorazione, pressione, risorse, scena e conseguenze.
+    frontmatter_profile: luogo
+    runtime_profile: luogo
+    required_frontmatter_fields:
+      - origine
+      - tensione
+      - dipendenze
+      - simboli_visibili
+      - bisogno_quotidiano
+      - costo_sociale
+      - evoluzione_se_ignorata
+      - gancio
+      - uso_al_tavolo
+      - player_safe
+      - prossima_mossa
+      - connessioni
+    required_runtime_prompts:
+      - origine
+      - dipendenze
+      - simboli_visibili
+      - bisogno_quotidiano
+      - costo_sociale
+      - evoluzione_se_ignorata
+    required_sections:
+      - profondita_lore
+      - giocabilita
+      - continuita
+      - pubblicazione
+    required_tabs:
+      - profondita_fantasy
+    plugin_surfaces:
+      - meta_bind
+      - dataview
+      - bases
+      - maps
+      - excalidraw
+      - canvas
+  fazione:
+    reason: La fazione deve avere agenda, risorse, dipendenze, costo sociale, pressione e propagazione.
+    frontmatter_profile: fazione
+    runtime_profile: fazione
+    required_frontmatter_fields:
+      - origine
+      - tensione
+      - dipendenze
+      - simboli_visibili
+      - costo_sociale
+      - evoluzione_se_ignorata
+      - obiettivo
+      - obiettivo_nascosto
+      - pressione
+      - prossima_mossa
+      - propaga_a
+      - connessioni
+    required_runtime_prompts:
+      - origine
+      - dipendenze
+      - simboli_visibili
+      - costo_sociale
+      - evoluzione_se_ignorata
+    required_sections:
+      - profondita_lore
+      - giocabilita
+      - continuita
+      - pubblicazione
+    required_tabs:
+      - profondita_fantasy
+    plugin_surfaces:
+      - meta_bind
+      - dataview
+      - bases
+      - tasks
+  missione:
+    reason: La missione deve trasformare lore in scelta, rischio, ricompensa e conseguenza persistente.
+    frontmatter_profile: missione
+    runtime_profile: missione
+    required_frontmatter_fields:
+      - origine
+      - causa
+      - tensione
+      - costo_sociale
+      - evoluzione_se_ignorata
+      - scelta
+      - posta
+      - rischi
+      - ricompense
+      - conseguenze
+      - entita_impattate
+      - propaga_a
+      - connessioni
+    required_runtime_prompts:
+      - origine
+      - causa
+      - tensione
+      - costo_sociale
+      - evoluzione_se_ignorata
+      - rischi
+      - entita_impattate
+      - propaga_a
+    required_sections:
+      - profondita_lore
+      - giocabilita
+      - continuita
+      - pubblicazione
+    required_tabs:
+      - profondita_fantasy
+    plugin_surfaces:
+      - meta_bind
+      - dataview
+      - bases
+      - tasks
+      - calendarium
+  tracciato:
+    reason: Il tracciato deve rendere visibile una pressione, il modo in cui avanza e cosa cambia nel mondo.
+    frontmatter_profile: tracciato
+    runtime_profile: tracciato
+    required_frontmatter_fields:
+      - origine
+      - causa
+      - tensione
+      - costo_sociale
+      - evoluzione_se_ignorata
+      - innesco
+      - posta
+      - progress_value
+      - progress_max
+      - prossima_mossa
+      - entita_impattate
+      - propaga_a
+      - connessioni
+    required_runtime_prompts:
+      - origine
+      - causa
+      - tensione
+      - costo_sociale
+      - evoluzione_se_ignorata
+      - entita_impattate
+      - propaga_a
+    required_sections:
+      - profondita_lore
+      - giocabilita
+      - continuita
+      - pubblicazione
+    required_tabs:
+      - profondita_fantasy
+    plugin_surfaces:
+      - meta_bind
+      - dataview
+      - bases
+      - tasks
+contracts:
+  fields_must_exist_in_yaml_catalog: true
+  runtime_prompts_must_exist: true
+  frontmatter_profiles_must_expose_required_fields: true
+  sections_and_tabs_must_exist_before_jinja_use: true
+  no_dashboard_required: true

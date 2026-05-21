@@ -281,6 +281,10 @@ profiles:
       - pressione
       - prossima_mossa
       - obiettivo
+      - origine
+      - tensione
+      - costo_sociale
+      - evoluzione_se_ignorata
       - connessioni
     sample_values:
     - id
@@ -326,6 +330,18 @@ profiles:
       value: obiettivo_nascosto
     - key: agenda
       value: agenda
+    - key: origine
+      value: origine
+    - key: tensione
+      value: tensione
+    - key: dipendenze
+      value: dipendenze
+    - key: simboli_visibili
+      value: simboli_visibili
+    - key: costo_sociale
+      value: costo_sociale
+    - key: evoluzione_se_ignorata
+      value: evoluzione_se_ignorata
     - key: influenza
       default: ''
     - key: pressione
@@ -393,6 +409,11 @@ profiles:
       - luogo_padre
       - pericolo
       - pressione
+      - origine
+      - tensione
+      - bisogno_quotidiano
+      - costo_sociale
+      - evoluzione_se_ignorata
       - connessioni
     sample_values:
     - id
@@ -444,6 +465,8 @@ profiles:
       default: ''
     - key: impressione
       value: impressione
+    - key: origine
+      value: origine
     - key: gancio
       value: gancio
     - key: uso_al_tavolo
@@ -454,6 +477,16 @@ profiles:
       value: funzione_narrativa
     - key: tensione
       value: tensione
+    - key: dipendenze
+      value: dipendenze
+    - key: simboli_visibili
+      value: simboli_visibili
+    - key: bisogno_quotidiano
+      value: bisogno_quotidiano
+    - key: costo_sociale
+      value: costo_sociale
+    - key: evoluzione_se_ignorata
+      value: evoluzione_se_ignorata
     - key: promessa_al_tavolo
       default: ''
     - key: confini
@@ -821,6 +854,13 @@ profiles:
       - committente
       - pressione
       - prossima_mossa
+      - origine
+      - causa
+      - tensione
+      - costo_sociale
+      - evoluzione_se_ignorata
+      - entita_impattate
+      - propaga_a
       - scadenza_mondo
       - fc-calendar
       - connessioni
@@ -864,10 +904,22 @@ profiles:
       default: 6
     - key: pressione
       value: pressione
+    - key: origine
+      value: origine
+    - key: causa
+      value: causa
+    - key: tensione
+      value: tensione
+    - key: costo_sociale
+      value: costo_sociale
+    - key: evoluzione_se_ignorata
+      value: evoluzione_se_ignorata
     - key: posta
       value: posta
     - key: scelta
       value: scelta
+    - key: rischi
+      value: rischi
     - key: gancio
       value: gancio
     - key: uso_al_tavolo
@@ -888,6 +940,10 @@ profiles:
       default: []
     - key: conseguenze
       value: conseguenze
+    - key: entita_impattate
+      value: entita_impattate
+    - key: propaga_a
+      value: propaga_a
     - key: segreti
       value: segreti
     - key: connessioni
@@ -923,6 +979,13 @@ profiles:
       - innesco
       - posta
       - prossima_mossa
+      - origine
+      - causa
+      - tensione
+      - costo_sociale
+      - evoluzione_se_ignorata
+      - entita_impattate
+      - propaga_a
       - connessioni
     sample_values:
     - id
@@ -962,6 +1025,16 @@ profiles:
       value: progress_max
     - key: pressione
       default: 0
+    - key: origine
+      value: origine
+    - key: causa
+      value: causa
+    - key: tensione
+      value: tensione
+    - key: costo_sociale
+      value: costo_sociale
+    - key: evoluzione_se_ignorata
+      value: evoluzione_se_ignorata
     - key: gancio
       value: gancio
     - key: uso_al_tavolo
@@ -983,9 +1056,9 @@ profiles:
     - key: esito_finale
       default: ''
     - key: entita_impattate
-      default: []
+      value: entita_impattate
     - key: propaga_a
-      default: []
+      value: propaga_a
     - key: mosse
       default: []
     - key: scelte

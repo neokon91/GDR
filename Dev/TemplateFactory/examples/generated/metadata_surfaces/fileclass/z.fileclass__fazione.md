@@ -23,6 +23,12 @@ fieldsOrder:
 - player_safe
 - obiettivo_nascosto
 - agenda
+- origine
+- tensione
+- dipendenze
+- simboli_visibili
+- costo_sociale
+- evoluzione_se_ignorata
 - influenza
 - pressione
 - prossima_mossa
@@ -141,6 +147,30 @@ fields:
 - name: agenda
   id: agenda
   type: Multi
+  options: {}
+- name: origine
+  id: origine
+  type: Input
+  options: {}
+- name: tensione
+  id: tensione
+  type: Input
+  options: {}
+- name: dipendenze
+  id: dipendenze
+  type: Multi
+  options: {}
+- name: simboli_visibili
+  id: simboli_visibili
+  type: Multi
+  options: {}
+- name: costo_sociale
+  id: costo_sociale
+  type: Input
+  options: {}
+- name: evoluzione_se_ignorata
+  id: evoluzione_se_ignorata
+  type: Input
   options: {}
 - name: influenza
   id: influenza

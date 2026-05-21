@@ -25,6 +25,14 @@ properties:
     displayName: Agenda
   obiettivo:
     displayName: Obiettivo
+  origine:
+    displayName: Origine
+  tensione:
+    displayName: Tensione
+  costo_sociale:
+    displayName: Costo sociale
+  evoluzione_se_ignorata:
+    displayName: Evoluzione se ignorata
   alleati:
     displayName: Alleati
   rivali:
@@ -81,6 +89,10 @@ views:
       - formula.stato_operativo
       - agenda
       - obiettivo
+      - origine
+      - tensione
+      - costo_sociale
+      - evoluzione_se_ignorata
       - prossima_mossa
       - alleati
       - rivali

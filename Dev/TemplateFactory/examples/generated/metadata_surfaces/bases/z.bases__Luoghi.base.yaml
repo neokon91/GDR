@@ -9,6 +9,11 @@ required_fields:
 - luogo_padre
 - pericolo
 - pressione
+- origine
+- tensione
+- bisogno_quotidiano
+- costo_sociale
+- evoluzione_se_ignorata
 - connessioni
 profile_fields:
 - id
@@ -33,11 +38,17 @@ profile_fields:
 - legittimita
 - capitale
 - impressione
+- origine
 - gancio
 - uso_al_tavolo
 - player_safe
 - funzione_narrativa
 - tensione
+- dipendenze
+- simboli_visibili
+- bisogno_quotidiano
+- costo_sociale
+- evoluzione_se_ignorata
 - promessa_al_tavolo
 - confini
 - vassalli

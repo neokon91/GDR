@@ -112,7 +112,7 @@ fields:
   options: {}
 - name: dipendenze
   id: dipendenze
-  type: Input
+  type: Multi
   options: {}
 - name: pressione
   id: pressione

@@ -11,6 +11,11 @@ async function tracciato(tp) {
     const context = { world: mondo };
     const progressMax = await helpers.promptOptional(tp, prompts.progress_max ?? "Segmenti totali", profile.progress_max_default ?? "6") || "6";
     const progressValue = await helpers.promptOptional(tp, prompts.progress_value ?? "Segmenti gia segnati", profile.progress_value_default ?? "0") || "0";
+    const origine = await helpers.promptOptional(tp, prompts.origine ?? "Origine del clock o della pressione");
+    const causa = await helpers.promptOptional(tp, prompts.causa ?? "Causa che lo ha messo in movimento");
+    const tensione = await helpers.promptOptional(tp, prompts.tensione ?? "Tensione che rende il tracciato instabile");
+    const costoSociale = await helpers.promptOptional(tp, prompts.costo_sociale ?? "Prezzo sociale quando avanza");
+    const evoluzioneSeIgnorata = await helpers.promptOptional(tp, prompts.evoluzione_se_ignorata ?? "Cosa accade se nessuno lo ferma");
     const posta = await helpers.promptOptional(tp, prompts.posta ?? "Cosa succede quando si riempie");
     const gancio = await helpers.promptOptional(tp, prompts.gancio ?? "Gancio giocabile");
     const usoAlTavolo = await helpers.promptOptional(tp, prompts.uso_al_tavolo ?? "Uso al tavolo");
@@ -22,6 +27,8 @@ async function tracciato(tp) {
     const fazioni = creazioneCompleta ? await helpers.chooseFactions(tp, prompts.fazioni ?? "Fazioni collegate", context) : [];
     const luoghi = creazioneCompleta ? await helpers.chooseLocations(tp, prompts.luoghi ?? "Luoghi collegati", context) : [];
     const personaggi = creazioneCompleta ? await helpers.choosePeople(tp, prompts.personaggi ?? "PNG o PG collegati", context) : [];
+    const entitaImpattate = creazioneCompleta ? await helpers.chooseConnections(tp, prompts.entita_impattate ?? "Entita direttamente impattate dal tracciato", context) : [];
+    const propagaA = creazioneCompleta ? await helpers.chooseConnections(tp, prompts.propaga_a ?? "Note a cui propagare conseguenze o aggiornamenti", context) : [];
     const connessioni = await helpers.chooseConnections(tp, profile.connection_prompt ?? "Connessioni vive del tracciato", context);
 
     const sessioni = activeContext.link ? [activeContext.link] : [];
@@ -43,12 +50,19 @@ async function tracciato(tp) {
         sessioni: helpers.inlineYamlList(sessioni),
         progress_value: helpers.yamlNumber(progressValue) || 0,
         progress_max: helpers.yamlNumber(progressMax) || 6,
+        origine: helpers.yamlQuote(origine),
+        causa: helpers.yamlQuote(causa),
+        tensione: helpers.yamlQuote(tensione),
+        costo_sociale: helpers.yamlQuote(costoSociale),
+        evoluzione_se_ignorata: helpers.yamlQuote(evoluzioneSeIgnorata),
         gancio: helpers.yamlQuote(gancio),
         uso_al_tavolo: helpers.yamlQuote(usoAlTavolo),
         player_safe: helpers.yamlQuote(playerSafe),
         posta: helpers.yamlQuote(posta),
         prossima_mossa: helpers.yamlQuote(prossimaMossa),
         innesco: helpers.yamlQuote(innesco),
+        entita_impattate: helpers.inlineYamlList(entitaImpattate),
+        propaga_a: helpers.inlineYamlList(propagaA),
         connessioni: helpers.inlineYamlList(connessioni)
     });
 }

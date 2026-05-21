@@ -37,6 +37,7 @@
 - Gate esperienza hub: `check_vault.js` verifica ruolo, classe visuale, callout, viste/input/azioni plugin-native e marker funzionali degli hub principali.
 - Gate Plugin Surface YAML: TemplateFactory blocca input Meta Bind, bottoni, callout, runtime DataviewJS e Bases usati nei Jinja se non sono dichiarati nei moduli YAML.
 - [[Dev/Prossima Discussione - YAML Entita Fantasy]] prepara la prossima fase su profondita delle entita fantasy governata da YAML.
+- `entity_depth.yaml` introduce contratti YAML per profondita fantasy di luogo, fazione, missione e tracciato: campi, prompt runtime, sezioni, tabs e superfici plugin obbligatorie.
 
 ### Migliorato
 
@@ -67,6 +68,7 @@
 - `Demo Brumafonda.md` nella release utente ora e un dossier plugin-native con tabs, callout operativi, DataviewJS, Tasks e fallback Markdown.
 - Le note del pacchetto demo dichiarano la campagna `[[Sale Sotto La Nebbia]]` per rendere affidabili filtri, hub e viste Dataview.
 - `bases_views.yaml`, `callouts.yaml`, `dataview_blocks.yaml`, `metabind_buttons.yaml` e `frontmatter_profiles.yaml` ora coprono le superfici plugin-native usate dai template generati.
+- I generatori `luogo`, `fazione`, `missione` e `tracciato` raccolgono profondita narrativa da prompt YAML e la scrivono nel frontmatter senza logica strutturale hardcoded.
 
 ### Verificato
 

@@ -25,6 +25,25 @@ layouts:
         label: Controllo
         sections:
           - feedback_creazione
+  profondita_fantasy:
+    syntax: tabs
+    tabs:
+      - id: profondita
+        label: Profondita
+        sections:
+          - profondita_lore
+      - id: tavolo
+        label: Tavolo
+        sections:
+          - giocabilita
+      - id: continuita
+        label: Continuita
+        sections:
+          - continuita
+      - id: pubblicazione
+        label: Pubblicazione
+        sections:
+          - pubblicazione
   session:
     syntax: tabs
     tabs:

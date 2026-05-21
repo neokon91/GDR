@@ -19,6 +19,16 @@ properties:
     displayName: Committente
   pressione:
     displayName: Pressione
+  origine:
+    displayName: Origine
+  causa:
+    displayName: Causa
+  tensione:
+    displayName: Tensione
+  costo_sociale:
+    displayName: Costo sociale
+  evoluzione_se_ignorata:
+    displayName: Evoluzione se ignorata
   scadenza_mondo:
     displayName: Scadenza
   prossima_mossa:
@@ -37,6 +47,10 @@ properties:
     displayName: Fazioni
   ricompense:
     displayName: Ricompense
+  entita_impattate:
+    displayName: Entita impattate
+  propaga_a:
+    displayName: Propaga a
 views:
   - type: table
     name: Aperte
@@ -55,6 +69,9 @@ views:
       - formula.stato_operativo
       - tipo
       - pressione
+      - origine
+      - causa
+      - tensione
       - scadenza_mondo
       - prossima_mossa
       - mondo
@@ -83,6 +100,8 @@ views:
       - pressione
       - scadenza_mondo
       - prossima_mossa
+      - entita_impattate
+      - propaga_a
       - fazioni
       - luoghi
     sort:

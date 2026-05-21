@@ -9,6 +9,13 @@ required_fields:
 - committente
 - pressione
 - prossima_mossa
+- origine
+- causa
+- tensione
+- costo_sociale
+- evoluzione_se_ignorata
+- entita_impattate
+- propaga_a
 - scadenza_mondo
 - fc-calendar
 - connessioni
@@ -30,8 +37,14 @@ profile_fields:
 - progress_value
 - progress_max
 - pressione
+- origine
+- causa
+- tensione
+- costo_sociale
+- evoluzione_se_ignorata
 - posta
 - scelta
+- rischi
 - gancio
 - uso_al_tavolo
 - player_safe
@@ -42,6 +55,8 @@ profile_fields:
 - scene_pronte
 - decisioni
 - conseguenze
+- entita_impattate
+- propaga_a
 - segreti
 - connessioni
 - scadenza_mondo

@@ -10,6 +10,11 @@ async function missione(tp) {
     const mondo = await helpers.chooseWorld(tp, profile.world_prompt ?? "Mondo della missione");
     const context = { world: mondo };
     const pressione = await helpers.promptOptional(tp, prompts.pressione ?? "Pressione da 0 a 10", profile.pressure_default ?? "3") || "3";
+    const origine = await helpers.promptOptional(tp, prompts.origine ?? "Origine della missione");
+    const causa = await helpers.promptOptional(tp, prompts.causa ?? "Causa concreta che ha prodotto il problema");
+    const tensione = await helpers.promptOptional(tp, prompts.tensione ?? "Tensione morale, politica o pratica della missione");
+    const costoSociale = await helpers.promptOptional(tp, prompts.costo_sociale ?? "Prezzo sociale del successo, fallimento o rinvio");
+    const evoluzioneSeIgnorata = await helpers.promptOptional(tp, prompts.evoluzione_se_ignorata ?? "Come peggiora se viene ignorata");
     const posta = await helpers.promptOptional(tp, prompts.posta ?? "Posta: cosa cambia se riesce o fallisce?");
     const scelta = await helpers.promptOptional(tp, prompts.scelta ?? "Scelta concreta per i giocatori");
     const playerSafe = await helpers.promptOptional(tp, prompts.player_safe ?? "Versione player-safe dell'obiettivo");
@@ -25,6 +30,9 @@ async function missione(tp) {
     const scadenzaMondo = creazioneCompleta ? await helpers.promptOptional(tp, prompts.scadenza_mondo ?? "Scadenza nel mondo") : "";
     const calendario = await helpers.promptCalendar(tp, { world: mondo }, prompts.calendario ?? "Calendario Calendarium");
     const ostacolo = creazioneCompleta ? await helpers.promptOptional(tp, prompts.ostacolo ?? "Ostacolo principale") : "";
+    const rischio = creazioneCompleta ? await helpers.promptOptional(tp, prompts.rischi ?? "Rischio principale per i PG o per il mondo") : "";
+    const entitaImpattate = creazioneCompleta ? await helpers.chooseConnections(tp, prompts.entita_impattate ?? "Entita direttamente impattate dalla missione", context) : [];
+    const propagaA = creazioneCompleta ? await helpers.chooseConnections(tp, prompts.propaga_a ?? "Note a cui propagare conseguenze o aggiornamenti", context) : [];
     const segreto = await helpers.promptOptional(tp, prompts.segreto ?? "Segreto dietro la missione");
     const domandaAperta = creazioneCompleta ? await helpers.promptOptional(tp, prompts.domanda_aperta ?? "Domanda aperta della missione") : "";
     const connessioni = await helpers.chooseConnections(tp, profile.connection_prompt ?? "Connessioni vive della missione", context);
@@ -48,6 +56,11 @@ async function missione(tp) {
         ricompense: helpers.inlineYamlList(ricompense),
         sessioni: helpers.inlineYamlList(sessioni),
         pressione: helpers.yamlNumber(pressione) || 3,
+        origine: helpers.yamlQuote(origine),
+        causa: helpers.yamlQuote(causa),
+        tensione: helpers.yamlQuote(tensione),
+        costo_sociale: helpers.yamlQuote(costoSociale),
+        evoluzione_se_ignorata: helpers.yamlQuote(evoluzioneSeIgnorata),
         posta: helpers.yamlQuote(posta),
         scelta: helpers.yamlQuote(scelta),
         gancio: helpers.yamlQuote(playerSafe || indizio),
@@ -56,8 +69,11 @@ async function missione(tp) {
         prossima_mossa: helpers.yamlQuote(prossimaMossa),
         domande_aperte: helpers.inlineYamlTextList([domandaAperta]),
         indizi: helpers.inlineYamlTextList([indizio]),
+        rischi: helpers.inlineYamlTextList([rischio]),
         ostacoli: helpers.inlineYamlTextList([ostacolo]),
         conseguenze: helpers.inlineYamlTextList([conseguenza]),
+        entita_impattate: helpers.inlineYamlList(entitaImpattate),
+        propaga_a: helpers.inlineYamlList(propagaA),
         segreti: helpers.inlineYamlTextList([segreto]),
         connessioni: helpers.inlineYamlList(connessioni),
         scadenza_mondo: helpers.yamlQuote(scadenzaMondo),

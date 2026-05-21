@@ -21,8 +21,14 @@ fieldsOrder:
 - progress_value
 - progress_max
 - pressione
+- origine
+- causa
+- tensione
+- costo_sociale
+- evoluzione_se_ignorata
 - posta
 - scelta
+- rischi
 - gancio
 - uso_al_tavolo
 - player_safe
@@ -33,6 +39,8 @@ fieldsOrder:
 - scene_pronte
 - decisioni
 - conseguenze
+- entita_impattate
+- propaga_a
 - segreti
 - connessioni
 - scadenza_mondo
@@ -129,6 +137,26 @@ fields:
   id: pressione
   type: Number
   options: {}
+- name: origine
+  id: origine
+  type: Input
+  options: {}
+- name: causa
+  id: causa
+  type: Input
+  options: {}
+- name: tensione
+  id: tensione
+  type: Input
+  options: {}
+- name: costo_sociale
+  id: costo_sociale
+  type: Input
+  options: {}
+- name: evoluzione_se_ignorata
+  id: evoluzione_se_ignorata
+  type: Input
+  options: {}
 - name: posta
   id: posta
   type: Input
@@ -136,6 +164,10 @@ fields:
 - name: scelta
   id: scelta
   type: Input
+  options: {}
+- name: rischi
+  id: rischi
+  type: Multi
   options: {}
 - name: gancio
   id: gancio
@@ -163,11 +195,11 @@ fields:
   options: {}
 - name: ostacoli
   id: ostacoli
-  type: Input
+  type: Multi
   options: {}
 - name: scene_pronte
   id: scene_pronte
-  type: Input
+  type: Multi
   options: {}
 - name: decisioni
   id: decisioni
@@ -175,6 +207,14 @@ fields:
   options: {}
 - name: conseguenze
   id: conseguenze
+  type: MultiFile
+  options: {}
+- name: entita_impattate
+  id: entita_impattate
+  type: MultiFile
+  options: {}
+- name: propaga_a
+  id: propaga_a
   type: MultiFile
   options: {}
 - name: segreti

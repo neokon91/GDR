@@ -36,6 +36,7 @@ REQUIRED_MODULES = {
     "bases_views",
     "frontmatter_profiles",
     "runtime_profiles",
+    "entity_depth",
     "workflows",
 }
 CRITICAL_RENDERED_GENERATORS = {
@@ -465,6 +466,66 @@ def validate_plugin_surface_contracts(modules: dict[str, dict], errors: list[str
         fail("TemplateFactory: Tabs usato dai Jinja ma modulo tabs mancante", errors)
 
 
+def validate_entity_depth_contracts(modules: dict[str, dict], errors: list[str]) -> None:
+    families = modules["entity_depth"].get("families", {})
+    if not families:
+        fail("entity_depth: nessuna famiglia definita", errors)
+        return
+
+    frontmatter_profiles = modules["frontmatter_profiles"].get("profiles", {})
+    runtime_profiles = modules["runtime_profiles"].get("profiles", {})
+    known_fields = known_frontmatter_fields(modules)
+    sections = modules["sections"].get("sections", {})
+    layouts = modules["tabs"].get("layouts", {})
+    bindings = modules["plugin_bindings"]
+    plugin_bindings = bindings.get("bindings", {})
+
+    for family_id, family in families.items():
+        frontmatter_profile = str(family.get("frontmatter_profile", ""))
+        runtime_profile = str(family.get("runtime_profile", ""))
+        if frontmatter_profile not in frontmatter_profiles:
+            fail(f"entity_depth.{family_id}: frontmatter_profile mancante ({frontmatter_profile})", errors)
+            continue
+        if runtime_profile not in runtime_profiles:
+            fail(f"entity_depth.{family_id}: runtime_profile mancante ({runtime_profile})", errors)
+            continue
+
+        profile_fields = {
+            str(field.get("key"))
+            for field in frontmatter_profiles[frontmatter_profile].get("fields", [])
+            if isinstance(field, dict) and field.get("key")
+        }
+        runtime_prompts = set((runtime_profiles[runtime_profile].get("prompts", {}) or {}).keys())
+
+        for field in family.get("required_frontmatter_fields", []) or []:
+            field = str(field)
+            if field not in known_fields:
+                fail(f"entity_depth.{family_id}: campo frontmatter non catalogato ({field})", errors)
+            if field not in profile_fields:
+                fail(f"entity_depth.{family_id}: campo non esposto dal profilo {frontmatter_profile} ({field})", errors)
+
+        for prompt in family.get("required_runtime_prompts", []) or []:
+            prompt = str(prompt)
+            if prompt not in runtime_prompts:
+                fail(f"entity_depth.{family_id}: prompt runtime mancante in {runtime_profile} ({prompt})", errors)
+
+        for section in family.get("required_sections", []) or []:
+            section = str(section)
+            if section not in sections:
+                fail(f"entity_depth.{family_id}: sezione richiesta mancante ({section})", errors)
+
+        for layout in family.get("required_tabs", []) or []:
+            layout = str(layout)
+            if layout not in layouts:
+                fail(f"entity_depth.{family_id}: layout tabs richiesto mancante ({layout})", errors)
+
+        for plugin in family.get("plugin_surfaces", []) or []:
+            plugin = str(plugin)
+            key = plugin_key(plugin, bindings)
+            if key not in plugin_bindings:
+                fail(f"entity_depth.{family_id}: plugin surface non dichiarata ({plugin})", errors)
+
+
 def validate_generated_previews(modules: dict[str, dict], errors: list[str]) -> None:
     if not GENERATED.exists():
         return
@@ -507,6 +568,8 @@ def main() -> int:
         validate_critical_rendered_generators(modules, errors)
     if not errors:
         validate_plugin_surface_contracts(modules, errors)
+    if not errors:
+        validate_entity_depth_contracts(modules, errors)
     if not errors:
         validate_rendering(modules, errors)
     if not errors:
