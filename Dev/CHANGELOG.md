@@ -32,6 +32,7 @@
 - Disciplina zero-warning: `check_vault.js` ora tratta ogni warning come blocker di `npm run check`.
 - Gate release-content: le note contenuto in `Mondi/` e `Campagne/` devono avere scheda plugin-native con tabs, callout, controlli dinamici e fallback Markdown.
 - Gate pagine utente chiave: setup, aiuto, prima sessione, materiali al tavolo, import mappe e guida mappe devono restare plugin-native.
+- Filtro navigazione release: cartelle tecniche `z.*` e compendio `SRD/` restano inclusi ma nascosti dal file explorer utente.
 
 ### Migliorato
 
@@ -39,6 +40,7 @@
 - [[Dev/NEXT_PHASE_HANDOFF]] aggiornato dopo M7 e chiusura warning demo: la prossima fase e M8 Release Evidence And Zero-Warning Discipline.
 - Le note demo Brumafonda sono state convertite da frontmatter/testo piatto a schede operative con Meta Bind, Dataview/DataviewJS, Bases, mappe e fallback.
 - Le guide utente più esposte sono state portate a tab funzionali con controlli, azioni, Dataview/DataviewJS, Tasks e fallback leggibile.
+- `release:clean` verifica che la release mantenga nascosti runtime, template, fileClass, Bases, bacheche tecniche e SRD dalla navigazione normale.
 - [[Motore Mondo Vivo]] e [[Cosa Succede Fuori Scena]] mostrano coda di continuita, bersagli da verificare e buchi di propagazione senza duplicare dashboard.
 - [[Risorse/Post Sessione Guidato]] e [[Durante il Gioco]] collegano scelta, conseguenza, bersagli, prossima mossa e recap.
 - TemplateFactory ora valida simmetria tra profili runtime e frontmatter, campi core/plugin/dominio e copertura minima di fileClass/Bases.

@@ -82,6 +82,9 @@ if (!releaseCleanText.includes('"Import"')) {
 if (!releaseCleanText.includes("render_template_factory.py") || !releaseCleanText.includes("--materialize-only")) {
     errors.push("release_clean.js: la release deve materializzare z.modelli da TemplateFactory prima della copia");
 }
+if (!releaseCleanText.includes("REQUIRED_USER_IGNORE_FILTERS") || !releaseCleanText.includes("z.automazioni/") || !releaseCleanText.includes("SRD/")) {
+    errors.push("release_clean.js: la release deve verificare i filtri di navigazione per cartelle tecniche e SRD");
+}
 
 if (errors.length) {
     console.error("Errori release:");

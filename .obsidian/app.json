@@ -1,4 +1,13 @@
 {
   "promptDelete": false,
-  "alwaysUpdateLinks": true
+  "alwaysUpdateLinks": true,
+  "userIgnoreFilters": [
+    "SRD/",
+    "z.automazioni/",
+    "z.bacheche/",
+    "z.bases/",
+    "z.engine/",
+    "z.fileclass/",
+    "z.modelli/"
+  ]
 }

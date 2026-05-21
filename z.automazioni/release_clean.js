@@ -100,6 +100,15 @@ const REQUIRED_RELEASE_FILES = [
     "z.bases/Incontri.base",
     "z.modelli/.templatefactory-manifest.json"
 ];
+const REQUIRED_USER_IGNORE_FILTERS = [
+    "SRD/",
+    "z.automazioni/",
+    "z.bacheche/",
+    "z.bases/",
+    "z.engine/",
+    "z.fileclass/",
+    "z.modelli/"
+];
 const GENERATED_RELEASE_NOTES = {
     "LEGGIMI.md": `# Vault GDR
 
@@ -115,6 +124,8 @@ Apri questa cartella in Obsidian come vault e parti da \`Inizia Qui.md\`.
 - \`Quality Report\` per copertura, buchi operativi e controllo anti-segreti;
 - atlante, mappe, template, automazioni e plugin abilitati necessari ai pulsanti;
 - SRD 5.2.1 italiano come modulo regolamentare separato.
+
+Le cartelle tecniche e il compendio SRD sono inclusi per far funzionare automazioni, template e riferimenti, ma sono nascosti dalla navigazione normale del vault.
 
 ## Primo Avvio
 
@@ -288,6 +299,14 @@ function validateRelease() {
     }
 
     const releaseEntries = walkRelease(OUT);
+    const releaseAppConfig = readJson(repoPath(OUT, ".obsidian/app.json"), {});
+    const ignoredFilters = new Set(releaseAppConfig.userIgnoreFilters ?? []);
+    for (const filter of REQUIRED_USER_IGNORE_FILTERS) {
+        if (!ignoredFilters.has(filter)) {
+            errors.push(`filtro navigazione utente mancante in .obsidian/app.json: ${filter}`);
+        }
+    }
+
     for (const forbidden of [...EXCLUDED_DIRS, ...EXCLUDED_ROOT_FILES]) {
         if (releaseEntries.some(entry => entry === forbidden || entry.startsWith(`${forbidden}/`))) {
             errors.push(`percorso non ammesso nella release pulita: ${forbidden}`);
