@@ -17,6 +17,7 @@ const { validatePluginControls } = require("./checks/plugin_controls");
 const { validateRequiredFiles } = require("./checks/required_files");
 const { validateSyntaxControls } = require("./checks/syntax_controls");
 const { validateMarkdownLinks } = require("./checks/markdown_links");
+const { validateMetaBindControls } = require("./checks/metabind_controls");
 
 const ROOT = process.cwd();
 const IGNORED_DIRS = new Set([".git", "node_modules", "dist"]);
@@ -622,85 +623,24 @@ validateMarkdownLinks({
     warnings
 });
 
-const templatePattern = /templateFile:\s*["']([^"']+)["']/g;
-function validateMetaBindTemplate(templateRef, context) {
-    const template = targetPath(templateRef);
-    if (template.startsWith("z.modelli/") && !isGeneratedTemplatePath(template)) {
-        errors.push(`${context} non generabile da TemplateFactory ${template}`);
-        return;
-    }
-    if (isGeneratedTemplatePath(template)) return;
-    if (!existsRel(template)) {
-        errors.push(`${context} mancante ${template}`);
-    }
-}
-
-for (const file of markdownFiles) {
-    const fileRel = rel(file);
-    const text = markdownText(file);
-    let match;
-
-    while ((match = templatePattern.exec(text))) {
-        validateMetaBindTemplate(match[1], `${fileRel}: template Meta Bind`);
-    }
-}
-
 const metaBindConfigPath = repoPath(".obsidian/plugins/obsidian-meta-bind-plugin/data.json");
 const metaBindConfig = readJson(metaBindConfigPath);
-if (metaBindConfig) {
-    const buttonTemplates = Array.isArray(metaBindConfig.buttonTemplates) ? metaBindConfig.buttonTemplates : [];
-    const inputTemplates = Array.isArray(metaBindConfig.inputFieldTemplates) ? metaBindConfig.inputFieldTemplates : [];
-    const buttonIds = new Set();
-    const inputTemplateNames = new Set(inputTemplates.map(template => template?.name).filter(Boolean));
-
-    for (const name of REQUIRED_META_BIND_INPUT_TEMPLATES) {
-        if (!inputTemplateNames.has(name)) {
-            errors.push(`Meta Bind: input template operativo mancante (${name})`);
-        }
-    }
-
-    for (const button of buttonTemplates) {
-        if (!button?.id) {
-            errors.push("Meta Bind: button template senza id");
-            continue;
-        }
-
-        if (buttonIds.has(button.id)) {
-            errors.push(`Meta Bind: button template duplicato ${button.id}`);
-        }
-        buttonIds.add(button.id);
-
-        for (const action of button.actions ?? []) {
-            if ((action.type === "templaterCreateNote" || action.type === "runTemplaterFile") && action.templateFile) {
-                validateMetaBindTemplate(action.templateFile, `Meta Bind: button template ${button.id} usa template`);
-            }
-
-            if (action.type === "updateMetadata") {
-                warnings.push(`Meta Bind: button template ${button.id} modifica frontmatter; usare INPUT inline/blocco`);
-            }
-        }
-    }
-
-    for (const id of REQUIRED_META_BIND_BUTTONS) {
-        if (!buttonIds.has(id)) {
-            errors.push(`Meta Bind: button operativo mancante (${id})`);
-        }
-    }
-
-    const inlineButtonPattern = /`BUTTON\[([^\]\n]+)\]`/g;
-    for (const file of markdownFiles) {
-        const fileRel = rel(file);
-        const text = markdownText(file);
-        let match;
-
-        while ((match = inlineButtonPattern.exec(text))) {
-            if (match[1].includes("...")) continue;
-            if (!buttonIds.has(match[1])) {
-                errors.push(`${fileRel}: BUTTON senza template Meta Bind (${match[1]})`);
-            }
-        }
-    }
-}
+validateMetaBindControls({
+    errors,
+    existsRel,
+    isGeneratedTemplatePath,
+    markdownFiles,
+    markdownText,
+    metaBindConfig,
+    modelMarkdownFiles,
+    rel,
+    repoPath,
+    requiredButtons: REQUIRED_META_BIND_BUTTONS,
+    requiredInputTemplates: REQUIRED_META_BIND_INPUT_TEMPLATES,
+    targetPath,
+    walk,
+    warnings
+});
 
 const metadataMenuConfig = readJson(repoPath(".obsidian/plugins/metadata-menu/data.json"));
 if (metadataMenuConfig) {
@@ -710,43 +650,6 @@ if (metadataMenuConfig) {
         if (!presetNames.has(name)) {
             errors.push(`Metadata Menu: preset field operativo mancante (${name})`);
         }
-    }
-}
-
-for (const file of modelMarkdownFiles) {
-    const fileRel = rel(file);
-    const text = markdownText(file);
-    if (/```meta-bind-button[\s\S]*?type:\s*updateMetadata[\s\S]*?```/.test(text)) {
-        warnings.push(`${fileRel}: meta-bind-button modifica frontmatter; usare INPUT inline/blocco`);
-    }
-}
-
-const automationDir = repoPath("z.automazioni");
-const automationNames = fs.existsSync(automationDir)
-    ? new Set(walk(automationDir, file => file.endsWith(".js")).map(file => path.basename(file, ".js")))
-    : new Set();
-const templaterUserPattern = /tp\.user\.([A-Za-z0-9_]+)/g;
-for (const file of modelMarkdownFiles) {
-    const fileRel = rel(file);
-    const text = markdownText(file);
-    let match;
-
-    while ((match = templaterUserPattern.exec(text))) {
-        const helper = match[1];
-        if (!automationNames.has(helper)) {
-            errors.push(`${fileRel}: helper Templater senza script in z.automazioni (${helper}.js)`);
-        }
-    }
-}
-
-for (const file of markdownFiles.filter(file => /(^|\/)[^/]*Router\.md$/.test(rel(file)))) {
-    const fileRel = rel(file);
-    const text = markdownText(file);
-    if (/^<%\*/m.test(text)) {
-        errors.push(`${fileRel}: router con blocco Templater multilinea; usare tp.user.template_router`);
-    }
-    if (!text.trimStart().startsWith("<% await tp.user.")) {
-        errors.push(`${fileRel}: router senza singola entry Templater iniziale`);
     }
 }
 
