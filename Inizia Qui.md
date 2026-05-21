@@ -12,7 +12,7 @@ Scegli una cosa sola. Il vault serve prima a creare un mondo homebrew giocabile,
 
 ## Flusso Principale
 
-> [!luogo] 1. Crea Il Mondo
+> [!luogo] Passo 1 - Crea Il Mondo
 > Output: un Codex homebrew con identità, luoghi, poteri, culture, misteri, mappe e connessioni vive.
 >
 > `BUTTON[nuovo-mondo-homebrew]`
@@ -21,7 +21,7 @@ Scegli una cosa sola. Il vault serve prima a creare un mondo homebrew giocabile,
 >
 > `BUTTON[bibbia-del-mondo-bibbia-del-mondo-2]`
 
-> [!scena] 2. Trasforma In Gioco
+> [!scena] Passo 2 - Trasforma In Gioco
 > Output: campagna, avventura o sessione radicata in almeno tre ancore del mondo.
 >
 > `BUTTON[campagna-da-ambientazione-campagna-da-ambientazione]`
@@ -30,12 +30,12 @@ Scegli una cosa sola. Il vault serve prima a creare un mondo homebrew giocabile,
 >
 > `BUTTON[preparazione-sessione-risorse-preparazione-sessione]`
 
-> [!incontro] 3. Gioca Live
+> [!incontro] Passo 3 - Gioca Live
 > Output: appunti live, clock aggiornati, handout consegnati e decisioni prese al tavolo.
 >
 > `BUTTON[gioca-hub-durante-il-gioco-durante-il-gioco]`
 
-> [!timer] 4. Aggiorna Il Mondo
+> [!timer] Passo 4 - Aggiorna Il Mondo
 > Output: conseguenze canonizzate, missioni aggiornate, prossime mosse, Codex aggiornato e prossima sessione.
 >
 > `BUTTON[fuori-scena-hub-cosa-succede-fuori-scena-cosa-succede-fuori-scena]`

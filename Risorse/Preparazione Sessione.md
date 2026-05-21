@@ -44,19 +44,19 @@ Apri la sessione indicata sopra e collega almeno tre ancore:
 
 Solo dopo compila i cinque campi di gioco.
 
-> [!scena] 1. Obiettivo
+> [!scena] Blocco 1 - Obiettivo
 > Scrivi una frase: cosa devono ottenere, scoprire o decidere i personaggi entro fine sessione.
 
-> [!luogo] 2. Prima Scena
+> [!luogo] Blocco 2 - Prima Scena
 > Dove si apre la sessione, chi e presente, cosa sta gia succedendo.
 
-> [!missione] 3. Scelta
+> [!missione] Blocco 3 - Scelta
 > Una decisione reale per i giocatori. Se non cambia nulla, non e una scelta.
 
-> [!timer] 4. Pressione
+> [!timer] Blocco 4 - Pressione
 > Una missione, fazione, relazione o clock che avanza se il party perde tempo.
 
-> [!handout] 5. Materiale
+> [!handout] Blocco 5 - Materiale
 > Almeno una cosa pronta da usare: incontro, mappa, handout, PNG o oggetto.
 
 ## Prendi Materiale Senza Cercare

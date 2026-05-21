@@ -756,6 +756,11 @@ for (const file of markdownFiles) {
     const text = fs.readFileSync(file, "utf8");
     const fileRel = rel(file);
     const taskLines = text.split(/\r?\n/).filter(line => /^\s*[-*]\s+\[[ xX]\]/.test(line));
+    const numberedCalloutTitle = text.match(/^> \[![^\]]+\] \d+\./m);
+
+    if (numberedCalloutTitle) {
+        errors.push(`${fileRel}: titolo callout numerato come lista; usare "Passo 1 -" o "Blocco 1 -" per evitare warning Tasks`);
+    }
 
     for (const line of taskLines) {
         if (line.includes("#task") && line.includes("🔁") && fileRel !== "z.bacheche/Manutenzione Vault.md") {
