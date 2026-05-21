@@ -14,6 +14,7 @@ const {
     walk: walkFiles
 } = require("./node_utils");
 const { validatePluginControls } = require("./checks/plugin_controls");
+const { validateRequiredFiles } = require("./checks/required_files");
 
 const ROOT = process.cwd();
 const IGNORED_DIRS = new Set([".git", "node_modules", "dist"]);
@@ -576,23 +577,13 @@ const calendariumNames = new Set(calendariumCalendars
     .filter(Boolean)
     .map(value => String(value).toLowerCase()));
 
-for (const file of REQUIRED_FILES) {
-    if (!existsRel(file)) {
-        errors.push(`File release/onboarding obbligatorio mancante: ${file}`);
-    }
-}
-
-for (const file of REQUIRED_BASE_FILES) {
-    if (!existsRel(file)) {
-        errors.push(`Base operativa mancante: ${file}`);
-    }
-}
-
-for (const file of REQUIRED_LAYER_FILES) {
-    if (!existsRel(file)) {
-        errors.push(`Plugin layer interno: file obbligatorio mancante ${file}`);
-    }
-}
+validateRequiredFiles({
+    errors,
+    existsRel,
+    requiredBaseFiles: REQUIRED_BASE_FILES,
+    requiredFiles: REQUIRED_FILES,
+    requiredLayerFiles: REQUIRED_LAYER_FILES
+});
 
 const pluginMatrixPath = repoPath("Dev/plugin_matrix.json");
 const pluginMatrix = readJson(pluginMatrixPath) ?? [];
