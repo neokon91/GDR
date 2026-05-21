@@ -62,6 +62,36 @@ buttons:
     action: runTemplaterFile
     template: z.modelli/azioni/Avanza Clock.md
     fallback: 'Azione manuale: aumentare pressione/progress_value'
+  applica_conseguenza:
+    id: applica-conseguenza
+    label: Applica Conseguenza
+    action: runTemplaterFile
+    template: z.modelli/azioni/Applica Conseguenza.md
+    fallback: 'Azione manuale: registrare conseguenza, entita_impattate e propagazione_stato'
+  collega_sessione_attiva:
+    id: collega-sessione-attiva
+    label: Collega Sessione Attiva
+    action: runTemplaterFile
+    template: z.modelli/azioni/Collega Sessione Attiva.md
+    fallback: 'Azione manuale: aggiungere la sessione attiva nei collegamenti della nota'
+  propaga_a_entita:
+    id: propaga-a-entita
+    label: Propaga A Entita
+    action: runTemplaterFile
+    template: z.modelli/azioni/Propaga A Entita.md
+    fallback: 'Azione manuale: aggiornare propaga_a, entita_impattate e aggiornamenti_richiesti'
+  nuova_mappa_zoom:
+    id: nuova-mappa-zoom-z-modelli-mappe-mappa-zoom-md
+    label: Nuova Mappa Zoom
+    action: templaterCreateNote
+    template: z.modelli/mappe/Mappa Zoom.md
+    fallback: '[[z.modelli/mappe/Mappa Zoom]]'
+  nuova_mappa_fronti_sessione:
+    id: nuova-mappa-fronti-z-modelli-mappe-mappa-excalidraw-fronti-excalidraw-md-2
+    label: Nuova Mappa Fronti
+    action: templaterCreateNote
+    template: z.modelli/mappe/Mappa Excalidraw Fronti.excalidraw.md
+    fallback: '[[z.modelli/mappe/Mappa Excalidraw Fronti.excalidraw]]'
 contracts:
   button_ids_must_match_meta_bind_config: .obsidian/plugins/obsidian-meta-bind-plugin/data.json
   generated_syntax: '`BUTTON[{{ id }}]`'

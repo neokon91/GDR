@@ -44,6 +44,93 @@ blocks:
       | Scelta |  |
       | Pressione |  |
       | Materiale pronto |  |
+  session_anchor_cards:
+    type: dataviewjs
+    runtime_view: renderSessionAnchorCards
+    use_for:
+      - session
+      - ancore
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      gdr.renderSessionAnchorCards(dv, dv.current());
+    fallback: |-
+      | Ancora | Note |
+      | --- | --- |
+      | Mondo |  |
+      | Luoghi |  |
+      | Fazioni |  |
+      | Missioni |  |
+  session_material_cards:
+    type: dataviewjs
+    runtime_view: renderSessionMaterialCards
+    use_for:
+      - session
+      - materiali
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      gdr.renderSessionMaterialCards(dv, dv.current());
+    fallback: |-
+      | Materiale | Note |
+      | --- | --- |
+      | Incontri |  |
+      | Dispense |  |
+      | Media |  |
+  session_map_cards:
+    type: dataviewjs
+    runtime_view: renderSessionMapCards
+    use_for:
+      - session
+      - mappe
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      gdr.renderSessionMapCards(dv, dv.current());
+    fallback: |-
+      | Mappa | Uso |
+      | --- | --- |
+  session_live_cards:
+    type: dataviewjs
+    runtime_view: renderSessionLiveCards
+    use_for:
+      - session
+      - live
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      gdr.renderSessionLiveCards(dv, dv.current());
+    fallback: |-
+      | Live | Valore |
+      | --- | --- |
+      | Scena corrente |  |
+      | Decisioni |  |
+  session_post_cards:
+    type: dataviewjs
+    runtime_view: renderSessionPostCards
+    use_for:
+      - session
+      - post-sessione
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      gdr.renderSessionPostCards(dv, dv.current());
+    fallback: |-
+      | Chiusura | Valore |
+      | --- | --- |
+      | Conseguenze |  |
+      | Recap pubblico |  |
+  m7_family_cards:
+    type: dataviewjs
+    runtime_view: renderM7FamilyCards
+    use_for:
+      - luogo
+      - fazione
+      - png
+      - relazione
+      - tracciato
+      - continuita
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      gdr.renderM7FamilyCards(dv, dv.current(), "{{ family }}");
+    fallback: |-
+      | Controllo | Stato |
+      | --- | --- |
   world_impact:
     type: dataviewjs
     use_for:

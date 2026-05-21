@@ -44,6 +44,67 @@ views:
       - color
     map_view: true
     fallback_dataview_block: map_assets
+  luoghi:
+    file: z.bases/Luoghi.base
+    source_folders:
+      - Mondi/Luoghi
+    required_fields:
+      - nome
+      - stato
+      - tipo
+      - mondo
+      - luogo_padre
+      - pericolo
+      - pressione
+      - fazioni
+      - missioni
+      - connessioni
+    fallback_dataview_block: linked_connections_table
+  fazioni:
+    file: z.bases/Fazioni.base
+    source_folders:
+      - Mondi/Fazioni
+    required_fields:
+      - nome
+      - stato
+      - tipo
+      - mondo
+      - pressione
+      - prossima_mossa
+      - luoghi
+      - missioni
+      - connessioni
+      - propaga_a
+    fallback_dataview_block: linked_connections_table
+  missioni:
+    file: z.bases/Missioni.base
+    source_folders:
+      - Mondi/Missioni
+    required_fields:
+      - nome
+      - stato
+      - tipo
+      - mondo
+      - pressione
+      - prossima_mossa
+      - campagne
+      - luoghi
+      - fazioni
+      - ricompense
+    fallback_dataview_block: linked_connections_table
+  png:
+    file: z.bases/PNG.base
+    source_folders:
+      - Mondi/Personaggi
+    required_fields:
+      - nome
+      - stato
+      - luogo
+      - fazioni
+      - pressione
+      - prossima_mossa
+      - missioni
+    fallback_dataview_block: linked_connections_table
   sessions:
     file: z.bases/Incontri.base
     source_folders:

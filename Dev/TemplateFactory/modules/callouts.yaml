@@ -17,6 +17,38 @@ callouts:
       - apertura sessione
       - blocchi giocabili
     fallback_heading: Scena
+  luogo:
+    type: luogo
+    title: Luogo
+    use_for:
+      - ancore geografiche
+      - territori
+      - esplorazione
+    fallback_heading: Luogo
+  mappa:
+    type: mappa
+    title: Mappa
+    use_for:
+      - mappe
+      - pin
+      - scene visuali
+    fallback_heading: Mappa
+  incontro:
+    type: incontro
+    title: Incontro
+    use_for:
+      - incontri
+      - combattimenti
+      - materiale al tavolo
+    fallback_heading: Incontro
+  todo:
+    type: todo
+    title: Task
+    collapsible: true
+    use_for:
+      - task operative
+      - checklist
+    fallback_heading: Task
   lettura:
     type: lettura
     title: Versione pubblica

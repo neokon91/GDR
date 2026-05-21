@@ -66,6 +66,20 @@ Gli script in `z.automazioni/` devono restare sottili:
 
 `npm run check:templates` blocca nuovi generatori inline non dichiarati e verifica i generatori critici post-M4 (`mappa`, `luogo`, `sessione`, `incontro`, `png`, `creatura`).
 
+## Regola Plugin Surface
+
+La logica di scheda deve vivere nei moduli YAML. I file Jinja possono comporre Markdown statico, ma non devono inventare nuovi controlli o superfici plugin senza contratto dichiarativo.
+
+`npm run check:templates` blocca:
+
+- `INPUT[...]` Meta Bind su campi non presenti in `fields_core.yaml`, `frontmatter_profiles.yaml` o nei campi plugin dichiarati;
+- `BUTTON[...]` non dichiarati in `metabind_buttons.yaml`;
+- callout non dichiarati in `callouts.yaml`;
+- chiamate `gdr.render...` non dichiarate in `dataview_blocks.yaml`;
+- link a `z.bases/*.base` non dichiarati in `bases_views.yaml`.
+
+La conseguenza pratica: YAML decide cosa esiste; Jinja assembla; JS esegue funzioni atomiche e viste riusabili. Se un DM/lore builder vuole cambiare comportamento, prima deve poter leggere il contratto in YAML.
+
 ## Moduli
 
 | Modulo | Responsabilita |

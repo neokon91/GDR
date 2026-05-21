@@ -4,6 +4,7 @@ version: 0.2.0
 field_catalog:
   domain_fields:
   - agenda
+  - aggiornamenti_richiesti
   - autorita_riconosciute
   - bioma
   - capitale
@@ -180,6 +181,8 @@ field_catalog:
   - livello
   - livello_attuale
   - luoghi_collegati
+  - luoghi_controllati
+  - luogo_corrente
   - luoghi_iconici
   - magia
   - maledizione
@@ -190,6 +193,7 @@ field_catalog:
   - missioni_figlie
   - misteri
   - misteri_pubblici
+  - motivazione
   - modi_di_dire
   - modifier
   - morte_aldila
@@ -197,11 +201,14 @@ field_catalog:
   - origine_evoluzione
   - origine_funzione
   - parlanti_esclusi
+  - parti
   - parole_note
   - popolazioni_coinvolte
   - possibili_paci
   - premessa
   - pressione_iniziale
+  - propagazione_stato
+  - pubblicabile
   - prestiti_linguistici
   - pretesti_pubblici
   - privilegi
@@ -215,9 +222,13 @@ field_catalog:
   - registri
   - regola
   - relazioni_chiave
+  - rinforzo
+  - rottura
   - retcon_di
   - retcon_motivo
   - risorse_contese
+  - segreti_rivelati
+  - soglia
   - rituali
   - rumor_attivi
   - scala
@@ -227,11 +238,13 @@ field_catalog:
   - soglie_accesso
   - sottoclasse
   - specie
+  - stato_relazione
   - stato_mondo
   - strumenti
   - successi_morte
   - suono_ritmo_gesti
   - tecnologia
+  - versione_player_safe
   - tema
   - temi
   - velocita
