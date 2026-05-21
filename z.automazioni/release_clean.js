@@ -71,6 +71,7 @@ const REQUIRED_RELEASE_FILES = [
     "Inizia Qui.md",
     "VERSION.md",
     "LEGGIMI.md",
+    "Demo Brumafonda.md",
     ".obsidian/community-plugins.json",
     ".obsidian/snippets/gdr-vault.css",
     "Hub/Vista Giocatori.md",
@@ -194,7 +195,8 @@ function writeUserReadme() {
         "2. Scegli `Apri cartella come vault`.",
         "3. Se Obsidian chiede conferma per gli strumenti inclusi, abilitali solo se hai scaricato il vault dalla release ufficiale.",
         "4. Apri `Inizia Qui.md`.",
-        "5. Apri `Risorse/Setup Guidato.md` per controllare plugin, pulsanti e dashboard.",
+        "5. Se vuoi vedere una demo gia pronta, apri `Demo Brumafonda.md`.",
+        "6. Apri `Risorse/Setup Guidato.md` per controllare plugin, pulsanti e dashboard.",
         "",
         "## Cosa Non Include",
         "",
@@ -202,6 +204,50 @@ function writeUserReadme() {
         ""
     ].join("\n");
     fs.writeFileSync(path.join(OUT, "LEGGIMI.md"), note);
+}
+
+function writeReleaseDemoGuide() {
+    const note = [
+        "---",
+        "cssclasses:",
+        "  - dashboard",
+        "categoria: risorsa",
+        "tipo: demo",
+        "stato: pronto",
+        "pubblico: true",
+        "---",
+        "",
+        "# Demo Brumafonda",
+        "",
+        "Questa pagina esiste solo nella release utente. Serve a provare il vault senza aprire documentazione di sviluppo.",
+        "",
+        "## Percorso Demo",
+        "",
+        "1. Apri [[Brumafonda Demo]] per vedere il mondo demo.",
+        "2. Apri [[Campagna - Sale Sotto La Nebbia]] per vedere come il mondo diventa campagna.",
+        "3. Apri [[2026-05-28 - La Campana Nella Nebbia]] per vedere una sessione demo gia giocata.",
+        "4. Apri [[Mappa Pubblica Di Brumafonda]] e [[Avviso Della Dogana Di Brumafonda]] per controllare materiale player-safe.",
+        "5. Apri [[Vista Giocatori]] per vedere recap, mappa e materiale condivisibile.",
+        "",
+        "## Pagine Da Provare",
+        "",
+        "- [[Inizia Qui]]",
+        "- [[Worldbuilder Dashboard]]",
+        "- [[Atlante del Mondo]]",
+        "- [[Campagna da Ambientazione]]",
+        "- [[Durante il Gioco]]",
+        "- [[Vista Giocatori]]",
+        "- [[Risorse/Controllo Vault]]",
+        "",
+        "## Cosa Verificare",
+        "",
+        "- Nessun blocco Dataview o DataviewJS mostra errori.",
+        "- I pulsanti principali sono visibili.",
+        "- La vista giocatori non mostra campi DM o segreti.",
+        "- La mappa e la dispensa pubblica sono raggiungibili.",
+        ""
+    ].join("\n");
+    fs.writeFileSync(path.join(OUT, "Demo Brumafonda.md"), note);
 }
 
 function walkRelease(dir, files = []) {
@@ -268,6 +314,7 @@ fs.rmSync(OUT, { recursive: true, force: true });
 fs.mkdirSync(DIST, { recursive: true });
 copyDir(ROOT, OUT, ROOT);
 writeUserReadme();
+writeReleaseDemoGuide();
 validateRelease();
 
 const zipped = zipIfAvailable();

@@ -9,6 +9,7 @@
 - Gate statico M3 in `npm run check` per verificare presenza demo, recap pubblico, mappa/dispensa pubbliche, player-safe e controlli di [[Vista Giocatori]].
 - `npm run check:smoke` come gate dedicato per la parte automatizzabile dello smoke demo finale.
 - `npm run check:release` come gate dedicato per versione, changelog e verifica release pulita.
+- `Demo Brumafonda.md` generata solo nella release utente come indice demo, senza includere `Dev/`.
 - [[Dev/Matrice Plugin 1.0]] e `Dev/plugin_matrix.json` per mappare ogni plugin installato a funzione, guida, pagina operativa e smoke.
 - Azioni Meta Bind generate per smistare e canonizzare bozze del Generatore di Contenuti Fantasy.
 - [[z.bases/Fazioni.base]] per correggere rapidamente fazioni in movimento, pressione, relazioni, mondo e archivio.
