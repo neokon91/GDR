@@ -36,6 +36,7 @@
 - Dossier campagna demo `Campagne/Sale Sotto La Nebbia/Sale Sotto La Nebbia.md`, con struttura finale da campagna giocabile invece di nota sparsa.
 - Gate esperienza hub: `check_vault.js` verifica ruolo, classe visuale, callout, viste/input/azioni plugin-native e marker funzionali degli hub principali.
 - Gate Plugin Surface YAML: TemplateFactory blocca input Meta Bind, bottoni, callout, runtime DataviewJS e Bases usati nei Jinja se non sono dichiarati nei moduli YAML.
+- [[Dev/Prossima Discussione - YAML Entita Fantasy]] prepara la prossima fase su profondita delle entita fantasy governata da YAML.
 
 ### Migliorato
 

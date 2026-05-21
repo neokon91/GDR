@@ -40,6 +40,16 @@ Usare [[CODEX_AGENTS]] per ogni modifica:
 
 Ogni modifica deve servire almeno uno di questi assi. Evitare dashboard decorative, micro utility isolate, refactor estetici e strumenti DM senza impatto sul mondo.
 
+## Prossima Discussione Consigliata
+
+Focus: [[Prossima Discussione - YAML Entita Fantasy]].
+
+Scopo: concentrare la prossima sessione di lavoro sulla profondita delle entita fantasy governata da YAML: campi, profili frontmatter, prompt runtime, sezioni, tabs, callout, Meta Bind, Dataview, Bases, mappe e fallback devono essere contratti leggibili prima di diventare template o runtime.
+
+Prima famiglia consigliata: **luogo + fazione + missione + tracciato**, per collegare worldbuilding, gioco al tavolo e continuita.
+
+Regola: niente nuove dashboard; migliorare prima il layer dichiarativo e poi materializzare.
+
 ## Prossima Fase Consigliata
 
 Fase stretta: **M8 Release Evidence And Zero-Warning Discipline**.
