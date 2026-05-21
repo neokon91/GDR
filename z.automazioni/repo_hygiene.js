@@ -2,7 +2,7 @@
 
 const fs = require("fs");
 const path = require("path");
-const { readJson: readJsonFile, rel: relativePath, walk } = require("./node_utils");
+const { readJson: readJsonFile, readTextIfExists, rel: relativePath, repoPath, walk } = require("./node_utils");
 
 const ROOT = process.cwd();
 const FIX = process.argv.includes("--fix");
@@ -55,11 +55,11 @@ for (const file of files) {
     }
 }
 
-const gitignorePath = path.join(ROOT, ".gitignore");
-if (!fs.existsSync(gitignorePath)) {
+const gitignorePath = repoPath(ROOT, ".gitignore");
+const gitignore = readTextIfExists(gitignorePath, null);
+if (gitignore === null) {
     errors.push(".gitignore mancante");
 } else {
-    const gitignore = fs.readFileSync(gitignorePath, "utf8");
     for (const pattern of [".DS_Store", "Thumbs.db", "*.tmp", "*.bak", "*.orig", "*~", "dist/"]) {
         if (!gitignore.includes(pattern)) {
             errors.push(`.gitignore: pattern mancante ${pattern}`);
@@ -67,7 +67,7 @@ if (!fs.existsSync(gitignorePath)) {
     }
 }
 
-const packageJson = readJson(path.join(ROOT, "package.json"));
+const packageJson = readJson(repoPath(ROOT, "package.json"));
 if (packageJson) {
     const scripts = packageJson.scripts ?? {};
     for (const script of REQUIRED_NPM_SCRIPTS) {
