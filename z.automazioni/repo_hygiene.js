@@ -16,6 +16,10 @@ const JUNK_FILE_PATTERNS = [
     /\.swp$/i
 ];
 const REQUIRED_NPM_SCRIPTS = ["check", "check:repo", "check:js", "check:smoke", "check:release", "check:diff", "release:clean"];
+const FORBIDDEN_SOURCE_FILES = new Set([
+    "Dev/Demo Finale.md",
+    "Demo Brumafonda.md"
+]);
 const errors = [];
 const fixed = [];
 
@@ -68,6 +72,11 @@ for (const file of files) {
 for (const file of files) {
     const fileRel = rel(file);
     if (fileRel.startsWith("dist/")) continue;
+
+    if (FORBIDDEN_SOURCE_FILES.has(fileRel)) {
+        errors.push(`${fileRel}: file demo generato o duplicato nel sorgente; deve restare solo nella release o nelle note demo reali`);
+    }
+
     if (!fileRel.endsWith(".md") && !fileRel.endsWith(".geojson")) continue;
 
     if (path.basename(fileRel).startsWith("Prova -") || fileRel === "Risorse/Prove Entità.md") {
