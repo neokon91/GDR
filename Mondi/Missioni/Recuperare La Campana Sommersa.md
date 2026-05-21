@@ -44,3 +44,79 @@ fc-end:
 # Recuperare La Campana Sommersa
 
 Missione demo collegata a luogo, fazione, economia, mappa e sessione.
+
+````tabs
+tab: Missione
+
+> [!missione] Obiettivo Giocabile
+> Mondo: `INPUT[mondo][:mondo]`
+>
+> Stato: `INPUT[stato][:stato]`
+>
+> Gancio: `INPUT[text:gancio]`
+>
+> Scelta: `INPUT[text:scelta]`
+>
+> Pressione: `INPUT[pressione][:pressione]`
+
+> [!regia]- Check Missione
+> ```dataviewjs
+> const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+> gdr.renderCreationFeedback(dv);
+> ```
+
+tab: Tavolo
+
+> [!scena] Preparazione
+> Luoghi: `INPUT[luoghi][:luoghi]`
+>
+> Fazioni: `INPUT[fazioni][:fazioni]`
+>
+> Sessioni: `INPUT[inlineListSuggester(optionQuery("Mondi/Sessioni"), useLinks(partial), allowOther):sessioni]`
+>
+> Scene pronte: `INPUT[list:scene_pronte]`
+>
+> Ostacoli: `INPUT[list:ostacoli]`
+
+> [!timer]- Clock Missione
+> Progresso: `INPUT[text:progress_value]`
+>
+> Massimo: `INPUT[text:progress_max]`
+>
+> Prossima mossa: `INPUT[prossima_mossa][:prossima_mossa]`
+
+tab: Conseguenze
+
+> [!timer] M6
+> Conseguenze: `INPUT[list:conseguenze]`
+>
+> Entita impattate: `INPUT[entita_impattate][:entita_impattate]`
+>
+> Propaga a: `INPUT[propaga_a][:propaga_a]`
+>
+> Stato propagazione: `INPUT[text:propagazione_stato]`
+
+> [!conflitto]- Bersagli Collegati
+> ```dataview
+> TABLE categoria, stato, pressione, prossima_mossa
+> FROM "Mondi"
+> WHERE contains(this.entita_impattate, file.link) OR contains(this.propaga_a, file.link)
+> SORT pressione DESC, file.name ASC
+> ```
+
+tab: Strumenti
+
+> [!regia] Correzione Rapida
+> - [[z.bases/Missioni.base]]
+> - [[z.bases/Luoghi.base]]
+> - [[z.bases/Fazioni.base]]
+> - [[Motore Mondo Vivo]]
+````
+
+## Fallback Markdown
+
+| Blocco | Valore |
+| --- | --- |
+| Luogo | [[Porto Di Brumafonda]] |
+| Fazione | [[Consorzio Del Sale Nero]] |
+| Sessione | [[2026-05-28 - La Campana Nella Nebbia]] |

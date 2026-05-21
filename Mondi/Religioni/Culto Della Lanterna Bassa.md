@@ -39,3 +39,61 @@ connessioni: ["[[Custodi Delle Saline]]", "[[Porto Di Brumafonda]]"]
 # Culto Della Lanterna Bassa
 
 Religione/culto demo per coprire rituali, calendario, conseguenze e player-safe.
+
+````tabs
+tab: Culto
+
+> [!infoboxwiki] Religione
+> Mondo: `INPUT[mondo][:mondo]`
+>
+> Stato: `INPUT[stato][:stato]`
+>
+> Pressione: `INPUT[pressione][:pressione]`
+>
+> Player-safe: `INPUT[text:player_safe]`
+
+> [!regia]- Check Fazione/Culto
+> ```dataviewjs
+> const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+> gdr.renderM7FamilyCards(dv, dv.current(), "fazione");
+> ```
+
+tab: Rito
+
+> [!lettura] Pratica Al Tavolo
+> Gancio: `INPUT[text:gancio]`
+>
+> Uso al tavolo: `INPUT[text:uso_al_tavolo]`
+>
+> Prossima mossa: `INPUT[prossima_mossa][:prossima_mossa]`
+>
+> Rituali: `INPUT[list:rituali]`
+>
+> Eresie: `INPUT[list:eresie]`
+
+tab: Rete
+
+> [!luogo] Luoghi Sacri E Tensioni
+> Templi: `INPUT[inlineListSuggester(optionQuery("Mondi/Luoghi"), useLinks(partial), allowOther):templi]`
+>
+> Luoghi sacri: `INPUT[inlineListSuggester(optionQuery("Mondi/Luoghi"), useLinks(partial), allowOther):luoghi_sacri]`
+>
+> Rivali: `INPUT[inlineListSuggester(optionQuery("Mondi"), useLinks(partial), allowOther):rivali]`
+>
+> Entita impattate: `INPUT[entita_impattate][:entita_impattate]`
+>
+> Propaga a: `INPUT[propaga_a][:propaga_a]`
+
+> [!regia]- Strumenti
+> - [[z.bases/Worldbuilding.base]]
+> - [[z.bases/Fazioni.base]]
+> - [[Mondi/Calendario]]
+````
+
+## Fallback Markdown
+
+| Blocco | Valore |
+| --- | --- |
+| Luogo sacro | [[Porto Di Brumafonda]] |
+| Rivale | [[Consorzio Del Sale Nero]] |
+| Rito | Processione al molo prima del recupero |

@@ -50,3 +50,66 @@ connessioni: ["[[Porto Di Brumafonda]]", "[[Mercato Del Sale Nero]]"]
 # Consorzio Del Sale Nero
 
 Potere economico demo: utile per testare fazioni, missioni, economia e conseguenze.
+
+````tabs
+tab: Potere
+
+> [!infoboxwiki] Fazione
+> Mondo: `INPUT[mondo][:mondo]`
+>
+> Stato: `INPUT[stato][:stato]`
+>
+> Obiettivo: `INPUT[text:obiettivo]`
+>
+> Pressione: `INPUT[pressione][:pressione]`
+>
+> Prossima mossa: `INPUT[prossima_mossa][:prossima_mossa]`
+
+> [!regia]- Check Fazione
+> ```dataviewjs
+> const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+> gdr.renderM7FamilyCards(dv, dv.current(), "fazione");
+> ```
+
+tab: Tavolo
+
+> [!missione] Contratto E Ricatto
+> Gancio: `INPUT[text:gancio]`
+>
+> Uso al tavolo: `INPUT[text:uso_al_tavolo]`
+>
+> Scelte: `INPUT[list:scelte]`
+>
+> Rischi: `INPUT[list:rischi]`
+>
+> Ricompense: `INPUT[list:ricompense]`
+
+> [!segreto]- Livello DM
+> Obiettivo nascosto: `INPUT[text:obiettivo_nascosto]`
+>
+> Mosse segrete: `INPUT[list:mosse_segrete]`
+
+tab: Rete
+
+> [!conflitto] Propagazione
+> Luoghi: `INPUT[luoghi][:luoghi]`
+>
+> Missioni: `INPUT[missioni][:missioni]`
+>
+> Rivali: `INPUT[inlineListSuggester(optionQuery("Mondi"), useLinks(partial), allowOther):rivali]`
+>
+> Propaga a: `INPUT[propaga_a][:propaga_a]`
+
+> [!regia]- Strumenti
+> - [[z.bases/Fazioni.base]]
+> - [[z.bases/Economia.base]]
+> - [[Motore Mondo Vivo]]
+````
+
+## Fallback Markdown
+
+| Blocco | Valore |
+| --- | --- |
+| Luogo | [[Porto Di Brumafonda]] |
+| Missione | [[Recuperare La Campana Sommersa]] |
+| Rivale | [[Custodi Delle Saline]] |

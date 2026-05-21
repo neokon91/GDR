@@ -65,3 +65,78 @@ collegamenti_mancanti: []
 # Porto Di Brumafonda
 
 Luogo centrale della demo. Deve apparire in atlante, preparazione sessione, vista giocatori tramite mappa pubblica e dashboard mondo.
+
+````tabs
+tab: Luogo
+
+> [!infoboxwiki] Porto
+> Mondo: `INPUT[mondo][:mondo]`
+>
+> Stato: `INPUT[stato][:stato]`
+>
+> Pressione: `INPUT[pressione][:pressione]`
+>
+> Pericolo: `INPUT[text:pericolo]`
+>
+> Player-safe: `INPUT[text:player_safe]`
+
+> [!regia]- Check Luogo
+> ```dataviewjs
+> const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+> gdr.renderM7FamilyCards(dv, dv.current(), "luogo");
+> ```
+
+tab: Tavolo
+
+> [!scena] Scene E Promessa
+> Gancio: `INPUT[text:gancio]`
+>
+> Uso al tavolo: `INPUT[text:uso_al_tavolo]`
+>
+> Prossima mossa: `INPUT[prossima_mossa][:prossima_mossa]`
+>
+> Scene: `INPUT[list:scene]`
+>
+> Scelte: `INPUT[list:scelte]`
+
+> [!segreto]- Livello DM
+> Segreti: `INPUT[list:segreti]`
+>
+> Indizi: `INPUT[list:indizi]`
+
+tab: Mappa
+
+> [!mappa] Atlante
+> Mappe: `INPUT[inlineListSuggester(optionQuery("Risorse/Mappe"), useLinks(partial), allowOther):mappe]`
+>
+> Fazioni: `INPUT[fazioni][:fazioni]`
+>
+> Missioni: `INPUT[missioni][:missioni]`
+>
+> Sessioni: `INPUT[inlineListSuggester(optionQuery("Mondi/Sessioni"), useLinks(partial), allowOther):sessioni]`
+
+> [!regia]- Strumenti Visuali
+> - [[z.bases/Atlante Mappe.base]]
+> - [[z.bases/Luoghi.base]]
+> - [[Mappa Pubblica Di Brumafonda]]
+> - [[Risorse/Mappe/Schema Relazioni GDR.excalidraw]]
+
+tab: Continuita
+
+> [!timer] Propagazione
+> Conseguenze: `INPUT[list:conseguenze]`
+>
+> Entita impattate: `INPUT[entita_impattate][:entita_impattate]`
+>
+> Propaga a: `INPUT[propaga_a][:propaga_a]`
+>
+> Stato propagazione: `INPUT[text:propagazione_stato]`
+````
+
+## Fallback Markdown
+
+| Blocco | Valore |
+| --- | --- |
+| Missione | [[Recuperare La Campana Sommersa]] |
+| Fazione | [[Consorzio Del Sale Nero]] |
+| Conseguenza | [[La Marea Ha Preso Il Faro Vecchio]] |

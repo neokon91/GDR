@@ -39,3 +39,62 @@ domande_aperte: ["Chi puo comprare senza indebitarsi?"]
 # Mercato Del Sale Nero
 
 Nodo economia demo collegato a luogo, fazione, missione e mappa.
+
+````tabs
+tab: Mercato
+
+> [!infoboxwiki] Nodo Economico
+> Mondo: `INPUT[mondo][:mondo]`
+>
+> Luogo: `INPUT[inlineListSuggester(optionQuery("Mondi/Luoghi"), useLinks(partial), allowOther):luogo]`
+>
+> Pressione: `INPUT[pressione][:pressione]`
+>
+> Player-safe: `INPUT[text:player_safe]`
+
+> [!regia]- Check Mercato
+> ```dataviewjs
+> const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+> gdr.renderM7FamilyCards(dv, dv.current(), "risorsa");
+> ```
+
+tab: Tavolo
+
+> [!missione] Scelte Economiche
+> Gancio: `INPUT[text:gancio]`
+>
+> Uso al tavolo: `INPUT[text:uso_al_tavolo]`
+>
+> Prossima mossa: `INPUT[prossima_mossa][:prossima_mossa]`
+>
+> Rischi: `INPUT[list:rischi]`
+>
+> Pedaggi: `INPUT[list:pedaggi]`
+
+tab: Connessioni
+
+> [!conflitto] Controllo E Propagazione
+> Fazioni controllanti: `INPUT[inlineListSuggester(optionQuery("Mondi/Fazioni"), useLinks(partial), allowOther):fazioni_controllanti]`
+>
+> Missioni: `INPUT[missioni][:missioni]`
+>
+> Entita impattate: `INPUT[entita_impattate][:entita_impattate]`
+>
+> Propaga a: `INPUT[propaga_a][:propaga_a]`
+
+> [!mappa]- Marker
+> Mappa: `INPUT[inlineListSuggester(optionQuery("Risorse/Mappe"), useLinks(partial), allowOther):mappa]`
+>
+> Layer mappa: `INPUT[text:layer_mappa]`
+>
+> - [[z.bases/Economia.base]]
+> - [[z.bases/Atlante Mappe.base]]
+````
+
+## Fallback Markdown
+
+| Blocco | Valore |
+| --- | --- |
+| Luogo | [[Porto Di Brumafonda]] |
+| Controllo | [[Consorzio Del Sale Nero]] |
+| Missione | [[Recuperare La Campana Sommersa]] |

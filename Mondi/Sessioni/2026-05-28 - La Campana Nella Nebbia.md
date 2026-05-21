@@ -57,3 +57,100 @@ output_sessione: ["missione agganciata", "mappa pubblica pronta", "conseguenza s
 # La Campana Nella Nebbia
 
 Sessione demo gia giocata per alimentare Vista Giocatori, recap e conseguenze.
+
+````tabs
+tab: Prepara
+
+> [!scena] Scaletta
+> Obiettivo: `INPUT[text:obiettivo]`
+>
+> Apertura: `INPUT[text:apertura]`
+>
+> Scelta: `INPUT[text:scelta]`
+>
+> Pressioni: `INPUT[inlineList:pressioni]`
+>
+> Materiale pronto: `INPUT[inlineList:materiale_pronto]`
+
+> [!regia]- Check Sessione
+> ```dataviewjs
+> const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+> gdr.renderPlayableOutline(dv, dv.current());
+> ```
+
+tab: Ancore
+
+> [!luogo] Mondo E Tavolo
+> Mondo: `INPUT[mondo][:mondo]`
+>
+> Campagne: `INPUT[campagne][:campagne]`
+>
+> Luoghi: `INPUT[luoghi][:luoghi]`
+>
+> Fazioni: `INPUT[fazioni][:fazioni]`
+>
+> Missioni: `INPUT[missioni][:missioni]`
+
+> [!regia]- Rete Sessione
+> ```dataviewjs
+> const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+> gdr.renderSessionAnchorCards(dv, dv.current());
+> ```
+
+tab: Tavolo
+
+> [!regia] Live
+> Attiva: `INPUT[toggle:attiva]`
+>
+> Stato: `INPUT[stato][:stato]`
+>
+> Scena corrente: `INPUT[text:scena_corrente]`
+>
+> Decisioni prese: `INPUT[list:decisioni_prese]`
+>
+> Tiro rapido: `dice: 1d20`
+
+> [!mappa]- Materiali
+> Mappe: `INPUT[inlineListSuggester(optionQuery("Risorse/Mappe"), useLinks(partial), allowOther):mappe]`
+>
+> Dispense: `INPUT[inlineListSuggester(optionQuery("Mondi/Dispense"), useLinks(partial), allowOther):dispense]`
+
+> [!regia]- Stato Live
+> ```dataviewjs
+> const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+> gdr.renderSessionLiveCards(dv, dv.current());
+> ```
+
+tab: Dopo
+
+> [!timer] Continuita
+> Conseguenze: `INPUT[list:conseguenze]`
+>
+> Entita impattate: `INPUT[entita_impattate][:entita_impattate]`
+>
+> Propaga a: `INPUT[propaga_a][:propaga_a]`
+>
+> Stato propagazione: `INPUT[text:propagazione_stato]`
+>
+> Prossima apertura: `INPUT[text:prossima_apertura]`
+
+> [!lettura]- Recap Pubblico
+> `INPUT[list:recap_pubblico]`
+
+> [!segreto]- Recap DM
+> `INPUT[list:recap_dm]`
+
+> [!regia]- Chiusura
+> ```dataviewjs
+> const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+> gdr.renderSessionPostCards(dv, dv.current());
+> ```
+````
+
+## Fallback Markdown
+
+| Blocco | Valore |
+| --- | --- |
+| Obiettivo | Mettere il gruppo davanti alla scelta tra profitto e legittimita. |
+| Mappa | [[Mappa Pubblica Di Brumafonda]] |
+| Conseguenza | [[La Marea Ha Preso Il Faro Vecchio]] |

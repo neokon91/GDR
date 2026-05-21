@@ -465,6 +465,7 @@ function isSrdNote(fileRel) {
 function isIndexLikeNote(fileRel) {
     return isFolderIndex(fileRel) || [
         "Mondi/Mondo.md",
+        "Mondi/Calendario.md",
         "Mondi/Stato del Mondo.md",
         "Dev/Indice Connettore GPT.md",
         "Dev/Sviluppo Vault.md",
@@ -498,6 +499,20 @@ function isLiveEntityNote(fileRel) {
     return /^(Mondi\/(Luoghi|Personaggi|Fazioni|Missioni|Timeline|Oggetti|Tracciati|Relazioni|Rotte|Risorse|Mercati|Culture|Religioni|Societa)|Risorse\/Mappe)\//.test(fileRel)
         && !isIndexLikeNote(fileRel)
         && !fileRel.startsWith("z.modelli/");
+}
+
+function isReleaseContentNote(fileRel) {
+    return /^(Mondi|Campagne)\//.test(fileRel)
+        && !isIndexLikeNote(fileRel)
+        && !fileRel.startsWith("Mondi/SRD/");
+}
+
+function hasPluginNativeSheet(text) {
+    const hasTabs = text.includes("````tabs");
+    const hasCallout = /> \[![^\]]+\]/.test(text);
+    const hasDynamicBlock = /```dataview|```dataviewjs|```tasks|```meta-bind|INPUT\[|BUTTON\[|dice:/.test(text);
+    const hasFallback = /Fallback Markdown/i.test(text);
+    return hasTabs && hasCallout && hasDynamicBlock && hasFallback;
 }
 
 function isGeneratedFantasyDraft(fileRel, frontmatter) {
@@ -782,6 +797,10 @@ if (!existsRel(gptIndexRel)) {
 
 for (const [fileRel, fm] of realEntries) {
     const text = readRel(fileRel);
+
+    if (isReleaseContentNote(fileRel) && !hasPluginNativeSheet(text)) {
+        warnings.push(`${fileRel}: nota di release senza scheda plugin-native completa (tabs, callout, controlli dinamici, fallback)`);
+    }
 
     if (isOperationalNote(fileRel) && hasValue(fm.categoria) && !ALLOWED_CATEGORIES.has(String(fm.categoria))) {
         warnings.push(`${fileRel}: categoria non prevista (${fm.categoria})`);

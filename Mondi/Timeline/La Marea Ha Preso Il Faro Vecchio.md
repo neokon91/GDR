@@ -53,3 +53,75 @@ ricompense: []
 # La Marea Ha Preso Il Faro Vecchio
 
 Conseguenza demo: azione del mondo -> missione -> propagazione a luogo, mercato e fazione.
+
+````tabs
+tab: Evento
+
+> [!timer] Causa Effetto
+> Mondo: `INPUT[mondo][:mondo]`
+>
+> Stato: `INPUT[stato][:stato]`
+>
+> Causa: `INPUT[text:causa]`
+>
+> Effetti: `INPUT[list:effetti]`
+>
+> Prossima mossa: `INPUT[prossima_mossa][:prossima_mossa]`
+
+> [!regia]- Check Continuita
+> ```dataviewjs
+> const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+> gdr.renderM7FamilyCards(dv, dv.current(), "continuita");
+> ```
+
+tab: Propagazione
+
+> [!conflitto] Bersagli
+> Luoghi: `INPUT[luoghi][:luoghi]`
+>
+> Fazioni: `INPUT[fazioni][:fazioni]`
+>
+> Missioni: `INPUT[missioni][:missioni]`
+>
+> Sessioni: `INPUT[inlineListSuggester(optionQuery("Mondi/Sessioni"), useLinks(partial), allowOther):sessioni]`
+>
+> Entita impattate: `INPUT[entita_impattate][:entita_impattate]`
+>
+> Propaga a: `INPUT[propaga_a][:propaga_a]`
+
+> [!regia]- Coda M6
+> ```dataviewjs
+> const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+> gdr.renderWorldImpact(dv, dv.current());
+> ```
+
+tab: Pubblico
+
+> [!lettura] Memoria
+> Player-safe: `INPUT[text:player_safe]`
+>
+> Memoria pubblica: `INPUT[list:memoria_pubblica]`
+>
+> Versioni alternative: `INPUT[list:versioni_alternative]`
+
+> [!segreto]- DM
+> Indizi: `INPUT[list:indizi]`
+>
+> Rischi: `INPUT[list:rischi]`
+
+tab: Strumenti
+
+> [!regia] Correzione Rapida
+> - [[Motore Mondo Vivo]]
+> - [[Cosa Succede Fuori Scena]]
+> - [[z.bases/Worldbuilding.base]]
+> - [[z.bases/Missioni.base]]
+````
+
+## Fallback Markdown
+
+| Blocco | Valore |
+| --- | --- |
+| Causa | Il faro vecchio e crollato durante una marea anomala. |
+| Effetto | rotta chiusa, prezzo del sale aumentato |
+| Bersagli | [[Porto Di Brumafonda]], [[Mercato Del Sale Nero]] |

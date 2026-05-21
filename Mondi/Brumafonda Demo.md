@@ -43,8 +43,78 @@ canonico: true
 
 Mondo demo per verificare il flusso 1.0: creazione mondo, espansione, economia, mappe, campagna, sessione, conseguenza e vista giocatori.
 
-## Stato Al Tavolo
+````tabs
+tab: Codex
 
-- La citta conosce la perdita del faro vecchio.
-- Il Consorzio cerca volontari per recuperare la campana sommersa.
-- I Custodi chiedono che nessun reperto venga venduto prima del rito della Lanterna Bassa.
+> [!infoboxwiki] Identita Del Mondo
+> Premessa: `INPUT[text:premessa]`
+>
+> Tono: `INPUT[text:tono]`
+>
+> Tema: `INPUT[text:tema]`
+>
+> Calendario: `INPUT[text:calendario]`
+>
+> Canonico: `INPUT[canonico][:canonico]`
+
+> [!scena]- Stato Al Tavolo
+
+> - La citta conosce la perdita del faro vecchio.
+> - Il Consorzio cerca volontari per recuperare la campana sommersa.
+> - I Custodi chiedono che nessun reperto venga venduto prima del rito della Lanterna Bassa.
+
+tab: Spine
+
+> [!luogo] Ancore Del Mondo
+> Luoghi iconici: `INPUT[inlineListSuggester(optionQuery("Mondi/Luoghi"), useLinks(partial), allowOther):luoghi_iconici]`
+>
+> Fazioni principali: `INPUT[inlineListSuggester(optionQuery("Mondi/Fazioni"), useLinks(partial), allowOther):fazioni_principali]`
+>
+> Religioni: `INPUT[inlineListSuggester(optionQuery("Mondi/Religioni"), useLinks(partial), allowOther):religioni]`
+>
+> Campagne: `INPUT[inlineListSuggester(optionQuery("Campagne"), useLinks(partial), allowOther):campagne]`
+
+> [!regia]- Stato M7
+> ```dataviewjs
+> const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+> gdr.renderM7FamilyCards(dv, dv.current(), "mondo");
+> ```
+
+tab: Continuita
+
+> [!timer] Stato Del Mondo
+> Stato mondo: `INPUT[list:stato_mondo]`
+>
+> Fronti: `INPUT[inlineListSuggester(optionQuery("Mondi/Missioni"), useLinks(partial), allowOther):fronti]`
+>
+> Tensioni: `INPUT[list:tensioni]`
+>
+> Domande aperte: `INPUT[list:domande_aperte]`
+
+> [!conflitto]- Catena Viva
+> ```dataview
+> TABLE categoria, tipo, stato, pressione, prossima_mossa
+> FROM "Mondi"
+> WHERE contains(mondo, this.file.link) OR contains(connessioni, this.file.link) OR contains(campagne, this.file.link)
+> SORT categoria ASC, pressione DESC, file.name ASC
+> ```
+
+tab: Strumenti
+
+> [!regia] Superfici Operative
+> - [[Worldbuilder Dashboard]]
+> - [[Atlante del Mondo]]
+> - [[Bibbia del Mondo]]
+> - [[Motore Mondo Vivo]]
+> - [[z.bases/Worldbuilding.base]]
+> - [[Risorse/Mappe/Schema Relazioni GDR.excalidraw]]
+````
+
+## Fallback Markdown
+
+| Blocco | Valore |
+| --- | --- |
+| Premessa | Una citta di sale, debiti e fari spenti. |
+| Luogo iniziale | [[Porto Di Brumafonda]] |
+| Potere iniziale | [[Consorzio Del Sale Nero]] |
+| Missione iniziale | [[Recuperare La Campana Sommersa]] |

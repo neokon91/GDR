@@ -47,3 +47,66 @@ domande_aperte: []
 # Custodi Delle Saline
 
 Cultura demo pensata per apparire sia nel Codex DM sia nelle viste player-safe.
+
+````tabs
+tab: Identita
+
+> [!infoboxwiki] Cultura
+> Mondo: `INPUT[mondo][:mondo]`
+>
+> Stato: `INPUT[stato][:stato]`
+>
+> Tratto distintivo: `INPUT[text:tratto_distintivo]`
+>
+> Player-safe: `INPUT[text:player_safe]`
+
+> [!regia]- Check Cultura
+> ```dataviewjs
+> const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+> gdr.renderM7FamilyCards(dv, dv.current(), "cultura");
+> ```
+
+tab: Tavolo
+
+> [!scena] Uso Giocabile
+> Gancio: `INPUT[text:gancio]`
+>
+> Uso al tavolo: `INPUT[text:uso_al_tavolo]`
+>
+> Prossima mossa: `INPUT[prossima_mossa][:prossima_mossa]`
+>
+> Scelte: `INPUT[list:scelte]`
+>
+> Rischi: `INPUT[list:rischi]`
+
+> [!lettura]- Cosa Vede Il Party
+> Valori: `INPUT[list:valori]`
+>
+> Tabu: `INPUT[list:tabu]`
+>
+> Feste: `INPUT[list:feste]`
+
+tab: Connessioni
+
+> [!conflitto] Rete Culturale
+> Luoghi: `INPUT[luoghi][:luoghi]`
+>
+> Religioni: `INPUT[inlineListSuggester(optionQuery("Mondi/Religioni"), useLinks(partial), allowOther):religioni]`
+>
+> Fazioni: `INPUT[fazioni][:fazioni]`
+>
+> Propaga a: `INPUT[propaga_a][:propaga_a]`
+
+> [!regia]- Basi
+> - [[z.bases/Worldbuilding.base]]
+> - [[z.bases/Fazioni.base]]
+> - [[Risorse/Mappe/Schema Relazioni GDR.excalidraw]]
+````
+
+## Fallback Markdown
+
+| Blocco | Valore |
+| --- | --- |
+| Luogo | [[Porto Di Brumafonda]] |
+| Culto | [[Culto Della Lanterna Bassa]] |
+| Pressione | Il recupero della campana deve essere pubblico. |

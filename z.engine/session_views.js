@@ -544,6 +544,41 @@
   function renderM7FamilyCards(dv, source = null, family = "generica") {
     const page = source ?? dv.current();
     const definitions = {
+      mondo: [
+        ["Premessa", page.premessa ?? page.gancio, "Scrivi la promessa centrale del mondo."],
+        ["Luoghi", page.luoghi_iconici ?? page.luoghi, "Collega luoghi che possono diventare sessioni."],
+        ["Poteri", page.fazioni_principali ?? page.fazioni, "Collega fazioni o poteri che muovono il mondo."],
+        ["Misteri", page.misteri_pubblici ?? page.segreti, "Rendi visibile cosa il tavolo puo scoprire."],
+        ["Fronti", page.fronti ?? page.missioni, "Collega missioni, conflitti o pressioni attive."]
+      ],
+      campagna: [
+        ["Mondo", page.mondo, "Collega il mondo da cui nasce la campagna."],
+        ["Regione", page.regione ?? page.luoghi, "Definisci dove parte la campagna."],
+        ["Poteri", page.fazioni ?? page.conflitti, "Collega chi spinge gli eventi."],
+        ["Missioni", page.missioni, "Collega obiettivi giocabili."],
+        ["Sessioni", page.sessioni, "Collega le sessioni gia pronte o giocate."]
+      ],
+      cultura: [
+        ["Identita", page.tratto_distintivo ?? page.valori, "Definisci cosa si vede subito al tavolo."],
+        ["Luoghi", page.luoghi, "Collega dove questa cultura vive o lascia tracce."],
+        ["Riti", page.feste ?? page.usi, "Collega pratiche giocabili, feste o tabu."],
+        ["Tensioni", page.tensioni ?? page.rischi, "Scrivi quale scelta o costo produce."],
+        ["Prossima mossa", page.prossima_mossa, "Definisci come reagisce quando viene coinvolta."]
+      ],
+      risorsa: [
+        ["Luogo", page.luogo ?? page.luoghi, "Collega dove la risorsa o il mercato si manifesta."],
+        ["Controllo", page.fazioni_controllanti ?? page.fazioni, "Collega chi controlla prezzo, accesso o rischio."],
+        ["Pressione", page.pressione, "Misura quanto il nodo economico sta cambiando."],
+        ["Missioni", page.missioni, "Collega obiettivi che possono alterare il nodo."],
+        ["Mappa", page.mappa ?? page.mappe, "Collega marker, mappa o layer cartografico."]
+      ],
+      dispensa: [
+        ["Pubblico", page.pubblico === true ? "Consegnabile ai giocatori." : "", "Decidi se questa dispensa e player-safe."],
+        ["Player-safe", page.player_safe, "Scrivi cosa puo leggere il party senza segreti."],
+        ["Sessioni", page.sessioni, "Collega quando consegnarla."],
+        ["Luogo", page.luogo ?? page.luoghi, "Collega dove appare o chi la emette."],
+        ["Mondo", page.mondo, "Collega il contesto narrativo."]
+      ],
       luogo: [
         ["Coordinate", page.coordinates, "Compila coordinate se il luogo deve apparire in Atlante Mappe."],
         ["Mappe", page.mappe ?? page.mappa, "Collega una mappa zoom, pubblica o DM."],

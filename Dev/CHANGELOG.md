@@ -30,11 +30,13 @@
 - `check:importers` con fixture dry-run per Azgaar e Watabou.
 - `render:metadata` e `check:metadata` per generare e verificare anteprime fileClass/Bases da `frontmatter_profiles.yaml`.
 - Disciplina zero-warning: `check_vault.js` ora tratta ogni warning come blocker di `npm run check`.
+- Gate release-content: le note contenuto in `Mondi/` e `Campagne/` devono avere scheda plugin-native con tabs, callout, controlli dinamici e fallback Markdown.
 
 ### Migliorato
 
 - [[Dev/NEXT_PHASE_HANDOFF]] chiarisce che M6 e completato e che la prossima fase deve concentrarsi su schede plugin-native, non su nuove dashboard.
 - [[Dev/NEXT_PHASE_HANDOFF]] aggiornato dopo M7 e chiusura warning demo: la prossima fase e M8 Release Evidence And Zero-Warning Discipline.
+- Le note demo Brumafonda sono state convertite da frontmatter/testo piatto a schede operative con Meta Bind, Dataview/DataviewJS, Bases, mappe e fallback.
 - [[Motore Mondo Vivo]] e [[Cosa Succede Fuori Scena]] mostrano coda di continuita, bersagli da verificare e buchi di propagazione senza duplicare dashboard.
 - [[Risorse/Post Sessione Guidato]] e [[Durante il Gioco]] collegano scelta, conseguenza, bersagli, prossima mossa e recap.
 - TemplateFactory ora valida simmetria tra profili runtime e frontmatter, campi core/plugin/dominio e copertura minima di fileClass/Bases.
