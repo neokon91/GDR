@@ -18,6 +18,7 @@ const { validateRequiredFiles } = require("./checks/required_files");
 const { validateSyntaxControls } = require("./checks/syntax_controls");
 const { validateMarkdownLinks } = require("./checks/markdown_links");
 const { validateMetaBindControls } = require("./checks/metabind_controls");
+const { validateObsidianConfig } = require("./checks/obsidian_config");
 
 const ROOT = process.cwd();
 const IGNORED_DIRS = new Set([".git", "node_modules", "dist"]);
@@ -643,46 +644,20 @@ validateMetaBindControls({
 });
 
 const metadataMenuConfig = readJson(repoPath(".obsidian/plugins/metadata-menu/data.json"));
-if (metadataMenuConfig) {
-    const presetNames = new Set((metadataMenuConfig.presetFields ?? []).map(field => field?.name).filter(Boolean));
-
-    for (const name of REQUIRED_METADATA_MENU_PRESETS) {
-        if (!presetNames.has(name)) {
-            errors.push(`Metadata Menu: preset field operativo mancante (${name})`);
-        }
-    }
-}
-
-const operationalViewRoots = /^(z\.modelli|Hub|Risorse|Mondi)\//;
-for (const file of markdownFiles.filter(file => operationalViewRoots.test(rel(file)))) {
-    const fileRel = rel(file);
-    const text = markdownText(file);
-    if (text.includes('z.automazioni/session_context.js')) {
-        errors.push(`${fileRel}: vista operativa punta a session_context.js; usare z.engine/session_views.js`);
-    }
-}
-
 const iconConfig = readJson(repoPath(".obsidian/plugins/obsidian-icon-folder/data.json"));
-if (iconConfig) {
-    for (const key of Object.keys(iconConfig)) {
-        if (key === "settings") continue;
-        if (isGeneratedTemplatePath(key)) continue;
-        if (!existsRel(key) && !existsRel(`${key}.md`)) {
-            errors.push(`Iconize punta a un percorso mancante: ${key}`);
-        }
-    }
-}
-
 const workspace = readOptionalJsonRel(".obsidian/workspace.json");
-if (workspace) {
-    const serialized = JSON.stringify(workspace);
-    const stalePaths = ["Bestiario/Prova.md", "\"Mondo/"];
-    for (const stalePath of stalePaths) {
-        if (serialized.includes(stalePath)) {
-            errors.push(`Configurazione Obsidian contiene percorso obsoleto: ${stalePath}`);
-        }
-    }
-}
+validateObsidianConfig({
+    errors,
+    existsRel,
+    iconConfig,
+    isGeneratedTemplatePath,
+    markdownFiles,
+    markdownText,
+    metadataMenuConfig,
+    rel,
+    requiredMetadataMenuPresets: REQUIRED_METADATA_MENU_PRESETS,
+    workspace
+});
 
 const realEntries = [...markdownMeta.entries()]
     .filter(([fileRel]) => !isFolderIndex(fileRel));
