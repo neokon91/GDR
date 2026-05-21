@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Gatto]]"]
+riferimenti_srd: ["[[SRD/Mostri/Gatto]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Gatto#^srd-gatto-saltatore]]", "[[SRD/Mostri/Gatto#^srd-gatto-graffio]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Gatto"
 type: "Bestia"
 size: "minuscola"
@@ -88,11 +95,13 @@ tab: Azioni
 ### Saltatore
 
 La distanza dei salti del gatto è determinata dalla sua Destrezza piuttosto che dalla Forza.
+^srd-gatto-saltatore
 ## Azioni
 
 ### Graffio
 
 *Tiro per colpire in mischia:* +4, portata 1,5 m. *Colpito:* 1 danno tagliente.
+^srd-gatto-graffio
 ````
 
 > [!info] Licenza

@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Avvoltoio gigante]]"]
+riferimenti_srd: ["[[SRD/Mostri/Avvoltoio gigante]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Avvoltoio gigante#^srd-avvoltoio_gigante-tattiche-del-branco]]", "[[SRD/Mostri/Avvoltoio gigante#^srd-avvoltoio_gigante-cavare]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Avvoltoio gigante"
 type: "Mostruosità"
 size: "grande"
@@ -86,11 +93,13 @@ tab: Azioni
 ### Tattiche del branco
 
 L'avvoltoio dispone di vantaggio a un tiro per colpire contro una creatura se almeno uno dei suoi alleati si trova entro 1,5 metri dalla creatura e non è incapacitato.
+^srd-avvoltoio_gigante-tattiche-del-branco
 ## Azioni
 
 ### Cavare
 
 *Tiro per colpire in mischia:* +4, portata 1,5 m. *Colpito:* 9 (2d6 + 2) danni perforanti, e il bersaglio è avvelenato fino al termine del proprio turno successivo.
+^srd-avvoltoio_gigante-cavare
 ````
 
 > [!info] Licenza

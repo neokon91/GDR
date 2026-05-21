@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Oggetti Magici/Cubo di forza]]"]
+riferimenti_srd: ["[[SRD/Oggetti Magici/Cubo di forza]]"]
+riferimenti_regola: []
+sezioni_collegate: ["[[SRD/Oggetti Magici/Cubo di forza#Facce del cubo di forza]]"]
+blocchi_collegati: []
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/oggetto-magico"]
 tipo_oggetto: "Oggetto meraviglioso"
 tipo_base: "Oggetto meraviglioso"
 rarita: "raro"
@@ -37,6 +44,7 @@ Inizialmente il cubo ha 10 cariche e recupera 1d6 cariche consumate all'alba di 
 **Santuario privato** 4
 **Scudo** 1
 **Sfera elastica** 4
+^srd-cubo_di_forza-incantesimo-costo-in-cariche
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

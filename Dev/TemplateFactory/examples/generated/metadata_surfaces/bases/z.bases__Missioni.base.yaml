@@ -65,3 +65,10 @@ profile_fields:
 - fc-category
 - fc-display-name
 - fc-end
+- fonti
+- riferimenti_srd
+- riferimenti_regola
+- sezioni_collegate
+- blocchi_collegati
+- tabelle_collegate
+- tags

@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Elementale dell'acqua]]"]
+riferimenti_srd: ["[[SRD/Mostri/Elementale dell'acqua]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Elementale dell'acqua#^srd-elementale_dell_acqua-congelamento]]", "[[SRD/Mostri/Elementale dell'acqua#^srd-elementale_dell_acqua-forma-d-acqua]]", "[[SRD/Mostri/Elementale dell'acqua#^srd-elementale_dell_acqua-multiattacco]]", "[[SRD/Mostri/Elementale dell'acqua#^srd-elementale_dell_acqua-schianto]]", "[[SRD/Mostri/Elementale dell'acqua#^srd-elementale_dell_acqua-sommergere-ricarica-4-6]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Elementale dell'acqua"
 type: "Elementale"
 size: "grande"
@@ -88,23 +95,28 @@ tab: Azioni
 ### Congelamento
 
 Se l'elementale subisce danni da freddo, la sua velocità è ridotta di 6 metri fino al termine del suo turno successivo.
+^srd-elementale_dell_acqua-congelamento
 
 ### Forma d'acqua
 
 L'elementale può entrare nello spazio di un nemico e fermarvisi. Può muoversi attraverso uno spazio stretto fino a 2,5 centimetri senza consumare movimento extra per farlo.
+^srd-elementale_dell_acqua-forma-d-acqua
 ## Azioni
 
 ### Multiattacco
 
 L'elementale effettua due attacchi Schianto.
+^srd-elementale_dell_acqua-multiattacco
 
 ### Schianto
 
 *Tiro per colpire in mischia:* +7, portata 1,5 m. *Colpito:* 13 (2d8 + 4) danni contundenti. Se il bersaglio è una creatura di taglia Media o inferiore, cade a terra prono.
+^srd-elementale_dell_acqua-schianto
 
 ### Sommergere (ricarica 4-6)
 
 *Tiro salvezza su Forza:* CD 15, ogni creatura nello spazio dell'elementale. *Fallimento:* 22 (4d8 + 4) danni contundenti. Se il bersaglio è una creatura di taglia Grande o inferiore, è afferrato (CD 14 per sfuggire). Finché la presa perdura, il bersaglio è trattenuto e soffoca (a meno che non sia in grado di respirare sott'acqua) e subisce 9 (2d8) danni contundenti all'inizio di ogni turno dell'elementale. Tramite Sommergere, l'elementale può afferrare una creatura di taglia Grande o un massimo di due creature di taglia Media o inferiore contemporaneamente. Con un'azione, una creatura entro 1,5 metri dall'elementale può tirare una creatura fuori da esso superando una prova di Forza (Atletica) con CD 14. *Successo:* danni dimezzati.
+^srd-elementale_dell_acqua-sommergere-ricarica-4-6
 ````
 
 > [!info] Licenza

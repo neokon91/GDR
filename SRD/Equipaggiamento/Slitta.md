@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Equipaggiamento/Slitta]]"]
+riferimenti_srd: ["[[SRD/Equipaggiamento/Slitta]]"]
+riferimenti_regola: []
+sezioni_collegate: ["[[SRD/Equipaggiamento/Slitta#Dettagli]]"]
+blocchi_collegati: []
+tabelle_collegate: ["[[SRD/Equipaggiamento/Slitta#^srd-slitta-dettagli]]"]
+tags: ["dnd55/srd"]
 capitolo: "Equipaggiamento"
 pagine_sorgente: "113-114"
 tipo_oggetto: "veicolo_da_tiro"
@@ -42,6 +49,7 @@ Peso 150 kg; costo 20 mo.
 | Oggetto | Peso | Costo |
 | --- | --- | --- |
 | Slitta | 150 kg | 20 mo |
+^srd-slitta-dettagli
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

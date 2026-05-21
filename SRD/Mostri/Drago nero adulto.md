@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Drago nero adulto]]"]
+riferimenti_srd: ["[[SRD/Mostri/Drago nero adulto]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Drago nero adulto#^srd-drago_nero_adulto-anfibio]]", "[[SRD/Mostri/Drago nero adulto#^srd-drago_nero_adulto-resistenza-leggendaria-3-giorno-o-4-giorno-nella-tana]]", "[[SRD/Mostri/Drago nero adulto#^srd-drago_nero_adulto-multiattacco]]", "[[SRD/Mostri/Drago nero adulto#^srd-drago_nero_adulto-squarcio]]", "[[SRD/Mostri/Drago nero adulto#^srd-drago_nero_adulto-incantesimi]]", "[[SRD/Mostri/Drago nero adulto#^srd-drago_nero_adulto-soffio-di-acido-ricarica-5-6]]", "[[SRD/Mostri/Drago nero adulto#^srd-drago_nero_adulto-balzo]]", "[[SRD/Mostri/Drago nero adulto#^srd-drago_nero_adulto-nugolo-di-insetti]]", "[[SRD/Mostri/Drago nero adulto#^srd-drago_nero_adulto-presenza-terrificante]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Drago nero adulto"
 type: "Drago (cromatico)"
 size: "enorme"
@@ -103,19 +110,23 @@ tab: Azioni
 ### Anfibio
 
 Il drago può respirare in aria e in acqua.
+^srd-drago_nero_adulto-anfibio
 
 ### Resistenza leggendaria (3/giorno o 4/giorno nella tana)
 
 Se il drago fallisce un tiro salvezza, può scegliere di superarlo comunque.
+^srd-drago_nero_adulto-resistenza-leggendaria-3-giorno-o-4-giorno-nella-tana
 ## Azioni
 
 ### Multiattacco
 
 Il drago effettua tre attacchi Squarcio. Può sostituire un attacco con un utilizzo di Incantesimi per lanciare freccia acida (di 3º livello).
+^srd-drago_nero_adulto-multiattacco
 
 ### Squarcio
 
 *Tiro per colpire in mischia:* +11, portata 3 m. *Colpito:* 13 (2d6 + 6) danni taglienti più 4 (1d8) danni da acido.
+^srd-drago_nero_adulto-squarcio
 
 ### Incantesimi
 
@@ -129,10 +140,12 @@ Il drago lancia uno dei seguenti incantesimi, senza bisogno di componenti materi
 - freccia acida (di 3º livello)
 - individuazione del magico
 - paura
+^srd-drago_nero_adulto-incantesimi
 
 ### Soffio di acido (ricarica 5-6)
 
 *Tiro salvezza su Destrezza:* CD 18, tutte le creature in una linea lunga 18 metri e larga 1,5 metri. *Fallimento:* 54 (12d8) danni da acido. *Successo:* danni dimezzati.
+^srd-drago_nero_adulto-soffio-di-acido-ricarica-5-6
 ## Azioni Leggendarie
 
 Subito dopo il turno di un'altra creatura, il drago può consumare un utilizzo per effettuare una delle seguenti azioni. Il drago recupera tutti gli utilizzi consumati all'inizio di ogni suo turno.
@@ -142,14 +155,17 @@ Subito dopo il turno di un'altra creatura, il drago può consumare un utilizzo p
 ### Balzo
 
 Il drago si muove fino a metà della sua velocità ed effettua un attacco Squarcio.
+^srd-drago_nero_adulto-balzo
 
 ### Nugolo di insetti
 
 *Tiro salvezza su Destrezza:* CD 17, una creatura che il drago è in grado di vedere entro 36 metri. *Fallimento:* 22 (4d10) danni da veleno, e il bersaglio subisce svantaggio ai tiri salvezza per mantenere la concentrazione fino al termine del proprio turno successivo. *Fallimento o successo:* il drago non può ripetere quest'azione fino all'inizio del proprio turno successivo.
+^srd-drago_nero_adulto-nugolo-di-insetti
 
 ### Presenza terrificante
 
 Il drago usa Incantesimi per lanciare paura. Il drago non può ripetere quest'azione fino all'inizio del proprio turno successivo.
+^srd-drago_nero_adulto-presenza-terrificante
 ````
 
 > [!info] Licenza

@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Regole/Gestire azioni e attacchi dei mostri]]"]
+riferimenti_srd: ["[[SRD/Regole/Gestire azioni e attacchi dei mostri]]"]
+riferimenti_regola: []
+sezioni_collegate: ["[[SRD/Regole/Gestire azioni e attacchi dei mostri#Gestione in combattimento]]", "[[SRD/Regole/Gestire azioni e attacchi dei mostri#Informazioni sugli attacchi]]", "[[SRD/Regole/Gestire azioni e attacchi dei mostri#Incantesimi dei mostri]]"]
+blocchi_collegati: []
+tabelle_collegate: ["[[SRD/Regole/Gestire azioni e attacchi dei mostri#^srd-gestire_azioni_mostri-gestione-in-combattimento]]", "[[SRD/Regole/Gestire azioni e attacchi dei mostri#^srd-gestire_azioni_mostri-informazioni-sugli-attacchi]]", "[[SRD/Regole/Gestire azioni e attacchi dei mostri#^srd-gestire_azioni_mostri-incantesimi-dei-mostri]]"]
+tags: ["dnd55/srd", "dnd55/regola"]
 capitolo: "Mostri"
 categoria_regola: "Mostri"
 pagine_sorgente: "290, 292"
@@ -25,6 +32,7 @@ Per far agire un mostro in linea con il suo grado di sfida, il GM dovrebbe usare
 | Capacita speciali | Se infliggono molti danni e hanno usi limitati, usale rapidamente e spesso. |
 | Multiattacco | Usalo ogni turno in cui il mostro non impiega una delle sue abilita piu potenti. |
 | Azioni bonus, reazioni, leggendarie | Se presenti nella scheda, usale il piu spesso possibile. |
+^srd-gestire_azioni_mostri-gestione-in-combattimento
 
 ## Informazioni sugli attacchi
 
@@ -36,6 +44,7 @@ Per far agire un mostro in linea con il suo grado di sfida, il GM dovrebbe usare
 | Colpito o mancato | Effetti che avvengono indipendentemente dall'esito del tiro. |
 | Danni | La scheda fornisce numero e formula; si usa il numero o si tira la formula, non entrambi. |
 | Tiro salvezza | L'effetto indica caratteristica, CD, bersagli e conseguenze di successo o fallimento; danni dimezzati significa arrotondati per difetto. |
+^srd-gestire_azioni_mostri-informazioni-sugli-attacchi
 
 ## Incantesimi dei mostri
 
@@ -46,6 +55,7 @@ Per far agire un mostro in linea con il suo grado di sfida, il GM dovrebbe usare
 | Restrizioni | La scheda puo imporre restrizioni speciali, come un incantesimo che funziona solo sul mostro stesso. |
 | Componenti | Il tratto Incantesimo indica se il mostro ignora componenti; se servono, il mostro possiede quelle materiali richieste. |
 | Tempi lunghi | Per tempi di lancio di 1 minuto o piu, il mostro deve usare l'azione di Magia ogni turno e mantenere concentrazione, salvo diversa indicazione. |
+^srd-gestire_azioni_mostri-incantesimi-dei-mostri
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

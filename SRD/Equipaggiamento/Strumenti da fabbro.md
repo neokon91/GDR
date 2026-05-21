@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Equipaggiamento/Strumenti da fabbro]]"]
+riferimenti_srd: ["[[SRD/Equipaggiamento/Strumenti da fabbro]]"]
+riferimenti_regola: []
+sezioni_collegate: ["[[SRD/Equipaggiamento/Strumenti da fabbro#Dettagli]]"]
+blocchi_collegati: []
+tabelle_collegate: ["[[SRD/Equipaggiamento/Strumenti da fabbro#^srd-strumenti_da_fabbro-dettagli]]"]
+tags: ["dnd55/srd"]
 capitolo: "Equipaggiamento"
 pagine_sorgente: "105-107"
 tipo_oggetto: "strumento"
@@ -42,6 +49,7 @@ Forza; forzare porte o contenitori; crea molte armi, armature medie e pesanti e 
 | Voce | Riepilogo |
 | --- | --- |
 | Strumenti da fabbro | Forza; forzare porte o contenitori; crea molte armi, armature medie e pesanti e oggetti metallici. |
+^srd-strumenti_da_fabbro-dettagli
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

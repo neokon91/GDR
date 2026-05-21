@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Sahuagin guerriero]]"]
+riferimenti_srd: ["[[SRD/Mostri/Sahuagin guerriero]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Sahuagin guerriero#^srd-sahuagin_guerriero-anfibio-limitato]]", "[[SRD/Mostri/Sahuagin guerriero#^srd-sahuagin_guerriero-frenesia-di-sangue]]", "[[SRD/Mostri/Sahuagin guerriero#^srd-sahuagin_guerriero-telepatia-con-gli-squali]]", "[[SRD/Mostri/Sahuagin guerriero#^srd-sahuagin_guerriero-multiattacco]]", "[[SRD/Mostri/Sahuagin guerriero#^srd-sahuagin_guerriero-artiglio]]", "[[SRD/Mostri/Sahuagin guerriero#^srd-sahuagin_guerriero-carica-acquatica]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Sahuagin guerriero"
 type: "Immondo"
 size: "medio"
@@ -94,23 +101,28 @@ tab: Azioni
 ### Anfibio limitato
 
 Il sahuagin può respirare in aria e in acqua, ma deve immergersi in acqua almeno una volta ogni 4 ore per evitare di soffocare.
+^srd-sahuagin_guerriero-anfibio-limitato
 
 ### Frenesia di sangue
 
 Il sahuagin dispone di vantaggio ai tiri per colpire contro ogni creatura che non possieda tutti i propri punti ferita.
+^srd-sahuagin_guerriero-frenesia-di-sangue
 
 ### Telepatia con gli squali
 
 Il sahuagin può comandare magicamente ogni squalo entro 36 metri da sé, usando una forma di telepatia speciale.
+^srd-sahuagin_guerriero-telepatia-con-gli-squali
 ## Azioni
 
 ### Multiattacco
 
 Il sahuagin effettua due attacchi Artiglio.
+^srd-sahuagin_guerriero-multiattacco
 
 ### Artiglio
 
 *Tiro per colpire in mischia:* +3, portata 1,5 m. *Colpito:* 4 (1d6 + 1) danni taglienti.
+^srd-sahuagin_guerriero-artiglio
 ````
 
 > [!info] Licenza

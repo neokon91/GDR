@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Regole/Azioni]]"]
+riferimenti_srd: ["[[SRD/Regole/Azioni]]"]
+riferimenti_regola: []
+sezioni_collegate: ["[[SRD/Regole/Azioni#Azioni principali]]", "[[SRD/Regole/Azioni#Azioni speciali]]", "[[SRD/Regole/Azioni#Abilita]]"]
+blocchi_collegati: []
+tabelle_collegate: ["[[SRD/Regole/Azioni#^srd-azioni-azioni-principali]]", "[[SRD/Regole/Azioni#^srd-azioni-abilita]]"]
+tags: ["dnd55/srd", "dnd55/regola"]
 capitolo: "Come si gioca"
 categoria_regola: "Azioni"
 pagine_sorgente: "10-11"
@@ -34,16 +41,19 @@ Quando una creatura fa qualcosa di diverso dal muoversi o comunicare, in genere 
 | Schivata | I tiri per colpire contro di te hanno svantaggio e i tuoi TS su Destrezza hanno vantaggio fino all'inizio del tuo turno successivo. |
 | Studio | Effettui una prova di Intelligenza legata a conoscenze. |
 | Utilizzo | Usi un oggetto non magico. |
+^srd-azioni-azioni-principali
 
 ## Azioni speciali
 
 ### Azioni bonus
 
 Puoi effettuare un'azione bonus solo quando una regola lo consente. Nel tuo turno puoi effettuarne una sola.
+^srd-azioni-azioni-bonus
 
 ### Reazioni
 
 Una reazione e una risposta istantanea a un innesco. Dopo averla usata, non puoi usarne un'altra fino all'inizio del tuo turno successivo.
+^srd-azioni-reazioni
 
 ## Abilita
 
@@ -67,6 +77,7 @@ Una reazione e una risposta istantanea a un innesco. Dopo averla usata, non puoi
 | Religione | Intelligenza | ricordare conoscenze su divinita, riti e culti |
 | Sopravvivenza | Saggezza | seguire tracce, orientarsi e vivere nelle terre selvagge |
 | Storia | Intelligenza | ricordare eventi, popoli e luoghi storici |
+^srd-azioni-abilita
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

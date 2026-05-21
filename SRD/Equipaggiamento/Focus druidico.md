@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Equipaggiamento/Focus druidico]]"]
+riferimenti_srd: ["[[SRD/Equipaggiamento/Focus druidico]]"]
+riferimenti_regola: []
+sezioni_collegate: ["[[SRD/Equipaggiamento/Focus druidico#Dettagli]]"]
+blocchi_collegati: []
+tabelle_collegate: ["[[SRD/Equipaggiamento/Focus druidico#^srd-focus_druidico-dettagli]]"]
+tags: ["dnd55/srd"]
 capitolo: "Equipaggiamento"
 pagine_sorgente: "107-113"
 tipo_oggetto: "equipaggiamento_avventura"
@@ -42,6 +49,7 @@ Bacchetta di tasso, bastone di legno o rametto di vischio per druidi e ranger.
 | Oggetto | Peso | Costo |
 | --- | --- | --- |
 | Focus druidico | variabile | variabile |
+^srd-focus_druidico-dettagli
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

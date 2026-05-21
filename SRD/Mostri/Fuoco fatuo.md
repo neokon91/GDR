@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Fuoco fatuo]]"]
+riferimenti_srd: ["[[SRD/Mostri/Fuoco fatuo]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Fuoco fatuo#^srd-fuoco_fatuo-effimero]]", "[[SRD/Mostri/Fuoco fatuo#^srd-fuoco_fatuo-illuminazione]]", "[[SRD/Mostri/Fuoco fatuo#^srd-fuoco_fatuo-movimento-incorporeo]]", "[[SRD/Mostri/Fuoco fatuo#^srd-fuoco_fatuo-folgore]]", "[[SRD/Mostri/Fuoco fatuo#^srd-fuoco_fatuo-assorbire-vita]]", "[[SRD/Mostri/Fuoco fatuo#^srd-fuoco_fatuo-svanire]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Fuoco fatuo"
 type: "Non morto"
 size: "minuscolo"
@@ -90,19 +97,23 @@ tab: Azioni
 ### Effimero
 
 Il fuoco fatuo non può indossare o trasportare niente.
+^srd-fuoco_fatuo-effimero
 
 ### Illuminazione
 
 Il fuoco fatuo emana luce intensa in un raggio di 6 metri e luce fioca per altri 6 metri.
+^srd-fuoco_fatuo-illuminazione
 
 ### Movimento incorporeo
 
 Il fuoco fatuo può muoversi attraverso altre creature e oggetti come se fossero terreno difficile. Se termina il suo turno all'interno di un oggetto, subisce 5 (1d10) danni da forza.
+^srd-fuoco_fatuo-movimento-incorporeo
 ## Azioni
 
 ### Folgore
 
 *Tiro per colpire in mischia:* +4, portata 1,5 m. *Colpito:* 11 (2d8 + 2) danni da fulmine.
+^srd-fuoco_fatuo-folgore
 ````
 
 > [!info] Licenza

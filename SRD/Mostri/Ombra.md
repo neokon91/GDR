@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Ombra]]"]
+riferimenti_srd: ["[[SRD/Mostri/Ombra]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Ombra#^srd-ombra-amorfo]]", "[[SRD/Mostri/Ombra#^srd-ombra-debolezza-al-sole]]", "[[SRD/Mostri/Ombra#^srd-ombra-colpo-prosciugante]]", "[[SRD/Mostri/Ombra#^srd-ombra-furtivita-d-ombra]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Ombra"
 type: "Non morto"
 size: "medio"
@@ -90,15 +97,18 @@ tab: Azioni
 ### Amorfo
 
 L'ombra può muoversi attraverso uno spazio stretto fino a 2,5 centimetri senza consumare movimento extra per farlo.
+^srd-ombra-amorfo
 
 ### Debolezza al sole
 
 Finché è esposta alla luce del sole, l'ombra subisce svantaggio alle prove con d20.
+^srd-ombra-debolezza-al-sole
 ## Azioni
 
 ### Colpo prosciugante
 
 *Tiro per colpire in mischia:* +4, portata 1,5 m *Colpito:* 5 (1d6 + 2) danni necrotici, e il punteggio di Forza del bersaglio diminuisce di 1d4. Se tale punteggio arriva a 0, il bersaglio muore. Se un umanoide viene ucciso da questo attacco, sorgerà un'ombra dal suo cadavere dopo 1d4 ore.
+^srd-ombra-colpo-prosciugante
 ````
 
 > [!info] Licenza

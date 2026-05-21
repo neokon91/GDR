@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Iena gigante]]"]
+riferimenti_srd: ["[[SRD/Mostri/Iena gigante]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Iena gigante#^srd-iena_gigante-morso]]", "[[SRD/Mostri/Iena gigante#^srd-iena_gigante-furia-1-giorno]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Iena gigante"
 type: "Bestia"
 size: "grande"
@@ -86,6 +93,7 @@ tab: Azioni
 ### Morso
 
 *Tiro per colpire in mischia:* +5, portata 1,5 m. *Colpito:* 10 (2d6 + 3) danni perforanti.
+^srd-iena_gigante-morso
 ````
 
 > [!info] Licenza

@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Lupo feroce]]"]
+riferimenti_srd: ["[[SRD/Mostri/Lupo feroce]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Lupo feroce#^srd-lupo_feroce-tattiche-del-branco]]", "[[SRD/Mostri/Lupo feroce#^srd-lupo_feroce-morso]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Lupo feroce"
 type: "Bestia"
 size: "grande"
@@ -87,11 +94,13 @@ tab: Azioni
 ### Tattiche del branco
 
 Il lupo dispone di vantaggio al tiro per colpire contro una creatura se almeno uno degli alleati dell'animale si trova entro 1,5 metri dalla creatura e non è incapacitato.
+^srd-lupo_feroce-tattiche-del-branco
 ## Azioni
 
 ### Morso
 
 *Tiro per colpire in mischia:* +5, portata 1,5 m. *Colpito:* 8 (1d10 + 3) danni perforanti. Se il bersaglio è una creatura di taglia Grande o inferiore, cade a terra prono.
+^srd-lupo_feroce-morso
 ````
 
 > [!info] Licenza

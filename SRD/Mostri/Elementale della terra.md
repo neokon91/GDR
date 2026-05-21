@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Elementale della terra]]"]
+riferimenti_srd: ["[[SRD/Mostri/Elementale della terra]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Elementale della terra#^srd-elementale_della_terra-mostro-da-assedio]]", "[[SRD/Mostri/Elementale della terra#^srd-elementale_della_terra-scivolare-nella-terra]]", "[[SRD/Mostri/Elementale della terra#^srd-elementale_della_terra-multiattacco]]", "[[SRD/Mostri/Elementale della terra#^srd-elementale_della_terra-schianto]]", "[[SRD/Mostri/Elementale della terra#^srd-elementale_della_terra-lancio-di-roccia]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Elementale della terra"
 type: "Elementale"
 size: "grande"
@@ -88,23 +95,28 @@ tab: Azioni
 ### Mostro da assedio
 
 L'elementale infligge danni doppi a oggetti e strutture.
+^srd-elementale_della_terra-mostro-da-assedio
 
 ### Scivolare nella terra
 
 L'elementale può scavare attraverso la terra e la pietra non magiche e non lavorate, senza disturbare il materiale attraverso cui si muove.
+^srd-elementale_della_terra-scivolare-nella-terra
 ## Azioni
 
 ### Multiattacco
 
 L'elementale effettua due attacchi, usando Schianto o Lancio di roccia in qualsiasi combinazione.
+^srd-elementale_della_terra-multiattacco
 
 ### Schianto
 
 *Tiro per colpire in mischia:* +8, portata 3 m. *Colpito:* 14 (2d8 + 5) danni contundenti.
+^srd-elementale_della_terra-schianto
 
 ### Lancio di roccia
 
 *Tiro per colpire a distanza:* +8, gittata 18 m. *Colpito:* 8 (1d6 + 5) danni contundenti. Se il bersaglio è una creatura di taglia Grande o inferiore, cade a terra prono.
+^srd-elementale_della_terra-lancio-di-roccia
 ````
 
 > [!info] Licenza

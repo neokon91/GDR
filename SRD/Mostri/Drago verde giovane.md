@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Drago verde giovane]]"]
+riferimenti_srd: ["[[SRD/Mostri/Drago verde giovane]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Drago verde giovane#^srd-drago_verde_giovane-anfibio]]", "[[SRD/Mostri/Drago verde giovane#^srd-drago_verde_giovane-multiattacco]]", "[[SRD/Mostri/Drago verde giovane#^srd-drago_verde_giovane-squarcio]]", "[[SRD/Mostri/Drago verde giovane#^srd-drago_verde_giovane-soffio-di-veleno-ricarica-5-6]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Drago verde giovane"
 type: "Drago (cromatico)"
 size: "grande"
@@ -94,19 +101,23 @@ tab: Azioni
 ### Anfibio
 
 Il drago può respirare in aria e in acqua.
+^srd-drago_verde_giovane-anfibio
 ## Azioni
 
 ### Multiattacco
 
 Il drago effettua tre attacchi Squarcio.
+^srd-drago_verde_giovane-multiattacco
 
 ### Squarcio
 
 *Tiro per colpire in mischia:* +7, portata 3 m. *Colpito:* 11 (2d6 + 4) danni taglienti più 7 (2d6) danni da veleno.
+^srd-drago_verde_giovane-squarcio
 
 ### Soffio di veleno (ricarica 5-6)
 
 *Tiro salvezza su Costituzione:* CD 14, tutte le creature in un cono di 9 metri. *Fallimento:* 42 (12d6) danni da veleno. *Successo:* danni dimezzati.
+^srd-drago_verde_giovane-soffio-di-veleno-ricarica-5-6
 ````
 
 > [!info] Licenza

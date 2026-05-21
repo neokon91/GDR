@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Vrock]]"]
+riferimenti_srd: ["[[SRD/Mostri/Vrock]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Vrock#^srd-vrock-resistenza-alla-magia]]", "[[SRD/Mostri/Vrock#^srd-vrock-ristoro-demoniaco]]", "[[SRD/Mostri/Vrock#^srd-vrock-multiattacco]]", "[[SRD/Mostri/Vrock#^srd-vrock-sbrandellare]]", "[[SRD/Mostri/Vrock#^srd-vrock-spore-ricarica-6]]", "[[SRD/Mostri/Vrock#^srd-vrock-stridio-stordente-1-giorno]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Vrock"
 type: "Immondo (demone)"
 size: "grande"
@@ -93,27 +100,33 @@ tab: Azioni
 ### Resistenza alla magia
 
 Il vrock dispone di vantaggio ai tiri salvezza contro incantesimi e altri effetti magici.
+^srd-vrock-resistenza-alla-magia
 
 ### Ristoro demoniaco
 
 Se il vrock muore al di fuori dell'Abisso, il suo corpo si dissolve diventando icore ed esso ne acquisisce uno nuovo all'istante, tornando in vita con tutti i suoi punti ferita da qualche parte nell'Abisso.
+^srd-vrock-ristoro-demoniaco
 ## Azioni
 
 ### Multiattacco
 
 Il vrock effettua due attacchi Sbrandellare.
+^srd-vrock-multiattacco
 
 ### Sbrandellare
 
 *Tiro per colpire in mischia:* +6, portata 1,5 m *Colpito:* 10 (2d6 + 3) danni perforanti più 10 (3d6) danni da veleno.
+^srd-vrock-sbrandellare
 
 ### Spore (ricarica 6)
 
 *Tiro salvezza su Costituzione:* CD 15, tutte le creature in un'emanazione di 6 metri di cui il vrock è il punto di origine. *Fallimento:* il bersaglio è avvelenato e ripete il tiro salvezza alla fine del suo turno successivo e, se lo supera, l'effetto svanisce. Finché è avvelenato, il bersaglio subisce 5 (1d10) danni da veleno all'inizio di ogni suo turno. L'effetto termina anticipatamente svuotandogli addosso un'ampolla di acqua santa.
+^srd-vrock-spore-ricarica-6
 
 ### Stridio stordente (1/giorno)
 
 *Tiro salvezza su Costituzione:* CD 15, tutte le creature in un'emanazione di 6 metri di cui il vrock è il punto di origine (i demoni superano automaticamente il tiro). *Fallimento:* 10 (3d6) danni da tuono, e il bersaglio è stordito fino al termine del turno successivo del vrock.
+^srd-vrock-stridio-stordente-1-giorno
 ````
 
 > [!info] Licenza

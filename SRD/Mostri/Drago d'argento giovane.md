@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Drago d'argento giovane]]"]
+riferimenti_srd: ["[[SRD/Mostri/Drago d'argento giovane]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Drago d'argento giovane#^srd-drago_d_argento_giovane-multiattacco]]", "[[SRD/Mostri/Drago d'argento giovane#^srd-drago_d_argento_giovane-squarcio]]", "[[SRD/Mostri/Drago d'argento giovane#^srd-drago_d_argento_giovane-soffio-di-freddo-ricarica-5-6]]", "[[SRD/Mostri/Drago d'argento giovane#^srd-drago_d_argento_giovane-soffio-paralizzante]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Drago d'argento giovane"
 type: "Drago (metallico)"
 size: "grande"
@@ -94,14 +101,17 @@ tab: Azioni
 ### Multiattacco
 
 Il drago effettua tre attacchi Squarcio. Può sostituire un attacco con un utilizzo di Soffio paralizzante.
+^srd-drago_d_argento_giovane-multiattacco
 
 ### Squarcio
 
 *Tiro per colpire in mischia:* +10, portata 3 m. *Colpito:* 15 (2d8 + 6) danni taglienti.
+^srd-drago_d_argento_giovane-squarcio
 
 ### Soffio di freddo (ricarica 5-6)
 
 *Tiro salvezza su Costituzione:* CD 17, tutte le creature in un cono di 9 metri. *Fallimento:* 49 (11d8) danni da freddo. *Successo:* danni dimezzati.
+^srd-drago_d_argento_giovane-soffio-di-freddo-ricarica-5-6
 
 ### Soffio paralizzante
 
@@ -110,6 +120,7 @@ Il drago effettua tre attacchi Squarcio. Può sostituire un attacco con un utili
 *Primo fallimento:* il bersaglio è incapacitato fino al termine del proprio turno successivo. A quel punto, ripete il tiro salvezza.
 
 *Secondo fallimento:* il bersaglio è paralizzato e ripete il tiro salvezza alla fine di ogni suo turno e, se lo supera, l'effetto svanisce. Dopo 1 minuto, il tiro viene superato automaticamente.
+^srd-drago_d_argento_giovane-soffio-paralizzante
 ````
 
 > [!info] Licenza

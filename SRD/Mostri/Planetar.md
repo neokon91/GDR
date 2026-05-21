@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Planetar]]"]
+riferimenti_srd: ["[[SRD/Mostri/Planetar]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Planetar#^srd-planetar-consapevolezza-divina]]", "[[SRD/Mostri/Planetar#^srd-planetar-resistenza-alla-magia]]", "[[SRD/Mostri/Planetar#^srd-planetar-ristoro-glorioso]]", "[[SRD/Mostri/Planetar#^srd-planetar-multiattacco]]", "[[SRD/Mostri/Planetar#^srd-planetar-spada-radiosa]]", "[[SRD/Mostri/Planetar#^srd-planetar-conflagrazione-divina]]", "[[SRD/Mostri/Planetar#^srd-planetar-incantesimi]]", "[[SRD/Mostri/Planetar#^srd-planetar-aiuto-divino-2-giorno]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Planetar"
 type: "Celestiale (angelo)"
 size: "grande"
@@ -102,31 +109,38 @@ tab: Azioni
 ### Consapevolezza divina
 
 Il planetar sa riconoscere le menzogne.
+^srd-planetar-consapevolezza-divina
 
 ### Resistenza alla magia
 
 Il planetar dispone di vantaggio ai tiri salvezza contro incantesimi e altri effetti magici.
+^srd-planetar-resistenza-alla-magia
 
 ### Ristoro glorioso
 
 Se il planetar muore al di fuori di Monte Celestia, il suo corpo scompare e ne acquisisce uno nuovo all'istante, tornando in vita con tutti i suoi punti ferita da qualche parte a Monte Celestia.
+^srd-planetar-ristoro-glorioso
 ## Azioni
 
 ### Multiattacco
 
 Il planetar effettua tre attacchi Spada radiosa oppure usa Conflagrazione divina due volte.
+^srd-planetar-multiattacco
 
 ### Spada radiosa
 
 *Tiro per colpire in mischia:* +12, portata 3 m. *Colpito:* 14 (2d6 + 7) danni taglienti più 18 (4d8) danni radiosi.
+^srd-planetar-spada-radiosa
 
 ### Conflagrazione divina
 
 *Tiro salvezza su Destrezza:* CD 20, tutti i nemici in una sfera di 6 metri di raggio centrata su un punto che il planetar è in grado di vedere entro 36 metri. *Fallimento:* 24 (7d6) danni radiosi. *Successo:* danni dimezzati.
+^srd-planetar-conflagrazione-divina
 
 ### Incantesimi
 
 Il planetar lancia uno dei seguenti incantesimi, senza bisogno di componenti materiali, utilizzando Carisma come caratteristica da incantatore (CD del tiro salvezza sull'incantesimo 20): A volontà: Individuazione del bene e del male1/giorno ciascuno: Comunione, controllare tempo atmosferico, dissolvi il bene e il male, rianimare morti
+^srd-planetar-incantesimi
 ````
 
 > [!info] Licenza

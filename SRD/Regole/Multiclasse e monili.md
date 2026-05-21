@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Regole/Multiclasse e monili]]"]
+riferimenti_srd: ["[[SRD/Regole/Multiclasse e monili]]"]
+riferimenti_regola: []
+sezioni_collegate: ["[[SRD/Regole/Multiclasse e monili#Regole multiclasse]]", "[[SRD/Regole/Multiclasse e monili#Uso dei monili]]", "[[SRD/Regole/Multiclasse e monili#Incantatore multiclasse: slot incantesimo 1-9]]", "[[SRD/Regole/Multiclasse e monili#Monili]]"]
+blocchi_collegati: []
+tabelle_collegate: ["[[SRD/Regole/Multiclasse e monili#^srd-multiclasse_e_monili-regole-multiclasse]]", "[[SRD/Regole/Multiclasse e monili#^srd-multiclasse_e_monili-uso-dei-monili]]", "[[SRD/Regole/Multiclasse e monili#^srd-multiclasse_e_monili-incantatore-multiclasse-slot-incantesimo-1-9]]", "[[SRD/Regole/Multiclasse e monili#^srd-multiclasse_e_monili-monili]]"]
+tags: ["dnd55/srd", "dnd55/regola"]
 capitolo: "Creazione del personaggio"
 categoria_regola: "Creazione personaggio"
 pagine_sorgente: "27-31"
@@ -31,6 +38,7 @@ Il multiclasse consente di acquisire livelli in piu classi. I monili sono piccol
 | Attacco extra | Privilegi Attacco extra da piu classi non sono cumulativi, salvo eccezioni specifiche. |
 | Incantesimi | Gli incantesimi preparati si determinano per classe; gli slot combinano livelli da incantatore secondo le regole multiclasse. |
 | Magia del patto | Slot da Magia del patto e Incantesimi possono essere usati reciprocamente per lanciare incantesimi preparati appropriati. |
+^srd-multiclasse_e_monili-regole-multiclasse
 
 ## Uso dei monili
 
@@ -39,6 +47,7 @@ Il multiclasse consente di acquisire livelli in piu classi. I monili sono piccol
 | Uso | Quando crei il personaggio puoi tirare una volta sulla tabella Monili. |
 | Funzione | Un monile e un oggetto semplice e minuscolo con un sottile velo di mistero. |
 | GM | Il GM puo usare la tabella per arredare dungeon o riempire le tasche di una creatura. |
+^srd-multiclasse_e_monili-uso-dei-monili
 
 ## Incantatore multiclasse: slot incantesimo 1-9
 
@@ -64,6 +73,7 @@ Il multiclasse consente di acquisire livelli in piu classi. I monili sono piccol
 | 18 | 4 | 3 | 3 | 3 | 3 | 1 | 1 | 1 | 1 |
 | 19 | 4 | 3 | 3 | 3 | 3 | 2 | 1 | 1 | 1 |
 | 20 | 4 | 3 | 3 | 3 | 3 | 2 | 2 | 1 | 1 |
+^srd-multiclasse_e_monili-incantatore-multiclasse-slot-incantesimo-1-9
 
 ## Monili
 
@@ -169,6 +179,7 @@ Il multiclasse consente di acquisire livelli in piu classi. I monili sono piccol
 | 98 | Un vaso di vetro pieno di lardo con un'etichetta che recita: "Grasso di Grifone" |
 | 99 | Uno scrigno di legno con il fondo di ceramica che contiene un verme vivo con una testa a ogni estremità del suo corpo |
 | 00 | Un'urna di metallo contenente le ceneri di un eroe |
+^srd-multiclasse_e_monili-monili
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

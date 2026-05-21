@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Guardia]]"]
+riferimenti_srd: ["[[SRD/Mostri/Guardia]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Guardia#^srd-guardia-lancia]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Guardia"
 type: "Umanoide"
 size: "medio o piccolo"
@@ -84,6 +91,7 @@ tab: Azioni
 ### Lancia
 
 *Tiro per colpire in mischia o a distanza:* +3, portata 1,5 m o gittata 6/18 m. *Colpito:* 4 (1d6 + 1) danni perforanti.
+^srd-guardia-lancia
 ````
 
 > [!info] Licenza

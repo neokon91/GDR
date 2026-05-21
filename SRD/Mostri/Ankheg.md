@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Ankheg]]"]
+riferimenti_srd: ["[[SRD/Mostri/Ankheg]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Ankheg#^srd-ankheg-scavatore-di-tunnel]]", "[[SRD/Mostri/Ankheg#^srd-ankheg-morso]]", "[[SRD/Mostri/Ankheg#^srd-ankheg-spruzzo-acido-ricarica-6]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Ankheg"
 type: "Mostruosità"
 size: "grande"
@@ -84,15 +91,18 @@ tab: Azioni
 ### Scavatore di tunnel
 
 L'ankheg può scavare nella roccia a metà della sua velocità di scavo e lascia dietro di sé un tunnel del diametro di 3 metri.
+^srd-ankheg-scavatore-di-tunnel
 ## Azioni
 
 ### Morso
 
 *Tiro per colpire in mischia:* +5 (con vantaggio se il bersaglio è afferrato dall'ankheg), portata 1,5 m. *Colpito:* 10 (2d6 + 3) danni taglienti più 3 (1d6) danni da acido. Se il bersaglio è una creatura di taglia Grande o inferiore, è afferrato (CD 13 per sfuggire).
+^srd-ankheg-morso
 
 ### Spruzzo acido (ricarica 6)
 
 *Tiro salvezza su Destrezza:* CD 12, tutte le creature in una linea lunga 9 metri e larga 1,5 metri. *Fallimento:* 14 (4d6) danni da acido. *Successo:* danni dimezzati.
+^srd-ankheg-spruzzo-acido-ricarica-6
 ````
 
 > [!info] Licenza

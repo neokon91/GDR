@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Anchilosauro]]"]
+riferimenti_srd: ["[[SRD/Mostri/Anchilosauro]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Anchilosauro#^srd-anchilosauro-multiattacco]]", "[[SRD/Mostri/Anchilosauro#^srd-anchilosauro-coda]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Anchilosauro"
 type: "Bestia (dinosauro)"
 size: "enorme"
@@ -83,10 +90,12 @@ tab: Azioni
 ### Multiattacco
 
 L'anchilosauro effettua due attacchi Coda.
+^srd-anchilosauro-multiattacco
 
 ### Coda
 
 *Tiro per colpire in mischia:* +6, portata 3 m. *Colpito:* 9 (1d10 + 4) danni contundenti. Se il bersaglio è una creatura di taglia Enorme o inferiore, cade a terra prono.
+^srd-anchilosauro-coda
 ````
 
 > [!info] Licenza

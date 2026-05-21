@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Equipaggiamento/Pasto Aristocratico]]"]
+riferimenti_srd: ["[[SRD/Equipaggiamento/Pasto Aristocratico]]"]
+riferimenti_regola: []
+sezioni_collegate: ["[[SRD/Equipaggiamento/Pasto Aristocratico#Dettagli]]"]
+blocchi_collegati: []
+tabelle_collegate: ["[[SRD/Equipaggiamento/Pasto Aristocratico#^srd-pasto_aristocratico-dettagli]]"]
+tags: ["dnd55/srd"]
 capitolo: "Equipaggiamento"
 pagine_sorgente: "114-115"
 tipo_oggetto: "vitto_alloggio"
@@ -42,6 +49,7 @@ Pasto (Aristocratico): 6 ma.
 | Oggetto | Dettaglio | Costo |
 | --- | --- | --- |
 | Pasto | Aristocratico | 6 ma |
+^srd-pasto_aristocratico-dettagli
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

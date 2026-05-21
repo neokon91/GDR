@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Tarrasque]]"]
+riferimenti_srd: ["[[SRD/Mostri/Tarrasque]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Tarrasque#^srd-tarrasque-carapace-riflettente]]", "[[SRD/Mostri/Tarrasque#^srd-tarrasque-mostro-da-assedio]]", "[[SRD/Mostri/Tarrasque#^srd-tarrasque-resistenza-alla-magia]]", "[[SRD/Mostri/Tarrasque#^srd-tarrasque-resistenza-leggendaria-6-giorno]]", "[[SRD/Mostri/Tarrasque#^srd-tarrasque-multiattacco]]", "[[SRD/Mostri/Tarrasque#^srd-tarrasque-artiglio]]", "[[SRD/Mostri/Tarrasque#^srd-tarrasque-coda]]", "[[SRD/Mostri/Tarrasque#^srd-tarrasque-morso]]", "[[SRD/Mostri/Tarrasque#^srd-tarrasque-ruggito-tonante-ricarica-5-6]]", "[[SRD/Mostri/Tarrasque#^srd-tarrasque-inghiottire]]", "[[SRD/Mostri/Tarrasque#^srd-tarrasque-assalto-brutale]]", "[[SRD/Mostri/Tarrasque#^srd-tarrasque-movimento-sismico]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Tarrasque"
 type: "Mostruosità (titano)"
 size: "mastodonica"
@@ -110,39 +117,48 @@ tab: Azioni
 ### Carapace riflettente
 
 Se il tarrasque è bersagliato da un incantesimo dardo incantato o un incantesimo che richiede un tiro per colpire a distanza, tira 1d6. Con un risultato di 1-5, il tarrasque non subisce alcun effetto. Con un risultato di 6, il tarrasque non subisce alcun effetto e riflette l'incantesimo contro l'incantatore, rendendolo il suo bersaglio.
+^srd-tarrasque-carapace-riflettente
 
 ### Mostro da assedio
 
 Il tarrasque infligge danni doppi a oggetti e strutture.
+^srd-tarrasque-mostro-da-assedio
 
 ### Resistenza alla magia
 
 Il tarrasque dispone di vantaggio ai tiri salvezza contro incantesimi e altri effetti magici.
+^srd-tarrasque-resistenza-alla-magia
 
 ### Resistenza leggendaria (6/giorno)
 
 Se il tarrasque fallisce un tiro salvezza, può scegliere di superarlo comunque.
+^srd-tarrasque-resistenza-leggendaria-6-giorno
 ## Azioni
 
 ### Multiattacco
 
 Il tarrasque effettua un attacco Morso e altri tre attacchi, usando Artiglio o Coda in qualsiasi combinazione.
+^srd-tarrasque-multiattacco
 
 ### Artiglio
 
 *Tiro per colpire in mischia:* +19, portata 4,5 m. *Colpito:* 28 (4d8 + 10) danni taglienti.
+^srd-tarrasque-artiglio
 
 ### Coda
 
 *Tiro per colpire in mischia:* +19, portata 9 m. *Colpito:* 23 (3d8 + 10) danni contundenti. Se il bersaglio è una creatura di taglia Enorme o inferiore, cade a terra prono.
+^srd-tarrasque-coda
 
 ### Morso
 
 *Tiro per colpire in mischia:* +19, portata 4,5 m. *Colpito:* 36 (4d12 + 10) danni perforanti, e il bersaglio è afferrato (CD 20 per sfuggire). Finché la presa perdura, il bersaglio è trattenuto e non può teletrasportarsi.
+^srd-tarrasque-morso
 
 ### Ruggito tonante (ricarica 5-6)
 
 *Tiro salvezza su Costituzione:* CD 27, ogni creatura e oggetto che non sia indossato o trasportato in un cono di 45 metri. *Fallimento:* 78 (12d12) danni da tuono, e il bersaglio è assordato e spaventato fino al termine del proprio turno successivo. *Successo:* danni dimezzati.
+^srd-tarrasque-ruggito-tonante-ricarica-5-6
 ## Azioni Leggendarie
 
 ## Opzioni
@@ -150,10 +166,12 @@ Il tarrasque effettua un attacco Morso e altri tre attacchi, usando Artiglio o C
 ### Assalto brutale
 
 Il tarrasque si muove fino a metà della sua velocità ed effettua un attacco Artiglio e un attacco Coda.
+^srd-tarrasque-assalto-brutale
 
 ### Movimento sismico
 
 Il tarrasque si muove fino alla sua velocità massima. Alla fine di questo movimento, crea un'onda d'urto istantanea in un'emanazione di 18 metri di cui il tarrasque è il punto di origine. Le creature in quell'area perdono la concentrazione e, se sono di taglia Media o inferiore, cadono a terra prone. Il tarrasque non può ripetere quest'azione fino all'inizio del proprio turno successivo.
+^srd-tarrasque-movimento-sismico
 ````
 
 > [!info] Licenza

@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Incantesimi/Tocco del vampiro]]"]
+riferimenti_srd: ["[[SRD/Incantesimi/Tocco del vampiro]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Incantesimi/Tocco del vampiro#^srd-tocco_del_vampiro-utilizzo-di-uno-slot-incantesimo-di-livello-superiore]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/incantesimo"]
 livello: 3
 scuola: "Necromanzia"
 classi: ["stregone", "mago", "warlock"]
@@ -38,6 +45,7 @@ Fino al termine dell'incantesimo, come azione di Magia, l'incantatore può effet
 ### Utilizzo di uno slot incantesimo di livello superiore
 
 I danni aumentano di 1d6 per ogni slot di livello superiore al 3º.
+^srd-tocco_del_vampiro-utilizzo-di-uno-slot-incantesimo-di-livello-superiore
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

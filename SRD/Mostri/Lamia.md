@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Lamia]]"]
+riferimenti_srd: ["[[SRD/Mostri/Lamia]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Lamia#^srd-lamia-multiattacco]]", "[[SRD/Mostri/Lamia#^srd-lamia-artiglio]]", "[[SRD/Mostri/Lamia#^srd-lamia-incantesimi]]", "[[SRD/Mostri/Lamia#^srd-lamia-tocco-corruttore]]", "[[SRD/Mostri/Lamia#^srd-lamia-balzo]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Lamia"
 type: "Immondo"
 size: "grande"
@@ -94,18 +101,22 @@ tab: Azioni
 ### Multiattacco
 
 Il lamia effettua due attacchi Artiglio. Può sostituire un attacco con un utilizzo di Tocco corruttore.
+^srd-lamia-multiattacco
 
 ### Artiglio
 
 *Tiro per colpire in mischia:* +5, portata 1,5 m *Colpito:* 7 (1d8 + 3) danni taglienti più 7 (2d6) danni psichici.
+^srd-lamia-artiglio
 
 ### Incantesimi
 
 Il lamia lancia uno dei seguenti incantesimi, senza bisogno di componenti materiali, utilizzando Carisma come caratteristica da incantatore (CD del tiro salvezza sull'incantesimo 13): 1/giorno ciascuno: Costrizione, immagine maggiore, scrutare A volontà: Camuffare se stesso (può apparire come un bipede di taglia Grande o Media), illusione minore
+^srd-lamia-incantesimi
 
 ### Tocco corruttore
 
 *Tiro salvezza su Saggezza:* CD 13, una creatura che il lamia è in grado di vedere entro 1,5 metri. *Fallimento:* 13 (3d8) danni psichici, e il bersaglio è maledetto per 1 ora. Finché la maledizione perdura, il bersaglio è affascinato e avvelenato.
+^srd-lamia-tocco-corruttore
 ````
 
 > [!info] Licenza

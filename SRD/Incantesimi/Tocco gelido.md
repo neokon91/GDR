@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Incantesimi/Tocco gelido]]"]
+riferimenti_srd: ["[[SRD/Incantesimi/Tocco gelido]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Incantesimi/Tocco gelido#^srd-tocco_gelido-trucchetto-potenziato]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/incantesimo"]
 livello: 0
 scuola: "Necromanzia"
 classi: ["mago", "stregone", "warlock"]
@@ -36,6 +43,7 @@ Incanalando un flusso di gelo sepolcrale, l'incantatore effettua un attacco con 
 ### Trucchetto potenziato
 
 I danni aumentano di 1d10 quando l'incantatore raggiunge il 5º livello (2d10), l'11º livello (3d10) e il 17º livello (4d10).
+^srd-tocco_gelido-trucchetto-potenziato
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

@@ -859,6 +859,20 @@ profiles:
       default: []
     - key: encounter_creatures
       value: encounter_creatures
+    - key: fonti
+      value: fonti
+    - key: riferimenti_srd
+      value: riferimenti_srd
+    - key: riferimenti_regola
+      value: riferimenti_regola
+    - key: sezioni_collegate
+      value: sezioni_collegate
+    - key: blocchi_collegati
+      value: blocchi_collegati
+    - key: tabelle_collegate
+      value: tabelle_collegate
+    - key: tags
+      value: tags
   missione:
     integrations:
       fileclass: z.fileclass/missione.md
@@ -983,6 +997,20 @@ profiles:
     - key: fc-end
       default: ''
       plugin: calendarium
+    - key: fonti
+      value: fonti
+    - key: riferimenti_srd
+      value: riferimenti_srd
+    - key: riferimenti_regola
+      value: riferimenti_regola
+    - key: sezioni_collegate
+      value: sezioni_collegate
+    - key: blocchi_collegati
+      value: blocchi_collegati
+    - key: tabelle_collegate
+      value: tabelle_collegate
+    - key: tags
+      value: tags
   tracciato:
     integrations:
       fileclass: z.fileclass/tracciato.md
@@ -1999,6 +2027,20 @@ profiles:
       value: legendary_actions
     - key: lair_actions
       value: lair_actions
+    - key: fonti
+      value: fonti
+    - key: riferimenti_srd
+      value: riferimenti_srd
+    - key: riferimenti_regola
+      value: riferimenti_regola
+    - key: sezioni_collegate
+      value: sezioni_collegate
+    - key: blocchi_collegati
+      value: blocchi_collegati
+    - key: tabelle_collegate
+      value: tabelle_collegate
+    - key: tags
+      value: tags
   culto:
     sample_values: []
     fields:
@@ -2425,6 +2467,20 @@ profiles:
       value: aggiorna_tracciato
     - key: archivia_appunto
       value: archivia_appunto
+    - key: fonti
+      value: fonti
+    - key: riferimenti_srd
+      value: riferimenti_srd
+    - key: riferimenti_regola
+      value: riferimenti_regola
+    - key: sezioni_collegate
+      value: sezioni_collegate
+    - key: blocchi_collegati
+      value: blocchi_collegati
+    - key: tabelle_collegate
+      value: tabelle_collegate
+    - key: tags
+      value: tags
   mappa:
     sample_values: []
     fields:
@@ -2637,6 +2693,20 @@ profiles:
       value: relazioni_chiave
     - key: canonico
       value: canonico
+    - key: fonti
+      value: fonti
+    - key: riferimenti_srd
+      value: riferimenti_srd
+    - key: riferimenti_regola
+      value: riferimenti_regola
+    - key: sezioni_collegate
+      value: sezioni_collegate
+    - key: blocchi_collegati
+      value: blocchi_collegati
+    - key: tabelle_collegate
+      value: tabelle_collegate
+    - key: tags
+      value: tags
   oggetto_magico:
     sample_values: []
     fields:
@@ -2680,6 +2750,20 @@ profiles:
       value: connessioni
     - key: sessioni
       value: sessioni
+    - key: fonti
+      value: fonti
+    - key: riferimenti_srd
+      value: riferimenti_srd
+    - key: riferimenti_regola
+      value: riferimenti_regola
+    - key: sezioni_collegate
+      value: sezioni_collegate
+    - key: blocchi_collegati
+      value: blocchi_collegati
+    - key: tabelle_collegate
+      value: tabelle_collegate
+    - key: tags
+      value: tags
   incantesimo:
     sample_values: []
     fields:
@@ -2725,6 +2809,20 @@ profiles:
       value: player_safe
     - key: connessioni
       value: connessioni
+    - key: fonti
+      value: fonti
+    - key: riferimenti_srd
+      value: riferimenti_srd
+    - key: riferimenti_regola
+      value: riferimenti_regola
+    - key: sezioni_collegate
+      value: sezioni_collegate
+    - key: blocchi_collegati
+      value: blocchi_collegati
+    - key: tabelle_collegate
+      value: tabelle_collegate
+    - key: tags
+      value: tags
   classe_dnd:
     sample_values: []
     fields:
@@ -2764,6 +2862,20 @@ profiles:
       value: uso_al_tavolo
     - key: player_safe
       value: player_safe
+    - key: fonti
+      value: fonti
+    - key: riferimenti_srd
+      value: riferimenti_srd
+    - key: riferimenti_regola
+      value: riferimenti_regola
+    - key: sezioni_collegate
+      value: sezioni_collegate
+    - key: blocchi_collegati
+      value: blocchi_collegati
+    - key: tabelle_collegate
+      value: tabelle_collegate
+    - key: tags
+      value: tags
   specie_dnd:
     sample_values: []
     fields:
@@ -2797,6 +2909,20 @@ profiles:
       value: uso_al_tavolo
     - key: player_safe
       value: player_safe
+    - key: fonti
+      value: fonti
+    - key: riferimenti_srd
+      value: riferimenti_srd
+    - key: riferimenti_regola
+      value: riferimenti_regola
+    - key: sezioni_collegate
+      value: sezioni_collegate
+    - key: blocchi_collegati
+      value: blocchi_collegati
+    - key: tabelle_collegate
+      value: tabelle_collegate
+    - key: tags
+      value: tags
   background_dnd:
     sample_values: []
     fields:
@@ -2832,6 +2958,20 @@ profiles:
       value: uso_al_tavolo
     - key: player_safe
       value: player_safe
+    - key: fonti
+      value: fonti
+    - key: riferimenti_srd
+      value: riferimenti_srd
+    - key: riferimenti_regola
+      value: riferimenti_regola
+    - key: sezioni_collegate
+      value: sezioni_collegate
+    - key: blocchi_collegati
+      value: blocchi_collegati
+    - key: tabelle_collegate
+      value: tabelle_collegate
+    - key: tags
+      value: tags
   talento_dnd:
     sample_values: []
     fields:
@@ -2863,6 +3003,20 @@ profiles:
       value: uso_al_tavolo
     - key: player_safe
       value: player_safe
+    - key: fonti
+      value: fonti
+    - key: riferimenti_srd
+      value: riferimenti_srd
+    - key: riferimenti_regola
+      value: riferimenti_regola
+    - key: sezioni_collegate
+      value: sezioni_collegate
+    - key: blocchi_collegati
+      value: blocchi_collegati
+    - key: tabelle_collegate
+      value: tabelle_collegate
+    - key: tags
+      value: tags
   regola_dnd:
     sample_values: []
     fields:
@@ -2888,6 +3042,20 @@ profiles:
       value: uso_al_tavolo
     - key: player_safe
       value: player_safe
+    - key: fonti
+      value: fonti
+    - key: riferimenti_srd
+      value: riferimenti_srd
+    - key: riferimenti_regola
+      value: riferimenti_regola
+    - key: sezioni_collegate
+      value: sezioni_collegate
+    - key: blocchi_collegati
+      value: blocchi_collegati
+    - key: tabelle_collegate
+      value: tabelle_collegate
+    - key: tags
+      value: tags
   trappola:
     sample_values: []
     fields:
@@ -2921,6 +3089,20 @@ profiles:
       value: uso_al_tavolo
     - key: player_safe
       value: player_safe
+    - key: fonti
+      value: fonti
+    - key: riferimenti_srd
+      value: riferimenti_srd
+    - key: riferimenti_regola
+      value: riferimenti_regola
+    - key: sezioni_collegate
+      value: sezioni_collegate
+    - key: blocchi_collegati
+      value: blocchi_collegati
+    - key: tabelle_collegate
+      value: tabelle_collegate
+    - key: tags
+      value: tags
   pericolo_ambientale:
     sample_values: []
     fields:
@@ -2954,6 +3136,20 @@ profiles:
       value: uso_al_tavolo
     - key: player_safe
       value: player_safe
+    - key: fonti
+      value: fonti
+    - key: riferimenti_srd
+      value: riferimenti_srd
+    - key: riferimenti_regola
+      value: riferimenti_regola
+    - key: sezioni_collegate
+      value: sezioni_collegate
+    - key: blocchi_collegati
+      value: blocchi_collegati
+    - key: tabelle_collegate
+      value: tabelle_collegate
+    - key: tags
+      value: tags
   tesoro:
     sample_values: []
     fields:
@@ -2983,6 +3179,20 @@ profiles:
       value: gancio
     - key: player_safe
       value: player_safe
+    - key: fonti
+      value: fonti
+    - key: riferimenti_srd
+      value: riferimenti_srd
+    - key: riferimenti_regola
+      value: riferimenti_regola
+    - key: sezioni_collegate
+      value: sezioni_collegate
+    - key: blocchi_collegati
+      value: blocchi_collegati
+    - key: tabelle_collegate
+      value: tabelle_collegate
+    - key: tags
+      value: tags
   pg:
     sample_values: []
     fields:
@@ -3319,6 +3529,20 @@ profiles:
       value: prossima_apertura
     - key: output_sessione
       value: output_sessione
+    - key: fonti
+      value: fonti
+    - key: riferimenti_srd
+      value: riferimenti_srd
+    - key: riferimenti_regola
+      value: riferimenti_regola
+    - key: sezioni_collegate
+      value: sezioni_collegate
+    - key: blocchi_collegati
+      value: blocchi_collegati
+    - key: tabelle_collegate
+      value: tabelle_collegate
+    - key: tags
+      value: tags
   world_entity:
     sample_values: []
     fields:

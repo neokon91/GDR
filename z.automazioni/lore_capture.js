@@ -1,5 +1,7 @@
 async function lore_capture(tp, routeOptions = {}) {
     const helpers = tp.user.helpers;
+    const profile = await helpers.runtimeProfile("lore_capture");
+    const prompts = profile.prompts ?? {};
     const route = Object.keys(routeOptions).length ? routeOptions : helpers.consumeRoute();
     const activeContext = helpers.getActiveSessionContext();
     const name = await helpers.promptRequired(tp, "Titolo evento o appunto lore", route.defaultName ?? "Evento emerso");
@@ -32,6 +34,7 @@ async function lore_capture(tp, routeOptions = {}) {
     const propagaA = selectedType?.id === "conseguenza"
         ? await helpers.chooseConnections(tp, "Dove deve propagarsi", context)
         : [];
+    const fontiGranulari = await helpers.promptWikilinkTargets(tp, prompts.fonti ?? "Fonti granulari dell'appunto (opzionale: Nota#Sezione o Nota#^blocco)");
     const calendario = await helpers.promptCalendar(tp, { world: mondo });
 
     const created = await helpers.moveNote(tp, "Inbox", name);
@@ -82,7 +85,14 @@ async function lore_capture(tp, routeOptions = {}) {
         aggiorna_luogo: 'false',
         aggiorna_missione: 'false',
         aggiorna_tracciato: 'false',
-        archivia_appunto: 'false'
+        archivia_appunto: 'false',
+        fonti: helpers.inlineYamlWikilinkList([...fontiGranulari, ...sessioni, ...collegamenti]),
+        riferimenti_srd: '[]',
+        riferimenti_regola: '[]',
+        sezioni_collegate: '[]',
+        blocchi_collegati: '[]',
+        tabelle_collegate: '[]',
+        tags: helpers.inlineYamlTextList(["mondo/lore", selectedType?.id === "conseguenza" ? "gdr/da-propagare" : "gdr/rumor"])
     });
 }
 

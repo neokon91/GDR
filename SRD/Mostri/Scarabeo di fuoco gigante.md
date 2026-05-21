@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Scarabeo di fuoco gigante]]"]
+riferimenti_srd: ["[[SRD/Mostri/Scarabeo di fuoco gigante]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Scarabeo di fuoco gigante#^srd-scarabeo_di_fuoco_gigante-illuminazione]]", "[[SRD/Mostri/Scarabeo di fuoco gigante#^srd-scarabeo_di_fuoco_gigante-morso]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Scarabeo di fuoco gigante"
 type: "Bestia"
 size: "piccola"
@@ -82,11 +89,13 @@ tab: Azioni
 ### Illuminazione
 
 Lo scarabeo proietta luce intensa in un raggio di 3 metri e luce fioca per altri 3 metri.
+^srd-scarabeo_di_fuoco_gigante-illuminazione
 ## Azioni
 
 ### Morso
 
 *Tiro per colpire in mischia:* +1, portata 1,5 m. *Colpito:* 1 danno da fuoco.
+^srd-scarabeo_di_fuoco_gigante-morso
 ````
 
 > [!info] Licenza

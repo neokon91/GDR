@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Spettro]]"]
+riferimenti_srd: ["[[SRD/Mostri/Spettro]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Spettro#^srd-spettro-movimento-incorporeo]]", "[[SRD/Mostri/Spettro#^srd-spettro-sensibilita-al-sole]]", "[[SRD/Mostri/Spettro#^srd-spettro-risucchio-di-vita]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Spettro"
 type: "Non morto"
 size: "medio"
@@ -84,15 +91,18 @@ tab: Azioni
 ### Movimento incorporeo
 
 Lo spettro può muoversi attraverso altre creature e oggetti come se fossero terreno difficile. Se termina il suo turno all'interno di un oggetto, subisce 5 (1d10) danni da forza.
+^srd-spettro-movimento-incorporeo
 
 ### Sensibilità al sole
 
 Finché è esposto alla luce del sole, lo spettro subisce svantaggio alle prove di caratteristica e ai tiri per colpire.
+^srd-spettro-sensibilita-al-sole
 ## Azioni
 
 ### Risucchio di vita
 
 *Tiro per colpire in mischia:* +4, portata 1,5 m *Colpito:* 7 (2d6) danni necrotici. Se il bersaglio è una creatura, i suoi punti ferita massimi sono ridotti di una quantità pari ai danni subiti.
+^srd-spettro-risucchio-di-vita
 ````
 
 > [!info] Licenza

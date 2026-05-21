@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Centauro combattente]]"]
+riferimenti_srd: ["[[SRD/Mostri/Centauro combattente]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Centauro combattente#^srd-centauro_combattente-multiattacco]]", "[[SRD/Mostri/Centauro combattente#^srd-centauro_combattente-picca]]", "[[SRD/Mostri/Centauro combattente#^srd-centauro_combattente-arco-lungo]]", "[[SRD/Mostri/Centauro combattente#^srd-centauro_combattente-carica-travolgente-ricarica-5-6]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Centauro combattente"
 type: "Folletto"
 size: "grande"
@@ -91,14 +98,17 @@ tab: Azioni
 ### Multiattacco
 
 Il centauro effettua due attacchi, utilizzando Picca o Arco lungo in qualsiasi combinazione.
+^srd-centauro_combattente-multiattacco
 
 ### Picca
 
 *Tiro per colpire in mischia:* +6, portata 3 m. *Colpito:* 9 (1d10 + 4) danni perforanti.
+^srd-centauro_combattente-picca
 
 ### Arco lungo
 
 *Tiro per colpire a distanza:* +4, gittata 45/180 m. *Colpito:* 6 (1d8 + 2) danni perforanti.
+^srd-centauro_combattente-arco-lungo
 ````
 
 > [!info] Licenza

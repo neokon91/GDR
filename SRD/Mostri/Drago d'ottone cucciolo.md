@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Drago d'ottone cucciolo]]"]
+riferimenti_srd: ["[[SRD/Mostri/Drago d'ottone cucciolo]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Drago d'ottone cucciolo#^srd-drago_d_ottone_cucciolo-squarcio]]", "[[SRD/Mostri/Drago d'ottone cucciolo#^srd-drago_d_ottone_cucciolo-soffio-di-fuoco-ricarica-5-6]]", "[[SRD/Mostri/Drago d'ottone cucciolo#^srd-drago_d_ottone_cucciolo-soffio-di-sonno]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Drago d'ottone cucciolo"
 type: "Drago (metallico)"
 size: "medio"
@@ -91,16 +98,19 @@ tab: Azioni
 ### Squarcio
 
 *Tiro per colpire in mischia:* +4, portata 1,5 m. *Colpito:* 7 (1d10 + 2) danni taglienti.
+^srd-drago_d_ottone_cucciolo-squarcio
 
 ### Soffio di fuoco (ricarica 5-6)
 
 *Tiro salvezza su Destrezza:* CD 11, tutte le creature in una linea lunga 6 metri e larga 1,5 metri. *Fallimento:* 14 (4d6) danni da fuoco. *Successo:* danni dimezzati.
+^srd-drago_d_ottone_cucciolo-soffio-di-fuoco-ricarica-5-6
 
 ### Soffio di sonno
 
 *Tiro salvezza su Costituzione:* CD 11, tutte le creature in un cono di 4,5 metri. *Fallimento:* il bersaglio è incapacitato fino al termine del proprio turno successivo, a quel punto ripete il tiro salvezza.
 
 *Secondo fallimento:* il bersaglio cade privo di sensi per 1 minuto. Questo effetto termina se il bersaglio subisce danni o se una creatura entro 1,5 metri da esso esegue un'azione per svegliarlo.
+^srd-drago_d_ottone_cucciolo-soffio-di-sonno
 ````
 
 > [!info] Licenza

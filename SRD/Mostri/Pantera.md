@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Pantera]]"]
+riferimenti_srd: ["[[SRD/Mostri/Pantera]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Pantera#^srd-pantera-squarcio]]", "[[SRD/Mostri/Pantera#^srd-pantera-fuga-agile]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Pantera"
 type: "Bestia"
 size: "media"
@@ -87,6 +94,7 @@ tab: Azioni
 ### Squarcio
 
 *Tiro per colpire in mischia:* +5, portata 1,5 m. *Colpito:* 6 (1d6 + 3) danni taglienti.
+^srd-pantera-squarcio
 ````
 
 > [!info] Licenza

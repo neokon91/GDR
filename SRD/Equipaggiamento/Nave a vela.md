@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Equipaggiamento/Nave a vela]]"]
+riferimenti_srd: ["[[SRD/Equipaggiamento/Nave a vela]]"]
+riferimenti_regola: []
+sezioni_collegate: ["[[SRD/Equipaggiamento/Nave a vela#Dettagli]]"]
+blocchi_collegati: []
+tabelle_collegate: ["[[SRD/Equipaggiamento/Nave a vela#^srd-nave_a_vela-dettagli]]"]
+tags: ["dnd55/srd"]
 capitolo: "Equipaggiamento"
 pagine_sorgente: "113-114"
 tipo_oggetto: "veicolo"
@@ -42,6 +49,7 @@ Velocita 3 km/h; costo 10.000 mo.
 | Nave | Velocità | Equipaggio | Passeggeri | Carico | CA | PF | Soglia di danno | Costo |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | Nave a vela | 3 km/h | 20 | 20 | 100 t | 15 | 300 | 15 | 10.000 mo |
+^srd-nave_a_vela-dettagli
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

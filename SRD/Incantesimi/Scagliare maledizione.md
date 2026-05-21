@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Incantesimi/Scagliare maledizione]]"]
+riferimenti_srd: ["[[SRD/Incantesimi/Scagliare maledizione]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Incantesimi/Scagliare maledizione#^srd-scagliare_maledizione-utilizzo-di-uno-slot-incantesimo-di-livello-superiore]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/incantesimo"]
 livello: 3
 scuola: "Necromanzia"
 classi: ["bardo", "chierico", "mago"]
@@ -41,6 +48,7 @@ L'incantatore tocca una creatura che deve superare un tiro salvezza su Saggezza,
 ### Utilizzo di uno slot incantesimo di livello superiore
 
 Se l'incantatore lancia questo incantesimo usando uno slot incantesimo di 4º livello, può mantenere la concentrazione su di esso fino a un massimo di 10 minuti. Se usa uno slot incantesimo di 5º livello o superiore, l'incantesimo non richiede concentrazione e la durata diventa di 8 ore (slot di 5º e 6º livello) o 24 ore (slot di 7º o 8º livello). Se usa uno slot incantesimo di 9º livello, l'incantesimo dura finché non viene dissolto.
+^srd-scagliare_maledizione-utilizzo-di-uno-slot-incantesimo-di-livello-superiore
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

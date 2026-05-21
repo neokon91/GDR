@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Incantesimi/Legame planare]]"]
+riferimenti_srd: ["[[SRD/Incantesimi/Legame planare]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Incantesimi/Legame planare#^srd-legame_planare-utilizzo-di-uno-slot-incantesimo-di-livello-superiore]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/incantesimo"]
 livello: 5
 scuola: "Abiurazione"
 classi: ["bardo", "chierico", "druido", "mago", "warlock"]
@@ -38,6 +45,7 @@ Una creatura vincolata deve eseguire gli ordini al meglio delle sue capacità. L
 ### Utilizzo di uno slot incantesimo di livello superiore
 
 La durata aumenta con uno slot incantesimo di 6º livello (10 giorni), di 7º livello (30 giorni), di 8º livello (180 giorni) e di 9º livello (366 giorni).
+^srd-legame_planare-utilizzo-di-uno-slot-incantesimo-di-livello-superiore
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

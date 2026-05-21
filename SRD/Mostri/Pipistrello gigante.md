@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Pipistrello gigante]]"]
+riferimenti_srd: ["[[SRD/Mostri/Pipistrello gigante]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Pipistrello gigante#^srd-pipistrello_gigante-morso]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Pipistrello gigante"
 type: "Bestia"
 size: "grande"
@@ -80,6 +87,7 @@ tab: Azioni
 ### Morso
 
 *Tiro per colpire in mischia:* +5, portata 1,5 m. *Colpito:* 6 (1d6 + 3) danni perforanti.
+^srd-pipistrello_gigante-morso
 ````
 
 > [!info] Licenza

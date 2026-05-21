@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Mephit del magma]]"]
+riferimenti_srd: ["[[SRD/Mostri/Mephit del magma]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Mephit del magma#^srd-mephit_del_magma-esplosione-mortale]]", "[[SRD/Mostri/Mephit del magma#^srd-mephit_del_magma-artiglio]]", "[[SRD/Mostri/Mephit del magma#^srd-mephit_del_magma-soffio-di-fuoco-ricarica-6]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Mephit del magma"
 type: "Elementale"
 size: "piccolo"
@@ -88,15 +95,18 @@ tab: Azioni
 ### Esplosione mortale
 
 Il mephit esplode quando muore. *Tiro salvezza su Destrezza:* CD 11, tutte le creature in un'emanazione di 1,5 metri di cui il mephit è il punto di origine. *Fallimento:* 7 (2d6) danni da fuoco. *Successo:* danni dimezzati.
+^srd-mephit_del_magma-esplosione-mortale
 ## Azioni
 
 ### Artiglio
 
 *Tiro per colpire in mischia:* +3, portata 1,5 m. *Colpito:* 3 (1d4 + 1) danni taglienti più 3 (1d6) danni da fuoco.
+^srd-mephit_del_magma-artiglio
 
 ### Soffio di fuoco (ricarica 6)
 
 *Tiro salvezza su Destrezza:* CD 11, tutte le creature in un cono di 4,5 metri. *Fallimento:* 7 (2d6) danni da fuoco. *Successo:* danni dimezzati.
+^srd-mephit_del_magma-soffio-di-fuoco-ricarica-6
 ````
 
 > [!info] Licenza

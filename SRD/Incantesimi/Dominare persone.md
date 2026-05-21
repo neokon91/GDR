@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Incantesimi/Dominare persone]]"]
+riferimenti_srd: ["[[SRD/Incantesimi/Dominare persone]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Incantesimi/Dominare persone#^srd-dominare_persone-utilizzo-di-uno-slot-incantesimo-di-livello-superiore]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/incantesimo"]
 livello: 5
 scuola: "Ammaliamento"
 classi: ["bardo", "mago", "stregone"]
@@ -40,6 +47,7 @@ L'incantatore può comandare al bersaglio di effettuare una reazione, ma per far
 ### Utilizzo di uno slot incantesimo di livello superiore
 
 La concentrazione dell'incantatore può durare più a lungo utilizzando uno slot incantesimo di 6º livello (fino a 10 minuti), di 7º livello (fino a 1 ora) o di 8º livello o superiore (fino a 8 ore).
+^srd-dominare_persone-utilizzo-di-uno-slot-incantesimo-di-livello-superiore
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

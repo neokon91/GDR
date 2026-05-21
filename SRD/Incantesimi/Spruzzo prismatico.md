@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Incantesimi/Spruzzo prismatico]]"]
+riferimenti_srd: ["[[SRD/Incantesimi/Spruzzo prismatico]]"]
+riferimenti_regola: []
+sezioni_collegate: ["[[SRD/Incantesimi/Spruzzo prismatico#Raggi prismatici]]"]
+blocchi_collegati: []
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/incantesimo"]
 livello: 7
 scuola: "Invocazione"
 classi: ["bardo", "mago", "stregone"]

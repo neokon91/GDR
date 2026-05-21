@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Ghoul]]"]
+riferimenti_srd: ["[[SRD/Mostri/Ghoul]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Ghoul#^srd-ghoul-multiattacco]]", "[[SRD/Mostri/Ghoul#^srd-ghoul-artiglio]]", "[[SRD/Mostri/Ghoul#^srd-ghoul-morso]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Ghoul"
 type: "Non morto"
 size: "medio"
@@ -84,16 +91,19 @@ tab: Azioni
 ### Multiattacco
 
 Il ghoul effettua due attacchi Morso.
+^srd-ghoul-multiattacco
 
 ### Artiglio
 
 *Tiro per colpire in mischia:* +4, portata 1,5 m. *Colpito:* 4 (1d4 + 2) danni taglienti. Se il bersaglio è una creatura diversa da un non morto o da un elfo, subisce il seguente effetto.
 
 *Tiro salvezza su Costituzione:* CD 10. *Fallimento:* il bersaglio è paralizzato fino al termine del proprio turno successivo.
+^srd-ghoul-artiglio
 
 ### Morso
 
 *Tiro per colpire in mischia:* +4, portata 1,5 m. *Colpito:* 5 (1d6 + 2) danni perforanti più 3 (1d6) danni necrotici.
+^srd-ghoul-morso
 ````
 
 > [!info] Licenza

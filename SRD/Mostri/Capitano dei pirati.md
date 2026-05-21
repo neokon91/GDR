@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Capitano dei pirati]]"]
+riferimenti_srd: ["[[SRD/Mostri/Capitano dei pirati]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Capitano dei pirati#^srd-capitano_dei_pirati-multiattacco]]", "[[SRD/Mostri/Capitano dei pirati#^srd-capitano_dei_pirati-stocco]]", "[[SRD/Mostri/Capitano dei pirati#^srd-capitano_dei_pirati-pistola]]", "[[SRD/Mostri/Capitano dei pirati#^srd-capitano_dei_pirati-fascino-del-capitano]]", "[[SRD/Mostri/Capitano dei pirati#^srd-capitano_dei_pirati-replica]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Capitano dei pirati"
 type: "Umanoide"
 size: "medio o piccolo"
@@ -97,14 +104,17 @@ tab: Azioni
 ### Multiattacco
 
 Il pirata effettua tre attacchi, usando Stocco o Pistola in qualsiasi combinazione.
+^srd-capitano_dei_pirati-multiattacco
 
 ### Stocco
 
 *Tiro per colpire in mischia:* +7, portata 1,5 m. *Colpito:* 13 (2d8 + 4) danni perforanti, e il pirata dispone di vantaggio al tiro per colpire successivo che effettua prima del termine del proprio turno corrente.
+^srd-capitano_dei_pirati-stocco
 
 ### Pistola
 
 *Tiro per colpire a distanza:* +7, gittata 9/27 m. *Colpito:* 15 (2d10 + 4) danni perforanti.
+^srd-capitano_dei_pirati-pistola
 ````
 
 > [!info] Licenza

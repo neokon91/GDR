@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Classi/Warlock]]"]
+riferimenti_srd: ["[[SRD/Classi/Warlock]]"]
+riferimenti_regola: []
+sezioni_collegate: ["[[SRD/Classi/Warlock#Tratti di classe]]", "[[SRD/Classi/Warlock#Progressione di classe]]", "[[SRD/Classi/Warlock#Privilegi chiave]]", "[[SRD/Classi/Warlock#Lista degli incantesimi da warlock]]", "[[SRD/Classi/Warlock#Sottoclasse del warlock: Patrono immondo]]", "[[SRD/Classi/Warlock#Incantesimi immondi]]"]
+blocchi_collegati: []
+tabelle_collegate: ["[[SRD/Classi/Warlock#^srd-warlock-tratti-di-classe]]", "[[SRD/Classi/Warlock#^srd-warlock-progressione-di-classe]]", "[[SRD/Classi/Warlock#^srd-warlock-privilegi-chiave]]", "[[SRD/Classi/Warlock#^srd-warlock-lista-degli-incantesimi-da-warlock]]", "[[SRD/Classi/Warlock#^srd-warlock-sottoclasse-del-warlock-patrono-immondo]]", "[[SRD/Classi/Warlock#^srd-warlock-incantesimi-immondi]]"]
+tags: ["dnd55/srd"]
 capitolo: "Classi"
 pagine_sorgente: "85-92"
 caratteristica_primaria: ["Carisma"]
@@ -41,6 +48,7 @@ A: armatura di cuoio, falcetto, 2 pugnali, focus arcano, libro, dotazione da stu
 | Armi | Armi semplici. |
 | Armature | Armature leggere. |
 | Equipaggiamento iniziale | A: armatura di cuoio, falcetto, 2 pugnali, focus arcano, libro, dotazione da studioso e 15 mo; oppure B: 100 mo. |
+^srd-warlock-tratti-di-classe
 
 ## Progressione di classe
 
@@ -66,6 +74,7 @@ A: armatura di cuoio, falcetto, 2 pugnali, focus arcano, libro, dotazione da stu
 | 18 | +6 | - | 10 | 4 | 14 | 4 | 5 |
 | 19 | +6 | Dono epico | 10 | 4 | 15 | 4 | 5 |
 | 20 | +6 | Maestro dell'occulto | 10 | 4 | 15 | 4 | 5 |
+^srd-warlock-progressione-di-classe
 
 ## Privilegi chiave
 
@@ -75,6 +84,7 @@ A: armatura di cuoio, falcetto, 2 pugnali, focus arcano, libro, dotazione da stu
 | Magia del patto | Slot dello stesso livello recuperati con riposo breve o lungo. |
 | Scaltrezza magica | Permette recupero limitato di risorse della Magia del patto. |
 | Maestro dell'occulto | Al 20º livello recupera tutti gli slot di Magia del patto quando usa Scaltrezza magica. |
+^srd-warlock-privilegi-chiave
 
 ## Lista degli incantesimi da warlock
 
@@ -152,6 +162,7 @@ A: armatura di cuoio, falcetto, 2 pugnali, focus arcano, libro, dotazione da stu
 | 9 | Portale | Evocazione | C, M |
 | 9 | Previsione | Divinazione | M |
 | 9 | Proiezione astrale | Necromanzia | M |
+^srd-warlock-lista-degli-incantesimi-da-warlock
 
 ## Sottoclasse del warlock: Patrono immondo
 
@@ -162,6 +173,7 @@ A: armatura di cuoio, falcetto, 2 pugnali, focus arcano, libro, dotazione da stu
 | 6 | Fortuna dell Oscuro | Aggiunge 1d10 a una prova di caratteristica o TS dopo il tiro ma prima dell esito. |
 | 10 | Resilienza immonda | Dopo riposo sceglie una resistenza ai danni tranne forza. |
 | 14 | Scagliare all Inferno | Una volta per turno puo tentare di mandare un bersaglio colpito nei Piani Inferiori. |
+^srd-warlock-sottoclasse-del-warlock-patrono-immondo
 
 ## Incantesimi immondi
 
@@ -171,6 +183,7 @@ A: armatura di cuoio, falcetto, 2 pugnali, focus arcano, libro, dotazione da stu
 | 5 | Nube maleodorante, palla di fuoco |
 | 7 | Muro di fuoco, scudo di fuoco |
 | 9 | Costrizione, piaga degli insetti |
+^srd-warlock-incantesimi-immondi
 
 ## Progressione
 

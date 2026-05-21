@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Bugbear cacciatore]]"]
+riferimenti_srd: ["[[SRD/Mostri/Bugbear cacciatore]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Bugbear cacciatore#^srd-bugbear_cacciatore-rapimento]]", "[[SRD/Mostri/Bugbear cacciatore#^srd-bugbear_cacciatore-multiattacco]]", "[[SRD/Mostri/Bugbear cacciatore#^srd-bugbear_cacciatore-giavellotto]]", "[[SRD/Mostri/Bugbear cacciatore#^srd-bugbear_cacciatore-mazza-chiodata]]", "[[SRD/Mostri/Bugbear cacciatore#^srd-bugbear_cacciatore-presa-rapida]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Bugbear cacciatore"
 type: "Folletto (goblinoide)"
 size: "medio"
@@ -95,19 +102,23 @@ tab: Azioni
 ### Rapimento
 
 Il bugbear non ha bisogno di usare movimento extra per spostare una creatura che sta afferrando.
+^srd-bugbear_cacciatore-rapimento
 ## Azioni
 
 ### Multiattacco
 
 Il bugbear effettua due attacchi Giavellotto o Mazza chiodata.
+^srd-bugbear_cacciatore-multiattacco
 
 ### Giavellotto
 
 *Tiro per colpire in mischia o a distanza:* +5, portata 3 m o gittata 9/36 m. *Colpito:* 13 (3d6 + 3) danni perforanti.
+^srd-bugbear_cacciatore-giavellotto
 
 ### Mazza chiodata
 
 *Tiro per colpire in mischia:* +5 (con vantaggio se il bersaglio è afferrato dal bugbear), portata 3 m. *Colpito:* 12 (2d8 + 3) danni perforanti.
+^srd-bugbear_cacciatore-mazza-chiodata
 ````
 
 > [!info] Licenza

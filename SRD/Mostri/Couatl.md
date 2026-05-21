@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Couatl]]"]
+riferimenti_srd: ["[[SRD/Mostri/Couatl]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Couatl#^srd-couatl-mente-schermata]]", "[[SRD/Mostri/Couatl#^srd-couatl-morso]]", "[[SRD/Mostri/Couatl#^srd-couatl-incantesimi]]", "[[SRD/Mostri/Couatl#^srd-couatl-stritolare]]", "[[SRD/Mostri/Couatl#^srd-couatl-aiuto-divino-2-giorno]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Couatl"
 type: "Celestiale"
 size: "medio"
@@ -90,11 +97,13 @@ tab: Azioni
 ### Mente schermata
 
 I pensieri del couatl non possono essere letti in alcun modo e le altre creature possono comunicare telepaticamente con lui solo se lo permette.
+^srd-couatl-mente-schermata
 ## Azioni
 
 ### Morso
 
 *Tiro per colpire in mischia:* +7, portata 1,5 m. *Colpito:* 11 (1d12 + 5) danni perforanti, e il bersaglio è avvelenato fino al termine del turno successivo del couatl.
+^srd-couatl-morso
 
 ### Incantesimi
 
@@ -112,10 +121,12 @@ Il couatl lancia uno dei seguenti incantesimi, senza bisogno di componenti, util
 - individuazione del bene e del male
 - individuazione del magico
 - trasformazione (solo in forma di bestia o umanoide, senza punti ferita temporanei ottenuti dall'incantesimo, e senza concentrazione o punti ferita temporanei per mantenere l'incantesimo)
+^srd-couatl-incantesimi
 
 ### Stritolare
 
 *Tiro salvezza su Forza:* CD 15, una creatura di taglia Media o inferiore che il couatl è in grado di vedere entro 1,5 metri. *Fallimento:* 8 (1d6 + 5) danni contundenti. Il bersaglio è afferrato (CD 13 per sfuggire) ed è trattenuto finché la presa perdura.
+^srd-couatl-stritolare
 ````
 
 > [!info] Licenza

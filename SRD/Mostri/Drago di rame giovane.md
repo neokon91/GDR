@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Drago di rame giovane]]"]
+riferimenti_srd: ["[[SRD/Mostri/Drago di rame giovane]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Drago di rame giovane#^srd-drago_di_rame_giovane-multiattacco]]", "[[SRD/Mostri/Drago di rame giovane#^srd-drago_di_rame_giovane-squarcio]]", "[[SRD/Mostri/Drago di rame giovane#^srd-drago_di_rame_giovane-soffio-di-acido-ricarica-5-6]]", "[[SRD/Mostri/Drago di rame giovane#^srd-drago_di_rame_giovane-soffio-rallentante]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Drago di rame giovane"
 type: "Drago (metallico)"
 size: "grande"
@@ -94,18 +101,22 @@ tab: Azioni
 ### Multiattacco
 
 Il drago effettua tre attacchi Squarcio. Può sostituire un attacco con un utilizzo di Soffio rallentante.
+^srd-drago_di_rame_giovane-multiattacco
 
 ### Squarcio
 
 *Tiro per colpire in mischia:* +7, portata 3 m. *Colpito:* 15 (2d10 + 4) danni taglienti.
+^srd-drago_di_rame_giovane-squarcio
 
 ### Soffio di acido (ricarica 5-6)
 
 *Tiro salvezza su Destrezza:* CD 14, tutte le creature in una linea lunga 12 metri e larga 1,5 metri. *Fallimento:* 40 (9d8) danni da acido. *Successo:* danni dimezzati.
+^srd-drago_di_rame_giovane-soffio-di-acido-ricarica-5-6
 
 ### Soffio rallentante
 
 *Tiro salvezza su Costituzione:* CD 14, tutte le creature in un cono di 9 metri. *Fallimento:* il bersaglio non può effettuare reazioni, la sua velocità è dimezzata e nel suo turno può effettuare un'azione o un'azione bonus, non entrambe. L'effetto dura fino al termine del proprio turno successivo.
+^srd-drago_di_rame_giovane-soffio-rallentante
 ````
 
 > [!info] Licenza

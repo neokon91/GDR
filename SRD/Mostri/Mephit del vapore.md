@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Mephit del vapore]]"]
+riferimenti_srd: ["[[SRD/Mostri/Mephit del vapore]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Mephit del vapore#^srd-mephit_del_vapore-esplosione-mortale]]", "[[SRD/Mostri/Mephit del vapore#^srd-mephit_del_vapore-forma-sfocata]]", "[[SRD/Mostri/Mephit del vapore#^srd-mephit_del_vapore-artiglio]]", "[[SRD/Mostri/Mephit del vapore#^srd-mephit_del_vapore-soffio-di-vapore-ricarica-6]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Mephit del vapore"
 type: "Elementale"
 size: "piccolo"
@@ -90,19 +97,23 @@ tab: Azioni
 ### Esplosione mortale
 
 Il mephit esplode quando muore. *Tiro salvezza su Destrezza:* CD 10, tutte le creature in un'emanazione di 1,5 metri di cui il mephit è il punto di origine. *Fallimento:* 5 (2d4) danni da fuoco. *Successo:* danni dimezzati.
+^srd-mephit_del_vapore-esplosione-mortale
 
 ### Forma sfocata
 
 I tiri per colpire contro il mephit sono effettuati con svantaggio, a meno che il mephit non sia incapacitato.
+^srd-mephit_del_vapore-forma-sfocata
 ## Azioni
 
 ### Artiglio
 
 *Tiro per colpire in mischia:* +2, portata 1,5 m. *Colpito:* 2 (1d4) danni taglienti più 2 (1d4) danni da fuoco.
+^srd-mephit_del_vapore-artiglio
 
 ### Soffio di vapore (ricarica 6)
 
 *Tiro salvezza su Costituzione:* CD 10, tutte le creature in un cono di 4,5 metri. *Fallimento:* 5 (2d4) danni da fuoco, e la velocità del bersaglio è ridotta di 3 metri fino al termine del turno successivo del mephit. *Successo:* danni dimezzati. *Fallimento o successo:* trovarsi sott'acqua non conferisce alcuna resistenza contro questi danni da fuoco.
+^srd-mephit_del_vapore-soffio-di-vapore-ricarica-6
 ````
 
 > [!info] Licenza

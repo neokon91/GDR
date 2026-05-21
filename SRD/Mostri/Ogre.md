@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Ogre]]"]
+riferimenti_srd: ["[[SRD/Mostri/Ogre]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Ogre#^srd-ogre-giavellotto]]", "[[SRD/Mostri/Ogre#^srd-ogre-randello-pesante]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Ogre"
 type: "Gigante"
 size: "grande"
@@ -82,10 +89,12 @@ tab: Azioni
 ### Giavellotto
 
 *Tiro per colpire in mischia o a distanza:* +6, portata 1,5 m o gittata 9/36 m. *Colpito:* 11 (2d6 + 4) danni perforanti.
+^srd-ogre-giavellotto
 
 ### Randello pesante
 
 *Tiro per colpire in mischia:* +6, portata 1,5 m. *Colpito:* 13 (2d8 + 4) danni contundenti.
+^srd-ogre-randello-pesante
 ````
 
 > [!info] Licenza

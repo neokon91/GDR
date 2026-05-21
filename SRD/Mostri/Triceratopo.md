@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Triceratopo]]"]
+riferimenti_srd: ["[[SRD/Mostri/Triceratopo]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Triceratopo#^srd-triceratopo-multiattacco]]", "[[SRD/Mostri/Triceratopo#^srd-triceratopo-trafiggere]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Triceratopo"
 type: "Bestia (dinosauro)"
 size: "enorme"
@@ -82,10 +89,12 @@ tab: Azioni
 ### Multiattacco
 
 Il triceratopo effettua due attacchi Trafiggere.
+^srd-triceratopo-multiattacco
 
 ### Trafiggere
 
 *Tiro per colpire in mischia:* +9, portata 1,5 m. *Colpito:* 19 (2d12 + 6) danni perforanti. Se il bersaglio è una creatura di taglia Enorme o inferiore e il triceratopo si è mosso di 6 metri o più in linea retta verso di esso subito prima del colpo, il bersaglio subisce 9 (2d8) danni perforanti extra e cade a terra prono.
+^srd-triceratopo-trafiggere
 ````
 
 > [!info] Licenza

@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Glossario/Prova di caratteristica]]"]
+riferimenti_srd: ["[[SRD/Glossario/Prova di caratteristica]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: []
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/regola"]
 lettera: "P"
 descrittore:
 pagine_sorgente: 212

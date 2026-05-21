@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Equipaggiamento/Corazza ad anelli]]"]
+riferimenti_srd: ["[[SRD/Equipaggiamento/Corazza ad anelli]]"]
+riferimenti_regola: []
+sezioni_collegate: ["[[SRD/Equipaggiamento/Corazza ad anelli#Dettagli]]"]
+blocchi_collegati: []
+tabelle_collegate: ["[[SRD/Equipaggiamento/Corazza ad anelli#^srd-corazza_ad_anelli-dettagli]]"]
+tags: ["dnd55/srd"]
 capitolo: "Equipaggiamento"
 pagine_sorgente: "104-105"
 tipo_oggetto: "armatura"
@@ -42,6 +49,7 @@ Pesante; Classe Armatura 14; costo 30 mo.
 | Categoria | Armatura | Classe Armatura | Forza | Furtività | Peso | Costo |
 | --- | --- | --- | --- | --- | --- | --- |
 | Pesante | Corazza ad anelli | 14 | - | Svantaggio | 20 kg | 30 mo |
+^srd-corazza_ad_anelli-dettagli
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

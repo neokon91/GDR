@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Omuncolo]]"]
+riferimenti_srd: ["[[SRD/Mostri/Omuncolo]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Omuncolo#^srd-omuncolo-legame-telepatico]]", "[[SRD/Mostri/Omuncolo#^srd-omuncolo-morso]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Omuncolo"
 type: "Costrutto"
 size: "minuscolo"
@@ -84,11 +91,13 @@ tab: Azioni
 ### Legame telepatico
 
 Finché l'omuncolo si trova sullo stesso piano di esistenza del suo padrone, i due possono comunicare telepaticamente tra loro.
+^srd-omuncolo-legame-telepatico
 ## Azioni
 
 ### Morso
 
 *Tiro per colpire in mischia:* +4, portata 1,5 m *Colpito:* 1 danno perforante, e il bersaglio subisce il seguente effetto. *Tiro salvezza su Costituzione:* CD 12. *Fallimento:* il bersaglio è avvelenato fino al termine del turno successivo dell'omuncolo. Fallimento di 5 o più: il bersaglio è avvelenato per 1 minuto. Finché è avvelenato, è privo di sensi, ma la condizione termina prima se subisce dei danni.
+^srd-omuncolo-morso
 ````
 
 > [!info] Licenza

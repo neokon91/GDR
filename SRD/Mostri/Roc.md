@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Roc]]"]
+riferimenti_srd: ["[[SRD/Mostri/Roc]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Roc#^srd-roc-multiattacco]]", "[[SRD/Mostri/Roc#^srd-roc-becco]]", "[[SRD/Mostri/Roc#^srd-roc-speroni]]", "[[SRD/Mostri/Roc#^srd-roc-in-picchiata-ricarica-5-6]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Roc"
 type: "Mostruosità"
 size: "mastodontica"
@@ -92,14 +99,17 @@ tab: Azioni
 ### Multiattacco
 
 Il roc effettua due attacchi Becco. Può sostituire un attacco con un attacco Speroni.
+^srd-roc-multiattacco
 
 ### Becco
 
 *Tiro per colpire in mischia:* +13, portata 3 m. *Colpito:* 28 (3d12 + 9) danni perforanti.
+^srd-roc-becco
 
 ### Speroni
 
 *Tiro per colpire in mischia:* +13, portata 1,5 m. *Colpito:* 23 (4d6 + 9) danni taglienti. Se il bersaglio è una creatura di taglia Enorme o inferiore, è afferrato (CD 19 per sfuggire) da entrambi gli speroni, ed è trattenuto finché la presa perdura.
+^srd-roc-speroni
 ````
 
 > [!info] Licenza

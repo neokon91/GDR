@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Regole/Origini e lingue del personaggio]]"]
+riferimenti_srd: ["[[SRD/Regole/Origini e lingue del personaggio]]"]
+riferimenti_regola: []
+sezioni_collegate: ["[[SRD/Regole/Origini e lingue del personaggio#Origini]]", "[[SRD/Regole/Origini e lingue del personaggio#Punteggi di caratteristica e background]]", "[[SRD/Regole/Origini e lingue del personaggio#Lingue]]"]
+blocchi_collegati: []
+tabelle_collegate: ["[[SRD/Regole/Origini e lingue del personaggio#^srd-origini_lingue_personaggio-origini]]", "[[SRD/Regole/Origini e lingue del personaggio#^srd-origini_lingue_personaggio-punteggi-di-caratteristica-e-background]]", "[[SRD/Regole/Origini e lingue del personaggio#^srd-origini_lingue_personaggio-lingue]]"]
+tags: ["dnd55/srd", "dnd55/regola"]
 capitolo: "Creazione del personaggio"
 categoria_regola: "Creazione personaggio"
 pagine_sorgente: "21-23"
@@ -27,6 +34,7 @@ Le origini del personaggio derivano da background, specie e lingue. Background e
 | Specie | Opzioni SRD: Dragonide, elfo, gnomo, goliath, halfling, nano, orco, tiefling e umano. |
 | Taglia e velocita | Sono determinate dalla specie e vanno annotate sulla scheda. |
 | Passato | Background e specie aiutano a definire famiglia, amicizie, legami, organizzazioni e motivazione all'avventura. |
+^srd-origini_lingue_personaggio-origini
 
 ## Punteggi di caratteristica e background
 
@@ -38,6 +46,7 @@ Le origini del personaggio derivano da background, specie e lingue. Background e
 | Intelligenza | Accolito |
 | Saggezza | Accolito |
 | Carisma | Accolito |
+^srd-origini_lingue_personaggio-punteggi-di-caratteristica-e-background
 
 ## Lingue
 
@@ -47,6 +56,7 @@ Le origini del personaggio derivano da background, specie e lingue. Background e
 | Standard | Lingua dei segni comune, Draconico, Nanico, Elfico, Gigante, Gnomesco, Goblin, Halfling, Orchesco. |
 | Rare | Abissale, Celestiale, Druidico, Gergo delle profondita, Infernale, Primordiale, Silvano, Sottocomune, Gergo ladresco. |
 | Primordiale | Include i dialetti Aquan, Auran, Ignan e Terran; parlanti di dialetti diversi comunicano tra loro. |
+^srd-origini_lingue_personaggio-lingue
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

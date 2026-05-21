@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Incantesimi/Evoca elementali minori]]"]
+riferimenti_srd: ["[[SRD/Incantesimi/Evoca elementali minori]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Incantesimi/Evoca elementali minori#^srd-evoca_elementali_minori-utilizzo-di-uno-slot-incantesimo-di-livello-superiore]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/incantesimo"]
 livello: 4
 scuola: "Evocazione"
 classi: ["druido", "mago"]
@@ -38,6 +45,7 @@ Inoltre, il terreno all'interno dell'emanazione diventa terreno difficile per i 
 ### Utilizzo di uno slot incantesimo di livello superiore
 
 I danni aumentano di 1d8 per ogni slot di livello superiore al 4º.
+^srd-evoca_elementali_minori-utilizzo-di-uno-slot-incantesimo-di-livello-superiore
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

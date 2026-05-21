@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Diavolo barbuto]]"]
+riferimenti_srd: ["[[SRD/Mostri/Diavolo barbuto]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Diavolo barbuto#^srd-diavolo_barbuto-resistenza-alla-magia]]", "[[SRD/Mostri/Diavolo barbuto#^srd-diavolo_barbuto-multiattacco]]", "[[SRD/Mostri/Diavolo barbuto#^srd-diavolo_barbuto-barba]]", "[[SRD/Mostri/Diavolo barbuto#^srd-diavolo_barbuto-falcione-infernale]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Diavolo barbuto"
 type: "Immondo (diavolo)"
 size: "medio"
@@ -89,15 +96,18 @@ tab: Azioni
 ### Resistenza alla magia
 
 Il diavolo dispone di vantaggio ai tiri salvezza contro incantesimi e altri effetti magici.
+^srd-diavolo_barbuto-resistenza-alla-magia
 ## Azioni
 
 ### Multiattacco
 
 Il diavolo effettua un attacco Barba e un attacco Falcione infernale.
+^srd-diavolo_barbuto-multiattacco
 
 ### Barba
 
 *Tiro per colpire in mischia:* +5, portata 1,5 m. *Colpito:* 7 (1d8 + 3) danni perforanti, e il bersaglio è avvelenato fino all'inizio del turno successivo del diavolo. Finché è avvelenato, il bersaglio non può recuperare punti ferita.
+^srd-diavolo_barbuto-barba
 
 ### Falcione infernale
 
@@ -106,6 +116,7 @@ Il diavolo effettua un attacco Barba e un attacco Falcione infernale.
 *Tiro salvezza su Costituzione:* CD 12.
 
 *Fallimento:* il bersaglio subisce una ferita infernale. Finché è ferito, il bersaglio perde 5 (1d10) punti ferita all'inizio di ogni suo turno. La ferita si rimargina dopo 1 minuto, dopo che un incantesimo ripristina i punti ferita del bersaglio, o dopo che il bersaglio o una creatura entro 1,5 metri effettua un'azione per tamponare la ferita superando una prova di Saggezza (Medicina) con CD 12.
+^srd-diavolo_barbuto-falcione-infernale
 ````
 
 > [!info] Licenza

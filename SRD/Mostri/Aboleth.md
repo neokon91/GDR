@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Aboleth]]"]
+riferimenti_srd: ["[[SRD/Mostri/Aboleth]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Aboleth#^srd-aboleth-anfibio]]", "[[SRD/Mostri/Aboleth#^srd-aboleth-nube-di-muco]]", "[[SRD/Mostri/Aboleth#^srd-aboleth-resistenza-leggendaria-3-giorno-o-4-giorno-nella-tana]]", "[[SRD/Mostri/Aboleth#^srd-aboleth-ristoro-occulto]]", "[[SRD/Mostri/Aboleth#^srd-aboleth-sonda-telepatica]]", "[[SRD/Mostri/Aboleth#^srd-aboleth-multiattacco]]", "[[SRD/Mostri/Aboleth#^srd-aboleth-tentacolo]]", "[[SRD/Mostri/Aboleth#^srd-aboleth-consuma-ricordi]]", "[[SRD/Mostri/Aboleth#^srd-aboleth-domina-mente-2-giorno]]", "[[SRD/Mostri/Aboleth#^srd-aboleth-risucchio-psichico]]", "[[SRD/Mostri/Aboleth#^srd-aboleth-sferzata]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Aboleth"
 type: "Aberrazione"
 size: "grande"
@@ -109,39 +116,48 @@ tab: Azioni
 ### Anfibio
 
 L'aboleth può respirare in aria e in acqua.
+^srd-aboleth-anfibio
 
 ### Nube di muco*
 
 Finché si trova sott'acqua, l'aboleth è circondato da uno strato di muco. *Tiro salvezza su Costituzione:* CD 14, tutte le creature in un'emanazione di 1,5 metri di cui l'aboleth è il punto di origine, alla fine del turno dell'aboleth. *Fallimento:* il bersaglio è maledetto. Finché la maledizione perdura, la pelle del bersaglio diventa viscida, il bersaglio può respirare in aria e in acqua e non può recuperare punti ferita finché si trova sott'acqua.
+^srd-aboleth-nube-di-muco
 
 ### Resistenza leggendaria (3/giorno o 4/giorno nella tana)
 
 Se l'aboleth fallisce un tiro salvezza, può scegliere di superarlo comunque.
+^srd-aboleth-resistenza-leggendaria-3-giorno-o-4-giorno-nella-tana
 
 ### Ristoro occulto
 
 Se viene annientato, l'aboleth ottiene un nuovo corpo dopo 5d10 giorni, tornando in vita con tutti i suoi punti ferita nel Reame Remoto o in un altro luogo a scelta del GM.
+^srd-aboleth-ristoro-occulto
 
 ### Sonda telepatica
 
 Se una creatura che l'aboleth è in grado di vedere comunica telepaticamente con l'aboleth, quest'ultimo apprende i più grandi desideri della creatura. Finché la creatura maledetta si trova fuori da uno specchio d'acqua, subisce 6 (1d12) danni da acido a intervalli di 10 minuti, a meno che la sua pelle non venga inumidita prima che siano trascorsi i 10 minuti.
+^srd-aboleth-sonda-telepatica
 ## Azioni
 
 ### Multiattacco
 
 L'aboleth effettua due attacchi Tentacolo e usa Consuma ricordi o Domina mente, se disponibili.
+^srd-aboleth-multiattacco
 
 ### Tentacolo
 
 *Tiro per colpire in mischia:* +9, portata 4,5 m. *Colpito:* 12 (2d6 + 5) danni contundenti. Se il bersaglio è una creatura di taglia Grande o inferiore, è afferrato (CD 14 per sfuggire) da uno dei quattro tentacoli.
+^srd-aboleth-tentacolo
 
 ### Consuma ricordi
 
 *Tiro salvezza su Intelligenza:* CD 16, una creatura entro 9 metri affascinata o afferrata dall'aboleth. *Fallimento:* 10 (3d6) danni psichici. *Successo:* danni dimezzati. *Fallimento o successo:* l'aboleth acquisisce i ricordi del bersaglio se questo è un umanoide e viene ridotto a 0 punti ferita da questa azione.
+^srd-aboleth-consuma-ricordi
 
 ### Domina mente (2/giorno)
 
 *Tiro salvezza su Saggezza:* CD 16, una creatura che l'aboleth è in grado di vedere entro 9 metri. *Fallimento:* la creatura è affascinata finché l'aboleth muore o si sposta su un piano di esistenza diverso da quello del bersaglio. Finché è affascinato, il bersaglio agisce come un alleato dell'aboleth ed è sotto il suo controllo finché si trova entro 18 metri da esso. Inoltre, l'aboleth e il bersaglio possono comunicare telepaticamente tra loro a qualsiasi distanza. Il bersaglio ripete il tiro salvezza ogni volta che subisce danni e ogni volta che trascorre 24 ore ad almeno 1,5 chilometri di distanza dall'aboleth e, se lo supera, l'effetto svanisce.
+^srd-aboleth-domina-mente-2-giorno
 ## Azioni Leggendarie
 
 Subito dopo il turno di un'altra creatura, l'aboleth può consumare un utilizzo per effettuare una delle seguenti azioni. L'aboleth recupera tutti gli utilizzi consumati all'inizio di ogni suo turno.
@@ -151,10 +167,12 @@ Subito dopo il turno di un'altra creatura, l'aboleth può consumare un utilizzo 
 ### Risucchio psichico
 
 Se l'aboleth ha affascinato o afferrato almeno una creatura, utilizza Consuma ricordi e recupera 5 (1d10) punti ferita.
+^srd-aboleth-risucchio-psichico
 
 ### Sferzata
 
 L'aboleth effettua un attacco Tentacolo.
+^srd-aboleth-sferzata
 ````
 
 > [!info] Licenza

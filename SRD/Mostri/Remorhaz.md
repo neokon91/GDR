@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Remorhaz]]"]
+riferimenti_srd: ["[[SRD/Mostri/Remorhaz]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Remorhaz#^srd-remorhaz-aura-di-calore]]", "[[SRD/Mostri/Remorhaz#^srd-remorhaz-morso]]", "[[SRD/Mostri/Remorhaz#^srd-remorhaz-inghiottire]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Remorhaz"
 type: "Mostruosità"
 size: "enorme"
@@ -84,11 +91,13 @@ tab: Azioni
 ### Aura di calore
 
 Al termine di ogni turno del remorhaz, tutte le creature in un'emanazione di 1,5 metri di cui il remorhaz è il punto di origine subiscono 16 (3d10) danni da fuoco.
+^srd-remorhaz-aura-di-calore
 ## Azioni
 
 ### Morso
 
 *Tiro per colpire in mischia:* +11, portata 3 m. *Colpito:* 18 (2d10 + 7) danni perforanti più 14 (4d6) danni da fuoco. Se il bersaglio è una creatura di taglia Grande o inferiore, è afferrato (CD 17 per sfuggire), ed è trattenuto finché la presa perdura.
+^srd-remorhaz-morso
 ````
 
 > [!info] Licenza

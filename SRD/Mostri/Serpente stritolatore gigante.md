@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Serpente stritolatore gigante]]"]
+riferimenti_srd: ["[[SRD/Mostri/Serpente stritolatore gigante]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Serpente stritolatore gigante#^srd-serpente_stritolatore_gigante-multiattacco]]", "[[SRD/Mostri/Serpente stritolatore gigante#^srd-serpente_stritolatore_gigante-morso]]", "[[SRD/Mostri/Serpente stritolatore gigante#^srd-serpente_stritolatore_gigante-stritolare]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Serpente stritolatore gigante"
 type: "Bestia"
 size: "enorme"
@@ -88,14 +95,17 @@ tab: Azioni
 ### Multiattacco
 
 Il serpente effettua un attacco Morso e usa Stritolare.
+^srd-serpente_stritolatore_gigante-multiattacco
 
 ### Morso
 
 *Tiro per colpire in mischia:* +6, portata 3 m. *Colpito:* 11 (2d6 + 4) danni perforanti.
+^srd-serpente_stritolatore_gigante-morso
 
 ### Stritolare
 
 *Tiro salvezza su Forza:* CD 14, una creatura di taglia Grande o inferiore che il serpente è in grado di vedere entro 3 metri. *Fallimento:* 13 (2d8 + 4) danni contundenti, e il bersaglio è afferrato (CD 14 per sfuggire).
+^srd-serpente_stritolatore_gigante-stritolare
 ````
 
 > [!info] Licenza

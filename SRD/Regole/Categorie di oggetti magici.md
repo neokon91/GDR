@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Regole/Categorie di oggetti magici]]"]
+riferimenti_srd: ["[[SRD/Regole/Categorie di oggetti magici]]"]
+riferimenti_regola: []
+sezioni_collegate: ["[[SRD/Regole/Categorie di oggetti magici#Categorie]]", "[[SRD/Regole/Categorie di oggetti magici#Regole aggiuntive]]"]
+blocchi_collegati: []
+tabelle_collegate: ["[[SRD/Regole/Categorie di oggetti magici#^srd-categorie_oggetti_magici-categorie]]", "[[SRD/Regole/Categorie di oggetti magici#^srd-categorie_oggetti_magici-regole-aggiuntive]]"]
+tags: ["dnd55/srd", "dnd55/regola"]
 capitolo: "Oggetti magici"
 categoria_regola: "Oggetti magici"
 pagine_sorgente: "232-233"
@@ -31,6 +38,7 @@ Ogni oggetto magico appartiene a una categoria che ne descrive forma, uso tipico
 | Pergamene | Sono consumabili; la magia si libera leggendo la pergamena e poi non puo piu essere usata. |
 | Pozioni | Sono infusi da bere o oli da applicare; di solito una fiala contiene 30 grammi di liquido. |
 | Verghe | Sono scettri in metallo, legno o osso e possono essere focus arcani salvo diversa indicazione. |
+^srd-categorie_oggetti_magici-categorie
 
 ## Regole aggiuntive
 
@@ -40,6 +48,7 @@ Ogni oggetto magico appartiene a una categoria che ne descrive forma, uso tipico
 | Prerequisiti di sintonia | Se e richiesto essere di una classe, la creatura deve appartenere a quella classe; se e richiesto essere incantatore, deve poter lanciare almeno un incantesimo tramite tratti o privilegi. |
 | Oggetti su misura | Il GM puo decidere che un oggetto non si adatti a qualsiasi anatomia o forma corporea. |
 | Oggetti in coppia | Il GM puo ammettere eccezioni quando un oggetto abbinato non puo essere indossato normalmente, pur richiedendo il pezzo corrispondente. |
+^srd-categorie_oggetti_magici-regole-aggiuntive
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

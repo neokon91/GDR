@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Equipaggiamento/Pozione di guarigione]]"]
+riferimenti_srd: ["[[SRD/Equipaggiamento/Pozione di guarigione]]"]
+riferimenti_regola: []
+sezioni_collegate: ["[[SRD/Equipaggiamento/Pozione di guarigione#Dettagli]]"]
+blocchi_collegati: []
+tabelle_collegate: ["[[SRD/Equipaggiamento/Pozione di guarigione#^srd-pozione_di_guarigione-dettagli]]"]
+tags: ["dnd55/srd"]
 capitolo: "Equipaggiamento"
 pagine_sorgente: "107-113"
 tipo_oggetto: "equipaggiamento_avventura"
@@ -42,6 +49,7 @@ Oggetto magico bevuto o somministrato come azione bonus; fa recuperare 2d4 + 2 P
 | Oggetto | Peso | Costo |
 | --- | --- | --- |
 | Pozione di guarigione | 0,25 kg | 50 mo |
+^srd-pozione_di_guarigione-dettagli
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

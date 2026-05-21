@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Equipaggiamento/Martello leggero]]"]
+riferimenti_srd: ["[[SRD/Equipaggiamento/Martello leggero]]"]
+riferimenti_regola: []
+sezioni_collegate: ["[[SRD/Equipaggiamento/Martello leggero#Dettagli]]"]
+blocchi_collegati: []
+tabelle_collegate: ["[[SRD/Equipaggiamento/Martello leggero#^srd-martello_leggero-dettagli]]"]
+tags: ["dnd55/srd"]
 capitolo: "Equipaggiamento"
 pagine_sorgente: "101-104"
 tipo_oggetto: "arma"
@@ -42,6 +49,7 @@ Mischia semplice; danni 1d4 contundenti; padronanza Graffio.
 | Categoria | Nome | Danni | Proprietà | Padronanza | Peso | Costo |
 | --- | --- | --- | --- | --- | --- | --- |
 | Mischia semplice | Martello leggero | 1d4 contundenti | lancio 6/18, leggera | Graffio | 1 kg | 2 mo |
+^srd-martello_leggero-dettagli
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

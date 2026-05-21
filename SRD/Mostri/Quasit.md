@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Quasit]]"]
+riferimenti_srd: ["[[SRD/Mostri/Quasit]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Quasit#^srd-quasit-resistenza-alla-magia]]", "[[SRD/Mostri/Quasit#^srd-quasit-squarcio]]", "[[SRD/Mostri/Quasit#^srd-quasit-invisibilita]]", "[[SRD/Mostri/Quasit#^srd-quasit-mutaforma]]", "[[SRD/Mostri/Quasit#^srd-quasit-spaventare-1-giorno]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Quasit"
 type: "Immondo"
 size: "minuscolo"
@@ -92,23 +99,28 @@ tab: Azioni
 ### Resistenza alla magia
 
 Il quasit dispone di vantaggio ai tiri salvezza contro incantesimi e altri effetti magici.
+^srd-quasit-resistenza-alla-magia
 ## Azioni
 
 ### Squarcio
 
 *Tiro per colpire in mischia:* +5, portata 1,5 m *Colpito:* 5 (1d4 + 3) danni taglienti, e il bersaglio è avvelenato fino all'inizio del turno successivo del quasit.
+^srd-quasit-squarcio
 
 ### Invisibilità
 
 Il quasit può lanciare invisibilità su di sé senza bisogno di componenti per incantesimi e utilizzando il Carisma come caratteristica da incantatore.
+^srd-quasit-invisibilita
 
 ### Mutaforma
 
 Il quasit può assumere la forma bestiale di un pipistrello (velocità 3 m, volo 12 m), un millepiedi (12 m, scalata 12 m) o un rospo (12 m, scalata 12 m), o tornare alla sua vera forma. Le sue statistiche di gioco restano le stesse in ogni forma, a eccezione della velocità. Nessun oggetto che indossa o trasporta viene trasformato.
+^srd-quasit-mutaforma
 
 ### Spaventare (1/giorno)
 
 *Tiro salvezza su Saggezza:* CD 10, una creatura entro 6 metri. *Fallimento:* il bersaglio è spaventato. Alla fine di ogni suo turno, il bersaglio ripete il tiro salvezza e, se lo supera, l'effetto svanisce. Dopo 1 minuto, il tiro viene superato automaticamente.
+^srd-quasit-spaventare-1-giorno
 ````
 
 > [!info] Licenza

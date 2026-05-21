@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Glossario/Ricerca]]"]
+riferimenti_srd: ["[[SRD/Glossario/Ricerca]]"]
+riferimenti_regola: []
+sezioni_collegate: ["[[SRD/Glossario/Ricerca#Ricerca]]"]
+blocchi_collegati: []
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/regola"]
 lettera: "R"
 descrittore: "azione"
 pagine_sorgente: "212-213"

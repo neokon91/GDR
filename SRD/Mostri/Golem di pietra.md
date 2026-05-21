@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Golem di pietra]]"]
+riferimenti_srd: ["[[SRD/Mostri/Golem di pietra]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Golem di pietra#^srd-golem_di_pietra-forma-immutabile]]", "[[SRD/Mostri/Golem di pietra#^srd-golem_di_pietra-resistenza-alla-magia]]", "[[SRD/Mostri/Golem di pietra#^srd-golem_di_pietra-multiattacco]]", "[[SRD/Mostri/Golem di pietra#^srd-golem_di_pietra-schianto]]", "[[SRD/Mostri/Golem di pietra#^srd-golem_di_pietra-dardo-vigoroso]]", "[[SRD/Mostri/Golem di pietra#^srd-golem_di_pietra-lentezza-ricarica-5-6]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Golem di pietra"
 type: "Costrutto"
 size: "grande"
@@ -90,23 +97,28 @@ tab: Azioni
 ### Forma immutabile
 
 Il golem non può mutare forma.
+^srd-golem_di_pietra-forma-immutabile
 
 ### Resistenza alla magia
 
 Il golem dispone di vantaggio ai tiri salvezza contro incantesimi e altri effetti magici.
+^srd-golem_di_pietra-resistenza-alla-magia
 ## Azioni
 
 ### Multiattacco
 
 Il golem effettua due attacchi, usando Schianto o Dardo vigoroso in qualsiasi combinazione.
+^srd-golem_di_pietra-multiattacco
 
 ### Schianto
 
 *Tiro per colpire in mischia:* +10, portata 1,5 m. *Colpito:* 15 (2d8 + 6) danni contundenti più 9 (2d8) danni da forza.
+^srd-golem_di_pietra-schianto
 
 ### Dardo vigoroso
 
 *Tiro per colpire a distanza:* +9, gittata 36 m. *Colpito:* 22 (4d10) danni da forza.
+^srd-golem_di_pietra-dardo-vigoroso
 ````
 
 > [!info] Licenza

@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Incantesimi/Creare non morti]]"]
+riferimenti_srd: ["[[SRD/Incantesimi/Creare non morti]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Incantesimi/Creare non morti#^srd-creare_non_morti-utilizzo-di-uno-slot-incantesimo-di-livello-superiore]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/incantesimo"]
 livello: 6
 scuola: "Necromanzia"
 classi: ["chierico", "mago", "warlock"]
@@ -40,6 +47,7 @@ La creatura rimane sotto il controllo dell'incantatore per 24 ore, passate le qu
 ### Utilizzo di uno slot incantesimo di livello superiore
 
 Se l'incantatore usa uno slot incantesimo di 7º livello, può animare o ristabilire il controllo su quattro ghoul. Se l'incantatore usa uno slot incantesimo di 8º livello, può animare o ristabilire il controllo su cinque ghoul, o due ghast o wight. Se l'incantatore usa uno slot incantesimo di 9º livello, può animare o ristabilire il controllo su sei ghoul, tre ghast o wight, o due mummie. Vedi "Mostri" per le relative schede delle statistiche.
+^srd-creare_non_morti-utilizzo-di-uno-slot-incantesimo-di-livello-superiore
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

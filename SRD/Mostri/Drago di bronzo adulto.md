@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Drago di bronzo adulto]]"]
+riferimenti_srd: ["[[SRD/Mostri/Drago di bronzo adulto]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Drago di bronzo adulto#^srd-drago_di_bronzo_adulto-anfibio]]", "[[SRD/Mostri/Drago di bronzo adulto#^srd-drago_di_bronzo_adulto-resistenza-leggendaria-3-giorno-o-4-giorno-nella-tana]]", "[[SRD/Mostri/Drago di bronzo adulto#^srd-drago_di_bronzo_adulto-multiattacco]]", "[[SRD/Mostri/Drago di bronzo adulto#^srd-drago_di_bronzo_adulto-squarcio]]", "[[SRD/Mostri/Drago di bronzo adulto#^srd-drago_di_bronzo_adulto-incantesimi]]", "[[SRD/Mostri/Drago di bronzo adulto#^srd-drago_di_bronzo_adulto-soffio-di-fulmini-ricarica-5-6]]", "[[SRD/Mostri/Drago di bronzo adulto#^srd-drago_di_bronzo_adulto-soffio-repulsivo]]", "[[SRD/Mostri/Drago di bronzo adulto#^srd-drago_di_bronzo_adulto-balzo]]", "[[SRD/Mostri/Drago di bronzo adulto#^srd-drago_di_bronzo_adulto-luce-guida]]", "[[SRD/Mostri/Drago di bronzo adulto#^srd-drago_di_bronzo_adulto-rombo-di-tuono]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Drago di bronzo adulto"
 type: "Drago (metallico)"
 size: "enorme"
@@ -106,19 +113,23 @@ tab: Azioni
 ### Anfibio
 
 Il drago può respirare in aria e in acqua.
+^srd-drago_di_bronzo_adulto-anfibio
 
 ### Resistenza leggendaria (3/giorno o 4/giorno nella tana)
 
 Se il drago fallisce un tiro salvezza, può scegliere di superarlo comunque.
+^srd-drago_di_bronzo_adulto-resistenza-leggendaria-3-giorno-o-4-giorno-nella-tana
 ## Azioni
 
 ### Multiattacco
 
 Il drago effettua tre attacchi Squarcio. Può sostituire un attacco con un utilizzo di (A) Soffio repulsivo o (B) Incantesimi per lanciare dardo tracciante (di 2º livello).
+^srd-drago_di_bronzo_adulto-multiattacco
 
 ### Squarcio
 
 *Tiro per colpire in mischia:* +12, portata 3 m. *Colpito:* 16 (2d8 + 7) danni taglienti più 5 (1d10) danni da fulmine.
+^srd-drago_di_bronzo_adulto-squarcio
 
 ### Incantesimi
 
@@ -134,14 +145,17 @@ Il drago lancia uno dei seguenti incantesimi, senza bisogno di componenti materi
 - parlare con gli animali
 - taumaturgia
 - trasformazione (solo in forma di bestia o umanoide, senza punti ferita temporanei ottenuti dall'incantesimo, e senza richiedere concentrazione o punti ferita temporanei per mantenere l'incantesimo)
+^srd-drago_di_bronzo_adulto-incantesimi
 
 ### Soffio di fulmini (ricarica 5-6)
 
 *Tiro salvezza su Destrezza:* CD 19, tutte le creature in una linea lunga 27 metri e larga 1,5 metri. *Fallimento:* 55 (10d10) danni da fulmine. *Successo:* danni dimezzati.
+^srd-drago_di_bronzo_adulto-soffio-di-fulmini-ricarica-5-6
 
 ### Soffio repulsivo
 
 *Tiro salvezza su Forza:* CD 19, tutte le creature in un cono di 9 metri. *Fallimento:* il bersaglio viene spinto fino a un massimo di 18 metri di distanza dal drago e cade a terra prono.
+^srd-drago_di_bronzo_adulto-soffio-repulsivo
 ## Azioni Leggendarie
 
 Subito dopo il turno di un'altra creatura, il drago può consumare un utilizzo per effettuare una delle seguenti azioni. Il drago recupera tutti gli utilizzi consumati all'inizio di ogni suo turno.
@@ -151,14 +165,17 @@ Subito dopo il turno di un'altra creatura, il drago può consumare un utilizzo p
 ### Balzo
 
 Il drago si muove fino a metà della sua velocità, ed effettua un attacco Squarcio.
+^srd-drago_di_bronzo_adulto-balzo
 
 ### Luce guida
 
 Il drago usa Incantesimi per lanciare dardo tracciante (di 2º livello).
+^srd-drago_di_bronzo_adulto-luce-guida
 
 ### Rombo di tuono
 
 *Tiro salvezza su Costituzione:* CD 17, tutte le creature in una sfera di 6 metri di raggio centrata su un punto che il drago è in grado di vedere entro 27 metri. *Fallimento:* 10 (3d6) danni da tuono, e il bersaglio è assordato fino al termine del proprio turno successivo.
+^srd-drago_di_bronzo_adulto-rombo-di-tuono
 ````
 
 > [!info] Licenza

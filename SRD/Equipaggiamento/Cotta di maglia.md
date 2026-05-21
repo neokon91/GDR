@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Equipaggiamento/Cotta di maglia]]"]
+riferimenti_srd: ["[[SRD/Equipaggiamento/Cotta di maglia]]"]
+riferimenti_regola: []
+sezioni_collegate: ["[[SRD/Equipaggiamento/Cotta di maglia#Dettagli]]"]
+blocchi_collegati: []
+tabelle_collegate: ["[[SRD/Equipaggiamento/Cotta di maglia#^srd-cotta_di_maglia-dettagli]]"]
+tags: ["dnd55/srd"]
 capitolo: "Equipaggiamento"
 pagine_sorgente: "104-105"
 tipo_oggetto: "armatura"
@@ -42,6 +49,7 @@ Pesante; Classe Armatura 16; costo 75 mo.
 | Categoria | Armatura | Classe Armatura | Forza | Furtività | Peso | Costo |
 | --- | --- | --- | --- | --- | --- | --- |
 | Pesante | Cotta di maglia | 16 | For 13 | Svantaggio | 27,5 kg | 75 mo |
+^srd-cotta_di_maglia-dettagli
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

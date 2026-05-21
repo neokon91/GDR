@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Uccello stigeo]]"]
+riferimenti_srd: ["[[SRD/Mostri/Uccello stigeo]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Uccello stigeo#^srd-uccello_stigeo-proboscide]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Uccello stigeo"
 type: "Mostruosità"
 size: "minuscola"
@@ -80,6 +87,7 @@ tab: Azioni
 ### Proboscide
 
 *Tiro per colpire in mischia:* +5, portata 1,5 m *Colpito:* 6 (1d6 + 3) danni perforanti, e l'uccello stigeo si avvinghia al bersaglio. Finché l'uccello stigeo è attaccato in questo modo non può effettuare attacchi Proboscide, e il bersaglio subisce 5 (2d4) danni necrotici all'inizio di ogni turno dell'uccello stigeo. L'uccello stigeo può staccarsi da solo utilizzando 1,5 metri del suo movimento. Il bersaglio o una creatura entro 1,5 metri da esso può staccare l'uccello stigeo con un'azione.
+^srd-uccello_stigeo-proboscide
 ````
 
 > [!info] Licenza

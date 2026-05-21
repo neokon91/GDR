@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Goblin tirapiedi]]"]
+riferimenti_srd: ["[[SRD/Mostri/Goblin tirapiedi]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Goblin tirapiedi#^srd-goblin_tirapiedi-pugnale]]", "[[SRD/Mostri/Goblin tirapiedi#^srd-goblin_tirapiedi-fuga-agile]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Goblin tirapiedi"
 type: "Folletto (goblinoide)"
 size: "piccolo"
@@ -86,6 +93,7 @@ tab: Azioni
 ### Pugnale
 
 *Tiro per colpire in mischia o a distanza:* +4, portata 1,5 m o gittata 6/18 m. *Colpito:* 4 (1d4 + 2) danni perforanti.
+^srd-goblin_tirapiedi-pugnale
 ````
 
 > [!info] Licenza

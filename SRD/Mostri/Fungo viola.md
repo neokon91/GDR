@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Fungo viola]]"]
+riferimenti_srd: ["[[SRD/Mostri/Fungo viola]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Fungo viola#^srd-fungo_viola-multiattacco]]", "[[SRD/Mostri/Fungo viola#^srd-fungo_viola-tocco-marcescente]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Fungo viola"
 type: "Vegetale"
 size: "medio"
@@ -82,10 +89,12 @@ tab: Azioni
 ### Multiattacco
 
 Il fungo effettua due attacchi Tocco marcescente.
+^srd-fungo_viola-multiattacco
 
 ### Tocco marcescente
 
 *Tiro per colpire in mischia:* +2, portata 3 m. *Colpito:* 4 (1d8) danni necrotici.
+^srd-fungo_viola-tocco-marcescente
 ````
 
 > [!info] Licenza

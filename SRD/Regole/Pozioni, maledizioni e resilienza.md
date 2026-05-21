@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Regole/Pozioni, maledizioni e resilienza]]"]
+riferimenti_srd: ["[[SRD/Regole/Pozioni, maledizioni e resilienza]]"]
+riferimenti_regola: []
+sezioni_collegate: ["[[SRD/Regole/Pozioni, maledizioni e resilienza#Miscibilita delle pozioni]]", "[[SRD/Regole/Pozioni, maledizioni e resilienza#Maledizioni e resilienza]]"]
+blocchi_collegati: []
+tabelle_collegate: ["[[SRD/Regole/Pozioni, maledizioni e resilienza#^srd-pozioni_maledizioni_resilienza-miscibilita-delle-pozioni]]", "[[SRD/Regole/Pozioni, maledizioni e resilienza#^srd-pozioni_maledizioni_resilienza-maledizioni-e-resilienza]]"]
+tags: ["dnd55/srd", "dnd55/regola"]
 capitolo: "Oggetti magici"
 categoria_regola: "Oggetti magici"
 pagine_sorgente: "233-235"
@@ -30,6 +37,7 @@ Le pozioni possono interagire in modo imprevedibile, gli oggetti maledetti nasco
 | 36-90 | Entrambe le pozioni funzionano normalmente. |
 | 91-99 | Entrambe le pozioni funzionano, ma gli effetti numerici e la durata di una pozione sono raddoppiati. Se nessuna delle due pozioni ha valori raddoppiabili, entrambe funzionano normalmente. |
 | 00 | Solo una pozione funziona, ma il suo effetto è permanente a discrezione del GM. |
+^srd-pozioni_maledizioni_resilienza-miscibilita-delle-pozioni
 
 ## Maledizioni e resilienza
 
@@ -39,6 +47,7 @@ Le pozioni possono interagire in modo imprevedibile, gli oggetti maledetti nasco
 | Sintonia maledetta | La sintonia con un oggetto maledetto non puo essere interrotta volontariamente finche la maledizione non viene spezzata. |
 | Resilienza | Un oggetto magico e tenace almeno quanto un oggetto non magico del suo genere; quasi tutti, eccetto pozioni e pergamene, hanno resistenza a tutti i danni. |
 | Manufatti | Possono essere distrutti solo con misure speciali, spesso scoperte tramite ricerca o missione. |
+^srd-pozioni_maledizioni_resilienza-maledizioni-e-resilienza
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Topo mannaro]]"]
+riferimenti_srd: ["[[SRD/Mostri/Topo mannaro]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Topo mannaro#^srd-topo_mannaro-multiattacco]]", "[[SRD/Mostri/Topo mannaro#^srd-topo_mannaro-graffio]]", "[[SRD/Mostri/Topo mannaro#^srd-topo_mannaro-morso-solo-in-forma-di-topo-o-ibrida]]", "[[SRD/Mostri/Topo mannaro#^srd-topo_mannaro-balestra-a-mano-solo-in-forma-umanoide-o-ibrida]]", "[[SRD/Mostri/Topo mannaro#^srd-topo_mannaro-mutaforma]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Topo mannaro"
 type: "Mostruosità (licantropo)"
 size: "media o piccola"
@@ -93,18 +100,22 @@ tab: Azioni
 ### Multiattacco
 
 Il topo mannaro effettua due attacchi, usando Graffio o Balestra a mano in qualsiasi combinazione. Può sostituire un attacco con un attacco Morso.
+^srd-topo_mannaro-multiattacco
 
 ### Graffio
 
 *Tiro per colpire in mischia:* +5, portata 1,5 m. *Colpito:* 6 (1d6 + 3) danni taglienti.
+^srd-topo_mannaro-graffio
 
 ### Morso (solo in forma di topo o ibrida)
 
 *Tiro per colpire in mischia:* +5, portata 1,5 m *Colpito:* 8 (2d4 + 3) danni perforanti. Se il bersaglio è un umanoide, subisce il seguente effetto. *Tiro salvezza su Costituzione:* CD 11. *Fallimento:* il bersaglio è maledetto. Se il bersaglio scende a 0 punti ferita, diventa un topo mannaro sotto il controllo del GM e ha 10 punti ferita. *Successo:* il bersaglio è immune alla maledizione del topo mannaro per 24 ore.
+^srd-topo_mannaro-morso-solo-in-forma-di-topo-o-ibrida
 
 ### Balestra a mano (solo in forma umanoide o ibrida)
 
 *Tiro per colpire a distanza:* +5, portata 9/36 m. *Colpito:* 6 (1d6 + 3) danni perforanti.
+^srd-topo_mannaro-balestra-a-mano-solo-in-forma-umanoide-o-ibrida
 ````
 
 > [!info] Licenza

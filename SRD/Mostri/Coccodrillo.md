@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Coccodrillo]]"]
+riferimenti_srd: ["[[SRD/Mostri/Coccodrillo]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Coccodrillo#^srd-coccodrillo-apnea]]", "[[SRD/Mostri/Coccodrillo#^srd-coccodrillo-morso]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Coccodrillo"
 type: "Bestia"
 size: "grande"
@@ -87,11 +94,13 @@ tab: Azioni
 ### Apnea
 
 Il coccodrillo può trattenere il respiro per 1 ora.
+^srd-coccodrillo-apnea
 ## Azioni
 
 ### Morso
 
 *Tiro per colpire in mischia:* +4, portata 1,5 m. *Colpito:* 6 (1d8 + 2) danni perforanti. Se il bersaglio è una creatura di taglia Media o inferiore, è afferrato (CD 12 per sfuggire). Mentre è afferrato, il bersaglio è anche trattenuto.
+^srd-coccodrillo-morso
 ````
 
 > [!info] Licenza

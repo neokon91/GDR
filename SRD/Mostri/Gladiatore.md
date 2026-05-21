@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Gladiatore]]"]
+riferimenti_srd: ["[[SRD/Mostri/Gladiatore]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Gladiatore#^srd-gladiatore-multiattacco]]", "[[SRD/Mostri/Gladiatore#^srd-gladiatore-lancia]]", "[[SRD/Mostri/Gladiatore#^srd-gladiatore-scudo-da-sfondamento]]", "[[SRD/Mostri/Gladiatore#^srd-gladiatore-parata]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Gladiatore"
 type: "Umanoide"
 size: "medio o piccolo"
@@ -95,14 +102,17 @@ tab: Azioni
 ### Multiattacco
 
 Il gladiatore effettua tre attacchi Lancia. Può sostituire un attacco con un utilizzo di Scudo da sfondamento.
+^srd-gladiatore-multiattacco
 
 ### Lancia
 
 *Tiro per colpire in mischia o a distanza:* +7, portata 1,5 m o gittata 6/18 m. *Colpito:* 11 (2d6 + 4) danni perforanti.
+^srd-gladiatore-lancia
 
 ### Scudo da sfondamento
 
 *Tiro salvezza su Forza:* CD 15, una creatura entro 1,5 metri che il gladiatore è in grado di vedere. *Fallimento:* 9 (2d4 + 4) danni contundenti. Se il bersaglio è una creatura di taglia Media o inferiore, cade a terra prono.
+^srd-gladiatore-scudo-da-sfondamento
 ````
 
 > [!info] Licenza

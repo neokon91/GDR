@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Equipaggiamento/Borsa del guaritore]]"]
+riferimenti_srd: ["[[SRD/Equipaggiamento/Borsa del guaritore]]"]
+riferimenti_regola: []
+sezioni_collegate: ["[[SRD/Equipaggiamento/Borsa del guaritore#Dettagli]]"]
+blocchi_collegati: []
+tabelle_collegate: ["[[SRD/Equipaggiamento/Borsa del guaritore#^srd-borsa_del_guaritore-dettagli]]"]
+tags: ["dnd55/srd"]
 capitolo: "Equipaggiamento"
 pagine_sorgente: "107-113"
 tipo_oggetto: "equipaggiamento_avventura"
@@ -42,6 +49,7 @@ Ha dieci usi; con un'azione di Utilizzo stabilizza una creatura a 0 PF senza pro
 | Oggetto | Peso | Costo |
 | --- | --- | --- |
 | Borsa del guaritore | 1,5 kg | 5 mo |
+^srd-borsa_del_guaritore-dettagli
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

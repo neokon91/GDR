@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Drago di bronzo cucciolo]]"]
+riferimenti_srd: ["[[SRD/Mostri/Drago di bronzo cucciolo]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Drago di bronzo cucciolo#^srd-drago_di_bronzo_cucciolo-anfibio]]", "[[SRD/Mostri/Drago di bronzo cucciolo#^srd-drago_di_bronzo_cucciolo-multiattacco]]", "[[SRD/Mostri/Drago di bronzo cucciolo#^srd-drago_di_bronzo_cucciolo-squarcio]]", "[[SRD/Mostri/Drago di bronzo cucciolo#^srd-drago_di_bronzo_cucciolo-soffio-di-fulmini-ricarica-5-6]]", "[[SRD/Mostri/Drago di bronzo cucciolo#^srd-drago_di_bronzo_cucciolo-soffio-repulsivo]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Drago di bronzo cucciolo"
 type: "Drago (metallico)"
 size: "medio"
@@ -95,23 +102,28 @@ tab: Azioni
 ### Anfibio
 
 Il drago può respirare in aria e in acqua.
+^srd-drago_di_bronzo_cucciolo-anfibio
 ## Azioni
 
 ### Multiattacco
 
 Il drago effettua due attacchi Squarcio.
+^srd-drago_di_bronzo_cucciolo-multiattacco
 
 ### Squarcio
 
 *Tiro per colpire in mischia:* +5, portata 1,5 m. *Colpito:* 8 (1d10 + 3) danni taglienti.
+^srd-drago_di_bronzo_cucciolo-squarcio
 
 ### Soffio di fulmini (ricarica 5-6)
 
 *Tiro salvezza su Destrezza:* CD 12, tutte le creature in una linea lunga 12 metri e larga 1,5 metri. *Fallimento:* 16 (3d10) danni da fulmine. *Successo:* danni dimezzati.
+^srd-drago_di_bronzo_cucciolo-soffio-di-fulmini-ricarica-5-6
 
 ### Soffio repulsivo
 
 *Tiro salvezza su Forza:* CD 12, tutte le creature in un cono di 9 metri. *Fallimento:* il bersaglio viene spinto fino a un massimo di 9 metri di distanza dal drago e cade a terra prono.
+^srd-drago_di_bronzo_cucciolo-soffio-repulsivo
 ````
 
 > [!info] Licenza

@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Drago d'oro adulto]]"]
+riferimenti_srd: ["[[SRD/Mostri/Drago d'oro adulto]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Drago d'oro adulto#^srd-drago_d_oro_adulto-anfibio]]", "[[SRD/Mostri/Drago d'oro adulto#^srd-drago_d_oro_adulto-resistenza-leggendaria-3-giorno-o-4-giorno-nella-tana]]", "[[SRD/Mostri/Drago d'oro adulto#^srd-drago_d_oro_adulto-multiattacco]]", "[[SRD/Mostri/Drago d'oro adulto#^srd-drago_d_oro_adulto-squarcio]]", "[[SRD/Mostri/Drago d'oro adulto#^srd-drago_d_oro_adulto-incantesimi]]", "[[SRD/Mostri/Drago d'oro adulto#^srd-drago_d_oro_adulto-soffio-di-fuoco-ricarica-5-6]]", "[[SRD/Mostri/Drago d'oro adulto#^srd-drago_d_oro_adulto-soffio-indebolente]]", "[[SRD/Mostri/Drago d'oro adulto#^srd-drago_d_oro_adulto-balzo]]", "[[SRD/Mostri/Drago d'oro adulto#^srd-drago_d_oro_adulto-luce-guida]]", "[[SRD/Mostri/Drago d'oro adulto#^srd-drago_d_oro_adulto-ostracismo]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Drago d'oro adulto"
 type: "Drago (metallico)"
 size: "enorme"
@@ -107,19 +114,23 @@ tab: Azioni
 ### Anfibio
 
 Il drago può respirare in aria e in acqua.
+^srd-drago_d_oro_adulto-anfibio
 
 ### Resistenza leggendaria (3/giorno o 4/giorno nella tana)
 
 Se il drago fallisce un tiro salvezza, può scegliere di superarlo comunque.
+^srd-drago_d_oro_adulto-resistenza-leggendaria-3-giorno-o-4-giorno-nella-tana
 ## Azioni
 
 ### Multiattacco
 
 Il drago effettua tre attacchi Squarcio. Può sostituire un attacco con un utilizzo di (A) Incantesimi per lanciare dardo tracciante (di 2º livello) o (B) Soffio indebolente.
+^srd-drago_d_oro_adulto-multiattacco
 
 ### Squarcio
 
 *Tiro per colpire in mischia:* +14, portata 3 m. *Colpito:* 17 (2d8 + 8) danni taglienti più 4 (1d8) danni da fuoco.
+^srd-drago_d_oro_adulto-squarcio
 
 ### Incantesimi
 
@@ -133,14 +144,17 @@ Il drago lancia uno dei seguenti incantesimi, senza bisogno di componenti materi
 - dardo tracciante (di 2º livello)
 - individuazione del magico
 - trasformazione (solo in forma di bestia o umanoide, senza punti ferita temporanei ottenuti dall'incantesimo, e senza richiedere concentrazione o punti ferita temporanei per mantenere l'incantesimo)
+^srd-drago_d_oro_adulto-incantesimi
 
 ### Soffio di fuoco (ricarica 5-6)
 
 *Tiro salvezza su Destrezza:* CD 21, tutte le creature in un cono di 18 metri. *Fallimento:* 66 (12d10) danni da fuoco. *Successo:* danni dimezzati.
+^srd-drago_d_oro_adulto-soffio-di-fuoco-ricarica-5-6
 
 ### Soffio indebolente
 
 *Tiro salvezza su Forza:* CD 21, ogni creatura che al momento non è sotto l'effetto di questo soffio in un cono di 18 metri. *Fallimento:* il bersaglio subisce svantaggio alle prove con d20 basate sulla Forza e sottrae 3 (1d6) ai tiri per i danni. La creatura ripete il tiro salvezza alla fine di ogni suo turno e, se lo supera, l'effetto svanisce. Dopo 1 minuto, il tiro viene superato automaticamente.
+^srd-drago_d_oro_adulto-soffio-indebolente
 ## Azioni Leggendarie
 
 Subito dopo il turno di un'altra creatura, il drago può consumare un utilizzo per effettuare una delle seguenti azioni. Il drago recupera tutti gli utilizzi consumati all'inizio di ogni suo turno.
@@ -150,14 +164,17 @@ Subito dopo il turno di un'altra creatura, il drago può consumare un utilizzo p
 ### Balzo
 
 Il drago si muove fino a metà della sua velocità, ed effettua un attacco Squarcio.
+^srd-drago_d_oro_adulto-balzo
 
 ### Luce guida
 
 Il drago usa Incantesimi per lanciare dardo tracciante (di 2º livello).
+^srd-drago_d_oro_adulto-luce-guida
 
 ### Ostracismo
 
 *Tiro salvezza su Carisma:* CD 21, una creatura che il drago è in grado di vedere entro 36 metri. *Fallimento:* 10 (3d6) danni da forza, il bersaglio è incapacitato e viene trasportato su un semipiano sicuro fino all'inizio del turno successivo del drago, durante cui riappare in uno spazio libero a scelta del drago entro 36 metri da quest'ultimo. *Fallimento o successo:* il drago non può ripetere quest'azione fino all'inizio del proprio turno successivo.
+^srd-drago_d_oro_adulto-ostracismo
 ````
 
 > [!info] Licenza

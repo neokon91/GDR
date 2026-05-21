@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Equipaggiamento/Custodia per mappe o pergamene]]"]
+riferimenti_srd: ["[[SRD/Equipaggiamento/Custodia per mappe o pergamene]]"]
+riferimenti_regola: []
+sezioni_collegate: ["[[SRD/Equipaggiamento/Custodia per mappe o pergamene#Dettagli]]"]
+blocchi_collegati: []
+tabelle_collegate: ["[[SRD/Equipaggiamento/Custodia per mappe o pergamene#^srd-custodia_per_mappe_o_pergamene-dettagli]]"]
+tags: ["dnd55/srd"]
 capitolo: "Equipaggiamento"
 pagine_sorgente: "107-113"
 tipo_oggetto: "equipaggiamento_avventura"
@@ -42,6 +49,7 @@ Peso 0,5 kg; costo 1 mo.
 | Oggetto | Peso | Costo |
 | --- | --- | --- |
 | Custodia per mappe o pergamene | 0,5 kg | 1 mo |
+^srd-custodia_per_mappe_o_pergamene-dettagli
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

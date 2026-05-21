@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Elementale dell'aria]]"]
+riferimenti_srd: ["[[SRD/Mostri/Elementale dell'aria]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Elementale dell'aria#^srd-elementale_dell_aria-forma-d-aria]]", "[[SRD/Mostri/Elementale dell'aria#^srd-elementale_dell_aria-multiattacco]]", "[[SRD/Mostri/Elementale dell'aria#^srd-elementale_dell_aria-schianto-tonante]]", "[[SRD/Mostri/Elementale dell'aria#^srd-elementale_dell_aria-vortice-ricarica-4-6]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Elementale dell'aria"
 type: "Elementale"
 size: "grande"
@@ -86,19 +93,23 @@ tab: Azioni
 ### Forma d'aria
 
 L'elementale può entrare nello spazio di una creatura e fermarvisi. Può muoversi attraverso uno spazio stretto fino a 2,5 centimetri senza consumare movimento extra per farlo.
+^srd-elementale_dell_aria-forma-d-aria
 ## Azioni
 
 ### Multiattacco
 
 L'elementale effettua due attacchi Schianto tonante.
+^srd-elementale_dell_aria-multiattacco
 
 ### Schianto tonante
 
 *Tiro per colpire in mischia:* +8, portata 3 m. *Colpito:* 14 (2d8 + 5) danni da tuono.
+^srd-elementale_dell_aria-schianto-tonante
 
 ### Vortice (ricarica 4-6)
 
 *Tiro salvezza su Forza:* CD 13, una creatura di taglia Media o inferiore nello spazio dell'elementale. *Fallimento:* 24 (4d10 + 2) danni da tuono, il bersaglio viene spinto fino a un massimo di 6 metri di distanza dall'elementale e cade a terra prono. *Successo:* danni dimezzati.
+^srd-elementale_dell_aria-vortice-ricarica-4-6
 ````
 
 > [!info] Licenza

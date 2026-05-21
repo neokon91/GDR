@@ -66,6 +66,20 @@ tab: Connessioni
 >
 > Propaga a: `INPUT[propaga_a][:propaga_a]`
 >
+> Fonti: `INPUT[fonti][:fonti]`
+>
+> Riferimenti SRD: `INPUT[riferimenti_srd][:riferimenti_srd]`
+>
+> Riferimenti regola: `INPUT[riferimenti_regola][:riferimenti_regola]`
+>
+> Sezioni collegate: `INPUT[sezioni_collegate][:sezioni_collegate]`
+>
+> Blocchi collegati: `INPUT[blocchi_collegati][:blocchi_collegati]`
+>
+> Tabelle collegate: `INPUT[tabelle_collegate][:tabelle_collegate]`
+>
+> Tag: `INPUT[tags][:tags]`
+>
 > Aggiornamenti richiesti: `INPUT[list:aggiornamenti_richiesti]`
 >
 > Stato propagazione: `INPUT[text:propagazione_stato]`

@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Guerriero veterano]]"]
+riferimenti_srd: ["[[SRD/Mostri/Guerriero veterano]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Guerriero veterano#^srd-guerriero_veterano-multiattacco]]", "[[SRD/Mostri/Guerriero veterano#^srd-guerriero_veterano-spadone]]", "[[SRD/Mostri/Guerriero veterano#^srd-guerriero_veterano-balestra-pesante]]", "[[SRD/Mostri/Guerriero veterano#^srd-guerriero_veterano-parata]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Guerriero veterano"
 type: "Umanoide"
 size: "medio o piccolo"
@@ -91,14 +98,17 @@ tab: Azioni
 ### Multiattacco
 
 Il guerriero effettua due attacchi Spadone o Balestra pesante.
+^srd-guerriero_veterano-multiattacco
 
 ### Spadone
 
 *Tiro per colpire in mischia:* +5, portata 1,5 m. *Colpito:* 10 (2d6 + 3) danni taglienti.
+^srd-guerriero_veterano-spadone
 
 ### Balestra pesante
 
 *Tiro per colpire a distanza:* +3, gittata 30/120 m. *Colpito:* 12 (2d10 + 1) danni perforanti.
+^srd-guerriero_veterano-balestra-pesante
 ````
 
 > [!info] Licenza

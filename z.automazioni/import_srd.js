@@ -89,6 +89,8 @@ const SOURCES = [
     }
 ];
 
+const DIR_BY_TIPO = Object.fromEntries(SOURCES.map(source => [source.tipo, source.dir]));
+
 function ensureDir(dir) {
     fs.mkdirSync(dir, { recursive: true });
 }
@@ -113,6 +115,29 @@ function slugify(value) {
         .replace(/[\\/:*?"<>|#^[\]]/g, "")
         .replace(/\s+/g, " ")
         .trim();
+}
+
+function blockSlug(value) {
+    return String(value ?? "")
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/[^a-z0-9_-]+/g, "-")
+        .replace(/^-+|-+$/g, "") || "blocco";
+}
+
+function blockId(item, name) {
+    return `srd-${blockSlug(item.id)}-${blockSlug(name)}`;
+}
+
+function wikilink(target) {
+    return `[[${target}]]`;
+}
+
+function srdTarget(item, tipo) {
+    const dir = DIR_BY_TIPO[tipo] ?? "";
+    const filename = slugify(item.nome || item.id);
+    return dir ? `${OUT}/${dir}/${filename}` : filename;
 }
 
 function yamlScalar(value) {
@@ -192,14 +217,14 @@ function tableFromRows(rows) {
     ].join("\n");
 }
 
-function sectionsToMarkdown(sections = []) {
+function sectionsToMarkdown(item, sections = []) {
     return sections.map(section => {
         const title = section.titolo ? `## ${section.titolo}\n\n` : "";
         if (Array.isArray(section.righe)) {
-            return `${title}${tableFromRows(section.righe)}`;
+            return `${title}${tableFromRows(section.righe)}\n^${blockId(item, section.titolo ?? "tabella")}`;
         }
         if (Array.isArray(section.blocchi)) {
-            return `${title}${section.blocchi.map(block => `### ${block.nome}\n\n${paragraph(block.descrizione)}`).join("\n\n")}`;
+            return `${title}${section.blocchi.map(block => `### ${block.nome}\n\n${paragraph(block.descrizione)}\n^${blockId(item, block.nome)}`).join("\n\n")}`;
         }
         if (section.descrizione) {
             return `${title}${paragraph(section.descrizione)}`;
@@ -208,9 +233,9 @@ function sectionsToMarkdown(sections = []) {
     }).filter(Boolean).join("\n\n");
 }
 
-function namedBlocks(title, blocks) {
+function namedBlocks(item, title, blocks) {
     if (!Array.isArray(blocks) || !blocks.length) return "";
-    return `## ${title}\n\n${blocks.map(block => `### ${block.nome}\n\n${paragraph(block.descrizione)}`).join("\n\n")}`;
+    return `## ${title}\n\n${blocks.map(block => `### ${block.nome}\n\n${paragraph(block.descrizione)}\n^${blockId(item, block.nome)}`).join("\n\n")}`;
 }
 
 function statTable(monster) {
@@ -279,6 +304,36 @@ function statblockBlocks(blocks) {
         : [];
 }
 
+function srdTags(tipo) {
+    const tags = ["dnd55/srd"];
+    if (tipo === "incantesimo") tags.push("dnd55/incantesimo");
+    if (tipo === "mostro") tags.push("dnd55/creatura");
+    if (tipo === "oggetto magico") tags.push("dnd55/oggetto-magico");
+    if (tipo === "regola" || tipo === "glossario") tags.push("dnd55/regola");
+    return tags;
+}
+
+function sectionLinks(item, tipo) {
+    const target = srdTarget(item, tipo);
+    return (item.sezioni ?? [])
+        .map(section => section.titolo ? wikilink(`${target}#${section.titolo}`) : "")
+        .filter(Boolean);
+}
+
+function tableLinks(item, tipo) {
+    const target = srdTarget(item, tipo);
+    return (item.sezioni ?? [])
+        .filter(section => Array.isArray(section.righe) && section.righe.length)
+        .map(section => wikilink(`${target}#^${blockId(item, section.titolo ?? "tabella")}`));
+}
+
+function contentBlockLinks(item, tipo, groups = []) {
+    const target = srdTarget(item, tipo);
+    return groups.flatMap(group => (group ?? [])
+        .map(block => block?.nome ? wikilink(`${target}#^${blockId(item, block.nome)}`) : "")
+        .filter(Boolean));
+}
+
 function renderBackground(item) {
     const competenze = item.competenze ?? {};
     const fields = baseFields(item, "background", {
@@ -295,7 +350,7 @@ function renderBackground(item) {
         `# ${item.nome}`,
         `> [!infobox|wiki]- Background\n> Caratteristiche: ${(item.punteggi_caratteristica ?? []).join(", ")}\n> Talento: ${item.talento_origine ?? ""}\n> Equipaggiamento alternativo: ${item.equipaggiamento_alternativo ?? ""}`,
         paragraph(item.descrizione),
-        sectionsToMarkdown(item.sezioni),
+        sectionsToMarkdown(item, item.sezioni),
         attribution()
     ].filter(Boolean).join("\n\n");
 }
@@ -314,7 +369,7 @@ function renderClass(item) {
         paragraph(item.descrizione),
         item.competenze ? `## Competenze\n\n${Object.entries(item.competenze).map(([k, v]) => `- **${k}**: ${v}`).join("\n")}` : "",
         item.equipaggiamento_iniziale ? `## Equipaggiamento Iniziale\n\n${paragraph(item.equipaggiamento_iniziale)}` : "",
-        sectionsToMarkdown(item.sezioni),
+        sectionsToMarkdown(item, item.sezioni),
         Array.isArray(item.progressione) ? `## Progressione\n\n${tableFromRows(item.progressione)}` : "",
         item.sottoclasse_srd?.nome ? `## Sottoclasse SRD\n\n${item.sottoclasse_srd.nome}` : "",
         attribution()
@@ -345,7 +400,7 @@ function renderEquipment(item) {
         `# ${item.nome}`,
         `> [!infobox|wiki]- Equipaggiamento\n> Tipo: ${item.tipo ?? ""}\n> Categoria: ${item.categoria ?? ""}\n> Costo: ${item.costo ?? ""}\n> Peso: ${item.peso ?? ""}`,
         paragraph(item.descrizione),
-        sectionsToMarkdown(item.sezioni),
+        sectionsToMarkdown(item, item.sezioni),
         attribution()
     ].filter(Boolean).join("\n\n");
 }
@@ -364,7 +419,7 @@ function renderFeat(item) {
         `# ${item.nome}`,
         `> [!infobox|wiki]- Talento\n> Categoria: ${item.categoria ?? ""}\n> Prerequisito: ${item.prerequisito ?? ""}\n> Ripetibile: ${item.ripetibile ? "si" : "no"}`,
         paragraph(item.descrizione),
-        sectionsToMarkdown(item.sezioni),
+        sectionsToMarkdown(item, item.sezioni),
         attribution()
     ].filter(Boolean).join("\n\n");
 }
@@ -381,7 +436,7 @@ function renderLanguage(item) {
         `# ${item.nome}`,
         `> [!infobox|wiki]- Lingua\n> Categoria: ${item.categoria ?? ""}\n> Tiro casuale: ${item.tiro_casuale ?? ""}`,
         paragraph(item.descrizione),
-        sectionsToMarkdown(item.sezioni),
+        sectionsToMarkdown(item, item.sezioni),
         attribution()
     ].filter(Boolean).join("\n\n");
 }
@@ -395,14 +450,15 @@ function renderSpell(item) {
         gittata: item.gittata,
         componenti: item.componenti,
         durata: item.durata,
-        pagine_sorgente: item.pagine_sorgente
+        pagine_sorgente: item.pagine_sorgente,
+        blocchi_collegati: contentBlockLinks(item, "incantesimo", [item.scaling])
     });
 
     return frontmatter(fields) + [
         `# ${item.nome}`,
         `> [!infobox|wiki]- Incantesimo\n> Livello: ${item.livello}\n> Scuola: ${item.scuola}\n> Tempo di lancio: ${item.tempo_lancio}\n> Gittata: ${item.gittata}\n> Componenti: ${item.componenti}\n> Durata: ${item.durata}`,
         paragraph(item.descrizione),
-        namedBlocks("Slot Di Livello Superiore", item.scaling),
+        namedBlocks(item, "Slot Di Livello Superiore", item.scaling),
         attribution()
     ].filter(Boolean).join("\n\n");
 }
@@ -421,7 +477,7 @@ function renderSpecies(item) {
         `# ${item.nome}`,
         `> [!infobox|wiki]- Specie\n> Tipo creatura: ${item.tipo_creatura ?? ""}\n> Taglia: ${item.taglia ?? ""}\n> Velocita: ${item.velocita ?? ""}`,
         paragraph(item.descrizione),
-        sectionsToMarkdown(item.sezioni),
+        sectionsToMarkdown(item, item.sezioni),
         attribution()
     ].filter(Boolean).join("\n\n");
 }
@@ -463,7 +519,15 @@ function renderMonster(item) {
         cr: cr.valore,
         xp: cr.punti_esperienza,
         bonus_competenza: item.bonus_competenza,
-        statblock: true
+        statblock: true,
+        blocchi_collegati: contentBlockLinks(item, "mostro", [
+            item.tratti,
+            item.azioni,
+            item.azioni_bonus,
+            item.reazioni,
+            item.azioni_leggendarie?.azioni,
+            item.azioni_tana
+        ])
     });
 
     const tabs = [
@@ -483,9 +547,9 @@ function renderMonster(item) {
         "",
         "tab: Azioni",
         "",
-        namedBlocks("Tratti", item.tratti),
-        namedBlocks("Azioni", item.azioni),
-        item.azioni_leggendarie ? renderLegendary(item.azioni_leggendarie) : "",
+        namedBlocks(item, "Tratti", item.tratti),
+        namedBlocks(item, "Azioni", item.azioni),
+        item.azioni_leggendarie ? renderLegendary(item, item.azioni_leggendarie) : "",
         "````",
     ].filter(Boolean).join("\n");
 
@@ -496,11 +560,11 @@ function renderMonster(item) {
     ].filter(Boolean).join("\n\n");
 }
 
-function renderLegendary(legendary) {
+function renderLegendary(item, legendary) {
     return [
         "## Azioni Leggendarie",
         paragraph(legendary.descrizione_utilizzi),
-        namedBlocks("Opzioni", legendary.azioni)
+        namedBlocks(item, "Opzioni", legendary.azioni)
     ].filter(Boolean).join("\n\n");
 }
 
@@ -516,7 +580,7 @@ function renderMagicItem(item) {
         `# ${item.nome}`,
         `> [!infobox|wiki]- Oggetto Magico\n> Tipo: ${item.tipo}\n> Rarita: ${item.rarita}\n> Sintonia: ${item.richiede_sintonia ? "si" : "no"}`,
         paragraph(item.descrizione),
-        sectionsToMarkdown(item.sezioni),
+        sectionsToMarkdown(item, item.sezioni),
         attribution()
     ].filter(Boolean).join("\n\n");
 }
@@ -531,7 +595,7 @@ function renderRule(item) {
     return frontmatter(fields) + [
         `# ${item.nome}`,
         paragraph(item.descrizione),
-        sectionsToMarkdown(item.sezioni),
+        sectionsToMarkdown(item, item.sezioni),
         attribution()
     ].filter(Boolean).join("\n\n");
 }
@@ -546,12 +610,13 @@ function renderGlossary(item) {
     return frontmatter(fields) + [
         `# ${item.nome}`,
         paragraph(item.descrizione),
-        sectionsToMarkdown(item.sezioni),
+        sectionsToMarkdown(item, item.sezioni),
         attribution()
     ].filter(Boolean).join("\n\n");
 }
 
 function baseFields(item, tipo, extra = {}) {
+    const riferimenti = [wikilink(srdTarget(item, tipo))];
     return {
         id: `srd-${item.id}`,
         srd_id: item.id,
@@ -564,6 +629,13 @@ function baseFields(item, tipo, extra = {}) {
         licenza: "CC-BY-4.0",
         repository: "neokon91/DND-SRD-IT",
         generato_da: GENERATED_BY,
+        fonti: [wikilink("SRD/Licenza SRD"), ...riferimenti],
+        riferimenti_srd: riferimenti,
+        riferimenti_regola: [],
+        sezioni_collegate: sectionLinks(item, tipo),
+        blocchi_collegati: [],
+        tabelle_collegate: tableLinks(item, tipo),
+        tags: srdTags(tipo),
         ...extra
     };
 }

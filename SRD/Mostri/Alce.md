@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Alce]]"]
+riferimenti_srd: ["[[SRD/Mostri/Alce]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Alce#^srd-alce-sfondamento]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Alce"
 type: "Bestia"
 size: "grande"
@@ -84,6 +91,7 @@ tab: Azioni
 ### Sfondamento
 
 *Tiro per colpire in mischia:* +5, portata 1,5 m. *Colpito:* 6 (1d6 + 3) danni contundenti. Se il bersaglio è una creatura di taglia Grande o inferiore e l'alce si è mosso di 6 metri o più in linea retta verso di esso subito prima del colpo, il bersaglio subisce 3 (1d6) danni contundenti extra e cade a terra prono.
+^srd-alce-sfondamento
 ````
 
 > [!info] Licenza

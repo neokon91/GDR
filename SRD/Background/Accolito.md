@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Background/Accolito]]"]
+riferimenti_srd: ["[[SRD/Background/Accolito]]"]
+riferimenti_regola: []
+sezioni_collegate: ["[[SRD/Background/Accolito#Dettagli]]"]
+blocchi_collegati: []
+tabelle_collegate: ["[[SRD/Background/Accolito#^srd-accolito-dettagli]]"]
+tags: ["dnd55/srd"]
 capitolo: "Origini dei personaggi"
 pagine_sorgente: 93
 punteggi_caratteristica: ["Intelligenza", "Saggezza", "Carisma"]
@@ -36,6 +43,7 @@ Intelligenza, Saggezza, Carisma; Iniziato alla magia (chierico); Intuizione e Re
 | Abilita | Intuizione e Religione |
 | Strumenti | scorte da calligrafo. |
 | Equipaggiamento alternativo | 50 mo |
+^srd-accolito-dettagli
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

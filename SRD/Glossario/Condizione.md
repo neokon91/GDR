@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Glossario/Condizione]]"]
+riferimenti_srd: ["[[SRD/Glossario/Condizione]]"]
+riferimenti_regola: []
+sezioni_collegate: ["[[SRD/Glossario/Condizione#Condizioni del glossario]]"]
+blocchi_collegati: []
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/regola"]
 lettera: "C"
 descrittore:
 pagine_sorgente: 206

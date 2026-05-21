@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Ippogrifo]]"]
+riferimenti_srd: ["[[SRD/Mostri/Ippogrifo]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Ippogrifo#^srd-ippogrifo-volo-sfuggente]]", "[[SRD/Mostri/Ippogrifo#^srd-ippogrifo-multiattacco]]", "[[SRD/Mostri/Ippogrifo#^srd-ippogrifo-squarcio]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Ippogrifo"
 type: "Mostruosità"
 size: "grande"
@@ -88,15 +95,18 @@ tab: Azioni
 ### Volo sfuggente
 
 L'ippogrifo non provoca attacchi d'opportunità quando vola oltre la portata di un nemico.
+^srd-ippogrifo-volo-sfuggente
 ## Azioni
 
 ### Multiattacco
 
 L'ippogrifo effettua due attacchi Squarcio.
+^srd-ippogrifo-multiattacco
 
 ### Squarcio
 
 *Tiro per colpire in mischia:* +5, portata 1,5 m. *Colpito:* 7 (1d8 + 3) danni taglienti.
+^srd-ippogrifo-squarcio
 ````
 
 > [!info] Licenza

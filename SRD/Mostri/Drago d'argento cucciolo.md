@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Drago d'argento cucciolo]]"]
+riferimenti_srd: ["[[SRD/Mostri/Drago d'argento cucciolo]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Drago d'argento cucciolo#^srd-drago_d_argento_cucciolo-multiattacco]]", "[[SRD/Mostri/Drago d'argento cucciolo#^srd-drago_d_argento_cucciolo-squarcio]]", "[[SRD/Mostri/Drago d'argento cucciolo#^srd-drago_d_argento_cucciolo-soffio-di-freddo-ricarica-5-6]]", "[[SRD/Mostri/Drago d'argento cucciolo#^srd-drago_d_argento_cucciolo-soffio-paralizzante]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Drago d'argento cucciolo"
 type: "Drago (metallico)"
 size: "medio"
@@ -93,18 +100,22 @@ tab: Azioni
 ### Multiattacco
 
 Il drago effettua due attacchi Squarcio.
+^srd-drago_d_argento_cucciolo-multiattacco
 
 ### Squarcio
 
 *Tiro per colpire in mischia:* +6, portata 1,5 m. *Colpito:* 9 (1d10 + 4) danni perforanti.
+^srd-drago_d_argento_cucciolo-squarcio
 
 ### Soffio di freddo (ricarica 5-6)
 
 *Tiro salvezza su Costituzione:* CD 13, tutte le creature in un cono di 4,5 metri. *Fallimento:* 18 (4d8) danni da freddo. *Successo:* danni dimezzati.
+^srd-drago_d_argento_cucciolo-soffio-di-freddo-ricarica-5-6
 
 ### Soffio paralizzante
 
 *Tiro salvezza su Costituzione:* CD 13, tutte le creature in un cono di 4,5 metri. *Primo fallimento:* il bersaglio è incapacitato fino al termine del proprio turno successivo. A quel punto, ripete il tiro salvezza. *Secondo fallimento:* il bersaglio è paralizzato e ripete il tiro salvezza alla fine di ogni suo turno e, se lo supera, l'effetto svanisce. Dopo 1 minuto, il tiro viene superato automaticamente.
+^srd-drago_d_argento_cucciolo-soffio-paralizzante
 ````
 
 > [!info] Licenza

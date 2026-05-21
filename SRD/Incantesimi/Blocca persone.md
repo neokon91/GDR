@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Incantesimi/Blocca persone]]"]
+riferimenti_srd: ["[[SRD/Incantesimi/Blocca persone]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Incantesimi/Blocca persone#^srd-blocca_persone-utilizzo-di-uno-slot-incantesimo-di-livello-superiore]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/incantesimo"]
 livello: 2
 scuola: "Ammaliamento"
 classi: ["bardo", "chierico", "druido", "mago", "stregone", "warlock"]
@@ -36,6 +43,7 @@ L'incantatore sceglie un umanoide entro gittata che egli è in grado di vedere. 
 ### Utilizzo di uno slot incantesimo di livello superiore
 
 L'incantatore può bersagliare un umanoide aggiuntivo per ogni slot di livello superiore al 2º.
+^srd-blocca_persone-utilizzo-di-uno-slot-incantesimo-di-livello-superiore
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

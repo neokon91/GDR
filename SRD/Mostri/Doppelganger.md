@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Doppelganger]]"]
+riferimenti_srd: ["[[SRD/Mostri/Doppelganger]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Doppelganger#^srd-doppelganger-multiattacco]]", "[[SRD/Mostri/Doppelganger#^srd-doppelganger-schianto]]", "[[SRD/Mostri/Doppelganger#^srd-doppelganger-lettura-del-pensiero]]", "[[SRD/Mostri/Doppelganger#^srd-doppelganger-sembianze-inquietanti-ricarica-6]]", "[[SRD/Mostri/Doppelganger#^srd-doppelganger-mutaforma]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Doppelganger"
 type: "Mostruosità"
 size: "media"
@@ -93,18 +100,22 @@ tab: Azioni
 ### Multiattacco
 
 Il doppelganger effettua due attacchi Schianto e usa Sembianze inquietanti.
+^srd-doppelganger-multiattacco
 
 ### Schianto
 
 *Tiro per colpire in mischia:* +6 (con vantaggio durante il primo round di ogni combattimento), portata 1,5 m. *Colpito:* 11 (2d6 + 4) danni contundenti.
+^srd-doppelganger-schianto
 
 ### Lettura del pensiero
 
 Il doppelganger lancia individuazione dei pensieri senza bisogno di componenti, utilizzando Carisma come caratteristica da incantatore (CD del tiro salvezza sull'incantesimo 12).
+^srd-doppelganger-lettura-del-pensiero
 
 ### Sembianze inquietanti (ricarica 6)
 
 *Tiro salvezza su Saggezza:* CD 12, tutte le creature in grado di vedere il doppelganger e che si trovano in un'emanazione di 4,5 metri di cui il doppelganger è il punto di origine. *Fallimento:* il bersaglio è spaventato, ripete il tiro salvezza alla fine di ogni suo turno e, se lo supera, l'effetto svanisce. Dopo 1 minuto, il tiro viene superato automaticamente.
+^srd-doppelganger-sembianze-inquietanti-ricarica-6
 ````
 
 > [!info] Licenza

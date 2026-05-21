@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Driade]]"]
+riferimenti_srd: ["[[SRD/Mostri/Driade]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Driade#^srd-driade-parlare-con-bestie-e-vegetali]]", "[[SRD/Mostri/Driade#^srd-driade-resistenza-alla-magia]]", "[[SRD/Mostri/Driade#^srd-driade-multiattacco]]", "[[SRD/Mostri/Driade#^srd-driade-sferzata-di-rampicante]]", "[[SRD/Mostri/Driade#^srd-driade-esplosione-di-spine]]", "[[SRD/Mostri/Driade#^srd-driade-incantesimi]]", "[[SRD/Mostri/Driade#^srd-driade-passo-arboreo]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Driade"
 type: "Folletto"
 size: "medio"
@@ -97,23 +104,28 @@ tab: Azioni
 ### Parlare con bestie e vegetali
 
 La driade può comunicare con le bestie e i vegetali come se condividesse con loro una lingua.
+^srd-driade-parlare-con-bestie-e-vegetali
 
 ### Resistenza alla magia
 
 La driade dispone di vantaggio ai tiri salvezza contro incantesimi e altri effetti magici.
+^srd-driade-resistenza-alla-magia
 ## Azioni
 
 ### Multiattacco
 
 La driade effettua un attacco Sferzata di rampicante o Esplosione di spine, e può usare Incantesimi per lanciare charme sui mostri.
+^srd-driade-multiattacco
 
 ### Sferzata di rampicante
 
 *Tiro per colpire in mischia:* +6, portata 3 m. *Colpito:* 8 (1d8 + 4) danni taglienti.
+^srd-driade-sferzata-di-rampicante
 
 ### Esplosione di spine
 
 *Tiro per colpire a distanza:* +6, gittata 18 m. *Colpito:* 7 (1d6 + 4) danni perforanti.
+^srd-driade-esplosione-di-spine
 
 ### Incantesimi
 
@@ -127,6 +139,7 @@ La driade lancia uno dei seguenti incantesimi, senza bisogno di componenti mater
 - amicizia con gli animali
 - artificio druidico
 - charme sui mostri (dura 24 ore; termina in anticipo se la driade lancia nuovamente l'incantesimo)
+^srd-driade-incantesimi
 ````
 
 > [!info] Licenza

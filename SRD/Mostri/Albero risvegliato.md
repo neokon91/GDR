@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Albero risvegliato]]"]
+riferimenti_srd: ["[[SRD/Mostri/Albero risvegliato]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Albero risvegliato#^srd-albero_risvegliato-schianto]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Albero risvegliato"
 type: "Vegetale"
 size: "enorme"
@@ -80,6 +87,7 @@ tab: Azioni
 ### Schianto
 
 *Tiro per colpire in mischia:* +6, portata 3 m. *Colpito:* 14 (3d6 + 4) danni contundenti.
+^srd-albero_risvegliato-schianto
 ````
 
 > [!info] Licenza

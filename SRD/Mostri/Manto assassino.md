@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Manto assassino]]"]
+riferimenti_srd: ["[[SRD/Mostri/Manto assassino]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Manto assassino#^srd-manto_assassino-sensibilita-alla-luce]]", "[[SRD/Mostri/Manto assassino#^srd-manto_assassino-multiattacco]]", "[[SRD/Mostri/Manto assassino#^srd-manto_assassino-avvinghiare]]", "[[SRD/Mostri/Manto assassino#^srd-manto_assassino-coda]]", "[[SRD/Mostri/Manto assassino#^srd-manto_assassino-allucinazioni-ricarica-dopo-un-riposo-breve-o-lungo]]", "[[SRD/Mostri/Manto assassino#^srd-manto_assassino-gemito]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Manto assassino"
 type: "Aberrazione"
 size: "grande"
@@ -94,19 +101,23 @@ tab: Azioni
 ### Sensibilità alla luce
 
 Finché è esposto alla luce intensa, il manto assassino subisce svantaggio ai tiri per colpire.
+^srd-manto_assassino-sensibilita-alla-luce
 ## Azioni
 
 ### Multiattacco
 
 Il manto assassino effettua un attacco Avvinghiare e due attacchi Coda.
+^srd-manto_assassino-multiattacco
 
 ### Avvinghiare
 
 *Tiro per colpire in mischia:* +6, portata 1,5 m. *Colpito:* 13 (3d6 + 3) danni perforanti. Se il bersaglio è una creatura di taglia Grande o inferiore, il manto si avvinghia ad essa. Finché resta avvinghiato al bersaglio, quest'ultimo è accecato, e il manto non può effettuare attacchi Avvinghiare contro altri bersagli. Inoltre, il manto assassino dimezza i danni subiti (arrotondati per difetto) e il bersaglio subisce lo stesso ammontare di danni. Il manto assassino può staccarsi da solo usando 1,5 metri di movimento. Il bersaglio o una creatura entro 1,5 metri da esso può effettuare un'azione per staccarsi il manto di dosso, superando una prova di Forza (Atletica) con CD 14.
+^srd-manto_assassino-avvinghiare
 
 ### Coda
 
 *Tiro per colpire in mischia:* +6, portata 3 m. *Colpito:* 8 (1d10 + 3) danni taglienti.
+^srd-manto_assassino-coda
 ````
 
 > [!info] Licenza

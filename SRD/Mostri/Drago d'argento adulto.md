@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Drago d'argento adulto]]"]
+riferimenti_srd: ["[[SRD/Mostri/Drago d'argento adulto]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Drago d'argento adulto#^srd-drago_d_argento_adulto-resistenza-leggendaria-3-giorno-o-4-giorno-nella-tana]]", "[[SRD/Mostri/Drago d'argento adulto#^srd-drago_d_argento_adulto-multiattacco]]", "[[SRD/Mostri/Drago d'argento adulto#^srd-drago_d_argento_adulto-squarcio]]", "[[SRD/Mostri/Drago d'argento adulto#^srd-drago_d_argento_adulto-incantesimi]]", "[[SRD/Mostri/Drago d'argento adulto#^srd-drago_d_argento_adulto-soffio-di-freddo-ricarica-5-6]]", "[[SRD/Mostri/Drago d'argento adulto#^srd-drago_d_argento_adulto-soffio-paralizzante]]", "[[SRD/Mostri/Drago d'argento adulto#^srd-drago_d_argento_adulto-assideramento]]", "[[SRD/Mostri/Drago d'argento adulto#^srd-drago_d_argento_adulto-balzo]]", "[[SRD/Mostri/Drago d'argento adulto#^srd-drago_d_argento_adulto-bufera]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Drago d'argento adulto"
 type: "Drago (metallico)"
 size: "enorme"
@@ -104,15 +111,18 @@ tab: Azioni
 ### Resistenza leggendaria (3/giorno o 4/giorno nella tana)
 
 Se il drago fallisce un tiro salvezza, può scegliere di superarlo comunque.
+^srd-drago_d_argento_adulto-resistenza-leggendaria-3-giorno-o-4-giorno-nella-tana
 ## Azioni
 
 ### Multiattacco
 
 Il drago effettua tre attacchi Squarcio. Può sostituire un attacco con un utilizzo di (A) Soffio paralizzante o (B) Incantesimi per lanciare coltello di ghiaccio.
+^srd-drago_d_argento_adulto-multiattacco
 
 ### Squarcio
 
 *Tiro per colpire in mischia:* +13, portata 3 m. *Colpito:* 17 (2d8 + 8) danni taglienti più 4 (1d8) danni da freddo.
+^srd-drago_d_argento_adulto-squarcio
 
 ### Incantesimi
 
@@ -127,10 +137,12 @@ Il drago lancia uno dei seguenti incantesimi, senza bisogno di componenti materi
 - coltello di ghiaccio
 - individuazione del magico
 - trasformazione (solo in forma di bestia o umanoide, senza punti ferita temporanei ottenuti dall'incantesimo, e senza richiedere concentrazione o punti ferita temporanei per mantenere l'incantesimo)
+^srd-drago_d_argento_adulto-incantesimi
 
 ### Soffio di freddo (ricarica 5-6)
 
 *Tiro salvezza su Costituzione:* CD 20, tutte le creature in un cono di 18 metri. *Fallimento:* 54 (12d8) danni da freddo. *Successo:* danni dimezzati.
+^srd-drago_d_argento_adulto-soffio-di-freddo-ricarica-5-6
 
 ### Soffio paralizzante
 
@@ -139,6 +151,7 @@ Il drago lancia uno dei seguenti incantesimi, senza bisogno di componenti materi
 *Primo fallimento:* il bersaglio è incapacitato fino al termine del proprio turno successivo. A quel punto, ripete il tiro salvezza.
 
 *Secondo fallimento:* il bersaglio è paralizzato e ripete il tiro salvezza alla fine di ogni suo turno e, se lo supera, l'effetto svanisce. Dopo 1 minuto, il tiro viene superato automaticamente.
+^srd-drago_d_argento_adulto-soffio-paralizzante
 ## Azioni Leggendarie
 
 Subito dopo il turno di un'altra creatura, il drago può consumare un utilizzo per effettuare una delle seguenti azioni. Il drago recupera tutti gli utilizzi consumati all'inizio di ogni suo turno.
@@ -148,14 +161,17 @@ Subito dopo il turno di un'altra creatura, il drago può consumare un utilizzo p
 ### Assideramento
 
 Il drago usa Incantesimi per lanciare blocca mostri. Il drago non può ripetere quest'azione fino all'inizio del proprio turno successivo.
+^srd-drago_d_argento_adulto-assideramento
 
 ### Balzo
 
 Il drago si muove fino a metà della sua velocità, ed effettua un attacco Squarcio.
+^srd-drago_d_argento_adulto-balzo
 
 ### Bufera
 
 *Tiro salvezza su Destrezza:* CD 19, tutte le creature in una linea lunga 18 metri e larga 3 metri. *Fallimento:* 14 (4d6) danni da freddo, e il bersaglio viene spinto in linea retta fino a un massimo di 9 metri lontano dal drago. *Successo:* danni dimezzati. *Fallimento o successo:* il drago non può ripetere quest'azione fino all'inizio del proprio turno successivo.
+^srd-drago_d_argento_adulto-bufera
 ````
 
 > [!info] Licenza

@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Cavallo da guerra]]"]
+riferimenti_srd: ["[[SRD/Mostri/Cavallo da guerra]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Cavallo da guerra#^srd-cavallo_da_guerra-zoccoli]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Cavallo da guerra"
 type: "Bestia"
 size: "grande"
@@ -81,6 +88,7 @@ tab: Azioni
 ### Zoccoli
 
 *Tiro per colpire in mischia:* +6, portata 1,5 m. *Colpito:* 9 (2d4 + 4) danni contundenti. Se il bersaglio è una creatura di taglia Grande o inferiore e il cavallo si è mosso di 6 metri o più in linea retta verso di esso subito prima del colpo, il bersaglio subisce 5 (2d4) danni contundenti extra e cade a terra prono.
+^srd-cavallo_da_guerra-zoccoli
 ````
 
 > [!info] Licenza

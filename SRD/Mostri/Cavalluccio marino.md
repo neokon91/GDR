@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Cavalluccio marino]]"]
+riferimenti_srd: ["[[SRD/Mostri/Cavalluccio marino]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Cavalluccio marino#^srd-cavalluccio_marino-respirare-sott-acqua]]", "[[SRD/Mostri/Cavalluccio marino#^srd-cavalluccio_marino-scatto-acquatico]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Cavalluccio marino"
 type: "Bestia"
 size: "minuscola"
@@ -87,11 +94,13 @@ tab: Azioni
 ### Respirare sott'acqua
 
 Il cavalluccio marino può respirare solo sott'acqua.
+^srd-cavalluccio_marino-respirare-sott-acqua
 ## Azioni
 
 ### Scatto acquatico
 
 Finché è sott'acqua, il cavalluccio marino può muoversi fino alla sua velocità di nuoto massima senza provocare attacchi di opportunità.
+^srd-cavalluccio_marino-scatto-acquatico
 ````
 
 > [!info] Licenza

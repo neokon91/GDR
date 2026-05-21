@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Serpente stritolatore]]"]
+riferimenti_srd: ["[[SRD/Mostri/Serpente stritolatore]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Serpente stritolatore#^srd-serpente_stritolatore-morso]]", "[[SRD/Mostri/Serpente stritolatore#^srd-serpente_stritolatore-stritolare]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Serpente stritolatore"
 type: "Bestia"
 size: "grande"
@@ -87,10 +94,12 @@ tab: Azioni
 ### Morso
 
 *Tiro per colpire in mischia:* +4, portata 1,5 m. *Colpito:* 6 (1d8 + 2) danni perforanti.
+^srd-serpente_stritolatore-morso
 
 ### Stritolare
 
 *Tiro salvezza su Forza:* CD 12, una creatura di taglia Media o inferiore che il serpente è in grado di vedere entro 1,5 metri. *Fallimento:* 7 (3d4) danni contundenti e il bersaglio viene afferrato (CD 12 per sfuggire).
+^srd-serpente_stritolatore-stritolare
 ````
 
 > [!info] Licenza

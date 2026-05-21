@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Classi/Monaco]]"]
+riferimenti_srd: ["[[SRD/Classi/Monaco]]"]
+riferimenti_regola: []
+sezioni_collegate: ["[[SRD/Classi/Monaco#Tratti di classe]]", "[[SRD/Classi/Monaco#Progressione di classe]]", "[[SRD/Classi/Monaco#Privilegi chiave]]", "[[SRD/Classi/Monaco#Sottoclasse del monaco: Guerriero della Mano Aperta]]"]
+blocchi_collegati: []
+tabelle_collegate: ["[[SRD/Classi/Monaco#^srd-monaco-tratti-di-classe]]", "[[SRD/Classi/Monaco#^srd-monaco-progressione-di-classe]]", "[[SRD/Classi/Monaco#^srd-monaco-privilegi-chiave]]", "[[SRD/Classi/Monaco#^srd-monaco-sottoclasse-del-monaco-guerriero-della-mano-aperta]]"]
+tags: ["dnd55/srd"]
 capitolo: "Classi"
 pagine_sorgente: "66-69"
 caratteristica_primaria: ["Destrezza", "Saggezza"]
@@ -43,6 +50,7 @@ A: lancia, 5 pugnali, strumento scelto, dotazione da esploratore e 11 mo; oppure
 | Strumenti | Uno strumento da artigiano o musicale a scelta. |
 | Armature | Nessuna. |
 | Equipaggiamento iniziale | A: lancia, 5 pugnali, strumento scelto, dotazione da esploratore e 11 mo; oppure B: 50 mo. |
+^srd-monaco-tratti-di-classe
 
 ## Progressione di classe
 
@@ -68,6 +76,7 @@ A: lancia, 5 pugnali, strumento scelto, dotazione da esploratore e 11 mo; oppure
 | 18 | +6 | Difesa superiore | 1d12 | 18 | +9 m |
 | 19 | +6 | Dono epico | 1d12 | 19 | +9 m |
 | 20 | +6 | Corpo e mente | 1d12 | 20 | +9 m |
+^srd-monaco-progressione-di-classe
 
 ## Privilegi chiave
 
@@ -77,6 +86,7 @@ A: lancia, 5 pugnali, strumento scelto, dotazione da esploratore e 11 mo; oppure
 | Concentrazione | Risorsa per Raffica di colpi, Difesa paziente, Passo del vento e altri privilegi. |
 | Colpo stordente | Spende concentrazione per tentare di stordire un bersaglio colpito. |
 | Movimento senza armatura | Aumenta mobilita e opzioni di spostamento. |
+^srd-monaco-privilegi-chiave
 
 ## Sottoclasse del monaco: Guerriero della Mano Aperta
 
@@ -86,6 +96,7 @@ A: lancia, 5 pugnali, strumento scelto, dotazione da esploratore e 11 mo; oppure
 | 6 | Integrita del corpo | Come azione bonus tira il dado di Arti marziali e recupera PF. |
 | 11 | Passo lesto | Dopo un azione bonus diversa da Passo del vento puo usare anche Passo del vento. |
 | 17 | Palmo tremante | Spende 4 punti concentrazione per vibrazioni che poi infliggono 10d12 danni da forza o meta con TS. |
+^srd-monaco-sottoclasse-del-monaco-guerriero-della-mano-aperta
 
 ## Progressione
 

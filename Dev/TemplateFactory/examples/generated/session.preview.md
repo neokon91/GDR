@@ -35,6 +35,10 @@ tab: Ancore
 > Clock: `INPUT[tracciati][:tracciati]`
 >
 > PNG: `INPUT[inlineListSuggester(optionQuery("Mondi/Personaggi"), useLinks(partial), allowOther):personaggi]`
+>
+> Fonti: `INPUT[fonti][:fonti]`
+>
+> Sezioni collegate: `INPUT[sezioni_collegate][:sezioni_collegate]`
 
 > [!regia]- Rete Sessione
 > ```dataviewjs
@@ -62,6 +66,16 @@ tab: Tavolo
 > Immagini: `INPUT[inlineListSuggester(optionQuery("Risorse/Immagini"), useLinks(partial), allowOther):immagini]`
 >
 > Video: `INPUT[inlineListSuggester(optionQuery("Risorse/Video"), useLinks(partial), allowOther):video]`
+>
+> Riferimenti SRD: `INPUT[riferimenti_srd][:riferimenti_srd]`
+>
+> Riferimenti regola: `INPUT[riferimenti_regola][:riferimenti_regola]`
+>
+> Blocchi collegati: `INPUT[blocchi_collegati][:blocchi_collegati]`
+>
+> Tabelle collegate: `INPUT[tabelle_collegate][:tabelle_collegate]`
+>
+> Tag: `INPUT[tags][:tags]`
 
 > [!regia]- Vista Materiali
 > ```dataviewjs

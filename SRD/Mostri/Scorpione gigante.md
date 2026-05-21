@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Scorpione gigante]]"]
+riferimenti_srd: ["[[SRD/Mostri/Scorpione gigante]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Scorpione gigante#^srd-scorpione_gigante-multiattacco]]", "[[SRD/Mostri/Scorpione gigante#^srd-scorpione_gigante-artiglio]]", "[[SRD/Mostri/Scorpione gigante#^srd-scorpione_gigante-pungiglione]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Scorpione gigante"
 type: "Bestia"
 size: "grande"
@@ -84,14 +91,17 @@ tab: Azioni
 ### Multiattacco
 
 Lo scorpione effettua due attacchi Artiglio e un attacco Pungiglione.
+^srd-scorpione_gigante-multiattacco
 
 ### Artiglio
 
 *Tiro per colpire in mischia:* +5, portata 1,5 m. *Colpito:* 6 (1d6 + 3) danni contundenti. Se il bersaglio è una creatura di taglia Grande o inferiore, è afferrato (CD 13 per sfuggire) da una delle due chele.
+^srd-scorpione_gigante-artiglio
 
 ### Pungiglione
 
 *Tiro per colpire in mischia:* +5, portata 1,5 m *Colpito:* 7 (1d8 + 3) danni perforanti più 11 (2d10) danni da veleno.
+^srd-scorpione_gigante-pungiglione
 ````
 
 > [!info] Licenza

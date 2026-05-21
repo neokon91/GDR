@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Equipaggiamento/Corda]]"]
+riferimenti_srd: ["[[SRD/Equipaggiamento/Corda]]"]
+riferimenti_regola: []
+sezioni_collegate: ["[[SRD/Equipaggiamento/Corda#Dettagli]]"]
+blocchi_collegati: []
+tabelle_collegate: ["[[SRD/Equipaggiamento/Corda#^srd-corda-dettagli]]"]
+tags: ["dnd55/srd"]
 capitolo: "Equipaggiamento"
 pagine_sorgente: "107-113"
 tipo_oggetto: "equipaggiamento_avventura"
@@ -42,6 +49,7 @@ Peso 2,5 kg; costo 1 mo.
 | Oggetto | Peso | Costo |
 | --- | --- | --- |
 | Corda | 2,5 kg | 1 mo |
+^srd-corda-dettagli
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Classi/Mago]]"]
+riferimenti_srd: ["[[SRD/Classi/Mago]]"]
+riferimenti_regola: []
+sezioni_collegate: ["[[SRD/Classi/Mago#Tratti di classe]]", "[[SRD/Classi/Mago#Progressione di classe]]", "[[SRD/Classi/Mago#Privilegi chiave]]", "[[SRD/Classi/Mago#Lista degli incantesimi da mago]]", "[[SRD/Classi/Mago#Sottoclasse del mago: Invocatore]]"]
+blocchi_collegati: []
+tabelle_collegate: ["[[SRD/Classi/Mago#^srd-mago-tratti-di-classe]]", "[[SRD/Classi/Mago#^srd-mago-progressione-di-classe]]", "[[SRD/Classi/Mago#^srd-mago-privilegi-chiave]]", "[[SRD/Classi/Mago#^srd-mago-lista-degli-incantesimi-da-mago]]", "[[SRD/Classi/Mago#^srd-mago-sottoclasse-del-mago-invocatore]]"]
+tags: ["dnd55/srd"]
 capitolo: "Classi"
 pagine_sorgente: "59-65"
 caratteristica_primaria: ["Intelligenza"]
@@ -41,6 +48,7 @@ A: 2 pugnali, focus arcano, veste, libro degli incantesimi, dotazione da studios
 | Armi | Armi semplici. |
 | Armature | Nessuna. |
 | Equipaggiamento iniziale | A: 2 pugnali, focus arcano, veste, libro degli incantesimi, dotazione da studioso e 5 mo; oppure B: 55 mo. |
+^srd-mago-tratti-di-classe
 
 ## Progressione di classe
 
@@ -66,6 +74,7 @@ A: 2 pugnali, focus arcano, veste, libro degli incantesimi, dotazione da studios
 | 18 | +6 | Maestria negli incantesimi | 5 | 23 | 4 | 3 | 3 | 3 | 3 | 1 | 1 | 1 | 1 |
 | 19 | +6 | Dono epico | 5 | 24 | 4 | 3 | 3 | 3 | 3 | 2 | 1 | 1 | 1 |
 | 20 | +6 | Incantesimi personali | 5 | 25 | 4 | 3 | 3 | 3 | 3 | 2 | 2 | 1 | 1 |
+^srd-mago-progressione-di-classe
 
 ## Privilegi chiave
 
@@ -75,6 +84,7 @@ A: 2 pugnali, focus arcano, veste, libro degli incantesimi, dotazione da studios
 | Recupero arcano | Recupera parte degli slot dopo un riposo breve. |
 | Libro degli incantesimi | Puo ampliare e sostituire il libro copiando incantesimi trovati. |
 | Padronanza degli incantesimi | Ai livelli alti rende alcune magie sempre accessibili. |
+^srd-mago-privilegi-chiave
 
 ## Lista degli incantesimi da mago
 
@@ -298,6 +308,7 @@ A: 2 pugnali, focus arcano, veste, libro degli incantesimi, dotazione da studios
 | 9 | Proiezione astrale | Necromanzia | M |
 | 9 | Sciame di meteore | Invocazione | - |
 | 9 | Trasformazione | Trasmutazione | C, M |
+^srd-mago-lista-degli-incantesimi-da-mago
 
 ## Sottoclasse del mago: Invocatore
 
@@ -307,6 +318,7 @@ A: 2 pugnali, focus arcano, veste, libro degli incantesimi, dotazione da studios
 | 3 | Scolpire incantesimi | Protegge creature scelte dagli effetti degli incantesimi di Invocazione. |
 | 10 | Invocazione potente | Aggiunge Intelligenza a un tiro per i danni di un incantesimo di Invocazione. |
 | 14 | Saturazione magica | Massimizza i danni di un incantesimo con slot 1-5, con rischio di danni necrotici se ripetuto prima del riposo lungo. |
+^srd-mago-sottoclasse-del-mago-invocatore
 
 ## Progressione
 

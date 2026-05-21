@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Glossario/Emanazione]]"]
+riferimenti_srd: ["[[SRD/Glossario/Emanazione]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: []
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/regola"]
 lettera: "E"
 descrittore: "area di effetto"
 pagine_sorgente: 207

@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Succube]]"]
+riferimenti_srd: ["[[SRD/Mostri/Succube]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Succube#^srd-succube-forma-incubo]]", "[[SRD/Mostri/Succube#^srd-succube-multiattacco]]", "[[SRD/Mostri/Succube#^srd-succube-tocco-immondo]]", "[[SRD/Mostri/Succube#^srd-succube-bacio-prosciugante]]", "[[SRD/Mostri/Succube#^srd-succube-fascino]]", "[[SRD/Mostri/Succube#^srd-succube-mutaforma]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Succube"
 type: "Immondo"
 size: "medio"
@@ -98,23 +105,28 @@ tab: Azioni
 ### Forma incubo
 
 Quando la succube termina un riposo lungo, può trasformarsi in un incubo, utilizzando la relativa scheda delle statistiche al posto di questa.
+^srd-succube-forma-incubo
 ## Azioni
 
 ### Multiattacco
 
 La succube effettua un attacco Tocco immondo e utilizza Fascino o Bacio prosciugante.
+^srd-succube-multiattacco
 
 ### Tocco immondo
 
 *Tiro per colpire in mischia:* +7, portata 1,5 m. *Colpito:* 16 (2d10 + 5) danni psichici.
+^srd-succube-tocco-immondo
 
 ### Bacio prosciugante
 
 *Tiro salvezza su Costituzione:* CD 15, una creatura affascinata dalla succube entro 1,5 metri. *Fallimento:* 13 (3d8) danni psichici. *Successo:* danni dimezzati. *Fallimento o successo:* i punti ferita massimi del bersaglio sono ridotti di un ammontare pari ai danni subiti.
+^srd-succube-bacio-prosciugante
 
 ### Fascino
 
 La succube lancia dominare persone (di 8º livello), senza bisogno di componenti e utilizzando Carisma come caratteristica da incantatore (CD del tiro salvezza sull'incantesimo 15).
+^srd-succube-fascino
 ````
 
 > [!info] Licenza

@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Gnoll guerriero]]"]
+riferimenti_srd: ["[[SRD/Mostri/Gnoll guerriero]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Gnoll guerriero#^srd-gnoll_guerriero-squarcio]]", "[[SRD/Mostri/Gnoll guerriero#^srd-gnoll_guerriero-arco-d-ossa]]", "[[SRD/Mostri/Gnoll guerriero#^srd-gnoll_guerriero-furia-1-giorno]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Gnoll guerriero"
 type: "Immondo"
 size: "medio"
@@ -84,10 +91,12 @@ tab: Azioni
 ### Squarcio
 
 *Tiro per colpire in mischia:* +4, portata 1,5 m. *Colpito:* 5 (1d6 + 2) danni perforanti.
+^srd-gnoll_guerriero-squarcio
 
 ### Arco d'ossa
 
 *Tiro per colpire a distanza:* +3, gittata 45/180 m. *Colpito:* 6 (1d10 + 1) danni perforanti.
+^srd-gnoll_guerriero-arco-d-ossa
 ````
 
 > [!info] Licenza

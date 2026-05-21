@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Archelon]]"]
+riferimenti_srd: ["[[SRD/Mostri/Archelon]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Archelon#^srd-archelon-anfibio]]", "[[SRD/Mostri/Archelon#^srd-archelon-multiattacco]]", "[[SRD/Mostri/Archelon#^srd-archelon-morso]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Archelon"
 type: "Bestia (dinosauro)"
 size: "enorme"
@@ -88,15 +95,18 @@ tab: Azioni
 ### Anfibio
 
 L'archelon può respirare in aria e in acqua.
+^srd-archelon-anfibio
 ## Azioni
 
 ### Multiattacco
 
 L'archelon effettua due attacchi Morso.
+^srd-archelon-multiattacco
 
 ### Morso
 
 *Tiro per colpire in mischia:* +6, portata 1,5 m. *Colpito:* 14 (3d6 + 4) danni perforanti.
+^srd-archelon-morso
 ````
 
 > [!info] Licenza

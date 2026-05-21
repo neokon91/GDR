@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Classi/Chierico]]"]
+riferimenti_srd: ["[[SRD/Classi/Chierico]]"]
+riferimenti_regola: []
+sezioni_collegate: ["[[SRD/Classi/Chierico#Tratti di classe]]", "[[SRD/Classi/Chierico#Progressione di classe]]", "[[SRD/Classi/Chierico#Privilegi chiave]]", "[[SRD/Classi/Chierico#Lista degli incantesimi da chierico]]", "[[SRD/Classi/Chierico#Sottoclasse del chierico: Dominio della Vita]]", "[[SRD/Classi/Chierico#Incantesimi del Dominio della Vita]]"]
+blocchi_collegati: []
+tabelle_collegate: ["[[SRD/Classi/Chierico#^srd-chierico-tratti-di-classe]]", "[[SRD/Classi/Chierico#^srd-chierico-progressione-di-classe]]", "[[SRD/Classi/Chierico#^srd-chierico-privilegi-chiave]]", "[[SRD/Classi/Chierico#^srd-chierico-lista-degli-incantesimi-da-chierico]]", "[[SRD/Classi/Chierico#^srd-chierico-sottoclasse-del-chierico-dominio-della-vita]]", "[[SRD/Classi/Chierico#^srd-chierico-incantesimi-del-dominio-della-vita]]"]
+tags: ["dnd55/srd"]
 capitolo: "Classi"
 pagine_sorgente: "41-46"
 caratteristica_primaria: ["Saggezza"]
@@ -41,6 +48,7 @@ A: giaco di maglia, scudo, mazza, simbolo sacro, dotazione da sacerdote e 7 mo; 
 | Armi | Armi semplici. |
 | Armature | Armature leggere e medie; scudi. |
 | Equipaggiamento iniziale | A: giaco di maglia, scudo, mazza, simbolo sacro, dotazione da sacerdote e 7 mo; oppure B: 110 mo. |
+^srd-chierico-tratti-di-classe
 
 ## Progressione di classe
 
@@ -66,6 +74,7 @@ A: giaco di maglia, scudo, mazza, simbolo sacro, dotazione da sacerdote e 7 mo; 
 | 18 | +6 | - | 4 | 5 | 20 | 4 | 3 | 3 | 3 | 3 | 1 | 1 | 1 | 1 |
 | 19 | +6 | Dono epico | 4 | 5 | 21 | 4 | 3 | 3 | 3 | 3 | 2 | 1 | 1 | 1 |
 | 20 | +6 | Intervento divino superiore | 4 | 5 | 22 | 4 | 3 | 3 | 3 | 3 | 2 | 2 | 1 | 1 |
+^srd-chierico-progressione-di-classe
 
 ## Privilegi chiave
 
@@ -75,6 +84,7 @@ A: giaco di maglia, scudo, mazza, simbolo sacro, dotazione da sacerdote e 7 mo; 
 | Ordine divino | Scelta iniziale che orienta armature, armi o conoscenza mistica. |
 | Incanalare divinita | Alimenta Scintilla divina, Scacciare non morti e opzioni di sottoclasse. |
 | Intervento divino | Richiama aiuto divino ai livelli alti. |
+^srd-chierico-privilegi-chiave
 
 ## Lista degli incantesimi da chierico
 
@@ -189,6 +199,7 @@ A: giaco di maglia, scudo, mazza, simbolo sacro, dotazione da sacerdote e 7 mo; 
 | 9 | Portale | Evocazione | C, M |
 | 9 | Proiezione astrale | Necromanzia | M |
 | 9 | Resurrezione pura | Necromanzia | M |
+^srd-chierico-lista-degli-incantesimi-da-chierico
 
 ## Sottoclasse del chierico: Dominio della Vita
 
@@ -199,6 +210,7 @@ A: giaco di maglia, scudo, mazza, simbolo sacro, dotazione da sacerdote e 7 mo; 
 | 3 | Preservare vita | Spende Incanalare divinita per distribuire cure pari a cinque volte il livello da chierico. |
 | 6 | Guaritore benedetto | Quando cura altri con uno slot, cura anche se stesso di 2 + livello dello slot. |
 | 17 | Guarigione suprema | Usa il risultato massimo dei dadi quando cura con incantesimi o Incanalare divinita. |
+^srd-chierico-sottoclasse-del-chierico-dominio-della-vita
 
 ## Incantesimi del Dominio della Vita
 
@@ -208,6 +220,7 @@ A: giaco di maglia, scudo, mazza, simbolo sacro, dotazione da sacerdote e 7 mo; 
 | 5 | Parola guaritrice di massa, rinascita |
 | 7 | Aura di vita, interdizione alla morte |
 | 9 | Ristorare superiore, cura ferite di massa |
+^srd-chierico-incantesimi-del-dominio-della-vita
 
 ## Progressione
 

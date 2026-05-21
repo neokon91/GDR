@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Drago blu giovane]]"]
+riferimenti_srd: ["[[SRD/Mostri/Drago blu giovane]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Drago blu giovane#^srd-drago_blu_giovane-multiattacco]]", "[[SRD/Mostri/Drago blu giovane#^srd-drago_blu_giovane-squarcio]]", "[[SRD/Mostri/Drago blu giovane#^srd-drago_blu_giovane-soffio-di-fulmini-ricarica-5-6]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Drago blu giovane"
 type: "Drago (cromatico)"
 size: "grande"
@@ -91,14 +98,17 @@ tab: Azioni
 ### Multiattacco
 
 Il drago effettua tre attacchi Squarcio.
+^srd-drago_blu_giovane-multiattacco
 
 ### Squarcio
 
 *Tiro per colpire in mischia:* +9, portata 3 m. *Colpito:* 12 (2d6 + 5) danni taglienti più 5 (1d10) danni da fulmine.
+^srd-drago_blu_giovane-squarcio
 
 ### Soffio di fulmini (ricarica 5-6)
 
 *Tiro salvezza su Destrezza:* CD 16, tutte le creature in una linea lunga 18 metri e larga 1,5 metri. *Fallimento:* 55 (10d10) danni da fulmine. *Successo:* danni dimezzati.
+^srd-drago_blu_giovane-soffio-di-fulmini-ricarica-5-6
 ````
 
 > [!info] Licenza

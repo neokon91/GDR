@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Chuul]]"]
+riferimenti_srd: ["[[SRD/Mostri/Chuul]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Chuul#^srd-chuul-anfibio]]", "[[SRD/Mostri/Chuul#^srd-chuul-percezione-della-magia]]", "[[SRD/Mostri/Chuul#^srd-chuul-multiattacco]]", "[[SRD/Mostri/Chuul#^srd-chuul-tenaglia]]", "[[SRD/Mostri/Chuul#^srd-chuul-tentacoli-paralizzanti]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Chuul"
 type: "Aberrazione"
 size: "grande"
@@ -92,23 +99,28 @@ tab: Azioni
 ### Anfibio
 
 Il chuul può respirare in aria e in acqua.
+^srd-chuul-anfibio
 
 ### Percezione della magia
 
 Il chuul percepisce la magia entro 36 metri da sé. Sotto ogni altro aspetto, questo tratto funziona come l'incantesimo individuazione del magico, ma di per sé non è magico.
+^srd-chuul-percezione-della-magia
 ## Azioni
 
 ### Multiattacco
 
 Il chuul effettua due attacchi Tenaglia e utilizza Tentacoli paralizzanti.
+^srd-chuul-multiattacco
 
 ### Tenaglia
 
 *Tiro per colpire in mischia:* +6, portata 3 m. *Colpito:* 9 (1d10 + 4) danni contundenti. Se il bersaglio è una creatura di taglia Grande o inferiore, è afferrato (CD 14 per sfuggire) da una delle due tenaglie.
+^srd-chuul-tenaglia
 
 ### Tentacoli paralizzanti
 
 *Tiro salvezza su Costituzione:* CD 13, una creatura afferrata dal chuul. *Fallimento:* il bersaglio è avvelenato e ripete il tiro salvezza alla fine del suo turno successivo e, se lo supera, l'effetto svanisce. Dopo 1 minuto, il tiro viene superato automaticamente. Finché è avvelenato, il bersaglio è paralizzato.
+^srd-chuul-tentacoli-paralizzanti
 ````
 
 > [!info] Licenza

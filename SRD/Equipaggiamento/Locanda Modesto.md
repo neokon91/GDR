@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Equipaggiamento/Locanda Modesto]]"]
+riferimenti_srd: ["[[SRD/Equipaggiamento/Locanda Modesto]]"]
+riferimenti_regola: []
+sezioni_collegate: ["[[SRD/Equipaggiamento/Locanda Modesto#Dettagli]]"]
+blocchi_collegati: []
+tabelle_collegate: ["[[SRD/Equipaggiamento/Locanda Modesto#^srd-locanda_modesto-dettagli]]"]
+tags: ["dnd55/srd"]
 capitolo: "Equipaggiamento"
 pagine_sorgente: "114-115"
 tipo_oggetto: "vitto_alloggio"
@@ -42,6 +49,7 @@ Locanda (Modesto): 5 ma.
 | Oggetto | Dettaglio | Costo |
 | --- | --- | --- |
 | Locanda | Modesto | 5 ma |
+^srd-locanda_modesto-dettagli
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

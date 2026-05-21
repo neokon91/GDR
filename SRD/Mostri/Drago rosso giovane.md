@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Drago rosso giovane]]"]
+riferimenti_srd: ["[[SRD/Mostri/Drago rosso giovane]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Drago rosso giovane#^srd-drago_rosso_giovane-multiattacco]]", "[[SRD/Mostri/Drago rosso giovane#^srd-drago_rosso_giovane-squarcio]]", "[[SRD/Mostri/Drago rosso giovane#^srd-drago_rosso_giovane-soffio-di-fuoco-ricarica-5-6]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Drago rosso giovane"
 type: "Drago (cromatico)"
 size: "grande"
@@ -91,14 +98,17 @@ tab: Azioni
 ### Multiattacco
 
 Il drago effettua tre attacchi Squarcio.
+^srd-drago_rosso_giovane-multiattacco
 
 ### Squarcio
 
 *Tiro per colpire in mischia:* +10, portata 3 m. *Colpito:* 13 (2d6 + 6) danni taglienti più 3 (1d6) danni da fuoco.
+^srd-drago_rosso_giovane-squarcio
 
 ### Soffio di fuoco (ricarica 5-6)
 
 *Tiro salvezza su Destrezza:* CD 17, tutte le creature in un cono di 9 metri. *Fallimento:* 56 (16d6) danni da fuoco. *Successo:* danni dimezzati.
+^srd-drago_rosso_giovane-soffio-di-fuoco-ricarica-5-6
 ````
 
 > [!info] Licenza

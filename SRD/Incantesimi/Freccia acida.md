@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Incantesimi/Freccia acida]]"]
+riferimenti_srd: ["[[SRD/Incantesimi/Freccia acida]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Incantesimi/Freccia acida#^srd-freccia_acida-utilizzo-di-uno-slot-incantesimo-di-livello-superiore]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/incantesimo"]
 livello: 2
 scuola: "Invocazione"
 classi: ["mago"]
@@ -36,6 +43,7 @@ Una freccia verde scintillante sfreccia verso un bersaglio entro gittata ed espl
 ### Utilizzo di uno slot incantesimo di livello superiore
 
 I danni (sia iniziali che successivi) aumentano di 1d4 per ogni slot di livello superiore al 2º.
+^srd-freccia_acida-utilizzo-di-uno-slot-incantesimo-di-livello-superiore
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

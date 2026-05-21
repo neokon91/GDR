@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Equipaggiamento/Messaggero]]"]
+riferimenti_srd: ["[[SRD/Equipaggiamento/Messaggero]]"]
+riferimenti_regola: []
+sezioni_collegate: ["[[SRD/Equipaggiamento/Messaggero#Dettagli]]"]
+blocchi_collegati: []
+tabelle_collegate: ["[[SRD/Equipaggiamento/Messaggero#^srd-messaggero-dettagli]]"]
+tags: ["dnd55/srd"]
 capitolo: "Equipaggiamento"
 pagine_sorgente: "114-115"
 tipo_oggetto: "servizio"
@@ -42,6 +49,7 @@ Disponibilita —; costo 2 mr per 1,5 km.
 | Categoria | Servizio/Livello | Disponibilità | Costo |
 | --- | --- | --- | --- |
 | Gregari | Messaggero | — | 2 mr per 1,5 km |
+^srd-messaggero-dettagli
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

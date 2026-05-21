@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Drago bianco giovane]]"]
+riferimenti_srd: ["[[SRD/Mostri/Drago bianco giovane]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Drago bianco giovane#^srd-drago_bianco_giovane-camminare-sul-ghiaccio]]", "[[SRD/Mostri/Drago bianco giovane#^srd-drago_bianco_giovane-multiattacco]]", "[[SRD/Mostri/Drago bianco giovane#^srd-drago_bianco_giovane-squarcio]]", "[[SRD/Mostri/Drago bianco giovane#^srd-drago_bianco_giovane-soffio-di-freddo-ricarica-5-6]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Drago bianco giovane"
 type: "Drago (cromatico)"
 size: "grande"
@@ -93,19 +100,23 @@ tab: Azioni
 ### Camminare sul ghiaccio
 
 Il drago può muoversi sulle superfici di ghiaccio e scalarle senza bisogno di effettuare una prova di caratteristica. Inoltre, un terreno difficile costituito da ghiaccio o neve non gli costa alcun movimento aggiuntivo.
+^srd-drago_bianco_giovane-camminare-sul-ghiaccio
 ## Azioni
 
 ### Multiattacco
 
 Il drago effettua tre attacchi Squarcio.
+^srd-drago_bianco_giovane-multiattacco
 
 ### Squarcio
 
 *Tiro per colpire in mischia:* +7, portata 3 m. *Colpito:* 9 (2d4 + 4) danni taglienti più 2 (1d4) danni da freddo.
+^srd-drago_bianco_giovane-squarcio
 
 ### Soffio di freddo (ricarica 5-6)
 
 *Tiro salvezza su Costituzione:* CD 15, tutte le creature in un cono di 9 metri. *Fallimento:* 40 (9d8) danni da freddo. *Successo:* danni dimezzati.
+^srd-drago_bianco_giovane-soffio-di-freddo-ricarica-5-6
 ````
 
 > [!info] Licenza

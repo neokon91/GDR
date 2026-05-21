@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Stormo di corvi]]"]
+riferimenti_srd: ["[[SRD/Mostri/Stormo di corvi]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Stormo di corvi#^srd-stormo_di_corvi-sciame]]", "[[SRD/Mostri/Stormo di corvi#^srd-stormo_di_corvi-becchi]]", "[[SRD/Mostri/Stormo di corvi#^srd-stormo_di_corvi-cacofonia-ricarica-6]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Stormo di corvi"
 type: "Sciame"
 size: "medio"
@@ -88,15 +95,18 @@ tab: Azioni
 ### Sciame
 
 Lo stormo può occupare lo spazio di un'altra creatura e viceversa, e può muoversi attraverso qualsiasi apertura abbastanza grande per un corvo Minuscolo. L'orda non può recuperare punti ferita o ottenere punti ferita temporanei.
+^srd-stormo_di_corvi-sciame
 ## Azioni
 
 ### Becchi
 
 *Tiro per colpire in mischia:* +4, portata 1,5 m. *Colpito:* 5 (1d6 + 2) danni perforanti, o 2 (1d4) danni perforanti se lo stormo è sanguinante.
+^srd-stormo_di_corvi-becchi
 
 ### Cacofonia (ricarica 6)
 
 *Tiro salvezza su Saggezza:* CD 10, una creatura nello spazio dello stormo. *Fallimento:* il bersaglio è assordato fino all'inizio del turno successivo dello stormo. Quando è assordato, il bersaglio subisce svantaggio alle prove di caratteristica e ai tiri per colpire.
+^srd-stormo_di_corvi-cacofonia-ricarica-6
 ````
 
 > [!info] Licenza

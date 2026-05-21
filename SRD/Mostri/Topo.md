@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Topo]]"]
+riferimenti_srd: ["[[SRD/Mostri/Topo]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Topo#^srd-topo-agile]]", "[[SRD/Mostri/Topo#^srd-topo-morso]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Topo"
 type: "Bestia"
 size: "minuscola"
@@ -86,11 +93,13 @@ tab: Azioni
 ### Agile
 
 Il topo non provoca attacchi di opportunità quando esce dalla portata di un nemico.
+^srd-topo-agile
 ## Azioni
 
 ### Morso
 
 *Tiro per colpire in mischia:* +2, portata 1,5 m. *Colpito:* 1 danno perforante.
+^srd-topo-morso
 ````
 
 > [!info] Licenza

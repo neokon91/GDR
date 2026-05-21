@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Equipaggiamento/Vino Comune]]"]
+riferimenti_srd: ["[[SRD/Equipaggiamento/Vino Comune]]"]
+riferimenti_regola: []
+sezioni_collegate: ["[[SRD/Equipaggiamento/Vino Comune#Dettagli]]"]
+blocchi_collegati: []
+tabelle_collegate: ["[[SRD/Equipaggiamento/Vino Comune#^srd-vino_comune-dettagli]]"]
+tags: ["dnd55/srd"]
 capitolo: "Equipaggiamento"
 pagine_sorgente: "114-115"
 tipo_oggetto: "vitto_alloggio"
@@ -42,6 +49,7 @@ Vino (Comune): 2 ma.
 | Oggetto | Dettaglio | Costo |
 | --- | --- | --- |
 | Vino | Comune | 2 ma |
+^srd-vino_comune-dettagli
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

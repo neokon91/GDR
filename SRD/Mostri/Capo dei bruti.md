@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Capo dei bruti]]"]
+riferimenti_srd: ["[[SRD/Mostri/Capo dei bruti]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Capo dei bruti#^srd-capo_dei_bruti-tattiche-del-branco]]", "[[SRD/Mostri/Capo dei bruti#^srd-capo_dei_bruti-multiattacco]]", "[[SRD/Mostri/Capo dei bruti#^srd-capo_dei_bruti-martello-da-guerra]]", "[[SRD/Mostri/Capo dei bruti#^srd-capo_dei_bruti-balestra-pesante]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Capo dei bruti"
 type: "Umanoide"
 size: "medio o piccolo"
@@ -89,21 +96,25 @@ tab: Azioni
 ### Tattiche del branco
 
 Il bruto dispone di vantaggio a un tiro per colpire contro una creatura se almeno uno dei suoi alleati si trova entro 1,5 metri dalla creatura e non è incapacitato.
+^srd-capo_dei_bruti-tattiche-del-branco
 ## Azioni
 
 ### Multiattacco
 
 Il bruto effettua due attacchi, usando Martello da guerra o Balestra pesante in qualsiasi combinazione.
+^srd-capo_dei_bruti-multiattacco
 
 ### Martello da guerra
 
 *Tiro per colpire in mischia:* +5, portata 1,5 m. *Colpito:* 12 (2d8 + 3) danni contundenti. Se il bersaglio è una creatura di taglia Grande o inferiore, il bruto lo spinge fino a 3 metri lontano da sé.
+^srd-capo_dei_bruti-martello-da-guerra
 
 ### Balestra pesante
 
 *Tiro per colpire a distanza:* +4, gittata 30/120 m. *Colpito:* 13 (2d10 + 2) danni perforanti.
 
 ---
+^srd-capo_dei_bruti-balestra-pesante
 ````
 
 > [!info] Licenza

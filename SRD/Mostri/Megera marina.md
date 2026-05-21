@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Megera marina]]"]
+riferimenti_srd: ["[[SRD/Mostri/Megera marina]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Megera marina#^srd-megera_marina-anfibio]]", "[[SRD/Mostri/Megera marina#^srd-megera_marina-magia-della-congrega]]", "[[SRD/Mostri/Megera marina#^srd-megera_marina-aspetto-orripilante]]", "[[SRD/Mostri/Megera marina#^srd-megera_marina-artiglio]]", "[[SRD/Mostri/Megera marina#^srd-megera_marina-aspetto-illusorio]]", "[[SRD/Mostri/Megera marina#^srd-megera_marina-sguardo-mortale-ricarica-5-6]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Megera marina"
 type: "Folletto"
 size: "medio"
@@ -90,27 +97,33 @@ tab: Azioni
 ### Anfibio
 
 La megera può respirare in aria e in acqua.
+^srd-megera_marina-anfibio
 
 ### Magia della congrega
 
 Finché si trova entro 9 metri da almeno due megere alleate, la megera può lanciare uno dei seguenti incantesimi senza bisogno di componenti materiali, utilizzando il normale tempo di lancio dell'incantesimo e Intelligenza come caratteristica da incantatore (CD del tiro salvezza sull'incantesimo 11): identificare, localizza oggetto, presagio, scrutare, servitore inosservato o trova famiglio. La megera deve terminare un riposo lungo prima di utilizzare questo tratto per lanciare di nuovo l'incantesimo.
+^srd-megera_marina-magia-della-congrega
 
 ### Aspetto orripilante
 
 *Tiro salvezza su Saggezza:* CD 11, qualsiasi bestia o umanoide inizi il proprio turno nel campo visivo della megera, entro un raggio di 9 metri da lei e può vederne la vera forma. *Fallimento:* il bersaglio è spaventato fino all'inizio del proprio turno successivo. *Successo:* il bersaglio è immune all'Aspetto orripilante di questa megera per 24 ore.
+^srd-megera_marina-aspetto-orripilante
 ## Azioni
 
 ### Artiglio
 
 *Tiro per colpire in mischia:* +5, portata 1,5 m. *Colpito:* 10 (2d6 + 3) danni taglienti.
+^srd-megera_marina-artiglio
 
 ### Aspetto illusorio
 
 La megera lancia camuffare se stesso, utilizzando Costituzione come caratteristica da incantatore (CD del tiro salvezza sull'incantesimo 13). L'incantesimo dura 24 ore.
+^srd-megera_marina-aspetto-illusorio
 
 ### Sguardo mortale (ricarica 5-6)
 
 *Tiro salvezza su Saggezza:* CD 11, una creatura spaventata che la megera è in grado di vedere entro 9 metri. *Fallimento:* se il bersaglio ha 20 punti ferita o meno, scende a 0 punti ferita. Altrimenti, il bersaglio subisce 13 (3d8) danni psichici.
+^srd-megera_marina-sguardo-mortale-ricarica-5-6
 ````
 
 > [!info] Licenza

@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Colonia di topi]]"]
+riferimenti_srd: ["[[SRD/Mostri/Colonia di topi]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Colonia di topi#^srd-colonia_di_topi-sciame]]", "[[SRD/Mostri/Colonia di topi#^srd-colonia_di_topi-morsi]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Colonia di topi"
 type: "Sciame"
 size: "medio"
@@ -83,11 +90,13 @@ tab: Azioni
 ### Sciame
 
 La colonia può occupare lo spazio di un'altra creatura e viceversa, e può muoversi attraverso qualsiasi apertura abbastanza grande per un topo Minuscolo. L'orda non può recuperare punti ferita o ottenere punti ferita temporanei.
+^srd-colonia_di_topi-sciame
 ## Azioni
 
 ### Morsi
 
 *Tiro per colpire in mischia:* +2, portata 1,5 m. *Colpito:* 5 (2d4) danni perforanti, o 2 (1d4) danni perforanti se lo sciame è sanguinante.
+^srd-colonia_di_topi-morsi
 ````
 
 > [!info] Licenza

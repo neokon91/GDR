@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Rospo gigante]]"]
+riferimenti_srd: ["[[SRD/Mostri/Rospo gigante]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Rospo gigante#^srd-rospo_gigante-anfibio]]", "[[SRD/Mostri/Rospo gigante#^srd-rospo_gigante-balzo-da-fermo]]", "[[SRD/Mostri/Rospo gigante#^srd-rospo_gigante-morso]]", "[[SRD/Mostri/Rospo gigante#^srd-rospo_gigante-inghiottire]]", "[[SRD/Mostri/Rospo gigante#^srd-rospo_gigante-media-o-inferiore-che-sta-afferrando]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Rospo gigante"
 type: "Bestia"
 size: "grande"
@@ -88,23 +95,28 @@ tab: Azioni
 ### Anfibio
 
 Il rospo può respirare in aria e in acqua.
+^srd-rospo_gigante-anfibio
 
 ### Balzo da fermo
 
 Il rospo può compiere un salto in lungo di massimo 6 metri e uno in alto di massimo 3 metri, con o senza rincorsa.
+^srd-rospo_gigante-balzo-da-fermo
 ## Azioni
 
 ### Morso
 
 *Tiro per colpire in mischia:* +4, portata 1,5 m *Colpito:* 5 (1d6 + 2) danni perforanti più 5 (2d4) danni da veleno. Se il bersaglio è una creatura di taglia Media o inferiore, è afferrato (CD 12 per sfuggire).
+^srd-rospo_gigante-morso
 
 ### Inghiottire
 
 Il rospo inghiotte un bersaglio di taglia
+^srd-rospo_gigante-inghiottire
 
 ### Media o inferiore che sta afferrando
 
 La creatura inghiottita non è afferrata, ma è accecata e trattenuta, e beneficia di copertura totale contro attacchi e altri effetti al di fuori del rospo. Inoltre, il bersaglio subisce 10 (3d6) danni da acido al termine di ogni turno del rospo. Il rospo può inghiottire un solo bersaglio alla volta e non può usare Morso finché ha un bersaglio inghiottito. Se il rospo muore, la creatura inghiottita non è più trattenuta e può fuggire dal cadavere usando 1,5 metri di movimento, uscendo prona.
+^srd-rospo_gigante-media-o-inferiore-che-sta-afferrando
 ````
 
 > [!info] Licenza

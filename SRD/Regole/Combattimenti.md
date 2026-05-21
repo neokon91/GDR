@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Regole/Combattimenti]]"]
+riferimenti_srd: ["[[SRD/Regole/Combattimenti]]"]
+riferimenti_regola: []
+sezioni_collegate: ["[[SRD/Regole/Combattimenti#Difficolta e gestione]]", "[[SRD/Regole/Combattimenti#Budget di PE per personaggio]]"]
+blocchi_collegati: []
+tabelle_collegate: ["[[SRD/Regole/Combattimenti#^srd-combattimenti-difficolta-e-gestione]]", "[[SRD/Regole/Combattimenti#^srd-combattimenti-budget-di-pe-per-personaggio]]"]
+tags: ["dnd55/srd", "dnd55/regola"]
 capitolo: "Strumenti di gioco"
 categoria_regola: "Strumenti di gioco"
 pagine_sorgente: "230-231"
@@ -30,6 +37,7 @@ La costruzione di combattimenti usa obiettivi di difficolta, budget di PE e scel
 | GS 0 | Creature con GS 0, soprattutto da 0 PE, vanno usate con parsimonia; per molte creature usa sciami. |
 | Schede statistiche | Oltre due o tre schede diverse in un incontro puo essere scoraggiante. |
 | Creature potenti | Una creatura con GS superiore al livello del gruppo puo eliminare personaggi con una sola azione. |
+^srd-combattimenti-difficolta-e-gestione
 
 ## Budget di PE per personaggio
 
@@ -55,6 +63,7 @@ La costruzione di combattimenti usa obiettivi di difficolta, budget di PE e scel
 | 18 | 5.000 | 8.700 | 14.200 |
 | 19 | 5.500 | 10.700 | 17.200 |
 | 20 | 6.400 | 13.200 | 22.000 |
+^srd-combattimenti-budget-di-pe-per-personaggio
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

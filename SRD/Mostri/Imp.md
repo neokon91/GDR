@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Imp]]"]
+riferimenti_srd: ["[[SRD/Mostri/Imp]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Imp#^srd-imp-resistenza-alla-magia]]", "[[SRD/Mostri/Imp#^srd-imp-pungiglione]]", "[[SRD/Mostri/Imp#^srd-imp-invisibilita]]", "[[SRD/Mostri/Imp#^srd-imp-mutaforma]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Imp"
 type: "Immondo (diavolo)"
 size: "minuscolo"
@@ -92,19 +99,23 @@ tab: Azioni
 ### Resistenza alla magia
 
 L'imp dispone di vantaggio ai tiri salvezza contro incantesimi e altri effetti magici.
+^srd-imp-resistenza-alla-magia
 ## Azioni
 
 ### Pungiglione
 
 *Tiro per colpire in mischia:* +5, portata 1,5 m *Colpito:* 6 (1d6 + 3) danni perforanti più 7 (2d6) danni da veleno.
+^srd-imp-pungiglione
 
 ### Invisibilità
 
 L'imp può lanciare invisibilità su di sé senza bisogno di componenti per incantesimi e utilizzando il Carisma come caratteristica da incantatore.
+^srd-imp-invisibilita
 
 ### Mutaforma
 
 L'imp può assumere la forma bestiale di un topo (velocità 6 m), un corvo (6 m, volo 18 m) o un ragno (6 m, scalata 6 m), o tornare alla sua vera forma. Le sue statistiche di gioco restano le stesse in ogni forma, a eccezione della velocità. Nessun oggetto che indossa o trasporta viene trasformato.
+^srd-imp-mutaforma
 ````
 
 > [!info] Licenza

@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Regole/Creare oggetti magici]]"]
+riferimenti_srd: ["[[SRD/Regole/Creare oggetti magici]]"]
+riferimenti_regola: []
+sezioni_collegate: ["[[SRD/Regole/Creare oggetti magici#Strumenti per categoria]]", "[[SRD/Regole/Creare oggetti magici#Tempi e costi]]"]
+blocchi_collegati: []
+tabelle_collegate: ["[[SRD/Regole/Creare oggetti magici#^srd-creare_oggetti_magici-strumenti-per-categoria]]", "[[SRD/Regole/Creare oggetti magici#^srd-creare_oggetti_magici-tempi-e-costi]]"]
+tags: ["dnd55/srd", "dnd55/regola"]
 capitolo: "Oggetti magici"
 categoria_regola: "Oggetti magici"
 pagine_sorgente: 235
@@ -31,6 +38,7 @@ Creare oggetti magici richiede competenza in Arcano, strumenti appropriati, even
 | Pergamena | Scorte da calligrafo |
 | Pozione | Scorte da alchimista o borsa da erborista |
 | Verga | Strumenti da intagliatore |
+^srd-creare_oggetti_magici-strumenti-per-categoria
 
 ## Tempi e costi
 
@@ -41,6 +49,7 @@ Creare oggetti magici richiede competenza in Arcano, strumenti appropriati, even
 | Raro | 50 giorni | 2.000 mo |
 | Molto raro | 125 giorni | 20.000 mo |
 | Leggendario | 250 giorni | 100.000 mo |
+^srd-creare_oggetti_magici-tempi-e-costi
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

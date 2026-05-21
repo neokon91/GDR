@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Famiglio del vampiro]]"]
+riferimenti_srd: ["[[SRD/Mostri/Famiglio del vampiro]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Famiglio del vampiro#^srd-famiglio_del_vampiro-connessione-vampirica]]", "[[SRD/Mostri/Famiglio del vampiro#^srd-famiglio_del_vampiro-multiattacco]]", "[[SRD/Mostri/Famiglio del vampiro#^srd-famiglio_del_vampiro-pugnale-ombroso]]", "[[SRD/Mostri/Famiglio del vampiro#^srd-famiglio_del_vampiro-agilita-immortale]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Famiglio del vampiro"
 type: "Umanoide"
 size: "medio o piccolo"
@@ -94,15 +101,18 @@ tab: Azioni
 ### Connessione vampirica
 
 Finché il famiglio e il suo padrone vampiro si trovano sullo stesso piano di esistenza, il vampiro può comunicare con il famiglio telepaticamente ed è in grado di percepire attraverso i sensi del famiglio.
+^srd-famiglio_del_vampiro-connessione-vampirica
 ## Azioni
 
 ### Multiattacco
 
 Il famiglio effettua due attacchi Pugnale ombroso.
+^srd-famiglio_del_vampiro-multiattacco
 
 ### Pugnale ombroso
 
 *Tiro per colpire in mischia o a distanza:* +5, portata 1,5 m o gittata 6/18 m *Colpito:* 5 (1d4 + 3) danni perforanti più 7 (3d4) danni necrotici. Se il bersaglio viene ridotto a 0 punti ferita da questo attacco, diventa stabile ma è avvelenato per 1 ora. Finché è avvelenato, il bersaglio è anche paralizzato.
+^srd-famiglio_del_vampiro-pugnale-ombroso
 ````
 
 > [!info] Licenza

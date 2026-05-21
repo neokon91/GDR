@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Equipaggiamento/Sella esotica]]"]
+riferimenti_srd: ["[[SRD/Equipaggiamento/Sella esotica]]"]
+riferimenti_regola: []
+sezioni_collegate: ["[[SRD/Equipaggiamento/Sella esotica#Dettagli]]"]
+blocchi_collegati: []
+tabelle_collegate: ["[[SRD/Equipaggiamento/Sella esotica#^srd-sella_esotica-dettagli]]"]
+tags: ["dnd55/srd"]
 capitolo: "Equipaggiamento"
 pagine_sorgente: "113-114"
 tipo_oggetto: "finimento_o_servizio"
@@ -42,6 +49,7 @@ Peso 20 kg; costo 60 mo.
 | Oggetto | Peso | Costo |
 | --- | --- | --- |
 | Sella esotica | 20 kg | 60 mo |
+^srd-sella_esotica-dettagli
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

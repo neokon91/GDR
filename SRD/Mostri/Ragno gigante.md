@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Ragno gigante]]"]
+riferimenti_srd: ["[[SRD/Mostri/Ragno gigante]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Ragno gigante#^srd-ragno_gigante-andatura-sulla-ragnatela]]", "[[SRD/Mostri/Ragno gigante#^srd-ragno_gigante-movimenti-del-ragno]]", "[[SRD/Mostri/Ragno gigante#^srd-ragno_gigante-morso]]", "[[SRD/Mostri/Ragno gigante#^srd-ragno_gigante-ragnatela-ricarica-5-6]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Ragno gigante"
 type: "Bestia"
 size: "grande"
@@ -91,19 +98,23 @@ tab: Azioni
 ### Andatura sulla ragnatela
 
 Il ragno ignora le restrizioni di movimento causate dalle ragnatele e conosce l'ubicazione esatta di ogni altra creatura a contatto con la stessa ragnatela.
+^srd-ragno_gigante-andatura-sulla-ragnatela
 
 ### Movimenti del ragno
 
 Il ragno può scalare le superfici difficili, compresi i soffitti, senza effettuare una prova di caratteristica.
+^srd-ragno_gigante-movimenti-del-ragno
 ## Azioni
 
 ### Morso
 
 *Tiro per colpire in mischia:* +5, portata 1,5 m *Colpito:* 7 (1d8 + 3) danni perforanti più 7 (2d6) danni da veleno.
+^srd-ragno_gigante-morso
 
 ### Ragnatela (ricarica 5-6)
 
 *Tiro salvezza su Destrezza:* CD 13, una creatura che il ragno è in grado di vedere entro 18 metri. *Fallimento:* il bersaglio è trattenuto finché la ragnatela non viene distrutta (CA 10; PF 5; vulnerabilità ai danni da fuoco; immunità ai danni da veleno e psichici).
+^srd-ragno_gigante-ragnatela-ricarica-5-6
 ````
 
 > [!info] Licenza

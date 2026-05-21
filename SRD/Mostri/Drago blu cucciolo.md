@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Drago blu cucciolo]]"]
+riferimenti_srd: ["[[SRD/Mostri/Drago blu cucciolo]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Drago blu cucciolo#^srd-drago_blu_cucciolo-multiattacco]]", "[[SRD/Mostri/Drago blu cucciolo#^srd-drago_blu_cucciolo-squarcio]]", "[[SRD/Mostri/Drago blu cucciolo#^srd-drago_blu_cucciolo-soffio-di-fulmini-ricarica-5-6]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Drago blu cucciolo"
 type: "Drago (cromatico)"
 size: "medio"
@@ -91,14 +98,17 @@ tab: Azioni
 ### Multiattacco
 
 Il drago effettua due attacchi Squarcio.
+^srd-drago_blu_cucciolo-multiattacco
 
 ### Squarcio
 
 *Tiro per colpire in mischia:* +5, portata 1,5 m. *Colpito:* 8 (1d10 + 3) danni taglienti più 3 (1d6) danni da fulmine.
+^srd-drago_blu_cucciolo-squarcio
 
 ### Soffio di fulmini (ricarica 5-6)
 
 *Tiro salvezza su Destrezza:* CD 12, tutte le creature in una linea lunga 9 metri e larga 1,5 metri. *Fallimento:* 21 (6d6) danni da fulmine. *Successo:* danni dimezzati.
+^srd-drago_blu_cucciolo-soffio-di-fulmini-ricarica-5-6
 ````
 
 > [!info] Licenza

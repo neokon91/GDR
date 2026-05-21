@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Oggetto animato]]"]
+riferimenti_srd: ["[[SRD/Mostri/Oggetto animato]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Oggetto animato#^srd-oggetto_animato-schianto]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Oggetto animato"
 type: "Costrutto"
 size: "enorme o inferiore"
@@ -80,6 +87,7 @@ tab: Azioni
 ### Schianto
 
 *Tiro per colpire in mischia:* il bonus equivale al modificatore di attacco dell'incantesimo del personaggio, portata 1,5 m. *Colpito:* danni da forza pari a 1d4 + 3 (taglia Media o inferiore), 2d6 + 3 + il modificatore di caratteristica da incantatore dell'incantatore (taglia Grande) o 2d12 + 3 + il modificatore di caratteristica da incantatore dell'incantatore (taglia Enorme).
+^srd-oggetto_animato-schianto
 ````
 
 > [!info] Licenza

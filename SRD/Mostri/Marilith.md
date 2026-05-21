@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Marilith]]"]
+riferimenti_srd: ["[[SRD/Mostri/Marilith]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Marilith#^srd-marilith-reattiva]]", "[[SRD/Mostri/Marilith#^srd-marilith-resistenza-alla-magia]]", "[[SRD/Mostri/Marilith#^srd-marilith-ristoro-demoniaco]]", "[[SRD/Mostri/Marilith#^srd-marilith-multiattacco]]", "[[SRD/Mostri/Marilith#^srd-marilith-lama-del-patto]]", "[[SRD/Mostri/Marilith#^srd-marilith-stritolare]]", "[[SRD/Mostri/Marilith#^srd-marilith-teletrasporto-ricarica-5-6]]", "[[SRD/Mostri/Marilith#^srd-marilith-parata]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Marilith"
 type: "Immondo (demone)"
 size: "grande"
@@ -102,27 +109,33 @@ tab: Azioni
 ### Reattiva
 
 Il marilith può effettuare una reazione a ogni turno in combattimento.
+^srd-marilith-reattiva
 
 ### Resistenza alla magia
 
 Il marilith dispone di vantaggio ai tiri salvezza contro incantesimi e altri effetti magici.
+^srd-marilith-resistenza-alla-magia
 
 ### Ristoro demoniaco
 
 Se il marilith muore al di fuori dell'Abisso, il suo corpo si dissolve diventando icore e ne acquisisce uno nuovo all'istante, tornando in vita con tutti i suoi punti ferita da qualche parte nell'Abisso.
+^srd-marilith-ristoro-demoniaco
 ## Azioni
 
 ### Multiattacco
 
 Il marilith effettua sei attacchi Lama del patto e usa Stritolare.
+^srd-marilith-multiattacco
 
 ### Lama del patto
 
 *Tiro per colpire in mischia:* +10, portata 1,5 m. *Colpito:* 10 (1d8 + 5) danni taglienti più 7 (2d6) danni necrotici.
+^srd-marilith-lama-del-patto
 
 ### Stritolare
 
 *Tiro salvezza su Forza:* CD 17, una creatura di taglia Media o inferiore che il marilith è in grado di vedere entro 1,5 metri. *Fallimento:* 15 (2d10 + 4) danni contundenti. Il bersaglio è afferrato (CD 14 per sfuggire) ed è trattenuto finché la presa perdura.
+^srd-marilith-stritolare
 ````
 
 > [!info] Licenza

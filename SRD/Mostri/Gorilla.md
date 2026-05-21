@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Gorilla]]"]
+riferimenti_srd: ["[[SRD/Mostri/Gorilla]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Gorilla#^srd-gorilla-multiattacco]]", "[[SRD/Mostri/Gorilla#^srd-gorilla-pugno]]", "[[SRD/Mostri/Gorilla#^srd-gorilla-roccia-ricarica-6]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Gorilla"
 type: "Bestia"
 size: "media"
@@ -89,14 +96,17 @@ tab: Azioni
 ### Multiattacco
 
 Il gorilla effettua due attacchi Pugno.
+^srd-gorilla-multiattacco
 
 ### Pugno
 
 *Tiro per colpire in mischia:* +5, portata 1,5 m. *Colpito:* 5 (1d4 + 3) danni contundenti.
+^srd-gorilla-pugno
 
 ### Roccia (ricarica 6)
 
 *Tiro per colpire a distanza:* +5, gittata 7,5/15 m *Colpito:* 10 (2d6 + 3) danni contundenti.
+^srd-gorilla-roccia-ricarica-6
 ````
 
 > [!info] Licenza

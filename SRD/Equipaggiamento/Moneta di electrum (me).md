@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Equipaggiamento/Moneta di electrum (me)]]"]
+riferimenti_srd: ["[[SRD/Equipaggiamento/Moneta di electrum (me)]]"]
+riferimenti_regola: []
+sezioni_collegate: ["[[SRD/Equipaggiamento/Moneta di electrum (me)#Dettagli]]"]
+blocchi_collegati: []
+tabelle_collegate: ["[[SRD/Equipaggiamento/Moneta di electrum (me)#^srd-moneta_di_electrum_me-dettagli]]"]
+tags: ["dnd55/srd"]
 capitolo: "Equipaggiamento"
 pagine_sorgente: 101
 tipo_oggetto: "moneta"
@@ -42,6 +49,7 @@ Valore in monete d'oro: 1/2.
 | Moneta | Valore in mo |
 | --- | --- |
 | Moneta di electrum (me) | 1/2 |
+^srd-moneta_di_electrum_me-dettagli
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

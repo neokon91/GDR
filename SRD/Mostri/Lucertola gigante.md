@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Lucertola gigante]]"]
+riferimenti_srd: ["[[SRD/Mostri/Lucertola gigante]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Lucertola gigante#^srd-lucertola_gigante-movimenti-del-ragno]]", "[[SRD/Mostri/Lucertola gigante#^srd-lucertola_gigante-morso]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Lucertola gigante"
 type: "Bestia"
 size: "grande"
@@ -83,11 +90,13 @@ tab: Azioni
 ### Movimenti del ragno
 
 La lucertola può scalare le superfici difficili, compresi i soffitti, senza effettuare una prova di caratteristica.
+^srd-lucertola_gigante-movimenti-del-ragno
 ## Azioni
 
 ### Morso
 
 *Tiro per colpire in mischia:* +4, portata 1,5 m. *Colpito:* 6 (1d8 + 2) danni perforanti.
+^srd-lucertola_gigante-morso
 ````
 
 > [!info] Licenza

@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Equipaggiamento/Scimitarra]]"]
+riferimenti_srd: ["[[SRD/Equipaggiamento/Scimitarra]]"]
+riferimenti_regola: []
+sezioni_collegate: ["[[SRD/Equipaggiamento/Scimitarra#Dettagli]]"]
+blocchi_collegati: []
+tabelle_collegate: ["[[SRD/Equipaggiamento/Scimitarra#^srd-scimitarra-dettagli]]"]
+tags: ["dnd55/srd"]
 capitolo: "Equipaggiamento"
 pagine_sorgente: "101-104"
 tipo_oggetto: "arma"
@@ -42,6 +49,7 @@ Mischia da guerra; danni 1d6 taglienti; padronanza Graffio.
 | Categoria | Nome | Danni | Proprietà | Padronanza | Peso | Costo |
 | --- | --- | --- | --- | --- | --- | --- |
 | Mischia da guerra | Scimitarra | 1d6 taglienti | accurata, leggera | Graffio | 1,5 kg | 25 mo |
+^srd-scimitarra-dettagli
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Glossario/Malnutrizione]]"]
+riferimenti_srd: ["[[SRD/Glossario/Malnutrizione]]"]
+riferimenti_regola: []
+sezioni_collegate: ["[[SRD/Glossario/Malnutrizione#Fabbisogno di cibo giornaliero]]"]
+blocchi_collegati: []
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/regola"]
 lettera: "M"
 descrittore: "pericolo"
 pagine_sorgente: "209-210"

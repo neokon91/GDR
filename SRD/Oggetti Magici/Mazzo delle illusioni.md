@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Oggetti Magici/Mazzo delle illusioni]]"]
+riferimenti_srd: ["[[SRD/Oggetti Magici/Mazzo delle illusioni]]"]
+riferimenti_regola: []
+sezioni_collegate: ["[[SRD/Oggetti Magici/Mazzo delle illusioni#1d100 Illusione*]]"]
+blocchi_collegati: []
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/oggetto-magico"]
 tipo_oggetto: "Oggetto meraviglioso"
 tipo_base: "Oggetto meraviglioso"
 rarita: "non comune"

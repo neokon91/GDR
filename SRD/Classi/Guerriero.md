@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Classi/Guerriero]]"]
+riferimenti_srd: ["[[SRD/Classi/Guerriero]]"]
+riferimenti_regola: []
+sezioni_collegate: ["[[SRD/Classi/Guerriero#Tratti di classe]]", "[[SRD/Classi/Guerriero#Progressione di classe]]", "[[SRD/Classi/Guerriero#Privilegi chiave]]", "[[SRD/Classi/Guerriero#Sottoclasse del guerriero: Campione]]"]
+blocchi_collegati: []
+tabelle_collegate: ["[[SRD/Classi/Guerriero#^srd-guerriero-tratti-di-classe]]", "[[SRD/Classi/Guerriero#^srd-guerriero-progressione-di-classe]]", "[[SRD/Classi/Guerriero#^srd-guerriero-privilegi-chiave]]", "[[SRD/Classi/Guerriero#^srd-guerriero-sottoclasse-del-guerriero-campione]]"]
+tags: ["dnd55/srd"]
 capitolo: "Classi"
 pagine_sorgente: "53-55"
 caratteristica_primaria: ["Forza", "Destrezza"]
@@ -41,6 +48,7 @@ A: cotta di maglia, spadone, mazzafrusto, 8 giavellotti, dotazione da avventurie
 | Armi | Armi semplici e da guerra. |
 | Armature | Armature leggere, medie e pesanti; scudi. |
 | Equipaggiamento iniziale | A: cotta di maglia, spadone, mazzafrusto, 8 giavellotti, dotazione da avventuriero e 4 mo; B: cuoio borchiato, scimitarra, spada corta, arco lungo, 20 frecce, faretra, dotazione da avventuriero e 11 mo; C: 155 mo. |
+^srd-guerriero-tratti-di-classe
 
 ## Progressione di classe
 
@@ -66,6 +74,7 @@ A: cotta di maglia, spadone, mazzafrusto, 8 giavellotti, dotazione da avventurie
 | 18 | +6 | Privilegio della sottoclasse | 4 | 6 |
 | 19 | +6 | Dono epico | 4 | 6 |
 | 20 | +6 | Tre attacchi extra | 4 | 6 |
+^srd-guerriero-progressione-di-classe
 
 ## Privilegi chiave
 
@@ -75,6 +84,7 @@ A: cotta di maglia, spadone, mazzafrusto, 8 giavellotti, dotazione da avventurie
 | Padronanza d'armi | Usa proprieta di padronanza delle armi e ne amplia il numero con i livelli. |
 | Azione impetuosa | Ottiene un'azione aggiuntiva in momenti decisivi. |
 | Attacco extra | Aumenta il numero di attacchi con l'azione di Attacco. |
+^srd-guerriero-privilegi-chiave
 
 ## Sottoclasse del guerriero: Campione
 
@@ -86,6 +96,7 @@ A: cotta di maglia, spadone, mazzafrusto, 8 giavellotti, dotazione da avventurie
 | 10 | Guerriero eroico | In combattimento ottiene Ispirazione eroica se inizia il turno senza averla. |
 | 15 | Critico superiore | Colpo critico con armi e colpi senz armi su 18-20. |
 | 18 | Sopravvissuto | Vantaggio ai TS morte e recupero PF a inizio turno se sanguinante. |
+^srd-guerriero-sottoclasse-del-guerriero-campione
 
 ## Progressione
 

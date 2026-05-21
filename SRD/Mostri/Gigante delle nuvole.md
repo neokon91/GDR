@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Gigante delle nuvole]]"]
+riferimenti_srd: ["[[SRD/Mostri/Gigante delle nuvole]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Gigante delle nuvole#^srd-gigante_delle_nuvole-multiattacco]]", "[[SRD/Mostri/Gigante delle nuvole#^srd-gigante_delle_nuvole-mazza-tonante]]", "[[SRD/Mostri/Gigante delle nuvole#^srd-gigante_delle_nuvole-nuvola-di-tuoni]]", "[[SRD/Mostri/Gigante delle nuvole#^srd-gigante_delle_nuvole-incantesimi]]", "[[SRD/Mostri/Gigante delle nuvole#^srd-gigante_delle_nuvole-passo-velato]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Gigante delle nuvole"
 type: "Gigante"
 size: "enorme"
@@ -95,14 +102,17 @@ tab: Azioni
 ### Multiattacco
 
 Il gigante effettua due attacchi, utilizzando Mazza tonante o Nuvola di tuoni in qualsiasi combinazione. Può sostituire un attacco con un utilizzo di Incantesimi per lanciare nube di nebbia.
+^srd-gigante_delle_nuvole-multiattacco
 
 ### Mazza tonante
 
 *Tiro per colpire in mischia:* +12, portata 3 m. *Colpito:* 21 (3d8 + 8) danni contundenti più 7 (2d6) danni da tuono.
+^srd-gigante_delle_nuvole-mazza-tonante
 
 ### Nuvola di tuoni
 
 *Tiro per colpire a distanza:* +12, gittata 72 m. *Colpito:* 18 (3d6 + 8) danni da tuono, e il bersaglio è incapacitato fino al termine del proprio turno successivo.
+^srd-gigante_delle_nuvole-nuvola-di-tuoni
 
 ### Incantesimi
 
@@ -117,6 +127,7 @@ A volontà:
 - individuazione del magico
 - luce
 - nube di nebbia
+^srd-gigante_delle_nuvole-incantesimi
 ````
 
 > [!info] Licenza

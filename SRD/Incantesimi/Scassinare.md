@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Incantesimi/Scassinare]]"]
+riferimenti_srd: ["[[SRD/Incantesimi/Scassinare]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: []
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/incantesimo"]
 livello: 2
 scuola: "Trasmutazione"
 classi: ["bardo", "mago", "stregone"]

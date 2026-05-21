@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Incantesimi/Pelle di pietra]]"]
+riferimenti_srd: ["[[SRD/Incantesimi/Pelle di pietra]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: []
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/incantesimo"]
 livello: 4
 scuola: "Trasmutazione"
 classi: ["druido", "mago", "ranger", "stregone"]

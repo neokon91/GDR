@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Coccatrice]]"]
+riferimenti_srd: ["[[SRD/Mostri/Coccatrice]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Coccatrice#^srd-coccatrice-morso-pietrificante]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Coccatrice"
 type: "Mostruosità"
 size: "piccola"
@@ -80,6 +87,7 @@ tab: Azioni
 ### Morso pietrificante
 
 *Tiro per colpire in mischia:* +3, portata 1,5 m. *Colpito:* 3 (1d4 + 1) danni perforanti. Se il bersaglio è una creatura, subisce il seguente effetto. *Tiro salvezza su Costituzione:* CD 11. *Primo fallimento:* il bersaglio è trattenuto. Ripete il tiro salvezza alla fine del proprio turno successivo se è ancora trattenuto e, se lo supera, l'effetto svanisce. *Secondo fallimento:* il bersaglio è pietrificato invece che trattenuto per 24 ore.
+^srd-coccatrice-morso-pietrificante
 ````
 
 > [!info] Licenza

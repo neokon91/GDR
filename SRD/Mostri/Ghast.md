@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Ghast]]"]
+riferimenti_srd: ["[[SRD/Mostri/Ghast]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Ghast#^srd-ghast-fetore]]", "[[SRD/Mostri/Ghast#^srd-ghast-artiglio]]", "[[SRD/Mostri/Ghast#^srd-ghast-morso]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Ghast"
 type: "Non morto"
 size: "medio"
@@ -85,6 +92,7 @@ tab: Azioni
 ### Fetore
 
 *Tiro salvezza su Costituzione:* CD 10, ogni creatura che inizi il suo turno in un'emanazione di 1,5 metri di cui il ghast è il punto di origine. *Fallimento:* il bersaglio è avvelenato fino all'inizio del proprio turno successivo. *Successo:* il bersaglio è immune a Fetore di questo ghast per 24 ore.
+^srd-ghast-fetore
 ## Azioni
 
 ### Artiglio
@@ -92,10 +100,12 @@ tab: Azioni
 *Tiro per colpire in mischia:* +5, portata 1,5 m. *Colpito:* 10 (2d6 + 3) danni taglienti. Se il bersaglio è una creatura diversa da un non morto, subisce il seguente effetto.
 
 *Tiro salvezza su Costituzione:* CD 10. *Fallimento:* il bersaglio è paralizzato fino al termine del proprio turno successivo.
+^srd-ghast-artiglio
 
 ### Morso
 
 *Tiro per colpire in mischia:* +5, portata 1,5 m. *Colpito:* 7 (1d8 + 3) danni perforanti più 9 (2d8) danni necrotici.
+^srd-ghast-morso
 ````
 
 > [!info] Licenza

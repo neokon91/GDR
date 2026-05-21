@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Incantesimi/Mano arcana]]"]
+riferimenti_srd: ["[[SRD/Incantesimi/Mano arcana]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Incantesimi/Mano arcana#^srd-mano_arcana-utilizzo-di-uno-slot-incantesimo-di-livello-superiore]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/incantesimo"]
 livello: 5
 scuola: "Invocazione"
 classi: ["mago", "stregone"]
@@ -52,6 +59,7 @@ La mano colpisce un bersaglio che si trova entro 1,5 metri da essa. L'incantator
 ### Utilizzo di uno slot incantesimo di livello superiore
 
 I danni del pugno serrato aumentano di 2d8 e quelli della mano stritolatrice di 2d6 per ogni slot di livello superiore al 5º.
+^srd-mano_arcana-utilizzo-di-uno-slot-incantesimo-di-livello-superiore
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

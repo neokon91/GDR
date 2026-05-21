@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Babbuino]]"]
+riferimenti_srd: ["[[SRD/Mostri/Babbuino]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Babbuino#^srd-babbuino-tattiche-del-branco]]", "[[SRD/Mostri/Babbuino#^srd-babbuino-morso]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Babbuino"
 type: "Bestia"
 size: "piccola"
@@ -82,11 +89,13 @@ tab: Azioni
 ### Tattiche del branco
 
 Il babbuino dispone di vantaggio a un tiro per colpire contro una creatura se almeno uno dei suoi alleati si trova entro 1,5 metri dalla creatura e non è incapacitato.
+^srd-babbuino-tattiche-del-branco
 ## Azioni
 
 ### Morso
 
 *Tiro per colpire in mischia:* +1, portata 1,5 m. *Colpito:* 1 (1d4 - 1) danni perforanti.
+^srd-babbuino-morso
 ````
 
 > [!info] Licenza

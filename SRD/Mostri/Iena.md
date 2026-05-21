@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Iena]]"]
+riferimenti_srd: ["[[SRD/Mostri/Iena]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Iena#^srd-iena-tattiche-del-branco]]", "[[SRD/Mostri/Iena#^srd-iena-morso]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Iena"
 type: "Bestia"
 size: "media"
@@ -86,11 +93,13 @@ tab: Azioni
 ### Tattiche del branco
 
 La iena dispone di vantaggio a un tiro per colpire contro una creatura se almeno uno dei suoi alleati si trova entro 1,5 metri dalla creatura e non è incapacitato.
+^srd-iena-tattiche-del-branco
 ## Azioni
 
 ### Morso
 
 *Tiro per colpire in mischia:* +2, portata 1,5 m. *Colpito:* 3 (1d6) danni perforanti.
+^srd-iena-morso
 ````
 
 > [!info] Licenza

@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Equipaggiamento/Falcione]]"]
+riferimenti_srd: ["[[SRD/Equipaggiamento/Falcione]]"]
+riferimenti_regola: []
+sezioni_collegate: ["[[SRD/Equipaggiamento/Falcione#Dettagli]]"]
+blocchi_collegati: []
+tabelle_collegate: ["[[SRD/Equipaggiamento/Falcione#^srd-falcione-dettagli]]"]
+tags: ["dnd55/srd"]
 capitolo: "Equipaggiamento"
 pagine_sorgente: "101-104"
 tipo_oggetto: "arma"
@@ -42,6 +49,7 @@ Mischia da guerra; danni 1d10 taglienti; padronanza Colpo di striscio.
 | Categoria | Nome | Danni | Proprietà | Padronanza | Peso | Costo |
 | --- | --- | --- | --- | --- | --- | --- |
 | Mischia da guerra | Falcione | 1d10 taglienti | due mani, pesante, portata | Colpo di striscio | 3 kg | 20 mo |
+^srd-falcione-dettagli
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

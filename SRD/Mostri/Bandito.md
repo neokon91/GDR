@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Bandito]]"]
+riferimenti_srd: ["[[SRD/Mostri/Bandito]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Bandito#^srd-bandito-balestra-leggera]]", "[[SRD/Mostri/Bandito#^srd-bandito-scimitarra]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Bandito"
 type: "Umanoide"
 size: "medio o piccolo"
@@ -82,10 +89,12 @@ tab: Azioni
 ### Balestra leggera
 
 *Tiro per colpire a distanza:* +3, gittata 24/96 m. *Colpito:* 5 (1d8 + 1) danni perforanti.
+^srd-bandito-balestra-leggera
 
 ### Scimitarra
 
 *Tiro per colpire in mischia:* +3, portata 1,5 m. *Colpito:* 4 (1d6 + 1) danni taglienti.
+^srd-bandito-scimitarra
 ````
 
 > [!info] Licenza

@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Deva]]"]
+riferimenti_srd: ["[[SRD/Mostri/Deva]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Deva#^srd-deva-resistenza-alla-magia]]", "[[SRD/Mostri/Deva#^srd-deva-ristoro-glorioso]]", "[[SRD/Mostri/Deva#^srd-deva-multiattacco]]", "[[SRD/Mostri/Deva#^srd-deva-mazza-divina]]", "[[SRD/Mostri/Deva#^srd-deva-incantesimi]]", "[[SRD/Mostri/Deva#^srd-deva-aiuto-divino-2-giorno]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Deva"
 type: "Celestiale (angelo)"
 size: "medio"
@@ -97,19 +104,23 @@ tab: Azioni
 ### Resistenza alla magia
 
 Il deva dispone di vantaggio ai tiri salvezza contro incantesimi e altri effetti magici.
+^srd-deva-resistenza-alla-magia
 
 ### Ristoro glorioso
 
 Se il deva muore al di fuori di Monte Celestia, il suo corpo scompare ed esso ne acquisisce uno nuovo all'istante, tornando in vita con tutti i suoi punti ferita da qualche parte a Monte Celestia.
+^srd-deva-ristoro-glorioso
 ## Azioni
 
 ### Multiattacco
 
 Il deva effettua due attacchi Mazza divina.
+^srd-deva-multiattacco
 
 ### Mazza divina
 
 *Tiro per colpire in mischia:* +8, portata 1,5 m. *Colpito:* 7 (1d6 + 4) danni contundenti più 18 (4d8) danni radiosi.
+^srd-deva-mazza-divina
 
 ### Incantesimi
 
@@ -122,6 +133,7 @@ Il deva lancia uno dei seguenti incantesimi, senza bisogno di componenti materia
 *A volontà:*
 - individuazione del bene e del male
 - trasformazione (solo in forma di bestia o umanoide, senza punti ferita temporanei ottenuti dall'incantesimo, e senza concentrazione o punti ferita temporanei per mantenere l'incantesimo)
+^srd-deva-incantesimi
 ````
 
 > [!info] Licenza

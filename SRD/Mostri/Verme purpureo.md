@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Verme purpureo]]"]
+riferimenti_srd: ["[[SRD/Mostri/Verme purpureo]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Verme purpureo#^srd-verme_purpureo-scavatore-di-tunnel]]", "[[SRD/Mostri/Verme purpureo#^srd-verme_purpureo-multiattacco]]", "[[SRD/Mostri/Verme purpureo#^srd-verme_purpureo-morso]]", "[[SRD/Mostri/Verme purpureo#^srd-verme_purpureo-pungiglione-caudale]]", "[[SRD/Mostri/Verme purpureo#^srd-verme_purpureo-inghiottire]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Verme purpureo"
 type: "Mostruosità"
 size: "mastodontica"
@@ -90,19 +97,23 @@ tab: Azioni
 ### Scavatore di tunnel
 
 Il verme può scavare attraverso la roccia solida a metà della sua velocità di scavo, formando un tunnel del diametro di 3 metri.
+^srd-verme_purpureo-scavatore-di-tunnel
 ## Azioni
 
 ### Multiattacco
 
 Il verme effettua un attacco Morso e un attacco Pungiglione caudale.
+^srd-verme_purpureo-multiattacco
 
 ### Morso
 
 *Tiro per colpire in mischia:* +14, portata 3 m. *Colpito:* 22 (3d8 + 9) danni perforanti. Se il bersaglio è una creatura di taglia Grande o inferiore, è afferrato (CD 19 per sfuggire), ed è trattenuto finché la presa perdura.
+^srd-verme_purpureo-morso
 
 ### Pungiglione caudale
 
 *Tiro per colpire in mischia:* +14, portata 3 m. *Colpito:* 16 (2d6 + 9) danni perforanti più 35 (10d6) danni da veleno.
+^srd-verme_purpureo-pungiglione-caudale
 ````
 
 > [!info] Licenza

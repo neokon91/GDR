@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Leone]]"]
+riferimenti_srd: ["[[SRD/Mostri/Leone]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Leone#^srd-leone-balzo-in-corsa]]", "[[SRD/Mostri/Leone#^srd-leone-tattiche-del-branco]]", "[[SRD/Mostri/Leone#^srd-leone-multiattacco]]", "[[SRD/Mostri/Leone#^srd-leone-squarcio]]", "[[SRD/Mostri/Leone#^srd-leone-ruggito]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Leone"
 type: "Bestia"
 size: "grande"
@@ -93,23 +100,28 @@ tab: Azioni
 ### Balzo in corsa
 
 Dopo una rincorsa di 3 metri, il leone può effettuare un salto in lungo di un massimo di 7,5 metri.
+^srd-leone-balzo-in-corsa
 
 ### Tattiche del branco
 
 Il leone dispone di vantaggio a un tiro per colpire contro una creatura se almeno uno degli alleati dell'animale si trova entro 1,5 metri dalla creatura e non ha la condizione incapacitato.
+^srd-leone-tattiche-del-branco
 ## Azioni
 
 ### Multiattacco
 
 Il leone effettua due attacchi Squarcio. Può sostituire un attacco con un utilizzo di Ruggito.
+^srd-leone-multiattacco
 
 ### Squarcio
 
 *Tiro per colpire in mischia:* +5, portata 1,5 m. *Colpito:* 7 (1d8 + 3) danni taglienti.
+^srd-leone-squarcio
 
 ### Ruggito
 
 *Tiro salvezza su Saggezza:* CD 11, una creatura entro 4,5 metri. *Fallimento:* il bersaglio è spaventato fino all'inizio del turno successivo del leone.
+^srd-leone-ruggito
 ````
 
 > [!info] Licenza

@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Sciame di pipistrelli]]"]
+riferimenti_srd: ["[[SRD/Mostri/Sciame di pipistrelli]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Sciame di pipistrelli#^srd-sciame_di_pipistrelli-sciame]]", "[[SRD/Mostri/Sciame di pipistrelli#^srd-sciame_di_pipistrelli-morsi]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Sciame di pipistrelli"
 type: "Sciame"
 size: "grande"
@@ -83,11 +90,13 @@ tab: Azioni
 
 Lo sciame può occupare lo spazio di un'altra creatura e viceversa, e può muoversi attraverso qualsiasi apertura sufficientemente larga da far passare un
 pipistrello di taglia Minuscola. L'orda non può recupe-rare punti ferita o ottenere punti ferita temporanei.
+^srd-sciame_di_pipistrelli-sciame
 ## Azioni
 
 ### Morsi
 
 *Tiro per colpire in mischia:* +4, portata 1,5 m. *Colpito:* 5 (2d4) danni perforanti, o 2 (1d4) danni perforanti se lo sciame è sanguinante.
+^srd-sciame_di_pipistrelli-morsi
 ````
 
 > [!info] Licenza

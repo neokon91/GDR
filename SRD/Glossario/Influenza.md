@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Glossario/Influenza]]"]
+riferimenti_srd: ["[[SRD/Glossario/Influenza]]"]
+riferimenti_regola: []
+sezioni_collegate: ["[[SRD/Glossario/Influenza#Esiti]]", "[[SRD/Glossario/Influenza#Prove di Influenza]]"]
+blocchi_collegati: []
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/regola"]
 lettera: "I"
 descrittore: "azione"
 pagine_sorgente: "208-209"
@@ -23,14 +30,17 @@ Con l'azione di Influenza, una creatura esorta un mostro a fare qualcosa. Il GM 
 ### Ben disposto
 
 Se la richiesta si allinea ai desideri del mostro, il mostro la soddisfa senza prova.
+^srd-influenza-ben-disposto
 
 ### Maldisposto
 
 Se la richiesta è sgradita o contraria all'allineamento del mostro, il mostro rifiuta senza prova.
+^srd-influenza-maldisposto
 
 ### Esitante
 
 Se il mostro esita, serve una prova di caratteristica con CD 15 o pari all'Intelligenza del mostro, scegliendo il valore più alto.
+^srd-influenza-esitante
 
 ## Prove di Influenza
 

@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Diavolo del ghiaccio]]"]
+riferimenti_srd: ["[[SRD/Mostri/Diavolo del ghiaccio]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Diavolo del ghiaccio#^srd-diavolo_del_ghiaccio-resistenza-alla-magia]]", "[[SRD/Mostri/Diavolo del ghiaccio#^srd-diavolo_del_ghiaccio-ristoro-diabolico]]", "[[SRD/Mostri/Diavolo del ghiaccio#^srd-diavolo_del_ghiaccio-multiattacco]]", "[[SRD/Mostri/Diavolo del ghiaccio#^srd-diavolo_del_ghiaccio-coda]]", "[[SRD/Mostri/Diavolo del ghiaccio#^srd-diavolo_del_ghiaccio-lancia-di-ghiaccio]]", "[[SRD/Mostri/Diavolo del ghiaccio#^srd-diavolo_del_ghiaccio-muro-di-ghiaccio-ricarica-6]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Diavolo del ghiaccio"
 type: "Immondo (diavolo)"
 size: "grande"
@@ -100,27 +107,33 @@ tab: Azioni
 ### Resistenza alla magia
 
 Il diavolo dispone di vantaggio ai tiri salvezza contro incantesimi e altri effetti magici.
+^srd-diavolo_del_ghiaccio-resistenza-alla-magia
 
 ### Ristoro diabolico
 
 Se il diavolo muore al di fuori dei Nove Inferi, il suo corpo si dissolve in fumo sulfureo e ne acquisisce uno nuovo all'istante, tornando in vita con tutti i suoi punti ferita da qualche parte nei Nove Inferi.
+^srd-diavolo_del_ghiaccio-ristoro-diabolico
 ## Azioni
 
 ### Multiattacco
 
 Il diavolo effettua tre attacchi Lancia di ghiaccio. Può sostituire un attacco con un attacco Coda.
+^srd-diavolo_del_ghiaccio-multiattacco
 
 ### Coda
 
 *Tiro per colpire in mischia:* +10, portata 3 m. *Colpito:* 15 (3d6 + 5) danni contundenti più 18 (4d8) danni da freddo.
+^srd-diavolo_del_ghiaccio-coda
 
 ### Lancia di ghiaccio
 
 *Tiro per colpire in mischia o a distanza:* +10, portata 1,5 m o gittata 9/36 m. *Colpito:* 14 (2d8 + 5) danni perforanti più 10 (3d6) danni da freddo. Fino al termine del proprio turno successivo, il bersaglio non può effettuare un'azione bonus o una reazione, la sua velocità è ridotta di 3 metri e durante il suo turno può muoversi o effettuare un'azione, ma non entrambe le cose. Colpito o mancato: la lancia fa magicamente ritorno nella mano del diavolo subito dopo un attacco a distanza.
+^srd-diavolo_del_ghiaccio-lancia-di-ghiaccio
 
 ### Muro di ghiaccio (ricarica 6)
 
 Il diavolo lancia muro di ghiaccio (di 8º livello), senza bisogno di componenti e utilizzando Intelligenza come caratteristica da incantatore (CD del tiro salvezza sull'incantesimo 17).
+^srd-diavolo_del_ghiaccio-muro-di-ghiaccio-ricarica-6
 ````
 
 > [!info] Licenza

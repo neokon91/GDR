@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Glossario/Attacchi di opportunita]]"]
+riferimenti_srd: ["[[SRD/Glossario/Attacchi di opportunita]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: []
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/regola"]
 lettera: "A"
 descrittore:
 pagine_sorgente: 204

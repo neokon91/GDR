@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Incantesimi/Forma gassosa]]"]
+riferimenti_srd: ["[[SRD/Incantesimi/Forma gassosa]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Incantesimi/Forma gassosa#^srd-forma_gassosa-utilizzo-di-uno-slot-incantesimo-di-livello-superiore]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/incantesimo"]
 livello: 3
 scuola: "Trasmutazione"
 classi: ["mago", "stregone", "warlock"]
@@ -40,6 +47,7 @@ Il bersaglio non può parlare o manipolare oggetti e quelli che trasporta o impu
 ### Utilizzo di uno slot incantesimo di livello superiore
 
 L'incantatore può bersagliare una creatura aggiuntiva per ogni slot di livello superiore al 3º.
+^srd-forma_gassosa-utilizzo-di-uno-slot-incantesimo-di-livello-superiore
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

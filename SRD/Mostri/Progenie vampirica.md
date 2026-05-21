@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Progenie vampirica]]"]
+riferimenti_srd: ["[[SRD/Mostri/Progenie vampirica]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Progenie vampirica#^srd-progenie_vampirica-acqua-corrente]]", "[[SRD/Mostri/Progenie vampirica#^srd-progenie_vampirica-debolezze-dei-vampiri]]", "[[SRD/Mostri/Progenie vampirica#^srd-progenie_vampirica-luce-del-sole]]", "[[SRD/Mostri/Progenie vampirica#^srd-progenie_vampirica-movimenti-del-ragno]]", "[[SRD/Mostri/Progenie vampirica#^srd-progenie_vampirica-paletto-nel-cuore]]", "[[SRD/Mostri/Progenie vampirica#^srd-progenie_vampirica-proibizione]]", "[[SRD/Mostri/Progenie vampirica#^srd-progenie_vampirica-multiattacco]]", "[[SRD/Mostri/Progenie vampirica#^srd-progenie_vampirica-artiglio]]", "[[SRD/Mostri/Progenie vampirica#^srd-progenie_vampirica-morso]]", "[[SRD/Mostri/Progenie vampirica#^srd-progenie_vampirica-agilita-immortale]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Progenie vampirica"
 type: "Non morto"
 size: "medio o piccolo"
@@ -105,31 +112,38 @@ tab: Azioni
 ### Acqua corrente
 
 Il vampiro subisce 20 danni da acido se termina il suo turno nell'acqua corrente.
+^srd-progenie_vampirica-acqua-corrente
 
 ### Debolezze dei vampiri
 
 Il vampiro ha le seguenti debolezze:
+^srd-progenie_vampirica-debolezze-dei-vampiri
 
 ### Luce del sole
 
 Il vampiro subisce 20 danni radiosi quando inizia il suo turno alla luce del sole. Finché è esposto alla luce del sole, subisce svantaggio a tiri per colpire e prove di caratteristica.
+^srd-progenie_vampirica-luce-del-sole
 
 ### Movimenti del ragno
 
 Il vampiro può scalare le superfici difficili, compresi i soffitti, senza effettuare una prova di caratteristica.
+^srd-progenie_vampirica-movimenti-del-ragno
 
 ### Paletto nel cuore
 
 Il vampiro viene distrutto se un'arma che infligge danni perforanti gli viene conficcata nel cuore mentre è incapacitato.
+^srd-progenie_vampirica-paletto-nel-cuore
 
 ### Proibizione
 
 Il vampiro non può entrare in casa di qualcuno se non viene invitato da chi vi risiede.
+^srd-progenie_vampirica-proibizione
 ## Azioni
 
 ### Multiattacco
 
 Il vampiro effettua due attacchi Artiglio e usa Morso.
+^srd-progenie_vampirica-multiattacco
 
 ### Artiglio
 
@@ -137,10 +151,12 @@ Il vampiro effettua due attacchi Artiglio e usa Morso.
 
 **Colpito:** 8 (2d4 + 3) danni taglienti
 Se il bersaglio è una creatura di taglia Media o inferiore, è afferrato (CD 13 per sfuggire) da uno dei due artigli.
+^srd-progenie_vampirica-artiglio
 
 ### Morso
 
 *Tiro salvezza su Costituzione:* CD 14, una creatura entro 1,5 metri che sia consenziente, afferrata, incapacitata o trattenuta. *Fallimento:* 5 (1d4 + 3) danni perforanti più 10 (3d6) danni necrotici. I punti ferita massimi del bersaglio sono ridotti di un ammontare pari ai danni necrotici subiti, e il vampiro recupera punti ferita pari a quell'ammontare.
+^srd-progenie_vampirica-morso
 ````
 
 > [!info] Licenza

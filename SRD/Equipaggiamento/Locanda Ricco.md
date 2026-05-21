@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Equipaggiamento/Locanda Ricco]]"]
+riferimenti_srd: ["[[SRD/Equipaggiamento/Locanda Ricco]]"]
+riferimenti_regola: []
+sezioni_collegate: ["[[SRD/Equipaggiamento/Locanda Ricco#Dettagli]]"]
+blocchi_collegati: []
+tabelle_collegate: ["[[SRD/Equipaggiamento/Locanda Ricco#^srd-locanda_ricco-dettagli]]"]
+tags: ["dnd55/srd"]
 capitolo: "Equipaggiamento"
 pagine_sorgente: "114-115"
 tipo_oggetto: "vitto_alloggio"
@@ -42,6 +49,7 @@ Locanda (Ricco): 2 mo.
 | Oggetto | Dettaglio | Costo |
 | --- | --- | --- |
 | Locanda | Ricco | 2 mo |
+^srd-locanda_ricco-dettagli
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

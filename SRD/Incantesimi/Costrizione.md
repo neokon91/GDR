@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Incantesimi/Costrizione]]"]
+riferimenti_srd: ["[[SRD/Incantesimi/Costrizione]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Incantesimi/Costrizione#^srd-costrizione-utilizzo-di-uno-slot-incantesimo-di-livello-superiore]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/incantesimo"]
 livello: 5
 scuola: "Ammaliamento"
 classi: ["bardo", "chierico", "druido", "mago", "paladino"]
@@ -42,6 +49,7 @@ Un incantesimo desiderio, rimuovi maledizione o ristorare superiore è in grado 
 ### Utilizzo di uno slot incantesimo di livello superiore
 
 Se l'incantatore usa uno slot incantesimo di 7º o 8º livello, la durata diventa 365 giorni. Se l'incantatore usa uno slot incantesimo di 9º livello, l'incantesimo dura finché uno degli incantesimi menzionati sopra non vi pone fine.
+^srd-costrizione-utilizzo-di-uno-slot-incantesimo-di-livello-superiore
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

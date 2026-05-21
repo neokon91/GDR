@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Scheletro]]"]
+riferimenti_srd: ["[[SRD/Mostri/Scheletro]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Scheletro#^srd-scheletro-spada-corta]]", "[[SRD/Mostri/Scheletro#^srd-scheletro-arco-corto]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Scheletro"
 type: "Non morto"
 size: "medio"
@@ -82,10 +89,12 @@ tab: Azioni
 ### Spada corta
 
 *Tiro per colpire in mischia:* +5, portata 1,5 m *Colpito:* 6 (1d6 + 3) danni perforanti.
+^srd-scheletro-spada-corta
 
 ### Arco corto
 
 *Tiro per colpire a distanza:* +5, portata 24/96 m *Colpito:* 6 (1d6 + 3) danni perforanti.
+^srd-scheletro-arco-corto
 ````
 
 > [!info] Licenza

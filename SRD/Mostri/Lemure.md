@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Lemure]]"]
+riferimenti_srd: ["[[SRD/Mostri/Lemure]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Lemure#^srd-lemure-ristoro-immondo]]", "[[SRD/Mostri/Lemure#^srd-lemure-melma-vile]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Lemure"
 type: "Immondo (diavolo)"
 size: "medio"
@@ -82,11 +89,13 @@ tab: Azioni
 ### Ristoro immondo
 
 Se il lemure muore nei Nove Inferi, torna in vita con tutti i suoi punti ferita dopo 1d10 giorni, a meno che non venga ucciso da una creatura sotto gli effetti di un incantesimo benedizione o i suoi resti vengano spruzzati di acqua santa.
+^srd-lemure-ristoro-immondo
 ## Azioni
 
 ### Melma vile
 
 *Tiro per colpire in mischia:* +2, portata 1,5 m. *Colpito:* 2 (1d4) danni da veleno.
+^srd-lemure-melma-vile
 ````
 
 > [!info] Licenza

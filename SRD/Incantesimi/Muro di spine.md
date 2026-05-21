@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Incantesimi/Muro di spine]]"]
+riferimenti_srd: ["[[SRD/Incantesimi/Muro di spine]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Incantesimi/Muro di spine#^srd-muro_di_spine-utilizzo-di-uno-slot-incantesimo-di-livello-superiore]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/incantesimo"]
 livello: 6
 scuola: "Evocazione"
 classi: ["druido"]
@@ -40,6 +47,7 @@ Una creatura può muoversi attraverso il muro, seppur con fatica e dolore: per o
 ### Utilizzo di uno slot incantesimo di livello superiore
 
 Entrambi i tipi di danno aumentano di 1d8 per ogni slot incantesimo di livello superiore al 6º.
+^srd-muro_di_spine-utilizzo-di-uno-slot-incantesimo-di-livello-superiore
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

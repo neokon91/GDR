@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Wight]]"]
+riferimenti_srd: ["[[SRD/Mostri/Wight]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Wight#^srd-wight-sensibilita-al-sole]]", "[[SRD/Mostri/Wight#^srd-wight-multiattacco]]", "[[SRD/Mostri/Wight#^srd-wight-spada-necrotica]]", "[[SRD/Mostri/Wight#^srd-wight-arco-necrotico]]", "[[SRD/Mostri/Wight#^srd-wight-risucchio-di-vita]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Wight"
 type: "Non morto"
 size: "medio"
@@ -93,23 +100,28 @@ tab: Azioni
 ### Sensibilità al sole
 
 Finché è esposto alla luce del sole, il wight subisce svantaggio alle prove di caratteristica e ai tiri per colpire.
+^srd-wight-sensibilita-al-sole
 ## Azioni
 
 ### Multiattacco
 
 Il wight effettua due attacchi, usando Spada necrotica o Arco necrotico in qualsiasi combinazione. Può sostituire un attacco con un utilizzo di Risucchio di vita.
+^srd-wight-multiattacco
 
 ### Spada necrotica
 
 *Tiro per colpire in mischia:* +4, portata 1,5 m *Colpito:* 6 (1d8 + 2) danni taglienti più 4 (1d8) danni necrotici.
+^srd-wight-spada-necrotica
 
 ### Arco necrotico
 
 *Tiro per colpire a distanza:* +4, gittata 45/180 m. *Colpito:* 6 (1d8 + 2) danni perforanti più 4 (1d8) danni necrotici.
+^srd-wight-arco-necrotico
 
 ### Risucchio di vita
 
 *Tiro salvezza su Costituzione:* CD 13, una creatura entro 1,5 metri. *Fallimento:* 6 (1d8 + 2) danni necrotici, e i punti ferita massimi del bersaglio sono ridotti di un ammontare pari ai danni subiti. Un umanoide ucciso da questo attacco si anima 24 ore dopo come zombi sotto il controllo del wight, a meno che l'umanoide non sia riportato in vita o il suo corpo non venga distrutto. Il wight non può controllare più di dodici zombi simultaneamente.
+^srd-wight-risucchio-di-vita
 ````
 
 > [!info] Licenza

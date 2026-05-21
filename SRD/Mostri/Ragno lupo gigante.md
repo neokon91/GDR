@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Ragno lupo gigante]]"]
+riferimenti_srd: ["[[SRD/Mostri/Ragno lupo gigante]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Ragno lupo gigante#^srd-ragno_lupo_gigante-movimenti-del-ragno]]", "[[SRD/Mostri/Ragno lupo gigante#^srd-ragno_lupo_gigante-morso]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Ragno lupo gigante"
 type: "Bestia"
 size: "media"
@@ -87,11 +94,13 @@ tab: Azioni
 ### Movimenti del ragno
 
 Il ragno può scalare le superfici difficili, compresi i soffitti, senza effettuare una prova di caratteristica.
+^srd-ragno_lupo_gigante-movimenti-del-ragno
 ## Azioni
 
 ### Morso
 
 *Tiro per colpire in mischia:* +5, portata 1,5 m *Colpito:* 5 (1d4 + 3) danni perforanti più 5 (2d4) danni da veleno.
+^srd-ragno_lupo_gigante-morso
 ````
 
 > [!info] Licenza

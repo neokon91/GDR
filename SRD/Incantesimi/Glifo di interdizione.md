@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Incantesimi/Glifo di interdizione]]"]
+riferimenti_srd: ["[[SRD/Incantesimi/Glifo di interdizione]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Incantesimi/Glifo di interdizione#^srd-glifo_di_interdizione-utilizzo-di-uno-slot-incantesimo-di-livello-superiore]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/incantesimo"]
 livello: 3
 scuola: "Abiurazione"
 classi: ["bardo", "chierico", "mago"]
@@ -48,6 +55,7 @@ Glifo magico. L'incantatore può custodire un incantesimo preparato di 3º livel
 ### Utilizzo di uno slot incantesimo di livello superiore
 
 I danni di una runa esplosiva aumentano di 1d8 per ogni slot di livello superiore al 3º. Se l'incantatore crea un glifo magico, può custodirvi qualsiasi incantesimo di livello pari o inferiore a quello dello slot incantesimo usato per il glifo di interdizione.
+^srd-glifo_di_interdizione-utilizzo-di-uno-slot-incantesimo-di-livello-superiore
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

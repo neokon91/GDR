@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Spirito draconico]]"]
+riferimenti_srd: ["[[SRD/Mostri/Spirito draconico]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Spirito draconico#^srd-spirito_draconico-resistenza-magica]]", "[[SRD/Mostri/Spirito draconico#^srd-spirito_draconico-multiattacco]]", "[[SRD/Mostri/Spirito draconico#^srd-spirito_draconico-morso]]", "[[SRD/Mostri/Spirito draconico#^srd-spirito_draconico-soffio-draconico-ricarica-5-6]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Spirito draconico"
 type: "Drago"
 size: "grande"
@@ -86,22 +93,26 @@ tab: Azioni
 ### Resistenza magica
 
 Lo spirito dispone di vantaggio ai tiri salvezza contro incantesimi e altri effetti magici.
+^srd-spirito_draconico-resistenza-magica
 ## Azioni
 
 ### Multiattacco
 
 Lo spirito effettua un numero di attacchi pari alla metà del livello dell'incantesimo (arrotondato per difetto).
+^srd-spirito_draconico-multiattacco
 
 ### Morso
 
 *Tiro per colpire in mischia:* bonus pari al modificatore di attacco dell'incantesimo dell'incantatore, portata 1,5 m.
 *Colpito:* 1d10 + 4 + il livello dell'incantesimo danni del tipo scelto (acido, freddo, fuoco, fulmine o veleno).
+^srd-spirito_draconico-morso
 
 ### Soffio draconico (Ricarica 5-6)
 
 *Tiro salvezza su Destrezza:* CD del tiro salvezza dell'incantesimo dell'incantatore, tutte le creature in un cono di 4,5 metri.
 *Fallimento:* 2d6 + il livello dell'incantesimo danni del tipo scelto.
 *Successo:* danni dimezzati.
+^srd-spirito_draconico-soffio-draconico-ricarica-5-6
 ````
 
 > [!info] Licenza

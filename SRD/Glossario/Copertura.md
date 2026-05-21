@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Glossario/Copertura]]"]
+riferimenti_srd: ["[[SRD/Glossario/Copertura]]"]
+riferimenti_regola: []
+sezioni_collegate: ["[[SRD/Glossario/Copertura#Gradi]]"]
+blocchi_collegati: []
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/regola"]
 lettera: "C"
 descrittore:
 pagine_sorgente: 206

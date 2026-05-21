@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Incantesimi/Arma magica]]"]
+riferimenti_srd: ["[[SRD/Incantesimi/Arma magica]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Incantesimi/Arma magica#^srd-arma_magica-utilizzo-di-uno-slot-incantesimo-di-livello-superiore]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/incantesimo"]
 livello: 2
 scuola: "Trasmutazione"
 classi: ["mago", "paladino", "ranger", "stregone"]
@@ -36,6 +43,7 @@ L'incantatore tocca un'arma non magica, e, fino al termine dell'incantesimo, que
 ### Utilizzo di uno slot incantesimo di livello superiore
 
 Il bonus aumenta a +2 con uno slot incantesimo compreso tra il 3º e 5º livello. Il bonus aumenta a +3 con uno slot incantesimo di 6º livello o superiore.
+^srd-arma_magica-utilizzo-di-uno-slot-incantesimo-di-livello-superiore
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Diavolo cornuto]]"]
+riferimenti_srd: ["[[SRD/Mostri/Diavolo cornuto]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Diavolo cornuto#^srd-diavolo_cornuto-resistenza-alla-magia]]", "[[SRD/Mostri/Diavolo cornuto#^srd-diavolo_cornuto-ristoro-diabolico]]", "[[SRD/Mostri/Diavolo cornuto#^srd-diavolo_cornuto-multiattacco]]", "[[SRD/Mostri/Diavolo cornuto#^srd-diavolo_cornuto-forcone-ardente]]", "[[SRD/Mostri/Diavolo cornuto#^srd-diavolo_cornuto-scagliare-fiamma]]", "[[SRD/Mostri/Diavolo cornuto#^srd-diavolo_cornuto-coda-infernale]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Diavolo cornuto"
 type: "Immondo (diavolo)"
 size: "grande"
@@ -94,27 +101,33 @@ tab: Azioni
 ### Resistenza alla magia
 
 Il diavolo dispone di vantaggio ai tiri salvezza contro incantesimi e altri effetti magici.
+^srd-diavolo_cornuto-resistenza-alla-magia
 
 ### Ristoro diabolico
 
 Se il diavolo muore al di fuori dei Nove Inferi, il suo corpo si dissolve in fumo sulfureo e ne acquisisce uno nuovo all'istante, tornando in vita con tutti i suoi punti ferita da qualche parte nei Nove Inferi.
+^srd-diavolo_cornuto-ristoro-diabolico
 ## Azioni
 
 ### Multiattacco
 
 Il diavolo effettua tre attacchi, utilizzando Forcone ardente o Scagliare fiamma in qualsiasi combinazione. Può sostituire un attacco con un utilizzo di Coda infernale.
+^srd-diavolo_cornuto-multiattacco
 
 ### Forcone ardente
 
 *Tiro per colpire in mischia:* +10, portata 3 m. *Colpito:* 15 (2d8 + 6) danni perforanti più 9 (2d8) danni da fuoco.
+^srd-diavolo_cornuto-forcone-ardente
 
 ### Scagliare fiamma
 
 *Tiro per colpire a distanza:* +8, gittata 45 m. *Colpito:* 26 (5d8 + 4) danni da fuoco. Se il bersaglio è un oggetto infiammabile che non è indossato o trasportato, inizia a bruciare.
+^srd-diavolo_cornuto-scagliare-fiamma
 
 ### Coda infernale
 
 *Tiro salvezza su Destrezza:* CD 17, una creatura che il diavolo è in grado di vedere entro 3 metri. *Fallimento:* 10 (1d8 + 6) danni necrotici, e il bersaglio subisce una ferita infernale se non ne ha già una. Finché è ferito, il bersaglio perde 10 (3d6) punti ferita all'inizio di ogni suo turno. La ferita si chiude dopo 1 minuto, dopo che un incantesimo ripristina i punti ferita del bersaglio, o dopo che il bersaglio o una creatura entro 1,5 metri effettua un'azione per tamponare la ferita superando una prova di Saggezza (Medicina) con CD 17.
+^srd-diavolo_cornuto-coda-infernale
 ````
 
 > [!info] Licenza

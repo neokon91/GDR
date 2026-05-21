@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Oggetti Magici/Arma +1, +2 o +3]]"]
+riferimenti_srd: ["[[SRD/Oggetti Magici/Arma +1, +2 o +3]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: []
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/oggetto-magico"]
 tipo_oggetto: "Arma (qualsiasi semplice o da guerra)"
 tipo_base: "Arma"
 rarita: "non comune (+1), rara (+2) o molto rara (+3)"

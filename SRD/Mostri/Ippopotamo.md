@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Ippopotamo]]"]
+riferimenti_srd: ["[[SRD/Mostri/Ippopotamo]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Ippopotamo#^srd-ippopotamo-apnea]]", "[[SRD/Mostri/Ippopotamo#^srd-ippopotamo-multiattacco]]", "[[SRD/Mostri/Ippopotamo#^srd-ippopotamo-morso]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Ippopotamo"
 type: "Bestia"
 size: "grande"
@@ -89,15 +96,18 @@ tab: Azioni
 ### Apnea
 
 L'ippopotamo può trattenere il respiro per 10 minuti.
+^srd-ippopotamo-apnea
 ## Azioni
 
 ### Multiattacco
 
 L'ippopotamo effettua due attacchi Morso.
+^srd-ippopotamo-multiattacco
 
 ### Morso
 
 *Tiro per colpire in mischia:* +7, portata 1,5 m. *Colpito:* 16 (2d10 + 5) danni perforanti.
+^srd-ippopotamo-morso
 ````
 
 > [!info] Licenza

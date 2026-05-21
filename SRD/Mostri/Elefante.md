@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Elefante]]"]
+riferimenti_srd: ["[[SRD/Mostri/Elefante]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Elefante#^srd-elefante-multiattacco]]", "[[SRD/Mostri/Elefante#^srd-elefante-trafiggere]]", "[[SRD/Mostri/Elefante#^srd-elefante-calpestare]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Elefante"
 type: "Bestia"
 size: "enorme"
@@ -84,10 +91,12 @@ tab: Azioni
 ### Multiattacco
 
 L'elefante effettua due attacchi Trafiggere.
+^srd-elefante-multiattacco
 
 ### Trafiggere
 
 *Tiro per colpire in mischia:* +8, portata 1,5 m *Colpito:* 15 (2d8 + 6) danni perforanti. Se il bersaglio è una creatura di taglia Enorme o inferiore e l'elefante si è mosso di 6 metri o più in linea retta verso di esso subito prima del colpo, il bersaglio cade a terra prono.
+^srd-elefante-trafiggere
 ````
 
 > [!info] Licenza

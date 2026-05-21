@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Regole/Passo di viaggio]]"]
+riferimenti_srd: ["[[SRD/Regole/Passo di viaggio]]"]
+riferimenti_regola: []
+sezioni_collegate: ["[[SRD/Regole/Passo di viaggio#Fattori del viaggio]]", "[[SRD/Regole/Passo di viaggio#Terreni]]"]
+blocchi_collegati: []
+tabelle_collegate: ["[[SRD/Regole/Passo di viaggio#^srd-passo_di_viaggio-fattori-del-viaggio]]", "[[SRD/Regole/Passo di viaggio#^srd-passo_di_viaggio-terreni]]"]
+tags: ["dnd55/srd", "dnd55/regola"]
 capitolo: "Strumenti di gioco"
 categoria_regola: "Strumenti di gioco"
 pagine_sorgente: 220
@@ -27,6 +34,7 @@ Il terreno predominante determina il passo massimo di viaggio. Strade, velocita 
 | Oltre 8 ore | Alla fine di ogni ora extra, ogni personaggio supera un TS su Costituzione o ottiene 1 livello di indebolimento; CD 10 + ore oltre l'ottava. |
 | Movimenti speciali | Chilometri all'ora = velocita divisa 2; passo normale = km/h per ore di viaggio; veloce x 1,33; lento x 0,66. |
 | Veicoli | Chi viaggia su un veicolo usa la velocita del veicolo in km/h e non sceglie un passo di viaggio. |
+^srd-passo_di_viaggio-fattori-del-viaggio
 
 ## Terreni
 
@@ -40,6 +48,7 @@ Il terreno predominante determina il passo massimo di viaggio. Strade, velocita 
 | Montagna o palude | lento | - | - | - |
 | Sottosuolo o urbano | normale | - | - | - |
 | Sull'acqua | Il movimento dipende dal veicolo. | - | - | - |
+^srd-passo_di_viaggio-terreni
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

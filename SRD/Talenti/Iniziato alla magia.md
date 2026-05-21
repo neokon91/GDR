@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Talenti/Iniziato alla magia]]"]
+riferimenti_srd: ["[[SRD/Talenti/Iniziato alla magia]]"]
+riferimenti_regola: []
+sezioni_collegate: ["[[SRD/Talenti/Iniziato alla magia#Beneficio]]"]
+blocchi_collegati: []
+tabelle_collegate: []
+tags: ["dnd55/srd"]
 capitolo: "Talenti"
 pagine_sorgente: "98-99"
 categoria_talento: "Origini"

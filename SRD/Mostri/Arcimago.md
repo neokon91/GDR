@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Arcimago]]"]
+riferimenti_srd: ["[[SRD/Mostri/Arcimago]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Arcimago#^srd-arcimago-resistenza-alla-magia]]", "[[SRD/Mostri/Arcimago#^srd-arcimago-multiattacco]]", "[[SRD/Mostri/Arcimago#^srd-arcimago-esplosione-arcana]]", "[[SRD/Mostri/Arcimago#^srd-arcimago-incantesimi]]", "[[SRD/Mostri/Arcimago#^srd-arcimago-passo-velato-3-giorno]]", "[[SRD/Mostri/Arcimago#^srd-arcimago-magia-di-protezione-3-giorno]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Arcimago"
 type: "Umanoide"
 size: "medio o piccolo"
@@ -98,19 +105,23 @@ tab: Azioni
 ### Resistenza alla magia
 
 L'arcimago dispone di vantaggio ai tiri salvezza contro incantesimi e altri effetti magici.
+^srd-arcimago-resistenza-alla-magia
 ## Azioni
 
 ### Multiattacco
 
 L'arcimago effettua quattro attacchi Esplosione arcana.
+^srd-arcimago-multiattacco
 
 ### Esplosione arcana
 
 *Tiro per colpire in mischia o a distanza:* +9, portata 1,5 m o gittata 45 m. *Colpito:* 27 (4d10 + 5) danni da forza.
+^srd-arcimago-esplosione-arcana
 
 ### Incantesimi
 
 L'arcimago lancia uno dei seguenti incantesimi, utilizzando Intelligenza come caratteristica da incantatore (CD del tiro salvezza sull'incantesimo 17): 1/giorno ciascuno: Cono di freddo (di 9º livello), scrutare, teletrasporto, vuoto mentale (lanciato prima del combattimento) 2/giorno ciascuno: Fulmine (di 7º livello), volare A volontà: Armatura magica (inclusa nella CA), camuffare se stesso, individuazione dei pensieri, individuazione del magico, invisibilità, luce, mano magica, prestidigitazione
+^srd-arcimago-incantesimi
 ````
 
 > [!info] Licenza

@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Plesiosauro]]"]
+riferimenti_srd: ["[[SRD/Mostri/Plesiosauro]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Plesiosauro#^srd-plesiosauro-apnea]]", "[[SRD/Mostri/Plesiosauro#^srd-plesiosauro-morso]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Plesiosauro"
 type: "Bestia (dinosauro)"
 size: "grande"
@@ -87,11 +94,13 @@ tab: Azioni
 ### Apnea
 
 Il plesiosauro può trattenere il respiro per 1 ora.
+^srd-plesiosauro-apnea
 ## Azioni
 
 ### Morso
 
 *Tiro per colpire in mischia:* +6, portata 3 m. *Colpito:* 11 (2d6 + 4) danni perforanti.
+^srd-plesiosauro-morso
 ````
 
 > [!info] Licenza

@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Incantesimi/Immagine maggiore]]"]
+riferimenti_srd: ["[[SRD/Incantesimi/Immagine maggiore]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Incantesimi/Immagine maggiore#^srd-immagine_maggiore-utilizzo-di-uno-slot-incantesimo-di-livello-superiore]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/incantesimo"]
 livello: 3
 scuola: "Illusione"
 classi: ["bardo", "mago", "stregone", "warlock"]
@@ -40,6 +47,7 @@ L'illusione può essere rivelata da un'interazione fisica, poiché è possibile 
 ### Utilizzo di uno slot incantesimo di livello superiore
 
 L'incantesimo dura finché non viene dissolto, e non necessita di concentrazione, se viene lanciato con uno slot incantesimo 4º livello o superiore.
+^srd-immagine_maggiore-utilizzo-di-uno-slot-incantesimo-di-livello-superiore
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

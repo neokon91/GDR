@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Ettin]]"]
+riferimenti_srd: ["[[SRD/Mostri/Ettin]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Ettin#^srd-ettin-ascia-da-battaglia]]", "[[SRD/Mostri/Ettin#^srd-ettin-mazza-chiodata]]", "[[SRD/Mostri/Ettin#^srd-ettin-multiattacco]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Ettin"
 type: "Gigante"
 size: "grande"
@@ -88,14 +95,17 @@ tab: Azioni
 ### Ascia da battaglia
 
 *Tiro per colpire in mischia:* +7, portata 1,5 m. *Colpito:* 14 (2d8 + 5) danni taglienti. Se il bersaglio è una creatura di taglia Grande o inferiore, cade a terra prono.
+^srd-ettin-ascia-da-battaglia
 
 ### Mazza chiodata
 
 *Tiro per colpire in mischia:* +7, portata 1,5 m. *Colpito:* 14 (2d8 + 5) danni perforanti, e il bersaglio subisce svantaggio al tiro per colpire successivo che effettua prima del termine del proprio turno successivo.
+^srd-ettin-mazza-chiodata
 
 ### Multiattacco
 
 L'ettin effettua un attacco Ascia da battaglia e un attacco Mazza chiodata.
+^srd-ettin-multiattacco
 ````
 
 > [!info] Licenza

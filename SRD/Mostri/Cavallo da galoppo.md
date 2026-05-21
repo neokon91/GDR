@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Cavallo da galoppo]]"]
+riferimenti_srd: ["[[SRD/Mostri/Cavallo da galoppo]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Cavallo da galoppo#^srd-cavallo_da_galoppo-zoccoli]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Cavallo da galoppo"
 type: "Bestia"
 size: "grande"
@@ -80,6 +87,7 @@ tab: Azioni
 ### Zoccoli
 
 *Tiro per colpire in mischia:* +5, portata 1,5 m. *Colpito:* 7 (1d8 + 3) danni contundenti.
+^srd-cavallo_da_galoppo-zoccoli
 ````
 
 > [!info] Licenza

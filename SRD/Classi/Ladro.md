@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Classi/Ladro]]"]
+riferimenti_srd: ["[[SRD/Classi/Ladro]]"]
+riferimenti_regola: []
+sezioni_collegate: ["[[SRD/Classi/Ladro#Tratti di classe]]", "[[SRD/Classi/Ladro#Progressione di classe]]", "[[SRD/Classi/Ladro#Privilegi chiave]]", "[[SRD/Classi/Ladro#Sottoclasse del ladro: Furfante]]"]
+blocchi_collegati: []
+tabelle_collegate: ["[[SRD/Classi/Ladro#^srd-ladro-tratti-di-classe]]", "[[SRD/Classi/Ladro#^srd-ladro-progressione-di-classe]]", "[[SRD/Classi/Ladro#^srd-ladro-privilegi-chiave]]", "[[SRD/Classi/Ladro#^srd-ladro-sottoclasse-del-ladro-furfante]]"]
+tags: ["dnd55/srd"]
 capitolo: "Classi"
 pagine_sorgente: "55-58"
 caratteristica_primaria: ["Destrezza"]
@@ -43,6 +50,7 @@ A: armatura di cuoio, 2 pugnali, spada corta, arco corto, 20 frecce, faretra, ar
 | Strumenti | Arnesi da scasso. |
 | Armature | Armature leggere. |
 | Equipaggiamento iniziale | A: armatura di cuoio, 2 pugnali, spada corta, arco corto, 20 frecce, faretra, arnesi da scasso, dotazione da scassinatore e 8 mo; oppure B: 100 mo. |
+^srd-ladro-tratti-di-classe
 
 ## Progressione di classe
 
@@ -68,6 +76,7 @@ A: armatura di cuoio, 2 pugnali, spada corta, arco corto, 20 frecce, faretra, ar
 | 18 | +6 | Inafferrabile | 9d6 |
 | 19 | +6 | Dono epico | 10d6 |
 | 20 | +6 | Pietra della buona fortuna | 10d6 |
+^srd-ladro-progressione-di-classe
 
 ## Privilegi chiave
 
@@ -77,6 +86,7 @@ A: armatura di cuoio, 2 pugnali, spada corta, arco corto, 20 frecce, faretra, ar
 | Maestria | Raddoppia il bonus di competenza in abilita o strumenti scelti. |
 | Azione scaltra | Usa Disimpegno, Nascondersi o Scatto come azione bonus. |
 | Colpo astuto | Spende dadi di Attacco furtivo per aggiungere effetti tattici. |
+^srd-ladro-privilegi-chiave
 
 ## Sottoclasse del ladro: Furfante
 
@@ -87,6 +97,7 @@ A: armatura di cuoio, 2 pugnali, spada corta, arco corto, 20 frecce, faretra, ar
 | 9 | Furtivita suprema | Ottiene Attacco nascosto come opzione di Colpo astuto. |
 | 13 | Usare oggetto magico | Migliora cariche, pergamene e limite di sintonia degli oggetti magici. |
 | 17 | Riflessi da furfante | Effettua due turni nel primo round di ogni combattimento. |
+^srd-ladro-sottoclasse-del-ladro-furfante
 
 ## Progressione
 

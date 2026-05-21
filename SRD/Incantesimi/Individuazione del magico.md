@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Incantesimi/Individuazione del magico]]"]
+riferimenti_srd: ["[[SRD/Incantesimi/Individuazione del magico]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: []
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/incantesimo"]
 livello: 1
 scuola: "Divinazione"
 classi: ["bardo", "chierico", "druido", "mago", "paladino", "ranger", "stregone", "warlock"]

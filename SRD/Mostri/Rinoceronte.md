@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Rinoceronte]]"]
+riferimenti_srd: ["[[SRD/Mostri/Rinoceronte]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Rinoceronte#^srd-rinoceronte-trafiggere]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Rinoceronte"
 type: "Bestia"
 size: "grande"
@@ -80,6 +87,7 @@ tab: Azioni
 ### Trafiggere
 
 *Tiro per colpire in mischia:* +7, portata 1,5 m. *Colpito:* 14 (2d8 + 5) danni perforanti. Se il bersaglio è una creatura di taglia Grande o inferiore e il rinoceronte si è mosso di 6 metri o più in linea retta verso di esso subito prima del colpo, il bersaglio subisce 9 (2d8) danni perforanti extra e cade a terra prono.
+^srd-rinoceronte-trafiggere
 ````
 
 > [!info] Licenza

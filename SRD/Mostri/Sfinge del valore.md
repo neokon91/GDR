@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Sfinge del valore]]"]
+riferimenti_srd: ["[[SRD/Mostri/Sfinge del valore]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Sfinge del valore#^srd-sfinge_del_valore-imperscrutabile]]", "[[SRD/Mostri/Sfinge del valore#^srd-sfinge_del_valore-resistenza-leggendaria-3-giorno-o-4-giorno-nella-tana]]", "[[SRD/Mostri/Sfinge del valore#^srd-sfinge_del_valore-multiattacco]]", "[[SRD/Mostri/Sfinge del valore#^srd-sfinge_del_valore-artiglio]]", "[[SRD/Mostri/Sfinge del valore#^srd-sfinge_del_valore-incantesimi]]", "[[SRD/Mostri/Sfinge del valore#^srd-sfinge_del_valore-primo-ruggito]]", "[[SRD/Mostri/Sfinge del valore#^srd-sfinge_del_valore-ruggito-3-giorno]]", "[[SRD/Mostri/Sfinge del valore#^srd-sfinge_del_valore-secondo-ruggito]]", "[[SRD/Mostri/Sfinge del valore#^srd-sfinge_del_valore-terzo-ruggito]]", "[[SRD/Mostri/Sfinge del valore#^srd-sfinge_del_valore-agguato-arcano]]", "[[SRD/Mostri/Sfinge del valore#^srd-sfinge_del_valore-peso-degli-anni]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Sfinge del valore"
 type: "Celestiale"
 size: "grande"
@@ -110,39 +117,48 @@ tab: Azioni
 ### Imperscrutabile
 
 Nessuna magia può consentire di osservare la sfinge da lontano o individuarne i pensieri senza il suo permesso. Le prove di Saggezza (Intuizione) effettuate per accertare le sue intenzioni o la sua sincerità subiscono svantaggio.
+^srd-sfinge_del_valore-imperscrutabile
 
 ### Resistenza leggendaria (3/giorno o 4/giorno nella tana)
 
 Se la sfinge fallisce un tiro salvezza, può scegliere di superarlo comunque.
+^srd-sfinge_del_valore-resistenza-leggendaria-3-giorno-o-4-giorno-nella-tana
 ## Azioni
 
 ### Multiattacco
 
 La sfinge effettua due attacchi Artiglio e utilizza Ruggito.
+^srd-sfinge_del_valore-multiattacco
 
 ### Artiglio
 
 *Tiro per colpire in mischia:* +12, portata 1,5 m. *Colpito:* 20 (4d6 + 6) danni taglienti.
+^srd-sfinge_del_valore-artiglio
 
 ### Incantesimi
 
 La sfinge lancia uno dei seguenti incantesimi, senza bisogno di componenti materiali, utilizzando Saggezza come caratteristica da incantatore (CD del tiro salvezza sull'incantesimo 20): 1/giorno ciascuno: banchetto degli eroi, dissolvi magie, individuazione del magico, ristorare superiore, zona di verità A volontà: Individuazione del bene e del male, taumaturgia
+^srd-sfinge_del_valore-incantesimi
 
 ### Primo ruggito
 
 *Tiro salvezza su Saggezza:* CD 20, tutti i nemici in un'emanazione di 150 metri di cui la sfinge è il punto di origine. *Fallimento:* il bersaglio è spaventato per 1 minuto.
+^srd-sfinge_del_valore-primo-ruggito
 
 ### Ruggito (3/giorno)
 
 La sfinge emette un ruggito magico. Ogni suo ruggito sortisce un effetto diverso come descritto sotto (la sequenza si ripristina dopo aver completato un riposo lungo):
+^srd-sfinge_del_valore-ruggito-3-giorno
 
 ### Secondo ruggito
 
 *Tiro salvezza su Saggezza:* CD 20, tutti i nemici in un'emanazione di 150 metri di cui la sfinge è il punto di origine. *Fallimento:* il bersaglio è paralizzato e ripete il tiro salvezza alla fine di ogni suo turno e, se lo supera, l'effetto svanisce. Dopo 1 minuto, il tiro viene superato automaticamente.
+^srd-sfinge_del_valore-secondo-ruggito
 
 ### Terzo ruggito
 
 *Tiro salvezza su Costituzione:* CD 20, tutti i nemici in un'emanazione di 150 metri di cui la sfinge è il punto di origine. *Fallimento:* 44 (8d10) danni da tuono, e il bersaglio cade a terra prono. *Successo:* danni dimezzati.
+^srd-sfinge_del_valore-terzo-ruggito
 ## Azioni Leggendarie
 
 Subito dopo il turno di un'altra creatura, la sfinge può consumare un utilizzo per effettuare una delle seguenti azioni. La sfinge recupera tutti gli utilizzi consumati all'inizio di ogni suo turno.
@@ -152,10 +168,12 @@ Subito dopo il turno di un'altra creatura, la sfinge può consumare un utilizzo 
 ### Agguato arcano
 
 La sfinge può teletrasportarsi fino a 9 metri in uno spazio libero che è in grado di vedere, effettuando un attacco Artiglio.
+^srd-sfinge_del_valore-agguato-arcano
 
 ### Peso degli anni
 
 *Tiro salvezza su Costituzione:* CD 16, una creatura che la sfinge è in grado di vedere entro 36 metri. *Fallimento:* il bersaglio ottiene 1 livello di indebolimento. Finché il bersaglio ha uno o più livelli di indebolimento, apparirà più vecchio di 3d10 anni. *Fallimento o successo:* la sfinge non può ripetere quest'azione fino all'inizio del proprio turno successivo.
+^srd-sfinge_del_valore-peso-degli-anni
 ````
 
 > [!info] Licenza

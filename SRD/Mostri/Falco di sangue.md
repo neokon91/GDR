@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Falco di sangue]]"]
+riferimenti_srd: ["[[SRD/Mostri/Falco di sangue]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Falco di sangue#^srd-falco_di_sangue-tattiche-del-branco]]", "[[SRD/Mostri/Falco di sangue#^srd-falco_di_sangue-becco]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Falco di sangue"
 type: "Bestia"
 size: "piccola"
@@ -86,11 +93,13 @@ tab: Azioni
 ### Tattiche del branco
 
 Il falco dispone di vantaggio a un tiro per colpire contro una creatura se almeno uno dei suoi alleati si trova entro 1,5 metri dalla creatura e non è incapacitato.
+^srd-falco_di_sangue-tattiche-del-branco
 ## Azioni
 
 ### Becco
 
 *Tiro per colpire in mischia:* +4, portata 1,5 m. *Colpito:* 4 (1d4 + 2) danni perforanti, o 6 (1d8 + 2) danni perforanti se il bersaglio è sanguinante.
+^srd-falco_di_sangue-becco
 ````
 
 > [!info] Licenza

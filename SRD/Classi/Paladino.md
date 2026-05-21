@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Classi/Paladino]]"]
+riferimenti_srd: ["[[SRD/Classi/Paladino]]"]
+riferimenti_regola: []
+sezioni_collegate: ["[[SRD/Classi/Paladino#Tratti di classe]]", "[[SRD/Classi/Paladino#Progressione di classe]]", "[[SRD/Classi/Paladino#Privilegi chiave]]", "[[SRD/Classi/Paladino#Lista degli incantesimi da paladino]]", "[[SRD/Classi/Paladino#Sottoclasse del paladino: Giuramento di devozione]]", "[[SRD/Classi/Paladino#Incantesimi del Giuramento di devozione]]"]
+blocchi_collegati: []
+tabelle_collegate: ["[[SRD/Classi/Paladino#^srd-paladino-tratti-di-classe]]", "[[SRD/Classi/Paladino#^srd-paladino-progressione-di-classe]]", "[[SRD/Classi/Paladino#^srd-paladino-privilegi-chiave]]", "[[SRD/Classi/Paladino#^srd-paladino-lista-degli-incantesimi-da-paladino]]", "[[SRD/Classi/Paladino#^srd-paladino-sottoclasse-del-paladino-giuramento-di-devozione]]", "[[SRD/Classi/Paladino#^srd-paladino-incantesimi-del-giuramento-di-devozione]]"]
+tags: ["dnd55/srd"]
 capitolo: "Classi"
 pagine_sorgente: "70-74"
 caratteristica_primaria: ["Forza", "Carisma"]
@@ -41,6 +48,7 @@ A: cotta di maglia, scudo, spada lunga, 6 giavellotti, simbolo sacro, dotazione 
 | Armi | Armi semplici e da guerra. |
 | Armature | Armature leggere, medie e pesanti; scudi. |
 | Equipaggiamento iniziale | A: cotta di maglia, scudo, spada lunga, 6 giavellotti, simbolo sacro, dotazione da sacerdote e 9 mo; oppure B: 150 mo. |
+^srd-paladino-tratti-di-classe
 
 ## Progressione di classe
 
@@ -66,6 +74,7 @@ A: cotta di maglia, scudo, spada lunga, 6 giavellotti, simbolo sacro, dotazione 
 | 18 | +6 | Ampliamento dell'aura | 3 | 14 | 4 | 3 | 3 | 3 | 1 |
 | 19 | +6 | Dono epico | 3 | 15 | 4 | 3 | 3 | 3 | 2 |
 | 20 | +6 | Privilegio della sottoclasse | 3 | 15 | 4 | 3 | 3 | 3 | 2 |
+^srd-paladino-progressione-di-classe
 
 ## Privilegi chiave
 
@@ -75,6 +84,7 @@ A: cotta di maglia, scudo, spada lunga, 6 giavellotti, simbolo sacro, dotazione 
 | Incantesimi | Prepara incantesimi da paladino usando Carisma. |
 | Punizione divina | Converte potere sacro in danni aggiuntivi. |
 | Incanalare divinita | Alimenta Percezione del Divino e opzioni di giuramento. |
+^srd-paladino-privilegi-chiave
 
 ## Lista degli incantesimi da paladino
 
@@ -118,6 +128,7 @@ A: cotta di maglia, scudo, spada lunga, 6 giavellotti, simbolo sacro, dotazione 
 | 5 | Dissolvi il bene e il male | Abiurazione | C, M |
 | 5 | Rianimare morti | Necromanzia | M |
 | 5 | Ristorare superiore | Abiurazione | M |
+^srd-paladino-lista-degli-incantesimi-da-paladino
 
 ## Sottoclasse del paladino: Giuramento di devozione
 
@@ -128,6 +139,7 @@ A: cotta di maglia, scudo, spada lunga, 6 giavellotti, simbolo sacro, dotazione 
 | 7 | Aura di devozione | Il paladino è gli alleati nell'Aura di protezione non possono essere affascinati. |
 | 15 | Punizione protettiva | Dopo punizione divina, il paladino e gli alleati nell'Aura ottengono mezza copertura. |
 | 20 | Nube sacra | Potenzia l'Aura con danni radiosi, luce solare e vantaggio contro immondi e non morti. |
+^srd-paladino-sottoclasse-del-paladino-giuramento-di-devozione
 
 ## Incantesimi del Giuramento di devozione
 
@@ -138,6 +150,7 @@ A: cotta di maglia, scudo, spada lunga, 6 giavellotti, simbolo sacro, dotazione 
 | 9 | Faro di speranza, dissolvi magie |
 | 13 | Liberta di movimento, guardiano della fede |
 | 17 | Comunione, colpo infuocato |
+^srd-paladino-incantesimi-del-giuramento-di-devozione
 
 ## Progressione
 

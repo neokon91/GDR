@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Azer sentinella]]"]
+riferimenti_srd: ["[[SRD/Mostri/Azer sentinella]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Azer sentinella#^srd-azer_sentinella-aura-di-fuoco]]", "[[SRD/Mostri/Azer sentinella#^srd-azer_sentinella-illuminazione]]", "[[SRD/Mostri/Azer sentinella#^srd-azer_sentinella-martello-ardente]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Azer sentinella"
 type: "Elementale"
 size: "medio"
@@ -85,15 +92,18 @@ tab: Azioni
 ### Aura di fuoco
 
 Al termine di ogni turno dell'azer, tutte le creature a scelta dell'azer che si trovano in un'emanazione di 1,5 metri di cui l'azer è il punto di origine subiscono 5 (1d10) danni da fuoco, a meno che l'azer non sia incapacitato.
+^srd-azer_sentinella-aura-di-fuoco
 
 ### Illuminazione
 
 L'azer emana luce intensa in un raggio di 3 metri e luce fioca per altri 3 metri.
+^srd-azer_sentinella-illuminazione
 ## Azioni
 
 ### Martello ardente
 
 *Tiro per colpire in mischia:* +5, portata 1,5 m *Colpito:* 8 (1d10 + 3) danni contundenti più 3 (1d6) danni da fuoco.
+^srd-azer_sentinella-martello-ardente
 ````
 
 > [!info] Licenza

@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Incantesimi/Colpo accurato]]"]
+riferimenti_srd: ["[[SRD/Incantesimi/Colpo accurato]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Incantesimi/Colpo accurato#^srd-colpo_accurato-trucchetto-potenziato]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/incantesimo"]
 livello: 0
 scuola: "Divinazione"
 classi: ["bardo", "mago", "stregone", "warlock"]
@@ -36,6 +43,7 @@ Guidato da un lampo di intuizione magica, l'incantatore effettua un attacco con 
 ### Trucchetto potenziato
 
 A prescindere dal tipo di danni che l'incantatore sceglie (danni radiosi o danni normali dell'arma), l'attacco infligge danni radiosi extra quando l'incantatore raggiunge il 5º livello (1d6), l'11º livello (2d6) e il 17º livello (3d6).
+^srd-colpo_accurato-trucchetto-potenziato
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

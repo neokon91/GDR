@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Drago d'ottone adulto]]"]
+riferimenti_srd: ["[[SRD/Mostri/Drago d'ottone adulto]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Drago d'ottone adulto#^srd-drago_d_ottone_adulto-resistenza-leggendaria-3-giorno-o-4-giorno-nella-tana]]", "[[SRD/Mostri/Drago d'ottone adulto#^srd-drago_d_ottone_adulto-multiattacco]]", "[[SRD/Mostri/Drago d'ottone adulto#^srd-drago_d_ottone_adulto-squarcio]]", "[[SRD/Mostri/Drago d'ottone adulto#^srd-drago_d_ottone_adulto-incantesimi]]", "[[SRD/Mostri/Drago d'ottone adulto#^srd-drago_d_ottone_adulto-soffio-di-fuoco-ricarica-5-6]]", "[[SRD/Mostri/Drago d'ottone adulto#^srd-drago_d_ottone_adulto-soffio-di-sonno]]", "[[SRD/Mostri/Drago d'ottone adulto#^srd-drago_d_ottone_adulto-balzo]]", "[[SRD/Mostri/Drago d'ottone adulto#^srd-drago_d_ottone_adulto-luce-accecante]]", "[[SRD/Mostri/Drago d'ottone adulto#^srd-drago_d_ottone_adulto-sabbie-roventi]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Drago d'ottone adulto"
 type: "Drago (metallico)"
 size: "enorme"
@@ -105,15 +112,18 @@ tab: Azioni
 ### Resistenza leggendaria (3/giorno o 4/giorno nella tana)
 
 Se il drago fallisce un tiro salvezza, può scegliere di superarlo comunque.
+^srd-drago_d_ottone_adulto-resistenza-leggendaria-3-giorno-o-4-giorno-nella-tana
 ## Azioni
 
 ### Multiattacco
 
 Il drago effettua tre attacchi Squarcio. Può sostituire un attacco con un utilizzo di (A) Soffio di sonno o (B) Incantesimi per lanciare raggio rovente.
+^srd-drago_d_ottone_adulto-multiattacco
 
 ### Squarcio
 
 *Tiro per colpire in mischia:* +11, portata 3 m. *Colpito:* 17 (2d10 + 6) danni taglienti più 4 (1d8) danni da fuoco.
+^srd-drago_d_ottone_adulto-squarcio
 
 ### Incantesimi
 
@@ -129,16 +139,19 @@ Il drago lancia uno dei seguenti incantesimi, senza bisogno di componenti materi
 - parlare con gli animali
 - raggio rovente
 - trasformazione (solo in forma di bestia o umanoide, senza punti ferita temporanei ottenuti dall'incantesimo, e senza richiedere concentrazione o punti ferita temporanei per mantenere l'incantesimo)
+^srd-drago_d_ottone_adulto-incantesimi
 
 ### Soffio di fuoco (ricarica 5-6)
 
 *Tiro salvezza su Destrezza:* CD 18, tutte le creature in una linea lunga 18 metri e larga 1,5 metri. *Fallimento:* 45 (10d8) danni da fuoco. *Successo:* danni dimezzati.
+^srd-drago_d_ottone_adulto-soffio-di-fuoco-ricarica-5-6
 
 ### Soffio di sonno
 
 *Tiro salvezza su Costituzione:* CD 18, tutte le creature in un cono di 18 metri. *Fallimento:* il bersaglio è incapacitato fino al termine del proprio turno successivo, a quel punto ripete il tiro salvezza.
 
 *Secondo fallimento:* il bersaglio cade privo di sensi per 10 minuti. Questo effetto termina se il bersaglio subisce danni o se una creatura entro 1,5 metri da esso esegue un'azione per svegliarlo.
+^srd-drago_d_ottone_adulto-soffio-di-sonno
 ## Azioni Leggendarie
 
 3 (4 nella tana). Subito dopo il turno di un'altra creatura, il drago può consumare un utilizzo per effettuare una delle seguenti azioni. Il drago recupera tutti gli utilizzi consumati all'inizio di ogni suo turno.
@@ -148,14 +161,17 @@ Il drago lancia uno dei seguenti incantesimi, senza bisogno di componenti materi
 ### Balzo
 
 Il drago si muove fino a metà della sua velocità, ed effettua un attacco Squarcio.
+^srd-drago_d_ottone_adulto-balzo
 
 ### Luce accecante
 
 Il drago usa Incantesimi per lanciare raggio rovente.
+^srd-drago_d_ottone_adulto-luce-accecante
 
 ### Sabbie roventi
 
 *Tiro salvezza su Destrezza:* CD 16, una creatura che il drago è in grado di vedere entro 36 metri. *Fallimento:* 27 (6d8) danni da fuoco, e la velocità del bersaglio è dimezzata fino al termine del proprio turno successivo. *Fallimento o successo:* il drago non può ripetere quest'azione fino all'inizio del proprio turno successivo.
+^srd-drago_d_ottone_adulto-sabbie-roventi
 ````
 
 > [!info] Licenza

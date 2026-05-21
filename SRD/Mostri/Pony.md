@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Pony]]"]
+riferimenti_srd: ["[[SRD/Mostri/Pony]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Pony#^srd-pony-zoccoli]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Pony"
 type: "Bestia"
 size: "media"
@@ -81,6 +88,7 @@ tab: Azioni
 ### Zoccoli
 
 *Tiro per colpire in mischia:* +4, portata 1,5 m. *Colpito:* 4 (1d4 + 2) danni contundenti.
+^srd-pony-zoccoli
 ````
 
 > [!info] Licenza

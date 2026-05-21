@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Drago di bronzo giovane]]"]
+riferimenti_srd: ["[[SRD/Mostri/Drago di bronzo giovane]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Drago di bronzo giovane#^srd-drago_di_bronzo_giovane-anfibio]]", "[[SRD/Mostri/Drago di bronzo giovane#^srd-drago_di_bronzo_giovane-multiattacco]]", "[[SRD/Mostri/Drago di bronzo giovane#^srd-drago_di_bronzo_giovane-squarcio]]", "[[SRD/Mostri/Drago di bronzo giovane#^srd-drago_di_bronzo_giovane-soffio-di-fulmini-ricarica-5-6]]", "[[SRD/Mostri/Drago di bronzo giovane#^srd-drago_di_bronzo_giovane-soffio-repulsivo]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Drago di bronzo giovane"
 type: "Drago (metallico)"
 size: "grande"
@@ -96,23 +103,28 @@ tab: Azioni
 ### Anfibio
 
 Il drago può respirare in aria e in acqua.
+^srd-drago_di_bronzo_giovane-anfibio
 ## Azioni
 
 ### Multiattacco
 
 Il drago effettua tre attacchi Squarcio. Può sostituire un attacco con un utilizzo di Soffio repulsivo.
+^srd-drago_di_bronzo_giovane-multiattacco
 
 ### Squarcio
 
 *Tiro per colpire in mischia:* +8, portata 3 m. *Colpito:* 16 (2d10 + 5) danni taglienti.
+^srd-drago_di_bronzo_giovane-squarcio
 
 ### Soffio di fulmini (ricarica 5-6)
 
 *Tiro salvezza su Destrezza:* CD 15, tutte le creature in una linea lunga 18 metri e larga 1,5 metri. *Fallimento:* 49 (9d10) danni da fulmine. *Successo:* danni dimezzati.
+^srd-drago_di_bronzo_giovane-soffio-di-fulmini-ricarica-5-6
 
 ### Soffio repulsivo
 
 *Tiro salvezza su Forza:* CD 15, tutte le creature in un cono di 9 metri. *Fallimento:* il bersaglio viene spinto fino a un massimo di 12 metri di distanza dal drago e cade a terra prono.
+^srd-drago_di_bronzo_giovane-soffio-repulsivo
 ````
 
 > [!info] Licenza

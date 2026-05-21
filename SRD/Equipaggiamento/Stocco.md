@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Equipaggiamento/Stocco]]"]
+riferimenti_srd: ["[[SRD/Equipaggiamento/Stocco]]"]
+riferimenti_regola: []
+sezioni_collegate: ["[[SRD/Equipaggiamento/Stocco#Dettagli]]"]
+blocchi_collegati: []
+tabelle_collegate: ["[[SRD/Equipaggiamento/Stocco#^srd-stocco-dettagli]]"]
+tags: ["dnd55/srd"]
 capitolo: "Equipaggiamento"
 pagine_sorgente: "101-104"
 tipo_oggetto: "arma"
@@ -42,6 +49,7 @@ Mischia da guerra; danni 1d8 perforanti; padronanza Vessazione.
 | Categoria | Nome | Danni | Proprietà | Padronanza | Peso | Costo |
 | --- | --- | --- | --- | --- | --- | --- |
 | Mischia da guerra | Stocco | 1d8 perforanti | accurata | Vessazione | 1 kg | 25 mo |
+^srd-stocco-dettagli
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

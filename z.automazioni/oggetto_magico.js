@@ -34,6 +34,9 @@ async function oggettoMagico(tp) {
     const prossimaMossa = await helpers.promptOptional(tp, prompts.prossima_mossa ?? "Cosa cambia se viene usato, perso o ignorato");
     const connessioni = await helpers.chooseConnections(tp, prompts.connessioni ?? "Connessioni a missioni, luoghi, PNG o fazioni", context);
     const sessioni = await helpers.chooseSessions(tp, prompts.sessioni ?? "Sessioni collegate", context);
+    const fonti = await helpers.promptWikilinkTargets(tp, prompts.fonti ?? "Fonti granulari dell'oggetto magico");
+    const riferimentiSrd = await helpers.promptWikilinkTargets(tp, prompts.riferimenti_srd ?? "Riferimenti SRD dell'oggetto magico");
+    const riferimentiRegola = await helpers.promptWikilinkTargets(tp, prompts.riferimenti_regola ?? "Riferimenti regola dell'oggetto magico");
 
     await helpers.moveNote(tp, helpers.path("oggetti"), name);
 
@@ -57,7 +60,13 @@ async function oggettoMagico(tp) {
         pressione: pressione,
         prossima_mossa: helpers.yamlQuote(prossimaMossa),
         connessioni: helpers.inlineYamlList(connessioni),
-        sessioni: helpers.inlineYamlList(sessioni)
+        sessioni: helpers.inlineYamlList(sessioni),
+        ...helpers.referenceFields({
+            fonti: [...fonti, ...riferimentiSrd, ...riferimentiRegola, proprietario, luogo, ...connessioni],
+            riferimentiSrd,
+            riferimentiRegola,
+            tags: ["dnd55/oggetto-magico", "dnd55/homebrew", "gdr/bozza"]
+        })
     });
 }
 

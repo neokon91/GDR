@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Cinghiale gigante]]"]
+riferimenti_srd: ["[[SRD/Mostri/Cinghiale gigante]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Cinghiale gigante#^srd-cinghiale_gigante-furia-sanguinante]]", "[[SRD/Mostri/Cinghiale gigante#^srd-cinghiale_gigante-trafiggere]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Cinghiale gigante"
 type: "Bestia"
 size: "grande"
@@ -83,11 +90,13 @@ tab: Azioni
 ### Furia sanguinante
 
 Il cinghiale dispone di vantaggio ai tiri per colpire in mischia mentre è sanguinante.
+^srd-cinghiale_gigante-furia-sanguinante
 ## Azioni
 
 ### Trafiggere
 
 *Tiro per colpire in mischia:* +5, portata 1,5 m. *Colpito:* 10 (2d6 + 3) danni perforanti. Se il bersaglio è una creatura di taglia Grande o inferiore e il cinghiale si è mosso di 6 metri o più in linea retta verso di esso subito prima del colpo, il bersaglio subisce 7 (2d6) danni perforanti extra e cade a terra prono.
+^srd-cinghiale_gigante-trafiggere
 ````
 
 > [!info] Licenza

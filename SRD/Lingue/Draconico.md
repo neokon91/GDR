@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Lingue/Draconico]]"]
+riferimenti_srd: ["[[SRD/Lingue/Draconico]]"]
+riferimenti_regola: []
+sezioni_collegate: ["[[SRD/Lingue/Draconico#Dettagli]]"]
+blocchi_collegati: []
+tabelle_collegate: ["[[SRD/Lingue/Draconico#^srd-draconico-dettagli]]"]
+tags: ["dnd55/srd"]
 capitolo: "Origini dei personaggi"
 pagine_sorgente: "21-23"
 categoria_lingua: "Standard"
@@ -29,6 +36,7 @@ Lingua standard. Tiro casuale 1d12: 2.
 | --- | --- |
 | Categoria | Standard |
 | Tiro casuale | 2 |
+^srd-draconico-dettagli
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

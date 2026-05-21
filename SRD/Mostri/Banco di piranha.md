@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Banco di piranha]]"]
+riferimenti_srd: ["[[SRD/Mostri/Banco di piranha]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Banco di piranha#^srd-banco_di_piranha-respirare-sott-acqua]]", "[[SRD/Mostri/Banco di piranha#^srd-banco_di_piranha-sciame]]", "[[SRD/Mostri/Banco di piranha#^srd-banco_di_piranha-morsi]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Banco di piranha"
 type: "Sciame"
 size: "medio"
@@ -84,15 +91,18 @@ tab: Azioni
 ### Respirare sott'acqua
 
 Il banco può respirare soltanto sott'acqua.
+^srd-banco_di_piranha-respirare-sott-acqua
 
 ### Sciame
 
 Il banco di pesci può occupare lo spazio di un'altra creatura e viceversa, e può muoversi attraverso qualsiasi apertura abbastanza grande per un piranha di taglia Minuscola. L'orda non può recuperare punti ferita o ottenere punti ferita temporanei.
+^srd-banco_di_piranha-sciame
 ## Azioni
 
 ### Morsi
 
 *Tiro per colpire in mischia:* +5 (con vantaggio se il bersaglio non ha tutti i punti ferita), portata 1,5 m. *Colpito:* 8 (2d4 + 3) danni perforanti, o 5 (1d4 + 3) danni perforanti se il banco è sanguinante.
+^srd-banco_di_piranha-morsi
 ````
 
 > [!info] Licenza

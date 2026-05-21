@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Idra]]"]
+riferimenti_srd: ["[[SRD/Mostri/Idra]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Idra#^srd-idra-apnea]]", "[[SRD/Mostri/Idra#^srd-idra-teste-multiple]]", "[[SRD/Mostri/Idra#^srd-idra-teste-reattive]]", "[[SRD/Mostri/Idra#^srd-idra-multiattacco]]", "[[SRD/Mostri/Idra#^srd-idra-morso]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Idra"
 type: "Mostruosità"
 size: "enorme"
@@ -92,23 +99,28 @@ tab: Azioni
 ### Apnea
 
 L'idra può trattenere il respiro per 1 ora.
+^srd-idra-apnea
 
 ### Teste multiple
 
 L'idra possiede cinque teste. Ogni volta che subisce 25 o più danni in un singolo turno, una delle teste muore. Se tutte le teste muoiono, l'idra muore. Alla fine del suo turno e finché ha almeno una testa vivente, l'idra fa ricrescere due teste per ogni testa morta dal suo ultimo turno, a meno che nel corso di tale periodo non abbia subito danni da fuoco. L'idra recupera 20 punti ferita quando fa ricrescere delle nuove teste.
+^srd-idra-teste-multiple
 
 ### Teste reattive
 
 Per ogni testa che l'idra possiede oltre la prima, riceve una reazione extra che può essere usata soltanto per gli attacchi di opportunità.
+^srd-idra-teste-reattive
 ## Azioni
 
 ### Multiattacco
 
 L'idra effettua un numero di attacchi Morso pari al numero di teste che possiede.
+^srd-idra-multiattacco
 
 ### Morso
 
 *Tiro per colpire in mischia:* +8, portata 3 m. *Colpito:* 10 (1d10 + 5) danni perforanti.
+^srd-idra-morso
 ````
 
 > [!info] Licenza

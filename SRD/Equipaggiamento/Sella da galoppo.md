@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Equipaggiamento/Sella da galoppo]]"]
+riferimenti_srd: ["[[SRD/Equipaggiamento/Sella da galoppo]]"]
+riferimenti_regola: []
+sezioni_collegate: ["[[SRD/Equipaggiamento/Sella da galoppo#Dettagli]]"]
+blocchi_collegati: []
+tabelle_collegate: ["[[SRD/Equipaggiamento/Sella da galoppo#^srd-sella_da_galoppo-dettagli]]"]
+tags: ["dnd55/srd"]
 capitolo: "Equipaggiamento"
 pagine_sorgente: "113-114"
 tipo_oggetto: "finimento_o_servizio"
@@ -42,6 +49,7 @@ Peso 12,5 kg; costo 10 mo.
 | Oggetto | Peso | Costo |
 | --- | --- | --- |
 | Sella da galoppo | 12,5 kg | 10 mo |
+^srd-sella_da_galoppo-dettagli
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

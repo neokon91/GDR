@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Esploratore]]"]
+riferimenti_srd: ["[[SRD/Mostri/Esploratore]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Esploratore#^srd-esploratore-multiattacco]]", "[[SRD/Mostri/Esploratore#^srd-esploratore-spada-corta]]", "[[SRD/Mostri/Esploratore#^srd-esploratore-arco-lungo]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Esploratore"
 type: "Umanoide"
 size: "medio o piccolo"
@@ -91,14 +98,17 @@ tab: Azioni
 ### Multiattacco
 
 L'esploratore effettua due attacchi, usando Spada corta e Arco lungo in qualsiasi combinazione.
+^srd-esploratore-multiattacco
 
 ### Spada corta
 
 *Tiro per colpire in mischia:* +4, portata 1,5 m. *Colpito:* 5 (1d6 + 2) danni perforanti.
+^srd-esploratore-spada-corta
 
 ### Arco lungo
 
 *Tiro per colpire a distanza:* +4, gittata 45/180 m. *Colpito:* 6 (1d8 + 2) danni perforanti.
+^srd-esploratore-arco-lungo
 ````
 
 > [!info] Licenza

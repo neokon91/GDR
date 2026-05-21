@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Orsogufo]]"]
+riferimenti_srd: ["[[SRD/Mostri/Orsogufo]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Orsogufo#^srd-orsogufo-multiattacco]]", "[[SRD/Mostri/Orsogufo#^srd-orsogufo-squarcio]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Orsogufo"
 type: "Mostruosità"
 size: "grande"
@@ -86,10 +93,12 @@ tab: Azioni
 ### Multiattacco
 
 L'orsogufo effettua due attacchi Squarcio.
+^srd-orsogufo-multiattacco
 
 ### Squarcio
 
 *Tiro per colpire in mischia:* +7, portata 1,5 m. *Colpito:* 14 (2d8 + 5) danni taglienti.
+^srd-orsogufo-squarcio
 ````
 
 > [!info] Licenza

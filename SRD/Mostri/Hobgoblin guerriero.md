@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Hobgoblin guerriero]]"]
+riferimenti_srd: ["[[SRD/Mostri/Hobgoblin guerriero]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Hobgoblin guerriero#^srd-hobgoblin_guerriero-tattiche-del-branco]]", "[[SRD/Mostri/Hobgoblin guerriero#^srd-hobgoblin_guerriero-spada-lunga]]", "[[SRD/Mostri/Hobgoblin guerriero#^srd-hobgoblin_guerriero-arco-lungo]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Hobgoblin guerriero"
 type: "Folletto (goblinoide)"
 size: "medio"
@@ -84,15 +91,18 @@ tab: Azioni
 ### Tattiche del branco
 
 L'hobgoblin dispone di vantaggio a un tiro per colpire contro una creatura se almeno uno dei suoi alleati si trova entro 1,5 metri dalla creatura e l'alleato non è incapacitato.
+^srd-hobgoblin_guerriero-tattiche-del-branco
 ## Azioni
 
 ### Spada lunga
 
 *Tiro per colpire in mischia:* +3, portata 1,5 m *Colpito:* 12 (2d10 + 1) danni taglienti.
+^srd-hobgoblin_guerriero-spada-lunga
 
 ### Arco lungo
 
 *Tiro per colpire a distanza:* +3, gittata 45/180 m. *Colpito:* 5 (1d8 + 1) danni perforanti più 7 (3d4) danni da veleno.
+^srd-hobgoblin_guerriero-arco-lungo
 ````
 
 > [!info] Licenza

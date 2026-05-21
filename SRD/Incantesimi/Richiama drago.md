@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Incantesimi/Richiama drago]]"]
+riferimenti_srd: ["[[SRD/Incantesimi/Richiama drago]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Incantesimi/Richiama drago#^srd-richiama_drago-utilizzo-di-uno-slot-incantesimo-di-livello-superiore]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/incantesimo"]
 livello: 5
 scuola: "Evocazione"
 classi: ["mago"]
@@ -36,6 +43,7 @@ L'incantatore invoca uno spirito di drago, che si manifesta in uno spazio libero
 ### Utilizzo di uno slot incantesimo di livello superiore
 
 Usa il livello dello slot incantesimo relativo al livello dell'incantesimo nella scheda delle statistiche.
+^srd-richiama_drago-utilizzo-di-uno-slot-incantesimo-di-livello-superiore
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Fustigatore]]"]
+riferimenti_srd: ["[[SRD/Mostri/Fustigatore]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Fustigatore#^srd-fustigatore-movimenti-del-ragno]]", "[[SRD/Mostri/Fustigatore#^srd-fustigatore-multiattacco]]", "[[SRD/Mostri/Fustigatore#^srd-fustigatore-morso]]", "[[SRD/Mostri/Fustigatore#^srd-fustigatore-tentacolo]]", "[[SRD/Mostri/Fustigatore#^srd-fustigatore-riavvolgere]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Fustigatore"
 type: "Aberrazione"
 size: "grande"
@@ -93,23 +100,28 @@ tab: Azioni
 ### Movimenti del ragno
 
 Il fustigatore può scalare le superfici difficili, compresi i soffitti, senza effettuare una prova di caratteristica.
+^srd-fustigatore-movimenti-del-ragno
 ## Azioni
 
 ### Multiattacco
 
 Il fustigatore effettua due attacchi Tentacolo, usa Riavvolgere ed effettua due attacchi Morso.
+^srd-fustigatore-multiattacco
 
 ### Morso
 
 *Tiro per colpire in mischia:* +7, portata 1,5 m. *Colpito:* 17 (3d8 + 4) danni perforanti.
+^srd-fustigatore-morso
 
 ### Tentacolo
 
 *Tiro per colpire in mischia:* +7, portata 18 m. *Colpito:* il bersaglio è afferrato (CD 14 per sfuggire) da uno dei sei tentacoli, ed è avvelenato finché la presa perdura. Il tentacolo può essere danneggiato e, quando viene distrutto, libera la creatura che aveva afferrato (CA 20, PF 10, immunità ai danni psichici e da veleno). I danni inflitti al tentacolo non danneggiano in alcun modo il fustigatore, e il tentacolo distrutto ricresce all'inizio del turno successivo del fustigatore.
+^srd-fustigatore-tentacolo
 
 ### Riavvolgere
 
 Il fustigatore tira in linea retta verso di sé ogni creatura che ha afferrato per un massimo di 9 metri.
+^srd-fustigatore-riavvolgere
 ````
 
 > [!info] Licenza

@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Regole/Trappole]]"]
+riferimenti_srd: ["[[SRD/Regole/Trappole]]"]
+riferimenti_regola: []
+sezioni_collegate: ["[[SRD/Regole/Trappole#Componenti ed esempi]]"]
+blocchi_collegati: []
+tabelle_collegate: ["[[SRD/Regole/Trappole#^srd-trappole-componenti-ed-esempi]]"]
+tags: ["dnd55/srd", "dnd55/regola"]
 capitolo: "Strumenti di gioco"
 categoria_regola: "Strumenti di gioco"
 pagine_sorgente: "227-230"
@@ -30,6 +37,7 @@ Le trappole funzionano meglio se usate con parsimonia. Le migliori sono distrazi
 | Dardi avvelenati | Piastra a pressione; TS Destrezza CD 13 o 1d3 dardi da 1d6 veleno ciascuno. |
 | Pietra rotolante | Piastra a pressione; pietra con iniziativa +8, CA 17, 100 PF, soglia danno 10. |
 | Statua del soffio di fuoco | Piastra a pressione; cono di fuoco, glifo individuabile e disarmabile. |
+^srd-trappole-componenti-ed-esempi
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

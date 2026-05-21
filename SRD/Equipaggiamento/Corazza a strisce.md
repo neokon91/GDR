@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Equipaggiamento/Corazza a strisce]]"]
+riferimenti_srd: ["[[SRD/Equipaggiamento/Corazza a strisce]]"]
+riferimenti_regola: []
+sezioni_collegate: ["[[SRD/Equipaggiamento/Corazza a strisce#Dettagli]]"]
+blocchi_collegati: []
+tabelle_collegate: ["[[SRD/Equipaggiamento/Corazza a strisce#^srd-corazza_a_strisce-dettagli]]"]
+tags: ["dnd55/srd"]
 capitolo: "Equipaggiamento"
 pagine_sorgente: "104-105"
 tipo_oggetto: "armatura"
@@ -42,6 +49,7 @@ Pesante; Classe Armatura 17; costo 200 mo.
 | Categoria | Armatura | Classe Armatura | Forza | Furtività | Peso | Costo |
 | --- | --- | --- | --- | --- | --- | --- |
 | Pesante | Corazza a strisce | 17 | For 15 | Svantaggio | 30 kg | 200 mo |
+^srd-corazza_a_strisce-dettagli
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

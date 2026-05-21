@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Rana]]"]
+riferimenti_srd: ["[[SRD/Mostri/Rana]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Rana#^srd-rana-anfibio]]", "[[SRD/Mostri/Rana#^srd-rana-balzo-da-fermo]]", "[[SRD/Mostri/Rana#^srd-rana-morso]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Rana"
 type: "Bestia"
 size: "minuscola"
@@ -89,15 +96,18 @@ tab: Azioni
 ### Anfibio
 
 La rana può respirare in aria e in acqua.
+^srd-rana-anfibio
 
 ### Balzo da fermo
 
 La rana può compiere un salto in lungo di un massimo di 3 metri e uno in alto di un massimo di 1,5 metri, con o senza rincorsa.
+^srd-rana-balzo-da-fermo
 ## Azioni
 
 ### Morso
 
 *Tiro per colpire in mischia:* +3, portata 1,5 m. *Colpito:* 1 danno perforante.
+^srd-rana-morso
 ````
 
 > [!info] Licenza

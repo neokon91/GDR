@@ -26,6 +26,7 @@ async function incontro(tp, routeOptions = {}) {
     const mappe = await helpers.chooseMaps(tp, prompts.mappe ?? "Mappe dell'incontro", context);
     const audio = await helpers.chooseAudio(tp, prompts.audio ?? "Audio dell'incontro", context);
     const ricompense = await helpers.chooseObjects(tp, prompts.ricompense ?? "Ricompense", context);
+    const riferimentiRegola = await helpers.promptWikilinkTargets(tp, prompts.riferimenti_regola ?? "Riferimenti regola dell'incontro");
     const encounterCreatures = creature.map(link => helpers.yamlQuote(encounterName(link)));
 
     const sessioni = activeContext.link ? [activeContext.link] : [];
@@ -46,7 +47,14 @@ async function incontro(tp, routeOptions = {}) {
         sessioni: helpers.inlineYamlList(sessioni),
         pericolo,
         ricompense: helpers.inlineYamlList(ricompense),
-        encounter_creatures: helpers.inlineYamlList(encounterCreatures)
+        encounter_creatures: helpers.inlineYamlList(encounterCreatures),
+        fonti: helpers.inlineYamlWikilinkList([...sessioni, luogo, ...mappe]),
+        riferimenti_srd: '[]',
+        riferimenti_regola: helpers.inlineYamlWikilinkList(riferimentiRegola),
+        sezioni_collegate: '[]',
+        blocchi_collegati: '[]',
+        tabelle_collegate: helpers.inlineYamlWikilinkList(["[[Risorse/Tabelle/Tabelle#^complicazioni]]"]),
+        tags: helpers.inlineYamlTextList(["gdr/bozza"])
     });
 }
 

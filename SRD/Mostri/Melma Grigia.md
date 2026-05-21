@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Melma Grigia]]"]
+riferimenti_srd: ["[[SRD/Mostri/Melma Grigia]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Melma Grigia#^srd-melma_grigia-amorfo]]", "[[SRD/Mostri/Melma Grigia#^srd-melma_grigia-forma-corrosiva]]", "[[SRD/Mostri/Melma Grigia#^srd-melma_grigia-pseudopode]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Melma Grigia"
 type: "Melma"
 size: "media"
@@ -88,15 +95,18 @@ tab: Azioni
 ### Amorfo
 
 La melma può muoversi attraverso uno spazio stretto fino a 2,5 centimetri senza consumare movimento extra per farlo.
+^srd-melma_grigia-amorfo
 
 ### Forma corrosiva
 
 Le munizioni non magiche che colpiscono la melma e infliggono danni sono distrutte. Qualsiasi arma non magica subisce una penalità cumulativa di -1 ai tiri per colpire subito dopo aver inflitto danni alla melma ed essere entrata in contatto con essa. Se la penalità arriva a -5, l'arma è distrutta. La penalità può essere rimossa lanciando l'incantesimo riparare sull'arma. La melma può corrodere fino a 5 centimetri di metallo o legno non magico in 1 round.
+^srd-melma_grigia-forma-corrosiva
 ## Azioni
 
 ### Pseudopode
 
 *Tiro per colpire in mischia:* +3, portata 1,5 m. *Colpito:* 10 (2d8 + 1) danni da acido. L'armatura non magica indossata dal bersaglio subisce una penalità di -1 alla CA che fornisce. Se la penalità riduce la sua CA a 10, l'armatura si distrugge. La penalità può essere rimossa lanciando l'incantesimo riparare sull'armatura.
+^srd-melma_grigia-pseudopode
 ````
 
 > [!info] Licenza

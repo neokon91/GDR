@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Incantesimi/Globo di invulnerabilita]]"]
+riferimenti_srd: ["[[SRD/Incantesimi/Globo di invulnerabilita]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Incantesimi/Globo di invulnerabilita#^srd-globo_di_invulnerabilita-utilizzo-di-uno-slot-incantesimo-di-livello-superiore]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/incantesimo"]
 livello: 6
 scuola: "Abiurazione"
 classi: ["mago", "stregone"]
@@ -38,6 +45,7 @@ Qualsiasi incantesimo di 5º livello o inferiore lanciato dall'esterno della bar
 ### Utilizzo di uno slot incantesimo di livello superiore
 
 La barriera blocca incantesimi superiori di 1 livello per ogni slot di livello superiore al 6º.
+^srd-globo_di_invulnerabilita-utilizzo-di-uno-slot-incantesimo-di-livello-superiore
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

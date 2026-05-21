@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Equipaggiamento/Lancia]]"]
+riferimenti_srd: ["[[SRD/Equipaggiamento/Lancia]]"]
+riferimenti_regola: []
+sezioni_collegate: ["[[SRD/Equipaggiamento/Lancia#Dettagli]]"]
+blocchi_collegati: []
+tabelle_collegate: ["[[SRD/Equipaggiamento/Lancia#^srd-lancia-dettagli]]"]
+tags: ["dnd55/srd"]
 capitolo: "Equipaggiamento"
 pagine_sorgente: "101-104"
 tipo_oggetto: "arma"
@@ -42,6 +49,7 @@ Mischia semplice; danni 1d6 perforanti; padronanza Fiaccare.
 | Categoria | Nome | Danni | Proprietà | Padronanza | Peso | Costo |
 | --- | --- | --- | --- | --- | --- | --- |
 | Mischia semplice | Lancia | 1d6 perforanti | lancio 6/18, versatile 1d8 | Fiaccare | 1,5 kg | 1 mo |
+^srd-lancia-dettagli
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

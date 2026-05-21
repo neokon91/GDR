@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Nobile]]"]
+riferimenti_srd: ["[[SRD/Mostri/Nobile]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Nobile#^srd-nobile-stocco]]", "[[SRD/Mostri/Nobile#^srd-nobile-parata]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Nobile"
 type: "Umanoide"
 size: "medio o piccolo"
@@ -88,6 +95,7 @@ tab: Azioni
 ### Stocco
 
 *Tiro per colpire in mischia:* +3, portata 1,5 m. *Colpito:* 5 (1d8 + 1) danni perforanti.
+^srd-nobile-stocco
 ````
 
 > [!info] Licenza

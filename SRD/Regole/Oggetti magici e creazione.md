@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Regole/Oggetti magici e creazione]]"]
+riferimenti_srd: ["[[SRD/Regole/Oggetti magici e creazione]]"]
+riferimenti_regola: []
+sezioni_collegate: ["[[SRD/Regole/Oggetti magici e creazione#Oggetti magici]]", "[[SRD/Regole/Oggetti magici e creazione#Creazione]]", "[[SRD/Regole/Oggetti magici e creazione#Costi pergamene magiche]]"]
+blocchi_collegati: []
+tabelle_collegate: ["[[SRD/Regole/Oggetti magici e creazione#^srd-oggetti_magici_e_creazione-oggetti-magici]]", "[[SRD/Regole/Oggetti magici e creazione#^srd-oggetti_magici_e_creazione-creazione]]", "[[SRD/Regole/Oggetti magici e creazione#^srd-oggetti_magici_e_creazione-costi-pergamene-magiche]]"]
+tags: ["dnd55/srd", "dnd55/regola"]
 capitolo: "Equipaggiamento"
 categoria_regola: "Equipaggiamento"
 pagine_sorgente: "115-117"
@@ -26,6 +33,7 @@ Il capitolo equipaggiamento riepiloga identificazione e sintonia degli oggetti m
 | Sintonia | Richiede un riposo breve concentrandosi sull'oggetto e mantenendo contatto fisico; non puo coincidere con il riposo usato per identificarlo. |
 | Limite | Una creatura puo essere in sintonia con al massimo tre oggetti magici e non con piu copie dello stesso oggetto. |
 | Fine sintonia | Termina se i prerequisiti non sono piu soddisfatti, l'oggetto resta oltre 30 metri per almeno 24 ore, il portatore muore, un'altra creatura entra in sintonia o il portatore termina volontariamente la sintonia. |
+^srd-oggetti_magici_e_creazione-oggetti-magici
 
 ## Creazione
 
@@ -35,6 +43,7 @@ Il capitolo equipaggiamento riepiloga identificazione e sintonia degli oggetti m
 | Aiuto | Piu personaggi competenti possono ridurre il tempo dividendo i giorni necessari per il numero di lavoratori. |
 | Pozione di guarigione | Con competenza nella borsa da erborista: 25 mo di materie prime e 1 giorno di lavoro. |
 | Pergamene magiche | Richiedono competenza in Arcano o scorte da calligrafo, incantesimo preparato e componenti materiali richieste. |
+^srd-oggetti_magici_e_creazione-creazione
 
 ## Costi pergamene magiche
 
@@ -50,6 +59,7 @@ Il capitolo equipaggiamento riepiloga identificazione e sintonia degli oggetti m
 | 7 | 50 giorni | 12.500 mo |
 | 8 | 60 giorni | 15.000 mo |
 | 9 | 120 giorni | 50.000 mo |
+^srd-oggetti_magici_e_creazione-costi-pergamene-magiche
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

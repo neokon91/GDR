@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Gigante delle pietre]]"]
+riferimenti_srd: ["[[SRD/Mostri/Gigante delle pietre]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Gigante delle pietre#^srd-gigante_delle_pietre-multiattacco]]", "[[SRD/Mostri/Gigante delle pietre#^srd-gigante_delle_pietre-randello-di-pietra]]", "[[SRD/Mostri/Gigante delle pietre#^srd-gigante_delle_pietre-macigno]]", "[[SRD/Mostri/Gigante delle pietre#^srd-gigante_delle_pietre-deviare-proiettili-ricarica-5-6]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Gigante delle pietre"
 type: "Gigante"
 size: "enorme"
@@ -95,14 +102,17 @@ tab: Azioni
 ### Multiattacco
 
 Il gigante effettua due attacchi, usando Randello di pietra o Macigno in qualsiasi combinazione.
+^srd-gigante_delle_pietre-multiattacco
 
 ### Randello di pietra
 
 *Tiro per colpire in mischia:* +9, portata 4,5 m. *Colpito:* 22 (3d10 + 6) danni contundenti.
+^srd-gigante_delle_pietre-randello-di-pietra
 
 ### Macigno
 
 *Tiro per colpire a distanza:* +9, gittata 18/72 m. *Colpito:* 15 (2d8 + 6) danni contundenti. Se il bersaglio è una creatura di taglia Grande o inferiore, cade a terra prono.
+^srd-gigante_delle_pietre-macigno
 ````
 
 > [!info] Licenza

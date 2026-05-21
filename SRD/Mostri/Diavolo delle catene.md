@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Diavolo delle catene]]"]
+riferimenti_srd: ["[[SRD/Mostri/Diavolo delle catene]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Diavolo delle catene#^srd-diavolo_delle_catene-resistenza-alla-magia]]", "[[SRD/Mostri/Diavolo delle catene#^srd-diavolo_delle_catene-ristoro-diabolico]]", "[[SRD/Mostri/Diavolo delle catene#^srd-diavolo_delle_catene-multiattacco]]", "[[SRD/Mostri/Diavolo delle catene#^srd-diavolo_delle_catene-catena]]", "[[SRD/Mostri/Diavolo delle catene#^srd-diavolo_delle_catene-evoca-catena-infernale]]", "[[SRD/Mostri/Diavolo delle catene#^srd-diavolo_delle_catene-sguardo-snervante]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Diavolo delle catene"
 type: "Immondo (diavolo)"
 size: "medio"
@@ -92,19 +99,23 @@ tab: Azioni
 ### Resistenza alla magia
 
 Il diavolo dispone di vantaggio ai tiri salvezza contro incantesimi e altri effetti magici.
+^srd-diavolo_delle_catene-resistenza-alla-magia
 
 ### Ristoro diabolico
 
 Se il diavolo muore al di fuori dei Nove Inferi, il suo corpo si dissolve in fumo sulfureo e ne acquisisce uno nuovo all'istante, tornando in vita con tutti i suoi punti ferita da qualche parte nei Nove Inferi.
+^srd-diavolo_delle_catene-ristoro-diabolico
 ## Azioni
 
 ### Multiattacco
 
 Il diavolo effettua due attacchi Catena e utilizza Evoca catena infernale.
+^srd-diavolo_delle_catene-multiattacco
 
 ### Catena
 
 *Tiro per colpire in mischia:* +7, portata 3 m. *Colpito:* 11 (2d6 + 4) danni taglienti. Se il bersaglio è una creatura di taglia Grande o inferiore, è afferrato (CD 14 per sfuggire) da una delle due catene, e resta trattenuto finché la presa perdura.
+^srd-diavolo_delle_catene-catena
 
 ### Evoca catena infernale
 
@@ -115,6 +126,7 @@ Il diavolo evoca una catena di fuoco per legare una creatura.
 *Fallimento:* 9 (2d4 + 4) danni da fuoco, e il bersaglio è trattenuto fino alla fine del turno successivo del diavolo; a quel punto la catena scompare. Se il bersaglio è di taglia Grande o inferiore, il diavolo lo trascina in linea retta verso di sé fino a un massimo di 9 metri.
 
 *Successo:* la catena svanisce.
+^srd-diavolo_delle_catene-evoca-catena-infernale
 ````
 
 > [!info] Licenza

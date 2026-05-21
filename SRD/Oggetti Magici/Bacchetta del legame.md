@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Oggetti Magici/Bacchetta del legame]]"]
+riferimenti_srd: ["[[SRD/Oggetti Magici/Bacchetta del legame]]"]
+riferimenti_regola: []
+sezioni_collegate: ["[[SRD/Oggetti Magici/Bacchetta del legame#Incantesimo Costo in cariche]]"]
+blocchi_collegati: []
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/oggetto-magico"]
 tipo_oggetto: "Bacchetta"
 tipo_base: "Bacchetta"
 rarita: "rara"
@@ -32,6 +39,7 @@ Mentre il personaggio impugna la bacchetta, può usarla per lanciare uno degli i
 ### Ripristinare le cariche
 
 All'alba di ogni giorno, la bacchetta recupera 1d6 + 1 cariche consumate. Se il personaggio consuma l'ultima carica, deve tirare 1d20. Se ottiene 1, la bacchetta va in cenere ed è distrutta
+^srd-bacchetta_del_legame-ripristinare-le-cariche
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

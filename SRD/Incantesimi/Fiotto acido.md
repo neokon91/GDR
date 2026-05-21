@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Incantesimi/Fiotto acido]]"]
+riferimenti_srd: ["[[SRD/Incantesimi/Fiotto acido]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Incantesimi/Fiotto acido#^srd-fiotto_acido-trucchetto-potenziato]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/incantesimo"]
 livello: 0
 scuola: "Invocazione"
 classi: ["mago", "stregone"]
@@ -36,6 +43,7 @@ L'incantatore crea una bolla di acido in un punto entro gittata, dove la bolla e
 ### Trucchetto potenziato
 
 I danni aumentano di 1d6 quando l'incantatore raggiunge il 5º livello (2d6), l'11º livello (3d6) e il 17º livello (4d6).
+^srd-fiotto_acido-trucchetto-potenziato
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

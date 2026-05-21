@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Drago verde cucciolo]]"]
+riferimenti_srd: ["[[SRD/Mostri/Drago verde cucciolo]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Drago verde cucciolo#^srd-drago_verde_cucciolo-anfibio]]", "[[SRD/Mostri/Drago verde cucciolo#^srd-drago_verde_cucciolo-multiattacco]]", "[[SRD/Mostri/Drago verde cucciolo#^srd-drago_verde_cucciolo-squarcio]]", "[[SRD/Mostri/Drago verde cucciolo#^srd-drago_verde_cucciolo-soffio-di-veleno-ricarica-5-6]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Drago verde cucciolo"
 type: "Drago (cromatico)"
 size: "medio"
@@ -93,19 +100,23 @@ tab: Azioni
 ### Anfibio
 
 Il drago può respirare in aria e in acqua.
+^srd-drago_verde_cucciolo-anfibio
 ## Azioni
 
 ### Multiattacco
 
 Il drago effettua due attacchi Squarcio.
+^srd-drago_verde_cucciolo-multiattacco
 
 ### Squarcio
 
 *Tiro per colpire in mischia:* +4, portata 1,5 m. *Colpito:* 7 (1d10 + 2) danni taglienti più 3 (1d6) danni da veleno.
+^srd-drago_verde_cucciolo-squarcio
 
 ### Soffio di veleno (ricarica 5-6)
 
 *Tiro salvezza su Costituzione:* CD 11, tutte le creature in un cono di 4,5 metri. *Fallimento:* 21 (6d6) danni da veleno. *Successo:* danni dimezzati.
+^srd-drago_verde_cucciolo-soffio-di-veleno-ricarica-5-6
 ````
 
 > [!info] Licenza

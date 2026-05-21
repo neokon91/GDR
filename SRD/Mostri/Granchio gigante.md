@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Granchio gigante]]"]
+riferimenti_srd: ["[[SRD/Mostri/Granchio gigante]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Granchio gigante#^srd-granchio_gigante-anfibio]]", "[[SRD/Mostri/Granchio gigante#^srd-granchio_gigante-artiglio]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Granchio gigante"
 type: "Bestia"
 size: "media"
@@ -86,11 +93,13 @@ tab: Azioni
 ### Anfibio
 
 Il granchio può respirare in aria e in acqua.
+^srd-granchio_gigante-anfibio
 ## Azioni
 
 ### Artiglio
 
 *Tiro per colpire in mischia:* +3, portata 1,5 m. *Colpito:* 4 (1d6 + 1) danni contundenti. Se il bersaglio è una creatura di taglia Media o inferiore, è afferrato (CD 11 per sfuggire) da una delle due chele.
+^srd-granchio_gigante-artiglio
 ````
 
 > [!info] Licenza

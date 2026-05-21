@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Equipaggiamento/Servizio magico 2]]"]
+riferimenti_srd: ["[[SRD/Equipaggiamento/Servizio magico 2]]"]
+riferimenti_regola: []
+sezioni_collegate: ["[[SRD/Equipaggiamento/Servizio magico 2#Dettagli]]"]
+blocchi_collegati: []
+tabelle_collegate: ["[[SRD/Equipaggiamento/Servizio magico 2#^srd-servizio_magico_2-dettagli]]"]
+tags: ["dnd55/srd"]
 capitolo: "Equipaggiamento"
 pagine_sorgente: "114-115"
 tipo_oggetto: "servizio"
@@ -42,6 +49,7 @@ Disponibilita Villaggio, cittadina o città; costo 200 mo.
 | Categoria | Servizio/Livello | Disponibilità | Costo |
 | --- | --- | --- | --- |
 | Servizi magici | 2 | Villaggio, cittadina o città | 200 mo |
+^srd-servizio_magico_2-dettagli
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

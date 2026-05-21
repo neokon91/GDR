@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Guardiano protettore]]"]
+riferimenti_srd: ["[[SRD/Mostri/Guardiano protettore]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Guardiano protettore#^srd-guardiano_protettore-incantesimo-custodito]]", "[[SRD/Mostri/Guardiano protettore#^srd-guardiano_protettore-rigenerazione]]", "[[SRD/Mostri/Guardiano protettore#^srd-guardiano_protettore-vincolato]]", "[[SRD/Mostri/Guardiano protettore#^srd-guardiano_protettore-multiattacco]]", "[[SRD/Mostri/Guardiano protettore#^srd-guardiano_protettore-pugno]]", "[[SRD/Mostri/Guardiano protettore#^srd-guardiano_protettore-protezione]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Guardiano protettore"
 type: "Costrutto"
 size: "grande"
@@ -90,23 +97,28 @@ tab: Azioni
 ### Incantesimo custodito
 
 Un incantatore che indossa l'amuleto del guardiano protettore può fare in modo che il guardiano custodisca un incantesimo di 4º livello o inferiore. Per farlo, il portatore deve lanciare l'incantesimo sul guardiano finché si trova entro 1,5 metri da esso. L'incantesimo non ha effetto, ma è custodito all'interno del guardiano. Quando gli viene affidato un nuovo incantesimo, quello custodito in precedenza viene sovrascritto. Il guardiano protettore può lanciare l'incantesimo custodito con qualsiasi parametro deciso dall'incantatore originale, senza bisogno di componenti e utilizzando la caratteristica da incantatore di quest'ultimo. Così facendo, l'incantesimo custodito va perduto.
+^srd-guardiano_protettore-incantesimo-custodito
 
 ### Rigenerazione
 
 Il guardiano protettore recupera 10 punti ferita all'inizio di ogni suo turno, se ha almeno 1 punto ferita.
+^srd-guardiano_protettore-rigenerazione
 
 ### Vincolato
 
 Il guardiano protettore è vincolato magicamente a un amuleto. Finché il guardiano e il suo amuleto si trovano sullo stesso piano di esistenza, il portatore dell'amuleto può chiamare telepaticamente ilguardiano affinché viaggi fino a lui. Il guardiano conosce la distanza e la direzione in cui si trova l'oggetto. Se il guardiano si trova entro 18 metri dal portatore dell'amuleto, la metà dei danni (arrotondati per eccesso) che il portatore subisce viene trasferita al guardiano.
+^srd-guardiano_protettore-vincolato
 ## Azioni
 
 ### Multiattacco
 
 Il guardiano effettua due attacchi Pugno.
+^srd-guardiano_protettore-multiattacco
 
 ### Pugno
 
 *Tiro per colpire in mischia:* +7, portata 3 m. *Colpito:* 11 (2d6 + 4) danni contundenti più 7 (2d6) danni da forza.
+^srd-guardiano_protettore-pugno
 ````
 
 > [!info] Licenza

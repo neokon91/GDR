@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Cespuglio risvegliato]]"]
+riferimenti_srd: ["[[SRD/Mostri/Cespuglio risvegliato]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Cespuglio risvegliato#^srd-cespuglio_risvegliato-graffiare]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Cespuglio risvegliato"
 type: "Vegetale"
 size: "piccolo"
@@ -80,6 +87,7 @@ tab: Azioni
 ### Graffiare
 
 *Tiro per colpire in mischia:* +1, portata 1,5 m. *Colpito:* 1 danno tagliente.
+^srd-cespuglio_risvegliato-graffiare
 ````
 
 > [!info] Licenza

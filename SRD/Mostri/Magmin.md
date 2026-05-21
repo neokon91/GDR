@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Magmin]]"]
+riferimenti_srd: ["[[SRD/Mostri/Magmin]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Magmin#^srd-magmin-esplosione-mortale]]", "[[SRD/Mostri/Magmin#^srd-magmin-tocco]]", "[[SRD/Mostri/Magmin#^srd-magmin-illuminazione-fiammeggiante]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Magmin"
 type: "Elementale"
 size: "piccolo"
@@ -84,11 +91,13 @@ tab: Azioni
 ### Esplosione mortale
 
 Il magmin esplode quando muore. *Tiro salvezza su Destrezza:* CD 11, tutte le creature in un'emanazione di 3 metri di cui il magmin è il punto di origine. *Fallimento:* 7 (2d6) danni da fuoco. *Successo:* danni dimezzati.
+^srd-magmin-esplosione-mortale
 ## Azioni
 
 ### Tocco
 
 *Tiro per colpire in mischia:* +4, portata 1,5 m. *Colpito:* 7 (2d4 + 2) danni da fuoco. Se il bersaglio è una creatura o un oggetto infiammabile che non è indossato o trasportato, prende fuoco.
+^srd-magmin-tocco
 ````
 
 > [!info] Licenza

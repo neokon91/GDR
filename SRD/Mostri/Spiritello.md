@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Spiritello]]"]
+riferimenti_srd: ["[[SRD/Mostri/Spiritello]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Spiritello#^srd-spiritello-ago-da-battaglia]]", "[[SRD/Mostri/Spiritello#^srd-spiritello-arco-ammaliante]]", "[[SRD/Mostri/Spiritello#^srd-spiritello-invisibilita]]", "[[SRD/Mostri/Spiritello#^srd-spiritello-vista-del-cuore]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Spiritello"
 type: "Folletto"
 size: "minuscolo"
@@ -91,18 +98,22 @@ tab: Azioni
 ### Ago da battaglia
 
 *Tiro per colpire in mischia:* +6, portata 1,5 m *Colpito:* 6 (1d4 + 4) danni perforanti.
+^srd-spiritello-ago-da-battaglia
 
 ### Arco ammaliante
 
 *Tiro per colpire a distanza:* +6, portata 12/48 m *Colpito:* 1 danno perforante e il bersaglio è affascinato fino all'inizio del turno successivo dello spiritello.
+^srd-spiritello-arco-ammaliante
 
 ### Invisibilità
 
 Lo spiritello può lanciare invisibilità su di sé senza bisogno di componenti per incantesimi e utilizzando il Carisma come caratteristica da incantatore.
+^srd-spiritello-invisibilita
 
 ### Vista del cuore
 
 *Tiro salvezza su Carisma:* CD 10, una creatura entro 1,5 metri che lo spiritello è in grado di vedere (celestiali, immondi e non morti falliscono in automatico la prova). *Fallimento:* lo spiritello conosce le emozioni e l'allineamento del bersaglio. Succube
+^srd-spiritello-vista-del-cuore
 ````
 
 > [!info] Licenza

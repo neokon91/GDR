@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Cavalluccio marino gigante]]"]
+riferimenti_srd: ["[[SRD/Mostri/Cavalluccio marino gigante]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Cavalluccio marino gigante#^srd-cavalluccio_marino_gigante-respirare-sott-acqua]]", "[[SRD/Mostri/Cavalluccio marino gigante#^srd-cavalluccio_marino_gigante-sfondamento]]", "[[SRD/Mostri/Cavalluccio marino gigante#^srd-cavalluccio_marino_gigante-scatto-acquatico]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Cavalluccio marino gigante"
 type: "Bestia"
 size: "grande"
@@ -84,11 +91,13 @@ tab: Azioni
 ### Respirare sott'acqua
 
 Il cavalluccio marino può respirare solo sott'acqua.
+^srd-cavalluccio_marino_gigante-respirare-sott-acqua
 ## Azioni
 
 ### Sfondamento
 
 *Tiro per colpire in mischia:* +4, portata 1,5 m *Colpito:* 9 (2d6 + 2) danni contundenti, o 11 (2d8 + 2) danni contundenti se il cavalluccio marino si è mosso di 6 metri o più in linea retta verso il bersaglio subito prima del colpo.
+^srd-cavalluccio_marino_gigante-sfondamento
 ````
 
 > [!info] Licenza

@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Equipaggiamento/Mulo]]"]
+riferimenti_srd: ["[[SRD/Equipaggiamento/Mulo]]"]
+riferimenti_regola: []
+sezioni_collegate: ["[[SRD/Equipaggiamento/Mulo#Dettagli]]"]
+blocchi_collegati: []
+tabelle_collegate: ["[[SRD/Equipaggiamento/Mulo#^srd-mulo-dettagli]]"]
+tags: ["dnd55/srd"]
 capitolo: "Equipaggiamento"
 pagine_sorgente: "113-114"
 tipo_oggetto: "cavalcatura"
@@ -42,6 +49,7 @@ Capacita di trasporto 210 kg; costo 8 mo.
 | Oggetto | Capacità di trasporto | Costo |
 | --- | --- | --- |
 | Mulo | 210 kg | 8 mo |
+^srd-mulo-dettagli
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Pirata]]"]
+riferimenti_srd: ["[[SRD/Mostri/Pirata]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Pirata#^srd-pirata-multiattacco]]", "[[SRD/Mostri/Pirata#^srd-pirata-pugnale]]", "[[SRD/Mostri/Pirata#^srd-pirata-baldanza-irresistibile]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Pirata"
 type: "Umanoide"
 size: "medio o piccolo"
@@ -86,14 +93,17 @@ tab: Azioni
 ### Multiattacco
 
 Il pirata effettua due attacchi Pugnale. Può sostituire un attacco con un utilizzo di Baldanza irresistibile.
+^srd-pirata-multiattacco
 
 ### Pugnale
 
 *Tiro per colpire in mischia o a distanza:* +5, portata 1,5 m o gittata 6/18 m *Colpito:* 5 (1d4 + 3) danni perforanti.
+^srd-pirata-pugnale
 
 ### Baldanza irresistibile
 
 *Tiro salvezza su Saggezza:* CD 12, una creatura che il pirata è in grado di vedere entro 9 metri. *Fallimento:* il bersaglio è affascinato fino all'inizio del turno successivo del pirata.
+^srd-pirata-baldanza-irresistibile
 ````
 
 > [!info] Licenza

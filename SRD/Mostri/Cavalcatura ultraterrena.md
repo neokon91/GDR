@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Cavalcatura ultraterrena]]"]
+riferimenti_srd: ["[[SRD/Mostri/Cavalcatura ultraterrena]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Cavalcatura ultraterrena#^srd-cavalcatura_ultraterrena-legame-con-l-incantatore]]", "[[SRD/Mostri/Cavalcatura ultraterrena#^srd-cavalcatura_ultraterrena-tipo-ultraterreno-scelta]]", "[[SRD/Mostri/Cavalcatura ultraterrena#^srd-cavalcatura_ultraterrena-zoccoli-o-attacco-naturale-equivalente]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Cavalcatura ultraterrena"
 type: "Celestiale, Folletto o Immondo (a scelta)"
 size: "grande"
@@ -84,16 +91,19 @@ tab: Azioni
 ### Legame con l'incantatore
 
 La cavalcatura è sotto il controllo dell'incantatore e agisce nel suo turno. Può muoversi e usare la sua reazione autonomamente, ma esegue le azioni secondo i comandi dell'incantatore.
+^srd-cavalcatura_ultraterrena-legame-con-l-incantatore
 
 ### Tipo ultraterreno (scelta)
 
 Quando viene evocata, scegli uno dei seguenti tipi: celestiale, folletto o immondo. Il tipo può influenzare l’aspetto e alcune interazioni magiche.
+^srd-cavalcatura_ultraterrena-tipo-ultraterreno-scelta
 ## Azioni
 
 ### Zoccoli (o attacco naturale equivalente)
 
 *Tiro per colpire in mischia:* bonus pari al modificatore di attacco dell'incantesimo dell'incantatore, portata 1,5 m.  
 *Colpito:* 1d8 + 4 + il bonus di competenza dell'incantatore danni contundenti (o altro tipo appropriato alla forma).
+^srd-cavalcatura_ultraterrena-zoccoli-o-attacco-naturale-equivalente
 ````
 
 > [!info] Licenza

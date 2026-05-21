@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Classi/Barbaro]]"]
+riferimenti_srd: ["[[SRD/Classi/Barbaro]]"]
+riferimenti_regola: []
+sezioni_collegate: ["[[SRD/Classi/Barbaro#Tratti di classe]]", "[[SRD/Classi/Barbaro#Progressione di classe]]", "[[SRD/Classi/Barbaro#Privilegi chiave]]", "[[SRD/Classi/Barbaro#Sottoclasse del barbaro: Cammino del berserker]]"]
+blocchi_collegati: []
+tabelle_collegate: ["[[SRD/Classi/Barbaro#^srd-barbaro-tratti-di-classe]]", "[[SRD/Classi/Barbaro#^srd-barbaro-progressione-di-classe]]", "[[SRD/Classi/Barbaro#^srd-barbaro-privilegi-chiave]]", "[[SRD/Classi/Barbaro#^srd-barbaro-sottoclasse-del-barbaro-cammino-del-berserker]]"]
+tags: ["dnd55/srd"]
 capitolo: "Classi"
 pagine_sorgente: "32-35"
 caratteristica_primaria: ["Forza"]
@@ -41,6 +48,7 @@ A: ascia bipenne, 4 asce, dotazione da esploratore e 15 mo; oppure B: 75 mo.
 | Armi | Armi semplici e da guerra. |
 | Armature | Armature leggere e medie; scudi. |
 | Equipaggiamento iniziale | A: ascia bipenne, 4 asce, dotazione da esploratore e 15 mo; oppure B: 75 mo. |
+^srd-barbaro-tratti-di-classe
 
 ## Progressione di classe
 
@@ -66,6 +74,7 @@ A: ascia bipenne, 4 asce, dotazione da esploratore e 15 mo; oppure B: 75 mo.
 | 18 | +6 | Potenza indomabile | 6 | +4 | 4 |
 | 19 | +6 | Dono epico | 6 | +4 | 4 |
 | 20 | +6 | Campione primordiale | 6 | +4 | 4 |
+^srd-barbaro-progressione-di-classe
 
 ## Privilegi chiave
 
@@ -75,6 +84,7 @@ A: ascia bipenne, 4 asce, dotazione da esploratore e 15 mo; oppure B: 75 mo.
 | Difesa senza armatura | Classe Armatura basata su Destrezza e Costituzione quando non indossa armatura. |
 | Attacco irruento | Vantaggio agli attacchi basati su Forza, concedendo vantaggio contro di se fino al turno successivo. |
 | Colpo brutale | Rinuncia al vantaggio per infliggere danni extra ed effetti di controllo. |
+^srd-barbaro-privilegi-chiave
 
 ## Sottoclasse del barbaro: Cammino del berserker
 
@@ -84,6 +94,7 @@ A: ascia bipenne, 4 asce, dotazione da esploratore e 15 mo; oppure B: 75 mo.
 | 6 | Ira incontenibile | Durante l'ira non puo essere affascinato o spaventato; se lo era, la condizione termina. |
 | 10 | Ritorsione | Quando subisce danni da una creatura entro 1,5 m puo reagire con un attacco in mischia. |
 | 14 | Presenza intimidatoria | Come azione bonus puo spaventare creature scelte entro 9 m con TS Saggezza. |
+^srd-barbaro-sottoclasse-del-barbaro-cammino-del-berserker
 
 ## Progressione
 

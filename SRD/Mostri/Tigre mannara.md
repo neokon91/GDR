@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Tigre mannara]]"]
+riferimenti_srd: ["[[SRD/Mostri/Tigre mannara]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Tigre mannara#^srd-tigre_mannara-multiattacco]]", "[[SRD/Mostri/Tigre mannara#^srd-tigre_mannara-graffio]]", "[[SRD/Mostri/Tigre mannara#^srd-tigre_mannara-morso-solo-in-forma-di-tigre-o-ibrida]]", "[[SRD/Mostri/Tigre mannara#^srd-tigre_mannara-arco-lungo-solo-in-forma-umanoide-o-ibrida]]", "[[SRD/Mostri/Tigre mannara#^srd-tigre_mannara-movimento-predatorio-solo-in-forma-di-tigre-o-ibrida]]", "[[SRD/Mostri/Tigre mannara#^srd-tigre_mannara-mutaforma]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Tigre mannara"
 type: "Mostruosità (licantropo)"
 size: "media o piccola"
@@ -95,18 +102,22 @@ tab: Azioni
 ### Multiattacco
 
 La tigre mannara effettua due attacchi, usando Graffio o Arco lungo in qualsiasi combinazione. Può sostituire un attacco con un attacco Morso.
+^srd-tigre_mannara-multiattacco
 
 ### Graffio
 
 *Tiro per colpire in mischia:* +5, portata 1,5 m. *Colpito:* 10 (2d6 + 3) danni taglienti.
+^srd-tigre_mannara-graffio
 
 ### Morso (solo in forma di tigre o ibrida)
 
 *Tiro per colpire in mischia:* +5, portata 1,5 m *Colpito:* 12 (2d8 + 3) danni perforanti. Se il bersaglio è un umanoide, subisce il seguente effetto. *Tiro salvezza su Costituzione:* CD 13. *Fallimento:* il bersaglio è maledetto. Se il bersaglio scende a 0 punti ferita, diventa una tigre mannara sotto il controllo del GM e ha 10 punti ferita. *Successo:* il bersaglio è immune alla maledizione della tigre mannara per 24 ore.
+^srd-tigre_mannara-morso-solo-in-forma-di-tigre-o-ibrida
 
 ### Arco lungo (solo in forma umanoide o ibrida)
 
 *Tiro per colpire a distanza:* +4, gittata 45/180 m. *Colpito:* 11 (2d8 + 2) danni perforanti.
+^srd-tigre_mannara-arco-lungo-solo-in-forma-umanoide-o-ibrida
 ````
 
 > [!info] Licenza

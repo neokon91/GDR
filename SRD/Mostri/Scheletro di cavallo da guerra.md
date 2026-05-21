@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Scheletro di cavallo da guerra]]"]
+riferimenti_srd: ["[[SRD/Mostri/Scheletro di cavallo da guerra]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Scheletro di cavallo da guerra#^srd-scheletro_di_cavallo_da_guerra-zoccoli]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Scheletro di cavallo da guerra"
 type: "Non morto"
 size: "grande"
@@ -83,6 +90,7 @@ tab: Azioni
 
 **Colpito:** 7 (1d6 + 4) danni contundenti
 Se il bersaglio è una creatura di taglia Grande o inferiore e lo scheletro si è mosso di 6 metri o più in linea retta verso di esso subito prima del colpo, il bersaglio cade a terra prono.
+^srd-scheletro_di_cavallo_da_guerra-zoccoli
 ````
 
 > [!info] Licenza

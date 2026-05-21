@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Bugbear guerriero]]"]
+riferimenti_srd: ["[[SRD/Mostri/Bugbear guerriero]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Bugbear guerriero#^srd-bugbear_guerriero-rapimento]]", "[[SRD/Mostri/Bugbear guerriero#^srd-bugbear_guerriero-martello-leggero]]", "[[SRD/Mostri/Bugbear guerriero#^srd-bugbear_guerriero-presa]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Bugbear guerriero"
 type: "Folletto (goblinoide)"
 size: "medio"
@@ -89,15 +96,18 @@ tab: Azioni
 ### Rapimento
 
 Il bugbear non ha bisogno di usare movimento extra per spostare una creatura che sta afferrando.
+^srd-bugbear_guerriero-rapimento
 ## Azioni
 
 ### Martello leggero
 
 *Tiro per colpire in mischia o a distanza:* +4 (con vantaggio se il bersaglio è afferrato dal bugbear), portata 3 m o gittata 6/18 m. *Colpito:* 9 (3d4 + 2) danni contundenti.
+^srd-bugbear_guerriero-martello-leggero
 
 ### Presa
 
 *Tiro per colpire in mischia:* +4, portata 3 m. *Colpito:* 9 (2d6 + 2) danni contundenti. Se il bersaglio è una creatura di taglia Media o inferiore, è afferrato (CD 12 per sfuggire).
+^srd-bugbear_guerriero-presa
 ````
 
 > [!info] Licenza

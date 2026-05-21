@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Xorn]]"]
+riferimenti_srd: ["[[SRD/Mostri/Xorn]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Xorn#^srd-xorn-percezione-dei-tesori]]", "[[SRD/Mostri/Xorn#^srd-xorn-scivolare-nella-terra]]", "[[SRD/Mostri/Xorn#^srd-xorn-multiattacco]]", "[[SRD/Mostri/Xorn#^srd-xorn-artiglio]]", "[[SRD/Mostri/Xorn#^srd-xorn-morso]]", "[[SRD/Mostri/Xorn#^srd-xorn-carica]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Xorn"
 type: "Elementale"
 size: "medio"
@@ -95,23 +102,28 @@ tab: Azioni
 ### Percezione dei tesori
 
 Lo xorn può individuare la posizione di pietre e metalli preziosi entro 18 metri da sé.
+^srd-xorn-percezione-dei-tesori
 
 ### Scivolare nella terra
 
 Lo xorn può scavare attraverso la terra e la pietra non magiche e non lavorate, senza disturbare il materiale attraverso cui si muove.
+^srd-xorn-scivolare-nella-terra
 ## Azioni
 
 ### Multiattacco
 
 Lo xorn effettua un attacco Morso e tre attacchi Artiglio.
+^srd-xorn-multiattacco
 
 ### Artiglio
 
 *Tiro per colpire in mischia:* +6, portata 1,5 m. *Colpito:* 8 (1d10 + 3) danni taglienti.
+^srd-xorn-artiglio
 
 ### Morso
 
 *Tiro per colpire in mischia:* +6, portata 1,5 m. *Colpito:* 17 (4d6 + 3) danni perforanti.
+^srd-xorn-morso
 ````
 
 > [!info] Licenza

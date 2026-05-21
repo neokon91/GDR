@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Regole/Le sei caratteristiche]]"]
+riferimenti_srd: ["[[SRD/Regole/Le sei caratteristiche]]"]
+riferimenti_regola: []
+sezioni_collegate: ["[[SRD/Regole/Le sei caratteristiche#Modificatori di caratteristica]]"]
+blocchi_collegati: []
+tabelle_collegate: ["[[SRD/Regole/Le sei caratteristiche#^srd-sei_caratteristiche-modificatori-di-caratteristica]]"]
+tags: ["dnd55/srd", "dnd55/regola"]
 capitolo: "Come si gioca"
 categoria_regola: "Fondamenti"
 pagine_sorgente: "5-6"
@@ -38,6 +45,7 @@ Tutte le creature hanno sei caratteristiche che misurano capacita fisiche e ment
 | 26-27 | +8 |
 | 28-29 | +9 |
 | 30 | +10 |
+^srd-sei_caratteristiche-modificatori-di-caratteristica
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

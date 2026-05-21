@@ -63,6 +63,8 @@ async function creatura(tp){
     const mondo = await helpers.chooseWorld(tp, prompts.mondo ?? "Mondo della creatura");
     const context = { world: mondo };
     const luoghi = await helpers.chooseLocations(tp, prompts.luoghi ?? "Luoghi o habitat collegati", context);
+    const fonti = await helpers.promptWikilinkTargets(tp, prompts.fonti ?? "Fonti granulari (wikilink, anche Nota#Sezione o Nota#^blocco)");
+    const riferimentiRegola = await helpers.promptWikilinkTargets(tp, prompts.riferimenti_regola ?? "Riferimenti regola per statblock e GS");
 
     // === STATISTICHE ===
     const ac = await helpers.promptOptional(tp, prompts.ac ?? "Classe Armatura", "15") || "15";
@@ -119,7 +121,17 @@ async function creatura(tp){
         bonus_actions: tp.user.helpers.inlineYamlArray(bonusActions),
         reactions: tp.user.helpers.inlineYamlArray(reactions),
         legendary_actions: '[]',
-        lair_actions: '[]'
+        lair_actions: '[]',
+        fonti: helpers.inlineYamlWikilinkList(fonti),
+        riferimenti_srd: helpers.inlineYamlWikilinkList([
+            "[[SRD/Regole/Scheda delle statistiche del mostro]]",
+            "[[SRD/Glossario/Taglia]]"
+        ]),
+        riferimenti_regola: helpers.inlineYamlWikilinkList(riferimentiRegola),
+        sezioni_collegate: '[]',
+        blocchi_collegati: '[]',
+        tabelle_collegate: '[]',
+        tags: helpers.inlineYamlTextList(["dnd55/creatura", "dnd55/homebrew", "gdr/bozza"])
     });
 }
 

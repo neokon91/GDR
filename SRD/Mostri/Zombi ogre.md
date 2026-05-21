@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Zombi ogre]]"]
+riferimenti_srd: ["[[SRD/Mostri/Zombi ogre]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Zombi ogre#^srd-zombi_ogre-tempra-dei-non-morti]]", "[[SRD/Mostri/Zombi ogre#^srd-zombi_ogre-schianto]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Zombi ogre"
 type: "Non morto"
 size: "grande"
@@ -83,11 +90,13 @@ tab: Azioni
 ### Tempra dei non morti
 
 Se i danni riducono lo zombi a 0 punti ferita, esso effettua un tiro salvezza su Costituzione (CD pari a 5 più i danni subiti), a meno che non si tratti di danni radiosi o di un colpo critico. In caso di successo, scende invece a 1 punto ferita.
+^srd-zombi_ogre-tempra-dei-non-morti
 ## Azioni
 
 ### Schianto
 
 *Tiro per colpire in mischia:* +6, portata 1,5 m. *Colpito:* 13 (2d8 + 4) danni contundenti.
+^srd-zombi_ogre-schianto
 ````
 
 > [!info] Licenza

@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Squalo cacciatore]]"]
+riferimenti_srd: ["[[SRD/Mostri/Squalo cacciatore]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Squalo cacciatore#^srd-squalo_cacciatore-respirare-sott-acqua]]", "[[SRD/Mostri/Squalo cacciatore#^srd-squalo_cacciatore-morso]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Squalo cacciatore"
 type: "Bestia"
 size: "grande"
@@ -86,11 +93,13 @@ tab: Azioni
 ### Respirare sott'acqua
 
 Lo squalo può respirare soltanto sott'acqua.
+^srd-squalo_cacciatore-respirare-sott-acqua
 ## Azioni
 
 ### Morso
 
 *Tiro per colpire in mischia:* +6 (con vantaggio se il bersaglio non ha tutti i punti ferita), portata 1,5 m. *Colpito:* 14 (3d6 + 4) danni perforanti.
+^srd-squalo_cacciatore-morso
 ````
 
 > [!info] Licenza

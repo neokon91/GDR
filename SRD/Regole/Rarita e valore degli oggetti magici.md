@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Regole/Rarita e valore degli oggetti magici]]"]
+riferimenti_srd: ["[[SRD/Regole/Rarita e valore degli oggetti magici]]"]
+riferimenti_regola: []
+sezioni_collegate: ["[[SRD/Regole/Rarita e valore degli oggetti magici#Valori per rarita]]", "[[SRD/Regole/Rarita e valore degli oggetti magici#Disponibilita indicativa]]"]
+blocchi_collegati: []
+tabelle_collegate: ["[[SRD/Regole/Rarita e valore degli oggetti magici#^srd-rarita_e_valore_oggetti_magici-valori-per-rarita]]", "[[SRD/Regole/Rarita e valore degli oggetti magici#^srd-rarita_e_valore_oggetti_magici-disponibilita-indicativa]]"]
+tags: ["dnd55/srd", "dnd55/regola"]
 capitolo: "Oggetti magici"
 categoria_regola: "Oggetti magici"
 pagine_sorgente: "233-234"
@@ -28,6 +35,7 @@ La rarita misura approssimativamente il potere di un oggetto magico e puo aiutar
 | Molto raro | 40.000 mo |
 | Leggendario | 200.000 mo |
 | Manufatto | Inestimabile |
+^srd-rarita_e_valore_oggetti_magici-valori-per-rarita
 
 ## Disponibilita indicativa
 
@@ -36,6 +44,7 @@ La rarita misura approssimativamente il potere di un oggetto magico e puo aiutar
 | Comune | Spesso acquistabile in una cittadina o una citta grande. |
 | Non comune e raro | Solitamente reperibile solo nelle citta grandi. |
 | Molto raro e oltre | Potrebbe essere venduto solo in luoghi meravigliosi, come una citta su un altro piano di esistenza. |
+^srd-rarita_e_valore_oggetti_magici-disponibilita-indicativa
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

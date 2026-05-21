@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Diavolo uncinato]]"]
+riferimenti_srd: ["[[SRD/Mostri/Diavolo uncinato]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Diavolo uncinato#^srd-diavolo_uncinato-pelle-uncinata]]", "[[SRD/Mostri/Diavolo uncinato#^srd-diavolo_uncinato-resistenza-alla-magia]]", "[[SRD/Mostri/Diavolo uncinato#^srd-diavolo_uncinato-ristoro-diabolico]]", "[[SRD/Mostri/Diavolo uncinato#^srd-diavolo_uncinato-multiattacco]]", "[[SRD/Mostri/Diavolo uncinato#^srd-diavolo_uncinato-artigli]]", "[[SRD/Mostri/Diavolo uncinato#^srd-diavolo_uncinato-coda]]", "[[SRD/Mostri/Diavolo uncinato#^srd-diavolo_uncinato-scagliare-fiamma]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Diavolo uncinato"
 type: "Immondo (diavolo)"
 size: "medio"
@@ -102,31 +109,38 @@ tab: Azioni
 ### Pelle uncinata
 
 All'inizio di ogni suo turno, il diavolo infligge 5 (1d10) danni perforanti a tutte le creature che afferra o a qualsiasi creatura lo afferri.
+^srd-diavolo_uncinato-pelle-uncinata
 
 ### Resistenza alla magia
 
 Il diavolo dispone di vantaggio ai tiri salvezza contro incantesimi e altri effetti magici.
+^srd-diavolo_uncinato-resistenza-alla-magia
 
 ### Ristoro diabolico
 
 Se il diavolo muore al di fuori dei Nove Inferi, il suo corpo si dissolve in fumo sulfureo e ne acquisisce uno nuovo all'istante, tornando in vita con tutti i suoi punti ferita da qualche parte nei Nove Inferi.
+^srd-diavolo_uncinato-ristoro-diabolico
 ## Azioni
 
 ### Multiattacco
 
 Il diavolo effettua un attacco Artigli e un attacco Coda, o effettua due attacchi Scagliare fiamma.
+^srd-diavolo_uncinato-multiattacco
 
 ### Artigli
 
 *Tiro per colpire in mischia:* +6, portata 1,5 m. *Colpito:* 10 (2d6 + 3) danni perforanti. Se il bersaglio è una creatura di taglia Grande o inferiore, è afferrato (CD 13 per sfuggire) da entrambi gli artigli.
+^srd-diavolo_uncinato-artigli
 
 ### Coda
 
 *Tiro per colpire in mischia:* +6, portata 3 m. *Colpito:* 14 (2d10 + 3) danni taglienti.
+^srd-diavolo_uncinato-coda
 
 ### Scagliare fiamma
 
 *Tiro per colpire a distanza:* +5, gittata 45 m. *Colpito:* 17 (5d6) danni da fuoco. Se il bersaglio è un oggetto infiammabile che non è indossato o trasportato, inizia a bruciare.
+^srd-diavolo_uncinato-scagliare-fiamma
 ````
 
 > [!info] Licenza

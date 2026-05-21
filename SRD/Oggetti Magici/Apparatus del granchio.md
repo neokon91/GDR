@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Oggetti Magici/Apparatus del granchio]]"]
+riferimenti_srd: ["[[SRD/Oggetti Magici/Apparatus del granchio]]"]
+riferimenti_regola: []
+sezioni_collegate: ["[[SRD/Oggetti Magici/Apparatus del granchio#Leva Su Giù]]"]
+blocchi_collegati: []
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/oggetto-magico"]
 tipo_oggetto: "Oggetto meraviglioso"
 tipo_base: "Oggetto meraviglioso"
 rarita: "leggendario"

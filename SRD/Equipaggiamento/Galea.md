@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Equipaggiamento/Galea]]"]
+riferimenti_srd: ["[[SRD/Equipaggiamento/Galea]]"]
+riferimenti_regola: []
+sezioni_collegate: ["[[SRD/Equipaggiamento/Galea#Dettagli]]"]
+blocchi_collegati: []
+tabelle_collegate: ["[[SRD/Equipaggiamento/Galea#^srd-galea-dettagli]]"]
+tags: ["dnd55/srd"]
 capitolo: "Equipaggiamento"
 pagine_sorgente: "113-114"
 tipo_oggetto: "veicolo"
@@ -42,6 +49,7 @@ Velocita 6 km/h; costo 30.000 mo.
 | Nave | Velocità | Equipaggio | Passeggeri | Carico | CA | PF | Soglia di danno | Costo |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | Galea | 6 km/h | 80 | - | 150 t | 15 | 500 | 20 | 30.000 mo |
+^srd-galea-dettagli
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

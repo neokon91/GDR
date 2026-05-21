@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Background/Criminale]]"]
+riferimenti_srd: ["[[SRD/Background/Criminale]]"]
+riferimenti_regola: []
+sezioni_collegate: ["[[SRD/Background/Criminale#Dettagli]]"]
+blocchi_collegati: []
+tabelle_collegate: ["[[SRD/Background/Criminale#^srd-criminale-dettagli]]"]
+tags: ["dnd55/srd"]
 capitolo: "Origini dei personaggi"
 pagine_sorgente: 93
 punteggi_caratteristica: ["Destrezza", "Costituzione", "Intelligenza"]
@@ -36,6 +43,7 @@ Destrezza, Costituzione, Intelligenza; Allerta; Rapidita di mano e Furtivita; ar
 | Abilita | Rapidita di mano e Furtivita |
 | Strumenti | arnesi da scasso. |
 | Equipaggiamento alternativo | 50 mo |
+^srd-criminale-dettagli
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

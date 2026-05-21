@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Naga spirituale]]"]
+riferimenti_srd: ["[[SRD/Mostri/Naga spirituale]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Naga spirituale#^srd-naga_spirituale-ristoro-immondo]]", "[[SRD/Mostri/Naga spirituale#^srd-naga_spirituale-multiattacco]]", "[[SRD/Mostri/Naga spirituale#^srd-naga_spirituale-morso]]", "[[SRD/Mostri/Naga spirituale#^srd-naga_spirituale-raggio-necrotico]]", "[[SRD/Mostri/Naga spirituale#^srd-naga_spirituale-incantesimi]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Naga spirituale"
 type: "Immondo"
 size: "grande"
@@ -92,23 +99,28 @@ tab: Azioni
 ### Ristoro immondo
 
 Se la naga muore, torna in vita dopo 1d6 giorni e recupera tutti i suoi punti ferita. Solo un incantesimo desiderio può impedire a questo tratto di funzionare.
+^srd-naga_spirituale-ristoro-immondo
 ## Azioni
 
 ### Multiattacco
 
 La naga effettua tre attacchi, usando Morso o Raggio necrotico in qualsiasi combinazione.
+^srd-naga_spirituale-multiattacco
 
 ### Morso
 
 *Tiro per colpire in mischia:* +7, portata 3 m. *Colpito:* 7 (1d6 + 4) danni perforanti più 14 (4d6) danni da veleno.
+^srd-naga_spirituale-morso
 
 ### Raggio necrotico
 
 *Tiro per colpire a distanza:* +6, gittata 18 m. *Colpito:* 21 (6d6) danni necrotici.
+^srd-naga_spirituale-raggio-necrotico
 
 ### Incantesimi
 
 La naga lancia uno dei seguenti incantesimi, senza bisogno di componenti somatiche o materiali, utilizzando Intelligenza come caratteristica da incantatore (CD del tiro salvezza sull'incantesimo 14): 2/giorno ciascuno: blocca persone (di 3º livello), individuazione dei pensieri, fulmine (di 4º livello), porta dimensionaleA volontà: illusione minore, individuazione del magico, mano magica, respirare sott'acqua
+^srd-naga_spirituale-incantesimi
 ````
 
 > [!info] Licenza

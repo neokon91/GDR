@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Golem di carne]]"]
+riferimenti_srd: ["[[SRD/Mostri/Golem di carne]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Golem di carne#^srd-golem_di_carne-assorbimento-del-fulmine]]", "[[SRD/Mostri/Golem di carne#^srd-golem_di_carne-avversione-al-fuoco]]", "[[SRD/Mostri/Golem di carne#^srd-golem_di_carne-berserk]]", "[[SRD/Mostri/Golem di carne#^srd-golem_di_carne-forma-immutabile]]", "[[SRD/Mostri/Golem di carne#^srd-golem_di_carne-resistenza-alla-magia]]", "[[SRD/Mostri/Golem di carne#^srd-golem_di_carne-multiattacco]]", "[[SRD/Mostri/Golem di carne#^srd-golem_di_carne-schianto]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Golem di carne"
 type: "Costrutto"
 size: "medio"
@@ -92,31 +99,38 @@ tab: Azioni
 ### Assorbimento del fulmine
 
 Ogni volta che il golem subisce danni da fulmine, recupera un numero di punti ferita pari ai danni da fulmine inflitti.
+^srd-golem_di_carne-assorbimento-del-fulmine
 
 ### Avversione al fuoco
 
 Se il golem subisce danni da fuoco, subisce svantaggio ai tiri per colpire e alle prove di caratteristica fino al termine del proprio turno successivo.
+^srd-golem_di_carne-avversione-al-fuoco
 
 ### Berserk
 
 Ogni volta che il golem inizia il suo turno sanguinante, tira 1d6. Se esce 6, il golem entra in uno stato di berserk. A ogni suo turno, finché è in stato di berserk, il golem attacca la creatura più vicina che è in grado di vedere. Se nessuna creatura è abbastanza vicina per essere attaccata, il golem si scaglia contro un oggetto. Una volta che il golem entra in stato di berserk, rimane in questo stato finché non viene distrutto o non è più sanguinante. Il creatore del golem, se si trova entro 18 metri dal golem in stato di berserk, può cercare di calmarlo eseguendo un'azione per effettuare una prova di Carisma (Persuasione) con CD 15. Il golem deve essere in grado di udire il suo creatore. Se la prova ha successo, il golem esce dallo stato di berserk fino all'inizio del proprio turno successivo; a quel punto, se è ancora sanguinante, riprende a effettuare il tiro del tratto Berserk.
+^srd-golem_di_carne-berserk
 
 ### Forma immutabile
 
 Il golem non può mutare forma.
+^srd-golem_di_carne-forma-immutabile
 
 ### Resistenza alla magia
 
 Il golem dispone di vantaggio ai tiri salvezza contro incantesimi e altri effetti magici.
+^srd-golem_di_carne-resistenza-alla-magia
 ## Azioni
 
 ### Multiattacco
 
 Il golem effettua due attacchi Schianto.
+^srd-golem_di_carne-multiattacco
 
 ### Schianto
 
 *Tiro per colpire in mischia:* +7, portata 1,5 m. *Colpito:* 13 (2d8 + 4) danni contundenti più 4 (1d8) danni da fulmine.
+^srd-golem_di_carne-schianto
 ````
 
 > [!info] Licenza

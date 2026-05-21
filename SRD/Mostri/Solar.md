@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Solar]]"]
+riferimenti_srd: ["[[SRD/Mostri/Solar]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Solar#^srd-solar-consapevolezza-divina]]", "[[SRD/Mostri/Solar#^srd-solar-resistenza-alla-magia]]", "[[SRD/Mostri/Solar#^srd-solar-resistenza-leggendaria-4-giorno]]", "[[SRD/Mostri/Solar#^srd-solar-ristoro-glorioso]]", "[[SRD/Mostri/Solar#^srd-solar-multiattacco]]", "[[SRD/Mostri/Solar#^srd-solar-spada-volante]]", "[[SRD/Mostri/Solar#^srd-solar-arco-assassino]]", "[[SRD/Mostri/Solar#^srd-solar-incantesimi]]", "[[SRD/Mostri/Solar#^srd-solar-aiuto-divino-3-giorno]]", "[[SRD/Mostri/Solar#^srd-solar-sguardo-accecante]]", "[[SRD/Mostri/Solar#^srd-solar-teletrasporto-radioso]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Solar"
 type: "Celestiale (angelo)"
 size: "grande"
@@ -104,35 +111,43 @@ tab: Azioni
 ### Consapevolezza divina
 
 Il solar sa riconoscere le menzogne.
+^srd-solar-consapevolezza-divina
 
 ### Resistenza alla magia
 
 Il solar dispone di vantaggio ai tiri salvezza contro incantesimi e altri effetti magici.
+^srd-solar-resistenza-alla-magia
 
 ### Resistenza leggendaria (4/giorno)
 
 Se il solar fallisce un tiro salvezza, può scegliere di superarlo comunque.
+^srd-solar-resistenza-leggendaria-4-giorno
 
 ### Ristoro glorioso
 
 Se il solar muore al di fuori di Monte Celestia, il suo corpo scompare e ne acquisisce uno nuovo all'istante, tornando in vita con tutti i suoi punti ferita da qualche parte a Monte Celestia.
+^srd-solar-ristoro-glorioso
 ## Azioni
 
 ### Multiattacco
 
 Il solar effettua due attacchi Spada volante. Può sostituire un attacco con un utilizzo di Arco assassino.
+^srd-solar-multiattacco
 
 ### Spada volante
 
 *Tiro per colpire in mischia o a distanza:* +15, portata 3 m o gittata 36 m. *Colpito:* 22 (4d6 + 8) danni taglienti più 36 (8d8) danni radiosi. Colpito o mancato: la spada torna magicamente nella mano del solar o fluttua entro 1,5 metri dal solar subito dopo un attacco a distanza.
+^srd-solar-spada-volante
 
 ### Arco assassino
 
 *Tiro salvezza su Destrezza:* CD 21, una creatura che il solar è in grado di vedere entro 180 metri. *Fallimento:* se la creatura possiede 100 punti ferita o meno, muore. Altrimenti, subisce 24 (4d8 + 6) danni perforanti più 36 (8d8) danni radiosi.
+^srd-solar-arco-assassino
 
 ### Incantesimi
 
 Il solar lancia uno dei seguenti incantesimi, senza bisogno di componenti materiali, utilizzando Carisma come caratteristica da incantatore (CD del tiro salvezza sull'incantesimo 25): 1/giorno ciascuno: comunione, controllare tempo atmosferico, dissolvi il bene e il male, resurrezioneA volontà: individuazione del bene e del male
+^srd-solar-incantesimi
 ## Azioni Leggendarie
 
 ## Opzioni
@@ -140,10 +155,12 @@ Il solar lancia uno dei seguenti incantesimi, senza bisogno di componenti materi
 ### Sguardo accecante
 
 *Tiro salvezza su Costituzione:* CD 25, una creatura che il solar è in grado di vedere entro 36 metri. *Fallimento:* il bersaglio è accecato per 1 minuto. *Fallimento o successo:* il solar non può ripetere quest'azione fino all'inizio del proprio turno successivo.
+^srd-solar-sguardo-accecante
 
 ### Teletrasporto radioso
 
 Il solar si teletrasporta fino a un massimo di 18 metri in uno spazio libero che è in grado di vedere. *Tiro salvezza su Destrezza:* CD 25, tutte le creature in un'emanazione di 3 metri di cui il solar è il punto di origine nel suo spazio di destinazione. *Fallimento:* 11 (2d10) danni radiosi. *Successo:* danni dimezzati.
+^srd-solar-teletrasporto-radioso
 ````
 
 > [!info] Licenza

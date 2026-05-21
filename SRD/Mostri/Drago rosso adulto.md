@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Drago rosso adulto]]"]
+riferimenti_srd: ["[[SRD/Mostri/Drago rosso adulto]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Drago rosso adulto#^srd-drago_rosso_adulto-resistenza-leggendaria-3-giorno-o-4-giorno-nella-tana]]", "[[SRD/Mostri/Drago rosso adulto#^srd-drago_rosso_adulto-multiattacco]]", "[[SRD/Mostri/Drago rosso adulto#^srd-drago_rosso_adulto-squarcio]]", "[[SRD/Mostri/Drago rosso adulto#^srd-drago_rosso_adulto-incantesimi]]", "[[SRD/Mostri/Drago rosso adulto#^srd-drago_rosso_adulto-soffio-di-fuoco-ricarica-5-6]]", "[[SRD/Mostri/Drago rosso adulto#^srd-drago_rosso_adulto-balzo]]", "[[SRD/Mostri/Drago rosso adulto#^srd-drago_rosso_adulto-presenza-imponente]]", "[[SRD/Mostri/Drago rosso adulto#^srd-drago_rosso_adulto-raggi-fiammeggianti]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Drago rosso adulto"
 type: "Drago (cromatico)"
 size: "enorme"
@@ -101,15 +108,18 @@ tab: Azioni
 ### Resistenza leggendaria (3/giorno o 4/giorno nella tana)
 
 Se il drago fallisce un tiro salvezza, può scegliere di superarlo comunque.
+^srd-drago_rosso_adulto-resistenza-leggendaria-3-giorno-o-4-giorno-nella-tana
 ## Azioni
 
 ### Multiattacco
 
 Il drago effettua tre attacchi Squarcio. Può sostituire un attacco con un utilizzo di Incantesimi per lanciare raggio rovente.
+^srd-drago_rosso_adulto-multiattacco
 
 ### Squarcio
 
 *Tiro per colpire in mischia:* +14, portata 3 m. *Colpito:* 13 (1d10 + 8) danni taglienti più 5 (2d4) danni da fuoco.
+^srd-drago_rosso_adulto-squarcio
 
 ### Incantesimi
 
@@ -122,10 +132,12 @@ Il drago lancia uno dei seguenti incantesimi, senza bisogno di componenti materi
 - comando (di 2º livello)
 - individuazione del magico
 - raggio rovente
+^srd-drago_rosso_adulto-incantesimi
 
 ### Soffio di fuoco (ricarica 5-6)
 
 *Tiro salvezza su Destrezza:* CD 21, tutte le creature in un cono di 18 metri. *Fallimento:* 59 (17d6) danni da fuoco. *Successo:* danni dimezzati.
+^srd-drago_rosso_adulto-soffio-di-fuoco-ricarica-5-6
 ## Azioni Leggendarie
 
 Subito dopo il turno di un'altra creatura, il drago può consumare un utilizzo per effettuare una delle seguenti azioni. Il drago recupera tutti gli utilizzi consumati all'inizio di ogni suo turno.
@@ -135,14 +147,17 @@ Subito dopo il turno di un'altra creatura, il drago può consumare un utilizzo p
 ### Balzo
 
 Il drago si muove fino a metà della sua velocità ed effettua un attacco Squarcio.
+^srd-drago_rosso_adulto-balzo
 
 ### Presenza imponente
 
 Il drago usa Incantesimi per lanciare comando (di 2º livello). Il drago non può ripetere quest'azione fino all'inizio del proprio turno successivo.
+^srd-drago_rosso_adulto-presenza-imponente
 
 ### Raggi fiammeggianti
 
 Il drago usa Incantesimi per lanciare raggio rovente. Il drago non può ripetere quest'azione fino all'inizio del proprio turno successivo.
+^srd-drago_rosso_adulto-raggi-fiammeggianti
 ````
 
 > [!info] Licenza

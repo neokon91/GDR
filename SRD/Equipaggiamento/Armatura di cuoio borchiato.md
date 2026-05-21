@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Equipaggiamento/Armatura di cuoio borchiato]]"]
+riferimenti_srd: ["[[SRD/Equipaggiamento/Armatura di cuoio borchiato]]"]
+riferimenti_regola: []
+sezioni_collegate: ["[[SRD/Equipaggiamento/Armatura di cuoio borchiato#Dettagli]]"]
+blocchi_collegati: []
+tabelle_collegate: ["[[SRD/Equipaggiamento/Armatura di cuoio borchiato#^srd-armatura_di_cuoio_borchiato-dettagli]]"]
+tags: ["dnd55/srd"]
 capitolo: "Equipaggiamento"
 pagine_sorgente: "104-105"
 tipo_oggetto: "armatura"
@@ -42,6 +49,7 @@ Leggera; Classe Armatura 12 + Des; costo 45 mo.
 | Categoria | Armatura | Classe Armatura | Forza | Furtività | Peso | Costo |
 | --- | --- | --- | --- | --- | --- | --- |
 | Leggera | Armatura di cuoio borchiato | 12 + Des | - | - | 6,5 kg | 45 mo |
+^srd-armatura_di_cuoio_borchiato-dettagli
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

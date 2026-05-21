@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Incantesimi/Evoca folletto]]"]
+riferimenti_srd: ["[[SRD/Incantesimi/Evoca folletto]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Incantesimi/Evoca folletto#^srd-evoca_folletto-utilizzo-di-uno-slot-incantesimo-di-livello-superiore]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/incantesimo"]
 livello: 6
 scuola: "Evocazione"
 classi: ["druido"]
@@ -38,6 +45,7 @@ Come azione bonus nei suoi turni successivi, l'incantatore può teletrasportare 
 ### Utilizzo di uno slot incantesimo di livello superiore
 
 I danni aumentano di 1d12 per ogni slot di livello superiore al 6º.
+^srd-evoca_folletto-utilizzo-di-uno-slot-incantesimo-di-livello-superiore
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

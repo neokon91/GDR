@@ -27,6 +27,10 @@ FIELD_TYPE_MAP = {
     "text": "Input",
     "wikilink": "File",
     "wikilink_list": "MultiFile",
+    "wikilink_target_list": "MultiFile",
+    "wikilink_section_list": "MultiFile",
+    "wikilink_block_list": "MultiFile",
+    "tag_list": "Multi",
 }
 
 

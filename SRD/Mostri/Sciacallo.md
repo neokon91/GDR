@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Sciacallo]]"]
+riferimenti_srd: ["[[SRD/Mostri/Sciacallo]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Sciacallo#^srd-sciacallo-morso]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Sciacallo"
 type: "Bestia"
 size: "piccola"
@@ -85,6 +92,7 @@ tab: Azioni
 ### Morso
 
 *Tiro per colpire in mischia:* +1, portata 1,5 m. *Colpito:* 1 (1d4 - 1) danni perforanti.
+^srd-sciacallo-morso
 ````
 
 > [!info] Licenza

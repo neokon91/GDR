@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Drago di rame cucciolo]]"]
+riferimenti_srd: ["[[SRD/Mostri/Drago di rame cucciolo]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Drago di rame cucciolo#^srd-drago_di_rame_cucciolo-squarcio]]", "[[SRD/Mostri/Drago di rame cucciolo#^srd-drago_di_rame_cucciolo-soffio-di-acido-ricarica-5-6]]", "[[SRD/Mostri/Drago di rame cucciolo#^srd-drago_di_rame_cucciolo-soffio-rallentante]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Drago di rame cucciolo"
 type: "Drago (metallico)"
 size: "medio"
@@ -91,14 +98,17 @@ tab: Azioni
 ### Squarcio
 
 *Tiro per colpire in mischia:* +4, portata 1,5 m. *Colpito:* 7 (1d10 + 2) danni taglienti.
+^srd-drago_di_rame_cucciolo-squarcio
 
 ### Soffio di acido (ricarica 5-6)
 
 *Tiro salvezza su Destrezza:* CD 11, tutte le creature in una linea lunga 6 metri e larga 1,5 metri. *Fallimento:* 18 (4d8) danni da acido. *Successo:* danni dimezzati.
+^srd-drago_di_rame_cucciolo-soffio-di-acido-ricarica-5-6
 
 ### Soffio rallentante
 
 *Tiro salvezza su Costituzione:* CD 11, tutte le creature in un cono di 4,5 metri. *Fallimento:* il bersaglio non può effettuare reazioni, la sua velocità è dimezzata e nel suo turno può effettuare un'azione o un'azione bonus, non entrambe. L'effetto dura fino al termine del proprio turno successivo.
+^srd-drago_di_rame_cucciolo-soffio-rallentante
 ````
 
 > [!info] Licenza

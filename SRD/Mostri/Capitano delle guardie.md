@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Capitano delle guardie]]"]
+riferimenti_srd: ["[[SRD/Mostri/Capitano delle guardie]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Capitano delle guardie#^srd-capitano_delle_guardie-multiattacco]]", "[[SRD/Mostri/Capitano delle guardie#^srd-capitano_delle_guardie-giavellotto]]", "[[SRD/Mostri/Capitano delle guardie#^srd-capitano_delle_guardie-spada-lunga]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Capitano delle guardie"
 type: "Umanoide"
 size: "medio o piccolo"
@@ -89,14 +96,17 @@ tab: Azioni
 ### Multiattacco
 
 La guardia effettua due attacchi, utilizzando Giavellotto o Spada lunga in qualsiasi combinazione.
+^srd-capitano_delle_guardie-multiattacco
 
 ### Giavellotto
 
 *Tiro per colpire in mischia o a distanza:* +6, portata 1,5 m o gittata 9/36 m. *Colpito:* 14 (3d6 + 4) danni perforanti.
+^srd-capitano_delle_guardie-giavellotto
 
 ### Spada lunga
 
 *Tiro per colpire in mischia:* +6, portata 1,5 m. *Colpito:* 15 (2d10 + 4) danni taglienti.
+^srd-capitano_delle_guardie-spada-lunga
 ````
 
 > [!info] Licenza

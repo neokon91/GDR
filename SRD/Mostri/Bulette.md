@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Bulette]]"]
+riferimenti_srd: ["[[SRD/Mostri/Bulette]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Bulette#^srd-bulette-multiattacco]]", "[[SRD/Mostri/Bulette#^srd-bulette-morso]]", "[[SRD/Mostri/Bulette#^srd-bulette-balzo-letale]]", "[[SRD/Mostri/Bulette#^srd-bulette-balzo]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Bulette"
 type: "Mostruosità"
 size: "grande"
@@ -90,14 +97,17 @@ tab: Azioni
 ### Multiattacco
 
 Il bulette effettua due attacchi Morso.
+^srd-bulette-multiattacco
 
 ### Morso
 
 *Tiro per colpire in mischia:* +7, portata 1,5 m. *Colpito:* 17 (2d12 + 4) danni perforanti.
+^srd-bulette-morso
 
 ### Balzo letale
 
 Il bulette usa 1,5 metri di movimento per saltare in uno spazio entro 4,5 metri che contiene una o più creature di taglia Grande o inferiore. *Tiro salvezza su Destrezza:* CD 15, tutte le creature nello spazio di destinazione del bulette. *Fallimento:* 19 (3d12) danni contundenti, e il bersaglio è prono. *Successo:* danni dimezzati, e il bersaglio viene spinto a 1,5 metri di distanza dal bulette.
+^srd-bulette-balzo-letale
 ````
 
 > [!info] Licenza

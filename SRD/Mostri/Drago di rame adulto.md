@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Drago di rame adulto]]"]
+riferimenti_srd: ["[[SRD/Mostri/Drago di rame adulto]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Drago di rame adulto#^srd-drago_di_rame_adulto-resistenza-leggendaria-3-giorno-o-4-giorno-nella-tana]]", "[[SRD/Mostri/Drago di rame adulto#^srd-drago_di_rame_adulto-multiattacco]]", "[[SRD/Mostri/Drago di rame adulto#^srd-drago_di_rame_adulto-squarcio]]", "[[SRD/Mostri/Drago di rame adulto#^srd-drago_di_rame_adulto-incantesimi]]", "[[SRD/Mostri/Drago di rame adulto#^srd-drago_di_rame_adulto-soffio-di-acido-ricarica-5-6]]", "[[SRD/Mostri/Drago di rame adulto#^srd-drago_di_rame_adulto-soffio-rallentante]]", "[[SRD/Mostri/Drago di rame adulto#^srd-drago_di_rame_adulto-balzo]]", "[[SRD/Mostri/Drago di rame adulto#^srd-drago_di_rame_adulto-magia-ridacchiante]]", "[[SRD/Mostri/Drago di rame adulto#^srd-drago_di_rame_adulto-scossa-mentale]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Drago di rame adulto"
 type: "Drago (metallico)"
 size: "enorme"
@@ -104,15 +111,18 @@ tab: Azioni
 ### Resistenza leggendaria (3/giorno o 4/giorno nella tana)
 
 Se il drago fallisce un tiro salvezza, può scegliere di superarlo comunque.
+^srd-drago_di_rame_adulto-resistenza-leggendaria-3-giorno-o-4-giorno-nella-tana
 ## Azioni
 
 ### Multiattacco
 
 Il drago effettua tre attacchi Squarcio. Può sostituire un attacco con un utilizzo di (A) Soffio rallentante o (B) Incantesimi per lanciare aculeo mentale (di 4º livello).
+^srd-drago_di_rame_adulto-multiattacco
 
 ### Squarcio
 
 *Tiro per colpire in mischia:* +11, portata 3 m. *Colpito:* 17 (2d10 + 6) danni taglienti più 4 (1d8) danni da acido.
+^srd-drago_di_rame_adulto-squarcio
 
 ### Incantesimi
 
@@ -127,14 +137,17 @@ Il drago lancia uno dei seguenti incantesimi, senza bisogno di componenti materi
 - illusione minore
 - individuazione del magico
 - trasformazione (solo in forma di bestia o umanoide, senza punti ferita temporanei ottenuti dall'incantesimo, e senza richiedere concentrazione o punti ferita temporanei per mantenere l'incantesimo)
+^srd-drago_di_rame_adulto-incantesimi
 
 ### Soffio di acido (ricarica 5-6)
 
 *Tiro salvezza su Destrezza:* CD 18, tutte le creature in una linea lunga 18 metri e larga 1,5 metri. *Fallimento:* 54 (12d8) danni da acido. *Successo:* danni dimezzati.
+^srd-drago_di_rame_adulto-soffio-di-acido-ricarica-5-6
 
 ### Soffio rallentante
 
 *Tiro salvezza su Costituzione:* CD 18, tutte le creature in un cono di 18 metri. *Fallimento:* il bersaglio non può effettuare reazioni, la sua velocità è dimezzata e nel suo turno può effettuare un'azione o un'azione bonus, non entrambe. L'effetto dura fino al termine del proprio turno successivo.
+^srd-drago_di_rame_adulto-soffio-rallentante
 ## Azioni Leggendarie
 
 Subito dopo il turno di un'altra creatura, il drago può consumare un utilizzo per effettuare una delle seguenti azioni. Il drago recupera tutti gli utilizzi consumati all'inizio di ogni suo turno.
@@ -144,14 +157,17 @@ Subito dopo il turno di un'altra creatura, il drago può consumare un utilizzo p
 ### Balzo
 
 Il drago si muove fino a metà della sua velocità, ed effettua un attacco Squarcio.
+^srd-drago_di_rame_adulto-balzo
 
 ### Magia ridacchiante
 
 *Tiro salvezza su Carisma:* CD 17, una creatura che il drago è in grado di vedere entro 27 metri. *Fallimento:* 24 (7d6) danni psichici. Fino al termine del proprio turno successivo, il bersaglio tira 1d6 ogni volta che effettua una prova di caratteristica o un tiro per colpire e sottrae il risultato dalla prova con d20. *Fallimento o successo:* il drago non può ripetere quest'azione fino all'inizio del proprio turno successivo.
+^srd-drago_di_rame_adulto-magia-ridacchiante
 
 ### Scossa mentale
 
 Il drago usa Incantesimi per lanciare aculeo mentale (di 4º livello). Il drago non può ripetere quest'azione fino all'inizio del proprio turno successivo.
+^srd-drago_di_rame_adulto-scossa-mentale
 ````
 
 > [!info] Licenza

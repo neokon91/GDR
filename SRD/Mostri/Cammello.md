@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Cammello]]"]
+riferimenti_srd: ["[[SRD/Mostri/Cammello]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Cammello#^srd-cammello-morso]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Cammello"
 type: "Bestia"
 size: "grande"
@@ -81,6 +88,7 @@ tab: Azioni
 ### Morso
 
 *Tiro per colpire in mischia:* +4, portata 1,5 m. *Colpito:* 4 (1d4 + 2) danni contundenti.
+^srd-cammello-morso
 ````
 
 > [!info] Licenza

@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Aquila gigante]]"]
+riferimenti_srd: ["[[SRD/Mostri/Aquila gigante]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Aquila gigante#^srd-aquila_gigante-multiattacco]]", "[[SRD/Mostri/Aquila gigante#^srd-aquila_gigante-squarcio]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Aquila gigante"
 type: "Celestiale"
 size: "grande"
@@ -86,10 +93,12 @@ tab: Azioni
 ### Multiattacco
 
 L'aquila effettua due attacchi Squarcio.
+^srd-aquila_gigante-multiattacco
 
 ### Squarcio
 
 *Tiro per colpire in mischia:* +5, portata 1,5 m. *Colpito:* 5 (1d4 + 3) danni taglienti più 3 (1d6) danni radiosi.
+^srd-aquila_gigante-squarcio
 ````
 
 > [!info] Licenza

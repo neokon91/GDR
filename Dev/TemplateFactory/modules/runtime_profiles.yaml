@@ -172,6 +172,8 @@ profiles:
       propaga_a: Note a cui propagare conseguenze o aggiornamenti
       segreto: Segreto dietro la missione
       domanda_aperta: Domanda aperta della missione
+      fonti: Fonti granulari della missione
+      riferimenti_regola: Riferimenti regola usati dalla missione
   tracciato:
     name_prompt: Nome del clock o tracciato
     completion_prompt: Vuoi collegare subito missioni, fazioni, luoghi e PNG? Scegli No per un clock rapido.
@@ -372,6 +374,7 @@ profiles:
       mappe: Mappe dell'incontro
       audio: Audio dell'incontro
       ricompense: Ricompense
+      riferimenti_regola: Riferimenti regola dell'incontro
   oggetto:
     name_prompt: Nome dell'oggetto
     type_prompt: Tipo di oggetto
@@ -548,6 +551,8 @@ profiles:
       speed: Velocita
       cr: Grado di Sfida
       stats: Caratteristiche D&D 5.5
+      fonti: Fonti granulari della creatura
+      riferimenti_regola: Riferimenti regola per statblock e GS
   culto:
     name_prompt: Nome
     prompts: {}
@@ -571,7 +576,8 @@ profiles:
     prompts: {}
   lore_capture:
     name_prompt: Nome
-    prompts: {}
+    prompts:
+      fonti: Fonti granulari dell'appunto
   mappa:
     name_prompt: Nome
     prompts: {}
@@ -613,6 +619,9 @@ profiles:
       prossima_mossa: Cosa cambia se viene usato, perso o ignorato
       connessioni: Connessioni a missioni, luoghi, PNG o fazioni
       sessioni: Sessioni collegate
+      fonti: Fonti granulari dell'oggetto magico
+      riferimenti_srd: Riferimenti SRD dell'oggetto magico
+      riferimenti_regola: Riferimenti regola dell'oggetto magico
   incantesimo:
     name_prompt: Nome dell'incantesimo
     option_sources:
@@ -636,6 +645,8 @@ profiles:
       limiti: Limiti, costi o rischi
       uso_al_tavolo: Uso concreto al tavolo
       player_safe: Descrizione mostrabile ai giocatori
+      riferimenti_srd: Riferimenti SRD granulari dell'incantesimo
+      riferimenti_regola: Riferimenti regola granulari dell'incantesimo
   classe_dnd:
     name_prompt: Nome della classe D&D
     option_sources:
@@ -650,6 +661,8 @@ profiles:
       culture: Culture o societa dove e comune
       uso_al_tavolo: Promessa di gioco
       player_safe: Descrizione mostrabile ai giocatori
+      riferimenti_srd: Riferimenti SRD della classe
+      riferimenti_regola: Riferimenti regola della classe
   specie_dnd:
     name_prompt: Nome della specie D&D
     option_sources:
@@ -663,6 +676,8 @@ profiles:
       luoghi: Luoghi o regioni di origine
       uso_al_tavolo: Promessa di gioco
       player_safe: Descrizione mostrabile ai giocatori
+      riferimenti_srd: Riferimenti SRD della specie
+      riferimenti_regola: Riferimenti regola della specie
   background_dnd:
     name_prompt: Nome del background D&D
     option_sources:
@@ -677,6 +692,8 @@ profiles:
       culture: Culture collegate
       uso_al_tavolo: Gancio per campagna
       player_safe: Descrizione mostrabile ai giocatori
+      riferimenti_srd: Riferimenti SRD del background
+      riferimenti_regola: Riferimenti regola del background
   talento_dnd:
     name_prompt: Nome del talento D&D
     prompts:
@@ -688,6 +705,8 @@ profiles:
       fazioni: Fazioni che lo insegnano
       uso_al_tavolo: Uso concreto al tavolo
       player_safe: Descrizione mostrabile ai giocatori
+      riferimenti_srd: Riferimenti SRD del talento
+      riferimenti_regola: Riferimenti regola del talento
   regola_dnd:
     name_prompt: Nome della regola D&D
     prompts:
@@ -697,6 +716,8 @@ profiles:
       effetti: Effetti pratici
       uso_al_tavolo: Quando serve al tavolo
       player_safe: Versione leggibile ai giocatori
+      riferimenti_srd: Riferimenti SRD della regola
+      riferimenti_regola: Riferimenti regola correlati
   trappola:
     name_prompt: Nome della trappola
     option_sources:
@@ -711,6 +732,8 @@ profiles:
       contromisure: Contromisure
       conseguenze: Conseguenze
       uso_al_tavolo: Uso concreto al tavolo
+      riferimenti_srd: Riferimenti SRD della trappola
+      riferimenti_regola: Riferimenti regola della trappola
   pericolo_ambientale:
     name_prompt: Nome del pericolo ambientale
     option_sources:
@@ -726,6 +749,8 @@ profiles:
       contromisure: Contromisure
       conseguenze: Conseguenze
       uso_al_tavolo: Uso concreto al tavolo
+      riferimenti_srd: Riferimenti SRD del pericolo ambientale
+      riferimenti_regola: Riferimenti regola del pericolo ambientale
   tesoro:
     name_prompt: Nome del tesoro
     option_sources:
@@ -739,6 +764,8 @@ profiles:
       luogo: Luogo dove si trova
       gancio: Perche interessa ai PG
       player_safe: Descrizione mostrabile ai giocatori
+      riferimenti_srd: Riferimenti SRD del tesoro
+      riferimenti_regola: Riferimenti regola del tesoro
   pg:
     name_prompt: Nome
     prompts: {}
@@ -750,7 +777,8 @@ profiles:
     prompts: {}
   sessione:
     name_prompt: Nome
-    prompts: {}
+    prompts:
+      riferimenti_regola: Riferimenti regola o SRD da tenere aperti
   world_entity:
     name_prompt: Nome
     prompts: {}

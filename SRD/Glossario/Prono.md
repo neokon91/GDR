@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Glossario/Prono]]"]
+riferimenti_srd: ["[[SRD/Glossario/Prono]]"]
+riferimenti_regola: []
+sezioni_collegate: ["[[SRD/Glossario/Prono#Effetti]]"]
+blocchi_collegati: []
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/regola"]
 lettera: "P"
 descrittore: "condizione"
 pagine_sorgente: 212
@@ -23,10 +30,12 @@ Condizione di una creatura a terra.
 ### Movimento limitato
 
 La creatura può solo strisciare o spendere metà della velocità per rialzarsi. Se la velocità è 0, non può rialzarsi.
+^srd-prono-movimento-limitato
 
 ### Influenza sugli attacchi
 
 La creatura ha svantaggio ai tiri per colpire. Gli attacchi contro di lei hanno vantaggio entro 1,5 metri, altrimenti svantaggio.
+^srd-prono-influenza-sugli-attacchi
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

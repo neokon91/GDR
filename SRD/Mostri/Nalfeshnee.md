@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Nalfeshnee]]"]
+riferimenti_srd: ["[[SRD/Mostri/Nalfeshnee]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Nalfeshnee#^srd-nalfeshnee-resistenza-alla-magia]]", "[[SRD/Mostri/Nalfeshnee#^srd-nalfeshnee-ristoro-demoniaco]]", "[[SRD/Mostri/Nalfeshnee#^srd-nalfeshnee-multiattacco]]", "[[SRD/Mostri/Nalfeshnee#^srd-nalfeshnee-squarcio]]", "[[SRD/Mostri/Nalfeshnee#^srd-nalfeshnee-teletrasporto]]", "[[SRD/Mostri/Nalfeshnee#^srd-nalfeshnee-nube-di-orrore-ricarica-5-6]]", "[[SRD/Mostri/Nalfeshnee#^srd-nalfeshnee-inseguimento]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Nalfeshnee"
 type: "Immondo (demone)"
 size: "grande"
@@ -96,23 +103,28 @@ tab: Azioni
 ### Resistenza alla magia
 
 Il nalfeshnee dispone di vantaggio ai tiri salvezza contro incantesimi e altri effetti magici.
+^srd-nalfeshnee-resistenza-alla-magia
 
 ### Ristoro demoniaco
 
 Se il nalfeshnee muore al di fuori dell'Abisso, il suo corpo si dissolve diventando icore e ne acquisisce uno nuovo all'istante, tornando in vita con tutti i suoi punti ferita da qualche parte nell'Abisso.
+^srd-nalfeshnee-ristoro-demoniaco
 ## Azioni
 
 ### Multiattacco
 
 Il nalfeshnee effettua tre attacchi Squarcio.
+^srd-nalfeshnee-multiattacco
 
 ### Squarcio
 
 *Tiro per colpire in mischia:* +10, portata 3 m. *Colpito:* 16 (2d10 + 5) danni taglienti più 11 (2d10) danni da forza.
+^srd-nalfeshnee-squarcio
 
 ### Teletrasporto
 
 Il nalfeshnee si teletrasporta fino a massimo di 36 metri in uno spazio libero che è in grado di vedere.
+^srd-nalfeshnee-teletrasporto
 ````
 
 > [!info] Licenza

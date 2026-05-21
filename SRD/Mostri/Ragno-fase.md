@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Ragno-fase]]"]
+riferimenti_srd: ["[[SRD/Mostri/Ragno-fase]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Ragno-fase#^srd-ragno-fase-andatura-sulla-ragnatela]]", "[[SRD/Mostri/Ragno-fase#^srd-ragno-fase-movimenti-del-ragno]]", "[[SRD/Mostri/Ragno-fase#^srd-ragno-fase-vista-eterea]]", "[[SRD/Mostri/Ragno-fase#^srd-ragno-fase-multiattacco]]", "[[SRD/Mostri/Ragno-fase#^srd-ragno-fase-morso]]", "[[SRD/Mostri/Ragno-fase#^srd-ragno-fase-transizione-eterea]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Ragno-fase"
 type: "Mostruosità"
 size: "grande"
@@ -94,23 +101,28 @@ tab: Azioni
 ### Andatura sulla ragnatela
 
 Il ragno ignora le restrizioni di movimento causate dalle ragnatele e conosce l'ubicazione di qualsiasi altra creatura a contatto con la medesima ragnatela.
+^srd-ragno-fase-andatura-sulla-ragnatela
 
 ### Movimenti del ragno
 
 Il ragno può scalare le superfici difficili, compresi i soffitti, senza effettuare una prova di caratteristica.
+^srd-ragno-fase-movimenti-del-ragno
 
 ### Vista eterea
 
 Il ragno è in grado di vedere per 18 metri sul Piano Etereo finché si trova sul Piano Materiale e viceversa.
+^srd-ragno-fase-vista-eterea
 ## Azioni
 
 ### Multiattacco
 
 Il ragno effettua due attacchi Morso.
+^srd-ragno-fase-multiattacco
 
 ### Morso
 
 *Tiro per colpire in mischia:* +5, portata 1,5 m *Colpito:* 8 (1d10 + 3) danni perforanti più 9 (2d8) danni da veleno. Se i danni riducono il bersaglio a 0 punti ferita, esso diventa stabile, ed è avvelenato per 1 ora. Finché è avvelenato, il bersaglio è anche paralizzato.
+^srd-ragno-fase-morso
 ````
 
 > [!info] Licenza

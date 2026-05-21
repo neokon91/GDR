@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Millepiedi gigante]]"]
+riferimenti_srd: ["[[SRD/Mostri/Millepiedi gigante]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Millepiedi gigante#^srd-millepiedi_gigante-morso]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Millepiedi gigante"
 type: "Bestia"
 size: "piccola"
@@ -80,6 +87,7 @@ tab: Azioni
 ### Morso
 
 *Tiro per colpire in mischia:* +4, portata 1,5 m *Colpito:* 4 (1d4 + 2) danni perforanti, e il bersaglio è avvelenato fino all'inizio del turno successivo del millepiedi.
+^srd-millepiedi_gigante-morso
 ````
 
 > [!info] Licenza

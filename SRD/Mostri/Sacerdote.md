@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Sacerdote]]"]
+riferimenti_srd: ["[[SRD/Mostri/Sacerdote]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Sacerdote#^srd-sacerdote-multiattacco]]", "[[SRD/Mostri/Sacerdote#^srd-sacerdote-mazza]]", "[[SRD/Mostri/Sacerdote#^srd-sacerdote-fiamma-radiosa]]", "[[SRD/Mostri/Sacerdote#^srd-sacerdote-incantesimi]]", "[[SRD/Mostri/Sacerdote#^srd-sacerdote-aiuto-divino-3-giorno]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Sacerdote"
 type: "Umanoide (chierico)"
 size: "medio o piccolo"
@@ -94,18 +101,22 @@ tab: Azioni
 ### Multiattacco
 
 Il sacerdote effettua due attacchi, usando Mazza o Fiamma radiosa in qualsiasi combinazione.
+^srd-sacerdote-multiattacco
 
 ### Mazza
 
 *Tiro per colpire in mischia:* +5, portata 1,5 m *Colpito:* 6 (1d6 + 3) danni contundenti più 5 (2d4) danni radiosi.
+^srd-sacerdote-mazza
 
 ### Fiamma radiosa
 
 *Tiro per colpire a distanza:* +5, gittata 18 m. *Colpito:* 11 (2d10) danni radiosi.
+^srd-sacerdote-fiamma-radiosa
 
 ### Incantesimi
 
 Il sacerdote lancia uno dei seguenti incantesimi, utilizzando Saggezza come caratteristica da incantatore (CD del tiro salvezza sull'incantesimo 13):A volontà: Luce, taumaturgia 1/giorno: Guardiani spirituali
+^srd-sacerdote-incantesimi
 ````
 
 > [!info] Licenza

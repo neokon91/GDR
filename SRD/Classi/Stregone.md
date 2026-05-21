@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Classi/Stregone]]"]
+riferimenti_srd: ["[[SRD/Classi/Stregone]]"]
+riferimenti_regola: []
+sezioni_collegate: ["[[SRD/Classi/Stregone#Tratti di classe]]", "[[SRD/Classi/Stregone#Progressione di classe]]", "[[SRD/Classi/Stregone#Privilegi chiave]]", "[[SRD/Classi/Stregone#Lista degli incantesimi da stregone]]", "[[SRD/Classi/Stregone#Sottoclasse dello stregone: Stregoneria draconica]]", "[[SRD/Classi/Stregone#Incantesimi draconici]]"]
+blocchi_collegati: []
+tabelle_collegate: ["[[SRD/Classi/Stregone#^srd-stregone-tratti-di-classe]]", "[[SRD/Classi/Stregone#^srd-stregone-progressione-di-classe]]", "[[SRD/Classi/Stregone#^srd-stregone-privilegi-chiave]]", "[[SRD/Classi/Stregone#^srd-stregone-lista-degli-incantesimi-da-stregone]]", "[[SRD/Classi/Stregone#^srd-stregone-sottoclasse-dello-stregone-stregoneria-draconica]]", "[[SRD/Classi/Stregone#^srd-stregone-incantesimi-draconici]]"]
+tags: ["dnd55/srd"]
 capitolo: "Classi"
 pagine_sorgente: "79-85"
 caratteristica_primaria: ["Carisma"]
@@ -41,6 +48,7 @@ A: lancia, 2 pugnali, focus arcano, dotazione da avventuriero e 28 mo; oppure B:
 | Armi | Armi semplici. |
 | Armature | Nessuna. |
 | Equipaggiamento iniziale | A: lancia, 2 pugnali, focus arcano, dotazione da avventuriero e 28 mo; oppure B: 50 mo. |
+^srd-stregone-tratti-di-classe
 
 ## Progressione di classe
 
@@ -66,6 +74,7 @@ A: lancia, 2 pugnali, focus arcano, dotazione da avventuriero e 28 mo; oppure B:
 | 18 | +6 | Privilegio della sottoclasse | 18 | 6 | 20 | 4 | 3 | 3 | 3 | 3 | 1 | 1 | 1 | 1 |
 | 19 | +6 | Dono epico | 19 | 6 | 21 | 4 | 3 | 3 | 3 | 3 | 2 | 1 | 1 | 1 |
 | 20 | +6 | Apoteosi arcana | 20 | 6 | 22 | 4 | 3 | 3 | 3 | 3 | 2 | 2 | 1 | 1 |
+^srd-stregone-progressione-di-classe
 
 ## Privilegi chiave
 
@@ -75,6 +84,7 @@ A: lancia, 2 pugnali, focus arcano, dotazione da avventuriero e 28 mo; oppure B:
 | Fonte di magia | Punti stregoneria usati per creare slot, convertire slot e alimentare privilegi. |
 | Metamagia | Modifica incantesimi con opzioni come incantesimo rapido, esteso, intensificato o gemellato. |
 | Ripristino stregonesco | Recupera risorse magiche ai livelli alti. |
+^srd-stregone-privilegi-chiave
 
 ## Lista degli incantesimi da stregone
 
@@ -220,6 +230,7 @@ A: lancia, 2 pugnali, focus arcano, dotazione da avventuriero e 28 mo; oppure B:
 | 9 | Parola del potere uccidere | Ammaliamento | - |
 | 9 | Portale | Evocazione | C, M |
 | 9 | Sciame di meteore | Invocazione | - |
+^srd-stregone-lista-degli-incantesimi-da-stregone
 
 ## Sottoclasse dello stregone: Stregoneria draconica
 
@@ -230,6 +241,7 @@ A: lancia, 2 pugnali, focus arcano, dotazione da avventuriero e 28 mo; oppure B:
 | 6 | Affinita elementale | Sceglie acido, freddo, fulmine, fuoco o veleno; ottiene resistenza e aggiunge Carisma ai danni. |
 | 14 | Ali di drago | Come azione bonus ottiene velocita di volo 18 m per 1 ora. |
 | 18 | Seguace draconico | Lancia richiama drago senza materiale, una volta gratis, e puo rimuovere concentrazione riducendo la durata. |
+^srd-stregone-sottoclasse-dello-stregone-stregoneria-draconica
 
 ## Incantesimi draconici
 
@@ -239,6 +251,7 @@ A: lancia, 2 pugnali, focus arcano, dotazione da avventuriero e 28 mo; oppure B:
 | 5 | Paura, volare |
 | 7 | Occhio arcano, charme sui mostri |
 | 9 | Conoscenza delle leggende, richiama drago |
+^srd-stregone-incantesimi-draconici
 
 ## Progressione
 

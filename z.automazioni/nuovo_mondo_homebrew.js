@@ -66,6 +66,13 @@ async function nuovo_mondo_homebrew(tp) {
             `uso_al_tavolo: ${helpers.yamlQuote("Ancora del mondo da trasformare in scena, scelta o conseguenza.")}`,
             `player_safe: ${helpers.yamlQuote(seedName)}`,
             "connessioni: []",
+            "fonti: []",
+            "riferimenti_srd: []",
+            "riferimenti_regola: []",
+            "sezioni_collegate: []",
+            "blocchi_collegati: []",
+            "tabelle_collegate: []",
+            "tags: [\"mondo/lore\", \"gdr/bozza\"]",
             "pressione: 0",
             "prossima_mossa: \"\"",
             "pubblico: false",
@@ -129,7 +136,14 @@ async function nuovo_mondo_homebrew(tp) {
         materiale_pubblico: '[]',
         campagne: '[]',
         relazioni_chiave: '[]',
-        canonico: 'false'
+        canonico: 'false',
+        fonti: helpers.inlineYamlWikilinkList([...locationLinks, ...powerLinks, ...cultureLinks]),
+        riferimenti_srd: '[]',
+        riferimenti_regola: '[]',
+        sezioni_collegate: '[]',
+        blocchi_collegati: '[]',
+        tabelle_collegate: '[]',
+        tags: helpers.inlineYamlTextList(["dnd55/homebrew", "mondo/lore", "gdr/bozza"])
     });
 }
 

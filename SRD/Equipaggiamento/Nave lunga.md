@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Equipaggiamento/Nave lunga]]"]
+riferimenti_srd: ["[[SRD/Equipaggiamento/Nave lunga]]"]
+riferimenti_regola: []
+sezioni_collegate: ["[[SRD/Equipaggiamento/Nave lunga#Dettagli]]"]
+blocchi_collegati: []
+tabelle_collegate: ["[[SRD/Equipaggiamento/Nave lunga#^srd-nave_lunga-dettagli]]"]
+tags: ["dnd55/srd"]
 capitolo: "Equipaggiamento"
 pagine_sorgente: "113-114"
 tipo_oggetto: "veicolo"
@@ -42,6 +49,7 @@ Velocita 4,5 km/h; costo 10.000 mo.
 | Nave | Velocità | Equipaggio | Passeggeri | Carico | CA | PF | Soglia di danno | Costo |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | Nave lunga | 4,5 km/h | 40 | 150 | 10 t | 15 | 300 | 15 | 10.000 mo |
+^srd-nave_lunga-dettagli
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Equipaggiamento/Strumento musicale]]"]
+riferimenti_srd: ["[[SRD/Equipaggiamento/Strumento musicale]]"]
+riferimenti_regola: []
+sezioni_collegate: ["[[SRD/Equipaggiamento/Strumento musicale#Dettagli]]"]
+blocchi_collegati: []
+tabelle_collegate: ["[[SRD/Equipaggiamento/Strumento musicale#^srd-strumento_musicale-dettagli]]"]
+tags: ["dnd55/srd"]
 capitolo: "Equipaggiamento"
 pagine_sorgente: "105-107"
 tipo_oggetto: "strumento"
@@ -42,6 +49,7 @@ Carisma; suonare o improvvisare; ogni variante richiede competenza separata.
 | Voce | Riepilogo |
 | --- | --- |
 | Strumento musicale | Carisma; suonare o improvvisare; ogni variante richiede competenza separata. |
+^srd-strumento_musicale-dettagli
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Goblin capo]]"]
+riferimenti_srd: ["[[SRD/Mostri/Goblin capo]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Goblin capo#^srd-goblin_capo-multiattacco]]", "[[SRD/Mostri/Goblin capo#^srd-goblin_capo-scimitarra]]", "[[SRD/Mostri/Goblin capo#^srd-goblin_capo-arco-corto]]", "[[SRD/Mostri/Goblin capo#^srd-goblin_capo-fuga-agile]]", "[[SRD/Mostri/Goblin capo#^srd-goblin_capo-sviare-attacco]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Goblin capo"
 type: "Folletto"
 size: "piccolo"
@@ -92,14 +99,17 @@ tab: Azioni
 ### Multiattacco
 
 Il goblin effettua due attacchi, utilizzando Scimitarra o Arco corto in qualsiasi combinazione.
+^srd-goblin_capo-multiattacco
 
 ### Scimitarra
 
 *Tiro per colpire in mischia:* +4, portata 1,5 m. *Colpito:* 5 (1d6 + 2) danni taglienti, più 2 (1d4) danni taglienti se il tiro per colpire è stato effettuato con vantaggio.
+^srd-goblin_capo-scimitarra
 
 ### Arco corto
 
 *Tiro per colpire a distanza:* +4, gittata 24/96 m. *Colpito:* 5 (1d6 + 2) danni perforanti, più 2 (1d4) danni perforanti se il tiro per colpire è stato effettuato con vantaggio.
+^srd-goblin_capo-arco-corto
 ````
 
 > [!info] Licenza

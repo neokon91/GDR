@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Scheletro di minotauro]]"]
+riferimenti_srd: ["[[SRD/Mostri/Scheletro di minotauro]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Scheletro di minotauro#^srd-scheletro_di_minotauro-schianto]]", "[[SRD/Mostri/Scheletro di minotauro#^srd-scheletro_di_minotauro-trafiggere]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Scheletro di minotauro"
 type: "Non morto"
 size: "grande"
@@ -82,10 +89,12 @@ tab: Azioni
 ### Schianto
 
 *Tiro per colpire in mischia:* +6, portata 1,5 m. *Colpito:* 15 (2d10 + 4) danni contundenti.
+^srd-scheletro_di_minotauro-schianto
 
 ### Trafiggere
 
 *Tiro per colpire in mischia:* +6, portata 1,5 m. *Colpito:* 11 (2d6 + 4) danni perforanti. Se il bersaglio è una creatura di taglia Grande o inferiore e lo scheletro si è mosso di 6 metri o più in linea retta verso di esso subito prima del colpo, il bersaglio subisce 9 (2d8) danni perforanti extra e cade a terra prono.
+^srd-scheletro_di_minotauro-trafiggere
 ````
 
 > [!info] Licenza

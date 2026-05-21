@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Glabrezu]]"]
+riferimenti_srd: ["[[SRD/Mostri/Glabrezu]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Glabrezu#^srd-glabrezu-resistenza-alla-magia]]", "[[SRD/Mostri/Glabrezu#^srd-glabrezu-ristoro-demoniaco]]", "[[SRD/Mostri/Glabrezu#^srd-glabrezu-multiattacco]]", "[[SRD/Mostri/Glabrezu#^srd-glabrezu-tenaglia]]", "[[SRD/Mostri/Glabrezu#^srd-glabrezu-incantesimi]]", "[[SRD/Mostri/Glabrezu#^srd-glabrezu-pugno]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Glabrezu"
 type: "Immondo (demone)"
 size: "grande"
@@ -99,19 +106,23 @@ tab: Azioni
 ### Resistenza alla magia
 
 Il glabrezu dispone di vantaggio ai tiri salvezza contro incantesimi e altri effetti magici.
+^srd-glabrezu-resistenza-alla-magia
 
 ### Ristoro demoniaco
 
 Se il glabrezu muore al di fuori dell'Abisso, il suo corpo si dissolve diventando icore e ne acquisisce uno nuovo all'istante, tornando in vita con tutti i suoi punti ferita da qualche parte nell'Abisso.
+^srd-glabrezu-ristoro-demoniaco
 ## Azioni
 
 ### Multiattacco
 
 Il glabrezu effettua due attacchi Tenaglia, e utilizza Pugno o Incantesimi.
+^srd-glabrezu-multiattacco
 
 ### Tenaglia
 
 *Tiro per colpire in mischia:* +9, portata 3 m. *Colpito:* 16 (2d10 + 5) danni taglienti. Se il bersaglio è una creatura di taglia Media o inferiore viene afferrato (CD 15 per sfuggire) da una delle due tenaglie.
+^srd-glabrezu-tenaglia
 
 ### Incantesimi
 
@@ -126,10 +137,12 @@ A volontà:
 - dissolvi magie
 - individuazione del magico
 - oscurità
+^srd-glabrezu-incantesimi
 
 ### Pugno
 
 *Tiro salvezza su Destrezza:* CD 17, una creatura afferrata dal glabrezu. *Fallimento:* 15 (3d6 + 5) danni contundenti. *Successo:* danni dimezzati.
+^srd-glabrezu-pugno
 ````
 
 > [!info] Licenza

@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Drago verde antico]]"]
+riferimenti_srd: ["[[SRD/Mostri/Drago verde antico]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Drago verde antico#^srd-drago_verde_antico-anfibio]]", "[[SRD/Mostri/Drago verde antico#^srd-drago_verde_antico-resistenza-leggendaria-4-giorno-o-5-giorno-nella-tana]]", "[[SRD/Mostri/Drago verde antico#^srd-drago_verde_antico-multiattacco]]", "[[SRD/Mostri/Drago verde antico#^srd-drago_verde_antico-squarcio]]", "[[SRD/Mostri/Drago verde antico#^srd-drago_verde_antico-incantesimi]]", "[[SRD/Mostri/Drago verde antico#^srd-drago_verde_antico-soffio-di-veleno-ricarica-5-6]]", "[[SRD/Mostri/Drago verde antico#^srd-drago_verde_antico-balzo]]", "[[SRD/Mostri/Drago verde antico#^srd-drago_verde_antico-invasione-mentale]]", "[[SRD/Mostri/Drago verde antico#^srd-drago_verde_antico-miasma-nocivo]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Drago verde antico"
 type: "Drago (cromatico)"
 size: "mastodontico"
@@ -105,19 +112,23 @@ tab: Azioni
 ### Anfibio
 
 Il drago può respirare in aria e in acqua.
+^srd-drago_verde_antico-anfibio
 
 ### Resistenza leggendaria (4/giorno o 5/giorno nella tana)
 
 Se il drago fallisce un tiro salvezza, può scegliere di superarlo comunque.
+^srd-drago_verde_antico-resistenza-leggendaria-4-giorno-o-5-giorno-nella-tana
 ## Azioni
 
 ### Multiattacco
 
 Il drago effettua tre attacchi Squarcio. Può sostituire un attacco con un utilizzo di Incantesimi per lanciare aculeo mentale (di 5º livello).
+^srd-drago_verde_antico-multiattacco
 
 ### Squarcio
 
 *Tiro per colpire in mischia:* +15, portata 4,5 m. *Colpito:* 17 (2d6 + 8) danni taglienti più 10 (3d6) danni da veleno.
+^srd-drago_verde_antico-squarcio
 
 ### Incantesimi
 
@@ -130,10 +141,12 @@ Il drago lancia uno dei seguenti incantesimi, senza bisogno di componenti materi
 *A volontà:*
 - aculeo mentale (di 5º livello)
 - individuazione del magico
+^srd-drago_verde_antico-incantesimi
 
 ### Soffio di veleno (ricarica 5-6)
 
 *Tiro salvezza su Costituzione:* CD 22, tutte le creature in un cono di 27 metri. *Fallimento:* 77 (22d6) danni da veleno. *Successo:* danni dimezzati.
+^srd-drago_verde_antico-soffio-di-veleno-ricarica-5-6
 ## Azioni Leggendarie
 
 Subito dopo il turno di un'altra creatura, il drago può consumare un utilizzo per effettuare una delle seguenti azioni. Il drago recupera tutti gli utilizzi consumati all'inizio di ogni suo turno.
@@ -143,14 +156,17 @@ Subito dopo il turno di un'altra creatura, il drago può consumare un utilizzo p
 ### Balzo
 
 Il drago si muove fino a metà della sua velocità, ed effettua un attacco Squarcio.
+^srd-drago_verde_antico-balzo
 
 ### Invasione mentale
 
 Il drago usa Incantesimi per lanciare aculeo mentale (di 5º livello).
+^srd-drago_verde_antico-invasione-mentale
 
 ### Miasma nocivo
 
 *Tiro salvezza su Costituzione:* CD 21, tutte le creature in una sfera di 9 metri di raggio centrata su un punto che il drago è in grado di vedere entro 27 metri. *Fallimento:* 17 (5d6) danni da veleno, e il bersaglio subisce una penalità di -2 alla CA fino al termine del proprio turno successivo. *Fallimento o successo:* il drago non può ripetere quest'azione fino all'inizio del proprio turno successivo.
+^srd-drago_verde_antico-miasma-nocivo
 ````
 
 > [!info] Licenza

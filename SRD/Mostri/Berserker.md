@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Berserker]]"]
+riferimenti_srd: ["[[SRD/Mostri/Berserker]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Berserker#^srd-berserker-frenesia-sanguinante]]", "[[SRD/Mostri/Berserker#^srd-berserker-ascia-bipenne]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Berserker"
 type: "Umanoide"
 size: "medio o piccolo"
@@ -82,11 +89,13 @@ tab: Azioni
 ### Frenesia sanguinante
 
 Finché è sanguinante, il berserker dispone di vantaggio ai tiri per colpire e ai tiri salvezza.
+^srd-berserker-frenesia-sanguinante
 ## Azioni
 
 ### Ascia bipenne
 
 *Tiro per colpire in mischia:* +5, portata 1,5 m *Colpito:* 9 (1d12 + 3) danni taglienti.
+^srd-berserker-ascia-bipenne
 ````
 
 > [!info] Licenza

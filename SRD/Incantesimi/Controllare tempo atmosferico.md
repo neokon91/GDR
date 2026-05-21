@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Incantesimi/Controllare tempo atmosferico]]"]
+riferimenti_srd: ["[[SRD/Incantesimi/Controllare tempo atmosferico]]"]
+riferimenti_regola: []
+sezioni_collegate: ["[[SRD/Incantesimi/Controllare tempo atmosferico#Precipitazioni]]", "[[SRD/Incantesimi/Controllare tempo atmosferico#Temperatura]]", "[[SRD/Incantesimi/Controllare tempo atmosferico#Vento]]"]
+blocchi_collegati: []
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/incantesimo"]
 livello: 8
 scuola: "Trasmutazione"
 classi: ["chierico", "druido", "mago"]

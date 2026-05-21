@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Pseudodrago]]"]
+riferimenti_srd: ["[[SRD/Mostri/Pseudodrago]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Pseudodrago#^srd-pseudodrago-resistenza-alla-magia]]", "[[SRD/Mostri/Pseudodrago#^srd-pseudodrago-multiattacco]]", "[[SRD/Mostri/Pseudodrago#^srd-pseudodrago-morso]]", "[[SRD/Mostri/Pseudodrago#^srd-pseudodrago-pungiglione]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Pseudodrago"
 type: "Drago"
 size: "minuscolo"
@@ -91,19 +98,23 @@ tab: Azioni
 ### Resistenza alla magia
 
 Lo pseudodrago dispone di vantaggio ai tiri salvezza contro incantesimi e altri effetti magici.
+^srd-pseudodrago-resistenza-alla-magia
 ## Azioni
 
 ### Multiattacco
 
 Lo pseudodrago effettua due attacchi Morso.
+^srd-pseudodrago-multiattacco
 
 ### Morso
 
 *Tiro per colpire in mischia:* +4, portata 1,5 m. *Colpito:* 4 (1d4 + 2) danni perforanti.
+^srd-pseudodrago-morso
 
 ### Pungiglione
 
 *Tiro salvezza su Costituzione:* CD 12, una creatura che lo pseudodrago è in grado di vedere entro 1,5 metri. *Fallimento:* 5 (2d4) danni da veleno, e il bersaglio è avvelenato per 1 ora. Fallimento di 5 o più: finché rimane avvelenato, il bersaglio è privo di sensi. Il bersaglio si sveglia se subisce danni o se una creatura entro 1,5 metri da esso effettua un'azione per svegliarlo.
+^srd-pseudodrago-pungiglione
 ````
 
 > [!info] Licenza

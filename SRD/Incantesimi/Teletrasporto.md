@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Incantesimi/Teletrasporto]]"]
+riferimenti_srd: ["[[SRD/Incantesimi/Teletrasporto]]"]
+riferimenti_regola: []
+sezioni_collegate: ["[[SRD/Incantesimi/Teletrasporto#Risultato del teletrasporto]]"]
+blocchi_collegati: []
+tabelle_collegate: ["[[SRD/Incantesimi/Teletrasporto#^srd-teletrasporto-risultato-del-teletrasporto]]"]
+tags: ["dnd55/srd", "dnd55/incantesimo"]
 livello: 7
 scuola: "Evocazione"
 classi: ["bardo", "mago", "stregone"]

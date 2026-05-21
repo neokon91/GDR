@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Regole/Spese, servizi e stile di vita]]"]
+riferimenti_srd: ["[[SRD/Regole/Spese, servizi e stile di vita]]"]
+riferimenti_regola: []
+sezioni_collegate: ["[[SRD/Regole/Spese, servizi e stile di vita#Stili di vita]]", "[[SRD/Regole/Spese, servizi e stile di vita#Servizi]]"]
+blocchi_collegati: []
+tabelle_collegate: ["[[SRD/Regole/Spese, servizi e stile di vita#^srd-spese_servizi_e_stile_di_vita-stili-di-vita]]", "[[SRD/Regole/Spese, servizi e stile di vita#^srd-spese_servizi_e_stile_di_vita-servizi]]"]
+tags: ["dnd55/srd", "dnd55/regola"]
 capitolo: "Equipaggiamento"
 categoria_regola: "Equipaggiamento"
 pagine_sorgente: "114-115"
@@ -29,6 +36,7 @@ Le spese dello stile di vita coprono vitto, alloggio, manutenzione dell'attrezza
 | Agiato | 2 mo al giorno. |
 | Ricco | 4 mo al giorno. |
 | Aristocratico | 10 mo al giorno. |
+^srd-spese_servizi_e_stile_di_vita-stili-di-vita
 
 ## Servizi
 
@@ -44,6 +52,7 @@ Le spese dello stile di vita coprono vitto, alloggio, manutenzione dell'attrezza
 | Servizi magici: livelli 4-5 | Solo cittadina o citta; costo 2.000 mo. |
 | Servizi magici: livelli 6-8 | Solo citta; costo 20.000 mo. |
 | Servizi magici: livello 9 | Solo citta; costo 100.000 mo. |
+^srd-spese_servizi_e_stile_di_vita-servizi
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

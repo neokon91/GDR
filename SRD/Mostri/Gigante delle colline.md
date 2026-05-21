@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Gigante delle colline]]"]
+riferimenti_srd: ["[[SRD/Mostri/Gigante delle colline]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Gigante delle colline#^srd-gigante_delle_colline-multiattacco]]", "[[SRD/Mostri/Gigante delle colline#^srd-gigante_delle_colline-tronco-d-albero]]", "[[SRD/Mostri/Gigante delle colline#^srd-gigante_delle_colline-lancio-di-rifiuti]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Gigante delle colline"
 type: "Gigante"
 size: "enorme"
@@ -88,14 +95,17 @@ tab: Azioni
 ### Multiattacco
 
 Il gigante effettua due attacchi, utilizzando Tronco d'albero o Lancio di rifiuti in qualsiasi combinazione.
+^srd-gigante_delle_colline-multiattacco
 
 ### Tronco d'albero
 
 *Tiro per colpire in mischia:* +8, portata 3 m. *Colpito:* 18 (3d8 + 5) danni contundenti. Se il bersaglio è una creatura di taglia Grande o inferiore, cade a terra prono.
+^srd-gigante_delle_colline-tronco-d-albero
 
 ### Lancio di rifiuti
 
 *Tiro per colpire a distanza:* +8, gittata 18/72 m. *Colpito:* 16 (2d10 + 5) danni contundenti, e il bersaglio è avvelenato fino al termine del proprio turno successivo.
+^srd-gigante_delle_colline-lancio-di-rifiuti
 ````
 
 > [!info] Licenza

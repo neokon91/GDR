@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Classi/Ranger]]"]
+riferimenti_srd: ["[[SRD/Classi/Ranger]]"]
+riferimenti_regola: []
+sezioni_collegate: ["[[SRD/Classi/Ranger#Tratti di classe]]", "[[SRD/Classi/Ranger#Progressione di classe]]", "[[SRD/Classi/Ranger#Privilegi chiave]]", "[[SRD/Classi/Ranger#Lista degli incantesimi da ranger]]", "[[SRD/Classi/Ranger#Sottoclasse del ranger: Cacciatore]]"]
+blocchi_collegati: []
+tabelle_collegate: ["[[SRD/Classi/Ranger#^srd-ranger-tratti-di-classe]]", "[[SRD/Classi/Ranger#^srd-ranger-progressione-di-classe]]", "[[SRD/Classi/Ranger#^srd-ranger-privilegi-chiave]]", "[[SRD/Classi/Ranger#^srd-ranger-lista-degli-incantesimi-da-ranger]]", "[[SRD/Classi/Ranger#^srd-ranger-sottoclasse-del-ranger-cacciatore]]"]
+tags: ["dnd55/srd"]
 capitolo: "Classi"
 pagine_sorgente: "75-78"
 caratteristica_primaria: ["Destrezza", "Saggezza"]
@@ -41,6 +48,7 @@ A: cuoio borchiato, scimitarra, spada corta, arco lungo, 20 frecce, faretra, foc
 | Armi | Armi semplici e da guerra. |
 | Armature | Armature leggere e medie; scudi. |
 | Equipaggiamento iniziale | A: cuoio borchiato, scimitarra, spada corta, arco lungo, 20 frecce, faretra, focus druidico, dotazione da esploratore e 7 mo; oppure B: 150 mo. |
+^srd-ranger-tratti-di-classe
 
 ## Progressione di classe
 
@@ -66,6 +74,7 @@ A: cuoio borchiato, scimitarra, spada corta, arco lungo, 20 frecce, faretra, foc
 | 18 | +6 | Sensi ferini | 6 | 14 | 4 | 3 | 3 | 3 | 1 |
 | 19 | +6 | Dono epico | 6 | 15 | 4 | 3 | 3 | 3 | 2 |
 | 20 | +6 | Sterminatore di nemici | 6 | 15 | 4 | 3 | 3 | 3 | 2 |
+^srd-ranger-progressione-di-classe
 
 ## Privilegi chiave
 
@@ -75,6 +84,7 @@ A: cuoio borchiato, scimitarra, spada corta, arco lungo, 20 frecce, faretra, foc
 | Incantesimi | Prepara incantesimi da ranger e recupera slot con riposo lungo. |
 | Stile di combattimento | Ottiene un talento Stile di combattimento appropriato. |
 | Girovago | Aumenta velocita e ottiene velocita di scalata e nuoto. |
+^srd-ranger-privilegi-chiave
 
 ## Lista degli incantesimi da ranger
 
@@ -128,6 +138,7 @@ A: cuoio borchiato, scimitarra, spada corta, arco lungo, 20 frecce, faretra, foc
 | 5 | Comunione con la natura | Divinazione | R |
 | 5 | Ristorare superiore | Abiurazione | M |
 | 5 | Traslazione arborea | Evocazione | C |
+^srd-ranger-lista-degli-incantesimi-da-ranger
 
 ## Sottoclasse del ranger: Cacciatore
 
@@ -138,6 +149,7 @@ A: cuoio borchiato, scimitarra, spada corta, arco lungo, 20 frecce, faretra, foc
 | 7 | Tattiche difensive | Sceglie Difesa dal multiattacco o Sfuggire all orda e puo cambiarla dopo riposo. |
 | 11 | Preda del cacciatore superiore | Estende i danni extra del marchio del cacciatore a una seconda creatura vicina. |
 | 15 | Difesa del cacciatore superiore | Con reazione ottiene resistenza al danno appena subito e allo stesso tipo fino a fine turno. |
+^srd-ranger-sottoclasse-del-ranger-cacciatore
 
 ## Progressione
 

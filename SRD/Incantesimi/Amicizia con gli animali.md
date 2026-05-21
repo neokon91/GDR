@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Incantesimi/Amicizia con gli animali]]"]
+riferimenti_srd: ["[[SRD/Incantesimi/Amicizia con gli animali]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Incantesimi/Amicizia con gli animali#^srd-amicizia_con_gli_animali-utilizzo-di-uno-slot-incantesimo-di-livello-superiore]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/incantesimo"]
 livello: 1
 scuola: "Ammaliamento"
 classi: ["bardo", "druido", "ranger"]
@@ -36,6 +43,7 @@ L'incantatore sceglie come bersaglio una bestia entro gittata che egli è in gra
 ### Utilizzo di uno slot incantesimo di livello superiore
 
 L'incantatore può scegliere come bersaglio una bestia aggiuntiva per ogni slot di livello superiore al 1º.
+^srd-amicizia_con_gli_animali-utilizzo-di-uno-slot-incantesimo-di-livello-superiore
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

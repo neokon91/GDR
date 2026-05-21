@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Drago d'oro giovane]]"]
+riferimenti_srd: ["[[SRD/Mostri/Drago d'oro giovane]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Drago d'oro giovane#^srd-drago_d_oro_giovane-anfibio]]", "[[SRD/Mostri/Drago d'oro giovane#^srd-drago_d_oro_giovane-multiattacco]]", "[[SRD/Mostri/Drago d'oro giovane#^srd-drago_d_oro_giovane-squarcio]]", "[[SRD/Mostri/Drago d'oro giovane#^srd-drago_d_oro_giovane-soffio-di-fuoco-ricarica-5-6]]", "[[SRD/Mostri/Drago d'oro giovane#^srd-drago_d_oro_giovane-soffio-indebolente]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Drago d'oro giovane"
 type: "Drago (metallico)"
 size: "grande"
@@ -97,23 +104,28 @@ tab: Azioni
 ### Anfibio
 
 Il drago può respirare in aria e in acqua.
+^srd-drago_d_oro_giovane-anfibio
 ## Azioni
 
 ### Multiattacco
 
 Il drago effettua tre attacchi Squarcio. Può sostituire un attacco con un utilizzo di Soffio indebolente.
+^srd-drago_d_oro_giovane-multiattacco
 
 ### Squarcio
 
 *Tiro per colpire in mischia:* +10, portata 3 m. *Colpito:* 17 (2d10 + 6) danni taglienti.
+^srd-drago_d_oro_giovane-squarcio
 
 ### Soffio di fuoco (ricarica 5-6)
 
 *Tiro salvezza su Destrezza:* CD 17, tutte le creature in un cono di 9 metri. *Fallimento:* 55 (10d10) danni da fuoco. *Successo:* danni dimezzati.
+^srd-drago_d_oro_giovane-soffio-di-fuoco-ricarica-5-6
 
 ### Soffio indebolente
 
 *Tiro salvezza su Forza:* CD 17, ogni creatura che al momento non è sotto l'effetto di questo soffio in un cono di 9 metri. *Fallimento:* il bersaglio subisce svantaggio alle prove con d20 basate sulla Forza e sottrae 3 (1d6) ai tiri per i danni. La creatura ripete il tiro salvezza alla fine di ogni suo turno e, se lo supera, l'effetto svanisce. Dopo 1 minuto, il tiro viene superato automaticamente.
+^srd-drago_d_oro_giovane-soffio-indebolente
 ````
 
 > [!info] Licenza

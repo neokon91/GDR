@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Incantesimi/Produrre fiamma]]"]
+riferimenti_srd: ["[[SRD/Incantesimi/Produrre fiamma]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Incantesimi/Produrre fiamma#^srd-produrre_fiamma-trucchetto-potenziato]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/incantesimo"]
 livello: 0
 scuola: "Evocazione"
 classi: ["druido"]
@@ -38,6 +45,7 @@ Fino al termine dell'incantesimo, l'incantatore può effettuare un'azione di Mag
 ### Trucchetto potenziato
 
 I danni di questo incantesimo aumentano di 1d8 quando l'incantatore raggiunge il 5º livello (2d8), l'11º livello (3d8) e il 17º livello (4d8).
+^srd-produrre_fiamma-trucchetto-potenziato
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

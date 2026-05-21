@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Incantesimi/Modificare memoria]]"]
+riferimenti_srd: ["[[SRD/Incantesimi/Modificare memoria]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Incantesimi/Modificare memoria#^srd-modificare_memoria-utilizzo-di-uno-slot-incantesimo-di-livello-superiore]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/incantesimo"]
 livello: 5
 scuola: "Ammaliamento"
 classi: ["bardo", "mago"]
@@ -44,6 +51,7 @@ Un incantesimo rimuovi maledizione o ristorare superiore lanciato su un bersagli
 ### Utilizzo di uno slot incantesimo di livello superiore
 
 L'incantatore può alterare i ricordi del bersaglio relativi a un evento risalente fino a 7 giorni prima (slot incantesimo di 6º livello), 30 giorni prima (slot incantesimo di 7º livello), 365 giorni prima (slot incantesimo di 8º livello) o a un qualsiasi momento del suo passato (slot incantesimo di 9º livello).
+^srd-modificare_memoria-utilizzo-di-uno-slot-incantesimo-di-livello-superiore
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

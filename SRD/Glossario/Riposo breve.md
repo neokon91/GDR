@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Glossario/Riposo breve]]"]
+riferimenti_srd: ["[[SRD/Glossario/Riposo breve]]"]
+riferimenti_regola: []
+sezioni_collegate: ["[[SRD/Glossario/Riposo breve#Interruzione]]"]
+blocchi_collegati: []
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/regola"]
 lettera: "R"
 descrittore:
 pagine_sorgente: 213
@@ -23,6 +30,7 @@ Un riposo breve è 1 ora di inattività leggera. Per iniziarlo devi avere almeno
 ### Eventi
 
 Tirare per l'iniziativa, lanciare un incantesimo diverso da un trucchetto o subire danni interrompe il riposo e impedisce di riceverne i benefici.
+^srd-riposo_breve-eventi
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Alce gigante]]"]
+riferimenti_srd: ["[[SRD/Mostri/Alce gigante]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Alce gigante#^srd-alce_gigante-sfondamento]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Alce gigante"
 type: "Celestiale"
 size: "enorme"
@@ -86,6 +93,7 @@ tab: Azioni
 ### Sfondamento
 
 *Tiro per colpire in mischia:* +6, portata 3 m. *Colpito:* 11 (2d6 + 4) danni contundenti più 5 (2d4) danni radiosi. Se il bersaglio è una creatura di taglia Enorme o inferiore e l'alce si è mosso di 6 metri o più in linea retta verso di esso subito prima del colpo, il bersaglio subisce 5 (2d4) danni contundenti extra e cade a terra prono.
+^srd-alce_gigante-sfondamento
 ````
 
 > [!info] Licenza

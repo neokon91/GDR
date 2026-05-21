@@ -31,3 +31,10 @@ profile_fields:
 - round
 - condizioni
 - encounter_creatures
+- fonti
+- riferimenti_srd
+- riferimenti_regola
+- sezioni_collegate
+- blocchi_collegati
+- tabelle_collegate
+- tags

@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Incantesimi/Parola divina]]"]
+riferimenti_srd: ["[[SRD/Incantesimi/Parola divina]]"]
+riferimenti_regola: []
+sezioni_collegate: ["[[SRD/Incantesimi/Parola divina#Effetti della parola divina]]"]
+blocchi_collegati: []
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/incantesimo"]
 livello: 7
 scuola: "Invocazione"
 classi: ["chierico"]

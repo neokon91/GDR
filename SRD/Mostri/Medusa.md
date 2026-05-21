@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Medusa]]"]
+riferimenti_srd: ["[[SRD/Mostri/Medusa]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Medusa#^srd-medusa-multiattacco]]", "[[SRD/Mostri/Medusa#^srd-medusa-artiglio]]", "[[SRD/Mostri/Medusa#^srd-medusa-chioma-di-serpenti]]", "[[SRD/Mostri/Medusa#^srd-medusa-raggio-velenoso]]", "[[SRD/Mostri/Medusa#^srd-medusa-sguardo-pietrificante-ricarica-5-6]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Medusa"
 type: "Mostruosità"
 size: "media"
@@ -95,18 +102,22 @@ tab: Azioni
 ### Multiattacco
 
 La medusa effettua due attacchi Artiglio e un attacco Chioma di serpenti, o tre attacchi Raggio velenoso.
+^srd-medusa-multiattacco
 
 ### Artiglio
 
 *Tiro per colpire in mischia:* +6, portata 1,5 m. *Colpito:* 10 (2d6 + 3) danni taglienti.
+^srd-medusa-artiglio
 
 ### Chioma di serpenti
 
 *Tiro per colpire in mischia:* +6, portata 1,5 m *Colpito:* 5 (1d4 + 3) danni perforanti più 14 (4d6) danni da veleno.
+^srd-medusa-chioma-di-serpenti
 
 ### Raggio velenoso
 
 *Tiro per colpire a distanza:* +5, gittata 45 m. *Colpito:* 11 (2d8 + 2) danni da veleno.
+^srd-medusa-raggio-velenoso
 ````
 
 > [!info] Licenza

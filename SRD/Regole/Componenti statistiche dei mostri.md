@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Regole/Componenti statistiche dei mostri]]"]
+riferimenti_srd: ["[[SRD/Regole/Componenti statistiche dei mostri]]"]
+riferimenti_regola: []
+sezioni_collegate: ["[[SRD/Regole/Componenti statistiche dei mostri#Combattimento e caratteristiche]]", "[[SRD/Regole/Componenti statistiche dei mostri#Dadi Vita per taglia]]", "[[SRD/Regole/Componenti statistiche dei mostri#Punti esperienza per grado di sfida]]", "[[SRD/Regole/Componenti statistiche dei mostri#Bonus di competenza per grado di sfida]]"]
+blocchi_collegati: []
+tabelle_collegate: ["[[SRD/Regole/Componenti statistiche dei mostri#^srd-componenti_statistiche_mostri-combattimento-e-caratteristiche]]", "[[SRD/Regole/Componenti statistiche dei mostri#^srd-componenti_statistiche_mostri-dadi-vita-per-taglia]]", "[[SRD/Regole/Componenti statistiche dei mostri#^srd-componenti_statistiche_mostri-punti-esperienza-per-grado-di-sfida]]", "[[SRD/Regole/Componenti statistiche dei mostri#^srd-componenti_statistiche_mostri-bonus-di-competenza-per-grado-di-sfida]]"]
+tags: ["dnd55/srd", "dnd55/regola"]
 capitolo: "Mostri"
 categoria_regola: "Mostri"
 pagine_sorgente: "290-292"
@@ -27,6 +34,7 @@ Le componenti numeriche della scheda spiegano CA, iniziativa, punti ferita, velo
 | Punti ferita | Presentati come numero e formula con Dadi Vita; si usa il numero o si tira la formula, non entrambi. |
 | Velocita | Indica la velocita base e possibili velocita speciali come nuoto, scalata, scavo o volo. |
 | Abilita | I bonus derivano da modificatore di caratteristica, bonus di competenza e possibili altri modificatori. |
+^srd-componenti_statistiche_mostri-combattimento-e-caratteristiche
 
 ## Dadi Vita per taglia
 
@@ -38,6 +46,7 @@ Le componenti numeriche della scheda spiegano CA, iniziativa, punti ferita, velo
 | Grande | d10 | 5,5 |
 | Enorme | d12 | 6,5 |
 | Mastodontica | d20 | 10,5 |
+^srd-componenti_statistiche_mostri-dadi-vita-per-taglia
 
 ## Punti esperienza per grado di sfida
 
@@ -60,6 +69,7 @@ Le componenti numeriche della scheda spiegano CA, iniziativa, punti ferita, velo
 | 28 | 120.000 |
 | 29 | 135.000 |
 | 30 | 155.000 |
+^srd-componenti_statistiche_mostri-punti-esperienza-per-grado-di-sfida
 
 ## Bonus di competenza per grado di sfida
 
@@ -69,6 +79,7 @@ Le componenti numeriche della scheda spiegano CA, iniziativa, punti ferita, velo
 | 21-24 | +7 |
 | 25-28 | +8 |
 | 29-30 | +9 |
+^srd-componenti_statistiche_mostri-bonus-di-competenza-per-grado-di-sfida
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

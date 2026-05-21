@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Classi/Bardo]]"]
+riferimenti_srd: ["[[SRD/Classi/Bardo]]"]
+riferimenti_regola: []
+sezioni_collegate: ["[[SRD/Classi/Bardo#Tratti di classe]]", "[[SRD/Classi/Bardo#Progressione di classe]]", "[[SRD/Classi/Bardo#Privilegi chiave]]", "[[SRD/Classi/Bardo#Lista degli incantesimi da bardo]]", "[[SRD/Classi/Bardo#Sottoclasse del bardo: Collegio della Sapienza]]"]
+blocchi_collegati: []
+tabelle_collegate: ["[[SRD/Classi/Bardo#^srd-bardo-tratti-di-classe]]", "[[SRD/Classi/Bardo#^srd-bardo-progressione-di-classe]]", "[[SRD/Classi/Bardo#^srd-bardo-privilegi-chiave]]", "[[SRD/Classi/Bardo#^srd-bardo-lista-degli-incantesimi-da-bardo]]", "[[SRD/Classi/Bardo#^srd-bardo-sottoclasse-del-bardo-collegio-della-sapienza]]"]
+tags: ["dnd55/srd"]
 capitolo: "Classi"
 pagine_sorgente: "35-40"
 caratteristica_primaria: ["Carisma"]
@@ -43,6 +50,7 @@ A: armatura di cuoio, 2 pugnali, strumento musicale, dotazione da intrattenitore
 | Strumenti | Tre strumenti musicali a scelta. |
 | Armature | Armature leggere. |
 | Equipaggiamento iniziale | A: armatura di cuoio, 2 pugnali, strumento musicale, dotazione da intrattenitore e 19 mo; oppure B: 90 mo. |
+^srd-bardo-tratti-di-classe
 
 ## Progressione di classe
 
@@ -68,6 +76,7 @@ A: armatura di cuoio, 2 pugnali, strumento musicale, dotazione da intrattenitore
 | 18 | +6 | Ispirazione superiore | D12 | 4 | 20 | 4 | 3 | 3 | 3 | 3 | 1 | 1 | 1 | 1 |
 | 19 | +6 | Dono epico | D12 | 4 | 21 | 4 | 3 | 3 | 3 | 3 | 2 | 1 | 1 | 1 |
 | 20 | +6 | Parole della creazione | D12 | 4 | 22 | 4 | 3 | 3 | 3 | 3 | 2 | 2 | 1 | 1 |
+^srd-bardo-progressione-di-classe
 
 ## Privilegi chiave
 
@@ -77,6 +86,7 @@ A: armatura di cuoio, 2 pugnali, strumento musicale, dotazione da intrattenitore
 | Incantesimi | Preparazione dalla lista del bardo, trucchetti e slot che si recuperano con riposo lungo. |
 | Maestria | Raddoppia il bonus di competenza per alcune abilita scelte. |
 | Segreti magici | Permette di preparare incantesimi da altre liste. |
+^srd-bardo-privilegi-chiave
 
 ## Lista degli incantesimi da bardo
 
@@ -212,6 +222,7 @@ A: armatura di cuoio, 2 pugnali, strumento musicale, dotazione da intrattenitore
 | 9 | Parola del potere guarire | Ammaliamento | - |
 | 9 | Parola del potere uccidere | Ammaliamento | - |
 | 9 | Previsione | Divinazione | M |
+^srd-bardo-lista-degli-incantesimi-da-bardo
 
 ## Sottoclasse del bardo: Collegio della Sapienza
 
@@ -221,6 +232,7 @@ A: armatura di cuoio, 2 pugnali, strumento musicale, dotazione da intrattenitore
 | 3 | Parole taglienti | Usa reazione e Ispirazione bardica per sottrarre il dado a danni, prove o tiri per colpire riusciti. |
 | 6 | Scoperte magiche | Apprende due incantesimi da chierico, druido o mago, sempre preparati e sostituibili salendo di livello. |
 | 14 | Abilita impareggiabile | Dopo un fallimento puo spendere Ispirazione bardica e aggiungerla al d20; se fallisce resta non consumata. |
+^srd-bardo-sottoclasse-del-bardo-collegio-della-sapienza
 
 ## Progressione
 

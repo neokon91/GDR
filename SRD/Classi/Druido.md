@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Classi/Druido]]"]
+riferimenti_srd: ["[[SRD/Classi/Druido]]"]
+riferimenti_regola: []
+sezioni_collegate: ["[[SRD/Classi/Druido#Tratti di classe]]", "[[SRD/Classi/Druido#Progressione di classe]]", "[[SRD/Classi/Druido#Forme bestiali]]", "[[SRD/Classi/Druido#Privilegi chiave]]", "[[SRD/Classi/Druido#Lista degli incantesimi da druido]]", "[[SRD/Classi/Druido#Sottoclasse del druido: Circolo della Terra]]", "[[SRD/Classi/Druido#Incantesimi del Circolo della Terra]]", "[[SRD/Classi/Druido#Interdizione della Natura]]"]
+blocchi_collegati: []
+tabelle_collegate: ["[[SRD/Classi/Druido#^srd-druido-tratti-di-classe]]", "[[SRD/Classi/Druido#^srd-druido-progressione-di-classe]]", "[[SRD/Classi/Druido#^srd-druido-forme-bestiali]]", "[[SRD/Classi/Druido#^srd-druido-privilegi-chiave]]", "[[SRD/Classi/Druido#^srd-druido-lista-degli-incantesimi-da-druido]]", "[[SRD/Classi/Druido#^srd-druido-sottoclasse-del-druido-circolo-della-terra]]", "[[SRD/Classi/Druido#^srd-druido-incantesimi-del-circolo-della-terra]]", "[[SRD/Classi/Druido#^srd-druido-interdizione-della-natura]]"]
+tags: ["dnd55/srd"]
 capitolo: "Classi"
 pagine_sorgente: "46-52"
 caratteristica_primaria: ["Saggezza"]
@@ -43,6 +50,7 @@ A: armatura di cuoio, scudo, falcetto, focus druidico, dotazione da esploratore,
 | Strumenti | Borsa da erborista. |
 | Armature | Armature leggere e scudi. |
 | Equipaggiamento iniziale | A: armatura di cuoio, scudo, falcetto, focus druidico, dotazione da esploratore, borsa da erborista e 9 mo; oppure B: 50 mo. |
+^srd-druido-tratti-di-classe
 
 ## Progressione di classe
 
@@ -68,6 +76,7 @@ A: armatura di cuoio, scudo, falcetto, focus druidico, dotazione da esploratore,
 | 18 | +6 | Incantesimi bestiali | 4 | 4 | 20 | 4 | 3 | 3 | 3 | 3 | 1 | 1 | 1 | 1 |
 | 19 | +6 | Dono epico | 4 | 4 | 21 | 4 | 3 | 3 | 3 | 3 | 2 | 1 | 1 | 1 |
 | 20 | +6 | Arcidruido | 4 | 4 | 22 | 4 | 3 | 3 | 3 | 3 | 2 | 2 | 1 | 1 |
+^srd-druido-progressione-di-classe
 
 ## Forme bestiali
 
@@ -76,6 +85,7 @@ A: armatura di cuoio, scudo, falcetto, focus druidico, dotazione da esploratore,
 | 2 | 4 | 1/4 | No |
 | 4 | 6 | 1/2 | No |
 | 8 | 8 | 1 | Si |
+^srd-druido-forme-bestiali
 
 ## Privilegi chiave
 
@@ -85,6 +95,7 @@ A: armatura di cuoio, scudo, falcetto, focus druidico, dotazione da esploratore,
 | Forma selvatica | Assume forme bestiali con limiti di livello, mantenendo alcuni tratti personali. |
 | Compagno selvatico | Opzione legata a Forma selvatica per richiamare aiuti naturali. |
 | Corpo senza tempo | La magia primordiale rallenta l'invecchiamento. |
+^srd-druido-privilegi-chiave
 
 ## Lista degli incantesimi da druido
 
@@ -214,6 +225,7 @@ A: armatura di cuoio, scudo, falcetto, focus druidico, dotazione da esploratore,
 | 9 | Resurrezione pura | Necromanzia | M |
 | 9 | Tempesta di vendetta | Evocazione | C |
 | 9 | Trasformazione | Trasmutazione | C, M |
+^srd-druido-lista-degli-incantesimi-da-druido
 
 ## Sottoclasse del druido: Circolo della Terra
 
@@ -224,6 +236,7 @@ A: armatura di cuoio, scudo, falcetto, focus druidico, dotazione da esploratore,
 | 6 | Recupero naturale | Lancia gratis un incantesimo del Circolo e recupera slot durante un riposo breve. |
 | 10 | Interdizione della Natura | Immunita ad avvelenato e resistenza in base alla terra scelta. |
 | 14 | Rifugio della Natura | Spende Forma selvatica per creare un area che concede mezza copertura e la resistenza agli alleati. |
+^srd-druido-sottoclasse-del-druido-circolo-della-terra
 
 ## Incantesimi del Circolo della Terra
 
@@ -233,6 +246,7 @@ A: armatura di cuoio, scudo, falcetto, focus druidico, dotazione da esploratore,
 | Polare | Blocca persone, nube di nebbia, raggio di gelo | Tempesta di nevischio | Tempesta di ghiaccio | Cono di freddo |
 | Temperata | Passo velato, sonno, stretta folgorante | Fulmine | Liberta di movimento | Traslazione arborea |
 | Tropicale | Fiotto acido, raggio di infermita, ragnatela | Nube maleodorante | Metamorfosi | Piaga degli insetti |
+^srd-druido-incantesimi-del-circolo-della-terra
 
 ## Interdizione della Natura
 
@@ -242,6 +256,7 @@ A: armatura di cuoio, scudo, falcetto, focus druidico, dotazione da esploratore,
 | Polare | Freddo |
 | Temperata | Fulmine |
 | Tropicale | Veleno |
+^srd-druido-interdizione-della-natura
 
 ## Progressione
 

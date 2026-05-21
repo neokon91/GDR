@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Equipaggiamento/Dotazione da avventuriero]]"]
+riferimenti_srd: ["[[SRD/Equipaggiamento/Dotazione da avventuriero]]"]
+riferimenti_regola: []
+sezioni_collegate: ["[[SRD/Equipaggiamento/Dotazione da avventuriero#Dettagli]]"]
+blocchi_collegati: []
+tabelle_collegate: ["[[SRD/Equipaggiamento/Dotazione da avventuriero#^srd-dotazione_da_avventuriero-dettagli]]"]
+tags: ["dnd55/srd"]
 capitolo: "Equipaggiamento"
 pagine_sorgente: "107-113"
 tipo_oggetto: "equipaggiamento_avventura"
@@ -42,6 +49,7 @@ Peso 27,5 kg; costo 12 mo.
 | Oggetto | Peso | Costo |
 | --- | --- | --- |
 | Dotazione da avventuriero | 27,5 kg | 12 mo |
+^srd-dotazione_da_avventuriero-dettagli
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

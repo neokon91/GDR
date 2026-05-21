@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Tigre]]"]
+riferimenti_srd: ["[[SRD/Mostri/Tigre]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Tigre#^srd-tigre-squarcio]]", "[[SRD/Mostri/Tigre#^srd-tigre-fuga-agile]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Tigre"
 type: "Bestia"
 size: "grande"
@@ -87,6 +94,7 @@ tab: Azioni
 ### Squarcio
 
 *Tiro per colpire in mischia:* +5, portata 1,5 m. *Colpito:* 10 (2d6 + 3) danni taglienti. Se il bersaglio è una creatura di taglia Grande o inferiore, cade a terra prono.
+^srd-tigre-squarcio
 ````
 
 > [!info] Licenza

@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Incantesimi/Muro di ghiaccio]]"]
+riferimenti_srd: ["[[SRD/Incantesimi/Muro di ghiaccio]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Incantesimi/Muro di ghiaccio#^srd-muro_di_ghiaccio-utilizzo-di-uno-slot-incantesimo-di-livello-superiore]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/incantesimo"]
 livello: 6
 scuola: "Invocazione"
 classi: ["mago"]
@@ -42,6 +49,7 @@ Una creatura che attraversa tale cortina d'aria gelida per la per la prima volta
 ### Utilizzo di uno slot incantesimo di livello superiore
 
 I danni inflitti dal muro quando compare aumentano di 2d6 e quelli subiti da chi passa attraverso la cortina d'aria gelida aumentano di 1d6 per ogni slot incantesimo di livello superiore al 6º.
+^srd-muro_di_ghiaccio-utilizzo-di-uno-slot-incantesimo-di-livello-superiore
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

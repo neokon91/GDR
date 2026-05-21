@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Hezrou]]"]
+riferimenti_srd: ["[[SRD/Mostri/Hezrou]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Hezrou#^srd-hezrou-fetore]]", "[[SRD/Mostri/Hezrou#^srd-hezrou-resistenza-alla-magia]]", "[[SRD/Mostri/Hezrou#^srd-hezrou-ristoro-demoniaco]]", "[[SRD/Mostri/Hezrou#^srd-hezrou-multiattacco]]", "[[SRD/Mostri/Hezrou#^srd-hezrou-squarcio]]", "[[SRD/Mostri/Hezrou#^srd-hezrou-balzo]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Hezrou"
 type: "Immondo (demone)"
 size: "grande"
@@ -93,23 +100,28 @@ tab: Azioni
 ### Fetore
 
 *Tiro salvezza su Costituzione:* CD 16, ogni creatura che inizi il suo turno in un'emanazione di 3 metri di cui l'hezrou è il punto di origine. *Fallimento:* il bersaglio è avvelenato fino all'inizio del proprio turno successivo.
+^srd-hezrou-fetore
 
 ### Resistenza alla magia
 
 L'hezrou dispone di vantaggio ai tiri salvezza contro incantesimi e altri effetti magici.
+^srd-hezrou-resistenza-alla-magia
 
 ### Ristoro demoniaco
 
 Se l'hezrou muore al di fuori dell'Abisso, il suo corpo si dissolve diventando icore ed esso ne acquisisce uno nuovo all'istante, tornando in vita con tutti i suoi punti ferita da qualche parte nell'Abisso.
+^srd-hezrou-ristoro-demoniaco
 ## Azioni
 
 ### Multiattacco
 
 L'hezrou effettua tre attacchi Squarcio.
+^srd-hezrou-multiattacco
 
 ### Squarcio
 
 *Tiro per colpire in mischia:* +7, portata 1,5 m. *Colpito:* 6 (1d4 + 4) danni taglienti più 9 (2d8) danni da veleno.
+^srd-hezrou-squarcio
 ````
 
 > [!info] Licenza

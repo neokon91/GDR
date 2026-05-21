@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Tirannosauro]]"]
+riferimenti_srd: ["[[SRD/Mostri/Tirannosauro]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Tirannosauro#^srd-tirannosauro-multiattacco]]", "[[SRD/Mostri/Tirannosauro#^srd-tirannosauro-coda]]", "[[SRD/Mostri/Tirannosauro#^srd-tirannosauro-morso]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Tirannosauro"
 type: "Bestia (dinosauro)"
 size: "enorme"
@@ -90,14 +97,17 @@ tab: Azioni
 ### Multiattacco
 
 Il tirannosauro effettua un attacco Morso e un attacco Coda.
+^srd-tirannosauro-multiattacco
 
 ### Coda
 
 *Tiro per colpire in mischia:* +10, portata 4,5 m. *Colpito:* 25 (4d8 + 7) danni contundenti. Se il bersaglio è una creatura di taglia Enorme o inferiore, cade a terra prono.
+^srd-tirannosauro-coda
 
 ### Morso
 
 *Tiro per colpire in mischia:* +10, portata 3 m. *Colpito:* 33 (4d12 + 7) danni perforanti. Se il bersaglio è una creatura di taglia Grande o inferiore, è afferrato (CD 17 per sfuggire). Mentre è afferrato, il bersaglio è trattenuto e non può essere bersagliato dalla Coda del tirannosauro.
+^srd-tirannosauro-morso
 ````
 
 > [!info] Licenza

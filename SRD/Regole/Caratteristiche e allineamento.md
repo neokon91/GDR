@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Regole/Caratteristiche e allineamento]]"]
+riferimenti_srd: ["[[SRD/Regole/Caratteristiche e allineamento]]"]
+riferimenti_regola: []
+sezioni_collegate: ["[[SRD/Regole/Caratteristiche e allineamento#Generare e modificare punteggi]]", "[[SRD/Regole/Caratteristiche e allineamento#Allineamenti]]", "[[SRD/Regole/Caratteristiche e allineamento#Costi in punti del punteggio di caratteristica]]", "[[SRD/Regole/Caratteristiche e allineamento#Serie standard per classe]]", "[[SRD/Regole/Caratteristiche e allineamento#Punteggi di caratteristica e modificatori]]"]
+blocchi_collegati: []
+tabelle_collegate: ["[[SRD/Regole/Caratteristiche e allineamento#^srd-caratteristiche_allineamento_personaggio-generare-e-modificare-punteggi]]", "[[SRD/Regole/Caratteristiche e allineamento#^srd-caratteristiche_allineamento_personaggio-allineamenti]]", "[[SRD/Regole/Caratteristiche e allineamento#^srd-caratteristiche_allineamento_personaggio-costi-in-punti-del-punteggio-di-caratteristica]]", "[[SRD/Regole/Caratteristiche e allineamento#^srd-caratteristiche_allineamento_personaggio-serie-standard-per-classe]]", "[[SRD/Regole/Caratteristiche e allineamento#^srd-caratteristiche_allineamento_personaggio-punteggi-di-caratteristica-e-modificatori]]"]
+tags: ["dnd55/srd", "dnd55/regola"]
 capitolo: "Creazione del personaggio"
 categoria_regola: "Creazione personaggio"
 pagine_sorgente: "23-24"
@@ -27,6 +34,7 @@ I punteggi di caratteristica possono essere generati con serie standard, generaz
 | Costo in punti | 27 punti; punteggi disponibili da 8 a 15 con costi da 0 a 9. |
 | Background | Aumenta un punteggio di 2 e un altro di 1, oppure tre punteggi di 1; nessun incremento oltre 20. |
 | Modificatori | Usa la tabella dei modificatori: 10-11 vale +0, 12-13 +1, 14-15 +2, 16-17 +3, 18-19 +4, 20 +5. |
+^srd-caratteristiche_allineamento_personaggio-generare-e-modificare-punteggi
 
 ## Allineamenti
 
@@ -39,6 +47,7 @@ I punteggi di caratteristica possono essere generati con serie standard, generaz
 | N | Evita questioni morali e fa cio che sembra migliore volta per volta. |
 | CN | Segue i propri capricci e mette la liberta personale al primo posto. |
 | LM/NM/CM | Allineamenti malvagi da concordare con il GM prima di creare il personaggio. |
+^srd-caratteristiche_allineamento_personaggio-allineamenti
 
 ## Costi in punti del punteggio di caratteristica
 
@@ -52,6 +61,7 @@ I punteggi di caratteristica possono essere generati con serie standard, generaz
 | 13 | 5 |
 | 14 | 7 |
 | 15 | 9 |
+^srd-caratteristiche_allineamento_personaggio-costi-in-punti-del-punteggio-di-caratteristica
 
 ## Serie standard per classe
 
@@ -69,6 +79,7 @@ I punteggi di caratteristica possono essere generati con serie standard, generaz
 | Ranger | 12 | 15 | 13 | 8 | 14 | 10 |
 | Stregone | 10 | 13 | 14 | 8 | 12 | 15 |
 | Warlock | 8 | 14 | 13 | 12 | 10 | 15 |
+^srd-caratteristiche_allineamento_personaggio-serie-standard-per-classe
 
 ## Punteggi di caratteristica e modificatori
 
@@ -84,6 +95,7 @@ I punteggi di caratteristica possono essere generati con serie standard, generaz
 | 16-17 | +3 |
 | 18-19 | +4 |
 | 20 | +5 |
+^srd-caratteristiche_allineamento_personaggio-punteggi-di-caratteristica-e-modificatori
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

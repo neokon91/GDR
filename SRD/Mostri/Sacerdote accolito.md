@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Sacerdote accolito]]"]
+riferimenti_srd: ["[[SRD/Mostri/Sacerdote accolito]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Sacerdote accolito#^srd-sacerdote_accolito-mazza]]", "[[SRD/Mostri/Sacerdote accolito#^srd-sacerdote_accolito-fiamma-radiosa]]", "[[SRD/Mostri/Sacerdote accolito#^srd-sacerdote_accolito-incantesimi]]", "[[SRD/Mostri/Sacerdote accolito#^srd-sacerdote_accolito-aiuto-divino-1-giorno]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Sacerdote accolito"
 type: "Umanoide (chierico)"
 size: "medio o piccolo"
@@ -91,14 +98,17 @@ tab: Azioni
 ### Mazza
 
 *Tiro per colpire in mischia:* +4, portata 1,5 m *Colpito:* 5 (1d6 + 2) danni contundenti più 2 (1d4) danni radiosi.
+^srd-sacerdote_accolito-mazza
 
 ### Fiamma radiosa
 
 *Tiro per colpire a distanza:* +4, gittata 18 m. *Colpito:* 7 (2d6) danni radiosi.
+^srd-sacerdote_accolito-fiamma-radiosa
 
 ### Incantesimi
 
 Il sacerdote lancia uno dei seguenti incantesimi, utilizzando Saggezza come caratteristica da incantatore: A volontà: Luce, taumaturgia
+^srd-sacerdote_accolito-incantesimi
 ````
 
 > [!info] Licenza

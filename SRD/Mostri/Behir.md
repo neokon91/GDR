@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Behir]]"]
+riferimenti_srd: ["[[SRD/Mostri/Behir]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Behir#^srd-behir-multiattacco]]", "[[SRD/Mostri/Behir#^srd-behir-morso]]", "[[SRD/Mostri/Behir#^srd-behir-soffio-di-fulmini-ricarica-5-6]]", "[[SRD/Mostri/Behir#^srd-behir-stritolare]]", "[[SRD/Mostri/Behir#^srd-behir-inghiottire]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Behir"
 type: "Mostruosità"
 size: "enorme"
@@ -93,18 +100,22 @@ tab: Azioni
 ### Multiattacco
 
 Il behir effettua un attacco Morso e usa Stritolare.
+^srd-behir-multiattacco
 
 ### Morso
 
 *Tiro per colpire in mischia:* +10, portata 3 m. *Colpito:* 19 (2d12 + 6) danni perforanti più 11 (2d10) danni da fulmine.
+^srd-behir-morso
 
 ### Soffio di fulmini (ricarica 5-6)
 
 *Tiro salvezza su Destrezza:* CD 16, tutte le creature in una linea lunga 27 metri e larga 1,5 metri. *Fallimento:* 66 (12d10) danni da fulmine. *Successo:* danni dimezzati.
+^srd-behir-soffio-di-fulmini-ricarica-5-6
 
 ### Stritolare
 
 *Tiro salvezza su Forza:* CD 18, una creatura di taglia Grande o inferiore che il behir è in grado di vedere entro 1,5 metri. *Fallimento:* 28 (5d8 + 6) danni contundenti. Il bersaglio è afferrato (CD 16 per sfuggire) ed è trattenuto finché la presa perdura.
+^srd-behir-stritolare
 ````
 
 > [!info] Licenza

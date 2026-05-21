@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Avvoltoio]]"]
+riferimenti_srd: ["[[SRD/Mostri/Avvoltoio]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Avvoltoio#^srd-avvoltoio-tattiche-del-branco]]", "[[SRD/Mostri/Avvoltoio#^srd-avvoltoio-becco]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Avvoltoio"
 type: "Bestia"
 size: "media"
@@ -86,11 +93,13 @@ tab: Azioni
 ### Tattiche del branco
 
 L'avvoltoio dispone di vantaggio a un tiro per colpire contro una creatura se almeno uno dei suoi alleati si trova entro 1,5 metri dalla creatura e non è incapacitato.
+^srd-avvoltoio-tattiche-del-branco
 ## Azioni
 
 ### Becco
 
 *Tiro per colpire in mischia:* +2, portata 1,5 m. *Colpito:* 2 (1d4) danni perforanti.
+^srd-avvoltoio-becco
 ````
 
 > [!info] Licenza

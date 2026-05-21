@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Regole/Componenti e durata]]"]
+riferimenti_srd: ["[[SRD/Regole/Componenti e durata]]"]
+riferimenti_regola: []
+sezioni_collegate: ["[[SRD/Regole/Componenti e durata#Componenti]]", "[[SRD/Regole/Componenti e durata#Durata]]"]
+blocchi_collegati: []
+tabelle_collegate: ["[[SRD/Regole/Componenti e durata#^srd-componenti_durata_incantesimi-componenti]]", "[[SRD/Regole/Componenti e durata#^srd-componenti_durata_incantesimi-durata]]"]
+tags: ["dnd55/srd", "dnd55/regola"]
 capitolo: "Incantesimi"
 categoria_regola: "Incantesimi"
 pagine_sorgente: 120
@@ -27,6 +34,7 @@ Le componenti sono i requisiti fisici necessari al lancio di un incantesimo. La 
 | Materiale (M) | Richiede materiali indicati tra parentesi; non sono consumati salvo diversa indicazione. |
 | Borsa o focus | Se il materiale non ha costo e non viene consumato, puo essere sostituito da borsa per componenti o focus da incantatore consentito dal privilegio. |
 | Mano libera | La mano usata per materiali o focus puo essere la stessa usata per componenti somatiche. |
+^srd-componenti_durata_incantesimi-componenti
 
 ## Durata
 
@@ -36,6 +44,7 @@ Le componenti sono i requisiti fisici necessari al lancio di un incantesimo. La 
 | Istantanea | L'incantesimo appare solo per un momento e poi scompare. |
 | Intervallo | La durata e espressa in round, minuti, ore o altre unita simili. |
 | Interrompere | Se un incantesimo a intervallo e in corso, l'incantatore puo interromperlo senza azione se non e incapacitato. |
+^srd-componenti_durata_incantesimi-durata
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

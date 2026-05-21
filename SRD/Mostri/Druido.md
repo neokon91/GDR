@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Druido]]"]
+riferimenti_srd: ["[[SRD/Mostri/Druido]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Druido#^srd-druido-multiattacco]]", "[[SRD/Mostri/Druido#^srd-druido-bastone-di-rampicanti]]", "[[SRD/Mostri/Druido#^srd-druido-bagliore-verdeggiante]]", "[[SRD/Mostri/Druido#^srd-druido-incantesimi]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Druido"
 type: "Umanoide"
 size: "medio o piccolo"
@@ -92,14 +99,17 @@ tab: Azioni
 ### Multiattacco
 
 Il druido effettua due attacchi, usando Bastone di rampicanti o Bagliore verdeggiante in qualsiasi combinazione.
+^srd-druido-multiattacco
 
 ### Bastone di rampicanti
 
 *Tiro per colpire in mischia:* +5, portata 1,5 m. *Colpito:* 7 (1d8 + 3) danni contundenti più 2 (1d4) danni da veleno.
+^srd-druido-bastone-di-rampicanti
 
 ### Bagliore verdeggiante
 
 *Tiro per colpire a distanza:* +5, gittata 27 m. *Colpito:* 10 (3d6) danni radiosi.
+^srd-druido-bagliore-verdeggiante
 
 ### Incantesimi
 
@@ -117,6 +127,7 @@ Il druido lancia uno dei seguenti incantesimi, utilizzando Saggezza come caratte
 *A volontà:*
 - artificio druidico
 - parlare con gli animali
+^srd-druido-incantesimi
 ````
 
 > [!info] Licenza

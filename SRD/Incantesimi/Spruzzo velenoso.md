@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Incantesimi/Spruzzo velenoso]]"]
+riferimenti_srd: ["[[SRD/Incantesimi/Spruzzo velenoso]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Incantesimi/Spruzzo velenoso#^srd-spruzzo_velenoso-trucchetto-potenziato]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/incantesimo"]
 livello: 0
 scuola: "Necromanzia"
 classi: ["druido", "mago", "stregone", "warlock"]
@@ -36,6 +43,7 @@ L'incantatore spruzza una nebbia tossica contro una creatura entro gittata, effe
 ### Trucchetto potenziato
 
 I danni aumentano di 1d12 quando l'incantatore raggiunge il 5º livello (2d12), l'11º livello (3d12) e il 17º livello (4d12).
+^srd-spruzzo_velenoso-trucchetto-potenziato
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

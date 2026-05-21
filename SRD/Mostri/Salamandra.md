@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Salamandra]]"]
+riferimenti_srd: ["[[SRD/Mostri/Salamandra]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Salamandra#^srd-salamandra-aura-di-fuoco]]", "[[SRD/Mostri/Salamandra#^srd-salamandra-multiattacco]]", "[[SRD/Mostri/Salamandra#^srd-salamandra-lancia-di-fuoco]]", "[[SRD/Mostri/Salamandra#^srd-salamandra-stritolare]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Salamandra"
 type: "Elementale"
 size: "grande"
@@ -86,19 +93,23 @@ tab: Azioni
 ### Aura di fuoco
 
 Alla fine di ogni turno della salamandra, ciascuna creatura a sua scelta in un'emanazione di 1,5 metri di cui la salamandra è il punto di origine subisce 7 (2d6) danni da fuoco.
+^srd-salamandra-aura-di-fuoco
 ## Azioni
 
 ### Multiattacco
 
 La salamandra effettua due attacchi Lancia di fuoco. Può sostituire un attacco con un utilizzo di Stritolare.
+^srd-salamandra-multiattacco
 
 ### Lancia di fuoco
 
 *Tiro per colpire in mischia o a distanza:* +7, portata 1,5 m o gittata 6/18 m. *Colpito:* 13 (2d8 + 4) danni perforanti più 7 (2d6) danni da fuoco. Colpito o mancato: la lancia torna magicamente tra le mani della salamandra subito dopo un attacco a distanza.
+^srd-salamandra-lancia-di-fuoco
 
 ### Stritolare
 
 *Tiro salvezza su Forza:* CD 15, una creatura di taglia Grande o inferiore che la salamandra è in grado di vedere entro 3 metri. *Fallimento:* 11 (2d6 + 4) danni contundenti più 7 (2d6) danni da fuoco. Il bersaglio è afferrato (CD 14 per sfuggire) ed è trattenuto finché la presa perdura.
+^srd-salamandra-stritolare
 ````
 
 > [!info] Licenza

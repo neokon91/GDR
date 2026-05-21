@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Cane intermittente]]"]
+riferimenti_srd: ["[[SRD/Mostri/Cane intermittente]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Cane intermittente#^srd-cane_intermittente-morso]]", "[[SRD/Mostri/Cane intermittente#^srd-cane_intermittente-teletrasporto-ricarica-4-6]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Cane intermittente"
 type: "Folletto"
 size: "medio"
@@ -87,6 +94,7 @@ tab: Azioni
 ### Morso
 
 *Tiro per colpire in mischia:* +5, portata 1,5 m *Colpito:* 5 (1d4 + 3) danni perforanti.
+^srd-cane_intermittente-morso
 ````
 
 > [!info] Licenza

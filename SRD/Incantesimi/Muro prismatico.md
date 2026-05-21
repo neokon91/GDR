@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Incantesimi/Muro prismatico]]"]
+riferimenti_srd: ["[[SRD/Incantesimi/Muro prismatico]]"]
+riferimenti_regola: []
+sezioni_collegate: ["[[SRD/Incantesimi/Muro prismatico#Strati prismatici]]"]
+blocchi_collegati: []
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/incantesimo"]
 livello: 9
 scuola: "Abiurazione"
 classi: ["bardo", "mago"]

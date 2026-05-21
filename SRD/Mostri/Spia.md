@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Spia]]"]
+riferimenti_srd: ["[[SRD/Mostri/Spia]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Spia#^srd-spia-spada-corta]]", "[[SRD/Mostri/Spia#^srd-spia-balestra-a-mano]]", "[[SRD/Mostri/Spia#^srd-spia-azione-scaltra]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Spia"
 type: "Umanoide"
 size: "medio o piccolo"
@@ -93,10 +100,12 @@ tab: Azioni
 ### Spada corta
 
 *Tiro per colpire in mischia:* +4, portata 1,5 m *Colpito:* 5 (1d6 + 2) danni perforanti più 7 (2d6) danni da veleno.
+^srd-spia-spada-corta
 
 ### Balestra a mano
 
 *Tiro per colpire a distanza:* +4, gittata 9/36 m. *Colpito:* 5 (1d6 + 2) danni perforanti più 7 (2d6) danni da veleno.
+^srd-spia-balestra-a-mano
 ````
 
 > [!info] Licenza

@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Pteranodonte]]"]
+riferimenti_srd: ["[[SRD/Mostri/Pteranodonte]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Pteranodonte#^srd-pteranodonte-volo-sfuggente]]", "[[SRD/Mostri/Pteranodonte#^srd-pteranodonte-morso]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Pteranodonte"
 type: "Bestia (dinosauro)"
 size: "media"
@@ -86,11 +93,13 @@ tab: Azioni
 ### Volo sfuggente
 
 Lo pteranodonte non provoca attacchi di opportunità quando vola oltre la portata di un nemico.
+^srd-pteranodonte-volo-sfuggente
 ## Azioni
 
 ### Morso
 
 *Tiro per colpire in mischia:* +4, portata 1,5 m. *Colpito:* 6 (1d8 + 2) danni perforanti.
+^srd-pteranodonte-morso
 ````
 
 > [!info] Licenza

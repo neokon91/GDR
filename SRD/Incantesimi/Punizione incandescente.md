@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Incantesimi/Punizione incandescente]]"]
+riferimenti_srd: ["[[SRD/Incantesimi/Punizione incandescente]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Incantesimi/Punizione incandescente#^srd-punizione_incandescente-utilizzo-di-uno-slot-incantesimo-di-livello-superiore]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/incantesimo"]
 livello: 1
 scuola: "Invocazione"
 classi: ["paladino"]
@@ -36,6 +43,7 @@ Quando l'incantatore colpisce il bersaglio, esso subisce 1d6 danni da fuoco extr
 ### Utilizzo di uno slot incantesimo di livello superiore
 
 Tutti i danni aumentano di 1d6 per ogni slot di livello superiore al 1º.
+^srd-punizione_incandescente-utilizzo-di-uno-slot-incantesimo-di-livello-superiore
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Grick]]"]
+riferimenti_srd: ["[[SRD/Mostri/Grick]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Grick#^srd-grick-multiattacco]]", "[[SRD/Mostri/Grick#^srd-grick-becco]]", "[[SRD/Mostri/Grick#^srd-grick-tentacoli]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Grick"
 type: "Aberrazione"
 size: "media"
@@ -88,14 +95,17 @@ tab: Azioni
 ### Multiattacco
 
 Il grick effettua un attacco Becco e un attacco Tentacoli.
+^srd-grick-multiattacco
 
 ### Becco
 
 *Tiro per colpire in mischia:* +4, portata 1,5 m.*Colpito:* 9 (2d6 + 2) danni perforanti.
+^srd-grick-becco
 
 ### Tentacoli
 
 *Tiro per colpire in mischia:* +4, portata 1,5 m. *Colpito:* 7 (1d10 + 2) danni taglienti. Se il bersaglio è una creatura di taglia Media o inferiore, è afferrato (CD 12 per sfuggire) da tutti e quattro i tentacoli.
+^srd-grick-tentacoli
 ````
 
 > [!info] Licenza

@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Drago d'ottone antico]]"]
+riferimenti_srd: ["[[SRD/Mostri/Drago d'ottone antico]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Drago d'ottone antico#^srd-drago_d_ottone_antico-resistenza-leggendaria-4-giorno-o-5-giorno-nella-tana]]", "[[SRD/Mostri/Drago d'ottone antico#^srd-drago_d_ottone_antico-multiattacco]]", "[[SRD/Mostri/Drago d'ottone antico#^srd-drago_d_ottone_antico-squarcio]]", "[[SRD/Mostri/Drago d'ottone antico#^srd-drago_d_ottone_antico-incantesimi]]", "[[SRD/Mostri/Drago d'ottone antico#^srd-drago_d_ottone_antico-soffio-di-fuoco-ricarica-5-6]]", "[[SRD/Mostri/Drago d'ottone antico#^srd-drago_d_ottone_antico-soffio-di-sonno]]", "[[SRD/Mostri/Drago d'ottone antico#^srd-drago_d_ottone_antico-balzo]]", "[[SRD/Mostri/Drago d'ottone antico#^srd-drago_d_ottone_antico-luce-accecante]]", "[[SRD/Mostri/Drago d'ottone antico#^srd-drago_d_ottone_antico-sabbie-roventi]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Drago d'ottone antico"
 type: "Drago (metallico)"
 size: "mastodontico"
@@ -105,15 +112,18 @@ tab: Azioni
 ### Resistenza leggendaria (4/giorno o 5/giorno nella tana)
 
 Se il drago fallisce un tiro salvezza, può scegliere di superarlo comunque.
+^srd-drago_d_ottone_antico-resistenza-leggendaria-4-giorno-o-5-giorno-nella-tana
 ## Azioni
 
 ### Multiattacco
 
 Il drago effettua tre attacchi Squarcio. Può sostituire un attacco con un utilizzo di (A) Soffio di sonno o (B) Incantesimi per lanciare raggio rovente (di 3º livello).
+^srd-drago_d_ottone_antico-multiattacco
 
 ### Squarcio
 
 *Tiro per colpire in mischia:* +14, portata 4,5 m. *Colpito:* 19 (2d10 + 8) danni taglienti più 7 (2d6) danni da fuoco.
+^srd-drago_d_ottone_antico-squarcio
 
 ### Incantesimi
 
@@ -129,16 +139,19 @@ Il drago lancia uno dei seguenti incantesimi, senza bisogno di componenti materi
 - parlare con gli animali
 - raggio rovente (di 3º livello)
 - trasformazione (solo in forma di bestia o umanoide, senza punti ferita temporanei ottenuti dall'incantesimo, e senza richiedere concentrazione o punti ferita temporanei per mantenere l'incantesimo)
+^srd-drago_d_ottone_antico-incantesimi
 
 ### Soffio di fuoco (ricarica 5-6)
 
 *Tiro salvezza su Destrezza:* CD 21, tutte le creature in una linea lunga 27 metri e larga 1,5 metri. *Fallimento:* 58 (13d8) danni da fuoco. *Successo:* danni dimezzati.
+^srd-drago_d_ottone_antico-soffio-di-fuoco-ricarica-5-6
 
 ### Soffio di sonno
 
 *Tiro salvezza su Costituzione:* CD 21, tutte le creature in un cono di 27 metri. *Fallimento:* il bersaglio è incapacitato fino al termine del proprio turno successivo, a quel punto ripete il tiro salvezza.
 
 *Secondo fallimento:* il bersaglio cade privo di sensi per 10 minuti. Questo effetto termina se il bersaglio subisce danni o se una creatura entro 1,5 metri da esso esegue un'azione per svegliarlo.
+^srd-drago_d_ottone_antico-soffio-di-sonno
 ## Azioni Leggendarie
 
 3 (4 nella tana). Subito dopo il turno di un'altra creatura, il drago può consumare un utilizzo per effettuare una delle seguenti azioni. Il drago recupera tutti gli utilizzi consumati all'inizio di ogni suo turno.
@@ -148,14 +161,17 @@ Il drago lancia uno dei seguenti incantesimi, senza bisogno di componenti materi
 ### Balzo
 
 Il drago si muove fino a metà della sua velocità, ed effettua un attacco Squarcio.
+^srd-drago_d_ottone_antico-balzo
 
 ### Luce accecante
 
 Il drago usa Incantesimi per lanciare raggio rovente (di 3º livello).
+^srd-drago_d_ottone_antico-luce-accecante
 
 ### Sabbie roventi
 
 *Tiro salvezza su Destrezza:* CD 20, una creatura che il drago è in grado di vedere entro 36 metri. *Fallimento:* 36 (8d8) danni da fuoco, e la velocità del bersaglio è dimezzata fino al termine del proprio turno successivo. *Fallimento o successo:* il drago non può ripetere quest'azione fino all'inizio del proprio turno successivo.
+^srd-drago_d_ottone_antico-sabbie-roventi
 ````
 
 > [!info] Licenza

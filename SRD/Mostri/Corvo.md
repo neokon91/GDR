@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Corvo]]"]
+riferimenti_srd: ["[[SRD/Mostri/Corvo]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Corvo#^srd-corvo-imitare]]", "[[SRD/Mostri/Corvo#^srd-corvo-becco]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Corvo"
 type: "Bestia"
 size: "minuscola"
@@ -86,11 +93,13 @@ tab: Azioni
 ### Imitare
 
 Il corvo può imitare dei suoni semplici che ha sentito, come sussurri o cinguettii. Chi li ascolta può capire che si tratta di imitazioni superando una prova di Saggezza (Intuizione) con CD 10.
+^srd-corvo-imitare
 ## Azioni
 
 ### Becco
 
 *Tiro per colpire in mischia:* +4, portata 1,5 m. *Colpito:* 1 danno perforante.
+^srd-corvo-becco
 ````
 
 > [!info] Licenza

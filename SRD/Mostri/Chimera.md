@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Chimera]]"]
+riferimenti_srd: ["[[SRD/Mostri/Chimera]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Chimera#^srd-chimera-multiattacco]]", "[[SRD/Mostri/Chimera#^srd-chimera-artiglio]]", "[[SRD/Mostri/Chimera#^srd-chimera-morso]]", "[[SRD/Mostri/Chimera#^srd-chimera-sfondamento]]", "[[SRD/Mostri/Chimera#^srd-chimera-soffio-di-fuoco-ricarica-5-6]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Chimera"
 type: "Mostruosità"
 size: "grande"
@@ -92,22 +99,27 @@ tab: Azioni
 ### Multiattacco
 
 La chimera effettua un attacco Sfondamento, un attacco Morso e un attacco Artiglio. Può sostituire l'attacco Artiglio con un utilizzo di Soffio di fuoco, se disponibile.
+^srd-chimera-multiattacco
 
 ### Artiglio
 
 *Tiro per colpire in mischia:* +7, portata 1,5 m. *Colpito:* 7 (1d6 + 4) danni taglienti
+^srd-chimera-artiglio
 
 ### Morso
 
 *Tiro per colpire in mischia:* +7, portata 1,5 m. *Colpito:* 11 (2d6 + 4) danni perforanti, o 18 (4d6 + 4) danni perforanti se la chimera dispone di vantaggio al tiro per colpire.
+^srd-chimera-morso
 
 ### Sfondamento
 
 *Tiro per colpire in mischia:* +7, portata 1,5 m. *Colpito:* 10 (1d12 + 4) danni contundenti. Se il bersaglio è una creatura di taglia Media o inferiore, cade a terra prono.
+^srd-chimera-sfondamento
 
 ### Soffio di fuoco (ricarica 5-6)
 
 *Tiro salvezza su Destrezza:* CD 15, tutte le creature in un cono di 4,5 metri. *Fallimento:* 31 (7d8) danni da fuoco. *Successo:* danni dimezzati.
+^srd-chimera-soffio-di-fuoco-ricarica-5-6
 ````
 
 > [!info] Licenza

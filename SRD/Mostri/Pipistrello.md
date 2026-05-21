@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Pipistrello]]"]
+riferimenti_srd: ["[[SRD/Mostri/Pipistrello]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Pipistrello#^srd-pipistrello-morso]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Pipistrello"
 type: "Bestia"
 size: "minuscola"
@@ -80,6 +87,7 @@ tab: Azioni
 ### Morso
 
 *Tiro per colpire in mischia:* +4, portata 1,5 m. *Colpito:* 1 danno perforante.
+^srd-pipistrello-morso
 ````
 
 > [!info] Licenza

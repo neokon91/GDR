@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Coboldo guerriero]]"]
+riferimenti_srd: ["[[SRD/Mostri/Coboldo guerriero]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Coboldo guerriero#^srd-coboldo_guerriero-sensibilita-al-sole]]", "[[SRD/Mostri/Coboldo guerriero#^srd-coboldo_guerriero-tattiche-del-branco]]", "[[SRD/Mostri/Coboldo guerriero#^srd-coboldo_guerriero-pugnale]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Coboldo guerriero"
 type: "Drago"
 size: "piccolo"
@@ -84,15 +91,18 @@ tab: Azioni
 ### Sensibilità al sole
 
 Finché è esposto alla luce del sole, il coboldo subisce svantaggio alle prove di caratteristica e ai tiri per colpire.
+^srd-coboldo_guerriero-sensibilita-al-sole
 
 ### Tattiche del branco
 
 Il coboldo dispone di vantaggio a un tiro per colpire contro una creatura se almeno uno degli alleati del mostro si trova entro 1,5 metri dalla creatura e l'alleato non è incapacitato.
+^srd-coboldo_guerriero-tattiche-del-branco
 ## Azioni
 
 ### Pugnale
 
 *Tiro per colpire in mischia o a distanza:* +4, portata 1,5 m o gittata 6/18 m. *Colpito:* 4 (1d4 + 2) danni perforanti.
+^srd-coboldo_guerriero-pugnale
 ````
 
 > [!info] Licenza

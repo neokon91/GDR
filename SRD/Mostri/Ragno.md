@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Ragno]]"]
+riferimenti_srd: ["[[SRD/Mostri/Ragno]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Ragno#^srd-ragno-andatura-sulla-ragnatela]]", "[[SRD/Mostri/Ragno#^srd-ragno-movimenti-del-ragno]]", "[[SRD/Mostri/Ragno#^srd-ragno-morso]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Ragno"
 type: "Bestia"
 size: "minuscola"
@@ -88,15 +95,18 @@ tab: Azioni
 ### Andatura sulla ragnatela
 
 Il ragno ignora le restrizioni di movimento causate dalle ragnatele e conosce l'ubicazione di qualsiasi altra creatura a contatto con la medesima ragnatela.
+^srd-ragno-andatura-sulla-ragnatela
 
 ### Movimenti del ragno
 
 Il ragno può scalare le superfici difficili, compresi i soffitti, senza effettuare una prova di caratteristica.
+^srd-ragno-movimenti-del-ragno
 ## Azioni
 
 ### Morso
 
 *Tiro per colpire in mischia:* +4, portata 1,5 m *Colpito:* 1 danno perforante più 2 (1d4) danni da veleno.
+^srd-ragno-morso
 ````
 
 > [!info] Licenza

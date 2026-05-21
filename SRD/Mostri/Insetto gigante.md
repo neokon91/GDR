@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Insetto gigante]]"]
+riferimenti_srd: ["[[SRD/Mostri/Insetto gigante]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Insetto gigante#^srd-insetto_gigante-attacco-naturale-variabile]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Insetto gigante"
 type: "Bestia"
 size: "grande o inferiore"
@@ -81,6 +88,7 @@ tab: Azioni
 ### Attacco naturale (variabile)
 
 *Tiro per colpire in mischia:* bonus variabile, portata 1,5 m (o diversa in base all’insetto). *Colpito:* danni variabili in base al tipo di insetto (per esempio morso, pungiglione, ecc.), eventualmente con effetti aggiuntivi come veleno.
+^srd-insetto_gigante-attacco-naturale-variabile
 ````
 
 > [!info] Licenza

@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Drago bianco adulto]]"]
+riferimenti_srd: ["[[SRD/Mostri/Drago bianco adulto]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Drago bianco adulto#^srd-drago_bianco_adulto-camminare-sul-ghiaccio]]", "[[SRD/Mostri/Drago bianco adulto#^srd-drago_bianco_adulto-multiattacco]]", "[[SRD/Mostri/Drago bianco adulto#^srd-drago_bianco_adulto-squarcio]]", "[[SRD/Mostri/Drago bianco adulto#^srd-drago_bianco_adulto-soffio-di-freddo-ricarica-5-6]]", "[[SRD/Mostri/Drago bianco adulto#^srd-drago_bianco_adulto-esplosione-congelante]]", "[[SRD/Mostri/Drago bianco adulto#^srd-drago_bianco_adulto-presenza-terrificante]]", "[[SRD/Mostri/Drago bianco adulto#^srd-drago_bianco_adulto-balzo]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Drago bianco adulto"
 type: "Drago (cromatico)"
 size: "enorme"
@@ -99,19 +106,23 @@ tab: Azioni
 ### Camminare sul ghiaccio
 
 Il drago può muoversi sulle superfici di ghiaccio e scalarle senza bisogno di effettuare una prova di caratteristica. Inoltre, un terreno difficile costituito da ghiaccio o neve non gli costa alcun movimento aggiuntivo.
+^srd-drago_bianco_adulto-camminare-sul-ghiaccio
 ## Azioni
 
 ### Multiattacco
 
 Il drago effettua tre attacchi Squarcio.
+^srd-drago_bianco_adulto-multiattacco
 
 ### Squarcio
 
 *Tiro per colpire in mischia:* +11, portata 3 m. *Colpito:* 13 (2d6 + 6) danni taglienti più 4 (1d8) danni da freddo.
+^srd-drago_bianco_adulto-squarcio
 
 ### Soffio di freddo (ricarica 5-6)
 
 *Tiro salvezza su Costituzione:* CD 19, tutte le creature in un cono di 18 metri. *Fallimento:* 54 (12d8) danni da freddo. *Successo:* danni dimezzati.
+^srd-drago_bianco_adulto-soffio-di-freddo-ricarica-5-6
 ## Azioni Leggendarie
 
 Subito dopo il turno di un'altra creatura, il drago può consumare un utilizzo per effettuare una delle seguenti azioni. Il drago recupera tutti gli utilizzi consumati all'inizio di ogni suo turno.
@@ -121,14 +132,17 @@ Subito dopo il turno di un'altra creatura, il drago può consumare un utilizzo p
 ### Esplosione congelante
 
 *Tiro salvezza su Costituzione:* CD 14, tutte le creature in una sfera di 9 metri di raggio centrata su un punto che il drago è in grado di vedere entro 36 metri. *Fallimento:* 7 (2d6) danni da freddo, e la velocità del bersaglio è pari a 0 fino al termine del turno successivo del bersaglio. *Fallimento o successo:* il drago non può ripetere quest'azione fino all'inizio del proprio turno successivo.
+^srd-drago_bianco_adulto-esplosione-congelante
 
 ### Presenza terrificante
 
 Il drago lancia paura senza bisogno di componenti materiali, utilizzando Carisma come caratteristica da incantatore (CD del tiro salvezza sull'incantesimo 14). Il drago non può ripetere quest'azione fino all'inizio del proprio turno successivo.
+^srd-drago_bianco_adulto-presenza-terrificante
 
 ### Balzo
 
 Il drago si muove fino a metà della sua velocità ed effettua un attacco Squarcio.
+^srd-drago_bianco_adulto-balzo
 ````
 
 > [!info] Licenza

@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Mummia]]"]
+riferimenti_srd: ["[[SRD/Mostri/Mummia]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Mummia#^srd-mummia-multiattacco]]", "[[SRD/Mostri/Mummia#^srd-mummia-pugno-di-putrefazione]]", "[[SRD/Mostri/Mummia#^srd-mummia-sguardo-funesto]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Mummia"
 type: "Non morto"
 size: "medio o piccolo"
@@ -85,14 +92,17 @@ tab: Azioni
 ### Multiattacco
 
 La mummia effettua due attacchi Pugno di putrefazione e usa Sguardo funesto.
+^srd-mummia-multiattacco
 
 ### Pugno di putrefazione
 
 *Tiro per colpire in mischia:* +5, portata 1,5 m *Colpito:* 8 (1d10 + 3) danni contundenti più 10 (3d6) danni necrotici. Se il bersaglio è una creatura, viene maledetto. Finché è maledetto, il bersaglio non può recuperare punti ferita, i suoi punti ferita massimi non tornano alla normalità al termine di un riposo lungo e sono ridotti di 10 (3d6) ogni 24 ore trascorse. Una creatura muore e si disintegra in polvere se viene ridotta a 0 punti ferita da questo attacco.
+^srd-mummia-pugno-di-putrefazione
 
 ### Sguardo funesto
 
 *Tiro salvezza su Saggezza:* CD 11, una creatura che la mummia è in grado di vedere entro 18 metri. *Fallimento:* il bersaglio è spaventato fino al termine del turno successivo della mummia. *Successo:* il bersaglio è immune allo Sguardo funesto di questa mummia per 24 ore.
+^srd-mummia-sguardo-funesto
 ````
 
 > [!info] Licenza

@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Diavolo della fossa]]"]
+riferimenti_srd: ["[[SRD/Mostri/Diavolo della fossa]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Diavolo della fossa#^srd-diavolo_della_fossa-aura-di-paura]]", "[[SRD/Mostri/Diavolo della fossa#^srd-diavolo_della_fossa-resistenza-alla-magia]]", "[[SRD/Mostri/Diavolo della fossa#^srd-diavolo_della_fossa-resistenza-leggendaria-4-giorno]]", "[[SRD/Mostri/Diavolo della fossa#^srd-diavolo_della_fossa-ristoro-diabolico]]", "[[SRD/Mostri/Diavolo della fossa#^srd-diavolo_della_fossa-multiattacco]]", "[[SRD/Mostri/Diavolo della fossa#^srd-diavolo_della_fossa-artiglio-diabolico]]", "[[SRD/Mostri/Diavolo della fossa#^srd-diavolo_della_fossa-mazza-fiammeggiante]]", "[[SRD/Mostri/Diavolo della fossa#^srd-diavolo_della_fossa-morso]]", "[[SRD/Mostri/Diavolo della fossa#^srd-diavolo_della_fossa-incantesimi-del-fuoco-infernale-ricarica-4-6]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Diavolo della fossa"
 type: "Immondo (diavolo)"
 size: "grande"
@@ -109,31 +116,38 @@ Il diavolo della fossa irradia un'aura in un'emanazione di 6 metri fintanto che 
 *Fallimento:* il bersaglio è spaventato fino all'inizio del proprio turno successivo.
 
 *Successo:* il bersaglio è immune all'aura di questo diavolo della fossa per 24 ore.
+^srd-diavolo_della_fossa-aura-di-paura
 
 ### Resistenza alla magia
 
 Il diavolo della fossa dispone di vantaggio ai tiri salvezza contro incantesimi e altri effetti magici.
+^srd-diavolo_della_fossa-resistenza-alla-magia
 
 ### Resistenza leggendaria (4/giorno)
 
 Se il diavolo della fossa fallisce un tiro salvezza, può scegliere di superarlo comunque.
+^srd-diavolo_della_fossa-resistenza-leggendaria-4-giorno
 
 ### Ristoro diabolico
 
 Se il diavolo della fossa muore al di fuori dei Nove Inferi, il suo corpo si dissolve in fumo sulfureo e ne acquisisce uno nuovo all'istante, tornando in vita con tutti i suoi punti ferita da qualche parte nei Nove Inferi.
+^srd-diavolo_della_fossa-ristoro-diabolico
 ## Azioni
 
 ### Multiattacco
 
 Il diavolo della fossa effettua un attacco Morso, due attacchi Artiglio diabolico e un attacco Mazza fiammeggiante.
+^srd-diavolo_della_fossa-multiattacco
 
 ### Artiglio diabolico
 
 *Tiro per colpire in mischia:* +14, portata 3 m. *Colpito:* 26 (4d8 + 8) danni necrotici.
+^srd-diavolo_della_fossa-artiglio-diabolico
 
 ### Mazza fiammeggiante
 
 *Tiro per colpire in mischia:* +14, portata 3 m. *Colpito:* 22 (4d6 + 8) danni da forza più 21 (6d6) danni da fuoco.
+^srd-diavolo_della_fossa-mazza-fiammeggiante
 
 ### Morso
 
@@ -142,10 +156,12 @@ Il diavolo della fossa effettua un attacco Morso, due attacchi Artiglio diabolic
 *Tiro salvezza su Costituzione:* CD 21.
 
 *Fallimento:* il bersaglio viene avvelenato. Finché è avvelenato, il bersaglio non può recuperare punti ferita e subisce 21 (6d6) danni da veleno all'inizio di ogni suo turno; il bersaglio ripete il tiro salvezza al termine di ogni suo turno e, se lo supera, l'effetto svanisce. Dopo 1 minuto, la prova viene superata automaticamente.
+^srd-diavolo_della_fossa-morso
 
 ### Incantesimi del fuoco infernale (ricarica 4-6)
 
 Il diavolo della fossa lancia palla di fuoco (di 5º livello) due volte, senza bisogno di componenti materiali e utilizzando Carisma come caratteristica da incantatore (CD del tiro salvezza sull'incantesimo 21). Può sostituire un incantesimo palla di fuoco con blocca mostri (di 7º livello) o con muro di fuoco.
+^srd-diavolo_della_fossa-incantesimi-del-fuoco-infernale-ricarica-4-6
 ````
 
 > [!info] Licenza

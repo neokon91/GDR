@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Oggetti Magici/Ascia del berserker]]"]
+riferimenti_srd: ["[[SRD/Oggetti Magici/Ascia del berserker]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: []
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/oggetto-magico"]
 tipo_oggetto: "Arma (alabarda, ascia bipenne o ascia da battaglia)"
 tipo_base: "Arma"
 rarita: "rara"

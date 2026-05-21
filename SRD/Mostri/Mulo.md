@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Mulo]]"]
+riferimenti_srd: ["[[SRD/Mostri/Mulo]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Mulo#^srd-mulo-bestia-da-soma]]", "[[SRD/Mostri/Mulo#^srd-mulo-zoccoli]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Mulo"
 type: "Bestia"
 size: "media"
@@ -83,11 +90,13 @@ tab: Azioni
 ### Bestia da soma
 
 Per determinare la sua capacità di carico, il mulo è considerato come se fosse di una categoria di taglia superiore.
+^srd-mulo-bestia-da-soma
 ## Azioni
 
 ### Zoccoli
 
 *Tiro per colpire in mischia:* +4, portata 1,5 m. *Colpito:* 4 (1d4 + 2) danni contundenti.
+^srd-mulo-zoccoli
 ````
 
 > [!info] Licenza

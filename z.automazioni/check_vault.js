@@ -452,6 +452,12 @@ function isBlockWikilink(value) {
     return /^\[\[[^\]|]+#\^[A-Za-z0-9_-]+(?:\|[^\]]+)?\]\]$/.test(text);
 }
 
+function requireYamlArray(fileRel, fm, field) {
+    if (hasValue(fm[field]) && !Array.isArray(fm[field])) {
+        warnings.push(`${fileRel}: ${field} deve essere una lista YAML`);
+    }
+}
+
 function flatText(value) {
     if (Array.isArray(value)) return value.map(flatText).join(" ");
     if (value && typeof value === "object") return Object.values(value).map(flatText).join(" ");
@@ -924,6 +930,10 @@ for (const [fileRel, fm] of realEntries) {
         if (normalizedTag && !allowedTags.has(normalizedTag)) {
             warnings.push(`${fileRel}: tag non previsto o non coerente (${normalizedTag})`);
         }
+    }
+
+    for (const field of ["fonti", "riferimenti_srd", "riferimenti_regola", "sezioni_collegate", "blocchi_collegati", "tabelle_collegate", "tags"]) {
+        requireYamlArray(fileRel, fm, field);
     }
 
     for (const field of ["fonti", "riferimenti_srd", "riferimenti_regola"]) {

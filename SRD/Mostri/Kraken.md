@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Kraken]]"]
+riferimenti_srd: ["[[SRD/Mostri/Kraken]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Kraken#^srd-kraken-anfibio]]", "[[SRD/Mostri/Kraken#^srd-kraken-mostro-da-assedio]]", "[[SRD/Mostri/Kraken#^srd-kraken-multiattacco]]", "[[SRD/Mostri/Kraken#^srd-kraken-tentacolo]]", "[[SRD/Mostri/Kraken#^srd-kraken-colpo-del-fulmine]]", "[[SRD/Mostri/Kraken#^srd-kraken-inghiottire]]", "[[SRD/Mostri/Kraken#^srd-kraken-scagliare]]", "[[SRD/Mostri/Kraken#^srd-kraken-inchiostro-nocivo]]", "[[SRD/Mostri/Kraken#^srd-kraken-lampo-burrascoso]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Kraken"
 type: "Mostruosità"
 size: "mastodontico"
@@ -105,15 +112,18 @@ tab: Azioni
 ### Anfibio
 
 Il kraken può respirare in aria e in acqua.
+^srd-kraken-anfibio
 
 ### Mostro da assedio
 
 Il kraken infligge danni doppi a oggetti e strutture. Resistenza leggendaria (4/giorno o 5/giorno nella tana). Se il kraken fallisce un tiro salvezza, può scegliere di superarlo comunque.
+^srd-kraken-mostro-da-assedio
 ## Azioni
 
 ### Multiattacco
 
 Il kraken effettua due attacchi Tentacolo e usa Scagliare, Colpo del fulmine o Inghiottire.
+^srd-kraken-multiattacco
 
 ### Tentacolo
 
@@ -121,18 +131,22 @@ Il kraken effettua due attacchi Tentacolo e usa Scagliare, Colpo del fulmine o I
 
 **Colpito:** 24 (4d6 + 10) danni contundenti
 Il bersaglio è afferrato (CD 20 per sfuggire) da uno dei dieci tentacoli, ed è trattenuto finché la presa perdura.
+^srd-kraken-tentacolo
 
 ### Colpo del fulmine
 
 *Tiro salvezza su Destrezza:* CD 23, una creatura che il kraken è in grado di vedere entro 36 metri. *Fallimento:* 33 (6d10) danni da fulmine. *Successo:* danni dimezzati.
+^srd-kraken-colpo-del-fulmine
 
 ### Inghiottire
 
 *Tiro salvezza su Destrezza:* CD 25, una creatura afferrata dal kraken (può inghiottire fino a quattro creature in una volta). *Fallimento:* 23 (3d8 + 10) danni perforanti. Se il bersaglio è di taglia Grande o inferiore, viene inghiottito e non è più afferrato. Una creatura inghiottita viene trattenuta, beneficia di copertura totale contro attacchi e altri effetti al di fuori del kraken, e subisce 24 (7d6) danni da acido all'inizio di ogni suo turno. Se il kraken subisce 50 danni o più in un singolo turno da una creatura al suo interno, deve superare un tiro salvezza su Costituzione con CD 25 alla fine di quel turno, altrimenti rigurgita tutte le creature inghiottite, che cadono prone in uno spazio entro 3 metri da lui. Se il kraken muore, qualsiasi creatura inghiottita non è più trattenuta e può fuggire dal cadavere usando 4,5 metri di movimento, uscendo prona.
+^srd-kraken-inghiottire
 
 ### Scagliare
 
 Il kraken scaglia una creatura di taglia Grande che ha afferrato in uno spazio che è in grado di vedere entro 18 metri da sé e che non sia in aria. *Tiro salvezza su Destrezza:* CD 25, la creatura scagliata e tutte le creature nello spazio di destinazione. *Fallimento:* 18 (4d8) danni contundenti, e il bersaglio cade a terra prono. *Successo:* danni dimezzati.
+^srd-kraken-scagliare
 ## Azioni Leggendarie
 
 Subito dopo il turno di un'altra creatura, il kraken può consumare un utilizzo per effettuare una delle seguenti azioni. Il kraken recupera tutti gli utilizzi consumati all'inizio di ogni suo turno.
@@ -142,10 +156,12 @@ Subito dopo il turno di un'altra creatura, il kraken può consumare un utilizzo 
 ### Inchiostro nocivo
 
 *Tiro salvezza su Costituzione:* CD 23, tutte le creature in un'emanazione di 4,5 metri di cui il kraken è il punto di origine finché si trova sott'acqua. *Fallimento:* il bersaglio è accecato e avvelenato fino al termine del turno successivo del kraken. Dopodiché il kraken si muove fino alla sua velocità massima. *Fallimento o successo:* il kraken non può ripetere quest'azione fino all'inizio del proprio turno successivo.
+^srd-kraken-inchiostro-nocivo
 
 ### Lampo burrascoso
 
 Il kraken usa Colpo del fulmine.
+^srd-kraken-lampo-burrascoso
 ````
 
 > [!info] Licenza

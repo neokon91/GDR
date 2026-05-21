@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Drider]]"]
+riferimenti_srd: ["[[SRD/Mostri/Drider]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Drider#^srd-drider-andatura-sulla-ragnatela]]", "[[SRD/Mostri/Drider#^srd-drider-movimenti-del-ragno]]", "[[SRD/Mostri/Drider#^srd-drider-sensibilita-al-sole]]", "[[SRD/Mostri/Drider#^srd-drider-multiattacco]]", "[[SRD/Mostri/Drider#^srd-drider-zampa-anteriore]]", "[[SRD/Mostri/Drider#^srd-drider-esplosione-di-veleno]]", "[[SRD/Mostri/Drider#^srd-drider-magia-della-regina-ragno-ricarica-5-6]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Drider"
 type: "Mostruosità"
 size: "grande"
@@ -97,27 +104,33 @@ tab: Azioni
 ### Andatura sulla ragnatela
 
 Il drider ignora le restrizioni di movimento causate dalle ragnatele e conosce l'ubicazione esatta di ogni altra creatura a contatto con la stessa ragnatela.
+^srd-drider-andatura-sulla-ragnatela
 
 ### Movimenti del ragno
 
 Il drider può scalare le superfici difficili, compresi i soffitti, senza effettuare una prova di caratteristica.
+^srd-drider-movimenti-del-ragno
 
 ### Sensibilità al sole
 
 Finché è esposto alla luce del sole, il drider subisce svantaggio alle prove di caratteristica e ai tiri per colpire.
+^srd-drider-sensibilita-al-sole
 ## Azioni
 
 ### Multiattacco
 
 Il drider effettua tre attacchi, usando Zampa anteriore o Esplosione di veleno in qualsiasi combinazione.
+^srd-drider-multiattacco
 
 ### Zampa anteriore
 
 *Tiro per colpire in mischia:* +7, portata 3 m. *Colpito:* 13 (2d8 + 4) danni perforanti.
+^srd-drider-zampa-anteriore
 
 ### Esplosione di veleno
 
 *Tiro per colpire a distanza:* +6, gittata 36 m. *Colpito:* 13 (3d6 + 3) danni da veleno.
+^srd-drider-esplosione-di-veleno
 ````
 
 > [!info] Licenza

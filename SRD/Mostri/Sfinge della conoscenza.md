@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Sfinge della conoscenza]]"]
+riferimenti_srd: ["[[SRD/Mostri/Sfinge della conoscenza]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Sfinge della conoscenza#^srd-sfinge_della_conoscenza-imperscrutabile]]", "[[SRD/Mostri/Sfinge della conoscenza#^srd-sfinge_della_conoscenza-resistenza-leggendaria-3-giorno-o-4-giorno-nella-tana]]", "[[SRD/Mostri/Sfinge della conoscenza#^srd-sfinge_della_conoscenza-multiattacco]]", "[[SRD/Mostri/Sfinge della conoscenza#^srd-sfinge_della_conoscenza-artiglio]]", "[[SRD/Mostri/Sfinge della conoscenza#^srd-sfinge_della_conoscenza-incantesimi]]", "[[SRD/Mostri/Sfinge della conoscenza#^srd-sfinge_della_conoscenza-ruggito-spezza-mente-ricarica-5-6]]", "[[SRD/Mostri/Sfinge della conoscenza#^srd-sfinge_della_conoscenza-agguato-arcano]]", "[[SRD/Mostri/Sfinge della conoscenza#^srd-sfinge_della_conoscenza-peso-degli-anni]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Sfinge della conoscenza"
 type: "Celestiale"
 size: "grande"
@@ -101,27 +108,33 @@ tab: Azioni
 ### Imperscrutabile
 
 Nessuna magia può consentire di osservare la sfinge da lontano o individuarne i pensieri senza il suo permesso. Le prove di Saggezza (Intuizione) effettuate per accertare le sue intenzioni o la sua sincerità subiscono svantaggio.
+^srd-sfinge_della_conoscenza-imperscrutabile
 
 ### Resistenza leggendaria (3/giorno o 4/giorno nella tana)
 
 Se la sfinge fallisce un tiro salvezza, può scegliere di superarlo comunque.
+^srd-sfinge_della_conoscenza-resistenza-leggendaria-3-giorno-o-4-giorno-nella-tana
 ## Azioni
 
 ### Multiattacco
 
 La sfinge effettua tre attacchi Artiglio.
+^srd-sfinge_della_conoscenza-multiattacco
 
 ### Artiglio
 
 *Tiro per colpire in mischia:* +8, portata 1,5 m. *Colpito:* 14 (3d6 + 4) danni taglienti.
+^srd-sfinge_della_conoscenza-artiglio
 
 ### Incantesimi
 
 La sfinge lancia uno dei seguenti incantesimi senza bisogno di componenti materiali, utilizzando Intelligenza come caratteristica da incantatore (CD del tiro salvezza sull'incantesimo 16):1/giorno ciascuno: conoscenza delle leggende, dissolvi magie, linguaggi, localizza oggetto, rimuovi maledizione, spostamento planareA volontà: identificare, illusione minore, individuazione del magico, mano magica, prestidigitazione
+^srd-sfinge_della_conoscenza-incantesimi
 
 ### Ruggito spezza-mente (ricarica 5-6)
 
 *Tiro salvezza su Saggezza:* CD 16, tutti i nemici in un'emanazione di 90 metri di cui la sfinge è il punto di origine. *Fallimento:* 35 (10d6) danni psichici, e il bersaglio è incapacitato fino all'inizio del turno successivo della sfinge.
+^srd-sfinge_della_conoscenza-ruggito-spezza-mente-ricarica-5-6
 ## Azioni Leggendarie
 
 Subito dopo il turno di un'altra creatura, la sfinge può consumare un utilizzo per effettuare una delle seguenti azioni. La sfinge recupera tutti gli utilizzi consumati all'inizio di ogni suo turno.
@@ -131,10 +144,12 @@ Subito dopo il turno di un'altra creatura, la sfinge può consumare un utilizzo 
 ### Agguato arcano
 
 La sfinge può teletrasportarsi fino a 9 metri in uno spazio libero che è in grado di vedere, effettuando un attacco Artiglio.
+^srd-sfinge_della_conoscenza-agguato-arcano
 
 ### Peso degli anni
 
 *Tiro salvezza su Costituzione:* CD 16, una creatura che la sfinge è in grado di vedere entro 36 metri. *Fallimento:* il bersaglio ottiene 1 livello di indebolimento. Finché il bersaglio ha uno o più livelli di indebolimento, apparirà più vecchio di 3d10 anni. *Fallimento o successo:* la sfinge non può ripetere quest'azione fino all'inizio del proprio turno successivo.
+^srd-sfinge_della_conoscenza-peso-degli-anni
 ````
 
 > [!info] Licenza

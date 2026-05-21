@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Cavaliere]]"]
+riferimenti_srd: ["[[SRD/Mostri/Cavaliere]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Cavaliere#^srd-cavaliere-multiattacco]]", "[[SRD/Mostri/Cavaliere#^srd-cavaliere-spadone]]", "[[SRD/Mostri/Cavaliere#^srd-cavaliere-balestra-pesante]]", "[[SRD/Mostri/Cavaliere#^srd-cavaliere-parata]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Cavaliere"
 type: "Umanoide"
 size: "medio o piccolo"
@@ -88,14 +95,17 @@ tab: Azioni
 ### Multiattacco
 
 Il cavaliere effettua due attacchi, usando Spadone o Balestra pesante in qualsiasi combinazione.
+^srd-cavaliere-multiattacco
 
 ### Spadone
 
 *Tiro per colpire in mischia:* +5, portata 1,5 m *Colpito:* 10 (2d6 + 3) danni taglienti più 4 (1d8) danni radiosi.
+^srd-cavaliere-spadone
 
 ### Balestra pesante
 
 *Tiro per colpire a distanza:* +2, gittata 30/120 m. *Colpito:* 11 (2d10) danni perforanti più 4 (1d8) danni radiosi.
+^srd-cavaliere-balestra-pesante
 ````
 
 > [!info] Licenza

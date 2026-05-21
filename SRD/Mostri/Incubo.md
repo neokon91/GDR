@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Incubo]]"]
+riferimenti_srd: ["[[SRD/Mostri/Incubo]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Incubo#^srd-incubo-forma-succube]]", "[[SRD/Mostri/Incubo#^srd-incubo-multiattacco]]", "[[SRD/Mostri/Incubo#^srd-incubo-tocco-irrequieto]]", "[[SRD/Mostri/Incubo#^srd-incubo-incantesimi]]", "[[SRD/Mostri/Incubo#^srd-incubo-sogno-spaventoso-ricarica-6]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Incubo"
 type: "Immondo"
 size: "medio"
@@ -96,19 +103,23 @@ tab: Azioni
 ### Forma succube
 
 Quando l'incubo termina un riposo lungo, può trasformarsi in una succube, utilizzando la relativa scheda delle statistiche al posto di questa. Nessun oggetto che indossa o trasporta viene trasformato.
+^srd-incubo-forma-succube
 ## Azioni
 
 ### Multiattacco
 
 L'incubo effettua due attacchi Tocco irrequieto.
+^srd-incubo-multiattacco
 
 ### Tocco irrequieto
 
 *Tiro per colpire in mischia:* +7, portata 1,5 m. *Colpito:* 15 (3d6 + 5) danni psichici, e il bersaglio è maledetto per 24 ore o finché l'incubo non muore. Finché la maledizione perdura, il bersaglio non ottiene alcun beneficio dai riposi brevi.
+^srd-incubo-tocco-irrequieto
 
 ### Incantesimi
 
 L'incubo lancia uno dei seguenti incantesimi, senza bisogno di componenti materiali, utilizzando Carisma come caratteristica da incantatore (CD del tiro salvezza sull'incantesimo 15): 1/giorno ciascuno: Sogno, trama ipnotica A volontà: Camuffare se stesso, forma eterea
+^srd-incubo-incantesimi
 ````
 
 > [!info] Licenza

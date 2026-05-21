@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Goblin guerriero]]"]
+riferimenti_srd: ["[[SRD/Mostri/Goblin guerriero]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Goblin guerriero#^srd-goblin_guerriero-scimitarra]]", "[[SRD/Mostri/Goblin guerriero#^srd-goblin_guerriero-arco-corto]]", "[[SRD/Mostri/Goblin guerriero#^srd-goblin_guerriero-fuga-agile]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Goblin guerriero"
 type: "Folletto (goblinoide)"
 size: "piccolo"
@@ -88,10 +95,12 @@ tab: Azioni
 ### Scimitarra
 
 *Tiro per colpire in mischia:* +4, portata 1,5 m. *Colpito:* 5 (1d6 + 2) danni taglienti, più 2 (1d4) danni taglienti se il tiro per colpire è stato effettuato con vantaggio.
+^srd-goblin_guerriero-scimitarra
 
 ### Arco corto
 
 *Tiro per colpire a distanza:* +4, gittata 24/96 m. *Colpito:* 5 (1d6 + 2) danni perforanti, più 2 (1d4) danni perforanti se il tiro per colpire è stato effettuato con vantaggio.
+^srd-goblin_guerriero-arco-corto
 ````
 
 > [!info] Licenza

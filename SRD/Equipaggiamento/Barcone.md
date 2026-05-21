@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Equipaggiamento/Barcone]]"]
+riferimenti_srd: ["[[SRD/Equipaggiamento/Barcone]]"]
+riferimenti_regola: []
+sezioni_collegate: ["[[SRD/Equipaggiamento/Barcone#Dettagli]]"]
+blocchi_collegati: []
+tabelle_collegate: ["[[SRD/Equipaggiamento/Barcone#^srd-barcone-dettagli]]"]
+tags: ["dnd55/srd"]
 capitolo: "Equipaggiamento"
 pagine_sorgente: "113-114"
 tipo_oggetto: "veicolo"
@@ -42,6 +49,7 @@ Velocita 1,5 km/h; costo 3.000 mo.
 | Nave | Velocità | Equipaggio | Passeggeri | Carico | CA | PF | Soglia di danno | Costo |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | Barcone | 1,5 km/h | 1 | 6 | 1/2 t | 15 | 100 | 10 | 3.000 mo |
+^srd-barcone-dettagli
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

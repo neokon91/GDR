@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Oggetti Magici/Borsa dei trucchi]]"]
+riferimenti_srd: ["[[SRD/Oggetti Magici/Borsa dei trucchi]]"]
+riferimenti_regola: []
+sezioni_collegate: ["[[SRD/Oggetti Magici/Borsa dei trucchi#Borsa dei trucchi grigia]]", "[[SRD/Oggetti Magici/Borsa dei trucchi#Borsa dei trucchi ruggine]]", "[[SRD/Oggetti Magici/Borsa dei trucchi#Borsa dei trucchi marrone]]"]
+blocchi_collegati: []
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/oggetto-magico"]
 tipo_oggetto: "Oggetto meraviglioso"
 tipo_base: "Oggetto meraviglioso"
 rarita: "non comune"
@@ -38,6 +45,7 @@ lanuginosi, non può essere riutilizzata fino all'alba successiva.
 **6** Tasso
 **7** Tasso gigante
 **8** Topo gigante
+^srd-borsa_dei_trucchi-1d8-creatura
 
 ## Borsa dei trucchi ruggine
 
@@ -51,6 +59,7 @@ lanuginosi, non può essere riutilizzata fino all'alba successiva.
 **6** Mastino
 **7** Orso bruno
 **8** Topo
+^srd-borsa_dei_trucchi-1d8-creatura
 
 ## Borsa dei trucchi marrone
 
@@ -64,6 +73,7 @@ lanuginosi, non può essere riutilizzata fino all'alba successiva.
 **6** Orso nero
 **7** Sciacallo
 **8** Tigre
+^srd-borsa_dei_trucchi-1d8-creatura
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

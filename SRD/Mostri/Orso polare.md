@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Orso polare]]"]
+riferimenti_srd: ["[[SRD/Mostri/Orso polare]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Orso polare#^srd-orso_polare-multiattacco]]", "[[SRD/Mostri/Orso polare#^srd-orso_polare-squarcio]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Orso polare"
 type: "Bestia"
 size: "grande"
@@ -87,10 +94,12 @@ tab: Azioni
 ### Multiattacco
 
 L'orso effettua due attacchi Squarcio.
+^srd-orso_polare-multiattacco
 
 ### Squarcio
 
 *Tiro per colpire in mischia:* +7, portata 1,5 m. *Colpito:* 9 (1d8 + 5) danni taglienti.
+^srd-orso_polare-squarcio
 ````
 
 > [!info] Licenza

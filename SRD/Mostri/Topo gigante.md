@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Topo gigante]]"]
+riferimenti_srd: ["[[SRD/Mostri/Topo gigante]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Topo gigante#^srd-topo_gigante-tattiche-del-branco]]", "[[SRD/Mostri/Topo gigante#^srd-topo_gigante-morso]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Topo gigante"
 type: "Bestia"
 size: "piccola"
@@ -87,11 +94,13 @@ tab: Azioni
 ### Tattiche del branco
 
 Il topo dispone di vantaggio a un tiro per colpire contro una creatura se almeno uno degli alleati del topo si trova entro 1,5 metri dalla creatura e non è incapacitato.
+^srd-topo_gigante-tattiche-del-branco
 ## Azioni
 
 ### Morso
 
 *Tiro per colpire in mischia:* +5, portata 1,5 m. *Colpito:* 5 (1d4 + 3) danni perforanti.
+^srd-topo_gigante-morso
 ````
 
 > [!info] Licenza

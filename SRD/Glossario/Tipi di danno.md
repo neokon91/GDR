@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Glossario/Tipi di danno]]"]
+riferimenti_srd: ["[[SRD/Glossario/Tipi di danno]]"]
+riferimenti_regola: []
+sezioni_collegate: ["[[SRD/Glossario/Tipi di danno#Tipi di danno]]"]
+blocchi_collegati: []
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/regola"]
 lettera: "T"
 descrittore:
 pagine_sorgente: 217

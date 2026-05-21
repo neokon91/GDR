@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Wraith]]"]
+riferimenti_srd: ["[[SRD/Mostri/Wraith]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Wraith#^srd-wraith-movimento-incorporeo]]", "[[SRD/Mostri/Wraith#^srd-wraith-sensibilita-al-sole]]", "[[SRD/Mostri/Wraith#^srd-wraith-risucchio-di-vita]]", "[[SRD/Mostri/Wraith#^srd-wraith-creare-spettro]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Wraith"
 type: "Non morto"
 size: "medio o piccolo"
@@ -86,19 +93,23 @@ tab: Azioni
 ### Movimento incorporeo
 
 Il wraith può muoversi attraverso altre creature e oggetti come se fossero terreno difficile. Se termina il suo turno all'interno di un oggetto, subisce 5 (1d10) danni da forza.
+^srd-wraith-movimento-incorporeo
 
 ### Sensibilità al sole
 
 Finché è esposto alla luce del sole, il wraith subisce svantaggio alle prove di caratteristica e ai tiri per colpire.
+^srd-wraith-sensibilita-al-sole
 ## Azioni
 
 ### Risucchio di vita
 
 *Tiro per colpire in mischia:* +6, portata 1,5 m. *Colpito:* 21 (4d8 + 3) danni necrotici. Se il bersaglio è una creatura, i suoi punti ferita massimi sono ridotti di una quantità pari ai danni subiti.
+^srd-wraith-risucchio-di-vita
 
 ### Creare spettro
 
 Il wraith bersaglia il cadavere di un umanoide situato entro 3 metri da sé che non abbia perso la vita da più di 1 minuto. Lo spirito del bersaglio si anima come spettro nello spazio del suo cadavere o nello spazio libero più vicino. Lo spettro è sotto il controllo del wraith. Il wraith non può controllare più di sette spettri simultaneamente.
+^srd-wraith-creare-spettro
 ````
 
 > [!info] Licenza

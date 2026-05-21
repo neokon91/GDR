@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Specie/Gnomo]]"]
+riferimenti_srd: ["[[SRD/Specie/Gnomo]]"]
+riferimenti_regola: []
+sezioni_collegate: ["[[SRD/Specie/Gnomo#Tratti]]"]
+blocchi_collegati: []
+tabelle_collegate: []
+tags: ["dnd55/srd"]
 capitolo: "Origini dei personaggi"
 pagine_sorgente: "93-97"
 tipo_creatura: "Umanoide"

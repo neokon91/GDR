@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Incantesimi/Salvare i morenti]]"]
+riferimenti_srd: ["[[SRD/Incantesimi/Salvare i morenti]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Incantesimi/Salvare i morenti#^srd-salvare_i_morenti-trucchetto-potenziato]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/incantesimo"]
 livello: 0
 scuola: "Necromanzia"
 classi: ["chierico", "druido"]
@@ -36,6 +43,7 @@ L'incantatore sceglie una creatura entro gittata con 0 punti ferita ma che è an
 ### Trucchetto potenziato
 
 La gittata raddoppia quando l'incantatore raggiunge il 5º livello (9 metri), l'11º livello (18 metri) e il 17º livello (36 metri).
+^srd-salvare_i_morenti-trucchetto-potenziato
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

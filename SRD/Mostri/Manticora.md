@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Manticora]]"]
+riferimenti_srd: ["[[SRD/Mostri/Manticora]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Manticora#^srd-manticora-multiattacco]]", "[[SRD/Mostri/Manticora#^srd-manticora-squarcio]]", "[[SRD/Mostri/Manticora#^srd-manticora-aculeo-caudale]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Manticora"
 type: "Mostruosità"
 size: "grande"
@@ -84,14 +91,17 @@ tab: Azioni
 ### Multiattacco
 
 La manticora effettua tre attacchi, usando Squarcio o Aculeo caudale in qualsiasi combinazione.
+^srd-manticora-multiattacco
 
 ### Squarcio
 
 *Tiro per colpire in mischia:* +5, portata 1,5 m. *Colpito:* 7 (1d8 + 3) danni taglienti.
+^srd-manticora-squarcio
 
 ### Aculeo caudale
 
 *Tiro per colpire a distanza:* +5, gittata 30/60 m. *Colpito:* 7 (1d8 + 3) danni perforanti.
+^srd-manticora-aculeo-caudale
 ````
 
 > [!info] Licenza

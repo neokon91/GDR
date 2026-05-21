@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Naga guardiana]]"]
+riferimenti_srd: ["[[SRD/Mostri/Naga guardiana]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Naga guardiana#^srd-naga_guardiana-ristoro-celestiale]]", "[[SRD/Mostri/Naga guardiana#^srd-naga_guardiana-multiattacco]]", "[[SRD/Mostri/Naga guardiana#^srd-naga_guardiana-morso]]", "[[SRD/Mostri/Naga guardiana#^srd-naga_guardiana-incantesimi]]", "[[SRD/Mostri/Naga guardiana#^srd-naga_guardiana-sputo-velenoso]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Naga guardiana"
 type: "Celestiale"
 size: "grande"
@@ -99,23 +106,28 @@ tab: Azioni
 ### Ristoro celestiale
 
 Se la naga muore, torna in vita 1d6 giorni dopo e recupera tutti i suoi punti ferita, a meno che non venga lanciato dissolvi il bene e il male sui suoi resti.
+^srd-naga_guardiana-ristoro-celestiale
 ## Azioni
 
 ### Multiattacco
 
 La naga effettua due attacchi Morso. Può sostituire qualsiasi attacco con un utilizzo di Sputo velenoso.
+^srd-naga_guardiana-multiattacco
 
 ### Morso
 
 *Tiro per colpire in mischia:* +8, portata 3 m. *Colpito:* 17 (2d12 + 4) danni perforanti più 22 (4d10) danni da veleno.
+^srd-naga_guardiana-morso
 
 ### Incantesimi
 
 La naga lancia uno dei seguenti incantesimi, senza bisogno di componenti somatiche o materiali, utilizzando Saggezza come caratteristica da incantatore (CD del tiro salvezza sull'incantesimo 16): 1/giorno ciascuno: Chiaroveggenza, colpo infuocato (di 6º livello), costrizione, cura ferite (di 6º livello), visione del vero A volontà: taumaturgia
+^srd-naga_guardiana-incantesimi
 
 ### Sputo velenoso
 
 *Tiro salvezza su Costituzione:* CD 16, una creatura che la naga è in grado di vedere entro 18 metri. *Fallimento:* 31 (7d8) danni da veleno, e il bersaglio è accecato fino all'inizio del turno successivo della naga. *Successo:* danni dimezzati.
+^srd-naga_guardiana-sputo-velenoso
 ````
 
 > [!info] Licenza

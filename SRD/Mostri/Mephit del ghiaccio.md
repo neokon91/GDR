@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Mephit del ghiaccio]]"]
+riferimenti_srd: ["[[SRD/Mostri/Mephit del ghiaccio]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Mephit del ghiaccio#^srd-mephit_del_ghiaccio-esplosione-mortale]]", "[[SRD/Mostri/Mephit del ghiaccio#^srd-mephit_del_ghiaccio-artiglio]]", "[[SRD/Mostri/Mephit del ghiaccio#^srd-mephit_del_ghiaccio-nube-di-nebbia-1-giorno]]", "[[SRD/Mostri/Mephit del ghiaccio#^srd-mephit_del_ghiaccio-soffio-di-gelo-ricarica-6]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Mephit del ghiaccio"
 type: "Elementale"
 size: "piccolo"
@@ -91,19 +98,23 @@ tab: Azioni
 ### Esplosione mortale
 
 Il mephit esplode quando muore. *Tiro salvezza su Costituzione:* CD 10, tutte le creature in un'emanazione di 1,5 metri di cui il mephit è il punto di origine. *Fallimento:* 5 (2d4) danni da freddo. *Successo:* danni dimezzati.
+^srd-mephit_del_ghiaccio-esplosione-mortale
 ## Azioni
 
 ### Artiglio
 
 *Tiro per colpire in mischia:* +3, portata 1,5 m. *Colpito:* 3 (1d4 + 1) danni taglienti più 2 (1d4) danni da freddo.
+^srd-mephit_del_ghiaccio-artiglio
 
 ### Nube di nebbia (1/giorno)
 
 Il mephit lancia nube di nebbia senza bisogno di componenti, utilizzando Carisma come caratteristica da incantatore.
+^srd-mephit_del_ghiaccio-nube-di-nebbia-1-giorno
 
 ### Soffio di gelo (ricarica 6)
 
 *Tiro salvezza su Costituzione:* CD 10, tutte le creature in un cono di 4,5 metri. *Fallimento:* 7 (3d4) danni da freddo. *Successo:* danni dimezzati.
+^srd-mephit_del_ghiaccio-soffio-di-gelo-ricarica-6
 ````
 
 > [!info] Licenza

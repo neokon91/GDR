@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Equipaggiamento/Fuoco dell'alchimista]]"]
+riferimenti_srd: ["[[SRD/Equipaggiamento/Fuoco dell'alchimista]]"]
+riferimenti_regola: []
+sezioni_collegate: ["[[SRD/Equipaggiamento/Fuoco dell'alchimista#Dettagli]]"]
+blocchi_collegati: []
+tabelle_collegate: ["[[SRD/Equipaggiamento/Fuoco dell'alchimista#^srd-fuoco_dell_alchimista-dettagli]]"]
+tags: ["dnd55/srd"]
 capitolo: "Equipaggiamento"
 pagine_sorgente: "107-113"
 tipo_oggetto: "equipaggiamento_avventura"
@@ -42,6 +49,7 @@ Puo incendiare un bersaglio e infliggere 1d4 danni da fuoco.
 | Oggetto | Peso | Costo |
 | --- | --- | --- |
 | Fuoco dell'alchimista | 0,5 kg | 50 mo |
+^srd-fuoco_dell_alchimista-dettagli
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

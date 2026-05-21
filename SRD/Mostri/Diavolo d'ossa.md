@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Diavolo d'ossa]]"]
+riferimenti_srd: ["[[SRD/Mostri/Diavolo d'ossa]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Diavolo d'ossa#^srd-diavolo_d_ossa-resistenza-alla-magia]]", "[[SRD/Mostri/Diavolo d'ossa#^srd-diavolo_d_ossa-ristoro-diabolico]]", "[[SRD/Mostri/Diavolo d'ossa#^srd-diavolo_d_ossa-multiattacco]]", "[[SRD/Mostri/Diavolo d'ossa#^srd-diavolo_d_ossa-artiglio]]", "[[SRD/Mostri/Diavolo d'ossa#^srd-diavolo_d_ossa-pungiglione-infernale]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Diavolo d'ossa"
 type: "Immondo (diavolo)"
 size: "grande"
@@ -97,23 +104,28 @@ tab: Azioni
 ### Resistenza alla magia
 
 Il diavolo dispone di vantaggio ai tiri salvezza contro incantesimi e altri effetti magici.
+^srd-diavolo_d_ossa-resistenza-alla-magia
 
 ### Ristoro diabolico
 
 Se il diavolo muore al di fuori dei Nove Inferi, il suo corpo si dissolve in fumo sulfureo e ne acquisisce uno nuovo all'istante, tornando in vita con tutti i suoi punti ferita da qualche parte nei Nove Inferi.
+^srd-diavolo_d_ossa-ristoro-diabolico
 ## Azioni
 
 ### Multiattacco
 
 Il diavolo effettua due attacchi Artiglio e un attacco Pungiglione infernale.
+^srd-diavolo_d_ossa-multiattacco
 
 ### Artiglio
 
 *Tiro per colpire in mischia:* +8, portata 3 m. *Colpito:* 13 (2d8 + 4) danni taglienti.
+^srd-diavolo_d_ossa-artiglio
 
 ### Pungiglione infernale
 
 *Tiro per colpire in mischia:* +8, portata 3 m. *Colpito:* 15 (2d10 + 4) danni perforanti più 18 (4d8) danni da veleno, e il bersaglio è avvelenato fino all'inizio del turno successivo del diavolo. Finché è avvelenato, il bersaglio non può recuperare punti ferita.
+^srd-diavolo_d_ossa-pungiglione-infernale
 ````
 
 > [!info] Licenza

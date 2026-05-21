@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Gorgone]]"]
+riferimenti_srd: ["[[SRD/Mostri/Gorgone]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Gorgone#^srd-gorgone-trafiggere]]", "[[SRD/Mostri/Gorgone#^srd-gorgone-soffio-pietrificante-ricarica-5-6]]", "[[SRD/Mostri/Gorgone#^srd-gorgone-calpestare]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Gorgone"
 type: "Costrutto"
 size: "grande"
@@ -88,10 +95,12 @@ tab: Azioni
 ### Trafiggere
 
 *Tiro per colpire in mischia:* +8, portata 1,5 m *Colpito:* 18 (2d12 + 5) danni perforanti. Se il bersaglio è una creatura di taglia Grande o inferiore e la gorgone si è mossa di 6 metri o più in linea retta verso di esso subito prima del colpo, il bersaglio cade a terra prono.
+^srd-gorgone-trafiggere
 
 ### Soffio pietrificante (ricarica 5-6)
 
 *Tiro salvezza su Costituzione:* CD 15, tutte le creature in un cono di 9 metri. *Primo fallimento:* il bersaglio è trattenuto. Ripete il tiro salvezza al termine del proprio turno successivo se è ancora trattenuto e, se lo supera, l'effetto svanisce. *Secondo fallimento:* il bersaglio è pietrificato invece che trattenuto.
+^srd-gorgone-soffio-pietrificante-ricarica-5-6
 ````
 
 > [!info] Licenza

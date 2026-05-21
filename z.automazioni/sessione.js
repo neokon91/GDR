@@ -1,5 +1,7 @@
 async function sessione(tp) {
     const helpers = tp.user.helpers;
+    const profile = await helpers.runtimeProfile("sessione");
+    const prompts = profile.prompts ?? {};
     const route = helpers.consumeRoute();
     const titolo = await helpers.promptRequired(tp, "Titolo della sessione", "Sessione");
     const data = await helpers.promptOptional(tp, "Data", tp.date.now("YYYY-MM-DD")) || tp.date.now("YYYY-MM-DD");
@@ -37,6 +39,7 @@ async function sessione(tp) {
     const video = creazioneCompleta ? await helpers.chooseVideos(tp, "Video previsti", context) : [];
     const fazioni = creazioneCompleta ? await helpers.chooseFactions(tp, "Fazioni in scena", context) : [];
     const oggetti = creazioneCompleta ? await helpers.chooseObjects(tp, "Oggetti in scena", context) : [];
+    const riferimentiRegola = creazioneCompleta ? await helpers.promptWikilinkTargets(tp, prompts.riferimenti_regola ?? "Riferimenti regola o SRD da tenere aperti") : [];
 
     await helpers.moveNote(tp, helpers.path("sessioni"), `${data} - ${titolo}`);
 
@@ -88,7 +91,14 @@ async function sessione(tp) {
         recap_pubblico: '[]',
         recap_dm: '[]',
         prossima_apertura: "",
-        output_sessione: '[]'
+        output_sessione: '[]',
+        fonti: helpers.inlineYamlWikilinkList([...campagne, ...luoghi, ...personaggi, ...missioni, ...tracciati, ...dispense, ...mappe]),
+        riferimenti_srd: helpers.inlineYamlWikilinkList(riferimentiRegola),
+        riferimenti_regola: helpers.inlineYamlWikilinkList(riferimentiRegola),
+        sezioni_collegate: '[]',
+        blocchi_collegati: '[]',
+        tabelle_collegate: helpers.inlineYamlWikilinkList(["[[Risorse/Tabelle/Tabelle#^complicazioni]]"]),
+        tags: helpers.inlineYamlTextList(["gdr/bozza"])
     });
 }
 

@@ -26,6 +26,23 @@ tab: Tavolo
 > Terreno: `INPUT[text:terreno]`
 >
 > Ricompense: `INPUT[inlineList:ricompense]`
+>
+> Riferimenti regola: `INPUT[riferimenti_regola][:riferimenti_regola]`
+>
+> Tabelle collegate: `INPUT[tabelle_collegate][:tabelle_collegate]`
+
+tab: Riferimenti
+
+> [!regia] Fonti E Link Granulari
+> Fonti: `INPUT[fonti][:fonti]`
+>
+> Riferimenti SRD: `INPUT[riferimenti_srd][:riferimenti_srd]`
+>
+> Sezioni collegate: `INPUT[sezioni_collegate][:sezioni_collegate]`
+>
+> Blocchi collegati: `INPUT[blocchi_collegati][:blocchi_collegati]`
+>
+> Tag: `INPUT[tags][:tags]`
 
 tab: Fallback
 

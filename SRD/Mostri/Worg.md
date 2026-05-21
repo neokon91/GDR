@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Worg]]"]
+riferimenti_srd: ["[[SRD/Mostri/Worg]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Worg#^srd-worg-morso]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Worg"
 type: "Folletto"
 size: "grande"
@@ -84,6 +91,7 @@ tab: Azioni
 ### Morso
 
 *Tiro per colpire in mischia:* +5, portata 1,5 m *Colpito:* 7 (1d8 + 3) danni perforanti, e il tiro per colpire successivo effettuato contro il bersaglio prima dell'inizio del turno successivo del worg dispone di vantaggio.
+^srd-worg-morso
 ````
 
 > [!info] Licenza

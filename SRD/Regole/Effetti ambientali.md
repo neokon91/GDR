@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Regole/Effetti ambientali]]"]
+riferimenti_srd: ["[[SRD/Regole/Effetti ambientali]]"]
+riferimenti_regola: []
+sezioni_collegate: ["[[SRD/Regole/Effetti ambientali#Pericoli ambientali]]"]
+blocchi_collegati: []
+tabelle_collegate: ["[[SRD/Regole/Effetti ambientali#^srd-effetti_ambientali-pericoli-ambientali]]"]
+tags: ["dnd55/srd", "dnd55/regola"]
 capitolo: "Strumenti di gioco"
 categoria_regola: "Strumenti di gioco"
 pagine_sorgente: "223-224"
@@ -31,6 +38,7 @@ Gli ambienti estremi impongono rischi aggiuntivi come indebolimento, terreno dif
 | Ghiaccio sottile | Regge 3d10 x 5 kg per quadrato di 3 metri; se superato si rompe sopra acque gelide. |
 | Precipitazioni abbondanti | Area leggermente oscurata, svantaggio a Percezione e pioggia battente spegne fiamme scoperte. |
 | Vento forte | Svantaggio agli attacchi a distanza con armi, spegne fiamme, disperde nebbia e puo far cadere creature volanti. |
+^srd-effetti_ambientali-pericoli-ambientali
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

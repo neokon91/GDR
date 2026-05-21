@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Oggetti Magici/Ruba nove vite]]"]
+riferimenti_srd: ["[[SRD/Oggetti Magici/Ruba nove vite]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: []
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/oggetto-magico"]
 tipo_oggetto: "Arma (qualsiasi arma semplice o da guerra)"
 tipo_base: "Arma"
 rarita: "molto rara"

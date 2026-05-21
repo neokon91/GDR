@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Oggetti Magici/Gemma elementale]]"]
+riferimenti_srd: ["[[SRD/Oggetti Magici/Gemma elementale]]"]
+riferimenti_regola: []
+sezioni_collegate: ["[[SRD/Oggetti Magici/Gemma elementale#Gemma Elementale richiamato]]"]
+blocchi_collegati: []
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/oggetto-magico"]
 tipo_oggetto: "Oggetto meraviglioso"
 tipo_base: "Oggetto meraviglioso"
 rarita: "non comune"

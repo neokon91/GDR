@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Drago d'ottone giovane]]"]
+riferimenti_srd: ["[[SRD/Mostri/Drago d'ottone giovane]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Drago d'ottone giovane#^srd-drago_d_ottone_giovane-multiattacco]]", "[[SRD/Mostri/Drago d'ottone giovane#^srd-drago_d_ottone_giovane-squarcio]]", "[[SRD/Mostri/Drago d'ottone giovane#^srd-drago_d_ottone_giovane-soffio-di-fuoco-ricarica-5-6]]", "[[SRD/Mostri/Drago d'ottone giovane#^srd-drago_d_ottone_giovane-soffio-di-sonno]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Drago d'ottone giovane"
 type: "Drago (metallico)"
 size: "grande"
@@ -94,20 +101,24 @@ tab: Azioni
 ### Multiattacco
 
 Il drago effettua tre attacchi Squarcio. Può sostituire due attacchi con un utilizzo di Soffio di sonno.
+^srd-drago_d_ottone_giovane-multiattacco
 
 ### Squarcio
 
 *Tiro per colpire in mischia:* +7, portata 3 m. *Colpito:* 15 (2d10 + 4) danni taglienti.
+^srd-drago_d_ottone_giovane-squarcio
 
 ### Soffio di fuoco (ricarica 5-6)
 
 *Tiro salvezza su Destrezza:* CD 14, tutte le creature in una linea lunga 12 metri e larga 1,5 metri. *Fallimento:* 38 (11d6) danni da fuoco. *Successo:* danni dimezzati.
+^srd-drago_d_ottone_giovane-soffio-di-fuoco-ricarica-5-6
 
 ### Soffio di sonno
 
 *Tiro salvezza su Costituzione:* CD 14, tutte le creature in un cono di 9 metri. *Fallimento:* il bersaglio è incapacitato fino al termine del proprio turno successivo, a quel punto ripete il tiro salvezza.
 
 *Secondo fallimento:* il bersaglio cade privo di sensi per 1 minuto. Questo effetto termina se il bersaglio subisce danni o se una creatura entro 1,5 metri da esso esegue un'azione per svegliarlo.
+^srd-drago_d_ottone_giovane-soffio-di-sonno
 ````
 
 > [!info] Licenza

@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Equipaggiamento/Borsa da erborista]]"]
+riferimenti_srd: ["[[SRD/Equipaggiamento/Borsa da erborista]]"]
+riferimenti_regola: []
+sezioni_collegate: ["[[SRD/Equipaggiamento/Borsa da erborista#Dettagli]]"]
+blocchi_collegati: []
+tabelle_collegate: ["[[SRD/Equipaggiamento/Borsa da erborista#^srd-borsa_da_erborista-dettagli]]"]
+tags: ["dnd55/srd"]
 capitolo: "Equipaggiamento"
 pagine_sorgente: "105-107"
 tipo_oggetto: "strumento"
@@ -42,6 +49,7 @@ Intelligenza; identificare piante; crea antitossina, candele e pozioni di guarig
 | Voce | Riepilogo |
 | --- | --- |
 | Borsa da erborista | Intelligenza; identificare piante; crea antitossina, candele e pozioni di guarigione. |
+^srd-borsa_da_erborista-dettagli
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Regole/Avanzamento e livelli superiori]]"]
+riferimenti_srd: ["[[SRD/Regole/Avanzamento e livelli superiori]]"]
+riferimenti_regola: []
+sezioni_collegate: ["[[SRD/Regole/Avanzamento e livelli superiori#Avanzamento]]", "[[SRD/Regole/Avanzamento e livelli superiori#Fasce di gioco]]", "[[SRD/Regole/Avanzamento e livelli superiori#Equipaggiamento a livelli superiori]]", "[[SRD/Regole/Avanzamento e livelli superiori#Avanzamento dei personaggi]]"]
+blocchi_collegati: []
+tabelle_collegate: ["[[SRD/Regole/Avanzamento e livelli superiori#^srd-avanzamento_livelli_superiori-avanzamento]]", "[[SRD/Regole/Avanzamento e livelli superiori#^srd-avanzamento_livelli_superiori-fasce-di-gioco]]", "[[SRD/Regole/Avanzamento e livelli superiori#^srd-avanzamento_livelli_superiori-equipaggiamento-a-livelli-superiori]]", "[[SRD/Regole/Avanzamento e livelli superiori#^srd-avanzamento_livelli_superiori-avanzamento-dei-personaggi]]"]
+tags: ["dnd55/srd", "dnd55/regola"]
 capitolo: "Creazione del personaggio"
 categoria_regola: "Creazione personaggio"
 pagine_sorgente: "25-27"
@@ -27,6 +34,7 @@ L'avanzamento di livello aumenta capacita, punti ferita e talvolta bonus di comp
 | Bonus di competenza | Quando aumenta, aggiorna tutti i numeri della scheda che lo includono. |
 | Modificatori | Se un punteggio diventa pari e cambia modificatore, aggiorna tutti i valori collegati. |
 | Costituzione | Se il modificatore aumenta di 1, i PF massimi aumentano di 1 per ogni livello del personaggio. |
+^srd-avanzamento_livelli_superiori-avanzamento
 
 ## Fasce di gioco
 
@@ -36,6 +44,7 @@ L'avanzamento di livello aumenta capacita, punti ferita e talvolta bonus di comp
 | 5-10 | Avventurieri affermati; minacce per citta e regni. |
 | 11-16 | Potere raro tra gli avventurieri; minacce continentali. |
 | 17-20 | Archetipi eroici; destino del mondo o multiverso. |
+^srd-avanzamento_livelli_superiori-fasce-di-gioco
 
 ## Equipaggiamento a livelli superiori
 
@@ -45,6 +54,7 @@ L'avanzamento di livello aumenta capacita, punti ferita e talvolta bonus di comp
 | 5-10 | 500 mo + 1d10 x 25 mo + equipaggiamento ordinario; 1 comune, 1 non comune |
 | 11-16 | 5.000 mo + 1d10 x 250 mo + equipaggiamento ordinario; 2 comuni, 3 non comuni, 1 raro |
 | 17-20 | 20.000 mo + 1d10 x 250 mo + equipaggiamento ordinario; 2 comuni, 4 non comuni, 3 rari, 1 molto raro |
+^srd-avanzamento_livelli_superiori-equipaggiamento-a-livelli-superiori
 
 ## Avanzamento dei personaggi
 
@@ -70,6 +80,7 @@ L'avanzamento di livello aumenta capacita, punti ferita e talvolta bonus di comp
 | 18 | 265.000 | +6 |
 | 19 | 305.000 | +6 |
 | 20 | 355.000 | +6 |
+^srd-avanzamento_livelli_superiori-avanzamento-dei-personaggi
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

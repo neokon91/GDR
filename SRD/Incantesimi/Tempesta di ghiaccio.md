@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Incantesimi/Tempesta di ghiaccio]]"]
+riferimenti_srd: ["[[SRD/Incantesimi/Tempesta di ghiaccio]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Incantesimi/Tempesta di ghiaccio#^srd-tempesta_di_ghiaccio-utilizzo-di-uno-slot-incantesimo-di-livello-superiore]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/incantesimo"]
 livello: 4
 scuola: "Invocazione"
 classi: ["druido", "mago", "stregone"]
@@ -38,6 +45,7 @@ La grandine trasforma l'area all'interno del cilindro in terreno difficile fino 
 ### Utilizzo di uno slot incantesimo di livello superiore
 
 I danni contundenti aumentano di 1d10 per ogni slot di livello superiore al 4º.
+^srd-tempesta_di_ghiaccio-utilizzo-di-uno-slot-incantesimo-di-livello-superiore
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Equipaggiamento/Armatura a piastre]]"]
+riferimenti_srd: ["[[SRD/Equipaggiamento/Armatura a piastre]]"]
+riferimenti_regola: []
+sezioni_collegate: ["[[SRD/Equipaggiamento/Armatura a piastre#Dettagli]]"]
+blocchi_collegati: []
+tabelle_collegate: ["[[SRD/Equipaggiamento/Armatura a piastre#^srd-armatura_a_piastre-dettagli]]"]
+tags: ["dnd55/srd"]
 capitolo: "Equipaggiamento"
 pagine_sorgente: "104-105"
 tipo_oggetto: "armatura"
@@ -42,6 +49,7 @@ Pesante; Classe Armatura 18; costo 1.500 mo.
 | Categoria | Armatura | Classe Armatura | Forza | Furtività | Peso | Costo |
 | --- | --- | --- | --- | --- | --- | --- |
 | Pesante | Armatura a piastre | 18 | For 15 | Svantaggio | 32,5 kg | 1.500 mo |
+^srd-armatura_a_piastre-dettagli
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Golem di ferro]]"]
+riferimenti_srd: ["[[SRD/Mostri/Golem di ferro]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Golem di ferro#^srd-golem_di_ferro-assorbimento-del-fuoco]]", "[[SRD/Mostri/Golem di ferro#^srd-golem_di_ferro-forma-immutabile]]", "[[SRD/Mostri/Golem di ferro#^srd-golem_di_ferro-resistenza-alla-magia]]", "[[SRD/Mostri/Golem di ferro#^srd-golem_di_ferro-multiattacco]]", "[[SRD/Mostri/Golem di ferro#^srd-golem_di_ferro-braccio-affilato]]", "[[SRD/Mostri/Golem di ferro#^srd-golem_di_ferro-dardo-di-fuoco]]", "[[SRD/Mostri/Golem di ferro#^srd-golem_di_ferro-soffio-di-veleno-ricarica-6]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Golem di ferro"
 type: "Costrutto"
 size: "grande"
@@ -92,31 +99,38 @@ tab: Azioni
 ### Assorbimento del fuoco
 
 Ogni volta che il golem subisce danni da fuoco, recupera un numero di punti ferita pari ai danni da fuoco inflitti.
+^srd-golem_di_ferro-assorbimento-del-fuoco
 
 ### Forma immutabile
 
 Il golem non può mutare forma.
+^srd-golem_di_ferro-forma-immutabile
 
 ### Resistenza alla magia
 
 Il golem dispone di vantaggio ai tiri salvezza contro incantesimi e altri effetti magici.
+^srd-golem_di_ferro-resistenza-alla-magia
 ## Azioni
 
 ### Multiattacco
 
 Il golem effettua due attacchi, usando Braccio affilato o Dardo di fuoco in qualsiasi combinazione.
+^srd-golem_di_ferro-multiattacco
 
 ### Braccio affilato
 
 *Tiro per colpire in mischia:* +12, portata 3 m. *Colpito:* 20 (3d8 + 7) danni taglienti più 10 (3d6) danni da fuoco.
+^srd-golem_di_ferro-braccio-affilato
 
 ### Dardo di fuoco
 
 *Tiro per colpire a distanza:* +10, gittata 36 m. *Colpito:* 36 (8d8) danni da fuoco.
+^srd-golem_di_ferro-dardo-di-fuoco
 
 ### Soffio di veleno (ricarica 6)
 
 *Tiro salvezza su Costituzione:* CD 18, tutte le creature in un cono di 18 metri. *Fallimento:* 55 (10d10) danni da veleno. *Successo:* danni dimezzati.
+^srd-golem_di_ferro-soffio-di-veleno-ricarica-6
 ````
 
 > [!info] Licenza

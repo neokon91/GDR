@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Segugio infernale]]"]
+riferimenti_srd: ["[[SRD/Mostri/Segugio infernale]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Segugio infernale#^srd-segugio_infernale-tattiche-del-branco]]", "[[SRD/Mostri/Segugio infernale#^srd-segugio_infernale-multiattacco]]", "[[SRD/Mostri/Segugio infernale#^srd-segugio_infernale-morso]]", "[[SRD/Mostri/Segugio infernale#^srd-segugio_infernale-soffio-di-fuoco-ricarica-5-6]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Segugio infernale"
 type: "Immondo"
 size: "medio"
@@ -90,19 +97,23 @@ tab: Azioni
 ### Tattiche del branco
 
 Il segugio dispone di vantaggio nel tiro per colpire contro una creatura se almeno uno degli alleati del segugio si trova entro 1,5 metri dalla creatura e non è incapacitato.
+^srd-segugio_infernale-tattiche-del-branco
 ## Azioni
 
 ### Multiattacco
 
 Il segugio effettua due attacchi Morso.
+^srd-segugio_infernale-multiattacco
 
 ### Morso
 
 *Tiro per colpire in mischia:* +5, portata 1,5 m *Colpito:* 7 (1d8 + 3) danni perforanti più 3 (1d6) danni da fuoco.
+^srd-segugio_infernale-morso
 
 ### Soffio di fuoco (ricarica 5-6)
 
 *Tiro salvezza su Destrezza:* CD 12, tutte le creature in un cono di 4,5 metri. *Fallimento:* 17 (5d6) danni da fuoco. *Successo:* danni dimezzati.
+^srd-segugio_infernale-soffio-di-fuoco-ricarica-5-6
 ````
 
 > [!info] Licenza

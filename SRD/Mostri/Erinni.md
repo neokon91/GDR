@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Erinni]]"]
+riferimenti_srd: ["[[SRD/Mostri/Erinni]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Erinni#^srd-erinni-corda-magica]]", "[[SRD/Mostri/Erinni#^srd-erinni-resistenza-alla-magia]]", "[[SRD/Mostri/Erinni#^srd-erinni-ristoro-diabolico]]", "[[SRD/Mostri/Erinni#^srd-erinni-multiattacco]]", "[[SRD/Mostri/Erinni#^srd-erinni-spada-inaridente]]", "[[SRD/Mostri/Erinni#^srd-erinni-corda-avvinghiante-richiede-corda-magica]]", "[[SRD/Mostri/Erinni#^srd-erinni-parata]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Erinni"
 type: "Immondo (diavolo)"
 size: "medio"
@@ -100,27 +107,33 @@ tab: Azioni
 ### Corda magica
 
 L'erinni possiede una corda magica. Finché la porta con sé, può usare l'azione Corda avvinghiante. La corda ha CA 20, 90 PF, e immunità ai danni psichici e da veleno. La corda si trasforma in polvere se viene ridotta a 0 punti ferita, se si trova a 1,5 metri o più dall'erinni per 1 ora o più, o se l'erinni muore. Se la corda è danneggiata o distrutta, l'erinni può ripristinarla interamente al termine di un riposo breve o lungo.
+^srd-erinni-corda-magica
 
 ### Resistenza alla magia
 
 L'erinni dispone di vantaggio ai tiri salvezza contro incantesimi e altri effetti magici.
+^srd-erinni-resistenza-alla-magia
 
 ### Ristoro diabolico
 
 Se l'erinni muore al di fuori dei Nove Inferi, il suo corpo si dissolve in fumo sulfureo ed essa ne acquisisce uno nuovo all'istante, tornando in vita con tutti i suoi punti ferita da qualche parte nei Nove Inferi.
+^srd-erinni-ristoro-diabolico
 ## Azioni
 
 ### Multiattacco
 
 L'erinni effettua tre attacchi Spada inaridente e può usare Corda avvinghiante.
+^srd-erinni-multiattacco
 
 ### Spada inaridente
 
 *Tiro per colpire in mischia:* +8, portata 1,5 m. *Colpito:* 13 (2d8 + 4) danni taglienti più 11 (2d10) danni necrotici.
+^srd-erinni-spada-inaridente
 
 ### Corda avvinghiante (richiede Corda magica)
 
 *Tiro salvezza su Forza:* CD 16, una creatura che l'erinni è in grado di vedere entro 36 metri. *Fallimento:* 14 (4d6) danni da forza, e il bersaglio è trattenuto finché la corda non viene distrutta, finché l'erinni non usa un'azione bonus per liberare il bersaglio, o finché l'erinni non usa nuovamente Corda avvinghiante.
+^srd-erinni-corda-avvinghiante-richiede-corda-magica
 ````
 
 > [!info] Licenza

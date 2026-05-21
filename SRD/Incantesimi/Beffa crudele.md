@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Incantesimi/Beffa crudele]]"]
+riferimenti_srd: ["[[SRD/Incantesimi/Beffa crudele]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Incantesimi/Beffa crudele#^srd-beffa_crudele-trucchetto-potenziato]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/incantesimo"]
 livello: 0
 scuola: "Ammaliamento"
 classi: ["bardo"]
@@ -36,6 +43,7 @@ L'incantatore pronuncia una sequenza di insulti mescolati a impercettibili ammal
 ### Trucchetto potenziato
 
 I danni aumentano di 1d6 quando l'incantatore raggiunge il 5º livello (2d6), l'11º livello (3d6) e il 17º livello (4d6).
+^srd-beffa_crudele-trucchetto-potenziato
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

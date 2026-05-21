@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Gigante delle tempeste]]"]
+riferimenti_srd: ["[[SRD/Mostri/Gigante delle tempeste]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Gigante delle tempeste#^srd-gigante_delle_tempeste-multiattacco]]", "[[SRD/Mostri/Gigante delle tempeste#^srd-gigante_delle_tempeste-spada-tempestosa]]", "[[SRD/Mostri/Gigante delle tempeste#^srd-gigante_delle_tempeste-saetta]]", "[[SRD/Mostri/Gigante delle tempeste#^srd-gigante_delle_tempeste-incantesimi]]", "[[SRD/Mostri/Gigante delle tempeste#^srd-gigante_delle_tempeste-tempesta-di-fulmini-ricarica-5-6]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Gigante delle tempeste"
 type: "Gigante"
 size: "enorme"
@@ -99,14 +106,17 @@ tab: Azioni
 ### Multiattacco
 
 Il gigante effettua due attacchi, usando Spada tempestosa o Saetta in qualsiasi combinazione.
+^srd-gigante_delle_tempeste-multiattacco
 
 ### Spada tempestosa
 
 *Tiro per colpire in mischia:* +14, portata 3 m. *Colpito:* 23 (4d6 + 9) danni taglienti più 13 (3d8) danni da fulmine.
+^srd-gigante_delle_tempeste-spada-tempestosa
 
 ### Saetta
 
 *Tiro per colpire a distanza:* +14, gittata 150 m. *Colpito:* 22 (2d12 + 9) danni da fulmine, e il bersaglio è accecato e assordato fino all'inizio del turno successivo del gigante.
+^srd-gigante_delle_tempeste-saetta
 
 ### Incantesimi
 
@@ -118,10 +128,12 @@ Il gigante lancia uno dei seguenti incantesimi, senza bisogno di componenti mate
 *A volontà:*
 - individuazione del magico
 - luce
+^srd-gigante_delle_tempeste-incantesimi
 
 ### Tempesta di fulmini (ricarica 5-6)
 
 *Tiro salvezza su Destrezza:* CD 18, ogni creatura in un cilindro di 3 metri di raggio e 12 metri d'altezza in un punto che il gigante è in grado di vedere entro 150 metri. *Fallimento:* 55 (10d10) danni da fulmine. *Successo:* danni dimezzati.
+^srd-gigante_delle_tempeste-tempesta-di-fulmini-ricarica-5-6
 ````
 
 > [!info] Licenza

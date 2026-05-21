@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Dretch]]"]
+riferimenti_srd: ["[[SRD/Mostri/Dretch]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Dretch#^srd-dretch-squarcio]]", "[[SRD/Mostri/Dretch#^srd-dretch-nube-fetida-1-giorno]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Dretch"
 type: "Immondo (demone)"
 size: "piccolo"
@@ -82,10 +89,12 @@ tab: Azioni
 ### Squarcio
 
 *Tiro per colpire in mischia:* +3, portata 1,5 m. *Colpito:* 4 (1d6 + 1) danni taglienti.
+^srd-dretch-squarcio
 
 ### Nube fetida (1/giorno)
 
 *Tiro salvezza su Costituzione:* CD 11, tutte le creature in un'emanazione di 3 metri di cui il dretch è il punto di origine. *Fallimento:* il bersaglio è avvelenato fino al termine del proprio turno successivo. Finché è avvelenata, la creatura può effettuare nel suo turno un'azione o un'azione bonus, ma non entrambe, e non può effettuare reazioni.
+^srd-dretch-nube-fetida-1-giorno
 ````
 
 > [!info] Licenza

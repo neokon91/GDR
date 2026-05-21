@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Oggetti Magici/Armatura +1, +2 o +3]]"]
+riferimenti_srd: ["[[SRD/Oggetti Magici/Armatura +1, +2 o +3]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: []
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/oggetto-magico"]
 tipo_oggetto: "Armatura (leggera, media o pesante)"
 tipo_base: "Armatura"
 rarita: "rara (+1), molto rara (+2) o leggendaria (+3)"

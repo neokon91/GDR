@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Mago]]"]
+riferimenti_srd: ["[[SRD/Mostri/Mago]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Mago#^srd-mago-multiattacco]]", "[[SRD/Mostri/Mago#^srd-mago-esplosione-arcana]]", "[[SRD/Mostri/Mago#^srd-mago-incantesimi]]", "[[SRD/Mostri/Mago#^srd-mago-passo-velato-3-giorno]]", "[[SRD/Mostri/Mago#^srd-mago-magia-di-protezione-3-giorno]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Mago"
 type: "Umanoide"
 size: "medio o piccolo"
@@ -96,14 +103,17 @@ tab: Azioni
 ### Multiattacco
 
 Il mago effettua tre attacchi Esplosione arcana.
+^srd-mago-multiattacco
 
 ### Esplosione arcana
 
 *Tiro per colpire in mischia o a distanza:* +6, portata 1,5 m o gittata 36 m. *Colpito:* 16 (3d8 + 3) danni da forza.
+^srd-mago-esplosione-arcana
 
 ### Incantesimi
 
 Il mago lancia uno dei seguenti incantesimi, utilizzando Intelligenza come caratteristica da incantatore (CD del tiro salvezza sull'incantesimo 14): 1/giorno ciascuno: Cono di freddo, volare 2/giorno ciascuno: Invisibilità, palla di fuoco (di 4º livello) A volontà: Armatura magica (inclusa nella CA), individuazione del magico, luce, mano magica, prestidigitazione
+^srd-mago-incantesimi
 ````
 
 > [!info] Licenza

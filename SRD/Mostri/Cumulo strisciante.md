@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Cumulo strisciante]]"]
+riferimenti_srd: ["[[SRD/Mostri/Cumulo strisciante]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Cumulo strisciante#^srd-cumulo_strisciante-assorbimento-del-fulmine]]", "[[SRD/Mostri/Cumulo strisciante#^srd-cumulo_strisciante-multiattacco]]", "[[SRD/Mostri/Cumulo strisciante#^srd-cumulo_strisciante-radice-elettrificata]]", "[[SRD/Mostri/Cumulo strisciante#^srd-cumulo_strisciante-avviluppare]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Cumulo strisciante"
 type: "Vegetale"
 size: "grande"
@@ -90,19 +97,23 @@ tab: Azioni
 ### Assorbimento del fulmine
 
 Ogni volta che il cumulo strisciante subisce danni da fulmine, recupera un numero di punti ferita pari ai danni da fulmine inflitti.
+^srd-cumulo_strisciante-assorbimento-del-fulmine
 ## Azioni
 
 ### Multiattacco
 
 Il cumulo strisciante effettua tre attacchi. Può sostituire un attacco con un utilizzo di Avviluppare.
+^srd-cumulo_strisciante-multiattacco
 
 ### Radice elettrificata
 
 *Tiro per colpire in mischia:* +7, portata 3 m. *Colpito:* 7 (1d6 + 4) danni contundenti più 5 (2d4) danni da fulmine. Se il bersaglio è una creatura di taglia Media o inferiore, il cumulo strisciante lo tira in linea retta verso di sé per 1,5 metri.
+^srd-cumulo_strisciante-radice-elettrificata
 
 ### Avviluppare
 
 *Tiro salvezza su Forza:* CD 15, una creatura di taglia Media o inferiore entro 1,5 metri. *Fallimento:* il bersaglio viene attirato nello spazio del cumulo strisciante ed è afferrato (CD 14 per sfuggire). Finché la presa perdura il bersaglio è accecato e trattenuto, e subisce 10 (3d6) danni da fulmine all'inizio di ogni suo turno. Quando il cumulo strisciante si muove, il bersaglio afferrato si muove con esso senza fargli consumare movimento extra. Il cumulo strisciante può afferrare una sola creatura per volta con questa azione.
+^srd-cumulo_strisciante-avviluppare
 ````
 
 > [!info] Licenza

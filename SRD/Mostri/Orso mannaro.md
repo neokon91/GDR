@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Orso mannaro]]"]
+riferimenti_srd: ["[[SRD/Mostri/Orso mannaro]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Orso mannaro#^srd-orso_mannaro-multiattacco]]", "[[SRD/Mostri/Orso mannaro#^srd-orso_mannaro-puo-sostituire-un-attacco-con-un-attacco-morso]]", "[[SRD/Mostri/Orso mannaro#^srd-orso_mannaro-ascia-solo-in-forma-umanoide-o-ibrida]]", "[[SRD/Mostri/Orso mannaro#^srd-orso_mannaro-morso-solo-in-forma-di-orso-o-ibrida]]", "[[SRD/Mostri/Orso mannaro#^srd-orso_mannaro-squarcio-solo-in-forma-di-orso-o-ibrida]]", "[[SRD/Mostri/Orso mannaro#^srd-orso_mannaro-mutaforma]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Orso mannaro"
 type: "Mostruosità (licantropo)"
 size: "media o piccola"
@@ -93,22 +100,27 @@ tab: Azioni
 ### Multiattacco
 
 L'orso mannaro effettua due attacchi, usando Ascia o Squarcio in qualsiasi combinazione.
+^srd-orso_mannaro-multiattacco
 
 ### Può sostituire un attacco con un attacco Morso
 
 
+^srd-orso_mannaro-puo-sostituire-un-attacco-con-un-attacco-morso
 
 ### Ascia (solo in forma umanoide o ibrida)
 
 *Tiro per colpire in mischia o a distanza:* +7, portata 1,5 m o gittata 6/18 m. *Colpito:* 14 (3d6 + 4) danni taglienti.
+^srd-orso_mannaro-ascia-solo-in-forma-umanoide-o-ibrida
 
 ### Morso (solo in forma di orso o ibrida)
 
 *Tiro per colpire in mischia:* +7, portata 1,5 m. *Colpito:* 17 (2d12 + 4) danni perforanti. Se il bersaglio è un umanoide, subisce il seguente effetto. *Tiro salvezza su Costituzione:* CD 14. *Fallimento:* il bersaglio è maledetto. Se il bersaglio scende a 0 punti ferita, diventa un orso mannaro sotto il controllo del GM e ha 10 punti ferita. *Successo:* il bersaglio è immune alla maledizione dell'orso mannaro per 24 ore.
+^srd-orso_mannaro-morso-solo-in-forma-di-orso-o-ibrida
 
 ### Squarcio (solo in forma di orso o ibrida)
 
 *Tiro per colpire in mischia:* +7, portata 1,5 m. *Colpito:* 13 (2d8 + 4) danni taglienti.
+^srd-orso_mannaro-squarcio-solo-in-forma-di-orso-o-ibrida
 ````
 
 > [!info] Licenza

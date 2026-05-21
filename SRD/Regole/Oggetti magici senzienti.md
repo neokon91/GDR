@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Regole/Oggetti magici senzienti]]"]
+riferimenti_srd: ["[[SRD/Regole/Oggetti magici senzienti]]"]
+riferimenti_regola: []
+sezioni_collegate: ["[[SRD/Regole/Oggetti magici senzienti#Tratti]]", "[[SRD/Regole/Oggetti magici senzienti#Conflitto]]"]
+blocchi_collegati: []
+tabelle_collegate: ["[[SRD/Regole/Oggetti magici senzienti#^srd-oggetti_magici_senzienti-tratti]]", "[[SRD/Regole/Oggetti magici senzienti#^srd-oggetti_magici_senzienti-conflitto]]"]
+tags: ["dnd55/srd", "dnd55/regola"]
 capitolo: "Oggetti magici"
 categoria_regola: "Oggetti magici"
 pagine_sorgente: "236-237"
@@ -27,6 +34,7 @@ Alcuni oggetti magici possiedono coscienza e personalita. Il GM controlla questi
 | Comunicazione | Comunica tramite emozioni, parlando, o parlando e comunicando telepaticamente. |
 | Sensi | Puo avere udito e visione entro 9, 18 o 36 metri, oppure scurovisione e udito entro 36 metri. |
 | Scopo speciale | Puo avere un obiettivo, come proteggere creature, cercare conoscenza, distruggere nemici o servire una divinita. |
+^srd-oggetti_magici_senzienti-tratti
 
 ## Conflitto
 
@@ -37,6 +45,7 @@ Alcuni oggetti magici possiedono coscienza e personalita. Il GM controlla questi
 | Richieste | L'oggetto puo chiedere di perseguire il suo scopo, eliminare cio che disprezza, essere ceduto o restare sempre vicino. |
 | Ritorsioni | Se rifiutato, puo impedire la sintonia, sopprimere proprieta attivate o tentare di controllare il portatore. |
 | Controllo | Il controllo impone affascinato per 1d12 ore su TS fallito; il portatore ripete il TS se subisce danni. |
+^srd-oggetti_magici_senzienti-conflitto
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

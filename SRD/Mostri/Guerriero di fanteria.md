@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Guerriero di fanteria]]"]
+riferimenti_srd: ["[[SRD/Mostri/Guerriero di fanteria]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Guerriero di fanteria#^srd-guerriero_di_fanteria-tattiche-del-branco]]", "[[SRD/Mostri/Guerriero di fanteria#^srd-guerriero_di_fanteria-lancia]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Guerriero di fanteria"
 type: "Umanoide"
 size: "medio o piccolo"
@@ -82,11 +89,13 @@ tab: Azioni
 ### Tattiche del branco
 
 Il guerriero dispone di vantaggio a un tiro per colpire contro una creatura se almeno uno dei suoi alleati si trova entro 1,5 metri dalla creatura e non è incapacitato.
+^srd-guerriero_di_fanteria-tattiche-del-branco
 ## Azioni
 
 ### Lancia
 
 *Tiro per colpire in mischia o a distanza:* +3, portata 1,5 m o gittata 6/18 m. *Colpito:* 4 (1d6 + 1) danni perforanti.
+^srd-guerriero_di_fanteria-lancia
 ````
 
 > [!info] Licenza

@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Mimic]]"]
+riferimenti_srd: ["[[SRD/Mostri/Mimic]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Mimic#^srd-mimic-adesivo-solo-in-forma-di-oggetto]]", "[[SRD/Mostri/Mimic#^srd-mimic-morso]]", "[[SRD/Mostri/Mimic#^srd-mimic-pseudopode]]", "[[SRD/Mostri/Mimic#^srd-mimic-mutaforma]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Mimic"
 type: "Mostruosità"
 size: "media"
@@ -90,15 +97,18 @@ tab: Azioni
 ### Adesivo (solo in forma di oggetto)
 
 Il mimic aderisce a qualsiasi cosa tocchi. Una creatura di taglia Enorme oinferiore attaccata al mimic è afferrata (CD 13 per sfuggire). Le prove di caratteristica effettuate per sfuggire a questa presa subiscono svantaggio.
+^srd-mimic-adesivo-solo-in-forma-di-oggetto
 ## Azioni
 
 ### Morso
 
 *Tiro per colpire in mischia:* +5 (con vantaggio se il bersaglio è afferrato dal mimic), portata 1,5 m. *Colpito:* 7 (1d8 + 3) danni perforanti, o 12 (2d8 + 3) danni perforanti se il bersaglio è afferrato dal mimic, più 4 (1d8) danni da acido.
+^srd-mimic-morso
 
 ### Pseudopode
 
 *Tiro per colpire in mischia:* +5, portata 1,5 m *Colpito:* 7 (1d8 + 3) danni contundenti più 4 (1d8) danni da acido. Se il bersaglio è una creatura di taglia Grande o inferiore, è afferrato (CD 13 per sfuggire). Le prove di caratteristica effettuate per sfuggire a questa presa subiscono svantaggio.
+^srd-mimic-pseudopode
 ````
 
 > [!info] Licenza

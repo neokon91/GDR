@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Oggetti Magici/Giaco di maglia elfico]]"]
+riferimenti_srd: ["[[SRD/Oggetti Magici/Giaco di maglia elfico]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: []
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/oggetto-magico"]
 tipo_oggetto: "Armatura (cotta di maglia o giaco di maglia)"
 tipo_base: "Armatura"
 rarita: "rara"

@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Talenti/Combattere con due armi]]"]
+riferimenti_srd: ["[[SRD/Talenti/Combattere con due armi]]"]
+riferimenti_regola: []
+sezioni_collegate: ["[[SRD/Talenti/Combattere con due armi#Beneficio]]"]
+blocchi_collegati: []
+tabelle_collegate: []
+tags: ["dnd55/srd"]
 capitolo: "Talenti"
 pagine_sorgente: "99-100"
 categoria_talento: "Stile di combattimento"

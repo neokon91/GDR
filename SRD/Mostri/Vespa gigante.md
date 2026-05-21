@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Vespa gigante]]"]
+riferimenti_srd: ["[[SRD/Mostri/Vespa gigante]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Vespa gigante#^srd-vespa_gigante-volo-sfuggente]]", "[[SRD/Mostri/Vespa gigante#^srd-vespa_gigante-pungiglione]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Vespa gigante"
 type: "Bestia"
 size: "media"
@@ -82,11 +89,13 @@ tab: Azioni
 ### Volo sfuggente
 
 La vespa non provoca attacchi di opportunità quando vola oltre la portata di un nemico.
+^srd-vespa_gigante-volo-sfuggente
 ## Azioni
 
 ### Pungiglione
 
 *Tiro per colpire in mischia:* +4, portata 1,5 m. *Colpito:* 5 (1d6 +2) danni perforanti più 5 (2d4) danni da veleno.
+^srd-vespa_gigante-pungiglione
 ````
 
 > [!info] Licenza

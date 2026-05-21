@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Otyugh]]"]
+riferimenti_srd: ["[[SRD/Mostri/Otyugh]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Otyugh#^srd-otyugh-multiattacco]]", "[[SRD/Mostri/Otyugh#^srd-otyugh-morso]]", "[[SRD/Mostri/Otyugh#^srd-otyugh-tentacolo]]", "[[SRD/Mostri/Otyugh#^srd-otyugh-schianto-con-tentacolo]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Otyugh"
 type: "Aberrazione"
 size: "grande"
@@ -87,18 +94,22 @@ tab: Azioni
 ### Multiattacco
 
 L'otyugh effettua un attacco Morso e due attacchi Tentacolo.
+^srd-otyugh-multiattacco
 
 ### Morso
 
 *Tiro per colpire in mischia:* +6, portata 1,5 m. *Colpito:* 12 (2d8 + 3) danni perforanti, e il bersaglio è avvelenato. Ogni volta che il bersaglio avvelenato termina un riposo lungo, subisce il seguente effetto. *Tiro salvezza su Costituzione:* CD 15. *Fallimento:* i punti ferita massimi del bersaglio sono ridotti di 5 (1d10), e la riduzione permane finché la condizione avvelenato del bersaglio non termina. *Successo:* la condizione avvelenato termina.
+^srd-otyugh-morso
 
 ### Tentacolo
 
 *Tiro per colpire in mischia:* +6, portata 3 m. *Colpito:* 12 (2d8 + 3) danni perforanti. Se il bersaglio è una creatura di taglia Media o inferiore, è afferrato (CD 13 per sfuggire) da uno dei due tentacoli.
+^srd-otyugh-tentacolo
 
 ### Schianto con tentacolo
 
 *Tiro salvezza su Costituzione:* CD 14, tutte le creature afferrate dall'otyugh. *Fallimento:* 16 (3d8 + 3) danni contundenti, e il bersaglio è stordito fino all'inizio del turno successivo dell'otyugh. *Successo:* danni dimezzati.
+^srd-otyugh-schianto-con-tentacolo
 ````
 
 > [!info] Licenza

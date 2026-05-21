@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Allosauro]]"]
+riferimenti_srd: ["[[SRD/Mostri/Allosauro]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Allosauro#^srd-allosauro-artigli]]", "[[SRD/Mostri/Allosauro#^srd-allosauro-morso]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Allosauro"
 type: "Bestia (dinosauro)"
 size: "grande"
@@ -86,10 +93,12 @@ tab: Azioni
 ### Artigli
 
 *Tiro per colpire in mischia:* +6, portata 1,5 m. *Colpito:* 8 (1d8 + 4) danni taglienti. Se il bersaglio è una creatura di taglia Grande o inferiore e l'allosauro si è mosso di 9 metri o più in linea retta verso di esso subito prima del colpo, il bersaglio cade a terra prono e l'allosauro può effettuare un attacco Morso contro di esso.
+^srd-allosauro-artigli
 
 ### Morso
 
 *Tiro per colpire in mischia:* +6, portata 1,5 m. *Colpito:* 15 (2d10 + 4) danni perforanti.
+^srd-allosauro-morso
 ````
 
 > [!info] Licenza

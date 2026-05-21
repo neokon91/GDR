@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Colonia di serpenti velenosi]]"]
+riferimenti_srd: ["[[SRD/Mostri/Colonia di serpenti velenosi]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Colonia di serpenti velenosi#^srd-colonia_di_serpenti_velenosi-sciame]]", "[[SRD/Mostri/Colonia di serpenti velenosi#^srd-colonia_di_serpenti_velenosi-morsi]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Colonia di serpenti velenosi"
 type: "Sciame"
 size: "medio"
@@ -82,11 +89,13 @@ tab: Azioni
 ### Sciame
 
 La colonia può occupare lo spazio di un'altra creatura e viceversa, e può muoversi attraverso qualsiasi apertura sufficientemente larga da far passare un serpente Minuscolo. L'orda non può recuperare punti ferita o ottenere punti ferita temporanei.
+^srd-colonia_di_serpenti_velenosi-sciame
 ## Azioni
 
 ### Morsi
 
 *Tiro per colpire in mischia:* +6, portata 1,5 m. *Colpito:* 8 (1d4 + 4) danni perforanti, o 6 (1d8 + 4) danni perforanti se la colonia è sanguinante, più 10 (3d6) danni da veleno.
+^srd-colonia_di_serpenti_velenosi-morsi
 ````
 
 > [!info] Licenza

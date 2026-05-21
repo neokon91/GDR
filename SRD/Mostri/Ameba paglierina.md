@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Ameba paglierina]]"]
+riferimenti_srd: ["[[SRD/Mostri/Ameba paglierina]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Ameba paglierina#^srd-ameba_paglierina-amorfo]]", "[[SRD/Mostri/Ameba paglierina#^srd-ameba_paglierina-movimenti-del-ragno]]", "[[SRD/Mostri/Ameba paglierina#^srd-ameba_paglierina-pseudopode]]", "[[SRD/Mostri/Ameba paglierina#^srd-ameba_paglierina-scindersi]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Ameba paglierina"
 type: "Melma"
 size: "grande"
@@ -86,15 +93,18 @@ tab: Azioni
 ### Amorfo
 
 L'ameba può muoversi attraverso uno spazio stretto fino a 2,5 centimetri senza consumare movimento extra per farlo.
+^srd-ameba_paglierina-amorfo
 
 ### Movimenti del ragno
 
 L'ameba può scalare le superfici difficili, compresi i soffitti, senza effettuare una prova di caratteristica.
+^srd-ameba_paglierina-movimenti-del-ragno
 ## Azioni
 
 ### Pseudopode
 
 *Tiro per colpire in mischia:* +4, portata 1,5 m *Colpito:* 12 (3d6 + 2) danni da acido.
+^srd-ameba_paglierina-pseudopode
 ````
 
 > [!info] Licenza

@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Squalo gigante]]"]
+riferimenti_srd: ["[[SRD/Mostri/Squalo gigante]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Squalo gigante#^srd-squalo_gigante-respirare-sott-acqua]]", "[[SRD/Mostri/Squalo gigante#^srd-squalo_gigante-multiattacco]]", "[[SRD/Mostri/Squalo gigante#^srd-squalo_gigante-morso]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Squalo gigante"
 type: "Bestia"
 size: "enorme"
@@ -88,15 +95,18 @@ tab: Azioni
 ### Respirare sott'acqua
 
 Lo squalo può respirare soltanto sott'acqua.
+^srd-squalo_gigante-respirare-sott-acqua
 ## Azioni
 
 ### Multiattacco
 
 Lo squalo effettua due attacchi Morso.
+^srd-squalo_gigante-multiattacco
 
 ### Morso
 
 *Tiro per colpire in mischia:* +9 (con vantaggio se il bersaglio non ha tutti i punti ferita), portata 1,5 m. *Colpito:* 22 (3d10 + 6) danni perforanti.
+^srd-squalo_gigante-morso
 ````
 
 > [!info] Licenza

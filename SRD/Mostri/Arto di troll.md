@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Arto di troll]]"]
+riferimenti_srd: ["[[SRD/Mostri/Arto di troll]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Arto di troll#^srd-arto_di_troll-generare-troll]]", "[[SRD/Mostri/Arto di troll#^srd-arto_di_troll-rigenerazione]]", "[[SRD/Mostri/Arto di troll#^srd-arto_di_troll-squarcio]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Arto di troll"
 type: "Gigante"
 size: "piccolo"
@@ -84,15 +91,18 @@ tab: Azioni
 ### Generare troll
 
 Stranamente, l'arto possiede gli stessi sensi di un troll integro. Se non viene distrutto entro 24 ore, tira 1d12. Con un risultato di 12, l'arto diventa un troll, altrimenti avvizzisce e si decompone.
+^srd-arto_di_troll-generare-troll
 
 ### Rigenerazione
 
 L'arto recupera 5 punti ferita all'inizio di ogni suo turno. Se l'arto subisce danni da acido o fuoco, questo tratto non funziona all'inizio del suo turno successivo. L'arto muore solo se inizia il suo turno con 0 punti ferita e non si rigenera.
+^srd-arto_di_troll-rigenerazione
 ## Azioni
 
 ### Squarcio
 
 *Tiro per colpire in mischia:* +6, portata 1,5 m. *Colpito:* 9 (2d4 + 4) danni taglienti.
+^srd-arto_di_troll-squarcio
 ````
 
 > [!info] Licenza

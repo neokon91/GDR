@@ -36,6 +36,8 @@ async function missione(tp) {
     const segreto = await helpers.promptOptional(tp, prompts.segreto ?? "Segreto dietro la missione");
     const domandaAperta = creazioneCompleta ? await helpers.promptOptional(tp, prompts.domanda_aperta ?? "Domanda aperta della missione") : "";
     const connessioni = await helpers.chooseConnections(tp, profile.connection_prompt ?? "Connessioni vive della missione", context);
+    const fontiGranulari = creazioneCompleta ? await helpers.promptWikilinkTargets(tp, prompts.fonti ?? "Fonti granulari della missione (wikilink, anche Nota#Sezione o Nota#^blocco)") : [];
+    const riferimentiRegola = creazioneCompleta ? await helpers.promptWikilinkTargets(tp, prompts.riferimenti_regola ?? "Riferimenti regola usati dalla missione") : [];
 
     const sessioni = activeContext.link ? [activeContext.link] : [];
     const created = await helpers.moveNote(tp, helpers.path("missioni"), name);
@@ -78,7 +80,14 @@ async function missione(tp) {
         connessioni: helpers.inlineYamlList(connessioni),
         scadenza_mondo: helpers.yamlQuote(scadenzaMondo),
         fc_calendar: helpers.yamlQuote(calendario),
-        fc_display_name: helpers.yamlQuote(name)
+        fc_display_name: helpers.yamlQuote(name),
+        fonti: helpers.inlineYamlWikilinkList([...fontiGranulari, ...sessioni, committente, ...connessioni]),
+        riferimenti_srd: '[]',
+        riferimenti_regola: helpers.inlineYamlWikilinkList(riferimentiRegola),
+        sezioni_collegate: '[]',
+        blocchi_collegati: '[]',
+        tabelle_collegate: '[]',
+        tags: helpers.inlineYamlTextList(["gdr/bozza"])
     });
 }
 

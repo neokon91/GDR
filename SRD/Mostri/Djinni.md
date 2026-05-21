@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Djinni]]"]
+riferimenti_srd: ["[[SRD/Mostri/Djinni]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Djinni#^srd-djinni-desideri]]", "[[SRD/Mostri/Djinni#^srd-djinni-resistenza-alla-magia]]", "[[SRD/Mostri/Djinni#^srd-djinni-ristoro-elementale]]", "[[SRD/Mostri/Djinni#^srd-djinni-multiattacco]]", "[[SRD/Mostri/Djinni#^srd-djinni-lama-burrascosa]]", "[[SRD/Mostri/Djinni#^srd-djinni-lampo-burrascoso]]", "[[SRD/Mostri/Djinni#^srd-djinni-creare-vortice]]", "[[SRD/Mostri/Djinni#^srd-djinni-incantesimi]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Djinni"
 type: "Elementale"
 size: "grande"
@@ -96,27 +103,33 @@ tab: Azioni
 ### Desideri
 
 Il djinni ha una probabilità del 30% di conoscere l'incantesimo desiderio. Se il djinni lo conosce, può lanciarlo solo per conto di una creatura diversa da un genio che comunica un desiderio in un modo che il djinni è in grado di comprendere. Se il djinni lancia l'incantesimo per conto della creatura, non subisce alcuna conseguenza derivante dal lancio dell'incantesimo. Una volta che il djinni l'ha lanciato tre volte, non può farlo di nuovo per 365 giorni.
+^srd-djinni-desideri
 
 ### Resistenza alla magia
 
 Il djinni dispone di vantaggio ai tiri salvezza contro incantesimi e altri effetti magici.
+^srd-djinni-resistenza-alla-magia
 
 ### Ristoro elementale
 
 Se il djinni muore al di fuori del Piano Elementale dell'Aria, il suo corpo si dissolve nell'aria ed esso ne acquisisce uno nuovo dopo 1d4 giorni, tornando in vita con tutti i suoi punti ferita da qualche parte sul Piano Elementale dell'Aria.
+^srd-djinni-ristoro-elementale
 ## Azioni
 
 ### Multiattacco
 
 Il djinni effettua tre attacchi, usando Lama burrascosa o Lampo burrascoso in qualsiasi combinazione.
+^srd-djinni-multiattacco
 
 ### Lama burrascosa
 
 *Tiro per colpire in mischia:* +9, portata 1,5 m. *Colpito:* 12 (2d6 + 5) danni taglienti più 7 (2d6) danni da fulmine.
+^srd-djinni-lama-burrascosa
 
 ### Lampo burrascoso
 
 *Tiro per colpire a distanza:* +9, gittata 36 m. *Colpito:* 13 (3d8) danni da tuono. Se il bersaglio è una creatura di taglia Grande o inferiore, cade a terra prono.
+^srd-djinni-lampo-burrascoso
 
 ### Creare vortice
 
@@ -125,6 +138,7 @@ Il djinni evoca un vortice in un punto che è in grado di vedere entro 36 metri.
 *Tiro salvezza su Forza:* CD 17 (una creatura effettua questo tiro salvezza solo una volta per turno, e il djinni non subisce alcun effetto).
 
 *Fallimento:* finché si trova nel vortice, il bersaglio è trattenuto e si sposta insieme al vortice. All'inizio di ogni suo turno, il bersaglio trattenuto subisce 21 (6d6) danni da tuono. Alla fine di ogni suo turno, il bersaglio ripete il tiro salvezza e, se lo supera, l'effetto svanisce.
+^srd-djinni-creare-vortice
 
 ### Incantesimi
 
@@ -145,6 +159,7 @@ Il djinni lancia uno dei seguenti incantesimi, senza bisogno di componenti mater
 *A volontà:*
 - individuazione del bene e del male
 - individuazione del magico
+^srd-djinni-incantesimi
 ````
 
 > [!info] Licenza

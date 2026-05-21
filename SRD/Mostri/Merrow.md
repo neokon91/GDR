@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Merrow]]"]
+riferimenti_srd: ["[[SRD/Mostri/Merrow]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Merrow#^srd-merrow-anfibio]]", "[[SRD/Mostri/Merrow#^srd-merrow-multiattacco]]", "[[SRD/Mostri/Merrow#^srd-merrow-arpione]]", "[[SRD/Mostri/Merrow#^srd-merrow-artiglio]]", "[[SRD/Mostri/Merrow#^srd-merrow-morso]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Merrow"
 type: "Mostruosità"
 size: "grande"
@@ -88,23 +95,28 @@ tab: Azioni
 ### Anfibio
 
 Il merrow può respirare in aria e in acqua.
+^srd-merrow-anfibio
 ## Azioni
 
 ### Multiattacco
 
 Il merrow effettua due attacchi, usando Morso, Artiglio o Arpione in qualsiasi combinazione.
+^srd-merrow-multiattacco
 
 ### Arpione
 
 *Tiro per colpire in mischia o a distanza:* +6, portata 1,5 m o gittata 6/18 m. *Colpito:* 11 (2d6 + 4) danni perforanti. Se il bersaglio è una creatura di taglia Grande o inferiore, il merrow trascina il bersaglio in linea retta verso di sé fino a 4,5 metri.
+^srd-merrow-arpione
 
 ### Artiglio
 
 *Tiro per colpire in mischia:* +6, portata 1,5 m. *Colpito:* 9 (2d4 + 4) danni taglienti.
+^srd-merrow-artiglio
 
 ### Morso
 
 *Tiro per colpire in mischia:* +6, portata 1,5 m. *Colpito:* 6 (1d4 + 4) danni perforanti, e il bersaglio è avvelenato fino al termine del turno successivo del merrow.
+^srd-merrow-morso
 ````
 
 > [!info] Licenza

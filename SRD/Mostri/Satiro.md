@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Satiro]]"]
+riferimenti_srd: ["[[SRD/Mostri/Satiro]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Satiro#^srd-satiro-resistenza-alla-magia]]", "[[SRD/Mostri/Satiro#^srd-satiro-zoccoli]]", "[[SRD/Mostri/Satiro#^srd-satiro-derisione]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Satiro"
 type: "Folletto"
 size: "medio"
@@ -90,15 +97,18 @@ tab: Azioni
 ### Resistenza alla magia
 
 Il satiro dispone di vantaggio ai tiri salvezza contro incantesimi e altri effetti magici.
+^srd-satiro-resistenza-alla-magia
 ## Azioni
 
 ### Zoccoli
 
 *Tiro per colpire in mischia:* +5, portata 1,5 m. *Colpito:* 5 (1d4 + 3) danni contundenti. Se il bersaglio è una creatura di taglia Media o inferiore, il satiro lo spinge fino a 3 metri lontano da sé.
+^srd-satiro-zoccoli
 
 ### Derisione
 
 *Tiro salvezza su Saggezza:* CD 12, una creatura che il satiro è in grado di vedere entro 27 metri. *Fallimento:* 5 (1d6 + 2) danni psichici.
+^srd-satiro-derisione
 ````
 
 > [!info] Licenza

@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Tasso gigante]]"]
+riferimenti_srd: ["[[SRD/Mostri/Tasso gigante]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Tasso gigante#^srd-tasso_gigante-morso]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Tasso gigante"
 type: "Bestia"
 size: "media"
@@ -84,6 +91,7 @@ tab: Azioni
 ### Morso
 
 *Tiro per colpire in mischia:* +3, portata 1,5 m. *Colpito:* 6 (2d4 + 1) danni perforanti.
+^srd-tasso_gigante-morso
 ````
 
 > [!info] Licenza

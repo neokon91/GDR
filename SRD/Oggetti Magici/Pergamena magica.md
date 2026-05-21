@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Oggetti Magici/Pergamena magica]]"]
+riferimenti_srd: ["[[SRD/Oggetti Magici/Pergamena magica]]"]
+riferimenti_regola: []
+sezioni_collegate: ["[[SRD/Oggetti Magici/Pergamena magica#Livello dell'incantesimo Rarità CD del tiro salvezza Bonus di attacco]]"]
+blocchi_collegati: []
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/oggetto-magico"]
 tipo_oggetto: "Pergamena"
 tipo_base: "Pergamena"
 rarita: "rarità variabile"
@@ -29,6 +36,7 @@ Una pergamena magica riporta le parole di un unico incantesimo, scritte in un co
 ### Copiare una pergamena nel libro degli incantesimi
 
 Gli incantesimi da mago scritti sulle  pergamene magiche possono essere copiati in un libro degli incantesimi. Per farlo, chi copia deve superare una prova di Intelligenza (Arcano) con CD pari a 10 più il livello dell'incantesimo. Se la prova viene superata, l'incantesimo viene copiato. A prescindere dal risultato della prova, la pergamena magica viene distrutta.
+^srd-pergamena_magica-copiare-una-pergamena-nel-libro-degli-incantesimi
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

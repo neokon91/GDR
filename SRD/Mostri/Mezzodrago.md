@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Mezzodrago]]"]
+riferimenti_srd: ["[[SRD/Mostri/Mezzodrago]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Mezzodrago#^srd-mezzodrago-origine-draconica]]", "[[SRD/Mostri/Mezzodrago#^srd-mezzodrago-multiattacco]]", "[[SRD/Mostri/Mezzodrago#^srd-mezzodrago-artiglio]]", "[[SRD/Mostri/Mezzodrago#^srd-mezzodrago-soffio-del-drago-ricarica-5-6]]", "[[SRD/Mostri/Mezzodrago#^srd-mezzodrago-balzo]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Mezzodrago"
 type: "Drago"
 size: "medio"
@@ -96,19 +103,23 @@ tab: Azioni
 ### Origine draconica
 
 Il mezzodrago è legato al tipo di drago associato con uno dei seguenti tipi di danno (a scelta del GM): acido, freddo, fulmine, fuoco o veleno. Questa scelta influenza gli altri aspetti della scheda delle statistiche.
+^srd-mezzodrago-origine-draconica
 ## Azioni
 
 ### Multiattacco
 
 Il mezzodrago effettua due attacchi Artiglio.
+^srd-mezzodrago-multiattacco
 
 ### Artiglio
 
 *Tiro per colpire in mischia:* +7, portata 3 m. *Colpito:* 6 (1d4 + 4) danni taglienti più 7 (2d6) danni del tipo scelto per il tratto Origine draconica.
+^srd-mezzodrago-artiglio
 
 ### Soffio del drago (ricarica 5-6)
 
 *Tiro salvezza su Destrezza:* CD 14, tutte le creature in un cono di 9 metri. *Fallimento:* 28 (8d6) danni del tipo scelto per il tratto Origine draconica. *Successo:* danni dimezzati.
+^srd-mezzodrago-soffio-del-drago-ricarica-5-6
 ````
 
 > [!info] Licenza

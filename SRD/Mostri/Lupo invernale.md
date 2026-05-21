@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Lupo invernale]]"]
+riferimenti_srd: ["[[SRD/Mostri/Lupo invernale]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Lupo invernale#^srd-lupo_invernale-tattiche-del-branco]]", "[[SRD/Mostri/Lupo invernale#^srd-lupo_invernale-morso]]", "[[SRD/Mostri/Lupo invernale#^srd-lupo_invernale-soffio-di-freddo-ricarica-5-6]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Lupo invernale"
 type: "Mostruosità"
 size: "grande"
@@ -89,15 +96,18 @@ tab: Azioni
 ### Tattiche del branco
 
 Il lupo dispone di vantaggio al tiro per colpire contro una creatura se almeno uno degli alleati dell'animale si trova entro 1,5 metri dalla creatura e non è incapacitato.
+^srd-lupo_invernale-tattiche-del-branco
 ## Azioni
 
 ### Morso
 
 *Tiro per colpire in mischia:* +6, portata 1,5 m. *Colpito:* 11 (2d6 + 4) danni perforanti. Se il bersaglio è una creatura di taglia Grande o inferiore, cade a terra prono.
+^srd-lupo_invernale-morso
 
 ### Soffio di freddo (ricarica 5-6)
 
 *Tiro salvezza su Costituzione:* CD 12, tutte le creature in un cono di 4,5 metri. *Fallimento:* 18 (4d8) danni da freddo. *Successo:* danni dimezzati.
+^srd-lupo_invernale-soffio-di-freddo-ricarica-5-6
 ````
 
 > [!info] Licenza

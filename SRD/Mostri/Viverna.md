@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Viverna]]"]
+riferimenti_srd: ["[[SRD/Mostri/Viverna]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Viverna#^srd-viverna-multiattacco]]", "[[SRD/Mostri/Viverna#^srd-viverna-morso]]", "[[SRD/Mostri/Viverna#^srd-viverna-pungiglione]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Viverna"
 type: "Drago"
 size: "grande"
@@ -88,14 +95,17 @@ tab: Azioni
 ### Multiattacco
 
 La viverna effettua un attacco Morso e un attacco Pungiglione.
+^srd-viverna-multiattacco
 
 ### Morso
 
 *Tiro per colpire in mischia:* +7, portata 1,5 m. *Colpito:* 13 (2d8 + 4) danni perforanti.
+^srd-viverna-morso
 
 ### Pungiglione
 
 *Tiro per colpire in mischia:* +7, portata 3 m. *Colpito:* 11 (2d6 + 4) danni perforanti più 24 (7d6) danni da veleno, e il bersaglio è avvelenato fino all'inizio del turno successivo della viverna.
+^srd-viverna-pungiglione
 ````
 
 > [!info] Licenza

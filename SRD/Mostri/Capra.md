@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Capra]]"]
+riferimenti_srd: ["[[SRD/Mostri/Capra]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Capra#^srd-capra-sfondamento]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Capra"
 type: "Bestia"
 size: "media"
@@ -85,6 +92,7 @@ tab: Azioni
 ### Sfondamento
 
 *Tiro per colpire in mischia:* +2, portata 1,5 m. *Colpito:* 1 danno contundente, o 2 (1d4) danni contundenti se la capra si è mossa di 6 metri o più in linea retta verso il bersaglio subito prima del colpo.
+^srd-capra-sfondamento
 ````
 
 > [!info] Licenza

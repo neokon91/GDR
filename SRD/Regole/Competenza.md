@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Regole/Competenza]]"]
+riferimenti_srd: ["[[SRD/Regole/Competenza]]"]
+riferimenti_regola: []
+sezioni_collegate: ["[[SRD/Regole/Competenza#Bonus di competenza]]", "[[SRD/Regole/Competenza#Regole]]"]
+blocchi_collegati: []
+tabelle_collegate: ["[[SRD/Regole/Competenza#^srd-competenza-bonus-di-competenza]]"]
+tags: ["dnd55/srd", "dnd55/regola"]
 capitolo: "Come si gioca"
 categoria_regola: "Prove"
 pagine_sorgente: "8-10"
@@ -30,20 +37,24 @@ Il bonus di competenza rappresenta l'addestramento di una creatura. Si applica a
 | 21-24 | +7 |
 | 25-28 | +8 |
 | 29-30 | +9 |
+^srd-competenza-bonus-di-competenza
 
 ## Regole
 
 ### I bonus non si accumulano
 
 Il bonus di competenza non puo essere aggiunto allo stesso tiro piu di una volta. Se viene moltiplicato o diviso, puo esserlo una sola volta.
+^srd-competenza-i-bonus-non-si-accumulano
 
 ### Competenze nelle abilita
 
 Quando una prova di caratteristica riguarda un'abilita in cui la creatura e competente, si aggiunge il bonus di competenza.
+^srd-competenza-competenze-nelle-abilita
 
 ### Competenze negli strumenti
 
 Quando uno strumento e rilevante e la creatura ne e competente, si aggiunge il bonus di competenza. Se sono rilevanti sia abilita sia strumento, la prova puo avere vantaggio.
+^srd-competenza-competenze-negli-strumenti
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

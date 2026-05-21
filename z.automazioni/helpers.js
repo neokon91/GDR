@@ -1073,6 +1073,52 @@ function inlineYamlList(values) {
     return filtered.length ? `[${filtered.join(", ")}]` : "[]";
 }
 
+function normalizeWikilinkTarget(value) {
+    const text = String(value ?? "").trim();
+    if (!text) return "";
+    if (/^\[\[[^\]]+\]\]$/.test(text)) return text;
+    return `[[${text.replace(/^#+/, "").trim()}]]`;
+}
+
+function splitListInput(value) {
+    return String(value ?? "")
+        .split(/[\n,;]+/)
+        .map(entry => entry.trim())
+        .filter(Boolean);
+}
+
+function inlineYamlWikilinkList(values) {
+    const normalized = (values ?? [])
+        .map(normalizeWikilinkTarget)
+        .filter(Boolean);
+    return inlineYamlList([...new Set(normalized)]);
+}
+
+async function promptWikilinkTargets(tp, message, defaultValue = "") {
+    const raw = await promptOptional(tp, message, defaultValue);
+    return splitListInput(raw).map(normalizeWikilinkTarget).filter(Boolean);
+}
+
+function referenceFields({
+    fonti = [],
+    riferimentiSrd = [],
+    riferimentiRegola = [],
+    sezioni = [],
+    blocchi = [],
+    tabelle = [],
+    tags = []
+} = {}) {
+    return {
+        fonti: inlineYamlWikilinkList(fonti),
+        riferimenti_srd: inlineYamlWikilinkList(riferimentiSrd),
+        riferimenti_regola: inlineYamlWikilinkList(riferimentiRegola),
+        sezioni_collegate: inlineYamlWikilinkList(sezioni),
+        blocchi_collegati: inlineYamlWikilinkList(blocchi),
+        tabelle_collegate: inlineYamlWikilinkList(tabelle),
+        tags: inlineYamlTextList(tags)
+    };
+}
+
 function inlineYamlTextList(values) {
     const filtered = (values ?? [])
         .map(value => String(value ?? "").trim())
@@ -1122,7 +1168,10 @@ module.exports = {
     collectNamedDescriptions,
     inlineYamlArray,
     inlineYamlList,
+    inlineYamlWikilinkList,
     inlineYamlTextList,
+    promptWikilinkTargets,
+    referenceFields,
     yamlNumber,
     parseAbilityScores,
     abilityArray,

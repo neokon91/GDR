@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Coccodrillo gigante]]"]
+riferimenti_srd: ["[[SRD/Mostri/Coccodrillo gigante]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Coccodrillo gigante#^srd-coccodrillo_gigante-apnea]]", "[[SRD/Mostri/Coccodrillo gigante#^srd-coccodrillo_gigante-multiattacco]]", "[[SRD/Mostri/Coccodrillo gigante#^srd-coccodrillo_gigante-coda]]", "[[SRD/Mostri/Coccodrillo gigante#^srd-coccodrillo_gigante-morso]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Coccodrillo gigante"
 type: "Bestia"
 size: "enorme"
@@ -90,19 +97,23 @@ tab: Azioni
 ### Apnea
 
 Il coccodrillo può trattenere il respiro per 1 ora.
+^srd-coccodrillo_gigante-apnea
 ## Azioni
 
 ### Multiattacco
 
 Il coccodrillo effettua un attacco Morso e un attacco Coda.
+^srd-coccodrillo_gigante-multiattacco
 
 ### Coda
 
 *Tiro per colpire in mischia:* +8, portata 3 m. *Colpito:* 18 (3d8 + 5) danni contundenti. Se il bersaglio è una creatura di taglia Grande o inferiore, cade a terra prono.
+^srd-coccodrillo_gigante-coda
 
 ### Morso
 
 *Tiro per colpire in mischia:* +8, portata 1,5 m. *Colpito:* 21 (3d10 + 5) danni perforanti. Se il bersaglio è una creatura di taglia Grande o inferiore, è afferrato (CD 15 per sfuggire). Mentre è afferrato, il bersaglio è trattenuto e non può essere bersagliato dalla Coda del coccodrillo.
+^srd-coccodrillo_gigante-morso
 ````
 
 > [!info] Licenza

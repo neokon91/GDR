@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Glossario/Caduta]]"]
+riferimenti_srd: ["[[SRD/Glossario/Caduta]]"]
+riferimenti_regola: []
+sezioni_collegate: ["[[SRD/Glossario/Caduta#Acqua o liquidi]]"]
+blocchi_collegati: []
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/regola"]
 lettera: "C"
 descrittore: "pericolo"
 pagine_sorgente: 205
@@ -23,6 +30,7 @@ Una creatura che cade subisce 1d6 danni contundenti per ogni 3 metri di caduta, 
 ### Reazione
 
 Cadendo in acqua o altro liquido, la creatura può usare la reazione per superare una prova di Forza (Atletica) o Destrezza (Acrobazia) con CD 15. Se riesce, i danni della caduta sono dimezzati.
+^srd-caduta-reazione
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

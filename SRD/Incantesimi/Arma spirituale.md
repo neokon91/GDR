@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Incantesimi/Arma spirituale]]"]
+riferimenti_srd: ["[[SRD/Incantesimi/Arma spirituale]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Incantesimi/Arma spirituale#^srd-arma_spirituale-utilizzo-di-uno-slot-incantesimo-di-livello-superiore]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/incantesimo"]
 livello: 2
 scuola: "Invocazione"
 classi: ["chierico"]
@@ -38,6 +45,7 @@ Come azione bonus nei suoi turni successivi, l'incantatore può muovere l'arma s
 ### Utilizzo di uno slot incantesimo di livello superiore
 
 I danni aumentano di 1d8 per ogni slot di livello superiore al 2º.
+^srd-arma_spirituale-utilizzo-di-uno-slot-incantesimo-di-livello-superiore
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

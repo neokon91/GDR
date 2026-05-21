@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Cultista fanatico]]"]
+riferimenti_srd: ["[[SRD/Mostri/Cultista fanatico]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Cultista fanatico#^srd-cultista_fanatico-lama-del-patto]]", "[[SRD/Mostri/Cultista fanatico#^srd-cultista_fanatico-incantesimi]]", "[[SRD/Mostri/Cultista fanatico#^srd-cultista_fanatico-arma-spirituale-2-giorno]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Cultista fanatico"
 type: "Umanoide"
 size: "medio o piccolo"
@@ -91,6 +98,7 @@ tab: Azioni
 ### Lama del patto
 
 *Tiro per colpire in mischia:* +4, portata 1,5 m. *Colpito:* 6 (1d8 + 2) danni taglienti più 7 (2d6) danni necrotici.
+^srd-cultista_fanatico-lama-del-patto
 
 ### Incantesimi
 
@@ -105,6 +113,7 @@ Il cultista lancia uno dei seguenti incantesimi, utilizzando Saggezza come carat
 *A volontà:*
 - luce
 - taumaturgia
+^srd-cultista_fanatico-incantesimi
 ````
 
 > [!info] Licenza

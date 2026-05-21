@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Basilisco]]"]
+riferimenti_srd: ["[[SRD/Mostri/Basilisco]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Basilisco#^srd-basilisco-morso]]", "[[SRD/Mostri/Basilisco#^srd-basilisco-sguardo-pietrificante-ricarica-4-6]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Basilisco"
 type: "Mostruosità"
 size: "media"
@@ -82,6 +89,7 @@ tab: Azioni
 ### Morso
 
 *Tiro per colpire in mischia:* +5, portata 1,5 m *Colpito:* 10 (2d6 + 3) danni perforanti più 7 (2d6) danni da veleno.
+^srd-basilisco-morso
 ````
 
 > [!info] Licenza

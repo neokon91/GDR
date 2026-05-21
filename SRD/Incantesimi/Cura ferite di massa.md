@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Incantesimi/Cura ferite di massa]]"]
+riferimenti_srd: ["[[SRD/Incantesimi/Cura ferite di massa]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Incantesimi/Cura ferite di massa#^srd-cura_ferite_di_massa-utilizzo-di-uno-slot-incantesimo-di-livello-superiore]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/incantesimo"]
 livello: 5
 scuola: "Abiurazione"
 classi: ["bardo", "chierico", "druido"]
@@ -36,6 +43,7 @@ Un'ondata di energia curativa si sprigiona da un punto entro gittata che l'incan
 ### Utilizzo di uno slot incantesimo di livello superiore
 
 La guarigione aumenta di 1d8 per ogni slot di livello superiore al 5º.
+^srd-cura_ferite_di_massa-utilizzo-di-uno-slot-incantesimo-di-livello-superiore
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

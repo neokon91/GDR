@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Drago di bronzo antico]]"]
+riferimenti_srd: ["[[SRD/Mostri/Drago di bronzo antico]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Drago di bronzo antico#^srd-drago_di_bronzo_antico-anfibio]]", "[[SRD/Mostri/Drago di bronzo antico#^srd-drago_di_bronzo_antico-resistenza-leggendaria-4-giorno-o-5-giorno-nella-tana]]", "[[SRD/Mostri/Drago di bronzo antico#^srd-drago_di_bronzo_antico-multiattacco]]", "[[SRD/Mostri/Drago di bronzo antico#^srd-drago_di_bronzo_antico-squarcio]]", "[[SRD/Mostri/Drago di bronzo antico#^srd-drago_di_bronzo_antico-incantesimi]]", "[[SRD/Mostri/Drago di bronzo antico#^srd-drago_di_bronzo_antico-soffio-di-fulmini-ricarica-5-6]]", "[[SRD/Mostri/Drago di bronzo antico#^srd-drago_di_bronzo_antico-soffio-repulsivo]]", "[[SRD/Mostri/Drago di bronzo antico#^srd-drago_di_bronzo_antico-balzo]]", "[[SRD/Mostri/Drago di bronzo antico#^srd-drago_di_bronzo_antico-luce-guida]]", "[[SRD/Mostri/Drago di bronzo antico#^srd-drago_di_bronzo_antico-rombo-di-tuono]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Drago di bronzo antico"
 type: "Drago (metallico)"
 size: "mastodontico"
@@ -106,19 +113,23 @@ tab: Azioni
 ### Anfibio
 
 Il drago può respirare in aria e in acqua.
+^srd-drago_di_bronzo_antico-anfibio
 
 ### Resistenza leggendaria (4/giorno o 5/giorno nella tana)
 
 Se il drago fallisce un tiro salvezza, può scegliere di superarlo comunque.
+^srd-drago_di_bronzo_antico-resistenza-leggendaria-4-giorno-o-5-giorno-nella-tana
 ## Azioni
 
 ### Multiattacco
 
 Il drago effettua tre attacchi Squarcio. Può sostituire un attacco con un utilizzo di (A) Soffio repulsivo o (B) Incantesimi per lanciare dardo tracciante (di 2º livello).
+^srd-drago_di_bronzo_antico-multiattacco
 
 ### Squarcio
 
 *Tiro per colpire in mischia:* +16, portata 4,5 m. *Colpito:* 18 (2d8 + 9) danni taglienti più 9 (2d8) danni da fulmine.
+^srd-drago_di_bronzo_antico-squarcio
 
 ### Incantesimi
 
@@ -136,14 +147,17 @@ Il drago lancia uno dei seguenti incantesimi, senza bisogno di componenti materi
 - individuazione dei pensieri
 - respirare sott'acqua
 - scrutare
+^srd-drago_di_bronzo_antico-incantesimi
 
 ### Soffio di fulmini (ricarica 5-6)
 
 *Tiro salvezza su Destrezza:* CD 23, tutte le creature in una linea lunga 36 metri e larga 3 metri. *Fallimento:* 82 (15d10) danni da fulmine. *Successo:* danni dimezzati.
+^srd-drago_di_bronzo_antico-soffio-di-fulmini-ricarica-5-6
 
 ### Soffio repulsivo
 
 *Tiro salvezza su Forza:* CD 23, tutte le creature in un cono di 9 metri. *Fallimento:* il bersaglio viene spinto fino a un massimo di 18 metri di distanza dal drago e cade a terra prono.
+^srd-drago_di_bronzo_antico-soffio-repulsivo
 ## Azioni Leggendarie
 
 Subito dopo il turno di un'altra creatura, il drago può consumare un utilizzo per effettuare una delle seguenti azioni. Il drago recupera tutti gli utilizzi consumati all'inizio di ogni suo turno.
@@ -153,14 +167,17 @@ Subito dopo il turno di un'altra creatura, il drago può consumare un utilizzo p
 ### Balzo
 
 Il drago si muove fino a metà della sua velocità, ed effettua un attacco Squarcio.
+^srd-drago_di_bronzo_antico-balzo
 
 ### Luce guida
 
 Il drago usa Incantesimi per lanciare dardo tracciante (di 2º livello).
+^srd-drago_di_bronzo_antico-luce-guida
 
 ### Rombo di tuono
 
 *Tiro salvezza su Costituzione:* CD 22, tutte le creature in una sfera di 6 metri di raggio centrata su un punto che il drago è in grado di vedere entro 36 metri. *Fallimento:* 13 (3d8) danni da tuono, e il bersaglio è assordato fino al termine del proprio turno successivo.
+^srd-drago_di_bronzo_antico-rombo-di-tuono
 ````
 
 > [!info] Licenza

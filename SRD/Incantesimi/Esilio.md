@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Incantesimi/Esilio]]"]
+riferimenti_srd: ["[[SRD/Incantesimi/Esilio]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Incantesimi/Esilio#^srd-esilio-utilizzo-di-uno-slot-incantesimo-di-livello-superiore]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/incantesimo"]
 livello: 4
 scuola: "Abiurazione"
 classi: ["chierico", "mago", "paladino", "stregone", "warlock"]
@@ -38,6 +45,7 @@ Se l'incantesimo sul bersaglio dura 1 minuto, il bersaglio non fa ritorno se è 
 ### Utilizzo di uno slot incantesimo di livello superiore
 
 L'incantatore può bersagliare una creatura aggiuntiva per ogni slot di livello superiore al 4º.
+^srd-esilio-utilizzo-di-uno-slot-incantesimo-di-livello-superiore
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

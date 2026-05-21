@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Glossario/Rompere gli oggetti]]"]
+riferimenti_srd: ["[[SRD/Glossario/Rompere gli oggetti]]"]
+riferimenti_regola: []
+sezioni_collegate: ["[[SRD/Glossario/Rompere gli oggetti#Classe Armatura degli oggetti]]", "[[SRD/Glossario/Rompere gli oggetti#Punti ferita degli oggetti]]"]
+blocchi_collegati: []
+tabelle_collegate: ["[[SRD/Glossario/Rompere gli oggetti#^srd-rompere_gli_oggetti-punti-ferita-degli-oggetti]]"]
+tags: ["dnd55/srd", "dnd55/regola"]
 lettera: "R"
 descrittore:
 pagine_sorgente: "213-214"
@@ -38,6 +45,7 @@ Gli oggetti possono essere danneggiati da attacchi o incantesimi. Un oggetto fra
 | Piccola | 3 (1d6) |
 | Media | 4 (1d8) |
 | Grande | 5 (1d10) |
+^srd-rompere_gli_oggetti-punti-ferita-degli-oggetti
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

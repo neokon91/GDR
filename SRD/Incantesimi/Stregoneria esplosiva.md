@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Incantesimi/Stregoneria esplosiva]]"]
+riferimenti_srd: ["[[SRD/Incantesimi/Stregoneria esplosiva]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Incantesimi/Stregoneria esplosiva#^srd-stregoneria_esplosiva-trucchetto-potenziato]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/incantesimo"]
 livello: 0
 scuola: "Invocazione"
 classi: ["stregone"]
@@ -38,6 +45,7 @@ Se l'incantatore ottiene il risultato 8 su un d8, può tirare un altro d8 e aggi
 ### Trucchetto potenziato
 
 I danni di questo incantesimo aumentano di 1d8 quando l'incantatore raggiunge il 5º livello (2d8), l'11º livello (3d8) e il 17º livello (4d8).
+^srd-stregoneria_esplosiva-trucchetto-potenziato
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

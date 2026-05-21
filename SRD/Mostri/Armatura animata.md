@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Armatura animata]]"]
+riferimenti_srd: ["[[SRD/Mostri/Armatura animata]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Armatura animata#^srd-armatura_animata-multiattacco]]", "[[SRD/Mostri/Armatura animata#^srd-armatura_animata-schianto]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Armatura animata"
 type: "Costrutto"
 size: "medio"
@@ -82,10 +89,12 @@ tab: Azioni
 ### Multiattacco
 
 L'armatura effettua due attacchi Schianto.
+^srd-armatura_animata-multiattacco
 
 ### Schianto
 
 *Tiro per colpire in mischia:* +4, portata 1,5 m. *Colpito:* 5 (1d6 + 2) danni contundenti.
+^srd-armatura_animata-schianto
 ````
 
 > [!info] Licenza

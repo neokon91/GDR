@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Troll]]"]
+riferimenti_srd: ["[[SRD/Mostri/Troll]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Troll#^srd-troll-arti-abominevoli-4-giorno]]", "[[SRD/Mostri/Troll#^srd-troll-rigenerazione]]", "[[SRD/Mostri/Troll#^srd-troll-multiattacco]]", "[[SRD/Mostri/Troll#^srd-troll-squarcio]]", "[[SRD/Mostri/Troll#^srd-troll-carica]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Troll"
 type: "Gigante"
 size: "grande"
@@ -92,19 +99,23 @@ tab: Azioni
 ### Arti abominevoli (4/giorno)
 
 Se il troll termina qualsiasi turno sanguinante e subisce più di 15 danni taglienti durante tale turno, uno dei suoi arti viene reciso, cade nello spazio del troll e diventa un arto di troll. L'arto svolge il suo turno subito dopo quello del troll. Il troll ha 1 livello di indebolimento per ogni arto mancante e fa ricrescere gli arti la prossima volta che recupera punti ferita.
+^srd-troll-arti-abominevoli-4-giorno
 
 ### Rigenerazione
 
 Il troll recupera 15 punti ferita all'inizio di ogni suo turno. Se il troll subisce danni da acido o fuoco, questo tratto non funziona all'inizio del suo turno successivo. Il troll muore solo se inizia il turno con 0 punti ferita e non si rigenera.
+^srd-troll-rigenerazione
 ## Azioni
 
 ### Multiattacco
 
 Il troll effettua tre attacchi Squarcio.
+^srd-troll-multiattacco
 
 ### Squarcio
 
 *Tiro per colpire in mischia:* +7, portata 3 m. *Colpito:* 11 (2d6 + 4) danni taglienti.
+^srd-troll-squarcio
 ````
 
 > [!info] Licenza

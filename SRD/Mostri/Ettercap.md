@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Ettercap]]"]
+riferimenti_srd: ["[[SRD/Mostri/Ettercap]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Ettercap#^srd-ettercap-andatura-sulla-ragnatela]]", "[[SRD/Mostri/Ettercap#^srd-ettercap-movimenti-del-ragno]]", "[[SRD/Mostri/Ettercap#^srd-ettercap-multiattacco]]", "[[SRD/Mostri/Ettercap#^srd-ettercap-artiglio]]", "[[SRD/Mostri/Ettercap#^srd-ettercap-morso]]", "[[SRD/Mostri/Ettercap#^srd-ettercap-filo-di-ragnatela-ricarica-5-6]]", "[[SRD/Mostri/Ettercap#^srd-ettercap-riavvolgere]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Ettercap"
 type: "Mostruosità"
 size: "media"
@@ -98,27 +105,33 @@ tab: Azioni
 ### Andatura sulla ragnatela
 
 L'ettercap ignora le restrizioni di movimento causate dalle ragnatele e conosce l'ubicazione esatta di ogni altra creatura a contatto con la stessa ragnatela.
+^srd-ettercap-andatura-sulla-ragnatela
 
 ### Movimenti del ragno
 
 L'ettercap può scalare le superfici difficili, compresi i soffitti, senza effettuare una prova di caratteristica.
+^srd-ettercap-movimenti-del-ragno
 ## Azioni
 
 ### Multiattacco
 
 L'ettercap effettua un attacco Morso e un attacco Artiglio.
+^srd-ettercap-multiattacco
 
 ### Artiglio
 
 *Tiro per colpire in mischia:* +4, portata 1,5 m. *Colpito:* 7 (2d4 + 2) danni taglienti.
+^srd-ettercap-artiglio
 
 ### Morso
 
 *Tiro per colpire in mischia:* +4, portata 1,5 m. *Colpito:* 5 (1d6 + 2) danni perforanti più 2 (1d4) danni da veleno, e il bersaglio è avvelenato fino all'inizio del turno successivo dell'ettercap.
+^srd-ettercap-morso
 
 ### Filo di ragnatela (ricarica 5-6)
 
 *Tiro salvezza su Destrezza:* CD 12, una creatura di taglia Grande o inferiore che l'ettercap è in grado di vedere entro 9 metri. *Fallimento:* il bersaglio è trattenuto finché la ragnatela non viene distrutta (CA 10; PF 5; vulnerabilità ai danni da fuoco; immunità ai danni contundenti, psichici e da veleno).
+^srd-ettercap-filo-di-ragnatela-ricarica-5-6
 ````
 
 > [!info] Licenza

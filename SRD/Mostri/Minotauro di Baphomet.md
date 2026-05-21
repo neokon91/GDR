@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Minotauro di Baphomet]]"]
+riferimenti_srd: ["[[SRD/Mostri/Minotauro di Baphomet]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Minotauro di Baphomet#^srd-minotauro_di_baphomet-falcione-abissale]]", "[[SRD/Mostri/Minotauro di Baphomet#^srd-minotauro_di_baphomet-trafiggere-ricarica-5-6]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Minotauro di Baphomet"
 type: "Mostruosità"
 size: "grande"
@@ -87,10 +94,12 @@ tab: Azioni
 ### Falcione abissale
 
 *Tiro per colpire in mischia:* +6, portata 3 m. *Colpito:* 10 (1d12 + 4) danni taglienti più 10 (3d6) danni necrotici.
+^srd-minotauro_di_baphomet-falcione-abissale
 
 ### Trafiggere (ricarica 5-6)
 
 *Tiro per colpire in mischia:* +6, portata 1,5 m. *Colpito:* 18 (4d6 + 4) danni perforanti. Se il bersaglio è una creatura di taglia Grande o inferiore e il minotauro si è mosso di 3 metri o più in linea retta verso di esso subito prima del colpo, il bersaglio subisce 10 (3d6) danni perforanti extra e cade a terra prono.
+^srd-minotauro_di_baphomet-trafiggere-ricarica-5-6
 ````
 
 > [!info] Licenza

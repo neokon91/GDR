@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Cavallo degli incubi]]"]
+riferimenti_srd: ["[[SRD/Mostri/Cavallo degli incubi]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Cavallo degli incubi#^srd-cavallo_degli_incubi-conferire-resistenza-al-fuoco]]", "[[SRD/Mostri/Cavallo degli incubi#^srd-cavallo_degli_incubi-illuminazione]]", "[[SRD/Mostri/Cavallo degli incubi#^srd-cavallo_degli_incubi-zoccoli]]", "[[SRD/Mostri/Cavallo degli incubi#^srd-cavallo_degli_incubi-passo-etereo]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Cavallo degli incubi"
 type: "Immondo"
 size: "grande"
@@ -86,19 +93,23 @@ tab: Azioni
 ### Conferire resistenza al fuoco
 
 Il cavallo degli incubi può conferire resistenza ai danni da fuoco a un cavaliere finché questi si trova sul cavallo.
+^srd-cavallo_degli_incubi-conferire-resistenza-al-fuoco
 
 ### Illuminazione
 
 Il cavallo degli incubi emana luce intensa in un raggio di 3 metri e luce fioca per altri 3 metri.
+^srd-cavallo_degli_incubi-illuminazione
 ## Azioni
 
 ### Zoccoli
 
 *Tiro per colpire in mischia:* +6, portata 1,5 m. *Colpito:* 13 (2d8 + 4) danni contundenti più 10 (3d6) danni da fuoco.
+^srd-cavallo_degli_incubi-zoccoli
 
 ### Passo etereo
 
 Il cavallo degli incubi e un massimo di tre creature consenzienti situate entro 1,5 metri da esso si teletrasportano dal Piano Materiale al Piano Etereo o viceversa.
+^srd-cavallo_degli_incubi-passo-etereo
 ````
 
 > [!info] Licenza

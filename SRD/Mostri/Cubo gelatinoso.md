@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Cubo gelatinoso]]"]
+riferimenti_srd: ["[[SRD/Mostri/Cubo gelatinoso]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Cubo gelatinoso#^srd-cubo_gelatinoso-cubo-di-melma]]", "[[SRD/Mostri/Cubo gelatinoso#^srd-cubo_gelatinoso-trasparente]]", "[[SRD/Mostri/Cubo gelatinoso#^srd-cubo_gelatinoso-pseudopode]]", "[[SRD/Mostri/Cubo gelatinoso#^srd-cubo_gelatinoso-avviluppare]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Cubo gelatinoso"
 type: "Melma"
 size: "grande"
@@ -86,15 +93,18 @@ tab: Azioni
 ### Cubo di melma
 
 Il cubo occupa il suo intero spazio ed è trasparente. Le altre creature possono entrare in quello spazio, ma la creatura che lo fa è soggetta all'azione del cubo Avviluppare e subisce svantaggio al tiro salvezza. Le creature all'interno del cubo beneficiano di copertura totale, e il cubo può contenere una creatura di taglia Grande o fino a quattro creature di taglia Media o Piccola contemporaneamente. Con un'azione, una creatura entro 1,5 metri dal cubo può tirare fuori dal cubo una creatura o un oggetto superando una prova di Forza (Atletica) con CD 12, e chi esegue questa azione subisce 10 (3d6) danni da acido.
+^srd-cubo_gelatinoso-cubo-di-melma
 
 ### Trasparente
 
 Anche quando il cubo è in piena vista, una creatura deve superare una prova di Saggezza (Percezione) con CD 15 per avvistare il cubo se la creatura non ha visto il cubo muoversi o agire in un altro modo.
+^srd-cubo_gelatinoso-trasparente
 ## Azioni
 
 ### Pseudopode
 
 *Tiro per colpire in mischia:* +4, portata 1,5 m. *Colpito:* 12 (3d6 + 2) danni da acido.
+^srd-cubo_gelatinoso-pseudopode
 
 ### Avviluppare
 
@@ -105,6 +115,7 @@ Il cubo si muove fino alla sua velocità massima senza provocare attacchi di opp
 *Fallimento:* 10 (3d6) danni da acido, e il bersaglio è avviluppato. Un bersaglio avviluppato soffoca, non può lanciare incantesimi con una componente Verbale, è trattenuto e subisce 10 (3d6) danni da acido all'inizio di ogni turno del cubo. Quando il cubo si muove, il bersaglio avviluppato si muove insieme a esso. Un bersaglio avviluppato può tentare di sfuggire usando un'azione per effettuare una prova di Forza (Atletica) con CD 12. Se la prova viene superata, il bersaglio sfugge ed entra nello spazio libero più vicino.
 
 *Successo:* danni dimezzati, e il bersaglio si sposta in uno spazio libero entro 1,5 metri dal cubo. Se non c'è alcuno spazio libero, il bersaglio fallisce la prova.
+^srd-cubo_gelatinoso-avviluppare
 ````
 
 > [!info] Licenza

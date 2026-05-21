@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Cacciatore invisibile]]"]
+riferimenti_srd: ["[[SRD/Mostri/Cacciatore invisibile]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Cacciatore invisibile#^srd-cacciatore_invisibile-forma-d-aria]]", "[[SRD/Mostri/Cacciatore invisibile#^srd-cacciatore_invisibile-invisibilita]]", "[[SRD/Mostri/Cacciatore invisibile#^srd-cacciatore_invisibile-multiattacco]]", "[[SRD/Mostri/Cacciatore invisibile#^srd-cacciatore_invisibile-colpo-di-vento]]", "[[SRD/Mostri/Cacciatore invisibile#^srd-cacciatore_invisibile-vortice]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Cacciatore invisibile"
 type: "Elementale"
 size: "grande"
@@ -93,23 +100,28 @@ tab: Azioni
 ### Forma d'aria
 
 Il cacciatore invisibile può entrare nello spazio di un nemico e fermarvisi. Può muoversi attraverso uno spazio stretto fino a 2,5 centimetri senza consumare movimento extra per farlo.
+^srd-cacciatore_invisibile-forma-d-aria
 
 ### Invisibilità
 
 Il cacciatore è invisibile.
+^srd-cacciatore_invisibile-invisibilita
 ## Azioni
 
 ### Multiattacco
 
 Il cacciatore invisibile effettua tre attacchi. Può sostituire un attacco con un utilizzo di Vortice.
+^srd-cacciatore_invisibile-multiattacco
 
 ### Colpo di vento
 
 *Tiro per colpire in mischia:* +7, portata 1,5 m. *Colpito:* 11 (2d6 + 4) danni da forza.
+^srd-cacciatore_invisibile-colpo-di-vento
 
 ### Vortice
 
 *Tiro salvezza su Costituzione:* CD 14, una creatura di taglia Grande o inferiore nello spazio del cacciatore. *Fallimento:* 7 (1d8 + 3) danni da tuono, e il bersaglio è afferrato (CD 13 per sfuggire). Finché la presa perdura, il bersaglio non può lanciare incantesimi con una componente verbale, e subisce 7 (2d6) danni da tuono all'inizio di ogni turno del cacciatore.
+^srd-cacciatore_invisibile-vortice
 ````
 
 > [!info] Licenza

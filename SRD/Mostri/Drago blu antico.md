@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Drago blu antico]]"]
+riferimenti_srd: ["[[SRD/Mostri/Drago blu antico]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Drago blu antico#^srd-drago_blu_antico-resistenza-leggendaria-4-giorno-o-5-giorno-nella-tana]]", "[[SRD/Mostri/Drago blu antico#^srd-drago_blu_antico-multiattacco]]", "[[SRD/Mostri/Drago blu antico#^srd-drago_blu_antico-squarcio]]", "[[SRD/Mostri/Drago blu antico#^srd-drago_blu_antico-incantesimi]]", "[[SRD/Mostri/Drago blu antico#^srd-drago_blu_antico-soffio-di-fulmini-ricarica-5-6]]", "[[SRD/Mostri/Drago blu antico#^srd-drago_blu_antico-boato-sonico]]", "[[SRD/Mostri/Drago blu antico#^srd-drago_blu_antico-spazzata-di-coda]]", "[[SRD/Mostri/Drago blu antico#^srd-drago_blu_antico-volo-celato]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Drago blu antico"
 type: "Drago (cromatico)"
 size: "mastodontico"
@@ -101,15 +108,18 @@ tab: Azioni
 ### Resistenza leggendaria (4/giorno o 5/giorno nella tana)
 
 Se il drago fallisce un tiro salvezza, può scegliere di superarlo comunque.
+^srd-drago_blu_antico-resistenza-leggendaria-4-giorno-o-5-giorno-nella-tana
 ## Azioni
 
 ### Multiattacco
 
 Il drago effettua tre attacchi Squarcio. Può sostituire un attacco con un utilizzo di Incantesimi per lanciare frantumare (di 3º livello).
+^srd-drago_blu_antico-multiattacco
 
 ### Squarcio
 
 *Tiro per colpire in mischia:* +16, portata 4,5 m. *Colpito:* 18 (2d8 + 9) danni taglienti più 11 (2d10) danni da fulmine.
+^srd-drago_blu_antico-squarcio
 
 ### Incantesimi
 
@@ -124,10 +134,12 @@ A volontà:
 - individuazione del magico
 - invisibilità
 - mano magica
+^srd-drago_blu_antico-incantesimi
 
 ### Soffio di fulmini (ricarica 5-6)
 
 *Tiro salvezza su Destrezza:* CD 23, tutte le creature in una linea lunga 36 metri e larga 3 metri. *Fallimento:* 88 (16d10) danni da fulmine. *Successo:* danni dimezzati.
+^srd-drago_blu_antico-soffio-di-fulmini-ricarica-5-6
 ## Azioni Leggendarie
 
 Subito dopo il turno di un'altra creatura, il drago può consumare un utilizzo per effettuare una delle seguenti azioni. Il drago recupera tutti gli utilizzi consumati all'inizio di ogni suo turno.
@@ -137,14 +149,17 @@ Subito dopo il turno di un'altra creatura, il drago può consumare un utilizzo p
 ### Boato sonico
 
 Il drago usa Incantesimi per lanciare frantumare (di 3º livello). Il drago non può ripetere quest'azione fino all'inizio del proprio turno successivo.
+^srd-drago_blu_antico-boato-sonico
 
 ### Spazzata di coda
 
 Il drago effettua un attacco Squarcio.
+^srd-drago_blu_antico-spazzata-di-coda
 
 ### Volo celato
 
 Il drago usa Incantesimi per lanciare invisibilità su se stesso, e può volare fino a metà della sua velocità di volo. Il drago non può ripetere quest'azione fino all'inizio del proprio turno successivo.
+^srd-drago_blu_antico-volo-celato
 ````
 
 > [!info] Licenza

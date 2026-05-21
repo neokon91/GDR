@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Incantesimi/Dardo di fuoco]]"]
+riferimenti_srd: ["[[SRD/Incantesimi/Dardo di fuoco]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Incantesimi/Dardo di fuoco#^srd-dardo_di_fuoco-trucchetto-potenziato]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/incantesimo"]
 livello: 0
 scuola: "Invocazione"
 classi: ["mago", "stregone"]
@@ -36,6 +43,7 @@ L'incantatore scaglia una scintilla di fuoco verso una creatura o un oggetto sit
 ### Trucchetto potenziato
 
 I danni aumentano di 1d10 quando l'incantatore raggiunge il 5º livello (2d10), l'11º livello (3d10) e il 17º livello (4d10).
+^srd-dardo_di_fuoco-trucchetto-potenziato
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Bruto]]"]
+riferimenti_srd: ["[[SRD/Mostri/Bruto]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Bruto#^srd-bruto-tattiche-del-branco]]", "[[SRD/Mostri/Bruto#^srd-bruto-mazza]]", "[[SRD/Mostri/Bruto#^srd-bruto-balestra-pesante]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Bruto"
 type: "Umanoide"
 size: "medio o piccolo"
@@ -84,15 +91,18 @@ tab: Azioni
 ### Tattiche del branco
 
 Il bruto dispone di vantaggio a un tiro per colpire contro una creatura se almeno uno dei suoi alleati si trova entro 1,5 metri dalla creatura e non è incapacitato.
+^srd-bruto-tattiche-del-branco
 ## Azioni
 
 ### Mazza
 
 *Tiro per colpire in mischia:* +4, portata 1,5 m *Colpito:* 5 (1d6 + 2) danni contundenti
+^srd-bruto-mazza
 
 ### Balestra pesante
 
 *Tiro per colpire a distanza:* +3, gittata 30/120 m. *Colpito:* 6 (1d10 + 1) danni perforanti.
+^srd-bruto-balestra-pesante
 ````
 
 > [!info] Licenza

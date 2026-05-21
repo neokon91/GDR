@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Daino]]"]
+riferimenti_srd: ["[[SRD/Mostri/Daino]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Daino#^srd-daino-agile]]", "[[SRD/Mostri/Daino#^srd-daino-sfondamento]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Daino"
 type: "Bestia"
 size: "media"
@@ -86,11 +93,13 @@ tab: Azioni
 ### Agile
 
 Il daino non provoca attacchi di opportunità quando esce dalla portata di un nemico.
+^srd-daino-agile
 ## Azioni
 
 ### Sfondamento
 
 *Tiro per colpire in mischia:* +2, portata 1,5 m. *Colpito:* 2 (1d4) danni contundenti.
+^srd-daino-sfondamento
 ````
 
 > [!info] Licenza

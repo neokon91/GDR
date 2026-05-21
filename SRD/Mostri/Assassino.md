@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Assassino]]"]
+riferimenti_srd: ["[[SRD/Mostri/Assassino]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Assassino#^srd-assassino-elusione]]", "[[SRD/Mostri/Assassino#^srd-assassino-multiattacco]]", "[[SRD/Mostri/Assassino#^srd-assassino-balestra-leggera]]", "[[SRD/Mostri/Assassino#^srd-assassino-spada-corta]]", "[[SRD/Mostri/Assassino#^srd-assassino-azione-scaltra]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Assassino"
 type: "Umanoide"
 size: "medio o piccolo"
@@ -96,19 +103,23 @@ tab: Azioni
 ### Elusione
 
 Se l'assassino è soggetto a un effetto che gli consente di effettuare un tiro salvezza su Destrezza per subire danni dimezzati, non subisce alcun danno in caso di successo, e ne subisce solo metà in caso di fallimento. Non può usare questo tratto se è incapacitato.
+^srd-assassino-elusione
 ## Azioni
 
 ### Multiattacco
 
 L'assassino effettua tre attacchi, usando Spada corta o Balestra leggera in qualsiasi combinazione.
+^srd-assassino-multiattacco
 
 ### Balestra leggera
 
 *Tiro per colpire a distanza:* +7, gittata 24/96 m. *Colpito:* 8 (1d8 + 4) danni perforanti più 21 (6d6) danni da veleno.
+^srd-assassino-balestra-leggera
 
 ### Spada corta
 
 *Tiro per colpire in mischia:* +7, portata 1,5 m. *Colpito:* 7 (1d6 + 4) danni perforanti più 17 (5d6) danni da veleno, e il bersaglio è avvelenato fino all'inizio del turno successivo dell'assassino.
+^srd-assassino-spada-corta
 ````
 
 > [!info] Licenza

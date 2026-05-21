@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Equipaggiamento/Moneta di platino (mp)]]"]
+riferimenti_srd: ["[[SRD/Equipaggiamento/Moneta di platino (mp)]]"]
+riferimenti_regola: []
+sezioni_collegate: ["[[SRD/Equipaggiamento/Moneta di platino (mp)#Dettagli]]"]
+blocchi_collegati: []
+tabelle_collegate: ["[[SRD/Equipaggiamento/Moneta di platino (mp)#^srd-moneta_di_platino_mp-dettagli]]"]
+tags: ["dnd55/srd"]
 capitolo: "Equipaggiamento"
 pagine_sorgente: 101
 tipo_oggetto: "moneta"
@@ -42,6 +49,7 @@ Valore in monete d'oro: 10.
 | Moneta | Valore in mo |
 | --- | --- |
 | Moneta di platino (mp) | 10 |
+^srd-moneta_di_platino_mp-dettagli
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

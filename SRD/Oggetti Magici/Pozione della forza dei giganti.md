@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Oggetti Magici/Pozione della forza dei giganti]]"]
+riferimenti_srd: ["[[SRD/Oggetti Magici/Pozione della forza dei giganti]]"]
+riferimenti_regola: []
+sezioni_collegate: ["[[SRD/Oggetti Magici/Pozione della forza dei giganti#Pozione per Rarità]]"]
+blocchi_collegati: []
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/oggetto-magico"]
 tipo_oggetto: "Pozione"
 tipo_base: "Pozione"
 rarita: "rarità variabile"

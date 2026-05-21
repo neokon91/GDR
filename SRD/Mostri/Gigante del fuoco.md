@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Gigante del fuoco]]"]
+riferimenti_srd: ["[[SRD/Mostri/Gigante del fuoco]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Gigante del fuoco#^srd-gigante_del_fuoco-multiattacco]]", "[[SRD/Mostri/Gigante del fuoco#^srd-gigante_del_fuoco-spada-di-fiamme]]", "[[SRD/Mostri/Gigante del fuoco#^srd-gigante_del_fuoco-lancio-di-martello]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Gigante del fuoco"
 type: "Gigante"
 size: "enorme"
@@ -92,14 +99,17 @@ tab: Azioni
 ### Multiattacco
 
 Il gigante effettua due attacchi, usando Spada di fiamme o Lancio di martello in qualsiasi combinazione.
+^srd-gigante_del_fuoco-multiattacco
 
 ### Spada di fiamme
 
 *Tiro per colpire in mischia:* +11, portata 3 m. *Colpito:* 21 (4d6 + 7) danni taglienti più 10 (3d6) danni da fuoco.
+^srd-gigante_del_fuoco-spada-di-fiamme
 
 ### Lancio di martello
 
 *Tiro per colpire a distanza:* +11, portata 18/72 m. *Colpito:* 23 (3d10 + 7) danni contundenti più 4 (1d8) danni da fuoco, il bersaglio viene spinto in linea retta fino a un massimo di 4,5 metri di distanza dal gigante, e subisce svantaggio al tiro per colpire successivo che effettua prima del termine del proprio turno successivo.
+^srd-gigante_del_fuoco-lancio-di-martello
 ````
 
 > [!info] Licenza

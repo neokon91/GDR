@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Gufo]]"]
+riferimenti_srd: ["[[SRD/Mostri/Gufo]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Gufo#^srd-gufo-volo-sfuggente]]", "[[SRD/Mostri/Gufo#^srd-gufo-speroni]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Gufo"
 type: "Bestia"
 size: "minuscola"
@@ -87,11 +94,13 @@ tab: Azioni
 ### Volo sfuggente
 
 Il gufo non provoca attacchi di opportunità quando vola oltre la portata di un nemico.
+^srd-gufo-volo-sfuggente
 ## Azioni
 
 ### Speroni
 
 *Tiro per colpire in mischia:* +3, portata 1,5 m. *Colpito:* 1 danno tagliente.
+^srd-gufo-speroni
 ````
 
 > [!info] Licenza

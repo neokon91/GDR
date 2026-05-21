@@ -63,6 +63,50 @@ function parseScalar(value) {
     return trimmed.replace(/^["']|["']$/g, "");
 }
 
+function splitInlineList(value) {
+    const entries = [];
+    let current = "";
+    let quote = "";
+    let escaped = false;
+
+    for (const char of String(value ?? "")) {
+        if (escaped) {
+            current += char;
+            escaped = false;
+            continue;
+        }
+
+        if (char === "\\" && quote === '"') {
+            current += char;
+            escaped = true;
+            continue;
+        }
+
+        if ((char === '"' || char === "'") && !quote) {
+            quote = char;
+            current += char;
+            continue;
+        }
+
+        if (char === quote) {
+            quote = "";
+            current += char;
+            continue;
+        }
+
+        if (char === "," && !quote) {
+            entries.push(current.trim());
+            current = "";
+            continue;
+        }
+
+        current += char;
+    }
+
+    if (current.trim()) entries.push(current.trim());
+    return entries;
+}
+
 function parseFrontmatter(text) {
     if (!text.startsWith("---\n")) return {};
 
@@ -91,7 +135,7 @@ function parseFrontmatter(text) {
             data[currentKey] = "";
         } else if (/^\[.*\]$/.test(value.trim())) {
             const inner = value.trim().slice(1, -1).trim();
-            data[currentKey] = inner ? inner.split(",").map(entry => parseScalar(entry.trim())) : [];
+            data[currentKey] = inner ? splitInlineList(inner).map(entry => parseScalar(entry.trim())) : [];
         } else {
             data[currentKey] = parseScalar(value);
         }

@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Cinghiale]]"]
+riferimenti_srd: ["[[SRD/Mostri/Cinghiale]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Cinghiale#^srd-cinghiale-furia-sanguinante]]", "[[SRD/Mostri/Cinghiale#^srd-cinghiale-trafiggere]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Cinghiale"
 type: "Bestia"
 size: "media"
@@ -82,11 +89,13 @@ tab: Azioni
 ### Furia sanguinante
 
 Se il cinghiale è sanguinante, ha vantaggio ai tiri per colpire.
+^srd-cinghiale-furia-sanguinante
 ## Azioni
 
 ### Trafiggere
 
 *Tiro per colpire in mischia:* +3, portata 1,5 m *Colpito:* 4 (1d6 + 1) danni perforanti. Se il bersaglio è una creatura di taglia Media o inferiore e il cinghiale si è mosso di 6 metri o più in linea retta verso di esso subito prima del colpo, il bersaglio subisce 3 (1d6) danni perforanti extra e cade a terra prono.
+^srd-cinghiale-trafiggere
 ````
 
 > [!info] Licenza

@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Gufo gigante]]"]
+riferimenti_srd: ["[[SRD/Mostri/Gufo gigante]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Gufo gigante#^srd-gufo_gigante-volo-sfuggente]]", "[[SRD/Mostri/Gufo gigante#^srd-gufo_gigante-speroni]]", "[[SRD/Mostri/Gufo gigante#^srd-gufo_gigante-incantesimi]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Gufo gigante"
 type: "Celestiale"
 size: "grande"
@@ -90,15 +97,18 @@ tab: Azioni
 ### Volo sfuggente
 
 Il gufo non provoca attacchi di opportunità quando vola oltre la portata di un nemico.
+^srd-gufo_gigante-volo-sfuggente
 ## Azioni
 
 ### Speroni
 
 *Tiro per colpire in mischia:* +4, portata 1,5 m. *Colpito:* 7 (1d10 + 2) danni taglienti.
+^srd-gufo_gigante-speroni
 
 ### Incantesimi
 
 Il gufo lancia uno dei seguenti incantesimi, senza bisogno di componenti, utilizzando Saggezza come caratteristica da incantatore: 1/giorno: Chiaroveggenza A volontà: Individuazione del bene e del male, individuazione del magico
+^srd-gufo_gigante-incantesimi
 ````
 
 > [!info] Licenza

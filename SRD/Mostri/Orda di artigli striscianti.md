@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Orda di artigli striscianti]]"]
+riferimenti_srd: ["[[SRD/Mostri/Orda di artigli striscianti]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Orda di artigli striscianti#^srd-orda_di_artigli_striscianti-sciame]]", "[[SRD/Mostri/Orda di artigli striscianti#^srd-orda_di_artigli_striscianti-orda-di-mani-afferranti]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Orda di artigli striscianti"
 type: "Sciame"
 size: "medio"
@@ -82,11 +89,13 @@ tab: Azioni
 ### Sciame
 
 L'orda può occupare lo spazio di un'altra creatura e viceversa, e può muoversi attraverso qualsiasi apertura sufficientemente larga da far passare una creatura di taglia Minuscola. L'orda non può recuperare punti ferita o ottenere punti ferita temporanei.
+^srd-orda_di_artigli_striscianti-sciame
 ## Azioni
 
 ### Orda di mani afferranti
 
 *Tiro per colpire in mischia:* +4, portata 1,5 m. *Colpito:* 20 (4d8 + 2) danni necrotici, o 11 (2d8 + 2) danni necrotici se l'orda è sanguinante. Se il bersaglio è una creatura di taglia Media o inferiore, cade a terra prono.
+^srd-orda_di_artigli_striscianti-orda-di-mani-afferranti
 ````
 
 > [!info] Licenza

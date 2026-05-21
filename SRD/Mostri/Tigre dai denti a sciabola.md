@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Tigre dai denti a sciabola]]"]
+riferimenti_srd: ["[[SRD/Mostri/Tigre dai denti a sciabola]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Tigre dai denti a sciabola#^srd-tigre_dai_denti_a_sciabola-balzo-in-corsa]]", "[[SRD/Mostri/Tigre dai denti a sciabola#^srd-tigre_dai_denti_a_sciabola-multiattacco]]", "[[SRD/Mostri/Tigre dai denti a sciabola#^srd-tigre_dai_denti_a_sciabola-squarcio]]", "[[SRD/Mostri/Tigre dai denti a sciabola#^srd-tigre_dai_denti_a_sciabola-fuga-agile]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Tigre dai denti a sciabola"
 type: "Bestia"
 size: "grande"
@@ -93,15 +100,18 @@ tab: Azioni
 ### Balzo in corsa
 
 Dopo una rincorsa di 3 metri, la tigre può effettuare un salto in lungo di un massimo di 7,5 metri.
+^srd-tigre_dai_denti_a_sciabola-balzo-in-corsa
 ## Azioni
 
 ### Multiattacco
 
 La tigre effettua due attacchi Squarcio.
+^srd-tigre_dai_denti_a_sciabola-multiattacco
 
 ### Squarcio
 
 *Tiro per colpire in mischia:* +6, portata 1,5 m. *Colpito:* 11 (2d6 + 4) danni taglienti.
+^srd-tigre_dai_denti_a_sciabola-squarcio
 ````
 
 > [!info] Licenza

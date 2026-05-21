@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Efreeti]]"]
+riferimenti_srd: ["[[SRD/Mostri/Efreeti]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Efreeti#^srd-efreeti-desideri]]", "[[SRD/Mostri/Efreeti#^srd-efreeti-resistenza-alla-magia]]", "[[SRD/Mostri/Efreeti#^srd-efreeti-ristoro-elementale]]", "[[SRD/Mostri/Efreeti#^srd-efreeti-multiattacco]]", "[[SRD/Mostri/Efreeti#^srd-efreeti-lama-cocente]]", "[[SRD/Mostri/Efreeti#^srd-efreeti-scagliare-fiamma]]", "[[SRD/Mostri/Efreeti#^srd-efreeti-incantesimi]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Efreeti"
 type: "Elementale (genio)"
 size: "grande"
@@ -94,27 +101,33 @@ tab: Azioni
 ### Desideri
 
 L'efreeti ha una probabilità del 30% di conoscere l'incantesimo desiderio. Se l'efreeti lo conosce, può lanciarlo solo per conto di una creatura diversa da un genio che comunica un desiderio in un modo che l'efreeti è in grado di comprendere. Se l'efreeti lancia l'incantesimo per conto della creatura, non subisce alcuna conseguenza derivante dal lancio dell'incantesimo. Una volta che l'efreeti l'ha lanciato tre volte, non può farlo di nuovo per 365 giorni.
+^srd-efreeti-desideri
 
 ### Resistenza alla magia
 
 L'efreeti dispone di vantaggio ai tiri salvezza contro incantesimi e altri effetti magici.
+^srd-efreeti-resistenza-alla-magia
 
 ### Ristoro elementale
 
 Se l'efreeti muore al di fuori del Piano Elementale del Fuoco, il suo corpo si dissolve in cenere ed esso ne acquisisce uno nuovo dopo 1d4 giorni, tornando in vita con tutti i suoi punti ferita da qualche parte sul Piano Elementale del Fuoco.
+^srd-efreeti-ristoro-elementale
 ## Azioni
 
 ### Multiattacco
 
 L'efreeti effettua tre attacchi, usando Lama cocente o Scagliare fiamma in qualsiasi combinazione.
+^srd-efreeti-multiattacco
 
 ### Lama cocente
 
 *Tiro per colpire in mischia:* +10, portata 1,5 m. *Colpito:* 13 (2d6 + 6) danni taglienti più 13 (2d12) danni da fuoco.
+^srd-efreeti-lama-cocente
 
 ### Scagliare fiamma
 
 *Tiro per colpire a distanza:* +8, gittata 36 m. *Colpito:* 24 (7d6) danni da fuoco.
+^srd-efreeti-scagliare-fiamma
 
 ### Incantesimi
 
@@ -131,6 +144,7 @@ L'efreeti lancia uno dei seguenti incantesimi, senza bisogno di componenti mater
 *A volontà:*
 - elementalismo
 - individuazione del magico
+^srd-efreeti-incantesimi
 ````
 
 > [!info] Licenza

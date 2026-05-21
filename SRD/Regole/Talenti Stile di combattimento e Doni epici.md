@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Regole/Talenti Stile di combattimento e Doni epici]]"]
+riferimenti_srd: ["[[SRD/Regole/Talenti Stile di combattimento e Doni epici]]"]
+riferimenti_regola: []
+sezioni_collegate: ["[[SRD/Regole/Talenti Stile di combattimento e Doni epici#Categorie]]"]
+blocchi_collegati: []
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/regola"]
 capitolo: "Talenti"
 categoria_regola: "Talenti"
 pagine_sorgente: "99-100"

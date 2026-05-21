@@ -322,6 +322,97 @@ blueprints:
     comparison_targets:
     - z.modelli/Creatura.md
     profile: encounter
+  incantesimo:
+    target_family:
+    - incantesimo
+    templater_entry: <% await tp.user.incantesimo(tp) %>
+    template_title: Incantesimo
+    output:
+      folder: z.modelli/dnd
+      files:
+      - Incantesimo.md
+      fallback: markdown_sections
+    comparison_targets:
+    - z.modelli/dnd/Incantesimo.md
+    profile: generic
+  classe_dnd:
+    target_family:
+    - classe dnd
+    templater_entry: <% await tp.user.classe_dnd(tp) %>
+    template_title: Classe Dnd
+    output:
+      folder: z.modelli/dnd
+      files:
+      - Classe Dnd.md
+      fallback: markdown_sections
+    comparison_targets:
+    - z.modelli/dnd/Classe Dnd.md
+    profile: generic
+  specie_dnd:
+    target_family:
+    - specie dnd
+    templater_entry: <% await tp.user.specie_dnd(tp) %>
+    template_title: Specie Dnd
+    output:
+      folder: z.modelli/dnd
+      files:
+      - Specie Dnd.md
+      fallback: markdown_sections
+    comparison_targets:
+    - z.modelli/dnd/Specie Dnd.md
+    profile: generic
+  background_dnd:
+    target_family:
+    - background dnd
+    templater_entry: <% await tp.user.background_dnd(tp) %>
+    template_title: Background Dnd
+    output:
+      folder: z.modelli/dnd
+      files:
+      - Background Dnd.md
+      fallback: markdown_sections
+    comparison_targets:
+    - z.modelli/dnd/Background Dnd.md
+    profile: generic
+  talento_dnd:
+    target_family:
+    - talento dnd
+    templater_entry: <% await tp.user.talento_dnd(tp) %>
+    template_title: Talento Dnd
+    output:
+      folder: z.modelli/dnd
+      files:
+      - Talento Dnd.md
+      fallback: markdown_sections
+    comparison_targets:
+    - z.modelli/dnd/Talento Dnd.md
+    profile: generic
+  regola_dnd:
+    target_family:
+    - regola dnd
+    templater_entry: <% await tp.user.regola_dnd(tp) %>
+    template_title: Regola Dnd
+    output:
+      folder: z.modelli/dnd
+      files:
+      - Regola Dnd.md
+      fallback: markdown_sections
+    comparison_targets:
+    - z.modelli/dnd/Regola Dnd.md
+    profile: generic
+  tesoro_dnd:
+    target_family:
+    - tesoro
+    templater_entry: <% await tp.user.tesoro(tp) %>
+    template_title: Tesoro
+    output:
+      folder: z.modelli/dnd
+      files:
+      - Tesoro.md
+      fallback: markdown_sections
+    comparison_targets:
+    - z.modelli/dnd/Tesoro.md
+    profile: generic
   mappa_zoom:
     target_family:
     - mappa
@@ -1403,7 +1494,7 @@ blueprints:
   dm_trappola:
     target_family:
     - trappola
-    templater_entry: <% await tp.user.world_entity(tp) %>
+    templater_entry: <% await tp.user.trappola(tp) %>
     template_title: Trappola
     world_impact: true
     output:
@@ -1417,7 +1508,7 @@ blueprints:
   dm_pericolo_ambientale:
     target_family:
     - pericolo ambientale
-    templater_entry: <% await tp.user.world_entity(tp) %>
+    templater_entry: <% await tp.user.pericolo_ambientale(tp) %>
     template_title: Pericolo Ambientale
     world_impact: true
     output:

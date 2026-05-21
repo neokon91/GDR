@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Incantesimi/Deflagrazione occulta]]"]
+riferimenti_srd: ["[[SRD/Incantesimi/Deflagrazione occulta]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Incantesimi/Deflagrazione occulta#^srd-deflagrazione_occulta-trucchetto-potenziato]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/incantesimo"]
 livello: 0
 scuola: "Invocazione"
 classi: ["warlock"]
@@ -36,6 +43,7 @@ L'incantatore scaglia un raggio di energia crepitante, effettuando un attacco a 
 ### Trucchetto potenziato
 
 L'incantesimo crea due raggi al 5º livello, tre raggi all'11º livello e quattro raggi al 17º livello. L'incantatore può indirizzare i raggi contro lo stesso bersaglio o contro bersagli differenti, effettuando un tiro per colpire separato per ogni raggio.
+^srd-deflagrazione_occulta-trucchetto-potenziato
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

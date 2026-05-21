@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Gigante del gelo]]"]
+riferimenti_srd: ["[[SRD/Mostri/Gigante del gelo]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Gigante del gelo#^srd-gigante_del_gelo-multiattacco]]", "[[SRD/Mostri/Gigante del gelo#^srd-gigante_del_gelo-ascia-del-gelo]]", "[[SRD/Mostri/Gigante del gelo#^srd-gigante_del_gelo-grande-arco]]", "[[SRD/Mostri/Gigante del gelo#^srd-gigante_del_gelo-grido-di-battaglia-ricarica-5-6]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Gigante del gelo"
 type: "Gigante"
 size: "enorme"
@@ -94,14 +101,17 @@ tab: Azioni
 ### Multiattacco
 
 Il gigante effettua due attacchi, usando Ascia del gelo o Grande arco in qualsiasi combinazione.
+^srd-gigante_del_gelo-multiattacco
 
 ### Ascia del gelo
 
 *Tiro per colpire in mischia:* +9, portata 3 m. *Colpito:* 19 (2d12 + 6) danni taglienti più 9 (2d8) danni da freddo.
+^srd-gigante_del_gelo-ascia-del-gelo
 
 ### Grande arco
 
 *Tiro per colpire a distanza:* +9, gittata 45/180 m. *Colpito:* 17 (2d10 + 6) danni perforanti più 7 (2d6) danni da freddo, e la velocità del bersaglio è ridotta di 3 metri fino al termine del proprio turno successivo.
+^srd-gigante_del_gelo-grande-arco
 ````
 
 > [!info] Licenza

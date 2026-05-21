@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Drago bianco cucciolo]]"]
+riferimenti_srd: ["[[SRD/Mostri/Drago bianco cucciolo]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Drago bianco cucciolo#^srd-drago_bianco_cucciolo-camminare-sul-ghiaccio]]", "[[SRD/Mostri/Drago bianco cucciolo#^srd-drago_bianco_cucciolo-multiattacco]]", "[[SRD/Mostri/Drago bianco cucciolo#^srd-drago_bianco_cucciolo-squarcio]]", "[[SRD/Mostri/Drago bianco cucciolo#^srd-drago_bianco_cucciolo-soffio-di-freddo-ricarica-5-6]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Drago bianco cucciolo"
 type: "Drago (cromatico)"
 size: "medio"
@@ -93,19 +100,23 @@ tab: Azioni
 ### Camminare sul ghiaccio
 
 Il drago può muoversi sulle superfici di ghiaccio e scalarle senza bisogno di effettuare una prova di caratteristica. Inoltre, un terreno difficile costituito da ghiaccio o neve non gli costa alcun movimento aggiuntivo.
+^srd-drago_bianco_cucciolo-camminare-sul-ghiaccio
 ## Azioni
 
 ### Multiattacco
 
 Il drago effettua due attacchi Squarcio.
+^srd-drago_bianco_cucciolo-multiattacco
 
 ### Squarcio
 
 *Tiro per colpire in mischia:* +4, portata 1,5 m. *Colpito:* 6 (1d8 + 2) danni taglienti più 2 (1d4) danni da freddo.
+^srd-drago_bianco_cucciolo-squarcio
 
 ### Soffio di freddo (ricarica 5-6)
 
 *Tiro salvezza su Costituzione:* CD 12, tutte le creature in un cono di 4,5 metri. *Fallimento:* 22 (5d8) danni da freddo. *Successo:* danni dimezzati.
+^srd-drago_bianco_cucciolo-soffio-di-freddo-ricarica-5-6
 ````
 
 > [!info] Licenza

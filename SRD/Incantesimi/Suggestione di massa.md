@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Incantesimi/Suggestione di massa]]"]
+riferimenti_srd: ["[[SRD/Incantesimi/Suggestione di massa]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Incantesimi/Suggestione di massa#^srd-suggestione_di_massa-utilizzo-di-uno-slot-incantesimo-di-livello-superiore]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/incantesimo"]
 livello: 6
 scuola: "Ammaliamento"
 classi: ["bardo", "mago", "stregone"]
@@ -38,6 +45,7 @@ Ogni bersaglio deve superare un tiro salvezza su Saggezza, altrimenti rimane aff
 ### Utilizzo di uno slot incantesimo di livello superiore
 
 La durata aumenta con uno slot incantesimo di 7º livello (10 giorni), 8º livello (30 giorni) o 9º livello (366 giorni).
+^srd-suggestione_di_massa-utilizzo-di-uno-slot-incantesimo-di-livello-superiore
 
 > [!info] Licenza
 > Questa nota include materiale tratto dal System Reference Document 5.2.1 di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd e concesso in licenza CC-BY-4.0.

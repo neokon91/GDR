@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Marinide schermagliatore]]"]
+riferimenti_srd: ["[[SRD/Mostri/Marinide schermagliatore]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Marinide schermagliatore#^srd-marinide_schermagliatore-anfibio]]", "[[SRD/Mostri/Marinide schermagliatore#^srd-marinide_schermagliatore-lancia-oceanica]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Marinide schermagliatore"
 type: "Elementale"
 size: "medio"
@@ -82,11 +89,13 @@ tab: Azioni
 ### Anfibio
 
 Il marinide può respirare in aria e in acqua.
+^srd-marinide_schermagliatore-anfibio
 ## Azioni
 
 ### Lancia oceanica
 
 *Tiro per colpire in mischia o a distanza:* +2, portata 1,5 m o gittata 6/18 m. *Colpito:* 3 (1d6) danni perforanti più 2 (1d4) danni da freddo. Se il bersaglio è una creatura, la sua velocità è ridotta di 3 metri fino al termine del proprio turno successivo. Colpito o mancato: la lancia fa magicamente ritorno nella mano del marinide subito dopo un attacco a distanza.
+^srd-marinide_schermagliatore-lancia-oceanica
 ````
 
 > [!info] Licenza

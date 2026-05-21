@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Mephit della polvere]]"]
+riferimenti_srd: ["[[SRD/Mostri/Mephit della polvere]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Mephit della polvere#^srd-mephit_della_polvere-esplosione-mortale]]", "[[SRD/Mostri/Mephit della polvere#^srd-mephit_della_polvere-artiglio]]", "[[SRD/Mostri/Mephit della polvere#^srd-mephit_della_polvere-soffio-accecante-ricarica-6]]", "[[SRD/Mostri/Mephit della polvere#^srd-mephit_della_polvere-sonno-1-giorno]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Mephit della polvere"
 type: "Elementale"
 size: "piccolo"
@@ -91,19 +98,23 @@ tab: Azioni
 ### Esplosione mortale
 
 Il mephit esplode quando muore. *Tiro salvezza su Destrezza:* CD 10, tutte le creature in un'emanazione di 1,5 metri di cui il mephit è il punto di origine. *Fallimento:* 5 (2d4) danni contundenti. *Successo:* danni dimezzati.
+^srd-mephit_della_polvere-esplosione-mortale
 ## Azioni
 
 ### Artiglio
 
 *Tiro per colpire in mischia:* +4, portata 1,5 m. *Colpito:* 4 (1d4 + 2) danni taglienti.
+^srd-mephit_della_polvere-artiglio
 
 ### Soffio accecante (ricarica 6)
 
 *Tiro salvezza su Destrezza:* CD 10, tutte le creature in un cono di 4,5 metri. *Fallimento:* il bersaglio è accecato fino al termine del turno successivo del mephit.
+^srd-mephit_della_polvere-soffio-accecante-ricarica-6
 
 ### Sonno (1/giorno)
 
 Il mephit lancia sonno senza bisogno di componenti, utilizzando Carisma come caratteristica da incantatore (CD del tiro salvezza sull'incantesimo 10).
+^srd-mephit_della_polvere-sonno-1-giorno
 ````
 
 > [!info] Licenza

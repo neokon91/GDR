@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Tappeto soffocante animato]]"]
+riferimenti_srd: ["[[SRD/Mostri/Tappeto soffocante animato]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Tappeto soffocante animato#^srd-tappeto_soffocante_animato-soffocare]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Tappeto soffocante animato"
 type: "Costrutto"
 size: "grande"
@@ -80,6 +87,7 @@ tab: Azioni
 ### Soffocare
 
 *Tiro per colpire in mischia:* +5, portata 1,5 m. *Colpito:* 10 (2d6 + 3) danni contundenti. Se il bersaglio è una creatura di taglia Media o inferiore, il tappeto lo afferra (CD 13 per sfuggire) invece di infliggere danni. Finché la presa perdura, il bersaglio è accecato e trattenuto, soffoca, e subisce 10 (2d6 + 3) danni contundenti all'inizio di ogni suo turno. Il tappeto può soffocare solo una creatura alla volta. Finché afferra il bersaglio, il tappeto non può effettuare questa azione e dimezza i danni subiti (arrotondati per difetto); il bersaglio subisce la stessa quantità di danni.
+^srd-tappeto_soffocante_animato-soffocare
 ````
 
 > [!info] Licenza

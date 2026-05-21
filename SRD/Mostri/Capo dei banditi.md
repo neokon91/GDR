@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Capo dei banditi]]"]
+riferimenti_srd: ["[[SRD/Mostri/Capo dei banditi]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Capo dei banditi#^srd-capo_dei_banditi-multiattacco]]", "[[SRD/Mostri/Capo dei banditi#^srd-capo_dei_banditi-pistola]]", "[[SRD/Mostri/Capo dei banditi#^srd-capo_dei_banditi-scimitarra]]", "[[SRD/Mostri/Capo dei banditi#^srd-capo_dei_banditi-parata]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Capo dei banditi"
 type: "Umanoide"
 size: "medio o piccolo"
@@ -94,14 +101,17 @@ tab: Azioni
 ### Multiattacco
 
 Il bandito effettua due attacchi, usando Scimitarra e Pistola in qualsiasi combinazione
+^srd-capo_dei_banditi-multiattacco
 
 ### Pistola
 
 *Tiro per colpire a distanza:* +5, gittata 9/27 m. *Colpito:* 8 (1d10 + 3) danni perforanti.
+^srd-capo_dei_banditi-pistola
 
 ### Scimitarra
 
 *Tiro per colpire in mischia:* +5, portata 1,5 m. *Colpito:* 6 (1d6 + 3) danni taglienti.
+^srd-capo_dei_banditi-scimitarra
 ````
 
 > [!info] Licenza

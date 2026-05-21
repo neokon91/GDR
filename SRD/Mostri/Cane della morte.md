@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Cane della morte]]"]
+riferimenti_srd: ["[[SRD/Mostri/Cane della morte]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Cane della morte#^srd-cane_della_morte-multiattacco]]", "[[SRD/Mostri/Cane della morte#^srd-cane_della_morte-morso]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Cane della morte"
 type: "Mostruosità"
 size: "media"
@@ -87,10 +94,12 @@ tab: Azioni
 ### Multiattacco
 
 Il cane della morte effettua due attacchi Morso.
+^srd-cane_della_morte-multiattacco
 
 ### Morso
 
 *Tiro per colpire in mischia:* +4, portata 1,5 m. *Colpito:* 4 (1d4 + 2) danni perforanti. Se il bersaglio è una creatura, subisce il seguente effetto. *Tiro salvezza su Costituzione:* CD 12. *Primo fallimento:* il bersaglio è avvelenato. Finché lo resta, i punti ferita massimi del bersaglio non tornano alla normalità al termine di un riposo lungo. La creatura ripete il tiro salvezza ogni 24 ore trascorse e, se lo supera, l'effetto svanisce. *Fallimenti successivi:* i punti ferita massimi del bersaglio avvelenato sono ridotti di 5 (1d10).
+^srd-cane_della_morte-morso
 ````
 
 > [!info] Licenza

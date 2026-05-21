@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Piovra]]"]
+riferimenti_srd: ["[[SRD/Mostri/Piovra]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Piovra#^srd-piovra-compressione]]", "[[SRD/Mostri/Piovra#^srd-piovra-respirare-sott-acqua]]", "[[SRD/Mostri/Piovra#^srd-piovra-tentacoli]]", "[[SRD/Mostri/Piovra#^srd-piovra-nube-di-inchiostro-1-giorno]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Piovra"
 type: "Bestia"
 size: "piccola"
@@ -91,15 +98,18 @@ tab: Azioni
 ### Compressione
 
 La piovra può muoversi attraverso uno spazio stretto fino a 2,5 centimetri senza consumare movimento extra per farlo.
+^srd-piovra-compressione
 
 ### Respirare sott'acqua
 
 La piovra può respirare soltanto sott'acqua.
+^srd-piovra-respirare-sott-acqua
 ## Azioni
 
 ### Tentacoli
 
 *Tiro per colpire in mischia:* +4, portata 1,5 m. *Colpito:* 1 danno contundente.
+^srd-piovra-tentacoli
 ````
 
 > [!info] Licenza

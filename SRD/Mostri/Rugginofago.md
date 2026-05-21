@@ -10,6 +10,13 @@ fonte: "SRD 5.2.1"
 licenza: "CC-BY-4.0"
 repository: "neokon91/DND-SRD-IT"
 generato_da: "import_srd"
+fonti: ["[[SRD/Licenza SRD]]", "[[SRD/Mostri/Rugginofago]]"]
+riferimenti_srd: ["[[SRD/Mostri/Rugginofago]]"]
+riferimenti_regola: []
+sezioni_collegate: []
+blocchi_collegati: ["[[SRD/Mostri/Rugginofago#^srd-rugginofago-fiutare-il-ferro]]", "[[SRD/Mostri/Rugginofago#^srd-rugginofago-multiattacco]]", "[[SRD/Mostri/Rugginofago#^srd-rugginofago-morso]]", "[[SRD/Mostri/Rugginofago#^srd-rugginofago-antenne]]", "[[SRD/Mostri/Rugginofago#^srd-rugginofago-distruggere-metallo]]", "[[SRD/Mostri/Rugginofago#^srd-rugginofago-antenne-riflesse]]"]
+tabelle_collegate: []
+tags: ["dnd55/srd", "dnd55/creatura"]
 name: "Rugginofago"
 type: "Mostruosità"
 size: "media"
@@ -90,23 +97,28 @@ tab: Azioni
 ### Fiutare il ferro
 
 Il rugginofago può individuare la precisa ubicazione di qualsiasi metallo ferroso situato entro 9 metri da esso.
+^srd-rugginofago-fiutare-il-ferro
 ## Azioni
 
 ### Multiattacco
 
 Il rugginofago effettua un attacco Morso e usa Antenne due volte.
+^srd-rugginofago-multiattacco
 
 ### Morso
 
 *Tiro per colpire in mischia:* +3, portata 1,5 m. *Colpito:* 5 (1d8 + 1) danni perforanti.
+^srd-rugginofago-morso
 
 ### Antenne
 
 Il rugginofago prende di mira un oggetto in metallo non magico (armatura o arma) indossato o trasportato da una creatura entro 1,5 metri da sé. *Tiro salvezza su Destrezza:* CD 11, la creatura che possiede l'oggetto. *Fallimento:* l'oggetto subisce una penalità di -1 alla CA che fornisce (armatura) o ai suoi tiri per colpire (arma). L'armatura viene distrutta se la penalità riduce la sua CA a 10; l'arma viene distrutta se la sua penalità arriva a -5. La penalità può essere rimossa lanciando l'incantesimo riparare sull'armatura o sull'arma.
+^srd-rugginofago-antenne
 
 ### Distruggere metallo
 
 Il rugginofago tocca un oggetto in metallo non magico entro 1,5 metri da sé che non è indossato o trasportato. Il tocco distrugge una porzione di oggetto pari a un cubo con spigolo di 30 centimetri.
+^srd-rugginofago-distruggere-metallo
 ````
 
 > [!info] Licenza
