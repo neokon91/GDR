@@ -16,6 +16,7 @@ tab: Scegli
 > [!mappa] Fonte
 > | Fonte | Quando usarla | Comando |
 > | --- | --- | --- |
+> | Dispatch unico | Scegli una sorgente senza ricordare il comando specifico. | `npm run import:map` |
 > | Azgaar GeoJSON | Continenti, stati, regioni, burg e geografia ampia. | `npm run import:azgaar` |
 > | Watabou City JSON | Una citta o insediamento dettagliato. | `npm run import:watabou:city` |
 > | Watabou One Page Dungeon JSON | Un dungeon rapido da rifinire. | `npm run import:watabou:dungeon` |
@@ -24,6 +25,7 @@ tab: Dry Run
 
 > [!regia] Prova Senza Scrivere
 > ```bash
+> npm run import:map -- azgaar "Import/Azgaar/mappa.geojson" --world "Nome Mondo" --dry-run
 > npm run import:azgaar -- "Import/Azgaar/mappa.geojson" --world "Nome Mondo" --dry-run
 > npm run import:watabou:city -- "Import/Watabou/citta.json" --world "Nome Mondo" --dry-run
 > npm run import:watabou:dungeon -- "Import/Watabou/dungeon.json" --world "Nome Mondo" --dry-run
@@ -95,6 +97,14 @@ Per il vault sono preferibili:
 - note create dal DM per rendere canonico solo cio che serve.
 
 ## Comando GeoJSON
+
+Comando unico:
+
+```bash
+npm run import:map -- azgaar "Import/Azgaar/mappa.geojson" --world "Nome Mondo"
+```
+
+Comando diretto:
 
 ```bash
 npm run import:azgaar -- "Import/Azgaar/mappa.geojson" --world "Nome Mondo"

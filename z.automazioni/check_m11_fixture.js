@@ -3,11 +3,33 @@
 const fs = require("fs");
 const os = require("os");
 const path = require("path");
-const { generateDemoFixture } = require("./generate_demo_fixture");
+const { FIXTURE_SCENARIO, generateDemoFixture } = require("./generate_demo_fixture");
 const { registerWorldChoice } = require("./m11_state");
 const { hasAny, hasValue, parseFrontmatter, readTextRel } = require("./node_utils");
 
 const errors = [];
+
+const SCENARIO = {
+    name: FIXTURE_SCENARIO.name,
+    date: FIXTURE_SCENARIO.date,
+    session: FIXTURE_SCENARIO.files.sessione,
+    consequence: FIXTURE_SCENARIO.files.conseguenza,
+    targets: [
+        FIXTURE_SCENARIO.files.luogo,
+        FIXTURE_SCENARIO.files.fazione,
+        FIXTURE_SCENARIO.files.missione,
+        FIXTURE_SCENARIO.files.tracciato
+    ],
+    track: FIXTURE_SCENARIO.files.tracciato,
+    encounter: FIXTURE_SCENARIO.files.incontro,
+    creature: FIXTURE_SCENARIO.files.creatura,
+    object: FIXTURE_SCENARIO.files.oggetto,
+    start: FIXTURE_SCENARIO.files.start,
+    choice: FIXTURE_SCENARIO.choice,
+    consequenceText: FIXTURE_SCENARIO.consequence,
+    nextMove: FIXTURE_SCENARIO.nextMove,
+    requiredCategories: FIXTURE_SCENARIO.requiredCategories
+};
 
 function fail(message) {
     errors.push(message);
@@ -62,6 +84,12 @@ function wikilink(fileRel) {
     return `[[${fileRel.replace(/\.md$/, "")}]]`;
 }
 
+function requirePage(pages, key, label = key) {
+    const page = pages.get(key);
+    if (!page) fail(`Fixture M11: ${label} mancante (${key})`);
+    return page;
+}
+
 function clearFields(frontmatter, fields) {
     for (const field of fields) delete frontmatter[field];
 }
@@ -71,18 +99,8 @@ function validateM11BeforeAfter(pages) {
         key,
         { rel: key, frontmatter: clone(page.frontmatter) }
     ]));
-    const sessionKey = "Mondi/Sessioni/2026-05-21 - M11 Demo Sessione.md";
-    const targetKeys = [
-        "Mondi/Luoghi/M11 Demo Faro.md",
-        "Mondi/Fazioni/M11 Demo Custodi.md",
-        "Mondi/Missioni/M11 Demo Campana.md",
-        "Mondi/Tracciati/M11 Demo Marea.md"
-    ];
-    const session = records.get(sessionKey)?.frontmatter;
-    const track = records.get("Mondi/Tracciati/M11 Demo Marea.md")?.frontmatter;
-    const choice = "I PG accendono il faro sommerso invece di consegnare la chiave ai Custodi.";
-    const consequenceText = "La marea rivela il passaggio sotto il porto e costringe i Custodi ad agire apertamente.";
-    const nextMove = "I Custodi bloccano il molo prima della prossima alba.";
+    const session = records.get(SCENARIO.session)?.frontmatter;
+    const track = records.get(SCENARIO.track)?.frontmatter;
 
     if (!session || !track) {
         fail("M11 before/after: sorgente o tracciato mancanti");
@@ -98,7 +116,7 @@ function validateM11BeforeAfter(pages) {
         "ultima_propagazione"
     ]);
 
-    for (const key of targetKeys) {
+    for (const key of SCENARIO.targets) {
         const fm = records.get(key)?.frontmatter;
         if (!fm) continue;
         clearFields(fm, [
@@ -111,24 +129,24 @@ function validateM11BeforeAfter(pages) {
     }
     track.progress_value = 1;
 
-    registerWorldChoice(records, sessionKey, {
-        today: "2026-05-21",
-        choice,
-        consequenceText,
-        targets: targetKeys.map(key => ({ key, link: wikilink(key) })),
-        nextMove,
+    registerWorldChoice(records, SCENARIO.session, {
+        today: SCENARIO.date,
+        choice: SCENARIO.choice,
+        consequenceText: SCENARIO.consequenceText,
+        targets: SCENARIO.targets.map(key => ({ key, link: wikilink(key) })),
+        nextMove: SCENARIO.nextMove,
         pressureDelta: 0,
         trackStep: 1,
-        sourceLink: wikilink(sessionKey)
+        sourceLink: wikilink(SCENARIO.session)
     });
 
-    if (!asArray(session.decisioni_prese).includes(choice)) fail("M11 before/after: scelta non scritta sulla sessione");
-    if (!asArray(session.conseguenze).includes(consequenceText)) fail("M11 before/after: conseguenza non scritta sulla sessione");
+    if (!asArray(session.decisioni_prese).includes(SCENARIO.choice)) fail("M11 before/after: scelta non scritta sulla sessione");
+    if (!asArray(session.conseguenze).includes(SCENARIO.consequenceText)) fail("M11 before/after: conseguenza non scritta sulla sessione");
     if (session.propagazione_stato !== "applicata") fail("M11 before/after: sessione non marcata applicata");
     if (Number(track.progress_value) !== 2) fail("M11 before/after: tracciato non avanzato da 1 a 2");
-    if (track.avanzato_il !== "2026-05-21") fail("M11 before/after: avanzato_il non aggiornato");
+    if (track.avanzato_il !== SCENARIO.date) fail("M11 before/after: avanzato_il non aggiornato");
 
-    for (const key of targetKeys) {
+    for (const key of SCENARIO.targets) {
         const fm = records.get(key)?.frontmatter;
         if (!fm) {
             fail(`M11 before/after: bersaglio mancante ${key}`);
@@ -138,6 +156,40 @@ function validateM11BeforeAfter(pages) {
         if (!hasValue(fm.aggiornamenti_richiesti)) fail(`M11 before/after: ${key} senza aggiornamenti_richiesti`);
         if (fm.propagazione_stato !== "da verificare") fail(`M11 before/after: ${key} non da verificare`);
     }
+}
+
+function validateScenarioContract(pages) {
+    const session = requirePage(pages, SCENARIO.session, "sessione scenario")?.frontmatter;
+    const consequence = requirePage(pages, SCENARIO.consequence, "conseguenza scenario")?.frontmatter;
+    const track = requirePage(pages, SCENARIO.track, "tracciato scenario")?.frontmatter;
+    const encounter = requirePage(pages, SCENARIO.encounter, "incontro scenario")?.frontmatter;
+    const creature = requirePage(pages, SCENARIO.creature, "creatura scenario")?.frontmatter;
+    const object = requirePage(pages, SCENARIO.object, "oggetto scenario")?.frontmatter;
+
+    if (!session || !consequence || !track || !encounter || !creature || !object) return;
+
+    if (!asArray(session.decisioni_prese).includes(SCENARIO.choice)) fail(`${SCENARIO.session}: scelta scenario non registrata`);
+    if (!asArray(session.conseguenze).some(value => String(value).includes(SCENARIO.consequenceText) || String(value).includes("M11 Demo Conseguenza"))) {
+        fail(`${SCENARIO.session}: conseguenza scenario non collegata`);
+    }
+    if (session.propagazione_stato !== "applicata") fail(`${SCENARIO.session}: propagazione_stato scenario non applicata`);
+    if (!SCENARIO.targets.every(target => includesLink(session.entita_impattate, target.replace(/^Mondi\//, "").replace(/\.md$/, "")))) {
+        fail(`${SCENARIO.session}: non tutti i bersagli scenario sono in entita_impattate`);
+    }
+
+    if (consequence.causa !== SCENARIO.choice) fail(`${SCENARIO.consequence}: causa scenario non coerente`);
+    if (!asArray(consequence.effetti).includes(SCENARIO.consequenceText)) fail(`${SCENARIO.consequence}: effetto scenario non coerente`);
+    if (consequence.propagazione_stato !== "applicata") fail(`${SCENARIO.consequence}: conseguenza non applicata`);
+
+    if (!(Number(track.progress_value) >= 2)) fail(`${SCENARIO.track}: clock non avanzato nello scenario`);
+    if (track.avanzato_il !== SCENARIO.date) fail(`${SCENARIO.track}: data avanzamento scenario non coerente`);
+    if (!hasValue(track.aggiornamenti_richiesti)) fail(`${SCENARIO.track}: aggiornamento richiesto del clock mancante`);
+
+    if (encounter.tipo === "combattimento" && !hasValue(encounter.encounter_creatures)) {
+        fail(`${SCENARIO.encounter}: incontro scenario senza creature pronte`);
+    }
+    if (!hasAny(creature, ["missioni", "fazioni", "luoghi", "luogo"])) fail(`${SCENARIO.creature}: creatura scenario isolata`);
+    if (!hasAny(object, ["uso_al_tavolo", "gancio", "prossima_mossa", "conseguenza_potenziale"])) fail(`${SCENARIO.object}: oggetto scenario senza uso narrativo`);
 }
 
 function validateDndHardening(page, kind) {
@@ -179,7 +231,9 @@ try {
     const pages = loadFixture(result.root);
     validateM11BeforeAfter(pages);
 
-    for (const expected of ["mondo", "campagna", "luogo", "fazione", "missione", "tracciato", "sessione", "incontro", "creatura", "oggetto"]) {
+    validateScenarioContract(pages);
+
+    for (const expected of SCENARIO.requiredCategories) {
         if (![...pages.values()].some(page => page.frontmatter.categoria === expected)) {
             fail(`Fixture M11: categoria mancante (${expected})`);
         }
@@ -238,7 +292,7 @@ try {
     if (creature) validateDndHardening(creature, "creatura");
     if (object) validateDndHardening(object, "oggetto");
 
-    const start = pages.get("M11 Demo - Start.md");
+    const start = pages.get(SCENARIO.start);
     if (!start) fail("Fixture M11: indice visuale M11 Demo - Start.md mancante");
     if (start && !start.text.includes("Hub/Durante il Gioco")) fail(`${start.rel}: link smoke Durante il Gioco mancante`);
     if (start && !start.text.includes("Risorse/Post Sessione Guidato")) fail(`${start.rel}: link smoke Post Sessione mancante`);

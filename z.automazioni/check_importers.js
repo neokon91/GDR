@@ -64,10 +64,25 @@ if (watabouDungeon.status !== 0) {
     errors.push(`import:watabou:dungeon dry-run output inatteso (${watabouDungeon.stdout.trim()})`);
 }
 
+const dispatch = run("node", [
+    "z.automazioni/import_map.js",
+    "azgaar",
+    azgaarFixture,
+    "--world",
+    "Mondo Test",
+    "--dry-run"
+]);
+
+if (dispatch.status !== 0) {
+    errors.push(`import:map dry-run fallito (${dispatch.stderr || dispatch.stdout})`);
+} else if (!dispatch.stdout.includes("Import simulato: 2 note")) {
+    errors.push(`import:map dry-run output inatteso (${dispatch.stdout.trim()})`);
+}
+
 if (errors.length) {
     console.error("Errori importer:");
     for (const error of errors) console.error(`- ${error}`);
     process.exit(1);
 }
 
-console.log("Importer OK: dry-run Azgaar e Watabou verificati.");
+console.log("Importer OK: dry-run Azgaar, Watabou e dispatch import:map verificati.");

@@ -88,6 +88,7 @@ const REQUIRED_RELEASE_FILES = [
     "Risorse/Controllo Vault.md",
     "Risorse/Quality Report.md",
     "z.engine/session_views.js",
+    "z.engine/session_continuity.js",
     "z.automazioni/helpers.js",
     "z.bases/Atlante Mappe.base",
     "z.bases/Worldbuilding.base",

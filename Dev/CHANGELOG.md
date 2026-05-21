@@ -44,6 +44,11 @@
 - [[Dev/NEXT_PHASE_HANDOFF]] punta a M11 invece di restare su M9, con priorita tecniche e vincoli coerenti con il sistema operativo narrativo in Obsidian.
 - M11 avviata con runtime reale: `registra_scelta_mondo` registra scelta, conseguenza, bersagli, propagazione, pressione e avanzamento tracciati sui target collegati.
 - `renderM11ContinuityChain` espone nelle viste operative la catena scelta -> conseguenza -> bersagli -> stato -> prossima apertura.
+- `check_m11_fixture.js` valida la catena end-to-end M11 su fixture generata: sessione, conseguenza, propagazione, clock, D&D 5.5 e viste operative.
+- `session_continuity.js` separa il runtime di continuita, propagazione e catena M11 dal bridge `session_views.js`.
+- `import:map` come dispatch unico per Azgaar, Watabou City e Watabou Dungeon.
+- `check:release-artifact` genera una release temporanea, verifica cartella/ZIP e ripulisce `dist/`.
+- GitHub Actions esegue `npm run check` su push e pull request.
 - Rimossa la demo manuale dal sorgente: i contenuti dimostrativi devono nascere da generatore dedicato a fine ciclo.
 - Gate esperienza hub: `check_vault.js` verifica ruolo, classe visuale, callout, viste/input/azioni plugin-native e marker funzionali degli hub principali.
 - Gate Plugin Surface YAML: TemplateFactory blocca input Meta Bind, bottoni, callout, runtime DataviewJS e Bases usati nei Jinja se non sono dichiarati nei moduli YAML.
@@ -96,6 +101,8 @@
 
 - `npm run check` rieseguito dopo M6 Continuity Engine e rigenerazione TemplateFactory.
 - `npm run check`
+- `npm run check:m11`
+- `npm run check:release-artifact`
 - `npm run check:smoke`
 - `npm run check:release`
 - `npm run check:importers`

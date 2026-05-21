@@ -22,13 +22,14 @@ const RELEASE_VERIFICATION_MARKERS = [
     "`dist/` resta artefatto locale ignorato da Git"
 ];
 const RELEASE_IMPORT_DOC_MARKERS = [
+    "npm run import:map",
     "npm run import:azgaar",
     "npm run import:watabou:city",
     "npm run import:watabou:dungeon"
 ];
 const RELEASE_HANDOFF_MARKERS = [
     "Warning noti: **nessuno**",
-    "M11 Pipeline Homebrew D&D 5.5 E Continuita Di Mondo",
+    "Hardening Post-M11 E Release Contract",
     "scelta dei giocatori -> evento -> conseguenza -> propagazione -> dashboard -> prossima sessione",
     "`npm run check` deve restare senza warning"
 ];

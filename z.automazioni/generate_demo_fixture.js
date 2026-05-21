@@ -5,6 +5,28 @@ const path = require("path");
 
 const DEMO_DATE = "2026-05-21";
 const DEFAULT_OUT_DIR = "dist/vault-gdr-clean";
+const FIXTURE_SCENARIO = {
+    name: "M11 scelta al faro",
+    date: DEMO_DATE,
+    files: {
+        mondo: "Mondi/M11 Demo.md",
+        campagna: "Campagne/M11 Demo Campagna.md",
+        luogo: "Mondi/Luoghi/M11 Demo Faro.md",
+        fazione: "Mondi/Fazioni/M11 Demo Custodi.md",
+        missione: "Mondi/Missioni/M11 Demo Campana.md",
+        tracciato: "Mondi/Tracciati/M11 Demo Marea.md",
+        sessione: "Mondi/Sessioni/2026-05-21 - M11 Demo Sessione.md",
+        incontro: "Mondi/Incontri/M11 Demo Scontro Al Faro.md",
+        creatura: "Mondi/Creature/M11 Demo Vedetta Salmastra.md",
+        oggetto: "Mondi/Oggetti/M11 Demo Chiave Di Sale.md",
+        conseguenza: "Mondi/Storia/M11 Demo Conseguenza Faro Acceso.md",
+        start: "M11 Demo - Start.md"
+    },
+    choice: "I PG accendono il faro sommerso invece di consegnare la chiave ai Custodi.",
+    consequence: "La marea rivela il passaggio sotto il porto e costringe i Custodi ad agire apertamente.",
+    nextMove: "I Custodi bloccano il molo prima della prossima alba.",
+    requiredCategories: ["mondo", "campagna", "luogo", "fazione", "missione", "tracciato", "sessione", "incontro", "creatura", "oggetto"]
+};
 
 function wikilink(file) {
     return `[[${file.replace(/\.md$/, "")}]]`;
@@ -45,25 +67,12 @@ function writeNote(root, file, fields, body) {
 }
 
 function fixtureEntries() {
-    const files = {
-        mondo: "Mondi/M11 Demo.md",
-        campagna: "Campagne/M11 Demo Campagna.md",
-        luogo: "Mondi/Luoghi/M11 Demo Faro.md",
-        fazione: "Mondi/Fazioni/M11 Demo Custodi.md",
-        missione: "Mondi/Missioni/M11 Demo Campana.md",
-        tracciato: "Mondi/Tracciati/M11 Demo Marea.md",
-        sessione: "Mondi/Sessioni/2026-05-21 - M11 Demo Sessione.md",
-        incontro: "Mondi/Incontri/M11 Demo Scontro Al Faro.md",
-        creatura: "Mondi/Creature/M11 Demo Vedetta Salmastra.md",
-        oggetto: "Mondi/Oggetti/M11 Demo Chiave Di Sale.md",
-        conseguenza: "Mondi/Storia/M11 Demo Conseguenza Faro Acceso.md",
-        start: "M11 Demo - Start.md"
-    };
+    const files = FIXTURE_SCENARIO.files;
 
     const link = Object.fromEntries(Object.entries(files).map(([key, file]) => [key, wikilink(file)]));
-    const choice = "I PG accendono il faro sommerso invece di consegnare la chiave ai Custodi.";
-    const consequence = "La marea rivela il passaggio sotto il porto e costringe i Custodi ad agire apertamente.";
-    const nextMove = "I Custodi bloccano il molo prima della prossima alba.";
+    const choice = FIXTURE_SCENARIO.choice;
+    const consequence = FIXTURE_SCENARIO.consequence;
+    const nextMove = FIXTURE_SCENARIO.nextMove;
     const impacted = [link.luogo, link.fazione, link.missione, link.tracciato];
     const propagatedBy = [link.sessione, link.conseguenza];
 
@@ -429,6 +438,7 @@ if (require.main === module) {
 module.exports = {
     DEFAULT_OUT_DIR,
     DEMO_DATE,
+    FIXTURE_SCENARIO,
     fixtureEntries,
     generateDemoFixture
 };

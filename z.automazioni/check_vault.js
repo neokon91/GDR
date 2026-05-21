@@ -19,6 +19,7 @@ const { validateSyntaxControls } = require("./checks/syntax_controls");
 const { validateMarkdownLinks } = require("./checks/markdown_links");
 const { validateMetaBindControls } = require("./checks/metabind_controls");
 const { validateObsidianConfig } = require("./checks/obsidian_config");
+const { validateDndHardening } = require("./checks/dnd_hardening");
 
 const ROOT = process.cwd();
 const IGNORED_DIRS = new Set([".git", "node_modules", "dist"]);
@@ -108,10 +109,12 @@ const REQUIRED_BASE_FILES = [
 ];
 const REQUIRED_LAYER_FILES = [
     "z.automazioni/helpers.js",
+    "z.automazioni/import_map.js",
     "z.automazioni/m11_state.js",
     "z.automazioni/generate_demo_fixture.js",
     "z.automazioni/check_m11_fixture.js",
     "z.automazioni/check_smoke.js",
+    "z.automazioni/check_release_artifact.js",
     "z.automazioni/check_release.js",
     "z.automazioni/audit_template_migration.py",
     "z.automazioni/check_template_factory.py",
@@ -126,6 +129,7 @@ const REQUIRED_LAYER_FILES = [
     "z.automazioni/nuovo_mondo_homebrew.js",
     "z.engine/README.md",
     "z.engine/gdr_views.js",
+    "z.engine/session_continuity.js",
     "z.engine/session_dnd.js",
     "z.engine/session_maps.js",
     "z.engine/session_player.js",
@@ -1235,47 +1239,7 @@ for (const [fileRel, fm] of realEntries) {
         }
     }
 
-    if (fileRel.startsWith("Mondi/Incontri/") && fm.categoria === "incontro" && fm.stato !== "archiviata") {
-        if (!hasAny(fm, ["luogo", "luoghi"])) {
-            warnings.push(`${fileRel}: incontro senza luogo`);
-        }
-        if (!hasAny(fm, ["missioni", "fazioni", "sessioni"])) {
-            warnings.push(`${fileRel}: incontro isolato da missione, fazione o sessione`);
-        }
-        if (!hasAny(fm, ["gancio", "uso_al_tavolo"])) {
-            warnings.push(`${fileRel}: incontro senza gancio o uso_al_tavolo`);
-        }
-        if (String(fm.tipo ?? "") === "combattimento" && !hasValue(fm.encounter_creatures)) {
-            warnings.push(`${fileRel}: combattimento senza encounter_creatures`);
-        }
-        if (String(fm.tipo ?? "") === "combattimento" && !hasValue(fm.creature)) {
-            warnings.push(`${fileRel}: combattimento senza creature collegate`);
-        }
-    }
-
-    if (fileRel.startsWith("Mondi/Creature/") && fm.categoria === "creatura" && fm.stato !== "archiviata") {
-        if (!hasAny(fm, ["luoghi", "habitat"])) {
-            warnings.push(`${fileRel}: creatura senza habitat o luoghi`);
-        }
-        if (!hasAny(fm, ["missioni", "fazioni", "luoghi", "luogo"])) {
-            warnings.push(`${fileRel}: creatura senza missione/fazione/luogo`);
-        }
-        if (!hasAny(fm, ["gancio", "uso_al_tavolo"])) {
-            warnings.push(`${fileRel}: creatura senza gancio o uso_al_tavolo`);
-        }
-    }
-
-    if (fileRel.startsWith("Mondi/Oggetti/") && fm.categoria === "oggetto" && fm.stato !== "archiviata") {
-        if (!hasAny(fm, ["luogo", "proprietario"])) {
-            warnings.push(`${fileRel}: oggetto senza luogo o proprietario`);
-        }
-        if (!hasAny(fm, ["missioni", "sessioni", "connessioni"])) {
-            warnings.push(`${fileRel}: oggetto isolato da missione, sessione o connessioni`);
-        }
-        if (!hasAny(fm, ["gancio", "uso_al_tavolo", "prossima_mossa", "conseguenza_potenziale"])) {
-            warnings.push(`${fileRel}: oggetto senza uso narrativo`);
-        }
-    }
+    validateDndHardening({ fileRel, frontmatter: fm, warnings, hasAny, hasValue });
 
     if (isGeneratedFantasyDraft(fileRel, fm)) {
         if (fm.canonico === true) {

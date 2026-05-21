@@ -8,7 +8,9 @@ stato: pronto
 
 # Prossima Discussione - YAML Entita Fantasy
 
-Brief operativo per la prossima fase: **M11 - Pipeline Homebrew D&D 5.5 E Continuita Di Mondo**.
+Brief operativo storico per la fase **M11 - Pipeline Homebrew D&D 5.5 E Continuita Di Mondo**.
+
+Stato 2026-05-21: la catena M11 e validata da fixture tecnica generata e da `npm run check:m11`. Il documento resta come contratto di prodotto; il lavoro successivo e hardening post-M11, non nuova progettazione della pipeline.
 
 Non e una discussione libera. Si entra con tre interventi grossi, misurabili, interni a Obsidian e coerenti con l'architettura esistente.
 
@@ -65,7 +67,7 @@ Accettazione:
 
 - almeno una catena `luogo -> fazione -> missione -> tracciato` mostra causa, pressione, conseguenza e prossima apertura;
 - `npm run check:templates` blocca superfici plugin usate ma non dichiarate;
-- `npm run check` passa senza warning;
+- `npm run check:m11` e `npm run check` passano senza warning;
 - nessuna nuova dashboard.
 
 ## Intervento 2 - Pipeline Homebrew D&D 5.5 Collegata Al Mondo
