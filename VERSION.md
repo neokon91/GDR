@@ -11,9 +11,3 @@ Data: 2026-05-21
 - Plugin inclusi nella cartella `.obsidian/plugins`.
 - Tema consigliato: Minimal.
 - Snippet consigliato: `gdr-vault`.
-
-## Controllo
-
-```bash
-npm run check
-```

@@ -112,6 +112,7 @@ def main() -> int:
     parser.add_argument("--output", default=str(DEFAULT_OUTPUT), help="Cartella output preview.")
     parser.add_argument("--no-clean", action="store_true", help="Non pulire la cartella output prima di scrivere.")
     parser.add_argument("--materialize", action="store_true", help="Scrive gli output generati in z.modelli.")
+    parser.add_argument("--materialize-only", action="store_true", help="Scrive solo gli output in z.modelli senza aggiornare le preview.")
     args = parser.parse_args()
 
     modules = load_modules()
@@ -131,6 +132,11 @@ def main() -> int:
         for error in errors:
             print(f"- {error}")
         return 1
+
+    if args.materialize_only:
+        write_materialized(rendered_by_name, blueprints)
+        print(f"TemplateFactory materialize OK: {len(rendered_by_name)} output in z.modelli.")
+        return 0
 
     output_dir = Path(args.output)
     if not output_dir.is_absolute():

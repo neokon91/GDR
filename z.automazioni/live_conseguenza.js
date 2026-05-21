@@ -1,6 +1,9 @@
-const { liveCaptureShortcut } = require("./live_capture_shortcuts");
+async function live_conseguenza(tp) {
+    return await tp.user.lore_capture(tp, {
+        tipo: "conseguenza",
+        defaultName: "Conseguenza emersa",
+        useActiveSession: true
+    });
+}
 
-module.exports = liveCaptureShortcut({
-    tipo: "conseguenza",
-    defaultName: "Conseguenza emersa"
-});
+module.exports = live_conseguenza;

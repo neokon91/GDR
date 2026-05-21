@@ -14,6 +14,7 @@ Apri [[Inizia Qui]] per il primo avvio. Il flusso principale e [[Risorse/Prepara
 - **Party control**: PG, HP, inventario, obiettivi e flags in una schermata da sessione.
 - **Quality report**: copertura, buchi operativi, sicurezza pubblicazione e materiale screenshot-ready.
 - **Worldbuilding sistemico**: culture, lingue, storia, conflitti, cosmologia, fazioni, relazioni, causalita e conseguenze persistenti.
+- **D&D 5.5 come profilo principale**: creature, incontri, oggetti, party e SRD sono ottimizzati per fantasy D&D-like, senza mescolare il regolamento con il canone del mondo.
 - **Markdown-first**: i contenuti restano nel vault dell'utente.
 - **Release pulita**: il vault puo generare una copia consegnabile con `npm run release:clean`.
 
@@ -113,7 +114,7 @@ Se dashboard, pulsanti o tabelle non funzionano, apri [[Risorse/Primo Avvio Stru
 - Usa `Nuovo Clock` per creare un tracciato quando una pressione deve avanzare a segmenti invece di restare una nota testuale.
 - Apri [[Risorse/Come Usare I Clock]] se vuoi tre esempi pratici: minaccia, viaggio e rituale.
 - Mantieni `SRD` separato dal contenuto canonico: e riferimento regolamentare, non ambientazione.
-- Mantieni il core system-neutral in `Mondi`, `Campagne`, `Hub` e `Risorse`; usa `SRD` come modulo regolamentare opzionale per campagne D&D-like.
+- Mantieni il worldbuilding portabile in `Mondi`, `Campagne`, `Hub` e `Risorse`, ma considera D&D 5.5/SRD il profilo regolamentare principale per creature, incontri, oggetti, party e prep.
 
 ## Manutenzione Leggera
 
@@ -140,14 +141,14 @@ npm run import:azgaar
 npm run release:clean
 ```
 
-`npm run check` valida plugin obbligatori, link, template Meta Bind, helper Templater, file del plugin layer interno, input template, pulsanti, preset Metadata Menu, igiene repository e sintassi degli script in `z.automazioni` e `z.engine`. `npm run clean:repo` rimuove solo artefatti locali e temporanei ignorati.
+`npm run check` valida plugin obbligatori, link, template Meta Bind, helper Templater, file del plugin layer interno, input template, pulsanti, preset Metadata Menu, igiene repository e sintassi degli script in `z.automazioni` e `z.engine`. `npm run release:clean` rigenera i template runtime da TemplateFactory prima di creare la copia consegnabile. `npm run clean:repo` rimuove solo artefatti locali e temporanei ignorati.
 
 
 
 ## Per Chi E Pensato
 
 - DM e worldbuilder che vogliono preparare e giocare da Obsidian.
-- Campagne fantasy system-neutral, con modulo SRD 5.2.1 italiano separato per giochi D&D-like.
+- Campagne fantasy con impronta principale D&D 5.5/SRD e worldbuilding abbastanza pulito da restare adattabile.
 - Utenti non tecnici che preferiscono pulsanti, dashboard e campi guidati.
 
 ## SRD

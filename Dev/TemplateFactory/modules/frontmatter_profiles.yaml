@@ -2562,6 +2562,20 @@ profiles:
       value: proprietario
     - key: luogo
       value: luogo
+    - key: gancio
+      value: gancio
+    - key: uso_al_tavolo
+      value: uso_al_tavolo
+    - key: player_safe
+      value: player_safe
+    - key: pressione
+      value: pressione
+    - key: prossima_mossa
+      value: prossima_mossa
+    - key: connessioni
+      value: connessioni
+    - key: sessioni
+      value: sessioni
   pg:
     sample_values: []
     fields:

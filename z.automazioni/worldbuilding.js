@@ -2,7 +2,11 @@
 
 async function worldbuilding(tp) {
   const helpers = tp.user.helpers;
-  const taxonomy = require("./world_taxonomy.js");
+  const taxonomy = tp.user.world_taxonomy;
+
+  if (!taxonomy?.getTaxonomy) {
+    helpers.abortCreation("Tassonomia worldbuilding non caricata: controlla gli script Templater.");
+  }
 
   /// Selezione per Luogo
   async function chooseLocation() {

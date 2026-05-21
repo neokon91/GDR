@@ -9,6 +9,7 @@ const ROOT = process.cwd();
 const DIST = repoPath(ROOT, "dist");
 const OUT = repoPath(DIST, "vault-gdr-clean");
 const ZIP = repoPath(DIST, "vault-gdr-clean.zip");
+const TEMPLATE_FACTORY_RENDERER = repoPath(ROOT, "z.automazioni/render_template_factory.py");
 
 const INCLUDED_ROOTS = new Set([
     ".obsidian",
@@ -20,6 +21,7 @@ const INCLUDED_ROOTS = new Set([
     "Risorse",
     "SRD",
     "z.automazioni",
+    "z.bases",
     "z.engine",
     "z.bacheche",
     "z.fileclass",
@@ -65,11 +67,13 @@ const EXCLUDED_AUTOMAZIONI = new Set([
     "import_srd.js",
     "LICENSE.md",
     "node_utils.js",
+    "repo_hygiene.js",
     "release_beta.js",
     "release_clean.js",
     "README.md",
     "template_factory_utils.py"
 ]);
+const EXCLUDED_AUTOMAZIONI_PREFIXES = ["audit_", "check_", "import_", "render_"];
 const EXCLUDED_FILES = new Set([".DS_Store"]);
 const REQUIRED_RELEASE_FILES = [
     "Inizia Qui.md",
@@ -90,6 +94,10 @@ const REQUIRED_RELEASE_FILES = [
     "Risorse/Mappe/Mappa Pubblica Di Brumafonda.md",
     "z.engine/session_views.js",
     "z.automazioni/helpers.js",
+    "z.bases/Atlante Mappe.base",
+    "z.bases/Worldbuilding.base",
+    "z.bases/Fazioni.base",
+    "z.bases/Incontri.base",
     "z.modelli/.templatefactory-manifest.json"
 ];
 const GENERATED_RELEASE_NOTES = {
@@ -119,7 +127,7 @@ Apri questa cartella in Obsidian come vault e parti da \`Inizia Qui.md\`.
 
 ## Cosa Non Include
 
-Questa copia non include materiali di sviluppo repository, issue template GitHub, roadmap interne, script CLI di import/release o plugin non abilitati.
+Questa copia contiene solo il vault pronto da aprire in Obsidian. Non include roadmap interne, strumenti di sviluppo o materiali sorgente non necessari al gioco.
 `,
     "Demo Brumafonda.md": `---
 cssclasses:
@@ -199,9 +207,10 @@ function shouldSkip(relPath, entry) {
     if (relPath.startsWith("z.automazioni/")) {
         const first = relPath.slice("z.automazioni/".length).split("/")[0];
         if (EXCLUDED_AUTOMAZIONI.has(first)) return true;
+        if (EXCLUDED_AUTOMAZIONI_PREFIXES.some(prefix => first.startsWith(prefix))) return true;
     }
 
-    if (relPath === "z.modelli/README.md" || relPath === "z.bacheche/README.md") return true;
+    if (relPath === "z.modelli/README.md" || relPath === "z.bacheche/README.md" || relPath === "z.engine/README.md") return true;
 
     return false;
 }
@@ -243,6 +252,32 @@ function walkRelease(dir, files = []) {
     return files;
 }
 
+function validateReleaseLinks(releaseEntries, errors) {
+    const fileEntries = releaseEntries.filter(entry => fs.statSync(repoPath(OUT, entry)).isFile());
+    const exactTargets = new Set(fileEntries);
+    const extensionlessTargets = new Set(fileEntries.map(entry => entry.replace(/\.[^.]+$/, "")));
+    const stemTargets = new Set(fileEntries.map(entry => path.basename(entry).replace(/\.[^.]+$/, "")));
+    const wikiLinkPattern = /\[\[([^\]]+)\]\]/g;
+
+    for (const entry of fileEntries.filter(file => file.endsWith(".md"))) {
+        const text = fs.readFileSync(repoPath(OUT, entry), "utf8");
+        for (const match of text.matchAll(wikiLinkPattern)) {
+            const target = String(match[1]).split("|")[0].split("#")[0].trim();
+            if (!target || target.startsWith("http://") || target.startsWith("https://")) continue;
+
+            const withoutMarkdown = target.replace(/\.md$/, "");
+            const matchesTarget = exactTargets.has(target)
+                || extensionlessTargets.has(withoutMarkdown)
+                || stemTargets.has(withoutMarkdown)
+                || [...extensionlessTargets].some(candidate => candidate.endsWith(`/${withoutMarkdown}`));
+
+            if (!matchesTarget) {
+                errors.push(`wikilink mancante nella release: ${entry} -> [[${match[1]}]]`);
+            }
+        }
+    }
+}
+
 function validateRelease() {
     const errors = [];
 
@@ -258,6 +293,16 @@ function validateRelease() {
             errors.push(`percorso non ammesso nella release pulita: ${forbidden}`);
         }
     }
+
+    for (const entry of releaseEntries) {
+        if (!entry.startsWith("z.automazioni/")) continue;
+        const file = path.basename(entry);
+        if (EXCLUDED_AUTOMAZIONI.has(file) || EXCLUDED_AUTOMAZIONI_PREFIXES.some(prefix => file.startsWith(prefix))) {
+            errors.push(`script di manutenzione non ammesso nella release pulita: ${entry}`);
+        }
+    }
+
+    validateReleaseLinks(releaseEntries, errors);
 
     const pluginRoot = repoPath(OUT, ".obsidian/plugins");
     if (fs.existsSync(pluginRoot)) {
@@ -291,6 +336,11 @@ function zipIfAvailable() {
     }
 }
 
+function materializeTemplates() {
+    execFileSync("python3", [TEMPLATE_FACTORY_RENDERER, "--materialize-only"], { cwd: ROOT, stdio: "inherit" });
+}
+
+materializeTemplates();
 fs.rmSync(OUT, { recursive: true, force: true });
 fs.mkdirSync(DIST, { recursive: true });
 copyDir(ROOT, OUT, ROOT);

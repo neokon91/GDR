@@ -6,6 +6,8 @@ Prima infrastruttura per generare template Obsidian a partire da moduli YAML e r
 
 Centralizzare definizioni ripetute: frontmatter, campi Meta Bind, router Templater, Dataview, Bases, Tasks, Calendarium, mappe, statblock, incontri e fallback Markdown.
 
+La generazione deve servire il profilo principale D&D 5.5/SRD senza legare il Codex del mondo al regolamento: i template regolamentari espongono campi utili a creature, incontri, oggetti e party; le entita di mondo restano giocabili anche quando non contengono statistiche.
+
 ## Architettura
 
 | Cartella | Uso |

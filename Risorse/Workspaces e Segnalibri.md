@@ -19,7 +19,7 @@ Workspaces serve per salvare layout di lavoro. Bookmarks serve per aprire subito
 | --- | --- | --- | --- |
 | DM al tavolo | sessione attiva, materiali, iniziativa | [[Durante il Gioco]] | Segnalibri, Initiative Tracker, Dice Tray |
 | Worldbuilding | mappe, fronti, atlante e lore | [[Worldbuilder Dashboard]] | File explorer, proprietà, backlinks |
-| Manutenzione | controllo, release, lint e recap plugin | [[Risorse/Controllo Vault]] | Ricerca, proprietà, outline |
+| Manutenzione | controllo vault, qualità e sicurezza giocatori | [[Risorse/Controllo Vault]] | Ricerca, proprietà, outline |
 
 Questi tre workspace sono gia salvati in `.obsidian/workspaces.json`:
 
@@ -32,7 +32,7 @@ Questi tre workspace sono gia salvati in `.obsidian/workspaces.json`:
 I segnalibri sono divisi in:
 
 - **Al Tavolo**: [[Durante il Gioco]], [[Risorse/Preparazione Sessione]], [[Risorse/Task DM]], [[Risorse/Iniziativa e Combattimenti]].
-- **Manutenzione**: [[Risorse/Controllo Vault]], [[Dev/Linter e Sviluppo]], [[Dev/Recap Plugin Installati]].
+- **Manutenzione**: [[Risorse/Controllo Vault]], [[Risorse/Quality Report]], [[Risorse/Se Qualcosa Non Funziona]].
 
 ## Regola Operativa
 

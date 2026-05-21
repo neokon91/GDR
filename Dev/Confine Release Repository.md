@@ -23,7 +23,7 @@ La release non deve includere strumenti di manutenzione repository, import massi
 | `.obsidian` | Plugin, configurazioni, snippet, homepage, callout, workspace e impostazioni necessarie. |
 | `Inizia Qui.md` | Porta di ingresso non tecnica. |
 | `Campagne`, `Giocatori`, `Hub`, `Inbox`, `Mondi`, `Risorse`, `SRD` | Contenuto operativo, player portal, dashboard, modelli di lavoro e regolamento. |
-| `z.modelli` | Template usati dai pulsanti e dai wizard. |
+| `z.modelli` | Template usati dai pulsanti e dai wizard. Sono materializzati da `Dev/TemplateFactory` durante `npm run release:clean`. |
 | `z.automazioni` runtime | Script Templater necessari ai template e alle azioni utente. |
 | `z.engine` | Componenti JS riusabili dalle dashboard. |
 | `z.bacheche` | Kanban e Tasks operativi del DM. |
@@ -46,4 +46,5 @@ La release non deve includere strumenti di manutenzione repository, import massi
 - Nessun plugin installato viene escluso se e abilitato e necessario a una funzione reale.
 - Nessuna demo entra finche non e stata creata con template e wizard ufficiali.
 - Nessun artefatto `dist/` resta nel repository sorgente.
+- `z.modelli` non deve dipendere dallo stato locale del manutentore: `npm run release:clean` deve rigenerarlo da TemplateFactory prima di copiare la ZIP utente.
 - Ogni modifica al confine release deve aggiornare `z.automazioni/release_clean.js`.

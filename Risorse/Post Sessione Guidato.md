@@ -115,7 +115,7 @@ LIMIT 8
 > - PNG o luoghi ora noti:
 > - Prossimo aggancio pubblico:
 >
-> Non copiare da recap DM, segreti, prossime mosse o campi nascosti. Il controllo `npm run check` segnala formule private evidenti nel recap pubblico.
+> Non copiare da recap DM, segreti, prossime mosse o campi nascosti. Prima di condividere materiale, controlla [[Vista Giocatori]] e [[Risorse/Controllo Vault]].
 
 ## 7. Recap DM
 

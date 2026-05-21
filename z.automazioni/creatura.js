@@ -1,5 +1,8 @@
 async function creatura(tp){
-    const creatureTypes = [
+    const helpers = tp.user.helpers;
+    const profile = await helpers.runtimeProfile("creatura");
+    const prompts = profile.prompts ?? {};
+    const creatureTypes = profile.type_options ?? [
     { label: "Aberrazione", id: "aberrazione" },
     { label: "Bestia", id: "bestia" },
     { label: "Celestiale", id: "celestiale" },
@@ -16,7 +19,7 @@ async function creatura(tp){
     { label: "Vegetale", id: "vegetale" }
     ];
 
-    const dimensions = [
+    const dimensions = profile.size_options ?? [
     { label: "Minuscola", id: "minuscola" },
     { label: "Piccola", id: "piccola" },
     { label: "Media", id: "media" },
@@ -25,7 +28,7 @@ async function creatura(tp){
     { label: "Mastodontica", id: "mastodontica" }
     ];
 
-    const alignments = [
+    const alignments = profile.alignment_options ?? [
     { label: "Legale Buono", id: "legale buono" },
     { label: "Neutrale Buono", id: "neutrale buono" },
     { label: "Caotico Buono", id: "caotico buono" },
@@ -37,14 +40,13 @@ async function creatura(tp){
     { label: "Caotico Malvagio", id: "caotico malvagio" }
     ];
 
-    const helpers = tp.user.helpers;
-    const name = await helpers.promptRequired(tp, "Nome della creatura");
+    const name = await helpers.promptRequired(tp, profile.name_prompt ?? "Nome della creatura");
     const id = helpers.slugify(name);
 
     const selectedType = await helpers.chooseOptional(
         tp,
         creatureTypes,
-        "Tipo della creatura"
+        profile.type_prompt ?? "Tipo della creatura"
     );
 
     const selectedDimensions = await helpers.chooseOptional(
@@ -58,15 +60,15 @@ async function creatura(tp){
         alignments,
         "Allineamento della creatura"
     );
-    const mondo = await helpers.chooseWorld(tp, "Mondo della creatura");
+    const mondo = await helpers.chooseWorld(tp, prompts.mondo ?? "Mondo della creatura");
     const context = { world: mondo };
-    const luoghi = await helpers.chooseLocations(tp, "Luoghi o habitat collegati", context);
+    const luoghi = await helpers.chooseLocations(tp, prompts.luoghi ?? "Luoghi o habitat collegati", context);
 
     // === STATISTICHE ===
-    const ac = await helpers.promptOptional(tp, "Classe Armatura", "15") || "15";
-    const hp = await helpers.promptOptional(tp, "Punti Ferita", "12") || "12";
-    const speed = await helpers.promptOptional(tp, "Velocità", "9 m.") || "9 m.";
-    const cr = await helpers.promptOptional(tp, "Grado di Sfida", "1/4") || "1/4";
+    const ac = await helpers.promptOptional(tp, prompts.ac ?? "Classe Armatura", "15") || "15";
+    const hp = await helpers.promptOptional(tp, prompts.hp ?? "Punti Ferita", "12") || "12";
+    const speed = await helpers.promptOptional(tp, prompts.speed ?? "Velocità", "9 m.") || "9 m.";
+    const cr = await helpers.promptOptional(tp, prompts.cr ?? "Grado di Sfida", "1/4") || "1/4";
 
     // === CARATTERISTICHE ===
     const str = await helpers.promptOptional(tp, "Forza", "10") || "10";

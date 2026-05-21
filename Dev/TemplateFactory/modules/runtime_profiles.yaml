@@ -472,8 +472,48 @@ profiles:
     name_prompt: Nome
     prompts: {}
   creatura:
-    name_prompt: Nome
-    prompts: {}
+    name_prompt: Nome della creatura
+    type_prompt: Tipo della creatura
+    type_options:
+    - {label: Aberrazione, id: aberrazione}
+    - {label: Bestia, id: bestia}
+    - {label: Celestiale, id: celestiale}
+    - {label: Costrutto, id: costrutto}
+    - {label: Drago, id: drago}
+    - {label: Elementale, id: elementale}
+    - {label: Folletto, id: folletto}
+    - {label: Gigante, id: gigante}
+    - {label: Immondo, id: immondo}
+    - {label: Melma, id: melma}
+    - {label: Mostruosita, id: mostruosita}
+    - {label: Non morto, id: non morto}
+    - {label: Umanoide, id: umanoide}
+    - {label: Vegetale, id: vegetale}
+    size_options:
+    - {label: Minuscola, id: minuscola}
+    - {label: Piccola, id: piccola}
+    - {label: Media, id: media}
+    - {label: Grande, id: grande}
+    - {label: Enorme, id: enorme}
+    - {label: Mastodontica, id: mastodontica}
+    alignment_options:
+    - {label: Legale buono, id: legale buono}
+    - {label: Neutrale buono, id: neutrale buono}
+    - {label: Caotico buono, id: caotico buono}
+    - {label: Legale neutrale, id: legale neutrale}
+    - {label: Neutrale, id: neutrale}
+    - {label: Caotico neutrale, id: caotico neutrale}
+    - {label: Legale malvagio, id: legale malvagio}
+    - {label: Neutrale malvagio, id: neutrale malvagio}
+    - {label: Caotico malvagio, id: caotico malvagio}
+    prompts:
+      mondo: Mondo della creatura
+      luoghi: Luoghi o habitat collegati
+      ac: Classe Armatura
+      hp: Punti Ferita
+      speed: Velocita
+      cr: Grado di Sfida
+      stats: Caratteristiche D&D 5.5
   culto:
     name_prompt: Nome
     prompts: {}
@@ -511,8 +551,32 @@ profiles:
     name_prompt: Nome
     prompts: {}
   oggetto_magico:
-    name_prompt: Nome
-    prompts: {}
+    name_prompt: Nome dell'oggetto magico
+    rarity_options:
+    - {label: Comune, id: comune}
+    - {label: Non comune, id: non comune}
+    - {label: Raro, id: raro}
+    - {label: Molto raro, id: molto raro}
+    - {label: Leggendario, id: leggendario}
+    - {label: Artefatto, id: artefatto}
+    boolean_options:
+    - {label: "No", id: "false"}
+    - {label: "Si", id: "true"}
+    prompts:
+      rarita: Rarita
+      sintonia: Richiede sintonia
+      cariche: Cariche o usi
+      maledizione: Ha una maledizione
+      mondo: Mondo dell'oggetto magico
+      proprietario: Proprietario
+      luogo: Luogo dell'oggetto magico
+      gancio: Perche entra in gioco
+      uso_al_tavolo: Uso concreto al tavolo
+      player_safe: Descrizione mostrabile ai giocatori
+      pressione: Pressione da 0 a 10
+      prossima_mossa: Cosa cambia se viene usato, perso o ignorato
+      connessioni: Connessioni a missioni, luoghi, PNG o fazioni
+      sessioni: Sessioni collegate
   pg:
     name_prompt: Nome
     prompts: {}

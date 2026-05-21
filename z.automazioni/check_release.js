@@ -63,6 +63,9 @@ const releaseCleanText = readTextRel(ROOT, "z.automazioni/release_clean.js");
 if (!releaseCleanText.includes('"Import"')) {
     errors.push("release_clean.js: la cartella Import deve restare fuori dalla release utente");
 }
+if (!releaseCleanText.includes("render_template_factory.py") || !releaseCleanText.includes("--materialize-only")) {
+    errors.push("release_clean.js: la release deve materializzare z.modelli da TemplateFactory prima della copia");
+}
 
 if (errors.length) {
     console.error("Errori release:");

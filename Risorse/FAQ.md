@@ -24,15 +24,13 @@ Apri [[Risorse/Primo Avvio Strumenti]] e controlla che gli strumenti per le tabe
 
 Apri [[Risorse/Primo Avvio Strumenti]] e controlla gli strumenti per pulsanti e creazione guidata. Se il problema resta, apri [[Risorse/Se Qualcosa Non Funziona]].
 
+## Devo Tenere I Contenuti Demo?
 
 Si, ma sono utili per capire come il vault dovrebbe apparire quando e popolato. Se vuoi una copia completamente vuota, archiviala o rimuovila solo dopo aver preso confidenza.
 
-
-- Il collaudo tecnico passa da `npm run check`, `npm run check:js` e smoke manuale delle viste principali. Il vault non mantiene note fittizie di prova nelle cartelle operative.
-
 ## Posso Usarlo Senza SRD?
 
-Si. `SRD` e un riferimento regolamentare separato. Il mondo e le campagne stanno in `Mondi` e `Campagne`.
+Si, ma il profilo principale del vault e fantasy D&D 5.5/SRD. `SRD` resta un riferimento regolamentare separato: il mondo e le campagne stanno in `Mondi` e `Campagne`.
 
 ## Funziona Da Mobile?
 

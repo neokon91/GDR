@@ -9,6 +9,7 @@ Questa cartella contiene roadmap, changelog, audit, confini release, smoke test,
 | Area | Uso |
 | --- | --- |
 | `Roadmap/` | Roadmap attiva e storiche. |
+| `NEXT_PHASE_HANDOFF.md` | Sintesi operativa per riprendere sviluppo con poco contesto. |
 | `TemplateFactory/` | Moduli YAML e schemi Jinja2 per generazione futura dei template. |
 | `Plugin Technical Reference.md` | Riferimenti tecnici puntuali a funzioni, sintassi e configurazioni dei plugin. |
 | `Sviluppo Vault.md` | Convenzioni tecniche del vault. |
