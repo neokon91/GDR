@@ -58,6 +58,8 @@ const REQUIRED_FILES = [
     "Dev/TemplateFactory/modules/metabind_inputs.yaml",
     "Dev/TemplateFactory/modules/metabind_buttons.yaml",
     "Dev/TemplateFactory/modules/bases_views.yaml",
+    "Dev/TemplateFactory/modules/frontmatter_profiles.yaml",
+    "Dev/TemplateFactory/modules/runtime_profiles.yaml",
     "Dev/TemplateFactory/modules/workflows.yaml",
     "Hub/1. DM Dashboard.md",
     "Hub/Atlante del Mondo.md",

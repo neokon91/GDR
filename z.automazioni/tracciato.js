@@ -1,38 +1,28 @@
 async function tracciato(tp) {
     const helpers = tp.user.helpers;
+    const profile = await helpers.runtimeProfile("tracciato");
+    const prompts = profile.prompts ?? {};
     const activeContext = helpers.getActiveSessionContext();
-    const name = await helpers.promptRequired(tp, "Nome del clock o tracciato");
+    const name = await helpers.promptRequired(tp, profile.name_prompt ?? "Nome del clock o tracciato");
     const id = helpers.slugify(name);
-    const creazioneCompleta = await helpers.askYesNo(tp, "Vuoi collegare subito missioni, fazioni, luoghi e PNG? Scegli No per un clock rapido.");
-    const selectedType = await helpers.chooseOptional(
-        tp,
-        [
-            { label: "Clock", id: "clock" },
-            { label: "Progress track", id: "progress track" },
-            { label: "Fronte", id: "fronte" },
-            { label: "Rituale", id: "rituale" },
-            { label: "Minaccia", id: "minaccia" },
-            { label: "Viaggio", id: "viaggio" },
-            { label: "Progetto", id: "progetto" }
-        ],
-        "Tipo di tracciato"
-    );
-    const mondo = await helpers.chooseWorld(tp, "Mondo del tracciato");
+    const creazioneCompleta = await helpers.askYesNo(tp, profile.completion_prompt ?? "Vuoi collegare subito missioni, fazioni, luoghi e PNG? Scegli No per un clock rapido.");
+    const selectedType = await helpers.chooseProfileOption(tp, profile);
+    const mondo = await helpers.chooseWorld(tp, profile.world_prompt ?? "Mondo del tracciato");
     const context = { world: mondo };
-    const progressMax = await helpers.promptOptional(tp, "Segmenti totali", "6") || "6";
-    const progressValue = await helpers.promptOptional(tp, "Segmenti gia segnati", "0") || "0";
-    const posta = await helpers.promptOptional(tp, "Cosa succede quando si riempie");
-    const gancio = await helpers.promptOptional(tp, "Gancio giocabile");
-    const usoAlTavolo = await helpers.promptOptional(tp, "Uso al tavolo");
-    const playerSafe = await helpers.promptOptional(tp, "Versione player-safe");
-    const prossimaMossa = await helpers.promptOptional(tp, "Prossima mossa");
-    const innesco = await helpers.promptOptional(tp, "Quando avanza");
-    const campagne = creazioneCompleta ? await helpers.chooseCampaigns(tp, "Campagne collegate", context) : [];
-    const missioni = creazioneCompleta ? await helpers.chooseMissions(tp, "Missioni collegate", context) : [];
-    const fazioni = creazioneCompleta ? await helpers.chooseFactions(tp, "Fazioni collegate", context) : [];
-    const luoghi = creazioneCompleta ? await helpers.chooseLocations(tp, "Luoghi collegati", context) : [];
-    const personaggi = creazioneCompleta ? await helpers.choosePeople(tp, "PNG o PG collegati", context) : [];
-    const connessioni = await helpers.chooseConnections(tp, "Connessioni vive del tracciato", context);
+    const progressMax = await helpers.promptOptional(tp, prompts.progress_max ?? "Segmenti totali", profile.progress_max_default ?? "6") || "6";
+    const progressValue = await helpers.promptOptional(tp, prompts.progress_value ?? "Segmenti gia segnati", profile.progress_value_default ?? "0") || "0";
+    const posta = await helpers.promptOptional(tp, prompts.posta ?? "Cosa succede quando si riempie");
+    const gancio = await helpers.promptOptional(tp, prompts.gancio ?? "Gancio giocabile");
+    const usoAlTavolo = await helpers.promptOptional(tp, prompts.uso_al_tavolo ?? "Uso al tavolo");
+    const playerSafe = await helpers.promptOptional(tp, prompts.player_safe ?? "Versione player-safe");
+    const prossimaMossa = await helpers.promptOptional(tp, prompts.prossima_mossa ?? "Prossima mossa");
+    const innesco = await helpers.promptOptional(tp, prompts.innesco ?? "Quando avanza");
+    const campagne = creazioneCompleta ? await helpers.chooseCampaigns(tp, prompts.campagne ?? "Campagne collegate", context) : [];
+    const missioni = creazioneCompleta ? await helpers.chooseMissions(tp, prompts.missioni ?? "Missioni collegate", context) : [];
+    const fazioni = creazioneCompleta ? await helpers.chooseFactions(tp, prompts.fazioni ?? "Fazioni collegate", context) : [];
+    const luoghi = creazioneCompleta ? await helpers.chooseLocations(tp, prompts.luoghi ?? "Luoghi collegati", context) : [];
+    const personaggi = creazioneCompleta ? await helpers.choosePeople(tp, prompts.personaggi ?? "PNG o PG collegati", context) : [];
+    const connessioni = await helpers.chooseConnections(tp, profile.connection_prompt ?? "Connessioni vive del tracciato", context);
 
     const sessioni = activeContext.link ? [activeContext.link] : [];
     const created = await helpers.moveNote(tp, helpers.path("tracciati"), name);

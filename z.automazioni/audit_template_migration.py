@@ -6,8 +6,11 @@ import argparse
 import difflib
 import json
 import re
+import sys
 from datetime import datetime, timezone
 from pathlib import Path
+
+sys.dont_write_bytecode = True
 
 from template_factory_utils import (
     FACTORY,

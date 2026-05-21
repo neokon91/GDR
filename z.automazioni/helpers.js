@@ -35,9 +35,187 @@ const PATHS = {
 };
 
 let pendingRoute = {};
+const templateFactoryCache = {};
 
 function path(key) {
     return PATHS[key] ?? key;
+}
+
+function parseYamlScalar(value) {
+    const trimmed = String(value ?? "").trim();
+
+    if (trimmed === "true") return true;
+    if (trimmed === "false") return false;
+    if (trimmed === "[]") return [];
+    if (/^-?\d+(\.\d+)?$/.test(trimmed)) return Number(trimmed);
+
+    return trimmed.replace(/^["']|["']$/g, "");
+}
+
+function parseYamlKeyValue(text) {
+    const match = String(text).match(/^([^:]+):(?:\s*(.*))?$/);
+    if (!match) return null;
+
+    return {
+        key: match[1].trim(),
+        value: match[2] ?? ""
+    };
+}
+
+function parseSimpleYaml(text) {
+    const lines = String(text ?? "")
+        .split(/\r?\n/)
+        .map(raw => ({
+            indent: raw.match(/^\s*/)[0].length,
+            text: raw.trim()
+        }))
+        .filter(line => line.text && !line.text.startsWith("#"));
+
+    function parseBlock(index, indent) {
+        if (index >= lines.length) return [{}, index];
+
+        if (lines[index].text.startsWith("- ")) {
+            const items = [];
+
+            while (index < lines.length && lines[index].indent === indent && lines[index].text.startsWith("- ")) {
+                const rest = lines[index].text.slice(2).trim();
+                const pair = parseYamlKeyValue(rest);
+
+                if (pair) {
+                    const item = {};
+                    if (pair.value.trim()) {
+                        item[pair.key] = parseYamlScalar(pair.value);
+                        index += 1;
+                    } else {
+                        const [child, nextIndex] = parseBlock(index + 1, indent + 2);
+                        item[pair.key] = child;
+                        index = nextIndex;
+                    }
+
+                    while (index < lines.length && lines[index].indent === indent + 2 && !lines[index].text.startsWith("- ")) {
+                        const childPair = parseYamlKeyValue(lines[index].text);
+                        if (!childPair) break;
+
+                        if (childPair.value.trim()) {
+                            item[childPair.key] = parseYamlScalar(childPair.value);
+                            index += 1;
+                        } else {
+                            const [child, nextIndex] = parseBlock(index + 1, indent + 4);
+                            item[childPair.key] = child;
+                            index = nextIndex;
+                        }
+                    }
+
+                    items.push(item);
+                    continue;
+                }
+
+                items.push(parseYamlScalar(rest));
+                index += 1;
+            }
+
+            return [items, index];
+        }
+
+        const data = {};
+        while (index < lines.length && lines[index].indent === indent && !lines[index].text.startsWith("- ")) {
+            const pair = parseYamlKeyValue(lines[index].text);
+            if (!pair) {
+                index += 1;
+                continue;
+            }
+
+            if (pair.value.trim()) {
+                data[pair.key] = parseYamlScalar(pair.value);
+                index += 1;
+            } else {
+                const [child, nextIndex] = parseBlock(index + 1, indent + 2);
+                data[pair.key] = child;
+                index = nextIndex;
+            }
+        }
+
+        return [data, index];
+    }
+
+    return parseBlock(0, 0)[0];
+}
+
+async function readVaultText(filePath) {
+    if (typeof app !== "undefined" && app?.vault?.adapter?.read) {
+        return await app.vault.adapter.read(filePath);
+    }
+
+    if (typeof require === "function") {
+        const fs = require("fs");
+        return fs.readFileSync(filePath, "utf8");
+    }
+
+    return "";
+}
+
+async function loadTemplateFactoryModule(moduleName) {
+    if (templateFactoryCache[moduleName]) {
+        return templateFactoryCache[moduleName];
+    }
+
+    const source = await readVaultText(`Dev/TemplateFactory/modules/${moduleName}.yaml`);
+    const parser = typeof parseYaml === "function"
+        ? parseYaml
+        : typeof window !== "undefined" && typeof window.parseYaml === "function"
+            ? window.parseYaml
+            : parseSimpleYaml;
+
+    templateFactoryCache[moduleName] = parser(source) ?? {};
+    return templateFactoryCache[moduleName];
+}
+
+async function loadRuntimeProfiles() {
+    const module = await loadTemplateFactoryModule("runtime_profiles");
+    return module.profiles ?? {};
+}
+
+async function runtimeProfile(name) {
+    const profiles = await loadRuntimeProfiles();
+    return profiles[name] ?? {};
+}
+
+async function frontmatterProfile(name) {
+    const module = await loadTemplateFactoryModule("frontmatter_profiles");
+    return module.profiles?.[name] ?? {};
+}
+
+async function chooseProfileOption(tp, profile, route = {}) {
+    const routeKey = profile.type_route_key;
+    const routeType = routeKey ? route[routeKey] : "";
+
+    if (routeType) {
+        return { id: routeType };
+    }
+
+    return await chooseOptional(tp, profile.type_options ?? [], profile.type_prompt ?? "Tipo");
+}
+
+function renderFrontmatterFromProfile(profile, values = {}) {
+    const fields = profile.fields ?? [];
+    const lines = fields.map(field => {
+        const key = field.key;
+        const valueKey = field.value;
+        const rawValue = valueKey && Object.prototype.hasOwnProperty.call(values, valueKey)
+            ? values[valueKey]
+            : field.default ?? "";
+        const value = Array.isArray(rawValue)
+            ? inlineYamlList(rawValue)
+            : rawValue;
+
+        return `${key}: ${value}`;
+    });
+
+    return `---\n${lines.join("\n")}\n---\n`;
+}
+
+async function renderFrontmatter(profileName, values = {}) {
+    return renderFrontmatterFromProfile(await frontmatterProfile(profileName), values);
 }
 
 function setRoute(route = {}) {
@@ -929,6 +1107,10 @@ function abilityArray(value, fallback = "10 10 10 10 10 10") {
 
 module.exports = {
     path,
+    runtimeProfile,
+    frontmatterProfile,
+    chooseProfileOption,
+    renderFrontmatter,
     setRoute,
     consumeRoute,
     abortCreation,

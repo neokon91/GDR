@@ -1,41 +1,25 @@
 async function oggetto(tp) {
     const helpers = tp.user.helpers;
+    const profile = await helpers.runtimeProfile("oggetto");
+    const prompts = profile.prompts ?? {};
     const activeContext = helpers.getActiveSessionContext();
-    const name = await helpers.promptRequired(tp, "Nome dell'oggetto");
+    const name = await helpers.promptRequired(tp, profile.name_prompt ?? "Nome dell'oggetto");
     const id = helpers.slugify(name);
-    const selectedType = await helpers.chooseOptional(
-        tp,
-        [
-            { label: "Oggetto comune", id: "oggetto comune" },
-            { label: "Reliquia", id: "reliquia" },
-            { label: "Indizio fisico", id: "indizio fisico" },
-            { label: "Chiave", id: "chiave" },
-            { label: "Tesoro", id: "tesoro" },
-            { label: "Artefatto", id: "artefatto" }
-        ],
-        "Tipo di oggetto"
-    );
+    const selectedType = await helpers.chooseProfileOption(tp, profile);
     const selectedRarity = await helpers.chooseOptional(
         tp,
-        [
-            { label: "Comune", id: "comune" },
-            { label: "Non comune", id: "non comune" },
-            { label: "Raro", id: "raro" },
-            { label: "Molto raro", id: "molto raro" },
-            { label: "Leggendario", id: "leggendario" },
-            { label: "Artefatto", id: "artefatto" }
-        ],
-        "Rarità"
+        profile.rarity_options ?? [],
+        profile.rarity_prompt ?? "Rarità"
     );
-    const mondo = await helpers.chooseWorld(tp, "Mondo dell'oggetto");
+    const mondo = await helpers.chooseWorld(tp, profile.world_prompt ?? "Mondo dell'oggetto");
     const context = { world: mondo };
-    const proprietario = await helpers.choosePerson(tp, "Proprietario", context);
-    const luogo = await helpers.chooseLocation(tp, "Luogo dell'oggetto", context);
-    const gancio = await helpers.promptOptional(tp, "Gancio giocabile dell'oggetto");
-    const usoAlTavolo = await helpers.promptOptional(tp, "Uso al tavolo");
-    const playerSafe = await helpers.promptOptional(tp, "Versione player-safe");
-    const prossimaMossa = await helpers.promptOptional(tp, "Cosa cambia se viene usato, perso o ignorato");
-    const connessioni = await helpers.chooseConnections(tp, "Connessioni vive dell'oggetto", context);
+    const proprietario = await helpers.choosePerson(tp, prompts.proprietario ?? "Proprietario", context);
+    const luogo = await helpers.chooseLocation(tp, prompts.luogo ?? "Luogo dell'oggetto", context);
+    const gancio = await helpers.promptOptional(tp, prompts.gancio ?? "Gancio giocabile dell'oggetto");
+    const usoAlTavolo = await helpers.promptOptional(tp, prompts.uso_al_tavolo ?? "Uso al tavolo");
+    const playerSafe = await helpers.promptOptional(tp, prompts.player_safe ?? "Versione player-safe");
+    const prossimaMossa = await helpers.promptOptional(tp, prompts.prossima_mossa ?? "Cosa cambia se viene usato, perso o ignorato");
+    const connessioni = await helpers.chooseConnections(tp, profile.connection_prompt ?? "Connessioni vive dell'oggetto", context);
 
     const sessioni = activeContext.link ? [activeContext.link] : [];
     const created = await helpers.moveNote(tp, helpers.path("oggetti"), name);

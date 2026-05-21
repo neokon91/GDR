@@ -1,18 +1,20 @@
 async function mercato(tp) {
     const helpers = tp.user.helpers;
-    const name = await helpers.promptRequired(tp, "Nome del mercato o nodo commerciale");
+    const profile = await helpers.runtimeProfile("mercato");
+    const prompts = profile.prompts ?? {};
+    const name = await helpers.promptRequired(tp, profile.name_prompt ?? "Nome del mercato o nodo commerciale");
     const id = helpers.slugify(name);
-    const mondo = await helpers.chooseWorld(tp, "Mondo del nodo");
+    const mondo = await helpers.chooseWorld(tp, profile.world_prompt ?? "Mondo del nodo");
     const context = { world: mondo };
-    const luogo = await helpers.chooseLocation(tp, "Luogo principale", context);
-    const fazioni = await helpers.chooseFactions(tp, "Fazioni che lo controllano", context);
-    const risorse = await helpers.chooseWorldResources(tp, "Risorse trattate", context);
-    const rischio = await helpers.promptOptional(tp, "Rischio o tensione commerciale");
-    const gancio = await helpers.promptOptional(tp, "Gancio giocabile del nodo");
-    const usoAlTavolo = await helpers.promptOptional(tp, "Uso al tavolo");
-    const playerSafe = await helpers.promptOptional(tp, "Versione player-safe");
-    const prossimaMossa = await helpers.promptOptional(tp, "Prossima mossa");
-    const connessioni = await helpers.chooseConnections(tp, "Connessioni vive del mercato", context);
+    const luogo = await helpers.chooseLocation(tp, prompts.luogo ?? "Luogo principale", context);
+    const fazioni = await helpers.chooseFactions(tp, prompts.fazioni ?? "Fazioni che lo controllano", context);
+    const risorse = await helpers.chooseWorldResources(tp, prompts.risorse ?? "Risorse trattate", context);
+    const rischio = await helpers.promptOptional(tp, prompts.rischio ?? "Rischio o tensione commerciale");
+    const gancio = await helpers.promptOptional(tp, prompts.gancio ?? "Gancio giocabile del nodo");
+    const usoAlTavolo = await helpers.promptOptional(tp, prompts.uso_al_tavolo ?? "Uso al tavolo");
+    const playerSafe = await helpers.promptOptional(tp, prompts.player_safe ?? "Versione player-safe");
+    const prossimaMossa = await helpers.promptOptional(tp, prompts.prossima_mossa ?? "Prossima mossa");
+    const connessioni = await helpers.chooseConnections(tp, profile.connection_prompt ?? "Connessioni vive del mercato", context);
 
     const created = await helpers.moveNote(tp, helpers.path("mercati"), name);
     await helpers.linkCreatedNoteToConnections(created, connessioni);

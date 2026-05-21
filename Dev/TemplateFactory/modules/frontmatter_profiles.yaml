@@ -1,0 +1,80 @@
+id: frontmatter_profiles
+purpose: Profili dichiarativi per ordinare e renderizzare frontmatter generato dagli script Templater.
+version: 0.1.0
+profiles:
+  missione:
+    fields:
+      - key: id
+        value: id
+      - key: nome
+        value: nome
+      - key: categoria
+        default: missione
+      - key: fileClass
+        default: missione
+      - key: tipo
+        value: tipo
+      - key: stato
+        default: proposta
+      - key: mondo
+        value: mondo
+      - key: committente
+        value: committente
+      - key: luoghi
+        value: luoghi
+      - key: personaggi
+        value: personaggi
+      - key: fazioni
+        value: fazioni
+      - key: tracciati
+        value: tracciati
+      - key: ricompense
+        value: ricompense
+      - key: sessioni
+        value: sessioni
+      - key: progress_value
+        default: 0
+      - key: progress_max
+        default: 6
+      - key: pressione
+        value: pressione
+      - key: posta
+        value: posta
+      - key: scelta
+        value: scelta
+      - key: gancio
+        value: gancio
+      - key: uso_al_tavolo
+        value: uso_al_tavolo
+      - key: player_safe
+        value: player_safe
+      - key: prossima_mossa
+        value: prossima_mossa
+      - key: domande_aperte
+        value: domande_aperte
+      - key: indizi
+        value: indizi
+      - key: ostacoli
+        value: ostacoli
+      - key: scene_pronte
+        default: []
+      - key: decisioni
+        default: []
+      - key: conseguenze
+        value: conseguenze
+      - key: segreti
+        value: segreti
+      - key: connessioni
+        value: connessioni
+      - key: scadenza_mondo
+        value: scadenza_mondo
+      - key: fc-calendar
+        value: fc_calendar
+      - key: fc-date
+        default: ""
+      - key: fc-category
+        default: scadenza
+      - key: fc-display-name
+        value: fc_display_name
+      - key: fc-end
+        default: ""

@@ -6,6 +6,8 @@ import sys
 import re
 from pathlib import Path
 
+sys.dont_write_bytecode = True
+
 from template_factory_utils import (
     FACTORY,
     MODULES,
@@ -29,6 +31,8 @@ REQUIRED_MODULES = {
     "metabind_inputs",
     "metabind_buttons",
     "bases_views",
+    "frontmatter_profiles",
+    "runtime_profiles",
     "workflows",
 }
 
@@ -115,6 +119,58 @@ def validate_blueprints(modules: dict[str, dict], errors: list[str]) -> None:
             fail(f"sections.{section_id}: fallback Markdown mancante", errors)
 
 
+def validate_runtime_profiles(modules: dict[str, dict], errors: list[str]) -> None:
+    profiles = modules["runtime_profiles"].get("profiles", {})
+    if not profiles:
+        fail("runtime_profiles: nessun profilo definito", errors)
+        return
+
+    for profile_id, profile in profiles.items():
+        if not profile.get("name_prompt"):
+            fail(f"runtime_profiles.{profile_id}: name_prompt mancante", errors)
+        if "prompts" not in profile or not isinstance(profile.get("prompts"), dict):
+            fail(f"runtime_profiles.{profile_id}: prompts mancante o non oggetto", errors)
+
+        for option_group in ("type_options", "biome_options", "rarity_options", "status_options"):
+            options = profile.get(option_group, [])
+            if options and not isinstance(options, list):
+                fail(f"runtime_profiles.{profile_id}.{option_group}: deve essere una lista", errors)
+                continue
+            for index, option in enumerate(options):
+                if not isinstance(option, dict) or not option.get("label") or not option.get("id"):
+                    fail(f"runtime_profiles.{profile_id}.{option_group}[{index}]: richiede label e id", errors)
+
+        if profile.get("type_options") and not profile.get("type_prompt"):
+            fail(f"runtime_profiles.{profile_id}: type_prompt mancante con type_options presenti", errors)
+
+
+def validate_frontmatter_profiles(modules: dict[str, dict], errors: list[str]) -> None:
+    profiles = modules["frontmatter_profiles"].get("profiles", {})
+    if not profiles:
+        fail("frontmatter_profiles: nessun profilo definito", errors)
+        return
+
+    for profile_id, profile in profiles.items():
+        fields = profile.get("fields", [])
+        if not isinstance(fields, list) or not fields:
+            fail(f"frontmatter_profiles.{profile_id}: fields mancante o vuoto", errors)
+            continue
+
+        seen: set[str] = set()
+        for index, field in enumerate(fields):
+            if not isinstance(field, dict) or not field.get("key"):
+                fail(f"frontmatter_profiles.{profile_id}.fields[{index}]: key mancante", errors)
+                continue
+
+            key = str(field["key"])
+            if key in seen:
+                fail(f"frontmatter_profiles.{profile_id}: campo duplicato {key}", errors)
+            seen.add(key)
+
+            if "value" not in field and "default" not in field:
+                fail(f"frontmatter_profiles.{profile_id}.{key}: richiede value o default", errors)
+
+
 def validate_rendering(modules: dict[str, dict], errors: list[str]) -> None:
     env = build_jinja_env()
 
@@ -163,6 +219,10 @@ def main() -> int:
         validate_modules(modules, errors)
     if not errors:
         validate_blueprints(modules, errors)
+    if not errors:
+        validate_runtime_profiles(modules, errors)
+    if not errors:
+        validate_frontmatter_profiles(modules, errors)
     if not errors:
         validate_rendering(modules, errors)
     if not errors:

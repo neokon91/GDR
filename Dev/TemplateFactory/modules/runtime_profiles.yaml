@@ -1,0 +1,329 @@
+id: runtime_profiles
+purpose: Profili runtime usati dagli script Templater sottili per prompt, scelte e default ripetuti.
+version: 0.1.0
+profiles:
+  fazione:
+    name_prompt: Nome della fazione
+    completion_prompt: Vuoi compilare rete, luoghi e relazioni ora? Scegli No per una fazione rapida.
+    type_prompt: Tipo di fazione
+    world_prompt: Mondo della fazione
+    connection_prompt: Connessioni vive della fazione
+    type_route_key: tipoFazione
+    type_options:
+      - label: Gilda
+        id: gilda
+      - label: Confraternita
+        id: confraternita
+      - label: Casata
+        id: casata
+      - label: Ordine militare
+        id: ordine militare
+      - label: Compagnia mercantile
+        id: compagnia mercantile
+      - label: Banda criminale
+        id: banda criminale
+      - label: Movimento ribelle
+        id: movimento ribelle
+      - label: Governo
+        id: governo
+      - label: Culto politico
+        id: culto politico
+    prompts:
+      obiettivo: Obiettivo pubblico
+      gancio: "Gancio giocabile: perche questa fazione entra in scena?"
+      player_safe: Versione player-safe mostrabile
+      obiettivo_nascosto: Obiettivo nascosto
+      pressione: Pressione da 0 a 10
+      prossima_mossa: Prossima mossa se nessuno interviene
+      segreto: Segreto o verità scomoda
+      leader: Leader della fazione
+      luoghi: Luoghi controllati o importanti
+      personaggi: Membri, alleati o nemici come PNG
+      missioni: Missioni collegate alla fazione
+      alleati: Fazioni alleate
+      rivali: Fazioni rivali o nemiche
+      scadenza_mondo: Scadenza nel mondo
+      domanda_aperta: Domanda aperta sulla fazione
+  luogo:
+    name_prompt: Nome del luogo
+    completion_prompt: Vuoi compilare collegamenti e lore ora? Scegli No per un luogo rapido.
+    type_prompt: Tipo di luogo
+    biome_prompt: Bioma
+    world_prompt: Mondo del luogo
+    connection_prompt: Connessioni vive del luogo
+    type_route_key: subtype
+    type_options:
+      - label: Città
+        id: città
+      - label: Villaggio
+        id: villaggio
+      - label: Capitale
+        id: capitale
+      - label: Porto
+        id: porto
+      - label: Fortezza
+        id: fortezza
+      - label: Rovina
+        id: rovina
+      - label: Dungeon
+        id: dungeon
+      - label: Regione
+        id: regione
+      - label: Regno
+        id: regno
+      - label: Tempio
+        id: tempio
+      - label: Foresta
+        id: foresta
+      - label: Montagna
+        id: montagna
+    biome_options:
+      - label: Foresta
+        id: foresta
+      - label: Deserto
+        id: deserto
+      - label: Montagna
+        id: montagna
+      - label: Costa
+        id: costa
+      - label: Palude
+        id: palude
+      - label: Tundra
+        id: tundra
+      - label: Sottosuolo
+        id: sottosuolo
+    prompts:
+      pericolo: Pericolo da 0 a 10
+      gancio: "Gancio giocabile: perche questo luogo importa adesso?"
+      impressione: Prima impressione
+      tensione: Tensione o conflitto locale
+      uso_al_tavolo: "Uso al tavolo: scelta, rischio o scena che produce"
+      player_safe: Versione player-safe mostrabile
+      luogo_padre: Luogo o regione superiore
+      governante: Governante o referente
+      fazioni: Fazioni presenti o interessate
+      personaggi: PNG collegati al luogo
+      missioni: Missioni collegate al luogo
+      funzione_narrativa: Funzione narrativa del luogo
+      verita_nascosta: Verità nascosta o segreto
+      domanda_aperta: Domanda aperta da esplorare al tavolo
+  missione:
+    name_prompt: Nome della missione
+    completion_prompt: Vuoi compilare collegamenti e dettagli ora? Scegli No per una missione rapida.
+    type_prompt: Tipo di missione
+    world_prompt: Mondo della missione
+    connection_prompt: Connessioni vive della missione
+    pressure_default: "3"
+    type_options:
+      - label: Incarico
+        id: incarico
+      - label: Ricerca
+        id: ricerca
+      - label: Mistero
+        id: mistero
+      - label: Salvataggio
+        id: salvataggio
+      - label: Caccia
+        id: caccia
+      - label: Viaggio
+        id: viaggio
+      - label: Fronte
+        id: fronte
+      - label: Trama personale
+        id: trama personale
+      - label: Missione di fazione
+        id: missione di fazione
+    prompts:
+      pressione: Pressione da 0 a 10
+      posta: "Posta: cosa cambia se riesce o fallisce?"
+      scelta: Scelta concreta per i giocatori
+      player_safe: Versione player-safe dell'obiettivo
+      prossima_mossa: Prossima mossa se ignorata
+      indizio: Indizio iniziale
+      conseguenza: Conseguenza se fallisce o viene ignorata
+      committente: Committente
+      luoghi: Luoghi della missione
+      personaggi: Personaggi coinvolti
+      fazioni: Fazioni coinvolte
+      tracciati: Clock o tracciati collegati
+      ricompense: Ricompense
+      scadenza_mondo: Scadenza nel mondo
+      calendario: Calendario Calendarium
+      ostacolo: Ostacolo principale
+      segreto: Segreto dietro la missione
+      domanda_aperta: Domanda aperta della missione
+  tracciato:
+    name_prompt: Nome del clock o tracciato
+    completion_prompt: Vuoi collegare subito missioni, fazioni, luoghi e PNG? Scegli No per un clock rapido.
+    type_prompt: Tipo di tracciato
+    world_prompt: Mondo del tracciato
+    connection_prompt: Connessioni vive del tracciato
+    progress_max_default: "6"
+    progress_value_default: "0"
+    type_options:
+      - label: Clock
+        id: clock
+      - label: Progress track
+        id: progress track
+      - label: Fronte
+        id: fronte
+      - label: Rituale
+        id: rituale
+      - label: Minaccia
+        id: minaccia
+      - label: Viaggio
+        id: viaggio
+      - label: Progetto
+        id: progetto
+    prompts:
+      progress_max: Segmenti totali
+      progress_value: Segmenti gia segnati
+      posta: Cosa succede quando si riempie
+      gancio: Gancio giocabile
+      uso_al_tavolo: Uso al tavolo
+      player_safe: Versione player-safe
+      prossima_mossa: Prossima mossa
+      innesco: Quando avanza
+      campagne: Campagne collegate
+      missioni: Missioni collegate
+      fazioni: Fazioni collegate
+      luoghi: Luoghi collegati
+      personaggi: PNG o PG collegati
+  relazione:
+    name_prompt: Nome della relazione, patto o rivalità
+    completion_prompt: Vuoi compilare storia, versioni e dipendenze della relazione ora? Scegli No per una relazione rapida.
+    type_prompt: Tipo di relazione
+    world_prompt: Mondo della relazione
+    connection_prompt: Connessioni vive della relazione
+    type_options:
+      - label: Alleanza
+        id: alleanza
+      - label: Rivalità
+        id: rivalità
+      - label: Guerra fredda
+        id: guerra fredda
+      - label: Vassallaggio
+        id: vassallaggio
+      - label: Trattato
+        id: trattato
+      - label: Debito
+        id: debito
+      - label: Faida
+        id: faida
+      - label: Patto religioso
+        id: patto religioso
+      - label: Tradimento
+        id: tradimento
+    prompts:
+      soggetti: Soggetti coinvolti
+      origine: Origine della relazione
+      posta: Cosa c'è in gioco
+      gancio: Gancio giocabile della relazione
+      uso_al_tavolo: Uso al tavolo
+      player_safe: Versione player-safe
+      prossima_mossa: Prossimo deterioramento o sviluppo
+      versione: Come la raccontano in modo diverso le parti
+      dipendenza: Dipendenza materiale o politica
+      ferita: Ferita aperta
+  oggetto:
+    name_prompt: Nome dell'oggetto
+    type_prompt: Tipo di oggetto
+    rarity_prompt: Rarità
+    world_prompt: Mondo dell'oggetto
+    connection_prompt: Connessioni vive dell'oggetto
+    type_options:
+      - label: Oggetto comune
+        id: oggetto comune
+      - label: Reliquia
+        id: reliquia
+      - label: Indizio fisico
+        id: indizio fisico
+      - label: Chiave
+        id: chiave
+      - label: Tesoro
+        id: tesoro
+      - label: Artefatto
+        id: artefatto
+    rarity_options:
+      - label: Comune
+        id: comune
+      - label: Non comune
+        id: non comune
+      - label: Raro
+        id: raro
+      - label: Molto raro
+        id: molto raro
+      - label: Leggendario
+        id: leggendario
+      - label: Artefatto
+        id: artefatto
+    prompts:
+      proprietario: Proprietario
+      luogo: Luogo dell'oggetto
+      gancio: Gancio giocabile dell'oggetto
+      uso_al_tavolo: Uso al tavolo
+      player_safe: Versione player-safe
+      prossima_mossa: Cosa cambia se viene usato, perso o ignorato
+  mercato:
+    name_prompt: Nome del mercato o nodo commerciale
+    world_prompt: Mondo del nodo
+    connection_prompt: Connessioni vive del mercato
+    prompts:
+      luogo: Luogo principale
+      fazioni: Fazioni che lo controllano
+      risorse: Risorse trattate
+      rischio: Rischio o tensione commerciale
+      gancio: Gancio giocabile del nodo
+      uso_al_tavolo: Uso al tavolo
+      player_safe: Versione player-safe
+      prossima_mossa: Prossima mossa
+  rotta:
+    name_prompt: Nome della rotta
+    world_prompt: Mondo della rotta
+    connection_prompt: Connessioni vive della rotta
+    status_prompt: Stato della rotta
+    status_options:
+      - label: Aperta
+        id: aperta
+      - label: Chiusa
+        id: chiusa
+      - label: Contesa
+        id: contesa
+      - label: Maledetta
+        id: maledetta
+      - label: Interrotta
+        id: interrotta
+    prompts:
+      partenza: Luogo di partenza
+      arrivo: Luogo di arrivo
+      regioni: Regioni attraversate
+      fazioni: Fazioni controllanti
+      risorse: Risorse trasportate
+      rischio: Rischio principale
+      pedaggio: Pedaggio o costo di passaggio
+      conseguenza: Conseguenza se bloccata
+      gancio: Gancio giocabile della rotta
+      uso_al_tavolo: Uso al tavolo
+      player_safe: Versione player-safe
+      prossima_mossa: Prossima mossa della rotta
+  cultura:
+    name_prompt: Nome della cultura o popolo
+    completion_prompt: Vuoi compilare domande di worldbuilding profondo ora? Scegli No per una cultura rapida.
+    world_prompt: Mondo della cultura
+    connection_prompt: Connessioni vive della cultura
+    prompts:
+      luoghi: Regioni o luoghi dove vive
+      fazioni: Fazioni collegate
+      religioni: Religioni collegate
+      tratto: Cosa rende riconoscibile questa cultura
+      gancio: Gancio giocabile della cultura
+      uso_al_tavolo: Uso al tavolo
+      player_safe: Versione player-safe
+      tensione: Tensione interna o problema
+      segreto: Verità nascosta o tabù
+      prossima_mossa: Prossima mossa culturale
+      mito_origine: Mito d'origine
+      sacro: Cosa considera sacro
+      proibito: Cosa considera proibito o mostruoso
+      vita_quotidiana: Dettaglio di vita quotidiana
+      rapporto_stranieri: Rapporto con stranieri o vicini

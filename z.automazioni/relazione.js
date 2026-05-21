@@ -1,36 +1,24 @@
 async function relazione(tp) {
     const helpers = tp.user.helpers;
-    const name = await helpers.promptRequired(tp, "Nome della relazione, patto o rivalità");
+    const profile = await helpers.runtimeProfile("relazione");
+    const prompts = profile.prompts ?? {};
+    const name = await helpers.promptRequired(tp, profile.name_prompt ?? "Nome della relazione, patto o rivalità");
     const id = helpers.slugify(name);
-    const creazioneCompleta = await helpers.askYesNo(tp, "Vuoi compilare storia, versioni e dipendenze della relazione ora? Scegli No per una relazione rapida.");
-    const selectedType = await helpers.chooseOptional(
-        tp,
-        [
-            { label: "Alleanza", id: "alleanza" },
-            { label: "Rivalità", id: "rivalità" },
-            { label: "Guerra fredda", id: "guerra fredda" },
-            { label: "Vassallaggio", id: "vassallaggio" },
-            { label: "Trattato", id: "trattato" },
-            { label: "Debito", id: "debito" },
-            { label: "Faida", id: "faida" },
-            { label: "Patto religioso", id: "patto religioso" },
-            { label: "Tradimento", id: "tradimento" }
-        ],
-        "Tipo di relazione"
-    );
-    const mondo = await helpers.chooseWorld(tp, "Mondo della relazione");
+    const creazioneCompleta = await helpers.askYesNo(tp, profile.completion_prompt ?? "Vuoi compilare storia, versioni e dipendenze della relazione ora? Scegli No per una relazione rapida.");
+    const selectedType = await helpers.chooseProfileOption(tp, profile);
+    const mondo = await helpers.chooseWorld(tp, profile.world_prompt ?? "Mondo della relazione");
     const context = { world: mondo };
-    const soggetti = creazioneCompleta ? await helpers.chooseNotesByPath(tp, "Mondi", "Soggetti coinvolti", context) : [];
-    const connessioni = await helpers.chooseConnections(tp, "Connessioni vive della relazione", context);
-    const origine = await helpers.promptOptional(tp, "Origine della relazione");
-    const posta = await helpers.promptOptional(tp, "Cosa c'è in gioco");
-    const gancio = await helpers.promptOptional(tp, "Gancio giocabile della relazione");
-    const usoAlTavolo = await helpers.promptOptional(tp, "Uso al tavolo");
-    const playerSafe = await helpers.promptOptional(tp, "Versione player-safe");
-    const prossimaMossa = await helpers.promptOptional(tp, "Prossimo deterioramento o sviluppo");
-    const versione = creazioneCompleta ? await helpers.promptOptional(tp, "Come la raccontano in modo diverso le parti") : "";
-    const dipendenza = creazioneCompleta ? await helpers.promptOptional(tp, "Dipendenza materiale o politica") : "";
-    const ferita = creazioneCompleta ? await helpers.promptOptional(tp, "Ferita aperta") : "";
+    const soggetti = creazioneCompleta ? await helpers.chooseNotesByPath(tp, "Mondi", prompts.soggetti ?? "Soggetti coinvolti", context) : [];
+    const connessioni = await helpers.chooseConnections(tp, profile.connection_prompt ?? "Connessioni vive della relazione", context);
+    const origine = await helpers.promptOptional(tp, prompts.origine ?? "Origine della relazione");
+    const posta = await helpers.promptOptional(tp, prompts.posta ?? "Cosa c'è in gioco");
+    const gancio = await helpers.promptOptional(tp, prompts.gancio ?? "Gancio giocabile della relazione");
+    const usoAlTavolo = await helpers.promptOptional(tp, prompts.uso_al_tavolo ?? "Uso al tavolo");
+    const playerSafe = await helpers.promptOptional(tp, prompts.player_safe ?? "Versione player-safe");
+    const prossimaMossa = await helpers.promptOptional(tp, prompts.prossima_mossa ?? "Prossimo deterioramento o sviluppo");
+    const versione = creazioneCompleta ? await helpers.promptOptional(tp, prompts.versione ?? "Come la raccontano in modo diverso le parti") : "";
+    const dipendenza = creazioneCompleta ? await helpers.promptOptional(tp, prompts.dipendenza ?? "Dipendenza materiale o politica") : "";
+    const ferita = creazioneCompleta ? await helpers.promptOptional(tp, prompts.ferita ?? "Ferita aperta") : "";
 
     const created = await helpers.moveNote(tp, helpers.path("relazioni"), name);
     await helpers.linkCreatedNoteToConnections(created, connessioni);
