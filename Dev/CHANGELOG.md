@@ -40,6 +40,7 @@
 
 - `npm run check`
 - `npm run release:clean`
+- Gate statico M3 demo/player-safe rieseguito il 2026-05-21.
 - `dist/vault-gdr-clean.zip` creato localmente come artefatto ignorato da Git.
 
 ## 1.0.0 - 2026-05-20

@@ -40,6 +40,13 @@ Scenario demo creato dopo M1 e M2 per verificare che il vault 1.0 funzioni con t
 - [x] `npm run check` passa con gate statico M3 su presenza demo e player-safe.
 - [ ] Smoke visuale manuale in Obsidian: [[Dev/Smoke Demo Finale]].
 
+## Ripresa Sviluppo 2026-05-21
+
+- `npm run check` passato: vault, TemplateFactory, repository, JS e diff whitespace.
+- `npm run release:clean` passato: copia utente e ZIP generati in `dist/`.
+- Gate statico M3 player-safe passato tramite `z.automazioni/check_vault.js`.
+- Resta aperto solo lo smoke visuale in Obsidian con evidenze screenshot/GIF prima di chiudere M3.
+
 ## Gate Statico M3
 
 `npm run check` verifica:

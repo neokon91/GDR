@@ -52,3 +52,11 @@ Apri queste pagine in ordine e verifica che non compaiano errori Dataview, JS En
 
 - [ ] Smoke visuale superato in Obsidian.
 - [ ] Eventuali problemi sono stati corretti e ricontrollati con `npm run check`.
+
+## Stato Ripresa 2026-05-21
+
+- [x] `npm run check` eseguito e passato.
+- [x] `npm run release:clean` eseguito e passato.
+- [x] Controllo player-safe statico della demo passato dentro `npm run check`.
+- [ ] Smoke visuale Obsidian ancora da eseguire sulle pagine del percorso visuale.
+- [ ] Screenshot/GIF di evidenza ancora da acquisire.
