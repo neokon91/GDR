@@ -7,7 +7,9 @@ const {
     hasValue,
     parseFrontmatter,
     readJson: readJsonFile,
-    readTextIfExists,
+    existsRel: existsRelFromUtils,
+    readTextRel,
+    repoPath: repoPathFromUtils,
     rel: relativePath,
     walk: walkFiles
 } = require("./node_utils");
@@ -361,9 +363,9 @@ function walk(dir, predicate = () => true) {
     return walkFiles(dir, { ignoredDirs: IGNORED_DIRS, predicate });
 }
 
-const repoPath = (...parts) => path.join(ROOT, ...parts);
-const existsRel = file => fs.existsSync(repoPath(file));
-const readRel = (file, fallback = "") => readTextIfExists(repoPath(file), fallback);
+const repoPath = (...parts) => repoPathFromUtils(ROOT, ...parts);
+const existsRel = file => existsRelFromUtils(ROOT, file);
+const readRel = (file, fallback = "") => readTextRel(ROOT, file, fallback);
 
 function readJson(file) {
     return readJsonFile(file, null, error => {
