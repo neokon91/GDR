@@ -2246,8 +2246,9 @@ class HexCartographerPlugin extends Plugin {
                     }
                 }, 50);
             } else if (leaf?.view?.file) {
+                const activeFilePath = leaf.view.file.path;
                 setTimeout(() => {
-                    const fileEl = document.querySelector(`.nav-file-title[data-path="${CSS.escape(leaf.view.file.path)}"]`);
+                    const fileEl = document.querySelector(`.nav-file-title[data-path="${CSS.escape(activeFilePath)}"]`);
                     if (fileEl && !fileEl.classList.contains('is-active')) {
                         fileEl.classList.add('is-active');
                     }

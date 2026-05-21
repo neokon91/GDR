@@ -645,6 +645,7 @@ for (const file of walk(ROOT, file => file.endsWith(".json"))) {
 }
 
 const communityPlugins = readJson(path.join(ROOT, ".obsidian/community-plugins.json")) ?? [];
+const tasksConfig = readOptionalJson(path.join(ROOT, ".obsidian/plugins/obsidian-tasks-plugin/data.json")) ?? {};
 const calendariumData = readOptionalJson(path.join(ROOT, ".obsidian/plugins/calendarium/data.json")) ?? {};
 const calendariumCalendars = Array.isArray(calendariumData.calendars)
     ? calendariumData.calendars
@@ -661,6 +662,23 @@ for (const plugin of REQUIRED_PLUGINS) {
 
     if (!fs.existsSync(path.join(ROOT, ".obsidian/plugins", plugin, "manifest.json"))) {
         errors.push(`Plugin obbligatorio non incluso: ${plugin}`);
+    }
+}
+
+if (communityPlugins.includes("obsidian-tasks-plugin")) {
+    if (tasksConfig.globalFilter !== "#task") {
+        errors.push("Tasks: globalFilter deve restare #task per evitare task accidentali");
+    }
+    if (tasksConfig.loggingOptions?.minLevels?.["tasks.Cache"] !== "error") {
+        errors.push("Tasks: tasks.Cache deve loggare solo errori per evitare warning sui callout custom");
+    }
+}
+
+const hexCartographerMain = path.join(ROOT, ".obsidian/plugins/hex-cartographer/main.js");
+if (communityPlugins.includes("hex-cartographer") && fs.existsSync(hexCartographerMain)) {
+    const hexSource = fs.readFileSync(hexCartographerMain, "utf8");
+    if (!hexSource.includes("const activeFilePath = leaf.view.file.path")) {
+        errors.push("Hex Cartographer: manca patch difensiva activeFilePath su active-leaf-change");
     }
 }
 

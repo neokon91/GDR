@@ -2,5 +2,16 @@
   "globalFilter": "#task",
   "removeGlobalFilter": false,
   "globalQuery": "",
-  "taskFormat": "tasksPluginEmoji"
+  "taskFormat": "tasksPluginEmoji",
+  "loggingOptions": {
+    "minLevels": {
+      "": "error",
+      "tasks": "error",
+      "tasks.Cache": "error",
+      "tasks.Events": "error",
+      "tasks.File": "error",
+      "tasks.Query": "error",
+      "tasks.Task": "error"
+    }
+  }
 }
