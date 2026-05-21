@@ -4,6 +4,9 @@
 
 ### Aggiunto
 
+- M6 Continuity Engine: azioni Meta Bind per applicare conseguenze e propagare entita con stato esplicito, backlink, aggiornamenti richiesti, pressione e prossima mossa opzionale.
+- Viste runtime riusabili `renderContinuityQueue`, `renderPropagationTargets` e `renderContinuityGaps` in `z.engine/session_views.js`.
+- TemplateFactory genera schede con tabs logici e callout funzionali che contengono Meta Bind, Dataview, DataviewJS, riferimenti Bases ed Excalidraw.
 - Scenario demo completo [[Brumafonda Demo]] con mondo, campagna, cultura, fazione, culto, luogo, economia, mappa, dispensa, missione, sessione e conseguenza.
 - [[Dev/Smoke Demo Finale]] come checklist manuale di smoke visuale, player-safe e raccolta evidenze screenshot/GIF.
 - Gate statico M3 in `npm run check` per verificare presenza demo, recap pubblico, mappa/dispensa pubbliche, player-safe e controlli di [[Vista Giocatori]].
@@ -29,6 +32,9 @@
 
 ### Migliorato
 
+- [[Dev/NEXT_PHASE_HANDOFF]] chiarisce che M6 e completato e che la prossima fase deve concentrarsi su schede plugin-native, non su nuove dashboard.
+- [[Motore Mondo Vivo]] e [[Cosa Succede Fuori Scena]] mostrano coda di continuita, bersagli da verificare e buchi di propagazione senza duplicare dashboard.
+- [[Risorse/Post Sessione Guidato]] e [[Durante il Gioco]] collegano scelta, conseguenza, bersagli, prossima mossa e recap.
 - TemplateFactory ora valida simmetria tra profili runtime e frontmatter, campi core/plugin/dominio e copertura minima di fileClass/Bases.
 - I generatori principali usano profili YAML per prompt e frontmatter, lasciando al JS solo raccolta input, calcolo valori e collegamenti note.
 - Gli importer cartografici usano una base comune per parsing input, dry-run, frontmatter e scrittura note.
@@ -49,6 +55,7 @@
 
 ### Verificato
 
+- `npm run check` rieseguito dopo M6 Continuity Engine e rigenerazione TemplateFactory.
 - `npm run check`
 - `npm run check:smoke`
 - `npm run check:release`
