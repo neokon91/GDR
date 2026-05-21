@@ -1,44 +1,20 @@
 #!/usr/bin/env node
 
-const fs = require("fs");
 const path = require("path");
+const {
+    parseImportArgs,
+    readJsonInput,
+    renderFrontmatter,
+    slugify,
+    writeNotes,
+    yamlQuote
+} = require("./import_map_utils");
 
 const ROOT = process.cwd();
 const OUT_DIR = path.join(ROOT, "Mondi", "Luoghi");
 
 function usage() {
     console.log("Uso: npm run import:azgaar -- <file.geojson> [--world \"Nome Mondo\"] [--dry-run]");
-}
-
-function slugify(value) {
-    return String(value ?? "")
-        .normalize("NFD")
-        .replace(/[\u0300-\u036f]/g, "")
-        .replace(/[\\/:*?\"<>|]/g, "")
-        .replace(/\s+/g, " ")
-        .trim();
-}
-
-function yamlQuote(value) {
-    return JSON.stringify(String(value ?? ""));
-}
-
-function parseArgs(argv) {
-    const args = { input: "", world: "", dryRun: false };
-
-    for (let i = 0; i < argv.length; i++) {
-        const arg = argv[i];
-
-        if (arg === "--world") {
-            args.world = argv[++i] ?? "";
-        } else if (arg === "--dry-run") {
-            args.dryRun = true;
-        } else if (!args.input) {
-            args.input = arg;
-        }
-    }
-
-    return args;
 }
 
 function getName(feature, index) {
@@ -90,10 +66,6 @@ function bbox(feature) {
 function firstPoint(feature) {
     const point = flattenCoords(feature.geometry?.coordinates ?? [])[0];
     return point ? point.map(n => Number(n).toFixed(6)).join(", ") : "";
-}
-
-function renderFrontmatter(profileName, values) {
-    return `---\n${Object.entries(values).map(([key, value]) => `${key}: ${value}`).join("\n")}\n---\n`;
 }
 
 function noteBody({ feature, index, inputName, world }) {
@@ -149,7 +121,7 @@ ${JSON.stringify(props, null, 2)}
 }
 
 function main() {
-    const args = parseArgs(process.argv.slice(2));
+    const args = parseImportArgs(process.argv.slice(2));
 
     if (!args.input) {
         usage();
@@ -157,45 +129,33 @@ function main() {
         return;
     }
 
-    const inputPath = path.resolve(ROOT, args.input);
-    if (!fs.existsSync(inputPath)) {
-        console.error(`File non trovato: ${args.input}`);
+    let input;
+    try {
+        input = readJsonInput(ROOT, args.input);
+    } catch (error) {
+        console.error(error.message);
         process.exitCode = 1;
         return;
     }
 
-    const data = JSON.parse(fs.readFileSync(inputPath, "utf8"));
+    const data = input.data;
     if (data.type !== "FeatureCollection" || !Array.isArray(data.features)) {
         console.error("Formato non supportato: serve un GeoJSON FeatureCollection.");
         process.exitCode = 1;
         return;
     }
 
-    fs.mkdirSync(OUT_DIR, { recursive: true });
-
-    let created = 0;
-    let skipped = 0;
-
-    data.features.forEach((feature, index) => {
-        const name = slugify(getName(feature, index));
-        const filename = `${name}.md`;
-        const target = path.join(OUT_DIR, filename);
-
-        if (fs.existsSync(target)) {
-            skipped++;
-            return;
-        }
-
-        if (!args.dryRun) {
-            fs.writeFileSync(target, noteBody({
-                feature,
-                index,
-                inputName: path.basename(inputPath),
-                world: args.world
-            }));
-        }
-
-        created++;
+    const { created, skipped } = writeNotes({
+        dryRun: args.dryRun,
+        items: data.features,
+        outDir: OUT_DIR,
+        targetName: getName,
+        renderItem: (feature, index) => noteBody({
+            feature,
+            index,
+            inputName: input.inputName,
+            world: args.world
+        })
     });
 
     console.log(`${args.dryRun ? "Import simulato" : "Import completato"}: ${created} note, ${skipped} gia esistenti.`);

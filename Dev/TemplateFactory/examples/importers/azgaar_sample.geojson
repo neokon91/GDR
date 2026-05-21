@@ -1,0 +1,57 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 1,
+        "name": "Porto di Test",
+        "type": "town",
+        "layer": "burgs"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          12.345,
+          45.678
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": 2,
+        "name": "Marca di Test",
+        "type": "state",
+        "layer": "states"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              10,
+              40
+            ],
+            [
+              11,
+              40
+            ],
+            [
+              11,
+              41
+            ],
+            [
+              10,
+              41
+            ],
+            [
+              10,
+              40
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}

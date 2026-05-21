@@ -23,11 +23,17 @@
 - Cartella `Dev/` per concentrare roadmap, changelog, audit, release notes, smoke, sviluppo e documentazione tecnica.
 - `Dev/TemplateFactory/` con moduli YAML iniziali per generazione futura di template Jinja2 integrati con Templater e plugin.
 - [[Dev/Plugin Technical Reference]] con riferimenti tecnici a funzioni, sintassi e configurazioni dei plugin installati.
+- `import_watabou_city.js` e `import_watabou_dungeon.js` per importare JSON Watabou City/One Page Dungeon come bozze operative.
+- `check:importers` con fixture dry-run per Azgaar e Watabou.
+- `render:metadata` e `check:metadata` per generare e verificare anteprime fileClass/Bases da `frontmatter_profiles.yaml`.
 
 ### Migliorato
 
 - TemplateFactory ora valida simmetria tra profili runtime e frontmatter, campi core/plugin/dominio e copertura minima di fileClass/Bases.
 - I generatori principali usano profili YAML per prompt e frontmatter, lasciando al JS solo raccolta input, calcolo valori e collegamenti note.
+- Gli importer cartografici usano una base comune per parsing input, dry-run, frontmatter e scrittura note.
+- [[Risorse/Importare Mappe]] ora guida Azgaar, Watabou City e Watabou One Page Dungeon.
+- `frontmatter_profiles.yaml` ora e il centro leggibile anche per fileClass/Bases: le integrazioni dichiarano target e campi minimi, le anteprime metadata rendono il diff revisionabile.
 - TemplateFactory ora copre i template generati, router, wizard e azioni operative materializzate in `z.modelli`.
 - Calendarium e selezionabile per mondo/campagna con propagazione controllata verso `fc-calendar` nei template generati.
 - [[Risorse/Smistamento Bozze Generate]] ora gestisce il ciclo bozza -> aggancio -> smistamento -> canonizzazione.
@@ -46,6 +52,8 @@
 - `npm run check`
 - `npm run check:smoke`
 - `npm run check:release`
+- `npm run check:importers`
+- `npm run check:metadata`
 - `npm run release:clean`
 - Gate statico M3 demo/player-safe rieseguito il 2026-05-21.
 - `dist/vault-gdr-clean.zip` creato localmente come artefatto ignorato da Git.

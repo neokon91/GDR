@@ -38,6 +38,14 @@ REQUIRED_MODULES = {
     "runtime_profiles",
     "workflows",
 }
+CRITICAL_RENDERED_GENERATORS = {
+    "mappa": "z.automazioni/mappa.js",
+    "luogo": "z.automazioni/luogo.js",
+    "sessione": "z.automazioni/sessione.js",
+    "incontro": "z.automazioni/incontro.js",
+    "png": "z.automazioni/png.js",
+    "creatura": "z.automazioni/creatura.js",
+}
 
 def fail(message: str, errors: list[str]) -> None:
     errors.append(message)
@@ -230,6 +238,28 @@ def validate_frontmatter_migration_backlog(frontmatter: dict, errors: list[str])
         fail(f"frontmatter_profiles: migration_backlog obsoleto o gia migrato ({stale})", errors)
 
 
+def validate_critical_rendered_generators(modules: dict[str, dict], errors: list[str]) -> None:
+    frontmatter_profiles = modules["frontmatter_profiles"].get("profiles", {})
+    runtime_profiles = modules["runtime_profiles"].get("profiles", {})
+
+    for profile_id, rel_path in sorted(CRITICAL_RENDERED_GENERATORS.items()):
+        if profile_id not in frontmatter_profiles:
+            fail(f"M5.0: profilo frontmatter critico mancante ({profile_id})", errors)
+        if profile_id not in runtime_profiles:
+            fail(f"M5.0: profilo runtime critico mancante ({profile_id})", errors)
+
+        path = ROOT / rel_path
+        if not path.exists():
+            fail(f"M5.0: generatore critico mancante ({rel_path})", errors)
+            continue
+
+        source = path.read_text(encoding="utf-8")
+        if f'renderFrontmatter("{profile_id}"' not in source:
+            fail(f"M5.0: {rel_path} non usa renderFrontmatter(\"{profile_id}\")", errors)
+        if "return `---" in source:
+            fail(f"M5.0: {rel_path} contiene ancora frontmatter inline", errors)
+
+
 def yaml_document(path: Path) -> dict:
     text = path.read_text(encoding="utf-8")
     if text.startswith("---\n"):
@@ -382,6 +412,8 @@ def main() -> int:
         validate_profile_symmetry(modules, errors)
     if not errors:
         validate_frontmatter_profiles(modules, errors)
+    if not errors:
+        validate_critical_rendered_generators(modules, errors)
     if not errors:
         validate_rendering(modules, errors)
     if not errors:

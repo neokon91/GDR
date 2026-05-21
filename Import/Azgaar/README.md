@@ -14,4 +14,10 @@ Non usare `.map` come formato primario per il vault: e il salvataggio interno di
 npm run import:azgaar -- "Import/Azgaar/mappa.geojson" --world "Nome Mondo"
 ```
 
+Per controllare cosa verrebbe creato senza scrivere note:
+
+```bash
+npm run import:azgaar -- "Import/Azgaar/mappa.geojson" --world "Nome Mondo" --dry-run
+```
+
 Il comando crea bozze in `Mondi/Luoghi`. L'utente decide poi cosa rendere canonico.

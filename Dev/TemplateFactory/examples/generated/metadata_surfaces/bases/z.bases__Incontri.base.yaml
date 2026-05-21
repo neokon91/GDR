@@ -1,0 +1,33 @@
+generated_from: Dev/TemplateFactory/modules/frontmatter_profiles.yaml
+profile: incontro
+target: z.bases/Incontri.base
+required_fields:
+- nome
+- tipo
+- stato
+- luogo
+- pericolo
+- creature
+- personaggi
+- mappe
+profile_fields:
+- id
+- nome
+- categoria
+- fileClass
+- tipo
+- stato
+- mondo
+- luogo
+- creature
+- personaggi
+- mappe
+- audio
+- sessioni
+- pericolo
+- ricompense
+- pressione
+- prossima_mossa
+- round
+- condizioni
+- encounter_creatures

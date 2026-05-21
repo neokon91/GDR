@@ -14,6 +14,14 @@ Questa pagina serve a portare mappe esterne nel vault senza trasformarle automat
 
 La mappa esterna produce bozze. Il DM decide cosa tenere, collegare e rendere canonico.
 
+## Scegli Fonte
+
+| Fonte | Quando usarla | Comando |
+| --- | --- | --- |
+| Azgaar GeoJSON | Continenti, stati, regioni, burg e geografia ampia. | `npm run import:azgaar` |
+| Watabou City JSON | Una citta o insediamento dettagliato. | `npm run import:watabou:city` |
+| Watabou One Page Dungeon JSON | Un dungeon rapido da trasformare in stanze, incontri e indizi. | `npm run import:watabou:dungeon` |
+
 ## Azgaar Fantasy Map Generator
 
 Azgaar e ottimo per generare mondi, stati, culture, burg e geografia. Per il vault la strada consigliata e:
@@ -53,10 +61,46 @@ Esempio di dry-run:
 ```bash
 ```
 
+## Watabou City
+
+Watabou City e utile quando hai gia deciso che un insediamento conta davvero. Esporta il JSON della citta e, se vuoi, salva PNG/SVG nella stessa cartella come riferimento visuale.
+
+```bash
+npm run import:watabou:city -- "Import/Watabou/citta.json" --world "Nome Mondo"
+```
+
+Per provare senza creare note:
+
+```bash
+npm run import:watabou:city -- "Import/Watabou/citta.json" --world "Nome Mondo" --dry-run
+```
+
+Il comando crea:
+
+- una bozza luogo in `Mondi/Luoghi`;
+- una bozza mappa in `Risorse/Mappe`;
+- collegamenti reciproci tra citta e mappa.
+
+## Watabou One Page Dungeon
+
+Watabou Dungeon e utile per produrre una bozza tattica da rifinire prima del tavolo.
+
+```bash
+npm run import:watabou:dungeon -- "Import/Watabou/dungeon.json" --world "Nome Mondo"
+```
+
+Per provare senza creare note:
+
+```bash
+npm run import:watabou:dungeon -- "Import/Watabou/dungeon.json" --world "Nome Mondo" --dry-run
+```
+
+Il comando crea una bozza luogo dungeon con elenco stanze e una checklist minima per trasformarlo in incontri, trappole o indizi.
+
 ## Dopo L'Import
 
 1. Apri [[Mondi/Luoghi/Luoghi]].
-2. Controlla le note con `fonte: azgaar`.
+2. Controlla le note con `fonte: azgaar`, `fonte: watabou-city` o `fonte: watabou-dungeon`.
 3. Collega mondo, fazioni, culture e missioni.
 4. Porta a `pronto` solo cio che userai.
 5. Lascia il resto in `bozza` o archivialo.

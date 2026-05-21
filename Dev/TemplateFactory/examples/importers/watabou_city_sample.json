@@ -1,0 +1,27 @@
+{
+  "name": "Citta di Test",
+  "population": 2400,
+  "center": [
+    12.345,
+    45.678
+  ],
+  "wards": [
+    {
+      "name": "Porto Vecchio"
+    },
+    {
+      "name": "Mercato Alto"
+    }
+  ],
+  "buildings": [
+    {
+      "id": 1
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    }
+  ]
+}

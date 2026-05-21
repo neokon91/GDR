@@ -22,6 +22,11 @@ const RELEASE_VERIFICATION_MARKERS = [
     "`npm run release:clean` ha creato `dist/vault-gdr-clean.zip`",
     "`dist/` resta artefatto locale ignorato da Git"
 ];
+const RELEASE_IMPORT_DOC_MARKERS = [
+    "npm run import:azgaar",
+    "npm run import:watabou:city",
+    "npm run import:watabou:dungeon"
+];
 
 const errors = [];
 
@@ -45,6 +50,18 @@ for (const marker of RELEASE_VERIFICATION_MARKERS) {
     if (!cleanReleaseText.includes(marker)) {
         errors.push(`Dev/Release Pulita.md: verifica release mancante (${marker})`);
     }
+}
+
+const importGuideText = readTextRel(ROOT, "Risorse/Importare Mappe.md");
+for (const marker of RELEASE_IMPORT_DOC_MARKERS) {
+    if (!importGuideText.includes(marker)) {
+        errors.push(`Risorse/Importare Mappe.md: comando import mancante (${marker})`);
+    }
+}
+
+const releaseCleanText = readTextRel(ROOT, "z.automazioni/release_clean.js");
+if (!releaseCleanText.includes('"Import"')) {
+    errors.push("release_clean.js: la cartella Import deve restare fuori dalla release utente");
 }
 
 if (errors.length) {

@@ -238,6 +238,9 @@ field_catalog:
   - verita
   - versioni_alternative
   - vincoli
+  - distretti
+  - edifici
+  - stanze
   plugin_fields:
     calendarium:
     - fc-calendar
@@ -2938,3 +2941,148 @@ profiles:
       value: pubblico
     - key: canonico
       value: canonico
+  watabou_city_luogo:
+    sample_values: []
+    fields:
+    - key: id
+      value: id
+    - key: nome
+      value: nome
+    - key: categoria
+      default: luogo
+    - key: fileClass
+      default: luogo
+    - key: tipo
+      default: insediamento
+    - key: sottotipo
+      default: citta watabou
+    - key: stato
+      default: bozza
+    - key: canonico
+      default: false
+    - key: mondo
+      value: mondo
+    - key: fonte
+      default: watabou-city
+    - key: file_import
+      value: file_import
+    - key: sessioni
+      value: sessioni
+    - key: popolazione
+      value: popolazione
+    - key: distretti
+      value: distretti
+    - key: edifici
+      value: edifici
+    - key: coordinate
+      value: coordinate
+    - key: mappa
+      value: mappa
+    - key: mappe
+      value: mappe
+    - key: fazioni
+      default: []
+    - key: personaggi
+      default: []
+    - key: missioni
+      default: []
+    - key: segreti
+      default: []
+    - key: domande_aperte
+      default: []
+    - key: connessioni
+      value: connessioni
+  watabou_city_mappa:
+    sample_values: []
+    fields:
+    - key: id
+      value: id
+    - key: nome
+      value: nome
+    - key: categoria
+      default: mappa
+    - key: tipo
+      default: watabou city
+    - key: uso
+      default: mappa insediamento
+    - key: stato
+      default: bozza
+    - key: mondo
+      value: mondo
+    - key: luogo
+      value: luogo
+    - key: luoghi
+      value: luoghi
+    - key: fonte
+      default: watabou-city
+    - key: file_import
+      value: file_import
+    - key: sessioni
+      value: sessioni
+    - key: coordinate
+      value: coordinate
+    - key: layer_mappa
+      default: insediamenti
+    - key: tipo_mappa
+      default: citta
+    - key: pubblico
+      default: false
+    - key: player_safe
+      default: ''
+    - key: segreto
+      default: ''
+    - key: connessioni
+      value: connessioni
+  watabou_dungeon_luogo:
+    sample_values: []
+    fields:
+    - key: id
+      value: id
+    - key: nome
+      value: nome
+    - key: categoria
+      default: luogo
+    - key: fileClass
+      default: luogo
+    - key: tipo
+      default: dungeon
+    - key: sottotipo
+      default: dungeon watabou
+    - key: stato
+      default: bozza
+    - key: canonico
+      default: false
+    - key: mondo
+      value: mondo
+    - key: fonte
+      default: watabou-dungeon
+    - key: file_import
+      value: file_import
+    - key: sessioni
+      value: sessioni
+    - key: stanze
+      value: stanze
+    - key: pericolo
+      value: pericolo
+    - key: fazioni
+      default: []
+    - key: personaggi
+      default: []
+    - key: creature
+      default: []
+    - key: incontri
+      default: []
+    - key: missioni
+      default: []
+    - key: mappe
+      default: []
+    - key: segreti
+      default: []
+    - key: indizi
+      default: []
+    - key: ricompense
+      default: []
+    - key: domande_aperte
+      default: []
+    - key: connessioni
+      default: []

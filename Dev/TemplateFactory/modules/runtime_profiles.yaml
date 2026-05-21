@@ -528,3 +528,12 @@ profiles:
   world_entity:
     name_prompt: Nome
     prompts: {}
+  watabou_city_luogo:
+    name_prompt: Nome
+    prompts: {}
+  watabou_city_mappa:
+    name_prompt: Nome
+    prompts: {}
+  watabou_dungeon_luogo:
+    name_prompt: Nome
+    prompts: {}

@@ -4,12 +4,15 @@
   "private": true,
   "description": "Vault Obsidian per preparare e gestire campagne GDR fantasy in italiano.",
   "scripts": {
-    "check": "node z.automazioni/check_vault.js && npm run check:templates && npm run check:smoke && npm run check:release && npm run check:repo && npm run check:js && npm run check:diff",
+    "check": "node z.automazioni/check_vault.js && npm run check:templates && npm run check:metadata && npm run check:smoke && npm run check:release && npm run check:importers && npm run check:repo && npm run check:js && npm run check:diff",
     "check:layer": "node z.automazioni/check_vault.js",
     "check:templates": "python3 z.automazioni/check_template_factory.py",
+    "check:metadata": "python3 z.automazioni/render_metadata_surfaces.py --check",
     "check:smoke": "node z.automazioni/check_smoke.js",
     "check:release": "node z.automazioni/check_release.js",
+    "check:importers": "node z.automazioni/check_importers.js",
     "render:templates": "python3 z.automazioni/render_template_factory.py",
+    "render:metadata": "python3 z.automazioni/render_metadata_surfaces.py",
     "generate:templates": "python3 z.automazioni/render_template_factory.py --materialize",
     "audit:templates": "python3 z.automazioni/audit_template_migration.py",
     "check:repo": "node z.automazioni/repo_hygiene.js",
@@ -18,6 +21,8 @@
     "clean:repo": "node z.automazioni/repo_hygiene.js --fix",
     "import:srd": "node z.automazioni/import_srd.js",
     "import:azgaar": "node z.automazioni/import_azgaar_geojson.js",
+    "import:watabou:city": "node z.automazioni/import_watabou_city.js",
+    "import:watabou:dungeon": "node z.automazioni/import_watabou_dungeon.js",
     "release:clean": "node z.automazioni/release_clean.js"
   }
 }

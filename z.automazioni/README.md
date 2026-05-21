@@ -16,6 +16,8 @@ Script usati da Templater, dashboard e manutenzione del vault.
 | `repo_hygiene.js` | Controllo repository: artefatti locali, note di prova residue e script npm essenziali. |
 | `import_srd.js` | Rigenera il riferimento SRD in `SRD/`. |
 | `import_azgaar_geojson.js` | Importa mappe Azgaar come bozze operative. |
+| `import_watabou_city.js` | Importa JSON Watabou City come luogo + mappa bozza. |
+| `import_watabou_dungeon.js` | Importa JSON Watabou One Page Dungeon come luogo dungeon bozza. |
 | `release_clean.js` | Crea una copia consegnabile del vault. |
 
 ## Helper Condivisi
