@@ -1,9 +1,6 @@
-async function live_png(tp) {
-    return await tp.user.lore_capture(tp, {
-        tipo: "png improvvisato",
-        defaultName: "PNG improvvisato",
-        useActiveSession: true
-    });
-}
+const { liveCaptureShortcut } = require("./live_capture_shortcuts");
 
-module.exports = live_png;
+module.exports = liveCaptureShortcut({
+    tipo: "png improvvisato",
+    defaultName: "PNG improvvisato"
+});

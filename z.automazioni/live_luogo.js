@@ -1,9 +1,6 @@
-async function live_luogo(tp) {
-    return await tp.user.lore_capture(tp, {
-        tipo: "luogo improvvisato",
-        defaultName: "Luogo improvvisato",
-        useActiveSession: true
-    });
-}
+const { liveCaptureShortcut } = require("./live_capture_shortcuts");
 
-module.exports = live_luogo;
+module.exports = liveCaptureShortcut({
+    tipo: "luogo improvvisato",
+    defaultName: "Luogo improvvisato"
+});
