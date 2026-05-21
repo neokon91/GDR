@@ -16,6 +16,7 @@ const {
 const { validatePluginControls } = require("./checks/plugin_controls");
 const { validateRequiredFiles } = require("./checks/required_files");
 const { validateSyntaxControls } = require("./checks/syntax_controls");
+const { validateMarkdownLinks } = require("./checks/markdown_links");
 
 const ROOT = process.cwd();
 const IGNORED_DIRS = new Set([".git", "node_modules", "dist"]);
@@ -610,44 +611,16 @@ validateSyntaxControls({
     walk
 });
 
-const wikiLinkPattern = /!?\[\[([^\]|#]+)(?:#[^\]|]+)?(?:\|[^\]]*)?\]\]/g;
-for (const file of markdownFiles) {
-    const fileRel = rel(file);
-    const text = markdownText(file);
-    const taskLines = text.split(/\r?\n/).filter(line => /^\s*[-*]\s+\[[ xX]\]/.test(line));
-    const numberedCalloutTitle = text.match(/^> \[![^\]]+\] \d+\./m);
-
-    if (numberedCalloutTitle) {
-        errors.push(`${fileRel}: titolo callout numerato come lista; usare "Passo 1 -" o "Blocco 1 -" per evitare warning Tasks`);
-    }
-
-    for (const line of taskLines) {
-        if (line.includes("#task") && line.includes("🔁") && fileRel !== "z.bacheche/Manutenzione Vault.md") {
-            errors.push(`${fileRel}: task ricorrente fuori dalla bacheca manutenzione`);
-        }
-    }
-
-    let match;
-
-    while ((match = wikiLinkPattern.exec(text))) {
-        const target = match[1].trim();
-        if (!target || /^[a-z]+:\/\//i.test(target)) continue;
-
-        const normalized = target.replace(/\\/g, "/").replace(/\.(md|canvas|base)$/, "");
-        if (isGeneratedTemplatePath(normalized)) continue;
-        const basename = path.basename(normalized);
-
-        if (linkableByPath.has(normalized)) continue;
-
-        const matches = linkableByBasename.get(basename) ?? [];
-
-        if (!matches.length) {
-            errors.push(`${fileRel}: wikilink rotto ${match[0]}`);
-        } else if (matches.length > 1) {
-            warnings.push(`${fileRel}: wikilink ambiguo ${match[0]} -> ${matches.join(", ")}`);
-        }
-    }
-}
+validateMarkdownLinks({
+    errors,
+    isGeneratedTemplatePath,
+    linkableByBasename,
+    linkableByPath,
+    markdownFiles,
+    markdownText,
+    rel,
+    warnings
+});
 
 const templatePattern = /templateFile:\s*["']([^"']+)["']/g;
 function validateMetaBindTemplate(templateRef, context) {
