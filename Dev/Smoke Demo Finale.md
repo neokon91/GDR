@@ -10,26 +10,28 @@ stato: pronto
 
 Checklist manuale per validare la demo [[Brumafonda Demo]] in Obsidian dopo il gate statico `npm run check`.
 
+Questa nota vive solo nel repository sorgente. La release utente non contiene `Dev/`: quando testi `dist/vault-gdr-clean`, usa le pagine indicate nella colonna "Release", non i link interni a `Dev/`.
+
 ## Prima Di Aprire Obsidian
 
 - [x] `npm run check` passa senza errori.
-- [x] [[Dev/Demo Finale]] mostra tutte le note del nucleo demo.
+- [x] [[Dev/Demo Finale]] mostra tutte le note del nucleo demo nel repository sorgente.
 - [x] [[Vista Giocatori]] contiene stato portale, recap, mappa, mondo conosciuto, diario pubblico e controllo sicurezza.
 
 ## Percorso Visuale
 
 Apri queste pagine in ordine e verifica che non compaiano errori Dataview, JS Engine, Meta Bind o blocchi vuoti critici.
 
-| Passo | Pagina | Esito atteso |
-| --- | --- | --- |
-| 1 | [[Inizia Qui]] | I pulsanti principali sono visibili e non puntano a percorsi mancanti. |
-| 2 | [[Dev/Demo Finale]] | Il nucleo demo copre mondo, campagna, sessione, missione e conseguenza. |
-| 3 | [[Worldbuilder Dashboard]] | [[Brumafonda Demo]] e le entita collegate emergono nelle viste worldbuilding. |
-| 4 | [[Atlante del Mondo]] | [[Porto Di Brumafonda]] e [[Mappa Pubblica Di Brumafonda]] sono raggiungibili. |
-| 5 | [[Campagna da Ambientazione]] | [[Campagna - Sale Sotto La Nebbia]] collega mondo, luogo, fazione, missione e sessione. |
-| 6 | [[Durante il Gioco]] | La sessione demo non rompe il cockpit anche senza essere attiva. |
-| 7 | [[Vista Giocatori]] | Recap, mappa e dispensa pubblica sono leggibili senza campi DM. |
-| 8 | [[Risorse/Controllo Vault]] | Non compaiono blocchi critici legati alla demo. |
+| Passo | Repository | Release | Esito atteso |
+| --- | --- | --- | --- |
+| 1 | [[Inizia Qui]] | [[Inizia Qui]] | I pulsanti principali sono visibili e non puntano a percorsi mancanti. |
+| 2 | [[Dev/Demo Finale]] | [[Brumafonda Demo]] | Il nucleo demo copre mondo, campagna, sessione, missione e conseguenza. |
+| 3 | [[Worldbuilder Dashboard]] | [[Worldbuilder Dashboard]] | [[Brumafonda Demo]] e le entita collegate emergono nelle viste worldbuilding. |
+| 4 | [[Atlante del Mondo]] | [[Atlante del Mondo]] | [[Porto Di Brumafonda]] e [[Mappa Pubblica Di Brumafonda]] sono raggiungibili. |
+| 5 | [[Campagna da Ambientazione]] | [[Campagna da Ambientazione]] | [[Campagna - Sale Sotto La Nebbia]] collega mondo, luogo, fazione, missione e sessione. |
+| 6 | [[Durante il Gioco]] | [[Durante il Gioco]] | La sessione demo non rompe il cockpit anche senza essere attiva. |
+| 7 | [[Vista Giocatori]] | [[Vista Giocatori]] | Recap, mappa e dispensa pubblica sono leggibili senza campi DM. |
+| 8 | [[Risorse/Controllo Vault]] | [[Risorse/Controllo Vault]] | Non compaiono blocchi critici legati alla demo. |
 
 ## Controllo Player-Safe
 
@@ -42,7 +44,7 @@ Apri queste pagine in ordine e verifica che non compaiano errori Dataview, JS En
 ## Evidenze Release
 
 - [ ] Screenshot `Inizia Qui`.
-- [ ] Screenshot [[Dev/Demo Finale]].
+- [ ] Screenshot [[Brumafonda Demo]] nella release utente o [[Dev/Demo Finale]] nel repository sorgente.
 - [ ] Screenshot [[Vista Giocatori]].
 - [ ] Screenshot [[Atlante del Mondo]].
 - [ ] Screenshot [[Risorse/Controllo Vault]].
