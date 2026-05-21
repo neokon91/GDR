@@ -15,6 +15,7 @@ const {
 } = require("./node_utils");
 const { validatePluginControls } = require("./checks/plugin_controls");
 const { validateRequiredFiles } = require("./checks/required_files");
+const { validateSyntaxControls } = require("./checks/syntax_controls");
 
 const ROOT = process.cwd();
 const IGNORED_DIRS = new Set([".git", "node_modules", "dist"]);
@@ -600,37 +601,14 @@ validatePluginControls({
     tasksConfig
 });
 
-for (const file of walk(ROOT, file => file.endsWith(".base"))) {
-    const source = fs.readFileSync(file, "utf8");
-    if (/[^\n]properties:/.test(source)) {
-        errors.push(`${rel(file)}: properties incollato alla riga precedente`);
-    }
-}
-
-for (const file of walk(ROOT, file => /^(z\.automazioni|z\.engine)\//.test(rel(file)) && file.endsWith(".js"))) {
-    try {
-        const source = fs.readFileSync(file, "utf8").replace(/^#!.*\n/, "");
-        new Function(source);
-    } catch (error) {
-        errors.push(`${rel(file)}: JavaScript non parsabile (${error.message})`);
-    }
-}
-
-for (const snippet of REQUIRED_SNIPPETS) {
-    const snippetPath = repoPath(snippet);
-    if (!fs.existsSync(snippetPath)) {
-        errors.push(`Snippet CSS obbligatorio mancante: ${snippet}`);
-        continue;
-    }
-
-    const css = fs.readFileSync(snippetPath, "utf8");
-    const openBraces = (css.match(/{/g) ?? []).length;
-    const closeBraces = (css.match(/}/g) ?? []).length;
-
-    if (openBraces !== closeBraces) {
-        errors.push(`${snippet}: parentesi graffe CSS non bilanciate (${openBraces} aperte, ${closeBraces} chiuse)`);
-    }
-}
+validateSyntaxControls({
+    errors,
+    rel,
+    repoPath,
+    requiredSnippets: REQUIRED_SNIPPETS,
+    root: ROOT,
+    walk
+});
 
 const wikiLinkPattern = /!?\[\[([^\]|#]+)(?:#[^\]|]+)?(?:\|[^\]]*)?\]\]/g;
 for (const file of markdownFiles) {
