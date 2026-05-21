@@ -28,6 +28,11 @@ const PUBLIC_DEMO_FILES = [
 ];
 
 const privatePublicPattern = /\b(dm|segreto|segreti|nascost[oaie]?|verita|verità|prossima mossa|mosse segrete|retroscena|non rivelare)\b/i;
+const PRIVATE_PUBLIC_FIELDS = ["segreti", "prossima_mossa", "mosse_segrete", "verita_nascosta"];
+
+function frontmatterRel(relPath) {
+    return existsRel(ROOT, relPath) ? parseFrontmatter(readTextRel(ROOT, relPath)) : null;
+}
 
 for (const relPath of DEMO_REQUIRED_FILES) {
     if (!existsRel(ROOT, relPath)) {
@@ -50,8 +55,8 @@ for (const marker of ["renderPlayerPortalStatus", "renderPlayerRecap", "renderPu
 }
 
 const sessionPath = "Mondi/Sessioni/2026-05-28 - La Campana Nella Nebbia.md";
-if (existsRel(ROOT, sessionPath)) {
-    const session = parseFrontmatter(readTextRel(ROOT, sessionPath));
+const session = frontmatterRel(sessionPath);
+if (session) {
     if (session.pubblico !== true) errors.push("Smoke demo: la sessione demo deve avere pubblico: true");
     if (!hasValue(session.recap_pubblico)) errors.push("Smoke demo: la sessione demo non ha recap_pubblico");
     if (privatePublicPattern.test(String(session.recap_pubblico))) {
@@ -63,8 +68,8 @@ if (existsRel(ROOT, sessionPath)) {
 }
 
 const mapPath = "Risorse/Mappe/Mappa Pubblica Di Brumafonda.md";
-if (existsRel(ROOT, mapPath)) {
-    const map = parseFrontmatter(readTextRel(ROOT, mapPath));
+const map = frontmatterRel(mapPath);
+if (map) {
     if (map.pubblico !== true) errors.push("Smoke demo: la mappa demo deve avere pubblico: true");
     if (!hasAny(map, ["player_safe", "cosa_mostrare", "luoghi", "luogo"])) {
         errors.push("Smoke demo: la mappa pubblica non ha testo o luoghi player-safe");
@@ -72,8 +77,8 @@ if (existsRel(ROOT, mapPath)) {
 }
 
 const handoutPath = "Mondi/Dispense/Avviso Della Dogana Di Brumafonda.md";
-if (existsRel(ROOT, handoutPath)) {
-    const handout = parseFrontmatter(readTextRel(ROOT, handoutPath));
+const handout = frontmatterRel(handoutPath);
+if (handout) {
     if (handout.pubblico !== true || handout.stato !== "pronto") {
         errors.push("Smoke demo: la dispensa demo deve essere pronta e pubblica");
     }
@@ -83,9 +88,9 @@ if (existsRel(ROOT, handoutPath)) {
 }
 
 for (const relPath of PUBLIC_DEMO_FILES) {
-    if (!existsRel(ROOT, relPath)) continue;
-    const frontmatter = parseFrontmatter(readTextRel(ROOT, relPath));
-    for (const privateField of ["segreti", "prossima_mossa", "mosse_segrete", "verita_nascosta"]) {
+    const frontmatter = frontmatterRel(relPath);
+    if (!frontmatter) continue;
+    for (const privateField of PRIVATE_PUBLIC_FIELDS) {
         if (hasValue(frontmatter[privateField])) {
             errors.push(`Smoke demo: file pubblico con campo DM ${privateField}: ${relPath}`);
         }
