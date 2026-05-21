@@ -37,6 +37,8 @@ properties:
     displayName: Missioni
   relazioni:
     displayName: Relazioni
+  connessioni:
+    displayName: Connessioni
   propaga_a:
     displayName: Propaga a
 views:

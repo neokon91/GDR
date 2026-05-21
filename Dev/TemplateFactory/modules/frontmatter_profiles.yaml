@@ -85,8 +85,51 @@ field_catalog:
       - mappa
       - layer_mappa
       - tipo_mappa
+migration_backlog:
+  - z.automazioni/adventure_shortcuts.js
+  - z.automazioni/arco_da_conflitto.js
+  - z.automazioni/campagna.js
+  - z.automazioni/campagna_da_regione.js
+  - z.automazioni/compendium_mondo.js
+  - z.automazioni/conflitto.js
+  - z.automazioni/cosmologia.js
+  - z.automazioni/creatura.js
+  - z.automazioni/culto.js
+  - z.automazioni/dispensa.js
+  - z.automazioni/era_storica.js
+  - z.automazioni/evento_storico.js
+  - z.automazioni/import_azgaar_geojson.js
+  - z.automazioni/incontro.js
+  - z.automazioni/lingua.js
+  - z.automazioni/live_nota.js
+  - z.automazioni/lore_capture.js
+  - z.automazioni/mappa.js
+  - z.automazioni/mondo.js
+  - z.automazioni/nota_rapida.js
+  - z.automazioni/nuovo_mondo_homebrew.js
+  - z.automazioni/oggetto_magico.js
+  - z.automazioni/personaggio.js
+  - z.automazioni/pg.js
+  - z.automazioni/png.js
+  - z.automazioni/ricorrenza_calendario.js
+  - z.automazioni/risorsa_mondo.js
+  - z.automazioni/sessione.js
+  - z.automazioni/world_entity.js
 profiles:
   fazione:
+    integrations:
+      fileclass: z.fileclass/fazione.md
+      bases:
+        - z.bases/Fazioni.base
+      required_fields:
+        - nome
+        - tipo
+        - stato
+        - mondo
+        - pressione
+        - prossima_mossa
+        - obiettivo
+        - connessioni
     sample_values:
       - id
       - nome
@@ -186,6 +229,19 @@ profiles:
       - key: connessioni
         value: connessioni
   luogo:
+    integrations:
+      fileclass: z.fileclass/luogo.md
+      bases:
+        - z.bases/Luoghi.base
+      required_fields:
+        - nome
+        - tipo
+        - stato
+        - mondo
+        - luogo_padre
+        - pericolo
+        - pressione
+        - connessioni
     sample_values:
       - id
       - nome
@@ -309,6 +365,21 @@ profiles:
       - key: collegamenti_mancanti
         default: []
   missione:
+    integrations:
+      fileclass: z.fileclass/missione.md
+      bases:
+        - z.bases/Missioni.base
+      required_fields:
+        - nome
+        - tipo
+        - stato
+        - mondo
+        - committente
+        - pressione
+        - prossima_mossa
+        - scadenza_mondo
+        - fc-calendar
+        - connessioni
     sample_values:
       - id
       - nome
@@ -395,6 +466,20 @@ profiles:
         default: ""
         plugin: calendarium
   tracciato:
+    integrations:
+      fileclass: z.fileclass/tracciato.md
+      required_fields:
+        - nome
+        - tipo
+        - stato
+        - mondo
+        - progress_value
+        - progress_max
+        - pressione
+        - innesco
+        - posta
+        - prossima_mossa
+        - connessioni
     sample_values:
       - id
       - nome
@@ -472,6 +557,22 @@ profiles:
       - key: conseguenze
         default: []
   relazione:
+    integrations:
+      fileclass: z.fileclass/relazione.md
+      bases:
+        - z.bases/Worldbuilding.base
+      required_fields:
+        - nome
+        - tipo
+        - stato
+        - mondo
+        - soggetti
+        - intensita
+        - pressione
+        - origine
+        - posta
+        - prossima_mossa
+        - connessioni
     sample_values:
       - id
       - nome
@@ -547,6 +648,16 @@ profiles:
       - key: segreti
         default: []
   oggetto:
+    integrations:
+      required_fields:
+        - nome
+        - tipo
+        - stato
+        - mondo
+        - luogo
+        - pressione
+        - prossima_mossa
+        - connessioni
     sample_values:
       - id
       - nome
@@ -588,6 +699,20 @@ profiles:
       - key: sessioni
         value: sessioni
   mercato:
+    integrations:
+      fileclass: z.fileclass/mercato.md
+      bases:
+        - z.bases/Economia.base
+      required_fields:
+        - nome
+        - mondo
+        - luogo
+        - fazioni_controllanti
+        - risorse
+        - rischi
+        - pressione
+        - prossima_mossa
+        - connessioni
     sample_values:
       - id
       - nome
@@ -668,6 +793,23 @@ profiles:
       - key: domande_aperte
         default: []
   rotta:
+    integrations:
+      fileclass: z.fileclass/rotta.md
+      bases:
+        - z.bases/Economia.base
+      required_fields:
+        - nome
+        - stato_rotta
+        - mondo
+        - partenza
+        - arrivo
+        - regioni
+        - fazioni_controllanti
+        - risorse_trasportate
+        - rischi
+        - pedaggi
+        - prossima_mossa
+        - connessioni
     sample_values:
       - id
       - nome
@@ -754,6 +896,20 @@ profiles:
       - key: domande_aperte
         default: []
   cultura:
+    integrations:
+      bases:
+        - z.bases/Worldbuilding.base
+      required_fields:
+        - nome
+        - categoria
+        - tipo
+        - stato
+        - mondo
+        - gancio
+        - uso_al_tavolo
+        - player_safe
+        - connessioni
+        - prossima_mossa
     sample_values:
       - id
       - nome

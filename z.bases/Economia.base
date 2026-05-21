@@ -24,6 +24,8 @@ properties:
     displayName: Luoghi
   luogo:
     displayName: Luogo
+  regioni:
+    displayName: Regioni
   fazioni_controllanti:
     displayName: Fazioni controllanti
   risorse:
@@ -48,6 +50,8 @@ properties:
     displayName: Pedaggi
   rischi:
     displayName: Rischi
+  connessioni:
+    displayName: Connessioni
 views:
   - type: table
     name: Pressioni economiche

@@ -13,6 +13,7 @@ sys.dont_write_bytecode = True
 from template_factory_utils import (
     FACTORY,
     MODULES,
+    ROOT,
     build_jinja_env,
     load_modules,
     render_context,
@@ -146,6 +147,16 @@ def validate_runtime_profiles(modules: dict[str, dict], errors: list[str]) -> No
             fail(f"runtime_profiles.{profile_id}: type_prompt mancante con type_options presenti", errors)
 
 
+def validate_profile_symmetry(modules: dict[str, dict], errors: list[str]) -> None:
+    runtime_profiles = set(modules["runtime_profiles"].get("profiles", {}))
+    frontmatter_profiles = set(modules["frontmatter_profiles"].get("profiles", {}))
+
+    for profile in sorted(runtime_profiles - frontmatter_profiles):
+        fail(f"runtime_profiles.{profile}: profilo frontmatter mancante", errors)
+    for profile in sorted(frontmatter_profiles - runtime_profiles):
+        fail(f"frontmatter_profiles.{profile}: profilo runtime mancante", errors)
+
+
 def validate_frontmatter_profiles(modules: dict[str, dict], errors: list[str]) -> None:
     frontmatter = modules["frontmatter_profiles"]
     profiles = frontmatter.get("profiles", {})
@@ -197,6 +208,93 @@ def validate_frontmatter_profiles(modules: dict[str, dict], errors: list[str]) -
             fail(f"frontmatter_profiles.{profile_id}: sample value non usato ({missing})", errors)
 
         validate_frontmatter_sample(profile_id, profile, errors)
+        validate_frontmatter_integrations(profile_id, profile, seen, errors)
+
+    validate_frontmatter_migration_backlog(frontmatter, errors)
+
+
+def validate_frontmatter_migration_backlog(frontmatter: dict, errors: list[str]) -> None:
+    backlog = {str(path) for path in frontmatter.get("migration_backlog", []) or []}
+    inline_generators: set[str] = set()
+
+    for path in sorted((ROOT / "z.automazioni").glob("*.js")):
+        rel_path = str(path.relative_to(ROOT))
+        source = path.read_text(encoding="utf-8")
+        if "return `---" in source and "renderFrontmatter(" not in source:
+            inline_generators.add(rel_path)
+
+    for missing in sorted(inline_generators - backlog):
+        fail(f"frontmatter_profiles: generatore inline non censito nel migration_backlog ({missing})", errors)
+
+    for stale in sorted(backlog - inline_generators):
+        fail(f"frontmatter_profiles: migration_backlog obsoleto o gia migrato ({stale})", errors)
+
+
+def yaml_document(path: Path) -> dict:
+    text = path.read_text(encoding="utf-8")
+    if text.startswith("---\n"):
+        end = text.find("\n---", 4)
+        if end != -1:
+            text = text[4:end]
+    data = yaml.safe_load(text) or {}
+    return data if isinstance(data, dict) else {}
+
+
+def fileclass_fields(path: Path) -> set[str]:
+    data = yaml_document(path)
+    fields = {str(field) for field in data.get("fieldsOrder", []) or []}
+    for field in data.get("fields", []) or []:
+        if isinstance(field, dict) and field.get("name"):
+            fields.add(str(field["name"]))
+    return fields
+
+
+def base_fields(path: Path) -> set[str]:
+    data = yaml_document(path)
+    fields: set[str] = set()
+
+    for key in (data.get("properties", {}) or {}):
+        key = str(key)
+        if key.startswith("formula."):
+            continue
+        fields.add(key.removeprefix("note."))
+
+    for view in data.get("views", []) or []:
+        if not isinstance(view, dict):
+            continue
+        for field in view.get("order", []) or []:
+            field = str(field)
+            if not field.startswith("formula."):
+                fields.add(field.removeprefix("note."))
+
+    return fields
+
+
+def validate_frontmatter_integrations(profile_id: str, profile: dict, profile_fields: set[str], errors: list[str]) -> None:
+    integrations = profile.get("integrations", {}) or {}
+    required_fields = set(integrations.get("required_fields", []) or [])
+
+    for field in sorted(required_fields - profile_fields):
+        fail(f"frontmatter_profiles.{profile_id}: required_field non presente nel profilo ({field})", errors)
+
+    fileclass = integrations.get("fileclass")
+    if fileclass:
+        path = ROOT / str(fileclass)
+        if not path.exists():
+            fail(f"frontmatter_profiles.{profile_id}: fileClass mancante {fileclass}", errors)
+        else:
+            available = fileclass_fields(path)
+            for field in sorted(required_fields - available):
+                fail(f"frontmatter_profiles.{profile_id}: {fileclass} non espone required_field {field}", errors)
+
+    for base in integrations.get("bases", []) or []:
+        path = ROOT / str(base)
+        if not path.exists():
+            fail(f"frontmatter_profiles.{profile_id}: Base mancante {base}", errors)
+            continue
+        available = base_fields(path)
+        for field in sorted(required_fields - available):
+            fail(f"frontmatter_profiles.{profile_id}: {base} non espone required_field {field}", errors)
 
 
 def render_frontmatter_sample(profile: dict) -> str:
@@ -280,6 +378,8 @@ def main() -> int:
         validate_blueprints(modules, errors)
     if not errors:
         validate_runtime_profiles(modules, errors)
+    if not errors:
+        validate_profile_symmetry(modules, errors)
     if not errors:
         validate_frontmatter_profiles(modules, errors)
     if not errors:

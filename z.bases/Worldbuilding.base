@@ -47,6 +47,14 @@ properties:
     displayName: Prossima mossa
   connessioni:
     displayName: Connessioni
+  soggetti:
+    displayName: Soggetti
+  intensita:
+    displayName: Intensita
+  origine:
+    displayName: Origine
+  posta:
+    displayName: Posta
   luoghi:
     displayName: Luoghi
   fazioni:

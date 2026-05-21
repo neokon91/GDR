@@ -26,6 +26,8 @@
 
 ### Migliorato
 
+- TemplateFactory ora valida simmetria tra profili runtime e frontmatter, campi core/plugin/dominio e copertura minima di fileClass/Bases.
+- I generatori principali usano profili YAML per prompt e frontmatter, lasciando al JS solo raccolta input, calcolo valori e collegamenti note.
 - TemplateFactory ora copre i template generati, router, wizard e azioni operative materializzate in `z.modelli`.
 - Calendarium e selezionabile per mondo/campagna con propagazione controllata verso `fc-calendar` nei template generati.
 - [[Risorse/Smistamento Bozze Generate]] ora gestisce il ciclo bozza -> aggancio -> smistamento -> canonizzazione.

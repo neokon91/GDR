@@ -23,6 +23,10 @@ properties:
     displayName: Scadenza
   prossima_mossa:
     displayName: Prossima mossa
+  fc-calendar:
+    displayName: Calendario
+  connessioni:
+    displayName: Connessioni
   campagna:
     displayName: Campagna
   campagne:

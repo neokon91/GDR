@@ -31,6 +31,8 @@ properties:
     displayName: Promessa al tavolo
   prossima_mossa:
     displayName: Prossima mossa
+  connessioni:
+    displayName: Connessioni
 views:
   - type: table
     name: Attivi
