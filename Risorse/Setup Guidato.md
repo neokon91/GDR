@@ -32,11 +32,13 @@ tab: Apri
 > [!scena] Percorso Utente
 > `BUTTON[inizia-qui-inizia-qui]`
 >
-> `BUTTON[prima-sessione-in-15-minuti-risorse-prima-sessione-in-15-minuti]`
+> `BUTTON[nuovo-mondo-homebrew]`
 >
-> `BUTTON[dm-dashboard-1-dm-dashboard]`
+> `BUTTON[preparazione-sessione-risorse-preparazione-sessione]`
 >
 > `BUTTON[durante-il-gioco-durante-il-gioco]`
+>
+> `BUTTON[fuori-scena-hub-cosa-succede-fuori-scena-cosa-succede-fuori-scena]`
 
 tab: Se Non Va
 
@@ -85,13 +87,11 @@ dv.table(
 ## Se Tutto E Pronto
 
 1. Apri [[Inizia Qui]].
-2. Apri [[Risorse/Prima Sessione In 15 Minuti]] se vuoi giocare subito.
-3. Apri [[Risorse/Creazione Guidata Entità]] se vuoi capire quali campi compilare subito.
-5. Apri [[1. DM Dashboard]] per preparare.
-6. Apri [[Hub/Party Control]] per controllare PG, HP, obiettivi, inventario e flags.
-7. Apri [[Durante il Gioco]] quando sei al tavolo.
-8. Apri [[Hub/Vista Giocatori]] per controllare cosa puoi mostrare o pubblicare.
-9. Apri [[Cosa Succede Fuori Scena]] dopo la sessione per scegliere le reazioni del mondo.
+2. Crea o apri un mondo.
+3. Prepara una sessione collegata al mondo.
+4. Apri [[Durante il Gioco]] quando sei al tavolo.
+5. Apri [[Hub/Cosa Succede Fuori Scena]] dopo la sessione per scegliere le reazioni del mondo.
+6. Apri [[Hub/Vista Giocatori]] solo quando devi mostrare materiale ai giocatori.
 
 ## Se Qualcosa E Da Controllare
 
@@ -110,7 +110,7 @@ dv.table(
 | Il party mostra PG e HP | [[Hub/Party Control]] |
 | Il portale giocatori non espone campi DM | [[Hub/Vista Giocatori]] |
 | Il report qualita mostra copertura e buchi | [[Risorse/Quality Report]] |
-| Il mondo vivo mostra pressioni e prossime mosse | [[Cosa Succede Fuori Scena]] |
+| Il mondo vivo mostra pressioni e prossime mosse | [[Hub/Cosa Succede Fuori Scena]] |
 | Il calendario mostra date o cose da calendarizzare | [[Mondi/Calendario]] |
 | I tiri rapidi sono leggibili | [[Risorse/Tabelle/Tabelle]] |
 | Le schede creatura appaiono | [[Mondi/Creature/Creature]] |

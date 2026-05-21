@@ -10,16 +10,20 @@ stato: sospeso
 
 La demo finale non vive più come note sorgente mantenute a mano.
 
-Regola attiva: la demo va generata solo a fine ciclo, da script, dopo che template, runtime, fileClass, controlli e viste operative sono stabili. Fino ad allora `npm run check` deve verificare il prodotto senza pretendere contenuti demo.
+Regola attiva: la demo finale resta l'ultima cosa. Va generata solo a fine ciclo, da script, dopo che template, runtime, fileClass, controlli e viste operative sono stabili. Fino ad allora `npm run check` deve verificare il prodotto senza pretendere contenuti demo.
+
+La fixture M11 generata da `npm run generate:demo-fixture` non e la demo finale: serve solo a provare la catena tecnica scelta -> conseguenza -> propagazione -> materiale D&D collegato al mondo.
 
 ## Stato
 
 - [x] Demo sorgente rimossa dal vault.
 - [x] Gate statico convertito su onboarding, vista giocatori, live e post-sessione.
 - [x] Le note demo manuali storiche sono vietate dal controllo vault.
-- [ ] Creare uno script dedicato di generazione demo finale.
-- [ ] Generare scenario demo coerente con TemplateFactory e runtime M11.
-- [ ] Eseguire smoke visuale sulla release generata.
+- [x] Script di fixture M11 tecnica disponibile: `z.automazioni/generate_demo_fixture.js`.
+- [x] Gate M11 tecnico disponibile: `npm run check:m11`.
+- [ ] Creare o promuovere lo script dedicato di generazione demo finale solo nella fase finale.
+- [ ] Generare scenario demo finale coerente con TemplateFactory e runtime M11.
+- [ ] Eseguire smoke visuale sulla release generata come ultimo passaggio pre-release.
 
 ## Regola Per La Fase Finale
 
@@ -39,6 +43,19 @@ Lo script dovrà produrre almeno:
 - oggetto o ricompensa;
 - mappa/dispensa player-safe;
 - conseguenza propagabile.
+
+## Regola Per M11 Prima Della Demo
+
+Prima della demo finale e ammessa solo una fixture tecnica generata in `dist/` e ignorata da Git.
+
+La fixture deve dimostrare:
+
+- catena scelta -> conseguenza -> `entita_impattate` -> `propagazione_stato`;
+- almeno un incontro con `encounter_creatures`;
+- almeno una creatura con habitat o luogo e aggancio a missione/fazione/sessione;
+- almeno un oggetto o ricompensa con uso narrativo e bersagli di propagazione.
+
+Non va trasformata in contenuto sorgente del vault.
 
 ## Smoke Senza Demo
 

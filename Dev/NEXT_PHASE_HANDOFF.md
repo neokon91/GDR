@@ -29,6 +29,12 @@ Completato:
 - disciplina zero-warning: `npm run check` deve fallire se `check_vault.js` produce warning.
 - M8/M9 hanno chiuso release evidence, sicurezza player-facing, percorso minimo di [[Inizia Qui]], proprietà collassate su dashboard/indici e gate anti-segreti globale.
 - M10 ha consolidato il contratto architetturale in [[Dev/README]], reso [[Dev/README]] indice canonico di sviluppo, dichiarato `continuity_rules` in `workflows.yaml` e separato recap pubblico da pubblicazione della sessione.
+- M11 ha portato il contratto dichiarativo oltre missione/tracciato/fazione/luogo: `entity_depth.yaml`, `frontmatter_profiles.yaml`, `runtime_profiles.yaml`, `sections.yaml`, `tabs.yaml`, `metabind_inputs.yaml`, `dataview_blocks.yaml` e `workflows.yaml` coprono anche incontro, creatura e oggetto come materiale D&D 5.5 collegato al mondo.
+- `z.fileclass/incontro.md` e `z.bases/Incontri.base` espongono i campi M11 necessari a gancio, uso al tavolo, ricompense, sessioni, prossima mossa, `entita_impattate` e `propaga_a`.
+- `z.engine/session_views.js` legge la pipeline D&D 5.5 tramite `renderDnd55MaterialPipeline` e `renderCombatReadiness`; la fixture M11 resta prova tecnica, non demo finale.
+- Taglio runtime avviato: mappe in `z.engine/session_maps.js`, pipeline D&D in `z.engine/session_dnd.js`, player view in `z.engine/session_player.js`, bridge pubblico ancora in `z.engine/session_views.js`.
+- Valore plugin reso operativo: [[Risorse/Mappe/Mappe]] mostra la prossima azione mappa per la sessione, [[Risorse/Task DM]] separa preparazione e post-sessione dalle bacheche Kanban.
+- Calendarium, Media Extended e Fantasy Content Generator hanno viste operative: [[Mondi/Calendario]] mostra la prossima scadenza narrativa, [[Risorse/Media Scene]] mostra media per sessione attiva, [[Risorse/Smistamento Bozze Generate]] mostra la prossima bozza da decidere.
 
 Warning noti: **nessuno**.
 
@@ -60,11 +66,11 @@ Scopo: rendere verificabile la catena scelta dei giocatori -> evento -> consegue
 
 Priorita:
 
-1. Chiudere il contratto YAML end-to-end per missione, tracciato, fazione e luogo.
-2. Collegare creature, incontri, oggetti e ricompense D&D 5.5 a mondo, missione, luogo, fazione e sessione.
-3. Estendere `workflows.yaml` e runtime esistente per propagazioni verificabili e non hardcoded.
-4. Aggiornare `Stato del Mondo`, `Cosa Succede Fuori Scena`, `Preparazione Sessione`, `Durante il Gioco` e `Post Sessione Guidato` senza creare nuove dashboard.
-5. Aggiungere gate che blocchino entita con conseguenze senza bersagli, stato propagazione incoerente o materiale D&D isolato dal mondo.
+1. Validare M11 su fixture tecnica generata in `dist/`, senza anticipare la demo finale.
+2. Aggiornare `Stato del Mondo`, `Cosa Succede Fuori Scena`, `Preparazione Sessione`, `Durante il Gioco` e `Post Sessione Guidato` solo dove il contratto M11 non e ancora visibile.
+3. Trasformare il riesame plugin in interventi mirati solo dove accelera Crea -> Prepara -> Gioca -> Aggiorna.
+4. Verificare visualmente il primo utilizzo su [[Inizia Qui]] e [[Risorse/Setup Guidato]] senza generare demo finale.
+5. Proseguire il taglio di `z.engine/session_views.js` su sessione e continuita prima di aggiungere nuove viste.
 
 ## Vincoli Tecnici
 
@@ -75,6 +81,7 @@ Priorita:
 - D&D 5.5/SRD resta il profilo regolamentare principale.
 - Le nuove funzioni devono produrre impatto sistemico sul mondo.
 - `npm run check` deve restare senza warning.
+- La demo finale e lo smoke visuale su release generata restano l'ultimo passaggio pre-release.
 
 ## Non Fare Nella Prossima Fase
 

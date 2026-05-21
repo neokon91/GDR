@@ -813,6 +813,13 @@ profiles:
       - creature
       - personaggi
       - mappe
+      - sessioni
+      - ricompense
+      - gancio
+      - uso_al_tavolo
+      - prossima_mossa
+      - entita_impattate
+      - propaga_a
     sample_values:
     - id
     - nome
@@ -869,6 +876,12 @@ profiles:
       default: []
     - key: encounter_creatures
       value: encounter_creatures
+    - key: entita_impattate
+      value: entita_impattate
+    - key: propaga_a
+      value: propaga_a
+    - key: conseguenze
+      default: []
     - key: fonti
       value: fonti
     - key: riferimenti_srd
@@ -1228,9 +1241,13 @@ profiles:
       - stato
       - mondo
       - luogo
+      - missioni
+      - sessioni
       - pressione
       - prossima_mossa
       - connessioni
+      - entita_impattate
+      - propaga_a
     sample_values:
     - id
     - nome
@@ -1271,6 +1288,16 @@ profiles:
       value: connessioni
     - key: sessioni
       value: sessioni
+    - key: missioni
+      value: missioni
+    - key: fazioni
+      value: fazioni
+    - key: entita_impattate
+      value: entita_impattate
+    - key: propaga_a
+      value: propaga_a
+    - key: conseguenze
+      default: []
   mercato:
     integrations:
       fileclass: z.fileclass/mercato.md
@@ -1969,6 +1996,21 @@ profiles:
     - key: domande_aperte
       value: domande_aperte
   creatura:
+    integrations:
+      required_fields:
+      - nome
+      - categoria
+      - mondo
+      - habitat
+      - luoghi
+      - fazioni
+      - missioni
+      - gancio
+      - uso_al_tavolo
+      - player_safe
+      - prossima_mossa
+      - entita_impattate
+      - propaga_a
     sample_values: []
     fields:
     - key: id
@@ -2041,6 +2083,12 @@ profiles:
       value: connessioni
     - key: sessioni
       value: sessioni
+    - key: entita_impattate
+      value: entita_impattate
+    - key: propaga_a
+      value: propaga_a
+    - key: conseguenze
+      default: []
     - key: traits
       value: traits
     - key: actions

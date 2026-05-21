@@ -153,6 +153,124 @@ families:
       - dataview
       - bases
       - tasks
+  incontro:
+    reason: L'incontro deve essere scena giocabile collegata a luogo, missione, fazione, sessione, ricompensa e conseguenze.
+    frontmatter_profile: incontro
+    runtime_profile: incontro
+    required_frontmatter_fields:
+      - luogo
+      - missioni
+      - fazioni
+      - sessioni
+      - creature
+      - encounter_creatures
+      - ricompense
+      - gancio
+      - uso_al_tavolo
+      - prossima_mossa
+      - entita_impattate
+      - propaga_a
+    required_runtime_prompts:
+      - luogo
+      - missioni
+      - fazioni
+      - creature
+      - ricompense
+      - gancio
+      - uso_al_tavolo
+      - prossima_mossa
+      - entita_impattate
+      - propaga_a
+    required_sections:
+      - encounter
+      - giocabilita
+      - continuita
+      - ricompense
+    required_tabs:
+      - dnd55_material
+    plugin_surfaces:
+      - meta_bind
+      - dataview
+      - bases
+      - fantasy_statblocks
+      - initiative_tracker
+  creatura:
+    reason: La creatura homebrew deve essere abitante o minaccia del mondo, non solo statblock.
+    frontmatter_profile: creatura
+    runtime_profile: creatura
+    required_frontmatter_fields:
+      - mondo
+      - habitat
+      - luoghi
+      - fazioni
+      - missioni
+      - gancio
+      - uso_al_tavolo
+      - player_safe
+      - prossima_mossa
+      - entita_impattate
+      - propaga_a
+    required_runtime_prompts:
+      - mondo
+      - luoghi
+      - fazioni
+      - missioni
+      - gancio
+      - uso_al_tavolo
+      - player_safe
+      - prossima_mossa
+      - entita_impattate
+      - propaga_a
+    required_sections:
+      - statblock
+      - giocabilita
+      - continuita
+      - pubblicazione
+    required_tabs:
+      - dnd55_material
+    plugin_surfaces:
+      - meta_bind
+      - dataview
+      - fantasy_statblocks
+  oggetto:
+    reason: Oggetti e ricompense devono funzionare come leve narrative, prove, debiti o conseguenze.
+    frontmatter_profile: oggetto
+    runtime_profile: oggetto
+    required_frontmatter_fields:
+      - mondo
+      - luogo
+      - proprietario
+      - missioni
+      - sessioni
+      - gancio
+      - uso_al_tavolo
+      - player_safe
+      - prossima_mossa
+      - entita_impattate
+      - propaga_a
+      - connessioni
+    required_runtime_prompts:
+      - proprietario
+      - luogo
+      - missioni
+      - sessioni
+      - gancio
+      - uso_al_tavolo
+      - player_safe
+      - prossima_mossa
+      - entita_impattate
+      - propaga_a
+    required_sections:
+      - giocabilita
+      - continuita
+      - pubblicazione
+      - ricompense
+    required_tabs:
+      - dnd55_material
+    plugin_surfaces:
+      - meta_bind
+      - dataview
+      - bases
 contracts:
   fields_must_exist_in_yaml_catalog: true
   runtime_prompts_must_exist: true

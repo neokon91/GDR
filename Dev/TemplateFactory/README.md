@@ -88,9 +88,21 @@ La conseguenza pratica: YAML decide cosa esiste; Jinja assembla; JS esegue funzi
 
 ## Regola Entity Depth
 
-`entity_depth.yaml` e il contratto di profondita per famiglie fantasy. Per `luogo`, `fazione`, `missione` e `tracciato` dichiara campi frontmatter, prompt runtime, sezioni, layout tabs e superfici plugin obbligatorie.
+`entity_depth.yaml` e il contratto di profondita per famiglie fantasy. Per `luogo`, `fazione`, `missione`, `tracciato`, `incontro`, `creatura` e `oggetto` dichiara campi frontmatter, prompt runtime, sezioni, layout tabs e superfici plugin obbligatorie.
 
 `npm run check:templates` blocca una famiglia se un campo non e catalogato, se il profilo frontmatter non lo espone, se manca un prompt runtime, se tabs/sezioni non esistono o se una superficie plugin richiesta non e dichiarata in `plugin_bindings.yaml`.
+
+## Regola M11 D&D Nel Mondo
+
+Creature, incontri, oggetti e ricompense non sono compendio isolato. Nel contratto TemplateFactory devono restare materiale narrativo collegato a luogo, fazione, missione, sessione e conseguenze.
+
+La regola minima e:
+
+- `incontro` dichiara luogo, missioni/fazioni/sessioni, creature, `encounter_creatures`, ricompense, uso al tavolo, prossima mossa, `entita_impattate` e `propaga_a`;
+- `creatura` dichiara habitat o luoghi, fazioni/missioni/sessioni/connessioni, uso al tavolo, player-safe, prossima mossa e propagazione;
+- `oggetto` dichiara luogo o proprietario, missioni/sessioni/connessioni, uso al tavolo, player-safe, prossima mossa e propagazione.
+
+Le viste `renderDnd55MaterialPipeline` e `renderCombatReadiness` sono runtime di lettura: mostrano gap, non inventano schema. I campi devono arrivare prima da `frontmatter_profiles.yaml`, `runtime_profiles.yaml`, `sections.yaml`, `tabs.yaml`, `dataview_blocks.yaml`, `metabind_inputs.yaml` e `workflows.yaml`.
 
 ## Regola Taxonomy Depth
 

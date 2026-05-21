@@ -150,3 +150,82 @@ continuity_rules:
     propagation:
       target_status: da verificare
       relation_subjects: update_relazioni_when_target_is_relation
+dnd55_world_material_rules:
+  encounter_to_world:
+    trigger: creazione o aggiornamento incontro
+    entities:
+      - incontro
+    conditions:
+      - field: luogo
+        required: true
+      - any_field:
+          - missioni
+          - fazioni
+          - sessioni
+        required: true
+      - field: encounter_creatures
+        required_when: tipo == combattimento
+      - field: creature
+        required_when: tipo == combattimento
+    effects:
+      - field: prossima_mossa
+        use: esito se l'incontro viene evitato, perso o vinto
+      - field: entita_impattate
+        use: note che cambiano per esito dell'incontro
+      - field: propaga_a
+        use: note da aggiornare dopo la scena
+    surfaced_by:
+      - renderDnd55MaterialPipeline
+      - renderCombatReadiness
+  creature_to_world:
+    trigger: creazione o aggiornamento creatura homebrew
+    entities:
+      - creatura
+    conditions:
+      - any_field:
+          - habitat
+          - luoghi
+        required: true
+      - any_field:
+          - missioni
+          - fazioni
+          - sessioni
+          - connessioni
+        required: true
+      - any_field:
+          - gancio
+          - uso_al_tavolo
+        required: true
+    effects:
+      - field: player_safe
+        use: versione mostrabile o rumor sulla creatura
+      - field: prossima_mossa
+        use: cosa cambia se la creatura resta libera o ignorata
+      - field: entita_impattate
+        use: prede, luoghi, fazioni o missioni toccate
+  reward_to_world:
+    trigger: creazione o aggiornamento oggetto o ricompensa
+    entities:
+      - oggetto
+    conditions:
+      - any_field:
+          - luogo
+          - proprietario
+        required: true
+      - any_field:
+          - missioni
+          - sessioni
+          - connessioni
+        required: true
+      - any_field:
+          - gancio
+          - uso_al_tavolo
+          - prossima_mossa
+        required: true
+    effects:
+      - field: entita_impattate
+        use: chi cambia status, debito, accesso o pericolo
+      - field: propaga_a
+        use: luoghi, fazioni, missioni o tracciati da aggiornare
+      - field: player_safe
+        use: descrizione consegnabile al tavolo

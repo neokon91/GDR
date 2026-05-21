@@ -26,6 +26,24 @@ stato: pronto
 | Mappa zoom | [[z.modelli/mappe/Mappa Zoom]] |
 | Fronti visuali | [[Risorse/Mappe/Schema Relazioni GDR.excalidraw]] |
 
+## Prossima Azione Mappa
+
+```dataviewjs
+const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+gdr.renderSessionMapCards(dv);
+```
+
+```dataview
+TABLE uso, mondo, luogo, pubblico, stato, file.mtime AS aggiornata
+FROM "Risorse/Mappe"
+WHERE file.name != "Mappe" AND stato != "archiviata"
+SORT file.mtime DESC
+LIMIT 6
+```
+
+> [!regia] Regola pratica
+> Se una mappa non aiuta una scelta, una rotta, una scena, un indizio o una conseguenza, resta bozza o archivio.
+
 ````tabs
 tab: Relazioni
 

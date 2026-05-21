@@ -29,6 +29,9 @@ fieldsOrder:
 - round
 - condizioni
 - encounter_creatures
+- entita_impattate
+- propaga_a
+- conseguenze
 - fonti
 - riferimenti_srd
 - riferimenti_regola
@@ -116,7 +119,7 @@ fields:
   options: {}
 - name: ricompense
   id: ricompense
-  type: Multi
+  type: MultiFile
   options: {}
 - name: gancio
   id: gancio
@@ -148,7 +151,19 @@ fields:
   options: {}
 - name: encounter_creatures
   id: encounter_creatures
-  type: Multi
+  type: Input
+  options: {}
+- name: entita_impattate
+  id: entita_impattate
+  type: MultiFile
+  options: {}
+- name: propaga_a
+  id: propaga_a
+  type: MultiFile
+  options: {}
+- name: conseguenze
+  id: conseguenze
+  type: MultiFile
   options: {}
 - name: fonti
   id: fonti

@@ -47,6 +47,9 @@ bindings:
       - componenti dashboard complessi
     local_modules:
       - z.engine/gdr_views.js
+      - z.engine/session_dnd.js
+      - z.engine/session_maps.js
+      - z.engine/session_player.js
       - z.engine/session_views.js
   metadata_menu:
     runtime: true

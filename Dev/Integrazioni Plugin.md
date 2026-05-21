@@ -104,6 +104,21 @@ Nessun plugin installato e candidato alla rimozione senza prova concreta. Ogni p
 | Linter | manutenzione | Pulizia manuale controllata, mai lint on save distruttivo. |
 | BRAT | manutenzione | Gestione plugin beta/non ufficiali, invisibile al DM. |
 
+## Riesame Valore Quotidiano
+
+Questa sezione prevale sulla semplice domanda "il plugin e presente?". Un plugin produce valore 1.0 solo se riduce tempo, errori o spaesamento in un flusso reale.
+
+| Area | Valore quotidiano atteso | Dove deve vedersi | Decisione |
+| --- | --- | --- | --- |
+| Mappe | Trovare territori, rotte, scene e pin senza leggere liste lunghe. | [[Risorse/Mappe/Mappe]], [[Risorse/Mappe Bases]], `z.bases/Atlante Mappe.base` | Core per esplorazione e tavolo; ogni mappa deve avere fallback testuale. |
+| Canvas / Excalidraw | Vedere relazioni, fronti, indizi e scene come rete navigabile. | [[Risorse/Canvas Per GDR]], [[Risorse/Excalidraw Per GDR]] | Utile quando mostra causalita o posizione; evitare disegni decorativi. |
+| Calendarium | Sapere cosa scade, quando avviene una sessione e quale evento futuro reagisce. | [[Mondi/Calendario]], missioni con `fc-date`, dashboard operative | Supporto tempo; resta utile solo se le scadenze alimentano preparazione e post-sessione. |
+| Fantasy Content Generator | Produrre bozze da smistare, non canone automatico. | [[Risorse/Smistamento Bozze Generate]], `Inbox/Generati` | Opzionale guidato; valore nullo se le bozze non vengono collegate a mondo/sessione. |
+| Media | Portare audio, immagini o video gia contestualizzati in sessione. | [[Risorse/Media Scene]], [[Hub/Durante il Gioco]] | Supporto leggero; non va riempito con asset generici. |
+| Tasks / Kanban | Tenere preparazione, post-sessione e manutenzione fuori dalla memoria del DM. | [[Risorse/Task DM]], `z.bacheche` | Supporto DM; non trasformare missioni, clock o lore in checklist. |
+
+Gate pratico: se un plugin non accelera Crea -> Prepara -> Gioca -> Aggiorna, deve restare invisibile o in manutenzione. La matrice resta il registro di presenza; questa sezione decide il valore operativo.
+
 ## Estensioni Non Installate Da Valutare
 
 Questa non e una lista di rimozione. I 27 plugin installati vanno sfruttati. Questa sezione riguarda solo estensioni non installate o alternative sovrapposte: entrano solo se migliorano una pagina operativa gia esistente o riducono complessita per l'utente non tecnico.

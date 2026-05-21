@@ -25,8 +25,18 @@ properties:
     displayName: Mappe
   ricompense:
     displayName: Ricompense
+  gancio:
+    displayName: Gancio
+  uso_al_tavolo:
+    displayName: Uso al tavolo
   prossima_mossa:
     displayName: Prossima mossa
+  entita_impattate:
+    displayName: Entita impattate
+  propaga_a:
+    displayName: Propaga a
+  conseguenze:
+    displayName: Conseguenze
 views:
   - type: table
     name: Pronti
@@ -42,6 +52,8 @@ views:
       - pressione
       - creature
       - personaggi
+      - gancio
+      - uso_al_tavolo
     sort:
       - property: stato
         direction: ASC
@@ -61,6 +73,9 @@ views:
       - luogo
       - creature
       - prossima_mossa
+      - entita_impattate
+      - propaga_a
+      - conseguenze
     sort:
       - property: pericolo
         direction: DESC
@@ -79,6 +94,7 @@ views:
       - mappe
       - personaggi
       - ricompense
+      - uso_al_tavolo
     sort:
       - property: sessioni
         direction: ASC
@@ -99,6 +115,9 @@ views:
       - creature
       - mappe
       - prossima_mossa
+      - entita_impattate
+      - propaga_a
+      - conseguenze
     sort:
       - property: stato
         direction: ASC

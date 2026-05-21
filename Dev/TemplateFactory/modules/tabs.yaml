@@ -92,6 +92,27 @@ layouts:
         label: Fallback
         sections:
           - fallback_markdown
+  dnd55_material:
+    syntax: tabs
+    tabs:
+      - id: mondo
+        label: Mondo
+        sections:
+          - dnd55_mondo
+      - id: tavolo
+        label: Tavolo
+        sections:
+          - dnd55_tavolo
+      - id: regole
+        label: Regole
+        sections:
+          - statblock
+          - encounter
+      - id: continuita
+        label: Continuita
+        sections:
+          - continuita
+          - ricompense
 syntax:
   open: '````tabs'
   tab_marker: 'tab: {{ label }}'

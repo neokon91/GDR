@@ -322,6 +322,41 @@ sections:
     fallback: |-
       ### Ricompense
       - Ricompense:
+  dnd55_mondo:
+    title: Collegamento Al Mondo
+    callout: regia
+    fields:
+      - luogo
+      - luoghi
+      - fazioni
+      - missioni
+      - sessioni
+      - entita_impattate
+      - propaga_a
+    fallback: |-
+      ### Collegamento al mondo
+      - Luogo o habitat:
+      - Fazioni:
+      - Missioni:
+      - Sessioni:
+      - Entita impattate:
+      - Propaga a:
+  dnd55_tavolo:
+    title: Pronto Al Tavolo
+    callout: conflitto
+    fields:
+      - gancio
+      - uso_al_tavolo
+      - player_safe
+      - prossima_mossa
+      - encounter_creatures
+    fallback: |-
+      ### Pronto al tavolo
+      - Gancio:
+      - Uso:
+      - Mostrabile:
+      - Se ignorato:
+      - Initiative Tracker:
   fallback_markdown:
     title: Fallback Markdown
     fallback: |-

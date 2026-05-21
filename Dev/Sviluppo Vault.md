@@ -140,6 +140,31 @@ Responsabilita:
 
 Le automazioni Templater usano invece `z.automazioni/helpers.js`. Per la creazione live sono disponibili `getActiveSessionFile()` e `getActiveSessionContext()`, usati per precompilare mondo e sessione nelle note create durante il gioco.
 
+### Debito Runtime
+
+`z.engine/session_views.js` e il runtime stabile da non spezzare durante M11, ma ha superato la dimensione in cui aggiungere viste senza criterio resta sostenibile.
+
+Primo taglio eseguito:
+
+- `z.engine/session_maps.js`: viste mappe per atlante, luoghi e sessione;
+- `z.engine/session_dnd.js`: pipeline D&D 5.5 e readiness combattimenti;
+- `z.engine/session_player.js`: vista giocatori, recap pubblico, mappe pubbliche e controlli anti-segreti;
+- `z.engine/session_views.js`: bridge pubblico compatibile con le chiamate DataviewJS esistenti.
+
+Prima di aggiungere nuova logica, valutare un taglio per famiglie con compatibilita esplicita:
+
+| Famiglia | Funzioni candidate | Regola di estrazione |
+| --- | --- | --- |
+| Sessione | banner, ancore, materiali, live, post-sessione | Prima estrazione possibile, perche e il flusso piu stabile. |
+| Player view | portale giocatori, recap, sicurezza pubblica | Estratto in `session_player.js`; mantenere identici i controlli anti-segreti. |
+| Continuita | queue, propagation targets, M11 chain, closable continuity | Estrarre insieme a test M11 e azioni Meta Bind. |
+| Mappe | mappe sessione, asset visuali, marker | Estratto in `session_maps.js`; mantenere bridge pubblico in `session_views.js`. |
+| D&D material pipeline | incontri, creature, oggetti, ricompense, combat readiness | Estratto in `session_dnd.js`; mantenere `renderDnd55MaterialPipeline` come bridge pubblico. |
+
+La regola di migrazione e conservativa: mantenere le funzioni esportate attuali o aggiungere bridge, aggiornare i riferimenti DataviewJS solo dopo `npm run check`, e non spostare percorsi usati da TemplateFactory, Meta Bind o release senza smoke Obsidian.
+
+Gate temporaneo: `session_views.js` non deve crescere oltre 1600 righe prima del taglio. Se serve superare la soglia, prima creare moduli famiglia in `z.engine/` e lasciare bridge compatibili.
+
 ## Template Live
 
 I template live sono pensati per catturare contenuto al tavolo senza costringere il DM a decidere subito la struttura definitiva:

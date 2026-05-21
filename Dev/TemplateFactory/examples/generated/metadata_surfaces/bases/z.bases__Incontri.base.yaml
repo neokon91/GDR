@@ -10,6 +10,13 @@ required_fields:
 - creature
 - personaggi
 - mappe
+- sessioni
+- ricompense
+- gancio
+- uso_al_tavolo
+- prossima_mossa
+- entita_impattate
+- propaga_a
 profile_fields:
 - id
 - nome
@@ -36,6 +43,9 @@ profile_fields:
 - round
 - condizioni
 - encounter_creatures
+- entita_impattate
+- propaga_a
+- conseguenze
 - fonti
 - riferimenti_srd
 - riferimenti_regola

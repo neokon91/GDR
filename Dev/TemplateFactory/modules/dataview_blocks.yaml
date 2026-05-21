@@ -180,6 +180,35 @@ blocks:
     fallback: |-
       | Mappa | Tipo | Coordinate | Luoghi |
       | --- | --- | --- | --- |
+  dnd55_material_pipeline:
+    type: dataviewjs
+    runtime_view: renderDnd55MaterialPipeline
+    use_for:
+      - session
+      - dnd55
+      - materiali
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      gdr.renderDnd55MaterialPipeline(dv);
+    fallback: |-
+      | Materiale | Mondo | Uso |
+      | --- | --- | --- |
+      | Incontri | luogo, missione, fazione, sessione | scena pronta |
+      | Creature | habitat, luogo, fazione, missione | minaccia o leva |
+      | Oggetti | luogo, proprietario, missione, conseguenza | ricompensa o prova |
+  combat_readiness:
+    type: dataviewjs
+    runtime_view: renderCombatReadiness
+    use_for:
+      - incontro
+      - dnd55
+      - combattimento
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      gdr.renderCombatReadiness(dv);
+    fallback: |-
+      | Incontro | Creature | Luogo | Aggancio |
+      | --- | --- | --- | --- |
 contracts:
   dataviewjs_has_no_file_writes: true
   empty_state_required: true

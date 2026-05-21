@@ -29,6 +29,19 @@ WHERE plugin = "fantasy-content-generator" AND stato = "bozza"
 SORT creato ASC, file.ctime ASC
 ```
 
+## Prossima Bozza Da Decidere
+
+```dataview
+TABLE categoria, tipo, generatore, mondo, luogo, campagne, sessioni, creato
+FROM "Inbox/Generati"
+WHERE plugin = "fantasy-content-generator" AND stato = "bozza"
+SORT (mondo OR luogo OR campagne OR sessioni) DESC, creato ASC, file.ctime ASC
+LIMIT 5
+```
+
+> [!regia] Regola pratica
+> Una bozza vale tempo solo se diventa aggancio, scena, indizio, mappa, incontro o conseguenza. Se non sai dove collegarla, archiviala o lasciala come spunto non canonico.
+
 ## Pronte Da Collegare
 
 ```dataview

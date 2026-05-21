@@ -71,6 +71,19 @@ SORT data ASC
 LIMIT 10
 ```
 
+## Prossima Scadenza Narrativa
+
+```dataview
+TABLE stato, pressione, scadenza_mondo, prossima_mossa, luoghi, fazioni
+FROM "Mondi/Missioni" OR "Mondi/Tracciati" OR "Mondi/Fazioni"
+WHERE stato != "archiviata" AND (scadenza_mondo OR fc-date OR pressione >= 6)
+SORT fc-date ASC, pressione DESC, file.mtime DESC
+LIMIT 8
+```
+
+> [!timer] Uso al tavolo
+> La prossima scadenza deve diventare una scelta, una pressione o una conseguenza nella preparazione. Se resta solo una data, non sta producendo gioco.
+
 ## Missioni Con Pressione
 
 ```dataview

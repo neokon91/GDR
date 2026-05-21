@@ -7,7 +7,7 @@ kanban-plugin: board
 ## Guida Rapida
 
 - [ ] Aprire [[Risorse/Post Sessione Guidato]] se vuoi il percorso passo passo #task
-- [ ] Aprire [[Cosa Succede Fuori Scena]] per decidere quali attori reagiscono #task
+- [ ] Aprire [[Hub/Cosa Succede Fuori Scena]] per decidere quali attori reagiscono #task
 - [ ] Aprire [[Risorse/Materiali Al Tavolo]] se devi verificare cosa e stato usato o consegnato #task
 
 ## Appunti Da Smistare
@@ -48,7 +48,7 @@ kanban-plugin: board
 - [ ] Preparare scena iniziale #task 🔺
 - [ ] Preparare clock o pressione #task 🔼
 - [ ] Eseguire [[Risorse/Controllo Vault]] #task
-- [ ] Controllare [[Cosa Succede Fuori Scena]] e scegliere una prossima mossa da mostrare subito #task
+- [ ] Controllare [[Hub/Cosa Succede Fuori Scena]] e scegliere una prossima mossa da mostrare subito #task
 
 
 %% kanban:settings

@@ -380,6 +380,8 @@ profiles:
       uso_al_tavolo: Uso al tavolo
       player_safe: Versione player-safe
       prossima_mossa: Cosa cambia se l'incontro viene evitato, perso o vinto
+      entita_impattate: Entita che cambiano se l'incontro viene vinto, perso o evitato
+      propaga_a: Note a cui propagare conseguenze dell'incontro
       riferimenti_regola: Riferimenti regola dell'incontro
   oggetto:
     name_prompt: Nome dell'oggetto
@@ -416,10 +418,15 @@ profiles:
     prompts:
       proprietario: Proprietario
       luogo: Luogo dell'oggetto
+      missioni: Missioni o promesse collegate all'oggetto
+      fazioni: Fazioni che lo cercano, proteggono o temono
+      sessioni: Sessioni in cui puo entrare in gioco
       gancio: Gancio giocabile dell'oggetto
       uso_al_tavolo: Uso al tavolo
       player_safe: Versione player-safe
       prossima_mossa: Cosa cambia se viene usato, perso o ignorato
+      entita_impattate: Entita che cambiano quando l'oggetto viene usato o perso
+      propaga_a: Note a cui propagare effetti dell'oggetto
   mercato:
     name_prompt: Nome del mercato o nodo commerciale
     world_prompt: Mondo del nodo
@@ -559,6 +566,8 @@ profiles:
       player_safe: Versione player-safe
       prossima_mossa: Cosa cambia se la creatura viene ignorata
       connessioni: Connessioni vive della creatura
+      entita_impattate: Entita che la creatura minaccia, protegge o altera
+      propaga_a: Note a cui propagare effetti della creatura
       ac: Classe Armatura
       hp: Punti Ferita
       speed: Velocita

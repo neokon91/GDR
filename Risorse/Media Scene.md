@@ -10,6 +10,31 @@ stato: pronto
 
 Questa pagina raccoglie i materiali con timestamp pronti per scene, recap, reference video o musica al tavolo.
 
+## Media Per La Sessione Attiva
+
+```dataviewjs
+const active = dv.pages('"Mondi/Sessioni"').where(p => p.attiva === true).first();
+if (!active) {
+  dv.paragraph("Nessuna sessione attiva. Collega media quando una sessione entra in preparazione o va al tavolo.");
+} else {
+  const links = [
+    ...(active.audio ?? []),
+    ...(active.immagini ?? []),
+    ...(active.video ?? [])
+  ];
+  const rows = dv.array(links).map(link => dv.page(link.path ?? link)).where(Boolean)
+    .map(p => [p.file.link, p.uso ?? "", p.scena ?? "", p.timestamp ?? "", p.stato ?? ""]);
+  if (!rows.length) {
+    dv.paragraph("Sessione attiva senza media collegati. Va bene: aggiungili solo se servono davvero al tavolo.");
+  } else {
+    dv.table(["Media", "Uso", "Scena", "Timestamp", "Stato"], rows);
+  }
+}
+```
+
+> [!regia] Regola pratica
+> Un media e pronto solo se sai in quale scena aprirlo. Altrimenti resta reference, non materiale al tavolo.
+
 ## Cue Pronti
 
 ```dataview

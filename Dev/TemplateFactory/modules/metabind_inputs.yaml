@@ -61,6 +61,21 @@ inputs:
     template_name: missioni
     syntax: '`INPUT[missioni][:missioni]`'
     fallback: 'Missioni:'
+  creature:
+    field: creature
+    template_name: creature
+    syntax: '`INPUT[creature][:creature]`'
+    fallback: 'Creature:'
+  encounter_creatures:
+    field: encounter_creatures
+    template_name: encounter_creatures
+    syntax: '`INPUT[encounter_creatures][:encounter_creatures]`'
+    fallback: 'Creature Initiative Tracker:'
+  ricompense:
+    field: ricompense
+    template_name: ricompense
+    syntax: '`INPUT[ricompense][:ricompense]`'
+    fallback: 'Ricompense:'
   tracciati:
     field: tracciati
     template_name: tracciati

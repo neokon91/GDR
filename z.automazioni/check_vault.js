@@ -126,6 +126,9 @@ const REQUIRED_LAYER_FILES = [
     "z.automazioni/nuovo_mondo_homebrew.js",
     "z.engine/README.md",
     "z.engine/gdr_views.js",
+    "z.engine/session_dnd.js",
+    "z.engine/session_maps.js",
+    "z.engine/session_player.js",
     "z.engine/session_views.js"
 ];
 const REQUIRED_DEV_ARCHITECTURE_MARKERS = [
@@ -874,6 +877,46 @@ const worldbuildingIndex = startHereText.indexOf("Crea Il Mondo");
 const sessionIndex = startHereText.indexOf("Trasforma In Gioco");
 if (worldbuildingIndex === -1 || sessionIndex === -1 || worldbuildingIndex > sessionIndex) {
     errors.push("Inizia Qui.md: il flusso deve esporre Crea Il Mondo prima di sessione/gioco");
+}
+
+const setupText = readRel("Risorse/Setup Guidato.md");
+for (const marker of ["Crea o apri un mondo", "Prepara una sessione", "Durante il Gioco", "Hub/Cosa Succede Fuori Scena"]) {
+    if (!setupText.includes(marker)) {
+        errors.push(`Risorse/Setup Guidato.md: percorso primo utilizzo incompleto (${marker})`);
+    }
+}
+
+const pluginIntegrationText = readRel("Dev/Integrazioni Plugin.md");
+for (const marker of ["Riesame Valore Quotidiano", "Mappe", "Canvas / Excalidraw", "Calendarium", "Fantasy Content Generator", "Media", "Tasks / Kanban", "Crea -> Prepara -> Gioca -> Aggiorna"]) {
+    if (!pluginIntegrationText.includes(marker)) {
+        errors.push(`Dev/Integrazioni Plugin.md: riesame valore quotidiano plugin incompleto (${marker})`);
+    }
+}
+if (!readRel("Risorse/Mappe/Mappe.md").includes("Prossima Azione Mappa")) {
+    errors.push("Risorse/Mappe/Mappe.md: manca azione operativa quotidiana per mappe");
+}
+const taskDmText = readRel("Risorse/Task DM.md");
+for (const marker of ["Post-Sessione Adesso", "Preparazione Adesso", "z.bacheche/Preparazione Sessioni", "z.bacheche/Post Sessione"]) {
+    if (!taskDmText.includes(marker)) {
+        errors.push(`Risorse/Task DM.md: vista Tasks/Kanban quotidiana incompleta (${marker})`);
+    }
+}
+const calendarText = readRel("Mondi/Calendario.md");
+if (!calendarText.includes("Prossima Scadenza Narrativa")) {
+    errors.push("Mondi/Calendario.md: manca vista operativa Calendarium/scadenze");
+}
+const mediaSceneText = readRel("Risorse/Media Scene.md");
+if (!mediaSceneText.includes("Media Per La Sessione Attiva")) {
+    errors.push("Risorse/Media Scene.md: manca vista operativa media per sessione attiva");
+}
+const generatedDraftsText = readRel("Risorse/Smistamento Bozze Generate.md");
+if (!generatedDraftsText.includes("Prossima Bozza Da Decidere")) {
+    errors.push("Risorse/Smistamento Bozze Generate.md: manca vista operativa per prossima bozza generata");
+}
+
+const sessionViewsLines = readRel("z.engine/session_views.js").split(/\r?\n/).length;
+if (sessionViewsLines > 1600) {
+    errors.push(`z.engine/session_views.js: ${sessionViewsLines} righe, tagliare per famiglie runtime prima di aggiungere nuove viste`);
 }
 
 const datedForCalendarium = realEntries.filter(([, fm]) => hasValue(fm["fc-date"]) && fm["fc-ignore"] !== true);

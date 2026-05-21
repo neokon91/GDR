@@ -98,6 +98,25 @@
     grid.innerHTML = list.map(mapper).join("");
   }
 
+  const sharedViewContext = {
+    activeSession,
+    cardClass,
+    cardHtml,
+    fieldText,
+    hasLinks,
+    hasText,
+    isReal,
+    linkKey,
+    pageFromLink,
+    pageTitle,
+    pagesFromLinks,
+    renderCardGrid,
+    renderEmptyState
+  };
+  const mapViews = (await eval(await app.vault.adapter.read("z.engine/session_maps.js")))(sharedViewContext);
+  const dndViews = (await eval(await app.vault.adapter.read("z.engine/session_dnd.js")))(sharedViewContext);
+  const playerViews = (await eval(await app.vault.adapter.read("z.engine/session_player.js")))(sharedViewContext);
+
   function renderCreationFeedback(dv, source = null) {
     const page = source ?? dv.current();
     const checks = [
@@ -446,126 +465,6 @@
     grid.innerHTML = cards.join("");
   }
 
-  function mapCard(page, options = {}) {
-    const show = fieldText(page.player_safe ?? page.cosa_mostrare ?? page.luoghi ?? page.luogo) || "Mostra solo i luoghi e i riferimenti gia sicuri.";
-    const hide = page.pubblico === true
-      ? "Nessun segreto DM nella mappa pubblica."
-      : fieldText(page.cosa_nascondere ?? page.prossima_mossa ?? page.segreti) || "Nascondi segreti, prossime mosse e layer non rivelati.";
-    const playerVersion = fieldText(page.versione_giocatori);
-    const action = options.azione ?? (fieldText(page.uso_al_tavolo ?? page.gancio) || "Apri la mappa quando orientamento o scelta spaziale contano.");
-    const why = [
-      `Mostra: ${show}`,
-      `Nascondi: ${hide}`,
-      playerVersion ? `Giocatori: ${playerVersion}` : ""
-    ].filter(Boolean).join(" · ");
-
-    return cardHtml({
-      title: pageTitle(page),
-      meta: [page.uso ?? page.tipo, page.pubblico === true ? "pubblica" : "DM", page.stato].filter(Boolean).join(" · "),
-      azione: action,
-      importa: why,
-      link: page.file.path,
-      badge: options.badge ?? "Mappa",
-      cls: cardClass(page, "gdr-info-card compact", page.pubblico === true ? "gdr-card-player gdr-kind-ready" : "")
-    });
-  }
-
-  function mapPagesForWorld(dv, worldLink = "", limit = 12) {
-    const worldPath = linkKey(worldLink);
-    return dv.pages('"Risorse/Mappe"')
-      .where(p => isReal(p) && p.file.name !== "Mappe" && p.stato !== "archiviata")
-      .where(p => !worldPath || linkKey(p.mondo) === worldPath)
-      .sort(p => p.pubblico === true ? 0 : 1, "asc")
-      .sort(p => p.uso ?? "", "asc")
-      .limit(limit)
-      .array();
-  }
-
-  function renderAtlasMapCards(dv, worldLink = "") {
-    renderCardGrid(dv, mapPagesForWorld(dv, worldLink, 16), p => mapCard(p), {
-      title: "Nessuna mappa pronta",
-      action: "Crea una mappa zoom o collega almeno un luogo a una mappa esistente.",
-      button: "BUTTON[nuova-mappa-zoom-z-modelli-mappe-mappa-zoom-md]"
-    });
-  }
-
-  function renderPlaceMapCards(dv, place = dv.current()) {
-    const placeKeys = new Set([place?.file?.path, place?.file?.name, linkKey(place?.file?.path)].filter(Boolean));
-    const linked = pagesFromLinks(dv, place?.mappe ?? []).array();
-    const matchesPlace = p => placeKeys.has(linkKey(p.luogo))
-      || dv.array(p.luoghi ?? []).some(link => placeKeys.has(linkKey(link)) || placeKeys.has(link?.path));
-    const pages = linked.length
-      ? linked
-      : dv.pages('"Risorse/Mappe"')
-        .where(p => isReal(p) && p.file.name !== "Mappe" && p.stato !== "archiviata" && matchesPlace(p))
-        .sort(p => p.pubblico === true ? 0 : 1, "asc")
-        .sort(p => p.uso ?? "", "asc")
-        .limit(8)
-        .array();
-
-    renderCardGrid(dv, pages, p => mapCard(p, {
-      badge: "Mappa luogo",
-      azione: fieldText(p.uso_al_tavolo) || "Apri questa mappa quando il luogo entra in scena."
-    }), {
-      title: "Nessuna mappa collegata al luogo",
-      action: "Compila il campo mappe del luogo o crea una mappa zoom collegata a questa nota.",
-      button: "BUTTON[nuova-mappa-zoom-z-modelli-mappe-mappa-zoom-md]"
-    });
-  }
-
-  function renderSessionMapCards(dv, source = null) {
-    const active = source ?? activeSession(dv);
-    if (!active) {
-      renderEmptyState(dv, {
-        title: "Nessuna sessione disponibile",
-        action: "Apri o crea una sessione prima di scegliere le mappe al tavolo.",
-        link: "Risorse/Preparazione Sessione.md"
-      });
-      return;
-    }
-
-    const seen = new Set();
-    const collect = links => pagesFromLinks(dv, links ?? [])
-      .array()
-      .filter(p => {
-        if (!p?.file?.path || seen.has(p.file.path)) return false;
-        seen.add(p.file.path);
-        return true;
-      });
-    const pages = [
-      ...collect(active.mappe),
-      ...dv.array(active.incontri ?? [])
-        .map(link => pageFromLink(dv, link))
-        .where(Boolean)
-        .array()
-        .flatMap(p => collect(p.mappe))
-    ];
-
-    if (!pages.length) {
-      const placeKeys = new Set(dv.array(active.luoghi ?? []).map(linkKey).array());
-      dv.pages('"Risorse/Mappe"')
-        .where(p => isReal(p) && p.file.name !== "Mappe" && p.stato !== "archiviata")
-        .where(p => placeKeys.has(linkKey(p.luogo)) || dv.array(p.luoghi ?? []).some(link => placeKeys.has(linkKey(link))))
-        .sort(p => p.uso ?? "", "asc")
-        .limit(8)
-        .forEach(p => {
-          if (!seen.has(p.file.path)) {
-            seen.add(p.file.path);
-            pages.push(p);
-          }
-        });
-    }
-
-    renderCardGrid(dv, pages, p => mapCard(p, {
-      badge: "Mappa sessione",
-      azione: fieldText(p.uso_al_tavolo) || "Usa questa mappa nella scena corrente."
-    }), {
-      title: "Nessuna mappa collegata alla sessione",
-      action: "Collega una mappa alla sessione, a un incontro o a un luogo della sessione.",
-      button: "BUTTON[nuova-mappa-zoom-z-modelli-mappe-mappa-zoom-md]"
-    });
-  }
-
   function renderSessionAnchorCards(dv, source = null) {
     const session = source ?? dv.current();
     const anchors = [
@@ -605,130 +504,6 @@
       importa: button || "Controlla i link media prima della sessione.",
       cls: `gdr-info-card compact ${fieldText(value) ? "gdr-kind-ready" : "gdr-kind-missing"}`
     })).join("");
-  }
-
-  function materialReadiness(page, kind = "materiale") {
-    const issues = [];
-    if (!page) return ["manca nota"];
-
-    if (kind === "incontro") {
-      if (!hasLinks(page.luogo)) issues.push("manca luogo");
-      if (!hasLinks(page.missioni) && !hasLinks(page.fazioni) && !hasLinks(page.sessioni)) issues.push("non agganciato a missione/fazione/sessione");
-      if (String(page.tipo ?? "") === "combattimento" && !hasLinks(page.creature)) issues.push("combattimento senza creature");
-      if (String(page.tipo ?? "") === "combattimento" && !hasLinks(page.encounter_creatures) && !hasText(page.encounter_creatures)) issues.push("manca Initiative Tracker");
-      if (!hasText(page.uso_al_tavolo) && !hasText(page.gancio)) issues.push("manca uso al tavolo");
-      if (!hasText(page.prossima_mossa)) issues.push("manca esito se ignorato");
-    }
-
-    if (kind === "creatura") {
-      if (!hasLinks(page.luoghi) && !hasText(page.habitat)) issues.push("manca habitat/luogo");
-      if (!hasLinks(page.missioni) && !hasLinks(page.fazioni) && !hasLinks(page.sessioni) && !hasLinks(page.connessioni)) issues.push("isolata dal mondo");
-      if (!hasText(page.uso_al_tavolo) && !hasText(page.gancio)) issues.push("manca uso al tavolo");
-      if (!hasText(page.player_safe)) issues.push("manca versione player-safe");
-    }
-
-    if (kind === "oggetto") {
-      if (!hasLinks(page.luogo) && !hasLinks(page.proprietario)) issues.push("manca luogo/proprietario");
-      if (!hasLinks(page.missioni) && !hasLinks(page.sessioni) && !hasLinks(page.connessioni)) issues.push("isolato da missione/sessione/mondo");
-      if (!hasText(page.uso_al_tavolo) && !hasText(page.gancio)) issues.push("manca uso al tavolo");
-      if (!hasText(page.player_safe)) issues.push("manca versione player-safe");
-    }
-
-    return issues;
-  }
-
-  function linkedUniquePages(dv, links) {
-    const seen = new Set();
-    return pagesFromLinks(dv, links ?? [])
-      .array()
-      .filter(page => {
-        if (!page?.file?.path || seen.has(page.file.path)) return false;
-        seen.add(page.file.path);
-        return true;
-      });
-  }
-
-  function renderDnd55MaterialPipeline(dv, source = null) {
-    const session = source ?? activeSession(dv);
-    if (!session) {
-      renderEmptyState(dv, {
-        title: "Nessuna sessione attiva",
-        action: "Attiva o apri una sessione prima di controllare incontri, creature e ricompense.",
-        link: "Risorse/Preparazione Sessione.md"
-      });
-      return;
-    }
-
-    const encounters = linkedUniquePages(dv, session.incontri);
-    const directCreatures = linkedUniquePages(dv, session.creature);
-    const encounterCreatures = encounters.flatMap(encounter => linkedUniquePages(dv, encounter.creature));
-    const directObjects = linkedUniquePages(dv, session.oggetti ?? session.ricompense);
-    const encounterObjects = encounters.flatMap(encounter => linkedUniquePages(dv, encounter.ricompense));
-    const creatures = linkedUniquePages(dv, [...directCreatures.map(p => p.file.link), ...encounterCreatures.map(p => p.file.link)]);
-    const objects = linkedUniquePages(dv, [...directObjects.map(p => p.file.link), ...encounterObjects.map(p => p.file.link)]);
-
-    const rows = [
-      ...encounters.map(page => ({ page, kind: "incontro", badge: "Incontro" })),
-      ...creatures.map(page => ({ page, kind: "creatura", badge: "Creatura" })),
-      ...objects.map(page => ({ page, kind: "oggetto", badge: "Oggetto" }))
-    ];
-
-    if (!rows.length) {
-      renderEmptyState(dv, {
-        title: "Materiale D&D non collegato",
-        action: "Collega almeno un incontro, creatura o oggetto alla sessione o a un incontro della sessione.",
-        button: "BUTTON[nuovo-incontro-z-modelli-dm-incontro-md]"
-      });
-      return;
-    }
-
-    renderCardGrid(dv, rows, ({ page, kind, badge }) => {
-      const issues = materialReadiness(page, kind);
-      const body = kind === "incontro"
-        ? fieldText(page.uso_al_tavolo ?? page.gancio ?? page.creature)
-        : fieldText(page.uso_al_tavolo ?? page.gancio ?? page.player_safe);
-      const why = issues.length
-        ? `Gap: ${issues.join(", ")}`
-        : fieldText(page.missioni ?? page.fazioni ?? page.luoghi ?? page.luogo ?? page.sessioni ?? page.connessioni);
-
-      return cardHtml({
-        title: pageTitle(page),
-        meta: [page.categoria ?? kind, page.tipo, page.stato].filter(Boolean).join(" · "),
-        azione: body || "Apri e completa uso al tavolo, agganci e conseguenze.",
-        importa: why,
-        link: page.file.path,
-        badge,
-        cls: cardClass(page, "gdr-info-card compact", issues.length ? "gdr-kind-missing" : "gdr-kind-ready")
-      });
-    }, {
-      title: "Nessun materiale D&D pronto",
-      action: "Crea o collega materiale D&D alla sessione."
-    });
-  }
-
-  function renderCombatReadiness(dv, source = '"Mondi/Incontri"', limit = 24) {
-    const rows = dv.pages(source)
-      .where(p => isReal(p) && p.stato !== "archiviata" && String(p.tipo ?? "") === "combattimento")
-      .sort(p => Number(p.pericolo ?? p.pressione ?? 0), "desc")
-      .limit(limit)
-      .array();
-
-    renderCardGrid(dv, rows, page => {
-      const issues = materialReadiness(page, "incontro");
-      return cardHtml({
-        title: pageTitle(page),
-        meta: [page.stato, page.luogo ? fieldText(page.luogo) : "", `pericolo ${page.pericolo ?? 0}`].filter(Boolean).join(" · "),
-        azione: fieldText(page.creature ?? page.encounter_creatures) || "Collega creature e Initiative Tracker.",
-        importa: issues.length ? `Gap: ${issues.join(", ")}` : fieldText(page.missioni ?? page.fazioni ?? page.sessioni),
-        link: page.file.path,
-        badge: "Combattimento",
-        cls: cardClass(page, "gdr-info-card compact", issues.length ? "gdr-kind-missing" : "gdr-kind-ready")
-      });
-    }, {
-      title: "Nessun combattimento pronto",
-      action: "Crea un incontro di combattimento solo quando serve round-by-round.",
-      button: "BUTTON[nuovo-incontro-z-modelli-dm-incontro-md]"
-    });
   }
 
   function renderSessionLiveCards(dv, source = null) {
@@ -1262,200 +1037,27 @@
     });
   }
 
-  function publicRows(dv, source, category, limit = 8) {
-    return dv.pages(source)
-      .where(p => publicCandidate(p, category))
-      .sort(p => Number(p.pressione ?? 0), "desc")
-      .limit(limit)
-      .array();
-  }
-
-  function publicMapRows(dv, limit = 4) {
-    return dv.pages('"Risorse/Mappe"')
-      .where(p => publicCandidate(p, "mappa"))
-      .sort(p => p.file.mtime, "desc")
-      .limit(limit)
-      .array();
-  }
-
-  function publicCard(page, category) {
-    const title = pageTitle(page);
-    const meta = category === "mappa"
-      ? [page.uso, "mappa condivisa"].filter(Boolean).join(" · ")
-      : category === "missione"
-        ? "obiettivo conosciuto"
-        : category === "personaggio"
-          ? "volto noto"
-          : category === "luogo"
-            ? "luogo scoperto"
-            : [category, page.tipo].filter(Boolean).join(" · ");
-    const body = category === "missione"
-      ? fieldText(page.player_safe ?? page.recap_pubblico)
-      : category === "personaggio"
-        ? fieldText(page.player_safe)
-        : category === "luogo"
-          ? fieldText(page.player_safe)
-          : fieldText(page.player_safe ?? page.uso_al_tavolo ?? page.tipo ?? page.luogo ?? page.personaggi);
-    const safeLink = page.pubblico === true && !hasPrivateFields(page) ? page.file.path : "";
-    return cardHtml({
-      title,
-      meta,
-      azione: body || "Informazione pubblica da completare.",
-      importa: fieldText(page.luoghi ?? page.luogo ?? page.mondo ?? page.recap_pubblico) || "Elemento emerso al tavolo.",
-      link: safeLink,
-      badge: "Player",
-      cls: `gdr-info-card compact gdr-card-player gdr-kind-${category}`
-    });
-  }
-
-  function renderPublicStats(dv) {
-    const stats = [
-      ["Missioni", publicRows(dv, '"Mondi/Missioni"', "missione", 99).length, "obiettivi visibili"],
-      ["PNG", publicRows(dv, '"Mondi/Personaggi"', "personaggio", 99).length, "volti noti"],
-      ["Luoghi", publicRows(dv, '"Mondi/Luoghi"', "luogo", 99).length, "posti scoperti"],
-      ["Handout", publicRows(dv, '"Mondi/Dispense"', "dispensa", 99).length, "materiali consegnati"],
-      ["Mappe", publicMapRows(dv, 99).length, "atlante condiviso"]
-    ];
-
-    const grid = dv.el("div", "", { cls: "gdr-stat-grid gdr-player-stats" });
-    grid.innerHTML = stats.map(([label, value, hint]) => `
-      <div class="gdr-stat-card">
-        <div class="gdr-stat-value">${escapeHtml(value)}</div>
-        <div class="gdr-stat-label">${escapeHtml(label)}</div>
-        <div class="gdr-stat-hint">${escapeHtml(hint)}</div>
-      </div>
-    `).join("");
-  }
-
-  function renderPlayerRecap(dv) {
-    const recaps = dv.pages('"Mondi/Sessioni"')
-      .where(p => isReal(p) && (p.pubblico === true || p.stato === "giocata"))
-      .sort(p => p.data ?? "0000-00-00", "desc")
-      .limit(5)
-      .array();
-
-    if (!recaps.length) {
-      dv.paragraph("Nessun recap pubblico ancora disponibile.");
-      return;
-    }
-
-    const panel = dv.el("div", "", { cls: "gdr-card-grid compact" });
-    panel.innerHTML = recaps.map(p => cardHtml({
-      title: p.file.name,
-      meta: p.data ?? p.data_mondo ?? "data non indicata",
-      body: fieldText(p.recap_pubblico ?? p.luoghi ?? p.missioni) || "Recap pubblico da compilare.",
-      link: p.pubblico === true && !hasPrivateFields(p) ? p.file.path : "",
-      cls: "gdr-info-card compact gdr-kind-sessione"
-    })).join("");
-  }
-
-  function renderPlayerMap(dv) {
-    const map = publicMapRows(dv, 1)[0];
-    if (!map) {
-      dv.paragraph("Nessuna mappa pubblica disponibile.");
-      return;
-    }
-
-    const panel = dv.el("div", "", { cls: "gdr-card-grid compact" });
-    panel.innerHTML = cardHtml({
-      title: pageTitle(map),
-      meta: [map.uso, map.mondo?.path ? map.mondo.path.split("/").pop().replace(/\.md$/, "") : ""].filter(Boolean).join(" · "),
-      body: fieldText(map.player_safe ?? map.luoghi ?? map.luogo) || "Mappa pubblica pronta.",
-      link: map.file.path,
-      badge: "Mappa condivisa",
-      cls: "gdr-info-card compact gdr-card-player gdr-kind-mappa"
-    });
-  }
-
-  function renderPublicSafety(dv) {
-    const risky = dv.pages('"Mondi" OR "Risorse/Mappe"')
-      .where(p => isReal(p) && p.pubblico === true && hasPrivateFields(p))
-      .sort(p => p.file.path, "asc")
-      .limit(12)
-      .array();
-
-    if (!risky.length) {
-      dv.paragraph("Controllo pubblico pulito: nessuna nota marcata pubblica contiene campi DM evidenti.");
-      return;
-    }
-
-    dv.table(["Nota", "Rischio"], risky.map(p => [p.file.link, "pubblico: true con campi segreti/prossima mossa/pressioni"]));
-  }
-
-  function renderPlayerPortalStatus(dv) {
-    const risky = dv.pages('"Mondi" OR "Risorse/Mappe"')
-      .where(p => isReal(p) && p.pubblico === true && hasPrivateFields(p))
-      .array();
-    const missingSafeText = dv.pages('"Mondi" OR "Risorse/Mappe"')
-      .where(p => isReal(p) && p.pubblico === true && !hasText(p.player_safe) && !hasText(p.recap_pubblico) && p.categoria !== "sessione")
-      .array();
-    const sessionsWithoutRecap = dv.pages('"Mondi/Sessioni"')
-      .where(p => isReal(p) && p.stato === "giocata" && !hasText(p.recap_pubblico))
-      .array();
-    const publicMapsWithoutText = dv.pages('"Risorse/Mappe"')
-      .where(p => isReal(p) && p.pubblico === true && !hasText(p.player_safe) && !hasLinks(p.luoghi) && !hasText(p.cosa_mostrare))
-      .array();
-    const deliveredHandouts = publicRows(dv, '"Mondi/Dispense"', "dispensa", 99);
-
-    const checks = [
-      ["Anti-segreti", !risky.length, risky.map(pageTitle).join(", ") || "Nessuna nota pubblica contiene campi DM evidenti."],
-      ["Testo player-safe", !missingSafeText.length, missingSafeText.map(pageTitle).join(", ") || "Le note pubbliche hanno testo mostrabile o recap."],
-      ["Recap", !sessionsWithoutRecap.length, sessionsWithoutRecap.map(pageTitle).join(", ") || "Le sessioni giocate hanno recap pubblico o non sono esposte."],
-      ["Mappe", !publicMapsWithoutText.length, publicMapsWithoutText.map(pageTitle).join(", ") || "Le mappe pubbliche hanno descrizione, luoghi o cosa mostrare."],
-      ["Dispense", deliveredHandouts.length > 0, deliveredHandouts.map(pageTitle).join(", ") || "Nessun handout consegnato ancora visibile."]
-    ];
-
-    const grid = dv.el("div", "", { cls: "gdr-card-grid compact" });
-    grid.innerHTML = checks.map(([label, ok, body]) => cardHtml({
-      title: `${ok ? "OK" : "Manca"} · ${label}`,
-      body,
-      cls: `gdr-info-card compact gdr-card-player ${ok ? "gdr-kind-ready" : "gdr-kind-missing"}`
-    })).join("");
-  }
-
-  function renderPlayerView(dv) {
-    renderPublicStats(dv);
-
-    const sections = [
-      ["Obiettivi", publicRows(dv, '"Mondi/Missioni"', "missione"), "missione"],
-      ["PNG conosciuti", publicRows(dv, '"Mondi/Personaggi"', "personaggio"), "personaggio"],
-      ["Luoghi scoperti", publicRows(dv, '"Mondi/Luoghi"', "luogo"), "luogo"],
-      ["Handout", publicRows(dv, '"Mondi/Dispense"', "dispensa"), "dispensa"],
-      ["Mappe condivise", publicMapRows(dv), "mappa"]
-    ];
-
-    for (const [title, pages, category] of sections) {
-      dv.header(2, title);
-      if (!pages.length) {
-        dv.paragraph("Niente da mostrare per ora.");
-        continue;
-      }
-      const grid = dv.el("div", "", { cls: "gdr-card-grid compact" });
-      grid.innerHTML = pages.map(page => publicCard(page, category)).join("");
-    }
-  }
-
   return {
     ...legacy,
     renderActiveSessionBanner,
-    renderAtlasMapCards,
+    renderAtlasMapCards: mapViews.renderAtlasMapCards,
     renderCreationFeedback,
     renderConsequenceCards,
     renderEmptyState,
     renderImpactedNextMoveCards,
     renderLiveCommandCenter,
-    renderPlaceMapCards,
+    renderPlaceMapCards: mapViews.renderPlaceMapCards,
     renderPlayableOutline,
-    renderPlayerMap,
-    renderPlayerPortalStatus,
-    renderPlayerRecap,
-    renderPlayerView,
-    renderPublicSafety,
-    renderPublicStats,
+    renderPlayerMap: playerViews.renderPlayerMap,
+    renderPlayerPortalStatus: playerViews.renderPlayerPortalStatus,
+    renderPlayerRecap: playerViews.renderPlayerRecap,
+    renderPlayerView: playerViews.renderPlayerView,
+    renderPublicSafety: playerViews.renderPublicSafety,
+    renderPublicStats: playerViews.renderPublicStats,
     renderM7FamilyCards,
     renderM11ContinuityChain,
-    renderCombatReadiness,
-    renderDnd55MaterialPipeline,
+    renderCombatReadiness: dndViews.renderCombatReadiness,
+    renderDnd55MaterialPipeline: dndViews.renderDnd55MaterialPipeline,
     renderSessionAnchorCards,
     renderSessionLiveCards,
     renderSessionMaterialCards,
@@ -1467,7 +1069,7 @@
     renderPropagationTargets,
     renderWorldImpact,
     renderWorldCreationStatus,
-    renderSessionMapCards,
+    renderSessionMapCards: mapViews.renderSessionMapCards,
     renderTableCockpit
   };
 })()

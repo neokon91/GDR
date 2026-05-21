@@ -8,11 +8,21 @@ fieldsOrder:
   - luogo
   - missioni
   - fazioni
+  - sessioni
   - creature
+  - encounter_creatures
   - personaggi
   - mappe
   - audio
+  - ricompense
+  - gancio
+  - uso_al_tavolo
+  - prossima_mossa
+  - entita_impattate
+  - propaga_a
+  - conseguenze
   - pericolo
+  - pressione
   - round
   - condizioni
 fields:
@@ -57,9 +67,17 @@ fields:
     id: fazioni
     type: MultiFile
     options: {}
+  - name: sessioni
+    id: sessioni
+    type: MultiFile
+    options: {}
   - name: creature
     id: creature
     type: MultiFile
+    options: {}
+  - name: encounter_creatures
+    id: encounter_creatures
+    type: Input
     options: {}
   - name: personaggi
     id: personaggi
@@ -73,8 +91,40 @@ fields:
     id: audio
     type: MultiFile
     options: {}
+  - name: ricompense
+    id: ricompense
+    type: MultiFile
+    options: {}
+  - name: gancio
+    id: gancio
+    type: Input
+    options: {}
+  - name: uso_al_tavolo
+    id: uso_al_tavolo
+    type: Input
+    options: {}
+  - name: prossima_mossa
+    id: prossima_mossa
+    type: Input
+    options: {}
+  - name: entita_impattate
+    id: entita_impattate
+    type: MultiFile
+    options: {}
+  - name: propaga_a
+    id: propaga_a
+    type: MultiFile
+    options: {}
+  - name: conseguenze
+    id: conseguenze
+    type: MultiFile
+    options: {}
   - name: pericolo
     id: pericolo
+    type: Number
+    options: {}
+  - name: pressione
+    id: pressione
     type: Number
     options: {}
   - name: round
@@ -86,4 +136,3 @@ fields:
     type: Input
     options: {}
 ---
-
