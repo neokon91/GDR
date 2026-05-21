@@ -235,6 +235,10 @@ const ALLOWED_STATES = new Set([
     "scomparso",
     "smistata"
 ]);
+const LIVE_ENTITY_CATEGORIES = new Set(["luogo", "personaggio", "fazione", "missione", "evento storico", "oggetto", "tracciato", "relazione", "risorsa", "cultura", "religione", "societa"]);
+const CODEX_CATEGORIES = new Set(["luogo", "personaggio", "fazione", "missione", "tracciato", "relazione", "evento storico", "oggetto", "cultura", "religione", "societa"]);
+const PLAYABLE_MAP_USES = new Set(["zoom", "esagoni", "dungeon", "scena"]);
+const STRUCTURED_MAP_USES = new Set(["fronte", "indizi", "regione"]);
 const RESOURCE_ENTITY_TYPES = [
     "risorsa",
     "merce",
@@ -1156,8 +1160,7 @@ for (const [fileRel, fm] of realEntries) {
         warnings.push(`${fileRel}: luogo pronto senza pericolo, stabilita o pressione`);
     }
 
-    const liveCategories = new Set(["luogo", "personaggio", "fazione", "missione", "evento storico", "oggetto", "tracciato", "relazione", "risorsa", "cultura", "religione", "societa"]);
-    if (isLiveEntityNote(fileRel) && liveCategories.has(String(fm.categoria ?? "")) && fm.stato !== "archiviata") {
+    if (isLiveEntityNote(fileRel) && LIVE_ENTITY_CATEGORIES.has(String(fm.categoria ?? "")) && fm.stato !== "archiviata") {
         if (!hasAny(fm, ["gancio", "uso_al_tavolo", "player_safe", "prossima_mossa", "connessioni"])) {
             warnings.push(`${fileRel}: entita viva senza gancio, uso al tavolo, player_safe, prossima_mossa o connessioni`);
         }
@@ -1174,8 +1177,7 @@ for (const [fileRel, fm] of realEntries) {
         warnings.push(`${fileRel}: pubblico true con campi DM evidenti`);
     }
 
-    const codexCategories = new Set(["luogo", "personaggio", "fazione", "missione", "tracciato", "relazione", "evento storico", "oggetto", "cultura", "religione", "societa"]);
-    if (isLiveEntityNote(fileRel) && codexCategories.has(String(fm.categoria ?? "")) && fm.stato !== "archiviata") {
+    if (isLiveEntityNote(fileRel) && CODEX_CATEGORIES.has(String(fm.categoria ?? "")) && fm.stato !== "archiviata") {
         const missingCodex = [];
         if (!hasCodexIdentity(fm)) missingCodex.push("identita");
         if (!hasCodexTableUse(fm)) missingCodex.push("al tavolo");
@@ -1239,8 +1241,6 @@ for (const [fileRel, fm] of realEntries) {
     }
 
     if (fileRel.startsWith("Risorse/Mappe/") && fileRel !== "Risorse/Mappe/Mappe.md" && fm.stato !== "archiviata") {
-        const playableMapUses = new Set(["zoom", "esagoni", "dungeon", "scena"]);
-        const structuredMapUses = new Set(["fronte", "indizi", "regione"]);
         const mapUse = String(fm.uso ?? "");
 
         if (!hasAny(fm, ["uso_al_tavolo", "gancio"])) {
@@ -1255,7 +1255,7 @@ for (const [fileRel, fm] of realEntries) {
             warnings.push(`${fileRel}: mappa DM senza cosa nascondere, prossima_mossa o versione giocatori`);
         }
 
-        if (playableMapUses.has(mapUse) && fm.stato === "pronto") {
+        if (PLAYABLE_MAP_USES.has(mapUse) && fm.stato === "pronto") {
             if (!hasValue(fm.mondo)) {
                 warnings.push(`${fileRel}: mappa pronta senza mondo`);
             }
@@ -1264,7 +1264,7 @@ for (const [fileRel, fm] of realEntries) {
             }
         }
 
-        if (structuredMapUses.has(mapUse) && fm.stato === "pronto" && !hasAny(fm, ["mondo", "fazioni", "personaggi", "missioni", "luoghi"])) {
+        if (STRUCTURED_MAP_USES.has(mapUse) && fm.stato === "pronto" && !hasAny(fm, ["mondo", "fazioni", "personaggi", "missioni", "luoghi"])) {
             warnings.push(`${fileRel}: mappa strutturale pronta senza collegamenti canonici`);
         }
 
