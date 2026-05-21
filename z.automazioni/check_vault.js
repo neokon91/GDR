@@ -1103,13 +1103,17 @@ for (const [fileRel, fm] of realEntries) {
 }
 
 if (warnings.length) {
-    console.log("Avvisi:");
-    for (const warning of warnings) console.log(`- ${warning}`);
+    console.error("Avvisi bloccanti:");
+    for (const warning of warnings) console.error(`- ${warning}`);
 }
 
 if (errors.length) {
     console.error("Errori:");
     for (const error of errors) console.error(`- ${error}`);
+    process.exit(1);
+}
+
+if (warnings.length) {
     process.exit(1);
 }
 

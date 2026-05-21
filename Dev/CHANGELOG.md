@@ -29,10 +29,12 @@
 - `import_watabou_city.js` e `import_watabou_dungeon.js` per importare JSON Watabou City/One Page Dungeon come bozze operative.
 - `check:importers` con fixture dry-run per Azgaar e Watabou.
 - `render:metadata` e `check:metadata` per generare e verificare anteprime fileClass/Bases da `frontmatter_profiles.yaml`.
+- Disciplina zero-warning: `check_vault.js` ora tratta ogni warning come blocker di `npm run check`.
 
 ### Migliorato
 
 - [[Dev/NEXT_PHASE_HANDOFF]] chiarisce che M6 e completato e che la prossima fase deve concentrarsi su schede plugin-native, non su nuove dashboard.
+- [[Dev/NEXT_PHASE_HANDOFF]] aggiornato dopo M7 e chiusura warning demo: la prossima fase e M8 Release Evidence And Zero-Warning Discipline.
 - [[Motore Mondo Vivo]] e [[Cosa Succede Fuori Scena]] mostrano coda di continuita, bersagli da verificare e buchi di propagazione senza duplicare dashboard.
 - [[Risorse/Post Sessione Guidato]] e [[Durante il Gioco]] collegano scelta, conseguenza, bersagli, prossima mossa e recap.
 - TemplateFactory ora valida simmetria tra profili runtime e frontmatter, campi core/plugin/dominio e copertura minima di fileClass/Bases.

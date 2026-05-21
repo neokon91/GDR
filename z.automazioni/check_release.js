@@ -27,6 +27,12 @@ const RELEASE_IMPORT_DOC_MARKERS = [
     "npm run import:watabou:city",
     "npm run import:watabou:dungeon"
 ];
+const RELEASE_HANDOFF_MARKERS = [
+    "Warning noti: **nessuno**",
+    "M8 Release Evidence And Zero-Warning Discipline",
+    "disciplina zero-warning",
+    "`npm run check` deve restare senza warning"
+];
 
 const errors = [];
 
@@ -57,6 +63,16 @@ for (const marker of RELEASE_IMPORT_DOC_MARKERS) {
     if (!importGuideText.includes(marker)) {
         errors.push(`Risorse/Importare Mappe.md: comando import mancante (${marker})`);
     }
+}
+
+const handoffText = readTextRel(ROOT, "Dev/NEXT_PHASE_HANDOFF.md");
+for (const marker of RELEASE_HANDOFF_MARKERS) {
+    if (!handoffText.includes(marker)) {
+        errors.push(`Dev/NEXT_PHASE_HANDOFF.md: handoff M8 obsoleto o incompleto (${marker})`);
+    }
+}
+if (/Warning noti:\s*\n\s*-/i.test(handoffText)) {
+    errors.push("Dev/NEXT_PHASE_HANDOFF.md: non deve elencare warning noti dopo la disciplina zero-warning");
 }
 
 const releaseCleanText = readTextRel(ROOT, "z.automazioni/release_clean.js");

@@ -15,22 +15,20 @@ GDR deve creare mondi persistenti, interconnessi, giocabili, riutilizzabili e pu
 ## Stato Attuale
 
 M6 Continuity Engine e stato implementato nel commit `3761c55`.
+M7 Plugin-Native Sheet System e stato implementato nel commit `adae038`.
+I warning demo M6 sono stati chiusi nel commit `243f196`.
 
 Completato:
 
 - azioni Meta Bind per applicare conseguenze e propagare entita con `propagazione_stato`, `propagato_da`, `aggiornamenti_richiesti`, `ultima_propagazione`, `applicata_a`, pressione e prossima mossa opzionale;
-- funzioni DataviewJS riusabili in `z.engine/session_views.js`: `renderContinuityQueue`, `renderPropagationTargets`, `renderContinuityGaps`;
+- funzioni DataviewJS riusabili in `z.engine/session_views.js`: `renderContinuityQueue`, `renderPropagationTargets`, `renderContinuityGaps`, `renderM7FamilyCards` e viste M7 sessione;
 - Motore Mondo Vivo e Cosa Succede Fuori Scena come superfici M6 principali, senza nuova dashboard;
 - Post Sessione Guidato e Durante il Gioco collegati al flusso scelta -> conseguenza -> bersagli -> prossima mossa;
-- TemplateFactory aggiornato per generare schede con tabs logici e callout custom funzionali, contenenti Meta Bind, Dataview, DataviewJS, Bases ed Excalidraw dove utile.
+- TemplateFactory aggiornata per sessione, luogo, fazione, PNG, relazione, tracciato ed evento/conseguenza con tabs logici, callout funzionali, Meta Bind, Dataview, DataviewJS, Bases, Tasks, Maps, Excalidraw e Canvas dove utile;
+- check automatici M7 sui template generati: schede lunghe con tabs, callout non vuoti, blocchi dinamici e fallback Markdown;
+- disciplina zero-warning: `npm run check` deve fallire se `check_vault.js` produce warning.
 
-Warning noti:
-
-- `Mondi/Luoghi/Porto Di Brumafonda.md`: impatto senza bersagli M6;
-- `Mondi/Missioni/Recuperare La Campana Sommersa.md`: impatto senza bersagli M6;
-- `Mondi/Sessioni/2026-05-28 - La Campana Nella Nebbia.md`: impatto senza bersagli M6.
-
-Questi warning sono voluti: indicano contenuti demo da completare con `entita_impattate`, `propaga_a` o `applicata_a`.
+Warning noti: **nessuno**.
 
 ## Filtro Decisionale
 
@@ -44,17 +42,17 @@ Ogni modifica deve servire almeno uno di questi assi. Evitare dashboard decorati
 
 ## Prossima Fase Consigliata
 
-Fase stretta: **M7 Plugin-Native Sheet System**.
+Fase stretta: **M8 Release Evidence And Zero-Warning Discipline**.
 
-Scopo: portare le schede generate a uno standard Obsidian-native professionale, sfruttando i plugin gia installati invece di aggiungere nuove viste.
+Scopo: rendere la 1.0 verificabile come prodotto consegnabile, non solo come repo che passa test statici.
 
 Priorita:
 
-1. Raffinare TemplateFactory per famiglia nota: sessione, luogo, fazione, PNG, relazione, tracciato, evento/conseguenza.
-2. Rendere ogni tab una sezione esplorabile reale, non una divisione estetica.
-3. Rendere ogni callout custom una superficie funzionale: contenuto, Meta Bind, Dataview, DataviewJS, Bases, Canvas, Excalidraw, Maps o Tasks.
-4. Aggiungere controlli smoke sui template generati: ogni scheda lunga deve avere tabs, callout non vuoti, almeno un blocco dinamico e fallback Markdown.
-5. Migliorare CSS/snippet solo dove serve leggibilita, densita operativa e chiarezza, non decorazione.
+1. Rendere ogni warning un blocker, senza eccezioni silenziose.
+2. Aggiornare [[Dev/Smoke Demo Finale]] con evidenze reali dei flussi: Inizia Qui, crea mondo, prepara sessione, gioca live, post-sessione, vista giocatori, mappe.
+3. Aggiungere controlli automatici contro handoff o changelog obsoleti quando una milestone viene chiusa.
+4. Collegare le evidenze visuali a una release pulita verificabile con `npm run release:clean`.
+5. Tenere M8 fuori da nuove dashboard: deve rafforzare affidabilita, consegna e regressioni.
 
 ## Vincoli Tecnici
 
@@ -64,6 +62,7 @@ Priorita:
 - I wrapper Templater utente non devono dipendere da `require` relativo.
 - D&D 5.5/SRD resta il profilo regolamentare principale.
 - Le nuove funzioni devono produrre impatto sistemico sul mondo.
+- `npm run check` deve restare senza warning.
 
 ## Non Fare Nella Prossima Fase
 
@@ -72,6 +71,7 @@ Priorita:
 - Non aggiungere callout con solo titolo.
 - Non usare tabs come cosmetica: ogni tab deve contenere una funzione distinta.
 - Non trasformare il vault in project management generico.
+- Non degradare warning a rumore accettato.
 
 ## Debito Separato
 
