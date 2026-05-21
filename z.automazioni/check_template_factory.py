@@ -39,6 +39,8 @@ REQUIRED_MODULES = {
     "entity_depth",
     "taxonomy_depth",
     "dnd55_options",
+    "link_targets",
+    "tag_rules",
     "workflows",
 }
 CRITICAL_RENDERED_GENERATORS = {
@@ -693,6 +695,63 @@ def validate_dnd55_options(modules: dict[str, dict], errors: list[str]) -> None:
                 fail(f"dnd55_options.{group_id}[{index}]: label non localizzata in italiano ({label})", errors)
 
 
+def validate_link_target_contracts(modules: dict[str, dict], errors: list[str]) -> None:
+    link_targets = modules["link_targets"]
+    fields = link_targets.get("fields", {})
+    if not isinstance(fields, dict) or not fields:
+        fail("link_targets: nessun campo definito", errors)
+        return
+
+    known_fields = collect_field_names(modules["fields_core"])
+    for field_id, field in fields.items():
+        if field_id not in known_fields:
+            fail(f"link_targets.{field_id}: campo non presente in fields_core", errors)
+        target = str((field or {}).get("target", ""))
+        if target not in {"note_or_section_or_block", "section", "block"}:
+            fail(f"link_targets.{field_id}: target non supportato ({target})", errors)
+
+    syntax = link_targets.get("syntax", {})
+    samples = {
+        "note": "[[Mondi/Luoghi/Porto Di Brumafonda]]",
+        "section": "[[Mondi/Sessioni/2026-05-28 - La Campana Nella Nebbia#Apertura]]",
+        "block": "[[Risorse/Tabelle/Tabelle#^complicazioni]]",
+    }
+    for syntax_id, sample in samples.items():
+        pattern = syntax.get(syntax_id)
+        if not pattern:
+            fail(f"link_targets.syntax.{syntax_id}: pattern mancante", errors)
+            continue
+        try:
+            if not re.fullmatch(str(pattern), sample):
+                fail(f"link_targets.syntax.{syntax_id}: pattern non valida il campione {sample}", errors)
+        except re.error as exc:
+            fail(f"link_targets.syntax.{syntax_id}: regex non valida ({exc})", errors)
+
+
+def allowed_tag_values(modules: dict[str, dict]) -> set[str]:
+    allowed: set[str] = set()
+    for tags in modules["tag_rules"].get("allowed_tags", {}).values():
+        if isinstance(tags, list):
+            allowed.update(str(tag) for tag in tags)
+    return allowed
+
+
+def validate_tag_rules(modules: dict[str, dict], errors: list[str]) -> None:
+    tag_rules = modules["tag_rules"]
+    if tag_rules.get("language") != "it":
+        fail("tag_rules: language deve essere it", errors)
+    allowed = allowed_tag_values(modules)
+    if not allowed:
+        fail("tag_rules: nessun tag consentito", errors)
+        return
+
+    for tag in sorted(allowed):
+        if tag.startswith("#"):
+            fail(f"tag_rules: tag senza cancelletto richiesto ({tag})", errors)
+        if not re.fullmatch(r"[a-z0-9][a-z0-9/-]*", tag):
+            fail(f"tag_rules: tag non semplice o non minuscolo ({tag})", errors)
+
+
 def validate_generated_previews(modules: dict[str, dict], errors: list[str]) -> None:
     if not GENERATED.exists():
         return
@@ -741,6 +800,10 @@ def main() -> int:
         validate_taxonomy_depth_contracts(modules, errors)
     if not errors:
         validate_dnd55_options(modules, errors)
+    if not errors:
+        validate_link_target_contracts(modules, errors)
+    if not errors:
+        validate_tag_rules(modules, errors)
     if not errors:
         validate_rendering(modules, errors)
     if not errors:

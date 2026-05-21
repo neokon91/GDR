@@ -40,6 +40,7 @@
 - `entity_depth.yaml` introduce contratti YAML per profondita fantasy di luogo, fazione, missione e tracciato: campi, prompt runtime, sezioni, tabs e superfici plugin obbligatorie.
 - `taxonomy_depth.yaml` introduce contratti verificati per D&D 5.5 e worldbuilding: opzioni giocatore, magia/regole, encounter tools, societa/economia, religione/cosmologia e storia/geografia/ecologia.
 - `dnd55_options.yaml` introduce valori D&D 5.5 localizzati in italiano per livelli incantesimo, scuole, tempi, componenti, classi, specie, tipi creatura, taglie, rarita, condizioni, CD, danni e proprieta equipaggiamento.
+- `link_targets.yaml` e `tag_rules.yaml` introducono contratti per wikilink granulari nel frontmatter e tag italiani controllati.
 
 ### Migliorato
 
@@ -73,6 +74,7 @@
 - I generatori `luogo`, `fazione`, `missione` e `tracciato` raccolgono profondita narrativa da prompt YAML e la scrivono nel frontmatter senza logica strutturale hardcoded.
 - Aggiunti profili YAML minimi per incantesimi, classi, specie, background, talenti, regole, trappole, pericoli ambientali e tesori, così lo SRD puo diventare contenuto collegabile al mondo e non solo compendio statico.
 - I profili runtime D&D 5.5 puntano a sorgenti opzioni italiane, mantenendo chiavi tecniche solo quando servono compatibilita con plugin e renderer.
+- `npm run check` ora segnala tag non dichiarati e link granulari malformati nei campi `fonti`, `riferimenti_srd`, `riferimenti_regola`, `sezioni_collegate`, `blocchi_collegati` e `tabelle_collegate`.
 
 ### Verificato
 

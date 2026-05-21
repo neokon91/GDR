@@ -42,6 +42,10 @@ Usa questi campi in modo coerente, perché alimentano Dataview, dashboard, Meta 
 - `progress_value`, `progress_max`, `innesco`, `posta`: alimentano clock e progress track. Usali su `categoria: tracciato` e, quando serve, sulle missioni.
 - `causa`, `conseguenze`, `luoghi`, `fazioni`, `missioni`: alimentano Timeline Causale.
 - `vuole`, `sa`, `leva`, `segreto`, `segreti`, `indizi`, `voci`, `domande_aperte`, `tensione`, `funzione_narrativa`: campi di profondita lore. Devono restare brevi e giocabili, non saggi enciclopedici.
+- `fonti`, `riferimenti_srd`, `riferimenti_regola`: usano wikilink precisi a note, sezioni o block id quando una scheda dipende da una fonte specifica.
+- `sezioni_collegate`: usa solo link a sezioni, per esempio `[[Mondi/Sessioni/2026-05-28 - La Campana Nella Nebbia#Apertura]]`.
+- `blocchi_collegati` e `tabelle_collegate`: usano block id Obsidian, per esempio `[[Risorse/Tabelle/Tabelle#^complicazioni]]`.
+- `tags`: opzionale e controllato. La tassonomia principale resta `categoria`, `tipo` e `stato`; i tag servono solo a marcatori trasversali semplici e italiani.
 
 Per le note di categoria `mondo`, usa anche `tono`, `tema`, `tecnologia`, `magia`, `continenti`, `fazioni`, `religioni` e `campagne`.
 
@@ -71,6 +75,26 @@ Regole per le automazioni di creazione:
 - per tracciati, chiedi almeno `mondo`, `missioni`, `fazioni`, `luoghi`, `progress_max`, `innesco`, `prossima_mossa`;
 - i campi lore opzionali devono essere brevi: una frase per `vuole`, `sa`, `leva`, `tensione`, `segreto`, `prossima_mossa`, `scadenza_mondo`;
 - non creare collegamenti reciproci modificando automaticamente note gia esistenti, a meno che l'utente lo chieda: e facile sovrascrivere lavoro manuale. Le viste Dataview devono ricostruire i backlink operativi leggendo i campi della nota nuova.
+
+## Wikilink Granulari E Tag
+
+Il vault deve sfruttare il frontmatter come grafo Obsidian, non solo come tabella. I link a nota intera restano il default per `connessioni`, `entita_impattate` e `propaga_a`; quando serve precisione, usare link a sezione o block id nei campi dedicati.
+
+Regole:
+
+- link a nota intera: `[[Mondi/Luoghi/Porto Di Brumafonda]]`;
+- link a sezione: `[[Mondi/Sessioni/2026-05-28 - La Campana Nella Nebbia#Apertura]]`;
+- link a blocco: `[[Risorse/Tabelle/Tabelle#^complicazioni]]`;
+- non mettere link granulari casuali in campi generici se esiste un campo dedicato;
+- i tag devono essere pochi, italiani, minuscoli e dichiarati in `Dev/TemplateFactory/modules/tag_rules.yaml`;
+- non usare i tag per sostituire `categoria`, `tipo`, `stato`, `fileClass` o campi wikilink.
+
+I contratti vivono in:
+
+- `Dev/TemplateFactory/modules/link_targets.yaml`;
+- `Dev/TemplateFactory/modules/tag_rules.yaml`.
+
+`npm run check` blocca tag non previsti e link granulari malformati nei campi dedicati.
 
 ## Cartelle Di Servizio
 

@@ -64,6 +64,8 @@ Gli script in `z.automazioni/` devono restare sottili:
 - `entity_depth.yaml` dichiara quali famiglie fantasy devono esporre profondita lore, giocabilita, continuita, tabs e superfici plugin.
 - `taxonomy_depth.yaml` dichiara la copertura tassonomica minima per categorie D&D 5.5 e worldbuilding profondo.
 - `dnd55_options.yaml` dichiara opzioni e valori D&D 5.5 localizzati in italiano.
+- `link_targets.yaml` dichiara i campi per wikilink granulari a note, sezioni e block id.
+- `tag_rules.yaml` dichiara i tag italiani ammessi.
 - Un generatore Templater non deve restituire blocchi `---` inline: deve usare `helpers.renderFrontmatter("profilo", valori)`.
 - Gli importer CLI possono usare un renderer locale equivalente solo quando non girano dentro Obsidian, ma il profilo resta dichiarato in `frontmatter_profiles.yaml`.
 
@@ -101,6 +103,14 @@ La conseguenza pratica: YAML decide cosa esiste; Jinja assembla; JS esegue funzi
 
 `npm run check:templates` blocca il vault se mancano gruppi obbligatori come scuole di magia, livelli incantesimo, taglie, tipi creatura, rarita, azioni, condizioni, CD, danni, classi, specie e background, oppure se i profili runtime puntano a gruppi inesistenti.
 
+## Regola Link E Tag
+
+`link_targets.yaml` definisce dove usare wikilink precisi nel frontmatter: `fonti`, `riferimenti_srd`, `riferimenti_regola`, `sezioni_collegate`, `blocchi_collegati` e `tabelle_collegate`.
+
+`tag_rules.yaml` limita i tag a un vocabolario italiano e semplice. La tassonomia primaria resta `categoria`, `tipo` e `stato`; i tag sono marcatori trasversali opzionali.
+
+`npm run check:templates` valida i contratti YAML, mentre `npm run check` blocca tag non ammessi e link granulari malformati nelle note reali.
+
 ## Moduli
 
 | Modulo | Responsabilita |
@@ -120,6 +130,8 @@ La conseguenza pratica: YAML decide cosa esiste; Jinja assembla; JS esegue funzi
 | `entity_depth.yaml` | Contratti di profondita per famiglie fantasy governate da YAML. |
 | `taxonomy_depth.yaml` | Copertura minima verificata per categorie D&D 5.5 e worldbuilding. |
 | `dnd55_options.yaml` | Valori D&D 5.5 localizzati in italiano per creazione homebrew. |
+| `link_targets.yaml` | Campi per wikilink granulari a note, sezioni e block id. |
+| `tag_rules.yaml` | Tag italiani ammessi e regole d'uso. |
 
 `frontmatter_profiles.yaml` distingue campi core, campi di dominio e campi legati a plugin come Calendarium o Maps. `check:templates` renderizza un campione per ogni profilo e verifica che il frontmatter risultante sia YAML valido.
 

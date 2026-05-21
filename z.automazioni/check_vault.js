@@ -60,6 +60,11 @@ const REQUIRED_FILES = [
     "Dev/TemplateFactory/modules/bases_views.yaml",
     "Dev/TemplateFactory/modules/frontmatter_profiles.yaml",
     "Dev/TemplateFactory/modules/runtime_profiles.yaml",
+    "Dev/TemplateFactory/modules/entity_depth.yaml",
+    "Dev/TemplateFactory/modules/taxonomy_depth.yaml",
+    "Dev/TemplateFactory/modules/dnd55_options.yaml",
+    "Dev/TemplateFactory/modules/link_targets.yaml",
+    "Dev/TemplateFactory/modules/tag_rules.yaml",
     "Dev/TemplateFactory/modules/workflows.yaml",
     "Hub/1. DM Dashboard.md",
     "Hub/Atlante del Mondo.md",
@@ -217,6 +222,7 @@ const REQUIRED_METADATA_MENU_PRESETS = [
     "missioni",
     "tracciati"
 ];
+const TAG_RULES_FILE = "Dev/TemplateFactory/modules/tag_rules.yaml";
 const ALLOWED_CATEGORIES = new Set([
     "avventura",
     "campagna",
@@ -415,6 +421,36 @@ function readJson(file) {
 
 const readOptionalJson = file => fs.existsSync(file) ? readJson(file) : null;
 const readOptionalJsonRel = file => readOptionalJson(repoPath(file));
+
+function arrayValue(value) {
+    if (Array.isArray(value)) return value;
+    if (hasValue(value)) return [value];
+    return [];
+}
+
+function loadAllowedTags() {
+    const text = readRel(TAG_RULES_FILE);
+    const allowed = new Set();
+    for (const line of text.split(/\r?\n/)) {
+        const match = line.match(/^\s+-\s+([a-z0-9][a-z0-9/-]*)\s*$/);
+        if (match) allowed.add(match[1]);
+    }
+    return allowed;
+}
+
+function isGranularWikilink(value) {
+    return /^\[\[[^\]|]+(?:#[^\]|]+)?(?:\|[^\]]+)?\]\]$/.test(String(value ?? "").trim());
+}
+
+function isSectionWikilink(value) {
+    const text = String(value ?? "").trim();
+    return /^\[\[[^\]|]+#[^^\]|]+(?:\|[^\]]+)?\]\]$/.test(text);
+}
+
+function isBlockWikilink(value) {
+    const text = String(value ?? "").trim();
+    return /^\[\[[^\]|]+#\^[A-Za-z0-9_-]+(?:\|[^\]]+)?\]\]$/.test(text);
+}
 
 function flatText(value) {
     if (Array.isArray(value)) return value.map(flatText).join(" ");
@@ -716,6 +752,7 @@ validateObsidianConfig({
 
 const realEntries = [...markdownMeta.entries()]
     .filter(([fileRel]) => !isFolderIndex(fileRel));
+const allowedTags = loadAllowedTags();
 
 const generatedDrafts = realEntries
     .filter(([fileRel, fm]) => isGeneratedFantasyDraft(fileRel, fm) && fm.stato === "bozza");
@@ -881,6 +918,37 @@ if (!existsRel(gptIndexRel)) {
 
 for (const [fileRel, fm] of realEntries) {
     const text = readRel(fileRel);
+
+    for (const tag of arrayValue(fm.tags)) {
+        const normalizedTag = String(tag).replace(/^#/, "").trim();
+        if (normalizedTag && !allowedTags.has(normalizedTag)) {
+            warnings.push(`${fileRel}: tag non previsto o non coerente (${normalizedTag})`);
+        }
+    }
+
+    for (const field of ["fonti", "riferimenti_srd", "riferimenti_regola"]) {
+        for (const target of arrayValue(fm[field])) {
+            if (!isGranularWikilink(target)) {
+                warnings.push(`${fileRel}: ${field} deve usare wikilink a nota, sezione o blocco (${target})`);
+            }
+        }
+    }
+
+    for (const field of ["sezioni_collegate"]) {
+        for (const target of arrayValue(fm[field])) {
+            if (!isSectionWikilink(target)) {
+                warnings.push(`${fileRel}: ${field} deve usare wikilink a sezione Nota#Sezione (${target})`);
+            }
+        }
+    }
+
+    for (const field of ["blocchi_collegati", "tabelle_collegate"]) {
+        for (const target of arrayValue(fm[field])) {
+            if (!isBlockWikilink(target)) {
+                warnings.push(`${fileRel}: ${field} deve usare wikilink a block id Nota#^blocco (${target})`);
+            }
+        }
+    }
 
     if (isReleaseContentNote(fileRel) && !hasPluginNativeSheet(text)) {
         warnings.push(`${fileRel}: nota di release senza scheda plugin-native completa (tabs, callout, controlli dinamici, fallback)`);

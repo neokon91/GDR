@@ -96,6 +96,42 @@ fields:
       required: false
       source: meta_bind
       use: luogo principale collegato
+  precise_links:
+    - name: fonti
+      type: wikilink_target_list
+      required: false
+      source: meta_bind
+      use: fonti a note, sezioni o block id
+    - name: riferimenti_srd
+      type: wikilink_target_list
+      required: false
+      source: meta_bind
+      use: riferimenti puntuali al compendio SRD
+    - name: riferimenti_regola
+      type: wikilink_target_list
+      required: false
+      source: meta_bind
+      use: regole precise collegate alla scheda
+    - name: sezioni_collegate
+      type: wikilink_section_list
+      required: false
+      source: meta_bind
+      use: link a sezioni Markdown specifiche
+    - name: blocchi_collegati
+      type: wikilink_block_list
+      required: false
+      source: meta_bind
+      use: link a block id Obsidian
+    - name: tabelle_collegate
+      type: wikilink_block_list
+      required: false
+      source: meta_bind
+      use: tabelle o generatori collegati via block id
+    - name: tags
+      type: tag_list
+      required: false
+      source: obsidian
+      use: tag italiani opzionali e controllati
   table_use:
     - name: identita
       type: text

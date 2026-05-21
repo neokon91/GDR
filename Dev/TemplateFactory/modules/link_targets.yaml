@@ -1,0 +1,37 @@
+id: link_targets
+purpose: Contratti per wikilink granulari nel frontmatter, inclusi link a sezioni e block id Obsidian.
+version: 0.1.0
+fields:
+  fonti:
+    type: wikilink_target_list
+    target: note_or_section_or_block
+    use: fonti generali, note SRD, handout, sessioni o appunti con riferimento preciso
+  riferimenti_srd:
+    type: wikilink_target_list
+    target: note_or_section_or_block
+    use: riferimenti a regole, incantesimi, mostri, oggetti o opzioni SRD
+  riferimenti_regola:
+    type: wikilink_target_list
+    target: note_or_section_or_block
+    use: regole puntuali usate dalla scheda
+  sezioni_collegate:
+    type: wikilink_section_list
+    target: section
+    use: link a sezioni Markdown specifiche con sintassi Nota#Sezione
+  blocchi_collegati:
+    type: wikilink_block_list
+    target: block
+    use: link a block id Obsidian con sintassi Nota#^blocco
+  tabelle_collegate:
+    type: wikilink_block_list
+    target: block
+    use: tabelle tirabili o riusabili, per Dice Roller e preparazione
+syntax:
+  note: "\\[\\[[^\\]#^|]+(?:\\|[^\\]]+)?\\]\\]"
+  section: "\\[\\[[^\\]|]+#[^^\\]|]+(?:\\|[^\\]]+)?\\]\\]"
+  block: "\\[\\[[^\\]|]+#\\^[A-Za-z0-9_-]+(?:\\|[^\\]]+)?\\]\\]"
+contracts:
+  frontmatter_may_use_note_section_or_block_links: true
+  fields_must_exist_in_fields_core: true
+  block_links_must_use_caret: true
+  section_links_must_not_use_caret: true
