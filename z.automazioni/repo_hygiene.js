@@ -2,7 +2,7 @@
 
 const fs = require("fs");
 const path = require("path");
-const { rel: relativePath, walk } = require("./node_utils");
+const { readJson: readJsonFile, rel: relativePath, walk } = require("./node_utils");
 
 const ROOT = process.cwd();
 const FIX = process.argv.includes("--fix");
@@ -25,12 +25,9 @@ function rel(file) {
 }
 
 function readJson(file) {
-    try {
-        return JSON.parse(fs.readFileSync(file, "utf8"));
-    } catch (error) {
+    return readJsonFile(file, null, error => {
         errors.push(`${rel(file)}: JSON non valido (${error.message})`);
-        return null;
-    }
+    });
 }
 
 const files = walk(ROOT, { ignoredDirs: IGNORED_DIRS });

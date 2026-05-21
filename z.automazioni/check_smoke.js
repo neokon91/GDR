@@ -1,8 +1,6 @@
 #!/usr/bin/env node
 
-const fs = require("fs");
-const path = require("path");
-const { hasAny, hasValue, parseFrontmatter } = require("./node_utils");
+const { existsRel, hasAny, hasValue, parseFrontmatter, readTextRel } = require("./node_utils");
 
 const ROOT = process.cwd();
 const errors = [];
@@ -31,28 +29,20 @@ const PUBLIC_DEMO_FILES = [
 
 const privatePublicPattern = /\b(dm|segreto|segreti|nascost[oaie]?|verita|verità|prossima mossa|mosse segrete|retroscena|non rivelare)\b/i;
 
-function filePath(relPath) {
-    return path.join(ROOT, relPath);
-}
-
-function read(relPath) {
-    return fs.readFileSync(filePath(relPath), "utf8");
-}
-
 for (const relPath of DEMO_REQUIRED_FILES) {
-    if (!fs.existsSync(filePath(relPath))) {
+    if (!existsRel(ROOT, relPath)) {
         errors.push(`Smoke demo: file obbligatorio mancante ${relPath}`);
     }
 }
 
-const demoWorld = fs.existsSync(filePath("Mondi/Brumafonda Demo.md")) ? read("Mondi/Brumafonda Demo.md") : "";
+const demoWorld = readTextRel(ROOT, "Mondi/Brumafonda Demo.md");
 for (const marker of ["[[Campagna - Sale Sotto La Nebbia]]", "[[Mappa Pubblica Di Brumafonda]]"]) {
     if (!demoWorld.includes(marker)) {
         errors.push(`Smoke demo: Brumafonda Demo non contiene ${marker}`);
     }
 }
 
-const playerView = fs.existsSync(filePath("Hub/Vista Giocatori.md")) ? read("Hub/Vista Giocatori.md") : "";
+const playerView = readTextRel(ROOT, "Hub/Vista Giocatori.md");
 for (const marker of ["renderPlayerPortalStatus", "renderPlayerRecap", "renderPublicSafety"]) {
     if (!playerView.includes(marker)) {
         errors.push(`Smoke demo: Vista Giocatori non contiene ${marker}`);
@@ -60,8 +50,8 @@ for (const marker of ["renderPlayerPortalStatus", "renderPlayerRecap", "renderPu
 }
 
 const sessionPath = "Mondi/Sessioni/2026-05-28 - La Campana Nella Nebbia.md";
-if (fs.existsSync(filePath(sessionPath))) {
-    const session = parseFrontmatter(read(sessionPath));
+if (existsRel(ROOT, sessionPath)) {
+    const session = parseFrontmatter(readTextRel(ROOT, sessionPath));
     if (session.pubblico !== true) errors.push("Smoke demo: la sessione demo deve avere pubblico: true");
     if (!hasValue(session.recap_pubblico)) errors.push("Smoke demo: la sessione demo non ha recap_pubblico");
     if (privatePublicPattern.test(String(session.recap_pubblico))) {
@@ -73,8 +63,8 @@ if (fs.existsSync(filePath(sessionPath))) {
 }
 
 const mapPath = "Risorse/Mappe/Mappa Pubblica Di Brumafonda.md";
-if (fs.existsSync(filePath(mapPath))) {
-    const map = parseFrontmatter(read(mapPath));
+if (existsRel(ROOT, mapPath)) {
+    const map = parseFrontmatter(readTextRel(ROOT, mapPath));
     if (map.pubblico !== true) errors.push("Smoke demo: la mappa demo deve avere pubblico: true");
     if (!hasAny(map, ["player_safe", "cosa_mostrare", "luoghi", "luogo"])) {
         errors.push("Smoke demo: la mappa pubblica non ha testo o luoghi player-safe");
@@ -82,8 +72,8 @@ if (fs.existsSync(filePath(mapPath))) {
 }
 
 const handoutPath = "Mondi/Dispense/Avviso Della Dogana Di Brumafonda.md";
-if (fs.existsSync(filePath(handoutPath))) {
-    const handout = parseFrontmatter(read(handoutPath));
+if (existsRel(ROOT, handoutPath)) {
+    const handout = parseFrontmatter(readTextRel(ROOT, handoutPath));
     if (handout.pubblico !== true || handout.stato !== "pronto") {
         errors.push("Smoke demo: la dispensa demo deve essere pronta e pubblica");
     }
@@ -93,8 +83,8 @@ if (fs.existsSync(filePath(handoutPath))) {
 }
 
 for (const relPath of PUBLIC_DEMO_FILES) {
-    if (!fs.existsSync(filePath(relPath))) continue;
-    const frontmatter = parseFrontmatter(read(relPath));
+    if (!existsRel(ROOT, relPath)) continue;
+    const frontmatter = parseFrontmatter(readTextRel(ROOT, relPath));
     for (const privateField of ["segreti", "prossima_mossa", "mosse_segrete", "verita_nascosta"]) {
         if (hasValue(frontmatter[privateField])) {
             errors.push(`Smoke demo: file pubblico con campo DM ${privateField}: ${relPath}`);
@@ -102,7 +92,7 @@ for (const relPath of PUBLIC_DEMO_FILES) {
     }
 }
 
-const smokeDoc = fs.existsSync(filePath("Dev/Smoke Demo Finale.md")) ? read("Dev/Smoke Demo Finale.md") : "";
+const smokeDoc = readTextRel(ROOT, "Dev/Smoke Demo Finale.md");
 for (const marker of ["Smoke visuale Obsidian ancora da eseguire", "Screenshot/GIF di evidenza ancora da acquisire"]) {
     if (!smokeDoc.includes(marker)) {
         errors.push(`Smoke demo: stato manuale mancante in Dev/Smoke Demo Finale.md (${marker})`);

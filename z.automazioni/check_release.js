@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 
-const path = require("path");
-const { readTextIfExists } = require("./node_utils");
+const { readTextRel } = require("./node_utils");
 
 const ROOT = process.cwd();
 const RELEASE_EXPECTED_VERSION = "1.0.0";
@@ -26,11 +25,7 @@ const RELEASE_VERIFICATION_MARKERS = [
 
 const errors = [];
 
-function readIfExists(relPath) {
-    return readTextIfExists(path.join(ROOT, relPath));
-}
-
-const versionText = readIfExists("VERSION.md");
+const versionText = readTextRel(ROOT, "VERSION.md");
 if (!versionText.includes(`Versione: \`${RELEASE_EXPECTED_VERSION}\``)) {
     errors.push(`VERSION.md: versione attesa ${RELEASE_EXPECTED_VERSION}`);
 }
@@ -38,14 +33,14 @@ if (!versionText.includes(`Data: ${RELEASE_EXPECTED_DATE}`)) {
     errors.push(`VERSION.md: data attesa ${RELEASE_EXPECTED_DATE}`);
 }
 
-const changelogText = readIfExists("Dev/CHANGELOG.md");
+const changelogText = readTextRel(ROOT, "Dev/CHANGELOG.md");
 for (const marker of RELEASE_CHANGELOG_MARKERS) {
     if (!changelogText.includes(marker)) {
         errors.push(`Dev/CHANGELOG.md: marker release mancante (${marker})`);
     }
 }
 
-const cleanReleaseText = readIfExists("Dev/Release Pulita.md");
+const cleanReleaseText = readTextRel(ROOT, "Dev/Release Pulita.md");
 for (const marker of RELEASE_VERIFICATION_MARKERS) {
     if (!cleanReleaseText.includes(marker)) {
         errors.push(`Dev/Release Pulita.md: verifica release mancante (${marker})`);

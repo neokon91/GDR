@@ -5,6 +5,18 @@ function rel(root, file) {
     return path.relative(root, file).replace(/\\/g, "/");
 }
 
+function repoPath(root, ...parts) {
+    return path.join(root, ...parts);
+}
+
+function existsRel(root, file) {
+    return fs.existsSync(repoPath(root, file));
+}
+
+function readTextRel(root, file, fallback = "") {
+    return readTextIfExists(repoPath(root, file), fallback);
+}
+
 function walk(dir, options = {}) {
     if (!fs.existsSync(dir)) return [];
 
@@ -104,6 +116,9 @@ module.exports = {
     parseFrontmatter,
     readJson,
     readTextIfExists,
+    readTextRel,
     rel,
+    repoPath,
+    existsRel,
     walk
 };
