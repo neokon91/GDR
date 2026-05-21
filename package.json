@@ -8,7 +8,7 @@
     "check:layer": "node z.automazioni/check_vault.js",
     "check:templates": "python3 z.automazioni/check_template_factory.py",
     "check:metadata": "python3 z.automazioni/render_metadata_surfaces.py --check",
-    "check:smoke": "node z.automazioni/check_smoke.js",
+    "check:smoke": "node z.automazioni/check_smoke.js && node z.automazioni/check_runtime_load.js",
     "check:m11": "node z.automazioni/check_m11_fixture.js",
     "check:release": "node z.automazioni/check_release.js",
     "check:release-artifact": "node z.automazioni/check_release_artifact.js",

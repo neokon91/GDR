@@ -20,6 +20,7 @@ const { validateMarkdownLinks } = require("./checks/markdown_links");
 const { validateMetaBindControls } = require("./checks/metabind_controls");
 const { validateObsidianConfig } = require("./checks/obsidian_config");
 const { validateDndHardening } = require("./checks/dnd_hardening");
+const { validatePlayerSafety } = require("./checks/player_safety");
 
 const ROOT = process.cwd();
 const IGNORED_DIRS = new Set([".git", "node_modules", "dist"]);
@@ -113,6 +114,7 @@ const REQUIRED_LAYER_FILES = [
     "z.automazioni/m11_state.js",
     "z.automazioni/generate_demo_fixture.js",
     "z.automazioni/check_m11_fixture.js",
+    "z.automazioni/check_runtime_load.js",
     "z.automazioni/check_smoke.js",
     "z.automazioni/check_release_artifact.js",
     "z.automazioni/check_release.js",
@@ -133,6 +135,7 @@ const REQUIRED_LAYER_FILES = [
     "z.engine/session_dnd.js",
     "z.engine/session_maps.js",
     "z.engine/session_player.js",
+    "z.engine/session_runtime.js",
     "z.engine/session_views.js"
 ];
 const REQUIRED_DEV_ARCHITECTURE_MARKERS = [
@@ -1227,17 +1230,18 @@ for (const [fileRel, fm] of realEntries) {
         }
     }
 
-    if (fileRel.startsWith("Mondi/Sessioni/") && fm.categoria === "sessione" && hasValue(fm.recap_pubblico)) {
-        if (hasPrivatePublicText(fm.recap_pubblico)) {
-            warnings.push(`${fileRel}: recap_pubblico contiene termini da DM o segreti`);
-        }
-
-        const publicRecap = normalizedText(fm.recap_pubblico);
-        const dmRecap = normalizedText(fm.recap_dm);
-        if (publicRecap && dmRecap && publicRecap === dmRecap) {
-            warnings.push(`${fileRel}: recap_pubblico identico a recap_dm`);
-        }
-    }
+    validatePlayerSafety({
+        fileRel,
+        frontmatter: fm,
+        text,
+        publicPrivateFields: PUBLIC_PRIVATE_FIELDS,
+        warnings,
+        errors,
+        hasAny,
+        hasValue,
+        hasPrivatePublicText,
+        normalizedText
+    });
 
     validateDndHardening({ fileRel, frontmatter: fm, warnings, hasAny, hasValue });
 
@@ -1326,16 +1330,6 @@ for (const [fileRel, fm] of realEntries) {
                 warnings.push(`${fileRel}: mappa pubblica con callout segreto`);
             }
         }
-    }
-}
-
-for (const [fileRel, fm] of realEntries) {
-    if (fm.pubblico !== true || fileRel.startsWith("Dev/")) continue;
-    if (hasAny(fm, PUBLIC_PRIVATE_FIELDS)) {
-        errors.push(`${fileRel}: nota pubblica con campi DM evidenti (${PUBLIC_PRIVATE_FIELDS.filter(field => hasValue(fm[field])).join(", ")})`);
-    }
-    if (hasPrivatePublicText(fm.player_safe) || hasPrivatePublicText(fm.recap_pubblico) || hasPrivatePublicText(fm.cosa_mostrare)) {
-        errors.push(`${fileRel}: testo pubblico/player-safe contiene termini da DM o segreti`);
     }
 }
 

@@ -32,7 +32,7 @@ Completato:
 - M11 ha portato il contratto dichiarativo oltre missione/tracciato/fazione/luogo: `entity_depth.yaml`, `frontmatter_profiles.yaml`, `runtime_profiles.yaml`, `sections.yaml`, `tabs.yaml`, `metabind_inputs.yaml`, `dataview_blocks.yaml` e `workflows.yaml` coprono anche incontro, creatura e oggetto come materiale D&D 5.5 collegato al mondo.
 - `z.fileclass/incontro.md` e `z.bases/Incontri.base` espongono i campi M11 necessari a gancio, uso al tavolo, ricompense, sessioni, prossima mossa, `entita_impattate` e `propaga_a`.
 - `z.engine/session_views.js` legge la pipeline D&D 5.5 tramite `renderDnd55MaterialPipeline` e `renderCombatReadiness`; `check_m11_fixture.js` valida gia la catena tecnica end-to-end. La fixture M11 resta prova tecnica, non demo finale.
-- Taglio runtime avviato: mappe in `z.engine/session_maps.js`, pipeline D&D in `z.engine/session_dnd.js`, player view in `z.engine/session_player.js`, bridge pubblico ancora in `z.engine/session_views.js`.
+- Taglio runtime avanzato: mappe in `z.engine/session_maps.js`, pipeline D&D in `z.engine/session_dnd.js`, player view in `z.engine/session_player.js`, continuita in `z.engine/session_continuity.js`, sessione/live/post in `z.engine/session_runtime.js`, bridge pubblico ridotto in `z.engine/session_views.js`.
 - Valore plugin reso operativo: [[Risorse/Mappe/Mappe]] mostra la prossima azione mappa per la sessione, [[Risorse/Task DM]] separa preparazione e post-sessione dalle bacheche Kanban.
 - Calendarium, Media Extended e Fantasy Content Generator hanno viste operative: [[Mondi/Calendario]] mostra la prossima scadenza narrativa, [[Risorse/Media Scene]] mostra media per sessione attiva, [[Risorse/Smistamento Bozze Generate]] mostra la prossima bozza da decidere.
 
@@ -66,10 +66,10 @@ Scopo: rendere mantenibile la catena scelta dei giocatori -> evento -> conseguen
 
 Priorita:
 
-1. Rendere `check_m11_fixture.js` un contratto di scenario esplicito, non solo una collezione di assert.
-2. Proseguire il taglio di `z.engine/session_views.js` separando continuita e M11 chain.
-3. Estrarre i controlli piu densi da `check_vault.js` in moduli riusabili.
-4. Aggiungere un gate automatico sull'artefatto di release pulita.
+1. Monitorare la CI GitHub su `main`; localmente `gh` richiede autenticazione e il repository non e leggibile via web anonimo.
+2. Estendere solo controlli automatici che riducono rischio reale: runtime load, player-safety, release artifact e importer.
+3. Estrarre i prossimi controlli densi da `check_vault.js` in moduli riusabili.
+4. Tenere `session_views.js` come bridge pubblico e non aggiungere nuove famiglie runtime dentro il bridge.
 5. Preparare la demo finale come codice generativo, lasciandola fuori dal sorgente fino all'ultima fase.
 
 ## Vincoli Tecnici

@@ -46,6 +46,9 @@
 - `renderM11ContinuityChain` espone nelle viste operative la catena scelta -> conseguenza -> bersagli -> stato -> prossima apertura.
 - `check_m11_fixture.js` valida la catena end-to-end M11 su fixture generata: sessione, conseguenza, propagazione, clock, D&D 5.5 e viste operative.
 - `session_continuity.js` separa il runtime di continuita, propagazione e catena M11 dal bridge `session_views.js`.
+- `session_runtime.js` separa viste sessione, live table e post-sessione; `session_views.js` resta bridge compatibile.
+- `check_runtime_load.js` carica il runtime DataviewJS con adapter Obsidian simulato e verifica gli export principali.
+- `player_safety.js` separa il gate anti-segreti/player-facing da `check_vault.js`.
 - `import:map` come dispatch unico per Azgaar, Watabou City e Watabou Dungeon.
 - `check:release-artifact` genera una release temporanea, verifica cartella/ZIP e ripulisce `dist/`.
 - GitHub Actions esegue `npm run check` su push e pull request.

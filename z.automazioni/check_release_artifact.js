@@ -19,9 +19,17 @@ const REQUIRED = [
     "z.engine/session_continuity.js",
     "z.engine/session_dnd.js",
     "z.engine/session_maps.js",
-    "z.engine/session_player.js"
+    "z.engine/session_player.js",
+    "z.engine/session_runtime.js"
 ];
 const FORBIDDEN_ROOTS = ["Dev", ".github", "dist", "node_modules"];
+const REQUIRED_PLUGINS = [
+    "dataview",
+    "templater-obsidian",
+    "obsidian-meta-bind-plugin",
+    "js-engine"
+];
+const FORBIDDEN_AUTOMATION_PREFIXES = ["audit_", "check_", "render_"];
 
 function existsRel(root, relPath) {
     return fs.existsSync(path.join(root, relPath));
@@ -46,8 +54,28 @@ function validateOutput(errors) {
     }
 
     const bridge = fs.readFileSync(path.join(OUT, "z.engine/session_views.js"), "utf8");
-    if (!bridge.includes("session_continuity.js")) {
-        fail(errors, "session_views.js della release non carica session_continuity.js");
+    for (const marker of ["session_continuity.js", "session_runtime.js", "session_dnd.js", "session_maps.js", "session_player.js"]) {
+        if (!bridge.includes(marker)) fail(errors, `session_views.js della release non carica ${marker}`);
+    }
+
+    const readme = fs.readFileSync(path.join(OUT, "LEGGIMI.md"), "utf8");
+    for (const marker of ["Apri questa cartella in Obsidian", "Vista Giocatori", "Quality Report"]) {
+        if (!readme.includes(marker)) fail(errors, `LEGGIMI.md release incompleto (${marker})`);
+    }
+
+    const plugins = JSON.parse(fs.readFileSync(path.join(OUT, ".obsidian/community-plugins.json"), "utf8"));
+    for (const plugin of REQUIRED_PLUGINS) {
+        if (!plugins.includes(plugin)) fail(errors, `plugin richiesto non abilitato nella release: ${plugin}`);
+    }
+
+    const automationRoot = path.join(OUT, "z.automazioni");
+    if (fs.existsSync(automationRoot)) {
+        for (const entry of fs.readdirSync(automationRoot, { withFileTypes: true })) {
+            if (!entry.isFile()) continue;
+            if (FORBIDDEN_AUTOMATION_PREFIXES.some(prefix => entry.name.startsWith(prefix))) {
+                fail(errors, `script tecnico vietato nella release: z.automazioni/${entry.name}`);
+            }
+        }
     }
 }
 
