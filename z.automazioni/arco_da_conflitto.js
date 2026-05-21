@@ -17,38 +17,36 @@ async function arcoDaConflitto(tp) {
 
     await helpers.moveNote(tp, helpers.path("missioni"), name);
 
-    return `---
-id: ${id}
-nome: ${helpers.yamlQuote(name)}
-categoria: missione
-tipo: arco narrativo
-stato: proposta
-mondo: ${mondo}
-campagne: ${campagna ? `[${campagna}]` : "[]"}
-conflitti: ${conflitto ? `[${conflitto}]` : "[]"}
-luoghi: ${helpers.inlineYamlList(luoghi)}
-fazioni: ${helpers.inlineYamlList(fazioni)}
-personaggi: []
-ricompense: ${helpers.inlineYamlList(ricompense)}
-pressione: 5
-posta: ${helpers.yamlQuote(posta)}
-prossima_mossa: ${helpers.yamlQuote(prossimaMossa)}
-scadenza_mondo: ${helpers.yamlQuote(scadenzaMondo)}
-missioni_figlie: []
-sessioni: []
-domande_aperte: []
-indizi: []
-ostacoli: []
-conseguenze: []
-segreti: []
-fc-calendar: ${helpers.yamlQuote(calendario)}
-fc-date:
-fc-category: scadenza
-fc-display-name: ${helpers.yamlQuote(name)}
-fc-end:
----
-
-`;
+    return await helpers.renderFrontmatter("arco_da_conflitto", {
+        id: id,
+        nome: helpers.yamlQuote(name),
+        categoria: 'missione',
+        tipo: 'arco narrativo',
+        stato: 'proposta',
+        mondo: mondo,
+        campagne: campagna ? `[${campagna}]` : "[]",
+        conflitti: conflitto ? `[${conflitto}]` : "[]",
+        luoghi: helpers.inlineYamlList(luoghi),
+        fazioni: helpers.inlineYamlList(fazioni),
+        personaggi: '[]',
+        ricompense: helpers.inlineYamlList(ricompense),
+        pressione: '5',
+        posta: helpers.yamlQuote(posta),
+        prossima_mossa: helpers.yamlQuote(prossimaMossa),
+        scadenza_mondo: helpers.yamlQuote(scadenzaMondo),
+        missioni_figlie: '[]',
+        sessioni: '[]',
+        domande_aperte: '[]',
+        indizi: '[]',
+        ostacoli: '[]',
+        conseguenze: '[]',
+        segreti: '[]',
+        fc_calendar: helpers.yamlQuote(calendario),
+        fc_date: "",
+        fc_category: 'scadenza',
+        fc_display_name: helpers.yamlQuote(name),
+        fc_end: ""
+    });
 }
 
 module.exports = arcoDaConflitto;

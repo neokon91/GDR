@@ -28,40 +28,38 @@ async function compendium_mondo(tp) {
 
     await helpers.moveNote(tp, helpers.path("compendium"), name);
 
-    return `---
-id: ${id}
-nome: ${helpers.yamlQuote(name)}
-categoria: risorsa
-fileClass: compendium
-tipo: ${type.id}
-stato: bozza
-mondo: ${mondo}
-culture: ${helpers.inlineYamlList(culture)}
-regioni: ${helpers.inlineYamlList(regioni)}
-luoghi: ${helpers.inlineYamlList(regioni)}
-risorse: ${helpers.inlineYamlList(risorse)}
-fazioni: ${helpers.inlineYamlList(fazioni)}
-missioni: []
-eventi_storici: []
-eventi: []
-uso_narrativo: ${helpers.yamlQuote(uso)}
-usi: ${helpers.inlineYamlTextList([uso])}
-rischi: []
-conseguenze: []
-segreti: ${helpers.inlineYamlTextList([segreto])}
-pressione: 0
-prossima_mossa:
-mappe: []
-coordinate:
-mappa:
-layer_mappa: culturale
-tipo_mappa: culturale
-propaga_a: []
-entita_impattate: []
-domande_aperte: []
----
-
-`;
+    return await helpers.renderFrontmatter("compendium_mondo", {
+        id: id,
+        nome: helpers.yamlQuote(name),
+        categoria: 'risorsa',
+        fileClass: 'compendium',
+        tipo: type.id,
+        stato: 'bozza',
+        mondo: mondo,
+        culture: helpers.inlineYamlList(culture),
+        regioni: helpers.inlineYamlList(regioni),
+        luoghi: helpers.inlineYamlList(regioni),
+        risorse: helpers.inlineYamlList(risorse),
+        fazioni: helpers.inlineYamlList(fazioni),
+        missioni: '[]',
+        eventi_storici: '[]',
+        eventi: '[]',
+        uso_narrativo: helpers.yamlQuote(uso),
+        usi: helpers.inlineYamlTextList([uso]),
+        rischi: '[]',
+        conseguenze: '[]',
+        segreti: helpers.inlineYamlTextList([segreto]),
+        pressione: '0',
+        prossima_mossa: "",
+        mappe: '[]',
+        coordinate: "",
+        mappa: "",
+        layer_mappa: 'culturale',
+        tipo_mappa: 'culturale',
+        propaga_a: '[]',
+        entita_impattate: '[]',
+        domande_aperte: '[]'
+    });
 }
 
 module.exports = compendium_mondo;

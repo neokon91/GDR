@@ -84,42 +84,41 @@ async function creatura(tp){
     // Crea la cartella se manca e sposta la nota nella sezione creature.
     await helpers.moveNote(tp, helpers.path("creature"), name);
 
-    return `---
-id: ${id}
-statblock: true
-name: ${helpers.yamlQuote(name)}
-nome: ${helpers.yamlQuote(name)}
-categoria: creatura
-type: ${selectedType?.id ?? ""}
-tipo: ${selectedType?.id ?? ""}
-stato: bozza
-mondo: ${mondo}
-size: ${selectedDimensions?.id ?? ""}
-alignment: ${selectedAlignment?.id ?? ""}
-ac: ${ac}
-hp: ${hp}
-speed: ${speed}
-cr: ${cr}
-stats: [${str}, ${dex}, ${con}, ${int}, ${wis}, ${cha}]
-saves: []
-skillsaves: []
-damage_vulnerabilities:
-damage_resistances:
-damage_immunities:
-condition_immunities:
-senses:
-languages:
-gear:
-habitat:
-luoghi: ${helpers.inlineYamlList(luoghi)}
-traits: ${tp.user.helpers.inlineYamlArray(traits)}
-actions: ${tp.user.helpers.inlineYamlArray(actions)}
-bonus_actions: ${tp.user.helpers.inlineYamlArray(bonusActions)}
-reactions: ${tp.user.helpers.inlineYamlArray(reactions)}
-legendary_actions: []
-lair_actions: []
----
-`
+    return await helpers.renderFrontmatter("creatura", {
+        id: id,
+        statblock: 'true',
+        name: helpers.yamlQuote(name),
+        nome: helpers.yamlQuote(name),
+        categoria: 'creatura',
+        type: selectedType?.id ?? "",
+        tipo: selectedType?.id ?? "",
+        stato: 'bozza',
+        mondo: mondo,
+        size: selectedDimensions?.id ?? "",
+        alignment: selectedAlignment?.id ?? "",
+        ac: ac,
+        hp: hp,
+        speed: speed,
+        cr: cr,
+        stats: `[${str}, ${dex}, ${con}, ${int}, ${wis}, ${cha}]`,
+        saves: '[]',
+        skillsaves: '[]',
+        damage_vulnerabilities: "",
+        damage_resistances: "",
+        damage_immunities: "",
+        condition_immunities: "",
+        senses: "",
+        languages: "",
+        gear: "",
+        habitat: "",
+        luoghi: helpers.inlineYamlList(luoghi),
+        traits: tp.user.helpers.inlineYamlArray(traits),
+        actions: tp.user.helpers.inlineYamlArray(actions),
+        bonus_actions: tp.user.helpers.inlineYamlArray(bonusActions),
+        reactions: tp.user.helpers.inlineYamlArray(reactions),
+        legendary_actions: '[]',
+        lair_actions: '[]'
+    });
 }
 
 module.exports = creatura;

@@ -20,27 +20,25 @@ async function eraStorica(tp) {
 
     await helpers.moveNote(tp, helpers.path("storia"), name);
 
-    return `---
-id: ${id}
-nome: ${helpers.yamlQuote(name)}
-categoria: evento storico
-tipo: ${tipo?.id ?? "era"}
-stato: canonico
-stato_canonico: canonico
-canonico: true
-mondo: ${mondo}
-data_mondo: ${helpers.yamlQuote(dataMondo)}
-causa: ${helpers.yamlQuote(causa)}
-conseguenze: ${helpers.inlineYamlTextList([conseguenza])}
-luoghi: []
-fazioni: []
-culture: []
-religioni: []
-sessioni: []
-segreti: []
----
-
-`;
+    return await helpers.renderFrontmatter("era_storica", {
+        id: id,
+        nome: helpers.yamlQuote(name),
+        categoria: 'evento storico',
+        tipo: tipo?.id ?? "era",
+        stato: 'canonico',
+        stato_canonico: 'canonico',
+        canonico: 'true',
+        mondo: mondo,
+        data_mondo: helpers.yamlQuote(dataMondo),
+        causa: helpers.yamlQuote(causa),
+        conseguenze: helpers.inlineYamlTextList([conseguenza]),
+        luoghi: '[]',
+        fazioni: '[]',
+        culture: '[]',
+        religioni: '[]',
+        sessioni: '[]',
+        segreti: '[]'
+    });
 }
 
 module.exports = eraStorica;

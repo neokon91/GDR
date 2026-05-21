@@ -12,47 +12,46 @@ async function mondo(tp) {
 
     await helpers.moveNote(tp, helpers.path("mondi"), name);
 
-    return `---
-id: ${id}
-nome: ${helpers.yamlQuote(name)}
-categoria: mondo
-fileClass: mondo
-stato: bozza
-tono: ${helpers.yamlQuote(tono)}
-tema: ${helpers.yamlQuote(tema)}
-temi: []
-promesse_narrative: []
-limiti: []
-ispirazioni: []
-non_vogliamo: []
-tecnologia: ${helpers.yamlQuote(tecnologia)}
-magia: ${helpers.yamlQuote(magia)}
-calendario: ${helpers.yamlQuote(calendario)}
-premessa: ${helpers.yamlQuote(premessa)}
-gancio: ${helpers.yamlQuote(premessa)}
-conflitto_centrale: ${helpers.yamlQuote(conflittoCentrale)}
-luoghi_iconici: []
-fazioni_principali: []
-misteri_pubblici: []
-materiale_pubblico: []
-domande_guida: []
-continenti: []
-fazioni: []
-religioni: []
-campagne: []
-verita: []
-rumor_attivi: []
-stato_mondo: []
-continuita: []
-relazioni_chiave: []
-domande_aperte: []
-tensioni: []
-fronti: []
-segreti: []
-checklist_lore: []
-canonico: false
----
-`;
+    return await helpers.renderFrontmatter("mondo", {
+        id: id,
+        nome: helpers.yamlQuote(name),
+        categoria: 'mondo',
+        fileClass: 'mondo',
+        stato: 'bozza',
+        tono: helpers.yamlQuote(tono),
+        tema: helpers.yamlQuote(tema),
+        temi: '[]',
+        promesse_narrative: '[]',
+        limiti: '[]',
+        ispirazioni: '[]',
+        non_vogliamo: '[]',
+        tecnologia: helpers.yamlQuote(tecnologia),
+        magia: helpers.yamlQuote(magia),
+        calendario: helpers.yamlQuote(calendario),
+        premessa: helpers.yamlQuote(premessa),
+        gancio: helpers.yamlQuote(premessa),
+        conflitto_centrale: helpers.yamlQuote(conflittoCentrale),
+        luoghi_iconici: '[]',
+        fazioni_principali: '[]',
+        misteri_pubblici: '[]',
+        materiale_pubblico: '[]',
+        domande_guida: '[]',
+        continenti: '[]',
+        fazioni: '[]',
+        religioni: '[]',
+        campagne: '[]',
+        verita: '[]',
+        rumor_attivi: '[]',
+        stato_mondo: '[]',
+        continuita: '[]',
+        relazioni_chiave: '[]',
+        domande_aperte: '[]',
+        tensioni: '[]',
+        fronti: '[]',
+        segreti: '[]',
+        checklist_lore: '[]',
+        canonico: 'false'
+    });
 }
 
 module.exports = mondo;

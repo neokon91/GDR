@@ -11,21 +11,20 @@ async function campagna(tp) {
 
     await helpers.moveNote(tp, helpers.path("campagne"), name);
 
-    return `---
-id: ${id}
-nome: ${helpers.yamlQuote(name)}
-categoria: campagna
-tipo:
-stato: preparazione
-tono: ${helpers.yamlQuote(tono)}
-livello_attuale: ${livello}
-calendario: ${helpers.yamlQuote(calendario)}
-personaggi: ${helpers.inlineYamlList(personaggi)}
-luoghi: ${helpers.inlineYamlList(luoghi)}
-fazioni: ${helpers.inlineYamlList(fazioni)}
-sessioni: []
----
-`;
+    return await helpers.renderFrontmatter("campagna", {
+        id: id,
+        nome: helpers.yamlQuote(name),
+        categoria: 'campagna',
+        tipo: "",
+        stato: 'preparazione',
+        tono: helpers.yamlQuote(tono),
+        livello_attuale: livello,
+        calendario: helpers.yamlQuote(calendario),
+        personaggi: helpers.inlineYamlList(personaggi),
+        luoghi: helpers.inlineYamlList(luoghi),
+        fazioni: helpers.inlineYamlList(fazioni),
+        sessioni: '[]'
+    });
 }
 
 module.exports = campagna;

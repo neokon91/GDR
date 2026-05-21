@@ -29,18 +29,17 @@ async function dispensa(tp) {
     // La dispensa appena creata compare nei materiali della sessione attiva.
     await helpers.linkCreatedNoteToActiveSession(created, { sessionField: "dispense" });
 
-    return `---
-id: ${id}
-nome: ${helpers.yamlQuote(name)}
-categoria: dispensa
-tipo: ${selectedType?.id ?? ""}
-stato: bozza
-mondo: ${mondo}
-luogo: ${luogo}
-personaggi: ${helpers.inlineYamlList(personaggi)}
-sessioni: ${helpers.inlineYamlList(sessioni)}
----
-`;
+    return await helpers.renderFrontmatter("dispensa", {
+        id: id,
+        nome: helpers.yamlQuote(name),
+        categoria: 'dispensa',
+        tipo: selectedType?.id ?? "",
+        stato: 'bozza',
+        mondo: mondo,
+        luogo: luogo,
+        personaggi: helpers.inlineYamlList(personaggi),
+        sessioni: helpers.inlineYamlList(sessioni)
+    });
 }
 
 module.exports = dispensa;

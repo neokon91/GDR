@@ -13,39 +13,37 @@ async function ricorrenza_calendario(tp) {
 
     await helpers.moveNote(tp, helpers.path("calendario_diegetico"), name);
 
-    return `---
-id: ${id}
-nome: ${helpers.yamlQuote(name)}
-categoria: risorsa
-fileClass: ricorrenza
-tipo: ricorrenza
-stato: bozza
-mondo: ${mondo}
-data_mondo: ${helpers.yamlQuote(dataMondo)}
-mese:
-stagione:
-festa: true
-tabu_stagionali: []
-scadenze_rituali: []
-eventi_ricorrenti: []
-culture: ${helpers.inlineYamlList(culture)}
-religioni: ${helpers.inlineYamlList(religioni)}
-luoghi: ${helpers.inlineYamlList(luoghi)}
-fazioni: []
-conseguenze_data_passata: ${helpers.inlineYamlTextList([conseguenza])}
-conseguenze: ${helpers.inlineYamlTextList([conseguenza])}
-pressioni_da_avanzare: []
-pressione: 0
-prossima_mossa:
-fc-calendar: ${helpers.yamlQuote(calendario)}
-fc-date:
-fc-category: festa
-fc-display-name: ${helpers.yamlQuote(name)}
-propaga_a: []
-entita_impattate: []
----
-
-`;
+    return await helpers.renderFrontmatter("ricorrenza_calendario", {
+        id: id,
+        nome: helpers.yamlQuote(name),
+        categoria: 'risorsa',
+        fileClass: 'ricorrenza',
+        tipo: 'ricorrenza',
+        stato: 'bozza',
+        mondo: mondo,
+        data_mondo: helpers.yamlQuote(dataMondo),
+        mese: "",
+        stagione: "",
+        festa: 'true',
+        tabu_stagionali: '[]',
+        scadenze_rituali: '[]',
+        eventi_ricorrenti: '[]',
+        culture: helpers.inlineYamlList(culture),
+        religioni: helpers.inlineYamlList(religioni),
+        luoghi: helpers.inlineYamlList(luoghi),
+        fazioni: '[]',
+        conseguenze_data_passata: helpers.inlineYamlTextList([conseguenza]),
+        conseguenze: helpers.inlineYamlTextList([conseguenza]),
+        pressioni_da_avanzare: '[]',
+        pressione: '0',
+        prossima_mossa: "",
+        fc_calendar: helpers.yamlQuote(calendario),
+        fc_date: "",
+        fc_category: 'festa',
+        fc_display_name: helpers.yamlQuote(name),
+        propaga_a: '[]',
+        entita_impattate: '[]'
+    });
 }
 
 module.exports = ricorrenza_calendario;

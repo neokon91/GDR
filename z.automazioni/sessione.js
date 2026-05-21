@@ -40,58 +40,56 @@ async function sessione(tp) {
 
     await helpers.moveNote(tp, helpers.path("sessioni"), `${data} - ${titolo}`);
 
-    return `---
-id: ${id}
-nome: ${helpers.yamlQuote(titolo)}
-cssclasses:
-  - tavolo
-categoria: sessione
-fileClass: sessione
-tipo: ${selectedType?.id ?? ""}
-data: ${data}
-data_mondo:
-fc-calendar: ${helpers.yamlQuote(calendario)}
-fc-date:
-fc-category: sessione
-fc-display-name: ${helpers.yamlQuote(titolo)}
-fc-end:
-stato: preparazione
-attiva: false
-mondo: ${mondo}
-campagne: ${helpers.inlineYamlList(campagne)}
-luoghi: ${helpers.inlineYamlList(luoghi)}
-personaggi: ${helpers.inlineYamlList(personaggi)}
-missioni: ${helpers.inlineYamlList(missioni)}
-tracciati: ${helpers.inlineYamlList(tracciati)}
-creature: ${helpers.inlineYamlList(creature)}
-incontri: ${helpers.inlineYamlList(incontri)}
-dispense: ${helpers.inlineYamlList(dispense)}
-mappe: ${helpers.inlineYamlList(mappe)}
-audio: ${helpers.inlineYamlList(audio)}
-immagini: ${helpers.inlineYamlList(immagini)}
-video: ${helpers.inlineYamlList(video)}
-fazioni: ${helpers.inlineYamlList(fazioni)}
-oggetti: ${helpers.inlineYamlList(oggetti)}
-appunti_live: []
-scena_corrente: ${helpers.yamlQuote(apertura)}
-decisioni_prese: []
-obiettivo: ${helpers.yamlQuote(obiettivo)}
-apertura: ${helpers.yamlQuote(apertura)}
-scelta: ${helpers.yamlQuote(scelta)}
-scene: []
-ricompense: []
-segreti_rivelabili: []
-domande_al_tavolo: []
-decisioni_attese: []
-pressioni: []
-materiale_pronto: []
-conseguenze: []
-recap_pubblico: []
-recap_dm: []
-prossima_apertura:
-output_sessione: []
----
-`;
+    return await helpers.renderFrontmatter("sessione", {
+        id: id,
+        nome: helpers.yamlQuote(titolo),
+        cssclasses: '[tavolo]',
+        categoria: 'sessione',
+        fileClass: 'sessione',
+        tipo: selectedType?.id ?? "",
+        data: data,
+        data_mondo: "",
+        fc_calendar: helpers.yamlQuote(calendario),
+        fc_date: "",
+        fc_category: 'sessione',
+        fc_display_name: helpers.yamlQuote(titolo),
+        fc_end: "",
+        stato: 'preparazione',
+        attiva: 'false',
+        mondo: mondo,
+        campagne: helpers.inlineYamlList(campagne),
+        luoghi: helpers.inlineYamlList(luoghi),
+        personaggi: helpers.inlineYamlList(personaggi),
+        missioni: helpers.inlineYamlList(missioni),
+        tracciati: helpers.inlineYamlList(tracciati),
+        creature: helpers.inlineYamlList(creature),
+        incontri: helpers.inlineYamlList(incontri),
+        dispense: helpers.inlineYamlList(dispense),
+        mappe: helpers.inlineYamlList(mappe),
+        audio: helpers.inlineYamlList(audio),
+        immagini: helpers.inlineYamlList(immagini),
+        video: helpers.inlineYamlList(video),
+        fazioni: helpers.inlineYamlList(fazioni),
+        oggetti: helpers.inlineYamlList(oggetti),
+        appunti_live: '[]',
+        scena_corrente: helpers.yamlQuote(apertura),
+        decisioni_prese: '[]',
+        obiettivo: helpers.yamlQuote(obiettivo),
+        apertura: helpers.yamlQuote(apertura),
+        scelta: helpers.yamlQuote(scelta),
+        scene: '[]',
+        ricompense: '[]',
+        segreti_rivelabili: '[]',
+        domande_al_tavolo: '[]',
+        decisioni_attese: '[]',
+        pressioni: '[]',
+        materiale_pronto: '[]',
+        conseguenze: '[]',
+        recap_pubblico: '[]',
+        recap_dm: '[]',
+        prossima_apertura: "",
+        output_sessione: '[]'
+    });
 }
 
 module.exports = sessione;

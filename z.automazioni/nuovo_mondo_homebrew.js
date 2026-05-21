@@ -103,35 +103,34 @@ async function nuovo_mondo_homebrew(tp) {
         cultureLinks.push(await createSeed("culture", culture, "cultura", "cultura"));
     }
 
-    return `---
-id: ${helpers.yamlQuote(helpers.slugify(name))}
-nome: ${helpers.yamlQuote(name)}
-categoria: mondo
-fileClass: mondo
-stato: bozza
-tono: ${helpers.yamlQuote(tone)}
-tema: ${helpers.yamlQuote(preset.id)}
-genere: ${helpers.yamlQuote(genre)}
-scala: ${helpers.yamlQuote(scale)}
-magia: ${helpers.yamlQuote(magic)}
-calendario: ${helpers.yamlQuote(calendar)}
-premessa: ${helpers.yamlQuote(promise)}
-gancio: ${helpers.yamlQuote(promise)}
-conflitto_centrale: ${helpers.yamlQuote(conflict)}
-vincoli: ${helpers.yamlQuote(constraints)}
-non_vogliamo: ${helpers.inlineYamlTextList([avoid])}
-luoghi_iconici: ${helpers.inlineYamlList(locationLinks)}
-fazioni_principali: ${helpers.inlineYamlList(powerLinks)}
-culture_fondative: ${helpers.inlineYamlList(cultureLinks)}
-misteri_pubblici: ${helpers.inlineYamlTextList([mystery])}
-pressione_iniziale: ${helpers.yamlQuote(pressure)}
-prossime_entita_consigliate: ["religione o mito", "risorsa contesa", "rotta", "relazione", "evento storico", "missione da conflitto"]
-materiale_pubblico: []
-campagne: []
-relazioni_chiave: []
-canonico: false
----
-`;
+    return await helpers.renderFrontmatter("nuovo_mondo_homebrew", {
+        id: helpers.yamlQuote(helpers.slugify(name)),
+        nome: helpers.yamlQuote(name),
+        categoria: 'mondo',
+        fileClass: 'mondo',
+        stato: 'bozza',
+        tono: helpers.yamlQuote(tone),
+        tema: helpers.yamlQuote(preset.id),
+        genere: helpers.yamlQuote(genre),
+        scala: helpers.yamlQuote(scale),
+        magia: helpers.yamlQuote(magic),
+        calendario: helpers.yamlQuote(calendar),
+        premessa: helpers.yamlQuote(promise),
+        gancio: helpers.yamlQuote(promise),
+        conflitto_centrale: helpers.yamlQuote(conflict),
+        vincoli: helpers.yamlQuote(constraints),
+        non_vogliamo: helpers.inlineYamlTextList([avoid]),
+        luoghi_iconici: helpers.inlineYamlList(locationLinks),
+        fazioni_principali: helpers.inlineYamlList(powerLinks),
+        culture_fondative: helpers.inlineYamlList(cultureLinks),
+        misteri_pubblici: helpers.inlineYamlTextList([mystery]),
+        pressione_iniziale: helpers.yamlQuote(pressure),
+        prossime_entita_consigliate: '["religione o mito", "risorsa contesa", "rotta", "relazione", "evento storico", "missione da conflitto"]',
+        materiale_pubblico: '[]',
+        campagne: '[]',
+        relazioni_chiave: '[]',
+        canonico: 'false'
+    });
 }
 
 module.exports = nuovo_mondo_homebrew;

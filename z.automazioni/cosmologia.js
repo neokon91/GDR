@@ -24,36 +24,34 @@ async function cosmologia(tp) {
 
     await helpers.moveNote(tp, helpers.path("cosmologia"), name);
 
-    return `---
-id: ${id}
-nome: ${helpers.yamlQuote(name)}
-categoria: cosmologia
-tipo: ${helpers.yamlQuote(tipo?.id ?? "piano")}
-stato: bozza
-canonico: false
-mondo: ${mondo}
-regola: ${helpers.yamlQuote(regola)}
-pericolo: ${helpers.yamlQuote(pericolo)}
-origine_funzione: ${helpers.inlineYamlTextList([origine])}
-leggi_metafisiche: ${helpers.inlineYamlTextList([regola])}
-soglie_accesso: ${helpers.inlineYamlTextList([soglia])}
-morte_aldila: ${helpers.inlineYamlTextList([aldila])}
-dottrine_religiose: []
-effetti_su_magia: []
-effetti_su_culture: []
-fenomeni_visibili: ${helpers.inlineYamlTextList([fenomeno])}
-scene_cosmiche: []
-indizi_cosmici: []
-misteri: []
-divinita: []
-religioni: []
-luoghi_collegati: []
-creature: []
-segreti: []
-domande_aperte: []
----
-
-`;
+    return await helpers.renderFrontmatter("cosmologia", {
+        id: id,
+        nome: helpers.yamlQuote(name),
+        categoria: 'cosmologia',
+        tipo: helpers.yamlQuote(tipo?.id ?? "piano"),
+        stato: 'bozza',
+        canonico: 'false',
+        mondo: mondo,
+        regola: helpers.yamlQuote(regola),
+        pericolo: helpers.yamlQuote(pericolo),
+        origine_funzione: helpers.inlineYamlTextList([origine]),
+        leggi_metafisiche: helpers.inlineYamlTextList([regola]),
+        soglie_accesso: helpers.inlineYamlTextList([soglia]),
+        morte_aldila: helpers.inlineYamlTextList([aldila]),
+        dottrine_religiose: '[]',
+        effetti_su_magia: '[]',
+        effetti_su_culture: '[]',
+        fenomeni_visibili: helpers.inlineYamlTextList([fenomeno]),
+        scene_cosmiche: '[]',
+        indizi_cosmici: '[]',
+        misteri: '[]',
+        divinita: '[]',
+        religioni: '[]',
+        luoghi_collegati: '[]',
+        creature: '[]',
+        segreti: '[]',
+        domande_aperte: '[]'
+    });
 }
 
 module.exports = cosmologia;

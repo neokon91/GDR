@@ -30,58 +30,57 @@ async function evento_storico(tp) {
     await helpers.linkCreatedNoteToActiveSession(created, { sessionField: "conseguenze" });
     await helpers.linkCreatedNoteToConnections(created, connessioni);
 
-    return `---
-id: ${id}
-nome: ${helpers.yamlQuote(name)}
-categoria: evento storico
-tipo: evento
-stato: canonico
-stato_canonico: canonico
-canonico: true
-fonte: prep
-fonte_note:
-grado_certezza: alto
-contraddice: []
-retcon_di: []
-retcon_motivo:
-mondo: ${mondo}
-data_mondo: ${helpers.yamlQuote(dataMondo)}
-data_reale:
-fc-calendar: ${helpers.yamlQuote(calendario)}
-fc-date:
-fc-category: conseguenza
-fc-display-name: ${helpers.yamlQuote(name)}
-luoghi: ${helpers.inlineYamlList(luoghi)}
-personaggi: ${helpers.inlineYamlList(personaggi)}
-fazioni: ${helpers.inlineYamlList(fazioni)}
-missioni: []
-tracciati: []
-sessioni: ${helpers.inlineYamlList(sessioni)}
-causa: ${helpers.yamlQuote(causa)}
-gancio: ${helpers.yamlQuote(gancio)}
-uso_al_tavolo: ${helpers.yamlQuote(usoAlTavolo)}
-player_safe: ${helpers.yamlQuote(playerSafe)}
-connessioni: ${helpers.inlineYamlList(connessioni)}
-cause: []
-effetti: []
-entita_impattate: []
-propaga_a: []
-stato_mondo: []
-fatti_accertati: []
-memoria_pubblica: ${helpers.inlineYamlTextList([memoria])}
-versioni_alternative: ${helpers.inlineYamlTextList([versione])}
-cambiamenti_quotidiani: ${helpers.inlineYamlTextList([cambiamento])}
-eredita_materiali: []
-conseguenze: ${helpers.inlineYamlTextList([cambiamento])}
-prossima_mossa: ${helpers.yamlQuote(prossimaMossa)}
-giocabile: false
-scelte: []
-rischi: []
-indizi: []
-png_coinvolti: []
-ricompense: []
----
-`;
+    return await helpers.renderFrontmatter("evento_storico", {
+        id: id,
+        nome: helpers.yamlQuote(name),
+        categoria: 'evento storico',
+        tipo: 'evento',
+        stato: 'canonico',
+        stato_canonico: 'canonico',
+        canonico: 'true',
+        fonte: 'prep',
+        fonte_note: "",
+        grado_certezza: 'alto',
+        contraddice: '[]',
+        retcon_di: '[]',
+        retcon_motivo: "",
+        mondo: mondo,
+        data_mondo: helpers.yamlQuote(dataMondo),
+        data_reale: "",
+        fc_calendar: helpers.yamlQuote(calendario),
+        fc_date: "",
+        fc_category: 'conseguenza',
+        fc_display_name: helpers.yamlQuote(name),
+        luoghi: helpers.inlineYamlList(luoghi),
+        personaggi: helpers.inlineYamlList(personaggi),
+        fazioni: helpers.inlineYamlList(fazioni),
+        missioni: '[]',
+        tracciati: '[]',
+        sessioni: helpers.inlineYamlList(sessioni),
+        causa: helpers.yamlQuote(causa),
+        gancio: helpers.yamlQuote(gancio),
+        uso_al_tavolo: helpers.yamlQuote(usoAlTavolo),
+        player_safe: helpers.yamlQuote(playerSafe),
+        connessioni: helpers.inlineYamlList(connessioni),
+        cause: '[]',
+        effetti: '[]',
+        entita_impattate: '[]',
+        propaga_a: '[]',
+        stato_mondo: '[]',
+        fatti_accertati: '[]',
+        memoria_pubblica: helpers.inlineYamlTextList([memoria]),
+        versioni_alternative: helpers.inlineYamlTextList([versione]),
+        cambiamenti_quotidiani: helpers.inlineYamlTextList([cambiamento]),
+        eredita_materiali: '[]',
+        conseguenze: helpers.inlineYamlTextList([cambiamento]),
+        prossima_mossa: helpers.yamlQuote(prossimaMossa),
+        giocabile: 'false',
+        scelte: '[]',
+        rischi: '[]',
+        indizi: '[]',
+        png_coinvolti: '[]',
+        ricompense: '[]'
+    });
 }
 
 module.exports = evento_storico;

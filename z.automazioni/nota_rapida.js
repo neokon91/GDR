@@ -24,23 +24,22 @@ async function nota_rapida(tp) {
     await helpers.linkCreatedNoteToActiveSession(created, { sessionField: "appunti_live" });
     await helpers.linkCreatedNoteToConnections(created, collegamenti);
 
-    return `---
-id: ${id}
-nome: ${helpers.yamlQuote(name)}
-categoria: nota rapida
-tipo: ${selectedType?.id ?? "idea"}
-stato: da smistare
-mondo: ${activeContext.world ?? ""}
-sessioni: ${helpers.inlineYamlList(activeContext.link ? [activeContext.link] : [])}
-collegamenti: ${helpers.inlineYamlList(collegamenti)}
-entita_impattate: []
-propaga_a: []
-canonizza_evento: false
-marca_rumor: false
-crea_conseguenza: false
-archivia_appunto: false
----
-`;
+    return await helpers.renderFrontmatter("nota_rapida", {
+        id: id,
+        nome: helpers.yamlQuote(name),
+        categoria: 'nota rapida',
+        tipo: selectedType?.id ?? "idea",
+        stato: 'da smistare',
+        mondo: activeContext.world ?? "",
+        sessioni: helpers.inlineYamlList(activeContext.link ? [activeContext.link] : []),
+        collegamenti: helpers.inlineYamlList(collegamenti),
+        entita_impattate: '[]',
+        propaga_a: '[]',
+        canonizza_evento: 'false',
+        marca_rumor: 'false',
+        crea_conseguenza: 'false',
+        archivia_appunto: 'false'
+    });
 }
 
 module.exports = nota_rapida;

@@ -21,22 +21,21 @@ async function oggettoMagico(tp) {
 
     await helpers.moveNote(tp, helpers.path("oggetti"), name);
 
-    return `---
-id: ${id}
-nome: ${helpers.yamlQuote(name)}
-categoria: oggetto
-tipo: oggetto magico
-rarita: ${rarita?.id ?? ""}
-sintonia: false
-cariche:
-maledizione: false
-stato: bozza
-canonico: false
-mondo: ${mondo}
-proprietario: ${proprietario}
-luogo: ${luogo}
----
-`;
+    return await helpers.renderFrontmatter("oggetto_magico", {
+        id: id,
+        nome: helpers.yamlQuote(name),
+        categoria: 'oggetto',
+        tipo: 'oggetto magico',
+        rarita: rarita?.id ?? "",
+        sintonia: 'false',
+        cariche: "",
+        maledizione: 'false',
+        stato: 'bozza',
+        canonico: 'false',
+        mondo: mondo,
+        proprietario: proprietario,
+        luogo: luogo
+    });
 }
 
 module.exports = oggettoMagico;

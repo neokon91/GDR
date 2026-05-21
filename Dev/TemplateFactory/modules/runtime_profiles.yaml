@@ -10,27 +10,27 @@ profiles:
     connection_prompt: Connessioni vive della fazione
     type_route_key: tipoFazione
     type_options:
-      - label: Gilda
-        id: gilda
-      - label: Confraternita
-        id: confraternita
-      - label: Casata
-        id: casata
-      - label: Ordine militare
-        id: ordine militare
-      - label: Compagnia mercantile
-        id: compagnia mercantile
-      - label: Banda criminale
-        id: banda criminale
-      - label: Movimento ribelle
-        id: movimento ribelle
-      - label: Governo
-        id: governo
-      - label: Culto politico
-        id: culto politico
+    - label: Gilda
+      id: gilda
+    - label: Confraternita
+      id: confraternita
+    - label: Casata
+      id: casata
+    - label: Ordine militare
+      id: ordine militare
+    - label: Compagnia mercantile
+      id: compagnia mercantile
+    - label: Banda criminale
+      id: banda criminale
+    - label: Movimento ribelle
+      id: movimento ribelle
+    - label: Governo
+      id: governo
+    - label: Culto politico
+      id: culto politico
     prompts:
       obiettivo: Obiettivo pubblico
-      gancio: "Gancio giocabile: perche questa fazione entra in scena?"
+      gancio: 'Gancio giocabile: perche questa fazione entra in scena?'
       player_safe: Versione player-safe mostrabile
       obiettivo_nascosto: Obiettivo nascosto
       pressione: Pressione da 0 a 10
@@ -53,51 +53,51 @@ profiles:
     connection_prompt: Connessioni vive del luogo
     type_route_key: subtype
     type_options:
-      - label: Città
-        id: città
-      - label: Villaggio
-        id: villaggio
-      - label: Capitale
-        id: capitale
-      - label: Porto
-        id: porto
-      - label: Fortezza
-        id: fortezza
-      - label: Rovina
-        id: rovina
-      - label: Dungeon
-        id: dungeon
-      - label: Regione
-        id: regione
-      - label: Regno
-        id: regno
-      - label: Tempio
-        id: tempio
-      - label: Foresta
-        id: foresta
-      - label: Montagna
-        id: montagna
+    - label: Città
+      id: città
+    - label: Villaggio
+      id: villaggio
+    - label: Capitale
+      id: capitale
+    - label: Porto
+      id: porto
+    - label: Fortezza
+      id: fortezza
+    - label: Rovina
+      id: rovina
+    - label: Dungeon
+      id: dungeon
+    - label: Regione
+      id: regione
+    - label: Regno
+      id: regno
+    - label: Tempio
+      id: tempio
+    - label: Foresta
+      id: foresta
+    - label: Montagna
+      id: montagna
     biome_options:
-      - label: Foresta
-        id: foresta
-      - label: Deserto
-        id: deserto
-      - label: Montagna
-        id: montagna
-      - label: Costa
-        id: costa
-      - label: Palude
-        id: palude
-      - label: Tundra
-        id: tundra
-      - label: Sottosuolo
-        id: sottosuolo
+    - label: Foresta
+      id: foresta
+    - label: Deserto
+      id: deserto
+    - label: Montagna
+      id: montagna
+    - label: Costa
+      id: costa
+    - label: Palude
+      id: palude
+    - label: Tundra
+      id: tundra
+    - label: Sottosuolo
+      id: sottosuolo
     prompts:
       pericolo: Pericolo da 0 a 10
-      gancio: "Gancio giocabile: perche questo luogo importa adesso?"
+      gancio: 'Gancio giocabile: perche questo luogo importa adesso?'
       impressione: Prima impressione
       tensione: Tensione o conflitto locale
-      uso_al_tavolo: "Uso al tavolo: scelta, rischio o scena che produce"
+      uso_al_tavolo: 'Uso al tavolo: scelta, rischio o scena che produce'
       player_safe: Versione player-safe mostrabile
       luogo_padre: Luogo o regione superiore
       governante: Governante o referente
@@ -113,29 +113,29 @@ profiles:
     type_prompt: Tipo di missione
     world_prompt: Mondo della missione
     connection_prompt: Connessioni vive della missione
-    pressure_default: "3"
+    pressure_default: '3'
     type_options:
-      - label: Incarico
-        id: incarico
-      - label: Ricerca
-        id: ricerca
-      - label: Mistero
-        id: mistero
-      - label: Salvataggio
-        id: salvataggio
-      - label: Caccia
-        id: caccia
-      - label: Viaggio
-        id: viaggio
-      - label: Fronte
-        id: fronte
-      - label: Trama personale
-        id: trama personale
-      - label: Missione di fazione
-        id: missione di fazione
+    - label: Incarico
+      id: incarico
+    - label: Ricerca
+      id: ricerca
+    - label: Mistero
+      id: mistero
+    - label: Salvataggio
+      id: salvataggio
+    - label: Caccia
+      id: caccia
+    - label: Viaggio
+      id: viaggio
+    - label: Fronte
+      id: fronte
+    - label: Trama personale
+      id: trama personale
+    - label: Missione di fazione
+      id: missione di fazione
     prompts:
       pressione: Pressione da 0 a 10
-      posta: "Posta: cosa cambia se riesce o fallisce?"
+      posta: 'Posta: cosa cambia se riesce o fallisce?'
       scelta: Scelta concreta per i giocatori
       player_safe: Versione player-safe dell'obiettivo
       prossima_mossa: Prossima mossa se ignorata
@@ -158,23 +158,23 @@ profiles:
     type_prompt: Tipo di tracciato
     world_prompt: Mondo del tracciato
     connection_prompt: Connessioni vive del tracciato
-    progress_max_default: "6"
-    progress_value_default: "0"
+    progress_max_default: '6'
+    progress_value_default: '0'
     type_options:
-      - label: Clock
-        id: clock
-      - label: Progress track
-        id: progress track
-      - label: Fronte
-        id: fronte
-      - label: Rituale
-        id: rituale
-      - label: Minaccia
-        id: minaccia
-      - label: Viaggio
-        id: viaggio
-      - label: Progetto
-        id: progetto
+    - label: Clock
+      id: clock
+    - label: Progress track
+      id: progress track
+    - label: Fronte
+      id: fronte
+    - label: Rituale
+      id: rituale
+    - label: Minaccia
+      id: minaccia
+    - label: Viaggio
+      id: viaggio
+    - label: Progetto
+      id: progetto
     prompts:
       progress_max: Segmenti totali
       progress_value: Segmenti gia segnati
@@ -196,24 +196,24 @@ profiles:
     world_prompt: Mondo della relazione
     connection_prompt: Connessioni vive della relazione
     type_options:
-      - label: Alleanza
-        id: alleanza
-      - label: Rivalità
-        id: rivalità
-      - label: Guerra fredda
-        id: guerra fredda
-      - label: Vassallaggio
-        id: vassallaggio
-      - label: Trattato
-        id: trattato
-      - label: Debito
-        id: debito
-      - label: Faida
-        id: faida
-      - label: Patto religioso
-        id: patto religioso
-      - label: Tradimento
-        id: tradimento
+    - label: Alleanza
+      id: alleanza
+    - label: Rivalità
+      id: rivalità
+    - label: Guerra fredda
+      id: guerra fredda
+    - label: Vassallaggio
+      id: vassallaggio
+    - label: Trattato
+      id: trattato
+    - label: Debito
+      id: debito
+    - label: Faida
+      id: faida
+    - label: Patto religioso
+      id: patto religioso
+    - label: Tradimento
+      id: tradimento
     prompts:
       soggetti: Soggetti coinvolti
       origine: Origine della relazione
@@ -225,6 +225,126 @@ profiles:
       versione: Come la raccontano in modo diverso le parti
       dipendenza: Dipendenza materiale o politica
       ferita: Ferita aperta
+  png:
+    name_prompt: Nome del PNG
+    completion_prompt: Vuoi compilare collegamenti, statblock e dettagli ora? Scegli No per una scheda rapida.
+    world_prompt: Mondo del PNG
+    connection_prompt: Connessioni vive del PNG
+    armor_class_default: '10'
+    hit_points_default: '4'
+    hit_dice_default: 1d8
+    speed_default: 9 m.
+    challenge_rating_default: '0'
+    ability_scores_default: 10 10 10 10 10 10
+    status_prompt: Stato del PNG
+    status_options:
+    - label: Bozza
+      id: bozza
+    - label: Pronto
+      id: pronto
+    - label: In gioco
+      id: in gioco
+    - label: Ostile
+      id: ostile
+    - label: Scomparso
+      id: scomparso
+    - label: Morto
+      id: morto
+    - label: Archiviata
+      id: archiviata
+    prompts:
+      ruolo: Ruolo o professione
+      atteggiamento: Atteggiamento iniziale
+      vuole: Cosa vuole
+      sa: Cosa sa di utile
+      segreto: Segreto o contraddizione
+      leva: Leva per coinvolgerlo al tavolo
+      luogo: Luogo del PNG
+      fazioni: Fazioni del PNG
+      relazioni: Relazioni del PNG
+      missioni: Missioni collegate al PNG
+      domanda_aperta: Domanda aperta sul PNG
+      ac: Classe Armatura
+      hp: Punti Ferita
+      hit_dice: Dadi Vita
+      speed: Velocità
+      cr: Grado di Sfida
+      stats: 'Caratteristiche D&D: FOR DES COS INT SAG CAR'
+  personaggio:
+    name_prompt: Nome del personaggio
+    world_prompt: Mondo del personaggio
+    connection_prompt: Connessioni vive del personaggio
+    armor_class_default: '10'
+    hit_points_default: '4'
+    hit_dice_default: 1d8
+    speed_default: 9 m.
+    challenge_rating_default: '0'
+    ability_scores_default: 10 10 10 10 10 10
+    status_prompt: Stato del personaggio
+    status_options:
+    - label: Bozza
+      id: bozza
+    - label: Pronto
+      id: pronto
+    - label: In gioco
+      id: in gioco
+    - label: Ostile
+      id: ostile
+    - label: Scomparso
+      id: scomparso
+    - label: Morto
+      id: morto
+    - label: Archiviata
+      id: archiviata
+    prompts:
+      ruolo: Ruolo o professione
+      allineamento: Allineamento
+      ac: Classe Armatura
+      hp: Punti Ferita
+      hit_dice: Dadi Vita
+      speed: Velocità
+      cr: Grado di Sfida
+      stats: 'Caratteristiche D&D: FOR DES COS INT SAG CAR'
+      luogo: Luogo del personaggio
+      fazioni: Fazioni del personaggio
+      relazioni: Relazioni del personaggio
+      missioni: Missioni collegate al personaggio
+      vuole: Cosa vuole
+      sa: Cosa sa di utile
+      gancio: 'Gancio giocabile: perche entra in scena ora?'
+      player_safe: Versione player-safe mostrabile
+      segreto: Segreto o contraddizione
+      leva: Leva per coinvolgerlo al tavolo
+      domanda_aperta: Domanda aperta sul personaggio
+  incontro:
+    name_prompt: Nome dell'incontro
+    type_prompt: Tipo di incontro
+    type_route_key: tipoIncontro
+    type_options:
+    - label: Combattimento
+      id: combattimento
+    - label: Negoziazione
+      id: negoziazione
+    - label: Esplorazione
+      id: esplorazione
+    - label: Ostacolo
+      id: ostacolo
+    - label: Inseguimento
+      id: inseguimento
+    - label: Trappola
+      id: trappola
+    - label: Pericolo ambientale
+      id: pericolo ambientale
+    - label: Scena sociale
+      id: scena sociale
+    prompts:
+      luogo: Luogo dell'incontro
+      pericolo: Pericolo da 0 a 10
+      creature: Creature coinvolte
+      personaggi: Personaggi coinvolti
+      mappe: Mappe dell'incontro
+      audio: Audio dell'incontro
+      ricompense: Ricompense
   oggetto:
     name_prompt: Nome dell'oggetto
     type_prompt: Tipo di oggetto
@@ -232,31 +352,31 @@ profiles:
     world_prompt: Mondo dell'oggetto
     connection_prompt: Connessioni vive dell'oggetto
     type_options:
-      - label: Oggetto comune
-        id: oggetto comune
-      - label: Reliquia
-        id: reliquia
-      - label: Indizio fisico
-        id: indizio fisico
-      - label: Chiave
-        id: chiave
-      - label: Tesoro
-        id: tesoro
-      - label: Artefatto
-        id: artefatto
+    - label: Oggetto comune
+      id: oggetto comune
+    - label: Reliquia
+      id: reliquia
+    - label: Indizio fisico
+      id: indizio fisico
+    - label: Chiave
+      id: chiave
+    - label: Tesoro
+      id: tesoro
+    - label: Artefatto
+      id: artefatto
     rarity_options:
-      - label: Comune
-        id: comune
-      - label: Non comune
-        id: non comune
-      - label: Raro
-        id: raro
-      - label: Molto raro
-        id: molto raro
-      - label: Leggendario
-        id: leggendario
-      - label: Artefatto
-        id: artefatto
+    - label: Comune
+      id: comune
+    - label: Non comune
+      id: non comune
+    - label: Raro
+      id: raro
+    - label: Molto raro
+      id: molto raro
+    - label: Leggendario
+      id: leggendario
+    - label: Artefatto
+      id: artefatto
     prompts:
       proprietario: Proprietario
       luogo: Luogo dell'oggetto
@@ -283,16 +403,16 @@ profiles:
     connection_prompt: Connessioni vive della rotta
     status_prompt: Stato della rotta
     status_options:
-      - label: Aperta
-        id: aperta
-      - label: Chiusa
-        id: chiusa
-      - label: Contesa
-        id: contesa
-      - label: Maledetta
-        id: maledetta
-      - label: Interrotta
-        id: interrotta
+    - label: Aperta
+      id: aperta
+    - label: Chiusa
+      id: chiusa
+    - label: Contesa
+      id: contesa
+    - label: Maledetta
+      id: maledetta
+    - label: Interrotta
+      id: interrotta
     prompts:
       partenza: Luogo di partenza
       arrivo: Luogo di arrivo
@@ -327,3 +447,84 @@ profiles:
       proibito: Cosa considera proibito o mostruoso
       vita_quotidiana: Dettaglio di vita quotidiana
       rapporto_stranieri: Rapporto con stranieri o vicini
+  adventure:
+    name_prompt: Nome
+    prompts: {}
+  one_shot:
+    name_prompt: Nome
+    prompts: {}
+  arco_da_conflitto:
+    name_prompt: Nome
+    prompts: {}
+  campagna:
+    name_prompt: Nome
+    prompts: {}
+  campagna_da_regione:
+    name_prompt: Nome
+    prompts: {}
+  compendium_mondo:
+    name_prompt: Nome
+    prompts: {}
+  conflitto:
+    name_prompt: Nome
+    prompts: {}
+  cosmologia:
+    name_prompt: Nome
+    prompts: {}
+  creatura:
+    name_prompt: Nome
+    prompts: {}
+  culto:
+    name_prompt: Nome
+    prompts: {}
+  dispensa:
+    name_prompt: Nome
+    prompts: {}
+  era_storica:
+    name_prompt: Nome
+    prompts: {}
+  evento_storico:
+    name_prompt: Nome
+    prompts: {}
+  azgaar_import:
+    name_prompt: Nome
+    prompts: {}
+  lingua:
+    name_prompt: Nome
+    prompts: {}
+  live_nota:
+    name_prompt: Nome
+    prompts: {}
+  lore_capture:
+    name_prompt: Nome
+    prompts: {}
+  mappa:
+    name_prompt: Nome
+    prompts: {}
+  mondo:
+    name_prompt: Nome
+    prompts: {}
+  nota_rapida:
+    name_prompt: Nome
+    prompts: {}
+  nuovo_mondo_homebrew:
+    name_prompt: Nome
+    prompts: {}
+  oggetto_magico:
+    name_prompt: Nome
+    prompts: {}
+  pg:
+    name_prompt: Nome
+    prompts: {}
+  ricorrenza_calendario:
+    name_prompt: Nome
+    prompts: {}
+  risorsa_mondo:
+    name_prompt: Nome
+    prompts: {}
+  sessione:
+    name_prompt: Nome
+    prompts: {}
+  world_entity:
+    name_prompt: Nome
+    prompts: {}

@@ -39,52 +39,51 @@ async function lore_capture(tp, routeOptions = {}) {
     await helpers.linkCreatedNoteToActiveSession(created, { sessionField: "appunti_live" });
     await helpers.linkCreatedNoteToConnections(created, [...collegamenti, ...entitaImpattate, ...propagaA]);
 
-    return `---
-id: ${id}
-nome: ${helpers.yamlQuote(name)}
-categoria: lore capture
-tipo: ${selectedType?.id ?? "evento"}
-stato: da smistare
-stato_canonico: rumor
-canonico: false
-fonte: sessione
-fonte_note:
-grado_certezza: medio
-contraddice: []
-retcon_di: []
-retcon_motivo:
-mondo: ${mondo}
-sessioni: ${helpers.inlineYamlList(sessioni)}
-collegamenti: ${helpers.inlineYamlList(collegamenti)}
-entita_impattate: ${helpers.inlineYamlList(entitaImpattate)}
-propaga_a: ${helpers.inlineYamlList(propagaA)}
-data_mondo:
-data_reale:
-fc-calendar: ${helpers.yamlQuote(calendario)}
-fc-date:
-fc-category: conseguenza
-fc-display-name: ${helpers.yamlQuote(name)}
-giocabile: false
-causa:
-stato_mondo: []
-scelte: []
-rischi: []
-indizi: []
-png_coinvolti: []
-ricompense: []
-conseguenze: []
-prossima_mossa:
-impatto: []
-azioni: []
-canonizza_evento: false
-collega_al_mondo: false
-aggiorna_png: false
-aggiorna_luogo: false
-aggiorna_missione: false
-aggiorna_tracciato: false
-archivia_appunto: false
----
-`;
+    return await helpers.renderFrontmatter("lore_capture", {
+        id: id,
+        nome: helpers.yamlQuote(name),
+        categoria: 'lore capture',
+        tipo: selectedType?.id ?? "evento",
+        stato: 'da smistare',
+        stato_canonico: 'rumor',
+        canonico: 'false',
+        fonte: 'sessione',
+        fonte_note: "",
+        grado_certezza: 'medio',
+        contraddice: '[]',
+        retcon_di: '[]',
+        retcon_motivo: "",
+        mondo: mondo,
+        sessioni: helpers.inlineYamlList(sessioni),
+        collegamenti: helpers.inlineYamlList(collegamenti),
+        entita_impattate: helpers.inlineYamlList(entitaImpattate),
+        propaga_a: helpers.inlineYamlList(propagaA),
+        data_mondo: "",
+        data_reale: "",
+        fc_calendar: helpers.yamlQuote(calendario),
+        fc_date: "",
+        fc_category: 'conseguenza',
+        fc_display_name: helpers.yamlQuote(name),
+        giocabile: 'false',
+        causa: "",
+        stato_mondo: '[]',
+        scelte: '[]',
+        rischi: '[]',
+        indizi: '[]',
+        png_coinvolti: '[]',
+        ricompense: '[]',
+        conseguenze: '[]',
+        prossima_mossa: "",
+        impatto: '[]',
+        azioni: '[]',
+        canonizza_evento: 'false',
+        collega_al_mondo: 'false',
+        aggiorna_png: 'false',
+        aggiorna_luogo: 'false',
+        aggiorna_missione: 'false',
+        aggiorna_tracciato: 'false',
+        archivia_appunto: 'false'
+    });
 }
 
 module.exports = lore_capture;

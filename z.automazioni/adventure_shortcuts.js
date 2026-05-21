@@ -21,20 +21,19 @@ async function createAdventure(tp) {
 
     await helpers.moveNote(tp, helpers.path("missioni"), name);
 
-    return `---
-id: ${id}
-nome: ${helpers.yamlQuote(name)}
-categoria: avventura
-tipo: avventura
-stato: bozza
-mondo: ${mondo}
-campagne: ${helpers.inlineYamlList(campagne)}
-luoghi: ${helpers.inlineYamlList(luoghi)}
-missioni: ${helpers.inlineYamlList(missioni)}
-incontri: ${helpers.inlineYamlList(incontri)}
-ricompense: ${helpers.inlineYamlList(ricompense)}
----
-`;
+    return await helpers.renderFrontmatter("adventure", {
+        id: id,
+        nome: helpers.yamlQuote(name),
+        categoria: 'avventura',
+        tipo: 'avventura',
+        stato: 'bozza',
+        mondo: mondo,
+        campagne: helpers.inlineYamlList(campagne),
+        luoghi: helpers.inlineYamlList(luoghi),
+        missioni: helpers.inlineYamlList(missioni),
+        incontri: helpers.inlineYamlList(incontri),
+        ricompense: helpers.inlineYamlList(ricompense)
+    });
 }
 
 async function createOneShot(tp) {
@@ -50,20 +49,19 @@ async function createOneShot(tp) {
 
     await helpers.moveNote(tp, helpers.path("missioni"), name);
 
-    return `---
-id: ${id}
-nome: ${helpers.yamlQuote(name)}
-categoria: avventura
-tipo: one-shot
-stato: bozza
-mondo: ${mondo}
-livello: ${livello}
-durata: ${helpers.yamlQuote(durata)}
-luoghi: ${helpers.inlineYamlList(luoghi)}
-incontri: ${helpers.inlineYamlList(incontri)}
-personaggi: ${helpers.inlineYamlList(personaggi)}
----
-`;
+    return await helpers.renderFrontmatter("one_shot", {
+        id: id,
+        nome: helpers.yamlQuote(name),
+        categoria: 'avventura',
+        tipo: 'one-shot',
+        stato: 'bozza',
+        mondo: mondo,
+        livello: livello,
+        durata: helpers.yamlQuote(durata),
+        luoghi: helpers.inlineYamlList(luoghi),
+        incontri: helpers.inlineYamlList(incontri),
+        personaggi: helpers.inlineYamlList(personaggi)
+    });
 }
 
 module.exports = {

@@ -1,5 +1,7 @@
 async function incontro(tp, routeOptions = {}) {
     const helpers = tp.user.helpers;
+    const profile = await helpers.runtimeProfile("incontro");
+    const prompts = profile.prompts ?? {};
     const activeContext = helpers.getActiveSessionContext();
     const encounterName = value => {
         const raw = String(value ?? "").trim();
@@ -7,32 +9,23 @@ async function incontro(tp, routeOptions = {}) {
         const target = match ? match[1] : raw;
         return target.replace(/\.md$/, "").split("/").pop();
     };
-    const name = await helpers.promptRequired(tp, "Nome dell'incontro");
+    const name = await helpers.promptRequired(tp, profile.name_prompt ?? "Nome dell'incontro");
     const id = helpers.slugify(name);
     const route = Object.keys(routeOptions).length ? routeOptions : helpers.consumeRoute();
     const forcedType = route.tipoIncontro ?? (["trappola", "pericolo ambientale"].includes(route.contentType) ? route.contentType : "");
-    const selectedType = forcedType ? { id: forcedType } : await helpers.chooseOptional(
+    const selectedType = forcedType ? { id: forcedType } : await helpers.chooseProfileOption(
         tp,
-        [
-            { label: "Combattimento", id: "combattimento" },
-            { label: "Negoziazione", id: "negoziazione" },
-            { label: "Esplorazione", id: "esplorazione" },
-            { label: "Ostacolo", id: "ostacolo" },
-            { label: "Inseguimento", id: "inseguimento" },
-            { label: "Trappola", id: "trappola" },
-            { label: "Pericolo ambientale", id: "pericolo ambientale" },
-            { label: "Scena sociale", id: "scena sociale" }
-        ],
-        "Tipo di incontro"
+        profile,
+        route
     );
-    const luogo = await helpers.chooseLocation(tp, "Luogo dell'incontro");
+    const luogo = await helpers.chooseLocation(tp, prompts.luogo ?? "Luogo dell'incontro");
     const context = { world: helpers.getWorldFromLink(luogo) };
-    const pericolo = await helpers.promptOptional(tp, "Pericolo da 0 a 10");
-    const creature = await helpers.chooseCreatures(tp, "Creature coinvolte", context);
-    const personaggi = await helpers.choosePeople(tp, "Personaggi coinvolti", context);
-    const mappe = await helpers.chooseMaps(tp, "Mappe dell'incontro", context);
-    const audio = await helpers.chooseAudio(tp, "Audio dell'incontro", context);
-    const ricompense = await helpers.chooseObjects(tp, "Ricompense", context);
+    const pericolo = await helpers.promptOptional(tp, prompts.pericolo ?? "Pericolo da 0 a 10");
+    const creature = await helpers.chooseCreatures(tp, prompts.creature ?? "Creature coinvolte", context);
+    const personaggi = await helpers.choosePeople(tp, prompts.personaggi ?? "Personaggi coinvolti", context);
+    const mappe = await helpers.chooseMaps(tp, prompts.mappe ?? "Mappe dell'incontro", context);
+    const audio = await helpers.chooseAudio(tp, prompts.audio ?? "Audio dell'incontro", context);
+    const ricompense = await helpers.chooseObjects(tp, prompts.ricompense ?? "Ricompense", context);
     const encounterCreatures = creature.map(link => helpers.yamlQuote(encounterName(link)));
 
     const sessioni = activeContext.link ? [activeContext.link] : [];
@@ -40,26 +33,21 @@ async function incontro(tp, routeOptions = {}) {
     // L'incontro appena creato diventa subito disponibile in Durante il Gioco.
     await helpers.linkCreatedNoteToActiveSession(created, { sessionField: "incontri" });
 
-    return `---
-id: ${id}
-nome: ${helpers.yamlQuote(name)}
-categoria: incontro
-tipo: ${selectedType?.id ?? ""}
-stato: bozza
-mondo: ${context.world}
-luogo: ${luogo}
-creature: ${helpers.inlineYamlList(creature)}
-personaggi: ${helpers.inlineYamlList(personaggi)}
-mappe: ${helpers.inlineYamlList(mappe)}
-audio: ${helpers.inlineYamlList(audio)}
-sessioni: ${helpers.inlineYamlList(sessioni)}
-pericolo: ${pericolo}
-ricompense: ${helpers.inlineYamlList(ricompense)}
-round: 1
-condizioni: []
-encounter_creatures: ${helpers.inlineYamlList(encounterCreatures)}
----
-`;
+    return await helpers.renderFrontmatter("incontro", {
+        id,
+        nome: helpers.yamlQuote(name),
+        tipo: selectedType?.id ?? "",
+        mondo: context.world,
+        luogo,
+        creature: helpers.inlineYamlList(creature),
+        personaggi: helpers.inlineYamlList(personaggi),
+        mappe: helpers.inlineYamlList(mappe),
+        audio: helpers.inlineYamlList(audio),
+        sessioni: helpers.inlineYamlList(sessioni),
+        pericolo,
+        ricompense: helpers.inlineYamlList(ricompense),
+        encounter_creatures: helpers.inlineYamlList(encounterCreatures)
+    });
 }
 
 module.exports = incontro;

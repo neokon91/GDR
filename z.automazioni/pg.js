@@ -81,54 +81,53 @@ async function pg(tp) {
 
     await helpers.moveNote(tp, helpers.path("personaggi"), name);
 
-    return `---
-id: ${id}
-nome: ${helpers.yamlQuote(name)}
-categoria: personaggio
-tipo: pg
-giocatore: ${helpers.yamlQuote(player)}
-classe: ${helpers.yamlQuote(classe)}
-sottoclasse: ${helpers.yamlQuote(subclass)}
-classe_srd: ${classe ? `[[${classe}]]` : ""}
-level: ${helpers.yamlNumber(livello) || 1}
-livello: ${helpers.yamlNumber(livello) || 1}
-esperienza: ${helpers.yamlNumber(esperienza) || 0}
-prossimo_livello: ${helpers.yamlQuote(prossimoLivello)}
-milestone: false
-bonus_competenza: ${proficiencyBonus(helpers.yamlNumber(livello) || 1)}
-specie: ${helpers.yamlQuote(specie)}
-background: ${helpers.yamlQuote(background)}
-alignment: ${helpers.yamlQuote(allineamento)}
-allineamento: ${helpers.yamlQuote(allineamento)}
-stato: in gioco
-mondo: ${mondo}
-luogo: ${luogo}
-fazioni: ${helpers.inlineYamlList(fazioni)}
-relazioni: ${helpers.inlineYamlList(relazioni)}
-ac: ${helpers.yamlNumber(ac) || 10}
-hp: ${helpers.yamlNumber(hp) || 10}
-hp_massimi: ${helpers.yamlNumber(hp) || 10}
-hp_attuali: ${helpers.yamlNumber(hp) || 10}
-hp_temporanei: ${helpers.yamlNumber(hpTemp) || 0}
-hit_dice: ${helpers.yamlQuote(hitDice)}
-dadi_vita_totali: ${helpers.yamlQuote(hitDice)}
-dadi_vita_spesi: 0
-speed: ${helpers.yamlQuote(speed)}
-velocita: ${helpers.yamlQuote(speed)}
-modifier: ${helpers.yamlNumber(initiative) || 0}
-iniziativa: ${helpers.yamlNumber(initiative) || 0}
-stats: ${helpers.abilityArray(stats)}
-ispirazione: false
-successi_morte: 0
-fallimenti_morte: 0
-competenze: []
-linguaggi: []
-strumenti: []
-equipaggiamento: []
-incantesimi: []
-privilegi: []
----
-`;
+    return await helpers.renderFrontmatter("pg", {
+        id: id,
+        nome: helpers.yamlQuote(name),
+        categoria: 'personaggio',
+        tipo: 'pg',
+        giocatore: helpers.yamlQuote(player),
+        classe: helpers.yamlQuote(classe),
+        sottoclasse: helpers.yamlQuote(subclass),
+        classe_srd: classe ? `[[${classe}]]` : "",
+        level: helpers.yamlNumber(livello) || 1,
+        livello: helpers.yamlNumber(livello) || 1,
+        esperienza: helpers.yamlNumber(esperienza) || 0,
+        prossimo_livello: helpers.yamlQuote(prossimoLivello),
+        milestone: 'false',
+        bonus_competenza: proficiencyBonus(helpers.yamlNumber(livello) || 1),
+        specie: helpers.yamlQuote(specie),
+        background: helpers.yamlQuote(background),
+        alignment: helpers.yamlQuote(allineamento),
+        allineamento: helpers.yamlQuote(allineamento),
+        stato: 'in gioco',
+        mondo: mondo,
+        luogo: luogo,
+        fazioni: helpers.inlineYamlList(fazioni),
+        relazioni: helpers.inlineYamlList(relazioni),
+        ac: helpers.yamlNumber(ac) || 10,
+        hp: helpers.yamlNumber(hp) || 10,
+        hp_massimi: helpers.yamlNumber(hp) || 10,
+        hp_attuali: helpers.yamlNumber(hp) || 10,
+        hp_temporanei: helpers.yamlNumber(hpTemp) || 0,
+        hit_dice: helpers.yamlQuote(hitDice),
+        dadi_vita_totali: helpers.yamlQuote(hitDice),
+        dadi_vita_spesi: '0',
+        speed: helpers.yamlQuote(speed),
+        velocita: helpers.yamlQuote(speed),
+        modifier: helpers.yamlNumber(initiative) || 0,
+        iniziativa: helpers.yamlNumber(initiative) || 0,
+        stats: helpers.abilityArray(stats),
+        ispirazione: 'false',
+        successi_morte: '0',
+        fallimenti_morte: '0',
+        competenze: '[]',
+        linguaggi: '[]',
+        strumenti: '[]',
+        equipaggiamento: '[]',
+        incantesimi: '[]',
+        privilegi: '[]'
+    });
 }
 
 module.exports = pg;

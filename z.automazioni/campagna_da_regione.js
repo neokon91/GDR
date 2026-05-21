@@ -26,29 +26,27 @@ async function campagnaDaRegione(tp) {
 
     await helpers.moveNote(tp, helpers.path("campagne"), name);
 
-    return `---
-id: ${id}
-nome: ${helpers.yamlQuote(name)}
-categoria: campagna
-tipo: campagna
-stato: preparazione
-profilo: ${helpers.yamlQuote(profilo?.id ?? "")}
-tono: ${helpers.yamlQuote(tono)}
-promessa: ${helpers.yamlQuote(promessa)}
-calendario: ${helpers.yamlQuote(calendario)}
-mondo: ${mondo}
-regione: ${regione}
-luoghi: [${regione}]
-culture: ${helpers.inlineYamlList(culture)}
-fazioni: ${helpers.inlineYamlList(fazioni)}
-conflitti: ${helpers.inlineYamlList(conflitti)}
-missioni: []
-sessioni: []
-ricompense: []
-domande_campagna: []
----
-
-`;
+    return await helpers.renderFrontmatter("campagna_da_regione", {
+        id: id,
+        nome: helpers.yamlQuote(name),
+        categoria: 'campagna',
+        tipo: 'campagna',
+        stato: 'preparazione',
+        profilo: helpers.yamlQuote(profilo?.id ?? ""),
+        tono: helpers.yamlQuote(tono),
+        promessa: helpers.yamlQuote(promessa),
+        calendario: helpers.yamlQuote(calendario),
+        mondo: mondo,
+        regione: regione,
+        luoghi: `[${regione}]`,
+        culture: helpers.inlineYamlList(culture),
+        fazioni: helpers.inlineYamlList(fazioni),
+        conflitti: helpers.inlineYamlList(conflitti),
+        missioni: '[]',
+        sessioni: '[]',
+        ricompense: '[]',
+        domande_campagna: '[]'
+    });
 }
 
 module.exports = campagnaDaRegione;

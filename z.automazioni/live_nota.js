@@ -9,17 +9,16 @@ async function live_nota(tp) {
     // La nota grezza resta in Inbox, ma viene richiamata dalla sessione per non perderla.
     await helpers.linkCreatedNoteToActiveSession(created, { sessionField: "appunti_live" });
 
-    return `---
-id: ${id}
-nome: ${helpers.yamlQuote(name)}
-categoria: nota rapida
-tipo: nota grezza
-stato: da smistare
-mondo: ${activeContext.world ?? ""}
-sessioni: ${helpers.inlineYamlList(collegamenti)}
-collegamenti: ${helpers.inlineYamlList(collegamenti)}
----
-`;
+    return await helpers.renderFrontmatter("live_nota", {
+        id: id,
+        nome: helpers.yamlQuote(name),
+        categoria: 'nota rapida',
+        tipo: 'nota grezza',
+        stato: 'da smistare',
+        mondo: activeContext.world ?? "",
+        sessioni: helpers.inlineYamlList(collegamenti),
+        collegamenti: helpers.inlineYamlList(collegamenti)
+    });
 }
 
 module.exports = live_nota;

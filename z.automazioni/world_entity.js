@@ -13,29 +13,28 @@ async function world_entity(tp) {
 
     await helpers.moveNote(tp, folder, name);
 
-    return `---
-id: ${helpers.yamlQuote(helpers.slugify(name))}
-nome: ${helpers.yamlQuote(name)}
-categoria: ${helpers.yamlQuote(route.category ?? "compendium")}
-tipo: ${helpers.yamlQuote(route.subtype ?? route.family ?? "voce")}
-famiglia_creativa: ${helpers.yamlQuote(route.family ?? "")}
-stato: bozza
-mondo: ${helpers.yamlQuote(world)}
-gancio: ${helpers.yamlQuote(identity)}
-identita: ${helpers.yamlQuote(identity)}
-uso_al_tavolo: ${helpers.yamlQuote(tableUse)}
-player_safe: ${helpers.yamlQuote(playerSafe)}
-segreto: ${helpers.yamlQuote(secret)}
-conseguenza_potenziale: ${helpers.yamlQuote(consequence)}
-connessioni: ${helpers.inlineYamlList(connections)}
-propaga_a: []
-entita_impattate: []
-pressione: 0
-prossima_mossa: ""
-pubblico: false
-canonico: false
----
-`;
+    return await helpers.renderFrontmatter("world_entity", {
+        id: helpers.yamlQuote(helpers.slugify(name)),
+        nome: helpers.yamlQuote(name),
+        categoria: helpers.yamlQuote(route.category ?? "compendium"),
+        tipo: helpers.yamlQuote(route.subtype ?? route.family ?? "voce"),
+        famiglia_creativa: helpers.yamlQuote(route.family ?? ""),
+        stato: 'bozza',
+        mondo: helpers.yamlQuote(world),
+        gancio: helpers.yamlQuote(identity),
+        identita: helpers.yamlQuote(identity),
+        uso_al_tavolo: helpers.yamlQuote(tableUse),
+        player_safe: helpers.yamlQuote(playerSafe),
+        segreto: helpers.yamlQuote(secret),
+        conseguenza_potenziale: helpers.yamlQuote(consequence),
+        connessioni: helpers.inlineYamlList(connections),
+        propaga_a: '[]',
+        entita_impattate: '[]',
+        pressione: '0',
+        prossima_mossa: '""',
+        pubblico: 'false',
+        canonico: 'false'
+    });
 }
 
 module.exports = world_entity;

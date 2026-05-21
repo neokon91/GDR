@@ -14,34 +14,32 @@ async function lingua(tp) {
 
     await helpers.moveNote(tp, helpers.path("lingue"), name);
 
-    return `---
-id: ${id}
-nome: ${helpers.yamlQuote(name)}
-categoria: lingua
-tipo: lingua
-stato: bozza
-canonico: false
-mondo: ${mondo}
-culture: []
-luoghi: ${helpers.inlineYamlList(luoghi)}
-origine: ${helpers.yamlQuote(origine)}
-usi: ${helpers.inlineYamlTextList([uso])}
-alfabeto:
-parole_note: []
-suono_ritmo_gesti: ${helpers.inlineYamlTextList([suono])}
-parlanti_esclusi: []
-registri: ${helpers.inlineYamlTextList([registro])}
-scrittura_supporti: []
-modi_di_dire: ${helpers.inlineYamlTextList([modoDiDire])}
-concetti_intraduicibili: ${helpers.inlineYamlTextList([concetto])}
-origine_evoluzione: ${helpers.inlineYamlTextList([origine])}
-prestiti_linguistici: []
-indizi_linguistici: []
-conflitti_linguistici: []
-segreti: []
----
-
-`;
+    return await helpers.renderFrontmatter("lingua", {
+        id: id,
+        nome: helpers.yamlQuote(name),
+        categoria: 'lingua',
+        tipo: 'lingua',
+        stato: 'bozza',
+        canonico: 'false',
+        mondo: mondo,
+        culture: '[]',
+        luoghi: helpers.inlineYamlList(luoghi),
+        origine: helpers.yamlQuote(origine),
+        usi: helpers.inlineYamlTextList([uso]),
+        alfabeto: "",
+        parole_note: '[]',
+        suono_ritmo_gesti: helpers.inlineYamlTextList([suono]),
+        parlanti_esclusi: '[]',
+        registri: helpers.inlineYamlTextList([registro]),
+        scrittura_supporti: '[]',
+        modi_di_dire: helpers.inlineYamlTextList([modoDiDire]),
+        concetti_intraduicibili: helpers.inlineYamlTextList([concetto]),
+        origine_evoluzione: helpers.inlineYamlTextList([origine]),
+        prestiti_linguistici: '[]',
+        indizi_linguistici: '[]',
+        conflitti_linguistici: '[]',
+        segreti: '[]'
+    });
 }
 
 module.exports = lingua;

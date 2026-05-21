@@ -92,6 +92,10 @@ function firstPoint(feature) {
     return point ? point.map(n => Number(n).toFixed(6)).join(", ") : "";
 }
 
+function renderFrontmatter(profileName, values) {
+    return `---\n${Object.entries(values).map(([key, value]) => `${key}: ${value}`).join("\n")}\n---\n`;
+}
+
 function noteBody({ feature, index, inputName, world }) {
     const props = feature.properties ?? {};
     const name = getName(feature, index);
@@ -100,29 +104,31 @@ function noteBody({ feature, index, inputName, world }) {
     const coordinate = firstPoint(feature);
     const bounds = bbox(feature);
 
-    return `---
-id: azgaar-${slugify(name).toLowerCase().replace(/\s+/g, "-")}
-nome: ${yamlQuote(name)}
-categoria: luogo
-tipo: ${yamlQuote(type)}
-stato: bozza
-canonico: false
-mondo: ${world ? `[[${world}]]` : ""}
-fonte: azgaar
-file_import: ${yamlQuote(inputName)}
-azgaar_id: ${yamlQuote(idSource)}
-azgaar_layer: ${yamlQuote(props.layer ?? props.type ?? props.kind ?? "")}
-geometria: ${yamlQuote(feature.geometry?.type ?? "")}
-coordinate: ${yamlQuote(coordinate)}
-bbox: ${yamlQuote(bounds)}
-fazioni: []
-culture: []
-religioni: []
-personaggi: []
-missioni: []
-segreti: []
-domande_aperte: []
----
+    const frontmatter = renderFrontmatter("azgaar_import", {
+        id: `azgaar-${slugify(name).toLowerCase().replace(/\s+/g, "-")}`,
+        nome: yamlQuote(name),
+        categoria: 'luogo',
+        tipo: yamlQuote(type),
+        stato: 'bozza',
+        canonico: 'false',
+        mondo: world ? `[[${world}]]` : "",
+        fonte: 'azgaar',
+        file_import: yamlQuote(inputName),
+        azgaar_id: yamlQuote(idSource),
+        azgaar_layer: yamlQuote(props.layer ?? props.type ?? props.kind ?? ""),
+        geometria: yamlQuote(feature.geometry?.type ?? ""),
+        coordinate: yamlQuote(coordinate),
+        bbox: yamlQuote(bounds),
+        fazioni: '[]',
+        culture: '[]',
+        religioni: '[]',
+        personaggi: '[]',
+        missioni: '[]',
+        segreti: '[]',
+        domande_aperte: '[]'
+    });
+
+    return `${frontmatter}
 
 # ${name}
 

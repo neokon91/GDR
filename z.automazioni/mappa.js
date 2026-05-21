@@ -12,31 +12,30 @@ async function mappa(tp) {
 
     await helpers.moveNote(tp, helpers.path("mappe"), name);
 
-    return `---
-id: ${helpers.yamlQuote(helpers.slugify(name))}
-nome: ${helpers.yamlQuote(name)}
-categoria: mappa
-tipo: ${helpers.yamlQuote(route.tipo ?? "mappa")}
-uso: ${helpers.yamlQuote(usage)}
-stato: bozza
-mondo: ${world}
-luogo: ${place}
-luoghi: ${helpers.inlineYamlList(places)}
-fazioni: ${helpers.inlineYamlList(factions)}
-missioni: ${helpers.inlineYamlList(missions)}
-coordinates:
-layer_mappa:
-tipo_mappa:
-pubblico: false
-player_safe:
-segreto:
-cosa_mostra:
-cosa_nascondere:
-layer_dm: []
-layer_pubblico: []
-connessioni: []
----
-`;
+    return await helpers.renderFrontmatter("mappa", {
+        id: helpers.yamlQuote(helpers.slugify(name)),
+        nome: helpers.yamlQuote(name),
+        categoria: 'mappa',
+        tipo: helpers.yamlQuote(route.tipo ?? "mappa"),
+        uso: helpers.yamlQuote(usage),
+        stato: 'bozza',
+        mondo: world,
+        luogo: place,
+        luoghi: helpers.inlineYamlList(places),
+        fazioni: helpers.inlineYamlList(factions),
+        missioni: helpers.inlineYamlList(missions),
+        coordinates: "",
+        layer_mappa: "",
+        tipo_mappa: "",
+        pubblico: 'false',
+        player_safe: "",
+        segreto: "",
+        cosa_mostra: "",
+        cosa_nascondere: "",
+        layer_dm: '[]',
+        layer_pubblico: '[]',
+        connessioni: '[]'
+    });
 }
 
 module.exports = mappa;
