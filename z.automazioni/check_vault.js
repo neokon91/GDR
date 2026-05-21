@@ -108,6 +108,9 @@ const REQUIRED_BASE_FILES = [
 ];
 const REQUIRED_LAYER_FILES = [
     "z.automazioni/helpers.js",
+    "z.automazioni/m11_state.js",
+    "z.automazioni/generate_demo_fixture.js",
+    "z.automazioni/check_m11_fixture.js",
     "z.automazioni/check_smoke.js",
     "z.automazioni/check_release.js",
     "z.automazioni/audit_template_migration.py",
@@ -1171,6 +1174,10 @@ for (const [fileRel, fm] of realEntries) {
         if (anchorCount < 3) {
             warnings.push(`${fileRel}: sessione senza almeno 3 ancore mondo (${anchorCount}/3 tra mondo, luoghi, poteri/PNG, missioni, clock, mappe/scena)`);
         }
+
+        if (hasValue(fm.incontri) && !hasValue(fm.materiale_pronto)) {
+            warnings.push(`${fileRel}: sessione con incontro ma senza materiale_pronto`);
+        }
     }
 
     if (fileRel.startsWith("Mondi/Sessioni/") && fm.categoria === "sessione" && hasValue(fm.recap_pubblico)) {
@@ -1195,8 +1202,11 @@ for (const [fileRel, fm] of realEntries) {
         if (!hasAny(fm, ["gancio", "uso_al_tavolo"])) {
             warnings.push(`${fileRel}: incontro senza gancio o uso_al_tavolo`);
         }
-        if (String(fm.tipo ?? "") === "combattimento" && !hasAny(fm, ["creature", "encounter_creatures"])) {
-            warnings.push(`${fileRel}: combattimento senza creature o encounter_creatures`);
+        if (String(fm.tipo ?? "") === "combattimento" && !hasValue(fm.encounter_creatures)) {
+            warnings.push(`${fileRel}: combattimento senza encounter_creatures`);
+        }
+        if (String(fm.tipo ?? "") === "combattimento" && !hasValue(fm.creature)) {
+            warnings.push(`${fileRel}: combattimento senza creature collegate`);
         }
     }
 
@@ -1204,8 +1214,8 @@ for (const [fileRel, fm] of realEntries) {
         if (!hasAny(fm, ["luoghi", "habitat"])) {
             warnings.push(`${fileRel}: creatura senza habitat o luoghi`);
         }
-        if (!hasAny(fm, ["missioni", "fazioni", "sessioni", "connessioni"])) {
-            warnings.push(`${fileRel}: creatura D&D isolata da mondo, missione, fazione o sessione`);
+        if (!hasAny(fm, ["missioni", "fazioni", "luoghi", "luogo"])) {
+            warnings.push(`${fileRel}: creatura senza missione/fazione/luogo`);
         }
         if (!hasAny(fm, ["gancio", "uso_al_tavolo"])) {
             warnings.push(`${fileRel}: creatura senza gancio o uso_al_tavolo`);
@@ -1219,8 +1229,8 @@ for (const [fileRel, fm] of realEntries) {
         if (!hasAny(fm, ["missioni", "sessioni", "connessioni"])) {
             warnings.push(`${fileRel}: oggetto isolato da missione, sessione o connessioni`);
         }
-        if (!hasAny(fm, ["gancio", "uso_al_tavolo"])) {
-            warnings.push(`${fileRel}: oggetto senza gancio o uso_al_tavolo`);
+        if (!hasAny(fm, ["gancio", "uso_al_tavolo", "prossima_mossa", "conseguenza_potenziale"])) {
+            warnings.push(`${fileRel}: oggetto senza uso narrativo`);
         }
     }
 

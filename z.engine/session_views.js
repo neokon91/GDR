@@ -183,6 +183,31 @@
       || (hasLinks(page?.entita_impattate) || hasLinks(page?.propaga_a) || hasLinks(page?.conseguenze) ? "aperta" : "");
   }
 
+  function continuityAction(page) {
+    const status = continuityStatus(page);
+    if (status === "da verificare") {
+      return "Apri il bersaglio, applica aggiornamenti_richiesti e poi marca propagazione_stato: propagata.";
+    }
+    if (hasLinks(page?.entita_impattate) || hasLinks(page?.propaga_a)) {
+      if (!["applicata", "propagata", "canonizzata"].includes(status)) {
+        return "Usa BUTTON[applica-conseguenza] o BUTTON[propaga-a-entita], poi controlla i bersagli.";
+      }
+    }
+    if (!hasText(page?.prossima_mossa) && ["missione", "tracciato", "fazione", "religione", "relazione", "conflitto"].includes(String(page?.categoria ?? ""))) {
+      return "Scrivi la prossima_mossa prima di chiudere la continuita.";
+    }
+    if (hasLinks(page?.aggiornamenti_richiesti)) {
+      return "Converti gli aggiornamenti richiesti in campi aggiornati sulla scheda.";
+    }
+    if (status === "applicata") {
+      return "Verifica che ogni bersaglio abbia reagito; poi propaga o chiudi.";
+    }
+    if (status === "propagata") {
+      return "Controlla recap pubblico e prossima apertura, poi archivia se non serve piu.";
+    }
+    return "Definisci bersagli, conseguenza concreta e prossima mossa.";
+  }
+
   function continuityIssues(page) {
     const issues = [];
     const hasImpact = hasLinks(page.conseguenze)
@@ -229,7 +254,8 @@
   }
 
   function renderContinuityQueue(dv, source = '"Mondi" OR "Inbox"', limit = 24) {
-    const rows = continuityRows(dv, source, limit).map(p => [
+    const pages = continuityRows(dv, source, limit);
+    const rows = pages.map(p => [
       p.file.link,
       p.categoria ?? p.tipo ?? "",
       continuityStatus(p) || "aperta",
@@ -237,6 +263,7 @@
       p.entita_impattate ?? [],
       p.propaga_a ?? p.applicata_a ?? [],
       p.aggiornamenti_richiesti ?? p.impatto ?? p.conseguenza_potenziale ?? "",
+      continuityAction(p),
       p.prossima_mossa ?? ""
     ]);
 
@@ -245,31 +272,109 @@
       return;
     }
 
-    dv.table(["Origine", "Tipo", "Stato", "Causa", "Impattate", "Da aggiornare", "Cambio richiesto", "Prossima mossa"], rows);
+    renderCardGrid(dv, pages.slice(0, 8), p => cardHtml({
+      title: pageTitle(p),
+      meta: [p.categoria ?? p.tipo ?? "", continuityStatus(p) || "aperta"].filter(Boolean).join(" · "),
+      azione: continuityAction(p),
+      importa: fieldText(p.aggiornamenti_richiesti ?? p.impatto ?? p.conseguenza_potenziale ?? p.entita_impattate ?? p.propaga_a) || "La nota e nella coda perche contiene continuita o bersagli.",
+      link: p.file.path,
+      badge: continuityStatus(p) === "da verificare" ? "Da verificare" : "Continuita",
+      cls: cardClass(p, "gdr-info-card compact", continuityStatus(p) === "propagata" ? "gdr-kind-ready" : "gdr-kind-missing")
+    }), {
+      title: "Nessuna continuita aperta",
+      action: "Registra una scelta o applica una conseguenza quando il mondo cambia."
+    });
+
+    dv.table(["Origine", "Tipo", "Stato", "Causa", "Impattate", "Da aggiornare", "Cambio richiesto", "Azione", "Prossima mossa"], rows);
   }
 
   function renderPropagationTargets(dv, source = '"Mondi"', limit = 24) {
-    const rows = dv.pages(source)
+    const pages = dv.pages(source)
       .where(p => isReal(p) && p.stato !== "archiviata" && (hasLinks(p.propagato_da) || hasLinks(p.aggiornamenti_richiesti) || continuityStatus(p) === "da verificare"))
       .sort(p => p.ultima_propagazione ?? p.file.mtime, "desc")
       .limit(limit)
-      .map(p => [
+      .array();
+    const rows = pages.map(p => [
         p.file.link,
         p.categoria ?? p.tipo ?? "",
         continuityStatus(p) || "da verificare",
         p.propagato_da ?? [],
         p.aggiornamenti_richiesti ?? [],
+        continuityAction(p),
         p.prossima_mossa ?? "",
         p.pressione ?? ""
-      ])
-      .array();
+      ]);
 
     if (!rows.length) {
       dv.paragraph("Nessun bersaglio di propagazione da verificare.");
       return;
     }
 
-    dv.table(["Bersaglio", "Tipo", "Stato", "Da", "Aggiornamento richiesto", "Prossima mossa", "Pressione"], rows);
+    renderCardGrid(dv, pages.slice(0, 8), p => cardHtml({
+      title: pageTitle(p),
+      meta: [p.categoria ?? p.tipo ?? "", continuityStatus(p) || "da verificare", p.pressione !== undefined ? `pressione ${p.pressione}` : ""].filter(Boolean).join(" · "),
+      azione: fieldText(p.aggiornamenti_richiesti) || continuityAction(p),
+      importa: continuityAction(p),
+      link: p.file.path,
+      badge: "Bersaglio",
+      cls: cardClass(p, "gdr-info-card compact", continuityStatus(p) === "da verificare" ? "gdr-kind-missing" : "gdr-kind-ready")
+    }), {
+      title: "Nessun bersaglio da aggiornare",
+      action: "Le propagazioni applicate compariranno qui quando richiedono verifica."
+    });
+
+    dv.table(["Bersaglio", "Tipo", "Stato", "Da", "Aggiornamento richiesto", "Azione", "Prossima mossa", "Pressione"], rows);
+  }
+
+  function isClosableContinuity(page) {
+    const status = continuityStatus(page);
+    const hasClosureSignal = hasText(page.prossima_mossa)
+      || hasText(page.recap_pubblico)
+      || hasLinks(page.effetti)
+      || hasText(page.effetti)
+      || hasLinks(page.conseguenze);
+    return ["propagata", "canonizzata"].includes(status)
+      && !hasLinks(page.aggiornamenti_richiesti)
+      && hasClosureSignal;
+  }
+
+  function renderClosableContinuity(dv, source = '"Mondi" OR "Inbox"', limit = 16) {
+    const pages = dv.pages(source)
+      .where(p => isReal(p) && p.stato !== "archiviata" && p.stato !== "ignorata")
+      .where(p => isClosableContinuity(p))
+      .sort(p => p.ultima_propagazione ?? p.propagato_il ?? p.file.mtime, "desc")
+      .limit(limit)
+      .array();
+
+    if (!pages.length) {
+      dv.paragraph("Nessuna continuita pronta da chiudere.");
+      return;
+    }
+
+    renderCardGrid(dv, pages.slice(0, 8), p => cardHtml({
+      title: pageTitle(p),
+      meta: [p.categoria ?? p.tipo ?? "", continuityStatus(p), p.ultima_propagazione ?? p.propagato_il ?? ""].filter(Boolean).join(" · "),
+      azione: "Controlla recap pubblico/prossima apertura, poi archivia o lascia canonizzata.",
+      importa: fieldText(p.prossima_mossa ?? p.recap_pubblico ?? p.effetti ?? p.conseguenze) || "La continuita ha segnali di chiusura e non richiede aggiornamenti.",
+      link: p.file.path,
+      badge: "Chiudibile",
+      cls: cardClass(p, "gdr-info-card compact", "gdr-kind-ready")
+    }), {
+      title: "Nessuna continuita chiudibile",
+      action: "Completa aggiornamenti richiesti e marca propagazione_stato: propagata."
+    });
+
+    dv.table(
+      ["Nota", "Tipo", "Stato", "Chiusura", "Ultima propagazione", "Azione"],
+      pages.map(p => [
+        p.file.link,
+        p.categoria ?? p.tipo ?? "",
+        continuityStatus(p),
+        p.prossima_mossa ?? p.recap_pubblico ?? p.effetti ?? p.conseguenze ?? "",
+        p.ultima_propagazione ?? p.propagato_il ?? "",
+        "Archivia, canonizza o lascia come riferimento chiuso."
+      ])
+    );
   }
 
   function renderContinuityGaps(dv, source = '"Mondi" OR "Inbox"', limit = 24) {
@@ -285,6 +390,7 @@
         entry.page.categoria ?? entry.page.tipo ?? "",
         continuityStatus(entry.page) || "aperta",
         entry.page.entita_impattate ?? entry.page.propaga_a ?? entry.page.applicata_a ?? [],
+        continuityAction(entry.page),
         entry.page.prossima_mossa ?? ""
       ])
       .array();
@@ -294,7 +400,7 @@
       return;
     }
 
-    dv.table(["Nota", "Gap", "Tipo", "Stato", "Bersagli", "Prossima mossa"], rows);
+    dv.table(["Nota", "Gap", "Tipo", "Stato", "Bersagli", "Azione", "Prossima mossa"], rows);
   }
 
   function renderWorldCreationStatus(dv, worldLink = "") {
@@ -1357,6 +1463,7 @@
     renderSessionPostCards,
     renderContinuityGaps,
     renderContinuityQueue,
+    renderClosableContinuity,
     renderPropagationTargets,
     renderWorldImpact,
     renderWorldCreationStatus,

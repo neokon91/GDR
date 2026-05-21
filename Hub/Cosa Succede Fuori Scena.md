@@ -104,6 +104,9 @@ gdr.renderContinuityGaps(dv, '"Mondi" OR "Inbox"', 24);
 dv.header(2, "Bersagli Da Aggiornare");
 gdr.renderPropagationTargets(dv, '"Mondi"', 24);
 
+dv.header(2, "Chiudibili Oggi");
+gdr.renderClosableContinuity(dv, '"Mondi" OR "Inbox"', 16);
+
 table(
   "Prossime Mosse Fuori Scena",
   ["Nota", "Tipo", "Stato", "Pressione", "Innesco", "Prossima mossa", "Conseguenze"],

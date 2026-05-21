@@ -26,6 +26,20 @@ for (const marker of ["renderTableCockpit", "renderM11ContinuityChain", "BUTTON[
     }
 }
 
+const livingWorld = readTextRel(ROOT, "Hub/Motore Mondo Vivo.md");
+for (const marker of ["renderContinuityQueue", "renderPropagationTargets", "renderClosableContinuity"]) {
+    if (!livingWorld.includes(marker)) {
+        errors.push(`Smoke statico: Motore Mondo Vivo non contiene ${marker}`);
+    }
+}
+
+const offscreen = readTextRel(ROOT, "Hub/Cosa Succede Fuori Scena.md");
+for (const marker of ["renderContinuityGaps", "renderPropagationTargets", "renderClosableContinuity"]) {
+    if (!offscreen.includes(marker)) {
+        errors.push(`Smoke statico: Cosa Succede Fuori Scena non contiene ${marker}`);
+    }
+}
+
 const postSession = readTextRel(ROOT, "Risorse/Post Sessione Guidato.md");
 for (const marker of ["renderM11ContinuityChain", "renderConsequenceCards", "BUTTON[registra-scelta-mondo]"]) {
     if (!postSession.includes(marker)) {

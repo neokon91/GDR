@@ -79,6 +79,9 @@ gdr.renderContinuityQueue(dv, '"Mondi" OR "Inbox"', 32);
 dv.header(2, "Bersagli Da Verificare");
 gdr.renderPropagationTargets(dv, '"Mondi"', 32);
 
+dv.header(2, "Chiudibili Oggi");
+gdr.renderClosableContinuity(dv, '"Mondi" OR "Inbox"', 16);
+
 dv.header(2, "Buchi Di Continuita");
 gdr.renderContinuityGaps(dv, '"Mondi" OR "Inbox"', 32);
 

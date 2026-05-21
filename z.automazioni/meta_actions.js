@@ -1,5 +1,6 @@
 async function meta_actions(tp, action = "") {
     const helpers = tp.user.helpers;
+    const m11 = tp.user.m11_state ?? (typeof require === "function" ? require("./m11_state") : null);
     const activeFile = app.workspace.getActiveFile?.() ?? tp.config?.target_file ?? null;
     const today = tp.date.now("YYYY-MM-DD");
 
@@ -132,64 +133,31 @@ async function meta_actions(tp, action = "") {
 
         return await helpers.chooseConnections(tp, "Entita a cui propagare", { world: meta.mondo });
     };
-    const appendUniqueText = (value, text) => {
-        const entries = helpers.normalizeFieldArray(value);
-        return text && !entries.includes(text) ? [...entries, text] : entries;
-    };
+    const appendUniqueText = (value, text) => m11.appendUnique(value, text);
     const promptPressureDelta = async () => {
         const raw = await helpers.promptOptional(tp, "Aumento pressione sui bersagli", "0");
         const delta = Number.parseInt(raw || "0", 10);
         return Number.isFinite(delta) ? delta : 0;
     };
-    const continuityUpdateText = ({ sourceLink, text, nextMove }) => [
-        today,
-        sourceLink,
-        text ? `impatto: ${text}` : "",
-        nextMove ? `prossima mossa: ${nextMove}` : ""
-    ].filter(Boolean).join(" | ");
     const applyContinuityImpact = async (targetFile, { sourceFile = currentFile(), sourceLink, targetLink, consequenceText, nextMove, pressureDelta = 0, trackStep = 0, mode = "propagazione" }) => {
         if (!targetFile || targetFile.path === sourceFile?.path) return;
 
         await helpers.processFrontmatter(targetFile, fm => {
-            fm.propagato_da = helpers.appendUniqueLink(fm.propagato_da, sourceLink);
-            fm.propagazione_stato = "da verificare";
-            fm.ultima_propagazione = today;
-            fm.aggiornamenti_richiesti = appendUniqueText(
-                fm.aggiornamenti_richiesti,
-                continuityUpdateText({ sourceLink, text: consequenceText, nextMove })
+            m11.applyContinuityImpact(
+                new Map([[targetFile.path, { frontmatter: fm }]]),
+                targetFile.path,
+                {
+                    sourceKey: sourceFile?.path ?? "",
+                    sourceLink,
+                    targetLink,
+                    consequenceText,
+                    nextMove,
+                    pressureDelta,
+                    trackStep,
+                    today,
+                    mode
+                }
             );
-
-            if (mode === "conseguenza") {
-                fm.conseguenze = helpers.appendUniqueLink(fm.conseguenze, sourceLink);
-            } else {
-                fm.connessioni = helpers.appendUniqueLink(fm.connessioni, sourceLink);
-            }
-
-            if (consequenceText) {
-                fm.impatto = appendUniqueText(fm.impatto, consequenceText);
-                if (String(fm.categoria ?? "") === "tracciato" && !fm.innesco) {
-                    fm.innesco = consequenceText;
-                }
-            }
-
-            if (nextMove && !fm.prossima_mossa) {
-                fm.prossima_mossa = nextMove;
-            }
-
-            if (pressureDelta !== 0) {
-                const currentPressure = Number.parseInt(fm.pressione ?? 0, 10) || 0;
-                fm.pressione = Math.max(0, currentPressure + pressureDelta);
-            }
-
-            if (trackStep !== 0 && String(fm.categoria ?? "") === "tracciato") {
-                const currentProgress = Number.parseInt(fm.progress_value ?? 0, 10) || 0;
-                const maxProgress = Number.parseInt(fm.progress_max ?? 0, 10) || 0;
-                fm.progress_value = Math.max(0, currentProgress + trackStep);
-                fm.avanzato_il = today;
-                if (maxProgress > 0 && fm.progress_value >= maxProgress && fm.stato !== "archiviata") {
-                    fm.stato = "completato";
-                }
-            }
         });
 
         const targetMeta = app.metadataCache.getFileCache(targetFile)?.frontmatter ?? {};
@@ -207,7 +175,8 @@ async function meta_actions(tp, action = "") {
                 fm.propagazione_stato = fm.propagazione_stato || "da verificare";
                 fm.aggiornamenti_richiesti = appendUniqueText(
                     fm.aggiornamenti_richiesti,
-                    continuityUpdateText({
+                    m11.continuityUpdateText({
+                        today,
                         sourceLink,
                         text: consequenceText || `Verifica relazione ${targetLink}`,
                         nextMove
@@ -216,15 +185,14 @@ async function meta_actions(tp, action = "") {
             });
         }
     };
-    const appendUniqueLinks = (value, links) => helpers.normalizeFieldArray(links)
-        .reduce((acc, link) => helpers.appendUniqueLink(acc, link), value);
-    const continuityEntry = ({ choice, consequenceText, targets, nextMove }) => [
+    const appendUniqueLinks = (value, links) => m11.appendUniqueMany(value, helpers.normalizeFieldArray(links));
+    const continuityEntry = ({ choice, consequenceText, targets, nextMove }) => m11.continuityEntry({
         today,
-        choice ? `scelta: ${choice}` : "",
-        consequenceText ? `conseguenza: ${consequenceText}` : "",
-        helpers.normalizeFieldArray(targets).length ? `bersagli: ${helpers.normalizeFieldArray(targets).join(", ")}` : "",
-        nextMove ? `prossima mossa: ${nextMove}` : ""
-    ].filter(Boolean).join(" | ");
+        choice,
+        consequenceText,
+        targets,
+        nextMove
+    });
 
     if (!currentFile()) {
         notice("Nessuna nota attiva.");
