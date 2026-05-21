@@ -45,6 +45,9 @@ decisioni_attese: ["scegliere il patrono del recupero"]
 pressioni: ["Consorzio", "Custodi", "marea"]
 materiale_pronto: ["[[Mappa Pubblica Di Brumafonda]]", "[[Avviso Della Dogana Di Brumafonda]]"]
 conseguenze: ["[[La Marea Ha Preso Il Faro Vecchio]]"]
+entita_impattate: ["[[Porto Di Brumafonda]]", "[[Recuperare La Campana Sommersa]]", "[[Consorzio Del Sale Nero]]"]
+propaga_a: ["[[Mercato Del Sale Nero]]", "[[Culto Della Lanterna Bassa]]"]
+propagazione_stato: "aperta"
 recap_pubblico: ["Il gruppo ha visto il porto fermarsi quando la campana sommersa ha suonato sotto la nebbia."]
 recap_dm: ["Il Consorzio ha accelerato il contratto dopo il suono della campana."]
 prossima_apertura: "La barca lascia il molo basso mentre le lanterne scendono a pelo d'acqua."

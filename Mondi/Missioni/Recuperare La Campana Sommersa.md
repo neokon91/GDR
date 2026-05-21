@@ -28,6 +28,9 @@ ostacoli: ["nebbia fitta", "marea contraria", "contratto ambiguo"]
 scene_pronte: ["contratto alla dogana", "veglia al molo", "immersione nel faro"]
 decisioni: ["accettare clausole del Consorzio", "coinvolgere i Custodi"]
 conseguenze: ["[[La Marea Ha Preso Il Faro Vecchio]]"]
+entita_impattate: ["[[Porto Di Brumafonda]]", "[[Consorzio Del Sale Nero]]", "[[Culto Della Lanterna Bassa]]"]
+propaga_a: ["[[Mercato Del Sale Nero]]", "[[La Marea Ha Preso Il Faro Vecchio]]"]
+propagazione_stato: "aperta"
 segreti: ["La campana contiene nomi incisi che non compaiono nei registri."]
 connessioni: ["[[Porto Di Brumafonda]]", "[[Consorzio Del Sale Nero]]", "[[Custodi Delle Saline]]"]
 scadenza_mondo: "Prima della Notte Della Lanterna Bassa"
