@@ -527,6 +527,7 @@ const markdownByPath = new Set();
 const markdownByBasename = new Map();
 const linkableByPath = new Set();
 const linkableByBasename = new Map();
+const markdownTextByPath = new Map();
 const markdownMeta = new Map();
 
 for (const file of linkableFiles) {
@@ -548,7 +549,13 @@ for (const file of markdownFiles) {
     markdownByPath.add(stem);
     if (!markdownByBasename.has(basename)) markdownByBasename.set(basename, []);
     markdownByBasename.get(basename).push(fileRel);
+    markdownTextByPath.set(fileRel, text);
     markdownMeta.set(fileRel, parseFrontmatter(text));
+}
+
+function markdownText(file) {
+    const fileRel = rel(file);
+    return markdownTextByPath.get(fileRel) ?? fs.readFileSync(file, "utf8");
 }
 
 for (const file of walk(ROOT, file => file.endsWith(".json"))) {
@@ -682,8 +689,8 @@ for (const snippet of REQUIRED_SNIPPETS) {
 
 const wikiLinkPattern = /!?\[\[([^\]|#]+)(?:#[^\]|]+)?(?:\|[^\]]*)?\]\]/g;
 for (const file of markdownFiles) {
-    const text = fs.readFileSync(file, "utf8");
     const fileRel = rel(file);
+    const text = markdownText(file);
     const taskLines = text.split(/\r?\n/).filter(line => /^\s*[-*]\s+\[[ xX]\]/.test(line));
     const numberedCalloutTitle = text.match(/^> \[![^\]]+\] \d+\./m);
 
@@ -733,7 +740,7 @@ function validateMetaBindTemplate(templateRef, context) {
 }
 
 for (const file of markdownFiles) {
-    const text = fs.readFileSync(file, "utf8");
+    const text = markdownText(file);
     let match;
 
     while ((match = templatePattern.exec(text))) {
@@ -785,7 +792,7 @@ if (metaBindConfig) {
 
     const inlineButtonPattern = /`BUTTON\[([^\]\n]+)\]`/g;
     for (const file of markdownFiles) {
-        const text = fs.readFileSync(file, "utf8");
+        const text = markdownText(file);
         let match;
 
         while ((match = inlineButtonPattern.exec(text))) {
@@ -809,7 +816,7 @@ if (metadataMenuConfig) {
 }
 
 for (const file of markdownFiles.filter(file => rel(file).startsWith("z.modelli/"))) {
-    const text = fs.readFileSync(file, "utf8");
+    const text = markdownText(file);
     if (/```meta-bind-button[\s\S]*?type:\s*updateMetadata[\s\S]*?```/.test(text)) {
         warnings.push(`${rel(file)}: meta-bind-button modifica frontmatter; usare INPUT inline/blocco`);
     }
@@ -821,7 +828,7 @@ const automationNames = fs.existsSync(automationDir)
     : new Set();
 const templaterUserPattern = /tp\.user\.([A-Za-z0-9_]+)/g;
 for (const file of markdownFiles.filter(file => rel(file).startsWith("z.modelli/"))) {
-    const text = fs.readFileSync(file, "utf8");
+    const text = markdownText(file);
     let match;
 
     while ((match = templaterUserPattern.exec(text))) {
@@ -833,8 +840,8 @@ for (const file of markdownFiles.filter(file => rel(file).startsWith("z.modelli/
 }
 
 for (const file of markdownFiles.filter(file => /(^|\/)[^/]*Router\.md$/.test(rel(file)))) {
-    const text = fs.readFileSync(file, "utf8");
     const fileRel = rel(file);
+    const text = markdownText(file);
     if (/^<%\*/m.test(text)) {
         errors.push(`${fileRel}: router con blocco Templater multilinea; usare tp.user.template_router`);
     }
@@ -845,7 +852,7 @@ for (const file of markdownFiles.filter(file => /(^|\/)[^/]*Router\.md$/.test(re
 
 const operationalViewRoots = /^(z\.modelli|Hub|Risorse|Mondi)\//;
 for (const file of markdownFiles.filter(file => operationalViewRoots.test(rel(file)))) {
-    const text = fs.readFileSync(file, "utf8");
+    const text = markdownText(file);
     if (text.includes('z.automazioni/session_context.js')) {
         errors.push(`${rel(file)}: vista operativa punta a session_context.js; usare z.engine/session_views.js`);
     }
