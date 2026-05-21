@@ -3,6 +3,7 @@
 const fs = require("fs");
 const path = require("path");
 const vm = require("vm");
+const { rel: relativePath, walk } = require("./node_utils");
 
 const ROOT = process.cwd();
 const JS_DIRS = ["z.automazioni", "z.engine"];
@@ -11,31 +12,13 @@ const errors = [];
 const warnings = [];
 
 function rel(file) {
-    return path.relative(ROOT, file).replace(/\\/g, "/");
+    return relativePath(ROOT, file);
 }
 
-function walk(dir) {
-    if (!fs.existsSync(dir)) return [];
-
-    const entries = fs.readdirSync(dir, { withFileTypes: true });
-    const files = [];
-
-    for (const entry of entries) {
-        if (IGNORED_DIRS.has(entry.name)) continue;
-
-        const fullPath = path.join(dir, entry.name);
-
-        if (entry.isDirectory()) {
-            files.push(...walk(fullPath));
-        } else if (entry.isFile() && entry.name.endsWith(".js")) {
-            files.push(fullPath);
-        }
-    }
-
-    return files;
-}
-
-const jsFiles = JS_DIRS.flatMap(dir => walk(path.join(ROOT, dir))).sort();
+const jsFiles = JS_DIRS.flatMap(dir => walk(path.join(ROOT, dir), {
+    ignoredDirs: IGNORED_DIRS,
+    predicate: file => file.endsWith(".js")
+})).sort();
 
 for (const file of jsFiles) {
     try {

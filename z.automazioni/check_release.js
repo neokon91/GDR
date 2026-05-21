@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
-const fs = require("fs");
 const path = require("path");
+const { readTextIfExists } = require("./node_utils");
 
 const ROOT = process.cwd();
 const RELEASE_EXPECTED_VERSION = "1.0.0";
@@ -27,8 +27,7 @@ const RELEASE_VERIFICATION_MARKERS = [
 const errors = [];
 
 function readIfExists(relPath) {
-    const fullPath = path.join(ROOT, relPath);
-    return fs.existsSync(fullPath) ? fs.readFileSync(fullPath, "utf8") : "";
+    return readTextIfExists(path.join(ROOT, relPath));
 }
 
 const versionText = readIfExists("VERSION.md");

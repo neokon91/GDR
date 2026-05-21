@@ -2,6 +2,7 @@
 
 const fs = require("fs");
 const path = require("path");
+const { rel: relativePath, walk } = require("./node_utils");
 
 const ROOT = process.cwd();
 const FIX = process.argv.includes("--fix");
@@ -20,26 +21,7 @@ const errors = [];
 const fixed = [];
 
 function rel(file) {
-    return path.relative(ROOT, file).replace(/\\/g, "/");
-}
-
-function walk(dir) {
-    const entries = fs.readdirSync(dir, { withFileTypes: true });
-    const files = [];
-
-    for (const entry of entries) {
-        if (IGNORED_DIRS.has(entry.name)) continue;
-
-        const fullPath = path.join(dir, entry.name);
-
-        if (entry.isDirectory()) {
-            files.push(...walk(fullPath));
-        } else if (entry.isFile()) {
-            files.push(fullPath);
-        }
-    }
-
-    return files;
+    return relativePath(ROOT, file);
 }
 
 function readJson(file) {
@@ -51,7 +33,7 @@ function readJson(file) {
     }
 }
 
-const files = walk(ROOT);
+const files = walk(ROOT, { ignoredDirs: IGNORED_DIRS });
 
 for (const file of files) {
     const basename = path.basename(file);

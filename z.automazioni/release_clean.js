@@ -3,6 +3,7 @@
 const fs = require("fs");
 const path = require("path");
 const { execFileSync } = require("child_process");
+const { readJson, rel: relativePath } = require("./node_utils");
 
 const ROOT = process.cwd();
 const DIST = path.join(ROOT, "dist");
@@ -62,6 +63,7 @@ const EXCLUDED_AUTOMAZIONI = new Set([
     "import_azgaar_geojson.js",
     "import_srd.js",
     "LICENSE.md",
+    "node_utils.js",
     "release_beta.js",
     "release_clean.js",
     "README.md"
@@ -157,18 +159,10 @@ Questa pagina esiste solo nella release utente. Serve a provare il vault senza a
 `
 };
 
-function readJson(file, fallback) {
-    try {
-        return JSON.parse(fs.readFileSync(file, "utf8"));
-    } catch {
-        return fallback;
-    }
-}
-
 const enabledPlugins = new Set(readJson(path.join(ROOT, ".obsidian/community-plugins.json"), []));
 
 function rel(file) {
-    return path.relative(ROOT, file).replace(/\\/g, "/");
+    return relativePath(ROOT, file);
 }
 
 function topSegment(relPath) {

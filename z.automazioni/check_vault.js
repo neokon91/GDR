@@ -2,6 +2,14 @@
 
 const fs = require("fs");
 const path = require("path");
+const {
+    hasAny,
+    hasValue,
+    parseFrontmatter,
+    readJson: readJsonFile,
+    rel: relativePath,
+    walk: walkFiles
+} = require("./node_utils");
 
 const ROOT = process.cwd();
 const IGNORED_DIRS = new Set([".git", "node_modules", "dist"]);
@@ -344,97 +352,22 @@ const errors = [];
 const warnings = [];
 
 function rel(file) {
-    return path.relative(ROOT, file).replace(/\\/g, "/");
+    return relativePath(ROOT, file);
 }
 
 function walk(dir, predicate = () => true) {
-    const entries = fs.readdirSync(dir, { withFileTypes: true });
-    const files = [];
-
-    for (const entry of entries) {
-        if (IGNORED_DIRS.has(entry.name)) continue;
-
-        const fullPath = path.join(dir, entry.name);
-
-        if (entry.isDirectory()) {
-            files.push(...walk(fullPath, predicate));
-        } else if (entry.isFile() && predicate(fullPath)) {
-            files.push(fullPath);
-        }
-    }
-
-    return files;
+    return walkFiles(dir, { ignoredDirs: IGNORED_DIRS, predicate });
 }
 
 function readJson(file) {
-    try {
-        return JSON.parse(fs.readFileSync(file, "utf8"));
-    } catch (error) {
+    return readJsonFile(file, null, error => {
         errors.push(`${rel(file)}: JSON non valido (${error.message})`);
-        return null;
-    }
+    });
 }
 
 function readOptionalJson(file) {
     if (!fs.existsSync(file)) return null;
     return readJson(file);
-}
-
-function parseScalar(value) {
-    const trimmed = String(value ?? "").trim();
-    if (trimmed === "true") return true;
-    if (trimmed === "false") return false;
-    if (trimmed === "[]") return [];
-    if (/^-?\d+(\.\d+)?$/.test(trimmed)) return Number(trimmed);
-    return trimmed.replace(/^["']|["']$/g, "");
-}
-
-function parseFrontmatter(text) {
-    if (!text.startsWith("---\n")) return {};
-
-    const end = text.indexOf("\n---", 4);
-    if (end === -1) return {};
-
-    const yaml = text.slice(4, end).split(/\r?\n/);
-    const data = {};
-    let currentKey = null;
-
-    for (const line of yaml) {
-        const listMatch = line.match(/^\s+-\s+(.+)$/);
-
-        if (listMatch && currentKey) {
-            if (!Array.isArray(data[currentKey])) data[currentKey] = [];
-            data[currentKey].push(parseScalar(listMatch[1]));
-            continue;
-        }
-
-        const keyMatch = line.match(/^([A-Za-z0-9_-]+):\s*(.*)$/);
-        if (!keyMatch) continue;
-
-        currentKey = keyMatch[1];
-        const value = keyMatch[2] ?? "";
-
-        if (!value.trim()) {
-            data[currentKey] = "";
-        } else if (/^\[.*\]$/.test(value.trim())) {
-            const inner = value.trim().slice(1, -1).trim();
-            data[currentKey] = inner ? inner.split(",").map(entry => parseScalar(entry.trim())) : [];
-        } else {
-            data[currentKey] = parseScalar(value);
-        }
-    }
-
-    return data;
-}
-
-function hasValue(value) {
-    if (Array.isArray(value)) return value.length > 0;
-    if (typeof value === "number") return Number.isFinite(value) && value !== 0;
-    return String(value ?? "").trim().length > 0;
-}
-
-function hasAny(frontmatter, fields) {
-    return fields.some(field => hasValue(frontmatter[field]));
 }
 
 function flatText(value) {

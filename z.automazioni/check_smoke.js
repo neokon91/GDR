@@ -2,6 +2,7 @@
 
 const fs = require("fs");
 const path = require("path");
+const { hasAny, hasValue, parseFrontmatter } = require("./node_utils");
 
 const ROOT = process.cwd();
 const errors = [];
@@ -36,45 +37,6 @@ function filePath(relPath) {
 
 function read(relPath) {
     return fs.readFileSync(filePath(relPath), "utf8");
-}
-
-function parseFrontmatter(text) {
-    if (!text.startsWith("---\n")) return {};
-    const end = text.indexOf("\n---", 4);
-    if (end === -1) return {};
-
-    const frontmatter = {};
-    for (const line of text.slice(4, end).split(/\r?\n/)) {
-        const match = line.match(/^([A-Za-z0-9_-]+):\s*(.*)$/);
-        if (!match) continue;
-
-        const [, key, rawValue] = match;
-        const value = rawValue.trim();
-        if (value === "true") {
-            frontmatter[key] = true;
-        } else if (value === "false") {
-            frontmatter[key] = false;
-        } else if (value.startsWith("[") && value.endsWith("]")) {
-            frontmatter[key] = value
-                .slice(1, -1)
-                .split(/,(?=(?:[^"]*"[^"]*")*[^"]*$)/)
-                .map(item => item.trim().replace(/^["']|["']$/g, ""))
-                .filter(Boolean);
-        } else {
-            frontmatter[key] = value.replace(/^["']|["']$/g, "");
-        }
-    }
-    return frontmatter;
-}
-
-function hasValue(value) {
-    if (value === undefined || value === null || value === false) return false;
-    if (Array.isArray(value)) return value.length > 0;
-    return String(value).trim().length > 0;
-}
-
-function hasAny(frontmatter, fields) {
-    return fields.some(field => hasValue(frontmatter[field]));
 }
 
 for (const relPath of DEMO_REQUIRED_FILES) {
