@@ -714,20 +714,24 @@ for (const file of markdownFiles) {
 }
 
 const templatePattern = /templateFile:\s*["']([^"']+)["']/g;
+function validateMetaBindTemplate(templateRef, context) {
+    const template = targetPath(templateRef);
+    if (template.startsWith("z.modelli/") && !isGeneratedTemplatePath(template)) {
+        errors.push(`${context} non generabile da TemplateFactory ${template}`);
+        return;
+    }
+    if (isGeneratedTemplatePath(template)) return;
+    if (!existsRel(template)) {
+        errors.push(`${context} mancante ${template}`);
+    }
+}
+
 for (const file of markdownFiles) {
     const text = fs.readFileSync(file, "utf8");
     let match;
 
     while ((match = templatePattern.exec(text))) {
-        const template = targetPath(match[1]);
-        if (template.startsWith("z.modelli/") && !isGeneratedTemplatePath(template)) {
-            errors.push(`${rel(file)}: template Meta Bind non generabile da TemplateFactory ${template}`);
-            continue;
-        }
-        if (isGeneratedTemplatePath(template)) continue;
-        if (!existsRel(template)) {
-            errors.push(`${rel(file)}: template Meta Bind mancante ${template}`);
-        }
+        validateMetaBindTemplate(match[1], `${rel(file)}: template Meta Bind`);
     }
 }
 
@@ -758,15 +762,7 @@ if (metaBindConfig) {
 
         for (const action of button.actions ?? []) {
             if ((action.type === "templaterCreateNote" || action.type === "runTemplaterFile") && action.templateFile) {
-                const template = targetPath(action.templateFile);
-                if (template.startsWith("z.modelli/") && !isGeneratedTemplatePath(template)) {
-                    errors.push(`Meta Bind: button template ${button.id} usa template non generabile da TemplateFactory ${template}`);
-                    continue;
-                }
-                if (isGeneratedTemplatePath(template)) continue;
-                if (!existsRel(template)) {
-                    errors.push(`Meta Bind: button template ${button.id} usa template mancante ${template}`);
-                }
+                validateMetaBindTemplate(action.templateFile, `Meta Bind: button template ${button.id} usa template`);
             }
 
             if (action.type === "updateMetadata") {
