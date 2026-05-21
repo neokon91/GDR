@@ -30,9 +30,21 @@ async function session_live_update(tp, mode = "scena") {
 
         if (!decisione) return "";
 
+        const conseguenza = await helpers.promptOptional(tp, "Cosa potrebbe cambiare nel mondo");
+        const chiReagisce = await helpers.promptOptional(tp, "Chi potrebbe reagire");
+
         await helpers.processFrontmatter(sessionFile, fm => {
             fm.decisioni_prese = appendText(fm.decisioni_prese, decisione);
             fm.output_sessione = appendText(fm.output_sessione, `Decisione: ${decisione}`);
+            if (conseguenza) {
+                fm.conseguenze = appendText(fm.conseguenze, conseguenza);
+                fm.output_sessione = appendText(fm.output_sessione, `Conseguenza potenziale: ${conseguenza}`);
+                fm.propagazione_stato = fm.propagazione_stato || "aperta";
+            }
+            if (chiReagisce) {
+                fm.propaga_a = appendText(fm.propaga_a, chiReagisce);
+                fm.aggiornamenti_richiesti = appendText(fm.aggiornamenti_richiesti, `Verifica reazione: ${chiReagisce}`);
+            }
         });
         new Notice("Decisione aggiunta alla sessione.");
         return "";

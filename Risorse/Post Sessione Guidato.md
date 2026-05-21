@@ -56,6 +56,10 @@ gdr.renderCanonDecisionCards(dv);
 
 ## 3. Conseguenze Da Applicare
 
+`BUTTON[applica-conseguenza]`
+
+`BUTTON[propaga-a-entita]`
+
 ```dataviewjs
 const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
 gdr.renderConsequenceCards(dv);

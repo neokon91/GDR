@@ -11,27 +11,26 @@ campagne_attive: []
 
 # Motore Mondo Vivo
 
-> [!timeline] Campaign + living world engine
+> [!timeline] Campaign + Living World Engine
 > Questa vista collega canone, fazioni, stati del mondo, causalita storica e conseguenze da sessione. Non sostituisce la preparazione: decide cosa deve cambiare nel mondo prima della prossima sessione.
 
 > [!scena] Filtro
-> Mondo:
-> `INPUT[mondo][:mondo_attivo]`
+> Mondo: `INPUT[mondo][:mondo_attivo]`
 >
-> Campagne:
-> `INPUT[campagne][:campagne_attive]`
+> Campagne: `INPUT[campagne][:campagne_attive]`
 
-`BUTTON[stato-campagna-mondi-stato-del-mondo]`
-
-`BUTTON[cosa-succede-fuori-scena-cosa-succede-fuori-scena]`
-
-`BUTTON[worldbuilder-worldbuilder-dashboard]`
-
-`BUTTON[timeline-mondi-timeline-timeline]`
-
-`BUTTON[controllo-canone-controllo-canone]`
-
-`BUTTON[economia-e-rotte-economia-e-rotte-2]`
+> [!regia] Superfici Collegate
+> `BUTTON[stato-campagna-mondi-stato-del-mondo]`
+>
+> `BUTTON[cosa-succede-fuori-scena-cosa-succede-fuori-scena]`
+>
+> `BUTTON[worldbuilder-worldbuilder-dashboard]`
+>
+> `BUTTON[timeline-mondi-timeline-timeline]`
+>
+> `BUTTON[controllo-canone-controllo-canone]`
+>
+> `BUTTON[economia-e-rotte-economia-e-rotte-2]`
 
 ```dataviewjs
 const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
@@ -74,14 +73,23 @@ grid.innerHTML = statRows.map(([label, value, hint]) => `
   </div>
 `).join("");
 
+dv.header(2, "Continuity Queue M6");
+gdr.renderContinuityQueue(dv, '"Mondi" OR "Inbox"', 32);
+
+dv.header(2, "Bersagli Da Verificare");
+gdr.renderPropagationTargets(dv, '"Mondi"', 32);
+
+dv.header(2, "Buchi Di Continuita");
+gdr.renderContinuityGaps(dv, '"Mondi" OR "Inbox"', 32);
+
 table(
   "Event Propagation",
-  ["Origine", "Tipo", "Stato", "Propaga a", "Entita impattate", "Conseguenze", "Prossima mossa"],
+  ["Origine", "Tipo", "Stato", "Propagazione", "Propaga a", "Entita impattate", "Conseguenze", "Prossima mossa"],
   pages('"Mondi" OR "Inbox"', p => hasLinks(p.propaga_a) || hasLinks(p.entita_impattate) || hasLinks(p.conseguenze) || has(p.prossima_mossa))
     .sort(p => Number(p.pressione ?? 0), "desc")
     .sort(p => p.file.mtime, "desc")
     .limit(24)
-    .map(p => [p.file.link, p.categoria ?? p.tipo ?? "", p.stato ?? p.stato_canonico ?? "", p.propaga_a ?? [], p.entita_impattate ?? p.collegamenti ?? [], p.conseguenze ?? [], p.prossima_mossa ?? ""])
+    .map(p => [p.file.link, p.categoria ?? p.tipo ?? "", p.stato ?? p.stato_canonico ?? "", p.propagazione_stato ?? "", p.propaga_a ?? [], p.entita_impattate ?? p.collegamenti ?? [], p.conseguenze ?? [], p.prossima_mossa ?? ""])
     .array()
 );
 
@@ -125,6 +133,18 @@ table(
     .limit(32)
     .map(p => [p.file.link, p.data_mondo ?? "", p.cause ?? p.causa ?? "", p.effetti ?? p.conseguenze ?? [], p.fazioni ?? [], p.luoghi ?? [], p.missioni ?? [], p.stato_mondo ?? []])
     .array()
+);
+
+table(
+  "Materiale Pubblicabile Da Stabilizzare",
+  ["Nota", "Tipo", "Canone", "Player safe", "Memoria pubblica", "Effetti", "Luoghi", "Fazioni"],
+  pages('"Mondi/Timeline" OR "Inbox"', p => p.canonico === true || p.stato_canonico === "canonico")
+    .where(p => !has(p.player_safe) || !has(p.memoria_pubblica) || (!hasLinks(p.effetti) && !has(p.effetti)) || (!hasLinks(p.luoghi) && !hasLinks(p.fazioni)))
+    .sort(p => p.file.mtime, "desc")
+    .limit(24)
+    .map(p => [p.file.link, p.categoria ?? p.tipo ?? "", p.stato_canonico ?? p.canonico ?? "", p.player_safe ?? "", p.memoria_pubblica ?? "", p.effetti ?? p.conseguenze ?? [], p.luoghi ?? [], p.fazioni ?? []])
+    .array(),
+  "Nessun materiale canonico da stabilizzare per pubblicazione."
 );
 
 table(

@@ -176,6 +176,127 @@
     });
   }
 
+  function continuityStatus(page) {
+    return String(page?.propagazione_stato ?? "").trim()
+      || (page?.applicata_il ? "applicata" : "")
+      || (page?.propagato_il ? "propagata" : "")
+      || (hasLinks(page?.entita_impattate) || hasLinks(page?.propaga_a) || hasLinks(page?.conseguenze) ? "aperta" : "");
+  }
+
+  function continuityIssues(page) {
+    const issues = [];
+    const hasImpact = hasLinks(page.conseguenze)
+      || hasLinks(page.entita_impattate)
+      || hasLinks(page.propaga_a)
+      || hasText(page.impatto)
+      || hasText(page.conseguenza_potenziale)
+      || hasText(page.prossima_mossa);
+    const hasTarget = hasLinks(page.entita_impattate) || hasLinks(page.propaga_a) || hasLinks(page.applicata_a);
+    const status = continuityStatus(page);
+
+    if (hasImpact && !hasTarget) issues.push("manca bersaglio");
+    if (hasTarget && !hasText(page.prossima_mossa) && ["missione", "tracciato", "fazione", "religione", "relazione", "conflitto"].includes(String(page.categoria ?? ""))) {
+      issues.push("manca prossima mossa");
+    }
+    if (hasImpact && !["applicata", "propagata", "canonizzata", "archiviata"].includes(status)) {
+      issues.push("non applicata");
+    }
+    if ((page.canonico === true || page.stato_canonico === "canonico") && String(page.categoria ?? "") === "evento storico" && !hasText(page.causa) && !hasLinks(page.cause)) {
+      issues.push("manca causa");
+    }
+    if ((page.canonico === true || page.stato_canonico === "canonico") && String(page.categoria ?? "") === "evento storico" && !hasLinks(page.conseguenze) && !hasLinks(page.effetti) && !hasText(page.effetti)) {
+      issues.push("manca effetto");
+    }
+
+    return issues;
+  }
+
+  function continuityRows(dv, source = '"Mondi" OR "Inbox"', limit = 24) {
+    return dv.pages(source)
+      .where(p => isReal(p) && p.stato !== "archiviata" && p.stato !== "ignorata")
+      .where(p => continuityStatus(p)
+        || hasLinks(p.conseguenze)
+        || hasLinks(p.entita_impattate)
+        || hasLinks(p.propaga_a)
+        || hasLinks(p.applicata_a)
+        || hasLinks(p.propagato_da)
+        || hasLinks(p.aggiornamenti_richiesti)
+        || hasText(p.impatto)
+        || hasText(p.conseguenza_potenziale))
+      .sort(p => p.ultima_propagazione ?? p.applicata_il ?? p.propagato_il ?? p.file.mtime, "desc")
+      .limit(limit)
+      .array();
+  }
+
+  function renderContinuityQueue(dv, source = '"Mondi" OR "Inbox"', limit = 24) {
+    const rows = continuityRows(dv, source, limit).map(p => [
+      p.file.link,
+      p.categoria ?? p.tipo ?? "",
+      continuityStatus(p) || "aperta",
+      p.causa ?? p.cause ?? p.sessioni ?? [],
+      p.entita_impattate ?? [],
+      p.propaga_a ?? p.applicata_a ?? [],
+      p.aggiornamenti_richiesti ?? p.impatto ?? p.conseguenza_potenziale ?? "",
+      p.prossima_mossa ?? ""
+    ]);
+
+    if (!rows.length) {
+      dv.paragraph("Nessuna continuita aperta.");
+      return;
+    }
+
+    dv.table(["Origine", "Tipo", "Stato", "Causa", "Impattate", "Da aggiornare", "Cambio richiesto", "Prossima mossa"], rows);
+  }
+
+  function renderPropagationTargets(dv, source = '"Mondi"', limit = 24) {
+    const rows = dv.pages(source)
+      .where(p => isReal(p) && p.stato !== "archiviata" && (hasLinks(p.propagato_da) || hasLinks(p.aggiornamenti_richiesti) || continuityStatus(p) === "da verificare"))
+      .sort(p => p.ultima_propagazione ?? p.file.mtime, "desc")
+      .limit(limit)
+      .map(p => [
+        p.file.link,
+        p.categoria ?? p.tipo ?? "",
+        continuityStatus(p) || "da verificare",
+        p.propagato_da ?? [],
+        p.aggiornamenti_richiesti ?? [],
+        p.prossima_mossa ?? "",
+        p.pressione ?? ""
+      ])
+      .array();
+
+    if (!rows.length) {
+      dv.paragraph("Nessun bersaglio di propagazione da verificare.");
+      return;
+    }
+
+    dv.table(["Bersaglio", "Tipo", "Stato", "Da", "Aggiornamento richiesto", "Prossima mossa", "Pressione"], rows);
+  }
+
+  function renderContinuityGaps(dv, source = '"Mondi" OR "Inbox"', limit = 24) {
+    const rows = dv.pages(source)
+      .where(p => isReal(p) && p.stato !== "archiviata" && p.stato !== "ignorata")
+      .map(p => ({ page: p, issues: continuityIssues(p) }))
+      .where(entry => entry.issues.length > 0)
+      .sort(entry => entry.page.file.mtime, "desc")
+      .limit(limit)
+      .map(entry => [
+        entry.page.file.link,
+        entry.issues.join(", "),
+        entry.page.categoria ?? entry.page.tipo ?? "",
+        continuityStatus(entry.page) || "aperta",
+        entry.page.entita_impattate ?? entry.page.propaga_a ?? entry.page.applicata_a ?? [],
+        entry.page.prossima_mossa ?? ""
+      ])
+      .array();
+
+    if (!rows.length) {
+      dv.paragraph("Nessun buco di continuita evidente.");
+      return;
+    }
+
+    dv.table(["Nota", "Gap", "Tipo", "Stato", "Bersagli", "Prossima mossa"], rows);
+  }
+
   function renderWorldCreationStatus(dv, worldLink = "") {
     const selectedPath = linkKey(worldLink);
     const worlds = dv.pages('"Mondi"')
@@ -521,6 +642,10 @@
       .array()
       .filter(p => p.stato !== "archiviata" && p.stato !== "ignorata");
     const unresolved = liveNotes.filter(p => !p.canonico && !p.stato_canonico && !hasLinks(p.entita_impattate) && !hasLinks(p.propaga_a));
+    const continuityGaps = [
+      session,
+      ...liveNotes
+    ].flatMap(p => continuityIssues(p));
     const impacted = [
       ...pagesFromLinks(dv, session.missioni ?? []).array(),
       ...pagesFromLinks(dv, session.tracciati ?? []).array(),
@@ -542,6 +667,14 @@
         body: fieldText(session.conseguenze) || fieldText(liveNotes.flatMap(p => asArray(p.conseguenze ?? p.impatto))) || "Registra almeno una conseguenza se qualcosa e cambiato nel mondo.",
         cls: hasLinks(session.conseguenze) || hasText(session.conseguenze) ? "gdr-kind-ready" : "gdr-kind-missing",
         link: session.file.path
+      },
+      {
+        title: "Continuita M6",
+        body: continuityGaps.length
+          ? `Gap da chiudere: ${[...new Set(continuityGaps)].join(", ")}`
+          : "Ogni conseguenza ha bersaglio, stato o prossima mossa verificabile.",
+        cls: continuityGaps.length ? "gdr-kind-missing" : "gdr-kind-ready",
+        link: "Hub/Motore Mondo Vivo.md"
       },
       {
         title: "Missioni e clock",
@@ -591,6 +724,61 @@
     })).join("");
 
     dv.paragraph("Sequenza giocabile: apertura -> pressione -> scelta -> conseguenza -> appunto per il post-sessione.");
+  }
+
+  function renderConsequenceCards(dv) {
+    const pages = continuityRows(dv, '"Mondi" OR "Inbox"', 16);
+
+    renderCardGrid(dv, pages, p => {
+      const issues = continuityIssues(p);
+      return cardHtml({
+        title: pageTitle(p),
+        meta: [p.tipo ?? p.categoria, continuityStatus(p) || (p.stato ?? p.stato_canonico)].filter(Boolean).join(" · "),
+        azione: issues.length
+          ? `Chiudi: ${issues.join(", ")}`
+          : (p.prossima_mossa ? `Verifica prossima mossa: ${fieldText(p.prossima_mossa)}` : "Applica conseguenza e scegli la prossima mossa."),
+        importa: fieldText(p.aggiornamenti_richiesti ?? p.entita_impattate ?? p.propaga_a ?? p.conseguenze) || "Manca propagazione esplicita.",
+        link: p.file.path,
+        badge: "Post-sessione",
+        cls: cardClass(p, "gdr-info-card compact", issues.length ? "gdr-kind-missing" : "gdr-kind-ready")
+      });
+    }, {
+      title: "Nessuna conseguenza aperta",
+      action: "Crea una conseguenza o collega entita impattate agli appunti live.",
+      button: "BUTTON[wizard-conseguenza]"
+    });
+  }
+
+  function renderImpactedNextMoveCards(dv) {
+    const targetKeys = new Set();
+    dv.pages('"Mondi" OR "Inbox"')
+      .where(p => isReal(p) && p.stato !== "archiviata" && (hasLinks(p.conseguenze) || hasLinks(p.entita_impattate) || hasLinks(p.propaga_a) || hasLinks(p.applicata_a)))
+      .forEach(p => {
+        [...asArray(p.entita_impattate), ...asArray(p.propaga_a), ...asArray(p.applicata_a)].forEach(link => targetKeys.add(linkKey(link)));
+      });
+
+    const pages = dv.pages('"Mondi/Missioni" OR "Mondi/Tracciati" OR "Mondi/Fazioni" OR "Mondi/Religioni" OR "Mondi/Relazioni"')
+      .where(p => isReal(p) && p.stato !== "archiviata")
+      .where(p => targetKeys.has(p.file.path) || targetKeys.has(p.file.name) || hasLinks(p.propagato_da) || hasLinks(p.aggiornamenti_richiesti))
+      .sort(p => pressure(p), "desc")
+      .limit(12)
+      .array();
+
+    renderCardGrid(dv, pages, p => cardHtml({
+      title: pageTitle(p),
+      meta: [p.categoria ?? p.tipo, continuityStatus(p) || p.stato].filter(Boolean).join(" · "),
+      azione: p.prossima_mossa
+        ? `Verifica o cambia: ${fieldText(p.prossima_mossa)}`
+        : "Apri la nota e compila il campo Prossima mossa nella Scheda Viva.",
+      importa: fieldText(p.aggiornamenti_richiesti ?? p.propagato_da ?? p.conseguenze ?? p.propaga_a ?? p.entita_impattate ?? p.missioni) || "Questa entita e stata toccata da una conseguenza.",
+      link: p.file.path,
+      badge: "Impattata",
+      cls: cardClass(p, "gdr-info-card compact", hasText(p.prossima_mossa) ? "gdr-kind-ready" : "gdr-kind-missing")
+    }), {
+      title: "Nessuna entita impattata da aggiornare",
+      action: "Applica una conseguenza scegliendo entita_impattate o propaga_a.",
+      button: "BUTTON[applica-conseguenza]"
+    });
   }
 
   function publicRows(dv, source, category, limit = 8) {
@@ -771,7 +959,9 @@
     renderActiveSessionBanner,
     renderAtlasMapCards,
     renderCreationFeedback,
+    renderConsequenceCards,
     renderEmptyState,
+    renderImpactedNextMoveCards,
     renderLiveCommandCenter,
     renderPlaceMapCards,
     renderPlayableOutline,
@@ -782,6 +972,9 @@
     renderPublicSafety,
     renderPublicStats,
     renderPostSessionCommandCenter,
+    renderContinuityGaps,
+    renderContinuityQueue,
+    renderPropagationTargets,
     renderWorldImpact,
     renderWorldCreationStatus,
     renderSessionMapCards,

@@ -35,6 +35,8 @@ if (!active) {
 
 `BUTTON[evento-lore-z-modelli-lore-capture-md]`
 
+`BUTTON[conseguenza-z-modelli-live-conseguenza-md]`
+
 `BUTTON[nuovo-clock-z-modelli-dm-tracciato-md]`
 
 `BUTTON[nuova-dispensa-z-modelli-dispensa-md]`

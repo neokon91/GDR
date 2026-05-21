@@ -1,6 +1,9 @@
 {{ templater_entry }}
 # `=this.nome`
 
+````tabs
+tab: Stato
+
 > [!infoboxwiki]- {{ blueprint.get("template_title", label) }}
 > Mondo: `INPUT[mondo][:mondo]`
 >
@@ -9,51 +12,98 @@
 > Pubblico: `INPUT[toggle:pubblico]`
 >
 > Canonico: `INPUT[canonico][:canonico]`
+>
+> La scheda e usabile quando ha almeno un gancio, una connessione viva e una conseguenza o prossima mossa.
 
-````tabs
+> [!regia] Azioni Scheda
+> `BUTTON[marca-canonico]`
+>
+> `BUTTON[marca-rumor]`
+>
+> `BUTTON[collega-sessione-attiva]`
+>
+> `BUTTON[archivia-nota]`
+
 tab: Tavolo
 
-> [!scena] Identita
+> [!scena] Identita Al Tavolo
 > `INPUT[text:identita]`
 >
-> > [!lettura]- Versione pubblica
-> > `INPUT[text:player_safe]`
->
-> > [!segreto]- Livello DM
-> > `INPUT[text:segreto]`
-
-> [!missione] Uso Al Tavolo
 > Gancio: `INPUT[text:gancio]`
 >
-> Uso: `INPUT[text:uso_al_tavolo]`
->
+> Uso al tavolo: `INPUT[text:uso_al_tavolo]`
+
+> [!missione] Scelta E Conseguenza
 > Prossima mossa: `INPUT[prossima_mossa][:prossima_mossa]`
 >
-> Conseguenza: `INPUT[text:conseguenza_potenziale]`
+> Conseguenza potenziale: `INPUT[text:conseguenza_potenziale]`
+{% if blueprint.get("continuity_fields", false) %}>
+> Causa: `INPUT[text:causa]`
+>
+> Effetti: `INPUT[list:effetti]`
+{% endif %}
+
+> [!lettura]- Versione Pubblica
+> `INPUT[text:player_safe]`
+
+> [!segreto]- Livello DM
+> `INPUT[text:segreto]`
 
 tab: Connessioni
 
-> [!regia] Collegala Subito
-> `INPUT[connessioni][:connessioni]`
+> [!regia] Collegamenti Operativi
+> Connessioni: `INPUT[connessioni][:connessioni]`
 >
 > Entita impattate: `INPUT[entita_impattate][:entita_impattate]`
 >
 > Propaga a: `INPUT[propaga_a][:propaga_a]`
+{% if blueprint.get("continuity_fields", false) %}>
+> Aggiornamenti richiesti: `INPUT[list:aggiornamenti_richiesti]`
+>
+> Stato propagazione: `INPUT[text:propagazione_stato]`
+{% endif %}
 
-```dataview
-{{ modules.dataview_blocks.blocks.linked_connections_table.code }}
-```
+> [!conflitto]- Note Che Puntano Qui
+> ```dataview
+> {{ modules.dataview_blocks.blocks.linked_connections_table.code | replace('\n', '\n> ') }}
+> ```
+
+> [!regia]- Base Editabile
+> Apri la base coerente con la famiglia della nota quando devi correggere molti campi insieme.
+>
+> - [[z.bases/Worldbuilding.base]]
+> - [[z.bases/Luoghi.base]]
+> - [[z.bases/Fazioni.base]]
+> - [[z.bases/Missioni.base]]
+> - [[z.bases/PNG.base]]
+> - [[Risorse/Mappe/Schema Relazioni GDR.excalidraw]]
+
+
+{% if blueprint.get("publication_fields", false) %}
+tab: Pubblicazione
+
+> [!lettura] Testo Da Manuale
+> Memoria pubblica: `INPUT[text:memoria_pubblica]`
+>
+> Versione player-safe: `INPUT[text:versione_player_safe]`
+>
+> Pubblicabile: `INPUT[toggle:pubblicabile]`
+>
+> Questo tab serve a trasformare continuita e lore in materiale leggibile fuori dalla singola sessione.
+{% endif %}
 
 tab: Controllo
 
-```dataviewjs
-{{ modules.dataview_blocks.blocks.feedback_creazione.code }}
-```
+> [!regia] Qualita Scheda
+> ```dataviewjs
+> {{ modules.dataview_blocks.blocks.feedback_creazione.code | replace('\n', '\n> ') }}
+> ```
 
 {% if blueprint.get("world_impact", true) %}
-```dataviewjs
-{{ modules.dataview_blocks.blocks.world_impact.code }}
-```
+> [!timer] Impatto Sul Mondo
+> ```dataviewjs
+> {{ modules.dataview_blocks.blocks.world_impact.code | replace('\n', '\n> ') }}
+> ```
 {% endif %}
 ````
 
@@ -66,7 +116,12 @@ tab: Controllo
 | Uso al tavolo |  |
 | Prossima mossa |  |
 | Conseguenza potenziale |  |
-| Connessioni |  |
+{% if blueprint.get("continuity_fields", false) %}| Causa |  |
+| Effetti |  |
+{% endif %}| Connessioni |  |
 | Entita impattate |  |
 | Propaga a |  |
+{% if blueprint.get("continuity_fields", false) %}| Aggiornamenti richiesti |  |
+{% endif %}{% if blueprint.get("publication_fields", false) %}| Memoria pubblica |  |
+{% endif %}
 | Versione pubblica |  |

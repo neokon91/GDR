@@ -132,6 +132,80 @@ async function meta_actions(tp, action = "") {
 
         return await helpers.chooseConnections(tp, "Entita a cui propagare", { world: meta.mondo });
     };
+    const appendUniqueText = (value, text) => {
+        const entries = helpers.normalizeFieldArray(value);
+        return text && !entries.includes(text) ? [...entries, text] : entries;
+    };
+    const promptPressureDelta = async () => {
+        const raw = await helpers.promptOptional(tp, "Aumento pressione sui bersagli", "0");
+        const delta = Number.parseInt(raw || "0", 10);
+        return Number.isFinite(delta) ? delta : 0;
+    };
+    const continuityUpdateText = ({ sourceLink, text, nextMove }) => [
+        today,
+        sourceLink,
+        text ? `impatto: ${text}` : "",
+        nextMove ? `prossima mossa: ${nextMove}` : ""
+    ].filter(Boolean).join(" | ");
+    const applyContinuityImpact = async (targetFile, { sourceLink, targetLink, consequenceText, nextMove, pressureDelta = 0, mode = "propagazione" }) => {
+        if (!targetFile || targetFile.path === currentFile().path) return;
+
+        await helpers.processFrontmatter(targetFile, fm => {
+            fm.propagato_da = helpers.appendUniqueLink(fm.propagato_da, sourceLink);
+            fm.propagazione_stato = "da verificare";
+            fm.ultima_propagazione = today;
+            fm.aggiornamenti_richiesti = appendUniqueText(
+                fm.aggiornamenti_richiesti,
+                continuityUpdateText({ sourceLink, text: consequenceText, nextMove })
+            );
+
+            if (mode === "conseguenza") {
+                fm.conseguenze = helpers.appendUniqueLink(fm.conseguenze, sourceLink);
+            } else {
+                fm.connessioni = helpers.appendUniqueLink(fm.connessioni, sourceLink);
+            }
+
+            if (consequenceText) {
+                fm.impatto = appendUniqueText(fm.impatto, consequenceText);
+                if (String(fm.categoria ?? "") === "tracciato" && !fm.innesco) {
+                    fm.innesco = consequenceText;
+                }
+            }
+
+            if (nextMove && !fm.prossima_mossa) {
+                fm.prossima_mossa = nextMove;
+            }
+
+            if (pressureDelta !== 0) {
+                const currentPressure = Number.parseInt(fm.pressione ?? 0, 10) || 0;
+                fm.pressione = Math.max(0, currentPressure + pressureDelta);
+            }
+        });
+
+        const targetMeta = app.metadataCache.getFileCache(targetFile)?.frontmatter ?? {};
+        const targetIsRelation = String(targetMeta.categoria ?? "") === "relazione" || helpers.normalizeFieldArray(targetMeta.soggetti).length > 0;
+
+        if (!targetIsRelation) return;
+
+        for (const subject of helpers.normalizeFieldArray(targetMeta.soggetti)) {
+            const subjectFile = helpers.getFileFromLink(subject);
+            if (!subjectFile || subjectFile.path === targetFile.path || subjectFile.path === currentFile().path) continue;
+
+            await helpers.processFrontmatter(subjectFile, fm => {
+                fm.relazioni = helpers.appendUniqueLink(fm.relazioni, targetLink);
+                fm.propagato_da = helpers.appendUniqueLink(fm.propagato_da, sourceLink);
+                fm.propagazione_stato = fm.propagazione_stato || "da verificare";
+                fm.aggiornamenti_richiesti = appendUniqueText(
+                    fm.aggiornamenti_richiesti,
+                    continuityUpdateText({
+                        sourceLink,
+                        text: consequenceText || `Verifica relazione ${targetLink}`,
+                        nextMove
+                    })
+                );
+            });
+        }
+    };
 
     if (!currentFile()) {
         notice("Nessuna nota attiva.");
@@ -217,18 +291,19 @@ async function meta_actions(tp, action = "") {
         const meta = currentMeta();
         const targets = await choosePropagationTargets(meta);
         const consequenceText = await helpers.promptOptional(tp, "Conseguenza applicata", meta.nome ?? currentFile().basename);
+        const nextMove = await helpers.promptOptional(tp, "Prossima mossa suggerita ai bersagli", meta.prossima_mossa ?? "");
+        const pressureDelta = await promptPressureDelta();
         const noteLink = currentLink();
 
         for (const target of targets) {
             const targetFile = helpers.getFileFromLink(target);
-            if (!targetFile || targetFile.path === currentFile().path) continue;
-
-            await helpers.processFrontmatter(targetFile, fm => {
-                fm.conseguenze = helpers.appendUniqueLink(fm.conseguenze, noteLink);
-                if (consequenceText) {
-                    fm.impatto = helpers.normalizeFieldArray(fm.impatto);
-                    if (!fm.impatto.includes(consequenceText)) fm.impatto.push(consequenceText);
-                }
+            await applyContinuityImpact(targetFile, {
+                sourceLink: noteLink,
+                targetLink: target,
+                consequenceText,
+                nextMove,
+                pressureDelta,
+                mode: "conseguenza"
             });
         }
 
@@ -236,6 +311,10 @@ async function meta_actions(tp, action = "") {
             fm.stato = fm.stato === "da smistare" ? "collegata" : fm.stato;
             fm.applicata_il = today;
             fm.applicata_a = targets;
+            fm.propagazione_stato = "applicata";
+            fm.ultima_propagazione = today;
+            if (consequenceText) fm.effetti = appendUniqueText(fm.effetti, consequenceText);
+            if (nextMove && !fm.prossima_mossa) fm.prossima_mossa = nextMove;
         });
         notice("Conseguenza applicata alle entita scelte.");
         return "";
@@ -244,21 +323,28 @@ async function meta_actions(tp, action = "") {
     if (action === "propaga_entita") {
         const meta = currentMeta();
         const targets = await choosePropagationTargets(meta);
+        const consequenceText = await helpers.promptOptional(tp, "Cosa deve cambiare sui bersagli", meta.impatto ?? meta.conseguenza_potenziale ?? meta.nome ?? currentFile().basename);
+        const nextMove = await helpers.promptOptional(tp, "Prossima mossa suggerita ai bersagli", meta.prossima_mossa ?? "");
         const noteLink = currentLink();
 
         for (const target of targets) {
             const targetFile = helpers.getFileFromLink(target);
-            if (!targetFile || targetFile.path === currentFile().path) continue;
-
-            await helpers.processFrontmatter(targetFile, fm => {
-                fm.connessioni = helpers.appendUniqueLink(fm.connessioni, noteLink);
-                fm.propagato_da = helpers.appendUniqueLink(fm.propagato_da, noteLink);
+            await applyContinuityImpact(targetFile, {
+                sourceLink: noteLink,
+                targetLink: target,
+                consequenceText,
+                nextMove,
+                mode: "propagazione"
             });
         }
 
         await helpers.processFrontmatter(currentFile(), fm => {
             fm.propagato_il = today;
             fm.propaga_a = targets;
+            fm.propagazione_stato = "propagata";
+            fm.ultima_propagazione = today;
+            if (consequenceText) fm.aggiornamenti_richiesti = appendUniqueText(fm.aggiornamenti_richiesti, consequenceText);
+            if (nextMove && !fm.prossima_mossa) fm.prossima_mossa = nextMove;
         });
         notice("Propagazione registrata.");
         return "";

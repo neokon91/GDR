@@ -48,9 +48,11 @@ async function wizard_layer(tp, wizard = "") {
             return "";
         }
 
+        const sceltaGiocatori = await helpers.promptOptional(tp, "Scelta dei giocatori");
+        const cambiamentoMondo = await helpers.promptOptional(tp, "Cosa cambia nel mondo");
+        const chiReagisce = await helpers.promptOptional(tp, "Chi reagisce prima della prossima sessione");
         const recapPubblico = await helpers.promptOptional(tp, "Recap pubblico");
         const recapDm = await helpers.promptOptional(tp, "Recap DM");
-        const conseguenza = await helpers.promptOptional(tp, "Conseguenza principale da applicare");
         const prossimaApertura = await helpers.promptOptional(tp, "Prossima apertura");
         const output = await helpers.promptOptional(tp, "Output utile per la prossima sessione");
 
@@ -61,12 +63,24 @@ async function wizard_layer(tp, wizard = "") {
             fm.recap_dm = helpers.normalizeFieldArray(fm.recap_dm);
             fm.conseguenze = helpers.normalizeFieldArray(fm.conseguenze);
             fm.output_sessione = helpers.normalizeFieldArray(fm.output_sessione);
+            fm.decisioni_prese = helpers.normalizeFieldArray(fm.decisioni_prese);
+            fm.propaga_a = helpers.normalizeFieldArray(fm.propaga_a);
 
+            if (sceltaGiocatori) fm.decisioni_prese.push(sceltaGiocatori);
+            if (cambiamentoMondo) fm.conseguenze.push(cambiamentoMondo);
+            if (chiReagisce) {
+                fm.propaga_a.push(chiReagisce);
+                fm.aggiornamenti_richiesti = helpers.normalizeFieldArray(fm.aggiornamenti_richiesti);
+                fm.aggiornamenti_richiesti.push(`Post-sessione: ${chiReagisce} reagisce a ${cambiamentoMondo || sceltaGiocatori || "quanto accaduto"}`);
+                fm.propagazione_stato = "aperta";
+            }
             if (recapPubblico) fm.recap_pubblico.push(recapPubblico);
             if (recapDm) fm.recap_dm.push(recapDm);
-            if (conseguenza) fm.conseguenze.push(conseguenza);
             if (prossimaApertura) fm.prossima_apertura = prossimaApertura;
             if (output) fm.output_sessione.push(output);
+            if (sceltaGiocatori || cambiamentoMondo) {
+                fm.output_sessione.push(`Continuita: ${[sceltaGiocatori, cambiamentoMondo, chiReagisce].filter(Boolean).join(" -> ")}`);
+            }
         });
 
         new Notice("Sessione chiusa. Output pronto per la prossima preparazione.");

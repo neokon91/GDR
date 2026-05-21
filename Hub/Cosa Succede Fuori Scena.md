@@ -11,23 +11,22 @@ campagne_attive: []
 
 # Cosa Succede Fuori Scena
 
-> [!timer] Motore fuori scena
+> [!timer] Motore Fuori Scena
 > Questa vista mostra cosa si muove quando i personaggi non intervengono: fazioni, PNG, missioni, clock, segreti e conseguenze aperte. Usala dopo la sessione e prima della preparazione.
 
 > [!scena] Filtro
-> Mondo:
-> `INPUT[mondo][:mondo_attivo]`
+> Mondo: `INPUT[mondo][:mondo_attivo]`
 >
-> Campagne:
-> `INPUT[campagne][:campagne_attive]`
+> Campagne: `INPUT[campagne][:campagne_attive]`
 
-`BUTTON[post-sessione-guidato-risorse-post-sessione-guidato]`
-
-`BUTTON[motore-mondo-vivo-motore-mondo-vivo]`
-
-`BUTTON[stato-campagna-mondi-stato-del-mondo]`
-
-`BUTTON[nuovo-clock-z-modelli-dm-tracciato-md]`
+> [!regia] Superfici Collegate
+> `BUTTON[post-sessione-guidato-risorse-post-sessione-guidato]`
+>
+> `BUTTON[motore-mondo-vivo-motore-mondo-vivo]`
+>
+> `BUTTON[stato-campagna-mondi-stato-del-mondo]`
+>
+> `BUTTON[nuovo-clock-z-modelli-dm-tracciato-md]`
 
 ```dataviewjs
 const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
@@ -74,7 +73,11 @@ const urgentTracks = pages('"Mondi/Tracciati" OR "Mondi/Missioni" OR "Mondi/Conf
 });
 const unpropagated = pages('"Mondi" OR "Inbox"', p =>
   (hasLinks(p.conseguenze) || hasLinks(p.entita_impattate) || hasLinks(p.propaga_a) || has(p.prossima_mossa))
-  && (!hasLinks(p.entita_impattate) || !hasLinks(p.propaga_a) || !has(p.prossima_mossa))
+  && (
+    (!hasLinks(p.entita_impattate) && !hasLinks(p.propaga_a) && !hasLinks(p.applicata_a))
+    || !has(p.prossima_mossa)
+    || !["applicata", "propagata", "canonizzata"].includes(String(p.propagazione_stato ?? ""))
+  )
 );
 const revealableSecrets = pages('"Mondi" OR "Inbox"', p =>
   hasLinks(p.segreti_rivelabili) || hasLinks(p.segreti) || has(p.segreto) || String(p.stato_canonico ?? "") === "segreto"
@@ -94,6 +97,12 @@ grid.innerHTML = stats.map(([label, value, hint]) => `
     <div class="gdr-stat-hint">${gdr.escapeHtml(hint)}</div>
   </div>
 `).join("");
+
+dv.header(2, "Coda Continuita M6");
+gdr.renderContinuityGaps(dv, '"Mondi" OR "Inbox"', 24);
+
+dv.header(2, "Bersagli Da Aggiornare");
+gdr.renderPropagationTargets(dv, '"Mondi"', 24);
 
 table(
   "Prossime Mosse Fuori Scena",
@@ -117,12 +126,12 @@ table(
 
 table(
   "Conseguenze Non Propagate",
-  ["Origine", "Tipo", "Stato", "Entita impattate", "Propaga a", "Conseguenze", "Prossima mossa"],
+  ["Origine", "Tipo", "Stato", "Propagazione", "Entita impattate", "Propaga a", "Conseguenze", "Prossima mossa"],
   unpropagated
     .sort(p => Number(p.pressione ?? 0), "desc")
     .sort(p => p.file.mtime, "desc")
     .limit(32)
-    .map(p => [p.file.link, p.categoria ?? p.tipo ?? "", p.stato ?? p.stato_canonico ?? "", p.entita_impattate ?? [], p.propaga_a ?? [], p.conseguenze ?? [], p.prossima_mossa ?? ""])
+    .map(p => [p.file.link, p.categoria ?? p.tipo ?? "", p.stato ?? p.stato_canonico ?? "", p.propagazione_stato ?? "aperta", p.entita_impattate ?? [], p.propaga_a ?? [], p.conseguenze ?? [], p.prossima_mossa ?? ""])
     .array(),
   "Nessuna conseguenza aperta evidente."
 );

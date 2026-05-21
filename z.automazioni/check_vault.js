@@ -944,6 +944,18 @@ for (const [fileRel, fm] of realEntries) {
         warnings.push(`${fileRel}: lore con impatto senza propagazione o collegamenti`);
     }
 
+    if (hasAny(fm, ["conseguenze", "impatto", "conseguenza_potenziale", "aggiornamenti_richiesti"]) && !hasAny(fm, ["entita_impattate", "propaga_a", "applicata_a"])) {
+        warnings.push(`${fileRel}: continuita M6 con impatto ma senza bersagli`);
+    }
+
+    if (String(fm.propagazione_stato ?? "") === "applicata" && !hasAny(fm, ["applicata_a", "propaga_a", "entita_impattate"])) {
+        warnings.push(`${fileRel}: propagazione_stato applicata senza bersagli applicati`);
+    }
+
+    if (String(fm.propagazione_stato ?? "") === "da verificare" && !hasAny(fm, ["aggiornamenti_richiesti", "prossima_mossa", "impatto"])) {
+        warnings.push(`${fileRel}: propagazione da verificare senza aggiornamento richiesto`);
+    }
+
     if (fileRel.startsWith("Mondi/Luoghi/") && fm.stato === "pronto" && !hasAny(fm, ["pericolo", "stabilita", "pressione"])) {
         warnings.push(`${fileRel}: luogo pronto senza pericolo, stabilita o pressione`);
     }

@@ -10,7 +10,7 @@ blocks:
     code: |-
       TABLE categoria, tipo, stato, pressione, prossima_mossa
       FROM "Mondi"
-      WHERE contains(this.connessioni, file.link)
+      WHERE contains(this.connessioni, file.link) OR contains(this.entita_impattate, file.link) OR contains(this.propaga_a, file.link)
       SORT categoria ASC, file.name ASC
     fallback: |-
       | Nota | Categoria | Stato | Pressione | Prossima mossa |

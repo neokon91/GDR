@@ -256,6 +256,8 @@ blueprints:
     templater_entry: <% await tp.user.live_conseguenza(tp) %>
     template_title: Conseguenza
     world_impact: true
+    continuity_fields: true
+    publication_fields: true
     output:
       folder: z.modelli
       files:
@@ -355,6 +357,8 @@ blueprints:
     templater_entry: <% await tp.user.evento_storico(tp) %>
     template_title: Evento Storico
     world_impact: true
+    continuity_fields: true
+    publication_fields: true
     output:
       folder: z.modelli
       files:

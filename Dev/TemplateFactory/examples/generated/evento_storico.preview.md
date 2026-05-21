@@ -1,6 +1,9 @@
 <% await tp.user.evento_storico(tp) %>
 # `=this.nome`
 
+````tabs
+tab: Stato
+
 > [!infoboxwiki]- Evento Storico
 > Mondo: `INPUT[mondo][:mondo]`
 >
@@ -9,56 +12,103 @@
 > Pubblico: `INPUT[toggle:pubblico]`
 >
 > Canonico: `INPUT[canonico][:canonico]`
+>
+> La scheda e usabile quando ha almeno un gancio, una connessione viva e una conseguenza o prossima mossa.
 
-````tabs
+> [!regia] Azioni Scheda
+> `BUTTON[marca-canonico]`
+>
+> `BUTTON[marca-rumor]`
+>
+> `BUTTON[collega-sessione-attiva]`
+>
+> `BUTTON[archivia-nota]`
+
 tab: Tavolo
 
-> [!scena] Identita
+> [!scena] Identita Al Tavolo
 > `INPUT[text:identita]`
 >
-> > [!lettura]- Versione pubblica
-> > `INPUT[text:player_safe]`
->
-> > [!segreto]- Livello DM
-> > `INPUT[text:segreto]`
-
-> [!missione] Uso Al Tavolo
 > Gancio: `INPUT[text:gancio]`
 >
-> Uso: `INPUT[text:uso_al_tavolo]`
->
+> Uso al tavolo: `INPUT[text:uso_al_tavolo]`
+
+> [!missione] Scelta E Conseguenza
 > Prossima mossa: `INPUT[prossima_mossa][:prossima_mossa]`
 >
-> Conseguenza: `INPUT[text:conseguenza_potenziale]`
+> Conseguenza potenziale: `INPUT[text:conseguenza_potenziale]`
+>
+> Causa: `INPUT[text:causa]`
+>
+> Effetti: `INPUT[list:effetti]`
+
+
+> [!lettura]- Versione Pubblica
+> `INPUT[text:player_safe]`
+
+> [!segreto]- Livello DM
+> `INPUT[text:segreto]`
 
 tab: Connessioni
 
-> [!regia] Collegala Subito
-> `INPUT[connessioni][:connessioni]`
+> [!regia] Collegamenti Operativi
+> Connessioni: `INPUT[connessioni][:connessioni]`
 >
 > Entita impattate: `INPUT[entita_impattate][:entita_impattate]`
 >
 > Propaga a: `INPUT[propaga_a][:propaga_a]`
+>
+> Aggiornamenti richiesti: `INPUT[list:aggiornamenti_richiesti]`
+>
+> Stato propagazione: `INPUT[text:propagazione_stato]`
 
-```dataview
-TABLE categoria, tipo, stato, pressione, prossima_mossa
-FROM "Mondi"
-WHERE contains(this.connessioni, file.link)
-SORT categoria ASC, file.name ASC
-```
+
+> [!conflitto]- Note Che Puntano Qui
+> ```dataview
+> TABLE categoria, tipo, stato, pressione, prossima_mossa
+> FROM "Mondi"
+> WHERE contains(this.connessioni, file.link) OR contains(this.entita_impattate, file.link) OR contains(this.propaga_a, file.link)
+> SORT categoria ASC, file.name ASC
+> ```
+
+> [!regia]- Base Editabile
+> Apri la base coerente con la famiglia della nota quando devi correggere molti campi insieme.
+>
+> - [[z.bases/Worldbuilding.base]]
+> - [[z.bases/Luoghi.base]]
+> - [[z.bases/Fazioni.base]]
+> - [[z.bases/Missioni.base]]
+> - [[z.bases/PNG.base]]
+> - [[Risorse/Mappe/Schema Relazioni GDR.excalidraw]]
+
+
+
+tab: Pubblicazione
+
+> [!lettura] Testo Da Manuale
+> Memoria pubblica: `INPUT[text:memoria_pubblica]`
+>
+> Versione player-safe: `INPUT[text:versione_player_safe]`
+>
+> Pubblicabile: `INPUT[toggle:pubblicabile]`
+>
+> Questo tab serve a trasformare continuita e lore in materiale leggibile fuori dalla singola sessione.
+
 
 tab: Controllo
 
-```dataviewjs
-const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
-gdr.renderCreationFeedback(dv);
-```
+> [!regia] Qualita Scheda
+> ```dataviewjs
+> const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+> gdr.renderCreationFeedback(dv);
+> ```
 
 
-```dataviewjs
-const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
-gdr.renderWorldImpact(dv);
-```
+> [!timer] Impatto Sul Mondo
+> ```dataviewjs
+> const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+> gdr.renderWorldImpact(dv);
+> ```
 
 ````
 
@@ -71,7 +121,12 @@ gdr.renderWorldImpact(dv);
 | Uso al tavolo |  |
 | Prossima mossa |  |
 | Conseguenza potenziale |  |
+| Causa |  |
+| Effetti |  |
 | Connessioni |  |
 | Entita impattate |  |
 | Propaga a |  |
+| Aggiornamenti richiesti |  |
+| Memoria pubblica |  |
+
 | Versione pubblica |  |

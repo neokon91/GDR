@@ -4,26 +4,24 @@
 ````tabs
 tab: Prepara
 
-> [!scena] Cinque Blocchi
+> [!scena] Scaletta Giocabile
 > Obiettivo: `INPUT[text:obiettivo]`
 >
 > Prima scena: `INPUT[text:apertura]`
 >
 > Scelta concreta: `INPUT[text:scelta]`
 >
-> > [!timer]- Pressioni
-> > `INPUT[inlineList:pressioni]`
+> Pressioni: `INPUT[inlineList:pressioni]`
 >
-> > [!lettura]- Materiale pronto
-> > `INPUT[inlineList:materiale_pronto]`
->
+> Materiale pronto: `INPUT[inlineList:materiale_pronto]`
+
+> [!incontro]- Materiale Da Creare
 > Incontri: `INPUT[inlineListSuggester(optionQuery("Mondi/Incontri"), useLinks(partial), allowOther):incontri]`
 >
 > Mappe: `INPUT[inlineListSuggester(optionQuery("Risorse/Mappe"), useLinks(partial), allowOther):mappe]`
 >
 > Dispense: `INPUT[inlineListSuggester(optionQuery("Mondi/Dispense"), useLinks(partial), allowOther):dispense]`
-
-> [!incontro]- Crea Materiale
+>
 > `BUTTON[nuovo-incontro-z-modelli-dm-incontro-md-default]`
 >
 > `BUTTON[nuova-mappa-zoom-z-modelli-mappe-mappa-zoom-md]`
@@ -44,6 +42,12 @@ tab: Ancore
 > Clock: `INPUT[tracciati][:tracciati]`
 >
 > PNG: `INPUT[inlineListSuggester(optionQuery("Mondi/Personaggi"), useLinks(partial), allowOther):personaggi]`
+
+> [!regia]- Controllo Ancore
+> ```dataviewjs
+> const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+> gdr.renderPlayableOutline(dv, dv.current());
+> ```
 
 tab: Media
 
@@ -68,6 +72,13 @@ tab: Live
 >
 > `BUTTON[durante-il-gioco-durante-il-gioco]`
 
+> [!timer]- Decisioni E Conseguenze
+> Decisioni: `INPUT[list:decisioni_prese]`
+>
+> Output sessione: `INPUT[list:output_sessione]`
+>
+> Propaga a: `INPUT[propaga_a][:propaga_a]`
+
 tab: Dopo
 
 > [!timer] Delta Del Mondo
@@ -75,15 +86,21 @@ tab: Dopo
 > INPUT[list:conseguenze]
 > ```
 >
-> > [!lettura]- Recap pubblico
-> > ```meta-bind
-> > INPUT[list:recap_pubblico]
-> > ```
+> Stato propagazione: `INPUT[text:propagazione_stato]`
 >
-> > [!segreto]- Recap DM
-> > ```meta-bind
-> > INPUT[list:recap_dm]
-> > ```
+> `BUTTON[applica-conseguenza]`
+>
+> `BUTTON[propaga-a-entita]`
+
+> [!lettura]- Recap Pubblico
+> ```meta-bind
+> INPUT[list:recap_pubblico]
+> ```
+
+> [!segreto]- Recap DM
+> ```meta-bind
+> INPUT[list:recap_dm]
+> ```
 ````
 
 ```dataviewjs
