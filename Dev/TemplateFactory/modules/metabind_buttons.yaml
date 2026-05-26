@@ -838,6 +838,7 @@ buttons:
     id: nuovo-mondo-z-modelli-mondo-md
   nuovo_mondo_homebrew:
     label: Nuovo Mondo Homebrew
+    required_for_release: true
     style: primary
     actions:
     - type: templaterCreateNote
@@ -1072,6 +1073,7 @@ buttons:
     id: smistamento-bozze-generate-risorse-smistamento-bozze-generate-2
   smista_bozza_generata:
     label: Smista Bozza
+    required_for_release: true
     style: primary
     actions:
     - type: runTemplaterFile
@@ -1080,6 +1082,7 @@ buttons:
     fallback: 'Azione manuale: spostare la bozza generata nella cartella canonica e impostare stato: pronto'
   canonizza_bozza_generata:
     label: Canonizza Bozza
+    required_for_release: true
     style: primary
     actions:
     - type: runTemplaterFile
@@ -1179,6 +1182,7 @@ buttons:
     id: worldbuilding-profondo-risorse-worldbuilding-profondo-2
   marca_canonico:
     label: Marca Canonico
+    required_for_release: true
     style: primary
     actions:
     - type: runTemplaterFile
@@ -1187,6 +1191,7 @@ buttons:
     fallback: 'Azione manuale: impostare canonico: true'
   marca_rumor:
     label: Marca Rumor
+    required_for_release: true
     style: default
     actions:
     - type: runTemplaterFile
@@ -1195,6 +1200,7 @@ buttons:
     fallback: 'Azione manuale: impostare stato_canonico: rumor'
   archivia_nota:
     label: Archivia
+    required_for_release: true
     style: destructive
     actions:
     - type: runTemplaterFile
@@ -1203,6 +1209,7 @@ buttons:
     fallback: 'Azione manuale: impostare stato: archiviata'
   applica_conseguenza:
     label: Applica Conseguenza
+    required_for_release: true
     style: primary
     actions:
     - type: runTemplaterFile
@@ -1211,6 +1218,7 @@ buttons:
     fallback: 'Azione manuale: registrare conseguenza, entita_impattate e propagazione_stato'
   registra_scelta_mondo:
     label: Registra Scelta Mondo
+    required_for_release: true
     style: primary
     actions:
     - type: runTemplaterFile
@@ -1219,6 +1227,7 @@ buttons:
     fallback: 'Azione manuale: registrare scelta, conseguenza, entita_impattate, applicata_a e propagazione_stato'
   avanza_clock:
     label: Avanza Clock
+    required_for_release: true
     style: primary
     actions:
     - type: runTemplaterFile
@@ -1227,6 +1236,7 @@ buttons:
     fallback: 'Azione manuale: aumentare pressione/progress_value'
   collega_sessione_attiva:
     label: Collega Sessione Attiva
+    required_for_release: true
     style: default
     actions:
     - type: runTemplaterFile
@@ -1235,6 +1245,7 @@ buttons:
     fallback: 'Azione manuale: aggiungere la sessione attiva nei collegamenti della nota'
   rendi_sessione_attiva:
     label: Rendi Sessione Attiva
+    required_for_release: true
     style: primary
     actions:
     - type: runTemplaterFile
@@ -1243,6 +1254,7 @@ buttons:
     fallback: 'Azione manuale: impostare attiva: true su una sola sessione e false sulle altre'
   propaga_a_entita:
     label: Propaga A Entita
+    required_for_release: true
     style: primary
     actions:
     - type: runTemplaterFile
@@ -1251,6 +1263,7 @@ buttons:
     fallback: 'Azione manuale: aggiornare propaga_a, entita_impattate e aggiornamenti_richiesti'
   prepara_recap_pubblico:
     label: Prepara Recap Pubblico
+    required_for_release: true
     style: primary
     actions:
     - type: runTemplaterFile
@@ -1259,6 +1272,7 @@ buttons:
     fallback: 'Azione manuale: scrivere recap pubblico senza segreti o prossime mosse DM'
   wizard_nuova_entita_viva:
     label: Nuova Entita Viva
+    required_for_release: true
     style: primary
     actions:
     - type: runTemplaterFile
@@ -1267,6 +1281,7 @@ buttons:
     fallback: '[[z.modelli/wizard/Nuova Entita Viva]]'
   wizard_appunto_live:
     label: Appunto Live
+    required_for_release: true
     style: primary
     actions:
     - type: templaterCreateNote
@@ -1277,6 +1292,7 @@ buttons:
     fallback: '[[z.modelli/wizard/Appunto Live]]'
   wizard_conseguenza:
     label: Conseguenza
+    required_for_release: true
     style: primary
     actions:
     - type: templaterCreateNote
@@ -1287,6 +1303,7 @@ buttons:
     fallback: '[[z.modelli/wizard/Conseguenza]]'
   wizard_fine_sessione:
     label: Fine Sessione
+    required_for_release: true
     style: primary
     actions:
     - type: runTemplaterFile
@@ -1295,6 +1312,7 @@ buttons:
     fallback: '[[z.modelli/wizard/Fine Sessione]]'
   wizard_sessione_da_output:
     label: Sessione Da Output
+    required_for_release: true
     style: primary
     actions:
     - type: templaterCreateNote

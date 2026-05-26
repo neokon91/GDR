@@ -50,6 +50,13 @@ function validateMetaBindControls({
         const buttonIds = new Set();
         const inputTemplateNames = new Set(inputTemplates.map(template => template?.name).filter(Boolean));
 
+        if (!requiredInputTemplates.length) {
+            errors.push("Meta Bind: nessun input richiesto marcato required_for_release in metabind_inputs.yaml");
+        }
+        if (!requiredButtons.length) {
+            errors.push("Meta Bind: nessun pulsante richiesto marcato required_for_release in metabind_buttons.yaml");
+        }
+
         for (const name of requiredInputTemplates) {
             if (!inputTemplateNames.has(name)) {
                 errors.push(`Meta Bind: input template operativo mancante (${name})`);

@@ -30,6 +30,36 @@ const {
 } = require("./checks/plugin_native_sheets");
 
 const ROOT = process.cwd();
+function loadYamlModule(relPath) {
+    const script = [
+        "import json, sys, yaml",
+        "with open(sys.argv[1], encoding='utf-8') as handle:",
+        "    data = yaml.safe_load(handle) or {}",
+        "print(json.dumps(data, ensure_ascii=False))"
+    ].join("\n");
+    const stdout = execFileSync("python3", ["-c", script, repoPathFromUtils(ROOT, relPath)], {
+        encoding: "utf8",
+        maxBuffer: 4 * 1024 * 1024
+    });
+    return JSON.parse(stdout);
+}
+
+function requiredMetaBindInputTemplates() {
+    const inputs = loadYamlModule("Dev/TemplateFactory/modules/metabind_inputs.yaml").inputs ?? {};
+    return Object.values(inputs)
+        .filter(input => input?.required_for_release === true)
+        .map(input => String(input.name ?? ""))
+        .filter(Boolean);
+}
+
+function requiredMetaBindButtons() {
+    const buttons = loadYamlModule("Dev/TemplateFactory/modules/metabind_buttons.yaml").buttons ?? {};
+    return Object.values(buttons)
+        .filter(button => button?.required_for_release === true)
+        .map(button => String(button.id ?? ""))
+        .filter(Boolean);
+}
+
 const IGNORED_DIRS = new Set([".git", "node_modules", "dist"]);
 const REQUIRED_PLUGINS = [
     "dataview",
@@ -173,41 +203,8 @@ const PUBLIC_PRIVATE_FIELDS = [
     "segreti_rivelabili",
     "pressioni"
 ];
-const REQUIRED_META_BIND_INPUT_TEMPLATES = [
-    "mondo",
-    "stato",
-    "pressione",
-    "prossima_mossa",
-    "connessioni",
-    "player_safe",
-    "entita_impattate",
-    "propaga_a",
-    "sessioni",
-    "luoghi",
-    "fazioni",
-    "missioni",
-    "tracciati"
-];
-const REQUIRED_META_BIND_BUTTONS = [
-    "marca-canonico",
-    "marca-rumor",
-    "archivia-nota",
-    "smista-bozza-generata",
-    "canonizza-bozza-generata",
-    "applica-conseguenza",
-    "registra-scelta-mondo",
-    "avanza-clock",
-    "collega-sessione-attiva",
-    "rendi-sessione-attiva",
-    "propaga-a-entita",
-    "prepara-recap-pubblico",
-    "nuovo-mondo-homebrew",
-    "wizard-nuova-entita-viva",
-    "wizard-appunto-live",
-    "wizard-conseguenza",
-    "wizard-fine-sessione",
-    "wizard-sessione-da-output"
-];
+const REQUIRED_META_BIND_INPUT_TEMPLATES = requiredMetaBindInputTemplates();
+const REQUIRED_META_BIND_BUTTONS = requiredMetaBindButtons();
 const REQUIRED_METADATA_MENU_PRESETS = [
     "mondo",
     "stato",

@@ -4,6 +4,7 @@ version: 0.2.0
 inputs:
   mondo:
     name: mondo
+    required_for_release: true
     declaration: INPUT[suggester(optionQuery("Mondi"), useLinks(partial), allowOther)]
     field: mondo
     syntax: '`INPUT[mondo][:mondo]`'
@@ -30,6 +31,7 @@ inputs:
       Falso), option(retcon, Retcon))]
   stato:
     name: stato
+    required_for_release: true
     declaration: INPUT[inlineSelect(option(bozza, Bozza), option(preparazione, Preparazione), option(pronto, Pronto), option(in
       corso, In Corso), option(in gioco, In Gioco), option(giocata, Giocata), option(da smistare, Da smistare), option(collegata,
       Collegata), option(canonica, Canonica), option(archiviata, Archiviata), option(ignorata, Ignorata))]
@@ -38,63 +40,74 @@ inputs:
     fallback: 'Stato: bozza'
   pressione:
     name: pressione
+    required_for_release: true
     declaration: INPUT[slider(minValue(0), maxValue(10), stepSize(1), addLabels)]
     field: pressione
     syntax: '`INPUT[pressione][:pressione]`'
     fallback: 'Pressione: 0'
   prossima_mossa:
     name: prossima_mossa
+    required_for_release: true
     declaration: INPUT[text]
     field: prossima_mossa
     syntax: '`INPUT[prossima_mossa][:prossima_mossa]`'
     fallback: 'Prossima mossa:'
   connessioni:
     name: connessioni
+    required_for_release: true
     declaration: INPUT[inlineListSuggester(optionQuery("Mondi"), useLinks(partial), allowOther)]
     field: connessioni
     syntax: '`INPUT[connessioni][:connessioni]`'
     fallback: 'Connessioni:'
   player_safe:
     name: player_safe
+    required_for_release: true
     declaration: INPUT[text]
     field: player_safe
     syntax: '`INPUT[player_safe][:player_safe]`'
     fallback: 'Player-safe:'
   entita_impattate:
     name: entita_impattate
+    required_for_release: true
     declaration: INPUT[inlineListSuggester(optionQuery("Mondi"), useLinks(partial), allowOther)]
     field: entita_impattate
     syntax: '`INPUT[entita_impattate][:entita_impattate]`'
     fallback: 'Entita impattate:'
   propaga_a:
     name: propaga_a
+    required_for_release: true
     declaration: INPUT[inlineListSuggester(optionQuery("Mondi"), useLinks(partial), allowOther)]
     field: propaga_a
     syntax: '`INPUT[propaga_a][:propaga_a]`'
     fallback: 'Propaga a:'
   sessioni:
     name: sessioni
+    required_for_release: true
     declaration: INPUT[inlineListSuggester(optionQuery("Mondi/Sessioni"), useLinks(partial), allowOther)]
   luoghi:
     name: luoghi
+    required_for_release: true
     declaration: INPUT[inlineListSuggester(optionQuery("Mondi/Luoghi"), useLinks(partial), allowOther)]
     field: luoghi
     syntax: '`INPUT[luoghi][:luoghi]`'
     fallback: 'Luoghi:'
   fazioni:
     name: fazioni
+    required_for_release: true
     declaration: INPUT[inlineListSuggester(optionQuery("Mondi/Fazioni"), useLinks(partial), allowOther)]
     field: fazioni
     syntax: '`INPUT[fazioni][:fazioni]`'
     fallback: 'Fazioni:'
   missioni:
     name: missioni
+    required_for_release: true
     declaration: INPUT[inlineListSuggester(optionQuery("Mondi/Missioni"), useLinks(partial), allowOther)]
     field: missioni
     syntax: '`INPUT[missioni][:missioni]`'
     fallback: 'Missioni:'
   tracciati:
     name: tracciati
+    required_for_release: true
     declaration: INPUT[inlineListSuggester(optionQuery("Mondi/Tracciati"), useLinks(partial), allowOther)]
     field: tracciati
     syntax: '`INPUT[tracciati][:tracciati]`'
