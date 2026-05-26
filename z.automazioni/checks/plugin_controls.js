@@ -9,6 +9,7 @@ function validatePluginControls({
     hasValue,
     isGeneratedTemplatePath,
     isVirtualUserPath,
+    pluginBindings,
     pluginMatrix,
     repoPath,
     requiredPlugins,
@@ -73,6 +74,25 @@ function validatePluginControls({
     for (const plugin of communityPlugins) {
         if (!pluginMatrixById.has(plugin)) {
             errors.push(`Plugin matrix: plugin abilitato non mappato ${plugin}`);
+        }
+    }
+
+    const bindings = pluginBindings?.bindings ?? {};
+    const boundPluginIds = new Set(
+        Object.values(bindings)
+            .map(binding => binding?.plugin_id)
+            .filter(Boolean)
+    );
+    for (const plugin of communityPlugins) {
+        if (!boundPluginIds.has(plugin)) {
+            errors.push(`Plugin bindings: plugin abilitato senza binding tecnico (${plugin})`);
+        }
+    }
+
+    for (const [bindingName, binding] of Object.entries(bindings)) {
+        const pluginId = binding?.plugin_id;
+        if (pluginId && !communityPlugins.includes(pluginId)) {
+            errors.push(`Plugin bindings: ${bindingName} punta a plugin non abilitato (${pluginId})`);
         }
     }
 }

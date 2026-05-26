@@ -3,6 +3,7 @@ purpose: Binding tecnici dei plugin usati dai template generati.
 version: 0.2.0
 bindings:
   templater:
+    plugin_id: templater-obsidian
     runtime: true
     responsibility: crea, sposta, rinomina e inizializza la nota prima del corpo statico
     entry_syntax:
@@ -16,6 +17,7 @@ bindings:
       - z.modelli/wizard
       - z.modelli/azioni
   meta_bind:
+    plugin_id: obsidian-meta-bind-plugin
     runtime: true
     responsibility: modifica campi YAML e lancia azioni esplicite dopo creazione nota
     inline_inputs:
@@ -30,6 +32,7 @@ bindings:
       - metabind_inputs
       - metabind_buttons
   dataview:
+    plugin_id: dataview
     runtime: true
     responsibility: viste, indici e controlli leggibili senza modificare file
     codeblocks:
@@ -40,6 +43,7 @@ bindings:
       - dashboard
       - controlli leggibili
   js_engine:
+    plugin_id: js-engine
     runtime: true
     responsibility: viste riusabili quando DataviewJS inline diventerebbe troppo lungo
     use_for:
@@ -52,6 +56,7 @@ bindings:
       - z.engine/session_player.js
       - z.engine/session_views.js
   metadata_menu:
+    plugin_id: metadata-menu
     runtime: true
     responsibility: tipi campo, fileClass e qualita frontmatter
     config_path: .obsidian/plugins/metadata-menu/data.json
@@ -66,6 +71,7 @@ bindings:
       - mappe con Maps per Bases
       - formule leggere
   tasks:
+    plugin_id: obsidian-tasks-plugin
     runtime: true
     responsibility: task operative e manutenzione
     global_filter: "#task"
@@ -73,6 +79,7 @@ bindings:
       - lavoro operativo DM
       - manutenzione
   calendarium:
+    plugin_id: calendarium
     runtime: true
     fields:
       - fc-calendar
@@ -81,6 +88,7 @@ bindings:
       - fc-display-name
       - fc-end
   statblocks:
+    plugin_id: obsidian-5e-statblocks
     runtime: true
     responsibility: rendering creature e schede SRD
     fields:
@@ -89,31 +97,37 @@ bindings:
       - source
     codeblock: statblock
   initiative_tracker:
+    plugin_id: initiative-tracker
     runtime: true
     responsibility: gestione incontri e turni live
     codeblock: encounter
   dice_roller:
+    plugin_id: obsidian-dice-roller
     runtime: true
     responsibility: tiri inline e tabelle casuali
     inline_syntax:
       - "dice: 1d20"
       - "dice: [[Risorse/Tabelle/Tabelle#^id-tabella]]"
   excalidraw:
+    plugin_id: obsidian-excalidraw-plugin
     runtime: true
     responsibility: mappe e diagrammi visuali con fallback testuale
     output_folder: Risorse/Mappe
     extension: .excalidraw.md
   canvas:
+    plugin_id: advanced-canvas
     runtime: true
     responsibility: reti visuali di note e fronti
     extension: .canvas
   media_extended:
+    plugin_id: media-extended
     runtime: true
     fields:
       - media
       - timestamp
       - scena
   maps:
+    plugin_id: maps
     runtime: true
     responsibility: vista mappa dentro Bases
     use_for:
@@ -121,31 +135,81 @@ bindings:
       - marker
       - coordinate
   ttrpg_tools_maps:
+    plugin_id: zoom-map
     runtime: true
     responsibility: mappe zoomabili con marker, layer e misure
-    plugin_id: zoom-map
   hex_cartographer_plugin:
+    plugin_id: hex-cartographer
     runtime: true
     responsibility: mappe esagonali e hexcrawl
-    plugin_id: hex-cartographer
   iconize:
+    plugin_id: obsidian-icon-folder
     runtime: true
     config_path: .obsidian/plugins/obsidian-icon-folder/data.json
   tabs:
+    plugin_id: tabs
     runtime: true
     responsibility: organizzazione sezioni lunghe
     codeblock: tabs
   callout_manager:
+    plugin_id: callout-manager
     runtime: true
     responsibility: vocabolario visuale dei callout GDR
     syntax: "> [!tipo]"
   style_settings:
+    plugin_id: obsidian-style-settings
     runtime: true
     config_path: .obsidian/plugins/obsidian-style-settings/data.json
+  folder_notes:
+    plugin_id: folder-notes
+    runtime: true
+    responsibility: note indice di cartella per navigazione iniziale e release pulita
+    config_path: .obsidian/plugins/folder-notes/data.json
+    use_for:
+      - indici cartella
+      - primo orientamento
+      - fallback navigazione
+  homepage:
+    plugin_id: homepage
+    runtime: true
+    responsibility: apertura controllata del vault su Inizia Qui
+    config_path: .obsidian/plugins/homepage/data.json
+    use_for:
+      - onboarding
+      - primo avvio
+  kanban:
+    plugin_id: obsidian-kanban
+    runtime: true
+    responsibility: bacheche Markdown operative per preparazione, post-sessione e manutenzione
+    frontmatter:
+      - kanban-plugin: board
+    output_targets:
+      - z.bacheche
+  fantasy_content_generator:
+    plugin_id: fantasy-content-generator
+    runtime: true
+    responsibility: bozze fantasy in Inbox/Generati da smistare, mai canone automatico
+    output_targets:
+      - Inbox/Generati
+    required_frontmatter:
+      - plugin
+      - generatore
+      - canonico
+      - stato_canonico
+  advanced_tables:
+    plugin_id: table-editor-obsidian
+    runtime: false
+    responsibility: editing manuale di tabelle Markdown senza dipendenze runtime
+    config_path: .obsidian/plugins/table-editor-obsidian/data.json
+    use_for:
+      - tabelle casuali
+      - tabelle guida
   linter:
+    plugin_id: obsidian-linter
     runtime: false
     config_path: .obsidian/plugins/obsidian-linter/data.json
   brat:
+    plugin_id: obsidian42-brat
     runtime: false
     use_for:
       - manutenzione plugin

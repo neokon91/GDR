@@ -43,7 +43,7 @@ Prima di lavorarci, controlla:
 | Templater | integrato | pulsanti di creazione e `z.modelli` | non aumentare i template senza controllo automatico |
 | Meta Bind | integrato | dashboard e template con campi interattivi | uniformare i campi piu usati |
 | JS Engine | integrato indiretto | viste DataviewJS e Meta Bind avanzati | usarlo solo dove evita lavoro manuale |
-| Metadata Menu | integrato base | gestione campi | FileClass presenti per `sessione`, `missione`, `tracciato`, `png`, `luogo`, `fazione`; estendere poi a `incontro`, `mappa`, `media` |
+| Metadata Menu | integrato | gestione campi | FileClass presenti per sessioni, missioni, tracciati, PNG, luoghi, fazioni, incontri, mappe, media, economia e compendium; mantenere allineati YAML, Bases e Meta Bind |
 | Folder Notes | integrato | note indice di cartella | mantenere indici brevi e utili |
 | Homepage | integrato | avvio su dashboard | nessun lavoro urgente |
 | Kanban | integrato | `z.bacheche` | collegare meglio post-sessione a missioni e sessioni |

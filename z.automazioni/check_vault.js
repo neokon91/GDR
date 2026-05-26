@@ -721,6 +721,7 @@ validateRequiredFiles({
 
 const pluginMatrixPath = repoPath("Dev/plugin_matrix.json");
 const pluginMatrix = readJson(pluginMatrixPath) ?? [];
+const pluginBindings = loadYamlModule("Dev/TemplateFactory/modules/plugin_bindings.yaml");
 validatePluginControls({
     communityPlugins,
     errors,
@@ -728,6 +729,7 @@ validatePluginControls({
     hasValue,
     isGeneratedTemplatePath,
     isVirtualUserPath: target => virtualUserPaths.has(String(target ?? "").replace(/\\/g, "/").replace(/\/$/, "")),
+    pluginBindings,
     pluginMatrix,
     repoPath,
     requiredPlugins: REQUIRED_PLUGINS,
