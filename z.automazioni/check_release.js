@@ -28,14 +28,14 @@ const RELEASE_IMPORT_DOC_MARKERS = [
     "npm run import:watabou:dungeon"
 ];
 const RELEASE_ROADMAP_MARKERS = [
-    "Confermare che non ci sono blocker Templater runtime noti",
-    "Preparare la fase M8 su release evidence e disciplina zero-warning",
-    "Raccogliere evidenze visuali in [[Dev/Smoke Demo Finale]]",
-    "Rafforzare i gate automatici contro materiale pubblico con campi DM evidenti",
-    "M9 - Riduzione Attrito E Sicurezza Player-Facing",
-    "M10 - Consolidamento Sistema Operativo Narrativo",
-    "M11 - Pipeline Homebrew D&D 5.5 E Continuita Di Mondo",
-    "Avviare M11 su missione + tracciato + fazione + luogo"
+    "Questa e la roadmap attiva di chiusura release",
+    "## Definition Of Done 1.0",
+    "## Gap Bloccanti",
+    "Audit visuale Obsidian",
+    "Feedback giocabilita nelle dashboard",
+    "Taxonomy gate SRD/D&D",
+    "Pulizia controllata `z.automazioni`",
+    "## Fuori Scope 1.0"
 ];
 
 const errors = [];
@@ -72,11 +72,13 @@ for (const marker of RELEASE_IMPORT_DOC_MARKERS) {
 const roadmapText = readTextRel(ROOT, "Dev/Roadmap/1.0 Professionale.md");
 for (const marker of RELEASE_ROADMAP_MARKERS) {
     if (!roadmapText.includes(marker)) {
-        errors.push(`Dev/Roadmap/1.0 Professionale.md: roadmap M11 obsoleta o incompleta (${marker})`);
+        errors.push(`Dev/Roadmap/1.0 Professionale.md: roadmap chiusura release incompleta (${marker})`);
     }
 }
-if (roadmapText.includes("- [ ] Correggere blocker Templater runtime")) {
-    errors.push("Dev/Roadmap/1.0 Professionale.md: non deve mantenere aperto il blocker Templater runtime dopo check zero-warning");
+for (const obsolete of ["M9 - Riduzione Attrito", "M10 - Consolidamento", "M11 - Pipeline", "Correggere blocker Templater runtime"]) {
+    if (roadmapText.includes(obsolete)) {
+        errors.push(`Dev/Roadmap/1.0 Professionale.md: marker roadmap storico rimasto (${obsolete})`);
+    }
 }
 
 const releaseCleanText = readTextRel(ROOT, "z.automazioni/release_clean.js");

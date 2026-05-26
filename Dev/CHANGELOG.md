@@ -23,7 +23,7 @@
 - [[z.bases/Fazioni.base]] per correggere rapidamente fazioni in movimento, pressione, relazioni, mondo e archivio.
 - [[z.bases/Economia.base]] per lavorare in tabella su risorse, rotte, mercati e pressioni economiche.
 - [[z.bases/Worldbuilding.base]] per modificare culture, religioni, societa e cosmologia senza toccare query Dataview.
-- [[Dev/Roadmap/1.0.0]] ora include una fase dedicata a Tasks e Bases avanzate.
+- Roadmap 1.0.0 storica: aggiunta una fase dedicata a Tasks e Bases avanzate.
 - [[Dev/Roadmap/1.0 Professionale]] come nuova roadmap attiva a Punto 0 per la vera 1.0.
 - [[Dev/Confine Release Repository]] per chiarire cosa entra nella ZIP utente e cosa resta nel repository.
 - [[Dev/Smoke 1.0 Professionale]] come checklist visuale completa dei flussi pre-release.
@@ -151,7 +151,7 @@
 
 - [[Hub/Party Control]] per PG, HP, missioni, inventario e flags durante la sessione.
 - [[Risorse/Quality Report]] come dashboard analytics per copertura, buchi operativi, sicurezza pubblicazione e materiale screenshot-ready.
-- [[Dev/Roadmap/1.0.0]] come roadmap completa e fonte unica per direzione prodotto, UX operativa e backlog attivo.
+- Roadmap 1.0.0 storica usata come fonte unica per direzione prodotto, UX operativa e backlog attivo.
 
 ### Migliorato
 
@@ -199,7 +199,7 @@
 
 - `CONTRIBUTING.md` e issue template GitHub per bug e feature request.
 - [[Risorse/Importare Mappe]] e import GeoJSON Azgaar verso bozze di luoghi.
-- [[Dev/Roadmap/0.8.0|Roadmap 0.8.0]] per completamento prodotto prima della release ZIP iniziale.
+- Roadmap 0.8.0 storica per completamento prodotto prima della release ZIP iniziale.
 - Tabelle Dice Roller per viaggio, scoperte esagono, reazioni fazione e conseguenze post-sessione.
 
 ### Migliorato
@@ -223,7 +223,7 @@
 ### Migliorato
 
 - [[Inizia Qui]] resta la pagina introduttiva all'apertura e mostra una prossima azione senza creare contenuti automaticamente.
-- [[Dev/Roadmap/0.7.0|Roadmap 0.7.0]] registra le decisioni di esperienza utente confermate.
+- Roadmap 0.7.0 storica registra le decisioni di esperienza utente confermate.
 
 ## 0.6.0 - 2026-05-20
 
@@ -235,7 +235,7 @@
 - [[Risorse/Opportunità Di Avventura]] per trovare elementi dell'ambientazione pronti a diventare missioni.
 - [[Risorse/Fronti Di Campagna]] per pressioni, prossime mosse e scadenze.
 - [[Risorse/Generare Campagna Da Ambientazione]] come guida non tecnica.
-- [[Dev/Roadmap/0.7.0|Roadmap 0.7.0]] con proposta e domande sul comportamento atteso del vault.
+- Roadmap 0.7.0 storica con proposta e domande sul comportamento atteso del vault.
 
 ### Migliorato
 
@@ -251,7 +251,7 @@
 - Nuove aree per [[Mondi/Culture/Culture]], [[Mondi/Lingue/Lingue]], [[Mondi/Storia/Storia]], [[Mondi/Conflitti/Conflitti]] e [[Mondi/Cosmologia/Cosmologia]].
 - Modelli guidati per cultura, lingua, era storica, conflitto e cosmologia.
 - [[Risorse/Worldbuilding Tassonomico]] come guida non tecnica alla costruzione di mondi ricchi.
-- [[Dev/Roadmap/0.5.0|Roadmap 0.5.0]] completata e [[Dev/Roadmap/0.6.0|Roadmap 0.6.0]] preparata.
+- Roadmap 0.5.0 storica completata e roadmap 0.6.0 storica preparata.
 
 ### Migliorato
 
@@ -269,7 +269,7 @@
 - [[Risorse/Profili Campagna]] per fantasy classico, investigativo, sandbox e one-shot.
 - [[Risorse/Materiali Al Tavolo]] per controllare dispense, mappe, media, incontri e creature della sessione attiva.
 - [[Risorse/Preset Calendario]] per usare date del mondo senza spiegare configurazioni interne.
-- [[Dev/Roadmap/0.4.0|Roadmap 0.4.0]] completata come tracciamento della versione.
+- Roadmap 0.4.0 storica completata come tracciamento della versione.
 
 ### Migliorato
 
@@ -299,7 +299,7 @@
 - [[z.modelli/Lore Capture]] per catturare eventi, dialoghi, luoghi, PNG improvvisati e conseguenze dalla sessione.
 - [[Mondi/Timeline/Timeline]] e [[z.modelli/Evento Storico]] per storicizzare eventi canonici, rumor, leggende, segreti e fatti dimenticati.
 - [[Mondi/Stato del Mondo]] per vedere conseguenze da applicare, PNG cambiati, luoghi in crisi, fazioni in movimento e missioni influenzate.
-- [[Dev/Roadmap/0.2.0|Roadmap 0.2.0]] per tracciare lo stato della roadmap Runtime + Lore Engine.
+- Roadmap 0.2.0 storica per tracciare lo stato della roadmap Runtime + Lore Engine.
 - Import SRD esteso a Background, Equipaggiamento, Talenti, Lingue e Specie dalla fonte JSON aggiornata.
 - Filtri opzionali per mondo e campagna su [[Worldbuilder Dashboard]] e [[Mondi/Stato del Mondo]].
 

@@ -9,7 +9,7 @@ Questa nota contiene convenzioni tecniche per mantenere il vault: campi, templat
 - [[Risorse/Guida DM]] deve spiegare il flusso operativo senza dettagli tecnici: preparazione, gioco, Inbox Live, post-sessione e canonizzazione.
 - [[Dev/Indice Connettore GPT]] deve restare un indice sintetico per code search e connettori GPT, marcato con `is_code_search_indexed: true`.
 - Questa nota contiene la documentazione tecnica di sviluppo: campi, template, automazioni, test, import generati e criteri di modifica.
-- [[Dev/Roadmap/1.0 Professionale]] contiene la direzione prodotto e UX operativa attiva. [[Dev/Roadmap/1.0.0]] resta fondazione storica. Se c'e conflitto, prevale la roadmap attiva.
+- [[Dev/Roadmap/1.0 Professionale]] contiene la direzione prodotto e UX operativa attiva. Le roadmap storiche sono confluite in changelog, README e contratti YAML. Se c'e conflitto, prevale la roadmap attiva.
 - Le istruzioni tecniche non vanno nel README se non sono necessarie per usare il vault al tavolo.
 - Il profilo regolamentare principale e D&D 5.5/SRD: i campi di creature, incontri, oggetti, ricompense, party e session prep devono restare compatibili con questo uso, mentre il Codex del mondo resta separato dal regolamento.
 - La linea architetturale e vincolante: YAML dichiara contratti e profili, Jinja/TemplateFactory genera Markdown statico, JS del vault contiene runtime e automazioni. Non aggiungere logica fragile nel corpo dei template.
