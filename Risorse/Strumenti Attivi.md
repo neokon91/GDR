@@ -41,7 +41,7 @@ Per il primo avvio usa [[Risorse/Primo Avvio Strumenti]]. Se qualcosa non rispon
 - **Icone**: rendono cartelle e pagine piu riconoscibili.
 - **Schede nelle note lunghe**: riducono lo scrolling in dashboard e template complessi.
 - **Aspetto del vault**: permette piccole regolazioni visuali senza toccare codice.
-- **Linter manuale**: [[Dev/Linter e Sviluppo]] aiuta a ripulire note selezionate senza riscrivere SRD, mappe o configurazioni.
+- **Linter manuale**: [[Dev/Sviluppo Vault]] aiuta a ripulire note selezionate senza riscrivere SRD, mappe o configurazioni.
 
 ## Regola Pratica
 

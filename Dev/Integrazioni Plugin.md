@@ -7,7 +7,7 @@ cssclasses:
 
 Questa pagina decide quali plugin integrare per primi nel vault. Non e una lista di installazione: e una coda di lavoro per trasformare plugin gia scelti in funzioni utili al DM.
 
-Per il contratto verificato della 1.0, vedi [[Dev/Matrice Plugin 1.0]], `Dev/plugin_matrix.json` e `Dev/TemplateFactory/modules/plugin_contracts.yaml`; `npm run check` fallisce se un plugin abilitato non ha funzione, guida, pagina operativa, smoke e contratto release.
+Per il contratto verificato della 1.0, vedi `Dev/plugin_matrix.json` e `Dev/TemplateFactory/modules/plugin_contracts.yaml`; `npm run check` fallisce se un plugin abilitato non ha funzione, guida, pagina operativa, smoke e contratto release.
 
 ## Fonti Ufficiali Consultate
 
@@ -266,7 +266,7 @@ Da fare:
 - fatto: mantenere `lintOnSave` e `lintOnFileChange` disattivati;
 - fatto: attivare solo regole a basso rischio: riga vuota dopo YAML, righe vuote consecutive, newline finale e trailing spaces;
 - fatto: ignorare `SRD`, `Risorse/Mappe` e `.obsidian`;
-- fatto: documentare uso e limiti in [[Dev/Linter e Sviluppo]].
+- fatto: documentare uso e limiti in [[Dev/Sviluppo Vault]].
 
 Fatto bene quando: il manutentore usa Linter su singole note o cartelle piccole e controlla sempre il diff.
 

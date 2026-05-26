@@ -18,7 +18,7 @@
 - `npm run check:smoke` come gate dedicato per la parte automatizzabile dello smoke demo finale.
 - `npm run check:release` come gate dedicato per versione, changelog e verifica release pulita.
 - La release non include più una demo manuale mantenuta nota per nota.
-- [[Dev/Matrice Plugin 1.0]] e `Dev/plugin_matrix.json` per mappare ogni plugin installato a funzione, guida, pagina operativa e smoke.
+- `Dev/plugin_matrix.json` per mappare ogni plugin installato a funzione, guida, pagina operativa e smoke.
 - Azioni Meta Bind generate per smistare e canonizzare bozze del Generatore di Contenuti Fantasy.
 - [[z.bases/Fazioni.base]] per correggere rapidamente fazioni in movimento, pressione, relazioni, mondo e archivio.
 - [[z.bases/Economia.base]] per lavorare in tabella su risorse, rotte, mercati e pressioni economiche.

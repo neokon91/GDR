@@ -14,7 +14,7 @@ Questa nota contiene convenzioni tecniche per mantenere il vault: campi, templat
 - Il profilo regolamentare principale e D&D 5.5/SRD: i campi di creature, incontri, oggetti, ricompense, party e session prep devono restare compatibili con questo uso, mentre il Codex del mondo resta separato dal regolamento.
 - La linea architetturale e vincolante: YAML dichiara contratti e profili, Jinja/TemplateFactory genera Markdown statico, JS del vault contiene runtime e automazioni. Non aggiungere logica fragile nel corpo dei template.
 - **Scheda meccanica PG**: `Dev/TemplateFactory/modules/srd_character_build.yaml` → `npm run import:srd-data` → `z.automazioni/data/srd/*.json` → `z.automazioni/pg.js` (Templater) → frontmatter strutturato → Jinja (`pg_mechanics_schema.yaml`, `macros/pg_mechanics.j2`, tab **Scheda** in `PG.md`). Dettaglio utente: [[docs/PG_SCHEDA_MECHANICA]]; porting e backlog da FantasyWorld: [[docs/FANTASYWORLD_INTEGRATION]].
-- [[Dev/README]] e l'indice canonico della documentazione di sviluppo: prima di creare una nuova nota tecnica, verifica se la modifica appartiene a roadmap, handoff, sviluppo, plugin layer, release o TemplateFactory.
+- [[Dev/README]] e l'indice canonico della documentazione di sviluppo: prima di creare una nuova nota tecnica, verifica se la modifica appartiene a roadmap, sviluppo, plugin layer, release o TemplateFactory.
 
 ## Stati delle Note Consigliati
 Usa pochi stati e usali sempre nello stesso modo.
@@ -108,6 +108,29 @@ I contratti vivono in:
 - `z.automazioni`: logica reale usata dai wrapper Templater e script CLI di manutenzione. Se cambi un percorso qui, aggiorna anche dashboard e Dataview.
 - `z.engine`: componenti JS riusabili per viste operative. Nuova logica complessa va qui, non copiata in blocchi DataviewJS sparsi.
 - `z.bacheche`: bacheche Kanban per preparazione e creature.
+
+## Linter Manuale
+
+Linter e uno strumento di manutenzione controllata, non una normalizzazione globale del vault. Deve restare manuale: niente lint on save, niente lint on file change.
+
+Regole accettate:
+
+- riga vuota dopo YAML;
+- limite alle righe vuote consecutive;
+- newline finale nel file;
+- rimozione spazi finali.
+
+Cartelle da ignorare:
+
+- `SRD`, per non riscrivere frontmatter e statblock importati;
+- `Risorse/Mappe`, per non toccare file Excalidraw e mappe plugin-heavy;
+- `.obsidian`, per evitare rumore su configurazioni plugin.
+
+Regola operativa:
+
+- usare Linter su singole note o cartelle piccole dopo una modifica controllata;
+- non lanciare Linter su tutto il vault prima di una release senza controllare il diff;
+- non attivare regole YAML aggressive: array, sort, quote e timestamp possono rompere campi usati da Dataview, Statblocks, Calendarium e template.
 
 ## Plugin Layer Interno
 

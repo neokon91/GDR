@@ -24,6 +24,6 @@
   {"id":"table-editor-obsidian","name":"Advanced Tables","class":"supporto editing","function":"Editing rapido di tabelle Markdown e tabelle casuali.","guide":"Dev/Integrazioni Plugin.md","operational":"Risorse/Tabelle/Tabelle.md","smoke":"Dev/Smoke 1.0 Professionale.md"},
   {"id":"zoom-map","name":"TTRPG Tools: Maps","class":"supporto mappe tavolo","function":"Mappe zoomabili con pin e riferimenti al tavolo.","guide":"Risorse/Mappe/Mappe.md","operational":"Risorse/Mappe/Mappe.md","smoke":"Dev/Smoke 1.0 Professionale.md"},
   {"id":"hex-cartographer","name":"Hex Cartographer","class":"supporto esplorazione","function":"Hexcrawl collegato a territori, incontri e conseguenze.","guide":"Risorse/Mappe/Mappe.md","operational":"Risorse/Mappe/Mappe.md","smoke":"Dev/Smoke 1.0 Professionale.md"},
-  {"id":"obsidian-linter","name":"Linter","class":"manutenzione","function":"Pulizia manuale prudente, mai lint distruttivo.","guide":"Dev/Linter e Sviluppo.md","operational":"z.bacheche/Manutenzione Vault.md","smoke":"Dev/Smoke 1.0 Professionale.md"},
+  {"id":"obsidian-linter","name":"Linter","class":"manutenzione","function":"Pulizia manuale prudente, mai lint distruttivo.","guide":"Dev/Sviluppo Vault.md","operational":"z.bacheche/Manutenzione Vault.md","smoke":"Dev/Smoke 1.0 Professionale.md"},
   {"id":"obsidian42-brat","name":"BRAT","class":"manutenzione","function":"Gestione plugin beta/non ufficiali fuori dal flusso DM.","guide":"Dev/Integrazioni Plugin.md","operational":"z.bacheche/Manutenzione Vault.md","smoke":"Dev/Smoke 1.0 Professionale.md"}
 ]

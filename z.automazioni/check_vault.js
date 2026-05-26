@@ -51,7 +51,6 @@ const REQUIRED_FILES = [
     "Dev/RELEASE.md",
     "Dev/Sviluppo Vault.md",
     "Dev/Integrazioni Plugin.md",
-    "Dev/Matrice Plugin 1.0.md",
     "Dev/plugin_matrix.json",
     "Dev/Plugin Technical Reference.md",
     "Dev/TemplateFactory/README.md",
