@@ -17,13 +17,42 @@ mondo_attivo: ""
 > Mondo:
 > `INPUT[mondo][:mondo_attivo]`
 
-`BUTTON[atlante-atlante-del-mondo-2]`
+<!-- workflow:quick_actions:start lore_hub -->
+> [!regia] Azioni rapide
+> Navigare il lore vivo senza perdere cosa produce segnali, segreti o gioco.
+>
+> **Atlante** - devi tornare a luoghi, culture e geografia
+> `BUTTON[atlante-atlante-del-mondo-2]`
+>
+> **Economia e rotte** - il lore riguarda risorse, viaggi o dipendenze
+> `BUTTON[economia-e-rotte-economia-e-rotte-2]`
+>
+> **Calendario** - feste, stagioni o date devono diventare pressione
+> `BUTTON[calendario-mondi-calendario]`
+>
+> **Compendium** - vuoi raccogliere elementi ricorrenti e materiali del mondo
+> `BUTTON[compendium-hub-compendium-del-mondo-compendium-del-mondo]`
+>
+> [!regia]- Cattura e canone
+> Decidere se un segnale resta appunto, diventa mistero o entra nel canone.
+>
+> **Cattura lore** - hai un segnale interessante ma non ancora canonico
+> `BUTTON[lore-capture-z-modelli-lore-capture-md]`
+>
+> **Nuovo mistero** - una verita deve essere rivelata gradualmente
+> `BUTTON[nuovo-segreto-o-mistero-z-modelli-worldbuilding-segreto-o-mistero-md]`
+>
+> **Revisione lore** - devi ripulire o canonizzare materiale disperso
+> `BUTTON[revisione-lore-revisione-lore]`
+>
+> **Controllo canone** - temi contraddizioni, duplicati o segreti esposti
+> `BUTTON[controllo-canone-controllo-canone]`
+<!-- workflow:quick_actions:end lore_hub -->
 
-`BUTTON[economia-e-rotte-economia-e-rotte-2]`
-
-`BUTTON[calendario-mondi-calendario]`
-
-`BUTTON[compendium-hub-compendium-del-mondo-compendium-del-mondo]`
+```dataviewjs
+const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+await gdr.renderWorkflowCommandDeck(dv, "lore_hub", { mode: "simple" });
+```
 
 ```dataviewjs
 const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));

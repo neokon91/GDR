@@ -15,28 +15,51 @@ Questa e la vista per usare il mondo nello spazio: mappa DM, mappa giocatori, lu
 > [!timeline] Atlante operativo
 > Usa questa pagina per vedere struttura, storia e buchi dell'ambientazione senza aprire archivi separati.
 
-`BUTTON[nuova-cultura-z-modelli-worldbuilding-cultura-md]`
-
-`BUTTON[nuova-lingua-z-modelli-worldbuilding-lingua-md]`
-
-`BUTTON[nuova-era-z-modelli-worldbuilding-era-storica-md]`
-
-`BUTTON[nuovo-conflitto-z-modelli-worldbuilding-conflitto-md]`
-
-`BUTTON[cosmologia-z-modelli-worldbuilding-cosmologia-md]`
-
-> [!regia]- Strumenti mondo avanzati
+<!-- workflow:quick_actions:start atlante_mondo -->
+> [!regia] Azioni rapide
+> Costruire e controllare geografia, culture, storia e buchi spaziali del mondo.
+>
+> **Nuova cultura** - un popolo, costume o tabu cambia luoghi e scelte
+> `BUTTON[nuova-cultura-z-modelli-worldbuilding-cultura-md]`
+>
+> **Nuova lingua** - lingua o scrittura diventano indizio, accesso o identita
+> `BUTTON[nuova-lingua-z-modelli-worldbuilding-lingua-md]`
+>
+> **Nuova era** - la storia ha bisogno di una fase riconoscibile
+> `BUTTON[nuova-era-z-modelli-worldbuilding-era-storica-md]`
+>
+> **Nuovo conflitto** - una tensione geografica o culturale deve produrre gioco
+> `BUTTON[nuovo-conflitto-z-modelli-worldbuilding-conflitto-md]`
+>
+> **Cosmologia** - il mondo ha regole metafisiche che cambiano il tavolo
+> `BUTTON[cosmologia-z-modelli-worldbuilding-cosmologia-md]`
+>
+> [!regia]- Orientamento mondo
+> Passare dall'atlante a controllo, profondita e gioco.
+>
+> **Worldbuilder** - non sai ancora quale pezzo creare o collegare
 > `BUTTON[worldbuilder-worldbuilder-dashboard-2]`
 >
+> **Controllo worldbuilding** - vuoi vedere cosa resta superficiale o scollegato
 > `BUTTON[controllo-worldbuilding-controllo-worldbuilding]`
 >
+> **Worldbuilding profondo** - una scheda ricorrente merita origine, costo e memoria
 > `BUTTON[worldbuilding-profondo-risorse-worldbuilding-profondo]`
 >
+> **Geopolitica** - luoghi e confini devono diventare poteri in attrito
 > `BUTTON[geopolitica-geopolitical-dashboard]`
 >
+> **Economia e rotte** - viaggi, risorse o passaggi devono pesare sul mondo
 > `BUTTON[economia-e-rotte-economia-e-rotte]`
 >
+> **Lore hub** - vuoi navigare segnali, storia e materiale canonico
 > `BUTTON[lore-hub-lore-hub]`
+<!-- workflow:quick_actions:end atlante_mondo -->
+
+```dataviewjs
+const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+await gdr.renderWorkflowCommandDeck(dv, "atlante_mondo", { mode: "simple" });
+```
 
 ## Filtro
 

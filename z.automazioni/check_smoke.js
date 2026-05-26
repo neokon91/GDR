@@ -57,7 +57,11 @@ for (const [label, relPath] of [
     ["Preparazione Sessione", "Risorse/Preparazione Sessione.md"],
     ["Durante il Gioco", "Hub/Durante il Gioco.md"],
     ["Cosa Succede Fuori Scena", "Hub/Cosa Succede Fuori Scena.md"],
-    ["Post Sessione Guidato", "Risorse/Post Sessione Guidato.md"]
+    ["Post Sessione Guidato", "Risorse/Post Sessione Guidato.md"],
+    ["Atlante del Mondo", "Hub/Atlante del Mondo.md"],
+    ["Controllo Worldbuilding", "Hub/Controllo Worldbuilding.md"],
+    ["Economia E Rotte", "Hub/Economia E Rotte.md"],
+    ["Lore Hub", "Hub/Lore Hub.md"]
 ]) {
     assertNoTechnicalJargon(label, relPath);
 }

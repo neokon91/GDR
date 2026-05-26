@@ -902,6 +902,171 @@ workflows:
       - Meta Bind
       - Dataview
       - JS Engine
+  atlante_mondo:
+    user_goal: Costruire e controllare geografia, culture, storia e buchi spaziali del mondo.
+    audience: user
+    entry_points:
+      - Hub/Atlante del Mondo.md
+    quick_actions:
+      - button: nuova-cultura-z-modelli-worldbuilding-cultura-md
+        label: Nuova cultura
+        use_when: un popolo, costume o tabu cambia luoghi e scelte
+      - button: nuova-lingua-z-modelli-worldbuilding-lingua-md
+        label: Nuova lingua
+        use_when: lingua o scrittura diventano indizio, accesso o identita
+      - button: nuova-era-z-modelli-worldbuilding-era-storica-md
+        label: Nuova era
+        use_when: la storia ha bisogno di una fase riconoscibile
+      - button: nuovo-conflitto-z-modelli-worldbuilding-conflitto-md
+        label: Nuovo conflitto
+        use_when: una tensione geografica o culturale deve produrre gioco
+      - button: cosmologia-z-modelli-worldbuilding-cosmologia-md
+        label: Cosmologia
+        use_when: il mondo ha regole metafisiche che cambiano il tavolo
+    action_groups:
+      orientamento:
+        label: Orientamento mondo
+        purpose: Passare dall'atlante a controllo, profondita e gioco.
+        actions:
+          - button: worldbuilder-worldbuilder-dashboard-2
+            label: Worldbuilder
+            use_when: non sai ancora quale pezzo creare o collegare
+          - button: controllo-worldbuilding-controllo-worldbuilding
+            label: Controllo worldbuilding
+            use_when: vuoi vedere cosa resta superficiale o scollegato
+          - button: worldbuilding-profondo-risorse-worldbuilding-profondo
+            label: Worldbuilding profondo
+            use_when: una scheda ricorrente merita origine, costo e memoria
+          - button: geopolitica-geopolitical-dashboard
+            label: Geopolitica
+            use_when: luoghi e confini devono diventare poteri in attrito
+          - button: economia-e-rotte-economia-e-rotte
+            label: Economia e rotte
+            use_when: viaggi, risorse o passaggi devono pesare sul mondo
+          - button: lore-hub-lore-hub
+            label: Lore hub
+            use_when: vuoi navigare segnali, storia e materiale canonico
+    required_plugins:
+      - Meta Bind
+      - Dataview
+      - Templater
+  controllo_worldbuilding:
+    user_goal: Trovare schede di mondo superficiali, scollegate o non ancora giocabili.
+    audience: user
+    entry_points:
+      - Hub/Controllo Worldbuilding.md
+    quick_actions:
+      - button: atlante-atlante-del-mondo-2
+        label: Atlante
+        use_when: devi vedere geografia, culture, storia e buchi spaziali
+      - button: worldbuilding-profondo-risorse-worldbuilding-profondo-2
+        label: Worldbuilding profondo
+        use_when: una scheda va resa piu viva invece di crearne una nuova
+      - button: bibbia-del-mondo-bibbia-del-mondo
+        label: Bibbia del mondo
+        use_when: devi consolidare tono, canone e principi del mondo
+      - button: economia-e-rotte-economia-e-rotte
+        label: Economia e rotte
+        use_when: mancano risorse, dipendenze, mercati o passaggi
+    action_groups:
+      riparazione:
+        label: Riparazione guidata
+        purpose: Convertire buchi strutturali in azioni concrete.
+        actions:
+          - button: nuova-cultura-z-modelli-worldbuilding-cultura-md
+            label: Nuova cultura
+            use_when: mancano vita quotidiana, tabù o identità sociali
+          - button: nuovo-conflitto-z-modelli-worldbuilding-conflitto-md
+            label: Nuovo conflitto
+            use_when: una tensione non ha ancora posta, cause o possibili paci
+          - button: nuova-relazione-z-modelli-worldbuilding-relazione-md
+            label: Nuova relazione
+            use_when: due entita esistono ma non si influenzano
+          - button: nuovo-segreto-o-mistero-z-modelli-worldbuilding-segreto-o-mistero-md
+            label: Nuovo mistero
+            use_when: manca una verita scopribile a livelli
+    required_plugins:
+      - Meta Bind
+      - Dataview
+      - Templater
+  economia_rotte:
+    user_goal: Rendere viaggi, risorse e mercati capaci di generare pressione di gioco.
+    audience: user
+    entry_points:
+      - Hub/Economia E Rotte.md
+    quick_actions:
+      - button: nuova-rotta-z-modelli-worldbuilding-rotta-md
+        label: Nuova rotta
+        use_when: un passaggio deve creare opportunita, costo o rischio
+      - button: nuova-risorsa-z-modelli-worldbuilding-risorsa-md
+        label: Nuova risorsa
+        use_when: una merce, dipendenza o scarsita muove fazioni
+      - button: nuovo-mercato-z-modelli-worldbuilding-mercato-o-nodo-commerciale-md
+        label: Nuovo mercato
+        use_when: serve un nodo commerciale, pedaggio o strozzatura
+      - button: geopolitica-geopolitical-dashboard
+        label: Geopolitica
+        use_when: economia e confini stanno producendo conflitto
+      - button: lore-hub-lore-hub
+        label: Lore hub
+        use_when: vuoi collegare risorse a storia, culture e segnali
+    action_groups:
+      conseguenze:
+        label: Conseguenze economiche
+        purpose: Trasformare blocchi, merci e rotte in materiale da sessione.
+        actions:
+          - button: nuovo-conflitto-z-modelli-worldbuilding-conflitto-md
+            label: Nuovo conflitto
+            use_when: una risorsa o rotta contesa deve diventare crisi
+          - button: nuova-missione-z-modelli-dm-missione-md
+            label: Nuova missione
+            use_when: una dipendenza economica diventa obiettivo per i PG
+          - button: nuovo-clock-z-modelli-dm-tracciato-md
+            label: Nuovo clock
+            use_when: scarsita, embargo o blocco devono avanzare nel tempo
+    required_plugins:
+      - Meta Bind
+      - Dataview
+      - Templater
+  lore_hub:
+    user_goal: Navigare il lore vivo senza perdere cosa produce segnali, segreti o gioco.
+    audience: user
+    entry_points:
+      - Hub/Lore Hub.md
+    quick_actions:
+      - button: atlante-atlante-del-mondo-2
+        label: Atlante
+        use_when: devi tornare a luoghi, culture e geografia
+      - button: economia-e-rotte-economia-e-rotte-2
+        label: Economia e rotte
+        use_when: il lore riguarda risorse, viaggi o dipendenze
+      - button: calendario-mondi-calendario
+        label: Calendario
+        use_when: feste, stagioni o date devono diventare pressione
+      - button: compendium-hub-compendium-del-mondo-compendium-del-mondo
+        label: Compendium
+        use_when: vuoi raccogliere elementi ricorrenti e materiali del mondo
+    action_groups:
+      cattura_lore:
+        label: Cattura e canone
+        purpose: Decidere se un segnale resta appunto, diventa mistero o entra nel canone.
+        actions:
+          - button: lore-capture-z-modelli-lore-capture-md
+            label: Cattura lore
+            use_when: hai un segnale interessante ma non ancora canonico
+          - button: nuovo-segreto-o-mistero-z-modelli-worldbuilding-segreto-o-mistero-md
+            label: Nuovo mistero
+            use_when: una verita deve essere rivelata gradualmente
+          - button: revisione-lore-revisione-lore
+            label: Revisione lore
+            use_when: devi ripulire o canonizzare materiale disperso
+          - button: controllo-canone-controllo-canone
+            label: Controllo canone
+            use_when: temi contraddizioni, duplicati o segreti esposti
+    required_plugins:
+      - Meta Bind
+      - Dataview
+      - Templater
   stato_campagna:
     user_goal: Leggere missioni, pressioni e conseguenze aperte e scegliere cosa portare al tavolo.
     entry_points:

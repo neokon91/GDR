@@ -91,6 +91,46 @@ const PRIMARY_PATH = [
             "motore-mondo-vivo-motore-mondo-vivo",
             "prossima-sessione-risorse-preparazione-sessione"
         ]
+    },
+    {
+        workflow: "atlante_mondo",
+        page: "Hub/Atlante del Mondo.md",
+        label: "Atlante del Mondo",
+        requiredButtons: [
+            "nuova-cultura-z-modelli-worldbuilding-cultura-md",
+            "nuovo-conflitto-z-modelli-worldbuilding-conflitto-md",
+            "controllo-worldbuilding-controllo-worldbuilding"
+        ]
+    },
+    {
+        workflow: "controllo_worldbuilding",
+        page: "Hub/Controllo Worldbuilding.md",
+        label: "Controllo Worldbuilding",
+        requiredButtons: [
+            "atlante-atlante-del-mondo-2",
+            "worldbuilding-profondo-risorse-worldbuilding-profondo-2",
+            "economia-e-rotte-economia-e-rotte"
+        ]
+    },
+    {
+        workflow: "economia_rotte",
+        page: "Hub/Economia E Rotte.md",
+        label: "Economia E Rotte",
+        requiredButtons: [
+            "nuova-rotta-z-modelli-worldbuilding-rotta-md",
+            "nuova-risorsa-z-modelli-worldbuilding-risorsa-md",
+            "nuovo-mercato-z-modelli-worldbuilding-mercato-o-nodo-commerciale-md"
+        ]
+    },
+    {
+        workflow: "lore_hub",
+        page: "Hub/Lore Hub.md",
+        label: "Lore Hub",
+        requiredButtons: [
+            "atlante-atlante-del-mondo-2",
+            "calendario-mondi-calendario",
+            "lore-capture-z-modelli-lore-capture-md"
+        ]
     }
 ];
 
@@ -102,7 +142,11 @@ const SIMPLE_CALLS = {
     prepara_sessione: /renderWorkflowCommandDeck\(dv,\s*"prepara_sessione",\s*\{\s*mode:\s*"simple"\s*\}\)/,
     gioca_live: /renderWorkflowCommandDeck\(dv,\s*"gioca_live",\s*\{\s*mode:\s*"simple"\s*\}\)/,
     post_sessione: /renderWorkflowCommandDeck\(dv,\s*"post_sessione",\s*\{\s*mode:\s*"simple"\s*\}\)/,
-    fuori_scena: /renderWorkflowCommandDeck\(dv,\s*"fuori_scena",\s*\{\s*mode:\s*"simple"\s*\}\)/
+    fuori_scena: /renderWorkflowCommandDeck\(dv,\s*"fuori_scena",\s*\{\s*mode:\s*"simple"\s*\}\)/,
+    atlante_mondo: /renderWorkflowCommandDeck\(dv,\s*"atlante_mondo",\s*\{\s*mode:\s*"simple"\s*\}\)/,
+    controllo_worldbuilding: /renderWorkflowCommandDeck\(dv,\s*"controllo_worldbuilding",\s*\{\s*mode:\s*"simple"\s*\}\)/,
+    economia_rotte: /renderWorkflowCommandDeck\(dv,\s*"economia_rotte",\s*\{\s*mode:\s*"simple"\s*\}\)/,
+    lore_hub: /renderWorkflowCommandDeck\(dv,\s*"lore_hub",\s*\{\s*mode:\s*"simple"\s*\}\)/
 };
 
 function workflowBlock(text, workflowId) {
