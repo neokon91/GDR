@@ -9,7 +9,7 @@ const REQUIRED_PLUGIN_NATIVE_USER_PAGES = [
 
 const REQUIRED_HUB_EXPERIENCE = [
     ["Hub/1. DM Dashboard.md", "gdr-dm-dashboard", ["Regia DM", "renderActions", "Durante il Gioco"]],
-    ["Hub/Worldbuilder Dashboard.md", "gdr-worldbuilder-dashboard", ["Scriptorium del Mondo", "renderWorldCreationStatus", "Campagna"]],
+    ["Hub/Worldbuilder Dashboard.md", "gdr-worldbuilder-dashboard", ["Scriptorium del Mondo", "renderWorldbuilderNow", "Campagna"]],
     ["Hub/Atlante del Mondo.md", "gdr-atlante-dashboard", ["mappa", "luoghi", "rotte"]],
     ["Hub/Bibbia del Mondo.md", "gdr-world-bible", ["World Anvil locale", "Codex", "renderCodexEditorial"]],
     ["Hub/Campagna da Ambientazione.md", "gdr-campaign-builder", ["campagne", "archi narrativi", "Opportunità"]],

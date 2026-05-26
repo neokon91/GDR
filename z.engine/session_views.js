@@ -447,6 +447,314 @@
     }).join("");
   }
 
+  async function readWorldbuildingCockpit() {
+    return readJsonRel("z.automazioni/data/runtime/worldbuilding_cockpit.json", {
+      surfaces: [],
+      queues: []
+    });
+  }
+
+  function dvItems(dv, value) {
+    const data = dv.array(value ?? []);
+    return typeof data.array === "function" ? data.array() : asArray(value);
+  }
+
+  function hasValue(dv, value) {
+    return dvItems(dv, value).filter(Boolean).length > 0 || hasText(value);
+  }
+
+  function worldbuilderCategory(page) {
+    const category = String(page?.categoria ?? page?.tipo ?? "").trim();
+    if (category) return category;
+    const folder = String(page?.file?.folder ?? "");
+    if (folder.includes("Risorse/Mappe")) return "mappa";
+    if (folder.includes("Mondi/Luoghi")) return "luogo";
+    if (folder.includes("Mondi/Fazioni")) return "fazione";
+    if (folder.includes("Mondi/Missioni")) return "missione";
+    if (folder.includes("Mondi/Personaggi")) return "personaggio";
+    return "nota";
+  }
+
+  function worldbuilderLinkCount(dv, page) {
+    const fields = [
+      "mondo", "campagna", "campagne", "luogo", "luogo_padre", "partenza", "arrivo",
+      "luoghi", "regioni", "culture", "lingue", "religioni", "fazioni", "fazioni_controllanti",
+      "personaggi", "missioni", "conflitti", "sessioni", "relazioni", "risorse",
+      "risorse_trasportate", "rotte", "mercati", "mappe", "propaga_a", "entita_impattate",
+      "connessioni", "collegamenti", "indizi", "segreti"
+    ];
+
+    return fields.reduce((total, key) => total + (hasValue(dv, page?.[key]) ? dvItems(dv, page?.[key]).filter(Boolean).length || 1 : 0), 0);
+  }
+
+  function worldbuilderScope(dv, worldLink = "", campaignLinks = []) {
+    const selectedWorld = linkKey(worldLink);
+    const selectedCampaigns = new Set(dvItems(dv, campaignLinks).map(linkKey).filter(Boolean));
+    const isFolderIndex = page => page?.file?.name === page?.file?.folder?.split("/").pop();
+    const real = page => isReal(page) && !isFolderIndex(page) && page.stato !== "archiviata" && page.stato !== "ignorata";
+    const matchesWorld = page => !selectedWorld || linkKey(page.mondo) === selectedWorld || page.file?.path === selectedWorld;
+    const matchesCampaign = page => {
+      if (!selectedCampaigns.size) return true;
+      const links = dvItems(dv, page.campagne ?? page.campagna ?? page.campagne_attive);
+      return !links.length || links.some(link => selectedCampaigns.has(linkKey(link)));
+    };
+    const inScope = page => real(page) && matchesWorld(page) && matchesCampaign(page);
+    const pages = dv.pages('"Mondi" OR "Campagne" OR "Inbox"')
+      .where(inScope)
+      .array();
+    const maps = dv.pages('"Risorse/Mappe"')
+      .where(page => real(page) && matchesWorld(page))
+      .array();
+
+    return { pages, maps, inScope, selectedWorld, selectedCampaigns };
+  }
+
+  function worldbuilderMissingRows(dv, context) {
+    const rows = [];
+    const add = (page, problem, action, priority = 1) => rows.push({ page, problem, action, priority });
+
+    for (const page of context.pages) {
+      const category = worldbuilderCategory(page);
+      const links = worldbuilderLinkCount(dv, page);
+      if (category === "mondo" && (!hasValue(dv, page.premessa) || !hasValue(dv, page.conflitto_centrale))) {
+        add(page, "mondo senza promessa o conflitto centrale", "Definisci promessa giocabile e tensione principale.", 5);
+      }
+      if (!hasValue(dv, page.mondo) && !["mondo", "risorsa", "lore capture", "dashboard"].includes(category)) {
+        add(page, "scheda senza mondo", "Collega il mondo o archiviala se non serve.", 4);
+      }
+      if (links < 2 && !["mondo", "dashboard"].includes(category)) {
+        add(page, "poche connessioni", "Collega almeno mondo, luogo, fazione, missione o conseguenza.", 3);
+      }
+      if (page.stato === "pronto" && !hasValue(dv, page.uso_al_tavolo) && !hasValue(dv, page.prossima_mossa) && !hasValue(dv, page.player_safe)) {
+        add(page, "pronta ma senza uso", "Scrivi uso_al_tavolo, prossima_mossa o testo player-safe.", 4);
+      }
+      if (category === "luogo" && !hasValue(dv, page.fazioni) && !hasValue(dv, page.governante)) {
+        add(page, "luogo senza potere", "Collega chi controlla, minaccia o usa questo luogo.", 4);
+      }
+      if (category === "luogo" && !hasValue(dv, page.mappa) && !hasValue(dv, page.mappe) && !hasValue(dv, page.coordinates)) {
+        add(page, "luogo senza mappa o coordinate", "Collega una mappa o compila coordinate per l'atlante.", 2);
+      }
+      if (["fazione", "religione", "conflitto", "relazione"].includes(category) && Number(page.pressione ?? 0) > 0 && !hasValue(dv, page.prossima_mossa)) {
+        add(page, "pressione senza prossima mossa", "Decidi cosa fa se i PG non intervengono.", 5);
+      }
+      if (category === "missione" && !hasValue(dv, page.fazioni) && !hasValue(dv, page.luoghi)) {
+        add(page, "missione senza appigli", "Collega luogo, fazione o committente.", 4);
+      }
+    }
+
+    for (const map of context.maps) {
+      if (!hasValue(dv, map.luogo) && !hasValue(dv, map.luoghi)) {
+        add(map, "mappa senza luoghi", "Collega almeno un luogo alla mappa.", 3);
+      }
+      if (map.pubblico === true && !hasValue(dv, map.player_safe) && !hasValue(dv, map.cosa_mostrare)) {
+        add(map, "mappa pubblica senza testo sicuro", "Scrivi cosa possono vedere i giocatori.", 4);
+      }
+    }
+
+    return rows
+      .sort((left, right) => right.priority - left.priority || (right.page?.file?.mtime ?? 0) - (left.page?.file?.mtime ?? 0));
+  }
+
+  function worldbuilderReadyRows(dv, context) {
+    const readyStates = new Set(["pronto", "in gioco", "in corso", "attivo", "accettata"]);
+    return context.pages
+      .filter(page => readyStates.has(String(page.stato ?? "")) || hasValue(dv, page.uso_al_tavolo) || hasValue(dv, page.prossima_mossa))
+      .filter(page => worldbuilderLinkCount(dv, page) >= 2 || hasValue(dv, page.uso_al_tavolo) || hasValue(dv, page.prossima_mossa) || hasValue(dv, page.player_safe))
+      .sort((left, right) => (right.file?.mtime ?? 0) - (left.file?.mtime ?? 0));
+  }
+
+  function worldbuilderPressureRows(dv, context) {
+    return context.pages
+      .filter(page => Number(page.pressione ?? page.pericolo ?? 0) > 0 || hasValue(dv, page.prossima_mossa))
+      .sort((left, right) => Number(right.pressione ?? right.pericolo ?? 0) - Number(left.pressione ?? left.pericolo ?? 0));
+  }
+
+  function worldbuilderPublicRows(dv, context) {
+    const candidates = [...context.pages, ...context.maps];
+    return candidates
+      .filter(page => {
+        const category = worldbuilderCategory(page);
+        return publicCandidate(page, category)
+          || page.pubblico === true
+          || hasValue(dv, page.player_safe)
+          || hasValue(dv, page.versione_giocatori)
+          || (["missione", "luogo", "dispensa", "mappa", "sessione"].includes(category) && ["pronto", "in gioco", "giocata", "consegnato"].includes(String(page.stato ?? "")));
+      })
+      .sort((left, right) => (hasPrivateFields(left) === hasPrivateFields(right) ? 0 : hasPrivateFields(left) ? 1 : -1));
+  }
+
+  function renderWorldbuilderNow(dv, worldLink = "", campaignLinks = []) {
+    const context = worldbuilderScope(dv, worldLink, campaignLinks);
+    const worlds = context.pages.filter(page => worldbuilderCategory(page) === "mondo");
+    const missing = worldbuilderMissingRows(dv, context);
+    const ready = worldbuilderReadyRows(dv, context);
+    const pressureRows = worldbuilderPressureRows(dv, context);
+    const publicRows = worldbuilderPublicRows(dv, context);
+    const mapRows = context.maps.filter(page => hasValue(dv, page.coordinates) || hasValue(dv, page.luogo) || hasValue(dv, page.luoghi));
+    const next = !worlds.length
+      ? ["Fai adesso: crea mondo", "Nessun mondo operativo nel filtro.", "Usa Nuovo mondo guidato e torna qui."]
+      : missing.length
+        ? ["Fai adesso: chiudi un buco", missing[0].problem, missing[0].action]
+        : pressureRows.length
+          ? ["Fai adesso: scegli una pressione", pageTitle(pressureRows[0]), fieldText(pressureRows[0].prossima_mossa) || "Decidi come avanza fuori scena."]
+          : ready.length
+            ? ["Fai adesso: porta al tavolo", pageTitle(ready[0]), fieldText(ready[0].uso_al_tavolo ?? ready[0].prossima_mossa) || "Trasformala in scena, missione o conseguenza."]
+            : ["Fai adesso: crea un appiglio", "Manca materiale giocabile filtrato.", "Crea luogo, fazione o missione con almeno due collegamenti."];
+
+    const cards = [
+      cardHtml({
+        title: next[0],
+        meta: next[1],
+        body: next[2],
+        importa: "Il cockpit privilegia il prossimo passo, non la completezza enciclopedica.",
+        cls: `gdr-info-card compact ${missing.length || !worlds.length ? "gdr-kind-missing" : "gdr-kind-ready"}`
+      }),
+      cardHtml({
+        title: "Cosa manca",
+        meta: `${missing.length} interventi`,
+        body: missing[0]?.problem ?? "Nessun buco pratico evidente.",
+        importa: missing[0]?.action ?? "Passa a pressioni, mappe o materiale player-safe.",
+        link: missing[0]?.page?.file?.path ?? "",
+        cls: `gdr-info-card compact ${missing.length ? "gdr-kind-missing" : "gdr-kind-ready"}`
+      }),
+      cardHtml({
+        title: "Cosa e pronto",
+        meta: `${ready.length} schede`,
+        body: ready[0] ? pageTitle(ready[0]) : "Nessuna scheda pronta nel filtro.",
+        importa: ready[0] ? fieldText(ready[0].uso_al_tavolo ?? ready[0].prossima_mossa ?? ready[0].player_safe) : "Rendi pronto almeno un luogo, potere o obiettivo.",
+        link: ready[0]?.file?.path ?? "",
+        cls: `gdr-info-card compact ${ready.length ? "gdr-kind-ready" : "gdr-kind-missing"}`
+      }),
+      cardHtml({
+        title: "Sotto pressione",
+        meta: `${pressureRows.length} fronti`,
+        body: pressureRows[0] ? pageTitle(pressureRows[0]) : "Nessuna pressione attiva.",
+        importa: pressureRows[0] ? fieldText(pressureRows[0].prossima_mossa) || "Dai una prossima mossa alla pressione piu alta." : "Crea un conflitto, clock o fazione con pressione.",
+        link: pressureRows[0]?.file?.path ?? "",
+        cls: `gdr-info-card compact ${pressureRows.length ? "gdr-kind-ready" : "gdr-kind-missing"}`
+      }),
+      cardHtml({
+        title: "Player-safe",
+        meta: `${publicRows.length} candidati`,
+        body: publicRows[0] ? pageTitle(publicRows[0]) : "Niente da consegnare per ora.",
+        importa: publicRows[0] ? fieldText(publicRows[0].player_safe ?? publicRows[0].recap_pubblico ?? publicRows[0].versione_giocatori) || "Verifica che non contenga campi DM." : "Compila player_safe su dispense, luoghi, mappe o missioni.",
+        link: publicRows[0]?.pubblico === true && !hasPrivateFields(publicRows[0]) ? publicRows[0].file?.path ?? "" : "",
+        cls: `gdr-info-card compact ${publicRows.length ? "gdr-kind-ready" : "gdr-kind-missing"}`
+      }),
+      cardHtml({
+        title: "Mappe",
+        meta: `${mapRows.length} supporti`,
+        body: mapRows[0] ? pageTitle(mapRows[0]) : "Nessuna mappa o coordinata trovata.",
+        importa: mapRows[0] ? fieldText(mapRows[0].uso_al_tavolo ?? mapRows[0].luogo ?? mapRows[0].luoghi) : "Collega coordinate, mappa o layer a un luogo giocabile.",
+        link: mapRows[0]?.file?.path ?? "",
+        cls: `gdr-info-card compact ${mapRows.length ? "gdr-kind-ready" : "gdr-kind-missing"}`
+      })
+    ];
+    const grid = dv.el("div", "", { cls: "gdr-card-grid compact gdr-worldbuilder-now" });
+    grid.innerHTML = cards.join("");
+  }
+
+  function renderWorldbuilderReadiness(dv, worldLink = "", campaignLinks = []) {
+    const context = worldbuilderScope(dv, worldLink, campaignLinks);
+    const missing = worldbuilderMissingRows(dv, context);
+    const ready = worldbuilderReadyRows(dv, context);
+    const pressureRows = worldbuilderPressureRows(dv, context);
+    const publicRows = worldbuilderPublicRows(dv, context);
+    const weakLinks = context.pages.filter(page => !["mondo", "dashboard"].includes(worldbuilderCategory(page)) && worldbuilderLinkCount(dv, page) < 2);
+    const mapRows = context.maps.filter(page => hasValue(dv, page.coordinates) || hasValue(dv, page.luogo) || hasValue(dv, page.luoghi));
+    const stats = [
+      ["Mancano", missing.length, "buchi pratici"],
+      ["Pronte", ready.length, "schede usabili"],
+      ["Pressioni", pressureRows.length, "mosse aperte"],
+      ["Player-safe", publicRows.length, "condivisibili o quasi"],
+      ["Mappe", mapRows.length, "supporti spaziali"],
+      ["Da collegare", weakLinks.length, "note isolate"]
+    ];
+    const grid = dv.el("div", "", { cls: "gdr-stat-grid gdr-worldbuilder-readiness" });
+    grid.innerHTML = stats.map(([label, value, hint]) => `
+      <div class="gdr-stat-card">
+        <div class="gdr-stat-value">${escapeHtml(value)}</div>
+        <div class="gdr-stat-label">${escapeHtml(label)}</div>
+        <div class="gdr-stat-hint">${escapeHtml(hint)}</div>
+      </div>
+    `).join("");
+  }
+
+  async function renderWorldbuilderQueues(dv, worldLink = "", campaignLinks = []) {
+    const cockpit = await readWorldbuildingCockpit();
+    const labels = new Map((cockpit.queues ?? []).map(queue => [queue.id, queue.label]));
+    const context = worldbuilderScope(dv, worldLink, campaignLinks);
+    const missing = worldbuilderMissingRows(dv, context).slice(0, 12);
+    const ready = worldbuilderReadyRows(dv, context).slice(0, 12);
+    const pressureRows = worldbuilderPressureRows(dv, context).slice(0, 12);
+    const publicRows = worldbuilderPublicRows(dv, context).slice(0, 12);
+    const renderTable = (id, headers, rows, empty) => {
+      dv.header(3, labels.get(id) ?? id);
+      if (!rows.length) {
+        dv.paragraph(empty);
+        return;
+      }
+      dv.table(headers, rows);
+    };
+
+    renderTable(
+      "missing",
+      ["Nota", "Problema", "Azione"],
+      missing.map(row => [row.page.file?.link ?? row.page.file?.path, row.problem, row.action]),
+      "Nessun buco pratico evidente con i filtri correnti."
+    );
+    renderTable(
+      "ready",
+      ["Nota", "Uso", "Collegamenti"],
+      ready.map(page => [page.file?.link ?? page.file?.path, fieldText(page.uso_al_tavolo ?? page.prossima_mossa ?? page.player_safe) || page.stato || "", worldbuilderLinkCount(dv, page)]),
+      "Nessuna scheda pronta nel filtro corrente."
+    );
+    renderTable(
+      "pressure",
+      ["Nota", "Pressione", "Prossima mossa"],
+      pressureRows.map(page => [page.file?.link ?? page.file?.path, page.pressione ?? page.pericolo ?? "", fieldText(page.prossima_mossa) || "da decidere"]),
+      "Nessuna pressione attiva nel filtro corrente."
+    );
+    renderTable(
+      "public",
+      ["Nota", "Stato", "Testo sicuro"],
+      publicRows.map(page => [page.file?.link ?? page.file?.path, hasPrivateFields(page) ? "da ripulire" : page.pubblico === true ? "pubblica" : page.stato ?? "", fieldText(page.player_safe ?? page.recap_pubblico ?? page.versione_giocatori) || "da compilare"]),
+      "Nessun materiale player-safe nel filtro corrente."
+    );
+  }
+
+  async function renderWorldbuilderSurfaceLinks(dv) {
+    const cockpit = await readWorldbuildingCockpit();
+    const surfaces = cockpit.surfaces ?? [];
+    if (!surfaces.length) {
+      renderEmptyState(dv, {
+        title: "Superfici non configurate",
+        action: "Rigenera il contratto worldbuilding cockpit dalla pipeline sorgenti.",
+        button: "npm run sync:sources"
+      });
+      return;
+    }
+
+    const grid = dv.el("div", "", { cls: "gdr-card-grid compact gdr-worldbuilder-surfaces" });
+    grid.innerHTML = surfaces.map(surface => {
+      const status = pluginStatus(surface.plugin);
+      const state = status.ok === true
+        ? "attiva"
+        : surface.generated_release
+          ? "generata in release"
+          : "fallback Markdown";
+      return cardHtml({
+        title: surface.label,
+        meta: `${surface.role} · ${state}`,
+        body: surface.action,
+        importa: surface.why,
+        link: surface.target,
+        badge: surface.badge,
+        cls: `gdr-info-card compact ${status.ok === false ? "gdr-kind-missing" : "gdr-kind-ready"}`
+      });
+    }).join("");
+  }
+
   async function renderWorkflowCommandDeck(dv, workflowId, options = {}) {
     const dataPath = "z.automazioni/data/workflows/quick_actions.json";
 
@@ -840,6 +1148,10 @@
     renderWorldCreationStatus,
     renderWorldbuildingFreedom,
     renderWorldbuildingStudio,
+    renderWorldbuilderNow,
+    renderWorldbuilderQueues,
+    renderWorldbuilderReadiness,
+    renderWorldbuilderSurfaceLinks,
     renderPluginTroubleshooting,
     renderOnboardingReadiness,
     renderVaultReadiness,

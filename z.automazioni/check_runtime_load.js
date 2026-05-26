@@ -25,6 +25,10 @@ const REQUIRED_EXPORTS = [
     "renderVaultReadiness",
     "renderWorkflowCommandDeck",
     "renderWorldImpact",
+    "renderWorldbuilderNow",
+    "renderWorldbuilderQueues",
+    "renderWorldbuilderReadiness",
+    "renderWorldbuilderSurfaceLinks",
     "renderWorldbuildingFreedom",
     "renderWorldbuildingStudio"
 ];
@@ -86,6 +90,18 @@ async function main() {
                 limit(count) {
                     return pageCollection(items.slice(0, count));
                 },
+                map(mapper) {
+                    return pageCollection(items.map(mapper));
+                },
+                forEach(callback) {
+                    items.forEach(callback);
+                },
+                some(predicate) {
+                    return items.some(predicate);
+                },
+                first() {
+                    return items[0] ?? null;
+                },
                 array() {
                     return items;
                 },
@@ -95,19 +111,47 @@ async function main() {
             });
             const demoPages = [
                 {
+                    file: { path: "Mondi/Mondo Demo.md", name: "Mondo Demo", link: "Mondi/Mondo Demo.md", folder: "Mondi", mtime: 6 },
+                    categoria: "mondo",
+                    stato: "pronto",
+                    premessa: "Un arcipelago conteso.",
+                    conflitto_centrale: "I fari sacri si spengono.",
+                    fazioni_principali: ["Mondi/Fazioni/Consiglio.md"],
+                    luoghi_iconici: ["Mondi/Luoghi/Luogo Pubblico.md"],
+                    culture_fondative: ["Mondi/Culture/Naviganti.md"]
+                },
+                {
                     file: { path: "Mondi/Luoghi/Luogo Pubblico.md", name: "Luogo Pubblico", link: "Mondi/Luoghi/Luogo Pubblico.md", mtime: 3 },
                     categoria: "luogo",
                     stato: "pronto",
                     pubblico: true,
                     player_safe: "Luogo noto al party.",
-                    segreto: "rivelazione DM"
+                    mondo: "Mondi/Mondo Demo.md",
+                    fazioni: ["Mondi/Fazioni/Consiglio.md"],
+                    coordinates: [45, 9],
+                    uso_al_tavolo: "Scena di trattativa."
+                },
+                {
+                    file: { path: "Mondi/Fazioni/Consiglio.md", name: "Consiglio", link: "Mondi/Fazioni/Consiglio.md", folder: "Mondi/Fazioni", mtime: 5 },
+                    categoria: "fazione",
+                    stato: "in gioco",
+                    mondo: "Mondi/Mondo Demo.md",
+                    pressione: 6,
+                    prossima_mossa: "Chiude il porto.",
+                    luoghi: ["Mondi/Luoghi/Luogo Pubblico.md"],
+                    missioni: ["Mondi/Missioni/Missione Pubblica.md"]
                 },
                 {
                     file: { path: "Mondi/Missioni/Missione Pubblica.md", name: "Missione Pubblica", link: "Mondi/Missioni/Missione Pubblica.md", mtime: 2 },
                     categoria: "missione",
                     stato: "in corso",
                     pubblico: true,
-                    player_safe: "Obiettivo chiaro."
+                    player_safe: "Obiettivo chiaro.",
+                    mondo: "Mondi/Mondo Demo.md",
+                    fazioni: ["Mondi/Fazioni/Consiglio.md"],
+                    luoghi: ["Mondi/Luoghi/Luogo Pubblico.md"],
+                    pressione: 4,
+                    prossima_mossa: "Il rivale arriva prima."
                 },
                 {
                     file: { path: "Mondi/Sessioni/Sessione Giocata.md", name: "Sessione Giocata", link: "Mondi/Sessioni/Sessione Giocata.md", mtime: 1 },
@@ -123,7 +167,10 @@ async function main() {
                     stato: "pronto",
                     pubblico: true,
                     player_safe: "Mappa condivisibile.",
-                    uso: "tavolo"
+                    uso: "tavolo",
+                    mondo: "Mondi/Mondo Demo.md",
+                    luogo: "Mondi/Luoghi/Luogo Pubblico.md",
+                    coordinates: [45, 9]
                 }
             ];
             const pagesForSource = source => {
@@ -137,6 +184,9 @@ async function main() {
                 if (query.includes('"Mondi/Luoghi"')) return demoPages.filter(page => page.file.path.startsWith("Mondi/Luoghi/"));
                 if (query.includes('"Mondi/Dispense"')) return demoPages.filter(page => page.file.path.startsWith("Mondi/Dispense/"));
                 if (query.includes('"Risorse/Mappe"')) return demoPages.filter(page => page.file.path.startsWith("Risorse/Mappe/"));
+                if (query.includes('"Mondi"') || query.includes('"Campagne"') || query.includes('"Inbox"')) {
+                    return demoPages.filter(page => page.file.path.startsWith("Mondi/") || page.file.path.startsWith("Campagne/") || page.file.path.startsWith("Inbox/"));
+                }
                 return [];
             };
             const dv = {
@@ -196,6 +246,22 @@ async function main() {
             views.renderWorldbuildingStudio(dv);
             if (!rendered.some(node => String(node.innerHTML).includes("Studio Worldbuilding"))) {
                 errors.push("renderWorldbuildingStudio: output senza studio worldbuilding");
+            }
+            views.renderWorldbuilderNow(dv);
+            if (!rendered.some(node => String(node.innerHTML).includes("Fai adesso"))) {
+                errors.push("renderWorldbuilderNow: output senza decisione immediata");
+            }
+            views.renderWorldbuilderReadiness(dv);
+            if (!rendered.some(node => String(node.innerHTML).includes("Player-safe"))) {
+                errors.push("renderWorldbuilderReadiness: output senza contatore player-safe");
+            }
+            await views.renderWorldbuilderQueues(dv);
+            if (!rendered.some(node => node.tag === "table" && String(node.text).includes("Chiude il porto"))) {
+                errors.push("renderWorldbuilderQueues: output senza coda pressioni");
+            }
+            await views.renderWorldbuilderSurfaceLinks(dv);
+            if (!rendered.some(node => String(node.innerHTML).includes("Codex editabile"))) {
+                errors.push("renderWorldbuilderSurfaceLinks: output senza superfici operative");
             }
             views.renderPlayerPortalStatus(dv);
             views.renderPublicSafety(dv);

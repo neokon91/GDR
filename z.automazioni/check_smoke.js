@@ -51,6 +51,14 @@ if (!startHere.includes("renderOnboardingReadiness")) {
     errors.push("Smoke statico: Inizia Qui non contiene renderOnboardingReadiness");
 }
 assertNoTechnicalJargon("Inizia Qui", "Inizia Qui.md");
+
+const worldbuilder = readTextRel(ROOT, "Hub/Worldbuilder Dashboard.md");
+for (const marker of ["renderWorldbuilderNow", "renderWorldbuilderReadiness", "renderWorldbuilderQueues", "renderWorldbuilderSurfaceLinks"]) {
+    if (!worldbuilder.includes(marker)) {
+        errors.push(`Smoke statico: Worldbuilder Dashboard non contiene ${marker}`);
+    }
+}
+
 for (const [label, relPath] of [
     ["DM Dashboard", "Hub/1. DM Dashboard.md"],
     ["Worldbuilder Dashboard", "Hub/Worldbuilder Dashboard.md"],

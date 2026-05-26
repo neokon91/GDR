@@ -1,0 +1,140 @@
+id: worldbuilding_cockpit
+purpose: Contratto operativo per trasformare Worldbuilder Dashboard in cockpit decisionale.
+version: 0.1.0
+dashboard:
+  page: Hub/Worldbuilder Dashboard.md
+  workflow: espandi_mondo
+  required_runtime_views:
+    - renderWorldbuilderNow
+    - renderWorldbuilderReadiness
+    - renderWorldbuilderQueues
+    - renderWorldbuilderSurfaceLinks
+  required_visible_sections:
+    - Adesso
+    - Prontezza
+    - Code Operative
+    - Mappe E Superfici
+panels:
+  now:
+    runtime_view: renderWorldbuilderNow
+    promise: Scegliere il prossimo passo senza leggere archivi lunghi.
+    answers:
+      - cosa manca
+      - cosa e pronto
+      - cosa preme
+      - cosa e pubblicabile
+  readiness:
+    runtime_view: renderWorldbuilderReadiness
+    promise: Misurare prontezza operativa con pochi contatori.
+    answers:
+      - note deboli
+      - note pronte
+      - pressioni
+      - mappe
+  queues:
+    runtime_view: renderWorldbuilderQueues
+    promise: Portare in tabella solo le schede su cui agire adesso.
+    answers:
+      - completare
+      - usare al tavolo
+      - propagare
+      - consegnare ai giocatori
+  surfaces:
+    runtime_view: renderWorldbuilderSurfaceLinks
+    promise: Aprire mappe, basi, canvas e campi guidati dal cockpit.
+    answers:
+      - correggere dati
+      - vedere coordinate
+      - disegnare fronti
+      - aggiornare campi
+queues:
+  - id: missing
+    label: Cosa manca
+    table_columns:
+      - Nota
+      - Problema
+      - Azione
+  - id: ready
+    label: Cosa e pronto
+    table_columns:
+      - Nota
+      - Uso
+      - Collegamenti
+  - id: pressure
+    label: Sotto pressione
+    table_columns:
+      - Nota
+      - Pressione
+      - Prossima mossa
+  - id: public
+    label: Player-safe
+    table_columns:
+      - Nota
+      - Stato
+      - Testo sicuro
+surfaces:
+  - id: worldbuilding_base
+    label: Codex editabile
+    plugin: Bases
+    target: z.bases/Worldbuilding.base
+    generated_release: true
+    badge: Base
+    role: correggere stati e collegamenti
+    action: Apri quando molte schede hanno campi da allineare.
+    why: Stato, uso al tavolo, player_safe e connessioni restano modificabili in tabella.
+  - id: atlas_maps
+    label: Atlante con marker
+    plugin: Maps
+    target: z.bases/Atlante Mappe.base
+    generated_release: true
+    badge: Mappa
+    role: vedere coordinate e layer
+    action: Apri quando un luogo deve comparire su mappa o manca un marker.
+    why: Coordinate, icone, colori e layer restano dati, non immagine decorativa.
+  - id: locations_base
+    label: Luoghi operativi
+    plugin: Bases
+    target: z.bases/Luoghi.base
+    generated_release: true
+    badge: Base
+    role: controllare posti giocabili
+    action: Apri quando devi ordinare gerarchie, pericoli, fazioni e missioni.
+    why: Un luogo pronto deve avere legami, rischio e un uso chiaro in scena.
+  - id: factions_base
+    label: Poteri in movimento
+    plugin: Bases
+    target: z.bases/Fazioni.base
+    generated_release: true
+    badge: Base
+    role: ordinare pressioni
+    action: Apri quando devi scegliere chi agisce fuori scena.
+    why: Pressione e prossima_mossa rendono le fazioni utilizzabili senza altra prosa.
+  - id: fronti_excalidraw
+    label: Fronti visuali
+    plugin: Excalidraw
+    target: Risorse/Mappe/Schema Relazioni GDR.excalidraw.md
+    badge: Disegno
+    role: disegnare relazioni mobili
+    action: Apri quando poteri, indizi o pressioni sono piu chiari come schema.
+    why: Il disegno serve prima della normalizzazione in schede e campi.
+  - id: canvas_reti
+    label: Reti di note
+    plugin: Advanced Canvas
+    target: Risorse/Canvas Per GDR.md
+    badge: Rete
+    role: navigare connessioni stabili
+    action: Apri quando i nodi sono gia note reali e vuoi vedere la struttura.
+    why: Canvas aiuta a leggere campagne, fazioni, luoghi, missioni e clock come rete.
+  - id: fileclass_core
+    label: Campi guidati
+    plugin: Metadata Menu
+    target: z.fileclass/luogo.md
+    generated_release: true
+    badge: Campi
+    role: compilare proprieta coerenti
+    action: Usa quando una nota ha campi mancanti o disallineati.
+    why: Le FileClass generano menu e ordine dei campi senza rendere sorgente la cartella z.fileclass.
+contracts:
+  dashboard_uses_runtime_views: true
+  surfaces_must_resolve_to_source_or_generated_release_target: true
+  generated_targets_must_stay_release_only: true

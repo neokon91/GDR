@@ -209,6 +209,65 @@ blocks:
     fallback: |-
       | Incontro | Creature | Luogo | Aggancio |
       | --- | --- | --- | --- |
+  worldbuilder_now:
+    type: dataviewjs
+    runtime_view: renderWorldbuilderNow
+    use_for:
+      - dashboard
+      - worldbuilding
+      - cockpit
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      gdr.renderWorldbuilderNow(dv, dv.current().mondo_attivo, dv.current().campagne_attive);
+    fallback: |-
+      | Scelta | Stato |
+      | --- | --- |
+      | Fai adesso | crea o collega il prossimo elemento vivo |
+  worldbuilder_readiness:
+    type: dataviewjs
+    runtime_view: renderWorldbuilderReadiness
+    use_for:
+      - dashboard
+      - worldbuilding
+      - cockpit
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      gdr.renderWorldbuilderReadiness(dv, dv.current().mondo_attivo, dv.current().campagne_attive);
+    fallback: |-
+      | Area | Conteggio |
+      | --- | --- |
+      | Mancano |  |
+      | Pronte |  |
+      | Pressioni |  |
+  worldbuilder_queues:
+    type: dataviewjs
+    runtime_view: renderWorldbuilderQueues
+    use_for:
+      - dashboard
+      - worldbuilding
+      - cockpit
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      await gdr.renderWorldbuilderQueues(dv, dv.current().mondo_attivo, dv.current().campagne_attive);
+    fallback: |-
+      | Nota | Azione |
+      | --- | --- |
+  worldbuilder_surface_links:
+    type: dataviewjs
+    runtime_view: renderWorldbuilderSurfaceLinks
+    use_for:
+      - dashboard
+      - worldbuilding
+      - cockpit
+      - mappe
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      await gdr.renderWorldbuilderSurfaceLinks(dv);
+    fallback: |-
+      | Superficie | Uso |
+      | --- | --- |
+      | Codex editabile | correggere stati e collegamenti |
+      | Atlante con marker | vedere coordinate e layer |
 contracts:
   dataviewjs_has_no_file_writes: true
   empty_state_required: true
