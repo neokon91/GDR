@@ -47,6 +47,7 @@ function workflowQuickActions(module) {
 
         entries[workflowId] = {
             user_goal: workflow.user_goal ?? "",
+            entry_points: (workflow.entry_points ?? []).map(entry => String(entry)),
             quick_actions: actions.map(action => ({
                 button: String(action.button ?? ""),
                 label: String(action.label ?? ""),

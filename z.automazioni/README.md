@@ -12,6 +12,7 @@ Script usati da Templater, dashboard e manutenzione del vault.
 | `check_release.js` | Valida versione, changelog e verifica automatica della release pulita. |
 | `render_template_factory.py` | Renderizza anteprime TemplateFactory in `Dev/TemplateFactory/examples/generated/`. |
 | `generate_workflow_data.js` | Genera JSON workflow da `workflows.yaml` e verifica che resti sincronizzato. |
+| `check_workflow_quick_actions.js` | Verifica che le pagine operative espongano i pulsanti rapidi dichiarati in YAML. |
 | `audit_template_migration.py` | Confronta preview TemplateFactory e template reali, generando un report di migrazione. |
 | `check_js.js` | Controllo sintattico ricorsivo degli script in `z.automazioni/` e `z.engine/`. |
 | `repo_hygiene.js` | Controllo repository: artefatti locali, note di prova residue e script npm essenziali. |
@@ -62,6 +63,7 @@ Dal root della repo:
 npm run check
 npm run check:templates
 npm run check:workflow-data
+npm run check:workflow-actions
 npm run generate:workflow-data
 npm run render:templates
 npm run audit:templates
