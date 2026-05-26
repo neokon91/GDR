@@ -10,6 +10,7 @@ Script usati da Templater, dashboard e manutenzione del vault.
 | `check_template_factory.py` | Valida moduli YAML, blueprint e rendering Jinja in memoria. |
 | `check_smoke.js` | Valida il gate statico della demo finale e del player-safe prima dello smoke visuale. |
 | `check_release.js` | Valida versione, changelog e verifica automatica della release pulita. |
+| `check_obsidian_user_acceptance.js` | Harness manuale assistito: apre una release stabile in Obsidian, accetta prompt trust/plugin/daemon con AppleScript e verifica le pagine first-run. Non e incluso in `npm run check`. |
 | `run_source_pipeline.py` | Esegue la pipeline unica dichiarata in `source_pipeline.yaml`. |
 | `render_template_factory.py` | Renderizza anteprime locali ignorate o materializza template finali in `z.modelli` dentro output locali/release. |
 | `render_obsidian_config.py` | Genera i JSON di configurazione Obsidian da `obsidian_config.yaml`. |
@@ -70,6 +71,7 @@ npm run check:templates
 npm run check:workflow-data
 npm run check:workflow-actions
 npm run check:workflow-render
+npm run check:obsidian-user -- --accept-prompts
 npm run generate:workflow-data
 npm run render:workflow-actions
 npm run render:templates

@@ -404,7 +404,7 @@ tab: Mappa
 
 ### Mappa Relazionale
 
-![[Risorse/Mappe/Schema Relazioni GDR.excalidraw]]
+[[Risorse/Mappe/Schema Relazioni GDR.excalidraw|Apri schema relazioni]]
 
 
 ```dataview
@@ -635,7 +635,7 @@ LIMIT 16
 ````tabs
 tab: Principali
 
-![[Risorse/Mappe/Schema Relazioni GDR.excalidraw]]
+[[Risorse/Mappe/Schema Relazioni GDR.excalidraw|Apri schema relazioni]]
 
 
 tab: Mondo
