@@ -8,6 +8,7 @@
 - `check:release-quality` valida shape delle azioni Meta Bind, cartelle di creazione, comandi plugin reali e wrapper Templater richiamabili.
 - `check:release-quality` blocca API DataviewJS fragili nei blocchi Markdown utente; la diagnostica plugin deve passare dal runtime `z.engine`.
 - TemplateFactory genera anche il template Avventura, con wrapper Templater dedicato e profilo YAML gia esistente.
+- `metabind_config.yaml` diventa fonte YAML completa per `.obsidian/plugins/obsidian-meta-bind-plugin/data.json`, verificata da `check:metabind-config`.
 - Workflow dichiarativi per dashboard DM, preparazione, live, post-sessione, fuori scena, worldbuilding, atlante, canone, compendium, Bibbia del mondo, economia, lore, motore mondo vivo e iniziativa.
 - `npm run release:demo` genera una release pulita con demo utente inclusa nello ZIP.
 - `generate_demo_world.js` crea `Demo Regno Di Prova.md` e uno scenario minimo con mondo, campagna, luogo, fazione, missione, sessione attiva, clock, incontro, creatura, oggetto, dispensa e conseguenza propagabile.

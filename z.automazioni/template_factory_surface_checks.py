@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import json
 import re
 
 from template_factory_utils import FACTORY, ROOT, known_frontmatter_fields
@@ -100,16 +99,14 @@ def validate_plugin_surface_contracts(modules: dict[str, dict], errors: list[str
 def validate_workflow_quick_actions(modules: dict[str, dict], errors: list[str]) -> None:
     """Valida che le azioni rapide dei flussi puntino a pulsanti Meta Bind reali."""
     workflow_map = modules["workflows"].get("workflows", {}) or {}
-    meta_bind_path = ROOT / ".obsidian/plugins/obsidian-meta-bind-plugin/data.json"
-    meta_bind = json.loads(meta_bind_path.read_text(encoding="utf-8")) if meta_bind_path.exists() else {}
-    configured_button_ids = {
-        str(button.get("id"))
-        for button in meta_bind.get("buttonTemplates", []) or []
-        if button.get("id")
-    }
     button_ids = {
         str(button.get("id"))
         for button in modules["metabind_buttons"].get("buttons", {}).values()
+        if button.get("id")
+    }
+    generated_button_ids = {
+        str(button.get("id"))
+        for button in modules["metabind_config"].get("config", {}).get("buttonTemplates", []) or []
         if button.get("id")
     }
 
@@ -136,7 +133,7 @@ def validate_workflow_quick_actions(modules: dict[str, dict], errors: list[str])
                 fail(f"workflows.{workflow_id}.quick_actions[{index}]: button mancante", errors)
             else:
                 validate_workflow_button_id(workflow_id, f"quick_actions[{index}]", button, errors)
-                if button not in button_ids and button not in configured_button_ids:
+                if button not in button_ids and button not in generated_button_ids:
                     fail(f"workflows.{workflow_id}.quick_actions[{index}]: pulsante non dichiarato ({button})", errors)
             if not (action or {}).get("label"):
                 fail(f"workflows.{workflow_id}.quick_actions[{index}]: label mancante", errors)
@@ -157,7 +154,7 @@ def validate_workflow_quick_actions(modules: dict[str, dict], errors: list[str])
                 fail(f"workflows.{workflow_id}.action_groups[{index}]: button mancante", errors)
             else:
                 validate_workflow_button_id(workflow_id, f"action_groups[{index}]", button, errors)
-                if button not in configured_button_ids:
+                if button not in generated_button_ids:
                     fail(f"workflows.{workflow_id}.action_groups[{index}]: pulsante non configurato in Meta Bind ({button})", errors)
             if not (action or {}).get("label"):
                 fail(f"workflows.{workflow_id}.action_groups[{index}]: label mancante", errors)

@@ -64,6 +64,7 @@ const REQUIRED_FILES = [
     "Dev/TemplateFactory/modules/dataview_blocks.yaml",
     "Dev/TemplateFactory/modules/metabind_inputs.yaml",
     "Dev/TemplateFactory/modules/metabind_buttons.yaml",
+    "Dev/TemplateFactory/modules/metabind_config.yaml",
     "Dev/TemplateFactory/modules/bases_views.yaml",
     "Dev/TemplateFactory/modules/frontmatter_profiles.yaml",
     "Dev/TemplateFactory/modules/runtime_profiles.yaml",

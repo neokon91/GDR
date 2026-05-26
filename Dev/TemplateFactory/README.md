@@ -173,6 +173,7 @@ Il render finale valida anche i blocchi Tabs: ogni blocco ` ````tabs ` deve esse
 | `dataview_blocks.yaml` | Blocchi Dataview/DataviewJS riusabili. |
 | `metabind_inputs.yaml` | Input Meta Bind canonici. |
 | `metabind_buttons.yaml` | Pulsanti Meta Bind canonici. |
+| `metabind_config.yaml` | Configurazione completa Meta Bind da cui viene generato `.obsidian/plugins/obsidian-meta-bind-plugin/data.json`. |
 | `bases_views.yaml` | Contratti per viste `.base`. |
 | `frontmatter_profiles.yaml` | Ordine, default e chiavi del frontmatter generato dagli script. |
 | `runtime_profiles.yaml` | Prompt, opzioni e default usati dagli script Templater sottili. |

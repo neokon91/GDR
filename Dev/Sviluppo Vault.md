@@ -138,7 +138,7 @@ Il vault usa un layer interno sopra Meta Bind, Templater, JS Engine e Metadata M
 
 Componenti:
 
-- Meta Bind Design System: input template globali in `.obsidian/plugins/obsidian-meta-bind-plugin/data.json`.
+- Meta Bind Design System: input template globali generati da `Dev/TemplateFactory/modules/metabind_config.yaml` in `.obsidian/plugins/obsidian-meta-bind-plugin/data.json`.
 - Meta Bind Action Library: pulsanti globali che chiamano template in `z.modelli/azioni`.
 - Templater Wizard Layer: wizard in `z.modelli/wizard` e logica in `z.automazioni/wizard_layer.js`.
 - JS Engine Views: componenti riusabili in `z.engine/gdr_views.js`.
@@ -151,6 +151,8 @@ Regole:
 - quando un campo diventa ricorrente, aggiungilo a Meta Bind input template, Metadata Menu preset e fileClass rilevanti;
 - quando una vista DataviewJS supera poche righe, spostala in `z.engine`;
 - ogni nuovo file essenziale del layer va aggiunto a `REQUIRED_LAYER_FILES` in `z.automazioni/check_vault.js`.
+
+La configurazione Meta Bind non si modifica a mano nel JSON: la fonte e `Dev/TemplateFactory/modules/metabind_config.yaml`, poi `npm run render:metabind-config` materializza `.obsidian/plugins/obsidian-meta-bind-plugin/data.json`. `npm run check:metabind-config` blocca ogni divergenza.
 
 ## Runtime Live E Session Context
 

@@ -48,7 +48,7 @@ Esempio: `z.modelli/dm/Sessione.md` usa `tp.user.sessione`, quindi lo script dev
 
 ## Manutenzione Del Layer Interno
 
-- Se aggiungi un pulsante operativo, registra il template in `.obsidian/plugins/obsidian-meta-bind-plugin/data.json` e aggiungi l'id a `REQUIRED_META_BIND_BUTTONS` in `check_vault.js`.
+- Se aggiungi un pulsante operativo, modifica `Dev/TemplateFactory/modules/metabind_config.yaml`, genera `.obsidian/plugins/obsidian-meta-bind-plugin/data.json` con `npm run render:metabind-config` e aggiungi l'id a `REQUIRED_META_BIND_BUTTONS` solo se diventa obbligatorio per il layer.
 - Se aggiungi un input template globale, aggiorna `REQUIRED_META_BIND_INPUT_TEMPLATES`.
 - Se aggiungi un preset Metadata Menu, aggiorna `REQUIRED_METADATA_MENU_PRESETS`.
 - Se aggiungi un file essenziale al layer, aggiorna `REQUIRED_LAYER_FILES`.
