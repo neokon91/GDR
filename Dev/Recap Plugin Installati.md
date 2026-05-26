@@ -89,7 +89,7 @@ Nota: `table-editor-obsidian` e il plugin mostrato come **Advanced Tables**; `ob
 | Metadata Menu | FileClass in `z.fileclass` | migliorato con nuove classi per incontri, mappe, media, rotte e risorse |
 | Tabs | usato in template e dashboard lunghe | sfruttato bene, da non abusare |
 | Dice Roller | tiri inline e tabelle con block id | sfruttato bene |
-| Calendarium | default importati e `Brumafonda` custom attivo | sfruttato per leggere `fc-*` e dare un calendario diegetico coerente |
+| Calendarium | calendario neutro `Calendario Del Mondo` attivo | sfruttato per leggere `fc-*` e dare un calendario diegetico coerente senza ambientazioni protette |
 | Fantasy Statblocks | creature con `statblock: true` e blocchi `statblock` | buono, ora collegato meglio agli incontri di combattimento |
 | Media Extended | indici media e timestamp | leggero, sufficiente finche non ci sono media reali di campagna |
 | Kanban | tre bacheche operative | base, migliorabile con task piu collegati |
@@ -188,7 +188,7 @@ Beneficia soprattutto: DM che usa musica, immagini, handout o video-reference.
 
 ## Prossime Azioni Consigliate
 
-1. Rifinire mesi, feste e stagioni di `Brumafonda` quando il calendario diegetico della campagna diventa canonico.
+1. Rinominare `Calendario Del Mondo` e rifinire mesi, feste e stagioni solo quando il calendario diegetico della campagna diventa canonico.
 2. Fatto: create FileClass Metadata Menu aggiuntive per `incontro`, `rotta`, `risorsa`, `mercato`, `compendium`, `ricorrenza`, `mappa` e `media`.
 4. Fatto: Hex Cartographer resta opzionale guidato per `regione -> esagoni -> incontri -> conseguenze`.
 5. Fatto: Media Extended e collegato a [[Durante il Gioco]] tramite media con `stato: pronto`.

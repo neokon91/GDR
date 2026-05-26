@@ -6,9 +6,60 @@ stato: pronto
 
 # Profili Plugin
 
-Due profili per orientarsi tra i **27 plugin community** elencati in `.obsidian/community-plugins.json`. Abilita solo ciò che usi: ogni plugin in più aumenta tempo di avvio e superficie di manutenzione.
+Questa pagina spiega gli strumenti inclusi nella release. Il vault arriva gia con plugin community, plugin core e configurazioni principali pronti: al primo avvio non devi scegliere cosa installare.
 
-## Minimo consigliato
+## Gia Incluso Nella Release
+
+Il profilo consegnato e pensato per un DM non tecnico. Tieni attivi i plugin inclusi finche `[[Inizia Qui]]`, dashboard, pulsanti e tabelle funzionano. Disattivare strumenti prima di aver provato il vault puo far comparire codice `dataviewjs`, pulsanti `BUTTON[...]` non renderizzati o template non eseguiti.
+
+### Non Disattivare Subito
+
+| Strumento | Perche serve subito |
+| --- | --- |
+| `dataview` | Dashboard, tabelle, controlli e messaggi di stato. |
+| `templater-obsidian` | Creazione guidata di sessioni, mondi, PNG, luoghi e azioni. |
+| `obsidian-meta-bind-plugin` | Pulsanti, input, toggle e azioni nel corpo delle note. |
+| `metadata-menu` | FileClass, campi guidati e coerenza dei metadata. |
+| `homepage` | Apertura iniziale su [[Inizia Qui]]. |
+| `folder-notes` | Cartelle principali apribili come indici. |
+| `callout-manager` | Callout GDR coerenti e leggibili. |
+| `obsidian-style-settings` | Impostazioni visuali dello snippet `gdr-vault`. |
+
+## Plugin Core Obsidian
+
+Questi plugin core sono abilitati nella release per navigazione, ricerca, proprietà, canvas, workspace e recupero file:
+
+| Plugin core | Uso nel vault |
+| --- | --- |
+| `file-explorer` | Navigazione cartelle e note. |
+| `global-search` | Ricerca nel vault. |
+| `switcher` | Apertura rapida note. |
+| `graph` | Vista grafo quando serve esplorare relazioni. |
+| `backlink` | Collegamenti in ingresso. |
+| `canvas` | Canvas e schemi visuali. |
+| `outgoing-link` | Collegamenti in uscita. |
+| `tag-pane` | Navigazione tag. |
+| `properties` | Frontmatter leggibile e modificabile. |
+| `page-preview` | Anteprima link. |
+| `daily-notes` | Note giornaliere se il DM le usa. |
+| `templates` | Supporto core ai template Obsidian. |
+| `note-composer` | Fusione e divisione note. |
+| `command-palette` | Comandi Obsidian. |
+| `editor-status` | Stato editor. |
+| `bookmarks` | Percorsi pronti nella barra laterale. |
+| `outline` | Indice della nota. |
+| `word-count` | Conteggio parole. |
+| `workspaces` | Layout salvati per gioco e worldbuilding. |
+| `file-recovery` | Recupero versioni locali. |
+| `sync` | Compatibilita con Obsidian Sync se l'utente lo usa. |
+| `bases` | Tabelle native `.base` e viste dati. |
+| `webviewer` | Apertura riferimenti web quando serve. |
+
+## Plugin Community Integrati
+
+Tutti i plugin community sotto sono inclusi e mappati in `Dev/plugin_matrix.json`.
+
+### Base Operativa
 
 Per preparare, giocare e aggiornare il mondo con il flusso Prepara → Gioca → Aggiorna:
 
@@ -23,11 +74,11 @@ Per preparare, giocare e aggiornare il mondo con il flusso Prepara → Gioca →
 | `callout-manager` | Stili callout coerenti con il tema GDR |
 | `obsidian-style-settings` | Palette e densità del snippet `gdr-vault` |
 
-**Snippet CSS:** attiva `gdr-vault` in Impostazioni → Aspetto → Snippet CSS (vedi [[README#Attivare L'Aspetto GDR]]).
+**Snippet CSS:** `gdr-vault` e gia abilitato nella release. Se l'aspetto sembra piatto, controlla Impostazioni -> Aspetto -> Snippet CSS.
 
-## Tavolo completo
+### Tavolo Completo
 
-Aggiungi al minimo quando giochi con combattimenti, mappe, calendario diegetico e generazione rapida:
+Questi strumenti sono gia presenti e diventano utili quando giochi con combattimenti, mappe, calendario diegetico e generazione rapida:
 
 | Plugin | Ruolo |
 |--------|--------|
@@ -51,7 +102,7 @@ Aggiungi al minimo quando giochi con combattimenti, mappe, calendario diegetico 
 | `obsidian-linter` | Formattazione markdown (opzionale in dev) |
 | `obsidian42-brat` | Plugin beta da BRAT (solo se necessario) |
 
-## Elenco completo (27)
+## Elenco Completo Community (27)
 
 Come in `community-plugins.json`:
 
@@ -85,4 +136,4 @@ Come in `community-plugins.json`:
 
 ## Verifica
 
-Dopo aver cambiato i plugin: riavvia Obsidian, apri [[Risorse/Primo Avvio Strumenti]] o [[Risorse/Setup Guidato]], poi [[Risorse/Se Qualcosa Non Funziona]] se qualcosa non si aggiorna.
+Dopo il primo avvio: apri [[Risorse/Primo Avvio Strumenti]] o [[Risorse/Setup Guidato]], poi [[Risorse/Se Qualcosa Non Funziona]] se qualcosa non si aggiorna. Cambia plugin solo dopo aver verificato il percorso base.

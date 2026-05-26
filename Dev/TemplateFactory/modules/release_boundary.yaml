@@ -34,7 +34,7 @@ forbidden_paths:
   - Dev/TemplateFactory/modules/worldbuilding_depth_axes.yaml
   - Dev/TemplateFactory/modules/demo_contract.yaml
   - Mondi/[Demo] Regno di Prova.md
-  - Mondi/Brumafonda Demo.md
+  - Mondi/Porto di Prova Demo.md
   - Campagne/Sale Sotto La Nebbia/Sale Sotto La Nebbia.md
 forbidden_text_markers:
   - idea_originale_riservata
@@ -58,7 +58,10 @@ required_plugins:
 forbidden_automation_prefixes:
   - audit_
   - check_
+  - generate_
+  - import_
   - render_
+  - template_factory_
 bridge_runtime_modules:
   - session_continuity.js
   - session_runtime.js

@@ -53,7 +53,7 @@ Prima di lavorarci, controlla:
 | Fantasy Statblocks | integrato | creature e mostri SRD | verificare rendering visuale in Obsidian dopo import |
 | Initiative Tracker | supportato | incontri pronti, [[Risorse/Iniziativa e Combattimenti]] | mantenere `encounter` solo sui combattimenti preparati |
 | Dice Roller | supportato | template e tabelle rapide | mantenere tabelle brevi, richiamabili e stabili |
-| Calendarium | integrato | sessioni, missioni, dashboard, controllo vault | usare `Brumafonda` come calendario custom e i default come riferimenti disponibili |
+| Calendarium | integrato | sessioni, missioni, dashboard, controllo vault | usare `Calendario Del Mondo` come calendario neutro predefinito |
 | Excalidraw | integrato | `Risorse/Mappe`, Worldbuilder Dashboard, Durante il Gioco, [[Risorse/Excalidraw Per GDR]] | usare per fronti, indizi e scene; nuove mappe in `Risorse/Mappe` con template dedicato |
 | Workspaces | supportato | [[Risorse/Workspaces e Segnalibri]] | salvare layout DM, worldbuilding e manutenzione |
 | Bookmarks | supportato | barra laterale Segnalibri | accesso rapido a pagine vive, non archivio parallelo |
@@ -168,7 +168,7 @@ Configurazione:
 | --- | --- | --- |
 | Dashboard e automazioni | ben sfruttate | Dataview, DataviewJS, Meta Bind e Templater sono la spina dorsale del vault. |
 | Metadata Menu | migliorato | Aggiunte FileClass per `incontro`, `rotta`, `risorsa`, `mercato`, `compendium`, `ricorrenza`, `mappa` e `media`. |
-| Calendarium | integrato con default e custom | Importati i calendari default del plugin e aggiunto `Brumafonda` come calendario custom del vault. |
+| Calendarium | integrato con default neutro | Configurato un calendario generico unico, senza ambientazioni protette o contenuti proprietari. |
 | Statblocks | base funzionante | Creature con `statblock: true`; ora il flusso incontro -> creatura -> iniziativa e documentato. |
 | Media Extended | leggero | Audio/video/immagini sono indicizzati; usarlo meglio solo con media reali di campagna. |
 | Kanban | base | Le bacheche esistono; prossimo passo utile: collegare task a sessioni e missioni reali. |
@@ -194,9 +194,8 @@ Da fare:
 - valutare eventi inline con `span` solo dentro note di sessione o resoconti, dove possono servire piu eventi nella stessa nota;
 - fatto: mostrare nella DM Dashboard le prossime scadenze narrative.
 - fatto: mostrare in [[Mondi/Calendario]] e [[Risorse/Controllo Vault]] le note con data leggibile ma senza `fc-date`.
-- fatto: portati nel vault principale i calendari default del plugin: Harptos, Gregorian, Greyhawk, Galifar e Barovian.
-- fatto: aggiunto `Brumafonda` come calendario custom basato sul layout dei template Calendarium.
-- fatto: impostato `Brumafonda` come calendario predefinito per `Mondi`, `Campagne` e `Inbox`.
+- fatto: sostituiti i calendari di ambientazioni protette con `Calendario Del Mondo`, default neutro rinominabile dal DM.
+- fatto: impostato `Calendario Del Mondo` come calendario predefinito per `Mondi` e `Campagne`.
 - fatto: [[Mondi/Calendario]] legge la configurazione Calendarium e mostra calendari, categorie, eventi interni e data corrente.
 - fatto: [[Risorse/Controllo Vault]] segnala note `fc-date` con `fc-calendar` non presente nella configurazione plugin.
 

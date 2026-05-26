@@ -332,7 +332,7 @@ def validate_link_target_contracts(modules: dict[str, dict], errors: list[str]) 
 
     syntax = link_targets.get("syntax", {})
     samples = {
-        "note": "[[Mondi/Luoghi/Porto Di Brumafonda]]",
+        "note": "[[Mondi/Luoghi/Porto Di Prova]]",
         "section": "[[Mondi/Sessioni/2026-05-28 - La Campana Nella Nebbia#Apertura]]",
         "block": "[[Risorse/Tabelle/Tabelle#^complicazioni]]",
     }

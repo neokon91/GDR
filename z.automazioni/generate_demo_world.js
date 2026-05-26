@@ -8,7 +8,7 @@ const DEMO_WORLD_FILE = "Mondi/[Demo] Regno di Prova.md";
 const DEMO_FILES = [
     DEMO_WORLD_FILE,
     "Campagne/[Demo] Sale Sotto La Nebbia.md",
-    "Mondi/Luoghi/[Demo] Porto Di Brumafonda.md",
+    "Mondi/Luoghi/[Demo] Porto Di Prova.md",
     "Mondi/Fazioni/[Demo] Consorzio Del Sale Nero.md",
     "Mondi/Missioni/[Demo] Recuperare La Campana Sommersa.md",
     "Mondi/Sessioni/[Demo] 2026-05-28 - La Campana Nella Nebbia.md",
@@ -47,7 +47,7 @@ function note(fields, body = "") {
 function demoWorldEntries() {
     const world = "[[Mondi/[Demo] Regno di Prova|Regno di Prova]]";
     const campaign = "[[Campagne/[Demo] Sale Sotto La Nebbia|Sale Sotto La Nebbia]]";
-    const place = "[[Mondi/Luoghi/[Demo] Porto Di Brumafonda|Porto Di Brumafonda]]";
+    const place = "[[Mondi/Luoghi/[Demo] Porto Di Prova|Porto Di Prova]]";
     const faction = "[[Mondi/Fazioni/[Demo] Consorzio Del Sale Nero|Consorzio Del Sale Nero]]";
     const mission = "[[Mondi/Missioni/[Demo] Recuperare La Campana Sommersa|Recuperare La Campana Sommersa]]";
     const session = "[[Mondi/Sessioni/[Demo] 2026-05-28 - La Campana Nella Nebbia|La Campana Nella Nebbia]]";
@@ -104,12 +104,12 @@ function demoWorldEntries() {
             sessioni: [session],
             tracciati: [clock],
             profilo: "demo primo utilizzo",
-            player_safe: "Il party arriva a Brumafonda mentre il porto discute il ritorno della campana sommersa.",
+            player_safe: "Il party arriva a Porto di Prova mentre il porto discute il ritorno della campana sommersa.",
             pubblico: true
         }, "# Sale Sotto La Nebbia\n\nCampagna dimostrativa breve: una pressione economica, una fazione e una prima sessione pronta.")],
-        ["Mondi/Luoghi/[Demo] Porto Di Brumafonda.md", note({
-            id: "demo-porto-di-brumafonda",
-            nome: "Porto Di Brumafonda",
+        ["Mondi/Luoghi/[Demo] Porto Di Prova.md", note({
+            id: "demo-porto-di-prova",
+            nome: "Porto Di Prova",
             categoria: "luogo",
             tipo: "porto",
             fileClass: "luogo",
@@ -123,7 +123,7 @@ function demoWorldEntries() {
             gancio: "Ogni nave sente un rintocco sotto la chiglia durante la nebbia.",
             player_safe: "Porto umido e affollato, pieno di mercanti nervosi e corde salate.",
             pubblico: true
-        }, "# Porto Di Brumafonda\n\nLuogo demo con pressione economica e aggancio alla prima missione.")],
+        }, "# Porto Di Prova\n\nLuogo demo con pressione economica e aggancio alla prima missione.")],
         ["Mondi/Fazioni/[Demo] Consorzio Del Sale Nero.md", note({
             id: "demo-consorzio-del-sale-nero",
             nome: "Consorzio Del Sale Nero",

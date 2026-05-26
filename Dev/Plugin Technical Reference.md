@@ -603,11 +603,11 @@ Contenuto.
 - Sintassi precisa:
 
 ```yaml
-fc-calendar: Brumafonda
-fc-date: "12 Nebbie 1423"
+fc-calendar: Calendario Del Mondo
+fc-date: "1-1-1"
 fc-category: sessione
 fc-display-name: Sessione 03
-fc-end: "13 Nebbie 1423"
+fc-end: "1-1-2"
 ```
 
 - Config file: `.obsidian/plugins/calendarium/data.json`.

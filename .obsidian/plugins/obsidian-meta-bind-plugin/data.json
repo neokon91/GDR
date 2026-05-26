@@ -150,17 +150,6 @@
       "id": "apri-bacheca-post-sessione-z-bacheche-post-sessione"
     },
     {
-      "label": "Apri Demo",
-      "style": "primary",
-      "actions": [
-        {
-          "type": "open",
-          "link": "[[Demo - La Reliquia Spezzata]]"
-        }
-      ],
-      "id": "apri-demo-demo-la-reliquia-spezzata"
-    },
-    {
       "label": "Arco Da Conflitto",
       "style": "primary",
       "actions": [
@@ -273,17 +262,6 @@
         }
       ],
       "id": "campagna-da-regione-z-modelli-dm-campagna-da-regione-md"
-    },
-    {
-      "label": "Canvas Fronti",
-      "style": "primary",
-      "actions": [
-        {
-          "type": "open",
-          "link": "[[Demo - Canvas Fronti.canvas]]"
-        }
-      ],
-      "id": "canvas-fronti-demo-canvas-fronti-canvas"
     },
     {
       "label": "Come Usare I Clock",

@@ -25,15 +25,15 @@ checks:
     - check:release-artifact
   forbidden_source_files:
     - Mondi/[Demo] Regno di Prova.md
-    - Mondi/Brumafonda Demo.md
+    - Mondi/Porto di Prova Demo.md
     - Campagne/Sale Sotto La Nebbia/Sale Sotto La Nebbia.md
     - Mondi/Culture/Custodi Delle Saline.md
     - Mondi/Fazioni/Consorzio Del Sale Nero.md
     - Mondi/Religioni/Culto Della Lanterna Bassa.md
-    - Mondi/Luoghi/Porto Di Brumafonda.md
+    - Mondi/Luoghi/Porto Di Prova.md
     - Mondi/Mercati/Mercato Del Sale Nero.md
-    - Risorse/Mappe/Mappa Pubblica Di Brumafonda.md
-    - Mondi/Dispense/Avviso Della Dogana Di Brumafonda.md
+    - Risorse/Mappe/Mappa Pubblica Di Porto di Prova.md
+    - Mondi/Dispense/Avviso Della Dogana Di Porto di Prova.md
     - Mondi/Missioni/Recuperare La Campana Sommersa.md
     - Mondi/Sessioni/2026-05-28 - La Campana Nella Nebbia.md
     - Mondi/Timeline/La Marea Ha Preso Il Faro Vecchio.md
