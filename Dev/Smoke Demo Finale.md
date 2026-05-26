@@ -12,7 +12,7 @@ La demo finale non vive più come note sorgente mantenute a mano.
 
 Regola attiva: la demo finale resta l'ultima cosa. Va generata solo a fine ciclo, da script, dopo che template, runtime, fileClass, controlli e viste operative sono stabili. Fino ad allora `npm run check` deve verificare il prodotto senza pretendere contenuti demo.
 
-La fixture M11 generata da `npm run generate:demo-fixture` non e la demo finale: serve solo a provare la catena tecnica scelta -> conseguenza -> propagazione -> materiale D&D collegato al mondo.
+La fixture M11 generata da `npm run generate:demo-fixture` non e la demo finale: serve solo a provare la catena tecnica scelta -> conseguenza -> propagazione -> materiale D&D collegato al mondo. Anche la demo minima "Regno di Prova" va generata con `npm run generate:demo-world` dentro `dist/`, non mantenuta in `Mondi/`.
 
 ## Stato
 

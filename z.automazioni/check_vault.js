@@ -179,6 +179,7 @@ const REQUIRED_HUB_EXPERIENCE = [
     ["Hub/Compendium Del Mondo.md", "gdr-compendium-dashboard", ["Originale, non-SRD", "Compendium", "tab:"]]
 ];
 const FORBIDDEN_MANUAL_DEMO_FILES = [
+    "Mondi/[Demo] Regno di Prova.md",
     "Mondi/Brumafonda Demo.md",
     "Campagne/Sale Sotto La Nebbia/Sale Sotto La Nebbia.md",
     "Mondi/Culture/Custodi Delle Saline.md",

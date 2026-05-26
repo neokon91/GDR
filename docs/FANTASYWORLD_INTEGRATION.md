@@ -24,7 +24,7 @@ FantasyWorld non va importato in blocco: va usato come laboratorio da cui promuo
 
 | Area FantasyWorld | Valore per GDR | Azione consigliata |
 |---|---|---|
-| `tests/test_srd.py` | Contratti meccanici semplici e verificabili per classi, abilita, talenti, point buy e background. | Portare test equivalenti in `z.automazioni/check_*` o in un gate dedicato `check:srd-character-data`, evitando pytest come dipendenza runtime del vault. |
+| `tests/test_srd.py` | Contratti meccanici semplici e verificabili per classi, abilita, talenti, point buy e background. | Portato il primo gate equivalente in `check:srd-character-data`; estenderlo quando entrano talenti/origini completi, evitando pytest come dipendenza runtime del vault. |
 | `YAML/yaml2json/srd/talenti.yaml` | Talenti modellati come scelte, prerequisiti e benefici, non solo testo. | Estendere `srd_character_build.yaml` con talenti e scelte meccaniche quando il wizard PG deve superare il livello 1. |
 | `JINJA/components/macro.jinja` | Macro riusabili per `VIEW`, `INPUT`, bonus caratteristica, tiri salvezza e abilita. | Mantenere la versione GDR in `Dev/TemplateFactory/jinja/macros/pg_mechanics.j2` e aggiungere controlli contro macro Meta Bind non dichiarate. |
 | `JS/creaPersonaggio.js` | Sequenza guidata completa: classe, specie, background, competenze, statistiche, HP, tratti. | Continuare ad assorbire solo la logica di scelta in `z.automazioni/pg.js`, usando `helpers.js` e campi narrativi GDR. |
@@ -43,11 +43,11 @@ FantasyWorld non va importato in blocco: va usato come laboratorio da cui promuo
 
 ## Backlog consigliato
 
-1. Aggiungere un gate `check:srd-character-data` che replichi i test utili di FantasyWorld: statistiche valide, abilita con stat valida, classi/background/talenti coerenti, point buy completo.
-2. Estendere `srd_character_build.yaml` con talenti e scelte del livello 1, mantenendo slug e label allineati al resto del vault.
-3. Portare gli assi tematici in un modulo dichiarativo piccolo e selettivo, iniziando da fazione, cultura, magia e luogo.
-4. Aggiungere controlli statici sulle tabs generate: tab non vuoti, separatori corretti, niente nesting profondo nei template utente.
-5. Usare la cosmologia FantasyWorld solo come profilo opzionale per mondi ad alta componente metafisica.
+1. Estendere `srd_character_build.yaml` con talenti e scelte del livello 1, mantenendo slug e label allineati al resto del vault.
+2. Portare gli assi tematici in un modulo dichiarativo piccolo e selettivo, iniziando da fazione, cultura, magia e luogo.
+3. Aggiungere controlli statici sulle tabs generate: tab non vuoti, separatori corretti, niente nesting profondo nei template utente.
+4. Usare la cosmologia FantasyWorld solo come profilo opzionale per mondi ad alta componente metafisica.
+5. Tenere ogni demo sorgente fuori dal vault: usare generatori (`generate:demo-world`, `generate:demo-fixture`) e artefatti in `dist/`.
 
 ## Pipeline GDR (non duplicare converter.py)
 

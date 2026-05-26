@@ -4,8 +4,9 @@
   "private": true,
   "description": "Vault Obsidian per preparare e gestire campagne GDR fantasy in italiano.",
   "scripts": {
-    "check": "npm run import:srd-data && node z.automazioni/check_vault.js && npm run check:templates && npm run check:metadata && npm run check:smoke && npm run check:m11 && npm run check:release && npm run check:importers && npm run check:release-artifact && npm run check:repo && npm run check:js && npm run check:diff",
+    "check": "npm run import:srd-data && npm run check:srd-character-data && node z.automazioni/check_vault.js && npm run check:templates && npm run check:metadata && npm run check:smoke && npm run check:m11 && npm run check:release && npm run check:importers && npm run check:release-artifact && npm run check:repo && npm run check:js && npm run check:diff",
     "import:srd-data": "node z.automazioni/import_srd_character_data.js",
+    "check:srd-character-data": "node z.automazioni/check_srd_character_data.js",
     "check:layer": "node z.automazioni/check_vault.js",
     "check:templates": "python3 z.automazioni/check_template_factory.py",
     "check:metadata": "python3 z.automazioni/render_metadata_surfaces.py --check",
@@ -23,6 +24,7 @@
     "check:diff": "git diff --check",
     "clean:repo": "node z.automazioni/repo_hygiene.js --fix",
     "generate:demo-fixture": "node z.automazioni/generate_demo_fixture.js --out dist/vault-gdr-clean --force",
+    "generate:demo-world": "node z.automazioni/generate_demo_world.js --out dist/vault-gdr-clean --force",
     "import:map": "node z.automazioni/import_map.js",
     "import:srd": "node z.automazioni/import_srd.js",
     "import:azgaar": "node z.automazioni/import_azgaar_geojson.js",
