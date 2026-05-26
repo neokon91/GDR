@@ -7,6 +7,7 @@ policy:
     - Dev/TemplateFactory/jinja/**/*.j2
     - z.automazioni/render_*.py
     - z.automazioni/generate_*.js
+    - z.automazioni/run_source_pipeline.py
   generated_layers:
     - z.modelli/**/*.md
     - z.modelli/.templatefactory-manifest.json
@@ -23,6 +24,10 @@ policy:
     - z.modelli/
   rule: I file generati non sono fonte di verita. Se divergono dai sorgenti YAML/Jinja, fallisce npm run check.
 artifacts:
+  source_pipeline:
+    source: Dev/TemplateFactory/modules/source_pipeline.yaml
+    runner: z.automazioni/run_source_pipeline.py
+    check: npm run check:source-pipeline
   template_materialized:
     source: Dev/TemplateFactory/modules/template_blueprints.yaml
     jinja: Dev/TemplateFactory/jinja

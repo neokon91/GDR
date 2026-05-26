@@ -53,6 +53,8 @@ Non introdurre generatori opachi: ogni JSON prodotto deve indicare `generated_by
 ## Comandi
 
 ```bash
+npm run sync:sources
+npm run check:source-pipeline
 npm run check:templates
 npm run check:workflow-data
 npm run check:metadata
@@ -61,6 +63,8 @@ npm run render:metadata
 npm run generate:workflow-data
 npm run audit:templates
 ```
+
+`sync:sources` e `check:source-pipeline` leggono `modules/source_pipeline.yaml`: e il punto unico per capire quali YAML/Jinja/codice utile generano gli output richiesti dal vault.
 
 `render:templates` scrive solo anteprime locali ignorate in `Dev/TemplateFactory/examples/generated/`. Non modifica `z.modelli`, `z.fileclass` o `z.bases`.
 

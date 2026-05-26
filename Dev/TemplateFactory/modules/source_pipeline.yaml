@@ -1,0 +1,138 @@
+id: source_pipeline
+purpose: Pipeline unica YAML/Jinja/codice utile -> output richiesti dal vault Obsidian.
+version: 0.1.0
+policy:
+  source_roots:
+    - Dev/TemplateFactory/modules
+    - Dev/TemplateFactory/jinja
+    - z.automazioni
+    - z.engine
+  rule: Per sviluppo umano partire da questa pipeline; i singoli script restano dettagli implementativi.
+  no_repo_output_roots:
+    - dist
+    - z.modelli
+    - Dev/TemplateFactory/examples/generated
+steps:
+  srd_character_data:
+    purpose: Converte YAML SRD personaggio in JSON runtime per PG.
+    sources:
+      - Dev/TemplateFactory/modules/srd_character_build.yaml
+    outputs:
+      - z.automazioni/data/srd/core.json
+      - z.automazioni/data/srd/opzioni_personaggio.json
+    render:
+      - node
+      - z.automazioni/import_srd_character_data.js
+    check:
+      - node
+      - z.automazioni/check_srd_character_data.js
+  obsidian_config:
+    purpose: Genera i JSON Obsidian controllati dal progetto.
+    sources:
+      - Dev/TemplateFactory/modules/obsidian_config.yaml
+    outputs:
+      - .obsidian/**/*.json
+    render:
+      - python3
+      - z.automazioni/render_obsidian_config.py
+    check:
+      - python3
+      - z.automazioni/render_obsidian_config.py
+      - --check
+  plugin_matrix:
+    purpose: Genera la matrice operativa dei plugin.
+    sources:
+      - Dev/TemplateFactory/modules/plugin_matrix.yaml
+    outputs:
+      - Dev/plugin_matrix.json
+    render:
+      - python3
+      - z.automazioni/render_plugin_matrix.py
+    check:
+      - python3
+      - z.automazioni/render_plugin_matrix.py
+      - --check
+  templater_wrappers:
+    purpose: Genera i wrapper richiesti da Templater nella user_scripts_folder.
+    sources:
+      - Dev/TemplateFactory/modules/templater_wrappers.yaml
+    outputs:
+      - z.automazioni/templater/*.js
+    render:
+      - python3
+      - z.automazioni/render_templater_wrappers.py
+    check:
+      - python3
+      - z.automazioni/render_templater_wrappers.py
+      - --check
+  metabind_config:
+    purpose: Assembla la configurazione Meta Bind da impostazioni, input e pulsanti YAML.
+    sources:
+      - Dev/TemplateFactory/modules/metabind_config.yaml
+      - Dev/TemplateFactory/modules/metabind_inputs.yaml
+      - Dev/TemplateFactory/modules/metabind_buttons.yaml
+    outputs:
+      - .obsidian/plugins/obsidian-meta-bind-plugin/data.json
+    render:
+      - python3
+      - z.automazioni/render_metabind_config.py
+    check:
+      - python3
+      - z.automazioni/render_metabind_config.py
+      - --check
+  workflow_data:
+    purpose: Genera quick_actions.json da workflows.yaml.
+    sources:
+      - Dev/TemplateFactory/modules/workflows.yaml
+    outputs:
+      - z.automazioni/data/workflows/quick_actions.json
+    render:
+      - node
+      - z.automazioni/generate_workflow_data.js
+    check:
+      - node
+      - z.automazioni/generate_workflow_data.js
+      - --check
+  workflow_blocks:
+    purpose: Renderizza blocchi azioni rapide dentro le pagine operative.
+    sources:
+      - Dev/TemplateFactory/modules/workflows.yaml
+      - z.automazioni/data/workflows/quick_actions.json
+    outputs:
+      - Hub/**/*.md
+      - Risorse/**/*.md
+      - z.bacheche/**/*.md
+    render:
+      - node
+      - z.automazioni/render_workflow_quick_actions.js
+    check:
+      - node
+      - z.automazioni/render_workflow_quick_actions.js
+      - --check
+  template_previews:
+    purpose: Verifica blueprint YAML e Jinja senza materializzare z.modelli nel repo sorgente.
+    sources:
+      - Dev/TemplateFactory/modules/template_blueprints.yaml
+      - Dev/TemplateFactory/jinja
+    outputs:
+      - memoria
+    render:
+      - python3
+      - z.automazioni/check_template_factory.py
+    check:
+      - python3
+      - z.automazioni/check_template_factory.py
+  metadata_surfaces:
+    purpose: Verifica fileClass/Bases derivate dai profili metadata senza scrivere output nel repo.
+    sources:
+      - Dev/TemplateFactory/modules/frontmatter_profiles.yaml
+    outputs:
+      - memoria
+    render:
+      - python3
+      - z.automazioni/render_metadata_surfaces.py
+      - --check
+    check:
+      - python3
+      - z.automazioni/render_metadata_surfaces.py
+      - --check
