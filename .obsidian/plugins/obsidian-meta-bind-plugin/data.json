@@ -587,7 +587,7 @@
       "actions": [
         {
           "type": "command",
-          "command": "fantasy-content-generator:open-generator"
+          "command": "fantasy-content-generator:open-fantasy-generator"
         }
       ],
       "id": "generatore-fantasy-fantasy-content-generator-open-generator"
@@ -598,7 +598,7 @@
       "actions": [
         {
           "type": "command",
-          "command": "fantasy-content-generator:open-generator"
+          "command": "fantasy-content-generator:open-fantasy-generator"
         }
       ],
       "id": "generatore-fantasy-fantasy-content-generator-open-generator-2"

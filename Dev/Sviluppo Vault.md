@@ -240,7 +240,7 @@ Prima di una release o dopo modifiche a template, script e plugin, esegui:
 npm run check
 ```
 
-Il controllo verifica JSON di configurazione, plugin obbligatori inclusi e abilitati, wikilink rotti o ambigui, percorsi `templateFile` usati dai pulsanti Meta Bind, helper Templater con wrapper funzione esistente in `z.automazioni/templater`, target di Iconize, riferimenti Obsidian obsoleti, sessioni multiple attive, indice GPT, frontmatter operativo, categorie/stati/tipi ragionevoli, note live senza sessione o mondo, campi minimi per categoria, file essenziali del plugin layer interno, input template Meta Bind, button template operativi, preset Metadata Menu, igiene repository e sintassi JS in `z.automazioni` e `z.engine`. SRD e note indice sono esclusi dai controlli che produrrebbero falsi positivi.
+Il controllo verifica JSON di configurazione, plugin obbligatori inclusi e abilitati, wikilink rotti o ambigui, percorsi `templateFile` usati dai pulsanti Meta Bind, cartelle `folderPath`, command plugin reali, helper Templater con wrapper funzione esistente in `z.automazioni/templater`, target di Iconize, riferimenti Obsidian obsoleti, sessioni multiple attive, indice GPT, frontmatter operativo, categorie/stati/tipi ragionevoli, note live senza sessione o mondo, campi minimi per categoria, file essenziali del plugin layer interno, input template Meta Bind, button template operativi, preset Metadata Menu, igiene repository e sintassi JS in `z.automazioni` e `z.engine`. SRD e note indice sono esclusi dai controlli che produrrebbero falsi positivi.
 
 Se `npm` non e disponibile, il comando equivalente e:
 

@@ -14,7 +14,15 @@ const WORKFLOWS = "Dev/TemplateFactory/modules/workflows.yaml";
 const TEMPLATER_DIR = "z.automazioni/templater";
 const IGNORED_DIRS = new Set([".git", "node_modules", "dist"]);
 const BUTTON_REF_PATTERN = /BUTTON\[([^\]\n]+)\]/g;
+const META_BIND_BUTTON_ID_PATTERN = /^[A-Za-z0-9][A-Za-z0-9_-]*$/;
 const errors = [];
+
+const ALLOWED_META_BIND_ACTION_TYPES = new Set([
+    "command",
+    "open",
+    "runTemplaterFile",
+    "templaterCreateNote"
+]);
 
 const REQUIRED_META_BIND_INPUTS = [
     "mondo",
@@ -150,6 +158,33 @@ function resolveObsidianTarget(target, root = ROOT) {
     }).some(file => path.basename(rel(root, file), path.extname(file)) === base);
 }
 
+function validateObsidianCommand(buttonId, command, communityPlugins, root = ROOT) {
+    const commandId = String(command ?? "").trim();
+    const match = commandId.match(/^([^:]+):(.+)$/);
+    if (!match) {
+        fail(`Meta Bind: ${buttonId} usa command non qualificato (${commandId})`);
+        return;
+    }
+
+    const [, pluginId, localCommandId] = match;
+    if (!communityPlugins.includes(pluginId)) {
+        fail(`Meta Bind: ${buttonId} usa command di plugin non abilitato (${pluginId})`);
+        return;
+    }
+
+    const pluginMain = path.join(root, ".obsidian/plugins", pluginId, "main.js");
+    if (!fs.existsSync(pluginMain)) {
+        fail(`Meta Bind: ${buttonId} usa command di plugin senza main.js (${pluginId})`);
+        return;
+    }
+
+    const source = fs.readFileSync(pluginMain, "utf8");
+    const commandPattern = new RegExp(`\\bid\\s*:\\s*["'\`]${localCommandId.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}["'\`]`);
+    if (!commandPattern.test(source)) {
+        fail(`Meta Bind: ${buttonId} usa command non trovato nel plugin ${pluginId} (${localCommandId})`);
+    }
+}
+
 function dataviewBlocks(text) {
     const normalized = text
         .split(/\r?\n/)
@@ -218,6 +253,7 @@ function validatePluginContract() {
 }
 
 function validateRuntimeConfig(root = ROOT) {
+    const communityPlugins = readJsonRel(".obsidian/community-plugins.json", root, []);
     const dataview = readJsonRel(".obsidian/plugins/dataview/data.json", root);
     if (dataview.enableDataviewJs !== true) fail("Dataview: enableDataviewJs deve essere true");
     if (dataview.enableInlineDataviewJs !== true) fail("Dataview: enableInlineDataviewJs deve essere true");
@@ -233,7 +269,7 @@ function validateRuntimeConfig(root = ROOT) {
     for (const name of REQUIRED_META_BIND_INPUTS) {
         if (!inputNames.has(name)) fail(`Meta Bind: input template mancante (${name})`);
     }
-    validateMetaBindTargets(metaBind, root, root === OUT);
+    validateMetaBindTargets(metaBind, root, root === OUT, communityPlugins);
 
     const metadataMenu = readJsonRel(".obsidian/plugins/metadata-menu/data.json", root);
     if (metadataMenu.classFilesPath !== "z.fileclass/") fail("Metadata Menu: classFilesPath deve essere z.fileclass/");
@@ -255,9 +291,10 @@ function validateRuntimeConfig(root = ROOT) {
     }
 }
 
-function validateMetaBindTargets(metaBind, root, firstRun) {
+function validateMetaBindTargets(metaBind, root, firstRun, communityPlugins = []) {
     const buttons = metaBind.buttonTemplates ?? [];
     const buttonIds = new Set(buttons.map(button => button.id));
+    if (buttonIds.size !== buttons.length) fail("Meta Bind: buttonTemplates contiene id duplicati");
     if (firstRun) {
         for (const button of REQUIRED_FIRST_RUN_BUTTONS) {
             if (!buttonIds.has(button)) fail(`Meta Bind: pulsante first-run mancante (${button})`);
@@ -265,13 +302,45 @@ function validateMetaBindTargets(metaBind, root, firstRun) {
     }
 
     for (const button of buttons) {
+        if (!META_BIND_BUTTON_ID_PATTERN.test(String(button.id ?? ""))) {
+            fail(`Meta Bind: id pulsante non valido (${button.id})`);
+        }
+        if (!String(button.label ?? "").trim()) {
+            fail(`Meta Bind: ${button.id} senza label visibile`);
+        }
+        if (!Array.isArray(button.actions) || !button.actions.length) {
+            fail(`Meta Bind: ${button.id} senza azioni`);
+            continue;
+        }
         for (const action of button.actions ?? []) {
-            if ((action.type === "templaterCreateNote" || action.type === "runTemplaterFile") && action.templateFile && !existsRel(action.templateFile, root)) {
-                fail(`Meta Bind: ${button.id} punta a template mancante ${action.templateFile}`);
+            if (!ALLOWED_META_BIND_ACTION_TYPES.has(action.type)) {
+                fail(`Meta Bind: ${button.id} usa action type non contrattualizzato (${action.type})`);
+                continue;
+            }
+            if (action.type === "templaterCreateNote" || action.type === "runTemplaterFile") {
+                if (!String(action.templateFile ?? "").trim()) {
+                    fail(`Meta Bind: ${button.id} azione Templater senza templateFile`);
+                } else if (!existsRel(action.templateFile, root)) {
+                    fail(`Meta Bind: ${button.id} punta a template mancante ${action.templateFile}`);
+                }
+            }
+            if (action.type === "templaterCreateNote") {
+                if (!String(action.folderPath ?? "").trim()) {
+                    fail(`Meta Bind: ${button.id} crea nota senza folderPath`);
+                } else if (!fs.existsSync(path.join(root, action.folderPath)) || !fs.statSync(path.join(root, action.folderPath)).isDirectory()) {
+                    fail(`Meta Bind: ${button.id} crea nota in cartella mancante ${action.folderPath}`);
+                }
+                if (typeof action.openNote !== "boolean") {
+                    fail(`Meta Bind: ${button.id} crea nota senza openNote booleano`);
+                }
             }
             if (action.type === "open") {
+                if (!String(action.link ?? "").trim()) fail(`Meta Bind: ${button.id} azione open senza link`);
                 const target = String(action.link ?? "").match(/\[\[([^\]]+)\]\]/)?.[1];
                 if (target && !resolveObsidianTarget(target, root)) fail(`Meta Bind: ${button.id} apre target mancante ${target}`);
+            }
+            if (action.type === "command") {
+                validateObsidianCommand(button.id, action.command, communityPlugins, root);
             }
         }
     }
@@ -341,6 +410,10 @@ function validateTemplaterWrappers(root = ROOT) {
         : [];
     if (wrappers.length < 50) fail(`Templater: wrapper insufficienti (${wrappers.length})`);
     const wrapperNames = new Set(wrappers.map(file => path.basename(file, ".js")));
+    for (const file of walk(templaterRoot)) {
+        if (!file.endsWith(".js")) fail(`${rel(root, file)}: Templater user_scripts_folder deve contenere solo wrapper JS`);
+        if (path.dirname(file) !== templaterRoot) fail(`${rel(root, file)}: wrapper Templater annidato, non richiamabile come tp.user diretto`);
+    }
 
     for (const file of wrappers) {
         try {
