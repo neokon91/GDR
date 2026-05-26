@@ -23,6 +23,7 @@ function markers(workflowId) {
 function renderBlock(workflowId, workflow) {
     const lines = [];
     const plugins = workflow.required_plugins ?? [];
+    const actionGroups = workflow.action_groups ?? {};
     lines.push(markers(workflowId).start);
     lines.push("> [!regia] Azioni rapide");
     lines.push(`> ${workflow.user_goal}`);
@@ -35,6 +36,17 @@ function renderBlock(workflowId, workflow) {
         lines.push(">");
         lines.push(`> **${action.label}** - ${action.use_when}`);
         lines.push(`> \`BUTTON[${action.button}]\``);
+    }
+
+    for (const group of Object.values(actionGroups)) {
+        lines.push(">");
+        lines.push(`> [!regia]- ${group.label}`);
+        if (group.purpose) lines.push(`> ${group.purpose}`);
+        for (const action of group.actions ?? []) {
+            lines.push(">");
+            lines.push(`> **${action.label}** - ${action.use_when}`);
+            lines.push(`> \`BUTTON[${action.button}]\``);
+        }
     }
 
     lines.push(markers(workflowId).end);

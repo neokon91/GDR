@@ -91,6 +91,76 @@ workflows:
       - button: post-sessione-guidato-risorse-post-sessione-guidato
         label: Chiudi sessione
         use_when: il tavolo finisce
+    action_groups:
+      cattura_live:
+        label: Cattura live
+        purpose: Creare note grezze durante il tavolo senza decidere subito la struttura definitiva.
+        actions:
+          - button: evento-live-z-modelli-live-evento-md
+            label: Evento live
+            use_when: succede qualcosa che potrebbe diventare canone
+          - button: png-improvvisato-z-modelli-live-png-md
+            label: PNG improvvisato
+            use_when: compare una persona non preparata
+          - button: luogo-improvvisato-z-modelli-live-luogo-md
+            label: Luogo improvvisato
+            use_when: il party entra in un posto non preparato
+          - button: nota-grezza-z-modelli-live-nota-grezza-md
+            label: Nota grezza
+            use_when: devi catturare velocemente senza tassonomia
+          - button: conseguenza-z-modelli-live-conseguenza-md
+            label: Conseguenza live
+            use_when: una scelta produce un effetto da risolvere dopo
+      supporto_tavolo:
+        label: Supporto al tavolo
+        purpose: Aprire strumenti che servono durante la sessione senza cercarli nel vault.
+        actions:
+          - button: preparazione-sessione-risorse-preparazione-sessione
+            label: Preparazione
+            use_when: devi tornare alle ancore della sessione
+          - button: nuovo-incontro-z-modelli-dm-incontro-md
+            label: Nuovo incontro
+            use_when: serve una scena meccanica o un combattimento
+          - button: party-control-hub-party-control
+            label: Party control
+            use_when: devi controllare PG, risorse e stato del party
+          - button: vista-giocatori-hub-vista-giocatori-vista-giocatori
+            label: Vista giocatori
+            use_when: devi verificare cosa e mostrabile
+      strumenti_avanzati:
+        label: Strumenti avanzati
+        purpose: Creare o aprire materiale strutturato solo quando il tavolo lo richiede.
+        actions:
+          - button: nuovo-png-z-modelli-personaggio-png-md
+            label: Nuovo PNG
+            use_when: un PNG improvvisato diventa ricorrente
+          - button: nuovo-luogo-z-modelli-luogo-router-md
+            label: Nuovo luogo
+            use_when: un luogo diventa rilevante per il mondo
+          - button: nuova-missione-z-modelli-dm-missione-md
+            label: Nuova missione
+            use_when: emerge un obiettivo giocabile
+          - button: nuova-fazione-z-modelli-fazione-router-md
+            label: Nuova fazione
+            use_when: emerge un potere organizzato
+          - button: iniziativa-risorse-iniziativa-e-combattimenti
+            label: Iniziativa
+            use_when: inizia un combattimento o una scena a turni
+          - button: nuovo-oggetto-z-modelli-oggetto-md
+            label: Nuovo oggetto
+            use_when: serve una ricompensa o leva concreta
+          - button: evento-storico-z-modelli-evento-storico-md
+            label: Evento storico
+            use_when: la sessione cambia la timeline
+          - button: stato-mondo-mondi-stato-del-mondo
+            label: Stato mondo
+            use_when: vuoi vedere pressioni e conseguenze aperte
+          - button: controllo-vault-risorse-controllo-vault
+            label: Controllo vault
+            use_when: qualcosa non torna nei controlli o nelle viste
+          - button: tabelle-rapide-risorse-tabelle-tabelle
+            label: Tabelle rapide
+            use_when: ti serve improvvisazione controllata
     required_plugins:
       - Meta Bind
       - Dataview
@@ -122,6 +192,23 @@ workflows:
       - button: fuori-scena-hub-cosa-succede-fuori-scena-cosa-succede-fuori-scena
         label: Fuori scena
         use_when: devi scegliere chi reagisce prima della prossima sessione
+    action_groups:
+      continuita:
+        label: Continuita e propagazione
+        purpose: Applicare le conseguenze alle note bersaglio prima che restino appunti isolati.
+        actions:
+          - button: registra-scelta-mondo
+            label: Registra scelta mondo
+            use_when: una decisione deve diventare stato tracciabile
+          - button: applica-conseguenza
+            label: Applica conseguenza
+            use_when: una conseguenza ha bersagli concreti
+          - button: propaga-a-entita
+            label: Propaga a entita
+            use_when: piu note devono ricevere aggiornamenti
+          - button: prepara-recap-pubblico
+            label: Prepara recap pubblico
+            use_when: devi chiudere con materiale player-safe
     required_plugins:
       - Templater
       - Meta Bind

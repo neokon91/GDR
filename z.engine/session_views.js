@@ -206,6 +206,7 @@
       const plugins = asArray(workflow.required_plugins);
       const entryPoints = asArray(workflow.entry_points);
       const actions = asArray(workflow.quick_actions);
+      const actionGroups = Object.values(workflow.action_groups ?? {});
       const grid = dv.el("div", "", { cls: "gdr-card-grid compact" });
       const cards = [];
 
@@ -234,6 +235,34 @@
           cls: `gdr-info-card compact ${action.button ? "gdr-kind-ready" : "gdr-kind-missing"}`
         }));
       }
+
+      for (const group of actionGroups) {
+        cards.push(cardHtml({
+          title: group.label || "Gruppo azioni",
+          meta: `${asArray(group.actions).length} azioni secondarie`,
+          body: group.purpose || "Gruppo operativo dichiarato nel workflow YAML.",
+          importa: "Usalo solo quando il flusso principale non basta.",
+          cls: "gdr-info-card compact gdr-kind-ready"
+        }));
+
+        for (const action of asArray(group.actions)) {
+          cards.push(cardHtml({
+            title: action.label || action.button || "Azione secondaria",
+            meta: action.button ? `BUTTON[${action.button}]` : "Pulsante mancante",
+            body: action.use_when || "Condizione d'uso non dichiarata.",
+            importa: "Azione secondaria validata contro Meta Bind.",
+            cls: `gdr-info-card compact ${action.button ? "gdr-kind-ready" : "gdr-kind-missing"}`
+          }));
+        }
+      }
+
+      cards.push(cardHtml({
+        title: "Se un controllo non risponde",
+        meta: "Fallback operativo",
+        body: "Controlla prima Meta Bind, Dataview e Templater; poi usa il testo del pulsante come procedura manuale.",
+        importa: "Il flusso resta usabile anche se un plugin non esegue l'azione.",
+        cls: "gdr-info-card compact"
+      }));
 
       grid.innerHTML = cards.join("");
     } catch (error) {

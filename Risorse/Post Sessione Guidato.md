@@ -50,6 +50,21 @@ gdr.renderPostSessionFocus(dv);
 >
 > **Fuori scena** - devi scegliere chi reagisce prima della prossima sessione
 > `BUTTON[fuori-scena-hub-cosa-succede-fuori-scena-cosa-succede-fuori-scena]`
+>
+> [!regia]- Continuita e propagazione
+> Applicare le conseguenze alle note bersaglio prima che restino appunti isolati.
+>
+> **Registra scelta mondo** - una decisione deve diventare stato tracciabile
+> `BUTTON[registra-scelta-mondo]`
+>
+> **Applica conseguenza** - una conseguenza ha bersagli concreti
+> `BUTTON[applica-conseguenza]`
+>
+> **Propaga a entita** - piu note devono ricevere aggiornamenti
+> `BUTTON[propaga-a-entita]`
+>
+> **Prepara recap pubblico** - devi chiudere con materiale player-safe
+> `BUTTON[prepara-recap-pubblico]`
 <!-- workflow:quick_actions:end post_sessione -->
 
 ```dataviewjs
@@ -83,12 +98,6 @@ gdr.renderCanonDecisionCards(dv);
 > - [ ] Appunti non canonici marcati rumor, leggenda, segreto, falso, archiviata o ignorata.
 
 ## 3. Conseguenze Da Applicare
-
-`BUTTON[registra-scelta-mondo]`
-
-`BUTTON[applica-conseguenza]`
-
-`BUTTON[propaga-a-entita]`
 
 ```dataviewjs
 const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
@@ -142,8 +151,6 @@ LIMIT 8
 ## 6. Recap Pubblico
 
 > [!lettura] Testo mostrabile ai giocatori
-> `BUTTON[prepara-recap-pubblico]`
->
 > - Cosa e successo:
 > - Cosa sanno tutti:
 > - Missioni aggiornate:

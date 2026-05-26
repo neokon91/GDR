@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 import re
 
 from template_factory_utils import FACTORY, ROOT, known_frontmatter_fields
@@ -88,6 +89,13 @@ def validate_plugin_surface_contracts(modules: dict[str, dict], errors: list[str
 def validate_workflow_quick_actions(modules: dict[str, dict], errors: list[str]) -> None:
     """Valida che le azioni rapide dei flussi puntino a pulsanti Meta Bind reali."""
     workflow_map = modules["workflows"].get("workflows", {}) or {}
+    meta_bind_path = ROOT / ".obsidian/plugins/obsidian-meta-bind-plugin/data.json"
+    meta_bind = json.loads(meta_bind_path.read_text(encoding="utf-8")) if meta_bind_path.exists() else {}
+    configured_button_ids = {
+        str(button.get("id"))
+        for button in meta_bind.get("buttonTemplates", []) or []
+        if button.get("id")
+    }
     button_ids = {
         str(button.get("id"))
         for button in modules["metabind_buttons"].get("buttons", {}).values()
@@ -100,6 +108,12 @@ def validate_workflow_quick_actions(modules: dict[str, dict], errors: list[str])
 
     for workflow_id, workflow in workflow_map.items():
         actions = workflow.get("quick_actions", []) or []
+        action_groups = workflow.get("action_groups", {}) or {}
+        grouped_actions = [
+            action
+            for group in action_groups.values()
+            for action in (group or {}).get("actions", []) or []
+        ]
         required_plugins = workflow.get("required_plugins", []) or []
         if workflow_id in {"prepara_sessione", "gioca_live", "post_sessione"} and not actions:
             fail(f"workflows.{workflow_id}: quick_actions mancanti", errors)
@@ -115,3 +129,22 @@ def validate_workflow_quick_actions(modules: dict[str, dict], errors: list[str])
                 fail(f"workflows.{workflow_id}.quick_actions[{index}]: label mancante", errors)
             if not (action or {}).get("use_when"):
                 fail(f"workflows.{workflow_id}.quick_actions[{index}]: use_when mancante", errors)
+
+        for group_id, group in action_groups.items():
+            if not (group or {}).get("label"):
+                fail(f"workflows.{workflow_id}.action_groups.{group_id}: label mancante", errors)
+            if not (group or {}).get("purpose"):
+                fail(f"workflows.{workflow_id}.action_groups.{group_id}: purpose mancante", errors)
+            if not ((group or {}).get("actions") or []):
+                fail(f"workflows.{workflow_id}.action_groups.{group_id}: actions mancanti", errors)
+
+        for index, action in enumerate(grouped_actions):
+            button = str((action or {}).get("button", ""))
+            if not button:
+                fail(f"workflows.{workflow_id}.action_groups[{index}]: button mancante", errors)
+            elif button not in configured_button_ids:
+                fail(f"workflows.{workflow_id}.action_groups[{index}]: pulsante non configurato in Meta Bind ({button})", errors)
+            if not (action or {}).get("label"):
+                fail(f"workflows.{workflow_id}.action_groups[{index}]: label mancante", errors)
+            if not (action or {}).get("use_when"):
+                fail(f"workflows.{workflow_id}.action_groups[{index}]: use_when mancante", errors)

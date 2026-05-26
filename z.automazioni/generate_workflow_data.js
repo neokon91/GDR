@@ -43,7 +43,8 @@ function workflowQuickActions(module) {
 
     for (const [workflowId, workflow] of Object.entries(workflows)) {
         const actions = workflow.quick_actions ?? [];
-        if (!actions.length) continue;
+        const actionGroups = workflow.action_groups ?? {};
+        if (!actions.length && !Object.keys(actionGroups).length) continue;
 
         entries[workflowId] = {
             user_goal: workflow.user_goal ?? "",
@@ -53,7 +54,19 @@ function workflowQuickActions(module) {
                 button: String(action.button ?? ""),
                 label: String(action.label ?? ""),
                 use_when: String(action.use_when ?? "")
-            }))
+            })),
+            action_groups: Object.fromEntries(Object.entries(actionGroups).map(([groupId, group]) => [
+                groupId,
+                {
+                    label: String(group.label ?? groupId),
+                    purpose: String(group.purpose ?? ""),
+                    actions: (group.actions ?? []).map(action => ({
+                        button: String(action.button ?? ""),
+                        label: String(action.label ?? ""),
+                        use_when: String(action.use_when ?? "")
+                    }))
+                }
+            ]))
         };
     }
 

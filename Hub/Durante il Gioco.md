@@ -58,33 +58,78 @@ if (!active) {
 >
 > **Chiudi sessione** - il tavolo finisce
 > `BUTTON[post-sessione-guidato-risorse-post-sessione-guidato]`
+>
+> [!regia]- Cattura live
+> Creare note grezze durante il tavolo senza decidere subito la struttura definitiva.
+>
+> **Evento live** - succede qualcosa che potrebbe diventare canone
+> `BUTTON[evento-live-z-modelli-live-evento-md]`
+>
+> **PNG improvvisato** - compare una persona non preparata
+> `BUTTON[png-improvvisato-z-modelli-live-png-md]`
+>
+> **Luogo improvvisato** - il party entra in un posto non preparato
+> `BUTTON[luogo-improvvisato-z-modelli-live-luogo-md]`
+>
+> **Nota grezza** - devi catturare velocemente senza tassonomia
+> `BUTTON[nota-grezza-z-modelli-live-nota-grezza-md]`
+>
+> **Conseguenza live** - una scelta produce un effetto da risolvere dopo
+> `BUTTON[conseguenza-z-modelli-live-conseguenza-md]`
+>
+> [!regia]- Supporto al tavolo
+> Aprire strumenti che servono durante la sessione senza cercarli nel vault.
+>
+> **Preparazione** - devi tornare alle ancore della sessione
+> `BUTTON[preparazione-sessione-risorse-preparazione-sessione]`
+>
+> **Nuovo incontro** - serve una scena meccanica o un combattimento
+> `BUTTON[nuovo-incontro-z-modelli-dm-incontro-md]`
+>
+> **Party control** - devi controllare PG, risorse e stato del party
+> `BUTTON[party-control-hub-party-control]`
+>
+> **Vista giocatori** - devi verificare cosa e mostrabile
+> `BUTTON[vista-giocatori-hub-vista-giocatori-vista-giocatori]`
+>
+> [!regia]- Strumenti avanzati
+> Creare o aprire materiale strutturato solo quando il tavolo lo richiede.
+>
+> **Nuovo PNG** - un PNG improvvisato diventa ricorrente
+> `BUTTON[nuovo-png-z-modelli-personaggio-png-md]`
+>
+> **Nuovo luogo** - un luogo diventa rilevante per il mondo
+> `BUTTON[nuovo-luogo-z-modelli-luogo-router-md]`
+>
+> **Nuova missione** - emerge un obiettivo giocabile
+> `BUTTON[nuova-missione-z-modelli-dm-missione-md]`
+>
+> **Nuova fazione** - emerge un potere organizzato
+> `BUTTON[nuova-fazione-z-modelli-fazione-router-md]`
+>
+> **Iniziativa** - inizia un combattimento o una scena a turni
+> `BUTTON[iniziativa-risorse-iniziativa-e-combattimenti]`
+>
+> **Nuovo oggetto** - serve una ricompensa o leva concreta
+> `BUTTON[nuovo-oggetto-z-modelli-oggetto-md]`
+>
+> **Evento storico** - la sessione cambia la timeline
+> `BUTTON[evento-storico-z-modelli-evento-storico-md]`
+>
+> **Stato mondo** - vuoi vedere pressioni e conseguenze aperte
+> `BUTTON[stato-mondo-mondi-stato-del-mondo]`
+>
+> **Controllo vault** - qualcosa non torna nei controlli o nelle viste
+> `BUTTON[controllo-vault-risorse-controllo-vault]`
+>
+> **Tabelle rapide** - ti serve improvvisazione controllata
+> `BUTTON[tabelle-rapide-risorse-tabelle-tabelle]`
 <!-- workflow:quick_actions:end gioca_live -->
 
 ```dataviewjs
 const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
 await gdr.renderWorkflowCommandDeck(dv, "gioca_live");
 ```
-
-`BUTTON[aggiorna-scena-z-modelli-dm-aggiorna-scena-corrente-md]`
-
-`BUTTON[aggiungi-decisione-z-modelli-dm-aggiungi-decisione-live-md]`
-
-`BUTTON[collega-appunto-z-modelli-dm-collega-appunto-live-md]`
-
-`BUTTON[nota-rapida-z-modelli-nota-rapida-md]`
-
-`BUTTON[evento-lore-z-modelli-lore-capture-md]`
-
-`BUTTON[conseguenza-z-modelli-live-conseguenza-md]`
-
-`BUTTON[nuovo-clock-z-modelli-dm-tracciato-md]`
-
-`BUTTON[nuova-dispensa-z-modelli-dispensa-md]`
-
-> [!missione] Fine Sessione
-> Quando il tavolo si chiude, apri il post-sessione e trasforma appunti, decisioni e clock in conseguenze.
->
-> `BUTTON[post-sessione-guidato-risorse-post-sessione-guidato]`
 
 ## Cockpit Unico
 
@@ -93,36 +138,6 @@ const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js")
 gdr.renderLiveCommandCenter(dv);
 gdr.renderM11ContinuityChain(dv);
 ```
-
-> [!regia]- Strumenti al tavolo
-> `BUTTON[preparazione-sessione-risorse-preparazione-sessione]`
->
-> `BUTTON[nuovo-incontro-z-modelli-dm-incontro-md]`
->
-> `BUTTON[party-control-hub-party-control]`
->
-> `BUTTON[vista-giocatori-hub-vista-giocatori-vista-giocatori]`
-
-> [!regia]- Strumenti avanzati
-> `BUTTON[nuovo-png-z-modelli-personaggio-png-md]`
->
-> `BUTTON[nuovo-luogo-z-modelli-luogo-router-md]`
->
-> `BUTTON[nuova-missione-z-modelli-dm-missione-md]`
->
-> `BUTTON[nuova-fazione-z-modelli-fazione-router-md]`
->
-> `BUTTON[iniziativa-risorse-iniziativa-e-combattimenti]`
->
-> `BUTTON[nuovo-oggetto-z-modelli-oggetto-md]`
->
-> `BUTTON[evento-storico-z-modelli-evento-storico-md]`
->
-> `BUTTON[stato-mondo-mondi-stato-del-mondo]`
->
-> `BUTTON[controllo-vault-risorse-controllo-vault]`
->
-> `BUTTON[tabelle-rapide-risorse-tabelle-tabelle]`
 
 ## Quadro Di Regia
 
@@ -196,16 +211,6 @@ gdr.renderSessionClockCards(dv);
 tab: Cattura
 
 ### Inbox Live
-
-`BUTTON[evento-live-z-modelli-live-evento-md]`
-
-`BUTTON[png-improvvisato-z-modelli-live-png-md]`
-
-`BUTTON[luogo-improvvisato-z-modelli-live-luogo-md]`
-
-`BUTTON[nota-grezza-z-modelli-live-nota-grezza-md]`
-
-`BUTTON[conseguenza-z-modelli-live-conseguenza-md]`
 
 ```dataview
 TABLE tipo, stato, stato_canonico, sessioni, collegamenti

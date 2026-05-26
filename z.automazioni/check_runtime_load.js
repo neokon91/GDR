@@ -69,6 +69,9 @@ async function main() {
             if (!rendered.some(node => String(node.innerHTML).includes("BUTTON[registra-scelta-mondo]"))) {
                 errors.push("renderWorkflowCommandDeck: output workflow gioca_live senza pulsanti operativi");
             }
+            if (!rendered.some(node => String(node.innerHTML).includes("BUTTON[evento-live-z-modelli-live-evento-md]"))) {
+                errors.push("renderWorkflowCommandDeck: output workflow gioca_live senza gruppi di cattura");
+            }
         }
     }
 
