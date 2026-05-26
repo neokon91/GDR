@@ -380,3 +380,288 @@ state_ready_requirements:
         - missioni
         - fazioni
         - luoghi
+playability_rules:
+  - id: inbox_lore_live_requires_session
+    path_prefix: Inbox/
+    categoria: lore capture
+    tipo_in:
+      - evento
+      - png improvvisato
+      - luogo improvvisato
+      - conseguenza
+    require_value: sessioni
+    warning: nota live senza sessione collegata
+  - id: inbox_lore_live_requires_world
+    path_prefix: Inbox/
+    categoria: lore capture
+    tipo_in:
+      - evento
+      - png improvvisato
+      - luogo improvvisato
+      - conseguenza
+    require_value: mondo
+    warning: nota live senza mondo collegato
+  - id: mission_requires_next_move
+    path_prefix: Mondi/Missioni/
+    stato_not: archiviata
+    require_value: prossima_mossa
+    warning: missione senza prossima_mossa
+  - id: high_pressure_mission_requires_track
+    path_prefix: Mondi/Missioni/
+    stato_not: archiviata
+    number_field_gte:
+      field: pressione
+      value: 7
+    require_value: tracciati
+    warning: missione ad alta pressione senza tracciato collegato
+  - id: active_png_requires_place
+    path_prefix: Mondi/Personaggi/
+    tipo: png
+    stato: in gioco
+    require_value: luogo
+    warning: PNG in gioco senza luogo
+  - id: active_png_requires_power_or_relation
+    path_prefix: Mondi/Personaggi/
+    tipo: png
+    stato: in gioco
+    require_any_of:
+      - fazioni
+      - relazioni
+    warning: PNG in gioco senza fazione o relazione
+  - id: pressured_power_requires_next_move
+    path_prefixes:
+      - Mondi/Fazioni/
+      - Mondi/Religioni/
+    number_field_gt:
+      field: pressione
+      value: 0
+    require_value: prossima_mossa
+    warning: fazione con pressione senza prossima_mossa
+  - id: pressured_power_requires_relations
+    path_prefixes:
+      - Mondi/Fazioni/
+      - Mondi/Religioni/
+    number_field_gt:
+      field: pressione
+      value: 0
+    require_any_of:
+      - rivali
+      - alleati
+      - relazioni
+    warning: potere in pressione senza rivali, alleati o relazioni
+  - id: moving_power_requires_propagation
+    path_prefixes:
+      - Mondi/Fazioni/
+      - Mondi/Religioni/
+    number_field_gt:
+      field: pressione
+      value: 0
+    require_any_of:
+      - propaga_a
+      - conseguenze
+      - missioni
+      - tracciati
+    warning: fazione in movimento senza propagazione, conseguenze o agganci di campagna
+  - id: culture_requires_tension
+    path_prefix: Mondi/Culture/
+    categoria: cultura
+    stato_not: archiviata
+    require_any_of:
+      - tensioni
+      - conflitti_interni
+      - relazioni_esterne
+      - relazioni
+    warning: cultura senza tensioni o relazioni culturali
+  - id: religion_requires_sacred_places
+    path_prefix: Mondi/Religioni/
+    categoria: religione
+    stato_not: archiviata
+    require_any_of:
+      - luoghi_sacri
+      - templi
+    warning: religione senza luoghi sacri o templi
+  - id: relation_requires_consequences
+    path_prefix: Mondi/Relazioni/
+    categoria: relazione
+    stato_not: archiviata
+    require_any_of:
+      - conseguenze
+      - propaga_a
+      - entita_impattate
+    warning: relazione senza conseguenze o propagazione
+  - id: high_pressure_relation_requires_next_move
+    path_prefix: Mondi/Relazioni/
+    categoria: relazione
+    stato_not: archiviata
+    number_field_gte:
+      field: pressione
+      value: 6
+    require_value: prossima_mossa
+    warning: relazione ad alta pressione senza prossima_mossa
+  - id: ready_culture_requires_playable_choice
+    path_prefix: Mondi/Culture/
+    categoria: cultura
+    stato: pronto
+    require_any_of:
+      - tabu
+      - tabu_sociali
+      - scelte
+    warning: cultura pronta senza tabu o scelte giocabili
+  - id: ready_religion_requires_ritual_tension
+    path_prefix: Mondi/Religioni/
+    categoria: religione
+    stato: pronto
+    require_any_of:
+      - eresie
+      - rituali
+      - calendario_rituale
+    warning: religione pronta senza eresie, rituali o calendario rituale
+  - id: major_political_territory_requires_capital
+    path_prefix: Mondi/Luoghi/
+    categoria: luogo
+    stato_not: archiviata
+    tipo_in:
+      - regno
+      - impero
+      - repubblica
+      - oligarchia
+    require_value: capitale
+    warning: territorio politico maggiore senza capitale
+  - id: political_territory_requires_power
+    path_prefix: Mondi/Luoghi/
+    categoria: luogo
+    stato_not: archiviata
+    tipo_in:
+      - regno
+      - impero
+      - repubblica
+      - oligarchia
+      - ducato
+      - contea
+      - baronia
+      - marca
+      - protettorato
+    require_any_of:
+      - governante
+      - fazioni
+    warning: territorio politico senza governante o fazioni di potere
+  - id: political_territory_requires_boundaries
+    path_prefix: Mondi/Luoghi/
+    categoria: luogo
+    stato_not: archiviata
+    tipo_in:
+      - regno
+      - impero
+      - repubblica
+      - oligarchia
+      - ducato
+      - contea
+      - baronia
+      - marca
+      - protettorato
+    require_any_of:
+      - confini
+      - luogo_padre
+    warning: territorio politico senza confini o territorio superiore
+  - id: political_territory_requires_resources
+    path_prefix: Mondi/Luoghi/
+    categoria: luogo
+    stato_not: archiviata
+    tipo_in:
+      - regno
+      - impero
+      - repubblica
+      - oligarchia
+      - ducato
+      - contea
+      - baronia
+      - marca
+      - protettorato
+    require_any_of:
+      - risorse_strategiche
+      - risorse
+    warning: territorio politico senza risorse strategiche
+  - id: high_pressure_power_requires_track
+    path_prefixes:
+      - Mondi/Fazioni/
+      - Mondi/Religioni/
+    number_field_gte:
+      field: pressione
+      value: 7
+    require_value: tracciati
+    warning: fazione ad alta pressione senza tracciato collegato
+  - id: track_requires_trigger
+    path_prefix: Mondi/Tracciati/
+    categoria: tracciato
+    stato_not: archiviata
+    require_value: innesco
+    warning: tracciato senza innesco
+  - id: track_requires_operational_links
+    path_prefix: Mondi/Tracciati/
+    categoria: tracciato
+    stato_not: archiviata
+    require_any_of:
+      - missioni
+      - fazioni
+      - luoghi
+    warning: tracciato senza collegamenti operativi
+  - id: near_complete_track_requires_consequences
+    path_prefix: Mondi/Tracciati/
+    categoria: tracciato
+    stato_not: archiviata
+    progress_near_completion: true
+    require_value: conseguenze
+    warning: tracciato vicino al completamento senza conseguenze
+  - id: track_consequences_require_targets
+    path_prefix: Mondi/Tracciati/
+    categoria: tracciato
+    stato_not: archiviata
+    when_value_present: conseguenze
+    require_any_of:
+      - entita_impattate
+      - propaga_a
+    warning: tracciato con conseguenze senza entita_impattate o propaga_a
+  - id: canonical_event_requires_consequences
+    path_prefix: Mondi/Timeline/
+    categoria: evento storico
+    any_field_equals:
+      - field: canonico
+        value: true
+      - field: stato_canonico
+        value: canonico
+    require_value: conseguenze
+    warning: evento canonico senza conseguenze
+  - id: canonical_event_requires_cause
+    path_prefix: Mondi/Timeline/
+    categoria: evento storico
+    any_field_equals:
+      - field: canonico
+        value: true
+      - field: stato_canonico
+        value: canonico
+    require_any_of:
+      - causa
+      - cause
+    warning: evento canonico senza causa
+  - id: event_effects_require_propagation
+    path_prefix: Mondi/Timeline/
+    categoria: evento storico
+    when_any_of_present:
+      - conseguenze
+      - effetti
+    require_any_of:
+      - entita_impattate
+      - propaga_a
+      - tracciati
+    warning: evento con effetti senza propagazione verso entita o tracciati
+  - id: event_effects_require_relation_or_territory
+    path_prefix: Mondi/Timeline/
+    categoria: evento storico
+    when_any_of_present:
+      - effetti
+      - conseguenze
+    require_any_of:
+      - relazioni
+      - propaga_a
+      - entita_impattate
+    warning: evento con effetti senza relazione o territorio impattato

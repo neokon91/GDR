@@ -89,10 +89,37 @@ for (const [categoryOrType, requirement] of Object.entries(readyStates)) {
     requireNonEmptyArray(errors, requirement?.any_of_fields, `state_ready_requirements.pronto.${categoryOrType}.any_of_fields`);
 }
 
+requireNonEmptyArray(errors, contract.playability_rules, "playability_rules");
+const playabilityRules = Array.isArray(contract.playability_rules) ? contract.playability_rules : [];
+const ruleIds = new Set();
+for (const rule of playabilityRules) {
+    const id = String(rule?.id ?? "");
+    if (!id) {
+        errors.push(`${CONTRACT}: playability_rules contiene regola senza id`);
+        continue;
+    }
+    if (ruleIds.has(id)) errors.push(`${CONTRACT}: playability_rules id duplicato (${id})`);
+    ruleIds.add(id);
+
+    if (!rule.warning) errors.push(`${CONTRACT}: playability_rules.${id} senza warning`);
+    if (!rule.require_value && !rule.require_any_of) {
+        errors.push(`${CONTRACT}: playability_rules.${id} senza require_value o require_any_of`);
+    }
+    if (rule.require_any_of) requireNonEmptyArray(errors, rule.require_any_of, `playability_rules.${id}.require_any_of`);
+    if (rule.tipo_in) requireNonEmptyArray(errors, rule.tipo_in, `playability_rules.${id}.tipo_in`);
+    if (rule.path_prefixes) requireNonEmptyArray(errors, rule.path_prefixes, `playability_rules.${id}.path_prefixes`);
+    if (rule.when_any_of_present) requireNonEmptyArray(errors, rule.when_any_of_present, `playability_rules.${id}.when_any_of_present`);
+    if (rule.any_field_equals) requireNonEmptyArray(errors, rule.any_field_equals, `playability_rules.${id}.any_field_equals`);
+
+    if (rule.categoria && !allowedCategories.has(String(rule.categoria))) {
+        errors.push(`${CONTRACT}: playability_rules.${id} usa categoria non dichiarata in fields_core.yaml (${rule.categoria})`);
+    }
+}
+
 if (errors.length) {
     console.error("Validation contract non valido:");
     for (const error of errors) console.error(`- ${error}`);
     process.exit(1);
 }
 
-console.log(`Validation contract OK: ${Object.keys(allowedTypesByCategory).length} categorie tipo, ${Object.keys(requiredFieldsByCategory).length} categorie required, ${Object.keys(readyStates).length} policy pronto.`);
+console.log(`Validation contract OK: ${Object.keys(allowedTypesByCategory).length} categorie tipo, ${Object.keys(requiredFieldsByCategory).length} categorie required, ${Object.keys(readyStates).length} policy pronto, ${playabilityRules.length} regole giocabilita.`);

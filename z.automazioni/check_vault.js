@@ -131,6 +131,22 @@ function requiredStateReadyRequirements() {
     }));
 }
 
+function requiredPlayabilityRules() {
+    const rules = VALIDATION_CONTRACT.playability_rules ?? [];
+    if (!Array.isArray(rules) || !rules.length) {
+        throw new Error("Dev/TemplateFactory/modules/validation_contract.yaml: playability_rules vuoto o mancante");
+    }
+    for (const rule of rules) {
+        if (!rule?.id || !rule?.warning) {
+            throw new Error("Dev/TemplateFactory/modules/validation_contract.yaml: ogni playability_rules deve dichiarare id e warning");
+        }
+        if (!rule.require_value && !rule.require_any_of) {
+            throw new Error(`Dev/TemplateFactory/modules/validation_contract.yaml: playability_rules.${rule.id} senza requisito verificabile`);
+        }
+    }
+    return rules;
+}
+
 function requiredMetaBindInputTemplates() {
     const inputs = loadYamlModule("Dev/TemplateFactory/modules/metabind_inputs.yaml").inputs ?? {};
     return Object.values(inputs)
@@ -321,6 +337,7 @@ const STRUCTURED_MAP_USES = new Set(["fronte", "indizi", "regione"]);
 const ALLOWED_TYPES_BY_CATEGORY = requiredValidationSetMap("allowed_types_by_category");
 const REQUIRED_FIELDS_BY_CATEGORY = requiredFieldsByCategoryFromProfiles();
 const READY_REQUIREMENTS_BY_CATEGORY_OR_TYPE = requiredStateReadyRequirements();
+const PLAYABILITY_RULES = requiredPlayabilityRules();
 
 const errors = [];
 const warnings = [];
@@ -350,6 +367,64 @@ function arrayValue(value) {
     if (Array.isArray(value)) return value;
     if (hasValue(value)) return [value];
     return [];
+}
+
+function sameScalar(left, right) {
+    if (typeof right === "boolean") return left === right;
+    return String(left ?? "") === String(right ?? "");
+}
+
+function pathMatchesRule(fileRel, rule) {
+    if (rule.path_prefix && !fileRel.startsWith(String(rule.path_prefix))) return false;
+    if (rule.path_prefixes) {
+        const prefixes = arrayValue(rule.path_prefixes).map(String);
+        if (!prefixes.some(prefix => fileRel.startsWith(prefix))) return false;
+    }
+    return true;
+}
+
+function frontmatterMatchesRule(fm, rule) {
+    if (rule.categoria && String(fm.categoria ?? "") !== String(rule.categoria)) return false;
+    if (rule.tipo && String(fm.tipo ?? "") !== String(rule.tipo)) return false;
+    if (rule.tipo_in && !arrayValue(rule.tipo_in).map(String).includes(String(fm.tipo ?? ""))) return false;
+    if (rule.stato && String(fm.stato ?? "") !== String(rule.stato)) return false;
+    if (rule.stato_not && String(fm.stato ?? "") === String(rule.stato_not)) return false;
+
+    if (rule.number_field_gt) {
+        const field = String(rule.number_field_gt.field ?? "");
+        if (!(Number(fm[field] ?? 0) > Number(rule.number_field_gt.value))) return false;
+    }
+    if (rule.number_field_gte) {
+        const field = String(rule.number_field_gte.field ?? "");
+        if (!(Number(fm[field] ?? 0) >= Number(rule.number_field_gte.value))) return false;
+    }
+    if (rule.when_value_present && !hasValue(fm[String(rule.when_value_present)])) return false;
+    if (rule.when_any_of_present && !hasAny(fm, arrayValue(rule.when_any_of_present).map(String))) return false;
+    if (rule.any_field_equals) {
+        const matchesAny = arrayValue(rule.any_field_equals).some(condition => sameScalar(fm[String(condition?.field ?? "")], condition?.value));
+        if (!matchesAny) return false;
+    }
+    if (rule.progress_near_completion) {
+        if (!(Number(fm.progress_max ?? 0) > 0 && Number(fm.progress_value ?? 0) >= Number(fm.progress_max) - 1)) return false;
+    }
+
+    return true;
+}
+
+function missingPlayabilityRequirement(fm, rule) {
+    if (rule.require_value && !hasValue(fm[String(rule.require_value)])) return true;
+    if (rule.require_any_of && !hasAny(fm, arrayValue(rule.require_any_of).map(String))) return true;
+    return false;
+}
+
+function validatePlayabilityRules(fileRel, fm) {
+    const messages = [];
+    for (const rule of PLAYABILITY_RULES) {
+        if (!pathMatchesRule(fileRel, rule)) continue;
+        if (!frontmatterMatchesRule(fm, rule)) continue;
+        if (missingPlayabilityRequirement(fm, rule)) messages.push(`${fileRel}: ${rule.warning}`);
+    }
+    return messages;
 }
 
 function loadAllowedTags() {
@@ -932,116 +1007,7 @@ for (const [fileRel, fm] of realEntries) {
         }
     }
 
-    if (fileRel.startsWith("Inbox/") && fm.categoria === "lore capture" && ["evento", "png improvvisato", "luogo improvvisato", "conseguenza"].includes(String(fm.tipo ?? ""))) {
-        if (!hasValue(fm.sessioni)) {
-            warnings.push(`${fileRel}: nota live senza sessione collegata`);
-        }
-        if (!hasValue(fm.mondo)) {
-            warnings.push(`${fileRel}: nota live senza mondo collegato`);
-        }
-    }
-
-    if (fileRel.startsWith("Mondi/Missioni/") && fm.stato !== "archiviata" && !hasValue(fm.prossima_mossa)) {
-        warnings.push(`${fileRel}: missione senza prossima_mossa`);
-    }
-
-    if (fileRel.startsWith("Mondi/Missioni/") && fm.stato !== "archiviata" && Number(fm.pressione ?? 0) >= 7 && !hasValue(fm.tracciati)) {
-        warnings.push(`${fileRel}: missione ad alta pressione senza tracciato collegato`);
-    }
-
-    if (fileRel.startsWith("Mondi/Personaggi/") && fm.tipo === "png" && fm.stato === "in gioco" && !hasValue(fm.luogo)) {
-        warnings.push(`${fileRel}: PNG in gioco senza luogo`);
-    }
-
-    if (fileRel.startsWith("Mondi/Personaggi/") && fm.tipo === "png" && fm.stato === "in gioco" && !hasAny(fm, ["fazioni", "relazioni"])) {
-        warnings.push(`${fileRel}: PNG in gioco senza fazione o relazione`);
-    }
-
-    if ((fileRel.startsWith("Mondi/Fazioni/") || fileRel.startsWith("Mondi/Religioni/")) && Number(fm.pressione ?? 0) > 0 && !hasValue(fm.prossima_mossa)) {
-        warnings.push(`${fileRel}: fazione con pressione senza prossima_mossa`);
-    }
-
-    if ((fileRel.startsWith("Mondi/Fazioni/") || fileRel.startsWith("Mondi/Religioni/")) && Number(fm.pressione ?? 0) > 0 && !hasAny(fm, ["rivali", "alleati", "relazioni"])) {
-        warnings.push(`${fileRel}: potere in pressione senza rivali, alleati o relazioni`);
-    }
-
-    if ((fileRel.startsWith("Mondi/Fazioni/") || fileRel.startsWith("Mondi/Religioni/")) && Number(fm.pressione ?? 0) > 0 && !hasAny(fm, ["propaga_a", "conseguenze", "missioni", "tracciati"])) {
-        warnings.push(`${fileRel}: fazione in movimento senza propagazione, conseguenze o agganci di campagna`);
-    }
-
-    if (fileRel.startsWith("Mondi/Culture/") && fm.categoria === "cultura" && fm.stato !== "archiviata" && !hasAny(fm, ["tensioni", "conflitti_interni", "relazioni_esterne", "relazioni"])) {
-        warnings.push(`${fileRel}: cultura senza tensioni o relazioni culturali`);
-    }
-
-    if (fileRel.startsWith("Mondi/Religioni/") && fm.categoria === "religione" && fm.stato !== "archiviata" && !hasAny(fm, ["luoghi_sacri", "templi"])) {
-        warnings.push(`${fileRel}: religione senza luoghi sacri o templi`);
-    }
-
-    if (fileRel.startsWith("Mondi/Relazioni/") && fm.categoria === "relazione" && fm.stato !== "archiviata" && !hasAny(fm, ["conseguenze", "propaga_a", "entita_impattate"])) {
-        warnings.push(`${fileRel}: relazione senza conseguenze o propagazione`);
-    }
-
-    if (fileRel.startsWith("Mondi/Relazioni/") && fm.categoria === "relazione" && fm.stato !== "archiviata" && Number(fm.pressione ?? 0) >= 6 && !hasValue(fm.prossima_mossa)) {
-        warnings.push(`${fileRel}: relazione ad alta pressione senza prossima_mossa`);
-    }
-
-    if (fileRel.startsWith("Mondi/Culture/") && fm.categoria === "cultura" && fm.stato === "pronto" && !hasAny(fm, ["tabu", "tabu_sociali", "scelte"])) {
-        warnings.push(`${fileRel}: cultura pronta senza tabu o scelte giocabili`);
-    }
-
-    if (fileRel.startsWith("Mondi/Religioni/") && fm.categoria === "religione" && fm.stato === "pronto" && !hasAny(fm, ["eresie", "rituali", "calendario_rituale"])) {
-        warnings.push(`${fileRel}: religione pronta senza eresie, rituali o calendario rituale`);
-    }
-
-    if (fileRel.startsWith("Mondi/Luoghi/") && fm.categoria === "luogo" && ["regno", "impero", "repubblica", "oligarchia", "ducato", "contea", "baronia", "marca", "protettorato"].includes(String(fm.tipo ?? "")) && fm.stato !== "archiviata") {
-        if (["regno", "impero", "repubblica", "oligarchia"].includes(String(fm.tipo ?? "")) && !hasValue(fm.capitale)) {
-            warnings.push(`${fileRel}: territorio politico maggiore senza capitale`);
-        }
-        if (!hasAny(fm, ["governante", "fazioni"])) {
-            warnings.push(`${fileRel}: territorio politico senza governante o fazioni di potere`);
-        }
-        if (!hasAny(fm, ["confini", "luogo_padre"])) {
-            warnings.push(`${fileRel}: territorio politico senza confini o territorio superiore`);
-        }
-        if (!hasAny(fm, ["risorse_strategiche", "risorse"])) {
-            warnings.push(`${fileRel}: territorio politico senza risorse strategiche`);
-        }
-    }
-
-    if ((fileRel.startsWith("Mondi/Fazioni/") || fileRel.startsWith("Mondi/Religioni/")) && Number(fm.pressione ?? 0) >= 7 && !hasValue(fm.tracciati)) {
-        warnings.push(`${fileRel}: fazione ad alta pressione senza tracciato collegato`);
-    }
-
-    if (fileRel.startsWith("Mondi/Tracciati/") && fm.categoria === "tracciato" && fm.stato !== "archiviata") {
-        if (!hasValue(fm.innesco)) {
-            warnings.push(`${fileRel}: tracciato senza innesco`);
-        }
-        if (!hasAny(fm, ["missioni", "fazioni", "luoghi"])) {
-            warnings.push(`${fileRel}: tracciato senza collegamenti operativi`);
-        }
-        if (Number(fm.progress_max ?? 0) > 0 && Number(fm.progress_value ?? 0) >= Number(fm.progress_max) - 1 && !hasValue(fm.conseguenze)) {
-            warnings.push(`${fileRel}: tracciato vicino al completamento senza conseguenze`);
-        }
-        if (hasValue(fm.conseguenze) && !hasAny(fm, ["entita_impattate", "propaga_a"])) {
-            warnings.push(`${fileRel}: tracciato con conseguenze senza entita_impattate o propaga_a`);
-        }
-    }
-
-    if (fileRel.startsWith("Mondi/Timeline/") && fm.categoria === "evento storico" && (fm.canonico === true || fm.stato_canonico === "canonico") && !hasValue(fm.conseguenze)) {
-        warnings.push(`${fileRel}: evento canonico senza conseguenze`);
-    }
-
-    if (fileRel.startsWith("Mondi/Timeline/") && fm.categoria === "evento storico" && (fm.canonico === true || fm.stato_canonico === "canonico") && !hasAny(fm, ["causa", "cause"])) {
-        warnings.push(`${fileRel}: evento canonico senza causa`);
-    }
-
-    if (fileRel.startsWith("Mondi/Timeline/") && fm.categoria === "evento storico" && hasAny(fm, ["conseguenze", "effetti"]) && !hasAny(fm, ["entita_impattate", "propaga_a", "tracciati"])) {
-        warnings.push(`${fileRel}: evento con effetti senza propagazione verso entita o tracciati`);
-    }
-
-    if (fileRel.startsWith("Mondi/Timeline/") && fm.categoria === "evento storico" && hasAny(fm, ["effetti", "conseguenze"]) && !hasAny(fm, ["relazioni", "propaga_a", "entita_impattate"])) {
-        warnings.push(`${fileRel}: evento con effetti senza relazione o territorio impattato`);
-    }
+    warnings.push(...validatePlayabilityRules(fileRel, fm));
 
     if (fileRel.startsWith("Inbox/") && fm.categoria === "lore capture" && hasAny(fm, ["impatto", "conseguenze"]) && !hasAny(fm, ["entita_impattate", "propaga_a", "collegamenti"])) {
         warnings.push(`${fileRel}: lore con impatto senza propagazione o collegamenti`);
