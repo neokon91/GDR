@@ -59,9 +59,28 @@ function requireSection(errors, value, pathText) {
 
 function requireExistingFiles(errors, files, pathText) {
     for (const relPath of files) {
-        if (!fs.existsSync(repoPath(ROOT, relPath))) {
+        if (!existsRelOrGenerated(relPath)) {
             errors.push(`${CONTRACT}: ${pathText} punta a file mancante (${relPath})`);
         }
+    }
+}
+
+function generatedRootSet() {
+    return new Set((releaseBoundary.generated_release_roots ?? []).map(root => String(root).replace(/\\/g, "/").replace(/\/$/, "")));
+}
+
+function metadataTargetSet(errors) {
+    try {
+        const stdout = execFileSync("python3", ["z.automazioni/render_metadata_surfaces.py", "--list-targets"], {
+            cwd: ROOT,
+            encoding: "utf8",
+            env: { ...process.env, PYTHONDONTWRITEBYTECODE: "1" },
+            maxBuffer: 1024 * 1024
+        });
+        return new Set(stdout.split(/\r?\n/).filter(Boolean).map(file => file.replace(/\\/g, "/")));
+    } catch (error) {
+        errors.push(`${CONTRACT}: impossibile leggere target metadata generati (${error.message})`);
+        return new Set();
     }
 }
 
@@ -77,6 +96,15 @@ const errors = [];
 const contract = loadYamlModule(CONTRACT);
 const obsidianConfig = loadYamlModule(OBSIDIAN_CONFIG);
 const releaseBoundary = loadYamlModule(RELEASE_BOUNDARY);
+const generatedRoots = generatedRootSet();
+const generatedMetadataTargets = metadataTargetSet(errors);
+
+function existsRelOrGenerated(relPath) {
+    const normalized = String(relPath).replace(/\\/g, "/");
+    const top = normalized.split("/", 1)[0];
+    if (fs.existsSync(repoPath(ROOT, normalized))) return true;
+    return generatedRoots.has(top) && generatedMetadataTargets.has(normalized);
+}
 
 if (contract.id !== "repo_quality_contract") {
     errors.push(`${CONTRACT}: id non valido`);

@@ -11,6 +11,8 @@ policy:
   no_repo_output_roots:
     - dist
     - z.modelli
+    - z.bases
+    - z.fileclass
     - Dev/TemplateFactory/examples/generated
 steps:
   srd_character_data:
@@ -250,11 +252,15 @@ steps:
       - python3
       - z.automazioni/check_template_factory.py
   metadata_surfaces:
-    purpose: Verifica fileClass/Bases derivate dai profili metadata senza scrivere output nel repo.
+    purpose: Verifica fileClass/Bases generate dai moduli metadata senza scrivere output nel repo sorgente.
+    release_only: true
     sources:
       - Dev/TemplateFactory/modules/frontmatter_profiles.yaml
+      - Dev/TemplateFactory/modules/bases_views.yaml
     outputs:
-      - memoria
+      - z.fileclass/**/*.md
+      - z.bases/**/*.base
+      - z.bases/README.md
     render:
       - python3
       - z.automazioni/render_metadata_surfaces.py

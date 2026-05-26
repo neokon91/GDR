@@ -58,15 +58,18 @@ def validate_pipeline(data: dict[str, Any], mode: str, errors: list[str]) -> lis
         for key in ("purpose", "sources", "outputs", "render", "check"):
             if key not in step:
                 fail(errors, f"{PIPELINE.relative_to(ROOT)}: {step_id} senza {key}")
+        release_only = step.get("release_only") is True
         for source in step.get("sources") or []:
             source_path = ROOT / str(source)
             if not any(char in str(source) for char in "*?[]") and not source_path.exists():
                 fail(errors, f"{PIPELINE.relative_to(ROOT)}: {step_id} source mancante {source}")
         for output in step.get("outputs") or []:
             first = str(output).split("/", 1)[0]
-            if mode == "check" and first in no_repo_output_roots:
-                fail(errors, f"{PIPELINE.relative_to(ROOT)}: {step_id} check non deve produrre {first}")
+            if first in no_repo_output_roots and not release_only:
+                fail(errors, f"{PIPELINE.relative_to(ROOT)}: {step_id} output {first} richiede release_only")
         command = validate_command(step_id, mode, step.get(mode), errors)
+        if release_only and mode == "render" and command and "--check" not in command:
+            fail(errors, f"{PIPELINE.relative_to(ROOT)}: {step_id} release_only deve validare in memoria durante sync:sources")
         if command:
             commands.append((str(step_id), command))
     return commands

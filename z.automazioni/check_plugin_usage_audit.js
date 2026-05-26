@@ -119,6 +119,20 @@ function loadGeneratedTargets() {
     } catch {
         // Il generation contract segnala gia problemi sui target generati.
     }
+    try {
+        const stdout = execFileSync("python3", ["z.automazioni/render_metadata_surfaces.py", "--list-targets"], {
+            cwd: ROOT,
+            encoding: "utf8",
+            env: { ...process.env, PYTHONDONTWRITEBYTECODE: "1" },
+            maxBuffer: 1024 * 1024
+        });
+        for (const line of stdout.split(/\r?\n/).filter(Boolean)) {
+            targets.add(line);
+            targets.add(line.replace(/\.(md|base)$/, ""));
+        }
+    } catch {
+        // Il generation contract segnala gia problemi sui target metadata generati.
+    }
     return targets;
 }
 

@@ -30,7 +30,7 @@ La generazione deve servire il profilo principale D&D 5.5/SRD senza legare il Co
 2. Validare chiavi obbligatorie: `id`, `purpose`, `version`.
 3. Comporre sezioni, callout, tab, input/pulsanti Meta Bind, blocchi Dataview e versioni Markdown leggibili.
 4. Renderizzare template sorgente con Jinja2.
-5. Scrivere in `z.fileclass/` o `z.bases/` solo dopo review; `z.modelli/` resta generato da YAML/Jinja.
+5. Verificare `z.fileclass/` e `z.bases/` dai moduli YAML; vengono materializzati solo in release, come `z.modelli`.
 6. Eseguire `npm run check`.
 7. Verificare in Obsidian con un collaudo visuale.
 
@@ -72,11 +72,11 @@ npm run audit:templates
 
 `render:metabind-config` assembla `.obsidian/plugins/obsidian-meta-bind-plugin/data.json` da tre YAML leggibili: impostazioni base, input e pulsanti.
 
-`release:clean` materializza `z.modelli` direttamente dentro `dist/vault-gdr-clean`: il repo sorgente non deve tracciare template finali generati.
+`release:clean` materializza `z.modelli`, `z.bases` e `z.fileclass` direttamente dentro `dist/vault-gdr-clean`: il repo sorgente non deve tracciare superfici Obsidian generate.
 
 `audit:templates` confronta anteprime locali e target dichiarati in `template_blueprints.yaml`; il report resta output locale ignorato.
 
-`render:metadata` produce anteprime fileClass/Bases a partire da `frontmatter_profiles.yaml`. Non modifica `z.fileclass` o `z.bases`: rende leggibile il contratto YAML e permette review/diff prima di materializzare modifiche.
+`render:metadata` produce anteprime fileClass/Bases a partire da `frontmatter_profiles.yaml` e `bases_views.yaml`. `npm run sync:sources` usa il check in memoria; la materializzazione reale avviene in release.
 
 ## Regola Runtime
 

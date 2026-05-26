@@ -4,7 +4,6 @@ from __future__ import annotations
 
 import argparse
 import difflib
-import re
 import sys
 from pathlib import Path
 from typing import Any
@@ -13,31 +12,29 @@ import yaml
 
 sys.dont_write_bytecode = True
 
-from template_factory_utils import ROOT, load_modules
+from template_factory_utils import ROOT, collect_field_names, load_modules
 
 
-OUT_DIR = ROOT / "Dev" / "TemplateFactory" / "examples" / "generated" / "metadata_surfaces"
-
-FIELD_TYPE_MAP = {
-    "boolean": "Boolean",
-    "date": "Date",
-    "list": "Multi",
-    "number": "Number",
-    "select": "Select",
-    "text": "Input",
-    "wikilink": "File",
-    "wikilink_list": "MultiFile",
-    "wikilink_target_list": "MultiFile",
-    "wikilink_section_list": "MultiFile",
-    "wikilink_block_list": "MultiFile",
-    "tag_list": "Multi",
-}
+PREVIEW_DIR = ROOT / "Dev" / "TemplateFactory" / "examples" / "generated" / "metadata_surfaces"
+FILECLASS_SOURCE = "Dev/TemplateFactory/modules/frontmatter_profiles.yaml"
+BASES_SOURCE = "Dev/TemplateFactory/modules/bases_views.yaml"
+GENERATED_ROOTS = ("z.bases", "z.fileclass")
 
 
-def yaml_document(path: Path) -> dict[str, Any]:
-    if not path.exists():
-        return {}
-    text = path.read_text(encoding="utf-8")
+class MetadataDumper(yaml.SafeDumper):
+    def increase_indent(self, flow: bool = False, indentless: bool = False) -> Any:
+        return super().increase_indent(flow, False)
+
+
+def rel(path: Path) -> str:
+    return str(path.relative_to(ROOT)).replace("\\", "/")
+
+
+def yaml_text(data: dict[str, Any]) -> str:
+    return yaml.dump(data, Dumper=MetadataDumper, allow_unicode=True, sort_keys=False, width=1000)
+
+
+def yaml_document_text(text: str) -> dict[str, Any]:
     if text.startswith("---\n"):
         end = text.find("\n---", 4)
         if end != -1:
@@ -46,187 +43,290 @@ def yaml_document(path: Path) -> dict[str, Any]:
     return data if isinstance(data, dict) else {}
 
 
-def field_catalog(modules: dict[str, dict[str, Any]]) -> dict[str, dict[str, Any]]:
-    catalog: dict[str, dict[str, Any]] = {}
-    for fields in modules["fields_core"].get("fields", {}).values():
-        if not isinstance(fields, list):
-            continue
-        for field in fields:
-            if isinstance(field, dict) and field.get("name"):
-                catalog[str(field["name"])] = field
-    return catalog
-
-
-def field_type(field_name: str, existing: dict[str, Any], catalog: dict[str, dict[str, Any]]) -> str:
-    if existing.get("type"):
-        return str(existing["type"])
-    core_type = str(catalog.get(field_name, {}).get("type", "text"))
-    return FIELD_TYPE_MAP.get(core_type, "Input")
-
-
-def field_options(field_name: str, existing: dict[str, Any], catalog: dict[str, dict[str, Any]]) -> dict[str, Any]:
-    if isinstance(existing.get("options"), dict) and existing["options"]:
-        return existing["options"]
-    values = catalog.get(field_name, {}).get("values", [])
-    if values:
-        return {
-            "sourceType": "ValuesList",
-            "valuesList": {str(index): value for index, value in enumerate(values)},
-        }
-    return {}
-
-
-def existing_fields_by_name(fileclass: dict[str, Any]) -> dict[str, dict[str, Any]]:
-    return {
-        str(field["name"]): field
-        for field in fileclass.get("fields", []) or []
-        if isinstance(field, dict) and field.get("name")
+def known_metadata_fields(modules: dict[str, dict[str, Any]]) -> set[str]:
+    frontmatter = modules["frontmatter_profiles"]
+    plugin_fields = {
+        field
+        for binding in modules["plugin_bindings"].get("bindings", {}).values()
+        for field in binding.get("fields", []) or []
     }
+    declared_plugin_fields = {
+        field
+        for fields in frontmatter.get("field_catalog", {}).get("plugin_fields", {}).values()
+        for field in fields or []
+    }
+    domain_fields = set(frontmatter.get("field_catalog", {}).get("domain_fields", []) or [])
+    return collect_field_names(modules["fields_core"]) | plugin_fields | declared_plugin_fields | domain_fields
 
 
-def profile_field_keys(profile: dict[str, Any]) -> list[str]:
-    keys: list[str] = []
-    for field in profile.get("fields", []) or []:
-        if isinstance(field, dict) and field.get("key"):
-            key = str(field["key"])
-            if key not in keys:
-                keys.append(key)
-    return keys
+def fileclass_fields_from_doc(fileclass: dict[str, Any]) -> set[str]:
+    fields = {str(field) for field in fileclass.get("fieldsOrder", []) or []}
+    for field in fileclass.get("fields", []) or []:
+        if isinstance(field, dict) and field.get("name"):
+            fields.add(str(field["name"]))
+    return fields
 
 
-def render_fileclass(profile_id: str, profile: dict[str, Any], catalog: dict[str, dict[str, Any]]) -> str:
-    integration = profile.get("integrations", {}) or {}
-    existing_path = ROOT / str(integration.get("fileclass", ""))
-    existing_doc = yaml_document(existing_path)
-    existing_fields = existing_fields_by_name(existing_doc)
-    fields_order = profile_field_keys(profile)
-    fields = []
+def base_fields_from_doc(base: dict[str, Any]) -> set[str]:
+    fields: set[str] = set()
+    for key in (base.get("properties", {}) or {}):
+        key = str(key)
+        if key.startswith("formula."):
+            continue
+        if key == "file.name":
+            fields.add("nome")
+        fields.add(key.removeprefix("note."))
 
-    for field_name in fields_order:
-        existing = existing_fields.get(field_name, {})
+    for view in base.get("views", []) or []:
+        if not isinstance(view, dict):
+            continue
+        for field in view.get("order", []) or []:
+            field = str(field)
+            if not field.startswith("formula."):
+                if field == "file.name":
+                    fields.add("nome")
+                fields.add(field.removeprefix("note."))
+    return fields
+
+
+def render_fileclass(fileclass_id: str, definition: dict[str, Any]) -> tuple[str, str, list[str]]:
+    errors: list[str] = []
+    target = str(definition.get("file", "")).replace("\\", "/")
+    icon = str(definition.get("icon", "database"))
+    source_fields = definition.get("fields", []) or []
+    fields_order: list[str] = []
+    fields: list[dict[str, Any]] = []
+
+    if not target.startswith("z.fileclass/") or not target.endswith(".md"):
+        errors.append(f"frontmatter_profiles.fileclasses.{fileclass_id}: target fileClass non valido ({target})")
+
+    for index, field in enumerate(source_fields):
+        if not isinstance(field, dict) or not field.get("name"):
+            errors.append(f"frontmatter_profiles.fileclasses.{fileclass_id}.fields[{index}]: name mancante")
+            continue
+        name = str(field["name"])
+        fields_order.append(name)
         fields.append({
-            "name": field_name,
-            "id": field_name,
-            "type": field_type(field_name, existing, catalog),
-            "options": field_options(field_name, existing, catalog),
+            "name": name,
+            "id": name,
+            "type": str(field.get("type", "Input")),
+            "options": field.get("options") if isinstance(field.get("options"), dict) else {},
         })
 
     frontmatter = {
-        "icon": existing_doc.get("icon", "database"),
-        "generated_from": "Dev/TemplateFactory/modules/frontmatter_profiles.yaml",
-        "profile": profile_id,
-        "target": str(integration.get("fileclass", "")),
+        "icon": icon,
         "fieldsOrder": fields_order,
         "fields": fields,
     }
-    yaml_text = yaml.safe_dump(frontmatter, allow_unicode=True, sort_keys=False, width=1000).strip()
-    return (
-        f"---\n{yaml_text}\n---\n\n"
-        f"# FileClass {profile_id}\n\n"
-        "Anteprima generata da TemplateFactory. Il profilo YAML resta la sorgente leggibile; "
-        "materializza solo dopo review del diff.\n"
-    )
+    body = str(definition.get("body", "")).strip()
+    rendered = f"---\n{yaml_text(frontmatter)}---\n\n"
+    if body:
+        rendered += f"{body}\n"
+    return target, rendered, errors
 
 
-def render_base_contract(profile_id: str, profile: dict[str, Any], base_path: str) -> str:
-    integration = profile.get("integrations", {}) or {}
-    required_fields = integration.get("required_fields", []) or []
-    fields = profile_field_keys(profile)
-    payload = {
-        "generated_from": "Dev/TemplateFactory/modules/frontmatter_profiles.yaml",
-        "profile": profile_id,
-        "target": base_path,
-        "required_fields": required_fields,
-        "profile_fields": fields,
-    }
-    return yaml.safe_dump(payload, allow_unicode=True, sort_keys=False, width=1000)
-
-
-def preview_name(path: str) -> str:
-    return re.sub(r"[^A-Za-z0-9_.-]+", "__", path)
-
-
-def render_all(modules: dict[str, dict[str, Any]]) -> dict[Path, str]:
-    catalog = field_catalog(modules)
-    outputs: dict[Path, str] = {}
-
-    for profile_id, profile in modules["frontmatter_profiles"].get("profiles", {}).items():
-        integration = profile.get("integrations", {}) or {}
-        fileclass = integration.get("fileclass")
-        if fileclass:
-            outputs[OUT_DIR / "fileclass" / preview_name(str(fileclass))] = render_fileclass(profile_id, profile, catalog)
-
-        for base in integration.get("bases", []) or []:
-            outputs[OUT_DIR / "bases" / f"{preview_name(str(base))}.yaml"] = render_base_contract(profile_id, profile, str(base))
-
-    manifest_lines = [
-        "# Metadata Surfaces",
-        "",
-        "Anteprime generate dai profili YAML. Servono a rendere leggibile il contratto tra frontmatter, fileClass e Bases prima di materializzare modifiche.",
-        "",
-        "## FileClass",
-        "",
-    ]
-    for path in sorted(p for p in outputs if "/fileclass/" in str(p)):
-        manifest_lines.append(f"- `{path.relative_to(ROOT)}`")
-    manifest_lines.extend(["", "## Bases", ""])
-    for path in sorted(p for p in outputs if "/bases/" in str(p)):
-        manifest_lines.append(f"- `{path.relative_to(ROOT)}`")
-    manifest_lines.append("")
-    outputs[OUT_DIR / "README.md"] = "\n".join(manifest_lines)
-
-    return outputs
-
-
-def check_outputs(outputs: dict[Path, str]) -> list[str]:
+def render_fileclasses(modules: dict[str, dict[str, Any]]) -> tuple[dict[str, str], list[str]]:
     errors: list[str] = []
-    if not OUT_DIR.exists():
-        return errors
-    for path, expected in sorted(outputs.items()):
-        if not path.exists():
-            errors.append(f"{path.relative_to(ROOT)}: anteprima mancante; eseguire npm run render:metadata")
+    outputs: dict[str, str] = {}
+    frontmatter = modules["frontmatter_profiles"]
+    profiles = frontmatter.get("profiles", {})
+    definitions = frontmatter.get("fileclasses", {}) or {}
+    known_fields = known_metadata_fields(modules)
+
+    if not isinstance(definitions, dict) or not definitions:
+        return {}, [f"{FILECLASS_SOURCE}: sezione fileclasses mancante"]
+
+    for fileclass_id, definition in definitions.items():
+        if not isinstance(definition, dict):
+            errors.append(f"frontmatter_profiles.fileclasses.{fileclass_id}: definizione non valida")
             continue
-        actual = path.read_text(encoding="utf-8")
+        profile = definition.get("profile")
+        if profile is not None and str(profile) not in profiles:
+            errors.append(f"frontmatter_profiles.fileclasses.{fileclass_id}: profilo inesistente ({profile})")
+
+        target, rendered, render_errors = render_fileclass(str(fileclass_id), definition)
+        errors.extend(render_errors)
+        if target in outputs:
+            errors.append(f"{target}: fileClass generata duplicata")
+        outputs[target] = rendered
+
+        doc = yaml_document_text(rendered)
+        fields = list(doc.get("fieldsOrder", []) or [])
+        if not fields:
+            errors.append(f"frontmatter_profiles.fileclasses.{fileclass_id}: fields vuoto")
+        duplicates = sorted({field for field in fields if fields.count(field) > 1})
+        for field in duplicates:
+            errors.append(f"frontmatter_profiles.fileclasses.{fileclass_id}: campo duplicato {field}")
+        for field in sorted(set(map(str, fields)) - known_fields):
+            errors.append(f"frontmatter_profiles.fileclasses.{fileclass_id}: campo non dichiarato ({field})")
+
+    return outputs, errors
+
+
+def render_bases(modules: dict[str, dict[str, Any]]) -> tuple[dict[str, str], list[str]]:
+    errors: list[str] = []
+    outputs: dict[str, str] = {}
+    bases = modules["bases_views"]
+    generated = bases.get("generated_bases", {}) or {}
+    generated_files = generated.get("files", {}) or {}
+    declared_views = bases.get("views", {}) or {}
+
+    if not isinstance(generated_files, dict) or not generated_files:
+        return {}, [f"{BASES_SOURCE}: generated_bases.files mancante"]
+
+    readme = str(generated.get("readme", "")).rstrip()
+    if not readme:
+        errors.append(f"{BASES_SOURCE}: generated_bases.readme mancante")
+    outputs["z.bases/README.md"] = f"{readme}\n"
+
+    for base_id, definition in generated_files.items():
+        if not isinstance(definition, dict):
+            errors.append(f"bases_views.generated_bases.files.{base_id}: definizione non valida")
+            continue
+        target = str(definition.get("file", "")).replace("\\", "/")
+        content = definition.get("content", {}) or {}
+        if not target.startswith("z.bases/") or not target.endswith(".base"):
+            errors.append(f"bases_views.generated_bases.files.{base_id}: target Base non valido ({target})")
+        if target in outputs:
+            errors.append(f"{target}: Base generata duplicata")
+        if not isinstance(content, dict) or not content:
+            errors.append(f"bases_views.generated_bases.files.{base_id}: content mancante")
+        outputs[target] = yaml_text(content)
+
+    declared_by_file = {
+        str(view.get("file", "")).replace("\\", "/"): (view_id, view)
+        for view_id, view in declared_views.items()
+        if isinstance(view, dict) and view.get("file")
+    }
+    generated_targets = set(outputs) - {"z.bases/README.md"}
+    declared_targets = set(declared_by_file)
+    for target in sorted(declared_targets - generated_targets):
+        errors.append(f"{BASES_SOURCE}: Base dichiarata ma non generata ({target})")
+    for target in sorted(generated_targets - declared_targets):
+        errors.append(f"{BASES_SOURCE}: Base generata senza contratto views ({target})")
+
+    for target in sorted(generated_targets & declared_targets):
+        view_id, view = declared_by_file[target]
+        base_doc = yaml.safe_load(outputs[target]) or {}
+        available = base_fields_from_doc(base_doc)
+        for field in sorted(set(view.get("required_fields", []) or []) - available):
+            errors.append(f"bases_views.{view_id}: {target} non espone required_field {field}")
+
+        if view.get("map_view"):
+            base_views = base_doc.get("views", []) or []
+            has_map = any(item.get("type") == "map" for item in base_views if isinstance(item, dict))
+            has_table = any(item.get("type") == "table" for item in base_views if isinstance(item, dict))
+            if not has_map:
+                errors.append(f"bases_views.{view_id}: map_view senza vista map")
+            if not has_table:
+                errors.append(f"bases_views.{view_id}: map_view senza fallback table")
+
+    return outputs, errors
+
+
+def render_all(modules: dict[str, dict[str, Any]] | None = None) -> tuple[dict[str, str], list[str]]:
+    modules = modules or load_modules()
+    outputs: dict[str, str] = {}
+    errors: list[str] = []
+
+    for rendered, render_errors in (render_fileclasses(modules), render_bases(modules)):
+        errors.extend(render_errors)
+        for target, content in rendered.items():
+            if target in outputs:
+                errors.append(f"{target}: target metadata duplicato")
+            if not content.strip():
+                errors.append(f"{target}: render vuoto")
+            outputs[target] = content
+
+    return dict(sorted(outputs.items())), errors
+
+
+def target_path(target_root: Path, rel_path: str) -> Path:
+    return target_root / rel_path
+
+
+def preview_path(rel_path: str) -> Path:
+    return PREVIEW_DIR / rel_path
+
+
+def check_outputs(outputs: dict[str, str]) -> list[str]:
+    errors: list[str] = []
+    for rel_path, expected in outputs.items():
+        local_path = ROOT / rel_path
+        local_root = ROOT / rel_path.split("/", 1)[0]
+        if not local_path.exists():
+            if local_root.exists():
+                errors.append(f"{rel_path}: output mancante nella root generata locale")
+            continue
+        actual = local_path.read_text(encoding="utf-8")
         if actual != expected:
             diff_lines = list(difflib.unified_diff(
                 actual.splitlines(),
                 expected.splitlines(),
-                fromfile=str(path.relative_to(ROOT)),
-                tofile=f"{path.relative_to(ROOT)}.expected",
+                fromfile=rel_path,
+                tofile=f"{rel_path}.expected",
                 lineterm="",
             ))
-            diff = "\n".join(diff_lines[:40])
-            errors.append(f"{path.relative_to(ROOT)}: anteprima non aggiornata\n{diff}")
+            errors.append(f"{rel_path}: output generato non aggiornato\n" + "\n".join(diff_lines[:60]))
     return errors
 
 
-def write_outputs(outputs: dict[Path, str]) -> None:
-    for path, content in outputs.items():
+def write_outputs(outputs: dict[str, str], target_root: Path) -> None:
+    for rel_path, content in outputs.items():
+        path = target_path(target_root, rel_path)
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(content, encoding="utf-8")
+
+
+def write_previews(outputs: dict[str, str]) -> None:
+    for rel_path, content in outputs.items():
+        path = preview_path(rel_path)
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_text(content, encoding="utf-8")
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Renderizza anteprime fileClass/Bases dai profili YAML.")
-    parser.add_argument("--check", action="store_true", help="Verifica che le anteprime siano aggiornate.")
+    parser = argparse.ArgumentParser(description="Renderizza fileClass e Bases dai moduli YAML sorgente.")
+    parser.add_argument("--check", action="store_true", help="Verifica il contratto senza creare output sorgente.")
+    parser.add_argument("--list-targets", action="store_true", help="Elenca i target generati relativi al repository.")
+    parser.add_argument("--target-root", help="Materializza le superfici generate sotto una root esterna, di norma la release.")
     args = parser.parse_args()
 
-    modules = load_modules()
-    outputs = render_all(modules)
+    outputs, errors = render_all()
+
+    if args.list_targets:
+        for rel_path in outputs:
+            print(rel_path)
+        return 0 if not errors else 1
 
     if args.check:
-        errors = check_outputs(outputs)
+        errors.extend(check_outputs(outputs))
         if errors:
             print("Errori metadata surfaces:", file=sys.stderr)
             for error in errors:
                 print(f"- {error}", file=sys.stderr)
             return 1
-        mode = "anteprime locali assenti, render verificato in memoria" if not OUT_DIR.exists() else "anteprime locali aggiornate"
-        print(f"Metadata surfaces OK: {len(outputs)} superfici, {mode}.")
+        materialized = [root for root in GENERATED_ROOTS if (ROOT / root).exists()]
+        mode = "root locali assenti, render verificato in memoria"
+        if materialized:
+            mode = f"root locali confrontate: {', '.join(materialized)}"
+        print(f"Metadata surfaces OK: {len(outputs)} file, {mode}.")
         return 0
 
-    write_outputs(outputs)
-    print(f"Metadata surfaces renderizzate: {len(outputs)} file in {OUT_DIR.relative_to(ROOT)}.")
+    if errors:
+        print("Errori metadata surfaces:", file=sys.stderr)
+        for error in errors:
+            print(f"- {error}", file=sys.stderr)
+        return 1
+
+    if args.target_root:
+        target_root = Path(args.target_root).resolve()
+        write_outputs(outputs, target_root)
+        print(f"Metadata surfaces materializzate: {len(outputs)} file in {target_root}.")
+        return 0
+
+    write_previews(outputs)
+    print(f"Metadata surfaces renderizzate: {len(outputs)} anteprime in {PREVIEW_DIR.relative_to(ROOT)}.")
     return 0
 
 

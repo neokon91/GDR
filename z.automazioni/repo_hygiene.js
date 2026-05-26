@@ -105,7 +105,22 @@ const gitignore = readTextIfExists(gitignorePath, null);
 if (gitignore === null) {
     errors.push(".gitignore mancante");
 } else {
-    for (const pattern of [".DS_Store", "Thumbs.db", "*.tmp", "*.bak", "*.orig", "*~", "dist/", "SRD/", "z.modelli/", "Dev/TemplateFactory/examples/generated/", "__pycache__/", "*.py[cod]", ".pytest_cache/"]) {
+    const requiredGitignorePatterns = [
+        ".DS_Store",
+        "Thumbs.db",
+        "*.tmp",
+        "*.bak",
+        "*.orig",
+        "*~",
+        "dist/",
+        ...GENERATED_RELEASE_ROOTS.map(root => `${String(root).replace(/\/$/, "")}/`),
+        "z.modelli/",
+        "Dev/TemplateFactory/examples/generated/",
+        "__pycache__/",
+        "*.py[cod]",
+        ".pytest_cache/"
+    ];
+    for (const pattern of [...new Set(requiredGitignorePatterns)]) {
         if (!gitignore.includes(pattern)) {
             errors.push(`.gitignore: pattern mancante ${pattern}`);
         }

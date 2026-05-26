@@ -116,6 +116,8 @@ copy_policy:
     - z.modelli/
 generated_release_roots:
   - SRD
+  - z.bases
+  - z.fileclass
 materialized_user_files:
   - path: Campagne/Campagne.md
     title: Campagne

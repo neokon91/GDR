@@ -20,6 +20,8 @@ dist/
 
 # Generated vault reference modules
 SRD/
+z.bases/
+z.fileclass/
 
 # Generated Obsidian templates
 z.modelli/**/*.md

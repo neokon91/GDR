@@ -490,6 +490,18 @@ function copyRuntimeTemplateModules() {
 }
 
 function materializeGeneratedReleaseRoots() {
+    if (GENERATED_RELEASE_ROOTS.has("z.bases") || GENERATED_RELEASE_ROOTS.has("z.fileclass")) {
+        execFileSync("python3", [
+            repoPath(ROOT, "z.automazioni/render_metadata_surfaces.py"),
+            "--target-root",
+            OUT
+        ], {
+            cwd: ROOT,
+            encoding: "utf8",
+            stdio: QUIET ? "pipe" : "inherit",
+            maxBuffer: 8 * 1024 * 1024
+        });
+    }
     if (GENERATED_RELEASE_ROOTS.has("SRD")) {
         execFileSync("node", [repoPath(ROOT, "z.automazioni/import_srd.js")], {
             cwd: OUT,

@@ -3,6 +3,7 @@ from __future__ import annotations
 import yaml
 
 from template_factory_utils import ROOT, known_frontmatter_fields, plugin_key, resolved_blueprints
+from render_metadata_surfaces import render_all
 
 
 def fail(message: str, errors: list[str]) -> None:
@@ -87,6 +88,10 @@ def validate_release_boundary_contract(modules: dict[str, dict], errors: list[st
         for file in boundary.get("materialized_user_files", []) or []
         if isinstance(file, dict)
     }
+    generated_release_roots = {str(root).rstrip("/") for root in boundary.get("generated_release_roots", []) or []}
+    generated_metadata_targets, generated_metadata_errors = render_all(modules)
+    for error in generated_metadata_errors:
+        fail(error, errors)
 
     for key in required_lists:
         values = boundary.get(key)
@@ -100,9 +105,13 @@ def validate_release_boundary_contract(modules: dict[str, dict], errors: list[st
             fail(f"release_boundary.copy_policy.{key}: lista mancante o vuota", errors)
 
     for rel_path in boundary.get("required_files", []) or []:
-        if str(rel_path) in generated_release_files or str(rel_path) in materialized_user_paths:
+        rel_path = str(rel_path).replace("\\", "/")
+        top = rel_path.split("/", 1)[0]
+        if rel_path in generated_release_files or rel_path in materialized_user_paths:
             continue
-        if not (ROOT / str(rel_path)).exists():
+        if top in generated_release_roots and rel_path in generated_metadata_targets:
+            continue
+        if not (ROOT / rel_path).exists():
             fail(f"release_boundary.required_files: file sorgente mancante ({rel_path})", errors)
 
     forbidden_roots = set(str(path) for path in boundary.get("forbidden_roots", []) or [])

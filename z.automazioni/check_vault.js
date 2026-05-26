@@ -517,6 +517,7 @@ function targetPath(target) {
 }
 
 const generatedTemplatePaths = new Set();
+const generatedMetadataPaths = new Set();
 
 function addGeneratedTemplatePath(templatePath) {
     const normalized = String(templatePath ?? "").replace(/\\/g, "/");
@@ -556,6 +557,20 @@ try {
     }
 } catch (error) {
     errors.push(`TemplateFactory: impossibile leggere i target generati (${error.message})`);
+}
+
+try {
+    const stdout = execFileSync("python3", ["z.automazioni/render_metadata_surfaces.py", "--list-targets"], {
+        cwd: ROOT,
+        encoding: "utf8",
+        env: { ...process.env, PYTHONDONTWRITEBYTECODE: "1" },
+        maxBuffer: 1024 * 1024
+    });
+    for (const metadataPath of stdout.split(/\r?\n/).filter(Boolean)) {
+        generatedMetadataPaths.add(metadataPath.replace(/\\/g, "/"));
+    }
+} catch (error) {
+    errors.push(`Metadata surfaces: impossibile leggere i target generati (${error.message})`);
 }
 
 function isGeneratedTemplatePath(fileRel) {
@@ -644,6 +659,8 @@ const calendariumNames = new Set(calendariumCalendars
 validateRequiredFiles({
     errors,
     existsRel,
+    generatedFiles: generatedMetadataPaths,
+    generatedVaultRoots: GENERATED_VAULT_ROOTS,
     requiredBaseFiles: REQUIRED_BASE_FILES,
     requiredFiles: REQUIRED_FILES,
     requiredLayerFiles: REQUIRED_LAYER_FILES
@@ -656,6 +673,7 @@ validatePluginControls({
     communityPlugins,
     errors,
     existsRel,
+    generatedFiles: generatedMetadataPaths,
     hasValue,
     isGeneratedTemplatePath,
     isVirtualUserPath: target => virtualUserPaths.has(String(target ?? "").replace(/\\/g, "/").replace(/\/$/, "")),

@@ -6,6 +6,7 @@ from pathlib import Path
 import yaml
 
 from template_factory_utils import ROOT, collect_field_names
+from render_metadata_surfaces import render_all, yaml_document_text
 
 
 def fail(message: str, errors: list[str]) -> None:
@@ -99,6 +100,7 @@ def validate_frontmatter_profiles(modules: dict[str, dict], errors: list[str]) -
     }
     domain_fields = set(frontmatter.get("field_catalog", {}).get("domain_fields", []) or [])
     known_fields = field_names | plugin_fields | declared_plugin_fields | domain_fields
+    metadata_docs = generated_metadata_docs(modules, errors)
 
     for profile_id, profile in profiles.items():
         fields = profile.get("fields", [])
@@ -131,7 +133,7 @@ def validate_frontmatter_profiles(modules: dict[str, dict], errors: list[str]) -
             fail(f"frontmatter_profiles.{profile_id}: sample value non usato ({missing})", errors)
 
         validate_frontmatter_sample(profile_id, profile, errors)
-        validate_frontmatter_integrations(profile_id, profile, seen, errors)
+        validate_frontmatter_integrations(profile_id, profile, seen, metadata_docs, errors)
 
     validate_frontmatter_migration_backlog(frontmatter, errors)
 
@@ -165,6 +167,10 @@ def yaml_document(path: Path) -> dict:
 
 def fileclass_fields(path: Path) -> set[str]:
     data = yaml_document(path)
+    return fileclass_fields_from_doc(data)
+
+
+def fileclass_fields_from_doc(data: dict) -> set[str]:
     fields = {str(field) for field in data.get("fieldsOrder", []) or []}
     for field in data.get("fields", []) or []:
         if isinstance(field, dict) and field.get("name"):
@@ -174,12 +180,18 @@ def fileclass_fields(path: Path) -> set[str]:
 
 def base_fields(path: Path) -> set[str]:
     data = yaml_document(path)
+    return base_fields_from_doc(data)
+
+
+def base_fields_from_doc(data: dict) -> set[str]:
     fields: set[str] = set()
 
     for key in (data.get("properties", {}) or {}):
         key = str(key)
         if key.startswith("formula."):
             continue
+        if key == "file.name":
+            fields.add("nome")
         fields.add(key.removeprefix("note."))
 
     for view in data.get("views", []) or []:
@@ -188,12 +200,34 @@ def base_fields(path: Path) -> set[str]:
         for field in view.get("order", []) or []:
             field = str(field)
             if not field.startswith("formula."):
+                if field == "file.name":
+                    fields.add("nome")
                 fields.add(field.removeprefix("note."))
 
     return fields
 
 
-def validate_frontmatter_integrations(profile_id: str, profile: dict, profile_fields: set[str], errors: list[str]) -> None:
+def generated_metadata_docs(modules: dict[str, dict], errors: list[str]) -> dict[str, dict]:
+    """Espone i documenti metadata generati anche quando z.bases/z.fileclass non esistono nel sorgente."""
+    outputs, render_errors = render_all(modules)
+    for error in render_errors:
+        fail(error, errors)
+    docs: dict[str, dict] = {}
+    for target, content in outputs.items():
+        if target == "z.bases/README.md":
+            continue
+        docs[target] = yaml_document_text(content)
+    return docs
+
+
+def generated_or_existing_doc(rel_path: str, metadata_docs: dict[str, dict]) -> dict | None:
+    path = ROOT / rel_path
+    if path.exists():
+        return yaml_document(path)
+    return metadata_docs.get(rel_path)
+
+
+def validate_frontmatter_integrations(profile_id: str, profile: dict, profile_fields: set[str], metadata_docs: dict[str, dict], errors: list[str]) -> None:
     integrations = profile.get("integrations", {}) or {}
     required_fields = set(integrations.get("required_fields", []) or [])
 
@@ -202,20 +236,22 @@ def validate_frontmatter_integrations(profile_id: str, profile: dict, profile_fi
 
     fileclass = integrations.get("fileclass")
     if fileclass:
-        path = ROOT / str(fileclass)
-        if not path.exists():
+        fileclass = str(fileclass).replace("\\", "/")
+        doc = generated_or_existing_doc(fileclass, metadata_docs)
+        if doc is None:
             fail(f"frontmatter_profiles.{profile_id}: fileClass mancante {fileclass}", errors)
         else:
-            available = fileclass_fields(path)
+            available = fileclass_fields_from_doc(doc)
             for field in sorted(required_fields - available):
                 fail(f"frontmatter_profiles.{profile_id}: {fileclass} non espone required_field {field}", errors)
 
     for base in integrations.get("bases", []) or []:
-        path = ROOT / str(base)
-        if not path.exists():
+        base = str(base).replace("\\", "/")
+        doc = generated_or_existing_doc(base, metadata_docs)
+        if doc is None:
             fail(f"frontmatter_profiles.{profile_id}: Base mancante {base}", errors)
             continue
-        available = base_fields(path)
+        available = base_fields_from_doc(doc)
         for field in sorted(required_fields - available):
             fail(f"frontmatter_profiles.{profile_id}: {base} non espone required_field {field}", errors)
 
