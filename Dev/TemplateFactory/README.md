@@ -124,6 +124,8 @@ Il render finale valida anche i blocchi Tabs: ogni blocco ` ````tabs ` deve esse
 
 `demo_contract.yaml` definisce la demo finale come contratto di codice: generatori ammessi, sorgenti demo vietate, gate richiesti e scenario minimo. Il controllo dedicato e `npm run check:demo-contract`.
 
+`release_boundary.yaml` dichiara cosa deve entrare o restare fuori dalla release utente: file richiesti, radici vietate, marker riservati/dev-only, plugin obbligatori e moduli runtime caricati dal bridge.
+
 ## Regola Italiano D&D 5.5
 
 `dnd55_options.yaml` e la fonte per valori selezionabili e label visibili al DM. I valori utente devono essere in italiano; le chiavi tecniche possono restare compatibili con plugin e renderer quando necessario.

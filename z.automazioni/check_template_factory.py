@@ -39,6 +39,7 @@ REQUIRED_MODULES = {
     "entity_depth",
     "worldbuilding_depth_axes",
     "demo_contract",
+    "release_boundary",
     "taxonomy_depth",
     "dnd55_options",
     "link_targets",
