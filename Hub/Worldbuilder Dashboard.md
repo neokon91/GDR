@@ -27,8 +27,6 @@ campagne_attive: []
 > [!regia] Azioni rapide
 > Aggiungere entita vive collegate e giocabili.
 >
-> Plugin coinvolti: `Templater`, `Meta Bind`, `Bases`, `Maps`, `Excalidraw`, `Advanced Canvas`, `Iconize`, `Dataview`.
->
 > **Nuovo mondo guidato** - il vault non ha ancora un mondo operativo
 > `BUTTON[nuovo-mondo-homebrew]`
 >
@@ -170,7 +168,8 @@ campagne_attive: []
 
 ```dataviewjs
 const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
-await gdr.renderWorkflowCommandDeck(dv, "espandi_mondo");
+gdr.renderWorldbuildingFreedom(dv, dv.current().mondo_attivo);
+await gdr.renderWorkflowCommandDeck(dv, "espandi_mondo", { mode: "simple" });
 ```
 
 ## Crea Il Tuo Mondo

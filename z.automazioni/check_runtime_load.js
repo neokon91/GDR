@@ -23,7 +23,8 @@ const REQUIRED_EXPORTS = [
     "renderSessionMaterialCards",
     "renderTableCockpit",
     "renderWorkflowCommandDeck",
-    "renderWorldImpact"
+    "renderWorldImpact",
+    "renderWorldbuildingFreedom"
 ];
 const REQUIRED_MODULES = [
     "z.engine/session_continuity.js",
@@ -68,11 +69,25 @@ async function main() {
         }
         if (!errors.length) {
             const rendered = [];
+            const emptyPages = items => ({
+                where(predicate) {
+                    return emptyPages(items.filter(predicate));
+                },
+                array() {
+                    return items;
+                },
+                get length() {
+                    return items.length;
+                }
+            });
             const dv = {
                 el(tag, text = "", options = {}) {
                     const node = { tag, text, options, innerHTML: "" };
                     rendered.push(node);
                     return node;
+                },
+                pages() {
+                    return emptyPages([]);
                 }
             };
             await views.renderWorkflowCommandDeck(dv, "gioca_live");
@@ -98,6 +113,10 @@ async function main() {
             }
             if (rendered.some(node => String(node.innerHTML).includes("Plugin coinvolti"))) {
                 errors.push("renderWorkflowCommandDeck: output semplice onboarding espone diagnostica plugin");
+            }
+            views.renderWorldbuildingFreedom(dv);
+            if (!rendered.some(node => String(node.innerHTML).includes("Liberta di worldbuilding"))) {
+                errors.push("renderWorldbuildingFreedom: output senza regia worldbuilding libero");
             }
         }
     }

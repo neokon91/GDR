@@ -79,7 +79,8 @@
     inbox_operativa: ["Meta Bind", "Dataview", "Templater", "Fantasy Content Generator"],
     smistamento_bozze: ["Meta Bind", "Dataview", "Templater", "Fantasy Content Generator"],
     quality_report: ["Meta Bind", "Dataview", "JS Engine"],
-    stato_campagna: ["Meta Bind", "Dataview", "Templater"]
+    stato_campagna: ["Meta Bind", "Dataview", "Templater"],
+    campagna_ambientazione: ["Meta Bind", "Dataview", "Templater"]
   };
 
   async function readJsonRel(path, fallback = null) {
@@ -274,6 +275,77 @@
         link: world.file.path,
         cls: `gdr-info-card compact ${ok ? "gdr-kind-ready" : "gdr-kind-missing"}`
       });
+    }));
+
+    const grid = dv.el("div", "", { cls: "gdr-card-grid compact" });
+    grid.innerHTML = cards.join("");
+  }
+
+  function renderWorldbuildingFreedom(dv, worldLink = "") {
+    const selectedPath = linkKey(worldLink);
+    const real = p => isReal(p) && p.file?.name !== p.file?.folder?.split("/").pop() && p.stato !== "archiviata";
+    const matchesWorld = p => {
+      if (!selectedPath) return true;
+      const world = linkKey(p.mondo);
+      return p.file?.path === selectedPath || world === selectedPath;
+    };
+    const count = source => dv.pages(source).where(p => real(p) && matchesWorld(p)).array().length;
+
+    const worlds = dv.pages('"Mondi"')
+      .where(p => isReal(p) && p.categoria === "mondo" && p.stato !== "archiviata")
+      .where(p => !selectedPath || p.file?.path === selectedPath)
+      .array().length;
+    const foundations = count('"Mondi/Luoghi"') + count('"Mondi/Culture"') + count('"Mondi/Fazioni"');
+    const pressures = count('"Mondi/Conflitti"') + count('"Mondi/Relazioni"') + count('"Mondi/Tracciati"');
+    const mysteries = count('"Mondi/Cosmologia"') + count('"Mondi/Creature"') + count('"Mondi/Oggetti"');
+    const play = count('"Mondi/Missioni"') + count('"Mondi/Sessioni"') + count('"Campagne"');
+    const drafts = dv.pages('"Mondi" OR "Campagne"')
+      .where(p => real(p) && matchesWorld(p) && p.stato === "bozza")
+      .array().length;
+
+    const cards = [];
+    cards.push(cardHtml({
+      title: worlds ? "Liberta di worldbuilding: scegli l'intento" : "Liberta di worldbuilding: parti da zero",
+      meta: worlds ? `${worlds} mondo/i attivi` : "Nessun mondo attivo",
+      body: worlds
+        ? "Non devi seguire un ordine fisso: crea, collega, approfondisci o porta al tavolo in base a cosa ti serve adesso."
+        : "Crea un mondo minimo e poi torna qui per scegliere se lavorare su luoghi, poteri, misteri o gioco.",
+      importa: worlds
+        ? "La profondita e utile solo quando produce scelta, pressione, scoperta o conseguenza."
+        : "Un mondo minimo basta: nome, tono, promessa e una tensione centrale.",
+      cls: `gdr-info-card compact ${worlds ? "gdr-kind-ready" : "gdr-kind-missing"}`
+    }));
+
+    cards.push(cardHtml({
+      title: "Creo spazio e identita",
+      meta: `${foundations} fondamenta`,
+      body: foundations ? "Aggiungi luogo, cultura o fazione solo quando cambia dove si gioca o chi decide." : "Parti da un luogo iniziale, una cultura visibile o una fazione che vuole qualcosa.",
+      importa: "Usa Nuova entita viva quando non sai ancora che tipo di scheda serve.",
+      cls: `gdr-info-card compact ${foundations ? "gdr-kind-ready" : "gdr-kind-missing"}`
+    }));
+
+    cards.push(cardHtml({
+      title: "Creo movimento",
+      meta: `${pressures} pressioni`,
+      body: pressures ? "Trasforma poteri e relazioni in prossime mosse, conflitti o clock." : "Crea almeno una pressione: senza qualcuno che agisce, il mondo resta fermo.",
+      importa: "Una pressione buona puo essere ignorata dal party e avanzare comunque.",
+      cls: `gdr-info-card compact ${pressures ? "gdr-kind-ready" : "gdr-kind-missing"}`
+    }));
+
+    cards.push(cardHtml({
+      title: "Creo profondita",
+      meta: `${mysteries} elementi profondi`,
+      body: "Aggiungi cosmologia, segreti, creature o oggetti quando tornano in scena o cambiano decisioni reali.",
+      importa: drafts ? `${drafts} bozza/e meritano completamento solo se stanno per essere usate.` : "Evita enciclopedia morta: ogni dettaglio deve avere costo, memoria o conseguenza.",
+      cls: "gdr-info-card compact gdr-kind-ready"
+    }));
+
+    cards.push(cardHtml({
+      title: "Porto al tavolo",
+      meta: `${play} pezzi giocabili`,
+      body: play ? "Apri Campagna da Ambientazione o Preparazione Sessione e scegli cosa giocare." : "Quando hai un luogo e una pressione, crea campagna, missione o prima sessione.",
+      importa: "Questo e il controllo finale: se non puo diventare scena, scelta o rischio, non e ancora pronto.",
+      cls: `gdr-info-card compact ${play ? "gdr-kind-ready" : "gdr-kind-missing"}`
     }));
 
     const grid = dv.el("div", "", { cls: "gdr-card-grid compact" });
@@ -636,6 +708,7 @@
     renderPropagationTargets: continuityViews.renderPropagationTargets,
     renderWorldImpact: continuityViews.renderWorldImpact,
     renderWorldCreationStatus,
+    renderWorldbuildingFreedom,
     renderPluginTroubleshooting,
     renderOnboardingReadiness,
     renderWorkflowCommandDeck,

@@ -56,12 +56,12 @@ Questa pagina spiega come creare note senza bloccare il gioco. La regola e sempl
 | Renderla parte dell'ambientazione | Origine, credenze, economia, memoria, contraddizioni, vita quotidiana. |
 | Farla muovere da sola | Pressione, clock, prossima mossa, entita impattate. |
 
-## Strumenti Usati
+## Cosa Succede Dopo
 
-- **Templater** crea la nota e fa le domande iniziali.
-- **Meta Bind** rende modificabili i campi dentro la scheda.
-- **Dataview** mostra la nota nelle dashboard.
-- **Metadata Menu** aiuta a mantenere coerenti i campi.
-- **Kanban** organizza preparazione e post-sessione.
+- Se una nota ha un gancio, puo entrare in preparazione.
+- Se una nota ha una pressione, puo muoversi fuori scena.
+- Se una nota ha relazioni, puo creare conseguenze su altre schede.
+- Se una nota ha parti pubbliche e segrete separate, puo essere mostrata ai giocatori senza rovinare sorprese.
+- Se una nota resta importante per piu sessioni, apri [[Risorse/Worldbuilding Profondo]] e aggiungi memoria, contraddizioni, costi e cambiamenti.
 
 Non serve compilare tutto subito. Una scheda e pronta quando puo generare una scena, una scelta, un rischio o una conseguenza.

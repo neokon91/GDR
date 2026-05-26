@@ -240,6 +240,7 @@ workflows:
       - pressione
   espandi_mondo:
     user_goal: Aggiungere entita vive collegate e giocabili.
+    audience: user
     entry_points:
       - Hub/Worldbuilder Dashboard.md
     quick_actions:
@@ -395,6 +396,64 @@ workflows:
       - Excalidraw
       - Advanced Canvas
       - Iconize
+      - Dataview
+  campagna_ambientazione:
+    user_goal: Trasformare una regione, un conflitto o una cultura in campagna giocabile.
+    audience: user
+    entry_points:
+      - Hub/Campagna da Ambientazione.md
+    quick_actions:
+      - button: campagna-da-regione-z-modelli-dm-campagna-da-regione-md
+        label: Campagna da regione
+        use_when: hai una zona interessante e vuoi darle struttura di campagna
+      - button: arco-da-conflitto-z-modelli-dm-arco-da-conflitto-md
+        label: Arco da conflitto
+        use_when: una tensione del mondo deve diventare avanzamento giocabile
+      - button: opportunita-risorse-opportunita-di-avventura
+        label: Opportunita di avventura
+        use_when: vuoi scegliere ganci gia pronti invece di creare altro lore
+      - button: fronti-risorse-fronti-di-campagna
+        label: Fronti di campagna
+        use_when: devi vedere quali pressioni stanno muovendo il mondo
+      - button: atlante-atlante-del-mondo
+        label: Atlante del mondo
+        use_when: ti manca una regione, cultura o crisi da cui partire
+    action_groups:
+      materializza:
+        label: Materializza il gioco
+        purpose: Convertire ambientazione in cose che il tavolo puo usare subito.
+        actions:
+          - button: nuova-campagna-z-modelli-dm-campagna-md
+            label: Nuova campagna
+            use_when: hai gia scelto promessa, luogo iniziale e tensione centrale
+          - button: nuova-missione-z-modelli-dm-missione-md
+            label: Nuova missione
+            use_when: una pressione deve diventare obiettivo concreto per i personaggi
+          - button: nuova-sessione-z-modelli-dm-sessione-md
+            label: Nuova sessione
+            use_when: vuoi preparare la prima giocata partendo dalla campagna
+          - button: nuovo-clock-z-modelli-dm-tracciato-md
+            label: Nuovo clock
+            use_when: un fronte deve avanzare anche se il party lo ignora
+      approfondisci_solo_se_serve:
+        label: Approfondisci solo se serve
+        purpose: Aggiungere profondita senza perdere il ponte verso la sessione.
+        actions:
+          - button: worldbuilding-profondo-risorse-worldbuilding-profondo
+            label: Worldbuilding profondo
+            use_when: una scheda continua a tornare in scena e merita piu livelli
+          - button: creazione-guidata-entita-risorse-creazione-guidata-entita
+            label: Creazione guidata entita
+            use_when: non sai quali campi compilare per renderla giocabile
+          - button: motore-mondo-vivo-motore-mondo-vivo
+            label: Motore mondo vivo
+            use_when: vuoi capire quali fazioni o pressioni reagiscono adesso
+          - button: preparazione-sessione-risorse-preparazione-sessione
+            label: Preparazione sessione
+            use_when: hai abbastanza materiale e devi portarlo al tavolo
+    required_plugins:
+      - Templater
+      - Meta Bind
       - Dataview
   fuori_scena:
     user_goal: Scegliere cosa reagisce tra una sessione e l'altra senza perdere conseguenze aperte.
