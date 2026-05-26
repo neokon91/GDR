@@ -14,8 +14,12 @@ const OUT = path.join(RELEASE_CHECK_ROOT, "vault-gdr-clean");
 const ZIP = `${OUT}.zip`;
 const CONTRACT = "Dev/TemplateFactory/modules/plugin_contracts.yaml";
 const RELEASE_BOUNDARY = "Dev/TemplateFactory/modules/release_boundary.yaml";
+const RELEASE_QUALITY_CONTRACT = "Dev/TemplateFactory/modules/release_quality_contract.yaml";
+const METABIND_INPUTS = "Dev/TemplateFactory/modules/metabind_inputs.yaml";
+const METABIND_BUTTONS = "Dev/TemplateFactory/modules/metabind_buttons.yaml";
 const WORKFLOWS = "Dev/TemplateFactory/modules/workflows.yaml";
 const TEMPLATER_DIR = "z.automazioni/templater";
+const CONTRACT_CHECK = process.argv.includes("--contract-check");
 const IGNORED_DIRS = new Set([".git", "node_modules", "dist"]);
 const BUTTON_REF_PATTERN = /BUTTON\[([^\]\n]+)\]/g;
 const META_BIND_BUTTON_ID_PATTERN = /^[A-Za-z0-9][A-Za-z0-9_-]*$/;
@@ -41,81 +45,54 @@ const ALLOWED_META_BIND_ACTION_TYPES = new Set([
     "templaterCreateNote"
 ]);
 
-const REQUIRED_META_BIND_INPUTS = [
-    "mondo",
-    "campagne",
-    "canonico",
-    "stato base",
-    "stato canonico",
-    "stato",
-    "pressione",
-    "prossima_mossa",
-    "connessioni",
-    "player_safe",
-    "entita_impattate",
-    "propaga_a",
-    "sessioni",
-    "luoghi",
-    "fazioni",
-    "missioni",
-    "tracciati"
-];
-
-const REQUIRED_FIRST_RUN_BUTTONS = [
-    "nuovo-mondo-homebrew",
-    "preparazione-sessione-risorse-preparazione-sessione",
-    "gioca-hub-durante-il-gioco-durante-il-gioco",
-    "fuori-scena-hub-cosa-succede-fuori-scena-cosa-succede-fuori-scena",
-    "setup-guidato-risorse-setup-guidato",
-    "prima-sessione-in-15-minuti-risorse-prima-sessione-in-15-minuti",
-    "worldbuilder-worldbuilder-dashboard-2",
-    "nuova-sessione-z-modelli-dm-sessione-md",
-    "rendi-sessione-attiva",
-    "wizard-appunto-live",
-    "registra-scelta-mondo",
-    "wizard-fine-sessione",
-    "applica-conseguenza",
-    "propaga-a-entita",
-    "prepara-recap-pubblico"
-];
-
-const FIRST_RUN_PAGES = [
-    "Inizia Qui.md",
-    "Demo Regno Di Prova.md",
-    "Risorse/Setup Guidato.md",
-    "Risorse/Prima Sessione In 15 Minuti.md",
-    "Hub/1. DM Dashboard.md",
-    "Hub/Worldbuilder Dashboard.md",
-    "Risorse/Preparazione Sessione.md",
-    "Hub/Durante il Gioco.md",
-    "Risorse/Post Sessione Guidato.md",
-    "Hub/Cosa Succede Fuori Scena.md",
-    "Hub/Vista Giocatori.md",
-    "Risorse/Se Qualcosa Non Funziona.md"
-];
-
-const FORBIDDEN_CALENDAR_MARKERS = [
-    "Harptos",
-    "Faer",
-    "Forgotten Realms",
-    "Greyhawk",
-    "Galifar",
-    "Barovia",
-    "Brumafonda",
-    "Terre della Soglia"
-];
-
-const FORBIDDEN_FIRST_RUN_MARKERS = [
-    "TemplateFactory",
-    "npm run",
-    "node z.automazioni",
-    "Dev/",
-    "source_lab:",
-    "idea_originale_riservata"
-];
+const RELEASE_QUALITY = loadYaml(RELEASE_QUALITY_CONTRACT);
+const REQUIRED_META_BIND_INPUTS = requiredMetaBindInputTemplates();
+const REQUIRED_META_BIND_BUTTONS = requiredMetaBindButtons();
+const FIRST_RUN_PAGES = requiredReleaseQualityArray("first_run_pages");
+const FORBIDDEN_CALENDAR_MARKERS = requiredReleaseQualityArray("forbidden_calendar_markers");
+const FORBIDDEN_FIRST_RUN_MARKERS = requiredReleaseQualityArray("forbidden_first_run_markers");
 
 function fail(message) {
     errors.push(message);
+}
+
+function contractValue(pathText) {
+    return String(pathText).split(".").reduce((value, key) => value?.[key], RELEASE_QUALITY);
+}
+
+function requiredReleaseQualityArray(pathText) {
+    const values = contractValue(pathText) ?? [];
+    const normalized = Array.isArray(values)
+        ? values.map(value => String(value)).filter(Boolean)
+        : [];
+    if (!normalized.length) {
+        throw new Error(`${RELEASE_QUALITY_CONTRACT}: ${pathText} vuoto o mancante`);
+    }
+    return normalized;
+}
+
+function requiredCatalogReleaseItems(relPath, rootKey, fieldName) {
+    const data = loadYaml(relPath);
+    const entries = Object.values(data[rootKey] ?? {})
+        .filter(item => item?.required_for_release === true)
+        .map(item => String(item?.[fieldName] ?? ""))
+        .filter(Boolean);
+    if (!entries.length) {
+        throw new Error(`${relPath}: nessun ${rootKey} con required_for_release: true`);
+    }
+    return entries;
+}
+
+function requiredMetaBindInputTemplates() {
+    return requiredCatalogReleaseItems(METABIND_INPUTS, "inputs", "name");
+}
+
+function requiredMetaBindButtons() {
+    return requiredCatalogReleaseItems(METABIND_BUTTONS, "buttons", "id");
+}
+
+function duplicates(values) {
+    return [...new Set(values.filter((value, index) => values.indexOf(value) !== index))];
 }
 
 function addGeneratedTemplatePath(templatePath) {
@@ -294,6 +271,37 @@ function collectBookmarks(items, out = []) {
     return out;
 }
 
+function validateReleaseQualityContract() {
+    if (RELEASE_QUALITY.id !== "release_quality_contract") {
+        fail(`${RELEASE_QUALITY_CONTRACT}: id non valido`);
+    }
+
+    for (const [name, values] of Object.entries({
+        first_run_pages: FIRST_RUN_PAGES,
+        forbidden_calendar_markers: FORBIDDEN_CALENDAR_MARKERS,
+        forbidden_first_run_markers: FORBIDDEN_FIRST_RUN_MARKERS
+    })) {
+        const duplicated = duplicates(values);
+        if (duplicated.length) {
+            fail(`${RELEASE_QUALITY_CONTRACT}: ${name} contiene duplicati (${duplicated.join(", ")})`);
+        }
+    }
+
+    if (!FIRST_RUN_PAGES.includes("Inizia Qui.md")) {
+        fail(`${RELEASE_QUALITY_CONTRACT}: first_run_pages deve includere Inizia Qui.md`);
+    }
+
+    for (const [name, values] of Object.entries({
+        required_meta_bind_inputs: REQUIRED_META_BIND_INPUTS,
+        required_meta_bind_buttons: REQUIRED_META_BIND_BUTTONS
+    })) {
+        const duplicated = duplicates(values);
+        if (duplicated.length) {
+            fail(`${name}: contiene duplicati (${duplicated.join(", ")})`);
+        }
+    }
+}
+
 function validatePluginContract() {
     const communityPlugins = readJsonRel(".obsidian/community-plugins.json", ROOT, []);
     const manifests = new Map(communityPlugins.map(id => [id, readJsonRel(`.obsidian/plugins/${id}/manifest.json`)]));
@@ -375,8 +383,8 @@ function validateMetaBindTargets(metaBind, root, firstRun, communityPlugins = []
     const buttonIds = new Set(buttons.map(button => button.id));
     if (buttonIds.size !== buttons.length) fail("Meta Bind: buttonTemplates contiene id duplicati");
     if (firstRun) {
-        for (const button of REQUIRED_FIRST_RUN_BUTTONS) {
-            if (!buttonIds.has(button)) fail(`Meta Bind: pulsante first-run mancante (${button})`);
+        for (const button of REQUIRED_META_BIND_BUTTONS) {
+            if (!buttonIds.has(button)) fail(`Meta Bind: pulsante release obbligatorio mancante (${button})`);
         }
     }
 
@@ -610,6 +618,18 @@ function validateReleaseFirstRun() {
     } catch {
         fail("zip release demo non valida: unzip -tq fallito");
     }
+}
+
+validateReleaseQualityContract();
+
+if (CONTRACT_CHECK) {
+    if (errors.length) {
+        console.error("Release quality contract non valido:");
+        for (const error of errors) console.error(`- ${error}`);
+        process.exit(1);
+    }
+    console.log(`Release quality contract OK: ${FIRST_RUN_PAGES.length} pagine first-run, ${REQUIRED_META_BIND_INPUTS.length} input Meta Bind, ${REQUIRED_META_BIND_BUTTONS.length} pulsanti Meta Bind obbligatori.`);
+    process.exit(0);
 }
 
 loadGeneratedTemplatePaths();

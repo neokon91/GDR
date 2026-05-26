@@ -11,6 +11,7 @@ Script usati da Templater, dashboard e manutenzione del vault.
 | `check_repo_quality_contract.js` | Valida `repo_quality_contract.yaml`: file obbligatori, plugin minimi, snippet, preset Metadata Menu e marker architetturali. |
 | `check_smoke.js` | Valida il gate statico della demo finale e del player-safe prima dello smoke visuale. |
 | `check_release.js` | Valida versione, changelog e verifica automatica della release pulita. |
+| `check_release_quality.js` | Verifica qualita statica della release pulita; in `--contract-check` valida solo `release_quality_contract.yaml` e cataloghi Meta Bind. |
 | `check_obsidian_user_acceptance.js` | Harness live: apre una release stabile in Obsidian con profilo persistente, verifica pagine first-run, gate UX visibili, probe runtime dei plugin, workflow Nuovo Mondo, ciclo sessione/post-sessione e persistenza. `check:obsidian-first-run` e l'unico comando che resetta profilo e accetta prompt. |
 | `run_source_pipeline.py` | Esegue la pipeline unica dichiarata in `source_pipeline.yaml`. |
 | `render_template_factory.py` | Renderizza anteprime locali ignorate o materializza template finali in `z.modelli` dentro output locali/release. |
@@ -72,6 +73,7 @@ npm run check:templates
 npm run check:workflow-data
 npm run check:workflow-actions
 npm run check:workflow-render
+npm run check:release-quality-contract
 npm run check:obsidian-ux
 npm run check:obsidian-user
 npm run check:obsidian-first-run

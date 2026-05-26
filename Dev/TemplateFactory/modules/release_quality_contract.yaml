@@ -1,0 +1,32 @@
+id: release_quality_contract
+purpose: Contratto dei gate statici applicati alla release pulita prima dello smoke live.
+version: 0.1.0
+first_run_pages:
+  - Inizia Qui.md
+  - Demo Regno Di Prova.md
+  - Risorse/Setup Guidato.md
+  - Risorse/Prima Sessione In 15 Minuti.md
+  - Hub/1. DM Dashboard.md
+  - Hub/Worldbuilder Dashboard.md
+  - Risorse/Preparazione Sessione.md
+  - Hub/Durante il Gioco.md
+  - Risorse/Post Sessione Guidato.md
+  - Hub/Cosa Succede Fuori Scena.md
+  - Hub/Vista Giocatori.md
+  - Risorse/Se Qualcosa Non Funziona.md
+forbidden_calendar_markers:
+  - Harptos
+  - Faer
+  - Forgotten Realms
+  - Greyhawk
+  - Galifar
+  - Barovia
+  - Brumafonda
+  - Terre della Soglia
+forbidden_first_run_markers:
+  - TemplateFactory
+  - "npm run"
+  - "node z.automazioni"
+  - "Dev/"
+  - "source_lab:"
+  - idea_originale_riservata

@@ -21,6 +21,7 @@
     "check:workflow-render": "node z.automazioni/render_workflow_quick_actions.js --check",
     "check:validation-contract": "node z.automazioni/check_validation_contract.js",
     "check:repo-quality-contract": "node z.automazioni/check_repo_quality_contract.js",
+    "check:release-quality-contract": "node z.automazioni/check_release_quality.js --contract-check",
     "check:user-path": "node z.automazioni/check_user_path.js",
     "check:metadata": "python3 z.automazioni/render_metadata_surfaces.py --check",
     "check:demo-contract": "node z.automazioni/check_demo_contract.js",

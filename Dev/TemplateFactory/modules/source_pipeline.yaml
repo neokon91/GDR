@@ -172,6 +172,23 @@ steps:
     check:
       - node
       - z.automazioni/check_repo_quality_contract.js
+  release_quality_contract:
+    purpose: Verifica il contratto YAML dei gate statici di release quality.
+    sources:
+      - Dev/TemplateFactory/modules/release_quality_contract.yaml
+      - Dev/TemplateFactory/modules/metabind_inputs.yaml
+      - Dev/TemplateFactory/modules/metabind_buttons.yaml
+      - z.automazioni/check_release_quality.js
+    outputs:
+      - memoria
+    render:
+      - node
+      - z.automazioni/check_release_quality.js
+      - --contract-check
+    check:
+      - node
+      - z.automazioni/check_release_quality.js
+      - --contract-check
   release_folder_notes:
     purpose: Verifica le folder notes utente di release da release_boundary.yaml e Jinja.
     sources:
