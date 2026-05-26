@@ -265,6 +265,7 @@ const REQUIRED_LAYER_FILES = [
     "z.automazioni/m11_state.js",
     "z.automazioni/generate_demo_fixture.js",
     "z.automazioni/check_m11_fixture.js",
+    "z.automazioni/check_plugin_usage_audit.js",
     "z.automazioni/check_runtime_load.js",
     "z.automazioni/check_smoke.js",
     "z.automazioni/check_validation_contract.js",

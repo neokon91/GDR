@@ -12,6 +12,7 @@
     "check:source-pipeline": "python3 z.automazioni/run_source_pipeline.py --mode check",
     "check:obsidian-config": "python3 z.automazioni/render_obsidian_config.py --check",
     "check:plugin-matrix": "python3 z.automazioni/render_plugin_matrix.py --check",
+    "check:plugin-usage": "node z.automazioni/check_plugin_usage_audit.js",
     "check:templater-wrappers": "python3 z.automazioni/render_templater_wrappers.py --check",
     "check:metabind-config": "python3 z.automazioni/render_metabind_config.py --check",
     "check:generation-contract": "python3 z.automazioni/check_generation_contract.py",
