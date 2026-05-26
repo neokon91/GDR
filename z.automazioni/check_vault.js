@@ -125,6 +125,7 @@ const REQUIRED_BASE_FILES = [
 ];
 const REQUIRED_LAYER_FILES = [
     "z.automazioni/helpers.js",
+    "z.automazioni/templater/sessione.js",
     "z.automazioni/import_map.js",
     "z.automazioni/m11_state.js",
     "z.automazioni/generate_demo_fixture.js",

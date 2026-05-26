@@ -148,7 +148,7 @@ function validateCriticalConfigs() {
 
     const templater = readJsonRel(".obsidian/plugins/templater-obsidian/data.json", {});
     if (templater.templates_folder !== "z.modelli") fail("Templater: templates_folder deve essere z.modelli");
-    if (templater.user_scripts_folder !== "z.automazioni") fail("Templater: user_scripts_folder deve essere z.automazioni");
+    if (templater.user_scripts_folder !== "z.automazioni/templater") fail("Templater: user_scripts_folder deve essere z.automazioni/templater");
     if (templater.enable_system_commands !== false) fail("Templater: enable_system_commands deve restare false");
     if (templater.trigger_on_file_creation !== false) fail("Templater: trigger_on_file_creation deve restare false");
 

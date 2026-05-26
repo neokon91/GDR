@@ -110,7 +110,7 @@ function validateMetaBindControls({
         }
     }
 
-    const automationDir = repoPath("z.automazioni");
+    const automationDir = repoPath("z.automazioni/templater");
     const automationNames = fs.existsSync(automationDir)
         ? new Set(walk(automationDir, file => file.endsWith(".js")).map(file => path.basename(file, ".js")))
         : new Set();
@@ -123,7 +123,7 @@ function validateMetaBindControls({
         while ((match = TEMPLATER_USER_PATTERN.exec(text))) {
             const helper = match[1];
             if (!automationNames.has(helper)) {
-                errors.push(`${fileRel}: helper Templater senza script in z.automazioni (${helper}.js)`);
+                errors.push(`${fileRel}: helper Templater senza wrapper in z.automazioni/templater (${helper}.js)`);
             }
         }
     }

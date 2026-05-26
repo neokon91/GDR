@@ -127,12 +127,13 @@ await tp.file.rename(nome);
 - Config file: `.obsidian/plugins/templater-obsidian/data.json`.
 - Config attuale rilevante:
   - `templates_folder`: `z.modelli`;
-  - `user_scripts_folder`: `z.automazioni`;
+  - `user_scripts_folder`: `z.automazioni/templater`;
   - `enable_system_commands`: `false`;
   - `trigger_on_file_creation`: `false`.
-- Dove e gia usato: template in `z.modelli/**`, per esempio `z.modelli/dm/Sessione.md`; funzioni in `z.automazioni/*.js`.
+- Dove e gia usato: template in `z.modelli/**`, per esempio `z.modelli/dm/Sessione.md`; wrapper Templater in `z.automazioni/templater/*.js`; logica reale in `z.automazioni/*.js`.
 - Dove va integrato:
   - ogni template generato da TemplateFactory deve avere una sola entry iniziale `<% await tp.user.nome(tp) %>`;
+  - ogni file visto direttamente da Templater deve esportare una sola funzione;
   - gli script devono limitarsi a inizializzazione, move/rename e normalizzazione metadata;
   - azioni da pulsante in `z.modelli/azioni/*.md` devono chiamare funzioni piccole in `z.automazioni/meta_actions.js`.
 - Fallback Markdown: se Templater non gira, il template deve restare leggibile e compilabile a mano; il primo rigo puo restare testo innocuo.

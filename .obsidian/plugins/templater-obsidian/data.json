@@ -6,7 +6,7 @@
   "auto_jump_to_cursor": false,
   "enable_system_commands": false,
   "shell_path": "",
-  "user_scripts_folder": "z.automazioni",
+  "user_scripts_folder": "z.automazioni/templater",
   "enable_folder_templates": false,
   "folder_templates": [],
   "enable_file_templates": false,

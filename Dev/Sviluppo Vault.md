@@ -104,7 +104,8 @@ I contratti vivono in:
 - `z.modelli`: template Templater. Modifica con cautela.
 - `z.modelli/azioni`: template sottili usati dai pulsanti Meta Bind operativi. La logica deve stare in `z.automazioni/meta_actions.js`.
 - `z.modelli/wizard`: wizard centralizzati. La logica deve stare in `z.automazioni/wizard_layer.js`.
-- `z.automazioni`: script Templater usati dai template e script CLI di manutenzione. Se cambi un percorso qui, aggiorna anche dashboard e Dataview.
+- `z.automazioni/templater`: wrapper caricati direttamente da Templater. Devono esportare solo funzioni.
+- `z.automazioni`: logica reale usata dai wrapper Templater e script CLI di manutenzione. Se cambi un percorso qui, aggiorna anche dashboard e Dataview.
 - `z.engine`: componenti JS riusabili per viste operative. Nuova logica complessa va qui, non copiata in blocchi DataviewJS sparsi.
 - `z.bacheche`: bacheche Kanban per preparazione e creature.
 
@@ -216,7 +217,7 @@ Prima di una release o dopo modifiche a template, script e plugin, esegui:
 npm run check
 ```
 
-Il controllo verifica JSON di configurazione, plugin obbligatori inclusi e abilitati, wikilink rotti o ambigui, percorsi `templateFile` usati dai pulsanti Meta Bind, helper Templater con script esistente in `z.automazioni`, target di Iconize, riferimenti Obsidian obsoleti, sessioni multiple attive, indice GPT, frontmatter operativo, categorie/stati/tipi ragionevoli, note live senza sessione o mondo, campi minimi per categoria, file essenziali del plugin layer interno, input template Meta Bind, button template operativi, preset Metadata Menu, igiene repository e sintassi JS in `z.automazioni` e `z.engine`. SRD e note indice sono esclusi dai controlli che produrrebbero falsi positivi.
+Il controllo verifica JSON di configurazione, plugin obbligatori inclusi e abilitati, wikilink rotti o ambigui, percorsi `templateFile` usati dai pulsanti Meta Bind, helper Templater con wrapper funzione esistente in `z.automazioni/templater`, target di Iconize, riferimenti Obsidian obsoleti, sessioni multiple attive, indice GPT, frontmatter operativo, categorie/stati/tipi ragionevoli, note live senza sessione o mondo, campi minimi per categoria, file essenziali del plugin layer interno, input template Meta Bind, button template operativi, preset Metadata Menu, igiene repository e sintassi JS in `z.automazioni` e `z.engine`. SRD e note indice sono esclusi dai controlli che produrrebbero falsi positivi.
 
 Se `npm` non e disponibile, il comando equivalente e:
 

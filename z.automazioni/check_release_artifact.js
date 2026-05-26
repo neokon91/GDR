@@ -95,8 +95,8 @@ function validateOutput(errors) {
         fail(errors, "snippet gdr-vault non abilitato nella release");
     }
     const templater = JSON.parse(fs.readFileSync(path.join(OUT, ".obsidian/plugins/templater-obsidian/data.json"), "utf8"));
-    if (templater.templates_folder !== "z.modelli" || templater.user_scripts_folder !== "z.automazioni") {
-        fail(errors, "Templater release non punta a z.modelli e z.automazioni");
+    if (templater.templates_folder !== "z.modelli" || templater.user_scripts_folder !== "z.automazioni/templater") {
+        fail(errors, "Templater release non punta a z.modelli e z.automazioni/templater");
     }
     const dataview = JSON.parse(fs.readFileSync(path.join(OUT, ".obsidian/plugins/dataview/data.json"), "utf8"));
     if (dataview.enableDataviewJs !== true) {

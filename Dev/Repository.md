@@ -33,7 +33,7 @@ Questa nota e tecnica. Serve solo a chi cura il vault, non al DM che lo usa per 
 | `z.modelli/` | template Templater | Percorsi richiamati da pulsanti Meta Bind. |
 | `z.modelli/azioni/` | template azione Meta Bind | Deve restare sottile: solo chiamate a `meta_actions.js`. |
 | `z.modelli/wizard/` | wizard Templater centralizzati | Deve restare sottile: solo chiamate a `wizard_layer.js`. |
-| `z.automazioni/` | script Templater e CLI | Cambiare nomi rompe template e controlli. |
+| `z.automazioni/` | runtime Templater, helper e CLI | Cambiare nomi rompe template e controlli. Templater vede solo `z.automazioni/templater/`. |
 | `z.engine/` | componenti JS riusabili | Viste operative da richiamare da DataviewJS o JS Engine. |
 | `z.bacheche/` | board Kanban | Workflow operativo, non archivio permanente. |
 | `.obsidian/` | configurazione Obsidian e plugin | Parte del prodotto: non e solo preferenza locale. |
@@ -48,7 +48,7 @@ Questa nota e tecnica. Serve solo a chi cura il vault, non al DM che lo usa per 
 ## Cosa Non Spostare Alla Leggera
 
 - `z.modelli`: Templater e Meta Bind usano percorsi espliciti come `templateFile`.
-- `z.automazioni`: i template chiamano helper con `tp.user.nome_script`.
+- `z.automazioni/templater`: wrapper funzione caricati da Templater con `tp.user.nome_script`; la logica reale resta in `z.automazioni`.
 - `z.engine`: le dashboard possono importare componenti JS da qui; non duplicare logica lunga nei blocchi DataviewJS.
 - `.obsidian/plugins/obsidian-meta-bind-plugin/data.json`: contiene input template e button template operativi.
 - `.obsidian/plugins/metadata-menu/data.json` e `z.fileclass/`: insieme definiscono lo schema operativo.

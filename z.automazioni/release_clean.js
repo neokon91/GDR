@@ -101,6 +101,7 @@ const REQUIRED_RELEASE_FILES = [
     "z.engine/session_continuity.js",
     "z.engine/session_runtime.js",
     "z.automazioni/helpers.js",
+    "z.automazioni/templater",
     "z.bases/Atlante Mappe.base",
     "z.bases/Worldbuilding.base",
     "z.bases/Fazioni.base",
@@ -429,8 +430,8 @@ function validateRelease() {
     }
 
     const templaterConfig = readJson(repoPath(OUT, ".obsidian/plugins/templater-obsidian/data.json"), {});
-    if (templaterConfig.templates_folder !== "z.modelli" || templaterConfig.user_scripts_folder !== "z.automazioni") {
-        errors.push("Templater non configurato su z.modelli e z.automazioni nella release");
+    if (templaterConfig.templates_folder !== "z.modelli" || templaterConfig.user_scripts_folder !== "z.automazioni/templater") {
+        errors.push("Templater non configurato su z.modelli e z.automazioni/templater nella release");
     }
 
     const dataviewConfig = readJson(repoPath(OUT, ".obsidian/plugins/dataview/data.json"), {});
