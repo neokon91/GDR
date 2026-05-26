@@ -23,6 +23,95 @@
   const fieldText = value => Array.isArray(value)
     ? value.map(item => item?.path ? item.path.split("/").pop().replace(/\.md$/, "") : String(item ?? "")).filter(Boolean).join(", ")
     : value?.path ? value.path.split("/").pop().replace(/\.md$/, "") : String(value ?? "");
+  const pluginIds = {
+    "Advanced Canvas": "advanced-canvas",
+    "Bases": "bases",
+    "Calendarium": "calendarium",
+    "Callout Manager": "callout-manager",
+    "Dataview": "dataview",
+    "Dice Roller": "obsidian-dice-roller",
+    "Excalidraw": "obsidian-excalidraw-plugin",
+    "Fantasy Content Generator": "fantasy-content-generator",
+    "Fantasy Statblocks": "obsidian-5e-statblocks",
+    "Folder Notes": "folder-notes",
+    "Initiative Tracker": "initiative-tracker",
+    "JS Engine": "js-engine",
+    "Kanban": "obsidian-kanban",
+    "Linter": "obsidian-linter",
+    "Maps": "maps",
+    "Media Extended": "media-extended",
+    "Meta Bind": "obsidian-meta-bind-plugin",
+    "Metadata Menu": "metadata-menu",
+    "Tasks": "obsidian-tasks-plugin",
+    "Templater": "templater-obsidian"
+  };
+  const pluginSymptoms = {
+    "Dataview": "Tabelle e dashboard restano vuote o mostrano codice.",
+    "Meta Bind": "I pulsanti BUTTON o gli input non reagiscono.",
+    "Templater": "Wizard e creazione note non partono o restano incompleti.",
+    "Tasks": "Checklist operative e bacheche non filtrano i task.",
+    "Dice Roller": "I tiri dice restano testo.",
+    "Fantasy Statblocks": "Le creature non appaiono come schede.",
+    "Initiative Tracker": "Gli incontri non entrano nel flusso a turni.",
+    "Media Extended": "Audio, video o riferimenti media non si aprono come previsto.",
+    "Calendarium": "Date e calendario non vengono mostrati.",
+    "Bases": "Le viste tabellari native non sono disponibili.",
+    "Maps": "Mappe e marker non vengono mostrati.",
+    "Excalidraw": "Mappe fronti e canvas disegnati non si aprono.",
+    "Advanced Canvas": "Canvas avanzati e collegamenti visuali non sono disponibili.",
+    "Linter": "La pulizia automatica delle note non e disponibile.",
+    "Fantasy Content Generator": "Il generatore fantasy non puo creare nuove bozze.",
+    "JS Engine": "Alcuni runtime condivisi non vengono eseguiti."
+  };
+  const workflowPluginFallbacks = {
+    dashboard_dm: ["Meta Bind", "Dataview", "Templater", "Tasks"],
+    espandi_mondo: ["Templater", "Meta Bind", "Dataview", "Bases", "Maps", "Excalidraw", "Advanced Canvas"],
+    prepara_sessione: ["Templater", "Dataview", "Tasks", "Meta Bind", "Dice Roller", "Initiative Tracker", "Fantasy Statblocks", "Media Extended"],
+    gioca_live: ["Meta Bind", "Dataview", "Dice Roller", "Initiative Tracker", "Fantasy Statblocks", "Media Extended", "Callout Manager"],
+    fuori_scena: ["Meta Bind", "Dataview", "Templater", "Tasks"],
+    post_sessione: ["Templater", "Meta Bind", "Tasks", "Dataview", "Calendarium"],
+    manutenzione: ["Meta Bind", "Dataview", "Tasks", "Bases", "Linter"],
+    inbox_operativa: ["Meta Bind", "Dataview", "Templater", "Fantasy Content Generator"],
+    smistamento_bozze: ["Meta Bind", "Dataview", "Templater", "Fantasy Content Generator"],
+    quality_report: ["Meta Bind", "Dataview", "JS Engine"],
+    stato_campagna: ["Meta Bind", "Dataview", "Templater"]
+  };
+
+  async function readJsonRel(path, fallback = null) {
+    try {
+      return JSON.parse(await app.vault.adapter.read(path));
+    } catch (error) {
+      return fallback;
+    }
+  }
+
+  async function canReadRel(path) {
+    try {
+      await app.vault.adapter.read(path);
+      return true;
+    } catch (error) {
+      return false;
+    }
+  }
+
+  function pluginStatus(label) {
+    const id = pluginIds[label];
+    const ok = id ? app.plugins?.enabledPlugins?.has(id) === true : null;
+    return { id: id ?? "plugin non mappato", ok };
+  }
+
+  function describeButtonTemplate(template) {
+    const actions = asArray(template?.actions);
+    if (!actions.length) return "Template Meta Bind senza azioni configurate.";
+    return actions.map(action => {
+      if (action.type === "templaterCreateNote") {
+        return `crea nota da ${action.templateFile ?? "template non indicato"}${action.folderPath ? ` in ${action.folderPath}` : ""}`;
+      }
+      if (action.type === "runTemplaterFile") return `esegue ${action.templateFile ?? "file Templater non indicato"}`;
+      if (action.type === "open") return `apre ${action.link ?? action.path ?? "destinazione non indicata"}`;
+      return action.type ?? "azione Meta Bind";
+    }).join("; ");
+  }
 
   function cardHtml({ title, meta = "", body = "", link = "", cls = "gdr-info-card", stato = "", pressione = "", azione = "", importa = "", badge = "" }) {
     const linkedTitle = link
@@ -193,6 +282,8 @@
       const raw = await app.vault.adapter.read(dataPath);
       const data = JSON.parse(raw);
       const workflow = data.workflows?.[workflowId];
+      const metaBind = await readJsonRel(".obsidian/plugins/obsidian-meta-bind-plugin/data.json", {});
+      const buttonTemplates = new Map(asArray(metaBind?.buttonTemplates).map(button => [String(button.id ?? ""), button]));
 
       if (!workflow) {
         renderEmptyState(dv, {
@@ -207,33 +298,68 @@
       const entryPoints = asArray(workflow.entry_points);
       const actions = asArray(workflow.quick_actions);
       const actionGroups = Object.values(workflow.action_groups ?? {});
+      const entryStates = await Promise.all(entryPoints.map(async entry => [entry, await canReadRel(entry)]));
+      const missingEntries = entryStates.filter(([, ok]) => !ok).map(([entry]) => entry);
+      const metaBindStatus = pluginStatus("Meta Bind");
       const grid = dv.el("div", "", { cls: "gdr-card-grid compact" });
       const cards = [];
+      const renderActionCard = (action, secondary = false) => {
+        const button = String(action.button ?? "");
+        const template = buttonTemplates.get(button);
+        const metaBindReady = metaBindStatus.ok === true;
+        const configured = Boolean(template);
+        const ready = Boolean(button && configured && metaBindReady);
+        const missingReason = !button
+          ? "Pulsante mancante nel workflow YAML."
+          : !configured
+            ? "Template Meta Bind non configurato."
+            : !metaBindReady
+              ? "Plugin Meta Bind non attivo."
+              : "Azione pronta.";
+        const fallback = !button
+          ? "Correggi Dev/TemplateFactory/modules/workflows.yaml."
+          : !configured
+            ? `Aggiungi ${button} in .obsidian/plugins/obsidian-meta-bind-plugin/data.json.`
+            : !metaBindReady
+              ? `Abilita Meta Bind (${metaBindStatus.id}) nei plugin community.`
+              : describeButtonTemplate(template);
+
+        return cardHtml({
+          title: action.label || button || (secondary ? "Azione secondaria" : "Azione"),
+          meta: button ? `BUTTON[${button}] · ${ready ? "Pronto" : "Da controllare"}` : "Pulsante mancante",
+          body: action.use_when || "Condizione d'uso non dichiarata.",
+          importa: `${missingReason} Fallback: ${fallback}`,
+          cls: `gdr-info-card compact ${ready ? "gdr-kind-ready" : "gdr-kind-missing"}`
+        });
+      };
 
       cards.push(cardHtml({
         title: "Flusso operativo",
         meta: workflowId,
         body: workflow.user_goal || "Obiettivo workflow non dichiarato.",
-        importa: entryPoints.length ? `Pagine: ${entryPoints.join(", ")}` : "Manca una pagina operativa collegata.",
-        cls: `gdr-info-card compact ${entryPoints.length ? "gdr-kind-ready" : "gdr-kind-missing"}`
+        importa: entryPoints.length
+          ? missingEntries.length
+            ? `Entry point mancanti: ${missingEntries.join(", ")}.`
+            : `Entry point verificati: ${entryPoints.join(", ")}.`
+          : "Manca una pagina operativa collegata.",
+        cls: `gdr-info-card compact ${entryPoints.length && !missingEntries.length ? "gdr-kind-ready" : "gdr-kind-missing"}`
       }));
 
-      cards.push(cardHtml({
-        title: "Plugin coinvolti",
-        meta: `${plugins.length} plugin`,
-        body: plugins.join(", ") || "Nessun plugin dichiarato nel workflow YAML.",
-        importa: "Se un controllo non risponde, verifica prima questi plugin in Obsidian.",
-        cls: `gdr-info-card compact ${plugins.length ? "gdr-kind-ready" : "gdr-kind-missing"}`
-      }));
+      for (const plugin of plugins) {
+        const status = pluginStatus(plugin);
+        cards.push(cardHtml({
+          title: plugin,
+          meta: status.ok === true ? "Plugin attivo" : status.ok === false ? "Plugin da attivare" : "Verifica manuale",
+          body: pluginSymptoms[plugin] ?? "Plugin dichiarato nel workflow YAML.",
+          importa: status.ok === true
+            ? `Plugin attivo: ${status.id}.`
+            : `Se le azioni non partono, apri Impostazioni > Plugin community e verifica ${status.id}.`,
+          cls: `gdr-info-card compact ${status.ok === true ? "gdr-kind-ready" : "gdr-kind-missing"}`
+        }));
+      }
 
       for (const action of actions) {
-        cards.push(cardHtml({
-          title: action.label || action.button || "Azione",
-          meta: action.button ? `BUTTON[${action.button}]` : "Pulsante mancante",
-          body: action.use_when || "Condizione d'uso non dichiarata.",
-          importa: action.button ? "Pulsante Meta Bind dichiarato nel contratto workflow." : "Correggi workflows.yaml.",
-          cls: `gdr-info-card compact ${action.button ? "gdr-kind-ready" : "gdr-kind-missing"}`
-        }));
+        cards.push(renderActionCard(action));
       }
 
       for (const group of actionGroups) {
@@ -246,21 +372,15 @@
         }));
 
         for (const action of asArray(group.actions)) {
-          cards.push(cardHtml({
-            title: action.label || action.button || "Azione secondaria",
-            meta: action.button ? `BUTTON[${action.button}]` : "Pulsante mancante",
-            body: action.use_when || "Condizione d'uso non dichiarata.",
-            importa: "Azione secondaria validata contro Meta Bind.",
-            cls: `gdr-info-card compact ${action.button ? "gdr-kind-ready" : "gdr-kind-missing"}`
-          }));
+          cards.push(renderActionCard(action, true));
         }
       }
 
       cards.push(cardHtml({
         title: "Se un controllo non risponde",
         meta: "Fallback operativo",
-        body: "Controlla prima Meta Bind, Dataview e Templater; poi usa il testo del pulsante come procedura manuale.",
-        importa: "Il flusso resta usabile anche se un plugin non esegue l'azione.",
+        body: "Leggi la condizione d'uso dell'azione, apri manualmente la pagina o il template indicato e completa i campi richiesti nella nota.",
+        importa: "Il deck ora distingue plugin mancanti, template Meta Bind assenti ed entry point non leggibili.",
         cls: "gdr-info-card compact"
       }));
 
@@ -275,74 +395,17 @@
   }
 
   function renderPluginTroubleshooting(dv, workflowId = "") {
-    const pluginIds = {
-      "Advanced Canvas": "advanced-canvas",
-      "Bases": "bases",
-      "Calendarium": "calendarium",
-      "Callout Manager": "callout-manager",
-      "Dataview": "dataview",
-      "Dice Roller": "obsidian-dice-roller",
-      "Fantasy Content Generator": "fantasy-content-generator",
-      "Fantasy Statblocks": "obsidian-5e-statblocks",
-      "Folder Notes": "folder-notes",
-      "Initiative Tracker": "initiative-tracker",
-      "JS Engine": "js-engine",
-      "Kanban": "obsidian-kanban",
-      "Linter": "obsidian-linter",
-      "Maps": "maps",
-      "Media Extended": "media-extended",
-      "Meta Bind": "obsidian-meta-bind-plugin",
-      "Metadata Menu": "metadata-menu",
-      "Tasks": "obsidian-tasks-plugin",
-      "Templater": "templater-obsidian"
-    };
-    const workflowPlugins = {
-      dashboard_dm: ["Meta Bind", "Dataview", "Templater", "Tasks"],
-      espandi_mondo: ["Templater", "Meta Bind", "Dataview", "Bases", "Maps", "Excalidraw", "Advanced Canvas"],
-      prepara_sessione: ["Templater", "Dataview", "Tasks", "Meta Bind", "Dice Roller", "Initiative Tracker", "Fantasy Statblocks", "Media Extended"],
-      gioca_live: ["Meta Bind", "Dataview", "Dice Roller", "Initiative Tracker", "Fantasy Statblocks", "Media Extended", "Callout Manager"],
-      fuori_scena: ["Meta Bind", "Dataview", "Templater", "Tasks"],
-      post_sessione: ["Templater", "Meta Bind", "Tasks", "Dataview", "Calendarium"],
-      manutenzione: ["Meta Bind", "Dataview", "Tasks", "Bases", "Linter"],
-      inbox_operativa: ["Meta Bind", "Dataview", "Templater", "Fantasy Content Generator"],
-      smistamento_bozze: ["Meta Bind", "Dataview", "Templater", "Fantasy Content Generator"],
-      quality_report: ["Meta Bind", "Dataview", "JS Engine"],
-      stato_campagna: ["Meta Bind", "Dataview", "Templater"]
-    };
-    const labels = workflowPlugins[workflowId] ?? ["Dataview", "Meta Bind", "Templater", "Tasks", "Dice Roller", "Fantasy Statblocks"];
-    const enabled = label => {
-      const id = pluginIds[label];
-      return id ? app.plugins?.enabledPlugins?.has(id) === true : null;
-    };
-    const symptomByPlugin = {
-      "Dataview": "Tabelle e dashboard restano vuote o mostrano codice.",
-      "Meta Bind": "I pulsanti BUTTON o gli input non reagiscono.",
-      "Templater": "Wizard e creazione note non partono o restano incompleti.",
-      "Tasks": "Checklist operative e bacheche non filtrano i task.",
-      "Dice Roller": "I tiri dice restano testo.",
-      "Fantasy Statblocks": "Le creature non appaiono come schede.",
-      "Initiative Tracker": "Gli incontri non entrano nel flusso a turni.",
-      "Media Extended": "Audio, video o riferimenti media non si aprono come previsto.",
-      "Calendarium": "Date e calendario non vengono mostrati.",
-      "Bases": "Le viste tabellari native non sono disponibili.",
-      "Maps": "Mappe e marker non vengono mostrati.",
-      "Excalidraw": "Mappe fronti e canvas disegnati non si aprono.",
-      "Advanced Canvas": "Canvas avanzati e collegamenti visuali non sono disponibili.",
-      "Linter": "La pulizia automatica delle note non e disponibile.",
-      "Fantasy Content Generator": "Il generatore fantasy non puo creare nuove bozze.",
-      "JS Engine": "Alcuni runtime condivisi non vengono eseguiti."
-    };
+    const labels = workflowPluginFallbacks[workflowId] ?? ["Dataview", "Meta Bind", "Templater", "Tasks", "Dice Roller", "Fantasy Statblocks"];
     const grid = dv.el("div", "", { cls: "gdr-card-grid compact" });
 
     grid.innerHTML = labels.map(label => {
-      const ok = enabled(label);
-      const id = pluginIds[label] ?? "plugin non mappato";
+      const status = pluginStatus(label);
       return cardHtml({
         title: label,
-        meta: ok === true ? "Pronto" : ok === false ? "Da controllare" : "Verifica manuale",
-        body: symptomByPlugin[label] ?? "Controlla che il plugin sia installato, abilitato e aggiornato.",
-        importa: ok === true ? `Plugin attivo: ${id}` : `Apri Impostazioni > Plugin community e verifica ${id}.`,
-        cls: `gdr-info-card compact ${ok === true ? "gdr-kind-ready" : "gdr-kind-missing"}`
+        meta: status.ok === true ? "Pronto" : status.ok === false ? "Da controllare" : "Verifica manuale",
+        body: pluginSymptoms[label] ?? "Controlla che il plugin sia installato, abilitato e aggiornato.",
+        importa: status.ok === true ? `Plugin attivo: ${status.id}` : `Apri Impostazioni > Plugin community e verifica ${status.id}.`,
+        cls: `gdr-info-card compact ${status.ok === true ? "gdr-kind-ready" : "gdr-kind-missing"}`
       });
     }).join("") + cardHtml({
       title: "Fallback manuale",

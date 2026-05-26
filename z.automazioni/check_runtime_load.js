@@ -81,6 +81,12 @@ async function main() {
             if (!rendered.some(node => String(node.innerHTML).includes("BUTTON[evento-live-z-modelli-live-evento-md]"))) {
                 errors.push("renderWorkflowCommandDeck: output workflow gioca_live senza gruppi di cattura");
             }
+            if (!rendered.some(node => String(node.innerHTML).includes("crea nota da z.modelli/Live Evento.md"))) {
+                errors.push("renderWorkflowCommandDeck: output senza fallback Meta Bind da template configurato");
+            }
+            if (!rendered.some(node => String(node.innerHTML).includes("Plugin da attivare"))) {
+                errors.push("renderWorkflowCommandDeck: output senza diagnosi plugin mancanti");
+            }
             views.renderPluginTroubleshooting(dv, "dashboard_dm");
             if (!rendered.some(node => String(node.innerHTML).includes("Fallback manuale"))) {
                 errors.push("renderPluginTroubleshooting: output senza fallback manuale");
