@@ -9,6 +9,28 @@ generated_by: release_clean
 
 {{ body }}
 {% endif %}
+
+## Subito
+
+{% if workflow_blocks %}
+Usa le azioni rapide qui sotto per trasformare questa area in materiale giocabile.
+{% else %}
+Apri [[Hub/Worldbuilder Dashboard]] per creare o collegare nuove note in questa area.
+{% endif %}
+
+## Vista
+
+```dataview
+TABLE stato, tipo, mondo, prossima_mossa
+FROM "{{ source_folder }}"
+WHERE file.name != "{{ title }}" AND file.path != this.file.path
+SORT file.mtime DESC
+LIMIT 20
+```
+
+## Quando Non C'e Ancora Nulla
+
+{{ empty_state }}
 {% for workflow_id in workflow_blocks %}
 {% set workflow = workflows.get(workflow_id, {}) %}
 

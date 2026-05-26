@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import sys
 from pathlib import Path
 from typing import Any
@@ -37,6 +38,22 @@ def load_json(path: Path) -> dict[str, Any]:
 def default_title(file: dict[str, Any]) -> str:
     path = Path(str(file.get("path", "")))
     return path.stem or "Indice"
+
+
+def source_folder(rel_path: str) -> str:
+    path = Path(rel_path)
+    parent = path.parent.as_posix()
+    return parent if parent != "." else path.stem
+
+
+def empty_state(file: dict[str, Any], rel_path: str) -> str:
+    if file.get("empty_state"):
+        return str(file["empty_state"]).strip()
+    folder = source_folder(rel_path)
+    return (
+        f"Se questa vista e vuota, non e un errore: crea una nota in `{folder}` "
+        "solo quando serve a una scelta, una scena, una conseguenza o una preparazione concreta."
+    )
 
 
 def build_env() -> Environment:
@@ -85,6 +102,8 @@ def render_notes(errors: list[str]) -> dict[str, str]:
             path=rel_path,
             title=str(file.get("title") or default_title(file)),
             body=str(file.get("body", "")).strip(),
+            source_folder=str(file.get("source_folder") or source_folder(rel_path)),
+            empty_state=empty_state(file, rel_path),
             workflow_blocks=[str(item) for item in workflow_blocks],
             workflows=workflows,
         )
@@ -106,6 +125,14 @@ def validate_rendered(rendered: dict[str, str], errors: list[str]) -> None:
             errors.append(f"{rel_path}: marker generated_by mancante")
         if "\n# " not in text:
             errors.append(f"{rel_path}: titolo H1 mancante")
+        for marker in ("## Subito", "## Vista", "## Quando Non C'e Ancora Nulla"):
+            if marker not in text:
+                errors.append(f"{rel_path}: sezione release mancante ({marker})")
+        if "```dataview" not in text:
+            errors.append(f"{rel_path}: vista Dataview minima mancante")
+        empty_match = re.search(r"## Quando Non C'e Ancora Nulla\n\n(.+?)(?:\n## |\n<!--|\Z)", text, re.S)
+        if not empty_match or not empty_match.group(1).strip():
+            errors.append(f"{rel_path}: stato vuoto operativo mancante")
         if "workflow:quick_actions:start" in text and "workflow:quick_actions:end" not in text:
             errors.append(f"{rel_path}: marker workflow incompleti")
 
