@@ -51,12 +51,10 @@ const EXCLUDED_RISORSE = new Set([
     "Modello Entità.md",
     "Preset Calendario.md",
     "Profili Campagna.md",
-    "Recap Plugin Installati.md",
     "Release Pulita.md",
     "Roadmap",
     "Smoke 1.0 Professionale.md",
     "Strumenti Attivi.md",
-    "Studio Iron Vault.md",
     "Sviluppo Vault.md",
     "Worldbuilding Tassonomico.md"
 ]);

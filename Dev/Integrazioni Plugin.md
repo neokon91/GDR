@@ -7,9 +7,7 @@ cssclasses:
 
 Questa pagina decide quali plugin integrare per primi nel vault. Non e una lista di installazione: e una coda di lavoro per trasformare plugin gia scelti in funzioni utili al DM.
 
-Per il recap completo dei plugin installati, con versioni, stato reale, fonti ufficiali e beneficiari, vedi [[Dev/Recap Plugin Installati]].
-
-Per il contratto verificato della 1.0, vedi [[Dev/Matrice Plugin 1.0]]. La matrice e duplicata in forma leggibile da macchina in `Dev/plugin_matrix.json`; `npm run check` fallisce se un plugin abilitato non ha funzione, guida, pagina operativa e smoke.
+Per il contratto verificato della 1.0, vedi [[Dev/Matrice Plugin 1.0]], `Dev/plugin_matrix.json` e `Dev/TemplateFactory/modules/plugin_contracts.yaml`; `npm run check` fallisce se un plugin abilitato non ha funzione, guida, pagina operativa, smoke e contratto release.
 
 ## Fonti Ufficiali Consultate
 
@@ -132,7 +130,7 @@ Questa non e una lista di rimozione. I 27 plugin installati vanno sfruttati. Que
 | Commander | bassa | non installato, opzionale UX | toolbar comandi per DM e mobile | Utile per esporre comandi senza far aprire la command palette. Non aggiunge contenuto o modello dati, quindi non e core. |
 | Leaflet | bassa | non installato, alternativa mappe | mappe fantasy con immagine e marker | Funzionalmente vicino a TTRPG Tools: Maps. Ha senso solo per compatibilita con vault esistenti o mappe gia scritte in sintassi Leaflet. |
 
-Dettaglio audit: [[Dev/Audit Plugin Bases Tasks]].
+Il dettaglio operativo e consolidato nel contratto plugin YAML e nei check `check:release-quality`.
 
 ### Prova Consigliata Per Bases
 
@@ -330,7 +328,6 @@ Fatto bene quando: durante preparazione o gioco il DM puo generare una bozza, sa
 Questi plugin restano secondari o fuori dal flusso base della release ZIP:
 
 - **Iconize**: migliora orientamento visivo, ma non sostituisce indici e dashboard chiare.
-- **Iron Vault**: fuori dal bundle e dal flusso base D&D/fantasy classico; studiarne progress track, clock, oracoli e note attive per replicare funzioni utili nel vault senza imporre Ironsworn/Starforged.
 - **BRAT**: manutenzione plugin essenziale per strumenti non ufficiali o beta; resta attivo ma non entra nel percorso del DM.
 - **Emoji Toolbar**: opzionale, non incluso nella release base.
 

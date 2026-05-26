@@ -346,7 +346,7 @@ limit 20
 ````
 
 - Config file: `.obsidian/plugins/obsidian-tasks-plugin/data.json`.
-- Dove e gia usato: `Risorse/Task DM.md`, `Dev/Audit Plugin Bases Tasks.md`, guide operative.
+- Dove e gia usato: `Risorse/Task DM.md`, guide operative e controlli in `z.automazioni`.
 - Dove va integrato:
   - template sessione, missione e manutenzione devono produrre task con `#task`;
   - `Dev/TemplateFactory/modules/sections.yaml` puo includere sezioni "Prossime azioni".

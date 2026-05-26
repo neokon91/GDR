@@ -45,8 +45,8 @@
 - Contratto architetturale consolidato in [[Dev/README]]: Markdown contenuto umano, YAML stato persistente, Dataview query layer, Meta Bind interfaccia, Templater generazione, `z.engine`/`z.automazioni` runtime.
 - `workflows.yaml` ora documenta regole dichiarative di continuità con trigger, condizioni, effetti e propagazioni, eseguite dal runtime esistente.
 - `prepara-recap-pubblico` non marca più pubblica l'intera nota sessione; il gate impedisce regressioni su questa azione.
-- [[Dev/Prossima Discussione - YAML Entita Fantasy]] ora e un brief operativo M11 con tre interventi concreti: entita vive end-to-end, pipeline homebrew D&D 5.5 collegata al mondo e simulazione narrativa leggera.
-- [[Dev/NEXT_PHASE_HANDOFF]] punta a M11 invece di restare su M9, con priorita tecniche e vincoli coerenti con il sistema operativo narrativo in Obsidian.
+- brief M11 consolidato poi rimosso ora e un brief operativo M11 con tre interventi concreti: entita vive end-to-end, pipeline homebrew D&D 5.5 collegata al mondo e simulazione narrativa leggera.
+- handoff M11 consolidato poi rimosso punta a M11 invece di restare su M9, con priorita tecniche e vincoli coerenti con il sistema operativo narrativo in Obsidian.
 - M11 avviata con runtime reale: `registra_scelta_mondo` registra scelta, conseguenza, bersagli, propagazione, pressione e avanzamento tracciati sui target collegati.
 - `renderM11ContinuityChain` espone nelle viste operative la catena scelta -> conseguenza -> bersagli -> stato -> prossima apertura.
 - `check_m11_fixture.js` valida la catena end-to-end M11 su fixture generata: sessione, conseguenza, propagazione, clock, D&D 5.5 e viste operative.
@@ -61,7 +61,7 @@
 - Rimossa la demo manuale dal sorgente: i contenuti dimostrativi devono nascere da generatore dedicato a fine ciclo.
 - Gate esperienza hub: `check_vault.js` verifica ruolo, classe visuale, callout, viste/input/azioni plugin-native e marker funzionali degli hub principali.
 - Gate Plugin Surface YAML: TemplateFactory blocca input Meta Bind, bottoni, callout, runtime DataviewJS e Bases usati nei Jinja se non sono dichiarati nei moduli YAML.
-- [[Dev/Prossima Discussione - YAML Entita Fantasy]] prepara la prossima fase su profondita delle entita fantasy governata da YAML.
+- brief M11 consolidato poi rimosso prepara la prossima fase su profondita delle entita fantasy governata da YAML.
 - `entity_depth.yaml` introduce contratti YAML per profondita fantasy di luogo, fazione, missione e tracciato: campi, prompt runtime, sezioni, tabs e superfici plugin obbligatorie.
 - `taxonomy_depth.yaml` introduce contratti verificati per D&D 5.5 e worldbuilding: opzioni giocatore, magia/regole, encounter tools, societa/economia, religione/cosmologia e storia/geografia/ecologia.
 - `dnd55_options.yaml` introduce valori D&D 5.5 localizzati in italiano per livelli incantesimo, scuole, tempi, componenti, classi, specie, tipi creatura, taglie, rarita, condizioni, CD, danni e proprieta equipaggiamento.
@@ -72,8 +72,8 @@
 - Le pagine utente principali usano `mode: "simple"` e non espongono diagnostica plugin nel percorso normale.
 - La documentazione utente distingue setup normale, recupero strumenti e sviluppo tecnico.
 - La demo finale resta artefatto generato in `dist/`, non contenuto sorgente da mantenere nota per nota.
-- [[Dev/NEXT_PHASE_HANDOFF]] chiarisce che M6 e completato e che la prossima fase deve concentrarsi su schede plugin-native, non su nuove dashboard.
-- [[Dev/NEXT_PHASE_HANDOFF]] aggiornato dopo M7 e chiusura warning: la prossima fase e M8 Release Evidence And Zero-Warning Discipline.
+- handoff M11 consolidato poi rimosso chiarisce che M6 e completato e che la prossima fase deve concentrarsi su schede plugin-native, non su nuove dashboard.
+- handoff M11 consolidato poi rimosso aggiornato dopo M7 e chiusura warning: la prossima fase e M8 Release Evidence And Zero-Warning Discipline.
 - Le note demo manuali storiche sono state eliminate dal sorgente per evitare manutenzione nota per nota.
 - Le guide utente più esposte sono state portate a tab funzionali con controlli, azioni, Dataview/DataviewJS, Tasks e fallback leggibile.
 - `release:clean` verifica che la release mantenga nascosti runtime, template, fileClass, Bases, bacheche tecniche e SRD dalla navigazione normale.

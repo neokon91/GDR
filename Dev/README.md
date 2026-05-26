@@ -9,7 +9,6 @@ Questa cartella contiene roadmap, changelog, audit, confini release, smoke test,
 | Area | Uso |
 | --- | --- |
 | `Roadmap/` | Roadmap attiva e storiche. |
-| `NEXT_PHASE_HANDOFF.md` | Sintesi operativa per riprendere sviluppo con poco contesto. |
 | `TemplateFactory/` | Moduli YAML e schemi Jinja2 per generazione futura dei template. |
 | `Plugin Technical Reference.md` | Riferimenti tecnici puntuali a funzioni, sintassi e configurazioni dei plugin. |
 | `Sviluppo Vault.md` | Convenzioni tecniche del vault. |
@@ -39,11 +38,10 @@ Usa questa nota come porta d'ingresso. Non duplicare decisioni tecniche in file 
 | Bisogno | Documento canonico |
 | --- | --- |
 | Direzione prodotto e milestone | [[Dev/Roadmap/1.0 Professionale]] |
-| Stato di ripresa breve | [[Dev/NEXT_PHASE_HANDOFF]] |
-| Brief prossima discussione concreta | [[Dev/Prossima Discussione - YAML Entita Fantasy]] |
 | Convenzioni tecniche, campi e runtime | [[Dev/Sviluppo Vault]] |
 | Layer Meta Bind, Templater, JS e fileClass | [[Dev/Plugin Layer Interno]] |
 | Sintassi e responsabilita plugin | [[Dev/Plugin Technical Reference]] |
+| Contratti plugin e release | `Dev/TemplateFactory/modules/plugin_contracts.yaml` |
 | Confini della ZIP utente | [[Dev/Confine Release Repository]] |
 | Verifica release | [[Dev/RELEASE]] e [[Dev/Smoke Demo Finale]] |
 | Template, YAML e superfici generate | [[Dev/TemplateFactory/README]] |
