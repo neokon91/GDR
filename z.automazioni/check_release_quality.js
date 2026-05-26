@@ -1,14 +1,15 @@
 #!/usr/bin/env node
 
 const fs = require("fs");
+const os = require("os");
 const path = require("path");
 const { execFileSync } = require("child_process");
 const { readJson, readTextRel, repoPath, walk } = require("./node_utils");
 
 const ROOT = process.cwd();
-const DIST = path.join(ROOT, "dist");
-const OUT = path.join(DIST, "vault-gdr-clean");
-const ZIP = path.join(DIST, "vault-gdr-clean.zip");
+const RELEASE_CHECK_ROOT = fs.mkdtempSync(path.join(os.tmpdir(), "vault-gdr-quality-check-"));
+const OUT = path.join(RELEASE_CHECK_ROOT, "vault-gdr-clean");
+const ZIP = `${OUT}.zip`;
 const CONTRACT = "Dev/TemplateFactory/modules/plugin_contracts.yaml";
 const WORKFLOWS = "Dev/TemplateFactory/modules/workflows.yaml";
 const TEMPLATER_DIR = "z.automazioni/templater";
@@ -521,10 +522,11 @@ function validateDataviewSyntax(root = ROOT, firstRunOnly = false) {
 }
 
 function validateReleaseFirstRun() {
-    fs.rmSync(DIST, { recursive: true, force: true });
-    execFileSync("node", ["z.automazioni/release_clean.js", "--with-demo", "--quiet"], { cwd: ROOT, stdio: "inherit" });
-    if (!fs.existsSync(OUT)) fail("release demo mancante: dist/vault-gdr-clean");
-    if (!fs.existsSync(ZIP)) fail("zip release demo mancante: dist/vault-gdr-clean.zip");
+    fs.rmSync(RELEASE_CHECK_ROOT, { recursive: true, force: true });
+    fs.mkdirSync(RELEASE_CHECK_ROOT, { recursive: true });
+    execFileSync("node", ["z.automazioni/release_clean.js", "--with-demo", "--quiet", "--out", OUT], { cwd: ROOT, stdio: "inherit" });
+    if (!fs.existsSync(OUT)) fail("release demo temporanea mancante");
+    if (!fs.existsSync(ZIP)) fail("zip release demo temporaneo mancante");
 
     const workspace = readJsonRel(".obsidian/workspace.json", OUT);
     const firstLeaf = workspace.main?.children?.[0]?.children?.[0]?.state?.state;
@@ -588,7 +590,7 @@ validateTemplaterWrappers(ROOT);
 validateDataviewSyntax(ROOT);
 validateReleaseFirstRun();
 
-fs.rmSync(DIST, { recursive: true, force: true });
+fs.rmSync(RELEASE_CHECK_ROOT, { recursive: true, force: true });
 
 if (errors.length) {
     console.error("Release quality non valida:");

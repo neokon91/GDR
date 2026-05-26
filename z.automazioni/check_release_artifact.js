@@ -1,14 +1,15 @@
 #!/usr/bin/env node
 
 const fs = require("fs");
+const os = require("os");
 const path = require("path");
 const { execFileSync } = require("child_process");
 const { repoPath } = require("./node_utils");
 
 const ROOT = process.cwd();
-const DIST = path.join(ROOT, "dist");
-const OUT = path.join(DIST, "vault-gdr-clean");
-const ZIP = path.join(DIST, "vault-gdr-clean.zip");
+const TEMP_ROOT = fs.mkdtempSync(path.join(os.tmpdir(), "vault-gdr-release-check-"));
+const OUT = path.join(TEMP_ROOT, "vault-gdr-clean");
+const ZIP = `${OUT}.zip`;
 const BOUNDARY = "Dev/TemplateFactory/modules/release_boundary.yaml";
 const INCLUDE_DEMO = process.argv.includes("--with-demo");
 const KEEP_ARTIFACT = process.argv.includes("--keep");
@@ -61,7 +62,7 @@ function walkFiles(root, files = []) {
 
 function validateOutput(errors) {
     if (!fs.existsSync(OUT)) {
-        fail(errors, "release artifact mancante: dist/vault-gdr-clean");
+        fail(errors, "release artifact temporaneo mancante");
         return;
     }
 
@@ -147,11 +148,11 @@ function validateZip(errors) {
 const errors = [];
 
 try {
-    execFileSync("node", ["z.automazioni/release_clean.js", "--quiet", ...(INCLUDE_DEMO ? ["--with-demo"] : [])], { cwd: ROOT, stdio: "inherit" });
+    execFileSync("node", ["z.automazioni/release_clean.js", "--quiet", "--out", OUT, ...(INCLUDE_DEMO ? ["--with-demo"] : [])], { cwd: ROOT, stdio: "inherit" });
     validateOutput(errors);
     validateZip(errors);
 } finally {
-    if (!KEEP_ARTIFACT) fs.rmSync(DIST, { recursive: true, force: true });
+    if (!KEEP_ARTIFACT) fs.rmSync(TEMP_ROOT, { recursive: true, force: true });
 }
 
 if (errors.length) {

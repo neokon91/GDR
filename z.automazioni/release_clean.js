@@ -7,9 +7,20 @@ const { generateDemoWorld } = require("./generate_demo_world");
 const { readJson, rel: relativePath, repoPath } = require("./node_utils");
 
 const ROOT = process.cwd();
-const DIST = repoPath(ROOT, "dist");
-const OUT = repoPath(DIST, "vault-gdr-clean");
-const ZIP = repoPath(DIST, "vault-gdr-clean.zip");
+function optionValue(name, fallback) {
+    const index = process.argv.indexOf(name);
+    if (index === -1) return fallback;
+    const value = process.argv[index + 1];
+    if (!value || value.startsWith("--")) {
+        console.error(`${name} richiede un percorso`);
+        process.exit(1);
+    }
+    return value;
+}
+
+const OUT = path.resolve(ROOT, optionValue("--out", "dist/vault-gdr-clean"));
+const DIST = path.dirname(OUT);
+const ZIP = `${OUT}.zip`;
 const INCLUDE_DEMO = process.argv.includes("--with-demo");
 const QUIET = process.argv.includes("--quiet");
 const TEMPLATE_FACTORY_RENDERER = repoPath(ROOT, "z.automazioni/render_template_factory.py");
@@ -477,7 +488,7 @@ function hasPluginNativeReleasePage(text) {
 function zipIfAvailable() {
     try {
         if (fs.existsSync(ZIP)) fs.rmSync(ZIP);
-        execFileSync("zip", ["-qr", ZIP, "vault-gdr-clean"], { cwd: DIST, stdio: "ignore" });
+        execFileSync("zip", ["-qr", ZIP, path.basename(OUT)], { cwd: DIST, stdio: "ignore" });
         return true;
     } catch {
         return false;
@@ -500,7 +511,7 @@ copyDir(ROOT, OUT, ROOT);
 materializeTemplates(OUT);
 writeGeneratedReleaseNotes();
 if (INCLUDE_DEMO) {
-    const result = generateDemoWorld({ outDir: "dist/vault-gdr-clean", force: true });
+    const result = generateDemoWorld({ outDir: OUT, force: true });
     if (!QUIET) console.log(`Demo utente generata: ${result.files.length} file in ${rel(result.root)}`);
 }
 validateRelease();
