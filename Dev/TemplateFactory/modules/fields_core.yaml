@@ -18,6 +18,32 @@ fields:
       required: true
       source: taxonomy
       use: famiglia principale della nota
+      values:
+        - avventura
+        - campagna
+        - conflitto
+        - cosmologia
+        - creatura
+        - cultura
+        - dispensa
+        - evento storico
+        - fazione
+        - incontro
+        - lingua
+        - lore capture
+        - luogo
+        - missione
+        - mondo
+        - nota rapida
+        - oggetto
+        - personaggio
+        - religione
+        - relazione
+        - risorsa
+        - sessione
+        - societa
+        - srd
+        - tracciato
     - name: tipo
       type: select
       required: true
@@ -29,17 +55,31 @@ fields:
       source: metadata_menu
       use: avanzamento operativo
       values:
+        - accettata
+        - archiviata
+        - attivo
         - bozza
-        - preparazione
-        - pronto
+        - canonica
+        - canonico
+        - collegata
+        - completato
+        - conclusa
+        - da smistare
+        - fallito
+        - giocata
+        - ignorata
         - in corso
         - in gioco
-        - giocata
-        - da smistare
-        - collegata
-        - canonica
-        - archiviata
-        - ignorata
+        - in guerra
+        - in pausa
+        - minacciato
+        - morto
+        - ostile
+        - preparazione
+        - pronto
+        - proposta
+        - scomparso
+        - smistata
     - name: fileClass
       type: text
       required: false

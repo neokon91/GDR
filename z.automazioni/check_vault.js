@@ -44,6 +44,29 @@ function loadYamlModule(relPath) {
     return JSON.parse(stdout);
 }
 
+const FIELDS_CORE = loadYamlModule("Dev/TemplateFactory/modules/fields_core.yaml");
+
+function coreFieldValues(fieldName) {
+    for (const group of Object.values(FIELDS_CORE.fields ?? {})) {
+        for (const field of group ?? []) {
+            if (field?.name === fieldName) {
+                return (field.values ?? [])
+                    .map(value => String(value))
+                    .filter(Boolean);
+            }
+        }
+    }
+    return [];
+}
+
+function requiredCoreFieldValues(fieldName) {
+    const values = coreFieldValues(fieldName);
+    if (!values.length) {
+        throw new Error(`Dev/TemplateFactory/modules/fields_core.yaml: campo ${fieldName} senza values dichiarati`);
+    }
+    return new Set(values);
+}
+
 function requiredMetaBindInputTemplates() {
     const inputs = loadYamlModule("Dev/TemplateFactory/modules/metabind_inputs.yaml").inputs ?? {};
     return Object.values(inputs)
@@ -223,60 +246,8 @@ const REQUIRED_METADATA_MENU_PRESETS = [
     "tracciati"
 ];
 const TAG_RULES_FILE = "Dev/TemplateFactory/modules/tag_rules.yaml";
-const ALLOWED_CATEGORIES = new Set([
-    "avventura",
-    "campagna",
-    "conflitto",
-    "cosmologia",
-    "creatura",
-    "cultura",
-    "dispensa",
-    "evento storico",
-    "fazione",
-    "incontro",
-    "lingua",
-    "lore capture",
-    "luogo",
-    "missione",
-    "mondo",
-    "nota rapida",
-    "oggetto",
-    "personaggio",
-    "religione",
-    "relazione",
-    "risorsa",
-    "sessione",
-    "societa",
-    "tracciato",
-    "srd"
-]);
-const ALLOWED_STATES = new Set([
-    "accettata",
-    "archiviata",
-    "bozza",
-    "canonico",
-    "canonica",
-    "collegata",
-    "completato",
-    "conclusa",
-    "da smistare",
-    "giocata",
-    "ignorata",
-    "attivo",
-    "fallito",
-    "in pausa",
-    "in corso",
-    "in gioco",
-    "in guerra",
-    "minacciato",
-    "morto",
-    "ostile",
-    "preparazione",
-    "pronto",
-    "proposta",
-    "scomparso",
-    "smistata"
-]);
+const ALLOWED_CATEGORIES = requiredCoreFieldValues("categoria");
+const ALLOWED_STATES = requiredCoreFieldValues("stato");
 const LIVE_ENTITY_CATEGORIES = new Set(["luogo", "personaggio", "fazione", "missione", "evento storico", "oggetto", "tracciato", "relazione", "risorsa", "cultura", "religione", "societa"]);
 const CODEX_CATEGORIES = new Set(["luogo", "personaggio", "fazione", "missione", "tracciato", "relazione", "evento storico", "oggetto", "cultura", "religione", "societa"]);
 const PLAYABLE_MAP_USES = new Set(["zoom", "esagoni", "dungeon", "scena"]);
