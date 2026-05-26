@@ -11,6 +11,8 @@ Script usati da Templater, dashboard e manutenzione del vault.
 | `check_smoke.js` | Valida il gate statico della demo finale e del player-safe prima dello smoke visuale. |
 | `check_release.js` | Valida versione, changelog e verifica automatica della release pulita. |
 | `render_template_factory.py` | Renderizza anteprime locali ignorate o materializza template finali in `z.modelli` dentro output locali/release. |
+| `render_obsidian_config.py` | Genera i JSON di configurazione Obsidian da `obsidian_config.yaml`. |
+| `render_plugin_matrix.py` | Genera `Dev/plugin_matrix.json` da `plugin_matrix.yaml`. |
 | `generate_workflow_data.js` | Genera JSON workflow da `workflows.yaml` e verifica che resti sincronizzato. |
 | `check_workflow_quick_actions.js` | Verifica che le pagine operative espongano i pulsanti rapidi dichiarati in YAML. |
 | `render_workflow_quick_actions.js` | Renderizza nelle pagine operative blocchi Markdown statici derivati dalle azioni rapide YAML. |

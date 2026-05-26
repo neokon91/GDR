@@ -15,6 +15,9 @@ from render_template_factory import materialized_targets, render_blueprint
 from template_factory_utils import ROOT, build_jinja_env, load_modules, resolved_blueprints
 
 CONTRACT = ROOT / "Dev" / "TemplateFactory" / "modules" / "generated_artifacts.yaml"
+OBSIDIAN_CONFIG = ROOT / "Dev" / "TemplateFactory" / "modules" / "obsidian_config.yaml"
+
+
 def fail(errors: list[str], message: str) -> None:
     errors.append(message)
 
@@ -30,6 +33,17 @@ def load_contract(errors: list[str]) -> dict[str, Any]:
     for key in ["policy", "artifacts"]:
         if key not in data:
             fail(errors, f"{CONTRACT.relative_to(ROOT)}: sezione mancante {key}")
+    return data
+
+
+def load_yaml(path: Path, errors: list[str]) -> dict[str, Any]:
+    if not path.exists():
+        fail(errors, f"{path.relative_to(ROOT)} mancante")
+        return {}
+    data = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
+    if not isinstance(data, dict):
+        fail(errors, f"{path.relative_to(ROOT)}: root YAML non valida")
+        return {}
     return data
 
 
@@ -86,12 +100,61 @@ def validate_tracked_generated(errors: list[str]) -> None:
         fail(errors, "dist: pacchetto release generato tracciato da Git")
 
 
+def tracked_json_files(errors: list[str]) -> set[str]:
+    result = subprocess.run(
+        ["git", "ls-files", "*.json"],
+        cwd=ROOT,
+        text=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        check=False,
+    )
+    if result.returncode != 0:
+        fail(errors, f"git ls-files *.json fallito: {result.stderr.strip()}")
+        return set()
+    return {line.strip().replace("\\", "/") for line in result.stdout.splitlines() if line.strip()}
+
+
+def obsidian_config_targets(errors: list[str]) -> set[str]:
+    source = load_yaml(OBSIDIAN_CONFIG, errors)
+    targets: set[str] = set()
+    for item in source.get("configs") or []:
+        if isinstance(item, dict) and item.get("target"):
+            targets.add(str(item["target"]).replace("\\", "/"))
+    return targets
+
+
+def validate_json_source_boundary(errors: list[str]) -> None:
+    generated_json = {
+        "Dev/plugin_matrix.json",
+        "z.automazioni/data/srd/core.json",
+        "z.automazioni/data/srd/opzioni_personaggio.json",
+        "z.automazioni/data/workflows/quick_actions.json",
+        ".obsidian/plugins/obsidian-meta-bind-plugin/data.json",
+        *obsidian_config_targets(errors),
+    }
+    native_json = {
+        "package.json",
+        "Dev/TemplateFactory/examples/importers/azgaar_sample.geojson",
+        "Dev/TemplateFactory/examples/importers/watabou_city_sample.json",
+        "Dev/TemplateFactory/examples/importers/watabou_dungeon_sample.json",
+    }
+
+    for rel_path in tracked_json_files(errors):
+        if rel_path in generated_json or rel_path in native_json:
+            continue
+        if rel_path.endswith("/manifest.json"):
+            continue
+        fail(errors, f"{rel_path}: JSON tracciato senza sorgente YAML/Jinja dichiarata")
+
+
 def main() -> int:
     errors: list[str] = []
     load_contract(errors)
     rendered, blueprints = expected_rendered()
     validate_render_plan(rendered, blueprints, errors)
     validate_tracked_generated(errors)
+    validate_json_source_boundary(errors)
 
     if errors:
         print("Contratto generazione non valido:", file=sys.stderr)
