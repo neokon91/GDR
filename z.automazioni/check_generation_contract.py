@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import subprocess
 import sys
 from pathlib import Path
 from typing import Any
@@ -12,16 +13,9 @@ import yaml
 sys.dont_write_bytecode = True
 
 from render_template_factory import materialized_targets, render_blueprint
-from template_factory_utils import (
-    GENERATED,
-    ROOT,
-    build_jinja_env,
-    load_modules,
-    resolved_blueprints,
-)
+from template_factory_utils import ROOT, build_jinja_env, load_modules, resolved_blueprints
 
 CONTRACT = ROOT / "Dev" / "TemplateFactory" / "modules" / "generated_artifacts.yaml"
-PREVIEW_MANIFEST = GENERATED / "manifest.json"
 MATERIALIZED_MANIFEST = ROOT / "z.modelli" / ".templatefactory-manifest.json"
 
 
@@ -58,26 +52,6 @@ def expected_rendered() -> tuple[dict[str, str], dict[str, dict[str, Any]]]:
         for name, blueprint in blueprints.items()
     }
     return rendered, blueprints
-
-
-def validate_previews(rendered: dict[str, str], errors: list[str]) -> None:
-    manifest = read_json(PREVIEW_MANIFEST)
-    manifest_files = {
-        item.get("blueprint"): item.get("path")
-        for item in manifest.get("files", [])
-        if isinstance(item, dict)
-    }
-
-    for name, content in sorted(rendered.items()):
-        rel_path = f"Dev/TemplateFactory/examples/generated/{name}.preview.md"
-        path = ROOT / rel_path
-        if manifest_files.get(name) != rel_path:
-            fail(errors, f"{PREVIEW_MANIFEST.relative_to(ROOT)}: preview non dichiarata per {name}")
-        if not path.exists():
-            fail(errors, f"{rel_path}: preview generata mancante")
-            continue
-        if path.read_text(encoding="utf-8") != content:
-            fail(errors, f"{rel_path}: preview non allineata a YAML/Jinja")
 
 
 def validate_materialized(rendered: dict[str, str], blueprints: dict[str, dict[str, Any]], errors: list[str]) -> None:
@@ -119,12 +93,22 @@ def validate_tracked_generated(errors: list[str]) -> None:
         if rel_path not in manifest_paths:
             fail(errors, f"{rel_path}: template in z.modelli fuori manifest generato")
 
+    result = subprocess.run(
+        ["git", "ls-files", "Dev/TemplateFactory/examples/generated"],
+        cwd=ROOT,
+        text=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        check=False,
+    )
+    if result.returncode == 0 and result.stdout.strip():
+        fail(errors, "Dev/TemplateFactory/examples/generated: output locale generato tracciato da Git")
+
 
 def main() -> int:
     errors: list[str] = []
     load_contract(errors)
     rendered, blueprints = expected_rendered()
-    validate_previews(rendered, errors)
     validate_materialized(rendered, blueprints, errors)
     validate_tracked_generated(errors)
 

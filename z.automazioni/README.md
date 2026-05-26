@@ -10,11 +10,11 @@ Script usati da Templater, dashboard e manutenzione del vault.
 | `check_template_factory.py` | Valida moduli YAML, blueprint e rendering Jinja in memoria. |
 | `check_smoke.js` | Valida il gate statico della demo finale e del player-safe prima dello smoke visuale. |
 | `check_release.js` | Valida versione, changelog e verifica automatica della release pulita. |
-| `render_template_factory.py` | Renderizza anteprime TemplateFactory in `Dev/TemplateFactory/examples/generated/`. |
+| `render_template_factory.py` | Renderizza anteprime locali ignorate o materializza template finali in `z.modelli`. |
 | `generate_workflow_data.js` | Genera JSON workflow da `workflows.yaml` e verifica che resti sincronizzato. |
 | `check_workflow_quick_actions.js` | Verifica che le pagine operative espongano i pulsanti rapidi dichiarati in YAML. |
 | `render_workflow_quick_actions.js` | Renderizza nelle pagine operative blocchi Markdown statici derivati dalle azioni rapide YAML. |
-| `audit_template_migration.py` | Confronta preview TemplateFactory e template reali, generando un report di migrazione. |
+| `audit_template_migration.py` | Confronta preview locali TemplateFactory e template reali, generando un report locale ignorato. |
 | `check_js.js` | Controllo sintattico ricorsivo degli script in `z.automazioni/` e `z.engine/`. |
 | `repo_hygiene.js` | Controllo repository: artefatti locali, note di prova residue e script npm essenziali. |
 | `import_srd.js` | Rigenera il riferimento SRD in `SRD/`. |

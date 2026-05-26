@@ -10,21 +10,16 @@ policy:
   generated_layers:
     - z.modelli/**/*.md
     - z.modelli/.templatefactory-manifest.json
-    - Dev/TemplateFactory/examples/generated/*.preview.md
-    - Dev/TemplateFactory/examples/generated/manifest.json
     - z.automazioni/data/workflows/quick_actions.json
     - .obsidian/plugins/obsidian-meta-bind-plugin/data.json
+  local_debug_outputs:
+    - Dev/TemplateFactory/examples/generated/
   rule: I file generati non sono fonte di verita. Se divergono dai sorgenti YAML/Jinja, fallisce npm run check.
 artifacts:
   template_materialized:
     source: Dev/TemplateFactory/modules/template_blueprints.yaml
     jinja: Dev/TemplateFactory/jinja
     target_manifest: z.modelli/.templatefactory-manifest.json
-    check: python3 z.automazioni/check_generation_contract.py
-  template_previews:
-    source: Dev/TemplateFactory/modules/template_blueprints.yaml
-    jinja: Dev/TemplateFactory/jinja
-    target_manifest: Dev/TemplateFactory/examples/generated/manifest.json
     check: python3 z.automazioni/check_generation_contract.py
   workflow_data:
     source: Dev/TemplateFactory/modules/workflows.yaml

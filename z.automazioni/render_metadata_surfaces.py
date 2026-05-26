@@ -180,6 +180,8 @@ def render_all(modules: dict[str, dict[str, Any]]) -> dict[Path, str]:
 
 def check_outputs(outputs: dict[Path, str]) -> list[str]:
     errors: list[str] = []
+    if not OUT_DIR.exists():
+        return errors
     for path, expected in sorted(outputs.items()):
         if not path.exists():
             errors.append(f"{path.relative_to(ROOT)}: anteprima mancante; eseguire npm run render:metadata")
@@ -219,7 +221,8 @@ def main() -> int:
             for error in errors:
                 print(f"- {error}", file=sys.stderr)
             return 1
-        print(f"Metadata surfaces OK: {len(outputs)} anteprime aggiornate.")
+        mode = "anteprime locali assenti, render verificato in memoria" if not OUT_DIR.exists() else "anteprime locali aggiornate"
+        print(f"Metadata surfaces OK: {len(outputs)} superfici, {mode}.")
         return 0
 
     write_outputs(outputs)

@@ -163,21 +163,25 @@ def validate_critical_rendered_generators(modules: dict[str, dict], errors: list
 
 
 def validate_pg_mechanical_preview(modules: dict[str, dict], errors: list[str]) -> None:
-    preview = GENERATED / "pg.preview.md"
-    if not preview.exists():
+    blueprints = resolved_blueprints(modules)
+    blueprint = blueprints.get("pg")
+    if not blueprint:
+        fail("pg: blueprint mancante", errors)
         return
 
-    text = preview.read_text(encoding="utf-8")
+    env = build_jinja_env()
+    template_ref = Path(str(blueprint["jinja_template"])).name
+    text = env.get_template(template_ref).render(**render_context("pg", blueprint, modules))
     if "undefined" in text:
-        fail("pg.preview.md: output contiene 'undefined'", errors)
+        fail("pg: output renderizzato contiene 'undefined'", errors)
     if "tab: Scheda" not in text:
-        fail("pg.preview.md: tab Scheda mancante", errors)
+        fail("pg: tab Scheda mancante", errors)
     if "INPUT[number:caratteristiche.forza.stat]" not in text:
-        fail("pg.preview.md: INPUT caratteristiche mancante", errors)
+        fail("pg: INPUT caratteristiche mancante", errors)
     if "VIEW[floor(({" not in text:
-        fail("pg.preview.md: VIEW modificatori mancante", errors)
+        fail("pg: VIEW modificatori mancante", errors)
     if "punti_ferita.attuali" not in text:
-        fail("pg.preview.md: slider punti ferita mancante", errors)
+        fail("pg: slider punti ferita mancante", errors)
 
 
 def validate_rendering(modules: dict[str, dict], errors: list[str]) -> None:
@@ -411,26 +415,6 @@ def validate_tag_rules(modules: dict[str, dict], errors: list[str]) -> None:
             fail(f"tag_rules: tag non semplice o non minuscolo ({tag})", errors)
 
 
-def validate_generated_previews(modules: dict[str, dict], errors: list[str]) -> None:
-    if not GENERATED.exists():
-        return
-
-    expected = {
-        f"{name}.preview.md"
-        for name in resolved_blueprints(modules)
-    }
-    actual = {path.name for path in GENERATED.glob("*.preview.md")}
-
-    for missing in sorted(expected - actual):
-        fail(f"preview TemplateFactory mancante: {missing}; eseguire npm run render:templates", errors)
-    for extra in sorted(actual - expected):
-        fail(f"preview TemplateFactory obsoleta: {extra}; eseguire npm run render:templates", errors)
-
-    manifest = GENERATED / "manifest.json"
-    if not manifest.exists():
-        fail("manifest preview TemplateFactory mancante; eseguire npm run render:templates", errors)
-
-
 def main() -> int:
     errors: list[str] = []
     try:
@@ -471,8 +455,6 @@ def main() -> int:
         validate_tag_rules(modules, errors)
     if not errors:
         validate_rendering(modules, errors)
-    if not errors:
-        validate_generated_previews(modules, errors)
     if not errors:
         validate_pg_mechanical_preview(modules, errors)
 
