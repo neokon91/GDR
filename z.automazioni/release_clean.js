@@ -5,7 +5,7 @@ const path = require("path");
 const { execFileSync } = require("child_process");
 const { generateDemoWorld } = require("./generate_demo_world");
 const { readJson, rel: relativePath, repoPath } = require("./node_utils");
-const { materializedUserFiles, renderMaterializedUserFile } = require("./release_boundary_utils");
+const { loadReleaseBoundary, materializedUserFiles, renderMaterializedUserFile } = require("./release_boundary_utils");
 
 const ROOT = process.cwd();
 function optionValue(name, fallback) {
@@ -25,109 +25,18 @@ const ZIP = `${OUT}.zip`;
 const INCLUDE_DEMO = process.argv.includes("--with-demo");
 const QUIET = process.argv.includes("--quiet");
 const TEMPLATE_FACTORY_RENDERER = repoPath(ROOT, "z.automazioni/render_template_factory.py");
-
-const INCLUDED_ROOTS = new Set([
-    ".obsidian",
-    "Campagne",
-    "Giocatori",
-    "Hub",
-    "Inbox",
-    "Mondi",
-    "Risorse",
-    "SRD",
-    "z.automazioni",
-    "z.bases",
-    "z.engine",
-    "z.bacheche",
-    "z.fileclass",
-    "z.modelli"
-]);
-
-const INCLUDED_ROOT_FILES = new Set([
-    "Inizia Qui.md",
-    "LICENSE.md",
-    "VERSION.md",
-]);
-
-const EXCLUDED_DIRS = new Set([".git", ".github", "Dev", "dist", "docs", "Import", "node_modules"]);
-const EXCLUDED_ROOT_FILES = new Set([".gitignore", "CHANGELOG.md", "CONTRIBUTING.md", "RELEASE.md", "Repository.md", "package.json"]);
-const EXCLUDED_RISORSE = new Set([
-    "Callout GDR.md",
-    "Checklist Lore Professionale.md",
-    "Confine Release Repository.md",
-    "Consegna Nuovo DM.md",
-    "Guida Lore Professionale.md",
-    "Indice Connettore GPT.md",
-    "Importare Mappe.md",
-    "Integrazioni Plugin.md",
-    "Media Scene.md",
-    "Modello Entità.md",
-    "Preset Calendario.md",
-    "Profili Campagna.md",
-    "Release Pulita.md",
-    "Roadmap",
-    "Smoke 1.0 Professionale.md",
-    "Strumenti Attivi.md",
-    "Sviluppo Vault.md",
-    "Worldbuilding Tassonomico.md"
-]);
-const EXCLUDED_AUTOMAZIONI = new Set([
-    "check_vault.js",
-    "checks",
-    "check_smoke.js",
-    "check_release.js",
-    "import_azgaar_geojson.js",
-    "import_srd.js",
-    "LICENSE.md",
-    "node_utils.js",
-    "repo_hygiene.js",
-    "release_beta.js",
-    "release_clean.js",
-    "README.md",
-    "template_factory_utils.py"
-]);
-const EXCLUDED_AUTOMAZIONI_PREFIXES = ["audit_", "check_", "generate_", "import_", "render_", "template_factory_"];
-const EXCLUDED_FILES = new Set([".DS_Store"]);
-const REQUIRED_RELEASE_FILES = [
-    "Inizia Qui.md",
-    "VERSION.md",
-    "LEGGIMI.md",
-    ".obsidian/app.json",
-    ".obsidian/appearance.json",
-    ".obsidian/community-plugins.json",
-    ".obsidian/core-plugins.json",
-    ".obsidian/snippets/gdr-vault.css",
-    ".obsidian/plugins/dataview/data.json",
-    ".obsidian/plugins/homepage/data.json",
-    ".obsidian/plugins/metadata-menu/data.json",
-    ".obsidian/plugins/obsidian-meta-bind-plugin/data.json",
-    ".obsidian/plugins/templater-obsidian/data.json",
-    "Hub/Vista Giocatori.md",
-    "Hub/Atlante del Mondo.md",
-    "Hub/Durante il Gioco.md",
-    "Risorse/Setup Guidato.md",
-    "Risorse/Controllo Vault.md",
-    "Risorse/Quality Report.md",
-    "z.engine/session_views.js",
-    "z.engine/session_continuity.js",
-    "z.engine/session_runtime.js",
-    "z.automazioni/helpers.js",
-    "z.automazioni/templater",
-    "z.bases/Atlante Mappe.base",
-    "z.bases/Worldbuilding.base",
-    "z.bases/Fazioni.base",
-    "z.bases/Incontri.base",
-    "z.modelli/.templatefactory-manifest.json"
-];
-const REQUIRED_USER_IGNORE_FILTERS = [
-    "SRD/",
-    "z.automazioni/",
-    "z.bacheche/",
-    "z.bases/",
-    "z.engine/",
-    "z.fileclass/",
-    "z.modelli/"
-];
+const RELEASE_BOUNDARY = loadReleaseBoundary(ROOT);
+const COPY_POLICY = RELEASE_BOUNDARY.copy_policy ?? {};
+const INCLUDED_ROOTS = new Set(COPY_POLICY.included_roots ?? []);
+const INCLUDED_ROOT_FILES = new Set(COPY_POLICY.included_root_files ?? []);
+const EXCLUDED_DIRS = new Set(COPY_POLICY.excluded_dirs ?? []);
+const EXCLUDED_ROOT_FILES = new Set(COPY_POLICY.excluded_root_files ?? []);
+const EXCLUDED_RISORSE = new Set(COPY_POLICY.excluded_risorse ?? []);
+const EXCLUDED_AUTOMAZIONI = new Set(COPY_POLICY.excluded_automazioni ?? []);
+const EXCLUDED_AUTOMAZIONI_PREFIXES = RELEASE_BOUNDARY.forbidden_automation_prefixes ?? [];
+const EXCLUDED_FILES = new Set(COPY_POLICY.excluded_files ?? []);
+const REQUIRED_RELEASE_FILES = RELEASE_BOUNDARY.required_files ?? [];
+const REQUIRED_USER_IGNORE_FILTERS = COPY_POLICY.required_user_ignore_filters ?? [];
 const GENERATED_RELEASE_NOTES = {
     "LEGGIMI.md": `# Vault GDR
 

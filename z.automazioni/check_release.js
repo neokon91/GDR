@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 const { readTextRel } = require("./node_utils");
+const { loadReleaseBoundary } = require("./release_boundary_utils");
 
 const ROOT = process.cwd();
 const RELEASE_EXPECTED_VERSION = "1.0.0";
@@ -39,6 +40,8 @@ const RELEASE_ROADMAP_MARKERS = [
 ];
 
 const errors = [];
+const releaseBoundary = loadReleaseBoundary(ROOT);
+const copyPolicy = releaseBoundary.copy_policy ?? {};
 
 const versionText = readTextRel(ROOT, "VERSION.md");
 if (!versionText.includes(`Versione: \`${RELEASE_EXPECTED_VERSION}\``)) {
@@ -82,14 +85,17 @@ for (const obsolete of ["M9 - Riduzione Attrito", "M10 - Consolidamento", "M11 -
 }
 
 const releaseCleanText = readTextRel(ROOT, "z.automazioni/release_clean.js");
-if (!releaseCleanText.includes('"Import"')) {
-    errors.push("release_clean.js: la cartella Import deve restare fuori dalla release utente");
+if (!(copyPolicy.excluded_dirs ?? []).includes("Import")) {
+    errors.push("release_boundary.copy_policy.excluded_dirs: la cartella Import deve restare fuori dalla release utente");
 }
 if (!releaseCleanText.includes("render_template_factory.py") || !releaseCleanText.includes("--materialize-only")) {
     errors.push("release_clean.js: la release deve materializzare z.modelli da TemplateFactory prima della copia");
 }
-if (!releaseCleanText.includes("REQUIRED_USER_IGNORE_FILTERS") || !releaseCleanText.includes("z.automazioni/") || !releaseCleanText.includes("SRD/")) {
-    errors.push("release_clean.js: la release deve verificare i filtri di navigazione per cartelle tecniche e SRD");
+const userIgnoreFilters = new Set(copyPolicy.required_user_ignore_filters ?? []);
+for (const filter of ["SRD/", "z.automazioni/"]) {
+    if (!userIgnoreFilters.has(filter)) {
+        errors.push(`release_boundary.copy_policy.required_user_ignore_filters: filtro mancante ${filter}`);
+    }
 }
 
 if (errors.length) {

@@ -78,14 +78,24 @@ def validate_release_boundary_contract(modules: dict[str, dict], errors: list[st
         "bridge_runtime_modules",
         "leggimi_markers",
     ]
+    generated_release_files = {
+        "LEGGIMI.md",
+        "z.modelli/.templatefactory-manifest.json",
+    }
 
     for key in required_lists:
         values = boundary.get(key)
         if not isinstance(values, list) or not values:
             fail(f"release_boundary.{key}: lista mancante o vuota", errors)
 
+    copy_policy = boundary.get("copy_policy", {}) or {}
+    for key in ("included_roots", "included_root_files", "excluded_dirs", "excluded_root_files", "required_user_ignore_filters"):
+        values = copy_policy.get(key)
+        if not isinstance(values, list) or not values:
+            fail(f"release_boundary.copy_policy.{key}: lista mancante o vuota", errors)
+
     for rel_path in boundary.get("required_files", []) or []:
-        if str(rel_path) == "LEGGIMI.md":
+        if str(rel_path) in generated_release_files:
             continue
         if not (ROOT / str(rel_path)).exists():
             fail(f"release_boundary.required_files: file sorgente mancante ({rel_path})", errors)

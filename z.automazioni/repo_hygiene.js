@@ -2,6 +2,7 @@
 
 const fs = require("fs");
 const path = require("path");
+const { execFileSync } = require("child_process");
 const { readJson: readJsonFile, readTextIfExists, rel: relativePath, repoPath, walk } = require("./node_utils");
 
 const ROOT = process.cwd();
@@ -26,6 +27,7 @@ const JUNK_FILE_PATTERNS = [
     /\.swp$/i
 ];
 const REQUIRED_NPM_SCRIPTS = ["check", "check:repo", "check:js", "check:smoke", "check:release", "check:importers", "check:metadata", "check:diff", "release:clean"];
+const FORBIDDEN_TRACKED_USER_ROOTS = ["Mondi", "Campagne", "Giocatori", "Inbox", "Import"];
 const errors = [];
 const fixed = [];
 
@@ -40,6 +42,15 @@ function readJson(file) {
 }
 
 const files = walk(ROOT, { ignoredDirs: IGNORED_DIRS });
+
+for (const root of FORBIDDEN_TRACKED_USER_ROOTS) {
+    const tracked = execFileSync("git", ["ls-files", `${root}/**`], { cwd: ROOT, encoding: "utf8" })
+        .split(/\r?\n/)
+        .filter(Boolean);
+    if (tracked.length) {
+        errors.push(`${root}: cartella utente tracciata nel sorgente (${tracked.length} file); deve esistere solo in release/output`);
+    }
+}
 
 for (const relDir of GENERATED_LOCAL_DIRS) {
     const target = repoPath(ROOT, relDir);

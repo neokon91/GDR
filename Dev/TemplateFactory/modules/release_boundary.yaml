@@ -16,14 +16,102 @@ required_files:
   - .obsidian/plugins/obsidian-meta-bind-plugin/data.json
   - .obsidian/plugins/templater-obsidian/data.json
   - Hub/Vista Giocatori.md
+  - Hub/Atlante del Mondo.md
   - Hub/Durante il Gioco.md
   - Risorse/Setup Guidato.md
+  - Risorse/Controllo Vault.md
+  - Risorse/Quality Report.md
   - z.engine/session_views.js
   - z.engine/session_continuity.js
   - z.engine/session_dnd.js
   - z.engine/session_maps.js
   - z.engine/session_player.js
   - z.engine/session_runtime.js
+  - z.automazioni/helpers.js
+  - z.automazioni/templater
+  - z.bases/Atlante Mappe.base
+  - z.bases/Worldbuilding.base
+  - z.bases/Fazioni.base
+  - z.bases/Incontri.base
+  - z.modelli/.templatefactory-manifest.json
+copy_policy:
+  included_roots:
+    - .obsidian
+    - Campagne
+    - Giocatori
+    - Hub
+    - Inbox
+    - Mondi
+    - Risorse
+    - SRD
+    - z.automazioni
+    - z.bases
+    - z.engine
+    - z.bacheche
+    - z.fileclass
+    - z.modelli
+  included_root_files:
+    - Inizia Qui.md
+    - LICENSE.md
+    - VERSION.md
+  excluded_dirs:
+    - .git
+    - .github
+    - Dev
+    - dist
+    - docs
+    - Import
+    - node_modules
+  excluded_root_files:
+    - .gitignore
+    - CHANGELOG.md
+    - CONTRIBUTING.md
+    - RELEASE.md
+    - Repository.md
+    - package.json
+  excluded_files:
+    - .DS_Store
+  excluded_risorse:
+    - Callout GDR.md
+    - Checklist Lore Professionale.md
+    - Confine Release Repository.md
+    - Consegna Nuovo DM.md
+    - Guida Lore Professionale.md
+    - Indice Connettore GPT.md
+    - Importare Mappe.md
+    - Integrazioni Plugin.md
+    - Media Scene.md
+    - Modello Entità.md
+    - Preset Calendario.md
+    - Profili Campagna.md
+    - Release Pulita.md
+    - Roadmap
+    - Smoke 1.0 Professionale.md
+    - Strumenti Attivi.md
+    - Sviluppo Vault.md
+    - Worldbuilding Tassonomico.md
+  excluded_automazioni:
+    - check_vault.js
+    - checks
+    - check_smoke.js
+    - check_release.js
+    - import_azgaar_geojson.js
+    - import_srd.js
+    - LICENSE.md
+    - node_utils.js
+    - repo_hygiene.js
+    - release_beta.js
+    - release_clean.js
+    - README.md
+    - template_factory_utils.py
+  required_user_ignore_filters:
+    - SRD/
+    - z.automazioni/
+    - z.bacheche/
+    - z.bases/
+    - z.engine/
+    - z.fileclass/
+    - z.modelli/
 materialized_user_files:
   - path: Campagne/Campagne.md
     title: Campagne
