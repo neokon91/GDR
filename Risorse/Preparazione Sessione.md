@@ -15,18 +15,25 @@ Questa pagina serve a trasformare un mondo gia costruito in una sessione live. S
 
 ## Azioni Rapide
 
-> [!regia] Riduci ricerca manuale
-> Usa questi pulsanti prima di leggere il resto della pagina: creano o collegano materiale operativo senza dover cercare template, cartelle o plugin.
+<!-- workflow:quick_actions:start prepara_sessione -->
+> [!regia] Azioni rapide
+> Preparare una sessione radicata nel mondo.
 >
+> **Nuova sessione** - non esiste ancora una nota sessione per il prossimo tavolo
 > `BUTTON[nuova-sessione-z-modelli-dm-sessione-md]`
 >
+> **Nuova entita viva** - manca un'ancora mondo giocabile
 > `BUTTON[wizard-nuova-entita-viva]`
 >
+> **Collega sessione attiva** - una nota utile non e ancora collegata alla sessione
 > `BUTTON[collega-sessione-attiva]`
 >
+> **Nuova mappa** - serve materiale spaziale pronto al tavolo
 > `BUTTON[nuova-mappa-zoom-z-modelli-mappe-mappa-zoom-md]`
 >
+> **Apri tavolo** - la sessione e pronta o in corso
 > `BUTTON[durante-il-gioco-durante-il-gioco]`
+<!-- workflow:quick_actions:end prepara_sessione -->
 
 ## Sessione Attiva
 

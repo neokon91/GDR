@@ -27,18 +27,25 @@ gdr.renderPostSessionCommandCenter(dv);
 gdr.renderPostSessionFocus(dv);
 ```
 
-> [!regia] Azioni rapide di chiusura
-> Parti da qui se vuoi chiudere senza leggere tutta la pagina: fine sessione, conseguenza, propagazione, recap pubblico, poi fuori scena.
+<!-- workflow:quick_actions:start post_sessione -->
+> [!regia] Azioni rapide
+> Trasformare appunti e conseguenze in mondo aggiornato.
 >
+> **Fine sessione guidata** - devi convertire appunti in output, recap e prossima apertura
 > `BUTTON[wizard-fine-sessione]`
 >
+> **Applica conseguenza** - una nota ha conseguenze o impatti ancora aperti
 > `BUTTON[applica-conseguenza]`
 >
+> **Propaga a entita** - bersagli collegati devono ricevere aggiornamenti
 > `BUTTON[propaga-a-entita]`
 >
+> **Prepara recap pubblico** - devi produrre materiale mostrabile ai giocatori
 > `BUTTON[prepara-recap-pubblico]`
 >
+> **Fuori scena** - devi scegliere chi reagisce prima della prossima sessione
 > `BUTTON[fuori-scena-hub-cosa-succede-fuori-scena-cosa-succede-fuori-scena]`
+<!-- workflow:quick_actions:end post_sessione -->
 
 ## 1. Decisioni Prese
 

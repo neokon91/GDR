@@ -29,18 +29,25 @@ if (!active) {
 
 ## Comandi Rapidi
 
-> [!regia] Flusso rapido
-> Durante il tavolo cattura prima, interpreta dopo: appunto live, conseguenza, scelta mondo, clock, poi post-sessione.
+<!-- workflow:quick_actions:start gioca_live -->
+> [!regia] Azioni rapide
+> Gestire sessione, tiri, incontri, media e appunti live da una schermata.
 >
+> **Appunto live** - emerge qualcosa ma non sai ancora che tipo di nota sia
 > `BUTTON[wizard-appunto-live]`
 >
+> **Conseguenza** - una scelta cambia missioni, PNG, luoghi, fazioni o clock
 > `BUTTON[wizard-conseguenza]`
 >
+> **Registra scelta mondo** - vuoi trasformare una decisione in continuita tracciabile
 > `BUTTON[registra-scelta-mondo]`
 >
+> **Avanza clock** - il tempo passa o una pressione peggiora
 > `BUTTON[avanza-clock]`
 >
+> **Chiudi sessione** - il tavolo finisce
 > `BUTTON[post-sessione-guidato-risorse-post-sessione-guidato]`
+<!-- workflow:quick_actions:end gioca_live -->
 
 `BUTTON[aggiorna-scena-z-modelli-dm-aggiorna-scena-corrente-md]`
 
@@ -54,13 +61,9 @@ if (!active) {
 
 `BUTTON[conseguenza-z-modelli-live-conseguenza-md]`
 
-`BUTTON[registra-scelta-mondo]`
-
 `BUTTON[nuovo-clock-z-modelli-dm-tracciato-md]`
 
 `BUTTON[nuova-dispensa-z-modelli-dispensa-md]`
-
-`BUTTON[post-sessione-guidato-risorse-post-sessione-guidato]`
 
 > [!missione] Fine Sessione
 > Quando il tavolo si chiude, apri il post-sessione e trasforma appunti, decisioni e clock in conseguenze.
