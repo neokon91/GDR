@@ -558,6 +558,7 @@ function validateReleaseFirstRun() {
     if (firstLeaf?.file !== "Inizia Qui.md" || firstLeaf?.mode !== "preview") fail("workspace first-run non apre Inizia Qui in preview");
 
     const appConfig = readJsonRel(".obsidian/app.json", OUT);
+    if (appConfig.propertiesInDocument !== "hidden") fail("app.json release non nasconde le proprieta nelle note");
     for (const hidden of ["z.automazioni/", "z.engine/", "z.modelli/", "z.bases/", "z.fileclass/"]) {
         if (!appConfig.userIgnoreFilters?.includes(hidden)) fail(`app.json non nasconde ${hidden}`);
     }

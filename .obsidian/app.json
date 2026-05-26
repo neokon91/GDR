@@ -1,6 +1,7 @@
 {
   "promptDelete": false,
   "alwaysUpdateLinks": true,
+  "propertiesInDocument": "hidden",
   "userIgnoreFilters": [
     "SRD/",
     "z.automazioni/",

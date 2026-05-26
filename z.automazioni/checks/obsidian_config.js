@@ -1,4 +1,5 @@
 function validateObsidianConfig({
+    appConfig,
     errors,
     existsRel,
     iconConfig,
@@ -11,6 +12,10 @@ function validateObsidianConfig({
     requiredMetadataMenuPresets,
     workspace
 }) {
+    if (appConfig?.propertiesInDocument !== "hidden") {
+        errors.push("app.json: propertiesInDocument deve restare hidden per non mostrare proprieta/frontmatter nelle note");
+    }
+
     if (metadataMenuConfig) {
         const presetNames = new Set((metadataMenuConfig.presetFields ?? []).map(field => field?.name).filter(Boolean));
 

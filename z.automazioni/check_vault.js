@@ -837,8 +837,10 @@ validateMetaBindControls({
 
 const metadataMenuConfig = readJson(repoPath(".obsidian/plugins/metadata-menu/data.json"));
 const iconConfig = readJson(repoPath(".obsidian/plugins/obsidian-icon-folder/data.json"));
+const appConfig = readJson(repoPath(".obsidian/app.json"));
 const workspace = readOptionalJsonRel(".obsidian/workspace.json");
 validateObsidianConfig({
+    appConfig,
     errors,
     existsRel,
     iconConfig,
