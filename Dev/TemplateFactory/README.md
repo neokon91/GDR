@@ -19,7 +19,7 @@ La generazione deve servire il profilo principale D&D 5.5/SRD senza legare il Co
 ## Pipeline scheda meccanica PG
 
 1. Modificare `modules/srd_character_build.yaml` (core + opzioni personaggio).
-2. `npm run import:srd-data` → JSON in `z.automazioni/data/srd/`.
+2. `npm run sync:sources` → JSON in `z.automazioni/data/srd/`.
 3. `z.automazioni/pg.js` legge i JSON e compone frontmatter (`caratteristiche`, `abilita`, `punti_ferita`, …).
 4. Jinja usa `pg_mechanics_schema.yaml` come contesto di render e `jinja/macros/pg_mechanics.j2` + `jinja/partials/pg_scheda_meccanica.md.j2` per il tab **Scheda** nel blueprint `pg`.
 5. `npm run render:templates` puo produrre anteprime locali ignorate da Git; `npm run generate:templates` materializza i template finali in `z.modelli` solo come output locale o release.
@@ -184,7 +184,7 @@ Il render finale valida anche i blocchi Tabs: ogni blocco ` ````tabs ` deve esse
 | `metabind_inputs.yaml` | Input Meta Bind canonici. |
 | `metabind_buttons.yaml` | Pulsanti Meta Bind canonici. |
 | `metabind_config.yaml` | Configurazione completa Meta Bind da cui viene generato `.obsidian/plugins/obsidian-meta-bind-plugin/data.json`. |
-| `generated_artifacts.yaml` | Contratto dei file MD/JSON generati da YAML/Jinja e verificati dai check. |
+| `source_pipeline.yaml` | Pipeline unica e contratto dei file MD/JSON generati da YAML/Jinja e verificati dai check. |
 | `bases_views.yaml` | Contratti per viste `.base`. |
 | `frontmatter_profiles.yaml` | Ordine, default e chiavi del frontmatter generato dagli script. |
 | `runtime_profiles.yaml` | Prompt, opzioni e default usati dagli script Templater sottili. |

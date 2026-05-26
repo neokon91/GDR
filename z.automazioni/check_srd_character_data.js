@@ -1,9 +1,11 @@
 #!/usr/bin/env node
 
 const path = require("path");
+const { execFileSync } = require("child_process");
 const { readJson, repoPath, rel } = require("./node_utils");
 
 const ROOT = process.cwd();
+const MODULE = repoPath(ROOT, "Dev/TemplateFactory/modules/srd_character_build.yaml");
 const DATA_DIR = repoPath(ROOT, "z.automazioni/data/srd");
 const EXPECTED_GENERATOR = "import_srd_character_data";
 
@@ -43,6 +45,47 @@ function choiceOptions(choice) {
     if (!choice || typeof choice !== "object") return [];
     if (Array.isArray(choice.opzioni)) return choice.opzioni;
     return [];
+}
+
+function loadYaml(filePath) {
+    const script = [
+        "import json, sys",
+        "import yaml",
+        "with open(sys.argv[1], encoding='utf-8') as handle:",
+        "    data = yaml.safe_load(handle) or {}",
+        "print(json.dumps(data, ensure_ascii=False))"
+    ].join("\n");
+
+    const stdout = execFileSync("python3", ["-c", script, filePath], {
+        encoding: "utf8",
+        maxBuffer: 10 * 1024 * 1024
+    });
+
+    return JSON.parse(stdout);
+}
+
+function normalize(value) {
+    if (Array.isArray(value)) return value.map(normalize);
+    if (!value || typeof value !== "object") return value;
+    return Object.fromEntries(
+        Object.entries(value)
+            .sort(([left], [right]) => left.localeCompare(right))
+            .map(([key, child]) => [key, normalize(child)])
+    );
+}
+
+function assertGeneratedFromSource(errors, core, opzioni) {
+    const source = loadYaml(MODULE);
+    const expectedCore = { ...(source.core ?? {}), generated_by: EXPECTED_GENERATOR };
+    const expectedOptions = { ...(source.opzioni ?? {}), generated_by: EXPECTED_GENERATOR };
+
+    // Il check deve restare non mutante: se diverge, si rigenera con sync:sources.
+    if (JSON.stringify(normalize(core)) !== JSON.stringify(normalize(expectedCore))) {
+        errors.push("core.json: non allineato a srd_character_build.yaml; eseguire npm run sync:sources");
+    }
+    if (JSON.stringify(normalize(opzioni)) !== JSON.stringify(normalize(expectedOptions))) {
+        errors.push("opzioni_personaggio.json: non allineato a srd_character_build.yaml; eseguire npm run sync:sources");
+    }
 }
 
 function validateCore(errors, core) {
@@ -184,6 +227,7 @@ function main() {
     if (!core || !opzioni) fail(errors);
     if (core.generated_by !== EXPECTED_GENERATOR) errors.push("core.json: generated_by non allineato");
     if (opzioni.generated_by !== EXPECTED_GENERATOR) errors.push("opzioni_personaggio.json: generated_by non allineato");
+    assertGeneratedFromSource(errors, core, opzioni);
 
     const coreRefs = validateCore(errors, core);
     validateClasses(errors, opzioni.classi, coreRefs);

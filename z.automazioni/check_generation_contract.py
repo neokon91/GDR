@@ -14,7 +14,7 @@ sys.dont_write_bytecode = True
 from render_template_factory import materialized_targets, render_blueprint
 from template_factory_utils import ROOT, build_jinja_env, load_modules, resolved_blueprints
 
-CONTRACT = ROOT / "Dev" / "TemplateFactory" / "modules" / "generated_artifacts.yaml"
+PIPELINE = ROOT / "Dev" / "TemplateFactory" / "modules" / "source_pipeline.yaml"
 OBSIDIAN_CONFIG = ROOT / "Dev" / "TemplateFactory" / "modules" / "obsidian_config.yaml"
 
 
@@ -22,17 +22,19 @@ def fail(errors: list[str], message: str) -> None:
     errors.append(message)
 
 
-def load_contract(errors: list[str]) -> dict[str, Any]:
-    if not CONTRACT.exists():
-        fail(errors, f"{CONTRACT.relative_to(ROOT)} mancante")
+def load_pipeline(errors: list[str]) -> dict[str, Any]:
+    if not PIPELINE.exists():
+        fail(errors, f"{PIPELINE.relative_to(ROOT)} mancante")
         return {}
-    data = yaml.safe_load(CONTRACT.read_text(encoding="utf-8")) or {}
+    data = yaml.safe_load(PIPELINE.read_text(encoding="utf-8")) or {}
     if not isinstance(data, dict):
-        fail(errors, f"{CONTRACT.relative_to(ROOT)}: root YAML non valida")
+        fail(errors, f"{PIPELINE.relative_to(ROOT)}: root YAML non valida")
         return {}
-    for key in ["policy", "artifacts"]:
+    if data.get("id") != "source_pipeline":
+        fail(errors, f"{PIPELINE.relative_to(ROOT)}: id non valido")
+    for key in ["policy", "steps"]:
         if key not in data:
-            fail(errors, f"{CONTRACT.relative_to(ROOT)}: sezione mancante {key}")
+            fail(errors, f"{PIPELINE.relative_to(ROOT)}: sezione mancante {key}")
     return data
 
 
@@ -124,15 +126,37 @@ def obsidian_config_targets(errors: list[str]) -> set[str]:
     return targets
 
 
-def validate_json_source_boundary(errors: list[str]) -> None:
-    generated_json = {
+def generated_json_from_pipeline(pipeline: dict[str, Any], errors: list[str]) -> set[str]:
+    generated_json: set[str] = set()
+    steps = pipeline.get("steps") if isinstance(pipeline.get("steps"), dict) else {}
+
+    for step_id, step in steps.items():
+        if not isinstance(step, dict):
+            fail(errors, f"{PIPELINE.relative_to(ROOT)}: step non valido {step_id}")
+            continue
+        for output in step.get("outputs") or []:
+            rel_path = str(output).replace("\\", "/")
+            if rel_path == ".obsidian/**/*.json":
+                generated_json.update(obsidian_config_targets(errors))
+            elif rel_path.endswith(".json") and not any(char in rel_path for char in "*?[]"):
+                generated_json.add(rel_path)
+
+    required = {
         "Dev/plugin_matrix.json",
         "z.automazioni/data/srd/core.json",
         "z.automazioni/data/srd/opzioni_personaggio.json",
         "z.automazioni/data/workflows/quick_actions.json",
         ".obsidian/plugins/obsidian-meta-bind-plugin/data.json",
-        *obsidian_config_targets(errors),
     }
+    missing = sorted(required - generated_json)
+    for rel_path in missing:
+        fail(errors, f"{rel_path}: output generato non dichiarato in source_pipeline.yaml")
+
+    return generated_json
+
+
+def validate_json_source_boundary(pipeline: dict[str, Any], errors: list[str]) -> None:
+    generated_json = generated_json_from_pipeline(pipeline, errors)
     native_json = {
         "package.json",
         "Dev/TemplateFactory/examples/importers/azgaar_sample.geojson",
@@ -150,11 +174,11 @@ def validate_json_source_boundary(errors: list[str]) -> None:
 
 def main() -> int:
     errors: list[str] = []
-    load_contract(errors)
+    pipeline = load_pipeline(errors)
     rendered, blueprints = expected_rendered()
     validate_render_plan(rendered, blueprints, errors)
     validate_tracked_generated(errors)
-    validate_json_source_boundary(errors)
+    validate_json_source_boundary(pipeline, errors)
 
     if errors:
         print("Contratto generazione non valido:", file=sys.stderr)

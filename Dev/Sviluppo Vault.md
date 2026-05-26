@@ -13,7 +13,7 @@ Questa nota contiene convenzioni tecniche per mantenere il vault: campi, templat
 - Le istruzioni tecniche non vanno nel README se non sono necessarie per usare il vault al tavolo.
 - Il profilo regolamentare principale e D&D 5.5/SRD: i campi di creature, incontri, oggetti, ricompense, party e session prep devono restare compatibili con questo uso, mentre il Codex del mondo resta separato dal regolamento.
 - La linea architetturale e vincolante: YAML dichiara contratti e profili, Jinja/TemplateFactory genera Markdown statico, JS del vault contiene runtime e automazioni. Non aggiungere logica fragile nel corpo dei template.
-- **Scheda meccanica PG**: `Dev/TemplateFactory/modules/srd_character_build.yaml` → `npm run import:srd-data` → `z.automazioni/data/srd/*.json` → `z.automazioni/pg.js` (Templater) → frontmatter strutturato → Jinja (`pg_mechanics_schema.yaml`, `macros/pg_mechanics.j2`, tab **Scheda** in `PG.md`). Dettaglio utente: [[docs/PG_SCHEDA_MECHANICA]]; porting e backlog da FantasyWorld: [[docs/FANTASYWORLD_INTEGRATION]].
+- **Scheda meccanica PG**: `Dev/TemplateFactory/modules/srd_character_build.yaml` → `npm run sync:sources` → `z.automazioni/data/srd/*.json` → `z.automazioni/pg.js` (Templater) → frontmatter strutturato → Jinja (`pg_mechanics_schema.yaml`, `macros/pg_mechanics.j2`, tab **Scheda** in `PG.md`). Dettaglio utente: [[docs/PG_SCHEDA_MECHANICA]]; porting e backlog da FantasyWorld: [[docs/FANTASYWORLD_INTEGRATION]].
 - [[Dev/README]] e l'indice canonico della documentazione di sviluppo: prima di creare una nuova nota tecnica, verifica se la modifica appartiene a roadmap, sviluppo, plugin layer, release o TemplateFactory.
 
 ## Stati delle Note Consigliati
@@ -154,7 +154,7 @@ Regole:
 
 La configurazione Meta Bind non si modifica a mano nel JSON: la fonte e `Dev/TemplateFactory/modules/metabind_config.yaml`, poi `npm run render:metabind-config` materializza `.obsidian/plugins/obsidian-meta-bind-plugin/data.json`. `npm run check:metabind-config` blocca ogni divergenza.
 
-Gli artefatti generati vivono sotto contratto in `Dev/TemplateFactory/modules/generated_artifacts.yaml`. Template Markdown in `z.modelli`, preview TemplateFactory, workflow JSON e configurazioni JSON generate devono essere ricostruibili da YAML/Jinja e codice di rendering; `npm run check:generation-contract` blocca output non allineati.
+Gli artefatti generati vivono sotto contratto in `Dev/TemplateFactory/modules/source_pipeline.yaml`. Template Markdown in `z.modelli`, preview TemplateFactory, workflow JSON e configurazioni JSON generate devono essere ricostruibili da YAML/Jinja e codice di rendering; `npm run check:generation-contract` blocca output non dichiarati nella pipeline.
 
 ## Runtime Live E Session Context
 

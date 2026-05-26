@@ -56,7 +56,7 @@ async function loadSrdData(tp) {
         };
     } catch (error) {
         throw new Error(
-            "Dati SRD PG mancanti. Esegui `npm run import:srd-data` nel repository e riapri il vault."
+            "Dati SRD PG mancanti. Esegui `npm run sync:sources` nel repository e riapri il vault."
         );
     }
 }

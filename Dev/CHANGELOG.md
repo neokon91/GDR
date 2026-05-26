@@ -9,7 +9,7 @@
 - `check:release-quality` blocca API DataviewJS fragili nei blocchi Markdown utente; la diagnostica plugin deve passare dal runtime `z.engine`.
 - TemplateFactory genera anche il template Avventura, con wrapper Templater dedicato e profilo YAML gia esistente.
 - `metabind_config.yaml` diventa fonte YAML completa per `.obsidian/plugins/obsidian-meta-bind-plugin/data.json`, verificata da `check:metabind-config`.
-- `generated_artifacts.yaml` dichiara MD/JSON generati da YAML/Jinja; `check:generation-contract` verifica il piano di render e blocca output generati tracciati.
+- `source_pipeline.yaml` dichiara MD/JSON generati da YAML/Jinja; `check:generation-contract` verifica il piano di render e blocca output generati non dichiarati nella pipeline.
 - Le preview `Dev/TemplateFactory/examples/generated`, `dist` e `z.modelli` non sono tracciati: restano output locale/release generato dai sorgenti.
 - Workflow dichiarativi per dashboard DM, preparazione, live, post-sessione, fuori scena, worldbuilding, atlante, canone, compendium, Bibbia del mondo, economia, lore, motore mondo vivo e iniziativa.
 - `npm run release:demo` genera una release pulita con demo utente inclusa nello ZIP.
