@@ -42,6 +42,14 @@ tab: Tavolo
 > Uso al tavolo: `INPUT[text:uso_al_tavolo]`
 
 > [!missione] Scelta E Conseguenza
+> Scelta: `INPUT[text:scelta]`
+>
+> Posta: `INPUT[text:posta]`
+>
+> Rischi: `INPUT[list:rischi]`
+>
+> Ricompense: `INPUT[list:ricompense]`
+>
 > Prossima mossa: `INPUT[prossima_mossa][:prossima_mossa]`
 >
 > Conseguenza potenziale: `INPUT[text:conseguenza_potenziale]`

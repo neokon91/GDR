@@ -19,11 +19,17 @@ sections:
     callout: missione
     fields:
       - uso_al_tavolo
+      - scelta
+      - posta
+      - rischi
       - conseguenza_potenziale
       - prossima_mossa
     fallback: |-
       ### Uso al tavolo
       - Uso:
+      - Scelta:
+      - Posta:
+      - Rischi:
       - Conseguenza:
       - Prossima mossa:
   connessioni:
@@ -65,21 +71,25 @@ sections:
     callout: missione
     fields:
       - gancio
+      - uso_al_tavolo
       - scelta
       - posta
       - rischi
       - ricompense
       - scene_pronte
       - ostacoli
+      - prossima_mossa
     fallback: |-
       ### Giocabilita
       - Gancio:
+      - Uso al tavolo:
       - Scelta:
       - Posta:
       - Rischi:
       - Ricompense:
       - Scene pronte:
       - Ostacoli:
+      - Prossima mossa:
   continuita:
     title: Continuita
     callout: timer

@@ -134,6 +134,11 @@ def validate_blueprints(modules: dict[str, dict], errors: list[str]) -> None:
         if "fallback" not in section:
             fail(f"sections.{section_id}: fallback Markdown mancante", errors)
 
+    playable_required = {"gancio", "uso_al_tavolo", "scelta", "posta", "rischi", "prossima_mossa"}
+    playable_fields = set(sections.get("giocabilita", {}).get("fields", []) or [])
+    for field in sorted(playable_required - playable_fields):
+        fail(f"sections.giocabilita: campo worldbuilding giocabile mancante ({field})", errors)
+
 
 def validate_critical_rendered_generators(modules: dict[str, dict], errors: list[str]) -> None:
     frontmatter_profiles = modules["frontmatter_profiles"].get("profiles", {})

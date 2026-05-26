@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-05-26T09:37:27.633943+00:00",
+  "generated_at": "2026-05-26T14:12:15.585111+00:00",
   "source": "Dev/TemplateFactory",
   "mode": "preview",
   "files": [
     {
       "blueprint": "arco_da_conflitto",
       "path": "Dev/TemplateFactory/examples/generated/arco_da_conflitto.preview.md",
-      "bytes": 2811
+      "bytes": 2949
     },
     {
       "blueprint": "azione_applica_conseguenza",
@@ -71,42 +71,42 @@
     {
       "blueprint": "background_dnd",
       "path": "Dev/TemplateFactory/examples/generated/background_dnd.preview.md",
-      "bytes": 2805
+      "bytes": 2943
     },
     {
       "blueprint": "campagna",
       "path": "Dev/TemplateFactory/examples/generated/campagna.preview.md",
-      "bytes": 2793
+      "bytes": 2931
     },
     {
       "blueprint": "campagna_da_regione",
       "path": "Dev/TemplateFactory/examples/generated/campagna_da_regione.preview.md",
-      "bytes": 2815
+      "bytes": 2953
     },
     {
       "blueprint": "classe_dnd",
       "path": "Dev/TemplateFactory/examples/generated/classe_dnd.preview.md",
-      "bytes": 2797
+      "bytes": 2935
     },
     {
       "blueprint": "compendium_del_mondo",
       "path": "Dev/TemplateFactory/examples/generated/compendium_del_mondo.preview.md",
-      "bytes": 2813
+      "bytes": 2951
     },
     {
       "blueprint": "conflitto",
       "path": "Dev/TemplateFactory/examples/generated/conflitto.preview.md",
-      "bytes": 2795
+      "bytes": 2933
     },
     {
       "blueprint": "conseguenza",
       "path": "Dev/TemplateFactory/examples/generated/conseguenza.preview.md",
-      "bytes": 4029
+      "bytes": 4167
     },
     {
       "blueprint": "cosmologia",
       "path": "Dev/TemplateFactory/examples/generated/cosmologia.preview.md",
-      "bytes": 2797
+      "bytes": 2935
     },
     {
       "blueprint": "creatura",
@@ -116,12 +116,12 @@
     {
       "blueprint": "cultura",
       "path": "Dev/TemplateFactory/examples/generated/cultura.preview.md",
-      "bytes": 2791
+      "bytes": 2929
     },
     {
       "blueprint": "dispensa",
       "path": "Dev/TemplateFactory/examples/generated/dispensa.preview.md",
-      "bytes": 2627
+      "bytes": 2765
     },
     {
       "blueprint": "dm_aggiorna_scena",
@@ -141,62 +141,62 @@
     {
       "blueprint": "dm_one_shot",
       "path": "Dev/TemplateFactory/examples/generated/dm_one_shot.preview.md",
-      "bytes": 2793
+      "bytes": 2931
     },
     {
       "blueprint": "dm_pericolo_ambientale",
       "path": "Dev/TemplateFactory/examples/generated/dm_pericolo_ambientale.preview.md",
-      "bytes": 2815
+      "bytes": 2953
     },
     {
       "blueprint": "dm_trappola",
       "path": "Dev/TemplateFactory/examples/generated/dm_trappola.preview.md",
-      "bytes": 2793
+      "bytes": 2931
     },
     {
       "blueprint": "era_storica",
       "path": "Dev/TemplateFactory/examples/generated/era_storica.preview.md",
-      "bytes": 2799
+      "bytes": 2937
     },
     {
       "blueprint": "evento_storico",
       "path": "Dev/TemplateFactory/examples/generated/evento_storico.preview.md",
-      "bytes": 4030
+      "bytes": 4168
     },
     {
       "blueprint": "fazione",
       "path": "Dev/TemplateFactory/examples/generated/fazione.preview.md",
-      "bytes": 3437
+      "bytes": 3575
     },
     {
       "blueprint": "fazione_confraternita",
       "path": "Dev/TemplateFactory/examples/generated/fazione_confraternita.preview.md",
-      "bytes": 3477
+      "bytes": 3615
     },
     {
       "blueprint": "fazione_gilda",
       "path": "Dev/TemplateFactory/examples/generated/fazione_gilda.preview.md",
-      "bytes": 3461
+      "bytes": 3599
     },
     {
       "blueprint": "geografia_continente",
       "path": "Dev/TemplateFactory/examples/generated/geografia_continente.preview.md",
-      "bytes": 3675
+      "bytes": 3813
     },
     {
       "blueprint": "geografia_isola",
       "path": "Dev/TemplateFactory/examples/generated/geografia_isola.preview.md",
-      "bytes": 3665
+      "bytes": 3803
     },
     {
       "blueprint": "geografia_regione",
       "path": "Dev/TemplateFactory/examples/generated/geografia_regione.preview.md",
-      "bytes": 3649
+      "bytes": 3787
     },
     {
       "blueprint": "incantesimo",
       "path": "Dev/TemplateFactory/examples/generated/incantesimo.preview.md",
-      "bytes": 2799
+      "bytes": 2937
     },
     {
       "blueprint": "incontro",
@@ -206,62 +206,62 @@
     {
       "blueprint": "lingua",
       "path": "Dev/TemplateFactory/examples/generated/lingua.preview.md",
-      "bytes": 2623
+      "bytes": 2761
     },
     {
       "blueprint": "live_evento",
       "path": "Dev/TemplateFactory/examples/generated/live_evento.preview.md",
-      "bytes": 2799
+      "bytes": 2937
     },
     {
       "blueprint": "live_luogo",
       "path": "Dev/TemplateFactory/examples/generated/live_luogo.preview.md",
-      "bytes": 3630
+      "bytes": 3768
     },
     {
       "blueprint": "live_nota_grezza",
       "path": "Dev/TemplateFactory/examples/generated/live_nota_grezza.preview.md",
-      "bytes": 2636
+      "bytes": 2774
     },
     {
       "blueprint": "live_png",
       "path": "Dev/TemplateFactory/examples/generated/live_png.preview.md",
-      "bytes": 3333
+      "bytes": 3471
     },
     {
       "blueprint": "lore_capture",
       "path": "Dev/TemplateFactory/examples/generated/lore_capture.preview.md",
-      "bytes": 2801
+      "bytes": 2939
     },
     {
       "blueprint": "luogo",
       "path": "Dev/TemplateFactory/examples/generated/luogo.preview.md",
-      "bytes": 3620
+      "bytes": 3758
     },
     {
       "blueprint": "luogo_dungeon",
       "path": "Dev/TemplateFactory/examples/generated/luogo_dungeon.preview.md",
-      "bytes": 3646
+      "bytes": 3784
     },
     {
       "blueprint": "luogo_insediamento",
       "path": "Dev/TemplateFactory/examples/generated/luogo_insediamento.preview.md",
-      "bytes": 3657
+      "bytes": 3795
     },
     {
       "blueprint": "luogo_regione_naturale",
       "path": "Dev/TemplateFactory/examples/generated/luogo_regione_naturale.preview.md",
-      "bytes": 3665
+      "bytes": 3803
     },
     {
       "blueprint": "luogo_rovina",
       "path": "Dev/TemplateFactory/examples/generated/luogo_rovina.preview.md",
-      "bytes": 3644
+      "bytes": 3782
     },
     {
       "blueprint": "luogo_tempio",
       "path": "Dev/TemplateFactory/examples/generated/luogo_tempio.preview.md",
-      "bytes": 3644
+      "bytes": 3782
     },
     {
       "blueprint": "mappa_excalidraw_fronti",
@@ -276,112 +276,112 @@
     {
       "blueprint": "mercato",
       "path": "Dev/TemplateFactory/examples/generated/mercato.preview.md",
-      "bytes": 2810
+      "bytes": 2948
     },
     {
       "blueprint": "missione",
       "path": "Dev/TemplateFactory/examples/generated/missione.preview.md",
-      "bytes": 2793
+      "bytes": 2931
     },
     {
       "blueprint": "mondo",
       "path": "Dev/TemplateFactory/examples/generated/mondo.preview.md",
-      "bytes": 2787
+      "bytes": 2925
     },
     {
       "blueprint": "nota_rapida",
       "path": "Dev/TemplateFactory/examples/generated/nota_rapida.preview.md",
-      "bytes": 2633
+      "bytes": 2771
     },
     {
       "blueprint": "oggetto",
       "path": "Dev/TemplateFactory/examples/generated/oggetto.preview.md",
-      "bytes": 2625
+      "bytes": 2763
     },
     {
       "blueprint": "oggetto_magico",
       "path": "Dev/TemplateFactory/examples/generated/oggetto_magico.preview.md",
-      "bytes": 2639
+      "bytes": 2777
     },
     {
       "blueprint": "personaggio_divinita",
       "path": "Dev/TemplateFactory/examples/generated/personaggio_divinita.preview.md",
-      "bytes": 3370
+      "bytes": 3508
     },
     {
       "blueprint": "pg",
       "path": "Dev/TemplateFactory/examples/generated/pg.preview.md",
-      "bytes": 10993
+      "bytes": 11131
     },
     {
       "blueprint": "png",
       "path": "Dev/TemplateFactory/examples/generated/png.preview.md",
-      "bytes": 3323
+      "bytes": 3461
     },
     {
       "blueprint": "politica_baronia",
       "path": "Dev/TemplateFactory/examples/generated/politica_baronia.preview.md",
-      "bytes": 3668
+      "bytes": 3806
     },
     {
       "blueprint": "politica_contea",
       "path": "Dev/TemplateFactory/examples/generated/politica_contea.preview.md",
-      "bytes": 3666
+      "bytes": 3804
     },
     {
       "blueprint": "politica_ducato",
       "path": "Dev/TemplateFactory/examples/generated/politica_ducato.preview.md",
-      "bytes": 3666
+      "bytes": 3804
     },
     {
       "blueprint": "politica_impero",
       "path": "Dev/TemplateFactory/examples/generated/politica_impero.preview.md",
-      "bytes": 3666
+      "bytes": 3804
     },
     {
       "blueprint": "politica_oligarchia",
       "path": "Dev/TemplateFactory/examples/generated/politica_oligarchia.preview.md",
-      "bytes": 3674
+      "bytes": 3812
     },
     {
       "blueprint": "politica_regno",
       "path": "Dev/TemplateFactory/examples/generated/politica_regno.preview.md",
-      "bytes": 3664
+      "bytes": 3802
     },
     {
       "blueprint": "politica_repubblica",
       "path": "Dev/TemplateFactory/examples/generated/politica_repubblica.preview.md",
-      "bytes": 3674
+      "bytes": 3812
     },
     {
       "blueprint": "regola_dnd",
       "path": "Dev/TemplateFactory/examples/generated/regola_dnd.preview.md",
-      "bytes": 2797
+      "bytes": 2935
     },
     {
       "blueprint": "relazione",
       "path": "Dev/TemplateFactory/examples/generated/relazione.preview.md",
-      "bytes": 3346
+      "bytes": 3484
     },
     {
       "blueprint": "religione_culto",
       "path": "Dev/TemplateFactory/examples/generated/religione_culto.preview.md",
-      "bytes": 3445
+      "bytes": 3583
     },
     {
       "blueprint": "ricorrenza_calendario",
       "path": "Dev/TemplateFactory/examples/generated/ricorrenza_calendario.preview.md",
-      "bytes": 2653
+      "bytes": 2791
     },
     {
       "blueprint": "risorsa",
       "path": "Dev/TemplateFactory/examples/generated/risorsa.preview.md",
-      "bytes": 2797
+      "bytes": 2935
     },
     {
       "blueprint": "rotta",
       "path": "Dev/TemplateFactory/examples/generated/rotta.preview.md",
-      "bytes": 2787
+      "bytes": 2925
     },
     {
       "blueprint": "router_cultura",
@@ -441,7 +441,7 @@
     {
       "blueprint": "segreto_o_mistero",
       "path": "Dev/TemplateFactory/examples/generated/segreto_o_mistero.preview.md",
-      "bytes": 2806
+      "bytes": 2944
     },
     {
       "blueprint": "session",
@@ -451,32 +451,32 @@
     {
       "blueprint": "specie_dnd",
       "path": "Dev/TemplateFactory/examples/generated/specie_dnd.preview.md",
-      "bytes": 2797
+      "bytes": 2935
     },
     {
       "blueprint": "talento_dnd",
       "path": "Dev/TemplateFactory/examples/generated/talento_dnd.preview.md",
-      "bytes": 2799
+      "bytes": 2937
     },
     {
       "blueprint": "tesoro_dnd",
       "path": "Dev/TemplateFactory/examples/generated/tesoro_dnd.preview.md",
-      "bytes": 2789
+      "bytes": 2927
     },
     {
       "blueprint": "tracciato",
       "path": "Dev/TemplateFactory/examples/generated/tracciato.preview.md",
-      "bytes": 3316
+      "bytes": 3454
     },
     {
       "blueprint": "wizard_appunto_live",
       "path": "Dev/TemplateFactory/examples/generated/wizard_appunto_live.preview.md",
-      "bytes": 2817
+      "bytes": 2955
     },
     {
       "blueprint": "wizard_conseguenza",
       "path": "Dev/TemplateFactory/examples/generated/wizard_conseguenza.preview.md",
-      "bytes": 3451
+      "bytes": 3589
     },
     {
       "blueprint": "wizard_fine_sessione",
@@ -491,17 +491,17 @@
     {
       "blueprint": "wizard_nuovo_mondo_homebrew",
       "path": "Dev/TemplateFactory/examples/generated/wizard_nuovo_mondo_homebrew.preview.md",
-      "bytes": 2817
+      "bytes": 2955
     },
     {
       "blueprint": "wizard_sessione_output",
       "path": "Dev/TemplateFactory/examples/generated/wizard_sessione_output.preview.md",
-      "bytes": 2863
+      "bytes": 3001
     },
     {
       "blueprint": "world_entity",
       "path": "Dev/TemplateFactory/examples/generated/world_entity.preview.md",
-      "bytes": 2809
+      "bytes": 2947
     }
   ]
 }
