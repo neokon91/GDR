@@ -326,6 +326,82 @@ field_catalog:
     - tipo_mappa
 migration_backlog:
   - z.automazioni/generate_demo_world.js
+validation_contract:
+  required_fields_by_category:
+    campagna:
+      - stato
+    conflitto:
+      - stato
+      - mondo
+      - pressione
+      - prossima_mossa
+    cosmologia:
+      - stato
+      - mondo
+    creatura:
+      - stato
+    cultura:
+      - stato
+      - mondo
+    dispensa:
+      - stato
+    evento storico:
+      - stato
+      - mondo
+      - data_mondo
+    fazione:
+      - stato
+      - mondo
+      - pressione
+    incontro:
+      - stato
+    lingua:
+      - stato
+      - mondo
+    lore capture:
+      - stato
+      - mondo
+      - data_mondo
+    luogo:
+      - stato
+      - mondo
+      - tipo
+    missione:
+      - stato
+      - mondo
+      - prossima_mossa
+    mondo:
+      - stato
+      - tono
+      - tema
+    nota rapida:
+      - stato
+    oggetto:
+      - stato
+    personaggio:
+      - stato
+    religione:
+      - stato
+      - mondo
+    relazione:
+      - stato
+      - mondo
+      - soggetti
+    risorsa:
+      - stato
+    sessione:
+      - stato
+      - attiva
+      - mondo
+    societa:
+      - stato
+      - mondo
+    tracciato:
+      - stato
+      - mondo
+      - progress_value
+      - progress_max
+      - prossima_mossa
 profiles:
   fazione:
     integrations:

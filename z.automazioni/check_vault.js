@@ -45,6 +45,7 @@ function loadYamlModule(relPath) {
 }
 
 const FIELDS_CORE = loadYamlModule("Dev/TemplateFactory/modules/fields_core.yaml");
+const FRONTMATTER_PROFILES = loadYamlModule("Dev/TemplateFactory/modules/frontmatter_profiles.yaml");
 
 function coreFieldValues(fieldName) {
     for (const group of Object.values(FIELDS_CORE.fields ?? {})) {
@@ -65,6 +66,23 @@ function requiredCoreFieldValues(fieldName) {
         throw new Error(`Dev/TemplateFactory/modules/fields_core.yaml: campo ${fieldName} senza values dichiarati`);
     }
     return new Set(values);
+}
+
+function requiredFieldsByCategoryFromProfiles() {
+    const contract = FRONTMATTER_PROFILES.validation_contract?.required_fields_by_category ?? {};
+    const entries = Object.entries(contract);
+    if (!entries.length) {
+        throw new Error("Dev/TemplateFactory/modules/frontmatter_profiles.yaml: validation_contract.required_fields_by_category vuoto o mancante");
+    }
+    return Object.fromEntries(entries.map(([category, fields]) => {
+        const requiredFields = (fields ?? [])
+            .map(field => String(field))
+            .filter(Boolean);
+        if (!requiredFields.length) {
+            throw new Error(`Dev/TemplateFactory/modules/frontmatter_profiles.yaml: categoria ${category} senza campi richiesti`);
+        }
+        return [category, requiredFields];
+    }));
 }
 
 function requiredMetaBindInputTemplates() {
@@ -343,31 +361,7 @@ const ALLOWED_TYPES_BY_CATEGORY = {
     societa: new Set(["ceto sociale", "clan casata o famiglia", "istituzione civile", "legge o codice", "crimine organizzato", "accademia o scuola", "burocrazia", "gilda non economica", "movimento popolare", "societa da definire"]),
     tracciato: new Set(["clock", "progress track", "fronte", "rituale", "minaccia", "viaggio", "progetto"])
 };
-const REQUIRED_FIELDS_BY_CATEGORY = {
-    campagna: ["stato"],
-    conflitto: ["stato", "mondo", "pressione", "prossima_mossa"],
-    cosmologia: ["stato", "mondo"],
-    creatura: ["stato"],
-    cultura: ["stato", "mondo"],
-    dispensa: ["stato"],
-    "evento storico": ["stato", "mondo", "data_mondo"],
-    fazione: ["stato", "mondo", "pressione"],
-    incontro: ["stato"],
-    lingua: ["stato", "mondo"],
-    "lore capture": ["stato", "mondo", "data_mondo"],
-    luogo: ["stato", "mondo", "tipo"],
-    missione: ["stato", "mondo", "prossima_mossa"],
-    mondo: ["stato", "tono", "tema"],
-    "nota rapida": ["stato"],
-    oggetto: ["stato"],
-    personaggio: ["stato"],
-    religione: ["stato", "mondo"],
-    relazione: ["stato", "mondo", "soggetti"],
-    risorsa: ["stato"],
-    sessione: ["stato", "attiva", "mondo"],
-    societa: ["stato", "mondo"],
-    tracciato: ["stato", "mondo", "progress_value", "progress_max", "prossima_mossa"]
-};
+const REQUIRED_FIELDS_BY_CATEGORY = requiredFieldsByCategoryFromProfiles();
 
 const errors = [];
 const warnings = [];
