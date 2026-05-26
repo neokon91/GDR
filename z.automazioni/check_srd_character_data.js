@@ -45,17 +45,7 @@ function choiceOptions(choice) {
     return [];
 }
 
-function main() {
-    const errors = [];
-    const corePath = repoPath(DATA_DIR, "core.json");
-    const optionsPath = repoPath(DATA_DIR, "opzioni_personaggio.json");
-    const core = readJson(corePath, null, () => errors.push(`JSON non valido: ${rel(ROOT, corePath)}`));
-    const opzioni = readJson(optionsPath, null, () => errors.push(`JSON non valido: ${rel(ROOT, optionsPath)}`));
-
-    if (!core || !opzioni) fail(errors);
-    if (core.generated_by !== EXPECTED_GENERATOR) errors.push("core.json: generated_by non allineato");
-    if (opzioni.generated_by !== EXPECTED_GENERATOR) errors.push("opzioni_personaggio.json: generated_by non allineato");
-
+function validateCore(errors, core) {
     if (!Array.isArray(core.statistiche) || core.statistiche.length !== 6) {
         errors.push("core.statistiche: servono esattamente 6 caratteristiche");
     }
@@ -75,6 +65,7 @@ function main() {
     if (!armorCategories.size) errors.push("core.categorie_armature: nessuna categoria");
     if (!weaponCategories.size) errors.push("core.categorie_armi: nessuna categoria");
 
+    // I metodi di generazione sono contratti utente: se cambiano, il wizard PG va rivisto.
     const methods = core.generazione_caratteristiche?.metodi ?? {};
     const standardArray = methods.array_standard?.valori ?? [];
     if (!Array.isArray(standardArray) || standardArray.length !== stats.size) {
@@ -91,91 +82,121 @@ function main() {
         }
     }
 
-    if (requireNonEmptyObject(errors, opzioni.classi, "opzioni.classi")) {
-        for (const [slug, cls] of Object.entries(opzioni.classi)) {
-            if (!cls.label) errors.push(`opzioni.classi.${slug}: label mancante`);
-            if (![6, 8, 10, 12].includes(cls.dadi_vita)) errors.push(`opzioni.classi.${slug}: dadi_vita non valido`);
-            if (!Array.isArray(cls.save_prof) || cls.save_prof.length !== 2) {
-                errors.push(`opzioni.classi.${slug}: save_prof deve avere 2 caratteristiche`);
-            }
-            assertRefs(errors, cls.save_prof, stats, `opzioni.classi.${slug}.save_prof`);
+    return { stats, skills, armorCategories, weaponCategories };
+}
 
-            const skillChoice = cls.abilita ?? {};
-            if (!Number.isInteger(skillChoice.scelte) || skillChoice.scelte < 0) {
-                errors.push(`opzioni.classi.${slug}.abilita: scelte non valido`);
-            }
-            if (skillChoice.opzioni !== "qualsiasi") {
-                if (!Array.isArray(skillChoice.opzioni) || skillChoice.opzioni.length < skillChoice.scelte) {
-                    errors.push(`opzioni.classi.${slug}.abilita: opzioni insufficienti`);
-                }
-                assertRefs(errors, skillChoice.opzioni, skills, `opzioni.classi.${slug}.abilita.opzioni`);
-            }
+function validateClasses(errors, classi, coreRefs) {
+    if (!requireNonEmptyObject(errors, classi, "opzioni.classi")) return;
 
-            assertRefs(errors, cls.addestramento_armature, armorCategories, `opzioni.classi.${slug}.addestramento_armature`);
-            assertRefs(errors, cls.addestramento_armi, weaponCategories, `opzioni.classi.${slug}.addestramento_armi`);
+    for (const [slug, cls] of Object.entries(classi)) {
+        if (!cls.label) errors.push(`opzioni.classi.${slug}: label mancante`);
+        if (![6, 8, 10, 12].includes(cls.dadi_vita)) errors.push(`opzioni.classi.${slug}: dadi_vita non valido`);
+        if (!Array.isArray(cls.save_prof) || cls.save_prof.length !== 2) {
+            errors.push(`opzioni.classi.${slug}: save_prof deve avere 2 caratteristiche`);
         }
-    }
+        assertRefs(errors, cls.save_prof, coreRefs.stats, `opzioni.classi.${slug}.save_prof`);
 
-    if (requireNonEmptyObject(errors, opzioni.specie, "opzioni.specie")) {
-        for (const [slug, species] of Object.entries(opzioni.specie)) {
-            if (!species.label) errors.push(`opzioni.specie.${slug}: label mancante`);
-            if (!requireNonEmptyObject(errors, species.tratti, `opzioni.specie.${slug}.tratti`)) continue;
-            for (const [traitSlug, trait] of Object.entries(species.tratti)) {
-                if (!trait.label) errors.push(`opzioni.specie.${slug}.tratti.${traitSlug}: label mancante`);
-                if (!trait.descrizione) errors.push(`opzioni.specie.${slug}.tratti.${traitSlug}: descrizione mancante`);
-                if (trait.tipo === "scelta" && !keys(trait.opzioni).length) {
-                    errors.push(`opzioni.specie.${slug}.tratti.${traitSlug}: scelta senza opzioni`);
-                }
-            }
+        const skillChoice = cls.abilita ?? {};
+        if (!Number.isInteger(skillChoice.scelte) || skillChoice.scelte < 0) {
+            errors.push(`opzioni.classi.${slug}.abilita: scelte non valido`);
         }
+        if (skillChoice.opzioni !== "qualsiasi") {
+            if (!Array.isArray(skillChoice.opzioni) || skillChoice.opzioni.length < skillChoice.scelte) {
+                errors.push(`opzioni.classi.${slug}.abilita: opzioni insufficienti`);
+            }
+            assertRefs(errors, skillChoice.opzioni, coreRefs.skills, `opzioni.classi.${slug}.abilita.opzioni`);
+        }
+
+        assertRefs(errors, cls.addestramento_armature, coreRefs.armorCategories, `opzioni.classi.${slug}.addestramento_armature`);
+        assertRefs(errors, cls.addestramento_armi, coreRefs.weaponCategories, `opzioni.classi.${slug}.addestramento_armi`);
     }
+}
 
-    const talents = new Set(keys(opzioni.talenti));
-    if (requireNonEmptyObject(errors, opzioni.talenti, "opzioni.talenti")) {
-        for (const [slug, talent] of Object.entries(opzioni.talenti)) {
-            if (!talent.label) errors.push(`opzioni.talenti.${slug}: label mancante`);
-            if (talent.categoria !== "origini") {
-                errors.push(`opzioni.talenti.${slug}: solo talenti di origine ammessi in questa fase`);
-            }
-            if (typeof talent.repeatable !== "boolean") {
-                errors.push(`opzioni.talenti.${slug}: repeatable deve essere booleano`);
-            }
-            if (!requireObject(errors, talent.benefici, `opzioni.talenti.${slug}.benefici`)) continue;
+function validateSpecies(errors, specie) {
+    if (!requireNonEmptyObject(errors, specie, "opzioni.specie")) return;
 
-            // I talenti derivati da Iniziato alla Magia devono restare vincolati alla lista dichiarata.
-            if (talent.base === "iniziato_alla_magia") {
-                assertRefs(
-                    errors,
-                    choiceOptions(talent.scelte?.caratteristica_incantatore),
-                    stats,
-                    `opzioni.talenti.${slug}.scelte.caratteristica_incantatore`
-                );
-                const lists = new Set(choiceOptions(talent.scelte?.lista_incantesimi));
-                if (![...lists].every(list => ["chierico", "druido", "mago"].includes(list))) {
-                    errors.push(`opzioni.talenti.${slug}: lista_incantesimi non supportata`);
-                }
+    for (const [slug, species] of Object.entries(specie)) {
+        if (!species.label) errors.push(`opzioni.specie.${slug}: label mancante`);
+        if (!requireNonEmptyObject(errors, species.tratti, `opzioni.specie.${slug}.tratti`)) continue;
+        for (const [traitSlug, trait] of Object.entries(species.tratti)) {
+            if (!trait.label) errors.push(`opzioni.specie.${slug}.tratti.${traitSlug}: label mancante`);
+            if (!trait.descrizione) errors.push(`opzioni.specie.${slug}.tratti.${traitSlug}: descrizione mancante`);
+            if (trait.tipo === "scelta" && !keys(trait.opzioni).length) {
+                errors.push(`opzioni.specie.${slug}.tratti.${traitSlug}: scelta senza opzioni`);
             }
         }
     }
+}
 
-    if (requireNonEmptyObject(errors, opzioni.background, "opzioni.background")) {
-        for (const [slug, background] of Object.entries(opzioni.background)) {
-            if (!background.label) errors.push(`opzioni.background.${slug}: label mancante`);
-            assertRefs(errors, background.competenze_abilita, skills, `opzioni.background.${slug}.competenze_abilita`);
-            assertRefs(errors, background.aumento_caratteristiche?.opzioni, stats, `opzioni.background.${slug}.aumento_caratteristiche.opzioni`);
-            assertRefs(errors, background.talento_origine, talents, `opzioni.background.${slug}.talento_origine`);
-            if (!Array.isArray(background.competenze_abilita) || background.competenze_abilita.length < 2) {
-                errors.push(`opzioni.background.${slug}: competenze_abilita insufficienti`);
+function validateTalents(errors, talenti, stats) {
+    const talents = new Set(keys(talenti));
+    if (!requireNonEmptyObject(errors, talenti, "opzioni.talenti")) return talents;
+
+    for (const [slug, talent] of Object.entries(talenti)) {
+        if (!talent.label) errors.push(`opzioni.talenti.${slug}: label mancante`);
+        if (talent.categoria !== "origini") {
+            errors.push(`opzioni.talenti.${slug}: solo talenti di origine ammessi in questa fase`);
+        }
+        if (typeof talent.repeatable !== "boolean") {
+            errors.push(`opzioni.talenti.${slug}: repeatable deve essere booleano`);
+        }
+        if (!requireObject(errors, talent.benefici, `opzioni.talenti.${slug}.benefici`)) continue;
+
+        // I talenti derivati da Iniziato alla Magia devono restare vincolati alla lista dichiarata.
+        if (talent.base === "iniziato_alla_magia") {
+            assertRefs(
+                errors,
+                choiceOptions(talent.scelte?.caratteristica_incantatore),
+                stats,
+                `opzioni.talenti.${slug}.scelte.caratteristica_incantatore`
+            );
+            const lists = new Set(choiceOptions(talent.scelte?.lista_incantesimi));
+            if (![...lists].every(list => ["chierico", "druido", "mago"].includes(list))) {
+                errors.push(`opzioni.talenti.${slug}: lista_incantesimi non supportata`);
             }
         }
     }
+
+    return talents;
+}
+
+function validateBackgrounds(errors, backgrounds, coreRefs, talents) {
+    if (!requireNonEmptyObject(errors, backgrounds, "opzioni.background")) return;
+
+    for (const [slug, background] of Object.entries(backgrounds)) {
+        if (!background.label) errors.push(`opzioni.background.${slug}: label mancante`);
+        assertRefs(errors, background.competenze_abilita, coreRefs.skills, `opzioni.background.${slug}.competenze_abilita`);
+        assertRefs(errors, background.aumento_caratteristiche?.opzioni, coreRefs.stats, `opzioni.background.${slug}.aumento_caratteristiche.opzioni`);
+        assertRefs(errors, background.talento_origine, talents, `opzioni.background.${slug}.talento_origine`);
+        if (!Array.isArray(background.competenze_abilita) || background.competenze_abilita.length < 2) {
+            errors.push(`opzioni.background.${slug}: competenze_abilita insufficienti`);
+        }
+    }
+}
+
+function main() {
+    const errors = [];
+    const corePath = repoPath(DATA_DIR, "core.json");
+    const optionsPath = repoPath(DATA_DIR, "opzioni_personaggio.json");
+    const core = readJson(corePath, null, () => errors.push(`JSON non valido: ${rel(ROOT, corePath)}`));
+    const opzioni = readJson(optionsPath, null, () => errors.push(`JSON non valido: ${rel(ROOT, optionsPath)}`));
+
+    if (!core || !opzioni) fail(errors);
+    if (core.generated_by !== EXPECTED_GENERATOR) errors.push("core.json: generated_by non allineato");
+    if (opzioni.generated_by !== EXPECTED_GENERATOR) errors.push("opzioni_personaggio.json: generated_by non allineato");
+
+    const coreRefs = validateCore(errors, core);
+    validateClasses(errors, opzioni.classi, coreRefs);
+    validateSpecies(errors, opzioni.specie);
+    const talents = validateTalents(errors, opzioni.talenti, coreRefs.stats);
+    validateBackgrounds(errors, opzioni.background, coreRefs, talents);
 
     if (errors.length) fail(errors);
 
     console.log(
         `SRD character data OK: ${keys(opzioni.classi).length} classi, ` +
         `${keys(opzioni.specie).length} specie, ${keys(opzioni.background).length} background, ` +
-        `${keys(opzioni.talenti).length} talenti, ${skills.size} abilita.`
+        `${keys(opzioni.talenti).length} talenti, ${coreRefs.skills.size} abilita.`
     );
 }
 
