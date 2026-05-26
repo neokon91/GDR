@@ -4,6 +4,11 @@
 
 ### Aggiunto
 
+- Percorso utente nuovo blindato da `check:user-path`: 17 superfici primarie e avanzate verificano workflow user-facing, deck semplice e pulsanti Meta Bind configurati.
+- Workflow dichiarativi per dashboard DM, preparazione, live, post-sessione, fuori scena, worldbuilding, atlante, canone, compendium, Bibbia del mondo, economia, lore, motore mondo vivo e iniziativa.
+- `npm run release:demo` genera una release pulita con demo utente inclusa nello ZIP.
+- `generate_demo_world.js` crea `Demo Regno Di Prova.md` e uno scenario minimo con mondo, campagna, luogo, fazione, missione, sessione attiva, clock, incontro, creatura, oggetto, dispensa e conseguenza propagabile.
+- `check:docs` verifica coerenza tra README, checklist release e contratto demo.
 - M6 Continuity Engine: azioni Meta Bind per applicare conseguenze e propagare entita con stato esplicito, backlink, aggiornamenti richiesti, pressione e prossima mossa opzionale.
 - Viste runtime riusabili `renderContinuityQueue`, `renderPropagationTargets` e `renderContinuityGaps` in `z.engine/session_views.js`.
 - TemplateFactory genera schede con tabs logici e callout funzionali che contengono Meta Bind, Dataview, DataviewJS, riferimenti Bases ed Excalidraw.
@@ -64,6 +69,9 @@
 
 ### Migliorato
 
+- Le pagine utente principali usano `mode: "simple"` e non espongono diagnostica plugin nel percorso normale.
+- La documentazione utente distingue setup normale, recupero strumenti e sviluppo tecnico.
+- La demo finale resta artefatto generato in `dist/`, non contenuto sorgente da mantenere nota per nota.
 - [[Dev/NEXT_PHASE_HANDOFF]] chiarisce che M6 e completato e che la prossima fase deve concentrarsi su schede plugin-native, non su nuove dashboard.
 - [[Dev/NEXT_PHASE_HANDOFF]] aggiornato dopo M7 e chiusura warning: la prossima fase e M8 Release Evidence And Zero-Warning Discipline.
 - Le note demo manuali storiche sono state eliminate dal sorgente per evitare manutenzione nota per nota.
@@ -103,6 +111,9 @@
 
 ### Verificato
 
+- `npm run check:user-path`
+- `npm run check:docs`
+- `npm run release:demo`
 - `npm run check` rieseguito dopo M6 Continuity Engine e rigenerazione TemplateFactory.
 - `npm run check`
 - `npm run check:m11`
