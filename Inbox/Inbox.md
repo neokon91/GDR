@@ -7,27 +7,50 @@ cssclasses:
 
 Usa questa cartella per idee grezze, appunti presi al volo e materiale non ancora deciso. Quando un'idea diventa utile al tavolo, trasformala in una nota del mondo.
 
-`BUTTON[smistamento-bozze-generate-risorse-smistamento-bozze-generate-2]`
+<!-- workflow:quick_actions:start inbox_operativa -->
+> [!regia] Azioni rapide
+> Smistare appunti grezzi, live e lore senza perdere agganci utili al tavolo.
+>
+> Plugin coinvolti: `Meta Bind`, `Dataview`, `Templater`, `Fantasy Content Generator`.
+>
+> **Smistamento bozze generate** - devi processare output del generatore fantasy
+> `BUTTON[smistamento-bozze-generate-risorse-smistamento-bozze-generate-2]`
+>
+> **Smista bozza** - una nota ha gia un aggancio operativo
+> `BUTTON[smista-bozza-generata]`
+>
+> **Canonizza bozza** - la bozza e diventata vera al tavolo
+> `BUTTON[canonizza-bozza-generata]`
+>
+> **Nota rapida** - devi catturare un'idea senza struttura
+> `BUTTON[nuova-nota-rapida-z-modelli-nota-rapida-md]`
+>
+> **Evento lore** - un appunto deve diventare lore da verificare
+> `BUTTON[nuovo-evento-lore-z-modelli-lore-capture-md]`
+>
+> [!regia]- Cattura live
+> Salvare materiale emerso al tavolo senza decidere subito la tassonomia definitiva.
+>
+> **Evento live** - succede qualcosa che potrebbe diventare canone
+> `BUTTON[evento-live-z-modelli-live-evento-md]`
+>
+> **PNG improvvisato** - compare una persona non preparata
+> `BUTTON[png-improvvisato-z-modelli-live-png-md]`
+>
+> **Luogo improvvisato** - il party entra in un posto non preparato
+> `BUTTON[luogo-improvvisato-z-modelli-live-luogo-md]`
+>
+> **Nota grezza** - devi catturare velocemente senza tassonomia
+> `BUTTON[nota-grezza-z-modelli-live-nota-grezza-md]`
+>
+> **Conseguenza live** - una scelta produce un effetto da risolvere dopo
+> `BUTTON[conseguenza-z-modelli-live-conseguenza-md]`
+<!-- workflow:quick_actions:end inbox_operativa -->
 
-`BUTTON[smista-bozza-generata]`
-
-`BUTTON[canonizza-bozza-generata]`
-
-`BUTTON[nuova-nota-rapida-z-modelli-nota-rapida-md]`
-
-`BUTTON[nuovo-evento-lore-z-modelli-lore-capture-md]`
-
-## Inbox Live
-
-`BUTTON[evento-live-z-modelli-live-evento-md]`
-
-`BUTTON[png-improvvisato-z-modelli-live-png-md]`
-
-`BUTTON[luogo-improvvisato-z-modelli-live-luogo-md]`
-
-`BUTTON[nota-grezza-z-modelli-live-nota-grezza-md]`
-
-`BUTTON[conseguenza-z-modelli-live-conseguenza-md]`
+```dataviewjs
+const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+await gdr.renderWorkflowCommandDeck(dv, "inbox_operativa");
+```
 
 ## Da Smistare
 

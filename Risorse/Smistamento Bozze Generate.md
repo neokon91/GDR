@@ -10,15 +10,32 @@ stato: pronto
 
 Questa pagina trasforma gli output del Generatore di Contenuti Fantasy in decisioni operative. Le note generate restano bozze finche non hanno almeno un aggancio a mondo, luogo, campagna o sessione.
 
-`BUTTON[generatore-fantasy-fantasy-content-generator-open-generator-2]`
+<!-- workflow:quick_actions:start smistamento_bozze -->
+> [!regia] Azioni rapide
+> Trasformare bozze generate in note utili, canoniche o archiviate.
+>
+> Plugin coinvolti: `Meta Bind`, `Dataview`, `Templater`, `Fantasy Content Generator`.
+>
+> **Generatore fantasy** - vuoi creare una nuova bozza da valutare
+> `BUTTON[generatore-fantasy-fantasy-content-generator-open-generator-2]`
+>
+> **Controllo vault** - vuoi verificare se restano bozze o problemi
+> `BUTTON[controllo-vault-risorse-controllo-vault-2]`
+>
+> **Inbox** - devi tornare alla coda completa degli appunti
+> `BUTTON[inbox-inbox-inbox-2]`
+>
+> **Smista bozza** - la bozza ha un aggancio a mondo, luogo, campagna o sessione
+> `BUTTON[smista-bozza-generata]`
+>
+> **Canonizza bozza** - la bozza e stata confermata in gioco o nel canone
+> `BUTTON[canonizza-bozza-generata]`
+<!-- workflow:quick_actions:end smistamento_bozze -->
 
-`BUTTON[controllo-vault-risorse-controllo-vault-2]`
-
-`BUTTON[inbox-inbox-inbox-2]`
-
-`BUTTON[smista-bozza-generata]`
-
-`BUTTON[canonizza-bozza-generata]`
+```dataviewjs
+const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+await gdr.renderWorkflowCommandDeck(dv, "smistamento_bozze");
+```
 
 ## Coda Di Lavoro
 

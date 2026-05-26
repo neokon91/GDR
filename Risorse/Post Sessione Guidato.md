@@ -12,12 +12,6 @@ stato: pronto
 > [!missione] Risultato
 > Trasforma la sessione appena giocata in mondo aggiornato: decisioni, conseguenze, missioni, PNG, luoghi, clock, recap pubblico, recap DM e prossima sessione.
 
-`BUTTON[cosa-succede-fuori-scena-cosa-succede-fuori-scena]`
-
-`BUTTON[nuovo-evento-storico-z-modelli-evento-storico-md]`
-
-`BUTTON[nuovo-clock-z-modelli-dm-tracciato-md]`
-
 ## Sessione Da Processare
 
 ```dataviewjs
@@ -65,6 +59,12 @@ gdr.renderPostSessionFocus(dv);
 >
 > **Prepara recap pubblico** - devi chiudere con materiale player-safe
 > `BUTTON[prepara-recap-pubblico]`
+>
+> **Evento storico** - l'esito della sessione deve entrare nella timeline
+> `BUTTON[nuovo-evento-storico-z-modelli-evento-storico-md]`
+>
+> **Nuovo clock** - una conseguenza deve diventare pressione tracciabile
+> `BUTTON[nuovo-clock-z-modelli-dm-tracciato-md]`
 <!-- workflow:quick_actions:end post_sessione -->
 
 ```dataviewjs

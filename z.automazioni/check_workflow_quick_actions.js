@@ -6,11 +6,16 @@ const ROOT = process.cwd();
 const DATA_FILE = "z.automazioni/data/workflows/quick_actions.json";
 const META_BIND_CONFIG = ".obsidian/plugins/obsidian-meta-bind-plugin/data.json";
 const BUTTON_ID_PATTERN = /^[A-Za-z0-9][A-Za-z0-9_-]*$/;
+const BUTTON_PATTERN = /`BUTTON\[([^\]\n]+)\]`/g;
 
 function fail(errors) {
     console.error("Workflow quick actions non valide:");
     for (const error of errors) console.error(`- ${error}`);
     process.exit(1);
+}
+
+function stripWorkflowBlocks(text) {
+    return text.replace(/<!-- workflow:quick_actions:start [^>]+ -->[\s\S]*?<!-- workflow:quick_actions:end [^>]+ -->/g, "");
 }
 
 function main() {
@@ -69,6 +74,12 @@ function main() {
                 if (!text.includes(`BUTTON[${button}]`)) {
                     errors.push(`${workflowId}: ${entry} non espone BUTTON[${button}]`);
                 }
+            }
+
+            const outsideWorkflowBlocks = stripWorkflowBlocks(text);
+            let match;
+            while ((match = BUTTON_PATTERN.exec(outsideWorkflowBlocks))) {
+                errors.push(`${workflowId}: ${entry} espone BUTTON[${match[1]}] fuori dal blocco workflow dichiarativo`);
             }
         }
     }

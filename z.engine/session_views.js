@@ -282,9 +282,11 @@
       "Callout Manager": "callout-manager",
       "Dataview": "dataview",
       "Dice Roller": "obsidian-dice-roller",
+      "Fantasy Content Generator": "fantasy-content-generator",
       "Fantasy Statblocks": "obsidian-5e-statblocks",
       "Folder Notes": "folder-notes",
       "Initiative Tracker": "initiative-tracker",
+      "JS Engine": "js-engine",
       "Kanban": "obsidian-kanban",
       "Linter": "obsidian-linter",
       "Maps": "maps",
@@ -301,7 +303,11 @@
       gioca_live: ["Meta Bind", "Dataview", "Dice Roller", "Initiative Tracker", "Fantasy Statblocks", "Media Extended", "Callout Manager"],
       fuori_scena: ["Meta Bind", "Dataview", "Templater", "Tasks"],
       post_sessione: ["Templater", "Meta Bind", "Tasks", "Dataview", "Calendarium"],
-      manutenzione: ["Meta Bind", "Dataview", "Tasks", "Bases", "Linter"]
+      manutenzione: ["Meta Bind", "Dataview", "Tasks", "Bases", "Linter"],
+      inbox_operativa: ["Meta Bind", "Dataview", "Templater", "Fantasy Content Generator"],
+      smistamento_bozze: ["Meta Bind", "Dataview", "Templater", "Fantasy Content Generator"],
+      quality_report: ["Meta Bind", "Dataview", "JS Engine"],
+      stato_campagna: ["Meta Bind", "Dataview", "Templater"]
     };
     const labels = workflowPlugins[workflowId] ?? ["Dataview", "Meta Bind", "Templater", "Tasks", "Dice Roller", "Fantasy Statblocks"];
     const enabled = label => {
@@ -322,7 +328,9 @@
       "Maps": "Mappe e marker non vengono mostrati.",
       "Excalidraw": "Mappe fronti e canvas disegnati non si aprono.",
       "Advanced Canvas": "Canvas avanzati e collegamenti visuali non sono disponibili.",
-      "Linter": "La pulizia automatica delle note non e disponibile."
+      "Linter": "La pulizia automatica delle note non e disponibile.",
+      "Fantasy Content Generator": "Il generatore fantasy non puo creare nuove bozze.",
+      "JS Engine": "Alcuni runtime condivisi non vengono eseguiti."
     };
     const grid = dv.el("div", "", { cls: "gdr-card-grid compact" });
 

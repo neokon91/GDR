@@ -543,6 +543,12 @@ workflows:
           - button: prepara-recap-pubblico
             label: Prepara recap pubblico
             use_when: devi chiudere con materiale player-safe
+          - button: nuovo-evento-storico-z-modelli-evento-storico-md
+            label: Evento storico
+            use_when: l'esito della sessione deve entrare nella timeline
+          - button: nuovo-clock-z-modelli-dm-tracciato-md
+            label: Nuovo clock
+            use_when: una conseguenza deve diventare pressione tracciabile
     required_plugins:
       - Templater
       - Meta Bind
@@ -603,6 +609,146 @@ workflows:
       - Style Settings
       - Tasks
       - Bases
+  inbox_operativa:
+    user_goal: Smistare appunti grezzi, live e lore senza perdere agganci utili al tavolo.
+    entry_points:
+      - Inbox/Inbox.md
+    quick_actions:
+      - button: smistamento-bozze-generate-risorse-smistamento-bozze-generate-2
+        label: Smistamento bozze generate
+        use_when: devi processare output del generatore fantasy
+      - button: smista-bozza-generata
+        label: Smista bozza
+        use_when: una nota ha gia un aggancio operativo
+      - button: canonizza-bozza-generata
+        label: Canonizza bozza
+        use_when: la bozza e diventata vera al tavolo
+      - button: nuova-nota-rapida-z-modelli-nota-rapida-md
+        label: Nota rapida
+        use_when: devi catturare un'idea senza struttura
+      - button: nuovo-evento-lore-z-modelli-lore-capture-md
+        label: Evento lore
+        use_when: un appunto deve diventare lore da verificare
+    action_groups:
+      cattura_live:
+        label: Cattura live
+        purpose: Salvare materiale emerso al tavolo senza decidere subito la tassonomia definitiva.
+        actions:
+          - button: evento-live-z-modelli-live-evento-md
+            label: Evento live
+            use_when: succede qualcosa che potrebbe diventare canone
+          - button: png-improvvisato-z-modelli-live-png-md
+            label: PNG improvvisato
+            use_when: compare una persona non preparata
+          - button: luogo-improvvisato-z-modelli-live-luogo-md
+            label: Luogo improvvisato
+            use_when: il party entra in un posto non preparato
+          - button: nota-grezza-z-modelli-live-nota-grezza-md
+            label: Nota grezza
+            use_when: devi catturare velocemente senza tassonomia
+          - button: conseguenza-z-modelli-live-conseguenza-md
+            label: Conseguenza live
+            use_when: una scelta produce un effetto da risolvere dopo
+    required_plugins:
+      - Meta Bind
+      - Dataview
+      - Templater
+      - Fantasy Content Generator
+  smistamento_bozze:
+    user_goal: Trasformare bozze generate in note utili, canoniche o archiviate.
+    entry_points:
+      - Risorse/Smistamento Bozze Generate.md
+    quick_actions:
+      - button: generatore-fantasy-fantasy-content-generator-open-generator-2
+        label: Generatore fantasy
+        use_when: vuoi creare una nuova bozza da valutare
+      - button: controllo-vault-risorse-controllo-vault-2
+        label: Controllo vault
+        use_when: vuoi verificare se restano bozze o problemi
+      - button: inbox-inbox-inbox-2
+        label: Inbox
+        use_when: devi tornare alla coda completa degli appunti
+      - button: smista-bozza-generata
+        label: Smista bozza
+        use_when: la bozza ha un aggancio a mondo, luogo, campagna o sessione
+      - button: canonizza-bozza-generata
+        label: Canonizza bozza
+        use_when: la bozza e stata confermata in gioco o nel canone
+    required_plugins:
+      - Meta Bind
+      - Dataview
+      - Templater
+      - Fantasy Content Generator
+  quality_report:
+    user_goal: Capire quali buchi rendono il vault meno giocabile, condivisibile o player-safe.
+    entry_points:
+      - Risorse/Quality Report.md
+    quick_actions:
+      - button: controllo-vault-risorse-controllo-vault
+        label: Controllo vault
+        use_when: vuoi passare dal report visuale alla coda operativa
+      - button: vista-giocatori-hub-vista-giocatori-vista-giocatori
+        label: Vista giocatori
+        use_when: devi verificare materiale mostrabile senza segreti DM
+      - button: atlante-del-mondo-atlante-del-mondo
+        label: Atlante del mondo
+        use_when: vuoi controllare copertura di luoghi, mappe e coordinate
+    action_groups:
+      correzione:
+        label: Correzione rapida
+        purpose: Aprire le superfici dove i buchi del report diventano lavoro concreto.
+        actions:
+          - button: worldbuilder-worldbuilder-dashboard
+            label: Worldbuilder
+            use_when: mancano collegamenti o fondamenta di mondo
+          - button: stato-campagna-mondi-stato-del-mondo
+            label: Stato campagna
+            use_when: il problema riguarda pressioni, missioni o conseguenze
+          - button: smistamento-bozze-generate-risorse-smistamento-bozze-generate-2
+            label: Smista bozze
+            use_when: il problema deriva da materiale generato non deciso
+    required_plugins:
+      - Meta Bind
+      - Dataview
+      - JS Engine
+  stato_campagna:
+    user_goal: Leggere missioni, pressioni e conseguenze aperte e scegliere cosa portare al tavolo.
+    entry_points:
+      - Mondi/Stato del Mondo.md
+    quick_actions:
+      - button: durante-il-gioco-durante-il-gioco
+        label: Durante il gioco
+        use_when: una pressione e pronta per entrare in scena
+      - button: cosa-succede-fuori-scena-cosa-succede-fuori-scena
+        label: Cosa succede fuori scena
+        use_when: devi decidere chi reagisce tra sessioni
+      - button: timeline-mondi-timeline-timeline
+        label: Timeline
+        use_when: un evento deve diventare storia canonica
+      - button: worldbuilder-worldbuilder-dashboard
+        label: Worldbuilder
+        use_when: mancano entita o collegamenti di mondo
+    action_groups:
+      continuita:
+        label: Continuita
+        purpose: Aggiornare le conseguenze aperte prima che diventino rumore.
+        actions:
+          - button: registra-scelta-mondo
+            label: Registra scelta mondo
+            use_when: una decisione deve diventare stato del mondo
+          - button: applica-conseguenza
+            label: Applica conseguenza
+            use_when: una conseguenza ha gia bersagli concreti
+          - button: propaga-a-entita
+            label: Propaga a entita
+            use_when: piu note devono ricevere aggiornamenti
+          - button: nuovo-clock-z-modelli-dm-tracciato-md
+            label: Nuovo clock
+            use_when: una pressione deve essere resa visibile
+    required_plugins:
+      - Meta Bind
+      - Dataview
+      - Templater
 continuity_rules:
   player_choice_to_world_state:
     trigger: BUTTON[registra-scelta-mondo]

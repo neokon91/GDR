@@ -19,13 +19,44 @@ Questa vista raccoglie cio che deve influenzare il tavolo: missioni aperte, fazi
 > Campagne:
 > `INPUT[campagne][:campagne_attive]`
 
-`BUTTON[durante-il-gioco-durante-il-gioco]`
+<!-- workflow:quick_actions:start stato_campagna -->
+> [!regia] Azioni rapide
+> Leggere missioni, pressioni e conseguenze aperte e scegliere cosa portare al tavolo.
+>
+> Plugin coinvolti: `Meta Bind`, `Dataview`, `Templater`.
+>
+> **Durante il gioco** - una pressione e pronta per entrare in scena
+> `BUTTON[durante-il-gioco-durante-il-gioco]`
+>
+> **Cosa succede fuori scena** - devi decidere chi reagisce tra sessioni
+> `BUTTON[cosa-succede-fuori-scena-cosa-succede-fuori-scena]`
+>
+> **Timeline** - un evento deve diventare storia canonica
+> `BUTTON[timeline-mondi-timeline-timeline]`
+>
+> **Worldbuilder** - mancano entita o collegamenti di mondo
+> `BUTTON[worldbuilder-worldbuilder-dashboard]`
+>
+> [!regia]- Continuita
+> Aggiornare le conseguenze aperte prima che diventino rumore.
+>
+> **Registra scelta mondo** - una decisione deve diventare stato del mondo
+> `BUTTON[registra-scelta-mondo]`
+>
+> **Applica conseguenza** - una conseguenza ha gia bersagli concreti
+> `BUTTON[applica-conseguenza]`
+>
+> **Propaga a entita** - piu note devono ricevere aggiornamenti
+> `BUTTON[propaga-a-entita]`
+>
+> **Nuovo clock** - una pressione deve essere resa visibile
+> `BUTTON[nuovo-clock-z-modelli-dm-tracciato-md]`
+<!-- workflow:quick_actions:end stato_campagna -->
 
-`BUTTON[cosa-succede-fuori-scena-cosa-succede-fuori-scena]`
-
-`BUTTON[timeline-mondi-timeline-timeline]`
-
-`BUTTON[worldbuilder-worldbuilder-dashboard]`
+```dataviewjs
+const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+await gdr.renderWorkflowCommandDeck(dv, "stato_campagna");
+```
 
 ```dataviewjs
 const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));

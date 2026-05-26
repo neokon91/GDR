@@ -452,8 +452,6 @@ tab: Post
 
 ### Post-Sessione
 
-`BUTTON[bacheca-post-sessione-z-bacheche-post-sessione]`
-
 > [!missione] Conseguenze
 > - [ ] Aggiornare missioni
 > - [ ] Aggiornare PNG e relazioni
