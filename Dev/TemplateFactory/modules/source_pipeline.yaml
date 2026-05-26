@@ -59,6 +59,7 @@ steps:
       - Dev/TemplateFactory/modules/plugin_contracts.yaml
       - Dev/TemplateFactory/modules/plugin_bindings.yaml
       - Dev/TemplateFactory/modules/release_boundary.yaml
+      - Dev/TemplateFactory/modules/live_acceptance.yaml
     outputs:
       - memoria
     render:

@@ -2,6 +2,34 @@ id: plugin_matrix
 purpose: Matrice operativa dei plugin generata da YAML per mantenere leggibile il
   contratto plugin.
 version: 0.1.0
+audit_policy:
+  required_tiers:
+    - core
+    - supporto
+    - opzionale
+    - manutenzione
+  minimum_gates_by_tier:
+    core: 2
+    supporto: 2
+  support_light_allowed:
+    - obsidian-icon-folder
+    - obsidian-style-settings
+    - table-editor-obsidian
+  optional_allowed:
+    - fantasy-content-generator
+    - zoom-map
+    - hex-cartographer
+  maintenance_allowed:
+    - obsidian-linter
+    - obsidian42-brat
+  release_enabled:
+    require_contract: true
+    require_binding: true
+    require_runtime_probe: true
+    require_resolved_surfaces:
+      - guide
+      - operational
+      - smoke
 plugins:
 - id: dataview
   name: Dataview

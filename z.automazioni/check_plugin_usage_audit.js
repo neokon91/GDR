@@ -4,25 +4,14 @@ const fs = require("fs");
 const path = require("path");
 const { execFileSync } = require("child_process");
 const { readTextRel, repoPath } = require("./node_utils");
-const { materializedUserFiles } = require("./release_boundary_utils");
+const { loadReleaseBoundary, materializedUserFiles } = require("./release_boundary_utils");
+const { releasePluginProfile } = require("./release_plugin_profile");
 
 const ROOT = process.cwd();
 const MATRIX = "Dev/TemplateFactory/modules/plugin_matrix.yaml";
 const CONTRACTS = "Dev/TemplateFactory/modules/plugin_contracts.yaml";
 const BINDINGS = "Dev/TemplateFactory/modules/plugin_bindings.yaml";
-
-const REQUIRED_CLASSES = new Set(["core", "supporto", "opzionale", "manutenzione"]);
-const OPTIONAL_ALLOWED = new Set([
-    "fantasy-content-generator",
-    "zoom-map",
-    "hex-cartographer"
-]);
-const SUPPORT_LIGHT_ALLOWED = new Set([
-    "obsidian-icon-folder",
-    "obsidian-style-settings",
-    "table-editor-obsidian"
-]);
-const MAINTENANCE_ALLOWED = new Set(["obsidian-linter", "obsidian42-brat"]);
+const LIVE_ACCEPTANCE = "Dev/TemplateFactory/modules/live_acceptance.yaml";
 
 function loadYaml(relPath) {
     const script = [
@@ -44,6 +33,45 @@ function readJson(relPath, fallback = null) {
     } catch {
         return fallback;
     }
+}
+
+function asStringList(value) {
+    return Array.isArray(value) ? value.map(item => String(item).trim()).filter(Boolean) : [];
+}
+
+function asBoolean(value, fallback = false) {
+    return typeof value === "boolean" ? value : fallback;
+}
+
+function loadPolicy(matrixSource, errors) {
+    const policy = matrixSource.audit_policy ?? {};
+    const requiredTiers = new Set(asStringList(policy.required_tiers));
+    const optionalAllowed = new Set(asStringList(policy.optional_allowed));
+    const supportLightAllowed = new Set(asStringList(policy.support_light_allowed));
+    const maintenanceAllowed = new Set(asStringList(policy.maintenance_allowed));
+    const minimumGatesByTier = policy.minimum_gates_by_tier ?? {};
+    const releaseEnabled = policy.release_enabled ?? {};
+    const requireResolvedSurfaces = new Set(asStringList(releaseEnabled.require_resolved_surfaces));
+
+    if (requiredTiers.size === 0) errors.push(`${MATRIX}: audit_policy.required_tiers vuoto`);
+    if (Object.keys(minimumGatesByTier).length === 0) errors.push(`${MATRIX}: audit_policy.minimum_gates_by_tier vuoto`);
+    if (optionalAllowed.size === 0) errors.push(`${MATRIX}: audit_policy.optional_allowed vuoto`);
+    if (maintenanceAllowed.size === 0) errors.push(`${MATRIX}: audit_policy.maintenance_allowed vuoto`);
+    if (requireResolvedSurfaces.size === 0) errors.push(`${MATRIX}: audit_policy.release_enabled.require_resolved_surfaces vuoto`);
+
+    return {
+        requiredTiers,
+        optionalAllowed,
+        supportLightAllowed,
+        maintenanceAllowed,
+        minimumGatesByTier,
+        releaseEnabled: {
+            requireContract: asBoolean(releaseEnabled.require_contract, true),
+            requireBinding: asBoolean(releaseEnabled.require_binding, true),
+            requireRuntimeProbe: asBoolean(releaseEnabled.require_runtime_probe, true),
+            requireResolvedSurfaces
+        }
+    };
 }
 
 function targetExists(target, generatedTargets, virtualUserPaths) {
@@ -110,9 +138,9 @@ function loadVirtualUserPaths() {
     return paths;
 }
 
-function tierFor(entry) {
+function tierFor(entry, requiredTiers) {
     const head = String(entry.class ?? "").split(/\s+/, 1)[0].toLowerCase();
-    return REQUIRED_CLASSES.has(head) ? head : "";
+    return requiredTiers.has(head) ? head : "";
 }
 
 function hasBindingSubstance(binding) {
@@ -130,11 +158,17 @@ function hasBindingSubstance(binding) {
 
 const errors = [];
 const community = readJson(".obsidian/community-plugins.json", []);
-const matrix = loadYaml(MATRIX).plugins ?? [];
+const matrixSource = loadYaml(MATRIX);
+const matrix = matrixSource.plugins ?? [];
 const contracts = loadYaml(CONTRACTS).plugins ?? [];
 const bindings = loadYaml(BINDINGS).bindings ?? {};
+const liveAcceptance = loadYaml(LIVE_ACCEPTANCE);
+const policy = loadPolicy(matrixSource, errors);
 const generatedTargets = loadGeneratedTargets();
 const virtualUserPaths = loadVirtualUserPaths();
+const releaseProfile = releasePluginProfile(ROOT, loadReleaseBoundary(ROOT));
+const releaseEnabledPlugins = releaseProfile.enabledPluginSet;
+const runtimeProbeIds = new Set((liveAcceptance.plugin_runtime_probes ?? []).map(probe => String(probe.id ?? "").trim()).filter(Boolean));
 
 const matrixById = new Map(matrix.map(entry => [entry.id, entry]));
 const contractById = new Map(contracts.map(entry => [entry.id, entry]));
@@ -154,22 +188,30 @@ for (const pluginId of community) {
         errors.push(`${pluginId}: plugin installato senza plugin_matrix`);
         continue;
     }
-    const tier = tierFor(entry);
+    const tier = tierFor(entry, policy.requiredTiers);
     if (!tier) {
         errors.push(`${pluginId}: classe plugin non classificata (${entry.class})`);
         continue;
     }
     counts[tier] += 1;
 
-    if (!contract) errors.push(`${pluginId}: manca plugin_contracts`);
-    if (!bindingRecord) errors.push(`${pluginId}: manca plugin_bindings.plugin_id`);
+    const isReleaseEnabled = releaseEnabledPlugins.has(pluginId);
+    if (!contract && (!isReleaseEnabled || policy.releaseEnabled.requireContract)) {
+        errors.push(`${pluginId}: manca plugin_contracts`);
+    }
+    if (!bindingRecord && (!isReleaseEnabled || policy.releaseEnabled.requireBinding)) {
+        errors.push(`${pluginId}: manca plugin_bindings.plugin_id`);
+    }
     if (contract && manifest.version && String(contract.version) !== String(manifest.version)) {
         errors.push(`${pluginId}: versione contratto diversa dal manifest`);
     }
 
-    if (!targetExists(entry.guide, generatedTargets, virtualUserPaths)) errors.push(`${pluginId}: guide non risolta (${entry.guide})`);
-    if (!targetExists(entry.operational, generatedTargets, virtualUserPaths)) errors.push(`${pluginId}: superficie operativa non risolta (${entry.operational})`);
-    if (!targetExists(entry.smoke, generatedTargets, virtualUserPaths)) errors.push(`${pluginId}: smoke non risolto (${entry.smoke})`);
+    const requiredSurfaces = isReleaseEnabled
+        ? policy.releaseEnabled.requireResolvedSurfaces
+        : new Set(["guide", "operational", "smoke"]);
+    if (requiredSurfaces.has("guide") && !targetExists(entry.guide, generatedTargets, virtualUserPaths)) errors.push(`${pluginId}: guide non risolta (${entry.guide})`);
+    if (requiredSurfaces.has("operational") && !targetExists(entry.operational, generatedTargets, virtualUserPaths)) errors.push(`${pluginId}: superficie operativa non risolta (${entry.operational})`);
+    if (requiredSurfaces.has("smoke") && !targetExists(entry.smoke, generatedTargets, virtualUserPaths)) errors.push(`${pluginId}: smoke non risolto (${entry.smoke})`);
 
     if (bindingRecord && !hasBindingSubstance(bindingRecord.binding)) {
         errors.push(`${pluginId}: binding tecnico senza responsabilita, uso, sintassi o config`);
@@ -179,14 +221,18 @@ for (const pluginId of community) {
     }
 
     const gates = contract?.gates ?? [];
-    if ((tier === "core" || tier === "supporto") && gates.length < 2 && !SUPPORT_LIGHT_ALLOWED.has(pluginId)) {
-        errors.push(`${pluginId}: plugin ${tier} con meno di due gate di verifica`);
+    const minimumGates = Number(policy.minimumGatesByTier[tier] ?? 0);
+    if (minimumGates > 0 && gates.length < minimumGates && !policy.supportLightAllowed.has(pluginId)) {
+        errors.push(`${pluginId}: plugin ${tier} con meno di ${minimumGates} gate di verifica`);
     }
-    if (tier === "opzionale" && !OPTIONAL_ALLOWED.has(pluginId)) {
+    if (tier === "opzionale" && !policy.optionalAllowed.has(pluginId)) {
         errors.push(`${pluginId}: plugin opzionale non approvato esplicitamente`);
     }
-    if (tier === "manutenzione" && !MAINTENANCE_ALLOWED.has(pluginId)) {
+    if (tier === "manutenzione" && !policy.maintenanceAllowed.has(pluginId)) {
         errors.push(`${pluginId}: plugin manutenzione non approvato esplicitamente`);
+    }
+    if (isReleaseEnabled && policy.releaseEnabled.requireRuntimeProbe && !runtimeProbeIds.has(pluginId)) {
+        errors.push(`${pluginId}: plugin incluso in release senza plugin_runtime_probes in ${LIVE_ACCEPTANCE}`);
     }
 
     const searchableText = [
@@ -202,6 +248,12 @@ for (const pluginId of community) {
 
 for (const pluginId of matrixById.keys()) {
     if (!community.includes(pluginId)) errors.push(`${pluginId}: plugin in matrice ma non installato`);
+}
+
+for (const pluginId of runtimeProbeIds) {
+    if (!releaseEnabledPlugins.has(pluginId)) {
+        errors.push(`${pluginId}: plugin_runtime_probes presente ma plugin non incluso nel profilo release`);
+    }
 }
 
 if (errors.length) {
