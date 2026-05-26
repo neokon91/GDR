@@ -8,6 +8,7 @@ function validatePluginControls({
     existsRel,
     hasValue,
     isGeneratedTemplatePath,
+    isVirtualUserPath,
     pluginMatrix,
     repoPath,
     requiredPlugins,
@@ -62,7 +63,7 @@ function validatePluginControls({
                 const target = String(entry[field] ?? "");
                 if (!target) continue;
                 const targetWithExtension = /\.(md|base|js|json|excalidraw)$/i.test(target) ? target : targetPath(target);
-                if (!existsRel(targetWithExtension) && !isGeneratedTemplatePath(targetWithExtension)) {
+                if (!existsRel(targetWithExtension) && !isGeneratedTemplatePath(targetWithExtension) && !isVirtualUserPath(targetWithExtension)) {
                     errors.push(`Dev/plugin_matrix.json: ${entry.id} ${field} mancante ${targetWithExtension}`);
                 }
             }

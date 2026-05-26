@@ -5,6 +5,7 @@ const os = require("os");
 const path = require("path");
 const { execFileSync } = require("child_process");
 const { readJson, readTextRel, repoPath, walk } = require("./node_utils");
+const { materializedUserFiles } = require("./release_boundary_utils");
 
 const ROOT = process.cwd();
 const RELEASE_CHECK_ROOT = fs.mkdtempSync(path.join(os.tmpdir(), "vault-gdr-quality-check-"));
@@ -29,6 +30,7 @@ const FORBIDDEN_DATAVIEWJS_PATTERNS = [
 ];
 const errors = [];
 const generatedTemplatePaths = new Set();
+const virtualUserPaths = new Set();
 
 const ALLOWED_META_BIND_ACTION_TYPES = new Set([
     "command",
@@ -156,6 +158,24 @@ function isGeneratedTemplatePath(relPath) {
     return generatedTemplatePaths.has(normalized) || generatedTemplatePaths.has(withExtension);
 }
 
+function loadVirtualUserPaths() {
+    for (const file of materializedUserFiles(ROOT)) {
+        const fileRel = String(file.path ?? "").replace(/\\/g, "/");
+        if (!fileRel) continue;
+        virtualUserPaths.add(fileRel);
+        virtualUserPaths.add(fileRel.replace(/\.md$/, ""));
+        let currentDir = path.dirname(fileRel).replace(/\\/g, "/");
+        while (currentDir && currentDir !== ".") {
+            virtualUserPaths.add(currentDir);
+            currentDir = path.dirname(currentDir).replace(/\\/g, "/");
+        }
+    }
+}
+
+function isVirtualUserPath(relPath) {
+    return virtualUserPaths.has(String(relPath ?? "").replace(/\\/g, "/").replace(/\/$/, ""));
+}
+
 function loadYaml(relPath) {
     const script = [
         "import json, sys, yaml",
@@ -206,6 +226,7 @@ function resolveObsidianTarget(target, root = ROOT) {
     if (!clean) return true;
     const candidates = [clean, `${clean}.md`, `${clean}.base`, `${clean}.canvas`, `${clean}.excalidraw.md`];
     if (root === ROOT && candidates.some(candidate => isGeneratedTemplatePath(candidate))) return true;
+    if (root === ROOT && candidates.some(candidate => isVirtualUserPath(candidate))) return true;
     if (candidates.some(candidate => existsRel(candidate, root))) return true;
     const base = path.basename(clean);
     return walk(root, {
@@ -385,6 +406,8 @@ function validateMetaBindTargets(metaBind, root, firstRun, communityPlugins = []
             if (action.type === "templaterCreateNote") {
                 if (!String(action.folderPath ?? "").trim()) {
                     fail(`Meta Bind: ${button.id} crea nota senza folderPath`);
+                } else if (root === ROOT && isVirtualUserPath(action.folderPath)) {
+                    continue;
                 } else if (!fs.existsSync(path.join(root, action.folderPath)) || !fs.statSync(path.join(root, action.folderPath)).isDirectory()) {
                     fail(`Meta Bind: ${button.id} crea nota in cartella mancante ${action.folderPath}`);
                 }
@@ -582,6 +605,7 @@ function validateReleaseFirstRun() {
 }
 
 loadGeneratedTemplatePaths();
+loadVirtualUserPaths();
 validatePluginContract();
 validateWorkflowRuntimeContract();
 validateRuntimeConfig(ROOT);

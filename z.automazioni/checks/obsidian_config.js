@@ -3,6 +3,7 @@ function validateObsidianConfig({
     existsRel,
     iconConfig,
     isGeneratedTemplatePath,
+    isVirtualUserPath,
     markdownFiles,
     markdownText,
     metadataMenuConfig,
@@ -34,6 +35,7 @@ function validateObsidianConfig({
             if (key === "settings") continue;
             if (key === "z.modelli") continue;
             if (isGeneratedTemplatePath(key)) continue;
+            if (isVirtualUserPath(key) || isVirtualUserPath(`${key}.md`)) continue;
             if (!existsRel(key) && !existsRel(`${key}.md`)) {
                 errors.push(`Iconize punta a un percorso mancante: ${key}`);
             }

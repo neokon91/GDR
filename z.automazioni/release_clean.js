@@ -5,6 +5,7 @@ const path = require("path");
 const { execFileSync } = require("child_process");
 const { generateDemoWorld } = require("./generate_demo_world");
 const { readJson, rel: relativePath, repoPath } = require("./node_utils");
+const { materializedUserFiles, renderMaterializedUserFile } = require("./release_boundary_utils");
 
 const ROOT = process.cwd();
 function optionValue(name, fallback) {
@@ -341,6 +342,15 @@ function writeGeneratedReleaseNotes() {
         const target = repoPath(OUT, file);
         fs.mkdirSync(path.dirname(target), { recursive: true });
         fs.writeFileSync(target, `${JSON.stringify(data, null, 2)}\n`);
+    }
+
+    const workflowData = readJson(repoPath(OUT, "z.automazioni/data/workflows/quick_actions.json"), {});
+    for (const file of materializedUserFiles(ROOT)) {
+        const relPath = String(file.path ?? "").replace(/\\/g, "/");
+        if (!relPath) continue;
+        const target = repoPath(OUT, relPath);
+        fs.mkdirSync(path.dirname(target), { recursive: true });
+        fs.writeFileSync(target, renderMaterializedUserFile(file, workflowData.workflows ?? {}), "utf8");
     }
 }
 

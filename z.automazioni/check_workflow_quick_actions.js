@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 const { existsRel, readJson, readTextRel, repoPath } = require("./node_utils");
+const { materializedUserFileMap, renderMaterializedUserFile } = require("./release_boundary_utils");
 
 const ROOT = process.cwd();
 const DATA_FILE = "z.automazioni/data/workflows/quick_actions.json";
@@ -22,6 +23,7 @@ function main() {
     const errors = [];
     const data = readJson(repoPath(ROOT, DATA_FILE), null);
     const metaBind = readJson(repoPath(ROOT, META_BIND_CONFIG), null);
+    const virtualFiles = materializedUserFileMap(ROOT);
     const buttonIds = new Set((metaBind?.buttonTemplates ?? []).map(button => String(button.id ?? "")));
 
     if (!data || data.generated_by !== "generate_workflow_data") {
@@ -50,12 +52,15 @@ function main() {
         }
 
         for (const entry of entryPoints) {
-            if (!existsRel(ROOT, entry)) {
+            const virtualFile = virtualFiles.get(entry);
+            if (!existsRel(ROOT, entry) && !virtualFile) {
                 errors.push(`${workflowId}: pagina operativa mancante (${entry})`);
                 continue;
             }
 
-            const text = readTextRel(ROOT, entry);
+            const text = existsRel(ROOT, entry)
+                ? readTextRel(ROOT, entry)
+                : renderMaterializedUserFile(virtualFile, data.workflows ?? {});
             for (const action of allActions) {
                 const button = String(action.button ?? "");
                 if (!button) {

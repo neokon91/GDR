@@ -23,6 +23,7 @@ const { validateObsidianConfig } = require("./checks/obsidian_config");
 const { validateDndHardening } = require("./checks/dnd_hardening");
 const { validatePlayerSafety } = require("./checks/player_safety");
 const { validateDemoPolicy } = require("./checks/demo_policy");
+const { materializedUserFileMap, materializedUserFiles, renderMaterializedUserFile } = require("./release_boundary_utils");
 const {
     hasPluginNativeSheet,
     validatePluginNativeExperience
@@ -110,7 +111,6 @@ const REQUIRED_FILES = [
     "Dev/Roadmap/Roadmap.md",
     "Dev/Indice Connettore GPT.md",
     "Risorse/Smistamento Bozze Generate.md",
-    "Mondi/Societa/Societa.md",
     "z.fileclass/mondo.md",
     "z.bacheche/Manutenzione Vault.md"
 ];
@@ -139,6 +139,7 @@ const REQUIRED_LAYER_FILES = [
     "z.automazioni/check_template_factory.py",
     "z.automazioni/render_template_factory.py",
     "z.automazioni/template_factory_utils.py",
+    "z.automazioni/release_boundary_utils.js",
     "z.automazioni/session_context.js",
     "z.automazioni/meta_actions.js",
     "z.automazioni/template_router.js",
@@ -638,6 +639,9 @@ function isGeneratedTemplatePath(fileRel) {
 
 const markdownFiles = walk(ROOT, file => file.endsWith(".md"));
 const linkableFiles = walk(ROOT, file => /\.(md|canvas|base)$/.test(file));
+const virtualUserFiles = materializedUserFiles(ROOT);
+const virtualUserFileMap = materializedUserFileMap(ROOT);
+const virtualUserPaths = new Set();
 const markdownByPath = new Set();
 const markdownByBasename = new Map();
 const linkableByPath = new Set();
@@ -653,6 +657,27 @@ for (const file of linkableFiles) {
     linkableByPath.add(stem);
     if (!linkableByBasename.has(basename)) linkableByBasename.set(basename, []);
     linkableByBasename.get(basename).push(fileRel);
+}
+
+for (const virtualFile of virtualUserFiles) {
+    const fileRel = String(virtualFile.path ?? "").replace(/\\/g, "/");
+    if (!fileRel) continue;
+    const stem = fileRel.replace(/\.md$/, "");
+    const basename = path.basename(stem);
+    let currentDir = path.dirname(fileRel).replace(/\\/g, "/");
+
+    virtualUserPaths.add(fileRel);
+    virtualUserPaths.add(stem);
+    while (currentDir && currentDir !== ".") {
+        virtualUserPaths.add(currentDir);
+        currentDir = path.dirname(currentDir).replace(/\\/g, "/");
+    }
+    linkableByPath.add(stem);
+    markdownByPath.add(stem);
+    if (!linkableByBasename.has(basename)) linkableByBasename.set(basename, []);
+    linkableByBasename.get(basename).push(fileRel);
+    if (!markdownByBasename.has(basename)) markdownByBasename.set(basename, []);
+    markdownByBasename.get(basename).push(fileRel);
 }
 
 for (const file of markdownFiles) {
@@ -706,6 +731,7 @@ validatePluginControls({
     existsRel,
     hasValue,
     isGeneratedTemplatePath,
+    isVirtualUserPath: target => virtualUserPaths.has(String(target ?? "").replace(/\\/g, "/").replace(/\/$/, "")),
     pluginMatrix,
     repoPath,
     requiredPlugins: REQUIRED_PLUGINS,
@@ -760,6 +786,7 @@ validateObsidianConfig({
     existsRel,
     iconConfig,
     isGeneratedTemplatePath,
+    isVirtualUserPath: target => virtualUserPaths.has(String(target ?? "").replace(/\\/g, "/").replace(/\/$/, "")),
     markdownFiles,
     markdownText,
     metadataMenuConfig,
@@ -851,7 +878,9 @@ for (const marker of ["Post-Sessione Adesso", "Preparazione Adesso", "z.bacheche
         errors.push(`Risorse/Task DM.md: vista Tasks/Kanban quotidiana incompleta (${marker})`);
     }
 }
-const calendarText = readRel("Mondi/Calendario.md");
+const calendarText = existsRel("Mondi/Calendario.md")
+    ? readRel("Mondi/Calendario.md")
+    : renderMaterializedUserFile(virtualUserFileMap.get("Mondi/Calendario.md") ?? {});
 if (!calendarText.includes("Prossima Scadenza Narrativa")) {
     errors.push("Mondi/Calendario.md: manca vista operativa Calendarium/scadenze");
 }

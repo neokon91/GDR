@@ -2,6 +2,7 @@
 
 const fs = require("fs");
 const { readJson, readTextRel, repoPath } = require("./node_utils");
+const { materializedUserFileMap, renderMaterializedUserFile } = require("./release_boundary_utils");
 
 const ROOT = process.cwd();
 const DATA_FILE = "z.automazioni/data/workflows/quick_actions.json";
@@ -67,6 +68,7 @@ function replaceBlock(text, workflowId, block) {
 function main() {
     const errors = [];
     const data = readJson(repoPath(ROOT, DATA_FILE), null);
+    const virtualFiles = materializedUserFileMap(ROOT);
 
     if (!data || data.generated_by !== "generate_workflow_data") {
         fail([`${DATA_FILE}: artefatto mancante o non generato da generate_workflow_data`]);
@@ -77,7 +79,10 @@ function main() {
 
         for (const entry of workflow.entry_points ?? []) {
             const file = repoPath(ROOT, entry);
-            const current = readTextRel(ROOT, entry, null);
+            const virtualFile = virtualFiles.get(entry);
+            const current = readTextRel(ROOT, entry, null) ?? (
+                virtualFile ? renderMaterializedUserFile(virtualFile, data.workflows ?? {}) : null
+            );
             if (current === null) {
                 errors.push(`${workflowId}: pagina operativa mancante (${entry})`);
                 continue;
@@ -91,6 +96,8 @@ function main() {
 
             if (CHECK_ONLY) {
                 if (next !== current) errors.push(`${entry}: blocco quick_actions non aggiornato; eseguire npm run render:workflow-actions`);
+            } else if (virtualFile) {
+                continue;
             } else if (next !== current) {
                 fs.writeFileSync(file, next, "utf8");
             }

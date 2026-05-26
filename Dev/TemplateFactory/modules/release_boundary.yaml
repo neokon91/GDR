@@ -24,6 +24,82 @@ required_files:
   - z.engine/session_maps.js
   - z.engine/session_player.js
   - z.engine/session_runtime.js
+materialized_user_files:
+  - path: Campagne/Campagne.md
+    title: Campagne
+    body: Indice runtime per campagne create dall'utente nella release.
+  - path: Giocatori/Giocatori.md
+    title: Giocatori
+    body: Area runtime per materiali condivisibili e vista giocatori.
+  - path: Inbox/Inbox.md
+    title: Inbox
+    body: Area runtime per appunti grezzi, live e bozze da smistare.
+    workflow_blocks:
+      - inbox_operativa
+  - path: Mondi/Mondo.md
+    title: Mondi
+    body: Indice runtime dei mondi creati dall'utente.
+  - path: Mondi/Calendario.md
+    title: Calendario
+    body: |
+      Vista runtime per date del mondo, sessioni e scadenze.
+
+      ## Prossima Scadenza Narrativa
+  - path: Mondi/Stato del Mondo.md
+    title: Stato Campagna
+    body: Vista runtime per missioni aperte, pressioni, conseguenze e continuita.
+    workflow_blocks:
+      - stato_campagna
+  - path: Mondi/Calendario Diegetico/Calendario Diegetico.md
+    title: Calendario Diegetico
+  - path: Mondi/Compendium/Compendium.md
+    title: Compendium
+  - path: Mondi/Conflitti/Conflitti.md
+    title: Conflitti
+  - path: Mondi/Cosmologia/Cosmologia.md
+    title: Cosmologia
+  - path: Mondi/Creature/Creature.md
+    title: Creature
+  - path: Mondi/Culture/Culture.md
+    title: Culture
+  - path: Mondi/Dispense/Dispense.md
+    title: Dispense
+  - path: Mondi/Fazioni/Fazioni.md
+    title: Fazioni
+  - path: Mondi/Incontri/Incontri.md
+    title: Incontri
+  - path: Mondi/Lingue/Lingue.md
+    title: Lingue
+  - path: Mondi/Luoghi/Luoghi.md
+    title: Luoghi
+  - path: Mondi/Mercati/Mercati.md
+    title: Mercati
+  - path: Mondi/Missioni/Missioni.md
+    title: Missioni
+  - path: Mondi/Oggetti/Oggetti.md
+    title: Oggetti
+  - path: Mondi/Personaggi/Personaggi.md
+    title: Personaggi
+  - path: Mondi/Relazioni/Relazioni.md
+    title: Relazioni
+  - path: Mondi/Religioni/Religioni.md
+    title: Religioni
+  - path: Mondi/Risorse/Risorse.md
+    title: Risorse
+  - path: Mondi/Rotte/Rotte.md
+    title: Rotte
+  - path: Mondi/Segreti/Segreti.md
+    title: Segreti
+  - path: Mondi/Sessioni/Sessioni.md
+    title: Sessioni
+  - path: Mondi/Societa/Societa.md
+    title: Societa
+  - path: Mondi/Storia/Storia.md
+    title: Storia
+  - path: Mondi/Timeline/Timeline.md
+    title: Timeline
+  - path: Mondi/Tracciati/Tracciati.md
+    title: Tracciati
 forbidden_roots:
   - Dev
   - .github
