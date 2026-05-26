@@ -67,6 +67,20 @@ frontmatter PG nella nota
 z.modelli/personaggio/PG.md (+ tab Scheda)
 ```
 
+## Evoluzione pipeline YAML -> JSON
+
+FantasyWorld usa YAML sia per Jinja sia per JSON utili agli script. GDR deve assorbire questo pattern senza copiare il converter generico del laboratorio.
+
+Regola per GDR:
+
+1. Il YAML resta il contratto leggibile in `Dev/TemplateFactory/modules`.
+2. Il JSON generato vive in `z.automazioni/data`, non dentro cartelle plugin opache.
+3. Gli script JS possono leggere il JSON generato solo se questo riduce duplicazione reale nel flusso utente.
+4. I JSON dei plugin Obsidian si generano solo quando il sottoinsieme e stabile e controllabile; altrimenti si validano contro YAML.
+5. Ogni passaggio deve avere script npm e check automatico.
+
+Caso pilota: `workflows.yaml` -> `z.automazioni/data/workflows/quick_actions.json`.
+
 ## Sincronizzare modifiche future
 
 1. Aggiorna i YAML in FantasyWorld se stai sperimentando.

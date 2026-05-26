@@ -1,0 +1,97 @@
+{
+  "generated_by": "generate_workflow_data",
+  "source": "Dev/TemplateFactory/modules/workflows.yaml",
+  "purpose": "Azioni rapide operative derivate da workflows.yaml per runtime, check e documentazione.",
+  "workflows": {
+    "prepara_sessione": {
+      "user_goal": "Preparare una sessione radicata nel mondo.",
+      "quick_actions": [
+        {
+          "button": "nuova-sessione-z-modelli-dm-sessione-md",
+          "label": "Nuova sessione",
+          "use_when": "non esiste ancora una nota sessione per il prossimo tavolo"
+        },
+        {
+          "button": "wizard-nuova-entita-viva",
+          "label": "Nuova entita viva",
+          "use_when": "manca un'ancora mondo giocabile"
+        },
+        {
+          "button": "collega-sessione-attiva",
+          "label": "Collega sessione attiva",
+          "use_when": "una nota utile non e ancora collegata alla sessione"
+        },
+        {
+          "button": "nuova-mappa-zoom-z-modelli-mappe-mappa-zoom-md",
+          "label": "Nuova mappa",
+          "use_when": "serve materiale spaziale pronto al tavolo"
+        },
+        {
+          "button": "durante-il-gioco-durante-il-gioco",
+          "label": "Apri tavolo",
+          "use_when": "la sessione e pronta o in corso"
+        }
+      ]
+    },
+    "gioca_live": {
+      "user_goal": "Gestire sessione, tiri, incontri, media e appunti live da una schermata.",
+      "quick_actions": [
+        {
+          "button": "wizard-appunto-live",
+          "label": "Appunto live",
+          "use_when": "emerge qualcosa ma non sai ancora che tipo di nota sia"
+        },
+        {
+          "button": "wizard-conseguenza",
+          "label": "Conseguenza",
+          "use_when": "una scelta cambia missioni, PNG, luoghi, fazioni o clock"
+        },
+        {
+          "button": "registra-scelta-mondo",
+          "label": "Registra scelta mondo",
+          "use_when": "vuoi trasformare una decisione in continuita tracciabile"
+        },
+        {
+          "button": "avanza-clock",
+          "label": "Avanza clock",
+          "use_when": "il tempo passa o una pressione peggiora"
+        },
+        {
+          "button": "post-sessione-guidato-risorse-post-sessione-guidato",
+          "label": "Chiudi sessione",
+          "use_when": "il tavolo finisce"
+        }
+      ]
+    },
+    "post_sessione": {
+      "user_goal": "Trasformare appunti e conseguenze in mondo aggiornato.",
+      "quick_actions": [
+        {
+          "button": "wizard-fine-sessione",
+          "label": "Fine sessione guidata",
+          "use_when": "devi convertire appunti in output, recap e prossima apertura"
+        },
+        {
+          "button": "applica-conseguenza",
+          "label": "Applica conseguenza",
+          "use_when": "una nota ha conseguenze o impatti ancora aperti"
+        },
+        {
+          "button": "propaga-a-entita",
+          "label": "Propaga a entita",
+          "use_when": "bersagli collegati devono ricevere aggiornamenti"
+        },
+        {
+          "button": "prepara-recap-pubblico",
+          "label": "Prepara recap pubblico",
+          "use_when": "devi produrre materiale mostrabile ai giocatori"
+        },
+        {
+          "button": "fuori-scena-hub-cosa-succede-fuori-scena-cosa-succede-fuori-scena",
+          "label": "Fuori scena",
+          "use_when": "devi scegliere chi reagisce prima della prossima sessione"
+        }
+      ]
+    }
+  }
+}

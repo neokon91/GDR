@@ -34,13 +34,31 @@ La generazione deve servire il profilo principale D&D 5.5/SRD senza legare il Co
 6. Eseguire `npm run check`.
 7. Verificare in Obsidian con un collaudo visuale.
 
+## Pipeline Evolutiva YAML -> Artefatti
+
+Il modello da seguire e quello gia sperimentato in FantasyWorld: un modulo YAML leggibile resta la fonte, mentre Jinja, JSON e runtime JS consumano artefatti derivati. In GDR la regola e piu stretta perche la release deve restare stabile dentro Obsidian.
+
+La direzione ammessa e:
+
+1. `modules/*.yaml` dichiara contratti, opzioni, pulsanti, workflow o profili.
+2. Uno script esplicito genera un artefatto piccolo e versionabile in `z.automazioni/data/`.
+3. Jinja o JS leggono l'artefatto generato quando serve evitare duplicazione.
+4. `npm run check` verifica che YAML e artefatto siano sincronizzati.
+5. I JSON interni dei plugin Obsidian vengono generati solo per sottoinsiemi sicuri; altrimenti restano validati, non sovrascritti.
+
+Primo caso attivo: `workflows.yaml` genera `z.automazioni/data/workflows/quick_actions.json` con `npm run generate:workflow-data`; `npm run check:workflow-data` fallisce se il JSON non e aggiornato.
+
+Non introdurre generatori opachi: ogni JSON prodotto deve indicare `generated_by`, `source` e `purpose`, e deve essere ricostruibile da un singolo comando npm.
+
 ## Comandi
 
 ```bash
 npm run check:templates
+npm run check:workflow-data
 npm run check:metadata
 npm run render:templates
 npm run render:metadata
+npm run generate:workflow-data
 npm run audit:templates
 ```
 
