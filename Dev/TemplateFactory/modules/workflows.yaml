@@ -2,6 +2,131 @@ id: workflows
 purpose: Flussi principali da coprire con template generati e integrazioni plugin.
 version: 0.1.0
 workflows:
+  onboarding_utente:
+    user_goal: Partire da zero senza scegliere tra troppe dashboard.
+    entry_points:
+      - Inizia Qui.md
+    quick_actions:
+      - button: setup-guidato-risorse-setup-guidato
+        label: Controlla strumenti
+        use_when: e la prima apertura o qualcosa non risponde
+      - button: nuovo-mondo-homebrew
+        label: Crea mondo
+        use_when: non hai ancora un mondo giocabile
+      - button: preparazione-sessione-risorse-preparazione-sessione
+        label: Prepara sessione
+        use_when: hai un mondo o almeno un'idea pronta da giocare
+      - button: gioca-hub-durante-il-gioco-durante-il-gioco
+        label: Gioca
+        use_when: sei al tavolo o vuoi vedere il cockpit live
+      - button: fuori-scena-hub-cosa-succede-fuori-scena-cosa-succede-fuori-scena
+        label: Chiudi e aggiorna
+        use_when: la sessione e finita e devi decidere conseguenze
+    action_groups:
+      orientamento:
+        label: Se ti perdi
+        purpose: Aprire solo le viste di supporto, non nuove strade parallele.
+        actions:
+          - button: prima-sessione-in-15-minuti-risorse-prima-sessione-in-15-minuti
+            label: Prima sessione in 15 minuti
+            use_when: vuoi giocare subito senza completare tutto
+          - button: worldbuilder-worldbuilder-dashboard-2
+            label: Worldbuilder
+            use_when: vuoi espandere il mondo dopo il primo giro
+          - button: bibbia-del-mondo-bibbia-del-mondo-2
+            label: Bibbia del mondo
+            use_when: vuoi consolidare tono e canone
+          - button: vista-giocatori-hub-vista-giocatori-vista-giocatori
+            label: Vista giocatori
+            use_when: devi mostrare materiale senza segreti DM
+          - button: quality-report-risorse-quality-report
+            label: Report qualita
+            use_when: vuoi capire cosa manca nel vault
+          - button: aiuto-risorse-faq
+            label: Aiuto
+            use_when: non capisci cosa fare o una vista non risponde
+    required_plugins:
+      - Meta Bind
+      - Dataview
+      - Templater
+  setup_guidato:
+    user_goal: Capire se il vault e pronto senza leggere impostazioni tecniche.
+    entry_points:
+      - Risorse/Setup Guidato.md
+    quick_actions:
+      - button: inizia-qui-inizia-qui
+        label: Torna all'inizio
+        use_when: i controlli sono pronti o vuoi ripartire dal percorso semplice
+      - button: nuovo-mondo-homebrew
+        label: Crea mondo
+        use_when: gli strumenti base funzionano
+      - button: preparazione-sessione-risorse-preparazione-sessione
+        label: Prepara sessione
+        use_when: hai gia un mondo o vuoi preparare il primo tavolo
+      - button: durante-il-gioco-durante-il-gioco
+        label: Apri tavolo
+        use_when: vuoi verificare il cockpit live
+      - button: fuori-scena-hub-cosa-succede-fuori-scena-cosa-succede-fuori-scena
+        label: Fuori scena
+        use_when: vuoi verificare il ciclo dopo sessione
+    action_groups:
+      ripristino:
+        label: Se qualcosa non va
+        purpose: Usare guide di ripristino leggibili prima di toccare impostazioni avanzate.
+        actions:
+          - button: aiuto-risorse-se-qualcosa-non-funziona
+            label: Se qualcosa non funziona
+            use_when: plugin, pulsanti o tabelle non sembrano pronti
+          - button: prima-sessione-in-15-minuti-risorse-prima-sessione-in-15-minuti
+            label: Prima sessione in 15 minuti
+            use_when: vuoi saltare il setup profondo e giocare con il minimo
+    required_plugins:
+      - Meta Bind
+      - Dataview
+      - Templater
+      - Metadata Menu
+      - Homepage
+  prima_sessione_rapida:
+    user_goal: Preparare, giocare e chiudere una prima sessione con il minimo indispensabile.
+    entry_points:
+      - Risorse/Prima Sessione In 15 Minuti.md
+    quick_actions:
+      - button: setup-guidato-risorse-setup-guidato-2
+        label: Controlla setup
+        use_when: non sai se i pulsanti funzionano
+      - button: preparazione-sessione-risorse-preparazione-sessione
+        label: Prepara
+        use_when: devi scrivere obiettivo, apertura e poche ancore
+      - button: rendi-sessione-attiva
+        label: Rendi attiva
+        use_when: hai scelto quale sessione giocare
+      - button: durante-il-gioco-durante-il-gioco
+        label: Gioca
+        use_when: vuoi aprire il cockpit del tavolo
+      - button: post-sessione-guidato-risorse-post-sessione-guidato
+        label: Chiudi sessione
+        use_when: il tavolo e finito
+      - button: cosa-succede-fuori-scena-cosa-succede-fuori-scena
+        label: Fuori scena
+        use_when: devi scegliere una conseguenza o prossima mossa
+    action_groups:
+      minimo:
+        label: Minimo giocabile
+        purpose: Creare solo quello che serve alla prima sessione.
+        actions:
+          - button: nuova-sessione-z-modelli-dm-sessione-md
+            label: Nuova sessione
+            use_when: non esiste ancora una nota sessione
+          - button: creazione-guidata-entita-risorse-creazione-guidata-entita
+            label: Creazione entita
+            use_when: non sai cosa compilare su PNG, luogo o fazione
+          - button: dm-dashboard-1-dm-dashboard
+            label: DM Dashboard
+            use_when: vuoi vedere lo stato complessivo del tavolo
+    required_plugins:
+      - Meta Bind
+      - Dataview
+      - Templater
   dashboard_dm:
     user_goal: Scegliere in pochi secondi se preparare, giocare, consolidare o creare materiale.
     entry_points:

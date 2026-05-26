@@ -8,160 +8,114 @@ stato: pronto
 
 # Prima Sessione In 15 Minuti
 
-Questa guida serve per giocare subito senza capire tutta la struttura del vault. Segui i passi in ordine: prepari una sessione minima, la rendi attiva, giochi, poi trasformi quello che succede in conseguenze.
+Usa questa pagina quando vuoi giocare subito. Non devi completare il mondo: ti bastano una sessione, una prima scena, un luogo, un PNG, una pressione e 1-3 informazioni rivelabili.
 
 ````tabs
-tab: Parti
+tab: Prima
 
-> [!regia] Avvio Rapido
-> `BUTTON[setup-guidato-risorse-setup-guidato-2]`
->
-> `BUTTON[inizia-qui-inizia-qui]`
->
-> `BUTTON[preparazione-sessione-risorse-preparazione-sessione]`
->
-> `BUTTON[durante-il-gioco-durante-il-gioco]`
+> [!scena] Minimo giocabile
+> Prepara solo obiettivo, apertura, luogo, PNG, pressione e segreti rivelabili.
 
-tab: Sessione
+tab: Durante
 
-> [!scena] Minimo Giocabile
-> Obiettivo, apertura, PNG, luogo, missione, clock e 1-3 segreti bastano per iniziare.
->
-> ```dataviewjs
-> const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
-> gdr.renderActiveSessionBanner(dv);
-> ```
+> [!incontro] Al tavolo
+> Apri [[Hub/Durante il Gioco]], cattura appunti e rimanda il riordino a dopo.
 
 tab: Dopo
 
 > [!timer] Chiusura
+> Apri [[Risorse/Post Sessione Guidato]], poi scegli una reazione in [[Hub/Cosa Succede Fuori Scena]].
+````
+
+## Percorso Breve
+
+<!-- workflow:quick_actions:start prima_sessione_rapida -->
+> [!regia] Azioni rapide
+> Preparare, giocare e chiudere una prima sessione con il minimo indispensabile.
+>
+> Plugin coinvolti: `Meta Bind`, `Dataview`, `Templater`.
+>
+> **Controlla setup** - non sai se i pulsanti funzionano
+> `BUTTON[setup-guidato-risorse-setup-guidato-2]`
+>
+> **Prepara** - devi scrivere obiettivo, apertura e poche ancore
+> `BUTTON[preparazione-sessione-risorse-preparazione-sessione]`
+>
+> **Rendi attiva** - hai scelto quale sessione giocare
+> `BUTTON[rendi-sessione-attiva]`
+>
+> **Gioca** - vuoi aprire il cockpit del tavolo
+> `BUTTON[durante-il-gioco-durante-il-gioco]`
+>
+> **Chiudi sessione** - il tavolo e finito
 > `BUTTON[post-sessione-guidato-risorse-post-sessione-guidato]`
 >
-> ```dataviewjs
-> const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
-> gdr.renderPostSessionCommandCenter(dv);
-> ```
+> **Fuori scena** - devi scegliere una conseguenza o prossima mossa
+> `BUTTON[cosa-succede-fuori-scena-cosa-succede-fuori-scena]`
+>
+> [!regia]- Minimo giocabile
+> Creare solo quello che serve alla prima sessione.
+>
+> **Nuova sessione** - non esiste ancora una nota sessione
+> `BUTTON[nuova-sessione-z-modelli-dm-sessione-md]`
+>
+> **Creazione entita** - non sai cosa compilare su PNG, luogo o fazione
+> `BUTTON[creazione-guidata-entita-risorse-creazione-guidata-entita]`
+>
+> **DM Dashboard** - vuoi vedere lo stato complessivo del tavolo
+> `BUTTON[dm-dashboard-1-dm-dashboard]`
+<!-- workflow:quick_actions:end prima_sessione_rapida -->
 
-tab: Checklist
+```dataviewjs
+const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+await gdr.renderWorkflowCommandDeck(dv, "prima_sessione_rapida");
+```
 
-> [!todo] Fine Giro
-> - [ ] Una sola sessione ha `attiva: true`. #task
-> - [ ] La sessione giocata ha un breve resoconto. #task
-> - [ ] I fatti veri sono segnati come canonici o collegati. #task
-> - [ ] Missioni e clock hanno stato aggiornato. #task
-> - [ ] Almeno una conseguenza ha `entita_impattate` o `propaga_a`. #task
-> - [ ] La prossima sessione ha una prima scena. #task
-````
+## Sessione Attiva
+
+```dataviewjs
+const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+gdr.renderActiveSessionBanner(dv);
+```
+
+## Scrivi Solo Questo
+
+| Elemento | Minimo sufficiente |
+| --- | --- |
+| Obiettivo | Cosa devono decidere, ottenere o scoprire i personaggi. |
+| Apertura | La prima scena da giocare. |
+| Luogo | Dove puo cambiare qualcosa. |
+| PNG | Chi vuole qualcosa adesso. |
+| Pressione | Cosa peggiora se nessuno interviene. |
+| Segreti | 1-3 informazioni che puoi rivelare. |
+
+## Durante Il Gioco
+
+- Cattura appunti senza riordinare tutto.
+- Registra decisioni importanti.
+- Segna conseguenze solo quando cambiano davvero mondo, missioni, PNG, luoghi o clock.
+- Non sistemare il vault mentre giochi: ordina dopo.
+
+## Dopo La Sessione
+
+```dataviewjs
+const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+gdr.renderPostSessionCommandCenter(dv);
+```
 
 ## Fallback Markdown
 
-| Passo | Dove |
+| Passo | Apri |
 | --- | --- |
 | Preparare | [[Risorse/Preparazione Sessione]] |
 | Giocare | [[Hub/Durante il Gioco]] |
 | Chiudere | [[Risorse/Post Sessione Guidato]] |
-
-## 1. Controlla Che Il Vault Sia Pronto
-
-`BUTTON[setup-guidato-risorse-setup-guidato-2]`
-
-`BUTTON[inizia-qui-inizia-qui]`
-
-`BUTTON[creazione-guidata-entita-risorse-creazione-guidata-entita]`
-
-Se i pulsanti funzionano e le tabelle mostrano testo leggibile, puoi proseguire.
-
-
-
-
-- una campagna con sessioni, PNG, luoghi, missione e clock gia collegati;
-- una sessione attiva visibile in [[Hub/Durante il Gioco]];
-- un clock che mostra pressione;
-- una conseguenza che passa da appunto a canone;
-- una prossima mossa fuori scena.
-
-## 3. Crea O Scegli Una Campagna
-
-`BUTTON[dm-dashboard-1-dm-dashboard]`
-
-
-- una campagna;
-- una sessione;
-- un luogo;
-- un PNG;
-- una missione o una domanda centrale;
-- un clock se c'e una minaccia che avanza.
-
-## 4. Prepara Solo Il Necessario
-
-`BUTTON[preparazione-sessione-risorse-preparazione-sessione]`
-
-Compila solo questi elementi:
-
-| Elemento | Cosa scrivere |
-| --- | --- |
-| Obiettivo | Cosa devono decidere o scoprire i personaggi. |
-| Apertura | Prima scena da giocare. |
-| PNG | Chi vuole qualcosa subito. |
-| Luogo | Dove la scena puo cambiare. |
-| Missione | Cosa e in gioco. |
-| Clock | Cosa peggiora se nessuno interviene. |
-| Segreti | 1-3 informazioni rivelabili. |
-
-## 5. Rendi Attiva La Sessione
-
-Apri la nota della sessione e imposta:
-
-- `stato`: `preparazione` o `pronto`;
-- `attiva`: acceso.
-
-Tieni una sola sessione attiva alla volta.
-
-## 6. Gioca Dal Tavolo Operativo
-
-`BUTTON[durante-il-gioco-durante-il-gioco]`
-
-Durante la sessione usa questa pagina per:
-
-- vedere sessione, PNG, missioni, incontri e clock;
-- creare note rapide;
-- catturare eventi o lore;
-- creare PNG, luoghi, missioni o clock improvvisati;
-- segnare segreti rivelati e conseguenze.
-
-Non sistemare tutto mentre giochi. Cattura prima, ordina dopo.
-
-## 7. Chiudi La Sessione
-
-`BUTTON[post-sessione-guidato-risorse-post-sessione-guidato]`
-
-Dopo la partita decidi:
-
-- cosa e diventato canonico;
-- quali missioni cambiano stato;
-- quali clock avanzano;
-- quali PNG o fazioni reagiscono;
-- quali conseguenze vanno propagate;
-- quale sara la prossima apertura.
-
-## 8. Guarda Cosa Si Muove Fuori Scena
-
-`BUTTON[cosa-succede-fuori-scena-cosa-succede-fuori-scena]`
-
-Scegli almeno una riga da trasformare in gioco:
-
-- una fazione fa una prossima mossa;
-- un clock avanza;
-- una missione ignorata peggiora;
-- un segreto diventa rivelabile;
-- una conseguenza cambia un luogo, PNG o relazione.
+| Vedere reazioni | [[Hub/Cosa Succede Fuori Scena]] |
 
 ## Checklist Finale
 
 - [ ] Una sola sessione ha `attiva: true`.
 - [ ] La sessione giocata ha un breve resoconto.
-- [ ] I fatti veri sono segnati come canonici o collegati.
 - [ ] Missioni e clock hanno stato aggiornato.
 - [ ] Almeno una conseguenza ha `entita_impattate` o `propaga_a`.
 - [ ] La prossima sessione ha una prima scena.
-- [ ] [[Hub/Cosa Succede Fuori Scena]] mostra almeno una pressione utilizzabile.

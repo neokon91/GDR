@@ -8,115 +8,108 @@ stato: pronto
 
 # Setup Guidato
 
-Usa questa pagina dopo aver aperto il vault per la prima volta. Non serve capire gli strumenti interni: guarda cosa e pronto e cosa richiede attenzione.
+Usa questa pagina solo al primo avvio o quando qualcosa non risponde. Non serve capire i plugin: guarda le righe "Da controllare" e poi torna a [[Inizia Qui]].
 
 ````tabs
-tab: Stato
+tab: Percorso
 
-> [!regia] Controllo Plugin
-> ```dataviewjs
-> const enabled = id => app.plugins.enabledPlugins.has(id);
-> const checks = [
->   ["Pulsanti", enabled("obsidian-meta-bind-plugin") && enabled("templater-obsidian")],
->   ["Tabelle", enabled("dataview")],
->   ["Campi guidati", enabled("metadata-menu")],
->   ["Mappe e schemi", enabled("obsidian-excalidraw-plugin")],
->   ["Tiri rapidi", enabled("obsidian-dice-roller")],
->   ["Calendario", enabled("calendarium")]
-> ];
-> dv.table(["Area", "Stato"], checks.map(([label, ok]) => [label, ok ? "Pronto" : "Da controllare"]));
-> ```
+> [!scena] Primo utilizzo
+> Crea o apri un mondo, poi Prepara una sessione. Quando sei pronto apri [[Hub/Durante il Gioco]]; dopo la partita apri [[Hub/Cosa Succede Fuori Scena]].
 
-tab: Apri
+tab: Problemi
 
-> [!scena] Percorso Utente
-> `BUTTON[inizia-qui-inizia-qui]`
->
-> `BUTTON[nuovo-mondo-homebrew]`
->
-> `BUTTON[preparazione-sessione-risorse-preparazione-sessione]`
->
-> `BUTTON[durante-il-gioco-durante-il-gioco]`
->
-> `BUTTON[fuori-scena-hub-cosa-succede-fuori-scena-cosa-succede-fuori-scena]`
-
-tab: Se Non Va
-
-> [!todo] Ripristino
-> - [ ] Apri [[Risorse/Primo Avvio Strumenti]]. #task
+> [!todo] Se non risponde
 > - [ ] Riavvia Obsidian. #task
-> - [ ] Riapri questa pagina. #task
-> - [ ] Se il problema resta, apri [[Risorse/Se Qualcosa Non Funziona]]. #task
+> - [ ] Riapri [[Risorse/Setup Guidato]]. #task
+> - [ ] Apri [[Risorse/Se Qualcosa Non Funziona]] se il problema resta. #task
 ````
 
-## Fallback Markdown
+## Azioni
 
-| Area | Azione |
-| --- | --- |
-| Setup | Apri [[Risorse/Primo Avvio Strumenti]] |
-| Giocare subito | Apri [[Risorse/Prima Sessione In 15 Minuti]] |
+<!-- workflow:quick_actions:start setup_guidato -->
+> [!regia] Azioni rapide
+> Capire se il vault e pronto senza leggere impostazioni tecniche.
+>
+> Plugin coinvolti: `Meta Bind`, `Dataview`, `Templater`, `Metadata Menu`, `Homepage`.
+>
+> **Torna all'inizio** - i controlli sono pronti o vuoi ripartire dal percorso semplice
+> `BUTTON[inizia-qui-inizia-qui]`
+>
+> **Crea mondo** - gli strumenti base funzionano
+> `BUTTON[nuovo-mondo-homebrew]`
+>
+> **Prepara sessione** - hai gia un mondo o vuoi preparare il primo tavolo
+> `BUTTON[preparazione-sessione-risorse-preparazione-sessione]`
+>
+> **Apri tavolo** - vuoi verificare il cockpit live
+> `BUTTON[durante-il-gioco-durante-il-gioco]`
+>
+> **Fuori scena** - vuoi verificare il ciclo dopo sessione
+> `BUTTON[fuori-scena-hub-cosa-succede-fuori-scena-cosa-succede-fuori-scena]`
+>
+> [!regia]- Se qualcosa non va
+> Usare guide di ripristino leggibili prima di toccare impostazioni avanzate.
+>
+> **Se qualcosa non funziona** - plugin, pulsanti o tabelle non sembrano pronti
+> `BUTTON[aiuto-risorse-se-qualcosa-non-funziona]`
+>
+> **Prima sessione in 15 minuti** - vuoi saltare il setup profondo e giocare con il minimo
+> `BUTTON[prima-sessione-in-15-minuti-risorse-prima-sessione-in-15-minuti]`
+<!-- workflow:quick_actions:end setup_guidato -->
 
-## Stato Del Vault
+```dataviewjs
+const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+await gdr.renderWorkflowCommandDeck(dv, "setup_guidato");
+```
+
+## Controllo Semplice
 
 ```dataviewjs
 const enabled = id => app.plugins.enabledPlugins.has(id);
 const exists = path => !!app.vault.getAbstractFileByPath(path);
 
 const checks = [
-  ["Pulsanti", enabled("obsidian-meta-bind-plugin") && enabled("templater-obsidian"), "I pulsanti aprono pagine e creano note."],
-  ["Tabelle", enabled("dataview"), "Dashboard, indici e controlli mostrano dati leggibili."],
-  ["Campi guidati", enabled("metadata-menu"), "I campi delle note sono piu facili da compilare."],
-  ["Bacheche", enabled("obsidian-kanban"), "Preparazione e post-sessione sono organizzate."],
-  ["Creature", enabled("obsidian-5e-statblocks"), "Mostri e creature possono apparire come schede."],
-  ["Tiri rapidi", enabled("obsidian-dice-roller"), "I tiri `dice:` e le tabelle casuali funzionano."],
-  ["Calendario", enabled("calendarium"), "Date del mondo e scadenze narrative sono disponibili."],
-  ["Mappe e schemi", enabled("obsidian-excalidraw-plugin"), "Mappe, fronti, indizi e scene sono modificabili."],
-  ["Pagina iniziale", enabled("homepage"), "Il vault puo aprirsi da Inizia Qui."],
+  ["Pulsanti", enabled("obsidian-meta-bind-plugin") && enabled("templater-obsidian"), "Se non sono pronti, i pulsanti non creano note."],
+  ["Tabelle", enabled("dataview"), "Se non e pronto, le dashboard restano vuote o mostrano codice."],
+  ["Campi guidati", enabled("metadata-menu"), "Aiuta a compilare le note, ma puoi iniziare anche senza."],
+  ["Pagina iniziale", enabled("homepage"), "Apre automaticamente Inizia Qui."],
+  ["Aspetto", exists(".obsidian/snippets/gdr-vault.css"), "Rende leggibili le dashboard."],
   ["Prima sessione", exists("Risorse/Prima Sessione In 15 Minuti.md"), "Percorso pratico per giocare subito."],
-  ["Creazione entità", exists("Risorse/Creazione Guidata Entità.md"), "Spiega cosa compilare subito e cosa aggiungere dopo."],
-  ["Worldbuilding profondo", exists("Risorse/Worldbuilding Profondo.md"), "Guida per passare da schede giocabili a schede di ambientazione."],
-  ["Fuori scena", exists("Hub/Cosa Succede Fuori Scena.md"), "Pressioni e prossime mosse dopo la sessione."]
+  ["Fuori scena", exists("Hub/Cosa Succede Fuori Scena.md"), "Serve dopo la sessione."]
 ];
 
-dv.table(
-  ["Area", "Stato", "Cosa significa"],
-  checks.map(([label, ok, text]) => [label, ok ? "Pronto" : "Da controllare", text])
-);
+dv.table(["Area", "Stato", "Cosa fare"], checks.map(([label, ok, text]) => [label, ok ? "Pronto" : "Da controllare", text]));
 ```
-
-## Se Tutto E Pronto
-
-1. Apri [[Inizia Qui]].
-2. Crea o apri un mondo.
-3. Prepara una sessione collegata al mondo.
-4. Apri [[Hub/Durante il Gioco]] quando sei al tavolo.
-5. Apri [[Hub/Cosa Succede Fuori Scena]] dopo la sessione per scegliere le reazioni del mondo.
-6. Apri [[Hub/Vista Giocatori]] solo quando devi mostrare materiale ai giocatori.
 
 ## Se Qualcosa E Da Controllare
 
-1. Apri [[Risorse/Primo Avvio Strumenti]].
-2. Riavvia Obsidian.
-3. Riapri questa pagina.
-4. Se il problema resta, apri [[Risorse/Se Qualcosa Non Funziona]].
+1. Riavvia Obsidian.
+2. Riapri questa pagina.
+3. Se i pulsanti non rispondono, apri [[Risorse/Se Qualcosa Non Funziona]].
+4. Se vuoi giocare comunque, apri [[Risorse/Prima Sessione In 15 Minuti]] e usa i link Markdown.
+
+## Fallback Markdown
+
+| Passo | Apri |
+| --- | --- |
+| Inizio | [[Inizia Qui]] |
+| Crea o apri un mondo | [[Worldbuilder Dashboard]] |
+| Prepara una sessione | [[Risorse/Preparazione Sessione]] |
+| Durante il Gioco | [[Hub/Durante il Gioco]] |
+| Dopo la sessione | [[Hub/Cosa Succede Fuori Scena]] |
 
 ## Prova Rapida
 
 | Prova | Dove guardare |
 | --- | --- |
 | I pulsanti aprono pagine | [[Inizia Qui]] |
-| Le dashboard mostrano tabelle o carte | [[1. DM Dashboard]] |
+| Le dashboard mostrano carte o tabelle | [[1. DM Dashboard]] |
 | Il tavolo mostra una sessione o un messaggio chiaro | [[Hub/Durante il Gioco]] |
-| Il party mostra PG e HP | [[Hub/Party Control]] |
-| Il portale giocatori non espone campi DM | [[Hub/Vista Giocatori]] |
-| Il report qualita mostra copertura e buchi | [[Risorse/Quality Report]] |
+| Il materiale giocatori non espone campi DM | [[Hub/Vista Giocatori]] |
 | Il mondo vivo mostra pressioni e prossime mosse | [[Hub/Cosa Succede Fuori Scena]] |
-| Il calendario mostra date o cose da calendarizzare | [[Mondi/Calendario]] |
-| I tiri rapidi sono leggibili | [[Risorse/Tabelle/Tabelle]] |
-| Le schede creatura appaiono | [[Mondi/Creature/Creature]] |
 
 ## Cosa Ignorare
 
 - Cartelle `z.*`.
 - File tecnici.
-- Impostazioni interne degli strumenti, finche il vault funziona.
+- Impostazioni interne dei plugin, finche le pagine principali funzionano.

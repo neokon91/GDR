@@ -34,6 +34,7 @@
     "Fantasy Content Generator": "fantasy-content-generator",
     "Fantasy Statblocks": "obsidian-5e-statblocks",
     "Folder Notes": "folder-notes",
+    "Homepage": "homepage",
     "Initiative Tracker": "initiative-tracker",
     "JS Engine": "js-engine",
     "Kanban": "obsidian-kanban",
@@ -61,10 +62,14 @@
     "Advanced Canvas": "Canvas avanzati e collegamenti visuali non sono disponibili.",
     "Linter": "La pulizia automatica delle note non e disponibile.",
     "Fantasy Content Generator": "Il generatore fantasy non puo creare nuove bozze.",
+    "Homepage": "La pagina iniziale automatica non viene aperta.",
     "JS Engine": "Alcuni runtime condivisi non vengono eseguiti."
   };
   const workflowPluginFallbacks = {
     dashboard_dm: ["Meta Bind", "Dataview", "Templater", "Tasks"],
+    onboarding_utente: ["Meta Bind", "Dataview", "Templater"],
+    setup_guidato: ["Meta Bind", "Dataview", "Templater", "Metadata Menu", "Homepage"],
+    prima_sessione_rapida: ["Meta Bind", "Dataview", "Templater"],
     espandi_mondo: ["Templater", "Meta Bind", "Dataview", "Bases", "Maps", "Excalidraw", "Advanced Canvas"],
     prepara_sessione: ["Templater", "Dataview", "Tasks", "Meta Bind", "Dice Roller", "Initiative Tracker", "Fantasy Statblocks", "Media Extended"],
     gioca_live: ["Meta Bind", "Dataview", "Dice Roller", "Initiative Tracker", "Fantasy Statblocks", "Media Extended", "Callout Manager"],

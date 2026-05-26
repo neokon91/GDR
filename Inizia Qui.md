@@ -8,51 +8,62 @@ stato: pronto
 ---
 # Inizia Qui
 
-Scegli una sola azione e parti da lì. Il vault serve prima a creare un mondo homebrew giocabile; poi lo trasforma in campagne, sessioni al tavolo e conseguenze che restano nel mondo.
+Questa e la pagina da usare quando non sai cosa aprire. Segui il percorso dall'alto verso il basso: controlla gli strumenti, crea o scegli un mondo, prepara una sessione, gioca, poi Aggiorna Il Mondo.
 
-## Percorso Minimo
+## Primo Passo
 
-> [!scena] Se non sai da dove partire
-> 1. Crea o apri un mondo.
-> 2. Prepara una sessione collegata a quel mondo.
-> 3. Gioca dal cockpit del tavolo.
-> 4. Chiudi la sessione aggiornando conseguenze e recap.
+> [!scena] Percorso guidato
+> Crea Il Mondo, poi Trasforma In Gioco. Se vuoi saltare il mondo completo, usa [[Risorse/Prima Sessione In 15 Minuti]] e torna qui dopo la partita.
 
-## Flusso Principale
-
-> [!luogo] Passo 1 - Crea Il Mondo
-> Risultato: un Codex homebrew con identità, luoghi, poteri, culture, misteri, mappe e connessioni vive.
+<!-- workflow:quick_actions:start onboarding_utente -->
+> [!regia] Azioni rapide
+> Partire da zero senza scegliere tra troppe dashboard.
 >
+> Plugin coinvolti: `Meta Bind`, `Dataview`, `Templater`.
+>
+> **Controlla strumenti** - e la prima apertura o qualcosa non risponde
+> `BUTTON[setup-guidato-risorse-setup-guidato]`
+>
+> **Crea mondo** - non hai ancora un mondo giocabile
 > `BUTTON[nuovo-mondo-homebrew]`
 >
-> Dashboard mondo:
+> **Prepara sessione** - hai un mondo o almeno un'idea pronta da giocare
+> `BUTTON[preparazione-sessione-risorse-preparazione-sessione]`
 >
+> **Gioca** - sei al tavolo o vuoi vedere il cockpit live
+> `BUTTON[gioca-hub-durante-il-gioco-durante-il-gioco]`
+>
+> **Chiudi e aggiorna** - la sessione e finita e devi decidere conseguenze
+> `BUTTON[fuori-scena-hub-cosa-succede-fuori-scena-cosa-succede-fuori-scena]`
+>
+> [!regia]- Se ti perdi
+> Aprire solo le viste di supporto, non nuove strade parallele.
+>
+> **Prima sessione in 15 minuti** - vuoi giocare subito senza completare tutto
+> `BUTTON[prima-sessione-in-15-minuti-risorse-prima-sessione-in-15-minuti]`
+>
+> **Worldbuilder** - vuoi espandere il mondo dopo il primo giro
 > `BUTTON[worldbuilder-worldbuilder-dashboard-2]`
 >
+> **Bibbia del mondo** - vuoi consolidare tono e canone
 > `BUTTON[bibbia-del-mondo-bibbia-del-mondo-2]`
+>
+> **Vista giocatori** - devi mostrare materiale senza segreti DM
+> `BUTTON[vista-giocatori-hub-vista-giocatori-vista-giocatori]`
+>
+> **Report qualita** - vuoi capire cosa manca nel vault
+> `BUTTON[quality-report-risorse-quality-report]`
+>
+> **Aiuto** - non capisci cosa fare o una vista non risponde
+> `BUTTON[aiuto-risorse-faq]`
+<!-- workflow:quick_actions:end onboarding_utente -->
 
-> [!scena] Passo 2 - Trasforma In Gioco
-> Risultato: una campagna, un'avventura o una sessione collegata ad almeno tre ancore del mondo.
->
-> `BUTTON[nuova-sessione-z-modelli-dm-sessione-md]`
->
-> Preparazione:
->
-> `BUTTON[campagna-da-ambientazione-campagna-da-ambientazione]`
->
-> `BUTTON[preparazione-sessione-risorse-preparazione-sessione]`
+```dataviewjs
+const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+await gdr.renderWorkflowCommandDeck(dv, "onboarding_utente");
+```
 
-> [!incontro] Passo 3 - Gioca Al Tavolo
-> Risultato: appunti di sessione, clock aggiornati, dispense consegnate e decisioni registrate.
->
-> `BUTTON[gioca-hub-durante-il-gioco-durante-il-gioco]`
-
-> [!timer] Passo 4 - Aggiorna Il Mondo
-> Risultato: conseguenze canonizzate, missioni aggiornate, prossime mosse e apertura della sessione successiva.
->
-> `BUTTON[fuori-scena-hub-cosa-succede-fuori-scena-cosa-succede-fuori-scena]`
-
-## Prossima Azione
+## Cosa Fare Adesso
 
 ```dataviewjs
 const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
@@ -60,34 +71,30 @@ gdr.renderActiveSessionBanner(dv);
 gdr.renderActions(dv);
 ```
 
-## Primo Avvio Minimo
+## Stato Minimo
 
 ```dataviewjs
+const enabled = id => app.plugins.enabledPlugins.has(id);
+const exists = path => !!app.vault.getAbstractFileByPath(path);
 const checks = [
-  ["Strumenti base", app.plugins.enabledPlugins.has("dataview") && app.plugins.enabledPlugins.has("obsidian-meta-bind-plugin") && app.plugins.enabledPlugins.has("templater-obsidian"), "Se non è pronto, apri Setup Guidato."],
-  ["Aspetto", app.vault.getAbstractFileByPath(".obsidian/snippets/gdr-vault.css"), "Attiva lo snippet `gdr-vault` nelle impostazioni Aspetto."],
+  ["Pulsanti", enabled("obsidian-meta-bind-plugin") && enabled("templater-obsidian"), "Servono per aprire pagine e creare note."],
+  ["Tabelle", enabled("dataview"), "Servono per mostrare dashboard e liste."],
+  ["Aspetto", exists(".obsidian/snippets/gdr-vault.css"), "Rende leggibili carte, dashboard e callout."],
+  ["Prima sessione", exists("Risorse/Prima Sessione In 15 Minuti.md"), "Percorso breve se vuoi giocare subito."]
 ];
 
-dv.table(["Controllo", "Stato", "Azione"], checks.map(([label, ok, text]) => [label, ok ? "Pronto" : "Da fare", text]));
+dv.table(["Controllo", "Stato", "Cosa significa"], checks.map(([label, ok, text]) => [label, ok ? "Pronto" : "Da fare", text]));
 ```
 
-## Strumenti Avanzati
+## Se I Pulsanti Non Funzionano
 
-> [!regia]- Apri solo quando servono
-> `BUTTON[vista-giocatori-hub-vista-giocatori-vista-giocatori]`
->
-> `BUTTON[party-control-hub-party-control]`
->
-> `BUTTON[quality-report-risorse-quality-report]`
->
-> `BUTTON[risorse-risorse-risorse]`
->
-> `BUTTON[aiuto-risorse-faq]`
->
-> Profili plugin consigliati: [[Risorse/Profili Plugin]].
+| Cosa vuoi fare | Apri |
+| --- | --- |
+| Controllare gli strumenti | [[Risorse/Setup Guidato]] |
+| Giocare con il minimo | [[Risorse/Prima Sessione In 15 Minuti]] |
+| Preparare la sessione | [[Risorse/Preparazione Sessione]] |
+| Giocare al tavolo | [[Hub/Durante il Gioco]] |
+| Chiudere la sessione | [[Risorse/Post Sessione Guidato]] |
+| Vedere cosa reagisce | [[Hub/Cosa Succede Fuori Scena]] |
 
-## Se Parti Da Zero
-
-Apri [[Risorse/Setup Guidato]] solo per controllare che gli strumenti funzionino. Poi torna qui e usa **Crea Il Mondo**.
-
-`BUTTON[setup-guidato-risorse-setup-guidato]`
+Ignora cartelle `z.*`, file tecnici e impostazioni interne finche questa pagina ti dice cosa fare dopo.
