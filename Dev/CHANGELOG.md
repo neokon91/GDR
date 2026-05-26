@@ -7,6 +7,7 @@
 - Percorso utente nuovo blindato da `check:user-path`: 17 superfici primarie e avanzate verificano workflow user-facing, deck semplice e pulsanti Meta Bind configurati.
 - `check:release-quality` valida shape delle azioni Meta Bind, cartelle di creazione, comandi plugin reali e wrapper Templater richiamabili.
 - `check:release-quality` blocca API DataviewJS fragili nei blocchi Markdown utente; la diagnostica plugin deve passare dal runtime `z.engine`.
+- TemplateFactory genera anche il template Avventura, con wrapper Templater dedicato e profilo YAML gia esistente.
 - Workflow dichiarativi per dashboard DM, preparazione, live, post-sessione, fuori scena, worldbuilding, atlante, canone, compendium, Bibbia del mondo, economia, lore, motore mondo vivo e iniziativa.
 - `npm run release:demo` genera una release pulita con demo utente inclusa nello ZIP.
 - `generate_demo_world.js` crea `Demo Regno Di Prova.md` e uno scenario minimo con mondo, campagna, luogo, fazione, missione, sessione attiva, clock, incontro, creatura, oggetto, dispensa e conseguenza propagabile.
@@ -115,6 +116,7 @@
 
 - I pulsanti Meta Bind del Generatore di Contenuti Fantasy richiamano il comando reale `fantasy-content-generator:open-fantasy-generator`.
 - `Inizia Qui` e `Setup Guidato` non leggono più direttamente `app.plugins` dai blocchi DataviewJS, ma usano `renderVaultReadiness`.
+- Il router DM non punta più a un template Avventura mancante; il gate release-quality blocca riferimenti `z.modelli/...` inesistenti negli script Templater.
 
 ### Verificato
 

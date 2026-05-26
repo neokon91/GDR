@@ -443,6 +443,17 @@ function validateTemplaterWrappers(root = ROOT) {
             if (!wrapperNames.has(match[1])) fail(`${fileRel}: tp.user.${match[1]} senza wrapper in ${TEMPLATER_DIR}`);
         }
     }
+
+    for (const file of walk(path.join(root, "z.automazioni"), { predicate: current => current.endsWith(".js") })) {
+        const fileRel = rel(root, file);
+        const text = readText(fileRel, root);
+        for (const match of text.matchAll(/["'](z\.modelli\/[^"']+)["']/g)) {
+            if (/\.(json|base|canvas|excalidraw|png|jpg|jpeg|webp|css|js)$/i.test(match[1])) continue;
+            if (/\/README$/i.test(match[1]) || /\/README\.md$/i.test(match[1])) continue;
+            const target = match[1].endsWith(".md") ? match[1] : `${match[1]}.md`;
+            if (!existsRel(target, root)) fail(`${fileRel}: riferimento Templater a template mancante ${target}`);
+        }
+    }
 }
 
 function validateDataviewSyntax(root = ROOT, firstRunOnly = false) {

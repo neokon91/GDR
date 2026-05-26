@@ -1519,6 +1519,20 @@ blueprints:
     comparison_targets:
     - z.modelli/dm/One-Shot.md
     profile: generic
+  dm_avventura:
+    target_family:
+    - avventura
+    templater_entry: <% await tp.user.avventura(tp) %>
+    template_title: Avventura
+    world_impact: true
+    output:
+      folder: z.modelli/dm
+      files:
+      - Avventura.md
+      fallback: markdown_sections
+    comparison_targets:
+    - z.modelli/dm/Avventura.md
+    profile: generic
   dm_trappola:
     target_family:
     - trappola

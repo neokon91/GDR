@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-26T14:12:15.585111+00:00",
+  "generated_at": "2026-05-26T14:46:05.588426+00:00",
   "source": "Dev/TemplateFactory",
   "mode": "preview",
   "files": [
@@ -132,6 +132,11 @@
       "blueprint": "dm_aggiungi_decisione",
       "path": "Dev/TemplateFactory/examples/generated/dm_aggiungi_decisione.preview.md",
       "bytes": 166
+    },
+    {
+      "blueprint": "dm_avventura",
+      "path": "Dev/TemplateFactory/examples/generated/dm_avventura.preview.md",
+      "bytes": 2933
     },
     {
       "blueprint": "dm_collega_appunto",
