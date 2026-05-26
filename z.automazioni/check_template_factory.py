@@ -15,7 +15,10 @@ from template_factory_utils import (
     MODULES,
     ROOT,
     build_jinja_env,
+    collect_field_names,
+    known_frontmatter_fields,
     load_modules,
+    plugin_key,
     render_context,
     resolved_blueprints,
     validate_rendered,
@@ -25,6 +28,7 @@ from template_factory_contract_checks import (
     validate_taxonomy_depth_contracts,
     validate_worldbuilding_depth_axes,
 )
+from template_factory_surface_checks import validate_plugin_surface_contracts
 
 
 GENERATED = FACTORY / "examples" / "generated"
@@ -62,21 +66,6 @@ CRITICAL_RENDERED_GENERATORS = {
 
 def fail(message: str, errors: list[str]) -> None:
     errors.append(message)
-
-
-def collect_field_names(fields_core: dict) -> set[str]:
-    names: set[str] = set()
-    for group in fields_core.get("fields", {}).values():
-        if isinstance(group, list):
-            for field in group:
-                if isinstance(field, dict) and field.get("name"):
-                    names.add(str(field["name"]))
-    return names
-
-
-def plugin_key(name: str, bindings: dict) -> str:
-    aliases = bindings.get("aliases", {})
-    return str(aliases.get(name, name))
 
 
 def validate_modules(modules: dict[str, dict], errors: list[str]) -> None:
@@ -436,99 +425,6 @@ def validate_rendering(modules: dict[str, dict], errors: list[str]) -> None:
 
         for error in validate_rendered(name, rendered):
             fail(f"blueprint {error}", errors)
-
-
-def known_frontmatter_fields(modules: dict[str, dict]) -> set[str]:
-    frontmatter = modules["frontmatter_profiles"]
-    field_names = collect_field_names(modules["fields_core"])
-    plugin_fields = {
-        field
-        for binding in modules["plugin_bindings"].get("bindings", {}).values()
-        for field in binding.get("fields", []) or []
-    }
-    declared_plugin_fields = {
-        field
-        for fields in frontmatter.get("field_catalog", {}).get("plugin_fields", {}).values()
-        for field in fields or []
-    }
-    domain_fields = set(frontmatter.get("field_catalog", {}).get("domain_fields", []) or [])
-    return field_names | plugin_fields | declared_plugin_fields | domain_fields
-
-
-def metabind_input_field(input_body: str) -> str:
-    body = input_body.strip()
-    if not body:
-        return ""
-    if ":" in body:
-        return body.rsplit(":", 1)[-1].strip()
-    return ""
-
-
-def validate_plugin_surface_contracts(modules: dict[str, dict], errors: list[str]) -> None:
-    """Keep generated plugin-native surfaces declared in YAML, not hidden in Jinja."""
-    jinja_text_by_path = {
-        path: path.read_text(encoding="utf-8")
-        for path in sorted((FACTORY / "jinja").glob("**/*.j2"))
-    }
-    all_text = "\n".join(jinja_text_by_path.values())
-
-    known_fields = known_frontmatter_fields(modules)
-    button_ids = {
-        str(button.get("id"))
-        for button in modules["metabind_buttons"].get("buttons", {}).values()
-        if button.get("id")
-    }
-    callout_types = {
-        str(callout.get("type"))
-        for callout in modules["callouts"].get("callouts", {}).values()
-        if callout.get("type")
-    }
-    runtime_views = {
-        str(block.get("runtime_view"))
-        for block in modules["dataview_blocks"].get("blocks", {}).values()
-        if block.get("runtime_view")
-    }
-    for block in modules["dataview_blocks"].get("blocks", {}).values():
-        code = str(block.get("code", ""))
-        for match in re.finditer(r"gdr\.([A-Za-z0-9_]+)\(", code):
-            runtime_views.add(match.group(1))
-    base_files = {
-        str(view.get("file"))
-        for view in modules["bases_views"].get("views", {}).values()
-        if view.get("file")
-    }
-
-    for path, text in jinja_text_by_path.items():
-        rel_path = path.relative_to(ROOT)
-        if "jinja/macros/" in rel_path.as_posix():
-            continue
-        for match in re.finditer(r"INPUT\[([^\]]+)\]", text):
-            field = metabind_input_field(match.group(1))
-            if field and field not in known_fields:
-                fail(f"{rel_path}: Meta Bind INPUT non dichiarato nei campi YAML ({field})", errors)
-
-        for match in re.finditer(r"BUTTON\[([^\]]+)\]", text):
-            button_id = match.group(1).strip()
-            if button_id not in button_ids:
-                fail(f"{rel_path}: Meta Bind BUTTON non dichiarato in metabind_buttons.yaml ({button_id})", errors)
-
-        for match in re.finditer(r"(?m)^> \[!([^\]\-]+)[^\]]*\]", text):
-            callout_type = match.group(1).strip()
-            if callout_type not in callout_types:
-                fail(f"{rel_path}: callout non dichiarato in callouts.yaml ({callout_type})", errors)
-
-        for match in re.finditer(r"gdr\.([A-Za-z0-9_]+)\(", text):
-            view = match.group(1)
-            if view not in runtime_views:
-                fail(f"{rel_path}: runtime DataviewJS non dichiarato in dataview_blocks.yaml ({view})", errors)
-
-        for match in re.finditer(r"\[\[(z\.bases/[^]|#]+\.base)", text):
-            base = match.group(1)
-            if base not in base_files:
-                fail(f"{rel_path}: Base linkata non dichiarata in bases_views.yaml ({base})", errors)
-
-    if "````tabs" in all_text and "tabs" not in modules:
-        fail("TemplateFactory: Tabs usato dai Jinja ma modulo tabs mancante", errors)
 
 
 def validate_entity_depth_contracts(modules: dict[str, dict], errors: list[str]) -> None:

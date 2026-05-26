@@ -2,43 +2,11 @@ from __future__ import annotations
 
 import yaml
 
-from template_factory_utils import ROOT, resolved_blueprints
+from template_factory_utils import ROOT, known_frontmatter_fields, plugin_key, resolved_blueprints
 
 
 def fail(message: str, errors: list[str]) -> None:
     errors.append(message)
-
-
-def collect_field_names(fields_core: dict) -> set[str]:
-    names: set[str] = set()
-    for group in fields_core.get("fields", {}).values():
-        if isinstance(group, list):
-            for field in group:
-                if isinstance(field, dict) and field.get("name"):
-                    names.add(str(field["name"]))
-    return names
-
-
-def plugin_key(name: str, bindings: dict) -> str:
-    aliases = bindings.get("aliases", {})
-    return str(aliases.get(name, name))
-
-
-def known_frontmatter_fields(modules: dict[str, dict]) -> set[str]:
-    frontmatter = modules["frontmatter_profiles"]
-    field_names = collect_field_names(modules["fields_core"])
-    plugin_fields = {
-        field
-        for binding in modules["plugin_bindings"].get("bindings", {}).values()
-        for field in binding.get("fields", []) or []
-    }
-    declared_plugin_fields = {
-        field
-        for fields in frontmatter.get("field_catalog", {}).get("plugin_fields", {}).values()
-        for field in fields or []
-    }
-    domain_fields = set(frontmatter.get("field_catalog", {}).get("domain_fields", []) or [])
-    return field_names | plugin_fields | declared_plugin_fields | domain_fields
 
 
 def validate_worldbuilding_depth_axes(modules: dict[str, dict], errors: list[str]) -> None:

@@ -73,6 +73,39 @@ def resolved_blueprints(modules: dict[str, dict[str, Any]]) -> dict[str, dict[st
     return resolved
 
 
+def collect_field_names(fields_core: dict[str, Any]) -> set[str]:
+    names: set[str] = set()
+    for group in fields_core.get("fields", {}).values():
+        if isinstance(group, list):
+            for field in group:
+                if isinstance(field, dict) and field.get("name"):
+                    names.add(str(field["name"]))
+    return names
+
+
+def plugin_key(name: str, bindings: dict[str, Any]) -> str:
+    aliases = bindings.get("aliases", {})
+    return str(aliases.get(name, name))
+
+
+def known_frontmatter_fields(modules: dict[str, dict[str, Any]]) -> set[str]:
+    """Raccoglie i campi frontmatter ammessi da core, plugin e catalogo di dominio."""
+    frontmatter = modules["frontmatter_profiles"]
+    field_names = collect_field_names(modules["fields_core"])
+    plugin_fields = {
+        field
+        for binding in modules["plugin_bindings"].get("bindings", {}).values()
+        for field in binding.get("fields", []) or []
+    }
+    declared_plugin_fields = {
+        field
+        for fields in frontmatter.get("field_catalog", {}).get("plugin_fields", {}).values()
+        for field in fields or []
+    }
+    domain_fields = set(frontmatter.get("field_catalog", {}).get("domain_fields", []) or [])
+    return field_names | plugin_fields | declared_plugin_fields | domain_fields
+
+
 def render_context(name: str, blueprint: dict[str, Any], modules: dict[str, dict[str, Any]]) -> dict[str, Any]:
     entry = str(blueprint.get("templater_entry", ""))
     context = {
