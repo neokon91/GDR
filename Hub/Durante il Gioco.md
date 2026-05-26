@@ -29,6 +29,19 @@ if (!active) {
 
 ## Comandi Rapidi
 
+> [!regia] Flusso rapido
+> Durante il tavolo cattura prima, interpreta dopo: appunto live, conseguenza, scelta mondo, clock, poi post-sessione.
+>
+> `BUTTON[wizard-appunto-live]`
+>
+> `BUTTON[wizard-conseguenza]`
+>
+> `BUTTON[registra-scelta-mondo]`
+>
+> `BUTTON[avanza-clock]`
+>
+> `BUTTON[post-sessione-guidato-risorse-post-sessione-guidato]`
+
 `BUTTON[aggiorna-scena-z-modelli-dm-aggiorna-scena-corrente-md]`
 
 `BUTTON[aggiungi-decisione-z-modelli-dm-aggiungi-decisione-live-md]`

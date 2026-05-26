@@ -83,3 +83,32 @@ def validate_plugin_surface_contracts(modules: dict[str, dict], errors: list[str
 
     if "````tabs" in all_text and "tabs" not in modules:
         fail("TemplateFactory: Tabs usato dai Jinja ma modulo tabs mancante", errors)
+
+
+def validate_workflow_quick_actions(modules: dict[str, dict], errors: list[str]) -> None:
+    """Valida che le azioni rapide dei flussi puntino a pulsanti Meta Bind reali."""
+    workflow_map = modules["workflows"].get("workflows", {}) or {}
+    button_ids = {
+        str(button.get("id"))
+        for button in modules["metabind_buttons"].get("buttons", {}).values()
+        if button.get("id")
+    }
+
+    if not workflow_map:
+        fail("workflows: nessun flusso operativo definito", errors)
+        return
+
+    for workflow_id, workflow in workflow_map.items():
+        actions = workflow.get("quick_actions", []) or []
+        if workflow_id in {"prepara_sessione", "gioca_live", "post_sessione"} and not actions:
+            fail(f"workflows.{workflow_id}: quick_actions mancanti", errors)
+        for index, action in enumerate(actions):
+            button = str((action or {}).get("button", ""))
+            if not button:
+                fail(f"workflows.{workflow_id}.quick_actions[{index}]: button mancante", errors)
+            elif button not in button_ids:
+                fail(f"workflows.{workflow_id}.quick_actions[{index}]: pulsante non dichiarato ({button})", errors)
+            if not (action or {}).get("label"):
+                fail(f"workflows.{workflow_id}.quick_actions[{index}]: label mancante", errors)
+            if not (action or {}).get("use_when"):
+                fail(f"workflows.{workflow_id}.quick_actions[{index}]: use_when mancante", errors)

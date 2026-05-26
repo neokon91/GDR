@@ -44,7 +44,7 @@ Questa pagina spiega come creare note senza bloccare il gioco. La regola e sempl
 3. Gioca o prepara la scena.
 4. Dopo la sessione apri [[Risorse/Post Sessione Guidato]].
 5. Se la nota resta importante, arricchiscila con collegamenti, relazioni, conseguenze e propagazione.
-6. Controlla [[Cosa Succede Fuori Scena]] per vedere se produce una prossima mossa.
+6. Controlla [[Hub/Cosa Succede Fuori Scena]] per vedere se produce una prossima mossa.
 7. Apri [[Risorse/Worldbuilding Profondo]] quando vuoi trasformare una scheda utile in una scheda di ambientazione.
 
 ## Scheda Da Giocare O Scheda Da Mondo?

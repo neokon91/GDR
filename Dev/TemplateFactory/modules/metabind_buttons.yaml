@@ -26,6 +26,38 @@ buttons:
     action: open
     link: '[[Hub/Durante il Gioco]]'
     fallback: '[[Hub/Durante il Gioco]]'
+  fuori_scena:
+    id: fuori-scena-hub-cosa-succede-fuori-scena-cosa-succede-fuori-scena
+    label: Fuori Scena
+    action: open
+    link: '[[Hub/Cosa Succede Fuori Scena|Cosa Succede Fuori Scena]]'
+    fallback: '[[Hub/Cosa Succede Fuori Scena]]'
+  post_sessione_guidato:
+    id: post-sessione-guidato-risorse-post-sessione-guidato
+    label: Post Sessione Guidato
+    action: open
+    link: '[[Risorse/Post Sessione Guidato]]'
+    fallback: '[[Risorse/Post Sessione Guidato]]'
+  wizard_appunto_live:
+    id: wizard-appunto-live
+    label: Appunto Live
+    action: templaterCreateNote
+    template: z.modelli/wizard/Appunto Live.md
+    folder: Inbox
+    fallback: '[[z.modelli/wizard/Appunto Live]]'
+  wizard_conseguenza:
+    id: wizard-conseguenza
+    label: Conseguenza
+    action: templaterCreateNote
+    template: z.modelli/wizard/Conseguenza.md
+    folder: Inbox
+    fallback: '[[z.modelli/wizard/Conseguenza]]'
+  wizard_fine_sessione:
+    id: wizard-fine-sessione
+    label: Fine Sessione
+    action: runTemplaterFile
+    template: z.modelli/wizard/Fine Sessione.md
+    fallback: '[[z.modelli/wizard/Fine Sessione]]'
   marca_canonico:
     id: marca-canonico
     label: Marca Canonico
@@ -86,6 +118,12 @@ buttons:
     action: runTemplaterFile
     template: z.modelli/azioni/Propaga A Entita.md
     fallback: 'Azione manuale: aggiornare propaga_a, entita_impattate e aggiornamenti_richiesti'
+  prepara_recap_pubblico:
+    id: prepara-recap-pubblico
+    label: Prepara Recap Pubblico
+    action: runTemplaterFile
+    template: z.modelli/azioni/Prepara Recap Pubblico.md
+    fallback: 'Azione manuale: scrivere recap pubblico senza segreti o prossime mosse DM'
   nuova_mappa_zoom:
     id: nuova-mappa-zoom-z-modelli-mappe-mappa-zoom-md
     label: Nuova Mappa Zoom

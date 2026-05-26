@@ -104,7 +104,7 @@ if (!rows.length) {
 - collega la nota canonica alla sessione, missione, luogo o fazione che la usera;
 - aggiorna [[Risorse/Controllo Vault]] per verificare che non resti tra le bozze generate;
 - se nasce una scena giocabile, collega anche mappa, incontro, dispensa o tabella;
-- se produce conseguenze, aggiorna tracciati, missioni o [[Cosa Succede Fuori Scena]].
+- se produce conseguenze, aggiorna tracciati, missioni o [[Hub/Cosa Succede Fuori Scena]].
 
 ## Smistate Dal Generatore
 

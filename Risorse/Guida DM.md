@@ -35,7 +35,7 @@ Questa guida serve a usare il vault senza pensare a strumenti interni, cartelle 
 
 ## Durante Il Gioco
 
-Apri [[Durante il Gioco]].
+Apri [[Hub/Durante il Gioco]].
 
 Usa quella pagina per:
 - scena corrente;
@@ -114,7 +114,7 @@ Fai solo queste cose:
 | Bisogno | Apri |
 | --- | --- |
 | Preparare | [[1. DM Dashboard]] |
-| Giocare | [[Durante il Gioco]] |
+| Giocare | [[Hub/Durante il Gioco]] |
 | Costruire il mondo | [[Worldbuilder Dashboard]] |
 | Controllare mondo vivo | [[Motore Mondo Vivo]] |
 | Controllare geopolitica | [[Geopolitical Dashboard]] |

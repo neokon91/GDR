@@ -18,7 +18,7 @@ Questa pagina raccoglie solo le guide utili mentre prepari o giochi. Le note tec
 | [[Risorse/Setup Guidato]] | Quando vuoi sapere se il vault e pronto. |
 | [[Risorse/Guida DM]] | Quando vuoi il flusso DM senza dettagli tecnici. |
 | [[Risorse/Preparazione Sessione]] | Prima di una sessione. |
-| [[Durante il Gioco]] | Durante la partita. |
+| [[Hub/Durante il Gioco]] | Durante la partita. |
 | [[Hub/Party Control]] | Quando vuoi controllare party, HP, obiettivi e flags. |
 | [[Risorse/Post Sessione Guidato]] | Subito dopo la partita. |
 | [[Risorse/Come Usare I Clock]] | Quando vuoi usare clock per minacce, viaggi o rituali. |

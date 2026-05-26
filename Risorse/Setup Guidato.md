@@ -75,7 +75,7 @@ const checks = [
   ["Prima sessione", exists("Risorse/Prima Sessione In 15 Minuti.md"), "Percorso pratico per giocare subito."],
   ["Creazione entità", exists("Risorse/Creazione Guidata Entità.md"), "Spiega cosa compilare subito e cosa aggiungere dopo."],
   ["Worldbuilding profondo", exists("Risorse/Worldbuilding Profondo.md"), "Guida per passare da schede giocabili a schede di ambientazione."],
-  ["Fuori scena", exists("Cosa Succede Fuori Scena.md"), "Pressioni e prossime mosse dopo la sessione."]
+  ["Fuori scena", exists("Hub/Cosa Succede Fuori Scena.md"), "Pressioni e prossime mosse dopo la sessione."]
 ];
 
 dv.table(
@@ -89,7 +89,7 @@ dv.table(
 1. Apri [[Inizia Qui]].
 2. Crea o apri un mondo.
 3. Prepara una sessione collegata al mondo.
-4. Apri [[Durante il Gioco]] quando sei al tavolo.
+4. Apri [[Hub/Durante il Gioco]] quando sei al tavolo.
 5. Apri [[Hub/Cosa Succede Fuori Scena]] dopo la sessione per scegliere le reazioni del mondo.
 6. Apri [[Hub/Vista Giocatori]] solo quando devi mostrare materiale ai giocatori.
 
@@ -106,7 +106,7 @@ dv.table(
 | --- | --- |
 | I pulsanti aprono pagine | [[Inizia Qui]] |
 | Le dashboard mostrano tabelle o carte | [[1. DM Dashboard]] |
-| Il tavolo mostra una sessione o un messaggio chiaro | [[Durante il Gioco]] |
+| Il tavolo mostra una sessione o un messaggio chiaro | [[Hub/Durante il Gioco]] |
 | Il party mostra PG e HP | [[Hub/Party Control]] |
 | Il portale giocatori non espone campi DM | [[Hub/Vista Giocatori]] |
 | Il report qualita mostra copertura e buchi | [[Risorse/Quality Report]] |

@@ -11,11 +11,22 @@ stato: pronto
 
 Questa pagina serve a trasformare un mondo gia costruito in una sessione live. Se non hai almeno un mondo, un luogo e una pressione/fazione/missione, torna prima al [[Worldbuilder Dashboard]]: una sessione non deve nascere nel vuoto.
 
-`BUTTON[nuova-sessione-z-modelli-dm-sessione-md]`
-
 `BUTTON[worldbuilder-worldbuilder-dashboard-2]`
 
-`BUTTON[durante-il-gioco-durante-il-gioco]`
+## Azioni Rapide
+
+> [!regia] Riduci ricerca manuale
+> Usa questi pulsanti prima di leggere il resto della pagina: creano o collegano materiale operativo senza dover cercare template, cartelle o plugin.
+>
+> `BUTTON[nuova-sessione-z-modelli-dm-sessione-md]`
+>
+> `BUTTON[wizard-nuova-entita-viva]`
+>
+> `BUTTON[collega-sessione-attiva]`
+>
+> `BUTTON[nuova-mappa-zoom-z-modelli-mappe-mappa-zoom-md]`
+>
+> `BUTTON[durante-il-gioco-durante-il-gioco]`
 
 ## Sessione Attiva
 
@@ -121,4 +132,4 @@ Quando le ancore mondo e i cinque blocchi sono completi:
 2. imposta `stato: pronto`;
 3. spegni `attiva` sulle altre sessioni;
 4. imposta `attiva: true` solo su questa se e la prossima al tavolo;
-5. apri [[Durante il Gioco]].
+5. apri [[Hub/Durante il Gioco]].

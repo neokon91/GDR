@@ -27,7 +27,18 @@ gdr.renderPostSessionCommandCenter(dv);
 gdr.renderPostSessionFocus(dv);
 ```
 
-`BUTTON[wizard-fine-sessione]`
+> [!regia] Azioni rapide di chiusura
+> Parti da qui se vuoi chiudere senza leggere tutta la pagina: fine sessione, conseguenza, propagazione, recap pubblico, poi fuori scena.
+>
+> `BUTTON[wizard-fine-sessione]`
+>
+> `BUTTON[applica-conseguenza]`
+>
+> `BUTTON[propaga-a-entita]`
+>
+> `BUTTON[prepara-recap-pubblico]`
+>
+> `BUTTON[fuori-scena-hub-cosa-succede-fuori-scena-cosa-succede-fuori-scena]`
 
 ## 1. Decisioni Prese
 
@@ -77,7 +88,7 @@ gdr.renderConsequenceCards(dv);
 
 ## 4. Prossime Mosse
 
-Apri [[Cosa Succede Fuori Scena]] solo per decidere cosa si muove prima della prossima preparazione.
+Apri [[Hub/Cosa Succede Fuori Scena]] solo per decidere cosa si muove prima della prossima preparazione.
 
 ### Entità Impattate
 

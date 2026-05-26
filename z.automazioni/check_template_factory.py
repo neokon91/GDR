@@ -31,7 +31,7 @@ from template_factory_profile_checks import (
     validate_profile_symmetry,
     validate_runtime_profiles,
 )
-from template_factory_surface_checks import validate_plugin_surface_contracts
+from template_factory_surface_checks import validate_plugin_surface_contracts, validate_workflow_quick_actions
 
 
 GENERATED = FACTORY / "examples" / "generated"
@@ -414,6 +414,8 @@ def main() -> int:
         validate_critical_rendered_generators(modules, errors)
     if not errors:
         validate_plugin_surface_contracts(modules, errors)
+    if not errors:
+        validate_workflow_quick_actions(modules, errors)
     if not errors:
         validate_entity_depth_contracts(modules, errors)
     if not errors:

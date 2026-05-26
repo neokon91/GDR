@@ -4,7 +4,7 @@ Un vault Obsidian professionale per DM e worldbuilder italiani. Aiuta a costruir
 
 L'obiettivo è farlo sembrare un'app locale dentro Obsidian, non una cartella di appunti. Il centro è il **Codex del Mondo**; il flusso operativo porta quel mondo al tavolo con **Prepara -> Gioca -> Aggiorna il mondo**.
 
-Apri [[Inizia Qui]] per il primo avvio. Il percorso principale passa da [[Risorse/Preparazione Sessione]] per preparare una sessione, [[Durante il Gioco]] per giocarla e [[Cosa Succede Fuori Scena]] per aggiornare conseguenze, missioni e prossime mosse. Le dashboard avanzate sono strumenti di supporto, non tappe obbligatorie.
+Apri [[Inizia Qui]] per il primo avvio. Il percorso principale passa da [[Risorse/Preparazione Sessione]] per preparare una sessione, [[Hub/Durante il Gioco]] per giocarla e [[Hub/Cosa Succede Fuori Scena]] per aggiornare conseguenze, missioni e prossime mosse. Le dashboard avanzate sono strumenti di supporto, non tappe obbligatorie.
 
 ## Perche Usarlo
 
@@ -60,10 +60,10 @@ Se dashboard, pulsanti o tabelle non funzionano, apri [[Risorse/Primo Avvio Stru
 4. Prepara la prossima sessione con [[Risorse/Preparazione Sessione]] solo quando ha almeno tre ancore mondo.
 5. Crea entita utili al mondo e al tavolo: PNG, luoghi, missioni, incontri, oggetti, dispense, culture, conflitti, rotte, risorse e relazioni.
 6. Collega le note usando i campi interattivi.
-7. Durante il gioco usa [[Durante il Gioco]] per appunti, timer, PNG attivi, incontri pronti, dispense e Inbox Live.
+7. Durante il gioco usa [[Hub/Durante il Gioco]] per appunti, timer, PNG attivi, incontri pronti, dispense e Inbox Live.
 8. Usa clock e progress track in [[Mondi/Tracciati/Tracciati]] quando una minaccia, un viaggio o un rituale deve avanzare in modo visibile.
 9. Dopo la sessione apri [[Risorse/Post Sessione Guidato]]: canonizza eventi, aggiorna mondo/missioni/tracciati e scegli la prossima sessione attiva.
-10. Apri [[Cosa Succede Fuori Scena]] per decidere quali PNG, fazioni, missioni e clock reagiscono prima della sessione successiva.
+10. Apri [[Hub/Cosa Succede Fuori Scena]] per decidere quali PNG, fazioni, missioni e clock reagiscono prima della sessione successiva.
 
 ## Dove Trovare Le Cose
 
@@ -94,7 +94,7 @@ Se dashboard, pulsanti o tabelle non funzionano, apri [[Risorse/Primo Avvio Stru
 - [[Atlante del Mondo]] e la vista principale per worldbuilding strutturale: geografia, culture, lingue, poteri, storia, conflitti, cosmologia, mappe, layer, territori e rotte.
 - [[Geopolitical Dashboard]] mostra territori politici, confini, vassalli, risorse strategiche, relazioni diplomatiche e buchi geopolitici.
 - [[Motore Mondo Vivo]] e il layer sistemico sopra gli strumenti DM: mostra propagazione eventi, dinamiche di fazione, relationship graph, causalita storica e continuita da chiudere prima della prossima sessione.
-- [[Cosa Succede Fuori Scena]] e la vista pratica per il dopo sessione: mostra pressioni urgenti, clock quasi pieni, missioni in stallo, segreti da collegare e conseguenze non propagate.
+- [[Hub/Cosa Succede Fuori Scena]] e la vista pratica per il dopo sessione: mostra pressioni urgenti, clock quasi pieni, missioni in stallo, segreti da collegare e conseguenze non propagate.
 - `Mondi/Relazioni` contiene alleanze, rivalita, trattati, vassallaggi, debiti e faide quando un legame deve avere stato, intensita, conseguenze e propagazione propria.
 - [[Campagna da Ambientazione]] trasforma regioni e conflitti in campagne, archi narrativi, fronti e opportunita di avventura.
 - [[Mondi/Stato del Mondo]] e la vista Stato Campagna: filtra per mondo o campagna e mostra missioni aperte, clock attivi, PNG mossi fuori scena, pressioni e conseguenze.

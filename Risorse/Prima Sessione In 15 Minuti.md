@@ -58,7 +58,7 @@ tab: Checklist
 | Passo | Dove |
 | --- | --- |
 | Preparare | [[Risorse/Preparazione Sessione]] |
-| Giocare | [[Durante il Gioco]] |
+| Giocare | [[Hub/Durante il Gioco]] |
 | Chiudere | [[Risorse/Post Sessione Guidato]] |
 
 ## 1. Controlla Che Il Vault Sia Pronto
@@ -75,7 +75,7 @@ Se i pulsanti funzionano e le tabelle mostrano testo leggibile, puoi proseguire.
 
 
 - una campagna con sessioni, PNG, luoghi, missione e clock gia collegati;
-- una sessione attiva visibile in [[Durante il Gioco]];
+- una sessione attiva visibile in [[Hub/Durante il Gioco]];
 - un clock che mostra pressione;
 - una conseguenza che passa da appunto a canone;
 - una prossima mossa fuori scena.
@@ -164,4 +164,4 @@ Scegli almeno una riga da trasformare in gioco:
 - [ ] Missioni e clock hanno stato aggiornato.
 - [ ] Almeno una conseguenza ha `entita_impattate` o `propaga_a`.
 - [ ] La prossima sessione ha una prima scena.
-- [ ] [[Cosa Succede Fuori Scena]] mostra almeno una pressione utilizzabile.
+- [ ] [[Hub/Cosa Succede Fuori Scena]] mostra almeno una pressione utilizzabile.

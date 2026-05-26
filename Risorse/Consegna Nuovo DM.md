@@ -17,7 +17,7 @@ Questa pagina serve quando il vault viene dato a una persona che deve usarlo, no
 | Primo avvio | [[Inizia Qui]] |
 | Controllo iniziale | [[Risorse/Setup Guidato]] |
 | Preparare | [[1. DM Dashboard]] |
-| Giocare | [[Durante il Gioco]] |
+| Giocare | [[Hub/Durante il Gioco]] |
 | Dopo la partita | [[Risorse/Post Sessione Guidato]] |
 | Se qualcosa non torna | [[Risorse/Se Qualcosa Non Funziona]] |
 
@@ -41,7 +41,7 @@ Questa pagina serve quando il vault viene dato a una persona che deve usarlo, no
 
 1. Apri [[Inizia Qui]].
 2. Apri [[Risorse/Setup Guidato]] e controlla che sia tutto pronto.
-4. Apri [[Durante il Gioco]] per vedere come appare una sessione al tavolo.
+4. Apri [[Hub/Durante il Gioco]] per vedere come appare una sessione al tavolo.
 5. Apri [[Risorse/Post Sessione Guidato]] per capire cosa succede dopo.
 
 ## Regola Pratica
