@@ -22,9 +22,14 @@ function markers(workflowId) {
 
 function renderBlock(workflowId, workflow) {
     const lines = [];
+    const plugins = workflow.required_plugins ?? [];
     lines.push(markers(workflowId).start);
     lines.push("> [!regia] Azioni rapide");
     lines.push(`> ${workflow.user_goal}`);
+    if (plugins.length) {
+        lines.push(">");
+        lines.push(`> Plugin coinvolti: ${plugins.map(plugin => `\`${plugin}\``).join(", ")}.`);
+    }
 
     for (const action of workflow.quick_actions ?? []) {
         lines.push(">");

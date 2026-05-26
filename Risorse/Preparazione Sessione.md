@@ -19,6 +19,8 @@ Questa pagina serve a trasformare un mondo gia costruito in una sessione live. S
 > [!regia] Azioni rapide
 > Preparare una sessione radicata nel mondo.
 >
+> Plugin coinvolti: `Templater`, `Dataview`, `Tasks`, `Kanban`, `Dice Roller`, `Initiative Tracker`, `Fantasy Statblocks`, `Media Extended`.
+>
 > **Nuova sessione** - non esiste ancora una nota sessione per il prossimo tavolo
 > `BUTTON[nuova-sessione-z-modelli-dm-sessione-md]`
 >
@@ -37,6 +39,11 @@ Questa pagina serve a trasformare un mondo gia costruito in una sessione live. S
 > **Apri tavolo** - la sessione e pronta o in corso
 > `BUTTON[durante-il-gioco-durante-il-gioco]`
 <!-- workflow:quick_actions:end prepara_sessione -->
+
+```dataviewjs
+const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+await gdr.renderWorkflowCommandDeck(dv, "prepara_sessione");
+```
 
 ## Sessione Attiva
 

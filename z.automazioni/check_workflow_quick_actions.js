@@ -23,6 +23,7 @@ function main() {
     for (const [workflowId, workflow] of Object.entries(data.workflows ?? {})) {
         const entryPoints = workflow.entry_points ?? [];
         const actions = workflow.quick_actions ?? [];
+        const plugins = workflow.required_plugins ?? [];
 
         if (!entryPoints.length) {
             errors.push(`${workflowId}: entry_points mancanti nel JSON workflow`);
@@ -32,6 +33,9 @@ function main() {
         if (!actions.length) {
             errors.push(`${workflowId}: quick_actions mancanti nel JSON workflow`);
             continue;
+        }
+        if (!plugins.length) {
+            errors.push(`${workflowId}: required_plugins mancanti nel JSON workflow`);
         }
 
         for (const entry of entryPoints) {

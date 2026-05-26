@@ -31,6 +31,8 @@ gdr.renderPostSessionFocus(dv);
 > [!regia] Azioni rapide
 > Trasformare appunti e conseguenze in mondo aggiornato.
 >
+> Plugin coinvolti: `Templater`, `Meta Bind`, `Tasks`, `Kanban`, `Dataview`, `Calendarium`.
+>
 > **Fine sessione guidata** - devi convertire appunti in output, recap e prossima apertura
 > `BUTTON[wizard-fine-sessione]`
 >
@@ -49,6 +51,11 @@ gdr.renderPostSessionFocus(dv);
 > **Fuori scena** - devi scegliere chi reagisce prima della prossima sessione
 > `BUTTON[fuori-scena-hub-cosa-succede-fuori-scena-cosa-succede-fuori-scena]`
 <!-- workflow:quick_actions:end post_sessione -->
+
+```dataviewjs
+const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+await gdr.renderWorkflowCommandDeck(dv, "post_sessione");
+```
 
 ## 1. Decisioni Prese
 

@@ -100,8 +100,11 @@ def validate_workflow_quick_actions(modules: dict[str, dict], errors: list[str])
 
     for workflow_id, workflow in workflow_map.items():
         actions = workflow.get("quick_actions", []) or []
+        required_plugins = workflow.get("required_plugins", []) or []
         if workflow_id in {"prepara_sessione", "gioca_live", "post_sessione"} and not actions:
             fail(f"workflows.{workflow_id}: quick_actions mancanti", errors)
+        if actions and not required_plugins:
+            fail(f"workflows.{workflow_id}: required_plugins mancanti per flusso con quick_actions", errors)
         for index, action in enumerate(actions):
             button = str((action or {}).get("button", ""))
             if not button:

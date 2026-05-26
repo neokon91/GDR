@@ -20,6 +20,7 @@ const REQUIRED_EXPORTS = [
     "renderSessionMapCards",
     "renderSessionMaterialCards",
     "renderTableCockpit",
+    "renderWorkflowCommandDeck",
     "renderWorldImpact"
 ];
 const REQUIRED_MODULES = [
@@ -53,6 +54,20 @@ async function main() {
         for (const name of REQUIRED_EXPORTS) {
             if (typeof views[name] !== "function") {
                 errors.push(`export runtime mancante o non funzione: ${name}`);
+            }
+        }
+        if (!errors.length) {
+            const rendered = [];
+            const dv = {
+                el(tag, text = "", options = {}) {
+                    const node = { tag, text, options, innerHTML: "" };
+                    rendered.push(node);
+                    return node;
+                }
+            };
+            await views.renderWorkflowCommandDeck(dv, "gioca_live");
+            if (!rendered.some(node => String(node.innerHTML).includes("BUTTON[registra-scelta-mondo]"))) {
+                errors.push("renderWorkflowCommandDeck: output workflow gioca_live senza pulsanti operativi");
             }
         }
     }

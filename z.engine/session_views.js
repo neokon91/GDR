@@ -186,6 +186,65 @@
     grid.innerHTML = cards.join("");
   }
 
+  async function renderWorkflowCommandDeck(dv, workflowId) {
+    const dataPath = "z.automazioni/data/workflows/quick_actions.json";
+
+    try {
+      const raw = await app.vault.adapter.read(dataPath);
+      const data = JSON.parse(raw);
+      const workflow = data.workflows?.[workflowId];
+
+      if (!workflow) {
+        renderEmptyState(dv, {
+          title: "Flusso non trovato",
+          action: `Aggiungi ${workflowId} a Dev/TemplateFactory/modules/workflows.yaml e rigenera i dati workflow.`,
+          button: "npm run generate:workflow-data"
+        });
+        return;
+      }
+
+      const plugins = asArray(workflow.required_plugins);
+      const entryPoints = asArray(workflow.entry_points);
+      const actions = asArray(workflow.quick_actions);
+      const grid = dv.el("div", "", { cls: "gdr-card-grid compact" });
+      const cards = [];
+
+      cards.push(cardHtml({
+        title: "Flusso operativo",
+        meta: workflowId,
+        body: workflow.user_goal || "Obiettivo workflow non dichiarato.",
+        importa: entryPoints.length ? `Pagine: ${entryPoints.join(", ")}` : "Manca una pagina operativa collegata.",
+        cls: `gdr-info-card compact ${entryPoints.length ? "gdr-kind-ready" : "gdr-kind-missing"}`
+      }));
+
+      cards.push(cardHtml({
+        title: "Plugin coinvolti",
+        meta: `${plugins.length} plugin`,
+        body: plugins.join(", ") || "Nessun plugin dichiarato nel workflow YAML.",
+        importa: "Se un controllo non risponde, verifica prima questi plugin in Obsidian.",
+        cls: `gdr-info-card compact ${plugins.length ? "gdr-kind-ready" : "gdr-kind-missing"}`
+      }));
+
+      for (const action of actions) {
+        cards.push(cardHtml({
+          title: action.label || action.button || "Azione",
+          meta: action.button ? `BUTTON[${action.button}]` : "Pulsante mancante",
+          body: action.use_when || "Condizione d'uso non dichiarata.",
+          importa: action.button ? "Pulsante Meta Bind dichiarato nel contratto workflow." : "Correggi workflows.yaml.",
+          cls: `gdr-info-card compact ${action.button ? "gdr-kind-ready" : "gdr-kind-missing"}`
+        }));
+      }
+
+      grid.innerHTML = cards.join("");
+    } catch (error) {
+      renderEmptyState(dv, {
+        title: "Workflow runtime non disponibile",
+        action: `Rigenera ${dataPath}; errore: ${error.message}`,
+        button: "npm run generate:workflow-data"
+      });
+    }
+  }
+
   function renderM7FamilyCards(dv, source = null, family = "generica") {
     const page = source ?? dv.current();
     const definitions = {
@@ -321,6 +380,7 @@
     renderPropagationTargets: continuityViews.renderPropagationTargets,
     renderWorldImpact: continuityViews.renderWorldImpact,
     renderWorldCreationStatus,
+    renderWorkflowCommandDeck,
     renderSessionMapCards: mapViews.renderSessionMapCards,
     renderTableCockpit: sessionViews.renderTableCockpit
   };
