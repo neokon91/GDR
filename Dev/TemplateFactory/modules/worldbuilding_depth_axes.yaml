@@ -2,6 +2,15 @@ id: worldbuilding_depth_axes
 purpose: Profili opzionali di profondita presi da FantasyWorld e ridotti a pochi assi giocabili per entita chiave.
 version: 0.1.0
 source_lab: /Users/andrea/Desktop/projects/FantasyWorld/YAML/altro/assi_tematici
+rights:
+  owner: neokon91
+  status: idea_originale_riservata
+  license: non_inclusa_nella_licenza_generale_del_vault
+  note: >
+    Gli assi tematici derivano da un lavoro originale personale sviluppato nel tempo.
+    Questo modulo e un riferimento sperimentale interno: non concede riuso, pubblicazione,
+    sublicenza o integrazione stabile fuori dal progetto senza autorizzazione esplicita
+    del titolare.
 rules:
   optional: true
   max_axes_per_profile: 5

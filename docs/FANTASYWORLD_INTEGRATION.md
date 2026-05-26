@@ -2,6 +2,12 @@
 
 FantasyWorld (`/Users/andrea/Desktop/projects/FantasyWorld`) è il laboratorio di riferimento; il vault GDR possiede la **pipeline di produzione** (TemplateFactory + release).
 
+## Diritti sugli assi tematici
+
+Gli assi tematici FantasyWorld sono una idea originale personale di neokon91 sviluppata nel tempo. Anche quando vengono citati o ridotti in `worldbuilding_depth_axes.yaml`, restano materiale riservato e **non** entrano automaticamente nella licenza generale del vault.
+
+Il loro uso nel repository e sperimentale/interno: non concede riuso, pubblicazione, sublicenza o integrazione stabile in prodotti derivati senza autorizzazione esplicita del titolare.
+
 ## Cosa è stato portato
 
 | FantasyWorld | GDR |
@@ -36,6 +42,7 @@ FantasyWorld non va importato in blocco: va usato come laboratorio da cui promuo
 ## Decisioni architetturali
 
 - FantasyWorld resta **laboratorio**, GDR resta **prodotto/release pipeline**.
+- Gli assi tematici FantasyWorld mantengono diritti separati e riservati; ogni promozione deve conservare il blocco diritti in `worldbuilding_depth_axes.yaml` e in `LICENSE.md`.
 - La direzione corretta e: YAML dichiarativo in TemplateFactory, JSON generato in `z.automazioni/data`, runtime Templater/JS nel vault, check automatici nel repository.
 - Non usare symlink, watcher o copia diretta da FantasyWorld: ogni promozione deve passare da modulo YAML, script npm e `npm run check`.
 - I contenuti worldbuilding profondi vanno trattati come generatori o profili opzionali, non come contenuto canonico imposto al DM.

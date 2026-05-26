@@ -170,3 +170,4 @@ La rigenerazione dello SRD e una procedura tecnica documentata in [[Dev/Sviluppo
 - Il vault e i suoi contenuti sono rilasciati con licenza **CC BY-NC-SA 4.0**. Vedi [[LICENSE]].
 - Gli script originali in `z.automazioni` sono rilasciati con licenza **MIT**. Vedi [[z.automazioni/LICENSE]].
 - Il materiale in `SRD` mantiene la propria licenza **CC-BY-4.0** e non e coperto dalla licenza del vault. Vedi [[SRD/Licenza SRD]].
+- Gli assi tematici FantasyWorld sono idea originale riservata e non sono coperti dalla licenza generale del vault. Vedi [[LICENSE]].

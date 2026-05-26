@@ -589,6 +589,7 @@ def validate_worldbuilding_depth_axes(modules: dict[str, dict], errors: list[str
     module = modules["worldbuilding_depth_axes"]
     profiles = module.get("profiles", {})
     rules = module.get("rules", {}) or {}
+    rights = module.get("rights", {}) or {}
     min_axes = int(rules.get("min_axes_per_profile", 3))
     max_axes = int(rules.get("max_axes_per_profile", 5))
     scale = rules.get("scale", {}) or {}
@@ -605,6 +606,13 @@ def validate_worldbuilding_depth_axes(modules: dict[str, dict], errors: list[str
     known_blueprints = set(resolved_blueprints(modules))
     known_profiles = known_entity_profiles | known_frontmatter_profiles | known_taxonomy_profiles | known_blueprints
 
+    # Gli assi sono una idea originale dell'autore: il blocco diritti e parte del contratto.
+    if rights.get("status") != "idea_originale_riservata":
+        fail("worldbuilding_depth_axes: status diritti non esplicito o non riservato", errors)
+    if rights.get("license") != "non_inclusa_nella_licenza_generale_del_vault":
+        fail("worldbuilding_depth_axes: licenza assi non separata dalla licenza generale", errors)
+    if not rights.get("owner") or not rights.get("note"):
+        fail("worldbuilding_depth_axes: owner/note diritti mancanti", errors)
     if rules.get("optional") is not True:
         fail("worldbuilding_depth_axes: gli assi devono restare opzionali", errors)
     if scale_min != 1 or scale_max != 5:
