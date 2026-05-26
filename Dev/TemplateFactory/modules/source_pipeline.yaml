@@ -109,6 +109,19 @@ steps:
       - node
       - z.automazioni/render_workflow_quick_actions.js
       - --check
+  validation_contract:
+    purpose: Verifica i contratti YAML usati dai check di dominio e qualita delle note.
+    sources:
+      - Dev/TemplateFactory/modules/validation_contract.yaml
+      - Dev/TemplateFactory/modules/fields_core.yaml
+    outputs:
+      - memoria
+    render:
+      - node
+      - z.automazioni/check_validation_contract.js
+    check:
+      - node
+      - z.automazioni/check_validation_contract.js
   release_folder_notes:
     purpose: Verifica le folder notes utente di release da release_boundary.yaml e Jinja.
     sources:

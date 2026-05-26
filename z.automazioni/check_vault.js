@@ -46,6 +46,7 @@ function loadYamlModule(relPath) {
 
 const FIELDS_CORE = loadYamlModule("Dev/TemplateFactory/modules/fields_core.yaml");
 const FRONTMATTER_PROFILES = loadYamlModule("Dev/TemplateFactory/modules/frontmatter_profiles.yaml");
+const VALIDATION_CONTRACT = loadYamlModule("Dev/TemplateFactory/modules/validation_contract.yaml");
 
 function coreFieldValues(fieldName) {
     for (const group of Object.values(FIELDS_CORE.fields ?? {})) {
@@ -69,47 +70,64 @@ function requiredCoreFieldValues(fieldName) {
 }
 
 function requiredFieldsByCategoryFromProfiles() {
-    const contract = FRONTMATTER_PROFILES.validation_contract?.required_fields_by_category ?? {};
+    const contract = VALIDATION_CONTRACT.required_fields_by_category ?? {};
     const entries = Object.entries(contract);
     if (!entries.length) {
-        throw new Error("Dev/TemplateFactory/modules/frontmatter_profiles.yaml: validation_contract.required_fields_by_category vuoto o mancante");
+        throw new Error("Dev/TemplateFactory/modules/validation_contract.yaml: required_fields_by_category vuoto o mancante");
     }
     return Object.fromEntries(entries.map(([category, fields]) => {
         const requiredFields = (fields ?? [])
             .map(field => String(field))
             .filter(Boolean);
         if (!requiredFields.length) {
-            throw new Error(`Dev/TemplateFactory/modules/frontmatter_profiles.yaml: categoria ${category} senza campi richiesti`);
+            throw new Error(`Dev/TemplateFactory/modules/validation_contract.yaml: categoria ${category} senza campi richiesti`);
         }
         return [category, requiredFields];
     }));
 }
 
 function requiredValidationList(key) {
-    const values = FRONTMATTER_PROFILES.validation_contract?.[key] ?? [];
+    const values = VALIDATION_CONTRACT[key] ?? [];
     const normalized = values
         .map(value => String(value))
         .filter(Boolean);
     if (!normalized.length) {
-        throw new Error(`Dev/TemplateFactory/modules/frontmatter_profiles.yaml: validation_contract.${key} vuoto o mancante`);
+        throw new Error(`Dev/TemplateFactory/modules/validation_contract.yaml: ${key} vuoto o mancante`);
     }
     return new Set(normalized);
 }
 
 function requiredValidationSetMap(key) {
-    const contract = FRONTMATTER_PROFILES.validation_contract?.[key] ?? {};
+    const contract = VALIDATION_CONTRACT[key] ?? {};
     const entries = Object.entries(contract);
     if (!entries.length) {
-        throw new Error(`Dev/TemplateFactory/modules/frontmatter_profiles.yaml: validation_contract.${key} vuoto o mancante`);
+        throw new Error(`Dev/TemplateFactory/modules/validation_contract.yaml: ${key} vuoto o mancante`);
     }
     return Object.fromEntries(entries.map(([category, values]) => {
         const normalized = (values ?? [])
             .map(value => String(value))
             .filter(Boolean);
         if (!normalized.length) {
-            throw new Error(`Dev/TemplateFactory/modules/frontmatter_profiles.yaml: validation_contract.${key}.${category} vuoto`);
+            throw new Error(`Dev/TemplateFactory/modules/validation_contract.yaml: ${key}.${category} vuoto`);
         }
         return [category, new Set(normalized)];
+    }));
+}
+
+function requiredStateReadyRequirements() {
+    const ready = VALIDATION_CONTRACT.state_ready_requirements?.pronto ?? {};
+    const entries = Object.entries(ready);
+    if (!entries.length) {
+        throw new Error("Dev/TemplateFactory/modules/validation_contract.yaml: state_ready_requirements.pronto vuoto o mancante");
+    }
+    return Object.fromEntries(entries.map(([categoryOrType, requirement]) => {
+        const anyOfFields = (requirement?.any_of_fields ?? [])
+            .map(field => String(field))
+            .filter(Boolean);
+        if (!anyOfFields.length) {
+            throw new Error(`Dev/TemplateFactory/modules/validation_contract.yaml: state_ready_requirements.pronto.${categoryOrType}.any_of_fields vuoto`);
+        }
+        return [categoryOrType, anyOfFields];
     }));
 }
 
@@ -168,6 +186,7 @@ const REQUIRED_FILES = [
     "Dev/TemplateFactory/modules/metabind_config.yaml",
     "Dev/TemplateFactory/modules/bases_views.yaml",
     "Dev/TemplateFactory/modules/frontmatter_profiles.yaml",
+    "Dev/TemplateFactory/modules/validation_contract.yaml",
     "Dev/TemplateFactory/modules/runtime_profiles.yaml",
     "Dev/TemplateFactory/modules/entity_depth.yaml",
     "Dev/TemplateFactory/modules/worldbuilding_depth_axes.yaml",
@@ -232,6 +251,7 @@ const REQUIRED_LAYER_FILES = [
     "z.automazioni/check_m11_fixture.js",
     "z.automazioni/check_runtime_load.js",
     "z.automazioni/check_smoke.js",
+    "z.automazioni/check_validation_contract.js",
     "z.automazioni/check_release_artifact.js",
     "z.automazioni/check_release.js",
     "z.automazioni/audit_template_migration.py",
@@ -300,6 +320,7 @@ const PLAYABLE_MAP_USES = new Set(["zoom", "esagoni", "dungeon", "scena"]);
 const STRUCTURED_MAP_USES = new Set(["fronte", "indizi", "regione"]);
 const ALLOWED_TYPES_BY_CATEGORY = requiredValidationSetMap("allowed_types_by_category");
 const REQUIRED_FIELDS_BY_CATEGORY = requiredFieldsByCategoryFromProfiles();
+const READY_REQUIREMENTS_BY_CATEGORY_OR_TYPE = requiredStateReadyRequirements();
 
 const errors = [];
 const warnings = [];
@@ -904,17 +925,7 @@ for (const [fileRel, fm] of realEntries) {
     }
 
     if (fm.stato === "pronto") {
-        const requiredByCategory = {
-            mondo: ["luoghi_iconici", "fazioni_principali", "culture_fondative", "misteri_pubblici"],
-            sessione: ["mondo", "campagne", "luoghi", "missioni"],
-            missione: ["mondo", "luoghi", "fazioni", "committente"],
-            incontro: ["luogo", "creature", "missioni", "fazioni"],
-            png: ["mondo", "luogo", "fazioni"],
-            luogo: ["mondo", "luogo_padre", "fazioni"],
-            fazione: ["mondo", "luoghi", "rivali"],
-            tracciato: ["mondo", "missioni", "fazioni", "luoghi"]
-        };
-        const fields = requiredByCategory[fm.tipo] ?? requiredByCategory[fm.categoria] ?? null;
+        const fields = READY_REQUIREMENTS_BY_CATEGORY_OR_TYPE[fm.tipo] ?? READY_REQUIREMENTS_BY_CATEGORY_OR_TYPE[fm.categoria] ?? null;
 
         if (fields && !hasAny(fm, fields)) {
             warnings.push(`${fileRel}: nota pronta senza collegamenti minimi (${fields.join(", ")})`);
