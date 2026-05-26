@@ -69,6 +69,7 @@ const REQUIRED_FILES = [
     "Dev/TemplateFactory/modules/runtime_profiles.yaml",
     "Dev/TemplateFactory/modules/entity_depth.yaml",
     "Dev/TemplateFactory/modules/worldbuilding_depth_axes.yaml",
+    "Dev/TemplateFactory/modules/demo_contract.yaml",
     "Dev/TemplateFactory/modules/taxonomy_depth.yaml",
     "Dev/TemplateFactory/modules/dnd55_options.yaml",
     "Dev/TemplateFactory/modules/srd_character_build.yaml",

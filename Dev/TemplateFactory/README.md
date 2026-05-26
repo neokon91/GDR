@@ -122,6 +122,8 @@ Le viste `renderDnd55MaterialPipeline` e `renderCombatReadiness` sono runtime di
 
 Il render finale valida anche i blocchi Tabs: ogni blocco ` ````tabs ` deve essere chiuso, contenere almeno una `tab:`, non avere testo prima della prima tab, non avere tab duplicate o vuote e non annidare altri blocchi Tabs a quattro backtick.
 
+`demo_contract.yaml` definisce la demo finale come contratto di codice: generatori ammessi, sorgenti demo vietate, gate richiesti e scenario minimo. Il controllo dedicato e `npm run check:demo-contract`.
+
 ## Regola Italiano D&D 5.5
 
 `dnd55_options.yaml` e la fonte per valori selezionabili e label visibili al DM. I valori utente devono essere in italiano; le chiavi tecniche possono restare compatibili con plugin e renderer quando necessario.

@@ -36,6 +36,7 @@ Completato:
 - PG/SRD ora include il primo catalogo talenti di origine referenziato dai background; `check:srd-character-data` blocca background con `talento_origine` non esistente.
 - Gli assi tematici FantasyWorld sono stati portati in forma selettiva in `worldbuilding_depth_axes.yaml`: profili iniziali fazione, cultura, magia e luogo; uso opzionale, scala 1-5, massimo cinque assi per profilo.
 - Vincolo diritti: gli assi tematici FantasyWorld sono idea originale riservata di neokon91, non inclusa nella licenza generale del vault. `check:templates` deve fallire se il blocco diritti del modulo viene rimosso o allentato.
+- Demo finale come codice: `demo_contract.yaml` definisce generatori, divieti sorgente, gate richiesti e scenario minimo; `check:demo-contract` lo verifica dentro `npm run check`.
 - Taglio runtime avanzato: mappe in `z.engine/session_maps.js`, pipeline D&D in `z.engine/session_dnd.js`, player view in `z.engine/session_player.js`, continuita in `z.engine/session_continuity.js`, sessione/live/post in `z.engine/session_runtime.js`, bridge pubblico ridotto in `z.engine/session_views.js`.
 - Valore plugin reso operativo: [[Risorse/Mappe/Mappe]] mostra la prossima azione mappa per la sessione, [[Risorse/Task DM]] separa preparazione e post-sessione dalle bacheche Kanban.
 - Calendarium, Media Extended e Fantasy Content Generator hanno viste operative: [[Mondi/Calendario]] mostra la prossima scadenza narrativa, [[Risorse/Media Scene]] mostra media per sessione attiva, [[Risorse/Smistamento Bozze Generate]] mostra la prossima bozza da decidere.

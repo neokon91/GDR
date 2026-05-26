@@ -38,6 +38,7 @@ REQUIRED_MODULES = {
     "runtime_profiles",
     "entity_depth",
     "worldbuilding_depth_axes",
+    "demo_contract",
     "taxonomy_depth",
     "dnd55_options",
     "link_targets",

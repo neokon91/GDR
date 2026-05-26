@@ -1,0 +1,63 @@
+id: demo_contract
+purpose: Contratto dichiarativo per mantenere la demo finale come codice generato e verificabile.
+version: 0.1.0
+status: pre_finale
+policy:
+  source_demo_allowed: false
+  output_root: dist/vault-gdr-clean
+  final_demo_only_after_release_contract: true
+  note: >
+    La demo finale non deve vivere come note sorgente. I generatori producono artefatti in dist/
+    e i check verificano flussi, categorie, sicurezza giocatori e continuita.
+generators:
+  fixture:
+    script: z.automazioni/generate_demo_fixture.js
+    npm: generate:demo-fixture
+    role: prova tecnica della catena scelta -> conseguenza -> propagazione
+  demo_world:
+    script: z.automazioni/generate_demo_world.js
+    npm: generate:demo-world
+    role: demo minima di primo avvio, non contenuto sorgente
+checks:
+  required_npm:
+    - check:smoke
+    - check:m11
+    - check:release-artifact
+  forbidden_source_files:
+    - Mondi/[Demo] Regno di Prova.md
+    - Mondi/Brumafonda Demo.md
+    - Campagne/Sale Sotto La Nebbia/Sale Sotto La Nebbia.md
+    - Mondi/Culture/Custodi Delle Saline.md
+    - Mondi/Fazioni/Consorzio Del Sale Nero.md
+    - Mondi/Religioni/Culto Della Lanterna Bassa.md
+    - Mondi/Luoghi/Porto Di Brumafonda.md
+    - Mondi/Mercati/Mercato Del Sale Nero.md
+    - Risorse/Mappe/Mappa Pubblica Di Brumafonda.md
+    - Mondi/Dispense/Avviso Della Dogana Di Brumafonda.md
+    - Mondi/Missioni/Recuperare La Campana Sommersa.md
+    - Mondi/Sessioni/2026-05-28 - La Campana Nella Nebbia.md
+    - Mondi/Timeline/La Marea Ha Preso Il Faro Vecchio.md
+final_demo_minimum:
+  categories:
+    - mondo
+    - campagna
+    - luogo
+    - fazione
+    - missione
+    - sessione
+    - tracciato
+    - incontro
+    - creatura
+    - oggetto
+    - evento storico
+  flows:
+    - scelta
+    - conseguenza
+    - entita_impattate
+    - propaga_a
+    - propagazione_stato
+    - player_safe
+  player_safe_surfaces:
+    - Hub/Vista Giocatori.md
+    - Risorse/Post Sessione Guidato.md
+    - Hub/Durante il Gioco.md
