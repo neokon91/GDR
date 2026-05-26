@@ -48,13 +48,21 @@ async function wizard_layer(tp, wizard = "") {
             return "";
         }
 
-        const sceltaGiocatori = await helpers.promptOptional(tp, "Scelta dei giocatori");
-        const cambiamentoMondo = await helpers.promptOptional(tp, "Cosa cambia nel mondo");
-        const chiReagisce = await helpers.promptOptional(tp, "Chi reagisce prima della prossima sessione");
-        const recapPubblico = await helpers.promptOptional(tp, "Recap pubblico");
-        const recapDm = await helpers.promptOptional(tp, "Recap DM");
-        const prossimaApertura = await helpers.promptOptional(tp, "Prossima apertura");
-        const output = await helpers.promptOptional(tp, "Output utile per la prossima sessione");
+        const meta = session.frontmatter ?? {};
+        const compactField = value => helpers.normalizeFieldArray(value).filter(Boolean).join("; ");
+        const appendUniqueText = (entries, text) => {
+            const normalized = helpers.normalizeFieldArray(entries);
+            return text && !normalized.includes(text) ? [...normalized, text] : normalized;
+        };
+
+        // Il post-sessione deve riusare cio che e gia stato scritto live, non farlo reinserire da zero.
+        const sceltaGiocatori = await helpers.promptOptional(tp, "Scelta dei giocatori", compactField(meta.decisioni_prese ?? meta.scelta));
+        const cambiamentoMondo = await helpers.promptOptional(tp, "Cosa cambia nel mondo", compactField(meta.conseguenze ?? meta.impatto));
+        const chiReagisce = await helpers.promptOptional(tp, "Chi reagisce prima della prossima sessione", compactField(meta.propaga_a ?? meta.entita_impattate));
+        const recapPubblico = await helpers.promptOptional(tp, "Recap pubblico", compactField(meta.recap_pubblico));
+        const recapDm = await helpers.promptOptional(tp, "Recap DM", compactField(meta.recap_dm));
+        const prossimaApertura = await helpers.promptOptional(tp, "Prossima apertura", meta.prossima_apertura ?? meta.prossima_mossa ?? "");
+        const output = await helpers.promptOptional(tp, "Output utile per la prossima sessione", compactField(meta.output_sessione));
 
         await helpers.processFrontmatter(session.file, fm => {
             fm.stato = "giocata";
@@ -66,20 +74,26 @@ async function wizard_layer(tp, wizard = "") {
             fm.decisioni_prese = helpers.normalizeFieldArray(fm.decisioni_prese);
             fm.propaga_a = helpers.normalizeFieldArray(fm.propaga_a);
 
-            if (sceltaGiocatori) fm.decisioni_prese.push(sceltaGiocatori);
-            if (cambiamentoMondo) fm.conseguenze.push(cambiamentoMondo);
+            if (sceltaGiocatori) fm.decisioni_prese = appendUniqueText(fm.decisioni_prese, sceltaGiocatori);
+            if (cambiamentoMondo) fm.conseguenze = appendUniqueText(fm.conseguenze, cambiamentoMondo);
             if (chiReagisce) {
-                fm.propaga_a.push(chiReagisce);
+                fm.propaga_a = appendUniqueText(fm.propaga_a, chiReagisce);
                 fm.aggiornamenti_richiesti = helpers.normalizeFieldArray(fm.aggiornamenti_richiesti);
-                fm.aggiornamenti_richiesti.push(`Post-sessione: ${chiReagisce} reagisce a ${cambiamentoMondo || sceltaGiocatori || "quanto accaduto"}`);
+                fm.aggiornamenti_richiesti = appendUniqueText(
+                    fm.aggiornamenti_richiesti,
+                    `Post-sessione: ${chiReagisce} reagisce a ${cambiamentoMondo || sceltaGiocatori || "quanto accaduto"}`
+                );
                 fm.propagazione_stato = "aperta";
             }
-            if (recapPubblico) fm.recap_pubblico.push(recapPubblico);
-            if (recapDm) fm.recap_dm.push(recapDm);
+            if (recapPubblico) fm.recap_pubblico = appendUniqueText(fm.recap_pubblico, recapPubblico);
+            if (recapDm) fm.recap_dm = appendUniqueText(fm.recap_dm, recapDm);
             if (prossimaApertura) fm.prossima_apertura = prossimaApertura;
-            if (output) fm.output_sessione.push(output);
+            if (output) fm.output_sessione = appendUniqueText(fm.output_sessione, output);
             if (sceltaGiocatori || cambiamentoMondo) {
-                fm.output_sessione.push(`Continuita: ${[sceltaGiocatori, cambiamentoMondo, chiReagisce].filter(Boolean).join(" -> ")}`);
+                fm.output_sessione = appendUniqueText(
+                    fm.output_sessione,
+                    `Continuita: ${[sceltaGiocatori, cambiamentoMondo, chiReagisce].filter(Boolean).join(" -> ")}`
+                );
             }
         });
 
