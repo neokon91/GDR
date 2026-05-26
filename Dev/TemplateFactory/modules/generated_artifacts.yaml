@@ -14,12 +14,14 @@ policy:
     - .obsidian/plugins/obsidian-meta-bind-plugin/data.json
   local_debug_outputs:
     - Dev/TemplateFactory/examples/generated/
+    - dist/
+    - z.modelli/
   rule: I file generati non sono fonte di verita. Se divergono dai sorgenti YAML/Jinja, fallisce npm run check.
 artifacts:
   template_materialized:
     source: Dev/TemplateFactory/modules/template_blueprints.yaml
     jinja: Dev/TemplateFactory/jinja
-    target_manifest: z.modelli/.templatefactory-manifest.json
+    target_manifest: z.modelli/.templatefactory-manifest.json nella release generata
     check: python3 z.automazioni/check_generation_contract.py
   workflow_data:
     source: Dev/TemplateFactory/modules/workflows.yaml

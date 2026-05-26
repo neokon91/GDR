@@ -10,7 +10,7 @@ Script usati da Templater, dashboard e manutenzione del vault.
 | `check_template_factory.py` | Valida moduli YAML, blueprint e rendering Jinja in memoria. |
 | `check_smoke.js` | Valida il gate statico della demo finale e del player-safe prima dello smoke visuale. |
 | `check_release.js` | Valida versione, changelog e verifica automatica della release pulita. |
-| `render_template_factory.py` | Renderizza anteprime locali ignorate o materializza template finali in `z.modelli`. |
+| `render_template_factory.py` | Renderizza anteprime locali ignorate o materializza template finali in `z.modelli` dentro output locali/release. |
 | `generate_workflow_data.js` | Genera JSON workflow da `workflows.yaml` e verifica che resti sincronizzato. |
 | `check_workflow_quick_actions.js` | Verifica che le pagine operative espongano i pulsanti rapidi dichiarati in YAML. |
 | `render_workflow_quick_actions.js` | Renderizza nelle pagine operative blocchi Markdown statici derivati dalle azioni rapide YAML. |
@@ -42,7 +42,7 @@ Script usati da Templater, dashboard e manutenzione del vault.
 
 ## Script Di Creazione
 
-Gli altri file `.js` corrispondono ai template in `z.modelli/`. Il nome dello script deve restare coerente con le chiamate `tp.user.*` nei template.
+Gli altri file `.js` corrispondono ai template generati in `z.modelli/`. Il nome dello script deve restare coerente con le chiamate `tp.user.*` nei template.
 
 Esempio: `z.modelli/dm/Sessione.md` usa `tp.user.sessione`, quindi lo script deve restare `sessione.js`.
 

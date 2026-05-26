@@ -2,6 +2,7 @@
 
 const fs = require("fs");
 const path = require("path");
+const { execFileSync } = require("child_process");
 const {
     hasAny,
     hasValue,
@@ -600,6 +601,34 @@ function addGeneratedTemplatePath(templatePath) {
 const templateFactoryManifest = readOptionalJsonRel("z.modelli/.templatefactory-manifest.json");
 for (const entry of templateFactoryManifest?.files ?? []) {
     addGeneratedTemplatePath(entry?.path);
+}
+
+try {
+    const stdout = execFileSync("python3", ["-c", [
+        "import json, sys",
+        "from pathlib import Path",
+        "root = Path.cwd()",
+        "sys.path.insert(0, str(root / 'z.automazioni'))",
+        "from render_template_factory import materialized_targets",
+        "from template_factory_utils import load_modules, resolved_blueprints, ROOT",
+        "modules = load_modules()",
+        "blueprints = resolved_blueprints(modules)",
+        "paths = []",
+        "for name, blueprint in sorted(blueprints.items()):",
+        "    for target in materialized_targets(name, blueprint):",
+        "        paths.append(str(target.relative_to(ROOT)))",
+        "print(json.dumps(paths, ensure_ascii=False))"
+    ].join("\n")], {
+        cwd: ROOT,
+        encoding: "utf8",
+        env: { ...process.env, PYTHONDONTWRITEBYTECODE: "1" },
+        maxBuffer: 1024 * 1024
+    });
+    for (const templatePath of JSON.parse(stdout)) {
+        addGeneratedTemplatePath(templatePath);
+    }
+} catch (error) {
+    errors.push(`TemplateFactory: impossibile leggere i target generati (${error.message})`);
 }
 
 function isGeneratedTemplatePath(fileRel) {

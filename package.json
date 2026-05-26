@@ -21,7 +21,7 @@
     "check:smoke": "node z.automazioni/check_smoke.js && node z.automazioni/check_runtime_load.js",
     "check:m11": "node z.automazioni/check_m11_fixture.js",
     "check:release": "node z.automazioni/check_release.js",
-    "check:release-artifact": "node z.automazioni/check_release_artifact.js --with-demo --keep",
+    "check:release-artifact": "node z.automazioni/check_release_artifact.js --with-demo",
     "check:importers": "node z.automazioni/check_importers.js",
     "render:templates": "python3 z.automazioni/render_template_factory.py",
     "render:metadata": "python3 z.automazioni/render_metadata_surfaces.py",

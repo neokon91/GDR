@@ -22,7 +22,7 @@ La generazione deve servire il profilo principale D&D 5.5/SRD senza legare il Co
 2. `npm run import:srd-data` → JSON in `z.automazioni/data/srd/`.
 3. `z.automazioni/pg.js` legge i JSON e compone frontmatter (`caratteristiche`, `abilita`, `punti_ferita`, …).
 4. Jinja usa `pg_mechanics_schema.yaml` come contesto di render e `jinja/macros/pg_mechanics.j2` + `jinja/partials/pg_scheda_meccanica.md.j2` per il tab **Scheda** nel blueprint `pg`.
-5. `npm run render:templates` puo produrre anteprime locali ignorate da Git; `npm run generate:templates` materializza i template finali in `z.modelli`.
+5. `npm run render:templates` puo produrre anteprime locali ignorate da Git; `npm run generate:templates` materializza i template finali in `z.modelli` solo come output locale o release.
 
 ## Pipeline Prevista
 
@@ -30,7 +30,7 @@ La generazione deve servire il profilo principale D&D 5.5/SRD senza legare il Co
 2. Validare chiavi obbligatorie: `id`, `purpose`, `version`.
 3. Comporre sezioni, callout, tab, input/pulsanti Meta Bind, blocchi Dataview e versioni Markdown leggibili.
 4. Renderizzare template sorgente con Jinja2.
-5. Scrivere in `z.modelli/`, `z.fileclass/` o `z.bases/` solo dopo review.
+5. Scrivere in `z.fileclass/` o `z.bases/` solo dopo review; `z.modelli/` resta generato da YAML/Jinja.
 6. Eseguire `npm run check`.
 7. Verificare in Obsidian con un collaudo visuale.
 
@@ -63,6 +63,8 @@ npm run audit:templates
 ```
 
 `render:templates` scrive solo anteprime locali ignorate in `Dev/TemplateFactory/examples/generated/`. Non modifica `z.modelli`, `z.fileclass` o `z.bases`.
+
+`release:clean` materializza `z.modelli` direttamente dentro `dist/vault-gdr-clean`: il repo sorgente non deve tracciare template finali generati.
 
 `audit:templates` confronta anteprime locali e target dichiarati in `template_blueprints.yaml`; il report resta output locale ignorato.
 

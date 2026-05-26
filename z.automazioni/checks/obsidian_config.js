@@ -32,6 +32,7 @@ function validateObsidianConfig({
     if (iconConfig) {
         for (const key of Object.keys(iconConfig)) {
             if (key === "settings") continue;
+            if (key === "z.modelli") continue;
             if (isGeneratedTemplatePath(key)) continue;
             if (!existsRel(key) && !existsRel(`${key}.md`)) {
                 errors.push(`Iconize punta a un percorso mancante: ${key}`);

@@ -27,6 +27,7 @@ const FORBIDDEN_DATAVIEWJS_PATTERNS = [
     [/\badapter\.write\b/, "adapter.write"]
 ];
 const errors = [];
+const generatedTemplatePaths = new Set();
 
 const ALLOWED_META_BIND_ACTION_TYPES = new Set([
     "command",
@@ -112,6 +113,48 @@ function fail(message) {
     errors.push(message);
 }
 
+function addGeneratedTemplatePath(templatePath) {
+    const normalized = String(templatePath ?? "").replace(/\\/g, "/").trim();
+    if (!normalized) return;
+    generatedTemplatePaths.add(normalized);
+    generatedTemplatePaths.add(normalized.replace(/\.md$/, ""));
+}
+
+function loadGeneratedTemplatePaths() {
+    try {
+        const stdout = execFileSync("python3", ["-c", [
+            "import json, sys",
+            "from pathlib import Path",
+            "root = Path.cwd()",
+            "sys.path.insert(0, str(root / 'z.automazioni'))",
+            "from render_template_factory import materialized_targets",
+            "from template_factory_utils import load_modules, resolved_blueprints, ROOT",
+            "modules = load_modules()",
+            "blueprints = resolved_blueprints(modules)",
+            "paths = []",
+            "for name, blueprint in sorted(blueprints.items()):",
+            "    for target in materialized_targets(name, blueprint):",
+            "        paths.append(str(target.relative_to(ROOT)))",
+            "print(json.dumps(paths, ensure_ascii=False))"
+        ].join("\n")], {
+            cwd: ROOT,
+            encoding: "utf8",
+            env: { ...process.env, PYTHONDONTWRITEBYTECODE: "1" },
+            maxBuffer: 1024 * 1024
+        });
+        for (const templatePath of JSON.parse(stdout)) addGeneratedTemplatePath(templatePath);
+    } catch (error) {
+        fail(`TemplateFactory: impossibile leggere i target generati (${error.message})`);
+    }
+}
+
+function isGeneratedTemplatePath(relPath) {
+    const normalized = String(relPath ?? "").replace(/\\/g, "/").trim();
+    if (!normalized) return false;
+    const withExtension = normalized.endsWith(".md") ? normalized : `${normalized}.md`;
+    return generatedTemplatePaths.has(normalized) || generatedTemplatePaths.has(withExtension);
+}
+
 function loadYaml(relPath) {
     const script = [
         "import json, sys, yaml",
@@ -161,6 +204,7 @@ function resolveObsidianTarget(target, root = ROOT) {
     const clean = target.split("#")[0].split("|")[0];
     if (!clean) return true;
     const candidates = [clean, `${clean}.md`, `${clean}.base`, `${clean}.canvas`, `${clean}.excalidraw.md`];
+    if (root === ROOT && candidates.some(candidate => isGeneratedTemplatePath(candidate))) return true;
     if (candidates.some(candidate => existsRel(candidate, root))) return true;
     const base = path.basename(clean);
     return walk(root, {
@@ -331,6 +375,8 @@ function validateMetaBindTargets(metaBind, root, firstRun, communityPlugins = []
             if (action.type === "templaterCreateNote" || action.type === "runTemplaterFile") {
                 if (!String(action.templateFile ?? "").trim()) {
                     fail(`Meta Bind: ${button.id} azione Templater senza templateFile`);
+                } else if (root === ROOT && isGeneratedTemplatePath(action.templateFile)) {
+                    continue;
                 } else if (!existsRel(action.templateFile, root)) {
                     fail(`Meta Bind: ${button.id} punta a template mancante ${action.templateFile}`);
                 }
@@ -451,6 +497,7 @@ function validateTemplaterWrappers(root = ROOT) {
             if (/\.(json|base|canvas|excalidraw|png|jpg|jpeg|webp|css|js)$/i.test(match[1])) continue;
             if (/\/README$/i.test(match[1]) || /\/README\.md$/i.test(match[1])) continue;
             const target = match[1].endsWith(".md") ? match[1] : `${match[1]}.md`;
+            if (root === ROOT && isGeneratedTemplatePath(target)) continue;
             if (!existsRel(target, root)) fail(`${fileRel}: riferimento Templater a template mancante ${target}`);
         }
     }
@@ -474,9 +521,8 @@ function validateDataviewSyntax(root = ROOT, firstRunOnly = false) {
 }
 
 function validateReleaseFirstRun() {
-    if (!fs.existsSync(OUT) || !fs.existsSync(ZIP)) {
-        execFileSync("node", ["z.automazioni/release_clean.js", "--with-demo", "--quiet"], { cwd: ROOT, stdio: "inherit" });
-    }
+    fs.rmSync(DIST, { recursive: true, force: true });
+    execFileSync("node", ["z.automazioni/release_clean.js", "--with-demo", "--quiet"], { cwd: ROOT, stdio: "inherit" });
     if (!fs.existsSync(OUT)) fail("release demo mancante: dist/vault-gdr-clean");
     if (!fs.existsSync(ZIP)) fail("zip release demo mancante: dist/vault-gdr-clean.zip");
 
@@ -533,6 +579,7 @@ function validateReleaseFirstRun() {
     }
 }
 
+loadGeneratedTemplatePaths();
 validatePluginContract();
 validateWorkflowRuntimeContract();
 validateRuntimeConfig(ROOT);
@@ -540,6 +587,8 @@ validateRuntimeButtonReferences(ROOT);
 validateTemplaterWrappers(ROOT);
 validateDataviewSyntax(ROOT);
 validateReleaseFirstRun();
+
+fs.rmSync(DIST, { recursive: true, force: true });
 
 if (errors.length) {
     console.error("Release quality non valida:");

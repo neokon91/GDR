@@ -62,7 +62,7 @@ def write_rendered(output_dir: Path, rendered_by_name: dict[str, str], clean: bo
     )
 
 
-def materialized_targets(name: str, blueprint: dict) -> list[Path]:
+def materialized_targets(name: str, blueprint: dict, target_root: Path = ROOT) -> list[Path]:
     output = blueprint.get("output", {})
     folder = output.get("folder")
     files = output.get("files") or []
@@ -71,17 +71,17 @@ def materialized_targets(name: str, blueprint: dict) -> list[Path]:
     if not files:
         raise ValueError(f"{name}: output.files mancante")
 
-    base = (ROOT / str(folder)).resolve()
+    base = (target_root / str(folder)).resolve()
     targets: list[Path] = []
     for file_name in files:
         target = (base / str(file_name)).resolve()
-        if not target.is_relative_to(ROOT):
+        if not target.is_relative_to(target_root):
             raise ValueError(f"{name}: output fuori repository ({target})")
         targets.append(target)
     return targets
 
 
-def write_materialized(rendered_by_name: dict[str, str], blueprints: dict[str, dict]) -> None:
+def write_materialized(rendered_by_name: dict[str, str], blueprints: dict[str, dict], target_root: Path = ROOT) -> None:
     manifest = {
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "source": "Dev/TemplateFactory",
@@ -90,16 +90,16 @@ def write_materialized(rendered_by_name: dict[str, str], blueprints: dict[str, d
     }
 
     for name, rendered in sorted(rendered_by_name.items()):
-        for target in materialized_targets(name, blueprints[name]):
+        for target in materialized_targets(name, blueprints[name], target_root):
             target.parent.mkdir(parents=True, exist_ok=True)
             target.write_text(rendered, encoding="utf-8")
             manifest["files"].append({
                 "blueprint": name,
-                "path": str(target.relative_to(ROOT)),
+                "path": str(target.relative_to(target_root)),
                 "bytes": len(rendered.encode("utf-8")),
             })
 
-    manifest_path = ROOT / "z.modelli" / ".templatefactory-manifest.json"
+    manifest_path = target_root / "z.modelli" / ".templatefactory-manifest.json"
     manifest_path.parent.mkdir(parents=True, exist_ok=True)
     manifest_path.write_text(
         json.dumps(manifest, ensure_ascii=False, indent=2) + "\n",
@@ -113,6 +113,7 @@ def main() -> int:
     parser.add_argument("--no-clean", action="store_true", help="Non pulire la cartella output prima di scrivere.")
     parser.add_argument("--materialize", action="store_true", help="Scrive gli output generati in z.modelli.")
     parser.add_argument("--materialize-only", action="store_true", help="Scrive solo gli output in z.modelli senza aggiornare le preview.")
+    parser.add_argument("--target-root", default=str(ROOT), help="Radice in cui materializzare z.modelli.")
     parser.add_argument("--quiet", action="store_true", help="Non stampa messaggi OK; gli errori restano visibili.")
     args = parser.parse_args()
 
@@ -134,10 +135,15 @@ def main() -> int:
             print(f"- {error}")
         return 1
 
+    target_root = Path(args.target_root)
+    if not target_root.is_absolute():
+        target_root = ROOT / target_root
+    target_root = target_root.resolve()
+
     if args.materialize_only:
-        write_materialized(rendered_by_name, blueprints)
+        write_materialized(rendered_by_name, blueprints, target_root)
         if not args.quiet:
-            print(f"TemplateFactory materialize OK: {len(rendered_by_name)} output in z.modelli.")
+            print(f"TemplateFactory materialize OK: {len(rendered_by_name)} output in {display_path(target_root / 'z.modelli')}.")
         return 0
 
     output_dir = Path(args.output)
@@ -146,7 +152,7 @@ def main() -> int:
     write_rendered(output_dir, rendered_by_name, clean=not args.no_clean)
     message = f"TemplateFactory render OK: {len(rendered_by_name)} preview in {display_path(output_dir)}"
     if args.materialize:
-        write_materialized(rendered_by_name, blueprints)
+        write_materialized(rendered_by_name, blueprints, target_root)
         message += " e output materializzati in z.modelli"
     if not args.quiet:
         print(f"{message}.")

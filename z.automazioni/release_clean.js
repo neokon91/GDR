@@ -274,6 +274,7 @@ function shouldIncludeRoot(relPath, entry) {
 }
 
 function shouldSkip(relPath, entry) {
+    if (entry.isDirectory() && entry.name === "__pycache__") return true;
     if (EXCLUDED_FILES.has(entry.name)) return true;
     const top = topSegment(relPath);
     if (EXCLUDED_DIRS.has(top)) return true;
@@ -483,14 +484,20 @@ function zipIfAvailable() {
     }
 }
 
-function materializeTemplates() {
-    execFileSync("python3", [TEMPLATE_FACTORY_RENDERER, "--materialize-only", ...(QUIET ? ["--quiet"] : [])], { cwd: ROOT, stdio: "inherit" });
+function materializeTemplates(targetRoot) {
+    execFileSync("python3", [
+        TEMPLATE_FACTORY_RENDERER,
+        "--materialize-only",
+        "--target-root",
+        targetRoot,
+        ...(QUIET ? ["--quiet"] : [])
+    ], { cwd: ROOT, stdio: "inherit" });
 }
 
-materializeTemplates();
 fs.rmSync(OUT, { recursive: true, force: true });
 fs.mkdirSync(DIST, { recursive: true });
 copyDir(ROOT, OUT, ROOT);
+materializeTemplates(OUT);
 writeGeneratedReleaseNotes();
 if (INCLUDE_DEMO) {
     const result = generateDemoWorld({ outDir: "dist/vault-gdr-clean", force: true });
