@@ -7,6 +7,15 @@ const { readJson: readJsonFile, readTextIfExists, rel: relativePath, repoPath, w
 const ROOT = process.cwd();
 const FIX = process.argv.includes("--fix");
 const IGNORED_DIRS = new Set([".git", "node_modules"]);
+const GENERATED_LOCAL_DIRS = [
+    "dist",
+    "z.modelli",
+    "Dev/TemplateFactory/examples/generated",
+    ".pytest_cache",
+    "__pycache__",
+    "z.automazioni/__pycache__",
+    "tests/__pycache__"
+];
 const JUNK_FILE_PATTERNS = [
     /^\.DS_Store$/,
     /^Thumbs\.db$/,
@@ -31,6 +40,18 @@ function readJson(file) {
 }
 
 const files = walk(ROOT, { ignoredDirs: IGNORED_DIRS });
+
+for (const relDir of GENERATED_LOCAL_DIRS) {
+    const target = repoPath(ROOT, relDir);
+    if (!fs.existsSync(target)) continue;
+
+    if (FIX) {
+        fs.rmSync(target, { recursive: true, force: true });
+        fixed.push(relDir);
+    } else {
+        errors.push(`${relDir}: cartella locale generata da rimuovere; usa npm run clean:repo`);
+    }
+}
 
 for (const file of files) {
     const basename = path.basename(file);
@@ -60,7 +81,7 @@ const gitignore = readTextIfExists(gitignorePath, null);
 if (gitignore === null) {
     errors.push(".gitignore mancante");
 } else {
-    for (const pattern of [".DS_Store", "Thumbs.db", "*.tmp", "*.bak", "*.orig", "*~", "dist/"]) {
+    for (const pattern of [".DS_Store", "Thumbs.db", "*.tmp", "*.bak", "*.orig", "*~", "dist/", "z.modelli/", "Dev/TemplateFactory/examples/generated/", "__pycache__/", "*.py[cod]", ".pytest_cache/"]) {
         if (!gitignore.includes(pattern)) {
             errors.push(`.gitignore: pattern mancante ${pattern}`);
         }
