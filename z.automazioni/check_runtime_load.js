@@ -13,6 +13,7 @@ const REQUIRED_EXPORTS = [
     "renderDnd55MaterialPipeline",
     "renderLiveCommandCenter",
     "renderM11ContinuityChain",
+    "renderOnboardingReadiness",
     "renderPlayerView",
     "renderPluginTroubleshooting",
     "renderPostSessionCommandCenter",
@@ -90,6 +91,13 @@ async function main() {
             views.renderPluginTroubleshooting(dv, "dashboard_dm");
             if (!rendered.some(node => String(node.innerHTML).includes("Fallback manuale"))) {
                 errors.push("renderPluginTroubleshooting: output senza fallback manuale");
+            }
+            await views.renderWorkflowCommandDeck(dv, "onboarding_utente", { mode: "simple" });
+            if (!rendered.some(node => String(node.innerHTML).includes("Percorso"))) {
+                errors.push("renderWorkflowCommandDeck: output semplice onboarding mancante");
+            }
+            if (rendered.some(node => String(node.innerHTML).includes("Plugin coinvolti"))) {
+                errors.push("renderWorkflowCommandDeck: output semplice onboarding espone diagnostica plugin");
             }
         }
     }

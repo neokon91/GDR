@@ -280,7 +280,7 @@
     grid.innerHTML = cards.join("");
   }
 
-  async function renderWorkflowCommandDeck(dv, workflowId) {
+  async function renderWorkflowCommandDeck(dv, workflowId, options = {}) {
     const dataPath = "z.automazioni/data/workflows/quick_actions.json";
 
     try {
@@ -303,6 +303,7 @@
       const entryPoints = asArray(workflow.entry_points);
       const actions = asArray(workflow.quick_actions);
       const actionGroups = Object.values(workflow.action_groups ?? {});
+      const simple = options.mode === "simple" || workflow.audience === "user";
       const entryStates = await Promise.all(entryPoints.map(async entry => [entry, await canReadRel(entry)]));
       const missingEntries = entryStates.filter(([, ok]) => !ok).map(([entry]) => entry);
       const metaBindStatus = pluginStatus("Meta Bind");
@@ -329,6 +330,16 @@
               ? `Abilita Meta Bind (${metaBindStatus.id}) nei plugin community.`
               : describeButtonTemplate(template);
 
+        if (simple && ready) {
+          return cardHtml({
+            title: action.label || button || (secondary ? "Azione secondaria" : "Azione"),
+            meta: secondary ? "Opzione utile" : "Azione principale",
+            body: action.use_when || "Usala quando serve.",
+            importa: "Se non risponde, usa la tabella di fallback in fondo alla pagina.",
+            cls: "gdr-info-card compact gdr-kind-ready"
+          });
+        }
+
         return cardHtml({
           title: action.label || button || (secondary ? "Azione secondaria" : "Azione"),
           meta: button ? `BUTTON[${button}] · ${ready ? "Pronto" : "Da controllare"}` : "Pulsante mancante",
@@ -339,18 +350,18 @@
       };
 
       cards.push(cardHtml({
-        title: "Flusso operativo",
-        meta: workflowId,
+        title: simple ? "Percorso" : "Flusso operativo",
+        meta: simple ? "Pronto da usare" : workflowId,
         body: workflow.user_goal || "Obiettivo workflow non dichiarato.",
         importa: entryPoints.length
           ? missingEntries.length
-            ? `Entry point mancanti: ${missingEntries.join(", ")}.`
-            : `Entry point verificati: ${entryPoints.join(", ")}.`
+            ? simple ? "Una pagina del percorso non e leggibile: apri Setup Guidato." : `Entry point mancanti: ${missingEntries.join(", ")}.`
+            : simple ? "Segui le azioni nell'ordine in cui compaiono." : `Entry point verificati: ${entryPoints.join(", ")}.`
           : "Manca una pagina operativa collegata.",
         cls: `gdr-info-card compact ${entryPoints.length && !missingEntries.length ? "gdr-kind-ready" : "gdr-kind-missing"}`
       }));
 
-      for (const plugin of plugins) {
+      for (const plugin of simple ? [] : plugins) {
         const status = pluginStatus(plugin);
         cards.push(cardHtml({
           title: plugin,
@@ -381,13 +392,15 @@
         }
       }
 
-      cards.push(cardHtml({
-        title: "Se un controllo non risponde",
-        meta: "Fallback operativo",
-        body: "Leggi la condizione d'uso dell'azione, apri manualmente la pagina o il template indicato e completa i campi richiesti nella nota.",
-        importa: "Il deck ora distingue plugin mancanti, template Meta Bind assenti ed entry point non leggibili.",
-        cls: "gdr-info-card compact"
-      }));
+      if (!simple) {
+        cards.push(cardHtml({
+          title: "Se un controllo non risponde",
+          meta: "Fallback operativo",
+          body: "Leggi la condizione d'uso dell'azione, apri manualmente la pagina o il template indicato e completa i campi richiesti nella nota.",
+          importa: "Il deck ora distingue plugin mancanti, template Meta Bind assenti ed entry point non leggibili.",
+          cls: "gdr-info-card compact"
+        }));
+      }
 
       grid.innerHTML = cards.join("");
     } catch (error) {
@@ -397,6 +410,73 @@
         button: "npm run generate:workflow-data"
       });
     }
+  }
+
+  function renderOnboardingReadiness(dv) {
+    const worlds = dv.pages('"Mondi"')
+      .where(p => isReal(p) && p.categoria === "mondo" && p.stato !== "archiviata")
+      .array();
+    const active = activeSession(dv);
+    const sessions = dv.pages('"Mondi/Sessioni"')
+      .where(p => isReal(p) && p.stato !== "archiviata")
+      .array();
+    const played = sessions.filter(p => ["giocata", "usata", "chiusa"].includes(String(p.stato ?? "")) || hasText(p.resoconto) || hasText(p.output_sessione));
+    const openConsequences = dv.pages('"Mondi" OR "Inbox"')
+      .where(p => isReal(p) && p.stato !== "archiviata")
+      .where(p => hasLinks(p.conseguenze) || hasLinks(p.entita_impattate) || hasLinks(p.propaga_a) || hasText(p.prossima_mossa))
+      .where(p => !["applicata", "propagata", "canonizzata"].includes(String(p.propagazione_stato ?? "")))
+      .array();
+
+    let card;
+    if (!worlds.length) {
+      card = {
+        title: "Fai questo adesso: crea il mondo",
+        meta: "Primo passo",
+        body: "Crea un mondo anche minimale. Bastano nome, tono e una promessa giocabile.",
+        importa: "Dopo il mondo potrai preparare la prima sessione.",
+        button: "BUTTON[nuovo-mondo-homebrew]",
+        cls: "gdr-info-card compact gdr-kind-missing"
+      };
+    } else if (!sessions.length) {
+      card = {
+        title: "Fai questo adesso: prepara una sessione",
+        meta: `${worlds.length} mondo/i trovati`,
+        body: "Crea o apri una sessione e collegala al mondo.",
+        importa: "Ti serve solo una prima scena pronta da giocare.",
+        button: "BUTTON[preparazione-sessione-risorse-preparazione-sessione]",
+        cls: "gdr-info-card compact gdr-kind-ready"
+      };
+    } else if (active) {
+      card = {
+        title: "Fai questo adesso: gioca",
+        meta: pageTitle(active) || "Sessione attiva",
+        body: "Apri il tavolo operativo e cattura quello che succede senza riordinare tutto subito.",
+        importa: "Il riordino arriva dopo la sessione.",
+        button: "BUTTON[gioca-hub-durante-il-gioco-durante-il-gioco]",
+        cls: "gdr-info-card compact gdr-kind-ready"
+      };
+    } else if (played.length && openConsequences.length) {
+      card = {
+        title: "Fai questo adesso: aggiorna il mondo",
+        meta: `${openConsequences.length} conseguenze o mosse aperte`,
+        body: "Scegli cosa cambia davvero e prepara la prossima mossa.",
+        importa: "Questo evita che gli appunti restino scollegati.",
+        button: "BUTTON[fuori-scena-hub-cosa-succede-fuori-scena-cosa-succede-fuori-scena]",
+        cls: "gdr-info-card compact gdr-kind-ready"
+      };
+    } else {
+      card = {
+        title: "Fai questo adesso: scegli la prossima sessione",
+        meta: `${sessions.length} sessione/i nel vault`,
+        body: "Apri Preparazione Sessione e rendi attiva quella che vuoi giocare.",
+        importa: "Una sola sessione attiva rende chiaro il tavolo operativo.",
+        button: "BUTTON[preparazione-sessione-risorse-preparazione-sessione]",
+        cls: "gdr-info-card compact gdr-kind-ready"
+      };
+    }
+
+    const grid = dv.el("div", "", { cls: "gdr-card-grid compact" });
+    grid.innerHTML = cardHtml(card);
   }
 
   function renderPluginTroubleshooting(dv, workflowId = "") {
@@ -557,6 +637,7 @@
     renderWorldImpact: continuityViews.renderWorldImpact,
     renderWorldCreationStatus,
     renderPluginTroubleshooting,
+    renderOnboardingReadiness,
     renderWorkflowCommandDeck,
     renderSessionMapCards: mapViews.renderSessionMapCards,
     renderTableCockpit: sessionViews.renderTableCockpit

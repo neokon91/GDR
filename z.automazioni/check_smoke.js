@@ -18,6 +18,17 @@ for (const marker of ["Crea Il Mondo", "Trasforma In Gioco", "Aggiorna Il Mondo"
         errors.push(`Smoke statico: Inizia Qui non contiene ${marker}`);
     }
 }
+if (!startHere.includes("renderOnboardingReadiness")) {
+    errors.push("Smoke statico: Inizia Qui non contiene renderOnboardingReadiness");
+}
+const visibleStartHere = startHere
+    .replace(/<!-- workflow:quick_actions:start [^>]+ -->[\s\S]*?<!-- workflow:quick_actions:end [^>]+ -->/g, "")
+    .replace(/```[\s\S]*?```/g, "");
+for (const jargon of ["Meta Bind", "Dataview", "Templater", "workflow", "runtime", "plugin", "entry point"]) {
+    if (visibleStartHere.includes(jargon)) {
+        errors.push(`Smoke statico: Inizia Qui espone gergo tecnico (${jargon})`);
+    }
+}
 
 const liveHub = readTextRel(ROOT, "Hub/Durante il Gioco.md");
 for (const marker of ["renderTableCockpit", "renderM11ContinuityChain", "BUTTON[registra-scelta-mondo]"]) {

@@ -19,8 +19,6 @@ Questa e la pagina da usare quando non sai cosa aprire. Il vault distribuito e g
 > [!regia] Azioni rapide
 > Partire da zero con il vault gia configurato, senza scegliere tra troppe dashboard.
 >
-> Plugin coinvolti: `Meta Bind`, `Dataview`, `Templater`.
->
 > **Crea mondo** - non hai ancora un mondo giocabile
 > `BUTTON[nuovo-mondo-homebrew]`
 >
@@ -60,13 +58,14 @@ Questa e la pagina da usare quando non sai cosa aprire. Il vault distribuito e g
 
 ```dataviewjs
 const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
-await gdr.renderWorkflowCommandDeck(dv, "onboarding_utente");
+await gdr.renderWorkflowCommandDeck(dv, "onboarding_utente", { mode: "simple" });
 ```
 
 ## Cosa Fare Adesso
 
 ```dataviewjs
 const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+gdr.renderOnboardingReadiness(dv);
 gdr.renderActiveSessionBanner(dv);
 gdr.renderActions(dv);
 ```

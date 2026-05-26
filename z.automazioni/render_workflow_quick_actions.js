@@ -24,10 +24,11 @@ function renderBlock(workflowId, workflow) {
     const lines = [];
     const plugins = workflow.required_plugins ?? [];
     const actionGroups = workflow.action_groups ?? {};
+    const userFacing = workflow.audience === "user";
     lines.push(markers(workflowId).start);
     lines.push("> [!regia] Azioni rapide");
     lines.push(`> ${workflow.user_goal}`);
-    if (plugins.length) {
+    if (plugins.length && !userFacing) {
         lines.push(">");
         lines.push(`> Plugin coinvolti: ${plugins.map(plugin => `\`${plugin}\``).join(", ")}.`);
     }

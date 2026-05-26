@@ -3,6 +3,7 @@ purpose: Flussi principali da coprire con template generati e integrazioni plugi
 version: 0.1.0
 workflows:
   onboarding_utente:
+    audience: user
     user_goal: Partire da zero con il vault gia configurato, senza scegliere tra troppe dashboard.
     entry_points:
       - Inizia Qui.md

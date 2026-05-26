@@ -4,6 +4,7 @@
   "purpose": "Azioni rapide operative derivate da workflows.yaml per runtime, check e documentazione.",
   "workflows": {
     "onboarding_utente": {
+      "audience": "user",
       "user_goal": "Partire da zero con il vault gia configurato, senza scegliere tra troppe dashboard.",
       "entry_points": [
         "Inizia Qui.md"
@@ -80,6 +81,7 @@
       }
     },
     "setup_guidato": {
+      "audience": "",
       "user_goal": "Capire se il vault e pronto senza leggere impostazioni tecniche.",
       "entry_points": [
         "Risorse/Setup Guidato.md"
@@ -138,6 +140,7 @@
       }
     },
     "prima_sessione_rapida": {
+      "audience": "",
       "user_goal": "Preparare, giocare e chiudere una prima sessione con il minimo indispensabile.",
       "entry_points": [
         "Risorse/Prima Sessione In 15 Minuti.md"
@@ -204,6 +207,7 @@
       }
     },
     "dashboard_dm": {
+      "audience": "",
       "user_goal": "Scegliere in pochi secondi se preparare, giocare, consolidare o creare materiale.",
       "entry_points": [
         "Hub/1. DM Dashboard.md"
@@ -353,6 +357,7 @@
       }
     },
     "espandi_mondo": {
+      "audience": "",
       "user_goal": "Aggiungere entita vive collegate e giocabili.",
       "entry_points": [
         "Hub/Worldbuilder Dashboard.md"
@@ -608,6 +613,7 @@
       }
     },
     "fuori_scena": {
+      "audience": "",
       "user_goal": "Scegliere cosa reagisce tra una sessione e l'altra senza perdere conseguenze aperte.",
       "entry_points": [
         "Hub/Cosa Succede Fuori Scena.md"
@@ -706,6 +712,7 @@
       }
     },
     "prepara_sessione": {
+      "audience": "",
       "user_goal": "Preparare una sessione radicata nel mondo.",
       "entry_points": [
         "Risorse/Preparazione Sessione.md"
@@ -808,6 +815,7 @@
       }
     },
     "gioca_live": {
+      "audience": "",
       "user_goal": "Gestire sessione, tiri, incontri, media e appunti live da una schermata.",
       "entry_points": [
         "Hub/Durante il Gioco.md"
@@ -980,6 +988,7 @@
       }
     },
     "post_sessione": {
+      "audience": "",
       "user_goal": "Trasformare appunti e conseguenze in mondo aggiornato.",
       "entry_points": [
         "Risorse/Post Sessione Guidato.md"
@@ -1064,6 +1073,7 @@
       }
     },
     "manutenzione": {
+      "audience": "",
       "user_goal": "Tenere il vault pulito e rilasciabile.",
       "entry_points": [
         "Risorse/Controllo Vault.md"
@@ -1134,6 +1144,7 @@
       }
     },
     "inbox_operativa": {
+      "audience": "",
       "user_goal": "Smistare appunti grezzi, live e lore senza perdere agganci utili al tavolo.",
       "entry_points": [
         "Inbox/Inbox.md"
@@ -1206,6 +1217,7 @@
       }
     },
     "smistamento_bozze": {
+      "audience": "",
       "user_goal": "Trasformare bozze generate in note utili, canoniche o archiviate.",
       "entry_points": [
         "Risorse/Smistamento Bozze Generate.md"
@@ -1246,6 +1258,7 @@
       "action_groups": {}
     },
     "quality_report": {
+      "audience": "",
       "user_goal": "Capire quali buchi rendono il vault meno giocabile, condivisibile o player-safe.",
       "entry_points": [
         "Risorse/Quality Report.md"
@@ -1297,6 +1310,7 @@
       }
     },
     "stato_campagna": {
+      "audience": "",
       "user_goal": "Leggere missioni, pressioni e conseguenze aperte e scegliere cosa portare al tavolo.",
       "entry_points": [
         "Mondi/Stato del Mondo.md"

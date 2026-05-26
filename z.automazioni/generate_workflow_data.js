@@ -47,6 +47,7 @@ function workflowQuickActions(module) {
         if (!actions.length && !Object.keys(actionGroups).length) continue;
 
         entries[workflowId] = {
+            audience: String(workflow.audience ?? ""),
             user_goal: workflow.user_goal ?? "",
             entry_points: (workflow.entry_points ?? []).map(entry => String(entry)),
             required_plugins: (workflow.required_plugins ?? []).map(plugin => String(plugin)),
