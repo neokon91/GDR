@@ -7,8 +7,9 @@ async function sessione(tp) {
     const data = await helpers.promptOptional(tp, "Data", tp.date.now("YYYY-MM-DD")) || tp.date.now("YYYY-MM-DD");
     const id = helpers.slugify(`${data}-${titolo}`);
     const creazioneCompleta = await helpers.askYesNo(tp, "Vuoi collegare subito cast, luoghi, materiali e media? Scegli No per una sessione rapida.");
-    const mondo = await helpers.chooseWorld(tp, "Mondo della sessione");
+    const mondo = route.mondo || await helpers.chooseWorld(tp, "Mondo della sessione");
     const context = { world: mondo };
+    const routeList = key => helpers.normalizeFieldArray(route[key]);
     const selectedType = await helpers.chooseOptional(
         tp,
         [
@@ -22,14 +23,19 @@ async function sessione(tp) {
         "Tipo di sessione"
     );
     const obiettivo = await helpers.promptOptional(tp, "Obiettivo della sessione", route.obiettivo ?? "");
-    const apertura = await helpers.promptOptional(tp, "Prima scena / apertura");
+    const apertura = await helpers.promptOptional(tp, "Prima scena / apertura", route.apertura ?? "");
     const scelta = await helpers.promptOptional(tp, "Scelta concreta per i giocatori");
-    const campagne = creazioneCompleta ? await helpers.chooseCampaigns(tp, "Campagne collegate", context) : [];
+    const campagneDaRotta = routeList("campagne");
+    const luoghiDaRotta = routeList("luoghi");
+    const missioniDaRotta = routeList("missioni");
+    const tracciatiDaRotta = routeList("tracciati");
+    const fazioniDaRotta = routeList("fazioni");
+    const campagne = creazioneCompleta ? (campagneDaRotta.length ? campagneDaRotta : await helpers.chooseCampaigns(tp, "Campagne collegate", context)) : [];
     const calendario = await helpers.promptCalendar(tp, { world: mondo, campaigns: campagne });
-    const luoghi = creazioneCompleta ? await helpers.chooseLocations(tp, "Luoghi in scena", context) : [];
+    const luoghi = creazioneCompleta ? (luoghiDaRotta.length ? luoghiDaRotta : await helpers.chooseLocations(tp, "Luoghi in scena", context)) : [];
     const personaggi = creazioneCompleta ? await helpers.choosePeople(tp, "Personaggi in scena", context) : [];
-    const missioni = creazioneCompleta ? await helpers.chooseMissions(tp, "Missioni vive", context) : [];
-    const tracciati = creazioneCompleta ? await helpers.chooseTracks(tp, "Clock e tracciati attivi", context) : [];
+    const missioni = creazioneCompleta ? (missioniDaRotta.length ? missioniDaRotta : await helpers.chooseMissions(tp, "Missioni vive", context)) : [];
+    const tracciati = creazioneCompleta ? (tracciatiDaRotta.length ? tracciatiDaRotta : await helpers.chooseTracks(tp, "Clock e tracciati attivi", context)) : [];
     const creature = creazioneCompleta ? await helpers.chooseCreatures(tp, "Creature in scena", context) : [];
     const incontri = creazioneCompleta ? await helpers.chooseEncounters(tp, "Incontri previsti", context) : [];
     const dispense = creazioneCompleta ? await helpers.chooseHandouts(tp, "Dispense previste", context) : [];
@@ -37,7 +43,7 @@ async function sessione(tp) {
     const audio = creazioneCompleta ? await helpers.chooseAudio(tp, "Audio previsti", context) : [];
     const immagini = creazioneCompleta ? await helpers.chooseImages(tp, "Immagini previste", context) : [];
     const video = creazioneCompleta ? await helpers.chooseVideos(tp, "Video previsti", context) : [];
-    const fazioni = creazioneCompleta ? await helpers.chooseFactions(tp, "Fazioni in scena", context) : [];
+    const fazioni = creazioneCompleta ? (fazioniDaRotta.length ? fazioniDaRotta : await helpers.chooseFactions(tp, "Fazioni in scena", context)) : [];
     const oggetti = creazioneCompleta ? await helpers.chooseObjects(tp, "Oggetti in scena", context) : [];
     const riferimentiRegola = creazioneCompleta ? await helpers.promptWikilinkTargets(tp, prompts.riferimenti_regola ?? "Riferimenti regola o SRD da tenere aperti") : [];
 

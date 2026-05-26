@@ -58,6 +58,12 @@ buttons:
     action: runTemplaterFile
     template: z.modelli/wizard/Fine Sessione.md
     fallback: '[[z.modelli/wizard/Fine Sessione]]'
+  wizard_sessione_da_output:
+    id: wizard-sessione-da-output
+    label: Prossima Sessione
+    action: runTemplaterFile
+    template: z.modelli/wizard/Nuova Sessione Da Output Precedente.md
+    fallback: '[[z.modelli/wizard/Nuova Sessione Da Output Precedente]]'
   marca_canonico:
     id: marca-canonico
     label: Marca Canonico

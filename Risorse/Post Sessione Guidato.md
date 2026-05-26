@@ -34,6 +34,9 @@ gdr.renderPostSessionFocus(dv);
 > **Fine sessione guidata** - devi convertire appunti in output, recap e prossima apertura
 > `BUTTON[wizard-fine-sessione]`
 >
+> **Prossima sessione da output** - hai chiuso la sessione e vuoi preparare la prossima partendo dall'output
+> `BUTTON[wizard-sessione-da-output]`
+>
 > **Applica conseguenza** - una nota ha conseguenze o impatti ancora aperti
 > `BUTTON[applica-conseguenza]`
 >

@@ -86,6 +86,11 @@
           "use_when": "devi convertire appunti in output, recap e prossima apertura"
         },
         {
+          "button": "wizard-sessione-da-output",
+          "label": "Prossima sessione da output",
+          "use_when": "hai chiuso la sessione e vuoi preparare la prossima partendo dall'output"
+        },
+        {
           "button": "applica-conseguenza",
           "label": "Applica conseguenza",
           "use_when": "una nota ha conseguenze o impatti ancora aperti"

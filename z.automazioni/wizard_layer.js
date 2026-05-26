@@ -88,14 +88,48 @@ async function wizard_layer(tp, wizard = "") {
     }
 
     if (wizard === "nuova_sessione_da_output_precedente") {
-        const lastSession = helpers.getActiveSessionFile();
+        const sessioniPath = helpers.path("sessioni");
+        // Se non c'e una sessione attiva, riparte dall'ultima sessione giocata con output utile.
+        const latestPlayedSession = app.vault.getMarkdownFiles()
+            .filter(file => file.path.startsWith(`${sessioniPath}/`))
+            .map(file => ({ file, meta: app.metadataCache.getFileCache(file)?.frontmatter ?? {} }))
+            .filter(({ meta }) => {
+                const output = helpers.normalizeFieldArray(meta.output_sessione);
+                return meta.categoria === "sessione" && meta.stato === "giocata" && (output.length || meta.prossima_apertura);
+            })
+            .sort((a, b) => (b.file.stat?.mtime ?? 0) - (a.file.stat?.mtime ?? 0))[0]?.file ?? null;
+        const selectedSession = helpers.getActiveSessionFile() ?? latestPlayedSession;
+        let lastSession = selectedSession;
+
+        if (!lastSession) {
+            const selected = await helpers.chooseNoteByPath(tp, sessioniPath, "Sessione sorgente per la prossima preparazione", "Annulla");
+            lastSession = helpers.getFileFromLink(selected);
+        }
+
+        if (!lastSession) {
+            new Notice("Nessuna sessione sorgente selezionata.");
+            return "";
+        }
+
         const lastMeta = app.metadataCache.getFileCache(lastSession)?.frontmatter ?? {};
-        const output = helpers.normalizeFieldArray(lastMeta.output_sessione).join("; ");
+        const outputItems = helpers.normalizeFieldArray(lastMeta.output_sessione);
+        const output = [
+            ...outputItems,
+            lastMeta.prossima_apertura ? `Prossima apertura: ${lastMeta.prossima_apertura}` : ""
+        ].filter(Boolean).join("; ");
 
         helpers.setRoute({
-            obiettivo: output
+            obiettivo: output || `Continuare da ${lastSession.basename}`,
+            apertura: lastMeta.prossima_apertura ?? "",
+            mondo: lastMeta.mondo ?? "",
+            campagne: helpers.normalizeFieldArray(lastMeta.campagne),
+            luoghi: helpers.normalizeFieldArray(lastMeta.luoghi),
+            missioni: helpers.normalizeFieldArray(lastMeta.missioni),
+            tracciati: helpers.normalizeFieldArray(lastMeta.tracciati),
+            fazioni: helpers.normalizeFieldArray(lastMeta.fazioni)
         });
 
+        new Notice(`Nuova preparazione da: ${lastSession.basename}.`);
         return await tp.user.sessione(tp);
     }
 
