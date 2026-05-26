@@ -10,6 +10,17 @@ def fail(message: str, errors: list[str]) -> None:
     errors.append(message)
 
 
+BUTTON_ID_PATTERN = re.compile(r"^[A-Za-z0-9][A-Za-z0-9_-]*$")
+
+
+def validate_workflow_button_id(workflow_id: str, context: str, button: str, errors: list[str]) -> None:
+    """I workflow dichiarano id Meta Bind puliti; il renderer aggiunge BUTTON[...]."""
+    if "BUTTON[" in button or "]" in button:
+        fail(f"workflows.{workflow_id}.{context}: usare id Meta Bind pulito, non {button}", errors)
+    if button and not BUTTON_ID_PATTERN.match(button):
+        fail(f"workflows.{workflow_id}.{context}: id pulsante Meta Bind non valido ({button})", errors)
+
+
 def metabind_input_field(input_body: str) -> str:
     body = input_body.strip()
     if not body:
@@ -123,8 +134,10 @@ def validate_workflow_quick_actions(modules: dict[str, dict], errors: list[str])
             button = str((action or {}).get("button", ""))
             if not button:
                 fail(f"workflows.{workflow_id}.quick_actions[{index}]: button mancante", errors)
-            elif button not in button_ids and button not in configured_button_ids:
-                fail(f"workflows.{workflow_id}.quick_actions[{index}]: pulsante non dichiarato ({button})", errors)
+            else:
+                validate_workflow_button_id(workflow_id, f"quick_actions[{index}]", button, errors)
+                if button not in button_ids and button not in configured_button_ids:
+                    fail(f"workflows.{workflow_id}.quick_actions[{index}]: pulsante non dichiarato ({button})", errors)
             if not (action or {}).get("label"):
                 fail(f"workflows.{workflow_id}.quick_actions[{index}]: label mancante", errors)
             if not (action or {}).get("use_when"):
@@ -142,8 +155,10 @@ def validate_workflow_quick_actions(modules: dict[str, dict], errors: list[str])
             button = str((action or {}).get("button", ""))
             if not button:
                 fail(f"workflows.{workflow_id}.action_groups[{index}]: button mancante", errors)
-            elif button not in configured_button_ids:
-                fail(f"workflows.{workflow_id}.action_groups[{index}]: pulsante non configurato in Meta Bind ({button})", errors)
+            else:
+                validate_workflow_button_id(workflow_id, f"action_groups[{index}]", button, errors)
+                if button not in configured_button_ids:
+                    fail(f"workflows.{workflow_id}.action_groups[{index}]: pulsante non configurato in Meta Bind ({button})", errors)
             if not (action or {}).get("label"):
                 fail(f"workflows.{workflow_id}.action_groups[{index}]: label mancante", errors)
             if not (action or {}).get("use_when"):

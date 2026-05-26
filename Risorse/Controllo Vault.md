@@ -6,9 +6,47 @@ cssclasses:
 
 Questa pagina mostra cosa richiede attenzione. Non e un controllo tecnico: serve a capire cosa manca prima o dopo una sessione.
 
-`BUTTON[quality-report-risorse-quality-report]`
+<!-- workflow:quick_actions:start manutenzione -->
+> [!regia] Azioni rapide
+> Tenere il vault pulito e rilasciabile.
+>
+> Plugin coinvolti: `Meta Bind`, `Dataview`, `Linter`, `BRAT`, `Style Settings`, `Tasks`, `Bases`.
+>
+> **Quality report** - vuoi una vista piu ampia dei problemi del vault
+> `BUTTON[quality-report-risorse-quality-report]`
+>
+> **Vista giocatori** - devi verificare cosa e sicuro mostrare
+> `BUTTON[vista-giocatori-hub-vista-giocatori-vista-giocatori]`
+>
+> **Smista bozze generate** - ci sono bozze da trasformare in materiale utile o archivio
+> `BUTTON[smistamento-bozze-generate-risorse-smistamento-bozze-generate-2]`
+>
+> **Bacheca preparazione** - sessioni e task preparatori vanno riordinati
+> `BUTTON[preparazione-sessioni-z-bacheche-preparazione-sessioni]`
+>
+> **Task DM** - vuoi vedere lavoro aperto e manutenzione operativa
+> `BUTTON[task-dm-risorse-task-dm]`
+>
+> [!regia]- Ripristino operativo
+> Aprire le superfici che indicano cosa manca quando automazioni o viste non bastano.
+>
+> **Aiuto** - pulsanti, Dataview o template non rispondono
+> `BUTTON[aiuto-risorse-se-qualcosa-non-funziona]`
+>
+> **Controllo vault** - devi tornare a questa pagina dopo una correzione
+> `BUTTON[controllo-vault-risorse-controllo-vault]`
+>
+> **Inbox** - devi smistare appunti grezzi
+> `BUTTON[inbox-inbox-inbox]`
+>
+> **Worldbuilder** - il problema e materiale di mondo scollegato
+> `BUTTON[worldbuilder-worldbuilder-dashboard]`
+<!-- workflow:quick_actions:end manutenzione -->
 
-`BUTTON[vista-giocatori-hub-vista-giocatori-vista-giocatori]`
+```dataviewjs
+const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+await gdr.renderWorkflowCommandDeck(dv, "manutenzione");
+```
 
 ## Colpo D'Occhio
 
@@ -70,8 +108,6 @@ SORT file.ctime DESC
 ```
 
 ## Bozze Generate
-
-`BUTTON[smistamento-bozze-generate-risorse-smistamento-bozze-generate-2]`
 
 ```dataview
 TABLE categoria, tipo, generatore, mondo, luogo, creato

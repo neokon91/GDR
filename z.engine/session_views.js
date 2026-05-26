@@ -277,6 +277,7 @@
   function renderPluginTroubleshooting(dv, workflowId = "") {
     const pluginIds = {
       "Advanced Canvas": "advanced-canvas",
+      "Bases": "bases",
       "Calendarium": "calendarium",
       "Callout Manager": "callout-manager",
       "Dataview": "dataview",
@@ -285,6 +286,7 @@
       "Folder Notes": "folder-notes",
       "Initiative Tracker": "initiative-tracker",
       "Kanban": "obsidian-kanban",
+      "Linter": "obsidian-linter",
       "Maps": "maps",
       "Media Extended": "media-extended",
       "Meta Bind": "obsidian-meta-bind-plugin",
@@ -294,9 +296,12 @@
     };
     const workflowPlugins = {
       dashboard_dm: ["Meta Bind", "Dataview", "Templater", "Tasks"],
+      espandi_mondo: ["Templater", "Meta Bind", "Dataview", "Bases", "Maps", "Excalidraw", "Advanced Canvas"],
       prepara_sessione: ["Templater", "Dataview", "Tasks", "Meta Bind", "Dice Roller", "Initiative Tracker", "Fantasy Statblocks", "Media Extended"],
       gioca_live: ["Meta Bind", "Dataview", "Dice Roller", "Initiative Tracker", "Fantasy Statblocks", "Media Extended", "Callout Manager"],
-      post_sessione: ["Templater", "Meta Bind", "Tasks", "Dataview", "Calendarium"]
+      fuori_scena: ["Meta Bind", "Dataview", "Templater", "Tasks"],
+      post_sessione: ["Templater", "Meta Bind", "Tasks", "Dataview", "Calendarium"],
+      manutenzione: ["Meta Bind", "Dataview", "Tasks", "Bases", "Linter"]
     };
     const labels = workflowPlugins[workflowId] ?? ["Dataview", "Meta Bind", "Templater", "Tasks", "Dice Roller", "Fantasy Statblocks"];
     const enabled = label => {
@@ -312,7 +317,12 @@
       "Fantasy Statblocks": "Le creature non appaiono come schede.",
       "Initiative Tracker": "Gli incontri non entrano nel flusso a turni.",
       "Media Extended": "Audio, video o riferimenti media non si aprono come previsto.",
-      "Calendarium": "Date e calendario non vengono mostrati."
+      "Calendarium": "Date e calendario non vengono mostrati.",
+      "Bases": "Le viste tabellari native non sono disponibili.",
+      "Maps": "Mappe e marker non vengono mostrati.",
+      "Excalidraw": "Mappe fronti e canvas disegnati non si aprono.",
+      "Advanced Canvas": "Canvas avanzati e collegamenti visuali non sono disponibili.",
+      "Linter": "La pulizia automatica delle note non e disponibile."
     };
     const grid = dv.el("div", "", { cls: "gdr-card-grid compact" });
 

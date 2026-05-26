@@ -114,6 +114,153 @@ workflows:
       - pressione
   espandi_mondo:
     user_goal: Aggiungere entita vive collegate e giocabili.
+    entry_points:
+      - Hub/Worldbuilder Dashboard.md
+    quick_actions:
+      - button: nuovo-mondo-homebrew
+        label: Nuovo mondo guidato
+        use_when: il vault non ha ancora un mondo operativo
+      - button: wizard-nuova-entita-viva
+        label: Nuova entita viva
+        use_when: non sai ancora se serve luogo, fazione, PNG o pressione
+      - button: campagna-da-ambientazione-campagna-da-ambientazione
+        label: Campagna da ambientazione
+        use_when: il mondo deve diventare struttura giocabile
+      - button: stato-mondo-mondi-stato-del-mondo
+        label: Stato mondo
+        use_when: vuoi vedere cosa e gia vivo o incompleto
+      - button: motore-mondo-vivo-motore-mondo-vivo
+        label: Motore mondo vivo
+        use_when: devi decidere chi si muove fuori scena
+      - button: controllo-vault-risorse-controllo-vault
+        label: Controllo vault
+        use_when: il materiale sembra scollegato o non pronto
+    action_groups:
+      superfici:
+        label: Superfici mondo
+        purpose: Aprire viste di controllo senza cercarle nella sidebar.
+        actions:
+          - button: dm-dashboard-1-dm-dashboard
+            label: DM Dashboard
+            use_when: devi tornare al cockpit principale
+          - button: indice-mondo-mondi-mondo
+            label: Indice mondo
+            use_when: vuoi navigare le categorie del mondo
+          - button: atlante-del-mondo-atlante-del-mondo
+            label: Atlante del mondo
+            use_when: devi controllare luoghi e mappe
+          - button: bibbia-del-mondo-bibbia-del-mondo-2
+            label: Bibbia del mondo
+            use_when: vuoi consolidare canone e tono
+          - button: geopolitica-geopolitical-dashboard-2
+            label: Geopolitica
+            use_when: vuoi leggere poteri, confini e conflitti
+          - button: economia-e-rotte-economia-e-rotte-2
+            label: Economia e rotte
+            use_when: vuoi controllare scambi, risorse e dipendenze
+          - button: lore-hub-lore-hub-2
+            label: Lore hub
+            use_when: devi lavorare su canone e appunti lore
+          - button: timeline-mondi-timeline-timeline
+            label: Timeline
+            use_when: devi storicizzare un evento
+          - button: revisione-lore-revisione-lore
+            label: Revisione lore
+            use_when: devi ripulire o canonizzare materiale
+          - button: controllo-canone-controllo-canone
+            label: Controllo canone
+            use_when: temi duplicati, contraddizioni o segreti esposti
+      fondamenta:
+        label: Fondamenta giocabili
+        purpose: Creare solo pezzi di mondo con un uso potenziale al tavolo.
+        actions:
+          - button: nuovo-luogo-z-modelli-luogo-router-md
+            label: Nuovo luogo
+            use_when: serve un posto dove possano agire i personaggi
+          - button: nuova-cultura-z-modelli-worldbuilding-cultura-md
+            label: Nuova cultura
+            use_when: un popolo o costume cambia scelte e scene
+          - button: nuova-lingua-z-modelli-worldbuilding-lingua-md
+            label: Nuova lingua
+            use_when: lingua o scrittura diventano indizio, accesso o ostacolo
+          - button: evento-storico-z-modelli-evento-storico-md
+            label: Evento storico
+            use_when: un fatto deve entrare nella timeline canonica
+          - button: nuova-era-z-modelli-worldbuilding-era-storica-md
+            label: Nuova era
+            use_when: la cronologia ha bisogno di una fase riconoscibile
+      pressioni:
+        label: Poteri e pressioni
+        purpose: Dare al mondo attori capaci di reagire.
+        actions:
+          - button: nuova-fazione-z-modelli-fazione-router-md
+            label: Nuova fazione
+            use_when: serve un potere organizzato
+          - button: nuovo-culto-z-modelli-fazione-culto-md
+            label: Nuovo culto
+            use_when: religione o culto devono agire come fazione
+          - button: nuovo-personaggio-z-modelli-personaggio-router-md
+            label: Nuovo personaggio
+            use_when: serve un volto ricorrente o una leva sociale
+          - button: nuova-relazione-z-modelli-worldbuilding-relazione-md
+            label: Nuova relazione
+            use_when: due entita devono influenzarsi a vicenda
+          - button: nuovo-conflitto-z-modelli-worldbuilding-conflitto-md
+            label: Nuovo conflitto
+            use_when: la tensione deve produrre missioni o clock
+          - button: nuovo-clock-z-modelli-dm-tracciato-md
+            label: Nuovo clock
+            use_when: una pressione deve avanzare in modo visibile
+      mistero_e_materia:
+        label: Mistero, mito e risorse
+        purpose: Collegare meraviglia, segreti ed economia a conseguenze pratiche.
+        actions:
+          - button: cosmologia-z-modelli-worldbuilding-cosmologia-md
+            label: Cosmologia
+            use_when: piani, dei o regole cosmiche incidono sul gioco
+          - button: segreto-o-mistero-z-modelli-worldbuilding-segreto-o-mistero-md
+            label: Segreto o mistero
+            use_when: serve materiale da rivelare gradualmente
+          - button: nuova-creatura-z-modelli-creatura-md
+            label: Nuova creatura
+            use_when: una presenza deve avere habitat, uso e conseguenze
+          - button: nuovo-oggetto-z-modelli-oggetto-md
+            label: Nuovo oggetto
+            use_when: serve una leva concreta o ricompensa
+          - button: nuovo-oggetto-magico-z-modelli-oggetto-magico-md
+            label: Oggetto magico
+            use_when: una ricompensa deve essere giocabile al tavolo
+          - button: nuova-rotta-z-modelli-worldbuilding-rotta-md
+            label: Nuova rotta
+            use_when: commercio o viaggio devono creare opportunita
+          - button: nuova-risorsa-z-modelli-worldbuilding-risorsa-md
+            label: Nuova risorsa
+            use_when: una merce o dipendenza muove fazioni
+          - button: nuovo-mercato-z-modelli-worldbuilding-mercato-o-nodo-commerciale-md
+            label: Nuovo mercato
+            use_when: serve un nodo economico o sociale
+      tavolo_e_mappe:
+        label: Tavolo e mappe
+        purpose: Trasformare worldbuilding in materiale immediatamente usabile.
+        actions:
+          - button: nuova-missione-z-modelli-dm-missione-md
+            label: Nuova missione
+            use_when: una tensione diventa obiettivo giocabile
+          - button: nuovo-incontro-z-modelli-dm-incontro-md-default
+            label: Nuovo incontro
+            use_when: serve una scena pronta
+          - button: dispense-mondi-dispense-dispense
+            label: Dispense
+            use_when: vuoi controllare materiale consegnabile
+          - button: mappe-risorse-mappe-mappe
+            label: Mappe
+            use_when: devi vedere o creare supporti spaziali
+          - button: nuova-mappa-zoom-z-modelli-mappe-mappa-zoom-md
+            label: Nuova mappa zoom
+            use_when: un luogo deve essere navigabile
+          - button: nuova-mappa-fronti-z-modelli-mappe-mappa-excalidraw-fronti-excalidraw-md
+            label: Nuova mappa fronti
+            use_when: vuoi visualizzare poteri, relazioni o pressioni
     required_plugins:
       - Templater
       - Meta Bind
@@ -122,6 +269,68 @@ workflows:
       - Excalidraw
       - Advanced Canvas
       - Iconize
+      - Dataview
+  fuori_scena:
+    user_goal: Scegliere cosa reagisce tra una sessione e l'altra senza perdere conseguenze aperte.
+    entry_points:
+      - Hub/Cosa Succede Fuori Scena.md
+    quick_actions:
+      - button: post-sessione-guidato-risorse-post-sessione-guidato
+        label: Post sessione guidato
+        use_when: devi chiudere appunti, recap e output della sessione
+      - button: motore-mondo-vivo-motore-mondo-vivo
+        label: Motore mondo vivo
+        use_when: vuoi leggere pressioni e prossime mosse aggregate
+      - button: stato-campagna-mondi-stato-del-mondo
+        label: Stato campagna
+        use_when: devi vedere conseguenze, missioni e tracciati aperti
+      - button: nuovo-clock-z-modelli-dm-tracciato-md
+        label: Nuovo clock
+        use_when: una pressione fuori scena deve diventare tracciabile
+      - button: applica-conseguenza
+        label: Applica conseguenza
+        use_when: una conseguenza ha bersagli gia identificati
+      - button: propaga-a-entita
+        label: Propaga a entita
+        use_when: piu note devono ricevere aggiornamenti coerenti
+    action_groups:
+      continuita:
+        label: Continuita
+        purpose: Trasformare eventi e scelte in stato leggibile prima della prossima preparazione.
+        actions:
+          - button: registra-scelta-mondo
+            label: Registra scelta mondo
+            use_when: una decisione del party deve diventare pressione o stato
+          - button: wizard-conseguenza
+            label: Conseguenza guidata
+            use_when: sai che qualcosa cambia ma non hai ancora i campi corretti
+          - button: evento-storico-z-modelli-evento-storico-md
+            label: Evento storico
+            use_when: la conseguenza deve entrare nella timeline
+          - button: prepara-recap-pubblico
+            label: Prepara recap pubblico
+            use_when: devi separare materiale mostrabile dai segreti DM
+      preparazione:
+        label: Ponte verso la prossima sessione
+        purpose: Convertire reazioni fuori scena in materiale da giocare.
+        actions:
+          - button: prossima-sessione-risorse-preparazione-sessione
+            label: Preparazione sessione
+            use_when: hai scelto una pressione da portare al tavolo
+          - button: nuova-missione-z-modelli-dm-missione-md
+            label: Nuova missione
+            use_when: una reazione diventa obiettivo concreto
+          - button: nuova-fazione-z-modelli-fazione-router-md
+            label: Nuova fazione
+            use_when: manca l'attore che produce la pressione
+          - button: nuovo-png-z-modelli-personaggio-png-md
+            label: Nuovo PNG
+            use_when: serve un volto per mostrare la reazione
+    required_plugins:
+      - Meta Bind
+      - Dataview
+      - Templater
+      - Tasks
   prepara_sessione:
     user_goal: Preparare una sessione radicata nel mondo.
     entry_points:
@@ -351,7 +560,44 @@ workflows:
       - Excalidraw
   manutenzione:
     user_goal: Tenere il vault pulito e rilasciabile.
+    entry_points:
+      - Risorse/Controllo Vault.md
+    quick_actions:
+      - button: quality-report-risorse-quality-report
+        label: Quality report
+        use_when: vuoi una vista piu ampia dei problemi del vault
+      - button: vista-giocatori-hub-vista-giocatori-vista-giocatori
+        label: Vista giocatori
+        use_when: devi verificare cosa e sicuro mostrare
+      - button: smistamento-bozze-generate-risorse-smistamento-bozze-generate-2
+        label: Smista bozze generate
+        use_when: ci sono bozze da trasformare in materiale utile o archivio
+      - button: preparazione-sessioni-z-bacheche-preparazione-sessioni
+        label: Bacheca preparazione
+        use_when: sessioni e task preparatori vanno riordinati
+      - button: task-dm-risorse-task-dm
+        label: Task DM
+        use_when: vuoi vedere lavoro aperto e manutenzione operativa
+    action_groups:
+      ripristino:
+        label: Ripristino operativo
+        purpose: Aprire le superfici che indicano cosa manca quando automazioni o viste non bastano.
+        actions:
+          - button: aiuto-risorse-se-qualcosa-non-funziona
+            label: Aiuto
+            use_when: pulsanti, Dataview o template non rispondono
+          - button: controllo-vault-risorse-controllo-vault
+            label: Controllo vault
+            use_when: devi tornare a questa pagina dopo una correzione
+          - button: inbox-inbox-inbox
+            label: Inbox
+            use_when: devi smistare appunti grezzi
+          - button: worldbuilder-worldbuilder-dashboard
+            label: Worldbuilder
+            use_when: il problema e materiale di mondo scollegato
     required_plugins:
+      - Meta Bind
+      - Dataview
       - Linter
       - BRAT
       - Style Settings
