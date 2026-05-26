@@ -5,6 +5,7 @@ const os = require("os");
 const path = require("path");
 const { execFileSync } = require("child_process");
 const { repoPath } = require("./node_utils");
+const { releasePluginProfile } = require("./release_plugin_profile");
 
 const ROOT = process.cwd();
 const TEMP_ROOT = fs.mkdtempSync(path.join(os.tmpdir(), "vault-gdr-release-check-"));
@@ -34,6 +35,7 @@ function loadYaml(relPath) {
 }
 
 const releaseBoundary = loadYaml(BOUNDARY);
+const releasePluginProfileContract = releasePluginProfile(ROOT, releaseBoundary);
 
 function existsRel(root, relPath) {
     return fs.existsSync(path.join(root, relPath));
@@ -89,6 +91,15 @@ function validateOutput(errors) {
     }
 
     const plugins = JSON.parse(fs.readFileSync(path.join(OUT, ".obsidian/community-plugins.json"), "utf8"));
+    const expectedPlugins = [...releasePluginProfileContract.enabledPlugins].sort();
+    const releasePlugins = [...plugins].sort();
+    if (JSON.stringify(releasePlugins) !== JSON.stringify(expectedPlugins)) {
+        fail(errors, `profilo plugin release non allineato: attesi ${expectedPlugins.join(", ")}, trovati ${releasePlugins.join(", ")}`);
+    }
+    for (const plugin of releasePluginProfileContract.enabledPlugins) {
+        if (!existsRel(OUT, `.obsidian/plugins/${plugin}/manifest.json`)) fail(errors, `manifest plugin profilo release mancante: ${plugin}`);
+        if (!existsRel(OUT, `.obsidian/plugins/${plugin}/main.js`)) fail(errors, `main plugin profilo release mancante: ${plugin}`);
+    }
     for (const plugin of asArray(releaseBoundary.required_plugins)) {
         if (!plugins.includes(plugin)) fail(errors, `plugin richiesto non abilitato nella release: ${plugin}`);
         if (!existsRel(OUT, `.obsidian/plugins/${plugin}/manifest.json`)) fail(errors, `manifest plugin richiesto mancante nella release: ${plugin}`);

@@ -276,6 +276,7 @@ const REQUIRED_LAYER_FILES = [
     "z.automazioni/render_template_factory.py",
     "z.automazioni/template_factory_utils.py",
     "z.automazioni/release_boundary_utils.js",
+    "z.automazioni/release_plugin_profile.js",
     "z.automazioni/session_context.js",
     "z.automazioni/meta_actions.js",
     "z.automazioni/template_router.js",

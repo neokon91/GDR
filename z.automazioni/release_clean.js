@@ -6,6 +6,7 @@ const { execFileSync } = require("child_process");
 const { generateDemoWorld } = require("./generate_demo_world");
 const { readJson, rel: relativePath, repoPath } = require("./node_utils");
 const { loadReleaseBoundary, renderedMaterializedUserFiles } = require("./release_boundary_utils");
+const { releasePluginProfile } = require("./release_plugin_profile");
 
 const ROOT = process.cwd();
 function optionValue(name, fallback) {
@@ -26,6 +27,7 @@ const INCLUDE_DEMO = process.argv.includes("--with-demo");
 const QUIET = process.argv.includes("--quiet");
 const TEMPLATE_FACTORY_RENDERER = repoPath(ROOT, "z.automazioni/render_template_factory.py");
 const RELEASE_BOUNDARY = loadReleaseBoundary(ROOT);
+const RELEASE_PLUGIN_PROFILE = releasePluginProfile(ROOT, RELEASE_BOUNDARY);
 const COPY_POLICY = RELEASE_BOUNDARY.copy_policy ?? {};
 const INCLUDED_ROOTS = new Set(COPY_POLICY.included_roots ?? []);
 const INCLUDED_ROOT_FILES = new Set(COPY_POLICY.included_root_files ?? []);
@@ -37,6 +39,7 @@ const EXCLUDED_AUTOMAZIONI_PREFIXES = RELEASE_BOUNDARY.forbidden_automation_pref
 const EXCLUDED_FILES = new Set(COPY_POLICY.excluded_files ?? []);
 const REQUIRED_RELEASE_FILES = RELEASE_BOUNDARY.required_files ?? [];
 const REQUIRED_USER_IGNORE_FILTERS = COPY_POLICY.required_user_ignore_filters ?? [];
+const enabledPlugins = RELEASE_PLUGIN_PROFILE.enabledPluginSet;
 const GENERATED_RELEASE_NOTES = {
     "LEGGIMI.md": `# Vault GDR
 
@@ -177,8 +180,6 @@ const GENERATED_RELEASE_JSON = {
     }
 };
 
-const enabledPlugins = new Set(readJson(repoPath(ROOT, ".obsidian/community-plugins.json"), []));
-
 function rel(file) {
     return relativePath(ROOT, file);
 }
@@ -247,6 +248,11 @@ function writeGeneratedReleaseNotes() {
     for (const [file, text] of Object.entries(GENERATED_RELEASE_NOTES)) {
         fs.writeFileSync(repoPath(OUT, file), text);
     }
+    fs.mkdirSync(repoPath(OUT, ".obsidian"), { recursive: true });
+    fs.writeFileSync(
+        repoPath(OUT, ".obsidian/community-plugins.json"),
+        `${JSON.stringify(RELEASE_PLUGIN_PROFILE.enabledPlugins, null, 2)}\n`
+    );
     for (const [file, data] of Object.entries(GENERATED_RELEASE_JSON)) {
         const target = repoPath(OUT, file);
         fs.mkdirSync(path.dirname(target), { recursive: true });
@@ -333,6 +339,13 @@ function validateRelease() {
     validateReleaseLinks(releaseEntries, errors);
 
     const pluginRoot = repoPath(OUT, ".obsidian/plugins");
+    const releaseCommunityPlugins = readJson(repoPath(OUT, ".obsidian/community-plugins.json"), []);
+    const expectedPluginList = [...RELEASE_PLUGIN_PROFILE.enabledPlugins].sort();
+    const releasePluginList = [...releaseCommunityPlugins].sort();
+    if (JSON.stringify(releasePluginList) !== JSON.stringify(expectedPluginList)) {
+        errors.push(`profilo plugin release non allineato: attesi ${expectedPluginList.join(", ")}, trovati ${releasePluginList.join(", ")}`);
+    }
+
     if (fs.existsSync(pluginRoot)) {
         const bundledPlugins = fs.readdirSync(pluginRoot, { withFileTypes: true })
             .filter(entry => entry.isDirectory())
@@ -341,6 +354,14 @@ function validateRelease() {
         for (const pluginId of bundledPlugins) {
             if (!enabledPlugins.has(pluginId)) {
                 errors.push(`plugin non abilitato incluso nella release: ${pluginId}`);
+            }
+        }
+        for (const pluginId of RELEASE_PLUGIN_PROFILE.enabledPlugins) {
+            if (!fs.existsSync(repoPath(OUT, `.obsidian/plugins/${pluginId}/manifest.json`))) {
+                errors.push(`manifest plugin profilo release mancante: ${pluginId}`);
+            }
+            if (!fs.existsSync(repoPath(OUT, `.obsidian/plugins/${pluginId}/main.js`))) {
+                errors.push(`main plugin profilo release mancante: ${pluginId}`);
             }
         }
     }

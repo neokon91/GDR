@@ -6,12 +6,14 @@ const path = require("path");
 const { execFileSync } = require("child_process");
 const { readJson, readTextRel, repoPath, walk } = require("./node_utils");
 const { materializedUserFiles } = require("./release_boundary_utils");
+const { releasePluginProfile } = require("./release_plugin_profile");
 
 const ROOT = process.cwd();
 const RELEASE_CHECK_ROOT = fs.mkdtempSync(path.join(os.tmpdir(), "vault-gdr-quality-check-"));
 const OUT = path.join(RELEASE_CHECK_ROOT, "vault-gdr-clean");
 const ZIP = `${OUT}.zip`;
 const CONTRACT = "Dev/TemplateFactory/modules/plugin_contracts.yaml";
+const RELEASE_BOUNDARY = "Dev/TemplateFactory/modules/release_boundary.yaml";
 const WORKFLOWS = "Dev/TemplateFactory/modules/workflows.yaml";
 const TEMPLATER_DIR = "z.automazioni/templater";
 const IGNORED_DIRS = new Set([".git", "node_modules", "dist"]);
@@ -560,8 +562,13 @@ function validateReleaseFirstRun() {
         if (!appConfig.userIgnoreFilters?.includes(hidden)) fail(`app.json non nasconde ${hidden}`);
     }
 
+    const expectedPlugins = releasePluginProfile(ROOT, loadYaml(RELEASE_BOUNDARY)).enabledPlugins;
     const communityPlugins = readJsonRel(".obsidian/community-plugins.json", OUT, []);
-    if (communityPlugins.length !== 27) fail(`plugin community attesi 27, trovati ${communityPlugins.length}`);
+    const expectedPluginList = [...expectedPlugins].sort();
+    const releasePluginList = [...communityPlugins].sort();
+    if (JSON.stringify(releasePluginList) !== JSON.stringify(expectedPluginList)) {
+        fail(`profilo plugin first-run non allineato: attesi ${expectedPluginList.join(", ")}, trovati ${releasePluginList.join(", ")}`);
+    }
     for (const plugin of communityPlugins) {
         if (!existsRel(`.obsidian/plugins/${plugin}/manifest.json`, OUT)) fail(`manifest plugin mancante: ${plugin}`);
         if (!existsRel(`.obsidian/plugins/${plugin}/main.js`, OUT)) fail(`main plugin mancante: ${plugin}`);

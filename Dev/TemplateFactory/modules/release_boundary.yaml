@@ -100,8 +100,10 @@ copy_policy:
     - LICENSE.md
     - node_utils.js
     - repo_hygiene.js
+    - release_boundary_utils.js
     - release_beta.js
     - release_clean.js
+    - release_plugin_profile.js
     - README.md
     - template_factory_utils.py
   required_user_ignore_filters:
@@ -219,6 +221,17 @@ required_plugins:
   - obsidian-excalidraw-plugin
   - maps
   - advanced-canvas
+release_plugin_profile:
+  enabled_classes:
+    - core
+    - supporto
+  enabled_optional_plugins:
+    - fantasy-content-generator
+  excluded_classes:
+    - manutenzione
+  excluded_optional_plugins:
+    - zoom-map
+    - hex-cartographer
 forbidden_automation_prefixes:
   - audit_
   - check_
