@@ -274,6 +274,67 @@
     }
   }
 
+  function renderPluginTroubleshooting(dv, workflowId = "") {
+    const pluginIds = {
+      "Advanced Canvas": "advanced-canvas",
+      "Calendarium": "calendarium",
+      "Callout Manager": "callout-manager",
+      "Dataview": "dataview",
+      "Dice Roller": "obsidian-dice-roller",
+      "Fantasy Statblocks": "obsidian-5e-statblocks",
+      "Folder Notes": "folder-notes",
+      "Initiative Tracker": "initiative-tracker",
+      "Kanban": "obsidian-kanban",
+      "Maps": "maps",
+      "Media Extended": "media-extended",
+      "Meta Bind": "obsidian-meta-bind-plugin",
+      "Metadata Menu": "metadata-menu",
+      "Tasks": "obsidian-tasks-plugin",
+      "Templater": "templater-obsidian"
+    };
+    const workflowPlugins = {
+      dashboard_dm: ["Meta Bind", "Dataview", "Templater", "Tasks"],
+      prepara_sessione: ["Templater", "Dataview", "Tasks", "Meta Bind", "Dice Roller", "Initiative Tracker", "Fantasy Statblocks", "Media Extended"],
+      gioca_live: ["Meta Bind", "Dataview", "Dice Roller", "Initiative Tracker", "Fantasy Statblocks", "Media Extended", "Callout Manager"],
+      post_sessione: ["Templater", "Meta Bind", "Tasks", "Dataview", "Calendarium"]
+    };
+    const labels = workflowPlugins[workflowId] ?? ["Dataview", "Meta Bind", "Templater", "Tasks", "Dice Roller", "Fantasy Statblocks"];
+    const enabled = label => {
+      const id = pluginIds[label];
+      return id ? app.plugins?.enabledPlugins?.has(id) === true : null;
+    };
+    const symptomByPlugin = {
+      "Dataview": "Tabelle e dashboard restano vuote o mostrano codice.",
+      "Meta Bind": "I pulsanti BUTTON o gli input non reagiscono.",
+      "Templater": "Wizard e creazione note non partono o restano incompleti.",
+      "Tasks": "Checklist operative e bacheche non filtrano i task.",
+      "Dice Roller": "I tiri dice restano testo.",
+      "Fantasy Statblocks": "Le creature non appaiono come schede.",
+      "Initiative Tracker": "Gli incontri non entrano nel flusso a turni.",
+      "Media Extended": "Audio, video o riferimenti media non si aprono come previsto.",
+      "Calendarium": "Date e calendario non vengono mostrati."
+    };
+    const grid = dv.el("div", "", { cls: "gdr-card-grid compact" });
+
+    grid.innerHTML = labels.map(label => {
+      const ok = enabled(label);
+      const id = pluginIds[label] ?? "plugin non mappato";
+      return cardHtml({
+        title: label,
+        meta: ok === true ? "Pronto" : ok === false ? "Da controllare" : "Verifica manuale",
+        body: symptomByPlugin[label] ?? "Controlla che il plugin sia installato, abilitato e aggiornato.",
+        importa: ok === true ? `Plugin attivo: ${id}` : `Apri Impostazioni > Plugin community e verifica ${id}.`,
+        cls: `gdr-info-card compact ${ok === true ? "gdr-kind-ready" : "gdr-kind-missing"}`
+      });
+    }).join("") + cardHtml({
+      title: "Fallback manuale",
+      meta: workflowId || "generale",
+      body: "Se un pulsante non esegue l'azione, usa il testo del workflow come procedura manuale e aggiorna i campi YAML dalla nota.",
+      importa: "Il vault deve restare usabile anche senza automazione perfetta.",
+      cls: "gdr-info-card compact"
+    });
+  }
+
   function renderM7FamilyCards(dv, source = null, family = "generica") {
     const page = source ?? dv.current();
     const definitions = {
@@ -409,6 +470,7 @@
     renderPropagationTargets: continuityViews.renderPropagationTargets,
     renderWorldImpact: continuityViews.renderWorldImpact,
     renderWorldCreationStatus,
+    renderPluginTroubleshooting,
     renderWorkflowCommandDeck,
     renderSessionMapCards: mapViews.renderSessionMapCards,
     renderTableCockpit: sessionViews.renderTableCockpit

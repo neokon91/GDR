@@ -14,6 +14,7 @@ const REQUIRED_EXPORTS = [
     "renderLiveCommandCenter",
     "renderM11ContinuityChain",
     "renderPlayerView",
+    "renderPluginTroubleshooting",
     "renderPostSessionCommandCenter",
     "renderPropagationTargets",
     "renderSessionAnchorCards",
@@ -33,6 +34,14 @@ const REQUIRED_MODULES = [
 ];
 
 global.app = {
+    plugins: {
+        enabledPlugins: new Set([
+            "dataview",
+            "obsidian-meta-bind-plugin",
+            "templater-obsidian",
+            "obsidian-tasks-plugin"
+        ])
+    },
     vault: {
         adapter: {
             async read(relPath) {
@@ -71,6 +80,10 @@ async function main() {
             }
             if (!rendered.some(node => String(node.innerHTML).includes("BUTTON[evento-live-z-modelli-live-evento-md]"))) {
                 errors.push("renderWorkflowCommandDeck: output workflow gioca_live senza gruppi di cattura");
+            }
+            views.renderPluginTroubleshooting(dv, "dashboard_dm");
+            if (!rendered.some(node => String(node.innerHTML).includes("Fallback manuale"))) {
+                errors.push("renderPluginTroubleshooting: output senza fallback manuale");
             }
         }
     }

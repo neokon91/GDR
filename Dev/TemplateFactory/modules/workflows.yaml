@@ -2,6 +2,98 @@ id: workflows
 purpose: Flussi principali da coprire con template generati e integrazioni plugin.
 version: 0.1.0
 workflows:
+  dashboard_dm:
+    user_goal: Scegliere in pochi secondi se preparare, giocare, consolidare o creare materiale.
+    entry_points:
+      - Hub/1. DM Dashboard.md
+    quick_actions:
+      - button: durante-il-gioco-durante-il-gioco
+        label: Durante il gioco
+        use_when: la sessione e pronta o in corso
+      - button: prossima-sessione-risorse-preparazione-sessione
+        label: Preparazione sessione
+        use_when: devi preparare o scegliere la prossima sessione
+      - button: post-sessione-z-bacheche-post-sessione
+        label: Post sessione
+        use_when: devi chiudere appunti, recap e conseguenze
+      - button: aiuto-risorse-se-qualcosa-non-funziona
+        label: Aiuto
+        use_when: pulsanti, viste o tabelle non rispondono
+    action_groups:
+      navigazione:
+        label: Navigazione DM
+        purpose: Aprire le superfici operative senza cercarle nella sidebar.
+        actions:
+          - button: stato-campagna-mondi-stato-del-mondo
+            label: Stato campagna
+            use_when: vuoi controllare pressioni e conseguenze aperte
+          - button: mondo-vivo-motore-mondo-vivo
+            label: Mondo vivo
+            use_when: vuoi decidere cosa si muove fuori scena
+          - button: fuori-scena-cosa-succede-fuori-scena
+            label: Fuori scena
+            use_when: devi scegliere le reazioni prima della prossima sessione
+          - button: inbox-inbox-inbox
+            label: Inbox
+            use_when: devi smistare appunti e materiale grezzo
+          - button: worldbuilder-worldbuilder-dashboard
+            label: Worldbuilder
+            use_when: devi costruire o collegare mondo, luoghi e fazioni
+          - button: campagna-da-ambientazione-campagna-da-ambientazione
+            label: Campagna da ambientazione
+            use_when: vuoi trasformare worldbuilding in gioco
+      creazione:
+        label: Crea per il tavolo
+        purpose: Creare materiale strutturato solo quando serve alla prossima sessione.
+        actions:
+          - button: nuovo-contenuto-dm-z-modelli-dm-dm-router-md
+            label: Router DM
+            use_when: non sai ancora quale scheda creare
+          - button: nuova-campagna-z-modelli-dm-campagna-md
+            label: Nuova campagna
+            use_when: serve un contenitore di gioco
+          - button: campagna-da-regione-z-modelli-dm-campagna-da-regione-md
+            label: Campagna da regione
+            use_when: vuoi partire da un territorio gia definito
+          - button: arco-da-conflitto-z-modelli-dm-arco-da-conflitto-md
+            label: Arco da conflitto
+            use_when: un conflitto deve diventare struttura di sessioni
+          - button: nuova-sessione-z-modelli-dm-sessione-md
+            label: Nuova sessione
+            use_when: devi preparare il prossimo tavolo
+          - button: nuova-missione-z-modelli-dm-missione-md
+            label: Nuova missione
+            use_when: emerge un obiettivo concreto
+          - button: nuovo-clock-z-modelli-dm-tracciato-md
+            label: Nuovo clock
+            use_when: una pressione va resa visibile
+          - button: nuovo-incontro-z-modelli-dm-incontro-md
+            label: Nuovo incontro
+            use_when: serve una scena pronta o un combattimento
+      manutenzione:
+        label: Manutenzione
+        purpose: Tenere pulito il materiale generato e risolvere problemi prima del tavolo.
+        actions:
+          - button: preparazione-sessioni-z-bacheche-preparazione-sessioni
+            label: Bacheca preparazione
+            use_when: devi riordinare le sessioni in corso
+          - button: task-dm-risorse-task-dm
+            label: Task DM
+            use_when: devi vedere lavoro aperto e manutenzione
+          - button: smista-generati-risorse-smistamento-bozze-generate
+            label: Smista generati
+            use_when: materiale generato deve diventare nota utile o archivio
+          - button: generatore-fantasy-fantasy-content-generator-open-generator
+            label: Generatore fantasy
+            use_when: vuoi produrre bozza da smistare, non canone diretto
+          - button: guida-dm-risorse-guida-dm
+            label: Guida DM
+            use_when: devi ricordare il flusso di uso del vault
+    required_plugins:
+      - Meta Bind
+      - Dataview
+      - Templater
+      - Tasks
   crea_mondo:
     user_goal: Creare un mondo homebrew senza sapere quali file servono.
     entry_points:
@@ -53,6 +145,39 @@ workflows:
       - button: durante-il-gioco-durante-il-gioco
         label: Apri tavolo
         use_when: la sessione e pronta o in corso
+    action_groups:
+      ancore:
+        label: Ancore mondo
+        purpose: Collegare materiale vivo prima di compilare i cinque blocchi della sessione.
+        actions:
+          - button: worldbuilder-worldbuilder-dashboard-2
+            label: Worldbuilder
+            use_when: mancano mondo, luogo, fazione o pressione
+          - button: nuova-missione-z-modelli-dm-missione-md
+            label: Nuova missione
+            use_when: serve un obiettivo giocabile
+          - button: nuovo-clock-z-modelli-dm-tracciato-md
+            label: Nuovo clock
+            use_when: manca una pressione visibile
+          - button: nuova-fazione-z-modelli-fazione-router-md
+            label: Nuova fazione
+            use_when: serve un potere che reagisce
+      materiale:
+        label: Materiale pronto
+        purpose: Preparare solo cio che puo arrivare davvero al tavolo.
+        actions:
+          - button: nuovo-incontro-z-modelli-dm-incontro-md
+            label: Nuovo incontro
+            use_when: serve una scena meccanica o un combattimento
+          - button: nuova-dispensa-z-modelli-dispensa-md
+            label: Nuova dispensa
+            use_when: serve materiale da consegnare o leggere
+          - button: nuova-mappa-fronti-z-modelli-mappe-mappa-excalidraw-fronti-excalidraw-md-2
+            label: Nuova mappa fronti
+            use_when: vuoi visualizzare relazioni, pressioni o fronti
+          - button: nuovo-png-z-modelli-personaggio-png-md
+            label: Nuovo PNG
+            use_when: serve una persona pronta in scena
     required_plugins:
       - Templater
       - Dataview

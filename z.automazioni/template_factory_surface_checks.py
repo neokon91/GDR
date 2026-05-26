@@ -123,7 +123,7 @@ def validate_workflow_quick_actions(modules: dict[str, dict], errors: list[str])
             button = str((action or {}).get("button", ""))
             if not button:
                 fail(f"workflows.{workflow_id}.quick_actions[{index}]: button mancante", errors)
-            elif button not in button_ids:
+            elif button not in button_ids and button not in configured_button_ids:
                 fail(f"workflows.{workflow_id}.quick_actions[{index}]: pulsante non dichiarato ({button})", errors)
             if not (action or {}).get("label"):
                 fail(f"workflows.{workflow_id}.quick_actions[{index}]: label mancante", errors)

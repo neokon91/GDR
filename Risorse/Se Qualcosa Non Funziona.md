@@ -15,15 +15,8 @@ tab: Diagnosi
 
 > [!regia] Prima Verifica
 > ```dataviewjs
-> const enabled = id => app.plugins.enabledPlugins.has(id);
-> const checks = [
->   ["Dataview", enabled("dataview"), "Tabelle e DataviewJS"],
->   ["Templater", enabled("templater-obsidian"), "Wizard e creazione note"],
->   ["Meta Bind", enabled("obsidian-meta-bind-plugin"), "Input e pulsanti"],
->   ["Tasks", enabled("obsidian-tasks-plugin"), "Checklist operative"],
->   ["CSS", true, "Attiva lo snippet gdr-vault se la grafica è piatta o poco leggibile"]
-> ];
-> dv.table(["Strumento", "Stato", "Serve per"], checks.map(([a,b,c]) => [a, b ? "Pronto" : "Da controllare", c]));
+> const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+> gdr.renderPluginTroubleshooting(dv);
 > ```
 
 tab: Ripara
