@@ -209,7 +209,7 @@
   {
     "id": "zoom-map",
     "name": "TTRPG Tools: Maps",
-    "class": "supporto mappe tavolo",
+    "class": "opzionale guidato mappe tavolo",
     "function": "Mappe zoomabili con pin e riferimenti al tavolo.",
     "guide": "Risorse/Mappe/Mappe.md",
     "operational": "Risorse/Mappe/Mappe.md",
@@ -218,7 +218,7 @@
   {
     "id": "hex-cartographer",
     "name": "Hex Cartographer",
-    "class": "supporto esplorazione",
+    "class": "opzionale guidato esplorazione",
     "function": "Hexcrawl collegato a territori, incontri e conseguenze.",
     "guide": "Risorse/Mappe/Mappe.md",
     "operational": "Risorse/Mappe/Mappe.md",

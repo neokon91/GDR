@@ -12,7 +12,11 @@ const CONTRACTS = "Dev/TemplateFactory/modules/plugin_contracts.yaml";
 const BINDINGS = "Dev/TemplateFactory/modules/plugin_bindings.yaml";
 
 const REQUIRED_CLASSES = new Set(["core", "supporto", "opzionale", "manutenzione"]);
-const OPTIONAL_ALLOWED = new Set(["fantasy-content-generator"]);
+const OPTIONAL_ALLOWED = new Set([
+    "fantasy-content-generator",
+    "zoom-map",
+    "hex-cartographer"
+]);
 const SUPPORT_LIGHT_ALLOWED = new Set([
     "obsidian-icon-folder",
     "obsidian-style-settings",

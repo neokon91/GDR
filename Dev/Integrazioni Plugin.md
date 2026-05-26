@@ -97,8 +97,8 @@ Nessun plugin installato e candidato alla rimozione senza prova concreta. Ogni p
 | Tabs | supporto UX | Riduzione scrolling solo in note lunghe. |
 | Style Settings | supporto visuale | Opzioni visuali stabili e documentate. |
 | Advanced Tables | supporto editing | Tabelle manuali e tabelle casuali leggibili. |
-| TTRPG Tools: Maps | supporto mappe tavolo | Mappe zoomabili con pin linkati alle note. |
-| Hex Cartographer | supporto esplorazione | Hexcrawl collegato a territori, incontri e conseguenze. |
+| TTRPG Tools: Maps | opzionale guidato mappe tavolo | Mappe zoomabili con pin linkati alle note, solo quando una mappa reale ne giustifica l'uso. |
+| Hex Cartographer | opzionale guidato esplorazione | Hexcrawl collegato a territori, incontri e conseguenze, solo per campagne dove le distanze contano. |
 | Linter | manutenzione | Pulizia manuale controllata, mai lint on save distruttivo. |
 | BRAT | manutenzione | Gestione plugin beta/non ufficiali, invisibile al DM. |
 
