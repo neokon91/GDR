@@ -31,7 +31,7 @@ FantasyWorld non va importato in blocco: va usato come laboratorio da cui promuo
 | Area FantasyWorld | Valore per GDR | Azione consigliata |
 |---|---|---|
 | `tests/test_srd.py` | Contratti meccanici semplici e verificabili per classi, abilita, talenti, point buy e background. | Portato il primo gate equivalente in `check:srd-character-data`; estenderlo quando entrano talenti/origini completi, evitando pytest come dipendenza runtime del vault. |
-| `YAML/yaml2json/srd/talenti.yaml` | Talenti modellati come scelte, prerequisiti e benefici, non solo testo. | Estendere `srd_character_build.yaml` con talenti e scelte meccaniche quando il wizard PG deve superare il livello 1. |
+| `YAML/yaml2json/srd/talenti.yaml` | Talenti modellati come scelte, prerequisiti e benefici, non solo testo. | Primo porting limitato ai talenti di origine referenziati dai background; estendere solo quando il wizard PG deve superare il livello 1. |
 | `JINJA/components/macro.jinja` | Macro riusabili per `VIEW`, `INPUT`, bonus caratteristica, tiri salvezza e abilita. | Mantenere la versione GDR in `Dev/TemplateFactory/jinja/macros/pg_mechanics.j2` e aggiungere controlli contro macro Meta Bind non dichiarate. |
 | `JS/creaPersonaggio.js` | Sequenza guidata completa: classe, specie, background, competenze, statistiche, HP, tratti. | Continuare ad assorbire solo la logica di scelta in `z.automazioni/pg.js`, usando `helpers.js` e campi narrativi GDR. |
 | `YAML/altro/assi_tematici/*.yaml` | Profondita worldbuilding parametrica per fazioni, culture, magia, luoghi, culti, lingue, insediamenti, artefatti. | Primo porting selettivo in `worldbuilding_depth_axes.yaml`: 3-5 assi per profilo, opzionali, usati come domande di sviluppo e non come campi obbligatori su ogni nota. |
@@ -50,11 +50,10 @@ FantasyWorld non va importato in blocco: va usato come laboratorio da cui promuo
 
 ## Backlog consigliato
 
-1. Estendere `srd_character_build.yaml` con talenti e scelte del livello 1, mantenendo slug e label allineati al resto del vault.
-2. Aggiungere controlli statici sulle tabs generate: tab non vuoti, separatori corretti, niente nesting profondo nei template utente.
-3. Usare la cosmologia FantasyWorld solo come profilo opzionale per mondi ad alta componente metafisica.
-4. Collegare gli assi tematici a generatori o viste di revisione solo dopo averne verificato l'utilita al tavolo.
-5. Tenere ogni demo sorgente fuori dal vault: usare generatori (`generate:demo-world`, `generate:demo-fixture`) e artefatti in `dist/`.
+1. Estendere il wizard PG per usare i talenti di origine come scelte guidate, non solo come dati in frontmatter.
+2. Usare la cosmologia FantasyWorld solo come profilo opzionale per mondi ad alta componente metafisica.
+3. Collegare gli assi tematici a generatori o viste di revisione solo dopo averne verificato l'utilita al tavolo.
+4. Tenere ogni demo sorgente fuori dal vault: usare generatori (`generate:demo-world`, `generate:demo-fixture`) e artefatti in `dist/`.
 
 ## Pipeline GDR (non duplicare converter.py)
 

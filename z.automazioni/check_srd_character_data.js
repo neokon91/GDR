@@ -39,6 +39,12 @@ function assertRefs(errors, refs, valid, label) {
     }
 }
 
+function choiceOptions(choice) {
+    if (!choice || typeof choice !== "object") return [];
+    if (Array.isArray(choice.opzioni)) return choice.opzioni;
+    return [];
+}
+
 function main() {
     const errors = [];
     const corePath = repoPath(DATA_DIR, "core.json");
@@ -124,11 +130,40 @@ function main() {
         }
     }
 
+    const talents = new Set(keys(opzioni.talenti));
+    if (requireNonEmptyObject(errors, opzioni.talenti, "opzioni.talenti")) {
+        for (const [slug, talent] of Object.entries(opzioni.talenti)) {
+            if (!talent.label) errors.push(`opzioni.talenti.${slug}: label mancante`);
+            if (talent.categoria !== "origini") {
+                errors.push(`opzioni.talenti.${slug}: solo talenti di origine ammessi in questa fase`);
+            }
+            if (typeof talent.repeatable !== "boolean") {
+                errors.push(`opzioni.talenti.${slug}: repeatable deve essere booleano`);
+            }
+            if (!requireObject(errors, talent.benefici, `opzioni.talenti.${slug}.benefici`)) continue;
+
+            // I talenti derivati da Iniziato alla Magia devono restare vincolati alla lista dichiarata.
+            if (talent.base === "iniziato_alla_magia") {
+                assertRefs(
+                    errors,
+                    choiceOptions(talent.scelte?.caratteristica_incantatore),
+                    stats,
+                    `opzioni.talenti.${slug}.scelte.caratteristica_incantatore`
+                );
+                const lists = new Set(choiceOptions(talent.scelte?.lista_incantesimi));
+                if (![...lists].every(list => ["chierico", "druido", "mago"].includes(list))) {
+                    errors.push(`opzioni.talenti.${slug}: lista_incantesimi non supportata`);
+                }
+            }
+        }
+    }
+
     if (requireNonEmptyObject(errors, opzioni.background, "opzioni.background")) {
         for (const [slug, background] of Object.entries(opzioni.background)) {
             if (!background.label) errors.push(`opzioni.background.${slug}: label mancante`);
             assertRefs(errors, background.competenze_abilita, skills, `opzioni.background.${slug}.competenze_abilita`);
             assertRefs(errors, background.aumento_caratteristiche?.opzioni, stats, `opzioni.background.${slug}.aumento_caratteristiche.opzioni`);
+            assertRefs(errors, background.talento_origine, talents, `opzioni.background.${slug}.talento_origine`);
             if (!Array.isArray(background.competenze_abilita) || background.competenze_abilita.length < 2) {
                 errors.push(`opzioni.background.${slug}: competenze_abilita insufficienti`);
             }
@@ -140,7 +175,7 @@ function main() {
     console.log(
         `SRD character data OK: ${keys(opzioni.classi).length} classi, ` +
         `${keys(opzioni.specie).length} specie, ${keys(opzioni.background).length} background, ` +
-        `${skills.size} abilita.`
+        `${keys(opzioni.talenti).length} talenti, ${skills.size} abilita.`
     );
 }
 

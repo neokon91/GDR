@@ -303,6 +303,90 @@ opzioni:
           label: Tenacia
           descrizione: Quando a 0 PF puoi restare cosciente (vedi SRD).
   sottospecie: {}
+  talenti:
+    abile:
+      label: Abile
+      categoria: origini
+      repeatable: true
+      prerequisiti: []
+      scelte:
+        competenze:
+          quantita: 3
+          tipo: [abilita, strumenti]
+      benefici:
+        competenze:
+          da_scelta: competenze
+    aggressore_selvaggio:
+      label: Aggressore Selvaggio
+      categoria: origini
+      repeatable: false
+      prerequisiti: []
+      benefici:
+        danni_arma:
+          ritira_dado: true
+          volte: 1
+          per: turno
+    allerta:
+      label: Allerta
+      categoria: origini
+      repeatable: false
+      prerequisiti: []
+      benefici:
+        iniziativa:
+          bonus: proficiency_bonus
+        scambio_iniziativa:
+          attivo: true
+          momento: dopo_tiro_iniziativa
+    iniziato_alla_magia_chierico:
+      label: Iniziato alla Magia (Chierico)
+      categoria: origini
+      repeatable: false
+      prerequisiti: []
+      base: iniziato_alla_magia
+      scelte:
+        lista_incantesimi:
+          opzioni: [chierico]
+        caratteristica_incantatore:
+          opzioni: [saggezza]
+        trucchetti:
+          quantita: 2
+          tipo: incantesimo
+          livello: 0
+        incantesimo_livello_1:
+          quantita: 1
+          tipo: incantesimo
+          livello: 1
+      benefici:
+        incantesimo_preparato:
+          da_scelta: incantesimo_livello_1
+        lancio_gratuito:
+          usi: 1
+          recupero: riposo_lungo
+    iniziato_alla_magia_mago:
+      label: Iniziato alla Magia (Mago)
+      categoria: origini
+      repeatable: false
+      prerequisiti: []
+      base: iniziato_alla_magia
+      scelte:
+        lista_incantesimi:
+          opzioni: [mago]
+        caratteristica_incantatore:
+          opzioni: [intelligenza]
+        trucchetti:
+          quantita: 2
+          tipo: incantesimo
+          livello: 0
+        incantesimo_livello_1:
+          quantita: 1
+          tipo: incantesimo
+          livello: 1
+      benefici:
+        incantesimo_preparato:
+          da_scelta: incantesimo_livello_1
+        lancio_gratuito:
+          usi: 1
+          recupero: riposo_lungo
   background:
     accolito:
       label: Accolito

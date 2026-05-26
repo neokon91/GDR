@@ -33,6 +33,7 @@ Completato:
 - `z.fileclass/incontro.md` e `z.bases/Incontri.base` espongono i campi M11 necessari a gancio, uso al tavolo, ricompense, sessioni, prossima mossa, `entita_impattate` e `propaga_a`.
 - `z.engine/session_views.js` legge la pipeline D&D 5.5 tramite `renderDnd55MaterialPipeline` e `renderCombatReadiness`; `check_m11_fixture.js` valida gia la catena tecnica end-to-end. La fixture M11 resta prova tecnica, non demo finale.
 - Post-FantasyWorld: i dati PG/SRD hanno un gate dedicato `check:srd-character-data`; la demo "Regno di Prova" non vive piu come nota sorgente, ma viene generata da `npm run generate:demo-world` dentro la release/fixture.
+- PG/SRD ora include il primo catalogo talenti di origine referenziato dai background; `check:srd-character-data` blocca background con `talento_origine` non esistente.
 - Gli assi tematici FantasyWorld sono stati portati in forma selettiva in `worldbuilding_depth_axes.yaml`: profili iniziali fazione, cultura, magia e luogo; uso opzionale, scala 1-5, massimo cinque assi per profilo.
 - Vincolo diritti: gli assi tematici FantasyWorld sono idea originale riservata di neokon91, non inclusa nella licenza generale del vault. `check:templates` deve fallire se il blocco diritti del modulo viene rimosso o allentato.
 - Taglio runtime avanzato: mappe in `z.engine/session_maps.js`, pipeline D&D in `z.engine/session_dnd.js`, player view in `z.engine/session_player.js`, continuita in `z.engine/session_continuity.js`, sessione/live/post in `z.engine/session_runtime.js`, bridge pubblico ridotto in `z.engine/session_views.js`.
@@ -70,7 +71,7 @@ Scopo: rendere mantenibile la catena scelta dei giocatori -> evento -> conseguen
 Priorita:
 
 1. Monitorare la CI GitHub su `main`; localmente `gh` richiede autenticazione e il repository non e leggibile via web anonimo.
-2. Chiudere l'integrazione FantasyWorld gia avviata: talenti/origini, macro Jinja e uso pratico degli assi tematici senza importare il laboratorio in blocco.
+2. Chiudere l'integrazione FantasyWorld gia avviata: uso guidato dei talenti di origine nel wizard PG, macro Jinja e uso pratico degli assi tematici senza importare il laboratorio in blocco.
 3. Estendere solo controlli automatici che riducono rischio reale: runtime load, player-safety, release artifact, importer e dati SRD PG.
 4. Estrarre i prossimi controlli densi da `check_vault.js` in moduli riusabili, iniziando da demo policy e plugin-native sheets.
 5. Tenere `session_views.js` come bridge pubblico e non aggiungere nuove famiglie runtime dentro il bridge.
