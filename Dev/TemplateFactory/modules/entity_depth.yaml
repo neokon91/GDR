@@ -277,3 +277,46 @@ contracts:
   frontmatter_profiles_must_expose_required_fields: true
   sections_and_tabs_must_exist_before_jinja_use: true
   no_dashboard_required: true
+  playability_gate:
+    purpose: Ogni famiglia deve esporre abbastanza leve per diventare scena, scelta o conseguenza senza imporre un asse tematico proprietario.
+    min_groups_present: 3
+    field_groups:
+      tavolo:
+        reason: L'utente deve capire come portare la scheda in scena.
+        fields:
+          - gancio
+          - uso_al_tavolo
+          - impressione
+          - obiettivo
+          - scelta
+          - innesco
+          - posta
+          - luogo
+          - missioni
+          - proprietario
+      movimento:
+        reason: La scheda deve poter cambiare il mondo anche se il party non la tocca.
+        fields:
+          - pressione
+          - prossima_mossa
+          - evoluzione_se_ignorata
+          - progress_value
+          - progress_max
+          - causa
+      conseguenza:
+        reason: Le conseguenze devono poter propagare stato e non restare testo isolato.
+        fields:
+          - conseguenze
+          - entita_impattate
+          - propaga_a
+          - ricompense
+          - rischi
+      collegamento:
+        reason: Una nota giocabile deve avere almeno un ponte verso mondo, sessione o altre entita.
+        fields:
+          - mondo
+          - luoghi
+          - fazioni
+          - sessioni
+          - connessioni
+          - creature

@@ -193,6 +193,10 @@ def validate_rendering(modules: dict[str, dict], errors: list[str]) -> None:
 
 def validate_entity_depth_contracts(modules: dict[str, dict], errors: list[str]) -> None:
     families = modules["entity_depth"].get("families", {})
+    contracts = modules["entity_depth"].get("contracts", {}) or {}
+    playability_gate = contracts.get("playability_gate", {}) or {}
+    playability_groups = playability_gate.get("field_groups", {}) or {}
+    min_playability_groups = int(playability_gate.get("min_groups_present", 0) or 0)
     if not families:
         fail("entity_depth: nessuna famiglia definita", errors)
         return
@@ -204,6 +208,22 @@ def validate_entity_depth_contracts(modules: dict[str, dict], errors: list[str])
     layouts = modules["tabs"].get("layouts", {})
     bindings = modules["plugin_bindings"]
     plugin_bindings = bindings.get("bindings", {})
+
+    if min_playability_groups <= 0:
+        fail("entity_depth.contracts.playability_gate: min_groups_present deve essere positivo", errors)
+    if not isinstance(playability_groups, dict) or not playability_groups:
+        fail("entity_depth.contracts.playability_gate: field_groups mancante", errors)
+
+    for group_id, group in playability_groups.items():
+        fields = group.get("fields", []) if isinstance(group, dict) else []
+        if not fields:
+            fail(f"entity_depth.contracts.playability_gate.{group_id}: fields mancante", errors)
+            continue
+        if not group.get("reason"):
+            fail(f"entity_depth.contracts.playability_gate.{group_id}: reason mancante", errors)
+        for field in fields:
+            if str(field) not in known_fields:
+                fail(f"entity_depth.contracts.playability_gate.{group_id}: campo non catalogato ({field})", errors)
 
     for family_id, family in families.items():
         frontmatter_profile = str(family.get("frontmatter_profile", ""))
@@ -220,6 +240,7 @@ def validate_entity_depth_contracts(modules: dict[str, dict], errors: list[str])
             for field in frontmatter_profiles[frontmatter_profile].get("fields", [])
             if isinstance(field, dict) and field.get("key")
         }
+        required_fields = {str(field) for field in family.get("required_frontmatter_fields", []) or []}
         runtime_prompts = set((runtime_profiles[runtime_profile].get("prompts", {}) or {}).keys())
 
         for field in family.get("required_frontmatter_fields", []) or []:
@@ -249,6 +270,19 @@ def validate_entity_depth_contracts(modules: dict[str, dict], errors: list[str])
             key = plugin_key(plugin, bindings)
             if key not in plugin_bindings:
                 fail(f"entity_depth.{family_id}: plugin surface non dichiarata ({plugin})", errors)
+
+        present_groups = []
+        for group_id, group in playability_groups.items():
+            group_fields = {str(field) for field in (group.get("fields", []) if isinstance(group, dict) else [])}
+            if required_fields & profile_fields & group_fields:
+                present_groups.append(str(group_id))
+
+        if len(present_groups) < min_playability_groups:
+            fail(
+                f"entity_depth.{family_id}: contratto giocabilita debole "
+                f"({len(present_groups)}/{min_playability_groups} gruppi: {', '.join(present_groups) or 'nessuno'})",
+                errors,
+            )
 
 
 def validate_dnd55_options(modules: dict[str, dict], errors: list[str]) -> None:

@@ -116,7 +116,9 @@ La conseguenza pratica: YAML decide cosa esiste; Jinja assembla; JS esegue funzi
 
 `entity_depth.yaml` e il contratto di profondita per famiglie fantasy. Per `luogo`, `fazione`, `missione`, `tracciato`, `incontro`, `creatura` e `oggetto` dichiara campi frontmatter, prompt runtime, sezioni, layout tabs e superfici plugin obbligatorie.
 
-`npm run check:templates` blocca una famiglia se un campo non e catalogato, se il profilo frontmatter non lo espone, se manca un prompt runtime, se tabs/sezioni non esistono o se una superficie plugin richiesta non e dichiarata in `plugin_bindings.yaml`.
+Il blocco `contracts.playability_gate` definisce la soglia minima per non creare schede enciclopediche morte: ogni famiglia deve esporre almeno tre gruppi tra tavolo, movimento, conseguenza e collegamento.
+
+`npm run check:templates` blocca una famiglia se un campo non e catalogato, se il profilo frontmatter non lo espone, se manca un prompt runtime, se tabs/sezioni non esistono, se una superficie plugin richiesta non e dichiarata in `plugin_bindings.yaml` o se la famiglia non supera il gate di giocabilita.
 
 ## Regola M11 D&D Nel Mondo
 
