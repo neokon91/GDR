@@ -23,6 +23,21 @@ const REQUIRED = [
     "z.engine/session_runtime.js"
 ];
 const FORBIDDEN_ROOTS = ["Dev", ".github", "dist", "node_modules"];
+const FORBIDDEN_RELEASE_PATHS = [
+    "docs",
+    "Dev/TemplateFactory/modules/worldbuilding_depth_axes.yaml",
+    "Dev/TemplateFactory/modules/demo_contract.yaml",
+    "Mondi/[Demo] Regno di Prova.md",
+    "Mondi/Brumafonda Demo.md",
+    "Campagne/Sale Sotto La Nebbia/Sale Sotto La Nebbia.md"
+];
+const FORBIDDEN_RELEASE_TEXT = [
+    "idea_originale_riservata",
+    "non_inclusa_nella_licenza_generale_del_vault",
+    "source_lab: /Users/andrea/Desktop/projects/FantasyWorld",
+    "assi_tematici_fazione",
+    "assi_tematici_magia"
+];
 const REQUIRED_PLUGINS = [
     "dataview",
     "templater-obsidian",
@@ -39,6 +54,19 @@ function fail(errors, message) {
     errors.push(message);
 }
 
+function walkFiles(root, files = []) {
+    if (!fs.existsSync(root)) return files;
+    for (const entry of fs.readdirSync(root, { withFileTypes: true })) {
+        const fullPath = path.join(root, entry.name);
+        if (entry.isDirectory()) {
+            walkFiles(fullPath, files);
+        } else if (entry.isFile()) {
+            files.push(fullPath);
+        }
+    }
+    return files;
+}
+
 function validateOutput(errors) {
     if (!fs.existsSync(OUT)) {
         fail(errors, "release artifact mancante: dist/vault-gdr-clean");
@@ -51,6 +79,9 @@ function validateOutput(errors) {
 
     for (const relPath of FORBIDDEN_ROOTS) {
         if (existsRel(OUT, relPath)) fail(errors, `percorso vietato nella release: ${relPath}`);
+    }
+    for (const relPath of FORBIDDEN_RELEASE_PATHS) {
+        if (existsRel(OUT, relPath)) fail(errors, `materiale dev/riservato vietato nella release: ${relPath}`);
     }
 
     const bridge = fs.readFileSync(path.join(OUT, "z.engine/session_views.js"), "utf8");
@@ -74,6 +105,18 @@ function validateOutput(errors) {
             if (!entry.isFile()) continue;
             if (FORBIDDEN_AUTOMATION_PREFIXES.some(prefix => entry.name.startsWith(prefix))) {
                 fail(errors, `script tecnico vietato nella release: z.automazioni/${entry.name}`);
+            }
+        }
+    }
+
+    // Protegge la release da materiale riservato o da percorsi locali del laboratorio FantasyWorld.
+    for (const file of walkFiles(OUT)) {
+        if (!file.endsWith(".md") && !file.endsWith(".yaml") && !file.endsWith(".json") && !file.endsWith(".js")) continue;
+        const relPath = path.relative(OUT, file).replace(/\\/g, "/");
+        const text = fs.readFileSync(file, "utf8");
+        for (const marker of FORBIDDEN_RELEASE_TEXT) {
+            if (text.includes(marker)) {
+                fail(errors, `${relPath}: marker riservato/dev-only nella release (${marker})`);
             }
         }
     }
