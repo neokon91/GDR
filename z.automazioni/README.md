@@ -8,6 +8,7 @@ Script usati da Templater, dashboard e manutenzione del vault.
 | --- | --- |
 | `check_vault.js` | Smoke test locale della struttura del vault, del plugin layer interno e degli script JS. |
 | `check_template_factory.py` | Valida moduli YAML, blueprint e rendering Jinja in memoria. |
+| `check_repo_quality_contract.js` | Valida `repo_quality_contract.yaml`: file obbligatori, plugin minimi, snippet, preset Metadata Menu e marker architetturali. |
 | `check_smoke.js` | Valida il gate statico della demo finale e del player-safe prima dello smoke visuale. |
 | `check_release.js` | Valida versione, changelog e verifica automatica della release pulita. |
 | `check_obsidian_user_acceptance.js` | Harness live: apre una release stabile in Obsidian con profilo persistente, verifica pagine first-run, probe runtime dei plugin, workflow Nuovo Mondo, ciclo sessione/post-sessione e persistenza. `check:obsidian-first-run` e l'unico comando che resetta profilo e accetta prompt. |
@@ -53,10 +54,9 @@ Esempio: `z.modelli/dm/Sessione.md` usa `tp.user.sessione`, quindi lo script dev
 
 ## Manutenzione Del Layer Interno
 
-- Se aggiungi un pulsante operativo, modifica `Dev/TemplateFactory/modules/metabind_config.yaml`, genera `.obsidian/plugins/obsidian-meta-bind-plugin/data.json` con `npm run render:metabind-config` e aggiungi l'id a `REQUIRED_META_BIND_BUTTONS` solo se diventa obbligatorio per il layer.
-- Se aggiungi un input template globale, aggiorna `REQUIRED_META_BIND_INPUT_TEMPLATES`.
-- Se aggiungi un preset Metadata Menu, aggiorna `REQUIRED_METADATA_MENU_PRESETS`.
-- Se aggiungi un file essenziale al layer, aggiorna `REQUIRED_LAYER_FILES`.
+- Se aggiungi un pulsante operativo obbligatorio, marca `required_for_release: true` nel catalogo YAML Meta Bind e rigenera con `npm run sync:sources`.
+- Se aggiungi un input template globale obbligatorio, marca `required_for_release: true` nel catalogo YAML Meta Bind.
+- Se aggiungi un preset Metadata Menu o un file essenziale al layer, aggiorna `Dev/TemplateFactory/modules/repo_quality_contract.yaml`.
 - Mantieni le azioni distruttive o di propagazione in `meta_actions.js`, non nei singoli template.
 - Mantieni rendering e feedback DataviewJS in `z.engine/`; `z.automazioni/session_context.js` resta ponte legacy fino alla migrazione completa.
 - I router in `z.modelli/*Router.md` devono avere una sola chiamata Templater iniziale.

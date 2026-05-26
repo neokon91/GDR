@@ -46,6 +46,7 @@ function loadYamlModule(relPath) {
 
 const FIELDS_CORE = loadYamlModule("Dev/TemplateFactory/modules/fields_core.yaml");
 const VALIDATION_CONTRACT = loadYamlModule("Dev/TemplateFactory/modules/validation_contract.yaml");
+const REPO_QUALITY_CONTRACT = loadYamlModule("Dev/TemplateFactory/modules/repo_quality_contract.yaml");
 
 function coreFieldValues(fieldName) {
     for (const group of Object.values(FIELDS_CORE.fields ?? {})) {
@@ -96,6 +97,21 @@ function requiredContractArray(pathText) {
         : [];
     if (!normalized.length) {
         throw new Error(`Dev/TemplateFactory/modules/validation_contract.yaml: ${pathText} vuoto o mancante`);
+    }
+    return normalized;
+}
+
+function repoQualityValue(pathText) {
+    return String(pathText).split(".").reduce((value, key) => value?.[key], REPO_QUALITY_CONTRACT);
+}
+
+function requiredRepoQualityArray(pathText) {
+    const values = repoQualityValue(pathText) ?? [];
+    const normalized = Array.isArray(values)
+        ? values.map(value => String(value)).filter(Boolean)
+        : [];
+    if (!normalized.length) {
+        throw new Error(`Dev/TemplateFactory/modules/repo_quality_contract.yaml: ${pathText} vuoto o mancante`);
     }
     return normalized;
 }
@@ -207,165 +223,18 @@ function requiredMetaBindButtons() {
 }
 
 const IGNORED_DIRS = new Set([".git", "node_modules", "dist"]);
-const REQUIRED_PLUGINS = [
-    "dataview",
-    "templater-obsidian",
-    "obsidian-meta-bind-plugin",
-    "js-engine",
-    "metadata-menu",
-    "folder-notes",
-    "homepage"
-];
-const REQUIRED_SNIPPETS = [
-    ".obsidian/snippets/gdr-vault.css"
-];
-const REQUIRED_FILES = [
-    "Inizia Qui.md",
-    "VERSION.md",
-    "Dev/README.md",
-    "Dev/CHANGELOG.md",
-    "Dev/CONTRIBUTING.md",
-    "Dev/Repository.md",
-    "Dev/RELEASE.md",
-    "Dev/Sviluppo Vault.md",
-    "Dev/Integrazioni Plugin.md",
-    "Dev/plugin_matrix.json",
-    "Dev/Plugin Technical Reference.md",
-    "Dev/TemplateFactory/README.md",
-    "Dev/TemplateFactory/modules/fields_core.yaml",
-    "Dev/TemplateFactory/modules/plugin_bindings.yaml",
-    "Dev/TemplateFactory/modules/plugin_contracts.yaml",
-    "Dev/TemplateFactory/modules/template_blueprints.yaml",
-    "Dev/TemplateFactory/modules/sections.yaml",
-    "Dev/TemplateFactory/modules/callouts.yaml",
-    "Dev/TemplateFactory/modules/tabs.yaml",
-    "Dev/TemplateFactory/modules/dataview_blocks.yaml",
-    "Dev/TemplateFactory/modules/metabind_inputs.yaml",
-    "Dev/TemplateFactory/modules/metabind_buttons.yaml",
-    "Dev/TemplateFactory/modules/metabind_config.yaml",
-    "Dev/TemplateFactory/modules/bases_views.yaml",
-    "Dev/TemplateFactory/modules/frontmatter_profiles.yaml",
-    "Dev/TemplateFactory/modules/validation_contract.yaml",
-    "Dev/TemplateFactory/modules/live_acceptance.yaml",
-    "Dev/TemplateFactory/modules/runtime_profiles.yaml",
-    "Dev/TemplateFactory/modules/entity_depth.yaml",
-    "Dev/TemplateFactory/modules/worldbuilding_depth_axes.yaml",
-    "Dev/TemplateFactory/modules/demo_contract.yaml",
-    "Dev/TemplateFactory/modules/release_boundary.yaml",
-    "Dev/TemplateFactory/modules/taxonomy_depth.yaml",
-    "Dev/TemplateFactory/modules/dnd55_options.yaml",
-    "Dev/TemplateFactory/modules/srd_character_build.yaml",
-    "Dev/TemplateFactory/modules/pg_mechanics_schema.yaml",
-    "z.automazioni/import_srd_character_data.js",
-    "z.automazioni/data/srd/core.json",
-    "z.automazioni/data/srd/opzioni_personaggio.json",
-    "Dev/TemplateFactory/modules/link_targets.yaml",
-    "Dev/TemplateFactory/modules/tag_rules.yaml",
-    "Dev/TemplateFactory/modules/workflows.yaml",
-    "Dev/TemplateFactory/modules/source_pipeline.yaml",
-    "Hub/1. DM Dashboard.md",
-    "Hub/Atlante del Mondo.md",
-    "Hub/Bibbia del Mondo.md",
-    "Hub/Campagna da Ambientazione.md",
-    "Hub/Compendium Del Mondo.md",
-    "Hub/Controllo Canone.md",
-    "Hub/Controllo Worldbuilding.md",
-    "Hub/Cosa Succede Fuori Scena.md",
-    "Hub/Durante il Gioco.md",
-    "Hub/Economia E Rotte.md",
-    "Hub/Geopolitical Dashboard.md",
-    "Hub/Lore Hub.md",
-    "Hub/Motore Mondo Vivo.md",
-    "Hub/Revisione Lore.md",
-    "Hub/Vista Giocatori.md",
-    "Hub/Worldbuilder Dashboard.md",
-    "Risorse/FAQ.md",
-    "Dev/Confine Release Repository.md",
-    "Dev/Release Pulita.md",
-    "Dev/Smoke 1.0 Professionale.md",
-    "Dev/Smoke Demo Finale.md",
-    "Dev/Plugin Layer Interno.md",
-    "Dev/Roadmap/1.0 Professionale.md",
-    "Dev/Roadmap/Roadmap.md",
-    "Dev/Indice Connettore GPT.md",
-    "Risorse/Smistamento Bozze Generate.md",
-    "z.fileclass/mondo.md",
-    "z.bacheche/Manutenzione Vault.md"
-];
-const REQUIRED_BASE_FILES = [
-    "z.bases/Atlante Mappe.base",
-    "z.bases/Economia.base",
-    "z.bases/Fazioni.base",
-    "z.bases/Incontri.base",
-    "z.bases/Luoghi.base",
-    "z.bases/Missioni.base",
-    "z.bases/PNG.base",
-    "z.bases/Worldbuilding.base"
-];
-const REQUIRED_LAYER_FILES = [
-    "z.automazioni/helpers.js",
-    "z.automazioni/templater/sessione.js",
-    "z.automazioni/import_map.js",
-    "z.automazioni/m11_state.js",
-    "z.automazioni/generate_demo_fixture.js",
-    "z.automazioni/check_m11_fixture.js",
-    "z.automazioni/check_plugin_usage_audit.js",
-    "z.automazioni/check_runtime_load.js",
-    "z.automazioni/check_smoke.js",
-    "z.automazioni/check_validation_contract.js",
-    "z.automazioni/check_release_artifact.js",
-    "z.automazioni/check_release.js",
-    "z.automazioni/audit_template_migration.py",
-    "z.automazioni/check_template_factory.py",
-    "z.automazioni/render_template_factory.py",
-    "z.automazioni/template_factory_utils.py",
-    "z.automazioni/release_boundary_utils.js",
-    "z.automazioni/release_plugin_profile.js",
-    "z.automazioni/session_context.js",
-    "z.automazioni/meta_actions.js",
-    "z.automazioni/template_router.js",
-    "z.automazioni/wizard_layer.js",
-    "z.automazioni/world_taxonomy.js",
-    "z.automazioni/world_entity.js",
-    "z.automazioni/nuovo_mondo_homebrew.js",
-    "z.engine/README.md",
-    "z.engine/gdr_views.js",
-    "z.engine/session_continuity.js",
-    "z.engine/session_dnd.js",
-    "z.engine/session_maps.js",
-    "z.engine/session_player.js",
-    "z.engine/session_runtime.js",
-    "z.engine/session_views.js"
-];
-const REQUIRED_DEV_ARCHITECTURE_MARKERS = [
-    "Markdown = contenuto umano",
-    "YAML = stato persistente e regole dichiarative",
-    "Dataview = query layer",
-    "Meta Bind = interfaccia",
-    "Templater = generazione",
-    "z.engine + z.automazioni = runtime/logica/esecuzione"
-];
+const REQUIRED_PLUGINS = requiredRepoQualityArray("required_surfaces.plugins");
+const REQUIRED_SNIPPETS = requiredRepoQualityArray("required_surfaces.snippets");
+const REQUIRED_FILES = requiredRepoQualityArray("required_surfaces.files");
+const REQUIRED_BASE_FILES = requiredRepoQualityArray("required_surfaces.base_files");
+const REQUIRED_LAYER_FILES = requiredRepoQualityArray("required_surfaces.layer_files");
+const REQUIRED_DEV_ARCHITECTURE_MARKERS = requiredRepoQualityArray("documentation_markers.dev_readme_architecture");
+const REQUIRED_WORKFLOW_CONTRACT_MARKERS = requiredRepoQualityArray("documentation_markers.workflow_contract");
 const PUBLIC_PRIVATE_FIELDS = requiredContractArray("private_frontmatter_fields");
 const PRIVATE_TEXT_TERMS = requiredContractArray("private_text_terms");
 const REQUIRED_META_BIND_INPUT_TEMPLATES = requiredMetaBindInputTemplates();
 const REQUIRED_META_BIND_BUTTONS = requiredMetaBindButtons();
-const REQUIRED_METADATA_MENU_PRESETS = [
-    "mondo",
-    "stato",
-    "stato_canonico",
-    "canonico",
-    "pressione",
-    "prossima_mossa",
-    "connessioni",
-    "player_safe",
-    "entita_impattate",
-    "propaga_a",
-    "sessioni",
-    "luoghi",
-    "fazioni",
-    "missioni",
-    "tracciati"
-];
+const REQUIRED_METADATA_MENU_PRESETS = requiredRepoQualityArray("required_surfaces.metadata_menu_presets");
 const TAG_RULES_FILE = "Dev/TemplateFactory/modules/tag_rules.yaml";
 const ALLOWED_CATEGORIES = requiredCoreFieldValues("categoria");
 const ALLOWED_STATES = requiredCoreFieldValues("stato");
@@ -886,7 +755,7 @@ for (const marker of REQUIRED_DEV_ARCHITECTURE_MARKERS) {
 }
 
 const workflowsText = readRel("Dev/TemplateFactory/modules/workflows.yaml");
-for (const marker of ["continuity_rules:", "trigger:", "conditions:", "effects:", "propagation:", "registra_scelta_mondo", "applica_conseguenza", "propaga_entita"]) {
+for (const marker of REQUIRED_WORKFLOW_CONTRACT_MARKERS) {
     if (!workflowsText.includes(marker)) {
         errors.push(`workflows.yaml: contratto continuita dichiarativa mancante (${marker})`);
     }

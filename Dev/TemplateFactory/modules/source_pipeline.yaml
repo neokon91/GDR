@@ -139,6 +139,23 @@ steps:
     check:
       - node
       - z.automazioni/check_validation_contract.js
+  repo_quality_contract:
+    purpose: Verifica il contratto YAML dei gate repository usati da check_vault.
+    sources:
+      - Dev/TemplateFactory/modules/repo_quality_contract.yaml
+      - Dev/TemplateFactory/modules/obsidian_config.yaml
+      - Dev/TemplateFactory/modules/release_boundary.yaml
+      - Dev/TemplateFactory/modules/workflows.yaml
+      - Dev/README.md
+      - z.automazioni/check_repo_quality_contract.js
+    outputs:
+      - memoria
+    render:
+      - node
+      - z.automazioni/check_repo_quality_contract.js
+    check:
+      - node
+      - z.automazioni/check_repo_quality_contract.js
   release_folder_notes:
     purpose: Verifica le folder notes utente di release da release_boundary.yaml e Jinja.
     sources:

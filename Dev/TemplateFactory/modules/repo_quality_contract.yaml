@@ -1,0 +1,164 @@
+id: repo_quality_contract
+purpose: Contratto sorgente per i gate di qualita repository che non appartengono alla tassonomia delle note.
+version: 0.1.0
+required_surfaces:
+  plugins:
+    - dataview
+    - templater-obsidian
+    - obsidian-meta-bind-plugin
+    - js-engine
+    - metadata-menu
+    - folder-notes
+    - homepage
+  snippets:
+    - .obsidian/snippets/gdr-vault.css
+  files:
+    - Inizia Qui.md
+    - VERSION.md
+    - Dev/README.md
+    - Dev/CHANGELOG.md
+    - Dev/CONTRIBUTING.md
+    - Dev/Repository.md
+    - Dev/RELEASE.md
+    - Dev/Sviluppo Vault.md
+    - Dev/Integrazioni Plugin.md
+    - Dev/plugin_matrix.json
+    - Dev/Plugin Technical Reference.md
+    - Dev/TemplateFactory/README.md
+    - Dev/TemplateFactory/modules/fields_core.yaml
+    - Dev/TemplateFactory/modules/plugin_bindings.yaml
+    - Dev/TemplateFactory/modules/plugin_contracts.yaml
+    - Dev/TemplateFactory/modules/template_blueprints.yaml
+    - Dev/TemplateFactory/modules/sections.yaml
+    - Dev/TemplateFactory/modules/callouts.yaml
+    - Dev/TemplateFactory/modules/tabs.yaml
+    - Dev/TemplateFactory/modules/dataview_blocks.yaml
+    - Dev/TemplateFactory/modules/metabind_inputs.yaml
+    - Dev/TemplateFactory/modules/metabind_buttons.yaml
+    - Dev/TemplateFactory/modules/metabind_config.yaml
+    - Dev/TemplateFactory/modules/bases_views.yaml
+    - Dev/TemplateFactory/modules/frontmatter_profiles.yaml
+    - Dev/TemplateFactory/modules/validation_contract.yaml
+    - Dev/TemplateFactory/modules/live_acceptance.yaml
+    - Dev/TemplateFactory/modules/runtime_profiles.yaml
+    - Dev/TemplateFactory/modules/entity_depth.yaml
+    - Dev/TemplateFactory/modules/worldbuilding_depth_axes.yaml
+    - Dev/TemplateFactory/modules/demo_contract.yaml
+    - Dev/TemplateFactory/modules/release_boundary.yaml
+    - Dev/TemplateFactory/modules/taxonomy_depth.yaml
+    - Dev/TemplateFactory/modules/dnd55_options.yaml
+    - Dev/TemplateFactory/modules/srd_character_build.yaml
+    - Dev/TemplateFactory/modules/pg_mechanics_schema.yaml
+    - Dev/TemplateFactory/modules/link_targets.yaml
+    - Dev/TemplateFactory/modules/tag_rules.yaml
+    - Dev/TemplateFactory/modules/workflows.yaml
+    - Dev/TemplateFactory/modules/source_pipeline.yaml
+    - Dev/TemplateFactory/modules/repo_quality_contract.yaml
+    - z.automazioni/import_srd_character_data.js
+    - z.automazioni/data/srd/core.json
+    - z.automazioni/data/srd/opzioni_personaggio.json
+    - Hub/1. DM Dashboard.md
+    - Hub/Atlante del Mondo.md
+    - Hub/Bibbia del Mondo.md
+    - Hub/Campagna da Ambientazione.md
+    - Hub/Compendium Del Mondo.md
+    - Hub/Controllo Canone.md
+    - Hub/Controllo Worldbuilding.md
+    - Hub/Cosa Succede Fuori Scena.md
+    - Hub/Durante il Gioco.md
+    - Hub/Economia E Rotte.md
+    - Hub/Geopolitical Dashboard.md
+    - Hub/Lore Hub.md
+    - Hub/Motore Mondo Vivo.md
+    - Hub/Revisione Lore.md
+    - Hub/Vista Giocatori.md
+    - Hub/Worldbuilder Dashboard.md
+    - Risorse/FAQ.md
+    - Dev/Confine Release Repository.md
+    - Dev/Release Pulita.md
+    - Dev/Smoke 1.0 Professionale.md
+    - Dev/Smoke Demo Finale.md
+    - Dev/Plugin Layer Interno.md
+    - Dev/Roadmap/1.0 Professionale.md
+    - Dev/Roadmap/Roadmap.md
+    - Dev/Indice Connettore GPT.md
+    - Risorse/Smistamento Bozze Generate.md
+    - z.fileclass/mondo.md
+    - z.bacheche/Manutenzione Vault.md
+  base_files:
+    - z.bases/Atlante Mappe.base
+    - z.bases/Economia.base
+    - z.bases/Fazioni.base
+    - z.bases/Incontri.base
+    - z.bases/Luoghi.base
+    - z.bases/Missioni.base
+    - z.bases/PNG.base
+    - z.bases/Worldbuilding.base
+  layer_files:
+    - z.automazioni/helpers.js
+    - z.automazioni/templater/sessione.js
+    - z.automazioni/import_map.js
+    - z.automazioni/m11_state.js
+    - z.automazioni/generate_demo_fixture.js
+    - z.automazioni/check_m11_fixture.js
+    - z.automazioni/check_plugin_usage_audit.js
+    - z.automazioni/check_runtime_load.js
+    - z.automazioni/check_smoke.js
+    - z.automazioni/check_validation_contract.js
+    - z.automazioni/check_repo_quality_contract.js
+    - z.automazioni/check_release_artifact.js
+    - z.automazioni/check_release.js
+    - z.automazioni/audit_template_migration.py
+    - z.automazioni/check_template_factory.py
+    - z.automazioni/render_template_factory.py
+    - z.automazioni/template_factory_utils.py
+    - z.automazioni/release_boundary_utils.js
+    - z.automazioni/release_plugin_profile.js
+    - z.automazioni/session_context.js
+    - z.automazioni/meta_actions.js
+    - z.automazioni/template_router.js
+    - z.automazioni/wizard_layer.js
+    - z.automazioni/world_taxonomy.js
+    - z.automazioni/world_entity.js
+    - z.automazioni/nuovo_mondo_homebrew.js
+    - z.engine/README.md
+    - z.engine/gdr_views.js
+    - z.engine/session_continuity.js
+    - z.engine/session_dnd.js
+    - z.engine/session_maps.js
+    - z.engine/session_player.js
+    - z.engine/session_runtime.js
+    - z.engine/session_views.js
+  metadata_menu_presets:
+    - mondo
+    - stato
+    - stato_canonico
+    - canonico
+    - pressione
+    - prossima_mossa
+    - connessioni
+    - player_safe
+    - entita_impattate
+    - propaga_a
+    - sessioni
+    - luoghi
+    - fazioni
+    - missioni
+    - tracciati
+documentation_markers:
+  dev_readme_architecture:
+    - Markdown = contenuto umano
+    - YAML = stato persistente e regole dichiarative
+    - Dataview = query layer
+    - Meta Bind = interfaccia
+    - Templater = generazione
+    - z.engine + z.automazioni = runtime/logica/esecuzione
+  workflow_contract:
+    - "continuity_rules:"
+    - "trigger:"
+    - "conditions:"
+    - "effects:"
+    - "propagation:"
+    - registra_scelta_mondo
+    - applica_conseguenza
+    - propaga_entita
