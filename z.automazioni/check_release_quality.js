@@ -10,8 +10,10 @@ const DIST = path.join(ROOT, "dist");
 const OUT = path.join(DIST, "vault-gdr-clean");
 const ZIP = path.join(DIST, "vault-gdr-clean.zip");
 const CONTRACT = "Dev/TemplateFactory/modules/plugin_contracts.yaml";
+const WORKFLOWS = "Dev/TemplateFactory/modules/workflows.yaml";
 const TEMPLATER_DIR = "z.automazioni/templater";
 const IGNORED_DIRS = new Set([".git", "node_modules", "dist"]);
+const BUTTON_REF_PATTERN = /BUTTON\[([^\]\n]+)\]/g;
 const errors = [];
 
 const REQUIRED_META_BIND_INPUTS = [
@@ -156,6 +158,20 @@ function dataviewBlocks(text) {
     return [...normalized.matchAll(/```dataviewjs\n([\s\S]*?)\n```/g)].map(match => match[1]);
 }
 
+function workflowActions(workflow) {
+    return [
+        ...(workflow.quick_actions ?? []),
+        ...Object.values(workflow.action_groups ?? {}).flatMap(group => group.actions ?? [])
+    ];
+}
+
+function runtimePluginLabels() {
+    const text = readText("z.engine/session_views.js");
+    const match = text.match(/const pluginIds = \{([\s\S]*?)\n  \};/);
+    if (!match) return new Set();
+    return new Set([...match[1].matchAll(/^\s+"([^"]+)":\s+"[^"]+"/gm)].map(entry => entry[1]));
+}
+
 function collectBookmarks(items, out = []) {
     for (const item of items ?? []) {
         if (item.type === "group") collectBookmarks(item.items, out);
@@ -271,6 +287,53 @@ function validateMetaBindTargets(metaBind, root, firstRun) {
     }
 }
 
+function validateWorkflowRuntimeContract() {
+    const workflows = loadYaml(WORKFLOWS).workflows ?? {};
+    const buttonIds = new Set((readJsonRel(".obsidian/plugins/obsidian-meta-bind-plugin/data.json").buttonTemplates ?? []).map(button => String(button.id ?? "")));
+    const labels = runtimePluginLabels();
+
+    for (const [workflowId, workflow] of Object.entries(workflows)) {
+        const actions = workflowActions(workflow);
+        const requiredPlugins = workflow.required_plugins ?? [];
+
+        if ((workflow.quick_actions?.length || Object.keys(workflow.action_groups ?? {}).length) && !(workflow.entry_points ?? []).length) {
+            fail(`${WORKFLOWS}: ${workflowId} ha azioni ma non dichiara entry_points`);
+        }
+
+        for (const plugin of requiredPlugins) {
+            if (!labels.has(plugin)) fail(`${WORKFLOWS}: ${workflowId} richiede plugin non diagnosticabile nel runtime (${plugin})`);
+        }
+
+        for (const action of actions) {
+            const button = String(action.button ?? "");
+            if (!button) {
+                fail(`${WORKFLOWS}: ${workflowId} contiene azione senza button`);
+                continue;
+            }
+            if (!buttonIds.has(button)) fail(`${WORKFLOWS}: ${workflowId} usa BUTTON[${button}] non presente in Meta Bind`);
+            if (!String(action.label ?? "").trim()) fail(`${WORKFLOWS}: ${workflowId} BUTTON[${button}] senza label`);
+            if (!String(action.use_when ?? "").trim()) fail(`${WORKFLOWS}: ${workflowId} BUTTON[${button}] senza use_when`);
+        }
+    }
+}
+
+function validateRuntimeButtonReferences(root = ROOT) {
+    const buttonIds = new Set((readJsonRel(".obsidian/plugins/obsidian-meta-bind-plugin/data.json", root).buttonTemplates ?? []).map(button => String(button.id ?? "")));
+    const files = [
+        ...markdownFiles(root).filter(file => !file.startsWith("Dev/TemplateFactory/examples/")),
+        ...walk(path.join(root, "z.engine"), { predicate: file => file.endsWith(".js") }).map(file => rel(root, file))
+    ];
+
+    for (const fileRel of files) {
+        const text = readText(fileRel, root);
+        for (const match of text.matchAll(BUTTON_REF_PATTERN)) {
+            const id = match[1];
+            if (id.includes("${") || id.includes("...")) continue;
+            if (!buttonIds.has(id)) fail(`${fileRel}: BUTTON[${id}] senza template Meta Bind`);
+        }
+    }
+}
+
 function validateTemplaterWrappers(root = ROOT) {
     const templaterRoot = path.join(root, TEMPLATER_DIR);
     const wrappers = fs.existsSync(templaterRoot)
@@ -371,7 +434,9 @@ function validateReleaseFirstRun() {
 }
 
 validatePluginContract();
+validateWorkflowRuntimeContract();
 validateRuntimeConfig(ROOT);
+validateRuntimeButtonReferences(ROOT);
 validateTemplaterWrappers(ROOT);
 validateDataviewSyntax(ROOT);
 validateReleaseFirstRun();
@@ -382,4 +447,4 @@ if (errors.length) {
     process.exit(1);
 }
 
-console.log("Release quality OK: plugin, contratti YAML, Templater, DataviewJS e first-run release verificati.");
+console.log("Release quality OK: plugin, workflow, Meta Bind, Templater, DataviewJS e first-run release verificati.");

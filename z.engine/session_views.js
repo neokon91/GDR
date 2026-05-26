@@ -25,7 +25,9 @@
     : value?.path ? value.path.split("/").pop().replace(/\.md$/, "") : String(value ?? "");
   const pluginIds = {
     "Advanced Canvas": "advanced-canvas",
+    "Advanced Tables": "table-editor-obsidian",
     "Bases": "bases",
+    "BRAT": "obsidian42-brat",
     "Calendarium": "calendarium",
     "Callout Manager": "callout-manager",
     "Dataview": "dataview",
@@ -34,7 +36,9 @@
     "Fantasy Content Generator": "fantasy-content-generator",
     "Fantasy Statblocks": "obsidian-5e-statblocks",
     "Folder Notes": "folder-notes",
+    "Hex Cartographer": "hex-cartographer",
     "Homepage": "homepage",
+    "Iconize": "obsidian-icon-folder",
     "Initiative Tracker": "initiative-tracker",
     "JS Engine": "js-engine",
     "Kanban": "obsidian-kanban",
@@ -43,27 +47,56 @@
     "Media Extended": "media-extended",
     "Meta Bind": "obsidian-meta-bind-plugin",
     "Metadata Menu": "metadata-menu",
+    "Style Settings": "obsidian-style-settings",
+    "Tabs": "tabs",
     "Tasks": "obsidian-tasks-plugin",
-    "Templater": "templater-obsidian"
+    "Templater": "templater-obsidian",
+    "TTRPG Tools: Maps": "zoom-map"
   };
   const pluginSymptoms = {
-    "Dataview": "Tabelle e dashboard restano vuote o mostrano codice.",
-    "Meta Bind": "I pulsanti BUTTON o gli input non reagiscono.",
-    "Templater": "Wizard e creazione note non partono o restano incompleti.",
-    "Tasks": "Checklist operative e bacheche non filtrano i task.",
-    "Dice Roller": "I tiri dice restano testo.",
-    "Fantasy Statblocks": "Le creature non appaiono come schede.",
-    "Initiative Tracker": "Gli incontri non entrano nel flusso a turni.",
-    "Media Extended": "Audio, video o riferimenti media non si aprono come previsto.",
+    "Advanced Canvas": "Canvas avanzati e collegamenti visuali non sono disponibili.",
+    "Advanced Tables": "L'editing delle tabelle Markdown e meno comodo, ma le tabelle restano leggibili.",
+    "BRAT": "Aggiornamenti beta e manutenzione plugin non sono disponibili.",
     "Calendarium": "Date e calendario non vengono mostrati.",
+    "Callout Manager": "I callout restano Markdown leggibile ma perdono la resa custom.",
+    "Dataview": "Tabelle e dashboard restano vuote o mostrano codice.",
+    "Dice Roller": "I tiri dice restano testo.",
+    "Excalidraw": "Mappe fronti e canvas disegnati non si aprono.",
+    "Fantasy Content Generator": "Il generatore fantasy non puo creare nuove bozze.",
+    "Fantasy Statblocks": "Le creature non appaiono come schede.",
+    "Folder Notes": "Le cartelle non aprono automaticamente la nota indice.",
+    "Hex Cartographer": "Le mappe esagonali non vengono renderizzate.",
+    "Homepage": "La pagina iniziale automatica non viene aperta.",
+    "Iconize": "Le icone di orientamento non vengono mostrate.",
+    "Initiative Tracker": "Gli incontri non entrano nel flusso a turni.",
+    "JS Engine": "Alcuni runtime condivisi non vengono eseguiti.",
+    "Kanban": "Le bacheche restano Markdown invece di aprirsi come board.",
+    "Linter": "La pulizia automatica delle note non e disponibile.",
     "Bases": "Le viste tabellari native non sono disponibili.",
     "Maps": "Mappe e marker non vengono mostrati.",
-    "Excalidraw": "Mappe fronti e canvas disegnati non si aprono.",
-    "Advanced Canvas": "Canvas avanzati e collegamenti visuali non sono disponibili.",
-    "Linter": "La pulizia automatica delle note non e disponibile.",
-    "Fantasy Content Generator": "Il generatore fantasy non puo creare nuove bozze.",
-    "Homepage": "La pagina iniziale automatica non viene aperta.",
-    "JS Engine": "Alcuni runtime condivisi non vengono eseguiti."
+    "Media Extended": "Audio, video o riferimenti media non si aprono come previsto.",
+    "Meta Bind": "I pulsanti BUTTON o gli input non reagiscono.",
+    "Metadata Menu": "FileClass e campi guidati non appaiono nelle note.",
+    "Style Settings": "Lo snippet grafico resta attivo, ma i controlli visuali del tema non sono regolabili.",
+    "Tabs": "I blocchi a schede restano sezioni lunghe.",
+    "Tasks": "Checklist operative e bacheche non filtrano i task.",
+    "Templater": "Wizard e creazione note non partono o restano incompleti.",
+    "TTRPG Tools: Maps": "Mappe zoomabili e pin non vengono mostrati."
+  };
+  const pluginManualActions = {
+    "Dataview": "Abilita Dataview e JavaScript queries; se resta vuoto usa le tabelle Markdown sotto il blocco.",
+    "Meta Bind": "Abilita Meta Bind; se un pulsante non reagisce apri manualmente la pagina indicata dal titolo dell'azione.",
+    "Templater": "Abilita Templater; verifica che la cartella script sia z.automazioni/templater e riprova il wizard.",
+    "Tasks": "Abilita Tasks; in alternativa cerca manualmente le checklist marcate #task.",
+    "Fantasy Statblocks": "Abilita Fantasy Statblocks; usa comunque la scheda creatura come Markdown.",
+    "Initiative Tracker": "Abilita Initiative Tracker; se non parte, usa l'incontro come lista manuale di turni.",
+    "Calendarium": "Abilita Calendarium; se manca, usa i campi data_mondo e fc-date come promemoria testuale.",
+    "Bases": "Se la vista Bases non appare, usa le tabelle Dataview o gli indici Mondi equivalenti.",
+    "Maps": "Se la mappa non appare, apri la nota luogo e usa coordinate, mappa collegata e tabelle.",
+    "Excalidraw": "Se il disegno non si apre, usa il file .excalidraw.md come appunto Markdown e crea una nuova mappa piu tardi.",
+    "Fantasy Content Generator": "Se il generatore non parte, crea una nota in Inbox e smistala dal workflow bozze.",
+    "Homepage": "Se non apre Inizia Qui, apri manualmente Inizia Qui.md dalla root del vault.",
+    "Metadata Menu": "Se i campi guidati non compaiono, compila direttamente il frontmatter YAML della nota."
   };
   const workflowPluginFallbacks = {
     dashboard_dm: ["Meta Bind", "Dataview", "Templater", "Tasks"],
@@ -442,7 +475,7 @@
           body: pluginSymptoms[plugin] ?? "Plugin dichiarato nel workflow YAML.",
           importa: status.ok === true
             ? `Plugin attivo: ${status.id}.`
-            : `Se le azioni non partono, apri Impostazioni > Plugin community e verifica ${status.id}.`,
+            : `${pluginManualActions[plugin] ?? "Apri Impostazioni > Plugin community, abilita il plugin e usa il fallback Markdown se resta inattivo."} ID plugin: ${status.id}.`,
           cls: `gdr-info-card compact ${status.ok === true ? "gdr-kind-ready" : "gdr-kind-missing"}`
         }));
       }
@@ -562,7 +595,7 @@
         title: label,
         meta: status.ok === true ? "Pronto" : status.ok === false ? "Da controllare" : "Verifica manuale",
         body: pluginSymptoms[label] ?? "Controlla che il plugin sia installato, abilitato e aggiornato.",
-        importa: status.ok === true ? `Plugin attivo: ${status.id}` : `Apri Impostazioni > Plugin community e verifica ${status.id}.`,
+        importa: status.ok === true ? `Plugin attivo: ${status.id}` : `${pluginManualActions[label] ?? "Abilita il plugin dai plugin community e usa il fallback Markdown della pagina."} ID plugin: ${status.id}.`,
         cls: `gdr-info-card compact ${status.ok === true ? "gdr-kind-ready" : "gdr-kind-missing"}`
       });
     }).join("") + cardHtml({
