@@ -73,15 +73,8 @@ gdr.renderActions(dv);
 ## Vault Pronto
 
 ```dataviewjs
-const enabled = id => app.plugins.enabledPlugins.has(id);
-const exists = path => !!app.vault.getAbstractFileByPath(path);
-const ready = enabled("obsidian-meta-bind-plugin") && enabled("templater-obsidian") && enabled("dataview") && exists(".obsidian/snippets/gdr-vault.css");
-const checks = [
-  ["Stato", ready, ready ? "Puoi iniziare da Crea mondo o Prepara sessione." : "Apri Setup Guidato solo per recuperare strumenti disabilitati."],
-  ["Percorso rapido", exists("Risorse/Prima Sessione In 15 Minuti.md"), "Disponibile se vuoi giocare subito."]
-];
-
-dv.table(["Area", "Stato", "Prossimo passo"], checks.map(([label, ok, text]) => [label, ok ? "Pronto" : "Da controllare", text]));
+const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+await gdr.renderVaultReadiness(dv, "start");
 ```
 
 ## Se I Pulsanti Non Funzionano

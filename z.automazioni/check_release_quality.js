@@ -15,6 +15,17 @@ const TEMPLATER_DIR = "z.automazioni/templater";
 const IGNORED_DIRS = new Set([".git", "node_modules", "dist"]);
 const BUTTON_REF_PATTERN = /BUTTON\[([^\]\n]+)\]/g;
 const META_BIND_BUTTON_ID_PATTERN = /^[A-Za-z0-9][A-Za-z0-9_-]*$/;
+const FORBIDDEN_DATAVIEWJS_PATTERNS = [
+    [/\bdv\.view\b/, "dv.view"],
+    [/\bapp\.plugins\b/, "app.plugins"],
+    [/\bapp\.workspace\b/, "app.workspace"],
+    [/\bwindow\./, "window"],
+    [/\bdocument\./, "document"],
+    [/\brequire\s*\(/, "require"],
+    [/\bprocess\./, "process"],
+    [/\bapp\.vault\.(?:modify|create|delete|rename|trash)\b/, "scrittura app.vault"],
+    [/\badapter\.write\b/, "adapter.write"]
+];
 const errors = [];
 
 const ALLOWED_META_BIND_ACTION_TYPES = new Set([
@@ -439,6 +450,9 @@ function validateDataviewSyntax(root = ROOT, firstRunOnly = false) {
     for (const fileRel of files) {
         if (!existsRel(fileRel, root)) continue;
         for (const code of dataviewBlocks(readText(fileRel, root))) {
+            for (const [pattern, label] of FORBIDDEN_DATAVIEWJS_PATTERNS) {
+                if (pattern.test(code)) fail(`${fileRel}: blocco dataviewjs usa API fragile o vietata (${label}); spostare nel runtime z.engine`);
+            }
             try {
                 new Function("dv", "app", "input", `return (async () => {\n${code}\n})()`);
             } catch (error) {

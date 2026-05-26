@@ -22,6 +22,7 @@ const REQUIRED_EXPORTS = [
     "renderSessionMapCards",
     "renderSessionMaterialCards",
     "renderTableCockpit",
+    "renderVaultReadiness",
     "renderWorkflowCommandDeck",
     "renderWorldImpact",
     "renderWorldbuildingFreedom"
@@ -88,6 +89,9 @@ async function main() {
                 },
                 pages() {
                     return emptyPages([]);
+                },
+                table(headers, rows) {
+                    rendered.push({ tag: "table", headers, rows, text: rows.flat().join(" "), innerHTML: rows.flat().join(" ") });
                 }
             };
             await views.renderWorkflowCommandDeck(dv, "gioca_live", { mode: "diagnostic" });
@@ -113,6 +117,10 @@ async function main() {
             }
             if (rendered.some(node => String(node.innerHTML).includes("Plugin coinvolti"))) {
                 errors.push("renderWorkflowCommandDeck: output semplice onboarding espone diagnostica plugin");
+            }
+            await views.renderVaultReadiness(dv, "setup");
+            if (!rendered.some(node => node.tag === "table" || String(node.text).includes("Pulsanti e creazione note"))) {
+                errors.push("renderVaultReadiness: output setup non renderizzato");
             }
             views.renderWorldbuildingFreedom(dv);
             if (!rendered.some(node => String(node.innerHTML).includes("Liberta di worldbuilding"))) {

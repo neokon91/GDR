@@ -65,20 +65,8 @@ await gdr.renderWorkflowCommandDeck(dv, "setup_guidato");
 ## Controllo Semplice
 
 ```dataviewjs
-const enabled = id => app.plugins.enabledPlugins.has(id);
-const exists = path => !!app.vault.getAbstractFileByPath(path);
-
-const checks = [
-  ["Pulsanti e creazione note", enabled("obsidian-meta-bind-plugin") && enabled("templater-obsidian"), "Se non sono pronti, abilita gli strumenti inclusi e riavvia Obsidian."],
-  ["Dashboard e tabelle", enabled("dataview"), "Se non e pronto, le dashboard restano vuote o mostrano codice."],
-  ["Campi guidati", enabled("metadata-menu"), "Aiuta a compilare le note, ma puoi iniziare anche senza."],
-  ["Pagina iniziale", enabled("homepage"), "Apre automaticamente Inizia Qui."],
-  ["Aspetto", exists(".obsidian/snippets/gdr-vault.css"), "Rende leggibili le dashboard."],
-  ["Prima sessione", exists("Risorse/Prima Sessione In 15 Minuti.md"), "Percorso pratico per giocare subito."],
-  ["Fuori scena", exists("Hub/Cosa Succede Fuori Scena.md"), "Serve dopo la sessione."]
-];
-
-dv.table(["Area", "Stato", "Cosa fare"], checks.map(([label, ok, text]) => [label, ok ? "Pronto" : "Da controllare", text]));
+const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+await gdr.renderVaultReadiness(dv, "setup");
 ```
 
 ## Se Qualcosa E Da Controllare

@@ -607,6 +607,40 @@
     });
   }
 
+  async function renderVaultReadiness(dv, mode = "start") {
+    const essential = [
+      ["Pulsanti e creazione note", ["Meta Bind", "Templater"], "Se non sono pronti, abilita gli strumenti inclusi e riavvia Obsidian."],
+      ["Dashboard e tabelle", ["Dataview"], "Se non e pronto, le dashboard restano vuote o mostrano codice."],
+      ["Aspetto", [], "Rende leggibili le dashboard.", ".obsidian/snippets/gdr-vault.css"]
+    ];
+    const setupOnly = [
+      ["Campi guidati", ["Metadata Menu"], "Aiuta a compilare le note, ma puoi iniziare anche senza."],
+      ["Pagina iniziale", ["Homepage"], "Apre automaticamente Inizia Qui."],
+      ["Prima sessione", [], "Percorso pratico per giocare subito.", "Risorse/Prima Sessione In 15 Minuti.md"],
+      ["Fuori scena", [], "Serve dopo la sessione.", "Hub/Cosa Succede Fuori Scena.md"]
+    ];
+    const rows = mode === "setup" ? [...essential, ...setupOnly] : [
+      ["Stato", ["Meta Bind", "Templater", "Dataview"], "Puoi iniziare da Crea mondo o Prepara sessione.", ".obsidian/snippets/gdr-vault.css"],
+      ["Percorso rapido", [], "Disponibile se vuoi giocare subito.", "Risorse/Prima Sessione In 15 Minuti.md"]
+    ];
+    const checks = [];
+
+    for (const [label, plugins, message, file] of rows) {
+      const pluginReady = plugins.every(plugin => pluginStatus(plugin).ok === true);
+      const fileReady = file ? await canReadRel(file) : true;
+      const ok = pluginReady && fileReady;
+      checks.push([
+        label,
+        ok ? "Pronto" : "Da controllare",
+        mode === "start" && label === "Stato" && !ok
+          ? "Apri Setup Guidato solo per recuperare strumenti disabilitati."
+          : message
+      ]);
+    }
+
+    dv.table(mode === "setup" ? ["Area", "Stato", "Cosa fare"] : ["Area", "Stato", "Prossimo passo"], checks);
+  }
+
   function renderM7FamilyCards(dv, source = null, family = "generica") {
     const page = source ?? dv.current();
     const definitions = {
@@ -745,6 +779,7 @@
     renderWorldbuildingFreedom,
     renderPluginTroubleshooting,
     renderOnboardingReadiness,
+    renderVaultReadiness,
     renderWorkflowCommandDeck,
     renderSessionMapCards: mapViews.renderSessionMapCards,
     renderTableCockpit: sessionViews.renderTableCockpit
