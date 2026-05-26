@@ -120,6 +120,8 @@ Le viste `renderDnd55MaterialPipeline` e `renderCombatReadiness` sono runtime di
 
 `worldbuilding_depth_axes.yaml` raccoglie il primo porting selettivo degli assi tematici FantasyWorld. Gli assi sono opzionali, limitati a 3-5 per profilo e servono a generare domande o revisioni mirate; non sono campi obbligatori da aggiungere a ogni nota.
 
+Il render finale valida anche i blocchi Tabs: ogni blocco ` ````tabs ` deve essere chiuso, contenere almeno una `tab:`, non avere testo prima della prima tab, non avere tab duplicate o vuote e non annidare altri blocchi Tabs a quattro backtick.
+
 ## Regola Italiano D&D 5.5
 
 `dnd55_options.yaml` e la fonte per valori selezionabili e label visibili al DM. I valori utente devono essere in italiano; le chiavi tecniche possono restare compatibili con plugin e renderer quando necessario.

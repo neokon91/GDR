@@ -109,7 +109,79 @@ def validate_rendered(name: str, rendered: str) -> list[str]:
         errors.append(f"{name}: output contiene {len(templater_tags)} tag Templater invece di 1")
     if "Fallback" not in rendered and "fallback" not in rendered:
         errors.append(f"{name}: output senza fallback Markdown esplicito")
+    errors.extend(validate_tabs_blocks(name, rendered))
     errors.extend(validate_plugin_native_sheet(name, rendered))
+
+    return errors
+
+
+def validate_tabs_blocks(name: str, rendered: str) -> list[str]:
+    """Controlla le tabs renderizzate: devono essere chiuse, leggibili e non vuote."""
+    errors: list[str] = []
+    lines = rendered.splitlines()
+    index = 0
+
+    while index < len(lines):
+        line = lines[index]
+        if line.strip() != "````tabs":
+            index += 1
+            continue
+
+        start_line = index + 1
+        index += 1
+        block_lines: list[str] = []
+        closed = False
+
+        while index < len(lines):
+            if lines[index].strip() == "````":
+                closed = True
+                break
+            block_lines.append(lines[index])
+            index += 1
+
+        if not closed:
+            errors.append(f"{name}: blocco tabs aperto a riga {start_line} non chiuso")
+            break
+
+        errors.extend(validate_single_tabs_block(name, start_line, block_lines))
+        index += 1
+
+    return errors
+
+
+def validate_single_tabs_block(name: str, start_line: int, block_lines: list[str]) -> list[str]:
+    """Valida un singolo blocco tabs senza interpretare il Markdown interno alle tab."""
+    errors: list[str] = []
+    tab_positions = [
+        (offset, line.removeprefix("tab:").strip())
+        for offset, line in enumerate(block_lines)
+        if line.startswith("tab:")
+    ]
+
+    if not tab_positions:
+        errors.append(f"{name}: blocco tabs a riga {start_line} senza tab dichiarate")
+        return errors
+
+    first_tab_offset = tab_positions[0][0]
+    preamble = "\n".join(block_lines[:first_tab_offset]).strip()
+    if preamble:
+        errors.append(f"{name}: blocco tabs a riga {start_line} contiene testo prima della prima tab")
+
+    seen: set[str] = set()
+    for index, (offset, tab_name) in enumerate(tab_positions):
+        if not tab_name:
+            errors.append(f"{name}: tab senza nome nel blocco a riga {start_line}")
+            continue
+        if tab_name in seen:
+            errors.append(f"{name}: tab duplicata nel blocco a riga {start_line} ({tab_name})")
+        seen.add(tab_name)
+
+        next_offset = tab_positions[index + 1][0] if index + 1 < len(tab_positions) else len(block_lines)
+        body = "\n".join(block_lines[offset + 1:next_offset]).strip()
+        if not body:
+            errors.append(f"{name}: tab vuota nel blocco a riga {start_line} ({tab_name})")
+        if "````tabs" in body:
+            errors.append(f"{name}: tab annidata con quattro backtick nel blocco a riga {start_line} ({tab_name})")
 
     return errors
 
