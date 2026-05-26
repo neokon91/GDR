@@ -18,6 +18,7 @@ const LEGACY_RESET_PROFILE = process.argv.includes("--reset-profile");
 const PRESEED_DAEMON = !process.argv.includes("--no-daemon-preseed");
 const WITH_DEMO = !process.argv.includes("--no-demo");
 const RUN_WORKFLOW_SMOKE = !process.argv.includes("--skip-workflow");
+const RUN_CYCLE_SMOKE = RUN_WORKFLOW_SMOKE && !process.argv.includes("--skip-cycle");
 const REQUESTED_PORT = Number(optionValue("--port", "0")) || 0;
 const PAGE_SETTLE_MS = Number(optionValue("--page-settle-ms", "5000")) || 5000;
 const PROFILE_ROOT = path.join(os.homedir(), "Library/Application Support/obsidian-gdr-live-test");
@@ -26,6 +27,7 @@ const OUT = path.join(WORK_ROOT, "vault-gdr-clean");
 const PROFILE_READY_FILE = path.join(PROFILE_ROOT, "gdr-live-test-profile-ready.json");
 const FIRST_RUN_PAGES = requiredConfigArray("first_run_pages");
 const WORKFLOW_SMOKE = requiredConfigObject("workflow_smoke");
+const CYCLE_SMOKE = requiredConfigObject("cycle_smoke");
 
 function loadYamlModule(relPath) {
     const script = [
@@ -87,6 +89,7 @@ function usage() {
         "  --accept-prompts   consente click automatici sui prompt; richiesto con --fresh-install",
         "  --contract-check   valida solo live_acceptance.yaml e non apre Obsidian",
         "  --skip-workflow    salta il workflow smoke Nuovo Mondo Homebrew",
+        "  --skip-cycle       salta ciclo live sessione/post-sessione",
         "  --no-daemon-preseed diagnostica: non installa il daemon nel profilo prima del bootstrap",
         "  --keep-open        lascia Obsidian aperto a fine prova",
         "  --no-demo          crea release senza demo",
@@ -102,6 +105,7 @@ function fail(message) {
 function validateLiveAcceptanceContract() {
     const errors = [];
     const workflow = WORKFLOW_SMOKE;
+    const cycle = CYCLE_SMOKE;
     const requiredWorkflowStrings = [
         "setup_page",
         "button_id",
@@ -141,6 +145,55 @@ function validateLiveAcceptanceContract() {
     if (!workflow.expected_files?.includes?.(workflow.expected_world_path)) {
         errors.push(`${LIVE_ACCEPTANCE_FILE}: workflow_smoke.expected_files deve includere expected_world_path`);
     }
+
+    const requiredCycleStrings = [
+        "setup_page",
+        "table_page",
+        "post_session_page",
+        "session_button_id",
+        "session_button_label",
+        "session_template_file",
+        "session_user_script",
+        "post_session_button_id",
+        "post_session_button_label",
+        "post_session_template_file",
+        "post_session_user_script",
+        "temp_note",
+        "expected_session_path",
+        "expected_session_name"
+    ];
+    for (const key of requiredCycleStrings) {
+        if (!String(cycle[key] ?? "").trim()) {
+            errors.push(`${LIVE_ACCEPTANCE_FILE}: cycle_smoke.${key} vuoto o mancante`);
+        }
+    }
+    for (const key of [
+        "prompt_answers",
+        "suggester_answers",
+        "prepare_frontmatter",
+        "live_frontmatter",
+        "expected_session_frontmatter",
+        "expected_session_list_contains"
+    ]) {
+        const value = cycle[key];
+        if (!value || typeof value !== "object" || Array.isArray(value) || !Object.keys(value).length) {
+            errors.push(`${LIVE_ACCEPTANCE_FILE}: cycle_smoke.${key} deve essere mappa non vuota`);
+        }
+    }
+    for (const key of ["expected_session_contains", "verify_pages_after_cycle", "persistence_pages"]) {
+        if (!Array.isArray(cycle[key]) || !cycle[key].length) {
+            errors.push(`${LIVE_ACCEPTANCE_FILE}: cycle_smoke.${key} deve essere lista non vuota`);
+        }
+    }
+    for (const relPath of [cycle.session_user_script, cycle.post_session_user_script]) {
+        const sourcePath = path.join(ROOT, String(relPath ?? ""));
+        if (relPath && !fs.existsSync(sourcePath)) {
+            errors.push(`${LIVE_ACCEPTANCE_FILE}: file sorgente mancante ${relPath}`);
+        }
+    }
+    if (!cycle.persistence_pages?.includes?.(cycle.expected_session_path)) {
+        errors.push(`${LIVE_ACCEPTANCE_FILE}: cycle_smoke.persistence_pages deve includere expected_session_path`);
+    }
     return errors;
 }
 
@@ -150,6 +203,10 @@ function sleep(ms) {
 
 function compact(value) {
     return String(value ?? "").replace(/\s+/g, " ").slice(0, 900);
+}
+
+function uniqueStrings(values) {
+    return [...new Set((values ?? []).map(value => String(value)).filter(Boolean))];
 }
 
 function privateVarPath(file) {
@@ -565,11 +622,18 @@ async function verifyWorkflowState(cdp, phase) {
         const worldFile = app.vault.getAbstractFileByPath(expectedWorldPath);
         const worldText = worldFile ? await app.vault.read(worldFile) : "";
         const missingWorldText = expectedWorldContains.filter(snippet => !worldText.includes(snippet));
-        const cache = worldFile ? app.metadataCache.getFileCache(worldFile)?.frontmatter ?? null : null;
-        const dataviewApi = app.plugins?.plugins?.dataview?.api ?? null;
-        const dataviewPage = dataviewApi
-            ? dataviewApi.page(expectedWorldPath) ?? dataviewApi.page(expectedWorldPath.replace(/\\.md$/, ""))
-            : null;
+        const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
+        let cache = worldFile ? app.metadataCache.getFileCache(worldFile)?.frontmatter ?? null : null;
+        let dataviewPage = null;
+        for (let attempt = 0; attempt < 30; attempt += 1) {
+            cache = worldFile ? app.metadataCache.getFileCache(worldFile)?.frontmatter ?? null : null;
+            const dataviewApi = app.plugins?.plugins?.dataview?.api ?? null;
+            dataviewPage = dataviewApi
+                ? dataviewApi.page(expectedWorldPath) ?? dataviewApi.page(expectedWorldPath.replace(/\\.md$/, ""))
+                : null;
+            if (cache?.categoria === "mondo" && dataviewPage) break;
+            await sleep(500);
+        }
         return {
             phase: ${JSON.stringify(phase)},
             expectedFileCount: expectedFiles.length,
@@ -711,6 +775,232 @@ async function runWorkflowSmoke(cdp) {
     return { ...result, state, newEvents: cdp.events.slice(before) };
 }
 
+async function verifyCycleState(cdp, phase) {
+    return await cdp.evaluate(`(async () => {
+        const cycle = ${JSON.stringify(CYCLE_SMOKE)};
+        const expectedSessionPath = String(cycle.expected_session_path ?? "");
+        const expectedText = (cycle.expected_session_contains ?? []).map(String);
+        const expectedFrontmatter = cycle.expected_session_frontmatter ?? {};
+        const expectedLists = cycle.expected_session_list_contains ?? {};
+        const sessionFile = app.vault.getAbstractFileByPath(expectedSessionPath);
+        const sessionText = sessionFile ? await app.vault.read(sessionFile) : "";
+        const missingSessionText = expectedText.filter(snippet => !sessionText.includes(snippet));
+        const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
+        let cache = sessionFile ? app.metadataCache.getFileCache(sessionFile)?.frontmatter ?? null : null;
+        let dataviewPage = null;
+        for (let attempt = 0; attempt < 30; attempt += 1) {
+            cache = sessionFile ? app.metadataCache.getFileCache(sessionFile)?.frontmatter ?? null : null;
+            const dataviewApi = app.plugins?.plugins?.dataview?.api ?? null;
+            dataviewPage = dataviewApi
+                ? dataviewApi.page(expectedSessionPath) ?? dataviewApi.page(expectedSessionPath.replace(/\\.md$/, ""))
+                : null;
+            if (cache?.categoria === "sessione" && dataviewPage) break;
+            await sleep(500);
+        }
+        const missingFrontmatter = Object.entries(expectedFrontmatter)
+            .filter(([key, expected]) => cache?.[key] !== expected)
+            .map(([key, expected]) => ({ key, expected, actual: cache?.[key] ?? null }));
+        const normalize = value => Array.isArray(value) ? value.map(String) : value ? [String(value)] : [];
+        const missingListValues = Object.entries(expectedLists).flatMap(([key, expectedValues]) => {
+            const actual = normalize(cache?.[key]);
+            return normalize(expectedValues)
+                .filter(expected => !actual.includes(expected))
+                .map(expected => ({ key, expected, actual }));
+        });
+        return {
+            phase: ${JSON.stringify(phase)},
+            sessionExists: Boolean(sessionFile),
+            sessionPath: sessionFile?.path ?? null,
+            activeFile: app.workspace.getActiveFile()?.path ?? null,
+            missingSessionText,
+            missingFrontmatter,
+            missingListValues,
+            metadataCategoria: cache?.categoria ?? null,
+            metadataStato: cache?.stato ?? null,
+            metadataAttiva: cache?.attiva ?? null,
+            dataviewIndexed: Boolean(dataviewPage)
+        };
+    })()`, { awaitPromise: true, timeoutMs: 30000 });
+}
+
+async function runCycleSmoke(cdp) {
+    const before = cdp.events.length;
+    const cycle = CYCLE_SMOKE;
+    await inspectPage(cdp, String(cycle.setup_page));
+
+    const result = await cdp.evaluate(`(async () => {
+        const cycle = ${JSON.stringify(CYCLE_SMOKE)};
+        const workflow = ${JSON.stringify(WORKFLOW_SMOKE)};
+        const promptAnswers = cycle.prompt_answers ?? {};
+        const suggesterAnswers = cycle.suggester_answers ?? {};
+        const expectedSessionPath = String(cycle.expected_session_path ?? "");
+        const sessionTemplateFile = String(cycle.session_template_file ?? "");
+        const postSessionTemplateFile = String(cycle.post_session_template_file ?? "");
+        const tempNote = String(cycle.temp_note ?? "");
+
+        const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
+        const stripOptional = value => String(value ?? "").replace(/\\s+\\(opzionale\\)$/, "");
+        const getFile = filePath => app.vault.getAbstractFileByPath(filePath);
+        const normalize = value => Array.isArray(value) ? value.filter(Boolean) : value ? [value] : [];
+        const appendUnique = (value, entries) => {
+            const current = normalize(value).map(String);
+            for (const entry of normalize(entries).map(String)) {
+                if (entry && !current.includes(entry)) current.push(entry);
+            }
+            return current;
+        };
+        const ensureFolder = async folderPath => {
+            const parts = String(folderPath ?? "").split("/").filter(Boolean);
+            let current = "";
+            for (const part of parts) {
+                current = current ? current + "/" + part : part;
+                if (!app.vault.getAbstractFileByPath(current)) await app.vault.createFolder(current);
+            }
+        };
+        const deleteIfExists = async filePath => {
+            const file = getFile(filePath);
+            if (file) await app.vault.delete(file, true);
+        };
+        const loadCommonJs = async filePath => {
+            const source = await app.vault.adapter.read(filePath);
+            const module = { exports: {} };
+            const localRequire = required => {
+                throw new Error("require non supportato nel ciclo live acceptance: " + required);
+            };
+            Function("module", "exports", "require", "app", "Notice", source)(module, module.exports, localRequire, app, Notice);
+            return module.exports;
+        };
+        const processFrontmatter = async (file, updater) => {
+            if (app.fileManager?.processFrontMatter) {
+                await app.fileManager.processFrontMatter(file, updater);
+                return;
+            }
+            throw new Error("processFrontMatter Obsidian non disponibile nel ciclo live");
+        };
+        const openFile = async filePath => {
+            const file = getFile(filePath);
+            if (!file) throw new Error("file live acceptance mancante: " + filePath);
+            const leaf = app.workspace.getLeaf("tab");
+            await leaf.openFile(file, { active: true });
+            if (typeof app.workspace.setActiveLeaf === "function") app.workspace.setActiveLeaf(leaf, { focus: true });
+            await sleep(750);
+        };
+
+        const metaBindConfig = JSON.parse(await app.vault.adapter.read(".obsidian/plugins/obsidian-meta-bind-plugin/data.json"));
+        const sessionButton = (metaBindConfig.buttonTemplates ?? []).find(entry => entry.id === cycle.session_button_id);
+        const postSessionButton = (metaBindConfig.buttonTemplates ?? []).find(entry => entry.id === cycle.post_session_button_id);
+        const sessionAction = sessionButton?.actions?.[0] ?? null;
+        const postSessionAction = postSessionButton?.actions?.[0] ?? null;
+        const sessionTemplateExists = Boolean(getFile(sessionTemplateFile));
+        const postSessionTemplateExists = Boolean(getFile(postSessionTemplateFile));
+        const sessionScriptExists = Boolean(getFile(String(cycle.session_user_script ?? "")));
+        const postSessionScriptExists = Boolean(getFile(String(cycle.post_session_user_script ?? "")));
+
+        await deleteIfExists(expectedSessionPath);
+        await deleteIfExists(tempNote);
+        await ensureFolder(tempNote.split("/").slice(0, -1).join("/"));
+        await app.vault.create(tempNote, "# Live Session Acceptance Temp\\n");
+        await openFile(tempNote);
+
+        const helpers = await loadCommonJs("z.automazioni/helpers.js");
+        const sessionWizard = await loadCommonJs(String(cycle.session_user_script));
+        const postWizard = await loadCommonJs(String(cycle.post_session_user_script));
+        helpers.setRoute({ mondo: "[[" + workflow.expected_world_name + "]]" });
+
+        let currentPath = tempNote;
+        const promptLog = [];
+        const suggesterLog = [];
+        const tp = {
+            user: { helpers },
+            date: {
+                now(format) {
+                    return String(promptAnswers.Data ?? "2026-05-26");
+                }
+            },
+            system: {
+                async prompt(message, defaultValue = "") {
+                    const key = stripOptional(message);
+                    const value = Object.prototype.hasOwnProperty.call(promptAnswers, key)
+                        ? promptAnswers[key]
+                        : defaultValue;
+                    promptLog.push({ message: key, value: String(value ?? "") });
+                    return value;
+                },
+                async suggester(labels, options, _throwOnCancel, message) {
+                    const expected = String(suggesterAnswers[message] ?? labels[0] ?? "");
+                    const index = labels.findIndex(label => String(label) === expected);
+                    const selected = index >= 0 ? options[index] : options[0];
+                    suggesterLog.push({ message: String(message ?? ""), value: String(selected?.label ?? selected?.id ?? selected ?? "") });
+                    return selected;
+                }
+            },
+            file: {
+                async move(targetWithoutExt) {
+                    const targetPath = String(targetWithoutExt).endsWith(".md")
+                        ? String(targetWithoutExt)
+                        : String(targetWithoutExt) + ".md";
+                    await ensureFolder(targetPath.split("/").slice(0, -1).join("/"));
+                    const currentFile = getFile(currentPath);
+                    if (!currentFile) throw new Error("nota temporanea ciclo live mancante: " + currentPath);
+                    if (app.fileManager?.renameFile) await app.fileManager.renameFile(currentFile, targetPath);
+                    else await app.vault.rename(currentFile, targetPath);
+                    currentPath = targetPath;
+                }
+            }
+        };
+
+        const frontmatter = await sessionWizard(tp);
+        const templateText = await app.vault.adapter.read(sessionTemplateFile);
+        const templateBody = templateText.replace(/^<%[\\s\\S]*?%>\\s*/, "");
+        const sessionFile = getFile(currentPath);
+        if (!sessionFile) throw new Error("nota sessione live acceptance non creata: " + currentPath);
+        await app.vault.modify(sessionFile, String(frontmatter ?? "") + templateBody);
+        await sleep(1000);
+
+        await processFrontmatter(sessionFile, fm => {
+            for (const [key, value] of Object.entries(cycle.prepare_frontmatter ?? {})) {
+                fm[key] = value;
+            }
+            for (const [key, value] of Object.entries(cycle.live_frontmatter ?? {})) {
+                fm[key] = Array.isArray(value) ? appendUnique(fm[key], value) : value;
+            }
+        });
+        await sleep(1000);
+        await openFile(String(cycle.table_page));
+
+        await postWizard(tp, "fine_sessione");
+        await sleep(1500);
+        await openFile(String(cycle.post_session_page));
+
+        return {
+            setupPage: cycle.setup_page,
+            tablePage: cycle.table_page,
+            postSessionPage: cycle.post_session_page,
+            sessionButtonFound: Boolean(sessionButton),
+            sessionButtonLabel: sessionButton?.label ?? null,
+            sessionButtonActionType: sessionAction?.type ?? null,
+            sessionButtonTemplateFile: sessionAction?.templateFile ?? null,
+            postSessionButtonFound: Boolean(postSessionButton),
+            postSessionButtonLabel: postSessionButton?.label ?? null,
+            postSessionButtonActionType: postSessionAction?.type ?? null,
+            postSessionButtonTemplateFile: postSessionAction?.templateFile ?? null,
+            sessionTemplateExists,
+            postSessionTemplateExists,
+            sessionScriptExists,
+            postSessionScriptExists,
+            expectedSessionPath,
+            currentPath,
+            promptCount: promptLog.length,
+            suggesterCount: suggesterLog.length,
+            promptLog,
+            suggesterLog
+        };
+    })()`, { awaitPromise: true, timeoutMs: 120000 });
+
+    const state = await verifyCycleState(cdp, "cycle");
+    return { ...result, state, newEvents: cdp.events.slice(before) };
+}
+
 async function runPersistencePass(port) {
     const page = await waitForPageTarget(port);
     const cdp = cdpClient(page.webSocketDebuggerUrl);
@@ -719,11 +1009,16 @@ async function runPersistencePass(port) {
     try {
         const summary = await waitForReadyPlugins(cdp);
         const state = await verifyWorkflowState(cdp, "persistence");
+        const cycleState = RUN_CYCLE_SMOKE ? await verifyCycleState(cdp, "persistence") : null;
         const results = [];
-        for (const pagePath of WORKFLOW_SMOKE.persistence_pages ?? []) {
+        const pages = uniqueStrings([
+            ...(WORKFLOW_SMOKE.persistence_pages ?? []),
+            ...(RUN_CYCLE_SMOKE ? (CYCLE_SMOKE.persistence_pages ?? []) : [])
+        ]);
+        for (const pagePath of pages) {
             results.push(await inspectPage(cdp, String(pagePath)));
         }
-        return { summary, state, results, events: cdp.events };
+        return { summary, state, cycleState, results, events: cdp.events };
     } finally {
         cdp.close();
     }
@@ -748,7 +1043,13 @@ async function runLivePass(port) {
             workflowPages.push(await inspectPage(cdp, String(pagePath)));
         }
 
-        return { summary, results, workflow, workflowPages, events: cdp.events };
+        const cycle = RUN_CYCLE_SMOKE ? await runCycleSmoke(cdp) : null;
+        const cyclePages = [];
+        for (const pagePath of RUN_CYCLE_SMOKE ? (CYCLE_SMOKE.verify_pages_after_cycle ?? []) : []) {
+            cyclePages.push(await inspectPage(cdp, String(pagePath)));
+        }
+
+        return { summary, results, workflow, workflowPages, cycle, cyclePages, events: cdp.events };
     } finally {
         cdp.close();
     }
@@ -756,7 +1057,7 @@ async function runLivePass(port) {
 
 function validateReport(report) {
     const errors = [];
-    const { summary, results, workflow, workflowPages = [], events } = report;
+    const { summary, results, workflow, workflowPages = [], cycle, cyclePages = [], events } = report;
     if (!summary) {
         errors.push("plugin summary non disponibile");
         return errors;
@@ -773,6 +1074,10 @@ function validateReport(report) {
     if (RUN_WORKFLOW_SMOKE) errors.push(...validateWorkflowResult(workflow, "workflow"));
     for (const result of workflowPages) {
         errors.push(...validatePageResult(result, "post-workflow"));
+    }
+    if (RUN_CYCLE_SMOKE) errors.push(...validateCycleResult(cycle, "cycle"));
+    for (const result of cyclePages) {
+        errors.push(...validatePageResult(result, "post-cycle"));
     }
     if (events.length) errors.push(`eventi console globali nel live pass: ${JSON.stringify(events)}`);
     return errors;
@@ -820,11 +1125,57 @@ function validateWorkflowResult(workflow, label) {
     return errors;
 }
 
+function validateCycleState(state, label) {
+    const errors = [];
+    if (!state) return [`ciclo ${label} non eseguito`];
+    if (!state.sessionExists) errors.push(`ciclo ${label}: sessione non creata`);
+    if (state.sessionPath !== CYCLE_SMOKE.expected_session_path) {
+        errors.push(`ciclo ${label}: sessione nel path inatteso (${state.sessionPath})`);
+    }
+    if (state.missingSessionText?.length) {
+        errors.push(`ciclo ${label}: contenuto sessione incompleto (${state.missingSessionText.join(", ")})`);
+    }
+    if (state.metadataCategoria !== "sessione") {
+        errors.push(`ciclo ${label}: metadata categoria non indicizzata come sessione (${state.metadataCategoria})`);
+    }
+    if (state.missingFrontmatter?.length) {
+        errors.push(`ciclo ${label}: frontmatter inatteso (${JSON.stringify(state.missingFrontmatter)})`);
+    }
+    if (state.missingListValues?.length) {
+        errors.push(`ciclo ${label}: liste frontmatter incomplete (${JSON.stringify(state.missingListValues)})`);
+    }
+    if (!state.dataviewIndexed) errors.push(`ciclo ${label}: Dataview non vede la sessione creata`);
+    return errors;
+}
+
+function validateCycleResult(cycle, label) {
+    const errors = [];
+    if (!cycle) return [`ciclo ${label} non eseguito`];
+    if (!cycle.sessionButtonFound) errors.push(`ciclo ${label}: pulsante Nuova Sessione mancante (${CYCLE_SMOKE.session_button_id})`);
+    if (cycle.sessionButtonActionType !== "templaterCreateNote") errors.push(`ciclo ${label}: azione Nuova Sessione inattesa (${cycle.sessionButtonActionType})`);
+    if (cycle.sessionButtonTemplateFile !== CYCLE_SMOKE.session_template_file) errors.push(`ciclo ${label}: template Nuova Sessione inatteso (${cycle.sessionButtonTemplateFile})`);
+    if (!cycle.postSessionButtonFound) errors.push(`ciclo ${label}: pulsante Fine Sessione mancante (${CYCLE_SMOKE.post_session_button_id})`);
+    if (cycle.postSessionButtonActionType !== "runTemplaterFile") errors.push(`ciclo ${label}: azione Fine Sessione inattesa (${cycle.postSessionButtonActionType})`);
+    if (cycle.postSessionButtonTemplateFile !== CYCLE_SMOKE.post_session_template_file) errors.push(`ciclo ${label}: template Fine Sessione inatteso (${cycle.postSessionButtonTemplateFile})`);
+    if (!cycle.sessionTemplateExists) errors.push(`ciclo ${label}: template sessione materializzato mancante (${CYCLE_SMOKE.session_template_file})`);
+    if (!cycle.postSessionTemplateExists) errors.push(`ciclo ${label}: template post-sessione materializzato mancante (${CYCLE_SMOKE.post_session_template_file})`);
+    if (!cycle.sessionScriptExists) errors.push(`ciclo ${label}: script sessione mancante (${CYCLE_SMOKE.session_user_script})`);
+    if (!cycle.postSessionScriptExists) errors.push(`ciclo ${label}: script post-sessione mancante (${CYCLE_SMOKE.post_session_user_script})`);
+    if (cycle.currentPath !== CYCLE_SMOKE.expected_session_path) errors.push(`ciclo ${label}: sessione creata nel path inatteso (${cycle.currentPath})`);
+    if (!cycle.promptCount || cycle.promptCount < Object.keys(CYCLE_SMOKE.prompt_answers ?? {}).length) {
+        errors.push(`ciclo ${label}: prompt compilati insufficienti (${cycle.promptCount})`);
+    }
+    errors.push(...validateCycleState(cycle.state, label));
+    if (cycle.newEvents?.length) errors.push(`ciclo ${label}: eventi console durante sessione/post-sessione (${JSON.stringify(cycle.newEvents)})`);
+    return errors;
+}
+
 function validatePersistenceReport(report) {
     const errors = [];
     if (!report?.summary) return ["persistence live pass non disponibile"];
     if (report.summary.missingLoaded?.length) errors.push(`persistence: plugin mancanti (${report.summary.missingLoaded.join(", ")})`);
     errors.push(...validateWorkflowState(report.state, "persistence"));
+    if (RUN_CYCLE_SMOKE) errors.push(...validateCycleState(report.cycleState, "persistence"));
     for (const result of report.results ?? []) {
         errors.push(...validatePageResult(result, "persistence"));
     }
@@ -854,7 +1205,7 @@ async function main() {
             for (const error of contractErrors) console.error(`- ${error}`);
             process.exit(1);
         }
-        console.log(`Live acceptance contract OK: ${FIRST_RUN_PAGES.length} pagine first-run, workflow ${WORKFLOW_SMOKE.button_id}.`);
+        console.log(`Live acceptance contract OK: ${FIRST_RUN_PAGES.length} pagine first-run, workflow ${WORKFLOW_SMOKE.button_id}, ciclo ${CYCLE_SMOKE.expected_session_name}.`);
         process.exit(0);
     }
     if (LEGACY_RESET_PROFILE && !FRESH_INSTALL) {
@@ -908,7 +1259,10 @@ async function main() {
         const workflowText = RUN_WORKFLOW_SMOKE
             ? `, workflow ${WORKFLOW_SMOKE.button_id} creato e persistente`
             : "";
-        console.log(`Obsidian user-acceptance OK: ${report.summary.expectedPluginCount} plugin caricati, ${report.results.length} pagine first-run verificate${workflowText}.`);
+        const cycleText = RUN_CYCLE_SMOKE
+            ? `, ciclo sessione/post-sessione ${CYCLE_SMOKE.expected_session_name} verificato`
+            : "";
+        console.log(`Obsidian user-acceptance OK: ${report.summary.expectedPluginCount} plugin caricati, ${report.results.length} pagine first-run verificate${workflowText}${cycleText}.`);
         markProfileReady();
         console.log(`Profilo test persistente: ${PROFILE_ROOT}`);
         console.log(`Vault test persistente: ${OUT}`);

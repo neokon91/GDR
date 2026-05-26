@@ -68,3 +68,90 @@ workflow_smoke:
   persistence_pages:
     - Mondi/Accettazione Live Obsidian.md
     - Hub/Worldbuilder Dashboard.md
+cycle_smoke:
+  setup_page: Risorse/Preparazione Sessione.md
+  table_page: Hub/Durante il Gioco.md
+  post_session_page: Risorse/Post Sessione Guidato.md
+  session_button_id: nuova-sessione-z-modelli-dm-sessione-md
+  session_button_label: Nuova Sessione
+  session_template_file: z.modelli/dm/Sessione.md
+  session_user_script: z.automazioni/sessione.js
+  post_session_button_id: wizard-fine-sessione
+  post_session_button_label: Fine Sessione
+  post_session_template_file: z.modelli/wizard/Fine Sessione.md
+  post_session_user_script: z.automazioni/wizard_layer.js
+  temp_note: Inbox/Live Session Acceptance Temp.md
+  expected_session_path: Mondi/Sessioni/2026-05-26 - Sessione Live Faro Sommerso.md
+  expected_session_name: Sessione Live Faro Sommerso
+  expected_session_contains:
+    - "categoria: sessione"
+    - "Sessione Live Faro Sommerso"
+    - "Faro di Vetro"
+    - "Le maree aprono una camera sotto il faro"
+  prompt_answers:
+    Titolo della sessione: Sessione Live Faro Sommerso
+    Data: "2026-05-26"
+    Obiettivo della sessione: Capire perche il Faro di Vetro brilla sotto la marea.
+    Prima scena / apertura: Le maree aprono una camera sotto il faro.
+    Scelta concreta per i giocatori: Salvare i custodi o inseguire il sigillo sommerso.
+    Calendario Calendarium: Calendario delle Maree
+    Scelta dei giocatori: Il gruppo salva i custodi e lascia fuggire il messaggero del sigillo.
+    Cosa cambia nel mondo: Il Consiglio delle Maree perde controllo sul porto.
+    Chi reagisce prima della prossima sessione: Consiglio delle Maree; Mercanti del Sigillo
+    Recap pubblico: I custodi del faro sono salvi, ma il sigillo e scomparso.
+    Recap DM: Il messaggero porta il sigillo alla Selva dei Giuramenti.
+    Prossima apertura: Il porto chiude le campane e accusa i naviganti.
+    Output utile per la prossima sessione: Seguire il sigillo verso la Selva dei Giuramenti.
+  suggester_answers:
+    Vuoi collegare subito cast, luoghi, materiali e media? Scegli No per una sessione rapida.: "No"
+    Tipo di sessione: Sessione di campagna
+  prepare_frontmatter:
+    stato: pronto
+    attiva: true
+    materiale_pronto:
+      - Mappa del Faro di Vetro
+      - Conflitto tra custodi e messaggero
+    pressioni:
+      - Le maree stanno salendo
+    luoghi:
+      - "[[Faro di Vetro]]"
+    fazioni:
+      - "[[Consiglio delle Maree]]"
+      - "[[Mercanti del Sigillo]]"
+  live_frontmatter:
+    scena_corrente: Camera sommersa del faro
+    decisioni_prese:
+      - Il gruppo salva i custodi e lascia fuggire il messaggero del sigillo.
+    output_sessione:
+      - Il sigillo viene portato verso la Selva dei Giuramenti.
+    conseguenze:
+      - Il Consiglio delle Maree perde controllo sul porto.
+    entita_impattate:
+      - "[[Faro di Vetro]]"
+      - "[[Consiglio delle Maree]]"
+    propaga_a:
+      - "[[Mercanti del Sigillo]]"
+  expected_session_frontmatter:
+    categoria: sessione
+    stato: giocata
+    attiva: false
+    propagazione_stato: aperta
+  expected_session_list_contains:
+    decisioni_prese:
+      - Il gruppo salva i custodi e lascia fuggire il messaggero del sigillo.
+    conseguenze:
+      - Il Consiglio delle Maree perde controllo sul porto.
+    recap_pubblico:
+      - I custodi del faro sono salvi, ma il sigillo e scomparso.
+    output_sessione:
+      - Seguire il sigillo verso la Selva dei Giuramenti.
+  verify_pages_after_cycle:
+    - Hub/Durante il Gioco.md
+    - Risorse/Post Sessione Guidato.md
+    - Mondi/Stato del Mondo.md
+    - Hub/Vista Giocatori.md
+    - Risorse/Quality Report.md
+  persistence_pages:
+    - Mondi/Sessioni/2026-05-26 - Sessione Live Faro Sommerso.md
+    - Risorse/Post Sessione Guidato.md
+    - Mondi/Stato del Mondo.md
