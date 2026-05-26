@@ -34,6 +34,11 @@ function labelStat(stat) {
     return stat.charAt(0).toUpperCase() + stat.slice(1);
 }
 
+function inlineYamlQuotedList(values, helpers) {
+    const filtered = (values ?? []).filter(Boolean);
+    return filtered.length ? `[${filtered.map(value => helpers.yamlQuote(value)).join(", ")}]` : "[]";
+}
+
 async function loadSrdData(tp) {
     const read = typeof app !== "undefined" && app?.vault?.adapter?.read
         ? path => app.vault.adapter.read(path)
@@ -277,6 +282,44 @@ async function gestisciTrattiSpecie(tp, specieId, specie, helpers) {
     return { tratti, scelte_tratti: scelteTratti };
 }
 
+function talentiOrigine(talenti) {
+    return Object.fromEntries(
+        Object.entries(talenti ?? {})
+            .filter(([, talent]) => talent?.categoria === "origini")
+    );
+}
+
+async function scegliTalentoOrigine(tp, backgroundDef, talenti, helpers) {
+    const talentiDaBackground = backgroundDef?.talento_origine ?? [];
+    const origine = talentiOrigine(talenti);
+
+    if (talentiDaBackground.length === 1) {
+        const talentoId = talentiDaBackground[0];
+        const talento = talenti?.[talentoId];
+        if (!talento) return [];
+
+        // Il wizard rende visibile il talento automatico del background invece di nasconderlo nel dato.
+        const confermato = await helpers.askYesNo(
+            tp,
+            `Talento d'origine dal background: ${talento.label ?? talentoId}. Confermi?`
+        );
+        return confermato ? [talento.label ?? talentoId] : [];
+    }
+
+    if (talentiDaBackground.length > 1) {
+        const opzioni = Object.fromEntries(
+            talentiDaBackground
+                .filter(id => talenti?.[id])
+                .map(id => [id, talenti[id]])
+        );
+        const scelto = await scegliDaLista(tp, "Talento d'origine del background", opzioni, helpers);
+        return scelto ? [talenti[scelto]?.label ?? scelto] : [];
+    }
+
+    const scelto = await scegliDaLista(tp, "Talento d'origine manuale", origine, helpers);
+    return scelto ? [origine[scelto]?.label ?? scelto] : [];
+}
+
 function buildCaratteristicheYaml(statistiche, saveProf) {
     const output = {};
 
@@ -309,6 +352,7 @@ async function pg(tp) {
     const classi = opzioni.classi ?? {};
     const specie = opzioni.specie ?? {};
     const backgrounds = opzioni.background ?? {};
+    const talentiSrd = opzioni.talenti ?? {};
     const sottospecieMap = opzioni.sottospecie ?? {};
     const abilita = core.abilita ?? {};
 
@@ -342,11 +386,13 @@ async function pg(tp) {
 
     let statistiche = {};
     let competenze = [];
+    let talenti = [];
     let trattiSpecie = { tratti: [], scelte_tratti: {} };
     let hp = 10;
 
     if (buildMeccanico) {
         trattiSpecie = await gestisciTrattiSpecie(tp, specieId, specie, helpers);
+        talenti = await scegliTalentoOrigine(tp, backgrounds[background], talentiSrd, helpers);
         competenze = await scegliCompetenzeClasse(tp, classe, classi, abilita, helpers);
         statistiche = await chiediStatistiche(tp, core, background, backgrounds, helpers);
         hp = calcolaPuntiFerita(classe, statistiche, classi);
@@ -372,7 +418,6 @@ async function pg(tp) {
         ...competenze,
         ...(backgroundDef.competenze_abilita ?? [])
     ]));
-    const talenti = backgroundDef.talento_origine ?? [];
     const armature = classeDef.addestramento_armature ?? [];
     const armi = classeDef.addestramento_armi ?? [];
 
@@ -452,7 +497,7 @@ async function pg(tp) {
         equipaggiamento: "[]",
         incantesimi: "[]",
         privilegi: "[]",
-        talenti: helpers.inlineYamlList(talenti),
+        talenti: inlineYamlQuotedList(talenti, helpers),
         tratti: helpers.inlineYamlList(trattiSpecie.tratti),
         scelte_tratti: "{}"
     });

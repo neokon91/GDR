@@ -16,6 +16,7 @@ I valori sono nel frontmatter strutturato (`caratteristiche`, `abilita`, `punti_
 2. Rispondi ai prompt narrativi (mondo, luogo, fazioni, relazioni) come prima.
 3. Se scegli **sì** alla scheda meccanica:
    - metodo caratteristiche (array standard, acquisto punti, manuale);
+   - talento d'origine del background, confermato o scelto dal catalogo SRD disponibile;
    - aumenti del background;
    - competenze di classe;
    - scelte tratti di specie (dove previsto).
