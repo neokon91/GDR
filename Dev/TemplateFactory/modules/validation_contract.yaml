@@ -267,6 +267,7 @@ allowed_types_by_category:
     - tempio
     - foresta
     - montagna
+    - luogo fondativo
   missione:
     - incarico
     - ricerca

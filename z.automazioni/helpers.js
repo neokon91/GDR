@@ -159,7 +159,37 @@ async function loadTemplateFactoryModule(moduleName) {
         return templateFactoryCache[moduleName];
     }
 
-    const source = await readVaultText(`Dev/TemplateFactory/modules/${moduleName}.yaml`);
+    const jsonCandidates = [
+        `z.automazioni/runtime_modules/${moduleName}.json`
+    ];
+    for (const candidate of jsonCandidates) {
+        try {
+            const source = await readVaultText(candidate);
+            if (source) {
+                templateFactoryCache[moduleName] = JSON.parse(source);
+                return templateFactoryCache[moduleName];
+            }
+        } catch {
+            // I JSON runtime esistono solo nella release pulita.
+        }
+    }
+
+    const yamlCandidates = [
+        `Dev/TemplateFactory/modules/${moduleName}.yaml`,
+        `z.automazioni/runtime_modules/${moduleName}.yaml`
+    ];
+    let source = "";
+    for (const candidate of yamlCandidates) {
+        try {
+            source = await readVaultText(candidate);
+            if (source) break;
+        } catch {
+            // In release i moduli YAML runtime sono copiati sotto z.automazioni/runtime_modules.
+        }
+    }
+    if (!source) {
+        throw new Error(`Modulo TemplateFactory mancante nel vault: ${moduleName}`);
+    }
     const parser = typeof parseYaml === "function"
         ? parseYaml
         : typeof window !== "undefined" && typeof window.parseYaml === "function"

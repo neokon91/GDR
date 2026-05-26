@@ -1,0 +1,70 @@
+id: live_acceptance
+purpose: Scenari di accettazione live per Obsidian reale in profilo isolato.
+version: 0.1.0
+first_run_pages:
+  - Inizia Qui.md
+  - Risorse/Setup Guidato.md
+  - Hub/1. DM Dashboard.md
+  - Hub/Durante il Gioco.md
+  - Risorse/Post Sessione Guidato.md
+  - Hub/Cosa Succede Fuori Scena.md
+  - Hub/Worldbuilder Dashboard.md
+  - Hub/Vista Giocatori.md
+  - Risorse/Quality Report.md
+workflow_smoke:
+  setup_page: Inizia Qui.md
+  button_id: nuovo-mondo-homebrew
+  button_label: Nuovo Mondo Homebrew
+  template_file: z.modelli/wizard/Nuovo Mondo Homebrew.md
+  helper_script: z.automazioni/helpers.js
+  user_script: z.automazioni/nuovo_mondo_homebrew.js
+  temp_note: Inbox/Live Acceptance Temp.md
+  expected_world_path: Mondi/Accettazione Live Obsidian.md
+  expected_world_name: Accettazione Live Obsidian
+  prompt_answers:
+    Nome del mondo: Accettazione Live Obsidian
+    Promessa del mondo: Un arcipelago conteso dove ogni faro custodisce un patto antico.
+    Tono: Avventura tesa, chiara al tavolo, con segreti leggibili dal DM.
+    Genere o contaminazione: Fantasy marittimo politico
+    Livello magia: Media, rituale e costosa
+    Calendario Calendarium del mondo: Calendario delle Maree
+    Scala iniziale: Arcipelago regionale
+    Conflitto centrale: Le maree stanno spegnendo i fari sacri e le fazioni cercano colpevoli.
+    Vincoli creativi: Niente contenuto proprietario o assi tematici esterni.
+    Temi da evitare: Tortura esplicita
+    Luogo fondativo 1: Faro di Vetro
+    Luogo fondativo 2: Porto delle Campane
+    Luogo fondativo 3: Selva dei Giuramenti
+    Potere/fazione fondativa 1: Consiglio delle Maree
+    Potere/fazione fondativa 2: Ordine della Lanterna
+    Potere/fazione fondativa 3: Mercanti del Sigillo
+    Cultura fondativa 1: Cantori della Soglia
+    Cultura fondativa 2: Naviganti del Sale
+    Mistero fondativo: Un faro continua a brillare sott'acqua.
+    Pressione iniziale: 6
+  suggester_answers:
+    Preset creativo: Dark fantasy
+  expected_files:
+    - Mondi/Accettazione Live Obsidian.md
+    - Mondi/Luoghi/Faro di Vetro.md
+    - Mondi/Luoghi/Porto delle Campane.md
+    - Mondi/Luoghi/Selva dei Giuramenti.md
+    - Mondi/Fazioni/Consiglio delle Maree.md
+    - Mondi/Fazioni/Ordine della Lanterna.md
+    - Mondi/Fazioni/Mercanti del Sigillo.md
+    - Mondi/Culture/Cantori della Soglia.md
+    - Mondi/Culture/Naviganti del Sale.md
+  expected_world_contains:
+    - "categoria: mondo"
+    - "Accettazione Live Obsidian"
+    - "dark fantasy"
+    - "Faro di Vetro"
+    - "Consiglio delle Maree"
+    - "Cantori della Soglia"
+  verify_pages_after_workflow:
+    - Hub/Worldbuilder Dashboard.md
+    - Hub/Atlante del Mondo.md
+    - Hub/Vista Giocatori.md
+  persistence_pages:
+    - Mondi/Accettazione Live Obsidian.md
+    - Hub/Worldbuilder Dashboard.md

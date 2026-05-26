@@ -3,6 +3,7 @@ const path = require("path");
 
 const TEMPLATE_PATTERN = /templateFile:\s*["']([^"']+)["']/g;
 const INLINE_BUTTON_PATTERN = /`BUTTON\[([^\]\n]+)\]`/g;
+const INLINE_LIST_INPUT_PATTERN = /`INPUT\[list:[^\]\n]+\]`/g;
 const COMPLEX_INLINE_INPUT_PATTERN = /`INPUT\[[^\]\n]*(?:optionQuery|useLinks|allowOther|suggester|Suggester)\([^\]\n]*\]`/g;
 const TEMPLATER_USER_PATTERN = /tp\.user\.([A-Za-z0-9_]+)/g;
 
@@ -105,6 +106,10 @@ function validateMetaBindControls({
 
             while ((match = COMPLEX_INLINE_INPUT_PATTERN.exec(text))) {
                 errors.push(`${fileRel}: INPUT Meta Bind con funzioni in inline code; usare blocco meta-bind`);
+            }
+
+            while ((match = INLINE_LIST_INPUT_PATTERN.exec(text))) {
+                errors.push(`${fileRel}: INPUT Meta Bind list in inline code; usare riga o blocco meta-bind`);
             }
         }
     }

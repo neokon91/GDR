@@ -39,6 +39,7 @@ const EXCLUDED_AUTOMAZIONI_PREFIXES = RELEASE_BOUNDARY.forbidden_automation_pref
 const EXCLUDED_FILES = new Set(COPY_POLICY.excluded_files ?? []);
 const REQUIRED_RELEASE_FILES = RELEASE_BOUNDARY.required_files ?? [];
 const REQUIRED_USER_IGNORE_FILTERS = COPY_POLICY.required_user_ignore_filters ?? [];
+const RUNTIME_TEMPLATE_MODULES = RELEASE_BOUNDARY.runtime_template_modules ?? [];
 const enabledPlugins = RELEASE_PLUGIN_PROFILE.enabledPluginSet;
 const GENERATED_RELEASE_NOTES = {
     "LEGGIMI.md": `# Vault GDR
@@ -312,6 +313,16 @@ function validateRelease() {
             errors.push(`file release obbligatorio mancante: ${file}`);
         }
     }
+    for (const moduleName of RUNTIME_TEMPLATE_MODULES) {
+        const runtimeModule = `z.automazioni/runtime_modules/${moduleName}`;
+        const runtimeModuleJson = runtimeModule.replace(/\.ya?ml$/, ".json");
+        if (!fs.existsSync(repoPath(OUT, runtimeModule))) {
+            errors.push(`modulo YAML runtime release mancante: ${runtimeModule}`);
+        }
+        if (!fs.existsSync(repoPath(OUT, runtimeModuleJson))) {
+            errors.push(`modulo JSON runtime release mancante: ${runtimeModuleJson}`);
+        }
+    }
 
     const releaseEntries = walkRelease(OUT);
     const releaseAppConfig = readJson(repoPath(OUT, ".obsidian/app.json"), {});
@@ -442,10 +453,40 @@ function materializeTemplates(targetRoot) {
     ], { cwd: ROOT, stdio: "inherit" });
 }
 
+function yamlToJsonText(source) {
+    const script = [
+        "import json, sys, yaml",
+        "with open(sys.argv[1], encoding='utf-8') as handle:",
+        "    data = yaml.safe_load(handle) or {}",
+        "print(json.dumps(data, ensure_ascii=False, indent=2))"
+    ].join("\n");
+    return execFileSync("python3", ["-c", script, source], {
+        encoding: "utf8",
+        maxBuffer: 8 * 1024 * 1024
+    });
+}
+
+function copyRuntimeTemplateModules() {
+    const targetDir = repoPath(OUT, "z.automazioni/runtime_modules");
+    fs.mkdirSync(targetDir, { recursive: true });
+    for (const moduleName of RUNTIME_TEMPLATE_MODULES) {
+        const source = repoPath(ROOT, "Dev/TemplateFactory/modules", moduleName);
+        if (!fs.existsSync(source)) {
+            console.error(`Modulo runtime release mancante: ${source}`);
+            process.exit(1);
+        }
+        const yamlTarget = repoPath(targetDir, moduleName);
+        const jsonTarget = repoPath(targetDir, moduleName.replace(/\.ya?ml$/, ".json"));
+        fs.copyFileSync(source, yamlTarget);
+        fs.writeFileSync(jsonTarget, `${yamlToJsonText(source).trimEnd()}\n`, "utf8");
+    }
+}
+
 fs.rmSync(OUT, { recursive: true, force: true });
 fs.mkdirSync(DIST, { recursive: true });
 copyDir(ROOT, OUT, ROOT);
 materializeTemplates(OUT);
+copyRuntimeTemplateModules();
 writeGeneratedReleaseNotes();
 if (INCLUDE_DEMO) {
     const result = generateDemoWorld({ outDir: OUT, force: true });

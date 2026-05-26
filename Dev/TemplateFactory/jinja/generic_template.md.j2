@@ -46,9 +46,11 @@ tab: Tavolo
 >
 > Posta: `INPUT[text:posta]`
 >
-> Rischi: `INPUT[list:rischi]`
+> Rischi:
+> INPUT[list:rischi]
 >
-> Ricompense: `INPUT[list:ricompense]`
+> Ricompense:
+> INPUT[list:ricompense]
 >
 > Prossima mossa: `INPUT[prossima_mossa][:prossima_mossa]`
 >
@@ -56,7 +58,8 @@ tab: Tavolo
 {% if blueprint.get("continuity_fields", false) %}>
 > Causa: `INPUT[text:causa]`
 >
-> Effetti: `INPUT[list:effetti]`
+> Effetti:
+> INPUT[list:effetti]
 {% endif %}
 
 > [!lettura]- Versione Pubblica
@@ -88,7 +91,8 @@ tab: Connessioni
 >
 > Tag: `INPUT[tags][:tags]`
 {% if blueprint.get("continuity_fields", false) %}>
-> Aggiornamenti richiesti: `INPUT[list:aggiornamenti_richiesti]`
+> Aggiornamenti richiesti:
+> INPUT[list:aggiornamenti_richiesti]
 >
 > Stato propagazione: `INPUT[text:propagazione_stato]`
 {% endif %}
@@ -182,7 +186,8 @@ tab: PNG
 >
 > Fazioni: `INPUT[fazioni][:fazioni]`
 >
-> Segreti rivelati: `INPUT[list:segreti_rivelati]`
+> Segreti rivelati:
+> INPUT[list:segreti_rivelati]
 
 > [!regia]- Stato PNG
 > ```dataviewjs
@@ -249,11 +254,13 @@ tab: Continuita
 > [!timer] Causa Effetto
 > Causa: `INPUT[text:causa]`
 >
-> Effetti: `INPUT[list:effetti]`
+> Effetti:
+> INPUT[list:effetti]
 >
 > Entita impattate: `INPUT[entita_impattate][:entita_impattate]`
 >
-> Aggiornamenti richiesti: `INPUT[list:aggiornamenti_richiesti]`
+> Aggiornamenti richiesti:
+> INPUT[list:aggiornamenti_richiesti]
 >
 > Stato propagazione: `INPUT[text:propagazione_stato]`
 

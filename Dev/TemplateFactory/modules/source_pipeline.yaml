@@ -155,6 +155,21 @@ steps:
       - python3
       - z.automazioni/render_release_folder_notes.py
       - --check
+  obsidian_user_acceptance:
+    purpose: Verifica il contratto dello smoke live Obsidian senza aprire l'app.
+    sources:
+      - Dev/TemplateFactory/modules/live_acceptance.yaml
+      - z.automazioni/check_obsidian_user_acceptance.js
+    outputs:
+      - memoria
+    render:
+      - node
+      - z.automazioni/check_obsidian_user_acceptance.js
+      - --contract-check
+    check:
+      - node
+      - z.automazioni/check_obsidian_user_acceptance.js
+      - --contract-check
   template_previews:
     purpose: Verifica blueprint YAML e Jinja senza materializzare z.modelli nel repo sorgente.
     sources:

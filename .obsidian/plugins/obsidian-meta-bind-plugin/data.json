@@ -55,6 +55,34 @@
       "declaration": "INPUT[inlineListSuggester(optionQuery(\"Mondi\"), useLinks(partial), allowOther)]"
     },
     {
+      "name": "fonti",
+      "declaration": "INPUT[inlineListSuggester(optionQuery(\"Mondi\"), useLinks(partial), allowOther)]"
+    },
+    {
+      "name": "riferimenti_srd",
+      "declaration": "INPUT[inlineListSuggester(optionQuery(\"SRD\"), useLinks(partial), allowOther)]"
+    },
+    {
+      "name": "riferimenti_regola",
+      "declaration": "INPUT[inlineListSuggester(optionQuery(\"SRD\"), useLinks(partial), allowOther)]"
+    },
+    {
+      "name": "sezioni_collegate",
+      "declaration": "INPUT[inlineList]"
+    },
+    {
+      "name": "blocchi_collegati",
+      "declaration": "INPUT[inlineList]"
+    },
+    {
+      "name": "tabelle_collegate",
+      "declaration": "INPUT[inlineList]"
+    },
+    {
+      "name": "tags",
+      "declaration": "INPUT[inlineList]"
+    },
+    {
       "name": "player_safe",
       "declaration": "INPUT[text]"
     },

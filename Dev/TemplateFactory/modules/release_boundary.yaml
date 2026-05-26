@@ -245,6 +245,9 @@ bridge_runtime_modules:
   - session_dnd.js
   - session_maps.js
   - session_player.js
+runtime_template_modules:
+  - frontmatter_profiles.yaml
+  - runtime_profiles.yaml
 leggimi_markers:
   - Apri questa cartella in Obsidian
   - Vista Giocatori

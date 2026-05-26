@@ -246,6 +246,7 @@ const REQUIRED_FILES = [
     "Dev/TemplateFactory/modules/bases_views.yaml",
     "Dev/TemplateFactory/modules/frontmatter_profiles.yaml",
     "Dev/TemplateFactory/modules/validation_contract.yaml",
+    "Dev/TemplateFactory/modules/live_acceptance.yaml",
     "Dev/TemplateFactory/modules/runtime_profiles.yaml",
     "Dev/TemplateFactory/modules/entity_depth.yaml",
     "Dev/TemplateFactory/modules/worldbuilding_depth_axes.yaml",

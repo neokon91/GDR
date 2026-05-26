@@ -83,6 +83,8 @@ profiles:
       id: foresta
     - label: Montagna
       id: montagna
+    - label: Luogo fondativo
+      id: luogo fondativo
     biome_options:
     - label: Foresta
       id: foresta
