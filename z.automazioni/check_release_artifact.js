@@ -10,6 +10,13 @@ const DIST = path.join(ROOT, "dist");
 const OUT = path.join(DIST, "vault-gdr-clean");
 const ZIP = path.join(DIST, "vault-gdr-clean.zip");
 const BOUNDARY = "Dev/TemplateFactory/modules/release_boundary.yaml";
+const INCLUDE_DEMO = process.argv.includes("--with-demo");
+const KEEP_ARTIFACT = process.argv.includes("--keep");
+const DEMO_RELEASE_PATHS = new Set([
+    "Demo Regno Di Prova.md",
+    "Mondi/[Demo] Regno di Prova.md",
+    "Mondi/Porto di Prova Demo.md"
+]);
 
 function loadYaml(relPath) {
     const script = [
@@ -66,6 +73,7 @@ function validateOutput(errors) {
         if (existsRel(OUT, relPath)) fail(errors, `percorso vietato nella release: ${relPath}`);
     }
     for (const relPath of asArray(releaseBoundary.forbidden_paths)) {
+        if (INCLUDE_DEMO && DEMO_RELEASE_PATHS.has(relPath)) continue;
         if (existsRel(OUT, relPath)) fail(errors, `materiale dev/riservato vietato nella release: ${relPath}`);
     }
 
@@ -139,11 +147,11 @@ function validateZip(errors) {
 const errors = [];
 
 try {
-    execFileSync("node", ["z.automazioni/release_clean.js"], { cwd: ROOT, stdio: "inherit" });
+    execFileSync("node", ["z.automazioni/release_clean.js", ...(INCLUDE_DEMO ? ["--with-demo"] : [])], { cwd: ROOT, stdio: "inherit" });
     validateOutput(errors);
     validateZip(errors);
 } finally {
-    fs.rmSync(DIST, { recursive: true, force: true });
+    if (!KEEP_ARTIFACT) fs.rmSync(DIST, { recursive: true, force: true });
 }
 
 if (errors.length) {

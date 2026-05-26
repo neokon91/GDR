@@ -4,7 +4,7 @@
   "private": true,
   "description": "Vault Obsidian per preparare e gestire campagne GDR fantasy in italiano.",
   "scripts": {
-    "check": "npm run import:srd-data && npm run check:srd-character-data && node z.automazioni/check_vault.js && npm run check:templates && npm run check:workflow-data && npm run check:workflow-actions && npm run check:workflow-render && npm run check:user-path && npm run check:metadata && npm run check:demo-contract && npm run check:release-quality && npm run check:docs && npm run check:smoke && npm run check:m11 && npm run check:release && npm run check:importers && npm run check:release-artifact && npm run check:repo && npm run check:js && npm run check:diff",
+    "check": "npm run import:srd-data && npm run check:srd-character-data && node z.automazioni/check_vault.js && npm run check:templates && npm run check:workflow-data && npm run check:workflow-actions && npm run check:workflow-render && npm run check:user-path && npm run check:metadata && npm run check:demo-contract && npm run check:release-artifact && npm run check:release-quality && npm run check:docs && npm run check:smoke && npm run check:m11 && npm run check:release && npm run check:importers && npm run check:repo && npm run check:js && npm run check:diff",
     "import:srd-data": "node z.automazioni/import_srd_character_data.js",
     "check:srd-character-data": "node z.automazioni/check_srd_character_data.js",
     "check:layer": "node z.automazioni/check_vault.js",
@@ -19,7 +19,7 @@
     "check:smoke": "node z.automazioni/check_smoke.js && node z.automazioni/check_runtime_load.js",
     "check:m11": "node z.automazioni/check_m11_fixture.js",
     "check:release": "node z.automazioni/check_release.js",
-    "check:release-artifact": "node z.automazioni/check_release_artifact.js",
+    "check:release-artifact": "node z.automazioni/check_release_artifact.js --with-demo --keep",
     "check:importers": "node z.automazioni/check_importers.js",
     "render:templates": "python3 z.automazioni/render_template_factory.py",
     "render:metadata": "python3 z.automazioni/render_metadata_surfaces.py",
