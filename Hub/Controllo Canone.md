@@ -14,9 +14,36 @@ mondo_attivo: ""
 > Mondo:
 > `INPUT[mondo][:mondo_attivo]`
 
-`BUTTON[timeline-mondi-timeline-timeline]`
+<!-- workflow:quick_actions:start controllo_canone -->
+> [!regia] Azioni rapide
+> Separare canone, rumor, retcon e contraddizioni prima che confondano il tavolo.
+>
+> **Timeline** - una verita deve entrare nella storia del mondo
+> `BUTTON[timeline-mondi-timeline-timeline]`
+>
+> **Revisione lore** - devi ripulire appunti, rumor o contraddizioni
+> `BUTTON[revisione-lore-revisione-lore]`
+>
+> [!regia]- Stabilizza canone
+> Portare informazioni in viste dove possono essere verificate.
+>
+> **Lore hub** - vuoi vedere segnali e materiale canonico collegato
+> `BUTTON[lore-hub-lore-hub]`
+>
+> **Evento lore** - una scoperta deve restare tracciabile ma non ancora assoluta
+> `BUTTON[nuovo-evento-lore-z-modelli-lore-capture-md]`
+>
+> **Controllo worldbuilding** - la contraddizione dipende da schede incomplete
+> `BUTTON[controllo-worldbuilding-controllo-worldbuilding]`
+>
+> **Motore mondo vivo** - una verita produce reazioni tra sessioni
+> `BUTTON[motore-mondo-vivo-motore-mondo-vivo]`
+<!-- workflow:quick_actions:end controllo_canone -->
 
-`BUTTON[revisione-lore-revisione-lore]`
+```dataviewjs
+const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+await gdr.renderWorkflowCommandDeck(dv, "controllo_canone", { mode: "simple" });
+```
 
 ```dataviewjs
 const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));

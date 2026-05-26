@@ -131,6 +131,56 @@ const PRIMARY_PATH = [
             "calendario-mondi-calendario",
             "lore-capture-z-modelli-lore-capture-md"
         ]
+    },
+    {
+        workflow: "motore_mondo_vivo",
+        page: "Hub/Motore Mondo Vivo.md",
+        label: "Motore Mondo Vivo",
+        requiredButtons: [
+            "stato-campagna-mondi-stato-del-mondo",
+            "cosa-succede-fuori-scena-cosa-succede-fuori-scena",
+            "controllo-canone-controllo-canone"
+        ]
+    },
+    {
+        workflow: "controllo_canone",
+        page: "Hub/Controllo Canone.md",
+        label: "Controllo Canone",
+        requiredButtons: [
+            "timeline-mondi-timeline-timeline",
+            "revisione-lore-revisione-lore",
+            "lore-hub-lore-hub"
+        ]
+    },
+    {
+        workflow: "compendium_mondo",
+        page: "Hub/Compendium Del Mondo.md",
+        label: "Compendium Del Mondo",
+        requiredButtons: [
+            "nuovo-elemento-z-modelli-worldbuilding-compendium-del-mondo-md",
+            "lore-hub-lore-hub",
+            "nuova-risorsa-z-modelli-worldbuilding-risorsa-md"
+        ]
+    },
+    {
+        workflow: "bibbia_mondo",
+        page: "Hub/Bibbia del Mondo.md",
+        label: "Bibbia del Mondo",
+        requiredButtons: [
+            "nuovo-mondo-homebrew",
+            "atlante-del-mondo-atlante-del-mondo",
+            "campagna-da-ambientazione-campagna-da-ambientazione"
+        ]
+    },
+    {
+        workflow: "iniziativa_combattimenti",
+        page: "Risorse/Iniziativa e Combattimenti.md",
+        label: "Iniziativa e Combattimenti",
+        requiredButtons: [
+            "durante-il-gioco-durante-il-gioco-3",
+            "nuovo-incontro-z-modelli-dm-incontro-md",
+            "preparazione-sessione-risorse-preparazione-sessione"
+        ]
     }
 ];
 
@@ -146,7 +196,12 @@ const SIMPLE_CALLS = {
     atlante_mondo: /renderWorkflowCommandDeck\(dv,\s*"atlante_mondo",\s*\{\s*mode:\s*"simple"\s*\}\)/,
     controllo_worldbuilding: /renderWorkflowCommandDeck\(dv,\s*"controllo_worldbuilding",\s*\{\s*mode:\s*"simple"\s*\}\)/,
     economia_rotte: /renderWorkflowCommandDeck\(dv,\s*"economia_rotte",\s*\{\s*mode:\s*"simple"\s*\}\)/,
-    lore_hub: /renderWorkflowCommandDeck\(dv,\s*"lore_hub",\s*\{\s*mode:\s*"simple"\s*\}\)/
+    lore_hub: /renderWorkflowCommandDeck\(dv,\s*"lore_hub",\s*\{\s*mode:\s*"simple"\s*\}\)/,
+    motore_mondo_vivo: /renderWorkflowCommandDeck\(dv,\s*"motore_mondo_vivo",\s*\{\s*mode:\s*"simple"\s*\}\)/,
+    controllo_canone: /renderWorkflowCommandDeck\(dv,\s*"controllo_canone",\s*\{\s*mode:\s*"simple"\s*\}\)/,
+    compendium_mondo: /renderWorkflowCommandDeck\(dv,\s*"compendium_mondo",\s*\{\s*mode:\s*"simple"\s*\}\)/,
+    bibbia_mondo: /renderWorkflowCommandDeck\(dv,\s*"bibbia_mondo",\s*\{\s*mode:\s*"simple"\s*\}\)/,
+    iniziativa_combattimenti: /renderWorkflowCommandDeck\(dv,\s*"iniziativa_combattimenti",\s*\{\s*mode:\s*"simple"\s*\}\)/
 };
 
 function workflowBlock(text, workflowId) {

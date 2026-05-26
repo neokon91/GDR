@@ -1067,6 +1067,186 @@ workflows:
       - Meta Bind
       - Dataview
       - Templater
+  motore_mondo_vivo:
+    user_goal: Decidere cosa cambia nel mondo prima della prossima sessione.
+    audience: user
+    entry_points:
+      - Hub/Motore Mondo Vivo.md
+    quick_actions:
+      - button: stato-campagna-mondi-stato-del-mondo
+        label: Stato campagna
+        use_when: devi leggere missioni, pressioni e conseguenze aperte
+      - button: cosa-succede-fuori-scena-cosa-succede-fuori-scena
+        label: Fuori scena
+        use_when: devi scegliere chi reagisce tra una sessione e l'altra
+      - button: worldbuilder-worldbuilder-dashboard
+        label: Worldbuilder
+        use_when: una reazione richiede luogo, fazione, mistero o pressione
+      - button: timeline-mondi-timeline-timeline
+        label: Timeline
+        use_when: un cambiamento deve diventare storia canonica
+      - button: controllo-canone-controllo-canone
+        label: Controllo canone
+        use_when: devi distinguere verita, rumor, retcon e contraddizioni
+      - button: economia-e-rotte-economia-e-rotte-2
+        label: Economia e rotte
+        use_when: una pressione riguarda risorse, mercati o passaggi
+    action_groups:
+      continuita:
+        label: Continuita operativa
+        purpose: Trasformare conseguenze aperte in mosse del mondo verificabili.
+        actions:
+          - button: registra-scelta-mondo
+            label: Registra scelta mondo
+            use_when: una decisione del party deve diventare stato persistente
+          - button: applica-conseguenza
+            label: Applica conseguenza
+            use_when: una conseguenza ha bersagli chiari
+          - button: propaga-a-entita
+            label: Propaga a entita
+            use_when: piu note devono ricevere aggiornamenti coerenti
+          - button: nuovo-clock-z-modelli-dm-tracciato-md
+            label: Nuovo clock
+            use_when: una pressione deve avanzare in modo visibile
+    required_plugins:
+      - Meta Bind
+      - Dataview
+      - Templater
+  controllo_canone:
+    user_goal: Separare canone, rumor, retcon e contraddizioni prima che confondano il tavolo.
+    audience: user
+    entry_points:
+      - Hub/Controllo Canone.md
+    quick_actions:
+      - button: timeline-mondi-timeline-timeline
+        label: Timeline
+        use_when: una verita deve entrare nella storia del mondo
+      - button: revisione-lore-revisione-lore
+        label: Revisione lore
+        use_when: devi ripulire appunti, rumor o contraddizioni
+    action_groups:
+      stabilizza:
+        label: Stabilizza canone
+        purpose: Portare informazioni in viste dove possono essere verificate.
+        actions:
+          - button: lore-hub-lore-hub
+            label: Lore hub
+            use_when: vuoi vedere segnali e materiale canonico collegato
+          - button: nuovo-evento-lore-z-modelli-lore-capture-md
+            label: Evento lore
+            use_when: una scoperta deve restare tracciabile ma non ancora assoluta
+          - button: controllo-worldbuilding-controllo-worldbuilding
+            label: Controllo worldbuilding
+            use_when: la contraddizione dipende da schede incomplete
+          - button: motore-mondo-vivo-motore-mondo-vivo
+            label: Motore mondo vivo
+            use_when: una verita produce reazioni tra sessioni
+    required_plugins:
+      - Meta Bind
+      - Dataview
+      - Templater
+  compendium_mondo:
+    user_goal: Creare elementi originali del mondo e collegarli a culture, risorse, missioni o storia.
+    audience: user
+    entry_points:
+      - Hub/Compendium Del Mondo.md
+    quick_actions:
+      - button: nuovo-elemento-z-modelli-worldbuilding-compendium-del-mondo-md
+        label: Nuovo elemento
+        use_when: vuoi creare materiale originale non-SRD con uso narrativo
+      - button: lore-hub-lore-hub
+        label: Lore hub
+        use_when: devi collegare l'elemento a segnali, misteri o canone
+    action_groups:
+      collega:
+        label: Collega al gioco
+        purpose: Evitare elementi decorativi senza impatto.
+        actions:
+          - button: nuova-risorsa-z-modelli-worldbuilding-risorsa-md
+            label: Nuova risorsa
+            use_when: l'elemento e merce, dipendenza o leva economica
+          - button: nuova-cultura-z-modelli-worldbuilding-cultura-md
+            label: Nuova cultura
+            use_when: l'elemento definisce pratiche, tabu o identita
+          - button: nuovo-segreto-o-mistero-z-modelli-worldbuilding-segreto-o-mistero-md
+            label: Nuovo mistero
+            use_when: l'elemento deve essere scoperto gradualmente
+          - button: nuova-missione-z-modelli-dm-missione-md
+            label: Nuova missione
+            use_when: l'elemento genera obiettivo, rischio o ricompensa
+    required_plugins:
+      - Meta Bind
+      - Dataview
+      - Templater
+  bibbia_mondo:
+    user_goal: Consolidare il mondo come prodotto leggibile prima di espanderlo ancora.
+    audience: user
+    entry_points:
+      - Hub/Bibbia del Mondo.md
+    quick_actions:
+      - button: nuovo-mondo-homebrew
+        label: Nuovo mondo guidato
+        use_when: non esiste ancora un mondo base da consolidare
+      - button: atlante-del-mondo-atlante-del-mondo
+        label: Atlante
+        use_when: devi vedere luoghi, culture, storia e geografia
+    action_groups:
+      consolidamento:
+        label: Consolidamento
+        purpose: Passare dal codex alla verifica e al gioco.
+        actions:
+          - button: worldbuilder-worldbuilder-dashboard
+            label: Worldbuilder
+            use_when: mancano identita, poteri o misteri giocabili
+          - button: controllo-worldbuilding-controllo-worldbuilding
+            label: Controllo worldbuilding
+            use_when: vuoi vedere buchi strutturali del mondo
+          - button: campagna-da-ambientazione-campagna-da-ambientazione
+            label: Campagna da ambientazione
+            use_when: il mondo deve diventare campagna o prima sessione
+          - button: vista-giocatori-hub-vista-giocatori-vista-giocatori
+            label: Vista giocatori
+            use_when: vuoi controllare cosa e mostrabile senza segreti
+    required_plugins:
+      - Meta Bind
+      - Dataview
+      - Templater
+  iniziativa_combattimenti:
+    user_goal: Preparare combattimenti che possano partire in round senza bloccare la sessione.
+    audience: user
+    entry_points:
+      - Risorse/Iniziativa e Combattimenti.md
+    quick_actions:
+      - button: durante-il-gioco-durante-il-gioco-3
+        label: Torna al tavolo
+        use_when: la scena e pronta o la sessione e in corso
+      - button: nuovo-incontro-z-modelli-dm-incontro-md
+        label: Nuovo incontro
+        use_when: serve una scena meccanica o un combattimento pronto
+    action_groups:
+      supporto:
+        label: Supporto combattimento
+        purpose: Preparare materiali collegati prima di entrare in iniziativa.
+        actions:
+          - button: nuova-mappa-zoom-z-modelli-mappe-mappa-zoom-md
+            label: Nuova mappa zoom
+            use_when: il combattimento ha bisogno di spazio navigabile
+          - button: nuovo-png-z-modelli-personaggio-png-md
+            label: Nuovo PNG
+            use_when: serve un volto o avversario ricorrente
+          - button: nuovo-oggetto-z-modelli-oggetto-md
+            label: Nuovo oggetto
+            use_when: la scena include ricompensa, leva o pericolo concreto
+          - button: preparazione-sessione-risorse-preparazione-sessione
+            label: Preparazione sessione
+            use_when: devi tornare alle ancore della sessione
+    required_plugins:
+      - Meta Bind
+      - Dataview
+      - Templater
+      - Dice Roller
+      - Initiative Tracker
+      - Fantasy Statblocks
   stato_campagna:
     user_goal: Leggere missioni, pressioni e conseguenze aperte e scegliere cosa portare al tavolo.
     entry_points:

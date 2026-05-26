@@ -9,7 +9,8 @@ const TECHNICAL_JARGON = ["Plugin coinvolti", "Meta Bind", "Dataview", "Template
 function userVisibleText(text) {
     let inFence = false;
     let fence = "";
-    const withoutCode = text.split(/\r?\n/).filter(line => {
+    const withoutFrontmatter = text.replace(/^---[\s\S]*?---\s*/, "");
+    const withoutCode = withoutFrontmatter.split(/\r?\n/).filter(line => {
         const match = line.match(/^(`{3,})/);
         if (match && (!inFence || match[1].length >= fence.length)) {
             inFence = !inFence;
@@ -61,7 +62,12 @@ for (const [label, relPath] of [
     ["Atlante del Mondo", "Hub/Atlante del Mondo.md"],
     ["Controllo Worldbuilding", "Hub/Controllo Worldbuilding.md"],
     ["Economia E Rotte", "Hub/Economia E Rotte.md"],
-    ["Lore Hub", "Hub/Lore Hub.md"]
+    ["Lore Hub", "Hub/Lore Hub.md"],
+    ["Motore Mondo Vivo", "Hub/Motore Mondo Vivo.md"],
+    ["Controllo Canone", "Hub/Controllo Canone.md"],
+    ["Compendium Del Mondo", "Hub/Compendium Del Mondo.md"],
+    ["Bibbia del Mondo", "Hub/Bibbia del Mondo.md"],
+    ["Iniziativa e Combattimenti", "Risorse/Iniziativa e Combattimenti.md"]
 ]) {
     assertNoTechnicalJargon(label, relPath);
 }

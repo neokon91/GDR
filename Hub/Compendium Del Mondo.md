@@ -17,9 +17,36 @@ mondo_attivo: ""
 > Mondo:
 > `INPUT[mondo][:mondo_attivo]`
 
-`BUTTON[nuovo-elemento-z-modelli-worldbuilding-compendium-del-mondo-md]`
+<!-- workflow:quick_actions:start compendium_mondo -->
+> [!regia] Azioni rapide
+> Creare elementi originali del mondo e collegarli a culture, risorse, missioni o storia.
+>
+> **Nuovo elemento** - vuoi creare materiale originale non-SRD con uso narrativo
+> `BUTTON[nuovo-elemento-z-modelli-worldbuilding-compendium-del-mondo-md]`
+>
+> **Lore hub** - devi collegare l'elemento a segnali, misteri o canone
+> `BUTTON[lore-hub-lore-hub]`
+>
+> [!regia]- Collega al gioco
+> Evitare elementi decorativi senza impatto.
+>
+> **Nuova risorsa** - l'elemento e merce, dipendenza o leva economica
+> `BUTTON[nuova-risorsa-z-modelli-worldbuilding-risorsa-md]`
+>
+> **Nuova cultura** - l'elemento definisce pratiche, tabu o identita
+> `BUTTON[nuova-cultura-z-modelli-worldbuilding-cultura-md]`
+>
+> **Nuovo mistero** - l'elemento deve essere scoperto gradualmente
+> `BUTTON[nuovo-segreto-o-mistero-z-modelli-worldbuilding-segreto-o-mistero-md]`
+>
+> **Nuova missione** - l'elemento genera obiettivo, rischio o ricompensa
+> `BUTTON[nuova-missione-z-modelli-dm-missione-md]`
+<!-- workflow:quick_actions:end compendium_mondo -->
 
-`BUTTON[lore-hub-lore-hub]`
+```dataviewjs
+const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+await gdr.renderWorkflowCommandDeck(dv, "compendium_mondo", { mode: "simple" });
+```
 
 ```dataviewjs
 const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
