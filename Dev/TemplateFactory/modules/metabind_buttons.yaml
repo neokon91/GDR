@@ -112,6 +112,12 @@ buttons:
     action: runTemplaterFile
     template: z.modelli/azioni/Collega Sessione Attiva.md
     fallback: 'Azione manuale: aggiungere la sessione attiva nei collegamenti della nota'
+  rendi_sessione_attiva:
+    id: rendi-sessione-attiva
+    label: Rendi Sessione Attiva
+    action: runTemplaterFile
+    template: z.modelli/azioni/Rendi Sessione Attiva.md
+    fallback: 'Azione manuale: impostare attiva: true su una sola sessione e false sulle altre'
   propaga_a_entita:
     id: propaga-a-entita
     label: Propaga A Entita

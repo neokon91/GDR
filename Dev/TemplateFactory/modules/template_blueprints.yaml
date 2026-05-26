@@ -1294,6 +1294,20 @@ blueprints:
     comparison_targets:
     - z.modelli/azioni/Collega Sessione Attiva.md
     profile: action
+  azione_rendi_sessione_attiva:
+    target_family:
+    - azione
+    templater_entry: <% await tp.user.meta_actions(tp, "rendi_sessione_attiva") %>
+    template_title: Rendi Sessione Attiva
+    world_impact: false
+    output:
+      folder: z.modelli/azioni
+      files:
+      - Rendi Sessione Attiva.md
+      fallback: markdown_sections
+    comparison_targets:
+    - z.modelli/azioni/Rendi Sessione Attiva.md
+    profile: action
   azione_marca_canonico:
     target_family:
     - azione

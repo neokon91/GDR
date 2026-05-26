@@ -38,6 +38,9 @@ workflows:
       - button: nuova-sessione-z-modelli-dm-sessione-md
         label: Nuova sessione
         use_when: non esiste ancora una nota sessione per il prossimo tavolo
+      - button: rendi-sessione-attiva
+        label: Rendi sessione attiva
+        use_when: hai scelto quale sessione userai al tavolo
       - button: wizard-nuova-entita-viva
         label: Nuova entita viva
         use_when: manca un'ancora mondo giocabile

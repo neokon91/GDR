@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-24T13:24:00.307963+00:00",
+  "generated_at": "2026-05-26T09:37:27.633943+00:00",
   "source": "Dev/TemplateFactory",
   "mode": "preview",
   "files": [
@@ -56,6 +56,11 @@
     {
       "blueprint": "azione_registra_scelta_mondo",
       "path": "Dev/TemplateFactory/examples/generated/azione_registra_scelta_mondo.preview.md",
+      "bytes": 171
+    },
+    {
+      "blueprint": "azione_rendi_sessione_attiva",
+      "path": "Dev/TemplateFactory/examples/generated/azione_rendi_sessione_attiva.preview.md",
       "bytes": 171
     },
     {

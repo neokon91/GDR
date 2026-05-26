@@ -1942,6 +1942,17 @@
       "id": "collega-sessione-attiva"
     },
     {
+      "label": "Rendi Sessione Attiva",
+      "style": "primary",
+      "actions": [
+        {
+          "type": "runTemplaterFile",
+          "templateFile": "z.modelli/azioni/Rendi Sessione Attiva.md"
+        }
+      ],
+      "id": "rendi-sessione-attiva"
+    },
+    {
       "label": "Propaga A Entita",
       "style": "primary",
       "actions": [

@@ -193,6 +193,7 @@ const REQUIRED_META_BIND_BUTTONS = [
     "registra-scelta-mondo",
     "avanza-clock",
     "collega-sessione-attiva",
+    "rendi-sessione-attiva",
     "propaga-a-entita",
     "prepara-recap-pubblico",
     "nuovo-mondo-homebrew",

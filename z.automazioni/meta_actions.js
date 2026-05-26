@@ -133,6 +133,17 @@ async function meta_actions(tp, action = "") {
 
         return await helpers.chooseConnections(tp, "Entita a cui propagare", { world: meta.mondo });
     };
+    const chooseSessionToActivate = async () => {
+        const file = currentFile();
+        const meta = currentMeta();
+
+        if (file && meta.categoria === "sessione") {
+            return file;
+        }
+
+        const link = await helpers.chooseNoteByPath(tp, helpers.path("sessioni"), "Sessione da rendere attiva", "Annulla");
+        return helpers.getFileFromLink(link);
+    };
     const appendUniqueText = (value, text) => m11.appendUnique(value, text);
     const promptPressureDelta = async () => {
         const raw = await helpers.promptOptional(tp, "Aumento pressione sui bersagli", "0");
@@ -250,6 +261,28 @@ async function meta_actions(tp, action = "") {
             updateCreated: true
         });
         notice(`Collegata alla sessione attiva (${sessionField}).`);
+        return "";
+    }
+
+    if (action === "rendi_sessione_attiva") {
+        const targetSession = await chooseSessionToActivate();
+        if (!targetSession) return "";
+
+        const sessionFiles = app.vault.getMarkdownFiles()
+            .filter(file => file.path.startsWith(`${helpers.path("sessioni")}/`));
+
+        for (const file of sessionFiles) {
+            const isTarget = file.path === targetSession.path;
+            await helpers.processFrontmatter(file, fm => {
+                if (fm.categoria !== "sessione") return;
+                fm.attiva = isTarget;
+                if (isTarget && (!fm.stato || fm.stato === "preparazione")) {
+                    fm.stato = "pronto";
+                }
+            });
+        }
+
+        notice(`Sessione attiva: ${targetSession.basename}.`);
         return "";
     }
 

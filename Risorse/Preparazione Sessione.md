@@ -22,6 +22,9 @@ Questa pagina serve a trasformare un mondo gia costruito in una sessione live. S
 > **Nuova sessione** - non esiste ancora una nota sessione per il prossimo tavolo
 > `BUTTON[nuova-sessione-z-modelli-dm-sessione-md]`
 >
+> **Rendi sessione attiva** - hai scelto quale sessione userai al tavolo
+> `BUTTON[rendi-sessione-attiva]`
+>
 > **Nuova entita viva** - manca un'ancora mondo giocabile
 > `BUTTON[wizard-nuova-entita-viva]`
 >
