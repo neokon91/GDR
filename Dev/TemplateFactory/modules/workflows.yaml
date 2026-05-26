@@ -51,6 +51,7 @@ workflows:
       - Dataview
       - Templater
   setup_guidato:
+    audience: user
     user_goal: Capire se il vault e pronto senza leggere impostazioni tecniche.
     entry_points:
       - Risorse/Setup Guidato.md
@@ -871,6 +872,7 @@ workflows:
       - Templater
       - Fantasy Content Generator
   quality_report:
+    audience: user
     user_goal: Capire quali buchi rendono il vault meno giocabile, condivisibile o player-safe.
     entry_points:
       - Risorse/Quality Report.md

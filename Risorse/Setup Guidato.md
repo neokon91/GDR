@@ -30,8 +30,6 @@ tab: Problemi
 > [!regia] Azioni rapide
 > Capire se il vault e pronto senza leggere impostazioni tecniche.
 >
-> Plugin coinvolti: `Meta Bind`, `Dataview`, `Templater`, `Metadata Menu`, `Homepage`.
->
 > **Torna all'inizio** - i controlli sono pronti o vuoi ripartire dal percorso semplice
 > `BUTTON[inizia-qui-inizia-qui]`
 >
@@ -98,6 +96,6 @@ await gdr.renderVaultReadiness(dv, "setup");
 
 ## Cosa Ignorare
 
-- Cartelle `z.*`.
+- Aree interne del vault.
 - File tecnici.
-- Impostazioni interne dei plugin, finche le pagine principali funzionano.
+- Impostazioni avanzate, finche le pagine principali funzionano.

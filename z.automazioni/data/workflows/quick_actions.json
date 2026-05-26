@@ -81,7 +81,7 @@
       }
     },
     "setup_guidato": {
-      "audience": "",
+      "audience": "user",
       "user_goal": "Capire se il vault e pronto senza leggere impostazioni tecniche.",
       "entry_points": [
         "Risorse/Setup Guidato.md"
@@ -1351,7 +1351,7 @@
       "action_groups": {}
     },
     "quality_report": {
-      "audience": "",
+      "audience": "user",
       "user_goal": "Capire quali buchi rendono il vault meno giocabile, condivisibile o player-safe.",
       "entry_points": [
         "Risorse/Quality Report.md"

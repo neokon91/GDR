@@ -29,6 +29,7 @@ const WORK_ROOT = path.join(os.homedir(), "Library/Caches/vault-gdr-live-test");
 const OUT = path.join(WORK_ROOT, "vault-gdr-clean");
 const PROFILE_READY_FILE = path.join(PROFILE_ROOT, "gdr-live-test-profile-ready.json");
 const FIRST_RUN_PAGES = requiredConfigArray("first_run_pages");
+const UX_SURFACE_CHECKS = requiredConfigObject("ux_surface_checks");
 const PLUGIN_RUNTIME_PROBES = requiredConfigArray("plugin_runtime_probes", "object");
 const WORKFLOW_SMOKE = requiredConfigObject("workflow_smoke");
 const CYCLE_SMOKE = requiredConfigObject("cycle_smoke");
@@ -112,7 +113,47 @@ function validateLiveAcceptanceContract() {
     const errors = [];
     const workflow = WORKFLOW_SMOKE;
     const cycle = CYCLE_SMOKE;
+    const ux = UX_SURFACE_CHECKS;
     const probeIds = new Set();
+    for (const key of ["forbidden_visible_text", "forbidden_visible_regex", "forbidden_visible_selectors", "required_visible_text_by_page"]) {
+        if (!Array.isArray(ux[key]) || !ux[key].length) {
+            errors.push(`${LIVE_ACCEPTANCE_FILE}: ux_surface_checks.${key} deve essere lista non vuota`);
+        }
+    }
+    for (const [index, pattern] of (ux.forbidden_visible_regex ?? []).entries()) {
+        try {
+            new RegExp(String(pattern));
+        } catch (error) {
+            errors.push(`${LIVE_ACCEPTANCE_FILE}: ux_surface_checks.forbidden_visible_regex[${index}] non valida (${error.message})`);
+        }
+    }
+    for (const [index, rule] of (ux.forbidden_visible_selectors ?? []).entries()) {
+        if (!String(rule?.selector ?? "").trim()) {
+            errors.push(`${LIVE_ACCEPTANCE_FILE}: ux_surface_checks.forbidden_visible_selectors[${index}].selector vuoto`);
+        }
+        if (!String(rule?.description ?? "").trim()) {
+            errors.push(`${LIVE_ACCEPTANCE_FILE}: ux_surface_checks.forbidden_visible_selectors[${index}].description vuoto`);
+        }
+    }
+    const uxPages = new Set();
+    for (const [index, rule] of (ux.required_visible_text_by_page ?? []).entries()) {
+        const page = String(rule?.page ?? "").trim();
+        if (!page) {
+            errors.push(`${LIVE_ACCEPTANCE_FILE}: ux_surface_checks.required_visible_text_by_page[${index}].page vuoto`);
+            continue;
+        }
+        uxPages.add(page);
+        for (const key of ["all", "any"]) {
+            if (!Array.isArray(rule[key]) || !rule[key].map(String).filter(Boolean).length) {
+                errors.push(`${LIVE_ACCEPTANCE_FILE}: ux_surface_checks.required_visible_text_by_page.${page}.${key} deve essere lista non vuota`);
+            }
+        }
+    }
+    for (const page of FIRST_RUN_PAGES) {
+        if (!uxPages.has(page)) {
+            errors.push(`${LIVE_ACCEPTANCE_FILE}: ux_surface_checks.required_visible_text_by_page non copre pagina first-run ${page}`);
+        }
+    }
     for (const [index, probe] of PLUGIN_RUNTIME_PROBES.entries()) {
         const id = String(probe.id ?? "").trim();
         if (!id) {
@@ -614,9 +655,11 @@ async function inspectPage(cdp, pagePath) {
     await sleep(PAGE_SETTLE_MS);
     const state = await cdp.evaluate(`(async () => {
         const pagePath = ${JSON.stringify(pagePath)};
+        const ux = ${JSON.stringify(UX_SURFACE_CHECKS)};
         const file = app.vault.getAbstractFileByPath(pagePath);
         const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
         let activeFile = app.workspace.getActiveFile()?.path ?? null;
+        let previewModeError = null;
         if (file && activeFile !== pagePath) {
             const leaf = app.workspace.getLeaf("tab");
             await leaf.openFile(file, { active: true });
@@ -626,16 +669,89 @@ async function inspectPage(cdp, pagePath) {
             await sleep(500);
             activeFile = app.workspace.getActiveFile()?.path ?? null;
         }
-        const text = document.body.innerText;
+        try {
+            const activeLeaf = app.workspace.getLeaf(false);
+            if (file && activeLeaf?.setViewState) {
+                await activeLeaf.setViewState({
+                    type: "markdown",
+                    state: { file: pagePath, mode: "preview" },
+                    active: true
+                });
+                await sleep(500);
+                activeFile = app.workspace.getActiveFile()?.path ?? null;
+            }
+        } catch (error) {
+            previewModeError = String(error?.message ?? error);
+        }
+        const activeLeafElement = document.querySelector(".workspace-leaf.mod-active") ?? document.querySelector(".workspace-leaf");
+        const contentRoot = activeLeafElement?.querySelector(".markdown-preview-view, .markdown-reading-view, .markdown-source-view, .view-content") ?? activeLeafElement ?? document.body;
+        const visibleText = String(contentRoot?.innerText ?? "");
+        const normalizedVisibleText = visibleText.toLocaleLowerCase("it");
+        const bodyText = document.body.innerText;
+        const text = visibleText || bodyText;
+        const includesVisible = value => normalizedVisibleText.includes(String(value ?? "").toLocaleLowerCase("it"));
+        const isVisible = node => {
+            const style = window.getComputedStyle(node);
+            if (style.display === "none" || style.visibility === "hidden" || style.opacity === "0") return false;
+            const rect = node.getBoundingClientRect();
+            return rect.width > 0 || rect.height > 0 || node.getClientRects().length > 0;
+        };
+        const forbiddenTextHits = (ux.forbidden_visible_text ?? [])
+            .map(String)
+            .filter(marker => marker && visibleText.includes(marker));
+        const forbiddenRegexHits = [];
+        for (const pattern of ux.forbidden_visible_regex ?? []) {
+            try {
+                const regex = new RegExp(String(pattern), "i");
+                if (regex.test(visibleText)) forbiddenRegexHits.push(String(pattern));
+            } catch {
+                forbiddenRegexHits.push("regex non valida: " + String(pattern));
+            }
+        }
+        const forbiddenSelectorHits = [];
+        for (const rule of ux.forbidden_visible_selectors ?? []) {
+            try {
+                const nodes = [...contentRoot.querySelectorAll(String(rule.selector ?? ""))]
+                    .filter(node => isVisible(node) && String(node.innerText ?? "").trim());
+                if (nodes.length) {
+                    forbiddenSelectorHits.push({
+                        selector: String(rule.selector ?? ""),
+                        description: String(rule.description ?? ""),
+                        count: nodes.length,
+                        sample: nodes.slice(0, 2).map(node => String(node.innerText ?? "").trim().slice(0, 120))
+                    });
+                }
+            } catch {
+                forbiddenSelectorHits.push({
+                    selector: String(rule.selector ?? ""),
+                    description: "selettore UX non valutabile",
+                    count: 1,
+                    sample: []
+                });
+            }
+        }
+        const requiredRule = (ux.required_visible_text_by_page ?? []).find(rule => String(rule.page ?? "") === pagePath) ?? null;
+        const missingAllText = (requiredRule?.all ?? []).map(String).filter(marker => !includesVisible(marker));
+        const anyText = (requiredRule?.any ?? []).map(String).filter(Boolean);
+        const missingAnyText = anyText.length && !anyText.some(marker => includesVisible(marker)) ? anyText : [];
         return {
             page: ${JSON.stringify(pagePath)},
             exists: ${JSON.stringify(Boolean(openState.exists))},
             openAttempts: ${JSON.stringify(openState.attempts ?? 0)},
             activeFile,
             title: document.title,
+            previewModeError,
             restrictedMode: /restricted mode|community plugins.*disabled|modalita.*limitata/i.test(text),
             dataviewError: /Evaluation Error|dataview.*error|dataviewjs.*error/i.test(text),
             templaterLeak: /<%[\\s\\S]*?%>/.test(text),
+            ux: {
+                visibleTextLength: visibleText.length,
+                forbiddenTextHits,
+                forbiddenRegexHits,
+                forbiddenSelectorHits,
+                missingAllText,
+                missingAnyText
+            },
             problemNotices: [...document.querySelectorAll(".notice")]
                 .map(node => node.innerText)
                 .filter(text => /error|errore|failed|fallit|exception/i.test(text))
@@ -1244,9 +1360,26 @@ function validatePageResult(result, label) {
     const errors = [];
     if (!result.exists) errors.push(`pagina ${label} mancante nel live pass: ${result.page}`);
     if (result.activeFile !== result.page) errors.push(`pagina ${label} non aperta nel live pass: ${result.page} -> ${result.activeFile}`);
+    if (result.previewModeError) errors.push(`pagina ${label} non forzata in lettura preview ${result.page}: ${result.previewModeError}`);
     if (result.restrictedMode) errors.push(`restricted mode visibile nel live pass ${label}: ${result.page}`);
     if (result.dataviewError) errors.push(`errore Dataview visibile nel live pass ${label}: ${result.page}`);
     if (result.templaterLeak) errors.push(`codice Templater visibile nel live pass ${label}: ${result.page}`);
+    if (!result.ux?.visibleTextLength) errors.push(`pagina ${label} senza testo visibile nel live pass: ${result.page}`);
+    if (result.ux?.forbiddenTextHits?.length) {
+        errors.push(`pagina ${label} espone testo tecnico vietato ${result.page}: ${result.ux.forbiddenTextHits.join(", ")}`);
+    }
+    if (result.ux?.forbiddenRegexHits?.length) {
+        errors.push(`pagina ${label} espone pattern tecnico vietato ${result.page}: ${result.ux.forbiddenRegexHits.join(", ")}`);
+    }
+    if (result.ux?.forbiddenSelectorHits?.length) {
+        errors.push(`pagina ${label} espone elementi UI vietati ${result.page}: ${JSON.stringify(result.ux.forbiddenSelectorHits)}`);
+    }
+    if (result.ux?.missingAllText?.length) {
+        errors.push(`pagina ${label} senza testo UX obbligatorio ${result.page}: ${result.ux.missingAllText.join(", ")}`);
+    }
+    if (result.ux?.missingAnyText?.length) {
+        errors.push(`pagina ${label} senza nessuna CTA attesa ${result.page}: ${result.ux.missingAnyText.join(" | ")}`);
+    }
     if (result.problemNotices.length) errors.push(`notice problematica nel live pass ${label} ${result.page}: ${result.problemNotices.join(" | ")}`);
     if (result.newEvents.length) errors.push(`eventi console nel live pass ${label} ${result.page}: ${JSON.stringify(result.newEvents)}`);
     return errors;
@@ -1362,7 +1495,7 @@ async function main() {
             for (const error of contractErrors) console.error(`- ${error}`);
             process.exit(1);
         }
-        console.log(`Live acceptance contract OK: ${FIRST_RUN_PAGES.length} pagine first-run, ${PLUGIN_RUNTIME_PROBES.length} probe plugin, workflow ${WORKFLOW_SMOKE.button_id}, ciclo ${CYCLE_SMOKE.expected_session_name}.`);
+        console.log(`Live acceptance contract OK: ${FIRST_RUN_PAGES.length} pagine first-run, ${UX_SURFACE_CHECKS.required_visible_text_by_page.length} gate UX, ${PLUGIN_RUNTIME_PROBES.length} probe plugin, workflow ${WORKFLOW_SMOKE.button_id}, ciclo ${CYCLE_SMOKE.expected_session_name}.`);
         process.exit(0);
     }
     if (LEGACY_RESET_PROFILE && !FRESH_INSTALL) {
@@ -1420,7 +1553,8 @@ async function main() {
             ? `, ciclo sessione/post-sessione ${CYCLE_SMOKE.expected_session_name} verificato`
             : "";
         const probesText = `, ${report.pluginRuntimeProbes?.probeCount ?? 0} probe plugin runtime verificati`;
-        console.log(`Obsidian user-acceptance OK: ${report.summary.expectedPluginCount} plugin caricati, ${report.results.length} pagine first-run verificate${probesText}${workflowText}${cycleText}.`);
+        const uxText = `, ${UX_SURFACE_CHECKS.required_visible_text_by_page.length} gate UX visibili verificati`;
+        console.log(`Obsidian user-acceptance OK: ${report.summary.expectedPluginCount} plugin caricati, ${report.results.length} pagine first-run verificate${uxText}${probesText}${workflowText}${cycleText}.`);
         markProfileReady();
         console.log(`Profilo test persistente: ${PROFILE_ROOT}`);
         console.log(`Vault test persistente: ${OUT}`);

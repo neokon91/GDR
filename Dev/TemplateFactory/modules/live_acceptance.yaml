@@ -11,6 +11,86 @@ first_run_pages:
   - Hub/Worldbuilder Dashboard.md
   - Hub/Vista Giocatori.md
   - Risorse/Quality Report.md
+ux_surface_checks:
+  forbidden_visible_text:
+    - "BUTTON["
+    - "```dataview"
+    - "<%"
+    - TemplateFactory
+    - "node z.automazioni"
+    - "z.*"
+    - "npm run"
+    - "source_lab:"
+    - idea_originale_riservata
+  forbidden_visible_regex:
+    - "\\bBUTTON\\[[^\\]\\n]+\\]"
+    - "```dataview(?:js)?"
+    - "<%[\\s\\S]*?%>"
+  forbidden_visible_selectors:
+    - selector: ".metadata-container"
+      description: proprieta Obsidian visibili nella nota
+    - selector: ".metadata-properties"
+      description: pannello proprieta Obsidian visibile nella nota
+    - selector: ".metadata-property"
+      description: singola proprieta Obsidian visibile nella nota
+  required_visible_text_by_page:
+    - page: Inizia Qui.md
+      all:
+        - Inizia Qui
+      any:
+        - Crea mondo
+        - Nuovo Mondo Homebrew
+    - page: Risorse/Setup Guidato.md
+      all:
+        - Setup Guidato
+      any:
+        - Torna all'inizio
+        - Crea mondo
+    - page: Hub/1. DM Dashboard.md
+      all:
+        - DM Dashboard
+      any:
+        - Durante il gioco
+        - Preparazione sessione
+    - page: Hub/Durante il Gioco.md
+      all:
+        - Durante il Gioco
+      any:
+        - Appunto live
+        - Registra scelta
+        - Aggiorna scena
+    - page: Risorse/Post Sessione Guidato.md
+      all:
+        - Post Sessione Guidato
+      any:
+        - Fine Sessione
+        - Recap pubblico
+    - page: Hub/Cosa Succede Fuori Scena.md
+      all:
+        - Cosa Succede Fuori Scena
+      any:
+        - Post sessione
+        - Applica conseguenza
+    - page: Hub/Worldbuilder Dashboard.md
+      all:
+        - Worldbuilder Dashboard
+      any:
+        - Crea mondo
+        - Nuova cultura
+        - Nuovo luogo
+    - page: Hub/Vista Giocatori.md
+      all:
+        - Vista Giocatori
+      any:
+        - Stato Portale
+        - Mondo Conosciuto
+        - Diario Pubblico
+    - page: Risorse/Quality Report.md
+      all:
+        - Quality Report
+      any:
+        - Controllo vault
+        - Copertura
 plugin_runtime_probes:
   - id: dataview
     commands_any:

@@ -88,4 +88,4 @@ await gdr.renderVaultReadiness(dv, "start");
 | Chiudere la sessione | [[Risorse/Post Sessione Guidato]] |
 | Vedere cosa reagisce | [[Hub/Cosa Succede Fuori Scena]] |
 
-Ignora cartelle `z.*`, file tecnici e impostazioni interne finche questa pagina ti dice cosa fare dopo.
+Resta sulle pagine indicate: le aree interne non servono durante il gioco.

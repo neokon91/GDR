@@ -15,8 +15,6 @@ Report visuale per capire cosa rende il vault pronto da giocare, da condividere 
 > [!regia] Azioni rapide
 > Capire quali buchi rendono il vault meno giocabile, condivisibile o player-safe.
 >
-> Plugin coinvolti: `Meta Bind`, `Dataview`, `JS Engine`.
->
 > **Controllo vault** - vuoi passare dal report visuale alla coda operativa
 > `BUTTON[controllo-vault-risorse-controllo-vault]`
 >
