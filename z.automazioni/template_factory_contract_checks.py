@@ -82,6 +82,11 @@ def validate_release_boundary_contract(modules: dict[str, dict], errors: list[st
         "LEGGIMI.md",
         "z.modelli/.templatefactory-manifest.json",
     }
+    materialized_user_paths = {
+        str(file.get("path", ""))
+        for file in boundary.get("materialized_user_files", []) or []
+        if isinstance(file, dict)
+    }
 
     for key in required_lists:
         values = boundary.get(key)
@@ -95,7 +100,7 @@ def validate_release_boundary_contract(modules: dict[str, dict], errors: list[st
             fail(f"release_boundary.copy_policy.{key}: lista mancante o vuota", errors)
 
     for rel_path in boundary.get("required_files", []) or []:
-        if str(rel_path) in generated_release_files:
+        if str(rel_path) in generated_release_files or str(rel_path) in materialized_user_paths:
             continue
         if not (ROOT / str(rel_path)).exists():
             fail(f"release_boundary.required_files: file sorgente mancante ({rel_path})", errors)

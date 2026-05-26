@@ -1,8 +1,9 @@
 const { execFileSync } = require("child_process");
-const path = require("path");
 const { repoPath } = require("./node_utils");
 
 const BOUNDARY = "Dev/TemplateFactory/modules/release_boundary.yaml";
+const RELEASE_FOLDER_NOTES_RENDERER = "z.automazioni/render_release_folder_notes.py";
+const renderedCache = new Map();
 
 function loadYaml(root, relPath) {
     const script = [
@@ -30,66 +31,30 @@ function materializedUserFileMap(root) {
     return new Map(materializedUserFiles(root).map(file => [String(file.path ?? "").replace(/\\/g, "/"), file]));
 }
 
-function renderWorkflowBlock(workflowId, workflow) {
-    const lines = [];
-    const plugins = workflow.required_plugins ?? [];
-    const actionGroups = workflow.action_groups ?? {};
-    const userFacing = workflow.audience === "user";
-
-    lines.push(`<!-- workflow:quick_actions:start ${workflowId} -->`);
-    lines.push("> [!regia] Azioni rapide");
-    lines.push(`> ${workflow.user_goal}`);
-    if (plugins.length && !userFacing) {
-        lines.push(">");
-        lines.push(`> Plugin coinvolti: ${plugins.map(plugin => `\`${plugin}\``).join(", ")}.`);
-    }
-
-    for (const action of workflow.quick_actions ?? []) {
-        lines.push(">");
-        lines.push(`> **${action.label}** - ${action.use_when}`);
-        lines.push(`> \`BUTTON[${action.button}]\``);
-    }
-
-    for (const group of Object.values(actionGroups)) {
-        lines.push(">");
-        lines.push(`> [!regia]- ${group.label}`);
-        if (group.purpose) lines.push(`> ${group.purpose}`);
-        for (const action of group.actions ?? []) {
-            lines.push(">");
-            lines.push(`> **${action.label}** - ${action.use_when}`);
-            lines.push(`> \`BUTTON[${action.button}]\``);
-        }
-    }
-
-    lines.push(`<!-- workflow:quick_actions:end ${workflowId} -->`);
-    return lines.join("\n");
+function renderedMaterializedUserFiles(root) {
+    if (renderedCache.has(root)) return renderedCache.get(root);
+    const stdout = execFileSync("python3", [RELEASE_FOLDER_NOTES_RENDERER, "--json"], {
+        cwd: root,
+        encoding: "utf8",
+        env: { ...process.env, PYTHONDONTWRITEBYTECODE: "1" },
+        maxBuffer: 4 * 1024 * 1024
+    });
+    const rendered = JSON.parse(stdout);
+    renderedCache.set(root, rendered);
+    return rendered;
 }
 
 function renderMaterializedUserFile(file, workflows = {}) {
-    const title = file.title ?? path.basename(String(file.path ?? ""), ".md");
-    const body = String(file.body ?? "").trim();
-    const workflowBlocks = (file.workflow_blocks ?? [])
-        .map(workflowId => renderWorkflowBlock(workflowId, workflows[workflowId] ?? {}))
-        .join("\n\n");
-    const sections = [
-        "---",
-        "cssclasses:",
-        "  - indice",
-        "generated_by: release_clean",
-        "---",
-        "",
-        `# ${title}`,
-        body,
-        workflowBlocks
-    ].filter(section => String(section).length > 0);
-
-    return `${sections.join("\n\n")}\n`;
+    void workflows;
+    const root = process.cwd();
+    const relPath = String(file.path ?? "").replace(/\\/g, "/");
+    return renderedMaterializedUserFiles(root)[relPath] ?? "";
 }
 
 module.exports = {
     loadReleaseBoundary,
     materializedUserFileMap,
     materializedUserFiles,
-    renderMaterializedUserFile,
-    renderWorkflowBlock
+    renderedMaterializedUserFiles,
+    renderMaterializedUserFile
 };

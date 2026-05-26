@@ -109,6 +109,22 @@ steps:
       - node
       - z.automazioni/render_workflow_quick_actions.js
       - --check
+  release_folder_notes:
+    purpose: Verifica le folder notes utente di release da release_boundary.yaml e Jinja.
+    sources:
+      - Dev/TemplateFactory/modules/release_boundary.yaml
+      - Dev/TemplateFactory/jinja/release_folder_note.md.j2
+      - z.automazioni/data/workflows/quick_actions.json
+    outputs:
+      - memoria
+    render:
+      - python3
+      - z.automazioni/render_release_folder_notes.py
+      - --check
+    check:
+      - python3
+      - z.automazioni/render_release_folder_notes.py
+      - --check
   template_previews:
     purpose: Verifica blueprint YAML e Jinja senza materializzare z.modelli nel repo sorgente.
     sources:

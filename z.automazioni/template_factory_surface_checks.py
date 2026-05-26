@@ -74,6 +74,9 @@ def validate_plugin_surface_contracts(modules: dict[str, dict], errors: list[str
 
         for match in re.finditer(r"BUTTON\[([^\]]+)\]", text):
             button_id = match.group(1).strip()
+            # I template di release possono interpolare id gia validati da workflows.yaml.
+            if "{{" in button_id or "{%" in button_id:
+                continue
             if button_id not in button_ids:
                 fail(f"{rel_path}: Meta Bind BUTTON non dichiarato in metabind_buttons.yaml ({button_id})", errors)
 
