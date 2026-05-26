@@ -49,6 +49,7 @@ const REQUIRED_FILES = [
     "Dev/CONTRIBUTING.md",
     "Dev/Repository.md",
     "Dev/RELEASE.md",
+    "Dev/First Run Acceptance.md",
     "Dev/Sviluppo Vault.md",
     "Dev/Integrazioni Plugin.md",
     "Dev/Matrice Plugin 1.0.md",

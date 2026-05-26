@@ -37,8 +37,8 @@ tab: Qualità
 > [!regia] Controlli
 > - [[Risorse/Controllo Vault]]
 > - [[Risorse/Quality Report|Quality Report - controllo qualità]]
-> - `npm run check` nel repository sorgente
-> - `npm run release:clean` prima di creare lo ZIP utente
+> - Se stai usando la release pubblica, non devi lanciare controlli tecnici.
+> - Se stai sviluppando il vault sorgente, usa i controlli indicati nella documentazione Dev.
 ````
 
 ## Fallback Markdown - Versione Leggibile Senza Plugin
