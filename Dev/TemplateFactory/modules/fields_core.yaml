@@ -13,6 +13,11 @@ fields:
       required: true
       source: templater
       use: titolo leggibile
+    - name: descrizione
+      type: text
+      required: false
+      source: templater
+      use: descrizione sintetica o testo importato leggibile
     - name: categoria
       type: select
       required: true
@@ -540,6 +545,16 @@ fields:
       required: false
       source: meta_bind
       use: descrizione visibile della mappa
+    - name: cosa_mostrare
+      type: text
+      required: false
+      source: meta_bind
+      use: descrizione player-safe o porzione mostrabile della mappa
+    - name: versione_giocatori
+      type: wikilink
+      required: false
+      source: meta_bind
+      use: versione separata della mappa destinata ai giocatori
     - name: layer_dm
       type: list
       required: false
@@ -713,6 +728,11 @@ fields:
       required: false
       source: metadata_menu
       use: segreti collegati o non ancora rivelati
+    - name: verita_nascosta
+      type: text
+      required: false
+      source: metadata_menu
+      use: verita privata del DM non mostrabile ai giocatori
     - name: leader
       type: wikilink
       required: false

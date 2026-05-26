@@ -26,6 +26,137 @@ codex_categories:
   - religione
   - societa
   - tracciato
+category_validation:
+  type_exempt_categories:
+    - avventura
+    - nota rapida
+    - srd
+  required_field_exempt_categories:
+    - avventura
+    - srd
+private_frontmatter_fields:
+  - segreti
+  - segreto
+  - prossima_mossa
+  - mosse_segrete
+  - verita_nascosta
+  - segreti_rivelabili
+  - pressioni
+private_text_terms:
+  - dm
+  - segreto
+  - segreti
+  - nascosto
+  - nascosta
+  - nascosti
+  - nascoste
+  - verita
+  - prossima mossa
+  - mosse segrete
+  - retroscena
+  - non rivelare
+live_entity_policy:
+  require_any_of_fields:
+    - gancio
+    - uso_al_tavolo
+    - player_safe
+    - prossima_mossa
+    - connessioni
+  sheet_require_any_of_fields:
+    - gancio
+    - uso_al_tavolo
+    - player_safe
+codex_article_policy:
+  identity_any_of_fields:
+    - gancio
+    - impressione
+    - identita
+    - descrizione
+    - vuole
+    - agenda
+    - tipo
+  table_use_any_of_fields:
+    - uso_al_tavolo
+    - promessa_al_tavolo
+    - prossima_mossa
+    - scene
+    - innesco
+    - posta
+  dm_layer_any_of_fields:
+    - segreto
+    - segreti
+    - verita_nascosta
+    - prossima_mossa
+    - propaga_a
+    - entita_impattate
+  operational_link_fields:
+    - connessioni
+    - luoghi
+    - luogo
+    - luogo_padre
+    - fazioni
+    - personaggi
+    - missioni
+    - tracciati
+    - relazioni
+    - mondo
+session_playability_policy:
+  active_states:
+    - preparazione
+    - pronto
+    - in corso
+  playable_any_of_fields:
+    - gancio
+    - scelta
+    - pressioni
+    - tracciati
+    - materiale_pronto
+    - conseguenze
+    - recap_pubblico
+  min_world_anchors: 3
+  world_anchor_groups:
+    - [mondo]
+    - [luoghi, luogo]
+    - [fazioni, personaggi]
+    - [missioni]
+    - [tracciati, pressioni]
+    - [mappe, incontri, materiale_pronto]
+  encounter_material_field: materiale_pronto
+map_review_policy:
+  playable_uses:
+    - zoom
+    - esagoni
+    - dungeon
+    - scena
+  structured_uses:
+    - fronte
+    - indizi
+    - regione
+  table_use_any_of_fields:
+    - uso_al_tavolo
+    - gancio
+  visibility_any_of_fields:
+    - player_safe
+    - cosa_mostrare
+    - luoghi
+    - luogo
+  dm_private_any_of_fields:
+    - cosa_nascondere
+    - prossima_mossa
+    - segreti
+    - versione_giocatori
+  ready_playable_link_any_of_fields:
+    - luogo
+    - luoghi
+    - incontri
+    - missioni
+  ready_structural_link_any_of_fields:
+    - mondo
+    - fazioni
+    - personaggi
+    - missioni
+    - luoghi
+  zoom_use: zoom
 allowed_types_by_category:
   campagna:
     - campagna
@@ -123,6 +254,19 @@ allowed_types_by_category:
     - dialogo
     - conseguenza
     - idea
+  luogo:
+    - città
+    - villaggio
+    - capitale
+    - porto
+    - fortezza
+    - rovina
+    - dungeon
+    - regione
+    - regno
+    - tempio
+    - foresta
+    - montagna
   missione:
     - incarico
     - ricerca
@@ -135,6 +279,8 @@ allowed_types_by_category:
     - missione di fazione
     - arco narrativo
     - missione
+  mondo:
+    - mondo
   oggetto:
     - oggetto
     - oggetto magico

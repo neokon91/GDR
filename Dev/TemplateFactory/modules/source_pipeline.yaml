@@ -129,6 +129,8 @@ steps:
     sources:
       - Dev/TemplateFactory/modules/validation_contract.yaml
       - Dev/TemplateFactory/modules/fields_core.yaml
+      - Dev/TemplateFactory/modules/frontmatter_profiles.yaml
+      - Dev/TemplateFactory/modules/runtime_profiles.yaml
     outputs:
       - memoria
     render:

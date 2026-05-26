@@ -45,7 +45,6 @@ function loadYamlModule(relPath) {
 }
 
 const FIELDS_CORE = loadYamlModule("Dev/TemplateFactory/modules/fields_core.yaml");
-const FRONTMATTER_PROFILES = loadYamlModule("Dev/TemplateFactory/modules/frontmatter_profiles.yaml");
 const VALIDATION_CONTRACT = loadYamlModule("Dev/TemplateFactory/modules/validation_contract.yaml");
 
 function coreFieldValues(fieldName) {
@@ -69,7 +68,7 @@ function requiredCoreFieldValues(fieldName) {
     return new Set(values);
 }
 
-function requiredFieldsByCategoryFromProfiles() {
+function requiredFieldsByCategory() {
     const contract = VALIDATION_CONTRACT.required_fields_by_category ?? {};
     const entries = Object.entries(contract);
     if (!entries.length) {
@@ -86,15 +85,59 @@ function requiredFieldsByCategoryFromProfiles() {
     }));
 }
 
-function requiredValidationList(key) {
-    const values = VALIDATION_CONTRACT[key] ?? [];
-    const normalized = values
-        .map(value => String(value))
-        .filter(Boolean);
+function contractValue(pathText) {
+    return String(pathText).split(".").reduce((value, key) => value?.[key], VALIDATION_CONTRACT);
+}
+
+function requiredContractArray(pathText) {
+    const values = contractValue(pathText) ?? [];
+    const normalized = Array.isArray(values)
+        ? values.map(value => String(value)).filter(Boolean)
+        : [];
     if (!normalized.length) {
-        throw new Error(`Dev/TemplateFactory/modules/validation_contract.yaml: ${key} vuoto o mancante`);
+        throw new Error(`Dev/TemplateFactory/modules/validation_contract.yaml: ${pathText} vuoto o mancante`);
     }
-    return new Set(normalized);
+    return normalized;
+}
+
+function requiredContractListOfLists(pathText) {
+    const groups = contractValue(pathText) ?? [];
+    if (!Array.isArray(groups) || !groups.length) {
+        throw new Error(`Dev/TemplateFactory/modules/validation_contract.yaml: ${pathText} vuoto o mancante`);
+    }
+    return groups.map((group, index) => {
+        const normalized = Array.isArray(group)
+            ? group.map(value => String(value)).filter(Boolean)
+            : [];
+        if (!normalized.length) {
+            throw new Error(`Dev/TemplateFactory/modules/validation_contract.yaml: ${pathText}.${index} vuoto`);
+        }
+        return normalized;
+    });
+}
+
+function requiredContractSet(pathText) {
+    return new Set(requiredContractArray(pathText));
+}
+
+function requiredContractString(pathText) {
+    const value = String(contractValue(pathText) ?? "").trim();
+    if (!value) {
+        throw new Error(`Dev/TemplateFactory/modules/validation_contract.yaml: ${pathText} vuoto o mancante`);
+    }
+    return value;
+}
+
+function requiredContractNumber(pathText, minimum) {
+    const value = Number(contractValue(pathText));
+    if (!Number.isFinite(value) || value < minimum) {
+        throw new Error(`Dev/TemplateFactory/modules/validation_contract.yaml: ${pathText} deve essere numero >= ${minimum}`);
+    }
+    return value;
+}
+
+function requiredValidationList(key) {
+    return requiredContractSet(key);
 }
 
 function requiredValidationSetMap(key) {
@@ -301,15 +344,8 @@ const REQUIRED_DEV_ARCHITECTURE_MARKERS = [
     "Templater = generazione",
     "z.engine + z.automazioni = runtime/logica/esecuzione"
 ];
-const PUBLIC_PRIVATE_FIELDS = [
-    "segreti",
-    "segreto",
-    "prossima_mossa",
-    "mosse_segrete",
-    "verita_nascosta",
-    "segreti_rivelabili",
-    "pressioni"
-];
+const PUBLIC_PRIVATE_FIELDS = requiredContractArray("private_frontmatter_fields");
+const PRIVATE_TEXT_TERMS = requiredContractArray("private_text_terms");
 const REQUIRED_META_BIND_INPUT_TEMPLATES = requiredMetaBindInputTemplates();
 const REQUIRED_META_BIND_BUTTONS = requiredMetaBindButtons();
 const REQUIRED_METADATA_MENU_PRESETS = [
@@ -334,10 +370,35 @@ const ALLOWED_CATEGORIES = requiredCoreFieldValues("categoria");
 const ALLOWED_STATES = requiredCoreFieldValues("stato");
 const LIVE_ENTITY_CATEGORIES = requiredValidationList("live_entity_categories");
 const CODEX_CATEGORIES = requiredValidationList("codex_categories");
-const PLAYABLE_MAP_USES = new Set(["zoom", "esagoni", "dungeon", "scena"]);
-const STRUCTURED_MAP_USES = new Set(["fronte", "indizi", "regione"]);
+const LIVE_ENTITY_POLICY = {
+    requireAnyOfFields: requiredContractArray("live_entity_policy.require_any_of_fields"),
+    sheetRequireAnyOfFields: requiredContractArray("live_entity_policy.sheet_require_any_of_fields")
+};
+const CODEX_ARTICLE_POLICY = {
+    identityAnyOfFields: requiredContractArray("codex_article_policy.identity_any_of_fields"),
+    tableUseAnyOfFields: requiredContractArray("codex_article_policy.table_use_any_of_fields"),
+    dmLayerAnyOfFields: requiredContractArray("codex_article_policy.dm_layer_any_of_fields"),
+    operationalLinkFields: requiredContractArray("codex_article_policy.operational_link_fields")
+};
+const SESSION_PLAYABILITY_POLICY = {
+    activeStates: requiredContractSet("session_playability_policy.active_states"),
+    playableAnyOfFields: requiredContractArray("session_playability_policy.playable_any_of_fields"),
+    minWorldAnchors: requiredContractNumber("session_playability_policy.min_world_anchors", 1),
+    worldAnchorGroups: requiredContractListOfLists("session_playability_policy.world_anchor_groups"),
+    encounterMaterialField: requiredContractString("session_playability_policy.encounter_material_field")
+};
+const MAP_REVIEW_POLICY = {
+    playableUses: requiredContractSet("map_review_policy.playable_uses"),
+    structuredUses: requiredContractSet("map_review_policy.structured_uses"),
+    tableUseAnyOfFields: requiredContractArray("map_review_policy.table_use_any_of_fields"),
+    visibilityAnyOfFields: requiredContractArray("map_review_policy.visibility_any_of_fields"),
+    dmPrivateAnyOfFields: requiredContractArray("map_review_policy.dm_private_any_of_fields"),
+    readyPlayableLinkAnyOfFields: requiredContractArray("map_review_policy.ready_playable_link_any_of_fields"),
+    readyStructuralLinkAnyOfFields: requiredContractArray("map_review_policy.ready_structural_link_any_of_fields"),
+    zoomUse: requiredContractString("map_review_policy.zoom_use")
+};
 const ALLOWED_TYPES_BY_CATEGORY = requiredValidationSetMap("allowed_types_by_category");
-const REQUIRED_FIELDS_BY_CATEGORY = requiredFieldsByCategoryFromProfiles();
+const REQUIRED_FIELDS_BY_CATEGORY = requiredFieldsByCategory();
 const READY_REQUIREMENTS_BY_CATEGORY_OR_TYPE = requiredStateReadyRequirements();
 const PLAYABILITY_RULES = requiredPlayabilityRules();
 
@@ -474,48 +535,43 @@ function normalizedText(value) {
         .trim();
 }
 
+function escapedRegExp(value) {
+    return String(value).replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+function includesNormalizedTerm(text, term) {
+    const normalizedTerm = normalizedText(term);
+    if (!normalizedTerm) return false;
+    if (/\s/.test(normalizedTerm)) return text.includes(normalizedTerm);
+    return new RegExp(`\\b${escapedRegExp(normalizedTerm)}\\b`).test(text);
+}
+
 function hasPrivatePublicText(value) {
     const text = normalizedText(value);
-    return /\b(dm|segreto|segreti|nascost[oaie]?|verita|prossima mossa|mosse segrete|retroscena|non rivelare)\b/.test(text);
+    return PRIVATE_TEXT_TERMS.some(term => includesNormalizedTerm(text, term));
 }
 
 function hasOperationalLinks(frontmatter) {
-    return hasAny(frontmatter, [
-        "connessioni",
-        "luoghi",
-        "luogo",
-        "luogo_padre",
-        "fazioni",
-        "personaggi",
-        "missioni",
-        "tracciati",
-        "relazioni",
-        "mondo"
-    ]);
+    return hasAny(frontmatter, CODEX_ARTICLE_POLICY.operationalLinkFields);
 }
 
 function hasCodexIdentity(frontmatter) {
-    return hasAny(frontmatter, ["gancio", "impressione", "identita", "descrizione", "vuole", "agenda", "tipo"]);
+    return hasAny(frontmatter, CODEX_ARTICLE_POLICY.identityAnyOfFields);
 }
 
 function hasCodexTableUse(frontmatter) {
-    return hasAny(frontmatter, ["uso_al_tavolo", "promessa_al_tavolo", "prossima_mossa", "scene", "innesco", "posta"]);
+    return hasAny(frontmatter, CODEX_ARTICLE_POLICY.tableUseAnyOfFields);
 }
 
 function hasCodexDmLayer(frontmatter) {
     if (frontmatter.pubblico === true) return true;
-    return hasAny(frontmatter, ["segreto", "segreti", "verita_nascosta", "prossima_mossa", "propaga_a", "entita_impattate"]);
+    return hasAny(frontmatter, CODEX_ARTICLE_POLICY.dmLayerAnyOfFields);
 }
 
 function sessionWorldAnchorCount(frontmatter) {
-    return [
-        hasAny(frontmatter, ["mondo"]),
-        hasAny(frontmatter, ["luoghi", "luogo"]),
-        hasAny(frontmatter, ["fazioni", "personaggi"]),
-        hasAny(frontmatter, ["missioni"]),
-        hasAny(frontmatter, ["tracciati", "pressioni"]),
-        hasAny(frontmatter, ["mappe", "incontri", "materiale_pronto"])
-    ].filter(Boolean).length;
+    return SESSION_PLAYABILITY_POLICY.worldAnchorGroups
+        .filter(fields => hasAny(frontmatter, fields))
+        .length;
 }
 
 function daysSince(value) {
@@ -1038,10 +1094,10 @@ for (const [fileRel, fm] of realEntries) {
     }
 
     if (isLiveEntityNote(fileRel) && LIVE_ENTITY_CATEGORIES.has(String(fm.categoria ?? "")) && fm.stato !== "archiviata") {
-        if (!hasAny(fm, ["gancio", "uso_al_tavolo", "player_safe", "prossima_mossa", "connessioni"])) {
-            warnings.push(`${fileRel}: entita viva senza gancio, uso al tavolo, player_safe, prossima_mossa o connessioni`);
+        if (!hasAny(fm, LIVE_ENTITY_POLICY.requireAnyOfFields)) {
+            warnings.push(`${fileRel}: entita viva senza campi operativi minimi (${LIVE_ENTITY_POLICY.requireAnyOfFields.join(", ")})`);
         }
-        if (text.includes("## Scheda Viva") && !hasAny(fm, ["gancio", "uso_al_tavolo", "player_safe"])) {
+        if (text.includes("## Scheda Viva") && !hasAny(fm, LIVE_ENTITY_POLICY.sheetRequireAnyOfFields)) {
             warnings.push(`${fileRel}: Scheda Viva presente ma campi vivi vuoti`);
         }
     }
@@ -1067,19 +1123,18 @@ for (const [fileRel, fm] of realEntries) {
         }
     }
 
-    if (fileRel.startsWith("Mondi/Sessioni/") && fm.categoria === "sessione" && ["preparazione", "pronto", "in corso"].includes(String(fm.stato ?? ""))) {
-        const playableFields = ["gancio", "scelta", "pressioni", "tracciati", "materiale_pronto", "conseguenze", "recap_pubblico"];
-        if (!hasAny(fm, playableFields)) {
+    if (fileRel.startsWith("Mondi/Sessioni/") && fm.categoria === "sessione" && SESSION_PLAYABILITY_POLICY.activeStates.has(String(fm.stato ?? ""))) {
+        if (!hasAny(fm, SESSION_PLAYABILITY_POLICY.playableAnyOfFields)) {
             warnings.push(`${fileRel}: sessione non verificabile come giocabile (gancio, scelta, pressione, materiale o output mancanti)`);
         }
 
         const anchorCount = sessionWorldAnchorCount(fm);
-        if (anchorCount < 3) {
-            warnings.push(`${fileRel}: sessione senza almeno 3 ancore mondo (${anchorCount}/3 tra mondo, luoghi, poteri/PNG, missioni, clock, mappe/scena)`);
+        if (anchorCount < SESSION_PLAYABILITY_POLICY.minWorldAnchors) {
+            warnings.push(`${fileRel}: sessione senza almeno ${SESSION_PLAYABILITY_POLICY.minWorldAnchors} ancore mondo (${anchorCount}/${SESSION_PLAYABILITY_POLICY.minWorldAnchors} tra mondo, luoghi, poteri/PNG, missioni, clock, mappe/scena)`);
         }
 
-        if (hasValue(fm.incontri) && !hasValue(fm.materiale_pronto)) {
-            warnings.push(`${fileRel}: sessione con incontro ma senza materiale_pronto`);
+        if (hasValue(fm.incontri) && !hasValue(fm[SESSION_PLAYABILITY_POLICY.encounterMaterialField])) {
+            warnings.push(`${fileRel}: sessione con incontro ma senza ${SESSION_PLAYABILITY_POLICY.encounterMaterialField}`);
         }
     }
 
@@ -1127,32 +1182,32 @@ for (const [fileRel, fm] of realEntries) {
     if (fileRel.startsWith("Risorse/Mappe/") && fileRel !== "Risorse/Mappe/Mappe.md" && fm.stato !== "archiviata") {
         const mapUse = String(fm.uso ?? "");
 
-        if (!hasAny(fm, ["uso_al_tavolo", "gancio"])) {
+        if (!hasAny(fm, MAP_REVIEW_POLICY.tableUseAnyOfFields)) {
             warnings.push(`${fileRel}: mappa senza uso al tavolo o gancio operativo`);
         }
 
-        if (!hasAny(fm, ["player_safe", "cosa_mostrare", "luoghi", "luogo"])) {
+        if (!hasAny(fm, MAP_REVIEW_POLICY.visibilityAnyOfFields)) {
             warnings.push(`${fileRel}: mappa senza cosa mostrare o luoghi collegati`);
         }
 
-        if (fm.pubblico !== true && !hasAny(fm, ["cosa_nascondere", "prossima_mossa", "segreti", "versione_giocatori"])) {
+        if (fm.pubblico !== true && !hasAny(fm, MAP_REVIEW_POLICY.dmPrivateAnyOfFields)) {
             warnings.push(`${fileRel}: mappa DM senza cosa nascondere, prossima_mossa o versione giocatori`);
         }
 
-        if (PLAYABLE_MAP_USES.has(mapUse) && fm.stato === "pronto") {
+        if (MAP_REVIEW_POLICY.playableUses.has(mapUse) && fm.stato === "pronto") {
             if (!hasValue(fm.mondo)) {
                 warnings.push(`${fileRel}: mappa pronta senza mondo`);
             }
-            if (!hasAny(fm, ["luogo", "luoghi", "incontri", "missioni"])) {
+            if (!hasAny(fm, MAP_REVIEW_POLICY.readyPlayableLinkAnyOfFields)) {
                 warnings.push(`${fileRel}: mappa pronta senza luogo, luoghi, incontri o missioni`);
             }
         }
 
-        if (STRUCTURED_MAP_USES.has(mapUse) && fm.stato === "pronto" && !hasAny(fm, ["mondo", "fazioni", "personaggi", "missioni", "luoghi"])) {
+        if (MAP_REVIEW_POLICY.structuredUses.has(mapUse) && fm.stato === "pronto" && !hasAny(fm, MAP_REVIEW_POLICY.readyStructuralLinkAnyOfFields)) {
             warnings.push(`${fileRel}: mappa strutturale pronta senza collegamenti canonici`);
         }
 
-        if (mapUse === "zoom") {
+        if (mapUse === MAP_REVIEW_POLICY.zoomUse) {
             const zoomMatch = text.match(/```zoommap([\s\S]*?)```/);
             if (!zoomMatch) {
                 warnings.push(`${fileRel}: mappa zoom senza blocco zoommap`);
