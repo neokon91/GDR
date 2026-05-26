@@ -642,6 +642,57 @@ def validate_worldbuilding_depth_axes(modules: dict[str, dict], errors: list[str
                     fail(f"worldbuilding_depth_axes.{profile_id}.{axis_id}: chiave mancante {key}", errors)
 
 
+def validate_release_boundary_contract(modules: dict[str, dict], errors: list[str]) -> None:
+    """Valida il confine release: il packaging deve restare guidato da YAML, non da hardcoding JS."""
+    boundary = modules["release_boundary"]
+    required_lists = [
+        "required_files",
+        "forbidden_roots",
+        "forbidden_paths",
+        "forbidden_text_markers",
+        "required_plugins",
+        "forbidden_automation_prefixes",
+        "bridge_runtime_modules",
+        "leggimi_markers",
+    ]
+
+    for key in required_lists:
+        values = boundary.get(key)
+        if not isinstance(values, list) or not values:
+            fail(f"release_boundary.{key}: lista mancante o vuota", errors)
+
+    for rel_path in boundary.get("required_files", []) or []:
+        if str(rel_path) == "LEGGIMI.md":
+            continue
+        if not (ROOT / str(rel_path)).exists():
+            fail(f"release_boundary.required_files: file sorgente mancante ({rel_path})", errors)
+
+    forbidden_roots = set(str(path) for path in boundary.get("forbidden_roots", []) or [])
+    for root in ("Dev", "dist", "node_modules"):
+        if root not in forbidden_roots:
+            fail(f"release_boundary.forbidden_roots: root obbligatoria mancante ({root})", errors)
+
+    forbidden_paths = set(str(path) for path in boundary.get("forbidden_paths", []) or [])
+    for rel_path in (
+        "Dev/TemplateFactory/modules/worldbuilding_depth_axes.yaml",
+        "Dev/TemplateFactory/modules/demo_contract.yaml",
+    ):
+        if rel_path not in forbidden_paths:
+            fail(f"release_boundary.forbidden_paths: modulo dev/riservato non vietato ({rel_path})", errors)
+
+    markers = set(str(marker) for marker in boundary.get("forbidden_text_markers", []) or [])
+    rights = modules["worldbuilding_depth_axes"].get("rights", {}) or {}
+    for marker in (rights.get("status"), rights.get("license"), "source_lab: /Users/andrea/Desktop/projects/FantasyWorld"):
+        if marker and str(marker) not in markers:
+            fail(f"release_boundary.forbidden_text_markers: marker diritti/lab mancante ({marker})", errors)
+
+    community_plugins_path = ROOT / ".obsidian" / "community-plugins.json"
+    community_plugins = set(yaml.safe_load(community_plugins_path.read_text(encoding="utf-8")) or [])
+    for plugin in boundary.get("required_plugins", []) or []:
+        if str(plugin) not in community_plugins:
+            fail(f"release_boundary.required_plugins: plugin non abilitato nel vault ({plugin})", errors)
+
+
 def validate_taxonomy_depth_contracts(modules: dict[str, dict], errors: list[str]) -> None:
     families = modules["taxonomy_depth"].get("families", {})
     if not families:
@@ -877,6 +928,8 @@ def main() -> int:
         validate_entity_depth_contracts(modules, errors)
     if not errors:
         validate_worldbuilding_depth_axes(modules, errors)
+    if not errors:
+        validate_release_boundary_contract(modules, errors)
     if not errors:
         validate_taxonomy_depth_contracts(modules, errors)
     if not errors:
