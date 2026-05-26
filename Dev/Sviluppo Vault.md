@@ -154,6 +154,8 @@ Regole:
 
 La configurazione Meta Bind non si modifica a mano nel JSON: la fonte e `Dev/TemplateFactory/modules/metabind_config.yaml`, poi `npm run render:metabind-config` materializza `.obsidian/plugins/obsidian-meta-bind-plugin/data.json`. `npm run check:metabind-config` blocca ogni divergenza.
 
+Gli artefatti generati vivono sotto contratto in `Dev/TemplateFactory/modules/generated_artifacts.yaml`. Template Markdown in `z.modelli`, preview TemplateFactory, workflow JSON e configurazioni JSON generate devono essere ricostruibili da YAML/Jinja e codice di rendering; `npm run check:generation-contract` blocca output non allineati.
+
 ## Runtime Live E Session Context
 
 La logica comune di runtime viene richiamata da `z.engine/session_views.js`. Il file `z.automazioni/session_context.js` resta come implementazione legacy dietro il bridge, per non rompere le funzioni esistenti durante la migrazione.

@@ -82,6 +82,7 @@ const REQUIRED_FILES = [
     "Dev/TemplateFactory/modules/link_targets.yaml",
     "Dev/TemplateFactory/modules/tag_rules.yaml",
     "Dev/TemplateFactory/modules/workflows.yaml",
+    "Dev/TemplateFactory/modules/generated_artifacts.yaml",
     "Hub/1. DM Dashboard.md",
     "Hub/Atlante del Mondo.md",
     "Hub/Bibbia del Mondo.md",
