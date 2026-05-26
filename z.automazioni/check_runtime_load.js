@@ -70,9 +70,20 @@ async function main() {
         }
         if (!errors.length) {
             const rendered = [];
-            const emptyPages = items => ({
+            const pageCollection = items => ({
                 where(predicate) {
-                    return emptyPages(items.filter(predicate));
+                    return pageCollection(items.filter(predicate));
+                },
+                sort(mapper, direction = "asc") {
+                    const ordered = [...items].sort((a, b) => {
+                        const left = mapper(a);
+                        const right = mapper(b);
+                        return left > right ? 1 : left < right ? -1 : 0;
+                    });
+                    return pageCollection(direction === "desc" ? ordered.reverse() : ordered);
+                },
+                limit(count) {
+                    return pageCollection(items.slice(0, count));
                 },
                 array() {
                     return items;
@@ -81,14 +92,69 @@ async function main() {
                     return items.length;
                 }
             });
+            const demoPages = [
+                {
+                    file: { path: "Mondi/Luoghi/Luogo Pubblico.md", name: "Luogo Pubblico", link: "Mondi/Luoghi/Luogo Pubblico.md", mtime: 3 },
+                    categoria: "luogo",
+                    stato: "pronto",
+                    pubblico: true,
+                    player_safe: "Luogo noto al party.",
+                    segreto: "rivelazione DM"
+                },
+                {
+                    file: { path: "Mondi/Missioni/Missione Pubblica.md", name: "Missione Pubblica", link: "Mondi/Missioni/Missione Pubblica.md", mtime: 2 },
+                    categoria: "missione",
+                    stato: "in corso",
+                    pubblico: true,
+                    player_safe: "Obiettivo chiaro."
+                },
+                {
+                    file: { path: "Mondi/Sessioni/Sessione Giocata.md", name: "Sessione Giocata", link: "Mondi/Sessioni/Sessione Giocata.md", mtime: 1 },
+                    categoria: "sessione",
+                    stato: "giocata",
+                    pubblico: true,
+                    data: "2026-05-26",
+                    recap_pubblico: "Recap pubblico pronto."
+                },
+                {
+                    file: { path: "Risorse/Mappe/Mappa Pubblica.md", name: "Mappa Pubblica", link: "Risorse/Mappe/Mappa Pubblica.md", mtime: 4 },
+                    categoria: "mappa",
+                    stato: "pronto",
+                    pubblico: true,
+                    player_safe: "Mappa condivisibile.",
+                    uso: "tavolo"
+                }
+            ];
+            const pagesForSource = source => {
+                const query = String(source ?? "");
+                if (query.includes('"Mondi"') && query.includes('"Risorse/Mappe"')) {
+                    return demoPages.filter(page => page.file.path.startsWith("Mondi/") || page.file.path.startsWith("Risorse/Mappe/"));
+                }
+                if (query.includes('"Mondi/Sessioni"')) return demoPages.filter(page => page.file.path.startsWith("Mondi/Sessioni/"));
+                if (query.includes('"Mondi/Missioni"')) return demoPages.filter(page => page.file.path.startsWith("Mondi/Missioni/"));
+                if (query.includes('"Mondi/Personaggi"')) return demoPages.filter(page => page.file.path.startsWith("Mondi/Personaggi/"));
+                if (query.includes('"Mondi/Luoghi"')) return demoPages.filter(page => page.file.path.startsWith("Mondi/Luoghi/"));
+                if (query.includes('"Mondi/Dispense"')) return demoPages.filter(page => page.file.path.startsWith("Mondi/Dispense/"));
+                if (query.includes('"Risorse/Mappe"')) return demoPages.filter(page => page.file.path.startsWith("Risorse/Mappe/"));
+                return [];
+            };
             const dv = {
+                array(items) {
+                    return pageCollection(Array.isArray(items) ? items : items ? [items] : []);
+                },
                 el(tag, text = "", options = {}) {
                     const node = { tag, text, options, innerHTML: "" };
                     rendered.push(node);
                     return node;
                 },
-                pages() {
-                    return emptyPages([]);
+                header(level, text) {
+                    rendered.push({ tag: `h${level}`, text, innerHTML: text });
+                },
+                pages(source) {
+                    return pageCollection(pagesForSource(source));
+                },
+                paragraph(text) {
+                    rendered.push({ tag: "p", text, innerHTML: text });
                 },
                 table(headers, rows) {
                     rendered.push({ tag: "table", headers, rows, text: rows.flat().join(" "), innerHTML: rows.flat().join(" ") });
@@ -125,6 +191,15 @@ async function main() {
             views.renderWorldbuildingFreedom(dv);
             if (!rendered.some(node => String(node.innerHTML).includes("Liberta di worldbuilding"))) {
                 errors.push("renderWorldbuildingFreedom: output senza regia worldbuilding libero");
+            }
+            views.renderPlayerPortalStatus(dv);
+            views.renderPublicSafety(dv);
+            views.renderPlayerView(dv);
+            if (!rendered.some(node => String(node.innerHTML).includes("Anti-segreti"))) {
+                errors.push("Vista Giocatori: stato portale non renderizzato");
+            }
+            if (!rendered.some(node => String(node.innerHTML).includes("pubblico: true con campi segreti"))) {
+                errors.push("Vista Giocatori: controllo sicurezza non segnala note pubbliche rischiose");
             }
         }
     }

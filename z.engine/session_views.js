@@ -226,8 +226,10 @@
     asArray,
     cardClass,
     cardHtml,
+    escapeHtml,
     fieldText,
     hasLinks,
+    hasPrivateFields,
     hasText,
     isReal,
     linkKey,
@@ -235,6 +237,7 @@
     pageTitle,
     pagesFromLinks,
     pressure,
+    publicCandidate,
     renderCardGrid,
     renderEmptyState,
     sessionCandidates
