@@ -908,6 +908,207 @@ fields:
       required: false
       source: bases
       use: tipologia descrittiva usata in viste esistenti
+  pg_mechanics:
+    - name: proficiency_bonus
+      type: number
+      required: false
+      source: templater
+      use: bonus di competenza D&D
+    - name: punti_ferita.attuali
+      type: number
+      required: false
+      source: meta_bind
+      use: punti ferita attuali
+    - name: punti_ferita.massimi
+      type: number
+      required: false
+      source: meta_bind
+      use: punti ferita massimi
+    - name: sottospecie
+      type: text
+      required: false
+      source: templater
+      use: sottospecie o lignaggio
+    - name: talenti
+      type: list
+      required: false
+      source: templater
+      use: talenti del personaggio
+    - name: tratti
+      type: list
+      required: false
+      source: templater
+      use: tratti di specie
+    - name: scelte_tratti
+      type: object
+      required: false
+      source: templater
+      use: scelte effettuate per tratti a opzione
+    - name: addestramento
+      type: object
+      required: false
+      source: templater
+      use: addestramento armature e armi
+    - name: addestramento.armature
+      type: list
+      required: false
+      source: meta_bind
+      use: armature addestrate
+    - name: addestramento.armi
+      type: list
+      required: false
+      source: meta_bind
+      use: armi addestrate
+    - name: caratteristiche.forza.stat
+      type: number
+      required: false
+      source: meta_bind
+      use: valore Forza
+    - name: caratteristiche.forza.save_prof
+      type: number
+      required: false
+      source: meta_bind
+      use: competenza tiro salvezza Forza
+    - name: caratteristiche.destrezza.stat
+      type: number
+      required: false
+      source: meta_bind
+      use: valore Destrezza
+    - name: caratteristiche.destrezza.save_prof
+      type: number
+      required: false
+      source: meta_bind
+      use: competenza tiro salvezza Destrezza
+    - name: caratteristiche.costituzione.stat
+      type: number
+      required: false
+      source: meta_bind
+      use: valore Costituzione
+    - name: caratteristiche.costituzione.save_prof
+      type: number
+      required: false
+      source: meta_bind
+      use: competenza tiro salvezza Costituzione
+    - name: caratteristiche.intelligenza.stat
+      type: number
+      required: false
+      source: meta_bind
+      use: valore Intelligenza
+    - name: caratteristiche.intelligenza.save_prof
+      type: number
+      required: false
+      source: meta_bind
+      use: competenza tiro salvezza Intelligenza
+    - name: caratteristiche.saggezza.stat
+      type: number
+      required: false
+      source: meta_bind
+      use: valore Saggezza
+    - name: caratteristiche.saggezza.save_prof
+      type: number
+      required: false
+      source: meta_bind
+      use: competenza tiro salvezza Saggezza
+    - name: caratteristiche.carisma.stat
+      type: number
+      required: false
+      source: meta_bind
+      use: valore Carisma
+    - name: caratteristiche.carisma.save_prof
+      type: number
+      required: false
+      source: meta_bind
+      use: competenza tiro salvezza Carisma
+    - name: abilita.acrobazia.prof
+      type: number
+      required: false
+      source: meta_bind
+      use: competenza Acrobazia
+    - name: abilita.addestrare_animali.prof
+      type: number
+      required: false
+      source: meta_bind
+      use: competenza Addestrare animali
+    - name: abilita.arcano.prof
+      type: number
+      required: false
+      source: meta_bind
+      use: competenza Arcano
+    - name: abilita.atletica.prof
+      type: number
+      required: false
+      source: meta_bind
+      use: competenza Atletica
+    - name: abilita.inganno.prof
+      type: number
+      required: false
+      source: meta_bind
+      use: competenza Inganno
+    - name: abilita.storia.prof
+      type: number
+      required: false
+      source: meta_bind
+      use: competenza Storia
+    - name: abilita.intuizione.prof
+      type: number
+      required: false
+      source: meta_bind
+      use: competenza Intuizione
+    - name: abilita.intimidire.prof
+      type: number
+      required: false
+      source: meta_bind
+      use: competenza Intimidire
+    - name: abilita.indagare.prof
+      type: number
+      required: false
+      source: meta_bind
+      use: competenza Indagare
+    - name: abilita.medicina.prof
+      type: number
+      required: false
+      source: meta_bind
+      use: competenza Medicina
+    - name: abilita.natura.prof
+      type: number
+      required: false
+      source: meta_bind
+      use: competenza Natura
+    - name: abilita.percezione.prof
+      type: number
+      required: false
+      source: meta_bind
+      use: competenza Percezione
+    - name: abilita.intrattenere.prof
+      type: number
+      required: false
+      source: meta_bind
+      use: competenza Intrattenere
+    - name: abilita.persuasione.prof
+      type: number
+      required: false
+      source: meta_bind
+      use: competenza Persuasione
+    - name: abilita.religione.prof
+      type: number
+      required: false
+      source: meta_bind
+      use: competenza Religione
+    - name: abilita.rapidita_di_mano.prof
+      type: number
+      required: false
+      source: meta_bind
+      use: competenza Rapidità di mano
+    - name: abilita.furtivita.prof
+      type: number
+      required: false
+      source: meta_bind
+      use: competenza Furtività
+    - name: abilita.sopravvivenza.prof
+      type: number
+      required: false
+      source: meta_bind
+      use: competenza Sopravvivenza
 checks:
   - check_vault_required_fields
   - public_secret_scan

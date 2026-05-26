@@ -1,15 +1,9 @@
 // Runtime DataviewJS stabile per i template operativi.
 // Le funzioni non ancora migrate vengono lette dal runtime legacy e sovrascritte qui una famiglia alla volta.
 (async () => {
+  const gdrCore = await eval(await app.vault.adapter.read("z.engine/gdr_views.js"));
+  const escapeHtml = gdrCore.escapeHtml;
   const legacy = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));
-
-  const escapeHtml = value => String(value ?? "").replace(/[&<>"']/g, c => ({
-    "&": "&amp;",
-    "<": "&lt;",
-    ">": "&gt;",
-    "\"": "&quot;",
-    "'": "&#39;"
-  }[c]));
 
   const asArray = value => Array.isArray(value) ? value : value ? [value] : [];
   const hasText = value => String(value ?? "").trim().length > 0;
@@ -296,6 +290,7 @@
 
   return {
     ...legacy,
+    escapeHtml: gdrCore.escapeHtml,
     renderActiveSessionBanner: sessionViews.renderActiveSessionBanner,
     renderAtlasMapCards: mapViews.renderAtlasMapCards,
     renderCreationFeedback,

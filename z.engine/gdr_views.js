@@ -1,4 +1,14 @@
 const GDRView = (() => {
+    function escapeHtml(value) {
+        return String(value ?? "").replace(/[&<>"']/g, c => ({
+            "&": "&amp;",
+            "<": "&lt;",
+            ">": "&gt;",
+            "\"": "&quot;",
+            "'": "&#39;"
+        }[c]));
+    }
+
     const asArray = value => Array.isArray(value) ? value.filter(Boolean) : value ? [value] : [];
     const isReal = page => page && page.stato !== "archiviata";
     const pressure = page => Number(page.pressione ?? page.progress_value ?? 0) || 0;
@@ -64,6 +74,7 @@ const GDRView = (() => {
 
     return {
         asArray,
+        escapeHtml,
         isReal,
         pressure,
         linkKey,

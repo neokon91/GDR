@@ -98,6 +98,7 @@ tab: Connessioni
 
 
 
+
 tab: PNG
 
 > [!scena] Persona Al Tavolo

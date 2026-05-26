@@ -85,6 +85,14 @@ def render_context(name: str, blueprint: dict[str, Any], modules: dict[str, dict
         "modules": modules,
     }
     context.update(load_context(name))
+
+    if name == "pg":
+        schema = modules.get("pg_mechanics_schema", {})
+        defaults = schema.get("render_defaults", {})
+        if isinstance(defaults, dict):
+            for key, value in defaults.items():
+                context.setdefault(key, value)
+
     return context
 
 

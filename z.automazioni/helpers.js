@@ -218,6 +218,56 @@ async function renderFrontmatter(profileName, values = {}) {
     return renderFrontmatterFromProfile(await frontmatterProfile(profileName), values);
 }
 
+function renderYamlScalar(value) {
+    if (value === true) return "true";
+    if (value === false) return "false";
+    if (value === null || value === undefined) return '""';
+    if (typeof value === "number") return String(value);
+    if (Array.isArray(value)) {
+        if (!value.length) return "[]";
+        return `\n${value.map(item => `  - ${renderYamlScalar(item)}`).join("\n")}`;
+    }
+    const text = String(value);
+    if (!text) return '""';
+    if (/[:#\[\]{}&,*?|>!%@`"']/.test(text) || /^\s|\s$/.test(text)) {
+        return `"${text.replace(/\\/g, "\\\\").replace(/"/g, '\\"')}"`;
+    }
+    return text;
+}
+
+function renderYamlObject(data, indent = 0) {
+    const lines = [];
+    const prefix = " ".repeat(indent);
+
+    for (const [key, value] of Object.entries(data ?? {})) {
+        if (value && typeof value === "object" && !Array.isArray(value)) {
+            lines.push(`${prefix}${key}:`);
+            lines.push(...renderYamlObject(value, indent + 2));
+            continue;
+        }
+
+        const rendered = renderYamlScalar(value);
+        if (typeof rendered === "string" && rendered.startsWith("\n")) {
+            lines.push(`${prefix}${key}:${rendered}`);
+        } else {
+            lines.push(`${prefix}${key}: ${rendered}`);
+        }
+    }
+
+    return lines;
+}
+
+function mergeFrontmatterNested(frontmatter, nested = {}) {
+    const match = String(frontmatter ?? "").match(/^---\n([\s\S]*?)\n---\n?$/);
+    if (!match) {
+        throw new Error("Frontmatter non valido per merge annidato.");
+    }
+
+    const nestedLines = renderYamlObject(nested, 0);
+    const body = [match[1].trimEnd(), ...nestedLines].filter(Boolean).join("\n");
+    return `---\n${body}\n---\n`;
+}
+
 function setRoute(route = {}) {
     pendingRoute = { ...route };
     return pendingRoute;
@@ -1157,6 +1207,8 @@ module.exports = {
     frontmatterProfile,
     chooseProfileOption,
     renderFrontmatter,
+    mergeFrontmatterNested,
+    renderYamlObject,
     setRoute,
     consumeRoute,
     abortCreation,

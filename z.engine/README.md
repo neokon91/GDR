@@ -5,7 +5,7 @@ Runtime di rendering per DataviewJS e JS Engine. I file qui dentro devono produr
 ## Contratto
 
 - `z.engine/session_views.js` e l'entrypoint per dashboard, sessioni, player view e template generati.
-- `z.engine/gdr_views.js` contiene componenti piu piccoli e riusabili.
+- `z.engine/gdr_views.js` contiene componenti piu piccoli e riusabili, incluso `escapeHtml` condiviso dalle dashboard.
 - Le azioni che scrivono frontmatter restano in `z.automazioni/meta_actions.js`.
 - La creazione e lo spostamento delle note restano in funzioni Templater dentro `z.automazioni/`.
 - Le nuove note operative non devono puntare direttamente a `z.automazioni/session_context.js`.

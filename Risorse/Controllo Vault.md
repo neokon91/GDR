@@ -13,9 +13,9 @@ Questa pagina mostra cosa richiede attenzione. Non e un controllo tecnico: serve
 ## Colpo D'Occhio
 
 ```dataviewjs
+const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
 const isReal = p => Boolean(p);
 const count = (source, predicate) => dv.pages(source).where(p => isReal(p) && predicate(p)).length;
-const escapeHtml = value => String(value ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "\"": "&quot;", "'": "&#39;" }[c]));
 
 const cards = [
   ["Idee da smistare", count('"Inbox"', p => p.file.name !== "Inbox" && !["smistata", "archiviata"].includes(p.stato)), "Decidi se diventano mondo"],
@@ -30,18 +30,13 @@ const cards = [
 const grid = dv.el("div", "", { cls: "gdr-stat-grid" });
 grid.innerHTML = cards.map(([label, value, hint]) => `
   <div class="gdr-stat-card">
-    <div class="gdr-stat-value">${escapeHtml(value)}</div>
-    <div class="gdr-stat-label">${escapeHtml(label)}</div>
-    <div class="gdr-stat-hint">${escapeHtml(hint)}</div>
+    <div class="gdr-stat-value">${gdr.escapeHtml(value)}</div>
+    <div class="gdr-stat-label">${gdr.escapeHtml(label)}</div>
+    <div class="gdr-stat-hint">${gdr.escapeHtml(hint)}</div>
   </div>
 `).join("");
-```
 
-## Carte Da Guardare
-
-```dataviewjs
-const escapeHtml = value => String(value ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "\"": "&quot;", "'": "&#39;" }[c]));
-const internalLink = file => `<a class="internal-link" data-href="${escapeHtml(file.path)}" href="${escapeHtml(file.path)}">${escapeHtml(file.name)}</a>`;
+dv.header(2, "Carte Da Guardare");
 
 const items = [
   ...dv.pages('"Inbox/Generati"').where(p => p.plugin === "fantasy-content-generator" && p.stato === "bozza").map(p => [p, "Bozza generata"]).array(),
@@ -57,9 +52,9 @@ if (!items.length) {
   const grid = dv.el("div", "", { cls: "gdr-card-grid compact" });
   grid.innerHTML = items.map(([p, kind]) => `
     <div class="gdr-info-card compact">
-      <div class="gdr-card-title">${internalLink(p.file)}</div>
-      <div class="gdr-card-meta">${escapeHtml(kind)} · ${escapeHtml(p.stato ?? "senza stato")}</div>
-      <div class="gdr-card-line">${escapeHtml(p.tipo ?? p.categoria ?? "nota")}</div>
+      <div class="gdr-card-title">${gdr.internalLink(p.file)}</div>
+      <div class="gdr-card-meta">${gdr.escapeHtml(kind)} · ${gdr.escapeHtml(p.stato ?? "senza stato")}</div>
+      <div class="gdr-card-line">${gdr.escapeHtml(p.tipo ?? p.categoria ?? "nota")}</div>
     </div>
   `).join("");
 }
@@ -141,9 +136,9 @@ SORT categoria ASC, nome ASC
 
 ## Controlli Coerenza
 
-### Stati Fuori Standard
-
 ```dataviewjs
+dv.header(3, "Stati Fuori Standard");
+
 const statiValidi = new Set([
   "bozza",
   "preparazione",
@@ -180,32 +175,20 @@ if (!pages.length) {
 } else {
   dv.table(["Nota", "Categoria", "Stato"], pages.map(p => [p.file.link, p.categoria, p.stato]));
 }
-```
 
-### Campi Base Mancanti
+dv.header(3, "Campi Base Mancanti");
 
-```dataviewjs
-const isFolderIndex = p => {
-  const stem = p.file.path.replace(/\.md$/, "");
-  const parts = stem.split("/");
-  return parts.length > 1 && parts[parts.length - 1] === parts[parts.length - 2];
-};
-
-const isServicePage = p => isFolderIndex(p) || p.file.path === "Mondi/Calendario.md";
-
-const pages = dv.pages('"Mondi" OR "Campagne" OR "Inbox"')
+const pagesMissingBase = dv.pages('"Mondi" OR "Campagne" OR "Inbox"')
   .where(p => !isServicePage(p) && (!p.categoria || !p.stato));
 
-if (!pages.length) {
+if (!pagesMissingBase.length) {
   dv.paragraph("Nessuna nota senza categoria o stato.");
 } else {
-  dv.table(["Nota", "Categoria", "Stato"], pages.map(p => [p.file.link, p.categoria ?? "manca", p.stato ?? "manca"]));
+  dv.table(["Nota", "Categoria", "Stato"], pagesMissingBase.map(p => [p.file.link, p.categoria ?? "manca", p.stato ?? "manca"]));
 }
-```
 
-### Date Da Calendarizzare
+dv.header(3, "Date Da Calendarizzare");
 
-```dataviewjs
 const hasText = value => String(value ?? "").trim().length > 0;
 
 const rows = [
@@ -225,12 +208,9 @@ if (!rows.length) {
 } else {
   dv.table(["Nota", "Problema", "Data"], rows);
 }
-```
 
-### Configurazione Calendarium
+dv.header(3, "Configurazione Calendarium");
 
-```dataviewjs
-const hasText = value => String(value ?? "").trim().length > 0;
 let data = null;
 try {
   data = JSON.parse(await app.vault.adapter.read(".obsidian/plugins/calendarium/data.json"));
@@ -261,12 +241,10 @@ if (data) {
     dv.table(["Elemento", "Problema", "Dettaglio"], issues);
   }
 }
-```
 
-### Pronti Ma Incompleti
+dv.header(3, "Pronti Ma Incompleti");
 
-```dataviewjs
-const rows = [
+const incompleteRows = [
   ...dv.pages('"Inbox/Generati"')
     .where(p => p.plugin === "fantasy-content-generator" && p.stato === "bozza" && (!p.mondo && !p.luogo))
     .map(p => [p.file.link, "Bozza generata senza mondo o luogo"]).array(),
@@ -287,9 +265,9 @@ const rows = [
     .map(p => [p.file.link, "Sessione pronta senza luoghi o personaggi"]).array()
 ];
 
-if (!rows.length) {
+if (!incompleteRows.length) {
   dv.paragraph("Nessun materiale pronto incompleto.");
 } else {
-  dv.table(["Nota", "Problema"], rows);
+  dv.table(["Nota", "Problema"], incompleteRows);
 }
 ```

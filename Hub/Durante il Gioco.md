@@ -59,12 +59,6 @@ if (!active) {
 ```dataviewjs
 const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
 gdr.renderLiveCommandCenter(dv);
-```
-
-## Catena Mondo Vivo
-
-```dataviewjs
-const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
 gdr.renderM11ContinuityChain(dv);
 ```
 
@@ -150,26 +144,8 @@ if (!active) {
     [[active.mondo ?? "", active.campagne ?? [], active.fazioni ?? [], active.luoghi ?? []]]
   );
 }
-```
-
-### Lore Collegata
-
-```dataviewjs
-const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
 gdr.renderSessionLoreCards(dv);
-```
-
-### Missioni Della Sessione
-
-```dataviewjs
-const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
 gdr.renderSessionMissionCards(dv);
-```
-
-### Clock Della Sessione
-
-```dataviewjs
-const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
 gdr.renderSessionClockCards(dv);
 ```
 
@@ -350,81 +326,57 @@ dv.table(
   ["Incontro", "Tipo", "Luogo", "Pericolo", "Creature", "Iniziativa"],
   pages.map(p => [p.file.link, p.tipo ?? "", p.luogo ?? "", p.pericolo ?? "", p.creature ?? [], p.encounter_creatures ?? []])
 );
-```
 
-#### Creature
+dv.header(4, "Creature");
 
-```dataviewjs
-const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
-const active = gdr.activeSession(dv);
-
-const pages = dv.array(active?.creature ?? [])
+const creaturePages = dv.array(active?.creature ?? [])
   .map(link => dv.page(link.path ?? link))
   .where(Boolean)
   .array();
 
-if (!pages.length) {
+if (!creaturePages.length) {
   dv.paragraph("Nessuna creatura collegata alla sessione attiva.");
 } else {
-  dv.table(["Creatura", "Tipo", "Taglia", "GS"], pages.map(p => [p.file.link, p.type ?? p.tipo ?? "", p.size ?? "", p.cr ?? ""]));
+  dv.table(["Creatura", "Tipo", "Taglia", "GS"], creaturePages.map(p => [p.file.link, p.type ?? p.tipo ?? "", p.size ?? "", p.cr ?? ""]));
 }
-```
 
-#### Oggetti Da Assegnare
+dv.header(4, "Oggetti Da Assegnare");
 
-```dataviewjs
-const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
-const active = gdr.activeSession(dv);
-
-let pages = dv.array(active?.oggetti ?? [])
+let oggettiPages = dv.array(active?.oggetti ?? [])
   .map(link => dv.page(link.path ?? link))
   .where(Boolean)
   .array();
 
-if (!pages.length) {
-  pages = dv.pages('"Mondi/Oggetti"')
+if (!oggettiPages.length) {
+  oggettiPages = dv.pages('"Mondi/Oggetti"')
     .where(p => !p.proprietario && p.stato !== "archiviata")
     .sort(p => p.rarita ?? "", "asc")
     .array();
 }
 
-dv.table(["Oggetto", "Tipo", "Rarita", "Luogo", "Proprietario"], pages.map(p => [p.file.link, p.tipo ?? "", p.rarita ?? "", p.luogo ?? "", p.proprietario ?? ""]));
-```
+dv.table(["Oggetto", "Tipo", "Rarita", "Luogo", "Proprietario"], oggettiPages.map(p => [p.file.link, p.tipo ?? "", p.rarita ?? "", p.luogo ?? "", p.proprietario ?? ""]));
 
-#### Dispense Di Scena
+dv.header(4, "Dispense Di Scena");
 
-```dataviewjs
-const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
-const active = gdr.activeSession(dv);
-
-let pages = dv.array(active?.dispense ?? [])
+let dispensePages = dv.array(active?.dispense ?? [])
   .map(link => dv.page(link.path ?? link))
   .where(Boolean)
   .array();
 
-if (!pages.length) {
-  pages = dv.pages('"Mondi/Dispense"')
+if (!dispensePages.length) {
+  dispensePages = dv.pages('"Mondi/Dispense"')
     .where(p => p.stato === "pronto")
     .sort(p => p.nome ?? p.file.name, "asc")
     .array();
 }
 
-dv.table(["Dispensa", "Tipo", "Luogo", "Personaggi"], pages.map(p => [p.file.link, p.tipo ?? "", p.luogo ?? "", p.personaggi ?? []]));
-```
+dv.table(["Dispensa", "Tipo", "Luogo", "Personaggi"], dispensePages.map(p => [p.file.link, p.tipo ?? "", p.luogo ?? "", p.personaggi ?? []]));
 
-#### Mappe
+dv.header(4, "Mappe");
 
-
-```dataviewjs
-const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
 gdr.renderSessionMapCards(dv);
-```
 
-#### Musica e Risorse
-
-```dataviewjs
-const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
-const active = gdr.activeSession(dv);
+dv.header(4, "Musica e Risorse");
 
 const encounterPages = dv.array(active?.incontri ?? [])
   .map(link => dv.page(link.path ?? link))
@@ -440,22 +392,22 @@ const mediaLinks = [
   ...encounterPages.flatMap(p => dv.array(p.video ?? []).array())
 ];
 
-let pages = dv.array(mediaLinks)
+let mediaPages = dv.array(mediaLinks)
   .map(link => dv.page(link.path ?? link))
   .where(Boolean)
   .array();
 
-if (!pages.length) {
-  pages = dv.pages('"Risorse/Audio" OR "Risorse/Video" OR "Risorse/Immagini" OR "Risorse/Dispense"')
+if (!mediaPages.length) {
+  mediaPages = dv.pages('"Risorse/Audio" OR "Risorse/Video" OR "Risorse/Immagini" OR "Risorse/Dispense"')
     .where(p => p.file.name !== "Audio" && p.file.name !== "Video" && p.file.name !== "Immagini" && p.file.name !== "Dispense" && p.stato === "pronto")
     .sort(p => p.uso ?? "", "asc")
     .array();
 }
 
-if (!pages.length) {
+if (!mediaPages.length) {
   dv.paragraph("Nessun media pronto o collegato alla sessione attiva.");
 } else {
-  dv.table(["Risorsa", "Uso", "Tono", "Campagna", "Stato"], pages.map(p => [p.file.link, p.uso ?? "", p.tono ?? "", p.campagna ?? "", p.stato ?? ""]));
+  dv.table(["Risorsa", "Uso", "Tono", "Campagna", "Stato"], mediaPages.map(p => [p.file.link, p.uso ?? "", p.tono ?? "", p.campagna ?? "", p.stato ?? ""]));
 }
 ```
 

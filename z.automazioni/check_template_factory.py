@@ -396,6 +396,24 @@ def validate_frontmatter_sample(profile_id: str, profile: dict, errors: list[str
         fail(f"frontmatter_profiles.{profile_id}: sample frontmatter non produce un oggetto YAML", errors)
 
 
+def validate_pg_mechanical_preview(modules: dict[str, dict], errors: list[str]) -> None:
+    preview = GENERATED / "pg.preview.md"
+    if not preview.exists():
+        return
+
+    text = preview.read_text(encoding="utf-8")
+    if "undefined" in text:
+        fail("pg.preview.md: output contiene 'undefined'", errors)
+    if "tab: Scheda" not in text:
+        fail("pg.preview.md: tab Scheda mancante", errors)
+    if "INPUT[number:caratteristiche.forza.stat]" not in text:
+        fail("pg.preview.md: INPUT caratteristiche mancante", errors)
+    if "VIEW[floor(({" not in text:
+        fail("pg.preview.md: VIEW modificatori mancante", errors)
+    if "punti_ferita.attuali" not in text:
+        fail("pg.preview.md: slider punti ferita mancante", errors)
+
+
 def validate_rendering(modules: dict[str, dict], errors: list[str]) -> None:
     env = build_jinja_env()
 
@@ -442,7 +460,7 @@ def validate_plugin_surface_contracts(modules: dict[str, dict], errors: list[str
     """Keep generated plugin-native surfaces declared in YAML, not hidden in Jinja."""
     jinja_text_by_path = {
         path: path.read_text(encoding="utf-8")
-        for path in sorted((FACTORY / "jinja").glob("*.j2"))
+        for path in sorted((FACTORY / "jinja").glob("**/*.j2"))
     }
     all_text = "\n".join(jinja_text_by_path.values())
 
@@ -474,6 +492,8 @@ def validate_plugin_surface_contracts(modules: dict[str, dict], errors: list[str
 
     for path, text in jinja_text_by_path.items():
         rel_path = path.relative_to(ROOT)
+        if "jinja/macros/" in rel_path.as_posix():
+            continue
         for match in re.finditer(r"INPUT\[([^\]]+)\]", text):
             field = metabind_input_field(match.group(1))
             if field and field not in known_fields:
@@ -808,6 +828,8 @@ def main() -> int:
         validate_rendering(modules, errors)
     if not errors:
         validate_generated_previews(modules, errors)
+    if not errors:
+        validate_pg_mechanical_preview(modules, errors)
 
     if errors:
         print("Errori TemplateFactory:", file=sys.stderr)

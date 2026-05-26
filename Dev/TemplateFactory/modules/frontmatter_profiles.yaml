@@ -166,6 +166,46 @@ field_catalog:
   - grado_certezza
   - habitat
   - hp_temporanei
+  - punti_ferita.attuali
+  - punti_ferita.massimi
+  - proficiency_bonus
+  - sottospecie
+  - talenti
+  - tratti
+  - scelte_tratti
+  - addestramento
+  - addestramento.armature
+  - addestramento.armi
+  - caratteristiche.forza.stat
+  - caratteristiche.forza.save_prof
+  - caratteristiche.destrezza.stat
+  - caratteristiche.destrezza.save_prof
+  - caratteristiche.costituzione.stat
+  - caratteristiche.costituzione.save_prof
+  - caratteristiche.intelligenza.stat
+  - caratteristiche.intelligenza.save_prof
+  - caratteristiche.saggezza.stat
+  - caratteristiche.saggezza.save_prof
+  - caratteristiche.carisma.stat
+  - caratteristiche.carisma.save_prof
+  - abilita.acrobazia.prof
+  - abilita.addestrare_animali.prof
+  - abilita.arcano.prof
+  - abilita.atletica.prof
+  - abilita.inganno.prof
+  - abilita.storia.prof
+  - abilita.intuizione.prof
+  - abilita.intimidire.prof
+  - abilita.indagare.prof
+  - abilita.medicina.prof
+  - abilita.natura.prof
+  - abilita.percezione.prof
+  - abilita.intrattenere.prof
+  - abilita.persuasione.prof
+  - abilita.religione.prof
+  - abilita.rapidita_di_mano.prof
+  - abilita.furtivita.prof
+  - abilita.sopravvivenza.prof
   - impatto
   - incantesimi
   - indizi_cosmici
@@ -3360,6 +3400,22 @@ profiles:
       value: incantesimi
     - key: privilegi
       value: privilegi
+    - key: sottospecie
+      value: sottospecie
+    - key: proficiency_bonus
+      value: proficiency_bonus
+    - key: punti_ferita.attuali
+      value: punti_ferita_attuali
+    - key: punti_ferita.massimi
+      value: punti_ferita_massimi
+    - key: talenti
+      value: talenti
+    - key: tratti
+      value: tratti
+    - key: scelte_tratti
+      value: scelte_tratti
+    - key: addestramento
+      value: addestramento
   ricorrenza_calendario:
     sample_values: []
     fields:

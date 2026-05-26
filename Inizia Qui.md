@@ -83,6 +83,8 @@ dv.table(["Controllo", "Stato", "Azione"], checks.map(([label, ok, text]) => [la
 > `BUTTON[risorse-risorse-risorse]`
 >
 > `BUTTON[aiuto-risorse-faq]`
+>
+> Profili plugin consigliati: [[Risorse/Profili Plugin]].
 
 ## Se Parti Da Zero
 

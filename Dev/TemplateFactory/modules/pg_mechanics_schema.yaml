@@ -1,0 +1,106 @@
+id: pg_mechanics_schema
+purpose: Valori di default per il render Jinja del tab Scheda meccanica PG.
+version: 0.1.0
+render_defaults:
+  proficiency_bonus: 2
+  punti_ferita:
+    massimi: 10
+    attuali: 10
+  caratteristiche:
+    forza:
+      label: Forza
+      stat: 10
+      save_prof: 0
+    destrezza:
+      label: Destrezza
+      stat: 10
+      save_prof: 0
+    costituzione:
+      label: Costituzione
+      stat: 10
+      save_prof: 0
+    intelligenza:
+      label: Intelligenza
+      stat: 10
+      save_prof: 0
+    saggezza:
+      label: Saggezza
+      stat: 10
+      save_prof: 0
+    carisma:
+      label: Carisma
+      stat: 10
+      save_prof: 0
+  abilita:
+    acrobazia:
+      label: Acrobazia
+      stat: destrezza
+      prof: 0
+    addestrare_animali:
+      label: Addestrare gli Animali
+      stat: saggezza
+      prof: 0
+    arcano:
+      label: Arcano
+      stat: intelligenza
+      prof: 0
+    atletica:
+      label: Atletica
+      stat: forza
+      prof: 0
+    inganno:
+      label: Inganno
+      stat: carisma
+      prof: 0
+    storia:
+      label: Storia
+      stat: intelligenza
+      prof: 0
+    intuizione:
+      label: Intuizione
+      stat: saggezza
+      prof: 0
+    intimidire:
+      label: Intimidire
+      stat: carisma
+      prof: 0
+    indagare:
+      label: Indagare
+      stat: intelligenza
+      prof: 0
+    medicina:
+      label: Medicina
+      stat: saggezza
+      prof: 0
+    natura:
+      label: Natura
+      stat: intelligenza
+      prof: 0
+    percezione:
+      label: Percezione
+      stat: saggezza
+      prof: 0
+    intrattenere:
+      label: Intrattenere
+      stat: carisma
+      prof: 0
+    persuasione:
+      label: Persuasione
+      stat: carisma
+      prof: 0
+    religione:
+      label: Religione
+      stat: intelligenza
+      prof: 0
+    rapidita_di_mano:
+      label: Rapidità di Mano
+      stat: destrezza
+      prof: 0
+    furtivita:
+      label: Furtività
+      stat: destrezza
+      prof: 0
+    sopravvivenza:
+      label: Sopravvivenza
+      stat: saggezza
+      prof: 0

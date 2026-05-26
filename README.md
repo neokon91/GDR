@@ -128,6 +128,13 @@ Se dashboard, pulsanti o tabelle non funzionano, apri [[Risorse/Primo Avvio Stru
 - Per importare mappe esterne come bozze, apri [[Risorse/Importare Mappe]] o usa `npm run import:azgaar`.
 - Non modificare manualmente le note in `SRD`: sono un riferimento regolamentare separato e possono essere rigenerate.
 
+## Sviluppo leggero
+
+- Il repository include `SRD/` versionato (~migliaia di note regolamentari). Per rigenerarlo: `npm run import:srd` (vedi [[docs/SRD_SETUP]]).
+- Per i dati meccanici della creazione PG (classi, specie, background, caratteristiche): `npm run import:srd-data` (vedi [[docs/PG_SCHEDA_MECHANICA]]).
+- Un clone **senza** cartella SRD non è ancora un percorso supportato: i check e la release pulita la assumono presente.
+- In futuro si potrà valutare un submodule o download opzionale; per ora non rimuovere `SRD/` dal git senza aggiornare tutti i check di release.
+
 ## Sviluppo
 
 Comandi principali dal root del vault:
@@ -137,6 +144,7 @@ npm run check
 npm run check:repo
 npm run clean:repo
 npm run import:srd
+npm run import:srd-data
 npm run import:azgaar
 npm run release:clean
 ```

@@ -1,0 +1,48 @@
+{% import "macros/pg_mechanics.j2" as mech %}
+tab: Scheda
+
+> [!infoboxwiki]- Identita Meccanica
+> Classe: {{ mech.view_or_dash("classe") }}
+>
+> Livello: {{ mech.view("livello") }}
+>
+> Bonus competenza: {{ mech.view("proficiency_bonus") }}
+>
+> Specie: {{ mech.view_or_dash("specie") }}
+>
+> Sottospecie: {{ mech.view_or_dash("sottospecie") }}
+>
+> Background: {{ mech.view_or_dash("background") }}
+>
+> Allineamento: `INPUT[text:allineamento]`
+
+## Punti ferita
+{{ mech.slider("Punti ferita", "punti_ferita.attuali", "punti_ferita.massimi") }}
+
+```tabs
+tab: Statistiche
+| Statistica | Valore | Bonus | Bonus salvezza | Prof |
+|:-:|:-:|:-:|:-:|:-:|
+{% for id, stat in caratteristiche.items() %}
+{{ mech.stat_row(id, stat) }}
+{% endfor %}
+
+tab: Abilita
+| Abilita | Prof | Bonus |
+|:-:|:-:|:-:|
+{% for id, skill in abilita.items() %}
+{{ mech.skill_row(id, skill) }}
+{% endfor %}
+
+tab: Talenti
+{{ mech.list_view("talenti") }}
+
+tab: Tratti
+{{ mech.list_view("tratti") }}
+
+tab: Addestramento
+| Tipo | Valori |
+|---|---|
+| Armature | {{ mech.list_view("addestramento.armature") }} |
+| Armi | {{ mech.list_view("addestramento.armi") }} |
+```

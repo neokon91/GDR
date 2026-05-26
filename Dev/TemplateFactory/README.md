@@ -16,6 +16,14 @@ La generazione deve servire il profilo principale D&D 5.5/SRD senza legare il Co
 | `jinja/` | Scheletri Jinja2 per produrre Markdown statico pronto per Obsidian. |
 | `examples/` | Output o casi di prova manuali. |
 
+## Pipeline scheda meccanica PG
+
+1. Modificare `modules/srd_character_build.yaml` (core + opzioni personaggio).
+2. `npm run import:srd-data` → JSON in `z.automazioni/data/srd/`.
+3. `z.automazioni/pg.js` legge i JSON e compone frontmatter (`caratteristiche`, `abilita`, `punti_ferita`, …).
+4. Jinja usa `pg_mechanics_schema.yaml` come contesto di render e `jinja/macros/pg_mechanics.j2` + `jinja/partials/pg_scheda_meccanica.md.j2` per il tab **Scheda** nel blueprint `pg`.
+5. `npm run render:templates` aggiorna `examples/generated/pg.preview.md`; `release:clean` materializza `z.modelli/personaggio/PG.md`.
+
 ## Pipeline Prevista
 
 1. Leggere `modules/*.yaml`.

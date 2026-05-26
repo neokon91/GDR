@@ -51,39 +51,23 @@ if (!worlds.length) {
     </div>
   `).join("");
 }
-```
 
-## Articoli Del Mondo
-
-```dataviewjs
-const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+dv.header(2, "Articoli Del Mondo");
 gdr.renderCodexEditorial(dv, dv.current().mondo_attivo);
-```
 
-## Pronti Da Mostrare
-
-```dataviewjs
-const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+dv.header(2, "Pronti Da Mostrare");
 gdr.renderCodexReadyShowcase(dv, dv.current().mondo_attivo);
-```
 
-## Pronti Da Giocare
-
-```dataviewjs
-const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+dv.header(2, "Pronti Da Giocare");
 gdr.renderCodexReadyToPlay(dv, dv.current().mondo_attivo);
-```
 
-## Buchi Del Codex
-
-```dataviewjs
-const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
-const worldPath = gdr.linkKey(dv.current().mondo_attivo);
+dv.header(2, "Buchi Del Codex");
+const codexWorldPath = gdr.linkKey(dv.current().mondo_attivo);
 const has = value => Array.isArray(value) ? value.length > 0 : String(value ?? "").trim().length > 0;
 const rows = [];
 dv.pages('"Mondi"')
   .where(p => gdr.isReal(p) && p.categoria === "mondo" && p.stato !== "archiviata")
-  .where(p => !worldPath || p.file.path === worldPath)
+  .where(p => !codexWorldPath || p.file.path === codexWorldPath)
   .forEach(p => {
     [
       ["gancio", p.gancio ?? p.premessa],
@@ -99,7 +83,7 @@ dv.pages('"Mondi"')
 
 dv.pages('"Mondi/Luoghi" OR "Mondi/Fazioni" OR "Mondi/Personaggi" OR "Mondi/Culture" OR "Mondi/Religioni" OR "Mondi/Timeline"')
   .where(p => gdr.isReal(p) && p.stato !== "archiviata")
-  .where(p => !worldPath || gdr.linkKey(p.mondo) === worldPath)
+  .where(p => !codexWorldPath || gdr.linkKey(p.mondo) === codexWorldPath)
   .forEach(p => {
     const title = p.file.link;
     const links = [

@@ -13,6 +13,7 @@ Questa nota contiene convenzioni tecniche per mantenere il vault: campi, templat
 - Le istruzioni tecniche non vanno nel README se non sono necessarie per usare il vault al tavolo.
 - Il profilo regolamentare principale e D&D 5.5/SRD: i campi di creature, incontri, oggetti, ricompense, party e session prep devono restare compatibili con questo uso, mentre il Codex del mondo resta separato dal regolamento.
 - La linea architetturale e vincolante: YAML dichiara contratti e profili, Jinja/TemplateFactory genera Markdown statico, JS del vault contiene runtime e automazioni. Non aggiungere logica fragile nel corpo dei template.
+- **Scheda meccanica PG**: `Dev/TemplateFactory/modules/srd_character_build.yaml` → `npm run import:srd-data` → `z.automazioni/data/srd/*.json` → `z.automazioni/pg.js` (Templater) → frontmatter strutturato → Jinja (`pg_mechanics_schema.yaml`, `macros/pg_mechanics.j2`, tab **Scheda** in `PG.md`). Dettaglio utente: [[docs/PG_SCHEDA_MECHANICA]]; porting e backlog da FantasyWorld: [[docs/FANTASYWORLD_INTEGRATION]].
 - [[Dev/README]] e l'indice canonico della documentazione di sviluppo: prima di creare una nuova nota tecnica, verifica se la modifica appartiene a roadmap, handoff, sviluppo, plugin layer, release o TemplateFactory.
 
 ## Stati delle Note Consigliati
@@ -187,7 +188,9 @@ Regola: questi template creano note in `Inbox` e devono provare a collegare auto
 
 ## Import SRD
 
-Lo script `z.automazioni/import_srd.js` importa il System Reference Document 5.2.1 in italiano dalla fork `neokon91/DND-SRD-IT` e genera note dentro `SRD`.
+Lo script `z.automazioni/import_srd.js` importa il System Reference Document 5.2.1 in italiano dalla fork `neokon91/DND-SRD-IT` e genera note dentro `SRD/`.
+
+**Peso del repository:** `SRD/` resta versionato nel git per release e check; un clone senza SRD non e ancora supportato. Per rigenerare la cartella localmente usa `npm run import:srd` (dettagli in [[docs/SRD_SETUP]]). Non pianificare la rimozione da git senza aggiornare `check_release`, `release:clean` e i riferimenti wikilink.
 
 Regole:
 

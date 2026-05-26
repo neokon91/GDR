@@ -1,0 +1,30 @@
+{# Macro scheda meccanica PG (Meta Bind INPUT/VIEW) #}
+{% macro slider(label, current, max) -%}
+```meta-bind-js-view
+{{ "{" }}{{ max }}{{ "}" }} as maxHp
+{{ "{" }}{{ current }}{{ "}" }} as hp
+---
+const str = `**{{ label }}**: ${context.bound.hp} / ${context.bound.maxHp} \`INPUT[slider(minValue(0), maxValue(${context.bound.maxHp})):{{ current }}]\``;
+return engine.markdown.create(str);
+```
+{%- endmacro %}
+
+{% macro stat_row(id, stat) -%}
+| {{ stat.label | default(id | replace("_", " ") | title) }} | `INPUT[number:caratteristiche.{{ id }}.stat]` | `VIEW[floor(({{ "{" }}caratteristiche.{{ id }}.stat{{ "}" }} - 10) / 2)]` | `VIEW[floor(({{ "{" }}caratteristiche.{{ id }}.stat{{ "}" }} - 10) / 2) + ({{ "{" }}caratteristiche.{{ id }}.save_prof{{ "}" }} * {{ "{" }}proficiency_bonus{{ "}" }})]` | `INPUT[inlineSelect(option(0, "—"), option(1, "✓"), option(2, "★")):caratteristiche.{{ id }}.save_prof]` |
+{%- endmacro %}
+
+{% macro skill_row(id, skill) -%}
+| {{ skill.label | default(id | replace("_", " ") | title) }} ({{ skill.stat | replace("_", " ") | title }}) | `INPUT[inlineSelect(option(0, "—"), option(1, "✓"), option(2, "★")):abilita.{{ id }}.prof]` | `VIEW[floor(({{ "{" }}caratteristiche.{{ skill.stat }}.stat{{ "}" }} - 10) / 2) + ({{ "{" }}abilita.{{ id }}.prof{{ "}" }} * {{ "{" }}proficiency_bonus{{ "}" }})]` |
+{%- endmacro %}
+
+{% macro view(path) -%}
+`=this.{{ path }}`
+{%- endmacro %}
+
+{% macro view_or_dash(path) -%}
+`=choice(this.{{ path }}, this.{{ path }}, "—")`
+{%- endmacro %}
+
+{% macro list_view(path) -%}
+`=join(this.{{ path }}, ", ")`
+{%- endmacro %}

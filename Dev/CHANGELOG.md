@@ -49,6 +49,7 @@
 - `session_runtime.js` separa viste sessione, live table e post-sessione; `session_views.js` resta bridge compatibile.
 - `check_runtime_load.js` carica il runtime DataviewJS con adapter Obsidian simulato e verifica gli export principali.
 - `player_safety.js` separa il gate anti-segreti/player-facing da `check_vault.js`.
+- [[docs/FANTASYWORLD_INTEGRATION]] documenta cosa promuovere dal laboratorio FantasyWorld: SRD PG, test dati, macro Jinja, assi tematici, cosmologia e regole plugin.
 - `import:map` come dispatch unico per Azgaar, Watabou City e Watabou Dungeon.
 - `check:release-artifact` genera una release temporanea, verifica cartella/ZIP e ripulisce `dist/`.
 - GitHub Actions esegue `npm run check` su push e pull request.

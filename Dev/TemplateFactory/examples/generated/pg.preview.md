@@ -98,6 +98,107 @@ tab: Connessioni
 
 
 
+
+tab: Scheda
+
+> [!infoboxwiki]- Identita Meccanica
+> Classe: `=choice(this.classe, this.classe, "—")`
+>
+> Livello: `=this.livello`
+>
+> Bonus competenza: `=this.proficiency_bonus`
+>
+> Specie: `=choice(this.specie, this.specie, "—")`
+>
+> Sottospecie: `=choice(this.sottospecie, this.sottospecie, "—")`
+>
+> Background: `=choice(this.background, this.background, "—")`
+>
+> Allineamento: `INPUT[text:allineamento]`
+
+## Punti ferita
+```meta-bind-js-view
+{punti_ferita.massimi} as maxHp
+{punti_ferita.attuali} as hp
+---
+const str = `**Punti ferita**: ${context.bound.hp} / ${context.bound.maxHp} \`INPUT[slider(minValue(0), maxValue(${context.bound.maxHp})):punti_ferita.attuali]\``;
+return engine.markdown.create(str);
+```
+
+```tabs
+tab: Statistiche
+| Statistica | Valore | Bonus | Bonus salvezza | Prof |
+|:-:|:-:|:-:|:-:|:-:|
+
+| Forza | `INPUT[number:caratteristiche.forza.stat]` | `VIEW[floor(({caratteristiche.forza.stat} - 10) / 2)]` | `VIEW[floor(({caratteristiche.forza.stat} - 10) / 2) + ({caratteristiche.forza.save_prof} * {proficiency_bonus})]` | `INPUT[inlineSelect(option(0, "—"), option(1, "✓"), option(2, "★")):caratteristiche.forza.save_prof]` |
+
+| Destrezza | `INPUT[number:caratteristiche.destrezza.stat]` | `VIEW[floor(({caratteristiche.destrezza.stat} - 10) / 2)]` | `VIEW[floor(({caratteristiche.destrezza.stat} - 10) / 2) + ({caratteristiche.destrezza.save_prof} * {proficiency_bonus})]` | `INPUT[inlineSelect(option(0, "—"), option(1, "✓"), option(2, "★")):caratteristiche.destrezza.save_prof]` |
+
+| Costituzione | `INPUT[number:caratteristiche.costituzione.stat]` | `VIEW[floor(({caratteristiche.costituzione.stat} - 10) / 2)]` | `VIEW[floor(({caratteristiche.costituzione.stat} - 10) / 2) + ({caratteristiche.costituzione.save_prof} * {proficiency_bonus})]` | `INPUT[inlineSelect(option(0, "—"), option(1, "✓"), option(2, "★")):caratteristiche.costituzione.save_prof]` |
+
+| Intelligenza | `INPUT[number:caratteristiche.intelligenza.stat]` | `VIEW[floor(({caratteristiche.intelligenza.stat} - 10) / 2)]` | `VIEW[floor(({caratteristiche.intelligenza.stat} - 10) / 2) + ({caratteristiche.intelligenza.save_prof} * {proficiency_bonus})]` | `INPUT[inlineSelect(option(0, "—"), option(1, "✓"), option(2, "★")):caratteristiche.intelligenza.save_prof]` |
+
+| Saggezza | `INPUT[number:caratteristiche.saggezza.stat]` | `VIEW[floor(({caratteristiche.saggezza.stat} - 10) / 2)]` | `VIEW[floor(({caratteristiche.saggezza.stat} - 10) / 2) + ({caratteristiche.saggezza.save_prof} * {proficiency_bonus})]` | `INPUT[inlineSelect(option(0, "—"), option(1, "✓"), option(2, "★")):caratteristiche.saggezza.save_prof]` |
+
+| Carisma | `INPUT[number:caratteristiche.carisma.stat]` | `VIEW[floor(({caratteristiche.carisma.stat} - 10) / 2)]` | `VIEW[floor(({caratteristiche.carisma.stat} - 10) / 2) + ({caratteristiche.carisma.save_prof} * {proficiency_bonus})]` | `INPUT[inlineSelect(option(0, "—"), option(1, "✓"), option(2, "★")):caratteristiche.carisma.save_prof]` |
+
+
+tab: Abilita
+| Abilita | Prof | Bonus |
+|:-:|:-:|:-:|
+
+| Acrobazia (Destrezza) | `INPUT[inlineSelect(option(0, "—"), option(1, "✓"), option(2, "★")):abilita.acrobazia.prof]` | `VIEW[floor(({caratteristiche.destrezza.stat} - 10) / 2) + ({abilita.acrobazia.prof} * {proficiency_bonus})]` |
+
+| Addestrare gli Animali (Saggezza) | `INPUT[inlineSelect(option(0, "—"), option(1, "✓"), option(2, "★")):abilita.addestrare_animali.prof]` | `VIEW[floor(({caratteristiche.saggezza.stat} - 10) / 2) + ({abilita.addestrare_animali.prof} * {proficiency_bonus})]` |
+
+| Arcano (Intelligenza) | `INPUT[inlineSelect(option(0, "—"), option(1, "✓"), option(2, "★")):abilita.arcano.prof]` | `VIEW[floor(({caratteristiche.intelligenza.stat} - 10) / 2) + ({abilita.arcano.prof} * {proficiency_bonus})]` |
+
+| Atletica (Forza) | `INPUT[inlineSelect(option(0, "—"), option(1, "✓"), option(2, "★")):abilita.atletica.prof]` | `VIEW[floor(({caratteristiche.forza.stat} - 10) / 2) + ({abilita.atletica.prof} * {proficiency_bonus})]` |
+
+| Inganno (Carisma) | `INPUT[inlineSelect(option(0, "—"), option(1, "✓"), option(2, "★")):abilita.inganno.prof]` | `VIEW[floor(({caratteristiche.carisma.stat} - 10) / 2) + ({abilita.inganno.prof} * {proficiency_bonus})]` |
+
+| Storia (Intelligenza) | `INPUT[inlineSelect(option(0, "—"), option(1, "✓"), option(2, "★")):abilita.storia.prof]` | `VIEW[floor(({caratteristiche.intelligenza.stat} - 10) / 2) + ({abilita.storia.prof} * {proficiency_bonus})]` |
+
+| Intuizione (Saggezza) | `INPUT[inlineSelect(option(0, "—"), option(1, "✓"), option(2, "★")):abilita.intuizione.prof]` | `VIEW[floor(({caratteristiche.saggezza.stat} - 10) / 2) + ({abilita.intuizione.prof} * {proficiency_bonus})]` |
+
+| Intimidire (Carisma) | `INPUT[inlineSelect(option(0, "—"), option(1, "✓"), option(2, "★")):abilita.intimidire.prof]` | `VIEW[floor(({caratteristiche.carisma.stat} - 10) / 2) + ({abilita.intimidire.prof} * {proficiency_bonus})]` |
+
+| Indagare (Intelligenza) | `INPUT[inlineSelect(option(0, "—"), option(1, "✓"), option(2, "★")):abilita.indagare.prof]` | `VIEW[floor(({caratteristiche.intelligenza.stat} - 10) / 2) + ({abilita.indagare.prof} * {proficiency_bonus})]` |
+
+| Medicina (Saggezza) | `INPUT[inlineSelect(option(0, "—"), option(1, "✓"), option(2, "★")):abilita.medicina.prof]` | `VIEW[floor(({caratteristiche.saggezza.stat} - 10) / 2) + ({abilita.medicina.prof} * {proficiency_bonus})]` |
+
+| Natura (Intelligenza) | `INPUT[inlineSelect(option(0, "—"), option(1, "✓"), option(2, "★")):abilita.natura.prof]` | `VIEW[floor(({caratteristiche.intelligenza.stat} - 10) / 2) + ({abilita.natura.prof} * {proficiency_bonus})]` |
+
+| Percezione (Saggezza) | `INPUT[inlineSelect(option(0, "—"), option(1, "✓"), option(2, "★")):abilita.percezione.prof]` | `VIEW[floor(({caratteristiche.saggezza.stat} - 10) / 2) + ({abilita.percezione.prof} * {proficiency_bonus})]` |
+
+| Intrattenere (Carisma) | `INPUT[inlineSelect(option(0, "—"), option(1, "✓"), option(2, "★")):abilita.intrattenere.prof]` | `VIEW[floor(({caratteristiche.carisma.stat} - 10) / 2) + ({abilita.intrattenere.prof} * {proficiency_bonus})]` |
+
+| Persuasione (Carisma) | `INPUT[inlineSelect(option(0, "—"), option(1, "✓"), option(2, "★")):abilita.persuasione.prof]` | `VIEW[floor(({caratteristiche.carisma.stat} - 10) / 2) + ({abilita.persuasione.prof} * {proficiency_bonus})]` |
+
+| Religione (Intelligenza) | `INPUT[inlineSelect(option(0, "—"), option(1, "✓"), option(2, "★")):abilita.religione.prof]` | `VIEW[floor(({caratteristiche.intelligenza.stat} - 10) / 2) + ({abilita.religione.prof} * {proficiency_bonus})]` |
+
+| Rapidità di Mano (Destrezza) | `INPUT[inlineSelect(option(0, "—"), option(1, "✓"), option(2, "★")):abilita.rapidita_di_mano.prof]` | `VIEW[floor(({caratteristiche.destrezza.stat} - 10) / 2) + ({abilita.rapidita_di_mano.prof} * {proficiency_bonus})]` |
+
+| Furtività (Destrezza) | `INPUT[inlineSelect(option(0, "—"), option(1, "✓"), option(2, "★")):abilita.furtivita.prof]` | `VIEW[floor(({caratteristiche.destrezza.stat} - 10) / 2) + ({abilita.furtivita.prof} * {proficiency_bonus})]` |
+
+| Sopravvivenza (Saggezza) | `INPUT[inlineSelect(option(0, "—"), option(1, "✓"), option(2, "★")):abilita.sopravvivenza.prof]` | `VIEW[floor(({caratteristiche.saggezza.stat} - 10) / 2) + ({abilita.sopravvivenza.prof} * {proficiency_bonus})]` |
+
+
+tab: Talenti
+`=join(this.talenti, ", ")`
+
+tab: Tratti
+`=join(this.tratti, ", ")`
+
+tab: Addestramento
+| Tipo | Valori |
+|---|---|
+| Armature | `=join(this.addestramento.armature, ", ")` |
+| Armi | `=join(this.addestramento.armi, ", ")` |
+```
+
+
+
 tab: PNG
 
 > [!scena] Persona Al Tavolo

@@ -156,6 +156,9 @@ tab: Potere
 > ```
 
 {% endif %}
+{% if blueprint_name == "pg" %}
+{% include "partials/pg_scheda_meccanica.md.j2" %}
+{% endif %}
 {% if is_png %}
 tab: PNG
 

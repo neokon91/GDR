@@ -13,31 +13,15 @@ pubblico: true
 > [!lettura] Portale condivisibile
 > Mostra solo materiale emerso al tavolo o marcato `pubblico: true`. I link diretti compaiono solo quando la nota non contiene campi DM evidenti.
 
-## Stato Portale
-
 ```dataviewjs
 const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+dv.header(2, "Stato Portale");
 gdr.renderPlayerPortalStatus(dv);
-```
-
-## Recap
-
-```dataviewjs
-const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+dv.header(2, "Recap");
 gdr.renderPlayerRecap(dv);
-```
-
-## Mappa
-
-```dataviewjs
-const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+dv.header(2, "Mappa");
 gdr.renderPlayerMap(dv);
-```
-
-## Mondo Conosciuto
-
-```dataviewjs
-const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+dv.header(2, "Mondo Conosciuto");
 gdr.renderPlayerView(dv);
 ```
 
@@ -51,9 +35,8 @@ SORT data DESC
 LIMIT 8
 ```
 
-## Controllo Sicurezza
-
 ```dataviewjs
 const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+dv.header(2, "Controllo Sicurezza");
 gdr.renderPublicSafety(dv);
 ```

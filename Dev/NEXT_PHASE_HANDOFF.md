@@ -67,10 +67,11 @@ Scopo: rendere mantenibile la catena scelta dei giocatori -> evento -> conseguen
 Priorita:
 
 1. Monitorare la CI GitHub su `main`; localmente `gh` richiede autenticazione e il repository non e leggibile via web anonimo.
-2. Estendere solo controlli automatici che riducono rischio reale: runtime load, player-safety, release artifact e importer.
-3. Estrarre i prossimi controlli densi da `check_vault.js` in moduli riusabili.
-4. Tenere `session_views.js` come bridge pubblico e non aggiungere nuove famiglie runtime dentro il bridge.
-5. Preparare la demo finale come codice generativo, lasciandola fuori dal sorgente fino all'ultima fase.
+2. Chiudere l'integrazione FantasyWorld gia avviata: SRD PG, test dati, macro Jinja e documentazione utente senza importare il laboratorio in blocco.
+3. Estendere solo controlli automatici che riducono rischio reale: runtime load, player-safety, release artifact, importer e dati SRD PG.
+4. Estrarre i prossimi controlli densi da `check_vault.js` in moduli riusabili.
+5. Tenere `session_views.js` come bridge pubblico e non aggiungere nuove famiglie runtime dentro il bridge.
+6. Preparare la demo finale come codice generativo, lasciandola fuori dal sorgente fino all'ultima fase.
 
 ## Vincoli Tecnici
 

@@ -47,6 +47,7 @@ Usa questa nota come porta d'ingresso. Non duplicare decisioni tecniche in file 
 | Confini della ZIP utente | [[Dev/Confine Release Repository]] |
 | Verifica release | [[Dev/RELEASE]] e [[Dev/Smoke Demo Finale]] |
 | Template, YAML e superfici generate | [[Dev/TemplateFactory/README]] |
+| Porting idee FantasyWorld | [[docs/FANTASYWORLD_INTEGRATION]] |
 
 ## Regole
 
