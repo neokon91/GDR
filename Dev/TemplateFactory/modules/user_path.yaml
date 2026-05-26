@@ -1,0 +1,138 @@
+id: user_path
+purpose: Percorso utente primario verificato dai check senza tenere workflow e CTA hardcoded in JavaScript.
+version: 0.1.0
+policy:
+  user_workflows_must_use_simple_mode: true
+  forbidden_user_block_markers:
+    - Plugin coinvolti
+required_release_config:
+  - .obsidian/app.json
+  - .obsidian/core-plugins.json
+  - .obsidian/community-plugins.json
+  - .obsidian/plugins/obsidian-meta-bind-plugin/data.json
+  - .obsidian/plugins/templater-obsidian/data.json
+  - .obsidian/plugins/dataview/data.json
+primary_path:
+  - workflow: onboarding_utente
+    page: Inizia Qui.md
+    label: Inizia Qui
+    required_buttons:
+      - nuovo-mondo-homebrew
+      - preparazione-sessione-risorse-preparazione-sessione
+      - gioca-hub-durante-il-gioco-durante-il-gioco
+      - fuori-scena-hub-cosa-succede-fuori-scena-cosa-succede-fuori-scena
+  - workflow: dashboard_dm
+    page: Hub/1. DM Dashboard.md
+    label: DM Dashboard
+    required_buttons:
+      - durante-il-gioco-durante-il-gioco
+      - prossima-sessione-risorse-preparazione-sessione
+      - worldbuilder-worldbuilder-dashboard
+      - campagna-da-ambientazione-campagna-da-ambientazione
+  - workflow: espandi_mondo
+    page: Hub/Worldbuilder Dashboard.md
+    label: Worldbuilder Dashboard
+    required_buttons:
+      - nuovo-mondo-homebrew
+      - wizard-nuova-entita-viva
+      - campagna-da-ambientazione-campagna-da-ambientazione
+  - workflow: campagna_ambientazione
+    page: Hub/Campagna da Ambientazione.md
+    label: Campagna da Ambientazione
+    required_buttons:
+      - campagna-da-regione-z-modelli-dm-campagna-da-regione-md
+      - arco-da-conflitto-z-modelli-dm-arco-da-conflitto-md
+      - nuova-sessione-z-modelli-dm-sessione-md
+  - workflow: prepara_sessione
+    page: Risorse/Preparazione Sessione.md
+    label: Preparazione Sessione
+    required_buttons:
+      - nuova-sessione-z-modelli-dm-sessione-md
+      - rendi-sessione-attiva
+      - durante-il-gioco-durante-il-gioco
+  - workflow: gioca_live
+    page: Hub/Durante il Gioco.md
+    label: Durante il Gioco
+    required_buttons:
+      - wizard-appunto-live
+      - registra-scelta-mondo
+      - avanza-clock
+      - post-sessione-guidato-risorse-post-sessione-guidato
+  - workflow: post_sessione
+    page: Risorse/Post Sessione Guidato.md
+    label: Post Sessione Guidato
+    required_buttons:
+      - wizard-fine-sessione
+      - applica-conseguenza
+      - propaga-a-entita
+      - fuori-scena-hub-cosa-succede-fuori-scena-cosa-succede-fuori-scena
+  - workflow: fuori_scena
+    page: Hub/Cosa Succede Fuori Scena.md
+    label: Cosa Succede Fuori Scena
+    required_buttons:
+      - post-sessione-guidato-risorse-post-sessione-guidato
+      - motore-mondo-vivo-motore-mondo-vivo
+      - prossima-sessione-risorse-preparazione-sessione
+  - workflow: atlante_mondo
+    page: Hub/Atlante del Mondo.md
+    label: Atlante del Mondo
+    required_buttons:
+      - nuova-cultura-z-modelli-worldbuilding-cultura-md
+      - nuovo-conflitto-z-modelli-worldbuilding-conflitto-md
+      - controllo-worldbuilding-controllo-worldbuilding
+  - workflow: controllo_worldbuilding
+    page: Hub/Controllo Worldbuilding.md
+    label: Controllo Worldbuilding
+    required_buttons:
+      - atlante-atlante-del-mondo-2
+      - worldbuilding-profondo-risorse-worldbuilding-profondo-2
+      - economia-e-rotte-economia-e-rotte
+  - workflow: economia_rotte
+    page: Hub/Economia E Rotte.md
+    label: Economia E Rotte
+    required_buttons:
+      - nuova-rotta-z-modelli-worldbuilding-rotta-md
+      - nuova-risorsa-z-modelli-worldbuilding-risorsa-md
+      - nuovo-mercato-z-modelli-worldbuilding-mercato-o-nodo-commerciale-md
+  - workflow: lore_hub
+    page: Hub/Lore Hub.md
+    label: Lore Hub
+    required_buttons:
+      - atlante-atlante-del-mondo-2
+      - calendario-mondi-calendario
+      - lore-capture-z-modelli-lore-capture-md
+  - workflow: motore_mondo_vivo
+    page: Hub/Motore Mondo Vivo.md
+    label: Motore Mondo Vivo
+    required_buttons:
+      - stato-campagna-mondi-stato-del-mondo
+      - cosa-succede-fuori-scena-cosa-succede-fuori-scena
+      - controllo-canone-controllo-canone
+  - workflow: controllo_canone
+    page: Hub/Controllo Canone.md
+    label: Controllo Canone
+    required_buttons:
+      - timeline-mondi-timeline-timeline
+      - revisione-lore-revisione-lore
+      - lore-hub-lore-hub
+  - workflow: compendium_mondo
+    page: Hub/Compendium Del Mondo.md
+    label: Compendium Del Mondo
+    required_buttons:
+      - nuovo-elemento-z-modelli-worldbuilding-compendium-del-mondo-md
+      - lore-hub-lore-hub
+      - nuova-risorsa-z-modelli-worldbuilding-risorsa-md
+  - workflow: bibbia_mondo
+    page: Hub/Bibbia del Mondo.md
+    label: Bibbia del Mondo
+    required_buttons:
+      - nuovo-mondo-homebrew
+      - atlante-del-mondo-atlante-del-mondo
+      - campagna-da-ambientazione-campagna-da-ambientazione
+  - workflow: iniziativa_combattimenti
+    page: Risorse/Iniziativa e Combattimenti.md
+    label: Iniziativa e Combattimenti
+    required_buttons:
+      - durante-il-gioco-durante-il-gioco-3
+      - nuovo-incontro-z-modelli-dm-incontro-md
+      - preparazione-sessione-risorse-preparazione-sessione

@@ -30,6 +30,7 @@
     "check:release": "node z.automazioni/check_release.js",
     "check:release-artifact": "node z.automazioni/check_release_artifact.js --with-demo",
     "check:obsidian-user": "node z.automazioni/check_obsidian_user_acceptance.js",
+    "check:obsidian-ux": "node z.automazioni/check_obsidian_user_acceptance.js --skip-workflow --skip-plugin-probes --page-settle-ms 2500",
     "check:obsidian-first-run": "node z.automazioni/check_obsidian_user_acceptance.js --fresh-install --accept-prompts",
     "check:importers": "node z.automazioni/check_importers.js",
     "render:templates": "python3 z.automazioni/render_template_factory.py",

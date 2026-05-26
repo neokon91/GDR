@@ -52,6 +52,7 @@ required_surfaces:
     - Dev/TemplateFactory/modules/link_targets.yaml
     - Dev/TemplateFactory/modules/tag_rules.yaml
     - Dev/TemplateFactory/modules/workflows.yaml
+    - Dev/TemplateFactory/modules/user_path.yaml
     - Dev/TemplateFactory/modules/source_pipeline.yaml
     - Dev/TemplateFactory/modules/repo_quality_contract.yaml
     - z.automazioni/import_srd_character_data.js
@@ -105,6 +106,7 @@ required_surfaces:
     - z.automazioni/check_runtime_load.js
     - z.automazioni/check_smoke.js
     - z.automazioni/check_validation_contract.js
+    - z.automazioni/check_user_path.js
     - z.automazioni/check_repo_quality_contract.js
     - z.automazioni/check_release_artifact.js
     - z.automazioni/check_release.js

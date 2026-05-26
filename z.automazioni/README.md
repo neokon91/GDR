@@ -20,6 +20,7 @@ Script usati da Templater, dashboard e manutenzione del vault.
 | `generate_workflow_data.js` | Genera JSON workflow da `workflows.yaml` e verifica che resti sincronizzato. |
 | `check_workflow_quick_actions.js` | Verifica che le pagine operative espongano i pulsanti rapidi dichiarati in YAML. |
 | `render_workflow_quick_actions.js` | Renderizza nelle pagine operative blocchi Markdown statici derivati dalle azioni rapide YAML. |
+| `check_user_path.js` | Verifica il percorso utente primario dichiarato in `user_path.yaml`. |
 | `audit_template_migration.py` | Confronta preview locali TemplateFactory e template reali, generando un report locale ignorato. |
 | `check_js.js` | Controllo sintattico ricorsivo degli script in `z.automazioni/` e `z.engine/`. |
 | `repo_hygiene.js` | Controllo repository: artefatti locali, note di prova residue e script npm essenziali. |
@@ -71,6 +72,7 @@ npm run check:templates
 npm run check:workflow-data
 npm run check:workflow-actions
 npm run check:workflow-render
+npm run check:obsidian-ux
 npm run check:obsidian-user
 npm run check:obsidian-first-run
 npm run generate:workflow-data

@@ -124,6 +124,22 @@ steps:
       - node
       - z.automazioni/render_workflow_quick_actions.js
       - --check
+  user_path:
+    purpose: Verifica il percorso utente primario dichiarato in YAML.
+    sources:
+      - Dev/TemplateFactory/modules/user_path.yaml
+      - Dev/TemplateFactory/modules/workflows.yaml
+      - z.automazioni/check_user_path.js
+      - z.automazioni/data/workflows/quick_actions.json
+      - .obsidian/plugins/obsidian-meta-bind-plugin/data.json
+    outputs:
+      - memoria
+    render:
+      - node
+      - z.automazioni/check_user_path.js
+    check:
+      - node
+      - z.automazioni/check_user_path.js
   validation_contract:
     purpose: Verifica i contratti YAML usati dai check di dominio e qualita delle note.
     sources:

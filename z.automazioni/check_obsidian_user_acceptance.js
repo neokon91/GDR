@@ -22,6 +22,7 @@ const PRESEED_DAEMON = !process.argv.includes("--no-daemon-preseed");
 const WITH_DEMO = !process.argv.includes("--no-demo");
 const RUN_WORKFLOW_SMOKE = !process.argv.includes("--skip-workflow");
 const RUN_CYCLE_SMOKE = RUN_WORKFLOW_SMOKE && !process.argv.includes("--skip-cycle");
+const RUN_PLUGIN_RUNTIME_PROBES = !process.argv.includes("--skip-plugin-probes");
 const REQUESTED_PORT = Number(optionValue("--port", "0")) || 0;
 const PAGE_SETTLE_MS = Number(optionValue("--page-settle-ms", "5000")) || 5000;
 const PROFILE_ROOT = path.join(os.homedir(), "Library/Application Support/obsidian-gdr-live-test");
@@ -97,6 +98,7 @@ function usage() {
         "  --contract-check   valida solo live_acceptance.yaml e non apre Obsidian",
         "  --skip-workflow    salta il workflow smoke Nuovo Mondo Homebrew",
         "  --skip-cycle       salta ciclo live sessione/post-sessione",
+        "  --skip-plugin-probes salta probe plugin profondi; utile per live UX rapido",
         "  --no-daemon-preseed diagnostica: non installa il daemon nel profilo prima del bootstrap",
         "  --keep-open        lascia Obsidian aperto a fine prova",
         "  --no-demo          crea release senza demo",
@@ -1311,7 +1313,7 @@ async function runLivePass(port) {
             cyclePages.push(await inspectPage(cdp, String(pagePath)));
         }
 
-        const pluginRuntimeProbes = await runPluginRuntimeProbes(cdp);
+        const pluginRuntimeProbes = RUN_PLUGIN_RUNTIME_PROBES ? await runPluginRuntimeProbes(cdp) : null;
 
         return { summary, results, workflow, workflowPages, cycle, cyclePages, pluginRuntimeProbes, events: cdp.events };
     } finally {
@@ -1343,7 +1345,7 @@ function validateReport(report) {
     for (const result of cyclePages) {
         errors.push(...validatePageResult(result, "post-cycle"));
     }
-    errors.push(...validatePluginRuntimeProbes(pluginRuntimeProbes));
+    if (RUN_PLUGIN_RUNTIME_PROBES) errors.push(...validatePluginRuntimeProbes(pluginRuntimeProbes));
     if (events.length) errors.push(`eventi console globali nel live pass: ${JSON.stringify(events)}`);
     return errors;
 }
@@ -1552,7 +1554,9 @@ async function main() {
         const cycleText = RUN_CYCLE_SMOKE
             ? `, ciclo sessione/post-sessione ${CYCLE_SMOKE.expected_session_name} verificato`
             : "";
-        const probesText = `, ${report.pluginRuntimeProbes?.probeCount ?? 0} probe plugin runtime verificati`;
+        const probesText = RUN_PLUGIN_RUNTIME_PROBES
+            ? `, ${report.pluginRuntimeProbes?.probeCount ?? 0} probe plugin runtime verificati`
+            : ", probe plugin profondi saltati";
         const uxText = `, ${UX_SURFACE_CHECKS.required_visible_text_by_page.length} gate UX visibili verificati`;
         console.log(`Obsidian user-acceptance OK: ${report.summary.expectedPluginCount} plugin caricati, ${report.results.length} pagine first-run verificate${uxText}${probesText}${workflowText}${cycleText}.`);
         markProfileReady();
