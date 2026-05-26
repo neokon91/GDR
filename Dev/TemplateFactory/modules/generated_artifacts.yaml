@@ -55,7 +55,10 @@ artifacts:
     targets: workflow entry_points
     check: npm run check:workflow-render
   metabind_config:
-    source: Dev/TemplateFactory/modules/metabind_config.yaml
+    sources:
+      - Dev/TemplateFactory/modules/metabind_config.yaml
+      - Dev/TemplateFactory/modules/metabind_inputs.yaml
+      - Dev/TemplateFactory/modules/metabind_buttons.yaml
     target: .obsidian/plugins/obsidian-meta-bind-plugin/data.json
     check: npm run check:metabind-config
   metadata_surfaces:

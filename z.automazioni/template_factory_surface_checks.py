@@ -104,11 +104,7 @@ def validate_workflow_quick_actions(modules: dict[str, dict], errors: list[str])
         for button in modules["metabind_buttons"].get("buttons", {}).values()
         if button.get("id")
     }
-    generated_button_ids = {
-        str(button.get("id"))
-        for button in modules["metabind_config"].get("config", {}).get("buttonTemplates", []) or []
-        if button.get("id")
-    }
+    generated_button_ids = button_ids
 
     if not workflow_map:
         fail("workflows: nessun flusso operativo definito", errors)

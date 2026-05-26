@@ -15,18 +15,73 @@ sys.dont_write_bytecode = True
 
 ROOT = Path.cwd()
 SOURCE = ROOT / "Dev" / "TemplateFactory" / "modules" / "metabind_config.yaml"
+INPUTS_SOURCE = ROOT / "Dev" / "TemplateFactory" / "modules" / "metabind_inputs.yaml"
+BUTTONS_SOURCE = ROOT / "Dev" / "TemplateFactory" / "modules" / "metabind_buttons.yaml"
 TARGET = ROOT / ".obsidian" / "plugins" / "obsidian-meta-bind-plugin" / "data.json"
 
 
-def load_source() -> dict[str, Any]:
-    if not SOURCE.exists():
-        raise FileNotFoundError(f"{SOURCE.relative_to(ROOT)} mancante")
-    data = yaml.safe_load(SOURCE.read_text(encoding="utf-8")) or {}
+def load_yaml(path: Path) -> dict[str, Any]:
+    if not path.exists():
+        raise FileNotFoundError(f"{path.relative_to(ROOT)} mancante")
+    data = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
     if not isinstance(data, dict):
-        raise ValueError(f"{SOURCE.relative_to(ROOT)}: root YAML non valida")
+        raise ValueError(f"{path.relative_to(ROOT)}: root YAML non valida")
+    return data
+
+
+def load_source() -> dict[str, Any]:
+    data = load_yaml(SOURCE)
     config = data.get("config")
     if not isinstance(config, dict):
         raise ValueError(f"{SOURCE.relative_to(ROOT)}: config mancante")
+    return dict(config)
+
+
+def load_inputs() -> list[dict[str, str]]:
+    data = load_yaml(INPUTS_SOURCE)
+    inputs = data.get("inputs")
+    if not isinstance(inputs, dict):
+        raise ValueError(f"{INPUTS_SOURCE.relative_to(ROOT)}: inputs deve essere un oggetto")
+
+    rendered: list[dict[str, str]] = []
+    for key, item in inputs.items():
+        if key == "list_block":
+            continue
+        if not isinstance(item, dict):
+            raise ValueError(f"{INPUTS_SOURCE.relative_to(ROOT)}: input non valido {key}")
+        name = str(item.get("name") or item.get("template_name") or "").strip()
+        declaration = str(item.get("declaration") or "").strip()
+        if not name or not declaration:
+            raise ValueError(f"{INPUTS_SOURCE.relative_to(ROOT)}: {key} senza name/declaration")
+        rendered.append({"name": name, "declaration": declaration})
+    return rendered
+
+
+def load_buttons() -> list[dict[str, Any]]:
+    data = load_yaml(BUTTONS_SOURCE)
+    buttons = data.get("buttons")
+    if not isinstance(buttons, dict):
+        raise ValueError(f"{BUTTONS_SOURCE.relative_to(ROOT)}: buttons deve essere un oggetto")
+
+    rendered: list[dict[str, Any]] = []
+    for key, item in buttons.items():
+        if not isinstance(item, dict):
+            raise ValueError(f"{BUTTONS_SOURCE.relative_to(ROOT)}: button non valido {key}")
+        button = {
+            field: value
+            for field, value in item.items()
+            if field in {"label", "style", "actions", "id"}
+        }
+        if not button.get("style"):
+            button["style"] = "primary"
+        rendered.append(button)
+    return rendered
+
+
+def compose_config() -> dict[str, Any]:
+    config = load_source()
+    config["inputFieldTemplates"] = load_inputs()
+    config["buttonTemplates"] = load_buttons()
     return config
 
 
@@ -44,11 +99,11 @@ def validate_config(config: dict[str, Any]) -> list[str]:
         name = str((item or {}).get("name", "")).strip()
         declaration = str((item or {}).get("declaration", "")).strip()
         if not name:
-            errors.append(f"metabind_config.yaml: inputFieldTemplates[{index}] senza name")
+            errors.append(f"metabind_inputs.yaml: inputFieldTemplates[{index}] senza name")
         if not declaration:
-            errors.append(f"metabind_config.yaml: inputFieldTemplates[{index}] senza declaration")
+            errors.append(f"metabind_inputs.yaml: inputFieldTemplates[{index}] senza declaration")
         if name in input_names:
-            errors.append(f"metabind_config.yaml: input duplicato {name}")
+            errors.append(f"metabind_inputs.yaml: input duplicato {name}")
         input_names.add(name)
 
     button_ids: set[str] = set()
@@ -57,11 +112,11 @@ def validate_config(config: dict[str, Any]) -> list[str]:
         label = str((button or {}).get("label", "")).strip()
         actions = (button or {}).get("actions")
         if not button_id:
-            errors.append(f"metabind_config.yaml: buttonTemplates[{index}] senza id")
+            errors.append(f"metabind_buttons.yaml: buttonTemplates[{index}] senza id")
         if not label:
-            errors.append(f"metabind_config.yaml: buttonTemplates[{index}] senza label")
+            errors.append(f"metabind_buttons.yaml: buttonTemplates[{index}] senza label")
         if button_id in button_ids:
-            errors.append(f"metabind_config.yaml: button duplicato {button_id}")
+            errors.append(f"metabind_buttons.yaml: button duplicato {button_id}")
         button_ids.add(button_id)
         if not isinstance(actions, list) or not actions:
             errors.append(f"metabind_config.yaml: {button_id or index} senza actions")
@@ -78,7 +133,7 @@ def main() -> int:
     parser.add_argument("--check", action="store_true", help="Verifica che data.json sia allineato al YAML")
     args = parser.parse_args()
 
-    config = load_source()
+    config = compose_config()
     errors = validate_config(config)
     if errors:
         print("Meta Bind config non valida:", file=sys.stderr)

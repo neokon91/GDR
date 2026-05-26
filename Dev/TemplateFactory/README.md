@@ -66,6 +66,8 @@ npm run audit:templates
 
 `render:obsidian-config` genera i JSON di configurazione Obsidian dichiarati in `modules/obsidian_config.yaml`; i manifest dei plugin restano JSON nativi del plugin.
 
+`render:metabind-config` assembla `.obsidian/plugins/obsidian-meta-bind-plugin/data.json` da tre YAML leggibili: impostazioni base, input e pulsanti.
+
 `release:clean` materializza `z.modelli` direttamente dentro `dist/vault-gdr-clean`: il repo sorgente non deve tracciare template finali generati.
 
 `audit:templates` confronta anteprime locali e target dichiarati in `template_blueprints.yaml`; il report resta output locale ignorato.

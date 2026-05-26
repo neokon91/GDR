@@ -12,6 +12,11 @@
   "viewFieldDisplayNullAsEmpty": false,
   "enableSyntaxHighlighting": true,
   "enableEditorRightClickMenu": true,
+  "excludedFolders": [
+    "SRD",
+    "z.automazioni",
+    "z.modelli"
+  ],
   "inputFieldTemplates": [
     {
       "name": "mondo",
@@ -2013,10 +2018,5 @@
       ],
       "id": "wizard-sessione-da-output"
     }
-  ],
-  "excludedFolders": [
-    "SRD",
-    "z.automazioni",
-    "z.modelli"
   ]
 }

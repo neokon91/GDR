@@ -1,171 +1,1308 @@
 id: metabind_buttons
-purpose: Pulsanti Meta Bind canonici e azioni runtime collegate.
-version: 0.1.0
+purpose: Button Template Meta Bind canonici usati per generare data.json, workflow e fallback operativi.
+version: 0.2.0
 buttons:
-  nuova_sessione:
-    id: nuova-sessione-z-modelli-dm-sessione-md
-    label: Nuova Sessione
-    action: templaterCreateNote
-    template: z.modelli/dm/Sessione.md
-    fallback: '[[z.modelli/dm/Sessione]]'
-  nuovo_mondo_homebrew:
-    id: nuovo-mondo-homebrew
-    label: Nuovo Mondo
-    action: runTemplaterFile
-    template: z.modelli/wizard/Nuovo Mondo Homebrew.md
-    fallback: '[[z.modelli/wizard/Nuovo Mondo Homebrew]]'
-  wizard_nuova_entita_viva:
-    id: wizard-nuova-entita-viva
-    label: Nuova Entita
-    action: runTemplaterFile
-    template: z.modelli/wizard/Nuova Entita Viva.md
-    fallback: '[[z.modelli/wizard/Nuova Entita Viva]]'
-  durante_il_gioco:
-    id: durante-il-gioco-durante-il-gioco
-    label: Durante Il Gioco
-    action: open
-    link: '[[Hub/Durante il Gioco]]'
-    fallback: '[[Hub/Durante il Gioco]]'
-  fuori_scena:
-    id: fuori-scena-hub-cosa-succede-fuori-scena-cosa-succede-fuori-scena
-    label: Fuori Scena
-    action: open
-    link: '[[Hub/Cosa Succede Fuori Scena|Cosa Succede Fuori Scena]]'
-    fallback: '[[Hub/Cosa Succede Fuori Scena]]'
-  post_sessione_guidato:
-    id: post-sessione-guidato-risorse-post-sessione-guidato
-    label: Post Sessione Guidato
-    action: open
-    link: '[[Risorse/Post Sessione Guidato]]'
-    fallback: '[[Risorse/Post Sessione Guidato]]'
-  wizard_appunto_live:
-    id: wizard-appunto-live
-    label: Appunto Live
-    action: templaterCreateNote
-    template: z.modelli/wizard/Appunto Live.md
-    folder: Inbox
-    fallback: '[[z.modelli/wizard/Appunto Live]]'
-  wizard_conseguenza:
-    id: wizard-conseguenza
-    label: Conseguenza
-    action: templaterCreateNote
-    template: z.modelli/wizard/Conseguenza.md
-    folder: Inbox
-    fallback: '[[z.modelli/wizard/Conseguenza]]'
-  aggiorna_scena:
-    id: aggiorna-scena-z-modelli-dm-aggiorna-scena-corrente-md
+  aggiorna_scena_z_modelli_dm_aggiorna_scena_corrente_md:
     label: Aggiorna Scena
-    action: runTemplaterFile
-    template: z.modelli/dm/Aggiorna Scena Corrente.md
+    style: primary
+    actions:
+    - type: runTemplaterFile
+      templateFile: z.modelli/dm/Aggiorna Scena Corrente.md
+    id: aggiorna-scena-z-modelli-dm-aggiorna-scena-corrente-md
     fallback: 'Azione manuale: aggiornare scena_corrente sulla sessione attiva'
-  aggiungi_decisione:
-    id: aggiungi-decisione-z-modelli-dm-aggiungi-decisione-live-md
+  aggiungi_decisione_z_modelli_dm_aggiungi_decisione_live_md:
     label: Aggiungi Decisione
-    action: runTemplaterFile
-    template: z.modelli/dm/Aggiungi Decisione Live.md
+    style: primary
+    actions:
+    - type: runTemplaterFile
+      templateFile: z.modelli/dm/Aggiungi Decisione Live.md
+    id: aggiungi-decisione-z-modelli-dm-aggiungi-decisione-live-md
     fallback: 'Azione manuale: aggiornare decisioni_prese e output_sessione sulla sessione attiva'
-  collega_appunto_live:
-    id: collega-appunto-z-modelli-dm-collega-appunto-live-md
+  collega_appunto_z_modelli_dm_collega_appunto_live_md:
     label: Collega Appunto
-    action: runTemplaterFile
-    template: z.modelli/dm/Collega Appunto Live.md
+    style: primary
+    actions:
+    - type: runTemplaterFile
+      templateFile: z.modelli/dm/Collega Appunto Live.md
+    id: collega-appunto-z-modelli-dm-collega-appunto-live-md
     fallback: 'Azione manuale: collegare un appunto Inbox ad appunti_live della sessione attiva'
-  wizard_fine_sessione:
-    id: wizard-fine-sessione
-    label: Fine Sessione
-    action: runTemplaterFile
-    template: z.modelli/wizard/Fine Sessione.md
-    fallback: '[[z.modelli/wizard/Fine Sessione]]'
-  wizard_sessione_da_output:
-    id: wizard-sessione-da-output
+  aiuto_risorse_faq:
+    label: Aiuto
+    style: default
+    actions:
+    - type: open
+      link: '[[Risorse/FAQ]]'
+    id: aiuto-risorse-faq
+  aiuto_risorse_se_qualcosa_non_funziona:
+    label: Aiuto
+    style: primary
+    actions:
+    - type: open
+      link: '[[Risorse/Se Qualcosa Non Funziona]]'
+    id: aiuto-risorse-se-qualcosa-non-funziona
+  apri_bacheca_post_sessione_z_bacheche_post_sessione:
+    label: Apri Bacheca Post Sessione
+    style: primary
+    actions:
+    - type: open
+      link: '[[z.bacheche/Post Sessione]]'
+    id: apri-bacheca-post-sessione-z-bacheche-post-sessione
+  arco_da_conflitto_z_modelli_dm_arco_da_conflitto_md:
+    label: Arco Da Conflitto
+    style: primary
+    actions:
+    - type: templaterCreateNote
+      templateFile: z.modelli/dm/Arco Da Conflitto.md
+      folderPath: Mondi/Missioni
+      openNote: true
+    id: arco-da-conflitto-z-modelli-dm-arco-da-conflitto-md
+  atlante_atlante_del_mondo:
+    label: Atlante
+    style: default
+    actions:
+    - type: open
+      link: '[[Atlante del Mondo]]'
+    id: atlante-atlante-del-mondo
+  atlante_atlante_del_mondo_2:
+    label: Atlante
+    style: primary
+    actions:
+    - type: open
+      link: '[[Atlante del Mondo]]'
+    id: atlante-atlante-del-mondo-2
+  atlante_del_mondo_atlante_del_mondo:
+    label: Atlante Del Mondo
+    style: primary
+    actions:
+    - type: open
+      link: '[[Atlante del Mondo]]'
+    id: atlante-del-mondo-atlante-del-mondo
+  bacheca_post_sessione_z_bacheche_post_sessione:
+    label: Bacheca Post Sessione
+    style: primary
+    actions:
+    - type: open
+      link: '[[z.bacheche/Post Sessione]]'
+    id: bacheca-post-sessione-z-bacheche-post-sessione
+  bibbia_del_mondo_bibbia_del_mondo:
+    label: Bibbia Del Mondo
+    style: default
+    actions:
+    - type: open
+      link: '[[Bibbia del Mondo]]'
+    id: bibbia-del-mondo-bibbia-del-mondo
+  bibbia_del_mondo_bibbia_del_mondo_2:
+    label: Bibbia Del Mondo
+    style: primary
+    actions:
+    - type: open
+      link: '[[Bibbia del Mondo]]'
+    id: bibbia-del-mondo-bibbia-del-mondo-2
+  calendario_mondi_calendario:
+    label: Calendario
+    style: default
+    actions:
+    - type: open
+      link: '[[Mondi/Calendario]]'
+    id: calendario-mondi-calendario
+  campagna_da_ambientazione_campagna_da_ambientazione:
+    label: Campagna Da Ambientazione
+    style: primary
+    actions:
+    - type: open
+      link: '[[Campagna da Ambientazione]]'
+    id: campagna-da-ambientazione-campagna-da-ambientazione
+  campagna_da_regione_z_modelli_dm_campagna_da_regione_md:
+    label: Campagna Da Regione
+    style: primary
+    actions:
+    - type: templaterCreateNote
+      templateFile: z.modelli/dm/Campagna Da Regione.md
+      folderPath: Campagne
+      openNote: true
+    id: campagna-da-regione-z-modelli-dm-campagna-da-regione-md
+  come_usare_i_clock_risorse_come_usare_i_clock:
+    label: Come Usare I Clock
+    style: primary
+    actions:
+    - type: open
+      link: '[[Risorse/Come Usare I Clock]]'
+    id: come-usare-i-clock-risorse-come-usare-i-clock
+  compendium_hub_compendium_del_mondo_compendium_del_mondo:
+    label: Compendium
+    style: default
+    actions:
+    - type: open
+      link: '[[Hub/Compendium Del Mondo|Compendium Del Mondo]]'
+    id: compendium-hub-compendium-del-mondo-compendium-del-mondo
+  conseguenza_z_modelli_live_conseguenza_md:
+    label: Conseguenza
+    style: primary
+    actions:
+    - type: templaterCreateNote
+      templateFile: z.modelli/Live Conseguenza.md
+      folderPath: Inbox
+      openNote: true
+    id: conseguenza-z-modelli-live-conseguenza-md
+  controllo_canone_controllo_canone:
+    label: Controllo Canone
+    style: primary
+    actions:
+    - type: open
+      link: '[[Controllo Canone]]'
+    id: controllo-canone-controllo-canone
+  controllo_vault_risorse_controllo_vault:
+    label: Controllo Vault
+    style: primary
+    actions:
+    - type: open
+      link: '[[Risorse/Controllo Vault]]'
+    id: controllo-vault-risorse-controllo-vault
+  controllo_vault_risorse_controllo_vault_2:
+    label: Controllo Vault
+    style: default
+    actions:
+    - type: open
+      link: '[[Risorse/Controllo Vault]]'
+    id: controllo-vault-risorse-controllo-vault-2
+  controllo_worldbuilding_controllo_worldbuilding:
+    label: Controllo Worldbuilding
+    style: primary
+    actions:
+    - type: open
+      link: '[[Controllo Worldbuilding]]'
+    id: controllo-worldbuilding-controllo-worldbuilding
+  cosa_succede_fuori_scena_cosa_succede_fuori_scena:
+    label: Cosa Succede Fuori Scena
+    style: primary
+    actions:
+    - type: open
+      link: '[[Cosa Succede Fuori Scena]]'
+    id: cosa-succede-fuori-scena-cosa-succede-fuori-scena
+  cosa_succede_fuori_scena_cosa_succede_fuori_scena_2:
+    label: Cosa Succede Fuori Scena
+    style: default
+    actions:
+    - type: open
+      link: '[[Cosa Succede Fuori Scena]]'
+    id: cosa-succede-fuori-scena-cosa-succede-fuori-scena-2
+  cosmologia_z_modelli_worldbuilding_cosmologia_md:
+    label: Cosmologia
+    style: primary
+    actions:
+    - type: templaterCreateNote
+      templateFile: z.modelli/worldbuilding/Cosmologia.md
+      folderPath: Mondi/Cosmologia
+      openNote: true
+    id: cosmologia-z-modelli-worldbuilding-cosmologia-md
+  costruisci_mondo_hub_atlante_del_mondo_atlante_del_mondo:
+    label: Costruisci Mondo
+    style: primary
+    actions:
+    - type: open
+      link: '[[Hub/Atlante del Mondo|Atlante del Mondo]]'
+    id: costruisci-mondo-hub-atlante-del-mondo-atlante-del-mondo
+  crea_campagna_hub_campagna_da_ambientazione_campagna_da_ambientazione:
+    label: Crea Campagna
+    style: primary
+    actions:
+    - type: open
+      link: '[[Hub/Campagna da Ambientazione|Campagna da Ambientazione]]'
+    id: crea-campagna-hub-campagna-da-ambientazione-campagna-da-ambientazione
+  creazione_entita_risorse_creazione_guidata_entita:
+    label: Creazione Entità
+    style: default
+    actions:
+    - type: open
+      link: '[[Risorse/Creazione Guidata Entità]]'
+    id: creazione-entita-risorse-creazione-guidata-entita
+  creazione_guidata_entita_risorse_creazione_guidata_entita:
+    label: Creazione Guidata Entità
+    style: default
+    actions:
+    - type: open
+      link: '[[Risorse/Creazione Guidata Entità]]'
+    id: creazione-guidata-entita-risorse-creazione-guidata-entita
+  dispense_mondi_dispense_dispense:
+    label: Dispense
+    style: primary
+    actions:
+    - type: open
+      link: '[[Mondi/Dispense/Dispense]]'
+    id: dispense-mondi-dispense-dispense
+  dm_dashboard_1_dm_dashboard:
+    label: DM Dashboard
+    style: primary
+    actions:
+    - type: open
+      link: '[[1. DM Dashboard]]'
+    id: dm-dashboard-1-dm-dashboard
+  durante_il_gioco_durante_il_gioco:
+    label: Durante Il Gioco
+    style: primary
+    actions:
+    - type: open
+      link: '[[Durante il Gioco]]'
+    id: durante-il-gioco-durante-il-gioco
+    fallback: '[[Hub/Durante il Gioco]]'
+  durante_il_gioco_durante_il_gioco_2:
+    label: Durante Il Gioco
+    style: default
+    actions:
+    - type: open
+      link: '[[Durante il Gioco]]'
+    id: durante-il-gioco-durante-il-gioco-2
+  durante_il_gioco_durante_il_gioco_3:
+    label: Durante il Gioco
+    style: primary
+    actions:
+    - type: open
+      link: '[[Durante il Gioco]]'
+    id: durante-il-gioco-durante-il-gioco-3
+  economia_e_rotte_economia_e_rotte:
+    label: Economia E Rotte
+    style: default
+    actions:
+    - type: open
+      link: '[[Economia E Rotte]]'
+    id: economia-e-rotte-economia-e-rotte
+  economia_e_rotte_economia_e_rotte_2:
+    label: Economia E Rotte
+    style: primary
+    actions:
+    - type: open
+      link: '[[Economia E Rotte]]'
+    id: economia-e-rotte-economia-e-rotte-2
+  evento_live_z_modelli_live_evento_md:
+    label: Evento Live
+    style: primary
+    actions:
+    - type: templaterCreateNote
+      templateFile: z.modelli/Live Evento.md
+      folderPath: Inbox
+      openNote: true
+    id: evento-live-z-modelli-live-evento-md
+  evento_lore_z_modelli_lore_capture_md:
+    label: Evento / Lore
+    style: primary
+    actions:
+    - type: templaterCreateNote
+      templateFile: z.modelli/Lore Capture.md
+      folderPath: Inbox
+      openNote: true
+    id: evento-lore-z-modelli-lore-capture-md
+  evento_storico_z_modelli_evento_storico_md:
+    label: Evento Storico
+    style: primary
+    actions:
+    - type: templaterCreateNote
+      templateFile: z.modelli/Evento Storico.md
+      folderPath: Mondi/Timeline
+      openNote: true
+    id: evento-storico-z-modelli-evento-storico-md
+  fronti_risorse_fronti_di_campagna:
+    label: Fronti
+    style: default
+    actions:
+    - type: open
+      link: '[[Risorse/Fronti Di Campagna]]'
+    id: fronti-risorse-fronti-di-campagna
+  fuori_scena_cosa_succede_fuori_scena:
+    label: Fuori Scena
+    style: primary
+    actions:
+    - type: open
+      link: '[[Cosa Succede Fuori Scena]]'
+    id: fuori-scena-cosa-succede-fuori-scena
+  fuori_scena_cosa_succede_fuori_scena_default:
+    label: Fuori Scena
+    style: default
+    actions:
+    - type: open
+      link: '[[Cosa Succede Fuori Scena]]'
+    id: fuori-scena-cosa-succede-fuori-scena-default
+  fuori_scena_hub_cosa_succede_fuori_scena_cosa_succede_fuori_scena:
+    label: Fuori Scena
+    style: primary
+    actions:
+    - type: open
+      link: '[[Hub/Cosa Succede Fuori Scena|Cosa Succede Fuori Scena]]'
+    id: fuori-scena-hub-cosa-succede-fuori-scena-cosa-succede-fuori-scena
+    fallback: '[[Hub/Cosa Succede Fuori Scena]]'
+  generatore_fantasy_fantasy_content_generator_open_generator:
+    label: Generatore Fantasy
+    style: default
+    actions:
+    - type: command
+      command: fantasy-content-generator:open-fantasy-generator
+    id: generatore-fantasy-fantasy-content-generator-open-generator
+  generatore_fantasy_fantasy_content_generator_open_generator_2:
+    label: Generatore Fantasy
+    style: primary
+    actions:
+    - type: command
+      command: fantasy-content-generator:open-fantasy-generator
+    id: generatore-fantasy-fantasy-content-generator-open-generator-2
+  geopolitica_geopolitical_dashboard:
+    label: Geopolitica
+    style: default
+    actions:
+    - type: open
+      link: '[[Geopolitical Dashboard]]'
+    id: geopolitica-geopolitical-dashboard
+  geopolitica_geopolitical_dashboard_2:
+    label: Geopolitica
+    style: primary
+    actions:
+    - type: open
+      link: '[[Geopolitical Dashboard]]'
+    id: geopolitica-geopolitical-dashboard-2
+  gioca_hub_durante_il_gioco_durante_il_gioco:
+    label: Gioca
+    style: primary
+    actions:
+    - type: open
+      link: '[[Hub/Durante il Gioco|Durante il Gioco]]'
+    id: gioca-hub-durante-il-gioco-durante-il-gioco
+  guida_dm_risorse_guida_dm:
+    label: Guida DM
+    style: primary
+    actions:
+    - type: open
+      link: '[[Risorse/Guida DM]]'
+    id: guida-dm-risorse-guida-dm
+  inbox_inbox_inbox:
+    label: Inbox
+    style: primary
+    actions:
+    - type: open
+      link: '[[Inbox/Inbox]]'
+    id: inbox-inbox-inbox
+  inbox_inbox_inbox_2:
+    label: Inbox
+    style: default
+    actions:
+    - type: open
+      link: '[[Inbox/Inbox]]'
+    id: inbox-inbox-inbox-2
+  indice_mondo_mondi_mondo:
+    label: Indice Mondo
+    style: primary
+    actions:
+    - type: open
+      link: '[[Mondi/Mondo]]'
+    id: indice-mondo-mondi-mondo
+  inizia_qui_inizia_qui:
+    label: Inizia Qui
+    style: default
+    actions:
+    - type: open
+      link: '[[Inizia Qui]]'
+    id: inizia-qui-inizia-qui
+  iniziativa_risorse_iniziativa_e_combattimenti:
+    label: Iniziativa
+    style: primary
+    actions:
+    - type: open
+      link: '[[Risorse/Iniziativa e Combattimenti]]'
+    id: iniziativa-risorse-iniziativa-e-combattimenti
+  lore_capture_z_modelli_lore_capture_md:
+    label: Lore Capture
+    style: primary
+    actions:
+    - type: templaterCreateNote
+      templateFile: z.modelli/Lore Capture.md
+      folderPath: Inbox
+      openNote: true
+    id: lore-capture-z-modelli-lore-capture-md
+  lore_hub_lore_hub:
+    label: Lore Hub
+    style: default
+    actions:
+    - type: open
+      link: '[[Lore Hub]]'
+    id: lore-hub-lore-hub
+  lore_hub_lore_hub_2:
+    label: Lore Hub
+    style: primary
+    actions:
+    - type: open
+      link: '[[Lore Hub]]'
+    id: lore-hub-lore-hub-2
+  luogo_improvvisato_z_modelli_live_luogo_md:
+    label: Luogo Improvvisato
+    style: primary
+    actions:
+    - type: templaterCreateNote
+      templateFile: z.modelli/Live Luogo.md
+      folderPath: Inbox
+      openNote: true
+    id: luogo-improvvisato-z-modelli-live-luogo-md
+  mappe_risorse_mappe_mappe:
+    label: Mappe
+    style: primary
+    actions:
+    - type: open
+      link: '[[Risorse/Mappe/Mappe]]'
+    id: mappe-risorse-mappe-mappe
+  materiali_al_tavolo_risorse_materiali_al_tavolo:
+    label: Materiali Al Tavolo
+    style: default
+    actions:
+    - type: open
+      link: '[[Risorse/Materiali Al Tavolo]]'
+    id: materiali-al-tavolo-risorse-materiali-al-tavolo
+  mondo_vivo_motore_mondo_vivo:
+    label: Mondo Vivo
+    style: primary
+    actions:
+    - type: open
+      link: '[[Motore Mondo Vivo]]'
+    id: mondo-vivo-motore-mondo-vivo
+  mondo_vivo_motore_mondo_vivo_2:
+    label: Mondo Vivo
+    style: default
+    actions:
+    - type: open
+      link: '[[Motore Mondo Vivo]]'
+    id: mondo-vivo-motore-mondo-vivo-2
+  motore_mondo_vivo_motore_mondo_vivo:
+    label: Motore Mondo Vivo
+    style: primary
+    actions:
+    - type: open
+      link: '[[Motore Mondo Vivo]]'
+    id: motore-mondo-vivo-motore-mondo-vivo
+  nota_grezza_z_modelli_live_nota_grezza_md:
+    label: Nota Grezza
+    style: primary
+    actions:
+    - type: templaterCreateNote
+      templateFile: z.modelli/Live Nota Grezza.md
+      folderPath: Inbox
+      openNote: true
+    id: nota-grezza-z-modelli-live-nota-grezza-md
+  nota_rapida_z_modelli_nota_rapida_md:
+    label: Nota Rapida
+    style: primary
+    actions:
+    - type: templaterCreateNote
+      templateFile: z.modelli/Nota Rapida.md
+      folderPath: Inbox
+      openNote: true
+    id: nota-rapida-z-modelli-nota-rapida-md
+  nuova_campagna_z_modelli_dm_campagna_md:
+    label: Nuova Campagna
+    style: primary
+    actions:
+    - type: templaterCreateNote
+      templateFile: z.modelli/dm/Campagna.md
+      folderPath: Campagne
+      openNote: true
+    id: nuova-campagna-z-modelli-dm-campagna-md
+  nuova_conseguenza_z_modelli_live_conseguenza_md:
+    label: Nuova Conseguenza
+    style: primary
+    actions:
+    - type: templaterCreateNote
+      templateFile: z.modelli/Live Conseguenza.md
+      folderPath: Inbox
+      openNote: true
+    id: nuova-conseguenza-z-modelli-live-conseguenza-md
+  nuova_conseguenza_z_modelli_live_conseguenza_md_default:
+    label: Nuova Conseguenza
+    style: default
+    actions:
+    - type: templaterCreateNote
+      templateFile: z.modelli/Live Conseguenza.md
+      folderPath: Inbox
+      openNote: true
+    id: nuova-conseguenza-z-modelli-live-conseguenza-md-default
+  nuova_creatura_z_modelli_creatura_md:
+    label: Nuova Creatura
+    style: primary
+    actions:
+    - type: templaterCreateNote
+      templateFile: z.modelli/Creatura.md
+      folderPath: Mondi/Creature
+      openNote: true
+    id: nuova-creatura-z-modelli-creatura-md
+  nuova_creatura_z_modelli_creatura_md_default:
+    label: Nuova Creatura
+    style: default
+    actions:
+    - type: templaterCreateNote
+      templateFile: z.modelli/Creatura.md
+      folderPath: Mondi/Creature
+      openNote: true
+    id: nuova-creatura-z-modelli-creatura-md-default
+  nuova_cultura_z_modelli_worldbuilding_cultura_md:
+    label: Nuova Cultura
+    style: primary
+    actions:
+    - type: templaterCreateNote
+      templateFile: z.modelli/worldbuilding/Cultura.md
+      folderPath: Mondi/Culture
+      openNote: true
+    id: nuova-cultura-z-modelli-worldbuilding-cultura-md
+  nuova_dispensa_z_modelli_dispensa_md:
+    label: Nuova Dispensa
+    style: primary
+    actions:
+    - type: templaterCreateNote
+      templateFile: z.modelli/Dispensa.md
+      folderPath: Mondi/Dispense
+      openNote: true
+    id: nuova-dispensa-z-modelli-dispensa-md
+  nuova_dispensa_z_modelli_dispensa_md_default:
+    label: Nuova Dispensa
+    style: default
+    actions:
+    - type: templaterCreateNote
+      templateFile: z.modelli/Dispensa.md
+      folderPath: Mondi/Dispense
+      openNote: true
+    id: nuova-dispensa-z-modelli-dispensa-md-default
+  nuova_era_z_modelli_worldbuilding_era_storica_md:
+    label: Nuova Era
+    style: primary
+    actions:
+    - type: templaterCreateNote
+      templateFile: z.modelli/worldbuilding/Era Storica.md
+      folderPath: Mondi/Storia
+      openNote: true
+    id: nuova-era-z-modelli-worldbuilding-era-storica-md
+  nuova_fazione_z_modelli_fazione_router_md:
+    label: Nuova Fazione
+    style: primary
+    actions:
+    - type: templaterCreateNote
+      templateFile: z.modelli/Fazione Router.md
+      folderPath: Mondi/Fazioni
+      openNote: true
+    id: nuova-fazione-z-modelli-fazione-router-md
+  nuova_lingua_z_modelli_worldbuilding_lingua_md:
+    label: Nuova Lingua
+    style: primary
+    actions:
+    - type: templaterCreateNote
+      templateFile: z.modelli/worldbuilding/Lingua.md
+      folderPath: Mondi/Lingue
+      openNote: true
+    id: nuova-lingua-z-modelli-worldbuilding-lingua-md
+  nuova_mappa_fronti_z_modelli_mappe_mappa_excalidraw_fronti_excalidraw_md:
+    label: Nuova Mappa Fronti
+    style: default
+    actions:
+    - type: templaterCreateNote
+      templateFile: z.modelli/mappe/Mappa Excalidraw Fronti.excalidraw.md
+      folderPath: Risorse/Mappe
+      openNote: true
+    id: nuova-mappa-fronti-z-modelli-mappe-mappa-excalidraw-fronti-excalidraw-md
+  nuova_mappa_fronti_z_modelli_mappe_mappa_excalidraw_fronti_excalidraw_md_2:
+    label: Nuova Mappa Fronti
+    style: primary
+    actions:
+    - type: templaterCreateNote
+      templateFile: z.modelli/mappe/Mappa Excalidraw Fronti.excalidraw.md
+      folderPath: Risorse/Mappe
+      openNote: true
+    id: nuova-mappa-fronti-z-modelli-mappe-mappa-excalidraw-fronti-excalidraw-md-2
+    fallback: '[[z.modelli/mappe/Mappa Excalidraw Fronti.excalidraw]]'
+  nuova_mappa_zoom_z_modelli_mappe_mappa_zoom_md:
+    label: Nuova Mappa Zoom
+    style: default
+    actions:
+    - type: templaterCreateNote
+      templateFile: z.modelli/mappe/Mappa Zoom.md
+      folderPath: Risorse/Mappe
+      openNote: true
+    id: nuova-mappa-zoom-z-modelli-mappe-mappa-zoom-md
+    fallback: '[[z.modelli/mappe/Mappa Zoom]]'
+  nuova_mappa_zoom_z_modelli_mappe_mappa_zoom_md_2:
+    label: Nuova Mappa Zoom
+    style: primary
+    actions:
+    - type: templaterCreateNote
+      templateFile: z.modelli/mappe/Mappa Zoom.md
+      folderPath: Risorse/Mappe
+      openNote: true
+    id: nuova-mappa-zoom-z-modelli-mappe-mappa-zoom-md-2
+  nuova_missione_z_modelli_dm_missione_md:
+    label: Nuova Missione
+    style: primary
+    actions:
+    - type: templaterCreateNote
+      templateFile: z.modelli/dm/Missione.md
+      folderPath: Mondi/Missioni
+      openNote: true
+    id: nuova-missione-z-modelli-dm-missione-md
+  nuova_nota_rapida_z_modelli_nota_rapida_md:
+    label: Nuova Nota Rapida
+    style: primary
+    actions:
+    - type: templaterCreateNote
+      templateFile: z.modelli/Nota Rapida.md
+      folderPath: Inbox
+      openNote: true
+    id: nuova-nota-rapida-z-modelli-nota-rapida-md
+  nuova_relazione_z_modelli_worldbuilding_relazione_md:
+    label: Nuova Relazione
+    style: primary
+    actions:
+    - type: templaterCreateNote
+      templateFile: z.modelli/worldbuilding/Relazione.md
+      folderPath: Mondi/Relazioni
+      openNote: true
+    id: nuova-relazione-z-modelli-worldbuilding-relazione-md
+  nuova_religione_z_modelli_fazione_culto_md:
+    label: Nuova Religione
+    style: primary
+    actions:
+    - type: templaterCreateNote
+      templateFile: z.modelli/fazione/Culto.md
+      folderPath: Mondi/Religioni
+      openNote: true
+    id: nuova-religione-z-modelli-fazione-culto-md
+  nuova_ricorrenza_z_modelli_worldbuilding_ricorrenza_calendario_md:
+    label: Nuova Ricorrenza
+    style: primary
+    actions:
+    - type: templaterCreateNote
+      templateFile: z.modelli/worldbuilding/Ricorrenza Calendario.md
+      folderPath: Mondi/Calendario Diegetico
+      openNote: true
+    id: nuova-ricorrenza-z-modelli-worldbuilding-ricorrenza-calendario-md
+  nuova_risorsa_z_modelli_worldbuilding_risorsa_md:
+    label: Nuova Risorsa
+    style: primary
+    actions:
+    - type: templaterCreateNote
+      templateFile: z.modelli/worldbuilding/Risorsa.md
+      folderPath: Mondi/Risorse
+      openNote: true
+    id: nuova-risorsa-z-modelli-worldbuilding-risorsa-md
+  nuova_rotta_z_modelli_worldbuilding_rotta_md:
+    label: Nuova Rotta
+    style: primary
+    actions:
+    - type: templaterCreateNote
+      templateFile: z.modelli/worldbuilding/Rotta.md
+      folderPath: Mondi/Rotte
+      openNote: true
+    id: nuova-rotta-z-modelli-worldbuilding-rotta-md
+  nuova_sessione_z_modelli_dm_sessione_md:
+    label: Nuova Sessione
+    style: primary
+    actions:
+    - type: templaterCreateNote
+      templateFile: z.modelli/dm/Sessione.md
+      folderPath: Mondi/Sessioni
+      openNote: true
+    id: nuova-sessione-z-modelli-dm-sessione-md
+    fallback: '[[z.modelli/dm/Sessione]]'
+  nuovo_clock_o_tracciato_z_modelli_dm_tracciato_md:
+    label: Nuovo Clock O Tracciato
+    style: primary
+    actions:
+    - type: templaterCreateNote
+      templateFile: z.modelli/dm/Tracciato.md
+      folderPath: Mondi/Tracciati
+      openNote: true
+    id: nuovo-clock-o-tracciato-z-modelli-dm-tracciato-md
+  nuovo_clock_z_modelli_dm_tracciato_md:
+    label: Nuovo Clock
+    style: primary
+    actions:
+    - type: templaterCreateNote
+      templateFile: z.modelli/dm/Tracciato.md
+      folderPath: Mondi/Tracciati
+      openNote: true
+    id: nuovo-clock-z-modelli-dm-tracciato-md
+  nuovo_clock_z_modelli_dm_tracciato_md_default:
+    label: Nuovo Clock
+    style: default
+    actions:
+    - type: templaterCreateNote
+      templateFile: z.modelli/dm/Tracciato.md
+      folderPath: Mondi/Tracciati
+      openNote: true
+    id: nuovo-clock-z-modelli-dm-tracciato-md-default
+  nuovo_conflitto_z_modelli_worldbuilding_conflitto_md:
+    label: Nuovo Conflitto
+    style: primary
+    actions:
+    - type: templaterCreateNote
+      templateFile: z.modelli/worldbuilding/Conflitto.md
+      folderPath: Mondi/Conflitti
+      openNote: true
+    id: nuovo-conflitto-z-modelli-worldbuilding-conflitto-md
+  nuovo_contenuto_dm_z_modelli_dm_dm_router_md:
+    label: Nuovo Contenuto DM
+    style: primary
+    actions:
+    - type: templaterCreateNote
+      templateFile: z.modelli/dm/DM Router.md
+      folderPath: Mondi
+      openNote: true
+    id: nuovo-contenuto-dm-z-modelli-dm-dm-router-md
+  nuovo_culto_z_modelli_fazione_culto_md:
+    label: Nuovo Culto
+    style: primary
+    actions:
+    - type: templaterCreateNote
+      templateFile: z.modelli/fazione/Culto.md
+      folderPath: Mondi/Religioni
+      openNote: true
+    id: nuovo-culto-z-modelli-fazione-culto-md
+  nuovo_elemento_z_modelli_worldbuilding_compendium_del_mondo_md:
+    label: Nuovo Elemento
+    style: primary
+    actions:
+    - type: templaterCreateNote
+      templateFile: z.modelli/worldbuilding/Compendium Del Mondo.md
+      folderPath: Mondi/Compendium
+      openNote: true
+    id: nuovo-elemento-z-modelli-worldbuilding-compendium-del-mondo-md
+  nuovo_evento_lore_z_modelli_lore_capture_md:
+    label: Nuovo Evento / Lore
+    style: primary
+    actions:
+    - type: templaterCreateNote
+      templateFile: z.modelli/Lore Capture.md
+      folderPath: Inbox
+      openNote: true
+    id: nuovo-evento-lore-z-modelli-lore-capture-md
+  nuovo_evento_storico_z_modelli_evento_storico_md:
+    label: Nuovo Evento Storico
+    style: primary
+    actions:
+    - type: templaterCreateNote
+      templateFile: z.modelli/Evento Storico.md
+      folderPath: Mondi/Timeline
+      openNote: true
+    id: nuovo-evento-storico-z-modelli-evento-storico-md
+  nuovo_incontro_z_modelli_dm_incontro_md:
+    label: Nuovo Incontro
+    style: primary
+    actions:
+    - type: templaterCreateNote
+      templateFile: z.modelli/dm/Incontro.md
+      folderPath: Mondi/Incontri
+      openNote: true
+    id: nuovo-incontro-z-modelli-dm-incontro-md
+  nuovo_incontro_z_modelli_dm_incontro_md_default:
+    label: Nuovo Incontro
+    style: default
+    actions:
+    - type: templaterCreateNote
+      templateFile: z.modelli/dm/Incontro.md
+      folderPath: Mondi/Incontri
+      openNote: true
+    id: nuovo-incontro-z-modelli-dm-incontro-md-default
+  nuovo_luogo_z_modelli_luogo_router_md:
+    label: Nuovo Luogo
+    style: primary
+    actions:
+    - type: templaterCreateNote
+      templateFile: z.modelli/Luogo Router.md
+      folderPath: Mondi/Luoghi
+      openNote: true
+    id: nuovo-luogo-z-modelli-luogo-router-md
+  nuovo_mercato_o_nodo_z_modelli_worldbuilding_mercato_o_nodo_commerciale_md:
+    label: Nuovo Mercato O Nodo
+    style: primary
+    actions:
+    - type: templaterCreateNote
+      templateFile: z.modelli/worldbuilding/Mercato o Nodo Commerciale.md
+      folderPath: Mondi/Mercati
+      openNote: true
+    id: nuovo-mercato-o-nodo-z-modelli-worldbuilding-mercato-o-nodo-commerciale-md
+  nuovo_mercato_z_modelli_worldbuilding_mercato_o_nodo_commerciale_md:
+    label: Nuovo Mercato
+    style: primary
+    actions:
+    - type: templaterCreateNote
+      templateFile: z.modelli/worldbuilding/Mercato o Nodo Commerciale.md
+      folderPath: Mondi/Mercati
+      openNote: true
+    id: nuovo-mercato-z-modelli-worldbuilding-mercato-o-nodo-commerciale-md
+  nuovo_mondo_z_modelli_mondo_md:
+    label: Nuovo Mondo
+    style: primary
+    actions:
+    - type: templaterCreateNote
+      templateFile: z.modelli/Mondo.md
+      folderPath: Mondi
+      openNote: true
+    id: nuovo-mondo-z-modelli-mondo-md
+  nuovo_mondo_homebrew:
+    label: Nuovo Mondo Homebrew
+    style: primary
+    actions:
+    - type: templaterCreateNote
+      templateFile: z.modelli/wizard/Nuovo Mondo Homebrew.md
+      folderPath: Mondi
+      openNote: true
+    id: nuovo-mondo-homebrew
+    fallback: '[[z.modelli/wizard/Nuovo Mondo Homebrew]]'
+  nuovo_oggetto_magico_z_modelli_oggetto_magico_md:
+    label: Nuovo Oggetto Magico
+    style: primary
+    actions:
+    - type: templaterCreateNote
+      templateFile: z.modelli/Oggetto Magico.md
+      folderPath: Mondi/Oggetti
+      openNote: true
+    id: nuovo-oggetto-magico-z-modelli-oggetto-magico-md
+  nuovo_oggetto_z_modelli_oggetto_md:
+    label: Nuovo Oggetto
+    style: primary
+    actions:
+    - type: templaterCreateNote
+      templateFile: z.modelli/Oggetto.md
+      folderPath: Mondi/Oggetti
+      openNote: true
+    id: nuovo-oggetto-z-modelli-oggetto-md
+  nuovo_personaggio_z_modelli_personaggio_router_md:
+    label: Nuovo Personaggio
+    style: primary
+    actions:
+    - type: templaterCreateNote
+      templateFile: z.modelli/Personaggio Router.md
+      folderPath: Mondi/Personaggi
+      openNote: true
+    id: nuovo-personaggio-z-modelli-personaggio-router-md
+  nuovo_pg_z_modelli_personaggio_pg_md:
+    label: Nuovo PG
+    style: primary
+    actions:
+    - type: templaterCreateNote
+      templateFile: z.modelli/personaggio/PG.md
+      folderPath: Mondi/Personaggi
+      openNote: true
+    id: nuovo-pg-z-modelli-personaggio-pg-md
+  nuovo_png_z_modelli_personaggio_png_md:
+    label: Nuovo PNG
+    style: primary
+    actions:
+    - type: templaterCreateNote
+      templateFile: z.modelli/personaggio/PNG.md
+      folderPath: Mondi/Personaggi
+      openNote: true
+    id: nuovo-png-z-modelli-personaggio-png-md
+  nuovo_segreto_o_mistero_z_modelli_worldbuilding_segreto_o_mistero_md:
+    label: Nuovo Segreto O Mistero
+    style: primary
+    actions:
+    - type: templaterCreateNote
+      templateFile: z.modelli/worldbuilding/Segreto o Mistero.md
+      folderPath: Mondi/Segreti
+      openNote: true
+    id: nuovo-segreto-o-mistero-z-modelli-worldbuilding-segreto-o-mistero-md
+  nuovo_territorio_politico_z_modelli_luogo_router_md:
+    label: Nuovo Territorio Politico
+    style: primary
+    actions:
+    - type: templaterCreateNote
+      templateFile: z.modelli/Luogo Router.md
+      folderPath: Mondi/Luoghi
+      openNote: true
+    id: nuovo-territorio-politico-z-modelli-luogo-router-md
+  nuovo_tracciato_z_modelli_dm_tracciato_md:
+    label: Nuovo Tracciato
+    style: primary
+    actions:
+    - type: templaterCreateNote
+      templateFile: z.modelli/dm/Tracciato.md
+      folderPath: Mondi/Tracciati
+      openNote: true
+    id: nuovo-tracciato-z-modelli-dm-tracciato-md
+  opportunita_risorse_opportunita_di_avventura:
+    label: Opportunità
+    style: default
+    actions:
+    - type: open
+      link: '[[Risorse/Opportunità Di Avventura]]'
+    id: opportunita-risorse-opportunita-di-avventura
+  png_improvvisato_z_modelli_live_png_md:
+    label: PNG Improvvisato
+    style: primary
+    actions:
+    - type: templaterCreateNote
+      templateFile: z.modelli/Live PNG.md
+      folderPath: Inbox
+      openNote: true
+    id: png-improvvisato-z-modelli-live-png-md
+  post_sessione_guidato_risorse_post_sessione_guidato:
+    label: Post Sessione Guidato
+    style: primary
+    actions:
+    - type: open
+      link: '[[Risorse/Post Sessione Guidato]]'
+    id: post-sessione-guidato-risorse-post-sessione-guidato
+    fallback: '[[Risorse/Post Sessione Guidato]]'
+  post_sessione_risorse_post_sessione_guidato:
+    label: Post Sessione
+    style: primary
+    actions:
+    - type: open
+      link: '[[Risorse/Post Sessione Guidato]]'
+    id: post-sessione-risorse-post-sessione-guidato
+  post_sessione_risorse_post_sessione_guidato_2:
+    label: Post Sessione
+    style: default
+    actions:
+    - type: open
+      link: '[[Risorse/Post Sessione Guidato]]'
+    id: post-sessione-risorse-post-sessione-guidato-2
+  post_sessione_z_bacheche_post_sessione:
+    label: Post Sessione
+    style: primary
+    actions:
+    - type: open
+      link: '[[z.bacheche/Post Sessione]]'
+    id: post-sessione-z-bacheche-post-sessione
+  prepara_hub_1_dm_dashboard_1_dm_dashboard:
+    label: Prepara
+    style: primary
+    actions:
+    - type: open
+      link: '[[Hub/1. DM Dashboard|1. DM Dashboard]]'
+    id: prepara-hub-1-dm-dashboard-1-dm-dashboard
+  preparazione_sessione_risorse_preparazione_sessione:
+    label: Preparazione Sessione
+    style: primary
+    actions:
+    - type: open
+      link: '[[Risorse/Preparazione Sessione]]'
+    id: preparazione-sessione-risorse-preparazione-sessione
+  preparazione_sessioni_z_bacheche_preparazione_sessioni:
+    label: Preparazione Sessioni
+    style: primary
+    actions:
+    - type: open
+      link: '[[z.bacheche/Preparazione Sessioni]]'
+    id: preparazione-sessioni-z-bacheche-preparazione-sessioni
+  prima_sessione_in_15_minuti_risorse_prima_sessione_in_15_minuti:
+    label: Prima Sessione In 15 Minuti
+    style: primary
+    actions:
+    - type: open
+      link: '[[Risorse/Prima Sessione In 15 Minuti]]'
+    id: prima-sessione-in-15-minuti-risorse-prima-sessione-in-15-minuti
+  prima_sessione_risorse_prima_sessione_in_15_minuti:
+    label: Prima Sessione
+    style: primary
+    actions:
+    - type: open
+      link: '[[Risorse/Prima Sessione In 15 Minuti]]'
+    id: prima-sessione-risorse-prima-sessione-in-15-minuti
+  prossima_sessione_risorse_preparazione_sessione:
     label: Prossima Sessione
-    action: runTemplaterFile
-    template: z.modelli/wizard/Nuova Sessione Da Output Precedente.md
-    fallback: '[[z.modelli/wizard/Nuova Sessione Da Output Precedente]]'
-  marca_canonico:
-    id: marca-canonico
-    label: Marca Canonico
-    action: runTemplaterFile
-    template: z.modelli/azioni/Marca Canonico.md
-    fallback: 'Azione manuale: impostare canonico: true'
-  marca_rumor:
-    id: marca-rumor
-    label: Marca Rumor
-    action: runTemplaterFile
-    template: z.modelli/azioni/Marca Rumor.md
-    fallback: 'Azione manuale: impostare stato_canonico: rumor'
-  archivia:
-    id: archivia-nota
-    label: Archivia
-    action: runTemplaterFile
-    template: z.modelli/azioni/Archivia.md
-    fallback: 'Azione manuale: impostare stato: archiviata'
+    style: primary
+    actions:
+    - type: open
+      link: '[[Risorse/Preparazione Sessione]]'
+    id: prossima-sessione-risorse-preparazione-sessione
+  revisione_lore_revisione_lore:
+    label: Revisione Lore
+    style: primary
+    actions:
+    - type: open
+      link: '[[Revisione Lore]]'
+    id: revisione-lore-revisione-lore
+  revisione_lore_revisione_lore_default:
+    label: Revisione Lore
+    style: default
+    actions:
+    - type: open
+      link: '[[Revisione Lore]]'
+    id: revisione-lore-revisione-lore-default
+  risorse_risorse_risorse:
+    label: Risorse
+    style: default
+    actions:
+    - type: open
+      link: '[[Risorse/Risorse]]'
+    id: risorse-risorse-risorse
+  segreto_o_mistero_z_modelli_worldbuilding_segreto_o_mistero_md:
+    label: Segreto O Mistero
+    style: primary
+    actions:
+    - type: templaterCreateNote
+      templateFile: z.modelli/worldbuilding/Segreto o Mistero.md
+      folderPath: Mondi/Segreti
+      openNote: true
+    id: segreto-o-mistero-z-modelli-worldbuilding-segreto-o-mistero-md
+  setup_guidato_risorse_setup_guidato:
+    label: Setup Guidato
+    style: default
+    actions:
+    - type: open
+      link: '[[Risorse/Setup Guidato]]'
+    id: setup-guidato-risorse-setup-guidato
+  setup_guidato_risorse_setup_guidato_2:
+    label: Setup Guidato
+    style: primary
+    actions:
+    - type: open
+      link: '[[Risorse/Setup Guidato]]'
+    id: setup-guidato-risorse-setup-guidato-2
+  smista_generati_risorse_smistamento_bozze_generate:
+    label: Smista Generati
+    style: default
+    actions:
+    - type: open
+      link: '[[Risorse/Smistamento Bozze Generate]]'
+    id: smista-generati-risorse-smistamento-bozze-generate
+  smistamento_bozze_generate_risorse_smistamento_bozze_generate:
+    label: Smistamento Bozze Generate
+    style: default
+    actions:
+    - type: open
+      link: '[[Risorse/Smistamento Bozze Generate]]'
+    id: smistamento-bozze-generate-risorse-smistamento-bozze-generate
+  smistamento_bozze_generate_risorse_smistamento_bozze_generate_2:
+    label: Smistamento Bozze Generate
+    style: primary
+    actions:
+    - type: open
+      link: '[[Risorse/Smistamento Bozze Generate]]'
+    id: smistamento-bozze-generate-risorse-smistamento-bozze-generate-2
   smista_bozza_generata:
-    id: smista-bozza-generata
     label: Smista Bozza
-    action: runTemplaterFile
-    template: z.modelli/azioni/Smista Bozza Generata.md
+    style: primary
+    actions:
+    - type: runTemplaterFile
+      templateFile: z.modelli/azioni/Smista Bozza Generata.md
+    id: smista-bozza-generata
     fallback: 'Azione manuale: spostare la bozza generata nella cartella canonica e impostare stato: pronto'
   canonizza_bozza_generata:
-    id: canonizza-bozza-generata
     label: Canonizza Bozza
-    action: runTemplaterFile
-    template: z.modelli/azioni/Canonizza Bozza Generata.md
+    style: primary
+    actions:
+    - type: runTemplaterFile
+      templateFile: z.modelli/azioni/Canonizza Bozza Generata.md
+    id: canonizza-bozza-generata
     fallback: 'Azione manuale: spostare la bozza generata nella cartella canonica e impostare canonico: true'
-  avanza_clock:
-    id: avanza-clock
-    label: Avanza Clock
-    action: runTemplaterFile
-    template: z.modelli/azioni/Avanza Clock.md
-    fallback: 'Azione manuale: aumentare pressione/progress_value'
+  stato_campagna_mondi_stato_del_mondo:
+    label: Stato Campagna
+    style: primary
+    actions:
+    - type: open
+      link: '[[Mondi/Stato del Mondo]]'
+    id: stato-campagna-mondi-stato-del-mondo
+  stato_mondo_mondi_stato_del_mondo:
+    label: Stato Mondo
+    style: primary
+    actions:
+    - type: open
+      link: '[[Mondi/Stato del Mondo]]'
+    id: stato-mondo-mondi-stato-del-mondo
+  tabelle_rapide_risorse_tabelle_tabelle:
+    label: Tabelle Rapide
+    style: primary
+    actions:
+    - type: open
+      link: '[[Risorse/Tabelle/Tabelle]]'
+    id: tabelle-rapide-risorse-tabelle-tabelle
+  task_dm_risorse_task_dm:
+    label: Task DM
+    style: default
+    actions:
+    - type: open
+      link: '[[Risorse/Task DM]]'
+    id: task-dm-risorse-task-dm
+  timeline_mondi_timeline_timeline:
+    label: Timeline
+    style: primary
+    actions:
+    - type: open
+      link: '[[Mondi/Timeline/Timeline]]'
+    id: timeline-mondi-timeline-timeline
+  party_control_hub_party_control:
+    label: Party Control
+    style: primary
+    actions:
+    - type: open
+      link: '[[Hub/Party Control]]'
+    id: party-control-hub-party-control
+  personaggi_mondi_personaggi_personaggi:
+    label: Personaggi
+    style: default
+    actions:
+    - type: open
+      link: '[[Mondi/Personaggi/Personaggi]]'
+    id: personaggi-mondi-personaggi-personaggi
+  quality_report_risorse_quality_report:
+    label: Quality Report
+    style: primary
+    actions:
+    - type: open
+      link: '[[Risorse/Quality Report]]'
+    id: quality-report-risorse-quality-report
+  vista_giocatori_hub_vista_giocatori_vista_giocatori:
+    label: Vista Giocatori
+    style: primary
+    actions:
+    - type: open
+      link: '[[Hub/Vista Giocatori|Vista Giocatori]]'
+    id: vista-giocatori-hub-vista-giocatori-vista-giocatori
+  worldbuilder_worldbuilder_dashboard:
+    label: Worldbuilder
+    style: primary
+    actions:
+    - type: open
+      link: '[[Worldbuilder Dashboard]]'
+    id: worldbuilder-worldbuilder-dashboard
+  worldbuilder_worldbuilder_dashboard_2:
+    label: Worldbuilder
+    style: default
+    actions:
+    - type: open
+      link: '[[Worldbuilder Dashboard]]'
+    id: worldbuilder-worldbuilder-dashboard-2
+  worldbuilding_profondo_risorse_worldbuilding_profondo:
+    label: Worldbuilding Profondo
+    style: default
+    actions:
+    - type: open
+      link: '[[Risorse/Worldbuilding Profondo]]'
+    id: worldbuilding-profondo-risorse-worldbuilding-profondo
+  worldbuilding_profondo_risorse_worldbuilding_profondo_2:
+    label: Worldbuilding Profondo
+    style: primary
+    actions:
+    - type: open
+      link: '[[Risorse/Worldbuilding Profondo]]'
+    id: worldbuilding-profondo-risorse-worldbuilding-profondo-2
+  marca_canonico:
+    label: Marca Canonico
+    style: primary
+    actions:
+    - type: runTemplaterFile
+      templateFile: z.modelli/azioni/Marca Canonico.md
+    id: marca-canonico
+    fallback: 'Azione manuale: impostare canonico: true'
+  marca_rumor:
+    label: Marca Rumor
+    style: default
+    actions:
+    - type: runTemplaterFile
+      templateFile: z.modelli/azioni/Marca Rumor.md
+    id: marca-rumor
+    fallback: 'Azione manuale: impostare stato_canonico: rumor'
+  archivia_nota:
+    label: Archivia
+    style: destructive
+    actions:
+    - type: runTemplaterFile
+      templateFile: z.modelli/azioni/Archivia.md
+    id: archivia-nota
+    fallback: 'Azione manuale: impostare stato: archiviata'
   applica_conseguenza:
-    id: applica-conseguenza
     label: Applica Conseguenza
-    action: runTemplaterFile
-    template: z.modelli/azioni/Applica Conseguenza.md
+    style: primary
+    actions:
+    - type: runTemplaterFile
+      templateFile: z.modelli/azioni/Applica Conseguenza.md
+    id: applica-conseguenza
     fallback: 'Azione manuale: registrare conseguenza, entita_impattate e propagazione_stato'
   registra_scelta_mondo:
-    id: registra-scelta-mondo
     label: Registra Scelta Mondo
-    action: runTemplaterFile
-    template: z.modelli/azioni/Registra Scelta Mondo.md
+    style: primary
+    actions:
+    - type: runTemplaterFile
+      templateFile: z.modelli/azioni/Registra Scelta Mondo.md
+    id: registra-scelta-mondo
     fallback: 'Azione manuale: registrare scelta, conseguenza, entita_impattate, applicata_a e propagazione_stato'
+  avanza_clock:
+    label: Avanza Clock
+    style: primary
+    actions:
+    - type: runTemplaterFile
+      templateFile: z.modelli/azioni/Avanza Clock.md
+    id: avanza-clock
+    fallback: 'Azione manuale: aumentare pressione/progress_value'
   collega_sessione_attiva:
-    id: collega-sessione-attiva
     label: Collega Sessione Attiva
-    action: runTemplaterFile
-    template: z.modelli/azioni/Collega Sessione Attiva.md
+    style: default
+    actions:
+    - type: runTemplaterFile
+      templateFile: z.modelli/azioni/Collega Sessione Attiva.md
+    id: collega-sessione-attiva
     fallback: 'Azione manuale: aggiungere la sessione attiva nei collegamenti della nota'
   rendi_sessione_attiva:
-    id: rendi-sessione-attiva
     label: Rendi Sessione Attiva
-    action: runTemplaterFile
-    template: z.modelli/azioni/Rendi Sessione Attiva.md
+    style: primary
+    actions:
+    - type: runTemplaterFile
+      templateFile: z.modelli/azioni/Rendi Sessione Attiva.md
+    id: rendi-sessione-attiva
     fallback: 'Azione manuale: impostare attiva: true su una sola sessione e false sulle altre'
   propaga_a_entita:
-    id: propaga-a-entita
     label: Propaga A Entita
-    action: runTemplaterFile
-    template: z.modelli/azioni/Propaga A Entita.md
+    style: primary
+    actions:
+    - type: runTemplaterFile
+      templateFile: z.modelli/azioni/Propaga A Entita.md
+    id: propaga-a-entita
     fallback: 'Azione manuale: aggiornare propaga_a, entita_impattate e aggiornamenti_richiesti'
   prepara_recap_pubblico:
-    id: prepara-recap-pubblico
     label: Prepara Recap Pubblico
-    action: runTemplaterFile
-    template: z.modelli/azioni/Prepara Recap Pubblico.md
+    style: primary
+    actions:
+    - type: runTemplaterFile
+      templateFile: z.modelli/azioni/Prepara Recap Pubblico.md
+    id: prepara-recap-pubblico
     fallback: 'Azione manuale: scrivere recap pubblico senza segreti o prossime mosse DM'
-  nuova_mappa_zoom:
-    id: nuova-mappa-zoom-z-modelli-mappe-mappa-zoom-md
-    label: Nuova Mappa Zoom
-    action: templaterCreateNote
-    template: z.modelli/mappe/Mappa Zoom.md
-    fallback: '[[z.modelli/mappe/Mappa Zoom]]'
-  nuova_mappa_fronti_sessione:
-    id: nuova-mappa-fronti-z-modelli-mappe-mappa-excalidraw-fronti-excalidraw-md-2
-    label: Nuova Mappa Fronti
-    action: templaterCreateNote
-    template: z.modelli/mappe/Mappa Excalidraw Fronti.excalidraw.md
-    fallback: '[[z.modelli/mappe/Mappa Excalidraw Fronti.excalidraw]]'
+  wizard_nuova_entita_viva:
+    label: Nuova Entita Viva
+    style: primary
+    actions:
+    - type: runTemplaterFile
+      templateFile: z.modelli/wizard/Nuova Entita Viva.md
+    id: wizard-nuova-entita-viva
+    fallback: '[[z.modelli/wizard/Nuova Entita Viva]]'
+  wizard_appunto_live:
+    label: Appunto Live
+    style: primary
+    actions:
+    - type: templaterCreateNote
+      templateFile: z.modelli/wizard/Appunto Live.md
+      folderPath: Inbox
+      openNote: true
+    id: wizard-appunto-live
+    fallback: '[[z.modelli/wizard/Appunto Live]]'
+  wizard_conseguenza:
+    label: Conseguenza
+    style: primary
+    actions:
+    - type: templaterCreateNote
+      templateFile: z.modelli/wizard/Conseguenza.md
+      folderPath: Inbox
+      openNote: true
+    id: wizard-conseguenza
+    fallback: '[[z.modelli/wizard/Conseguenza]]'
+  wizard_fine_sessione:
+    label: Fine Sessione
+    style: primary
+    actions:
+    - type: runTemplaterFile
+      templateFile: z.modelli/wizard/Fine Sessione.md
+    id: wizard-fine-sessione
+    fallback: '[[z.modelli/wizard/Fine Sessione]]'
+  wizard_sessione_da_output:
+    label: Sessione Da Output
+    style: primary
+    actions:
+    - type: templaterCreateNote
+      templateFile: z.modelli/wizard/Nuova Sessione Da Output Precedente.md
+      folderPath: Mondi/Sessioni
+      openNote: true
+    id: wizard-sessione-da-output
+    fallback: '[[z.modelli/wizard/Nuova Sessione Da Output Precedente]]'
 contracts:
   button_ids_must_match_meta_bind_config: .obsidian/plugins/obsidian-meta-bind-plugin/data.json
   generated_syntax: '`BUTTON[{{ id }}]`'
