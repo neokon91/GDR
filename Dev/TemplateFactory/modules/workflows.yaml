@@ -67,9 +67,18 @@ workflows:
     entry_points:
       - Hub/Durante il Gioco.md
     quick_actions:
+      - button: aggiorna-scena-z-modelli-dm-aggiorna-scena-corrente-md
+        label: Aggiorna scena
+        use_when: cambia la scena corrente e vuoi tenerla visibile alla sessione
       - button: wizard-appunto-live
         label: Appunto live
         use_when: emerge qualcosa ma non sai ancora che tipo di nota sia
+      - button: collega-appunto-z-modelli-dm-collega-appunto-live-md
+        label: Collega appunto
+        use_when: hai gia scritto un appunto Inbox e va agganciato alla sessione attiva
+      - button: aggiungi-decisione-z-modelli-dm-aggiungi-decisione-live-md
+        label: Aggiungi decisione live
+        use_when: vuoi registrare una decisione senza ancora propagare tutto il mondo
       - button: wizard-conseguenza
         label: Conseguenza
         use_when: una scelta cambia missioni, PNG, luoghi, fazioni o clock

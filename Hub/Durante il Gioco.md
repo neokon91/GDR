@@ -33,8 +33,17 @@ if (!active) {
 > [!regia] Azioni rapide
 > Gestire sessione, tiri, incontri, media e appunti live da una schermata.
 >
+> **Aggiorna scena** - cambia la scena corrente e vuoi tenerla visibile alla sessione
+> `BUTTON[aggiorna-scena-z-modelli-dm-aggiorna-scena-corrente-md]`
+>
 > **Appunto live** - emerge qualcosa ma non sai ancora che tipo di nota sia
 > `BUTTON[wizard-appunto-live]`
+>
+> **Collega appunto** - hai gia scritto un appunto Inbox e va agganciato alla sessione attiva
+> `BUTTON[collega-appunto-z-modelli-dm-collega-appunto-live-md]`
+>
+> **Aggiungi decisione live** - vuoi registrare una decisione senza ancora propagare tutto il mondo
+> `BUTTON[aggiungi-decisione-z-modelli-dm-aggiungi-decisione-live-md]`
 >
 > **Conseguenza** - una scelta cambia missioni, PNG, luoghi, fazioni o clock
 > `BUTTON[wizard-conseguenza]`

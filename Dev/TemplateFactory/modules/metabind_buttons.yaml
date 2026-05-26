@@ -52,6 +52,24 @@ buttons:
     template: z.modelli/wizard/Conseguenza.md
     folder: Inbox
     fallback: '[[z.modelli/wizard/Conseguenza]]'
+  aggiorna_scena:
+    id: aggiorna-scena-z-modelli-dm-aggiorna-scena-corrente-md
+    label: Aggiorna Scena
+    action: runTemplaterFile
+    template: z.modelli/dm/Aggiorna Scena Corrente.md
+    fallback: 'Azione manuale: aggiornare scena_corrente sulla sessione attiva'
+  aggiungi_decisione:
+    id: aggiungi-decisione-z-modelli-dm-aggiungi-decisione-live-md
+    label: Aggiungi Decisione
+    action: runTemplaterFile
+    template: z.modelli/dm/Aggiungi Decisione Live.md
+    fallback: 'Azione manuale: aggiornare decisioni_prese e output_sessione sulla sessione attiva'
+  collega_appunto_live:
+    id: collega-appunto-z-modelli-dm-collega-appunto-live-md
+    label: Collega Appunto
+    action: runTemplaterFile
+    template: z.modelli/dm/Collega Appunto Live.md
+    fallback: 'Azione manuale: collegare un appunto Inbox ad appunti_live della sessione attiva'
   wizard_fine_sessione:
     id: wizard-fine-sessione
     label: Fine Sessione
