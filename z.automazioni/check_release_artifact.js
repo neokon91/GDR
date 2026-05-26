@@ -147,7 +147,7 @@ function validateZip(errors) {
 const errors = [];
 
 try {
-    execFileSync("node", ["z.automazioni/release_clean.js", ...(INCLUDE_DEMO ? ["--with-demo"] : [])], { cwd: ROOT, stdio: "inherit" });
+    execFileSync("node", ["z.automazioni/release_clean.js", "--quiet", ...(INCLUDE_DEMO ? ["--with-demo"] : [])], { cwd: ROOT, stdio: "inherit" });
     validateOutput(errors);
     validateZip(errors);
 } finally {

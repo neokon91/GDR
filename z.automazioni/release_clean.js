@@ -11,6 +11,7 @@ const DIST = repoPath(ROOT, "dist");
 const OUT = repoPath(DIST, "vault-gdr-clean");
 const ZIP = repoPath(DIST, "vault-gdr-clean.zip");
 const INCLUDE_DEMO = process.argv.includes("--with-demo");
+const QUIET = process.argv.includes("--quiet");
 const TEMPLATE_FACTORY_RENDERER = repoPath(ROOT, "z.automazioni/render_template_factory.py");
 
 const INCLUDED_ROOTS = new Set([
@@ -462,7 +463,7 @@ function validateRelease() {
         process.exit(1);
     }
 
-    console.log(`Release pulita verificata: ${releaseEntries.length} percorsi controllati.`);
+    if (!QUIET) console.log(`Release pulita verificata: ${releaseEntries.length} percorsi controllati.`);
 }
 
 function hasPluginNativeReleasePage(text) {
@@ -483,7 +484,7 @@ function zipIfAvailable() {
 }
 
 function materializeTemplates() {
-    execFileSync("python3", [TEMPLATE_FACTORY_RENDERER, "--materialize-only"], { cwd: ROOT, stdio: "inherit" });
+    execFileSync("python3", [TEMPLATE_FACTORY_RENDERER, "--materialize-only", ...(QUIET ? ["--quiet"] : [])], { cwd: ROOT, stdio: "inherit" });
 }
 
 materializeTemplates();
@@ -493,14 +494,14 @@ copyDir(ROOT, OUT, ROOT);
 writeGeneratedReleaseNotes();
 if (INCLUDE_DEMO) {
     const result = generateDemoWorld({ outDir: "dist/vault-gdr-clean", force: true });
-    console.log(`Demo utente generata: ${result.files.length} file in ${rel(result.root)}`);
+    if (!QUIET) console.log(`Demo utente generata: ${result.files.length} file in ${rel(result.root)}`);
 }
 validateRelease();
 
 const zipped = zipIfAvailable();
-console.log(`Release utente creata: ${rel(OUT)}`);
-if (zipped) {
+if (!QUIET) console.log(`Release utente creata: ${rel(OUT)}`);
+if (zipped && !QUIET) {
     console.log(`Zip utente creato: ${rel(ZIP)}`);
-} else {
+} else if (!zipped) {
     console.log("Zip utente non creato: comando zip non disponibile.");
 }

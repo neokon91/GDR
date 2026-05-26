@@ -377,7 +377,7 @@ function validateDataviewSyntax(root = ROOT, firstRunOnly = false) {
 
 function validateReleaseFirstRun() {
     if (!fs.existsSync(OUT) || !fs.existsSync(ZIP)) {
-        execFileSync("node", ["z.automazioni/release_clean.js", "--with-demo"], { cwd: ROOT, stdio: "inherit" });
+        execFileSync("node", ["z.automazioni/release_clean.js", "--with-demo", "--quiet"], { cwd: ROOT, stdio: "inherit" });
     }
     if (!fs.existsSync(OUT)) fail("release demo mancante: dist/vault-gdr-clean");
     if (!fs.existsSync(ZIP)) fail("zip release demo mancante: dist/vault-gdr-clean.zip");
