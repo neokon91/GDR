@@ -118,6 +118,8 @@ Le viste `renderDnd55MaterialPipeline` e `renderCombatReadiness` sono runtime di
 
 `npm run check:templates` blocca una categoria tassonomica se manca la cartella SRD sorgente dichiarata, se manca il profilo runtime/frontmatter, se un campo obbligatorio non e catalogato o se il profilo non lo espone.
 
+`worldbuilding_depth_axes.yaml` raccoglie il primo porting selettivo degli assi tematici FantasyWorld. Gli assi sono opzionali, limitati a 3-5 per profilo e servono a generare domande o revisioni mirate; non sono campi obbligatori da aggiungere a ogni nota.
+
 ## Regola Italiano D&D 5.5
 
 `dnd55_options.yaml` e la fonte per valori selezionabili e label visibili al DM. I valori utente devono essere in italiano; le chiavi tecniche possono restare compatibili con plugin e renderer quando necessario.

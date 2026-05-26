@@ -1,0 +1,158 @@
+id: worldbuilding_depth_axes
+purpose: Profili opzionali di profondita presi da FantasyWorld e ridotti a pochi assi giocabili per entita chiave.
+version: 0.1.0
+source_lab: /Users/andrea/Desktop/projects/FantasyWorld/YAML/altro/assi_tematici
+rules:
+  optional: true
+  max_axes_per_profile: 5
+  min_axes_per_profile: 3
+  scale:
+    min: 1
+    max: 5
+  usage: >
+    Gli assi non sono frontmatter obbligatorio. Servono a guidare domande, generatori e revisioni
+    quando una nota deve diventare piu profonda, non a trasformare ogni entita in una scheda lunga.
+profiles:
+  fazione:
+    source: assi_tematici_fazione.yaml
+    intent: Rendere una fazione leggibile come potere sociale, metodo operativo e pressione al tavolo.
+    recommended_for:
+      - fazione
+      - fazione_gilda
+      - fazione_confraternita
+      - culto
+    axes:
+      struttura:
+        label: Struttura
+        question: Quanto e rigida la catena decisionale interna?
+        low: Orizzontale
+        mid: Semi-gerarchica
+        high: Piramidale
+        table_use: Capire chi puo negoziare, tradire o bloccare una decisione.
+      scopo:
+        label: Scopo primario
+        question: La fazione agisce per ideale, potere concreto o sopravvivenza?
+        low: Ideale puro
+        mid: Equilibrato
+        high: Pragmatico puro
+        table_use: Rendere chiara la posta quando i PG offrono compromessi.
+      metodo_operativo:
+        label: Metodo operativo
+        question: Quanto sono visibili le sue azioni?
+        low: Occulto
+        mid: Ambivalente
+        high: Palese
+        table_use: Decidere se gli indizi arrivano come segreti, pressione pubblica o ultimatum.
+      legalita:
+        label: Legalita
+        question: Che rapporto ha con l'autorita riconosciuta?
+        low: Illegale
+        mid: Semi-legale
+        high: Ufficiale
+        table_use: Determinare conseguenze sociali quando i PG collaborano o si oppongono.
+  cultura:
+    source: assi_tematici_cultura.yaml
+    intent: Usare la cultura come motore di identita, tabù, linguaggio e conflitto, non come lore statico.
+    recommended_for:
+      - cultura
+      - router_societa
+      - specie_dnd
+      - luogo_insediamento
+    axes:
+      valori_dominanti:
+        label: Valori dominanti
+        question: Quale valore giustifica sacrifici e giudizi morali?
+        low: Sopravvivenza e protezione
+        mid: Onore e manifestazione
+        high: Potere e trasformazione
+        table_use: Preparare dilemmi che il gruppo locale non considera neutri.
+      dinamica_linguaggi:
+        label: Dinamica dei linguaggi
+        question: Come la cultura trasmette significato e memoria?
+        low: Orale intuitivo
+        mid: Codificato stratificato
+        high: Sinestetico-trascendente
+        table_use: Dare forma a prove sociali, traduzioni, tabù e incomprensioni.
+      relazione_morte:
+        label: Relazione con morte e dolore
+        question: La perdita e rimossa, ritualizzata o integrata nella vita quotidiana?
+        low: Rimozione e paura
+        mid: Iniziazione trasformativa
+        high: Coabitazione con la morte
+        table_use: Rendere tombe, lutti, antenati e necromanzia scelte sociali concrete.
+  magia:
+    source: assi_tematici_magia.yaml
+    intent: Definire come funziona la magia in un mondo o regione senza sovrascrivere il regolamento D&D/SRD.
+    recommended_for:
+      - mondo
+      - cosmologia
+      - religione_culto
+      - luogo
+      - incantesimo
+    axes:
+      fonte_magia:
+        label: Fonte della magia
+        question: La magia nasce dall'individuo, dal mondo o da potenze esterne?
+        low: Innata
+        mid: Equilibrata
+        high: Donata
+        table_use: Chiarire patroni, lignaggi, luoghi di potere e conflitti sui canali magici.
+      metodo_magia:
+        label: Metodo magico
+        question: La magia e impulso, arte interpretativa o procedura esatta?
+        low: Selvaggio
+        mid: Interpretativo
+        high: Meccanico
+        table_use: Stabilire il tono di scuole, rituali, fallimenti e ricerca arcana.
+      costo_magia:
+        label: Costo esistenziale
+        question: Cosa consuma davvero un incanto importante?
+        low: Nullo
+        mid: Bilanciato
+        high: Sacrificio
+        table_use: Creare conseguenze narrative senza modificare i numeri base del sistema.
+      rischio:
+        label: Rischio esistenziale
+        question: Quanto l'uso della magia minaccia identita, corpo o realta?
+        low: Sicura
+        mid: Instabile
+        high: Corrompente
+        table_use: Decidere quando un effetto magico produce clock, segni o contaminazioni.
+  luogo:
+    source: assi_tematici_luogo.yaml
+    intent: Rendere i luoghi scenari attivi con leggi, pericoli e pressioni riconoscibili.
+    recommended_for:
+      - luogo
+      - luogo_dungeon
+      - geografia_regione
+      - luogo_rovina
+      - luogo_tempio
+    axes:
+      stabilita_spaziale:
+        label: Stabilita spaziale
+        question: Lo spazio resta affidabile o cambia sotto pressione?
+        low: Solido
+        mid: Anomalo
+        high: Mutante
+        table_use: Scegliere se mappa, orientamento e ritorni sono risorse sicure o rischiose.
+      coerenza_temporale:
+        label: Coerenza temporale
+        question: Il tempo scorre in modo normale?
+        low: Lineare
+        mid: Distorto
+        high: Atemporale
+        table_use: Preparare scadenze, salti, ripetizioni e conseguenze fuori scena.
+      presenza_magica:
+        label: Presenza magica
+        question: Quanta magia ambientale influenza azioni e percezioni?
+        low: Nulla
+        mid: Attiva
+        high: Sovraccarica
+        table_use: Definire segnali sensoriali, indizi arcani e complicazioni.
+      sacralita:
+        label: Sacralita
+        question: Il luogo e profano, rituale o centro simbolico del mondo?
+        low: Profano
+        mid: Rituale
+        high: Axis Mundi
+        table_use: Collegare culto, tabù, profanazioni e reazioni delle fazioni.

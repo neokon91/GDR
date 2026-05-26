@@ -37,6 +37,7 @@ REQUIRED_MODULES = {
     "frontmatter_profiles",
     "runtime_profiles",
     "entity_depth",
+    "worldbuilding_depth_axes",
     "taxonomy_depth",
     "dnd55_options",
     "link_targets",
@@ -583,6 +584,54 @@ def validate_entity_depth_contracts(modules: dict[str, dict], errors: list[str])
                 fail(f"entity_depth.{family_id}: plugin surface non dichiarata ({plugin})", errors)
 
 
+def validate_worldbuilding_depth_axes(modules: dict[str, dict], errors: list[str]) -> None:
+    """Valida gli assi opzionali: devono aiutare il DM, non diventare un secondo schema obbligatorio."""
+    module = modules["worldbuilding_depth_axes"]
+    profiles = module.get("profiles", {})
+    rules = module.get("rules", {}) or {}
+    min_axes = int(rules.get("min_axes_per_profile", 3))
+    max_axes = int(rules.get("max_axes_per_profile", 5))
+    scale = rules.get("scale", {}) or {}
+    scale_min = int(scale.get("min", 1))
+    scale_max = int(scale.get("max", 5))
+    known_entity_profiles = set(modules["entity_depth"].get("families", {}))
+    known_frontmatter_profiles = set(modules["frontmatter_profiles"].get("profiles", {}))
+    known_taxonomy_profiles = {
+        str(profile_id)
+        for family in modules["taxonomy_depth"].get("families", {}).values()
+        for profile_id in (family.get("profile_contracts", {}) or {})
+    }
+    # I target possono essere profili base o blueprint specifici come luogo_tempio/fazione_gilda.
+    known_blueprints = set(resolved_blueprints(modules))
+    known_profiles = known_entity_profiles | known_frontmatter_profiles | known_taxonomy_profiles | known_blueprints
+
+    if rules.get("optional") is not True:
+        fail("worldbuilding_depth_axes: gli assi devono restare opzionali", errors)
+    if scale_min != 1 or scale_max != 5:
+        fail("worldbuilding_depth_axes: la scala deve restare 1-5", errors)
+    if not profiles:
+        fail("worldbuilding_depth_axes: nessun profilo definito", errors)
+        return
+
+    for profile_id, profile in profiles.items():
+        axes = profile.get("axes", {}) or {}
+        if len(axes) < min_axes or len(axes) > max_axes:
+            fail(f"worldbuilding_depth_axes.{profile_id}: usare {min_axes}-{max_axes} assi, non {len(axes)}", errors)
+        if not profile.get("intent"):
+            fail(f"worldbuilding_depth_axes.{profile_id}: intent mancante", errors)
+        if not profile.get("source"):
+            fail(f"worldbuilding_depth_axes.{profile_id}: source FantasyWorld mancante", errors)
+
+        for target in profile.get("recommended_for", []) or []:
+            if str(target) not in known_profiles:
+                fail(f"worldbuilding_depth_axes.{profile_id}: recommended_for non mappato nel vault ({target})", errors)
+
+        for axis_id, axis in axes.items():
+            for key in ("label", "question", "low", "mid", "high", "table_use"):
+                if not axis.get(key):
+                    fail(f"worldbuilding_depth_axes.{profile_id}.{axis_id}: chiave mancante {key}", errors)
+
+
 def validate_taxonomy_depth_contracts(modules: dict[str, dict], errors: list[str]) -> None:
     families = modules["taxonomy_depth"].get("families", {})
     if not families:
@@ -816,6 +865,8 @@ def main() -> int:
         validate_plugin_surface_contracts(modules, errors)
     if not errors:
         validate_entity_depth_contracts(modules, errors)
+    if not errors:
+        validate_worldbuilding_depth_axes(modules, errors)
     if not errors:
         validate_taxonomy_depth_contracts(modules, errors)
     if not errors:
