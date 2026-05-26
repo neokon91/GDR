@@ -75,7 +75,7 @@ const EXCLUDED_AUTOMAZIONI = new Set([
     "README.md",
     "template_factory_utils.py"
 ]);
-const EXCLUDED_AUTOMAZIONI_PREFIXES = ["audit_", "check_", "import_", "render_"];
+const EXCLUDED_AUTOMAZIONI_PREFIXES = ["audit_", "check_", "generate_", "import_", "render_", "template_factory_"];
 const EXCLUDED_FILES = new Set([".DS_Store"]);
 const REQUIRED_RELEASE_FILES = [
     "Inizia Qui.md",
@@ -148,6 +148,114 @@ Questa copia contiene solo il vault pronto da aprire in Obsidian. Non include ro
 `
 };
 
+const GENERATED_RELEASE_JSON = {
+    ".obsidian/workspace.json": {
+        main: {
+            id: "gdr-release-main",
+            type: "split",
+            children: [{
+                id: "gdr-release-tabs",
+                type: "tabs",
+                children: [{
+                    id: "gdr-release-start",
+                    type: "leaf",
+                    state: {
+                        type: "markdown",
+                        state: {
+                            file: "Inizia Qui.md",
+                            mode: "preview",
+                            source: false
+                        },
+                        icon: "lucide-file",
+                        title: "Inizia Qui"
+                    }
+                }],
+                currentTab: 0
+            }],
+            direction: "vertical"
+        },
+        left: {
+            id: "gdr-release-left",
+            type: "split",
+            children: [{
+                id: "gdr-release-left-tabs",
+                type: "tabs",
+                children: [
+                    {
+                        id: "gdr-release-bookmarks",
+                        type: "leaf",
+                        state: {
+                            type: "bookmarks",
+                            state: {},
+                            icon: "lucide-bookmark",
+                            title: "Percorsi"
+                        }
+                    },
+                    {
+                        id: "gdr-release-files",
+                        type: "leaf",
+                        state: {
+                            type: "file-explorer",
+                            state: {
+                                sortOrder: "alphabetical",
+                                autoReveal: false
+                            },
+                            icon: "lucide-folder-closed",
+                            title: "File"
+                        }
+                    }
+                ],
+                currentTab: 0
+            }],
+            direction: "horizontal",
+            width: 300
+        },
+        right: {
+            id: "gdr-release-right",
+            type: "split",
+            children: [],
+            direction: "horizontal",
+            collapsed: true
+        },
+        active: "gdr-release-start",
+        lastOpenFiles: ["Inizia Qui.md"]
+    },
+    ".obsidian/bookmarks.json": {
+        items: [
+            {
+                type: "group",
+                title: "Primo utilizzo",
+                items: [
+                    { type: "file", path: "Inizia Qui.md", title: "Inizia Qui" },
+                    ...(INCLUDE_DEMO ? [{ type: "file", path: "Demo Regno Di Prova.md", title: "Demo Regno Di Prova" }] : []),
+                    { type: "file", path: "Risorse/Prima Sessione In 15 Minuti.md", title: "Prima Sessione In 15 Minuti" },
+                    { type: "file", path: "Risorse/Setup Guidato.md", title: "Setup Guidato" }
+                ]
+            },
+            {
+                type: "group",
+                title: "Ciclo di gioco",
+                items: [
+                    { type: "file", path: "Risorse/Preparazione Sessione.md", title: "Preparazione Sessione" },
+                    { type: "file", path: "Hub/Durante il Gioco.md", title: "Durante il Gioco" },
+                    { type: "file", path: "Risorse/Post Sessione Guidato.md", title: "Post Sessione Guidato" },
+                    { type: "file", path: "Hub/Cosa Succede Fuori Scena.md", title: "Cosa Succede Fuori Scena" }
+                ]
+            },
+            {
+                type: "group",
+                title: "Mondo e giocatori",
+                items: [
+                    { type: "file", path: "Hub/Worldbuilder Dashboard.md", title: "Worldbuilder" },
+                    { type: "file", path: "Hub/Atlante del Mondo.md", title: "Atlante del Mondo" },
+                    { type: "file", path: "Hub/Campagna da Ambientazione.md", title: "Campagna da Ambientazione" },
+                    { type: "file", path: "Hub/Vista Giocatori.md", title: "Vista Giocatori" }
+                ]
+            }
+        ]
+    }
+};
+
 const enabledPlugins = new Set(readJson(repoPath(ROOT, ".obsidian/community-plugins.json"), []));
 
 function rel(file) {
@@ -216,6 +324,11 @@ function copyDir(source, target, base = source) {
 function writeGeneratedReleaseNotes() {
     for (const [file, text] of Object.entries(GENERATED_RELEASE_NOTES)) {
         fs.writeFileSync(repoPath(OUT, file), text);
+    }
+    for (const [file, data] of Object.entries(GENERATED_RELEASE_JSON)) {
+        const target = repoPath(OUT, file);
+        fs.mkdirSync(path.dirname(target), { recursive: true });
+        fs.writeFileSync(target, `${JSON.stringify(data, null, 2)}\n`);
     }
 }
 
@@ -325,6 +438,25 @@ function validateRelease() {
         errors.push("DataviewJS non abilitato nella release");
     }
 
+    const workspaceConfig = readJson(repoPath(OUT, ".obsidian/workspace.json"), {});
+    const firstLeaf = workspaceConfig.main?.children?.[0]?.children?.[0]?.state;
+    if (firstLeaf?.state?.file !== "Inizia Qui.md" || firstLeaf?.state?.mode !== "preview") {
+        errors.push("workspace release non apre Inizia Qui in modalita lettura");
+    }
+
+    const releaseSet = new Set(releaseEntries);
+    const bookmarksConfig = readJson(repoPath(OUT, ".obsidian/bookmarks.json"), {});
+    const collectBookmarks = items => {
+        for (const item of items ?? []) {
+            if (item.type === "group") collectBookmarks(item.items);
+            if (item.type === "file") {
+                if (String(item.path ?? "").startsWith("z.")) errors.push(`bookmark tecnico nella release: ${item.path}`);
+                if (!releaseSet.has(item.path)) errors.push(`bookmark verso file mancante nella release: ${item.path}`);
+            }
+        }
+    };
+    collectBookmarks(bookmarksConfig.items);
+
     if (errors.length) {
         console.error("Release pulita non valida:");
         for (const error of errors) console.error(`- ${error}`);
@@ -360,11 +492,11 @@ fs.rmSync(OUT, { recursive: true, force: true });
 fs.mkdirSync(DIST, { recursive: true });
 copyDir(ROOT, OUT, ROOT);
 writeGeneratedReleaseNotes();
-validateRelease();
 if (INCLUDE_DEMO) {
     const result = generateDemoWorld({ outDir: "dist/vault-gdr-clean", force: true });
     console.log(`Demo utente generata: ${result.files.length} file in ${rel(result.root)}`);
 }
+validateRelease();
 
 const zipped = zipIfAvailable();
 console.log(`Release utente creata: ${rel(OUT)}`);
