@@ -1,6 +1,33 @@
 id: runtime_profiles
 purpose: Profili runtime usati dagli script Templater sottili per prompt, scelte e default ripetuti.
 version: 0.1.0
+runtime_contracts:
+  session_context:
+    active_states:
+      - pronto
+      - preparazione
+    play_states:
+      - in corso
+      - pronto
+      - preparazione
+    closed_states:
+      - archiviata
+      - ignorata
+    link_fields:
+      - campagne
+      - luoghi
+      - personaggi
+      - missioni
+      - creature
+      - incontri
+      - dispense
+      - mappe
+      - audio
+      - immagini
+      - video
+      - fazioni
+      - oggetti
+      - appunti_live
 profiles:
   fazione:
     name_prompt: Nome della fazione

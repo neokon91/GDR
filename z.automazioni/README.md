@@ -18,6 +18,7 @@ Script usati da Templater, dashboard e manutenzione del vault.
 | `render_template_factory.py` | Renderizza anteprime locali ignorate o materializza template finali in `z.modelli` dentro output locali/release. |
 | `render_obsidian_config.py` | Genera i JSON di configurazione Obsidian da `obsidian_config.yaml`. |
 | `render_plugin_matrix.py` | Genera `Dev/plugin_matrix.json` da `plugin_matrix.yaml`. |
+| `render_session_context_contract.py` | Genera `z.automazioni/data/runtime/session_context.json` da `runtime_profiles.yaml` e valida stati/campi contro `fields_core.yaml`. |
 | `render_templater_wrappers.py` | Genera i wrapper `z.automazioni/templater/*.js` da `templater_wrappers.yaml`. |
 | `generate_workflow_data.js` | Genera JSON workflow da `workflows.yaml` e verifica che resti sincronizzato. |
 | `check_workflow_quick_actions.js` | Verifica che le pagine operative espongano i pulsanti rapidi dichiarati in YAML. |
@@ -74,6 +75,7 @@ npm run check:templates
 npm run check:workflow-data
 npm run check:workflow-actions
 npm run check:workflow-render
+npm run check:session-context-contract
 npm run check:release-quality-contract
 npm run check:obsidian-ux
 npm run check:obsidian-user

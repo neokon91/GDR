@@ -156,6 +156,21 @@ steps:
     check:
       - node
       - z.automazioni/check_validation_contract.js
+  session_context_contract:
+    purpose: Genera il contratto JSON letto dal runtime legacy session_context.js.
+    sources:
+      - Dev/TemplateFactory/modules/runtime_profiles.yaml
+      - Dev/TemplateFactory/modules/fields_core.yaml
+      - z.automazioni/render_session_context_contract.py
+    outputs:
+      - z.automazioni/data/runtime/session_context.json
+    render:
+      - python3
+      - z.automazioni/render_session_context_contract.py
+    check:
+      - python3
+      - z.automazioni/render_session_context_contract.py
+      - --check
   repo_quality_contract:
     purpose: Verifica il contratto YAML dei gate repository usati da check_vault.
     sources:

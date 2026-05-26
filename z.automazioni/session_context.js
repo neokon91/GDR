@@ -1,23 +1,30 @@
-(() => {
-  const ACTIVE_STATES = ["pronto", "preparazione"];
-  const PLAY_STATES = ["in corso", ...ACTIVE_STATES];
-  const CLOSED_STATES = ["archiviata", "ignorata"];
-  const LINK_FIELDS = [
-    "campagne",
-    "luoghi",
-    "personaggi",
-    "missioni",
-    "creature",
-    "incontri",
-    "dispense",
-    "mappe",
-    "audio",
-    "immagini",
-    "video",
-    "fazioni",
-    "oggetti",
-    "appunti_live"
-  ];
+(async () => {
+  async function readJsonRel(relPath) {
+    if (typeof app !== "undefined" && app?.vault?.adapter?.read) {
+      return JSON.parse(await app.vault.adapter.read(relPath));
+    }
+    if (typeof require === "function") {
+      const fs = require("fs");
+      return JSON.parse(fs.readFileSync(relPath, "utf8"));
+    }
+    throw new Error(`Impossibile leggere ${relPath}`);
+  }
+
+  function requireContractArray(contract, key) {
+    const values = Array.isArray(contract?.[key])
+      ? contract[key].map(value => String(value).trim()).filter(Boolean)
+      : [];
+    if (!values.length) {
+      throw new Error(`session_context runtime contract senza ${key}`);
+    }
+    return values;
+  }
+
+  const SESSION_CONTEXT_CONTRACT = await readJsonRel("z.automazioni/data/runtime/session_context.json");
+  const ACTIVE_STATES = requireContractArray(SESSION_CONTEXT_CONTRACT, "active_states");
+  const PLAY_STATES = requireContractArray(SESSION_CONTEXT_CONTRACT, "play_states");
+  const CLOSED_STATES = requireContractArray(SESSION_CONTEXT_CONTRACT, "closed_states");
+  const LINK_FIELDS = requireContractArray(SESSION_CONTEXT_CONTRACT, "link_fields");
 
   const escapeHtml = value => String(value ?? "").replace(/[&<>"']/g, c => ({
     "&": "&amp;",

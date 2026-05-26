@@ -28,6 +28,7 @@ required_files:
   - z.engine/session_player.js
   - z.engine/session_runtime.js
   - z.automazioni/helpers.js
+  - z.automazioni/data/runtime/session_context.json
   - z.automazioni/templater
   - z.bases/Atlante Mappe.base
   - z.bases/Worldbuilding.base
