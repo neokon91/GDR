@@ -5,6 +5,16 @@ required_files:
   - Inizia Qui.md
   - LEGGIMI.md
   - VERSION.md
+  - .obsidian/app.json
+  - .obsidian/appearance.json
+  - .obsidian/community-plugins.json
+  - .obsidian/core-plugins.json
+  - .obsidian/snippets/gdr-vault.css
+  - .obsidian/plugins/dataview/data.json
+  - .obsidian/plugins/homepage/data.json
+  - .obsidian/plugins/metadata-menu/data.json
+  - .obsidian/plugins/obsidian-meta-bind-plugin/data.json
+  - .obsidian/plugins/templater-obsidian/data.json
   - Hub/Vista Giocatori.md
   - Hub/Durante il Gioco.md
   - Risorse/Setup Guidato.md
@@ -37,6 +47,14 @@ required_plugins:
   - templater-obsidian
   - obsidian-meta-bind-plugin
   - js-engine
+  - metadata-menu
+  - homepage
+  - folder-notes
+  - obsidian-tasks-plugin
+  - fantasy-content-generator
+  - obsidian-excalidraw-plugin
+  - maps
+  - advanced-canvas
 forbidden_automation_prefixes:
   - audit_
   - check_

@@ -79,8 +79,16 @@ const REQUIRED_RELEASE_FILES = [
     "Inizia Qui.md",
     "VERSION.md",
     "LEGGIMI.md",
+    ".obsidian/app.json",
+    ".obsidian/appearance.json",
     ".obsidian/community-plugins.json",
+    ".obsidian/core-plugins.json",
     ".obsidian/snippets/gdr-vault.css",
+    ".obsidian/plugins/dataview/data.json",
+    ".obsidian/plugins/homepage/data.json",
+    ".obsidian/plugins/metadata-menu/data.json",
+    ".obsidian/plugins/obsidian-meta-bind-plugin/data.json",
+    ".obsidian/plugins/templater-obsidian/data.json",
     "Hub/Vista Giocatori.md",
     "Hub/Atlante del Mondo.md",
     "Hub/Durante il Gioco.md",
@@ -119,7 +127,7 @@ Apri questa cartella in Obsidian come vault e parti da \`Inizia Qui.md\`.
 - \`Vista Giocatori\` per recap, handout, mappe pubbliche e materiale condivisibile;
 - \`Party Control\` per PG, HP, missioni, inventario e flags;
 - \`Quality Report\` per copertura, buchi operativi e controllo anti-segreti;
-- atlante, mappe, template, automazioni e plugin abilitati necessari ai pulsanti;
+- atlante, mappe, template, automazioni, plugin e configurazioni gia inclusi;
 - SRD 5.2.1 italiano come modulo regolamentare separato.
 
 Le cartelle tecniche e il compendio SRD sono inclusi per far funzionare automazioni, template e riferimenti, ma sono nascosti dalla navigazione normale del vault.
@@ -130,7 +138,7 @@ Le cartelle tecniche e il compendio SRD sono inclusi per far funzionare automazi
 2. Scegli \`Apri cartella come vault\`.
 3. Se Obsidian chiede conferma per gli strumenti inclusi, abilitali solo se hai scaricato il vault dalla release ufficiale.
 4. Apri \`Inizia Qui.md\`.
-5. Apri \`Risorse/Setup Guidato.md\` per controllare plugin, pulsanti e dashboard.
+5. Usa \`Risorse/Setup Guidato.md\` solo se pulsanti, tabelle o pagina iniziale non rispondono.
 
 ## Cosa Non Include
 
@@ -292,6 +300,27 @@ function validateRelease() {
                 errors.push(`plugin non abilitato incluso nella release: ${pluginId}`);
             }
         }
+    }
+
+    const homepageConfig = readJson(repoPath(OUT, ".obsidian/plugins/homepage/data.json"), {});
+    const homepage = homepageConfig.homepages?.["Main Homepage"];
+    if (homepage?.value !== "Inizia Qui" || homepage?.openOnStartup !== true) {
+        errors.push("homepage non configurata per aprire Inizia Qui all'avvio");
+    }
+
+    const appearanceConfig = readJson(repoPath(OUT, ".obsidian/appearance.json"), {});
+    if (!Array.isArray(appearanceConfig.enabledCssSnippets) || !appearanceConfig.enabledCssSnippets.includes("gdr-vault")) {
+        errors.push("snippet gdr-vault non abilitato nella release");
+    }
+
+    const templaterConfig = readJson(repoPath(OUT, ".obsidian/plugins/templater-obsidian/data.json"), {});
+    if (templaterConfig.templates_folder !== "z.modelli" || templaterConfig.user_scripts_folder !== "z.automazioni") {
+        errors.push("Templater non configurato su z.modelli e z.automazioni nella release");
+    }
+
+    const dataviewConfig = readJson(repoPath(OUT, ".obsidian/plugins/dataview/data.json"), {});
+    if (dataviewConfig.enableDataviewJs !== true) {
+        errors.push("DataviewJS non abilitato nella release");
     }
 
     if (errors.length) {

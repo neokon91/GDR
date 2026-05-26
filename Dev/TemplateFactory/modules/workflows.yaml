@@ -3,13 +3,10 @@ purpose: Flussi principali da coprire con template generati e integrazioni plugi
 version: 0.1.0
 workflows:
   onboarding_utente:
-    user_goal: Partire da zero senza scegliere tra troppe dashboard.
+    user_goal: Partire da zero con il vault gia configurato, senza scegliere tra troppe dashboard.
     entry_points:
       - Inizia Qui.md
     quick_actions:
-      - button: setup-guidato-risorse-setup-guidato
-        label: Controlla strumenti
-        use_when: e la prima apertura o qualcosa non risponde
       - button: nuovo-mondo-homebrew
         label: Crea mondo
         use_when: non hai ancora un mondo giocabile
@@ -27,6 +24,9 @@ workflows:
         label: Se ti perdi
         purpose: Aprire solo le viste di supporto, non nuove strade parallele.
         actions:
+          - button: setup-guidato-risorse-setup-guidato
+            label: Recupero strumenti
+            use_when: pulsanti, tabelle o pagina iniziale non rispondono
           - button: prima-sessione-in-15-minuti-risorse-prima-sessione-in-15-minuti
             label: Prima sessione in 15 minuti
             use_when: vuoi giocare subito senza completare tutto

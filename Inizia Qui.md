@@ -8,21 +8,18 @@ stato: pronto
 ---
 # Inizia Qui
 
-Questa e la pagina da usare quando non sai cosa aprire. Segui il percorso dall'alto verso il basso: controlla gli strumenti, crea o scegli un mondo, prepara una sessione, gioca, poi Aggiorna Il Mondo.
+Questa e la pagina da usare quando non sai cosa aprire. Il vault distribuito e gia configurato: segui il percorso dall'alto verso il basso, crea o scegli un mondo, prepara una sessione, gioca, poi Aggiorna Il Mondo.
 
 ## Primo Passo
 
 > [!scena] Percorso guidato
-> Crea Il Mondo, poi Trasforma In Gioco. Se vuoi saltare il mondo completo, usa [[Risorse/Prima Sessione In 15 Minuti]] e torna qui dopo la partita.
+> Crea Il Mondo, poi Trasforma In Gioco. Se Obsidian chiede di abilitare gli strumenti inclusi nel vault, conferma solo se hai scaricato questa copia dalla release ufficiale.
 
 <!-- workflow:quick_actions:start onboarding_utente -->
 > [!regia] Azioni rapide
-> Partire da zero senza scegliere tra troppe dashboard.
+> Partire da zero con il vault gia configurato, senza scegliere tra troppe dashboard.
 >
 > Plugin coinvolti: `Meta Bind`, `Dataview`, `Templater`.
->
-> **Controlla strumenti** - e la prima apertura o qualcosa non risponde
-> `BUTTON[setup-guidato-risorse-setup-guidato]`
 >
 > **Crea mondo** - non hai ancora un mondo giocabile
 > `BUTTON[nuovo-mondo-homebrew]`
@@ -38,6 +35,9 @@ Questa e la pagina da usare quando non sai cosa aprire. Segui il percorso dall'a
 >
 > [!regia]- Se ti perdi
 > Aprire solo le viste di supporto, non nuove strade parallele.
+>
+> **Recupero strumenti** - pulsanti, tabelle o pagina iniziale non rispondono
+> `BUTTON[setup-guidato-risorse-setup-guidato]`
 >
 > **Prima sessione in 15 minuti** - vuoi giocare subito senza completare tutto
 > `BUTTON[prima-sessione-in-15-minuti-risorse-prima-sessione-in-15-minuti]`
@@ -71,19 +71,18 @@ gdr.renderActiveSessionBanner(dv);
 gdr.renderActions(dv);
 ```
 
-## Stato Minimo
+## Vault Pronto
 
 ```dataviewjs
 const enabled = id => app.plugins.enabledPlugins.has(id);
 const exists = path => !!app.vault.getAbstractFileByPath(path);
+const ready = enabled("obsidian-meta-bind-plugin") && enabled("templater-obsidian") && enabled("dataview") && exists(".obsidian/snippets/gdr-vault.css");
 const checks = [
-  ["Pulsanti", enabled("obsidian-meta-bind-plugin") && enabled("templater-obsidian"), "Servono per aprire pagine e creare note."],
-  ["Tabelle", enabled("dataview"), "Servono per mostrare dashboard e liste."],
-  ["Aspetto", exists(".obsidian/snippets/gdr-vault.css"), "Rende leggibili carte, dashboard e callout."],
-  ["Prima sessione", exists("Risorse/Prima Sessione In 15 Minuti.md"), "Percorso breve se vuoi giocare subito."]
+  ["Stato", ready, ready ? "Puoi iniziare da Crea mondo o Prepara sessione." : "Apri Setup Guidato solo per recuperare strumenti disabilitati."],
+  ["Percorso rapido", exists("Risorse/Prima Sessione In 15 Minuti.md"), "Disponibile se vuoi giocare subito."]
 ];
 
-dv.table(["Controllo", "Stato", "Cosa significa"], checks.map(([label, ok, text]) => [label, ok ? "Pronto" : "Da fare", text]));
+dv.table(["Area", "Stato", "Prossimo passo"], checks.map(([label, ok, text]) => [label, ok ? "Pronto" : "Da controllare", text]));
 ```
 
 ## Se I Pulsanti Non Funzionano

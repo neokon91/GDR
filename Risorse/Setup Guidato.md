@@ -8,13 +8,13 @@ stato: pronto
 
 # Setup Guidato
 
-Usa questa pagina solo al primo avvio o quando qualcosa non risponde. Non serve capire i plugin: guarda le righe "Da controllare" e poi torna a [[Inizia Qui]].
+Usa questa pagina solo se qualcosa non risponde. La release del vault e gia configurata: questa pagina serve a recuperare strumenti che Obsidian ha bloccato, disabilitato o non caricato.
 
 ````tabs
 tab: Percorso
 
 > [!scena] Primo utilizzo
-> Crea o apri un mondo, poi Prepara una sessione. Quando sei pronto apri [[Hub/Durante il Gioco]]; dopo la partita apri [[Hub/Cosa Succede Fuori Scena]].
+> Se tutto e pronto, non restare qui: torna a [[Inizia Qui]], Crea o apri un mondo, poi Prepara una sessione. Quando sei pronto apri [[Hub/Durante il Gioco]]; dopo la partita apri [[Hub/Cosa Succede Fuori Scena]].
 
 tab: Problemi
 
@@ -69,8 +69,8 @@ const enabled = id => app.plugins.enabledPlugins.has(id);
 const exists = path => !!app.vault.getAbstractFileByPath(path);
 
 const checks = [
-  ["Pulsanti", enabled("obsidian-meta-bind-plugin") && enabled("templater-obsidian"), "Se non sono pronti, i pulsanti non creano note."],
-  ["Tabelle", enabled("dataview"), "Se non e pronto, le dashboard restano vuote o mostrano codice."],
+  ["Pulsanti e creazione note", enabled("obsidian-meta-bind-plugin") && enabled("templater-obsidian"), "Se non sono pronti, abilita gli strumenti inclusi e riavvia Obsidian."],
+  ["Dashboard e tabelle", enabled("dataview"), "Se non e pronto, le dashboard restano vuote o mostrano codice."],
   ["Campi guidati", enabled("metadata-menu"), "Aiuta a compilare le note, ma puoi iniziare anche senza."],
   ["Pagina iniziale", enabled("homepage"), "Apre automaticamente Inizia Qui."],
   ["Aspetto", exists(".obsidian/snippets/gdr-vault.css"), "Rende leggibili le dashboard."],

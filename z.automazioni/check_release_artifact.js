@@ -82,6 +82,25 @@ function validateOutput(errors) {
     const plugins = JSON.parse(fs.readFileSync(path.join(OUT, ".obsidian/community-plugins.json"), "utf8"));
     for (const plugin of asArray(releaseBoundary.required_plugins)) {
         if (!plugins.includes(plugin)) fail(errors, `plugin richiesto non abilitato nella release: ${plugin}`);
+        if (!existsRel(OUT, `.obsidian/plugins/${plugin}/manifest.json`)) fail(errors, `manifest plugin richiesto mancante nella release: ${plugin}`);
+        if (!existsRel(OUT, `.obsidian/plugins/${plugin}/main.js`)) fail(errors, `main plugin richiesto mancante nella release: ${plugin}`);
+    }
+
+    const homepage = JSON.parse(fs.readFileSync(path.join(OUT, ".obsidian/plugins/homepage/data.json"), "utf8")).homepages?.["Main Homepage"];
+    if (homepage?.value !== "Inizia Qui" || homepage?.openOnStartup !== true) {
+        fail(errors, "homepage release non apre Inizia Qui all'avvio");
+    }
+    const appearance = JSON.parse(fs.readFileSync(path.join(OUT, ".obsidian/appearance.json"), "utf8"));
+    if (!appearance.enabledCssSnippets?.includes("gdr-vault")) {
+        fail(errors, "snippet gdr-vault non abilitato nella release");
+    }
+    const templater = JSON.parse(fs.readFileSync(path.join(OUT, ".obsidian/plugins/templater-obsidian/data.json"), "utf8"));
+    if (templater.templates_folder !== "z.modelli" || templater.user_scripts_folder !== "z.automazioni") {
+        fail(errors, "Templater release non punta a z.modelli e z.automazioni");
+    }
+    const dataview = JSON.parse(fs.readFileSync(path.join(OUT, ".obsidian/plugins/dataview/data.json"), "utf8"));
+    if (dataview.enableDataviewJs !== true) {
+        fail(errors, "DataviewJS non abilitato nella release");
     }
 
     const automationRoot = path.join(OUT, "z.automazioni");

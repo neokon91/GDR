@@ -24,7 +24,7 @@ Apri [[Inizia Qui]] per il primo avvio. Il percorso principale passa da [[Risors
 2. Apri la cartella in Obsidian.
 3. Vai su [[Inizia Qui]].
 4. Se Obsidian chiede conferma per gli strumenti inclusi nel vault, abilitali solo se hai scaricato da fonte affidabile.
-5. Apri [[Risorse/Setup Guidato]].
+5. Parti da [[Inizia Qui]]. Apri [[Risorse/Setup Guidato]] solo se pulsanti, tabelle o pagina iniziale non rispondono.
 6. Clicca **Crea Il Mondo** in [[Inizia Qui]].
 7. Crea o scegli un mondo homebrew e compila Codex, Atlante e prime entità.
 8. Trasforma quel mondo in campagna, avventura o sessione.
