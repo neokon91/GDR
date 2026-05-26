@@ -20,8 +20,8 @@ Apri [[Inizia Qui]] per il primo avvio. Il percorso principale passa da [[Risors
 
 ## Primi 5 Minuti
 
-1. Scarica lo ZIP della release o clona il repository.
-2. Apri la cartella in Obsidian.
+1. Scarica lo ZIP della release.
+2. Estrai lo ZIP e apri la cartella in Obsidian.
 3. Vai su [[Inizia Qui]].
 4. Se Obsidian chiede conferma per gli strumenti inclusi nel vault, abilitali solo se hai scaricato da fonte affidabile.
 5. Parti da [[Inizia Qui]]. Apri [[Risorse/Setup Guidato]] solo se pulsanti, tabelle o pagina iniziale non rispondono.
@@ -31,14 +31,28 @@ Apri [[Inizia Qui]] per il primo avvio. Il percorso principale passa da [[Risors
 9. Collega almeno tre ancore mondo alla sessione: mondo, luogo, potere/PNG, missione, clock, mappa o scena.
 10. Apri **Gioca** quando vai al tavolo.
 
-## Attivare L'Aspetto GDR
+## Aspetto GDR
+
+La release utente include gia snippet, tema e configurazioni principali. Normalmente non devi configurare nulla.
+
+Se l'aspetto non sembra quello previsto:
 
 1. Apri **Impostazioni > Aspetto > Snippet CSS**.
-2. Attiva `gdr-vault`.
+2. Verifica che `gdr-vault` sia attivo.
 3. Se non lo vedi, ricarica gli snippet CSS dalla stessa sezione.
 4. Consigliato: tema **Minimal** e pannello **Style Settings > GDR Vault** per palette, densità di dashboard, tabelle e callout.
 
 Lo snippet non aggiunge dipendenze. Migliora dashboard, callout, card, pulsanti e Vista Giocatori usando classi CSS compatibili con Obsidian, Dataview e Meta Bind.
+
+## Demo Inclusa Nella Release
+
+La demo non vive nel repository come note da mantenere a mano. Quando serve una release con esempio pronto, il manutentore genera lo ZIP con:
+
+```bash
+npm run release:demo
+```
+
+La demo crea `Demo Regno Di Prova.md` dentro la release pulita e mostra un percorso minimo: mondo, campagna, luogo, fazione, missione, sessione, clock, incontro, creatura, oggetto, dispensa e conseguenza propagabile.
 
 ## Flusso Rapido
 
@@ -147,9 +161,10 @@ npm run import:srd
 npm run import:srd-data
 npm run import:azgaar
 npm run release:clean
+npm run release:demo
 ```
 
-`npm run check` valida plugin obbligatori, link, template Meta Bind, helper Templater, file del layer interno, input template, pulsanti, preset Metadata Menu, igiene del repository e sintassi degli script in `z.automazioni` e `z.engine`. `npm run release:clean` rigenera i template runtime da TemplateFactory prima di creare la copia consegnabile. `npm run clean:repo` rimuove solo artefatti locali e temporanei ignorati.
+`npm run check` valida plugin obbligatori, link, template Meta Bind, helper Templater, file del layer interno, input template, pulsanti, preset Metadata Menu, igiene del repository e sintassi degli script in `z.automazioni` e `z.engine`. `npm run release:clean` rigenera i template runtime da TemplateFactory prima di creare la copia consegnabile. `npm run release:demo` crea la stessa release includendo la demo generata nello ZIP. `npm run clean:repo` rimuove solo artefatti locali e temporanei ignorati.
 
 
 

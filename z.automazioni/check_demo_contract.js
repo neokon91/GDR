@@ -1,10 +1,12 @@
 #!/usr/bin/env node
 
 const fs = require("fs");
+const os = require("os");
+const path = require("path");
 const { execFileSync } = require("child_process");
 const { FIXTURE_SCENARIO } = require("./generate_demo_fixture");
-const { DEMO_WORLD_FILE } = require("./generate_demo_world");
-const { existsRel, readJson, readTextRel, repoPath } = require("./node_utils");
+const { DEMO_FILES, DEMO_WORLD_FILE, generateDemoWorld } = require("./generate_demo_world");
+const { existsRel, parseFrontmatter, readJson, readTextRel, repoPath, walk } = require("./node_utils");
 
 const ROOT = process.cwd();
 const CONTRACT = "Dev/TemplateFactory/modules/demo_contract.yaml";
@@ -104,6 +106,55 @@ function validateMinimumScenario(errors, contract) {
     }
 }
 
+function validateDemoWorldGenerator(errors, contract) {
+    const tempParent = fs.mkdtempSync(path.join(os.tmpdir(), "gdr-demo-world-"));
+    try {
+        const result = generateDemoWorld({
+            root: tempParent,
+            outDir: "release",
+            create: true,
+            force: true
+        });
+        const expected = new Set(DEMO_FILES);
+        for (const relPath of expected) {
+            if (!result.files.includes(relPath)) {
+                fail(errors, `generate_demo_world: output non dichiara ${relPath}`);
+            }
+            if (!fs.existsSync(path.join(result.root, relPath))) {
+                fail(errors, `generate_demo_world: file non generato (${relPath})`);
+            }
+        }
+
+        const notes = walk(result.root, {
+            predicate: file => file.endsWith(".md")
+        }).map(file => ({
+            relPath: path.relative(result.root, file).replace(/\\/g, "/"),
+            frontmatter: parseFrontmatter(fs.readFileSync(file, "utf8"))
+        }));
+        const categories = new Set(notes.map(note => String(note.frontmatter.categoria ?? "")));
+        for (const category of asArray(contract.final_demo_minimum?.categories)) {
+            if (!categories.has(category)) {
+                fail(errors, `generate_demo_world: categoria minima non generata (${category})`);
+            }
+        }
+
+        for (const field of asArray(contract.final_demo_minimum?.flows)) {
+            if (!notes.some(note => note.frontmatter[field] !== undefined && String(note.frontmatter[field] ?? "").length > 0)) {
+                fail(errors, `generate_demo_world: campo flusso minimo assente (${field})`);
+            }
+        }
+
+        if (!notes.some(note => note.frontmatter.pubblico === true && String(note.frontmatter.player_safe ?? "").length > 0)) {
+            fail(errors, "generate_demo_world: nessun materiale pubblico player_safe");
+        }
+        if (!notes.some(note => note.frontmatter.attiva === true && note.frontmatter.categoria === "sessione")) {
+            fail(errors, "generate_demo_world: nessuna sessione demo attiva");
+        }
+    } finally {
+        fs.rmSync(tempParent, { recursive: true, force: true });
+    }
+}
+
 function validateDocs(errors) {
     const smokeText = readTextRel(ROOT, "Dev/Smoke Demo Finale.md");
     for (const marker of ["demo_contract.yaml", "generate:demo-fixture", "generate:demo-world"]) {
@@ -124,6 +175,7 @@ validateGenerators(errors, contract, packageJson);
 validateForbiddenSources(errors, contract);
 validateChecks(errors, contract, packageJson);
 validateMinimumScenario(errors, contract);
+validateDemoWorldGenerator(errors, contract);
 validateDocs(errors);
 
 if (errors.length) {

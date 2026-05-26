@@ -7,7 +7,7 @@ Questa checklist serve a preparare una copia pubblicabile del vault. Si esegue d
 1. Apri [[Inizia Qui]] e verifica che i pulsanti portino alle pagine giuste.
 2. Apri [[1. DM Dashboard]], [[Durante il Gioco]], [[Hub/Party Control]], [[Atlante del Mondo]], [[Geopolitical Dashboard]], [[Motore Mondo Vivo]], [[Campagna da Ambientazione]] e [[Vista Giocatori]].
 3. Apri [[Risorse/Controllo Vault]] e [[Risorse/Quality Report]] e risolvi problemi operativi importanti.
-4. Esegui [[Dev/Smoke Demo Finale]] dal repository sorgente se stai preparando la release 1.0 con demo inclusa. Quando testi lo ZIP utente, usa `Demo Brumafonda.md`, generata solo nella release.
+4. Esegui [[Dev/Smoke Demo Finale]] dal repository sorgente se stai preparando la release 1.0 con demo inclusa. La demo utente e generata nello ZIP pulito da `npm run generate:demo-world`.
 5. Acquisisci almeno cinque screenshot: `Inizia Qui`, `Vista Giocatori`, `Atlante del Mondo`, `Party Control`, `Quality Report`.
 6. Registra una GIF breve del flusso `Inizia Qui` -> `Durante il Gioco` -> `Vista Giocatori`.
 7. Esegui:
@@ -16,13 +16,19 @@ Questa checklist serve a preparare una copia pubblicabile del vault. Si esegue d
 npm run check
 ```
 
-8. Se la release include la demo, il comando deve includere e superare anche `npm run check:smoke`.
+8. Se la release include la demo, genera la demo dopo `npm run release:clean` e verifica che `npm run check:demo-contract` e `npm run check:smoke` siano verdi.
 9. Aggiorna [[VERSION]].
 10. Aggiorna [[Dev/CHANGELOG]].
 11. Crea la release utente:
 
 ```bash
 npm run release:clean
+```
+
+Per creare direttamente una release con demo utente inclusa nello ZIP:
+
+```bash
+npm run release:demo
 ```
 
 12. Crea tag o GitHub Release solo dopo controlli puliti.
@@ -42,6 +48,8 @@ Non contiene materiali di sviluppo repository, issue template GitHub, roadmap in
 
 ## Cosa Controllare A Mano
 
+- `dist/vault-gdr-clean.zip` si apre su [[Inizia Qui]] con configurazione Obsidian gia inclusa.
+- Se generata, `Demo Regno Di Prova.md` esiste nella release pulita e collega mondo, campagna, sessione e materiale player-safe.
 - Le dashboard non mostrano errori Dataview.
 - I pulsanti Meta Bind aprono o creano note.
 - La vista `Durante il Gioco` mostra una sessione attiva se esiste una sessione con `attiva`, `in corso`, `pronto` o `preparazione`.

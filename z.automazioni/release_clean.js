@@ -3,12 +3,14 @@
 const fs = require("fs");
 const path = require("path");
 const { execFileSync } = require("child_process");
+const { generateDemoWorld } = require("./generate_demo_world");
 const { readJson, rel: relativePath, repoPath } = require("./node_utils");
 
 const ROOT = process.cwd();
 const DIST = repoPath(ROOT, "dist");
 const OUT = repoPath(DIST, "vault-gdr-clean");
 const ZIP = repoPath(DIST, "vault-gdr-clean.zip");
+const INCLUDE_DEMO = process.argv.includes("--with-demo");
 const TEMPLATE_FACTORY_RENDERER = repoPath(ROOT, "z.automazioni/render_template_factory.py");
 
 const INCLUDED_ROOTS = new Set([
@@ -359,6 +361,10 @@ fs.mkdirSync(DIST, { recursive: true });
 copyDir(ROOT, OUT, ROOT);
 writeGeneratedReleaseNotes();
 validateRelease();
+if (INCLUDE_DEMO) {
+    const result = generateDemoWorld({ outDir: "dist/vault-gdr-clean", force: true });
+    console.log(`Demo utente generata: ${result.files.length} file in ${rel(result.root)}`);
+}
 
 const zipped = zipIfAvailable();
 console.log(`Release utente creata: ${rel(OUT)}`);

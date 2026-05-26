@@ -10,9 +10,9 @@ stato: sospeso
 
 La demo finale non vive più come note sorgente mantenute a mano.
 
-Regola attiva: la demo finale resta l'ultima cosa. Va generata solo a fine ciclo, da script, dopo che template, runtime, fileClass, controlli e viste operative sono stabili. Fino ad allora `npm run check` deve verificare il prodotto senza pretendere contenuti demo. Il contratto dichiarativo vive in `Dev/TemplateFactory/modules/demo_contract.yaml` ed e verificato da `npm run check:demo-contract`.
+Regola attiva: la demo finale non vive nel sorgente. Va generata da script dentro `dist/` dopo la creazione della release pulita. Il contratto dichiarativo vive in `Dev/TemplateFactory/modules/demo_contract.yaml` ed e verificato da `npm run check:demo-contract`.
 
-La fixture M11 generata da `npm run generate:demo-fixture` non e la demo finale: serve solo a provare la catena tecnica scelta -> conseguenza -> propagazione -> materiale D&D collegato al mondo. Anche la demo minima "Regno di Prova" va generata con `npm run generate:demo-world` dentro `dist/`, non mantenuta in `Mondi/`.
+La fixture M11 generata da `npm run generate:demo-fixture` resta prova tecnica: scelta -> conseguenza -> propagazione -> materiale D&D collegato al mondo. La demo utente "Regno di Prova" si genera con `npm run generate:demo-world` dentro `dist/vault-gdr-clean`, non si mantiene in `Mondi/`.
 
 ## Stato
 
@@ -22,15 +22,16 @@ La fixture M11 generata da `npm run generate:demo-fixture` non e la demo finale:
 - [x] Script di fixture M11 tecnica disponibile: `z.automazioni/generate_demo_fixture.js`.
 - [x] Gate M11 tecnico disponibile: `npm run check:m11`.
 - [x] Contratto demo dichiarativo disponibile: `demo_contract.yaml`, con generatori `generate:demo-fixture` e `generate:demo-world`.
-- [ ] Creare o promuovere lo script dedicato di generazione demo finale solo nella fase finale.
-- [ ] Generare scenario demo finale coerente con TemplateFactory e runtime M11.
+- [x] Script demo utente disponibile: `z.automazioni/generate_demo_world.js`.
+- [x] `npm run check:demo-contract` verifica che la demo generata copra scenario minimo, campi di flusso e materiale player-safe.
+- [ ] Generare scenario demo nella release pulita prima dello smoke visuale finale.
 - [ ] Eseguire smoke visuale sulla release generata come ultimo passaggio pre-release.
 
 ## Regola Per La Fase Finale
 
-La demo finale dovrà essere generata da script e poi verificata, non corretta nota per nota.
+La demo finale deve essere generata da script e poi verificata, non corretta nota per nota.
 
-Lo script dovrà produrre almeno:
+`npm run generate:demo-world -- --out dist/vault-gdr-clean --force` produce almeno:
 
 - mondo;
 - campagna;
@@ -44,6 +45,8 @@ Lo script dovrà produrre almeno:
 - oggetto o ricompensa;
 - mappa/dispensa player-safe;
 - conseguenza propagabile.
+
+Il check `npm run check:demo-contract` genera la demo in una cartella temporanea e fallisce se manca una categoria minima, un campo di flusso o una sessione attiva.
 
 ## Regola Per M11 Prima Della Demo
 
@@ -60,7 +63,7 @@ Non va trasformata in contenuto sorgente del vault.
 
 ## Smoke Senza Demo
 
-Fino alla fase demo finale, `npm run check:smoke` controlla solo:
+`npm run check:smoke` controlla senza dipendere da note demo sorgente:
 
 - `Inizia Qui`;
 - `Vista Giocatori`;
