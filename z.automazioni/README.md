@@ -64,6 +64,7 @@ Esempio: `z.modelli/dm/Sessione.md` usa `tp.user.sessione`, quindi lo script dev
 - Mantieni le azioni distruttive o di propagazione in `meta_actions.js`, non nei singoli template.
 - Mantieni rendering e feedback DataviewJS in `z.engine/`; `z.automazioni/session_context.js` resta ponte legacy fino alla migrazione completa.
 - I router in `z.modelli/*Router.md` devono avere una sola chiamata Templater iniziale.
+- `SRD/` e un root generato: non va tracciato nel sorgente, viene materializzato dalla release pulita.
 
 ## Controllo
 

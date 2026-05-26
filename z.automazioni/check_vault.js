@@ -23,13 +23,15 @@ const { validateObsidianConfig } = require("./checks/obsidian_config");
 const { validateDndHardening } = require("./checks/dnd_hardening");
 const { validatePlayerSafety } = require("./checks/player_safety");
 const { validateDemoPolicy } = require("./checks/demo_policy");
-const { materializedUserFileMap, materializedUserFiles, renderMaterializedUserFile } = require("./release_boundary_utils");
+const { loadReleaseBoundary, materializedUserFileMap, materializedUserFiles, renderMaterializedUserFile } = require("./release_boundary_utils");
 const {
     hasPluginNativeSheet,
     validatePluginNativeExperience
 } = require("./checks/plugin_native_sheets");
 
 const ROOT = process.cwd();
+const RELEASE_BOUNDARY = loadReleaseBoundary(ROOT);
+const GENERATED_VAULT_ROOTS = new Set(RELEASE_BOUNDARY.generated_release_roots ?? []);
 function loadYamlModule(relPath) {
     const script = [
         "import json, sys, yaml",
@@ -676,6 +678,7 @@ validateSyntaxControls({
 
 validateMarkdownLinks({
     errors,
+    generatedVaultRoots: GENERATED_VAULT_ROOTS,
     isGeneratedTemplatePath,
     linkableByBasename,
     linkableByPath,

@@ -71,6 +71,9 @@ function validateOutput(errors) {
     for (const relPath of asArray(releaseBoundary.required_files)) {
         if (!existsRel(OUT, relPath)) fail(errors, `file release richiesto mancante: ${relPath}`);
     }
+    for (const relPath of asArray(releaseBoundary.generated_release_roots)) {
+        if (!existsRel(OUT, relPath)) fail(errors, `root generata release mancante: ${relPath}`);
+    }
 
     for (const relPath of asArray(releaseBoundary.forbidden_roots)) {
         if (existsRel(OUT, relPath)) fail(errors, `percorso vietato nella release: ${relPath}`);

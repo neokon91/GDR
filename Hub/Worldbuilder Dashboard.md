@@ -169,6 +169,7 @@ campagne_attive: []
 ```dataviewjs
 const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
 gdr.renderWorldbuildingFreedom(dv, dv.current().mondo_attivo);
+gdr.renderWorldbuildingStudio(dv);
 await gdr.renderWorkflowCommandDeck(dv, "espandi_mondo", { mode: "simple" });
 ```
 

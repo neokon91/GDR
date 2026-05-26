@@ -44,7 +44,6 @@ copy_policy:
     - Inbox
     - Mondi
     - Risorse
-    - SRD
     - z.automazioni
     - z.bases
     - z.engine
@@ -115,6 +114,8 @@ copy_policy:
     - z.engine/
     - z.fileclass/
     - z.modelli/
+generated_release_roots:
+  - SRD
 materialized_user_files:
   - path: Campagne/Campagne.md
     title: Campagne

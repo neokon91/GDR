@@ -16,6 +16,7 @@ from template_factory_utils import ROOT, build_jinja_env, load_modules, resolved
 
 PIPELINE = ROOT / "Dev" / "TemplateFactory" / "modules" / "source_pipeline.yaml"
 OBSIDIAN_CONFIG = ROOT / "Dev" / "TemplateFactory" / "modules" / "obsidian_config.yaml"
+RELEASE_BOUNDARY = ROOT / "Dev" / "TemplateFactory" / "modules" / "release_boundary.yaml"
 
 
 def fail(errors: list[str], message: str) -> None:
@@ -78,7 +79,9 @@ def validate_render_plan(rendered: dict[str, str], blueprints: dict[str, dict[st
 
 def validate_tracked_generated(errors: list[str]) -> None:
     # I template materializzati e le preview locali sono output: non devono rientrare in Git.
-    for generated_path in ["z.modelli", "Dev/TemplateFactory/examples/generated"]:
+    release_boundary = load_yaml(RELEASE_BOUNDARY, errors)
+    generated_release_roots = [str(root).rstrip("/") for root in release_boundary.get("generated_release_roots", []) or []]
+    for generated_path in ["z.modelli", "Dev/TemplateFactory/examples/generated", *generated_release_roots]:
         result = subprocess.run(
             ["git", "ls-files", generated_path],
             cwd=ROOT,

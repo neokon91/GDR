@@ -25,7 +25,8 @@ const REQUIRED_EXPORTS = [
     "renderVaultReadiness",
     "renderWorkflowCommandDeck",
     "renderWorldImpact",
-    "renderWorldbuildingFreedom"
+    "renderWorldbuildingFreedom",
+    "renderWorldbuildingStudio"
 ];
 const REQUIRED_MODULES = [
     "z.engine/session_continuity.js",
@@ -191,6 +192,10 @@ async function main() {
             views.renderWorldbuildingFreedom(dv);
             if (!rendered.some(node => String(node.innerHTML).includes("Liberta di worldbuilding"))) {
                 errors.push("renderWorldbuildingFreedom: output senza regia worldbuilding libero");
+            }
+            views.renderWorldbuildingStudio(dv);
+            if (!rendered.some(node => String(node.innerHTML).includes("Studio Worldbuilding"))) {
+                errors.push("renderWorldbuildingStudio: output senza studio worldbuilding");
             }
             views.renderPlayerPortalStatus(dv);
             views.renderPublicSafety(dv);

@@ -18,6 +18,9 @@ __pycache__/
 # Generated release packages
 dist/
 
+# Generated vault reference modules
+SRD/
+
 # Generated Obsidian templates
 z.modelli/**/*.md
 z.modelli/.templatefactory-manifest.json

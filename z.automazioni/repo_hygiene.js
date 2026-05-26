@@ -4,12 +4,16 @@ const fs = require("fs");
 const path = require("path");
 const { execFileSync } = require("child_process");
 const { readJson: readJsonFile, readTextIfExists, rel: relativePath, repoPath, walk } = require("./node_utils");
+const { loadReleaseBoundary } = require("./release_boundary_utils");
 
 const ROOT = process.cwd();
 const FIX = process.argv.includes("--fix");
+const RELEASE_BOUNDARY = loadReleaseBoundary(ROOT);
+const GENERATED_RELEASE_ROOTS = RELEASE_BOUNDARY.generated_release_roots ?? [];
 const IGNORED_DIRS = new Set([".git", "node_modules"]);
 const GENERATED_LOCAL_DIRS = [
     "dist",
+    ...GENERATED_RELEASE_ROOTS,
     "z.modelli",
     "Dev/TemplateFactory/examples/generated",
     ".pytest_cache",
@@ -49,6 +53,15 @@ for (const root of FORBIDDEN_TRACKED_USER_ROOTS) {
         .filter(Boolean);
     if (tracked.length) {
         errors.push(`${root}: cartella utente tracciata nel sorgente (${tracked.length} file); deve esistere solo in release/output`);
+    }
+}
+
+for (const root of GENERATED_RELEASE_ROOTS) {
+    const tracked = execFileSync("git", ["ls-files", `${root}/**`], { cwd: ROOT, encoding: "utf8" })
+        .split(/\r?\n/)
+        .filter(Boolean);
+    if (tracked.length) {
+        errors.push(`${root}: root generata tracciata nel sorgente (${tracked.length} file); deve essere materializzata in release/output`);
     }
 }
 
@@ -92,7 +105,7 @@ const gitignore = readTextIfExists(gitignorePath, null);
 if (gitignore === null) {
     errors.push(".gitignore mancante");
 } else {
-    for (const pattern of [".DS_Store", "Thumbs.db", "*.tmp", "*.bak", "*.orig", "*~", "dist/", "z.modelli/", "Dev/TemplateFactory/examples/generated/", "__pycache__/", "*.py[cod]", ".pytest_cache/"]) {
+    for (const pattern of [".DS_Store", "Thumbs.db", "*.tmp", "*.bak", "*.orig", "*~", "dist/", "SRD/", "z.modelli/", "Dev/TemplateFactory/examples/generated/", "__pycache__/", "*.py[cod]", ".pytest_cache/"]) {
         if (!gitignore.includes(pattern)) {
             errors.push(`.gitignore: pattern mancante ${pattern}`);
         }

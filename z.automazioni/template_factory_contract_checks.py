@@ -146,9 +146,13 @@ def validate_taxonomy_depth_contracts(modules: dict[str, dict], errors: list[str
     bindings = modules["plugin_bindings"]
     plugin_bindings = bindings.get("bindings", {})
     dnd55_option_groups = set(modules["dnd55_options"].get("groups", {}))
+    generated_release_roots = {str(root).rstrip("/") for root in modules["release_boundary"].get("generated_release_roots", []) or []}
 
     for family_id, family in families.items():
         for folder in family.get("source_folders", []) or []:
+            top = str(folder).replace("\\", "/").split("/", 1)[0]
+            if top in generated_release_roots:
+                continue
             if not (ROOT / str(folder)).exists():
                 fail(f"taxonomy_depth.{family_id}: cartella sorgente mancante ({folder})", errors)
 

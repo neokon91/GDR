@@ -4,6 +4,7 @@ const WIKI_LINK_PATTERN = /!?\[\[([^\]|#]+)(?:#[^\]|]+)?(?:\|[^\]]*)?\]\]/g;
 
 function validateMarkdownLinks({
     errors,
+    generatedVaultRoots = new Set(),
     isGeneratedTemplatePath,
     linkableByBasename,
     linkableByPath,
@@ -36,6 +37,7 @@ function validateMarkdownLinks({
 
             const normalized = target.replace(/\\/g, "/").replace(/\.(md|canvas|base)$/, "");
             if (isGeneratedTemplatePath(normalized)) continue;
+            if ([...generatedVaultRoots].some(root => normalized === root || normalized.startsWith(`${root}/`))) continue;
             const basename = path.basename(normalized);
 
             if (linkableByPath.has(normalized)) continue;

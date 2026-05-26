@@ -388,6 +388,65 @@
     grid.innerHTML = cards.join("");
   }
 
+  function renderWorldbuildingStudio(dv) {
+    const surfaces = [
+      {
+        title: "Studio Worldbuilding",
+        plugin: "Dataview",
+        meta: "Regia",
+        body: "Scegli se creare, collegare, approfondire o portare al tavolo senza passare dalla sidebar.",
+        importa: "Questa dashboard deve restare il cockpit principale del worldbuilding.",
+        link: "Hub/Worldbuilder Dashboard.md"
+      },
+      {
+        title: "Codex editabile",
+        plugin: "Bases",
+        meta: "Base dati",
+        body: "Usa la vista Worldbuilding.base per correggere campi, stati e collegamenti in modo tabellare.",
+        importa: "Serve quando molte schede esistono ma non sono ancora allineate.",
+        link: "z.bases/Worldbuilding.base"
+      },
+      {
+        title: "Atlante con marker",
+        plugin: "Maps",
+        meta: "Geografia",
+        body: "Usa Atlante Mappe.base per coordinate, icone e colori dei luoghi.",
+        importa: "Le mappe restano dati modificabili, non solo immagini decorative.",
+        link: "z.bases/Atlante Mappe.base"
+      },
+      {
+        title: "Fronti visuali",
+        plugin: "Excalidraw",
+        meta: "Diagrammi",
+        body: "Usa Excalidraw per relazioni mobili, indizi, pressioni e mappe di preparazione.",
+        importa: "Quando non sai ancora la struttura finale, disegna prima di normalizzare.",
+        link: "Risorse/Mappe/Schema Relazioni GDR.excalidraw.md"
+      },
+      {
+        title: "Reti di note",
+        plugin: "Advanced Canvas",
+        meta: "Canvas",
+        body: "Usa Canvas quando le connessioni sono stabili e ogni nodo deve aprire una nota reale.",
+        importa: "Campagne, fazioni, luoghi, missioni e clock diventano una rete navigabile.",
+        link: "Risorse/Canvas Per GDR.md"
+      }
+    ];
+    const grid = dv.el("div", "", { cls: "gdr-card-grid compact" });
+    grid.innerHTML = surfaces.map(surface => {
+      const status = pluginStatus(surface.plugin);
+      return cardHtml({
+        title: surface.title,
+        meta: `${surface.meta} · ${status.ok === true ? "plugin attivo" : "fallback disponibile"}`,
+        body: surface.body,
+        importa: status.ok === false
+          ? `${pluginManualActions[surface.plugin] ?? "Usa la superficie Markdown collegata finche il plugin non e attivo."} ID plugin: ${status.id}.`
+          : surface.importa,
+        link: surface.link,
+        cls: `gdr-info-card compact ${status.ok === false ? "gdr-kind-missing" : "gdr-kind-ready"}`
+      });
+    }).join("");
+  }
+
   async function renderWorkflowCommandDeck(dv, workflowId, options = {}) {
     const dataPath = "z.automazioni/data/workflows/quick_actions.json";
 
@@ -780,6 +839,7 @@
     renderWorldImpact: continuityViews.renderWorldImpact,
     renderWorldCreationStatus,
     renderWorldbuildingFreedom,
+    renderWorldbuildingStudio,
     renderPluginTroubleshooting,
     renderOnboardingReadiness,
     renderVaultReadiness,

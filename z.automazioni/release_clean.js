@@ -40,6 +40,7 @@ const EXCLUDED_FILES = new Set(COPY_POLICY.excluded_files ?? []);
 const REQUIRED_RELEASE_FILES = RELEASE_BOUNDARY.required_files ?? [];
 const REQUIRED_USER_IGNORE_FILTERS = COPY_POLICY.required_user_ignore_filters ?? [];
 const RUNTIME_TEMPLATE_MODULES = RELEASE_BOUNDARY.runtime_template_modules ?? [];
+const GENERATED_RELEASE_ROOTS = new Set(RELEASE_BOUNDARY.generated_release_roots ?? []);
 const enabledPlugins = RELEASE_PLUGIN_PROFILE.enabledPluginSet;
 const GENERATED_RELEASE_NOTES = {
     "LEGGIMI.md": `# Vault GDR
@@ -201,6 +202,7 @@ function shouldSkip(relPath, entry) {
     if (EXCLUDED_FILES.has(entry.name)) return true;
     const top = topSegment(relPath);
     if (EXCLUDED_DIRS.has(top)) return true;
+    if (GENERATED_RELEASE_ROOTS.has(top)) return true;
     if (!shouldIncludeRoot(relPath, entry)) return true;
 
     if (relPath.startsWith(".obsidian/plugins/")) {
@@ -321,6 +323,11 @@ function validateRelease() {
         }
         if (!fs.existsSync(repoPath(OUT, runtimeModuleJson))) {
             errors.push(`modulo JSON runtime release mancante: ${runtimeModuleJson}`);
+        }
+    }
+    for (const root of GENERATED_RELEASE_ROOTS) {
+        if (!fs.existsSync(repoPath(OUT, root))) {
+            errors.push(`root generata release mancante: ${root}`);
         }
     }
 
@@ -482,11 +489,23 @@ function copyRuntimeTemplateModules() {
     }
 }
 
+function materializeGeneratedReleaseRoots() {
+    if (GENERATED_RELEASE_ROOTS.has("SRD")) {
+        execFileSync("node", [repoPath(ROOT, "z.automazioni/import_srd.js")], {
+            cwd: OUT,
+            encoding: "utf8",
+            stdio: QUIET ? "pipe" : "inherit",
+            maxBuffer: 32 * 1024 * 1024
+        });
+    }
+}
+
 fs.rmSync(OUT, { recursive: true, force: true });
 fs.mkdirSync(DIST, { recursive: true });
 copyDir(ROOT, OUT, ROOT);
 materializeTemplates(OUT);
 copyRuntimeTemplateModules();
+materializeGeneratedReleaseRoots();
 writeGeneratedReleaseNotes();
 if (INCLUDE_DEMO) {
     const result = generateDemoWorld({ outDir: OUT, force: true });
