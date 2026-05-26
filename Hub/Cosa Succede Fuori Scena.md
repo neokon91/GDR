@@ -23,8 +23,6 @@ campagne_attive: []
 > [!regia] Azioni rapide
 > Scegliere cosa reagisce tra una sessione e l'altra senza perdere conseguenze aperte.
 >
-> Plugin coinvolti: `Meta Bind`, `Dataview`, `Templater`, `Tasks`.
->
 > **Post sessione guidato** - devi chiudere appunti, recap e output della sessione
 > `BUTTON[post-sessione-guidato-risorse-post-sessione-guidato]`
 >
@@ -76,7 +74,7 @@ campagne_attive: []
 
 ```dataviewjs
 const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
-await gdr.renderWorkflowCommandDeck(dv, "fuori_scena");
+await gdr.renderWorkflowCommandDeck(dv, "fuori_scena", { mode: "simple" });
 ```
 
 ```dataviewjs

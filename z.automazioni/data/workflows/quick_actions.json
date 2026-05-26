@@ -140,7 +140,7 @@
       }
     },
     "prima_sessione_rapida": {
-      "audience": "",
+      "audience": "user",
       "user_goal": "Preparare, giocare e chiudere una prima sessione con il minimo indispensabile.",
       "entry_points": [
         "Risorse/Prima Sessione In 15 Minuti.md"
@@ -207,7 +207,7 @@
       }
     },
     "dashboard_dm": {
-      "audience": "",
+      "audience": "user",
       "user_goal": "Scegliere in pochi secondi se preparare, giocare, consolidare o creare materiale.",
       "entry_points": [
         "Hub/1. DM Dashboard.md"
@@ -706,7 +706,7 @@
       }
     },
     "fuori_scena": {
-      "audience": "",
+      "audience": "user",
       "user_goal": "Scegliere cosa reagisce tra una sessione e l'altra senza perdere conseguenze aperte.",
       "entry_points": [
         "Hub/Cosa Succede Fuori Scena.md"
@@ -805,7 +805,7 @@
       }
     },
     "prepara_sessione": {
-      "audience": "",
+      "audience": "user",
       "user_goal": "Preparare una sessione radicata nel mondo.",
       "entry_points": [
         "Risorse/Preparazione Sessione.md"
@@ -908,7 +908,7 @@
       }
     },
     "gioca_live": {
-      "audience": "",
+      "audience": "user",
       "user_goal": "Gestire sessione, tiri, incontri, media e appunti live da una schermata.",
       "entry_points": [
         "Hub/Durante il Gioco.md"
@@ -1081,7 +1081,7 @@
       }
     },
     "post_sessione": {
-      "audience": "",
+      "audience": "user",
       "user_goal": "Trasformare appunti e conseguenze in mondo aggiornato.",
       "entry_points": [
         "Risorse/Post Sessione Guidato.md"

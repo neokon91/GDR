@@ -90,7 +90,7 @@ async function main() {
                     return emptyPages([]);
                 }
             };
-            await views.renderWorkflowCommandDeck(dv, "gioca_live");
+            await views.renderWorkflowCommandDeck(dv, "gioca_live", { mode: "diagnostic" });
             if (!rendered.some(node => String(node.innerHTML).includes("BUTTON[registra-scelta-mondo]"))) {
                 errors.push("renderWorkflowCommandDeck: output workflow gioca_live senza pulsanti operativi");
             }

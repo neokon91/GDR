@@ -33,8 +33,6 @@ if (!active) {
 > [!regia] Azioni rapide
 > Gestire sessione, tiri, incontri, media e appunti live da una schermata.
 >
-> Plugin coinvolti: `Meta Bind`, `Dataview`, `Dice Roller`, `Initiative Tracker`, `Fantasy Statblocks`, `Media Extended`, `Callout Manager`.
->
 > **Aggiorna scena** - cambia la scena corrente e vuoi tenerla visibile alla sessione
 > `BUTTON[aggiorna-scena-z-modelli-dm-aggiorna-scena-corrente-md]`
 >
@@ -128,7 +126,7 @@ if (!active) {
 
 ```dataviewjs
 const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
-await gdr.renderWorkflowCommandDeck(dv, "gioca_live");
+await gdr.renderWorkflowCommandDeck(dv, "gioca_live", { mode: "simple" });
 ```
 
 ## Cockpit Unico

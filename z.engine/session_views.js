@@ -375,7 +375,8 @@
       const entryPoints = asArray(workflow.entry_points);
       const actions = asArray(workflow.quick_actions);
       const actionGroups = Object.values(workflow.action_groups ?? {});
-      const simple = options.mode === "simple" || workflow.audience === "user";
+      const diagnostic = options.mode === "diagnostic";
+      const simple = !diagnostic && (options.mode === "simple" || workflow.audience === "user");
       const entryStates = await Promise.all(entryPoints.map(async entry => [entry, await canReadRel(entry)]));
       const missingEntries = entryStates.filter(([, ok]) => !ok).map(([entry]) => entry);
       const metaBindStatus = pluginStatus("Meta Bind");

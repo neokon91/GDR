@@ -33,8 +33,6 @@ tab: Dopo
 > [!regia] Azioni rapide
 > Preparare, giocare e chiudere una prima sessione con il minimo indispensabile.
 >
-> Plugin coinvolti: `Meta Bind`, `Dataview`, `Templater`.
->
 > **Controlla setup** - non sai se i pulsanti funzionano
 > `BUTTON[setup-guidato-risorse-setup-guidato-2]`
 >
@@ -68,7 +66,7 @@ tab: Dopo
 
 ```dataviewjs
 const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
-await gdr.renderWorkflowCommandDeck(dv, "prima_sessione_rapida");
+await gdr.renderWorkflowCommandDeck(dv, "prima_sessione_rapida", { mode: "simple" });
 ```
 
 ## Sessione Attiva
