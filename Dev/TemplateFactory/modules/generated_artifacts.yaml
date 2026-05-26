@@ -14,6 +14,7 @@ policy:
     - z.automazioni/data/srd/core.json
     - z.automazioni/data/srd/opzioni_personaggio.json
     - Dev/plugin_matrix.json
+    - z.automazioni/templater/*.js
     - .obsidian/**/*.json
     - .obsidian/plugins/obsidian-meta-bind-plugin/data.json
   local_debug_outputs:
@@ -45,6 +46,10 @@ artifacts:
     source: Dev/TemplateFactory/modules/plugin_matrix.yaml
     target: Dev/plugin_matrix.json
     check: npm run check:plugin-matrix
+  templater_wrappers:
+    source: Dev/TemplateFactory/modules/templater_wrappers.yaml
+    target: z.automazioni/templater/*.js
+    check: npm run check:templater-wrappers
   workflow_blocks:
     source: z.automazioni/data/workflows/quick_actions.json
     targets: workflow entry_points

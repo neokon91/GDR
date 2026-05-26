@@ -13,6 +13,7 @@ Script usati da Templater, dashboard e manutenzione del vault.
 | `render_template_factory.py` | Renderizza anteprime locali ignorate o materializza template finali in `z.modelli` dentro output locali/release. |
 | `render_obsidian_config.py` | Genera i JSON di configurazione Obsidian da `obsidian_config.yaml`. |
 | `render_plugin_matrix.py` | Genera `Dev/plugin_matrix.json` da `plugin_matrix.yaml`. |
+| `render_templater_wrappers.py` | Genera i wrapper `z.automazioni/templater/*.js` da `templater_wrappers.yaml`. |
 | `generate_workflow_data.js` | Genera JSON workflow da `workflows.yaml` e verifica che resti sincronizzato. |
 | `check_workflow_quick_actions.js` | Verifica che le pagine operative espongano i pulsanti rapidi dichiarati in YAML. |
 | `render_workflow_quick_actions.js` | Renderizza nelle pagine operative blocchi Markdown statici derivati dalle azioni rapide YAML. |
@@ -44,7 +45,7 @@ Script usati da Templater, dashboard e manutenzione del vault.
 
 ## Script Di Creazione
 
-Gli altri file `.js` corrispondono ai template generati in `z.modelli/`. Il nome dello script deve restare coerente con le chiamate `tp.user.*` nei template.
+Gli altri file `.js` corrispondono ai template generati in `z.modelli/`. I wrapper in `z.automazioni/templater/` sono generati da YAML e non vanno editati a mano.
 
 Esempio: `z.modelli/dm/Sessione.md` usa `tp.user.sessione`, quindi lo script deve restare `sessione.js`.
 
