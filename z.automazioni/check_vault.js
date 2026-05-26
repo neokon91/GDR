@@ -85,6 +85,34 @@ function requiredFieldsByCategoryFromProfiles() {
     }));
 }
 
+function requiredValidationList(key) {
+    const values = FRONTMATTER_PROFILES.validation_contract?.[key] ?? [];
+    const normalized = values
+        .map(value => String(value))
+        .filter(Boolean);
+    if (!normalized.length) {
+        throw new Error(`Dev/TemplateFactory/modules/frontmatter_profiles.yaml: validation_contract.${key} vuoto o mancante`);
+    }
+    return new Set(normalized);
+}
+
+function requiredValidationSetMap(key) {
+    const contract = FRONTMATTER_PROFILES.validation_contract?.[key] ?? {};
+    const entries = Object.entries(contract);
+    if (!entries.length) {
+        throw new Error(`Dev/TemplateFactory/modules/frontmatter_profiles.yaml: validation_contract.${key} vuoto o mancante`);
+    }
+    return Object.fromEntries(entries.map(([category, values]) => {
+        const normalized = (values ?? [])
+            .map(value => String(value))
+            .filter(Boolean);
+        if (!normalized.length) {
+            throw new Error(`Dev/TemplateFactory/modules/frontmatter_profiles.yaml: validation_contract.${key}.${category} vuoto`);
+        }
+        return [category, new Set(normalized)];
+    }));
+}
+
 function requiredMetaBindInputTemplates() {
     const inputs = loadYamlModule("Dev/TemplateFactory/modules/metabind_inputs.yaml").inputs ?? {};
     return Object.values(inputs)
@@ -266,101 +294,11 @@ const REQUIRED_METADATA_MENU_PRESETS = [
 const TAG_RULES_FILE = "Dev/TemplateFactory/modules/tag_rules.yaml";
 const ALLOWED_CATEGORIES = requiredCoreFieldValues("categoria");
 const ALLOWED_STATES = requiredCoreFieldValues("stato");
-const LIVE_ENTITY_CATEGORIES = new Set(["luogo", "personaggio", "fazione", "missione", "evento storico", "oggetto", "tracciato", "relazione", "risorsa", "cultura", "religione", "societa"]);
-const CODEX_CATEGORIES = new Set(["luogo", "personaggio", "fazione", "missione", "tracciato", "relazione", "evento storico", "oggetto", "cultura", "religione", "societa"]);
+const LIVE_ENTITY_CATEGORIES = requiredValidationList("live_entity_categories");
+const CODEX_CATEGORIES = requiredValidationList("codex_categories");
 const PLAYABLE_MAP_USES = new Set(["zoom", "esagoni", "dungeon", "scena"]);
 const STRUCTURED_MAP_USES = new Set(["fronte", "indizi", "regione"]);
-const RESOURCE_ENTITY_TYPES = [
-    "risorsa",
-    "merce",
-    "materia prima",
-    "reliquia",
-    "rotta",
-    "mercato",
-    "merce strategica",
-    "miniera cava foresta o fonte",
-    "porto mercato fiera o caravanserraglio",
-    "monopolio",
-    "rotta illegale",
-    "debito o banca",
-    "carestia",
-    "tecnologia produttiva",
-    "oggetto di prestigio",
-    "leva economica da definire"
-];
-const RESOURCE_DOCUMENT_TYPES = [
-    "aspetto",
-    "audio",
-    "audit plugin",
-    "calendario diegetico",
-    "canon control",
-    "codex mondo",
-    "compendium",
-    "compendium mondo",
-    "controllo",
-    "controllo worldbuilding",
-    "dashboard",
-    "dashboard economia",
-    "dashboard fuori scena",
-    "dashboard geopolitica",
-    "faq",
-    "generatori worldbuilding",
-    "guida",
-    "guida plugin",
-    "guida rapida",
-    "immagini",
-    "indice",
-    "indice connettore gpt",
-    "indice mercati",
-    "indice risorse",
-    "indice rotte",
-    "indice segreti",
-    "lore",
-    "lore hub",
-    "lore review",
-    "mappa",
-    "mappe",
-    "media",
-    "mistero",
-    "motore mondo vivo",
-    "onboarding",
-    "plugin",
-    "portale giocatori",
-    "post-sessione",
-    "preparazione",
-    "primo avvio",
-    "repository",
-    "roadmap",
-    "setup",
-    "stato mondo",
-    "studio plugin",
-    "supporto",
-    "sviluppo",
-    "tabelle",
-    "video"
-];
-const ALLOWED_TYPES_BY_CATEGORY = {
-    campagna: new Set(["campagna"]),
-    conflitto: new Set(["conflitto", "guerra", "crisi", "rivalità"]),
-    cosmologia: new Set(["piano", "reame divino", "aldilà", "principio cosmico", "soglia", "legge arcana", "scuola o tradizione magica", "risorsa magica", "fenomeno magico", "patto", "contaminazione", "soglia o portale", "anomalia", "piano reame o aldila", "mistero arcano"]),
-    creatura: new Set(["habitat", "migrazione", "catena alimentare", "variante regionale", "creatura sacra", "mostro sociale", "specie senziente", "predatore territoriale", "piaga sciame o invasione", "ecosistema da definire"]),
-    cultura: new Set(["cultura", "popolo", "etnia", "tradizione", "festa o calendario rituale", "tabu", "rito di passaggio", "costume quotidiano", "cucina e ospitalita", "matrimonio famiglia e parentela", "funerali e memoria", "duello onore e vendetta", "arte musica teatro moda", "cultura da definire"]),
-    dispensa: new Set(["lettera", "mappa", "documento", "indizio", "dispensa"]),
-    "evento storico": new Set(["evento", "conseguenza", "rumor", "leggenda", "era", "epoca", "guerra", "catastrofe", "fondazione", "dinastia", "migrazione", "rivoluzione", "scoperta", "trattato", "eta mitica", "cronologia concorrente", "evento da definire"]),
-    fazione: new Set(["fazione generica", "confraternita", "culto", "gilda", "ordine rituale"]),
-    incontro: new Set(["combattimento", "esplorazione", "pericolo ambientale", "trappola"]),
-    lingua: new Set(["lingua", "dialetto", "scrittura", "lingua antica"]),
-    "lore capture": new Set(["evento", "png improvvisato", "luogo improvvisato", "dialogo", "conseguenza", "idea"]),
-    missione: new Set(["incarico", "ricerca", "mistero", "salvataggio", "caccia", "viaggio", "fronte", "trama personale", "missione di fazione", "arco narrativo", "missione"]),
-    oggetto: new Set(["oggetto", "oggetto magico", "chiave"]),
-    personaggio: new Set(["pg", "png"]),
-    religione: new Set(["divinità", "soglia", "pantheon", "divinita", "santo profeta o eroe mitico", "eresia", "ordine religioso", "reliquia", "luogo sacro", "profezia", "pratica quotidiana", "mito da definire"]),
-    relazione: new Set(["relazione", "alleanza", "rivalità", "guerra fredda", "vassallaggio", "trattato", "debito", "faida", "patto religioso", "tradimento"]),
-    risorsa: new Set([...RESOURCE_ENTITY_TYPES, ...RESOURCE_DOCUMENT_TYPES]),
-    sessione: new Set(["sessione di campagna", "sessione zero", "interludio", "downtime", "finale", "one-shot"]),
-    societa: new Set(["ceto sociale", "clan casata o famiglia", "istituzione civile", "legge o codice", "crimine organizzato", "accademia o scuola", "burocrazia", "gilda non economica", "movimento popolare", "societa da definire"]),
-    tracciato: new Set(["clock", "progress track", "fronte", "rituale", "minaccia", "viaggio", "progetto"])
-};
+const ALLOWED_TYPES_BY_CATEGORY = requiredValidationSetMap("allowed_types_by_category");
 const REQUIRED_FIELDS_BY_CATEGORY = requiredFieldsByCategoryFromProfiles();
 
 const errors = [];
