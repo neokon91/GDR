@@ -5,10 +5,13 @@ const net = require("net");
 const os = require("os");
 const path = require("path");
 const { execFileSync } = require("child_process");
+const { loadReleaseBoundary } = require("./release_boundary_utils");
+const { releasePluginProfile } = require("./release_plugin_profile");
 
 const ROOT = process.cwd();
 const LIVE_ACCEPTANCE_FILE = "Dev/TemplateFactory/modules/live_acceptance.yaml";
 const LIVE_ACCEPTANCE = loadYamlModule(LIVE_ACCEPTANCE_FILE);
+const RELEASE_PLUGIN_IDS = releasePluginProfile(ROOT, loadReleaseBoundary(ROOT)).enabledPlugins;
 const OBSIDIAN_APP = optionValue("--obsidian", "/Applications/Obsidian.app");
 const ACCEPT_PROMPTS = process.argv.includes("--accept-prompts");
 const CONTRACT_CHECK = process.argv.includes("--contract-check");
@@ -26,6 +29,7 @@ const WORK_ROOT = path.join(os.homedir(), "Library/Caches/vault-gdr-live-test");
 const OUT = path.join(WORK_ROOT, "vault-gdr-clean");
 const PROFILE_READY_FILE = path.join(PROFILE_ROOT, "gdr-live-test-profile-ready.json");
 const FIRST_RUN_PAGES = requiredConfigArray("first_run_pages");
+const PLUGIN_RUNTIME_PROBES = requiredConfigArray("plugin_runtime_probes", "object");
 const WORKFLOW_SMOKE = requiredConfigObject("workflow_smoke");
 const CYCLE_SMOKE = requiredConfigObject("cycle_smoke");
 
@@ -47,10 +51,12 @@ function configValue(pathText) {
     return String(pathText).split(".").reduce((value, key) => value?.[key], LIVE_ACCEPTANCE);
 }
 
-function requiredConfigArray(pathText) {
+function requiredConfigArray(pathText, itemType = "string") {
     const values = configValue(pathText) ?? [];
     const normalized = Array.isArray(values)
-        ? values.map(value => String(value)).filter(Boolean)
+        ? values
+            .map(value => itemType === "string" ? String(value) : value)
+            .filter(value => itemType === "string" ? Boolean(value) : Boolean(value && typeof value === "object" && !Array.isArray(value)))
         : [];
     if (!normalized.length) {
         throw new Error(`${LIVE_ACCEPTANCE_FILE}: ${pathText} vuoto o mancante`);
@@ -106,6 +112,33 @@ function validateLiveAcceptanceContract() {
     const errors = [];
     const workflow = WORKFLOW_SMOKE;
     const cycle = CYCLE_SMOKE;
+    const probeIds = new Set();
+    for (const [index, probe] of PLUGIN_RUNTIME_PROBES.entries()) {
+        const id = String(probe.id ?? "").trim();
+        if (!id) {
+            errors.push(`${LIVE_ACCEPTANCE_FILE}: plugin_runtime_probes[${index}].id vuoto o mancante`);
+            continue;
+        }
+        if (probeIds.has(id)) {
+            errors.push(`${LIVE_ACCEPTANCE_FILE}: plugin_runtime_probes duplicato ${id}`);
+        }
+        probeIds.add(id);
+        const hasSubstance = Boolean(
+            probe.commands_any?.length ||
+            probe.api_checks?.length ||
+            probe.config_checks?.length ||
+            probe.source_checks?.length ||
+            probe.file_checks?.length
+        );
+        if (!hasSubstance) {
+            errors.push(`${LIVE_ACCEPTANCE_FILE}: plugin_runtime_probes.${id} senza probe verificabile`);
+        }
+    }
+    for (const pluginId of RELEASE_PLUGIN_IDS) {
+        if (!probeIds.has(pluginId)) {
+            errors.push(`${LIVE_ACCEPTANCE_FILE}: plugin_runtime_probes non copre plugin release ${pluginId}`);
+        }
+    }
     const requiredWorkflowStrings = [
         "setup_page",
         "button_id",
@@ -823,6 +856,119 @@ async function verifyCycleState(cdp, phase) {
     })()`, { awaitPromise: true, timeoutMs: 30000 });
 }
 
+async function runPluginRuntimeProbes(cdp) {
+    return await cdp.evaluate(`(async () => {
+        const probes = ${JSON.stringify(PLUGIN_RUNTIME_PROBES)};
+        const commandText = Object.entries(app.commands?.commands ?? {})
+            .map(([id, command]) => [id, command?.name ?? ""].join(" ").toLowerCase());
+        const getPath = (data, pathText) => String(pathText ?? "").split(".").reduce((value, key) => value?.[key], data);
+        const readText = async filePath => await app.vault.adapter.read(filePath);
+        const errors = [];
+        const results = [];
+
+        for (const probe of probes) {
+            const id = String(probe.id ?? "");
+            const plugin = app.plugins?.plugins?.[id] ?? null;
+            const result = { id, loaded: Boolean(plugin), checks: [] };
+            if (!plugin) {
+                errors.push(id + ": plugin non caricato nel live runtime");
+            }
+
+            for (const needle of probe.commands_any ?? []) {
+                const normalized = String(needle).toLowerCase();
+                const matched = commandText.some(command => command.includes(normalized));
+                result.checks.push({ type: "command", needle, ok: matched });
+                if (!matched) errors.push(id + ": comando runtime non trovato (" + needle + ")");
+            }
+
+            for (const apiCheck of probe.api_checks ?? []) {
+                let ok = false;
+                if (apiCheck === "dataview_page") {
+                    const api = app.plugins?.plugins?.dataview?.api ?? null;
+                    const sample = api?.page?.("Inizia Qui") ?? api?.page?.("Hub/1. DM Dashboard");
+                    const pages = api?.pages?.();
+                    const pageCount = typeof pages?.length === "number"
+                        ? pages.length
+                        : typeof pages?.array === "function"
+                            ? pages.array().length
+                            : 0;
+                    ok = Boolean(api && (sample || pageCount > 0));
+                }
+                result.checks.push({ type: "api", apiCheck, ok });
+                if (!ok) errors.push(id + ": API runtime non verificata (" + apiCheck + ")");
+            }
+
+            for (const filePath of probe.file_checks ?? []) {
+                const exists = Boolean(app.vault.getAbstractFileByPath(String(filePath)));
+                result.checks.push({ type: "file", filePath, ok: exists });
+                if (!exists) errors.push(id + ": file operativo mancante (" + filePath + ")");
+            }
+
+            for (const sourceCheck of probe.source_checks ?? []) {
+                const filePath = String(sourceCheck.file ?? "");
+                let text = "";
+                let exists = false;
+                try {
+                    text = await readText(filePath);
+                    exists = true;
+                } catch {
+                    exists = false;
+                }
+                result.checks.push({ type: "source", filePath, ok: exists });
+                if (!exists) {
+                    errors.push(id + ": sorgente operativa mancante (" + filePath + ")");
+                    continue;
+                }
+                for (const marker of sourceCheck.contains ?? []) {
+                    const ok = text.includes(String(marker));
+                    result.checks.push({ type: "source-contains", filePath, marker, ok });
+                    if (!ok) errors.push(id + ": marker operativo mancante in " + filePath + " (" + marker + ")");
+                }
+            }
+
+            for (const configCheck of probe.config_checks ?? []) {
+                const filePath = String(configCheck.path ?? "");
+                let text = "";
+                let data = null;
+                try {
+                    text = await readText(filePath);
+                    data = JSON.parse(text);
+                } catch {
+                    // Alcuni plugin usano file non JSON, ma in questo vault dichiariamo solo data.json.
+                }
+                const exists = Boolean(text);
+                result.checks.push({ type: "config", filePath, ok: exists });
+                if (!exists) {
+                    errors.push(id + ": configurazione plugin mancante (" + filePath + ")");
+                    continue;
+                }
+                for (const marker of configCheck.contains ?? []) {
+                    const ok = text.includes(String(marker));
+                    result.checks.push({ type: "config-contains", filePath, marker, ok });
+                    if (!ok) errors.push(id + ": marker configurazione mancante in " + filePath + " (" + marker + ")");
+                }
+                for (const [jsonPath, expected] of Object.entries(configCheck.json_equals ?? {})) {
+                    const actual = getPath(data, jsonPath);
+                    const ok = actual === expected;
+                    result.checks.push({ type: "json-equals", filePath, jsonPath, expected, actual, ok });
+                    if (!ok) errors.push(id + ": configurazione " + filePath + "." + jsonPath + " inattesa (" + actual + ")");
+                }
+                for (const [jsonPath, minLength] of Object.entries(configCheck.array_min ?? {})) {
+                    const actual = getPath(data, jsonPath);
+                    const length = Array.isArray(actual) ? actual.length : 0;
+                    const ok = length >= Number(minLength);
+                    result.checks.push({ type: "array-min", filePath, jsonPath, minLength, length, ok });
+                    if (!ok) errors.push(id + ": configurazione " + filePath + "." + jsonPath + " sotto soglia (" + length + "/" + minLength + ")");
+                }
+            }
+
+            results.push(result);
+        }
+
+        return { probeCount: probes.length, errors, results };
+    })()`, { awaitPromise: true, timeoutMs: 60000 });
+}
+
 async function runCycleSmoke(cdp) {
     const before = cdp.events.length;
     const cycle = CYCLE_SMOKE;
@@ -1049,7 +1195,9 @@ async function runLivePass(port) {
             cyclePages.push(await inspectPage(cdp, String(pagePath)));
         }
 
-        return { summary, results, workflow, workflowPages, cycle, cyclePages, events: cdp.events };
+        const pluginRuntimeProbes = await runPluginRuntimeProbes(cdp);
+
+        return { summary, results, workflow, workflowPages, cycle, cyclePages, pluginRuntimeProbes, events: cdp.events };
     } finally {
         cdp.close();
     }
@@ -1057,7 +1205,7 @@ async function runLivePass(port) {
 
 function validateReport(report) {
     const errors = [];
-    const { summary, results, workflow, workflowPages = [], cycle, cyclePages = [], events } = report;
+    const { summary, results, workflow, workflowPages = [], cycle, cyclePages = [], pluginRuntimeProbes, events } = report;
     if (!summary) {
         errors.push("plugin summary non disponibile");
         return errors;
@@ -1079,8 +1227,17 @@ function validateReport(report) {
     for (const result of cyclePages) {
         errors.push(...validatePageResult(result, "post-cycle"));
     }
+    errors.push(...validatePluginRuntimeProbes(pluginRuntimeProbes));
     if (events.length) errors.push(`eventi console globali nel live pass: ${JSON.stringify(events)}`);
     return errors;
+}
+
+function validatePluginRuntimeProbes(report) {
+    if (!report) return ["plugin runtime probes non eseguiti"];
+    if (report.probeCount !== PLUGIN_RUNTIME_PROBES.length) {
+        return [`plugin runtime probes incompleti (${report.probeCount}/${PLUGIN_RUNTIME_PROBES.length})`];
+    }
+    return (report.errors ?? []).map(error => `plugin runtime: ${error}`);
 }
 
 function validatePageResult(result, label) {
@@ -1205,7 +1362,7 @@ async function main() {
             for (const error of contractErrors) console.error(`- ${error}`);
             process.exit(1);
         }
-        console.log(`Live acceptance contract OK: ${FIRST_RUN_PAGES.length} pagine first-run, workflow ${WORKFLOW_SMOKE.button_id}, ciclo ${CYCLE_SMOKE.expected_session_name}.`);
+        console.log(`Live acceptance contract OK: ${FIRST_RUN_PAGES.length} pagine first-run, ${PLUGIN_RUNTIME_PROBES.length} probe plugin, workflow ${WORKFLOW_SMOKE.button_id}, ciclo ${CYCLE_SMOKE.expected_session_name}.`);
         process.exit(0);
     }
     if (LEGACY_RESET_PROFILE && !FRESH_INSTALL) {
@@ -1262,7 +1419,8 @@ async function main() {
         const cycleText = RUN_CYCLE_SMOKE
             ? `, ciclo sessione/post-sessione ${CYCLE_SMOKE.expected_session_name} verificato`
             : "";
-        console.log(`Obsidian user-acceptance OK: ${report.summary.expectedPluginCount} plugin caricati, ${report.results.length} pagine first-run verificate${workflowText}${cycleText}.`);
+        const probesText = `, ${report.pluginRuntimeProbes?.probeCount ?? 0} probe plugin runtime verificati`;
+        console.log(`Obsidian user-acceptance OK: ${report.summary.expectedPluginCount} plugin caricati, ${report.results.length} pagine first-run verificate${probesText}${workflowText}${cycleText}.`);
         markProfileReady();
         console.log(`Profilo test persistente: ${PROFILE_ROOT}`);
         console.log(`Vault test persistente: ${OUT}`);

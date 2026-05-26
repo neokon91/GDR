@@ -11,6 +11,168 @@ first_run_pages:
   - Hub/Worldbuilder Dashboard.md
   - Hub/Vista Giocatori.md
   - Risorse/Quality Report.md
+plugin_runtime_probes:
+  - id: dataview
+    commands_any:
+      - dataview
+    api_checks:
+      - dataview_page
+    source_checks:
+      - file: Hub/1. DM Dashboard.md
+        contains:
+          - "```dataviewjs"
+  - id: templater-obsidian
+    commands_any:
+      - templater
+    config_checks:
+      - path: .obsidian/plugins/templater-obsidian/data.json
+        json_equals:
+          templates_folder: z.modelli
+          user_scripts_folder: z.automazioni/templater
+    source_checks:
+      - file: z.modelli/dm/Sessione.md
+        contains:
+          - "<% await tp.user.sessione(tp) %>"
+  - id: obsidian-meta-bind-plugin
+    commands_any:
+      - meta-bind
+    config_checks:
+      - path: .obsidian/plugins/obsidian-meta-bind-plugin/data.json
+        array_min:
+          inputFieldTemplates: 20
+          buttonTemplates: 20
+    source_checks:
+      - file: Inizia Qui.md
+        contains:
+          - "BUTTON[nuovo-mondo-homebrew]"
+  - id: js-engine
+    source_checks:
+      - file: z.engine/session_views.js
+        contains:
+          - "JS Engine"
+  - id: metadata-menu
+    config_checks:
+      - path: .obsidian/plugins/metadata-menu/data.json
+        json_equals:
+          classFilesPath: z.fileclass/
+    file_checks:
+      - z.fileclass/sessione.md
+  - id: folder-notes
+    config_checks:
+      - path: .obsidian/plugins/folder-notes/data.json
+    file_checks:
+      - Mondi/Mondo.md
+  - id: homepage
+    config_checks:
+      - path: .obsidian/plugins/homepage/data.json
+        contains:
+          - Inizia Qui
+  - id: callout-manager
+    config_checks:
+      - path: .obsidian/plugins/callout-manager/data.json
+    source_checks:
+      - file: Hub/Durante il Gioco.md
+        contains:
+          - "> [!regia]"
+  - id: obsidian-5e-statblocks
+    source_checks:
+      - file: z.modelli/dm/Incontro.md
+        contains:
+          - "```statblock"
+  - id: obsidian-excalidraw-plugin
+    config_checks:
+      - path: .obsidian/plugins/obsidian-excalidraw-plugin/data.json
+    source_checks:
+      - file: Risorse/Mappe/Schema Relazioni GDR.excalidraw.md
+        contains:
+          - "excalidraw-plugin: parsed"
+  - id: obsidian-kanban
+    source_checks:
+      - file: z.bacheche/Preparazione Sessioni.md
+        contains:
+          - "kanban-plugin: board"
+  - id: obsidian-tasks-plugin
+    config_checks:
+      - path: .obsidian/plugins/obsidian-tasks-plugin/data.json
+        json_equals:
+          globalFilter: "#task"
+    source_checks:
+      - file: Risorse/Task DM.md
+        contains:
+          - "```tasks"
+  - id: maps
+    source_checks:
+      - file: z.bases/Atlante Mappe.base
+        contains:
+          - "type: map"
+          - "coordinates: note.coordinates"
+  - id: initiative-tracker
+    config_checks:
+      - path: .obsidian/plugins/initiative-tracker/data.json
+    source_checks:
+      - file: z.modelli/dm/Incontro.md
+        contains:
+          - "```encounter"
+  - id: obsidian-dice-roller
+    config_checks:
+      - path: .obsidian/plugins/obsidian-dice-roller/data.json
+    source_checks:
+      - file: Risorse/Tabelle/Tabelle.md
+        contains:
+          - "dice: [[Risorse/Tabelle/Tabelle#^complicazioni]]"
+  - id: calendarium
+    config_checks:
+      - path: .obsidian/plugins/calendarium/data.json
+        contains:
+          - Calendario Del Mondo
+    source_checks:
+      - file: Mondi/Sessioni/2026-05-26 - Sessione Live Faro Sommerso.md
+        contains:
+          - "fc-calendar"
+  - id: advanced-canvas
+    source_checks:
+      - file: Risorse/Canvas Per GDR.md
+        contains:
+          - "Canvas serve"
+  - id: media-extended
+    config_checks:
+      - path: .obsidian/plugins/media-extended/data.json
+    source_checks:
+      - file: Risorse/Materiali Al Tavolo.md
+        contains:
+          - "audio"
+          - "video"
+  - id: fantasy-content-generator
+    config_checks:
+      - path: .obsidian/plugins/fantasy-content-generator/data.json
+    source_checks:
+      - file: Risorse/Smistamento Bozze Generate.md
+        contains:
+          - "Fantasy Content Generator"
+  - id: obsidian-icon-folder
+    config_checks:
+      - path: .obsidian/plugins/obsidian-icon-folder/data.json
+    file_checks:
+      - Inizia Qui.md
+  - id: tabs
+    source_checks:
+      - file: z.modelli/dm/Sessione.md
+        contains:
+          - "````tabs"
+  - id: obsidian-style-settings
+    config_checks:
+      - path: .obsidian/plugins/obsidian-style-settings/data.json
+    source_checks:
+      - file: Risorse/Aspetto Vault.md
+        contains:
+          - "Style Settings"
+  - id: table-editor-obsidian
+    config_checks:
+      - path: .obsidian/plugins/table-editor-obsidian/data.json
+    source_checks:
+      - file: Risorse/Tabelle/Tabelle.md
+        contains:
+          - "| d6 | Risultato |"
 workflow_smoke:
   setup_page: Inizia Qui.md
   button_id: nuovo-mondo-homebrew
