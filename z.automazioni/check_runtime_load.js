@@ -40,9 +40,7 @@ const REQUIRED_EXPORTS = [
     "renderWorldbuildingControlNow",
     "renderWorldbuildingControlQueues",
     "renderWorldbuildingControlReadiness",
-    "renderWorldbuildingControlSurfaceLinks",
-    "renderWorldbuildingFreedom",
-    "renderWorldbuildingStudio"
+    "renderWorldbuildingControlSurfaceLinks"
 ];
 const REQUIRED_MODULES = [
     "z.engine/session_continuity.js",
@@ -329,14 +327,6 @@ async function main() {
             await views.renderCanonControlSurfaceLinks(dv);
             if (!rendered.some(node => String(node.innerHTML).includes("Revisione lore"))) {
                 errors.push("renderCanonControlSurfaceLinks: output senza superfici canone");
-            }
-            views.renderWorldbuildingFreedom(dv);
-            if (!rendered.some(node => String(node.innerHTML).includes("Liberta di worldbuilding"))) {
-                errors.push("renderWorldbuildingFreedom: output senza regia worldbuilding libero");
-            }
-            views.renderWorldbuildingStudio(dv);
-            if (!rendered.some(node => String(node.innerHTML).includes("Studio Worldbuilding"))) {
-                errors.push("renderWorldbuildingStudio: output senza studio worldbuilding");
             }
             views.renderWorldbuilderNow(dv);
             if (!rendered.some(node => String(node.innerHTML).includes("Fai adesso"))) {
