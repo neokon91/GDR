@@ -269,6 +269,7 @@
     continuityIssues: continuityViews.continuityIssues,
     continuityStatus: continuityViews.continuityStatus
   });
+  const dmDashboardViews = (await eval(await app.vault.adapter.read("z.engine/session_dm_dashboard.js")))(sharedViewContext);
   const { continuityIssues } = continuityViews;
   const sessionViews = (await eval(await app.vault.adapter.read("z.engine/session_runtime.js")))({
     ...sharedViewContext,
@@ -1051,6 +1052,10 @@
     renderM11ContinuityChain: continuityViews.renderM11ContinuityChain,
     renderCombatReadiness: dndViews.renderCombatReadiness,
     renderDnd55MaterialPipeline: dndViews.renderDnd55MaterialPipeline,
+    renderDmDashboardNow: dmDashboardViews.renderDmDashboardNow,
+    renderDmDashboardQueues: dmDashboardViews.renderDmDashboardQueues,
+    renderDmDashboardReadiness: dmDashboardViews.renderDmDashboardReadiness,
+    renderDmDashboardSurfaceLinks: dmDashboardViews.renderDmDashboardSurfaceLinks,
     renderSessionAnchorCards: sessionViews.renderSessionAnchorCards,
     renderSessionLiveCards: sessionViews.renderSessionLiveCards,
     renderSessionMaterialCards: sessionViews.renderSessionMaterialCards,

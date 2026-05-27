@@ -19,6 +19,10 @@ const REQUIRED_EXPORTS = [
     "renderConsequenceCards",
     "renderContinuityQueue",
     "renderDnd55MaterialPipeline",
+    "renderDmDashboardNow",
+    "renderDmDashboardQueues",
+    "renderDmDashboardReadiness",
+    "renderDmDashboardSurfaceLinks",
     "renderLiveCommandCenter",
     "renderLiveTableMaterials",
     "renderLiveTableNow",
@@ -62,6 +66,7 @@ const REQUIRED_MODULES = [
     "z.engine/session_atlas.js",
     "z.engine/session_canon_control.js",
     "z.engine/session_dnd.js",
+    "z.engine/session_dm_dashboard.js",
     "z.engine/session_maps.js",
     "z.engine/session_player.js",
     "z.engine/session_runtime.js",
@@ -416,6 +421,22 @@ async function main() {
             await views.renderVaultReadiness(dv, "setup");
             if (!rendered.some(node => node.tag === "table" || String(node.text).includes("Pulsanti e creazione note"))) {
                 errors.push("renderVaultReadiness: output setup non renderizzato");
+            }
+            views.renderDmDashboardNow(dv);
+            if (!rendered.some(node => String(node.innerHTML).includes("Fai adesso"))) {
+                errors.push("renderDmDashboardNow: output senza decisione immediata");
+            }
+            views.renderDmDashboardReadiness(dv);
+            if (!rendered.some(node => String(node.innerHTML).includes("Sessioni"))) {
+                errors.push("renderDmDashboardReadiness: output senza metriche sessioni");
+            }
+            await views.renderDmDashboardQueues(dv);
+            if (!rendered.some(node => node.tag === "table" && String(node.text).includes("Il rivale arriva prima"))) {
+                errors.push("renderDmDashboardQueues: output senza pressioni operative");
+            }
+            await views.renderDmDashboardSurfaceLinks(dv);
+            if (!rendered.some(node => String(node.innerHTML).includes("Durante il Gioco"))) {
+                errors.push("renderDmDashboardSurfaceLinks: output senza superfici DM");
             }
             views.renderAtlasNow(dv);
             if (!rendered.some(node => String(node.innerHTML).includes("Marker pronti"))) {

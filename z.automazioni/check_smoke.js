@@ -59,6 +59,13 @@ for (const marker of ["renderWorldbuilderNow", "renderWorldbuilderReadiness", "r
     }
 }
 
+const dmDashboard = readTextRel(ROOT, "Hub/1. DM Dashboard.md");
+for (const marker of ["renderDmDashboardNow", "renderDmDashboardReadiness", "renderDmDashboardQueues", "renderDmDashboardSurfaceLinks"]) {
+    if (!dmDashboard.includes(marker)) {
+        errors.push(`Smoke statico: DM Dashboard non contiene ${marker}`);
+    }
+}
+
 const atlas = readTextRel(ROOT, "Hub/Atlante del Mondo.md");
 for (const marker of ["renderAtlasNow", "renderAtlasReadiness", "renderAtlasQueues", "renderAtlasSurfaceLinks"]) {
     if (!atlas.includes(marker)) {

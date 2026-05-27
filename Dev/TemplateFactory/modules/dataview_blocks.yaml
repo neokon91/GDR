@@ -271,6 +271,69 @@ blocks:
     fallback: |-
       | Incontro | Creature | Luogo | Aggancio |
       | --- | --- | --- | --- |
+  dm_dashboard_now:
+    type: dataviewjs
+    runtime_view: renderDmDashboardNow
+    use_for:
+      - dashboard
+      - dm
+      - cockpit
+      - triage
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      gdr.renderDmDashboardNow(dv);
+    fallback: |-
+      | Priorita | Azione |
+      | --- | --- |
+      | Fai adesso | prepara, gioca, chiudi o smista |
+  dm_dashboard_readiness:
+    type: dataviewjs
+    runtime_view: renderDmDashboardReadiness
+    use_for:
+      - dashboard
+      - dm
+      - cockpit
+      - stato
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      gdr.renderDmDashboardReadiness(dv);
+    fallback: |-
+      | Area | Conteggio |
+      | --- | --- |
+      | Sessioni |  |
+      | Missioni |  |
+      | Materiali |  |
+      | Inbox |  |
+  dm_dashboard_queues:
+    type: dataviewjs
+    runtime_view: renderDmDashboardQueues
+    use_for:
+      - dashboard
+      - dm
+      - cockpit
+      - code
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      await gdr.renderDmDashboardQueues(dv);
+    fallback: |-
+      | Coda | Prossima azione |
+      | --- | --- |
+  dm_dashboard_surface_links:
+    type: dataviewjs
+    runtime_view: renderDmDashboardSurfaceLinks
+    use_for:
+      - dashboard
+      - dm
+      - cockpit
+      - navigazione
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      await gdr.renderDmDashboardSurfaceLinks(dv);
+    fallback: |-
+      | Superficie | Uso |
+      | --- | --- |
+      | Durante il Gioco | giocare la sessione attiva |
+      | Preparazione sessione | rifinire il prossimo tavolo |
   worldbuilder_now:
     type: dataviewjs
     runtime_view: renderWorldbuilderNow

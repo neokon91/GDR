@@ -1,0 +1,154 @@
+id: dm_dashboard_cockpit
+purpose: Contratto operativo per trasformare la DM Dashboard in cockpit di triage del prossimo tavolo.
+version: 0.1.0
+dashboard:
+  page: Hub/1. DM Dashboard.md
+  workflow: dashboard_dm
+  required_runtime_views:
+    - renderDmDashboardNow
+    - renderDmDashboardReadiness
+    - renderDmDashboardQueues
+    - renderDmDashboardSurfaceLinks
+  required_visible_sections:
+    - Fai Adesso
+    - Stato DM
+    - Code Operative
+    - Superfici
+panels:
+  now:
+    runtime_view: renderDmDashboardNow
+    promise: Decidere se preparare, giocare, chiudere o pulire prima di fare altro.
+    answers:
+      - sessione attiva
+      - sessione da preparare
+      - post-sessione aperto
+      - pressione senza prossima mossa
+      - inbox da smistare
+  readiness:
+    runtime_view: renderDmDashboardReadiness
+    promise: Misurare lo stato operativo del DM senza leggere tabelle lunghe.
+    answers:
+      - campagne attive
+      - sessioni attive
+      - sessioni pronte
+      - missioni aperte
+      - materiali pronti
+      - inbox e bozze
+  queues:
+    runtime_view: renderDmDashboardQueues
+    promise: Mostrare solo le code che possono cambiare il prossimo tavolo.
+    answers:
+      - sessioni operative
+      - pressioni da portare
+      - materiali pronti
+      - inbox da decidere
+  surfaces:
+    runtime_view: renderDmDashboardSurfaceLinks
+    promise: Aprire la superficie specialistica giusta senza trasformare la home in archivio.
+    answers:
+      - durante il gioco
+      - preparazione
+      - post-sessione
+      - mondo vivo
+      - manutenzione
+queues:
+  - id: sessions
+    label: Sessioni operative
+    table_columns:
+      - Sessione
+      - Stato
+      - Data
+      - Azione
+  - id: pressures
+    label: Pressioni da portare
+    table_columns:
+      - Fronte
+      - Stato
+      - Pressione
+      - Prossima mossa
+  - id: materials
+    label: Materiali pronti
+    table_columns:
+      - Materiale
+      - Tipo
+      - Luogo
+      - Uso
+  - id: inbox
+    label: Inbox da decidere
+    table_columns:
+      - Nota
+      - Origine
+      - Stato
+      - Azione
+surfaces:
+  - id: live_table
+    label: Durante il Gioco
+    plugin: Dataview
+    target: Hub/Durante il Gioco.md
+    badge: Live
+    role: giocare la sessione attiva
+    action: Apri quando c'e una sessione attiva, pronta o in corso.
+    why: La dashboard deve consegnare il tavolo alla vista live appena e tempo di giocare.
+  - id: preparation
+    label: Preparazione sessione
+    plugin: Dataview
+    target: Risorse/Preparazione Sessione.md
+    badge: Prep
+    role: rendere giocabile la prossima sessione
+    action: Apri quando mancano obiettivo, scelta, pressione o materiale pronto.
+    why: Preparare una sessione concreta vale piu di ampliare indici generici.
+  - id: post_session
+    label: Post sessione
+    plugin: Dataview
+    target: Risorse/Post Sessione Guidato.md
+    badge: Chiusura
+    role: consolidare recap e conseguenze
+    action: Apri quando una sessione giocata ha appunti, recap o propagazioni aperte.
+    why: Il post-sessione trasforma gioco al tavolo in canone, conseguenze e prossima apertura.
+  - id: living_world
+    label: Motore mondo vivo
+    plugin: Dataview
+    target: Hub/Motore Mondo Vivo.md
+    badge: Pressioni
+    role: scegliere cosa cambia fuori dal tavolo
+    action: Apri quando una pressione non ha prossima mossa o una conseguenza deve propagare.
+    why: La home non deve risolvere il mondo vivo, deve mandare al motore giusto.
+  - id: offscreen
+    label: Fuori scena
+    plugin: Dataview
+    target: Hub/Cosa Succede Fuori Scena.md
+    badge: Reazioni
+    role: muovere attori tra sessioni
+    action: Apri quando fazioni, PNG, missioni o clock devono reagire prima del prossimo tavolo.
+    why: Le reazioni fuori scena tengono viva la campagna senza allungare la dashboard.
+  - id: vault_control
+    label: Controllo vault
+    plugin: Dataview
+    target: Risorse/Controllo Vault.md
+    badge: Pulizia
+    role: ripulire code e incoerenze
+    action: Apri quando inbox, bozze o stati incoerenti bloccano il flusso operativo.
+    why: La manutenzione resta fuori dalla home finche non serve a sbloccare il tavolo.
+  - id: missions_base
+    label: Missioni aperte
+    plugin: Bases
+    target: z.bases/Missioni.base
+    generated_release: true
+    badge: Base
+    role: ordinare missioni e stati
+    action: Apri quando molte missioni aperte chiedono confronto tabellare.
+    why: La Base generata aiuta correzioni rapide senza rendere z.bases sorgente tracciato.
+  - id: encounters_base
+    label: Incontri pronti
+    plugin: Bases
+    target: z.bases/Incontri.base
+    generated_release: true
+    badge: Base
+    role: scegliere materiale pronto
+    action: Apri quando devi filtrare incontri per stato, luogo o pericolo.
+    why: La dashboard mostra il prossimo materiale, la Base permette lavoro tabellare.
+contracts:
+  dashboard_uses_runtime_views: true
+  surfaces_must_resolve_to_source_or_generated_release_target: true
+  generated_targets_must_stay_release_only: true
+  dm_dashboard_prioritizes_next_table_decision: true

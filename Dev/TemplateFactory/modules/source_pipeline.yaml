@@ -127,6 +127,24 @@ steps:
       - node
       - z.automazioni/render_workflow_quick_actions.js
       - --check
+  dm_dashboard_cockpit:
+    purpose: Genera il contratto runtime della DM Dashboard senza scrivere root generate.
+    sources:
+      - Dev/TemplateFactory/modules/dm_dashboard_cockpit.yaml
+      - Dev/TemplateFactory/modules/bases_views.yaml
+      - Dev/TemplateFactory/modules/frontmatter_profiles.yaml
+      - Hub/1. DM Dashboard.md
+      - z.engine/session_dm_dashboard.js
+      - z.engine/session_views.js
+    outputs:
+      - z.automazioni/data/runtime/dm_dashboard_cockpit.json
+    render:
+      - node
+      - z.automazioni/render_dm_dashboard_cockpit.js
+    check:
+      - node
+      - z.automazioni/render_dm_dashboard_cockpit.js
+      - --check
   worldbuilding_cockpit:
     purpose: Genera il contratto runtime del cockpit worldbuilding senza scrivere root generate.
     sources:
