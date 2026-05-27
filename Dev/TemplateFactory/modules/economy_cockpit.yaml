@@ -1,0 +1,185 @@
+id: economy_cockpit
+purpose: Contratto operativo per trasformare Economia E Rotte in cockpit di rotte, risorse, mercati e dipendenze.
+version: 0.1.0
+dashboard:
+  page: Hub/Economia E Rotte.md
+  workflow: economia_rotte
+  required_runtime_views:
+    - renderEconomyNow
+    - renderEconomyReadiness
+    - renderEconomyQueues
+    - renderEconomyDependencyQueues
+    - renderEconomySurfaceLinks
+  required_visible_sections:
+    - Filtro
+    - Priorita Economica
+    - Stato Rete
+    - Rotte Risorse Mercati
+    - Dipendenze E Buchi
+    - Superfici
+    - Azioni
+panels:
+  now:
+    runtime_view: renderEconomyNow
+    promise: Decidere quale blocco economico deve muovere il gioco adesso.
+    answers:
+      - rotta bloccata
+      - rotta contesa
+      - conseguenza non propagata
+      - buco economico
+  readiness:
+    runtime_view: renderEconomyReadiness
+    promise: Misurare rotte, risorse, mercati, controllori, dipendenze e buchi.
+    answers:
+      - rotte aperte
+      - rotte bloccate
+      - risorse
+      - mercati
+      - dipendenze
+  economy:
+    runtime_view: renderEconomyQueues
+    promise: Portare in tabella la rete economica giocabile.
+    answers:
+      - rotte
+      - risorse strategiche
+      - mercati
+  dependencies:
+    runtime_view: renderEconomyDependencyQueues
+    promise: Vedere chi controlla cosa e quali conseguenze non hanno bersaglio.
+    answers:
+      - controllori
+      - luoghi dipendenti
+      - conseguenze non propagate
+      - buchi
+  surfaces:
+    runtime_view: renderEconomySurfaceLinks
+    promise: Aprire viste e basi che trasformano economia in conflitto, tavolo e mondo vivo.
+    answers:
+      - geopolitica
+      - mondo vivo
+      - atlante
+      - basi economia
+queues:
+  - id: routes
+    label: Rotte Aperte, Bloccate E Contese
+    table_columns:
+      - Rotta
+      - Stato
+      - Da
+      - A
+      - Risorse
+      - Controllori
+      - Pressione
+      - Prossima mossa
+  - id: resources
+    label: Risorse Strategiche
+    table_columns:
+      - Risorsa
+      - Luoghi
+      - Controllori
+      - Uso
+      - Dipendenze
+      - Rotte
+      - Mercati
+  - id: markets
+    label: Mercati O Nodi Commerciali
+    table_columns:
+      - Nodo
+      - Luogo
+      - Risorse
+      - Rotte
+      - Controllori
+      - Rischi
+      - Prossima mossa
+  - id: controllers
+    label: Fazioni Che Controllano Risorse
+    table_columns:
+      - Fazione
+      - Risorse
+      - Rotte
+      - Mercati
+  - id: dependencies
+    label: Luoghi Dipendenti Da Una Risorsa
+    table_columns:
+      - Luogo
+      - Risorse dichiarate
+      - Dipende da
+      - Rotte collegate
+  - id: unpropagated
+    label: Conseguenze Economiche Non Propagate
+    table_columns:
+      - Nota
+      - Conseguenze
+      - Propaga a
+      - Entita impattate
+      - Prossima mossa
+  - id: gaps
+    label: Buchi Di Rotte Risorse E Mercati
+    table_columns:
+      - Nota
+      - Problema
+      - Stato
+surfaces:
+  - id: geopolitical
+    label: Geopolitica
+    plugin: Dataview
+    target: Hub/Geopolitical Dashboard.md
+    badge: Potere
+    role: leggere confini e crisi
+    action: Apri quando una rotta, risorsa o mercato crea conflitto politico.
+    why: Economia e potere devono convergere in poste, confini e relazioni.
+  - id: living_world
+    label: Motore Mondo Vivo
+    plugin: Dataview
+    target: Hub/Motore Mondo Vivo.md
+    badge: Propaga
+    role: applicare conseguenze
+    action: Apri quando un blocco economico deve cambiare piu note del mondo.
+    why: Le conseguenze economiche non devono restare testo locale.
+  - id: atlas
+    label: Atlante
+    plugin: Dataview
+    target: Hub/Atlante del Mondo.md
+    badge: Spazio
+    role: vedere passaggi e territori
+    action: Apri quando rotte e risorse dipendono da geografia, marker o territori.
+    why: Una rotta e giocabile se il tavolo capisce dove passa e cosa rischia.
+  - id: lore
+    label: Lore hub
+    plugin: Dataview
+    target: Hub/Lore Hub.md
+    badge: Segnali
+    role: collegare storia e culture
+    action: Apri quando una risorsa deve diventare rumor, tradizione, segreto o indizio.
+    why: Le economie fantasy funzionano se hanno memoria, simboli e segnali.
+  - id: preparation
+    label: Preparazione sessione
+    plugin: Dataview
+    target: Risorse/Preparazione Sessione.md
+    badge: Tavolo
+    role: portare pressione in scena
+    action: Apri quando una dipendenza economica diventa scelta per la prossima sessione.
+    why: Se non arriva al tavolo, la rete economica resta archivio.
+  - id: economy_base
+    label: Rotte e risorse
+    plugin: Bases
+    target: z.bases/Economia.base
+    generated_release: true
+    badge: Base
+    role: correggere nodi economici
+    action: Apri quando devi sistemare stato, controllori, rischi o prossima mossa in tabella.
+    why: La Base generata permette manutenzione rapida senza rendere z.bases sorgente tracciato.
+  - id: factions_base
+    label: Poteri in movimento
+    plugin: Bases
+    target: z.bases/Fazioni.base
+    generated_release: true
+    badge: Base
+    role: collegare controllori
+    action: Apri quando risorse e rotte hanno fazioni da aggiornare o confrontare.
+    why: Il controllo economico deve rientrare anche nelle pressioni delle fazioni.
+contracts:
+  dashboard_uses_runtime_views: true
+  surfaces_must_resolve_to_source_or_generated_release_target: true
+  generated_targets_must_stay_release_only: true
+  economy_prioritizes_game_pressure_before_archive_tables: true

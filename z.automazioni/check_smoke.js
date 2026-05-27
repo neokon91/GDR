@@ -129,6 +129,13 @@ for (const marker of ["renderLivingWorldNow", "renderLivingWorldReadiness", "ren
     }
 }
 
+const economy = readTextRel(ROOT, "Hub/Economia E Rotte.md");
+for (const marker of ["renderEconomyNow", "renderEconomyReadiness", "renderEconomyQueues", "renderEconomyDependencyQueues", "renderEconomySurfaceLinks"]) {
+    if (!economy.includes(marker)) {
+        errors.push(`Smoke statico: Economia E Rotte non contiene ${marker}`);
+    }
+}
+
 const offscreen = readTextRel(ROOT, "Hub/Cosa Succede Fuori Scena.md");
 for (const marker of ["renderOffscreenNow", "renderOffscreenReadiness", "renderOffscreenReactionQueues", "renderOffscreenTableBridge", "renderOffscreenSurfaceLinks"]) {
     if (!offscreen.includes(marker)) {

@@ -605,6 +605,84 @@ blocks:
       | --- | --- |
       | Lore hub | vedere segnali e materiale collegato |
       | Revisione lore | ripulire appunti e rumor |
+  economy_now:
+    type: dataviewjs
+    runtime_view: renderEconomyNow
+    use_for:
+      - dashboard
+      - economia
+      - rotte
+      - cockpit
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      gdr.renderEconomyNow(dv, dv.current().mondo_attivo);
+    fallback: |-
+      | Priorita | Azione |
+      | --- | --- |
+      | Muovi prima | scegli rotta, risorsa, mercato o buco economico |
+  economy_readiness:
+    type: dataviewjs
+    runtime_view: renderEconomyReadiness
+    use_for:
+      - dashboard
+      - economia
+      - rotte
+      - cockpit
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      gdr.renderEconomyReadiness(dv, dv.current().mondo_attivo);
+    fallback: |-
+      | Area | Conteggio |
+      | --- | --- |
+      | Rotte |  |
+      | Risorse |  |
+      | Mercati |  |
+      | Buchi |  |
+  economy_queues:
+    type: dataviewjs
+    runtime_view: renderEconomyQueues
+    use_for:
+      - dashboard
+      - economia
+      - rotte
+      - cockpit
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      await gdr.renderEconomyQueues(dv, dv.current().mondo_attivo);
+    fallback: |-
+      | Nodo | Stato |
+      | --- | --- |
+  economy_dependency_queues:
+    type: dataviewjs
+    runtime_view: renderEconomyDependencyQueues
+    use_for:
+      - dashboard
+      - economia
+      - rotte
+      - dipendenze
+      - cockpit
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      await gdr.renderEconomyDependencyQueues(dv, dv.current().mondo_attivo);
+    fallback: |-
+      | Nota | Problema |
+      | --- | --- |
+  economy_surface_links:
+    type: dataviewjs
+    runtime_view: renderEconomySurfaceLinks
+    use_for:
+      - dashboard
+      - economia
+      - rotte
+      - cockpit
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      await gdr.renderEconomySurfaceLinks(dv);
+    fallback: |-
+      | Superficie | Uso |
+      | --- | --- |
+      | Geopolitica | leggere confini e crisi |
+      | Motore Mondo Vivo | propagare conseguenze |
   living_world_now:
     type: dataviewjs
     runtime_view: renderLivingWorldNow

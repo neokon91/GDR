@@ -43,6 +43,7 @@ REQUIRED_MODULES = {
     "callouts",
     "tabs",
     "dataview_blocks",
+    "economy_cockpit",
     "metabind_inputs",
     "metabind_buttons",
     "bases_views",

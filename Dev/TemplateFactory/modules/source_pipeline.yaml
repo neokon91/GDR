@@ -298,6 +298,24 @@ steps:
       - node
       - z.automazioni/render_living_world_cockpit.js
       - --check
+  economy_cockpit:
+    purpose: Genera il contratto runtime del cockpit Economia E Rotte senza scrivere root generate.
+    sources:
+      - Dev/TemplateFactory/modules/economy_cockpit.yaml
+      - Dev/TemplateFactory/modules/bases_views.yaml
+      - Dev/TemplateFactory/modules/frontmatter_profiles.yaml
+      - Hub/Economia E Rotte.md
+      - z.engine/session_economy.js
+      - z.engine/session_views.js
+    outputs:
+      - z.automazioni/data/runtime/economy_cockpit.json
+    render:
+      - node
+      - z.automazioni/render_economy_cockpit.js
+    check:
+      - node
+      - z.automazioni/render_economy_cockpit.js
+      - --check
   offscreen_cockpit:
     purpose: Genera il contratto runtime del cockpit Cosa Succede Fuori Scena senza scrivere root generate.
     sources:

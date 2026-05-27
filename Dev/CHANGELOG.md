@@ -4,6 +4,7 @@
 
 ### Aggiunto
 
+- `Hub/Economia E Rotte.md` trasformata in cockpit compatto con runtime `session_economy.js` e contratto `economy_cockpit.yaml`.
 - `resource_hub.yaml` genera il catalogo centrale `Risorse/Risorse.md`, lasciandolo fuori dal sorgente tracciato.
 - `resource_indexes.yaml` genera gli indici finali Audio, Video, Immagini e Dispense da YAML/Jinja, lasciandoli fuori dal sorgente tracciato.
 - `z.bacheche` e documentazione repo-dev consolidate: le bacheche sono generate da YAML/Jinja e `docs/` e stato rimosso come area separata.

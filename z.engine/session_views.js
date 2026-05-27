@@ -270,6 +270,7 @@
     continuityStatus: continuityViews.continuityStatus
   });
   const dmDashboardViews = (await eval(await app.vault.adapter.read("z.engine/session_dm_dashboard.js")))(sharedViewContext);
+  const economyViews = (await eval(await app.vault.adapter.read("z.engine/session_economy.js")))(sharedViewContext);
   const vaultControlViews = (await eval(await app.vault.adapter.read("z.engine/session_vault_control.js")))(sharedViewContext);
   const { continuityIssues } = continuityViews;
   const sessionViews = (await eval(await app.vault.adapter.read("z.engine/session_runtime.js")))({
@@ -1024,6 +1025,11 @@
     renderCreationFeedback,
     renderConsequenceCards: continuityViews.renderConsequenceCards,
     renderEmptyState,
+    renderEconomyDependencyQueues: economyViews.renderEconomyDependencyQueues,
+    renderEconomyNow: economyViews.renderEconomyNow,
+    renderEconomyQueues: economyViews.renderEconomyQueues,
+    renderEconomyReadiness: economyViews.renderEconomyReadiness,
+    renderEconomySurfaceLinks: economyViews.renderEconomySurfaceLinks,
     renderImpactedNextMoveCards: continuityViews.renderImpactedNextMoveCards,
     renderLiveCommandCenter: sessionViews.renderLiveCommandCenter,
     renderLiveTableMaterials: liveTableViews.renderLiveTableMaterials,

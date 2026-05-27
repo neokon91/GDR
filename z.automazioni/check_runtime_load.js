@@ -23,6 +23,11 @@ const REQUIRED_EXPORTS = [
     "renderDmDashboardQueues",
     "renderDmDashboardReadiness",
     "renderDmDashboardSurfaceLinks",
+    "renderEconomyDependencyQueues",
+    "renderEconomyNow",
+    "renderEconomyQueues",
+    "renderEconomyReadiness",
+    "renderEconomySurfaceLinks",
     "renderLiveCommandCenter",
     "renderLiveTableMaterials",
     "renderLiveTableNow",
@@ -72,6 +77,7 @@ const REQUIRED_MODULES = [
     "z.engine/session_canon_control.js",
     "z.engine/session_dnd.js",
     "z.engine/session_dm_dashboard.js",
+    "z.engine/session_economy.js",
     "z.engine/session_maps.js",
     "z.engine/session_player.js",
     "z.engine/session_runtime.js",
@@ -190,8 +196,36 @@ async function main() {
                     mondo: "Mondi/Mondo Demo.md",
                     partenza: "Mondi/Luoghi/Luogo Pubblico.md",
                     arrivo: "Mondi/Luoghi/Luogo Pubblico.md",
+                    risorse_trasportate: ["Mondi/Risorse/Sale Lunare.md"],
+                    fazioni_controllanti: ["Mondi/Fazioni/Consiglio.md"],
+                    rischi: ["pedaggio"],
                     pressione: 5,
                     prossima_mossa: "Il pedaggio raddoppia."
+                },
+                {
+                    file: { path: "Mondi/Risorse/Sale Lunare.md", name: "Sale Lunare", link: "Mondi/Risorse/Sale Lunare.md", folder: "Mondi/Risorse", mtime: 20 },
+                    categoria: "risorsa",
+                    stato: "pronto",
+                    mondo: "Mondi/Mondo Demo.md",
+                    luoghi: ["Mondi/Luoghi/Luogo Pubblico.md"],
+                    fazioni_controllanti: ["Mondi/Fazioni/Consiglio.md"],
+                    uso_narrativo: "Serve ai fari sacri.",
+                    luoghi_dipendenti: ["Mondi/Luoghi/Luogo Pubblico.md"],
+                    rotte: ["Mondi/Rotte/Strada del Sale.md"],
+                    mercati: ["Mondi/Mercati/Mercato del Faro.md"],
+                    conseguenze: ["I fari si spengono."]
+                },
+                {
+                    file: { path: "Mondi/Mercati/Mercato del Faro.md", name: "Mercato del Faro", link: "Mondi/Mercati/Mercato del Faro.md", folder: "Mondi/Mercati", mtime: 21 },
+                    categoria: "mercato",
+                    stato: "pronto",
+                    mondo: "Mondi/Mondo Demo.md",
+                    luogo: "Mondi/Luoghi/Luogo Pubblico.md",
+                    risorse: ["Mondi/Risorse/Sale Lunare.md"],
+                    rotte: ["Mondi/Rotte/Strada del Sale.md"],
+                    fazioni_controllanti: ["Mondi/Fazioni/Consiglio.md"],
+                    rischi: ["embargo"],
+                    prossima_mossa: "Il mercato chiude ai forestieri."
                 },
                 {
                     file: { path: "Mondi/Missioni/Missione Pubblica.md", name: "Missione Pubblica", link: "Mondi/Missioni/Missione Pubblica.md", mtime: 2 },
@@ -365,6 +399,8 @@ async function main() {
                 if (query.includes('"Mondi/Oggetti"')) return demoPages.filter(page => page.file.path.startsWith("Mondi/Oggetti/"));
                 if (query.includes('"Mondi/Luoghi"')) return demoPages.filter(page => page.file.path.startsWith("Mondi/Luoghi/"));
                 if (query.includes('"Mondi/Rotte"')) return demoPages.filter(page => page.file.path.startsWith("Mondi/Rotte/"));
+                if (query.includes('"Mondi/Risorse"')) return demoPages.filter(page => page.file.path.startsWith("Mondi/Risorse/"));
+                if (query.includes('"Mondi/Mercati"')) return demoPages.filter(page => page.file.path.startsWith("Mondi/Mercati/"));
                 if (query.includes('"Mondi/Culture"') || query.includes('"Mondi/Lingue"')) return demoPages.filter(page => page.file.path.startsWith("Mondi/Culture/") || page.file.path.startsWith("Mondi/Lingue/"));
                 if (query.includes('"Mondi/Storia"') || query.includes('"Mondi/Timeline"')) return demoPages.filter(page => page.file.path.startsWith("Mondi/Storia/") || page.file.path.startsWith("Mondi/Timeline/"));
                 if (query.includes('"Mondi/Dispense"')) return demoPages.filter(page => page.file.path.startsWith("Mondi/Dispense/"));
@@ -551,6 +587,26 @@ async function main() {
             await views.renderLivingWorldSurfaceLinks(dv);
             if (!rendered.some(node => String(node.innerHTML).includes("Poteri in movimento"))) {
                 errors.push("renderLivingWorldSurfaceLinks: output senza superfici mondo vivo");
+            }
+            views.renderEconomyNow(dv);
+            if (!rendered.some(node => String(node.innerHTML).includes("Muovi prima"))) {
+                errors.push("renderEconomyNow: output senza priorita economica");
+            }
+            views.renderEconomyReadiness(dv);
+            if (!rendered.some(node => String(node.innerHTML).includes("Rotte aperte"))) {
+                errors.push("renderEconomyReadiness: output senza metriche rotte");
+            }
+            await views.renderEconomyQueues(dv);
+            if (!rendered.some(node => node.tag === "table" && String(node.text).includes("Sale Lunare"))) {
+                errors.push("renderEconomyQueues: output senza risorse economiche");
+            }
+            await views.renderEconomyDependencyQueues(dv);
+            if (!rendered.some(node => node.tag === "table" && String(node.text).includes("I fari si spengono"))) {
+                errors.push("renderEconomyDependencyQueues: output senza code conseguenze");
+            }
+            await views.renderEconomySurfaceLinks(dv);
+            if (!rendered.some(node => String(node.innerHTML).includes("Geopolitica"))) {
+                errors.push("renderEconomySurfaceLinks: output senza superfici economia");
             }
             views.renderOffscreenNow(dv);
             if (!rendered.some(node => String(node.innerHTML).includes("Reagisce prima"))) {
