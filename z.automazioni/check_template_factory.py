@@ -49,6 +49,7 @@ REQUIRED_MODULES = {
     "bacheche",
     "frontmatter_profiles",
     "runtime_profiles",
+    "resource_indexes",
     "entity_depth",
     "worldbuilding_depth_axes",
     "demo_contract",

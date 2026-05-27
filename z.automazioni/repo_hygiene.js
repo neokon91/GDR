@@ -33,6 +33,12 @@ const JUNK_FILE_PATTERNS = [
 const REQUIRED_NPM_SCRIPTS = ["check", "check:repo", "check:js", "check:smoke", "check:release", "check:importers", "check:metadata", "check:diff", "release:clean"];
 const FORBIDDEN_TRACKED_USER_ROOTS = ["Mondi", "Campagne", "Giocatori", "Inbox", "Import"];
 const FORBIDDEN_TRACKED_GENERATED_ROOTS = ["z.bacheche"];
+const FORBIDDEN_TRACKED_GENERATED_FILES = [
+    "Risorse/Audio/Audio.md",
+    "Risorse/Video/Video.md",
+    "Risorse/Immagini/Immagini.md",
+    "Risorse/Dispense/Dispense.md"
+];
 const errors = [];
 const fixed = [];
 
@@ -72,6 +78,13 @@ for (const root of FORBIDDEN_TRACKED_GENERATED_ROOTS) {
         .filter(Boolean);
     if (tracked.length) {
         errors.push(`${root}: superficie vault generata tracciata nel sorgente (${tracked.length} file); deve derivare da YAML/Jinja`);
+    }
+}
+
+for (const relPath of FORBIDDEN_TRACKED_GENERATED_FILES) {
+    const tracked = execFileSync("git", ["ls-files", relPath], { cwd: ROOT, encoding: "utf8" }).trim();
+    if (tracked) {
+        errors.push(`${relPath}: superficie vault generata tracciata nel sorgente; deve derivare da YAML/Jinja`);
     }
 }
 

@@ -77,7 +77,21 @@ def validate_render_plan(rendered: dict[str, str], blueprints: dict[str, dict[st
         fail(errors, "nessun target z.modelli dichiarato dai blueprint")
 
 
-def validate_tracked_generated(errors: list[str]) -> None:
+def generated_markdown_files_from_pipeline(pipeline: dict[str, Any], errors: list[str]) -> set[str]:
+    generated_markdown: set[str] = set()
+    steps = pipeline.get("steps") if isinstance(pipeline.get("steps"), dict) else {}
+    for step_id, step in steps.items():
+        if not isinstance(step, dict):
+            fail(errors, f"{PIPELINE.relative_to(ROOT)}: step non valido {step_id}")
+            continue
+        for output in step.get("outputs") or []:
+            rel_path = str(output).replace("\\", "/")
+            if rel_path.endswith(".md") and not any(char in rel_path for char in "*?[]"):
+                generated_markdown.add(rel_path)
+    return generated_markdown
+
+
+def validate_tracked_generated(pipeline: dict[str, Any], errors: list[str]) -> None:
     # I template materializzati e le preview locali sono output: non devono rientrare in Git.
     release_boundary = load_yaml(RELEASE_BOUNDARY, errors)
     generated_release_roots = [str(root).rstrip("/") for root in release_boundary.get("generated_release_roots", []) or []]
@@ -93,6 +107,18 @@ def validate_tracked_generated(errors: list[str]) -> None:
         )
         if result.returncode == 0 and result.stdout.strip():
             fail(errors, f"{generated_path}: output generato tracciato da Git")
+
+    for generated_path in sorted(generated_markdown_files_from_pipeline(pipeline, errors)):
+        result = subprocess.run(
+            ["git", "ls-files", generated_path],
+            cwd=ROOT,
+            text=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            check=False,
+        )
+        if result.returncode == 0 and result.stdout.strip():
+            fail(errors, f"{generated_path}: output Markdown generato tracciato da Git")
 
     result = subprocess.run(
         ["git", "ls-files", "dist"],
@@ -184,7 +210,7 @@ def main() -> int:
     pipeline = load_pipeline(errors)
     rendered, blueprints = expected_rendered()
     validate_render_plan(rendered, blueprints, errors)
-    validate_tracked_generated(errors)
+    validate_tracked_generated(pipeline, errors)
     validate_json_source_boundary(pipeline, errors)
 
     if errors:

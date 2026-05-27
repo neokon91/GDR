@@ -126,6 +126,23 @@ steps:
       - python3
       - z.automazioni/render_bacheche.py
       - --check
+  resource_indexes:
+    purpose: Genera indici semplici di risorse finali da YAML/Jinja.
+    sources:
+      - Dev/TemplateFactory/modules/resource_indexes.yaml
+      - Dev/TemplateFactory/jinja/resource_index.md.j2
+    outputs:
+      - Risorse/Audio/Audio.md
+      - Risorse/Video/Video.md
+      - Risorse/Immagini/Immagini.md
+      - Risorse/Dispense/Dispense.md
+    render:
+      - python3
+      - z.automazioni/render_resource_indexes.py
+    check:
+      - python3
+      - z.automazioni/render_resource_indexes.py
+      - --check
   workflow_blocks:
     purpose: Renderizza blocchi azioni rapide dentro le pagine operative.
     sources:
