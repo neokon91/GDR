@@ -87,6 +87,82 @@ blocks:
     fallback: |-
       | Mappa | Uso |
       | --- | --- |
+  maps_now:
+    type: dataviewjs
+    runtime_view: renderMapsNow
+    use_for:
+      - dashboard
+      - mappe
+      - cockpit
+      - priorita
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      gdr.renderMapsNow(dv, dv.current().mondo_attivo);
+    fallback: |-
+      | Priorita | Azione |
+      | --- | --- |
+      | Mappa prima | usa, correggi o rendi player-safe |
+  maps_readiness:
+    type: dataviewjs
+    runtime_view: renderMapsReadiness
+    use_for:
+      - dashboard
+      - mappe
+      - cockpit
+      - stato
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      gdr.renderMapsReadiness(dv, dv.current().mondo_attivo);
+    fallback: |-
+      | Area | Conteggio |
+      | --- | --- |
+      | Mappe |  |
+      | Player-safe |  |
+      | Layer |  |
+  maps_use_queues:
+    type: dataviewjs
+    runtime_view: renderMapsUseQueues
+    use_for:
+      - dashboard
+      - mappe
+      - cockpit
+      - code
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      await gdr.renderMapsUseQueues(dv, dv.current().mondo_attivo);
+    fallback: |-
+      | Mappa | Problema |
+      | --- | --- |
+  maps_integrated_layers:
+    type: dataviewjs
+    runtime_view: renderMapsIntegratedLayers
+    use_for:
+      - dashboard
+      - mappe
+      - cockpit
+      - layer
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      await gdr.renderMapsIntegratedLayers(dv, dv.current().mondo_attivo);
+    fallback: |-
+      | Nota | Layer |
+      | --- | --- |
+  maps_surface_links:
+    type: dataviewjs
+    runtime_view: renderMapsSurfaceLinks
+    use_for:
+      - dashboard
+      - mappe
+      - cockpit
+      - superfici
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      await gdr.renderMapsSurfaceLinks(dv);
+    fallback: |-
+      | Superficie | Uso |
+      | --- | --- |
+      | Atlante con marker | vedere coordinate e layer |
+      | Vista giocatori | verificare player-safe |
   session_live_cards:
     type: dataviewjs
     runtime_view: renderSessionLiveCards

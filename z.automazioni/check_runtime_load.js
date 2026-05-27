@@ -11,6 +11,11 @@ const REQUIRED_EXPORTS = [
     "renderAtlasQueues",
     "renderAtlasReadiness",
     "renderAtlasSurfaceLinks",
+    "renderMapsIntegratedLayers",
+    "renderMapsNow",
+    "renderMapsReadiness",
+    "renderMapsSurfaceLinks",
+    "renderMapsUseQueues",
     "renderCanonControlNow",
     "renderCanonControlQueues",
     "renderCanonControlReadiness",
@@ -570,7 +575,45 @@ async function main() {
                     uso: "tavolo",
                     mondo: "Mondi/Mondo Demo.md",
                     luogo: "Mondi/Luoghi/Luogo Pubblico.md",
+                    uso_al_tavolo: "Orientare la trattativa al porto.",
                     coordinates: [45, 9]
+                },
+                {
+                    file: { path: "Risorse/Mappe/Fronte del Porto.md", name: "Fronte del Porto", link: "Risorse/Mappe/Fronte del Porto.md", folder: "Risorse/Mappe", mtime: 30 },
+                    categoria: "mappa",
+                    stato: "bozza",
+                    uso: "fronte",
+                    mondo: "Mondi/Mondo Demo.md",
+                    fazioni: ["Mondi/Fazioni/Consiglio.md"],
+                    personaggi: ["Mondi/Personaggi/Capitano Faro.md"],
+                    missioni: ["Mondi/Missioni/Missione Pubblica.md"],
+                    prossima_mossa: "Il Consiglio sposta le guardie sul molo."
+                },
+                {
+                    file: { path: "Risorse/Mappe/Dungeon del Faro.md", name: "Dungeon del Faro", link: "Risorse/Mappe/Dungeon del Faro.md", folder: "Risorse/Mappe", mtime: 31 },
+                    categoria: "mappa",
+                    stato: "pronto",
+                    uso: "dungeon",
+                    mondo: "Mondi/Mondo Demo.md",
+                    luogo: "Mondi/Luoghi/Luogo Pubblico.md",
+                    incontri: ["Mondi/Incontri/Assalto al Molo.md"],
+                    uso_al_tavolo: "Gestire ingressi, coperture e linee di vista."
+                },
+                {
+                    file: { path: "Risorse/Mappe/Esagoni del Golfo.md", name: "Esagoni del Golfo", link: "Risorse/Mappe/Esagoni del Golfo.md", folder: "Risorse/Mappe", mtime: 32 },
+                    categoria: "mappa",
+                    stato: "pronto",
+                    uso: "esagoni",
+                    mondo: "Mondi/Mondo Demo.md",
+                    luoghi: ["Mondi/Luoghi/Luogo Pubblico.md"],
+                    regioni: ["Mondi/Luoghi/Luogo Pubblico.md"],
+                    uso_al_tavolo: "Scegliere rotte, rischi e deviazioni.",
+                    coordinates: [46, 10]
+                },
+                {
+                    file: { path: "Risorse/Mappe/Mappa Senza Uso.md", name: "Mappa Senza Uso", link: "Risorse/Mappe/Mappa Senza Uso.md", folder: "Risorse/Mappe", mtime: 33 },
+                    categoria: "mappa",
+                    stato: "bozza"
                 },
                 {
                     file: { path: "Campagne/Campagna Faro.md", name: "Campagna Faro", link: "Campagne/Campagna Faro.md", folder: "Campagne", mtime: 25 },
@@ -867,6 +910,37 @@ async function main() {
             await views.renderAtlasSurfaceLinks(dv);
             if (!rendered.some(node => String(node.innerHTML).includes("Atlante con marker"))) {
                 errors.push("renderAtlasSurfaceLinks: output senza superfici atlante");
+            }
+            const mapsNowStart = rendered.length;
+            views.renderMapsNow(dv);
+            if (!rendered.slice(mapsNowStart).some(node => String(node.innerHTML).includes("Mappa prima"))) {
+                errors.push("renderMapsNow: output senza priorita mappe");
+            }
+            const mapsReadinessStart = rendered.length;
+            views.renderMapsReadiness(dv);
+            if (!rendered.slice(mapsReadinessStart).some(node => String(node.innerHTML).includes("Player-safe"))) {
+                errors.push("renderMapsReadiness: output senza metriche player-safe");
+            }
+            const mapsQueuesStart = rendered.length;
+            await views.renderMapsUseQueues(dv);
+            if (!rendered.slice(mapsQueuesStart).some(node => node.tag === "table" && String(node.text).includes("Mappa Senza Uso"))) {
+                errors.push("renderMapsUseQueues: output senza buchi mappa");
+            }
+            if (!rendered.slice(mapsQueuesStart).some(node => node.tag === "table" && String(node.text).includes("Fronte del Porto"))) {
+                errors.push("renderMapsUseQueues: output senza archivio per uso");
+            }
+            const mapsLayersStart = rendered.length;
+            await views.renderMapsIntegratedLayers(dv);
+            if (!rendered.slice(mapsLayersStart).some(node => node.tag === "table" && String(node.text).includes("Luogo Pubblico"))) {
+                errors.push("renderMapsIntegratedLayers: output senza layer integrati");
+            }
+            if (!rendered.slice(mapsLayersStart).some(node => node.tag === "table" && String(node.text).includes("Mappa Pubblica"))) {
+                errors.push("renderMapsIntegratedLayers: output senza mappe sessione");
+            }
+            const mapsSurfacesStart = rendered.length;
+            await views.renderMapsSurfaceLinks(dv);
+            if (!rendered.slice(mapsSurfacesStart).some(node => String(node.innerHTML).includes("Importare mappe"))) {
+                errors.push("renderMapsSurfaceLinks: output senza superfici mappe");
             }
             views.renderCanonControlNow(dv);
             if (!rendered.some(node => String(node.innerHTML).includes("Sistema prima"))) {

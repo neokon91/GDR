@@ -1,0 +1,162 @@
+id: maps_cockpit
+purpose: Contratto operativo per trasformare Mappe in cockpit compatto di supporti spaziali, player-safe e layer integrati.
+version: 0.1.0
+dashboard:
+  page: Risorse/Mappe/Mappe.md
+  workflow: mappe_operativo
+  required_runtime_views:
+    - renderMapsNow
+    - renderMapsReadiness
+    - renderMapsUseQueues
+    - renderMapsIntegratedLayers
+    - renderMapsSurfaceLinks
+  required_visible_sections:
+    - Filtro
+    - Prossima Azione Mappa
+    - Stato Mappe
+    - Code Mappe
+    - Layer Integrati
+    - Superfici
+    - Azioni
+panels:
+  now:
+    runtime_view: renderMapsNow
+    promise: Decidere quale mappa usare, correggere o rendere sicura adesso.
+    answers:
+      - mappa prima
+      - sessione
+      - player-safe
+      - da correggere
+      - layer integrati
+  readiness:
+    runtime_view: renderMapsReadiness
+    promise: Misurare copertura, buchi, mappe pronte, player-safe e layer.
+    answers:
+      - mappe
+      - pronte
+      - buchi
+      - player-safe
+      - sessione
+      - layer
+  queues:
+    runtime_view: renderMapsUseQueues
+    promise: Sostituire query inline e archivio lungo con code verificabili per uso e sicurezza.
+    answers:
+      - buchi aperti
+      - mappe pronte
+      - archivio per uso
+  layers:
+    runtime_view: renderMapsIntegratedLayers
+    promise: Vedere quali note di mondo hanno mappa, coordinate o layer collegati.
+    answers:
+      - layer integrati
+      - mappe sessione
+  surfaces:
+    runtime_view: renderMapsSurfaceLinks
+    promise: Aprire lo strumento giusto per correggere coordinate, importare asset, disegnare fronti o controllare la vista giocatori.
+    answers:
+      - atlante con marker
+      - importare mappe
+      - fronti visuali
+      - materiali al tavolo
+      - vista giocatori
+queues:
+  - id: open_gaps
+    label: Buchi Mappe
+    table_columns:
+      - Mappa
+      - Problema
+      - Azione
+  - id: ready_maps
+    label: Mappe Pronte
+    table_columns:
+      - Mappa
+      - Uso
+      - Stato
+      - Mostrare
+  - id: use_archive
+    label: Archivio Per Uso
+    table_columns:
+      - Mappa
+      - Uso
+      - Aggancio
+      - Aggiornata
+  - id: integrated_layers
+    label: Layer Integrati
+    table_columns:
+      - Nota
+      - Tipo
+      - Layer
+      - Mappa/coordinate
+  - id: session_maps
+    label: Mappe Sessione
+    table_columns:
+      - Mappa
+      - Uso
+      - Luogo
+      - Sicurezza
+surfaces:
+  - id: atlas_maps
+    label: Atlante con marker
+    plugin: Maps
+    target: z.bases/Atlante Mappe.base
+    generated_release: true
+    badge: Mappa
+    role: vedere coordinate e layer
+    action: Apri quando devi controllare marker, icone, colori o layer.
+    why: Maps legge la Base generata; il sorgente resta nei moduli YAML.
+  - id: atlas_dashboard
+    label: Atlante del mondo
+    plugin: Dataview
+    target: Hub/Atlante del Mondo.md
+    badge: Atlante
+    role: correggere luoghi e rotte
+    action: Apri quando la mappa segnala buchi in coordinate, territori o viaggi.
+    why: L'atlante collega mappe, luoghi, rotte e marker senza duplicare archivio.
+  - id: map_import
+    label: Importare mappe
+    plugin: Templater
+    target: Risorse/Importare Mappe.md
+    badge: Import
+    role: normalizzare asset esterni
+    action: Apri quando una mappa generata o importata deve diventare nota controllata.
+    why: Gli importatori tengono immagini e dati dentro un flusso ripetibile.
+  - id: fronti_excalidraw
+    label: Fronti visuali
+    plugin: Excalidraw
+    target: Risorse/Mappe/Schema Relazioni GDR.excalidraw.md
+    badge: Disegno
+    role: disegnare pressioni e indizi
+    action: Apri quando fazioni, PNG o indizi sono piu chiari come schema.
+    why: Excalidraw resta supporto visuale, mentre il canone vive nelle note collegate.
+  - id: table_materials
+    label: Materiali al tavolo
+    plugin: Dataview
+    target: Risorse/Materiali Al Tavolo.md
+    badge: Tavolo
+    role: collegare alla sessione
+    action: Apri quando una mappa va servita insieme a incontri, dispense o media.
+    why: La mappa e pronta solo se aiuta la sessione reale.
+  - id: player_view
+    label: Vista giocatori
+    plugin: Dataview
+    target: Hub/Vista Giocatori.md
+    badge: Player-safe
+    role: verificare cosa mostrare
+    action: Apri prima di condividere mappe pubbliche o versioni giocatori.
+    why: Il controllo anti-segreti evita che layer DM escano al tavolo.
+  - id: fileclass_map
+    label: Campi mappa
+    plugin: Metadata Menu
+    target: z.fileclass/mappa.md
+    generated_release: true
+    badge: Campi
+    role: compilare properties mappa
+    action: Usa quando mancano uso, luogo, coordinate, layer o versione giocatori.
+    why: Le FileClass sono generate in release e non rientrano come sorgente tracciato.
+contracts:
+  dashboard_uses_runtime_views: true
+  page_must_not_use_inline_dataview_queries: true
+  surfaces_must_resolve_to_source_or_generated_release_target: true
+  generated_targets_must_stay_release_only: true
+  map_surface_requires_coordinates_field: true

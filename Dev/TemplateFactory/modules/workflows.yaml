@@ -905,6 +905,50 @@ workflows:
       - Meta Bind
       - Dataview
       - JS Engine
+  mappe_operativo:
+    audience: user
+    user_goal: Scegliere o correggere il supporto spaziale giusto per sessione, viaggio, fronte o versione giocatori.
+    entry_points:
+      - Risorse/Mappe/Mappe.md
+    quick_actions:
+      - button: nuova-mappa-zoom-z-modelli-mappe-mappa-zoom-md
+        label: Nuova mappa zoom
+        use_when: una scena, un dungeon o un luogo deve essere navigabile
+      - button: nuova-mappa-fronti-z-modelli-mappe-mappa-excalidraw-fronti-excalidraw-md
+        label: Nuova mappa fronti
+        use_when: pressioni, fazioni, indizi o relazioni vanno viste insieme
+      - button: atlante-del-mondo-atlante-del-mondo
+        label: Atlante
+        use_when: devi correggere coordinate, luoghi, rotte o layer
+      - button: vista-giocatori-hub-vista-giocatori-vista-giocatori
+        label: Vista giocatori
+        use_when: vuoi mostrare una mappa senza rivelare segreti DM
+    action_groups:
+      contesto:
+        label: Contesto mappa
+        purpose: Aprire la superficie dove la mappa diventa gioco, non archivio.
+        actions:
+          - button: preparazione-sessione-risorse-preparazione-sessione
+            label: Preparazione sessione
+            use_when: la mappa serve il prossimo tavolo
+          - button: durante-il-gioco-durante-il-gioco
+            label: Durante il gioco
+            use_when: devi aprire la mappa mentre la scena e attiva
+          - button: worldbuilder-worldbuilder-dashboard-2
+            label: Worldbuilder
+            use_when: mancano luoghi, fazioni o missioni da collegare
+          - button: quality-report-risorse-quality-report
+            label: Report qualita
+            use_when: vuoi controllare player-safe, buchi e materiale mostrabile
+    required_plugins:
+      - Meta Bind
+      - Dataview
+      - Templater
+      - Bases
+      - Maps
+      - Excalidraw
+      - "TTRPG Tools: Maps"
+      - Hex Cartographer
   atlante_mondo:
     user_goal: Costruire e controllare geografia, culture, storia e buchi spaziali del mondo.
     audience: user

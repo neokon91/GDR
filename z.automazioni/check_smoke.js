@@ -80,6 +80,16 @@ for (const marker of ["renderAtlasNow", "renderAtlasReadiness", "renderAtlasQueu
     }
 }
 
+const maps = readTextRel(ROOT, "Risorse/Mappe/Mappe.md");
+for (const marker of ["renderMapsNow", "renderMapsReadiness", "renderMapsUseQueues", "renderMapsIntegratedLayers", "renderMapsSurfaceLinks"]) {
+    if (!maps.includes(marker)) {
+        errors.push(`Smoke statico: Mappe non contiene ${marker}`);
+    }
+}
+if (maps.includes("dv.pages(") || maps.includes("````tabs")) {
+    errors.push("Smoke statico: Mappe contiene ancora query o tabs inline");
+}
+
 const worldbuildingControl = readTextRel(ROOT, "Hub/Controllo Worldbuilding.md");
 for (const marker of ["renderWorldbuildingControlNow", "renderWorldbuildingControlReadiness", "renderWorldbuildingControlQueues", "renderWorldbuildingControlSurfaceLinks"]) {
     if (!worldbuildingControl.includes(marker)) {
@@ -114,6 +124,7 @@ for (const [label, relPath] of [
     ["Controllo Canone", "Hub/Controllo Canone.md"],
     ["Compendium Del Mondo", "Hub/Compendium Del Mondo.md"],
     ["Bibbia del Mondo", "Hub/Bibbia del Mondo.md"],
+    ["Mappe", "Risorse/Mappe/Mappe.md"],
     ["Iniziativa e Combattimenti", "Risorse/Iniziativa e Combattimenti.md"]
 ]) {
     assertNoTechnicalJargon(label, relPath);

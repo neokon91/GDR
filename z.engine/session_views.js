@@ -112,6 +112,7 @@
     inbox_operativa: ["Meta Bind", "Dataview", "Templater", "Fantasy Content Generator"],
     smistamento_bozze: ["Meta Bind", "Dataview", "Templater", "Fantasy Content Generator"],
     quality_report: ["Meta Bind", "Dataview", "JS Engine"],
+    mappe_operativo: ["Meta Bind", "Dataview", "Templater", "Bases", "Maps", "Excalidraw", "TTRPG Tools: Maps", "Hex Cartographer"],
     stato_campagna: ["Meta Bind", "Dataview", "Templater"],
     campagna_ambientazione: ["Meta Bind", "Dataview", "Templater"]
   };
@@ -1034,6 +1035,11 @@
     renderAtlasQueues: atlasViews.renderAtlasQueues,
     renderAtlasReadiness: atlasViews.renderAtlasReadiness,
     renderAtlasSurfaceLinks: atlasViews.renderAtlasSurfaceLinks,
+    renderMapsIntegratedLayers: mapViews.renderMapsIntegratedLayers,
+    renderMapsNow: mapViews.renderMapsNow,
+    renderMapsReadiness: mapViews.renderMapsReadiness,
+    renderMapsSurfaceLinks: mapViews.renderMapsSurfaceLinks,
+    renderMapsUseQueues: mapViews.renderMapsUseQueues,
     renderCanonControlNow: canonControlViews.renderCanonControlNow,
     renderCanonControlQueues: canonControlViews.renderCanonControlQueues,
     renderCanonControlReadiness: canonControlViews.renderCanonControlReadiness,

@@ -4,6 +4,7 @@
 
 ### Aggiunto
 
+- `Risorse/Mappe/Mappe.md` trasformata in cockpit compatto con runtime `session_maps.js` e contratto `maps_cockpit.yaml`.
 - `Hub/Compendium Del Mondo.md` trasformata in cockpit compatto con runtime `session_compendium.js` e contratto `compendium_cockpit.yaml`.
 - `Hub/Bibbia del Mondo.md` trasformata in cockpit Codex compatto con runtime `session_world_bible.js` e contratto `world_bible_cockpit.yaml`.
 - `Risorse/Smistamento Bozze Generate.md` trasformata in cockpit compatto con runtime `session_generated_drafts.js` e contratto `generated_drafts_cockpit.yaml`.

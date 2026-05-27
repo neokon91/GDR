@@ -332,6 +332,24 @@ steps:
       - node
       - z.automazioni/render_atlas_cockpit.js
       - --check
+  maps_cockpit:
+    purpose: Genera il contratto runtime del cockpit Mappe senza scrivere root generate.
+    sources:
+      - Dev/TemplateFactory/modules/maps_cockpit.yaml
+      - Dev/TemplateFactory/modules/bases_views.yaml
+      - Dev/TemplateFactory/modules/frontmatter_profiles.yaml
+      - Risorse/Mappe/Mappe.md
+      - z.engine/session_maps.js
+      - z.engine/session_views.js
+    outputs:
+      - z.automazioni/data/runtime/maps_cockpit.json
+    render:
+      - node
+      - z.automazioni/render_maps_cockpit.js
+    check:
+      - node
+      - z.automazioni/render_maps_cockpit.js
+      - --check
   worldbuilding_control_cockpit:
     purpose: Genera il contratto runtime dell'audit Controllo Worldbuilding senza scrivere root generate.
     sources:
