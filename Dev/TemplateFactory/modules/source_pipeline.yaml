@@ -406,6 +406,24 @@ steps:
       - node
       - z.automazioni/render_offscreen_cockpit.js
       - --check
+  preparation_cockpit:
+    purpose: Genera il contratto runtime del cockpit Preparazione Sessione senza scrivere root generate.
+    sources:
+      - Dev/TemplateFactory/modules/preparation_cockpit.yaml
+      - Dev/TemplateFactory/modules/bases_views.yaml
+      - Dev/TemplateFactory/modules/frontmatter_profiles.yaml
+      - Risorse/Preparazione Sessione.md
+      - z.engine/session_preparation.js
+      - z.engine/session_views.js
+    outputs:
+      - z.automazioni/data/runtime/preparation_cockpit.json
+    render:
+      - node
+      - z.automazioni/render_preparation_cockpit.js
+    check:
+      - node
+      - z.automazioni/render_preparation_cockpit.js
+      - --check
   live_table_cockpit:
     purpose: Genera il contratto runtime del cockpit Durante il Gioco senza scrivere root generate.
     sources:

@@ -1298,6 +1298,82 @@ blocks:
       | --- | --- |
       | Motore mondo vivo | propagare conseguenze |
       | Vista giocatori | controllare recap pubblico |
+  preparation_now:
+    type: dataviewjs
+    runtime_view: renderPreparationNow
+    use_for:
+      - dashboard
+      - preparazione
+      - sessione
+      - cockpit
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      gdr.renderPreparationNow(dv);
+    fallback: |-
+      | Priorita | Azione |
+      | --- | --- |
+      | Prepara prima | completa sessione target, ancore e blocchi |
+  preparation_readiness:
+    type: dataviewjs
+    runtime_view: renderPreparationReadiness
+    use_for:
+      - dashboard
+      - preparazione
+      - sessione
+      - cockpit
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      gdr.renderPreparationReadiness(dv);
+    fallback: |-
+      | Area | Conteggio |
+      | --- | --- |
+      | Ancore |  |
+      | Cinque blocchi |  |
+      | Materiali |  |
+  preparation_anchor_queues:
+    type: dataviewjs
+    runtime_view: renderPreparationAnchorQueues
+    use_for:
+      - dashboard
+      - preparazione
+      - ancore
+      - cockpit
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      await gdr.renderPreparationAnchorQueues(dv);
+    fallback: |-
+      | Ancora | Stato |
+      | --- | --- |
+  preparation_material_queues:
+    type: dataviewjs
+    runtime_view: renderPreparationMaterialQueues
+    use_for:
+      - dashboard
+      - preparazione
+      - materiali
+      - cockpit
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      await gdr.renderPreparationMaterialQueues(dv);
+    fallback: |-
+      | Materiale | Stato |
+      | --- | --- |
+  preparation_surface_links:
+    type: dataviewjs
+    runtime_view: renderPreparationSurfaceLinks
+    use_for:
+      - dashboard
+      - preparazione
+      - superfici
+      - cockpit
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      await gdr.renderPreparationSurfaceLinks(dv);
+    fallback: |-
+      | Superficie | Uso |
+      | --- | --- |
+      | Durante il Gioco | aprire il tavolo |
+      | Materiali al tavolo | verificare output pronti |
 contracts:
   dataviewjs_has_no_file_writes: true
   empty_state_required: true

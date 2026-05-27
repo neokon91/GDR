@@ -123,6 +123,13 @@ for (const marker of ["renderLiveTableNow", "renderLiveTableReadiness", "renderL
     }
 }
 
+const preparation = readTextRel(ROOT, "Risorse/Preparazione Sessione.md");
+for (const marker of ["renderPreparationNow", "renderPreparationReadiness", "renderPreparationAnchorQueues", "renderPreparationMaterialQueues", "renderPreparationSurfaceLinks", "BUTTON[nuova-sessione-z-modelli-dm-sessione-md]"]) {
+    if (!preparation.includes(marker)) {
+        errors.push(`Smoke statico: Preparazione Sessione non contiene ${marker}`);
+    }
+}
+
 const livingWorld = readTextRel(ROOT, "Hub/Motore Mondo Vivo.md");
 for (const marker of ["renderLivingWorldNow", "renderLivingWorldReadiness", "renderLivingWorldQueues", "renderLivingWorldPressureQueues", "renderLivingWorldSurfaceLinks"]) {
     if (!livingWorld.includes(marker)) {

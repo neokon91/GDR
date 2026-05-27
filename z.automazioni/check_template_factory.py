@@ -39,6 +39,7 @@ REQUIRED_MODULES = {
     "fields_core",
     "plugin_bindings",
     "post_session_cockpit",
+    "preparation_cockpit",
     "template_blueprints",
     "sections",
     "callouts",

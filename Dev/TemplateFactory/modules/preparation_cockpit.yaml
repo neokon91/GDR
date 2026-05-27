@@ -1,0 +1,197 @@
+id: preparation_cockpit
+purpose: Contratto operativo per trasformare Preparazione Sessione in cockpit compatto di sessione target, ancore, blocchi e materiali pronti.
+version: 0.1.0
+dashboard:
+  page: Risorse/Preparazione Sessione.md
+  workflow: prepara_sessione
+  required_runtime_views:
+    - renderPreparationNow
+    - renderPreparationReadiness
+    - renderPreparationAnchorQueues
+    - renderPreparationMaterialQueues
+    - renderPreparationSurfaceLinks
+  required_visible_sections:
+    - Sessione Da Preparare
+    - Stato Preparazione
+    - Ancore E Blocchi
+    - Materiali Pronti
+    - Superfici
+    - Azioni
+panels:
+  now:
+    runtime_view: renderPreparationNow
+    promise: Dire al DM cosa completare prima di aprire il tavolo.
+    answers:
+      - sessione target
+      - priorita di preparazione
+      - ancore mondo
+      - cinque blocchi
+      - materiale pronto
+  readiness:
+    runtime_view: renderPreparationReadiness
+    promise: Misurare sessione attiva, ancore, blocchi, missioni, pressioni e materiali.
+    answers:
+      - sessioni attive
+      - ancore collegate
+      - blocchi pronti
+      - missioni
+      - pressioni
+      - materiali
+  anchors:
+    runtime_view: renderPreparationAnchorQueues
+    promise: Portare in tabella sessioni candidate, ancore, missioni e pressioni.
+    answers:
+      - sessioni candidate
+      - ancore mancanti
+      - missioni giocabili
+      - clock e pressioni
+  materials:
+    runtime_view: renderPreparationMaterialQueues
+    promise: Portare in tabella PNG, incontri, handout e mappe pronti per il tavolo.
+    answers:
+      - persone in scena
+      - incontri
+      - dispense
+      - mappe
+  surfaces:
+    runtime_view: renderPreparationSurfaceLinks
+    promise: Aprire le superfici giuste quando la sessione e quasi pronta.
+    answers:
+      - durante il gioco
+      - materiali al tavolo
+      - iniziativa
+      - party control
+      - vista giocatori
+queues:
+  - id: candidate_sessions
+    label: Sessioni Candidate
+    table_columns:
+      - Sessione
+      - Stato
+      - Data
+      - Obiettivo
+      - Azione
+  - id: anchors
+    label: Ancore Mondo
+    table_columns:
+      - Ancora
+      - Stato
+      - Valore
+      - Azione
+  - id: missions
+    label: Missioni Giocabili
+    table_columns:
+      - Missione
+      - Stato
+      - Pressione
+      - Prossima mossa
+      - Luoghi
+  - id: pressures
+    label: Pressioni Da Portare Al Tavolo
+    table_columns:
+      - Pressione
+      - Tipo
+      - Valore
+      - Prossima mossa
+  - id: people
+    label: Persone In Scena
+    table_columns:
+      - Persona
+      - Ruolo
+      - Luogo
+      - Atteggiamento
+  - id: encounters
+    label: Incontri Pronti
+    table_columns:
+      - Incontro
+      - Tipo
+      - Pericolo
+      - Luogo
+      - Creature
+  - id: handouts
+    label: Handout Pronti
+    table_columns:
+      - Handout
+      - Tipo
+      - Luogo
+      - Pubblico
+  - id: maps
+    label: Mappe Pronte
+    table_columns:
+      - Mappa
+      - Uso
+      - Luogo
+      - Stato
+surfaces:
+  - id: live_table
+    label: Durante il Gioco
+    plugin: Dataview
+    target: Hub/Durante il Gioco.md
+    badge: Live
+    role: aprire il tavolo
+    action: Apri quando ancore, cinque blocchi e materiale minimo sono pronti.
+    why: La preparazione deve finire in una sessione giocabile, non in una lista infinita.
+  - id: table_materials
+    label: Materiali al tavolo
+    plugin: Dataview
+    target: Risorse/Materiali Al Tavolo.md
+    badge: Materiali
+    role: controllare cosa usare
+    action: Apri quando incontri, mappe, dispense o media devono essere verificati prima della scena.
+    why: Il cockpit prepara il minimo; i materiali restano una superficie separata.
+  - id: initiative
+    label: Iniziativa e combattimenti
+    plugin: Initiative Tracker
+    target: Risorse/Iniziativa e Combattimenti.md
+    badge: Turni
+    role: preparare scene ordinate
+    action: Apri quando un incontro pronto puo diventare combattimento o scena a turni.
+    why: Le regole tattiche entrano solo quando servono davvero alla sessione.
+  - id: party_control
+    label: Party control
+    plugin: Dataview
+    target: Hub/Party Control.md
+    badge: Party
+    role: verificare PG
+    action: Apri se risorse, condizioni o spotlight dei personaggi cambiano la preparazione.
+    why: La prossima scena deve sapere cosa puo fare davvero il party.
+  - id: player_view
+    label: Vista giocatori
+    plugin: Dataview
+    target: Hub/Vista Giocatori.md
+    badge: Player-safe
+    role: controllare condivisione
+    action: Apri prima di condividere mappe, dispense o recap di apertura.
+    why: Il materiale pronto non deve rivelare segreti o prossime mosse DM.
+  - id: missions_base
+    label: Missioni aperte
+    plugin: Bases
+    target: z.bases/Missioni.base
+    generated_release: true
+    badge: Base
+    role: correggere obiettivi
+    action: Apri quando devi filtrare missioni per stato, pressione o campagna.
+    why: La Base generata accelera la scelta senza diventare sorgente tracciato.
+  - id: encounters_base
+    label: Incontri pronti
+    plugin: Bases
+    target: z.bases/Incontri.base
+    generated_release: true
+    badge: Base
+    role: scegliere incontri
+    action: Apri quando devi filtrare incontri per luogo, pericolo o stato.
+    why: Gli incontri pronti sono materiale operativo, non testo da cercare a mano.
+  - id: maps_base
+    label: Atlante mappe
+    plugin: Bases
+    target: z.bases/Atlante Mappe.base
+    generated_release: true
+    badge: Base
+    role: verificare mappe
+    action: Apri quando la sessione dipende da mappa, luogo o coordinate.
+    why: Le mappe restano output di release ma servono a rendere il tavolo immediato.
+contracts:
+  dashboard_uses_runtime_views: true
+  surfaces_must_resolve_to_source_or_generated_release_target: true
+  generated_targets_must_stay_release_only: true
+  preparation_prioritizes_playable_session_over_world_lore: true

@@ -68,6 +68,11 @@ const REQUIRED_EXPORTS = [
     "renderOnboardingReadiness",
     "renderPlayerView",
     "renderPluginTroubleshooting",
+    "renderPreparationAnchorQueues",
+    "renderPreparationMaterialQueues",
+    "renderPreparationNow",
+    "renderPreparationReadiness",
+    "renderPreparationSurfaceLinks",
     "renderPostSessionCommandCenter",
     "renderPostSessionClosureQueues",
     "renderPostSessionNow",
@@ -107,6 +112,7 @@ const REQUIRED_MODULES = [
     "z.engine/session_geopolitical.js",
     "z.engine/session_maps.js",
     "z.engine/session_player.js",
+    "z.engine/session_preparation.js",
     "z.engine/session_post_session.js",
     "z.engine/session_runtime.js",
     "z.engine/session_vault_control.js",
@@ -606,6 +612,26 @@ async function main() {
             await views.renderVaultControlSurfaceLinks(dv);
             if (!rendered.some(node => String(node.innerHTML).includes("Quality report"))) {
                 errors.push("renderVaultControlSurfaceLinks: output senza superfici manutenzione");
+            }
+            views.renderPreparationNow(dv);
+            if (!rendered.some(node => String(node.innerHTML).includes("Prepara prima"))) {
+                errors.push("renderPreparationNow: output senza priorita di preparazione");
+            }
+            views.renderPreparationReadiness(dv);
+            if (!rendered.some(node => String(node.innerHTML).includes("Cinque blocchi"))) {
+                errors.push("renderPreparationReadiness: output senza metriche dei blocchi");
+            }
+            await views.renderPreparationAnchorQueues(dv);
+            if (!rendered.some(node => node.tag === "table" && String(node.text).includes("Missione Pubblica"))) {
+                errors.push("renderPreparationAnchorQueues: output senza missioni giocabili");
+            }
+            await views.renderPreparationMaterialQueues(dv);
+            if (!rendered.some(node => node.tag === "table" && String(node.text).includes("Assalto al Molo"))) {
+                errors.push("renderPreparationMaterialQueues: output senza incontri pronti");
+            }
+            await views.renderPreparationSurfaceLinks(dv);
+            if (!rendered.some(node => String(node.innerHTML).includes("Durante il Gioco"))) {
+                errors.push("renderPreparationSurfaceLinks: output senza superfici preparazione");
             }
             views.renderAtlasNow(dv);
             if (!rendered.some(node => String(node.innerHTML).includes("Marker pronti"))) {
