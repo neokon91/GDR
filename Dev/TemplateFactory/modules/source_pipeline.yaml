@@ -70,6 +70,22 @@ steps:
     check:
       - node
       - z.automazioni/check_plugin_usage_audit.js
+  entity_model_contract:
+    purpose: Verifica il catalogo YAML delle categorie entita e impedisce il ritorno della nota lunga in Risorse.
+    sources:
+      - Dev/TemplateFactory/modules/entity_model.yaml
+      - Dev/TemplateFactory/modules/fields_core.yaml
+      - Dev/TemplateFactory/modules/frontmatter_profiles.yaml
+      - Dev/TemplateFactory/modules/validation_contract.yaml
+      - z.automazioni/check_entity_model.js
+    outputs:
+      - memoria
+    render:
+      - node
+      - z.automazioni/check_entity_model.js
+    check:
+      - node
+      - z.automazioni/check_entity_model.js
   templater_wrappers:
     purpose: Genera i wrapper richiesti da Templater nella user_scripts_folder.
     sources:

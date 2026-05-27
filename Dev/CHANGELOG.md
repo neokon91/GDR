@@ -4,6 +4,7 @@
 
 ### Aggiunto
 
+- `Risorse/Modello Entità.md` rimossa come nota lunga: il catalogo categorie ora vive in `entity_model.yaml`, verificato da `check_entity_model.js`.
 - `Risorse/Preparazione Sessione.md` trasformata in cockpit compatto con runtime `session_preparation.js` e contratto `preparation_cockpit.yaml`.
 - `Risorse/Post Sessione Guidato.md` trasformata in cockpit compatto con runtime `session_post_session.js` e contratto `post_session_cockpit.yaml`.
 - `Hub/Revisione Lore.md` trasformata in cockpit compatto con runtime `session_lore_review.js` e contratto `lore_review_cockpit.yaml`.

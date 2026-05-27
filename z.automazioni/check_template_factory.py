@@ -57,6 +57,7 @@ REQUIRED_MODULES = {
     "resource_hub",
     "resource_indexes",
     "entity_depth",
+    "entity_model",
     "worldbuilding_depth_axes",
     "demo_contract",
     "release_boundary",

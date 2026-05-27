@@ -1,0 +1,686 @@
+id: entity_model
+purpose: Catalogo canonico delle categorie di entita, usato per decidere cosa merita template, cartella e controlli.
+version: 0.1.0
+policy:
+  structured_note_when:
+    - deve essere ritrovata durante la sessione
+    - deve collegarsi a mondo, luogo, personaggio, fazione o missione
+    - deve avere stato operativo
+    - deve essere riusata in piu sessioni o campagne
+    - deve diventare contenuto canonico
+  folder_when:
+    - la categoria e stabile
+    - una automazione o dashboard la consuma
+    - serve trovarla rapidamente al tavolo
+  do_not_create_for:
+    - idee vaghe
+    - varianti speculative
+    - contenuti finti di collaudo
+  inbox_for_uncertain_content: Inbox/Inbox
+  replaces_tracked_note: Risorse/Modello Entità.md
+common_fields:
+  required:
+    - nome
+    - categoria
+    - tipo
+    - stato
+  contextual:
+    - mondo
+    - canonico
+    - luogo
+    - luoghi
+    - personaggi
+    - fazioni
+    - creature
+    - oggetti
+    - ricompense
+    - sessioni
+priorities:
+  essential: Template e controlli da mantenere ora.
+  useful: Utile solo quando il flusso lo richiede spesso.
+  defer: Non implementare finche non c'e domanda reale.
+categories:
+  mondo:
+    label: Mondo
+    folder: Mondi
+    priority: essential
+    purpose: Contiene le verita dell'ambientazione e collega luoghi, fazioni, religioni e campagne.
+    create_when:
+      - piu luoghi, fazioni o campagne condividono le stesse regole narrative
+    types:
+      - mondo
+    required_fields:
+      - categoria
+      - stato
+      - tono
+      - tema
+    useful_fields:
+      - tecnologia
+      - magia
+      - continenti
+      - fazioni
+      - religioni
+      - campagne
+      - canonico
+    template_blueprints:
+      - mondo
+    future_templates:
+      - piano o dimensione
+      - linea temporale del mondo
+  personaggio:
+    label: Personaggio
+    folder: Mondi/Personaggi
+    priority: essential
+    purpose: Gestisce PG, PNG, divinita e figure importanti.
+    create_when:
+      - il personaggio puo tornare o influenzare una missione
+      - il personaggio ha relazioni, luogo, fazione o segreti rilevanti
+    types:
+      - pg
+      - png
+    required_fields:
+      - categoria
+      - stato
+    useful_fields:
+      - tipo
+      - ruolo
+      - classe
+      - mondo
+      - luogo
+      - fazioni
+      - relazioni
+    template_blueprints:
+      - png
+      - pg
+    future_templates:
+      - antagonista come variante guidata del png
+      - divinita se diventa flusso frequente
+  luogo:
+    label: Luogo
+    folder: Mondi/Luoghi
+    priority: essential
+    purpose: Descrive dove succedono le cose e collega incontri, PNG, fazioni, segreti e risorse.
+    create_when:
+      - i personaggi possono andarci, tornarci o parlarne come punto importante
+    types:
+      - villaggio
+      - capitale
+      - porto
+      - fortezza
+      - rovina
+      - dungeon
+      - regione
+      - regno
+      - tempio
+      - foresta
+      - montagna
+    required_fields:
+      - categoria
+      - stato
+      - mondo
+      - tipo
+    useful_fields:
+      - tipologia
+      - bioma
+      - luogo_padre
+      - pericolo
+      - fazioni
+      - religioni
+      - risorse
+      - problemi
+    template_blueprints:
+      - luogo
+    future_templates:
+      - regione politica
+      - continente o isola
+      - quartiere solo per citta dense
+  fazione:
+    label: Fazione
+    folder: Mondi/Fazioni
+    priority: essential
+    purpose: Segue gruppi con obiettivi, potere, leader, agenti e oppositori.
+    create_when:
+      - il gruppo prende decisioni, muove risorse o reagisce alle azioni dei PG
+    types:
+      - fazione generica
+      - confraternita
+      - culto
+      - gilda
+      - ordine rituale
+    required_fields:
+      - categoria
+      - stato
+      - mondo
+      - pressione
+    useful_fields:
+      - tipo
+      - canonico
+      - leader
+      - luoghi
+      - personaggi
+      - obiettivo
+      - prossima_mossa
+    template_blueprints:
+      - fazione
+    future_templates:
+      - gilda
+      - confraternita o ordine
+      - casata nobile
+  missione:
+    label: Missione
+    folder: Mondi/Missioni
+    priority: essential
+    purpose: Trasforma lore in obiettivo giocabile, scelta, rischio, ricompensa e conseguenza.
+    create_when:
+      - i giocatori possono accettare, rifiutare, cambiare o fallire qualcosa
+    types:
+      - incarico
+      - ricerca
+      - mistero
+      - salvataggio
+      - caccia
+      - viaggio
+      - fronte
+      - trama personale
+      - missione di fazione
+      - arco narrativo
+      - missione
+    required_fields:
+      - categoria
+      - stato
+      - mondo
+      - prossima_mossa
+    useful_fields:
+      - scelta
+      - posta
+      - rischi
+      - ricompense
+      - conseguenze
+      - entita_impattate
+      - propaga_a
+      - luoghi
+      - fazioni
+    template_blueprints:
+      - missione
+  tracciato:
+    label: Tracciato
+    folder: Mondi/Tracciati
+    priority: essential
+    purpose: Rende visibile una pressione, come avanza e cosa cambia nel mondo.
+    create_when:
+      - serve un clock, rituale, minaccia, viaggio o progetto con avanzamento persistente
+    types:
+      - clock
+      - progress track
+      - fronte
+      - rituale
+      - minaccia
+      - viaggio
+      - progetto
+    required_fields:
+      - categoria
+      - stato
+      - mondo
+      - progress_value
+      - progress_max
+      - prossima_mossa
+    useful_fields:
+      - pressione
+      - innesco
+      - posta
+      - entita_impattate
+      - propaga_a
+      - connessioni
+    template_blueprints:
+      - tracciato
+  incontro:
+    label: Incontro
+    folder: Mondi/Incontri
+    priority: essential
+    purpose: Prepara una scena meccanica, sociale, esplorativa o di combattimento.
+    create_when:
+      - la scena ha luogo, posta, pericolo, creature o ricompense da usare al tavolo
+    types:
+      - combattimento
+      - esplorazione
+      - pericolo ambientale
+      - trappola
+    required_fields:
+      - categoria
+      - stato
+    useful_fields:
+      - luogo
+      - missioni
+      - fazioni
+      - sessioni
+      - creature
+      - encounter_creatures
+      - ricompense
+      - gancio
+      - uso_al_tavolo
+    template_blueprints:
+      - incontro
+  oggetto:
+    label: Oggetto
+    folder: Mondi/Oggetti
+    priority: essential
+    purpose: Gestisce chiavi, prove, ricompense e leve narrative persistenti.
+    create_when:
+      - l'oggetto puo cambiare decisioni, missioni, relazioni o conseguenze
+    types:
+      - oggetto
+      - oggetto magico
+      - chiave
+    required_fields:
+      - categoria
+      - stato
+    useful_fields:
+      - mondo
+      - luogo
+      - proprietario
+      - missioni
+      - sessioni
+      - gancio
+      - uso_al_tavolo
+      - player_safe
+    template_blueprints:
+      - oggetto
+  creatura:
+    label: Creatura
+    folder: Mondi/Creature
+    priority: useful
+    purpose: Collega statblock, habitat, minaccia e ruolo nel mondo.
+    create_when:
+      - la creatura e abitante, minaccia o risorsa ricorrente dell'ambientazione
+    types:
+      - habitat
+      - migrazione
+      - catena alimentare
+      - variante regionale
+      - creatura sacra
+      - mostro sociale
+      - specie senziente
+      - predatore territoriale
+      - ecosistema da definire
+    required_fields:
+      - categoria
+      - stato
+    useful_fields:
+      - mondo
+      - habitat
+      - luoghi
+      - fazioni
+      - missioni
+      - gancio
+      - uso_al_tavolo
+      - player_safe
+    template_blueprints:
+      - creatura
+  evento storico:
+    label: Evento Storico
+    folder: Mondi/Timeline
+    priority: useful
+    purpose: Stabilizza canone, conseguenze, rumor, leggende e cronologia.
+    create_when:
+      - l'evento cambia stato del mondo o viene citato da piu note
+    types:
+      - evento
+      - conseguenza
+      - rumor
+      - leggenda
+      - era
+      - guerra
+      - catastrofe
+      - fondazione
+      - trattato
+      - evento da definire
+    required_fields:
+      - categoria
+      - stato
+      - mondo
+      - data_mondo
+    useful_fields:
+      - canonico
+      - fonti
+      - entita_impattate
+      - propaga_a
+  relazione:
+    label: Relazione
+    folder: Mondi/Relazioni
+    priority: useful
+    purpose: Rende operative alleanze, rivalita, trattati, debiti e faide.
+    create_when:
+      - la relazione puo muovere fazioni, luoghi, missioni o risorse
+    types:
+      - relazione
+      - alleanza
+      - guerra fredda
+      - vassallaggio
+      - trattato
+      - debito
+      - faida
+      - patto religioso
+      - tradimento
+    required_fields:
+      - categoria
+      - stato
+      - mondo
+      - soggetti
+    useful_fields:
+      - pressione
+      - posta
+      - prossima_mossa
+      - conseguenze
+      - entita_impattate
+  religione:
+    label: Religione
+    folder: Mondi/Religioni
+    priority: useful
+    purpose: Gestisce divinita, culti, pratiche, miti e luoghi sacri.
+    create_when:
+      - la fede produce autorita, tabo, risorse, conflitti o scelte al tavolo
+    types:
+      - divinita
+      - pantheon
+      - eresia
+      - ordine religioso
+      - reliquia
+      - luogo sacro
+      - profezia
+      - pratica quotidiana
+      - mito da definire
+    required_fields:
+      - categoria
+      - stato
+      - mondo
+    useful_fields:
+      - luoghi
+      - fazioni
+      - simboli_visibili
+      - costo_sociale
+      - uso_al_tavolo
+      - player_safe
+  cultura:
+    label: Cultura
+    folder: Mondi/Culture
+    priority: useful
+    purpose: Rende giocabili popoli, tradizioni, tabu, feste e costumi.
+    create_when:
+      - la cultura influenza scene, conflitti, accoglienza o informazioni
+    types:
+      - cultura
+      - popolo
+      - etnia
+      - tradizione
+      - tabu
+      - rito di passaggio
+      - costume quotidiano
+      - cultura da definire
+    required_fields:
+      - categoria
+      - stato
+      - mondo
+    useful_fields:
+      - luoghi
+      - lingue
+      - religioni
+      - tensioni
+      - feste
+      - player_safe
+  risorsa:
+    label: Risorsa
+    folder: Mondi/Risorse
+    priority: useful
+    purpose: Modella merci, risorse strategiche, mercati, rotte e leve economiche.
+    create_when:
+      - la risorsa muove potere, viaggio, conflitto o dipendenza economica
+    types:
+      - risorsa
+      - merce
+      - materia prima
+      - reliquia
+      - rotta
+      - mercato
+      - merce strategica
+      - monopolio
+      - carestia
+      - leva economica da definire
+    required_fields:
+      - categoria
+      - stato
+    useful_fields:
+      - mondo
+      - luoghi
+      - fazioni
+      - rotte
+      - mercati
+      - pressione
+      - prossima_mossa
+  sessione:
+    label: Sessione
+    folder: Mondi/Sessioni
+    priority: essential
+    purpose: Porta al tavolo obiettivo, prima scena, scelta, pressione, materiali e post-sessione.
+    create_when:
+      - serve preparare, giocare o chiudere una partita concreta
+    types:
+      - sessione di campagna
+      - sessione zero
+      - interludio
+      - downtime
+      - finale
+      - one-shot
+    required_fields:
+      - categoria
+      - stato
+      - attiva
+      - mondo
+    useful_fields:
+      - campagna
+      - luoghi
+      - missioni
+      - tracciati
+      - incontri
+      - dispense
+      - mappe
+      - recap_pubblico
+  campagna:
+    label: Campagna
+    folder: Campagne
+    priority: essential
+    purpose: Collega ambientazione, promessa, party, fronti e sessioni.
+    create_when:
+      - piu sessioni condividono obiettivo, tono, party e continuita
+    types:
+      - campagna
+    required_fields:
+      - categoria
+      - stato
+    useful_fields:
+      - mondo
+      - profilo
+      - promessa
+      - regione
+      - luogo
+      - sessioni
+  conflitto:
+    label: Conflitto
+    folder: Mondi/Conflitti
+    priority: useful
+    purpose: Tiene insieme posta, fazioni, pressione e prossima mossa di uno scontro aperto.
+    create_when:
+      - piu attori competono per una posta che puo cambiare al tavolo
+    types:
+      - conflitto
+      - guerra
+      - crisi
+    required_fields:
+      - categoria
+      - stato
+      - mondo
+      - pressione
+      - prossima_mossa
+    useful_fields:
+      - posta
+      - fazioni
+      - luoghi
+      - conseguenze
+  societa:
+    label: Societa
+    folder: Mondi/Societa
+    priority: useful
+    purpose: Descrive istituzioni, leggi, ceti, clan, accademie e movimenti sociali.
+    create_when:
+      - l'organizzazione sociale crea vincoli, opportunita o attrito giocabile
+    types:
+      - ceto sociale
+      - istituzione civile
+      - crimine organizzato
+      - movimento popolare
+      - societa da definire
+    required_fields:
+      - categoria
+      - stato
+      - mondo
+    useful_fields:
+      - luoghi
+      - fazioni
+      - costo_sociale
+      - evoluzione_se_ignorata
+      - uso_al_tavolo
+  cosmologia:
+    label: Cosmologia
+    folder: Mondi/Cosmologia
+    priority: defer
+    purpose: Regola piani, soglie, leggi arcane e principi cosmici solo quando diventano giocabili.
+    create_when:
+      - una legge cosmica produce scelta, costo o conseguenza al tavolo
+    types:
+      - piano
+      - reame divino
+      - principio cosmico
+      - soglia
+      - legge arcana
+      - patto
+      - anomalia
+      - mistero arcano
+    required_fields:
+      - categoria
+      - stato
+      - mondo
+    useful_fields:
+      - simboli_visibili
+      - costo_sociale
+      - evoluzione_se_ignorata
+  lingua:
+    label: Lingua
+    folder: Mondi/Lingue
+    priority: defer
+    purpose: Conserva lingue, dialetti e scritture solo se creano indizi o barriere.
+    create_when:
+      - la lingua cambia accesso a informazioni, luoghi, culture o segreti
+    types:
+      - lingua
+      - dialetto
+      - scrittura
+      - lingua antica
+    required_fields:
+      - categoria
+      - stato
+      - mondo
+    useful_fields:
+      - culture
+      - luoghi
+      - uso_al_tavolo
+  dispensa:
+    label: Dispensa
+    folder: Mondi/Dispense
+    priority: useful
+    purpose: Materiale consegnabile, leggibile o mostrabile al tavolo.
+    create_when:
+      - il contenuto va consegnato, letto o riusato in sessione
+    types:
+      - lettera
+      - mappa
+      - documento
+      - indizio
+      - dispensa
+    required_fields:
+      - categoria
+      - stato
+    useful_fields:
+      - luogo
+      - personaggi
+      - pubblico
+      - player_safe
+  lore capture:
+    label: Lore Capture
+    folder: Inbox
+    priority: essential
+    purpose: Cattura temporanea per eventi, luoghi, PNG, dialoghi e conseguenze emerse al tavolo.
+    create_when:
+      - il contenuto e reale al tavolo ma non ancora smistato
+    types:
+      - evento
+      - png improvvisato
+      - luogo improvvisato
+      - dialogo
+      - conseguenza
+      - idea
+    required_fields:
+      - categoria
+      - stato
+      - mondo
+      - data_mondo
+    useful_fields:
+      - sessioni
+      - entita_impattate
+      - propaga_a
+      - canonico
+  avventura:
+    label: Avventura
+    folder: Mondi/Avventure
+    priority: defer
+    purpose: Variante di missione/campagna da usare solo se serve un contenitore intermedio.
+    create_when:
+      - non basta una missione e non serve ancora una campagna
+    types: []
+    required_fields:
+      - categoria
+      - stato
+    useful_fields:
+      - mondo
+      - missioni
+      - sessioni
+  nota rapida:
+    label: Nota Rapida
+    folder: Inbox
+    priority: essential
+    purpose: Cattura minima prima dello smistamento.
+    create_when:
+      - e solo un'idea vaga o non si sa ancora la categoria
+    types: []
+    required_fields:
+      - categoria
+      - stato
+    useful_fields:
+      - gancio
+      - connessioni
+  srd:
+    label: SRD
+    folder: SRD
+    priority: defer
+    purpose: Riferimento regolamentare importato, non contenuto mondo.
+    create_when:
+      - il dato arriva da import SRD o compendio regolamentare
+    types: []
+    required_fields:
+      - categoria
+    useful_fields:
+      - riferimenti_srd
+contracts:
+  yaml_is_source_of_truth: true
+  markdown_note_removed_from_risorse: true
+  categories_must_exist_in_fields_core: true
+  required_fields_must_match_validation_contract: true
+  listed_types_must_be_allowed_by_validation_contract: true
