@@ -949,6 +949,42 @@ workflows:
       - Excalidraw
       - "TTRPG Tools: Maps"
       - Hex Cartographer
+  import_mappe:
+    audience: user
+    user_goal: Normalizzare mappe esterne senza far entrare contenuto grezzo nel canone.
+    entry_points:
+      - Risorse/Importare Mappe.md
+    quick_actions:
+      - button: mappe-risorse-mappe-mappe
+        label: Mappe
+        use_when: devi controllare uso, agganci o versione giocatori
+      - button: atlante-del-mondo-atlante-del-mondo
+        label: Atlante
+        use_when: devi verificare coordinate, luoghi o marker
+      - button: smista-generati-risorse-smistamento-bozze-generate
+        label: Smista bozze
+        use_when: l'import ha creato note in Inbox/Generati
+      - button: controllo-vault-risorse-controllo-vault
+        label: Controllo vault
+        use_when: vuoi controllare buchi e note isolate dopo lo smistamento
+    action_groups:
+      chiusura:
+        label: Dopo import
+        purpose: Aprire solo le superfici che trasformano output grezzi in materiale giocabile.
+        actions:
+          - button: vista-giocatori-hub-vista-giocatori-vista-giocatori
+            label: Vista giocatori
+            use_when: una mappa o un luogo importato puo essere mostrato al party
+          - button: preparazione-sessione-risorse-preparazione-sessione
+            label: Preparazione sessione
+            use_when: l'import serve la prossima giocata
+          - button: worldbuilder-worldbuilder-dashboard-2
+            label: Worldbuilder
+            use_when: mancano luoghi, fazioni o missioni da collegare
+    required_plugins:
+      - Meta Bind
+      - Dataview
+      - Templater
   atlante_mondo:
     user_goal: Costruire e controllare geografia, culture, storia e buchi spaziali del mondo.
     audience: user

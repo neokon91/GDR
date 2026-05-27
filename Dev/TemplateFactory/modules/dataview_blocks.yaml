@@ -163,6 +163,83 @@ blocks:
       | --- | --- |
       | Atlante con marker | vedere coordinate e layer |
       | Vista giocatori | verificare player-safe |
+  map_import_now:
+    type: dataviewjs
+    runtime_view: renderMapImportNow
+    use_for:
+      - dashboard
+      - mappe
+      - import
+      - priorita
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      await gdr.renderMapImportNow(dv);
+    fallback: |-
+      | Priorita | Azione |
+      | --- | --- |
+      | Import prima | esegui dry-run o smista bozza |
+  map_import_readiness:
+    type: dataviewjs
+    runtime_view: renderMapImportReadiness
+    use_for:
+      - dashboard
+      - mappe
+      - import
+      - stato
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      await gdr.renderMapImportReadiness(dv);
+    fallback: |-
+      | Area | Conteggio |
+      | --- | --- |
+      | Sorgenti |  |
+      | Bozze |  |
+      | Mappe |  |
+  map_import_sources:
+    type: dataviewjs
+    runtime_view: renderMapImportSources
+    use_for:
+      - dashboard
+      - mappe
+      - import
+      - comandi
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      await gdr.renderMapImportSources(dv);
+    fallback: |-
+      | Sorgente | Dry-run |
+      | --- | --- |
+      | import:map | npm run import:map -- ... --dry-run |
+  map_import_queues:
+    type: dataviewjs
+    runtime_view: renderMapImportQueues
+    use_for:
+      - dashboard
+      - mappe
+      - import
+      - code
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      await gdr.renderMapImportQueues(dv);
+    fallback: |-
+      | Bozza | Fonte | Azione |
+      | --- | --- | --- |
+  map_import_surface_links:
+    type: dataviewjs
+    runtime_view: renderMapImportSurfaceLinks
+    use_for:
+      - dashboard
+      - mappe
+      - import
+      - superfici
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      await gdr.renderMapImportSurfaceLinks(dv);
+    fallback: |-
+      | Superficie | Uso |
+      | --- | --- |
+      | Smistamento bozze | decidere cosa diventa canone |
+      | Mappe | controllare player-safe |
   session_live_cards:
     type: dataviewjs
     runtime_view: renderSessionLiveCards

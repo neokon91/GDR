@@ -350,6 +350,25 @@ steps:
       - node
       - z.automazioni/render_maps_cockpit.js
       - --check
+  import_maps_cockpit:
+    purpose: Genera il contratto runtime del cockpit Importare Mappe senza scrivere root generate.
+    sources:
+      - Dev/TemplateFactory/modules/import_maps_cockpit.yaml
+      - Dev/TemplateFactory/modules/bases_views.yaml
+      - Dev/TemplateFactory/modules/frontmatter_profiles.yaml
+      - Risorse/Importare Mappe.md
+      - z.engine/session_import_maps.js
+      - z.engine/session_views.js
+      - package.json
+    outputs:
+      - z.automazioni/data/runtime/map_import_cockpit.json
+    render:
+      - node
+      - z.automazioni/render_import_maps_cockpit.js
+    check:
+      - node
+      - z.automazioni/render_import_maps_cockpit.js
+      - --check
   worldbuilding_control_cockpit:
     purpose: Genera il contratto runtime dell'audit Controllo Worldbuilding senza scrivere root generate.
     sources:

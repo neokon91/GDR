@@ -16,6 +16,11 @@ const REQUIRED_EXPORTS = [
     "renderMapsReadiness",
     "renderMapsSurfaceLinks",
     "renderMapsUseQueues",
+    "renderMapImportNow",
+    "renderMapImportQueues",
+    "renderMapImportReadiness",
+    "renderMapImportSources",
+    "renderMapImportSurfaceLinks",
     "renderCanonControlNow",
     "renderCanonControlQueues",
     "renderCanonControlReadiness",
@@ -147,6 +152,7 @@ const REQUIRED_MODULES = [
     "z.engine/session_economy.js",
     "z.engine/session_generated_drafts.js",
     "z.engine/session_geopolitical.js",
+    "z.engine/session_import_maps.js",
     "z.engine/session_maps.js",
     "z.engine/session_player.js",
     "z.engine/session_preparation.js",
@@ -554,6 +560,15 @@ async function main() {
                     luogo: "Mondi/Luoghi/Luogo Pubblico.md"
                 },
                 {
+                    file: { path: "Inbox/Generati/Burg Importato.md", name: "Burg Importato", link: "Inbox/Generati/Burg Importato.md", folder: "Inbox/Generati", mtime: 34, ctime: 34 },
+                    categoria: "luogo",
+                    tipo: "regione",
+                    stato: "bozza",
+                    fonte: "azgaar",
+                    mondo: "Mondi/Mondo Demo.md",
+                    coordinates: [44, 8]
+                },
+                {
                     file: { path: "Mondi/Luoghi/Luogo Generato.md", name: "Luogo Generato", link: "Mondi/Luoghi/Luogo Generato.md", folder: "Mondi/Luoghi", mtime: 27 },
                     plugin: "fantasy-content-generator",
                     categoria: "luogo",
@@ -567,6 +582,15 @@ async function main() {
                     mondo: "Mondi/Mondo Demo.md"
                 },
                 {
+                    file: { path: "Mondi/Luoghi/Dungeon Watabou.md", name: "Dungeon Watabou", link: "Mondi/Luoghi/Dungeon Watabou.md", folder: "Mondi/Luoghi", mtime: 35 },
+                    categoria: "luogo",
+                    tipo: "dungeon",
+                    stato: "pronto",
+                    fonte: "watabou-dungeon",
+                    mondo: "Mondi/Mondo Demo.md",
+                    uso_al_tavolo: "Esplorazione a stanze collegate."
+                },
+                {
                     file: { path: "Risorse/Mappe/Mappa Pubblica.md", name: "Mappa Pubblica", link: "Risorse/Mappe/Mappa Pubblica.md", mtime: 4 },
                     categoria: "mappa",
                     stato: "pronto",
@@ -577,6 +601,14 @@ async function main() {
                     luogo: "Mondi/Luoghi/Luogo Pubblico.md",
                     uso_al_tavolo: "Orientare la trattativa al porto.",
                     coordinates: [45, 9]
+                },
+                {
+                    file: { path: "Risorse/Mappe/Citta Watabou.md", name: "Citta Watabou", link: "Risorse/Mappe/Citta Watabou.md", folder: "Risorse/Mappe", mtime: 36 },
+                    categoria: "mappa",
+                    stato: "bozza",
+                    tipo: "watabou city",
+                    fonte: "watabou-city",
+                    mondo: "Mondi/Mondo Demo.md"
                 },
                 {
                     file: { path: "Risorse/Mappe/Fronte del Porto.md", name: "Fronte del Porto", link: "Risorse/Mappe/Fronte del Porto.md", folder: "Risorse/Mappe", mtime: 30 },
@@ -941,6 +973,34 @@ async function main() {
             await views.renderMapsSurfaceLinks(dv);
             if (!rendered.slice(mapsSurfacesStart).some(node => String(node.innerHTML).includes("Importare mappe"))) {
                 errors.push("renderMapsSurfaceLinks: output senza superfici mappe");
+            }
+            const mapImportNowStart = rendered.length;
+            await views.renderMapImportNow(dv);
+            if (!rendered.slice(mapImportNowStart).some(node => String(node.innerHTML).includes("Import prima"))) {
+                errors.push("renderMapImportNow: output senza priorita import");
+            }
+            const mapImportReadinessStart = rendered.length;
+            await views.renderMapImportReadiness(dv);
+            if (!rendered.slice(mapImportReadinessStart).some(node => String(node.innerHTML).includes("Dry-run"))) {
+                errors.push("renderMapImportReadiness: output senza metriche dry-run");
+            }
+            const mapImportSourcesStart = rendered.length;
+            await views.renderMapImportSources(dv);
+            if (!rendered.slice(mapImportSourcesStart).some(node => node.tag === "table" && String(node.text).includes("npm run import:map"))) {
+                errors.push("renderMapImportSources: output senza comando dispatch import:map");
+            }
+            const mapImportQueuesStart = rendered.length;
+            await views.renderMapImportQueues(dv);
+            if (!rendered.slice(mapImportQueuesStart).some(node => node.tag === "table" && String(node.text).includes("Burg Importato"))) {
+                errors.push("renderMapImportQueues: output senza bozze importate");
+            }
+            if (!rendered.slice(mapImportQueuesStart).some(node => node.tag === "table" && String(node.text).includes("mappa senza luogo"))) {
+                errors.push("renderMapImportQueues: output senza buchi import");
+            }
+            const mapImportSurfacesStart = rendered.length;
+            await views.renderMapImportSurfaceLinks(dv);
+            if (!rendered.slice(mapImportSurfacesStart).some(node => String(node.innerHTML).includes("Smistamento bozze"))) {
+                errors.push("renderMapImportSurfaceLinks: output senza superfici import");
             }
             views.renderCanonControlNow(dv);
             if (!rendered.some(node => String(node.innerHTML).includes("Sistema prima"))) {

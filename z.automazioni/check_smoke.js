@@ -90,6 +90,16 @@ if (maps.includes("dv.pages(") || maps.includes("````tabs")) {
     errors.push("Smoke statico: Mappe contiene ancora query o tabs inline");
 }
 
+const mapImport = readTextRel(ROOT, "Risorse/Importare Mappe.md");
+for (const marker of ["renderMapImportNow", "renderMapImportReadiness", "renderMapImportSources", "renderMapImportQueues", "renderMapImportSurfaceLinks"]) {
+    if (!mapImport.includes(marker)) {
+        errors.push(`Smoke statico: Importare Mappe non contiene ${marker}`);
+    }
+}
+if (mapImport.includes("dv.pages(") || mapImport.includes("````tabs")) {
+    errors.push("Smoke statico: Importare Mappe contiene ancora query o tabs inline");
+}
+
 const worldbuildingControl = readTextRel(ROOT, "Hub/Controllo Worldbuilding.md");
 for (const marker of ["renderWorldbuildingControlNow", "renderWorldbuildingControlReadiness", "renderWorldbuildingControlQueues", "renderWorldbuildingControlSurfaceLinks"]) {
     if (!worldbuildingControl.includes(marker)) {

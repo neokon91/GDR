@@ -65,10 +65,10 @@ for (const marker of RELEASE_VERIFICATION_MARKERS) {
     }
 }
 
-const importGuideText = readTextRel(ROOT, "Risorse/Importare Mappe.md");
+const importGuideText = `${readTextRel(ROOT, "Dev/TemplateFactory/modules/import_maps_cockpit.yaml")}\n${readTextRel(ROOT, "Risorse/Importare Mappe.md")}`;
 for (const marker of RELEASE_IMPORT_DOC_MARKERS) {
     if (!importGuideText.includes(marker)) {
-        errors.push(`Risorse/Importare Mappe.md: comando import mancante (${marker})`);
+        errors.push(`import_maps_cockpit.yaml: comando import mancante (${marker})`);
     }
 }
 

@@ -113,6 +113,7 @@
     smistamento_bozze: ["Meta Bind", "Dataview", "Templater", "Fantasy Content Generator"],
     quality_report: ["Meta Bind", "Dataview", "JS Engine"],
     mappe_operativo: ["Meta Bind", "Dataview", "Templater", "Bases", "Maps", "Excalidraw", "TTRPG Tools: Maps", "Hex Cartographer"],
+    import_mappe: ["Meta Bind", "Dataview", "Templater"],
     stato_campagna: ["Meta Bind", "Dataview", "Templater"],
     campagna_ambientazione: ["Meta Bind", "Dataview", "Templater"]
   };
@@ -246,6 +247,7 @@
     sessionCandidates
   };
   const mapViews = (await eval(await app.vault.adapter.read("z.engine/session_maps.js")))(sharedViewContext);
+  const importMapViews = (await eval(await app.vault.adapter.read("z.engine/session_import_maps.js")))(sharedViewContext);
   const atlasViews = (await eval(await app.vault.adapter.read("z.engine/session_atlas.js")))(sharedViewContext);
   const canonControlViews = (await eval(await app.vault.adapter.read("z.engine/session_canon_control.js")))(sharedViewContext);
   const worldbuildingControlViews = (await eval(await app.vault.adapter.read("z.engine/session_worldbuilding_control.js")))(sharedViewContext);
@@ -1040,6 +1042,11 @@
     renderMapsReadiness: mapViews.renderMapsReadiness,
     renderMapsSurfaceLinks: mapViews.renderMapsSurfaceLinks,
     renderMapsUseQueues: mapViews.renderMapsUseQueues,
+    renderMapImportNow: importMapViews.renderMapImportNow,
+    renderMapImportQueues: importMapViews.renderMapImportQueues,
+    renderMapImportReadiness: importMapViews.renderMapImportReadiness,
+    renderMapImportSources: importMapViews.renderMapImportSources,
+    renderMapImportSurfaceLinks: importMapViews.renderMapImportSurfaceLinks,
     renderCanonControlNow: canonControlViews.renderCanonControlNow,
     renderCanonControlQueues: canonControlViews.renderCanonControlQueues,
     renderCanonControlReadiness: canonControlViews.renderCanonControlReadiness,
