@@ -4,6 +4,7 @@
 
 ### Aggiunto
 
+- `Hub/Campagna da Ambientazione.md` trasformata in cockpit compatto con runtime `session_campaign_builder.js` e contratto `campaign_builder_cockpit.yaml`.
 - `Hub/Lore Hub.md` trasformata in cockpit compatto con runtime `session_lore.js` e contratto `lore_cockpit.yaml`.
 - `Hub/Geopolitical Dashboard.md` trasformata in cockpit compatto con runtime `session_geopolitical.js` e contratto `geopolitical_cockpit.yaml`.
 - `Hub/Economia E Rotte.md` trasformata in cockpit compatto con runtime `session_economy.js` e contratto `economy_cockpit.yaml`.

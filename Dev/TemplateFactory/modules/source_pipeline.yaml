@@ -352,6 +352,24 @@ steps:
       - node
       - z.automazioni/render_geopolitical_cockpit.js
       - --check
+  campaign_builder_cockpit:
+    purpose: Genera il contratto runtime del cockpit Campagna da Ambientazione senza scrivere root generate.
+    sources:
+      - Dev/TemplateFactory/modules/campaign_builder_cockpit.yaml
+      - Dev/TemplateFactory/modules/bases_views.yaml
+      - Dev/TemplateFactory/modules/frontmatter_profiles.yaml
+      - Hub/Campagna da Ambientazione.md
+      - z.engine/session_campaign_builder.js
+      - z.engine/session_views.js
+    outputs:
+      - z.automazioni/data/runtime/campaign_builder_cockpit.json
+    render:
+      - node
+      - z.automazioni/render_campaign_builder_cockpit.js
+    check:
+      - node
+      - z.automazioni/render_campaign_builder_cockpit.js
+      - --check
   offscreen_cockpit:
     purpose: Genera il contratto runtime del cockpit Cosa Succede Fuori Scena senza scrivere root generate.
     sources:

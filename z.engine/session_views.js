@@ -272,6 +272,7 @@
   const dmDashboardViews = (await eval(await app.vault.adapter.read("z.engine/session_dm_dashboard.js")))(sharedViewContext);
   const economyViews = (await eval(await app.vault.adapter.read("z.engine/session_economy.js")))(sharedViewContext);
   const geopoliticalViews = (await eval(await app.vault.adapter.read("z.engine/session_geopolitical.js")))(sharedViewContext);
+  const campaignBuilderViews = (await eval(await app.vault.adapter.read("z.engine/session_campaign_builder.js")))(sharedViewContext);
   const loreViews = (await eval(await app.vault.adapter.read("z.engine/session_lore.js")))(sharedViewContext);
   const vaultControlViews = (await eval(await app.vault.adapter.read("z.engine/session_vault_control.js")))(sharedViewContext);
   const { continuityIssues } = continuityViews;
@@ -1024,6 +1025,11 @@
     renderCanonControlQueues: canonControlViews.renderCanonControlQueues,
     renderCanonControlReadiness: canonControlViews.renderCanonControlReadiness,
     renderCanonControlSurfaceLinks: canonControlViews.renderCanonControlSurfaceLinks,
+    renderCampaignBuilderCampaignQueues: campaignBuilderViews.renderCampaignBuilderCampaignQueues,
+    renderCampaignBuilderNow: campaignBuilderViews.renderCampaignBuilderNow,
+    renderCampaignBuilderOpportunityQueues: campaignBuilderViews.renderCampaignBuilderOpportunityQueues,
+    renderCampaignBuilderReadiness: campaignBuilderViews.renderCampaignBuilderReadiness,
+    renderCampaignBuilderSurfaceLinks: campaignBuilderViews.renderCampaignBuilderSurfaceLinks,
     renderCreationFeedback,
     renderConsequenceCards: continuityViews.renderConsequenceCards,
     renderEmptyState,

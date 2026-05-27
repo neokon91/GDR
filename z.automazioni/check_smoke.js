@@ -137,6 +137,13 @@ for (const marker of ["renderEconomyNow", "renderEconomyReadiness", "renderEcono
     }
 }
 
+const campaignBuilder = readTextRel(ROOT, "Hub/Campagna da Ambientazione.md");
+for (const marker of ["renderCampaignBuilderNow", "renderCampaignBuilderReadiness", "renderCampaignBuilderOpportunityQueues", "renderCampaignBuilderCampaignQueues", "renderCampaignBuilderSurfaceLinks"]) {
+    if (!campaignBuilder.includes(marker)) {
+        errors.push(`Smoke statico: Campagna da Ambientazione non contiene ${marker}`);
+    }
+}
+
 const geopolitical = readTextRel(ROOT, "Hub/Geopolitical Dashboard.md");
 for (const marker of ["renderGeopoliticalNow", "renderGeopoliticalReadiness", "renderGeopoliticalQueues", "renderGeopoliticalPressureQueues", "renderGeopoliticalSurfaceLinks"]) {
     if (!geopolitical.includes(marker)) {

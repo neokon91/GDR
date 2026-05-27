@@ -15,6 +15,11 @@ const REQUIRED_EXPORTS = [
     "renderCanonControlQueues",
     "renderCanonControlReadiness",
     "renderCanonControlSurfaceLinks",
+    "renderCampaignBuilderCampaignQueues",
+    "renderCampaignBuilderNow",
+    "renderCampaignBuilderOpportunityQueues",
+    "renderCampaignBuilderReadiness",
+    "renderCampaignBuilderSurfaceLinks",
     "renderCombatReadiness",
     "renderConsequenceCards",
     "renderContinuityQueue",
@@ -84,6 +89,7 @@ const REQUIRED_EXPORTS = [
 const REQUIRED_MODULES = [
     "z.engine/session_continuity.js",
     "z.engine/session_atlas.js",
+    "z.engine/session_campaign_builder.js",
     "z.engine/session_canon_control.js",
     "z.engine/session_dnd.js",
     "z.engine/session_dm_dashboard.js",
@@ -200,6 +206,10 @@ async function main() {
                     rivali: [],
                     risorse_strategiche: ["Mondi/Risorse/Sale Lunare.md"],
                     crisi_interne: ["Il porto chiude agli stranieri."],
+                    pericolo: 3,
+                    problemi: ["La milizia chiude gli accessi."],
+                    segreti: ["Il faro e sotto assedio."],
+                    tensione: "Il porto deve scegliere tra trattato e rivolta.",
                     coordinates: [45, 9],
                     uso_al_tavolo: "Scena di trattativa.",
                     prossima_mossa: "Il Consiglio militarizza il molo."
@@ -213,6 +223,18 @@ async function main() {
                     prossima_mossa: "Chiude il porto.",
                     luoghi: ["Mondi/Luoghi/Luogo Pubblico.md"],
                     missioni: ["Mondi/Missioni/Missione Pubblica.md"]
+                },
+                {
+                    file: { path: "Mondi/Conflitti/Guerra del Faro.md", name: "Guerra del Faro", link: "Mondi/Conflitti/Guerra del Faro.md", folder: "Mondi/Conflitti", mtime: 24 },
+                    categoria: "conflitto",
+                    tipo: "guerra fredda",
+                    stato: "attivo",
+                    mondo: "Mondi/Mondo Demo.md",
+                    pressione: 7,
+                    posta: "controllo dei fari sacri",
+                    fazioni: ["Mondi/Fazioni/Consiglio.md", "Mondi/Fazioni/Rivali.md"],
+                    luoghi: ["Mondi/Luoghi/Luogo Pubblico.md"],
+                    prossima_mossa: "La flotta rivale occupa il faro."
                 },
                 {
                     file: { path: "Mondi/Culture/Naviganti.md", name: "Naviganti", link: "Mondi/Culture/Naviganti.md", folder: "Mondi/Culture", mtime: 22 },
@@ -285,6 +307,7 @@ async function main() {
                     mondo: "Mondi/Mondo Demo.md",
                     fazioni: ["Mondi/Fazioni/Consiglio.md"],
                     luoghi: ["Mondi/Luoghi/Luogo Pubblico.md"],
+                    campagna: "Campagne/Campagna Faro.md",
                     pressione: 4,
                     progress_value: 4,
                     progress_max: 6,
@@ -358,6 +381,7 @@ async function main() {
                     pubblico: false,
                     data: "2026-05-27",
                     mondo: "Mondi/Mondo Demo.md",
+                    campagna: "Campagne/Campagna Faro.md",
                     scena_corrente: "Banchina del porto.",
                     scelta: "Salvare il faro o inseguire il rivale.",
                     fazioni: ["Mondi/Fazioni/Consiglio.md"],
@@ -431,6 +455,22 @@ async function main() {
                     mondo: "Mondi/Mondo Demo.md",
                     luogo: "Mondi/Luoghi/Luogo Pubblico.md",
                     coordinates: [45, 9]
+                },
+                {
+                    file: { path: "Campagne/Campagna Faro.md", name: "Campagna Faro", link: "Campagne/Campagna Faro.md", folder: "Campagne", mtime: 25 },
+                    categoria: "campagna",
+                    tipo: "sandbox costiera",
+                    stato: "attiva",
+                    mondo: "Mondi/Mondo Demo.md",
+                    profilo: "politica e viaggio",
+                    promessa: "Decidere chi controllera i fari sacri.",
+                    regione: "Mondi/Luoghi/Luogo Pubblico.md",
+                    luogo_iniziale: "Mondi/Luoghi/Luogo Pubblico.md",
+                    culture: ["Mondi/Culture/Naviganti.md"],
+                    fazioni: ["Mondi/Fazioni/Consiglio.md"],
+                    conflitti: ["Mondi/Conflitti/Guerra del Faro.md"],
+                    conflitto_centrale: "Mondi/Conflitti/Guerra del Faro.md",
+                    prossima_sessione: "Mondi/Sessioni/Sessione Live.md"
                 }
             ];
             const pagesForSource = source => {
@@ -442,6 +482,7 @@ async function main() {
                 if (query.includes('"Mondi/Missioni"')) return demoPages.filter(page => page.file.path.startsWith("Mondi/Missioni/"));
                 if (query.includes('"Mondi/Personaggi"')) return demoPages.filter(page => page.file.path.startsWith("Mondi/Personaggi/"));
                 if (query.includes('"Mondi/Fazioni"')) return demoPages.filter(page => page.file.path.startsWith("Mondi/Fazioni/"));
+                if (query.includes('"Mondi/Conflitti"')) return demoPages.filter(page => page.file.path.startsWith("Mondi/Conflitti/"));
                 if (query.includes('"Mondi/Tracciati"')) return demoPages.filter(page => page.file.path.startsWith("Mondi/Tracciati/"));
                 if (query.includes('"Mondi/Incontri"')) return demoPages.filter(page => page.file.path.startsWith("Mondi/Incontri/"));
                 if (query.includes('"Mondi/Creature"')) return demoPages.filter(page => page.file.path.startsWith("Mondi/Creature/"));
@@ -458,6 +499,7 @@ async function main() {
                 if (query.includes('"Mondi/Storia"') || query.includes('"Mondi/Timeline"')) return demoPages.filter(page => page.file.path.startsWith("Mondi/Storia/") || page.file.path.startsWith("Mondi/Timeline/"));
                 if (query.includes('"Mondi/Dispense"')) return demoPages.filter(page => page.file.path.startsWith("Mondi/Dispense/"));
                 if (query.includes('"Risorse/Mappe"')) return demoPages.filter(page => page.file.path.startsWith("Risorse/Mappe/"));
+                if (query.trim() === '"Campagne"') return demoPages.filter(page => page.file.path.startsWith("Campagne/"));
                 if (query.includes('"Mondi"') || query.includes('"Campagne"') || query.includes('"Inbox"')) {
                     return demoPages.filter(page => page.file.path.startsWith("Mondi/") || page.file.path.startsWith("Campagne/") || page.file.path.startsWith("Inbox/"));
                 }
@@ -680,6 +722,26 @@ async function main() {
             await views.renderGeopoliticalSurfaceLinks(dv);
             if (!rendered.some(node => String(node.innerHTML).includes("Luoghi operativi"))) {
                 errors.push("renderGeopoliticalSurfaceLinks: output senza superfici geopolitiche");
+            }
+            views.renderCampaignBuilderNow(dv);
+            if (!rendered.some(node => String(node.innerHTML).includes("Trasforma prima"))) {
+                errors.push("renderCampaignBuilderNow: output senza priorita campagna");
+            }
+            views.renderCampaignBuilderReadiness(dv);
+            if (!rendered.some(node => String(node.innerHTML).includes("Campagne"))) {
+                errors.push("renderCampaignBuilderReadiness: output senza metriche campagne");
+            }
+            await views.renderCampaignBuilderOpportunityQueues(dv);
+            if (!rendered.some(node => node.tag === "table" && String(node.text).includes("Guerra del Faro"))) {
+                errors.push("renderCampaignBuilderOpportunityQueues: output senza opportunita da ambientazione");
+            }
+            await views.renderCampaignBuilderCampaignQueues(dv);
+            if (!rendered.some(node => node.tag === "table" && String(node.text).includes("Campagna Faro"))) {
+                errors.push("renderCampaignBuilderCampaignQueues: output senza campagne create");
+            }
+            await views.renderCampaignBuilderSurfaceLinks(dv);
+            if (!rendered.some(node => String(node.innerHTML).includes("Preparazione sessione"))) {
+                errors.push("renderCampaignBuilderSurfaceLinks: output senza superfici campagna");
             }
             views.renderLoreNow(dv);
             if (!rendered.some(node => String(node.innerHTML).includes("Segnale prima"))) {
