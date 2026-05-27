@@ -135,7 +135,7 @@ Se dashboard, pulsanti o tabelle non funzionano, apri [[Risorse/Primo Avvio Stru
 - Non lasciare link placeholder: crea la nota o trasforma il link in testo semplice.
 - Archivia invece di cancellare quando una nota ha valore storico.
 - Dopo una sessione, aggiorna missioni, tracciati, PNG, luoghi visitati, ricompense e conseguenze da [[Risorse/Post Sessione Guidato]].
-- Il layer operativo interno e documentato in [[Dev/Plugin Layer Interno]]: input Meta Bind, pulsanti, wizard, JS views e fileClass.
+- Il layer operativo interno e documentato in [[Dev/Sviluppo Vault]]: input Meta Bind, pulsanti, wizard, JS views e fileClass.
 - Per controlli e sviluppo del vault, vedi [[Dev/Sviluppo Vault]].
 - Per preparare una release o una copia pulita, apri [[Dev/RELEASE]] e [[Risorse/Controllo Vault]].
 - Per creare una copia consegnabile, apri [[Dev/Release Pulita]] o usa `npm run release:clean`.

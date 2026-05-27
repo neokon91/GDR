@@ -90,6 +90,11 @@
 - `dnd55_options.yaml` introduce valori D&D 5.5 localizzati in italiano per livelli incantesimo, scuole, tempi, componenti, classi, specie, tipi creatura, taglie, rarita, condizioni, CD, danni e proprieta equipaggiamento.
 - `link_targets.yaml` e `tag_rules.yaml` introducono contratti per wikilink granulari nel frontmatter e tag italiani controllati.
 
+### Rimosso
+
+- Guide residue non piu usate come sorgente o percorso release: `Risorse/Profili Plugin.md`, `Risorse/Consegna Nuovo DM.md`, `Risorse/Guida Lore Professionale.md`, `Risorse/Checklist Lore Professionale.md`, `Risorse/Profili Campagna.md`, `Risorse/Worldbuilding Tassonomico.md`, `Risorse/Strumenti Attivi.md`, `Risorse/Generare Campagna Da Ambientazione.md`, `Risorse/Workspaces e Segnalibri.md`.
+- `Dev/Plugin Layer Interno.md`: contenuto assorbito da `Dev/Sviluppo Vault.md`.
+
 ### Migliorato
 
 - Le pagine utente principali usano `mode: "simple"` e non espongono diagnostica plugin nel percorso normale.
@@ -213,7 +218,7 @@
 - [[Bibbia del Mondo]], [[Revisione Lore]] e [[Controllo Canone]] per mantenere coerenza narrativa, fonte, canone e retcon.
 - Nuova area [[Mondi/Relazioni/Relazioni]] con template [[z.modelli/worldbuilding/Relazione]] e automazione `relazione`.
 - Template e automazioni per lore persistence, event propagation, stato del mondo e causalita storica.
-- [[Risorse/Guida Lore Professionale]] e [[Risorse/Checklist Lore Professionale]].
+- Guide lore professionale e checklist lore.
 
 ### Migliorato
 
@@ -263,7 +268,7 @@
 - Generatore guidato "Arco Da Conflitto".
 - [[Risorse/Opportunità Di Avventura]] per trovare elementi dell'ambientazione pronti a diventare missioni.
 - [[Risorse/Fronti Di Campagna]] per pressioni, prossime mosse e scadenze.
-- [[Risorse/Generare Campagna Da Ambientazione]] come guida non tecnica.
+- Guida non tecnica per generare campagna da ambientazione.
 - Roadmap 0.7.0 storica con proposta e domande sul comportamento atteso del vault.
 
 ### Migliorato
@@ -279,7 +284,7 @@
 - [[Atlante del Mondo]] per worldbuilding tassonomico e ambientazioni grandi.
 - Nuove aree per [[Mondi/Culture/Culture]], [[Mondi/Lingue/Lingue]], [[Mondi/Storia/Storia]], [[Mondi/Conflitti/Conflitti]] e [[Mondi/Cosmologia/Cosmologia]].
 - Modelli guidati per cultura, lingua, era storica, conflitto e cosmologia.
-- [[Risorse/Worldbuilding Tassonomico]] come guida non tecnica alla costruzione di mondi ricchi.
+- Guida non tecnica al worldbuilding tassonomico.
 - Roadmap 0.5.0 storica completata e roadmap 0.6.0 storica preparata.
 
 ### Migliorato
@@ -294,8 +299,8 @@
 
 - [[Risorse/Setup Guidato]] per verificare lo stato del vault senza leggere impostazioni interne.
 - [[Risorse/Post Sessione Guidato]] per chiudere la partita con passaggi leggibili.
-- [[Risorse/Consegna Nuovo DM]] per consegnare il vault senza spiegazioni tecniche.
-- [[Risorse/Profili Campagna]] per fantasy classico, investigativo, sandbox e one-shot.
+- Guida di consegna nuovo DM senza spiegazioni tecniche.
+- Profili campagna per fantasy classico, investigativo, sandbox e one-shot.
 - [[Risorse/Materiali Al Tavolo]] per controllare dispense, mappe, media, incontri e creature della sessione attiva.
 - [[Risorse/Preset Calendario]] per usare date del mondo senza spiegare configurazioni interne.
 - Roadmap 0.4.0 storica completata come tracciamento della versione.

@@ -2948,7 +2948,6 @@ configs:
     Risorse/Setup Guidato.md: LiBadgeCheck
     Dev/Sviluppo Vault.md: LiRoute
     Risorse/Preparazione Sessione.md: LiListChecks
-    Risorse/Strumenti Attivi.md: LiPlug
     z.modelli: LiFileCode2
     z.automazioni: LiCog
     z.automazioni/entita: LiCog

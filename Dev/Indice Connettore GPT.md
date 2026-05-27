@@ -32,7 +32,6 @@ Questa nota orienta un connettore GPT o un indice code search sul vault. Non e u
 
 - [[Dev/Sviluppo Vault]]
 - [[Risorse/Controllo Vault]]
-- [[Risorse/Strumenti Attivi]]
 - [[Dev/Integrazioni Plugin]]
 - [[Dev/CHANGELOG]]
 - [[VERSION]]

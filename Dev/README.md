@@ -39,7 +39,7 @@ Usa questa nota come porta d'ingresso. Non duplicare decisioni tecniche in file 
 | --- | --- |
 | Direzione prodotto e milestone | [[Dev/Roadmap/1.0 Professionale]] |
 | Convenzioni tecniche, campi e runtime | [[Dev/Sviluppo Vault]] |
-| Layer Meta Bind, Templater, JS e fileClass | [[Dev/Plugin Layer Interno]] |
+| Layer Meta Bind, Templater, JS e fileClass | [[Dev/Sviluppo Vault]] |
 | Sintassi e responsabilita plugin | [[Dev/Plugin Technical Reference]] |
 | Contratti plugin e release | `Dev/TemplateFactory/modules/plugin_contracts.yaml` |
 | Confini della ZIP utente | [[Dev/Confine Release Repository]] |

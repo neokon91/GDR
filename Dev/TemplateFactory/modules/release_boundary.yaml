@@ -73,22 +73,16 @@ copy_policy:
     - .DS_Store
   excluded_risorse:
     - Callout GDR.md
-    - Checklist Lore Professionale.md
     - Confine Release Repository.md
-    - Consegna Nuovo DM.md
-    - Guida Lore Professionale.md
     - Indice Connettore GPT.md
     - Importare Mappe.md
     - Integrazioni Plugin.md
     - Media Scene.md
     - Preset Calendario.md
-    - Profili Campagna.md
     - Release Pulita.md
     - Roadmap
     - Smoke 1.0 Professionale.md
-    - Strumenti Attivi.md
     - Sviluppo Vault.md
-    - Worldbuilding Tassonomico.md
   excluded_automazioni:
     - check_vault.js
     - checks

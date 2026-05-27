@@ -53,7 +53,7 @@ Prima di lavorarci, controlla:
 | Dice Roller | supportato | template e tabelle rapide | mantenere tabelle brevi, richiamabili e stabili |
 | Calendarium | integrato | sessioni, missioni, dashboard, controllo vault | usare `Calendario Del Mondo` come calendario neutro predefinito |
 | Excalidraw | integrato | `Risorse/Mappe`, Worldbuilder Dashboard, Durante il Gioco, [[Risorse/Excalidraw Per GDR]] | usare per fronti, indizi e scene; nuove mappe in `Risorse/Mappe` con template dedicato |
-| Workspaces | supportato | [[Risorse/Workspaces e Segnalibri]] | salvare layout DM, worldbuilding e manutenzione |
+| Workspaces | supportato | configurazione `.obsidian` | salvare layout DM, worldbuilding e manutenzione |
 | Bookmarks | supportato | barra laterale Segnalibri | accesso rapido a pagine vive, non archivio parallelo |
 | Media Extended | supportato leggero | indici audio/video, Durante il Gioco | usare timestamp e scene solo per materiali pronti |
 | Hex Cartographer | opzionale guidato | Risorse/Mappe | usare per regioni, viaggi e hexcrawl quando le distanze contano |
