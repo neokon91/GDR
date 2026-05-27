@@ -257,6 +257,12 @@
     continuityIssues: continuityViews.continuityIssues,
     continuityStatus: continuityViews.continuityStatus
   });
+  const offscreenViews = (await eval(await app.vault.adapter.read("z.engine/session_offscreen.js")))({
+    ...sharedViewContext,
+    continuityAction: continuityViews.continuityAction,
+    continuityIssues: continuityViews.continuityIssues,
+    continuityStatus: continuityViews.continuityStatus
+  });
   const { continuityIssues } = continuityViews;
   const sessionViews = (await eval(await app.vault.adapter.read("z.engine/session_runtime.js")))({
     ...sharedViewContext,
@@ -1017,6 +1023,11 @@
     renderLivingWorldQueues: livingWorldViews.renderLivingWorldQueues,
     renderLivingWorldReadiness: livingWorldViews.renderLivingWorldReadiness,
     renderLivingWorldSurfaceLinks: livingWorldViews.renderLivingWorldSurfaceLinks,
+    renderOffscreenNow: offscreenViews.renderOffscreenNow,
+    renderOffscreenReactionQueues: offscreenViews.renderOffscreenReactionQueues,
+    renderOffscreenReadiness: offscreenViews.renderOffscreenReadiness,
+    renderOffscreenSurfaceLinks: offscreenViews.renderOffscreenSurfaceLinks,
+    renderOffscreenTableBridge: offscreenViews.renderOffscreenTableBridge,
     renderPlaceMapCards: mapViews.renderPlaceMapCards,
     renderPlayableOutline: sessionViews.renderPlayableOutline,
     renderPlayerMap: playerViews.renderPlayerMap,

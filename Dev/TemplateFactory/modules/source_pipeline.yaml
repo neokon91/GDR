@@ -216,6 +216,24 @@ steps:
       - node
       - z.automazioni/render_living_world_cockpit.js
       - --check
+  offscreen_cockpit:
+    purpose: Genera il contratto runtime del cockpit Cosa Succede Fuori Scena senza scrivere root generate.
+    sources:
+      - Dev/TemplateFactory/modules/offscreen_cockpit.yaml
+      - Dev/TemplateFactory/modules/bases_views.yaml
+      - Dev/TemplateFactory/modules/frontmatter_profiles.yaml
+      - Hub/Cosa Succede Fuori Scena.md
+      - z.engine/session_offscreen.js
+      - z.engine/session_views.js
+    outputs:
+      - z.automazioni/data/runtime/offscreen_cockpit.json
+    render:
+      - node
+      - z.automazioni/render_offscreen_cockpit.js
+    check:
+      - node
+      - z.automazioni/render_offscreen_cockpit.js
+      - --check
   user_path:
     purpose: Verifica il percorso utente primario dichiarato in YAML.
     sources:

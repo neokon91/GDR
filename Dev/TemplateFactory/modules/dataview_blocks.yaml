@@ -542,6 +542,83 @@ blocks:
       | --- | --- |
       | Fuori scena | scegliere reazioni tra sessioni |
       | Controllo canone | stabilizzare verita e retcon |
+  offscreen_now:
+    type: dataviewjs
+    runtime_view: renderOffscreenNow
+    use_for:
+      - dashboard
+      - fuori scena
+      - reazioni
+      - cockpit
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      gdr.renderOffscreenNow(dv, dv.current().mondo_attivo, dv.current().campagne_attive);
+    fallback: |-
+      | Priorita | Azione |
+      | --- | --- |
+      | Reagisce prima | scegli attore, clock o conseguenza da muovere |
+  offscreen_readiness:
+    type: dataviewjs
+    runtime_view: renderOffscreenReadiness
+    use_for:
+      - dashboard
+      - fuori scena
+      - reazioni
+      - cockpit
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      gdr.renderOffscreenReadiness(dv, dv.current().mondo_attivo, dv.current().campagne_attive);
+    fallback: |-
+      | Area | Conteggio |
+      | --- | --- |
+      | Attori in moto |  |
+      | Clock urgenti |  |
+      | Conseguenze aperte |  |
+      | Ponte al tavolo |  |
+  offscreen_reaction_queues:
+    type: dataviewjs
+    runtime_view: renderOffscreenReactionQueues
+    use_for:
+      - dashboard
+      - fuori scena
+      - reazioni
+      - cockpit
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      await gdr.renderOffscreenReactionQueues(dv, dv.current().mondo_attivo, dv.current().campagne_attive);
+    fallback: |-
+      | Nota | Reazione |
+      | --- | --- |
+  offscreen_table_bridge:
+    type: dataviewjs
+    runtime_view: renderOffscreenTableBridge
+    use_for:
+      - dashboard
+      - fuori scena
+      - preparazione
+      - cockpit
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      await gdr.renderOffscreenTableBridge(dv, dv.current().mondo_attivo, dv.current().campagne_attive);
+    fallback: |-
+      | Materiale | Uso |
+      | --- | --- |
+  offscreen_surface_links:
+    type: dataviewjs
+    runtime_view: renderOffscreenSurfaceLinks
+    use_for:
+      - dashboard
+      - fuori scena
+      - reazioni
+      - cockpit
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      await gdr.renderOffscreenSurfaceLinks(dv);
+    fallback: |-
+      | Superficie | Uso |
+      | --- | --- |
+      | Motore mondo vivo | verificare propagazioni |
+      | Preparazione sessione | portare la reazione al tavolo |
 contracts:
   dataviewjs_has_no_file_writes: true
   empty_state_required: true

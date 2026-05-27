@@ -26,6 +26,11 @@ const REQUIRED_EXPORTS = [
     "renderLivingWorldReadiness",
     "renderLivingWorldSurfaceLinks",
     "renderM11ContinuityChain",
+    "renderOffscreenNow",
+    "renderOffscreenReactionQueues",
+    "renderOffscreenReadiness",
+    "renderOffscreenSurfaceLinks",
+    "renderOffscreenTableBridge",
     "renderOnboardingReadiness",
     "renderPlayerView",
     "renderPluginTroubleshooting",
@@ -57,6 +62,7 @@ const REQUIRED_MODULES = [
     "z.engine/session_runtime.js",
     "z.engine/session_views.js",
     "z.engine/session_living_world.js",
+    "z.engine/session_offscreen.js",
     "z.engine/session_worldbuilding_control.js"
 ];
 
@@ -180,6 +186,9 @@ async function main() {
                     fazioni: ["Mondi/Fazioni/Consiglio.md"],
                     luoghi: ["Mondi/Luoghi/Luogo Pubblico.md"],
                     pressione: 4,
+                    progress_value: 4,
+                    progress_max: 6,
+                    scadenza_mondo: "prossima luna",
                     prossima_mossa: "Il rivale arriva prima."
                 },
                 {
@@ -379,6 +388,26 @@ async function main() {
             await views.renderLivingWorldSurfaceLinks(dv);
             if (!rendered.some(node => String(node.innerHTML).includes("Poteri in movimento"))) {
                 errors.push("renderLivingWorldSurfaceLinks: output senza superfici mondo vivo");
+            }
+            views.renderOffscreenNow(dv);
+            if (!rendered.some(node => String(node.innerHTML).includes("Reagisce prima"))) {
+                errors.push("renderOffscreenNow: output senza priorita fuori scena");
+            }
+            views.renderOffscreenReadiness(dv);
+            if (!rendered.some(node => String(node.innerHTML).includes("Attori in moto"))) {
+                errors.push("renderOffscreenReadiness: output senza metriche fuori scena");
+            }
+            await views.renderOffscreenReactionQueues(dv);
+            if (!rendered.some(node => node.tag === "table" && String(node.text).includes("Chiude il porto"))) {
+                errors.push("renderOffscreenReactionQueues: output senza prossime mosse fuori scena");
+            }
+            await views.renderOffscreenTableBridge(dv);
+            if (!rendered.some(node => node.tag === "table" && String(node.text).includes("Il rivale arriva prima"))) {
+                errors.push("renderOffscreenTableBridge: output senza ponte al tavolo");
+            }
+            await views.renderOffscreenSurfaceLinks(dv);
+            if (!rendered.some(node => String(node.innerHTML).includes("Preparazione sessione"))) {
+                errors.push("renderOffscreenSurfaceLinks: output senza superfici fuori scena");
             }
             views.renderWorldbuildingControlNow(dv);
             if (!rendered.some(node => String(node.innerHTML).includes("Ripara prima"))) {

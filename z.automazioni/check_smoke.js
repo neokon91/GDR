@@ -116,7 +116,7 @@ for (const marker of ["renderLivingWorldNow", "renderLivingWorldReadiness", "ren
 }
 
 const offscreen = readTextRel(ROOT, "Hub/Cosa Succede Fuori Scena.md");
-for (const marker of ["renderContinuityGaps", "renderPropagationTargets", "renderClosableContinuity"]) {
+for (const marker of ["renderOffscreenNow", "renderOffscreenReadiness", "renderOffscreenReactionQueues", "renderOffscreenTableBridge", "renderOffscreenSurfaceLinks"]) {
     if (!offscreen.includes(marker)) {
         errors.push(`Smoke statico: Cosa Succede Fuori Scena non contiene ${marker}`);
     }
