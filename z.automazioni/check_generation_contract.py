@@ -168,7 +168,10 @@ def validate_json_source_boundary(pipeline: dict[str, Any], errors: list[str]) -
     }
 
     for rel_path in tracked_json_files(errors):
-        if rel_path in generated_json or rel_path in native_json:
+        if rel_path in generated_json:
+            fail(errors, f"{rel_path}: JSON generato tracciato da Git")
+            continue
+        if rel_path in native_json:
             continue
         if rel_path.endswith("/manifest.json"):
             continue

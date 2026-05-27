@@ -103,12 +103,12 @@ def validate(source: dict[str, Any], errors: list[str], check_alignment: bool) -
 
     for target in sorted(tracked - set(declared)):
         fail(errors, f"{target}: JSON Obsidian tracciato senza sorgente YAML")
-    for target in sorted(set(declared) - tracked):
-        fail(errors, f"{SOURCE.relative_to(ROOT)}: target non tracciato o inesistente {target}")
+    for target in sorted(tracked & set(declared)):
+        fail(errors, f"{target}: JSON Obsidian generato tracciato da Git")
 
     for target, data in sorted(declared.items()):
         path = ROOT / target
-        if not path.exists():
+        if check_alignment and not path.exists():
             fail(errors, f"{target}: file JSON mancante")
             continue
         if not check_alignment:

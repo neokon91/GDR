@@ -1,9 +1,0 @@
-{
-  "minimal-style@@base@@light": "#2288BB",
-  "gdr-vault@@gdr-palette": "gdr-palette-scriptorium",
-  "gdr-vault@@gdr-readable-width": 1120,
-  "gdr-vault@@gdr-dashboard-density": "0.75rem",
-  "gdr-vault@@gdr-table-density": "0.42rem",
-  "gdr-vault@@gdr-card-depth": "0 8px 22px rgba(0, 0, 0, 0.08)",
-  "gdr-vault@@gdr-callout-density": "0.85rem"
-}
