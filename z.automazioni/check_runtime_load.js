@@ -69,6 +69,11 @@ const REQUIRED_EXPORTS = [
     "renderPlayerView",
     "renderPluginTroubleshooting",
     "renderPostSessionCommandCenter",
+    "renderPostSessionClosureQueues",
+    "renderPostSessionNow",
+    "renderPostSessionPropagationQueues",
+    "renderPostSessionReadiness",
+    "renderPostSessionSurfaceLinks",
     "renderPropagationTargets",
     "renderSessionAnchorCards",
     "renderSessionMapCards",
@@ -102,6 +107,7 @@ const REQUIRED_MODULES = [
     "z.engine/session_geopolitical.js",
     "z.engine/session_maps.js",
     "z.engine/session_player.js",
+    "z.engine/session_post_session.js",
     "z.engine/session_runtime.js",
     "z.engine/session_vault_control.js",
     "z.engine/session_views.js",
@@ -668,6 +674,26 @@ async function main() {
             await views.renderLiveTableSurfaceLinks(dv);
             if (!rendered.some(node => String(node.innerHTML).includes("Iniziativa e combattimenti"))) {
                 errors.push("renderLiveTableSurfaceLinks: output senza superfici live");
+            }
+            views.renderPostSessionNow(dv);
+            if (!rendered.some(node => String(node.innerHTML).includes("Chiudi prima"))) {
+                errors.push("renderPostSessionNow: output senza priorita di chiusura");
+            }
+            views.renderPostSessionReadiness(dv);
+            if (!rendered.some(node => String(node.innerHTML).includes("Appunti live"))) {
+                errors.push("renderPostSessionReadiness: output senza metriche appunti");
+            }
+            await views.renderPostSessionClosureQueues(dv);
+            if (!rendered.some(node => node.tag === "table" && String(node.text).includes("Conseguenza del Faro"))) {
+                errors.push("renderPostSessionClosureQueues: output senza appunti live");
+            }
+            await views.renderPostSessionPropagationQueues(dv);
+            if (!rendered.some(node => node.tag === "table" && String(node.text).includes("Missione Pubblica"))) {
+                errors.push("renderPostSessionPropagationQueues: output senza bersagli impattati");
+            }
+            await views.renderPostSessionSurfaceLinks(dv);
+            if (!rendered.some(node => String(node.innerHTML).includes("Vista Giocatori"))) {
+                errors.push("renderPostSessionSurfaceLinks: output senza superfici post-sessione");
             }
             views.renderLivingWorldNow(dv);
             if (!rendered.some(node => String(node.innerHTML).includes("Cambia prima"))) {

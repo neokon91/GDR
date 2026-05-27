@@ -305,7 +305,9 @@ try {
     const liveHub = readTextRel(process.cwd(), "Hub/Durante il Gioco.md");
     const postSession = readTextRel(process.cwd(), "Risorse/Post Sessione Guidato.md");
     if (!liveHub.includes("renderM11ContinuityChain")) fail("Durante il Gioco: catena M11 non leggibile");
-    if (!postSession.includes("renderConsequenceCards")) fail("Post Sessione Guidato: carte conseguenze non leggibili");
+    for (const marker of ["renderPostSessionClosureQueues", "renderPostSessionPropagationQueues"]) {
+        if (!postSession.includes(marker)) fail(`Post Sessione Guidato: cockpit conseguenze non leggibile (${marker})`);
+    }
 } finally {
     fs.rmSync(tempParent, { recursive: true, force: true });
 }

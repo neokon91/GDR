@@ -269,6 +269,12 @@
     continuityIssues: continuityViews.continuityIssues,
     continuityStatus: continuityViews.continuityStatus
   });
+  const postSessionViews = (await eval(await app.vault.adapter.read("z.engine/session_post_session.js")))({
+    ...sharedViewContext,
+    continuityAction: continuityViews.continuityAction,
+    continuityIssues: continuityViews.continuityIssues,
+    continuityStatus: continuityViews.continuityStatus
+  });
   const dmDashboardViews = (await eval(await app.vault.adapter.read("z.engine/session_dm_dashboard.js")))(sharedViewContext);
   const economyViews = (await eval(await app.vault.adapter.read("z.engine/session_economy.js")))(sharedViewContext);
   const geopoliticalViews = (await eval(await app.vault.adapter.read("z.engine/session_geopolitical.js")))(sharedViewContext);
@@ -1091,6 +1097,11 @@
     renderSessionLiveCards: sessionViews.renderSessionLiveCards,
     renderSessionMaterialCards: sessionViews.renderSessionMaterialCards,
     renderPostSessionCommandCenter: sessionViews.renderPostSessionCommandCenter,
+    renderPostSessionClosureQueues: postSessionViews.renderPostSessionClosureQueues,
+    renderPostSessionNow: postSessionViews.renderPostSessionNow,
+    renderPostSessionPropagationQueues: postSessionViews.renderPostSessionPropagationQueues,
+    renderPostSessionReadiness: postSessionViews.renderPostSessionReadiness,
+    renderPostSessionSurfaceLinks: postSessionViews.renderPostSessionSurfaceLinks,
     renderSessionPostCards: sessionViews.renderSessionPostCards,
     renderContinuityGaps: continuityViews.renderContinuityGaps,
     renderContinuityQueue: continuityViews.renderContinuityQueue,

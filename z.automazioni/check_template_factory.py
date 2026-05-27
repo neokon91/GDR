@@ -38,6 +38,7 @@ GENERATED = FACTORY / "examples" / "generated"
 REQUIRED_MODULES = {
     "fields_core",
     "plugin_bindings",
+    "post_session_cockpit",
     "template_blueprints",
     "sections",
     "callouts",

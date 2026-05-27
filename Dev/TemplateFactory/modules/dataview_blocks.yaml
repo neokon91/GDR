@@ -1222,6 +1222,82 @@ blocks:
       | --- | --- |
       | Party control | controllare PG e risorse |
       | Iniziativa | gestire scene a turni |
+  post_session_now:
+    type: dataviewjs
+    runtime_view: renderPostSessionNow
+    use_for:
+      - dashboard
+      - post sessione
+      - chiusura
+      - cockpit
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      gdr.renderPostSessionNow(dv);
+    fallback: |-
+      | Priorita | Azione |
+      | --- | --- |
+      | Chiudi prima | decidi appunti, conseguenze, recap o prossima sessione |
+  post_session_readiness:
+    type: dataviewjs
+    runtime_view: renderPostSessionReadiness
+    use_for:
+      - dashboard
+      - post sessione
+      - chiusura
+      - cockpit
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      gdr.renderPostSessionReadiness(dv);
+    fallback: |-
+      | Area | Conteggio |
+      | --- | --- |
+      | Appunti live |  |
+      | Conseguenze |  |
+      | Recap |  |
+  post_session_closure_queues:
+    type: dataviewjs
+    runtime_view: renderPostSessionClosureQueues
+    use_for:
+      - dashboard
+      - post sessione
+      - canone
+      - cockpit
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      await gdr.renderPostSessionClosureQueues(dv);
+    fallback: |-
+      | Nota | Decisione |
+      | --- | --- |
+  post_session_propagation_queues:
+    type: dataviewjs
+    runtime_view: renderPostSessionPropagationQueues
+    use_for:
+      - dashboard
+      - post sessione
+      - conseguenze
+      - cockpit
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      await gdr.renderPostSessionPropagationQueues(dv);
+    fallback: |-
+      | Bersaglio | Prossima mossa |
+      | --- | --- |
+  post_session_surface_links:
+    type: dataviewjs
+    runtime_view: renderPostSessionSurfaceLinks
+    use_for:
+      - dashboard
+      - post sessione
+      - superfici
+      - cockpit
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      await gdr.renderPostSessionSurfaceLinks(dv);
+    fallback: |-
+      | Superficie | Uso |
+      | --- | --- |
+      | Motore mondo vivo | propagare conseguenze |
+      | Vista giocatori | controllare recap pubblico |
 contracts:
   dataviewjs_has_no_file_writes: true
   empty_state_required: true

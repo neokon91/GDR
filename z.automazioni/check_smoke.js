@@ -173,7 +173,7 @@ for (const marker of ["renderOffscreenNow", "renderOffscreenReadiness", "renderO
 }
 
 const postSession = readTextRel(ROOT, "Risorse/Post Sessione Guidato.md");
-for (const marker of ["renderM11ContinuityChain", "renderConsequenceCards", "BUTTON[registra-scelta-mondo]"]) {
+for (const marker of ["renderPostSessionNow", "renderPostSessionReadiness", "renderPostSessionClosureQueues", "renderPostSessionPropagationQueues", "renderPostSessionSurfaceLinks", "BUTTON[registra-scelta-mondo]"]) {
     if (!postSession.includes(marker)) {
         errors.push(`Smoke statico: Post Sessione Guidato non contiene ${marker}`);
     }

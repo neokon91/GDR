@@ -4,6 +4,7 @@
 
 ### Aggiunto
 
+- `Risorse/Post Sessione Guidato.md` trasformata in cockpit compatto con runtime `session_post_session.js` e contratto `post_session_cockpit.yaml`.
 - `Hub/Revisione Lore.md` trasformata in cockpit compatto con runtime `session_lore_review.js` e contratto `lore_review_cockpit.yaml`.
 - `Hub/Campagna da Ambientazione.md` trasformata in cockpit compatto con runtime `session_campaign_builder.js` e contratto `campaign_builder_cockpit.yaml`.
 - `Hub/Lore Hub.md` trasformata in cockpit compatto con runtime `session_lore.js` e contratto `lore_cockpit.yaml`.

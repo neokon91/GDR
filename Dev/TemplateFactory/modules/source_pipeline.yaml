@@ -424,6 +424,24 @@ steps:
       - node
       - z.automazioni/render_live_table_cockpit.js
       - --check
+  post_session_cockpit:
+    purpose: Genera il contratto runtime del cockpit Post Sessione Guidato senza scrivere root generate.
+    sources:
+      - Dev/TemplateFactory/modules/post_session_cockpit.yaml
+      - Dev/TemplateFactory/modules/bases_views.yaml
+      - Dev/TemplateFactory/modules/frontmatter_profiles.yaml
+      - Risorse/Post Sessione Guidato.md
+      - z.engine/session_post_session.js
+      - z.engine/session_views.js
+    outputs:
+      - z.automazioni/data/runtime/post_session_cockpit.json
+    render:
+      - node
+      - z.automazioni/render_post_session_cockpit.js
+    check:
+      - node
+      - z.automazioni/render_post_session_cockpit.js
+      - --check
   user_path:
     purpose: Verifica il percorso utente primario dichiarato in YAML.
     sources:
