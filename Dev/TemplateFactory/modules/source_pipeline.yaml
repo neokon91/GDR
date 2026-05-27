@@ -198,6 +198,24 @@ steps:
       - node
       - z.automazioni/render_canon_control_cockpit.js
       - --check
+  living_world_cockpit:
+    purpose: Genera il contratto runtime del cockpit Motore Mondo Vivo senza scrivere root generate.
+    sources:
+      - Dev/TemplateFactory/modules/living_world_cockpit.yaml
+      - Dev/TemplateFactory/modules/bases_views.yaml
+      - Dev/TemplateFactory/modules/frontmatter_profiles.yaml
+      - Hub/Motore Mondo Vivo.md
+      - z.engine/session_living_world.js
+      - z.engine/session_views.js
+    outputs:
+      - z.automazioni/data/runtime/living_world_cockpit.json
+    render:
+      - node
+      - z.automazioni/render_living_world_cockpit.js
+    check:
+      - node
+      - z.automazioni/render_living_world_cockpit.js
+      - --check
   user_path:
     purpose: Verifica il percorso utente primario dichiarato in YAML.
     sources:

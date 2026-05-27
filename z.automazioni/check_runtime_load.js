@@ -20,6 +20,11 @@ const REQUIRED_EXPORTS = [
     "renderContinuityQueue",
     "renderDnd55MaterialPipeline",
     "renderLiveCommandCenter",
+    "renderLivingWorldNow",
+    "renderLivingWorldPressureQueues",
+    "renderLivingWorldQueues",
+    "renderLivingWorldReadiness",
+    "renderLivingWorldSurfaceLinks",
     "renderM11ContinuityChain",
     "renderOnboardingReadiness",
     "renderPlayerView",
@@ -51,6 +56,7 @@ const REQUIRED_MODULES = [
     "z.engine/session_player.js",
     "z.engine/session_runtime.js",
     "z.engine/session_views.js",
+    "z.engine/session_living_world.js",
     "z.engine/session_worldbuilding_control.js"
 ];
 
@@ -215,6 +221,16 @@ async function main() {
                     mondo: "Mondi/Mondo Demo.md"
                 },
                 {
+                    file: { path: "Inbox/Conseguenza del Faro.md", name: "Conseguenza del Faro", link: "Inbox/Conseguenza del Faro.md", folder: "Inbox", mtime: 12 },
+                    categoria: "lore capture",
+                    stato: "da smistare",
+                    mondo: "Mondi/Mondo Demo.md",
+                    conseguenze: ["Il Consiglio cambia rotta."],
+                    entita_impattate: ["Mondi/Fazioni/Consiglio.md"],
+                    propagazione_stato: "aperta",
+                    prossima_mossa: "Aggiorna il Consiglio."
+                },
+                {
                     file: { path: "Risorse/Mappe/Mappa Pubblica.md", name: "Mappa Pubblica", link: "Risorse/Mappe/Mappa Pubblica.md", mtime: 4 },
                     categoria: "mappa",
                     stato: "pronto",
@@ -343,6 +359,26 @@ async function main() {
             await views.renderWorldbuilderSurfaceLinks(dv);
             if (!rendered.some(node => String(node.innerHTML).includes("Codex editabile"))) {
                 errors.push("renderWorldbuilderSurfaceLinks: output senza superfici operative");
+            }
+            views.renderLivingWorldNow(dv);
+            if (!rendered.some(node => String(node.innerHTML).includes("Cambia prima"))) {
+                errors.push("renderLivingWorldNow: output senza priorita mondo vivo");
+            }
+            views.renderLivingWorldReadiness(dv);
+            if (!rendered.some(node => String(node.innerHTML).includes("Propagazioni"))) {
+                errors.push("renderLivingWorldReadiness: output senza metriche di propagazione");
+            }
+            await views.renderLivingWorldQueues(dv);
+            if (!rendered.some(node => node.tag === "table" && String(node.text).includes("Aggiorna il Consiglio"))) {
+                errors.push("renderLivingWorldQueues: output senza coda continuita");
+            }
+            await views.renderLivingWorldPressureQueues(dv);
+            if (!rendered.some(node => node.tag === "table" && String(node.text).includes("Il pedaggio raddoppia"))) {
+                errors.push("renderLivingWorldPressureQueues: output senza pressione economica");
+            }
+            await views.renderLivingWorldSurfaceLinks(dv);
+            if (!rendered.some(node => String(node.innerHTML).includes("Poteri in movimento"))) {
+                errors.push("renderLivingWorldSurfaceLinks: output senza superfici mondo vivo");
             }
             views.renderWorldbuildingControlNow(dv);
             if (!rendered.some(node => String(node.innerHTML).includes("Ripara prima"))) {

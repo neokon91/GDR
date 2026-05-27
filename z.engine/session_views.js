@@ -251,6 +251,12 @@
   const dndViews = (await eval(await app.vault.adapter.read("z.engine/session_dnd.js")))(sharedViewContext);
   const playerViews = (await eval(await app.vault.adapter.read("z.engine/session_player.js")))(sharedViewContext);
   const continuityViews = (await eval(await app.vault.adapter.read("z.engine/session_continuity.js")))(sharedViewContext);
+  const livingWorldViews = (await eval(await app.vault.adapter.read("z.engine/session_living_world.js")))({
+    ...sharedViewContext,
+    continuityAction: continuityViews.continuityAction,
+    continuityIssues: continuityViews.continuityIssues,
+    continuityStatus: continuityViews.continuityStatus
+  });
   const { continuityIssues } = continuityViews;
   const sessionViews = (await eval(await app.vault.adapter.read("z.engine/session_runtime.js")))({
     ...sharedViewContext,
@@ -1006,6 +1012,11 @@
     renderEmptyState,
     renderImpactedNextMoveCards: continuityViews.renderImpactedNextMoveCards,
     renderLiveCommandCenter: sessionViews.renderLiveCommandCenter,
+    renderLivingWorldNow: livingWorldViews.renderLivingWorldNow,
+    renderLivingWorldPressureQueues: livingWorldViews.renderLivingWorldPressureQueues,
+    renderLivingWorldQueues: livingWorldViews.renderLivingWorldQueues,
+    renderLivingWorldReadiness: livingWorldViews.renderLivingWorldReadiness,
+    renderLivingWorldSurfaceLinks: livingWorldViews.renderLivingWorldSurfaceLinks,
     renderPlaceMapCards: mapViews.renderPlaceMapCards,
     renderPlayableOutline: sessionViews.renderPlayableOutline,
     renderPlayerMap: playerViews.renderPlayerMap,

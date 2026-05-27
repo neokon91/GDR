@@ -464,6 +464,84 @@ blocks:
       | --- | --- |
       | Lore hub | vedere segnali e materiale collegato |
       | Revisione lore | ripulire appunti e rumor |
+  living_world_now:
+    type: dataviewjs
+    runtime_view: renderLivingWorldNow
+    use_for:
+      - dashboard
+      - mondo vivo
+      - propagazione
+      - cockpit
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      gdr.renderLivingWorldNow(dv, dv.current().mondo_attivo, dv.current().campagne_attive);
+    fallback: |-
+      | Priorita | Azione |
+      | --- | --- |
+      | Cambia prima | scegli conseguenza, bersaglio o pressione da aggiornare |
+  living_world_readiness:
+    type: dataviewjs
+    runtime_view: renderLivingWorldReadiness
+    use_for:
+      - dashboard
+      - mondo vivo
+      - propagazione
+      - cockpit
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      gdr.renderLivingWorldReadiness(dv, dv.current().mondo_attivo, dv.current().campagne_attive);
+    fallback: |-
+      | Area | Conteggio |
+      | --- | --- |
+      | Canone vivo |  |
+      | Pressioni |  |
+      | Propagazioni |  |
+      | Buchi |  |
+  living_world_queues:
+    type: dataviewjs
+    runtime_view: renderLivingWorldQueues
+    use_for:
+      - dashboard
+      - mondo vivo
+      - propagazione
+      - cockpit
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      await gdr.renderLivingWorldQueues(dv, dv.current().mondo_attivo, dv.current().campagne_attive);
+    fallback: |-
+      | Nota | Azione |
+      | --- | --- |
+  living_world_pressure_queues:
+    type: dataviewjs
+    runtime_view: renderLivingWorldPressureQueues
+    use_for:
+      - dashboard
+      - mondo vivo
+      - pressioni
+      - economia
+      - cockpit
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      await gdr.renderLivingWorldPressureQueues(dv, dv.current().mondo_attivo, dv.current().campagne_attive);
+    fallback: |-
+      | Nodo | Pressione |
+      | --- | --- |
+  living_world_surface_links:
+    type: dataviewjs
+    runtime_view: renderLivingWorldSurfaceLinks
+    use_for:
+      - dashboard
+      - mondo vivo
+      - propagazione
+      - cockpit
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      await gdr.renderLivingWorldSurfaceLinks(dv);
+    fallback: |-
+      | Superficie | Uso |
+      | --- | --- |
+      | Fuori scena | scegliere reazioni tra sessioni |
+      | Controllo canone | stabilizzare verita e retcon |
 contracts:
   dataviewjs_has_no_file_writes: true
   empty_state_required: true

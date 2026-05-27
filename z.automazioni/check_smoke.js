@@ -109,7 +109,7 @@ for (const marker of ["renderTableCockpit", "renderM11ContinuityChain", "BUTTON[
 }
 
 const livingWorld = readTextRel(ROOT, "Hub/Motore Mondo Vivo.md");
-for (const marker of ["renderContinuityQueue", "renderPropagationTargets", "renderClosableContinuity"]) {
+for (const marker of ["renderLivingWorldNow", "renderLivingWorldReadiness", "renderLivingWorldQueues", "renderLivingWorldPressureQueues", "renderLivingWorldSurfaceLinks"]) {
     if (!livingWorld.includes(marker)) {
         errors.push(`Smoke statico: Motore Mondo Vivo non contiene ${marker}`);
     }

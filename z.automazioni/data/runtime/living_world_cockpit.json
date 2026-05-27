@@ -1,0 +1,228 @@
+{
+  "generated_by": "render_living_world_cockpit",
+  "source": "Dev/TemplateFactory/modules/living_world_cockpit.yaml",
+  "version": "0.1.0",
+  "purpose": "Contratto operativo per trasformare Motore Mondo Vivo in cockpit di propagazione, pressioni e canone vivo.",
+  "dashboard": {
+    "page": "Hub/Motore Mondo Vivo.md",
+    "workflow": "motore_mondo_vivo",
+    "required_runtime_views": [
+      "renderLivingWorldNow",
+      "renderLivingWorldReadiness",
+      "renderLivingWorldQueues",
+      "renderLivingWorldPressureQueues",
+      "renderLivingWorldSurfaceLinks"
+    ],
+    "required_visible_sections": [
+      "Filtro",
+      "Priorita",
+      "Stato Mondo Vivo",
+      "Code Di Propagazione",
+      "Pressioni E Bersagli",
+      "Superfici"
+    ]
+  },
+  "panels": {
+    "now": {
+      "runtime_view": "renderLivingWorldNow",
+      "promise": "Decidere cosa deve cambiare prima della prossima sessione.",
+      "answers": [
+        "continuita aperta",
+        "bersaglio da aggiornare",
+        "pressione senza mossa",
+        "canone senza conseguenze"
+      ]
+    },
+    "readiness": {
+      "runtime_view": "renderLivingWorldReadiness",
+      "promise": "Misurare canone vivo, pressioni, propagazioni e buchi.",
+      "answers": [
+        "canone vivo",
+        "pressioni",
+        "economia",
+        "propagazioni",
+        "buchi di continuita"
+      ]
+    },
+    "queues": {
+      "runtime_view": "renderLivingWorldQueues",
+      "promise": "Portare in tabella conseguenze, bersagli, chiusure e gap.",
+      "answers": [
+        "continuita aperte",
+        "bersagli da verificare",
+        "chiudibili oggi",
+        "buchi di continuita"
+      ]
+    },
+    "pressure": {
+      "runtime_view": "renderLivingWorldPressureQueues",
+      "promise": "Ordinare poteri, economia, storia e canone pubblicabile.",
+      "answers": [
+        "faction dynamics",
+        "economic pressure",
+        "historical causality",
+        "materiale canonico da stabilizzare"
+      ]
+    },
+    "surfaces": {
+      "runtime_view": "renderLivingWorldSurfaceLinks",
+      "promise": "Aprire le superfici giuste per applicare conseguenze e aggiornare il mondo.",
+      "answers": [
+        "fuori scena",
+        "controllo canone",
+        "economia",
+        "basi generate"
+      ]
+    }
+  },
+  "queues": [
+    {
+      "id": "continuity",
+      "label": "Continuita aperte",
+      "table_columns": [
+        "Origine",
+        "Stato",
+        "Bersagli",
+        "Azione"
+      ]
+    },
+    {
+      "id": "targets",
+      "label": "Bersagli da verificare",
+      "table_columns": [
+        "Bersaglio",
+        "Stato",
+        "Aggiornamento",
+        "Prossima mossa"
+      ]
+    },
+    {
+      "id": "closable",
+      "label": "Chiudibili oggi",
+      "table_columns": [
+        "Nota",
+        "Stato",
+        "Chiusura",
+        "Azione"
+      ]
+    },
+    {
+      "id": "gaps",
+      "label": "Buchi di continuita",
+      "table_columns": [
+        "Nota",
+        "Gap",
+        "Stato",
+        "Azione"
+      ]
+    },
+    {
+      "id": "powers",
+      "label": "Faction dynamics",
+      "table_columns": [
+        "Potere",
+        "Pressione",
+        "Clock",
+        "Prossima mossa"
+      ]
+    },
+    {
+      "id": "economy",
+      "label": "Economic pressure",
+      "table_columns": [
+        "Nodo",
+        "Stato",
+        "Pressione",
+        "Conseguenze"
+      ]
+    },
+    {
+      "id": "history",
+      "label": "Historical causality",
+      "table_columns": [
+        "Evento",
+        "Data",
+        "Cause",
+        "Effetti"
+      ]
+    },
+    {
+      "id": "public_canon",
+      "label": "Materiale canonico da stabilizzare",
+      "table_columns": [
+        "Nota",
+        "Canone",
+        "Cosa manca",
+        "Azione"
+      ]
+    }
+  ],
+  "surfaces": [
+    {
+      "id": "offscreen",
+      "label": "Fuori scena",
+      "plugin": "Dataview",
+      "target": "Hub/Cosa Succede Fuori Scena.md",
+      "generated_release": false,
+      "badge": "Reazioni",
+      "role": "scegliere chi reagisce",
+      "action": "Apri quando una conseguenza richiede mosse tra sessioni.",
+      "why": "Il mondo vivo funziona solo se qualcuno reagisce fuori dalla scena giocata."
+    },
+    {
+      "id": "canon_control",
+      "label": "Controllo canone",
+      "plugin": "Dataview",
+      "target": "Hub/Controllo Canone.md",
+      "generated_release": false,
+      "badge": "Canone",
+      "role": "stabilizzare verita e retcon",
+      "action": "Apri quando una conseguenza diventa storia, rumor o correzione canonica.",
+      "why": "Le propagazioni canoniche devono avere fonte, causa ed effetti."
+    },
+    {
+      "id": "economy_routes",
+      "label": "Economia e rotte",
+      "plugin": "Dataview",
+      "target": "Hub/Economia E Rotte.md",
+      "generated_release": false,
+      "badge": "Economia",
+      "role": "muovere risorse e passaggi",
+      "action": "Apri quando il cambiamento tocca rotte, mercati, risorse o pedaggi.",
+      "why": "Le pressioni economiche rendono visibili conseguenze e scarsita."
+    },
+    {
+      "id": "worldbuilder",
+      "label": "Worldbuilder",
+      "plugin": "Dataview",
+      "target": "Hub/Worldbuilder Dashboard.md",
+      "generated_release": false,
+      "badge": "Mondo",
+      "role": "creare bersagli mancanti",
+      "action": "Apri quando una reazione richiede luogo, fazione, mistero o pressione nuovi.",
+      "why": "Non propagare nel vuoto: crea solo i pezzi necessari al prossimo cambio."
+    },
+    {
+      "id": "factions_base",
+      "label": "Poteri in movimento",
+      "plugin": "Bases",
+      "target": "z.bases/Fazioni.base",
+      "generated_release": true,
+      "badge": "Base",
+      "role": "ordinare pressioni",
+      "action": "Apri quando piu fazioni hanno pressione, clock o prossima_mossa da aggiornare.",
+      "why": "La Base generata permette correzioni tabellari senza rendere z.bases sorgente tracciato."
+    },
+    {
+      "id": "economy_base",
+      "label": "Rotte e risorse",
+      "plugin": "Bases",
+      "target": "z.bases/Economia.base",
+      "generated_release": true,
+      "badge": "Base",
+      "role": "correggere nodi economici",
+      "action": "Apri quando rotte, risorse o mercati devono ricevere conseguenze.",
+      "why": "Economia e rotte restano dati modificabili in release, non note sorgente manuali."
+    }
+  ]
+}
