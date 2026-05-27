@@ -73,6 +73,12 @@ const REQUIRED_EXPORTS = [
     "renderPreparationNow",
     "renderPreparationReadiness",
     "renderPreparationSurfaceLinks",
+    "renderTableMaterialsAssetQueues",
+    "renderTableMaterialsDndPipeline",
+    "renderTableMaterialsNow",
+    "renderTableMaterialsReadiness",
+    "renderTableMaterialsSessionQueues",
+    "renderTableMaterialsSurfaceLinks",
     "renderPostSessionCommandCenter",
     "renderPostSessionClosureQueues",
     "renderPostSessionNow",
@@ -113,6 +119,7 @@ const REQUIRED_MODULES = [
     "z.engine/session_maps.js",
     "z.engine/session_player.js",
     "z.engine/session_preparation.js",
+    "z.engine/session_table_materials.js",
     "z.engine/session_post_session.js",
     "z.engine/session_runtime.js",
     "z.engine/session_vault_control.js",
@@ -632,6 +639,30 @@ async function main() {
             await views.renderPreparationSurfaceLinks(dv);
             if (!rendered.some(node => String(node.innerHTML).includes("Durante il Gioco"))) {
                 errors.push("renderPreparationSurfaceLinks: output senza superfici preparazione");
+            }
+            views.renderTableMaterialsNow(dv);
+            if (!rendered.some(node => String(node.innerHTML).includes("Materiale prima"))) {
+                errors.push("renderTableMaterialsNow: output senza priorita materiale");
+            }
+            views.renderTableMaterialsReadiness(dv);
+            if (!rendered.some(node => String(node.innerHTML).includes("Dispense"))) {
+                errors.push("renderTableMaterialsReadiness: output senza metriche dispense");
+            }
+            await views.renderTableMaterialsSessionQueues(dv);
+            if (!rendered.some(node => node.tag === "table" && String(node.text).includes("Lettera del Porto"))) {
+                errors.push("renderTableMaterialsSessionQueues: output senza dispense della sessione");
+            }
+            await views.renderTableMaterialsAssetQueues(dv);
+            if (!rendered.some(node => node.tag === "table" && String(node.text).includes("Assalto al Molo"))) {
+                errors.push("renderTableMaterialsAssetQueues: output senza incontri o mappe");
+            }
+            views.renderTableMaterialsDndPipeline(dv);
+            if (!rendered.some(node => String(node.innerHTML).includes("Guardia del Porto"))) {
+                errors.push("renderTableMaterialsDndPipeline: output senza creature collegate");
+            }
+            await views.renderTableMaterialsSurfaceLinks(dv);
+            if (!rendered.some(node => String(node.innerHTML).includes("Iniziativa e combattimenti"))) {
+                errors.push("renderTableMaterialsSurfaceLinks: output senza superfici materiali");
             }
             views.renderAtlasNow(dv);
             if (!rendered.some(node => String(node.innerHTML).includes("Marker pronti"))) {

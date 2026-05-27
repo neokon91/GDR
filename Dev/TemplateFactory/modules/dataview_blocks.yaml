@@ -1222,6 +1222,96 @@ blocks:
       | --- | --- |
       | Party control | controllare PG e risorse |
       | Iniziativa | gestire scene a turni |
+  table_materials_now:
+    type: dataviewjs
+    runtime_view: renderTableMaterialsNow
+    use_for:
+      - dashboard
+      - materiali
+      - tavolo
+      - cockpit
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      gdr.renderTableMaterialsNow(dv);
+    fallback: |-
+      | Priorita | Azione |
+      | --- | --- |
+      | Materiale prima | apri o correggi il materiale che serve alla prossima scena |
+  table_materials_readiness:
+    type: dataviewjs
+    runtime_view: renderTableMaterialsReadiness
+    use_for:
+      - dashboard
+      - materiali
+      - tavolo
+      - cockpit
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      gdr.renderTableMaterialsReadiness(dv);
+    fallback: |-
+      | Area | Conteggio |
+      | --- | --- |
+      | Dispense |  |
+      | Mappe |  |
+      | Incontri |  |
+  table_materials_session_queues:
+    type: dataviewjs
+    runtime_view: renderTableMaterialsSessionQueues
+    use_for:
+      - dashboard
+      - materiali
+      - sessione
+      - cockpit
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      await gdr.renderTableMaterialsSessionQueues(dv);
+    fallback: |-
+      | Materiale | Uso |
+      | --- | --- |
+  table_materials_asset_queues:
+    type: dataviewjs
+    runtime_view: renderTableMaterialsAssetQueues
+    use_for:
+      - dashboard
+      - materiali
+      - asset
+      - cockpit
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      await gdr.renderTableMaterialsAssetQueues(dv);
+    fallback: |-
+      | Asset | Stato |
+      | --- | --- |
+  table_materials_dnd_pipeline:
+    type: dataviewjs
+    runtime_view: renderTableMaterialsDndPipeline
+    use_for:
+      - dashboard
+      - materiali
+      - dnd55
+      - cockpit
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      gdr.renderTableMaterialsDndPipeline(dv);
+    fallback: |-
+      | Materiale | Gap |
+      | --- | --- |
+  table_materials_surface_links:
+    type: dataviewjs
+    runtime_view: renderTableMaterialsSurfaceLinks
+    use_for:
+      - dashboard
+      - materiali
+      - superfici
+      - cockpit
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      await gdr.renderTableMaterialsSurfaceLinks(dv);
+    fallback: |-
+      | Superficie | Uso |
+      | --- | --- |
+      | Durante il Gioco | usare il materiale |
+      | Vista giocatori | controllare cosa mostrare |
   post_session_now:
     type: dataviewjs
     runtime_view: renderPostSessionNow

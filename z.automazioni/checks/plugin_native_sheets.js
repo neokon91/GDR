@@ -32,7 +32,8 @@ function hasPluginNativeSheet(text) {
     const hasCallout = /> \[![^\]]+\]/.test(text);
     const hasDynamicBlock = /```dataview|```dataviewjs|```tasks|```meta-bind|INPUT\[|BUTTON\[|dice:/.test(text);
     const hasFallback = /Fallback Markdown/i.test(text);
-    return hasTabs && hasCallout && hasDynamicBlock && hasFallback;
+    const hasRuntimeCockpit = /z\.engine\/session_views\.js/.test(text) && /render[A-Z][A-Za-z0-9]+\(/.test(text);
+    return (hasTabs && hasCallout && hasDynamicBlock && hasFallback) || (hasCallout && hasDynamicBlock && hasRuntimeCockpit);
 }
 
 function cssClasses(frontmatter) {

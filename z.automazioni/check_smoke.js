@@ -99,6 +99,7 @@ for (const [label, relPath] of [
     ["Worldbuilder Dashboard", "Hub/Worldbuilder Dashboard.md"],
     ["Campagna da Ambientazione", "Hub/Campagna da Ambientazione.md"],
     ["Preparazione Sessione", "Risorse/Preparazione Sessione.md"],
+    ["Materiali Al Tavolo", "Risorse/Materiali Al Tavolo.md"],
     ["Durante il Gioco", "Hub/Durante il Gioco.md"],
     ["Cosa Succede Fuori Scena", "Hub/Cosa Succede Fuori Scena.md"],
     ["Post Sessione Guidato", "Risorse/Post Sessione Guidato.md"],
@@ -127,6 +128,13 @@ const preparation = readTextRel(ROOT, "Risorse/Preparazione Sessione.md");
 for (const marker of ["renderPreparationNow", "renderPreparationReadiness", "renderPreparationAnchorQueues", "renderPreparationMaterialQueues", "renderPreparationSurfaceLinks", "BUTTON[nuova-sessione-z-modelli-dm-sessione-md]"]) {
     if (!preparation.includes(marker)) {
         errors.push(`Smoke statico: Preparazione Sessione non contiene ${marker}`);
+    }
+}
+
+const tableMaterials = readTextRel(ROOT, "Risorse/Materiali Al Tavolo.md");
+for (const marker of ["renderTableMaterialsNow", "renderTableMaterialsReadiness", "renderTableMaterialsSessionQueues", "renderTableMaterialsAssetQueues", "renderTableMaterialsDndPipeline", "renderTableMaterialsSurfaceLinks"]) {
+    if (!tableMaterials.includes(marker)) {
+        errors.push(`Smoke statico: Materiali Al Tavolo non contiene ${marker}`);
     }
 }
 

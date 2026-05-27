@@ -1,0 +1,205 @@
+id: table_materials_cockpit
+purpose: Contratto operativo per trasformare Materiali Al Tavolo in cockpit compatto di materiali collegati alla sessione target.
+version: 0.1.0
+dashboard:
+  page: Risorse/Materiali Al Tavolo.md
+  workflow: prepara_sessione
+  required_runtime_views:
+    - renderTableMaterialsNow
+    - renderTableMaterialsReadiness
+    - renderTableMaterialsSessionQueues
+    - renderTableMaterialsAssetQueues
+    - renderTableMaterialsDndPipeline
+    - renderTableMaterialsSurfaceLinks
+  required_visible_sections:
+    - Pronto Ora
+    - Stato Materiali
+    - Sessione E Consegne
+    - Incontri Mappe Media
+    - Prontezza DnD
+    - Superfici
+    - Azioni
+panels:
+  now:
+    runtime_view: renderTableMaterialsNow
+    promise: Dire al DM quale materiale aprire o correggere prima del tavolo.
+    answers:
+      - sessione target
+      - materiale prioritario
+      - consegne
+      - mappe e media
+      - incontri
+  readiness:
+    runtime_view: renderTableMaterialsReadiness
+    promise: Misurare subito cosa e pronto, cosa manca e quanti gap restano.
+    answers:
+      - sessione
+      - dispense
+      - mappe
+      - media
+      - incontri
+      - oggetti
+      - gap dnd
+  session:
+    runtime_view: renderTableMaterialsSessionQueues
+    promise: Tenere in tabella materiali collegati, dispense e oggetti consegnabili.
+    answers:
+      - materiale sessione
+      - handout
+      - oggetti
+      - quando aprire
+  assets:
+    runtime_view: renderTableMaterialsAssetQueues
+    promise: Tenere separati incontri, creature, mappe e media pronti per la scena.
+    answers:
+      - incontri
+      - creature
+      - mappe
+      - media
+  dnd:
+    runtime_view: renderTableMaterialsDndPipeline
+    promise: Mostrare se incontri, creature e oggetti hanno agganci e uso al tavolo.
+    answers:
+      - incontri dnd
+      - creature
+      - oggetti
+      - campi mancanti
+  surfaces:
+    runtime_view: renderTableMaterialsSurfaceLinks
+    promise: Aprire solo superfici utili a usare o riparare il materiale.
+    answers:
+      - preparazione
+      - durante il gioco
+      - iniziativa
+      - mappe
+      - vista giocatori
+queues:
+  - id: session_materials
+    label: Materiali Della Sessione
+    table_columns:
+      - Materiale
+      - Tipo
+      - Uso
+      - Stato
+      - Azione
+  - id: handouts
+    label: Dispense Da Consegnare
+    table_columns:
+      - Dispensa
+      - Tipo
+      - Luogo
+      - Pubblico
+      - Quando
+  - id: objects
+    label: Oggetti E Ricompense
+    table_columns:
+      - Oggetto
+      - Tipo
+      - Luogo
+      - Uso
+      - Stato
+  - id: encounters
+    label: Incontri Pronti
+    table_columns:
+      - Incontro
+      - Tipo
+      - Pericolo
+      - Luogo
+      - Creature
+  - id: creatures
+    label: Creature Collegate
+    table_columns:
+      - Creatura
+      - Tipo
+      - Taglia
+      - GS
+      - Uso
+  - id: maps_media
+    label: Mappe E Media
+    table_columns:
+      - Risorsa
+      - Tipo
+      - Uso
+      - Scena
+      - Stato
+surfaces:
+  - id: preparation
+    label: Preparazione sessione
+    plugin: Dataview
+    target: Risorse/Preparazione Sessione.md
+    badge: Ancore
+    role: decidere cosa serve
+    action: Apri quando il materiale non ha ancora una sessione, una scena o una pressione chiara.
+    why: I materiali devono servire una sessione concreta, non accumularsi nel vault.
+  - id: live_table
+    label: Durante il Gioco
+    plugin: Dataview
+    target: Hub/Durante il Gioco.md
+    badge: Live
+    role: usare il materiale
+    action: Apri quando i materiali minimi sono pronti e la sessione passa al tavolo.
+    why: La verifica qui deve finire in gioco, non in ulteriore preparazione.
+  - id: initiative
+    label: Iniziativa e combattimenti
+    plugin: Initiative Tracker
+    target: Risorse/Iniziativa e Combattimenti.md
+    badge: Turni
+    role: avviare scene ordinate
+    action: Apri quando un incontro pronto diventa combattimento o scena a turni.
+    why: Le creature e gli incontri entrano nei turni solo quando la scena lo richiede.
+  - id: maps
+    label: Mappe
+    plugin: Maps
+    target: Risorse/Mappe/Mappe.md
+    badge: Spazio
+    role: aprire asset spaziali
+    action: Apri quando una scena dipende da posizione, coordinate, marker o mappa pubblica.
+    why: La mappa deve chiarire scelte e movimento, non decorare la sessione.
+  - id: media
+    label: Media scene
+    plugin: Media Extended
+    target: Risorse/Media Scene.md
+    badge: Cue
+    role: controllare audio e video
+    action: Apri quando un cue ha scena, timestamp o uso chiaro al tavolo.
+    why: Un media senza scena resta reference e non deve occupare il cockpit.
+  - id: player_view
+    label: Vista giocatori
+    plugin: Dataview
+    target: Hub/Vista Giocatori.md
+    badge: Player-safe
+    role: proteggere segreti
+    action: Apri prima di condividere dispense, mappe pubbliche o recap di apertura.
+    why: Il materiale pronto puo contenere informazione DM che non deve uscire al party.
+  - id: encounters_base
+    label: Incontri pronti
+    plugin: Bases
+    target: z.bases/Incontri.base
+    generated_release: true
+    badge: Base
+    role: filtrare incontri
+    action: Apri quando devi scegliere incontri per luogo, pericolo o stato.
+    why: La Base generata resta output di release ma accelera la scelta al tavolo.
+  - id: maps_base
+    label: Atlante mappe
+    plugin: Bases
+    target: z.bases/Atlante Mappe.base
+    generated_release: true
+    badge: Base
+    role: verificare mappe
+    action: Apri quando devi filtrare mappe, marker o asset pubblici.
+    why: Le mappe pronte devono essere trovabili senza trasformare z.bases in sorgente.
+  - id: png_base
+    label: PNG in scena
+    plugin: Bases
+    target: z.bases/PNG.base
+    generated_release: true
+    badge: Base
+    role: trovare volti collegati
+    action: Apri quando dispense, incontri o oggetti dipendono da PNG ricorrenti.
+    why: I materiali funzionano meglio se hanno persone e leve riconoscibili.
+contracts:
+  dashboard_uses_runtime_views: true
+  surfaces_must_resolve_to_source_or_generated_release_target: true
+  generated_targets_must_stay_release_only: true
+  table_materials_prioritizes_session_use_over_asset_catalog: true

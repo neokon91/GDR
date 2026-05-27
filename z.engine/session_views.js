@@ -264,6 +264,7 @@
     continuityStatus: continuityViews.continuityStatus
   });
   const preparationViews = (await eval(await app.vault.adapter.read("z.engine/session_preparation.js")))(sharedViewContext);
+  const tableMaterialsViews = (await eval(await app.vault.adapter.read("z.engine/session_table_materials.js")))(sharedViewContext);
   const liveTableViews = (await eval(await app.vault.adapter.read("z.engine/session_live_table.js")))({
     ...sharedViewContext,
     continuityAction: continuityViews.continuityAction,
@@ -1091,6 +1092,12 @@
     renderPreparationNow: preparationViews.renderPreparationNow,
     renderPreparationReadiness: preparationViews.renderPreparationReadiness,
     renderPreparationSurfaceLinks: preparationViews.renderPreparationSurfaceLinks,
+    renderTableMaterialsAssetQueues: tableMaterialsViews.renderTableMaterialsAssetQueues,
+    renderTableMaterialsDndPipeline: tableMaterialsViews.renderTableMaterialsDndPipeline,
+    renderTableMaterialsNow: tableMaterialsViews.renderTableMaterialsNow,
+    renderTableMaterialsReadiness: tableMaterialsViews.renderTableMaterialsReadiness,
+    renderTableMaterialsSessionQueues: tableMaterialsViews.renderTableMaterialsSessionQueues,
+    renderTableMaterialsSurfaceLinks: tableMaterialsViews.renderTableMaterialsSurfaceLinks,
     renderM7FamilyCards,
     renderM11ContinuityChain: continuityViews.renderM11ContinuityChain,
     renderCombatReadiness: dndViews.renderCombatReadiness,

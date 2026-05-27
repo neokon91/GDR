@@ -440,6 +440,24 @@ steps:
       - node
       - z.automazioni/render_preparation_cockpit.js
       - --check
+  table_materials_cockpit:
+    purpose: Genera il contratto runtime del cockpit Materiali Al Tavolo senza scrivere root generate.
+    sources:
+      - Dev/TemplateFactory/modules/table_materials_cockpit.yaml
+      - Dev/TemplateFactory/modules/bases_views.yaml
+      - Dev/TemplateFactory/modules/frontmatter_profiles.yaml
+      - Risorse/Materiali Al Tavolo.md
+      - z.engine/session_table_materials.js
+      - z.engine/session_views.js
+    outputs:
+      - z.automazioni/data/runtime/table_materials_cockpit.json
+    render:
+      - node
+      - z.automazioni/render_table_materials_cockpit.js
+    check:
+      - node
+      - z.automazioni/render_table_materials_cockpit.js
+      - --check
   live_table_cockpit:
     purpose: Genera il contratto runtime del cockpit Durante il Gioco senza scrivere root generate.
     sources:
