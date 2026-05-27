@@ -1,0 +1,165 @@
+id: vault_control_cockpit
+purpose: Contratto operativo per trasformare Controllo Vault in cockpit di manutenzione giocabile.
+version: 0.1.0
+dashboard:
+  page: Risorse/Controllo Vault.md
+  workflow: manutenzione
+  required_runtime_views:
+    - renderVaultControlNow
+    - renderVaultControlReadiness
+    - renderVaultControlQueues
+    - renderVaultControlCoherence
+    - renderVaultControlSurfaceLinks
+  required_visible_sections:
+    - Priorita
+    - Stato Vault
+    - Code Operative
+    - Coerenza
+    - Superfici
+panels:
+  now:
+    runtime_view: renderVaultControlNow
+    promise: Dire cosa correggere prima per non bloccare preparazione, tavolo o post-sessione.
+    answers:
+      - stato fuori standard
+      - campi base mancanti
+      - materiale pronto incompleto
+      - data da calendarizzare
+      - inbox da smistare
+  readiness:
+    runtime_view: renderVaultControlReadiness
+    promise: Misurare il rumore operativo del vault senza leggere liste lunghe.
+    answers:
+      - inbox
+      - bozze generate
+      - sessioni in preparazione
+      - materiali pronti
+      - missioni aperte
+      - problemi base
+  queues:
+    runtime_view: renderVaultControlQueues
+    promise: Mostrare solo le code pratiche che richiedono decisione o collegamento.
+    answers:
+      - carte da guardare
+      - mappe da rendere giocabili
+      - materiale pronto
+      - campagna aperta
+  coherence:
+    runtime_view: renderVaultControlCoherence
+    promise: Auditare stati, campi minimi, date e pronti incompleti.
+    answers:
+      - stati fuori standard
+      - campi base mancanti
+      - date narrative
+      - Calendarium
+      - pronti incompleti
+  surfaces:
+    runtime_view: renderVaultControlSurfaceLinks
+    promise: Mandare la correzione alla superficie specializzata invece di allungare questa pagina.
+    answers:
+      - quality report
+      - vista giocatori
+      - smistamento bozze
+      - preparazione sessione
+      - task DM
+queues:
+  - id: attention
+    label: Carte da guardare
+    table_columns:
+      - Nota
+      - Tipo
+      - Stato
+      - Azione
+  - id: maps
+    label: Mappe da rendere giocabili
+    table_columns:
+      - Mappa
+      - Uso
+      - Stato
+      - Collegamento
+  - id: table_ready
+    label: Materiale pronto
+    table_columns:
+      - Nota
+      - Categoria
+      - Stato
+      - Luogo
+  - id: campaign_open
+    label: Campagna aperta
+    table_columns:
+      - Nota
+      - Tipo
+      - Stato
+      - Collegamenti
+surfaces:
+  - id: quality_report
+    label: Quality report
+    plugin: Dataview
+    target: Risorse/Quality Report.md
+    badge: Qualita
+    role: leggere problemi ampi
+    action: Apri quando serve una vista piu larga di sicurezza, pubblico e completezza.
+    why: Controllo Vault decide il prossimo blocco; Quality Report misura il quadro generale.
+  - id: player_view
+    label: Vista giocatori
+    plugin: Dataview
+    target: Hub/Vista Giocatori.md
+    badge: Player-safe
+    role: verificare materiale condivisibile
+    action: Apri prima di mostrare recap, mappe, dispense o informazioni pubbliche.
+    why: La manutenzione deve proteggere segreti e campi DM prima della condivisione.
+  - id: generated_drafts
+    label: Smistamento bozze
+    plugin: Dataview
+    target: Risorse/Smistamento Bozze Generate.md
+    badge: Inbox
+    role: trasformare bozze in materiale utile
+    action: Apri quando bozze generate o appunti grezzi devono diventare note reali o archivio.
+    why: Il materiale generato non deve entrare nel canone senza decisione.
+  - id: preparation
+    label: Preparazione sessione
+    plugin: Dataview
+    target: Risorse/Preparazione Sessione.md
+    badge: Prep
+    role: chiudere sessioni in preparazione
+    action: Apri quando una sessione manca di obiettivo, scelta, pressione o materiale.
+    why: Le code di manutenzione sono utili solo se sbloccano il prossimo tavolo.
+  - id: task_dm
+    label: Task DM
+    plugin: Tasks
+    target: Risorse/Task DM.md
+    badge: Task
+    role: ordinare lavoro aperto
+    action: Apri quando la correzione richiede task, checklist o manutenzione ricorrente.
+    why: Le liste lunghe di lavoro restano nella superficie task, non nel cockpit.
+  - id: help
+    label: Aiuto
+    plugin: Dataview
+    target: Risorse/Se Qualcosa Non Funziona.md
+    badge: Fallback
+    role: ripristinare viste e pulsanti
+    action: Apri quando pulsanti, Dataview o template non rispondono.
+    why: Il controllo operativo deve offrire una via manuale quando i plugin non partono.
+  - id: worldbuilding_base
+    label: Codex tabellare
+    plugin: Bases
+    target: z.bases/Worldbuilding.base
+    generated_release: true
+    badge: Base
+    role: correggere stati e collegamenti
+    action: Apri quando molte note richiedono correzioni tabellari.
+    why: La Base generata supporta manutenzione rapida senza rendere z.bases sorgente tracciato.
+  - id: missions_base
+    label: Missioni
+    plugin: Bases
+    target: z.bases/Missioni.base
+    generated_release: true
+    badge: Base
+    role: ripulire missioni aperte
+    action: Apri quando missioni aperte devono ricevere stato, committente o collegamenti.
+    why: Le missioni sono spesso la coda che blocca preparazione e mondo vivo.
+contracts:
+  dashboard_uses_runtime_views: true
+  surfaces_must_resolve_to_source_or_generated_release_target: true
+  generated_targets_must_stay_release_only: true
+  vault_control_prioritizes_blocking_issue_before_listing: true

@@ -49,6 +49,11 @@ const REQUIRED_EXPORTS = [
     "renderSessionMapCards",
     "renderSessionMaterialCards",
     "renderTableCockpit",
+    "renderVaultControlCoherence",
+    "renderVaultControlNow",
+    "renderVaultControlQueues",
+    "renderVaultControlReadiness",
+    "renderVaultControlSurfaceLinks",
     "renderVaultReadiness",
     "renderWorkflowCommandDeck",
     "renderWorldImpact",
@@ -70,6 +75,7 @@ const REQUIRED_MODULES = [
     "z.engine/session_maps.js",
     "z.engine/session_player.js",
     "z.engine/session_runtime.js",
+    "z.engine/session_vault_control.js",
     "z.engine/session_views.js",
     "z.engine/session_live_table.js",
     "z.engine/session_living_world.js",
@@ -437,6 +443,26 @@ async function main() {
             await views.renderDmDashboardSurfaceLinks(dv);
             if (!rendered.some(node => String(node.innerHTML).includes("Durante il Gioco"))) {
                 errors.push("renderDmDashboardSurfaceLinks: output senza superfici DM");
+            }
+            await views.renderVaultControlNow(dv);
+            if (!rendered.some(node => String(node.innerHTML).includes("Ripara prima"))) {
+                errors.push("renderVaultControlNow: output senza priorita manutenzione");
+            }
+            await views.renderVaultControlReadiness(dv);
+            if (!rendered.some(node => String(node.innerHTML).includes("Calendario"))) {
+                errors.push("renderVaultControlReadiness: output senza metriche calendario");
+            }
+            await views.renderVaultControlQueues(dv);
+            if (!rendered.some(node => node.tag === "table" && String(node.text).includes("Missione Pubblica"))) {
+                errors.push("renderVaultControlQueues: output senza code operative");
+            }
+            await views.renderVaultControlCoherence(dv);
+            if (!rendered.some(node => node.tag === "table" && String(node.text).includes("Missione aperta senza committente"))) {
+                errors.push("renderVaultControlCoherence: output senza audit pronti incompleti");
+            }
+            await views.renderVaultControlSurfaceLinks(dv);
+            if (!rendered.some(node => String(node.innerHTML).includes("Quality report"))) {
+                errors.push("renderVaultControlSurfaceLinks: output senza superfici manutenzione");
             }
             views.renderAtlasNow(dv);
             if (!rendered.some(node => String(node.innerHTML).includes("Marker pronti"))) {

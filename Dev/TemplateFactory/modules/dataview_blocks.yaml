@@ -334,6 +334,84 @@ blocks:
       | --- | --- |
       | Durante il Gioco | giocare la sessione attiva |
       | Preparazione sessione | rifinire il prossimo tavolo |
+  vault_control_now:
+    type: dataviewjs
+    runtime_view: renderVaultControlNow
+    use_for:
+      - dashboard
+      - controllo vault
+      - manutenzione
+      - cockpit
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      await gdr.renderVaultControlNow(dv);
+    fallback: |-
+      | Priorita | Azione |
+      | --- | --- |
+      | Ripara prima | correggi il blocco che impedisce preparazione, tavolo o post-sessione |
+  vault_control_readiness:
+    type: dataviewjs
+    runtime_view: renderVaultControlReadiness
+    use_for:
+      - dashboard
+      - controllo vault
+      - manutenzione
+      - cockpit
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      await gdr.renderVaultControlReadiness(dv);
+    fallback: |-
+      | Area | Conteggio |
+      | --- | --- |
+      | Inbox |  |
+      | Sessioni |  |
+      | Materiali |  |
+      | Coerenza |  |
+  vault_control_queues:
+    type: dataviewjs
+    runtime_view: renderVaultControlQueues
+    use_for:
+      - dashboard
+      - controllo vault
+      - manutenzione
+      - cockpit
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      await gdr.renderVaultControlQueues(dv);
+    fallback: |-
+      | Nota | Azione |
+      | --- | --- |
+  vault_control_coherence:
+    type: dataviewjs
+    runtime_view: renderVaultControlCoherence
+    use_for:
+      - dashboard
+      - controllo vault
+      - manutenzione
+      - audit
+      - cockpit
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      await gdr.renderVaultControlCoherence(dv);
+    fallback: |-
+      | Controllo | Problema |
+      | --- | --- |
+  vault_control_surface_links:
+    type: dataviewjs
+    runtime_view: renderVaultControlSurfaceLinks
+    use_for:
+      - dashboard
+      - controllo vault
+      - manutenzione
+      - cockpit
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      await gdr.renderVaultControlSurfaceLinks(dv);
+    fallback: |-
+      | Superficie | Uso |
+      | --- | --- |
+      | Quality report | vedere problemi ampi |
+      | Smistamento bozze | decidere materiale generato |
   worldbuilder_now:
     type: dataviewjs
     runtime_view: renderWorldbuilderNow

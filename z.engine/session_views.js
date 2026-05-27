@@ -270,6 +270,7 @@
     continuityStatus: continuityViews.continuityStatus
   });
   const dmDashboardViews = (await eval(await app.vault.adapter.read("z.engine/session_dm_dashboard.js")))(sharedViewContext);
+  const vaultControlViews = (await eval(await app.vault.adapter.read("z.engine/session_vault_control.js")))(sharedViewContext);
   const { continuityIssues } = continuityViews;
   const sessionViews = (await eval(await app.vault.adapter.read("z.engine/session_runtime.js")))({
     ...sharedViewContext,
@@ -1078,6 +1079,11 @@
     renderPluginTroubleshooting,
     renderOnboardingReadiness,
     renderVaultReadiness,
+    renderVaultControlCoherence: vaultControlViews.renderVaultControlCoherence,
+    renderVaultControlNow: vaultControlViews.renderVaultControlNow,
+    renderVaultControlQueues: vaultControlViews.renderVaultControlQueues,
+    renderVaultControlReadiness: vaultControlViews.renderVaultControlReadiness,
+    renderVaultControlSurfaceLinks: vaultControlViews.renderVaultControlSurfaceLinks,
     renderWorkflowCommandDeck,
     renderSessionMapCards: mapViews.renderSessionMapCards,
     renderTableCockpit: sessionViews.renderTableCockpit

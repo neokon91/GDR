@@ -145,6 +145,24 @@ steps:
       - node
       - z.automazioni/render_dm_dashboard_cockpit.js
       - --check
+  vault_control_cockpit:
+    purpose: Genera il contratto runtime del cockpit Controllo Vault senza scrivere root generate.
+    sources:
+      - Dev/TemplateFactory/modules/vault_control_cockpit.yaml
+      - Dev/TemplateFactory/modules/bases_views.yaml
+      - Dev/TemplateFactory/modules/frontmatter_profiles.yaml
+      - Risorse/Controllo Vault.md
+      - z.engine/session_vault_control.js
+      - z.engine/session_views.js
+    outputs:
+      - z.automazioni/data/runtime/vault_control_cockpit.json
+    render:
+      - node
+      - z.automazioni/render_vault_control_cockpit.js
+    check:
+      - node
+      - z.automazioni/render_vault_control_cockpit.js
+      - --check
   worldbuilding_cockpit:
     purpose: Genera il contratto runtime del cockpit worldbuilding senza scrivere root generate.
     sources:

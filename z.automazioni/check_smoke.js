@@ -66,6 +66,13 @@ for (const marker of ["renderDmDashboardNow", "renderDmDashboardReadiness", "ren
     }
 }
 
+const vaultControl = readTextRel(ROOT, "Risorse/Controllo Vault.md");
+for (const marker of ["renderVaultControlNow", "renderVaultControlReadiness", "renderVaultControlQueues", "renderVaultControlCoherence", "renderVaultControlSurfaceLinks"]) {
+    if (!vaultControl.includes(marker)) {
+        errors.push(`Smoke statico: Controllo Vault non contiene ${marker}`);
+    }
+}
+
 const atlas = readTextRel(ROOT, "Hub/Atlante del Mondo.md");
 for (const marker of ["renderAtlasNow", "renderAtlasReadiness", "renderAtlasQueues", "renderAtlasSurfaceLinks"]) {
     if (!atlas.includes(marker)) {
