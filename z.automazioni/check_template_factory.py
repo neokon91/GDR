@@ -40,6 +40,7 @@ REQUIRED_MODULES = {
     "plugin_bindings",
     "post_session_cockpit",
     "preparation_cockpit",
+    "quality_report_cockpit",
     "table_materials_cockpit",
     "template_blueprints",
     "sections",

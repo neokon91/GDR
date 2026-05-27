@@ -1,0 +1,173 @@
+id: quality_report_cockpit
+purpose: Contratto operativo per trasformare Quality Report in cockpit compatto di qualita giocabile, pubblicazione e screenshot.
+version: 0.1.0
+dashboard:
+  page: Risorse/Quality Report.md
+  workflow: quality_report
+  required_runtime_views:
+    - renderQualityReportNow
+    - renderQualityReportCoverage
+    - renderQualityReportOperationalGaps
+    - renderQualityReportPublicSafety
+    - renderQualityReportShowcase
+    - renderQualityReportSurfaceLinks
+  required_visible_sections:
+    - Priorita
+    - Copertura
+    - Buchi Operativi
+    - Pubblicazione Giocatori
+    - Screenshot Ready
+    - Superfici
+    - Azioni
+panels:
+  now:
+    runtime_view: renderQualityReportNow
+    promise: Dire quale problema di qualita blocca prima giocabilita, pubblico o screenshot.
+    answers:
+      - rischio pubblico
+      - buco operativo
+      - bozza da smistare
+      - materiale screenshot-ready
+  coverage:
+    runtime_view: renderQualityReportCoverage
+    promise: Misurare se il vault ha massa giocabile sufficiente senza leggere liste lunghe.
+    answers:
+      - mondi
+      - luoghi
+      - png
+      - missioni
+      - sessioni
+      - mappe
+      - pubblico
+      - pressioni
+  operational:
+    runtime_view: renderQualityReportOperationalGaps
+    promise: Mostrare buchi che rendono una nota meno usabile al tavolo.
+    answers:
+      - png senza scena
+      - luoghi senza mappa o parent
+      - missioni senza conseguenze
+      - sessioni senza obiettivo
+      - mappe non collegate
+      - fazioni senza pressione
+  public:
+    runtime_view: renderQualityReportPublicSafety
+    promise: Proteggere la vista giocatori da campi DM e materiale pubblico incompleto.
+    answers:
+      - rischi anti-segreti
+      - testo player-safe mancante
+  showcase:
+    runtime_view: renderQualityReportShowcase
+    promise: Trovare materiale pronto da mostrare in release, screenshot o demo.
+    answers:
+      - mappe pubbliche
+      - dispense pronte
+      - campagne attive
+  surfaces:
+    runtime_view: renderQualityReportSurfaceLinks
+    promise: Mandare ogni problema alla superficie corretta senza allungare il report.
+    answers:
+      - controllo vault
+      - vista giocatori
+      - atlante
+      - worldbuilder
+      - smistamento bozze
+queues:
+  - id: operational_gaps
+    label: Buchi Operativi
+    table_columns:
+      - Nota
+      - Problema
+      - Stato
+      - Azione
+  - id: public_risks
+    label: Rischi Pubblici
+    table_columns:
+      - Nota
+      - Rischio
+      - Azione
+  - id: public_missing_text
+    label: Testo Player-Safe Mancante
+    table_columns:
+      - Nota
+      - Problema
+      - Azione
+  - id: screenshot_ready
+    label: Materiale Screenshot-Ready
+    table_columns:
+      - Materiale
+      - Tipo
+      - Uso
+      - Pubblico
+      - Stato
+surfaces:
+  - id: vault_control
+    label: Controllo vault
+    plugin: Dataview
+    target: Risorse/Controllo Vault.md
+    badge: Ripara
+    role: correggere blocchi
+    action: Apri quando il report mostra un problema da trasformare in coda operativa.
+    why: Quality Report misura il quadro; Controllo Vault decide la riparazione concreta.
+  - id: player_view
+    label: Vista giocatori
+    plugin: Dataview
+    target: Hub/Vista Giocatori.md
+    badge: Player
+    role: verificare condivisione
+    action: Apri prima di pubblicare mappe, dispense, recap o note con pubblico true.
+    why: La qualita di release dipende dal non esporre campi DM al party.
+  - id: atlas
+    label: Atlante del mondo
+    plugin: Maps
+    target: Hub/Atlante del Mondo.md
+    badge: Mappe
+    role: correggere copertura spaziale
+    action: Apri quando luoghi, mappe o coordinate sono il buco dominante.
+    why: La geografia deve essere usabile in scena e non solo descritta.
+  - id: worldbuilder
+    label: Worldbuilder
+    plugin: Dataview
+    target: Hub/Worldbuilder Dashboard.md
+    badge: Mondo
+    role: completare fondamenta
+    action: Apri quando mancano collegamenti, pressioni, PNG o luoghi giocabili.
+    why: Le note incomplete vanno riportate al ciclo di worldbuilding operativo.
+  - id: living_world
+    label: Motore Mondo Vivo
+    plugin: Dataview
+    target: Hub/Motore Mondo Vivo.md
+    badge: Pressioni
+    role: controllare missioni e conseguenze
+    action: Apri quando missioni, pressioni o conseguenze rendono debole il report.
+    why: La qualita giocabile nasce da obiettivi, scelte e conseguenze leggibili.
+  - id: generated_drafts
+    label: Smistamento bozze
+    plugin: Dataview
+    target: Risorse/Smistamento Bozze Generate.md
+    badge: Inbox
+    role: ridurre rumore generato
+    action: Apri quando il problema deriva da materiale generato non deciso.
+    why: Le bozze non smistate abbassano segnale e fiducia nel vault.
+  - id: table_materials
+    label: Materiali al tavolo
+    plugin: Dataview
+    target: Risorse/Materiali Al Tavolo.md
+    badge: Kit
+    role: verificare materiale pronto
+    action: Apri quando mappe, dispense o incontri sembrano pronti ma non collegati alla sessione.
+    why: Il report non deve diventare inventario; il materiale si controlla nel cockpit dedicato.
+  - id: maps_base
+    label: Atlante mappe
+    plugin: Bases
+    target: z.bases/Atlante Mappe.base
+    generated_release: true
+    badge: Base
+    role: filtrare asset visuali
+    action: Apri quando molte mappe devono essere corrette o rese pubbliche.
+    why: La Base generata accelera correzioni senza diventare sorgente tracciato.
+contracts:
+  dashboard_uses_runtime_views: true
+  surfaces_must_resolve_to_source_or_generated_release_target: true
+  generated_targets_must_stay_release_only: true
+  quality_report_measures_general_quality_not_repair_queue: true

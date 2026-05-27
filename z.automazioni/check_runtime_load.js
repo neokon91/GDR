@@ -73,6 +73,12 @@ const REQUIRED_EXPORTS = [
     "renderPreparationNow",
     "renderPreparationReadiness",
     "renderPreparationSurfaceLinks",
+    "renderQualityReportCoverage",
+    "renderQualityReportNow",
+    "renderQualityReportOperationalGaps",
+    "renderQualityReportPublicSafety",
+    "renderQualityReportShowcase",
+    "renderQualityReportSurfaceLinks",
     "renderTableMaterialsAssetQueues",
     "renderTableMaterialsDndPipeline",
     "renderTableMaterialsNow",
@@ -119,6 +125,7 @@ const REQUIRED_MODULES = [
     "z.engine/session_maps.js",
     "z.engine/session_player.js",
     "z.engine/session_preparation.js",
+    "z.engine/session_quality_report.js",
     "z.engine/session_table_materials.js",
     "z.engine/session_post_session.js",
     "z.engine/session_runtime.js",
@@ -619,6 +626,30 @@ async function main() {
             await views.renderVaultControlSurfaceLinks(dv);
             if (!rendered.some(node => String(node.innerHTML).includes("Quality report"))) {
                 errors.push("renderVaultControlSurfaceLinks: output senza superfici manutenzione");
+            }
+            views.renderQualityReportNow(dv);
+            if (!rendered.some(node => String(node.innerHTML).includes("Qualita prima"))) {
+                errors.push("renderQualityReportNow: output senza priorita qualita");
+            }
+            views.renderQualityReportCoverage(dv);
+            if (!rendered.some(node => String(node.innerHTML).includes("Mondi"))) {
+                errors.push("renderQualityReportCoverage: output senza copertura mondi");
+            }
+            await views.renderQualityReportOperationalGaps(dv);
+            if (!rendered.some(node => node.tag === "table" && String(node.text).includes("Sessione Live"))) {
+                errors.push("renderQualityReportOperationalGaps: output senza buchi operativi");
+            }
+            await views.renderQualityReportPublicSafety(dv);
+            if (!rendered.some(node => node.tag === "table" && String(node.text).includes("pubblico: true con campi segreti"))) {
+                errors.push("renderQualityReportPublicSafety: output senza rischi pubblici");
+            }
+            await views.renderQualityReportShowcase(dv);
+            if (!rendered.some(node => node.tag === "table" && String(node.text).includes("Mappa Pubblica"))) {
+                errors.push("renderQualityReportShowcase: output senza materiale screenshot-ready");
+            }
+            await views.renderQualityReportSurfaceLinks(dv);
+            if (!rendered.some(node => String(node.innerHTML).includes("Controllo vault"))) {
+                errors.push("renderQualityReportSurfaceLinks: output senza superfici quality report");
             }
             views.renderPreparationNow(dv);
             if (!rendered.some(node => String(node.innerHTML).includes("Prepara prima"))) {

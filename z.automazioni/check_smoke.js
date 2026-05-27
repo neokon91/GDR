@@ -100,6 +100,7 @@ for (const [label, relPath] of [
     ["Campagna da Ambientazione", "Hub/Campagna da Ambientazione.md"],
     ["Preparazione Sessione", "Risorse/Preparazione Sessione.md"],
     ["Materiali Al Tavolo", "Risorse/Materiali Al Tavolo.md"],
+    ["Quality Report", "Risorse/Quality Report.md"],
     ["Durante il Gioco", "Hub/Durante il Gioco.md"],
     ["Cosa Succede Fuori Scena", "Hub/Cosa Succede Fuori Scena.md"],
     ["Post Sessione Guidato", "Risorse/Post Sessione Guidato.md"],
@@ -135,6 +136,13 @@ const tableMaterials = readTextRel(ROOT, "Risorse/Materiali Al Tavolo.md");
 for (const marker of ["renderTableMaterialsNow", "renderTableMaterialsReadiness", "renderTableMaterialsSessionQueues", "renderTableMaterialsAssetQueues", "renderTableMaterialsDndPipeline", "renderTableMaterialsSurfaceLinks"]) {
     if (!tableMaterials.includes(marker)) {
         errors.push(`Smoke statico: Materiali Al Tavolo non contiene ${marker}`);
+    }
+}
+
+const qualityReport = readTextRel(ROOT, "Risorse/Quality Report.md");
+for (const marker of ["renderQualityReportNow", "renderQualityReportCoverage", "renderQualityReportOperationalGaps", "renderQualityReportPublicSafety", "renderQualityReportShowcase", "renderQualityReportSurfaceLinks"]) {
+    if (!qualityReport.includes(marker)) {
+        errors.push(`Smoke statico: Quality Report non contiene ${marker}`);
     }
 }
 

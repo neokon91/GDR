@@ -225,6 +225,24 @@ steps:
       - node
       - z.automazioni/render_vault_control_cockpit.js
       - --check
+  quality_report_cockpit:
+    purpose: Genera il contratto runtime del cockpit Quality Report senza scrivere root generate.
+    sources:
+      - Dev/TemplateFactory/modules/quality_report_cockpit.yaml
+      - Dev/TemplateFactory/modules/bases_views.yaml
+      - Dev/TemplateFactory/modules/frontmatter_profiles.yaml
+      - Risorse/Quality Report.md
+      - z.engine/session_quality_report.js
+      - z.engine/session_views.js
+    outputs:
+      - z.automazioni/data/runtime/quality_report_cockpit.json
+    render:
+      - node
+      - z.automazioni/render_quality_report_cockpit.js
+    check:
+      - node
+      - z.automazioni/render_quality_report_cockpit.js
+      - --check
   worldbuilding_cockpit:
     purpose: Genera il contratto runtime del cockpit worldbuilding senza scrivere root generate.
     sources:

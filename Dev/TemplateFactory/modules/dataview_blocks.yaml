@@ -412,6 +412,96 @@ blocks:
       | --- | --- |
       | Quality report | vedere problemi ampi |
       | Smistamento bozze | decidere materiale generato |
+  quality_report_now:
+    type: dataviewjs
+    runtime_view: renderQualityReportNow
+    use_for:
+      - dashboard
+      - quality report
+      - qualita
+      - cockpit
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      gdr.renderQualityReportNow(dv);
+    fallback: |-
+      | Priorita | Azione |
+      | --- | --- |
+      | Qualita prima | correggi sicurezza pubblica, buco operativo o bozza |
+  quality_report_coverage:
+    type: dataviewjs
+    runtime_view: renderQualityReportCoverage
+    use_for:
+      - dashboard
+      - quality report
+      - copertura
+      - cockpit
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      gdr.renderQualityReportCoverage(dv);
+    fallback: |-
+      | Area | Conteggio |
+      | --- | --- |
+      | Mondi |  |
+      | Missioni |  |
+      | Pubblico |  |
+  quality_report_operational_gaps:
+    type: dataviewjs
+    runtime_view: renderQualityReportOperationalGaps
+    use_for:
+      - dashboard
+      - quality report
+      - audit
+      - cockpit
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      await gdr.renderQualityReportOperationalGaps(dv);
+    fallback: |-
+      | Nota | Problema |
+      | --- | --- |
+  quality_report_public_safety:
+    type: dataviewjs
+    runtime_view: renderQualityReportPublicSafety
+    use_for:
+      - dashboard
+      - quality report
+      - player-safe
+      - cockpit
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      await gdr.renderQualityReportPublicSafety(dv);
+    fallback: |-
+      | Nota | Rischio |
+      | --- | --- |
+  quality_report_showcase:
+    type: dataviewjs
+    runtime_view: renderQualityReportShowcase
+    use_for:
+      - dashboard
+      - quality report
+      - screenshot
+      - cockpit
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      await gdr.renderQualityReportShowcase(dv);
+    fallback: |-
+      | Materiale | Uso |
+      | --- | --- |
+  quality_report_surface_links:
+    type: dataviewjs
+    runtime_view: renderQualityReportSurfaceLinks
+    use_for:
+      - dashboard
+      - quality report
+      - superfici
+      - cockpit
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      await gdr.renderQualityReportSurfaceLinks(dv);
+    fallback: |-
+      | Superficie | Uso |
+      | --- | --- |
+      | Controllo vault | correggere blocchi |
+      | Vista giocatori | verificare condivisione |
   worldbuilder_now:
     type: dataviewjs
     runtime_view: renderWorldbuilderNow

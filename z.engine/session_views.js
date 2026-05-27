@@ -283,6 +283,7 @@
   const campaignBuilderViews = (await eval(await app.vault.adapter.read("z.engine/session_campaign_builder.js")))(sharedViewContext);
   const loreViews = (await eval(await app.vault.adapter.read("z.engine/session_lore.js")))(sharedViewContext);
   const loreReviewViews = (await eval(await app.vault.adapter.read("z.engine/session_lore_review.js")))(sharedViewContext);
+  const qualityReportViews = (await eval(await app.vault.adapter.read("z.engine/session_quality_report.js")))(sharedViewContext);
   const vaultControlViews = (await eval(await app.vault.adapter.read("z.engine/session_vault_control.js")))(sharedViewContext);
   const { continuityIssues } = continuityViews;
   const sessionViews = (await eval(await app.vault.adapter.read("z.engine/session_runtime.js")))({
@@ -1087,6 +1088,12 @@
     renderPlayerView: playerViews.renderPlayerView,
     renderPublicSafety: playerViews.renderPublicSafety,
     renderPublicStats: playerViews.renderPublicStats,
+    renderQualityReportCoverage: qualityReportViews.renderQualityReportCoverage,
+    renderQualityReportNow: qualityReportViews.renderQualityReportNow,
+    renderQualityReportOperationalGaps: qualityReportViews.renderQualityReportOperationalGaps,
+    renderQualityReportPublicSafety: qualityReportViews.renderQualityReportPublicSafety,
+    renderQualityReportShowcase: qualityReportViews.renderQualityReportShowcase,
+    renderQualityReportSurfaceLinks: qualityReportViews.renderQualityReportSurfaceLinks,
     renderPreparationAnchorQueues: preparationViews.renderPreparationAnchorQueues,
     renderPreparationMaterialQueues: preparationViews.renderPreparationMaterialQueues,
     renderPreparationNow: preparationViews.renderPreparationNow,
