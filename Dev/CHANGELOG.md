@@ -4,6 +4,7 @@
 
 ### Aggiunto
 
+- `Risorse/Smistamento Bozze Generate.md` trasformata in cockpit compatto con runtime `session_generated_drafts.js` e contratto `generated_drafts_cockpit.yaml`.
 - `Risorse/Quality Report.md` trasformata in cockpit compatto con runtime `session_quality_report.js` e contratto `quality_report_cockpit.yaml`.
 - `Risorse/Materiali Al Tavolo.md` trasformata in cockpit compatto con runtime `session_table_materials.js` e contratto `table_materials_cockpit.yaml`.
 - `Risorse/Modello Entità.md` rimossa come nota lunga: il catalogo categorie ora vive in `entity_model.yaml`, verificato da `check_entity_model.js`.

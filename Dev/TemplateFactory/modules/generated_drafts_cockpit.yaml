@@ -1,0 +1,162 @@
+id: generated_drafts_cockpit
+purpose: Contratto operativo per trasformare Smistamento Bozze Generate in cockpit compatto del ciclo generatore -> aggancio -> smistamento -> canonizzazione.
+version: 0.1.0
+dashboard:
+  page: Risorse/Smistamento Bozze Generate.md
+  workflow: smistamento_bozze
+  required_runtime_views:
+    - renderGeneratedDraftsNow
+    - renderGeneratedDraftsReadiness
+    - renderGeneratedDraftsQueues
+    - renderGeneratedDraftsDestinations
+    - renderGeneratedDraftsResolved
+    - renderGeneratedDraftsSurfaceLinks
+  required_visible_sections:
+    - Prossima Bozza Da Decidere
+    - Stato Bozze
+    - Code Di Smistamento
+    - Destinazioni
+    - Smistate E Canonizzate
+    - Superfici
+    - Azioni
+panels:
+  now:
+    runtime_view: renderGeneratedDraftsNow
+    promise: Dire quale bozza decidere prima e se puo essere smistata.
+    answers:
+      - prossima bozza
+      - pronte da collegare
+      - senza aggancio
+      - smistate
+  readiness:
+    runtime_view: renderGeneratedDraftsReadiness
+    promise: Misurare quanto rumore generato resta nel vault.
+    answers:
+      - bozze aperte
+      - pronte
+      - senza aggancio
+      - smistate
+      - canonizzate
+  queues:
+    runtime_view: renderGeneratedDraftsQueues
+    promise: Separare coda completa, bozze pronte e bozze senza aggancio.
+    answers:
+      - coda di lavoro
+      - pronte da collegare
+      - senza aggancio
+  destinations:
+    runtime_view: renderGeneratedDraftsDestinations
+    promise: Suggerire la cartella di destinazione senza spostare automaticamente niente.
+    answers:
+      - destinazione consigliata
+      - azione ammessa
+      - aggancio mancante
+  resolved:
+    runtime_view: renderGeneratedDraftsResolved
+    promise: Mostrare cosa e uscito da Inbox/Generati e cosa e diventato canone.
+    answers:
+      - smistate
+      - canonizzate
+      - origine bozza
+  surfaces:
+    runtime_view: renderGeneratedDraftsSurfaceLinks
+    promise: Mandare la bozza alla superficie giusta dopo la decisione.
+    answers:
+      - controllo vault
+      - quality report
+      - worldbuilder
+      - materiali al tavolo
+queues:
+  - id: draft_queue
+    label: Coda Di Lavoro
+    table_columns:
+      - Bozza
+      - Categoria
+      - Tipo
+      - Generatore
+      - Aggancio
+      - Creata
+  - id: ready_to_link
+    label: Pronte Da Collegare
+    table_columns:
+      - Bozza
+      - Aggancio
+      - Azione
+  - id: unanchored
+    label: Senza Aggancio
+    table_columns:
+      - Bozza
+      - Categoria
+      - Tipo
+      - Azione
+  - id: destinations
+    label: Destinazione Consigliata
+    table_columns:
+      - Bozza
+      - Categoria
+      - Tipo
+      - Destinazione
+      - Azione
+  - id: resolved
+    label: Smistate Dal Generatore
+    table_columns:
+      - Nota
+      - Categoria
+      - Stato
+      - Canonico
+      - Origine
+surfaces:
+  - id: vault_control
+    label: Controllo vault
+    plugin: Dataview
+    target: Risorse/Controllo Vault.md
+    badge: Ripara
+    role: verificare residui
+    action: Apri dopo lo smistamento per controllare che non restino bozze o incoerenze.
+    why: Le bozze generate devono sparire dalla coda o diventare materiale utile.
+  - id: quality_report
+    label: Quality report
+    plugin: Dataview
+    target: Risorse/Quality Report.md
+    badge: Qualita
+    role: misurare rumore
+    action: Apri quando vuoi vedere se il materiale generato abbassa segnale e fiducia.
+    why: Il report misura l'effetto delle bozze sulla qualita generale del vault.
+  - id: worldbuilder
+    label: Worldbuilder
+    plugin: Dataview
+    target: Hub/Worldbuilder Dashboard.md
+    badge: Mondo
+    role: collegare al mondo
+    action: Apri quando la bozza deve diventare luogo, fazione, PNG, oggetto o pressione.
+    why: Una bozza utile deve entrare nel mondo vivo, non restare appunto isolato.
+  - id: table_materials
+    label: Materiali al tavolo
+    plugin: Dataview
+    target: Risorse/Materiali Al Tavolo.md
+    badge: Kit
+    role: usare in sessione
+    action: Apri quando una bozza diventa handout, incontro, oggetto o mappa da usare.
+    why: Il materiale generato vale solo se arriva a una scena o a una scelta.
+  - id: help
+    label: Aiuto
+    plugin: Dataview
+    target: Risorse/Se Qualcosa Non Funziona.md
+    badge: Fallback
+    role: recuperare manualmente
+    action: Apri se il generatore o i pulsanti di smistamento non rispondono.
+    why: Il flusso deve restare recuperabile anche senza automazioni.
+  - id: worldbuilding_base
+    label: Codex tabellare
+    plugin: Bases
+    target: z.bases/Worldbuilding.base
+    generated_release: true
+    badge: Base
+    role: correggere molte note
+    action: Apri quando molte bozze smistate devono ricevere stato, collegamenti o campi.
+    why: La Base generata accelera manutenzione senza diventare sorgente tracciato.
+contracts:
+  dashboard_uses_runtime_views: true
+  surfaces_must_resolve_to_source_or_generated_release_target: true
+  generated_targets_must_stay_release_only: true
+  generated_drafts_never_become_canon_without_anchor: true

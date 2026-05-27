@@ -243,6 +243,24 @@ steps:
       - node
       - z.automazioni/render_quality_report_cockpit.js
       - --check
+  generated_drafts_cockpit:
+    purpose: Genera il contratto runtime del cockpit Smistamento Bozze senza scrivere root generate.
+    sources:
+      - Dev/TemplateFactory/modules/generated_drafts_cockpit.yaml
+      - Dev/TemplateFactory/modules/bases_views.yaml
+      - Dev/TemplateFactory/modules/frontmatter_profiles.yaml
+      - Risorse/Smistamento Bozze Generate.md
+      - z.engine/session_generated_drafts.js
+      - z.engine/session_views.js
+    outputs:
+      - z.automazioni/data/runtime/generated_drafts_cockpit.json
+    render:
+      - node
+      - z.automazioni/render_generated_drafts_cockpit.js
+    check:
+      - node
+      - z.automazioni/render_generated_drafts_cockpit.js
+      - --check
   worldbuilding_cockpit:
     purpose: Genera il contratto runtime del cockpit worldbuilding senza scrivere root generate.
     sources:

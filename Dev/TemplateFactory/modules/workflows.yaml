@@ -847,6 +847,7 @@ workflows:
       - Templater
       - Fantasy Content Generator
   smistamento_bozze:
+    audience: user
     user_goal: Trasformare bozze generate in note utili, canoniche o archiviate.
     entry_points:
       - Risorse/Smistamento Bozze Generate.md

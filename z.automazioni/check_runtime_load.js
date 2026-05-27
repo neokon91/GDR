@@ -33,6 +33,12 @@ const REQUIRED_EXPORTS = [
     "renderEconomyQueues",
     "renderEconomyReadiness",
     "renderEconomySurfaceLinks",
+    "renderGeneratedDraftsDestinations",
+    "renderGeneratedDraftsNow",
+    "renderGeneratedDraftsQueues",
+    "renderGeneratedDraftsReadiness",
+    "renderGeneratedDraftsResolved",
+    "renderGeneratedDraftsSurfaceLinks",
     "renderGeopoliticalNow",
     "renderGeopoliticalPressureQueues",
     "renderGeopoliticalQueues",
@@ -121,6 +127,7 @@ const REQUIRED_MODULES = [
     "z.engine/session_dnd.js",
     "z.engine/session_dm_dashboard.js",
     "z.engine/session_economy.js",
+    "z.engine/session_generated_drafts.js",
     "z.engine/session_geopolitical.js",
     "z.engine/session_maps.js",
     "z.engine/session_player.js",
@@ -478,6 +485,31 @@ async function main() {
                     prossima_mossa: "Aggiorna il Consiglio."
                 },
                 {
+                    file: { path: "Inbox/Generati/Taverna Generata.md", name: "Taverna Generata", link: "Inbox/Generati/Taverna Generata.md", folder: "Inbox/Generati", mtime: 26, ctime: 26 },
+                    plugin: "fantasy-content-generator",
+                    categoria: "luogo",
+                    tipo: "taverna",
+                    stato: "bozza",
+                    canonico: false,
+                    generatore: "Fantasy Content Generator",
+                    creato: "2026-05-27",
+                    mondo: "Mondi/Mondo Demo.md",
+                    luogo: "Mondi/Luoghi/Luogo Pubblico.md"
+                },
+                {
+                    file: { path: "Mondi/Luoghi/Luogo Generato.md", name: "Luogo Generato", link: "Mondi/Luoghi/Luogo Generato.md", folder: "Mondi/Luoghi", mtime: 27 },
+                    plugin: "fantasy-content-generator",
+                    categoria: "luogo",
+                    tipo: "taverna",
+                    stato: "pronto",
+                    canonico: true,
+                    stato_canonico: "canonico",
+                    origine_bozza: "Inbox/Generati/Taverna Generata.md",
+                    smistato_il: "2026-05-27",
+                    canonizzato_il: "2026-05-27",
+                    mondo: "Mondi/Mondo Demo.md"
+                },
+                {
                     file: { path: "Risorse/Mappe/Mappa Pubblica.md", name: "Mappa Pubblica", link: "Risorse/Mappe/Mappa Pubblica.md", mtime: 4 },
                     categoria: "mappa",
                     stato: "pronto",
@@ -531,6 +563,7 @@ async function main() {
                 if (query.includes('"Mondi/Storia"') || query.includes('"Mondi/Timeline"')) return demoPages.filter(page => page.file.path.startsWith("Mondi/Storia/") || page.file.path.startsWith("Mondi/Timeline/"));
                 if (query.includes('"Mondi/Dispense"')) return demoPages.filter(page => page.file.path.startsWith("Mondi/Dispense/"));
                 if (query.includes('"Risorse/Mappe"')) return demoPages.filter(page => page.file.path.startsWith("Risorse/Mappe/"));
+                if (query.includes('"Inbox/Generati"')) return demoPages.filter(page => page.file.path.startsWith("Inbox/Generati/"));
                 if (query.trim() === '"Campagne"') return demoPages.filter(page => page.file.path.startsWith("Campagne/"));
                 if (query.includes('"Mondi"') || query.includes('"Campagne"') || query.includes('"Inbox"')) {
                     return demoPages.filter(page => page.file.path.startsWith("Mondi/") || page.file.path.startsWith("Campagne/") || page.file.path.startsWith("Inbox/"));
@@ -650,6 +683,30 @@ async function main() {
             await views.renderQualityReportSurfaceLinks(dv);
             if (!rendered.some(node => String(node.innerHTML).includes("Controllo vault"))) {
                 errors.push("renderQualityReportSurfaceLinks: output senza superfici quality report");
+            }
+            views.renderGeneratedDraftsNow(dv);
+            if (!rendered.some(node => String(node.innerHTML).includes("Bozza prima"))) {
+                errors.push("renderGeneratedDraftsNow: output senza prossima bozza");
+            }
+            views.renderGeneratedDraftsReadiness(dv);
+            if (!rendered.some(node => String(node.innerHTML).includes("Senza aggancio"))) {
+                errors.push("renderGeneratedDraftsReadiness: output senza metriche bozze");
+            }
+            await views.renderGeneratedDraftsQueues(dv);
+            if (!rendered.some(node => node.tag === "table" && String(node.text).includes("Taverna Generata"))) {
+                errors.push("renderGeneratedDraftsQueues: output senza bozze generate");
+            }
+            await views.renderGeneratedDraftsDestinations(dv);
+            if (!rendered.some(node => node.tag === "table" && String(node.text).includes("Mondi/Luoghi"))) {
+                errors.push("renderGeneratedDraftsDestinations: output senza destinazione suggerita");
+            }
+            await views.renderGeneratedDraftsResolved(dv);
+            if (!rendered.some(node => node.tag === "table" && String(node.text).includes("Luogo Generato"))) {
+                errors.push("renderGeneratedDraftsResolved: output senza bozze smistate");
+            }
+            await views.renderGeneratedDraftsSurfaceLinks(dv);
+            if (!rendered.some(node => String(node.innerHTML).includes("Controllo vault"))) {
+                errors.push("renderGeneratedDraftsSurfaceLinks: output senza superfici smistamento");
             }
             views.renderPreparationNow(dv);
             if (!rendered.some(node => String(node.innerHTML).includes("Prepara prima"))) {

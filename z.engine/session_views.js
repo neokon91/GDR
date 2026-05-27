@@ -279,6 +279,7 @@
   });
   const dmDashboardViews = (await eval(await app.vault.adapter.read("z.engine/session_dm_dashboard.js")))(sharedViewContext);
   const economyViews = (await eval(await app.vault.adapter.read("z.engine/session_economy.js")))(sharedViewContext);
+  const generatedDraftsViews = (await eval(await app.vault.adapter.read("z.engine/session_generated_drafts.js")))(sharedViewContext);
   const geopoliticalViews = (await eval(await app.vault.adapter.read("z.engine/session_geopolitical.js")))(sharedViewContext);
   const campaignBuilderViews = (await eval(await app.vault.adapter.read("z.engine/session_campaign_builder.js")))(sharedViewContext);
   const loreViews = (await eval(await app.vault.adapter.read("z.engine/session_lore.js")))(sharedViewContext);
@@ -1113,6 +1114,12 @@
     renderDmDashboardQueues: dmDashboardViews.renderDmDashboardQueues,
     renderDmDashboardReadiness: dmDashboardViews.renderDmDashboardReadiness,
     renderDmDashboardSurfaceLinks: dmDashboardViews.renderDmDashboardSurfaceLinks,
+    renderGeneratedDraftsDestinations: generatedDraftsViews.renderGeneratedDraftsDestinations,
+    renderGeneratedDraftsNow: generatedDraftsViews.renderGeneratedDraftsNow,
+    renderGeneratedDraftsQueues: generatedDraftsViews.renderGeneratedDraftsQueues,
+    renderGeneratedDraftsReadiness: generatedDraftsViews.renderGeneratedDraftsReadiness,
+    renderGeneratedDraftsResolved: generatedDraftsViews.renderGeneratedDraftsResolved,
+    renderGeneratedDraftsSurfaceLinks: generatedDraftsViews.renderGeneratedDraftsSurfaceLinks,
     renderSessionAnchorCards: sessionViews.renderSessionAnchorCards,
     renderSessionLiveCards: sessionViews.renderSessionLiveCards,
     renderSessionMaterialCards: sessionViews.renderSessionMaterialCards,

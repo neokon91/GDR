@@ -101,6 +101,7 @@ for (const [label, relPath] of [
     ["Preparazione Sessione", "Risorse/Preparazione Sessione.md"],
     ["Materiali Al Tavolo", "Risorse/Materiali Al Tavolo.md"],
     ["Quality Report", "Risorse/Quality Report.md"],
+    ["Smistamento Bozze Generate", "Risorse/Smistamento Bozze Generate.md"],
     ["Durante il Gioco", "Hub/Durante il Gioco.md"],
     ["Cosa Succede Fuori Scena", "Hub/Cosa Succede Fuori Scena.md"],
     ["Post Sessione Guidato", "Risorse/Post Sessione Guidato.md"],
@@ -143,6 +144,13 @@ const qualityReport = readTextRel(ROOT, "Risorse/Quality Report.md");
 for (const marker of ["renderQualityReportNow", "renderQualityReportCoverage", "renderQualityReportOperationalGaps", "renderQualityReportPublicSafety", "renderQualityReportShowcase", "renderQualityReportSurfaceLinks"]) {
     if (!qualityReport.includes(marker)) {
         errors.push(`Smoke statico: Quality Report non contiene ${marker}`);
+    }
+}
+
+const generatedDrafts = readTextRel(ROOT, "Risorse/Smistamento Bozze Generate.md");
+for (const marker of ["renderGeneratedDraftsNow", "renderGeneratedDraftsReadiness", "renderGeneratedDraftsQueues", "renderGeneratedDraftsDestinations", "renderGeneratedDraftsResolved", "renderGeneratedDraftsSurfaceLinks"]) {
+    if (!generatedDrafts.includes(marker)) {
+        errors.push(`Smoke statico: Smistamento Bozze Generate non contiene ${marker}`);
     }
 }
 

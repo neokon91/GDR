@@ -502,6 +502,96 @@ blocks:
       | --- | --- |
       | Controllo vault | correggere blocchi |
       | Vista giocatori | verificare condivisione |
+  generated_drafts_now:
+    type: dataviewjs
+    runtime_view: renderGeneratedDraftsNow
+    use_for:
+      - dashboard
+      - bozze generate
+      - smistamento
+      - cockpit
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      gdr.renderGeneratedDraftsNow(dv);
+    fallback: |-
+      | Priorita | Azione |
+      | --- | --- |
+      | Bozza prima | collega, smista, canonizza o archivia |
+  generated_drafts_readiness:
+    type: dataviewjs
+    runtime_view: renderGeneratedDraftsReadiness
+    use_for:
+      - dashboard
+      - bozze generate
+      - stato
+      - cockpit
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      gdr.renderGeneratedDraftsReadiness(dv);
+    fallback: |-
+      | Area | Conteggio |
+      | --- | --- |
+      | Bozze |  |
+      | Pronte |  |
+      | Senza aggancio |  |
+  generated_drafts_queues:
+    type: dataviewjs
+    runtime_view: renderGeneratedDraftsQueues
+    use_for:
+      - dashboard
+      - bozze generate
+      - code
+      - cockpit
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      await gdr.renderGeneratedDraftsQueues(dv);
+    fallback: |-
+      | Bozza | Azione |
+      | --- | --- |
+  generated_drafts_destinations:
+    type: dataviewjs
+    runtime_view: renderGeneratedDraftsDestinations
+    use_for:
+      - dashboard
+      - bozze generate
+      - destinazioni
+      - cockpit
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      await gdr.renderGeneratedDraftsDestinations(dv);
+    fallback: |-
+      | Bozza | Destinazione |
+      | --- | --- |
+  generated_drafts_resolved:
+    type: dataviewjs
+    runtime_view: renderGeneratedDraftsResolved
+    use_for:
+      - dashboard
+      - bozze generate
+      - canonizzazione
+      - cockpit
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      await gdr.renderGeneratedDraftsResolved(dv);
+    fallback: |-
+      | Nota | Stato |
+      | --- | --- |
+  generated_drafts_surface_links:
+    type: dataviewjs
+    runtime_view: renderGeneratedDraftsSurfaceLinks
+    use_for:
+      - dashboard
+      - bozze generate
+      - superfici
+      - cockpit
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      await gdr.renderGeneratedDraftsSurfaceLinks(dv);
+    fallback: |-
+      | Superficie | Uso |
+      | --- | --- |
+      | Controllo vault | verificare residui |
+      | Worldbuilder | collegare al mondo |
   worldbuilder_now:
     type: dataviewjs
     runtime_view: renderWorldbuilderNow
