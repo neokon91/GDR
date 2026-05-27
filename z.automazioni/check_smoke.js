@@ -66,6 +66,13 @@ for (const marker of ["renderAtlasNow", "renderAtlasReadiness", "renderAtlasQueu
     }
 }
 
+const worldbuildingControl = readTextRel(ROOT, "Hub/Controllo Worldbuilding.md");
+for (const marker of ["renderWorldbuildingControlNow", "renderWorldbuildingControlReadiness", "renderWorldbuildingControlQueues", "renderWorldbuildingControlSurfaceLinks"]) {
+    if (!worldbuildingControl.includes(marker)) {
+        errors.push(`Smoke statico: Controllo Worldbuilding non contiene ${marker}`);
+    }
+}
+
 for (const [label, relPath] of [
     ["DM Dashboard", "Hub/1. DM Dashboard.md"],
     ["Worldbuilder Dashboard", "Hub/Worldbuilder Dashboard.md"],

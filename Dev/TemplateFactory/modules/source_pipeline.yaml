@@ -162,6 +162,24 @@ steps:
       - node
       - z.automazioni/render_atlas_cockpit.js
       - --check
+  worldbuilding_control_cockpit:
+    purpose: Genera il contratto runtime dell'audit Controllo Worldbuilding senza scrivere root generate.
+    sources:
+      - Dev/TemplateFactory/modules/worldbuilding_control_cockpit.yaml
+      - Dev/TemplateFactory/modules/bases_views.yaml
+      - Dev/TemplateFactory/modules/frontmatter_profiles.yaml
+      - Hub/Controllo Worldbuilding.md
+      - z.engine/session_worldbuilding_control.js
+      - z.engine/session_views.js
+    outputs:
+      - z.automazioni/data/runtime/worldbuilding_control_cockpit.json
+    render:
+      - node
+      - z.automazioni/render_worldbuilding_control_cockpit.js
+    check:
+      - node
+      - z.automazioni/render_worldbuilding_control_cockpit.js
+      - --check
   user_path:
     purpose: Verifica il percorso utente primario dichiarato in YAML.
     sources:

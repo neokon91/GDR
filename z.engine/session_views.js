@@ -246,6 +246,7 @@
   };
   const mapViews = (await eval(await app.vault.adapter.read("z.engine/session_maps.js")))(sharedViewContext);
   const atlasViews = (await eval(await app.vault.adapter.read("z.engine/session_atlas.js")))(sharedViewContext);
+  const worldbuildingControlViews = (await eval(await app.vault.adapter.read("z.engine/session_worldbuilding_control.js")))(sharedViewContext);
   const dndViews = (await eval(await app.vault.adapter.read("z.engine/session_dnd.js")))(sharedViewContext);
   const playerViews = (await eval(await app.vault.adapter.read("z.engine/session_player.js")))(sharedViewContext);
   const continuityViews = (await eval(await app.vault.adapter.read("z.engine/session_continuity.js")))(sharedViewContext);
@@ -1159,6 +1160,10 @@
     renderWorldbuilderQueues,
     renderWorldbuilderReadiness,
     renderWorldbuilderSurfaceLinks,
+    renderWorldbuildingControlNow: worldbuildingControlViews.renderWorldbuildingControlNow,
+    renderWorldbuildingControlQueues: worldbuildingControlViews.renderWorldbuildingControlQueues,
+    renderWorldbuildingControlReadiness: worldbuildingControlViews.renderWorldbuildingControlReadiness,
+    renderWorldbuildingControlSurfaceLinks: worldbuildingControlViews.renderWorldbuildingControlSurfaceLinks,
     renderPluginTroubleshooting,
     renderOnboardingReadiness,
     renderVaultReadiness,

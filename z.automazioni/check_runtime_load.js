@@ -33,6 +33,10 @@ const REQUIRED_EXPORTS = [
     "renderWorldbuilderQueues",
     "renderWorldbuilderReadiness",
     "renderWorldbuilderSurfaceLinks",
+    "renderWorldbuildingControlNow",
+    "renderWorldbuildingControlQueues",
+    "renderWorldbuildingControlReadiness",
+    "renderWorldbuildingControlSurfaceLinks",
     "renderWorldbuildingFreedom",
     "renderWorldbuildingStudio"
 ];
@@ -43,7 +47,8 @@ const REQUIRED_MODULES = [
     "z.engine/session_maps.js",
     "z.engine/session_player.js",
     "z.engine/session_runtime.js",
-    "z.engine/session_views.js"
+    "z.engine/session_views.js",
+    "z.engine/session_worldbuilding_control.js"
 ];
 
 global.app = {
@@ -297,6 +302,22 @@ async function main() {
             await views.renderWorldbuilderSurfaceLinks(dv);
             if (!rendered.some(node => String(node.innerHTML).includes("Codex editabile"))) {
                 errors.push("renderWorldbuilderSurfaceLinks: output senza superfici operative");
+            }
+            views.renderWorldbuildingControlNow(dv);
+            if (!rendered.some(node => String(node.innerHTML).includes("Ripara prima"))) {
+                errors.push("renderWorldbuildingControlNow: output senza priorita di riparazione");
+            }
+            views.renderWorldbuildingControlReadiness(dv);
+            if (!rendered.some(node => String(node.innerHTML).includes("Profondita"))) {
+                errors.push("renderWorldbuildingControlReadiness: output senza metriche di profondita");
+            }
+            await views.renderWorldbuildingControlQueues(dv);
+            if (!rendered.some(node => node.tag === "table" && String(node.text).includes("mondo senza principi"))) {
+                errors.push("renderWorldbuildingControlQueues: output senza coda di profondita");
+            }
+            await views.renderWorldbuildingControlSurfaceLinks(dv);
+            if (!rendered.some(node => String(node.innerHTML).includes("Controllo canone"))) {
+                errors.push("renderWorldbuildingControlSurfaceLinks: output senza superfici di controllo");
             }
             views.renderPlayerPortalStatus(dv);
             views.renderPublicSafety(dv);

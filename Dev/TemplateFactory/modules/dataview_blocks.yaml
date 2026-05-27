@@ -330,6 +330,73 @@ blocks:
       | --- | --- |
       | Codex editabile | correggere stati e collegamenti |
       | Atlante con marker | vedere coordinate e layer |
+  worldbuilding_control_now:
+    type: dataviewjs
+    runtime_view: renderWorldbuildingControlNow
+    use_for:
+      - dashboard
+      - worldbuilding
+      - controllo
+      - cockpit
+      - audit
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      gdr.renderWorldbuildingControlNow(dv, dv.current().mondo_attivo);
+    fallback: |-
+      | Priorita | Azione |
+      | --- | --- |
+      | Ripara prima | controlla profondita, connessioni, canone e player-safe |
+  worldbuilding_control_readiness:
+    type: dataviewjs
+    runtime_view: renderWorldbuildingControlReadiness
+    use_for:
+      - dashboard
+      - worldbuilding
+      - controllo
+      - cockpit
+      - audit
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      gdr.renderWorldbuildingControlReadiness(dv, dv.current().mondo_attivo);
+    fallback: |-
+      | Area | Conteggio |
+      | --- | --- |
+      | Profondita |  |
+      | Connessioni |  |
+      | Canone |  |
+      | Player-safe |  |
+  worldbuilding_control_queues:
+    type: dataviewjs
+    runtime_view: renderWorldbuildingControlQueues
+    use_for:
+      - dashboard
+      - worldbuilding
+      - controllo
+      - cockpit
+      - audit
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      await gdr.renderWorldbuildingControlQueues(dv, dv.current().mondo_attivo);
+    fallback: |-
+      | Nota | Riparazione |
+      | --- | --- |
+  worldbuilding_control_surface_links:
+    type: dataviewjs
+    runtime_view: renderWorldbuildingControlSurfaceLinks
+    use_for:
+      - dashboard
+      - worldbuilding
+      - controllo
+      - cockpit
+      - audit
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      await gdr.renderWorldbuildingControlSurfaceLinks(dv);
+    fallback: |-
+      | Superficie | Uso |
+      | --- | --- |
+      | Codex editabile | correggere campi e connessioni |
+      | Controllo canone | stabilizzare verita e rumor |
 contracts:
   dataviewjs_has_no_file_writes: true
   empty_state_required: true
