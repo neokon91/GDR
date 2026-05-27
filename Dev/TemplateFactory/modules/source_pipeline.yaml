@@ -143,6 +143,20 @@ steps:
       - python3
       - z.automazioni/render_resource_indexes.py
       - --check
+  resource_hub:
+    purpose: Genera il catalogo centrale Risorse/Risorse.md da YAML/Jinja.
+    sources:
+      - Dev/TemplateFactory/modules/resource_hub.yaml
+      - Dev/TemplateFactory/jinja/resource_hub.md.j2
+    outputs:
+      - Risorse/Risorse.md
+    render:
+      - python3
+      - z.automazioni/render_resource_hub.py
+    check:
+      - python3
+      - z.automazioni/render_resource_hub.py
+      - --check
   workflow_blocks:
     purpose: Renderizza blocchi azioni rapide dentro le pagine operative.
     sources:

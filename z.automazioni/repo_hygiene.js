@@ -34,6 +34,7 @@ const REQUIRED_NPM_SCRIPTS = ["check", "check:repo", "check:js", "check:smoke", 
 const FORBIDDEN_TRACKED_USER_ROOTS = ["Mondi", "Campagne", "Giocatori", "Inbox", "Import"];
 const FORBIDDEN_TRACKED_GENERATED_ROOTS = ["z.bacheche"];
 const FORBIDDEN_TRACKED_GENERATED_FILES = [
+    "Risorse/Risorse.md",
     "Risorse/Audio/Audio.md",
     "Risorse/Video/Video.md",
     "Risorse/Immagini/Immagini.md",

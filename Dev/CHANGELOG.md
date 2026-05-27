@@ -4,6 +4,7 @@
 
 ### Aggiunto
 
+- `resource_hub.yaml` genera il catalogo centrale `Risorse/Risorse.md`, lasciandolo fuori dal sorgente tracciato.
 - `resource_indexes.yaml` genera gli indici finali Audio, Video, Immagini e Dispense da YAML/Jinja, lasciandoli fuori dal sorgente tracciato.
 - `z.bacheche` e documentazione repo-dev consolidate: le bacheche sono generate da YAML/Jinja e `docs/` e stato rimosso come area separata.
 - Percorso utente nuovo blindato da `check:user-path`: 17 superfici primarie e avanzate verificano workflow user-facing, deck semplice e pulsanti Meta Bind configurati.
