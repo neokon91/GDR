@@ -914,6 +914,82 @@ blocks:
       | --- | --- |
       | Atlante | collegare luoghi e mappe |
       | Controllo canone | decidere verita e rumor |
+  lore_review_now:
+    type: dataviewjs
+    runtime_view: renderLoreReviewNow
+    use_for:
+      - dashboard
+      - lore
+      - revisione
+      - cockpit
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      gdr.renderLoreReviewNow(dv, dv.current().mondo_attivo);
+    fallback: |-
+      | Priorita | Azione |
+      | --- | --- |
+      | Rivedi prima | completa, collega o rendi giocabile il lore |
+  lore_review_readiness:
+    type: dataviewjs
+    runtime_view: renderLoreReviewReadiness
+    use_for:
+      - dashboard
+      - lore
+      - revisione
+      - cockpit
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      gdr.renderLoreReviewReadiness(dv, dv.current().mondo_attivo);
+    fallback: |-
+      | Area | Conteggio |
+      | --- | --- |
+      | Da completare |  |
+      | Non giocabile |  |
+      | Isolate |  |
+  lore_review_completion_queues:
+    type: dataviewjs
+    runtime_view: renderLoreReviewCompletionQueues
+    use_for:
+      - dashboard
+      - lore
+      - revisione
+      - cockpit
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      await gdr.renderLoreReviewCompletionQueues(dv, dv.current().mondo_attivo);
+    fallback: |-
+      | Nota | Serve ancora |
+      | --- | --- |
+  lore_review_table_queues:
+    type: dataviewjs
+    runtime_view: renderLoreReviewTableQueues
+    use_for:
+      - dashboard
+      - lore
+      - revisione
+      - cockpit
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      await gdr.renderLoreReviewTableQueues(dv, dv.current().mondo_attivo);
+    fallback: |-
+      | Nota | Problema |
+      | --- | --- |
+  lore_review_surface_links:
+    type: dataviewjs
+    runtime_view: renderLoreReviewSurfaceLinks
+    use_for:
+      - dashboard
+      - lore
+      - revisione
+      - cockpit
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      await gdr.renderLoreReviewSurfaceLinks(dv);
+    fallback: |-
+      | Superficie | Uso |
+      | --- | --- |
+      | Controllo canone | decidere verita |
+      | Motore Mondo Vivo | applicare effetti |
   living_world_now:
     type: dataviewjs
     runtime_view: renderLivingWorldNow

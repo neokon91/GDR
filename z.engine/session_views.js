@@ -274,6 +274,7 @@
   const geopoliticalViews = (await eval(await app.vault.adapter.read("z.engine/session_geopolitical.js")))(sharedViewContext);
   const campaignBuilderViews = (await eval(await app.vault.adapter.read("z.engine/session_campaign_builder.js")))(sharedViewContext);
   const loreViews = (await eval(await app.vault.adapter.read("z.engine/session_lore.js")))(sharedViewContext);
+  const loreReviewViews = (await eval(await app.vault.adapter.read("z.engine/session_lore_review.js")))(sharedViewContext);
   const vaultControlViews = (await eval(await app.vault.adapter.read("z.engine/session_vault_control.js")))(sharedViewContext);
   const { continuityIssues } = continuityViews;
   const sessionViews = (await eval(await app.vault.adapter.read("z.engine/session_runtime.js")))({
@@ -1057,6 +1058,11 @@
     renderLivingWorldSurfaceLinks: livingWorldViews.renderLivingWorldSurfaceLinks,
     renderLoreNow: loreViews.renderLoreNow,
     renderLoreReadiness: loreViews.renderLoreReadiness,
+    renderLoreReviewCompletionQueues: loreReviewViews.renderLoreReviewCompletionQueues,
+    renderLoreReviewNow: loreReviewViews.renderLoreReviewNow,
+    renderLoreReviewReadiness: loreReviewViews.renderLoreReviewReadiness,
+    renderLoreReviewSurfaceLinks: loreReviewViews.renderLoreReviewSurfaceLinks,
+    renderLoreReviewTableQueues: loreReviewViews.renderLoreReviewTableQueues,
     renderLoreSignalQueues: loreViews.renderLoreSignalQueues,
     renderLoreSurfaceLinks: loreViews.renderLoreSurfaceLinks,
     renderLoreWorldQueues: loreViews.renderLoreWorldQueues,

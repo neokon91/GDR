@@ -62,6 +62,7 @@ REQUIRED_MODULES = {
     "dnd55_options",
     "link_targets",
     "lore_cockpit",
+    "lore_review_cockpit",
     "tag_rules",
     "workflows",
 }

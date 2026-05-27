@@ -158,6 +158,13 @@ for (const marker of ["renderLoreNow", "renderLoreReadiness", "renderLoreSignalQ
     }
 }
 
+const loreReview = readTextRel(ROOT, "Hub/Revisione Lore.md");
+for (const marker of ["renderLoreReviewNow", "renderLoreReviewReadiness", "renderLoreReviewCompletionQueues", "renderLoreReviewTableQueues", "renderLoreReviewSurfaceLinks"]) {
+    if (!loreReview.includes(marker)) {
+        errors.push(`Smoke statico: Revisione Lore non contiene ${marker}`);
+    }
+}
+
 const offscreen = readTextRel(ROOT, "Hub/Cosa Succede Fuori Scena.md");
 for (const marker of ["renderOffscreenNow", "renderOffscreenReadiness", "renderOffscreenReactionQueues", "renderOffscreenTableBridge", "renderOffscreenSurfaceLinks"]) {
     if (!offscreen.includes(marker)) {

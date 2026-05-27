@@ -51,6 +51,11 @@ const REQUIRED_EXPORTS = [
     "renderLivingWorldSurfaceLinks",
     "renderLoreNow",
     "renderLoreReadiness",
+    "renderLoreReviewCompletionQueues",
+    "renderLoreReviewNow",
+    "renderLoreReviewReadiness",
+    "renderLoreReviewSurfaceLinks",
+    "renderLoreReviewTableQueues",
     "renderLoreSignalQueues",
     "renderLoreSurfaceLinks",
     "renderLoreWorldQueues",
@@ -103,6 +108,7 @@ const REQUIRED_MODULES = [
     "z.engine/session_live_table.js",
     "z.engine/session_living_world.js",
     "z.engine/session_lore.js",
+    "z.engine/session_lore_review.js",
     "z.engine/session_offscreen.js",
     "z.engine/session_worldbuilding_control.js"
 ];
@@ -762,6 +768,26 @@ async function main() {
             await views.renderLoreSurfaceLinks(dv);
             if (!rendered.some(node => String(node.innerHTML).includes("Controllo canone"))) {
                 errors.push("renderLoreSurfaceLinks: output senza superfici lore");
+            }
+            views.renderLoreReviewNow(dv);
+            if (!rendered.some(node => String(node.innerHTML).includes("Rivedi prima"))) {
+                errors.push("renderLoreReviewNow: output senza priorita revisione lore");
+            }
+            views.renderLoreReviewReadiness(dv);
+            if (!rendered.some(node => String(node.innerHTML).includes("Lore in revisione"))) {
+                errors.push("renderLoreReviewReadiness: output senza metriche revisione lore");
+            }
+            await views.renderLoreReviewCompletionQueues(dv);
+            if (!rendered.some(node => node.tag === "table" && String(node.text).includes("Segnale del Faro"))) {
+                errors.push("renderLoreReviewCompletionQueues: output senza lore da completare");
+            }
+            await views.renderLoreReviewTableQueues(dv);
+            if (!rendered.some(node => node.tag === "table" && String(node.text).includes("Rumor del Faro"))) {
+                errors.push("renderLoreReviewTableQueues: output senza segreti o pressioni da rivedere");
+            }
+            await views.renderLoreReviewSurfaceLinks(dv);
+            if (!rendered.some(node => String(node.innerHTML).includes("Motore Mondo Vivo"))) {
+                errors.push("renderLoreReviewSurfaceLinks: output senza superfici revisione lore");
             }
             views.renderOffscreenNow(dv);
             if (!rendered.some(node => String(node.innerHTML).includes("Reagisce prima"))) {

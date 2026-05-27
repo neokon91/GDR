@@ -1105,6 +1105,42 @@ workflows:
       - Meta Bind
       - Dataview
       - Templater
+  revisione_lore:
+    user_goal: Ripulire appunti lore, segreti e pressioni prima che confondano canone e tavolo.
+    audience: user
+    entry_points:
+      - Hub/Revisione Lore.md
+    quick_actions:
+      - button: lore-capture-z-modelli-lore-capture-md
+        label: Cattura lore
+        use_when: hai un segnale interessante ma non ancora stabile
+      - button: nuovo-segreto-o-mistero-z-modelli-worldbuilding-segreto-o-mistero-md
+        label: Nuovo mistero
+        use_when: una verita deve essere rivelata gradualmente
+      - button: controllo-canone-controllo-canone
+        label: Controllo canone
+        use_when: devi decidere verita, rumor, segreto, falso o retcon
+      - button: lore-hub-lore-hub
+        label: Lore hub
+        use_when: vuoi leggere il materiale lore gia collegato
+    action_groups:
+      trasforma_in_gioco:
+        label: Trasforma in gioco
+        purpose: Convertire lore riparato in mondo vivo, appigli e scena.
+        actions:
+          - button: motore-mondo-vivo-motore-mondo-vivo
+            label: Motore mondo vivo
+            use_when: una verita produce conseguenze o reazioni
+          - button: controllo-worldbuilding-controllo-worldbuilding
+            label: Controllo worldbuilding
+            use_when: il buco nasce da schede mondo incomplete
+          - button: atlante-atlante-del-mondo
+            label: Atlante
+            use_when: manca un luogo, regione o mappa collegata
+    required_plugins:
+      - Meta Bind
+      - Dataview
+      - Templater
   motore_mondo_vivo:
     user_goal: Decidere cosa cambia nel mondo prima della prossima sessione.
     audience: user

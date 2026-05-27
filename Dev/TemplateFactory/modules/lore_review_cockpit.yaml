@@ -1,0 +1,167 @@
+id: lore_review_cockpit
+purpose: Contratto operativo per trasformare Revisione Lore in cockpit di pulizia, collegamento e giocabilita del lore.
+version: 0.1.0
+dashboard:
+  page: Hub/Revisione Lore.md
+  workflow: revisione_lore
+  required_runtime_views:
+    - renderLoreReviewNow
+    - renderLoreReviewReadiness
+    - renderLoreReviewCompletionQueues
+    - renderLoreReviewTableQueues
+    - renderLoreReviewSurfaceLinks
+  required_visible_sections:
+    - Filtro
+    - Priorita Revisione
+    - Stato Revisione
+    - Completa E Collega
+    - Misteri Storia Pressioni
+    - Superfici
+    - Azioni
+panels:
+  now:
+    runtime_view: renderLoreReviewNow
+    promise: Decidere quale appunto lore va completato, collegato o reso giocabile prima.
+    answers:
+      - campi minimi mancanti
+      - lore decorativo
+      - note isolate
+      - segreti senza indizi
+      - pressioni senza uso al tavolo
+  readiness:
+    runtime_view: renderLoreReviewReadiness
+    promise: Misurare quante note sono incomplete, isolate, non giocabili o senza effetto.
+    answers:
+      - lore in revisione
+      - da completare
+      - non giocabile
+      - isolate
+      - segreti
+      - pressioni
+  completion:
+    runtime_view: renderLoreReviewCompletionQueues
+    promise: Mostrare le note che devono ricevere mondo, canone, appigli o uso al tavolo.
+    answers:
+      - da completare
+      - non arriva al tavolo
+      - senza appigli nel mondo
+  table:
+    runtime_view: renderLoreReviewTableQueues
+    promise: Ordinare segreti senza indizi, storia senza effetto e pressioni senza mossa.
+    answers:
+      - segreti senza indizi
+      - eventi senza conseguenze
+      - pressioni senza innesco
+  surfaces:
+    runtime_view: renderLoreReviewSurfaceLinks
+    promise: Aprire la superficie giusta per stabilizzare canone, mondo vivo o worldbuilding.
+    answers:
+      - controllo canone
+      - lore hub
+      - mondo vivo
+      - controllo worldbuilding
+queues:
+  - id: completion
+    label: Da Completare
+    table_columns:
+      - Nota
+      - Tipo
+      - Stato
+      - Serve ancora
+  - id: playability
+    label: Non Arriva Al Tavolo
+    table_columns:
+      - Nota
+      - Tipo
+      - Stato
+      - Scelte
+      - Rischi
+      - Indizi
+      - Prossima mossa
+  - id: anchors
+    label: Senza Appigli Nel Mondo
+    table_columns:
+      - Nota
+      - Tipo
+      - Mondo
+      - Canone
+      - Sessioni
+  - id: mysteries
+    label: Segreti Senza Indizi
+    table_columns:
+      - Nota
+      - Tipo
+      - Stato
+      - Collegamenti
+  - id: history
+    label: Storia Senza Effetto
+    table_columns:
+      - Evento
+      - Data
+      - Perche
+      - Cosa cambia
+      - Prossima mossa
+  - id: pressures
+    label: Pressioni Senza Uso Al Tavolo
+    table_columns:
+      - Pressione
+      - Avanzamento
+      - Quando avanza
+      - Fazioni
+      - Missioni
+      - Cosa cambia
+surfaces:
+  - id: canon_control
+    label: Controllo canone
+    plugin: Dataview
+    target: Hub/Controllo Canone.md
+    badge: Canone
+    role: decidere verita
+    action: Apri quando una nota deve diventare canonica, rumor, segreto, falso o retcon.
+    why: La revisione chiude il rumore solo se assegna posizione canonica esplicita.
+  - id: lore_hub
+    label: Lore hub
+    plugin: Dataview
+    target: Hub/Lore Hub.md
+    badge: Segnali
+    role: leggere materiale vivo
+    action: Apri quando vuoi vedere segnali, misteri, culture e materiali gia collegati.
+    why: La revisione ripara; il Lore Hub serve a navigare cio che e pronto.
+  - id: living_world
+    label: Motore Mondo Vivo
+    plugin: Dataview
+    target: Hub/Motore Mondo Vivo.md
+    badge: Propaga
+    role: applicare effetti
+    action: Apri quando una verita o pressione deve cambiare fazioni, luoghi o timeline.
+    why: Il lore utile produce conseguenze e prossime mosse verificabili.
+  - id: worldbuilding_control
+    label: Controllo worldbuilding
+    plugin: Dataview
+    target: Hub/Controllo Worldbuilding.md
+    badge: Coerenza
+    role: riparare schede
+    action: Apri quando il problema nasce da mondo, luogo, cultura o fazione incompleta.
+    why: Molti buchi lore sono buchi di struttura del mondo, non di testo.
+  - id: atlas
+    label: Atlante
+    plugin: Dataview
+    target: Hub/Atlante del Mondo.md
+    badge: Luoghi
+    role: collegare appigli
+    action: Apri quando una nota lore manca di luogo, regione, mappa o percorso.
+    why: Un appunto isolato diventa giocabile quando entra nello spazio del mondo.
+  - id: worldbuilding_base
+    label: Worldbuilding profondo
+    plugin: Bases
+    target: z.bases/Worldbuilding.base
+    generated_release: true
+    badge: Base
+    role: correggere in tabella
+    action: Apri quando molte note di societa, cultura, religione o conflitto vanno ripulite insieme.
+    why: Le Bases sono output di release, non sorgente tracciato, ma servono per manutenzione rapida.
+contracts:
+  dashboard_uses_runtime_views: true
+  surfaces_must_resolve_to_source_or_generated_release_target: true
+  generated_targets_must_stay_release_only: true
+  lore_review_prioritizes_playable_cleanup_before_archive_tables: true
