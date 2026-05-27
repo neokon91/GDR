@@ -37,6 +37,7 @@ z.automazioni/data/runtime/*.json
 z.automazioni/data/srd/*.json
 z.automazioni/data/workflows/*.json
 z.automazioni/templater/*.js
+z.bacheche/*.md
 
 # Local TemplateFactory previews and review reports
 Dev/TemplateFactory/examples/generated/

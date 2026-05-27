@@ -46,6 +46,7 @@ REQUIRED_MODULES = {
     "metabind_inputs",
     "metabind_buttons",
     "bases_views",
+    "bacheche",
     "frontmatter_profiles",
     "runtime_profiles",
     "entity_depth",

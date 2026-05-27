@@ -81,7 +81,8 @@ def validate_tracked_generated(errors: list[str]) -> None:
     # I template materializzati e le preview locali sono output: non devono rientrare in Git.
     release_boundary = load_yaml(RELEASE_BOUNDARY, errors)
     generated_release_roots = [str(root).rstrip("/") for root in release_boundary.get("generated_release_roots", []) or []]
-    for generated_path in ["z.modelli", "Dev/TemplateFactory/examples/generated", *generated_release_roots]:
+    generated_markdown_roots = ["z.bacheche"]
+    for generated_path in ["z.modelli", "Dev/TemplateFactory/examples/generated", *generated_release_roots, *generated_markdown_roots]:
         result = subprocess.run(
             ["git", "ls-files", generated_path],
             cwd=ROOT,

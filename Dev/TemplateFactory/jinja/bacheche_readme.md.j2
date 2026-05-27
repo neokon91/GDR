@@ -1,0 +1,16 @@
+# {{ title }}
+
+{{ intro }}
+
+| Board | Uso |
+| --- | --- |
+{% for board in boards -%}
+| `{{ board.file }}` | {{ board.use }} |
+{% endfor %}
+
+{% for item in guidelines %}
+{{ item }}
+{% if not loop.last %}
+
+{% endif %}
+{% endfor %}

@@ -32,6 +32,7 @@ const JUNK_FILE_PATTERNS = [
 ];
 const REQUIRED_NPM_SCRIPTS = ["check", "check:repo", "check:js", "check:smoke", "check:release", "check:importers", "check:metadata", "check:diff", "release:clean"];
 const FORBIDDEN_TRACKED_USER_ROOTS = ["Mondi", "Campagne", "Giocatori", "Inbox", "Import"];
+const FORBIDDEN_TRACKED_GENERATED_ROOTS = ["z.bacheche"];
 const errors = [];
 const fixed = [];
 
@@ -62,6 +63,15 @@ for (const root of GENERATED_RELEASE_ROOTS) {
         .filter(Boolean);
     if (tracked.length) {
         errors.push(`${root}: root generata tracciata nel sorgente (${tracked.length} file); deve essere materializzata in release/output`);
+    }
+}
+
+for (const root of FORBIDDEN_TRACKED_GENERATED_ROOTS) {
+    const tracked = execFileSync("git", ["ls-files", `${root}/**`], { cwd: ROOT, encoding: "utf8" })
+        .split(/\r?\n/)
+        .filter(Boolean);
+    if (tracked.length) {
+        errors.push(`${root}: superficie vault generata tracciata nel sorgente (${tracked.length} file); deve derivare da YAML/Jinja`);
     }
 }
 

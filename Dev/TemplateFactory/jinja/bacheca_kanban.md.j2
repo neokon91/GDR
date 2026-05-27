@@ -1,0 +1,18 @@
+---
+kanban-plugin: board
+---
+
+{% for column in columns %}
+## {{ column.title }}
+
+{% for task in column.tasks %}
+- [ ] {{ task }}
+{% endfor %}
+
+{% endfor %}
+
+%% kanban:settings
+```
+{{ settings_json }}
+```
+%%
