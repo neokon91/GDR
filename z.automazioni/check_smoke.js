@@ -102,7 +102,7 @@ for (const [label, relPath] of [
 }
 
 const liveHub = readTextRel(ROOT, "Hub/Durante il Gioco.md");
-for (const marker of ["renderTableCockpit", "renderM11ContinuityChain", "BUTTON[registra-scelta-mondo]"]) {
+for (const marker of ["renderLiveTableNow", "renderLiveTableReadiness", "renderLiveTableQueues", "renderLiveTableMaterials", "renderLiveTableSurfaceLinks", "renderM11ContinuityChain", "BUTTON[registra-scelta-mondo]"]) {
     if (!liveHub.includes(marker)) {
         errors.push(`Smoke statico: Durante il Gioco non contiene ${marker}`);
     }

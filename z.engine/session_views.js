@@ -263,6 +263,12 @@
     continuityIssues: continuityViews.continuityIssues,
     continuityStatus: continuityViews.continuityStatus
   });
+  const liveTableViews = (await eval(await app.vault.adapter.read("z.engine/session_live_table.js")))({
+    ...sharedViewContext,
+    continuityAction: continuityViews.continuityAction,
+    continuityIssues: continuityViews.continuityIssues,
+    continuityStatus: continuityViews.continuityStatus
+  });
   const { continuityIssues } = continuityViews;
   const sessionViews = (await eval(await app.vault.adapter.read("z.engine/session_runtime.js")))({
     ...sharedViewContext,
@@ -1018,6 +1024,11 @@
     renderEmptyState,
     renderImpactedNextMoveCards: continuityViews.renderImpactedNextMoveCards,
     renderLiveCommandCenter: sessionViews.renderLiveCommandCenter,
+    renderLiveTableMaterials: liveTableViews.renderLiveTableMaterials,
+    renderLiveTableNow: liveTableViews.renderLiveTableNow,
+    renderLiveTableQueues: liveTableViews.renderLiveTableQueues,
+    renderLiveTableReadiness: liveTableViews.renderLiveTableReadiness,
+    renderLiveTableSurfaceLinks: liveTableViews.renderLiveTableSurfaceLinks,
     renderLivingWorldNow: livingWorldViews.renderLivingWorldNow,
     renderLivingWorldPressureQueues: livingWorldViews.renderLivingWorldPressureQueues,
     renderLivingWorldQueues: livingWorldViews.renderLivingWorldQueues,

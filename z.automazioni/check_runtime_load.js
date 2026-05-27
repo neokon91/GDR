@@ -20,6 +20,11 @@ const REQUIRED_EXPORTS = [
     "renderContinuityQueue",
     "renderDnd55MaterialPipeline",
     "renderLiveCommandCenter",
+    "renderLiveTableMaterials",
+    "renderLiveTableNow",
+    "renderLiveTableQueues",
+    "renderLiveTableReadiness",
+    "renderLiveTableSurfaceLinks",
     "renderLivingWorldNow",
     "renderLivingWorldPressureQueues",
     "renderLivingWorldQueues",
@@ -61,6 +66,7 @@ const REQUIRED_MODULES = [
     "z.engine/session_player.js",
     "z.engine/session_runtime.js",
     "z.engine/session_views.js",
+    "z.engine/session_live_table.js",
     "z.engine/session_living_world.js",
     "z.engine/session_offscreen.js",
     "z.engine/session_worldbuilding_control.js"
@@ -192,6 +198,88 @@ async function main() {
                     prossima_mossa: "Il rivale arriva prima."
                 },
                 {
+                    file: { path: "Mondi/Tracciati/Allarme Porto.md", name: "Allarme Porto", link: "Mondi/Tracciati/Allarme Porto.md", folder: "Mondi/Tracciati", mtime: 13 },
+                    categoria: "tracciato",
+                    stato: "attivo",
+                    mondo: "Mondi/Mondo Demo.md",
+                    fazioni: ["Mondi/Fazioni/Consiglio.md"],
+                    missioni: ["Mondi/Missioni/Missione Pubblica.md"],
+                    pressione: 5,
+                    progress_value: 3,
+                    progress_max: 6,
+                    prossima_mossa: "Le guardie bloccano il molo."
+                },
+                {
+                    file: { path: "Mondi/Personaggi/Capitano Faro.md", name: "Capitano Faro", link: "Mondi/Personaggi/Capitano Faro.md", folder: "Mondi/Personaggi", mtime: 14 },
+                    categoria: "personaggio",
+                    tipo: "png",
+                    stato: "in gioco",
+                    mondo: "Mondi/Mondo Demo.md",
+                    ruolo: "capitano della guardia",
+                    luogo: "Mondi/Luoghi/Luogo Pubblico.md",
+                    atteggiamento: "diffidente"
+                },
+                {
+                    file: { path: "Mondi/Incontri/Assalto al Molo.md", name: "Assalto al Molo", link: "Mondi/Incontri/Assalto al Molo.md", folder: "Mondi/Incontri", mtime: 15 },
+                    categoria: "incontro",
+                    tipo: "combattimento",
+                    stato: "pronto",
+                    mondo: "Mondi/Mondo Demo.md",
+                    luogo: "Mondi/Luoghi/Luogo Pubblico.md",
+                    pericolo: 4,
+                    creature: ["Mondi/Creature/Guardia del Porto.md"]
+                },
+                {
+                    file: { path: "Mondi/Creature/Guardia del Porto.md", name: "Guardia del Porto", link: "Mondi/Creature/Guardia del Porto.md", folder: "Mondi/Creature", mtime: 16 },
+                    categoria: "creatura",
+                    tipo: "umanoide",
+                    stato: "pronto",
+                    mondo: "Mondi/Mondo Demo.md",
+                    size: "Media",
+                    cr: "1/2"
+                },
+                {
+                    file: { path: "Mondi/Oggetti/Chiave del Faro.md", name: "Chiave del Faro", link: "Mondi/Oggetti/Chiave del Faro.md", folder: "Mondi/Oggetti", mtime: 17 },
+                    categoria: "oggetto",
+                    tipo: "chiave",
+                    stato: "pronto",
+                    mondo: "Mondi/Mondo Demo.md",
+                    rarita: "comune",
+                    luogo: "Mondi/Luoghi/Luogo Pubblico.md"
+                },
+                {
+                    file: { path: "Mondi/Dispense/Lettera del Porto.md", name: "Lettera del Porto", link: "Mondi/Dispense/Lettera del Porto.md", folder: "Mondi/Dispense", mtime: 18 },
+                    categoria: "dispensa",
+                    tipo: "lettera",
+                    stato: "pronto",
+                    mondo: "Mondi/Mondo Demo.md",
+                    luogo: "Mondi/Luoghi/Luogo Pubblico.md",
+                    personaggi: ["Mondi/Personaggi/Capitano Faro.md"]
+                },
+                {
+                    file: { path: "Mondi/Sessioni/Sessione Live.md", name: "Sessione Live", link: "Mondi/Sessioni/Sessione Live.md", folder: "Mondi/Sessioni", mtime: 19 },
+                    categoria: "sessione",
+                    stato: "pronto",
+                    attiva: true,
+                    pubblico: false,
+                    data: "2026-05-27",
+                    mondo: "Mondi/Mondo Demo.md",
+                    scena_corrente: "Banchina del porto.",
+                    scelta: "Salvare il faro o inseguire il rivale.",
+                    fazioni: ["Mondi/Fazioni/Consiglio.md"],
+                    luoghi: ["Mondi/Luoghi/Luogo Pubblico.md"],
+                    missioni: ["Mondi/Missioni/Missione Pubblica.md"],
+                    tracciati: ["Mondi/Tracciati/Allarme Porto.md"],
+                    personaggi: ["Mondi/Personaggi/Capitano Faro.md"],
+                    incontri: ["Mondi/Incontri/Assalto al Molo.md"],
+                    dispense: ["Mondi/Dispense/Lettera del Porto.md"],
+                    oggetti: ["Mondi/Oggetti/Chiave del Faro.md"],
+                    mappe: ["Risorse/Mappe/Mappa Pubblica.md"],
+                    appunti_live: ["Inbox/Conseguenza del Faro.md"],
+                    conseguenze: ["Il Consiglio cambia rotta."],
+                    entita_impattate: ["Mondi/Fazioni/Consiglio.md"]
+                },
+                {
                     file: { path: "Mondi/Sessioni/Sessione Giocata.md", name: "Sessione Giocata", link: "Mondi/Sessioni/Sessione Giocata.md", mtime: 1 },
                     categoria: "sessione",
                     stato: "giocata",
@@ -260,6 +348,10 @@ async function main() {
                 if (query.includes('"Mondi/Missioni"')) return demoPages.filter(page => page.file.path.startsWith("Mondi/Missioni/"));
                 if (query.includes('"Mondi/Personaggi"')) return demoPages.filter(page => page.file.path.startsWith("Mondi/Personaggi/"));
                 if (query.includes('"Mondi/Fazioni"')) return demoPages.filter(page => page.file.path.startsWith("Mondi/Fazioni/"));
+                if (query.includes('"Mondi/Tracciati"')) return demoPages.filter(page => page.file.path.startsWith("Mondi/Tracciati/"));
+                if (query.includes('"Mondi/Incontri"')) return demoPages.filter(page => page.file.path.startsWith("Mondi/Incontri/"));
+                if (query.includes('"Mondi/Creature"')) return demoPages.filter(page => page.file.path.startsWith("Mondi/Creature/"));
+                if (query.includes('"Mondi/Oggetti"')) return demoPages.filter(page => page.file.path.startsWith("Mondi/Oggetti/"));
                 if (query.includes('"Mondi/Luoghi"')) return demoPages.filter(page => page.file.path.startsWith("Mondi/Luoghi/"));
                 if (query.includes('"Mondi/Rotte"')) return demoPages.filter(page => page.file.path.startsWith("Mondi/Rotte/"));
                 if (query.includes('"Mondi/Culture"') || query.includes('"Mondi/Lingue"')) return demoPages.filter(page => page.file.path.startsWith("Mondi/Culture/") || page.file.path.startsWith("Mondi/Lingue/"));
@@ -285,6 +377,10 @@ async function main() {
                 },
                 pages(source) {
                     return pageCollection(pagesForSource(source));
+                },
+                page(link) {
+                    const key = String(link?.path ?? link ?? "");
+                    return demoPages.find(page => page.file.path === key || page.file.link === key || page.file.name === key || page.file.name === key.replace(/\.md$/, "")) ?? null;
                 },
                 paragraph(text) {
                     rendered.push({ tag: "p", text, innerHTML: text });
@@ -368,6 +464,26 @@ async function main() {
             await views.renderWorldbuilderSurfaceLinks(dv);
             if (!rendered.some(node => String(node.innerHTML).includes("Codex editabile"))) {
                 errors.push("renderWorldbuilderSurfaceLinks: output senza superfici operative");
+            }
+            views.renderLiveTableNow(dv);
+            if (!rendered.some(node => String(node.innerHTML).includes("Gioca adesso"))) {
+                errors.push("renderLiveTableNow: output senza priorita live");
+            }
+            views.renderLiveTableReadiness(dv);
+            if (!rendered.some(node => String(node.innerHTML).includes("Mappe e media"))) {
+                errors.push("renderLiveTableReadiness: output senza metriche live");
+            }
+            await views.renderLiveTableQueues(dv);
+            if (!rendered.some(node => node.tag === "table" && String(node.text).includes("Chiude il porto"))) {
+                errors.push("renderLiveTableQueues: output senza pressioni live");
+            }
+            await views.renderLiveTableMaterials(dv);
+            if (!rendered.some(node => node.tag === "table" && String(node.text).includes("Assalto al Molo"))) {
+                errors.push("renderLiveTableMaterials: output senza materiali live");
+            }
+            await views.renderLiveTableSurfaceLinks(dv);
+            if (!rendered.some(node => String(node.innerHTML).includes("Iniziativa e combattimenti"))) {
+                errors.push("renderLiveTableSurfaceLinks: output senza superfici live");
             }
             views.renderLivingWorldNow(dv);
             if (!rendered.some(node => String(node.innerHTML).includes("Cambia prima"))) {

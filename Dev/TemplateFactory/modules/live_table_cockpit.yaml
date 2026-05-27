@@ -1,0 +1,155 @@
+id: live_table_cockpit
+purpose: Contratto operativo per trasformare Durante il Gioco in cockpit live compatto e giocabile.
+version: 0.1.0
+dashboard:
+  page: Hub/Durante il Gioco.md
+  workflow: gioca_live
+  required_runtime_views:
+    - renderLiveTableNow
+    - renderLiveTableReadiness
+    - renderLiveTableQueues
+    - renderLiveTableMaterials
+    - renderLiveTableSurfaceLinks
+  required_visible_sections:
+    - Sessione Attiva
+    - Stato Tavolo
+    - Code Live
+    - Materiali
+    - Continuita Live
+    - Superfici
+panels:
+  now:
+    runtime_view: renderLiveTableNow
+    promise: Dire al DM cosa usare adesso al tavolo.
+    answers:
+      - sessione attiva
+      - scena corrente
+      - scelta da ottenere
+      - prossima azione live
+  readiness:
+    runtime_view: renderLiveTableReadiness
+    promise: Misurare quanta sessione e pronta senza leggere tabelle lunghe.
+    answers:
+      - luoghi
+      - png e pg
+      - missioni
+      - clock
+      - materiali
+      - appunti live
+  queues:
+    runtime_view: renderLiveTableQueues
+    promise: Tenere davanti appunti, pressioni e persone rilevanti alla scena.
+    answers:
+      - inbox live
+      - pressioni collegate
+      - persone in scena
+      - decisioni e conseguenze
+  materials:
+    runtime_view: renderLiveTableMaterials
+    promise: Aprire solo materiali pronti o collegati alla sessione attiva.
+    answers:
+      - incontri
+      - creature
+      - oggetti
+      - dispense
+      - mappe e media
+  surfaces:
+    runtime_view: renderLiveTableSurfaceLinks
+    promise: Aprire gli strumenti giusti senza esporre diagnostica tecnica.
+    answers:
+      - preparazione
+      - party control
+      - iniziativa
+      - vista giocatori
+queues:
+  - id: live_notes
+    label: Inbox live
+    table_columns:
+      - Nota
+      - Tipo
+      - Stato
+      - Azione
+  - id: pressures
+    label: Pressioni collegate
+    table_columns:
+      - Fronte
+      - Stato
+      - Pressione
+      - Prossima mossa
+  - id: people
+    label: Persone in scena
+    table_columns:
+      - Persona
+      - Ruolo
+      - Luogo
+      - Atteggiamento
+  - id: materials
+    label: Materiali pronti
+    table_columns:
+      - Materiale
+      - Tipo
+      - Uso
+      - Stato
+  - id: post_bridge
+    label: Ponte post-sessione
+    table_columns:
+      - Output
+      - Stato
+      - Bersagli
+      - Azione
+surfaces:
+  - id: preparation
+    label: Preparazione sessione
+    plugin: Dataview
+    target: Risorse/Preparazione Sessione.md
+    badge: Ancore
+    role: ritrovare la promessa di gioco
+    action: Apri quando la scena perde obiettivo, pressione o materiale pronto.
+    why: La preparazione e la fonte delle ancore da usare durante il tavolo.
+  - id: party_control
+    label: Party control
+    plugin: Dataview
+    target: Hub/Party Control.md
+    badge: Party
+    role: controllare PG e risorse
+    action: Apri quando servono stato, condizioni, risorse o note dei personaggi.
+    why: Il cockpit live deve sapere cosa puo fare davvero il party.
+  - id: initiative
+    label: Iniziativa e combattimenti
+    plugin: Initiative Tracker
+    target: Risorse/Iniziativa e Combattimenti.md
+    badge: Turni
+    role: gestire scene a turni
+    action: Apri quando un incontro diventa combattimento o scena ordinata.
+    why: I turni devono restare fuori dalla pagina live finche non servono.
+  - id: player_view
+    label: Vista giocatori
+    plugin: Dataview
+    target: Hub/Vista Giocatori.md
+    badge: Player-safe
+    role: verificare cosa mostrare
+    action: Apri prima di condividere recap, mappe, dispense o informazioni pubbliche.
+    why: La pagina live vede materiale DM; la vista giocatori protegge i segreti.
+  - id: encounters_base
+    label: Incontri pronti
+    plugin: Bases
+    target: z.bases/Incontri.base
+    generated_release: true
+    badge: Base
+    role: scegliere incontri
+    action: Apri quando devi filtrare incontri per pericolo, luogo o stato.
+    why: La Base generata aiuta al tavolo senza rendere z.bases sorgente tracciato.
+  - id: png_base
+    label: PNG in scena
+    plugin: Bases
+    target: z.bases/PNG.base
+    generated_release: true
+    badge: Base
+    role: trovare volti e leve
+    action: Apri quando servono PNG ricorrenti, atteggiamenti o collegamenti.
+    why: I PNG pronti trasformano improvvisazione in continuita.
+contracts:
+  dashboard_uses_runtime_views: true
+  surfaces_must_resolve_to_source_or_generated_release_target: true
+  generated_targets_must_stay_release_only: true
+  live_table_prioritizes_current_table_use: true

@@ -619,6 +619,83 @@ blocks:
       | --- | --- |
       | Motore mondo vivo | verificare propagazioni |
       | Preparazione sessione | portare la reazione al tavolo |
+  live_table_now:
+    type: dataviewjs
+    runtime_view: renderLiveTableNow
+    use_for:
+      - dashboard
+      - durante il gioco
+      - tavolo
+      - cockpit
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      gdr.renderLiveTableNow(dv);
+    fallback: |-
+      | Priorita | Azione |
+      | --- | --- |
+      | Gioca adesso | usa scena, scelta, pressione e cattura live |
+  live_table_readiness:
+    type: dataviewjs
+    runtime_view: renderLiveTableReadiness
+    use_for:
+      - dashboard
+      - durante il gioco
+      - tavolo
+      - cockpit
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      gdr.renderLiveTableReadiness(dv);
+    fallback: |-
+      | Area | Conteggio |
+      | --- | --- |
+      | Luoghi |  |
+      | Persone |  |
+      | Missioni |  |
+      | Materiali |  |
+  live_table_queues:
+    type: dataviewjs
+    runtime_view: renderLiveTableQueues
+    use_for:
+      - dashboard
+      - durante il gioco
+      - tavolo
+      - cockpit
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      await gdr.renderLiveTableQueues(dv);
+    fallback: |-
+      | Nota | Uso |
+      | --- | --- |
+  live_table_materials:
+    type: dataviewjs
+    runtime_view: renderLiveTableMaterials
+    use_for:
+      - dashboard
+      - durante il gioco
+      - materiali
+      - cockpit
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      await gdr.renderLiveTableMaterials(dv);
+    fallback: |-
+      | Materiale | Stato |
+      | --- | --- |
+  live_table_surface_links:
+    type: dataviewjs
+    runtime_view: renderLiveTableSurfaceLinks
+    use_for:
+      - dashboard
+      - durante il gioco
+      - tavolo
+      - cockpit
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      await gdr.renderLiveTableSurfaceLinks(dv);
+    fallback: |-
+      | Superficie | Uso |
+      | --- | --- |
+      | Party control | controllare PG e risorse |
+      | Iniziativa | gestire scene a turni |
 contracts:
   dataviewjs_has_no_file_writes: true
   empty_state_required: true

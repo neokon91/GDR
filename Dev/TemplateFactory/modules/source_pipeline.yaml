@@ -234,6 +234,24 @@ steps:
       - node
       - z.automazioni/render_offscreen_cockpit.js
       - --check
+  live_table_cockpit:
+    purpose: Genera il contratto runtime del cockpit Durante il Gioco senza scrivere root generate.
+    sources:
+      - Dev/TemplateFactory/modules/live_table_cockpit.yaml
+      - Dev/TemplateFactory/modules/bases_views.yaml
+      - Dev/TemplateFactory/modules/frontmatter_profiles.yaml
+      - Hub/Durante il Gioco.md
+      - z.engine/session_live_table.js
+      - z.engine/session_views.js
+    outputs:
+      - z.automazioni/data/runtime/live_table_cockpit.json
+    render:
+      - node
+      - z.automazioni/render_live_table_cockpit.js
+    check:
+      - node
+      - z.automazioni/render_live_table_cockpit.js
+      - --check
   user_path:
     purpose: Verifica il percorso utente primario dichiarato in YAML.
     sources:
