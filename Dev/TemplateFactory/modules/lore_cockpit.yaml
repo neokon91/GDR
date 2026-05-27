@@ -1,0 +1,191 @@
+id: lore_cockpit
+purpose: Contratto operativo per trasformare Lore Hub in cockpit di segnali, canone, misteri e materiale giocabile.
+version: 0.1.0
+dashboard:
+  page: Hub/Lore Hub.md
+  workflow: lore_hub
+  required_runtime_views:
+    - renderLoreNow
+    - renderLoreReadiness
+    - renderLoreSignalQueues
+    - renderLoreWorldQueues
+    - renderLoreSurfaceLinks
+  required_visible_sections:
+    - Filtro
+    - Priorita Lore
+    - Stato Lore
+    - Segnali E Canone
+    - Materiali Del Mondo
+    - Superfici
+    - Azioni
+panels:
+  now:
+    runtime_view: renderLoreNow
+    promise: Decidere quale segnale lore deve diventare gioco, canone o mistero adesso.
+    answers:
+      - decisione canonica
+      - mistero senza indizi
+      - evento senza conseguenze
+      - lore senza uso al tavolo
+  readiness:
+    runtime_view: renderLoreReadiness
+    promise: Misurare regioni, culture, poteri, storia, misteri, mappe e materiali originali.
+    answers:
+      - regioni
+      - culture
+      - storia
+      - misteri
+      - materiali
+  signals:
+    runtime_view: renderLoreSignalQueues
+    promise: Portare in tabella segnali, canone, misteri e timeline causale.
+    answers:
+      - segnali
+      - canone da decidere
+      - misteri
+      - storia e conseguenze
+  world:
+    runtime_view: renderLoreWorldQueues
+    promise: Vedere culture, poteri, mappe e materiali collegabili al tavolo.
+    answers:
+      - culture
+      - poteri
+      - mappe
+      - oggetti e risorse
+  surfaces:
+    runtime_view: renderLoreSurfaceLinks
+    promise: Aprire gli strumenti giusti per trasformare lore in mondo vivo, canone o materiale.
+    answers:
+      - atlante
+      - economia
+      - controllo canone
+      - compendium
+queues:
+  - id: signals
+    label: Segnali Operativi
+    table_columns:
+      - Nota
+      - Categoria
+      - Stato
+      - Pressione
+      - Prossima mossa
+  - id: canon_decisions
+    label: Canone Da Decidere
+    table_columns:
+      - Nota
+      - Categoria
+      - Stato
+      - Decisione richiesta
+  - id: mysteries
+    label: Misteri E Indizi
+    table_columns:
+      - Mistero
+      - Verita
+      - Indizi
+      - Propaga a
+  - id: history
+    label: Storia E Conseguenze
+    table_columns:
+      - Evento
+      - Data
+      - Cause
+      - Conseguenze
+      - Prossima mossa
+  - id: cultures
+    label: Culture Lingue E Feste
+    table_columns:
+      - Cultura
+      - Luoghi
+      - Lingue
+      - Religioni
+      - Tensioni
+      - Feste
+  - id: powers
+    label: Poteri E Culti
+    table_columns:
+      - Potere
+      - Tipo
+      - Luoghi
+      - Pressione
+      - Agenda
+      - Prossima mossa
+  - id: maps
+    label: Mappe Lore
+    table_columns:
+      - Mappa
+      - Uso
+      - Mondo
+      - Luogo
+      - Stato
+  - id: materials
+    label: Oggetti Risorse E Compendium
+    table_columns:
+      - Nota
+      - Tipo
+      - Luoghi
+      - Risorse
+      - Fazioni
+      - Uso
+surfaces:
+  - id: atlas
+    label: Atlante
+    plugin: Dataview
+    target: Hub/Atlante del Mondo.md
+    badge: Spazio
+    role: collegare luoghi e mappe
+    action: Apri quando il segnale lore dipende da geografia, cultura o marker.
+    why: Il lore diventa giocabile quando ha luogo, percorso o mappa.
+  - id: canon_control
+    label: Controllo canone
+    plugin: Dataview
+    target: Hub/Controllo Canone.md
+    badge: Canone
+    role: decidere verita e rumor
+    action: Apri quando un appunto deve diventare canonico, rumor, falso, segreto o retcon.
+    why: Il canone va stabilizzato prima di usarlo come vincolo di mondo.
+  - id: lore_review
+    label: Revisione lore
+    plugin: Dataview
+    target: Hub/Revisione Lore.md
+    badge: Pulizia
+    role: ripulire materiale disperso
+    action: Apri quando molte note lore sono incomplete, isolate o non giocabili.
+    why: La revisione impedisce che appunti grezzi diventino rumore permanente.
+  - id: economy
+    label: Economia e rotte
+    plugin: Dataview
+    target: Hub/Economia E Rotte.md
+    badge: Risorse
+    role: trasformare risorse in pressione
+    action: Apri quando il lore riguarda merci, dipendenze, viaggi o scarsita.
+    why: Risorse e rotte danno conseguenze visibili a storia e culture.
+  - id: compendium
+    label: Compendium
+    plugin: Dataview
+    target: Hub/Compendium Del Mondo.md
+    badge: Materiali
+    role: ordinare elementi originali
+    action: Apri quando oggetti, reliquie, simboli o materiali ricorrenti devono diventare riusabili.
+    why: Il compendium tiene separato materiale originale dal riferimento regolamentare.
+  - id: living_world
+    label: Motore Mondo Vivo
+    plugin: Dataview
+    target: Hub/Motore Mondo Vivo.md
+    badge: Propaga
+    role: applicare conseguenze
+    action: Apri quando una scoperta o verita deve cambiare fazioni, luoghi o timeline.
+    why: Il lore utile produce effetti, non solo descrizioni.
+  - id: worldbuilding_base
+    label: Worldbuilding profondo
+    plugin: Bases
+    target: z.bases/Worldbuilding.base
+    generated_release: true
+    badge: Base
+    role: correggere culture e societa
+    action: Apri quando culture, religioni, societa o cosmologia vanno completate in tabella.
+    why: La Base generata permette manutenzione rapida senza rendere z.bases sorgente tracciato.
+contracts:
+  dashboard_uses_runtime_views: true
+  surfaces_must_resolve_to_source_or_generated_release_target: true
+  generated_targets_must_stay_release_only: true
+  lore_prioritizes_gameable_signal_before_archive_browsing: true

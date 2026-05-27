@@ -39,6 +39,11 @@ const REQUIRED_EXPORTS = [
     "renderLivingWorldQueues",
     "renderLivingWorldReadiness",
     "renderLivingWorldSurfaceLinks",
+    "renderLoreNow",
+    "renderLoreReadiness",
+    "renderLoreSignalQueues",
+    "renderLoreSurfaceLinks",
+    "renderLoreWorldQueues",
     "renderM11ContinuityChain",
     "renderOffscreenNow",
     "renderOffscreenReactionQueues",
@@ -85,6 +90,7 @@ const REQUIRED_MODULES = [
     "z.engine/session_views.js",
     "z.engine/session_live_table.js",
     "z.engine/session_living_world.js",
+    "z.engine/session_lore.js",
     "z.engine/session_offscreen.js",
     "z.engine/session_worldbuilding_control.js"
 ];
@@ -188,6 +194,17 @@ async function main() {
                     prossima_mossa: "Chiude il porto.",
                     luoghi: ["Mondi/Luoghi/Luogo Pubblico.md"],
                     missioni: ["Mondi/Missioni/Missione Pubblica.md"]
+                },
+                {
+                    file: { path: "Mondi/Culture/Naviganti.md", name: "Naviganti", link: "Mondi/Culture/Naviganti.md", folder: "Mondi/Culture", mtime: 22 },
+                    categoria: "cultura",
+                    stato: "pronto",
+                    mondo: "Mondi/Mondo Demo.md",
+                    luoghi: ["Mondi/Luoghi/Luogo Pubblico.md"],
+                    lingue: ["Mondi/Lingue/Canto dei Fari.md"],
+                    religioni: ["Mondi/Religioni/Culto del Faro.md"],
+                    tensioni: ["Il porto chiude agli stranieri."],
+                    feste: ["Veglia del Sale"]
                 },
                 {
                     file: { path: "Mondi/Rotte/Strada del Sale.md", name: "Strada del Sale", link: "Mondi/Rotte/Strada del Sale.md", folder: "Mondi/Rotte", mtime: 7 },
@@ -401,6 +418,9 @@ async function main() {
                 if (query.includes('"Mondi/Rotte"')) return demoPages.filter(page => page.file.path.startsWith("Mondi/Rotte/"));
                 if (query.includes('"Mondi/Risorse"')) return demoPages.filter(page => page.file.path.startsWith("Mondi/Risorse/"));
                 if (query.includes('"Mondi/Mercati"')) return demoPages.filter(page => page.file.path.startsWith("Mondi/Mercati/"));
+                if (query.includes('"Mondi/Religioni"')) return demoPages.filter(page => page.file.path.startsWith("Mondi/Religioni/"));
+                if (query.includes('"Mondi/Segreti"')) return demoPages.filter(page => page.file.path.startsWith("Mondi/Segreti/"));
+                if (query.includes('"Mondi/Compendium"')) return demoPages.filter(page => page.file.path.startsWith("Mondi/Compendium/"));
                 if (query.includes('"Mondi/Culture"') || query.includes('"Mondi/Lingue"')) return demoPages.filter(page => page.file.path.startsWith("Mondi/Culture/") || page.file.path.startsWith("Mondi/Lingue/"));
                 if (query.includes('"Mondi/Storia"') || query.includes('"Mondi/Timeline"')) return demoPages.filter(page => page.file.path.startsWith("Mondi/Storia/") || page.file.path.startsWith("Mondi/Timeline/"));
                 if (query.includes('"Mondi/Dispense"')) return demoPages.filter(page => page.file.path.startsWith("Mondi/Dispense/"));
@@ -607,6 +627,26 @@ async function main() {
             await views.renderEconomySurfaceLinks(dv);
             if (!rendered.some(node => String(node.innerHTML).includes("Geopolitica"))) {
                 errors.push("renderEconomySurfaceLinks: output senza superfici economia");
+            }
+            views.renderLoreNow(dv);
+            if (!rendered.some(node => String(node.innerHTML).includes("Segnale prima"))) {
+                errors.push("renderLoreNow: output senza priorita lore");
+            }
+            views.renderLoreReadiness(dv);
+            if (!rendered.some(node => String(node.innerHTML).includes("Misteri"))) {
+                errors.push("renderLoreReadiness: output senza metriche misteri");
+            }
+            await views.renderLoreSignalQueues(dv);
+            if (!rendered.some(node => node.tag === "table" && String(node.text).includes("Segnale del Faro"))) {
+                errors.push("renderLoreSignalQueues: output senza segnali lore");
+            }
+            await views.renderLoreWorldQueues(dv);
+            if (!rendered.some(node => node.tag === "table" && String(node.text).includes("Naviganti"))) {
+                errors.push("renderLoreWorldQueues: output senza culture operative");
+            }
+            await views.renderLoreSurfaceLinks(dv);
+            if (!rendered.some(node => String(node.innerHTML).includes("Controllo canone"))) {
+                errors.push("renderLoreSurfaceLinks: output senza superfici lore");
             }
             views.renderOffscreenNow(dv);
             if (!rendered.some(node => String(node.innerHTML).includes("Reagisce prima"))) {

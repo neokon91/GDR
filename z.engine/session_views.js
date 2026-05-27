@@ -271,6 +271,7 @@
   });
   const dmDashboardViews = (await eval(await app.vault.adapter.read("z.engine/session_dm_dashboard.js")))(sharedViewContext);
   const economyViews = (await eval(await app.vault.adapter.read("z.engine/session_economy.js")))(sharedViewContext);
+  const loreViews = (await eval(await app.vault.adapter.read("z.engine/session_lore.js")))(sharedViewContext);
   const vaultControlViews = (await eval(await app.vault.adapter.read("z.engine/session_vault_control.js")))(sharedViewContext);
   const { continuityIssues } = continuityViews;
   const sessionViews = (await eval(await app.vault.adapter.read("z.engine/session_runtime.js")))({
@@ -1042,6 +1043,11 @@
     renderLivingWorldQueues: livingWorldViews.renderLivingWorldQueues,
     renderLivingWorldReadiness: livingWorldViews.renderLivingWorldReadiness,
     renderLivingWorldSurfaceLinks: livingWorldViews.renderLivingWorldSurfaceLinks,
+    renderLoreNow: loreViews.renderLoreNow,
+    renderLoreReadiness: loreViews.renderLoreReadiness,
+    renderLoreSignalQueues: loreViews.renderLoreSignalQueues,
+    renderLoreSurfaceLinks: loreViews.renderLoreSurfaceLinks,
+    renderLoreWorldQueues: loreViews.renderLoreWorldQueues,
     renderOffscreenNow: offscreenViews.renderOffscreenNow,
     renderOffscreenReactionQueues: offscreenViews.renderOffscreenReactionQueues,
     renderOffscreenReadiness: offscreenViews.renderOffscreenReadiness,

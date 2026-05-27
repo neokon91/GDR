@@ -683,6 +683,83 @@ blocks:
       | --- | --- |
       | Geopolitica | leggere confini e crisi |
       | Motore Mondo Vivo | propagare conseguenze |
+  lore_now:
+    type: dataviewjs
+    runtime_view: renderLoreNow
+    use_for:
+      - dashboard
+      - lore
+      - canone
+      - cockpit
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      gdr.renderLoreNow(dv, dv.current().mondo_attivo);
+    fallback: |-
+      | Priorita | Azione |
+      | --- | --- |
+      | Segnale prima | scegli canone, mistero, evento o lore da rendere giocabile |
+  lore_readiness:
+    type: dataviewjs
+    runtime_view: renderLoreReadiness
+    use_for:
+      - dashboard
+      - lore
+      - canone
+      - cockpit
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      gdr.renderLoreReadiness(dv, dv.current().mondo_attivo);
+    fallback: |-
+      | Area | Conteggio |
+      | --- | --- |
+      | Culture |  |
+      | Storia |  |
+      | Misteri |  |
+      | Materiali |  |
+  lore_signal_queues:
+    type: dataviewjs
+    runtime_view: renderLoreSignalQueues
+    use_for:
+      - dashboard
+      - lore
+      - canone
+      - cockpit
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      await gdr.renderLoreSignalQueues(dv, dv.current().mondo_attivo);
+    fallback: |-
+      | Nota | Decisione |
+      | --- | --- |
+  lore_world_queues:
+    type: dataviewjs
+    runtime_view: renderLoreWorldQueues
+    use_for:
+      - dashboard
+      - lore
+      - worldbuilding
+      - cockpit
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      await gdr.renderLoreWorldQueues(dv, dv.current().mondo_attivo);
+    fallback: |-
+      | Materiale | Uso |
+      | --- | --- |
+  lore_surface_links:
+    type: dataviewjs
+    runtime_view: renderLoreSurfaceLinks
+    use_for:
+      - dashboard
+      - lore
+      - canone
+      - cockpit
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      await gdr.renderLoreSurfaceLinks(dv);
+    fallback: |-
+      | Superficie | Uso |
+      | --- | --- |
+      | Atlante | collegare luoghi e mappe |
+      | Controllo canone | decidere verita e rumor |
   living_world_now:
     type: dataviewjs
     runtime_view: renderLivingWorldNow

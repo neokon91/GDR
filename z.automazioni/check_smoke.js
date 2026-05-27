@@ -136,6 +136,13 @@ for (const marker of ["renderEconomyNow", "renderEconomyReadiness", "renderEcono
     }
 }
 
+const lore = readTextRel(ROOT, "Hub/Lore Hub.md");
+for (const marker of ["renderLoreNow", "renderLoreReadiness", "renderLoreSignalQueues", "renderLoreWorldQueues", "renderLoreSurfaceLinks"]) {
+    if (!lore.includes(marker)) {
+        errors.push(`Smoke statico: Lore Hub non contiene ${marker}`);
+    }
+}
+
 const offscreen = readTextRel(ROOT, "Hub/Cosa Succede Fuori Scena.md");
 for (const marker of ["renderOffscreenNow", "renderOffscreenReadiness", "renderOffscreenReactionQueues", "renderOffscreenTableBridge", "renderOffscreenSurfaceLinks"]) {
     if (!offscreen.includes(marker)) {

@@ -59,6 +59,7 @@ REQUIRED_MODULES = {
     "taxonomy_depth",
     "dnd55_options",
     "link_targets",
+    "lore_cockpit",
     "tag_rules",
     "workflows",
 }

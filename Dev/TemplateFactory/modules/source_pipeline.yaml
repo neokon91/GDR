@@ -316,6 +316,24 @@ steps:
       - node
       - z.automazioni/render_economy_cockpit.js
       - --check
+  lore_cockpit:
+    purpose: Genera il contratto runtime del cockpit Lore Hub senza scrivere root generate.
+    sources:
+      - Dev/TemplateFactory/modules/lore_cockpit.yaml
+      - Dev/TemplateFactory/modules/bases_views.yaml
+      - Dev/TemplateFactory/modules/frontmatter_profiles.yaml
+      - Hub/Lore Hub.md
+      - z.engine/session_lore.js
+      - z.engine/session_views.js
+    outputs:
+      - z.automazioni/data/runtime/lore_cockpit.json
+    render:
+      - node
+      - z.automazioni/render_lore_cockpit.js
+    check:
+      - node
+      - z.automazioni/render_lore_cockpit.js
+      - --check
   offscreen_cockpit:
     purpose: Genera il contratto runtime del cockpit Cosa Succede Fuori Scena senza scrivere root generate.
     sources:
