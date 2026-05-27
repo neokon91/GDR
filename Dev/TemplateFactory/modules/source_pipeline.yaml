@@ -180,6 +180,24 @@ steps:
       - node
       - z.automazioni/render_worldbuilding_control_cockpit.js
       - --check
+  canon_control_cockpit:
+    purpose: Genera il contratto runtime del cockpit Controllo Canone senza scrivere root generate.
+    sources:
+      - Dev/TemplateFactory/modules/canon_control_cockpit.yaml
+      - Dev/TemplateFactory/modules/bases_views.yaml
+      - Dev/TemplateFactory/modules/frontmatter_profiles.yaml
+      - Hub/Controllo Canone.md
+      - z.engine/session_canon_control.js
+      - z.engine/session_views.js
+    outputs:
+      - z.automazioni/data/runtime/canon_control_cockpit.json
+    render:
+      - node
+      - z.automazioni/render_canon_control_cockpit.js
+    check:
+      - node
+      - z.automazioni/render_canon_control_cockpit.js
+      - --check
   user_path:
     purpose: Verifica il percorso utente primario dichiarato in YAML.
     sources:

@@ -11,6 +11,10 @@ const REQUIRED_EXPORTS = [
     "renderAtlasQueues",
     "renderAtlasReadiness",
     "renderAtlasSurfaceLinks",
+    "renderCanonControlNow",
+    "renderCanonControlQueues",
+    "renderCanonControlReadiness",
+    "renderCanonControlSurfaceLinks",
     "renderCombatReadiness",
     "renderConsequenceCards",
     "renderContinuityQueue",
@@ -43,6 +47,7 @@ const REQUIRED_EXPORTS = [
 const REQUIRED_MODULES = [
     "z.engine/session_continuity.js",
     "z.engine/session_atlas.js",
+    "z.engine/session_canon_control.js",
     "z.engine/session_dnd.js",
     "z.engine/session_maps.js",
     "z.engine/session_player.js",
@@ -182,6 +187,36 @@ async function main() {
                     recap_pubblico: "Recap pubblico pronto."
                 },
                 {
+                    file: { path: "Mondi/Timeline/Caduta dei Fari.md", name: "Caduta dei Fari", link: "Mondi/Timeline/Caduta dei Fari.md", folder: "Mondi/Timeline", mtime: 8 },
+                    categoria: "evento storico",
+                    stato: "pronto",
+                    mondo: "Mondi/Mondo Demo.md",
+                    canonico: true,
+                    stato_canonico: "canonico",
+                    fonte: ""
+                },
+                {
+                    file: { path: "Mondi/Timeline/Retcon del Faro.md", name: "Retcon del Faro", link: "Mondi/Timeline/Retcon del Faro.md", folder: "Mondi/Timeline", mtime: 9 },
+                    categoria: "evento storico",
+                    stato: "bozza",
+                    mondo: "Mondi/Mondo Demo.md",
+                    stato_canonico: "retcon",
+                    retcon_di: ["Mondi/Timeline/Caduta dei Fari.md"]
+                },
+                {
+                    file: { path: "Mondi/Segreti/Rumor del Faro.md", name: "Rumor del Faro", link: "Mondi/Segreti/Rumor del Faro.md", folder: "Mondi/Segreti", mtime: 10 },
+                    categoria: "segreto",
+                    stato: "bozza",
+                    mondo: "Mondi/Mondo Demo.md",
+                    stato_canonico: "rumor"
+                },
+                {
+                    file: { path: "Inbox/Segnale del Faro.md", name: "Segnale del Faro", link: "Inbox/Segnale del Faro.md", folder: "Inbox", mtime: 11 },
+                    categoria: "lore capture",
+                    stato: "da smistare",
+                    mondo: "Mondi/Mondo Demo.md"
+                },
+                {
                     file: { path: "Risorse/Mappe/Mappa Pubblica.md", name: "Mappa Pubblica", link: "Risorse/Mappe/Mappa Pubblica.md", mtime: 4 },
                     categoria: "mappa",
                     stato: "pronto",
@@ -278,6 +313,22 @@ async function main() {
             await views.renderAtlasSurfaceLinks(dv);
             if (!rendered.some(node => String(node.innerHTML).includes("Atlante con marker"))) {
                 errors.push("renderAtlasSurfaceLinks: output senza superfici atlante");
+            }
+            views.renderCanonControlNow(dv);
+            if (!rendered.some(node => String(node.innerHTML).includes("Sistema prima"))) {
+                errors.push("renderCanonControlNow: output senza priorita canonica");
+            }
+            views.renderCanonControlReadiness(dv);
+            if (!rendered.some(node => String(node.innerHTML).includes("Canonico"))) {
+                errors.push("renderCanonControlReadiness: output senza metriche canone");
+            }
+            await views.renderCanonControlQueues(dv);
+            if (!rendered.some(node => node.tag === "table" && String(node.text).includes("verita senza fonte"))) {
+                errors.push("renderCanonControlQueues: output senza coda provenienza");
+            }
+            await views.renderCanonControlSurfaceLinks(dv);
+            if (!rendered.some(node => String(node.innerHTML).includes("Revisione lore"))) {
+                errors.push("renderCanonControlSurfaceLinks: output senza superfici canone");
             }
             views.renderWorldbuildingFreedom(dv);
             if (!rendered.some(node => String(node.innerHTML).includes("Liberta di worldbuilding"))) {

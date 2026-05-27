@@ -397,6 +397,73 @@ blocks:
       | --- | --- |
       | Codex editabile | correggere campi e connessioni |
       | Controllo canone | stabilizzare verita e rumor |
+  canon_control_now:
+    type: dataviewjs
+    runtime_view: renderCanonControlNow
+    use_for:
+      - dashboard
+      - canone
+      - lore
+      - cockpit
+      - audit
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      gdr.renderCanonControlNow(dv, dv.current().mondo_attivo);
+    fallback: |-
+      | Priorita | Azione |
+      | --- | --- |
+      | Sistema prima | controlla fonte, rumor, contraddizioni e retcon |
+  canon_control_readiness:
+    type: dataviewjs
+    runtime_view: renderCanonControlReadiness
+    use_for:
+      - dashboard
+      - canone
+      - lore
+      - cockpit
+      - audit
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      gdr.renderCanonControlReadiness(dv, dv.current().mondo_attivo);
+    fallback: |-
+      | Area | Conteggio |
+      | --- | --- |
+      | Canonico |  |
+      | Rumor |  |
+      | Contraddizioni |  |
+      | Retcon |  |
+  canon_control_queues:
+    type: dataviewjs
+    runtime_view: renderCanonControlQueues
+    use_for:
+      - dashboard
+      - canone
+      - lore
+      - cockpit
+      - audit
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      await gdr.renderCanonControlQueues(dv, dv.current().mondo_attivo);
+    fallback: |-
+      | Nota | Decisione |
+      | --- | --- |
+  canon_control_surface_links:
+    type: dataviewjs
+    runtime_view: renderCanonControlSurfaceLinks
+    use_for:
+      - dashboard
+      - canone
+      - lore
+      - cockpit
+      - audit
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      await gdr.renderCanonControlSurfaceLinks(dv);
+    fallback: |-
+      | Superficie | Uso |
+      | --- | --- |
+      | Lore hub | vedere segnali e materiale collegato |
+      | Revisione lore | ripulire appunti e rumor |
 contracts:
   dataviewjs_has_no_file_writes: true
   empty_state_required: true

@@ -73,6 +73,13 @@ for (const marker of ["renderWorldbuildingControlNow", "renderWorldbuildingContr
     }
 }
 
+const canonControl = readTextRel(ROOT, "Hub/Controllo Canone.md");
+for (const marker of ["renderCanonControlNow", "renderCanonControlReadiness", "renderCanonControlQueues", "renderCanonControlSurfaceLinks"]) {
+    if (!canonControl.includes(marker)) {
+        errors.push(`Smoke statico: Controllo Canone non contiene ${marker}`);
+    }
+}
+
 for (const [label, relPath] of [
     ["DM Dashboard", "Hub/1. DM Dashboard.md"],
     ["Worldbuilder Dashboard", "Hub/Worldbuilder Dashboard.md"],

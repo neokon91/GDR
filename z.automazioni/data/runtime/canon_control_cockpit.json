@@ -1,0 +1,187 @@
+{
+  "generated_by": "render_canon_control_cockpit",
+  "source": "Dev/TemplateFactory/modules/canon_control_cockpit.yaml",
+  "version": "0.1.0",
+  "purpose": "Contratto operativo per trasformare Controllo Canone in cockpit canonico compatto.",
+  "dashboard": {
+    "page": "Hub/Controllo Canone.md",
+    "workflow": "controllo_canone",
+    "required_runtime_views": [
+      "renderCanonControlNow",
+      "renderCanonControlReadiness",
+      "renderCanonControlQueues",
+      "renderCanonControlSurfaceLinks"
+    ],
+    "required_visible_sections": [
+      "Filtro",
+      "Priorita",
+      "Stato Canone",
+      "Code Canoniche",
+      "Superfici"
+    ]
+  },
+  "panels": {
+    "now": {
+      "runtime_view": "renderCanonControlNow",
+      "promise": "Decidere quale verita, voce o retcon sistemare prima.",
+      "answers": [
+        "verita senza provenienza",
+        "rumor senza aggancio",
+        "contraddizione aperta",
+        "retcon incompleta"
+      ]
+    },
+    "readiness": {
+      "runtime_view": "renderCanonControlReadiness",
+      "promise": "Misurare canone, rumor, retcon e decisioni aperte.",
+      "answers": [
+        "verita confermate",
+        "voci e leggende",
+        "contraddizioni",
+        "provenienza",
+        "retcon"
+      ]
+    },
+    "queues": {
+      "runtime_view": "renderCanonControlQueues",
+      "promise": "Portare in tabella solo le decisioni canoniche azionabili.",
+      "answers": [
+        "cosa e vero",
+        "cosa e detto o dubbio",
+        "cosa si contraddice",
+        "cosa manca di fonte",
+        "cosa va propagato"
+      ]
+    },
+    "surfaces": {
+      "runtime_view": "renderCanonControlSurfaceLinks",
+      "promise": "Aprire gli strumenti giusti per stabilizzare lore, timeline e conseguenze.",
+      "answers": [
+        "rivedere lore",
+        "aggiornare timeline",
+        "propagare conseguenze",
+        "correggere campi"
+      ]
+    }
+  },
+  "queues": [
+    {
+      "id": "truth",
+      "label": "Vero, detto o dubbio",
+      "table_columns": [
+        "Nota",
+        "Tipo",
+        "Canone",
+        "Fonte",
+        "Sessioni"
+      ]
+    },
+    {
+      "id": "rumors",
+      "label": "Voci, leggende e bugie",
+      "table_columns": [
+        "Nota",
+        "Stato",
+        "Solidita",
+        "Aggancio"
+      ]
+    },
+    {
+      "id": "contradictions",
+      "label": "Contraddizioni aperte",
+      "table_columns": [
+        "Nota",
+        "Cosa smentisce",
+        "Cosa corregge",
+        "Motivo"
+      ]
+    },
+    {
+      "id": "provenance",
+      "label": "Verita senza provenienza",
+      "table_columns": [
+        "Nota",
+        "Tipo",
+        "Cosa manca",
+        "Azione"
+      ]
+    },
+    {
+      "id": "retcons",
+      "label": "Retcon da sistemare",
+      "table_columns": [
+        "Nota",
+        "Cosa corregge",
+        "Cosa manca",
+        "Prossimo passo"
+      ]
+    },
+    {
+      "id": "decisions",
+      "label": "Decisioni canoniche aperte",
+      "table_columns": [
+        "Nota",
+        "Tipo",
+        "Decisione",
+        "Azione"
+      ]
+    }
+  ],
+  "surfaces": [
+    {
+      "id": "lore_hub",
+      "label": "Lore hub",
+      "plugin": "Dataview",
+      "target": "Hub/Lore Hub.md",
+      "generated_release": false,
+      "badge": "Lore",
+      "role": "vedere segnali e materiale collegato",
+      "action": "Apri quando devi capire se un'informazione e segnale, mistero o fatto.",
+      "why": "Il canone non va deciso isolato dai segnali che lo rendono giocabile."
+    },
+    {
+      "id": "lore_review",
+      "label": "Revisione lore",
+      "plugin": "Dataview",
+      "target": "Hub/Revisione Lore.md",
+      "generated_release": false,
+      "badge": "Revisione",
+      "role": "ripulire appunti e rumor",
+      "action": "Apri quando una voce va archiviata, canonizzata o trasformata in mistero.",
+      "why": "La revisione separa materiale utile da rumore prima che entri nelle superfici operative."
+    },
+    {
+      "id": "living_world",
+      "label": "Motore mondo vivo",
+      "plugin": "Dataview",
+      "target": "Hub/Motore Mondo Vivo.md",
+      "generated_release": false,
+      "badge": "Propaga",
+      "role": "applicare conseguenze",
+      "action": "Apri quando una verita canonica deve cambiare luoghi, fazioni o timeline.",
+      "why": "Una verita confermata deve produrre conseguenze o vincoli, non restare etichetta."
+    },
+    {
+      "id": "worldbuilding_base",
+      "label": "Codex editabile",
+      "plugin": "Bases",
+      "target": "z.bases/Worldbuilding.base",
+      "generated_release": true,
+      "badge": "Base",
+      "role": "correggere stato canonico e collegamenti",
+      "action": "Apri quando molte schede hanno stato_canonico, fonte o connessioni da allineare.",
+      "why": "La Base generata permette correzioni tabellari senza rendere z.bases sorgente tracciato."
+    },
+    {
+      "id": "worldbuilding_control",
+      "label": "Controllo worldbuilding",
+      "plugin": "Dataview",
+      "target": "Hub/Controllo Worldbuilding.md",
+      "generated_release": false,
+      "badge": "Audit",
+      "role": "verificare buchi strutturali",
+      "action": "Apri quando una contraddizione nasce da schede superficiali o scollegate.",
+      "why": "Alcuni problemi canonici sono in realta buchi di profondita, connessione o giocabilita."
+    }
+  ]
+}
