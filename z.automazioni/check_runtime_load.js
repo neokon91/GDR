@@ -28,6 +28,11 @@ const REQUIRED_EXPORTS = [
     "renderEconomyQueues",
     "renderEconomyReadiness",
     "renderEconomySurfaceLinks",
+    "renderGeopoliticalNow",
+    "renderGeopoliticalPressureQueues",
+    "renderGeopoliticalQueues",
+    "renderGeopoliticalReadiness",
+    "renderGeopoliticalSurfaceLinks",
     "renderLiveCommandCenter",
     "renderLiveTableMaterials",
     "renderLiveTableNow",
@@ -83,6 +88,7 @@ const REQUIRED_MODULES = [
     "z.engine/session_dnd.js",
     "z.engine/session_dm_dashboard.js",
     "z.engine/session_economy.js",
+    "z.engine/session_geopolitical.js",
     "z.engine/session_maps.js",
     "z.engine/session_player.js",
     "z.engine/session_runtime.js",
@@ -175,15 +181,28 @@ async function main() {
                     culture_fondative: ["Mondi/Culture/Naviganti.md"]
                 },
                 {
-                    file: { path: "Mondi/Luoghi/Luogo Pubblico.md", name: "Luogo Pubblico", link: "Mondi/Luoghi/Luogo Pubblico.md", mtime: 3 },
+                    file: { path: "Mondi/Luoghi/Luogo Pubblico.md", name: "Luogo Pubblico", link: "Mondi/Luoghi/Luogo Pubblico.md", folder: "Mondi/Luoghi", mtime: 3 },
                     categoria: "luogo",
+                    tipo: "regno",
                     stato: "pronto",
+                    stabilita: "tesa",
+                    pressione: 4,
                     pubblico: true,
                     player_safe: "Luogo noto al party.",
                     mondo: "Mondi/Mondo Demo.md",
                     fazioni: ["Mondi/Fazioni/Consiglio.md"],
+                    legittimita: "consiglio portuale",
+                    capitale: "Mondi/Luoghi/Luogo Pubblico.md",
+                    governante: "Mondi/Fazioni/Consiglio.md",
+                    confini: ["Mondi/Rotte/Strada del Sale.md"],
+                    vassalli: [],
+                    relazioni: ["Mondi/Relazioni/Patto del Faro.md"],
+                    rivali: [],
+                    risorse_strategiche: ["Mondi/Risorse/Sale Lunare.md"],
+                    crisi_interne: ["Il porto chiude agli stranieri."],
                     coordinates: [45, 9],
-                    uso_al_tavolo: "Scena di trattativa."
+                    uso_al_tavolo: "Scena di trattativa.",
+                    prossima_mossa: "Il Consiglio militarizza il molo."
                 },
                 {
                     file: { path: "Mondi/Fazioni/Consiglio.md", name: "Consiglio", link: "Mondi/Fazioni/Consiglio.md", folder: "Mondi/Fazioni", mtime: 5 },
@@ -243,6 +262,19 @@ async function main() {
                     fazioni_controllanti: ["Mondi/Fazioni/Consiglio.md"],
                     rischi: ["embargo"],
                     prossima_mossa: "Il mercato chiude ai forestieri."
+                },
+                {
+                    file: { path: "Mondi/Relazioni/Patto del Faro.md", name: "Patto del Faro", link: "Mondi/Relazioni/Patto del Faro.md", folder: "Mondi/Relazioni", mtime: 23 },
+                    categoria: "relazione",
+                    stato: "tesa",
+                    mondo: "Mondi/Mondo Demo.md",
+                    tipo: "trattato",
+                    soggetti: ["Mondi/Fazioni/Consiglio.md", "Mondi/Fazioni/Rivali.md"],
+                    intensita: "alta",
+                    pressione: 6,
+                    posta: "controllo del faro",
+                    conseguenze: ["Embargo sul sale"],
+                    prossima_mossa: "Il patto viene rotto al tramonto."
                 },
                 {
                     file: { path: "Mondi/Missioni/Missione Pubblica.md", name: "Missione Pubblica", link: "Mondi/Missioni/Missione Pubblica.md", mtime: 2 },
@@ -418,6 +450,7 @@ async function main() {
                 if (query.includes('"Mondi/Rotte"')) return demoPages.filter(page => page.file.path.startsWith("Mondi/Rotte/"));
                 if (query.includes('"Mondi/Risorse"')) return demoPages.filter(page => page.file.path.startsWith("Mondi/Risorse/"));
                 if (query.includes('"Mondi/Mercati"')) return demoPages.filter(page => page.file.path.startsWith("Mondi/Mercati/"));
+                if (query.includes('"Mondi/Relazioni"')) return demoPages.filter(page => page.file.path.startsWith("Mondi/Relazioni/"));
                 if (query.includes('"Mondi/Religioni"')) return demoPages.filter(page => page.file.path.startsWith("Mondi/Religioni/"));
                 if (query.includes('"Mondi/Segreti"')) return demoPages.filter(page => page.file.path.startsWith("Mondi/Segreti/"));
                 if (query.includes('"Mondi/Compendium"')) return demoPages.filter(page => page.file.path.startsWith("Mondi/Compendium/"));
@@ -627,6 +660,26 @@ async function main() {
             await views.renderEconomySurfaceLinks(dv);
             if (!rendered.some(node => String(node.innerHTML).includes("Geopolitica"))) {
                 errors.push("renderEconomySurfaceLinks: output senza superfici economia");
+            }
+            views.renderGeopoliticalNow(dv);
+            if (!rendered.some(node => String(node.innerHTML).includes("Muovi prima"))) {
+                errors.push("renderGeopoliticalNow: output senza priorita geopolitica");
+            }
+            views.renderGeopoliticalReadiness(dv);
+            if (!rendered.some(node => String(node.innerHTML).includes("Territori"))) {
+                errors.push("renderGeopoliticalReadiness: output senza metriche territori");
+            }
+            await views.renderGeopoliticalQueues(dv);
+            if (!rendered.some(node => node.tag === "table" && String(node.text).includes("Patto del Faro"))) {
+                errors.push("renderGeopoliticalQueues: output senza relazioni diplomatiche");
+            }
+            await views.renderGeopoliticalPressureQueues(dv);
+            if (!rendered.some(node => node.tag === "table" && String(node.text).includes("Sale Lunare"))) {
+                errors.push("renderGeopoliticalPressureQueues: output senza risorse strategiche");
+            }
+            await views.renderGeopoliticalSurfaceLinks(dv);
+            if (!rendered.some(node => String(node.innerHTML).includes("Luoghi operativi"))) {
+                errors.push("renderGeopoliticalSurfaceLinks: output senza superfici geopolitiche");
             }
             views.renderLoreNow(dv);
             if (!rendered.some(node => String(node.innerHTML).includes("Segnale prima"))) {

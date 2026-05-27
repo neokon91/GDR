@@ -991,6 +991,42 @@ workflows:
       - Meta Bind
       - Dataview
       - Templater
+  geopolitica:
+    user_goal: Trasformare confini, poteri e crisi diplomatiche in pressione giocabile.
+    audience: user
+    entry_points:
+      - Hub/Geopolitical Dashboard.md
+    quick_actions:
+      - button: nuovo-territorio-politico-z-modelli-luogo-router-md
+        label: Nuovo territorio
+        use_when: serve uno stato, dominio, marca o protettorato
+      - button: nuova-relazione-z-modelli-worldbuilding-relazione-md
+        label: Nuova relazione
+        use_when: due poteri devono avere patto, rivalita o trattato
+      - button: motore-mondo-vivo-motore-mondo-vivo
+        label: Motore mondo vivo
+        use_when: una crisi deve propagarsi su luoghi, fazioni o timeline
+      - button: economia-e-rotte-economia-e-rotte-2
+        label: Economia e rotte
+        use_when: confini, risorse o pedaggi stanno muovendo il conflitto
+    action_groups:
+      conseguenze:
+        label: Conseguenze politiche
+        purpose: Convertire attriti diplomatici in conflitti, missioni o clock.
+        actions:
+          - button: nuovo-conflitto-z-modelli-worldbuilding-conflitto-md
+            label: Nuovo conflitto
+            use_when: una crisi diplomatica deve avere posta e schieramenti
+          - button: nuova-missione-z-modelli-dm-missione-md
+            label: Nuova missione
+            use_when: un confine o trattato crea un obiettivo per i PG
+          - button: nuovo-clock-z-modelli-dm-tracciato-md
+            label: Nuovo clock
+            use_when: guerra, embargo o successione devono avanzare nel tempo
+    required_plugins:
+      - Meta Bind
+      - Dataview
+      - Templater
   economia_rotte:
     user_goal: Rendere viaggi, risorse e mercati capaci di generare pressione di gioco.
     audience: user

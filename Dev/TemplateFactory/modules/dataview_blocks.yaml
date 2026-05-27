@@ -683,6 +683,83 @@ blocks:
       | --- | --- |
       | Geopolitica | leggere confini e crisi |
       | Motore Mondo Vivo | propagare conseguenze |
+  geopolitical_now:
+    type: dataviewjs
+    runtime_view: renderGeopoliticalNow
+    use_for:
+      - dashboard
+      - geopolitica
+      - poteri
+      - cockpit
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      gdr.renderGeopoliticalNow(dv, dv.current().mondo_attivo);
+    fallback: |-
+      | Priorita | Azione |
+      | --- | --- |
+      | Muovi prima | scegli territorio, relazione, crisi o buco politico |
+  geopolitical_readiness:
+    type: dataviewjs
+    runtime_view: renderGeopoliticalReadiness
+    use_for:
+      - dashboard
+      - geopolitica
+      - poteri
+      - cockpit
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      gdr.renderGeopoliticalReadiness(dv, dv.current().mondo_attivo);
+    fallback: |-
+      | Area | Conteggio |
+      | --- | --- |
+      | Territori |  |
+      | Relazioni |  |
+      | Crisi |  |
+      | Buchi |  |
+  geopolitical_queues:
+    type: dataviewjs
+    runtime_view: renderGeopoliticalQueues
+    use_for:
+      - dashboard
+      - geopolitica
+      - poteri
+      - cockpit
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      await gdr.renderGeopoliticalQueues(dv, dv.current().mondo_attivo);
+    fallback: |-
+      | Territorio | Pressione |
+      | --- | --- |
+  geopolitical_pressure_queues:
+    type: dataviewjs
+    runtime_view: renderGeopoliticalPressureQueues
+    use_for:
+      - dashboard
+      - geopolitica
+      - confini
+      - cockpit
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      await gdr.renderGeopoliticalPressureQueues(dv, dv.current().mondo_attivo);
+    fallback: |-
+      | Nota | Problema |
+      | --- | --- |
+  geopolitical_surface_links:
+    type: dataviewjs
+    runtime_view: renderGeopoliticalSurfaceLinks
+    use_for:
+      - dashboard
+      - geopolitica
+      - poteri
+      - cockpit
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      await gdr.renderGeopoliticalSurfaceLinks(dv);
+    fallback: |-
+      | Superficie | Uso |
+      | --- | --- |
+      | Economia e rotte | leggere risorse e pedaggi |
+      | Motore Mondo Vivo | applicare crisi |
   lore_now:
     type: dataviewjs
     runtime_view: renderLoreNow

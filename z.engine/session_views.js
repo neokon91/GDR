@@ -271,6 +271,7 @@
   });
   const dmDashboardViews = (await eval(await app.vault.adapter.read("z.engine/session_dm_dashboard.js")))(sharedViewContext);
   const economyViews = (await eval(await app.vault.adapter.read("z.engine/session_economy.js")))(sharedViewContext);
+  const geopoliticalViews = (await eval(await app.vault.adapter.read("z.engine/session_geopolitical.js")))(sharedViewContext);
   const loreViews = (await eval(await app.vault.adapter.read("z.engine/session_lore.js")))(sharedViewContext);
   const vaultControlViews = (await eval(await app.vault.adapter.read("z.engine/session_vault_control.js")))(sharedViewContext);
   const { continuityIssues } = continuityViews;
@@ -1032,6 +1033,11 @@
     renderEconomyReadiness: economyViews.renderEconomyReadiness,
     renderEconomySurfaceLinks: economyViews.renderEconomySurfaceLinks,
     renderImpactedNextMoveCards: continuityViews.renderImpactedNextMoveCards,
+    renderGeopoliticalNow: geopoliticalViews.renderGeopoliticalNow,
+    renderGeopoliticalPressureQueues: geopoliticalViews.renderGeopoliticalPressureQueues,
+    renderGeopoliticalQueues: geopoliticalViews.renderGeopoliticalQueues,
+    renderGeopoliticalReadiness: geopoliticalViews.renderGeopoliticalReadiness,
+    renderGeopoliticalSurfaceLinks: geopoliticalViews.renderGeopoliticalSurfaceLinks,
     renderLiveCommandCenter: sessionViews.renderLiveCommandCenter,
     renderLiveTableMaterials: liveTableViews.renderLiveTableMaterials,
     renderLiveTableNow: liveTableViews.renderLiveTableNow,

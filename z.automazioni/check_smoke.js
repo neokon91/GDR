@@ -105,6 +105,7 @@ for (const [label, relPath] of [
     ["Atlante del Mondo", "Hub/Atlante del Mondo.md"],
     ["Controllo Worldbuilding", "Hub/Controllo Worldbuilding.md"],
     ["Economia E Rotte", "Hub/Economia E Rotte.md"],
+    ["Geopolitical Dashboard", "Hub/Geopolitical Dashboard.md"],
     ["Lore Hub", "Hub/Lore Hub.md"],
     ["Motore Mondo Vivo", "Hub/Motore Mondo Vivo.md"],
     ["Controllo Canone", "Hub/Controllo Canone.md"],
@@ -133,6 +134,13 @@ const economy = readTextRel(ROOT, "Hub/Economia E Rotte.md");
 for (const marker of ["renderEconomyNow", "renderEconomyReadiness", "renderEconomyQueues", "renderEconomyDependencyQueues", "renderEconomySurfaceLinks"]) {
     if (!economy.includes(marker)) {
         errors.push(`Smoke statico: Economia E Rotte non contiene ${marker}`);
+    }
+}
+
+const geopolitical = readTextRel(ROOT, "Hub/Geopolitical Dashboard.md");
+for (const marker of ["renderGeopoliticalNow", "renderGeopoliticalReadiness", "renderGeopoliticalQueues", "renderGeopoliticalPressureQueues", "renderGeopoliticalSurfaceLinks"]) {
+    if (!geopolitical.includes(marker)) {
+        errors.push(`Smoke statico: Geopolitical Dashboard non contiene ${marker}`);
     }
 }
 

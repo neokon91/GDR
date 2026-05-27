@@ -49,6 +49,7 @@ REQUIRED_MODULES = {
     "bases_views",
     "bacheche",
     "frontmatter_profiles",
+    "geopolitical_cockpit",
     "runtime_profiles",
     "resource_hub",
     "resource_indexes",
