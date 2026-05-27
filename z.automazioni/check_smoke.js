@@ -59,6 +59,13 @@ for (const marker of ["renderWorldbuilderNow", "renderWorldbuilderReadiness", "r
     }
 }
 
+const atlas = readTextRel(ROOT, "Hub/Atlante del Mondo.md");
+for (const marker of ["renderAtlasNow", "renderAtlasReadiness", "renderAtlasQueues", "renderAtlasSurfaceLinks"]) {
+    if (!atlas.includes(marker)) {
+        errors.push(`Smoke statico: Atlante del Mondo non contiene ${marker}`);
+    }
+}
+
 for (const [label, relPath] of [
     ["DM Dashboard", "Hub/1. DM Dashboard.md"],
     ["Worldbuilder Dashboard", "Hub/Worldbuilder Dashboard.md"],

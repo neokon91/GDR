@@ -236,13 +236,16 @@
     pageFromLink,
     pageTitle,
     pagesFromLinks,
+    pluginStatus,
     pressure,
     publicCandidate,
+    readJsonRel,
     renderCardGrid,
     renderEmptyState,
     sessionCandidates
   };
   const mapViews = (await eval(await app.vault.adapter.read("z.engine/session_maps.js")))(sharedViewContext);
+  const atlasViews = (await eval(await app.vault.adapter.read("z.engine/session_atlas.js")))(sharedViewContext);
   const dndViews = (await eval(await app.vault.adapter.read("z.engine/session_dnd.js")))(sharedViewContext);
   const playerViews = (await eval(await app.vault.adapter.read("z.engine/session_player.js")))(sharedViewContext);
   const continuityViews = (await eval(await app.vault.adapter.read("z.engine/session_continuity.js")))(sharedViewContext);
@@ -1117,7 +1120,11 @@
     ...legacy,
     escapeHtml: gdrCore.escapeHtml,
     renderActiveSessionBanner: sessionViews.renderActiveSessionBanner,
+    renderAtlasNow: atlasViews.renderAtlasNow,
     renderAtlasMapCards: mapViews.renderAtlasMapCards,
+    renderAtlasQueues: atlasViews.renderAtlasQueues,
+    renderAtlasReadiness: atlasViews.renderAtlasReadiness,
+    renderAtlasSurfaceLinks: atlasViews.renderAtlasSurfaceLinks,
     renderCreationFeedback,
     renderConsequenceCards: continuityViews.renderConsequenceCards,
     renderEmptyState,

@@ -1,0 +1,182 @@
+{
+  "generated_by": "render_atlas_cockpit",
+  "source": "Dev/TemplateFactory/modules/atlas_cockpit.yaml",
+  "version": "0.1.0",
+  "purpose": "Contratto operativo per trasformare Atlante del Mondo in cockpit spaziale.",
+  "dashboard": {
+    "page": "Hub/Atlante del Mondo.md",
+    "workflow": "atlante_mondo",
+    "required_runtime_views": [
+      "renderAtlasNow",
+      "renderAtlasReadiness",
+      "renderAtlasQueues",
+      "renderAtlasSurfaceLinks"
+    ],
+    "required_visible_sections": [
+      "Filtro",
+      "Adesso",
+      "Prontezza",
+      "Code Cartografiche",
+      "Mappe E Strumenti"
+    ]
+  },
+  "panels": {
+    "now": {
+      "runtime_view": "renderAtlasNow",
+      "promise": "Decidere quale nodo spaziale correggere o usare adesso.",
+      "answers": [
+        "luogo senza mappa",
+        "marker pronto",
+        "rotta sotto pressione",
+        "mappa pubblicabile"
+      ]
+    },
+    "readiness": {
+      "runtime_view": "renderAtlasReadiness",
+      "promise": "Misurare geografia, marker, rotte e buchi cartografici.",
+      "answers": [
+        "luoghi",
+        "marker",
+        "mappe",
+        "rotte"
+      ]
+    },
+    "queues": {
+      "runtime_view": "renderAtlasQueues",
+      "promise": "Portare in tabella solo problemi e risorse spaziali azionabili.",
+      "answers": [
+        "buchi cartografici",
+        "marker pronti",
+        "rotte e territori",
+        "mappe player-safe"
+      ]
+    },
+    "surfaces": {
+      "runtime_view": "renderAtlasSurfaceLinks",
+      "promise": "Aprire basi, mappe, importatori e disegni dal cockpit.",
+      "answers": [
+        "correggere coordinate",
+        "importare mappe",
+        "vedere luoghi",
+        "disegnare fronti"
+      ]
+    }
+  },
+  "queues": [
+    {
+      "id": "gaps",
+      "label": "Buchi cartografici",
+      "table_columns": [
+        "Nota",
+        "Problema",
+        "Azione"
+      ]
+    },
+    {
+      "id": "markers",
+      "label": "Marker pronti",
+      "table_columns": [
+        "Nota",
+        "Coordinate",
+        "Layer"
+      ]
+    },
+    {
+      "id": "routes",
+      "label": "Rotte e territori",
+      "table_columns": [
+        "Nota",
+        "Pressione",
+        "Prossima mossa"
+      ]
+    },
+    {
+      "id": "public_maps",
+      "label": "Mappe player-safe",
+      "table_columns": [
+        "Nota",
+        "Stato",
+        "Mostrare"
+      ]
+    }
+  ],
+  "surfaces": [
+    {
+      "id": "atlas_maps",
+      "label": "Atlante con marker",
+      "plugin": "Maps",
+      "target": "z.bases/Atlante Mappe.base",
+      "generated_release": true,
+      "badge": "Mappa",
+      "role": "vedere coordinate e layer",
+      "action": "Apri quando devi controllare marker, icone, colori o layer.",
+      "why": "Maps legge la Base generata; il sorgente resta nei moduli YAML."
+    },
+    {
+      "id": "locations_base",
+      "label": "Luoghi operativi",
+      "plugin": "Bases",
+      "target": "z.bases/Luoghi.base",
+      "generated_release": true,
+      "badge": "Base",
+      "role": "correggere gerarchie e pericoli",
+      "action": "Apri quando luoghi, regioni o territori hanno campi incompleti.",
+      "why": "Tipo, luogo_padre, pericolo, pressione e fazioni restano modificabili in tabella."
+    },
+    {
+      "id": "economy_base",
+      "label": "Rotte e risorse",
+      "plugin": "Bases",
+      "target": "z.bases/Economia.base",
+      "generated_release": true,
+      "badge": "Base",
+      "role": "leggere viaggi e strozzature",
+      "action": "Apri quando una rotta, risorsa o mercato muove il territorio.",
+      "why": "Le pressioni economiche diventano fronti spaziali e missioni."
+    },
+    {
+      "id": "maps_index",
+      "label": "Archivio mappe",
+      "plugin": "Dataview",
+      "target": "Risorse/Mappe/Mappe.md",
+      "generated_release": false,
+      "badge": "Archivio",
+      "role": "aprire supporti spaziali",
+      "action": "Apri quando devi trovare asset, mappe zoom o schema relazioni.",
+      "why": "Il fallback Markdown resta leggibile anche senza viste mappa."
+    },
+    {
+      "id": "map_import",
+      "label": "Importare mappe",
+      "plugin": "Templater",
+      "target": "Risorse/Importare Mappe.md",
+      "generated_release": false,
+      "badge": "Import",
+      "role": "portare dentro asset esterni",
+      "action": "Apri quando devi normalizzare una mappa generata o importata.",
+      "why": "Gli importatori restano automazioni controllate, non contenuto sorgente manuale."
+    },
+    {
+      "id": "fronti_excalidraw",
+      "label": "Fronti visuali",
+      "plugin": "Excalidraw",
+      "target": "Risorse/Mappe/Schema Relazioni GDR.excalidraw.md",
+      "generated_release": false,
+      "badge": "Disegno",
+      "role": "disegnare pressioni e indizi",
+      "action": "Apri quando confini, fazioni o indizi sono piu chiari come schema.",
+      "why": "Excalidraw serve a ragionare prima di fissare campi e relazioni."
+    },
+    {
+      "id": "fileclass_map",
+      "label": "Campi mappa",
+      "plugin": "Metadata Menu",
+      "target": "z.fileclass/mappa.md",
+      "generated_release": true,
+      "badge": "Campi",
+      "role": "compilare properties mappa",
+      "action": "Usa quando mancano coordinate, layer, icona, colore o versione giocatori.",
+      "why": "Le FileClass sono generate in release e non rientrano come sorgente tracciato."
+    }
+  ]
+}

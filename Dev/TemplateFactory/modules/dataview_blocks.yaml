@@ -180,6 +180,68 @@ blocks:
     fallback: |-
       | Mappa | Tipo | Coordinate | Luoghi |
       | --- | --- | --- | --- |
+  atlas_now:
+    type: dataviewjs
+    runtime_view: renderAtlasNow
+    use_for:
+      - dashboard
+      - atlante
+      - mappe
+      - cockpit
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      gdr.renderAtlasNow(dv, dv.current().mondo_attivo);
+    fallback: |-
+      | Scelta | Stato |
+      | --- | --- |
+      | Fai adesso | correggi il prossimo buco cartografico |
+  atlas_readiness:
+    type: dataviewjs
+    runtime_view: renderAtlasReadiness
+    use_for:
+      - dashboard
+      - atlante
+      - mappe
+      - cockpit
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      gdr.renderAtlasReadiness(dv, dv.current().mondo_attivo);
+    fallback: |-
+      | Area | Conteggio |
+      | --- | --- |
+      | Luoghi |  |
+      | Marker |  |
+      | Rotte |  |
+  atlas_queues:
+    type: dataviewjs
+    runtime_view: renderAtlasQueues
+    use_for:
+      - dashboard
+      - atlante
+      - mappe
+      - cockpit
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      await gdr.renderAtlasQueues(dv, dv.current().mondo_attivo);
+    fallback: |-
+      | Nota | Azione |
+      | --- | --- |
+  atlas_surface_links:
+    type: dataviewjs
+    runtime_view: renderAtlasSurfaceLinks
+    use_for:
+      - dashboard
+      - atlante
+      - mappe
+      - cockpit
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      await gdr.renderAtlasSurfaceLinks(dv);
+    fallback: |-
+      | Superficie | Uso |
+      | --- | --- |
+      | Atlante con marker | vedere coordinate e layer |
+      | Importare mappe | normalizzare asset esterni |
   dnd55_material_pipeline:
     type: dataviewjs
     runtime_view: renderDnd55MaterialPipeline

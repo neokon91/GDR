@@ -7,6 +7,10 @@ const ROOT = process.cwd();
 const errors = [];
 const REQUIRED_EXPORTS = [
     "renderActiveSessionBanner",
+    "renderAtlasNow",
+    "renderAtlasQueues",
+    "renderAtlasReadiness",
+    "renderAtlasSurfaceLinks",
     "renderCombatReadiness",
     "renderConsequenceCards",
     "renderContinuityQueue",
@@ -34,6 +38,7 @@ const REQUIRED_EXPORTS = [
 ];
 const REQUIRED_MODULES = [
     "z.engine/session_continuity.js",
+    "z.engine/session_atlas.js",
     "z.engine/session_dnd.js",
     "z.engine/session_maps.js",
     "z.engine/session_player.js",
@@ -142,6 +147,16 @@ async function main() {
                     missioni: ["Mondi/Missioni/Missione Pubblica.md"]
                 },
                 {
+                    file: { path: "Mondi/Rotte/Strada del Sale.md", name: "Strada del Sale", link: "Mondi/Rotte/Strada del Sale.md", folder: "Mondi/Rotte", mtime: 7 },
+                    categoria: "rotta",
+                    stato: "contesa",
+                    mondo: "Mondi/Mondo Demo.md",
+                    partenza: "Mondi/Luoghi/Luogo Pubblico.md",
+                    arrivo: "Mondi/Luoghi/Luogo Pubblico.md",
+                    pressione: 5,
+                    prossima_mossa: "Il pedaggio raddoppia."
+                },
+                {
                     file: { path: "Mondi/Missioni/Missione Pubblica.md", name: "Missione Pubblica", link: "Mondi/Missioni/Missione Pubblica.md", mtime: 2 },
                     categoria: "missione",
                     stato: "in corso",
@@ -181,7 +196,11 @@ async function main() {
                 if (query.includes('"Mondi/Sessioni"')) return demoPages.filter(page => page.file.path.startsWith("Mondi/Sessioni/"));
                 if (query.includes('"Mondi/Missioni"')) return demoPages.filter(page => page.file.path.startsWith("Mondi/Missioni/"));
                 if (query.includes('"Mondi/Personaggi"')) return demoPages.filter(page => page.file.path.startsWith("Mondi/Personaggi/"));
+                if (query.includes('"Mondi/Fazioni"')) return demoPages.filter(page => page.file.path.startsWith("Mondi/Fazioni/"));
                 if (query.includes('"Mondi/Luoghi"')) return demoPages.filter(page => page.file.path.startsWith("Mondi/Luoghi/"));
+                if (query.includes('"Mondi/Rotte"')) return demoPages.filter(page => page.file.path.startsWith("Mondi/Rotte/"));
+                if (query.includes('"Mondi/Culture"') || query.includes('"Mondi/Lingue"')) return demoPages.filter(page => page.file.path.startsWith("Mondi/Culture/") || page.file.path.startsWith("Mondi/Lingue/"));
+                if (query.includes('"Mondi/Storia"') || query.includes('"Mondi/Timeline"')) return demoPages.filter(page => page.file.path.startsWith("Mondi/Storia/") || page.file.path.startsWith("Mondi/Timeline/"));
                 if (query.includes('"Mondi/Dispense"')) return demoPages.filter(page => page.file.path.startsWith("Mondi/Dispense/"));
                 if (query.includes('"Risorse/Mappe"')) return demoPages.filter(page => page.file.path.startsWith("Risorse/Mappe/"));
                 if (query.includes('"Mondi"') || query.includes('"Campagne"') || query.includes('"Inbox"')) {
@@ -238,6 +257,22 @@ async function main() {
             await views.renderVaultReadiness(dv, "setup");
             if (!rendered.some(node => node.tag === "table" || String(node.text).includes("Pulsanti e creazione note"))) {
                 errors.push("renderVaultReadiness: output setup non renderizzato");
+            }
+            views.renderAtlasNow(dv);
+            if (!rendered.some(node => String(node.innerHTML).includes("Marker pronti"))) {
+                errors.push("renderAtlasNow: output senza marker pronti");
+            }
+            views.renderAtlasReadiness(dv);
+            if (!rendered.some(node => String(node.innerHTML).includes("Rotte"))) {
+                errors.push("renderAtlasReadiness: output senza contatore rotte");
+            }
+            await views.renderAtlasQueues(dv);
+            if (!rendered.some(node => node.tag === "table" && String(node.text).includes("Il pedaggio raddoppia"))) {
+                errors.push("renderAtlasQueues: output senza coda rotte");
+            }
+            await views.renderAtlasSurfaceLinks(dv);
+            if (!rendered.some(node => String(node.innerHTML).includes("Atlante con marker"))) {
+                errors.push("renderAtlasSurfaceLinks: output senza superfici atlante");
             }
             views.renderWorldbuildingFreedom(dv);
             if (!rendered.some(node => String(node.innerHTML).includes("Liberta di worldbuilding"))) {

@@ -144,6 +144,24 @@ steps:
       - node
       - z.automazioni/render_worldbuilding_cockpit.js
       - --check
+  atlas_cockpit:
+    purpose: Genera il contratto runtime del cockpit atlante senza scrivere root generate.
+    sources:
+      - Dev/TemplateFactory/modules/atlas_cockpit.yaml
+      - Dev/TemplateFactory/modules/bases_views.yaml
+      - Dev/TemplateFactory/modules/frontmatter_profiles.yaml
+      - Hub/Atlante del Mondo.md
+      - z.engine/session_atlas.js
+      - z.engine/session_views.js
+    outputs:
+      - z.automazioni/data/runtime/atlas_cockpit.json
+    render:
+      - node
+      - z.automazioni/render_atlas_cockpit.js
+    check:
+      - node
+      - z.automazioni/render_atlas_cockpit.js
+      - --check
   user_path:
     purpose: Verifica il percorso utente primario dichiarato in YAML.
     sources:
