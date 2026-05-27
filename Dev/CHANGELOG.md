@@ -4,13 +4,14 @@
 
 ### Aggiunto
 
+- `z.bacheche` e documentazione repo-dev consolidate: le bacheche sono generate da YAML/Jinja e `docs/` e stato rimosso come area separata.
 - Percorso utente nuovo blindato da `check:user-path`: 17 superfici primarie e avanzate verificano workflow user-facing, deck semplice e pulsanti Meta Bind configurati.
 - `check:release-quality` valida shape delle azioni Meta Bind, cartelle di creazione, comandi plugin reali e wrapper Templater richiamabili.
 - `check:release-quality` blocca API DataviewJS fragili nei blocchi Markdown utente; la diagnostica plugin deve passare dal runtime `z.engine`.
 - TemplateFactory genera anche il template Avventura, con wrapper Templater dedicato e profilo YAML gia esistente.
 - `metabind_config.yaml` diventa fonte YAML completa per `.obsidian/plugins/obsidian-meta-bind-plugin/data.json`, verificata da `check:metabind-config`.
 - `source_pipeline.yaml` dichiara MD/JSON generati da YAML/Jinja; `check:generation-contract` verifica il piano di render e blocca output generati non dichiarati nella pipeline.
-- Le preview `Dev/TemplateFactory/examples/generated`, `dist` e `z.modelli` non sono tracciati: restano output locale/release generato dai sorgenti.
+- Le preview `Dev/TemplateFactory/examples/generated`, `dist`, `SRD`, `z.modelli`, `z.bacheche`, `z.bases`, `z.fileclass`, JSON runtime e JSON plugin generati non sono tracciati: restano output locale/release generato dai sorgenti.
 - Workflow dichiarativi per dashboard DM, preparazione, live, post-sessione, fuori scena, worldbuilding, atlante, canone, compendium, Bibbia del mondo, economia, lore, motore mondo vivo e iniziativa.
 - `npm run release:demo` genera una release pulita con demo utente inclusa nello ZIP.
 - `generate_demo_world.js` crea `Demo Regno Di Prova.md` e uno scenario minimo con mondo, campagna, luogo, fazione, missione, sessione attiva, clock, incontro, creatura, oggetto, dispensa e conseguenza propagabile.
@@ -24,7 +25,7 @@
 - `npm run check:smoke` come gate dedicato per la parte automatizzabile dello smoke demo finale.
 - `npm run check:release` come gate dedicato per versione, changelog e verifica release pulita.
 - La release non include più una demo manuale mantenuta nota per nota.
-- `Dev/plugin_matrix.json` per mappare ogni plugin installato a funzione, guida, pagina operativa e smoke.
+- `Dev/TemplateFactory/modules/plugin_matrix.yaml` come sorgente della matrice plugin; `Dev/plugin_matrix.json` resta output locale generato.
 - Azioni Meta Bind generate per smistare e canonizzare bozze del Generatore di Contenuti Fantasy.
 - [[z.bases/Fazioni.base]] per correggere rapidamente fazioni in movimento, pressione, relazioni, mondo e archivio.
 - [[z.bases/Economia.base]] per lavorare in tabella su risorse, rotte, mercati e pressioni economiche.
@@ -60,7 +61,7 @@
 - `session_runtime.js` separa viste sessione, live table e post-sessione; `session_views.js` resta bridge compatibile.
 - `check_runtime_load.js` carica il runtime DataviewJS con adapter Obsidian simulato e verifica gli export principali.
 - `player_safety.js` separa il gate anti-segreti/player-facing da `check_vault.js`.
-- [[docs/FANTASYWORLD_INTEGRATION]] documenta cosa promuovere dal laboratorio FantasyWorld: SRD PG, test dati, macro Jinja, assi tematici, cosmologia e regole plugin.
+- Le note di porting private sono state consolidate nei contratti YAML e nella documentazione Dev canonica, senza mantenere `docs/` come area separata.
 - `import:map` come dispatch unico per Azgaar, Watabou City e Watabou Dungeon.
 - `check:release-artifact` genera una release temporanea, verifica cartella/ZIP e ripulisce `dist/`.
 - GitHub Actions esegue `npm run check` su push e pull request.

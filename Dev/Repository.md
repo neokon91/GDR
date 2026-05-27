@@ -24,18 +24,18 @@ Questa nota e tecnica. Serve solo a chi cura il vault, non al DM che lo usa per 
 | `Hub/Vista Giocatori.md` | materiale condivisibile | Non deve mostrare segreti o prossime mosse DM. |
 | `Hub/Worldbuilder Dashboard.md` | costruzione mondo avanzata | Deve mostrare relazioni, buchi e pressioni, non solo archivi. |
 | `Hub/Motore Mondo Vivo.md` | stato sistemico del mondo | Deve mostrare propagazione, causalita, faction dynamics e continuita narrativa. |
-| `Giocatori/` | indice area giocatori | Area pubblica o condivisibile. |
-| `Inbox/` | appunti grezzi e live | Qui entra cio che non e ancora canonico. |
-| `Mondi/` | ambientazioni canoniche | Qui stanno luoghi, PNG, fazioni, relazioni, missioni, incontri e timeline. |
+| `Giocatori/` | indice area giocatori | Cartella utente materializzata in release, non sorgente tracciato. |
+| `Inbox/` | appunti grezzi e live | Cartella utente materializzata in release, non sorgente tracciato. |
+| `Mondi/` | ambientazioni canoniche | Cartella utente materializzata in release, non sorgente tracciato. |
 | `Risorse/` | guide, strumenti, mappe, media, tabelle | Materiale riutilizzabile e documentazione del vault. |
 | `Dev/Roadmap/` | roadmap attiva e storiche | Archivio manutenzione, non percorso primario del DM. |
-| `SRD/` | riferimento regolamentare generato | Non trattare come contenuto canonico del mondo. |
-| `z.modelli/` | template Templater | Percorsi richiamati da pulsanti Meta Bind. |
+| `SRD/` | riferimento regolamentare generato | Materializzato in release, non sorgente tracciato. |
+| `z.modelli/` | template Templater | Output TemplateFactory materializzato localmente o in release. |
 | `z.modelli/azioni/` | template azione Meta Bind | Deve restare sottile: solo chiamate a `meta_actions.js`. |
 | `z.modelli/wizard/` | wizard Templater centralizzati | Deve restare sottile: solo chiamate a `wizard_layer.js`. |
-| `z.automazioni/` | runtime Templater, helper e CLI | Cambiare nomi rompe template e controlli. Templater vede solo `z.automazioni/templater/`. |
+| `z.automazioni/` | runtime Templater, helper e CLI | Cambiare nomi rompe template e controlli. I wrapper `z.automazioni/templater/` sono generati. |
 | `z.engine/` | componenti JS riusabili | Viste operative da richiamare da DataviewJS o JS Engine. |
-| `z.bacheche/` | board Kanban | Workflow operativo, non archivio permanente. |
+| `z.bacheche/` | board Kanban | Output YAML/Jinja materializzato dal modulo `bacheche`. |
 | `.obsidian/` | configurazione Obsidian e plugin | Parte del prodotto: non e solo preferenza locale. |
 
 ## Cosa Toccare Prima
@@ -50,16 +50,17 @@ Questa nota e tecnica. Serve solo a chi cura il vault, non al DM che lo usa per 
 - `z.modelli`: Templater e Meta Bind usano percorsi espliciti come `templateFile`.
 - `z.automazioni/templater`: wrapper funzione caricati da Templater con `tp.user.nome_script`; la logica reale resta in `z.automazioni`.
 - `z.engine`: le dashboard possono importare componenti JS da qui; non duplicare logica lunga nei blocchi DataviewJS.
-- `.obsidian/plugins/obsidian-meta-bind-plugin/data.json`: contiene input template e button template operativi.
-- `.obsidian/plugins/metadata-menu/data.json` e `z.fileclass/`: insieme definiscono lo schema operativo.
+- `.obsidian/plugins/obsidian-meta-bind-plugin/data.json`: contiene input template e button template operativi, ma e generato da YAML.
+- `.obsidian/plugins/metadata-menu/data.json` e `z.fileclass/`: insieme definiscono lo schema operativo; i target generati non vanno tracciati.
 - `.obsidian/plugins`: il vault include plugin e configurazioni necessarie.
-- `SRD`: puo essere rigenerato da `z.automazioni/import_srd.js`.
+- `SRD`: puo essere rigenerato da `z.automazioni/import_srd.js`, ma resta fuori dall'indice Git.
 - `Inizia Qui.md` resta l'unica dashboard root: le altre viste principali stanno in `Hub/`.
 
 ## Comandi
 
 ```bash
 npm run check
+npm run sync:sources
 npm run check:repo
 npm run clean:repo
 npm run import:srd
@@ -70,6 +71,7 @@ Se `npm` non e disponibile, usa direttamente:
 
 ```bash
 node z.automazioni/check_vault.js
+python3 z.automazioni/run_source_pipeline.py --mode render
 node z.automazioni/repo_hygiene.js
 node z.automazioni/repo_hygiene.js --fix
 node z.automazioni/import_srd.js

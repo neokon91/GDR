@@ -14,12 +14,12 @@ La generazione deve servire il profilo principale D&D 5.5/SRD senza legare il Co
 | --- | --- |
 | `modules/` | Moduli YAML dichiarativi. Non contengono runtime utente. |
 | `jinja/` | Scheletri Jinja2 per produrre Markdown statico pronto per Obsidian. |
-| `examples/` | Output o casi di prova manuali. |
+| `examples/` | Output o casi di prova manuali ignorati da Git. |
 
 ## Pipeline scheda meccanica PG
 
 1. Modificare `modules/srd_character_build.yaml` (core + opzioni personaggio).
-2. `npm run sync:sources` → JSON in `z.automazioni/data/srd/`.
+2. `npm run sync:sources` → JSON locale ignorato in `z.automazioni/data/srd/`.
 3. `z.automazioni/pg.js` legge i JSON e compone frontmatter (`caratteristiche`, `abilita`, `punti_ferita`, …).
 4. Jinja usa `pg_mechanics_schema.yaml` come contesto di render e `jinja/macros/pg_mechanics.j2` + `jinja/partials/pg_scheda_meccanica.md.j2` per il tab **Scheda** nel blueprint `pg`.
 5. `npm run render:templates` puo produrre anteprime locali ignorate da Git; `npm run generate:templates` materializza i template finali in `z.modelli` solo come output locale o release.
@@ -41,12 +41,12 @@ Il modello da seguire e quello gia sperimentato in FantasyWorld: un modulo YAML 
 La direzione ammessa e:
 
 1. `modules/*.yaml` dichiara contratti, opzioni, pulsanti, workflow o profili.
-2. Uno script esplicito genera un artefatto piccolo e versionabile in `z.automazioni/data/`.
+2. Uno script esplicito genera un artefatto piccolo e ricostruibile in `z.automazioni/data/`.
 3. Jinja o JS leggono l'artefatto generato quando serve evitare duplicazione.
 4. `npm run check` verifica che YAML e artefatto siano sincronizzati.
 5. I JSON interni dei plugin Obsidian vengono generati solo per sottoinsiemi sicuri; altrimenti restano validati, non sovrascritti.
 
-Primo caso attivo: `workflows.yaml` genera `z.automazioni/data/workflows/quick_actions.json` con `npm run generate:workflow-data`; `npm run check:workflow-data` fallisce se il JSON non e aggiornato.
+I casi attivi includono `workflows.yaml` → `z.automazioni/data/workflows/quick_actions.json`, `srd_character_build.yaml` → `z.automazioni/data/srd/*.json`, `bacheche.yaml` → `z.bacheche/*.md` e i cockpit YAML → `z.automazioni/data/runtime/*.json`. Sono output locali ignorati da Git.
 
 Non introdurre generatori opachi: ogni JSON prodotto deve indicare `generated_by`, `source` e `purpose`, e deve essere ricostruibile da un singolo comando npm.
 
@@ -57,14 +57,18 @@ npm run sync:sources
 npm run check:source-pipeline
 npm run check:templates
 npm run check:workflow-data
+npm run check:bacheche
 npm run check:metadata
 npm run render:templates
 npm run render:metadata
 npm run generate:workflow-data
+npm run render:bacheche
 npm run audit:templates
 ```
 
 `sync:sources` e `check:source-pipeline` leggono `modules/source_pipeline.yaml`: e il punto unico per capire quali YAML/Jinja/codice utile generano gli output richiesti dal vault.
+
+`render:bacheche` genera `z.bacheche/*.md` da `modules/bacheche.yaml` e Jinja. Le bacheche sono superficie vault finale, non sorgente tracciato.
 
 `render:templates` scrive solo anteprime locali ignorate in `Dev/TemplateFactory/examples/generated/`. Non modifica `z.modelli`, `z.fileclass` o `z.bases`.
 
@@ -72,7 +76,7 @@ npm run audit:templates
 
 `render:metabind-config` assembla `.obsidian/plugins/obsidian-meta-bind-plugin/data.json` da tre YAML leggibili: impostazioni base, input e pulsanti.
 
-`release:clean` materializza `z.modelli`, `z.bases` e `z.fileclass` direttamente dentro `dist/vault-gdr-clean`: il repo sorgente non deve tracciare superfici Obsidian generate.
+`release:clean` materializza `SRD`, `z.modelli`, `z.bacheche`, `z.bases` e `z.fileclass` direttamente dentro `dist/vault-gdr-clean`: il repo sorgente non deve tracciare superfici Obsidian generate.
 
 `audit:templates` confronta anteprime locali e target dichiarati in `template_blueprints.yaml`; il report resta output locale ignorato.
 

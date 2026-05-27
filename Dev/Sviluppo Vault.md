@@ -13,7 +13,7 @@ Questa nota contiene convenzioni tecniche per mantenere il vault: campi, templat
 - Le istruzioni tecniche non vanno nel README se non sono necessarie per usare il vault al tavolo.
 - Il profilo regolamentare principale e D&D 5.5/SRD: i campi di creature, incontri, oggetti, ricompense, party e session prep devono restare compatibili con questo uso, mentre il Codex del mondo resta separato dal regolamento.
 - La linea architetturale e vincolante: YAML dichiara contratti e profili, Jinja/TemplateFactory genera Markdown statico, JS del vault contiene runtime e automazioni. Non aggiungere logica fragile nel corpo dei template.
-- **Scheda meccanica PG**: `Dev/TemplateFactory/modules/srd_character_build.yaml` → `npm run sync:sources` → `z.automazioni/data/srd/*.json` → `z.automazioni/pg.js` (Templater) → frontmatter strutturato → Jinja (`pg_mechanics_schema.yaml`, `macros/pg_mechanics.j2`, tab **Scheda** in `PG.md`). Dettaglio utente: [[docs/PG_SCHEDA_MECHANICA]]; porting e backlog da FantasyWorld: [[docs/FANTASYWORLD_INTEGRATION]].
+- **Scheda meccanica PG**: `Dev/TemplateFactory/modules/srd_character_build.yaml` → `npm run sync:sources` → `z.automazioni/data/srd/*.json` → `z.automazioni/pg.js` (Templater) → frontmatter strutturato → Jinja (`pg_mechanics_schema.yaml`, `macros/pg_mechanics.j2`, tab **Scheda** in `PG.md`). Le note di porting private non sono documentazione stabile del repository: ogni promozione passa da YAML, renderer e check.
 - [[Dev/README]] e l'indice canonico della documentazione di sviluppo: prima di creare una nuova nota tecnica, verifica se la modifica appartiene a roadmap, sviluppo, plugin layer, release o TemplateFactory.
 
 ## Stati delle Note Consigliati
@@ -107,7 +107,7 @@ I contratti vivono in:
 - `z.automazioni/templater`: wrapper caricati direttamente da Templater. Devono esportare solo funzioni.
 - `z.automazioni`: logica reale usata dai wrapper Templater e script CLI di manutenzione. Se cambi un percorso qui, aggiorna anche dashboard e Dataview.
 - `z.engine`: componenti JS riusabili per viste operative. Nuova logica complessa va qui, non copiata in blocchi DataviewJS sparsi.
-- `z.bacheche`: bacheche Kanban per preparazione e creature.
+- `z.bacheche`: bacheche Kanban per preparazione e creature, generate da `Dev/TemplateFactory/modules/bacheche.yaml`.
 
 ## Linter Manuale
 
@@ -154,7 +154,20 @@ Regole:
 
 La configurazione Meta Bind non si modifica a mano nel JSON: la fonte e `Dev/TemplateFactory/modules/metabind_config.yaml`, poi `npm run render:metabind-config` materializza `.obsidian/plugins/obsidian-meta-bind-plugin/data.json`. `npm run check:metabind-config` blocca ogni divergenza.
 
-Gli artefatti generati vivono sotto contratto in `Dev/TemplateFactory/modules/source_pipeline.yaml`. Template Markdown in `z.modelli`, preview TemplateFactory, workflow JSON e configurazioni JSON generate devono essere ricostruibili da YAML/Jinja e codice di rendering; `npm run check:generation-contract` blocca output non dichiarati nella pipeline.
+Gli artefatti generati vivono sotto contratto in `Dev/TemplateFactory/modules/source_pipeline.yaml`. Template Markdown in `z.modelli`, bacheche Kanban in `z.bacheche`, preview TemplateFactory, workflow JSON, runtime JSON e configurazioni JSON generate devono essere ricostruibili da YAML/Jinja e codice di rendering; `npm run check:generation-contract` blocca output non dichiarati o tracciati da Git.
+
+## Scheda Meccanica PG
+
+Il template **PG** combina il flusso narrativo del vault con un tab **Scheda** per statistiche, abilita, punti ferita e addestramenti D&D 5.5.
+
+Contratto tecnico:
+
+- `Dev/TemplateFactory/modules/srd_character_build.yaml` contiene classi, specie, background, caratteristiche, abilita e opzioni PG.
+- `npm run sync:sources` genera `z.automazioni/data/srd/core.json` e `z.automazioni/data/srd/opzioni_personaggio.json`.
+- `z.automazioni/pg.js` legge quei JSON e scrive frontmatter strutturato nella nota.
+- `Dev/TemplateFactory/modules/pg_mechanics_schema.yaml` e `Dev/TemplateFactory/jinja/macros/pg_mechanics.j2` generano il tab **Scheda** nel template PG.
+
+Regola: non hardcodare nuove opzioni PG nello script. Aggiungile nel modulo YAML, rigenera con `npm run sync:sources` e lascia che `npm run check:srd-character-data` verifichi l'allineamento.
 
 ## Runtime Live E Session Context
 
@@ -218,7 +231,7 @@ Regola: questi template creano note in `Inbox` e devono provare a collegare auto
 
 Lo script `z.automazioni/import_srd.js` importa il System Reference Document 5.2.1 in italiano dalla fork `neokon91/DND-SRD-IT` e genera note dentro `SRD/`.
 
-**Peso del repository:** `SRD/` resta versionato nel git per release e check; un clone senza SRD non e ancora supportato. Per rigenerare la cartella localmente usa `npm run import:srd` (dettagli in [[docs/SRD_SETUP]]). Non pianificare la rimozione da git senza aggiornare `check_release`, `release:clean` e i riferimenti wikilink.
+**Peso del repository:** `SRD/` non e sorgente tracciato. La release pulita lo materializza dentro `dist/vault-gdr-clean` tramite `z.automazioni/import_srd.js`, eseguito da `npm run release:clean`. Per avere una copia locale di sviluppo puoi usare `npm run import:srd`, ma il risultato resta ignorato da Git.
 
 Regole:
 
@@ -228,7 +241,7 @@ Regole:
 - per note SRD non mostro, preferisci frontmatter semplice e leggibile da Properties;
 - una nota generata viene sovrascritta solo se contiene ancora quel campo;
 - se una nota SRD viene modificata a mano, rimuovere o cambiare `generato_da` prima di rigenerare;
-- `SRD` resta separato dal contenuto canonico del mondo.
+- `SRD` resta separato dal contenuto canonico del mondo e non deve rientrare nel sorgente tracciato.
 
 Comando:
 

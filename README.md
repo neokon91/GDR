@@ -91,7 +91,7 @@ Se dashboard, pulsanti o tabelle non funzionano, apri [[Risorse/Primo Avvio Stru
 - `Mondi/Tracciati`: clock e progress track per fronti, missioni, rituali, minacce e viaggi.
 - `Mondi/Incontri`: scene di conflitto, ostacoli e combattimenti pronti.
 - `Risorse`: mappe, immagini, audio, video, tabelle e dispense generiche.
-- `SRD`: riferimento separato al System Reference Document 5.2.1 in italiano.
+- `SRD`: riferimento separato al System Reference Document 5.2.1 in italiano, materializzato nella release pulita.
 - `Inbox`: idee grezze e appunti non ancora sistemati.
 - `Giocatori`: area dedicata a materiale condivisibile.
 - `Vista Giocatori`: portale sicuro per i giocatori, pronto per tavolo, stream o pubblicazione selettiva.
@@ -140,14 +140,14 @@ Se dashboard, pulsanti o tabelle non funzionano, apri [[Risorse/Primo Avvio Stru
 - Per preparare una release o una copia pulita, apri [[Dev/RELEASE]] e [[Risorse/Controllo Vault]].
 - Per creare una copia consegnabile, apri [[Dev/Release Pulita]] o usa `npm run release:clean`.
 - Per importare mappe esterne come bozze, apri [[Risorse/Importare Mappe]] o usa `npm run import:azgaar`.
-- Non modificare manualmente le note in `SRD`: sono un riferimento regolamentare separato e possono essere rigenerate.
+- Non modificare manualmente le note in `SRD` nella release: sono un riferimento regolamentare separato e possono essere rigenerate.
 
 ## Sviluppo leggero
 
-- Il repository include `SRD/` versionato (~migliaia di note regolamentari). Per rigenerarlo: `npm run import:srd` (vedi [[docs/SRD_SETUP]]).
-- Per i dati meccanici della creazione PG (classi, specie, background, caratteristiche): `npm run import:srd-data` (vedi [[docs/PG_SCHEDA_MECHANICA]]).
-- Un clone **senza** cartella SRD non è ancora un percorso supportato: i check e la release pulita la assumono presente.
-- In futuro si potrà valutare un submodule o download opzionale; per ora non rimuovere `SRD/` dal git senza aggiornare tutti i check di release.
+- Il repository sorgente non traccia `SRD/`, `z.bases/`, `z.fileclass/`, `z.bacheche/`, `z.modelli/` o i JSON generati: sono output materializzati da pipeline.
+- Dopo un clone o una modifica ai moduli YAML/Jinja, esegui `npm run sync:sources` prima dei check.
+- La release pulita rigenera `SRD/`, fileClass, Bases, template, bacheche e JSON runtime con `npm run release:clean`.
+- Per i dati meccanici della creazione PG modifica `Dev/TemplateFactory/modules/srd_character_build.yaml`, poi esegui `npm run sync:sources`.
 
 ## Sviluppo
 
@@ -155,6 +155,7 @@ Comandi principali dal root del vault:
 
 ```bash
 npm run check
+npm run sync:sources
 npm run check:repo
 npm run clean:repo
 npm run import:srd
@@ -164,7 +165,7 @@ npm run release:clean
 npm run release:demo
 ```
 
-`npm run check` valida plugin obbligatori, link, template Meta Bind, helper Templater, file del layer interno, input template, pulsanti, preset Metadata Menu, igiene del repository e sintassi degli script in `z.automazioni` e `z.engine`. `npm run release:clean` rigenera i template runtime da TemplateFactory prima di creare la copia consegnabile. `npm run release:demo` crea la stessa release includendo la demo generata nello ZIP. `npm run clean:repo` rimuove solo artefatti locali e temporanei ignorati.
+`npm run check` valida plugin obbligatori, link, template Meta Bind, helper Templater, file del layer interno, input template, pulsanti, preset Metadata Menu, igiene del repository e sintassi degli script in `z.automazioni` e `z.engine`. `npm run sync:sources` materializza gli output ignorati necessari al vault locale. `npm run release:clean` rigenera i template runtime da TemplateFactory prima di creare la copia consegnabile. `npm run release:demo` crea la stessa release includendo la demo generata nello ZIP. `npm run clean:repo` rimuove solo artefatti locali e temporanei ignorati.
 
 
 
@@ -176,13 +177,10 @@ npm run release:demo
 
 ## SRD
 
-`SRD` contiene il System Reference Document 5.2.1 in italiano come archivio regolamentare separato dal contenuto del mondo. Per rigenerarlo usa:
-
-La rigenerazione dello SRD e una procedura tecnica documentata in [[Dev/Sviluppo Vault]].
+`SRD` contiene il System Reference Document 5.2.1 in italiano come archivio regolamentare separato dal contenuto del mondo. Non e sorgente tracciato: viene rigenerato nella release pulita da `z.automazioni/import_srd.js`. La procedura tecnica sta in [[Dev/Sviluppo Vault]].
 
 ## Licenza
 
 - Il vault e i suoi contenuti sono rilasciati con licenza **CC BY-NC-SA 4.0**. Vedi [[LICENSE]].
 - Gli script originali in `z.automazioni` sono rilasciati con licenza **MIT**. Vedi [[z.automazioni/LICENSE]].
-- Il materiale in `SRD` mantiene la propria licenza **CC-BY-4.0** e non e coperto dalla licenza del vault. Vedi [[SRD/Licenza SRD]].
-- Gli assi tematici FantasyWorld sono idea originale riservata e non sono coperti dalla licenza generale del vault. Vedi [[LICENSE]].
+- Il materiale in `SRD` mantiene la propria licenza **CC-BY-4.0** e non e coperto dalla licenza del vault.

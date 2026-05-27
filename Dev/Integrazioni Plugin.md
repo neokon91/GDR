@@ -7,7 +7,7 @@ cssclasses:
 
 Questa pagina decide quali plugin integrare per primi nel vault. Non e una lista di installazione: e una coda di lavoro per trasformare plugin gia scelti in funzioni utili al DM.
 
-Per il contratto verificato della 1.0, vedi `Dev/plugin_matrix.json` e `Dev/TemplateFactory/modules/plugin_contracts.yaml`; `npm run check` fallisce se un plugin abilitato non ha funzione, guida, pagina operativa, smoke e contratto release.
+Per il contratto verificato della 1.0, vedi `Dev/TemplateFactory/modules/plugin_matrix.yaml` e `Dev/TemplateFactory/modules/plugin_contracts.yaml`; `Dev/plugin_matrix.json` e solo output locale generato da `npm run sync:sources`. `npm run check` fallisce se un plugin abilitato non ha funzione, guida, pagina operativa, smoke e contratto release.
 
 ## Fonti Ufficiali Consultate
 

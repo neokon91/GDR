@@ -42,9 +42,9 @@ Non contiene materiali di sviluppo repository, issue template GitHub, roadmap in
 
 - `.obsidian/plugins`: contiene plugin e configurazioni necessarie al comportamento custom del vault.
 - `.obsidian/snippets/gdr-vault.css`: definisce dashboard, callout e vista tavolo.
-- `z.modelli`: template usati dai pulsanti.
+- `z.modelli`: template usati dai pulsanti, materializzati da TemplateFactory.
 - `z.automazioni`: script Templater e controlli tecnici.
-- `SRD`: riferimento regolamentare separato dal contenuto canonico.
+- `SRD`: riferimento regolamentare separato dal contenuto canonico, rigenerato nella release.
 
 ## Cosa Controllare A Mano
 
