@@ -109,6 +109,12 @@ const REQUIRED_EXPORTS = [
     "renderVaultControlSurfaceLinks",
     "renderVaultReadiness",
     "renderWorkflowCommandDeck",
+    "renderWorldBibleArticles",
+    "renderWorldBibleGaps",
+    "renderWorldBibleIdentity",
+    "renderWorldBibleNow",
+    "renderWorldBibleReadiness",
+    "renderWorldBibleSurfaceLinks",
     "renderWorldImpact",
     "renderWorldbuilderNow",
     "renderWorldbuilderQueues",
@@ -138,6 +144,7 @@ const REQUIRED_MODULES = [
     "z.engine/session_runtime.js",
     "z.engine/session_vault_control.js",
     "z.engine/session_views.js",
+    "z.engine/session_world_bible.js",
     "z.engine/session_live_table.js",
     "z.engine/session_living_world.js",
     "z.engine/session_lore.js",
@@ -707,6 +714,30 @@ async function main() {
             await views.renderGeneratedDraftsSurfaceLinks(dv);
             if (!rendered.some(node => String(node.innerHTML).includes("Controllo vault"))) {
                 errors.push("renderGeneratedDraftsSurfaceLinks: output senza superfici smistamento");
+            }
+            views.renderWorldBibleNow(dv);
+            if (!rendered.some(node => String(node.innerHTML).includes("Mondo prima"))) {
+                errors.push("renderWorldBibleNow: output senza priorita Codex");
+            }
+            views.renderWorldBibleReadiness(dv);
+            if (!rendered.some(node => String(node.innerHTML).includes("Player-safe"))) {
+                errors.push("renderWorldBibleReadiness: output senza metriche player-safe");
+            }
+            views.renderWorldBibleIdentity(dv);
+            if (!rendered.some(node => String(node.innerHTML).includes("Mondo Demo"))) {
+                errors.push("renderWorldBibleIdentity: output senza identita mondo");
+            }
+            views.renderWorldBibleArticles(dv);
+            if (!rendered.some(node => String(node.innerHTML).includes("Luogo Pubblico"))) {
+                errors.push("renderWorldBibleArticles: output senza articoli Codex");
+            }
+            await views.renderWorldBibleGaps(dv);
+            if (!rendered.some(node => node.tag === "table" && String(node.text).includes("tono"))) {
+                errors.push("renderWorldBibleGaps: output senza buchi identita mondo");
+            }
+            await views.renderWorldBibleSurfaceLinks(dv);
+            if (!rendered.some(node => String(node.innerHTML).includes("Vista giocatori"))) {
+                errors.push("renderWorldBibleSurfaceLinks: output senza superfici Bibbia del Mondo");
             }
             views.renderPreparationNow(dv);
             if (!rendered.some(node => String(node.innerHTML).includes("Prepara prima"))) {

@@ -154,6 +154,13 @@ for (const marker of ["renderGeneratedDraftsNow", "renderGeneratedDraftsReadines
     }
 }
 
+const worldBible = readTextRel(ROOT, "Hub/Bibbia del Mondo.md");
+for (const marker of ["renderWorldBibleNow", "renderWorldBibleReadiness", "renderWorldBibleIdentity", "renderWorldBibleArticles", "renderWorldBibleGaps", "renderWorldBibleSurfaceLinks"]) {
+    if (!worldBible.includes(marker)) {
+        errors.push(`Smoke statico: Bibbia del Mondo non contiene ${marker}`);
+    }
+}
+
 const livingWorld = readTextRel(ROOT, "Hub/Motore Mondo Vivo.md");
 for (const marker of ["renderLivingWorldNow", "renderLivingWorldReadiness", "renderLivingWorldQueues", "renderLivingWorldPressureQueues", "renderLivingWorldSurfaceLinks"]) {
     if (!livingWorld.includes(marker)) {

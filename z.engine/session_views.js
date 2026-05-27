@@ -282,6 +282,7 @@
   const generatedDraftsViews = (await eval(await app.vault.adapter.read("z.engine/session_generated_drafts.js")))(sharedViewContext);
   const geopoliticalViews = (await eval(await app.vault.adapter.read("z.engine/session_geopolitical.js")))(sharedViewContext);
   const campaignBuilderViews = (await eval(await app.vault.adapter.read("z.engine/session_campaign_builder.js")))(sharedViewContext);
+  const worldBibleViews = (await eval(await app.vault.adapter.read("z.engine/session_world_bible.js")))(sharedViewContext);
   const loreViews = (await eval(await app.vault.adapter.read("z.engine/session_lore.js")))(sharedViewContext);
   const loreReviewViews = (await eval(await app.vault.adapter.read("z.engine/session_lore_review.js")))(sharedViewContext);
   const qualityReportViews = (await eval(await app.vault.adapter.read("z.engine/session_quality_report.js")))(sharedViewContext);
@@ -1076,6 +1077,9 @@
     renderLoreSignalQueues: loreViews.renderLoreSignalQueues,
     renderLoreSurfaceLinks: loreViews.renderLoreSurfaceLinks,
     renderLoreWorldQueues: loreViews.renderLoreWorldQueues,
+    renderCodexEditorial: worldBibleViews.renderCodexEditorial,
+    renderCodexReadyShowcase: worldBibleViews.renderCodexReadyShowcase,
+    renderCodexReadyToPlay: worldBibleViews.renderCodexReadyToPlay,
     renderOffscreenNow: offscreenViews.renderOffscreenNow,
     renderOffscreenReactionQueues: offscreenViews.renderOffscreenReactionQueues,
     renderOffscreenReadiness: offscreenViews.renderOffscreenReadiness,
@@ -1135,6 +1139,12 @@
     renderClosableContinuity: continuityViews.renderClosableContinuity,
     renderPropagationTargets: continuityViews.renderPropagationTargets,
     renderWorldImpact: continuityViews.renderWorldImpact,
+    renderWorldBibleArticles: worldBibleViews.renderWorldBibleArticles,
+    renderWorldBibleGaps: worldBibleViews.renderWorldBibleGaps,
+    renderWorldBibleIdentity: worldBibleViews.renderWorldBibleIdentity,
+    renderWorldBibleNow: worldBibleViews.renderWorldBibleNow,
+    renderWorldBibleReadiness: worldBibleViews.renderWorldBibleReadiness,
+    renderWorldBibleSurfaceLinks: worldBibleViews.renderWorldBibleSurfaceLinks,
     renderWorldCreationStatus,
     renderWorldbuilderNow,
     renderWorldbuilderQueues,

@@ -592,6 +592,98 @@ blocks:
       | --- | --- |
       | Controllo vault | verificare residui |
       | Worldbuilder | collegare al mondo |
+  world_bible_now:
+    type: dataviewjs
+    runtime_view: renderWorldBibleNow
+    use_for:
+      - dashboard
+      - bibbia mondo
+      - codex
+      - cockpit
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      gdr.renderWorldBibleNow(dv, dv.current().mondo_attivo);
+    fallback: |-
+      | Priorita | Azione |
+      | --- | --- |
+      | Mondo prima | rendi leggibile, mostrabile o giocabile |
+  world_bible_readiness:
+    type: dataviewjs
+    runtime_view: renderWorldBibleReadiness
+    use_for:
+      - dashboard
+      - bibbia mondo
+      - codex
+      - stato
+      - cockpit
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      gdr.renderWorldBibleReadiness(dv, dv.current().mondo_attivo);
+    fallback: |-
+      | Area | Conteggio |
+      | --- | --- |
+      | Mondi |  |
+      | Player-safe |  |
+      | Da giocare |  |
+  world_bible_identity:
+    type: dataviewjs
+    runtime_view: renderWorldBibleIdentity
+    use_for:
+      - dashboard
+      - bibbia mondo
+      - identita
+      - cockpit
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      gdr.renderWorldBibleIdentity(dv, dv.current().mondo_attivo);
+    fallback: |-
+      | Mondo | Stato |
+      | --- | --- |
+      |  | gancio, tono, conflitto e misteri |
+  world_bible_articles:
+    type: dataviewjs
+    runtime_view: renderWorldBibleArticles
+    use_for:
+      - dashboard
+      - bibbia mondo
+      - articoli
+      - cockpit
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      gdr.renderWorldBibleArticles(dv, dv.current().mondo_attivo);
+    fallback: |-
+      | Articolo | Uso |
+      | --- | --- |
+  world_bible_gaps:
+    type: dataviewjs
+    runtime_view: renderWorldBibleGaps
+    use_for:
+      - dashboard
+      - bibbia mondo
+      - buchi
+      - cockpit
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      await gdr.renderWorldBibleGaps(dv, dv.current().mondo_attivo);
+    fallback: |-
+      | Nota | Manca |
+      | --- | --- |
+  world_bible_surface_links:
+    type: dataviewjs
+    runtime_view: renderWorldBibleSurfaceLinks
+    use_for:
+      - dashboard
+      - bibbia mondo
+      - superfici
+      - cockpit
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      await gdr.renderWorldBibleSurfaceLinks(dv);
+    fallback: |-
+      | Superficie | Uso |
+      | --- | --- |
+      | Atlante | luoghi e mappe |
+      | Vista giocatori | materiale mostrabile |
   worldbuilder_now:
     type: dataviewjs
     runtime_view: renderWorldbuilderNow

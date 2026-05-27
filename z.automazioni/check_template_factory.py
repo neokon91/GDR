@@ -67,6 +67,7 @@ REQUIRED_MODULES = {
     "taxonomy_depth",
     "dnd55_options",
     "link_targets",
+    "world_bible_cockpit",
     "lore_cockpit",
     "lore_review_cockpit",
     "tag_rules",

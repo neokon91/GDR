@@ -261,6 +261,24 @@ steps:
       - node
       - z.automazioni/render_generated_drafts_cockpit.js
       - --check
+  world_bible_cockpit:
+    purpose: Genera il contratto runtime del cockpit Bibbia del Mondo senza scrivere root generate.
+    sources:
+      - Dev/TemplateFactory/modules/world_bible_cockpit.yaml
+      - Dev/TemplateFactory/modules/bases_views.yaml
+      - Dev/TemplateFactory/modules/frontmatter_profiles.yaml
+      - Hub/Bibbia del Mondo.md
+      - z.engine/session_world_bible.js
+      - z.engine/session_views.js
+    outputs:
+      - z.automazioni/data/runtime/world_bible_cockpit.json
+    render:
+      - node
+      - z.automazioni/render_world_bible_cockpit.js
+    check:
+      - node
+      - z.automazioni/render_world_bible_cockpit.js
+      - --check
   worldbuilding_cockpit:
     purpose: Genera il contratto runtime del cockpit worldbuilding senza scrivere root generate.
     sources:

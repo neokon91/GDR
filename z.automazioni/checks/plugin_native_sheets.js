@@ -11,7 +11,7 @@ const REQUIRED_HUB_EXPERIENCE = [
     ["Hub/1. DM Dashboard.md", "gdr-dm-dashboard", ["Regia DM", "renderDmDashboardNow", "renderDmDashboardSurfaceLinks"]],
     ["Hub/Worldbuilder Dashboard.md", "gdr-worldbuilder-dashboard", ["Scriptorium del Mondo", "renderWorldbuilderNow", "Campagna"]],
     ["Hub/Atlante del Mondo.md", "gdr-atlante-dashboard", ["mappa", "luoghi", "rotte"]],
-    ["Hub/Bibbia del Mondo.md", "gdr-world-bible", ["World Anvil locale", "Codex", "renderCodexEditorial"]],
+    ["Hub/Bibbia del Mondo.md", "gdr-world-bible", ["World Anvil locale", "Codex", "renderWorldBibleNow"]],
     ["Hub/Campagna da Ambientazione.md", "gdr-campaign-builder", ["campagne", "archi narrativi", "Opportunità"]],
     ["Hub/Durante il Gioco.md", "gdr-tavolo-dashboard", ["Schermo del DM", "Sessione Attiva", "renderLiveTableNow"]],
     ["Hub/Cosa Succede Fuori Scena.md", "gdr-offscreen-dashboard", ["Motore Fuori Scena", "renderOffscreenNow", "campagne_attive"]],
