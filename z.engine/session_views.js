@@ -283,6 +283,7 @@
   const geopoliticalViews = (await eval(await app.vault.adapter.read("z.engine/session_geopolitical.js")))(sharedViewContext);
   const campaignBuilderViews = (await eval(await app.vault.adapter.read("z.engine/session_campaign_builder.js")))(sharedViewContext);
   const worldBibleViews = (await eval(await app.vault.adapter.read("z.engine/session_world_bible.js")))(sharedViewContext);
+  const compendiumViews = (await eval(await app.vault.adapter.read("z.engine/session_compendium.js")))(sharedViewContext);
   const loreViews = (await eval(await app.vault.adapter.read("z.engine/session_lore.js")))(sharedViewContext);
   const loreReviewViews = (await eval(await app.vault.adapter.read("z.engine/session_lore_review.js")))(sharedViewContext);
   const qualityReportViews = (await eval(await app.vault.adapter.read("z.engine/session_quality_report.js")))(sharedViewContext);
@@ -1042,6 +1043,12 @@
     renderCampaignBuilderOpportunityQueues: campaignBuilderViews.renderCampaignBuilderOpportunityQueues,
     renderCampaignBuilderReadiness: campaignBuilderViews.renderCampaignBuilderReadiness,
     renderCampaignBuilderSurfaceLinks: campaignBuilderViews.renderCampaignBuilderSurfaceLinks,
+    renderCompendiumHistoryQueues: compendiumViews.renderCompendiumHistoryQueues,
+    renderCompendiumNow: compendiumViews.renderCompendiumNow,
+    renderCompendiumOperationalQueues: compendiumViews.renderCompendiumOperationalQueues,
+    renderCompendiumReadiness: compendiumViews.renderCompendiumReadiness,
+    renderCompendiumSurfaceLinks: compendiumViews.renderCompendiumSurfaceLinks,
+    renderCompendiumTypeMix: compendiumViews.renderCompendiumTypeMix,
     renderCreationFeedback,
     renderConsequenceCards: continuityViews.renderConsequenceCards,
     renderEmptyState,

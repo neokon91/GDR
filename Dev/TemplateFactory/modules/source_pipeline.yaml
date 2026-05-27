@@ -279,6 +279,24 @@ steps:
       - node
       - z.automazioni/render_world_bible_cockpit.js
       - --check
+  compendium_cockpit:
+    purpose: Genera il contratto runtime del cockpit Compendium Del Mondo senza scrivere root generate.
+    sources:
+      - Dev/TemplateFactory/modules/compendium_cockpit.yaml
+      - Dev/TemplateFactory/modules/bases_views.yaml
+      - Dev/TemplateFactory/modules/frontmatter_profiles.yaml
+      - Hub/Compendium Del Mondo.md
+      - z.engine/session_compendium.js
+      - z.engine/session_views.js
+    outputs:
+      - z.automazioni/data/runtime/compendium_cockpit.json
+    render:
+      - node
+      - z.automazioni/render_compendium_cockpit.js
+    check:
+      - node
+      - z.automazioni/render_compendium_cockpit.js
+      - --check
   worldbuilding_cockpit:
     purpose: Genera il contratto runtime del cockpit worldbuilding senza scrivere root generate.
     sources:

@@ -161,6 +161,13 @@ for (const marker of ["renderWorldBibleNow", "renderWorldBibleReadiness", "rende
     }
 }
 
+const compendium = readTextRel(ROOT, "Hub/Compendium Del Mondo.md");
+for (const marker of ["renderCompendiumNow", "renderCompendiumReadiness", "renderCompendiumTypeMix", "renderCompendiumOperationalQueues", "renderCompendiumHistoryQueues", "renderCompendiumSurfaceLinks"]) {
+    if (!compendium.includes(marker)) {
+        errors.push(`Smoke statico: Compendium Del Mondo non contiene ${marker}`);
+    }
+}
+
 const livingWorld = readTextRel(ROOT, "Hub/Motore Mondo Vivo.md");
 for (const marker of ["renderLivingWorldNow", "renderLivingWorldReadiness", "renderLivingWorldQueues", "renderLivingWorldPressureQueues", "renderLivingWorldSurfaceLinks"]) {
     if (!livingWorld.includes(marker)) {

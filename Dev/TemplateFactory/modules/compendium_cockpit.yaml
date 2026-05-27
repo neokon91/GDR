@@ -1,0 +1,191 @@
+id: compendium_cockpit
+purpose: Contratto operativo per trasformare Compendium Del Mondo in cockpit di elementi originali non-SRD collegati al gioco.
+version: 0.1.0
+dashboard:
+  page: Hub/Compendium Del Mondo.md
+  workflow: compendium_mondo
+  required_runtime_views:
+    - renderCompendiumNow
+    - renderCompendiumReadiness
+    - renderCompendiumTypeMix
+    - renderCompendiumOperationalQueues
+    - renderCompendiumHistoryQueues
+    - renderCompendiumSurfaceLinks
+  required_visible_sections:
+    - Filtro
+    - Priorita Compendium
+    - Stato Compendium
+    - Tipi Originali
+    - Code Operative
+    - Storia E Pressioni
+    - Superfici
+    - Azioni
+panels:
+  now:
+    runtime_view: renderCompendiumNow
+    promise: Decidere quale elemento originale va collegato, reso utile o trasformato in pressione.
+    answers:
+      - elemento prima
+      - con uso
+      - decorativi
+      - storia e segreti
+      - pressione
+  readiness:
+    runtime_view: renderCompendiumReadiness
+    promise: Misurare quanti elementi originali hanno uso, cultura, leva economica e legami storici.
+    answers:
+      - elementi
+      - con uso
+      - culture e regioni
+      - risorse e fazioni
+      - buchi
+  types:
+    runtime_view: renderCompendiumTypeMix
+    promise: Vedere la distribuzione tra materiali, piante, malattie, monete, tecnologie, cibi e altri elementi.
+    answers:
+      - materiale
+      - pianta
+      - malattia
+      - moneta
+      - tecnologia
+      - creatura regionale
+  operational:
+    runtime_view: renderCompendiumOperationalQueues
+    promise: Sostituire le tabelle inline con code verificabili di archivio, senza uso e buchi aperti.
+    answers:
+      - archivio
+      - senza uso
+      - buchi aperti
+  history:
+    runtime_view: renderCompendiumHistoryQueues
+    promise: Vedere quali elementi hanno storia, segreti, conseguenze, pressione o mappe.
+    answers:
+      - collegamenti storici
+      - pressioni
+      - mappe
+  surfaces:
+    runtime_view: renderCompendiumSurfaceLinks
+    promise: Aprire lo strumento giusto per collegare l'elemento a lore, economia, atlante o mondo vivo.
+    answers:
+      - lore hub
+      - economia
+      - atlante
+      - worldbuilder
+      - controllo worldbuilding
+      - mondo vivo
+queues:
+  - id: archive
+    label: Archivio Originale
+    table_columns:
+      - Elemento
+      - Tipo
+      - Culture/regioni
+      - Risorse/fazioni
+      - Uso
+  - id: without_use
+    label: Senza Uso
+    table_columns:
+      - Elemento
+      - Tipo
+      - Mondo
+      - Azione
+  - id: open_gaps
+    label: Buchi Aperti
+    table_columns:
+      - Elemento
+      - Problema
+      - Azione
+  - id: history_links
+    label: Collegamenti Storici
+    table_columns:
+      - Elemento
+      - Tipo
+      - Eventi
+      - Conseguenze
+      - Segreti
+  - id: pressure
+    label: Pressioni Del Compendium
+    table_columns:
+      - Elemento
+      - Pressione
+      - Prossima mossa
+      - Propaga a
+  - id: map_links
+    label: Mappe E Coordinate
+    table_columns:
+      - Elemento
+      - Tipo
+      - Mappa
+      - Coordinate
+surfaces:
+  - id: lore_hub
+    label: Lore Hub
+    plugin: Dataview
+    target: Hub/Lore Hub.md
+    badge: Lore
+    role: collegare segnali e misteri
+    action: Apri quando l'elemento originale deve diventare indizio, segreto o materiale canonico.
+    why: Il Compendium e utile quando produce segnali e scoperte, non solo lista di colore.
+  - id: economy
+    label: Economia e rotte
+    plugin: Dataview
+    target: Hub/Economia E Rotte.md
+    badge: Risorse
+    role: trasformare materiali in leva economica
+    action: Apri quando materiale, moneta, tecnologia o cibo crea dipendenze, rotte o mercati.
+    why: Le risorse originali diventano gioco quando cambiano scarsita, poteri e viaggi.
+  - id: atlas
+    label: Atlante
+    plugin: Dataview
+    target: Hub/Atlante del Mondo.md
+    badge: Luoghi
+    role: collocare nel mondo
+    action: Apri quando l'elemento deve essere messo su regione, luogo, rotta, mappa o marker.
+    why: Un elemento senza luogo resta astratto e non torna al tavolo.
+  - id: worldbuilder
+    label: Worldbuilder
+    plugin: Dataview
+    target: Hub/Worldbuilder Dashboard.md
+    badge: Crea
+    role: completare appigli
+    action: Apri quando mancano cultura, regione, fazione, missione o uso narrativo.
+    why: Il worldbuilder trasforma il materiale originale in appigli, scelte e conseguenze.
+  - id: worldbuilding_control
+    label: Controllo worldbuilding
+    plugin: Dataview
+    target: Hub/Controllo Worldbuilding.md
+    badge: Audit
+    role: trovare elementi decorativi
+    action: Apri quando molti elementi sono pronti ma isolati o senza uso al tavolo.
+    why: L'audit impedisce che il Compendium diventi un archivio non giocabile.
+  - id: living_world
+    label: Motore Mondo Vivo
+    plugin: Dataview
+    target: Hub/Motore Mondo Vivo.md
+    badge: Pressione
+    role: propagare conseguenze
+    action: Apri quando un elemento ha pressione, prossima mossa, conseguenze o bersagli impattati.
+    why: Gli elementi originali migliori muovono fazioni, risorse e scene tra sessioni.
+  - id: worldbuilding_base
+    label: Worldbuilding tabellare
+    plugin: Bases
+    target: z.bases/Worldbuilding.base
+    generated_release: true
+    badge: Base
+    role: correggere in tabella
+    action: Apri quando devi completare molte note di cultura, societa o cosmologia collegate.
+    why: La Base e output di release, non sorgente tracciato del repository.
+  - id: compendium_fileclass
+    label: Scheda compendium
+    plugin: Metadata Menu
+    target: z.fileclass/compendium.md
+    generated_release: true
+    badge: Campi
+    role: guidare i campi della nota
+    action: Apri quando vuoi controllare o completare i campi dell'elemento originale.
+    why: La FileClass resta output generato per Obsidian, non sorgente da versionare.
+contracts:
+  dashboard_uses_runtime_views: true
+  compendium_prioritizes_game_use_over_archive: true
+  surfaces_must_resolve_to_source_or_generated_release_target: true
+  generated_targets_must_stay_release_only: true

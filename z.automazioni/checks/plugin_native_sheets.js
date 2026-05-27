@@ -24,7 +24,7 @@ const REQUIRED_HUB_EXPERIENCE = [
     ["Hub/Revisione Lore.md", "gdr-lore-review", ["Revisione Lore", "INPUT[", "dataviewjs"]],
     ["Hub/Geopolitical Dashboard.md", "gdr-geopolitical-dashboard", ["Geopolitica operativa", "INPUT[", "dataviewjs"]],
     ["Hub/Economia E Rotte.md", "gdr-economia-rotte", ["Sistema commerciale", "INPUT[", "dataviewjs"]],
-    ["Hub/Compendium Del Mondo.md", "gdr-compendium-dashboard", ["Originale, non-SRD", "Compendium", "tab:"]]
+    ["Hub/Compendium Del Mondo.md", "gdr-compendium-dashboard", ["Originale, non-SRD", "Compendium", "renderCompendiumNow"]]
 ];
 
 function hasPluginNativeSheet(text) {

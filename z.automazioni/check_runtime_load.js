@@ -20,6 +20,12 @@ const REQUIRED_EXPORTS = [
     "renderCampaignBuilderOpportunityQueues",
     "renderCampaignBuilderReadiness",
     "renderCampaignBuilderSurfaceLinks",
+    "renderCompendiumHistoryQueues",
+    "renderCompendiumNow",
+    "renderCompendiumOperationalQueues",
+    "renderCompendiumReadiness",
+    "renderCompendiumSurfaceLinks",
+    "renderCompendiumTypeMix",
     "renderCombatReadiness",
     "renderConsequenceCards",
     "renderContinuityQueue",
@@ -130,6 +136,7 @@ const REQUIRED_MODULES = [
     "z.engine/session_atlas.js",
     "z.engine/session_campaign_builder.js",
     "z.engine/session_canon_control.js",
+    "z.engine/session_compendium.js",
     "z.engine/session_dnd.js",
     "z.engine/session_dm_dashboard.js",
     "z.engine/session_economy.js",
@@ -318,6 +325,44 @@ async function main() {
                     rotte: ["Mondi/Rotte/Strada del Sale.md"],
                     mercati: ["Mondi/Mercati/Mercato del Faro.md"],
                     conseguenze: ["I fari si spengono."]
+                },
+                {
+                    file: { path: "Mondi/Compendium/Sale Nero.md", name: "Sale Nero", link: "Mondi/Compendium/Sale Nero.md", folder: "Mondi/Compendium", mtime: 28 },
+                    categoria: "risorsa",
+                    fileClass: "compendium",
+                    tipo: "materiale",
+                    stato: "pronto",
+                    mondo: "Mondi/Mondo Demo.md",
+                    culture: ["Mondi/Culture/Naviganti.md"],
+                    regioni: ["Mondi/Luoghi/Luogo Pubblico.md"],
+                    luoghi: ["Mondi/Luoghi/Luogo Pubblico.md"],
+                    risorse: ["Mondi/Risorse/Sale Lunare.md"],
+                    fazioni: ["Mondi/Fazioni/Consiglio.md"],
+                    missioni: ["Mondi/Missioni/Missione Pubblica.md"],
+                    eventi_storici: ["Mondi/Timeline/Caduta dei Fari.md"],
+                    uso_narrativo: "Reagente dei fari sacri.",
+                    usi: ["Chiave rituale"],
+                    rischi: ["attira contrabbandieri"],
+                    conseguenze: ["I fari si spengono."],
+                    segreti: ["Il sale viene dal faro spento."],
+                    pressione: 3,
+                    prossima_mossa: "Il Consiglio tassa il sale nero.",
+                    mappe: ["Risorse/Mappe/Mappa Pubblica.md"]
+                },
+                {
+                    file: { path: "Mondi/Compendium/Moneta Rotta.md", name: "Moneta Rotta", link: "Mondi/Compendium/Moneta Rotta.md", folder: "Mondi/Compendium", mtime: 29 },
+                    categoria: "risorsa",
+                    fileClass: "compendium",
+                    tipo: "moneta",
+                    stato: "bozza",
+                    mondo: "Mondi/Mondo Demo.md",
+                    culture: [],
+                    regioni: [],
+                    risorse: [],
+                    fazioni: [],
+                    missioni: [],
+                    uso_narrativo: "",
+                    pressione: 0
                 },
                 {
                     file: { path: "Mondi/Mercati/Mercato del Faro.md", name: "Mercato del Faro", link: "Mondi/Mercati/Mercato del Faro.md", folder: "Mondi/Mercati", mtime: 21 },
@@ -738,6 +783,30 @@ async function main() {
             await views.renderWorldBibleSurfaceLinks(dv);
             if (!rendered.some(node => String(node.innerHTML).includes("Vista giocatori"))) {
                 errors.push("renderWorldBibleSurfaceLinks: output senza superfici Bibbia del Mondo");
+            }
+            views.renderCompendiumNow(dv);
+            if (!rendered.some(node => String(node.innerHTML).includes("Elemento prima"))) {
+                errors.push("renderCompendiumNow: output senza priorita compendium");
+            }
+            views.renderCompendiumReadiness(dv);
+            if (!rendered.some(node => String(node.innerHTML).includes("Con uso"))) {
+                errors.push("renderCompendiumReadiness: output senza metriche uso compendium");
+            }
+            views.renderCompendiumTypeMix(dv);
+            if (!rendered.some(node => String(node.innerHTML).includes("materiale"))) {
+                errors.push("renderCompendiumTypeMix: output senza tipi compendium");
+            }
+            await views.renderCompendiumOperationalQueues(dv);
+            if (!rendered.some(node => node.tag === "table" && String(node.text).includes("Moneta Rotta"))) {
+                errors.push("renderCompendiumOperationalQueues: output senza elementi da collegare");
+            }
+            await views.renderCompendiumHistoryQueues(dv);
+            if (!rendered.some(node => node.tag === "table" && String(node.text).includes("Il Consiglio tassa il sale nero"))) {
+                errors.push("renderCompendiumHistoryQueues: output senza pressione compendium");
+            }
+            await views.renderCompendiumSurfaceLinks(dv);
+            if (!rendered.some(node => String(node.innerHTML).includes("Economia e rotte"))) {
+                errors.push("renderCompendiumSurfaceLinks: output senza superfici compendium");
             }
             views.renderPreparationNow(dv);
             if (!rendered.some(node => String(node.innerHTML).includes("Prepara prima"))) {

@@ -684,6 +684,96 @@ blocks:
       | --- | --- |
       | Atlante | luoghi e mappe |
       | Vista giocatori | materiale mostrabile |
+  compendium_now:
+    type: dataviewjs
+    runtime_view: renderCompendiumNow
+    use_for:
+      - dashboard
+      - compendium
+      - mondo
+      - cockpit
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      gdr.renderCompendiumNow(dv, dv.current().mondo_attivo);
+    fallback: |-
+      | Priorita | Azione |
+      | --- | --- |
+      | Elemento prima | collega o rendi giocabile |
+  compendium_readiness:
+    type: dataviewjs
+    runtime_view: renderCompendiumReadiness
+    use_for:
+      - dashboard
+      - compendium
+      - stato
+      - cockpit
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      gdr.renderCompendiumReadiness(dv, dv.current().mondo_attivo);
+    fallback: |-
+      | Area | Conteggio |
+      | --- | --- |
+      | Elementi |  |
+      | Con uso |  |
+      | Buchi |  |
+  compendium_type_mix:
+    type: dataviewjs
+    runtime_view: renderCompendiumTypeMix
+    use_for:
+      - dashboard
+      - compendium
+      - tipi
+      - cockpit
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      gdr.renderCompendiumTypeMix(dv, dv.current().mondo_attivo);
+    fallback: |-
+      | Tipo | Conteggio |
+      | --- | --- |
+  compendium_operational_queues:
+    type: dataviewjs
+    runtime_view: renderCompendiumOperationalQueues
+    use_for:
+      - dashboard
+      - compendium
+      - code
+      - cockpit
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      await gdr.renderCompendiumOperationalQueues(dv, dv.current().mondo_attivo);
+    fallback: |-
+      | Elemento | Azione |
+      | --- | --- |
+  compendium_history_queues:
+    type: dataviewjs
+    runtime_view: renderCompendiumHistoryQueues
+    use_for:
+      - dashboard
+      - compendium
+      - storia
+      - cockpit
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      await gdr.renderCompendiumHistoryQueues(dv, dv.current().mondo_attivo);
+    fallback: |-
+      | Elemento | Collegamento |
+      | --- | --- |
+  compendium_surface_links:
+    type: dataviewjs
+    runtime_view: renderCompendiumSurfaceLinks
+    use_for:
+      - dashboard
+      - compendium
+      - superfici
+      - cockpit
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      await gdr.renderCompendiumSurfaceLinks(dv);
+    fallback: |-
+      | Superficie | Uso |
+      | --- | --- |
+      | Lore Hub | segnali e misteri |
+      | Economia e rotte | risorse e mercati |
   worldbuilder_now:
     type: dataviewjs
     runtime_view: renderWorldbuilderNow

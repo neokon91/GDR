@@ -68,6 +68,7 @@ REQUIRED_MODULES = {
     "dnd55_options",
     "link_targets",
     "world_bible_cockpit",
+    "compendium_cockpit",
     "lore_cockpit",
     "lore_review_cockpit",
     "tag_rules",
