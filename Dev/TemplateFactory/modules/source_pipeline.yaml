@@ -171,25 +171,6 @@ steps:
       - python3
       - z.automazioni/render_resource_support_pages.py
       - --check
-  plugin_usage_audit:
-    purpose: Verifica che ogni plugin installato abbia classe, contratto, binding tecnico e superficie reale.
-    sources:
-      - Dev/TemplateFactory/modules/plugin_matrix.yaml
-      - Dev/TemplateFactory/modules/plugin_contracts.yaml
-      - Dev/TemplateFactory/modules/plugin_bindings.yaml
-      - Dev/TemplateFactory/modules/release_boundary.yaml
-      - Dev/TemplateFactory/modules/live_acceptance.yaml
-      - Dev/plugin_matrix.json
-      - .obsidian/plugins/obsidian-meta-bind-plugin/data.json
-      - z.bacheche/Manutenzione Vault.md
-    outputs:
-      - memoria
-    render:
-      - node
-      - z.automazioni/check_plugin_usage_audit.js
-    check:
-      - node
-      - z.automazioni/check_plugin_usage_audit.js
   resource_indexes:
     purpose: Genera indici semplici di risorse finali da YAML/Jinja.
     sources:
@@ -252,12 +233,48 @@ steps:
       - python3
       - z.automazioni/render_hub_pages.py
       - --check
+  root_pages:
+    purpose: Genera le pagine root finali del vault da YAML/Jinja, lasciandole fuori dal sorgente tracciato.
+    sources:
+      - Dev/TemplateFactory/modules/root_pages.yaml
+      - Dev/TemplateFactory/jinja/resource_support_page.md.j2
+      - z.automazioni/render_root_pages.py
+    outputs:
+      - Inizia Qui.md
+      - VERSION.md
+    render:
+      - python3
+      - z.automazioni/render_root_pages.py
+    check:
+      - python3
+      - z.automazioni/render_root_pages.py
+      - --check
+  plugin_usage_audit:
+    purpose: Verifica che ogni plugin installato abbia classe, contratto, binding tecnico e superficie reale.
+    sources:
+      - Dev/TemplateFactory/modules/plugin_matrix.yaml
+      - Dev/TemplateFactory/modules/plugin_contracts.yaml
+      - Dev/TemplateFactory/modules/plugin_bindings.yaml
+      - Dev/TemplateFactory/modules/release_boundary.yaml
+      - Dev/TemplateFactory/modules/live_acceptance.yaml
+      - Dev/plugin_matrix.json
+      - .obsidian/plugins/obsidian-meta-bind-plugin/data.json
+      - z.bacheche/Manutenzione Vault.md
+    outputs:
+      - memoria
+    render:
+      - node
+      - z.automazioni/check_plugin_usage_audit.js
+    check:
+      - node
+      - z.automazioni/check_plugin_usage_audit.js
   workflow_blocks:
     purpose: Renderizza blocchi azioni rapide dentro le pagine operative.
     sources:
       - Dev/TemplateFactory/modules/workflows.yaml
       - z.automazioni/data/workflows/quick_actions.json
     outputs:
+      - Inizia Qui.md
       - Hub/**/*.md
       - Risorse/**/*.md
       - z.bacheche/**/*.md

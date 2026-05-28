@@ -21,7 +21,7 @@ La release non deve includere strumenti di manutenzione repository, import massi
 | Area | Motivo |
 | --- | --- |
 | `.obsidian` | Plugin, configurazioni, snippet, homepage, callout, workspace e impostazioni necessarie. |
-| `Inizia Qui.md` | Porta di ingresso non tecnica. |
+| `Inizia Qui.md` | Porta di ingresso non tecnica, generata da `root_pages.yaml`. |
 | `Campagne`, `Giocatori`, `Hub`, `Inbox`, `Mondi`, `Risorse`, `SRD` | Contenuto operativo, player portal, dashboard, modelli di lavoro e regolamento. Le cartelle utente e SRD sono materializzate in release. |
 | `z.modelli` | Template usati dai pulsanti e dai wizard. Sono materializzati da `Dev/TemplateFactory` durante `npm run release:clean`. |
 | `z.automazioni` runtime | Script Templater necessari ai template e alle azioni utente. |
@@ -29,7 +29,7 @@ La release non deve includere strumenti di manutenzione repository, import massi
 | `z.bacheche` | Kanban e Tasks operativi del DM, generati da YAML/Jinja. |
 | `z.bases` | Viste Bases editabili, generate da `frontmatter_profiles.yaml` e `bases_views.yaml`. |
 | `z.fileclass` | FileClass Metadata Menu per campi guidati, generate da YAML. |
-| `LICENSE.md`, `VERSION.md` | Informazioni essenziali di distribuzione. |
+| `LICENSE.md`, `VERSION.md` | Informazioni essenziali di distribuzione; `VERSION.md` e generato da `root_pages.yaml`. |
 
 ## Resta Solo Nel Repository
 

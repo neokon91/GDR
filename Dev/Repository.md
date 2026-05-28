@@ -14,8 +14,8 @@ Questa nota e tecnica. Serve solo a chi cura il vault, non al DM che lo usa per 
 
 | Percorso | Contiene | Regola pratica |
 | --- | --- | --- |
-| `Inizia Qui.md` | onboarding non tecnico | Deve restare la porta d'ingresso. |
-| `Hub/` | dashboard e viste principali | Tiene la root pulita senza nascondere gli ingressi operativi. |
+| `Inizia Qui.md` | onboarding non tecnico | Output root generato da `root_pages.yaml`; deve restare la porta d'ingresso in release. |
+| `Hub/` | dashboard e viste principali | Output generato da `hub_pages.yaml`; tiene la root pulita senza nascondere gli ingressi operativi. |
 | `Hub/1. DM Dashboard.md` | preparazione e vista DM | Non spostare senza aggiornare link, Homepage e documentazione. |
 | `Hub/Durante il Gioco.md` | schermata al tavolo | Deve restare rapida, non enciclopedica. |
 | `Hub/Atlante del Mondo.md` | worldbuilding strutturale | Porta principale per ambientazioni grandi. |
@@ -54,7 +54,7 @@ Questa nota e tecnica. Serve solo a chi cura il vault, non al DM che lo usa per 
 - `.obsidian/plugins/metadata-menu/data.json` e `z.fileclass/`: insieme definiscono lo schema operativo; i target generati non vanno tracciati.
 - `.obsidian/plugins`: il vault include plugin e configurazioni necessarie.
 - `SRD`: puo essere rigenerato da `z.automazioni/import_srd.js`, ma resta fuori dall'indice Git.
-- `Inizia Qui.md` resta l'unica dashboard root: le altre viste principali stanno in `Hub/`.
+- `Inizia Qui.md` resta l'unica dashboard root in release, ma nel repository e generata da YAML/Jinja.
 
 ## Comandi
 
