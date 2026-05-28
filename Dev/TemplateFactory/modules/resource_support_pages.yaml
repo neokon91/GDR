@@ -1,0 +1,364 @@
+id: resource_support_pages
+purpose: Guide Risorse di supporto materializzate da YAML/Jinja, non mantenute come note sorgente.
+version: 0.1.0
+pages:
+  - path: Risorse/Aspetto Vault.md
+    title: Aspetto Vault
+    frontmatter:
+      cssclasses:
+        - indice
+      categoria: risorsa
+      tipo: aspetto
+      stato: pronto
+    body: |
+      Il vault usa il tema **Minimal** con lo snippet `gdr-vault.css`. Le regolazioni principali sono in **Style Settings > GDR Vault**.
+
+      ## Controlli Principali
+
+      | Impostazione | Cosa cambia |
+      | --- | --- |
+      | Palette | Colori di dashboard, callout e accenti GDR |
+      | Note width | Larghezza delle pagine indice e dashboard |
+      | Dashboard density | Spaziatura di card, flussi e griglie |
+      | Table density | Altezza delle righe nelle tabelle |
+      | Card depth | Ombra delle card, da piatta a rialzata |
+      | Callout density | Spaziatura interna dei callout |
+
+      ## Cosa Cura Lo Snippet
+
+      - Dashboard e indici hanno card compatte, griglie adattive e pulsanti leggibili anche con titoli lunghi.
+      - Le viste principali hanno accenti dedicati: DM Dashboard, Worldbuilder Dashboard, Atlante, Durante il Gioco e Vista Giocatori.
+      - PNG, luoghi, fazioni, missioni, incontri, timeline, segreti e ricompense usano colori coerenti in callout, card ed etichette CSS riutilizzabili.
+      - Le tabelle Dataview e Markdown restano dense e scorrono lateralmente quando sono troppo larghe.
+      - I callout GDR hanno colori e icone coerenti per scena, regia, indizio, segreto, incontro, tesoro, ricompensa, PNG, luogo, fazione, missione, handout, regola, pericolo, lettura, timeline e timer.
+      - La vista `tavolo` aumenta leggibilità e nasconde i metadati, utile durante la sessione.
+      - La stampa rimuove gli elementi dell'interfaccia e nasconde i callout `segreto`.
+      - I colori sono volutamente sobri: niente gradienti decorativi, niente velature sovrapposte e accenti abbastanza chiari da restare leggibili con temi chiari e scuri.
+      - Il focus da tastiera resta visibile su pulsanti e link; le animazioni rispettano la preferenza di movimento ridotto del sistema.
+
+      ## Attivare Lo Stile
+
+      1. Apri **Impostazioni > Aspetto > Snippet CSS**.
+      2. Attiva lo snippet `gdr-vault`.
+      3. Se lo snippet non compare, premi il pulsante di ricarica nella sezione Snippet CSS.
+      4. Consigliato: usa il tema **Minimal** e, se presente, regola **Style Settings > GDR Vault**.
+
+      ## Classi E Blocchi Utili
+
+      - Dashboard operative: usa `cssclasses: [dashboard]` nel frontmatter.
+      - Schermata da tavolo: usa `cssclasses: [tavolo]`.
+      - Vista giocatori: usa `cssclasses: [dashboard, gdr-player-view]`.
+      - Etichette riutilizzabili in HTML/DataviewJS: `gdr-badge png`, `gdr-badge luogo`, `gdr-badge fazione`, `gdr-badge missione`, `gdr-badge incontro`, `gdr-badge timeline`, `gdr-badge segreto`, `gdr-badge ricompensa`.
+      - Callout tematici: `[!regia]`, `[!scena]`, `[!png]`, `[!luogo]`, `[!fazione]`, `[!missione]`, `[!incontro]`, `[!timeline]`, `[!segreto]`, `[!ricompensa]`, `[!lettura]`, `[!timer]`.
+
+      ## Preset Consigliato
+
+      - Tema: Minimal.
+      - Snippet attivo: `gdr-vault`.
+      - Palette: Scriptorium.
+      - Dashboard density: Comfortable.
+      - Table density: Comfortable.
+      - Card depth: Soft.
+
+      ## Regola Pratica
+
+      Mantieni l'interfaccia leggibile al tavolo: dashboard dense ma ordinate, callout riconoscibili, tabelle compatte e nessuna decorazione che rallenti la lettura.
+
+  - path: Risorse/Callout GDR.md
+    title: Callout GDR
+    body: |
+      Usa i callout per rendere leggibile una nota al tavolo. Ogni tipo deve rispondere a una domanda semplice: cosa devo leggere, cosa devono scoprire, cosa minaccia la scena, cosa cambia nel mondo.
+
+      Lo snippet `gdr-vault.css` dà a ogni callout un colore e un'icona coerenti. L'idea è leggere la pagina a colpo d'occhio:
+
+      - blu: scena, regia, missioni e timeline;
+      - teal: luoghi e mondo fisico;
+      - verde: PNG e relazioni;
+      - bronzo: fazioni e poteri organizzati;
+      - viola: segreti e poteri nascosti;
+      - rosso: pericoli e incontri;
+      - oro: indizi, tesori, ricompense e dispense.
+
+      ## Scene
+
+      > [!scena] Scena
+      > Situazione, apertura, svolta o momento da giocare.
+
+      > [!lettura] Lettura
+      > Testo pronto da leggere al tavolo.
+
+      > [!timer] Timer
+      > Orologi, pressioni e conseguenze in arrivo.
+
+      > [!regia] Regia
+      > Note operative per il DM, priorità e decisioni da prendere.
+
+      ## Informazioni
+
+      > [!indizio] Indizio
+      > Informazioni scopribili dai personaggi.
+
+      > [!segreto]- Segreto
+      > Informazioni riservate al GM.
+
+      > [!regola] Regola
+      > Regola, eccezione o riferimento meccanico.
+
+      ## Mondo
+
+      > [!luogo] Luogo
+      > Descrizione, atmosfera o dettaglio ambientale.
+
+      > [!png] PNG
+      > Personaggio non giocante, motivazioni e uso al tavolo.
+
+      > [!missione] Missione
+      > Obiettivo, incarico o filo narrativo.
+
+      > [!fazione] Fazione
+      > Potere organizzato, agenda, pressione o prossima mossa.
+
+      > [!timeline] Timeline
+      > Evento, conseguenza storica o collegamento causale.
+
+      ## Pericoli e Ricompense
+
+      > [!incontro] Incontro
+      > Setup, creature, tattiche o ostacoli attivi.
+
+      > [!pericolo] Pericolo
+      > Minaccia, trappola, rischio o complicazione.
+
+      > [!tesoro] Tesoro
+      > Ricompense, oggetti, indizi fisici o bottino.
+
+      > [!ricompensa] Ricompensa
+      > Premio, leva negoziale, favore, informazione o bottino significativo.
+
+      > [!handout] Dispensa
+      > Testo o materiale da consegnare ai giocatori.
+
+      ## Scheda Rapida
+
+      > [!infoboxwiki] Wiki
+      > # Titolo di esempio
+      > ---
+      > **Info 1**: informazione
+      > **Info 2**: informazione
+      > ## Tabella di esempio
+      > |A1|A2|
+      > |---|---|
+      > |Prova 1|Prova 2|
+      > >[!info] Callout annidato
+      > >Informazioni
+
+  - path: Risorse/Canvas Per GDR.md
+    title: Canvas Per GDR
+    frontmatter:
+      cssclasses:
+        - indice
+      categoria: risorsa
+      tipo: guida plugin
+      stato: pronto
+      plugin:
+        - Canvas
+        - Advanced Canvas
+    body: |
+      Canvas serve quando vuoi vedere note vere collegate tra loro: campagna, mondo, fazioni, PNG, luoghi, missioni, clock e incontri. Excalidraw resta migliore per disegnare, annotare e ragionare liberamente; Canvas resta migliore quando la mappa deve essere una rete di note apribili.
+
+      ## Regola Operativa
+
+      - Usa Canvas per mappe strutturali e durevoli: fronti, fazioni, archi di campagna, indizi gia canonici.
+      - Usa Excalidraw per schizzi, mappe di scena, diagrammi liberi e investigazioni ancora mobili.
+      - Ogni nodo importante dovrebbe puntare a una nota canonica, non a testo isolato nel canvas.
+      - I gruppi devono indicare una domanda di regia: fronte politico, mistero, sessione, conseguenze.
+
+      ## Canvas Pronti
+
+      ```dataview
+      TABLE file.mtime AS aggiornato
+      FROM "Risorse/Mappe"
+      WHERE contains(file.name, "Canvas")
+      SORT file.mtime DESC
+      ```
+
+  - path: Risorse/Excalidraw Per GDR.md
+    title: Excalidraw Per GDR
+    frontmatter:
+      cssclasses:
+        - indice
+      categoria: risorsa
+      tipo: guida plugin
+      stato: pronto
+    body: |
+      Excalidraw nel vault serve per mappe vive: fronti, relazioni, indizi, scene e dungeon. Non deve diventare una cartella di disegni decorativi.
+
+      ## Quando Usarlo
+
+      | Uso | Quando serve | Esempio |
+      | --- | --- | --- |
+      | `relazioni` | Serve una rete generale tra mondo, luoghi, fazioni e missioni. | [[Schema Relazioni GDR.excalidraw]] |
+
+      ## Regola Operativa
+
+      - ogni mappa deve avere `categoria: risorsa`, `tipo: mappa`, `uso`, `stato`;
+      - collega `mondo`, `luogo`, `fazioni`, `personaggi`, `missioni` quando servono;
+      - usa link interni dentro il disegno, non solo testo;
+      - mostra la mappa da [[Risorse/Mappe/Mappe]], [[Worldbuilder Dashboard]] o [[Durante il Gioco]];
+      - se la mappa contiene segreti, non collegarla a [[Vista Giocatori]].
+
+      ## Vista Operativa
+
+      ```dataview
+      TABLE uso, mondo, luogo, fazioni, personaggi, missioni, stato, file.mtime AS aggiornato
+      FROM "Risorse/Mappe"
+      WHERE contains(tags, "excalidraw") AND file.name != "Mappe"
+      SORT uso ASC, mondo ASC, file.name ASC
+      ```
+
+      ## Creazione
+
+      `BUTTON[nuova-mappa-fronti-z-modelli-mappe-mappa-excalidraw-fronti-excalidraw-md-2]`
+
+      Il plugin Excalidraw e configurato per creare nuovi disegni in `Risorse/Mappe` e usare il template fronti come base.
+
+  - path: Risorse/Mappe Bases.md
+    title: Mappe Bases
+    frontmatter:
+      cssclasses:
+        - indice
+      categoria: risorsa
+      tipo: guida plugin
+      stato: pronto
+      plugin:
+        - Bases
+        - Maps
+    body: |
+      Maps per Bases aggiunge una vista mappa ai file `.base`. Il plugin community `maps` e installato nel vault come **Maps 0.1.6**.
+
+      ## Viste
+
+      Apri [[z.bases/Atlante Mappe.base]]. La vista `Mappa` mostra i marker; `Tabella` resta il fallback controllabile. `Per layer` serve a verificare politica, religione, commercio e conflitti. `Dati marker` isola coordinate, icone e colori quando devi correggere la resa sulla mappa.
+
+      La base usa:
+
+      - `coordinates` come coppia latitudine/longitudine;
+      - `icon` come icona Lucide;
+      - `color` come colore del marker;
+      - `layer_mappa` per distinguere politica, religione, commercio e conflitti.
+
+  - path: Risorse/Preset Calendario.md
+    title: Preset Calendario
+    frontmatter:
+      cssclasses:
+        - indice
+      categoria: risorsa
+      tipo: guida
+      stato: pronto
+    body: |
+      Questa pagina evita di spiegare campi tecnici al DM. Scegli un modo semplice per segnare il tempo e usalo sempre.
+
+      ## Preset Rapido
+
+      | Uso | Scrivi cosi |
+      | --- | --- |
+      | Giorni normali | "Giorno 1", "Giorno 2", "Giorno 3" |
+      | Notti o fasi | "Prima notte", "Seconda notte", "Terza notte" |
+      | Viaggio | "Viaggio, giorno 1", "Viaggio, giorno 2" |
+      | Mistero | "Prima ora", "Seconda ora", "Al tramonto" |
+      | Sandbox | "Settimana 1", "Settimana 2", "Fine mese" |
+
+      ## Dove Scriverlo
+
+      | Nota | Campo leggibile |
+      | --- | --- |
+      | Sessione | `data_mondo` |
+      | Missione | `scadenza_mondo` |
+      | Evento storico | `data_mondo` |
+
+      ## Se Vuoi Una Vista Calendario
+
+      Il vault include un solo calendario neutro di Calendarium: `Calendario Del Mondo`. Serve come base sicura per campagne originali e puo essere rinominato dal DM nelle impostazioni del plugin.
+
+      Chi prepara il vault puo compilare anche:
+
+      | Campo | Esempio semplice |
+      | --- | --- |
+      | `fc-calendar` | "Calendario Del Mondo" |
+      | `fc-date` | "1-1-1" |
+      | `fc-category` | "sessione" |
+      | `fc-display-name` | "Sessione 1" |
+
+      Il DM puo ignorare questi campi: [[Mondi/Calendario]] mostra comunque le date leggibili e segnala cosa manca.
+
+      ## Calendario Disponibile
+
+      | Calendario | Uso consigliato |
+      | --- | --- |
+      | `Calendario Del Mondo` | Default neutro per campagne originali, sandbox e campagne homebrew. |
+
+      ## Categorie Consigliate
+
+      | Categoria | Quando usarla |
+      | --- | --- |
+      | `sessione` | Sessioni preparate o giocate. |
+      | `scadenza` | Missioni con tempo limitato. |
+      | `pericolo` | Minacce che avanzano se ignorate. |
+      | `conseguenza` | Eventi nati dopo una sessione. |
+      | `festa` | Ricorrenze, mercati, rituali e date speciali. |
+
+  - path: Risorse/Primo Avvio Strumenti.md
+    title: Primo Avvio Strumenti
+    frontmatter:
+      cssclasses:
+        - indice
+      categoria: risorsa
+      tipo: primo avvio
+      stato: pronto
+    body: |
+      Questa pagina serve quando apri il vault per la prima volta o quando pulsanti, tabelle e dashboard non funzionano.
+
+      Il vault include strumenti già configurati. Servono a far funzionare dashboard, pulsanti, tabelle, schede creatura, bacheche e campi guidati. Se Obsidian chiede se vuoi fidarti degli strumenti inclusi, conferma solo se hai scaricato il vault da una fonte affidabile.
+
+      ## Controllo Rapido
+
+      | Cosa vedi | Cosa significa | Cosa fare |
+      | --- | --- | --- |
+      | I pulsanti aprono pagine o creano note | Tutto bene | Puoi partire da [[Inizia Qui]]. |
+      | Le tabelle mostrano righe o messaggi leggibili | Tutto bene | Puoi usare dashboard e indici. |
+      | I pulsanti non fanno nulla | Strumenti non attivi | Controlla le impostazioni degli strumenti community in Obsidian. |
+      | Le tabelle mostrano codice | Strumenti non attivi | Riabilita gli strumenti inclusi e riapri la nota. |
+      | I mostri non appaiono come schede | Strumento creature non attivo | Riabilita gli strumenti inclusi e riapri la nota creatura. |
+      | I tiri `dice:` restano testo | Strumento tiri non attivo | Riabilita gli strumenti inclusi. |
+
+      ## Strumenti Necessari
+
+      | Funzione | Serve per |
+      | --- | --- |
+      | Dashboard automatiche | Riepiloghi, controlli e viste operative. |
+      | Creazione guidata | Nuove sessioni, missioni, PNG, luoghi e incontri. |
+      | Campi interattivi | Pulsanti, toggle, selettori e campi dentro le note. |
+      | Gestione campi | Stato, categoria, tipo e collegamenti più coerenti. |
+      | Indici di cartella | Cartelle principali più facili da aprire. |
+      | Pagina iniziale | Apertura automatica su [[Inizia Qui]]. |
+
+      ## Strumenti Consigliati
+
+      | Funzione | Serve per |
+      | --- | --- |
+      | Bacheche | Preparazione e post-sessione. |
+      | Blocchi GDR | Scene, indizi, segreti, pericoli e testi da leggere. |
+      | Schede creatura | Mostri e creature leggibili. |
+      | Tiri rapidi | Dadi e tabelle casuali. |
+      | Iniziativa | Combattimenti al tavolo. |
+      | Calendario | Date del mondo e scadenze narrative. |
+      | Mappe e schemi | Relazioni, dungeon, fronti e riferimenti visuali. |
+      | Audio e video | Materiale da sessione. |
+      | Icone e aspetto | Orientamento visuale e leggibilità. |
+
+      ## Dopo Il Primo Avvio
+
+      1. Apri [[Inizia Qui]].
+      2. Apri [[Hub/1. DM Dashboard|1. DM Dashboard]].
+      3. Apri [[Risorse/Controllo Vault]].
+      4. Se vedi problemi, apri [[Risorse/Se Qualcosa Non Funziona]].

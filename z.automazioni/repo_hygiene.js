@@ -35,6 +35,13 @@ const FORBIDDEN_TRACKED_USER_ROOTS = ["Mondi", "Campagne", "Giocatori", "Inbox",
 const FORBIDDEN_TRACKED_GENERATED_ROOTS = ["z.bacheche"];
 const FORBIDDEN_TRACKED_GENERATED_FILES = [
     "Risorse/Risorse.md",
+    "Risorse/Aspetto Vault.md",
+    "Risorse/Callout GDR.md",
+    "Risorse/Canvas Per GDR.md",
+    "Risorse/Excalidraw Per GDR.md",
+    "Risorse/Mappe Bases.md",
+    "Risorse/Preset Calendario.md",
+    "Risorse/Primo Avvio Strumenti.md",
     "Risorse/Audio/Audio.md",
     "Risorse/Video/Video.md",
     "Risorse/Immagini/Immagini.md",

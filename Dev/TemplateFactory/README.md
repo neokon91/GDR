@@ -46,7 +46,7 @@ La direzione ammessa e:
 4. `npm run check` verifica che YAML e artefatto siano sincronizzati.
 5. I JSON interni dei plugin Obsidian vengono generati solo per sottoinsiemi sicuri; altrimenti restano validati, non sovrascritti.
 
-I casi attivi includono `workflows.yaml` → `z.automazioni/data/workflows/quick_actions.json`, `srd_character_build.yaml` → `z.automazioni/data/srd/*.json`, `bacheche.yaml` → `z.bacheche/*.md`, `resource_hub.yaml` → `Risorse/Risorse.md`, `resource_indexes.yaml` → indici semplici in `Risorse/*/*.md` e i cockpit YAML → `z.automazioni/data/runtime/*.json`. Sono output locali ignorati da Git.
+I casi attivi includono `workflows.yaml` → `z.automazioni/data/workflows/quick_actions.json`, `srd_character_build.yaml` → `z.automazioni/data/srd/*.json`, `bacheche.yaml` → `z.bacheche/*.md`, `resource_hub.yaml` → `Risorse/Risorse.md`, `resource_indexes.yaml` → indici semplici in `Risorse/*/*.md`, `resource_support_pages.yaml` → guide supporto in `Risorse/*.md` e i cockpit YAML → `z.automazioni/data/runtime/*.json`. Sono output locali ignorati da Git.
 
 Non introdurre generatori opachi: ogni JSON prodotto deve indicare `generated_by`, `source` e `purpose`, e deve essere ricostruibile da un singolo comando npm.
 
@@ -75,6 +75,8 @@ npm run audit:templates
 `render:bacheche` genera `z.bacheche/*.md` da `modules/bacheche.yaml` e Jinja. Le bacheche sono superficie vault finale, non sorgente tracciato.
 
 `render:resource-hub` genera `Risorse/Risorse.md`, catalogo centrale delle guide e dei materiali utente.
+
+`render:resource-support` genera le guide supporto dichiarate in `resource_support_pages.yaml`, così il sorgente resta YAML/Jinja e le note finali non sono tracciate.
 
 `render:resource-indexes` genera gli indici ripetitivi di risorse come Audio, Video, Immagini e Dispense. Le note di contenuto dentro quelle cartelle restano dell'utente o della release, non sorgente della repo.
 

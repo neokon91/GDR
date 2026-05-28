@@ -58,6 +58,7 @@ REQUIRED_MODULES = {
     "runtime_profiles",
     "resource_hub",
     "resource_indexes",
+    "resource_support_pages",
     "entity_depth",
     "entity_model",
     "worldbuilding_depth_axes",

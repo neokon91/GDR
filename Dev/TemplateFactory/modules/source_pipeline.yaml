@@ -126,6 +126,27 @@ steps:
       - python3
       - z.automazioni/render_bacheche.py
       - --check
+  resource_support_pages:
+    purpose: Genera guide Risorse di supporto da YAML/Jinja, lasciandole fuori dal sorgente tracciato.
+    sources:
+      - Dev/TemplateFactory/modules/resource_support_pages.yaml
+      - Dev/TemplateFactory/jinja/resource_support_page.md.j2
+      - z.automazioni/render_resource_support_pages.py
+    outputs:
+      - Risorse/Aspetto Vault.md
+      - Risorse/Callout GDR.md
+      - Risorse/Canvas Per GDR.md
+      - Risorse/Excalidraw Per GDR.md
+      - Risorse/Mappe Bases.md
+      - Risorse/Preset Calendario.md
+      - Risorse/Primo Avvio Strumenti.md
+    render:
+      - python3
+      - z.automazioni/render_resource_support_pages.py
+    check:
+      - python3
+      - z.automazioni/render_resource_support_pages.py
+      - --check
   plugin_usage_audit:
     purpose: Verifica che ogni plugin installato abbia classe, contratto, binding tecnico e superficie reale.
     sources:

@@ -1,0 +1,179 @@
+#!/usr/bin/env python3
+
+from __future__ import annotations
+
+import argparse
+import json
+import sys
+from pathlib import Path
+from typing import Any
+
+import yaml
+from jinja2 import Environment, FileSystemLoader, StrictUndefined
+
+sys.dont_write_bytecode = True
+
+ROOT = Path(__file__).resolve().parents[1]
+SOURCE = ROOT / "Dev" / "TemplateFactory" / "modules" / "resource_support_pages.yaml"
+JINJA = ROOT / "Dev" / "TemplateFactory" / "jinja"
+TEMPLATE = "resource_support_page.md.j2"
+
+
+class IndentedDumper(yaml.SafeDumper):
+    def increase_indent(self, flow: bool = False, indentless: bool = False) -> Any:
+        return super().increase_indent(flow, False)
+
+
+def fail(errors: list[str], message: str) -> None:
+    errors.append(message)
+
+
+def load_source(errors: list[str]) -> dict[str, Any]:
+    if not SOURCE.exists():
+        fail(errors, f"{SOURCE.relative_to(ROOT)} mancante")
+        return {}
+    data = yaml.safe_load(SOURCE.read_text(encoding="utf-8")) or {}
+    if not isinstance(data, dict):
+        fail(errors, f"{SOURCE.relative_to(ROOT)}: root YAML non valida")
+        return {}
+    if data.get("id") != "resource_support_pages":
+        fail(errors, f"{SOURCE.relative_to(ROOT)}: id non valido")
+    return data
+
+
+def build_env() -> Environment:
+    return Environment(
+        loader=FileSystemLoader(str(JINJA)),
+        undefined=StrictUndefined,
+        autoescape=False,
+        keep_trailing_newline=True,
+        trim_blocks=True,
+        lstrip_blocks=True,
+    )
+
+
+def frontmatter_text(frontmatter: Any, rel_path: str, errors: list[str]) -> str:
+    if frontmatter in (None, ""):
+        return ""
+    if not isinstance(frontmatter, dict):
+        fail(errors, f"{rel_path}: frontmatter deve essere mappa")
+        return ""
+    if not frontmatter:
+        return ""
+    return yaml.dump(frontmatter, Dumper=IndentedDumper, allow_unicode=True, sort_keys=False).strip() + "\n"
+
+
+def normalize_page(record: dict[str, Any], index: int, errors: list[str]) -> dict[str, Any] | None:
+    local_errors: list[str] = []
+    path = str(record.get("path") or "").replace("\\", "/").strip()
+    title = str(record.get("title") or "").strip()
+    body = str(record.get("body") or "").strip()
+
+    if not path:
+        fail(local_errors, f"{SOURCE.relative_to(ROOT)}: pages[{index}] senza path")
+    elif not path.startswith("Risorse/") or not path.endswith(".md"):
+        fail(local_errors, f"{SOURCE.relative_to(ROOT)}: target supporto non valido ({path})")
+    if not title:
+        fail(local_errors, f"{path or f'pages[{index}]'}: title mancante")
+    if not body:
+        fail(local_errors, f"{path or f'pages[{index}]'}: body mancante")
+    if body.startswith("# "):
+        fail(local_errors, f"{path}: body non deve duplicare H1")
+
+    rendered_frontmatter = frontmatter_text(record.get("frontmatter"), path, local_errors)
+    if local_errors:
+        errors.extend(local_errors)
+        return None
+
+    return {
+        "path": path,
+        "title": title,
+        "body": body,
+        "frontmatter_text": rendered_frontmatter,
+    }
+
+
+def render_all(errors: list[str]) -> dict[str, str]:
+    source = load_source(errors)
+    pages = source.get("pages")
+    if not isinstance(pages, list) or not pages:
+        fail(errors, f"{SOURCE.relative_to(ROOT)}: pages deve essere lista non vuota")
+        return {}
+
+    env = build_env()
+    template = env.get_template(TEMPLATE)
+    rendered: dict[str, str] = {}
+
+    for index, record in enumerate(pages):
+        if not isinstance(record, dict):
+            fail(errors, f"{SOURCE.relative_to(ROOT)}: pages[{index}] non valida")
+            continue
+        normalized = normalize_page(record, index, errors)
+        if not normalized:
+            continue
+        path = normalized["path"]
+        if path in rendered:
+            fail(errors, f"{SOURCE.relative_to(ROOT)}: target duplicato {path}")
+            continue
+        text = template.render(**normalized)
+        rendered[path] = text if text.endswith("\n") else f"{text}\n"
+
+    for path, text in rendered.items():
+        if not text.startswith("# ") and not text.startswith("---\n"):
+            fail(errors, f"{path}: render senza intestazione")
+        if f"# {Path(path).stem}" not in text:
+            fail(errors, f"{path}: H1 non coerente con il target")
+        if "```dataviewjs" in text:
+            fail(errors, f"{path}: DataviewJS inline non ammesso nelle guide supporto generate")
+    return rendered
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description="Genera guide Risorse di supporto da YAML/Jinja.")
+    parser.add_argument("--check", action="store_true", help="Verifica senza scrivere.")
+    parser.add_argument("--json", action="store_true", help="Stampa mappa path -> Markdown renderizzato.")
+    parser.add_argument("--list-targets", action="store_true", help="Stampa i target generati.")
+    args = parser.parse_args()
+
+    errors: list[str] = []
+    rendered = render_all(errors)
+
+    if args.list_targets:
+        if errors:
+            print("Guide supporto risorse non valide:", file=sys.stderr)
+            for error in errors:
+                print(f"- {error}", file=sys.stderr)
+            return 1
+        for path in sorted(rendered):
+            print(path)
+        return 0
+
+    if args.check:
+        for path, expected in sorted(rendered.items()):
+            target = ROOT / path
+            current = target.read_text(encoding="utf-8") if target.exists() else ""
+            if current != expected:
+                fail(errors, f"{path}: guida supporto non allineata; eseguire npm run sync:sources")
+
+    if errors:
+        print("Guide supporto risorse non valide:", file=sys.stderr)
+        for error in errors:
+            print(f"- {error}", file=sys.stderr)
+        return 1
+
+    if args.json:
+        print(json.dumps(rendered, ensure_ascii=False, sort_keys=True))
+        return 0
+
+    if not args.check:
+        for path, text in sorted(rendered.items()):
+            target = ROOT / path
+            target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_text(text, encoding="utf-8")
+
+    print(f"Resource support pages {'OK' if args.check else 'generati'}: {len(rendered)} file da YAML/Jinja.")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
