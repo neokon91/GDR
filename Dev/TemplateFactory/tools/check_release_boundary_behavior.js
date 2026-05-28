@@ -64,6 +64,19 @@ function runtimeModulePaths(manifest) {
     return paths;
 }
 
+function commonJsRuntimeSpecs(manifest) {
+    const runtime = manifest.commonjs_runtime ?? {};
+    return {
+        entrypoints: asArray(runtime.entrypoints),
+        localDependencies: asArray(runtime.local_dependencies),
+        dataDependencies: asArray(runtime.data_dependencies)
+    };
+}
+
+function specPath(spec) {
+    return String(spec?.path ?? "").replace(/\\/g, "/").trim();
+}
+
 function resolveJsRequire(sourceFile, request) {
     const sourceDir = path.dirname(sourceFile);
     const raw = path.resolve(sourceDir, request);
@@ -197,7 +210,7 @@ function validateLocalJsDependencies() {
             || rel(item).startsWith("z.engine/")
         )
     });
-    const requirePattern = /\brequire\s*\(\s*["'](\.{1,2}\/[^"']+)["']\s*\)/g;
+    const requirePattern = /\b(?:require|optionalRequire)\s*\(\s*["'](\.{1,2}\/[^"']+)["']\s*\)/g;
     const adapterReadPattern = /app\.vault\.adapter\.read\(\s*["']([^"']+)["']\s*\)/g;
 
     for (const file of files) {
@@ -214,6 +227,44 @@ function validateLocalJsDependencies() {
             const target = match[1].replace(/\\/g, "/");
             if (!existsRel(OUT, target)) {
                 fail(`release boundary: app.vault.adapter.read punta a file assente in ${rel(file)} -> ${target}`);
+            }
+        }
+    }
+}
+
+function validateDeclaredCommonJsRuntime() {
+    const runtimeManifest = readJsonRel("z.automazioni/data/runtime/runtime_exports.json", { commonjs_runtime: {} });
+    const specs = commonJsRuntimeSpecs(runtimeManifest);
+
+    if (!specs.entrypoints.length) fail("release boundary: runtime_exports.json senza commonjs_runtime.entrypoints");
+    if (!specs.localDependencies.length) fail("release boundary: runtime_exports.json senza commonjs_runtime.local_dependencies");
+
+    const modulePaths = [...specs.entrypoints, ...specs.localDependencies]
+        .map(specPath)
+        .filter(Boolean);
+    const dataPaths = specs.dataDependencies
+        .map(specPath)
+        .filter(Boolean);
+    const declaredModules = new Set(modulePaths);
+
+    for (const relPath of [...modulePaths, ...dataPaths]) {
+        if (!existsRel(OUT, relPath)) {
+            fail(`release boundary: dipendenza runtime dichiarata mancante (${relPath})`);
+        }
+    }
+
+    const requirePattern = /\b(?:require|optionalRequire)\s*\(\s*["'](\.{1,2}\/[^"']+)["']\s*\)/g;
+    for (const relPath of modulePaths.filter(item => item.endsWith(".js"))) {
+        const file = path.join(OUT, relPath);
+        if (!fs.existsSync(file)) continue;
+        const source = readText(file);
+        let match;
+        while ((match = requirePattern.exec(source))) {
+            const resolved = resolveJsRequire(file, match[1]);
+            const target = rel(resolved);
+            if (!target.startsWith("z.automazioni/") && !target.startsWith("z.engine/")) continue;
+            if (!declaredModules.has(target)) {
+                fail(`release boundary: dipendenza CommonJS locale non dichiarata (${relPath} -> ${target})`);
             }
         }
     }
@@ -270,6 +321,7 @@ try {
     validateHiddenTechnicalRoots(boundary);
     validateForbiddenText(boundary);
     validateLocalJsDependencies();
+    validateDeclaredCommonJsRuntime();
     validateBridgeRuntime(boundary);
     validateZip();
 } finally {

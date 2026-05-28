@@ -101,6 +101,92 @@ function runtimeModuleSpecs(source, sourcePath) {
     return { groups: normalizedGroups, modules };
 }
 
+function normalizeSpecList(source, key, sourcePath, { required = true } = {}) {
+    const entries = source?.[key];
+    if (!Array.isArray(entries) || (required && !entries.length)) {
+        errors.push(`${sourcePath}.${key}: lista mancante o vuota`);
+        return [];
+    }
+
+    const seenKeys = new Set();
+    const seenPaths = new Set();
+    return entries.map((entry, index) => {
+        const id = `${sourcePath}.${key}[${index}]`;
+        const specKey = String(entry?.key ?? "").trim();
+        const specPath = String(entry?.path ?? "").replace(/\\/g, "/").trim();
+        if (!specKey) errors.push(`${id}: key mancante`);
+        if (!specPath) errors.push(`${id}: path mancante`);
+        if (specKey && seenKeys.has(specKey)) errors.push(`${sourcePath}.${key}: key duplicata (${specKey})`);
+        if (specPath && seenPaths.has(specPath)) errors.push(`${sourcePath}.${key}: path duplicato (${specPath})`);
+        if (specKey) seenKeys.add(specKey);
+        if (specPath) seenPaths.add(specPath);
+        return { key: specKey, path: specPath };
+    });
+}
+
+function resolveLocalJs(sourceRelPath, request) {
+    const sourceDir = path.dirname(path.join(ROOT, sourceRelPath));
+    const raw = path.resolve(sourceDir, request);
+    const candidates = [
+        raw,
+        `${raw}.js`,
+        path.join(raw, "index.js")
+    ];
+    const resolved = candidates.find(candidate => fs.existsSync(candidate)) ?? candidates[1];
+    return path.relative(ROOT, resolved).replace(/\\/g, "/");
+}
+
+function localJsDependencies(sourceRelPath) {
+    const source = fs.existsSync(path.join(ROOT, sourceRelPath))
+        ? fs.readFileSync(path.join(ROOT, sourceRelPath), "utf8")
+        : "";
+    const dependencies = [];
+    const requirePattern = /\b(?:require|optionalRequire)\s*\(\s*["'](\.{1,2}\/[^"']+)["']\s*\)/g;
+    let match;
+    while ((match = requirePattern.exec(source))) {
+        dependencies.push(resolveLocalJs(sourceRelPath, match[1]));
+    }
+    return dependencies;
+}
+
+function commonJsRuntimeSpecs(source, sourcePath) {
+    const commonjs = source?.commonjs_runtime;
+    if (!isPlainObject(commonjs)) {
+        errors.push(`${sourcePath}: commonjs_runtime mancante o non valido`);
+        return { entrypoints: [], local_dependencies: [], data_dependencies: [], modules: [], data: [] };
+    }
+
+    const commonjsPath = `${sourcePath}.commonjs_runtime`;
+    const entrypoints = normalizeSpecList(commonjs, "entrypoints", commonjsPath);
+    const localDependencies = normalizeSpecList(commonjs, "local_dependencies", commonjsPath);
+    const dataDependencies = normalizeSpecList(commonjs, "data_dependencies", commonjsPath);
+    const modules = [...entrypoints, ...localDependencies].map(spec => spec.path).filter(Boolean);
+    const data = dataDependencies.map(spec => spec.path).filter(Boolean);
+    const declaredModules = new Set(modules);
+
+    for (const modulePath of modules) {
+        if (!modulePath.endsWith(".js")) {
+            errors.push(`${commonjsPath}: modulo CommonJS non JS (${modulePath})`);
+            continue;
+        }
+
+        for (const dependency of localJsDependencies(modulePath)) {
+            if (!dependency.startsWith("z.automazioni/") && !dependency.startsWith("z.engine/")) continue;
+            if (!declaredModules.has(dependency)) {
+                errors.push(`${commonjsPath}: dipendenza locale non dichiarata (${modulePath} -> ${dependency})`);
+            }
+        }
+    }
+
+    return {
+        entrypoints,
+        local_dependencies: localDependencies,
+        data_dependencies: dataDependencies,
+        modules,
+        data
+    };
+}
+
 function validateSourceRoutes(routes, sourcePath) {
     for (const [index, route] of routes.entries()) {
         const id = String(route.id ?? `source_routes[${index}]`);
@@ -307,9 +393,12 @@ if (RUNTIME_DATAVIEW_CONTRACT.id !== "runtime_dataview_contract") {
 
 const REQUIRED_EXPORTS = requireStringArray(RUNTIME_EXPORTS, "required_exports", RUNTIME_EXPORTS_SOURCE);
 const RUNTIME_MODULES = runtimeModuleSpecs(RUNTIME_EXPORTS, RUNTIME_EXPORTS_SOURCE);
+const COMMONJS_RUNTIME = commonJsRuntimeSpecs(RUNTIME_EXPORTS, RUNTIME_EXPORTS_SOURCE);
 const REQUIRED_MODULES = [
     String(RUNTIME_EXPORTS.bridge ?? "z.engine/session_views.js").trim(),
-    ...RUNTIME_MODULES.modules
+    ...RUNTIME_MODULES.modules,
+    ...COMMONJS_RUNTIME.modules,
+    ...COMMONJS_RUNTIME.data
 ].filter(Boolean);
 const RENDER_CHECKS = requireObjectArray(RUNTIME_RENDER_CONTRACT, "render_checks", RUNTIME_RENDER_CONTRACT_SOURCE);
 const SOURCE_ROUTES = requireObjectArray(RUNTIME_DATAVIEW_CONTRACT, "source_routes", RUNTIME_DATAVIEW_CONTRACT_SOURCE);
@@ -320,7 +409,12 @@ const RUNTIME_DATA_PAYLOAD = {
     generated_by: "check_runtime_load",
     generated_from: RUNTIME_EXPORTS_SOURCE,
     source: RUNTIME_EXPORTS_SOURCE,
-    purpose: "Registry runtime dei moduli caricati dal bridge DataviewJS session_views.js.",
+    purpose: "Registry runtime dei moduli caricati dal bridge DataviewJS e delle dipendenze CommonJS Templater.",
+    commonjs_runtime: {
+        entrypoints: COMMONJS_RUNTIME.entrypoints,
+        local_dependencies: COMMONJS_RUNTIME.local_dependencies,
+        data_dependencies: COMMONJS_RUNTIME.data_dependencies
+    },
     runtime_modules: RUNTIME_MODULES.groups
 };
 

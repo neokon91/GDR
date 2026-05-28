@@ -39,6 +39,7 @@ required_files:
   - z.automazioni/meta_actions.js
   - z.automazioni/continuity_event_model.js
   - z.automazioni/continuity_state.js
+  - z.automazioni/session_lifecycle_actions.js
   - z.automazioni/pg.js
   - z.automazioni/pg_mechanics.js
   - z.automazioni/data/srd/core.json

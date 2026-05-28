@@ -832,7 +832,7 @@ steps:
       - Dev/TemplateFactory/tools/render_session_context_contract.py
       - --check
   runtime_exports_contract:
-    purpose: Verifica manifest export z.engine, sorgenti Dataview simulate, scenari render e fixture runtime senza mantenere liste o asserzioni enormi nel codice.
+    purpose: Verifica manifest export z.engine, dipendenze CommonJS Templater, sorgenti Dataview simulate, scenari render e fixture runtime senza mantenere liste o asserzioni enormi nel codice.
     sources:
       - Dev/TemplateFactory/modules/runtime_exports.yaml
       - Dev/TemplateFactory/modules/runtime_render_contract.yaml

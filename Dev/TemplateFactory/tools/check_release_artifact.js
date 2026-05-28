@@ -70,6 +70,20 @@ function runtimeModulePaths(manifest) {
     return paths;
 }
 
+function specPath(spec) {
+    return String(spec?.path ?? "").replace(/\\/g, "/").trim();
+}
+
+function commonJsRuntimePaths(manifest, errors) {
+    const runtime = manifest.commonjs_runtime ?? {};
+    const entrypoints = asArray(runtime.entrypoints).map(specPath).filter(Boolean);
+    const localDependencies = asArray(runtime.local_dependencies).map(specPath).filter(Boolean);
+    const dataDependencies = asArray(runtime.data_dependencies).map(specPath).filter(Boolean);
+    if (!entrypoints.length) fail(errors, "runtime_exports.json della release senza commonjs_runtime.entrypoints");
+    if (!localDependencies.length) fail(errors, "runtime_exports.json della release senza commonjs_runtime.local_dependencies");
+    return [...entrypoints, ...localDependencies, ...dataDependencies];
+}
+
 function walkFiles(root, files = []) {
     if (!fs.existsSync(root)) return files;
     for (const entry of fs.readdirSync(root, { withFileTypes: true })) {
@@ -110,6 +124,9 @@ function validateOutput(errors) {
     }
     const runtimeManifest = readJsonRel(OUT, "z.automazioni/data/runtime/runtime_exports.json", errors, { runtime_modules: {} });
     const runtimePaths = runtimeModulePaths(runtimeManifest);
+    for (const relPath of commonJsRuntimePaths(runtimeManifest, errors)) {
+        if (!existsRel(OUT, relPath)) fail(errors, `dipendenza runtime CommonJS mancante nella release: ${relPath}`);
+    }
     for (const marker of asArray(releaseBoundary.bridge_runtime_modules)) {
         const modulePath = `z.engine/${marker}`;
         if (!runtimePaths.has(modulePath)) fail(errors, `runtime_exports.json della release non dichiara ${modulePath}`);
