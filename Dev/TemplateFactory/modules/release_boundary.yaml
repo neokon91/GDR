@@ -34,7 +34,6 @@ required_files:
   - z.automazioni/continuity_state.js
   - z.automazioni/pg.js
   - z.automazioni/pg_mechanics.js
-  - z.automazioni/session_context.js
   - z.automazioni/data/srd/core.json
   - z.automazioni/data/srd/opzioni_personaggio.json
   - z.automazioni/data/runtime/plugin_profile.json

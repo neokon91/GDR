@@ -43,7 +43,7 @@ Questa nota orienta un connettore GPT o un indice code search sul vault. Non e u
 ## Runtime E Automazioni
 
 - `z.engine/session_views.js`: entrypoint DataviewJS per viste sessione, dashboard e player view.
-- `z.automazioni/session_context.js`: implementazione legacy dietro `z.engine/session_views.js`; non puntarla direttamente da nuovi template.
+- `z.engine/session_core.js`: nucleo sessione condiviso per sessione attiva, candidati, pressione e filtri player-safe.
 - `z.automazioni/helpers.js`: helper Templater, selettori, spostamento note, contesto sessione attiva.
 - `Dev/TemplateFactory/tools/check_vault.js`: controllo qualita locale del vault, inclusi indice GPT, template, campi minimi, sessioni attive e note live.
 - `Dev/TemplateFactory/tools/import_srd.js`: rigenerazione SRD; i mostri mantengono frontmatter `statblock: true` parsabile da Fantasy Statblocks.

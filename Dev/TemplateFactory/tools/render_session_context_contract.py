@@ -124,7 +124,7 @@ def json_text(contract: dict[str, Any]) -> str:
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Genera il contratto runtime per session_context.js.")
+    parser = argparse.ArgumentParser(description="Genera il contratto runtime per il core sessione.")
     parser.add_argument("--check", action="store_true", help="Verifica senza scrivere.")
     args = parser.parse_args()
 

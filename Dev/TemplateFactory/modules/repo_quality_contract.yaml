@@ -130,7 +130,6 @@ required_surfaces:
     - Dev/TemplateFactory/tools/template_factory_utils.py
     - Dev/TemplateFactory/tools/release_boundary_utils.js
     - Dev/TemplateFactory/tools/release_plugin_profile.js
-    - z.automazioni/session_context.js
     - z.automazioni/meta_actions.js
     - z.automazioni/template_router.js
     - z.automazioni/wizard_layer.js

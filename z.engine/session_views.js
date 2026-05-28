@@ -158,6 +158,69 @@
     grid.innerHTML = list.map(mapper).join("");
   }
 
+  function renderActions(dv) {
+    const active = activeSession(dv);
+    const prep = dv.pages('"Mondi/Sessioni"')
+      .where(p => isReal(p) && p.stato === "preparazione")
+      .sort(p => p.data ?? "0000-00-00", "desc")
+      .first();
+    const inbox = dv.pages('"Inbox"')
+      .where(p => isReal(p) && p.file.name !== "Inbox" && !["smistata", "archiviata", "ignorata"].includes(p.stato))
+      .sort(p => p.file.mtime, "desc");
+    const pressureItems = dv.pages('"Mondi/Missioni" OR "Mondi/Tracciati" OR "Mondi/Fazioni" OR "Mondi/Conflitti"')
+      .where(p => isReal(p) && p.stato !== "archiviata" && pressure(p) > 0)
+      .sort(p => pressure(p), "desc")
+      .limit(4);
+
+    const actions = [];
+    if (active) {
+      actions.push({ title: "Gioca la sessione attiva", meta: active.file.name, body: "Apri il cockpit del tavolo.", link: "Hub/Durante il Gioco.md" });
+    } else if (prep) {
+      actions.push({ title: "Finisci la preparazione", meta: prep.file.name, body: "C'e una sessione in preparazione.", link: "Risorse/Preparazione Sessione.md" });
+    } else {
+      actions.push({ title: "Crea una sessione", meta: "Nessuna sessione attiva", body: "Parti da Preparazione Sessione.", link: "Risorse/Preparazione Sessione.md" });
+    }
+
+    if (inbox.length) {
+      actions.push({ title: "Svuota Inbox", meta: `${inbox.length} appunti da decidere`, body: "Trasforma appunti in gioco o archiviali.", link: "Inbox/Inbox.md" });
+    }
+
+    pressureItems.forEach(p => actions.push({
+      title: pageTitle(p),
+      meta: p.categoria ?? "pressione",
+      stato: p.stato ?? "",
+      pressione: pressure(p),
+      azione: p.prossima_mossa ?? "Serve una prossima mossa chiara.",
+      importa: fieldText(p.gancio ?? p.posta ?? p.obiettivo ?? p.innesco) || "Questa pressione puo cambiare la prossima scena.",
+      link: p.file.path
+    }));
+
+    const container = dv.el("div", "", { cls: "gdr-card-grid compact" });
+    container.innerHTML = actions.slice(0, 6).map(cardHtml).join("");
+  }
+
+  function renderPartyControl(dv) {
+    const party = dv.pages('"Mondi/Personaggi"')
+      .where(p => isReal(p) && p.tipo === "pg" && p.stato !== "archiviata")
+      .sort(p => p.giocatore ?? p.nome ?? p.file.name, "asc")
+      .array();
+
+    if (!party.length) {
+      dv.paragraph("Nessun PG in gioco. Crea un PG da Personaggi o collega il party alla campagna.");
+      return;
+    }
+
+    const cards = party.map(p => {
+      const hp = `${p.hp_attuali ?? "?"}/${p.hp_massimi ?? "?"}`;
+      const meta = [p.giocatore, p.classe, p.livello ? `livello ${p.livello}` : ""].filter(Boolean).join(" · ");
+      const body = `HP ${hp}${p.hp_temporanei ? ` · temp ${p.hp_temporanei}` : ""}${p.condizioni ? ` · ${fieldText(p.condizioni)}` : ""}${p.spotlight ? ` · spotlight ${p.spotlight}` : ""}${p.ispirazione ? " · ispirazione" : ""}`;
+      return cardHtml({ title: pageTitle(p), meta, body, link: p.file.path, cls: "gdr-info-card compact gdr-kind-party" });
+    });
+
+    const grid = dv.el("div", "", { cls: "gdr-card-grid compact" });
+    grid.innerHTML = cards.join("");
+  }
+
   const sharedViewContext = {
     activeSession,
     activeSessions,
@@ -956,9 +1019,11 @@
     escapeHtml: gdrCore.escapeHtml,
     ...renderExports(...Object.values(runtimeViews)),
     renderCreationFeedback,
+    renderActions,
     renderEmptyState,
     renderM7FamilyCards,
     renderOnboardingReadiness,
+    renderPartyControl,
     renderPluginTroubleshooting,
     renderVaultReadiness,
     renderWorkflowCommandDeck,
