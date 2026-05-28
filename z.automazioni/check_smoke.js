@@ -100,6 +100,16 @@ if (mapImport.includes("dv.pages(") || mapImport.includes("````tabs")) {
     errors.push("Smoke statico: Importare Mappe contiene ancora query o tabs inline");
 }
 
+const mediaScene = readTextRel(ROOT, "Risorse/Media Scene.md");
+for (const marker of ["renderMediaSceneNow", "renderMediaSceneReadiness", "renderMediaSceneSessionCues", "renderMediaSceneCueQueues", "renderMediaSceneSurfaceLinks"]) {
+    if (!mediaScene.includes(marker)) {
+        errors.push(`Smoke statico: Media Scene non contiene ${marker}`);
+    }
+}
+if (mediaScene.includes("dv.pages(") || mediaScene.includes("````tabs") || /^```dataview\s*$/m.test(mediaScene)) {
+    errors.push("Smoke statico: Media Scene contiene ancora query o tabs inline");
+}
+
 const worldbuildingControl = readTextRel(ROOT, "Hub/Controllo Worldbuilding.md");
 for (const marker of ["renderWorldbuildingControlNow", "renderWorldbuildingControlReadiness", "renderWorldbuildingControlQueues", "renderWorldbuildingControlSurfaceLinks"]) {
     if (!worldbuildingControl.includes(marker)) {

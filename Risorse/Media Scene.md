@@ -1,53 +1,81 @@
 ---
 cssclasses:
-  - indice
+  - dashboard
+  - gdr-media-scene-dashboard
 categoria: risorsa
-tipo: media
+tipo: dashboard
 stato: pronto
 ---
 
 # Media Scene
 
-Questa pagina raccoglie i materiali con timestamp pronti per scene, recap, reference video o musica al tavolo.
+> [!scena] Cue di scena
+> Risultato: aprire solo audio, video o immagini che hanno scena, uso e punto di ingresso chiari.
+
+<!-- workflow:quick_actions:start media_scene -->
+> [!regia] Azioni rapide
+> Preparare cue media senza trasformarli in archivio parallelo.
+>
+> **Durante il gioco** - la sessione e attiva e devi aprire cue al tavolo
+> `BUTTON[durante-il-gioco-durante-il-gioco]`
+>
+> **Materiali al tavolo** - vuoi vedere media insieme a mappe, dispense e incontri
+> `BUTTON[materiali-al-tavolo-risorse-materiali-al-tavolo]`
+>
+> **Preparazione sessione** - il cue non ha ancora scena o obiettivo chiaro
+> `BUTTON[preparazione-sessione-risorse-preparazione-sessione]`
+>
+> **Vista giocatori** - una immagine o un video puo essere mostrato al party
+> `BUTTON[vista-giocatori-hub-vista-giocatori-vista-giocatori]`
+>
+> [!regia]- Se non e pronto
+> Tornare alla superficie che decide se il cue serve davvero.
+>
+> **Controllo vault** - il media e scollegato o sembra rumore
+> `BUTTON[controllo-vault-risorse-controllo-vault]`
+>
+> **Report qualita** - devi controllare sicurezza e materiale mostrabile
+> `BUTTON[quality-report-risorse-quality-report]`
+<!-- workflow:quick_actions:end media_scene -->
 
 ## Media Per La Sessione Attiva
 
 ```dataviewjs
-const active = dv.pages('"Mondi/Sessioni"').where(p => p.attiva === true).first();
-if (!active) {
-  dv.paragraph("Nessuna sessione attiva. Collega media quando una sessione entra in preparazione o va al tavolo.");
-} else {
-  const links = [
-    ...(active.audio ?? []),
-    ...(active.immagini ?? []),
-    ...(active.video ?? [])
-  ];
-  const rows = dv.array(links).map(link => dv.page(link.path ?? link)).where(Boolean)
-    .map(p => [p.file.link, p.uso ?? "", p.scena ?? "", p.timestamp ?? "", p.stato ?? ""]);
-  if (!rows.length) {
-    dv.paragraph("Sessione attiva senza media collegati. Va bene: aggiungili solo se servono davvero al tavolo.");
-  } else {
-    dv.table(["Media", "Uso", "Scena", "Timestamp", "Stato"], rows);
-  }
-}
+const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+gdr.renderMediaSceneNow(dv);
 ```
 
-> [!regia] Regola pratica
-> Un media e pronto solo se sai in quale scena aprirlo. Altrimenti resta reference, non materiale al tavolo.
+## Stato Cue
 
-## Cue Pronti
-
-```dataview
-TABLE uso, tono, campagna, scena, timestamp, stato
-FROM "Risorse/Audio" OR "Risorse/Video"
-WHERE file.name != "Audio" AND file.name != "Video"
-SORT campagna ASC, uso ASC, scena ASC, file.name ASC
+```dataviewjs
+const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+gdr.renderMediaSceneReadiness(dv);
 ```
 
-## Sintassi Media Extended
+## Cue Sessione
 
-- Link a un momento: wikilink al file media con `#t=70`
-- Clip con loop: embed del file media con `#t=70,95&loop`
-- Embed dimensionato: embed del file media con larghezza o dimensioni, per esempio `640x360`
+```dataviewjs
+const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+await gdr.renderMediaSceneSessionCues(dv);
+```
 
-Regola di release: i media indispensabili alla sessione devono essere locali o sostituibili. I link remoti sono reference, non dipendenze critiche.
+## Archivio Cue
+
+```dataviewjs
+const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+await gdr.renderMediaSceneCueQueues(dv);
+```
+
+## Superfici
+
+```dataviewjs
+const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+await gdr.renderMediaSceneSurfaceLinks(dv);
+```
+
+## Azioni
+
+```dataviewjs
+const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+await gdr.renderWorkflowCommandDeck(dv, "media_scene", { mode: "simple" });
+```

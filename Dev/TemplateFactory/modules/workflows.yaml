@@ -586,6 +586,39 @@ workflows:
       - Initiative Tracker
       - Fantasy Statblocks
       - Media Extended
+  media_scene:
+    audience: user
+    user_goal: Preparare cue media senza trasformarli in archivio parallelo.
+    entry_points:
+      - Risorse/Media Scene.md
+    quick_actions:
+      - button: durante-il-gioco-durante-il-gioco
+        label: Durante il gioco
+        use_when: la sessione e attiva e devi aprire cue al tavolo
+      - button: materiali-al-tavolo-risorse-materiali-al-tavolo
+        label: Materiali al tavolo
+        use_when: vuoi vedere media insieme a mappe, dispense e incontri
+      - button: preparazione-sessione-risorse-preparazione-sessione
+        label: Preparazione sessione
+        use_when: il cue non ha ancora scena o obiettivo chiaro
+      - button: vista-giocatori-hub-vista-giocatori-vista-giocatori
+        label: Vista giocatori
+        use_when: una immagine o un video puo essere mostrato al party
+    action_groups:
+      ripara:
+        label: Se non e pronto
+        purpose: Tornare alla superficie che decide se il cue serve davvero.
+        actions:
+          - button: controllo-vault-risorse-controllo-vault
+            label: Controllo vault
+            use_when: il media e scollegato o sembra rumore
+          - button: quality-report-risorse-quality-report
+            label: Report qualita
+            use_when: devi controllare sicurezza e materiale mostrabile
+    required_plugins:
+      - Meta Bind
+      - Dataview
+      - Media Extended
   gioca_live:
     audience: user
     user_goal: Gestire sessione, tiri, incontri, media e appunti live da una schermata.

@@ -240,6 +240,82 @@ blocks:
       | --- | --- |
       | Smistamento bozze | decidere cosa diventa canone |
       | Mappe | controllare player-safe |
+  media_scene_now:
+    type: dataviewjs
+    runtime_view: renderMediaSceneNow
+    use_for:
+      - dashboard
+      - media
+      - cockpit
+      - priorita
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      gdr.renderMediaSceneNow(dv);
+    fallback: |-
+      | Priorita | Azione |
+      | --- | --- |
+      | Cue adesso | apri o correggi il media della scena |
+  media_scene_readiness:
+    type: dataviewjs
+    runtime_view: renderMediaSceneReadiness
+    use_for:
+      - dashboard
+      - media
+      - cockpit
+      - stato
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      gdr.renderMediaSceneReadiness(dv);
+    fallback: |-
+      | Area | Conteggio |
+      | --- | --- |
+      | Cue collegati |  |
+      | Timestamp |  |
+      | Buchi |  |
+  media_scene_session_cues:
+    type: dataviewjs
+    runtime_view: renderMediaSceneSessionCues
+    use_for:
+      - dashboard
+      - media
+      - cockpit
+      - sessione
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      await gdr.renderMediaSceneSessionCues(dv);
+    fallback: |-
+      | Media | Uso | Scena | Timestamp |
+      | --- | --- | --- | --- |
+  media_scene_cue_queues:
+    type: dataviewjs
+    runtime_view: renderMediaSceneCueQueues
+    use_for:
+      - dashboard
+      - media
+      - cockpit
+      - code
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      await gdr.renderMediaSceneCueQueues(dv);
+    fallback: |-
+      | Media | Problema | Azione |
+      | --- | --- | --- |
+  media_scene_surface_links:
+    type: dataviewjs
+    runtime_view: renderMediaSceneSurfaceLinks
+    use_for:
+      - dashboard
+      - media
+      - cockpit
+      - superfici
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      await gdr.renderMediaSceneSurfaceLinks(dv);
+    fallback: |-
+      | Superficie | Uso |
+      | --- | --- |
+      | Durante il Gioco | aprire cue al tavolo |
+      | Materiali al tavolo | collegare media a mappe e dispense |
   session_live_cards:
     type: dataviewjs
     runtime_view: renderSessionLiveCards

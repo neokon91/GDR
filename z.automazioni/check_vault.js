@@ -837,6 +837,14 @@ const mediaSceneText = readRel("Risorse/Media Scene.md");
 if (!mediaSceneText.includes("Media Per La Sessione Attiva")) {
     errors.push("Risorse/Media Scene.md: manca vista operativa media per sessione attiva");
 }
+for (const marker of ["renderMediaSceneNow", "renderMediaSceneSessionCues", "renderMediaSceneCueQueues"]) {
+    if (!mediaSceneText.includes(marker)) {
+        errors.push(`Risorse/Media Scene.md: manca runtime media scene (${marker})`);
+    }
+}
+if (/dv\.pages\(/.test(mediaSceneText) || /^```dataview\s*$/m.test(mediaSceneText)) {
+    errors.push("Risorse/Media Scene.md: non deve contenere query Dataview inline dopo la migrazione cockpit");
+}
 const generatedDraftsText = readRel("Risorse/Smistamento Bozze Generate.md");
 if (!generatedDraftsText.includes("Prossima Bozza Da Decidere")) {
     errors.push("Risorse/Smistamento Bozze Generate.md: manca vista operativa per prossima bozza generata");

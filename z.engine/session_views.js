@@ -105,6 +105,7 @@
     prima_sessione_rapida: ["Meta Bind", "Dataview", "Templater"],
     espandi_mondo: ["Templater", "Meta Bind", "Dataview", "Bases", "Maps", "Excalidraw", "Advanced Canvas"],
     prepara_sessione: ["Templater", "Dataview", "Tasks", "Meta Bind", "Dice Roller", "Initiative Tracker", "Fantasy Statblocks", "Media Extended"],
+    media_scene: ["Meta Bind", "Dataview", "Media Extended"],
     gioca_live: ["Meta Bind", "Dataview", "Dice Roller", "Initiative Tracker", "Fantasy Statblocks", "Media Extended", "Callout Manager"],
     fuori_scena: ["Meta Bind", "Dataview", "Templater", "Tasks"],
     post_sessione: ["Templater", "Meta Bind", "Tasks", "Dataview", "Calendarium"],
@@ -268,6 +269,7 @@
   });
   const preparationViews = (await eval(await app.vault.adapter.read("z.engine/session_preparation.js")))(sharedViewContext);
   const tableMaterialsViews = (await eval(await app.vault.adapter.read("z.engine/session_table_materials.js")))(sharedViewContext);
+  const mediaSceneViews = (await eval(await app.vault.adapter.read("z.engine/session_media_scene.js")))(sharedViewContext);
   const liveTableViews = (await eval(await app.vault.adapter.read("z.engine/session_live_table.js")))({
     ...sharedViewContext,
     continuityAction: continuityViews.continuityAction,
@@ -1124,6 +1126,11 @@
     renderPreparationNow: preparationViews.renderPreparationNow,
     renderPreparationReadiness: preparationViews.renderPreparationReadiness,
     renderPreparationSurfaceLinks: preparationViews.renderPreparationSurfaceLinks,
+    renderMediaSceneCueQueues: mediaSceneViews.renderMediaSceneCueQueues,
+    renderMediaSceneNow: mediaSceneViews.renderMediaSceneNow,
+    renderMediaSceneReadiness: mediaSceneViews.renderMediaSceneReadiness,
+    renderMediaSceneSessionCues: mediaSceneViews.renderMediaSceneSessionCues,
+    renderMediaSceneSurfaceLinks: mediaSceneViews.renderMediaSceneSurfaceLinks,
     renderTableMaterialsAssetQueues: tableMaterialsViews.renderTableMaterialsAssetQueues,
     renderTableMaterialsDndPipeline: tableMaterialsViews.renderTableMaterialsDndPipeline,
     renderTableMaterialsNow: tableMaterialsViews.renderTableMaterialsNow,

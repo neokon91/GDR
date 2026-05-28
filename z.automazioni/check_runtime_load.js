@@ -21,6 +21,11 @@ const REQUIRED_EXPORTS = [
     "renderMapImportReadiness",
     "renderMapImportSources",
     "renderMapImportSurfaceLinks",
+    "renderMediaSceneCueQueues",
+    "renderMediaSceneNow",
+    "renderMediaSceneReadiness",
+    "renderMediaSceneSessionCues",
+    "renderMediaSceneSurfaceLinks",
     "renderCanonControlNow",
     "renderCanonControlQueues",
     "renderCanonControlReadiness",
@@ -167,6 +172,7 @@ const REQUIRED_MODULES = [
     "z.engine/session_living_world.js",
     "z.engine/session_lore.js",
     "z.engine/session_lore_review.js",
+    "z.engine/session_media_scene.js",
     "z.engine/session_offscreen.js",
     "z.engine/session_worldbuilding_control.js"
 ];
@@ -495,6 +501,9 @@ async function main() {
                     dispense: ["Mondi/Dispense/Lettera del Porto.md"],
                     oggetti: ["Mondi/Oggetti/Chiave del Faro.md"],
                     mappe: ["Risorse/Mappe/Mappa Pubblica.md"],
+                    audio: ["Risorse/Audio/Tema del Faro.md"],
+                    immagini: ["Risorse/Immagini/Stemma del Faro.md"],
+                    video: ["Risorse/Video/Reference Porto.md"],
                     appunti_live: ["Inbox/Conseguenza del Faro.md"],
                     conseguenze: ["Il Consiglio cambia rotta."],
                     entita_impattate: ["Mondi/Fazioni/Consiglio.md"]
@@ -648,6 +657,34 @@ async function main() {
                     stato: "bozza"
                 },
                 {
+                    file: { path: "Risorse/Audio/Tema del Faro.md", name: "Tema del Faro", link: "Risorse/Audio/Tema del Faro.md", folder: "Risorse/Audio", mtime: 37 },
+                    categoria: "media",
+                    tipo: "audio",
+                    stato: "pronto",
+                    uso: "tensione",
+                    tono: "attesa",
+                    campagna: "Campagne/Campagna Faro.md",
+                    scena: "Banchina del porto",
+                    timestamp: "00:42"
+                },
+                {
+                    file: { path: "Risorse/Immagini/Stemma del Faro.md", name: "Stemma del Faro", link: "Risorse/Immagini/Stemma del Faro.md", folder: "Risorse/Immagini", mtime: 38 },
+                    categoria: "media",
+                    tipo: "immagine",
+                    stato: "pronto",
+                    uso: "handout visuale",
+                    scena: "Trattativa col Consiglio",
+                    pubblico: true,
+                    player_safe: "Stemma pubblico del porto."
+                },
+                {
+                    file: { path: "Risorse/Video/Reference Porto.md", name: "Reference Porto", link: "Risorse/Video/Reference Porto.md", folder: "Risorse/Video", mtime: 39 },
+                    categoria: "media",
+                    tipo: "video",
+                    stato: "bozza",
+                    uso: "reference"
+                },
+                {
                     file: { path: "Campagne/Campagna Faro.md", name: "Campagna Faro", link: "Campagne/Campagna Faro.md", folder: "Campagne", mtime: 25 },
                     categoria: "campagna",
                     tipo: "sandbox costiera",
@@ -690,6 +727,9 @@ async function main() {
                 if (query.includes('"Mondi/Storia"') || query.includes('"Mondi/Timeline"')) return demoPages.filter(page => page.file.path.startsWith("Mondi/Storia/") || page.file.path.startsWith("Mondi/Timeline/"));
                 if (query.includes('"Mondi/Dispense"')) return demoPages.filter(page => page.file.path.startsWith("Mondi/Dispense/"));
                 if (query.includes('"Risorse/Mappe"')) return demoPages.filter(page => page.file.path.startsWith("Risorse/Mappe/"));
+                if (query.includes('"Risorse/Audio"') || query.includes('"Risorse/Video"') || query.includes('"Risorse/Immagini"') || query.includes('"Risorse/Dispense"')) {
+                    return demoPages.filter(page => page.file.path.startsWith("Risorse/Audio/") || page.file.path.startsWith("Risorse/Video/") || page.file.path.startsWith("Risorse/Immagini/") || page.file.path.startsWith("Risorse/Dispense/"));
+                }
                 if (query.includes('"Inbox/Generati"')) return demoPages.filter(page => page.file.path.startsWith("Inbox/Generati/"));
                 if (query.trim() === '"Campagne"') return demoPages.filter(page => page.file.path.startsWith("Campagne/"));
                 if (query.includes('"Mondi"') || query.includes('"Campagne"') || query.includes('"Inbox"')) {
@@ -926,6 +966,34 @@ async function main() {
             await views.renderTableMaterialsSurfaceLinks(dv);
             if (!rendered.some(node => String(node.innerHTML).includes("Iniziativa e combattimenti"))) {
                 errors.push("renderTableMaterialsSurfaceLinks: output senza superfici materiali");
+            }
+            const mediaSceneNowStart = rendered.length;
+            views.renderMediaSceneNow(dv);
+            if (!rendered.slice(mediaSceneNowStart).some(node => String(node.innerHTML).includes("Cue adesso"))) {
+                errors.push("renderMediaSceneNow: output senza priorita cue");
+            }
+            const mediaSceneReadinessStart = rendered.length;
+            views.renderMediaSceneReadiness(dv);
+            if (!rendered.slice(mediaSceneReadinessStart).some(node => String(node.innerHTML).includes("Timestamp"))) {
+                errors.push("renderMediaSceneReadiness: output senza metriche timestamp");
+            }
+            const mediaSceneSessionStart = rendered.length;
+            await views.renderMediaSceneSessionCues(dv);
+            if (!rendered.slice(mediaSceneSessionStart).some(node => node.tag === "table" && String(node.text).includes("Tema del Faro"))) {
+                errors.push("renderMediaSceneSessionCues: output senza cue della sessione attiva");
+            }
+            const mediaSceneQueuesStart = rendered.length;
+            await views.renderMediaSceneCueQueues(dv);
+            if (!rendered.slice(mediaSceneQueuesStart).some(node => node.tag === "table" && String(node.text).includes("Reference Porto"))) {
+                errors.push("renderMediaSceneCueQueues: output senza archivio cue");
+            }
+            if (!rendered.slice(mediaSceneQueuesStart).some(node => node.tag === "table" && String(node.text).includes("timestamp mancante"))) {
+                errors.push("renderMediaSceneCueQueues: output senza buchi cue");
+            }
+            const mediaSceneSurfacesStart = rendered.length;
+            await views.renderMediaSceneSurfaceLinks(dv);
+            if (!rendered.slice(mediaSceneSurfacesStart).some(node => String(node.innerHTML).includes("Materiali al tavolo"))) {
+                errors.push("renderMediaSceneSurfaceLinks: output senza superfici media");
             }
             views.renderAtlasNow(dv);
             if (!rendered.some(node => String(node.innerHTML).includes("Marker pronti"))) {

@@ -567,6 +567,24 @@ steps:
       - node
       - z.automazioni/render_table_materials_cockpit.js
       - --check
+  media_scene_cockpit:
+    purpose: Genera il contratto runtime del cockpit Media Scene senza scrivere root generate.
+    sources:
+      - Dev/TemplateFactory/modules/media_scene_cockpit.yaml
+      - Dev/TemplateFactory/modules/bases_views.yaml
+      - Dev/TemplateFactory/modules/frontmatter_profiles.yaml
+      - Risorse/Media Scene.md
+      - z.engine/session_media_scene.js
+      - z.engine/session_views.js
+    outputs:
+      - z.automazioni/data/runtime/media_scene_cockpit.json
+    render:
+      - node
+      - z.automazioni/render_media_scene_cockpit.js
+    check:
+      - node
+      - z.automazioni/render_media_scene_cockpit.js
+      - --check
   live_table_cockpit:
     purpose: Genera il contratto runtime del cockpit Durante il Gioco senza scrivere root generate.
     sources:

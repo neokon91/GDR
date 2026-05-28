@@ -73,6 +73,7 @@ REQUIRED_MODULES = {
     "lore_review_cockpit",
     "maps_cockpit",
     "import_maps_cockpit",
+    "media_scene_cockpit",
     "tag_rules",
     "workflows",
 }
