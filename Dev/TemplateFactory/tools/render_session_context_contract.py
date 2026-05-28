@@ -191,6 +191,23 @@ def template_router_blueprint_routes(template_blueprints: dict[str, Any]) -> set
     return routes
 
 
+def wizard_layer_blueprint_routes(template_blueprints: dict[str, Any]) -> set[str]:
+    routes: set[str] = set()
+    route_pattern = re.compile(r"wizard_layer\s*\(\s*tp\s*,\s*['\"]([^'\"]+)['\"]")
+    blueprints = template_blueprints.get("blueprints")
+    if not isinstance(blueprints, dict):
+        return routes
+
+    for spec in blueprints.values():
+        if not isinstance(spec, dict):
+            continue
+        entry = str(spec.get("templater_entry") or "")
+        match = route_pattern.search(entry)
+        if match:
+            routes.add(match.group(1).strip())
+    return routes
+
+
 def blueprint_route_options(template_blueprints: dict[str, Any], helper_name: str) -> list[dict[str, str]]:
     routes: list[dict[str, str]] = []
     entry_pattern = re.compile(rf"tp\.user\.{re.escape(helper_name)}\s*\(\s*tp\s*,\s*\{{([^}}]*)\}}\s*\)")
@@ -263,9 +280,182 @@ def validate_set_route(errors: list[str], source: str, value: Any, key: str) -> 
     return route
 
 
+def validate_dm_content(
+    router: dict[str, Any],
+    allowed_templates: set[str],
+    errors: list[str],
+) -> dict[str, Any]:
+    source = f"{TEMPLATE_ROUTER.relative_to(ROOT)}.dm_content"
+    raw_content = router.get("dm_content")
+    if not isinstance(raw_content, dict) or not raw_content:
+        fail(errors, f"{source} deve essere mappa non vuota")
+        return {}
+
+    prompt = require_text(errors, source, raw_content.get("prompt"), "prompt")
+    fallback_template = normalize_template_ref(raw_content.get("fallback_template"))
+    if not fallback_template:
+        fail(errors, f"{source}.fallback_template mancante")
+    elif fallback_template not in allowed_templates:
+        fail(errors, f"{source}.fallback_template non dichiarato in template_blueprints ({fallback_template})")
+
+    raw_options = raw_content.get("options")
+    if not isinstance(raw_options, list) or not raw_options:
+        fail(errors, f"{source}.options deve essere lista non vuota")
+        raw_options = []
+
+    options: list[dict[str, str]] = []
+    seen_ids: set[str] = set()
+    for index, option in enumerate(raw_options):
+        if not isinstance(option, dict):
+            fail(errors, f"{source}.options[{index}] deve essere mappa")
+            continue
+        label = require_text(errors, source, option.get("label"), f"options[{index}].label")
+        option_id = require_text(errors, source, option.get("id"), f"options[{index}].id")
+        if option_id in seen_ids:
+            fail(errors, f"{source}.options id duplicato ({option_id})")
+        seen_ids.add(option_id)
+
+        template = normalize_template_ref(option.get("template"))
+        if not template:
+            fail(errors, f"{source}.options.{option_id}.template mancante")
+        elif template not in allowed_templates:
+            fail(errors, f"{source}.options.{option_id}.template non dichiarato in template_blueprints ({template})")
+
+        options.append({
+            "label": label,
+            "id": option_id,
+            "template": template,
+        })
+
+    return {
+        "prompt": prompt,
+        "fallback_template": fallback_template,
+        "options": options,
+    }
+
+
+def validate_wizard_route_payload(errors: list[str], source: str, value: Any, route_id: str) -> dict[str, Any]:
+    if value in (None, ""):
+        return {}
+    if not isinstance(value, dict):
+        fail(errors, f"{source}.{route_id}.route deve essere mappa")
+        return {}
+
+    allowed_keys = {"defaultName", "tipo", "useActiveSession"}
+    result: dict[str, Any] = {}
+    for key, raw in value.items():
+        key_text = str(key or "").strip()
+        if key_text not in allowed_keys:
+            fail(errors, f"{source}.{route_id}.route usa chiave non supportata ({key_text})")
+            continue
+        if key_text == "useActiveSession":
+            if not isinstance(raw, bool):
+                fail(errors, f"{source}.{route_id}.route.useActiveSession deve essere booleano")
+                continue
+            result[key_text] = raw
+            continue
+
+        text = str(raw or "").strip()
+        if not text:
+            fail(errors, f"{source}.{route_id}.route.{key_text} mancante")
+            continue
+        result[key_text] = text
+    return result
+
+
+def validate_wizard_routes(
+    router: dict[str, Any],
+    template_blueprints: dict[str, Any],
+    path_registry: dict[str, str],
+    allowed_templates: set[str],
+    errors: list[str],
+) -> dict[str, Any]:
+    source = f"{TEMPLATE_ROUTER.relative_to(ROOT)}.wizard_routes"
+    raw_routes = router.get("wizard_routes")
+    if not isinstance(raw_routes, dict) or not raw_routes:
+        fail(errors, f"{source} deve essere mappa non vuota")
+        return {}
+
+    expected_routes = wizard_layer_blueprint_routes(template_blueprints)
+    if not expected_routes:
+        fail(errors, f"{TEMPLATE_BLUEPRINTS.relative_to(ROOT)}: nessuna route wizard_layer dichiarata")
+
+    routes: dict[str, Any] = {}
+    for route_id, route in raw_routes.items():
+        route_key = str(route_id or "").strip()
+        if route_key != str(route_id) or not route_key or any(char.isspace() for char in route_key):
+            fail(errors, f"{source} contiene key non valida ({route_id})")
+            continue
+        if not isinstance(route, dict):
+            fail(errors, f"{source}.{route_key} deve essere mappa")
+            continue
+
+        handler = require_text(errors, source, route.get("handler"), f"{route_key}.handler")
+        if handler not in {"create_from_template", "lore_capture"}:
+            fail(errors, f"{source}.{route_key}.handler non supportato ({handler})")
+            continue
+
+        if handler == "lore_capture":
+            routes[route_key] = {
+                "handler": handler,
+                "route": validate_wizard_route_payload(errors, source, route.get("route"), route_key),
+            }
+            continue
+
+        prompt = require_text(errors, source, route.get("prompt"), f"{route_key}.prompt")
+        raw_options = route.get("options")
+        if not isinstance(raw_options, list) or not raw_options:
+            fail(errors, f"{source}.{route_key}.options deve essere lista non vuota")
+            raw_options = []
+
+        options: list[dict[str, str]] = []
+        seen_labels: set[str] = set()
+        for index, option in enumerate(raw_options):
+            if not isinstance(option, dict):
+                fail(errors, f"{source}.{route_key}.options[{index}] deve essere mappa")
+                continue
+            label = require_text(errors, source, option.get("label"), f"{route_key}.options[{index}].label")
+            if label in seen_labels:
+                fail(errors, f"{source}.{route_key}.options label duplicata ({label})")
+            seen_labels.add(label)
+
+            template = normalize_folder(option.get("template"))
+            normalized_template = normalize_template_ref(template)
+            if not template:
+                fail(errors, f"{source}.{route_key}.options.{label}.template mancante")
+            elif normalized_template not in allowed_templates:
+                fail(errors, f"{source}.{route_key}.options.{label}.template non dichiarato in template_blueprints ({normalized_template})")
+
+            path_key = require_text(errors, source, option.get("path_key"), f"{route_key}.options.{label}.path_key")
+            if path_key and path_key not in path_registry:
+                fail(errors, f"{source}.{route_key}.options.{label}.path_key non dichiarato in path_registry ({path_key})")
+
+            options.append({
+                "label": label,
+                "template": template,
+                "path_key": path_key,
+            })
+
+        routes[route_key] = {
+            "handler": handler,
+            "prompt": prompt,
+            "options": options,
+        }
+
+    if expected_routes:
+        declared_routes = set(routes)
+        for route_id in sorted(expected_routes - declared_routes):
+            fail(errors, f"{source}: route usata da template_blueprints ma non dichiarata ({route_id})")
+        for route_id in sorted(declared_routes - expected_routes):
+            fail(errors, f"{source}: route dichiarata senza blueprint wizard_layer ({route_id})")
+
+    return routes
+
+
 def validate_template_router(
     router: dict[str, Any],
     template_blueprints: dict[str, Any],
+    path_registry: dict[str, str],
     errors: list[str],
 ) -> dict[str, Any]:
     source = str(TEMPLATE_ROUTER.relative_to(ROOT))
@@ -370,9 +560,14 @@ def validate_template_router(
         for route_id in extra:
             fail(errors, f"{source}: route dichiarata senza blueprint router ({route_id})")
 
+    dm_content = validate_dm_content(router, allowed_templates, errors)
+    wizard_routes = validate_wizard_routes(router, template_blueprints, path_registry, allowed_templates, errors)
+
     return {
         "prompt_routes": prompt_routes,
         "delegated_routes": delegated_routes,
+        "dm_content": dm_content,
+        "wizard_routes": wizard_routes,
         "creative_routes": creative_routes,
     }
 
@@ -654,7 +849,7 @@ def validate_contract(
         resource_support_pages,
         errors,
     )
-    template_router = validate_template_router(template_router_contract, template_blueprints, errors)
+    template_router = validate_template_router(template_router_contract, template_blueprints, path_registry, errors)
     world_taxonomy = validate_world_taxonomy(
         world_taxonomy,
         template_blueprints,

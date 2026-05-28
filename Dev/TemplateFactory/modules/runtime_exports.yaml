@@ -14,12 +14,16 @@ commonjs_runtime:
       path: z.automazioni/meta_actions.js
     - key: continuity_state
       path: z.automazioni/continuity_state.js
+    - key: dm
+      path: z.automazioni/dm.js
     - key: pg
       path: z.automazioni/pg.js
     - key: session_lifecycle_actions
       path: z.automazioni/session_lifecycle_actions.js
     - key: template_router
       path: z.automazioni/template_router.js
+    - key: wizard_layer
+      path: z.automazioni/wizard_layer.js
   local_dependencies:
     - key: helper_paths
       path: z.automazioni/helper_paths.js

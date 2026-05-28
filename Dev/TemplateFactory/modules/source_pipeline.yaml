@@ -845,8 +845,10 @@ steps:
       - Dev/TemplateFactory/modules/runtime_exports.yaml
       - Dev/TemplateFactory/modules/runtime_render_contract.yaml
       - Dev/TemplateFactory/modules/runtime_dataview_contract.yaml
+      - z.automazioni/dm.js
       - z.automazioni/helper_paths.js
       - z.automazioni/template_router.js
+      - z.automazioni/wizard_layer.js
       - z.automazioni/worldbuilding.js
       - z.automazioni/world_taxonomy.js
       - z.automazioni/data/runtime/plugin_profile.json

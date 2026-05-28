@@ -1,4 +1,5 @@
 const createWorldbuilding = require("./worldbuilding");
+const createDm = require("./dm");
 
 async function template_router(tp, route = "") {
     const helpers = tp.user.helpers;
@@ -33,7 +34,7 @@ async function template_router(tp, route = "") {
     };
 
     const routeDm = async () => {
-        const dm = await tp.user.dm(tp);
+        const dm = await createDm(tp);
         const contentType = await dm.chooseContent();
         const templatePath = dm.getContentTemplate(contentType);
 

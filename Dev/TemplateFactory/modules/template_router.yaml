@@ -40,6 +40,92 @@ prompt_routes:
 delegated_routes:
   - id: dm
     handler: dm
+dm_content:
+  prompt: Cosa vuoi creare per il tavolo?
+  fallback_template: z.modelli/dm/Incontro
+  options:
+    - label: Sessione
+      id: sessione
+      template: z.modelli/dm/Sessione
+    - label: Missione
+      id: missione
+      template: z.modelli/dm/Missione
+    - label: Clock o tracciato
+      id: tracciato
+      template: z.modelli/dm/Tracciato
+    - label: Incontro
+      id: incontro
+      template: z.modelli/dm/Incontro
+    - label: Trappola
+      id: trappola
+      template: z.modelli/dm/Trappola
+    - label: Pericolo ambientale
+      id: pericolo ambientale
+      template: z.modelli/dm/Pericolo Ambientale
+    - label: Avventura
+      id: avventura
+      template: z.modelli/dm/Avventura
+    - label: One-Shot
+      id: one-shot
+      template: z.modelli/dm/One-Shot
+    - label: Campagna
+      id: campagna
+      template: z.modelli/dm/Campagna
+wizard_routes:
+  appunto_live:
+    handler: lore_capture
+    route:
+      defaultName: Appunto live
+      useActiveSession: true
+  conseguenza:
+    handler: lore_capture
+    route:
+      tipo: conseguenza
+      defaultName: Conseguenza emersa
+      useActiveSession: true
+  nuova_entita_viva:
+    handler: create_from_template
+    prompt: Che entita viva vuoi creare?
+    options:
+      - label: Nuovo mondo homebrew
+        template: z.modelli/wizard/Nuovo Mondo Homebrew.md
+        path_key: mondi
+      - label: PNG vivo
+        template: z.modelli/personaggio/PNG.md
+        path_key: personaggi
+      - label: Luogo vivo
+        template: z.modelli/Luogo Router.md
+        path_key: luoghi
+      - label: Fazione viva
+        template: z.modelli/Fazione Router.md
+        path_key: fazioni
+      - label: Societa
+        template: z.modelli/Societa Router.md
+        path_key: societa
+      - label: Cultura
+        template: z.modelli/Cultura Router.md
+        path_key: culture
+      - label: Religione o mito
+        template: z.modelli/Religione Router.md
+        path_key: religioni
+      - label: Economia o risorsa
+        template: z.modelli/Economia Router.md
+        path_key: risorse_mondo
+      - label: Magia o cosmologia
+        template: z.modelli/Magia Router.md
+        path_key: cosmologia
+      - label: Storia
+        template: z.modelli/Storia Router.md
+        path_key: timeline
+      - label: Ecologia o creatura
+        template: z.modelli/Ecologia Router.md
+        path_key: creature
+      - label: Missione viva
+        template: z.modelli/dm/Missione.md
+        path_key: missioni
+      - label: Clock o tracciato
+        template: z.modelli/dm/Tracciato.md
+        path_key: tracciati
 creative_routes:
   - luogo
   - cultura

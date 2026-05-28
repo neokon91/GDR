@@ -1,38 +1,29 @@
+function dmContentContract() {
+    const content = require("./data/runtime/session_context.json").template_router?.dm_content ?? {};
+    if (!Array.isArray(content.options) || !content.options.length) {
+        throw new Error("Contratto DM runtime mancante in z.automazioni/data/runtime/session_context.json");
+    }
+    return content;
+}
+
 async function dm(tp) {
     const helpers = tp.user.helpers;
+    const content = dmContentContract();
+    const options = content.options ?? [];
+    const templates = new Map(options.map(option => [option.id, option.template]));
 
     async function chooseContent() {
         const selected = await helpers.chooseRequired(
             tp,
-            [
-                { label: "Sessione", id: "sessione" },
-                { label: "Missione", id: "missione" },
-                { label: "Clock o tracciato", id: "tracciato" },
-                { label: "Incontro", id: "incontro" },
-                { label: "Trappola", id: "trappola" },
-                { label: "Pericolo ambientale", id: "pericolo ambientale" },
-                { label: "Avventura", id: "avventura" },
-                { label: "One-Shot", id: "one-shot" },
-                { label: "Campagna", id: "campagna" }
-            ],
-            "Cosa vuoi creare per il tavolo?"
+            options,
+            content.prompt
         );
 
         return selected.id;
     }
 
     function getContentTemplate(contentType) {
-        if (contentType === "sessione") return "z.modelli/dm/Sessione";
-        if (contentType === "missione") return "z.modelli/dm/Missione";
-        if (contentType === "tracciato") return "z.modelli/dm/Tracciato";
-        if (contentType === "incontro") return "z.modelli/dm/Incontro";
-        if (contentType === "trappola") return "z.modelli/dm/Trappola";
-        if (contentType === "pericolo ambientale") return "z.modelli/dm/Pericolo Ambientale";
-        if (contentType === "avventura") return "z.modelli/dm/Avventura";
-        if (contentType === "one-shot") return "z.modelli/dm/One-Shot";
-        if (contentType === "campagna") return "z.modelli/dm/Campagna";
-
-        return "z.modelli/dm/Incontro";
+        return templates.get(contentType) ?? content.fallback_template;
     }
 
     return {

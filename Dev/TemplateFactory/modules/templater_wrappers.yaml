@@ -31,6 +31,8 @@ wrappers:
   module: ../cultura
 - name: dispensa
   module: ../dispensa
+- name: dm
+  module: ../dm
 - name: era_storica
   module: ../era_storica
 - name: evento_storico
