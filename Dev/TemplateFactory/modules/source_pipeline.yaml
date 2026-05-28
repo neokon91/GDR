@@ -221,6 +221,37 @@ steps:
       - python3
       - z.automazioni/render_resource_hub.py
       - --check
+  hub_pages:
+    purpose: Genera le pagine operative Hub da YAML/Jinja, lasciandole fuori dal sorgente tracciato.
+    sources:
+      - Dev/TemplateFactory/modules/hub_pages.yaml
+      - Dev/TemplateFactory/jinja/resource_support_page.md.j2
+      - z.automazioni/render_hub_pages.py
+    outputs:
+      - Hub/1. DM Dashboard.md
+      - Hub/Atlante del Mondo.md
+      - Hub/Bibbia del Mondo.md
+      - Hub/Campagna da Ambientazione.md
+      - Hub/Compendium Del Mondo.md
+      - Hub/Controllo Canone.md
+      - Hub/Controllo Worldbuilding.md
+      - Hub/Cosa Succede Fuori Scena.md
+      - Hub/Durante il Gioco.md
+      - Hub/Economia E Rotte.md
+      - Hub/Geopolitical Dashboard.md
+      - Hub/Lore Hub.md
+      - Hub/Motore Mondo Vivo.md
+      - Hub/Party Control.md
+      - Hub/Revisione Lore.md
+      - Hub/Vista Giocatori.md
+      - Hub/Worldbuilder Dashboard.md
+    render:
+      - python3
+      - z.automazioni/render_hub_pages.py
+    check:
+      - python3
+      - z.automazioni/render_hub_pages.py
+      - --check
   workflow_blocks:
     purpose: Renderizza blocchi azioni rapide dentro le pagine operative.
     sources:

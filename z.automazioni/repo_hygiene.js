@@ -32,7 +32,7 @@ const JUNK_FILE_PATTERNS = [
 ];
 const REQUIRED_NPM_SCRIPTS = ["check", "check:repo", "check:js", "check:smoke", "check:release", "check:importers", "check:metadata", "check:diff", "release:clean"];
 const FORBIDDEN_TRACKED_USER_ROOTS = ["Mondi", "Campagne", "Giocatori", "Inbox", "Import"];
-const FORBIDDEN_TRACKED_GENERATED_ROOTS = ["z.bacheche"];
+const FORBIDDEN_TRACKED_GENERATED_ROOTS = ["Hub", "z.bacheche"];
 const FORBIDDEN_TRACKED_GENERATED_FILES = [
     "Risorse/Risorse.md",
     "Risorse/Aspetto Vault.md",
