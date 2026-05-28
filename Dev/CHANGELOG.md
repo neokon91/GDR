@@ -4,6 +4,7 @@
 
 ### Aggiunto
 
+- `Risorse/Guida DM.md` trasformata in bussola DM compatta con runtime `session_dm_guide.js` e contratto `dm_guide_cockpit.yaml`.
 - `Risorse/Media Scene.md` trasformata in cockpit compatto con runtime `session_media_scene.js` e contratto `media_scene_cockpit.yaml`.
 - `Risorse/Importare Mappe.md` trasformata in cockpit compatto con runtime `session_import_maps.js` e contratto `import_maps_cockpit.yaml`.
 - `Risorse/Mappe/Mappe.md` trasformata in cockpit compatto con runtime `session_maps.js` e contratto `maps_cockpit.yaml`.

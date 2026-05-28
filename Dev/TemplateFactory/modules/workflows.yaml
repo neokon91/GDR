@@ -223,6 +223,49 @@ workflows:
       - Dataview
       - Templater
       - Tasks
+  guida_dm:
+    audience: user
+    user_goal: Scegliere cosa aprire adesso senza leggere guide lunghe.
+    entry_points:
+      - Risorse/Guida DM.md
+    quick_actions:
+      - button: dm-dashboard-1-dm-dashboard
+        label: DM Dashboard
+        use_when: vuoi vedere lo stato complessivo del tavolo
+      - button: preparazione-sessione-risorse-preparazione-sessione
+        label: Prepara
+        use_when: devi scegliere o rifinire la prossima sessione
+      - button: durante-il-gioco-durante-il-gioco
+        label: Gioca
+        use_when: una sessione deve andare al tavolo
+      - button: post-sessione-guidato-risorse-post-sessione-guidato
+        label: Chiudi
+        use_when: il tavolo e finito e devi smistare conseguenze
+    action_groups:
+      mondo:
+        label: Mondo
+        purpose: Aprire solo superfici che cambiano materiale giocabile.
+        actions:
+          - button: worldbuilder-worldbuilder-dashboard-2
+            label: Worldbuilder
+            use_when: una sessione richiede nuovi luoghi, poteri o pressioni
+          - button: motore-mondo-vivo-motore-mondo-vivo
+            label: Mondo vivo
+            use_when: una conseguenza deve cambiare note o clock
+      pulizia:
+        label: Pulizia
+        purpose: Risolvere rumore e condivisione prima di creare altro.
+        actions:
+          - button: controllo-vault-risorse-controllo-vault
+            label: Controllo Vault
+            use_when: ci sono bozze, note isolate o problemi di stato
+          - button: vista-giocatori-hub-vista-giocatori-vista-giocatori
+            label: Vista giocatori
+            use_when: devi condividere recap, mappa o dispensa senza segreti
+    required_plugins:
+      - Meta Bind
+      - Dataview
+      - Templater
   crea_mondo:
     user_goal: Creare un mondo homebrew senza sapere quali file servono.
     entry_points:

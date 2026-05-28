@@ -66,6 +66,16 @@ for (const marker of ["renderDmDashboardNow", "renderDmDashboardReadiness", "ren
     }
 }
 
+const dmGuide = readTextRel(ROOT, "Risorse/Guida DM.md");
+for (const marker of ["renderDmGuideNow", "renderDmGuideLoop", "renderDmGuideRules", "renderDmGuideSurfaceLinks"]) {
+    if (!dmGuide.includes(marker)) {
+        errors.push(`Smoke statico: Guida DM non contiene ${marker}`);
+    }
+}
+if (dmGuide.includes("dv.pages(") || dmGuide.includes("````tabs") || /^```dataview\s*$/m.test(dmGuide)) {
+    errors.push("Smoke statico: Guida DM contiene ancora query o tabs inline");
+}
+
 const vaultControl = readTextRel(ROOT, "Risorse/Controllo Vault.md");
 for (const marker of ["renderVaultControlNow", "renderVaultControlReadiness", "renderVaultControlQueues", "renderVaultControlCoherence", "renderVaultControlSurfaceLinks"]) {
     if (!vaultControl.includes(marker)) {
@@ -126,6 +136,7 @@ for (const marker of ["renderCanonControlNow", "renderCanonControlReadiness", "r
 
 for (const [label, relPath] of [
     ["DM Dashboard", "Hub/1. DM Dashboard.md"],
+    ["Guida DM", "Risorse/Guida DM.md"],
     ["Worldbuilder Dashboard", "Hub/Worldbuilder Dashboard.md"],
     ["Campagna da Ambientazione", "Hub/Campagna da Ambientazione.md"],
     ["Preparazione Sessione", "Risorse/Preparazione Sessione.md"],

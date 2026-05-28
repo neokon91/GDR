@@ -49,6 +49,10 @@ const REQUIRED_EXPORTS = [
     "renderDmDashboardQueues",
     "renderDmDashboardReadiness",
     "renderDmDashboardSurfaceLinks",
+    "renderDmGuideLoop",
+    "renderDmGuideNow",
+    "renderDmGuideRules",
+    "renderDmGuideSurfaceLinks",
     "renderEconomyDependencyQueues",
     "renderEconomyNow",
     "renderEconomyQueues",
@@ -154,6 +158,7 @@ const REQUIRED_MODULES = [
     "z.engine/session_compendium.js",
     "z.engine/session_dnd.js",
     "z.engine/session_dm_dashboard.js",
+    "z.engine/session_dm_guide.js",
     "z.engine/session_economy.js",
     "z.engine/session_generated_drafts.js",
     "z.engine/session_geopolitical.js",
@@ -806,6 +811,26 @@ async function main() {
             await views.renderDmDashboardSurfaceLinks(dv);
             if (!rendered.some(node => String(node.innerHTML).includes("Durante il Gioco"))) {
                 errors.push("renderDmDashboardSurfaceLinks: output senza superfici DM");
+            }
+            const dmGuideNowStart = rendered.length;
+            views.renderDmGuideNow(dv);
+            if (!rendered.slice(dmGuideNowStart).some(node => String(node.innerHTML).includes("Fai adesso"))) {
+                errors.push("renderDmGuideNow: output senza decisione immediata");
+            }
+            const dmGuideLoopStart = rendered.length;
+            await views.renderDmGuideLoop(dv);
+            if (!rendered.slice(dmGuideLoopStart).some(node => node.tag === "table" && String(node.text).includes("Prepara"))) {
+                errors.push("renderDmGuideLoop: output senza ciclo operativo");
+            }
+            const dmGuideRulesStart = rendered.length;
+            await views.renderDmGuideRules(dv);
+            if (!rendered.slice(dmGuideRulesStart).some(node => String(node.innerHTML).includes("Bozze non canone"))) {
+                errors.push("renderDmGuideRules: output senza regole di taglio");
+            }
+            const dmGuideSurfacesStart = rendered.length;
+            await views.renderDmGuideSurfaceLinks(dv);
+            if (!rendered.slice(dmGuideSurfacesStart).some(node => String(node.innerHTML).includes("Preparazione sessione"))) {
+                errors.push("renderDmGuideSurfaceLinks: output senza superfici guida DM");
             }
             await views.renderVaultControlNow(dv);
             if (!rendered.some(node => String(node.innerHTML).includes("Ripara prima"))) {

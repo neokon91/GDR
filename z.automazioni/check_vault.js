@@ -811,6 +811,18 @@ for (const marker of ["Crea o apri un mondo", "Prepara una sessione", "Durante i
         errors.push(`Risorse/Setup Guidato.md: percorso primo utilizzo incompleto (${marker})`);
     }
 }
+const dmGuideText = readRel("Risorse/Guida DM.md");
+for (const marker of ["Cosa Fare Ora", "renderDmGuideNow", "renderDmGuideLoop", "renderDmGuideRules", "renderDmGuideSurfaceLinks"]) {
+    if (!dmGuideText.includes(marker)) {
+        errors.push(`Risorse/Guida DM.md: bussola DM incompleta (${marker})`);
+    }
+}
+if (/dv\.pages\(/.test(dmGuideText) || dmGuideText.includes("````tabs") || /^```dataview\s*$/m.test(dmGuideText)) {
+    errors.push("Risorse/Guida DM.md: non deve contenere query Dataview inline dopo la migrazione cockpit");
+}
+if (dmGuideText.split(/\r?\n/).length > 95) {
+    errors.push("Risorse/Guida DM.md: superficie troppo lunga per una bussola DM compatta");
+}
 
 const pluginIntegrationText = readRel("Dev/Integrazioni Plugin.md");
 for (const marker of ["Riesame Valore Quotidiano", "Mappe", "Canvas / Excalidraw", "Calendarium", "Fantasy Content Generator", "Media", "Tasks / Kanban", "Crea -> Prepara -> Gioca -> Aggiorna"]) {

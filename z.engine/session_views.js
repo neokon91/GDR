@@ -100,6 +100,7 @@
   };
   const workflowPluginFallbacks = {
     dashboard_dm: ["Meta Bind", "Dataview", "Templater", "Tasks"],
+    guida_dm: ["Meta Bind", "Dataview", "Templater"],
     onboarding_utente: ["Meta Bind", "Dataview", "Templater"],
     setup_guidato: ["Meta Bind", "Dataview", "Templater", "Metadata Menu", "Homepage"],
     prima_sessione_rapida: ["Meta Bind", "Dataview", "Templater"],
@@ -283,6 +284,7 @@
     continuityStatus: continuityViews.continuityStatus
   });
   const dmDashboardViews = (await eval(await app.vault.adapter.read("z.engine/session_dm_dashboard.js")))(sharedViewContext);
+  const dmGuideViews = (await eval(await app.vault.adapter.read("z.engine/session_dm_guide.js")))(sharedViewContext);
   const economyViews = (await eval(await app.vault.adapter.read("z.engine/session_economy.js")))(sharedViewContext);
   const generatedDraftsViews = (await eval(await app.vault.adapter.read("z.engine/session_generated_drafts.js")))(sharedViewContext);
   const geopoliticalViews = (await eval(await app.vault.adapter.read("z.engine/session_geopolitical.js")))(sharedViewContext);
@@ -1145,6 +1147,10 @@
     renderDmDashboardQueues: dmDashboardViews.renderDmDashboardQueues,
     renderDmDashboardReadiness: dmDashboardViews.renderDmDashboardReadiness,
     renderDmDashboardSurfaceLinks: dmDashboardViews.renderDmDashboardSurfaceLinks,
+    renderDmGuideLoop: dmGuideViews.renderDmGuideLoop,
+    renderDmGuideNow: dmGuideViews.renderDmGuideNow,
+    renderDmGuideRules: dmGuideViews.renderDmGuideRules,
+    renderDmGuideSurfaceLinks: dmGuideViews.renderDmGuideSurfaceLinks,
     renderGeneratedDraftsDestinations: generatedDraftsViews.renderGeneratedDraftsDestinations,
     renderGeneratedDraftsNow: generatedDraftsViews.renderGeneratedDraftsNow,
     renderGeneratedDraftsQueues: generatedDraftsViews.renderGeneratedDraftsQueues,

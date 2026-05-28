@@ -563,6 +563,72 @@ blocks:
       | --- | --- |
       | Durante il Gioco | giocare la sessione attiva |
       | Preparazione sessione | rifinire il prossimo tavolo |
+  dm_guide_now:
+    type: dataviewjs
+    runtime_view: renderDmGuideNow
+    use_for:
+      - dashboard
+      - guida dm
+      - cockpit
+      - triage
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      gdr.renderDmGuideNow(dv);
+    fallback: |-
+      | Priorita | Azione |
+      | --- | --- |
+      | Fai adesso | crea mondo, prepara, gioca, chiudi o pulisci |
+  dm_guide_loop:
+    type: dataviewjs
+    runtime_view: renderDmGuideLoop
+    use_for:
+      - dashboard
+      - guida dm
+      - ciclo
+      - cockpit
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      await gdr.renderDmGuideLoop(dv);
+    fallback: |-
+      | Fase | Apri | Azione |
+      | --- | --- | --- |
+      | Prepara | Preparazione Sessione | scegli il prossimo tavolo |
+      | Gioca | Durante il Gioco | usa la sessione attiva |
+      | Chiudi | Post Sessione Guidato | smista conseguenze |
+  dm_guide_rules:
+    type: dataviewjs
+    runtime_view: renderDmGuideRules
+    use_for:
+      - dashboard
+      - guida dm
+      - regole
+      - cockpit
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      await gdr.renderDmGuideRules(dv);
+    fallback: |-
+      | Regola | Perche |
+      | --- | --- |
+      | Una sessione attiva | evita ambiguita |
+      | Tre ancore prima del dettaglio | evita note isolate |
+      | Bozze non canone | evita rumore nel mondo |
+  dm_guide_surface_links:
+    type: dataviewjs
+    runtime_view: renderDmGuideSurfaceLinks
+    use_for:
+      - dashboard
+      - guida dm
+      - superfici
+      - cockpit
+    code: |-
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      await gdr.renderDmGuideSurfaceLinks(dv);
+    fallback: |-
+      | Superficie | Uso |
+      | --- | --- |
+      | DM Dashboard | scegliere il prossimo gesto |
+      | Preparazione sessione | preparare il tavolo |
+      | Controllo Vault | pulire prima di creare |
   vault_control_now:
     type: dataviewjs
     runtime_view: renderVaultControlNow
