@@ -105,6 +105,45 @@ queues:
       - Stato
       - Canonico
       - Origine
+generated_targets:
+  fallback_path_key: inbox
+  rules:
+    - id: luogo
+      category: luogo
+      path_key: luoghi
+    - id: fazione
+      category: fazione
+      path_key: fazioni
+    - id: religione
+      category: religione
+      path_key: religioni
+    - id: personaggio
+      category: personaggio
+      path_key: personaggi
+    - id: png
+      type: png
+      path_key: personaggi
+    - id: oggetto
+      category: oggetto
+      path_key: oggetti
+    - id: missione
+      category: missione
+      path_key: missioni
+    - id: creatura
+      category: creatura
+      path_key: creature
+    - id: incontro
+      category: incontro
+      path_key: incontri
+    - id: dispensa
+      category: dispensa
+      path_key: dispense
+    - id: generazione
+      category: generazione
+      path_key: inbox
+    - id: spunto
+      category: spunto
+      path_key: inbox
 surfaces:
   - id: vault_control
     label: Controllo vault

@@ -398,6 +398,7 @@ steps:
     purpose: Genera il contratto runtime del cockpit Smistamento Bozze senza scrivere root generate.
     sources:
       - Dev/TemplateFactory/modules/generated_drafts_cockpit.yaml
+      - Dev/TemplateFactory/modules/runtime_profiles.yaml
       - Dev/TemplateFactory/modules/bases_views.yaml
       - Dev/TemplateFactory/modules/frontmatter_profiles.yaml
       - Risorse/Smistamento Bozze Generate.md
@@ -844,6 +845,7 @@ steps:
       - z.automazioni/helper_paths.js
       - z.automazioni/data/runtime/plugin_profile.json
       - z.automazioni/data/runtime/session_context.json
+      - z.automazioni/data/runtime/generated_drafts_cockpit.json
       - Dev/TemplateFactory/tools/fixtures/runtime_demo_pages.json
       - Dev/TemplateFactory/tools/check_runtime_load.js
     outputs:

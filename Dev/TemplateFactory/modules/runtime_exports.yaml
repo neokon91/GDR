@@ -46,6 +46,8 @@ commonjs_runtime:
       path: z.automazioni/data/runtime/plugin_profile.json
     - key: session_context
       path: z.automazioni/data/runtime/session_context.json
+    - key: generated_drafts_cockpit
+      path: z.automazioni/data/runtime/generated_drafts_cockpit.json
 runtime_modules:
   shared_context:
     - key: atlas

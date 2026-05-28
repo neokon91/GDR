@@ -33,6 +33,8 @@ runtime_contracts:
       campagne:
         folder: Campagne
         entity_category: campagna
+      inbox:
+        folder: Inbox
       creature:
         folder: Mondi/Creature
         entity_category: creatura

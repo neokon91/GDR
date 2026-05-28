@@ -48,7 +48,20 @@
       || hasLinks(page.sessioni) || hasText(page.sessioni);
   }
 
-  function destinationFor(page) {
+  function generatedTargetRule(page, cockpit = {}) {
+    const category = String(page?.categoria ?? "");
+    const type = String(page?.tipo ?? "");
+
+    return (cockpit.generated_targets?.rules ?? []).find(rule =>
+      (rule.category && rule.category === category)
+      || (rule.type && rule.type === type)
+    );
+  }
+
+  function destinationFor(page, cockpit = {}) {
+    const rule = generatedTargetRule(page, cockpit);
+    if (rule?.folder) return rule.folder;
+
     const category = String(page?.categoria ?? "");
     const type = String(page?.tipo ?? "");
 
@@ -61,10 +74,10 @@
     if (category === "incontro") return "Mondi/Incontri";
     if (category === "dispensa") return "Mondi/Dispense";
     if (category === "generazione" || category === "spunto") return "Inbox";
-    return "Inbox/Generati";
+    return cockpit.generated_targets?.fallback_folder ?? "Inbox";
   }
 
-  function generatedDraftsData(dv) {
+  function generatedDraftsData(dv, cockpit = {}) {
     const drafts = pages(dv, '"Inbox/Generati"', page => pathStarts(page, "Inbox/Generati/") && page.plugin === "fantasy-content-generator" && page.stato === "bozza")
       .sort((left, right) => {
         const leftAnchored = hasOperationalAnchor(left) ? 0 : 1;
@@ -78,7 +91,7 @@
     const canonized = resolved.filter(page => page.canonico === true || hasText(page.canonizzato_il) || page.stato_canonico === "canonico");
     const destinations = drafts.map(page => ({
       page,
-      destination: destinationFor(page),
+      destination: destinationFor(page, cockpit),
       anchored: hasOperationalAnchor(page),
       action: hasOperationalAnchor(page)
         ? "Usa Smista bozza; canonizza solo se confermata al tavolo."
@@ -251,7 +264,7 @@
   async function renderGeneratedDraftsDestinations(dv) {
     const cockpit = await readGeneratedDraftsCockpit();
     const labels = queueLabels(cockpit);
-    const data = generatedDraftsData(dv);
+    const data = generatedDraftsData(dv, cockpit);
 
     renderTable(
       dv,

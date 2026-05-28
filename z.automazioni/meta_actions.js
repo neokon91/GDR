@@ -1,5 +1,6 @@
 async function meta_actions(tp, action = "") {
     const helpers = tp.user.helpers;
+    const generatedDraftTargets = require("./data/runtime/generated_drafts_cockpit.json").generated_targets ?? {};
     const optionalRequire = modulePath => {
         if (typeof require !== "function") return null;
         try {
@@ -21,17 +22,18 @@ async function meta_actions(tp, action = "") {
 
     const notice = message => new Notice(message);
     const privatePublicPattern = /\b(dm|segreto|segreti|nascost[oaie]?|verita|verità|prossima mossa|mosse segrete|retroscena|non rivelare)\b/i;
-    const generatedTargetFolder = frontmatter => {
+    const generatedTargetRule = frontmatter => {
         const category = String(frontmatter?.categoria ?? "");
         const type = String(frontmatter?.tipo ?? "");
-
-        if (category === "luogo") return helpers.path("luoghi");
-        if (category === "fazione") return helpers.path("fazioni");
-        if (category === "religione") return helpers.path("religioni");
-        if (category === "personaggio" || type === "png") return helpers.path("personaggi");
-        if (category === "oggetto") return helpers.path("oggetti");
-        if (category === "missione") return helpers.path("missioni");
-        return "Inbox";
+        return (generatedDraftTargets.rules ?? []).find(rule =>
+            (rule.category && rule.category === category)
+            || (rule.type && rule.type === type)
+        );
+    };
+    const generatedTargetFolder = frontmatter => {
+        const rule = generatedTargetRule(frontmatter);
+        return rule?.folder
+            ?? helpers.path(rule?.path_key ?? generatedDraftTargets.fallback_path_key ?? "inbox");
     };
     const hasGeneratedAnchor = frontmatter => [
         frontmatter.mondo,
