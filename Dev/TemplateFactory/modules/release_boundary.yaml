@@ -22,6 +22,7 @@ required_files:
   - Risorse/Controllo Vault.md
   - Risorse/Quality Report.md
   - z.engine/session_views.js
+  - z.engine/session_core.js
   - z.engine/session_continuity.js
   - z.engine/session_dnd.js
   - z.engine/session_maps.js

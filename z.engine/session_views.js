@@ -1,9 +1,8 @@
 // Runtime DataviewJS stabile per i template operativi.
-// Le funzioni non ancora migrate vengono lette dal runtime legacy e sovrascritte qui una famiglia alla volta.
 (async () => {
   const gdrCore = await eval(await app.vault.adapter.read("z.engine/gdr_views.js"));
   const escapeHtml = gdrCore.escapeHtml;
-  const legacy = await eval(await app.vault.adapter.read("z.automazioni/session_context.js"));
+  const sessionCore = await eval(await app.vault.adapter.read("z.engine/session_core.js"));
 
   const asArray = value => Array.isArray(value) ? value : value ? [value] : [];
   const hasText = value => String(value ?? "").trim().length > 0;
@@ -12,12 +11,12 @@
   const isReal = page => Boolean(page);
   const pageFromLink = (dv, link) => dv.page(link?.path ?? link);
   const pagesFromLinks = (dv, links) => dv.array(links ?? []).map(link => pageFromLink(dv, link)).where(Boolean);
-  const activeSession = dv => legacy.activeSession(dv);
-  const activeSessions = dv => legacy.activeSessions(dv);
-  const sessionCandidates = dv => legacy.sessionCandidates(dv);
-  const pressure = page => legacy.pressure(page);
-  const hasPrivateFields = page => legacy.hasPrivateFields(page);
-  const publicCandidate = (page, category) => legacy.publicCandidate(page, category);
+  const activeSession = dv => sessionCore.activeSession(dv);
+  const activeSessions = dv => sessionCore.activeSessions(dv);
+  const sessionCandidates = dv => sessionCore.sessionCandidates(dv);
+  const pressure = page => sessionCore.pressure(page);
+  const hasPrivateFields = page => sessionCore.hasPrivateFields(page);
+  const publicCandidate = (page, category) => sessionCore.publicCandidate(page, category);
   const internalLink = file => `<a class="internal-link" data-href="${escapeHtml(file.path)}" href="${escapeHtml(file.path)}">${escapeHtml(file.name)}</a>`;
   const pageTitle = page => page?.nome ?? page?.name ?? page?.file?.name ?? "";
   const fieldText = value => Array.isArray(value)
@@ -953,7 +952,7 @@
   }
 
   return {
-    ...legacy,
+    ...sessionCore,
     escapeHtml: gdrCore.escapeHtml,
     ...renderExports(...Object.values(runtimeViews)),
     renderCreationFeedback,

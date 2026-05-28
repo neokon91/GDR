@@ -817,7 +817,7 @@ steps:
       - node
       - Dev/TemplateFactory/tools/check_naming_contract.js
   session_context_contract:
-    purpose: Genera il contratto JSON letto dal runtime legacy session_context.js.
+    purpose: Genera il contratto JSON letto dal core sessione e dal runtime di compatibilita.
     sources:
       - Dev/TemplateFactory/modules/runtime_profiles.yaml
       - Dev/TemplateFactory/modules/fields_core.yaml
