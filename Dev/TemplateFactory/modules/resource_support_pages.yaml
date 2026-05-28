@@ -362,3 +362,596 @@ pages:
       2. Apri [[Hub/1. DM Dashboard|1. DM Dashboard]].
       3. Apri [[Risorse/Controllo Vault]].
       4. Se vedi problemi, apri [[Risorse/Se Qualcosa Non Funziona]].
+
+  - path: Risorse/Setup Guidato.md
+    title: Setup Guidato
+    frontmatter:
+      cssclasses:
+        - indice
+      categoria: risorsa
+      tipo: setup
+      stato: pronto
+    body: |
+      Usa questa pagina solo se qualcosa non risponde. La release del vault e gia configurata: questa pagina serve a recuperare strumenti che Obsidian ha bloccato, disabilitato o non caricato.
+
+      ````tabs
+      tab: Percorso
+
+      > [!scena] Primo utilizzo
+      > Se tutto e pronto, non restare qui: torna a [[Inizia Qui]], Crea o apri un mondo, poi Prepara una sessione. Quando sei pronto apri [[Hub/Durante il Gioco]]; dopo la partita apri [[Hub/Cosa Succede Fuori Scena]].
+
+      tab: Problemi
+
+      > [!todo] Se non risponde
+      > - [ ] Riavvia Obsidian. #task
+      > - [ ] Riapri [[Risorse/Setup Guidato]]. #task
+      > - [ ] Apri [[Risorse/Se Qualcosa Non Funziona]] se il problema resta. #task
+      ````
+
+      ## Azioni
+
+      <!-- workflow:quick_actions:start setup_guidato -->
+      > [!regia] Azioni rapide
+      > Capire se il vault e pronto senza leggere impostazioni tecniche.
+      >
+      > **Torna all'inizio** - i controlli sono pronti o vuoi ripartire dal percorso semplice
+      > `BUTTON[inizia-qui-inizia-qui]`
+      >
+      > **Crea mondo** - gli strumenti base funzionano
+      > `BUTTON[nuovo-mondo-homebrew]`
+      >
+      > **Prepara sessione** - hai gia un mondo o vuoi preparare il primo tavolo
+      > `BUTTON[preparazione-sessione-risorse-preparazione-sessione]`
+      >
+      > **Apri tavolo** - vuoi verificare il cockpit live
+      > `BUTTON[durante-il-gioco-durante-il-gioco]`
+      >
+      > **Fuori scena** - vuoi verificare il ciclo dopo sessione
+      > `BUTTON[fuori-scena-hub-cosa-succede-fuori-scena-cosa-succede-fuori-scena]`
+      >
+      > [!regia]- Se qualcosa non va
+      > Usare guide di ripristino leggibili prima di toccare impostazioni avanzate.
+      >
+      > **Se qualcosa non funziona** - plugin, pulsanti o tabelle non sembrano pronti
+      > `BUTTON[aiuto-risorse-se-qualcosa-non-funziona]`
+      >
+      > **Prima sessione in 15 minuti** - vuoi saltare il setup profondo e giocare con il minimo
+      > `BUTTON[prima-sessione-in-15-minuti-risorse-prima-sessione-in-15-minuti]`
+      <!-- workflow:quick_actions:end setup_guidato -->
+
+      ```dataviewjs
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      await gdr.renderWorkflowCommandDeck(dv, "setup_guidato");
+      ```
+
+      ## Controllo Semplice
+
+      ```dataviewjs
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      await gdr.renderVaultReadiness(dv, "setup");
+      ```
+
+      ## Se Qualcosa E Da Controllare
+
+      1. Riavvia Obsidian.
+      2. Riapri questa pagina.
+      3. Se i pulsanti non rispondono, apri [[Risorse/Se Qualcosa Non Funziona]].
+      4. Se vuoi giocare comunque, apri [[Risorse/Prima Sessione In 15 Minuti]] e usa i link Markdown.
+
+      ## Fallback Markdown
+
+      | Passo | Apri |
+      | --- | --- |
+      | Inizio | [[Inizia Qui]] |
+      | Crea o apri un mondo | [[Worldbuilder Dashboard]] |
+      | Prepara una sessione | [[Risorse/Preparazione Sessione]] |
+      | Durante il Gioco | [[Hub/Durante il Gioco]] |
+      | Dopo la sessione | [[Hub/Cosa Succede Fuori Scena]] |
+
+      ## Prova Rapida
+
+      | Prova | Dove guardare |
+      | --- | --- |
+      | I pulsanti aprono pagine | [[Inizia Qui]] |
+      | Le dashboard mostrano carte o tabelle | [[1. DM Dashboard]] |
+      | Il tavolo mostra una sessione o un messaggio chiaro | [[Hub/Durante il Gioco]] |
+      | Il materiale giocatori non espone campi DM | [[Hub/Vista Giocatori]] |
+      | Il mondo vivo mostra pressioni e prossime mosse | [[Hub/Cosa Succede Fuori Scena]] |
+
+      ## Cosa Ignorare
+
+      - Aree interne del vault.
+      - File tecnici.
+      - Impostazioni avanzate, finche le pagine principali funzionano.
+
+  - path: Risorse/FAQ.md
+    title: FAQ
+    frontmatter:
+      cssclasses:
+        - indice
+      categoria: risorsa
+      tipo: faq
+      stato: pronto
+    body: |
+      ## Devo Capire Obsidian Per Usarlo?
+
+      No. Parti da [[Inizia Qui]] e usa i pulsanti. Le cartelle tecniche servono al vault, ma non devi aprirle per giocare.
+
+      ## Obsidian Mi Chiede Se Fidarmi Degli Strumenti
+
+      Conferma solo se hai scaricato il vault da una fonte affidabile. Gli strumenti inclusi servono a dashboard, pulsanti, tabelle e campi interattivi.
+
+      ## Le Tabelle Non Si Vedono
+
+      Apri [[Risorse/Primo Avvio Strumenti]] e controlla che gli strumenti per le tabelle siano attivi. Poi riapri la nota.
+
+      ## I Pulsanti Non Creano Note
+
+      Apri [[Risorse/Primo Avvio Strumenti]] e controlla gli strumenti per pulsanti e creazione guidata. Se il problema resta, apri [[Risorse/Se Qualcosa Non Funziona]].
+
+      ## Devo Tenere I Contenuti Demo?
+
+      Si, ma sono utili per capire come il vault dovrebbe apparire quando e popolato. Se vuoi una copia completamente vuota, archiviala o rimuovila solo dopo aver preso confidenza.
+
+      ## Posso Usarlo Senza SRD?
+
+      Si, ma il profilo principale del vault e fantasy D&D 5.5/SRD. `SRD` resta un riferimento regolamentare separato: il mondo e le campagne stanno in `Mondi` e `Campagne`.
+
+      ## Funziona Da Mobile?
+
+      Le note sono leggibili da mobile, ma creazione guidata, dashboard complesse e bacheche sono piu comode da desktop o tablet.
+
+      ## Dove Scrivo Appunti Durante La Sessione?
+
+      Apri [[Durante il Gioco]] oppure crea una nota rapida in [[Inbox/Inbox]].
+
+      ## Quando Una Nota Diventa Canonica?
+
+      Quando e successa al tavolo o hai deciso che e vera nel mondo. Usa `canonico: true` solo per contenuti confermati.
+
+  - path: Risorse/Se Qualcosa Non Funziona.md
+    title: Se Qualcosa Non Funziona
+    frontmatter:
+      cssclasses:
+        - indice
+      categoria: risorsa
+      tipo: supporto
+      stato: pronto
+    body: |
+      Usa questa pagina quando dashboard, pulsanti, tabelle o schede creatura non si comportano come previsto.
+
+      ````tabs
+      tab: Diagnosi
+
+      > [!regia] Prima Verifica
+      > ```dataviewjs
+      > const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      > gdr.renderPluginTroubleshooting(dv);
+      > ```
+
+      tab: Ripara
+
+      > [!todo] Percorso Rapido
+      > - [ ] Riavvia Obsidian. #task
+      > - [ ] Apri [[Risorse/Setup Guidato]]. #task
+      > - [ ] Apri [[Risorse/Primo Avvio Strumenti]]. #task
+      > - [ ] Riprova da [[Risorse/Prima Sessione In 15 Minuti]]. #task
+
+      tab: Sintomi
+
+      > [!lettura] Problemi Comuni
+      > Le tabelle richiedono Dataview; i pulsanti richiedono Meta Bind e Templater; i tiri `dice:` richiedono Dice Roller; le schede creatura richiedono Fantasy Statblocks.
+
+      tab: Qualità
+
+      > [!regia] Controlli
+      > - [[Risorse/Controllo Vault]]
+      > - [[Risorse/Quality Report|Quality Report - controllo qualità]]
+      > - Se stai usando la release pubblica, non devi lanciare controlli tecnici.
+      > - Se stai sviluppando il vault sorgente, usa i controlli indicati nella documentazione Dev.
+      ````
+
+      ## Fallback Markdown - Versione Leggibile Senza Plugin
+
+      | Sintomo | Prima azione |
+      | --- | --- |
+      | Tabelle vuote | Controlla Dataview |
+      | Pulsanti rotti | Controlla Meta Bind e Templater |
+      | Grafica piatta | Attiva snippet `gdr-vault` |
+
+      ## Prima Verifica
+
+      1. Controlla gli strumenti necessari in [[Risorse/Primo Avvio Strumenti]].
+      2. Riavvia Obsidian dopo averli abilitati o aggiornati.
+      3. Apri [[1. DM Dashboard]] e poi [[Risorse/Controllo Vault]].
+      4. Se una vista mostra codice invece del risultato, uno strumento interno probabilmente manca o non e attivo.
+
+      ## Problemi Comuni
+
+      | Sintomo | Probabile causa | Cosa fare |
+      | --- | --- | --- |
+      | Le tabelle non compaiono | Dataview disattivato | Abilita Dataview e riapri la nota |
+      | Vedi blocchi tipo `dataviewjs` invece di tabelle | Dataview non sta eseguendo il codice | Abilita Dataview e consenti JavaScript queries nelle impostazioni di Dataview |
+      | I pulsanti non funzionano | Meta Bind o Templater disattivati | Abilita entrambi e riprova |
+      | Il pulsante crea una nota ma non compila i campi | Templater non e attivo o non ha accesso agli script | Abilita Templater, controlla la cartella script e riprova da [[1. DM Dashboard]] |
+      | Le note create sono vuote o sbagliate | Creazione guidata non attiva | Controlla gli strumenti necessari in [[Risorse/Primo Avvio Strumenti]] |
+      | `Durante il Gioco` non mostra la sessione giusta | Nessuna sessione attiva o troppe sessioni attive | Apri la sessione corretta e lascia `attiva` acceso solo lì |
+      | `Cosa Succede Fuori Scena` è vuota | Mancano pressione, prossima mossa o conseguenze sulle note | Compila `pressione`, `innesco`, `prossima_mossa` o `conseguenze` su missioni, PNG, fazioni e clock |
+      | I mostri non appaiono come schede | Schede creatura non attive | Controlla gli strumenti necessari e riapri la nota creatura |
+      | I tiri `dice:` restano testo | Tiri rapidi non attivi | Controlla gli strumenti necessari |
+      | Le date non compaiono nel calendario | Calendario non attivo o data mancante | Controlla gli strumenti necessari e compila la data del mondo |
+      | Le bacheche non si aprono | Bacheche non attive | Controlla gli strumenti necessari |
+      | La grafica sembra piatta o poco leggibile | Snippet CSS non attivo | Attiva `gdr-vault` in Impostazioni > Aspetto > Snippet CSS |
+      | Obsidian chiede di fidarsi dei plugin | Protezione di sicurezza normale | Conferma solo se hai scaricato lo ZIP da una fonte affidabile |
+
+      ## Percorso Di Ripristino Rapido
+
+      1. Riavvia Obsidian.
+      2. Apri [[Risorse/Setup Guidato]].
+      3. Se un controllo non e pronto, apri [[Risorse/Primo Avvio Strumenti]].
+      4. Apri [[Risorse/Prima Sessione In 15 Minuti]] e riprova il flusso base.
+      5. Se il problema riguarda una sessione, controlla che una sola sessione abbia `attiva: true`.
+      6. Se il problema riguarda il mondo vivo, aggiungi almeno una `prossima_mossa` o una `pressione` a una missione, fazione, PNG o tracciato.
+
+      ## Controlli Di Qualità
+
+      Prima di usare una copia come release, apri [[Risorse/Controllo Vault]] e verifica:
+
+      - nessuno stato fuori standard;
+      - nessuna nota senza `categoria` o `stato`;
+      - nessun materiale `pronto` incompleto;
+      - nessuna data narrativa da calendarizzare, se usi Calendarium;
+      - nessun link placeholder lasciato in note operative.
+
+      ## Se Il Vault Resta Rotto
+
+      - Apri [[Risorse/Primo Avvio Strumenti]] e verifica che gli strumenti richiesti risultino abilitati.
+      - Se hai modificato manualmente file in `SRD`, controlla [[SRD/Licenza SRD]] e rigenera solo quando sai che le modifiche non verranno perse.
+
+  - path: Risorse/Prima Sessione In 15 Minuti.md
+    title: Prima Sessione In 15 Minuti
+    frontmatter:
+      cssclasses:
+        - indice
+      categoria: risorsa
+      tipo: guida rapida
+      stato: pronto
+    body: |
+      Usa questa pagina quando vuoi giocare subito. Non devi completare il mondo: ti bastano una sessione, una prima scena, un luogo, un PNG, una pressione e 1-3 informazioni rivelabili.
+
+      ````tabs
+      tab: Prima
+
+      > [!scena] Minimo giocabile
+      > Prepara solo obiettivo, apertura, luogo, PNG, pressione e segreti rivelabili.
+
+      tab: Durante
+
+      > [!incontro] Al tavolo
+      > Apri [[Hub/Durante il Gioco]], cattura appunti e rimanda il riordino a dopo.
+
+      tab: Dopo
+
+      > [!timer] Chiusura
+      > Apri [[Risorse/Post Sessione Guidato]], poi scegli una reazione in [[Hub/Cosa Succede Fuori Scena]].
+      ````
+
+      ## Percorso Breve
+
+      <!-- workflow:quick_actions:start prima_sessione_rapida -->
+      > [!regia] Azioni rapide
+      > Preparare, giocare e chiudere una prima sessione con il minimo indispensabile.
+      >
+      > **Controlla setup** - non sai se i pulsanti funzionano
+      > `BUTTON[setup-guidato-risorse-setup-guidato-2]`
+      >
+      > **Prepara** - devi scrivere obiettivo, apertura e poche ancore
+      > `BUTTON[preparazione-sessione-risorse-preparazione-sessione]`
+      >
+      > **Rendi attiva** - hai scelto quale sessione giocare
+      > `BUTTON[rendi-sessione-attiva]`
+      >
+      > **Gioca** - vuoi aprire il cockpit del tavolo
+      > `BUTTON[durante-il-gioco-durante-il-gioco]`
+      >
+      > **Chiudi sessione** - il tavolo e finito
+      > `BUTTON[post-sessione-guidato-risorse-post-sessione-guidato]`
+      >
+      > **Fuori scena** - devi scegliere una conseguenza o prossima mossa
+      > `BUTTON[cosa-succede-fuori-scena-cosa-succede-fuori-scena]`
+      >
+      > [!regia]- Minimo giocabile
+      > Creare solo quello che serve alla prima sessione.
+      >
+      > **Nuova sessione** - non esiste ancora una nota sessione
+      > `BUTTON[nuova-sessione-z-modelli-dm-sessione-md]`
+      >
+      > **Creazione entita** - non sai cosa compilare su PNG, luogo o fazione
+      > `BUTTON[creazione-guidata-entita-risorse-creazione-guidata-entita]`
+      >
+      > **DM Dashboard** - vuoi vedere lo stato complessivo del tavolo
+      > `BUTTON[dm-dashboard-1-dm-dashboard]`
+      <!-- workflow:quick_actions:end prima_sessione_rapida -->
+
+      ```dataviewjs
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      await gdr.renderWorkflowCommandDeck(dv, "prima_sessione_rapida", { mode: "simple" });
+      ```
+
+      ## Sessione Attiva
+
+      ```dataviewjs
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      gdr.renderActiveSessionBanner(dv);
+      ```
+
+      ## Scrivi Solo Questo
+
+      | Elemento | Minimo sufficiente |
+      | --- | --- |
+      | Obiettivo | Cosa devono decidere, ottenere o scoprire i personaggi. |
+      | Apertura | La prima scena da giocare. |
+      | Luogo | Dove puo cambiare qualcosa. |
+      | PNG | Chi vuole qualcosa adesso. |
+      | Pressione | Cosa peggiora se nessuno interviene. |
+      | Segreti | 1-3 informazioni che puoi rivelare. |
+
+      ## Durante Il Gioco
+
+      - Cattura appunti senza riordinare tutto.
+      - Registra decisioni importanti.
+      - Segna conseguenze solo quando cambiano davvero mondo, missioni, PNG, luoghi o clock.
+      - Non sistemare il vault mentre giochi: ordina dopo.
+
+      ## Dopo La Sessione
+
+      ```dataviewjs
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      gdr.renderPostSessionCommandCenter(dv);
+      ```
+
+      ## Fallback Markdown
+
+      | Passo | Apri |
+      | --- | --- |
+      | Preparare | [[Risorse/Preparazione Sessione]] |
+      | Giocare | [[Hub/Durante il Gioco]] |
+      | Chiudere | [[Risorse/Post Sessione Guidato]] |
+      | Vedere reazioni | [[Hub/Cosa Succede Fuori Scena]] |
+
+      ## Checklist Finale
+
+      - [ ] Una sola sessione ha `attiva: true`.
+      - [ ] La sessione giocata ha un breve resoconto.
+      - [ ] Missioni e clock hanno stato aggiornato.
+      - [ ] Almeno una conseguenza ha `entita_impattate` o `propaga_a`.
+      - [ ] La prossima sessione ha una prima scena.
+
+  - path: Risorse/Come Usare I Clock.md
+    title: Come Usare I Clock
+    frontmatter:
+      cssclasses:
+        - indice
+      categoria: risorsa
+      tipo: guida
+      stato: pronto
+    body: |
+      Un clock serve quando qualcosa cambia anche se i personaggi non lo guardano. Non e un archivio: e una pressione visibile.
+
+      ## Quando Crearlo
+
+      Crea un clock quando puoi completare questa frase:
+
+      > Se nessuno interviene, succede questo: ...
+
+      Usa un clock per:
+
+      - una minaccia che avanza;
+      - un viaggio che consuma tempo e risorse;
+      - un rituale o progetto lungo;
+      - una fazione che prepara una mossa;
+      - una conseguenza che peggiora.
+
+      Non creare un clock per una nota statica, un segreto, una descrizione o una cosa che non cambia.
+
+      ## Caso 1: Minaccia
+
+
+      | Campo | Cosa scrivere |
+      | --- | --- |
+      | Tipo | `minaccia` |
+      | Segmenti | 6 o 8 |
+      | Innesco | cosa la fa avanzare |
+      | Posta | cosa succede quando si riempie |
+      | Prossima mossa | cosa fa vedere al tavolo prima che sia troppo tardi |
+
+      Avanza il clock quando i PG perdono tempo, falliscono un tiro importante, ignorano segnali chiari o usano una soluzione rischiosa.
+
+      Quando si riempie, non punire a caso: applica la posta che avevi scritto. Poi crea una conseguenza o un evento storico.
+
+      ## Caso 2: Viaggio
+
+
+      Un viaggio usa il clock per mostrare progresso, fatica e complicazioni.
+
+      - Avanza quando il gruppo supera una scena di viaggio.
+      - Complica quando il gruppo si perde, consuma risorse o attira attenzione.
+      - Chiudi quando arriva alla meta o quando il viaggio cambia natura.
+
+      Se vuoi tensione, usa due tracciati: uno per arrivare e uno per la minaccia che arriva prima.
+
+      ## Caso 3: Rituale
+
+      Un rituale e utile quando qualcuno sta preparando qualcosa fuori scena.
+
+      - Segmenti brevi se deve scattare presto.
+      - Segmenti lunghi se accompagna un arco di campagna.
+      - Inneschi chiari: luna piena, sacrificio, frammento trovato, luogo profanato.
+
+      Quando si riempie, cambia una nota vera: luogo, fazione, missione, PNG o timeline.
+
+      ## Dopo La Sessione
+
+      Apri [[Risorse/Post Sessione Guidato]] e controlla:
+
+      - quali clock sono avanzati;
+      - quali clock sono arrivati alla fine;
+      - quale conseguenza diventa canonica;
+      - quale evento storico va creato;
+      - quale tracciato nuovo nasce dalla conseguenza.
+
+      La regola pratica: un clock pieno deve lasciare una traccia nel mondo.
+
+  - path: Risorse/Task DM.md
+    title: Task DM
+    frontmatter:
+      cssclasses:
+        - indice
+      categoria: risorsa
+      tipo: dashboard
+      stato: pronto
+    body: |
+      Questa vista raccoglie solo le checklist operative marcate `#task`. Tasks usa `#task` come filtro globale; Dataview resta come fallback leggibile.
+
+      ## Post-Sessione Adesso
+
+      ```tasks
+      not done
+      path includes z.bacheche/Post Sessione.md
+      sort by priority
+      sort by urgency
+      sort by description
+      ```
+
+      ## Preparazione Adesso
+
+      ```tasks
+      not done
+      path includes z.bacheche/Preparazione Sessioni.md
+      sort by priority
+      sort by urgency
+      sort by description
+      ```
+
+      ## Aperte Tasks
+
+      ```tasks
+      not done
+      path includes z.bacheche
+      group by due
+      sort by urgency
+      sort by due
+      sort by description
+      ```
+
+      ## Priorita Tasks
+
+      ```tasks
+      not done
+      path includes z.bacheche
+      sort by priority
+      sort by urgency
+      sort by path
+      ```
+
+      ## Completate Tasks
+
+      ```tasks
+      done
+      path includes z.bacheche
+      sort by done reverse
+      sort by path
+      ```
+
+      ## Aperte Dataview
+
+      ```dataview
+      TASK
+      FROM "z.bacheche"
+      WHERE !completed AND contains(text, "#task")
+      GROUP BY file.link
+      ```
+
+      ## Completate Dataview
+
+      ```dataview
+      TASK
+      FROM "z.bacheche"
+      WHERE completed AND contains(text, "#task")
+      GROUP BY file.link
+      ```
+
+      ## Regola
+
+      Usa `#task` solo per lavoro reale del DM: preparare, smistare, aggiornare, chiudere sessione. Non usarlo per missioni narrative, clock, conseguenze o checklist di documentazione.
+
+      Le bacheche utili ogni giorno sono [[z.bacheche/Preparazione Sessioni]] prima del tavolo e [[z.bacheche/Post Sessione]] dopo il tavolo. La vista qui sopra serve solo a non cercarle a mano.
+
+  - path: Risorse/Iniziativa e Combattimenti.md
+    title: Iniziativa E Combattimenti
+    frontmatter:
+      cssclasses:
+        - indice
+      categoria: risorsa
+      tipo: guida plugin
+      stato: pronto
+      plugin:
+        - Initiative Tracker
+        - Fantasy Statblocks
+        - Dice Roller
+    body: |
+      Questa pagina tiene separati gli incontri di combattimento dagli incontri sociali o esplorativi. Initiative Tracker va usato quando la scena deve davvero partire in round, con creature, condizioni e mappa pronta.
+
+      <!-- workflow:quick_actions:start iniziativa_combattimenti -->
+      > [!regia] Azioni rapide
+      > Preparare combattimenti che possano partire in round senza bloccare la sessione.
+      >
+      > **Torna al tavolo** - la scena e pronta o la sessione e in corso
+      > `BUTTON[durante-il-gioco-durante-il-gioco-3]`
+      >
+      > **Nuovo incontro** - serve una scena meccanica o un combattimento pronto
+      > `BUTTON[nuovo-incontro-z-modelli-dm-incontro-md]`
+      >
+      > [!regia]- Supporto combattimento
+      > Preparare materiali collegati prima di entrare in iniziativa.
+      >
+      > **Nuova mappa zoom** - il combattimento ha bisogno di spazio navigabile
+      > `BUTTON[nuova-mappa-zoom-z-modelli-mappe-mappa-zoom-md]`
+      >
+      > **Nuovo PNG** - serve un volto o avversario ricorrente
+      > `BUTTON[nuovo-png-z-modelli-personaggio-png-md]`
+      >
+      > **Nuovo oggetto** - la scena include ricompensa, leva o pericolo concreto
+      > `BUTTON[nuovo-oggetto-z-modelli-oggetto-md]`
+      >
+      > **Preparazione sessione** - devi tornare alle ancore della sessione
+      > `BUTTON[preparazione-sessione-risorse-preparazione-sessione]`
+      <!-- workflow:quick_actions:end iniziativa_combattimenti -->
+
+      ```dataviewjs
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      await gdr.renderWorkflowCommandDeck(dv, "iniziativa_combattimenti", { mode: "simple" });
+      ```
+
+      ## Combattimenti Pronti
+
+      ```dataviewjs
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      gdr.renderCombatReadiness(dv);
+      ```
+
+      ## Controllo Initiative Tracker
+
+      ```dataview
+      TABLE stato, luogo, creature, encounter_creatures AS iniziativa
+      FROM "Mondi/Incontri"
+      WHERE tipo = "combattimento" AND !encounter_creatures
+      SORT file.name ASC
+      ```
+
+      ## Regola Operativa
+
+      - Gli incontri `combattimento` devono avere `encounter_creatures` e un blocco `encounter`.
+      - Gli incontri `esplorazione` o `sociale` possono avere creature e pericoli, ma non devono forzare Initiative Tracker.
+      - I nomi in `encounter_creatures` devono corrispondere al campo `name` dello statblock, per esempio `Lupo`.
+      - Usa quantita esplicite quando serve: `2: Lupo`, `1d4: Scheletro`, `3: Goblin`.

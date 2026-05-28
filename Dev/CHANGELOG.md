@@ -23,7 +23,7 @@
 - `Hub/Economia E Rotte.md` trasformata in cockpit compatto con runtime `session_economy.js` e contratto `economy_cockpit.yaml`.
 - `resource_hub.yaml` genera il catalogo centrale `Risorse/Risorse.md`, lasciandolo fuori dal sorgente tracciato.
 - `resource_indexes.yaml` genera gli indici finali Audio, Video, Immagini e Dispense da YAML/Jinja, lasciandoli fuori dal sorgente tracciato.
-- `resource_support_pages.yaml` genera sette guide supporto in `Risorse/` da YAML/Jinja, lasciandole fuori dal sorgente tracciato.
+- `resource_support_pages.yaml` genera quattordici guide supporto in `Risorse/` da YAML/Jinja, lasciandole fuori dal sorgente tracciato.
 - `z.bacheche` e documentazione repo-dev consolidate: le bacheche sono generate da YAML/Jinja e `docs/` e stato rimosso come area separata.
 - Percorso utente nuovo blindato da `check:user-path`: 17 superfici primarie e avanzate verificano workflow user-facing, deck semplice e pulsanti Meta Bind configurati.
 - `check:release-quality` valida shape delle azioni Meta Bind, cartelle di creazione, comandi plugin reali e wrapper Templater richiamabili.

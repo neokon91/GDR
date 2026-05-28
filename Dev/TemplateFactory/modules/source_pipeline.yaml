@@ -136,10 +136,17 @@ steps:
       - Risorse/Aspetto Vault.md
       - Risorse/Callout GDR.md
       - Risorse/Canvas Per GDR.md
+      - Risorse/Come Usare I Clock.md
       - Risorse/Excalidraw Per GDR.md
+      - Risorse/FAQ.md
+      - Risorse/Iniziativa e Combattimenti.md
       - Risorse/Mappe Bases.md
       - Risorse/Preset Calendario.md
+      - Risorse/Prima Sessione In 15 Minuti.md
       - Risorse/Primo Avvio Strumenti.md
+      - Risorse/Se Qualcosa Non Funziona.md
+      - Risorse/Setup Guidato.md
+      - Risorse/Task DM.md
     render:
       - python3
       - z.automazioni/render_resource_support_pages.py

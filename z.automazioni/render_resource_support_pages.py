@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import sys
 from pathlib import Path
 from typing import Any
@@ -121,10 +122,14 @@ def render_all(errors: list[str]) -> dict[str, str]:
     for path, text in rendered.items():
         if not text.startswith("# ") and not text.startswith("---\n"):
             fail(errors, f"{path}: render senza intestazione")
-        if f"# {Path(path).stem}" not in text:
+        if f"# {Path(path).stem}".lower() not in text.lower():
             fail(errors, f"{path}: H1 non coerente con il target")
-        if "```dataviewjs" in text:
-            fail(errors, f"{path}: DataviewJS inline non ammesso nelle guide supporto generate")
+        for code in re.findall(r"```dataviewjs\n([\s\S]*?)```", text):
+            if "z.engine/session_views.js" not in code:
+                fail(errors, f"{path}: DataviewJS deve passare dal runtime z.engine/session_views.js")
+            for forbidden in ("dv.pages(", "app.plugins", "app.workspace", "window.", "document.", "require("):
+                if forbidden in code:
+                    fail(errors, f"{path}: DataviewJS usa API fragile o vietata ({forbidden})")
     return rendered
 
 
