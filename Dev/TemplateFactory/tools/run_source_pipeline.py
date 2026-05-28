@@ -54,7 +54,12 @@ def validate_pipeline(data: dict[str, Any], mode: str, errors: list[str]) -> lis
     outputs_available_after_previous_steps: set[str] = set()
 
     def source_generated_by_previous_step(source: str) -> bool:
-        return any(fnmatch.fnmatch(source, pattern) for pattern in outputs_available_after_previous_steps)
+        for pattern in outputs_available_after_previous_steps:
+            if fnmatch.fnmatch(source, pattern):
+                return True
+            if "/**/" in pattern and fnmatch.fnmatch(source, pattern.replace("/**/", "/")):
+                return True
+        return False
 
     for step_id, step in steps.items():
         if not isinstance(step, dict):
