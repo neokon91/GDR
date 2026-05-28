@@ -824,10 +824,10 @@ if (dmGuideText.split(/\r?\n/).length > 95) {
     errors.push("Risorse/Guida DM.md: superficie troppo lunga per una bussola DM compatta");
 }
 
-const pluginIntegrationText = readRel("Dev/Integrazioni Plugin.md");
+const pluginIntegrationText = readRel("Dev/TemplateFactory/modules/plugin_matrix.yaml");
 for (const marker of ["Riesame Valore Quotidiano", "Mappe", "Canvas / Excalidraw", "Calendarium", "Fantasy Content Generator", "Media", "Tasks / Kanban", "Crea -> Prepara -> Gioca -> Aggiorna"]) {
     if (!pluginIntegrationText.includes(marker)) {
-        errors.push(`Dev/Integrazioni Plugin.md: riesame valore quotidiano plugin incompleto (${marker})`);
+        errors.push(`plugin_matrix.yaml: riesame valore quotidiano plugin incompleto (${marker})`);
     }
 }
 if (!readRel("Risorse/Mappe/Mappe.md").includes("Prossima Azione Mappa")) {

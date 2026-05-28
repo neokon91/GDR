@@ -2,7 +2,7 @@
 
 Area di sviluppo del vault.
 
-Questa cartella contiene roadmap, changelog, audit, confini release, smoke test, specifiche plugin e infrastruttura futura per generare template. Non fa parte del percorso primario del DM e non deve entrare nella ZIP utente.
+Questa cartella contiene roadmap, changelog, audit, confini release, smoke test e contratti YAML/JS. Non fa parte del percorso primario del DM e non deve entrare nella ZIP utente.
 
 ## Contenuto
 
@@ -10,9 +10,7 @@ Questa cartella contiene roadmap, changelog, audit, confini release, smoke test,
 | --- | --- |
 | `Roadmap/` | Roadmap attiva e storiche. |
 | `TemplateFactory/` | Moduli YAML e schemi Jinja2 per generazione futura dei template. |
-| `Plugin Technical Reference.md` | Riferimenti tecnici puntuali a funzioni, sintassi e configurazioni dei plugin. |
 | `Sviluppo Vault.md` | Convenzioni tecniche del vault. |
-| `Integrazioni Plugin.md` | Strategia di sfruttamento plugin. |
 | `Confine Release Repository.md` | Cosa entra nella ZIP utente e cosa resta nel repository. |
 | `Smoke 1.0 Professionale.md` | Smoke visuale pre-release. |
 
@@ -40,8 +38,8 @@ Usa questa nota come porta d'ingresso. Non duplicare decisioni tecniche in file 
 | Direzione prodotto e milestone | [[Dev/Roadmap/1.0 Professionale]] |
 | Convenzioni tecniche, campi e runtime | [[Dev/Sviluppo Vault]] |
 | Layer Meta Bind, Templater, JS e fileClass | [[Dev/Sviluppo Vault]] |
-| Sintassi e responsabilita plugin | [[Dev/Plugin Technical Reference]] |
-| Contratti plugin e release | `Dev/TemplateFactory/modules/plugin_contracts.yaml` |
+| Sintassi e responsabilita plugin | `Dev/TemplateFactory/modules/plugin_bindings.yaml` |
+| Contratti plugin e release | `Dev/TemplateFactory/modules/plugin_matrix.yaml` e `Dev/TemplateFactory/modules/plugin_contracts.yaml` |
 | Confini della ZIP utente | [[Dev/Confine Release Repository]] |
 | Verifica release | [[Dev/RELEASE]] e [[Dev/Smoke Demo Finale]] |
 | Template, YAML e superfici generate | [[Dev/TemplateFactory/README]] |

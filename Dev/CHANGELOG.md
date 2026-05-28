@@ -26,6 +26,7 @@
 - `resource_support_pages.yaml` genera trentuno superfici `Risorse/` da YAML/Jinja, incluse le shell cockpit e la mappa Excalidraw di relazioni, lasciandole fuori dal sorgente tracciato.
 - `hub_pages.yaml` genera le diciassette superfici operative `Hub/` da YAML/Jinja, lasciandole fuori dal sorgente tracciato.
 - `root_pages.yaml` genera `Inizia Qui.md` e `VERSION.md` da YAML/Jinja, lasciando il root del repository ai soli file sorgente e documenti sviluppo.
+- `Dev/Integrazioni Plugin.md` e `Dev/Plugin Technical Reference.md` rimossi: il contratto plugin vive in `plugin_matrix.yaml`, `plugin_contracts.yaml` e `plugin_bindings.yaml`.
 - `z.bacheche` e documentazione repo-dev consolidate: le bacheche sono generate da YAML/Jinja e `docs/` e stato rimosso come area separata.
 - Percorso utente nuovo blindato da `check:user-path`: 17 superfici primarie e avanzate verificano workflow user-facing, deck semplice e pulsanti Meta Bind configurati.
 - `check:release-quality` valida shape delle azioni Meta Bind, cartelle di creazione, comandi plugin reali e wrapper Templater richiamabili.
@@ -56,10 +57,10 @@
 - [[Dev/Roadmap/1.0 Professionale]] come nuova roadmap attiva a Punto 0 per la vera 1.0.
 - [[Dev/Confine Release Repository]] per chiarire cosa entra nella ZIP utente e cosa resta nel repository.
 - [[Dev/Smoke 1.0 Professionale]] come checklist visuale completa dei flussi pre-release.
-- [[Dev/Integrazioni Plugin]] ora classifica tutti i plugin/strumenti installati per la 1.0 professionale.
+- `plugin_matrix.yaml` ora classifica tutti i plugin/strumenti installati per la 1.0 professionale.
 - Cartella `Dev/` per concentrare roadmap, changelog, audit, release notes, smoke, sviluppo e documentazione tecnica.
 - `Dev/TemplateFactory/` con moduli YAML iniziali per generazione futura di template Jinja2 integrati con Templater e plugin.
-- [[Dev/Plugin Technical Reference]] con riferimenti tecnici a funzioni, sintassi e configurazioni dei plugin installati.
+- `plugin_contracts.yaml` e `plugin_bindings.yaml` coprono riferimenti tecnici, funzioni, sintassi e configurazioni dei plugin installati.
 - `import_watabou_city.js` e `import_watabou_dungeon.js` per importare JSON Watabou City/One Page Dungeon come bozze operative.
 - `check:importers` con fixture dry-run per Azgaar e Watabou.
 - `render:metadata` e `check:metadata` per generare e verificare anteprime fileClass/Bases da `frontmatter_profiles.yaml`.

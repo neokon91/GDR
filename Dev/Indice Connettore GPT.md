@@ -32,12 +32,13 @@ Questa nota orienta un connettore GPT o un indice code search sul vault. Non e u
 
 - [[Dev/Sviluppo Vault]]
 - [[Risorse/Controllo Vault]]
-- [[Dev/Integrazioni Plugin]]
 - [[Dev/CHANGELOG]]
 - [[VERSION]]
 - [[Dev/RELEASE]]
-- [[Dev/Plugin Technical Reference]]
 - [[Dev/TemplateFactory/README]]
+- `Dev/TemplateFactory/modules/plugin_matrix.yaml`
+- `Dev/TemplateFactory/modules/plugin_contracts.yaml`
+- `Dev/TemplateFactory/modules/plugin_bindings.yaml`
 
 ## Runtime E Automazioni
 

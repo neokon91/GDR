@@ -21,10 +21,9 @@ required_surfaces:
     - Dev/Repository.md
     - Dev/RELEASE.md
     - Dev/Sviluppo Vault.md
-    - Dev/Integrazioni Plugin.md
     - Dev/plugin_matrix.json
-    - Dev/Plugin Technical Reference.md
     - Dev/TemplateFactory/README.md
+    - Dev/TemplateFactory/modules/plugin_matrix.yaml
     - Dev/TemplateFactory/modules/fields_core.yaml
     - Dev/TemplateFactory/modules/plugin_bindings.yaml
     - Dev/TemplateFactory/modules/plugin_contracts.yaml

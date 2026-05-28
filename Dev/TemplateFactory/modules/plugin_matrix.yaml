@@ -30,12 +30,29 @@ audit_policy:
       - guide
       - operational
       - smoke
+value_review:
+  title: Riesame Valore Quotidiano
+  principle: Crea -> Prepara -> Gioca -> Aggiorna
+  purpose: Registro sintetico del valore quotidiano dei plugin; sostituisce documentazione plugin manuale.
+  areas:
+    - label: Mappe
+      decision: Usare mappe, marker e basi solo quando riducono tempo di orientamento o rendono il tavolo piu leggibile.
+    - label: Canvas / Excalidraw
+      decision: Usare reti visuali per fronti, indizi e causalita, non come decorazione.
+    - label: Calendarium
+      decision: Tenere date, scadenze e sessioni collegate a conseguenze giocabili.
+    - label: Fantasy Content Generator
+      decision: Produrre bozze da smistare, mai canone automatico.
+    - label: Media
+      decision: Portare al tavolo solo audio, immagini e video gia contestualizzati.
+    - label: Tasks / Kanban
+      decision: Tenere preparazione, post-sessione e manutenzione fuori dalla memoria del DM.
 plugins:
 - id: dataview
   name: Dataview
   class: core
   function: Dashboard, indici e controlli automatici su frontmatter e link.
-  guide: Dev/Plugin Technical Reference.md
+  guide: Dev/TemplateFactory/modules/plugin_contracts.yaml
   operational: Hub/1. DM Dashboard.md
   smoke: Dev/Smoke 1.0 Professionale.md
 - id: templater-obsidian
@@ -49,35 +66,35 @@ plugins:
   name: Meta Bind
   class: core
   function: Pulsanti, input e azioni operative nel corpo nota.
-  guide: Dev/Plugin Technical Reference.md
+  guide: Dev/TemplateFactory/modules/plugin_contracts.yaml
   operational: Inizia Qui.md
   smoke: Dev/Smoke 1.0 Professionale.md
 - id: js-engine
   name: JS Engine
   class: core tecnico
   function: Runtime riusabile per viste complesse e cockpit.
-  guide: Dev/Plugin Technical Reference.md
+  guide: Dev/TemplateFactory/modules/plugin_contracts.yaml
   operational: z.engine/session_views.js
   smoke: Dev/Smoke 1.0 Professionale.md
 - id: metadata-menu
   name: Metadata Menu
   class: core dati
   function: FileClass e campi guidati per note operative.
-  guide: Dev/Plugin Technical Reference.md
+  guide: Dev/TemplateFactory/modules/plugin_contracts.yaml
   operational: z.fileclass/sessione.md
   smoke: Dev/Smoke 1.0 Professionale.md
 - id: folder-notes
   name: Folder Notes
   class: core navigazione
   function: Cartelle principali apribili come indici utili.
-  guide: Dev/Plugin Technical Reference.md
+  guide: Dev/TemplateFactory/modules/plugin_contracts.yaml
   operational: Mondi/Mondo.md
   smoke: Dev/Smoke 1.0 Professionale.md
 - id: homepage
   name: Homepage
   class: core onboarding
   function: Primo avvio su Inizia Qui.
-  guide: Dev/Plugin Technical Reference.md
+  guide: Dev/TemplateFactory/modules/plugin_contracts.yaml
   operational: Inizia Qui.md
   smoke: Dev/Smoke 1.0 Professionale.md
 - id: callout-manager
@@ -105,7 +122,7 @@ plugins:
   name: Kanban
   class: supporto DM
   function: Bacheche operative per preparazione, post-sessione e manutenzione.
-  guide: Dev/Plugin Technical Reference.md
+  guide: Dev/TemplateFactory/modules/plugin_contracts.yaml
   operational: z.bacheche/Manutenzione Vault.md
   smoke: Dev/Smoke 1.0 Professionale.md
 - id: obsidian-tasks-plugin
@@ -168,14 +185,14 @@ plugins:
   name: Iconize
   class: supporto orientamento
   function: Icone per orientamento visivo, senza sostituire indici.
-  guide: Dev/Integrazioni Plugin.md
+  guide: Dev/TemplateFactory/modules/plugin_matrix.yaml
   operational: Inizia Qui.md
   smoke: Dev/Smoke 1.0 Professionale.md
 - id: tabs
   name: Tabs
   class: supporto UX
   function: Schede in dashboard e template lunghi per ridurre scrolling.
-  guide: Dev/Plugin Technical Reference.md
+  guide: Dev/TemplateFactory/modules/plugin_contracts.yaml
   operational: Hub/Worldbuilder Dashboard.md
   smoke: Dev/Smoke 1.0 Professionale.md
 - id: obsidian-style-settings
@@ -189,7 +206,7 @@ plugins:
   name: Advanced Tables
   class: supporto editing
   function: Editing rapido di tabelle Markdown e tabelle casuali.
-  guide: Dev/Integrazioni Plugin.md
+  guide: Dev/TemplateFactory/modules/plugin_matrix.yaml
   operational: Risorse/Tabelle/Tabelle.md
   smoke: Dev/Smoke 1.0 Professionale.md
 - id: zoom-map
@@ -217,6 +234,6 @@ plugins:
   name: BRAT
   class: manutenzione
   function: Gestione plugin beta/non ufficiali fuori dal flusso DM.
-  guide: Dev/Integrazioni Plugin.md
+  guide: Dev/TemplateFactory/modules/plugin_matrix.yaml
   operational: z.bacheche/Manutenzione Vault.md
   smoke: Dev/Smoke 1.0 Professionale.md

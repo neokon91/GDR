@@ -252,8 +252,9 @@ for (const pluginId of community) {
     const searchableText = [
         readTextRel(ROOT, entry.guide, ""),
         readTextRel(ROOT, entry.operational, ""),
-        readTextRel(ROOT, "Dev/Integrazioni Plugin.md", ""),
-        readTextRel(ROOT, "Dev/Plugin Technical Reference.md", "")
+        readTextRel(ROOT, MATRIX, ""),
+        readTextRel(ROOT, CONTRACTS, ""),
+        readTextRel(ROOT, BINDINGS, "")
     ].join("\n");
     if (!searchableText.includes(entry.name) && !searchableText.includes(pluginId)) {
         errors.push(`${pluginId}: documentazione/superficie non cita nome o id plugin`);

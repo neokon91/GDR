@@ -37,7 +37,7 @@ La release non deve includere strumenti di manutenzione repository, import massi
 | --- | --- |
 | `.git`, `.github`, `Import`, `node_modules`, `dist` | Sviluppo, import, CI o artefatti generati. |
 | `Dev/CHANGELOG.md`, `Dev/CONTRIBUTING.md`, `Dev/RELEASE.md`, `Dev/Repository.md`, `package.json` | Manutenzione repository, non uso al tavolo. |
-| `Dev/Roadmap`, `Dev/Sviluppo Vault`, `Dev/Integrazioni Plugin`, `Dev/TemplateFactory/modules/plugin_contracts.yaml` | Direzione e audit di sviluppo, non percorso utente finale. |
+| `Dev/Roadmap`, `Dev/Sviluppo Vault`, `Dev/TemplateFactory/modules/plugin_matrix.yaml`, `Dev/TemplateFactory/modules/plugin_contracts.yaml` | Direzione e audit di sviluppo, non percorso utente finale. |
 | `Dev/Confine Release Repository`, `Dev/Smoke 1.0 Professionale` | Controlli pre-release e confini di manutenzione. |
 | Script CLI di check, import e release in `z.automazioni` | Servono al manutentore, non al DM. |
 

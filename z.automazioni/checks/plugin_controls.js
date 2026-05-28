@@ -64,7 +64,7 @@ function validatePluginControls({
             for (const field of ["guide", "operational", "smoke"]) {
                 const target = String(entry[field] ?? "");
                 if (!target) continue;
-                const targetWithExtension = /\.(md|base|js|json|excalidraw)$/i.test(target) ? target : targetPath(target);
+                const targetWithExtension = /\.(md|base|js|json|yaml|yml|excalidraw)$/i.test(target) ? target : targetPath(target);
                 if (!existsRel(targetWithExtension)
                     && !generatedFiles.has(targetWithExtension)
                     && !isGeneratedTemplatePath(targetWithExtension)
