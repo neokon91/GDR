@@ -1,38 +1,33 @@
 async function template_router(tp, route = "") {
     const helpers = tp.user.helpers;
+    const routerContract = require("./data/runtime/session_context.json").template_router ?? {};
+    const promptRoutes = new Map((routerContract.prompt_routes ?? []).map(item => [item.id, item]));
+    const delegatedRoutes = new Map((routerContract.delegated_routes ?? []).map(item => [item.id, item]));
+    const creativeRoutes = new Set(routerContract.creative_routes ?? []);
 
     const includeTemplate = async templatePath => {
         const includePath = String.fromCharCode(91, 91) + templatePath + String.fromCharCode(93, 93);
         return await tp.file.include(includePath);
     };
 
-    const routeCreative = async kind => {
-        const wb = await tp.user.worldbuilding(tp);
-        let routeInfo;
-
-        if (kind === "luogo") {
-            routeInfo = await wb.chooseLocation();
-        } else {
-            routeInfo = await wb.chooseCreative(kind);
-        }
-
-        return await includeTemplate(wb.getCreativeTemplate(routeInfo));
-    };
-
-    const routeFaction = async () => {
+    const routePrompt = async routeConfig => {
         const selected = await helpers.chooseRequired(
             tp,
-            [
-                { label: "Fazione generica", id: "fazione", template: "z.modelli/fazione/Fazione", tipo: "" },
-                { label: "Gilda", id: "gilda", template: "z.modelli/fazione/Gilda", tipo: "gilda" },
-                { label: "Confraternita", id: "confraternita", template: "z.modelli/fazione/Confraternita", tipo: "confraternita" },
-                { label: "Culto politico", id: "culto politico", template: "z.modelli/fazione/Fazione", tipo: "culto politico" }
-            ],
-            "Che tipo di fazione vuoi creare?"
+            routeConfig.options ?? [],
+            routeConfig.prompt ?? "Che cosa vuoi creare?"
         );
 
-        helpers.setRoute({ tipoFazione: selected.tipo });
+        if (selected.set_route) helpers.setRoute(selected.set_route);
         return await includeTemplate(selected.template);
+    };
+
+    const routeCreative = async kind => {
+        const wb = await tp.user.worldbuilding(tp);
+        const routeInfo = kind === "luogo"
+            ? await wb.chooseLocation()
+            : await wb.chooseCreative(kind);
+
+        return await includeTemplate(wb.getCreativeTemplate(routeInfo));
     };
 
     const routeDm = async () => {
@@ -44,35 +39,11 @@ async function template_router(tp, route = "") {
         return await includeTemplate(templatePath);
     };
 
-    const routePersonaggio = async () => {
-        const selected = await helpers.chooseRequired(
-            tp,
-            [
-                { label: "PNG", template: "z.modelli/personaggio/PNG" },
-                { label: "PG", template: "z.modelli/personaggio/PG" },
-                { label: "Divinità o entità", template: "z.modelli/personaggio/Divinità" }
-            ],
-            "Che tipo di personaggio vuoi creare?"
-        );
+    const promptRoute = promptRoutes.get(route);
+    if (promptRoute) return await routePrompt(promptRoute);
 
-        return await includeTemplate(selected.template);
-    };
-
-    if (route === "fazione") return await routeFaction();
-    if (route === "dm") return await routeDm();
-    if (route === "personaggio") return await routePersonaggio();
-
-    const creativeRoutes = new Set([
-        "cultura",
-        "ecologia",
-        "economia",
-        "luogo",
-        "magia",
-        "religione",
-        "societa",
-        "storia"
-    ]);
-
+    const delegatedRoute = delegatedRoutes.get(route);
+    if (delegatedRoute?.handler === "dm") return await routeDm();
     if (creativeRoutes.has(route)) {
         return await routeCreative(route);
     }

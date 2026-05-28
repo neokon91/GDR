@@ -18,6 +18,8 @@ commonjs_runtime:
       path: z.automazioni/pg.js
     - key: session_lifecycle_actions
       path: z.automazioni/session_lifecycle_actions.js
+    - key: template_router
+      path: z.automazioni/template_router.js
   local_dependencies:
     - key: helper_paths
       path: z.automazioni/helper_paths.js

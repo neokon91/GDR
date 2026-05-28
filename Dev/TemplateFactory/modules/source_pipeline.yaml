@@ -826,6 +826,7 @@ steps:
       - Dev/TemplateFactory/modules/release_boundary.yaml
       - Dev/TemplateFactory/modules/resource_indexes.yaml
       - Dev/TemplateFactory/modules/resource_support_pages.yaml
+      - Dev/TemplateFactory/modules/template_blueprints.yaml
       - Dev/TemplateFactory/tools/render_session_context_contract.py
     outputs:
       - z.automazioni/data/runtime/session_context.json
@@ -843,6 +844,7 @@ steps:
       - Dev/TemplateFactory/modules/runtime_render_contract.yaml
       - Dev/TemplateFactory/modules/runtime_dataview_contract.yaml
       - z.automazioni/helper_paths.js
+      - z.automazioni/template_router.js
       - z.automazioni/data/runtime/plugin_profile.json
       - z.automazioni/data/runtime/session_context.json
       - z.automazioni/data/runtime/generated_drafts_cockpit.json
