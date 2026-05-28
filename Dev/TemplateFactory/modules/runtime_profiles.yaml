@@ -28,6 +28,89 @@ runtime_contracts:
       - fazioni
       - oggetti
       - appunti_live
+  path_registry:
+    paths:
+      campagne:
+        folder: Campagne
+        entity_category: campagna
+      creature:
+        folder: Mondi/Creature
+        entity_category: creatura
+      dispense:
+        folder: Mondi/Dispense
+        entity_category: dispensa
+      fazioni:
+        folder: Mondi/Fazioni
+        entity_category: fazione
+      incontri:
+        folder: Mondi/Incontri
+        entity_category: incontro
+      luoghi:
+        folder: Mondi/Luoghi
+        entity_category: luogo
+      missioni:
+        folder: Mondi/Missioni
+        entity_category: missione
+      mondi:
+        folder: Mondi
+        entity_category: mondo
+      oggetti:
+        folder: Mondi/Oggetti
+        entity_category: oggetto
+      personaggi:
+        folder: Mondi/Personaggi
+        entity_category: personaggio
+      religioni:
+        folder: Mondi/Religioni
+        entity_category: religione
+      societa:
+        folder: Mondi/Societa
+        entity_category: societa
+      relazioni:
+        folder: Mondi/Relazioni
+        entity_category: relazione
+      sessioni:
+        folder: Mondi/Sessioni
+        entity_category: sessione
+      mappe:
+        folder: Risorse/Mappe
+      audio:
+        folder: Risorse/Audio
+      immagini:
+        folder: Risorse/Immagini
+      video:
+        folder: Risorse/Video
+      culture:
+        folder: Mondi/Culture
+        entity_category: cultura
+      lingue:
+        folder: Mondi/Lingue
+        entity_category: lingua
+      storia:
+        folder: Mondi/Storia
+      timeline:
+        folder: Mondi/Timeline
+        entity_category: evento storico
+      conflitti:
+        folder: Mondi/Conflitti
+        entity_category: conflitto
+      cosmologia:
+        folder: Mondi/Cosmologia
+        entity_category: cosmologia
+      tracciati:
+        folder: Mondi/Tracciati
+        entity_category: tracciato
+      rotte:
+        folder: Mondi/Rotte
+      risorse_mondo:
+        folder: Mondi/Risorse
+        entity_category: risorsa
+      mercati:
+        folder: Mondi/Mercati
+      compendium:
+        folder: Mondi/Compendium
+      calendario_diegetico:
+        folder: Mondi/Calendario Diegetico
 profiles:
   fazione:
     name_prompt: Nome della fazione

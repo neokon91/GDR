@@ -18,7 +18,7 @@ async function eraStorica(tp) {
     const causa = await helpers.promptOptional(tp, "Causa principale");
     const conseguenza = await helpers.promptOptional(tp, "Conseguenza principale");
 
-    await helpers.moveNote(tp, helpers.path("storia"), name);
+    await helpers.moveNote(tp, helpers.path("timeline"), name);
 
     return await helpers.renderFrontmatter("era_storica", {
         id: id,

@@ -300,6 +300,7 @@ function createNoteSelectionHelpers({
                 PATHS.oggetti,
                 PATHS.mappe,
                 PATHS.culture,
+                PATHS.timeline,
                 PATHS.storia
             ]),
             message,

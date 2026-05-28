@@ -245,7 +245,7 @@ function validateDeclaredCommonJsRuntime() {
     const dataPaths = specs.dataDependencies
         .map(specPath)
         .filter(Boolean);
-    const declaredModules = new Set(modulePaths);
+    const declaredRuntimePaths = new Set([...modulePaths, ...dataPaths]);
 
     for (const relPath of [...modulePaths, ...dataPaths]) {
         if (!existsRel(OUT, relPath)) {
@@ -263,7 +263,7 @@ function validateDeclaredCommonJsRuntime() {
             const resolved = resolveJsRequire(file, match[1]);
             const target = rel(resolved);
             if (!target.startsWith("z.automazioni/") && !target.startsWith("z.engine/")) continue;
-            if (!declaredModules.has(target)) {
+            if (!declaredRuntimePaths.has(target)) {
                 fail(`release boundary: dipendenza CommonJS locale non dichiarata (${relPath} -> ${target})`);
             }
         }

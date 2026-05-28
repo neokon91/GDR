@@ -15,6 +15,10 @@ sys.dont_write_bytecode = True
 ROOT = Path(__file__).resolve().parents[3]
 RUNTIME_PROFILES = ROOT / "Dev" / "TemplateFactory" / "modules" / "runtime_profiles.yaml"
 FIELDS_CORE = ROOT / "Dev" / "TemplateFactory" / "modules" / "fields_core.yaml"
+ENTITY_MODEL = ROOT / "Dev" / "TemplateFactory" / "modules" / "entity_model.yaml"
+RELEASE_BOUNDARY = ROOT / "Dev" / "TemplateFactory" / "modules" / "release_boundary.yaml"
+RESOURCE_INDEXES = ROOT / "Dev" / "TemplateFactory" / "modules" / "resource_indexes.yaml"
+RESOURCE_SUPPORT_PAGES = ROOT / "Dev" / "TemplateFactory" / "modules" / "resource_support_pages.yaml"
 TARGET = ROOT / "z.automazioni" / "data" / "runtime" / "session_context.json"
 
 
@@ -67,7 +71,109 @@ def validate_non_empty_list(errors: list[str], data: dict[str, Any], key: str) -
     return values
 
 
-def validate_contract(runtime_profiles: dict[str, Any], fields_core: dict[str, Any], errors: list[str]) -> dict[str, Any]:
+def normalize_folder(value: Any) -> str:
+    return str(value or "").replace("\\", "/").strip().rstrip("/")
+
+
+def parent_folder(rel_path: Any) -> str:
+    path = str(rel_path or "").replace("\\", "/").strip()
+    if not path or "/" not in path:
+        return ""
+    return path.rsplit("/", 1)[0]
+
+
+def declared_runtime_folders(
+    release_boundary: dict[str, Any],
+    resource_indexes: dict[str, Any],
+    resource_support_pages: dict[str, Any],
+) -> set[str]:
+    folders: set[str] = set()
+
+    for item in release_boundary.get("materialized_user_files") or []:
+        if isinstance(item, dict):
+            folder = parent_folder(item.get("path"))
+            if folder:
+                folders.add(folder)
+
+    for module in (resource_indexes, resource_support_pages):
+        for item in module.get("indexes") or module.get("pages") or []:
+            if isinstance(item, dict):
+                folder = parent_folder(item.get("path"))
+                if folder:
+                    folders.add(folder)
+
+    return folders
+
+
+def validate_path_registry(
+    contracts: dict[str, Any],
+    entity_model: dict[str, Any],
+    release_boundary: dict[str, Any],
+    resource_indexes: dict[str, Any],
+    resource_support_pages: dict[str, Any],
+    errors: list[str],
+) -> dict[str, str]:
+    path_contract = contracts.get("path_registry")
+    if not isinstance(path_contract, dict) or not path_contract:
+        fail(errors, f"{RUNTIME_PROFILES.relative_to(ROOT)}: runtime_contracts.path_registry deve essere mappa non vuota")
+        return {}
+
+    paths = path_contract.get("paths")
+    if not isinstance(paths, dict) or not paths:
+        fail(errors, f"{RUNTIME_PROFILES.relative_to(ROOT)}: runtime_contracts.path_registry.paths deve essere mappa non vuota")
+        return {}
+
+    categories = entity_model.get("categories") if isinstance(entity_model.get("categories"), dict) else {}
+    known_folders = declared_runtime_folders(release_boundary, resource_indexes, resource_support_pages)
+    registry: dict[str, str] = {}
+
+    for key, spec in paths.items():
+        key_text = str(key).strip()
+        if key_text != str(key) or not key_text or any(char.isspace() for char in key_text):
+            fail(errors, f"{RUNTIME_PROFILES.relative_to(ROOT)}: path_registry.paths contiene key non valida ({key})")
+            continue
+        if not isinstance(spec, dict):
+            fail(errors, f"{RUNTIME_PROFILES.relative_to(ROOT)}: path_registry.paths.{key_text} deve essere mappa")
+            continue
+
+        folder = normalize_folder(spec.get("folder"))
+        if not folder or folder.endswith(".md"):
+            fail(errors, f"{RUNTIME_PROFILES.relative_to(ROOT)}: path_registry.paths.{key_text}.folder non valido ({folder})")
+            continue
+        registry[key_text] = folder
+
+        entity_category = str(spec.get("entity_category") or "").strip()
+        if entity_category:
+            category = categories.get(entity_category)
+            if not isinstance(category, dict):
+                fail(errors, f"{RUNTIME_PROFILES.relative_to(ROOT)}: path_registry.paths.{key_text}.entity_category non dichiarata ({entity_category})")
+                continue
+            model_folder = normalize_folder(category.get("folder"))
+            if folder != model_folder:
+                fail(
+                    errors,
+                    f"{RUNTIME_PROFILES.relative_to(ROOT)}: path_registry.paths.{key_text}.folder "
+                    f"non allineato a entity_model.{entity_category}.folder ({folder} != {model_folder})",
+                )
+        elif folder not in known_folders:
+            fail(
+                errors,
+                f"{RUNTIME_PROFILES.relative_to(ROOT)}: path_registry.paths.{key_text}.folder "
+                f"non dichiarato da release/resource contracts ({folder})",
+            )
+
+    return registry
+
+
+def validate_contract(
+    runtime_profiles: dict[str, Any],
+    fields_core: dict[str, Any],
+    entity_model: dict[str, Any],
+    release_boundary: dict[str, Any],
+    resource_indexes: dict[str, Any],
+    resource_support_pages: dict[str, Any],
+    errors: list[str],
+) -> dict[str, Any]:
     contracts = runtime_profiles.get("runtime_contracts")
     if not isinstance(contracts, dict) or not contracts:
         fail(errors, f"{RUNTIME_PROFILES.relative_to(ROOT)}: runtime_contracts deve essere mappa non vuota")
@@ -82,6 +188,14 @@ def validate_contract(runtime_profiles: dict[str, Any], fields_core: dict[str, A
     play_states = validate_non_empty_list(errors, session_context, "play_states")
     closed_states = validate_non_empty_list(errors, session_context, "closed_states")
     link_fields = validate_non_empty_list(errors, session_context, "link_fields")
+    path_registry = validate_path_registry(
+        contracts,
+        entity_model,
+        release_boundary,
+        resource_indexes,
+        resource_support_pages,
+        errors,
+    )
 
     allowed_states = state_values(fields_core)
     if not allowed_states:
@@ -116,6 +230,7 @@ def validate_contract(runtime_profiles: dict[str, Any], fields_core: dict[str, A
         "play_states": play_states,
         "closed_states": closed_states,
         "link_fields": link_fields,
+        "path_registry": path_registry,
     }
 
 
@@ -131,7 +246,19 @@ def main() -> int:
     errors: list[str] = []
     runtime_profiles = load_yaml(RUNTIME_PROFILES, errors)
     fields_core = load_yaml(FIELDS_CORE, errors)
-    contract = validate_contract(runtime_profiles, fields_core, errors)
+    entity_model = load_yaml(ENTITY_MODEL, errors)
+    release_boundary = load_yaml(RELEASE_BOUNDARY, errors)
+    resource_indexes = load_yaml(RESOURCE_INDEXES, errors)
+    resource_support_pages = load_yaml(RESOURCE_SUPPORT_PAGES, errors)
+    contract = validate_contract(
+        runtime_profiles,
+        fields_core,
+        entity_model,
+        release_boundary,
+        resource_indexes,
+        resource_support_pages,
+        errors,
+    )
 
     if not errors:
         expected = json_text(contract)
@@ -154,7 +281,8 @@ def main() -> int:
         f"{len(contract['active_states'])} stati attivi, "
         f"{len(contract['play_states'])} stati gioco, "
         f"{len(contract['closed_states'])} stati chiusi, "
-        f"{len(contract['link_fields'])} campi link."
+        f"{len(contract['link_fields'])} campi link, "
+        f"{len(contract['path_registry'])} percorsi runtime."
     )
     return 0
 

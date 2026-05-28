@@ -817,10 +817,14 @@ steps:
       - node
       - Dev/TemplateFactory/tools/check_naming_contract.js
   session_context_contract:
-    purpose: Genera il contratto JSON letto dal core sessione.
+    purpose: Genera il contratto JSON letto dal core sessione e dal registry percorsi runtime.
     sources:
       - Dev/TemplateFactory/modules/runtime_profiles.yaml
       - Dev/TemplateFactory/modules/fields_core.yaml
+      - Dev/TemplateFactory/modules/entity_model.yaml
+      - Dev/TemplateFactory/modules/release_boundary.yaml
+      - Dev/TemplateFactory/modules/resource_indexes.yaml
+      - Dev/TemplateFactory/modules/resource_support_pages.yaml
       - Dev/TemplateFactory/tools/render_session_context_contract.py
     outputs:
       - z.automazioni/data/runtime/session_context.json
@@ -837,7 +841,9 @@ steps:
       - Dev/TemplateFactory/modules/runtime_exports.yaml
       - Dev/TemplateFactory/modules/runtime_render_contract.yaml
       - Dev/TemplateFactory/modules/runtime_dataview_contract.yaml
+      - z.automazioni/helper_paths.js
       - z.automazioni/data/runtime/plugin_profile.json
+      - z.automazioni/data/runtime/session_context.json
       - Dev/TemplateFactory/tools/fixtures/runtime_demo_pages.json
       - Dev/TemplateFactory/tools/check_runtime_load.js
     outputs:

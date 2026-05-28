@@ -15,7 +15,7 @@ async function wizard_layer(tp, wizard = "") {
                 { label: "Religione o mito", template: "z.modelli/Religione Router.md", folder: helpers.path("religioni") },
                 { label: "Economia o risorsa", template: "z.modelli/Economia Router.md", folder: helpers.path("risorse_mondo") },
                 { label: "Magia o cosmologia", template: "z.modelli/Magia Router.md", folder: helpers.path("cosmologia") },
-                { label: "Storia", template: "z.modelli/Storia Router.md", folder: helpers.path("storia") },
+                { label: "Storia", template: "z.modelli/Storia Router.md", folder: helpers.path("timeline") },
                 { label: "Ecologia o creatura", template: "z.modelli/Ecologia Router.md", folder: helpers.path("creature") },
                 { label: "Missione viva", template: "z.modelli/dm/Missione.md", folder: helpers.path("missioni") },
                 { label: "Clock o tracciato", template: "z.modelli/dm/Tracciato.md", folder: helpers.path("tracciati") }

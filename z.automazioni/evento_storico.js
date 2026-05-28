@@ -25,7 +25,7 @@ async function evento_storico(tp) {
     const prossimaMossa = await helpers.promptOptional(tp, "Prossima mossa o conseguenza pendente");
     const connessioni = await helpers.chooseConnections(tp, "Connessioni vive dell'evento", context);
 
-    const created = await helpers.moveNote(tp, "Mondi/Timeline", name);
+    const created = await helpers.moveNote(tp, helpers.path("timeline"), name);
     // Un evento storico creato dal gioco diventa conseguenza della sessione attiva.
     await helpers.linkCreatedNoteToActiveSession(created, { sessionField: "conseguenze" });
     await helpers.linkCreatedNoteToConnections(created, connessioni);

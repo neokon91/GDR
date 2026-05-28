@@ -162,7 +162,7 @@ function commonJsRuntimeSpecs(source, sourcePath) {
     const dataDependencies = normalizeSpecList(commonjs, "data_dependencies", commonjsPath);
     const modules = [...entrypoints, ...localDependencies].map(spec => spec.path).filter(Boolean);
     const data = dataDependencies.map(spec => spec.path).filter(Boolean);
-    const declaredModules = new Set(modules);
+    const declaredRuntimePaths = new Set([...modules, ...data]);
 
     for (const modulePath of modules) {
         if (!modulePath.endsWith(".js")) {
@@ -172,7 +172,7 @@ function commonJsRuntimeSpecs(source, sourcePath) {
 
         for (const dependency of localJsDependencies(modulePath)) {
             if (!dependency.startsWith("z.automazioni/") && !dependency.startsWith("z.engine/")) continue;
-            if (!declaredModules.has(dependency)) {
+            if (!declaredRuntimePaths.has(dependency)) {
                 errors.push(`${commonjsPath}: dipendenza locale non dichiarata (${modulePath} -> ${dependency})`);
             }
         }
@@ -185,6 +185,25 @@ function commonJsRuntimeSpecs(source, sourcePath) {
         modules,
         data
     };
+}
+
+function validatePathRegistryRuntime() {
+    const contractPath = "z.automazioni/data/runtime/session_context.json";
+    const contract = readJsonRel(contractPath);
+    const registry = contract?.path_registry;
+    if (!isPlainObject(registry) || !Object.keys(registry).length) {
+        errors.push(`${contractPath}: path_registry mancante o vuoto`);
+        return;
+    }
+
+    try {
+        const helperPaths = require(path.join(ROOT, "z.automazioni/helper_paths.js"));
+        if (JSON.stringify(helperPaths.PATHS ?? {}) !== JSON.stringify(registry)) {
+            errors.push("z.automazioni/helper_paths.js: PATHS non allineato a session_context.json.path_registry");
+        }
+    } catch (error) {
+        errors.push(`z.automazioni/helper_paths.js: caricamento path registry fallito (${error.message})`);
+    }
 }
 
 function validateSourceRoutes(routes, sourcePath) {
@@ -457,6 +476,10 @@ async function main() {
         if (!fs.existsSync(path.join(ROOT, relPath))) {
             errors.push(`runtime mancante: ${relPath}`);
         }
+    }
+
+    if (!errors.length) {
+        validatePathRegistryRuntime();
     }
 
     if (!errors.length) {
