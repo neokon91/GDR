@@ -29,6 +29,10 @@ required_files:
   - z.engine/session_player.js
   - z.engine/session_runtime.js
   - z.automazioni/helpers.js
+  - z.automazioni/helper_paths.js
+  - z.automazioni/helper_prompts.js
+  - z.automazioni/helper_yaml.js
+  - z.automazioni/helper_notes.js
   - z.automazioni/meta_actions.js
   - z.automazioni/continuity_event_model.js
   - z.automazioni/continuity_state.js

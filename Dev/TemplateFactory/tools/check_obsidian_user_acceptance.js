@@ -340,10 +340,34 @@ async function runWorkflowSmoke(cdp) {
             const file = getFile(filePath);
             if (file) await app.vault.delete(file, true);
         };
+        const moduleCache = {};
+        const normalizeRequiredPath = (fromPath, required) => {
+            if (!String(required ?? "").startsWith(".")) return "";
+            const fromParts = String(fromPath).split("/");
+            fromParts.pop();
+            for (const part of String(required).split("/")) {
+                if (!part || part === ".") continue;
+                if (part === "..") fromParts.pop();
+                else fromParts.push(part);
+            }
+            const resolved = fromParts.join("/");
+            return resolved.endsWith(".js") ? resolved : resolved + ".js";
+        };
         const loadCommonJs = async filePath => {
-            const source = await app.vault.adapter.read(filePath);
+            const normalizedPath = String(filePath);
+            if (moduleCache[normalizedPath]) return moduleCache[normalizedPath].exports;
+            const source = await app.vault.adapter.read(normalizedPath);
             const module = { exports: {} };
+            moduleCache[normalizedPath] = module;
+            const requiredModules = [...source.matchAll(/require\\(["']([^"']+)["']\\)/g)]
+                .map(match => normalizeRequiredPath(normalizedPath, match[1]))
+                .filter(Boolean);
+            for (const requiredPath of requiredModules) {
+                await loadCommonJs(requiredPath);
+            }
             const localRequire = required => {
+                const requiredPath = normalizeRequiredPath(normalizedPath, required);
+                if (requiredPath && moduleCache[requiredPath]) return moduleCache[requiredPath].exports;
                 throw new Error("require non supportato nel live workflow: " + required);
             };
             Function("module", "exports", "require", "app", "Notice", source)(module, module.exports, localRequire, app, Notice);
