@@ -1,17 +1,23 @@
 #!/usr/bin/env node
 
 const fs = require("fs");
-const net = require("net");
 const os = require("os");
 const path = require("path");
-const { execFileSync } = require("child_process");
-const { loadReleaseBoundary } = require("./release_boundary_utils");
-const { releasePluginProfile } = require("./release_plugin_profile");
+const { cdpClient, waitForPageTarget: waitForDevToolsPageTarget } = require("./obsidian_acceptance_cdp");
+const { createLiveAcceptanceConfig } = require("./obsidian_acceptance_config");
+const {
+    acceptPrompts: acceptProfilePrompts,
+    buildRelease,
+    findFreePort,
+    launchObsidian,
+    markProfileReady,
+    prepareProfile,
+    sleep,
+    stopProfileObsidian
+} = require("./obsidian_acceptance_process");
+const { createObsidianAcceptanceValidators } = require("./obsidian_acceptance_validators");
 
 const ROOT = process.cwd();
-const LIVE_ACCEPTANCE_FILE = "Dev/TemplateFactory/modules/live_acceptance.yaml";
-const LIVE_ACCEPTANCE = loadYamlModule(LIVE_ACCEPTANCE_FILE);
-const RELEASE_PLUGIN_IDS = releasePluginProfile(ROOT, loadReleaseBoundary(ROOT)).enabledPlugins;
 const OBSIDIAN_APP = optionValue("--obsidian", "/Applications/Obsidian.app");
 const ACCEPT_PROMPTS = process.argv.includes("--accept-prompts");
 const CONTRACT_CHECK = process.argv.includes("--contract-check");
@@ -29,50 +35,25 @@ const PROFILE_ROOT = path.join(os.homedir(), "Library/Application Support/obsidi
 const WORK_ROOT = path.join(os.homedir(), "Library/Caches/vault-gdr-live-test");
 const OUT = path.join(WORK_ROOT, "vault-gdr-clean");
 const PROFILE_READY_FILE = path.join(PROFILE_ROOT, "gdr-live-test-profile-ready.json");
-const FIRST_RUN_PAGES = requiredConfigArray("first_run_pages");
-const UX_SURFACE_CHECKS = requiredConfigObject("ux_surface_checks");
-const PLUGIN_RUNTIME_PROBES = requiredConfigArray("plugin_runtime_probes", "object");
-const WORKFLOW_SMOKE = requiredConfigObject("workflow_smoke");
-const CYCLE_SMOKE = requiredConfigObject("cycle_smoke");
-
-function loadYamlModule(relPath) {
-    const script = [
-        "import json, sys, yaml",
-        "with open(sys.argv[1], encoding='utf-8') as handle:",
-        "    data = yaml.safe_load(handle) or {}",
-        "print(json.dumps(data, ensure_ascii=False))"
-    ].join("\n");
-    const stdout = execFileSync("python3", ["-c", script, path.join(ROOT, relPath)], {
-        encoding: "utf8",
-        maxBuffer: 4 * 1024 * 1024
-    });
-    return JSON.parse(stdout);
-}
-
-function configValue(pathText) {
-    return String(pathText).split(".").reduce((value, key) => value?.[key], LIVE_ACCEPTANCE);
-}
-
-function requiredConfigArray(pathText, itemType = "string") {
-    const values = configValue(pathText) ?? [];
-    const normalized = Array.isArray(values)
-        ? values
-            .map(value => itemType === "string" ? String(value) : value)
-            .filter(value => itemType === "string" ? Boolean(value) : Boolean(value && typeof value === "object" && !Array.isArray(value)))
-        : [];
-    if (!normalized.length) {
-        throw new Error(`${LIVE_ACCEPTANCE_FILE}: ${pathText} vuoto o mancante`);
-    }
-    return normalized;
-}
-
-function requiredConfigObject(pathText) {
-    const value = configValue(pathText);
-    if (!value || typeof value !== "object" || Array.isArray(value)) {
-        throw new Error(`${LIVE_ACCEPTANCE_FILE}: ${pathText} deve essere mappa`);
-    }
-    return value;
-}
+const {
+    CYCLE_SMOKE,
+    FIRST_RUN_PAGES,
+    PLUGIN_RUNTIME_PROBES,
+    UX_SURFACE_CHECKS,
+    WORKFLOW_SMOKE,
+    validateLiveAcceptanceContract
+} = createLiveAcceptanceConfig(ROOT);
+const {
+    validatePersistenceReport,
+    validateReport
+} = createObsidianAcceptanceValidators({
+    cycleSmoke: CYCLE_SMOKE,
+    pluginRuntimeProbes: PLUGIN_RUNTIME_PROBES,
+    runCycleSmoke: RUN_CYCLE_SMOKE,
+    runPluginRuntimeProbes: RUN_PLUGIN_RUNTIME_PROBES,
+    runWorkflowSmoke: RUN_WORKFLOW_SMOKE,
+    workflowSmoke: WORKFLOW_SMOKE
+});
 
 function optionValue(name, fallback) {
     const index = process.argv.indexOf(name);
@@ -107,491 +88,19 @@ function usage() {
     ].join("\n"));
 }
 
-function fail(message) {
-    throw new Error(message);
-}
-
-function validateLiveAcceptanceContract() {
-    const errors = [];
-    const workflow = WORKFLOW_SMOKE;
-    const cycle = CYCLE_SMOKE;
-    const ux = UX_SURFACE_CHECKS;
-    const probeIds = new Set();
-    for (const key of ["forbidden_visible_text", "forbidden_visible_regex", "forbidden_visible_selectors", "required_visible_text_by_page"]) {
-        if (!Array.isArray(ux[key]) || !ux[key].length) {
-            errors.push(`${LIVE_ACCEPTANCE_FILE}: ux_surface_checks.${key} deve essere lista non vuota`);
-        }
-    }
-    for (const [index, pattern] of (ux.forbidden_visible_regex ?? []).entries()) {
-        try {
-            new RegExp(String(pattern));
-        } catch (error) {
-            errors.push(`${LIVE_ACCEPTANCE_FILE}: ux_surface_checks.forbidden_visible_regex[${index}] non valida (${error.message})`);
-        }
-    }
-    for (const [index, rule] of (ux.forbidden_visible_selectors ?? []).entries()) {
-        if (!String(rule?.selector ?? "").trim()) {
-            errors.push(`${LIVE_ACCEPTANCE_FILE}: ux_surface_checks.forbidden_visible_selectors[${index}].selector vuoto`);
-        }
-        if (!String(rule?.description ?? "").trim()) {
-            errors.push(`${LIVE_ACCEPTANCE_FILE}: ux_surface_checks.forbidden_visible_selectors[${index}].description vuoto`);
-        }
-    }
-    const uxPages = new Set();
-    for (const [index, rule] of (ux.required_visible_text_by_page ?? []).entries()) {
-        const page = String(rule?.page ?? "").trim();
-        if (!page) {
-            errors.push(`${LIVE_ACCEPTANCE_FILE}: ux_surface_checks.required_visible_text_by_page[${index}].page vuoto`);
-            continue;
-        }
-        uxPages.add(page);
-        for (const key of ["all", "any"]) {
-            if (!Array.isArray(rule[key]) || !rule[key].map(String).filter(Boolean).length) {
-                errors.push(`${LIVE_ACCEPTANCE_FILE}: ux_surface_checks.required_visible_text_by_page.${page}.${key} deve essere lista non vuota`);
-            }
-        }
-    }
-    for (const page of FIRST_RUN_PAGES) {
-        if (!uxPages.has(page)) {
-            errors.push(`${LIVE_ACCEPTANCE_FILE}: ux_surface_checks.required_visible_text_by_page non copre pagina first-run ${page}`);
-        }
-    }
-    for (const [index, probe] of PLUGIN_RUNTIME_PROBES.entries()) {
-        const id = String(probe.id ?? "").trim();
-        if (!id) {
-            errors.push(`${LIVE_ACCEPTANCE_FILE}: plugin_runtime_probes[${index}].id vuoto o mancante`);
-            continue;
-        }
-        if (probeIds.has(id)) {
-            errors.push(`${LIVE_ACCEPTANCE_FILE}: plugin_runtime_probes duplicato ${id}`);
-        }
-        probeIds.add(id);
-        const hasSubstance = Boolean(
-            probe.commands_any?.length ||
-            probe.api_checks?.length ||
-            probe.config_checks?.length ||
-            probe.source_checks?.length ||
-            probe.file_checks?.length
-        );
-        if (!hasSubstance) {
-            errors.push(`${LIVE_ACCEPTANCE_FILE}: plugin_runtime_probes.${id} senza probe verificabile`);
-        }
-    }
-    for (const pluginId of RELEASE_PLUGIN_IDS) {
-        if (!probeIds.has(pluginId)) {
-            errors.push(`${LIVE_ACCEPTANCE_FILE}: plugin_runtime_probes non copre plugin release ${pluginId}`);
-        }
-    }
-    const requiredWorkflowStrings = [
-        "setup_page",
-        "button_id",
-        "button_label",
-        "template_file",
-        "helper_script",
-        "user_script",
-        "temp_note",
-        "expected_world_path",
-        "expected_world_name"
-    ];
-    for (const key of requiredWorkflowStrings) {
-        if (!String(workflow[key] ?? "").trim()) {
-            errors.push(`${LIVE_ACCEPTANCE_FILE}: workflow_smoke.${key} vuoto o mancante`);
-        }
-    }
-    for (const key of ["prompt_answers", "suggester_answers"]) {
-        const value = workflow[key];
-        if (!value || typeof value !== "object" || Array.isArray(value) || !Object.keys(value).length) {
-            errors.push(`${LIVE_ACCEPTANCE_FILE}: workflow_smoke.${key} deve essere mappa non vuota`);
-        }
-    }
-    for (const key of ["expected_files", "expected_world_contains", "verify_pages_after_workflow", "persistence_pages"]) {
-        if (!Array.isArray(workflow[key]) || !workflow[key].length) {
-            errors.push(`${LIVE_ACCEPTANCE_FILE}: workflow_smoke.${key} deve essere lista non vuota`);
-        }
-    }
-    for (const relPath of [workflow.helper_script, workflow.user_script, workflow.template_file]) {
-        const sourcePath = path.join(ROOT, String(relPath ?? ""));
-        if (relPath && !fs.existsSync(sourcePath) && relPath !== workflow.template_file) {
-            errors.push(`${LIVE_ACCEPTANCE_FILE}: file sorgente mancante ${relPath}`);
-        }
-    }
-    if (!FIRST_RUN_PAGES.includes(workflow.setup_page)) {
-        errors.push(`${LIVE_ACCEPTANCE_FILE}: workflow_smoke.setup_page deve essere incluso in first_run_pages`);
-    }
-    if (!workflow.expected_files?.includes?.(workflow.expected_world_path)) {
-        errors.push(`${LIVE_ACCEPTANCE_FILE}: workflow_smoke.expected_files deve includere expected_world_path`);
-    }
-
-    const requiredCycleStrings = [
-        "setup_page",
-        "table_page",
-        "post_session_page",
-        "session_button_id",
-        "session_button_label",
-        "session_template_file",
-        "session_user_script",
-        "post_session_button_id",
-        "post_session_button_label",
-        "post_session_template_file",
-        "post_session_user_script",
-        "post_session_action",
-        "temp_note",
-        "expected_session_path",
-        "expected_session_name"
-    ];
-    for (const key of requiredCycleStrings) {
-        if (!String(cycle[key] ?? "").trim()) {
-            errors.push(`${LIVE_ACCEPTANCE_FILE}: cycle_smoke.${key} vuoto o mancante`);
-        }
-    }
-    for (const key of [
-        "prompt_answers",
-        "suggester_answers",
-        "prepare_frontmatter",
-        "live_frontmatter",
-        "expected_session_frontmatter",
-        "expected_session_list_contains"
-    ]) {
-        const value = cycle[key];
-        if (!value || typeof value !== "object" || Array.isArray(value) || !Object.keys(value).length) {
-            errors.push(`${LIVE_ACCEPTANCE_FILE}: cycle_smoke.${key} deve essere mappa non vuota`);
-        }
-    }
-    for (const key of ["expected_session_contains", "verify_pages_after_cycle", "persistence_pages"]) {
-        if (!Array.isArray(cycle[key]) || !cycle[key].length) {
-            errors.push(`${LIVE_ACCEPTANCE_FILE}: cycle_smoke.${key} deve essere lista non vuota`);
-        }
-    }
-    for (const relPath of [cycle.session_user_script, cycle.post_session_user_script]) {
-        const sourcePath = path.join(ROOT, String(relPath ?? ""));
-        if (relPath && !fs.existsSync(sourcePath)) {
-            errors.push(`${LIVE_ACCEPTANCE_FILE}: file sorgente mancante ${relPath}`);
-        }
-    }
-    if (!cycle.persistence_pages?.includes?.(cycle.expected_session_path)) {
-        errors.push(`${LIVE_ACCEPTANCE_FILE}: cycle_smoke.persistence_pages deve includere expected_session_path`);
-    }
-    return errors;
-}
-
-function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-}
-
-function compact(value) {
-    return String(value ?? "").replace(/\s+/g, " ").slice(0, 900);
-}
-
 function uniqueStrings(values) {
     return [...new Set((values ?? []).map(value => String(value)).filter(Boolean))];
 }
 
-function privateVarPath(file) {
-    return file.replace(/^\/var\//, "/private/var/");
-}
-
-function processLines() {
-    return execFileSync("ps", ["ax", "-o", "pid=,command="], { encoding: "utf8" }).split(/\r?\n/);
-}
-
-function profileProcessIds() {
-    const markers = [PROFILE_ROOT, privateVarPath(PROFILE_ROOT)];
-    return processLines()
-        .filter(line => markers.some(marker => line.includes(marker)))
-        .map(line => Number(line.trim().split(/\s+/, 1)[0]))
-        .filter(pid => pid && pid !== process.pid);
-}
-
-function mainObsidianPid() {
-    const markers = [PROFILE_ROOT, privateVarPath(PROFILE_ROOT)];
-    for (const line of processLines()) {
-        if (!markers.some(marker => line.includes(marker))) continue;
-        if (!line.includes("/Obsidian.app/Contents/MacOS/Obsidian")) continue;
-        const pid = Number(line.trim().split(/\s+/, 1)[0]);
-        if (pid) return pid;
-    }
-    return 0;
-}
-
-function stopProfileObsidian() {
-    for (const pid of profileProcessIds()) {
-        try {
-            process.kill(pid, "SIGTERM");
-        } catch {
-            // Il processo puo essere gia terminato.
-        }
-    }
-}
-
-async function findFreePort(start = 9231) {
-    for (let port = start; port < start + 80; port += 1) {
-        const free = await new Promise(resolve => {
-            const server = net.createServer()
-                .once("error", () => resolve(false))
-                .once("listening", () => server.close(() => resolve(true)))
-                .listen(port, "127.0.0.1");
-        });
-        if (free) return port;
-    }
-    fail(`nessuna porta DevTools libera da ${start} a ${start + 79}`);
-}
-
-function prepareProfile() {
-    if (FRESH_INSTALL) fs.rmSync(PROFILE_ROOT, { recursive: true, force: true });
-    fs.mkdirSync(PROFILE_ROOT, { recursive: true });
-    fs.mkdirSync(WORK_ROOT, { recursive: true });
-
-    for (const file of fs.readdirSync(PROFILE_ROOT).filter(name => /^mx-main-daemon-.*\.asar$/.test(name))) {
-        fs.rmSync(path.join(PROFILE_ROOT, file), { force: true });
-    }
-    if (PRESEED_DAEMON) {
-        const sourceProfile = path.join(os.homedir(), "Library/Application Support/obsidian");
-        const daemon = fs.existsSync(sourceProfile)
-            ? fs.readdirSync(sourceProfile)
-                .filter(name => /^mx-main-daemon-.*\.asar$/.test(name))
-                .sort()
-                .pop()
-            : "";
-        if (daemon) {
-            fs.copyFileSync(path.join(sourceProfile, daemon), path.join(PROFILE_ROOT, daemon));
-        }
-    }
-    fs.writeFileSync(path.join(PROFILE_ROOT, "mx-pref.json"), `${JSON.stringify({ enableExtension: true }, null, 2)}\n`);
-    fs.writeFileSync(path.join(PROFILE_ROOT, "obsidian.json"), `${JSON.stringify({
-        vaults: {
-            "vault-gdr-live-test": {
-                path: OUT,
-                ts: Date.now(),
-                open: true
-            }
-        },
-        cli: true
-    }, null, 2)}\n`);
-}
-
-function buildRelease() {
-    execFileSync("node", [
-        "Dev/TemplateFactory/tools/release_clean.js",
-        "--quiet",
-        "--out",
-        OUT,
-        ...(WITH_DEMO ? ["--with-demo"] : [])
-    ], { cwd: ROOT, stdio: "inherit" });
-}
-
-function launchObsidian(port) {
-    execFileSync("open", [
-        "-na",
-        OBSIDIAN_APP,
-        "--args",
-        `--user-data-dir=${PROFILE_ROOT}`,
-        `--remote-debugging-port=${port}`
-    ], { stdio: "ignore" });
-}
-
-const PROMPT_ACCEPTOR = `
-on valueText(itemRef)
-  set outText to ""
-  try
-    set outText to outText & " " & (name of itemRef as text)
-  end try
-  try
-    set outText to outText & " " & (description of itemRef as text)
-  end try
-  try
-    set outText to outText & " " & (value of itemRef as text)
-  end try
-  return outText
-end valueText
-
-on collectText(itemRef, depthLeft)
-  set outText to my valueText(itemRef)
-  if depthLeft <= 0 then return outText
-  tell application "System Events"
-    try
-      repeat with childRef in UI elements of itemRef
-        set outText to outText & " " & my collectText(childRef, depthLeft - 1)
-      end repeat
-    end try
-  end tell
-  return outText
-end collectText
-
-on hasAny(textValue, needles)
-  repeat with needle in needles
-    if textValue contains (needle as text) then return true
-  end repeat
-  return false
-end hasAny
-
-on shouldClick(labelText, rootText)
-  if my hasAny(labelText, {"Cancel", "Annulla", "Don't", "Dont", "Non ", "Deny", "Rifiuta"}) then return false
-  if my hasAny(labelText, {"Trust author and enable plugins", "Trust author", "Enable plugins", "Enable community plugins", "Turn on community plugins"}) then return true
-  if my hasAny(labelText, {"Considera attendibile", "Autore attendibile", "Abilita plugin", "Plugin della community"}) then return true
-  if my hasAny(labelText, {"Install Main Daemon", "Install main daemon", "Installa Main Daemon", "Installa daemon"}) then return true
-  if my hasAny(labelText, {"Install", "Installa"}) and my hasAny(rootText, {"Daemon", "daemon", "MX", "Media Extended"}) then return true
-  if my hasAny(labelText, {"Continue", "OK", "Continua"}) and my hasAny(rootText, {"community plugin", "Community plugin", "Trust", "trust", "Daemon", "daemon", "plugin della community", "attendibile"}) then return true
-  return false
-end shouldClick
-
-on clickFirst(itemRef, rootText)
-  tell application "System Events"
-    try
-      if role of itemRef is "AXButton" then
-        set labelText to my valueText(itemRef)
-        if my shouldClick(labelText, rootText) then
-          click itemRef
-          return "clicked " & labelText
-        end if
-      end if
-    end try
-    try
-      repeat with childRef in UI elements of itemRef
-        set resultText to my clickFirst(childRef, rootText)
-        if resultText is not "" then return resultText
-      end repeat
-    end try
-  end tell
-  return ""
-end clickFirst
-
-on run argv
-  set targetPid to item 1 of argv as integer
-  tell application "System Events"
-    try
-      set targetProcess to first process whose unix id is targetPid
-      set frontmost of targetProcess to true
-      repeat with winRef in windows of targetProcess
-        set rootText to my collectText(winRef, 5)
-        set resultText to my clickFirst(winRef, rootText)
-        if resultText is not "" then return resultText
-      end repeat
-    on error errText
-      return "error " & errText
-    end try
-  end tell
-  return ""
-end run
-`;
-
 function acceptPrompts() {
-    const pid = mainObsidianPid();
-    if (!pid) return "";
-    try {
-        return execFileSync("osascript", ["-e", PROMPT_ACCEPTOR, String(pid)], {
-            encoding: "utf8",
-            timeout: 5000
-        }).trim();
-    } catch (error) {
-        return `osascript failed: ${error.message}`;
-    }
+    return acceptProfilePrompts(PROFILE_ROOT);
 }
 
 async function waitForPageTarget(port, timeoutMs = 45000) {
-    const deadline = Date.now() + timeoutMs;
-    let lastError = "";
-
-    while (Date.now() < deadline) {
-        if (ACCEPT_PROMPTS) acceptPrompts();
-        try {
-            const targets = await fetch(`http://127.0.0.1:${port}/json/list`).then(response => response.json());
-            const page = targets.find(target => target.type === "page" && /vault-gdr-clean|Obsidian/.test(target.title ?? ""));
-            if (page?.webSocketDebuggerUrl) return page;
-        } catch (error) {
-            lastError = error.message;
-        }
-        await sleep(750);
-    }
-
-    fail(`target DevTools Obsidian non trovato sulla porta ${port}${lastError ? ` (${lastError})` : ""}`);
-}
-
-function cdpClient(wsUrl) {
-    const ws = new WebSocket(wsUrl);
-    let seq = 0;
-    const pending = new Map();
-    const events = [];
-
-    function send(method, params = {}, timeoutMs = 30000) {
-        const id = ++seq;
-        ws.send(JSON.stringify({ id, method, params }));
-        return new Promise((resolve, reject) => {
-            const timer = setTimeout(() => reject(new Error(`timeout CDP ${method}`)), timeoutMs);
-            pending.set(id, { resolve, reject, timer, method });
-        });
-    }
-
-    ws.onmessage = event => {
-        const msg = JSON.parse(event.data);
-        if (msg.id && pending.has(msg.id)) {
-            const item = pending.get(msg.id);
-            pending.delete(msg.id);
-            clearTimeout(item.timer);
-            if (msg.error) item.reject(new Error(`${item.method}: ${msg.error.message}`));
-            else item.resolve(msg.result);
-            return;
-        }
-        if (msg.method === "Runtime.exceptionThrown") {
-            const details = msg.params.exceptionDetails ?? {};
-            const stack = details.stackTrace?.callFrames
-                ?.slice(0, 5)
-                ?.map(frame => `${frame.functionName || "<anon>"} ${frame.url || ""}:${frame.lineNumber}:${frame.columnNumber}`)
-                ?.join(" | ");
-            events.push({
-                type: "exception",
-                text: compact(details.exception?.description || details.exception?.value || details.text),
-                url: details.url ?? "",
-                line: details.lineNumber ?? null,
-                column: details.columnNumber ?? null,
-                stack: compact(stack)
-            });
-        }
-        if (msg.method === "Runtime.consoleAPICalled") {
-            const level = msg.params.type;
-            if (["error", "warning", "assert"].includes(level)) {
-                events.push({ type: `console:${level}`, text: msg.params.args.map(arg => compact(arg.value ?? arg.description)).join(" | ") });
-            }
-        }
-        if (msg.method === "Log.entryAdded") {
-            const entry = msg.params.entry;
-            if (["error", "warning"].includes(entry.level)) {
-                events.push({ type: `log:${entry.level}`, text: compact(entry.text) });
-            }
-        }
-    };
-
-    async function open() {
-        await new Promise((resolve, reject) => {
-            ws.onopen = resolve;
-            ws.onerror = reject;
-        });
-        await send("Runtime.enable");
-        await send("Log.enable");
-        await send("Page.enable");
-    }
-
-    async function evaluate(expression, options = {}) {
-        const timeoutMs = options.timeoutMs ?? 30000;
-        const result = await send("Runtime.evaluate", {
-            expression,
-            awaitPromise: options.awaitPromise ?? false,
-            returnByValue: true,
-            timeout: timeoutMs
-        }, timeoutMs + 3000);
-        if (result.exceptionDetails) {
-            fail(result.exceptionDetails.text || result.exceptionDetails.exception?.description || "Runtime exception");
-        }
-        return result.result.value;
-    }
-
-    return {
-        events,
-        evaluate,
-        open,
-        close() {
-            ws.close();
-        }
-    };
+    return await waitForDevToolsPageTarget(port, {
+        timeoutMs,
+        acceptPrompts: ACCEPT_PROMPTS ? acceptPrompts : null
+    });
 }
 
 async function waitForReadyPlugins(cdp) {
@@ -1353,170 +862,6 @@ async function runLivePass(port) {
     }
 }
 
-function validateReport(report) {
-    const errors = [];
-    const { summary, results, workflow, workflowPages = [], cycle, cyclePages = [], pluginRuntimeProbes, events } = report;
-    if (!summary) {
-        errors.push("plugin summary non disponibile");
-        return errors;
-    }
-    if (summary.enabledPluginCount !== summary.expectedPluginCount || summary.loadedPluginCount !== summary.expectedPluginCount || summary.missingLoaded.length) {
-        errors.push(`plugin release non caricati: ${JSON.stringify(summary)}`);
-    }
-    for (const [name, ok] of Object.entries(summary.keyCommands)) {
-        if (!ok) errors.push(`comando/plugin chiave assente nel live pass: ${name}`);
-    }
-    for (const result of results) {
-        errors.push(...validatePageResult(result, "first-run"));
-    }
-    if (RUN_WORKFLOW_SMOKE) errors.push(...validateWorkflowResult(workflow, "workflow"));
-    for (const result of workflowPages) {
-        errors.push(...validatePageResult(result, "post-workflow"));
-    }
-    if (RUN_CYCLE_SMOKE) errors.push(...validateCycleResult(cycle, "cycle"));
-    for (const result of cyclePages) {
-        errors.push(...validatePageResult(result, "post-cycle"));
-    }
-    if (RUN_PLUGIN_RUNTIME_PROBES) errors.push(...validatePluginRuntimeProbes(pluginRuntimeProbes));
-    if (events.length) errors.push(`eventi console globali nel live pass: ${JSON.stringify(events)}`);
-    return errors;
-}
-
-function validatePluginRuntimeProbes(report) {
-    if (!report) return ["plugin runtime probes non eseguiti"];
-    if (report.probeCount !== PLUGIN_RUNTIME_PROBES.length) {
-        return [`plugin runtime probes incompleti (${report.probeCount}/${PLUGIN_RUNTIME_PROBES.length})`];
-    }
-    return (report.errors ?? []).map(error => `plugin runtime: ${error}`);
-}
-
-function validatePageResult(result, label) {
-    const errors = [];
-    if (!result.exists) errors.push(`pagina ${label} mancante nel live pass: ${result.page}`);
-    if (result.activeFile !== result.page) errors.push(`pagina ${label} non aperta nel live pass: ${result.page} -> ${result.activeFile}`);
-    if (result.previewModeError) errors.push(`pagina ${label} non forzata in lettura preview ${result.page}: ${result.previewModeError}`);
-    if (result.restrictedMode) errors.push(`restricted mode visibile nel live pass ${label}: ${result.page}`);
-    if (result.dataviewError) errors.push(`errore Dataview visibile nel live pass ${label}: ${result.page}`);
-    if (result.templaterLeak) errors.push(`codice Templater visibile nel live pass ${label}: ${result.page}`);
-    if (!result.ux?.visibleTextLength) errors.push(`pagina ${label} senza testo visibile nel live pass: ${result.page}`);
-    if (result.ux?.forbiddenTextHits?.length) {
-        errors.push(`pagina ${label} espone testo tecnico vietato ${result.page}: ${result.ux.forbiddenTextHits.join(", ")}`);
-    }
-    if (result.ux?.forbiddenRegexHits?.length) {
-        errors.push(`pagina ${label} espone pattern tecnico vietato ${result.page}: ${result.ux.forbiddenRegexHits.join(", ")}`);
-    }
-    if (result.ux?.forbiddenSelectorHits?.length) {
-        errors.push(`pagina ${label} espone elementi UI vietati ${result.page}: ${JSON.stringify(result.ux.forbiddenSelectorHits)}`);
-    }
-    if (result.ux?.missingAllText?.length) {
-        errors.push(`pagina ${label} senza testo UX obbligatorio ${result.page}: ${result.ux.missingAllText.join(", ")}`);
-    }
-    if (result.ux?.missingAnyText?.length) {
-        errors.push(`pagina ${label} senza nessuna CTA attesa ${result.page}: ${result.ux.missingAnyText.join(" | ")}`);
-    }
-    if (result.problemNotices.length) errors.push(`notice problematica nel live pass ${label} ${result.page}: ${result.problemNotices.join(" | ")}`);
-    if (result.newEvents.length) errors.push(`eventi console nel live pass ${label} ${result.page}: ${JSON.stringify(result.newEvents)}`);
-    return errors;
-}
-
-function validateWorkflowState(state, label) {
-    const errors = [];
-    if (!state) return [`workflow ${label} non eseguito`];
-    if (state.missingFiles?.length) errors.push(`workflow ${label}: file attesi mancanti (${state.missingFiles.join(", ")})`);
-    if (!state.worldExists) errors.push(`workflow ${label}: mondo non creato`);
-    if (state.missingWorldText?.length) errors.push(`workflow ${label}: contenuto mondo incompleto (${state.missingWorldText.join(", ")})`);
-    if (state.metadataCategoria !== "mondo") errors.push(`workflow ${label}: metadata categoria non indicizzata come mondo (${state.metadataCategoria})`);
-    if (!state.dataviewIndexed) errors.push(`workflow ${label}: Dataview non vede il mondo creato`);
-    return errors;
-}
-
-function validateWorkflowResult(workflow, label) {
-    const errors = [];
-    if (!workflow) return [`workflow ${label} non eseguito`];
-    if (!workflow.bodyHasButtonLabel) errors.push(`workflow ${label}: pulsante Nuovo Mondo non visibile nella pagina setup`);
-    if (!workflow.buttonFound) errors.push(`workflow ${label}: template button Meta Bind mancante (${WORKFLOW_SMOKE.button_id})`);
-    if (workflow.buttonActionType !== "templaterCreateNote") errors.push(`workflow ${label}: azione Meta Bind inattesa (${workflow.buttonActionType})`);
-    if (workflow.buttonTemplateFile !== WORKFLOW_SMOKE.template_file) errors.push(`workflow ${label}: template Meta Bind inatteso (${workflow.buttonTemplateFile})`);
-    if (!workflow.templateExists) errors.push(`workflow ${label}: template materializzato mancante (${WORKFLOW_SMOKE.template_file})`);
-    if (!workflow.helperExists) errors.push(`workflow ${label}: helper runtime mancante (${WORKFLOW_SMOKE.helper_script})`);
-    if (!workflow.userScriptExists) errors.push(`workflow ${label}: user script Templater mancante (${WORKFLOW_SMOKE.user_script})`);
-    if (workflow.currentPath !== WORKFLOW_SMOKE.expected_world_path) errors.push(`workflow ${label}: mondo creato nel path inatteso (${workflow.currentPath})`);
-    if (!workflow.promptCount || workflow.promptCount < Object.keys(WORKFLOW_SMOKE.prompt_answers ?? {}).length) {
-        errors.push(`workflow ${label}: prompt compilati insufficienti (${workflow.promptCount})`);
-    }
-    errors.push(...validateWorkflowState(workflow.state, label));
-    if (workflow.newEvents?.length) errors.push(`workflow ${label}: eventi console durante creazione (${JSON.stringify(workflow.newEvents)})`);
-    return errors;
-}
-
-function validateCycleState(state, label) {
-    const errors = [];
-    if (!state) return [`ciclo ${label} non eseguito`];
-    if (!state.sessionExists) errors.push(`ciclo ${label}: sessione non creata`);
-    if (state.sessionPath !== CYCLE_SMOKE.expected_session_path) {
-        errors.push(`ciclo ${label}: sessione nel path inatteso (${state.sessionPath})`);
-    }
-    if (state.missingSessionText?.length) {
-        errors.push(`ciclo ${label}: contenuto sessione incompleto (${state.missingSessionText.join(", ")})`);
-    }
-    if (state.metadataCategoria !== "sessione") {
-        errors.push(`ciclo ${label}: metadata categoria non indicizzata come sessione (${state.metadataCategoria})`);
-    }
-    if (state.missingFrontmatter?.length) {
-        errors.push(`ciclo ${label}: frontmatter inatteso (${JSON.stringify(state.missingFrontmatter)})`);
-    }
-    if (state.missingListValues?.length) {
-        errors.push(`ciclo ${label}: liste frontmatter incomplete (${JSON.stringify(state.missingListValues)})`);
-    }
-    if (!state.dataviewIndexed) errors.push(`ciclo ${label}: Dataview non vede la sessione creata`);
-    return errors;
-}
-
-function validateCycleResult(cycle, label) {
-    const errors = [];
-    if (!cycle) return [`ciclo ${label} non eseguito`];
-    if (!cycle.sessionButtonFound) errors.push(`ciclo ${label}: pulsante Nuova Sessione mancante (${CYCLE_SMOKE.session_button_id})`);
-    if (cycle.sessionButtonActionType !== "templaterCreateNote") errors.push(`ciclo ${label}: azione Nuova Sessione inattesa (${cycle.sessionButtonActionType})`);
-    if (cycle.sessionButtonTemplateFile !== CYCLE_SMOKE.session_template_file) errors.push(`ciclo ${label}: template Nuova Sessione inatteso (${cycle.sessionButtonTemplateFile})`);
-    if (!cycle.postSessionButtonFound) errors.push(`ciclo ${label}: pulsante post-sessione mancante (${CYCLE_SMOKE.post_session_button_id})`);
-    if (cycle.postSessionButtonActionType !== "runTemplaterFile") errors.push(`ciclo ${label}: azione post-sessione inattesa (${cycle.postSessionButtonActionType})`);
-    if (cycle.postSessionButtonTemplateFile !== CYCLE_SMOKE.post_session_template_file) errors.push(`ciclo ${label}: template post-sessione inatteso (${cycle.postSessionButtonTemplateFile})`);
-    if (!cycle.sessionTemplateExists) errors.push(`ciclo ${label}: template sessione materializzato mancante (${CYCLE_SMOKE.session_template_file})`);
-    if (!cycle.postSessionTemplateExists) errors.push(`ciclo ${label}: template post-sessione materializzato mancante (${CYCLE_SMOKE.post_session_template_file})`);
-    if (!cycle.sessionScriptExists) errors.push(`ciclo ${label}: script sessione mancante (${CYCLE_SMOKE.session_user_script})`);
-    if (!cycle.postSessionScriptExists) errors.push(`ciclo ${label}: script post-sessione mancante (${CYCLE_SMOKE.post_session_user_script})`);
-    if (cycle.currentPath !== CYCLE_SMOKE.expected_session_path) errors.push(`ciclo ${label}: sessione creata nel path inatteso (${cycle.currentPath})`);
-    if (!cycle.promptCount || cycle.promptCount < Object.keys(CYCLE_SMOKE.prompt_answers ?? {}).length) {
-        errors.push(`ciclo ${label}: prompt compilati insufficienti (${cycle.promptCount})`);
-    }
-    errors.push(...validateCycleState(cycle.state, label));
-    if (cycle.newEvents?.length) errors.push(`ciclo ${label}: eventi console durante sessione/post-sessione (${JSON.stringify(cycle.newEvents)})`);
-    return errors;
-}
-
-function validatePersistenceReport(report) {
-    const errors = [];
-    if (!report?.summary) return ["persistence live pass non disponibile"];
-    if (report.summary.missingLoaded?.length) errors.push(`persistence: plugin mancanti (${report.summary.missingLoaded.join(", ")})`);
-    errors.push(...validateWorkflowState(report.state, "persistence"));
-    if (RUN_CYCLE_SMOKE) errors.push(...validateCycleState(report.cycleState, "persistence"));
-    for (const result of report.results ?? []) {
-        errors.push(...validatePageResult(result, "persistence"));
-    }
-    if (report.events?.length) errors.push(`persistence: eventi console globali (${JSON.stringify(report.events)})`);
-    return errors;
-}
-
-function markProfileReady() {
-    fs.mkdirSync(PROFILE_ROOT, { recursive: true });
-    fs.writeFileSync(PROFILE_READY_FILE, `${JSON.stringify({
-        profileRoot: PROFILE_ROOT,
-        vault: OUT,
-        updatedAt: new Date().toISOString(),
-        promptPolicy: "persistent-profile-no-reaccept"
-    }, null, 2)}\n`);
-}
-
 async function main() {
     if (process.argv.includes("--help")) {
         usage();
@@ -1543,32 +888,50 @@ async function main() {
         process.exit(2);
     }
     if (typeof WebSocket !== "function" || typeof fetch !== "function") {
-        fail("serve Node recente con fetch/WebSocket globali");
+        throw new Error("serve Node recente con fetch/WebSocket globali");
     }
     if (process.platform !== "darwin") {
-        fail("questo harness usa macOS, Obsidian.app e AppleScript");
+        throw new Error("questo harness usa macOS, Obsidian.app e AppleScript");
     }
     if (!fs.existsSync(OBSIDIAN_APP)) {
-        fail(`Obsidian non trovato: ${OBSIDIAN_APP}`);
+        throw new Error(`Obsidian non trovato: ${OBSIDIAN_APP}`);
     }
 
-    stopProfileObsidian();
+    stopProfileObsidian(PROFILE_ROOT);
     await sleep(1000);
-    prepareProfile();
-    buildRelease();
+    prepareProfile({
+        freshInstall: FRESH_INSTALL,
+        out: OUT,
+        preseedDaemon: PRESEED_DAEMON,
+        profileRoot: PROFILE_ROOT,
+        workRoot: WORK_ROOT
+    });
+    buildRelease({
+        root: ROOT,
+        out: OUT,
+        withDemo: WITH_DEMO
+    });
 
     const port = REQUESTED_PORT || await findFreePort();
-    launchObsidian(port);
+    launchObsidian({
+        obsidianApp: OBSIDIAN_APP,
+        port,
+        profileRoot: PROFILE_ROOT
+    });
 
     try {
         const report = await runLivePass(port);
         let errors = validateReport(report);
         let persistenceReport = null;
         if (!errors.length && RUN_WORKFLOW_SMOKE) {
-            stopProfileObsidian();
+            stopProfileObsidian(PROFILE_ROOT);
             await sleep(1500);
             const persistencePort = await findFreePort(REQUESTED_PORT ? REQUESTED_PORT + 1 : port + 1);
-            launchObsidian(persistencePort);
+            launchObsidian({
+                obsidianApp: OBSIDIAN_APP,
+                port: persistencePort,
+                profileRoot: PROFILE_ROOT
+            });
             persistenceReport = await runPersistencePass(persistencePort);
             errors = [...errors, ...validatePersistenceReport(persistenceReport)];
         }
@@ -1591,11 +954,15 @@ async function main() {
             : ", probe plugin profondi saltati";
         const uxText = `, ${UX_SURFACE_CHECKS.required_visible_text_by_page.length} gate UX visibili verificati`;
         console.log(`Obsidian user-acceptance OK: ${report.summary.expectedPluginCount} plugin caricati, ${report.results.length} pagine first-run verificate${uxText}${probesText}${workflowText}${cycleText}.`);
-        markProfileReady();
+        markProfileReady({
+            out: OUT,
+            profileReadyFile: PROFILE_READY_FILE,
+            profileRoot: PROFILE_ROOT
+        });
         console.log(`Profilo test persistente: ${PROFILE_ROOT}`);
         console.log(`Vault test persistente: ${OUT}`);
     } finally {
-        if (!KEEP_OPEN) stopProfileObsidian();
+        if (!KEEP_OPEN) stopProfileObsidian(PROFILE_ROOT);
     }
 }
 
