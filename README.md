@@ -182,5 +182,5 @@ npm run release:demo
 ## Licenza
 
 - Il vault e i suoi contenuti sono rilasciati con licenza **CC BY-NC-SA 4.0**. Vedi [[LICENSE]].
-- Gli script originali in `z.automazioni` sono rilasciati con licenza **MIT**. Vedi [[z.automazioni/LICENSE]].
+- Gli script originali in `z.automazioni` sono rilasciati con licenza **MIT**. Vedi [[LICENSE]].
 - Il materiale in `SRD` mantiene la propria licenza **CC-BY-4.0** e non e coperto dalla licenza del vault.

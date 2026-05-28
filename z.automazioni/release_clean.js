@@ -223,7 +223,7 @@ function shouldSkip(relPath, entry) {
         if (EXCLUDED_AUTOMAZIONI_PREFIXES.some(prefix => first.startsWith(prefix))) return true;
     }
 
-    if (relPath === "z.modelli/README.md" || relPath === "z.bacheche/README.md" || relPath === "z.engine/README.md") return true;
+    if (relPath === "z.modelli/README.md" || relPath === "z.bacheche/README.md") return true;
 
     return false;
 }

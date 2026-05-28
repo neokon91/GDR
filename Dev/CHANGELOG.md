@@ -95,6 +95,7 @@
 
 ### Rimosso
 
+- Documentazione runtime duplicata `z.automazioni/README.md`, `z.automazioni/LICENSE.md` e `z.engine/README.md`: contratti e licenze restano centralizzati in `README.md`, `LICENSE.md` e `Dev/`.
 - Guide residue non piu usate come sorgente o percorso release: `Risorse/Profili Plugin.md`, `Risorse/Consegna Nuovo DM.md`, `Risorse/Guida Lore Professionale.md`, `Risorse/Checklist Lore Professionale.md`, `Risorse/Profili Campagna.md`, `Risorse/Worldbuilding Tassonomico.md`, `Risorse/Strumenti Attivi.md`, `Risorse/Generare Campagna Da Ambientazione.md`, `Risorse/Workspaces e Segnalibri.md`.
 - `Dev/Plugin Layer Interno.md`: contenuto assorbito da `Dev/Sviluppo Vault.md`.
 

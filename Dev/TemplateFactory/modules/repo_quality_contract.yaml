@@ -123,7 +123,6 @@ required_surfaces:
     - z.automazioni/world_taxonomy.js
     - z.automazioni/world_entity.js
     - z.automazioni/nuovo_mondo_homebrew.js
-    - z.engine/README.md
     - z.engine/gdr_views.js
     - z.engine/session_continuity.js
     - z.engine/session_dnd.js
