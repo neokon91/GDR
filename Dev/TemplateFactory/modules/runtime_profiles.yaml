@@ -187,6 +187,24 @@ runtime_contracts:
                 label: Sottosuolo, caverna-mondo o regione planare
               - id: fenomeno naturale anomalo
                 label: Fenomeno naturale anomalo
+          - id: regione naturale
+            label: Regione naturale
+            folder: luoghi
+            category: luogo
+            items:
+              - id: regione naturale
+                label: Regione naturale
+          - id: geografia
+            label: Geografia regionale
+            folder: luoghi
+            category: luogo
+            items:
+              - id: continente
+                label: Continente
+              - id: isola
+                label: Isola
+              - id: regione
+                label: Regione
           - id: politico
             label: Geografia politica
             folder: luoghi
@@ -210,6 +228,25 @@ runtime_contracts:
                 label: Confederazione nomade
               - id: marca militare
                 label: Marca militare
+          - id: politica
+            label: Politica e domini
+            folder: luoghi
+            category: luogo
+            items:
+              - id: regno
+                label: Regno
+              - id: impero
+                label: Impero
+              - id: repubblica
+                label: Repubblica
+              - id: oligarchia
+                label: Oligarchia
+              - id: ducato
+                label: Ducato
+              - id: contea
+                label: Contea
+              - id: baronia
+                label: Baronia
           - id: abitato
             label: Abitato o infrastruttura
             folder: luoghi

@@ -189,6 +189,31 @@ def template_router_blueprint_routes(template_blueprints: dict[str, Any]) -> set
     return routes
 
 
+def blueprint_route_options(template_blueprints: dict[str, Any], helper_name: str) -> list[dict[str, str]]:
+    routes: list[dict[str, str]] = []
+    entry_pattern = re.compile(rf"tp\.user\.{re.escape(helper_name)}\s*\(\s*tp\s*,\s*\{{([^}}]*)\}}\s*\)")
+    pair_pattern = re.compile(r"([A-Za-z_][A-Za-z0-9_]*)\s*:\s*['\"]([^'\"]+)['\"]")
+    blueprints = template_blueprints.get("blueprints")
+    if not isinstance(blueprints, dict):
+        return routes
+
+    for spec in blueprints.values():
+        if not isinstance(spec, dict):
+            continue
+        entry = str(spec.get("templater_entry") or "")
+        match = entry_pattern.search(entry)
+        if not match:
+            continue
+        route = {
+            key: value.strip()
+            for key, value in pair_pattern.findall(match.group(1))
+            if value.strip()
+        }
+        if route:
+            routes.append(route)
+    return routes
+
+
 def template_targets(template_blueprints: dict[str, Any]) -> set[str]:
     targets: set[str] = set()
     blueprints = template_blueprints.get("blueprints")
@@ -373,6 +398,28 @@ def validate_condition_map(errors: list[str], source: str, value: Any, key: str)
     return result
 
 
+def condition_satisfied(route: dict[str, str], conditions: dict[str, str], mode: str) -> bool:
+    for key, expected in conditions.items():
+        value = str(route.get(key, ""))
+        target = str(expected)
+        if mode == "contains":
+            if target not in value:
+                return False
+        elif value != target:
+            return False
+    return True
+
+
+def rule_reachable(rule: dict[str, Any], routes: list[dict[str, str]]) -> bool:
+    for route in routes:
+        if "match" in rule and not condition_satisfied(route, rule["match"], "match"):
+            continue
+        if "contains" in rule and not condition_satisfied(route, rule["contains"], "contains"):
+            continue
+        return True
+    return False
+
+
 def validate_world_taxonomy(
     contracts: dict[str, Any],
     template_blueprints: dict[str, Any],
@@ -401,6 +448,7 @@ def validate_world_taxonomy(
 
     categories = entity_model.get("categories") if isinstance(entity_model.get("categories"), dict) else {}
     kinds: dict[str, Any] = {}
+    taxonomy_routes: dict[str, list[dict[str, str]]] = {}
     for kind_id, kind in raw_kinds.items():
         kind_key = str(kind_id or "").strip()
         if not kind_key or any(char.isspace() for char in kind_key):
@@ -463,6 +511,15 @@ def validate_world_taxonomy(
                 "category": category,
                 "items": items,
             })
+            for item_id, _item_label in items:
+                taxonomy_routes.setdefault(kind_key, []).append({
+                    "kind": kind_key,
+                    "family": family_id,
+                    "folder": folder,
+                    "category": family_id,
+                    "subtype": item_id,
+                    "frontmatterCategory": category,
+                })
 
         kinds[kind_key] = {
             "label": label,
@@ -539,6 +596,20 @@ def validate_world_taxonomy(
             "default_template": kind_default,
             "rules": rules,
         }
+
+    direct_luogo_routes = [
+        {"kind": "luogo", **route}
+        for route in blueprint_route_options(template_blueprints, "luogo")
+    ]
+    reachable_routes = {
+        kind_id: [*routes, *(direct_luogo_routes if kind_id == "luogo" else [])]
+        for kind_id, routes in taxonomy_routes.items()
+    }
+    for kind_id, route_spec in by_kind.items():
+        routes = reachable_routes.get(kind_id, [])
+        for rule in route_spec.get("rules") or []:
+            if not rule_reachable(rule, routes):
+                fail(errors, f"{source}.template_routes.by_kind.{kind_id}.rules.{rule['id']} non raggiungibile dalla tassonomia YAML o dai blueprint")
 
     return {
         "kinds": kinds,
