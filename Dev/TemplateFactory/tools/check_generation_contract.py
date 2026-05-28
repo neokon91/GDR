@@ -185,10 +185,28 @@ def generated_json_from_pipeline(pipeline: dict[str, Any], errors: list[str]) ->
     return generated_json
 
 
+def source_json_from_pipeline(pipeline: dict[str, Any], errors: list[str]) -> set[str]:
+    source_json: set[str] = set()
+    steps = pipeline.get("steps") if isinstance(pipeline.get("steps"), dict) else {}
+
+    for step_id, step in steps.items():
+        if not isinstance(step, dict):
+            fail(errors, f"{PIPELINE.relative_to(ROOT)}: step non valido {step_id}")
+            continue
+        for source in step.get("sources") or []:
+            rel_path = str(source).replace("\\", "/")
+            if rel_path.endswith(".json") and not any(char in rel_path for char in "*?[]"):
+                source_json.add(rel_path)
+
+    return source_json
+
+
 def validate_json_source_boundary(pipeline: dict[str, Any], errors: list[str]) -> None:
     generated_json = generated_json_from_pipeline(pipeline, errors)
+    source_json = source_json_from_pipeline(pipeline, errors)
     native_json = {
         "package.json",
+        "package-lock.json",
         "Dev/TemplateFactory/examples/importers/azgaar_sample.geojson",
         "Dev/TemplateFactory/examples/importers/watabou_city_sample.json",
         "Dev/TemplateFactory/examples/importers/watabou_dungeon_sample.json",
@@ -198,7 +216,7 @@ def validate_json_source_boundary(pipeline: dict[str, Any], errors: list[str]) -
         if rel_path in generated_json:
             fail(errors, f"{rel_path}: JSON generato tracciato da Git")
             continue
-        if rel_path in native_json:
+        if rel_path in native_json or rel_path in source_json:
             continue
         if rel_path.endswith("/manifest.json"):
             continue
