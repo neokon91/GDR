@@ -821,6 +821,7 @@ steps:
     purpose: Genera il contratto JSON letto dal core sessione e dal registry percorsi runtime.
     sources:
       - Dev/TemplateFactory/modules/runtime_profiles.yaml
+      - Dev/TemplateFactory/modules/template_router.yaml
       - Dev/TemplateFactory/modules/world_taxonomy.yaml
       - Dev/TemplateFactory/modules/fields_core.yaml
       - Dev/TemplateFactory/modules/entity_model.yaml

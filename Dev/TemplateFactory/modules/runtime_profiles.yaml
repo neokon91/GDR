@@ -113,55 +113,6 @@ runtime_contracts:
         folder: Mondi/Compendium
       calendario_diegetico:
         folder: Mondi/Calendario Diegetico
-  template_router:
-    prompt_routes:
-      - id: fazione
-        prompt: Che tipo di fazione vuoi creare?
-        options:
-          - label: Fazione generica
-            id: fazione
-            template: z.modelli/fazione/Fazione
-            set_route:
-              tipoFazione: ""
-          - label: Gilda
-            id: gilda
-            template: z.modelli/fazione/Gilda
-            set_route:
-              tipoFazione: gilda
-          - label: Confraternita
-            id: confraternita
-            template: z.modelli/fazione/Confraternita
-            set_route:
-              tipoFazione: confraternita
-          - label: Culto politico
-            id: culto politico
-            template: z.modelli/fazione/Fazione
-            set_route:
-              tipoFazione: culto politico
-      - id: personaggio
-        prompt: Che tipo di personaggio vuoi creare?
-        options:
-          - label: PNG
-            id: png
-            template: z.modelli/personaggio/PNG
-          - label: PG
-            id: pg
-            template: z.modelli/personaggio/PG
-          - label: Divinità o entità
-            id: divinita
-            template: z.modelli/personaggio/Divinità
-    delegated_routes:
-      - id: dm
-        handler: dm
-    creative_routes:
-      - luogo
-      - cultura
-      - religione
-      - economia
-      - magia
-      - storia
-      - ecologia
-      - societa
 profiles:
   fazione:
     name_prompt: Nome della fazione

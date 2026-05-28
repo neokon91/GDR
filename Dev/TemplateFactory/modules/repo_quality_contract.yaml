@@ -42,6 +42,7 @@ required_surfaces:
     - Dev/TemplateFactory/modules/validation_contract.yaml
     - Dev/TemplateFactory/modules/live_acceptance.yaml
     - Dev/TemplateFactory/modules/runtime_profiles.yaml
+    - Dev/TemplateFactory/modules/template_router.yaml
     - Dev/TemplateFactory/modules/world_taxonomy.yaml
     - Dev/TemplateFactory/modules/runtime_exports.yaml
     - Dev/TemplateFactory/modules/runtime_render_contract.yaml

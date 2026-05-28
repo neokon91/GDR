@@ -15,6 +15,7 @@ sys.dont_write_bytecode = True
 
 ROOT = Path(__file__).resolve().parents[3]
 RUNTIME_PROFILES = ROOT / "Dev" / "TemplateFactory" / "modules" / "runtime_profiles.yaml"
+TEMPLATE_ROUTER = ROOT / "Dev" / "TemplateFactory" / "modules" / "template_router.yaml"
 WORLD_TAXONOMY = ROOT / "Dev" / "TemplateFactory" / "modules" / "world_taxonomy.yaml"
 FIELDS_CORE = ROOT / "Dev" / "TemplateFactory" / "modules" / "fields_core.yaml"
 ENTITY_MODEL = ROOT / "Dev" / "TemplateFactory" / "modules" / "entity_model.yaml"
@@ -263,12 +264,11 @@ def validate_set_route(errors: list[str], source: str, value: Any, key: str) -> 
 
 
 def validate_template_router(
-    contracts: dict[str, Any],
+    router: dict[str, Any],
     template_blueprints: dict[str, Any],
     errors: list[str],
 ) -> dict[str, Any]:
-    source = f"{RUNTIME_PROFILES.relative_to(ROOT)}: runtime_contracts.template_router"
-    router = contracts.get("template_router")
+    source = str(TEMPLATE_ROUTER.relative_to(ROOT))
     if not isinstance(router, dict) or not router:
         fail(errors, f"{source} deve essere mappa non vuota")
         return {}
@@ -622,6 +622,7 @@ def validate_world_taxonomy(
 
 def validate_contract(
     runtime_profiles: dict[str, Any],
+    template_router_contract: dict[str, Any],
     world_taxonomy: dict[str, Any],
     fields_core: dict[str, Any],
     entity_model: dict[str, Any],
@@ -653,7 +654,7 @@ def validate_contract(
         resource_support_pages,
         errors,
     )
-    template_router = validate_template_router(contracts, template_blueprints, errors)
+    template_router = validate_template_router(template_router_contract, template_blueprints, errors)
     world_taxonomy = validate_world_taxonomy(
         world_taxonomy,
         template_blueprints,
@@ -713,6 +714,7 @@ def main() -> int:
 
     errors: list[str] = []
     runtime_profiles = load_yaml(RUNTIME_PROFILES, errors)
+    template_router = load_yaml(TEMPLATE_ROUTER, errors)
     world_taxonomy = load_yaml(WORLD_TAXONOMY, errors)
     fields_core = load_yaml(FIELDS_CORE, errors)
     entity_model = load_yaml(ENTITY_MODEL, errors)
@@ -722,6 +724,7 @@ def main() -> int:
     template_blueprints = load_yaml(TEMPLATE_BLUEPRINTS, errors)
     contract = validate_contract(
         runtime_profiles,
+        template_router,
         world_taxonomy,
         fields_core,
         entity_model,
