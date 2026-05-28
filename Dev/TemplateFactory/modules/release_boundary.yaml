@@ -33,6 +33,9 @@ required_files:
   - z.automazioni/helper_prompts.js
   - z.automazioni/helper_yaml.js
   - z.automazioni/helper_notes.js
+  - z.automazioni/helper_note_core.js
+  - z.automazioni/helper_note_selection.js
+  - z.automazioni/helper_session_links.js
   - z.automazioni/meta_actions.js
   - z.automazioni/continuity_event_model.js
   - z.automazioni/continuity_state.js
