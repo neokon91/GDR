@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import fnmatch
 import subprocess
 import sys
 from pathlib import Path
@@ -50,6 +51,10 @@ def validate_pipeline(data: dict[str, Any], mode: str, errors: list[str]) -> lis
     commands: list[tuple[str, list[str]]] = []
     steps = data.get("steps") if isinstance(data.get("steps"), dict) else {}
     no_repo_output_roots = set(data.get("policy", {}).get("no_repo_output_roots", []) or [])
+    outputs_available_after_previous_steps: set[str] = set()
+
+    def source_generated_by_previous_step(source: str) -> bool:
+        return any(fnmatch.fnmatch(source, pattern) for pattern in outputs_available_after_previous_steps)
 
     for step_id, step in steps.items():
         if not isinstance(step, dict):
@@ -60,8 +65,11 @@ def validate_pipeline(data: dict[str, Any], mode: str, errors: list[str]) -> lis
                 fail(errors, f"{PIPELINE.relative_to(ROOT)}: {step_id} senza {key}")
         release_only = step.get("release_only") is True
         for source in step.get("sources") or []:
-            source_path = ROOT / str(source)
-            if not any(char in str(source) for char in "*?[]") and not source_path.exists():
+            source_text = str(source)
+            source_path = ROOT / source_text
+            source_is_glob = any(char in source_text for char in "*?[]")
+            generated_during_render = mode == "render" and source_generated_by_previous_step(source_text)
+            if not source_is_glob and not source_path.exists() and not generated_during_render:
                 fail(errors, f"{PIPELINE.relative_to(ROOT)}: {step_id} source mancante {source}")
         for output in step.get("outputs") or []:
             first = str(output).split("/", 1)[0]
@@ -72,6 +80,8 @@ def validate_pipeline(data: dict[str, Any], mode: str, errors: list[str]) -> lis
             fail(errors, f"{PIPELINE.relative_to(ROOT)}: {step_id} release_only deve validare in memoria durante sync:sources")
         if command:
             commands.append((str(step_id), command))
+        for output in step.get("outputs") or []:
+            outputs_available_after_previous_steps.add(str(output))
     return commands
 
 

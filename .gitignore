@@ -18,14 +18,22 @@ __pycache__/
 # Generated release packages
 dist/
 
+# User/runtime vault folders
+Campagne/
+Giocatori/
+Inbox/
+Import/
+Mondi/
+docs/
+
 # Generated vault reference modules
 SRD/
 z.bases/
 z.fileclass/
+z.bacheche/
 
 # Generated Obsidian templates
-z.modelli/**/*.md
-z.modelli/.templatefactory-manifest.json
+z.modelli/
 
 # Output generati dalla source pipeline: restano locali, non sorgente tracciato.
 Dev/plugin_matrix.json
@@ -33,16 +41,13 @@ Dev/plugin_matrix.json
 .obsidian/**/*.json
 !.obsidian/plugins/*/manifest.json
 !.obsidian/themes/*/manifest.json
-z.automazioni/data/runtime/*.json
-z.automazioni/data/srd/*.json
-z.automazioni/data/workflows/*.json
-z.automazioni/templater/*.js
-z.bacheche/*.md
+z.automazioni/data/
+z.automazioni/templater/
 Risorse/Risorse.md
-Risorse/Audio/Audio.md
-Risorse/Video/Video.md
-Risorse/Immagini/Immagini.md
-Risorse/Dispense/Dispense.md
+Risorse/Audio/
+Risorse/Video/
+Risorse/Immagini/
+Risorse/Dispense/
 
 # Local TemplateFactory previews and review reports
 Dev/TemplateFactory/examples/generated/
