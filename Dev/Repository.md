@@ -48,12 +48,12 @@ Questa nota e tecnica. Serve solo a chi cura il vault, non al DM che lo usa per 
 ## Cosa Non Spostare Alla Leggera
 
 - `z.modelli`: Templater e Meta Bind usano percorsi espliciti come `templateFile`.
-- `z.automazioni/templater`: wrapper funzione caricati da Templater con `tp.user.nome_script`; la logica reale resta in `z.automazioni`.
+- `z.automazioni/templater`: wrapper funzione caricati da Templater con `tp.user.nome_script`; la logica runtime resta in `z.automazioni`, il tooling repo resta in `Dev/TemplateFactory/tools`.
 - `z.engine`: le dashboard possono importare componenti JS da qui; non duplicare logica lunga nei blocchi DataviewJS.
 - `.obsidian/plugins/obsidian-meta-bind-plugin/data.json`: contiene input template e button template operativi, ma e generato da YAML.
 - `.obsidian/plugins/metadata-menu/data.json` e `z.fileclass/`: insieme definiscono lo schema operativo; i target generati non vanno tracciati.
 - `.obsidian/plugins`: il vault include plugin e configurazioni necessarie.
-- `SRD`: puo essere rigenerato da `z.automazioni/import_srd.js`, ma resta fuori dall'indice Git.
+- `SRD`: puo essere rigenerato da `Dev/TemplateFactory/tools/import_srd.js`, ma resta fuori dall'indice Git.
 - `Inizia Qui.md` resta l'unica dashboard root in release, ma nel repository e generata da YAML/Jinja.
 
 ## Comandi
@@ -70,12 +70,12 @@ npm run release:clean
 Se `npm` non e disponibile, usa direttamente:
 
 ```bash
-node z.automazioni/check_vault.js
-python3 z.automazioni/run_source_pipeline.py --mode render
-node z.automazioni/repo_hygiene.js
-node z.automazioni/repo_hygiene.js --fix
-node z.automazioni/import_srd.js
-node z.automazioni/release_clean.js
+node Dev/TemplateFactory/tools/check_vault.js
+python3 Dev/TemplateFactory/tools/run_source_pipeline.py --mode render
+node Dev/TemplateFactory/tools/repo_hygiene.js
+node Dev/TemplateFactory/tools/repo_hygiene.js --fix
+node Dev/TemplateFactory/tools/import_srd.js
+node Dev/TemplateFactory/tools/release_clean.js
 ```
 
 ## Regola Di Chiusura

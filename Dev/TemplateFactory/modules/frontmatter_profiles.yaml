@@ -324,8 +324,6 @@ field_catalog:
     - mappa
     - layer_mappa
     - tipo_mappa
-migration_backlog:
-  - z.automazioni/generate_demo_world.js
 profiles:
   fazione:
     integrations:

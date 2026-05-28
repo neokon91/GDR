@@ -165,7 +165,7 @@ npm run release:clean
 npm run release:demo
 ```
 
-`npm run check` valida plugin obbligatori, link, template Meta Bind, helper Templater, file del layer interno, input template, pulsanti, preset Metadata Menu, igiene del repository e sintassi degli script in `z.automazioni` e `z.engine`. `npm run sync:sources` materializza gli output ignorati necessari al vault locale. `npm run release:clean` rigenera i template runtime da TemplateFactory prima di creare la copia consegnabile. `npm run release:demo` crea la stessa release includendo la demo generata nello ZIP. `npm run clean:repo` rimuove solo artefatti locali e temporanei ignorati.
+`npm run check` valida plugin obbligatori, link, template Meta Bind, helper Templater, file del layer interno, input template, pulsanti, preset Metadata Menu, igiene del repository e sintassi di tooling, runtime `z.automazioni` e `z.engine`. `npm run sync:sources` materializza gli output ignorati necessari al vault locale. `npm run release:clean` rigenera i template runtime da TemplateFactory prima di creare la copia consegnabile. `npm run release:demo` crea la stessa release includendo la demo generata nello ZIP. `npm run clean:repo` rimuove solo artefatti locali e temporanei ignorati.
 
 
 
@@ -177,10 +177,10 @@ npm run release:demo
 
 ## SRD
 
-`SRD` contiene il System Reference Document 5.2.1 in italiano come archivio regolamentare separato dal contenuto del mondo. Non e sorgente tracciato: viene rigenerato nella release pulita da `z.automazioni/import_srd.js`. La procedura tecnica sta in [[Dev/Sviluppo Vault]].
+`SRD` contiene il System Reference Document 5.2.1 in italiano come archivio regolamentare separato dal contenuto del mondo. Non e sorgente tracciato: viene rigenerato nella release pulita da `Dev/TemplateFactory/tools/import_srd.js`. La procedura tecnica sta in [[Dev/Sviluppo Vault]].
 
 ## Licenza
 
 - Il vault e i suoi contenuti sono rilasciati con licenza **CC BY-NC-SA 4.0**. Vedi [[LICENSE]].
-- Gli script originali in `z.automazioni` sono rilasciati con licenza **MIT**. Vedi [[LICENSE]].
+- Gli script runtime in `z.automazioni` e il tooling in `Dev/TemplateFactory/tools` sono rilasciati con licenza **MIT**. Vedi [[LICENSE]].
 - Il materiale in `SRD` mantiene la propria licenza **CC-BY-4.0** e non e coperto dalla licenza del vault.

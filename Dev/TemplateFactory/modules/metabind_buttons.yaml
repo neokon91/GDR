@@ -1270,6 +1270,24 @@ buttons:
       templateFile: z.modelli/azioni/Prepara Recap Pubblico.md
     id: prepara-recap-pubblico
     fallback: 'Azione manuale: scrivere recap pubblico senza segreti o prossime mosse DM'
+  chiudi_sessione_viva:
+    label: Chiudi Sessione Viva
+    required_for_release: true
+    style: primary
+    actions:
+    - type: runTemplaterFile
+      templateFile: z.modelli/azioni/Chiudi Sessione Viva.md
+    id: chiudi-sessione-viva
+    fallback: 'Azione manuale: chiudere sessione, salvare recap, propagare conseguenze e disattivare attiva'
+  apri_prossima_sessione_viva:
+    label: Apri Prossima Sessione Viva
+    required_for_release: true
+    style: primary
+    actions:
+    - type: runTemplaterFile
+      templateFile: z.modelli/azioni/Apri Prossima Sessione Viva.md
+    id: apri-prossima-sessione-viva
+    fallback: 'Azione manuale: creare una nuova sessione da output, recap e conseguenze della sessione chiusa'
   wizard_nuova_entita_viva:
     label: Nuova Entita Viva
     required_for_release: true

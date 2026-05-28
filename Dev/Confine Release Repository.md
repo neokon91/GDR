@@ -39,7 +39,7 @@ La release non deve includere strumenti di manutenzione repository, import massi
 | `Dev/CHANGELOG.md`, `Dev/CONTRIBUTING.md`, `Dev/RELEASE.md`, `Dev/Repository.md`, `package.json` | Manutenzione repository, non uso al tavolo. |
 | `Dev/Roadmap`, `Dev/Sviluppo Vault`, `Dev/TemplateFactory/modules/plugin_matrix.yaml`, `Dev/TemplateFactory/modules/plugin_contracts.yaml` | Direzione e audit di sviluppo, non percorso utente finale. |
 | `Dev/Confine Release Repository`, `Dev/Smoke 1.0 Professionale` | Controlli pre-release e confini di manutenzione. |
-| Script CLI di check, import e release in `z.automazioni` | Servono al manutentore, non al DM. |
+| Tooling CLI di check, import e release in `Dev/TemplateFactory/tools` | Serve al manutentore, non al DM. |
 
 ## Regole
 
@@ -47,4 +47,4 @@ La release non deve includere strumenti di manutenzione repository, import massi
 - Nessuna demo entra finche non e stata creata con template e wizard ufficiali.
 - Nessun artefatto `dist/` resta nel repository sorgente.
 - `SRD`, `z.modelli`, `z.bacheche`, `z.bases`, `z.fileclass` e JSON generati non devono dipendere dallo stato locale del manutentore: `npm run release:clean` deve rigenerarli prima di creare la ZIP utente.
-- Ogni modifica al confine release deve aggiornare `z.automazioni/release_clean.js`.
+- Ogni modifica al confine release deve aggiornare `Dev/TemplateFactory/tools/release_clean.js`.

@@ -12,17 +12,17 @@ La demo finale non vive più come note sorgente mantenute a mano.
 
 Regola attiva: la demo finale non vive nel sorgente. Va generata da script dentro `dist/` dopo la creazione della release pulita. Il contratto dichiarativo vive in `Dev/TemplateFactory/modules/demo_contract.yaml` ed e verificato da `npm run check:demo-contract`.
 
-La fixture M11 generata da `npm run generate:demo-fixture` resta prova tecnica: scelta -> conseguenza -> propagazione -> materiale D&D collegato al mondo. La demo utente "Regno di Prova" si genera con `npm run generate:demo-world` dentro `dist/vault-gdr-clean`, non si mantiene in `Mondi/`.
+La fixture di continuita generata da `npm run generate:demo-fixture` resta prova tecnica: scelta -> conseguenza -> propagazione -> materiale D&D collegato al mondo. La demo utente "Regno di Prova" si genera con `npm run generate:demo-world` dentro `dist/vault-gdr-clean`, non si mantiene in `Mondi/`.
 
 ## Stato
 
 - [x] Demo sorgente rimossa dal vault.
 - [x] Gate statico convertito su onboarding, vista giocatori, live e post-sessione.
 - [x] Le note demo manuali storiche sono vietate dal controllo vault.
-- [x] Script di fixture M11 tecnica disponibile: `z.automazioni/generate_demo_fixture.js`.
-- [x] Gate M11 tecnico disponibile: `npm run check:m11`.
+- [x] Script di fixture continuita tecnica disponibile: `Dev/TemplateFactory/tools/generate_demo_fixture.js`.
+- [x] Gate continuita tecnico disponibile: `npm run check:continuity`.
 - [x] Contratto demo dichiarativo disponibile: `demo_contract.yaml`, con generatori `generate:demo-fixture` e `generate:demo-world`.
-- [x] Script demo utente disponibile: `z.automazioni/generate_demo_world.js`.
+- [x] Script demo utente disponibile: `Dev/TemplateFactory/tools/generate_demo_world.js`.
 - [x] `npm run check:demo-contract` verifica che la demo generata copra scenario minimo, campi di flusso e materiale player-safe.
 - [ ] Generare scenario demo nella release pulita prima dello smoke visuale finale.
 - [ ] Eseguire smoke visuale sulla release generata come ultimo passaggio pre-release.
@@ -48,7 +48,7 @@ La demo finale deve essere generata da script e poi verificata, non corretta not
 
 Il check `npm run check:demo-contract` genera la demo in una cartella temporanea e fallisce se manca una categoria minima, un campo di flusso o una sessione attiva.
 
-## Regola Per M11 Prima Della Demo
+## Regola Continuita Prima Della Demo
 
 Prima della demo finale e ammessa solo una fixture tecnica generata in `dist/` e ignorata da Git.
 
@@ -69,5 +69,5 @@ Non va trasformata in contenuto sorgente del vault.
 - `Vista Giocatori`;
 - `Durante il Gioco`;
 - `Post Sessione Guidato`;
-- catena M11 di continuità;
+- catena di continuita live;
 - pulsante `registra-scelta-mondo`.

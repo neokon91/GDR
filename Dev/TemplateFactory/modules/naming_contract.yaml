@@ -1,0 +1,45 @@
+id: naming_contract
+purpose: Contratto per mantenere nomi di dominio stabili e impedire il ritorno di alias di milestone nel codice attivo.
+version: 0.1.0
+policy:
+  scan_roots:
+    - package.json
+    - .github/workflows
+    - Dev
+    - Hub
+    - Risorse
+    - z.automazioni
+    - z.engine
+  text_extensions:
+    - .js
+    - .json
+    - .md
+    - .py
+    - .yaml
+    - .yml
+  allowed_historical_paths:
+    - Dev/CHANGELOG.md
+    - Dev/Roadmap/1.1 Kernel Architetturale.md
+    - Dev/TemplateFactory/modules/naming_contract.yaml
+  forbidden_active_terms:
+    - term: m11
+      match: word
+      case_insensitive: true
+      rationale: M11 era un nome di milestone; il dominio runtime canonico e continuita.
+      replacement: continuity
+    - term: check_m11
+      match: substring
+      case_insensitive: true
+      rationale: I check devono esporre nomi di dominio, non milestone.
+      replacement: check_continuity
+    - term: renderM11
+      match: substring
+      case_insensitive: false
+      rationale: Gli export Dataview devono usare nomi di dominio.
+      replacement: renderContinuity
+release_cleanup:
+  obsolete_roadmap_titles:
+    - M9 - Riduzione Attrito
+    - M10 - Consolidamento
+    - M11 - Pipeline
+    - Correggere blocker Templater runtime

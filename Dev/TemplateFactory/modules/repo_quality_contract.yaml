@@ -36,10 +36,16 @@ required_surfaces:
     - Dev/TemplateFactory/modules/metabind_buttons.yaml
     - Dev/TemplateFactory/modules/metabind_config.yaml
     - Dev/TemplateFactory/modules/bases_views.yaml
+    - Dev/TemplateFactory/modules/obsidian_plugin_bundle_contract.yaml
+    - Dev/TemplateFactory/modules/naming_contract.yaml
     - Dev/TemplateFactory/modules/frontmatter_profiles.yaml
     - Dev/TemplateFactory/modules/validation_contract.yaml
     - Dev/TemplateFactory/modules/live_acceptance.yaml
     - Dev/TemplateFactory/modules/runtime_profiles.yaml
+    - Dev/TemplateFactory/modules/runtime_exports.yaml
+    - Dev/TemplateFactory/modules/runtime_render_contract.yaml
+    - Dev/TemplateFactory/modules/runtime_dataview_contract.yaml
+    - Dev/TemplateFactory/modules/runtime_plugin_profile.yaml
     - Dev/TemplateFactory/modules/entity_depth.yaml
     - Dev/TemplateFactory/modules/worldbuilding_depth_axes.yaml
     - Dev/TemplateFactory/modules/demo_contract.yaml
@@ -55,7 +61,8 @@ required_surfaces:
     - Dev/TemplateFactory/modules/user_path.yaml
     - Dev/TemplateFactory/modules/source_pipeline.yaml
     - Dev/TemplateFactory/modules/repo_quality_contract.yaml
-    - z.automazioni/import_srd_character_data.js
+    - Dev/TemplateFactory/assets/resource_support/schema_relazioni_gdr.excalidraw.body.md
+    - Dev/TemplateFactory/tools/import_srd_character_data.js
     - z.automazioni/data/srd/core.json
     - z.automazioni/data/srd/opzioni_personaggio.json
     - Hub/1. DM Dashboard.md
@@ -97,24 +104,32 @@ required_surfaces:
   layer_files:
     - z.automazioni/helpers.js
     - z.automazioni/templater/sessione.js
-    - z.automazioni/import_map.js
-    - z.automazioni/m11_state.js
-    - z.automazioni/generate_demo_fixture.js
-    - z.automazioni/check_m11_fixture.js
-    - z.automazioni/check_plugin_usage_audit.js
-    - z.automazioni/check_runtime_load.js
-    - z.automazioni/check_smoke.js
-    - z.automazioni/check_validation_contract.js
-    - z.automazioni/check_user_path.js
-    - z.automazioni/check_repo_quality_contract.js
-    - z.automazioni/check_release_artifact.js
-    - z.automazioni/check_release.js
-    - z.automazioni/audit_template_migration.py
-    - z.automazioni/check_template_factory.py
-    - z.automazioni/render_template_factory.py
-    - z.automazioni/template_factory_utils.py
-    - z.automazioni/release_boundary_utils.js
-    - z.automazioni/release_plugin_profile.js
+    - Dev/TemplateFactory/tools/import_map.js
+    - z.automazioni/continuity_event_model.js
+    - z.automazioni/continuity_state.js
+    - Dev/TemplateFactory/tools/generate_demo_fixture.js
+    - Dev/TemplateFactory/tools/check_continuity_event_model.js
+    - Dev/TemplateFactory/tools/check_continuity_fixture.js
+    - Dev/TemplateFactory/tools/check_meta_actions_behavior.js
+    - Dev/TemplateFactory/tools/check_plugin_usage_audit.js
+    - Dev/TemplateFactory/tools/check_obsidian_plugin_bundles.js
+    - Dev/TemplateFactory/tools/check_naming_contract.js
+    - Dev/TemplateFactory/tools/render_runtime_plugin_profile.js
+    - Dev/TemplateFactory/tools/check_runtime_load.js
+    - Dev/TemplateFactory/tools/fixtures/runtime_demo_pages.json
+    - Dev/TemplateFactory/tools/check_smoke.js
+    - Dev/TemplateFactory/tools/check_validation_contract.js
+    - Dev/TemplateFactory/tools/check_user_path.js
+    - Dev/TemplateFactory/tools/check_repo_quality_contract.js
+    - Dev/TemplateFactory/tools/check_release_artifact.js
+    - Dev/TemplateFactory/tools/check_release_boundary_behavior.js
+    - Dev/TemplateFactory/tools/check_release.js
+    - Dev/TemplateFactory/tools/audit_template_migration.py
+    - Dev/TemplateFactory/tools/check_template_factory.py
+    - Dev/TemplateFactory/tools/render_template_factory.py
+    - Dev/TemplateFactory/tools/template_factory_utils.py
+    - Dev/TemplateFactory/tools/release_boundary_utils.js
+    - Dev/TemplateFactory/tools/release_plugin_profile.js
     - z.automazioni/session_context.js
     - z.automazioni/meta_actions.js
     - z.automazioni/template_router.js

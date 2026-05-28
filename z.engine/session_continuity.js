@@ -1,4 +1,4 @@
-// Runtime DataviewJS per continuita, propagazione e catena M11.
+// Runtime DataviewJS per continuita, propagazione e catena live.
 context => {
   const {
     activeSession,
@@ -348,7 +348,7 @@ context => {
     });
   }
 
-  function renderM11ContinuityChain(dv, source = null) {
+  function renderContinuityChain(dv, source = null) {
     const session = source ?? activeSession(dv) ?? dv.current();
     const targetLinks = [
       ...asArray(session?.missioni),
@@ -386,7 +386,7 @@ context => {
 
     if (!pages.length) {
       renderEmptyState(dv, {
-        title: "Catena M11 non collegata",
+        title: "Catena continuita non collegata",
         action: "Collega missione, tracciato, fazione e luogo alla sessione o alla conseguenza.",
         button: "BUTTON[registra-scelta-mondo]"
       });
@@ -406,11 +406,11 @@ context => {
           ? `Gap: ${issues.join(", ")}`
           : fieldText(p.aggiornamenti_richiesti ?? p.conseguenze ?? p.entita_impattate ?? p.propaga_a ?? p.connessioni),
         link: p.file.path,
-        badge: "M11",
+        badge: "Continuita",
         cls: cardClass(p, "gdr-info-card compact", issues.length ? "gdr-kind-missing" : "gdr-kind-ready")
       });
     }, {
-      title: "Nessun bersaglio M11",
+      title: "Nessun bersaglio di continuita",
       action: "Registra una scelta mondo e scegli bersagli reali.",
       button: "BUTTON[registra-scelta-mondo]"
     });
@@ -425,8 +425,8 @@ context => {
     renderConsequenceCards,
     renderContinuityGaps,
     renderContinuityQueue,
+    renderContinuityChain,
     renderImpactedNextMoveCards,
-    renderM11ContinuityChain,
     renderPropagationTargets,
     renderWorldImpact
   };

@@ -1350,6 +1350,34 @@ blueprints:
     comparison_targets:
     - z.modelli/azioni/Prepara Recap Pubblico.md
     profile: action
+  azione_chiudi_sessione_viva:
+    target_family:
+    - azione
+    templater_entry: <% await tp.user.meta_actions(tp, "chiudi_sessione_viva") %>
+    template_title: Chiudi Sessione Viva
+    world_impact: true
+    output:
+      folder: z.modelli/azioni
+      files:
+      - Chiudi Sessione Viva.md
+      fallback: markdown_sections
+    comparison_targets:
+    - z.modelli/azioni/Chiudi Sessione Viva.md
+    profile: action
+  azione_apri_prossima_sessione_viva:
+    target_family:
+    - azione
+    templater_entry: <% await tp.user.meta_actions(tp, "apri_prossima_sessione_viva") %>
+    template_title: Apri Prossima Sessione Viva
+    world_impact: true
+    output:
+      folder: z.modelli/azioni
+      files:
+      - Apri Prossima Sessione Viva.md
+      fallback: markdown_sections
+    comparison_targets:
+    - z.modelli/azioni/Apri Prossima Sessione Viva.md
+    profile: action
   azione_propaga_entita:
     target_family:
     - azione
@@ -1565,7 +1593,7 @@ outputs:
   markdown_templates: z.modelli
   fileclasses: z.fileclass
   bases: z.bases
-  checks: z.automazioni/check_vault.js
+  checks: Dev/TemplateFactory/tools/check_vault.js
 jinja_contract:
   role: generatore_statico
   allowed:
@@ -1576,4 +1604,4 @@ jinja_contract:
   forbidden:
   - richiedere Jinja nel vault utente
   - inserire logica Jinja da eseguire in Obsidian
-  - duplicare responsabilita degli script in z.automazioni
+  - duplicare responsabilita degli script runtime in z.automazioni

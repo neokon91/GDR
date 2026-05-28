@@ -569,6 +569,9 @@ workflows:
     entry_points:
       - Risorse/Preparazione Sessione.md
     quick_actions:
+      - button: apri-prossima-sessione-viva
+        label: Apri prossima sessione viva
+        use_when: hai una sessione chiusa e vuoi preparare la prossima con output, recap e conseguenze ereditate
       - button: nuova-sessione-z-modelli-dm-sessione-md
         label: Nuova sessione
         use_when: non esiste ancora una nota sessione per il prossimo tavolo
@@ -689,9 +692,12 @@ workflows:
       - button: avanza-clock
         label: Avanza clock
         use_when: il tempo passa o una pressione peggiora
+      - button: chiudi-sessione-viva
+        label: Chiudi sessione viva
+        use_when: il tavolo finisce e vuoi salvare recap, conseguenze e stato mondo in un solo passaggio
       - button: post-sessione-guidato-risorse-post-sessione-guidato
-        label: Chiudi sessione
-        use_when: il tavolo finisce
+        label: Post sessione guidato
+        use_when: devi fare revisione manuale o controllare code rimaste aperte
     action_groups:
       cattura_live:
         label: Cattura live
@@ -776,6 +782,12 @@ workflows:
     entry_points:
       - Risorse/Post Sessione Guidato.md
     quick_actions:
+      - button: chiudi-sessione-viva
+        label: Chiudi sessione viva
+        use_when: vuoi chiudere sessione, recap e propagazione con un solo comando
+      - button: apri-prossima-sessione-viva
+        label: Apri prossima sessione viva
+        use_when: la sessione e chiusa e vuoi iniziare la preparazione successiva senza reinserire output a mano
       - button: wizard-fine-sessione
         label: Fine sessione guidata
         use_when: devi convertire appunti in output, recap e prossima apertura
@@ -811,6 +823,12 @@ workflows:
           - button: prepara-recap-pubblico
             label: Prepara recap pubblico
             use_when: devi chiudere con materiale player-safe
+          - button: chiudi-sessione-viva
+            label: Chiudi sessione viva
+            use_when: recap, conseguenze e bersagli sono pronti per essere applicati insieme
+          - button: apri-prossima-sessione-viva
+            label: Apri prossima sessione viva
+            use_when: output e conseguenze devono diventare materiale di preparazione
           - button: nuovo-evento-storico-z-modelli-evento-storico-md
             label: Evento storico
             use_when: l'esito della sessione deve entrare nella timeline
@@ -1590,6 +1608,59 @@ continuity_rules:
     propagation:
       target_status: da verificare
       relation_subjects: update_relazioni_when_target_is_relation
+  close_live_session:
+    trigger: BUTTON[chiudi-sessione-viva]
+    action: chiudi_sessione_viva
+    executor: z.automazioni/meta_actions.js
+    conditions:
+      - source_is: sessione attiva o sessione corrente
+      - prompt: recap pubblico player-safe
+      - prompt: recap DM
+      - optional_source_has: entita_impattate or propaga_a
+    effects:
+      - source_field: stato
+        value: giocata
+      - source_field: attiva
+        value: false
+      - source_field: chiusa_il
+      - source_field: recap_pubblico
+      - source_field: recap_dm
+      - source_field: prossima_apertura
+      - source_field: output_sessione
+      - target_field: propagato_da
+      - target_field: aggiornamenti_richiesti
+      - target_field: progress_value
+        when: target.categoria == tracciato
+    propagation:
+      target_status: da verificare
+      player_safety: blocca recap pubblico con termini da DM o segreti
+  open_next_live_session:
+    trigger: BUTTON[apri-prossima-sessione-viva]
+    action: apri_prossima_sessione_viva
+    executor: z.automazioni/meta_actions.js
+    conditions:
+      - source_is: sessione corrente o ultima sessione chiusa
+      - source_has: mondo
+      - source_can_have: output_sessione, recap_pubblico, conseguenze, entita_impattate
+    effects:
+      - creates: sessione
+      - target_field: stato
+        value: preparazione
+      - target_field: attiva
+        value: true
+      - target_field: mondo
+      - target_field: recap_pubblico
+      - target_field: conseguenze
+      - target_field: pressioni
+      - target_field: apertura
+      - target_field: obiettivo
+      - other_sessions_field: attiva
+        value: false
+      - source_field: sezioni_collegate
+      - source_field: output_sessione
+    propagation:
+      target_status: preparazione
+      source_boundary: la nuova sessione eredita output, non modifica lore o bersagli
 dnd55_world_material_rules:
   encounter_to_world:
     trigger: creazione o aggiornamento incontro

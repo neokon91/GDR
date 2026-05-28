@@ -48,6 +48,8 @@ La direzione ammessa e:
 
 I casi attivi includono `workflows.yaml` → `z.automazioni/data/workflows/quick_actions.json`, `srd_character_build.yaml` → `z.automazioni/data/srd/*.json`, `bacheche.yaml` → `z.bacheche/*.md`, `resource_hub.yaml` → `Risorse/Risorse.md`, `resource_indexes.yaml` → indici semplici in `Risorse/*/*.md`, `resource_support_pages.yaml` → guide supporto in `Risorse/*.md` e i cockpit YAML → `z.automazioni/data/runtime/*.json`. Sono output locali ignorati da Git.
 
+`runtime_exports.yaml`, `runtime_render_contract.yaml` e `runtime_dataview_contract.yaml` sono contratti runtime, non generatori Markdown: dichiarano registry moduli, export pubblici `z.engine`, sorgenti Dataview simulate e scenari minimi di render verificati da `check:runtime-load` con fixture esterna. Il JSON `z.automazioni/data/runtime/runtime_exports.json` e generato da `check_runtime_load.js --render-runtime-data` durante `sync:sources`.
+
 Non introdurre generatori opachi: ogni JSON prodotto deve indicare `generated_by`, `source` e `purpose`, e deve essere ricostruibile da un singolo comando npm.
 
 ## Comandi
@@ -76,7 +78,7 @@ npm run audit:templates
 
 `render:resource-hub` genera `Risorse/Risorse.md`, catalogo centrale delle guide e dei materiali utente.
 
-`render:resource-support` genera le guide supporto dichiarate in `resource_support_pages.yaml`, così il sorgente resta YAML/Jinja e le note finali non sono tracciate.
+`render:resource-support` genera le guide supporto dichiarate in `resource_support_pages.yaml`, così il sorgente resta YAML/Jinja e le note finali non sono tracciate. Corpi lunghi o opachi, come dati Excalidraw compressi, devono stare in `Dev/TemplateFactory/assets/...` e essere collegati con `body_file`.
 
 `render:resource-indexes` genera gli indici ripetitivi di risorse come Audio, Video, Immagini e Dispense. Le note di contenuto dentro quelle cartelle restano dell'utente o della release, non sorgente della repo.
 
@@ -84,7 +86,15 @@ npm run audit:templates
 
 `render:obsidian-config` genera i JSON di configurazione Obsidian dichiarati in `modules/obsidian_config.yaml`; i manifest dei plugin restano JSON nativi del plugin.
 
+`check:obsidian-config` valida anche che bookmark e workspace puntino a file esistenti o output dichiarati in `source_pipeline.yaml`.
+
+`check:plugin-bundles` valida la scelta di distribuire plugin e temi Obsidian vendorizzati: solo `manifest.json`, `main.js` e `styles.css` possono essere tracciati nei plugin, mentre `data.json` e stato locale restano generati/ignorati.
+
+`check:naming` blocca il ritorno di nomi di milestone nel codice attivo: gli alias storici restano solo in changelog/roadmap, mentre runtime e check devono usare nomi di dominio.
+
 `render:metabind-config` assembla `.obsidian/plugins/obsidian-meta-bind-plugin/data.json` da tre YAML leggibili: impostazioni base, input e pulsanti.
+
+`render:runtime-plugin-profile` genera il JSON runtime letto da `session_views.js` per troubleshooting plugin, fallback workflow e readiness. I dati derivano da `plugin_matrix.yaml`, `plugin_contracts.yaml`, `workflows.yaml` e dagli override minimi in `runtime_plugin_profile.yaml`.
 
 `release:clean` materializza `SRD`, `z.modelli`, `z.bacheche`, `z.bases` e `z.fileclass` direttamente dentro `dist/vault-gdr-clean`: il repo sorgente non deve tracciare superfici Obsidian generate.
 
@@ -106,7 +116,7 @@ Il resto del file è Markdown statico generato da Jinja: tab, callout, input Met
 
 ## Regola Generator
 
-Gli script in `z.automazioni/` devono restare sottili:
+Gli script runtime in `z.automazioni/` devono restare sottili. Check, renderer, importer CLI, release script e fixture tecniche stanno in `Dev/TemplateFactory/tools/`:
 
 - JS raccoglie input, sceglie file esistenti, calcola valori e collega note.
 - `runtime_profiles.yaml` dichiara prompt, opzioni e default.
@@ -144,7 +154,7 @@ Il blocco `contracts.playability_gate` definisce la soglia minima per non creare
 
 `npm run check:templates` blocca una famiglia se un campo non e catalogato, se il profilo frontmatter non lo espone, se manca un prompt runtime, se tabs/sezioni non esistono, se una superficie plugin richiesta non e dichiarata in `plugin_bindings.yaml` o se la famiglia non supera il gate di giocabilita.
 
-## Regola M11 D&D Nel Mondo
+## Regola Continuita D&D Nel Mondo
 
 Creature, incontri, oggetti e ricompense non sono compendio isolato. Nel contratto TemplateFactory devono restare materiale narrativo collegato a luogo, fazione, missione, sessione e conseguenze.
 

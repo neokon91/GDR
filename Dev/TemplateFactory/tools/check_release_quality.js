@@ -1,0 +1,663 @@
+#!/usr/bin/env node
+
+const fs = require("fs");
+const os = require("os");
+const path = require("path");
+const { execFileSync } = require("child_process");
+const { readJson, readTextRel, repoPath, walk } = require("./node_utils");
+const { materializedUserFiles } = require("./release_boundary_utils");
+const { releasePluginProfile } = require("./release_plugin_profile");
+
+const ROOT = process.cwd();
+const RELEASE_CHECK_ROOT = fs.mkdtempSync(path.join(os.tmpdir(), "vault-gdr-quality-check-"));
+const OUT = path.join(RELEASE_CHECK_ROOT, "vault-gdr-clean");
+const ZIP = `${OUT}.zip`;
+const CONTRACT = "Dev/TemplateFactory/modules/plugin_contracts.yaml";
+const RELEASE_BOUNDARY = "Dev/TemplateFactory/modules/release_boundary.yaml";
+const RELEASE_QUALITY_CONTRACT = "Dev/TemplateFactory/modules/release_quality_contract.yaml";
+const METABIND_INPUTS = "Dev/TemplateFactory/modules/metabind_inputs.yaml";
+const METABIND_BUTTONS = "Dev/TemplateFactory/modules/metabind_buttons.yaml";
+const WORKFLOWS = "Dev/TemplateFactory/modules/workflows.yaml";
+const TEMPLATER_DIR = "z.automazioni/templater";
+const CONTRACT_CHECK = process.argv.includes("--contract-check");
+const IGNORED_DIRS = new Set([".git", "node_modules", "dist"]);
+const BUTTON_REF_PATTERN = /BUTTON\[([^\]\n]+)\]/g;
+const META_BIND_BUTTON_ID_PATTERN = /^[A-Za-z0-9][A-Za-z0-9_-]*$/;
+const FORBIDDEN_DATAVIEWJS_PATTERNS = [
+    [/\bdv\.view\b/, "dv.view"],
+    [/\bapp\.plugins\b/, "app.plugins"],
+    [/\bapp\.workspace\b/, "app.workspace"],
+    [/\bwindow\./, "window"],
+    [/\bdocument\./, "document"],
+    [/\brequire\s*\(/, "require"],
+    [/\bprocess\./, "process"],
+    [/\bapp\.vault\.(?:modify|create|delete|rename|trash)\b/, "scrittura app.vault"],
+    [/\badapter\.write\b/, "adapter.write"]
+];
+const errors = [];
+const generatedTemplatePaths = new Set();
+const virtualUserPaths = new Set();
+
+const ALLOWED_META_BIND_ACTION_TYPES = new Set([
+    "command",
+    "open",
+    "runTemplaterFile",
+    "templaterCreateNote"
+]);
+
+const RELEASE_QUALITY = loadYaml(RELEASE_QUALITY_CONTRACT);
+const REQUIRED_META_BIND_INPUTS = requiredMetaBindInputTemplates();
+const REQUIRED_META_BIND_BUTTONS = requiredMetaBindButtons();
+const FIRST_RUN_PAGES = requiredReleaseQualityArray("first_run_pages");
+const FORBIDDEN_CALENDAR_MARKERS = requiredReleaseQualityArray("forbidden_calendar_markers");
+const FORBIDDEN_FIRST_RUN_MARKERS = requiredReleaseQualityArray("forbidden_first_run_markers");
+
+function fail(message) {
+    errors.push(message);
+}
+
+function contractValue(pathText) {
+    return String(pathText).split(".").reduce((value, key) => value?.[key], RELEASE_QUALITY);
+}
+
+function requiredReleaseQualityArray(pathText) {
+    const values = contractValue(pathText) ?? [];
+    const normalized = Array.isArray(values)
+        ? values.map(value => String(value)).filter(Boolean)
+        : [];
+    if (!normalized.length) {
+        throw new Error(`${RELEASE_QUALITY_CONTRACT}: ${pathText} vuoto o mancante`);
+    }
+    return normalized;
+}
+
+function requiredCatalogReleaseItems(relPath, rootKey, fieldName) {
+    const data = loadYaml(relPath);
+    const entries = Object.values(data[rootKey] ?? {})
+        .filter(item => item?.required_for_release === true)
+        .map(item => String(item?.[fieldName] ?? ""))
+        .filter(Boolean);
+    if (!entries.length) {
+        throw new Error(`${relPath}: nessun ${rootKey} con required_for_release: true`);
+    }
+    return entries;
+}
+
+function requiredMetaBindInputTemplates() {
+    return requiredCatalogReleaseItems(METABIND_INPUTS, "inputs", "name");
+}
+
+function requiredMetaBindButtons() {
+    return requiredCatalogReleaseItems(METABIND_BUTTONS, "buttons", "id");
+}
+
+function duplicates(values) {
+    return [...new Set(values.filter((value, index) => values.indexOf(value) !== index))];
+}
+
+function addGeneratedTemplatePath(templatePath) {
+    const normalized = String(templatePath ?? "").replace(/\\/g, "/").trim();
+    if (!normalized) return;
+    generatedTemplatePaths.add(normalized);
+    generatedTemplatePaths.add(normalized.replace(/\.md$/, ""));
+}
+
+function loadGeneratedTemplatePaths() {
+    try {
+        const stdout = execFileSync("python3", ["-c", [
+            "import json, sys",
+            "from pathlib import Path",
+            "root = Path.cwd()",
+            "sys.path.insert(0, str(root / 'Dev' / 'TemplateFactory' / 'tools'))",
+            "from render_template_factory import materialized_targets",
+            "from template_factory_utils import load_modules, resolved_blueprints, ROOT",
+            "modules = load_modules()",
+            "blueprints = resolved_blueprints(modules)",
+            "paths = []",
+            "for name, blueprint in sorted(blueprints.items()):",
+            "    for target in materialized_targets(name, blueprint):",
+            "        paths.append(str(target.relative_to(ROOT)))",
+            "print(json.dumps(paths, ensure_ascii=False))"
+        ].join("\n")], {
+            cwd: ROOT,
+            encoding: "utf8",
+            env: { ...process.env, PYTHONDONTWRITEBYTECODE: "1" },
+            maxBuffer: 1024 * 1024
+        });
+        for (const templatePath of JSON.parse(stdout)) addGeneratedTemplatePath(templatePath);
+    } catch (error) {
+        fail(`TemplateFactory: impossibile leggere i target generati (${error.message})`);
+    }
+}
+
+function isGeneratedTemplatePath(relPath) {
+    const normalized = String(relPath ?? "").replace(/\\/g, "/").trim();
+    if (!normalized) return false;
+    const withExtension = normalized.endsWith(".md") ? normalized : `${normalized}.md`;
+    return generatedTemplatePaths.has(normalized) || generatedTemplatePaths.has(withExtension);
+}
+
+function loadVirtualUserPaths() {
+    for (const file of materializedUserFiles(ROOT)) {
+        const fileRel = String(file.path ?? "").replace(/\\/g, "/");
+        if (!fileRel) continue;
+        virtualUserPaths.add(fileRel);
+        virtualUserPaths.add(fileRel.replace(/\.md$/, ""));
+        let currentDir = path.dirname(fileRel).replace(/\\/g, "/");
+        while (currentDir && currentDir !== ".") {
+            virtualUserPaths.add(currentDir);
+            currentDir = path.dirname(currentDir).replace(/\\/g, "/");
+        }
+    }
+}
+
+function isVirtualUserPath(relPath) {
+    return virtualUserPaths.has(String(relPath ?? "").replace(/\\/g, "/").replace(/\/$/, ""));
+}
+
+function loadYaml(relPath) {
+    const script = [
+        "import json, sys, yaml",
+        "with open(sys.argv[1], encoding='utf-8') as handle:",
+        "    data = yaml.safe_load(handle) or {}",
+        "print(json.dumps(data, ensure_ascii=False))"
+    ].join("\n");
+    const stdout = execFileSync("python3", ["-c", script, repoPath(ROOT, relPath)], {
+        encoding: "utf8",
+        maxBuffer: 10 * 1024 * 1024
+    });
+    return JSON.parse(stdout);
+}
+
+function existsRel(relPath, root = ROOT) {
+    return fs.existsSync(path.join(root, relPath));
+}
+
+function readJsonRel(relPath, root = ROOT, fallback = {}) {
+    try {
+        return JSON.parse(fs.readFileSync(path.join(root, relPath), "utf8"));
+    } catch (error) {
+        fail(`${relPath}: JSON non leggibile (${error.message})`);
+        return fallback;
+    }
+}
+
+function readText(relPath, root = ROOT, fallback = "") {
+    const file = path.join(root, relPath);
+    return fs.existsSync(file) ? fs.readFileSync(file, "utf8") : fallback;
+}
+
+function rel(root, file) {
+    return path.relative(root, file).replace(/\\/g, "/");
+}
+
+function markdownFiles(root = ROOT) {
+    return walk(root, {
+        ignoredDirs: IGNORED_DIRS,
+        predicate: file => file.endsWith(".md")
+    }).map(file => rel(root, file));
+}
+
+function resolveObsidianTarget(target, root = ROOT) {
+    if (!target) return true;
+    if (/^(https?:|obsidian:|mailto:)/.test(target)) return true;
+    const clean = target.split("#")[0].split("|")[0];
+    if (!clean) return true;
+    const candidates = [clean, `${clean}.md`, `${clean}.base`, `${clean}.canvas`, `${clean}.excalidraw.md`];
+    if (root === ROOT && candidates.some(candidate => isGeneratedTemplatePath(candidate))) return true;
+    if (root === ROOT && candidates.some(candidate => isVirtualUserPath(candidate))) return true;
+    if (candidates.some(candidate => existsRel(candidate, root))) return true;
+    const base = path.basename(clean);
+    return walk(root, {
+        ignoredDirs: IGNORED_DIRS,
+        predicate: file => /\.(md|base|canvas)$/i.test(file)
+    }).some(file => path.basename(rel(root, file), path.extname(file)) === base);
+}
+
+function validateObsidianCommand(buttonId, command, communityPlugins, root = ROOT) {
+    const commandId = String(command ?? "").trim();
+    const match = commandId.match(/^([^:]+):(.+)$/);
+    if (!match) {
+        fail(`Meta Bind: ${buttonId} usa command non qualificato (${commandId})`);
+        return;
+    }
+
+    const [, pluginId, localCommandId] = match;
+    if (!communityPlugins.includes(pluginId)) {
+        fail(`Meta Bind: ${buttonId} usa command di plugin non abilitato (${pluginId})`);
+        return;
+    }
+
+    const pluginMain = path.join(root, ".obsidian/plugins", pluginId, "main.js");
+    if (!fs.existsSync(pluginMain)) {
+        fail(`Meta Bind: ${buttonId} usa command di plugin senza main.js (${pluginId})`);
+        return;
+    }
+
+    const source = fs.readFileSync(pluginMain, "utf8");
+    const commandPattern = new RegExp(`\\bid\\s*:\\s*["'\`]${localCommandId.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}["'\`]`);
+    if (!commandPattern.test(source)) {
+        fail(`Meta Bind: ${buttonId} usa command non trovato nel plugin ${pluginId} (${localCommandId})`);
+    }
+}
+
+function dataviewBlocks(text) {
+    const normalized = text
+        .split(/\r?\n/)
+        .filter(line => !line.trimStart().startsWith(">"))
+        .join("\n");
+    return [...normalized.matchAll(/```dataviewjs\n([\s\S]*?)\n```/g)].map(match => match[1]);
+}
+
+function workflowActions(workflow) {
+    return [
+        ...(workflow.quick_actions ?? []),
+        ...Object.values(workflow.action_groups ?? {}).flatMap(group => group.actions ?? [])
+    ];
+}
+
+function runtimePluginLabels() {
+    const profile = readJsonRel("z.automazioni/data/runtime/plugin_profile.json", ROOT, {
+        plugins_by_label: {},
+        workflow_plugins: {}
+    });
+    return {
+        labels: new Set(Object.keys(profile.plugins_by_label ?? {})),
+        workflowPlugins: profile.workflow_plugins ?? {}
+    };
+}
+
+function collectBookmarks(items, out = []) {
+    for (const item of items ?? []) {
+        if (item.type === "group") collectBookmarks(item.items, out);
+        if (item.type === "file") out.push(item.path);
+    }
+    return out;
+}
+
+function validateReleaseQualityContract() {
+    if (RELEASE_QUALITY.id !== "release_quality_contract") {
+        fail(`${RELEASE_QUALITY_CONTRACT}: id non valido`);
+    }
+
+    for (const [name, values] of Object.entries({
+        first_run_pages: FIRST_RUN_PAGES,
+        forbidden_calendar_markers: FORBIDDEN_CALENDAR_MARKERS,
+        forbidden_first_run_markers: FORBIDDEN_FIRST_RUN_MARKERS
+    })) {
+        const duplicated = duplicates(values);
+        if (duplicated.length) {
+            fail(`${RELEASE_QUALITY_CONTRACT}: ${name} contiene duplicati (${duplicated.join(", ")})`);
+        }
+    }
+
+    if (!FIRST_RUN_PAGES.includes("Inizia Qui.md")) {
+        fail(`${RELEASE_QUALITY_CONTRACT}: first_run_pages deve includere Inizia Qui.md`);
+    }
+
+    for (const [name, values] of Object.entries({
+        required_meta_bind_inputs: REQUIRED_META_BIND_INPUTS,
+        required_meta_bind_buttons: REQUIRED_META_BIND_BUTTONS
+    })) {
+        const duplicated = duplicates(values);
+        if (duplicated.length) {
+            fail(`${name}: contiene duplicati (${duplicated.join(", ")})`);
+        }
+    }
+}
+
+function validatePluginContract() {
+    const communityPlugins = readJsonRel(".obsidian/community-plugins.json", ROOT, []);
+    const manifests = new Map(communityPlugins.map(id => [id, readJsonRel(`.obsidian/plugins/${id}/manifest.json`)]));
+    const matrix = readJsonRel("Dev/plugin_matrix.json", ROOT, []);
+    const matrixIds = new Set(matrix.map(entry => entry.id));
+    const contract = loadYaml(CONTRACT);
+    const contractPlugins = new Map((contract.plugins ?? []).map(plugin => [plugin.id, plugin]));
+
+    if (!contract.policy?.includes("Contratto operativo profondo")) {
+        fail(`${CONTRACT}: policy non esplicita`);
+    }
+
+    for (const id of communityPlugins) {
+        const manifest = manifests.get(id);
+        const record = contractPlugins.get(id);
+        if (!matrixIds.has(id)) fail(`${id}: assente da Dev/plugin_matrix.json`);
+        if (!existsRel(`.obsidian/plugins/${id}/main.js`)) fail(`${id}: main.js plugin mancante`);
+        if (!record) {
+            fail(`${CONTRACT}: plugin abilitato senza contratto (${id})`);
+            continue;
+        }
+        if (record.name !== manifest.name) fail(`${CONTRACT}: ${id} name non coincide con manifest`);
+        if (record.version !== manifest.version) fail(`${CONTRACT}: ${id} version non coincide con manifest`);
+        if (!Array.isArray(record.official_sources) || record.official_sources.length < 2) {
+            fail(`${CONTRACT}: ${id} fonti ufficiali insufficienti`);
+        }
+        for (const field of ["official_capability", "local_scope", "visible_failure", "release_contract", "manual_smoke"]) {
+            if (!String(record[field] ?? "").trim()) fail(`${CONTRACT}: ${id} campo mancante ${field}`);
+        }
+        if (!Array.isArray(record.gates) || !record.gates.length) fail(`${CONTRACT}: ${id} senza gate`);
+    }
+
+    for (const id of contractPlugins.keys()) {
+        if (!communityPlugins.includes(id)) fail(`${CONTRACT}: record per plugin non abilitato (${id})`);
+    }
+}
+
+function validateRuntimeConfig(root = ROOT) {
+    const communityPlugins = readJsonRel(".obsidian/community-plugins.json", root, []);
+    const dataview = readJsonRel(".obsidian/plugins/dataview/data.json", root);
+    if (dataview.enableDataviewJs !== true) fail("Dataview: enableDataviewJs deve essere true");
+    if (dataview.enableInlineDataviewJs !== true) fail("Dataview: enableInlineDataviewJs deve essere true");
+
+    const templater = readJsonRel(".obsidian/plugins/templater-obsidian/data.json", root);
+    if (templater.templates_folder !== "z.modelli") fail("Templater: templates_folder deve essere z.modelli");
+    if (templater.user_scripts_folder !== TEMPLATER_DIR) fail(`Templater: user_scripts_folder deve essere ${TEMPLATER_DIR}`);
+    if (templater.enable_system_commands !== false) fail("Templater: enable_system_commands deve restare false");
+
+    const metaBind = readJsonRel(".obsidian/plugins/obsidian-meta-bind-plugin/data.json", root);
+    if (metaBind.enableJs !== true) fail("Meta Bind: enableJs deve essere true");
+    const inputNames = new Set((metaBind.inputFieldTemplates ?? []).map(input => input.name));
+    for (const name of REQUIRED_META_BIND_INPUTS) {
+        if (!inputNames.has(name)) fail(`Meta Bind: input template mancante (${name})`);
+    }
+    validateMetaBindTargets(metaBind, root, root === OUT, communityPlugins);
+
+    const metadataMenu = readJsonRel(".obsidian/plugins/metadata-menu/data.json", root);
+    if (metadataMenu.classFilesPath !== "z.fileclass/") fail("Metadata Menu: classFilesPath deve essere z.fileclass/");
+
+    const homepage = readJsonRel(".obsidian/plugins/homepage/data.json", root);
+    const mainHomepage = homepage.homepages?.["Main Homepage"];
+    if (mainHomepage?.value !== "Inizia Qui" || mainHomepage?.openOnStartup !== true) fail("Homepage: apertura iniziale non punta a Inizia Qui");
+
+    const tasks = readJsonRel(".obsidian/plugins/obsidian-tasks-plugin/data.json", root);
+    if (tasks.globalFilter !== "#task") fail("Tasks: globalFilter deve restare #task");
+
+    const calendarText = readText(".obsidian/plugins/calendarium/data.json", root);
+    const calendar = readJsonRel(".obsidian/plugins/calendarium/data.json", root);
+    if ((calendar.calendars ?? []).length !== 1 || calendar.calendars?.[0]?.name !== "Calendario Del Mondo") {
+        fail("Calendarium: deve restare un solo calendario neutro");
+    }
+    for (const marker of FORBIDDEN_CALENDAR_MARKERS) {
+        if (calendarText.includes(marker)) fail(`Calendarium: riferimento non neutro vietato (${marker})`);
+    }
+}
+
+function validateMetaBindTargets(metaBind, root, firstRun, communityPlugins = []) {
+    const buttons = metaBind.buttonTemplates ?? [];
+    const buttonIds = new Set(buttons.map(button => button.id));
+    if (buttonIds.size !== buttons.length) fail("Meta Bind: buttonTemplates contiene id duplicati");
+    if (firstRun) {
+        for (const button of REQUIRED_META_BIND_BUTTONS) {
+            if (!buttonIds.has(button)) fail(`Meta Bind: pulsante release obbligatorio mancante (${button})`);
+        }
+    }
+
+    for (const button of buttons) {
+        if (!META_BIND_BUTTON_ID_PATTERN.test(String(button.id ?? ""))) {
+            fail(`Meta Bind: id pulsante non valido (${button.id})`);
+        }
+        if (!String(button.label ?? "").trim()) {
+            fail(`Meta Bind: ${button.id} senza label visibile`);
+        }
+        if (!Array.isArray(button.actions) || !button.actions.length) {
+            fail(`Meta Bind: ${button.id} senza azioni`);
+            continue;
+        }
+        for (const action of button.actions ?? []) {
+            if (!ALLOWED_META_BIND_ACTION_TYPES.has(action.type)) {
+                fail(`Meta Bind: ${button.id} usa action type non contrattualizzato (${action.type})`);
+                continue;
+            }
+            if (action.type === "templaterCreateNote" || action.type === "runTemplaterFile") {
+                if (!String(action.templateFile ?? "").trim()) {
+                    fail(`Meta Bind: ${button.id} azione Templater senza templateFile`);
+                } else if (root === ROOT && isGeneratedTemplatePath(action.templateFile)) {
+                    continue;
+                } else if (!existsRel(action.templateFile, root)) {
+                    fail(`Meta Bind: ${button.id} punta a template mancante ${action.templateFile}`);
+                }
+            }
+            if (action.type === "templaterCreateNote") {
+                if (!String(action.folderPath ?? "").trim()) {
+                    fail(`Meta Bind: ${button.id} crea nota senza folderPath`);
+                } else if (root === ROOT && isVirtualUserPath(action.folderPath)) {
+                    continue;
+                } else if (!fs.existsSync(path.join(root, action.folderPath)) || !fs.statSync(path.join(root, action.folderPath)).isDirectory()) {
+                    fail(`Meta Bind: ${button.id} crea nota in cartella mancante ${action.folderPath}`);
+                }
+                if (typeof action.openNote !== "boolean") {
+                    fail(`Meta Bind: ${button.id} crea nota senza openNote booleano`);
+                }
+            }
+            if (action.type === "open") {
+                if (!String(action.link ?? "").trim()) fail(`Meta Bind: ${button.id} azione open senza link`);
+                const target = String(action.link ?? "").match(/\[\[([^\]]+)\]\]/)?.[1];
+                if (target && !resolveObsidianTarget(target, root)) fail(`Meta Bind: ${button.id} apre target mancante ${target}`);
+            }
+            if (action.type === "command") {
+                validateObsidianCommand(button.id, action.command, communityPlugins, root);
+            }
+        }
+    }
+
+    if (!firstRun) {
+        for (const fileRel of markdownFiles(ROOT)) {
+            if (fileRel.startsWith("Dev/TemplateFactory/examples/")) continue;
+            const text = readText(fileRel);
+            for (const match of text.matchAll(/`BUTTON\[([^\]\n]+)\]`/g)) {
+                if (!match[1].includes("...") && !buttonIds.has(match[1])) fail(`${fileRel}: BUTTON senza template Meta Bind (${match[1]})`);
+            }
+        }
+    }
+}
+
+function validateWorkflowRuntimeContract() {
+    const workflows = loadYaml(WORKFLOWS).workflows ?? {};
+    const buttonIds = new Set((readJsonRel(".obsidian/plugins/obsidian-meta-bind-plugin/data.json").buttonTemplates ?? []).map(button => String(button.id ?? "")));
+    const runtimeProfile = runtimePluginLabels();
+    const labels = runtimeProfile.labels;
+
+    for (const [workflowId, workflow] of Object.entries(workflows)) {
+        const actions = workflowActions(workflow);
+        const requiredPlugins = workflow.required_plugins ?? [];
+        const profiledPlugins = runtimeProfile.workflowPlugins[workflowId] ?? [];
+
+        if ((workflow.quick_actions?.length || Object.keys(workflow.action_groups ?? {}).length) && !(workflow.entry_points ?? []).length) {
+            fail(`${WORKFLOWS}: ${workflowId} ha azioni ma non dichiara entry_points`);
+        }
+
+        if (requiredPlugins.length && JSON.stringify(profiledPlugins) !== JSON.stringify(requiredPlugins)) {
+            fail(`${WORKFLOWS}: ${workflowId}.required_plugins non allineato a z.automazioni/data/runtime/plugin_profile.json`);
+        }
+
+        for (const plugin of requiredPlugins) {
+            if (!labels.has(plugin)) fail(`${WORKFLOWS}: ${workflowId} richiede plugin non diagnosticabile nel runtime (${plugin})`);
+        }
+
+        for (const action of actions) {
+            const button = String(action.button ?? "");
+            if (!button) {
+                fail(`${WORKFLOWS}: ${workflowId} contiene azione senza button`);
+                continue;
+            }
+            if (!buttonIds.has(button)) fail(`${WORKFLOWS}: ${workflowId} usa BUTTON[${button}] non presente in Meta Bind`);
+            if (!String(action.label ?? "").trim()) fail(`${WORKFLOWS}: ${workflowId} BUTTON[${button}] senza label`);
+            if (!String(action.use_when ?? "").trim()) fail(`${WORKFLOWS}: ${workflowId} BUTTON[${button}] senza use_when`);
+        }
+    }
+}
+
+function validateRuntimeButtonReferences(root = ROOT) {
+    const buttonIds = new Set((readJsonRel(".obsidian/plugins/obsidian-meta-bind-plugin/data.json", root).buttonTemplates ?? []).map(button => String(button.id ?? "")));
+    const files = [
+        ...markdownFiles(root).filter(file => !file.startsWith("Dev/TemplateFactory/examples/")),
+        ...walk(path.join(root, "z.engine"), { predicate: file => file.endsWith(".js") }).map(file => rel(root, file))
+    ];
+
+    for (const fileRel of files) {
+        const text = readText(fileRel, root);
+        for (const match of text.matchAll(BUTTON_REF_PATTERN)) {
+            const id = match[1];
+            if (id.includes("${") || id.includes("...")) continue;
+            if (!buttonIds.has(id)) fail(`${fileRel}: BUTTON[${id}] senza template Meta Bind`);
+        }
+    }
+}
+
+function validateTemplaterWrappers(root = ROOT) {
+    const templaterRoot = path.join(root, TEMPLATER_DIR);
+    const wrappers = fs.existsSync(templaterRoot)
+        ? walk(templaterRoot, { predicate: file => file.endsWith(".js") })
+        : [];
+    if (wrappers.length < 50) fail(`Templater: wrapper insufficienti (${wrappers.length})`);
+    const wrapperNames = new Set(wrappers.map(file => path.basename(file, ".js")));
+    for (const file of walk(templaterRoot)) {
+        if (!file.endsWith(".js")) fail(`${rel(root, file)}: Templater user_scripts_folder deve contenere solo wrapper JS`);
+        if (path.dirname(file) !== templaterRoot) fail(`${rel(root, file)}: wrapper Templater annidato, non richiamabile come tp.user diretto`);
+    }
+
+    for (const file of wrappers) {
+        try {
+            delete require.cache[require.resolve(file)];
+            const exported = require(file);
+            if (typeof exported !== "function") fail(`${rel(root, file)}: Templater accetta solo export funzione`);
+        } catch (error) {
+            fail(`${rel(root, file)}: import wrapper fallito (${error.message})`);
+        }
+    }
+
+    for (const file of walk(path.join(root, "z.modelli"), { predicate: file => file.endsWith(".md") })) {
+        const fileRel = rel(root, file);
+        const text = readText(fileRel, root);
+        for (const match of text.matchAll(/tp\.user\.([A-Za-z0-9_]+)/g)) {
+            if (!wrapperNames.has(match[1])) fail(`${fileRel}: tp.user.${match[1]} senza wrapper in ${TEMPLATER_DIR}`);
+        }
+    }
+
+    for (const file of walk(path.join(root, "z.automazioni"), { predicate: current => current.endsWith(".js") })) {
+        const fileRel = rel(root, file);
+        const text = readText(fileRel, root);
+        for (const match of text.matchAll(/["'](z\.modelli\/[^"']+)["']/g)) {
+            if (/\.(json|base|canvas|excalidraw|png|jpg|jpeg|webp|css|js)$/i.test(match[1])) continue;
+            if (/\/README$/i.test(match[1]) || /\/README\.md$/i.test(match[1])) continue;
+            const target = match[1].endsWith(".md") ? match[1] : `${match[1]}.md`;
+            if (root === ROOT && isGeneratedTemplatePath(target)) continue;
+            if (!existsRel(target, root)) fail(`${fileRel}: riferimento Templater a template mancante ${target}`);
+        }
+    }
+}
+
+function validateDataviewSyntax(root = ROOT, firstRunOnly = false) {
+    const files = firstRunOnly ? FIRST_RUN_PAGES : markdownFiles(root).filter(file => !file.startsWith("z.modelli/") && !file.startsWith("Dev/TemplateFactory/examples/"));
+    for (const fileRel of files) {
+        if (!existsRel(fileRel, root)) continue;
+        for (const code of dataviewBlocks(readText(fileRel, root))) {
+            for (const [pattern, label] of FORBIDDEN_DATAVIEWJS_PATTERNS) {
+                if (pattern.test(code)) fail(`${fileRel}: blocco dataviewjs usa API fragile o vietata (${label}); spostare nel runtime z.engine`);
+            }
+            try {
+                new Function("dv", "app", "input", `return (async () => {\n${code}\n})()`);
+            } catch (error) {
+                fail(`${fileRel}: blocco dataviewjs non compilabile (${error.message})`);
+            }
+        }
+    }
+}
+
+function validateReleaseFirstRun() {
+    fs.rmSync(RELEASE_CHECK_ROOT, { recursive: true, force: true });
+    fs.mkdirSync(RELEASE_CHECK_ROOT, { recursive: true });
+    execFileSync("node", ["Dev/TemplateFactory/tools/release_clean.js", "--with-demo", "--quiet", "--out", OUT], { cwd: ROOT, stdio: "inherit" });
+    if (!fs.existsSync(OUT)) fail("release demo temporanea mancante");
+    if (!fs.existsSync(ZIP)) fail("zip release demo temporaneo mancante");
+
+    const workspace = readJsonRel(".obsidian/workspace.json", OUT);
+    const firstLeaf = workspace.main?.children?.[0]?.children?.[0]?.state?.state;
+    if (firstLeaf?.file !== "Inizia Qui.md" || firstLeaf?.mode !== "preview") fail("workspace first-run non apre Inizia Qui in preview");
+
+    const appConfig = readJsonRel(".obsidian/app.json", OUT);
+    if (appConfig.propertiesInDocument !== "hidden") fail("app.json release non nasconde le proprieta nelle note");
+    for (const hidden of ["z.automazioni/", "z.engine/", "z.modelli/", "z.bases/", "z.fileclass/"]) {
+        if (!appConfig.userIgnoreFilters?.includes(hidden)) fail(`app.json non nasconde ${hidden}`);
+    }
+
+    const expectedPlugins = releasePluginProfile(ROOT, loadYaml(RELEASE_BOUNDARY)).enabledPlugins;
+    const communityPlugins = readJsonRel(".obsidian/community-plugins.json", OUT, []);
+    const expectedPluginList = [...expectedPlugins].sort();
+    const releasePluginList = [...communityPlugins].sort();
+    if (JSON.stringify(releasePluginList) !== JSON.stringify(expectedPluginList)) {
+        fail(`profilo plugin first-run non allineato: attesi ${expectedPluginList.join(", ")}, trovati ${releasePluginList.join(", ")}`);
+    }
+    for (const plugin of communityPlugins) {
+        if (!existsRel(`.obsidian/plugins/${plugin}/manifest.json`, OUT)) fail(`manifest plugin mancante: ${plugin}`);
+        if (!existsRel(`.obsidian/plugins/${plugin}/main.js`, OUT)) fail(`main plugin mancante: ${plugin}`);
+    }
+
+    const bookmarks = collectBookmarks(readJsonRel(".obsidian/bookmarks.json", OUT).items);
+    for (const bookmark of bookmarks) {
+        if (bookmark.startsWith("z.")) fail(`bookmark tecnico visibile: ${bookmark}`);
+        if (!existsRel(bookmark, OUT)) fail(`bookmark verso file mancante: ${bookmark}`);
+    }
+
+    validateRuntimeConfig(OUT);
+    validateTemplaterWrappers(OUT);
+    validateDataviewSyntax(OUT, true);
+
+    for (const relPath of FIRST_RUN_PAGES) {
+        if (!existsRel(relPath, OUT)) {
+            fail(`pagina first-run mancante: ${relPath}`);
+            continue;
+        }
+        const text = readText(relPath, OUT);
+        if (/<%[\s\S]*?%>/.test(text)) fail(`${relPath}: contiene codice Templater visibile`);
+        for (const marker of FORBIDDEN_FIRST_RUN_MARKERS) {
+            if (text.includes(marker)) fail(`${relPath}: marker tecnico visibile (${marker})`);
+        }
+        for (const match of text.matchAll(/\[\[([^\]]+)\]\]/g)) {
+            if (!resolveObsidianTarget(match[1], OUT)) fail(`${relPath}: wikilink verso target mancante (${match[1]})`);
+        }
+    }
+
+    for (const file of walk(path.join(OUT, "z.automazioni"))) {
+        const base = path.basename(file);
+        if (/^(check_|generate_|import_|render_|template_factory_)/.test(base)) fail(`script tecnico vietato nella release: ${rel(OUT, file)}`);
+    }
+
+    try {
+        execFileSync("unzip", ["-tq", ZIP], { cwd: ROOT, stdio: "ignore" });
+    } catch {
+        fail("zip release demo non valida: unzip -tq fallito");
+    }
+}
+
+validateReleaseQualityContract();
+
+if (CONTRACT_CHECK) {
+    if (errors.length) {
+        console.error("Release quality contract non valido:");
+        for (const error of errors) console.error(`- ${error}`);
+        process.exit(1);
+    }
+    console.log(`Release quality contract OK: ${FIRST_RUN_PAGES.length} pagine first-run, ${REQUIRED_META_BIND_INPUTS.length} input Meta Bind, ${REQUIRED_META_BIND_BUTTONS.length} pulsanti Meta Bind obbligatori.`);
+    process.exit(0);
+}
+
+loadGeneratedTemplatePaths();
+loadVirtualUserPaths();
+validatePluginContract();
+validateWorkflowRuntimeContract();
+validateRuntimeConfig(ROOT);
+validateRuntimeButtonReferences(ROOT);
+validateTemplaterWrappers(ROOT);
+validateDataviewSyntax(ROOT);
+validateReleaseFirstRun();
+
+fs.rmSync(RELEASE_CHECK_ROOT, { recursive: true, force: true });
+
+if (errors.length) {
+    console.error("Release quality non valida:");
+    for (const error of errors) console.error(`- ${error}`);
+    process.exit(1);
+}
+
+console.log("Release quality OK: plugin, workflow, Meta Bind, Templater, DataviewJS e first-run release verificati.");

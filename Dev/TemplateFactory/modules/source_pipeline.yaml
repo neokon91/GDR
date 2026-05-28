@@ -24,10 +24,10 @@ steps:
       - z.automazioni/data/srd/opzioni_personaggio.json
     render:
       - node
-      - z.automazioni/import_srd_character_data.js
+      - Dev/TemplateFactory/tools/import_srd_character_data.js
     check:
       - node
-      - z.automazioni/check_srd_character_data.js
+      - Dev/TemplateFactory/tools/check_srd_character_data.js
   obsidian_config:
     purpose: Genera i JSON Obsidian controllati dal progetto.
     sources:
@@ -36,10 +36,10 @@ steps:
       - .obsidian/**/*.json
     render:
       - python3
-      - z.automazioni/render_obsidian_config.py
+      - Dev/TemplateFactory/tools/render_obsidian_config.py
     check:
       - python3
-      - z.automazioni/render_obsidian_config.py
+      - Dev/TemplateFactory/tools/render_obsidian_config.py
       - --check
   plugin_matrix:
     purpose: Genera la matrice operativa dei plugin.
@@ -49,11 +49,30 @@ steps:
       - Dev/plugin_matrix.json
     render:
       - python3
-      - z.automazioni/render_plugin_matrix.py
+      - Dev/TemplateFactory/tools/render_plugin_matrix.py
     check:
       - python3
-      - z.automazioni/render_plugin_matrix.py
+      - Dev/TemplateFactory/tools/render_plugin_matrix.py
       - --check
+  obsidian_plugin_bundles:
+    purpose: Verifica che i bundle plugin/temi Obsidian tracciati siano dichiarati, minimi e coerenti con matrice e contratti.
+    sources:
+      - Dev/TemplateFactory/modules/obsidian_plugin_bundle_contract.yaml
+      - Dev/TemplateFactory/modules/plugin_matrix.yaml
+      - Dev/TemplateFactory/modules/plugin_contracts.yaml
+      - .obsidian/community-plugins.json
+      - .obsidian/plugins
+      - .obsidian/themes
+      - .obsidian/snippets
+      - Dev/TemplateFactory/tools/check_obsidian_plugin_bundles.js
+    outputs:
+      - memoria
+    render:
+      - node
+      - Dev/TemplateFactory/tools/check_obsidian_plugin_bundles.js
+    check:
+      - node
+      - Dev/TemplateFactory/tools/check_obsidian_plugin_bundles.js
   entity_model_contract:
     purpose: Verifica il catalogo YAML delle categorie entita e impedisce il ritorno della nota lunga in Risorse.
     sources:
@@ -61,15 +80,15 @@ steps:
       - Dev/TemplateFactory/modules/fields_core.yaml
       - Dev/TemplateFactory/modules/frontmatter_profiles.yaml
       - Dev/TemplateFactory/modules/validation_contract.yaml
-      - z.automazioni/check_entity_model.js
+      - Dev/TemplateFactory/tools/check_entity_model.js
     outputs:
       - memoria
     render:
       - node
-      - z.automazioni/check_entity_model.js
+      - Dev/TemplateFactory/tools/check_entity_model.js
     check:
       - node
-      - z.automazioni/check_entity_model.js
+      - Dev/TemplateFactory/tools/check_entity_model.js
   templater_wrappers:
     purpose: Genera i wrapper richiesti da Templater nella user_scripts_folder.
     sources:
@@ -78,10 +97,10 @@ steps:
       - z.automazioni/templater/*.js
     render:
       - python3
-      - z.automazioni/render_templater_wrappers.py
+      - Dev/TemplateFactory/tools/render_templater_wrappers.py
     check:
       - python3
-      - z.automazioni/render_templater_wrappers.py
+      - Dev/TemplateFactory/tools/render_templater_wrappers.py
       - --check
   metabind_config:
     purpose: Assembla la configurazione Meta Bind da impostazioni, input e pulsanti YAML.
@@ -93,10 +112,10 @@ steps:
       - .obsidian/plugins/obsidian-meta-bind-plugin/data.json
     render:
       - python3
-      - z.automazioni/render_metabind_config.py
+      - Dev/TemplateFactory/tools/render_metabind_config.py
     check:
       - python3
-      - z.automazioni/render_metabind_config.py
+      - Dev/TemplateFactory/tools/render_metabind_config.py
       - --check
   workflow_data:
     purpose: Genera quick_actions.json da workflows.yaml.
@@ -106,10 +125,27 @@ steps:
       - z.automazioni/data/workflows/quick_actions.json
     render:
       - node
-      - z.automazioni/generate_workflow_data.js
+      - Dev/TemplateFactory/tools/generate_workflow_data.js
     check:
       - node
-      - z.automazioni/generate_workflow_data.js
+      - Dev/TemplateFactory/tools/generate_workflow_data.js
+      - --check
+  runtime_plugin_profile:
+    purpose: Genera il profilo runtime dei plugin usato da troubleshooting, workflow fallback e readiness.
+    sources:
+      - Dev/TemplateFactory/modules/runtime_plugin_profile.yaml
+      - Dev/TemplateFactory/modules/plugin_matrix.yaml
+      - Dev/TemplateFactory/modules/plugin_contracts.yaml
+      - Dev/TemplateFactory/modules/workflows.yaml
+      - Dev/TemplateFactory/tools/render_runtime_plugin_profile.js
+    outputs:
+      - z.automazioni/data/runtime/plugin_profile.json
+    render:
+      - node
+      - Dev/TemplateFactory/tools/render_runtime_plugin_profile.js
+    check:
+      - node
+      - Dev/TemplateFactory/tools/render_runtime_plugin_profile.js
       - --check
   bacheche:
     purpose: Genera le bacheche Kanban operative del vault finale da YAML/Jinja.
@@ -121,17 +157,18 @@ steps:
       - z.bacheche/*.md
     render:
       - python3
-      - z.automazioni/render_bacheche.py
+      - Dev/TemplateFactory/tools/render_bacheche.py
     check:
       - python3
-      - z.automazioni/render_bacheche.py
+      - Dev/TemplateFactory/tools/render_bacheche.py
       - --check
   resource_support_pages:
     purpose: Genera guide Risorse di supporto da YAML/Jinja, lasciandole fuori dal sorgente tracciato.
     sources:
       - Dev/TemplateFactory/modules/resource_support_pages.yaml
+      - Dev/TemplateFactory/assets/resource_support/schema_relazioni_gdr.excalidraw.body.md
       - Dev/TemplateFactory/jinja/resource_support_page.md.j2
-      - z.automazioni/render_resource_support_pages.py
+      - Dev/TemplateFactory/tools/render_resource_support_pages.py
     outputs:
       - Risorse/Aspetto Vault.md
       - Risorse/Callout GDR.md
@@ -166,10 +203,10 @@ steps:
       - Risorse/Worldbuilding Profondo.md
     render:
       - python3
-      - z.automazioni/render_resource_support_pages.py
+      - Dev/TemplateFactory/tools/render_resource_support_pages.py
     check:
       - python3
-      - z.automazioni/render_resource_support_pages.py
+      - Dev/TemplateFactory/tools/render_resource_support_pages.py
       - --check
   resource_indexes:
     purpose: Genera indici semplici di risorse finali da YAML/Jinja.
@@ -183,10 +220,10 @@ steps:
       - Risorse/Dispense/Dispense.md
     render:
       - python3
-      - z.automazioni/render_resource_indexes.py
+      - Dev/TemplateFactory/tools/render_resource_indexes.py
     check:
       - python3
-      - z.automazioni/render_resource_indexes.py
+      - Dev/TemplateFactory/tools/render_resource_indexes.py
       - --check
   resource_hub:
     purpose: Genera il catalogo centrale Risorse/Risorse.md da YAML/Jinja.
@@ -197,17 +234,17 @@ steps:
       - Risorse/Risorse.md
     render:
       - python3
-      - z.automazioni/render_resource_hub.py
+      - Dev/TemplateFactory/tools/render_resource_hub.py
     check:
       - python3
-      - z.automazioni/render_resource_hub.py
+      - Dev/TemplateFactory/tools/render_resource_hub.py
       - --check
   hub_pages:
     purpose: Genera le pagine operative Hub da YAML/Jinja, lasciandole fuori dal sorgente tracciato.
     sources:
       - Dev/TemplateFactory/modules/hub_pages.yaml
       - Dev/TemplateFactory/jinja/resource_support_page.md.j2
-      - z.automazioni/render_hub_pages.py
+      - Dev/TemplateFactory/tools/render_hub_pages.py
     outputs:
       - Hub/1. DM Dashboard.md
       - Hub/Atlante del Mondo.md
@@ -228,26 +265,26 @@ steps:
       - Hub/Worldbuilder Dashboard.md
     render:
       - python3
-      - z.automazioni/render_hub_pages.py
+      - Dev/TemplateFactory/tools/render_hub_pages.py
     check:
       - python3
-      - z.automazioni/render_hub_pages.py
+      - Dev/TemplateFactory/tools/render_hub_pages.py
       - --check
   root_pages:
     purpose: Genera le pagine root finali del vault da YAML/Jinja, lasciandole fuori dal sorgente tracciato.
     sources:
       - Dev/TemplateFactory/modules/root_pages.yaml
       - Dev/TemplateFactory/jinja/resource_support_page.md.j2
-      - z.automazioni/render_root_pages.py
+      - Dev/TemplateFactory/tools/render_root_pages.py
     outputs:
       - Inizia Qui.md
       - VERSION.md
     render:
       - python3
-      - z.automazioni/render_root_pages.py
+      - Dev/TemplateFactory/tools/render_root_pages.py
     check:
       - python3
-      - z.automazioni/render_root_pages.py
+      - Dev/TemplateFactory/tools/render_root_pages.py
       - --check
   plugin_usage_audit:
     purpose: Verifica che ogni plugin installato abbia classe, contratto, binding tecnico e superficie reale.
@@ -264,10 +301,10 @@ steps:
       - memoria
     render:
       - node
-      - z.automazioni/check_plugin_usage_audit.js
+      - Dev/TemplateFactory/tools/check_plugin_usage_audit.js
     check:
       - node
-      - z.automazioni/check_plugin_usage_audit.js
+      - Dev/TemplateFactory/tools/check_plugin_usage_audit.js
   workflow_blocks:
     purpose: Renderizza blocchi azioni rapide dentro le pagine operative.
     sources:
@@ -280,10 +317,10 @@ steps:
       - z.bacheche/**/*.md
     render:
       - node
-      - z.automazioni/render_workflow_quick_actions.js
+      - Dev/TemplateFactory/tools/render_workflow_quick_actions.js
     check:
       - node
-      - z.automazioni/render_workflow_quick_actions.js
+      - Dev/TemplateFactory/tools/render_workflow_quick_actions.js
       - --check
   dm_dashboard_cockpit:
     purpose: Genera il contratto runtime della DM Dashboard senza scrivere root generate.
@@ -298,10 +335,10 @@ steps:
       - z.automazioni/data/runtime/dm_dashboard_cockpit.json
     render:
       - node
-      - z.automazioni/render_dm_dashboard_cockpit.js
+      - Dev/TemplateFactory/tools/render_dm_dashboard_cockpit.js
     check:
       - node
-      - z.automazioni/render_dm_dashboard_cockpit.js
+      - Dev/TemplateFactory/tools/render_dm_dashboard_cockpit.js
       - --check
   dm_guide_cockpit:
     purpose: Genera il contratto runtime della Guida DM senza scrivere root generate.
@@ -316,10 +353,10 @@ steps:
       - z.automazioni/data/runtime/dm_guide_cockpit.json
     render:
       - node
-      - z.automazioni/render_dm_guide_cockpit.js
+      - Dev/TemplateFactory/tools/render_dm_guide_cockpit.js
     check:
       - node
-      - z.automazioni/render_dm_guide_cockpit.js
+      - Dev/TemplateFactory/tools/render_dm_guide_cockpit.js
       - --check
   vault_control_cockpit:
     purpose: Genera il contratto runtime del cockpit Controllo Vault senza scrivere root generate.
@@ -334,10 +371,10 @@ steps:
       - z.automazioni/data/runtime/vault_control_cockpit.json
     render:
       - node
-      - z.automazioni/render_vault_control_cockpit.js
+      - Dev/TemplateFactory/tools/render_vault_control_cockpit.js
     check:
       - node
-      - z.automazioni/render_vault_control_cockpit.js
+      - Dev/TemplateFactory/tools/render_vault_control_cockpit.js
       - --check
   quality_report_cockpit:
     purpose: Genera il contratto runtime del cockpit Quality Report senza scrivere root generate.
@@ -352,10 +389,10 @@ steps:
       - z.automazioni/data/runtime/quality_report_cockpit.json
     render:
       - node
-      - z.automazioni/render_quality_report_cockpit.js
+      - Dev/TemplateFactory/tools/render_quality_report_cockpit.js
     check:
       - node
-      - z.automazioni/render_quality_report_cockpit.js
+      - Dev/TemplateFactory/tools/render_quality_report_cockpit.js
       - --check
   generated_drafts_cockpit:
     purpose: Genera il contratto runtime del cockpit Smistamento Bozze senza scrivere root generate.
@@ -370,10 +407,10 @@ steps:
       - z.automazioni/data/runtime/generated_drafts_cockpit.json
     render:
       - node
-      - z.automazioni/render_generated_drafts_cockpit.js
+      - Dev/TemplateFactory/tools/render_generated_drafts_cockpit.js
     check:
       - node
-      - z.automazioni/render_generated_drafts_cockpit.js
+      - Dev/TemplateFactory/tools/render_generated_drafts_cockpit.js
       - --check
   world_bible_cockpit:
     purpose: Genera il contratto runtime del cockpit Bibbia del Mondo senza scrivere root generate.
@@ -388,10 +425,10 @@ steps:
       - z.automazioni/data/runtime/world_bible_cockpit.json
     render:
       - node
-      - z.automazioni/render_world_bible_cockpit.js
+      - Dev/TemplateFactory/tools/render_world_bible_cockpit.js
     check:
       - node
-      - z.automazioni/render_world_bible_cockpit.js
+      - Dev/TemplateFactory/tools/render_world_bible_cockpit.js
       - --check
   compendium_cockpit:
     purpose: Genera il contratto runtime del cockpit Compendium Del Mondo senza scrivere root generate.
@@ -406,10 +443,10 @@ steps:
       - z.automazioni/data/runtime/compendium_cockpit.json
     render:
       - node
-      - z.automazioni/render_compendium_cockpit.js
+      - Dev/TemplateFactory/tools/render_compendium_cockpit.js
     check:
       - node
-      - z.automazioni/render_compendium_cockpit.js
+      - Dev/TemplateFactory/tools/render_compendium_cockpit.js
       - --check
   worldbuilding_cockpit:
     purpose: Genera il contratto runtime del cockpit worldbuilding senza scrivere root generate.
@@ -423,10 +460,10 @@ steps:
       - z.automazioni/data/runtime/worldbuilding_cockpit.json
     render:
       - node
-      - z.automazioni/render_worldbuilding_cockpit.js
+      - Dev/TemplateFactory/tools/render_worldbuilding_cockpit.js
     check:
       - node
-      - z.automazioni/render_worldbuilding_cockpit.js
+      - Dev/TemplateFactory/tools/render_worldbuilding_cockpit.js
       - --check
   atlas_cockpit:
     purpose: Genera il contratto runtime del cockpit atlante senza scrivere root generate.
@@ -441,10 +478,10 @@ steps:
       - z.automazioni/data/runtime/atlas_cockpit.json
     render:
       - node
-      - z.automazioni/render_atlas_cockpit.js
+      - Dev/TemplateFactory/tools/render_atlas_cockpit.js
     check:
       - node
-      - z.automazioni/render_atlas_cockpit.js
+      - Dev/TemplateFactory/tools/render_atlas_cockpit.js
       - --check
   maps_cockpit:
     purpose: Genera il contratto runtime del cockpit Mappe senza scrivere root generate.
@@ -459,10 +496,10 @@ steps:
       - z.automazioni/data/runtime/maps_cockpit.json
     render:
       - node
-      - z.automazioni/render_maps_cockpit.js
+      - Dev/TemplateFactory/tools/render_maps_cockpit.js
     check:
       - node
-      - z.automazioni/render_maps_cockpit.js
+      - Dev/TemplateFactory/tools/render_maps_cockpit.js
       - --check
   import_maps_cockpit:
     purpose: Genera il contratto runtime del cockpit Importare Mappe senza scrivere root generate.
@@ -478,10 +515,10 @@ steps:
       - z.automazioni/data/runtime/map_import_cockpit.json
     render:
       - node
-      - z.automazioni/render_import_maps_cockpit.js
+      - Dev/TemplateFactory/tools/render_import_maps_cockpit.js
     check:
       - node
-      - z.automazioni/render_import_maps_cockpit.js
+      - Dev/TemplateFactory/tools/render_import_maps_cockpit.js
       - --check
   worldbuilding_control_cockpit:
     purpose: Genera il contratto runtime dell'audit Controllo Worldbuilding senza scrivere root generate.
@@ -496,10 +533,10 @@ steps:
       - z.automazioni/data/runtime/worldbuilding_control_cockpit.json
     render:
       - node
-      - z.automazioni/render_worldbuilding_control_cockpit.js
+      - Dev/TemplateFactory/tools/render_worldbuilding_control_cockpit.js
     check:
       - node
-      - z.automazioni/render_worldbuilding_control_cockpit.js
+      - Dev/TemplateFactory/tools/render_worldbuilding_control_cockpit.js
       - --check
   canon_control_cockpit:
     purpose: Genera il contratto runtime del cockpit Controllo Canone senza scrivere root generate.
@@ -514,10 +551,10 @@ steps:
       - z.automazioni/data/runtime/canon_control_cockpit.json
     render:
       - node
-      - z.automazioni/render_canon_control_cockpit.js
+      - Dev/TemplateFactory/tools/render_canon_control_cockpit.js
     check:
       - node
-      - z.automazioni/render_canon_control_cockpit.js
+      - Dev/TemplateFactory/tools/render_canon_control_cockpit.js
       - --check
   living_world_cockpit:
     purpose: Genera il contratto runtime del cockpit Motore Mondo Vivo senza scrivere root generate.
@@ -532,10 +569,10 @@ steps:
       - z.automazioni/data/runtime/living_world_cockpit.json
     render:
       - node
-      - z.automazioni/render_living_world_cockpit.js
+      - Dev/TemplateFactory/tools/render_living_world_cockpit.js
     check:
       - node
-      - z.automazioni/render_living_world_cockpit.js
+      - Dev/TemplateFactory/tools/render_living_world_cockpit.js
       - --check
   economy_cockpit:
     purpose: Genera il contratto runtime del cockpit Economia E Rotte senza scrivere root generate.
@@ -550,10 +587,10 @@ steps:
       - z.automazioni/data/runtime/economy_cockpit.json
     render:
       - node
-      - z.automazioni/render_economy_cockpit.js
+      - Dev/TemplateFactory/tools/render_economy_cockpit.js
     check:
       - node
-      - z.automazioni/render_economy_cockpit.js
+      - Dev/TemplateFactory/tools/render_economy_cockpit.js
       - --check
   lore_cockpit:
     purpose: Genera il contratto runtime del cockpit Lore Hub senza scrivere root generate.
@@ -568,10 +605,10 @@ steps:
       - z.automazioni/data/runtime/lore_cockpit.json
     render:
       - node
-      - z.automazioni/render_lore_cockpit.js
+      - Dev/TemplateFactory/tools/render_lore_cockpit.js
     check:
       - node
-      - z.automazioni/render_lore_cockpit.js
+      - Dev/TemplateFactory/tools/render_lore_cockpit.js
       - --check
   lore_review_cockpit:
     purpose: Genera il contratto runtime del cockpit Revisione Lore senza scrivere root generate.
@@ -586,10 +623,10 @@ steps:
       - z.automazioni/data/runtime/lore_review_cockpit.json
     render:
       - node
-      - z.automazioni/render_lore_review_cockpit.js
+      - Dev/TemplateFactory/tools/render_lore_review_cockpit.js
     check:
       - node
-      - z.automazioni/render_lore_review_cockpit.js
+      - Dev/TemplateFactory/tools/render_lore_review_cockpit.js
       - --check
   geopolitical_cockpit:
     purpose: Genera il contratto runtime del cockpit Geopolitical Dashboard senza scrivere root generate.
@@ -604,10 +641,10 @@ steps:
       - z.automazioni/data/runtime/geopolitical_cockpit.json
     render:
       - node
-      - z.automazioni/render_geopolitical_cockpit.js
+      - Dev/TemplateFactory/tools/render_geopolitical_cockpit.js
     check:
       - node
-      - z.automazioni/render_geopolitical_cockpit.js
+      - Dev/TemplateFactory/tools/render_geopolitical_cockpit.js
       - --check
   campaign_builder_cockpit:
     purpose: Genera il contratto runtime del cockpit Campagna da Ambientazione senza scrivere root generate.
@@ -622,10 +659,10 @@ steps:
       - z.automazioni/data/runtime/campaign_builder_cockpit.json
     render:
       - node
-      - z.automazioni/render_campaign_builder_cockpit.js
+      - Dev/TemplateFactory/tools/render_campaign_builder_cockpit.js
     check:
       - node
-      - z.automazioni/render_campaign_builder_cockpit.js
+      - Dev/TemplateFactory/tools/render_campaign_builder_cockpit.js
       - --check
   offscreen_cockpit:
     purpose: Genera il contratto runtime del cockpit Cosa Succede Fuori Scena senza scrivere root generate.
@@ -640,10 +677,10 @@ steps:
       - z.automazioni/data/runtime/offscreen_cockpit.json
     render:
       - node
-      - z.automazioni/render_offscreen_cockpit.js
+      - Dev/TemplateFactory/tools/render_offscreen_cockpit.js
     check:
       - node
-      - z.automazioni/render_offscreen_cockpit.js
+      - Dev/TemplateFactory/tools/render_offscreen_cockpit.js
       - --check
   preparation_cockpit:
     purpose: Genera il contratto runtime del cockpit Preparazione Sessione senza scrivere root generate.
@@ -658,10 +695,10 @@ steps:
       - z.automazioni/data/runtime/preparation_cockpit.json
     render:
       - node
-      - z.automazioni/render_preparation_cockpit.js
+      - Dev/TemplateFactory/tools/render_preparation_cockpit.js
     check:
       - node
-      - z.automazioni/render_preparation_cockpit.js
+      - Dev/TemplateFactory/tools/render_preparation_cockpit.js
       - --check
   table_materials_cockpit:
     purpose: Genera il contratto runtime del cockpit Materiali Al Tavolo senza scrivere root generate.
@@ -676,10 +713,10 @@ steps:
       - z.automazioni/data/runtime/table_materials_cockpit.json
     render:
       - node
-      - z.automazioni/render_table_materials_cockpit.js
+      - Dev/TemplateFactory/tools/render_table_materials_cockpit.js
     check:
       - node
-      - z.automazioni/render_table_materials_cockpit.js
+      - Dev/TemplateFactory/tools/render_table_materials_cockpit.js
       - --check
   media_scene_cockpit:
     purpose: Genera il contratto runtime del cockpit Media Scene senza scrivere root generate.
@@ -694,10 +731,10 @@ steps:
       - z.automazioni/data/runtime/media_scene_cockpit.json
     render:
       - node
-      - z.automazioni/render_media_scene_cockpit.js
+      - Dev/TemplateFactory/tools/render_media_scene_cockpit.js
     check:
       - node
-      - z.automazioni/render_media_scene_cockpit.js
+      - Dev/TemplateFactory/tools/render_media_scene_cockpit.js
       - --check
   live_table_cockpit:
     purpose: Genera il contratto runtime del cockpit Durante il Gioco senza scrivere root generate.
@@ -712,10 +749,10 @@ steps:
       - z.automazioni/data/runtime/live_table_cockpit.json
     render:
       - node
-      - z.automazioni/render_live_table_cockpit.js
+      - Dev/TemplateFactory/tools/render_live_table_cockpit.js
     check:
       - node
-      - z.automazioni/render_live_table_cockpit.js
+      - Dev/TemplateFactory/tools/render_live_table_cockpit.js
       - --check
   post_session_cockpit:
     purpose: Genera il contratto runtime del cockpit Post Sessione Guidato senza scrivere root generate.
@@ -730,27 +767,27 @@ steps:
       - z.automazioni/data/runtime/post_session_cockpit.json
     render:
       - node
-      - z.automazioni/render_post_session_cockpit.js
+      - Dev/TemplateFactory/tools/render_post_session_cockpit.js
     check:
       - node
-      - z.automazioni/render_post_session_cockpit.js
+      - Dev/TemplateFactory/tools/render_post_session_cockpit.js
       - --check
   user_path:
     purpose: Verifica il percorso utente primario dichiarato in YAML.
     sources:
       - Dev/TemplateFactory/modules/user_path.yaml
       - Dev/TemplateFactory/modules/workflows.yaml
-      - z.automazioni/check_user_path.js
+      - Dev/TemplateFactory/tools/check_user_path.js
       - z.automazioni/data/workflows/quick_actions.json
       - .obsidian/plugins/obsidian-meta-bind-plugin/data.json
     outputs:
       - memoria
     render:
       - node
-      - z.automazioni/check_user_path.js
+      - Dev/TemplateFactory/tools/check_user_path.js
     check:
       - node
-      - z.automazioni/check_user_path.js
+      - Dev/TemplateFactory/tools/check_user_path.js
   validation_contract:
     purpose: Verifica i contratti YAML usati dai check di dominio e qualita delle note.
     sources:
@@ -762,25 +799,56 @@ steps:
       - memoria
     render:
       - node
-      - z.automazioni/check_validation_contract.js
+      - Dev/TemplateFactory/tools/check_validation_contract.js
     check:
       - node
-      - z.automazioni/check_validation_contract.js
+      - Dev/TemplateFactory/tools/check_validation_contract.js
+  naming_contract:
+    purpose: Verifica che codice, pipeline e runtime usino nomi di dominio e non alias di milestone.
+    sources:
+      - Dev/TemplateFactory/modules/naming_contract.yaml
+      - Dev/TemplateFactory/tools/check_naming_contract.js
+    outputs:
+      - memoria
+    render:
+      - node
+      - Dev/TemplateFactory/tools/check_naming_contract.js
+    check:
+      - node
+      - Dev/TemplateFactory/tools/check_naming_contract.js
   session_context_contract:
     purpose: Genera il contratto JSON letto dal runtime legacy session_context.js.
     sources:
       - Dev/TemplateFactory/modules/runtime_profiles.yaml
       - Dev/TemplateFactory/modules/fields_core.yaml
-      - z.automazioni/render_session_context_contract.py
+      - Dev/TemplateFactory/tools/render_session_context_contract.py
     outputs:
       - z.automazioni/data/runtime/session_context.json
     render:
       - python3
-      - z.automazioni/render_session_context_contract.py
+      - Dev/TemplateFactory/tools/render_session_context_contract.py
     check:
       - python3
-      - z.automazioni/render_session_context_contract.py
+      - Dev/TemplateFactory/tools/render_session_context_contract.py
       - --check
+  runtime_exports_contract:
+    purpose: Verifica manifest export z.engine, sorgenti Dataview simulate, scenari render e fixture runtime senza mantenere liste o asserzioni enormi nel codice.
+    sources:
+      - Dev/TemplateFactory/modules/runtime_exports.yaml
+      - Dev/TemplateFactory/modules/runtime_render_contract.yaml
+      - Dev/TemplateFactory/modules/runtime_dataview_contract.yaml
+      - z.automazioni/data/runtime/plugin_profile.json
+      - Dev/TemplateFactory/tools/fixtures/runtime_demo_pages.json
+      - Dev/TemplateFactory/tools/check_runtime_load.js
+    outputs:
+      - z.automazioni/data/runtime/runtime_exports.json
+    render:
+      - node
+      - Dev/TemplateFactory/tools/check_runtime_load.js
+      - --render-runtime-data
+    check:
+      - node
+      - Dev/TemplateFactory/tools/check_runtime_load.js
   repo_quality_contract:
     purpose: Verifica il contratto YAML dei gate repository usati da check_vault.
     sources:
@@ -789,31 +857,31 @@ steps:
       - Dev/TemplateFactory/modules/release_boundary.yaml
       - Dev/TemplateFactory/modules/workflows.yaml
       - Dev/README.md
-      - z.automazioni/check_repo_quality_contract.js
+      - Dev/TemplateFactory/tools/check_repo_quality_contract.js
     outputs:
       - memoria
     render:
       - node
-      - z.automazioni/check_repo_quality_contract.js
+      - Dev/TemplateFactory/tools/check_repo_quality_contract.js
     check:
       - node
-      - z.automazioni/check_repo_quality_contract.js
+      - Dev/TemplateFactory/tools/check_repo_quality_contract.js
   release_quality_contract:
     purpose: Verifica il contratto YAML dei gate statici di release quality.
     sources:
       - Dev/TemplateFactory/modules/release_quality_contract.yaml
       - Dev/TemplateFactory/modules/metabind_inputs.yaml
       - Dev/TemplateFactory/modules/metabind_buttons.yaml
-      - z.automazioni/check_release_quality.js
+      - Dev/TemplateFactory/tools/check_release_quality.js
     outputs:
       - memoria
     render:
       - node
-      - z.automazioni/check_release_quality.js
+      - Dev/TemplateFactory/tools/check_release_quality.js
       - --contract-check
     check:
       - node
-      - z.automazioni/check_release_quality.js
+      - Dev/TemplateFactory/tools/check_release_quality.js
       - --contract-check
   release_folder_notes:
     purpose: Verifica le folder notes utente di release da release_boundary.yaml e Jinja.
@@ -825,26 +893,26 @@ steps:
       - memoria
     render:
       - python3
-      - z.automazioni/render_release_folder_notes.py
+      - Dev/TemplateFactory/tools/render_release_folder_notes.py
       - --check
     check:
       - python3
-      - z.automazioni/render_release_folder_notes.py
+      - Dev/TemplateFactory/tools/render_release_folder_notes.py
       - --check
   obsidian_user_acceptance:
     purpose: Verifica il contratto dello smoke live Obsidian senza aprire l'app.
     sources:
       - Dev/TemplateFactory/modules/live_acceptance.yaml
-      - z.automazioni/check_obsidian_user_acceptance.js
+      - Dev/TemplateFactory/tools/check_obsidian_user_acceptance.js
     outputs:
       - memoria
     render:
       - node
-      - z.automazioni/check_obsidian_user_acceptance.js
+      - Dev/TemplateFactory/tools/check_obsidian_user_acceptance.js
       - --contract-check
     check:
       - node
-      - z.automazioni/check_obsidian_user_acceptance.js
+      - Dev/TemplateFactory/tools/check_obsidian_user_acceptance.js
       - --contract-check
   template_previews:
     purpose: Verifica blueprint YAML e Jinja senza materializzare z.modelli nel repo sorgente.
@@ -855,10 +923,10 @@ steps:
       - memoria
     render:
       - python3
-      - z.automazioni/check_template_factory.py
+      - Dev/TemplateFactory/tools/check_template_factory.py
     check:
       - python3
-      - z.automazioni/check_template_factory.py
+      - Dev/TemplateFactory/tools/check_template_factory.py
   metadata_surfaces:
     purpose: Verifica fileClass/Bases generate dai moduli metadata senza scrivere output nel repo sorgente.
     release_only: true
@@ -871,9 +939,9 @@ steps:
       - z.bases/README.md
     render:
       - python3
-      - z.automazioni/render_metadata_surfaces.py
+      - Dev/TemplateFactory/tools/render_metadata_surfaces.py
       - --check
     check:
       - python3
-      - z.automazioni/render_metadata_surfaces.py
+      - Dev/TemplateFactory/tools/render_metadata_surfaces.py
       - --check

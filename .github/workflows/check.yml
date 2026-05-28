@@ -21,8 +21,11 @@ jobs:
         with:
           python-version: "3.12"
 
+      - name: Install Node dependencies
+        run: npm ci
+
       - name: Install Python dependencies
-        run: python -m pip install pyyaml jinja2
+        run: python -m pip install -r requirements-dev.txt
 
       - name: Sync generated sources
         run: npm run sync:sources

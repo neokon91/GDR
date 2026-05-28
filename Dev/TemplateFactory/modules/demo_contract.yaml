@@ -11,17 +11,17 @@ policy:
     e i check verificano flussi, categorie, sicurezza giocatori e continuita.
 generators:
   fixture:
-    script: z.automazioni/generate_demo_fixture.js
+    script: Dev/TemplateFactory/tools/generate_demo_fixture.js
     npm: generate:demo-fixture
     role: prova tecnica della catena scelta -> conseguenza -> propagazione
   demo_world:
-    script: z.automazioni/generate_demo_world.js
+    script: Dev/TemplateFactory/tools/generate_demo_world.js
     npm: generate:demo-world
     role: demo minima di primo avvio, non contenuto sorgente
 checks:
   required_npm:
     - check:smoke
-    - check:m11
+    - check:continuity
     - check:release-artifact
   forbidden_source_files:
     - Mondi/[Demo] Regno di Prova.md

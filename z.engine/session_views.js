@@ -23,103 +23,6 @@
   const fieldText = value => Array.isArray(value)
     ? value.map(item => item?.path ? item.path.split("/").pop().replace(/\.md$/, "") : String(item ?? "")).filter(Boolean).join(", ")
     : value?.path ? value.path.split("/").pop().replace(/\.md$/, "") : String(value ?? "");
-  const pluginIds = {
-    "Advanced Canvas": "advanced-canvas",
-    "Advanced Tables": "table-editor-obsidian",
-    "Bases": "bases",
-    "BRAT": "obsidian42-brat",
-    "Calendarium": "calendarium",
-    "Callout Manager": "callout-manager",
-    "Dataview": "dataview",
-    "Dice Roller": "obsidian-dice-roller",
-    "Excalidraw": "obsidian-excalidraw-plugin",
-    "Fantasy Content Generator": "fantasy-content-generator",
-    "Fantasy Statblocks": "obsidian-5e-statblocks",
-    "Folder Notes": "folder-notes",
-    "Hex Cartographer": "hex-cartographer",
-    "Homepage": "homepage",
-    "Iconize": "obsidian-icon-folder",
-    "Initiative Tracker": "initiative-tracker",
-    "JS Engine": "js-engine",
-    "Kanban": "obsidian-kanban",
-    "Linter": "obsidian-linter",
-    "Maps": "maps",
-    "Media Extended": "media-extended",
-    "Meta Bind": "obsidian-meta-bind-plugin",
-    "Metadata Menu": "metadata-menu",
-    "Style Settings": "obsidian-style-settings",
-    "Tabs": "tabs",
-    "Tasks": "obsidian-tasks-plugin",
-    "Templater": "templater-obsidian",
-    "TTRPG Tools: Maps": "zoom-map"
-  };
-  const pluginSymptoms = {
-    "Advanced Canvas": "Canvas avanzati e collegamenti visuali non sono disponibili.",
-    "Advanced Tables": "L'editing delle tabelle Markdown e meno comodo, ma le tabelle restano leggibili.",
-    "BRAT": "Aggiornamenti beta e manutenzione plugin non sono disponibili.",
-    "Calendarium": "Date e calendario non vengono mostrati.",
-    "Callout Manager": "I callout restano Markdown leggibile ma perdono la resa custom.",
-    "Dataview": "Tabelle e dashboard restano vuote o mostrano codice.",
-    "Dice Roller": "I tiri dice restano testo.",
-    "Excalidraw": "Mappe fronti e canvas disegnati non si aprono.",
-    "Fantasy Content Generator": "Il generatore fantasy non puo creare nuove bozze.",
-    "Fantasy Statblocks": "Le creature non appaiono come schede.",
-    "Folder Notes": "Le cartelle non aprono automaticamente la nota indice.",
-    "Hex Cartographer": "Le mappe esagonali non vengono renderizzate.",
-    "Homepage": "La pagina iniziale automatica non viene aperta.",
-    "Iconize": "Le icone di orientamento non vengono mostrate.",
-    "Initiative Tracker": "Gli incontri non entrano nel flusso a turni.",
-    "JS Engine": "Alcuni runtime condivisi non vengono eseguiti.",
-    "Kanban": "Le bacheche restano Markdown invece di aprirsi come board.",
-    "Linter": "La pulizia automatica delle note non e disponibile.",
-    "Bases": "Le viste tabellari native non sono disponibili.",
-    "Maps": "Mappe e marker non vengono mostrati.",
-    "Media Extended": "Audio, video o riferimenti media non si aprono come previsto.",
-    "Meta Bind": "I pulsanti BUTTON o gli input non reagiscono.",
-    "Metadata Menu": "FileClass e campi guidati non appaiono nelle note.",
-    "Style Settings": "Lo snippet grafico resta attivo, ma i controlli visuali del tema non sono regolabili.",
-    "Tabs": "I blocchi a schede restano sezioni lunghe.",
-    "Tasks": "Checklist operative e bacheche non filtrano i task.",
-    "Templater": "Wizard e creazione note non partono o restano incompleti.",
-    "TTRPG Tools: Maps": "Mappe zoomabili e pin non vengono mostrati."
-  };
-  const pluginManualActions = {
-    "Dataview": "Abilita Dataview e JavaScript queries; se resta vuoto usa le tabelle Markdown sotto il blocco.",
-    "Meta Bind": "Abilita Meta Bind; se un pulsante non reagisce apri manualmente la pagina indicata dal titolo dell'azione.",
-    "Templater": "Abilita Templater; verifica che la cartella script sia z.automazioni/templater e riprova il wizard.",
-    "Tasks": "Abilita Tasks; in alternativa cerca manualmente le checklist marcate #task.",
-    "Fantasy Statblocks": "Abilita Fantasy Statblocks; usa comunque la scheda creatura come Markdown.",
-    "Initiative Tracker": "Abilita Initiative Tracker; se non parte, usa l'incontro come lista manuale di turni.",
-    "Calendarium": "Abilita Calendarium; se manca, usa i campi data_mondo e fc-date come promemoria testuale.",
-    "Bases": "Se la vista Bases non appare, usa le tabelle Dataview o gli indici Mondi equivalenti.",
-    "Maps": "Se la mappa non appare, apri la nota luogo e usa coordinate, mappa collegata e tabelle.",
-    "Excalidraw": "Se il disegno non si apre, usa il file .excalidraw.md come appunto Markdown e crea una nuova mappa piu tardi.",
-    "Fantasy Content Generator": "Se il generatore non parte, crea una nota in Inbox e smistala dal workflow bozze.",
-    "Homepage": "Se non apre Inizia Qui, apri manualmente Inizia Qui.md dalla root del vault.",
-    "Metadata Menu": "Se i campi guidati non compaiono, compila direttamente il frontmatter YAML della nota."
-  };
-  const workflowPluginFallbacks = {
-    dashboard_dm: ["Meta Bind", "Dataview", "Templater", "Tasks"],
-    guida_dm: ["Meta Bind", "Dataview", "Templater"],
-    onboarding_utente: ["Meta Bind", "Dataview", "Templater"],
-    setup_guidato: ["Meta Bind", "Dataview", "Templater", "Metadata Menu", "Homepage"],
-    prima_sessione_rapida: ["Meta Bind", "Dataview", "Templater"],
-    espandi_mondo: ["Templater", "Meta Bind", "Dataview", "Bases", "Maps", "Excalidraw", "Advanced Canvas"],
-    prepara_sessione: ["Templater", "Dataview", "Tasks", "Meta Bind", "Dice Roller", "Initiative Tracker", "Fantasy Statblocks", "Media Extended"],
-    media_scene: ["Meta Bind", "Dataview", "Media Extended"],
-    gioca_live: ["Meta Bind", "Dataview", "Dice Roller", "Initiative Tracker", "Fantasy Statblocks", "Media Extended", "Callout Manager"],
-    fuori_scena: ["Meta Bind", "Dataview", "Templater", "Tasks"],
-    post_sessione: ["Templater", "Meta Bind", "Tasks", "Dataview", "Calendarium"],
-    manutenzione: ["Meta Bind", "Dataview", "Tasks", "Bases", "Linter"],
-    inbox_operativa: ["Meta Bind", "Dataview", "Templater", "Fantasy Content Generator"],
-    smistamento_bozze: ["Meta Bind", "Dataview", "Templater", "Fantasy Content Generator"],
-    quality_report: ["Meta Bind", "Dataview", "JS Engine"],
-    mappe_operativo: ["Meta Bind", "Dataview", "Templater", "Bases", "Maps", "Excalidraw", "TTRPG Tools: Maps", "Hex Cartographer"],
-    import_mappe: ["Meta Bind", "Dataview", "Templater"],
-    stato_campagna: ["Meta Bind", "Dataview", "Templater"],
-    campagna_ambientazione: ["Meta Bind", "Dataview", "Templater"]
-  };
-
   async function readJsonRel(path, fallback = null) {
     try {
       return JSON.parse(await app.vault.adapter.read(path));
@@ -137,10 +40,42 @@
     }
   }
 
+  const pluginProfile = await readJsonRel("z.automazioni/data/runtime/plugin_profile.json", {
+    default_workflow_plugins: ["Dataview", "Meta Bind", "Templater", "Tasks", "Dice Roller", "Fantasy Statblocks"],
+    default_manual_action: "Abilita il plugin dai plugin community e usa il fallback Markdown della pagina.",
+    plugins_by_label: {},
+    workflow_plugins: {}
+  });
+  const pluginByLabel = pluginProfile.plugins_by_label ?? {};
+  const workflowPluginFallbacks = pluginProfile.workflow_plugins ?? {};
+  const defaultWorkflowPlugins = asArray(pluginProfile.default_workflow_plugins).length
+    ? asArray(pluginProfile.default_workflow_plugins)
+    : ["Dataview", "Meta Bind", "Templater", "Tasks", "Dice Roller", "Fantasy Statblocks"];
+
+  function pluginInfo(label) {
+    return pluginByLabel[label] ?? {};
+  }
+
   function pluginStatus(label) {
-    const id = pluginIds[label];
-    const ok = id ? app.plugins?.enabledPlugins?.has(id) === true : null;
-    return { id: id ?? "plugin non mappato", ok };
+    const info = pluginInfo(label);
+    const id = info.id;
+    if (!id) return { id: "plugin non mappato", ok: null, info };
+
+    const communityOk = app.plugins?.enabledPlugins?.has(id) === true;
+    const internalPlugin = app.internalPlugins?.plugins?.[id] ?? app.internalPlugins?.getPluginById?.(id);
+    const coreOk = internalPlugin?.enabled === true;
+    const ok = info.source === "core" ? coreOk || communityOk : communityOk;
+    return { id, ok, info };
+  }
+
+  function pluginSymptom(label) {
+    return pluginInfo(label).symptom ?? "Controlla che il plugin sia installato, abilitato e aggiornato.";
+  }
+
+  function pluginManualAction(label) {
+    return pluginInfo(label).manual_action
+      ?? pluginProfile.default_manual_action
+      ?? "Abilita il plugin dai plugin community e usa il fallback Markdown della pagina.";
   }
 
   function describeButtonTemplate(template) {
@@ -248,58 +183,37 @@
     renderEmptyState,
     sessionCandidates
   };
-  const mapViews = (await eval(await app.vault.adapter.read("z.engine/session_maps.js")))(sharedViewContext);
-  const importMapViews = (await eval(await app.vault.adapter.read("z.engine/session_import_maps.js")))(sharedViewContext);
-  const atlasViews = (await eval(await app.vault.adapter.read("z.engine/session_atlas.js")))(sharedViewContext);
-  const canonControlViews = (await eval(await app.vault.adapter.read("z.engine/session_canon_control.js")))(sharedViewContext);
-  const worldbuildingControlViews = (await eval(await app.vault.adapter.read("z.engine/session_worldbuilding_control.js")))(sharedViewContext);
-  const dndViews = (await eval(await app.vault.adapter.read("z.engine/session_dnd.js")))(sharedViewContext);
-  const playerViews = (await eval(await app.vault.adapter.read("z.engine/session_player.js")))(sharedViewContext);
-  const continuityViews = (await eval(await app.vault.adapter.read("z.engine/session_continuity.js")))(sharedViewContext);
-  const livingWorldViews = (await eval(await app.vault.adapter.read("z.engine/session_living_world.js")))({
+  async function loadRuntimeModule(file, context) {
+    return (await eval(await app.vault.adapter.read(file)))(context);
+  }
+
+  async function loadRuntimeModules(specs, context) {
+    const loaded = {};
+    for (const [key, file] of specs) loaded[key] = await loadRuntimeModule(file, context);
+    return loaded;
+  }
+
+  function moduleSpecs(group) {
+    return asArray(group).map(item => [item.key, item.path]).filter(([key, file]) => key && file);
+  }
+
+  const runtimeManifest = await readJsonRel("z.automazioni/data/runtime/runtime_exports.json", null);
+  if (!runtimeManifest?.runtime_modules) throw new Error("Runtime exports non generato: esegui npm run sync:sources.");
+
+  const runtimeModuleGroups = runtimeManifest.runtime_modules;
+  const runtimeViews = await loadRuntimeModules(moduleSpecs(runtimeModuleGroups.shared_context), sharedViewContext);
+  const continuityViews = runtimeViews.continuity;
+  const continuityContext = {
     ...sharedViewContext,
     continuityAction: continuityViews.continuityAction,
     continuityIssues: continuityViews.continuityIssues,
     continuityStatus: continuityViews.continuityStatus
-  });
-  const offscreenViews = (await eval(await app.vault.adapter.read("z.engine/session_offscreen.js")))({
+  };
+  Object.assign(runtimeViews, await loadRuntimeModules(moduleSpecs(runtimeModuleGroups.continuity_context), continuityContext));
+  Object.assign(runtimeViews, await loadRuntimeModules(moduleSpecs(runtimeModuleGroups.session_context), {
     ...sharedViewContext,
-    continuityAction: continuityViews.continuityAction,
-    continuityIssues: continuityViews.continuityIssues,
-    continuityStatus: continuityViews.continuityStatus
-  });
-  const preparationViews = (await eval(await app.vault.adapter.read("z.engine/session_preparation.js")))(sharedViewContext);
-  const tableMaterialsViews = (await eval(await app.vault.adapter.read("z.engine/session_table_materials.js")))(sharedViewContext);
-  const mediaSceneViews = (await eval(await app.vault.adapter.read("z.engine/session_media_scene.js")))(sharedViewContext);
-  const liveTableViews = (await eval(await app.vault.adapter.read("z.engine/session_live_table.js")))({
-    ...sharedViewContext,
-    continuityAction: continuityViews.continuityAction,
-    continuityIssues: continuityViews.continuityIssues,
-    continuityStatus: continuityViews.continuityStatus
-  });
-  const postSessionViews = (await eval(await app.vault.adapter.read("z.engine/session_post_session.js")))({
-    ...sharedViewContext,
-    continuityAction: continuityViews.continuityAction,
-    continuityIssues: continuityViews.continuityIssues,
-    continuityStatus: continuityViews.continuityStatus
-  });
-  const dmDashboardViews = (await eval(await app.vault.adapter.read("z.engine/session_dm_dashboard.js")))(sharedViewContext);
-  const dmGuideViews = (await eval(await app.vault.adapter.read("z.engine/session_dm_guide.js")))(sharedViewContext);
-  const economyViews = (await eval(await app.vault.adapter.read("z.engine/session_economy.js")))(sharedViewContext);
-  const generatedDraftsViews = (await eval(await app.vault.adapter.read("z.engine/session_generated_drafts.js")))(sharedViewContext);
-  const geopoliticalViews = (await eval(await app.vault.adapter.read("z.engine/session_geopolitical.js")))(sharedViewContext);
-  const campaignBuilderViews = (await eval(await app.vault.adapter.read("z.engine/session_campaign_builder.js")))(sharedViewContext);
-  const worldBibleViews = (await eval(await app.vault.adapter.read("z.engine/session_world_bible.js")))(sharedViewContext);
-  const compendiumViews = (await eval(await app.vault.adapter.read("z.engine/session_compendium.js")))(sharedViewContext);
-  const loreViews = (await eval(await app.vault.adapter.read("z.engine/session_lore.js")))(sharedViewContext);
-  const loreReviewViews = (await eval(await app.vault.adapter.read("z.engine/session_lore_review.js")))(sharedViewContext);
-  const qualityReportViews = (await eval(await app.vault.adapter.read("z.engine/session_quality_report.js")))(sharedViewContext);
-  const vaultControlViews = (await eval(await app.vault.adapter.read("z.engine/session_vault_control.js")))(sharedViewContext);
-  const { continuityIssues } = continuityViews;
-  const sessionViews = (await eval(await app.vault.adapter.read("z.engine/session_runtime.js")))({
-    ...sharedViewContext,
-    continuityIssues
-  });
+    continuityIssues: continuityViews.continuityIssues
+  }));
 
   function renderCreationFeedback(dv, source = null) {
     const page = source ?? dv.current();
@@ -761,10 +675,10 @@
         cards.push(cardHtml({
           title: plugin,
           meta: status.ok === true ? "Plugin attivo" : status.ok === false ? "Plugin da attivare" : "Verifica manuale",
-          body: pluginSymptoms[plugin] ?? "Plugin dichiarato nel workflow YAML.",
+          body: pluginSymptom(plugin),
           importa: status.ok === true
             ? `Plugin attivo: ${status.id}.`
-            : `${pluginManualActions[plugin] ?? "Apri Impostazioni > Plugin community, abilita il plugin e usa il fallback Markdown se resta inattivo."} ID plugin: ${status.id}.`,
+            : `${pluginManualAction(plugin)} ID plugin: ${status.id}.`,
           cls: `gdr-info-card compact ${status.ok === true ? "gdr-kind-ready" : "gdr-kind-missing"}`
         }));
       }
@@ -875,7 +789,7 @@
   }
 
   function renderPluginTroubleshooting(dv, workflowId = "") {
-    const labels = workflowPluginFallbacks[workflowId] ?? ["Dataview", "Meta Bind", "Templater", "Tasks", "Dice Roller", "Fantasy Statblocks"];
+    const labels = workflowPluginFallbacks[workflowId] ?? defaultWorkflowPlugins;
     const grid = dv.el("div", "", { cls: "gdr-card-grid compact" });
 
     grid.innerHTML = labels.map(label => {
@@ -883,8 +797,8 @@
       return cardHtml({
         title: label,
         meta: status.ok === true ? "Pronto" : status.ok === false ? "Da controllare" : "Verifica manuale",
-        body: pluginSymptoms[label] ?? "Controlla che il plugin sia installato, abilitato e aggiornato.",
-        importa: status.ok === true ? `Plugin attivo: ${status.id}` : `${pluginManualActions[label] ?? "Abilita il plugin dai plugin community e usa il fallback Markdown della pagina."} ID plugin: ${status.id}.`,
+        body: pluginSymptom(label),
+        importa: status.ok === true ? `Plugin attivo: ${status.id}` : `${pluginManualAction(label)} ID plugin: ${status.id}.`,
         cls: `gdr-info-card compact ${status.ok === true ? "gdr-kind-ready" : "gdr-kind-missing"}`
       });
     }).join("") + cardHtml({
@@ -1032,171 +946,27 @@
     }
   }
 
+  function renderExports(...modules) {
+    return Object.assign({}, ...modules.map(module => Object.fromEntries(
+      Object.entries(module ?? {}).filter(([name, value]) => name.startsWith("render") && typeof value === "function")
+    )));
+  }
+
   return {
     ...legacy,
     escapeHtml: gdrCore.escapeHtml,
-    renderActiveSessionBanner: sessionViews.renderActiveSessionBanner,
-    renderAtlasNow: atlasViews.renderAtlasNow,
-    renderAtlasMapCards: mapViews.renderAtlasMapCards,
-    renderAtlasQueues: atlasViews.renderAtlasQueues,
-    renderAtlasReadiness: atlasViews.renderAtlasReadiness,
-    renderAtlasSurfaceLinks: atlasViews.renderAtlasSurfaceLinks,
-    renderMapsIntegratedLayers: mapViews.renderMapsIntegratedLayers,
-    renderMapsNow: mapViews.renderMapsNow,
-    renderMapsReadiness: mapViews.renderMapsReadiness,
-    renderMapsSurfaceLinks: mapViews.renderMapsSurfaceLinks,
-    renderMapsUseQueues: mapViews.renderMapsUseQueues,
-    renderMapImportNow: importMapViews.renderMapImportNow,
-    renderMapImportQueues: importMapViews.renderMapImportQueues,
-    renderMapImportReadiness: importMapViews.renderMapImportReadiness,
-    renderMapImportSources: importMapViews.renderMapImportSources,
-    renderMapImportSurfaceLinks: importMapViews.renderMapImportSurfaceLinks,
-    renderCanonControlNow: canonControlViews.renderCanonControlNow,
-    renderCanonControlQueues: canonControlViews.renderCanonControlQueues,
-    renderCanonControlReadiness: canonControlViews.renderCanonControlReadiness,
-    renderCanonControlSurfaceLinks: canonControlViews.renderCanonControlSurfaceLinks,
-    renderCampaignBuilderCampaignQueues: campaignBuilderViews.renderCampaignBuilderCampaignQueues,
-    renderCampaignBuilderNow: campaignBuilderViews.renderCampaignBuilderNow,
-    renderCampaignBuilderOpportunityQueues: campaignBuilderViews.renderCampaignBuilderOpportunityQueues,
-    renderCampaignBuilderReadiness: campaignBuilderViews.renderCampaignBuilderReadiness,
-    renderCampaignBuilderSurfaceLinks: campaignBuilderViews.renderCampaignBuilderSurfaceLinks,
-    renderCompendiumHistoryQueues: compendiumViews.renderCompendiumHistoryQueues,
-    renderCompendiumNow: compendiumViews.renderCompendiumNow,
-    renderCompendiumOperationalQueues: compendiumViews.renderCompendiumOperationalQueues,
-    renderCompendiumReadiness: compendiumViews.renderCompendiumReadiness,
-    renderCompendiumSurfaceLinks: compendiumViews.renderCompendiumSurfaceLinks,
-    renderCompendiumTypeMix: compendiumViews.renderCompendiumTypeMix,
+    ...renderExports(...Object.values(runtimeViews)),
     renderCreationFeedback,
-    renderConsequenceCards: continuityViews.renderConsequenceCards,
     renderEmptyState,
-    renderEconomyDependencyQueues: economyViews.renderEconomyDependencyQueues,
-    renderEconomyNow: economyViews.renderEconomyNow,
-    renderEconomyQueues: economyViews.renderEconomyQueues,
-    renderEconomyReadiness: economyViews.renderEconomyReadiness,
-    renderEconomySurfaceLinks: economyViews.renderEconomySurfaceLinks,
-    renderImpactedNextMoveCards: continuityViews.renderImpactedNextMoveCards,
-    renderGeopoliticalNow: geopoliticalViews.renderGeopoliticalNow,
-    renderGeopoliticalPressureQueues: geopoliticalViews.renderGeopoliticalPressureQueues,
-    renderGeopoliticalQueues: geopoliticalViews.renderGeopoliticalQueues,
-    renderGeopoliticalReadiness: geopoliticalViews.renderGeopoliticalReadiness,
-    renderGeopoliticalSurfaceLinks: geopoliticalViews.renderGeopoliticalSurfaceLinks,
-    renderLiveCommandCenter: sessionViews.renderLiveCommandCenter,
-    renderLiveTableMaterials: liveTableViews.renderLiveTableMaterials,
-    renderLiveTableNow: liveTableViews.renderLiveTableNow,
-    renderLiveTableQueues: liveTableViews.renderLiveTableQueues,
-    renderLiveTableReadiness: liveTableViews.renderLiveTableReadiness,
-    renderLiveTableSurfaceLinks: liveTableViews.renderLiveTableSurfaceLinks,
-    renderLivingWorldNow: livingWorldViews.renderLivingWorldNow,
-    renderLivingWorldPressureQueues: livingWorldViews.renderLivingWorldPressureQueues,
-    renderLivingWorldQueues: livingWorldViews.renderLivingWorldQueues,
-    renderLivingWorldReadiness: livingWorldViews.renderLivingWorldReadiness,
-    renderLivingWorldSurfaceLinks: livingWorldViews.renderLivingWorldSurfaceLinks,
-    renderLoreNow: loreViews.renderLoreNow,
-    renderLoreReadiness: loreViews.renderLoreReadiness,
-    renderLoreReviewCompletionQueues: loreReviewViews.renderLoreReviewCompletionQueues,
-    renderLoreReviewNow: loreReviewViews.renderLoreReviewNow,
-    renderLoreReviewReadiness: loreReviewViews.renderLoreReviewReadiness,
-    renderLoreReviewSurfaceLinks: loreReviewViews.renderLoreReviewSurfaceLinks,
-    renderLoreReviewTableQueues: loreReviewViews.renderLoreReviewTableQueues,
-    renderLoreSignalQueues: loreViews.renderLoreSignalQueues,
-    renderLoreSurfaceLinks: loreViews.renderLoreSurfaceLinks,
-    renderLoreWorldQueues: loreViews.renderLoreWorldQueues,
-    renderCodexEditorial: worldBibleViews.renderCodexEditorial,
-    renderCodexReadyShowcase: worldBibleViews.renderCodexReadyShowcase,
-    renderCodexReadyToPlay: worldBibleViews.renderCodexReadyToPlay,
-    renderOffscreenNow: offscreenViews.renderOffscreenNow,
-    renderOffscreenReactionQueues: offscreenViews.renderOffscreenReactionQueues,
-    renderOffscreenReadiness: offscreenViews.renderOffscreenReadiness,
-    renderOffscreenSurfaceLinks: offscreenViews.renderOffscreenSurfaceLinks,
-    renderOffscreenTableBridge: offscreenViews.renderOffscreenTableBridge,
-    renderPlaceMapCards: mapViews.renderPlaceMapCards,
-    renderPlayableOutline: sessionViews.renderPlayableOutline,
-    renderPlayerMap: playerViews.renderPlayerMap,
-    renderPlayerPortalStatus: playerViews.renderPlayerPortalStatus,
-    renderPlayerRecap: playerViews.renderPlayerRecap,
-    renderPlayerView: playerViews.renderPlayerView,
-    renderPublicSafety: playerViews.renderPublicSafety,
-    renderPublicStats: playerViews.renderPublicStats,
-    renderQualityReportCoverage: qualityReportViews.renderQualityReportCoverage,
-    renderQualityReportNow: qualityReportViews.renderQualityReportNow,
-    renderQualityReportOperationalGaps: qualityReportViews.renderQualityReportOperationalGaps,
-    renderQualityReportPublicSafety: qualityReportViews.renderQualityReportPublicSafety,
-    renderQualityReportShowcase: qualityReportViews.renderQualityReportShowcase,
-    renderQualityReportSurfaceLinks: qualityReportViews.renderQualityReportSurfaceLinks,
-    renderPreparationAnchorQueues: preparationViews.renderPreparationAnchorQueues,
-    renderPreparationMaterialQueues: preparationViews.renderPreparationMaterialQueues,
-    renderPreparationNow: preparationViews.renderPreparationNow,
-    renderPreparationReadiness: preparationViews.renderPreparationReadiness,
-    renderPreparationSurfaceLinks: preparationViews.renderPreparationSurfaceLinks,
-    renderMediaSceneCueQueues: mediaSceneViews.renderMediaSceneCueQueues,
-    renderMediaSceneNow: mediaSceneViews.renderMediaSceneNow,
-    renderMediaSceneReadiness: mediaSceneViews.renderMediaSceneReadiness,
-    renderMediaSceneSessionCues: mediaSceneViews.renderMediaSceneSessionCues,
-    renderMediaSceneSurfaceLinks: mediaSceneViews.renderMediaSceneSurfaceLinks,
-    renderTableMaterialsAssetQueues: tableMaterialsViews.renderTableMaterialsAssetQueues,
-    renderTableMaterialsDndPipeline: tableMaterialsViews.renderTableMaterialsDndPipeline,
-    renderTableMaterialsNow: tableMaterialsViews.renderTableMaterialsNow,
-    renderTableMaterialsReadiness: tableMaterialsViews.renderTableMaterialsReadiness,
-    renderTableMaterialsSessionQueues: tableMaterialsViews.renderTableMaterialsSessionQueues,
-    renderTableMaterialsSurfaceLinks: tableMaterialsViews.renderTableMaterialsSurfaceLinks,
     renderM7FamilyCards,
-    renderM11ContinuityChain: continuityViews.renderM11ContinuityChain,
-    renderCombatReadiness: dndViews.renderCombatReadiness,
-    renderDnd55MaterialPipeline: dndViews.renderDnd55MaterialPipeline,
-    renderDmDashboardNow: dmDashboardViews.renderDmDashboardNow,
-    renderDmDashboardQueues: dmDashboardViews.renderDmDashboardQueues,
-    renderDmDashboardReadiness: dmDashboardViews.renderDmDashboardReadiness,
-    renderDmDashboardSurfaceLinks: dmDashboardViews.renderDmDashboardSurfaceLinks,
-    renderDmGuideLoop: dmGuideViews.renderDmGuideLoop,
-    renderDmGuideNow: dmGuideViews.renderDmGuideNow,
-    renderDmGuideRules: dmGuideViews.renderDmGuideRules,
-    renderDmGuideSurfaceLinks: dmGuideViews.renderDmGuideSurfaceLinks,
-    renderGeneratedDraftsDestinations: generatedDraftsViews.renderGeneratedDraftsDestinations,
-    renderGeneratedDraftsNow: generatedDraftsViews.renderGeneratedDraftsNow,
-    renderGeneratedDraftsQueues: generatedDraftsViews.renderGeneratedDraftsQueues,
-    renderGeneratedDraftsReadiness: generatedDraftsViews.renderGeneratedDraftsReadiness,
-    renderGeneratedDraftsResolved: generatedDraftsViews.renderGeneratedDraftsResolved,
-    renderGeneratedDraftsSurfaceLinks: generatedDraftsViews.renderGeneratedDraftsSurfaceLinks,
-    renderSessionAnchorCards: sessionViews.renderSessionAnchorCards,
-    renderSessionLiveCards: sessionViews.renderSessionLiveCards,
-    renderSessionMaterialCards: sessionViews.renderSessionMaterialCards,
-    renderPostSessionCommandCenter: sessionViews.renderPostSessionCommandCenter,
-    renderPostSessionClosureQueues: postSessionViews.renderPostSessionClosureQueues,
-    renderPostSessionNow: postSessionViews.renderPostSessionNow,
-    renderPostSessionPropagationQueues: postSessionViews.renderPostSessionPropagationQueues,
-    renderPostSessionReadiness: postSessionViews.renderPostSessionReadiness,
-    renderPostSessionSurfaceLinks: postSessionViews.renderPostSessionSurfaceLinks,
-    renderSessionPostCards: sessionViews.renderSessionPostCards,
-    renderContinuityGaps: continuityViews.renderContinuityGaps,
-    renderContinuityQueue: continuityViews.renderContinuityQueue,
-    renderClosableContinuity: continuityViews.renderClosableContinuity,
-    renderPropagationTargets: continuityViews.renderPropagationTargets,
-    renderWorldImpact: continuityViews.renderWorldImpact,
-    renderWorldBibleArticles: worldBibleViews.renderWorldBibleArticles,
-    renderWorldBibleGaps: worldBibleViews.renderWorldBibleGaps,
-    renderWorldBibleIdentity: worldBibleViews.renderWorldBibleIdentity,
-    renderWorldBibleNow: worldBibleViews.renderWorldBibleNow,
-    renderWorldBibleReadiness: worldBibleViews.renderWorldBibleReadiness,
-    renderWorldBibleSurfaceLinks: worldBibleViews.renderWorldBibleSurfaceLinks,
+    renderOnboardingReadiness,
+    renderPluginTroubleshooting,
+    renderVaultReadiness,
+    renderWorkflowCommandDeck,
     renderWorldCreationStatus,
     renderWorldbuilderNow,
     renderWorldbuilderQueues,
     renderWorldbuilderReadiness,
-    renderWorldbuilderSurfaceLinks,
-    renderWorldbuildingControlNow: worldbuildingControlViews.renderWorldbuildingControlNow,
-    renderWorldbuildingControlQueues: worldbuildingControlViews.renderWorldbuildingControlQueues,
-    renderWorldbuildingControlReadiness: worldbuildingControlViews.renderWorldbuildingControlReadiness,
-    renderWorldbuildingControlSurfaceLinks: worldbuildingControlViews.renderWorldbuildingControlSurfaceLinks,
-    renderPluginTroubleshooting,
-    renderOnboardingReadiness,
-    renderVaultReadiness,
-    renderVaultControlCoherence: vaultControlViews.renderVaultControlCoherence,
-    renderVaultControlNow: vaultControlViews.renderVaultControlNow,
-    renderVaultControlQueues: vaultControlViews.renderVaultControlQueues,
-    renderVaultControlReadiness: vaultControlViews.renderVaultControlReadiness,
-    renderVaultControlSurfaceLinks: vaultControlViews.renderVaultControlSurfaceLinks,
-    renderWorkflowCommandDeck,
-    renderSessionMapCards: mapViews.renderSessionMapCards,
-    renderTableCockpit: sessionViews.renderTableCockpit
+    renderWorldbuilderSurfaceLinks
   };
 })()

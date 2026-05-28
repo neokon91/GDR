@@ -58,7 +58,7 @@ Tag e link granulari sono governati da `tag_rules.yaml` e `link_targets.yaml`; n
 
 ## Creazione Guidata
 
-I router devono presentare scelte comprensibili al DM, non nomi di file. La logica sta in `z.automazioni/*.js`, i wrapper Templater sono generati e i template finali stanno fuori dal sorgente tracciato.
+I router devono presentare scelte comprensibili al DM, non nomi di file. La logica runtime caricata da Templater sta in `z.automazioni/*.js`; il tooling di sviluppo sta in `Dev/TemplateFactory/tools/`. I wrapper Templater sono generati e i template finali stanno fuori dal sorgente tracciato.
 
 Regole operative:
 
@@ -74,17 +74,27 @@ Le note di porting private non sono documentazione stabile del repository: ogni 
 
 Il vault usa un layer interno sopra Meta Bind, Templater, JS Engine e Metadata Menu. Non e un plugin Obsidian separato: e un contratto di file e configurazioni verificato da `npm run check`.
 
+- I bundle plugin/temi Obsidian sono tracciati solo per release apribile offline; `obsidian_plugin_bundle_contract.yaml` e `check:plugin-bundles` limitano i file ammessi e bloccano configurazioni/stato JSON tracciati per errore.
 - Meta Bind: input e pulsanti da YAML, configurazione JSON generata.
 - Templater: wrapper funzione generati in `z.automazioni/templater`.
 - JS Engine: viste riusabili in `z.engine/`.
 - Metadata Menu: preset e fileClass generati dai profili frontmatter.
 - `z.bacheche`: bacheche Kanban per preparazione e creature, generate da `Dev/TemplateFactory/modules/bacheche.yaml`.
+- Tooling repo: check, render, import, release e fixture tecniche vivono in `Dev/TemplateFactory/tools/`, non nel runtime Obsidian.
 
 Non modificare a mano JSON generati, fileClass, Bases, template o bacheche. Cambia il contratto YAML o il renderer, poi rigenera.
+
+Per le pagine di supporto, non inserire blob opachi direttamente in `resource_support_pages.yaml`: usa `body_file` verso `Dev/TemplateFactory/assets/...` quando il contenuto e lungo, compresso o non revisionabile come YAML.
 
 ## Runtime
 
 `z.engine/session_views.js` resta il bridge pubblico per le chiamate DataviewJS esistenti. Le famiglie gia estratte vivono in moduli dedicati (`session_maps.js`, `session_dnd.js`, `session_player.js`, cockpit e runtime sessione).
+
+Gli export pubblici e la registry dei moduli runtime sono dichiarati in `Dev/TemplateFactory/modules/runtime_exports.yaml`; il bridge legge il JSON generato `z.automazioni/data/runtime/runtime_exports.json`. Gli scenari minimi di render sono in `Dev/TemplateFactory/modules/runtime_render_contract.yaml`; le sorgenti Dataview simulate sono in `Dev/TemplateFactory/modules/runtime_dataview_contract.yaml`. `session_views.js` pubblica automaticamente gli export `render*`; `check:runtime-load` usa manifest e fixture `Dev/TemplateFactory/tools/fixtures/runtime_demo_pages.json` per impedire drift.
+
+Il troubleshooting plugin runtime passa da `Dev/TemplateFactory/modules/runtime_plugin_profile.yaml` e dal JSON generato `z.automazioni/data/runtime/plugin_profile.json`: non aggiungere dizionari statici di plugin, sintomi o fallback dentro `session_views.js`.
+
+La continuita narrativa passa da `z.automazioni/continuity_event_model.js`: gli script operativi devono creare eventi con sorgente, causa, conseguenza, bersagli, stato e visibilita, poi applicarli tramite il reducer/adattatore di `continuity_state.js`. I nomi runtime/check devono restare nomi di dominio; `check:naming` blocca il ritorno di alias di milestone nel codice attivo.
 
 Regole di migrazione:
 
@@ -92,30 +102,40 @@ Regole di migrazione:
 - aggiungere check runtime quando nasce una funzione pubblica;
 - non spostare path usati da Meta Bind, Templater, TemplateFactory o release senza `npm run check`;
 - non far crescere `session_views.js` se una nuova famiglia puo stare in un modulo dedicato.
+- le azioni Meta Bind che mutano frontmatter devono avere copertura in `npm run check:meta-actions` quando toccano continuita, propagazione o player safety.
+- le modifiche al modello eventi di continuita devono passare da `npm run check:continuity-events` e non solo da fixture end-to-end.
 
 ## SRD E D&D
 
 Il profilo regolamentare principale e D&D 5.5/SRD, ma il Codex del mondo resta separato dal regolamento.
 
-`SRD/` non e sorgente tracciato. La release pulita lo materializza tramite `z.automazioni/import_srd.js`; per una copia locale usare `npm run import:srd`, lasciando l'output ignorato da Git.
+`SRD/` non e sorgente tracciato. La release pulita lo materializza tramite `Dev/TemplateFactory/tools/import_srd.js`; per una copia locale usare `npm run import:srd`, lasciando l'output ignorato da Git.
 
 La scheda meccanica PG segue questa catena:
 
-`srd_character_build.yaml` -> `npm run sync:sources` -> `z.automazioni/data/srd/*.json` -> `z.automazioni/pg.js` -> frontmatter strutturato -> Jinja della scheda PG.
+`srd_character_build.yaml` -> `npm run sync:sources` -> `z.automazioni/data/srd/*.json` -> `z.automazioni/pg_mechanics.js` -> `z.automazioni/pg.js` -> frontmatter strutturato -> Jinja della scheda PG.
 
-Non hardcodare nuove opzioni PG nello script: aggiungerle al modulo YAML e verificare con `npm run check:srd-character-data`.
+Non hardcodare nuove opzioni PG nello script: aggiungerle al modulo YAML e verificare con `npm run check:srd-character-data` e `npm run check:pg-mechanics`.
 
 ## Check E Release
 
 Comandi principali:
 
 ```bash
+npm ci
+python -m pip install -r requirements-dev.txt
 npm run sync:sources
 npm run check
 npm run release:clean
 npm run release:demo
 ```
 
-`npm run sync:sources` materializza output ignorati necessari ai check locali e alla CI. `npm run check` valida pipeline, plugin, runtime, workflow, release, demo, import, repo hygiene e sintassi JS. `npm run release:clean` crea la copia consegnabile; `npm run release:demo` aggiunge la demo generata.
+`npm ci` e `requirements-dev.txt` mantengono la toolchain di sviluppo riproducibile. `npm run sync:sources` materializza output ignorati necessari ai check locali e alla CI. `npm run check` valida pipeline, plugin, runtime, workflow, azioni Meta Bind, regole PG, release, demo, import, repo hygiene e sintassi JS. `npm run release:clean` crea la copia consegnabile; `npm run release:demo` aggiunge la demo generata.
+
+`obsidian_config.yaml` non puo puntare a bookmark, workspace o file statici mancanti: `render_obsidian_config.py --check` accetta solo path esistenti o output dichiarati in `source_pipeline.yaml`.
+
+L'import SRD deve restare pinnato a un commit sorgente, non a un branch remoto mobile. `check:importers` blocca regressioni verso `main` o `master`.
+
+Il confine release non va verificato solo con presenza/assenza di file puntuali: `npm run check:release-boundary` genera una release temporanea e controlla copy policy, esclusioni dev, marker vietati, bridge runtime e dipendenze JS locali.
 
 Dopo un check locale, gli output generati possono essere rimossi con `npm run clean:repo` o con una pulizia degli ignored, senza tracciarli.

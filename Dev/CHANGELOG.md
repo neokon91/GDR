@@ -4,6 +4,26 @@
 
 ### Aggiunto
 
+- `Dev/TemplateFactory/tools/` separa tooling repo, check, renderer, importer, release script e fixture tecniche dal runtime vault `z.automazioni`; `check:repo` blocca il ritorno di tooling dev nella cartella runtime.
+- [[Dev/Roadmap/1.1 Kernel Architetturale]] come roadmap proposta per build riproducibile, runtime modulare, test dominio, plugin layer a profili e traiettoria narrative/rules engine.
+- `check:srd-import-source` e pin commit per `import_srd.js`, evitando release SRD dipendenti da branch remoto mobile.
+- `requirements-dev.txt` e `package-lock.json` come baseline minima per toolchain CI/sviluppo riproducibile.
+- Messaggio DX piu chiaro in `check:source-pipeline` quando mancano output generati e serve `npm run sync:sources`.
+- `cockpit_renderer_utils.js` come kernel condiviso per renderer cockpit, escluso dalla release utente, con tutti i 25 renderer cockpit convertiti a wrapper dichiarativi o specializzati senza cambiare gli artifact generati.
+- `pg_mechanics.js` come modulo runtime separato per regole PG testabili senza Obsidian, lasciando `pg.js` come wizard Templater/adattatore.
+- `check:pg-mechanics` valida su dati SRD generati point-buy, aumenti background, PF, competenze, YAML meccanico, talenti origine e tratti specie.
+- `continuity_state.js` come nome canonico del runtime di continuita, senza alias di milestone nel codice attivo.
+- `continuity_event_model.js` introduce evento narrativo, normalizzazione bersagli, reducer/applicatore puro e `check:continuity-events` per verificare continuita senza Obsidian.
+- `check:continuity` e `renderContinuityChain` sono ora gli unici nomi operativi per fixture e vista continuita.
+- `naming_contract.yaml` e `check:naming` impediscono il ritorno di alias di milestone in codice, pipeline e runtime attivo.
+- `check:meta-actions` verifica con frontmatter mockato le azioni Meta Bind critiche: scelta mondo, applica conseguenza, propaga entita e recap pubblico player-safe.
+- `check:release-boundary` verifica su release temporanea copy policy, esclusioni dev, marker vietati, runtime bridge e dipendenze JS locali.
+- `obsidian_plugin_bundle_contract.yaml` e `check:plugin-bundles` rendono esplicita la policy dei plugin/temi Obsidian vendorizzati, bloccando bundle non dichiarati e configurazioni JSON tracciate per errore.
+- `runtime_exports.yaml` dichiara moduli ed export pubblici `z.engine`, `runtime_render_contract.yaml` dichiara gli scenari minimi di render e `runtime_dataview_contract.yaml` dichiara le sorgenti Dataview simulate; `check_runtime_load.js` ora e un runner generico su manifest e fixture invece di mantenere liste, route, dati e asserzioni massive inline.
+- `runtime_plugin_profile.yaml` e `render_runtime_plugin_profile.js` spostano da `session_views.js` a YAML/JSON generato il profilo plugin runtime per troubleshooting, fallback workflow e readiness.
+- `runtime_exports.yaml` governa anche la registry dei moduli caricati da `session_views.js`; `check_runtime_load.js` genera il JSON runtime usato dal bridge e valida export/render senza registry hardcoded.
+- `render_resource_support_pages.py` supporta `body_file` per asset lunghi o opachi sotto `Dev/TemplateFactory/assets`, e blocca nuovi dati Excalidraw compressi inline in `resource_support_pages.yaml`.
+- `render_obsidian_config.py` valida anche i riferimenti `path`/`file` in bookmark e workspace, bloccando target non tracciati o non generati da `source_pipeline.yaml`.
 - `Risorse/Guida DM.md` trasformata in bussola DM compatta con runtime `session_dm_guide.js` e contratto `dm_guide_cockpit.yaml`.
 - `Risorse/Media Scene.md` trasformata in cockpit compatto con runtime `session_media_scene.js` e contratto `media_scene_cockpit.yaml`.
 - `Risorse/Importare Mappe.md` trasformata in cockpit compatto con runtime `session_import_maps.js` e contratto `import_maps_cockpit.yaml`.
@@ -34,6 +54,7 @@
 - `check:release-quality` blocca API DataviewJS fragili nei blocchi Markdown utente; la diagnostica plugin deve passare dal runtime `z.engine`.
 - TemplateFactory genera anche il template Avventura, con wrapper Templater dedicato e profilo YAML gia esistente.
 - `metabind_config.yaml` diventa fonte YAML completa per `.obsidian/plugins/obsidian-meta-bind-plugin/data.json`, verificata da `check:metabind-config`.
+- `check:runtime-load` espone il gate runtime come comando dedicato; `npm run check` lo esegue attraverso `check:source-pipeline` evitando un secondo giro nello smoke statico.
 - `source_pipeline.yaml` dichiara MD/JSON generati da YAML/Jinja; `check:generation-contract` verifica il piano di render e blocca output generati non dichiarati nella pipeline.
 - Le preview `Dev/TemplateFactory/examples/generated`, `dist`, `SRD`, `z.modelli`, `z.bacheche`, `z.bases`, `z.fileclass`, JSON runtime e JSON plugin generati non sono tracciati: restano output locale/release generato dai sorgenti.
 - Workflow dichiarativi per dashboard DM, preparazione, live, post-sessione, fuori scena, worldbuilding, atlante, canone, compendium, Bibbia del mondo, economia, lore, motore mondo vivo e iniziativa.
@@ -76,12 +97,12 @@
 - Contratto architetturale consolidato in [[Dev/README]]: Markdown contenuto umano, YAML stato persistente, Dataview query layer, Meta Bind interfaccia, Templater generazione, `z.engine`/`z.automazioni` runtime.
 - `workflows.yaml` ora documenta regole dichiarative di continuità con trigger, condizioni, effetti e propagazioni, eseguite dal runtime esistente.
 - `prepara-recap-pubblico` non marca più pubblica l'intera nota sessione; il gate impedisce regressioni su questa azione.
-- brief M11 consolidato poi rimosso ora e un brief operativo M11 con tre interventi concreti: entita vive end-to-end, pipeline homebrew D&D 5.5 collegata al mondo e simulazione narrativa leggera.
-- handoff M11 consolidato poi rimosso punta a M11 invece di restare su M9, con priorita tecniche e vincoli coerenti con il sistema operativo narrativo in Obsidian.
-- M11 avviata con runtime reale: `registra_scelta_mondo` registra scelta, conseguenza, bersagli, propagazione, pressione e avanzamento tracciati sui target collegati.
-- `renderM11ContinuityChain` espone nelle viste operative la catena scelta -> conseguenza -> bersagli -> stato -> prossima apertura.
-- `check_m11_fixture.js` valida la catena end-to-end M11 su fixture generata: sessione, conseguenza, propagazione, clock, D&D 5.5 e viste operative.
-- `session_continuity.js` separa il runtime di continuita, propagazione e catena M11 dal bridge `session_views.js`.
+- Brief di continuita consolidato poi rimosso con tre interventi concreti: entita vive end-to-end, pipeline homebrew D&D 5.5 collegata al mondo e simulazione narrativa leggera.
+- Handoff di continuita consolidato poi rimosso al posto del precedente riferimento di milestone, con priorita tecniche e vincoli coerenti con il sistema operativo narrativo in Obsidian.
+- Continuita avviata con runtime reale: `registra_scelta_mondo` registra scelta, conseguenza, bersagli, propagazione, pressione e avanzamento tracciati sui target collegati.
+- `renderContinuityChain` espone nelle viste operative la catena scelta -> conseguenza -> bersagli -> stato -> prossima apertura.
+- `check_continuity_fixture.js` valida la catena end-to-end su fixture generata: sessione, conseguenza, propagazione, clock, D&D 5.5 e viste operative.
+- `session_continuity.js` separa il runtime di continuita, propagazione e catena narrativa dal bridge `session_views.js`.
 - `session_runtime.js` separa viste sessione, live table e post-sessione; `session_views.js` resta bridge compatibile.
 - `check_runtime_load.js` carica il runtime DataviewJS con adapter Obsidian simulato e verifica gli export principali.
 - `player_safety.js` separa il gate anti-segreti/player-facing da `check_vault.js`.
@@ -92,7 +113,7 @@
 - Rimossa la demo manuale dal sorgente: i contenuti dimostrativi devono nascere da generatore dedicato a fine ciclo.
 - Gate esperienza hub: `check_vault.js` verifica ruolo, classe visuale, callout, viste/input/azioni plugin-native e marker funzionali degli hub principali.
 - Gate Plugin Surface YAML: TemplateFactory blocca input Meta Bind, bottoni, callout, runtime DataviewJS e Bases usati nei Jinja se non sono dichiarati nei moduli YAML.
-- brief M11 consolidato poi rimosso prepara la prossima fase su profondita delle entita fantasy governata da YAML.
+- Brief di continuita consolidato poi rimosso prepara la prossima fase su profondita delle entita fantasy governata da YAML.
 - `entity_depth.yaml` introduce contratti YAML per profondita fantasy di luogo, fazione, missione e tracciato: campi, prompt runtime, sezioni, tabs e superfici plugin obbligatorie.
 - `taxonomy_depth.yaml` introduce contratti verificati per D&D 5.5 e worldbuilding: opzioni giocatore, magia/regole, encounter tools, societa/economia, religione/cosmologia e storia/geografia/ecologia.
 - `dnd55_options.yaml` introduce valori D&D 5.5 localizzati in italiano per livelli incantesimo, scuole, tempi, componenti, classi, specie, tipi creatura, taglie, rarita, condizioni, CD, danni e proprieta equipaggiamento.
@@ -109,8 +130,8 @@
 - Le pagine utente principali usano `mode: "simple"` e non espongono diagnostica plugin nel percorso normale.
 - La documentazione utente distingue setup normale, recupero strumenti e sviluppo tecnico.
 - La demo finale resta artefatto generato in `dist/`, non contenuto sorgente da mantenere nota per nota.
-- handoff M11 consolidato poi rimosso chiarisce che M6 e completato e che la prossima fase deve concentrarsi su schede plugin-native, non su nuove dashboard.
-- handoff M11 consolidato poi rimosso aggiornato dopo M7 e chiusura warning: la prossima fase e M8 Release Evidence And Zero-Warning Discipline.
+- Handoff di continuita consolidato poi rimosso chiarisce che la milestone precedente e completata e che la prossima fase deve concentrarsi su schede plugin-native, non su nuove dashboard.
+- Handoff di continuita consolidato poi rimosso aggiornato dopo la chiusura warning: la prossima fase e Release Evidence And Zero-Warning Discipline.
 - Le note demo manuali storiche sono state eliminate dal sorgente per evitare manutenzione nota per nota.
 - Le guide utente più esposte sono state portate a tab funzionali con controlli, azioni, Dataview/DataviewJS, Tasks e fallback leggibile.
 - `release:clean` verifica che la release mantenga nascosti runtime, template, fileClass, Bases, bacheche tecniche e SRD dalla navigazione normale.
@@ -159,7 +180,7 @@
 - `npm run release:demo`
 - `npm run check` rieseguito dopo M6 Continuity Engine e rigenerazione TemplateFactory.
 - `npm run check`
-- `npm run check:m11`
+- `npm run check:continuity`
 - `npm run check:release-artifact`
 - `npm run check:smoke`
 - `npm run check:release`
@@ -332,7 +353,7 @@
 
 - [[1. DM Dashboard]] e [[Worldbuilder Dashboard]] usano gli helper condivisi del Session Context.
 - [[Durante il Gioco]] e [[Inbox/Inbox]] creano note live piu specifiche invece di usare sempre template generici.
-- `z.automazioni/check_vault.js` distingue meglio warning utili da rumore su note indice o risorse.
+- `Dev/TemplateFactory/tools/check_vault.js` distingue meglio warning utili da rumore su note indice o risorse.
 
 ## 0.2.0 - 2026-05-19
 
@@ -363,7 +384,7 @@
 
 - Nota [[Inizia Qui]] come onboarding non tecnico.
 - [[Risorse/FAQ]] per supporto non tecnico.
-- Smoke test tecnico `node z.automazioni/check_vault.js`.
+- Smoke test tecnico `node Dev/TemplateFactory/tools/check_vault.js`.
 - Documentazione di release in [[Dev/RELEASE]].
 - File [[VERSION]] con versione corrente del vault.
 

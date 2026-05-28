@@ -28,6 +28,16 @@ required_files:
   - z.engine/session_player.js
   - z.engine/session_runtime.js
   - z.automazioni/helpers.js
+  - z.automazioni/meta_actions.js
+  - z.automazioni/continuity_event_model.js
+  - z.automazioni/continuity_state.js
+  - z.automazioni/pg.js
+  - z.automazioni/pg_mechanics.js
+  - z.automazioni/session_context.js
+  - z.automazioni/data/srd/core.json
+  - z.automazioni/data/srd/opzioni_personaggio.json
+  - z.automazioni/data/runtime/plugin_profile.json
+  - z.automazioni/data/runtime/runtime_exports.json
   - z.automazioni/data/runtime/session_context.json
   - z.automazioni/templater
   - z.bases/Atlante Mappe.base
@@ -83,21 +93,8 @@ copy_policy:
     - Smoke 1.0 Professionale.md
     - Sviluppo Vault.md
   excluded_automazioni:
-    - check_vault.js
-    - checks
-    - check_smoke.js
-    - check_release.js
-    - import_azgaar_geojson.js
-    - import_srd.js
     - LICENSE.md
-    - node_utils.js
-    - repo_hygiene.js
-    - release_boundary_utils.js
-    - release_beta.js
-    - release_clean.js
-    - release_plugin_profile.js
     - README.md
-    - template_factory_utils.py
   required_user_ignore_filters:
     - SRD/
     - z.automazioni/
@@ -231,9 +228,14 @@ release_plugin_profile:
 forbidden_automation_prefixes:
   - audit_
   - check_
+  - cockpit_renderer_utils
   - generate_
   - import_
+  - node_utils
+  - repo_hygiene
   - render_
+  - release_
+  - run_source_pipeline
   - template_factory_
 bridge_runtime_modules:
   - session_continuity.js

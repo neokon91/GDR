@@ -1,0 +1,37 @@
+id: runtime_plugin_profile
+purpose: Profilo runtime dei plugin letto dalle viste DataviewJS per fallback, troubleshooting e readiness.
+version: 0.1.0
+sources:
+  plugin_matrix: Dev/TemplateFactory/modules/plugin_matrix.yaml
+  plugin_contracts: Dev/TemplateFactory/modules/plugin_contracts.yaml
+  workflows: Dev/TemplateFactory/modules/workflows.yaml
+output: z.automazioni/data/runtime/plugin_profile.json
+defaults:
+  workflow_plugins:
+    - Dataview
+    - Meta Bind
+    - Templater
+    - Tasks
+    - Dice Roller
+    - Fantasy Statblocks
+  manual_action: Apri Impostazioni > Plugin community, abilita il plugin e usa il fallback Markdown se resta inattivo.
+core_plugins:
+  - id: bases
+    label: Bases
+    source: core
+    function: Viste tabellari native Obsidian per file .base e correzione properties.
+    symptom: Le viste tabellari native non sono disponibili.
+    manual_action: Se la vista Bases non appare, usa le tabelle Dataview o gli indici Mondi equivalenti.
+manual_actions:
+  Dataview: Abilita Dataview e JavaScript queries; se resta vuoto usa le tabelle Markdown sotto il blocco.
+  Meta Bind: Abilita Meta Bind; se un pulsante non reagisce apri manualmente la pagina indicata dal titolo dell'azione.
+  Templater: Abilita Templater; verifica che la cartella script sia z.automazioni/templater e riprova il wizard.
+  Tasks: Abilita Tasks; in alternativa cerca manualmente le checklist marcate #task.
+  Fantasy Statblocks: Abilita Fantasy Statblocks; usa comunque la scheda creatura come Markdown.
+  Initiative Tracker: Abilita Initiative Tracker; se non parte, usa l'incontro come lista manuale di turni.
+  Calendarium: Abilita Calendarium; se manca, usa i campi data_mondo e fc-date come promemoria testuale.
+  Maps: Se la mappa non appare, apri la nota luogo e usa coordinate, mappa collegata e tabelle.
+  Excalidraw: Se il disegno non si apre, usa il file .excalidraw.md come appunto Markdown e crea una nuova mappa piu tardi.
+  Fantasy Content Generator: Se il generatore non parte, crea una nota in Inbox e smistala dal workflow bozze.
+  Homepage: Se non apre Inizia Qui, apri manualmente Inizia Qui.md dalla root del vault.
+  Metadata Menu: Se i campi guidati non compaiono, compila direttamente il frontmatter YAML della nota.
