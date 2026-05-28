@@ -15,6 +15,7 @@ sys.dont_write_bytecode = True
 
 ROOT = Path(__file__).resolve().parents[3]
 RUNTIME_PROFILES = ROOT / "Dev" / "TemplateFactory" / "modules" / "runtime_profiles.yaml"
+WORLD_TAXONOMY = ROOT / "Dev" / "TemplateFactory" / "modules" / "world_taxonomy.yaml"
 FIELDS_CORE = ROOT / "Dev" / "TemplateFactory" / "modules" / "fields_core.yaml"
 ENTITY_MODEL = ROOT / "Dev" / "TemplateFactory" / "modules" / "entity_model.yaml"
 RELEASE_BOUNDARY = ROOT / "Dev" / "TemplateFactory" / "modules" / "release_boundary.yaml"
@@ -421,15 +422,14 @@ def rule_reachable(rule: dict[str, Any], routes: list[dict[str, str]]) -> bool:
 
 
 def validate_world_taxonomy(
-    contracts: dict[str, Any],
+    taxonomy: dict[str, Any],
     template_blueprints: dict[str, Any],
     path_registry: dict[str, str],
     entity_model: dict[str, Any],
     template_router: dict[str, Any],
     errors: list[str],
 ) -> dict[str, Any]:
-    source = f"{RUNTIME_PROFILES.relative_to(ROOT)}: runtime_contracts.world_taxonomy"
-    taxonomy = contracts.get("world_taxonomy")
+    source = str(WORLD_TAXONOMY.relative_to(ROOT))
     if not isinstance(taxonomy, dict) or not taxonomy:
         fail(errors, f"{source} deve essere mappa non vuota")
         return {}
@@ -622,6 +622,7 @@ def validate_world_taxonomy(
 
 def validate_contract(
     runtime_profiles: dict[str, Any],
+    world_taxonomy: dict[str, Any],
     fields_core: dict[str, Any],
     entity_model: dict[str, Any],
     release_boundary: dict[str, Any],
@@ -654,7 +655,7 @@ def validate_contract(
     )
     template_router = validate_template_router(contracts, template_blueprints, errors)
     world_taxonomy = validate_world_taxonomy(
-        contracts,
+        world_taxonomy,
         template_blueprints,
         path_registry,
         entity_model,
@@ -712,6 +713,7 @@ def main() -> int:
 
     errors: list[str] = []
     runtime_profiles = load_yaml(RUNTIME_PROFILES, errors)
+    world_taxonomy = load_yaml(WORLD_TAXONOMY, errors)
     fields_core = load_yaml(FIELDS_CORE, errors)
     entity_model = load_yaml(ENTITY_MODEL, errors)
     release_boundary = load_yaml(RELEASE_BOUNDARY, errors)
@@ -720,6 +722,7 @@ def main() -> int:
     template_blueprints = load_yaml(TEMPLATE_BLUEPRINTS, errors)
     contract = validate_contract(
         runtime_profiles,
+        world_taxonomy,
         fields_core,
         entity_model,
         release_boundary,

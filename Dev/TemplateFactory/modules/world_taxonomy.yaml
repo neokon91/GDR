@@ -1,0 +1,436 @@
+id: world_taxonomy
+purpose: Tassonomia dichiarativa per i router creativi worldbuilding e le route template collegate ai blueprint.
+version: 0.1.0
+kinds:
+  luogo:
+    label: Luogo
+    default_folder: luoghi
+    families:
+      - id: fisico
+        label: Geografia fisica
+        folder: luoghi
+        category: luogo
+        items:
+          - id: catena montuosa
+            label: Catena montuosa
+          - id: fiume o delta
+            label: Fiume o delta
+          - id: mare arcipelago o costa
+            label: Mare, arcipelago o costa
+          - id: deserto steppa tundra foresta palude
+            label: Deserto, steppa, tundra, foresta o palude
+          - id: vulcano faglia cratere rovina geologica
+            label: Vulcano, faglia, cratere o rovina geologica
+          - id: sottosuolo caverna mondo regione planare
+            label: Sottosuolo, caverna-mondo o regione planare
+          - id: fenomeno naturale anomalo
+            label: Fenomeno naturale anomalo
+      - id: regione naturale
+        label: Regione naturale
+        folder: luoghi
+        category: luogo
+        items:
+          - id: regione naturale
+            label: Regione naturale
+      - id: geografia
+        label: Geografia regionale
+        folder: luoghi
+        category: luogo
+        items:
+          - id: continente
+            label: Continente
+          - id: isola
+            label: Isola
+          - id: regione
+            label: Regione
+      - id: politico
+        label: Geografia politica
+        folder: luoghi
+        category: luogo
+        items:
+          - id: citta-stato
+            label: Citta-stato
+          - id: federazione
+            label: Federazione
+          - id: teocrazia
+            label: Teocrazia
+          - id: protettorato
+            label: Protettorato
+          - id: colonia
+            label: Colonia
+          - id: enclave
+            label: Enclave
+          - id: zona contesa
+            label: Zona contesa
+          - id: confederazione nomade
+            label: Confederazione nomade
+          - id: marca militare
+            label: Marca militare
+      - id: politica
+        label: Politica e domini
+        folder: luoghi
+        category: luogo
+        items:
+          - id: regno
+            label: Regno
+          - id: impero
+            label: Impero
+          - id: repubblica
+            label: Repubblica
+          - id: oligarchia
+            label: Oligarchia
+          - id: ducato
+            label: Ducato
+          - id: contea
+            label: Contea
+          - id: baronia
+            label: Baronia
+      - id: abitato
+        label: Abitato o infrastruttura
+        folder: luoghi
+        category: luogo
+        items:
+          - id: insediamento
+            label: Insediamento
+          - id: porto
+            label: Porto
+          - id: fortezza
+            label: Fortezza
+          - id: mercato
+            label: Mercato
+          - id: strada o ponte
+            label: Strada o ponte
+      - id: sacro
+        label: Sacro
+        folder: luoghi
+        category: luogo
+        items:
+          - id: tempio
+            label: Tempio
+          - id: santuario
+            label: Santuario
+          - id: reliquiario
+            label: Reliquiario
+          - id: luogo sacro
+            label: Luogo sacro
+      - id: pericoloso
+        label: Pericoloso
+        folder: luoghi
+        category: luogo
+        items:
+          - id: dungeon
+            label: Dungeon
+          - id: rovina
+            label: Rovina
+          - id: tana
+            label: Tana
+          - id: frontiera ostile
+            label: Frontiera ostile
+      - id: bozza
+        label: Non so ancora
+        folder: luoghi
+        category: luogo
+        items:
+          - id: luogo da scoprire
+            label: Bozza utile
+  societa:
+    label: Societa
+    default_folder: societa
+    families:
+      - id: struttura
+        label: Struttura sociale
+        folder: societa
+        category: societa
+        items:
+          - id: ceto sociale
+            label: Ceto sociale
+          - id: clan casata o famiglia
+            label: Clan, casata o famiglia
+          - id: istituzione civile
+            label: Istituzione civile
+          - id: legge o codice
+            label: Legge o codice
+          - id: crimine organizzato
+            label: Crimine organizzato
+          - id: accademia o scuola
+            label: Accademia o scuola
+          - id: burocrazia
+            label: Burocrazia
+          - id: gilda non economica
+            label: Gilda non economica
+          - id: movimento popolare
+            label: Movimento popolare
+          - id: societa da definire
+            label: Non so ancora
+  cultura:
+    label: Cultura
+    default_folder: culture
+    families:
+      - id: pratiche
+        label: Pratiche culturali
+        folder: culture
+        category: cultura
+        items:
+          - id: festa o calendario rituale
+            label: Festa o calendario rituale
+          - id: tabu
+            label: Tabu
+          - id: rito di passaggio
+            label: Rito di passaggio
+          - id: costume quotidiano
+            label: Costume quotidiano
+          - id: cucina e ospitalita
+            label: Cucina e ospitalita
+          - id: matrimonio famiglia e parentela
+            label: Matrimonio, famiglia e parentela
+          - id: funerali e memoria
+            label: Funerali e memoria
+          - id: duello onore e vendetta
+            label: Duello, onore e vendetta
+          - id: arte musica teatro moda
+            label: Arte, musica, teatro o moda
+          - id: cultura da definire
+            label: Non so ancora
+  religione:
+    label: Religione e mito
+    default_folder: religioni
+    families:
+      - id: mito
+        label: Religione e mito
+        folder: religioni
+        category: religione
+        items:
+          - id: pantheon
+            label: Pantheon
+          - id: divinita
+            label: Divinita
+          - id: santo profeta o eroe mitico
+            label: Santo, profeta o eroe mitico
+          - id: eresia
+            label: Eresia
+          - id: ordine religioso
+            label: Ordine religioso
+          - id: reliquia
+            label: Reliquia
+          - id: luogo sacro
+            label: Luogo sacro
+          - id: profezia
+            label: Profezia
+          - id: pratica quotidiana
+            label: Pratica quotidiana
+          - id: mito da definire
+            label: Non so ancora
+  magia:
+    label: Magia e cosmologia
+    default_folder: cosmologia
+    families:
+      - id: arcano
+        label: Magia e cosmologia
+        folder: cosmologia
+        category: cosmologia
+        items:
+          - id: legge arcana
+            label: Legge arcana
+          - id: scuola o tradizione magica
+            label: Scuola o tradizione magica
+          - id: risorsa magica
+            label: Risorsa magica
+          - id: fenomeno magico
+            label: Fenomeno magico
+          - id: patto
+            label: Patto
+          - id: contaminazione
+            label: Contaminazione
+          - id: soglia o portale
+            label: Soglia o portale
+          - id: anomalia
+            label: Anomalia
+          - id: piano reame o aldila
+            label: Piano, reame o aldila
+          - id: mistero arcano
+            label: Non so ancora
+  economia:
+    label: Economia
+    default_folder: risorse_mondo
+    families:
+      - id: scambio
+        label: Economia
+        folder: risorse_mondo
+        category: risorsa
+        items:
+          - id: merce strategica
+            label: Merce strategica
+          - id: miniera cava foresta o fonte
+            label: Miniera, cava, foresta o fonte
+          - id: porto mercato fiera o caravanserraglio
+            label: Porto, mercato, fiera o caravanserraglio
+          - id: monopolio
+            label: Monopolio
+          - id: rotta illegale
+            label: Rotta illegale
+          - id: debito o banca
+            label: Debito o banca
+          - id: carestia
+            label: Carestia
+          - id: tecnologia produttiva
+            label: Tecnologia produttiva
+          - id: oggetto di prestigio
+            label: Oggetto di prestigio
+          - id: leva economica da definire
+            label: Non so ancora
+  ecologia:
+    label: Creature ed ecologia
+    default_folder: creature
+    families:
+      - id: ecosistema
+        label: Creature ed ecologia
+        folder: creature
+        category: creatura
+        items:
+          - id: habitat
+            label: Habitat
+          - id: migrazione
+            label: Migrazione
+          - id: catena alimentare
+            label: Catena alimentare
+          - id: variante regionale
+            label: Variante regionale
+          - id: creatura sacra
+            label: Creatura sacra
+          - id: mostro sociale
+            label: Mostro sociale
+          - id: specie senziente
+            label: Specie senziente
+          - id: predatore territoriale
+            label: Predatore territoriale
+          - id: piaga sciame o invasione
+            label: Piaga, sciame o invasione
+          - id: ecosistema da definire
+            label: Non so ancora
+  storia:
+    label: Storia
+    default_folder: storia
+    families:
+      - id: evento
+        label: Storia
+        folder: storia
+        category: evento storico
+        items:
+          - id: dinastia
+            label: Dinastia
+          - id: guerra
+            label: Guerra
+          - id: migrazione
+            label: Migrazione
+          - id: catastrofe
+            label: Catastrofe
+          - id: rivoluzione
+            label: Rivoluzione
+          - id: scoperta
+            label: Scoperta
+          - id: trattato
+            label: Trattato
+          - id: eta mitica
+            label: Eta mitica
+          - id: cronologia concorrente
+            label: Cronologia concorrente
+          - id: evento da definire
+            label: Non so ancora
+template_routes:
+  default_template: z.modelli/worldbuilding/Entita Worldbuilding
+  by_kind:
+    luogo:
+      default_template: z.modelli/luogo/Interesse
+      rules:
+        - id: luogo_insediamento_subtype
+          match:
+            subtype: insediamento
+          template: z.modelli/luogo/Insediamento
+        - id: luogo_insediamento_category
+          match:
+            category: insediamento
+          template: z.modelli/luogo/Insediamento
+        - id: luogo_tempio
+          match:
+            subtype: tempio
+          template: z.modelli/luogo/Tempio
+        - id: luogo_dungeon
+          match:
+            subtype: dungeon
+          template: z.modelli/luogo/Dungeon
+        - id: luogo_rovina
+          match:
+            subtype: rovina
+          template: z.modelli/luogo/Rovina
+        - id: luogo_regione_naturale
+          match:
+            category: regione naturale
+          template: z.modelli/luogo/Regione Naturale
+        - id: geografia_continente
+          match:
+            subtype: continente
+          template: z.modelli/geografia/Continente
+        - id: geografia_isola
+          match:
+            subtype: isola
+          template: z.modelli/geografia/Isola
+        - id: geografia_regione
+          match:
+            category: geografia
+          template: z.modelli/geografia/Regione
+        - id: politica_regno
+          match:
+            subtype: regno
+          template: z.modelli/politica/Regno
+        - id: politica_impero
+          match:
+            subtype: impero
+          template: z.modelli/politica/Impero
+        - id: politica_repubblica
+          match:
+            subtype: repubblica
+          template: z.modelli/politica/Repubblica
+        - id: politica_oligarchia
+          match:
+            subtype: oligarchia
+          template: z.modelli/politica/Oligarchia
+        - id: politica_ducato
+          match:
+            subtype: ducato
+          template: z.modelli/politica/Ducato
+        - id: politica_contea
+          match:
+            subtype: contea
+          template: z.modelli/politica/Contea
+        - id: politica_baronia
+          match:
+            subtype: baronia
+          template: z.modelli/politica/Baronia
+    cultura:
+      default_template: z.modelli/worldbuilding/Cultura
+    religione:
+      default_template: z.modelli/fazione/Culto
+    magia:
+      default_template: z.modelli/worldbuilding/Cosmologia
+    storia:
+      default_template: z.modelli/Evento Storico
+      rules:
+        - id: storia_eta_mitica
+          match:
+            subtype: eta mitica
+          template: z.modelli/worldbuilding/Era Storica
+    ecologia:
+      default_template: z.modelli/Creatura
+    economia:
+      default_template: z.modelli/worldbuilding/Risorsa
+      rules:
+        - id: economia_rotta
+          contains:
+            subtype: rotta
+          template: z.modelli/worldbuilding/Rotta
+        - id: economia_mercato
+          contains:
+            subtype: mercato
+          template: z.modelli/worldbuilding/Mercato o Nodo Commerciale
+    societa:
+      default_template: z.modelli/worldbuilding/Entita Worldbuilding

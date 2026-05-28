@@ -56,6 +56,7 @@ REQUIRED_MODULES = {
     "frontmatter_profiles",
     "geopolitical_cockpit",
     "runtime_profiles",
+    "world_taxonomy",
     "resource_hub",
     "resource_indexes",
     "resource_support_pages",
