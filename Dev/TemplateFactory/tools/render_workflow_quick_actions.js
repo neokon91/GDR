@@ -21,6 +21,16 @@ function markers(workflowId) {
     };
 }
 
+function renderAction(lines, action) {
+    const label = String(action.label ?? "").trim();
+    const useWhen = String(action.use_when ?? "").trim();
+    const button = String(action.button ?? "").trim();
+
+    lines.push(">");
+    lines.push(`> **${label}**${useWhen ? ` - ${useWhen}` : ""}`);
+    if (button) lines.push(`<!-- workflow:button ${button} -->`);
+}
+
 function renderBlock(workflowId, workflow) {
     const lines = [];
     const plugins = workflow.required_plugins ?? [];
@@ -35,9 +45,7 @@ function renderBlock(workflowId, workflow) {
     }
 
     for (const action of workflow.quick_actions ?? []) {
-        lines.push(">");
-        lines.push(`> **${action.label}** - ${action.use_when}`);
-        lines.push(`> \`BUTTON[${action.button}]\``);
+        renderAction(lines, action);
     }
 
     for (const group of Object.values(actionGroups)) {
@@ -45,9 +53,7 @@ function renderBlock(workflowId, workflow) {
         lines.push(`> [!regia]- ${group.label}`);
         if (group.purpose) lines.push(`> ${group.purpose}`);
         for (const action of group.actions ?? []) {
-            lines.push(">");
-            lines.push(`> **${action.label}** - ${action.use_when}`);
-            lines.push(`> \`BUTTON[${action.button}]\``);
+            renderAction(lines, action);
         }
     }
 

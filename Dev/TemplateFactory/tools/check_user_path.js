@@ -59,6 +59,10 @@ function workflowBlock(text, workflowId) {
     return text.slice(startIndex, endIndex + end.length);
 }
 
+function buttonDeclaration(button) {
+    return `<!-- workflow:button ${button} -->`;
+}
+
 function validateContract(primaryPath) {
     if (USER_PATH.id !== "user_path") errors.push(`${USER_PATH_FILE}: id non valido`);
 
@@ -133,7 +137,7 @@ function main() {
             if (!buttonIds.has(button)) {
                 errors.push(`${label}: pulsante Meta Bind non configurato (${button})`);
             }
-            if (!block.includes(`BUTTON[${button}]`)) {
+            if (!block.includes(buttonDeclaration(button))) {
                 errors.push(`${label}: azione primaria non esposta (${button})`);
             }
         }

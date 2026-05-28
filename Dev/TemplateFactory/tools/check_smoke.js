@@ -162,14 +162,14 @@ for (const [label, relPath] of [
 }
 
 const liveHub = readTextRel(ROOT, "Hub/Durante il Gioco.md");
-for (const marker of ["renderLiveTableNow", "renderLiveTableReadiness", "renderLiveTableQueues", "renderLiveTableMaterials", "renderLiveTableSurfaceLinks", "renderContinuityChain", "BUTTON[registra-scelta-mondo]"]) {
+for (const marker of ["renderLiveTableNow", "renderLiveTableReadiness", "renderLiveTableQueues", "renderLiveTableMaterials", "renderLiveTableSurfaceLinks", "renderContinuityChain", "workflow:button registra-scelta-mondo"]) {
     if (!liveHub.includes(marker)) {
         errors.push(`Smoke statico: Durante il Gioco non contiene ${marker}`);
     }
 }
 
 const preparation = readTextRel(ROOT, "Risorse/Preparazione Sessione.md");
-for (const marker of ["renderPreparationNow", "renderPreparationReadiness", "renderPreparationAnchorQueues", "renderPreparationMaterialQueues", "renderPreparationSurfaceLinks", "BUTTON[nuova-sessione-z-modelli-dm-sessione-md]"]) {
+for (const marker of ["renderPreparationNow", "renderPreparationReadiness", "renderPreparationAnchorQueues", "renderPreparationMaterialQueues", "renderPreparationSurfaceLinks", "workflow:button nuova-sessione-z-modelli-dm-sessione-md"]) {
     if (!preparation.includes(marker)) {
         errors.push(`Smoke statico: Preparazione Sessione non contiene ${marker}`);
     }
@@ -260,7 +260,7 @@ for (const marker of ["renderOffscreenNow", "renderOffscreenReadiness", "renderO
 }
 
 const postSession = readTextRel(ROOT, "Risorse/Post Sessione Guidato.md");
-for (const marker of ["renderPostSessionNow", "renderPostSessionReadiness", "renderPostSessionClosureQueues", "renderPostSessionPropagationQueues", "renderPostSessionSurfaceLinks", "BUTTON[registra-scelta-mondo]"]) {
+for (const marker of ["renderPostSessionNow", "renderPostSessionReadiness", "renderPostSessionClosureQueues", "renderPostSessionPropagationQueues", "renderPostSessionSurfaceLinks", "workflow:button registra-scelta-mondo"]) {
     if (!postSession.includes(marker)) {
         errors.push(`Smoke statico: Post Sessione Guidato non contiene ${marker}`);
     }

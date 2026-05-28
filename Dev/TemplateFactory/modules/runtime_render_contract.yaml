@@ -33,6 +33,8 @@ render_checks:
         message: 'renderWorkflowCommandDeck: output semplice onboarding mancante'
       - not_contains: 'Plugin coinvolti'
         message: 'renderWorkflowCommandDeck: output semplice onboarding espone diagnostica plugin'
+      - not_contains: 'BUTTON['
+        message: 'renderWorkflowCommandDeck: output semplice onboarding espone sintassi Meta Bind'
   - call: renderVaultReadiness
     args:
       - 'setup'

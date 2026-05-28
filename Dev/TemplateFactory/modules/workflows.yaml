@@ -291,7 +291,7 @@ workflows:
       - Hub/Worldbuilder Dashboard.md
     quick_actions:
       - button: nuovo-mondo-homebrew
-        label: Nuovo mondo guidato
+        label: Crea mondo
         use_when: il vault non ha ancora un mondo operativo
       - button: wizard-nuova-entita-viva
         label: Nuova entita viva

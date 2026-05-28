@@ -128,16 +128,25 @@
     return [base, `gdr-card-${kind}`, `gdr-kind-${category}`, stateClass, extra].filter(Boolean).join(" ");
   }
 
+  function commandHint(command) {
+    const text = String(command ?? "").trim();
+    if (!text) return "";
+    if (/^BUTTON\[[^\]]+\]$/.test(text)) return "Usa il pulsante dedicato nella pagina.";
+    if (/^(npm run|node |python3 |z\.)/.test(text)) return "Apri Controllo Vault e rigenera le sorgenti.";
+    return text;
+  }
+
   function emptyStateHtml({ title, action, link = "", button = "", cls = "gdr-info-card compact gdr-kind-missing gdr-empty-state" }) {
     const titleHtml = link
       ? `<a class="internal-link" data-href="${escapeHtml(link)}" href="${escapeHtml(link)}">${escapeHtml(title)}</a>`
       : escapeHtml(title);
+    const command = commandHint(button);
     return `
       <div class="${cls}">
         <div class="gdr-card-badge">Azione richiesta</div>
         <div class="gdr-card-title">${titleHtml}</div>
         <div class="gdr-card-line"><strong>Prossimo passo:</strong> ${escapeHtml(action)}</div>
-        ${button ? `<div class="gdr-card-line"><code>${escapeHtml(button)}</code></div>` : ""}
+        ${command ? `<div class="gdr-card-line">${escapeHtml(command)}</div>` : ""}
       </div>
     `;
   }
@@ -701,13 +710,15 @@
               ? `Abilita Meta Bind (${metaBindStatus.id}) nei plugin community.`
               : describeButtonTemplate(template);
 
-        if (simple && ready) {
+        if (simple) {
           return cardHtml({
             title: action.label || button || (secondary ? "Azione secondaria" : "Azione"),
-            meta: secondary ? "Opzione utile" : "Azione principale",
+            meta: ready ? (secondary ? "Opzione utile" : "Azione principale") : "Azione da controllare",
             body: action.use_when || "Usala quando serve.",
-            importa: "Se non risponde, usa la tabella di fallback in fondo alla pagina.",
-            cls: "gdr-info-card compact gdr-kind-ready"
+            importa: ready
+              ? "Se non risponde, usa la tabella di fallback in fondo alla pagina."
+              : "Se il comando non compare come pulsante, apri Setup Guidato o Controllo Vault.",
+            cls: `gdr-info-card compact ${ready ? "gdr-kind-ready" : "gdr-kind-missing"}`
           });
         }
 

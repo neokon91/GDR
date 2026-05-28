@@ -86,7 +86,7 @@ context => {
     }
     if (hasLinks(page?.entita_impattate) || hasLinks(page?.propaga_a)) {
       if (!["applicata", "propagata", "canonizzata"].includes(status)) {
-        return "Usa BUTTON[applica-conseguenza] o BUTTON[propaga-a-entita], poi controlla i bersagli.";
+        return "Applica o propaga la conseguenza, poi controlla i bersagli.";
       }
     }
     if (!hasText(page?.prossima_mossa) && ["missione", "tracciato", "fazione", "religione", "relazione", "conflitto"].includes(String(page?.categoria ?? ""))) {

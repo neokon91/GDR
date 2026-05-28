@@ -9,6 +9,10 @@ const META_BIND_CONFIG = ".obsidian/plugins/obsidian-meta-bind-plugin/data.json"
 const BUTTON_ID_PATTERN = /^[A-Za-z0-9][A-Za-z0-9_-]*$/;
 const BUTTON_PATTERN = /`BUTTON\[([^\]\n]+)\]`/g;
 
+function buttonDeclaration(button) {
+    return `<!-- workflow:button ${button} -->`;
+}
+
 function fail(errors) {
     console.error("Workflow quick actions non valide:");
     for (const error of errors) console.error(`- ${error}`);
@@ -76,8 +80,8 @@ function main() {
                 if (!buttonIds.has(button)) {
                     errors.push(`${workflowId}: BUTTON[${button}] non presente nella configurazione Meta Bind`);
                 }
-                if (!text.includes(`BUTTON[${button}]`)) {
-                    errors.push(`${workflowId}: ${entry} non espone BUTTON[${button}]`);
+                if (!text.includes(buttonDeclaration(button))) {
+                    errors.push(`${workflowId}: ${entry} non dichiara workflow:button ${button}`);
                 }
             }
 

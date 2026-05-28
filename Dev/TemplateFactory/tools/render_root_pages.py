@@ -19,6 +19,9 @@ SOURCE = ROOT / "Dev" / "TemplateFactory" / "modules" / "root_pages.yaml"
 JINJA = ROOT / "Dev" / "TemplateFactory" / "jinja"
 TEMPLATE = "resource_support_page.md.j2"
 ALLOWED_ROOT_PAGES = {"Inizia Qui.md", "VERSION.md"}
+WORKFLOW_QUICK_ACTIONS_RE = re.compile(
+    r"<!-- workflow:quick_actions:start [^>]+ -->[\s\S]*?<!-- workflow:quick_actions:end [^>]+ -->"
+)
 
 
 class IndentedDumper(yaml.SafeDumper):
@@ -52,6 +55,10 @@ def build_env() -> Environment:
         trim_blocks=True,
         lstrip_blocks=True,
     )
+
+
+def comparable_page(text: str) -> str:
+    return WORKFLOW_QUICK_ACTIONS_RE.sub("<!-- workflow:quick_actions:block -->", text)
 
 
 def frontmatter_text(frontmatter: Any, rel_path: str, errors: list[str]) -> str:
@@ -161,7 +168,7 @@ def main() -> int:
         for path, expected in sorted(rendered.items()):
             target = ROOT / path
             current = target.read_text(encoding="utf-8") if target.exists() else ""
-            if current != expected:
+            if comparable_page(current) != comparable_page(expected):
                 fail(errors, f"{path}: pagina root non allineata; eseguire npm run sync:sources")
 
     if errors:

@@ -124,12 +124,12 @@ plugin_runtime_probes:
     source_checks:
       - file: Inizia Qui.md
         contains:
-          - "BUTTON[nuovo-mondo-homebrew]"
+          - "workflow:button nuovo-mondo-homebrew"
   - id: js-engine
     source_checks:
       - file: z.engine/session_views.js
         contains:
-          - "JS Engine"
+          - "z.engine/gdr_views.js"
   - id: metadata-menu
     config_checks:
       - path: .obsidian/plugins/metadata-menu/data.json

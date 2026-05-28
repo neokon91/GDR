@@ -351,12 +351,17 @@ async function runWorkflowSmoke(cdp) {
                 else fromParts.push(part);
             }
             const resolved = fromParts.join("/");
-            return resolved.endsWith(".js") ? resolved : resolved + ".js";
+            return /\.(js|json)$/i.test(resolved) ? resolved : resolved + ".js";
         };
         const loadCommonJs = async filePath => {
             const normalizedPath = String(filePath);
             if (moduleCache[normalizedPath]) return moduleCache[normalizedPath].exports;
             const source = await app.vault.adapter.read(normalizedPath);
+            if (normalizedPath.endsWith(".json")) {
+                const module = { exports: JSON.parse(source) };
+                moduleCache[normalizedPath] = module;
+                return module.exports;
+            }
             const module = { exports: {} };
             moduleCache[normalizedPath] = module;
             const requiredModules = [...source.matchAll(/require\\(["']([^"']+)["']\\)/g)]
@@ -670,12 +675,17 @@ async function runCycleSmoke(cdp) {
                 else fromParts.push(part);
             }
             const resolved = fromParts.join("/");
-            return resolved.endsWith(".js") ? resolved : resolved + ".js";
+            return /\.(js|json)$/i.test(resolved) ? resolved : resolved + ".js";
         };
         const loadCommonJs = async filePath => {
             const normalizedPath = String(filePath);
             if (moduleCache[normalizedPath]) return moduleCache[normalizedPath].exports;
             const source = await app.vault.adapter.read(normalizedPath);
+            if (normalizedPath.endsWith(".json")) {
+                const module = { exports: JSON.parse(source) };
+                moduleCache[normalizedPath] = module;
+                return module.exports;
+            }
             const module = { exports: {} };
             moduleCache[normalizedPath] = module;
             const requiredModules = [...source.matchAll(/require\\(["']([^"']+)["']\\)/g)]
