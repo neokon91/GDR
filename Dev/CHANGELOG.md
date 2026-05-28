@@ -27,6 +27,7 @@
 - `hub_pages.yaml` genera le diciassette superfici operative `Hub/` da YAML/Jinja, lasciandole fuori dal sorgente tracciato.
 - `root_pages.yaml` genera `Inizia Qui.md` e `VERSION.md` da YAML/Jinja, lasciando il root del repository ai soli file sorgente e documenti sviluppo.
 - `Dev/Integrazioni Plugin.md` e `Dev/Plugin Technical Reference.md` rimossi: il contratto plugin vive in `plugin_matrix.yaml`, `plugin_contracts.yaml` e `plugin_bindings.yaml`.
+- CI allineata alla repo sorgente pulita: GitHub Actions esegue `npm run sync:sources` prima di `npm run check`; `Dev/Sviluppo Vault.md` ridotto a indice tecnico dei contratti YAML/JS.
 - `z.bacheche` e documentazione repo-dev consolidate: le bacheche sono generate da YAML/Jinja e `docs/` e stato rimosso come area separata.
 - Percorso utente nuovo blindato da `check:user-path`: 17 superfici primarie e avanzate verificano workflow user-facing, deck semplice e pulsanti Meta Bind configurati.
 - `check:release-quality` valida shape delle azioni Meta Bind, cartelle di creazione, comandi plugin reali e wrapper Templater richiamabili.
