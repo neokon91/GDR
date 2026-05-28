@@ -351,6 +351,204 @@ def validate_template_router(
     }
 
 
+def validate_condition_map(errors: list[str], source: str, value: Any, key: str) -> dict[str, str]:
+    allowed_fields = {"kind", "family", "folder", "category", "subtype", "frontmatterCategory"}
+    if value in (None, ""):
+        return {}
+    if not isinstance(value, dict):
+        fail(errors, f"{source}: {key} deve essere mappa")
+        return {}
+
+    result: dict[str, str] = {}
+    for field, raw in value.items():
+        field_id = str(field or "").strip()
+        if field_id not in allowed_fields:
+            fail(errors, f"{source}: {key} usa campo route non supportato ({field_id})")
+            continue
+        text = str(raw or "").strip()
+        if not text:
+            fail(errors, f"{source}: {key}.{field_id} mancante")
+            continue
+        result[field_id] = text
+    return result
+
+
+def validate_world_taxonomy(
+    contracts: dict[str, Any],
+    template_blueprints: dict[str, Any],
+    path_registry: dict[str, str],
+    entity_model: dict[str, Any],
+    template_router: dict[str, Any],
+    errors: list[str],
+) -> dict[str, Any]:
+    source = f"{RUNTIME_PROFILES.relative_to(ROOT)}: runtime_contracts.world_taxonomy"
+    taxonomy = contracts.get("world_taxonomy")
+    if not isinstance(taxonomy, dict) or not taxonomy:
+        fail(errors, f"{source} deve essere mappa non vuota")
+        return {}
+
+    raw_kinds = taxonomy.get("kinds")
+    if not isinstance(raw_kinds, dict) or not raw_kinds:
+        fail(errors, f"{source}.kinds deve essere mappa non vuota")
+        raw_kinds = {}
+
+    creative_routes = set(template_router.get("creative_routes") or [])
+    declared_kinds = {str(kind).strip() for kind in raw_kinds}
+    for missing in sorted(creative_routes - declared_kinds):
+        fail(errors, f"{source}.kinds non copre creative_route ({missing})")
+    for extra in sorted(declared_kinds - creative_routes):
+        fail(errors, f"{source}.kinds dichiara kind non usato dal router ({extra})")
+
+    categories = entity_model.get("categories") if isinstance(entity_model.get("categories"), dict) else {}
+    kinds: dict[str, Any] = {}
+    for kind_id, kind in raw_kinds.items():
+        kind_key = str(kind_id or "").strip()
+        if not kind_key or any(char.isspace() for char in kind_key):
+            fail(errors, f"{source}.kinds contiene key non valida ({kind_id})")
+            continue
+        if not isinstance(kind, dict):
+            fail(errors, f"{source}.kinds.{kind_key} deve essere mappa")
+            continue
+
+        label = require_text(errors, source, kind.get("label"), f"kinds.{kind_key}.label")
+        default_folder = require_text(errors, source, kind.get("default_folder"), f"kinds.{kind_key}.default_folder")
+        if default_folder and default_folder not in path_registry:
+            fail(errors, f"{source}.kinds.{kind_key}.default_folder non dichiarato in path_registry ({default_folder})")
+
+        raw_families = kind.get("families")
+        if not isinstance(raw_families, list) or not raw_families:
+            fail(errors, f"{source}.kinds.{kind_key}.families deve essere lista non vuota")
+            raw_families = []
+
+        families: list[dict[str, Any]] = []
+        family_ids: set[str] = set()
+        for family_index, family in enumerate(raw_families):
+            if not isinstance(family, dict):
+                fail(errors, f"{source}.kinds.{kind_key}.families[{family_index}] deve essere mappa")
+                continue
+            family_id = require_text(errors, source, family.get("id"), f"kinds.{kind_key}.families[{family_index}].id")
+            if family_id in family_ids:
+                fail(errors, f"{source}.kinds.{kind_key}.families id duplicato ({family_id})")
+            family_ids.add(family_id)
+            family_label = require_text(errors, source, family.get("label"), f"kinds.{kind_key}.families.{family_id}.label")
+            folder = require_text(errors, source, family.get("folder"), f"kinds.{kind_key}.families.{family_id}.folder")
+            if folder and folder not in path_registry:
+                fail(errors, f"{source}.kinds.{kind_key}.families.{family_id}.folder non dichiarato in path_registry ({folder})")
+            category = require_text(errors, source, family.get("category"), f"kinds.{kind_key}.families.{family_id}.category")
+            if category and category not in categories:
+                fail(errors, f"{source}.kinds.{kind_key}.families.{family_id}.category non dichiarata in entity_model ({category})")
+
+            raw_items = family.get("items")
+            if not isinstance(raw_items, list) or not raw_items:
+                fail(errors, f"{source}.kinds.{kind_key}.families.{family_id}.items deve essere lista non vuota")
+                raw_items = []
+
+            items: list[list[str]] = []
+            item_ids: set[str] = set()
+            for item_index, item in enumerate(raw_items):
+                if not isinstance(item, dict):
+                    fail(errors, f"{source}.kinds.{kind_key}.families.{family_id}.items[{item_index}] deve essere mappa")
+                    continue
+                item_id = require_text(errors, source, item.get("id"), f"kinds.{kind_key}.families.{family_id}.items[{item_index}].id")
+                item_label = require_text(errors, source, item.get("label"), f"kinds.{kind_key}.families.{family_id}.items.{item_id}.label")
+                if item_id in item_ids:
+                    fail(errors, f"{source}.kinds.{kind_key}.families.{family_id}.items id duplicato ({item_id})")
+                item_ids.add(item_id)
+                items.append([item_id, item_label])
+
+            families.append({
+                "id": family_id,
+                "label": family_label,
+                "folder": folder,
+                "category": category,
+                "items": items,
+            })
+
+        kinds[kind_key] = {
+            "label": label,
+            "defaultFolder": default_folder,
+            "families": families,
+        }
+
+    allowed_templates = template_targets(template_blueprints)
+    raw_template_routes = taxonomy.get("template_routes")
+    if not isinstance(raw_template_routes, dict) or not raw_template_routes:
+        fail(errors, f"{source}.template_routes deve essere mappa non vuota")
+        raw_template_routes = {}
+
+    default_template = normalize_template_ref(raw_template_routes.get("default_template"))
+    if not default_template:
+        fail(errors, f"{source}.template_routes.default_template mancante")
+    elif default_template not in allowed_templates:
+        fail(errors, f"{source}.template_routes.default_template non dichiarato in template_blueprints ({default_template})")
+
+    raw_by_kind = raw_template_routes.get("by_kind")
+    if not isinstance(raw_by_kind, dict) or not raw_by_kind:
+        fail(errors, f"{source}.template_routes.by_kind deve essere mappa non vuota")
+        raw_by_kind = {}
+    for missing in sorted(creative_routes - set(raw_by_kind)):
+        fail(errors, f"{source}.template_routes.by_kind non copre creative_route ({missing})")
+    for extra in sorted(set(raw_by_kind) - creative_routes):
+        fail(errors, f"{source}.template_routes.by_kind dichiara kind non usato dal router ({extra})")
+
+    by_kind: dict[str, Any] = {}
+    for kind_id, route_spec in raw_by_kind.items():
+        kind_key = str(kind_id or "").strip()
+        if not isinstance(route_spec, dict):
+            fail(errors, f"{source}.template_routes.by_kind.{kind_key} deve essere mappa")
+            continue
+        kind_default = normalize_template_ref(route_spec.get("default_template"))
+        if not kind_default:
+            fail(errors, f"{source}.template_routes.by_kind.{kind_key}.default_template mancante")
+        elif kind_default not in allowed_templates:
+            fail(errors, f"{source}.template_routes.by_kind.{kind_key}.default_template non dichiarato in template_blueprints ({kind_default})")
+
+        rules: list[dict[str, Any]] = []
+        raw_rules = route_spec.get("rules") or []
+        if not isinstance(raw_rules, list):
+            fail(errors, f"{source}.template_routes.by_kind.{kind_key}.rules deve essere lista")
+            raw_rules = []
+        rule_ids: set[str] = set()
+        for rule_index, rule in enumerate(raw_rules):
+            if not isinstance(rule, dict):
+                fail(errors, f"{source}.template_routes.by_kind.{kind_key}.rules[{rule_index}] deve essere mappa")
+                continue
+            rule_id = require_text(errors, source, rule.get("id"), f"template_routes.by_kind.{kind_key}.rules[{rule_index}].id")
+            if rule_id in rule_ids:
+                fail(errors, f"{source}.template_routes.by_kind.{kind_key}.rules id duplicato ({rule_id})")
+            rule_ids.add(rule_id)
+
+            template = normalize_template_ref(rule.get("template"))
+            if not template:
+                fail(errors, f"{source}.template_routes.by_kind.{kind_key}.rules.{rule_id}.template mancante")
+            elif template not in allowed_templates:
+                fail(errors, f"{source}.template_routes.by_kind.{kind_key}.rules.{rule_id}.template non dichiarato in template_blueprints ({template})")
+
+            match = validate_condition_map(errors, source, rule.get("match"), f"template_routes.by_kind.{kind_key}.rules.{rule_id}.match")
+            contains = validate_condition_map(errors, source, rule.get("contains"), f"template_routes.by_kind.{kind_key}.rules.{rule_id}.contains")
+            if not match and not contains:
+                fail(errors, f"{source}.template_routes.by_kind.{kind_key}.rules.{rule_id} richiede match o contains")
+            rules.append({
+                "id": rule_id,
+                **({"match": match} if match else {}),
+                **({"contains": contains} if contains else {}),
+                "template": template,
+            })
+
+        by_kind[kind_key] = {
+            "default_template": kind_default,
+            "rules": rules,
+        }
+
+    return {
+        "kinds": kinds,
+        "template_routes": {
+            "default_template": default_template,
+            "by_kind": by_kind,
+        },
+    }
+
+
 def validate_contract(
     runtime_profiles: dict[str, Any],
     fields_core: dict[str, Any],
@@ -384,6 +582,14 @@ def validate_contract(
         errors,
     )
     template_router = validate_template_router(contracts, template_blueprints, errors)
+    world_taxonomy = validate_world_taxonomy(
+        contracts,
+        template_blueprints,
+        path_registry,
+        entity_model,
+        template_router,
+        errors,
+    )
 
     allowed_states = state_values(fields_core)
     if not allowed_states:
@@ -420,6 +626,7 @@ def validate_contract(
         "link_fields": link_fields,
         "path_registry": path_registry,
         "template_router": template_router,
+        "world_taxonomy": world_taxonomy,
     }
 
 
@@ -474,7 +681,8 @@ def main() -> int:
         f"{len(contract['closed_states'])} stati chiusi, "
         f"{len(contract['link_fields'])} campi link, "
         f"{len(contract['path_registry'])} percorsi runtime, "
-        f"{len(contract['template_router']['prompt_routes']) + len(contract['template_router']['delegated_routes']) + len(contract['template_router']['creative_routes'])} route template."
+        f"{len(contract['template_router']['prompt_routes']) + len(contract['template_router']['delegated_routes']) + len(contract['template_router']['creative_routes'])} route template, "
+        f"{len(contract['world_taxonomy']['kinds'])} tassonomie worldbuilding."
     )
     return 0
 

@@ -1,3 +1,5 @@
+const createWorldbuilding = require("./worldbuilding");
+
 async function template_router(tp, route = "") {
     const helpers = tp.user.helpers;
     const routerContract = require("./data/runtime/session_context.json").template_router ?? {};
@@ -22,7 +24,7 @@ async function template_router(tp, route = "") {
     };
 
     const routeCreative = async kind => {
-        const wb = await tp.user.worldbuilding(tp);
+        const wb = await createWorldbuilding(tp);
         const routeInfo = kind === "luogo"
             ? await wb.chooseLocation()
             : await wb.chooseCreative(kind);

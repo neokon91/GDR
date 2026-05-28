@@ -39,6 +39,10 @@ commonjs_runtime:
       path: z.automazioni/continuity_event_model.js
     - key: pg_mechanics
       path: z.automazioni/pg_mechanics.js
+    - key: worldbuilding
+      path: z.automazioni/worldbuilding.js
+    - key: world_taxonomy
+      path: z.automazioni/world_taxonomy.js
   data_dependencies:
     - key: srd_core
       path: z.automazioni/data/srd/core.json

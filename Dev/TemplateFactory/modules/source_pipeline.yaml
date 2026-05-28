@@ -845,6 +845,8 @@ steps:
       - Dev/TemplateFactory/modules/runtime_dataview_contract.yaml
       - z.automazioni/helper_paths.js
       - z.automazioni/template_router.js
+      - z.automazioni/worldbuilding.js
+      - z.automazioni/world_taxonomy.js
       - z.automazioni/data/runtime/plugin_profile.json
       - z.automazioni/data/runtime/session_context.json
       - z.automazioni/data/runtime/generated_drafts_cockpit.json
