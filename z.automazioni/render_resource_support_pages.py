@@ -68,6 +68,7 @@ def normalize_page(record: dict[str, Any], index: int, errors: list[str]) -> dic
     local_errors: list[str] = []
     path = str(record.get("path") or "").replace("\\", "/").strip()
     title = str(record.get("title") or "").strip()
+    pre_title = str(record.get("pre_title") or "").strip()
     body = str(record.get("body") or "").strip()
 
     if not path:
@@ -89,6 +90,7 @@ def normalize_page(record: dict[str, Any], index: int, errors: list[str]) -> dic
     return {
         "path": path,
         "title": title,
+        "pre_title": pre_title,
         "body": body,
         "frontmatter_text": rendered_frontmatter,
     }
@@ -122,7 +124,11 @@ def render_all(errors: list[str]) -> dict[str, str]:
     for path, text in rendered.items():
         if not text.startswith("# ") and not text.startswith("---\n"):
             fail(errors, f"{path}: render senza intestazione")
-        if f"# {Path(path).stem}".lower() not in text.lower():
+        if path.endswith(".excalidraw.md"):
+            # I file Excalidraw richiedono un H1 tecnico stabile letto dal plugin.
+            if "# Excalidraw Data" not in text:
+                fail(errors, f"{path}: H1 tecnico Excalidraw mancante")
+        elif f"# {Path(path).stem}".lower() not in text.lower():
             fail(errors, f"{path}: H1 non coerente con il target")
         for code in re.findall(r"```dataviewjs\n([\s\S]*?)```", text):
             if "z.engine/session_views.js" not in code:
