@@ -62,7 +62,8 @@ primary_path:
     page: Risorse/Post Sessione Guidato.md
     label: Post Sessione Guidato
     required_buttons:
-      - wizard-fine-sessione
+      - chiudi-sessione-viva
+      - apri-prossima-sessione-viva
       - applica-conseguenza
       - propaga-a-entita
       - fuori-scena-hub-cosa-succede-fuori-scena-cosa-succede-fuori-scena

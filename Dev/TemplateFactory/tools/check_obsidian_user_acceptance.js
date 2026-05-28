@@ -234,6 +234,7 @@ function validateLiveAcceptanceContract() {
         "post_session_button_label",
         "post_session_template_file",
         "post_session_user_script",
+        "post_session_action",
         "temp_note",
         "expected_session_path",
         "expected_session_name"
@@ -1125,10 +1126,34 @@ async function runCycleSmoke(cdp) {
             const file = getFile(filePath);
             if (file) await app.vault.delete(file, true);
         };
+        const moduleCache = {};
+        const normalizeRequiredPath = (fromPath, required) => {
+            if (!String(required ?? "").startsWith(".")) return "";
+            const fromParts = String(fromPath).split("/");
+            fromParts.pop();
+            for (const part of String(required).split("/")) {
+                if (!part || part === ".") continue;
+                if (part === "..") fromParts.pop();
+                else fromParts.push(part);
+            }
+            const resolved = fromParts.join("/");
+            return resolved.endsWith(".js") ? resolved : resolved + ".js";
+        };
         const loadCommonJs = async filePath => {
-            const source = await app.vault.adapter.read(filePath);
+            const normalizedPath = String(filePath);
+            if (moduleCache[normalizedPath]) return moduleCache[normalizedPath].exports;
+            const source = await app.vault.adapter.read(normalizedPath);
             const module = { exports: {} };
+            moduleCache[normalizedPath] = module;
+            const requiredModules = [...source.matchAll(/require\\(["']([^"']+)["']\\)/g)]
+                .map(match => normalizeRequiredPath(normalizedPath, match[1]))
+                .filter(Boolean);
+            for (const requiredPath of requiredModules) {
+                await loadCommonJs(requiredPath);
+            }
             const localRequire = required => {
+                const requiredPath = normalizeRequiredPath(normalizedPath, required);
+                if (requiredPath && moduleCache[requiredPath]) return moduleCache[requiredPath].exports;
                 throw new Error("require non supportato nel ciclo live acceptance: " + required);
             };
             Function("module", "exports", "require", "app", "Notice", source)(module, module.exports, localRequire, app, Notice);
@@ -1167,15 +1192,22 @@ async function runCycleSmoke(cdp) {
         await openFile(tempNote);
 
         const helpers = await loadCommonJs("z.automazioni/helpers.js");
+        const continuityState = await loadCommonJs("z.automazioni/continuity_state.js");
+        const sessionLifecycleActions = await loadCommonJs("z.automazioni/session_lifecycle_actions.js");
         const sessionWizard = await loadCommonJs(String(cycle.session_user_script));
-        const postWizard = await loadCommonJs(String(cycle.post_session_user_script));
+        const postSessionRunner = await loadCommonJs(String(cycle.post_session_user_script));
         helpers.setRoute({ mondo: "[[" + workflow.expected_world_name + "]]" });
 
         let currentPath = tempNote;
         const promptLog = [];
         const suggesterLog = [];
         const tp = {
-            user: { helpers },
+            user: {
+                helpers,
+                continuity_state: continuityState,
+                meta_actions: postSessionRunner,
+                session_lifecycle_actions: sessionLifecycleActions
+            },
             date: {
                 now(format) {
                     return String(promptAnswers.Data ?? "2026-05-26");
@@ -1232,7 +1264,7 @@ async function runCycleSmoke(cdp) {
         await sleep(1000);
         await openFile(String(cycle.table_page));
 
-        await postWizard(tp, "fine_sessione");
+        await postSessionRunner(tp, String(cycle.post_session_action));
         await sleep(1500);
         await openFile(String(cycle.post_session_page));
 
@@ -1446,9 +1478,9 @@ function validateCycleResult(cycle, label) {
     if (!cycle.sessionButtonFound) errors.push(`ciclo ${label}: pulsante Nuova Sessione mancante (${CYCLE_SMOKE.session_button_id})`);
     if (cycle.sessionButtonActionType !== "templaterCreateNote") errors.push(`ciclo ${label}: azione Nuova Sessione inattesa (${cycle.sessionButtonActionType})`);
     if (cycle.sessionButtonTemplateFile !== CYCLE_SMOKE.session_template_file) errors.push(`ciclo ${label}: template Nuova Sessione inatteso (${cycle.sessionButtonTemplateFile})`);
-    if (!cycle.postSessionButtonFound) errors.push(`ciclo ${label}: pulsante Fine Sessione mancante (${CYCLE_SMOKE.post_session_button_id})`);
-    if (cycle.postSessionButtonActionType !== "runTemplaterFile") errors.push(`ciclo ${label}: azione Fine Sessione inattesa (${cycle.postSessionButtonActionType})`);
-    if (cycle.postSessionButtonTemplateFile !== CYCLE_SMOKE.post_session_template_file) errors.push(`ciclo ${label}: template Fine Sessione inatteso (${cycle.postSessionButtonTemplateFile})`);
+    if (!cycle.postSessionButtonFound) errors.push(`ciclo ${label}: pulsante post-sessione mancante (${CYCLE_SMOKE.post_session_button_id})`);
+    if (cycle.postSessionButtonActionType !== "runTemplaterFile") errors.push(`ciclo ${label}: azione post-sessione inattesa (${cycle.postSessionButtonActionType})`);
+    if (cycle.postSessionButtonTemplateFile !== CYCLE_SMOKE.post_session_template_file) errors.push(`ciclo ${label}: template post-sessione inatteso (${cycle.postSessionButtonTemplateFile})`);
     if (!cycle.sessionTemplateExists) errors.push(`ciclo ${label}: template sessione materializzato mancante (${CYCLE_SMOKE.session_template_file})`);
     if (!cycle.postSessionTemplateExists) errors.push(`ciclo ${label}: template post-sessione materializzato mancante (${CYCLE_SMOKE.post_session_template_file})`);
     if (!cycle.sessionScriptExists) errors.push(`ciclo ${label}: script sessione mancante (${CYCLE_SMOKE.session_user_script})`);

@@ -788,12 +788,6 @@ workflows:
       - button: apri-prossima-sessione-viva
         label: Apri prossima sessione viva
         use_when: la sessione e chiusa e vuoi iniziare la preparazione successiva senza reinserire output a mano
-      - button: wizard-fine-sessione
-        label: Fine sessione guidata
-        use_when: devi convertire appunti in output, recap e prossima apertura
-      - button: wizard-sessione-da-output
-        label: Prossima sessione da output
-        use_when: hai chiuso la sessione e vuoi preparare la prossima partendo dall'output
       - button: applica-conseguenza
         label: Applica conseguenza
         use_when: una nota ha conseguenze o impatti ancora aperti

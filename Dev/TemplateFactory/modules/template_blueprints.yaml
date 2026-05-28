@@ -1462,20 +1462,6 @@ blueprints:
     comparison_targets:
     - z.modelli/wizard/Conseguenza.md
     profile: generic
-  wizard_fine_sessione:
-    target_family:
-    - wizard
-    templater_entry: <% await tp.user.wizard_layer(tp, "fine_sessione") %>
-    template_title: Fine Sessione
-    world_impact: false
-    output:
-      folder: z.modelli/wizard
-      files:
-      - Fine Sessione.md
-      fallback: markdown_sections
-    comparison_targets:
-    - z.modelli/wizard/Fine Sessione.md
-    profile: action
   wizard_nuova_entita_viva:
     target_family:
     - wizard
@@ -1490,20 +1476,6 @@ blueprints:
     comparison_targets:
     - z.modelli/wizard/Nuova Entita Viva.md
     profile: action
-  wizard_sessione_output:
-    target_family:
-    - wizard
-    templater_entry: <% await tp.user.wizard_layer(tp, "nuova_sessione_da_output_precedente") %>
-    template_title: Nuova Sessione Da Output Precedente
-    world_impact: true
-    output:
-      folder: z.modelli/wizard
-      files:
-      - Nuova Sessione Da Output Precedente.md
-      fallback: markdown_sections
-    comparison_targets:
-    - z.modelli/wizard/Nuova Sessione Da Output Precedente.md
-    profile: generic
   wizard_nuovo_mondo_homebrew:
     target_family:
     - wizard

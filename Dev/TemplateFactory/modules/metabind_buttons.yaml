@@ -1319,26 +1319,6 @@ buttons:
       openNote: true
     id: wizard-conseguenza
     fallback: '[[z.modelli/wizard/Conseguenza]]'
-  wizard_fine_sessione:
-    label: Fine Sessione
-    required_for_release: true
-    style: primary
-    actions:
-    - type: runTemplaterFile
-      templateFile: z.modelli/wizard/Fine Sessione.md
-    id: wizard-fine-sessione
-    fallback: '[[z.modelli/wizard/Fine Sessione]]'
-  wizard_sessione_da_output:
-    label: Sessione Da Output
-    required_for_release: true
-    style: primary
-    actions:
-    - type: templaterCreateNote
-      templateFile: z.modelli/wizard/Nuova Sessione Da Output Precedente.md
-      folderPath: Mondi/Sessioni
-      openNote: true
-    id: wizard-sessione-da-output
-    fallback: '[[z.modelli/wizard/Nuova Sessione Da Output Precedente]]'
 contracts:
   button_ids_must_match_meta_bind_config: .obsidian/plugins/obsidian-meta-bind-plugin/data.json
   generated_syntax: '`BUTTON[{{ id }}]`'

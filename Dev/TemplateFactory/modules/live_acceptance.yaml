@@ -63,7 +63,7 @@ ux_surface_checks:
       all:
         - Post Sessione Guidato
       any:
-        - Fine Sessione
+        - Chiudi sessione
         - Recap pubblico
     - page: Hub/Cosa Succede Fuori Scena.md
       all:
@@ -318,10 +318,11 @@ cycle_smoke:
   session_button_label: Nuova Sessione
   session_template_file: z.modelli/dm/Sessione.md
   session_user_script: z.automazioni/sessione.js
-  post_session_button_id: wizard-fine-sessione
-  post_session_button_label: Fine Sessione
-  post_session_template_file: z.modelli/wizard/Fine Sessione.md
-  post_session_user_script: z.automazioni/wizard_layer.js
+  post_session_button_id: chiudi-sessione-viva
+  post_session_button_label: Chiudi Sessione Viva
+  post_session_template_file: z.modelli/azioni/Chiudi Sessione Viva.md
+  post_session_user_script: z.automazioni/meta_actions.js
+  post_session_action: chiudi_sessione_viva
   temp_note: Inbox/Live Session Acceptance Temp.md
   expected_session_path: Mondi/Sessioni/2026-05-26 - Sessione Live Faro Sommerso.md
   expected_session_name: Sessione Live Faro Sommerso
@@ -337,13 +338,14 @@ cycle_smoke:
     Prima scena / apertura: Le maree aprono una camera sotto il faro.
     Scelta concreta per i giocatori: Salvare i custodi o inseguire il sigillo sommerso.
     Calendario Calendarium: Calendario delle Maree
-    Scelta dei giocatori: Il gruppo salva i custodi e lascia fuggire il messaggero del sigillo.
-    Cosa cambia nel mondo: Il Consiglio delle Maree perde controllo sul porto.
-    Chi reagisce prima della prossima sessione: Consiglio delle Maree; Mercanti del Sigillo
-    Recap pubblico: I custodi del faro sono salvi, ma il sigillo e scomparso.
-    Recap DM: Il messaggero porta il sigillo alla Selva dei Giuramenti.
-    Prossima apertura: Il porto chiude le campane e accusa i naviganti.
-    Output utile per la prossima sessione: Seguire il sigillo verso la Selva dei Giuramenti.
+    Recap pubblico player-safe: I custodi del faro sono salvi, ma il sigillo e scomparso.
+    Recap DM e segreti: Il messaggero porta il sigillo alla Selva dei Giuramenti.
+    Svolta o scelta principale: Il gruppo salva i custodi e lascia fuggire il messaggero del sigillo.
+    Conseguenza concreta nel mondo: Il Consiglio delle Maree perde controllo sul porto.
+    Prossima mossa o reazione: Il Consiglio delle Maree chiude il porto; i Mercanti del Sigillo cercano compratori.
+    Apertura prossima sessione: Il porto chiude le campane e accusa i naviganti.
+    Aumento pressione sui bersagli: "0"
+    Avanzamento tracciati bersaglio: "1"
   suggester_answers:
     Vuoi collegare subito cast, luoghi, materiali e media? Scegli No per una sessione rapida.: "No"
     Tipo di sessione: Sessione di campagna
@@ -377,7 +379,8 @@ cycle_smoke:
     categoria: sessione
     stato: giocata
     attiva: false
-    propagazione_stato: aperta
+    propagazione_stato: applicata
+    prossima_apertura: Il porto chiude le campane e accusa i naviganti.
   expected_session_list_contains:
     decisioni_prese:
       - Il gruppo salva i custodi e lascia fuggire il messaggero del sigillo.
@@ -386,7 +389,7 @@ cycle_smoke:
     recap_pubblico:
       - I custodi del faro sono salvi, ma il sigillo e scomparso.
     output_sessione:
-      - Seguire il sigillo verso la Selva dei Giuramenti.
+      - Il sigillo viene portato verso la Selva dei Giuramenti.
   verify_pages_after_cycle:
     - Hub/Durante il Gioco.md
     - Risorse/Post Sessione Guidato.md
