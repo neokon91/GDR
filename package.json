@@ -5,8 +5,8 @@
   "description": "Vault Obsidian per preparare e gestire campagne GDR fantasy in italiano.",
   "scripts": {
     "check": "npm run check:source-pipeline && node Dev/Tools/node-legacy/check_vault.js && npm run check:generation-contract && npm run check:workflow-actions && npm run check:user-path && npm run check:release-artifact && npm run check:release-boundary && npm run check:release-quality && npm run check:docs && npm run check:smoke && npm run check:continuity && npm run check:continuity-events && npm run check:meta-actions && npm run check:pg-mechanics && npm run check:release && npm run check:importers && npm run check:repo && npm run check:js && npm run check:diff",
-    "import:srd-data": "node Dev/Tools/node-legacy/import_srd_character_data.js",
-    "check:srd-character-data": "node Dev/Tools/node-legacy/check_srd_character_data.js",
+    "import:srd-data": "python3 Dev/Tools/python/render_srd_character_data.py",
+    "check:srd-character-data": "python3 Dev/Tools/python/render_srd_character_data.py --check",
     "check:layer": "node Dev/Tools/node-legacy/check_vault.js",
     "check:templates": "python3 Dev/Tools/python/check_template_factory.py",
     "check:source-pipeline": "python3 Dev/Tools/python/run_source_pipeline.py --mode check",

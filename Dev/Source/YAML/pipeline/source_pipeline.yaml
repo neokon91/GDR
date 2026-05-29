@@ -21,15 +21,17 @@ steps:
     purpose: Converte YAML SRD personaggio in JSON runtime per PG.
     sources:
       - Dev/Source/YAML/canonical/srd_character_build.yaml
+      - Dev/Tools/python/render_srd_character_data.py
     outputs:
       - z.automazioni/data/srd/core.json
       - z.automazioni/data/srd/opzioni_personaggio.json
     render:
-      - node
-      - Dev/Tools/node-legacy/import_srd_character_data.js
+      - python3
+      - Dev/Tools/python/render_srd_character_data.py
     check:
-      - node
-      - Dev/Tools/node-legacy/check_srd_character_data.js
+      - python3
+      - Dev/Tools/python/render_srd_character_data.py
+      - --check
   obsidian_config:
     purpose: Genera i JSON Obsidian controllati dal progetto.
     sources:

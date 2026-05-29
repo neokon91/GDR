@@ -61,7 +61,7 @@ required_surfaces:
     - Dev/Source/YAML/pipeline/source_pipeline.yaml
     - Dev/Source/YAML/quality/repo_quality_contract.yaml
     - Dev/Source/Assets/resource_support/schema_relazioni_gdr.excalidraw.body.md
-    - Dev/Tools/node-legacy/import_srd_character_data.js
+    - Dev/Tools/python/render_srd_character_data.py
     - z.automazioni/data/srd/core.json
     - z.automazioni/data/srd/opzioni_personaggio.json
     - Hub/1. DM Dashboard.md
