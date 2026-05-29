@@ -114,7 +114,7 @@ required_surfaces:
     - Dev/Tools/node-legacy/check_smoke.js
     - Dev/Tools/python/check_validation_contract.py
     - Dev/Tools/python/check_user_path.py
-    - Dev/Tools/node-legacy/check_repo_quality_contract.js
+    - Dev/Tools/python/check_repo_quality_contract.py
     - Dev/Tools/node-legacy/check_release_artifact.js
     - Dev/Tools/node-legacy/check_release_boundary_behavior.js
     - Dev/Tools/node-legacy/check_release.js

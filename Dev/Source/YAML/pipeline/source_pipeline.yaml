@@ -939,15 +939,15 @@ steps:
       - Dev/Source/YAML/quality/release_boundary.yaml
       - Dev/Source/YAML/json/workflows.yaml
       - Dev/README.md
-      - Dev/Tools/node-legacy/check_repo_quality_contract.js
+      - Dev/Tools/python/check_repo_quality_contract.py
     outputs:
       - memoria
     render:
-      - node
-      - Dev/Tools/node-legacy/check_repo_quality_contract.js
+      - python3
+      - Dev/Tools/python/check_repo_quality_contract.py
     check:
-      - node
-      - Dev/Tools/node-legacy/check_repo_quality_contract.js
+      - python3
+      - Dev/Tools/python/check_repo_quality_contract.py
   release_quality_contract:
     purpose: Verifica il contratto YAML dei gate statici di release quality.
     sources:
