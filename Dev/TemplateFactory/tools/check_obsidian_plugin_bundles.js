@@ -6,6 +6,7 @@ const { execFileSync } = require("child_process");
 
 const ROOT = process.cwd();
 const CONTRACT = "Dev/TemplateFactory/modules/obsidian_plugin_bundle_contract.yaml";
+const OBSIDIAN_CONFIG = "Dev/TemplateFactory/modules/obsidian_config.yaml";
 
 function repoPath(relPath) {
     return path.join(ROOT, relPath);
@@ -25,16 +26,20 @@ function loadYaml(relPath) {
     return JSON.parse(stdout);
 }
 
-function readJson(relPath, fallback = null) {
-    try {
-        return JSON.parse(fs.readFileSync(repoPath(relPath), "utf8"));
-    } catch {
-        return fallback;
-    }
-}
-
 function asStringList(value) {
     return Array.isArray(value) ? value.map(item => String(item).trim()).filter(Boolean) : [];
+}
+
+function declaredCommunityPlugins(errors) {
+    const source = loadYaml(OBSIDIAN_CONFIG);
+    const record = (source.configs ?? []).find(item => item?.target === ".obsidian/community-plugins.json");
+    if (!record) {
+        errors.push(`${OBSIDIAN_CONFIG}: target .obsidian/community-plugins.json mancante`);
+        return [];
+    }
+    const plugins = asStringList(record.data);
+    if (plugins.length === 0) errors.push(`${OBSIDIAN_CONFIG}: community-plugins.json dichiarato senza plugin`);
+    return plugins;
 }
 
 function gitTracked(prefix) {
@@ -107,15 +112,13 @@ for (const relPath of trackedSnippetFiles) {
     }
 }
 
-const communityPlugins = readJson(".obsidian/community-plugins.json", null);
-if (Array.isArray(communityPlugins)) {
-    const enabled = new Set(communityPlugins.map(pluginId => String(pluginId).trim()).filter(Boolean));
-    for (const pluginId of enabled) {
-        if (!matrixIds.has(pluginId)) errors.push(`${pluginId}: community-plugins.json abilita plugin fuori plugin_matrix`);
-    }
-    for (const pluginId of matrixIds) {
-        if (!enabled.has(pluginId)) errors.push(`${pluginId}: plugin_matrix non abilitato in community-plugins.json generato`);
-    }
+const communityPlugins = declaredCommunityPlugins(errors);
+const enabled = new Set(communityPlugins.map(pluginId => String(pluginId).trim()).filter(Boolean));
+for (const pluginId of enabled) {
+    if (!matrixIds.has(pluginId)) errors.push(`${pluginId}: obsidian_config abilita plugin fuori plugin_matrix`);
+}
+for (const pluginId of matrixIds) {
+    if (!enabled.has(pluginId)) errors.push(`${pluginId}: plugin_matrix non dichiarato in obsidian_config community-plugins`);
 }
 
 // I bundle locali ignorati sono ammessi: servono al manutentore per collaudo e

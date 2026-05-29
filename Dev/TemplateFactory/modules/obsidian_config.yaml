@@ -4,9 +4,11 @@ version: 0.1.0
 policy:
   source_of_truth: Questo file e la fonte umana per i JSON Obsidian controllati dal progetto.
   native_json_exceptions:
-  - .obsidian/**/manifest.json
   - .obsidian/workspace.json
+  delegated_generated_targets:
   - .obsidian/plugins/obsidian-meta-bind-plugin/data.json
+  forbidden_json_targets:
+  - .obsidian/**/manifest.json
   rule: 'I JSON dichiarati qui non si editano a mano: modificare YAML e rigenerare.'
 configs:
 - target: .obsidian/app.json

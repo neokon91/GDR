@@ -239,8 +239,6 @@ def validate_json_source_boundary(pipeline: dict[str, Any], errors: list[str]) -
             continue
         if rel_path in native_json or rel_path in source_json:
             continue
-        if rel_path.endswith("/manifest.json"):
-            continue
         fail(errors, f"{rel_path}: JSON tracciato senza sorgente YAML/Jinja dichiarata")
 
 

@@ -12,6 +12,9 @@ const MATRIX = "Dev/TemplateFactory/modules/plugin_matrix.yaml";
 const CONTRACTS = "Dev/TemplateFactory/modules/plugin_contracts.yaml";
 const BINDINGS = "Dev/TemplateFactory/modules/plugin_bindings.yaml";
 const MANUAL_ACCEPTANCE = "Dev/TemplateFactory/modules/manual_acceptance.yaml";
+const OBSIDIAN_CONFIG = "Dev/TemplateFactory/modules/obsidian_config.yaml";
+const METABIND_CONFIG = "Dev/TemplateFactory/modules/metabind_config.yaml";
+const SOURCE_PIPELINE = "Dev/TemplateFactory/modules/source_pipeline.yaml";
 
 function loadYaml(relPath) {
     const script = [
@@ -25,14 +28,6 @@ function loadYaml(relPath) {
         maxBuffer: 8 * 1024 * 1024
     });
     return JSON.parse(stdout);
-}
-
-function readJson(relPath, fallback = null) {
-    try {
-        return JSON.parse(fs.readFileSync(repoPath(ROOT, relPath), "utf8"));
-    } catch {
-        return fallback;
-    }
 }
 
 function asStringList(value) {
@@ -74,6 +69,48 @@ function loadPolicy(matrixSource, errors) {
     };
 }
 
+function declaredCommunityPlugins(errors) {
+    const source = loadYaml(OBSIDIAN_CONFIG);
+    const record = (source.configs ?? []).find(item => item?.target === ".obsidian/community-plugins.json");
+    if (!record) {
+        errors.push(`${OBSIDIAN_CONFIG}: target .obsidian/community-plugins.json mancante`);
+        return [];
+    }
+    const plugins = asStringList(record.data);
+    if (plugins.length === 0) errors.push(`${OBSIDIAN_CONFIG}: community-plugins.json dichiarato senza plugin`);
+    return plugins;
+}
+
+function generatedObsidianConfigTargets(errors) {
+    const targets = new Set();
+    const obsidianConfig = loadYaml(OBSIDIAN_CONFIG);
+    for (const record of obsidianConfig.configs ?? []) {
+        const target = String(record?.target ?? "").replace(/\\/g, "/").trim();
+        if (target) targets.add(target);
+    }
+    const metaBindConfig = loadYaml(METABIND_CONFIG);
+    const metaBindTarget = String(metaBindConfig.target ?? "").replace(/\\/g, "/").trim();
+    if (metaBindTarget) targets.add(metaBindTarget);
+    if (targets.size === 0) errors.push(`${OBSIDIAN_CONFIG}/${METABIND_CONFIG}: nessun target Obsidian generato dichiarato`);
+    return targets;
+}
+
+function pipelineOutputTargets(errors) {
+    const targets = new Set();
+    const pipeline = loadYaml(SOURCE_PIPELINE);
+    const steps = pipeline.steps ?? {};
+    for (const step of Object.values(steps)) {
+        for (const output of step?.outputs ?? []) {
+            const target = String(output ?? "").replace(/\\/g, "/").trim();
+            if (!target || target === "memoria" || /[*?[\]]/.test(target)) continue;
+            targets.add(target);
+            targets.add(target.replace(/\.(md|json|base|canvas)$/, ""));
+        }
+    }
+    if (targets.size === 0) errors.push(`${SOURCE_PIPELINE}: nessun output materiale dichiarato`);
+    return targets;
+}
+
 function targetExists(target, generatedTargets, virtualUserPaths) {
     const clean = String(target ?? "").trim();
     if (!clean) return false;
@@ -93,8 +130,15 @@ function targetExists(target, generatedTargets, virtualUserPaths) {
     );
 }
 
-function loadGeneratedTargets() {
+function loadGeneratedTargets(errors) {
     const targets = new Set();
+    for (const target of generatedObsidianConfigTargets(errors)) {
+        targets.add(target);
+        targets.add(target.replace(/\.(json|md|base|canvas)$/, ""));
+    }
+    for (const target of pipelineOutputTargets(errors)) {
+        targets.add(target);
+    }
     try {
         const stdout = execFileSync("python3", ["-c", [
             "import json, sys",
@@ -171,17 +215,18 @@ function hasBindingSubstance(binding) {
 }
 
 const errors = [];
-const community = readJson(".obsidian/community-plugins.json", []);
 const matrixSource = loadYaml(MATRIX);
 const matrix = matrixSource.plugins ?? [];
 const contracts = loadYaml(CONTRACTS).plugins ?? [];
 const bindings = loadYaml(BINDINGS).bindings ?? {};
 const manualAcceptance = loadYaml(MANUAL_ACCEPTANCE);
 const policy = loadPolicy(matrixSource, errors);
-const generatedTargets = loadGeneratedTargets();
+const community = declaredCommunityPlugins(errors);
+const generatedTargets = loadGeneratedTargets(errors);
 const virtualUserPaths = loadVirtualUserPaths();
 const releaseProfile = releasePluginProfile(ROOT, loadReleaseBoundary(ROOT));
 const releaseEnabledPlugins = releaseProfile.enabledPluginSet;
+const declaredPlugins = new Set(matrix.map(entry => String(entry.id ?? "").trim()).filter(Boolean));
 const runtimeProbeIds = new Set((manualAcceptance.plugin_runtime_probes ?? []).map(probe => String(probe.id ?? "").trim()).filter(Boolean));
 
 const matrixById = new Map(matrix.map(entry => [entry.id, entry]));
@@ -196,10 +241,9 @@ for (const pluginId of community) {
     const entry = matrixById.get(pluginId);
     const contract = contractById.get(pluginId);
     const bindingRecord = bindingByPluginId.get(pluginId);
-    const manifest = readJson(`.obsidian/plugins/${pluginId}/manifest.json`, {});
 
     if (!entry) {
-        errors.push(`${pluginId}: plugin installato senza plugin_matrix`);
+        errors.push(`${pluginId}: plugin dichiarato senza plugin_matrix`);
         continue;
     }
     const tier = tierFor(entry, policy.requiredTiers);
@@ -216,8 +260,8 @@ for (const pluginId of community) {
     if (!bindingRecord && (!isReleaseEnabled || policy.releaseEnabled.requireBinding)) {
         errors.push(`${pluginId}: manca plugin_bindings.plugin_id`);
     }
-    if (contract && manifest.version && String(contract.version) !== String(manifest.version)) {
-        errors.push(`${pluginId}: versione contratto diversa dal manifest`);
+    if (contract && !String(contract.version ?? "").trim()) {
+        errors.push(`${pluginId}: plugin_contracts senza versione dichiarativa`);
     }
 
     const requiredSurfaces = isReleaseEnabled
@@ -230,7 +274,7 @@ for (const pluginId of community) {
     if (bindingRecord && !hasBindingSubstance(bindingRecord.binding)) {
         errors.push(`${pluginId}: binding tecnico senza responsabilita, uso, sintassi o config`);
     }
-    if (bindingRecord?.binding?.config_path && !fs.existsSync(repoPath(ROOT, bindingRecord.binding.config_path))) {
+    if (bindingRecord?.binding?.config_path && !targetExists(bindingRecord.binding.config_path, generatedTargets, virtualUserPaths)) {
         errors.push(`${pluginId}: config_path dichiarato ma mancante (${bindingRecord.binding.config_path})`);
     }
 
@@ -262,7 +306,11 @@ for (const pluginId of community) {
 }
 
 for (const pluginId of matrixById.keys()) {
-    if (!community.includes(pluginId)) errors.push(`${pluginId}: plugin in matrice ma non installato`);
+    if (!community.includes(pluginId)) errors.push(`${pluginId}: plugin in matrice ma non dichiarato in ${OBSIDIAN_CONFIG}`);
+}
+
+for (const pluginId of community) {
+    if (!declaredPlugins.has(pluginId)) errors.push(`${pluginId}: plugin in ${OBSIDIAN_CONFIG} ma non in plugin_matrix`);
 }
 
 for (const pluginId of runtimeProbeIds) {

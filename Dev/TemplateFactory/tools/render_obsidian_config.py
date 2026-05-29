@@ -72,7 +72,10 @@ def declared_configs(source: dict[str, Any], errors: list[str]) -> dict[str, Any
         if not target.startswith(".obsidian/") or not target.endswith(".json"):
             fail(errors, f"{SOURCE.relative_to(ROOT)}: target non Obsidian JSON {target}")
             continue
-        if target.endswith("/manifest.json") or target in NATIVE_JSON_EXCEPTIONS or target in DELEGATED_TARGETS:
+        if target.endswith("/manifest.json"):
+            fail(errors, f"{SOURCE.relative_to(ROOT)}: target manifest plugin vietato {target}")
+            continue
+        if target in NATIVE_JSON_EXCEPTIONS or target in DELEGATED_TARGETS:
             fail(errors, f"{SOURCE.relative_to(ROOT)}: target gestito altrove {target}")
             continue
         if target in declared:
@@ -164,8 +167,6 @@ def tracked_obsidian_json(errors: list[str]) -> set[str]:
     for line in result.stdout.splitlines():
         path = line.strip().replace("\\", "/")
         if not path.endswith(".json"):
-            continue
-        if path.endswith("/manifest.json"):
             continue
         if path in NATIVE_JSON_EXCEPTIONS or path in DELEGATED_TARGETS:
             continue
