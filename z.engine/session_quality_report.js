@@ -283,7 +283,7 @@
       "screenshot_ready",
       ["Materiale", "Tipo", "Uso", "Pubblico", "Stato"],
       data.showcaseReady.slice(0, 30).map(row => [asLink(row.page), row.kind, row.use, row.page.pubblico === true ? "si" : "no", row.page.stato ?? ""]),
-      "Nessun materiale screenshot-ready trovato."
+      "Nessun materiale pronto da condividere trovato."
     );
   }
 

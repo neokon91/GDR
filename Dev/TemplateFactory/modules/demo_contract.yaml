@@ -25,6 +25,26 @@ checks:
     - check:release-artifact
   forbidden_source_files:
     - Mondi/[Demo] Regno di Prova.md
+    - Campagne/[Demo] Sale Sotto La Nebbia.md
+    - Mondi/Luoghi/[Demo] Costa Delle Lanterne.md
+    - Mondi/Luoghi/[Demo] Porto Di Prova.md
+    - Mondi/Luoghi/[Demo] Faro Vecchio.md
+    - Mondi/Luoghi/[Demo] Saline Bianche.md
+    - Mondi/Culture/[Demo] Gente Della Soglia Salata.md
+    - Mondi/Fazioni/[Demo] Consorzio Del Sale Nero.md
+    - Mondi/Fazioni/[Demo] Dogana Delle Lanterne.md
+    - Mondi/Fazioni/[Demo] Custodi Delle Saline.md
+    - Mondi/Conflitti/[Demo] Blocco Delle Rotte Del Sale.md
+    - Mondi/Segreti/[Demo] Patto Della Campana Sommersa.md
+    - Mondi/Missioni/[Demo] Recuperare La Campana Sommersa.md
+    - Mondi/Sessioni/[Demo] 2026-05-28 - La Campana Nella Nebbia.md
+    - Mondi/Tracciati/[Demo] Marea Della Lanterna Bassa.md
+    - Mondi/Incontri/[Demo] Scontro Alla Banchina.md
+    - Mondi/Creature/[Demo] Vedetta Salmastra.md
+    - Mondi/Oggetti/[Demo] Chiave Di Sale.md
+    - Mondi/Timeline/[Demo] Il Faro Vecchio Si Riaccende.md
+    - Mondi/Dispense/[Demo] Avviso Della Dogana.md
+    - Demo Regno Di Prova.md
     - Mondi/Porto di Prova Demo.md
     - Campagne/Sale Sotto La Nebbia/Sale Sotto La Nebbia.md
     - Mondi/Culture/Custodi Delle Saline.md
@@ -42,7 +62,10 @@ final_demo_minimum:
     - mondo
     - campagna
     - luogo
+    - cultura
     - fazione
+    - conflitto
+    - segreto
     - missione
     - sessione
     - tracciato
@@ -61,3 +84,24 @@ final_demo_minimum:
     - Hub/Vista Giocatori.md
     - Risorse/Post Sessione Guidato.md
     - Hub/Durante il Gioco.md
+  playable_region:
+    name: Costa Delle Lanterne
+    min_locations: 3
+    min_factions: 3
+    required_categories:
+      - cultura
+      - conflitto
+      - segreto
+      - missione
+      - sessione
+      - tracciato
+    required_fields:
+      - regione_starter
+      - luoghi
+      - fazioni
+      - culture
+      - conflitti
+      - segreti
+      - missioni
+      - tracciati
+      - player_safe

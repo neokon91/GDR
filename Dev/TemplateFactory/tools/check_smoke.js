@@ -42,7 +42,7 @@ for (const marker of ["renderPlayerPortalStatus", "renderPlayerRecap", "renderPu
 }
 
 const startHere = readTextRel(ROOT, "Inizia Qui.md");
-for (const marker of ["Crea Il Mondo", "Trasforma In Gioco", "Aggiorna Il Mondo"]) {
+for (const marker of ["Prima Sessione", "Crea mondo", "Prepara sessione", "Gioca", "Chiudi e aggiorna"]) {
     if (!startHere.includes(marker)) {
         errors.push(`Smoke statico: Inizia Qui non contiene ${marker}`);
     }

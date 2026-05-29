@@ -27,7 +27,7 @@ panels:
       - rischio pubblico
       - buco operativo
       - bozza da smistare
-      - materiale screenshot-ready
+      - materiale pronto da condividere
   coverage:
     runtime_view: renderQualityReportCoverage
     promise: Misurare se il vault ha massa giocabile sufficiente senza leggere liste lunghe.

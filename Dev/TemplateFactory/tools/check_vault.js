@@ -799,10 +799,18 @@ if (gptConnectorIndex?.is_code_search_indexed !== true) {
 }
 
 const startHereText = readRel("Inizia Qui.md");
-const worldbuildingIndex = startHereText.indexOf("Crea Il Mondo");
-const sessionIndex = startHereText.indexOf("Trasforma In Gioco");
-if (worldbuildingIndex === -1 || sessionIndex === -1 || worldbuildingIndex > sessionIndex) {
-    errors.push("Inizia Qui.md: il flusso deve esporre Crea Il Mondo prima di sessione/gioco");
+const quickSessionIndex = startHereText.indexOf("Prima Sessione");
+const worldbuildingIndex = Math.max(
+    startHereText.indexOf("Crea Il Mondo"),
+    startHereText.indexOf("Crea mondo"),
+    startHereText.indexOf("Crea Mondo")
+);
+const prepIndex = startHereText.indexOf("Prepara");
+const playIndex = startHereText.indexOf("Gioca");
+if (quickSessionIndex === -1 || worldbuildingIndex === -1 || prepIndex === -1 || playIndex === -1) {
+    errors.push("Inizia Qui.md: il flusso deve esporre Prima Sessione, Crea mondo, Prepara e Gioca");
+} else if (Math.min(quickSessionIndex, worldbuildingIndex) > playIndex) {
+    errors.push("Inizia Qui.md: il flusso deve proporre prima sessione o mondo prima di Gioca");
 }
 
 const setupText = readRel("Risorse/Setup Guidato.md");

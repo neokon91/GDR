@@ -13,6 +13,15 @@ function buttonDeclaration(button) {
     return `<!-- workflow:button ${button} -->`;
 }
 
+function workflowBlock(text, workflowId) {
+    const start = `<!-- workflow:quick_actions:start ${workflowId} -->`;
+    const end = `<!-- workflow:quick_actions:end ${workflowId} -->`;
+    const startIndex = text.indexOf(start);
+    const endIndex = text.indexOf(end);
+    if (startIndex === -1 || endIndex === -1 || endIndex < startIndex) return "";
+    return text.slice(startIndex, endIndex + end.length);
+}
+
 function fail(errors) {
     console.error("Workflow quick actions non valide:");
     for (const error of errors) console.error(`- ${error}`);
@@ -65,7 +74,12 @@ function main() {
             const text = existsRel(ROOT, entry)
                 ? readTextRel(ROOT, entry)
                 : renderMaterializedUserFile(virtualFile, data.workflows ?? {});
-            for (const action of allActions) {
+        const block = workflowBlock(text, workflowId);
+        const visibleWorkflowButtons = [...block.matchAll(BUTTON_PATTERN)].map(match => match[1]);
+        if (visibleWorkflowButtons.length) {
+            errors.push(`${workflowId}: ${entry} espone sintassi Meta Bind visibile nel blocco workflow (${visibleWorkflowButtons.join(", ")})`);
+        }
+        for (const action of allActions) {
                 const button = String(action.button ?? "");
                 if (!button) {
                     errors.push(`${workflowId}: quick action senza button`);

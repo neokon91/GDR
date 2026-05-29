@@ -67,6 +67,12 @@ function createObsidianAcceptanceValidators({
         if (result.ux?.missingAnyText?.length) {
             errors.push(`pagina ${label} senza nessuna CTA attesa ${result.page}: ${result.ux.missingAnyText.join(" | ")}`);
         }
+        if (result.ux?.missingClickableAll?.length) {
+            errors.push(`pagina ${label} senza pulsanti cliccabili obbligatori ${result.page}: ${result.ux.missingClickableAll.join(", ")}; trovati: ${(result.ux.clickableLabels ?? []).join(" | ")}`);
+        }
+        if (result.ux?.missingClickableAny?.length) {
+            errors.push(`pagina ${label} senza nessun pulsante cliccabile atteso ${result.page}: ${result.ux.missingClickableAny.join(" | ")}; trovati: ${(result.ux.clickableLabels ?? []).join(" | ")}`);
+        }
         if (result.problemNotices.length) errors.push(`notice problematica nel live pass ${label} ${result.page}: ${result.problemNotices.join(" | ")}`);
         if (result.newEvents.length) errors.push(`eventi console nel live pass ${label} ${result.page}: ${JSON.stringify(result.newEvents)}`);
         return errors;

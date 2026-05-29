@@ -51,82 +51,82 @@ pages:
       > Scegliere in pochi secondi se preparare, giocare, consolidare o creare materiale.
       >
       > **Durante il gioco** - la sessione e pronta o in corso
-      > `BUTTON[durante-il-gioco-durante-il-gioco]`
+      <!-- workflow:button durante-il-gioco-durante-il-gioco -->
       >
       > **Preparazione sessione** - devi preparare o scegliere la prossima sessione
-      > `BUTTON[prossima-sessione-risorse-preparazione-sessione]`
+      <!-- workflow:button prossima-sessione-risorse-preparazione-sessione -->
       >
       > **Post sessione** - devi chiudere appunti, recap e conseguenze
-      > `BUTTON[post-sessione-z-bacheche-post-sessione]`
+      <!-- workflow:button post-sessione-z-bacheche-post-sessione -->
       >
       > **Aiuto** - pulsanti, viste o tabelle non rispondono
-      > `BUTTON[aiuto-risorse-se-qualcosa-non-funziona]`
+      <!-- workflow:button aiuto-risorse-se-qualcosa-non-funziona -->
       >
       > [!regia]- Navigazione DM
       > Aprire le superfici operative senza cercarle nella sidebar.
       >
       > **Stato campagna** - vuoi controllare pressioni e conseguenze aperte
-      > `BUTTON[stato-campagna-mondi-stato-del-mondo]`
+      <!-- workflow:button stato-campagna-mondi-stato-del-mondo -->
       >
       > **Mondo vivo** - vuoi decidere cosa si muove fuori scena
-      > `BUTTON[mondo-vivo-motore-mondo-vivo]`
+      <!-- workflow:button mondo-vivo-motore-mondo-vivo -->
       >
       > **Fuori scena** - devi scegliere le reazioni prima della prossima sessione
-      > `BUTTON[fuori-scena-cosa-succede-fuori-scena]`
+      <!-- workflow:button fuori-scena-cosa-succede-fuori-scena -->
       >
       > **Inbox** - devi smistare appunti e materiale grezzo
-      > `BUTTON[inbox-inbox-inbox]`
+      <!-- workflow:button inbox-inbox-inbox -->
       >
       > **Worldbuilder** - devi costruire o collegare mondo, luoghi e fazioni
-      > `BUTTON[worldbuilder-worldbuilder-dashboard]`
+      <!-- workflow:button worldbuilder-worldbuilder-dashboard -->
       >
       > **Campagna da ambientazione** - vuoi trasformare worldbuilding in gioco
-      > `BUTTON[campagna-da-ambientazione-campagna-da-ambientazione]`
+      <!-- workflow:button campagna-da-ambientazione-campagna-da-ambientazione -->
       >
       > [!regia]- Crea per il tavolo
       > Creare materiale strutturato solo quando serve alla prossima sessione.
       >
       > **Router DM** - non sai ancora quale scheda creare
-      > `BUTTON[nuovo-contenuto-dm-z-modelli-dm-dm-router-md]`
+      <!-- workflow:button nuovo-contenuto-dm-z-modelli-dm-dm-router-md -->
       >
       > **Nuova campagna** - serve un contenitore di gioco
-      > `BUTTON[nuova-campagna-z-modelli-dm-campagna-md]`
+      <!-- workflow:button nuova-campagna-z-modelli-dm-campagna-md -->
       >
       > **Campagna da regione** - vuoi partire da un territorio gia definito
-      > `BUTTON[campagna-da-regione-z-modelli-dm-campagna-da-regione-md]`
+      <!-- workflow:button campagna-da-regione-z-modelli-dm-campagna-da-regione-md -->
       >
       > **Arco da conflitto** - un conflitto deve diventare struttura di sessioni
-      > `BUTTON[arco-da-conflitto-z-modelli-dm-arco-da-conflitto-md]`
+      <!-- workflow:button arco-da-conflitto-z-modelli-dm-arco-da-conflitto-md -->
       >
       > **Nuova sessione** - devi preparare il prossimo tavolo
-      > `BUTTON[nuova-sessione-z-modelli-dm-sessione-md]`
+      <!-- workflow:button nuova-sessione-z-modelli-dm-sessione-md -->
       >
       > **Nuova missione** - emerge un obiettivo concreto
-      > `BUTTON[nuova-missione-z-modelli-dm-missione-md]`
+      <!-- workflow:button nuova-missione-z-modelli-dm-missione-md -->
       >
       > **Nuovo clock** - una pressione va resa visibile
-      > `BUTTON[nuovo-clock-z-modelli-dm-tracciato-md]`
+      <!-- workflow:button nuovo-clock-z-modelli-dm-tracciato-md -->
       >
       > **Nuovo incontro** - serve una scena pronta o un combattimento
-      > `BUTTON[nuovo-incontro-z-modelli-dm-incontro-md]`
+      <!-- workflow:button nuovo-incontro-z-modelli-dm-incontro-md -->
       >
       > [!regia]- Manutenzione
       > Tenere pulito il materiale generato e risolvere problemi prima del tavolo.
       >
       > **Bacheca preparazione** - devi riordinare le sessioni in corso
-      > `BUTTON[preparazione-sessioni-z-bacheche-preparazione-sessioni]`
+      <!-- workflow:button preparazione-sessioni-z-bacheche-preparazione-sessioni -->
       >
       > **Task DM** - devi vedere lavoro aperto e manutenzione
-      > `BUTTON[task-dm-risorse-task-dm]`
+      <!-- workflow:button task-dm-risorse-task-dm -->
       >
       > **Smista generati** - materiale generato deve diventare nota utile o archivio
-      > `BUTTON[smista-generati-risorse-smistamento-bozze-generate]`
+      <!-- workflow:button smista-generati-risorse-smistamento-bozze-generate -->
       >
       > **Generatore fantasy** - vuoi produrre bozza da smistare, non canone diretto
-      > `BUTTON[generatore-fantasy-fantasy-content-generator-open-generator]`
+      <!-- workflow:button generatore-fantasy-fantasy-content-generator-open-generator -->
       >
       > **Guida DM** - devi ricordare il flusso di uso del vault
-      > `BUTTON[guida-dm-risorse-guida-dm]`
+      <!-- workflow:button guida-dm-risorse-guida-dm -->
       <!-- workflow:quick_actions:end dashboard_dm -->
 
       ```dataviewjs
@@ -153,40 +153,40 @@ pages:
       > Costruire e controllare geografia, culture, storia e buchi spaziali del mondo.
       >
       > **Nuova cultura** - un popolo, costume o tabu cambia luoghi e scelte
-      > `BUTTON[nuova-cultura-z-modelli-worldbuilding-cultura-md]`
+      <!-- workflow:button nuova-cultura-z-modelli-worldbuilding-cultura-md -->
       >
       > **Nuova lingua** - lingua o scrittura diventano indizio, accesso o identita
-      > `BUTTON[nuova-lingua-z-modelli-worldbuilding-lingua-md]`
+      <!-- workflow:button nuova-lingua-z-modelli-worldbuilding-lingua-md -->
       >
       > **Nuova era** - la storia ha bisogno di una fase riconoscibile
-      > `BUTTON[nuova-era-z-modelli-worldbuilding-era-storica-md]`
+      <!-- workflow:button nuova-era-z-modelli-worldbuilding-era-storica-md -->
       >
       > **Nuovo conflitto** - una tensione geografica o culturale deve produrre gioco
-      > `BUTTON[nuovo-conflitto-z-modelli-worldbuilding-conflitto-md]`
+      <!-- workflow:button nuovo-conflitto-z-modelli-worldbuilding-conflitto-md -->
       >
       > **Cosmologia** - il mondo ha regole metafisiche che cambiano il tavolo
-      > `BUTTON[cosmologia-z-modelli-worldbuilding-cosmologia-md]`
+      <!-- workflow:button cosmologia-z-modelli-worldbuilding-cosmologia-md -->
       >
       > [!regia]- Orientamento mondo
       > Passare dall'atlante a controllo, profondita e gioco.
       >
       > **Worldbuilder** - non sai ancora quale pezzo creare o collegare
-      > `BUTTON[worldbuilder-worldbuilder-dashboard-2]`
+      <!-- workflow:button worldbuilder-worldbuilder-dashboard-2 -->
       >
       > **Controllo worldbuilding** - vuoi vedere cosa resta superficiale o scollegato
-      > `BUTTON[controllo-worldbuilding-controllo-worldbuilding]`
+      <!-- workflow:button controllo-worldbuilding-controllo-worldbuilding -->
       >
       > **Worldbuilding profondo** - una scheda ricorrente merita origine, costo e memoria
-      > `BUTTON[worldbuilding-profondo-risorse-worldbuilding-profondo]`
+      <!-- workflow:button worldbuilding-profondo-risorse-worldbuilding-profondo -->
       >
       > **Geopolitica** - luoghi e confini devono diventare poteri in attrito
-      > `BUTTON[geopolitica-geopolitical-dashboard]`
+      <!-- workflow:button geopolitica-geopolitical-dashboard -->
       >
       > **Economia e rotte** - viaggi, risorse o passaggi devono pesare sul mondo
-      > `BUTTON[economia-e-rotte-economia-e-rotte]`
+      <!-- workflow:button economia-e-rotte-economia-e-rotte -->
       >
       > **Lore hub** - vuoi navigare segnali, storia e materiale canonico
-      > `BUTTON[lore-hub-lore-hub]`
+      <!-- workflow:button lore-hub-lore-hub -->
       <!-- workflow:quick_actions:end atlante_mondo -->
 
       ## Filtro
@@ -298,25 +298,25 @@ pages:
       > Consolidare il mondo come prodotto leggibile prima di espanderlo ancora.
       >
       > **Nuovo mondo guidato** - non esiste ancora un mondo base da consolidare
-      > `BUTTON[nuovo-mondo-homebrew]`
+      <!-- workflow:button nuovo-mondo-homebrew -->
       >
       > **Atlante** - devi vedere luoghi, culture, storia e geografia
-      > `BUTTON[atlante-del-mondo-atlante-del-mondo]`
+      <!-- workflow:button atlante-del-mondo-atlante-del-mondo -->
       >
       > [!regia]- Consolidamento
       > Passare dal codex alla verifica e al gioco.
       >
       > **Worldbuilder** - mancano identita, poteri o misteri giocabili
-      > `BUTTON[worldbuilder-worldbuilder-dashboard]`
+      <!-- workflow:button worldbuilder-worldbuilder-dashboard -->
       >
       > **Controllo worldbuilding** - vuoi vedere buchi strutturali del mondo
-      > `BUTTON[controllo-worldbuilding-controllo-worldbuilding]`
+      <!-- workflow:button controllo-worldbuilding-controllo-worldbuilding -->
       >
       > **Campagna da ambientazione** - il mondo deve diventare campagna o prima sessione
-      > `BUTTON[campagna-da-ambientazione-campagna-da-ambientazione]`
+      <!-- workflow:button campagna-da-ambientazione-campagna-da-ambientazione -->
       >
       > **Vista giocatori** - vuoi controllare cosa e mostrabile senza segreti
-      > `BUTTON[vista-giocatori-hub-vista-giocatori-vista-giocatori]`
+      <!-- workflow:button vista-giocatori-hub-vista-giocatori-vista-giocatori -->
       <!-- workflow:quick_actions:end bibbia_mondo -->
 
       ```dataviewjs
@@ -386,49 +386,52 @@ pages:
       > Trasformare una regione, un conflitto o una cultura in campagna giocabile.
       >
       > **Campagna da regione** - hai una zona interessante e vuoi darle struttura di campagna
-      > `BUTTON[campagna-da-regione-z-modelli-dm-campagna-da-regione-md]`
+      <!-- workflow:button campagna-da-regione-z-modelli-dm-campagna-da-regione-md -->
+      >
+      > **Regione giocabile** - vuoi capire se la zona ha abbastanza tavolo prima di creare una campagna
+      <!-- workflow:button regione-giocabile-risorse-regione-giocabile -->
       >
       > **Arco da conflitto** - una tensione del mondo deve diventare avanzamento giocabile
-      > `BUTTON[arco-da-conflitto-z-modelli-dm-arco-da-conflitto-md]`
+      <!-- workflow:button arco-da-conflitto-z-modelli-dm-arco-da-conflitto-md -->
       >
       > **Opportunita di avventura** - vuoi scegliere ganci gia pronti invece di creare altro lore
-      > `BUTTON[opportunita-risorse-opportunita-di-avventura]`
+      <!-- workflow:button opportunita-risorse-opportunita-di-avventura -->
       >
       > **Fronti di campagna** - devi vedere quali pressioni stanno muovendo il mondo
-      > `BUTTON[fronti-risorse-fronti-di-campagna]`
+      <!-- workflow:button fronti-risorse-fronti-di-campagna -->
       >
       > **Atlante del mondo** - ti manca una regione, cultura o crisi da cui partire
-      > `BUTTON[atlante-atlante-del-mondo]`
+      <!-- workflow:button atlante-atlante-del-mondo -->
       >
       > [!regia]- Materializza il gioco
       > Convertire ambientazione in cose che il tavolo puo usare subito.
       >
       > **Nuova campagna** - hai gia scelto promessa, luogo iniziale e tensione centrale
-      > `BUTTON[nuova-campagna-z-modelli-dm-campagna-md]`
+      <!-- workflow:button nuova-campagna-z-modelli-dm-campagna-md -->
       >
       > **Nuova missione** - una pressione deve diventare obiettivo concreto per i personaggi
-      > `BUTTON[nuova-missione-z-modelli-dm-missione-md]`
+      <!-- workflow:button nuova-missione-z-modelli-dm-missione-md -->
       >
       > **Nuova sessione** - vuoi preparare la prima giocata partendo dalla campagna
-      > `BUTTON[nuova-sessione-z-modelli-dm-sessione-md]`
+      <!-- workflow:button nuova-sessione-z-modelli-dm-sessione-md -->
       >
       > **Nuovo clock** - un fronte deve avanzare anche se il party lo ignora
-      > `BUTTON[nuovo-clock-z-modelli-dm-tracciato-md]`
+      <!-- workflow:button nuovo-clock-z-modelli-dm-tracciato-md -->
       >
       > [!regia]- Approfondisci solo se serve
       > Aggiungere profondita senza perdere il ponte verso la sessione.
       >
       > **Worldbuilding profondo** - una scheda continua a tornare in scena e merita piu livelli
-      > `BUTTON[worldbuilding-profondo-risorse-worldbuilding-profondo]`
+      <!-- workflow:button worldbuilding-profondo-risorse-worldbuilding-profondo -->
       >
       > **Creazione guidata entita** - non sai quali campi compilare per renderla giocabile
-      > `BUTTON[creazione-guidata-entita-risorse-creazione-guidata-entita]`
+      <!-- workflow:button creazione-guidata-entita-risorse-creazione-guidata-entita -->
       >
       > **Motore mondo vivo** - vuoi capire quali fazioni o pressioni reagiscono adesso
-      > `BUTTON[motore-mondo-vivo-motore-mondo-vivo]`
+      <!-- workflow:button motore-mondo-vivo-motore-mondo-vivo -->
       >
       > **Preparazione sessione** - hai abbastanza materiale e devi portarlo al tavolo
-      > `BUTTON[preparazione-sessione-risorse-preparazione-sessione]`
+      <!-- workflow:button preparazione-sessione-risorse-preparazione-sessione -->
       <!-- workflow:quick_actions:end campagna_ambientazione -->
 
       ```dataviewjs
@@ -505,25 +508,25 @@ pages:
       > Creare elementi originali del mondo e collegarli a culture, risorse, missioni o storia.
       >
       > **Nuovo elemento** - vuoi creare materiale originale non-SRD con uso narrativo
-      > `BUTTON[nuovo-elemento-z-modelli-worldbuilding-compendium-del-mondo-md]`
+      <!-- workflow:button nuovo-elemento-z-modelli-worldbuilding-compendium-del-mondo-md -->
       >
       > **Lore hub** - devi collegare l'elemento a segnali, misteri o canone
-      > `BUTTON[lore-hub-lore-hub]`
+      <!-- workflow:button lore-hub-lore-hub -->
       >
       > [!regia]- Collega al gioco
       > Evitare elementi decorativi senza impatto.
       >
       > **Nuova risorsa** - l'elemento e merce, dipendenza o leva economica
-      > `BUTTON[nuova-risorsa-z-modelli-worldbuilding-risorsa-md]`
+      <!-- workflow:button nuova-risorsa-z-modelli-worldbuilding-risorsa-md -->
       >
       > **Nuova cultura** - l'elemento definisce pratiche, tabu o identita
-      > `BUTTON[nuova-cultura-z-modelli-worldbuilding-cultura-md]`
+      <!-- workflow:button nuova-cultura-z-modelli-worldbuilding-cultura-md -->
       >
       > **Nuovo mistero** - l'elemento deve essere scoperto gradualmente
-      > `BUTTON[nuovo-segreto-o-mistero-z-modelli-worldbuilding-segreto-o-mistero-md]`
+      <!-- workflow:button nuovo-segreto-o-mistero-z-modelli-worldbuilding-segreto-o-mistero-md -->
       >
       > **Nuova missione** - l'elemento genera obiettivo, rischio o ricompensa
-      > `BUTTON[nuova-missione-z-modelli-dm-missione-md]`
+      <!-- workflow:button nuova-missione-z-modelli-dm-missione-md -->
       <!-- workflow:quick_actions:end compendium_mondo -->
 
       ```dataviewjs
@@ -555,25 +558,25 @@ pages:
       > Separare canone, rumor, retcon e contraddizioni prima che confondano il tavolo.
       >
       > **Timeline** - una verita deve entrare nella storia del mondo
-      > `BUTTON[timeline-mondi-timeline-timeline]`
+      <!-- workflow:button timeline-mondi-timeline-timeline -->
       >
       > **Revisione lore** - devi ripulire appunti, rumor o contraddizioni
-      > `BUTTON[revisione-lore-revisione-lore]`
+      <!-- workflow:button revisione-lore-revisione-lore -->
       >
       > [!regia]- Stabilizza canone
       > Portare informazioni in viste dove possono essere verificate.
       >
       > **Lore hub** - vuoi vedere segnali e materiale canonico collegato
-      > `BUTTON[lore-hub-lore-hub]`
+      <!-- workflow:button lore-hub-lore-hub -->
       >
       > **Evento lore** - una scoperta deve restare tracciabile ma non ancora assoluta
-      > `BUTTON[nuovo-evento-lore-z-modelli-lore-capture-md]`
+      <!-- workflow:button nuovo-evento-lore-z-modelli-lore-capture-md -->
       >
       > **Controllo worldbuilding** - la contraddizione dipende da schede incomplete
-      > `BUTTON[controllo-worldbuilding-controllo-worldbuilding]`
+      <!-- workflow:button controllo-worldbuilding-controllo-worldbuilding -->
       >
       > **Motore mondo vivo** - una verita produce reazioni tra sessioni
-      > `BUTTON[motore-mondo-vivo-motore-mondo-vivo]`
+      <!-- workflow:button motore-mondo-vivo-motore-mondo-vivo -->
       <!-- workflow:quick_actions:end controllo_canone -->
 
       ## Priorita
@@ -635,31 +638,31 @@ pages:
       > Trovare schede di mondo superficiali, scollegate o non ancora giocabili.
       >
       > **Atlante** - devi vedere geografia, culture, storia e buchi spaziali
-      > `BUTTON[atlante-atlante-del-mondo-2]`
+      <!-- workflow:button atlante-atlante-del-mondo-2 -->
       >
       > **Worldbuilding profondo** - una scheda va resa piu viva invece di crearne una nuova
-      > `BUTTON[worldbuilding-profondo-risorse-worldbuilding-profondo-2]`
+      <!-- workflow:button worldbuilding-profondo-risorse-worldbuilding-profondo-2 -->
       >
       > **Bibbia del mondo** - devi consolidare tono, canone e principi del mondo
-      > `BUTTON[bibbia-del-mondo-bibbia-del-mondo]`
+      <!-- workflow:button bibbia-del-mondo-bibbia-del-mondo -->
       >
       > **Economia e rotte** - mancano risorse, dipendenze, mercati o passaggi
-      > `BUTTON[economia-e-rotte-economia-e-rotte]`
+      <!-- workflow:button economia-e-rotte-economia-e-rotte -->
       >
       > [!regia]- Riparazione guidata
       > Convertire buchi strutturali in azioni concrete.
       >
       > **Nuova cultura** - mancano vita quotidiana, tabù o identità sociali
-      > `BUTTON[nuova-cultura-z-modelli-worldbuilding-cultura-md]`
+      <!-- workflow:button nuova-cultura-z-modelli-worldbuilding-cultura-md -->
       >
       > **Nuovo conflitto** - una tensione non ha ancora posta, cause o possibili paci
-      > `BUTTON[nuovo-conflitto-z-modelli-worldbuilding-conflitto-md]`
+      <!-- workflow:button nuovo-conflitto-z-modelli-worldbuilding-conflitto-md -->
       >
       > **Nuova relazione** - due entita esistono ma non si influenzano
-      > `BUTTON[nuova-relazione-z-modelli-worldbuilding-relazione-md]`
+      <!-- workflow:button nuova-relazione-z-modelli-worldbuilding-relazione-md -->
       >
       > **Nuovo mistero** - manca una verita scopribile a livelli
-      > `BUTTON[nuovo-segreto-o-mistero-z-modelli-worldbuilding-segreto-o-mistero-md]`
+      <!-- workflow:button nuovo-segreto-o-mistero-z-modelli-worldbuilding-segreto-o-mistero-md -->
       <!-- workflow:quick_actions:end controllo_worldbuilding -->
 
       ## Priorita
@@ -761,52 +764,52 @@ pages:
       > Scegliere cosa reagisce tra una sessione e l'altra senza perdere conseguenze aperte.
       >
       > **Post sessione guidato** - devi chiudere appunti, recap e output della sessione
-      > `BUTTON[post-sessione-guidato-risorse-post-sessione-guidato]`
+      <!-- workflow:button post-sessione-guidato-risorse-post-sessione-guidato -->
       >
       > **Motore mondo vivo** - vuoi leggere pressioni e prossime mosse aggregate
-      > `BUTTON[motore-mondo-vivo-motore-mondo-vivo]`
+      <!-- workflow:button motore-mondo-vivo-motore-mondo-vivo -->
       >
       > **Stato campagna** - devi vedere conseguenze, missioni e tracciati aperti
-      > `BUTTON[stato-campagna-mondi-stato-del-mondo]`
+      <!-- workflow:button stato-campagna-mondi-stato-del-mondo -->
       >
       > **Nuovo clock** - una pressione fuori scena deve diventare tracciabile
-      > `BUTTON[nuovo-clock-z-modelli-dm-tracciato-md]`
+      <!-- workflow:button nuovo-clock-z-modelli-dm-tracciato-md -->
       >
       > **Applica conseguenza** - una conseguenza ha bersagli gia identificati
-      > `BUTTON[applica-conseguenza]`
+      <!-- workflow:button applica-conseguenza -->
       >
       > **Propaga a entita** - piu note devono ricevere aggiornamenti coerenti
-      > `BUTTON[propaga-a-entita]`
+      <!-- workflow:button propaga-a-entita -->
       >
       > [!regia]- Continuita
       > Trasformare eventi e scelte in stato leggibile prima della prossima preparazione.
       >
       > **Registra scelta mondo** - una decisione del party deve diventare pressione o stato
-      > `BUTTON[registra-scelta-mondo]`
+      <!-- workflow:button registra-scelta-mondo -->
       >
       > **Conseguenza guidata** - sai che qualcosa cambia ma non hai ancora i campi corretti
-      > `BUTTON[wizard-conseguenza]`
+      <!-- workflow:button wizard-conseguenza -->
       >
       > **Evento storico** - la conseguenza deve entrare nella timeline
-      > `BUTTON[evento-storico-z-modelli-evento-storico-md]`
+      <!-- workflow:button evento-storico-z-modelli-evento-storico-md -->
       >
       > **Prepara recap pubblico** - devi separare materiale mostrabile dai segreti DM
-      > `BUTTON[prepara-recap-pubblico]`
+      <!-- workflow:button prepara-recap-pubblico -->
       >
       > [!regia]- Ponte verso la prossima sessione
       > Convertire reazioni fuori scena in materiale da giocare.
       >
       > **Preparazione sessione** - hai scelto una pressione da portare al tavolo
-      > `BUTTON[prossima-sessione-risorse-preparazione-sessione]`
+      <!-- workflow:button prossima-sessione-risorse-preparazione-sessione -->
       >
       > **Nuova missione** - una reazione diventa obiettivo concreto
-      > `BUTTON[nuova-missione-z-modelli-dm-missione-md]`
+      <!-- workflow:button nuova-missione-z-modelli-dm-missione-md -->
       >
       > **Nuova fazione** - manca l'attore che produce la pressione
-      > `BUTTON[nuova-fazione-z-modelli-fazione-router-md]`
+      <!-- workflow:button nuova-fazione-z-modelli-fazione-router-md -->
       >
       > **Nuovo PNG** - serve un volto per mostrare la reazione
-      > `BUTTON[nuovo-png-z-modelli-personaggio-png-md]`
+      <!-- workflow:button nuovo-png-z-modelli-personaggio-png-md -->
       <!-- workflow:quick_actions:end fuori_scena -->
 
       ```dataviewjs
@@ -877,94 +880,94 @@ pages:
       > Gestire sessione, tiri, incontri, media e appunti live da una schermata.
       >
       > **Aggiorna scena** - cambia la scena corrente e vuoi tenerla visibile alla sessione
-      > `BUTTON[aggiorna-scena-z-modelli-dm-aggiorna-scena-corrente-md]`
+      <!-- workflow:button aggiorna-scena-z-modelli-dm-aggiorna-scena-corrente-md -->
       >
       > **Appunto live** - emerge qualcosa ma non sai ancora che tipo di nota sia
-      > `BUTTON[wizard-appunto-live]`
+      <!-- workflow:button wizard-appunto-live -->
       >
       > **Collega appunto** - hai gia scritto un appunto Inbox e va agganciato alla sessione attiva
-      > `BUTTON[collega-appunto-z-modelli-dm-collega-appunto-live-md]`
+      <!-- workflow:button collega-appunto-z-modelli-dm-collega-appunto-live-md -->
       >
       > **Aggiungi decisione live** - vuoi registrare una decisione senza ancora propagare tutto il mondo
-      > `BUTTON[aggiungi-decisione-z-modelli-dm-aggiungi-decisione-live-md]`
+      <!-- workflow:button aggiungi-decisione-z-modelli-dm-aggiungi-decisione-live-md -->
       >
       > **Conseguenza** - una scelta cambia missioni, PNG, luoghi, fazioni o clock
-      > `BUTTON[wizard-conseguenza]`
+      <!-- workflow:button wizard-conseguenza -->
       >
       > **Registra scelta mondo** - vuoi trasformare una decisione in continuita tracciabile
-      > `BUTTON[registra-scelta-mondo]`
+      <!-- workflow:button registra-scelta-mondo -->
       >
       > **Avanza clock** - il tempo passa o una pressione peggiora
-      > `BUTTON[avanza-clock]`
+      <!-- workflow:button avanza-clock -->
       >
       > **Chiudi sessione** - il tavolo finisce
-      > `BUTTON[post-sessione-guidato-risorse-post-sessione-guidato]`
+      <!-- workflow:button post-sessione-guidato-risorse-post-sessione-guidato -->
       >
       > [!regia]- Cattura live
       > Creare note grezze durante il tavolo senza decidere subito la struttura definitiva.
       >
       > **Evento live** - succede qualcosa che potrebbe diventare canone
-      > `BUTTON[evento-live-z-modelli-live-evento-md]`
+      <!-- workflow:button evento-live-z-modelli-live-evento-md -->
       >
       > **PNG improvvisato** - compare una persona non preparata
-      > `BUTTON[png-improvvisato-z-modelli-live-png-md]`
+      <!-- workflow:button png-improvvisato-z-modelli-live-png-md -->
       >
       > **Luogo improvvisato** - il party entra in un posto non preparato
-      > `BUTTON[luogo-improvvisato-z-modelli-live-luogo-md]`
+      <!-- workflow:button luogo-improvvisato-z-modelli-live-luogo-md -->
       >
       > **Nota grezza** - devi catturare velocemente senza tassonomia
-      > `BUTTON[nota-grezza-z-modelli-live-nota-grezza-md]`
+      <!-- workflow:button nota-grezza-z-modelli-live-nota-grezza-md -->
       >
       > **Conseguenza live** - una scelta produce un effetto da risolvere dopo
-      > `BUTTON[conseguenza-z-modelli-live-conseguenza-md]`
+      <!-- workflow:button conseguenza-z-modelli-live-conseguenza-md -->
       >
       > [!regia]- Supporto al tavolo
       > Aprire strumenti che servono durante la sessione senza cercarli nel vault.
       >
       > **Preparazione** - devi tornare alle ancore della sessione
-      > `BUTTON[preparazione-sessione-risorse-preparazione-sessione]`
+      <!-- workflow:button preparazione-sessione-risorse-preparazione-sessione -->
       >
       > **Nuovo incontro** - serve una scena meccanica o un combattimento
-      > `BUTTON[nuovo-incontro-z-modelli-dm-incontro-md]`
+      <!-- workflow:button nuovo-incontro-z-modelli-dm-incontro-md -->
       >
       > **Party control** - devi controllare PG, risorse e stato del party
-      > `BUTTON[party-control-hub-party-control]`
+      <!-- workflow:button party-control-hub-party-control -->
       >
       > **Vista giocatori** - devi verificare cosa e mostrabile
-      > `BUTTON[vista-giocatori-hub-vista-giocatori-vista-giocatori]`
+      <!-- workflow:button vista-giocatori-hub-vista-giocatori-vista-giocatori -->
       >
       > [!regia]- Strumenti avanzati
       > Creare o aprire materiale strutturato solo quando il tavolo lo richiede.
       >
       > **Nuovo PNG** - un PNG improvvisato diventa ricorrente
-      > `BUTTON[nuovo-png-z-modelli-personaggio-png-md]`
+      <!-- workflow:button nuovo-png-z-modelli-personaggio-png-md -->
       >
       > **Nuovo luogo** - un luogo diventa rilevante per il mondo
-      > `BUTTON[nuovo-luogo-z-modelli-luogo-router-md]`
+      <!-- workflow:button nuovo-luogo-z-modelli-luogo-router-md -->
       >
       > **Nuova missione** - emerge un obiettivo giocabile
-      > `BUTTON[nuova-missione-z-modelli-dm-missione-md]`
+      <!-- workflow:button nuova-missione-z-modelli-dm-missione-md -->
       >
       > **Nuova fazione** - emerge un potere organizzato
-      > `BUTTON[nuova-fazione-z-modelli-fazione-router-md]`
+      <!-- workflow:button nuova-fazione-z-modelli-fazione-router-md -->
       >
       > **Iniziativa** - inizia un combattimento o una scena a turni
-      > `BUTTON[iniziativa-risorse-iniziativa-e-combattimenti]`
+      <!-- workflow:button iniziativa-risorse-iniziativa-e-combattimenti -->
       >
       > **Nuovo oggetto** - serve una ricompensa o leva concreta
-      > `BUTTON[nuovo-oggetto-z-modelli-oggetto-md]`
+      <!-- workflow:button nuovo-oggetto-z-modelli-oggetto-md -->
       >
       > **Evento storico** - la sessione cambia la timeline
-      > `BUTTON[evento-storico-z-modelli-evento-storico-md]`
+      <!-- workflow:button evento-storico-z-modelli-evento-storico-md -->
       >
       > **Stato mondo** - vuoi vedere pressioni e conseguenze aperte
-      > `BUTTON[stato-mondo-mondi-stato-del-mondo]`
+      <!-- workflow:button stato-mondo-mondi-stato-del-mondo -->
       >
       > **Controllo vault** - qualcosa non torna nei controlli o nelle viste
-      > `BUTTON[controllo-vault-risorse-controllo-vault]`
+      <!-- workflow:button controllo-vault-risorse-controllo-vault -->
       >
       > **Tabelle rapide** - ti serve improvvisazione controllata
-      > `BUTTON[tabelle-rapide-risorse-tabelle-tabelle]`
+      <!-- workflow:button tabelle-rapide-risorse-tabelle-tabelle -->
       <!-- workflow:quick_actions:end gioca_live -->
 
       ```dataviewjs
@@ -1034,31 +1037,31 @@ pages:
       > Rendere viaggi, risorse e mercati capaci di generare pressione di gioco.
       >
       > **Nuova rotta** - un passaggio deve creare opportunita, costo o rischio
-      > `BUTTON[nuova-rotta-z-modelli-worldbuilding-rotta-md]`
+      <!-- workflow:button nuova-rotta-z-modelli-worldbuilding-rotta-md -->
       >
       > **Nuova risorsa** - una merce, dipendenza o scarsita muove fazioni
-      > `BUTTON[nuova-risorsa-z-modelli-worldbuilding-risorsa-md]`
+      <!-- workflow:button nuova-risorsa-z-modelli-worldbuilding-risorsa-md -->
       >
       > **Nuovo mercato** - serve un nodo commerciale, pedaggio o strozzatura
-      > `BUTTON[nuovo-mercato-z-modelli-worldbuilding-mercato-o-nodo-commerciale-md]`
+      <!-- workflow:button nuovo-mercato-z-modelli-worldbuilding-mercato-o-nodo-commerciale-md -->
       >
       > **Geopolitica** - economia e confini stanno producendo conflitto
-      > `BUTTON[geopolitica-geopolitical-dashboard]`
+      <!-- workflow:button geopolitica-geopolitical-dashboard -->
       >
       > **Lore hub** - vuoi collegare risorse a storia, culture e segnali
-      > `BUTTON[lore-hub-lore-hub]`
+      <!-- workflow:button lore-hub-lore-hub -->
       >
       > [!regia]- Conseguenze economiche
       > Trasformare blocchi, merci e rotte in materiale da sessione.
       >
       > **Nuovo conflitto** - una risorsa o rotta contesa deve diventare crisi
-      > `BUTTON[nuovo-conflitto-z-modelli-worldbuilding-conflitto-md]`
+      <!-- workflow:button nuovo-conflitto-z-modelli-worldbuilding-conflitto-md -->
       >
       > **Nuova missione** - una dipendenza economica diventa obiettivo per i PG
-      > `BUTTON[nuova-missione-z-modelli-dm-missione-md]`
+      <!-- workflow:button nuova-missione-z-modelli-dm-missione-md -->
       >
       > **Nuovo clock** - scarsita, embargo o blocco devono avanzare nel tempo
-      > `BUTTON[nuovo-clock-z-modelli-dm-tracciato-md]`
+      <!-- workflow:button nuovo-clock-z-modelli-dm-tracciato-md -->
       <!-- workflow:quick_actions:end economia_rotte -->
 
       ```dataviewjs
@@ -1128,28 +1131,28 @@ pages:
       > Trasformare confini, poteri e crisi diplomatiche in pressione giocabile.
       >
       > **Nuovo territorio** - serve uno stato, dominio, marca o protettorato
-      > `BUTTON[nuovo-territorio-politico-z-modelli-luogo-router-md]`
+      <!-- workflow:button nuovo-territorio-politico-z-modelli-luogo-router-md -->
       >
       > **Nuova relazione** - due poteri devono avere patto, rivalita o trattato
-      > `BUTTON[nuova-relazione-z-modelli-worldbuilding-relazione-md]`
+      <!-- workflow:button nuova-relazione-z-modelli-worldbuilding-relazione-md -->
       >
       > **Motore mondo vivo** - una crisi deve propagarsi su luoghi, fazioni o timeline
-      > `BUTTON[motore-mondo-vivo-motore-mondo-vivo]`
+      <!-- workflow:button motore-mondo-vivo-motore-mondo-vivo -->
       >
       > **Economia e rotte** - confini, risorse o pedaggi stanno muovendo il conflitto
-      > `BUTTON[economia-e-rotte-economia-e-rotte-2]`
+      <!-- workflow:button economia-e-rotte-economia-e-rotte-2 -->
       >
       > [!regia]- Conseguenze politiche
       > Convertire attriti diplomatici in conflitti, missioni o clock.
       >
       > **Nuovo conflitto** - una crisi diplomatica deve avere posta e schieramenti
-      > `BUTTON[nuovo-conflitto-z-modelli-worldbuilding-conflitto-md]`
+      <!-- workflow:button nuovo-conflitto-z-modelli-worldbuilding-conflitto-md -->
       >
       > **Nuova missione** - un confine o trattato crea un obiettivo per i PG
-      > `BUTTON[nuova-missione-z-modelli-dm-missione-md]`
+      <!-- workflow:button nuova-missione-z-modelli-dm-missione-md -->
       >
       > **Nuovo clock** - guerra, embargo o successione devono avanzare nel tempo
-      > `BUTTON[nuovo-clock-z-modelli-dm-tracciato-md]`
+      <!-- workflow:button nuovo-clock-z-modelli-dm-tracciato-md -->
       <!-- workflow:quick_actions:end geopolitica -->
 
       ```dataviewjs
@@ -1219,31 +1222,31 @@ pages:
       > Navigare il lore vivo senza perdere cosa produce segnali, segreti o gioco.
       >
       > **Atlante** - devi tornare a luoghi, culture e geografia
-      > `BUTTON[atlante-atlante-del-mondo-2]`
+      <!-- workflow:button atlante-atlante-del-mondo-2 -->
       >
       > **Economia e rotte** - il lore riguarda risorse, viaggi o dipendenze
-      > `BUTTON[economia-e-rotte-economia-e-rotte-2]`
+      <!-- workflow:button economia-e-rotte-economia-e-rotte-2 -->
       >
       > **Calendario** - feste, stagioni o date devono diventare pressione
-      > `BUTTON[calendario-mondi-calendario]`
+      <!-- workflow:button calendario-mondi-calendario -->
       >
       > **Compendium** - vuoi raccogliere elementi ricorrenti e materiali del mondo
-      > `BUTTON[compendium-hub-compendium-del-mondo-compendium-del-mondo]`
+      <!-- workflow:button compendium-hub-compendium-del-mondo-compendium-del-mondo -->
       >
       > [!regia]- Cattura e canone
       > Decidere se un segnale resta appunto, diventa mistero o entra nel canone.
       >
       > **Cattura lore** - hai un segnale interessante ma non ancora canonico
-      > `BUTTON[lore-capture-z-modelli-lore-capture-md]`
+      <!-- workflow:button lore-capture-z-modelli-lore-capture-md -->
       >
       > **Nuovo mistero** - una verita deve essere rivelata gradualmente
-      > `BUTTON[nuovo-segreto-o-mistero-z-modelli-worldbuilding-segreto-o-mistero-md]`
+      <!-- workflow:button nuovo-segreto-o-mistero-z-modelli-worldbuilding-segreto-o-mistero-md -->
       >
       > **Revisione lore** - devi ripulire o canonizzare materiale disperso
-      > `BUTTON[revisione-lore-revisione-lore]`
+      <!-- workflow:button revisione-lore-revisione-lore -->
       >
       > **Controllo canone** - temi contraddizioni, duplicati o segreti esposti
-      > `BUTTON[controllo-canone-controllo-canone]`
+      <!-- workflow:button controllo-canone-controllo-canone -->
       <!-- workflow:quick_actions:end lore_hub -->
 
       ```dataviewjs
@@ -1315,37 +1318,37 @@ pages:
       > Decidere cosa cambia nel mondo prima della prossima sessione.
       >
       > **Stato campagna** - devi leggere missioni, pressioni e conseguenze aperte
-      > `BUTTON[stato-campagna-mondi-stato-del-mondo]`
+      <!-- workflow:button stato-campagna-mondi-stato-del-mondo -->
       >
       > **Fuori scena** - devi scegliere chi reagisce tra una sessione e l'altra
-      > `BUTTON[cosa-succede-fuori-scena-cosa-succede-fuori-scena]`
+      <!-- workflow:button cosa-succede-fuori-scena-cosa-succede-fuori-scena -->
       >
       > **Worldbuilder** - una reazione richiede luogo, fazione, mistero o pressione
-      > `BUTTON[worldbuilder-worldbuilder-dashboard]`
+      <!-- workflow:button worldbuilder-worldbuilder-dashboard -->
       >
       > **Timeline** - un cambiamento deve diventare storia canonica
-      > `BUTTON[timeline-mondi-timeline-timeline]`
+      <!-- workflow:button timeline-mondi-timeline-timeline -->
       >
       > **Controllo canone** - devi distinguere verita, rumor, retcon e contraddizioni
-      > `BUTTON[controllo-canone-controllo-canone]`
+      <!-- workflow:button controllo-canone-controllo-canone -->
       >
       > **Economia e rotte** - una pressione riguarda risorse, mercati o passaggi
-      > `BUTTON[economia-e-rotte-economia-e-rotte-2]`
+      <!-- workflow:button economia-e-rotte-economia-e-rotte-2 -->
       >
       > [!regia]- Continuita operativa
       > Trasformare conseguenze aperte in mosse del mondo verificabili.
       >
       > **Registra scelta mondo** - una decisione del party deve diventare stato persistente
-      > `BUTTON[registra-scelta-mondo]`
+      <!-- workflow:button registra-scelta-mondo -->
       >
       > **Applica conseguenza** - una conseguenza ha bersagli chiari
-      > `BUTTON[applica-conseguenza]`
+      <!-- workflow:button applica-conseguenza -->
       >
       > **Propaga a entita** - piu note devono ricevere aggiornamenti coerenti
-      > `BUTTON[propaga-a-entita]`
+      <!-- workflow:button propaga-a-entita -->
       >
       > **Nuovo clock** - una pressione deve avanzare in modo visibile
-      > `BUTTON[nuovo-clock-z-modelli-dm-tracciato-md]`
+      <!-- workflow:button nuovo-clock-z-modelli-dm-tracciato-md -->
       <!-- workflow:quick_actions:end motore_mondo_vivo -->
 
       ```dataviewjs
@@ -1363,16 +1366,14 @@ pages:
       tipo: dashboard
       stato: pronto
     body: |
-      Cockpit rapido per party, HP, condizioni, risorse, inventario, loot, quest personali e spotlight durante la sessione.
+      > [!scena] Cockpit rapido
+      > Controllo operativo del party per HP, condizioni, risorse, inventario, loot, quest personali e spotlight durante la sessione. Usa questo hub come supporto a `durante-il-gioco`, non come archivio personaggi.
 
-      `BUTTON[durante-il-gioco-durante-il-gioco]`
-
-      `BUTTON[nuovo-pg-z-modelli-personaggio-pg-md]`
-
-      > [!regia]- Strumenti
-      > `BUTTON[personaggi-mondi-personaggi-personaggi]`
-      >
-      > `BUTTON[vista-giocatori-hub-vista-giocatori-vista-giocatori]`
+      | Azione | Apri |
+      | --- | --- |
+      | Tornare al tavolo | [[Hub/Durante il Gioco]] |
+      | Aprire i personaggi | [[Mondi/Personaggi/Personaggi]] |
+      | Controllare cosa vedono i giocatori | [[Hub/Vista Giocatori]] |
 
       ## Party
 
@@ -1502,28 +1503,28 @@ pages:
       > Ripulire appunti lore, segreti e pressioni prima che confondano canone e tavolo.
       >
       > **Cattura lore** - hai un segnale interessante ma non ancora stabile
-      > `BUTTON[lore-capture-z-modelli-lore-capture-md]`
+      <!-- workflow:button lore-capture-z-modelli-lore-capture-md -->
       >
       > **Nuovo mistero** - una verita deve essere rivelata gradualmente
-      > `BUTTON[nuovo-segreto-o-mistero-z-modelli-worldbuilding-segreto-o-mistero-md]`
+      <!-- workflow:button nuovo-segreto-o-mistero-z-modelli-worldbuilding-segreto-o-mistero-md -->
       >
       > **Controllo canone** - devi decidere verita, rumor, segreto, falso o retcon
-      > `BUTTON[controllo-canone-controllo-canone]`
+      <!-- workflow:button controllo-canone-controllo-canone -->
       >
       > **Lore hub** - vuoi leggere il materiale lore gia collegato
-      > `BUTTON[lore-hub-lore-hub]`
+      <!-- workflow:button lore-hub-lore-hub -->
       >
       > [!regia]- Trasforma in gioco
       > Convertire lore riparato in mondo vivo, appigli e scena.
       >
       > **Motore mondo vivo** - una verita produce conseguenze o reazioni
-      > `BUTTON[motore-mondo-vivo-motore-mondo-vivo]`
+      <!-- workflow:button motore-mondo-vivo-motore-mondo-vivo -->
       >
       > **Controllo worldbuilding** - il buco nasce da schede mondo incomplete
-      > `BUTTON[controllo-worldbuilding-controllo-worldbuilding]`
+      <!-- workflow:button controllo-worldbuilding-controllo-worldbuilding -->
       >
       > **Atlante** - manca un luogo, regione o mappa collegata
-      > `BUTTON[atlante-atlante-del-mondo]`
+      <!-- workflow:button atlante-atlante-del-mondo -->
       <!-- workflow:quick_actions:end revisione_lore -->
 
       ```dataviewjs
@@ -1602,142 +1603,145 @@ pages:
       > Aggiungere entita vive collegate e giocabili.
       >
       > **Nuovo mondo guidato** - il vault non ha ancora un mondo operativo
-      > `BUTTON[nuovo-mondo-homebrew]`
+      <!-- workflow:button nuovo-mondo-homebrew -->
       >
       > **Nuova entita viva** - non sai ancora se serve luogo, fazione, PNG o pressione
-      > `BUTTON[wizard-nuova-entita-viva]`
+      <!-- workflow:button wizard-nuova-entita-viva -->
+      >
+      > **Regione giocabile** - vuoi costruire una zona profonda ma pronta per la prossima sessione
+      <!-- workflow:button regione-giocabile-risorse-regione-giocabile -->
       >
       > **Campagna da ambientazione** - il mondo deve diventare struttura giocabile
-      > `BUTTON[campagna-da-ambientazione-campagna-da-ambientazione]`
+      <!-- workflow:button campagna-da-ambientazione-campagna-da-ambientazione -->
       >
       > **Stato mondo** - vuoi vedere cosa e gia vivo o incompleto
-      > `BUTTON[stato-mondo-mondi-stato-del-mondo]`
+      <!-- workflow:button stato-mondo-mondi-stato-del-mondo -->
       >
       > **Motore mondo vivo** - devi decidere chi si muove fuori scena
-      > `BUTTON[motore-mondo-vivo-motore-mondo-vivo]`
+      <!-- workflow:button motore-mondo-vivo-motore-mondo-vivo -->
       >
       > **Controllo vault** - il materiale sembra scollegato o non pronto
-      > `BUTTON[controllo-vault-risorse-controllo-vault]`
+      <!-- workflow:button controllo-vault-risorse-controllo-vault -->
       >
       > [!regia]- Superfici mondo
       > Aprire viste di controllo senza cercarle nella sidebar.
       >
       > **DM Dashboard** - devi tornare al cockpit principale
-      > `BUTTON[dm-dashboard-1-dm-dashboard]`
+      <!-- workflow:button dm-dashboard-1-dm-dashboard -->
       >
       > **Indice mondo** - vuoi navigare le categorie del mondo
-      > `BUTTON[indice-mondo-mondi-mondo]`
+      <!-- workflow:button indice-mondo-mondi-mondo -->
       >
       > **Atlante del mondo** - devi controllare luoghi e mappe
-      > `BUTTON[atlante-del-mondo-atlante-del-mondo]`
+      <!-- workflow:button atlante-del-mondo-atlante-del-mondo -->
       >
       > **Bibbia del mondo** - vuoi consolidare canone e tono
-      > `BUTTON[bibbia-del-mondo-bibbia-del-mondo-2]`
+      <!-- workflow:button bibbia-del-mondo-bibbia-del-mondo-2 -->
       >
       > **Geopolitica** - vuoi leggere poteri, confini e conflitti
-      > `BUTTON[geopolitica-geopolitical-dashboard-2]`
+      <!-- workflow:button geopolitica-geopolitical-dashboard-2 -->
       >
       > **Economia e rotte** - vuoi controllare scambi, risorse e dipendenze
-      > `BUTTON[economia-e-rotte-economia-e-rotte-2]`
+      <!-- workflow:button economia-e-rotte-economia-e-rotte-2 -->
       >
       > **Lore hub** - devi lavorare su canone e appunti lore
-      > `BUTTON[lore-hub-lore-hub-2]`
+      <!-- workflow:button lore-hub-lore-hub-2 -->
       >
       > **Timeline** - devi storicizzare un evento
-      > `BUTTON[timeline-mondi-timeline-timeline]`
+      <!-- workflow:button timeline-mondi-timeline-timeline -->
       >
       > **Revisione lore** - devi ripulire o canonizzare materiale
-      > `BUTTON[revisione-lore-revisione-lore]`
+      <!-- workflow:button revisione-lore-revisione-lore -->
       >
       > **Controllo canone** - temi duplicati, contraddizioni o segreti esposti
-      > `BUTTON[controllo-canone-controllo-canone]`
+      <!-- workflow:button controllo-canone-controllo-canone -->
       >
       > [!regia]- Fondamenta giocabili
       > Creare solo pezzi di mondo con un uso potenziale al tavolo.
       >
       > **Nuovo luogo** - serve un posto dove possano agire i personaggi
-      > `BUTTON[nuovo-luogo-z-modelli-luogo-router-md]`
+      <!-- workflow:button nuovo-luogo-z-modelli-luogo-router-md -->
       >
       > **Nuova cultura** - un popolo o costume cambia scelte e scene
-      > `BUTTON[nuova-cultura-z-modelli-worldbuilding-cultura-md]`
+      <!-- workflow:button nuova-cultura-z-modelli-worldbuilding-cultura-md -->
       >
       > **Nuova lingua** - lingua o scrittura diventano indizio, accesso o ostacolo
-      > `BUTTON[nuova-lingua-z-modelli-worldbuilding-lingua-md]`
+      <!-- workflow:button nuova-lingua-z-modelli-worldbuilding-lingua-md -->
       >
       > **Evento storico** - un fatto deve entrare nella timeline canonica
-      > `BUTTON[evento-storico-z-modelli-evento-storico-md]`
+      <!-- workflow:button evento-storico-z-modelli-evento-storico-md -->
       >
       > **Nuova era** - la cronologia ha bisogno di una fase riconoscibile
-      > `BUTTON[nuova-era-z-modelli-worldbuilding-era-storica-md]`
+      <!-- workflow:button nuova-era-z-modelli-worldbuilding-era-storica-md -->
       >
       > [!regia]- Poteri e pressioni
       > Dare al mondo attori capaci di reagire.
       >
       > **Nuova fazione** - serve un potere organizzato
-      > `BUTTON[nuova-fazione-z-modelli-fazione-router-md]`
+      <!-- workflow:button nuova-fazione-z-modelli-fazione-router-md -->
       >
       > **Nuovo culto** - religione o culto devono agire come fazione
-      > `BUTTON[nuovo-culto-z-modelli-fazione-culto-md]`
+      <!-- workflow:button nuovo-culto-z-modelli-fazione-culto-md -->
       >
       > **Nuovo personaggio** - serve un volto ricorrente o una leva sociale
-      > `BUTTON[nuovo-personaggio-z-modelli-personaggio-router-md]`
+      <!-- workflow:button nuovo-personaggio-z-modelli-personaggio-router-md -->
       >
       > **Nuova relazione** - due entita devono influenzarsi a vicenda
-      > `BUTTON[nuova-relazione-z-modelli-worldbuilding-relazione-md]`
+      <!-- workflow:button nuova-relazione-z-modelli-worldbuilding-relazione-md -->
       >
       > **Nuovo conflitto** - la tensione deve produrre missioni o clock
-      > `BUTTON[nuovo-conflitto-z-modelli-worldbuilding-conflitto-md]`
+      <!-- workflow:button nuovo-conflitto-z-modelli-worldbuilding-conflitto-md -->
       >
       > **Nuovo clock** - una pressione deve avanzare in modo visibile
-      > `BUTTON[nuovo-clock-z-modelli-dm-tracciato-md]`
+      <!-- workflow:button nuovo-clock-z-modelli-dm-tracciato-md -->
       >
       > [!regia]- Mistero, mito e risorse
       > Collegare meraviglia, segreti ed economia a conseguenze pratiche.
       >
       > **Cosmologia** - piani, dei o regole cosmiche incidono sul gioco
-      > `BUTTON[cosmologia-z-modelli-worldbuilding-cosmologia-md]`
+      <!-- workflow:button cosmologia-z-modelli-worldbuilding-cosmologia-md -->
       >
       > **Segreto o mistero** - serve materiale da rivelare gradualmente
-      > `BUTTON[segreto-o-mistero-z-modelli-worldbuilding-segreto-o-mistero-md]`
+      <!-- workflow:button segreto-o-mistero-z-modelli-worldbuilding-segreto-o-mistero-md -->
       >
       > **Nuova creatura** - una presenza deve avere habitat, uso e conseguenze
-      > `BUTTON[nuova-creatura-z-modelli-creatura-md]`
+      <!-- workflow:button nuova-creatura-z-modelli-creatura-md -->
       >
       > **Nuovo oggetto** - serve una leva concreta o ricompensa
-      > `BUTTON[nuovo-oggetto-z-modelli-oggetto-md]`
+      <!-- workflow:button nuovo-oggetto-z-modelli-oggetto-md -->
       >
       > **Oggetto magico** - una ricompensa deve essere giocabile al tavolo
-      > `BUTTON[nuovo-oggetto-magico-z-modelli-oggetto-magico-md]`
+      <!-- workflow:button nuovo-oggetto-magico-z-modelli-oggetto-magico-md -->
       >
       > **Nuova rotta** - commercio o viaggio devono creare opportunita
-      > `BUTTON[nuova-rotta-z-modelli-worldbuilding-rotta-md]`
+      <!-- workflow:button nuova-rotta-z-modelli-worldbuilding-rotta-md -->
       >
       > **Nuova risorsa** - una merce o dipendenza muove fazioni
-      > `BUTTON[nuova-risorsa-z-modelli-worldbuilding-risorsa-md]`
+      <!-- workflow:button nuova-risorsa-z-modelli-worldbuilding-risorsa-md -->
       >
       > **Nuovo mercato** - serve un nodo economico o sociale
-      > `BUTTON[nuovo-mercato-z-modelli-worldbuilding-mercato-o-nodo-commerciale-md]`
+      <!-- workflow:button nuovo-mercato-z-modelli-worldbuilding-mercato-o-nodo-commerciale-md -->
       >
       > [!regia]- Tavolo e mappe
       > Trasformare worldbuilding in materiale immediatamente usabile.
       >
       > **Nuova missione** - una tensione diventa obiettivo giocabile
-      > `BUTTON[nuova-missione-z-modelli-dm-missione-md]`
+      <!-- workflow:button nuova-missione-z-modelli-dm-missione-md -->
       >
       > **Nuovo incontro** - serve una scena pronta
-      > `BUTTON[nuovo-incontro-z-modelli-dm-incontro-md-default]`
+      <!-- workflow:button nuovo-incontro-z-modelli-dm-incontro-md-default -->
       >
       > **Dispense** - vuoi controllare materiale consegnabile
-      > `BUTTON[dispense-mondi-dispense-dispense]`
+      <!-- workflow:button dispense-mondi-dispense-dispense -->
       >
       > **Mappe** - devi vedere o creare supporti spaziali
-      > `BUTTON[mappe-risorse-mappe-mappe]`
+      <!-- workflow:button mappe-risorse-mappe-mappe -->
       >
       > **Nuova mappa zoom** - un luogo deve essere navigabile
-      > `BUTTON[nuova-mappa-zoom-z-modelli-mappe-mappa-zoom-md]`
+      <!-- workflow:button nuova-mappa-zoom-z-modelli-mappe-mappa-zoom-md -->
       >
       > **Nuova mappa fronti** - vuoi visualizzare poteri, relazioni o pressioni
-      > `BUTTON[nuova-mappa-fronti-z-modelli-mappe-mappa-excalidraw-fronti-excalidraw-md]`
+      <!-- workflow:button nuova-mappa-fronti-z-modelli-mappe-mappa-excalidraw-fronti-excalidraw-md -->
       <!-- workflow:quick_actions:end espandi_mondo -->
 
       ## Adesso

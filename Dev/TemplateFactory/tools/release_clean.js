@@ -42,6 +42,9 @@ const REQUIRED_USER_IGNORE_FILTERS = COPY_POLICY.required_user_ignore_filters ??
 const RUNTIME_TEMPLATE_MODULES = RELEASE_BOUNDARY.runtime_template_modules ?? [];
 const GENERATED_RELEASE_ROOTS = new Set(RELEASE_BOUNDARY.generated_release_roots ?? []);
 const enabledPlugins = RELEASE_PLUGIN_PROFILE.enabledPluginSet;
+const GENERATED_RELEASE_DEMO_NOTE = INCLUDE_DEMO
+    ? "- `Demo Regno Di Prova.md` come scenario dimostrativo generato, con regione giocabile e materiale player-safe;\n"
+    : "";
 const GENERATED_RELEASE_NOTES = {
     "LEGGIMI.md": `# Vault GDR
 
@@ -56,7 +59,8 @@ Apri questa cartella in Obsidian come vault e parti da \`Inizia Qui.md\`.
 - \`Party Control\` per PG, HP, missioni, inventario e flags;
 - \`Quality Report\` per copertura, buchi operativi e controllo anti-segreti;
 - atlante, mappe, template, automazioni, plugin e configurazioni gia inclusi;
-- SRD 5.2.1 italiano come modulo regolamentare separato.
+- \`Risorse/Regione Giocabile.md\` per trasformare un territorio in materiale giocabile;
+${GENERATED_RELEASE_DEMO_NOTE}- SRD 5.2.1 italiano come modulo regolamentare separato.
 
 Le cartelle tecniche e il compendio SRD sono inclusi per far funzionare automazioni, template e riferimenti, ma sono nascosti dalla navigazione normale del vault.
 
@@ -71,6 +75,8 @@ Le cartelle tecniche e il compendio SRD sono inclusi per far funzionare automazi
 ## Cosa Non Include
 
 Questa copia contiene solo il vault pronto da aprire in Obsidian. Non include roadmap interne, strumenti di sviluppo o materiali sorgente non necessari al gioco.
+
+Non e una app standalone, non e un rules engine completo e non ripubblica l'intero regolamento 5.5e. Il materiale SRD resta un riferimento separato; mondo, campagne e homebrew restano contenuto dell'utente.
 `
 };
 

@@ -1,8 +1,13 @@
 id: dnd55_options
-purpose: Opzioni e valori D&D 5.5 localizzati in italiano per creazione homebrew compatibile.
+purpose: Opzioni e valori D&D 5.5-compatible localizzati in italiano per creazione homebrew e materiale SRD-linked.
 version: 0.1.0
 language: it
-ruleset: D&D 5.5 SRD
+ruleset: D&D 5.5-compatible
+profile:
+  srd_reference: SRD 5.2.1 CC-BY-4.0
+  scope: >
+    Liste di opzioni per campi guidati e materiale homebrew compatibile. `SRD` resta il riferimento
+    regolamentare separato; queste liste non pretendono di essere ripubblicazione completa del SRD.
 groups:
   livelli_incantesimo:
     field: livello_incantesimo
@@ -109,7 +114,14 @@ groups:
     field: background
     values:
       - {id: accolito, label: Accolito}
+      - {id: artigiano, label: Artigiano}
       - {id: criminale, label: Criminale}
+      - {id: eremita, label: Eremita}
+      - {id: eroe_locale, label: Eroe locale}
+      - {id: forestiero, label: Forestiero}
+      - {id: intrattenitore, label: Intrattenitore}
+      - {id: marinaio, label: Marinaio}
+      - {id: nobile, label: Nobile}
       - {id: sapiente, label: Sapiente}
       - {id: soldato, label: Soldato}
   tipi_creatura:

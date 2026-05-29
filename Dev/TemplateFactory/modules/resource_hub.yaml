@@ -12,6 +12,8 @@ sections:
     rows:
       - link: '[[Inizia Qui]]'
         text: Quando non sai da dove partire.
+      - link: '[[Risorse/Prima Sessione In 15 Minuti]]'
+        text: Quando vuoi arrivare al tavolo senza completare il mondo.
       - link: '[[Risorse/Setup Guidato]]'
         text: Quando vuoi sapere se il vault e pronto.
       - link: '[[Risorse/Guida DM]]'
@@ -41,6 +43,8 @@ sections:
         text: Quando vuoi vedere tono, promesse, verita, rumor e limiti del mondo.
       - link: '[[Campagna da Ambientazione]]'
         text: Quando vuoi trasformare mondo, regione o conflitto in campagna.
+      - link: '[[Risorse/Regione Giocabile]]'
+        text: Quando vuoi una zona profonda ma pronta a produrre sessioni, fronti e materiale player-safe.
       - link: '[[Risorse/Opportunità Di Avventura]]'
         text: Elementi del mondo pronti a diventare missioni.
       - link: '[[Risorse/Fronti Di Campagna]]'
@@ -69,7 +73,7 @@ sections:
       - link: '[[Risorse/Materiali Al Tavolo]]'
         text: Controllo dei materiali collegati alla sessione attiva.
       - link: '[[SRD/SRD]]'
-        text: Riferimento regolamentare, separato dal mondo canonico.
+        text: Riferimento regolamentare CC-BY-4.0, separato da opzioni starter e mondo canonico.
   - title: Aiuto E Controlli
     headers:
       - Pagina
@@ -82,7 +86,7 @@ sections:
       - link: '[[Risorse/Controllo Vault]]'
         text: Controlli pratici su note incomplete, sessioni attive e materiale pronto.
       - link: '[[Risorse/Quality Report]]'
-        text: Report visuale su copertura, buchi, sicurezza pubblicazione e screenshot-ready.
+        text: Report visuale su copertura, buchi, sicurezza pubblicazione e materiale pronto da condividere.
       - link: '[[Risorse/Aspetto Vault]]'
         text: Regolazioni visuali semplici.
       - link: '[[Revisione Lore]]'

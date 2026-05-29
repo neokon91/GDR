@@ -8,13 +8,13 @@ stato: pronto
 
 # Confine Release Repository
 
-Questa nota definisce cosa entra nella ZIP utente e cosa resta solo nel repository di sviluppo.
+Questa nota riassume cosa entra nella ZIP utente e cosa resta solo nel repository di sviluppo. Il contratto autoritativo vive in `Dev/TemplateFactory/modules/release_boundary.yaml`; se c'e conflitto, prevale il YAML.
 
 ## Principio
 
 La release deve essere usabile da un DM non tecnico. Deve includere tutto cio che serve a usare il vault in Obsidian: plugin abilitati, configurazioni, template, automazioni Templater, viste JS runtime, basi editabili, bacheche operative, fileClass, SRD e pagine operative. Molti di questi elementi sono output materializzati dalla pipeline, non sorgente tracciato.
 
-La release non deve includere strumenti di manutenzione repository, import massivi, changelog interno, roadmap, issue template o artefatti generati.
+La release non deve includere strumenti di manutenzione repository, import massivi, changelog interno, roadmap, issue template o artefatti `dist/` prodotti da precedenti build.
 
 ## Entra Nella Release
 
@@ -44,7 +44,7 @@ La release non deve includere strumenti di manutenzione repository, import massi
 ## Regole
 
 - Nessun plugin installato viene escluso se e abilitato e necessario a una funzione reale.
-- Nessuna demo entra finche non e stata creata con template e wizard ufficiali.
+- Nessuna demo sorgente entra nel repository. La demo utente entra solo quando la release viene generata con `npm run release:demo`.
 - Nessun artefatto `dist/` resta nel repository sorgente.
 - `SRD`, `z.modelli`, `z.bacheche`, `z.bases`, `z.fileclass` e JSON generati non devono dipendere dallo stato locale del manutentore: `npm run release:clean` deve rigenerarli prima di creare la ZIP utente.
-- Ogni modifica al confine release deve aggiornare `Dev/TemplateFactory/tools/release_clean.js`.
+- Ogni modifica al confine release deve aggiornare `release_boundary.yaml` e, se cambia la copia effettiva, `Dev/TemplateFactory/tools/release_clean.js`.

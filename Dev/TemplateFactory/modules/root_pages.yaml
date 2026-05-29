@@ -12,52 +12,55 @@ pages:
       tipo: onboarding
       stato: pronto
     body: |
-      Questa e la pagina da usare quando non sai cosa aprire. Il vault distribuito e gia configurato: segui il percorso dall'alto verso il basso, crea o scegli un mondo, prepara una sessione, gioca, poi Aggiorna Il Mondo.
+      Questa e la pagina da usare quando non sai cosa aprire. Il vault distribuito e gia configurato: se vuoi giocare oggi, parti da Prima Sessione; se vuoi costruire con calma, crea un mondo minimo, prepara una sessione, gioca, poi Aggiorna Il Mondo.
 
       ## Primo Passo
 
       > [!scena] Percorso guidato
-      > Crea Il Mondo, poi Trasforma In Gioco. Se Obsidian chiede di abilitare gli strumenti inclusi nel vault, conferma solo se hai scaricato questa copia dalla release ufficiale.
+      > Scegli una strada sola: Prima Sessione per arrivare al tavolo, Crea Mondo per fondare il Codex, Prepara quando hai gia un'idea giocabile. Se Obsidian chiede di abilitare gli strumenti inclusi nel vault, conferma solo se hai scaricato questa copia dalla release ufficiale.
 
       <!-- workflow:quick_actions:start onboarding_utente -->
       > [!regia] Azioni rapide
-      > Partire da zero con il vault gia configurato, senza scegliere tra troppe dashboard.
+      > Scegliere subito se giocare oggi, creare un mondo minimo o tornare al tavolo.
       >
       > **Crea mondo** - non hai ancora un mondo giocabile
-      > `BUTTON[nuovo-mondo-homebrew]`
+      <!-- workflow:button nuovo-mondo-homebrew -->
+      >
+      > **Prima sessione** - vuoi giocare oggi senza completare tutto il Codex
+      <!-- workflow:button prima-sessione-in-15-minuti-risorse-prima-sessione-in-15-minuti -->
       >
       > **Prepara sessione** - hai un mondo o almeno un'idea pronta da giocare
-      > `BUTTON[preparazione-sessione-risorse-preparazione-sessione]`
+      <!-- workflow:button preparazione-sessione-risorse-preparazione-sessione -->
       >
       > **Gioca** - sei al tavolo o vuoi vedere il cockpit live
-      > `BUTTON[gioca-hub-durante-il-gioco-durante-il-gioco]`
+      <!-- workflow:button gioca-hub-durante-il-gioco-durante-il-gioco -->
       >
       > **Chiudi e aggiorna** - la sessione e finita e devi decidere conseguenze
-      > `BUTTON[fuori-scena-hub-cosa-succede-fuori-scena-cosa-succede-fuori-scena]`
+      <!-- workflow:button fuori-scena-hub-cosa-succede-fuori-scena-cosa-succede-fuori-scena -->
       >
       > [!regia]- Se ti perdi
       > Aprire solo le viste di supporto, non nuove strade parallele.
       >
       > **Recupero strumenti** - pulsanti, tabelle o pagina iniziale non rispondono
-      > `BUTTON[setup-guidato-risorse-setup-guidato]`
-      >
-      > **Prima sessione in 15 minuti** - vuoi giocare subito senza completare tutto
-      > `BUTTON[prima-sessione-in-15-minuti-risorse-prima-sessione-in-15-minuti]`
+      <!-- workflow:button setup-guidato-risorse-setup-guidato -->
       >
       > **Worldbuilder** - vuoi espandere il mondo dopo il primo giro
-      > `BUTTON[worldbuilder-worldbuilder-dashboard-2]`
+      <!-- workflow:button worldbuilder-worldbuilder-dashboard-2 -->
+      >
+      > **Regione giocabile** - vuoi dare profondita al primo territorio senza perdere il tavolo
+      <!-- workflow:button regione-giocabile-risorse-regione-giocabile -->
       >
       > **Bibbia del mondo** - vuoi consolidare tono e canone
-      > `BUTTON[bibbia-del-mondo-bibbia-del-mondo-2]`
+      <!-- workflow:button bibbia-del-mondo-bibbia-del-mondo-2 -->
       >
       > **Vista giocatori** - devi mostrare materiale senza segreti DM
-      > `BUTTON[vista-giocatori-hub-vista-giocatori-vista-giocatori]`
+      <!-- workflow:button vista-giocatori-hub-vista-giocatori-vista-giocatori -->
       >
       > **Report qualita** - vuoi capire cosa manca nel vault
-      > `BUTTON[quality-report-risorse-quality-report]`
+      <!-- workflow:button quality-report-risorse-quality-report -->
       >
       > **Aiuto** - non capisci cosa fare o una vista non risponde
-      > `BUTTON[aiuto-risorse-faq]`
+      <!-- workflow:button aiuto-risorse-faq -->
       <!-- workflow:quick_actions:end onboarding_utente -->
 
       ```dataviewjs
@@ -87,6 +90,7 @@ pages:
       | --- | --- |
       | Controllare gli strumenti | [[Risorse/Setup Guidato]] |
       | Giocare con il minimo | [[Risorse/Prima Sessione In 15 Minuti]] |
+      | Dare profondita a una zona | [[Risorse/Regione Giocabile]] |
       | Preparare la sessione | [[Risorse/Preparazione Sessione]] |
       | Giocare al tavolo | [[Hub/Durante il Gioco]] |
       | Chiudere la sessione | [[Risorse/Post Sessione Guidato]] |

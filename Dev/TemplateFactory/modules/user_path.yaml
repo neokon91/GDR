@@ -5,6 +5,7 @@ policy:
   user_workflows_must_use_simple_mode: true
   forbidden_user_block_markers:
     - Plugin coinvolti
+    - BUTTON[
 required_release_config:
   - .obsidian/app.json
   - .obsidian/core-plugins.json
@@ -18,9 +19,18 @@ primary_path:
     label: Inizia Qui
     required_buttons:
       - nuovo-mondo-homebrew
+      - prima-sessione-in-15-minuti-risorse-prima-sessione-in-15-minuti
       - preparazione-sessione-risorse-preparazione-sessione
       - gioca-hub-durante-il-gioco-durante-il-gioco
       - fuori-scena-hub-cosa-succede-fuori-scena-cosa-succede-fuori-scena
+  - workflow: prima_sessione_rapida
+    page: Risorse/Prima Sessione In 15 Minuti.md
+    label: Prima Sessione In 15 Minuti
+    required_buttons:
+      - nuova-sessione-z-modelli-dm-sessione-md
+      - preparazione-sessione-risorse-preparazione-sessione
+      - durante-il-gioco-durante-il-gioco
+      - post-sessione-guidato-risorse-post-sessione-guidato
   - workflow: dashboard_dm
     page: Hub/1. DM Dashboard.md
     label: DM Dashboard
@@ -35,7 +45,17 @@ primary_path:
     required_buttons:
       - nuovo-mondo-homebrew
       - wizard-nuova-entita-viva
+      - regione-giocabile-risorse-regione-giocabile
       - campagna-da-ambientazione-campagna-da-ambientazione
+  - workflow: regione_giocabile
+    page: Risorse/Regione Giocabile.md
+    label: Regione Giocabile
+    required_buttons:
+      - nuovo-luogo-z-modelli-luogo-router-md
+      - nuova-fazione-z-modelli-fazione-router-md
+      - nuovo-conflitto-z-modelli-worldbuilding-conflitto-md
+      - nuova-missione-z-modelli-dm-missione-md
+      - nuova-sessione-z-modelli-dm-sessione-md
   - workflow: campagna_ambientazione
     page: Hub/Campagna da Ambientazione.md
     label: Campagna da Ambientazione

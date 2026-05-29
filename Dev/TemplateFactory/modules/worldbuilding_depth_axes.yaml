@@ -1,16 +1,6 @@
 id: worldbuilding_depth_axes
-purpose: Profili opzionali di profondita presi da FantasyWorld e ridotti a pochi assi giocabili per entita chiave.
+purpose: Profili opzionali di profondita ridotti a pochi assi giocabili per entita chiave.
 version: 0.1.0
-source_lab: /Users/andrea/Desktop/projects/FantasyWorld/YAML/altro/assi_tematici
-rights:
-  owner: neokon91
-  status: idea_originale_riservata
-  license: non_inclusa_nella_licenza_generale_del_vault
-  note: >
-    Gli assi tematici derivano da un lavoro originale personale sviluppato nel tempo.
-    Questo modulo e un riferimento sperimentale interno: non concede riuso, pubblicazione,
-    sublicenza o integrazione stabile fuori dal progetto senza autorizzazione esplicita
-    del titolare.
 rules:
   optional: true
   max_axes_per_profile: 5
@@ -21,9 +11,16 @@ rules:
   usage: >
     Gli assi non sono frontmatter obbligatorio. Servono a guidare domande, generatori e revisioni
     quando una nota deve diventare piu profonda, non a trasformare ogni entita in una scheda lunga.
+rights:
+  status: idea_originale_riservata
+  license: non_inclusa_nella_licenza_generale_del_vault
+  owner: Andrea
+  note: >
+    Assi originali di profondita mantenuti come materiale interno riservato e non inclusi nella
+    licenza generale della release utente.
 profiles:
   fazione:
-    source: assi_tematici_fazione.yaml
+    source: depth_axes_fazione
     intent: Rendere una fazione leggibile come potere sociale, metodo operativo e pressione al tavolo.
     recommended_for:
       - fazione
@@ -60,7 +57,7 @@ profiles:
         high: Ufficiale
         table_use: Determinare conseguenze sociali quando i PG collaborano o si oppongono.
   cultura:
-    source: assi_tematici_cultura.yaml
+    source: depth_axes_cultura
     intent: Usare la cultura come motore di identita, tabù, linguaggio e conflitto, non come lore statico.
     recommended_for:
       - cultura
@@ -90,7 +87,7 @@ profiles:
         high: Coabitazione con la morte
         table_use: Rendere tombe, lutti, antenati e necromanzia scelte sociali concrete.
   magia:
-    source: assi_tematici_magia.yaml
+    source: depth_axes_magia
     intent: Definire come funziona la magia in un mondo o regione senza sovrascrivere il regolamento D&D/SRD.
     recommended_for:
       - mondo
@@ -128,7 +125,7 @@ profiles:
         high: Corrompente
         table_use: Decidere quando un effetto magico produce clock, segni o contaminazioni.
   luogo:
-    source: assi_tematici_luogo.yaml
+    source: depth_axes_luogo
     intent: Rendere i luoghi scenari attivi con leggi, pericoli e pressioni riconoscibili.
     recommended_for:
       - luogo
@@ -165,3 +162,46 @@ profiles:
         mid: Rituale
         high: Axis Mundi
         table_use: Collegare culto, tabù, profanazioni e reazioni delle fazioni.
+  regione_giocabile:
+    source: depth_axes_regione_giocabile
+    intent: Rendere una regione abbastanza densa da sostenere canone, pressioni e sessioni senza diventare enciclopedia.
+    recommended_for:
+      - luogo
+      - geografia_regione
+      - luogo_regione_naturale
+    axes:
+      densita_operativa:
+        label: Densita operativa
+        question: Quanti luoghi, poteri e problemi possono generare scene diverse nella stessa regione?
+        low: Punto singolo
+        mid: Rete locale
+        high: Sistema regionale
+        table_use: Capire se serve una singola missione, una mini-campagna o un arco lungo.
+      pressione_sistemica:
+        label: Pressione sistemica
+        question: Quanto la crisi della regione si propaga su luoghi, risorse e fazioni?
+        low: Isolata
+        mid: Collegata
+        high: Cascata
+        table_use: Decidere quali conseguenze aggiornare dopo una scelta dei PG.
+      differenza_culturale:
+        label: Differenza culturale
+        question: Quanto la vita quotidiana locale cambia scelte, linguaggio e rischi sociali?
+        low: Familiare
+        mid: Distintiva
+        high: Estraniante
+        table_use: Preparare scene sociali che non siano solo informazioni da leggere.
+      accessibilita_player_safe:
+        label: Accessibilita player-safe
+        question: Quanto della regione puo essere mostrato senza rivelare i segreti DM?
+        low: Opaca
+        mid: A strati
+        high: Leggibile
+        table_use: Separare mappa pubblica, rumor e verita nascoste prima della sessione.
+      memoria_canonica:
+        label: Memoria canonica
+        question: Quanto il passato della regione spiega il conflitto presente e le reazioni future?
+        low: Decorativa
+        mid: Motivante
+        high: Fondativa
+        table_use: Scegliere quali eventi entrano in timeline e quali restano colore.

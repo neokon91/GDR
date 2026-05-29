@@ -113,7 +113,7 @@ async function waitForReadyPlugins(cdp) {
     }
 
     let summary = null;
-    const pluginDeadline = Date.now() + 90000;
+    const pluginDeadline = Date.now() + (FRESH_INSTALL || ACCEPT_PROMPTS ? 240000 : 180000);
     while (Date.now() < pluginDeadline) {
         if (ACCEPT_PROMPTS) acceptPrompts();
         summary = await cdp.evaluate(`(async () => {
@@ -246,6 +246,39 @@ async function inspectPage(cdp, pagePath) {
         const missingAllText = (requiredRule?.all ?? []).map(String).filter(marker => !includesVisible(marker));
         const anyText = (requiredRule?.any ?? []).map(String).filter(Boolean);
         const missingAnyText = anyText.length && !anyText.some(marker => includesVisible(marker)) ? anyText : [];
+        const collectClickableLabels = () => [...contentRoot.querySelectorAll(".meta-bind-button, .mb-button, button")]
+            .filter(isVisible)
+            .map(node => String(node.innerText ?? node.getAttribute("aria-label") ?? node.getAttribute("title") ?? "").trim())
+            .filter(Boolean);
+        const clickableLabels = [];
+        const addClickableLabels = labels => {
+            for (const label of labels) {
+                if (!clickableLabels.includes(label)) clickableLabels.push(label);
+            }
+        };
+        addClickableLabels(collectClickableLabels());
+        const scrollContainer = [
+            contentRoot,
+            contentRoot.closest?.(".view-content"),
+            activeLeafElement?.querySelector(".view-content"),
+            document.scrollingElement
+        ].filter(Boolean).find(node => Number(node.scrollHeight ?? 0) > Number(node.clientHeight ?? 0) + 20) ?? contentRoot;
+        const originalScrollTop = Number(scrollContainer.scrollTop ?? 0);
+        const maxScrollTop = Math.max(0, Number(scrollContainer.scrollHeight ?? 0) - Number(scrollContainer.clientHeight ?? 0));
+        if (maxScrollTop > 0) {
+            for (const ratio of [0.25, 0.5, 0.75, 1]) {
+                scrollContainer.scrollTop = Math.round(maxScrollTop * ratio);
+                await sleep(150);
+                addClickableLabels(collectClickableLabels());
+            }
+            scrollContainer.scrollTop = originalScrollTop;
+        }
+        const normalizedClickableLabels = clickableLabels.map(label => label.toLocaleLowerCase("it"));
+        const includesClickable = value => normalizedClickableLabels.some(label => label.includes(String(value ?? "").toLocaleLowerCase("it")));
+        const clickableRule = (ux.required_clickable_buttons_by_page ?? []).find(rule => String(rule.page ?? "") === pagePath) ?? null;
+        const missingClickableAll = (clickableRule?.all ?? []).map(String).filter(marker => !includesClickable(marker));
+        const clickableAny = (clickableRule?.any ?? []).map(String).filter(Boolean);
+        const missingClickableAny = clickableAny.length && !clickableAny.some(marker => includesClickable(marker)) ? clickableAny : [];
         return {
             page: ${JSON.stringify(pagePath)},
             exists: ${JSON.stringify(Boolean(openState.exists))},
@@ -262,7 +295,10 @@ async function inspectPage(cdp, pagePath) {
                 forbiddenRegexHits,
                 forbiddenSelectorHits,
                 missingAllText,
-                missingAnyText
+                missingAnyText,
+                clickableLabels,
+                missingClickableAll,
+                missingClickableAny
             },
             problemNotices: [...document.querySelectorAll(".notice")]
                 .map(node => node.innerText)
@@ -623,7 +659,7 @@ async function runPluginRuntimeProbes(cdp) {
         }
 
         return { probeCount: probes.length, errors, results };
-    })()`, { awaitPromise: true, timeoutMs: 60000 });
+    })()`, { awaitPromise: true, timeoutMs: 120000 });
 }
 
 async function runCycleSmoke(cdp) {

@@ -121,6 +121,14 @@ surfaces:
     role: scegliere regione
     action: Apri quando devi trovare il luogo, la rotta o il marker da cui far partire la campagna.
     why: Una campagna nasce meglio da un luogo giocabile che da una lista di lore.
+  - id: playable_region
+    label: Regione giocabile
+    plugin: Dataview
+    target: Risorse/Regione Giocabile.md
+    badge: Ponte
+    role: verificare regione
+    action: Apri quando la zona ha lore interessante ma non e ancora chiaro se produce sessioni, fronti e materiale player-safe.
+    why: Prima di creare una campagna conviene sapere quali luoghi, poteri, pressioni e segreti arriveranno davvero al tavolo.
   - id: geopolitics
     label: Geopolitica
     plugin: Dataview

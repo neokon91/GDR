@@ -4,39 +4,38 @@ Questa checklist serve a preparare una copia pubblicabile del vault. Si esegue d
 
 ## Prima Della Release
 
-1. Apri [[Inizia Qui]] e verifica che i pulsanti portino alle pagine giuste.
-2. Apri [[1. DM Dashboard]], [[Durante il Gioco]], [[Hub/Party Control]], [[Atlante del Mondo]], [[Geopolitical Dashboard]], [[Motore Mondo Vivo]], [[Campagna da Ambientazione]] e [[Vista Giocatori]].
-3. Apri [[Risorse/Controllo Vault]] e [[Risorse/Quality Report]] e risolvi problemi operativi importanti.
-4. Esegui [[Dev/Smoke Demo Finale]] dal repository sorgente se stai preparando la release 1.0 con demo inclusa. La demo utente e generata nello ZIP pulito da `npm run generate:demo-world`.
-5. Acquisisci almeno cinque screenshot: `Inizia Qui`, `Vista Giocatori`, `Atlante del Mondo`, `Party Control`, `Quality Report`.
-6. Registra una GIF breve del flusso `Inizia Qui` -> `Durante il Gioco` -> `Vista Giocatori`.
-7. Esegui:
+1. Se hai modificato YAML, Jinja o generatori, esegui `npm run sync:sources`.
+2. Esegui:
 
 ```bash
 npm run check
 ```
 
-8. Se la release include la demo, genera la demo dopo `npm run release:clean` e verifica che `npm run check:demo-contract` e `npm run check:smoke` siano verdi.
-9. Aggiorna [[VERSION]].
-10. Aggiorna [[Dev/CHANGELOG]].
-11. Crea la release utente:
+3. Aggiorna [[VERSION]].
+4. Aggiorna [[Dev/CHANGELOG]].
+5. Crea la release utente senza demo:
 
 ```bash
 npm run release:clean
 ```
 
-Per creare direttamente una release con demo utente inclusa nello ZIP:
+Oppure crea direttamente la release con demo utente inclusa:
 
 ```bash
 npm run release:demo
 ```
 
-12. Crea tag o GitHub Release solo dopo controlli puliti.
+6. Se la release include la demo, esegui [[Dev/Smoke Demo Finale]] sulla release generata. Il percorso consegnabile e `npm run release:demo`; `npm run generate:demo-world` e solo uno strumento interno di manutenzione.
+7. Apri lo ZIP in Obsidian e fai lo smoke manuale sulle pagine elencate sotto.
+8. Screenshot e GIF sono utili per pubblicazione e store page, ma non sostituiscono i gate tecnici o lo smoke manuale.
+9. Crea tag o GitHub Release solo dopo controlli puliti.
 
 ## ZIP Utente
 
 
 Non contiene materiali di sviluppo repository, issue template GitHub, roadmap interne, script CLI di import/release o plugin non abilitati. Per sviluppo e manutenzione si lavora tramite Git.
+
+Non promettere che lo ZIP sia una app standalone, un rules engine completo o una ripubblicazione del regolamento 5.5e. E un vault Obsidian con workflow, template, automazioni e materiale SRD separato.
 
 ## Cosa Non Rimuovere
 
@@ -49,13 +48,14 @@ Non contiene materiali di sviluppo repository, issue template GitHub, roadmap in
 ## Cosa Controllare A Mano
 
 - `dist/vault-gdr-clean.zip` si apre su [[Inizia Qui]] con configurazione Obsidian gia inclusa.
-- Se generata, `Demo Regno Di Prova.md` esiste nella release pulita e collega mondo, campagna, sessione e materiale player-safe.
+- Se generata, `Demo Regno Di Prova.md` esiste nella release pulita e collega mondo, regione giocabile, campagna, sessione e materiale player-safe.
 - Le dashboard non mostrano errori Dataview.
 - I pulsanti Meta Bind aprono o creano note.
+- [[Risorse/Regione Giocabile]] mostra azioni comprensibili, non sintassi tecnica, e porta verso luogo, fazione, conflitto, missione, sessione e materiali player-safe.
 - La vista `Durante il Gioco` mostra una sessione attiva se esiste una sessione con `attiva`, `in corso`, `pronto` o `preparazione`.
 - [[Hub/Party Control]] mostra PG, HP, missioni, ricompense e flags senza errori Dataview.
 - [[Vista Giocatori]] mostra solo materiale pubblico, emerso o consegnato e il controllo sicurezza non segnala segreti esposti.
-- [[Risorse/Quality Report]] mostra copertura, buchi operativi e materiale screenshot-ready.
+- [[Risorse/Quality Report]] mostra copertura, buchi operativi e materiale pronto da condividere.
 - [[Mondi/Stato del Mondo]] mostra conseguenze, PNG cambiati, luoghi in crisi, fazioni in movimento, relazioni, propagazione e missioni influenzate senza errori Dataview.
 - [[Mondi/Timeline/Timeline]] mostra eventi canonici e lore da sessione.
 - [[Geopolitical Dashboard]] mostra territori politici, relazioni diplomatiche, risorse strategiche e buchi geopolitici senza errori Dataview.

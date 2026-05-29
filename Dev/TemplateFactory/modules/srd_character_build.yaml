@@ -1,8 +1,17 @@
 id: srd_character_build
-purpose: Dati meccanici SRD 5.5 per creazione PG (core + opzioni personaggio).
+purpose: Dati starter D&D 5.5-compatible per creazione PG, con SRD 5.2.1 come riferimento regolamentare separato.
 version: 0.1.0
 language: it
-ruleset: D&D 5.5 SRD
+ruleset: D&D 5.5-compatible
+rules_profile:
+  srd_reference: SRD 5.2.1 CC-BY-4.0
+  scope: >
+    Questo modulo alimenta il wizard PG con dati meccanici e opzioni starter localizzate.
+    Non ripubblica il regolamento completo e non dichiara che ogni opzione sia testo SRD puro.
+  policy:
+    - SRD resta il riferimento regolamentare separato dalla fiction del mondo.
+    - Le opzioni starter servono a creare materiale compatibile e possono essere sostituite dal tavolo.
+    - Il canone del mondo non deriva automaticamente da classi, specie, background o talenti.
 core:
   statistiche:
     - forza
@@ -219,7 +228,7 @@ opzioni:
       tratti:
         addestramento:
           label: Addestramento
-          descrizione: Il personaggio ottiene un talento di origine a scelta (vedi SRD).
+          descrizione: Il personaggio ottiene un talento di origine a scelta nel profilo 5.5e.
     elfo:
       label: Elfo
       tratti:
@@ -277,13 +286,13 @@ opzioni:
       tratti:
         retaggio_infernale:
           label: Retaggio infernale
-          descrizione: Resistenza al fuoco e magia innata (vedi SRD).
+          descrizione: Resistenza al fuoco e magia innata nel profilo 5.5e.
     aasimar:
       label: Aasimar
       tratti:
         celestiale:
           label: Retaggio celestiale
-          descrizione: Resistenza necrotica/radiante e tratti di livello (vedi SRD).
+          descrizione: Opzione starter compatibile 5.5e; adatta o sostituisci se vuoi profilo SRD puro.
     goliath:
       label: Goliath
       tratti:
@@ -301,7 +310,7 @@ opzioni:
       tratti:
         tenacia:
           label: Tenacia
-          descrizione: Quando a 0 PF puoi restare cosciente (vedi SRD).
+          descrizione: Quando a 0 PF puoi restare cosciente nel profilo 5.5e.
   sottospecie: {}
   talenti:
     abile:

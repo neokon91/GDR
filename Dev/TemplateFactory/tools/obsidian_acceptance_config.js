@@ -100,6 +100,21 @@ function createLiveAcceptanceConfig(root) {
                 errors.push(`${LIVE_ACCEPTANCE_FILE}: ux_surface_checks.required_visible_text_by_page non copre pagina first-run ${page}`);
             }
         }
+        for (const [index, rule] of (ux.required_clickable_buttons_by_page ?? []).entries()) {
+            const page = String(rule?.page ?? "").trim();
+            if (!page) {
+                errors.push(`${LIVE_ACCEPTANCE_FILE}: ux_surface_checks.required_clickable_buttons_by_page[${index}].page vuoto`);
+                continue;
+            }
+            if (!firstRunPages.includes(page)) {
+                errors.push(`${LIVE_ACCEPTANCE_FILE}: ux_surface_checks.required_clickable_buttons_by_page.${page} non e una pagina first-run`);
+            }
+            const all = Array.isArray(rule.all) ? rule.all.map(String).filter(Boolean) : [];
+            const any = Array.isArray(rule.any) ? rule.any.map(String).filter(Boolean) : [];
+            if (!all.length && !any.length) {
+                errors.push(`${LIVE_ACCEPTANCE_FILE}: ux_surface_checks.required_clickable_buttons_by_page.${page} deve dichiarare all o any`);
+            }
+        }
         for (const [index, probe] of pluginRuntimeProbes.entries()) {
             const id = String(probe.id ?? "").trim();
             if (!id) {

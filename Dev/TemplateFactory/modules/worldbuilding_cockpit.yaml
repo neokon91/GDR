@@ -91,6 +91,14 @@ surfaces:
     role: vedere coordinate e layer
     action: Apri quando un luogo deve comparire su mappa o manca un marker.
     why: Coordinate, icone, colori e layer restano dati, non immagine decorativa.
+  - id: playable_region
+    label: Regione giocabile
+    plugin: Dataview
+    target: Risorse/Regione Giocabile.md
+    badge: Ponte
+    role: convertire profondita in tavolo
+    action: Apri quando una zona deve produrre luoghi, poteri, pressioni, missioni e materiale player-safe.
+    why: La regione e il formato minimo per legare worldbuilding profondo, campagna e prossima sessione.
   - id: locations_base
     label: Luoghi operativi
     plugin: Bases

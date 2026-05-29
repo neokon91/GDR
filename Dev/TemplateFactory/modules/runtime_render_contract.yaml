@@ -129,7 +129,7 @@ render_checks:
       - contains: 'Mappa Pubblica'
         field: 'text'
         tag: 'table'
-        message: 'renderQualityReportShowcase: output senza materiale screenshot-ready'
+        message: 'renderQualityReportShowcase: output senza materiale pronto da condividere'
   - call: renderQualityReportSurfaceLinks
     expects:
       - contains: 'Controllo vault'

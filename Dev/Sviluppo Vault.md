@@ -107,7 +107,7 @@ Regole di migrazione:
 
 ## SRD E D&D
 
-Il profilo regolamentare principale e D&D 5.5/SRD, ma il Codex del mondo resta separato dal regolamento.
+Il profilo meccanico principale e D&D 5.5-compatible con SRD separato, ma il Codex del mondo resta separato dal regolamento.
 
 `SRD/` non e sorgente tracciato. La release pulita lo materializza tramite `Dev/TemplateFactory/tools/import_srd.js`; per una copia locale usare `npm run import:srd`, lasciando l'output ignorato da Git.
 

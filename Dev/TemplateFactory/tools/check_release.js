@@ -17,13 +17,12 @@ const RELEASE_CHANGELOG_MARKERS = [
     "smistamento -> canonizzazione",
     "dist/vault-gdr-clean.zip"
 ];
-const RELEASE_VERIFICATION_MARKERS = [
-    "## Ultima Verifica Automatica",
-    RELEASE_EXPECTED_DATE,
-    "`npm run check` passato senza warning",
-    "`npm run release:clean` ha creato `dist/vault-gdr-clean`",
-    "`npm run release:clean` ha creato `dist/vault-gdr-clean.zip`",
-    "`dist/` resta artefatto locale ignorato da Git"
+const RELEASE_DOC_MARKERS = [
+    "npm run release:clean",
+    "npm run release:demo",
+    "Il percorso consegnabile e `npm run release:demo`",
+    "Non promettere che lo ZIP sia una app standalone",
+    "Apri lo ZIP in Obsidian e fai lo smoke manuale"
 ];
 const RELEASE_IMPORT_DOC_MARKERS = [
     "npm run import:map",
@@ -82,10 +81,10 @@ for (const marker of RELEASE_CHANGELOG_MARKERS) {
     }
 }
 
-const cleanReleaseText = readTextRel(ROOT, "Dev/Release Pulita.md");
-for (const marker of RELEASE_VERIFICATION_MARKERS) {
-    if (!cleanReleaseText.includes(marker)) {
-        errors.push(`Dev/Release Pulita.md: verifica release mancante (${marker})`);
+const releaseDocText = readTextRel(ROOT, "Dev/RELEASE.md");
+for (const marker of RELEASE_DOC_MARKERS) {
+    if (!releaseDocText.includes(marker)) {
+        errors.push(`Dev/RELEASE.md: documentazione release incompleta (${marker})`);
     }
 }
 

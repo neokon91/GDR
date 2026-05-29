@@ -33,6 +33,18 @@ function asArray(value) {
     return Array.isArray(value) ? value : [];
 }
 
+function hasValue(value) {
+    if (Array.isArray(value)) return value.length > 0;
+    if (typeof value === "boolean") return value === true;
+    if (typeof value === "number") return Number.isFinite(value) && value !== 0;
+    return String(value ?? "").trim().length > 0;
+}
+
+function valueIncludes(value, marker) {
+    if (Array.isArray(value)) return value.some(item => valueIncludes(item, marker));
+    return String(value ?? "").includes(marker);
+}
+
 function validateGenerators(errors, contract, packageJson) {
     const generators = contract.generators ?? {};
     for (const [id, generator] of Object.entries(generators)) {
@@ -55,8 +67,10 @@ function validateForbiddenSources(errors, contract) {
     }
 
     const forbidden = asArray(contract.checks?.forbidden_source_files);
-    if (!forbidden.includes(DEMO_WORLD_FILE)) {
-        fail(errors, `demo_contract: demo world vietata non dichiarata (${DEMO_WORLD_FILE})`);
+    for (const demoFile of DEMO_FILES) {
+        if (!forbidden.includes(demoFile)) {
+            fail(errors, `demo_contract: demo world vietata non dichiarata (${demoFile})`);
+        }
     }
 
     for (const relPath of forbidden) {
@@ -106,6 +120,62 @@ function validateMinimumScenario(errors, contract) {
     }
 }
 
+function validatePlayableRegion(errors, contract, notes) {
+    const regionContract = contract.final_demo_minimum?.playable_region ?? {};
+    const regionName = String(regionContract.name ?? "").trim();
+    if (!regionName) {
+        fail(errors, "demo_contract.final_demo_minimum.playable_region.name mancante");
+        return;
+    }
+
+    const region = notes.find(note => (
+        note.frontmatter.categoria === "luogo"
+        && String(note.frontmatter.nome ?? "") === regionName
+    ));
+    if (!region) {
+        fail(errors, `generate_demo_world: regione giocabile mancante (${regionName})`);
+        return;
+    }
+
+    for (const field of asArray(regionContract.required_fields)) {
+        if (!hasValue(region.frontmatter[field])) {
+            fail(errors, `generate_demo_world: regione giocabile senza campo ${field}`);
+        }
+    }
+
+    const regionNotes = notes.filter(note => (
+        note.frontmatter.regione_starter === true
+        || valueIncludes(note.frontmatter.regione, regionName)
+        || valueIncludes(note.frontmatter.luogo_padre, regionName)
+    ));
+    const locations = regionNotes.filter(note => (
+        note.frontmatter.categoria === "luogo"
+        && String(note.frontmatter.nome ?? "") !== regionName
+    ));
+    const factions = regionNotes.filter(note => note.frontmatter.categoria === "fazione");
+
+    const minLocations = Number(regionContract.min_locations ?? 0);
+    if (locations.length < minLocations) {
+        fail(errors, `generate_demo_world: regione giocabile con pochi luoghi (${locations.length}/${minLocations})`);
+    }
+    const minFactions = Number(regionContract.min_factions ?? 0);
+    if (factions.length < minFactions) {
+        fail(errors, `generate_demo_world: regione giocabile con poche fazioni (${factions.length}/${minFactions})`);
+    }
+
+    for (const category of asArray(regionContract.required_categories)) {
+        if (!regionNotes.some(note => note.frontmatter.categoria === category)) {
+            fail(errors, `generate_demo_world: regione giocabile senza categoria ${category}`);
+        }
+    }
+    if (!regionNotes.some(note => note.frontmatter.pubblico === true && hasValue(note.frontmatter.player_safe))) {
+        fail(errors, "generate_demo_world: regione giocabile senza materiale pubblico player_safe");
+    }
+    if (!regionNotes.some(note => note.frontmatter.categoria === "segreto" && note.frontmatter.pubblico === false)) {
+        fail(errors, "generate_demo_world: regione giocabile senza segreto DM separato");
+    }
+}
+
 function validateDemoWorldGenerator(errors, contract) {
     const tempParent = fs.mkdtempSync(path.join(os.tmpdir(), "gdr-demo-world-"));
     try {
@@ -150,6 +220,8 @@ function validateDemoWorldGenerator(errors, contract) {
         if (!notes.some(note => note.frontmatter.attiva === true && note.frontmatter.categoria === "sessione")) {
             fail(errors, "generate_demo_world: nessuna sessione demo attiva");
         }
+
+        validatePlayableRegion(errors, contract, notes);
     } finally {
         fs.rmSync(tempParent, { recursive: true, force: true });
     }

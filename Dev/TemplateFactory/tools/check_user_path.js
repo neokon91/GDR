@@ -63,6 +63,8 @@ function buttonDeclaration(button) {
     return `<!-- workflow:button ${button} -->`;
 }
 
+const VISIBLE_BUTTON_PATTERN = /`BUTTON\[([^\]\n]+)\]`/g;
+
 function validateContract(primaryPath) {
     if (USER_PATH.id !== "user_path") errors.push(`${USER_PATH_FILE}: id non valido`);
 
@@ -132,6 +134,10 @@ function main() {
             if (block.includes(marker)) {
                 errors.push(`${label}: blocco utente espone marker vietato (${marker})`);
             }
+        }
+        const visibleButtons = [...block.matchAll(VISIBLE_BUTTON_PATTERN)].map(match => match[1]);
+        if (visibleButtons.length) {
+            errors.push(`${label}: blocco utente espone sintassi tecnica Meta Bind (${visibleButtons.join(", ")})`);
         }
         for (const button of requiredButtons) {
             if (!buttonIds.has(button)) {

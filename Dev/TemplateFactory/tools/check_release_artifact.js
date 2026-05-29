@@ -5,6 +5,7 @@ const os = require("os");
 const path = require("path");
 const { execFileSync } = require("child_process");
 const { repoPath } = require("./node_utils");
+const { DEMO_FILES } = require("./generate_demo_world");
 const { releasePluginProfile } = require("./release_plugin_profile");
 
 const ROOT = process.cwd();
@@ -14,11 +15,7 @@ const ZIP = `${OUT}.zip`;
 const BOUNDARY = "Dev/TemplateFactory/modules/release_boundary.yaml";
 const INCLUDE_DEMO = process.argv.includes("--with-demo");
 const KEEP_ARTIFACT = process.argv.includes("--keep");
-const DEMO_RELEASE_PATHS = new Set([
-    "Demo Regno Di Prova.md",
-    "Mondi/[Demo] Regno di Prova.md",
-    "Mondi/Porto di Prova Demo.md"
-]);
+const DEMO_RELEASE_PATHS = new Set([...DEMO_FILES, "Mondi/Porto di Prova Demo.md"]);
 
 function loadYaml(relPath) {
     const script = [
@@ -137,6 +134,12 @@ function validateOutput(errors) {
     for (const marker of asArray(releaseBoundary.leggimi_markers)) {
         if (!readme.includes(marker)) fail(errors, `LEGGIMI.md release incompleto (${marker})`);
     }
+    if (INCLUDE_DEMO && !readme.includes("Demo Regno Di Prova.md")) {
+        fail(errors, "LEGGIMI.md release demo senza riferimento a Demo Regno Di Prova.md");
+    }
+    if (!INCLUDE_DEMO && readme.includes("Demo Regno Di Prova.md")) {
+        fail(errors, "LEGGIMI.md release pulita cita la demo anche senza --with-demo");
+    }
 
     const plugins = JSON.parse(fs.readFileSync(path.join(OUT, ".obsidian/community-plugins.json"), "utf8"));
     const expectedPlugins = [...releasePluginProfileContract.enabledPlugins].sort();
@@ -181,7 +184,7 @@ function validateOutput(errors) {
         }
     }
 
-    // Protegge la release da materiale riservato o da percorsi locali del laboratorio FantasyWorld.
+    // Protegge la release da materiale riservato o da percorsi locali del laboratorio di sviluppo.
     for (const file of walkFiles(OUT)) {
         if (!file.endsWith(".md") && !file.endsWith(".yaml") && !file.endsWith(".json") && !file.endsWith(".js")) continue;
         const relPath = path.relative(OUT, file).replace(/\\/g, "/");

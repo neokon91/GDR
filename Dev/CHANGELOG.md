@@ -5,7 +5,7 @@
 ### Aggiunto
 
 - `Dev/TemplateFactory/tools/` separa tooling repo, check, renderer, importer, release script e fixture tecniche dal runtime vault `z.automazioni`; `check:repo` blocca il ritorno di tooling dev nella cartella runtime.
-- [[Dev/Roadmap/1.1 Kernel Architetturale]] come roadmap proposta per build riproducibile, runtime modulare, test dominio, plugin layer a profili e traiettoria narrative/rules engine.
+- [[Dev/Roadmap/1.1 Kernel Architetturale]] come roadmap proposta per build riproducibile, runtime modulare, test dominio, plugin layer a profili e traiettoria narrativa/adattatori meccanici.
 - `check:srd-import-source` e pin commit per `import_srd.js`, evitando release SRD dipendenti da branch remoto mobile.
 - `requirements-dev.txt` e `package-lock.json` come baseline minima per toolchain CI/sviluppo riproducibile.
 - Messaggio DX piu chiaro in `check:source-pipeline` quando mancano output generati e serve `npm run sync:sources`.
@@ -200,7 +200,7 @@
 
 ### Migliorato
 
-- [[Inizia Qui]], [[Worldbuilder Dashboard]], [[Bibbia del Mondo]] e [[Risorse/Guida DM]] ora partono da Crea Il Mondo e trattano sessioni e campagne come derivati del Codex.
+- [[Inizia Qui]], [[Worldbuilder Dashboard]], [[Bibbia del Mondo]] e [[Risorse/Guida DM]] ora partono da Crea mondo e trattano sessioni e campagne come derivati del Codex.
 - `npm run check` controlla il layer 1.0.0, il nuovo wizard mondo, i file tassonomici e l'ordine worldbuilding-first di [[Inizia Qui]].
 - `release:clean` include anche `z.engine`, cosi le viste JS usate dal vault restano nella release utente.
 
@@ -214,7 +214,7 @@
 ### Aggiunto
 
 - [[Hub/Party Control]] per PG, HP, missioni, inventario e flags durante la sessione.
-- [[Risorse/Quality Report]] come dashboard analytics per copertura, buchi operativi, sicurezza pubblicazione e materiale screenshot-ready.
+- [[Risorse/Quality Report]] come dashboard analytics per copertura, buchi operativi, sicurezza pubblicazione e materiale pronto da condividere.
 - Roadmap 1.0.0 storica usata come fonte unica per direzione prodotto, UX operativa e backlog attivo.
 
 ### Migliorato
@@ -234,10 +234,10 @@
 - Il template [[z.modelli/dm/Sessione]] ora apre subito con i cinque campi compilabili e un controllo che dice cosa manca senza rimandare ad altre note.
 - Il template [[z.modelli/Mondo]] ora apre con un Codex in 6 campi e [[Bibbia del Mondo]] diventa un Codex consultabile tipo World Anvil locale.
 - [[Atlante del Mondo]] include una tab mappa con mappe pubbliche/DM, luoghi con coordinate/layer e rotte.
-- README e checklist release evidenziano player portal, party control, quality report, screenshot e GIF.
+- README e checklist release evidenziano player portal, party control, quality report e materiale pronto da condividere.
 - `release:clean` genera un `LEGGIMI.md` utente piu completo e la documentazione include una pagina release pubblica pronta.
 - Roadmap, strategia prodotto e sviluppo vault ora mettono la riduzione della navigazione sopra nuove feature.
-- README, Repository, Release e Risorse/Release Pulita non linkano piu documenti superflui.
+- README, Repository e Release non linkano piu documenti superflui.
 
 ## 0.9.0 - 2026-05-20
 
@@ -281,7 +281,7 @@
 
 - [[Vista Giocatori]] per materiale condivisibile: recap, obiettivi, PNG, luoghi e dispense note.
 - [[Giocatori/Giocatori]] come indice dell'area giocatori.
-- [[Dev/Release Pulita]] per preparare una copia consegnabile del vault.
+- [[Dev/RELEASE]] per preparare una copia consegnabile del vault.
 - Script `npm run release:clean` per creare `dist/vault-gdr-clean` e, se disponibile, `dist/vault-gdr-clean.zip`.
 
 ### Migliorato

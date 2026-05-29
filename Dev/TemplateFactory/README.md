@@ -6,7 +6,7 @@ Prima infrastruttura per generare template Obsidian a partire da moduli YAML e r
 
 Centralizzare definizioni ripetute: frontmatter, campi Meta Bind, router Templater, Dataview, Bases, Tasks, Calendarium, mappe, schede creatura, incontri e versioni Markdown leggibili senza plugin.
 
-La generazione deve servire il profilo principale D&D 5.5/SRD senza legare il Codex del mondo al regolamento: i template regolamentari espongono campi utili a creature, incontri, oggetti e party; le entita di mondo restano giocabili anche quando non contengono statistiche.
+La generazione deve servire il profilo D&D 5.5-compatible con SRD separato senza legare il Codex del mondo al regolamento: i template meccanici espongono campi utili a creature, incontri, oggetti e party; le entita di mondo restano giocabili anche quando non contengono statistiche.
 
 ## Architettura
 
@@ -36,7 +36,7 @@ La generazione deve servire il profilo principale D&D 5.5/SRD senza legare il Co
 
 ## Pipeline Evolutiva YAML -> Artefatti
 
-Il modello da seguire e quello gia sperimentato in FantasyWorld: un modulo YAML leggibile resta la fonte, mentre Jinja, JSON e runtime JS consumano artefatti derivati. In GDR la regola e piu stretta perche la release deve restare stabile dentro Obsidian.
+Il modello da seguire e dichiarativo: un modulo YAML leggibile resta la fonte, mentre Jinja, JSON e runtime JS consumano artefatti derivati. In GDR la regola e stretta perche la release deve restare stabile dentro Obsidian.
 
 La direzione ammessa e:
 
@@ -172,7 +172,7 @@ Le viste `renderDnd55MaterialPipeline` e `renderCombatReadiness` sono runtime di
 
 `npm run check:templates` blocca una categoria tassonomica se manca la cartella SRD sorgente dichiarata, se manca il profilo runtime/frontmatter, se un campo obbligatorio non e catalogato o se il profilo non lo espone.
 
-`worldbuilding_depth_axes.yaml` raccoglie il primo porting selettivo degli assi tematici FantasyWorld. Gli assi sono opzionali, limitati a 3-5 per profilo e servono a generare domande o revisioni mirate; non sono campi obbligatori da aggiungere a ogni nota.
+`worldbuilding_depth_axes.yaml` raccoglie assi opzionali di profondita worldbuilding. Gli assi sono limitati a 3-5 per profilo e servono a generare domande o revisioni mirate; non sono campi obbligatori da aggiungere a ogni nota.
 
 Il render finale valida anche i blocchi Tabs: ogni blocco ` ````tabs ` deve essere chiuso, contenere almeno una `tab:`, non avere testo prima della prima tab, non avere tab duplicate o vuote e non annidare altri blocchi Tabs a quattro backtick.
 

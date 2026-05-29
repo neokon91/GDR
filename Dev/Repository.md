@@ -41,8 +41,8 @@ Questa nota e tecnica. Serve solo a chi cura il vault, non al DM che lo usa per 
 ## Cosa Toccare Prima
 
 1. Note operative e dashboard se vuoi migliorare l'esperienza del DM.
-2. Template in `z.modelli/` se vuoi cambiare come nascono le note.
-3. Script in `z.automazioni/` se vuoi cambiare automazioni o controlli.
+2. Moduli YAML/Jinja in `Dev/TemplateFactory/` se vuoi cambiare come nascono le note.
+3. Script in `z.automazioni/` se vuoi cambiare automazioni runtime o controlli usati dentro Obsidian.
 4. Plugin/config in `.obsidian/` solo quando sai quale comportamento dipende da quella impostazione.
 
 ## Cosa Non Spostare Alla Leggera

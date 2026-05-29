@@ -209,18 +209,11 @@ pages:
 
       ## Vista Operativa
 
-      ```dataview
-      TABLE uso, mondo, luogo, fazioni, personaggi, missioni, stato, file.mtime AS aggiornato
-      FROM "Risorse/Mappe"
-      WHERE contains(tags, "excalidraw") AND file.name != "Mappe"
-      SORT uso ASC, mondo ASC, file.name ASC
-      ```
+      Apri [[Risorse/Mappe/Mappe]] per controllare mappe, layer, versioni player-safe e materiali collegati al tavolo.
 
       ## Creazione
 
-      `BUTTON[nuova-mappa-fronti-z-modelli-mappe-mappa-excalidraw-fronti-excalidraw-md-2]`
-
-      Il plugin Excalidraw e configurato per creare nuovi disegni in `Risorse/Mappe` e usare il template fronti come base.
+      Da [[Risorse/Mappe/Mappe]] usa Nuova mappa fronti quando una scena, un fronte o una rete di relazioni deve diventare disegno operativo.
 
   - path: Risorse/Mappe Bases.md
     title: Mappe Bases
@@ -395,28 +388,28 @@ pages:
       > Capire se il vault e pronto senza leggere impostazioni tecniche.
       >
       > **Torna all'inizio** - i controlli sono pronti o vuoi ripartire dal percorso semplice
-      > `BUTTON[inizia-qui-inizia-qui]`
+      <!-- workflow:button inizia-qui-inizia-qui -->
       >
       > **Crea mondo** - gli strumenti base funzionano
-      > `BUTTON[nuovo-mondo-homebrew]`
+      <!-- workflow:button nuovo-mondo-homebrew -->
       >
       > **Prepara sessione** - hai gia un mondo o vuoi preparare il primo tavolo
-      > `BUTTON[preparazione-sessione-risorse-preparazione-sessione]`
+      <!-- workflow:button preparazione-sessione-risorse-preparazione-sessione -->
       >
       > **Apri tavolo** - vuoi verificare il cockpit live
-      > `BUTTON[durante-il-gioco-durante-il-gioco]`
+      <!-- workflow:button durante-il-gioco-durante-il-gioco -->
       >
       > **Fuori scena** - vuoi verificare il ciclo dopo sessione
-      > `BUTTON[fuori-scena-hub-cosa-succede-fuori-scena-cosa-succede-fuori-scena]`
+      <!-- workflow:button fuori-scena-hub-cosa-succede-fuori-scena-cosa-succede-fuori-scena -->
       >
       > [!regia]- Se qualcosa non va
       > Usare guide di ripristino leggibili prima di toccare impostazioni avanzate.
       >
       > **Se qualcosa non funziona** - plugin, pulsanti o tabelle non sembrano pronti
-      > `BUTTON[aiuto-risorse-se-qualcosa-non-funziona]`
+      <!-- workflow:button aiuto-risorse-se-qualcosa-non-funziona -->
       >
       > **Prima sessione in 15 minuti** - vuoi saltare il setup profondo e giocare con il minimo
-      > `BUTTON[prima-sessione-in-15-minuti-risorse-prima-sessione-in-15-minuti]`
+      <!-- workflow:button prima-sessione-in-15-minuti-risorse-prima-sessione-in-15-minuti -->
       <!-- workflow:quick_actions:end setup_guidato -->
 
       ```dataviewjs
@@ -495,7 +488,7 @@ pages:
 
       ## Posso Usarlo Senza SRD?
 
-      Si, ma il profilo principale del vault e fantasy D&D 5.5/SRD. `SRD` resta un riferimento regolamentare separato: il mondo e le campagne stanno in `Mondi` e `Campagne`.
+      Si. Il profilo principale resta fantasy D&D 5.5-compatible: `SRD` e il riferimento regolamentare separato, mentre mondo, canone, campagne e homebrew stanno in `Mondi` e `Campagne`. Le opzioni starter del vault servono a giocare e creare materiale compatibile; non trasformano il canone del mondo in testo SRD.
 
       ## Funziona Da Mobile?
 
@@ -619,6 +612,8 @@ pages:
     body: |
       Usa questa pagina quando vuoi giocare subito. Non devi completare il mondo: ti bastano una sessione, una prima scena, un luogo, un PNG, una pressione e 1-3 informazioni rivelabili.
 
+      La regola e semplice: crea o scegli una sessione, scrivi solo il minimo, rendila attiva, gioca, poi chiudi e aggiorna il mondo. Il Worldbuilder viene dopo, quando una domanda del tavolo merita profondita.
+
       ````tabs
       tab: Prima
 
@@ -642,35 +637,35 @@ pages:
       > [!regia] Azioni rapide
       > Preparare, giocare e chiudere una prima sessione con il minimo indispensabile.
       >
-      > **Controlla setup** - non sai se i pulsanti funzionano
-      > `BUTTON[setup-guidato-risorse-setup-guidato-2]`
+      > **Nuova sessione** - non esiste ancora una nota sessione
+      <!-- workflow:button nuova-sessione-z-modelli-dm-sessione-md -->
       >
       > **Prepara** - devi scrivere obiettivo, apertura e poche ancore
-      > `BUTTON[preparazione-sessione-risorse-preparazione-sessione]`
+      <!-- workflow:button preparazione-sessione-risorse-preparazione-sessione -->
       >
       > **Rendi attiva** - hai scelto quale sessione giocare
-      > `BUTTON[rendi-sessione-attiva]`
+      <!-- workflow:button rendi-sessione-attiva -->
       >
       > **Gioca** - vuoi aprire il cockpit del tavolo
-      > `BUTTON[durante-il-gioco-durante-il-gioco]`
+      <!-- workflow:button durante-il-gioco-durante-il-gioco -->
       >
       > **Chiudi sessione** - il tavolo e finito
-      > `BUTTON[post-sessione-guidato-risorse-post-sessione-guidato]`
+      <!-- workflow:button post-sessione-guidato-risorse-post-sessione-guidato -->
       >
       > **Fuori scena** - devi scegliere una conseguenza o prossima mossa
-      > `BUTTON[cosa-succede-fuori-scena-cosa-succede-fuori-scena]`
+      <!-- workflow:button cosa-succede-fuori-scena-cosa-succede-fuori-scena -->
       >
       > [!regia]- Minimo giocabile
       > Creare solo quello che serve alla prima sessione.
       >
-      > **Nuova sessione** - non esiste ancora una nota sessione
-      > `BUTTON[nuova-sessione-z-modelli-dm-sessione-md]`
-      >
       > **Creazione entita** - non sai cosa compilare su PNG, luogo o fazione
-      > `BUTTON[creazione-guidata-entita-risorse-creazione-guidata-entita]`
+      <!-- workflow:button creazione-guidata-entita-risorse-creazione-guidata-entita -->
+      >
+      > **Controlla setup** - pulsanti o tabelle non sembrano funzionare
+      <!-- workflow:button setup-guidato-risorse-setup-guidato-2 -->
       >
       > **DM Dashboard** - vuoi vedere lo stato complessivo del tavolo
-      > `BUTTON[dm-dashboard-1-dm-dashboard]`
+      <!-- workflow:button dm-dashboard-1-dm-dashboard -->
       <!-- workflow:quick_actions:end prima_sessione_rapida -->
 
       ```dataviewjs
@@ -695,6 +690,15 @@ pages:
       | PNG | Chi vuole qualcosa adesso. |
       | Pressione | Cosa peggiora se nessuno interviene. |
       | Segreti | 1-3 informazioni che puoi rivelare. |
+
+      ## Non Preparare Ora
+
+      | Rimanda | Perche |
+      | --- | --- |
+      | Enciclopedia del mondo | Prima serve una scelta da mettere in scena. |
+      | Calendario completo | Basta sapere cosa scade prima della prossima sessione. |
+      | Geopolitica dettagliata | Serve solo se produce una crisi giocabile. |
+      | Statblock perfetti | Per il primo tavolo basta un incontro usabile e collegato. |
 
       ## Durante Il Gioco
 
@@ -907,25 +911,25 @@ pages:
       > Preparare combattimenti che possano partire in round senza bloccare la sessione.
       >
       > **Torna al tavolo** - la scena e pronta o la sessione e in corso
-      > `BUTTON[durante-il-gioco-durante-il-gioco-3]`
+      <!-- workflow:button durante-il-gioco-durante-il-gioco-3 -->
       >
       > **Nuovo incontro** - serve una scena meccanica o un combattimento pronto
-      > `BUTTON[nuovo-incontro-z-modelli-dm-incontro-md]`
+      <!-- workflow:button nuovo-incontro-z-modelli-dm-incontro-md -->
       >
       > [!regia]- Supporto combattimento
       > Preparare materiali collegati prima di entrare in iniziativa.
       >
       > **Nuova mappa zoom** - il combattimento ha bisogno di spazio navigabile
-      > `BUTTON[nuova-mappa-zoom-z-modelli-mappe-mappa-zoom-md]`
+      <!-- workflow:button nuova-mappa-zoom-z-modelli-mappe-mappa-zoom-md -->
       >
       > **Nuovo PNG** - serve un volto o avversario ricorrente
-      > `BUTTON[nuovo-png-z-modelli-personaggio-png-md]`
+      <!-- workflow:button nuovo-png-z-modelli-personaggio-png-md -->
       >
       > **Nuovo oggetto** - la scena include ricompensa, leva o pericolo concreto
-      > `BUTTON[nuovo-oggetto-z-modelli-oggetto-md]`
+      <!-- workflow:button nuovo-oggetto-z-modelli-oggetto-md -->
       >
       > **Preparazione sessione** - devi tornare alle ancore della sessione
-      > `BUTTON[preparazione-sessione-risorse-preparazione-sessione]`
+      <!-- workflow:button preparazione-sessione-risorse-preparazione-sessione -->
       <!-- workflow:quick_actions:end iniziativa_combattimenti -->
 
       ```dataviewjs
@@ -1022,6 +1026,130 @@ pages:
       - Se una nota resta importante per piu sessioni, apri [[Risorse/Worldbuilding Profondo]] e aggiungi memoria, contraddizioni, costi e cambiamenti.
 
       Non serve compilare tutto subito. Una scheda e pronta quando puo generare una scena, una scelta, un rischio o una conseguenza.
+
+  - path: Risorse/Regione Giocabile.md
+    title: Regione Giocabile
+    frontmatter:
+      cssclasses:
+        - indice
+      categoria: risorsa
+      tipo: guida
+      stato: pronto
+    body: |
+      Usa questa pagina quando vuoi costruire una zona del mondo abbastanza profonda da reggere piu sessioni, ma abbastanza concreta da produrre gioco subito.
+
+      Una regione giocabile non e una enciclopedia: e un territorio dove i personaggi possono entrare, scegliere, pagare costi, scoprire verita e cambiare equilibri.
+
+      <!-- workflow:quick_actions:start regione_giocabile -->
+      > [!regia] Azioni rapide
+      > Costruire una regione profonda che produca subito luoghi, poteri, missioni, segreti e materiale player-safe.
+      >
+      > **Nuovo luogo** - manca un posto dove i personaggi possano agire
+      <!-- workflow:button nuovo-luogo-z-modelli-luogo-router-md -->
+      >
+      > **Nuova fazione** - manca un potere che vuole qualcosa nella regione
+      <!-- workflow:button nuova-fazione-z-modelli-fazione-router-md -->
+      >
+      > **Nuovo conflitto** - la regione non ha ancora una pressione leggibile
+      <!-- workflow:button nuovo-conflitto-z-modelli-worldbuilding-conflitto-md -->
+      >
+      > **Nuova missione** - una tensione deve diventare obiettivo giocabile
+      <!-- workflow:button nuova-missione-z-modelli-dm-missione-md -->
+      >
+      > **Nuova sessione** - la regione e pronta per arrivare al tavolo
+      <!-- workflow:button nuova-sessione-z-modelli-dm-sessione-md -->
+      >
+      > **Campagna da regione** - la zona deve sostenere piu sessioni
+      <!-- workflow:button campagna-da-regione-z-modelli-dm-campagna-da-regione-md -->
+      <!-- workflow:quick_actions:end regione_giocabile -->
+
+      ```dataviewjs
+      const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+      await gdr.renderWorkflowCommandDeck(dv, "regione_giocabile", { mode: "simple" });
+      ```
+
+      ## Pronta Quando
+
+      | Area | Minimo giocabile | Profondita utile |
+      | --- | --- | --- |
+      | Geografia | 3 luoghi distinti collegati da una rotta, confine o ostacolo. | Ogni luogo cambia comportamento di PNG, viaggi o risorse. |
+      | Poteri | 2 fazioni o autorita con obiettivi incompatibili. | Ogni potere ha dipendenza, metodo, simbolo visibile e prossima mossa. |
+      | Vita quotidiana | 1 norma locale che i PG noteranno subito. | Tabu, festa, mestiere, lingua o costo sociale influenzano una scena. |
+      | Pressione | 1 conflitto o clock che avanza se nessuno interviene. | La pressione colpisce luoghi, fazioni, risorse e player-facing rumor. |
+      | Mistero | 1 verita DM con 2-3 indizi rivelabili. | Ogni indizio puo essere scoperto senza spiegare tutto il canone. |
+      | Uscita al tavolo | 1 missione o sessione pronta. | La regione produce incontri, dispense, mappe e conseguenze persistenti. |
+
+      ## Mappa Minima 3x3
+
+      | Nodo | Domanda | Output |
+      | --- | --- | --- |
+      | Luogo sicuro | Dove possono riposare, comprare, sentire rumor o trattare? | Insediamento, mercato, santuario, campo o nave. |
+      | Luogo instabile | Dove una pressione e gia visibile? | Confine, miniera, porto chiuso, tempio conteso, foresta malata. |
+      | Luogo proibito | Dove la verita o il pericolo sono piu forti? | Rovina, dungeon, zona sacra, frontiera, archivio, falla planare. |
+      | Potere legittimo | Chi pretende obbedienza? | Autorita, casata, consiglio, culto riconosciuto. |
+      | Potere pratico | Chi controlla risorse, strade, informazioni o violenza? | Gilda, milizia, mercanti, guide, contrabbandieri. |
+      | Potere ferito | Chi ha perso qualcosa e vuole cambiare l'ordine? | Esuli, antenati, setta, popolo marginale, fazione sconfitta. |
+      | Rumor pubblico | Cosa sanno tutti ma interpretano male? | Frase player-safe da mettere in vista giocatori. |
+      | Verita DM | Cosa e vero ma non ancora rivelato? | Segreto, mistero o evento storico canonico. |
+      | Conseguenza futura | Cosa succede se i PG ignorano la regione? | Prossima mossa, clock, fronte o missione perduta. |
+
+      ## Strati Profondi Senza Enciclopedia
+
+      | Strato | Domanda forte | Quando basta |
+      | --- | --- | --- |
+      | Memoria | Quale evento passato spiega il conflitto attuale? | Hai una data, una ferita e due versioni diverse della storia. |
+      | Cultura | Quale comportamento locale mette i PG davanti a una scelta? | Hai un tabu, una pratica, una parola o un rito che cambia una scena. |
+      | Economia | Quale risorsa rende qualcuno dipendente da qualcun altro? | Hai merce, controllore, rotta, scarsita e costo sociale. |
+      | Potere | Chi puo reagire entro la prossima sessione? | Hai obiettivo, leva, metodo e prossima mossa. |
+      | Meraviglia | Cosa rende questa regione diversa da un luogo generico? | Hai un fenomeno, una regola locale o una immagine giocabile. |
+      | Canone | Cosa resta vero dopo che i PG intervengono? | Hai una conseguenza da scrivere in timeline, luogo, fazione o missione. |
+
+      ## Conversione In Gioco
+
+      1. Scegli il luogo dove iniziano i PG.
+      2. Scegli chi vuole qualcosa entro pochi giorni.
+      3. Scrivi la conseguenza se nessuno interviene.
+      4. Crea una missione con obiettivo, scelta, rischio e ricompensa.
+      5. Prepara una sessione con apertura, pressione e 1-3 segreti rivelabili.
+      6. Crea solo gli incontri che possono davvero comparire.
+      7. Scrivi una frase player-safe per la Vista Giocatori.
+
+      ## Compatibilita 5.5e
+
+      - Tieni il regolamento separato dal canone: `SRD` e riferimento, non ambientazione.
+      - Usa creature, incontri e oggetti D&D 5.5-compatible solo quando livello, rischio o ricompensa devono arrivare al tavolo.
+      - Non trasformare ogni cultura in meccanica. Dai regole solo a cio che i PG possono usare, subire o scegliere.
+      - Per una prima regione bastano 1-2 incontri sociali, 1 pericolo esplorativo e 1 minaccia meccanica opzionale.
+
+      ## Materiale Player-Safe
+
+      | Da mostrare | Da tenere DM |
+      | --- | --- |
+      | Nome regione, tono, mappa pubblica, rumor, PNG noti, luoghi raggiungibili. | Verita del mistero, tradimenti, obiettivi nascosti, clock non scoperti. |
+      | Una frase su cosa rende il posto diverso. | Origine profonda, causa reale e conseguenze non ancora visibili. |
+      | Missione accettata, ricompense promesse, pericoli evidenti. | Fallimenti possibili, reazioni future, prezzo politico o cosmico. |
+
+      ## Regioni Candidate
+
+      ```dataview
+      TABLE mondo, tipo, luogo_padre, pericolo, tensione, fazioni, missioni
+      FROM "Mondi/Luoghi"
+      WHERE stato != "archiviata" AND (tipo = "regione" OR subtype = "regione" OR category = "geografia" OR luogo_padre)
+      SORT mondo ASC, pericolo DESC, nome ASC
+      LIMIT 30
+      ```
+
+      ## Pressioni Della Regione
+
+      ```dataview
+      TABLE mondo, pressione, posta, prossima_mossa, fazioni, luoghi
+      FROM "Mondi/Conflitti" OR "Mondi/Missioni" OR "Mondi/Fazioni"
+      WHERE stato != "archiviata" AND (pressione > 0 OR prossima_mossa)
+      SORT pressione DESC, file.mtime DESC
+      LIMIT 30
+      ```
+
+      Fermati quando puoi dire: "domani posso far entrare i PG qui, mostrare un problema, offrire una scelta e sapere cosa cambia dopo".
 
   - path: Risorse/Fronti Di Campagna.md
     title: Fronti Di Campagna
@@ -1515,34 +1643,34 @@ pages:
       > Plugin coinvolti: `Meta Bind`, `Dataview`, `Linter`, `BRAT`, `Style Settings`, `Tasks`, `Bases`.
       >
       > **Quality report** - vuoi una vista piu ampia dei problemi del vault
-      > `BUTTON[quality-report-risorse-quality-report]`
+      <!-- workflow:button quality-report-risorse-quality-report -->
       >
       > **Vista giocatori** - devi verificare cosa e sicuro mostrare
-      > `BUTTON[vista-giocatori-hub-vista-giocatori-vista-giocatori]`
+      <!-- workflow:button vista-giocatori-hub-vista-giocatori-vista-giocatori -->
       >
       > **Smista bozze generate** - ci sono bozze da trasformare in materiale utile o archivio
-      > `BUTTON[smistamento-bozze-generate-risorse-smistamento-bozze-generate-2]`
+      <!-- workflow:button smistamento-bozze-generate-risorse-smistamento-bozze-generate-2 -->
       >
       > **Bacheca preparazione** - sessioni e task preparatori vanno riordinati
-      > `BUTTON[preparazione-sessioni-z-bacheche-preparazione-sessioni]`
+      <!-- workflow:button preparazione-sessioni-z-bacheche-preparazione-sessioni -->
       >
       > **Task DM** - vuoi vedere lavoro aperto e manutenzione operativa
-      > `BUTTON[task-dm-risorse-task-dm]`
+      <!-- workflow:button task-dm-risorse-task-dm -->
       >
       > [!regia]- Ripristino operativo
       > Aprire le superfici che indicano cosa manca quando automazioni o viste non bastano.
       >
       > **Aiuto** - pulsanti, Dataview o template non rispondono
-      > `BUTTON[aiuto-risorse-se-qualcosa-non-funziona]`
+      <!-- workflow:button aiuto-risorse-se-qualcosa-non-funziona -->
       >
       > **Controllo vault** - devi tornare a questa pagina dopo una correzione
-      > `BUTTON[controllo-vault-risorse-controllo-vault]`
+      <!-- workflow:button controllo-vault-risorse-controllo-vault -->
       >
       > **Inbox** - devi smistare appunti grezzi
-      > `BUTTON[inbox-inbox-inbox]`
+      <!-- workflow:button inbox-inbox-inbox -->
       >
       > **Worldbuilder** - il problema e materiale di mondo scollegato
-      > `BUTTON[worldbuilder-worldbuilder-dashboard]`
+      <!-- workflow:button worldbuilder-worldbuilder-dashboard -->
       <!-- workflow:quick_actions:end manutenzione -->
 
       ```dataviewjs
@@ -1568,34 +1696,34 @@ pages:
       > Scegliere cosa aprire adesso senza leggere guide lunghe.
       >
       > **DM Dashboard** - vuoi vedere lo stato complessivo del tavolo
-      > `BUTTON[dm-dashboard-1-dm-dashboard]`
+      <!-- workflow:button dm-dashboard-1-dm-dashboard -->
       >
       > **Prepara** - devi scegliere o rifinire la prossima sessione
-      > `BUTTON[preparazione-sessione-risorse-preparazione-sessione]`
+      <!-- workflow:button preparazione-sessione-risorse-preparazione-sessione -->
       >
       > **Gioca** - una sessione deve andare al tavolo
-      > `BUTTON[durante-il-gioco-durante-il-gioco]`
+      <!-- workflow:button durante-il-gioco-durante-il-gioco -->
       >
       > **Chiudi** - il tavolo e finito e devi smistare conseguenze
-      > `BUTTON[post-sessione-guidato-risorse-post-sessione-guidato]`
+      <!-- workflow:button post-sessione-guidato-risorse-post-sessione-guidato -->
       >
       > [!regia]- Mondo
       > Aprire solo superfici che cambiano materiale giocabile.
       >
       > **Worldbuilder** - una sessione richiede nuovi luoghi, poteri o pressioni
-      > `BUTTON[worldbuilder-worldbuilder-dashboard-2]`
+      <!-- workflow:button worldbuilder-worldbuilder-dashboard-2 -->
       >
       > **Mondo vivo** - una conseguenza deve cambiare note o clock
-      > `BUTTON[motore-mondo-vivo-motore-mondo-vivo]`
+      <!-- workflow:button motore-mondo-vivo-motore-mondo-vivo -->
       >
       > [!regia]- Pulizia
       > Risolvere rumore e condivisione prima di creare altro.
       >
       > **Controllo Vault** - ci sono bozze, note isolate o problemi di stato
-      > `BUTTON[controllo-vault-risorse-controllo-vault]`
+      <!-- workflow:button controllo-vault-risorse-controllo-vault -->
       >
       > **Vista giocatori** - devi condividere recap, mappa o dispensa senza segreti
-      > `BUTTON[vista-giocatori-hub-vista-giocatori-vista-giocatori]`
+      <!-- workflow:button vista-giocatori-hub-vista-giocatori-vista-giocatori -->
       <!-- workflow:quick_actions:end guida_dm -->
 
       ## Cosa Fare Ora
@@ -1651,28 +1779,28 @@ pages:
       > Normalizzare mappe esterne senza far entrare contenuto grezzo nel canone.
       >
       > **Mappe** - devi controllare uso, agganci o versione giocatori
-      > `BUTTON[mappe-risorse-mappe-mappe]`
+      <!-- workflow:button mappe-risorse-mappe-mappe -->
       >
       > **Atlante** - devi verificare coordinate, luoghi o marker
-      > `BUTTON[atlante-del-mondo-atlante-del-mondo]`
+      <!-- workflow:button atlante-del-mondo-atlante-del-mondo -->
       >
       > **Smista bozze** - l'import ha creato note in Inbox/Generati
-      > `BUTTON[smista-generati-risorse-smistamento-bozze-generate]`
+      <!-- workflow:button smista-generati-risorse-smistamento-bozze-generate -->
       >
       > **Controllo vault** - vuoi controllare buchi e note isolate dopo lo smistamento
-      > `BUTTON[controllo-vault-risorse-controllo-vault]`
+      <!-- workflow:button controllo-vault-risorse-controllo-vault -->
       >
       > [!regia]- Dopo import
       > Aprire solo le superfici che trasformano output grezzi in materiale giocabile.
       >
       > **Vista giocatori** - una mappa o un luogo importato puo essere mostrato al party
-      > `BUTTON[vista-giocatori-hub-vista-giocatori-vista-giocatori]`
+      <!-- workflow:button vista-giocatori-hub-vista-giocatori-vista-giocatori -->
       >
       > **Preparazione sessione** - l'import serve la prossima giocata
-      > `BUTTON[preparazione-sessione-risorse-preparazione-sessione]`
+      <!-- workflow:button preparazione-sessione-risorse-preparazione-sessione -->
       >
       > **Worldbuilder** - mancano luoghi, fazioni o missioni da collegare
-      > `BUTTON[worldbuilder-worldbuilder-dashboard-2]`
+      <!-- workflow:button worldbuilder-worldbuilder-dashboard-2 -->
       <!-- workflow:quick_actions:end import_mappe -->
 
       ## Import Prima
@@ -1736,31 +1864,31 @@ pages:
       > Scegliere o correggere il supporto spaziale giusto per sessione, viaggio, fronte o versione giocatori.
       >
       > **Nuova mappa zoom** - una scena, un dungeon o un luogo deve essere navigabile
-      > `BUTTON[nuova-mappa-zoom-z-modelli-mappe-mappa-zoom-md]`
+      <!-- workflow:button nuova-mappa-zoom-z-modelli-mappe-mappa-zoom-md -->
       >
       > **Nuova mappa fronti** - pressioni, fazioni, indizi o relazioni vanno viste insieme
-      > `BUTTON[nuova-mappa-fronti-z-modelli-mappe-mappa-excalidraw-fronti-excalidraw-md]`
+      <!-- workflow:button nuova-mappa-fronti-z-modelli-mappe-mappa-excalidraw-fronti-excalidraw-md -->
       >
       > **Atlante** - devi correggere coordinate, luoghi, rotte o layer
-      > `BUTTON[atlante-del-mondo-atlante-del-mondo]`
+      <!-- workflow:button atlante-del-mondo-atlante-del-mondo -->
       >
       > **Vista giocatori** - vuoi mostrare una mappa senza rivelare segreti DM
-      > `BUTTON[vista-giocatori-hub-vista-giocatori-vista-giocatori]`
+      <!-- workflow:button vista-giocatori-hub-vista-giocatori-vista-giocatori -->
       >
       > [!regia]- Contesto mappa
       > Aprire la superficie dove la mappa diventa gioco, non archivio.
       >
       > **Preparazione sessione** - la mappa serve il prossimo tavolo
-      > `BUTTON[preparazione-sessione-risorse-preparazione-sessione]`
+      <!-- workflow:button preparazione-sessione-risorse-preparazione-sessione -->
       >
       > **Durante il gioco** - devi aprire la mappa mentre la scena e attiva
-      > `BUTTON[durante-il-gioco-durante-il-gioco]`
+      <!-- workflow:button durante-il-gioco-durante-il-gioco -->
       >
       > **Worldbuilder** - mancano luoghi, fazioni o missioni da collegare
-      > `BUTTON[worldbuilder-worldbuilder-dashboard-2]`
+      <!-- workflow:button worldbuilder-worldbuilder-dashboard-2 -->
       >
       > **Report qualita** - vuoi controllare player-safe, buchi e materiale mostrabile
-      > `BUTTON[quality-report-risorse-quality-report]`
+      <!-- workflow:button quality-report-risorse-quality-report -->
       <!-- workflow:quick_actions:end mappe_operativo -->
 
       ## Filtro
@@ -1914,25 +2042,25 @@ pages:
       > Preparare cue media senza trasformarli in archivio parallelo.
       >
       > **Durante il gioco** - la sessione e attiva e devi aprire cue al tavolo
-      > `BUTTON[durante-il-gioco-durante-il-gioco]`
+      <!-- workflow:button durante-il-gioco-durante-il-gioco -->
       >
       > **Materiali al tavolo** - vuoi vedere media insieme a mappe, dispense e incontri
-      > `BUTTON[materiali-al-tavolo-risorse-materiali-al-tavolo]`
+      <!-- workflow:button materiali-al-tavolo-risorse-materiali-al-tavolo -->
       >
       > **Preparazione sessione** - il cue non ha ancora scena o obiettivo chiaro
-      > `BUTTON[preparazione-sessione-risorse-preparazione-sessione]`
+      <!-- workflow:button preparazione-sessione-risorse-preparazione-sessione -->
       >
       > **Vista giocatori** - una immagine o un video puo essere mostrato al party
-      > `BUTTON[vista-giocatori-hub-vista-giocatori-vista-giocatori]`
+      <!-- workflow:button vista-giocatori-hub-vista-giocatori-vista-giocatori -->
       >
       > [!regia]- Se non e pronto
       > Tornare alla superficie che decide se il cue serve davvero.
       >
       > **Controllo vault** - il media e scollegato o sembra rumore
-      > `BUTTON[controllo-vault-risorse-controllo-vault]`
+      <!-- workflow:button controllo-vault-risorse-controllo-vault -->
       >
       > **Report qualita** - devi controllare sicurezza e materiale mostrabile
-      > `BUTTON[quality-report-risorse-quality-report]`
+      <!-- workflow:button quality-report-risorse-quality-report -->
       <!-- workflow:quick_actions:end media_scene -->
 
       ## Media Per La Sessione Attiva
@@ -2032,49 +2160,49 @@ pages:
       > Trasformare appunti e conseguenze in mondo aggiornato.
       >
       > **Chiudi sessione viva** - vuoi chiudere sessione, recap e propagazione con un solo comando
-      > `BUTTON[chiudi-sessione-viva]`
+      <!-- workflow:button chiudi-sessione-viva -->
       >
       > **Apri prossima sessione viva** - la sessione e chiusa e vuoi iniziare la preparazione successiva senza reinserire output a mano
-      > `BUTTON[apri-prossima-sessione-viva]`
+      <!-- workflow:button apri-prossima-sessione-viva -->
       >
       > **Applica conseguenza** - una nota ha conseguenze o impatti ancora aperti
-      > `BUTTON[applica-conseguenza]`
+      <!-- workflow:button applica-conseguenza -->
       >
       > **Propaga a entita** - bersagli collegati devono ricevere aggiornamenti
-      > `BUTTON[propaga-a-entita]`
+      <!-- workflow:button propaga-a-entita -->
       >
       > **Prepara recap pubblico** - devi produrre materiale mostrabile ai giocatori
-      > `BUTTON[prepara-recap-pubblico]`
+      <!-- workflow:button prepara-recap-pubblico -->
       >
       > **Fuori scena** - devi scegliere chi reagisce prima della prossima sessione
-      > `BUTTON[fuori-scena-hub-cosa-succede-fuori-scena-cosa-succede-fuori-scena]`
+      <!-- workflow:button fuori-scena-hub-cosa-succede-fuori-scena-cosa-succede-fuori-scena -->
       >
       > [!regia]- Continuita e propagazione
       > Applicare le conseguenze alle note bersaglio prima che restino appunti isolati.
       >
       > **Registra scelta mondo** - una decisione deve diventare stato tracciabile
-      > `BUTTON[registra-scelta-mondo]`
+      <!-- workflow:button registra-scelta-mondo -->
       >
       > **Applica conseguenza** - una conseguenza ha bersagli concreti
-      > `BUTTON[applica-conseguenza]`
+      <!-- workflow:button applica-conseguenza -->
       >
       > **Propaga a entita** - piu note devono ricevere aggiornamenti
-      > `BUTTON[propaga-a-entita]`
+      <!-- workflow:button propaga-a-entita -->
       >
       > **Prepara recap pubblico** - devi chiudere con materiale player-safe
-      > `BUTTON[prepara-recap-pubblico]`
+      <!-- workflow:button prepara-recap-pubblico -->
       >
       > **Chiudi sessione viva** - recap, conseguenze e bersagli sono pronti per essere applicati insieme
-      > `BUTTON[chiudi-sessione-viva]`
+      <!-- workflow:button chiudi-sessione-viva -->
       >
       > **Apri prossima sessione viva** - output e conseguenze devono diventare materiale di preparazione
-      > `BUTTON[apri-prossima-sessione-viva]`
+      <!-- workflow:button apri-prossima-sessione-viva -->
       >
       > **Evento storico** - l'esito della sessione deve entrare nella timeline
-      > `BUTTON[nuovo-evento-storico-z-modelli-evento-storico-md]`
+      <!-- workflow:button nuovo-evento-storico-z-modelli-evento-storico-md -->
       >
       > **Nuovo clock** - una conseguenza deve diventare pressione tracciabile
-      > `BUTTON[nuovo-clock-z-modelli-dm-tracciato-md]`
+      <!-- workflow:button nuovo-clock-z-modelli-dm-tracciato-md -->
       <!-- workflow:quick_actions:end post_sessione -->
 
       ```dataviewjs
@@ -2137,52 +2265,52 @@ pages:
       > Preparare una sessione radicata nel mondo.
       >
       > **Nuova sessione** - non esiste ancora una nota sessione per il prossimo tavolo
-      > `BUTTON[nuova-sessione-z-modelli-dm-sessione-md]`
+      <!-- workflow:button nuova-sessione-z-modelli-dm-sessione-md -->
       >
       > **Rendi sessione attiva** - hai scelto quale sessione userai al tavolo
-      > `BUTTON[rendi-sessione-attiva]`
+      <!-- workflow:button rendi-sessione-attiva -->
       >
       > **Nuova entita viva** - manca un'ancora mondo giocabile
-      > `BUTTON[wizard-nuova-entita-viva]`
+      <!-- workflow:button wizard-nuova-entita-viva -->
       >
       > **Collega sessione attiva** - una nota utile non e ancora collegata alla sessione
-      > `BUTTON[collega-sessione-attiva]`
+      <!-- workflow:button collega-sessione-attiva -->
       >
       > **Nuova mappa** - serve materiale spaziale pronto al tavolo
-      > `BUTTON[nuova-mappa-zoom-z-modelli-mappe-mappa-zoom-md]`
+      <!-- workflow:button nuova-mappa-zoom-z-modelli-mappe-mappa-zoom-md -->
       >
       > **Apri tavolo** - la sessione e pronta o in corso
-      > `BUTTON[durante-il-gioco-durante-il-gioco]`
+      <!-- workflow:button durante-il-gioco-durante-il-gioco -->
       >
       > [!regia]- Ancore mondo
       > Collegare materiale vivo prima di compilare i cinque blocchi della sessione.
       >
       > **Worldbuilder** - mancano mondo, luogo, fazione o pressione
-      > `BUTTON[worldbuilder-worldbuilder-dashboard-2]`
+      <!-- workflow:button worldbuilder-worldbuilder-dashboard-2 -->
       >
       > **Nuova missione** - serve un obiettivo giocabile
-      > `BUTTON[nuova-missione-z-modelli-dm-missione-md]`
+      <!-- workflow:button nuova-missione-z-modelli-dm-missione-md -->
       >
       > **Nuovo clock** - manca una pressione visibile
-      > `BUTTON[nuovo-clock-z-modelli-dm-tracciato-md]`
+      <!-- workflow:button nuovo-clock-z-modelli-dm-tracciato-md -->
       >
       > **Nuova fazione** - serve un potere che reagisce
-      > `BUTTON[nuova-fazione-z-modelli-fazione-router-md]`
+      <!-- workflow:button nuova-fazione-z-modelli-fazione-router-md -->
       >
       > [!regia]- Materiale pronto
       > Preparare solo cio che puo arrivare davvero al tavolo.
       >
       > **Nuovo incontro** - serve una scena meccanica o un combattimento
-      > `BUTTON[nuovo-incontro-z-modelli-dm-incontro-md]`
+      <!-- workflow:button nuovo-incontro-z-modelli-dm-incontro-md -->
       >
       > **Nuova dispensa** - serve materiale da consegnare o leggere
-      > `BUTTON[nuova-dispensa-z-modelli-dispensa-md]`
+      <!-- workflow:button nuova-dispensa-z-modelli-dispensa-md -->
       >
       > **Nuova mappa fronti** - vuoi visualizzare relazioni, pressioni o fronti
-      > `BUTTON[nuova-mappa-fronti-z-modelli-mappe-mappa-excalidraw-fronti-excalidraw-md-2]`
+      <!-- workflow:button nuova-mappa-fronti-z-modelli-mappe-mappa-excalidraw-fronti-excalidraw-md-2 -->
       >
       > **Nuovo PNG** - serve una persona pronta in scena
-      > `BUTTON[nuovo-png-z-modelli-personaggio-png-md]`
+      <!-- workflow:button nuovo-png-z-modelli-personaggio-png-md -->
       <!-- workflow:quick_actions:end prepara_sessione -->
 
       ```dataviewjs
@@ -2252,25 +2380,25 @@ pages:
       > Capire quali buchi rendono il vault meno giocabile, condivisibile o player-safe.
       >
       > **Controllo vault** - vuoi passare dal report visuale alla coda operativa
-      > `BUTTON[controllo-vault-risorse-controllo-vault]`
+      <!-- workflow:button controllo-vault-risorse-controllo-vault -->
       >
       > **Vista giocatori** - devi verificare materiale mostrabile senza segreti DM
-      > `BUTTON[vista-giocatori-hub-vista-giocatori-vista-giocatori]`
+      <!-- workflow:button vista-giocatori-hub-vista-giocatori-vista-giocatori -->
       >
       > **Atlante del mondo** - vuoi controllare copertura di luoghi, mappe e coordinate
-      > `BUTTON[atlante-del-mondo-atlante-del-mondo]`
+      <!-- workflow:button atlante-del-mondo-atlante-del-mondo -->
       >
       > [!regia]- Correzione rapida
       > Aprire le superfici dove i buchi del report diventano lavoro concreto.
       >
       > **Worldbuilder** - mancano collegamenti o fondamenta di mondo
-      > `BUTTON[worldbuilder-worldbuilder-dashboard]`
+      <!-- workflow:button worldbuilder-worldbuilder-dashboard -->
       >
       > **Stato campagna** - il problema riguarda pressioni, missioni o conseguenze
-      > `BUTTON[stato-campagna-mondi-stato-del-mondo]`
+      <!-- workflow:button stato-campagna-mondi-stato-del-mondo -->
       >
       > **Smista bozze** - il problema deriva da materiale generato non deciso
-      > `BUTTON[smistamento-bozze-generate-risorse-smistamento-bozze-generate-2]`
+      <!-- workflow:button smistamento-bozze-generate-risorse-smistamento-bozze-generate-2 -->
       <!-- workflow:quick_actions:end quality_report -->
 
       ```dataviewjs
@@ -2340,19 +2468,19 @@ pages:
       > Trasformare bozze generate in note utili, canoniche o archiviate.
       >
       > **Generatore fantasy** - vuoi creare una nuova bozza da valutare
-      > `BUTTON[generatore-fantasy-fantasy-content-generator-open-generator-2]`
+      <!-- workflow:button generatore-fantasy-fantasy-content-generator-open-generator-2 -->
       >
       > **Controllo vault** - vuoi verificare se restano bozze o problemi
-      > `BUTTON[controllo-vault-risorse-controllo-vault-2]`
+      <!-- workflow:button controllo-vault-risorse-controllo-vault-2 -->
       >
       > **Inbox** - devi tornare alla coda completa degli appunti
-      > `BUTTON[inbox-inbox-inbox-2]`
+      <!-- workflow:button inbox-inbox-inbox-2 -->
       >
       > **Smista bozza** - la bozza ha un aggancio a mondo, luogo, campagna o sessione
-      > `BUTTON[smista-bozza-generata]`
+      <!-- workflow:button smista-bozza-generata -->
       >
       > **Canonizza bozza** - la bozza e stata confermata in gioco o nel canone
-      > `BUTTON[canonizza-bozza-generata]`
+      <!-- workflow:button canonizza-bozza-generata -->
       <!-- workflow:quick_actions:end smistamento_bozze -->
 
       ```dataviewjs

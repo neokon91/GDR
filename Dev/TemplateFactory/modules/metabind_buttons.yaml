@@ -999,6 +999,13 @@ buttons:
     - type: open
       link: '[[Risorse/Prima Sessione In 15 Minuti]]'
     id: prima-sessione-risorse-prima-sessione-in-15-minuti
+  regione_giocabile_risorse_regione_giocabile:
+    label: Regione Giocabile
+    style: primary
+    actions:
+    - type: open
+      link: '[[Risorse/Regione Giocabile]]'
+    id: regione-giocabile-risorse-regione-giocabile
   prossima_sessione_risorse_preparazione_sessione:
     label: Prossima Sessione
     style: primary

@@ -2,7 +2,7 @@
 
 Un vault Obsidian professionale per DM e worldbuilder italiani. Aiuta a costruire ambientazioni profonde, trasformarle in campagne, preparare sessioni radicate nel Codex del mondo, controllare il party e mostrare ai giocatori solo materiale sicuro.
 
-L'obiettivo è farlo sembrare un'app locale dentro Obsidian, non una cartella di appunti. Il centro è il **Codex del Mondo**; il flusso operativo porta quel mondo al tavolo con **Prepara -> Gioca -> Aggiorna il mondo**.
+L'obiettivo e farlo sembrare un'app locale dentro Obsidian, non una cartella di appunti. Non e una app standalone e non e un rules engine completo: il valore sta nel collegare mondo, preparazione, sessione e conseguenze. Il centro e il **Codex del Mondo**; il flusso operativo porta quel mondo al tavolo con **Prepara -> Gioca -> Aggiorna il mondo**.
 
 Apri [[Inizia Qui]] per il primo avvio. Il percorso principale passa da [[Risorse/Preparazione Sessione]] per preparare una sessione, [[Hub/Durante il Gioco]] per giocarla e [[Hub/Cosa Succede Fuori Scena]] per aggiornare conseguenze, missioni e prossime mosse. Le dashboard avanzate sono strumenti di supporto, non tappe obbligatorie.
 
@@ -12,24 +12,20 @@ Apri [[Inizia Qui]] per il primo avvio. Il percorso principale passa da [[Risors
 - **Completo**: mondo, campagna, sessione, post-sessione e vista giocatori.
 - **Vista giocatori**: recap, PNG noti, luoghi scoperti, dispense, mappe condivise e controllo anti-segreti.
 - **Controllo party**: PG, HP, inventario, obiettivi e flag in una schermata da sessione.
-- **Controllo qualità**: copertura, buchi operativi, sicurezza della pubblicazione e materiale pronto per screenshot.
+- **Controllo qualita**: copertura, buchi operativi, sicurezza della pubblicazione e materiale pronto da condividere.
 - **Worldbuilding sistemico**: culture, lingue, storia, conflitti, cosmologia, fazioni, relazioni, causalità e conseguenze persistenti.
-- **D&D 5.5 come profilo principale**: creature, incontri, oggetti, party e SRD sono ottimizzati per fantasy D&D-like, senza mescolare il regolamento con il canone del mondo.
+- **Regione giocabile**: ponte tra worldbuilding profondo e tavolo, con luoghi, poteri, pressioni, segreti, missioni e materiale player-safe.
+- **Compatibilita 5.5e sobria**: creature, incontri, oggetti, party e riferimenti SRD sono pensati per fantasy D&D-like, ma restano scaffolding operativo e non una ripubblicazione completa del regolamento.
 - **Markdown-first**: i contenuti restano nel vault dell'utente.
 - **Release pulita**: il vault può generare una copia consegnabile con `npm run release:clean`.
 
-## Primi 5 Minuti
+## Primo Avvio In 5 Minuti
 
 1. Scarica lo ZIP della release.
-2. Estrai lo ZIP e apri la cartella in Obsidian.
-3. Vai su [[Inizia Qui]].
-4. Se Obsidian chiede conferma per gli strumenti inclusi nel vault, abilitali solo se hai scaricato da fonte affidabile.
-5. Parti da [[Inizia Qui]]. Apri [[Risorse/Setup Guidato]] solo se pulsanti, tabelle o pagina iniziale non rispondono.
-6. Clicca **Crea Il Mondo** in [[Inizia Qui]].
-7. Crea o scegli un mondo homebrew e compila Codex, Atlante e prime entità.
-8. Trasforma quel mondo in campagna, avventura o sessione.
-9. Collega almeno tre ancore mondo alla sessione: mondo, luogo, potere/PNG, missione, clock, mappa o scena.
-10. Apri **Gioca** quando vai al tavolo.
+2. Estrai lo ZIP, apri la cartella in Obsidian e abilita gli strumenti inclusi solo se la release arriva da fonte affidabile.
+3. Vai su [[Inizia Qui]]. Apri [[Risorse/Setup Guidato]] solo se pulsanti, tabelle o pagina iniziale non rispondono.
+4. Scegli una strada: **Prima sessione** per giocare subito, **Crea mondo** per fondare l'ambientazione, **Regione giocabile** per rendere un territorio pronto al tavolo.
+5. Quando hai obiettivo, luogo, pressione e materiale essenziale, passa a **Prepara sessione**, poi **Gioca**, poi **Chiudi e aggiorna**.
 
 ## Aspetto GDR
 
@@ -46,38 +42,39 @@ Lo snippet non aggiunge dipendenze. Migliora dashboard, callout, card, pulsanti 
 
 ## Demo Inclusa Nella Release
 
-La demo non vive nel repository come note da mantenere a mano. Quando serve una release con esempio pronto, il manutentore genera lo ZIP con:
+La demo non vive nel repository come note da mantenere a mano. La release senza demo si crea con `npm run release:clean`; quella con demo si crea con:
 
 ```bash
 npm run release:demo
 ```
 
-La demo crea `Demo Regno Di Prova.md` dentro la release pulita e mostra un percorso minimo: mondo, campagna, luogo, fazione, missione, sessione, clock, incontro, creatura, oggetto, dispensa e conseguenza propagabile.
+La demo crea `Demo Regno Di Prova.md` dentro la release pulita e mostra un percorso minimo ma completo: mondo, regione giocabile, campagna, tre luoghi, cultura locale, tre fazioni, conflitto, segreto DM separato dal materiale player-safe, missione, sessione, clock, incontro, creatura, oggetto, dispensa e conseguenza propagabile.
 
 ## Flusso Rapido
 
 1. Apri il vault in Obsidian e vai su [[Inizia Qui]].
-2. Clicca **Crea Il Mondo**.
-3. Crea o apri il Codex del mondo.
-4. Clicca **Trasforma In Gioco** per derivare campagna, avventura o sessione.
-5. Collega almeno tre ancore mondo, poi completa: obiettivo, prima scena, scelta, pressione, materiale.
-6. Clicca **Gioca**.
-7. Dopo la partita clicca **Aggiorna il mondo**.
+2. Clicca **Prima sessione** se vuoi arrivare subito al tavolo, oppure **Crea mondo** se devi fondare l'ambientazione.
+3. Prepara solo il minimo giocabile: obiettivo, apertura, luogo, PNG, pressione e materiale essenziale.
+4. Clicca **Gioca**.
+5. Dopo la partita clicca **Chiudi e aggiorna**.
+6. Usa **Regione giocabile** quando una zona deve reggere piu sessioni senza diventare enciclopedia.
+7. Usa Worldbuilder, Bibbia del Mondo, Atlante e Canone solo quando una domanda del tavolo richiede profondita.
 
 Se dashboard, pulsanti o tabelle non funzionano, apri [[Risorse/Primo Avvio Strumenti]], [[Risorse/FAQ]] e poi [[Risorse/Se Qualcosa Non Funziona]].
 
 ## Flusso Consigliato
 
 1. Crea o apri un mondo dalla [[Worldbuilder Dashboard]].
-2. Costruisci il Codex: luoghi, culture, lingue, storia, poteri, religioni, relazioni, risorse, mappe e misteri.
-3. Trasforma il mondo in campagna o avventura da [[Campagna da Ambientazione]].
-4. Prepara la prossima sessione con [[Risorse/Preparazione Sessione]] solo quando ha almeno tre ancore mondo.
-5. Crea entita utili al mondo e al tavolo: PNG, luoghi, missioni, incontri, oggetti, dispense, culture, conflitti, rotte, risorse e relazioni.
-6. Collega le note usando i campi interattivi.
-7. Durante il gioco usa [[Hub/Durante il Gioco]] per appunti, timer, PNG attivi, incontri pronti, dispense e Inbox Live.
-8. Usa clock e progress track in [[Mondi/Tracciati/Tracciati]] quando una minaccia, un viaggio o un rituale deve avanzare in modo visibile.
-9. Dopo la sessione apri [[Risorse/Post Sessione Guidato]]: canonizza eventi, aggiorna mondo/missioni/tracciati e scegli la prossima sessione attiva.
-10. Apri [[Hub/Cosa Succede Fuori Scena]] per decidere quali PNG, fazioni, missioni e clock reagiscono prima della sessione successiva.
+2. Usa [[Risorse/Regione Giocabile]] per dare al primo territorio luoghi, poteri, pressioni, segreti e uscita verso sessione.
+3. Costruisci il Codex: culture, lingue, storia, poteri, religioni, relazioni, risorse, mappe e misteri solo quando servono.
+4. Trasforma il mondo in campagna o avventura da [[Campagna da Ambientazione]].
+5. Prepara la prossima sessione con [[Risorse/Preparazione Sessione]] solo quando ha almeno tre ancore mondo.
+6. Crea entita utili al mondo e al tavolo: PNG, luoghi, missioni, incontri, oggetti, dispense, culture, conflitti, rotte, risorse e relazioni.
+7. Collega le note usando i campi interattivi.
+8. Durante il gioco usa [[Hub/Durante il Gioco]] per appunti, timer, PNG attivi, incontri pronti, dispense e Inbox Live.
+9. Usa clock e progress track in [[Mondi/Tracciati/Tracciati]] quando una minaccia, un viaggio o un rituale deve avanzare in modo visibile.
+10. Dopo la sessione apri [[Risorse/Post Sessione Guidato]]: canonizza eventi, aggiorna mondo/missioni/tracciati e scegli la prossima sessione attiva.
+11. Apri [[Hub/Cosa Succede Fuori Scena]] per decidere quali PNG, fazioni, missioni e clock reagiscono prima della sessione successiva.
 
 ## Dove Trovare Le Cose
 
@@ -95,7 +92,7 @@ Se dashboard, pulsanti o tabelle non funzionano, apri [[Risorse/Primo Avvio Stru
 - `Inbox`: idee grezze e appunti non ancora sistemati.
 - `Giocatori`: area dedicata a materiale condivisibile.
 - `Vista Giocatori`: portale sicuro per i giocatori, pronto per tavolo, stream o pubblicazione selettiva.
-- `Quality Report`: controllo visuale di copertura, note incomplete e materiale pronto per screenshot.
+- `Quality Report`: controllo visuale di copertura, note incomplete e materiale pronto da condividere.
 - `Post Sessione Guidato`: percorso per consolidare quello che e successo al tavolo.
 
 ## Mondo, Campagna E Risorse
@@ -110,6 +107,7 @@ Se dashboard, pulsanti o tabelle non funzionano, apri [[Risorse/Primo Avvio Stru
 - [[Motore Mondo Vivo]] e il layer sistemico sopra gli strumenti DM: mostra propagazione eventi, dinamiche di fazione, relationship graph, causalita storica e continuita da chiudere prima della prossima sessione.
 - [[Hub/Cosa Succede Fuori Scena]] e la vista pratica per il dopo sessione: mostra pressioni urgenti, clock quasi pieni, missioni in stallo, segreti da collegare e conseguenze non propagate.
 - `Mondi/Relazioni` contiene alleanze, rivalita, trattati, vassallaggi, debiti e faide quando un legame deve avere stato, intensita, conseguenze e propagazione propria.
+- [[Risorse/Regione Giocabile]] controlla se un territorio ha abbastanza geografia, poteri, cultura, pressione, mistero e uscita player-safe per arrivare al tavolo.
 - [[Campagna da Ambientazione]] trasforma regioni e conflitti in campagne, archi narrativi, fronti e opportunita di avventura.
 - [[Mondi/Stato del Mondo]] e la vista Stato Campagna: filtra per mondo o campagna e mostra missioni aperte, clock attivi, PNG mossi fuori scena, pressioni e conseguenze.
 
@@ -127,8 +125,9 @@ Se dashboard, pulsanti o tabelle non funzionano, apri [[Risorse/Primo Avvio Stru
 - Quando crei una nuova entità, scegli la creazione rapida se ti serve giocare subito: i collegamenti e i dettagli opzionali si aggiungono dopo dalla scheda. Vedi [[Risorse/Creazione Guidata Entità]].
 - Usa `Nuovo Clock` per creare un tracciato quando una pressione deve avanzare a segmenti invece di restare una nota testuale.
 - Apri [[Risorse/Come Usare I Clock]] se vuoi tre esempi pratici: minaccia, viaggio e rituale.
-- Mantieni `SRD` separato dal contenuto canonico: è riferimento regolamentare, non ambientazione.
-- Mantieni il worldbuilding portabile in `Mondi`, `Campagne`, `Hub` e `Risorse`, ma considera D&D 5.5/SRD il profilo regolamentare principale per creature, incontri, oggetti, party e prep.
+- Mantieni `SRD` separato dal contenuto canonico: e riferimento regolamentare, non ambientazione.
+- Mantieni il worldbuilding portabile in `Mondi`, `Campagne`, `Hub` e `Risorse`, ma considera D&D 5.5-compatible il profilo meccanico principale per creature, incontri, oggetti, party e prep.
+- Distingui sempre tre livelli: `SRD` come riferimento CC-BY-4.0, opzioni starter del vault come scaffolding compatibile, canone del mondo come materiale homebrew.
 
 ## Manutenzione Leggera
 
@@ -138,7 +137,7 @@ Se dashboard, pulsanti o tabelle non funzionano, apri [[Risorse/Primo Avvio Stru
 - Il layer operativo interno e documentato in [[Dev/Sviluppo Vault]]: input Meta Bind, pulsanti, wizard, JS views e fileClass.
 - Per controlli e sviluppo del vault, vedi [[Dev/Sviluppo Vault]].
 - Per preparare una release o una copia pulita, apri [[Dev/RELEASE]] e [[Risorse/Controllo Vault]].
-- Per creare una copia consegnabile, apri [[Dev/Release Pulita]] o usa `npm run release:clean`.
+- Per creare una copia consegnabile, usa `npm run release:clean`; per includere la demo generata usa `npm run release:demo`.
 - Per importare mappe esterne come bozze, apri [[Risorse/Importare Mappe]] o usa `npm run import:azgaar`.
 - Non modificare manualmente le note in `SRD` nella release: sono un riferimento regolamentare separato e possono essere rigenerate.
 
@@ -165,19 +164,19 @@ npm run release:clean
 npm run release:demo
 ```
 
-`npm run check` valida plugin obbligatori, link, template Meta Bind, helper Templater, file del layer interno, input template, pulsanti, preset Metadata Menu, igiene del repository e sintassi di tooling, runtime `z.automazioni` e `z.engine`. `npm run sync:sources` materializza gli output ignorati necessari al vault locale. `npm run release:clean` rigenera i template runtime da TemplateFactory prima di creare la copia consegnabile. `npm run release:demo` crea la stessa release includendo la demo generata nello ZIP. `npm run clean:repo` rimuove solo artefatti locali e temporanei ignorati.
+`npm run check` valida pipeline dichiarativa, plugin obbligatori, link, template Meta Bind, helper Templater, file del layer interno, input template, pulsanti, preset Metadata Menu, igiene del repository, sintassi tooling e contratti runtime statici. Non sostituisce uno smoke visuale in Obsidian quando si prepara una release pubblica. `npm run sync:sources` materializza gli output ignorati necessari al vault locale. `npm run release:clean` rigenera i template runtime da TemplateFactory prima di creare la copia consegnabile. `npm run release:demo` crea la stessa release includendo la demo generata nello ZIP. `npm run clean:repo` rimuove solo artefatti locali e temporanei ignorati.
 
 
 
 ## Per Chi E Pensato
 
 - DM e worldbuilder che vogliono preparare e giocare da Obsidian.
-- Campagne fantasy con impronta principale D&D 5.5/SRD e worldbuilding abbastanza pulito da restare adattabile.
+- Campagne fantasy con impronta principale D&D 5.5-compatible e worldbuilding abbastanza pulito da restare adattabile.
 - Utenti non tecnici che preferiscono pulsanti, dashboard e campi guidati.
 
 ## SRD
 
-`SRD` contiene il System Reference Document 5.2.1 in italiano come archivio regolamentare separato dal contenuto del mondo. Non e sorgente tracciato: viene rigenerato nella release pulita da `Dev/TemplateFactory/tools/import_srd.js`. La procedura tecnica sta in [[Dev/Sviluppo Vault]].
+`SRD` contiene il System Reference Document 5.2.1 in italiano come archivio regolamentare separato dal contenuto del mondo. Non e sorgente tracciato: viene rigenerato nella release pulita da `Dev/TemplateFactory/tools/import_srd.js`. I dati runtime per PG, creature, incontri e oggetti sono scaffolding D&D 5.5-compatible: possono usare riferimenti SRD, ma non vanno letti come canone del mondo o come ripubblicazione completa del regolamento. La procedura tecnica sta in [[Dev/Sviluppo Vault]].
 
 ## Licenza
 

@@ -4,11 +4,14 @@ version: 0.1.0
 first_run_pages:
   - Inizia Qui.md
   - Risorse/Setup Guidato.md
+  - Risorse/Prima Sessione In 15 Minuti.md
   - Hub/1. DM Dashboard.md
+  - Risorse/Preparazione Sessione.md
   - Hub/Durante il Gioco.md
   - Risorse/Post Sessione Guidato.md
   - Hub/Cosa Succede Fuori Scena.md
   - Hub/Worldbuilder Dashboard.md
+  - Risorse/Regione Giocabile.md
   - Hub/Vista Giocatori.md
   - Risorse/Quality Report.md
 ux_surface_checks:
@@ -46,12 +49,25 @@ ux_surface_checks:
       any:
         - Torna all'inizio
         - Crea mondo
+    - page: Risorse/Prima Sessione In 15 Minuti.md
+      all:
+        - Prima Sessione In 15 Minuti
+      any:
+        - Nuova sessione
+        - Gioca
+        - Chiudi sessione
     - page: Hub/1. DM Dashboard.md
       all:
         - DM Dashboard
       any:
         - Durante il gioco
         - Preparazione sessione
+    - page: Risorse/Preparazione Sessione.md
+      all:
+        - Preparazione Sessione
+      any:
+        - Nuova sessione
+        - Apri tavolo
     - page: Hub/Durante il Gioco.md
       all:
         - Durante il Gioco
@@ -76,8 +92,16 @@ ux_surface_checks:
         - Worldbuilder Dashboard
       any:
         - Crea mondo
+        - Regione giocabile
         - Nuova cultura
         - Nuovo luogo
+    - page: Risorse/Regione Giocabile.md
+      all:
+        - Regione Giocabile
+      any:
+        - Nuovo luogo
+        - Nuova missione
+        - Campagna da regione
     - page: Hub/Vista Giocatori.md
       all:
         - Vista Giocatori
@@ -91,6 +115,42 @@ ux_surface_checks:
       any:
         - Controllo vault
         - Copertura
+  required_clickable_buttons_by_page:
+    - page: Inizia Qui.md
+      all:
+        - Nuovo Mondo Homebrew
+        - Prima Sessione In 15 Minuti
+        - Preparazione Sessione
+        - Gioca
+    - page: Risorse/Prima Sessione In 15 Minuti.md
+      all:
+        - Nuova Sessione
+        - Durante Il Gioco
+        - Post Sessione Guidato
+    - page: Risorse/Preparazione Sessione.md
+      all:
+        - Nuova Sessione
+        - Durante Il Gioco
+    - page: Hub/Durante il Gioco.md
+      all:
+        - Appunto Live
+        - Registra Scelta Mondo
+        - Chiudi Sessione Viva
+    - page: Risorse/Post Sessione Guidato.md
+      all:
+        - Chiudi Sessione Viva
+        - Applica Conseguenza
+        - Propaga A Entita
+    - page: Hub/Worldbuilder Dashboard.md
+      all:
+        - Regione Giocabile
+    - page: Risorse/Regione Giocabile.md
+      all:
+        - Nuovo Luogo
+        - Nuova Fazione
+        - Nuovo Conflitto
+        - Nuova Missione
+        - Nuova Sessione
 plugin_runtime_probes:
   - id: dataview
     commands_any:

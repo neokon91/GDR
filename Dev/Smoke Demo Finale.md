@@ -10,9 +10,9 @@ stato: sospeso
 
 La demo finale non vive più come note sorgente mantenute a mano.
 
-Regola attiva: la demo finale non vive nel sorgente. Va generata da script dentro `dist/` dopo la creazione della release pulita. Il contratto dichiarativo vive in `Dev/TemplateFactory/modules/demo_contract.yaml` ed e verificato da `npm run check:demo-contract`.
+Regola attiva: la demo finale non vive nel sorgente. Per una release consegnabile con demo usa `npm run release:demo`, che crea la release pulita e inserisce la demo nello ZIP. Il contratto dichiarativo vive in `Dev/TemplateFactory/modules/demo_contract.yaml` ed e verificato da `npm run check:demo-contract`.
 
-La fixture di continuita generata da `npm run generate:demo-fixture` resta prova tecnica: scelta -> conseguenza -> propagazione -> materiale D&D collegato al mondo. La demo utente "Regno di Prova" si genera con `npm run generate:demo-world` dentro `dist/vault-gdr-clean`, non si mantiene in `Mondi/`.
+La fixture di continuita generata da `npm run generate:demo-fixture` resta prova tecnica: scelta -> conseguenza -> propagazione -> materiale D&D collegato al mondo. Il generatore diretto `npm run generate:demo-world` serve solo per manutenzione o debug dentro `dist/vault-gdr-clean`; non e il percorso normale per produrre uno ZIP consegnabile. Include una regione giocabile completa per provare worldbuilding profondo senza creare note sorgente manuali.
 
 ## Stato
 
@@ -31,12 +31,21 @@ La fixture di continuita generata da `npm run generate:demo-fixture` resta prova
 
 La demo finale deve essere generata da script e poi verificata, non corretta nota per nota.
 
-`npm run generate:demo-world -- --out dist/vault-gdr-clean --force` produce almeno:
+Percorso normale per la release demo:
+
+```bash
+npm run release:demo
+```
+
+Per debug del solo generatore, dopo una release pulita locale, `npm run generate:demo-world -- --out dist/vault-gdr-clean --force` produce almeno:
 
 - mondo;
+- regione giocabile con tre luoghi;
 - campagna;
-- luogo;
-- fazione;
+- cultura locale;
+- tre fazioni;
+- conflitto;
+- segreto DM con indizi player-safe;
 - missione;
 - sessione;
 - tracciato;

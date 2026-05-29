@@ -206,6 +206,8 @@ forbidden_paths:
 forbidden_text_markers:
   - idea_originale_riservata
   - non_inclusa_nella_licenza_generale_del_vault
+  - FantasyWorld
+  - "source_lab:"
   - "source_lab: /Users/andrea/Desktop/projects/FantasyWorld"
   - assi_tematici_fazione
   - assi_tematici_magia
@@ -257,4 +259,8 @@ runtime_template_modules:
 leggimi_markers:
   - Apri questa cartella in Obsidian
   - Vista Giocatori
+  - Regione Giocabile
   - Quality Report
+  - Non e una app standalone
+  - rules engine completo
+  - SRD 5.2.1
