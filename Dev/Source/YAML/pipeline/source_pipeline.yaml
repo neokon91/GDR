@@ -121,14 +121,15 @@ steps:
     purpose: Genera quick_actions.json da workflows.yaml.
     sources:
       - Dev/Source/YAML/json/workflows.yaml
+      - Dev/Tools/python/render_workflow_data.py
     outputs:
       - z.automazioni/data/workflows/quick_actions.json
     render:
-      - node
-      - Dev/Tools/node-legacy/generate_workflow_data.js
+      - python3
+      - Dev/Tools/python/render_workflow_data.py
     check:
-      - node
-      - Dev/Tools/node-legacy/generate_workflow_data.js
+      - python3
+      - Dev/Tools/python/render_workflow_data.py
       - --check
   runtime_plugin_profile:
     purpose: Genera il profilo runtime dei plugin usato da troubleshooting, workflow fallback e readiness.
