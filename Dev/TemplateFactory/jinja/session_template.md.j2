@@ -1,3 +1,4 @@
+{% import "macros/dataview_blocks.j2" as dvw -%}
 {{ templater_entry | default("<% await tp.user.sessione(tp) %>") }}
 # `=this.nome`
 
@@ -16,10 +17,7 @@ tab: Prepara
 > Materiale pronto: `INPUT[inlineList:materiale_pronto]`
 
 > [!regia]- Check Prep
-> ```dataviewjs
-> const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
-> gdr.renderPlayableOutline(dv, dv.current());
-> ```
+{{ dvw.quoted_runtime_block(modules.dataview_blocks.blocks.playable_outline) }}
 
 tab: Ancore
 
@@ -44,10 +42,7 @@ tab: Ancore
 > Sezioni collegate: `INPUT[sezioni_collegate][:sezioni_collegate]`
 
 > [!regia]- Rete Sessione
-> ```dataviewjs
-> const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
-> gdr.renderSessionAnchorCards(dv, dv.current());
-> ```
+{{ dvw.quoted_runtime_block(modules.dataview_blocks.blocks.session_anchor_cards) }}
 
 > [!lettura]- Bases Per Correzione
 > Apri la base coerente quando devi correggere piu note collegate alla sessione:
@@ -96,10 +91,7 @@ tab: Tavolo
 > Tag: `INPUT[tags][:tags]`
 
 > [!regia]- Vista Materiali
-> ```dataviewjs
-> const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
-> gdr.renderSessionMaterialCards(dv, dv.current());
-> ```
+{{ dvw.quoted_runtime_block(modules.dataview_blocks.blocks.session_material_cards) }}
 
 > [!todo]- Task Preparazione
 > ```tasks
@@ -132,10 +124,7 @@ tab: Mappa
 > - [[Risorse/Canvas Per GDR]] definisce quando usare Canvas per reti di scena con nodi canonici.
 
 > [!regia]- Mappe Sessione
-> ```dataviewjs
-> const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
-> gdr.renderSessionMapCards(dv, dv.current());
-> ```
+{{ dvw.quoted_runtime_block(modules.dataview_blocks.blocks.session_map_cards) }}
 
 tab: Live
 
@@ -158,10 +147,7 @@ tab: Live
 > Propaga a: `INPUT[propaga_a][:propaga_a]`
 
 > [!regia]- Stato Live
-> ```dataviewjs
-> const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
-> gdr.renderSessionLiveCards(dv, dv.current());
-> ```
+{{ dvw.quoted_runtime_block(modules.dataview_blocks.blocks.session_live_cards) }}
 
 tab: Dopo
 
@@ -191,15 +177,10 @@ tab: Dopo
 > ```
 
 > [!regia]- Chiusura Sessione
-> ```dataviewjs
-> const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
-> gdr.renderSessionPostCards(dv, dv.current());
-> ```
+{{ dvw.quoted_runtime_block(modules.dataview_blocks.blocks.session_post_cards) }}
 ````
 
-```dataviewjs
-{{ modules.dataview_blocks.blocks.playable_outline.code }}
-```
+{{ dvw.fenced_runtime_block(modules.dataview_blocks.blocks.playable_outline) }}
 
 ## Fallback Markdown
 

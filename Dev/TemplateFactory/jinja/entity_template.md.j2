@@ -1,3 +1,4 @@
+{% import "macros/dataview_blocks.j2" as dvw -%}
 {{ templater_entry | default("<% await tp.user.world_entity(tp) %>") }}
 # `=this.nome`
 
@@ -49,9 +50,7 @@ tab: Connessioni
 > INPUT[inlineListSuggester(optionQuery("Mondi"), useLinks(partial), allowOther):connessioni]
 > ```
 
-```dataview
-{{ modules.dataview_blocks.blocks.linked_connections_table.code }}
-```
+{{ dvw.fenced_block(modules.dataview_blocks.blocks.linked_connections_table) }}
 
 > [!timer]- Propagazione
 > Entita impattate:
@@ -83,13 +82,9 @@ tab: Articolo
 
 tab: Controllo
 
-```dataviewjs
-{{ modules.dataview_blocks.blocks.feedback_creazione.code }}
-```
+{{ dvw.fenced_runtime_block(modules.dataview_blocks.blocks.feedback_creazione, "dv") }}
 
-```dataviewjs
-{{ modules.dataview_blocks.blocks.world_impact.code }}
-```
+{{ dvw.fenced_runtime_block(modules.dataview_blocks.blocks.world_impact, "dv") }}
 ````
 
 ## Fallback Markdown

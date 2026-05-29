@@ -48,11 +48,12 @@ def validate_plugin_surface_contracts(modules: dict[str, dict], errors: list[str
         for callout in modules["callouts"].get("callouts", {}).values()
         if callout.get("type")
     }
-    runtime_views = {
+    declared_runtime_views = {
         str(block.get("runtime_view"))
         for block in modules["dataview_blocks"].get("blocks", {}).values()
         if block.get("runtime_view")
     }
+    runtime_views = set(declared_runtime_views)
     for block in modules["dataview_blocks"].get("blocks", {}).values():
         code = str(block.get("code", ""))
         for match in re.finditer(r"gdr\.([A-Za-z0-9_]+)\(", code):
@@ -62,11 +63,20 @@ def validate_plugin_surface_contracts(modules: dict[str, dict], errors: list[str
         for view in modules["bases_views"].get("views", {}).values()
         if view.get("file")
     }
+    required_exports = set(modules.get("runtime_exports", {}).get("required_exports", []) or [])
+
+    for view in sorted(declared_runtime_views):
+        if view not in required_exports:
+            fail(f"dataview_blocks: runtime_view non dichiarata in runtime_exports.yaml ({view})", errors)
 
     for path, text in jinja_text_by_path.items():
         rel_path = path.relative_to(ROOT)
         if "jinja/macros/" in rel_path.as_posix():
             continue
+        if 'app.vault.adapter.read("z.engine/session_views.js")' in text:
+            fail(f"{rel_path}: usare macros/dataview_blocks.j2 per il bridge DataviewJS runtime", errors)
+        if re.search(r"modules\.dataview_blocks\.blocks\.[A-Za-z0-9_]+\.code", text):
+            fail(f"{rel_path}: usare macros/dataview_blocks.j2 invece di leggere .code direttamente", errors)
         for match in re.finditer(r"INPUT\[([^\]]+)\]", text):
             field = metabind_input_field(match.group(1))
             if field and field not in known_fields:

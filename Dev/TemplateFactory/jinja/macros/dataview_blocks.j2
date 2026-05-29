@@ -1,0 +1,36 @@
+{% macro code_fence(language, code) -%}
+```{{ language }}
+{{ code | trim }}
+```
+{%- endmacro %}
+
+{% macro quoted_code_fence(language, code) -%}
+> ```{{ language }}
+> {{ code | trim | replace('\n', '\n> ') }}
+> ```
+{%- endmacro %}
+
+{% macro runtime_call(runtime_view, args="dv, dv.current()") -%}
+const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
+gdr.{{ runtime_view }}({{ args }});
+{%- endmacro %}
+
+{% macro runtime_block(block, args="dv, dv.current()") -%}
+{{ runtime_call(block.runtime_view, args) }}
+{%- endmacro %}
+
+{% macro fenced_block(block) -%}
+{{ code_fence(block.type | default("dataviewjs"), block.code) }}
+{%- endmacro %}
+
+{% macro quoted_block(block) -%}
+{{ quoted_code_fence(block.type | default("dataviewjs"), block.code) }}
+{%- endmacro %}
+
+{% macro fenced_runtime_block(block, args="dv, dv.current()") -%}
+{{ code_fence(block.type | default("dataviewjs"), runtime_block(block, args)) }}
+{%- endmacro %}
+
+{% macro quoted_runtime_block(block, args="dv, dv.current()") -%}
+{{ quoted_code_fence(block.type | default("dataviewjs"), runtime_block(block, args)) }}
+{%- endmacro %}

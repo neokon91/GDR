@@ -157,6 +157,7 @@ required_exports:
   - renderCombatReadiness
   - renderConsequenceCards
   - renderContinuityQueue
+  - renderCreationFeedback
   - renderDnd55MaterialPipeline
   - renderDmDashboardNow
   - renderDmDashboardQueues
@@ -211,6 +212,7 @@ required_exports:
   - renderOffscreenTableBridge
   - renderOnboardingReadiness
   - renderPlayabilityFamilyCards
+  - renderPlayableOutline
   - renderPlayerView
   - renderPluginTroubleshooting
   - renderPreparationAnchorQueues
@@ -238,8 +240,10 @@ required_exports:
   - renderPostSessionSurfaceLinks
   - renderPropagationTargets
   - renderSessionAnchorCards
+  - renderSessionLiveCards
   - renderSessionMapCards
   - renderSessionMaterialCards
+  - renderSessionPostCards
   - renderTableCockpit
   - renderVaultControlCoherence
   - renderVaultControlNow

@@ -17,6 +17,7 @@ blocks:
       | --- | --- | --- | --- | --- |
   feedback_creazione:
     type: dataviewjs
+    runtime_view: renderCreationFeedback
     use_for:
       - controllo
       - world_entity
@@ -30,6 +31,7 @@ blocks:
       - Verificare almeno due connessioni.
   playable_outline:
     type: dataviewjs
+    runtime_view: renderPlayableOutline
     use_for:
       - session
       - scaletta
@@ -362,6 +364,7 @@ blocks:
       | --- | --- |
   world_impact:
     type: dataviewjs
+    runtime_view: renderWorldImpact
     use_for:
       - world_entity
       - propagation

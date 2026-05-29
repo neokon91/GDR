@@ -1,3 +1,4 @@
+{% import "macros/dataview_blocks.j2" as dvw -%}
 {{ templater_entry }}
 # `=this.nome`
 {% set families = blueprint.get("target_family", []) %}
@@ -98,9 +99,7 @@ tab: Connessioni
 {% endif %}
 
 > [!conflitto]- Note Che Puntano Qui
-> ```dataview
-> {{ modules.dataview_blocks.blocks.linked_connections_table.code | replace('\n', '\n> ') }}
-> ```
+{{ dvw.quoted_block(modules.dataview_blocks.blocks.linked_connections_table) }}
 
 > [!regia]- Base Editabile
 > Apri la base coerente con la famiglia della nota quando devi correggere molti campi insieme.
@@ -135,10 +134,7 @@ tab: Territorio
 > - [[Risorse/Canvas Per GDR]] serve per reti di quartiere, dungeon, rotte o fronti territoriali.
 
 > [!regia]- Stato Luogo
-> ```dataviewjs
-> const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
-> gdr.renderPlayabilityFamilyCards(dv, dv.current(), "luogo");
-> ```
+{{ dvw.quoted_runtime_block(modules.dataview_blocks.blocks.playability_family_cards, 'dv, dv.current(), "luogo"') }}
 
 {% endif %}
 {% if is_faction %}
@@ -162,10 +158,7 @@ tab: Potere
 > Pressione: `INPUT[pressione][:pressione]`
 
 > [!regia]- Stato Fazione
-> ```dataviewjs
-> const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
-> gdr.renderPlayabilityFamilyCards(dv, dv.current(), "fazione");
-> ```
+{{ dvw.quoted_runtime_block(modules.dataview_blocks.blocks.playability_family_cards, 'dv, dv.current(), "fazione"') }}
 
 {% endif %}
 {% if blueprint_name == "pg" %}
@@ -190,10 +183,7 @@ tab: PNG
 > INPUT[list:segreti_rivelati]
 
 > [!regia]- Stato PNG
-> ```dataviewjs
-> const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
-> gdr.renderPlayabilityFamilyCards(dv, dv.current(), "png");
-> ```
+{{ dvw.quoted_runtime_block(modules.dataview_blocks.blocks.playability_family_cards, 'dv, dv.current(), "png"') }}
 
 {% endif %}
 {% if is_relation %}
@@ -214,10 +204,7 @@ tab: Legame
 > Cosa lo rafforza: `INPUT[text:rinforzo]`
 
 > [!regia]- Stato Relazione
-> ```dataviewjs
-> const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
-> gdr.renderPlayabilityFamilyCards(dv, dv.current(), "relazione");
-> ```
+{{ dvw.quoted_runtime_block(modules.dataview_blocks.blocks.playability_family_cards, 'dv, dv.current(), "relazione"') }}
 
 {% endif %}
 {% if is_track %}
@@ -242,10 +229,7 @@ tab: Clock
 > ```
 
 > [!regia]- Stato Tracciato
-> ```dataviewjs
-> const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
-> gdr.renderPlayabilityFamilyCards(dv, dv.current(), "tracciato");
-> ```
+{{ dvw.quoted_runtime_block(modules.dataview_blocks.blocks.playability_family_cards, 'dv, dv.current(), "tracciato"') }}
 
 {% endif %}
 {% if is_continuity %}
@@ -270,10 +254,7 @@ tab: Continuita
 > Versione player-safe: `INPUT[text:versione_player_safe]`
 
 > [!regia]- Stato Continuita
-> ```dataviewjs
-> const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
-> gdr.renderPlayabilityFamilyCards(dv, dv.current(), "continuita");
-> ```
+{{ dvw.quoted_runtime_block(modules.dataview_blocks.blocks.playability_family_cards, 'dv, dv.current(), "continuita"') }}
 
 {% endif %}
 
@@ -293,15 +274,11 @@ tab: Pubblicazione
 tab: Controllo
 
 > [!regia] Qualita Scheda
-> ```dataviewjs
-> {{ modules.dataview_blocks.blocks.feedback_creazione.code | replace('\n', '\n> ') }}
-> ```
+{{ dvw.quoted_runtime_block(modules.dataview_blocks.blocks.feedback_creazione, "dv") }}
 
 {% if blueprint.get("world_impact", true) %}
 > [!timer] Impatto Sul Mondo
-> ```dataviewjs
-> {{ modules.dataview_blocks.blocks.world_impact.code | replace('\n', '\n> ') }}
-> ```
+{{ dvw.quoted_runtime_block(modules.dataview_blocks.blocks.world_impact, "dv") }}
 {% endif %}
 ````
 
