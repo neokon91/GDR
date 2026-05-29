@@ -1,5 +1,5 @@
 id: release_quality_contract
-purpose: Contratto dei gate statici applicati alla release pulita prima dello smoke live.
+purpose: Contratto dei gate statici applicati alla release pulita prima del test manuale di apertura Obsidian.
 version: 0.1.0
 first_run_pages:
   - Inizia Qui.md

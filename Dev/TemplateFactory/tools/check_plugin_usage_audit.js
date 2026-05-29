@@ -11,7 +11,7 @@ const ROOT = process.cwd();
 const MATRIX = "Dev/TemplateFactory/modules/plugin_matrix.yaml";
 const CONTRACTS = "Dev/TemplateFactory/modules/plugin_contracts.yaml";
 const BINDINGS = "Dev/TemplateFactory/modules/plugin_bindings.yaml";
-const LIVE_ACCEPTANCE = "Dev/TemplateFactory/modules/live_acceptance.yaml";
+const MANUAL_ACCEPTANCE = "Dev/TemplateFactory/modules/manual_acceptance.yaml";
 
 function loadYaml(relPath) {
     const script = [
@@ -176,13 +176,13 @@ const matrixSource = loadYaml(MATRIX);
 const matrix = matrixSource.plugins ?? [];
 const contracts = loadYaml(CONTRACTS).plugins ?? [];
 const bindings = loadYaml(BINDINGS).bindings ?? {};
-const liveAcceptance = loadYaml(LIVE_ACCEPTANCE);
+const manualAcceptance = loadYaml(MANUAL_ACCEPTANCE);
 const policy = loadPolicy(matrixSource, errors);
 const generatedTargets = loadGeneratedTargets();
 const virtualUserPaths = loadVirtualUserPaths();
 const releaseProfile = releasePluginProfile(ROOT, loadReleaseBoundary(ROOT));
 const releaseEnabledPlugins = releaseProfile.enabledPluginSet;
-const runtimeProbeIds = new Set((liveAcceptance.plugin_runtime_probes ?? []).map(probe => String(probe.id ?? "").trim()).filter(Boolean));
+const runtimeProbeIds = new Set((manualAcceptance.plugin_runtime_probes ?? []).map(probe => String(probe.id ?? "").trim()).filter(Boolean));
 
 const matrixById = new Map(matrix.map(entry => [entry.id, entry]));
 const contractById = new Map(contracts.map(entry => [entry.id, entry]));
@@ -246,7 +246,7 @@ for (const pluginId of community) {
         errors.push(`${pluginId}: plugin manutenzione non approvato esplicitamente`);
     }
     if (isReleaseEnabled && policy.releaseEnabled.requireRuntimeProbe && !runtimeProbeIds.has(pluginId)) {
-        errors.push(`${pluginId}: plugin incluso in release senza plugin_runtime_probes in ${LIVE_ACCEPTANCE}`);
+        errors.push(`${pluginId}: plugin incluso in release senza plugin_runtime_probes in ${MANUAL_ACCEPTANCE}`);
     }
 
     const searchableText = [

@@ -98,6 +98,8 @@ npm run audit:templates
 
 `release:clean` materializza `SRD`, `z.modelli`, `z.bacheche`, `z.bases` e `z.fileclass` direttamente dentro `dist/vault-gdr-clean`: il repo sorgente non deve tracciare superfici Obsidian generate.
 
+`prepare:manual-release-test` crea una release locale in `dist/vault-gdr-manual-test` e una checklist di feedback senza avviare Obsidian. I vecchi check live sono stati ridotti a questo percorso manuale.
+
 `audit:templates` confronta anteprime locali e target dichiarati in `template_blueprints.yaml`; il report resta output locale ignorato.
 
 `render:metadata` produce anteprime fileClass/Bases a partire da `frontmatter_profiles.yaml` e `bases_views.yaml`. `npm run sync:sources` usa il check in memoria; la materializzazione reale avviene in release.

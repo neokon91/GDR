@@ -1,5 +1,5 @@
-id: live_acceptance
-purpose: Scenari di accettazione live per Obsidian reale in profilo isolato.
+id: manual_acceptance
+purpose: Checklist di accettazione manuale per aprire una release Obsidian preparata staticamente, senza harness live automatico.
 version: 0.1.0
 first_run_pages:
   - Inizia Qui.md

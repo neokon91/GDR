@@ -162,9 +162,10 @@ npm run import:srd-data
 npm run import:azgaar
 npm run release:clean
 npm run release:demo
+npm run prepare:manual-release-test
 ```
 
-`npm run check` valida pipeline dichiarativa, plugin obbligatori, link, template Meta Bind, helper Templater, file del layer interno, input template, pulsanti, preset Metadata Menu, igiene del repository, sintassi tooling e contratti runtime statici. Non sostituisce uno smoke visuale in Obsidian quando si prepara una release pubblica. `npm run sync:sources` materializza gli output ignorati necessari al vault locale. `npm run release:clean` rigenera i template runtime da TemplateFactory prima di creare la copia consegnabile. `npm run release:demo` crea la stessa release includendo la demo generata nello ZIP. `npm run clean:repo` rimuove solo artefatti locali e temporanei ignorati.
+`npm run check` valida pipeline dichiarativa, plugin obbligatori, link, template Meta Bind, helper Templater, file del layer interno, input template, pulsanti, preset Metadata Menu, igiene del repository, sintassi tooling e contratti runtime statici. Non apre Obsidian. Per una prova umana della release usa `npm run prepare:manual-release-test`, poi apri manualmente la cartella indicata e rimanda il feedback. `npm run sync:sources` materializza gli output ignorati necessari al vault locale. `npm run release:clean` rigenera i template runtime da TemplateFactory prima di creare la copia consegnabile. `npm run release:demo` crea la stessa release includendo la demo generata nello ZIP. `npm run clean:repo` rimuove solo artefatti locali e temporanei ignorati.
 
 
 

@@ -293,7 +293,7 @@ steps:
       - Dev/TemplateFactory/modules/plugin_contracts.yaml
       - Dev/TemplateFactory/modules/plugin_bindings.yaml
       - Dev/TemplateFactory/modules/release_boundary.yaml
-      - Dev/TemplateFactory/modules/live_acceptance.yaml
+      - Dev/TemplateFactory/modules/manual_acceptance.yaml
       - Dev/plugin_matrix.json
       - .obsidian/plugins/obsidian-meta-bind-plugin/data.json
       - z.bacheche/Manutenzione Vault.md
@@ -915,20 +915,20 @@ steps:
       - python3
       - Dev/TemplateFactory/tools/render_release_folder_notes.py
       - --check
-  obsidian_user_acceptance:
-    purpose: Verifica il contratto dello smoke live Obsidian senza aprire l'app.
+  manual_release_acceptance:
+    purpose: Verifica il contratto della checklist manuale Obsidian senza aprire l'app.
     sources:
-      - Dev/TemplateFactory/modules/live_acceptance.yaml
-      - Dev/TemplateFactory/tools/check_obsidian_user_acceptance.js
+      - Dev/TemplateFactory/modules/manual_acceptance.yaml
+      - Dev/TemplateFactory/tools/prepare_manual_release_test.js
     outputs:
       - memoria
     render:
       - node
-      - Dev/TemplateFactory/tools/check_obsidian_user_acceptance.js
+      - Dev/TemplateFactory/tools/prepare_manual_release_test.js
       - --contract-check
     check:
       - node
-      - Dev/TemplateFactory/tools/check_obsidian_user_acceptance.js
+      - Dev/TemplateFactory/tools/prepare_manual_release_test.js
       - --contract-check
   template_previews:
     purpose: Verifica blueprint YAML e Jinja senza materializzare z.modelli nel repo sorgente.

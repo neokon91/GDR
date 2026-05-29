@@ -40,7 +40,7 @@ required_surfaces:
     - Dev/TemplateFactory/modules/naming_contract.yaml
     - Dev/TemplateFactory/modules/frontmatter_profiles.yaml
     - Dev/TemplateFactory/modules/validation_contract.yaml
-    - Dev/TemplateFactory/modules/live_acceptance.yaml
+    - Dev/TemplateFactory/modules/manual_acceptance.yaml
     - Dev/TemplateFactory/modules/runtime_profiles.yaml
     - Dev/TemplateFactory/modules/template_router.yaml
     - Dev/TemplateFactory/modules/world_taxonomy.yaml
