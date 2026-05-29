@@ -904,7 +904,6 @@ function isIndexLikeNote(fileRel) {
         "Mondi/Mondo.md",
         "Mondi/Calendario.md",
         "Mondi/Stato del Mondo.md",
-        "Dev/Indice Connettore GPT.md",
         "Dev/Sviluppo Vault.md",
         "Risorse/Smistamento Bozze Generate.md",
         "Risorse/Guida DM.md",
@@ -1233,11 +1232,6 @@ if (activeSessions.length > 1) {
 warnings.push(...validateRegionPlayabilityGate(realEntries));
 warnings.push(...validateRegionToSessionGate(realEntries));
 
-const gptConnectorIndex = markdownMeta.get("Dev/Indice Connettore GPT.md");
-if (gptConnectorIndex?.is_code_search_indexed !== true) {
-    errors.push("Dev/Indice Connettore GPT.md: manca is_code_search_indexed: true");
-}
-
 const startHereText = readRel("Inizia Qui.md");
 const quickSessionIndex = startHereText.indexOf("Prima Sessione");
 const worldbuildingIndex = Math.max(
@@ -1330,22 +1324,6 @@ if (calendariumCalendars.length) {
         if (!["mondo", "campagna"].includes(fm.categoria)) continue;
         if (hasValue(fm.calendario) && !calendariumNames.has(String(fm.calendario).toLowerCase())) {
             warnings.push(`${fileRel}: calendario preferito non configurato in Calendarium (${fm.calendario})`);
-        }
-    }
-}
-
-const gptIndexRel = "Dev/Indice Connettore GPT.md";
-if (!existsRel(gptIndexRel)) {
-    errors.push("Dev/Indice Connettore GPT.md: file mancante");
-} else {
-    const gptIndexText = readRel(gptIndexRel);
-    const codePathPattern = /`([^`\n]+\.(?:md|js|json|css))`/g;
-    let match;
-
-    while ((match = codePathPattern.exec(gptIndexText))) {
-        const referenced = match[1].trim();
-        if (!existsRel(referenced)) {
-            errors.push(`Dev/Indice Connettore GPT.md: percorso citato mancante ${referenced}`);
         }
     }
 }

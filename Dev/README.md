@@ -2,17 +2,17 @@
 
 Area di sviluppo del vault.
 
-Questa cartella contiene roadmap, changelog, audit, confini release, smoke test e contratti YAML/JS. Non fa parte del percorso primario del DM e non deve entrare nella ZIP utente.
+Questa cartella contiene solo documentazione essenziale, contratti YAML/JS e tooling. Non fa parte del percorso primario del DM e non deve entrare nella ZIP utente.
 
 ## Contenuto
 
 | Area | Uso |
 | --- | --- |
-| `Roadmap/` | Roadmap attiva e storiche. |
-| `TemplateFactory/` | Moduli YAML e schemi Jinja2 per generazione futura dei template. |
-| `Sviluppo Vault.md` | Convenzioni tecniche del vault. |
-| `Confine Release Repository.md` | Cosa entra nella ZIP utente e cosa resta nel repository. |
+| `CHANGELOG.md` | Storia minima delle release e marker verificati. |
+| `RELEASE.md` | Procedura per costruire e validare la ZIP utente. |
 | `Smoke 1.0 Professionale.md` | Smoke visuale pre-release. |
+| `Sviluppo Vault.md` | Convenzioni tecniche e comandi di manutenzione. |
+| `TemplateFactory/` | Moduli YAML, Jinja2 e tooling di generazione. |
 
 ## Contratto Architetturale
 
@@ -31,24 +31,23 @@ Non introdurre web app, backend esterni, database esterni o sistemi fuori da Obs
 
 ## Indice Operativo Di Sviluppo
 
-Usa questa nota come porta d'ingresso. Non duplicare decisioni tecniche in file nuovi se possono stare nei documenti esistenti.
+Usa questa nota come porta d'ingresso. Non creare nuova documentazione stabile se la regola puo vivere in YAML, in un check o in uno dei documenti essenziali.
 
 | Bisogno | Documento canonico |
 | --- | --- |
-| Direzione prodotto e milestone | [[Dev/Roadmap/1.0 Professionale]] |
+| Architettura e confini del sorgente | `source_pipeline.yaml`, `release_boundary.yaml`, `repo_quality_contract.yaml` |
 | Convenzioni tecniche, campi e runtime | [[Dev/Sviluppo Vault]] |
 | Layer Meta Bind, Templater, JS e fileClass | [[Dev/Sviluppo Vault]] |
 | Sintassi e responsabilita plugin | `Dev/TemplateFactory/modules/plugin_bindings.yaml` |
 | Contratti plugin e release | `Dev/TemplateFactory/modules/plugin_matrix.yaml` e `Dev/TemplateFactory/modules/plugin_contracts.yaml` |
-| Confini della ZIP utente | [[Dev/Confine Release Repository]] |
 | Verifica release | [[Dev/RELEASE]] e [[Dev/Smoke 1.0 Professionale]] |
 | Template, YAML e superfici generate | [[Dev/TemplateFactory/README]] |
 | Scheda PG, SRD e output generati | [[Dev/Sviluppo Vault]] |
 
 ## Regole
 
-- Ogni nuova funzione utente deve partire da una decisione in roadmap.
+- Ogni nuova funzione utente deve partire da un contratto YAML o da un check aggiornato.
 - I moduli YAML in `TemplateFactory/modules` devono descrivere dati e integrazioni, non contenere logica fragile.
 - Jinja2 serve per generare template sorgente; Templater resta il runtime dentro Obsidian.
 - Se un file in `Dev/` diventa necessario all'utente finale, va spostato fuori da `Dev/` e aggiunto ai controlli.
-- La documentazione di sviluppo va consolidata aggiornando l'indice qui sopra, non creando una nuova nota scollegata.
+- La documentazione di sviluppo va consolidata qui, in [[Dev/Sviluppo Vault]], in [[Dev/RELEASE]] o nei contratti YAML.

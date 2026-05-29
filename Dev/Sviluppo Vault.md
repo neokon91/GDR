@@ -2,14 +2,14 @@
 
 Questa nota e l'indice tecnico di manutenzione. Non deve duplicare i contratti YAML: quando una regola diventa stabile, vive in `Dev/TemplateFactory/modules/` e viene verificata dai check.
 
-La direzione prodotto e UX operativa attiva sta in [[Dev/Roadmap/1.0 Professionale]]. Se c'e conflitto, prevalgono roadmap attiva, YAML e check.
+Se c'e conflitto, prevalgono YAML, renderer e check. La documentazione storica non e sorgente operativo.
 
 ## Confine
 
 - `README.md`: guida utente, non manuale tecnico.
-- [[Dev/Repository]]: mappa repo, cartelle e comandi.
 - [[Dev/README]]: indice della documentazione di sviluppo.
-- [[Dev/Indice Connettore GPT]]: indice sintetico per code search, con `is_code_search_indexed: true`.
+- [[Dev/RELEASE]]: procedura release.
+- [[Dev/Smoke 1.0 Professionale]]: checklist manuale minima.
 - [[Risorse/Guida DM]]: flusso operativo per il DM, generato e non tecnico.
 - Questa nota: regole minime per non rompere pipeline, runtime, plugin layer e release.
 

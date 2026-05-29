@@ -83,23 +83,16 @@ copy_policy:
   excluded_root_files:
     - .gitignore
     - CHANGELOG.md
-    - CONTRIBUTING.md
     - RELEASE.md
-    - Repository.md
     - package.json
   excluded_files:
     - .DS_Store
   excluded_risorse:
     - Callout GDR.md
-    - Confine Release Repository.md
-    - Indice Connettore GPT.md
     - Importare Mappe.md
     - Media Scene.md
     - Preset Calendario.md
     - Release Pulita.md
-    - Roadmap
-    - Smoke 1.0 Professionale.md
-    - Sviluppo Vault.md
   excluded_automazioni:
     - LICENSE.md
     - README.md

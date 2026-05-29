@@ -19,7 +19,6 @@ policy:
     - .yml
   allowed_historical_paths:
     - Dev/CHANGELOG.md
-    - Dev/Roadmap/1.1 Kernel Architetturale.md
     - Dev/TemplateFactory/modules/naming_contract.yaml
   forbidden_active_terms:
     - term: m11
@@ -52,9 +51,3 @@ policy:
       case_insensitive: false
       rationale: Gli export Dataview devono usare nomi di dominio.
       replacement: renderPlayability
-release_cleanup:
-  obsolete_roadmap_titles:
-    - M9 - Riduzione Attrito
-    - M10 - Consolidamento
-    - M11 - Pipeline
-    - Correggere blocker Templater runtime
