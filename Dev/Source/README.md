@@ -20,6 +20,23 @@ La generazione deve servire il profilo D&D 5.5-compatible con SRD separato senza
 | `Jinja/` | Scheletri Jinja2 per produrre Markdown statico pronto per Obsidian. |
 | `Assets/` | Asset sorgente lunghi o opachi consumati dai renderer. |
 
+## Contratto Source Of Truth
+
+Il formato sorgente deve restare leggibile da una persona e abbastanza strutturato da generare artefatti diversi senza duplicazione. Quando una nuova feature riguarda entita, scelte guidate, cockpit, plugin o qualita, la fonte deve essere un modulo YAML e non una stringa dispersa in JS, Markdown o Jinja.
+
+Il flusso architetturale da rispettare e:
+
+1. `YAML/canonical/` dichiara entita, campi, tassonomie, profili, scelte e regole di validazione.
+2. `YAML/json/` dichiara matrici runtime, cockpit, workflow e configurazioni plugin che diventano JSON piccoli in `z.automazioni/data/`.
+3. `YAML/render/` dichiara superfici Markdown, template, hub, indici, fileClass e Bases da comporre con Jinja.
+4. Jinja e le sue macro assemblano Markdown Obsidian: callout, tabs, Dataview, Meta Bind, fallback leggibile e wrapper Templater.
+5. JS in `z.automazioni/` e `z.engine/` consuma frontmatter e JSON generati per eseguire scelte complesse dentro Obsidian, ad esempio creazione entita, preparazione sessione, cockpit e viste runtime.
+6. I check Python verificano che YAML, JSON, Markdown generato, plugin e runtime restino allineati.
+
+Un modulo YAML ben fatto deve quindi poter alimentare piu superfici: schema frontmatter, wizard di creazione, opzioni Meta Bind, pulsanti, viste Dataview, JSON runtime, template Jinja e gate di qualita. Se una feature richiede un nuovo campo, la modifica corretta e aggiungere il campo al contratto YAML e poi farlo emergere negli output derivati.
+
+I plugin installati sono parte dell'architettura. Callout, Dataview, Meta Bind, Templater, Bases, Tasks, Calendar/Calendarium, Canvas, Excalidraw, Style Settings e gli altri plugin dichiarati vanno considerati disponibili finche un contratto non li classifica come opzionali o manutentivi. Ogni uso plugin deve essere dichiarato in YAML e verificabile: niente dipendenze implicite nascoste in template o script.
+
 ## Pipeline scheda meccanica PG
 
 1. Modificare `YAML/canonical/srd_character_build.yaml` (core + opzioni personaggio).

@@ -27,13 +27,17 @@ Questo repository resta un sistema operativo narrativo dentro Obsidian. Il sourc
 | Layer | Responsabilita |
 | --- | --- |
 | Markdown | Markdown = contenuto umano. |
-| YAML | YAML = stato persistente e regole dichiarative. |
+| YAML | YAML = source of truth umano e macchina: entita, profili, scelte, regole, plugin, output e gate. |
+| JSON generato | JSON generato = matrice runtime piccola, ricostruibile e consumata dal JS dentro Obsidian. |
 | Dataview | Dataview = query layer. |
 | Meta Bind | Meta Bind = interfaccia. |
 | Templater | Templater = generazione. |
+| Jinja2 | Jinja2 = composizione di Markdown statico, macro e fallback leggibili. |
 | Runtime interno | z.engine + z.automazioni = runtime/logica/esecuzione. |
 
 Non introdurre web app, backend esterni, database esterni o sistemi fuori da Obsidian. Se una scelta dei giocatori cambia il mondo, il cambiamento deve finire in frontmatter YAML e diventare visibile attraverso Dataview, dashboard, Meta Bind e controlli.
+
+I plugin installati sono capacita disponibili fino a prova contraria: il progetto deve sfruttare plugin core e community dichiarati nei contratti, degradando solo quando un plugin e marcato opzionale o quando esiste un fallback dichiarato. Non duplicare a mano in JS o Markdown una funzione gia esprimibile con YAML, Jinja, Meta Bind, Dataview, Bases, Tasks, Canvas, Excalidraw, Calendarium o un plugin dichiarato.
 
 ## Indice Operativo Di Sviluppo
 
@@ -53,8 +57,9 @@ Usa questa nota come porta d'ingresso. Non creare nuova documentazione stabile s
 ## Regole
 
 - Ogni nuova funzione utente deve partire da un contratto YAML o da un check aggiornato.
-- I moduli YAML in `Dev/Source/YAML` devono descrivere dati e integrazioni, non contenere logica fragile.
-- Jinja2 serve per generare template sorgente; Templater resta il runtime dentro Obsidian.
+- I moduli YAML in `Dev/Source/YAML` devono descrivere dati, relazioni, scelte, integrazioni plugin e output derivati; non devono contenere logica fragile.
+- Lo stesso YAML deve essere multiuso quando possibile: frontmatter, wizard, JSON runtime, template Markdown, viste, pulsanti e check devono derivare dalla stessa dichiarazione invece che da copie parallele.
+- Jinja2 serve per generare template sorgente, macro e fallback Markdown; Templater resta il runtime dentro Obsidian.
 - Il nuovo tooling di sviluppo va scritto in Python dentro `Dev/Tools/python/`.
 - Il JS usato in Obsidian resta in `z.automazioni/` e `z.engine/`; `Dev/Tools/node-legacy/` esiste solo per il tooling JS storico ancora non portato.
 - Se un file in `Dev/` diventa necessario all'utente finale, va spostato fuori da `Dev/` e aggiunto ai controlli.

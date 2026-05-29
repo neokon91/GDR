@@ -157,10 +157,12 @@ required_surfaces:
 documentation_markers:
   dev_readme_architecture:
     - Markdown = contenuto umano
-    - YAML = stato persistente e regole dichiarative
+    - YAML = source of truth umano e macchina
+    - JSON generato = matrice runtime piccola
     - Dataview = query layer
     - Meta Bind = interfaccia
     - Templater = generazione
+    - Jinja2 = composizione di Markdown statico
     - z.engine + z.automazioni = runtime/logica/esecuzione
   workflow_contract:
     - "continuity_rules:"
