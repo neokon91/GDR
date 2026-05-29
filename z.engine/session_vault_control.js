@@ -104,6 +104,118 @@
     ];
   }
 
+  const PLAYABILITY_GATES = ["tavolo", "movimento", "conseguenza", "collegamento"];
+  const PLAYABILITY_GATE_ACTIONS = {
+    tavolo: "Manuale: compila uso_al_tavolo, scena o posta. Workflow: Worldbuilder, Preparazione sessione o Materiali al tavolo.",
+    movimento: "Manuale: compila prossima_mossa o pressione. Workflow: Motore mondo vivo o Task DM.",
+    conseguenza: "Manuale: compila conseguenze, propaga_a o entita_impattate. Workflow: Post Sessione Guidato.",
+    collegamento: "Manuale: collega mondo, luogo, fazione, missione o conseguenza. Workflow: Worldbuilder o Codex tabellare."
+  };
+  const MOVING_ENTITY_KINDS = new Set(["fazione", "culto", "religione", "png", "personaggio", "missione", "conflitto", "relazione", "rotta", "tracciato", "clock"]);
+  const CONSEQUENCE_ENTITY_KINDS = new Set(["luogo", "fazione", "culto", "religione", "png", "personaggio", "missione", "conflitto", "relazione", "rotta", "tracciato", "clock", "incontro"]);
+
+  function items(value) {
+    return Array.isArray(value) ? value : value ? [value] : [];
+  }
+
+  function anyValue(page, fields) {
+    return fields.some(field => hasLinks(page?.[field]) || hasText(page?.[field]));
+  }
+
+  function positiveNumber(page, fields) {
+    return fields.some(field => Number(page?.[field] ?? 0) > 0);
+  }
+
+  function normalizedKind(value) {
+    return String(value ?? "")
+      .trim()
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "");
+  }
+
+  function vaultEntityKind(page) {
+    const explicitType = normalizedKind(page.tipo);
+    if (pathStarts(page, "Mondi/Luoghi/")) return "luogo";
+    if (pathStarts(page, "Mondi/Fazioni/")) return ["fazione", "culto", "religione"].includes(explicitType) ? explicitType : "fazione";
+    if (pathStarts(page, "Mondi/Personaggi/")) return explicitType === "png" ? "png" : "personaggio";
+    if (pathStarts(page, "Mondi/Missioni/")) return "missione";
+    if (pathStarts(page, "Mondi/Conflitti/")) return "conflitto";
+    if (pathStarts(page, "Mondi/Relazioni/")) return "relazione";
+    if (pathStarts(page, "Mondi/Rotte/")) return "rotta";
+    if (pathStarts(page, "Mondi/Incontri/")) return "incontro";
+    if (pathStarts(page, "Risorse/Mappe/")) return "mappa";
+    return normalizedKind(page.categoria ?? page.tipo);
+  }
+
+  function vaultEntityLinkCount(page) {
+    const fields = [
+      "mondo", "campagna", "campagne", "luogo", "luogo_padre", "partenza", "arrivo",
+      "luoghi", "regioni", "culture", "lingue", "religioni", "fazioni", "fazioni_controllanti",
+      "personaggi", "missioni", "conflitti", "sessioni", "relazioni", "risorse", "rotte",
+      "mercati", "mappe", "propaga_a", "entita_impattate", "connessioni", "collegamenti",
+      "indizi", "segreti", "committente", "creature"
+    ];
+    return fields.reduce((total, field) => {
+      const value = page?.[field];
+      const linked = items(value).filter(Boolean).length;
+      return total + (linked || (hasText(value) ? 1 : 0));
+    }, 0);
+  }
+
+  function liveEntityCandidate(page) {
+    const kind = vaultEntityKind(page);
+    const state = String(page.stato ?? "");
+    const operationalState = ["preparazione", "pronto", "in gioco", "in corso", "attivo", "proposta", "accettata"].includes(state);
+    const operationalKind = ["luogo", "fazione", "culto", "religione", "png", "personaggio", "missione", "conflitto", "relazione", "rotta", "tracciato", "clock", "incontro", "mappa"].includes(kind);
+    return operationalKind && operationalState;
+  }
+
+  function requiredEntityGates(page) {
+    const kind = vaultEntityKind(page);
+    const gates = ["tavolo", "collegamento"];
+    if (MOVING_ENTITY_KINDS.has(kind)) gates.splice(1, 0, "movimento");
+    if (CONSEQUENCE_ENTITY_KINDS.has(kind)) gates.splice(gates.length - 1, 0, "conseguenza");
+    return gates;
+  }
+
+  function entityGateCoverage(page) {
+    const links = vaultEntityLinkCount(page);
+    return {
+      tavolo: anyValue(page, ["uso_al_tavolo", "promessa_al_tavolo", "scene", "scena", "gancio", "posta", "obiettivo", "obiettivo_giocabile", "indizi", "missioni"]),
+      movimento: anyValue(page, ["prossima_mossa", "mosse", "innesco", "avanza_se", "tracciati", "clock"]) || positiveNumber(page, ["pressione", "pericolo"]),
+      conseguenza: anyValue(page, ["conseguenza", "conseguenze", "conseguenze_se_bloccata", "effetti", "impatto", "propaga_a", "entita_impattate", "cambiamenti_quotidiani", "cosa_cambia"]),
+      collegamento: links >= 2
+    };
+  }
+
+  function liveEntityGateRows(dv) {
+    return pages(dv, '"Mondi" OR "Risorse/Mappe"', page => liveEntityCandidate(page))
+      .map(page => {
+        const coverage = entityGateCoverage(page);
+        const missingGates = requiredEntityGates(page).filter(gate => !coverage[gate]);
+        const missingLabel = missingGates.join(", ");
+        return {
+          page,
+          problem: missingGates.length ? `mancano: ${missingLabel}` : "gate completi",
+          missingLabel,
+          missingGates,
+          action: missingGates[0] ? PLAYABILITY_GATE_ACTIONS[missingGates[0]] : "Nessuna azione richiesta.",
+          workflow: [...new Set(missingGates.map(gate => PLAYABILITY_GATE_ACTIONS[gate]))].join(" | "),
+          priority: missingGates.length
+        };
+      })
+      .filter(row => row.missingGates.length)
+      .sort((left, right) => right.priority - left.priority || (right.page?.file?.mtime ?? 0) - (left.page?.file?.mtime ?? 0));
+  }
+
+  function gateCounts(rows) {
+    return PLAYABILITY_GATES.reduce((counts, gate) => {
+      counts[gate] = rows.filter(row => row.missingGates.includes(gate)).length;
+      return counts;
+    }, {});
+  }
+
   function vaultControlData(dv) {
     const inbox = sortedByMtime(pages(dv, '"Inbox"', page => pathStarts(page, "Inbox/") && !pathStarts(page, "Inbox/Generati/") && page.file?.name !== "Inbox" && !["smistata", "archiviata", "ignorata"].includes(String(page.stato ?? ""))));
     const generatedDrafts = sortedByMtime(pages(dv, '"Inbox/Generati"', page => pathStarts(page, "Inbox/Generati/") && page.plugin === "fantasy-content-generator" && page.stato === "bozza"));
@@ -119,6 +231,8 @@
     const missingBase = missingBaseRows(dv);
     const dates = dateRows(dv);
     const incomplete = incompleteRows(dv);
+    const liveGaps = liveEntityGateRows(dv);
+    const liveGateCounts = gateCounts(liveGaps);
     const attention = [
       ...generatedDrafts.map(page => ({ page, kind: "Bozza generata", action: "Smista o archivia." })),
       ...inbox.map(page => ({ page, kind: "Inbox", action: "Decidi se diventa gioco." })),
@@ -135,6 +249,8 @@
       inbox,
       incomplete,
       invalidStates,
+      liveGateCounts,
+      liveGaps,
       mapsToPlay,
       missingBase,
       missions,
@@ -173,6 +289,7 @@
       ["Ripara prima: stato fuori standard", data.invalidStates[0], "Correggi lo stato o archivia la nota.", "Risorse/Controllo Vault.md"],
       ["Ripara prima: campi base mancanti", data.missingBase[0], "Compila categoria e stato.", "Risorse/Controllo Vault.md"],
       ["Ripara prima: pronto incompleto", data.incomplete[0], "Completa il collegamento mancante prima del tavolo.", "Risorse/Controllo Vault.md"],
+      ["Ripara prima: entita viva incompleta", data.liveGaps[0], "Completa tavolo, movimento, conseguenza o collegamento.", "Risorse/Controllo Vault.md"],
       ["Ripara prima: data da calendarizzare", data.dates[0], "Allinea data_mondo, fc-date e categoria Calendarium.", "Risorse/Controllo Vault.md"],
       ["Ripara prima: Calendarium", calendarIssues[0], "Controlla calendario o fallback manuale.", "Risorse/Controllo Vault.md"],
       ["Ripara prima: inbox", data.attention[0], "Smista, collega o archivia.", data.attention[0]?.page?.file?.path ?? "Inbox/Inbox.md"]
@@ -210,6 +327,14 @@
         cls: "gdr-info-card compact gdr-kind-ready"
       }),
       cardHtml({
+        title: "Entita vive",
+        meta: `${data.liveGaps.length} da completare`,
+        body: data.liveGaps[0] ? `${pageTitle(data.liveGaps[0].page)}: ${data.liveGaps[0].problem}` : "Tavolo, movimento, conseguenze e collegamenti sono coperti.",
+        importa: data.liveGaps[0]?.action ?? "Le entita operative hanno abbastanza appigli per arrivare al gioco.",
+        link: data.liveGaps[0]?.page?.file?.path ?? "",
+        cls: `gdr-info-card compact ${data.liveGaps.length ? "gdr-kind-missing" : "gdr-kind-ready"}`
+      }),
+      cardHtml({
         title: "Da smistare",
         meta: `${data.inbox.length + data.generatedDrafts.length} note`,
         body: data.attention[0] ? pageTitle(data.attention[0].page) : "Inbox pulita.",
@@ -240,6 +365,10 @@
       ["Materiali", data.readyMaterials.length, "pronti"],
       ["Missioni", data.missions.length, "aperte"],
       ["PNG", data.png.length, "in gioco"],
+      ["Tavolo", data.liveGateCounts.tavolo, "entita senza scena"],
+      ["Movimento", data.liveGateCounts.movimento, "senza prossima mossa"],
+      ["Conseguenze", data.liveGateCounts.conseguenza, "senza cosa cambia"],
+      ["Collegamenti", data.liveGateCounts.collegamento, "senza agganci"],
       ["Bozze", data.drafts.length, "da completare"],
       ["Stati", data.invalidStates.length, "fuori standard"],
       ["Base", data.missingBase.length, "campi mancanti"],
@@ -299,6 +428,12 @@
       [...data.missions, ...data.png, ...data.drafts].slice(0, 12).map(page => [asLink(page), page.tipo ?? page.categoria ?? "", page.stato ?? "", fieldText(page.luoghi ?? page.personaggi ?? page.collegamenti) || "da collegare"]),
       "Nessuna missione, PNG o bozza operativa da mostrare."
     );
+    renderTable(
+      "live_entities",
+      ["Nota", "Manca", "Azione", "Workflow esistente"],
+      data.liveGaps.slice(0, 12).map(row => [asLink(row.page), row.missingLabel, row.action, row.workflow]),
+      "Nessuna entita viva incompleta tra tavolo, movimento, conseguenza e collegamento."
+    );
   }
 
   async function renderVaultControlCoherence(dv) {
@@ -342,6 +477,12 @@
       ["Nota", "Problema", "Dettaglio"],
       data.incomplete.map(row => [asLink(row.page), row.problem, row.detail]),
       "Nessun materiale pronto incompleto."
+    );
+    renderTable(
+      "Entita Vive Incomplete",
+      ["Nota", "Manca", "Azione"],
+      data.liveGaps.map(row => [asLink(row.page), row.missingLabel, row.action]),
+      "Nessuna entita viva incompleta."
     );
   }
 

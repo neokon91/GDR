@@ -18,16 +18,21 @@ dashboard:
 panels:
   now:
     runtime_view: renderWorldbuildingControlNow
-    promise: Decidere cosa riparare prima senza leggere liste lunghe.
+    promise: Decidere cosa riparare prima leggendo anche tavolo, movimento, conseguenza e collegamento.
     answers:
       - profondita mancante
       - connessioni deboli
       - canone incompleto
+      - entita vive incomplete
       - rischio player-safe
   readiness:
     runtime_view: renderWorldbuildingControlReadiness
-    promise: Misurare i buchi strutturali che impediscono il gioco.
+    promise: Misurare i buchi strutturali e i gate mancanti che impediscono il gioco.
     answers:
+      - tavolo mancante
+      - movimento mancante
+      - conseguenze mancanti
+      - collegamenti mancanti
       - profondita
       - collegamenti
       - canone
@@ -40,7 +45,8 @@ panels:
       - cosa approfondire
       - cosa collegare
       - cosa canonizzare
-      - cosa rendere giocabile
+      - cosa manca alle entita vive
+      - workflow esistente da usare
       - cosa ripulire
   surfaces:
     runtime_view: renderWorldbuildingControlSurfaceLinks
@@ -74,8 +80,9 @@ queues:
     label: Materiale non giocabile
     table_columns:
       - Nota
-      - Stato
-      - Cosa manca
+      - Manca
+      - Azione
+      - Workflow esistente
   - id: player_safe
     label: Player-safe rischioso
     table_columns:

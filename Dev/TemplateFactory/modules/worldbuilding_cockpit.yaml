@@ -17,27 +17,29 @@ dashboard:
 panels:
   now:
     runtime_view: renderWorldbuilderNow
-    promise: Scegliere il prossimo passo senza leggere archivi lunghi.
+    promise: Scegliere il prossimo passo leggendo cosa manca tra tavolo, movimento, conseguenza e collegamento.
     answers:
-      - cosa manca
+      - cosa manca per le entita vive
       - cosa e pronto
       - cosa preme
       - cosa e pubblicabile
   readiness:
     runtime_view: renderWorldbuilderReadiness
-    promise: Misurare prontezza operativa con pochi contatori.
+    promise: Misurare prontezza operativa con contatori azionabili, non solo archivi.
     answers:
-      - note deboli
+      - tavolo mancante
+      - movimento mancante
+      - conseguenze mancanti
+      - collegamenti mancanti
       - note pronte
-      - pressioni
-      - mappe
   queues:
     runtime_view: renderWorldbuilderQueues
     promise: Portare in tabella solo le schede su cui agire adesso.
     answers:
-      - completare
+      - completare entita vive
+      - usare workflow esistenti
       - usare al tavolo
-      - propagare
+      - propagare conseguenze
       - consegnare ai giocatori
   surfaces:
     runtime_view: renderWorldbuilderSurfaceLinks
@@ -52,8 +54,9 @@ queues:
     label: Cosa manca
     table_columns:
       - Nota
-      - Problema
+      - Manca
       - Azione
+      - Workflow esistente
   - id: ready
     label: Cosa e pronto
     table_columns:

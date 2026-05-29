@@ -391,6 +391,102 @@
     return fields.reduce((total, key) => total + (hasValue(dv, page?.[key]) ? dvItems(dv, page?.[key]).filter(Boolean).length || 1 : 0), 0);
   }
 
+  function normalizedGateKind(value) {
+    return String(value ?? "")
+      .trim()
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "");
+  }
+
+  const PLAYABILITY_GATES = ["tavolo", "movimento", "conseguenza", "collegamento"];
+  const PLAYABILITY_GATE_LABELS = {
+    tavolo: "tavolo",
+    movimento: "movimento",
+    conseguenza: "conseguenza",
+    collegamento: "collegamento"
+  };
+  const PLAYABILITY_GATE_ACTIONS = {
+    tavolo: "Manuale: compila uso_al_tavolo, scena o posta. Pulsante: Nuova missione o Nuovo incontro.",
+    movimento: "Manuale: compila prossima_mossa o pressione. Pulsante: Motore mondo vivo o Nuovo clock.",
+    conseguenza: "Manuale: compila conseguenze, propaga_a o entita_impattate. Workflow: Post Sessione Guidato o Controllo vault.",
+    collegamento: "Manuale: collega mondo, luogo, fazione, missione o conseguenza. Superficie: Codex editabile o Nuova relazione."
+  };
+  const LIVE_WORLD_CATEGORIES = new Set([
+    "luogo", "fazione", "religione", "culto", "personaggio", "png", "missione", "conflitto",
+    "relazione", "rotta", "mercato", "tracciato", "clock", "incontro", "creatura", "risorsa",
+    "cultura", "lingua", "evento storico", "cosmologia", "segreto", "mistero"
+  ]);
+  const MOVING_WORLD_CATEGORIES = new Set([
+    "fazione", "religione", "culto", "personaggio", "png", "missione", "conflitto",
+    "relazione", "rotta", "mercato", "tracciato", "clock"
+  ]);
+  const CONSEQUENCE_WORLD_CATEGORIES = new Set([
+    "luogo", "fazione", "religione", "culto", "personaggio", "png", "missione", "conflitto",
+    "relazione", "rotta", "mercato", "tracciato", "clock", "incontro", "evento storico", "cosmologia"
+  ]);
+
+  function worldbuilderGateCategory(page) {
+    return normalizedGateKind(worldbuilderCategory(page));
+  }
+
+  function worldbuilderIsLiveEntity(page) {
+    const category = worldbuilderGateCategory(page);
+    if (["mondo", "dashboard", "sessione", "risorsa"].includes(category)) return false;
+    if (LIVE_WORLD_CATEGORIES.has(category)) return true;
+    return String(page?.file?.folder ?? "").startsWith("Mondi/");
+  }
+
+  function anyWorldbuilderField(dv, page, fields) {
+    return fields.some(field => hasValue(dv, page?.[field]));
+  }
+
+  function positiveWorldbuilderNumber(page, fields) {
+    return fields.some(field => Number(page?.[field] ?? 0) > 0);
+  }
+
+  function worldbuilderRequiredGates(page) {
+    const category = worldbuilderGateCategory(page);
+    const gates = ["tavolo", "collegamento"];
+    if (MOVING_WORLD_CATEGORIES.has(category)) gates.splice(1, 0, "movimento");
+    if (CONSEQUENCE_WORLD_CATEGORIES.has(category)) gates.splice(gates.length - 1, 0, "conseguenza");
+    return gates;
+  }
+
+  function worldbuilderGateCoverage(dv, page, links = worldbuilderLinkCount(dv, page)) {
+    return {
+      tavolo: anyWorldbuilderField(dv, page, ["uso_al_tavolo", "promessa_al_tavolo", "scene", "scena", "gancio", "posta", "obiettivo", "obiettivo_giocabile", "indizi", "missioni"]),
+      movimento: anyWorldbuilderField(dv, page, ["prossima_mossa", "mosse", "innesco", "avanza_se", "tracciati", "clock"]) || positiveWorldbuilderNumber(page, ["pressione", "pericolo"]),
+      conseguenza: anyWorldbuilderField(dv, page, ["conseguenza", "conseguenze", "conseguenze_se_bloccata", "effetti", "impatto", "propaga_a", "entita_impattate", "cambiamenti_quotidiani", "cosa_cambia"]),
+      collegamento: links >= 2
+    };
+  }
+
+  function worldbuilderLiveGateRow(dv, page, links = worldbuilderLinkCount(dv, page)) {
+    if (!worldbuilderIsLiveEntity(page)) return null;
+    const coverage = worldbuilderGateCoverage(dv, page, links);
+    const missingGates = worldbuilderRequiredGates(page).filter(gate => !coverage[gate]);
+    if (!missingGates.length) return null;
+    const missingLabel = missingGates.map(gate => PLAYABILITY_GATE_LABELS[gate]).join(", ");
+    const workflows = [...new Set(missingGates.map(gate => PLAYABILITY_GATE_ACTIONS[gate]))].join(" | ");
+    return {
+      page,
+      problem: `mancano: ${missingLabel}`,
+      missingLabel,
+      missingGates,
+      action: PLAYABILITY_GATE_ACTIONS[missingGates[0]],
+      workflow: workflows,
+      priority: 6 + missingGates.length
+    };
+  }
+
+  function worldbuilderGateCounts(rows) {
+    return PLAYABILITY_GATES.reduce((counts, gate) => {
+      counts[gate] = rows.filter(row => row.missingGates?.includes(gate)).length;
+      return counts;
+    }, {});
+  }
+
   function worldbuilderScope(dv, worldLink = "", campaignLinks = []) {
     const selectedWorld = linkKey(worldLink);
     const selectedCampaigns = new Set(dvItems(dv, campaignLinks).map(linkKey).filter(Boolean));
@@ -420,16 +516,18 @@
     for (const page of context.pages) {
       const category = worldbuilderCategory(page);
       const links = worldbuilderLinkCount(dv, page);
+      const gateRow = worldbuilderLiveGateRow(dv, page, links);
+      if (gateRow) rows.push(gateRow);
       if (category === "mondo" && (!hasValue(dv, page.premessa) || !hasValue(dv, page.conflitto_centrale))) {
         add(page, "mondo senza promessa o conflitto centrale", "Definisci promessa giocabile e tensione principale.", 5);
       }
       if (!hasValue(dv, page.mondo) && !["mondo", "risorsa", "lore capture", "dashboard"].includes(category)) {
         add(page, "scheda senza mondo", "Collega il mondo o archiviala se non serve.", 4);
       }
-      if (links < 2 && !["mondo", "dashboard"].includes(category)) {
+      if (links < 2 && !["mondo", "dashboard"].includes(category) && !gateRow?.missingGates?.includes("collegamento")) {
         add(page, "poche connessioni", "Collega almeno mondo, luogo, fazione, missione o conseguenza.", 3);
       }
-      if (page.stato === "pronto" && !hasValue(dv, page.uso_al_tavolo) && !hasValue(dv, page.prossima_mossa) && !hasValue(dv, page.player_safe)) {
+      if (page.stato === "pronto" && !hasValue(dv, page.uso_al_tavolo) && !hasValue(dv, page.prossima_mossa) && !hasValue(dv, page.player_safe) && !gateRow?.missingGates?.includes("tavolo")) {
         add(page, "pronta ma senza uso", "Scrivi uso_al_tavolo, prossima_mossa o testo player-safe.", 4);
       }
       if (category === "luogo" && !hasValue(dv, page.fazioni) && !hasValue(dv, page.governante)) {
@@ -562,16 +660,18 @@
     const context = worldbuilderScope(dv, worldLink, campaignLinks);
     const missing = worldbuilderMissingRows(dv, context);
     const ready = worldbuilderReadyRows(dv, context);
-    const pressureRows = worldbuilderPressureRows(dv, context);
     const publicRows = worldbuilderPublicRows(dv, context);
     const weakLinks = context.pages.filter(page => !["mondo", "dashboard"].includes(worldbuilderCategory(page)) && worldbuilderLinkCount(dv, page) < 2);
-    const mapRows = context.maps.filter(page => hasValue(dv, page.coordinates) || hasValue(dv, page.luogo) || hasValue(dv, page.luoghi));
+    const gateRows = missing.filter(row => row.missingGates?.length);
+    const gateCounts = worldbuilderGateCounts(gateRows);
     const stats = [
-      ["Mancano", missing.length, "buchi pratici"],
+      ["Tavolo", gateCounts.tavolo, "senza uso in scena"],
+      ["Movimento", gateCounts.movimento, "senza prossima mossa"],
+      ["Conseguenze", gateCounts.conseguenza, "senza cosa cambia"],
+      ["Collegamenti", gateCounts.collegamento, "senza agganci"],
       ["Pronte", ready.length, "schede usabili"],
-      ["Pressioni", pressureRows.length, "mosse aperte"],
       ["Player-safe", publicRows.length, "condivisibili o quasi"],
-      ["Mappe", mapRows.length, "supporti spaziali"],
+      ["Buchi", missing.length, "interventi totali"],
       ["Da collegare", weakLinks.length, "note isolate"]
     ];
     const grid = dv.el("div", "", { cls: "gdr-stat-grid gdr-worldbuilder-readiness" });
@@ -603,8 +703,8 @@
 
     renderTable(
       "missing",
-      ["Nota", "Problema", "Azione"],
-      missing.map(row => [row.page.file?.link ?? row.page.file?.path, row.problem, row.action]),
+      ["Nota", "Manca", "Azione", "Workflow esistente"],
+      missing.map(row => [row.page.file?.link ?? row.page.file?.path, row.missingLabel ?? row.problem, row.action, row.workflow ?? "Manuale: modifica i campi indicati nella nota."]),
       "Nessun buco pratico evidente con i filtri correnti."
     );
     renderTable(

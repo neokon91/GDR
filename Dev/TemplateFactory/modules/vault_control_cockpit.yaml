@@ -19,40 +19,47 @@ dashboard:
 panels:
   now:
     runtime_view: renderVaultControlNow
-    promise: Dire cosa correggere prima per non bloccare preparazione, tavolo o post-sessione.
+    promise: Dire cosa correggere prima per non bloccare tavolo, movimento, conseguenza o collegamento.
     answers:
       - stato fuori standard
       - campi base mancanti
       - materiale pronto incompleto
+      - entita vive incomplete
       - data da calendarizzare
       - inbox da smistare
   readiness:
     runtime_view: renderVaultControlReadiness
-    promise: Misurare il rumore operativo del vault senza leggere liste lunghe.
+    promise: Misurare il rumore operativo del vault e i gate mancanti delle entita vive.
     answers:
       - inbox
       - bozze generate
       - sessioni in preparazione
       - materiali pronti
       - missioni aperte
+      - tavolo mancante
+      - movimento mancante
+      - conseguenze mancanti
+      - collegamenti mancanti
       - problemi base
   queues:
     runtime_view: renderVaultControlQueues
     promise: Mostrare solo le code pratiche che richiedono decisione o collegamento.
     answers:
       - carte da guardare
+      - entita vive
       - mappe da rendere giocabili
       - materiale pronto
       - campagna aperta
   coherence:
     runtime_view: renderVaultControlCoherence
-    promise: Auditare stati, campi minimi, date e pronti incompleti.
+    promise: Auditare stati, campi minimi, date, pronti incompleti ed entita vive non azionabili.
     answers:
       - stati fuori standard
       - campi base mancanti
       - date narrative
       - Calendarium
       - pronti incompleti
+      - entita vive incomplete
   surfaces:
     runtime_view: renderVaultControlSurfaceLinks
     promise: Mandare la correzione alla superficie specializzata invece di allungare questa pagina.
@@ -91,6 +98,13 @@ queues:
       - Tipo
       - Stato
       - Collegamenti
+  - id: live_entities
+    label: Entita vive
+    table_columns:
+      - Nota
+      - Manca
+      - Azione
+      - Workflow esistente
 surfaces:
   - id: quality_report
     label: Quality report
