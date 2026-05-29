@@ -1,0 +1,271 @@
+id: runtime_exports
+purpose: Contratto dichiarativo degli export pubblici z.engine/session_views.js e dei moduli runtime richiesti.
+version: 0.1.0
+bridge: z.engine/session_views.js
+fixture: Dev/Tests/fixtures/runtime_fixture_pages.json
+render_contract: Dev/Source/YAML/json/runtime_render_contract.yaml
+runtime_data: z.automazioni/data/runtime/runtime_exports.json
+commonjs_runtime:
+  purpose: Moduli CommonJS caricati da Templater o dai workflow runtime; le dipendenze locali devono restare dichiarate qui.
+  entrypoints:
+    - key: helpers
+      path: z.automazioni/helpers.js
+    - key: meta_actions
+      path: z.automazioni/meta_actions.js
+    - key: continuity_state
+      path: z.automazioni/continuity_state.js
+    - key: dm
+      path: z.automazioni/dm.js
+    - key: pg
+      path: z.automazioni/pg.js
+    - key: session_lifecycle_actions
+      path: z.automazioni/session_lifecycle_actions.js
+    - key: template_router
+      path: z.automazioni/template_router.js
+    - key: wizard_layer
+      path: z.automazioni/wizard_layer.js
+  local_dependencies:
+    - key: helper_paths
+      path: z.automazioni/helper_paths.js
+    - key: helper_prompts
+      path: z.automazioni/helper_prompts.js
+    - key: helper_yaml
+      path: z.automazioni/helper_yaml.js
+    - key: helper_notes
+      path: z.automazioni/helper_notes.js
+    - key: helper_note_core
+      path: z.automazioni/helper_note_core.js
+    - key: helper_note_selection
+      path: z.automazioni/helper_note_selection.js
+    - key: helper_session_links
+      path: z.automazioni/helper_session_links.js
+    - key: continuity_event_model
+      path: z.automazioni/continuity_event_model.js
+    - key: pg_mechanics
+      path: z.automazioni/pg_mechanics.js
+    - key: worldbuilding
+      path: z.automazioni/worldbuilding.js
+    - key: world_taxonomy
+      path: z.automazioni/world_taxonomy.js
+  data_dependencies:
+    - key: srd_core
+      path: z.automazioni/data/srd/core.json
+    - key: srd_character_options
+      path: z.automazioni/data/srd/opzioni_personaggio.json
+    - key: plugin_profile
+      path: z.automazioni/data/runtime/plugin_profile.json
+    - key: session_context
+      path: z.automazioni/data/runtime/session_context.json
+    - key: generated_drafts_cockpit
+      path: z.automazioni/data/runtime/generated_drafts_cockpit.json
+runtime_modules:
+  shared_context:
+    - key: playability
+      path: z.engine/session_playability.js
+    - key: atlas
+      path: z.engine/session_atlas.js
+    - key: campaignBuilder
+      path: z.engine/session_campaign_builder.js
+    - key: canonControl
+      path: z.engine/session_canon_control.js
+    - key: compendium
+      path: z.engine/session_compendium.js
+    - key: continuity
+      path: z.engine/session_continuity.js
+    - key: dnd
+      path: z.engine/session_dnd.js
+    - key: dmDashboard
+      path: z.engine/session_dm_dashboard.js
+    - key: dmGuide
+      path: z.engine/session_dm_guide.js
+    - key: economy
+      path: z.engine/session_economy.js
+    - key: generatedDrafts
+      path: z.engine/session_generated_drafts.js
+    - key: geopolitical
+      path: z.engine/session_geopolitical.js
+    - key: importMap
+      path: z.engine/session_import_maps.js
+    - key: lore
+      path: z.engine/session_lore.js
+    - key: loreReview
+      path: z.engine/session_lore_review.js
+    - key: map
+      path: z.engine/session_maps.js
+    - key: mediaScene
+      path: z.engine/session_media_scene.js
+    - key: player
+      path: z.engine/session_player.js
+    - key: preparation
+      path: z.engine/session_preparation.js
+    - key: qualityReport
+      path: z.engine/session_quality_report.js
+    - key: tableMaterials
+      path: z.engine/session_table_materials.js
+    - key: vaultControl
+      path: z.engine/session_vault_control.js
+    - key: worldBible
+      path: z.engine/session_world_bible.js
+    - key: worldbuildingControl
+      path: z.engine/session_worldbuilding_control.js
+  continuity_context:
+    - key: liveTable
+      path: z.engine/session_live_table.js
+    - key: livingWorld
+      path: z.engine/session_living_world.js
+    - key: offscreen
+      path: z.engine/session_offscreen.js
+    - key: postSession
+      path: z.engine/session_post_session.js
+  session_context:
+    - key: session
+      path: z.engine/session_runtime.js
+required_exports:
+  - renderActiveSessionBanner
+  - renderAtlasNow
+  - renderAtlasQueues
+  - renderAtlasReadiness
+  - renderAtlasSurfaceLinks
+  - renderMapsIntegratedLayers
+  - renderMapsNow
+  - renderMapsReadiness
+  - renderMapsSurfaceLinks
+  - renderMapsUseQueues
+  - renderMapImportNow
+  - renderMapImportQueues
+  - renderMapImportReadiness
+  - renderMapImportSources
+  - renderMapImportSurfaceLinks
+  - renderMediaSceneCueQueues
+  - renderMediaSceneNow
+  - renderMediaSceneReadiness
+  - renderMediaSceneSessionCues
+  - renderMediaSceneSurfaceLinks
+  - renderCanonControlNow
+  - renderCanonControlQueues
+  - renderCanonControlReadiness
+  - renderCanonControlSurfaceLinks
+  - renderCampaignBuilderCampaignQueues
+  - renderCampaignBuilderNow
+  - renderCampaignBuilderOpportunityQueues
+  - renderCampaignBuilderReadiness
+  - renderCampaignBuilderSurfaceLinks
+  - renderCompendiumHistoryQueues
+  - renderCompendiumNow
+  - renderCompendiumOperationalQueues
+  - renderCompendiumReadiness
+  - renderCompendiumSurfaceLinks
+  - renderCompendiumTypeMix
+  - renderCombatReadiness
+  - renderConsequenceCards
+  - renderContinuityQueue
+  - renderCreationFeedback
+  - renderDnd55MaterialPipeline
+  - renderDmDashboardNow
+  - renderDmDashboardQueues
+  - renderDmDashboardReadiness
+  - renderDmDashboardSurfaceLinks
+  - renderDmGuideLoop
+  - renderDmGuideNow
+  - renderDmGuideRules
+  - renderDmGuideSurfaceLinks
+  - renderEconomyDependencyQueues
+  - renderEconomyNow
+  - renderEconomyQueues
+  - renderEconomyReadiness
+  - renderEconomySurfaceLinks
+  - renderGeneratedDraftsDestinations
+  - renderGeneratedDraftsNow
+  - renderGeneratedDraftsQueues
+  - renderGeneratedDraftsReadiness
+  - renderGeneratedDraftsResolved
+  - renderGeneratedDraftsSurfaceLinks
+  - renderGeopoliticalNow
+  - renderGeopoliticalPressureQueues
+  - renderGeopoliticalQueues
+  - renderGeopoliticalReadiness
+  - renderGeopoliticalSurfaceLinks
+  - renderLiveCommandCenter
+  - renderLiveTableMaterials
+  - renderLiveTableNow
+  - renderLiveTableQueues
+  - renderLiveTableReadiness
+  - renderLiveTableSurfaceLinks
+  - renderLivingWorldNow
+  - renderLivingWorldPressureQueues
+  - renderLivingWorldQueues
+  - renderLivingWorldReadiness
+  - renderLivingWorldSurfaceLinks
+  - renderLoreNow
+  - renderLoreReadiness
+  - renderLoreReviewCompletionQueues
+  - renderLoreReviewNow
+  - renderLoreReviewReadiness
+  - renderLoreReviewSurfaceLinks
+  - renderLoreReviewTableQueues
+  - renderLoreSignalQueues
+  - renderLoreSurfaceLinks
+  - renderLoreWorldQueues
+  - renderContinuityChain
+  - renderOffscreenNow
+  - renderOffscreenReactionQueues
+  - renderOffscreenReadiness
+  - renderOffscreenSurfaceLinks
+  - renderOffscreenTableBridge
+  - renderOnboardingReadiness
+  - renderPlayabilityFamilyCards
+  - renderPlayableOutline
+  - renderPlayerView
+  - renderPluginTroubleshooting
+  - renderPreparationAnchorQueues
+  - renderPreparationMaterialQueues
+  - renderPreparationNow
+  - renderPreparationReadiness
+  - renderPreparationSurfaceLinks
+  - renderQualityReportCoverage
+  - renderQualityReportNow
+  - renderQualityReportOperationalGaps
+  - renderQualityReportPublicSafety
+  - renderQualityReportShowcase
+  - renderQualityReportSurfaceLinks
+  - renderTableMaterialsAssetQueues
+  - renderTableMaterialsDndPipeline
+  - renderTableMaterialsNow
+  - renderTableMaterialsReadiness
+  - renderTableMaterialsSessionQueues
+  - renderTableMaterialsSurfaceLinks
+  - renderPostSessionCommandCenter
+  - renderPostSessionClosureQueues
+  - renderPostSessionNow
+  - renderPostSessionPropagationQueues
+  - renderPostSessionReadiness
+  - renderPostSessionSurfaceLinks
+  - renderPropagationTargets
+  - renderSessionAnchorCards
+  - renderSessionLiveCards
+  - renderSessionMapCards
+  - renderSessionMaterialCards
+  - renderSessionPostCards
+  - renderTableCockpit
+  - renderVaultControlCoherence
+  - renderVaultControlNow
+  - renderVaultControlQueues
+  - renderVaultControlReadiness
+  - renderVaultControlSurfaceLinks
+  - renderVaultReadiness
+  - renderWorkflowCommandDeck
+  - renderWorldBibleArticles
+  - renderWorldBibleGaps
+  - renderWorldBibleIdentity
+  - renderWorldBibleNow
+  - renderWorldBibleReadiness
+  - renderWorldBibleSurfaceLinks
+  - renderWorldImpact
+  - renderWorldbuilderNow
+  - renderWorldbuilderQueues
+  - renderWorldbuilderReadiness
+  - renderWorldbuilderSurfaceLinks
+  - renderWorldbuildingControlNow
+  - renderWorldbuildingControlQueues
+  - renderWorldbuildingControlReadiness
+  - renderWorldbuildingControlSurfaceLinks

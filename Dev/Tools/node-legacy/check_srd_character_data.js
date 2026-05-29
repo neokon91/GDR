@@ -1,0 +1,247 @@
+#!/usr/bin/env node
+
+const path = require("path");
+const { execFileSync } = require("child_process");
+const { readJson, repoPath, rel } = require("./node_utils");
+
+const ROOT = process.cwd();
+const MODULE = repoPath(ROOT, "Dev/Source/YAML/canonical/srd_character_build.yaml");
+const DATA_DIR = repoPath(ROOT, "z.automazioni/data/srd");
+const EXPECTED_GENERATOR = "import_srd_character_data";
+
+function fail(errors) {
+    for (const error of errors) console.error(error);
+    process.exit(1);
+}
+
+function keys(object) {
+    return Object.keys(object ?? {});
+}
+
+function requireObject(errors, object, label) {
+    if (!object || typeof object !== "object" || Array.isArray(object)) {
+        errors.push(`${label}: oggetto mancante o non valido`);
+        return false;
+    }
+    return true;
+}
+
+function requireNonEmptyObject(errors, object, label) {
+    if (!requireObject(errors, object, label)) return false;
+    if (!keys(object).length) {
+        errors.push(`${label}: oggetto vuoto`);
+        return false;
+    }
+    return true;
+}
+
+function assertRefs(errors, refs, valid, label) {
+    for (const ref of refs ?? []) {
+        if (!valid.has(ref)) errors.push(`${label}: riferimento non valido (${ref})`);
+    }
+}
+
+function choiceOptions(choice) {
+    if (!choice || typeof choice !== "object") return [];
+    if (Array.isArray(choice.opzioni)) return choice.opzioni;
+    return [];
+}
+
+function loadYaml(filePath) {
+    const script = [
+        "import json, sys",
+        "import yaml",
+        "with open(sys.argv[1], encoding='utf-8') as handle:",
+        "    data = yaml.safe_load(handle) or {}",
+        "print(json.dumps(data, ensure_ascii=False))"
+    ].join("\n");
+
+    const stdout = execFileSync("python3", ["-c", script, filePath], {
+        encoding: "utf8",
+        maxBuffer: 10 * 1024 * 1024
+    });
+
+    return JSON.parse(stdout);
+}
+
+function normalize(value) {
+    if (Array.isArray(value)) return value.map(normalize);
+    if (!value || typeof value !== "object") return value;
+    return Object.fromEntries(
+        Object.entries(value)
+            .sort(([left], [right]) => left.localeCompare(right))
+            .map(([key, child]) => [key, normalize(child)])
+    );
+}
+
+function assertGeneratedFromSource(errors, core, opzioni) {
+    const source = loadYaml(MODULE);
+    const expectedCore = { ...(source.core ?? {}), generated_by: EXPECTED_GENERATOR };
+    const expectedOptions = { ...(source.opzioni ?? {}), generated_by: EXPECTED_GENERATOR };
+
+    // Il check deve restare non mutante: se diverge, si rigenera con sync:sources.
+    if (JSON.stringify(normalize(core)) !== JSON.stringify(normalize(expectedCore))) {
+        errors.push("core.json: non allineato a srd_character_build.yaml; eseguire npm run sync:sources");
+    }
+    if (JSON.stringify(normalize(opzioni)) !== JSON.stringify(normalize(expectedOptions))) {
+        errors.push("opzioni_personaggio.json: non allineato a srd_character_build.yaml; eseguire npm run sync:sources");
+    }
+}
+
+function validateCore(errors, core) {
+    if (!Array.isArray(core.statistiche) || core.statistiche.length !== 6) {
+        errors.push("core.statistiche: servono esattamente 6 caratteristiche");
+    }
+    const stats = new Set(core.statistiche ?? []);
+    if (stats.size !== (core.statistiche ?? []).length) errors.push("core.statistiche: valori duplicati");
+
+    if (requireNonEmptyObject(errors, core.abilita, "core.abilita")) {
+        for (const [slug, skill] of Object.entries(core.abilita)) {
+            if (!skill.label) errors.push(`core.abilita.${slug}: label mancante`);
+            if (!stats.has(skill.stat)) errors.push(`core.abilita.${slug}: stat non valida (${skill.stat})`);
+        }
+    }
+    const skills = new Set(keys(core.abilita));
+    const armorCategories = new Set(keys(core.categorie_armature));
+    const weaponCategories = new Set(keys(core.categorie_armi));
+
+    if (!armorCategories.size) errors.push("core.categorie_armature: nessuna categoria");
+    if (!weaponCategories.size) errors.push("core.categorie_armi: nessuna categoria");
+
+    // I metodi di generazione sono contratti utente: se cambiano, il wizard PG va rivisto.
+    const methods = core.generazione_caratteristiche?.metodi ?? {};
+    const standardArray = methods.array_standard?.valori ?? [];
+    if (!Array.isArray(standardArray) || standardArray.length !== stats.size) {
+        errors.push("generazione_caratteristiche.array_standard: valori non allineati alle statistiche");
+    }
+    const pointBuy = methods.point_buy;
+    if (!pointBuy || pointBuy.punti !== 27 || pointBuy.minimo !== 8 || pointBuy.massimo !== 15) {
+        errors.push("generazione_caratteristiche.point_buy: contratto 27 punti 8-15 non rispettato");
+    } else {
+        for (let score = pointBuy.minimo; score <= pointBuy.massimo; score += 1) {
+            if (!Number.isInteger(pointBuy.costi?.[score])) {
+                errors.push(`generazione_caratteristiche.point_buy: costo mancante per ${score}`);
+            }
+        }
+    }
+
+    return { stats, skills, armorCategories, weaponCategories };
+}
+
+function validateClasses(errors, classi, coreRefs) {
+    if (!requireNonEmptyObject(errors, classi, "opzioni.classi")) return;
+
+    for (const [slug, cls] of Object.entries(classi)) {
+        if (!cls.label) errors.push(`opzioni.classi.${slug}: label mancante`);
+        if (![6, 8, 10, 12].includes(cls.dadi_vita)) errors.push(`opzioni.classi.${slug}: dadi_vita non valido`);
+        if (!Array.isArray(cls.save_prof) || cls.save_prof.length !== 2) {
+            errors.push(`opzioni.classi.${slug}: save_prof deve avere 2 caratteristiche`);
+        }
+        assertRefs(errors, cls.save_prof, coreRefs.stats, `opzioni.classi.${slug}.save_prof`);
+
+        const skillChoice = cls.abilita ?? {};
+        if (!Number.isInteger(skillChoice.scelte) || skillChoice.scelte < 0) {
+            errors.push(`opzioni.classi.${slug}.abilita: scelte non valido`);
+        }
+        if (skillChoice.opzioni !== "qualsiasi") {
+            if (!Array.isArray(skillChoice.opzioni) || skillChoice.opzioni.length < skillChoice.scelte) {
+                errors.push(`opzioni.classi.${slug}.abilita: opzioni insufficienti`);
+            }
+            assertRefs(errors, skillChoice.opzioni, coreRefs.skills, `opzioni.classi.${slug}.abilita.opzioni`);
+        }
+
+        assertRefs(errors, cls.addestramento_armature, coreRefs.armorCategories, `opzioni.classi.${slug}.addestramento_armature`);
+        assertRefs(errors, cls.addestramento_armi, coreRefs.weaponCategories, `opzioni.classi.${slug}.addestramento_armi`);
+    }
+}
+
+function validateSpecies(errors, specie) {
+    if (!requireNonEmptyObject(errors, specie, "opzioni.specie")) return;
+
+    for (const [slug, species] of Object.entries(specie)) {
+        if (!species.label) errors.push(`opzioni.specie.${slug}: label mancante`);
+        if (!requireNonEmptyObject(errors, species.tratti, `opzioni.specie.${slug}.tratti`)) continue;
+        for (const [traitSlug, trait] of Object.entries(species.tratti)) {
+            if (!trait.label) errors.push(`opzioni.specie.${slug}.tratti.${traitSlug}: label mancante`);
+            if (!trait.descrizione) errors.push(`opzioni.specie.${slug}.tratti.${traitSlug}: descrizione mancante`);
+            if (trait.tipo === "scelta" && !keys(trait.opzioni).length) {
+                errors.push(`opzioni.specie.${slug}.tratti.${traitSlug}: scelta senza opzioni`);
+            }
+        }
+    }
+}
+
+function validateTalents(errors, talenti, stats) {
+    const talents = new Set(keys(talenti));
+    if (!requireNonEmptyObject(errors, talenti, "opzioni.talenti")) return talents;
+
+    for (const [slug, talent] of Object.entries(talenti)) {
+        if (!talent.label) errors.push(`opzioni.talenti.${slug}: label mancante`);
+        if (talent.categoria !== "origini") {
+            errors.push(`opzioni.talenti.${slug}: solo talenti di origine ammessi in questa fase`);
+        }
+        if (typeof talent.repeatable !== "boolean") {
+            errors.push(`opzioni.talenti.${slug}: repeatable deve essere booleano`);
+        }
+        if (!requireObject(errors, talent.benefici, `opzioni.talenti.${slug}.benefici`)) continue;
+
+        // I talenti derivati da Iniziato alla Magia devono restare vincolati alla lista dichiarata.
+        if (talent.base === "iniziato_alla_magia") {
+            assertRefs(
+                errors,
+                choiceOptions(talent.scelte?.caratteristica_incantatore),
+                stats,
+                `opzioni.talenti.${slug}.scelte.caratteristica_incantatore`
+            );
+            const lists = new Set(choiceOptions(talent.scelte?.lista_incantesimi));
+            if (![...lists].every(list => ["chierico", "druido", "mago"].includes(list))) {
+                errors.push(`opzioni.talenti.${slug}: lista_incantesimi non supportata`);
+            }
+        }
+    }
+
+    return talents;
+}
+
+function validateBackgrounds(errors, backgrounds, coreRefs, talents) {
+    if (!requireNonEmptyObject(errors, backgrounds, "opzioni.background")) return;
+
+    for (const [slug, background] of Object.entries(backgrounds)) {
+        if (!background.label) errors.push(`opzioni.background.${slug}: label mancante`);
+        assertRefs(errors, background.competenze_abilita, coreRefs.skills, `opzioni.background.${slug}.competenze_abilita`);
+        assertRefs(errors, background.aumento_caratteristiche?.opzioni, coreRefs.stats, `opzioni.background.${slug}.aumento_caratteristiche.opzioni`);
+        assertRefs(errors, background.talento_origine, talents, `opzioni.background.${slug}.talento_origine`);
+        if (!Array.isArray(background.competenze_abilita) || background.competenze_abilita.length < 2) {
+            errors.push(`opzioni.background.${slug}: competenze_abilita insufficienti`);
+        }
+    }
+}
+
+function main() {
+    const errors = [];
+    const corePath = repoPath(DATA_DIR, "core.json");
+    const optionsPath = repoPath(DATA_DIR, "opzioni_personaggio.json");
+    const core = readJson(corePath, null, () => errors.push(`JSON non valido: ${rel(ROOT, corePath)}`));
+    const opzioni = readJson(optionsPath, null, () => errors.push(`JSON non valido: ${rel(ROOT, optionsPath)}`));
+
+    if (!core || !opzioni) fail(errors);
+    if (core.generated_by !== EXPECTED_GENERATOR) errors.push("core.json: generated_by non allineato");
+    if (opzioni.generated_by !== EXPECTED_GENERATOR) errors.push("opzioni_personaggio.json: generated_by non allineato");
+    assertGeneratedFromSource(errors, core, opzioni);
+
+    const coreRefs = validateCore(errors, core);
+    validateClasses(errors, opzioni.classi, coreRefs);
+    validateSpecies(errors, opzioni.specie);
+    const talents = validateTalents(errors, opzioni.talenti, coreRefs.stats);
+    validateBackgrounds(errors, opzioni.background, coreRefs, talents);
+
+    if (errors.length) fail(errors);
+
+    console.log(
+        `SRD character data OK: ${keys(opzioni.classi).length} classi, ` +
+        `${keys(opzioni.specie).length} specie, ${keys(opzioni.background).length} background, ` +
+        `${keys(opzioni.talenti).length} talenti, ${coreRefs.skills.size} abilita.`
+    );
+}
+
+main();

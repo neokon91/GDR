@@ -1,6 +1,6 @@
 # Sviluppo Vault
 
-Questa nota e l'indice tecnico di manutenzione. Non deve duplicare i contratti YAML: quando una regola diventa stabile, vive in `Dev/TemplateFactory/modules/` e viene verificata dai check.
+Questa nota e l'indice tecnico di manutenzione. Non deve duplicare i contratti YAML: quando una regola diventa stabile, vive in `Dev/Source/YAML/` e viene verificata dai check.
 
 Se c'e conflitto, prevalgono YAML, renderer e check. La documentazione storica non e sorgente operativo.
 
@@ -18,8 +18,14 @@ Se c'e conflitto, prevalgono YAML, renderer e check. La documentazione storica n
 La source of truth umana e dichiarativa:
 
 - YAML dichiara contratti, profili, workflow, plugin, campi, tassonomie e release.
-- Jinja/TemplateFactory genera Markdown statico richiesto dal vault.
-- JS contiene runtime, check, import, release e automazioni reali.
+- `Dev/Source/YAML/canonical/` contiene il dominio sorgente stabile.
+- `Dev/Source/YAML/json/` contiene YAML che genera JSON runtime o configurazioni plugin.
+- `Dev/Source/YAML/render/` contiene YAML che genera Markdown, template e superfici Obsidian.
+- `Dev/Source/YAML/quality/` contiene contratti di check, release e igiene repo.
+- `Dev/Source/Jinja/` genera Markdown statico richiesto dal vault.
+- Python in `Dev/Tools/python/` e il tooling di sviluppo primario.
+- JS in `z.automazioni/` e `z.engine/` contiene runtime Obsidian e automazioni reali.
+- JS in `Dev/Tools/node-legacy/` e tooling storico isolato, da non usare come modello per nuovo sviluppo salvo necessita.
 - Markdown finale, JSON runtime, fileClass, Bases, template e bacheche sono output generati quando dichiarati in `source_pipeline.yaml`.
 
 Non aggiungere logica lunga dentro note utente, template Markdown o blocchi DataviewJS. Se una vista cresce, spostarla in `z.engine/` e lasciare nella superficie solo il richiamo operativo.
@@ -28,17 +34,17 @@ Non aggiungere logica lunga dentro note utente, template Markdown o blocchi Data
 
 | Ambito | Fonte |
 | --- | --- |
-| Campi canonici | `fields_core.yaml` |
-| Modello categorie | `entity_model.yaml` |
-| Campi minimi e giocabilita | `validation_contract.yaml` |
-| Profili frontmatter e fileClass | `frontmatter_profiles.yaml` |
-| Tassonomie profonde SRD/D&D e mondo | `taxonomy_depth.yaml` |
-| Template Markdown | `template_blueprints.yaml` e `Dev/TemplateFactory/jinja/` |
-| Workflow e azioni rapide | `workflows.yaml` |
-| Plugin e binding | `plugin_matrix.yaml`, `plugin_contracts.yaml`, `plugin_bindings.yaml` |
-| Config Obsidian | `obsidian_config.yaml`, `metabind_config.yaml`, `metabind_inputs.yaml`, `metabind_buttons.yaml` |
-| Release e confini ZIP | `release_boundary.yaml`, `release_quality_contract.yaml` |
-| Pipeline generazione/check | `source_pipeline.yaml` |
+| Campi canonici | `Dev/Source/YAML/canonical/fields_core.yaml` |
+| Modello categorie | `Dev/Source/YAML/canonical/entity_model.yaml` |
+| Campi minimi e giocabilita | `Dev/Source/YAML/canonical/validation_contract.yaml` |
+| Profili frontmatter e fileClass | `Dev/Source/YAML/canonical/frontmatter_profiles.yaml` |
+| Tassonomie profonde SRD/D&D e mondo | `Dev/Source/YAML/canonical/taxonomy_depth.yaml` |
+| Template Markdown | `Dev/Source/YAML/render/template_blueprints.yaml` e `Dev/Source/Jinja/` |
+| Workflow e azioni rapide | `Dev/Source/YAML/json/workflows.yaml` |
+| Plugin e binding | `Dev/Source/YAML/json/plugin_matrix.yaml`, `Dev/Source/YAML/canonical/plugin_contracts.yaml`, `Dev/Source/YAML/canonical/plugin_bindings.yaml` |
+| Config Obsidian | `Dev/Source/YAML/json/obsidian_config.yaml`, `Dev/Source/YAML/json/metabind_config.yaml`, `Dev/Source/YAML/json/metabind_inputs.yaml`, `Dev/Source/YAML/json/metabind_buttons.yaml` |
+| Release e confini ZIP | `Dev/Source/YAML/quality/release_boundary.yaml`, `Dev/Source/YAML/quality/release_quality_contract.yaml` |
+| Pipeline generazione/check | `Dev/Source/YAML/pipeline/source_pipeline.yaml` |
 
 Regola: se modifichi uno di questi contratti, esegui `npm run sync:sources` prima di `npm run check`.
 
@@ -58,7 +64,7 @@ Tag e link granulari sono governati da `tag_rules.yaml` e `link_targets.yaml`; n
 
 ## Creazione Guidata
 
-I router devono presentare scelte comprensibili al DM, non nomi di file. La logica runtime caricata da Templater sta in `z.automazioni/*.js`; il tooling di sviluppo sta in `Dev/TemplateFactory/tools/`. I wrapper Templater sono generati e i template finali stanno fuori dal sorgente tracciato.
+I router devono presentare scelte comprensibili al DM, non nomi di file. La logica runtime caricata da Templater sta in `z.automazioni/*.js`; il nuovo tooling di sviluppo sta in `Dev/Tools/python/`. I wrapper Templater sono generati e i template finali stanno fuori dal sorgente tracciato.
 
 Regole operative:
 
@@ -79,20 +85,20 @@ Il vault usa un layer interno sopra Meta Bind, Templater, JS Engine e Metadata M
 - Templater: wrapper funzione generati in `z.automazioni/templater`.
 - JS Engine: viste riusabili in `z.engine/`.
 - Metadata Menu: preset e fileClass generati dai profili frontmatter.
-- `z.bacheche`: bacheche Kanban per preparazione e creature, generate da `Dev/TemplateFactory/modules/bacheche.yaml`.
-- Tooling repo: check, render, import, release e fixture tecniche vivono in `Dev/TemplateFactory/tools/`, non nel runtime Obsidian.
+- `z.bacheche`: bacheche Kanban per preparazione e creature, generate da `Dev/Source/YAML/render/bacheche.yaml`.
+- Tooling repo: check, render, import, release e fixture tecniche vivono in `Dev/Tools/`, non nel runtime Obsidian.
 
 Non modificare a mano JSON generati, fileClass, Bases, template o bacheche. Cambia il contratto YAML o il renderer, poi rigenera.
 
-Per le pagine di supporto, non inserire blob opachi direttamente in `resource_support_pages.yaml`: usa `body_file` verso `Dev/TemplateFactory/assets/...` quando il contenuto e lungo, compresso o non revisionabile come YAML.
+Per le pagine di supporto, non inserire blob opachi direttamente in `resource_support_pages.yaml`: usa `body_file` verso `Dev/Source/Assets/...` quando il contenuto e lungo, compresso o non revisionabile come YAML.
 
 ## Runtime
 
 `z.engine/session_views.js` resta il bridge pubblico per le chiamate DataviewJS esistenti. Le famiglie gia estratte vivono in moduli dedicati (`session_maps.js`, `session_dnd.js`, `session_player.js`, cockpit e runtime sessione).
 
-Gli export pubblici e la registry dei moduli runtime sono dichiarati in `Dev/TemplateFactory/modules/runtime_exports.yaml`; il bridge legge il JSON generato `z.automazioni/data/runtime/runtime_exports.json`. Gli scenari minimi di render sono in `Dev/TemplateFactory/modules/runtime_render_contract.yaml`; le sorgenti Dataview simulate sono in `Dev/TemplateFactory/modules/runtime_dataview_contract.yaml`. `session_views.js` pubblica automaticamente gli export `render*`; `check:runtime-load` usa manifest e fixture `Dev/TemplateFactory/tools/fixtures/runtime_fixture_pages.json` per impedire drift.
+Gli export pubblici e la registry dei moduli runtime sono dichiarati in `Dev/Source/YAML/json/runtime_exports.yaml`; il bridge legge il JSON generato `z.automazioni/data/runtime/runtime_exports.json`. Gli scenari minimi di render sono in `Dev/Source/YAML/json/runtime_render_contract.yaml`; le sorgenti Dataview simulate sono in `Dev/Source/YAML/json/runtime_dataview_contract.yaml`. `session_views.js` pubblica automaticamente gli export `render*`; `check:runtime-load` usa manifest e fixture `Dev/Tests/fixtures/runtime_fixture_pages.json` per impedire drift.
 
-Il troubleshooting plugin runtime passa da `Dev/TemplateFactory/modules/runtime_plugin_profile.yaml` e dal JSON generato `z.automazioni/data/runtime/plugin_profile.json`: non aggiungere dizionari statici di plugin, sintomi o fallback dentro `session_views.js`.
+Il troubleshooting plugin runtime passa da `Dev/Source/YAML/json/runtime_plugin_profile.yaml` e dal JSON generato `z.automazioni/data/runtime/plugin_profile.json`: non aggiungere dizionari statici di plugin, sintomi o fallback dentro `session_views.js`.
 
 La continuita narrativa passa da `z.automazioni/continuity_event_model.js`: gli script operativi devono creare eventi con sorgente, causa, conseguenza, bersagli, stato e visibilita, poi applicarli tramite il reducer/adattatore di `continuity_state.js`. I nomi runtime/check devono restare nomi di dominio; `check:naming` blocca il ritorno di alias di milestone nel codice attivo.
 
@@ -100,7 +106,7 @@ Regole di migrazione:
 
 - mantenere export e bridge compatibili;
 - aggiungere check runtime quando nasce una funzione pubblica;
-- non spostare path usati da Meta Bind, Templater, TemplateFactory o release senza `npm run check`;
+- non spostare path usati da Meta Bind, Templater, renderer o release senza `npm run check`;
 - non far crescere `session_views.js` se una nuova famiglia puo stare in un modulo dedicato.
 - le azioni Meta Bind che mutano frontmatter devono avere copertura in `npm run check:meta-actions` quando toccano continuita, propagazione o player safety.
 - le modifiche al modello eventi di continuita devono passare da `npm run check:continuity-events` e non solo da fixture end-to-end.
@@ -109,11 +115,11 @@ Regole di migrazione:
 
 Il profilo meccanico principale e D&D 5.5-compatible con SRD separato, ma il Codex del mondo resta separato dal regolamento.
 
-`SRD/` non e sorgente tracciato. La release pulita lo materializza tramite `Dev/TemplateFactory/tools/import_srd.js`; per una copia locale usare `npm run import:srd`, lasciando l'output ignorato da Git.
+`SRD/` non e sorgente tracciato. La release pulita lo materializza tramite `Dev/Tools/node-legacy/import_srd.js`; per una copia locale usare `npm run import:srd`, lasciando l'output ignorato da Git.
 
 La scheda meccanica PG segue questa catena:
 
-`srd_character_build.yaml` -> `npm run sync:sources` -> `z.automazioni/data/srd/*.json` -> `z.automazioni/pg_mechanics.js` -> `z.automazioni/pg.js` -> frontmatter strutturato -> Jinja della scheda PG.
+`Dev/Source/YAML/canonical/srd_character_build.yaml` -> `npm run sync:sources` -> `z.automazioni/data/srd/*.json` -> `z.automazioni/pg_mechanics.js` -> `z.automazioni/pg.js` -> frontmatter strutturato -> Jinja della scheda PG.
 
 Non hardcodare nuove opzioni PG nello script: aggiungerle al modulo YAML e verificare con `npm run check:srd-character-data` e `npm run check:pg-mechanics`.
 

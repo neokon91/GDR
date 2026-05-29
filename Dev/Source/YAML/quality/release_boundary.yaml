@@ -1,0 +1,255 @@
+id: release_boundary
+purpose: Contratto dichiarativo per tenere la release utente separata da materiali sviluppo e contenuti riservati.
+version: 0.1.0
+required_files:
+  - Inizia Qui.md
+  - LEGGIMI.md
+  - VERSION.md
+  - .obsidian/app.json
+  - .obsidian/appearance.json
+  - .obsidian/community-plugins.json
+  - .obsidian/core-plugins.json
+  - .obsidian/snippets/gdr-vault.css
+  - .obsidian/plugins/dataview/data.json
+  - .obsidian/plugins/homepage/data.json
+  - .obsidian/plugins/metadata-menu/data.json
+  - .obsidian/plugins/obsidian-meta-bind-plugin/data.json
+  - .obsidian/plugins/templater-obsidian/data.json
+  - Hub/Vista Giocatori.md
+  - Hub/Atlante del Mondo.md
+  - Hub/Durante il Gioco.md
+  - Risorse/Setup Guidato.md
+  - Risorse/Controllo Vault.md
+  - Risorse/Quality Report.md
+  - z.engine/session_views.js
+  - z.engine/session_core.js
+  - z.engine/session_continuity.js
+  - z.engine/session_dnd.js
+  - z.engine/session_maps.js
+  - z.engine/session_player.js
+  - z.engine/session_runtime.js
+  - z.automazioni/helpers.js
+  - z.automazioni/helper_paths.js
+  - z.automazioni/helper_prompts.js
+  - z.automazioni/helper_yaml.js
+  - z.automazioni/helper_notes.js
+  - z.automazioni/helper_note_core.js
+  - z.automazioni/helper_note_selection.js
+  - z.automazioni/helper_session_links.js
+  - z.automazioni/meta_actions.js
+  - z.automazioni/continuity_event_model.js
+  - z.automazioni/continuity_state.js
+  - z.automazioni/session_lifecycle_actions.js
+  - z.automazioni/pg.js
+  - z.automazioni/pg_mechanics.js
+  - z.automazioni/data/srd/core.json
+  - z.automazioni/data/srd/opzioni_personaggio.json
+  - z.automazioni/data/runtime/plugin_profile.json
+  - z.automazioni/data/runtime/runtime_exports.json
+  - z.automazioni/data/runtime/session_context.json
+  - z.automazioni/templater
+  - z.bases/Atlante Mappe.base
+  - z.bases/Worldbuilding.base
+  - z.bases/Fazioni.base
+  - z.bases/Incontri.base
+  - z.modelli/.templatefactory-manifest.json
+copy_policy:
+  included_roots:
+    - .obsidian
+    - Campagne
+    - Giocatori
+    - Hub
+    - Inbox
+    - Mondi
+    - Risorse
+    - z.automazioni
+    - z.bases
+    - z.engine
+    - z.bacheche
+    - z.fileclass
+    - z.modelli
+  included_root_files:
+    - Inizia Qui.md
+    - LICENSE.md
+    - VERSION.md
+  excluded_dirs:
+    - .git
+    - .github
+    - Dev
+    - dist
+    - docs
+    - Import
+    - node_modules
+  excluded_root_files:
+    - .gitignore
+    - CHANGELOG.md
+    - RELEASE.md
+    - package.json
+  excluded_files:
+    - .DS_Store
+  excluded_risorse:
+    - Callout GDR.md
+    - Importare Mappe.md
+    - Media Scene.md
+    - Preset Calendario.md
+    - Release Pulita.md
+  excluded_automazioni:
+    - LICENSE.md
+    - README.md
+  required_user_ignore_filters:
+    - SRD/
+    - z.automazioni/
+    - z.bacheche/
+    - z.bases/
+    - z.engine/
+    - z.fileclass/
+    - z.modelli/
+generated_release_roots:
+  - SRD
+  - z.bases
+  - z.fileclass
+materialized_user_files:
+  - path: Campagne/Campagne.md
+    title: Campagne
+    body: Indice runtime per campagne create dall'utente nella release.
+  - path: Giocatori/Giocatori.md
+    title: Giocatori
+    body: Area runtime per materiali condivisibili e vista giocatori.
+  - path: Inbox/Inbox.md
+    title: Inbox
+    body: Area runtime per appunti grezzi, live e bozze da smistare.
+    workflow_blocks:
+      - inbox_operativa
+  - path: Mondi/Mondo.md
+    title: Mondi
+    body: Indice runtime dei mondi creati dall'utente.
+  - path: Mondi/Calendario.md
+    title: Calendario
+    body: |
+      Vista runtime per date del mondo, sessioni e scadenze.
+
+      ## Prossima Scadenza Narrativa
+  - path: Mondi/Stato del Mondo.md
+    title: Stato Campagna
+    body: Vista runtime per missioni aperte, pressioni, conseguenze e continuita.
+    workflow_blocks:
+      - stato_campagna
+  - path: Mondi/Calendario Diegetico/Calendario Diegetico.md
+    title: Calendario Diegetico
+  - path: Mondi/Compendium/Compendium.md
+    title: Compendium
+  - path: Mondi/Conflitti/Conflitti.md
+    title: Conflitti
+  - path: Mondi/Cosmologia/Cosmologia.md
+    title: Cosmologia
+  - path: Mondi/Creature/Creature.md
+    title: Creature
+  - path: Mondi/Culture/Culture.md
+    title: Culture
+  - path: Mondi/Dispense/Dispense.md
+    title: Dispense
+  - path: Mondi/Fazioni/Fazioni.md
+    title: Fazioni
+  - path: Mondi/Incontri/Incontri.md
+    title: Incontri
+  - path: Mondi/Lingue/Lingue.md
+    title: Lingue
+  - path: Mondi/Luoghi/Luoghi.md
+    title: Luoghi
+  - path: Mondi/Mercati/Mercati.md
+    title: Mercati
+  - path: Mondi/Missioni/Missioni.md
+    title: Missioni
+  - path: Mondi/Oggetti/Oggetti.md
+    title: Oggetti
+  - path: Mondi/Personaggi/Personaggi.md
+    title: Personaggi
+  - path: Mondi/Relazioni/Relazioni.md
+    title: Relazioni
+  - path: Mondi/Religioni/Religioni.md
+    title: Religioni
+  - path: Mondi/Risorse/Risorse.md
+    title: Risorse
+  - path: Mondi/Rotte/Rotte.md
+    title: Rotte
+  - path: Mondi/Segreti/Segreti.md
+    title: Segreti
+  - path: Mondi/Sessioni/Sessioni.md
+    title: Sessioni
+  - path: Mondi/Societa/Societa.md
+    title: Societa
+  - path: Mondi/Storia/Storia.md
+    title: Storia
+  - path: Mondi/Timeline/Timeline.md
+    title: Timeline
+  - path: Mondi/Tracciati/Tracciati.md
+    title: Tracciati
+forbidden_roots:
+  - Dev
+  - .github
+  - dist
+  - node_modules
+forbidden_paths:
+  - docs
+  - Dev/Source/YAML/canonical/worldbuilding_depth_axes.yaml
+forbidden_text_markers:
+  - idea_originale_riservata
+  - non_inclusa_nella_licenza_generale_del_vault
+  - FantasyWorld
+  - "source_lab:"
+  - "source_lab: /Users/andrea/Desktop/projects/FantasyWorld"
+  - assi_tematici_fazione
+  - assi_tematici_magia
+required_plugins:
+  - dataview
+  - templater-obsidian
+  - obsidian-meta-bind-plugin
+  - js-engine
+  - metadata-menu
+  - homepage
+  - folder-notes
+  - obsidian-tasks-plugin
+  - fantasy-content-generator
+  - obsidian-excalidraw-plugin
+  - maps
+  - advanced-canvas
+release_plugin_profile:
+  enabled_classes:
+    - core
+    - supporto
+  enabled_optional_plugins:
+    - fantasy-content-generator
+  excluded_classes:
+    - manutenzione
+  excluded_optional_plugins:
+    - zoom-map
+    - hex-cartographer
+forbidden_automation_prefixes:
+  - audit_
+  - check_
+  - generate_
+  - import_
+  - node_utils
+  - repo_hygiene
+  - render_
+  - release_
+  - run_source_pipeline
+  - template_factory_
+bridge_runtime_modules:
+  - session_playability.js
+  - session_continuity.js
+  - session_runtime.js
+  - session_dnd.js
+  - session_maps.js
+  - session_player.js
+runtime_template_modules:
+  - frontmatter_profiles.yaml
+  - runtime_profiles.yaml
+leggimi_markers:
+  - Apri questa cartella in Obsidian
+  - Vista Giocatori
+  - Regione Giocabile
+  - Quality Report
+  - Non e una app standalone
+  - rules engine completo
+  - SRD 5.2.1

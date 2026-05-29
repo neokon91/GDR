@@ -12,7 +12,13 @@ Questa cartella contiene solo documentazione essenziale, contratti YAML/JS e too
 | `RELEASE.md` | Procedura per costruire e validare la ZIP utente. |
 | `Smoke 1.0 Professionale.md` | Smoke visuale pre-release. |
 | `Sviluppo Vault.md` | Convenzioni tecniche e comandi di manutenzione. |
-| `TemplateFactory/` | Moduli YAML, Jinja2 e tooling di generazione. |
+| `Source/YAML/` | Source of truth dichiarativo, separato per dominio, JSON, render, qualita e pipeline. |
+| `Source/Jinja/` | Template Jinja2 usati dai renderer. |
+| `Source/Assets/` | Asset sorgente consumati dalla pipeline. |
+| `Tools/python/` | Tooling di sviluppo primario. |
+| `Tools/node-legacy/` | Check, importer e release script JS esistenti, isolati dal runtime Obsidian. |
+| `Examples/` | Input tecnici per importer e casi locali non utente. |
+| `Tests/fixtures/` | Fixture tecniche usate dai check runtime. |
 
 ## Contratto Architetturale
 
@@ -38,16 +44,18 @@ Usa questa nota come porta d'ingresso. Non creare nuova documentazione stabile s
 | Architettura e confini del sorgente | `source_pipeline.yaml`, `release_boundary.yaml`, `repo_quality_contract.yaml` |
 | Convenzioni tecniche, campi e runtime | [[Dev/Sviluppo Vault]] |
 | Layer Meta Bind, Templater, JS e fileClass | [[Dev/Sviluppo Vault]] |
-| Sintassi e responsabilita plugin | `Dev/TemplateFactory/modules/plugin_bindings.yaml` |
-| Contratti plugin e release | `Dev/TemplateFactory/modules/plugin_matrix.yaml` e `Dev/TemplateFactory/modules/plugin_contracts.yaml` |
+| Sintassi e responsabilita plugin | `Dev/Source/YAML/canonical/plugin_bindings.yaml` |
+| Contratti plugin e release | `Dev/Source/YAML/json/plugin_matrix.yaml` e `Dev/Source/YAML/canonical/plugin_contracts.yaml` |
 | Verifica release | [[Dev/RELEASE]] e [[Dev/Smoke 1.0 Professionale]] |
-| Template, YAML e superfici generate | [[Dev/TemplateFactory/README]] |
+| Template, YAML e superfici generate | [[Dev/Source/README]] |
 | Scheda PG, SRD e output generati | [[Dev/Sviluppo Vault]] |
 
 ## Regole
 
 - Ogni nuova funzione utente deve partire da un contratto YAML o da un check aggiornato.
-- I moduli YAML in `TemplateFactory/modules` devono descrivere dati e integrazioni, non contenere logica fragile.
+- I moduli YAML in `Dev/Source/YAML` devono descrivere dati e integrazioni, non contenere logica fragile.
 - Jinja2 serve per generare template sorgente; Templater resta il runtime dentro Obsidian.
+- Il nuovo tooling di sviluppo va scritto in Python dentro `Dev/Tools/python/`.
+- Il JS usato in Obsidian resta in `z.automazioni/` e `z.engine/`; `Dev/Tools/node-legacy/` esiste solo per il tooling JS storico ancora non portato.
 - Se un file in `Dev/` diventa necessario all'utente finale, va spostato fuori da `Dev/` e aggiunto ai controlli.
 - La documentazione di sviluppo va consolidata qui, in [[Dev/Sviluppo Vault]], in [[Dev/RELEASE]] o nei contratti YAML.

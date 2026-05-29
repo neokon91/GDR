@@ -85,7 +85,7 @@ context => {
       ["Stato propagazione", fieldText(session.propagazione_stato) || "Imposta aperta, applicata, propagata o da verificare.", hasText(session.propagazione_stato)],
       ["Recap pubblico", fieldText(session.recap_pubblico) || "Scrivi un recap player-safe senza segreti.", hasText(session.recap_pubblico) || hasLinks(session.recap_pubblico)],
       ["Recap DM", fieldText(session.recap_dm) || "Annota segreti, retcon, prossime mosse e materiali da non mostrare.", hasText(session.recap_dm) || hasLinks(session.recap_dm)],
-      ["Gap M6", issues.length ? issues.join(", ") : "Nessun gap evidente sulla sessione.", issues.length === 0]
+      ["Gap continuita", issues.length ? issues.join(", ") : "Nessun gap evidente sulla sessione.", issues.length === 0]
     ];
     const grid = dv.el("div", "", { cls: "gdr-card-grid compact" });
 
@@ -303,7 +303,7 @@ context => {
         link: session.file.path
       },
       {
-        title: "Continuita M6",
+        title: "Continuita",
         body: continuityGaps.length
           ? `Gap da chiudere: ${[...new Set(continuityGaps)].join(", ")}`
           : "Ogni conseguenza ha bersaglio, stato o prossima mossa verificabile.",

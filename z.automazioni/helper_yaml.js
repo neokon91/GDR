@@ -134,7 +134,11 @@ async function loadTemplateFactoryModule(moduleName) {
     }
 
     const yamlCandidates = [
-        `Dev/TemplateFactory/modules/${moduleName}.yaml`,
+        `Dev/Source/YAML/canonical/${moduleName}.yaml`,
+        `Dev/Source/YAML/json/${moduleName}.yaml`,
+        `Dev/Source/YAML/render/${moduleName}.yaml`,
+        `Dev/Source/YAML/quality/${moduleName}.yaml`,
+        `Dev/Source/YAML/pipeline/${moduleName}.yaml`,
         `z.automazioni/runtime_modules/${moduleName}.yaml`
     ];
     let source = "";
@@ -147,7 +151,7 @@ async function loadTemplateFactoryModule(moduleName) {
         }
     }
     if (!source) {
-        throw new Error(`Modulo TemplateFactory mancante nel vault: ${moduleName}`);
+        throw new Error(`Modulo YAML sorgente mancante nel vault: ${moduleName}`);
     }
     const parser = typeof parseYaml === "function"
         ? parseYaml

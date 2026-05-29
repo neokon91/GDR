@@ -720,7 +720,7 @@
       if (!workflow) {
         renderEmptyState(dv, {
           title: "Flusso non trovato",
-          action: `Aggiungi ${workflowId} a Dev/TemplateFactory/modules/workflows.yaml e rigenera i dati workflow.`,
+          action: `Aggiungi ${workflowId} a Dev/Source/YAML/json/workflows.yaml e rigenera i dati workflow.`,
           button: "npm run generate:workflow-data"
         });
         return;
@@ -751,7 +751,7 @@
               ? "Plugin Meta Bind non attivo."
               : "Azione pronta.";
         const fallback = !button
-          ? "Correggi Dev/TemplateFactory/modules/workflows.yaml."
+          ? "Correggi Dev/Source/YAML/json/workflows.yaml."
           : !configured
             ? `Aggiungi ${button} in .obsidian/plugins/obsidian-meta-bind-plugin/data.json.`
             : !metaBindReady

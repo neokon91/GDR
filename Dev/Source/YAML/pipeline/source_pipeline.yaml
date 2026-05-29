@@ -1,0 +1,1024 @@
+id: source_pipeline
+purpose: Pipeline unica YAML/Jinja/codice utile -> output richiesti dal vault Obsidian.
+version: 0.1.0
+policy:
+  source_roots:
+    - Dev/Source/YAML
+    - Dev/Source/Jinja
+    - Dev/Tools
+  runtime_output_roots:
+    - z.automazioni
+    - z.engine
+  rule: Per sviluppo umano partire da YAML/Jinja e generatori TemplateFactory; JSON, template materializzati e runtime Obsidian sono output del vault.
+  no_repo_output_roots:
+    - dist
+    - z.modelli
+    - z.bases
+    - z.fileclass
+    - Dev/Build/template-previews
+steps:
+  srd_character_data:
+    purpose: Converte YAML SRD personaggio in JSON runtime per PG.
+    sources:
+      - Dev/Source/YAML/canonical/srd_character_build.yaml
+    outputs:
+      - z.automazioni/data/srd/core.json
+      - z.automazioni/data/srd/opzioni_personaggio.json
+    render:
+      - node
+      - Dev/Tools/node-legacy/import_srd_character_data.js
+    check:
+      - node
+      - Dev/Tools/node-legacy/check_srd_character_data.js
+  obsidian_config:
+    purpose: Genera i JSON Obsidian controllati dal progetto.
+    sources:
+      - Dev/Source/YAML/json/obsidian_config.yaml
+    outputs:
+      - .obsidian/**/*.json
+    render:
+      - python3
+      - Dev/Tools/python/render_obsidian_config.py
+    check:
+      - python3
+      - Dev/Tools/python/render_obsidian_config.py
+      - --check
+  plugin_matrix:
+    purpose: Genera la matrice operativa dei plugin.
+    sources:
+      - Dev/Source/YAML/json/plugin_matrix.yaml
+    outputs:
+      - Dev/plugin_matrix.json
+    render:
+      - python3
+      - Dev/Tools/python/render_plugin_matrix.py
+    check:
+      - python3
+      - Dev/Tools/python/render_plugin_matrix.py
+      - --check
+  obsidian_plugin_bundles:
+    purpose: Verifica che plugin Obsidian siano dichiarati da YAML senza bundle terzi tracciati nella repo.
+    sources:
+      - Dev/Source/YAML/quality/obsidian_plugin_bundle_contract.yaml
+      - Dev/Source/YAML/json/obsidian_config.yaml
+      - Dev/Source/YAML/json/plugin_matrix.yaml
+      - Dev/Source/YAML/canonical/plugin_contracts.yaml
+      - .obsidian/snippets
+      - Dev/Tools/node-legacy/check_obsidian_plugin_bundles.js
+    outputs:
+      - memoria
+    render:
+      - node
+      - Dev/Tools/node-legacy/check_obsidian_plugin_bundles.js
+    check:
+      - node
+      - Dev/Tools/node-legacy/check_obsidian_plugin_bundles.js
+  entity_model_contract:
+    purpose: Verifica il catalogo YAML delle categorie entita e impedisce il ritorno della nota lunga in Risorse.
+    sources:
+      - Dev/Source/YAML/canonical/entity_model.yaml
+      - Dev/Source/YAML/canonical/fields_core.yaml
+      - Dev/Source/YAML/canonical/frontmatter_profiles.yaml
+      - Dev/Source/YAML/canonical/validation_contract.yaml
+      - Dev/Tools/node-legacy/check_entity_model.js
+    outputs:
+      - memoria
+    render:
+      - node
+      - Dev/Tools/node-legacy/check_entity_model.js
+    check:
+      - node
+      - Dev/Tools/node-legacy/check_entity_model.js
+  templater_wrappers:
+    purpose: Genera i wrapper richiesti da Templater nella user_scripts_folder.
+    sources:
+      - Dev/Source/YAML/render/templater_wrappers.yaml
+    outputs:
+      - z.automazioni/templater/*.js
+    render:
+      - python3
+      - Dev/Tools/python/render_templater_wrappers.py
+    check:
+      - python3
+      - Dev/Tools/python/render_templater_wrappers.py
+      - --check
+  metabind_config:
+    purpose: Assembla la configurazione Meta Bind da impostazioni, input e pulsanti YAML.
+    sources:
+      - Dev/Source/YAML/json/metabind_config.yaml
+      - Dev/Source/YAML/json/metabind_inputs.yaml
+      - Dev/Source/YAML/json/metabind_buttons.yaml
+    outputs:
+      - .obsidian/plugins/obsidian-meta-bind-plugin/data.json
+    render:
+      - python3
+      - Dev/Tools/python/render_metabind_config.py
+    check:
+      - python3
+      - Dev/Tools/python/render_metabind_config.py
+      - --check
+  workflow_data:
+    purpose: Genera quick_actions.json da workflows.yaml.
+    sources:
+      - Dev/Source/YAML/json/workflows.yaml
+    outputs:
+      - z.automazioni/data/workflows/quick_actions.json
+    render:
+      - node
+      - Dev/Tools/node-legacy/generate_workflow_data.js
+    check:
+      - node
+      - Dev/Tools/node-legacy/generate_workflow_data.js
+      - --check
+  runtime_plugin_profile:
+    purpose: Genera il profilo runtime dei plugin usato da troubleshooting, workflow fallback e readiness.
+    sources:
+      - Dev/Source/YAML/json/runtime_plugin_profile.yaml
+      - Dev/Source/YAML/json/plugin_matrix.yaml
+      - Dev/Source/YAML/canonical/plugin_contracts.yaml
+      - Dev/Source/YAML/json/workflows.yaml
+      - Dev/Tools/python/render_runtime_plugin_profile.py
+    outputs:
+      - z.automazioni/data/runtime/plugin_profile.json
+    render:
+      - python3
+      - Dev/Tools/python/render_runtime_plugin_profile.py
+    check:
+      - python3
+      - Dev/Tools/python/render_runtime_plugin_profile.py
+      - --check
+  bacheche:
+    purpose: Genera le bacheche Kanban operative del vault finale da YAML/Jinja.
+    sources:
+      - Dev/Source/YAML/render/bacheche.yaml
+      - Dev/Source/Jinja/bacheca_kanban.md.j2
+      - Dev/Source/Jinja/bacheche_readme.md.j2
+    outputs:
+      - z.bacheche/*.md
+    render:
+      - python3
+      - Dev/Tools/python/render_bacheche.py
+    check:
+      - python3
+      - Dev/Tools/python/render_bacheche.py
+      - --check
+  resource_support_pages:
+    purpose: Genera guide Risorse di supporto da YAML/Jinja, lasciandole fuori dal sorgente tracciato.
+    sources:
+      - Dev/Source/YAML/render/resource_support_pages.yaml
+      - Dev/Source/Assets/resource_support/schema_relazioni_gdr.excalidraw.body.md
+      - Dev/Source/Jinja/resource_support_page.md.j2
+      - Dev/Tools/python/render_resource_support_pages.py
+    outputs:
+      - Risorse/Aspetto Vault.md
+      - Risorse/Callout GDR.md
+      - Risorse/Canvas Per GDR.md
+      - Risorse/Come Usare I Clock.md
+      - Risorse/Controllo Vault.md
+      - Risorse/Creazione Guidata Entità.md
+      - Risorse/Excalidraw Per GDR.md
+      - Risorse/FAQ.md
+      - Risorse/Fronti Di Campagna.md
+      - Risorse/Guida DM.md
+      - Risorse/Iniziativa e Combattimenti.md
+      - Risorse/Importare Mappe.md
+      - Risorse/Mappe Bases.md
+      - Risorse/Mappe/Mappe.md
+      - Risorse/Mappe/Schema Relazioni GDR.excalidraw.md
+      - Risorse/Materiali Al Tavolo.md
+      - Risorse/Media Scene.md
+      - Risorse/Opportunità Di Avventura.md
+      - Risorse/Post Sessione Guidato.md
+      - Risorse/Preparazione Sessione.md
+      - Risorse/Preset Calendario.md
+      - Risorse/Prima Sessione In 15 Minuti.md
+      - Risorse/Primo Avvio Strumenti.md
+      - Risorse/Quality Report.md
+      - Risorse/Se Qualcosa Non Funziona.md
+      - Risorse/Setup Guidato.md
+      - Risorse/Smistamento Bozze Generate.md
+      - Risorse/Tabelle/Tabelle.md
+      - Risorse/Tabelle/Worldbuilding Generatori.md
+      - Risorse/Task DM.md
+      - Risorse/Worldbuilding Profondo.md
+    render:
+      - python3
+      - Dev/Tools/python/render_resource_support_pages.py
+    check:
+      - python3
+      - Dev/Tools/python/render_resource_support_pages.py
+      - --check
+  resource_indexes:
+    purpose: Genera indici semplici di risorse finali da YAML/Jinja.
+    sources:
+      - Dev/Source/YAML/render/resource_indexes.yaml
+      - Dev/Source/Jinja/resource_index.md.j2
+    outputs:
+      - Risorse/Audio/Audio.md
+      - Risorse/Video/Video.md
+      - Risorse/Immagini/Immagini.md
+      - Risorse/Dispense/Dispense.md
+    render:
+      - python3
+      - Dev/Tools/python/render_resource_indexes.py
+    check:
+      - python3
+      - Dev/Tools/python/render_resource_indexes.py
+      - --check
+  resource_hub:
+    purpose: Genera il catalogo centrale Risorse/Risorse.md da YAML/Jinja.
+    sources:
+      - Dev/Source/YAML/render/resource_hub.yaml
+      - Dev/Source/Jinja/resource_hub.md.j2
+    outputs:
+      - Risorse/Risorse.md
+    render:
+      - python3
+      - Dev/Tools/python/render_resource_hub.py
+    check:
+      - python3
+      - Dev/Tools/python/render_resource_hub.py
+      - --check
+  hub_pages:
+    purpose: Genera le pagine operative Hub da YAML/Jinja, lasciandole fuori dal sorgente tracciato.
+    sources:
+      - Dev/Source/YAML/render/hub_pages.yaml
+      - Dev/Source/Jinja/resource_support_page.md.j2
+      - Dev/Tools/python/render_hub_pages.py
+    outputs:
+      - Hub/1. DM Dashboard.md
+      - Hub/Atlante del Mondo.md
+      - Hub/Bibbia del Mondo.md
+      - Hub/Campagna da Ambientazione.md
+      - Hub/Compendium Del Mondo.md
+      - Hub/Controllo Canone.md
+      - Hub/Controllo Worldbuilding.md
+      - Hub/Cosa Succede Fuori Scena.md
+      - Hub/Durante il Gioco.md
+      - Hub/Economia E Rotte.md
+      - Hub/Geopolitical Dashboard.md
+      - Hub/Lore Hub.md
+      - Hub/Motore Mondo Vivo.md
+      - Hub/Party Control.md
+      - Hub/Revisione Lore.md
+      - Hub/Vista Giocatori.md
+      - Hub/Worldbuilder Dashboard.md
+    render:
+      - python3
+      - Dev/Tools/python/render_hub_pages.py
+    check:
+      - python3
+      - Dev/Tools/python/render_hub_pages.py
+      - --check
+  root_pages:
+    purpose: Genera le pagine root finali del vault da YAML/Jinja, lasciandole fuori dal sorgente tracciato.
+    sources:
+      - Dev/Source/YAML/render/root_pages.yaml
+      - Dev/Source/Jinja/resource_support_page.md.j2
+      - Dev/Tools/python/render_root_pages.py
+    outputs:
+      - Inizia Qui.md
+      - VERSION.md
+    render:
+      - python3
+      - Dev/Tools/python/render_root_pages.py
+    check:
+      - python3
+      - Dev/Tools/python/render_root_pages.py
+      - --check
+  plugin_usage_audit:
+    purpose: Verifica che ogni plugin dichiarato abbia classe, contratto, binding tecnico e superficie reale.
+    sources:
+      - Dev/Source/YAML/json/obsidian_config.yaml
+      - Dev/Source/YAML/json/metabind_config.yaml
+      - Dev/Source/YAML/json/plugin_matrix.yaml
+      - Dev/Source/YAML/canonical/plugin_contracts.yaml
+      - Dev/Source/YAML/canonical/plugin_bindings.yaml
+      - Dev/Source/YAML/quality/release_boundary.yaml
+      - Dev/Source/YAML/quality/manual_acceptance.yaml
+      - Dev/Source/YAML/pipeline/source_pipeline.yaml
+      - Dev/plugin_matrix.json
+    outputs:
+      - memoria
+    render:
+      - node
+      - Dev/Tools/node-legacy/check_plugin_usage_audit.js
+    check:
+      - node
+      - Dev/Tools/node-legacy/check_plugin_usage_audit.js
+  workflow_blocks:
+    purpose: Renderizza blocchi azioni rapide dentro le pagine operative.
+    sources:
+      - Dev/Source/YAML/json/workflows.yaml
+      - z.automazioni/data/workflows/quick_actions.json
+      - .obsidian/plugins/obsidian-meta-bind-plugin/data.json
+      - Dev/Source/YAML/quality/release_boundary.yaml
+      - Dev/Source/Jinja/release_folder_note.md.j2
+      - Dev/Tools/python/render_release_folder_notes.py
+      - Dev/Tools/python/render_workflow_quick_actions.py
+    outputs:
+      - Inizia Qui.md
+      - Hub/**/*.md
+      - Risorse/**/*.md
+      - z.bacheche/**/*.md
+    render:
+      - python3
+      - Dev/Tools/python/render_workflow_quick_actions.py
+    check:
+      - python3
+      - Dev/Tools/python/render_workflow_quick_actions.py
+      - --check
+  dm_dashboard_cockpit:
+    purpose: Genera il contratto runtime della DM Dashboard senza scrivere root generate.
+    sources:
+      - Dev/Source/YAML/json/dm_dashboard_cockpit.yaml
+      - Dev/Source/YAML/render/bases_views.yaml
+      - Dev/Source/YAML/canonical/frontmatter_profiles.yaml
+      - Hub/1. DM Dashboard.md
+      - z.engine/session_dm_dashboard.js
+      - z.engine/session_views.js
+    outputs:
+      - z.automazioni/data/runtime/dm_dashboard_cockpit.json
+    render:
+      - python3
+      - Dev/Tools/python/render_cockpit_contract.py
+      - dm_dashboard_cockpit
+    check:
+      - python3
+      - Dev/Tools/python/render_cockpit_contract.py
+      - dm_dashboard_cockpit
+      - --check
+  dm_guide_cockpit:
+    purpose: Genera il contratto runtime della Guida DM senza scrivere root generate.
+    sources:
+      - Dev/Source/YAML/json/dm_guide_cockpit.yaml
+      - Dev/Source/YAML/render/bases_views.yaml
+      - Dev/Source/YAML/canonical/frontmatter_profiles.yaml
+      - Risorse/Guida DM.md
+      - z.engine/session_dm_guide.js
+      - z.engine/session_views.js
+    outputs:
+      - z.automazioni/data/runtime/dm_guide_cockpit.json
+    render:
+      - python3
+      - Dev/Tools/python/render_cockpit_contract.py
+      - dm_guide_cockpit
+    check:
+      - python3
+      - Dev/Tools/python/render_cockpit_contract.py
+      - dm_guide_cockpit
+      - --check
+  vault_control_cockpit:
+    purpose: Genera il contratto runtime del cockpit Controllo Vault senza scrivere root generate.
+    sources:
+      - Dev/Source/YAML/json/vault_control_cockpit.yaml
+      - Dev/Source/YAML/render/bases_views.yaml
+      - Dev/Source/YAML/canonical/frontmatter_profiles.yaml
+      - Risorse/Controllo Vault.md
+      - z.engine/session_playability.js
+      - z.engine/session_vault_control.js
+      - z.engine/session_views.js
+    outputs:
+      - z.automazioni/data/runtime/vault_control_cockpit.json
+    render:
+      - python3
+      - Dev/Tools/python/render_cockpit_contract.py
+      - vault_control_cockpit
+    check:
+      - python3
+      - Dev/Tools/python/render_cockpit_contract.py
+      - vault_control_cockpit
+      - --check
+  quality_report_cockpit:
+    purpose: Genera il contratto runtime del cockpit Quality Report senza scrivere root generate.
+    sources:
+      - Dev/Source/YAML/json/quality_report_cockpit.yaml
+      - Dev/Source/YAML/canonical/region_playability_contract.yaml
+      - Dev/Source/YAML/canonical/region_to_session_contract.yaml
+      - Dev/Source/YAML/render/bases_views.yaml
+      - Dev/Source/YAML/canonical/frontmatter_profiles.yaml
+      - Risorse/Quality Report.md
+      - z.engine/session_quality_report.js
+      - z.engine/session_views.js
+    outputs:
+      - z.automazioni/data/runtime/quality_report_cockpit.json
+    render:
+      - python3
+      - Dev/Tools/python/render_cockpit_contract.py
+      - quality_report_cockpit
+    check:
+      - python3
+      - Dev/Tools/python/render_cockpit_contract.py
+      - quality_report_cockpit
+      - --check
+  generated_drafts_cockpit:
+    purpose: Genera il contratto runtime del cockpit Smistamento Bozze senza scrivere root generate.
+    sources:
+      - Dev/Source/YAML/json/generated_drafts_cockpit.yaml
+      - Dev/Source/YAML/canonical/runtime_profiles.yaml
+      - Dev/Source/YAML/render/bases_views.yaml
+      - Dev/Source/YAML/canonical/frontmatter_profiles.yaml
+      - Risorse/Smistamento Bozze Generate.md
+      - z.engine/session_generated_drafts.js
+      - z.engine/session_views.js
+    outputs:
+      - z.automazioni/data/runtime/generated_drafts_cockpit.json
+    render:
+      - python3
+      - Dev/Tools/python/render_cockpit_contract.py
+      - generated_drafts_cockpit
+    check:
+      - python3
+      - Dev/Tools/python/render_cockpit_contract.py
+      - generated_drafts_cockpit
+      - --check
+  world_bible_cockpit:
+    purpose: Genera il contratto runtime del cockpit Bibbia del Mondo senza scrivere root generate.
+    sources:
+      - Dev/Source/YAML/json/world_bible_cockpit.yaml
+      - Dev/Source/YAML/render/bases_views.yaml
+      - Dev/Source/YAML/canonical/frontmatter_profiles.yaml
+      - Hub/Bibbia del Mondo.md
+      - z.engine/session_world_bible.js
+      - z.engine/session_views.js
+    outputs:
+      - z.automazioni/data/runtime/world_bible_cockpit.json
+    render:
+      - python3
+      - Dev/Tools/python/render_cockpit_contract.py
+      - world_bible_cockpit
+    check:
+      - python3
+      - Dev/Tools/python/render_cockpit_contract.py
+      - world_bible_cockpit
+      - --check
+  compendium_cockpit:
+    purpose: Genera il contratto runtime del cockpit Compendium Del Mondo senza scrivere root generate.
+    sources:
+      - Dev/Source/YAML/json/compendium_cockpit.yaml
+      - Dev/Source/YAML/render/bases_views.yaml
+      - Dev/Source/YAML/canonical/frontmatter_profiles.yaml
+      - Hub/Compendium Del Mondo.md
+      - z.engine/session_compendium.js
+      - z.engine/session_views.js
+    outputs:
+      - z.automazioni/data/runtime/compendium_cockpit.json
+    render:
+      - python3
+      - Dev/Tools/python/render_cockpit_contract.py
+      - compendium_cockpit
+    check:
+      - python3
+      - Dev/Tools/python/render_cockpit_contract.py
+      - compendium_cockpit
+      - --check
+  worldbuilding_cockpit:
+    purpose: Genera il contratto runtime del cockpit worldbuilding senza scrivere root generate.
+    sources:
+      - Dev/Source/YAML/json/worldbuilding_cockpit.yaml
+      - Dev/Source/YAML/render/bases_views.yaml
+      - Dev/Source/YAML/canonical/frontmatter_profiles.yaml
+      - Hub/Worldbuilder Dashboard.md
+      - z.engine/session_views.js
+    outputs:
+      - z.automazioni/data/runtime/worldbuilding_cockpit.json
+    render:
+      - python3
+      - Dev/Tools/python/render_cockpit_contract.py
+      - worldbuilding_cockpit
+    check:
+      - python3
+      - Dev/Tools/python/render_cockpit_contract.py
+      - worldbuilding_cockpit
+      - --check
+  atlas_cockpit:
+    purpose: Genera il contratto runtime del cockpit atlante senza scrivere root generate.
+    sources:
+      - Dev/Source/YAML/json/atlas_cockpit.yaml
+      - Dev/Source/YAML/render/bases_views.yaml
+      - Dev/Source/YAML/canonical/frontmatter_profiles.yaml
+      - Hub/Atlante del Mondo.md
+      - z.engine/session_atlas.js
+      - z.engine/session_views.js
+    outputs:
+      - z.automazioni/data/runtime/atlas_cockpit.json
+    render:
+      - python3
+      - Dev/Tools/python/render_cockpit_contract.py
+      - atlas_cockpit
+    check:
+      - python3
+      - Dev/Tools/python/render_cockpit_contract.py
+      - atlas_cockpit
+      - --check
+  maps_cockpit:
+    purpose: Genera il contratto runtime del cockpit Mappe senza scrivere root generate.
+    sources:
+      - Dev/Source/YAML/json/maps_cockpit.yaml
+      - Dev/Source/YAML/render/bases_views.yaml
+      - Dev/Source/YAML/canonical/frontmatter_profiles.yaml
+      - Risorse/Mappe/Mappe.md
+      - z.engine/session_maps.js
+      - z.engine/session_views.js
+    outputs:
+      - z.automazioni/data/runtime/maps_cockpit.json
+    render:
+      - python3
+      - Dev/Tools/python/render_cockpit_contract.py
+      - maps_cockpit
+    check:
+      - python3
+      - Dev/Tools/python/render_cockpit_contract.py
+      - maps_cockpit
+      - --check
+  import_maps_cockpit:
+    purpose: Genera il contratto runtime del cockpit Importare Mappe senza scrivere root generate.
+    sources:
+      - Dev/Source/YAML/json/import_maps_cockpit.yaml
+      - Dev/Source/YAML/render/bases_views.yaml
+      - Dev/Source/YAML/canonical/frontmatter_profiles.yaml
+      - Risorse/Importare Mappe.md
+      - z.engine/session_import_maps.js
+      - z.engine/session_views.js
+      - package.json
+    outputs:
+      - z.automazioni/data/runtime/map_import_cockpit.json
+    render:
+      - python3
+      - Dev/Tools/python/render_cockpit_contract.py
+      - import_maps_cockpit
+    check:
+      - python3
+      - Dev/Tools/python/render_cockpit_contract.py
+      - import_maps_cockpit
+      - --check
+  worldbuilding_control_cockpit:
+    purpose: Genera il contratto runtime dell'audit Controllo Worldbuilding senza scrivere root generate.
+    sources:
+      - Dev/Source/YAML/json/worldbuilding_control_cockpit.yaml
+      - Dev/Source/YAML/render/bases_views.yaml
+      - Dev/Source/YAML/canonical/frontmatter_profiles.yaml
+      - Hub/Controllo Worldbuilding.md
+      - z.engine/session_playability.js
+      - z.engine/session_worldbuilding_control.js
+      - z.engine/session_views.js
+    outputs:
+      - z.automazioni/data/runtime/worldbuilding_control_cockpit.json
+    render:
+      - python3
+      - Dev/Tools/python/render_cockpit_contract.py
+      - worldbuilding_control_cockpit
+    check:
+      - python3
+      - Dev/Tools/python/render_cockpit_contract.py
+      - worldbuilding_control_cockpit
+      - --check
+  canon_control_cockpit:
+    purpose: Genera il contratto runtime del cockpit Controllo Canone senza scrivere root generate.
+    sources:
+      - Dev/Source/YAML/json/canon_control_cockpit.yaml
+      - Dev/Source/YAML/render/bases_views.yaml
+      - Dev/Source/YAML/canonical/frontmatter_profiles.yaml
+      - Hub/Controllo Canone.md
+      - z.engine/session_canon_control.js
+      - z.engine/session_views.js
+    outputs:
+      - z.automazioni/data/runtime/canon_control_cockpit.json
+    render:
+      - python3
+      - Dev/Tools/python/render_cockpit_contract.py
+      - canon_control_cockpit
+    check:
+      - python3
+      - Dev/Tools/python/render_cockpit_contract.py
+      - canon_control_cockpit
+      - --check
+  living_world_cockpit:
+    purpose: Genera il contratto runtime del cockpit Motore Mondo Vivo senza scrivere root generate.
+    sources:
+      - Dev/Source/YAML/json/living_world_cockpit.yaml
+      - Dev/Source/YAML/render/bases_views.yaml
+      - Dev/Source/YAML/canonical/frontmatter_profiles.yaml
+      - Hub/Motore Mondo Vivo.md
+      - z.engine/session_living_world.js
+      - z.engine/session_views.js
+    outputs:
+      - z.automazioni/data/runtime/living_world_cockpit.json
+    render:
+      - python3
+      - Dev/Tools/python/render_cockpit_contract.py
+      - living_world_cockpit
+    check:
+      - python3
+      - Dev/Tools/python/render_cockpit_contract.py
+      - living_world_cockpit
+      - --check
+  economy_cockpit:
+    purpose: Genera il contratto runtime del cockpit Economia E Rotte senza scrivere root generate.
+    sources:
+      - Dev/Source/YAML/json/economy_cockpit.yaml
+      - Dev/Source/YAML/render/bases_views.yaml
+      - Dev/Source/YAML/canonical/frontmatter_profiles.yaml
+      - Hub/Economia E Rotte.md
+      - z.engine/session_economy.js
+      - z.engine/session_views.js
+    outputs:
+      - z.automazioni/data/runtime/economy_cockpit.json
+    render:
+      - python3
+      - Dev/Tools/python/render_cockpit_contract.py
+      - economy_cockpit
+    check:
+      - python3
+      - Dev/Tools/python/render_cockpit_contract.py
+      - economy_cockpit
+      - --check
+  lore_cockpit:
+    purpose: Genera il contratto runtime del cockpit Lore Hub senza scrivere root generate.
+    sources:
+      - Dev/Source/YAML/json/lore_cockpit.yaml
+      - Dev/Source/YAML/render/bases_views.yaml
+      - Dev/Source/YAML/canonical/frontmatter_profiles.yaml
+      - Hub/Lore Hub.md
+      - z.engine/session_lore.js
+      - z.engine/session_views.js
+    outputs:
+      - z.automazioni/data/runtime/lore_cockpit.json
+    render:
+      - python3
+      - Dev/Tools/python/render_cockpit_contract.py
+      - lore_cockpit
+    check:
+      - python3
+      - Dev/Tools/python/render_cockpit_contract.py
+      - lore_cockpit
+      - --check
+  lore_review_cockpit:
+    purpose: Genera il contratto runtime del cockpit Revisione Lore senza scrivere root generate.
+    sources:
+      - Dev/Source/YAML/json/lore_review_cockpit.yaml
+      - Dev/Source/YAML/render/bases_views.yaml
+      - Dev/Source/YAML/canonical/frontmatter_profiles.yaml
+      - Hub/Revisione Lore.md
+      - z.engine/session_lore_review.js
+      - z.engine/session_views.js
+    outputs:
+      - z.automazioni/data/runtime/lore_review_cockpit.json
+    render:
+      - python3
+      - Dev/Tools/python/render_cockpit_contract.py
+      - lore_review_cockpit
+    check:
+      - python3
+      - Dev/Tools/python/render_cockpit_contract.py
+      - lore_review_cockpit
+      - --check
+  geopolitical_cockpit:
+    purpose: Genera il contratto runtime del cockpit Geopolitical Dashboard senza scrivere root generate.
+    sources:
+      - Dev/Source/YAML/json/geopolitical_cockpit.yaml
+      - Dev/Source/YAML/render/bases_views.yaml
+      - Dev/Source/YAML/canonical/frontmatter_profiles.yaml
+      - Hub/Geopolitical Dashboard.md
+      - z.engine/session_geopolitical.js
+      - z.engine/session_views.js
+    outputs:
+      - z.automazioni/data/runtime/geopolitical_cockpit.json
+    render:
+      - python3
+      - Dev/Tools/python/render_cockpit_contract.py
+      - geopolitical_cockpit
+    check:
+      - python3
+      - Dev/Tools/python/render_cockpit_contract.py
+      - geopolitical_cockpit
+      - --check
+  campaign_builder_cockpit:
+    purpose: Genera il contratto runtime del cockpit Campagna da Ambientazione senza scrivere root generate.
+    sources:
+      - Dev/Source/YAML/json/campaign_builder_cockpit.yaml
+      - Dev/Source/YAML/render/bases_views.yaml
+      - Dev/Source/YAML/canonical/frontmatter_profiles.yaml
+      - Hub/Campagna da Ambientazione.md
+      - z.engine/session_campaign_builder.js
+      - z.engine/session_views.js
+    outputs:
+      - z.automazioni/data/runtime/campaign_builder_cockpit.json
+    render:
+      - python3
+      - Dev/Tools/python/render_cockpit_contract.py
+      - campaign_builder_cockpit
+    check:
+      - python3
+      - Dev/Tools/python/render_cockpit_contract.py
+      - campaign_builder_cockpit
+      - --check
+  offscreen_cockpit:
+    purpose: Genera il contratto runtime del cockpit Cosa Succede Fuori Scena senza scrivere root generate.
+    sources:
+      - Dev/Source/YAML/json/offscreen_cockpit.yaml
+      - Dev/Source/YAML/render/bases_views.yaml
+      - Dev/Source/YAML/canonical/frontmatter_profiles.yaml
+      - Hub/Cosa Succede Fuori Scena.md
+      - z.engine/session_offscreen.js
+      - z.engine/session_views.js
+    outputs:
+      - z.automazioni/data/runtime/offscreen_cockpit.json
+    render:
+      - python3
+      - Dev/Tools/python/render_cockpit_contract.py
+      - offscreen_cockpit
+    check:
+      - python3
+      - Dev/Tools/python/render_cockpit_contract.py
+      - offscreen_cockpit
+      - --check
+  preparation_cockpit:
+    purpose: Genera il contratto runtime del cockpit Preparazione Sessione senza scrivere root generate.
+    sources:
+      - Dev/Source/YAML/json/preparation_cockpit.yaml
+      - Dev/Source/YAML/render/bases_views.yaml
+      - Dev/Source/YAML/canonical/frontmatter_profiles.yaml
+      - Risorse/Preparazione Sessione.md
+      - z.engine/session_preparation.js
+      - z.engine/session_views.js
+    outputs:
+      - z.automazioni/data/runtime/preparation_cockpit.json
+    render:
+      - python3
+      - Dev/Tools/python/render_cockpit_contract.py
+      - preparation_cockpit
+    check:
+      - python3
+      - Dev/Tools/python/render_cockpit_contract.py
+      - preparation_cockpit
+      - --check
+  table_materials_cockpit:
+    purpose: Genera il contratto runtime del cockpit Materiali Al Tavolo senza scrivere root generate.
+    sources:
+      - Dev/Source/YAML/json/table_materials_cockpit.yaml
+      - Dev/Source/YAML/render/bases_views.yaml
+      - Dev/Source/YAML/canonical/frontmatter_profiles.yaml
+      - Risorse/Materiali Al Tavolo.md
+      - z.engine/session_table_materials.js
+      - z.engine/session_views.js
+    outputs:
+      - z.automazioni/data/runtime/table_materials_cockpit.json
+    render:
+      - python3
+      - Dev/Tools/python/render_cockpit_contract.py
+      - table_materials_cockpit
+    check:
+      - python3
+      - Dev/Tools/python/render_cockpit_contract.py
+      - table_materials_cockpit
+      - --check
+  media_scene_cockpit:
+    purpose: Genera il contratto runtime del cockpit Media Scene senza scrivere root generate.
+    sources:
+      - Dev/Source/YAML/json/media_scene_cockpit.yaml
+      - Dev/Source/YAML/render/bases_views.yaml
+      - Dev/Source/YAML/canonical/frontmatter_profiles.yaml
+      - Risorse/Media Scene.md
+      - z.engine/session_media_scene.js
+      - z.engine/session_views.js
+    outputs:
+      - z.automazioni/data/runtime/media_scene_cockpit.json
+    render:
+      - python3
+      - Dev/Tools/python/render_cockpit_contract.py
+      - media_scene_cockpit
+    check:
+      - python3
+      - Dev/Tools/python/render_cockpit_contract.py
+      - media_scene_cockpit
+      - --check
+  live_table_cockpit:
+    purpose: Genera il contratto runtime del cockpit Durante il Gioco senza scrivere root generate.
+    sources:
+      - Dev/Source/YAML/json/live_table_cockpit.yaml
+      - Dev/Source/YAML/render/bases_views.yaml
+      - Dev/Source/YAML/canonical/frontmatter_profiles.yaml
+      - Hub/Durante il Gioco.md
+      - z.engine/session_live_table.js
+      - z.engine/session_views.js
+    outputs:
+      - z.automazioni/data/runtime/live_table_cockpit.json
+    render:
+      - python3
+      - Dev/Tools/python/render_cockpit_contract.py
+      - live_table_cockpit
+    check:
+      - python3
+      - Dev/Tools/python/render_cockpit_contract.py
+      - live_table_cockpit
+      - --check
+  post_session_cockpit:
+    purpose: Genera il contratto runtime del cockpit Post Sessione Guidato senza scrivere root generate.
+    sources:
+      - Dev/Source/YAML/json/post_session_cockpit.yaml
+      - Dev/Source/YAML/render/bases_views.yaml
+      - Dev/Source/YAML/canonical/frontmatter_profiles.yaml
+      - Risorse/Post Sessione Guidato.md
+      - z.engine/session_post_session.js
+      - z.engine/session_views.js
+    outputs:
+      - z.automazioni/data/runtime/post_session_cockpit.json
+    render:
+      - python3
+      - Dev/Tools/python/render_cockpit_contract.py
+      - post_session_cockpit
+    check:
+      - python3
+      - Dev/Tools/python/render_cockpit_contract.py
+      - post_session_cockpit
+      - --check
+  user_path:
+    purpose: Verifica il percorso utente primario dichiarato in YAML.
+    sources:
+      - Dev/Source/YAML/quality/user_path.yaml
+      - Dev/Source/YAML/json/workflows.yaml
+      - Dev/Tools/node-legacy/check_user_path.js
+      - z.automazioni/data/workflows/quick_actions.json
+      - .obsidian/plugins/obsidian-meta-bind-plugin/data.json
+    outputs:
+      - memoria
+    render:
+      - node
+      - Dev/Tools/node-legacy/check_user_path.js
+    check:
+      - node
+      - Dev/Tools/node-legacy/check_user_path.js
+  validation_contract:
+    purpose: Verifica i contratti YAML usati dai check di dominio e qualita delle note.
+    sources:
+      - Dev/Source/YAML/canonical/validation_contract.yaml
+      - Dev/Source/YAML/canonical/fields_core.yaml
+      - Dev/Source/YAML/canonical/frontmatter_profiles.yaml
+      - Dev/Source/YAML/canonical/runtime_profiles.yaml
+    outputs:
+      - memoria
+    render:
+      - node
+      - Dev/Tools/node-legacy/check_validation_contract.js
+    check:
+      - node
+      - Dev/Tools/node-legacy/check_validation_contract.js
+  naming_contract:
+    purpose: Verifica che codice, pipeline e runtime usino nomi di dominio e non alias di milestone.
+    sources:
+      - Dev/Source/YAML/quality/naming_contract.yaml
+      - Dev/Tools/node-legacy/check_naming_contract.js
+    outputs:
+      - memoria
+    render:
+      - node
+      - Dev/Tools/node-legacy/check_naming_contract.js
+    check:
+      - node
+      - Dev/Tools/node-legacy/check_naming_contract.js
+  session_context_contract:
+    purpose: Genera il contratto JSON letto dal core sessione e dal registry percorsi runtime.
+    sources:
+      - Dev/Source/YAML/canonical/runtime_profiles.yaml
+      - Dev/Source/YAML/canonical/template_router.yaml
+      - Dev/Source/YAML/canonical/world_taxonomy.yaml
+      - Dev/Source/YAML/canonical/fields_core.yaml
+      - Dev/Source/YAML/canonical/entity_model.yaml
+      - Dev/Source/YAML/quality/release_boundary.yaml
+      - Dev/Source/YAML/render/resource_indexes.yaml
+      - Dev/Source/YAML/render/resource_support_pages.yaml
+      - Dev/Source/YAML/render/template_blueprints.yaml
+      - Dev/Tools/python/render_session_context_contract.py
+    outputs:
+      - z.automazioni/data/runtime/session_context.json
+    render:
+      - python3
+      - Dev/Tools/python/render_session_context_contract.py
+    check:
+      - python3
+      - Dev/Tools/python/render_session_context_contract.py
+      - --check
+  runtime_exports_contract:
+    purpose: Verifica manifest export z.engine, dipendenze CommonJS Templater, sorgenti Dataview simulate, scenari render e fixture runtime senza mantenere liste o asserzioni enormi nel codice.
+    sources:
+      - Dev/Source/YAML/json/runtime_exports.yaml
+      - Dev/Source/YAML/json/runtime_render_contract.yaml
+      - Dev/Source/YAML/json/runtime_dataview_contract.yaml
+      - z.automazioni/dm.js
+      - z.automazioni/helper_paths.js
+      - z.automazioni/template_router.js
+      - z.automazioni/wizard_layer.js
+      - z.automazioni/worldbuilding.js
+      - z.automazioni/world_taxonomy.js
+      - z.automazioni/data/runtime/plugin_profile.json
+      - z.automazioni/data/runtime/session_context.json
+      - z.automazioni/data/runtime/generated_drafts_cockpit.json
+      - z.engine/session_playability.js
+      - Dev/Tests/fixtures/runtime_fixture_pages.json
+      - Dev/Tools/node-legacy/check_runtime_load.js
+    outputs:
+      - z.automazioni/data/runtime/runtime_exports.json
+    render:
+      - node
+      - Dev/Tools/node-legacy/check_runtime_load.js
+      - --render-runtime-data
+    check:
+      - node
+      - Dev/Tools/node-legacy/check_runtime_load.js
+  repo_quality_contract:
+    purpose: Verifica il contratto YAML dei gate repository usati da check_vault.
+    sources:
+      - Dev/Source/YAML/quality/repo_quality_contract.yaml
+      - Dev/Source/YAML/json/obsidian_config.yaml
+      - Dev/Source/YAML/quality/release_boundary.yaml
+      - Dev/Source/YAML/json/workflows.yaml
+      - Dev/README.md
+      - Dev/Tools/node-legacy/check_repo_quality_contract.js
+    outputs:
+      - memoria
+    render:
+      - node
+      - Dev/Tools/node-legacy/check_repo_quality_contract.js
+    check:
+      - node
+      - Dev/Tools/node-legacy/check_repo_quality_contract.js
+  release_quality_contract:
+    purpose: Verifica il contratto YAML dei gate statici di release quality.
+    sources:
+      - Dev/Source/YAML/quality/release_quality_contract.yaml
+      - Dev/Source/YAML/json/metabind_inputs.yaml
+      - Dev/Source/YAML/json/metabind_buttons.yaml
+      - Dev/Tools/node-legacy/check_release_quality.js
+    outputs:
+      - memoria
+    render:
+      - node
+      - Dev/Tools/node-legacy/check_release_quality.js
+      - --contract-check
+    check:
+      - node
+      - Dev/Tools/node-legacy/check_release_quality.js
+      - --contract-check
+  release_folder_notes:
+    purpose: Verifica le folder notes utente di release da release_boundary.yaml e Jinja.
+    sources:
+      - Dev/Source/YAML/quality/release_boundary.yaml
+      - Dev/Source/Jinja/release_folder_note.md.j2
+      - z.automazioni/data/workflows/quick_actions.json
+    outputs:
+      - memoria
+    render:
+      - python3
+      - Dev/Tools/python/render_release_folder_notes.py
+      - --check
+    check:
+      - python3
+      - Dev/Tools/python/render_release_folder_notes.py
+      - --check
+  manual_release_acceptance:
+    purpose: Verifica il contratto della checklist manuale Obsidian senza aprire l'app.
+    sources:
+      - Dev/Source/YAML/quality/manual_acceptance.yaml
+      - Dev/Tools/node-legacy/prepare_manual_release_test.js
+    outputs:
+      - memoria
+    render:
+      - node
+      - Dev/Tools/node-legacy/prepare_manual_release_test.js
+      - --contract-check
+    check:
+      - node
+      - Dev/Tools/node-legacy/prepare_manual_release_test.js
+      - --contract-check
+  template_previews:
+    purpose: Verifica blueprint YAML e Jinja senza materializzare z.modelli nel repo sorgente.
+    sources:
+      - Dev/Source/YAML/render/template_blueprints.yaml
+      - Dev/Source/Jinja
+    outputs:
+      - memoria
+    render:
+      - python3
+      - Dev/Tools/python/check_template_factory.py
+    check:
+      - python3
+      - Dev/Tools/python/check_template_factory.py
+  metadata_surfaces:
+    purpose: Verifica fileClass/Bases generate dai moduli metadata senza scrivere output nel repo sorgente.
+    release_only: true
+    sources:
+      - Dev/Source/YAML/canonical/frontmatter_profiles.yaml
+      - Dev/Source/YAML/render/bases_views.yaml
+    outputs:
+      - z.fileclass/**/*.md
+      - z.bases/**/*.base
+      - z.bases/README.md
+    render:
+      - python3
+      - Dev/Tools/python/render_metadata_surfaces.py
+      - --check
+    check:
+      - python3
+      - Dev/Tools/python/render_metadata_surfaces.py
+      - --check

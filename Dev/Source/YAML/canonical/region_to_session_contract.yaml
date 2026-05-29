@@ -1,0 +1,123 @@
+id: region_to_session_contract
+purpose: Contratto minimo per verificare che una Regione Giocabile possa produrre una sessione preparabile.
+version: 0.1.0
+region_to_session:
+  unit: session_ready_region
+  requires_region_playability_contract: Dev/Source/YAML/canonical/region_playability_contract.yaml
+  minimum_session_exit:
+    regione_giocabile:
+      min_count: 1
+      required: true
+      reason: La campagna o sessione non deve partire da una regione che fallisce il Region Playability Gate.
+    missione_selezionabile:
+      min_count: 1
+      required: true
+      source_folders:
+        - Mondi/Missioni
+      accepted_fields:
+        - missioni
+      reason: Il DM deve poter scegliere un obiettivo senza completare il mondo.
+    apertura_sessione:
+      min_count: 1
+      required: true
+      accepted_fields:
+        - apertura
+        - prossima_apertura
+        - scena_corrente
+        - gancio
+        - innesco
+      reason: La regione deve aprirsi in una scena giocabile.
+    luogo_iniziale:
+      min_count: 1
+      required: true
+      accepted_fields:
+        - luogo_iniziale
+        - luogo
+        - luoghi
+      reason: La prima scena deve sapere dove avviene.
+    fazione_attiva:
+      min_count: 1
+      required: true
+      source_folders:
+        - Mondi/Fazioni
+      accepted_fields:
+        - fazioni
+      active_states:
+        - attivo
+        - attiva
+        - in gioco
+        - in corso
+        - in guerra
+        - pronto
+      reason: Serve almeno un potere che reagisce alle scelte dei PG.
+    pressione_attiva:
+      min_count: 1
+      required: true
+      accepted_fields:
+        - pressione
+        - pressioni
+        - tracciati
+        - progress_value
+        - prossima_mossa
+      reason: Qualcosa deve avanzare se i PG esitano o ignorano la situazione.
+    scelta_pg:
+      min_count: 1
+      required: true
+      accepted_fields:
+        - scelta
+        - scelta_pg
+        - scelta_concreta
+        - domande_al_tavolo
+        - decisioni_attese
+        - posta
+      reason: La sessione deve contenere almeno una decisione reale per il party.
+    materiale_player_safe:
+      min_count: 1
+      required: true
+      accepted_fields:
+        - player_safe
+        - recap_pubblico
+        - materiale_pubblico
+        - cosa_mostrare
+        - materiale_pronto
+      reason: Il DM deve avere almeno un pezzo mostrabile o usabile al tavolo.
+validation_model:
+  trigger_entities:
+    - id: campagna
+      path_prefix: Campagne/
+      categoria: campagna
+      active_states:
+        - attiva
+        - attivo
+        - in corso
+        - preparazione
+        - pronto
+    - id: sessione
+      path_prefix: Mondi/Sessioni/
+      categoria: sessione
+      active_states:
+        - preparazione
+        - pronto
+        - in corso
+        - attivo
+  region_link_fields:
+    - regione
+    - regioni
+  region_scope_linkage_fields:
+    - regione
+    - luogo_padre
+    - luoghi
+    - regioni
+    - connessioni
+  source_folders:
+    - Mondi/Luoghi
+    - Mondi/Fazioni
+    - Mondi/Conflitti
+    - Mondi/Missioni
+    - Mondi/Tracciati
+    - Mondi/Sessioni
+  pass_when_all_minimums_are_met: true
+contracts:
+  no_new_dashboard_required: true
+  must_use_existing_quality_gates: true
+  missing_requirement_blocks_session_readiness: true

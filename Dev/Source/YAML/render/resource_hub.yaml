@@ -1,0 +1,118 @@
+id: resource_hub
+purpose: Sorgente dichiarativa del catalogo finale Risorse/Risorse.md.
+version: 0.1.0
+target: Risorse/Risorse.md
+title: Risorse
+intro: Questa pagina raccoglie solo le guide utili mentre prepari o giochi. Le note tecniche, le prove e la manutenzione restano fuori dal percorso principale.
+sections:
+  - title: Uso Quotidiano
+    headers:
+      - Pagina
+      - Quando aprirla
+    rows:
+      - link: '[[Inizia Qui]]'
+        text: Quando non sai da dove partire.
+      - link: '[[Risorse/Prima Sessione In 15 Minuti]]'
+        text: Quando vuoi arrivare al tavolo senza completare il mondo.
+      - link: '[[Risorse/Setup Guidato]]'
+        text: Quando vuoi sapere se il vault e pronto.
+      - link: '[[Risorse/Guida DM]]'
+        text: Quando vuoi il flusso DM senza dettagli tecnici.
+      - link: '[[Risorse/Preparazione Sessione]]'
+        text: Prima di una sessione.
+      - link: '[[Hub/Durante il Gioco]]'
+        text: Durante la partita.
+      - link: '[[Hub/Party Control]]'
+        text: Quando vuoi controllare party, HP, obiettivi e flags.
+      - link: '[[Risorse/Post Sessione Guidato]]'
+        text: Subito dopo la partita.
+      - link: '[[Risorse/Come Usare I Clock]]'
+        text: Quando vuoi usare clock per minacce, viaggi o rituali.
+      - link: '[[Risorse/Tabelle/Tabelle]]'
+        text: Quando serve improvvisare con tiri e tabelle.
+      - link: '[[Risorse/FAQ]]'
+        text: Quando hai un dubbio d'uso.
+  - title: Mondo E Campagna
+    headers:
+      - Pagina
+      - Quando aprirla
+    rows:
+      - link: '[[Atlante del Mondo]]'
+        text: Quando vuoi costruire un'ambientazione ricca e collegata.
+      - link: '[[Bibbia del Mondo]]'
+        text: Quando vuoi vedere tono, promesse, verita, rumor e limiti del mondo.
+      - link: '[[Campagna da Ambientazione]]'
+        text: Quando vuoi trasformare mondo, regione o conflitto in campagna.
+      - link: '[[Risorse/Regione Giocabile]]'
+        text: Quando vuoi una zona profonda ma pronta a produrre sessioni, fronti e materiale player-safe.
+      - link: '[[Risorse/Opportunità Di Avventura]]'
+        text: Elementi del mondo pronti a diventare missioni.
+      - link: '[[Risorse/Fronti Di Campagna]]'
+        text: Pressioni, prossime mosse e scadenze della campagna.
+      - link: '[[Motore Mondo Vivo]]'
+        text: Propagazione, relazioni, canone e continuita narrativa.
+      - link: '[[Geopolitical Dashboard]]'
+        text: Stati, confini, risorse, vassalli e relazioni diplomatiche.
+      - link: '[[Vista Giocatori]]'
+        text: Portale condivisibile con recap, PNG noti, luoghi, handout e mappe pubbliche.
+  - title: Materiali Al Tavolo
+    headers:
+      - Area
+      - Uso
+    rows:
+      - link: '[[Risorse/Mappe/Mappe]]'
+        text: Mappe, schemi e riferimenti visuali.
+      - link: '[[Risorse/Immagini/Immagini]]'
+        text: Immagini, ritratti, luoghi e handout visuali.
+      - link: '[[Risorse/Audio/Audio]]'
+        text: Musica, atmosfera e audio da sessione.
+      - link: '[[Risorse/Video/Video]]'
+        text: Video, reference e timestamp utili.
+      - link: '[[Risorse/Dispense/Dispense]]'
+        text: Materiali generici da consegnare o riusare.
+      - link: '[[Risorse/Materiali Al Tavolo]]'
+        text: Controllo dei materiali collegati alla sessione attiva.
+      - link: '[[SRD/SRD]]'
+        text: Riferimento regolamentare CC-BY-4.0, separato da opzioni base e mondo canonico.
+  - title: Aiuto E Controlli
+    headers:
+      - Pagina
+      - Uso
+    rows:
+      - link: '[[Risorse/Primo Avvio Strumenti]]'
+        text: Cosa fare se Obsidian chiede di abilitare i plugin inclusi.
+      - link: '[[Risorse/Se Qualcosa Non Funziona]]'
+        text: Diagnosi rapida quando pulsanti, tabelle o viste non rispondono.
+      - link: '[[Risorse/Controllo Vault]]'
+        text: Controlli pratici su note incomplete, sessioni attive e materiale pronto.
+      - link: '[[Risorse/Quality Report]]'
+        text: Report visuale su copertura, buchi, sicurezza pubblicazione e materiale pronto da condividere.
+      - link: '[[Risorse/Aspetto Vault]]'
+        text: Regolazioni visuali semplici.
+      - link: '[[Revisione Lore]]'
+        text: Lore incompleta, scollegata o non ancora giocabile.
+      - link: '[[Controllo Canone]]'
+        text: Verita, rumor, leggende, retcon e provenienza del canone.
+      - link: '[[Mondi/Calendario]]'
+        text: Date del mondo, sessioni, scadenze e cose da calendarizzare.
+      - link: '[[VERSION]]'
+        text: Versione corrente del vault.
+archives:
+  - title: Archivio Mappe
+    from: Risorse/Mappe
+    where: file.name != "Mappe"
+  - title: Archivio Immagini
+    from: Risorse/Immagini
+    where: file.name != "Immagini"
+  - title: Archivio Audio
+    from: Risorse/Audio
+    where: file.name != "Audio"
+  - title: Archivio Video
+    from: Risorse/Video
+    where: file.name != "Video"
+  - title: Archivio Tabelle
+    from: Risorse/Tabelle
+    where: file.name != "Tabelle"
+  - title: Archivio Dispense
+    from: Risorse/Dispense
+    where: file.name != "Dispense"

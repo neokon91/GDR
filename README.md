@@ -117,7 +117,7 @@ Se dashboard, pulsanti o tabelle non funzionano, apri [[Risorse/Primo Avvio Stru
 - Apri [[Risorse/Come Usare I Clock]] se vuoi tre esempi pratici: minaccia, viaggio e rituale.
 - Mantieni `SRD` separato dal contenuto canonico: e riferimento regolamentare, non ambientazione.
 - Mantieni il worldbuilding portabile in `Mondi`, `Campagne`, `Hub` e `Risorse`, ma considera D&D 5.5-compatible il profilo meccanico principale per creature, incontri, oggetti, party e prep.
-- Distingui sempre tre livelli: `SRD` come riferimento CC-BY-4.0, opzioni starter del vault come scaffolding compatibile, canone del mondo come materiale homebrew.
+- Distingui sempre tre livelli: `SRD` come riferimento CC-BY-4.0, opzioni base del vault come scaffolding compatibile, canone del mondo come materiale homebrew.
 
 ## Manutenzione Leggera
 
@@ -136,7 +136,7 @@ Se dashboard, pulsanti o tabelle non funzionano, apri [[Risorse/Primo Avvio Stru
 - Il repository sorgente non traccia `SRD/`, `z.bases/`, `z.fileclass/`, `z.bacheche/`, `z.modelli/` o i JSON generati: sono output materializzati da pipeline.
 - Dopo un clone o una modifica ai moduli YAML/Jinja, esegui `npm run sync:sources` prima dei check.
 - La release pulita rigenera `SRD/`, fileClass, Bases, template, bacheche e JSON runtime con `npm run release:clean`.
-- Per i dati meccanici della creazione PG modifica `Dev/TemplateFactory/modules/srd_character_build.yaml`, poi esegui `npm run sync:sources`.
+- Per i dati meccanici della creazione PG modifica `Dev/Source/YAML/canonical/srd_character_build.yaml`, poi esegui `npm run sync:sources`.
 
 ## Sviluppo
 
@@ -167,10 +167,10 @@ npm run prepare:manual-release-test
 
 ## SRD
 
-`SRD` contiene il System Reference Document 5.2.1 in italiano come archivio regolamentare separato dal contenuto del mondo. Non e sorgente tracciato: viene rigenerato nella release pulita da `Dev/TemplateFactory/tools/import_srd.js`. I dati runtime per PG, creature, incontri e oggetti sono scaffolding D&D 5.5-compatible: possono usare riferimenti SRD, ma non vanno letti come canone del mondo o come ripubblicazione completa del regolamento. La procedura tecnica sta in [[Dev/Sviluppo Vault]].
+`SRD` contiene il System Reference Document 5.2.1 in italiano come archivio regolamentare separato dal contenuto del mondo. Non e sorgente tracciato: viene rigenerato nella release pulita da `Dev/Tools/node-legacy/import_srd.js`. I dati runtime per PG, creature, incontri e oggetti sono scaffolding D&D 5.5-compatible: possono usare riferimenti SRD, ma non vanno letti come canone del mondo o come ripubblicazione completa del regolamento. La procedura tecnica sta in [[Dev/Sviluppo Vault]].
 
 ## Licenza
 
 - Il vault e i suoi contenuti sono rilasciati con licenza **CC BY-NC-SA 4.0**. Vedi [[LICENSE]].
-- Gli script runtime in `z.automazioni` e il tooling in `Dev/TemplateFactory/tools` sono rilasciati con licenza **MIT**. Vedi [[LICENSE]].
+- Gli script runtime in `z.automazioni` e il tooling in `Dev/Tools` sono rilasciati con licenza **MIT**. Vedi [[LICENSE]].
 - Il materiale in `SRD` mantiene la propria licenza **CC-BY-4.0** e non e coperto dalla licenza del vault.
