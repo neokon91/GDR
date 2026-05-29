@@ -44,7 +44,7 @@ function escapeRegExp(value) {
 }
 
 function termRegex(term) {
-    const flags = term.case_insensitive === false ? "g" : "gi";
+    const flags = term.case_insensitive === false ? "" : "i";
     const raw = escapeRegExp(term.term ?? "");
     if (term.match === "word") return new RegExp(`\\b${raw}\\b`, flags);
     return new RegExp(raw, flags);

@@ -344,9 +344,9 @@ blocks:
       | --- | --- |
       | Conseguenze |  |
       | Recap pubblico |  |
-  m7_family_cards:
+  playability_family_cards:
     type: dataviewjs
-    runtime_view: renderM7FamilyCards
+    runtime_view: renderPlayabilityFamilyCards
     use_for:
       - luogo
       - fazione
@@ -356,7 +356,7 @@ blocks:
       - continuita
     code: |-
       const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
-      gdr.renderM7FamilyCards(dv, dv.current(), "{{ family }}");
+      gdr.renderPlayabilityFamilyCards(dv, dv.current(), "{{ family }}");
     fallback: |-
       | Controllo | Stato |
       | --- | --- |

@@ -250,7 +250,7 @@ def validate_plugin_native_sheet(name: str, rendered: str) -> list[str]:
         required_tabs = ("Prepara", "Ancore", "Tavolo", "Mappa", "Live", "Dopo")
         for tab in required_tabs:
             if f"tab: {tab}" not in rendered:
-                errors.append(f"{name}: tab M7 mancante ({tab})")
+                errors.append(f"{name}: tab sessione giocabile mancante ({tab})")
 
         tab_chunks = re.split(r"(?m)^tab: ", rendered)
         for chunk in tab_chunks[1:]:
@@ -270,49 +270,49 @@ def validate_plugin_native_sheet(name: str, rendered: str) -> list[str]:
         )
         for view in required_runtime_views:
             if view not in rendered:
-                errors.append(f"{name}: vista DataviewJS M7 mancante ({view})")
+                errors.append(f"{name}: vista DataviewJS giocabile mancante ({view})")
 
         required_plugins = ("```tasks", "[[z.bases/", "Atlante Mappe.base", ".excalidraw", "Canvas", "dice: 1d20")
         for marker in required_plugins:
             if marker not in rendered:
-                errors.append(f"{name}: integrazione plugin M7 mancante ({marker})")
+                errors.append(f"{name}: integrazione plugin giocabile mancante ({marker})")
 
     family_contracts = [
         (
             "luogo",
             name == "luogo" or name == "live_luogo" or name.startswith(("luogo_", "geografia_", "politica_")),
             "Territorio",
-            ("renderM7FamilyCards", '"luogo"', "Atlante Mappe.base", ".excalidraw", "Canvas"),
+            ("renderPlayabilityFamilyCards", '"luogo"', "Atlante Mappe.base", ".excalidraw", "Canvas"),
         ),
         (
             "fazione",
             name == "fazione" or name.startswith("fazione_") or name == "religione_culto",
             "Potere",
-            ("renderM7FamilyCards", '"fazione"', "INPUT[pressione]", "luoghi_controllati"),
+            ("renderPlayabilityFamilyCards", '"fazione"', "INPUT[pressione]", "luoghi_controllati"),
         ),
         (
             "png",
             name in {"png", "pg", "live_png", "personaggio_divinita"},
             "PNG",
-            ("renderM7FamilyCards", '"png"', "motivazione", "segreti_rivelati"),
+            ("renderPlayabilityFamilyCards", '"png"', "motivazione", "segreti_rivelati"),
         ),
         (
             "relazione",
             name == "relazione",
             "Legame",
-            ("renderM7FamilyCards", '"relazione"', "stato_relazione", "rottura", "rinforzo"),
+            ("renderPlayabilityFamilyCards", '"relazione"', "stato_relazione", "rottura", "rinforzo"),
         ),
         (
             "tracciato",
             name == "tracciato",
             "Clock",
-            ("renderM7FamilyCards", '"tracciato"', "```tasks", "BUTTON[avanza-clock]"),
+            ("renderPlayabilityFamilyCards", '"tracciato"', "```tasks", "BUTTON[avanza-clock]"),
         ),
         (
             "continuita",
             name in {"conseguenza", "evento_storico", "wizard_conseguenza"},
             "Continuita",
-            ("renderM7FamilyCards", '"continuita"', "aggiornamenti_richiesti", "propagazione_stato"),
+            ("renderPlayabilityFamilyCards", '"continuita"', "aggiornamenti_richiesti", "propagazione_stato"),
         ),
     ]
 
@@ -320,9 +320,9 @@ def validate_plugin_native_sheet(name: str, rendered: str) -> list[str]:
         if not applies:
             continue
         if f"tab: {tab}" not in rendered:
-            errors.append(f"{name}: tab M7 {family} mancante ({tab})")
+            errors.append(f"{name}: tab scheda giocabile {family} mancante ({tab})")
         for marker in markers:
             if marker not in rendered:
-                errors.append(f"{name}: marker M7 {family} mancante ({marker})")
+                errors.append(f"{name}: marker scheda giocabile {family} mancante ({marker})")
 
     return errors

@@ -917,7 +917,7 @@
     dv.table(mode === "setup" ? ["Area", "Stato", "Cosa fare"] : ["Area", "Stato", "Prossimo passo"], checks);
   }
 
-  function renderM7FamilyCards(dv, source = null, family = "generica") {
+  function renderPlayabilityFamilyCards(dv, source = null, family = "generica") {
     const page = source ?? dv.current();
     const definitions = {
       mondo: [
@@ -1032,7 +1032,7 @@
     renderCreationFeedback,
     renderActions,
     renderEmptyState,
-    renderM7FamilyCards,
+    renderPlayabilityFamilyCards,
     renderOnboardingReadiness,
     renderPartyControl,
     renderPluginTroubleshooting,
