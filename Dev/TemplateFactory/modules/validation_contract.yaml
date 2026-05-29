@@ -521,6 +521,18 @@ state_ready_requirements:
         - mondo
         - luoghi
         - rivali
+    cultura:
+      any_of_fields:
+        - valore_dominante
+        - tensione_culturale
+        - conflitto_generato
+        - missioni
+    religione:
+      any_of_fields:
+        - dogma
+        - dogmi
+        - reazione_a_violazione
+        - missioni
     tracciato:
       any_of_fields:
         - mondo
@@ -654,6 +666,16 @@ playability_rules:
       - tabu_sociali
       - scelte
     warning: cultura pronta senza tabu o scelte giocabili
+  - id: culture_requires_play_output
+    path_prefix: Mondi/Culture/
+    categoria: cultura
+    stato_not: archiviata
+    require_any_of:
+      - conflitto_generato
+      - missioni
+      - conseguenze
+      - propaga_a
+    warning: cultura senza conflitto, missione o conseguenza generata
   - id: ready_religion_requires_ritual_tension
     path_prefix: Mondi/Religioni/
     categoria: religione
@@ -663,6 +685,43 @@ playability_rules:
       - rituali
       - calendario_rituale
     warning: religione pronta senza eresie, rituali o calendario rituale
+  - id: religion_requires_violation_reaction
+    path_prefix: Mondi/Religioni/
+    categoria: religione
+    stato_not: archiviata
+    require_any_of:
+      - reazione_a_violazione
+      - costo_sociale
+      - conseguenze
+      - missioni
+    warning: religione senza costo sociale, reazione a violazione o missione generata
+  - id: economic_entity_requires_crisis_chain
+    path_prefixes:
+      - Mondi/Risorse/
+      - Mondi/Rotte/
+      - Mondi/Mercati/
+    categoria: risorsa
+    stato_not: archiviata
+    require_any_of:
+      - crisi
+      - rischi
+      - conseguenze_se_bloccata
+      - missioni
+    warning: economia senza crisi, rischio, conseguenza di blocco o missione collegata
+  - id: pressured_economy_requires_mission_or_track
+    path_prefixes:
+      - Mondi/Risorse/
+      - Mondi/Rotte/
+      - Mondi/Mercati/
+    categoria: risorsa
+    number_field_gt:
+      field: pressione
+      value: 0
+    require_any_of:
+      - missioni
+      - tracciati
+      - conflitti
+    warning: economia sotto pressione senza missione, tracciato o conflitto collegato
   - id: major_political_territory_requires_capital
     path_prefix: Mondi/Luoghi/
     categoria: luogo

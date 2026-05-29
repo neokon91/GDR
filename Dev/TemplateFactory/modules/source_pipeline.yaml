@@ -380,6 +380,8 @@ steps:
     purpose: Genera il contratto runtime del cockpit Quality Report senza scrivere root generate.
     sources:
       - Dev/TemplateFactory/modules/quality_report_cockpit.yaml
+      - Dev/TemplateFactory/modules/region_playability_contract.yaml
+      - Dev/TemplateFactory/modules/region_to_session_contract.yaml
       - Dev/TemplateFactory/modules/bases_views.yaml
       - Dev/TemplateFactory/modules/frontmatter_profiles.yaml
       - Risorse/Quality Report.md

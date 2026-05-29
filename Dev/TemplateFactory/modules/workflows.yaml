@@ -8,38 +8,41 @@ workflows:
     entry_points:
       - Inizia Qui.md
     quick_actions:
-      - button: nuovo-mondo-homebrew
-        label: Crea mondo
-        use_when: non hai ancora un mondo giocabile
       - button: prima-sessione-in-15-minuti-risorse-prima-sessione-in-15-minuti
         label: Prima sessione
         use_when: vuoi giocare oggi senza completare tutto il Codex
+      - button: regione-giocabile-risorse-regione-giocabile
+        label: Regione giocabile
+        use_when: vuoi creare il minimo territorio che produce gioco
       - button: preparazione-sessione-risorse-preparazione-sessione
         label: Prepara sessione
         use_when: hai un mondo o almeno un'idea pronta da giocare
       - button: gioca-hub-durante-il-gioco-durante-il-gioco
         label: Gioca
         use_when: sei al tavolo o vuoi vedere il cockpit live
-      - button: fuori-scena-hub-cosa-succede-fuori-scena-cosa-succede-fuori-scena
-        label: Chiudi e aggiorna
-        use_when: la sessione e finita e devi decidere conseguenze
+      - button: post-sessione-guidato-risorse-post-sessione-guidato
+        label: Post sessione
+        use_when: il tavolo e finito e devi salvare conseguenze
     action_groups:
       orientamento:
         label: Se ti perdi
         purpose: Aprire solo le viste di supporto, non nuove strade parallele.
         actions:
+          - button: nuovo-mondo-homebrew
+            label: Crea mondo
+            use_when: vuoi fondare un mondo minimo prima della regione
           - button: setup-guidato-risorse-setup-guidato
             label: Recupero strumenti
             use_when: pulsanti, tabelle o pagina iniziale non rispondono
           - button: worldbuilder-worldbuilder-dashboard-2
             label: Worldbuilder
             use_when: vuoi espandere il mondo dopo il primo giro
-          - button: regione-giocabile-risorse-regione-giocabile
-            label: Regione giocabile
-            use_when: vuoi dare profondita al primo territorio senza perdere il tavolo
           - button: bibbia-del-mondo-bibbia-del-mondo-2
             label: Bibbia del mondo
             use_when: vuoi consolidare tono e canone
+          - button: fuori-scena-hub-cosa-succede-fuori-scena-cosa-succede-fuori-scena
+            label: Fuori scena
+            use_when: devi decidere reazioni tra una sessione e l'altra
           - button: vista-giocatori-hub-vista-giocatori-vista-giocatori
             label: Vista giocatori
             use_when: devi mostrare materiale senza segreti DM

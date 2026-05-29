@@ -48,12 +48,326 @@
     }
   }
 
-  function qualityData(dv) {
+  function listValue(value) {
+    if (Array.isArray(value)) return value;
+    if (value && typeof value === "object" && value.path) return [value];
+    return hasText(value) ? [value] : [];
+  }
+
+  function valuePresent(value) {
+    if (Array.isArray(value)) return value.length > 0;
+    if (typeof value === "number") return Number.isFinite(value) && value !== 0;
+    if (typeof value === "boolean") return value === true;
+    return hasText(value);
+  }
+
+  function basename(value) {
+    const parts = String(value ?? "").replace(/\\/g, "/").replace(/\.md$/, "").split("/");
+    return parts[parts.length - 1] ?? "";
+  }
+
+  function normalizedRef(value) {
+    return String(value ?? "")
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/\s+/g, " ")
+      .trim();
+  }
+
+  function referenceTokens(value) {
+    const raw = value?.path ? value.path : String(value ?? "").trim();
+    if (!raw) return [];
+
+    const wikilink = raw.match(/^\[\[([^\]|#]+)(?:#[^\]|]+)?(?:\|[^\]]+)?\]\]$/);
+    const target = (wikilink ? wikilink[1] : raw)
+      .replace(/\\/g, "/")
+      .replace(/\.md$/, "")
+      .trim();
+    if (!target) return [];
+    return [target, basename(target)].map(normalizedRef).filter(Boolean);
+  }
+
+  function pageReferenceTokens(page) {
+    return new Set([
+      page?.file?.path,
+      page?.file?.name,
+      page?.nome,
+      page?.id
+    ].flatMap(referenceTokens));
+  }
+
+  function fieldReferencesPage(value, pageTokens) {
+    return listValue(value).flatMap(referenceTokens).some(token => pageTokens.has(token));
+  }
+
+  function contractStrings(value, fallback = []) {
+    return Array.isArray(value)
+      ? value.map(item => String(item)).filter(Boolean)
+      : fallback;
+  }
+
+  function regionContractPayload(cockpit) {
+    const contract = cockpit?.region_playability_contract ?? null;
+    return contract?.region_playability?.minimum_viable_region ? contract : null;
+  }
+
+  function regionMinimums(contract) {
+    return contract?.region_playability?.minimum_viable_region ?? {};
+  }
+
+  function regionTypeCandidate(page, contract) {
+    const candidate = contract?.validation_model?.region_candidates ?? {};
+    const pathPrefix = String(candidate.path_prefix ?? "Mondi/Luoghi/");
+    const category = String(candidate.categoria ?? "luogo");
+    const typeFields = contractStrings(candidate.type_fields, ["tipo"]);
+    const typeValues = new Set(contractStrings(candidate.type_values, ["regione"]).map(normalizedRef));
+
+    if (!String(page?.file?.path ?? "").startsWith(pathPrefix)) return false;
+    if (String(page?.categoria ?? "") !== category) return false;
+    return typeFields.some(field => listValue(page?.[field]).some(value => {
+      const normalized = normalizedRef(value);
+      return typeValues.has(normalized) || normalized.split(/\s+/).some(part => typeValues.has(part));
+    }));
+  }
+
+  function regionCandidate(page, contract) {
+    const candidate = contract?.validation_model?.region_candidates ?? {};
+    const states = new Set(contractStrings(candidate.validated_states, ["pronto"]));
+
+    if (!regionTypeCandidate(page, contract)) return false;
+    return states.has(String(page?.stato ?? ""));
+  }
+
+  function relatedRegionPages(allPages, region, contract) {
+    const folders = contractStrings(contract?.validation_model?.source_folders, []);
+    const fields = contractStrings(contract?.validation_model?.linkage_fields, []);
+    const regionTokens = pageReferenceTokens(region);
+    return allPages.filter(page => {
+      const pagePath = String(page?.file?.path ?? "");
+      if (pagePath === String(region?.file?.path ?? "")) return false;
+      if (!folders.some(folder => pagePath.startsWith(`${String(folder).replace(/\/$/, "")}/`))) return false;
+      return fields.some(field => fieldReferencesPage(page?.[field], regionTokens));
+    });
+  }
+
+  function hasAcceptedField(page, fields) {
+    return fields.some(field => valuePresent(page?.[field]));
+  }
+
+  function regionCounts(region, related, contract) {
+    const minimums = regionMinimums(contract);
+    const scoped = [region, ...related];
+    return {
+      luoghi: related.filter(page => String(page?.file?.path ?? "").startsWith("Mondi/Luoghi/") && page.categoria === "luogo").length,
+      fazioni: related.filter(page => String(page?.file?.path ?? "").startsWith("Mondi/Fazioni/") && page.categoria === "fazione").length,
+      conflitti: related.filter(page => String(page?.file?.path ?? "").startsWith("Mondi/Conflitti/") && page.categoria === "conflitto").length,
+      missioni: related.filter(page => String(page?.file?.path ?? "").startsWith("Mondi/Missioni/") && page.categoria === "missione").length,
+      pressioni: scoped.filter(page => String(page?.file?.path ?? "").startsWith("Mondi/Tracciati/") || hasAcceptedField(page, contractStrings(minimums.pressioni?.accepted_fields, []))).length,
+      uscita_verso_sessione: scoped.filter(page => String(page?.file?.path ?? "").startsWith("Mondi/Sessioni/") || hasAcceptedField(page, contractStrings(minimums.uscita_verso_sessione?.accepted_fields, []))).length,
+      superficie_player_safe: scoped.filter(page => hasAcceptedField(page, contractStrings(minimums.superficie_player_safe?.accepted_fields, []))).length
+    };
+  }
+
+  function regionPlayabilityGaps(collections, cockpit) {
+    const contract = regionContractPayload(cockpit);
+    if (!contract) return [];
+    if (contract?.validation_model?.pass_when_all_minimums_are_met !== true) return [];
+
+    const allPages = [
+      ...collections.places,
+      ...collections.factions,
+      ...collections.conflicts,
+      ...collections.missions,
+      ...collections.tracks,
+      ...collections.sessions
+    ];
+    const minimums = regionMinimums(contract);
+
+    return collections.places
+      .filter(page => regionCandidate(page, contract))
+      .map(region => {
+        const related = relatedRegionPages(allPages, region, contract);
+        const counts = regionCounts(region, related, contract);
+        const missing = Object.entries(minimums)
+          .filter(([, requirement]) => requirement?.required === true)
+          .map(([id, requirement]) => ({ id, count: counts[id] ?? 0, min: Number(requirement.min_count ?? 1) }))
+          .filter(item => item.count < item.min);
+
+        if (!missing.length) return null;
+        const missingText = missing.map(item => `${item.id} ${item.count}/${item.min}`).join(", ");
+        const missingNames = missing.map(item => item.id.replace(/_/g, " ")).join(", ");
+        return {
+          page: region,
+          problem: `Regione Giocabile incompleta: ${missingText}`,
+          action: `Completa ${missingNames} prima di usarla come base di campagna o sessione.`,
+          severity: 6
+        };
+      })
+      .filter(Boolean);
+  }
+
+  function regionToSessionContractPayload(cockpit) {
+    const contract = cockpit?.region_to_session_contract ?? null;
+    return contract?.region_to_session?.minimum_session_exit ? contract : null;
+  }
+
+  function regionToSessionMinimums(contract) {
+    return contract?.region_to_session?.minimum_session_exit ?? {};
+  }
+
+  function regionToSessionTrigger(page, contract) {
+    return (contract?.validation_model?.trigger_entities ?? []).some(trigger => {
+        const pathPrefix = String(trigger?.path_prefix ?? "");
+        const category = String(trigger?.categoria ?? "");
+        const states = new Set(contractStrings(trigger?.active_states, []));
+        return String(page?.file?.path ?? "").startsWith(pathPrefix)
+          && String(page?.categoria ?? "") === category
+          && states.has(String(page?.stato ?? ""));
+      });
+  }
+
+  function pageHasAnyField(page, fields) {
+    return fields.some(field => valuePresent(page?.[field]));
+  }
+
+  function pageInFolders(page, folders) {
+    const path = String(page?.file?.path ?? "");
+    return folders.some(folder => path.startsWith(`${String(folder).replace(/\/$/, "")}/`));
+  }
+
+  function referencedRegionsForTrigger(regions, trigger, contract) {
+    const fields = contractStrings(contract?.validation_model?.region_link_fields, []);
+    return regions.filter(region => {
+      const tokens = pageReferenceTokens(region);
+      return fields.some(field => fieldReferencesPage(trigger?.[field], tokens));
+    });
+  }
+
+  function relatedRegionToSessionPages(allPages, region, contract) {
+    const folders = contractStrings(contract?.validation_model?.source_folders, []);
+    const fields = contractStrings(contract?.validation_model?.region_scope_linkage_fields, []);
+    const regionTokens = pageReferenceTokens(region);
+    return allPages.filter(page => {
+      const pagePath = String(page?.file?.path ?? "");
+      if (pagePath === String(region?.file?.path ?? "")) return false;
+      if (!folders.some(folder => pagePath.startsWith(`${String(folder).replace(/\/$/, "")}/`))) return false;
+      return fields.some(field => fieldReferencesPage(page?.[field], regionTokens));
+    });
+  }
+
+  function uniquePagesByPath(rows) {
+    const seen = new Set();
+    return rows.filter(page => {
+      const key = String(page?.file?.path ?? "");
+      if (!key || seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    });
+  }
+
+  function countPagesInFolders(rows, folders, predicate = () => true) {
+    return rows.filter(page => pageInFolders(page, folders) && predicate(page)).length;
+  }
+
+  function regionIsPlayable(region, allPages, regionContract) {
+    if (!regionCandidate(region, regionContract)) return false;
+    const related = relatedRegionPages(allPages, region, regionContract);
+    const counts = regionCounts(region, related, regionContract);
+    return !Object.entries(regionMinimums(regionContract))
+      .filter(([, requirement]) => requirement?.required === true)
+      .map(([id, requirement]) => ({ id, count: counts[id] ?? 0, min: Number(requirement.min_count ?? 1) }))
+      .some(item => item.count < item.min);
+  }
+
+  function regionToSessionCounts(trigger, region, allPages, regionContract, contract) {
+    const related = relatedRegionToSessionPages(allPages, region, contract);
+    const scoped = uniquePagesByPath([trigger, region, ...related]);
+    const minimums = regionToSessionMinimums(contract);
+    const activeFactionStates = new Set(contractStrings(minimums.fazione_attiva?.active_states, []));
+
+    return {
+      regione_giocabile: regionIsPlayable(region, allPages, regionContract) ? 1 : 0,
+      missione_selezionabile: Math.max(
+        countPagesInFolders(related, contractStrings(minimums.missione_selezionabile?.source_folders, []), page => page.categoria === "missione"),
+        scoped.filter(page => pageHasAnyField(page, contractStrings(minimums.missione_selezionabile?.accepted_fields, []))).length
+      ),
+      apertura_sessione: scoped.filter(page => pageHasAnyField(page, contractStrings(minimums.apertura_sessione?.accepted_fields, []))).length,
+      luogo_iniziale: Math.max(
+        countPagesInFolders(related, ["Mondi/Luoghi"], page => page.file?.path !== region.file?.path && page.categoria === "luogo"),
+        scoped.filter(page => pageHasAnyField(page, contractStrings(minimums.luogo_iniziale?.accepted_fields, []))).length
+      ),
+      fazione_attiva: Math.max(
+        countPagesInFolders(related, contractStrings(minimums.fazione_attiva?.source_folders, []), page => page.categoria === "fazione" && activeFactionStates.has(String(page.stato ?? ""))),
+        scoped.filter(page => pageHasAnyField(page, contractStrings(minimums.fazione_attiva?.accepted_fields, []))).length
+      ),
+      pressione_attiva: scoped.filter(page => pageHasAnyField(page, contractStrings(minimums.pressione_attiva?.accepted_fields, []))).length,
+      scelta_pg: scoped.filter(page => pageHasAnyField(page, contractStrings(minimums.scelta_pg?.accepted_fields, []))).length,
+      materiale_player_safe: scoped.filter(page => pageHasAnyField(page, contractStrings(minimums.materiale_player_safe?.accepted_fields, []))).length
+    };
+  }
+
+  function regionToSessionGaps(collections, cockpit) {
+    const regionContract = regionContractPayload(cockpit);
+    const contract = regionToSessionContractPayload(cockpit);
+    if (!regionContract || !contract) return [];
+    if (contract?.validation_model?.pass_when_all_minimums_are_met !== true) return [];
+
+    const allPages = [
+      ...collections.places,
+      ...collections.factions,
+      ...collections.conflicts,
+      ...collections.missions,
+      ...collections.tracks,
+      ...collections.sessions
+    ];
+    const regions = collections.places.filter(page => regionTypeCandidate(page, regionContract));
+    const triggers = [...collections.campaigns, ...collections.sessions]
+      .filter(page => regionToSessionTrigger(page, contract))
+      .filter(page => contractStrings(contract?.validation_model?.region_link_fields, []).some(field => valuePresent(page?.[field])));
+    const minimums = regionToSessionMinimums(contract);
+
+    return triggers.flatMap(trigger => {
+      const referenced = referencedRegionsForTrigger(regions, trigger, contract);
+      if (!referenced.length) {
+        return [{
+          page: trigger,
+          problem: "Region to Session incompleto: regione_giocabile 0/1",
+          action: "Collega una Regione Giocabile valida prima di preparare la sessione.",
+          severity: 7
+        }];
+      }
+
+      return referenced.map(region => {
+        const counts = regionToSessionCounts(trigger, region, allPages, regionContract, contract);
+        const missing = Object.entries(minimums)
+          .filter(([, requirement]) => requirement?.required === true)
+          .map(([id, requirement]) => ({ id, count: counts[id] ?? 0, min: Number(requirement.min_count ?? 1) }))
+          .filter(item => item.count < item.min);
+
+        if (!missing.length) return null;
+        const missingText = missing.map(item => `${item.id} ${item.count}/${item.min}`).join(", ");
+        const missingNames = missing.map(item => item.id.replace(/_/g, " ")).join(", ");
+        return {
+          page: trigger,
+          problem: `Region to Session incompleto: ${missingText}`,
+          action: `Completa ${missingNames} nella regione o nella sessione collegata.`,
+          severity: 7
+        };
+      }).filter(Boolean);
+    });
+  }
+
+  function qualityData(dv, cockpit = null) {
     const worlds = pages(dv, '"Mondi"', page => page.categoria === "mondo");
     const places = pages(dv, '"Mondi/Luoghi"');
     const png = pages(dv, '"Mondi/Personaggi"', page => page.tipo === "png" || page.categoria === "png");
+    const factions = pages(dv, '"Mondi/Fazioni"');
+    const conflicts = pages(dv, '"Mondi/Conflitti"');
     const missions = pages(dv, '"Mondi/Missioni"');
+    const tracks = pages(dv, '"Mondi/Tracciati"');
     const sessions = pages(dv, '"Mondi/Sessioni"');
+    const campaigns = pages(dv, '"Campagne"');
     const maps = pages(dv, '"Risorse/Mappe"', page => page.file?.name !== "Mappe");
     const publicRows = pages(dv, '"Mondi" OR "Risorse/Mappe"', page => page.pubblico === true);
     const pressures = pages(dv, '"Mondi/Missioni" OR "Mondi/Tracciati" OR "Mondi/Fazioni" OR "Mondi/Conflitti"', page => pressure(page) > 0);
@@ -102,12 +416,14 @@
     );
     addGap(
       operationalGaps,
-      pages(dv, '"Mondi/Fazioni"'),
+      factions,
       "Fazione senza pressione",
       page => !hasText(page.prossima_mossa) && pressure(page) === 0,
       "Definisci prossima mossa o pressione.",
       4
     );
+    operationalGaps.push(...regionPlayabilityGaps({ places, factions, conflicts, missions, tracks, sessions }, cockpit));
+    operationalGaps.push(...regionToSessionGaps({ campaigns, places, factions, conflicts, missions, tracks, sessions }, cockpit));
 
     const publicRisks = publicRows
       .filter(page => hasPrivateFields(page))
@@ -156,8 +472,9 @@
     };
   }
 
-  function renderQualityReportNow(dv) {
-    const data = qualityData(dv);
+  async function renderQualityReportNow(dv) {
+    const cockpit = await readQualityReportCockpit();
+    const data = qualityData(dv, cockpit);
     const priority = data.priority;
     const cards = [
       cardHtml({
@@ -240,7 +557,7 @@
   async function renderQualityReportOperationalGaps(dv) {
     const cockpit = await readQualityReportCockpit();
     const labels = queueLabels(cockpit);
-    const data = qualityData(dv);
+    const data = qualityData(dv, cockpit);
     renderTable(
       dv,
       labels,

@@ -49,6 +49,8 @@ function loadYamlModule(relPath) {
 const FIELDS_CORE = loadYamlModule("Dev/TemplateFactory/modules/fields_core.yaml");
 const VALIDATION_CONTRACT = loadYamlModule("Dev/TemplateFactory/modules/validation_contract.yaml");
 const REPO_QUALITY_CONTRACT = loadYamlModule("Dev/TemplateFactory/modules/repo_quality_contract.yaml");
+const REGION_PLAYABILITY_CONTRACT = loadYamlModule("Dev/TemplateFactory/modules/region_playability_contract.yaml");
+const REGION_TO_SESSION_CONTRACT = loadYamlModule("Dev/TemplateFactory/modules/region_to_session_contract.yaml");
 
 function coreFieldValues(fieldName) {
     for (const group of Object.values(FIELDS_CORE.fields ?? {})) {
@@ -116,6 +118,186 @@ function requiredRepoQualityArray(pathText) {
         throw new Error(`Dev/TemplateFactory/modules/repo_quality_contract.yaml: ${pathText} vuoto o mancante`);
     }
     return normalized;
+}
+
+function regionContractValue(pathText) {
+    return String(pathText).split(".").reduce((value, key) => value?.[key], REGION_PLAYABILITY_CONTRACT);
+}
+
+function requiredRegionContractArray(pathText) {
+    const values = regionContractValue(pathText) ?? [];
+    const normalized = Array.isArray(values)
+        ? values.map(value => String(value)).filter(Boolean)
+        : [];
+    if (!normalized.length) {
+        throw new Error(`Dev/TemplateFactory/modules/region_playability_contract.yaml: ${pathText} vuoto o mancante`);
+    }
+    return normalized;
+}
+
+function requiredRegionContractString(pathText, fallback = null) {
+    const rawValue = regionContractValue(pathText);
+    const value = String(rawValue ?? fallback ?? "").trim();
+    if (!value) {
+        throw new Error(`Dev/TemplateFactory/modules/region_playability_contract.yaml: ${pathText} vuoto o mancante`);
+    }
+    return value;
+}
+
+function requiredRegionContractNumber(pathText, minimum) {
+    const value = Number(regionContractValue(pathText));
+    if (!Number.isFinite(value) || value < minimum) {
+        throw new Error(`Dev/TemplateFactory/modules/region_playability_contract.yaml: ${pathText} deve essere numero >= ${minimum}`);
+    }
+    return value;
+}
+
+function requiredRegionPlayabilityPolicy() {
+    if (REGION_PLAYABILITY_CONTRACT.id !== "region_playability_contract") {
+        throw new Error("Dev/TemplateFactory/modules/region_playability_contract.yaml: id non valido");
+    }
+
+    const requirementIds = [
+        "luoghi",
+        "fazioni",
+        "conflitti",
+        "missioni",
+        "pressioni",
+        "uscita_verso_sessione",
+        "superficie_player_safe"
+    ];
+    const minimums = Object.fromEntries(requirementIds.map(id => {
+        const basePath = `region_playability.minimum_viable_region.${id}`;
+        if (regionContractValue(`${basePath}.required`) !== true) {
+            throw new Error(`Dev/TemplateFactory/modules/region_playability_contract.yaml: ${basePath}.required deve essere true`);
+        }
+        return [id, {
+            minCount: requiredRegionContractNumber(`${basePath}.min_count`, 1),
+            acceptedFields: (regionContractValue(`${basePath}.accepted_fields`) ?? [])
+                .map(field => String(field))
+                .filter(Boolean),
+            reason: String(regionContractValue(`${basePath}.reason`) ?? "")
+        }];
+    }));
+
+    const candidate = regionContractValue("validation_model.region_candidates") ?? {};
+    const typeFields = (Array.isArray(candidate.type_fields) ? candidate.type_fields : ["tipo"])
+        .map(field => String(field))
+        .filter(Boolean);
+    const typeValues = (Array.isArray(candidate.type_values) ? candidate.type_values : ["regione"])
+        .map(value => normalizedText(value))
+        .filter(Boolean);
+    const validatedStates = (Array.isArray(candidate.validated_states) ? candidate.validated_states : ["pronto"])
+        .map(value => String(value))
+        .filter(Boolean);
+
+    if (!typeFields.length || !typeValues.length || !validatedStates.length) {
+        throw new Error("Dev/TemplateFactory/modules/region_playability_contract.yaml: validation_model.region_candidates incompleto");
+    }
+
+    return {
+        minimums,
+        sourceFolders: requiredRegionContractArray("validation_model.source_folders"),
+        linkageFields: requiredRegionContractArray("validation_model.linkage_fields"),
+        passWhenAllMinimumsAreMet: regionContractValue("validation_model.pass_when_all_minimums_are_met") === true,
+        candidate: {
+            pathPrefix: String(candidate.path_prefix ?? "Mondi/Luoghi/"),
+            categoria: requiredRegionContractString("validation_model.region_candidates.categoria", "luogo"),
+            typeFields,
+            typeValues: new Set(typeValues),
+            validatedStates: new Set(validatedStates)
+        }
+    };
+}
+
+function regionToSessionContractValue(pathText) {
+    return String(pathText).split(".").reduce((value, key) => value?.[key], REGION_TO_SESSION_CONTRACT);
+}
+
+function requiredRegionToSessionContractArray(pathText) {
+    const values = regionToSessionContractValue(pathText) ?? [];
+    const normalized = Array.isArray(values)
+        ? values.map(value => String(value)).filter(Boolean)
+        : [];
+    if (!normalized.length) {
+        throw new Error(`Dev/TemplateFactory/modules/region_to_session_contract.yaml: ${pathText} vuoto o mancante`);
+    }
+    return normalized;
+}
+
+function requiredRegionToSessionContractNumber(pathText, minimum) {
+    const value = Number(regionToSessionContractValue(pathText));
+    if (!Number.isFinite(value) || value < minimum) {
+        throw new Error(`Dev/TemplateFactory/modules/region_to_session_contract.yaml: ${pathText} deve essere numero >= ${minimum}`);
+    }
+    return value;
+}
+
+function optionalRegionToSessionContractArray(pathText) {
+    const values = regionToSessionContractValue(pathText) ?? [];
+    return Array.isArray(values)
+        ? values.map(value => String(value)).filter(Boolean)
+        : [];
+}
+
+function requiredRegionToSessionPolicy() {
+    if (REGION_TO_SESSION_CONTRACT.id !== "region_to_session_contract") {
+        throw new Error("Dev/TemplateFactory/modules/region_to_session_contract.yaml: id non valido");
+    }
+
+    const requiredPlayabilityContract = String(regionToSessionContractValue("region_to_session.requires_region_playability_contract") ?? "");
+    if (requiredPlayabilityContract !== "Dev/TemplateFactory/modules/region_playability_contract.yaml") {
+        throw new Error("Dev/TemplateFactory/modules/region_to_session_contract.yaml: requires_region_playability_contract non allineato");
+    }
+
+    const requirementIds = [
+        "regione_giocabile",
+        "missione_selezionabile",
+        "apertura_sessione",
+        "luogo_iniziale",
+        "fazione_attiva",
+        "pressione_attiva",
+        "scelta_pg",
+        "materiale_player_safe"
+    ];
+    const minimums = Object.fromEntries(requirementIds.map(id => {
+        const basePath = `region_to_session.minimum_session_exit.${id}`;
+        if (regionToSessionContractValue(`${basePath}.required`) !== true) {
+            throw new Error(`Dev/TemplateFactory/modules/region_to_session_contract.yaml: ${basePath}.required deve essere true`);
+        }
+        return [id, {
+            minCount: requiredRegionToSessionContractNumber(`${basePath}.min_count`, 1),
+            acceptedFields: optionalRegionToSessionContractArray(`${basePath}.accepted_fields`),
+            sourceFolders: optionalRegionToSessionContractArray(`${basePath}.source_folders`),
+            activeStates: new Set(optionalRegionToSessionContractArray(`${basePath}.active_states`)),
+            reason: String(regionToSessionContractValue(`${basePath}.reason`) ?? "")
+        }];
+    }));
+
+    const triggers = regionToSessionContractValue("validation_model.trigger_entities") ?? [];
+    if (!Array.isArray(triggers) || !triggers.length) {
+        throw new Error("Dev/TemplateFactory/modules/region_to_session_contract.yaml: validation_model.trigger_entities vuoto o mancante");
+    }
+
+    return {
+        minimums,
+        triggers: triggers.map((trigger, index) => {
+            const id = String(trigger?.id ?? "").trim();
+            const pathPrefix = String(trigger?.path_prefix ?? "").trim();
+            const categoria = String(trigger?.categoria ?? "").trim();
+            const activeStates = (trigger?.active_states ?? [])
+                .map(value => String(value))
+                .filter(Boolean);
+            if (!id || !pathPrefix || !categoria || !activeStates.length) {
+                throw new Error(`Dev/TemplateFactory/modules/region_to_session_contract.yaml: trigger_entities[${index}] incompleto`);
+            }
+            return { id, pathPrefix, categoria, activeStates: new Set(activeStates) };
+        }),
+        regionLinkFields: requiredRegionToSessionContractArray("validation_model.region_link_fields"),
+        regionScopeLinkageFields: requiredRegionToSessionContractArray("validation_model.region_scope_linkage_fields"),
+        sourceFolders: requiredRegionToSessionContractArray("validation_model.source_folders"),
+        passWhenAllMinimumsAreMet: regionToSessionContractValue("validation_model.pass_when_all_minimums_are_met") === true
+    };
 }
 
 function requiredContractListOfLists(pathText) {
@@ -273,6 +455,8 @@ const ALLOWED_TYPES_BY_CATEGORY = requiredValidationSetMap("allowed_types_by_cat
 const REQUIRED_FIELDS_BY_CATEGORY = requiredFieldsByCategory();
 const READY_REQUIREMENTS_BY_CATEGORY_OR_TYPE = requiredStateReadyRequirements();
 const PLAYABILITY_RULES = requiredPlayabilityRules();
+const REGION_PLAYABILITY_POLICY = requiredRegionPlayabilityPolicy();
+const REGION_TO_SESSION_POLICY = requiredRegionToSessionPolicy();
 
 const errors = [];
 const warnings = [];
@@ -358,6 +542,260 @@ function validatePlayabilityRules(fileRel, fm) {
         if (!pathMatchesRule(fileRel, rule)) continue;
         if (!frontmatterMatchesRule(fm, rule)) continue;
         if (missingPlayabilityRequirement(fm, rule)) messages.push(`${fileRel}: ${rule.warning}`);
+    }
+    return messages;
+}
+
+function noteStem(fileRel) {
+    return String(fileRel ?? "").replace(/\\/g, "/").replace(/\.md$/, "");
+}
+
+function referenceTokens(value) {
+    const raw = String(value ?? "").trim();
+    if (!raw) return [];
+
+    const wikilink = raw.match(/^\[\[([^\]|#]+)(?:#[^\]|]+)?(?:\|[^\]]+)?\]\]$/);
+    const target = (wikilink ? wikilink[1] : raw)
+        .replace(/\\/g, "/")
+        .replace(/\.md$/, "")
+        .trim();
+    if (!target) return [];
+
+    return [
+        target,
+        path.basename(target)
+    ].map(token => normalizedText(token)).filter(Boolean);
+}
+
+function fieldReferenceTokens(value) {
+    return arrayValue(value).flatMap(referenceTokens);
+}
+
+function noteReferenceTokens(fileRel, fm) {
+    const stem = noteStem(fileRel);
+    const tokens = [
+        stem,
+        path.basename(stem),
+        fm.nome,
+        fm.id
+    ].flatMap(referenceTokens);
+    return new Set(tokens);
+}
+
+function fieldReferencesNote(value, noteTokens) {
+    return fieldReferenceTokens(value).some(token => noteTokens.has(token));
+}
+
+function entryReferencesRegion(fm, regionTokens) {
+    return REGION_PLAYABILITY_POLICY.linkageFields
+        .some(field => fieldReferencesNote(fm[field], regionTokens));
+}
+
+function fieldMatchesRegionType(value) {
+    return arrayValue(value).some(item => {
+        const normalized = normalizedText(item);
+        if (REGION_PLAYABILITY_POLICY.candidate.typeValues.has(normalized)) return true;
+        return normalized.split(/\s+/).some(part => REGION_PLAYABILITY_POLICY.candidate.typeValues.has(part));
+    });
+}
+
+function isRegionTypeCandidate(fileRel, fm) {
+    const candidate = REGION_PLAYABILITY_POLICY.candidate;
+    if (!fileRel.startsWith(candidate.pathPrefix)) return false;
+    if (String(fm.categoria ?? "") !== candidate.categoria) return false;
+    return candidate.typeFields.some(field => fieldMatchesRegionType(fm[field]));
+}
+
+function isRegionPlayabilityCandidate(fileRel, fm) {
+    return isRegionTypeCandidate(fileRel, fm)
+        && REGION_PLAYABILITY_POLICY.candidate.validatedStates.has(String(fm.stato ?? ""));
+}
+
+function entryInRegionContractScope(fileRel) {
+    return REGION_PLAYABILITY_POLICY.sourceFolders
+        .some(folder => fileRel.startsWith(`${folder.replace(/\/$/, "")}/`));
+}
+
+function relatedRegionEntries(realEntries, regionFileRel, regionFm) {
+    const regionTokens = noteReferenceTokens(regionFileRel, regionFm);
+    return realEntries.filter(([fileRel, fm]) => {
+        if (fileRel === regionFileRel) return false;
+        if (!entryInRegionContractScope(fileRel)) return false;
+        if (String(fm.stato ?? "") === "archiviata" || String(fm.stato ?? "") === "ignorata") return false;
+        return entryReferencesRegion(fm, regionTokens);
+    });
+}
+
+function countRelatedEntries(entries, predicate) {
+    return entries.filter(([fileRel, fm]) => fileRel && predicate(fileRel, fm)).length;
+}
+
+function hasAcceptedRegionField(fm, fields) {
+    return fields.some(field => hasValue(fm[field]));
+}
+
+function regionPlayabilityCounts(regionFileRel, regionFm, realEntries) {
+    const related = relatedRegionEntries(realEntries, regionFileRel, regionFm);
+    const scopedWithRegion = [[regionFileRel, regionFm], ...related];
+    const minimums = REGION_PLAYABILITY_POLICY.minimums;
+
+    return {
+        luoghi: countRelatedEntries(related, (fileRel, fm) => fileRel.startsWith("Mondi/Luoghi/") && fm.categoria === "luogo"),
+        fazioni: countRelatedEntries(related, (fileRel, fm) => fileRel.startsWith("Mondi/Fazioni/") && fm.categoria === "fazione"),
+        conflitti: countRelatedEntries(related, (fileRel, fm) => fileRel.startsWith("Mondi/Conflitti/") && fm.categoria === "conflitto"),
+        missioni: countRelatedEntries(related, (fileRel, fm) => fileRel.startsWith("Mondi/Missioni/") && fm.categoria === "missione"),
+        pressioni: countRelatedEntries(scopedWithRegion, (fileRel, fm) => {
+            return fileRel.startsWith("Mondi/Tracciati/")
+                || hasAcceptedRegionField(fm, minimums.pressioni.acceptedFields);
+        }),
+        uscita_verso_sessione: countRelatedEntries(scopedWithRegion, (fileRel, fm) => {
+            return fileRel.startsWith("Mondi/Sessioni/")
+                || hasAcceptedRegionField(fm, minimums.uscita_verso_sessione.acceptedFields);
+        }),
+        superficie_player_safe: countRelatedEntries(scopedWithRegion, (fileRel, fm) => {
+            return hasAcceptedRegionField(fm, minimums.superficie_player_safe.acceptedFields);
+        })
+    };
+}
+
+function regionPlayabilityMissing(counts) {
+    return Object.entries(REGION_PLAYABILITY_POLICY.minimums)
+        .filter(([id, requirement]) => (counts[id] ?? 0) < requirement.minCount)
+        .map(([id, requirement]) => `${id} ${counts[id] ?? 0}/${requirement.minCount}`);
+}
+
+function validateRegionPlayabilityGate(realEntries) {
+    const messages = [];
+    if (!REGION_PLAYABILITY_POLICY.passWhenAllMinimumsAreMet) return messages;
+
+    for (const [fileRel, fm] of realEntries) {
+        if (!isRegionPlayabilityCandidate(fileRel, fm)) continue;
+
+        const counts = regionPlayabilityCounts(fileRel, fm, realEntries);
+        const missing = regionPlayabilityMissing(counts);
+        if (!missing.length) continue;
+
+        messages.push(`${fileRel}: Region Playability Gate non superato (${missing.join(", ")})`);
+    }
+    return messages;
+}
+
+function isRegionToSessionTrigger(fileRel, fm) {
+    return REGION_TO_SESSION_POLICY.triggers.some(trigger => {
+        return fileRel.startsWith(trigger.pathPrefix)
+            && String(fm.categoria ?? "") === trigger.categoria
+            && trigger.activeStates.has(String(fm.stato ?? ""));
+    });
+}
+
+function triggerHasRegionLink(fm) {
+    return hasAny(fm, REGION_TO_SESSION_POLICY.regionLinkFields);
+}
+
+function referencedRegionEntries(realEntries, triggerFm) {
+    return realEntries.filter(([fileRel, fm]) => {
+        if (!isRegionTypeCandidate(fileRel, fm)) return false;
+        const regionTokens = noteReferenceTokens(fileRel, fm);
+        return REGION_TO_SESSION_POLICY.regionLinkFields
+            .some(field => fieldReferencesNote(triggerFm[field], regionTokens));
+    });
+}
+
+function entryInRegionToSessionScope(fileRel) {
+    return REGION_TO_SESSION_POLICY.sourceFolders
+        .some(folder => fileRel.startsWith(`${folder.replace(/\/$/, "")}/`));
+}
+
+function relatedRegionToSessionEntries(realEntries, regionFileRel, regionFm) {
+    const regionTokens = noteReferenceTokens(regionFileRel, regionFm);
+    return realEntries.filter(([fileRel, fm]) => {
+        if (fileRel === regionFileRel) return false;
+        if (!entryInRegionToSessionScope(fileRel)) return false;
+        if (String(fm.stato ?? "") === "archiviata" || String(fm.stato ?? "") === "ignorata") return false;
+        return REGION_TO_SESSION_POLICY.regionScopeLinkageFields
+            .some(field => fieldReferencesNote(fm[field], regionTokens));
+    });
+}
+
+function uniqueEntries(entries) {
+    const seen = new Set();
+    return entries.filter(([fileRel]) => {
+        if (!fileRel || seen.has(fileRel)) return false;
+        seen.add(fileRel);
+        return true;
+    });
+}
+
+function countEntriesWithFields(entries, fields) {
+    return entries.filter(([, fm]) => hasAcceptedRegionField(fm, fields)).length;
+}
+
+function countRelatedByFolder(entries, folders, predicate = () => true) {
+    return entries.filter(([fileRel, fm]) => {
+        return folders.some(folder => fileRel.startsWith(`${folder.replace(/\/$/, "")}/`))
+            && predicate(fileRel, fm);
+    }).length;
+}
+
+function regionIsPlayable(regionFileRel, regionFm, realEntries) {
+    return isRegionPlayabilityCandidate(regionFileRel, regionFm)
+        && regionPlayabilityMissing(regionPlayabilityCounts(regionFileRel, regionFm, realEntries)).length === 0;
+}
+
+function regionToSessionCounts(triggerFileRel, triggerFm, regionFileRel, regionFm, realEntries) {
+    const related = relatedRegionToSessionEntries(realEntries, regionFileRel, regionFm);
+    const scoped = uniqueEntries([[triggerFileRel, triggerFm], [regionFileRel, regionFm], ...related]);
+    const minimums = REGION_TO_SESSION_POLICY.minimums;
+
+    return {
+        regione_giocabile: regionIsPlayable(regionFileRel, regionFm, realEntries) ? 1 : 0,
+        missione_selezionabile: Math.max(
+            countRelatedByFolder(related, minimums.missione_selezionabile.sourceFolders, (fileRel, fm) => fileRel && fm.categoria === "missione"),
+            countEntriesWithFields(scoped, minimums.missione_selezionabile.acceptedFields)
+        ),
+        apertura_sessione: countEntriesWithFields(scoped, minimums.apertura_sessione.acceptedFields),
+        luogo_iniziale: Math.max(
+            countRelatedByFolder(related, ["Mondi/Luoghi"], (fileRel, fm) => fileRel !== regionFileRel && fm.categoria === "luogo"),
+            countEntriesWithFields(scoped, minimums.luogo_iniziale.acceptedFields)
+        ),
+        fazione_attiva: Math.max(
+            countRelatedByFolder(related, minimums.fazione_attiva.sourceFolders, (fileRel, fm) => {
+                return fileRel && fm.categoria === "fazione" && minimums.fazione_attiva.activeStates.has(String(fm.stato ?? ""));
+            }),
+            countEntriesWithFields(scoped, minimums.fazione_attiva.acceptedFields)
+        ),
+        pressione_attiva: countEntriesWithFields(scoped, minimums.pressione_attiva.acceptedFields),
+        scelta_pg: countEntriesWithFields(scoped, minimums.scelta_pg.acceptedFields),
+        materiale_player_safe: countEntriesWithFields(scoped, minimums.materiale_player_safe.acceptedFields)
+    };
+}
+
+function regionToSessionMissing(counts) {
+    return Object.entries(REGION_TO_SESSION_POLICY.minimums)
+        .filter(([id, requirement]) => (counts[id] ?? 0) < requirement.minCount)
+        .map(([id, requirement]) => `${id} ${counts[id] ?? 0}/${requirement.minCount}`);
+}
+
+function validateRegionToSessionGate(realEntries) {
+    const messages = [];
+    if (!REGION_TO_SESSION_POLICY.passWhenAllMinimumsAreMet) return messages;
+
+    for (const [fileRel, fm] of realEntries) {
+        if (!isRegionToSessionTrigger(fileRel, fm) || !triggerHasRegionLink(fm)) continue;
+
+        const regions = referencedRegionEntries(realEntries, fm);
+        if (!regions.length) {
+            messages.push(`${fileRel}: Region to Session Gate non superato (regione_giocabile 0/1)`);
+            continue;
+        }
+
+        for (const [regionFileRel, regionFm] of regions) {
+            const counts = regionToSessionCounts(fileRel, fm, regionFileRel, regionFm, realEntries);
+            const missing = regionToSessionMissing(counts);
+            if (!missing.length) continue;
+
+            messages.push(`${fileRel}: Region to Session Gate non superato verso ${regionFileRel} (${missing.join(", ")})`);
+        }
     }
     return messages;
 }
@@ -792,6 +1230,9 @@ const activeSessions = realEntries
 if (activeSessions.length > 1) {
     errors.push(`Sessioni multiple attive: ${activeSessions.map(([fileRel]) => fileRel).join(", ")}`);
 }
+
+warnings.push(...validateRegionPlayabilityGate(realEntries));
+warnings.push(...validateRegionToSessionGate(realEntries));
 
 const gptConnectorIndex = markdownMeta.get("Dev/Indice Connettore GPT.md");
 if (gptConnectorIndex?.is_code_search_indexed !== true) {

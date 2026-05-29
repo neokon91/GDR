@@ -973,6 +973,8 @@ pages:
 
       ## Campi Essenziali
 
+      Usa `depth_level` per evitare schede inutilmente pesanti: `rapido` richiede solo gancio e uso al tavolo; `giocabile` aggiunge pressione, prossima mossa e connessioni; `profondo` aggiunge dipendenze, costo sociale, evoluzione se ignorata e propagazione.
+
       | Entità | Compila subito | Perché serve |
       | --- | --- | --- |
       | PNG | Vuole, sa, leva, segreto | Produce dialogo, scelta o sospetto. |
@@ -1069,6 +1071,10 @@ pages:
       ```
 
       ## Pronta Quando
+
+      Contratto minimo: 3 luoghi, 2 fazioni, 1 conflitto, 1 missione, 1 pressione, 1 uscita verso sessione e 1 superficie player-safe. Se manca uno di questi pezzi, la regione resta bozza utile ma non ancora prodotto giocabile.
+
+      Session-ready significa che una campagna o sessione collegata trova gia: missione selezionabile, apertura, luogo iniziale, fazione attiva, pressione che avanza, scelta per i PG e materiale player-safe.
 
       | Area | Minimo giocabile | Profondita utile |
       | --- | --- | --- |
@@ -2335,7 +2341,7 @@ pages:
 
       ```dataviewjs
       const gdr = await eval(await app.vault.adapter.read("z.engine/session_views.js"));
-      gdr.renderQualityReportNow(dv);
+      await gdr.renderQualityReportNow(dv);
       ```
 
       ## Copertura

@@ -18,11 +18,11 @@ primary_path:
     page: Inizia Qui.md
     label: Inizia Qui
     required_buttons:
-      - nuovo-mondo-homebrew
       - prima-sessione-in-15-minuti-risorse-prima-sessione-in-15-minuti
+      - regione-giocabile-risorse-regione-giocabile
       - preparazione-sessione-risorse-preparazione-sessione
       - gioca-hub-durante-il-gioco-durante-il-gioco
-      - fuori-scena-hub-cosa-succede-fuori-scena-cosa-succede-fuori-scena
+      - post-sessione-guidato-risorse-post-sessione-guidato
   - workflow: prima_sessione_rapida
     page: Risorse/Prima Sessione In 15 Minuti.md
     label: Prima Sessione In 15 Minuti
@@ -31,22 +31,6 @@ primary_path:
       - preparazione-sessione-risorse-preparazione-sessione
       - durante-il-gioco-durante-il-gioco
       - post-sessione-guidato-risorse-post-sessione-guidato
-  - workflow: dashboard_dm
-    page: Hub/1. DM Dashboard.md
-    label: DM Dashboard
-    required_buttons:
-      - durante-il-gioco-durante-il-gioco
-      - prossima-sessione-risorse-preparazione-sessione
-      - worldbuilder-worldbuilder-dashboard
-      - campagna-da-ambientazione-campagna-da-ambientazione
-  - workflow: espandi_mondo
-    page: Hub/Worldbuilder Dashboard.md
-    label: Worldbuilder Dashboard
-    required_buttons:
-      - nuovo-mondo-homebrew
-      - wizard-nuova-entita-viva
-      - regione-giocabile-risorse-regione-giocabile
-      - campagna-da-ambientazione-campagna-da-ambientazione
   - workflow: regione_giocabile
     page: Risorse/Regione Giocabile.md
     label: Regione Giocabile
@@ -55,13 +39,6 @@ primary_path:
       - nuova-fazione-z-modelli-fazione-router-md
       - nuovo-conflitto-z-modelli-worldbuilding-conflitto-md
       - nuova-missione-z-modelli-dm-missione-md
-      - nuova-sessione-z-modelli-dm-sessione-md
-  - workflow: campagna_ambientazione
-    page: Hub/Campagna da Ambientazione.md
-    label: Campagna da Ambientazione
-    required_buttons:
-      - campagna-da-regione-z-modelli-dm-campagna-da-regione-md
-      - arco-da-conflitto-z-modelli-dm-arco-da-conflitto-md
       - nuova-sessione-z-modelli-dm-sessione-md
   - workflow: prepara_sessione
     page: Risorse/Preparazione Sessione.md
@@ -87,73 +64,33 @@ primary_path:
       - applica-conseguenza
       - propaga-a-entita
       - fuori-scena-hub-cosa-succede-fuori-scena-cosa-succede-fuori-scena
-  - workflow: fuori_scena
-    page: Hub/Cosa Succede Fuori Scena.md
-    label: Cosa Succede Fuori Scena
-    required_buttons:
-      - post-sessione-guidato-risorse-post-sessione-guidato
-      - motore-mondo-vivo-motore-mondo-vivo
-      - prossima-sessione-risorse-preparazione-sessione
-  - workflow: atlante_mondo
-    page: Hub/Atlante del Mondo.md
-    label: Atlante del Mondo
-    required_buttons:
-      - nuova-cultura-z-modelli-worldbuilding-cultura-md
-      - nuovo-conflitto-z-modelli-worldbuilding-conflitto-md
-      - controllo-worldbuilding-controllo-worldbuilding
-  - workflow: controllo_worldbuilding
-    page: Hub/Controllo Worldbuilding.md
-    label: Controllo Worldbuilding
-    required_buttons:
-      - atlante-atlante-del-mondo-2
-      - worldbuilding-profondo-risorse-worldbuilding-profondo-2
-      - economia-e-rotte-economia-e-rotte
-  - workflow: economia_rotte
-    page: Hub/Economia E Rotte.md
-    label: Economia E Rotte
-    required_buttons:
-      - nuova-rotta-z-modelli-worldbuilding-rotta-md
-      - nuova-risorsa-z-modelli-worldbuilding-risorsa-md
-      - nuovo-mercato-z-modelli-worldbuilding-mercato-o-nodo-commerciale-md
-  - workflow: lore_hub
-    page: Hub/Lore Hub.md
-    label: Lore Hub
-    required_buttons:
-      - atlante-atlante-del-mondo-2
-      - calendario-mondi-calendario
-      - lore-capture-z-modelli-lore-capture-md
-  - workflow: motore_mondo_vivo
-    page: Hub/Motore Mondo Vivo.md
-    label: Motore Mondo Vivo
-    required_buttons:
-      - stato-campagna-mondi-stato-del-mondo
-      - cosa-succede-fuori-scena-cosa-succede-fuori-scena
-      - controllo-canone-controllo-canone
-  - workflow: controllo_canone
-    page: Hub/Controllo Canone.md
-    label: Controllo Canone
-    required_buttons:
-      - timeline-mondi-timeline-timeline
-      - revisione-lore-revisione-lore
-      - lore-hub-lore-hub
-  - workflow: compendium_mondo
-    page: Hub/Compendium Del Mondo.md
-    label: Compendium Del Mondo
-    required_buttons:
-      - nuovo-elemento-z-modelli-worldbuilding-compendium-del-mondo-md
-      - lore-hub-lore-hub
-      - nuova-risorsa-z-modelli-worldbuilding-risorsa-md
-  - workflow: bibbia_mondo
-    page: Hub/Bibbia del Mondo.md
-    label: Bibbia del Mondo
-    required_buttons:
-      - nuovo-mondo-homebrew
-      - atlante-del-mondo-atlante-del-mondo
-      - campagna-da-ambientazione-campagna-da-ambientazione
-  - workflow: iniziativa_combattimenti
-    page: Risorse/Iniziativa e Combattimenti.md
-    label: Iniziativa e Combattimenti
-    required_buttons:
-      - durante-il-gioco-durante-il-gioco-3
-      - nuovo-incontro-z-modelli-dm-incontro-md
-      - preparazione-sessione-risorse-preparazione-sessione
+ux_classification:
+  CORE:
+    - prima_sessione_rapida
+    - regione_giocabile
+    - prepara_sessione
+    - gioca_live
+    - post_sessione
+  ADVANCED:
+    - dashboard_dm
+    - espandi_mondo
+    - campagna_ambientazione
+    - fuori_scena
+    - atlante_mondo
+    - economia_rotte
+    - lore_hub
+    - motore_mondo_vivo
+    - bibbia_mondo
+    - compendium_mondo
+    - iniziativa_combattimenti
+  DEV_ONLY:
+    - setup_guidato
+    - manutenzione
+    - controllo_worldbuilding
+    - controllo_canone
+    - revisione_lore
+    - quality_report
+contracts:
+  new_user_primary_surfaces_are_core_only: true
+  onboarding_is_gateway_not_workflow: true
+  advanced_surfaces_must_support_core: true

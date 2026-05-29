@@ -219,6 +219,15 @@ fields:
       source: meta_bind
       use: impatto concreto durante la sessione
   entity_depth:
+    - name: depth_level
+      type: select
+      required: false
+      source: meta_bind
+      use: profondita selettiva della nota
+      values:
+        - rapido
+        - giocabile
+        - profondo
     - name: origine
       type: text
       required: false
@@ -264,6 +273,36 @@ fields:
       required: false
       source: meta_bind
       use: formulazione pubblicabile o condivisibile senza segreti
+    - name: valore_dominante
+      type: text
+      required: false
+      source: meta_bind
+      use: valore culturale o sociale che guida scelte e attriti
+    - name: tensione_culturale
+      type: text
+      required: false
+      source: meta_bind
+      use: tensione culturale che produce scene o scelte
+    - name: conflitto_generato
+      type: text
+      required: false
+      source: meta_bind
+      use: conflitto prodotto da una cultura, fede o risorsa
+    - name: dogma
+      type: text
+      required: false
+      source: meta_bind
+      use: dogma operativo che crea vincoli al tavolo
+    - name: reazione_a_violazione
+      type: text
+      required: false
+      source: meta_bind
+      use: risposta sociale o religiosa quando un tabu viene infranto
+    - name: crisi
+      type: text
+      required: false
+      source: meta_bind
+      use: crisi economica, sociale o materiale che genera pressione
   pressure:
     - name: pressione
       type: number

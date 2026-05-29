@@ -1,0 +1,78 @@
+id: region_playability_contract
+purpose: Contratto minimo per trattare una Regione Giocabile come prodotto primario del vault.
+version: 0.1.0
+region_playability:
+  unit: regione_giocabile
+  minimum_viable_region:
+    luoghi:
+      min_count: 3
+      required: true
+      reason: La regione deve offrire almeno sicurezza, instabilita e pericolo/proibito.
+    fazioni:
+      min_count: 2
+      required: true
+      reason: Servono poteri con desideri incompatibili o metodi incompatibili.
+    conflitti:
+      min_count: 1
+      required: true
+      reason: Il territorio deve avere una posta aperta che cambia il tavolo.
+    missioni:
+      min_count: 1
+      required: true
+      reason: Una tensione deve gia poter diventare obiettivo concreto.
+    pressioni:
+      min_count: 1
+      required: true
+      accepted_fields:
+        - pressione
+        - tracciati
+        - prossima_mossa
+      reason: Qualcosa deve avanzare se i PG ignorano la regione.
+    uscita_verso_sessione:
+      min_count: 1
+      required: true
+      accepted_fields:
+        - sessioni
+        - prossima_apertura
+        - apertura
+      reason: La regione deve poter generare una sessione senza completare il mondo.
+    superficie_player_safe:
+      min_count: 1
+      required: true
+      accepted_fields:
+        - player_safe
+        - recap_pubblico
+        - materiale_pubblico
+      reason: Il DM deve poter mostrare almeno una verita pubblica senza esporre segreti.
+validation_model:
+  region_candidates:
+    path_prefix: Mondi/Luoghi/
+    categoria: luogo
+    type_fields:
+      - tipo
+    type_values:
+      - regione
+    validated_states:
+      - pronto
+      - in gioco
+      - in corso
+      - attivo
+      - preparazione
+  source_folders:
+    - Mondi/Luoghi
+    - Mondi/Fazioni
+    - Mondi/Conflitti
+    - Mondi/Missioni
+    - Mondi/Tracciati
+    - Mondi/Sessioni
+  linkage_fields:
+    - regione
+    - luogo_padre
+    - luoghi
+    - regioni
+    - connessioni
+  pass_when_all_minimums_are_met: true
+contracts:
+  no_world_completion_required: true
+  no_new_dashboard_required: true
+  missing_requirement_blocks_campaign_generation: true

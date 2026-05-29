@@ -376,7 +376,7 @@ categories:
     label: Religione
     folder: Mondi/Religioni
     priority: useful
-    purpose: Gestisce divinita, culti, pratiche, miti e luoghi sacri.
+    purpose: Gestisce divinita, culti, dogmi, costi sociali, violazioni e reazioni giocabili.
     create_when:
       - la fede produce autorita, tabo, risorse, conflitti o scelte al tavolo
     types:
@@ -396,15 +396,22 @@ categories:
     useful_fields:
       - luoghi
       - fazioni
-      - simboli_visibili
+      - dogma
       - costo_sociale
+      - reazione_a_violazione
+      - simboli_visibili
+      - pressione
+      - prossima_mossa
+      - missioni
+      - conseguenze
+      - propaga_a
       - uso_al_tavolo
       - player_safe
   cultura:
     label: Cultura
     folder: Mondi/Culture
     priority: useful
-    purpose: Rende giocabili popoli, tradizioni, tabu, feste e costumi.
+    purpose: Rende giocabili popoli, tradizioni, tabu, feste e costumi tramite valori, tensioni, conflitti e conseguenze.
     create_when:
       - la cultura influenza scene, conflitti, accoglienza o informazioni
     types:
@@ -424,14 +431,20 @@ categories:
       - luoghi
       - lingue
       - religioni
+      - valore_dominante
+      - tensione_culturale
+      - conflitto_generato
       - tensioni
       - feste
+      - missioni
+      - conseguenze
+      - prossima_mossa
       - player_safe
   risorsa:
     label: Risorsa
     folder: Mondi/Risorse
     priority: useful
-    purpose: Modella merci, risorse strategiche, mercati, rotte e leve economiche.
+    purpose: Modella merci, risorse strategiche, mercati, rotte e leve economiche come catena dipendenza, crisi, pressione e missione.
     create_when:
       - la risorsa muove potere, viaggio, conflitto o dipendenza economica
     types:
@@ -454,8 +467,15 @@ categories:
       - fazioni
       - rotte
       - mercati
+      - dipendenze
+      - crisi
       - pressione
       - prossima_mossa
+      - missioni
+      - conseguenze
+      - gancio
+      - uso_al_tavolo
+      - player_safe
   sessione:
     label: Sessione
     folder: Mondi/Sessioni

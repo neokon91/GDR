@@ -593,10 +593,14 @@ profiles:
       fazioni: Fazioni collegate
       religioni: Religioni collegate
       tratto: Cosa rende riconoscibile questa cultura
+      valore_dominante: Valore dominante che guida accoglienza, conflitti o scelte
       gancio: Gancio giocabile della cultura
       uso_al_tavolo: Uso al tavolo
       player_safe: Versione player-safe
       tensione: Tensione interna o problema
+      tensione_culturale: Tensione culturale visibile in scena
+      conflitto_generato: Conflitto generato dalla cultura
+      costo_sociale: Costo sociale per chi viola norme o tabu
       segreto: Verità nascosta o tabù
       prossima_mossa: Prossima mossa culturale
       mito_origine: Mito d'origine
@@ -691,7 +695,17 @@ profiles:
       riferimenti_regola: Riferimenti regola per statblock e GS
   culto:
     name_prompt: Nome
-    prompts: {}
+    prompts:
+      dogma: Dogma operativo che crea vincoli o scelte
+      costo_sociale: Costo sociale per chi obbedisce o viola la fede
+      reazione_a_violazione: Reazione a violazione di dogma, tabu o rito
+      gancio: Gancio giocabile della religione o culto
+      uso_al_tavolo: Uso al tavolo
+      player_safe: Versione player-safe
+      pressione: Pressione religiosa da 0 a 10
+      prossima_mossa: Prossima mossa se nessuno interviene
+      conseguenze: Conseguenze religiose o sociali
+      missioni: Missioni generate dalla fede
   dispensa:
     name_prompt: Nome
     prompts: {}
@@ -910,7 +924,14 @@ profiles:
     prompts: {}
   risorsa_mondo:
     name_prompt: Nome
-    prompts: {}
+    prompts:
+      uso_narrativo: Uso narrativo o strategico
+      dipendenze: Chi o cosa dipende dalla risorsa
+      crisi: Crisi prodotta da scarsita, monopolio o interruzione
+      pressione: Pressione economica da 0 a 10
+      prossima_mossa: Prossima mossa economica
+      missioni: Missioni generate dalla crisi economica
+      conseguenze: Conseguenze se la risorsa manca o cambia controllo
   sessione:
     name_prompt: Nome
     prompts:

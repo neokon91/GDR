@@ -50,6 +50,8 @@ panels:
       - sessioni senza obiettivo
       - mappe non collegate
       - fazioni senza pressione
+      - regioni giocabili incomplete
+      - regioni non session-ready
   public:
     runtime_view: renderQualityReportPublicSafety
     promise: Proteggere la vista giocatori da campi DM e materiale pubblico incompleto.

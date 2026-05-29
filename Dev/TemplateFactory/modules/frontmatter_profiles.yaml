@@ -12,11 +12,13 @@ field_catalog:
   - collegamenti_mancanti
   - confini
   - conflitti
+  - conflitto_generato
   - conflitti_interni
   - contraddizioni_interne
   - cose_proibite
   - cose_sacre
   - crisi_interne
+  - crisi
   - debolezze
   - decisioni
   - dipendenze
@@ -59,6 +61,7 @@ field_catalog:
   - proprietario
   - promesse_al_tavolo
   - rapporto_stranieri
+  - reazione_a_violazione
   - rarita
   - relazioni_esterne
   - risorse_strategiche
@@ -69,10 +72,12 @@ field_catalog:
   - tabu
   - tabu_sociali
   - tensioni
+  - tensione_culturale
   - tratto_distintivo
   - trattati
   - usi
   - valori
+  - valore_dominante
   - vassalli
   - versioni_contrapposte
   - voci
@@ -135,6 +140,7 @@ field_catalog:
   - dadi_vita_spesi
   - dadi_vita_totali
   - data_reale
+  - dogma
   - dogmi
   - domande_campagna
   - domande_guida
@@ -361,6 +367,8 @@ profiles:
       value: tipo
     - key: stato
       default: bozza
+    - key: depth_level
+      default: giocabile
     - key: canonico
       default: false
     - key: stato_canonico
@@ -498,6 +506,8 @@ profiles:
       value: bioma
     - key: stato
       default: bozza
+    - key: depth_level
+      default: giocabile
     - key: canonico
       default: false
     - key: stato_canonico
@@ -877,6 +887,8 @@ profiles:
       value: tipo
     - key: stato
       default: bozza
+    - key: depth_level
+      default: giocabile
     - key: mondo
       value: mondo
     - key: luogo
@@ -976,6 +988,8 @@ profiles:
       value: tipo
     - key: stato
       default: proposta
+    - key: depth_level
+      default: giocabile
     - key: mondo
       value: mondo
     - key: committente
@@ -1113,6 +1127,8 @@ profiles:
       value: tipo
     - key: stato
       default: attivo
+    - key: depth_level
+      default: giocabile
     - key: mondo
       value: mondo
     - key: campagne
@@ -1305,6 +1321,8 @@ profiles:
       value: rarita
     - key: stato
       default: bozza
+    - key: depth_level
+      default: giocabile
     - key: canonico
       default: false
     - key: mondo
@@ -1369,6 +1387,8 @@ profiles:
       default: mercato
     - key: stato
       default: bozza
+    - key: depth_level
+      default: rapido
     - key: mondo
       value: mondo
     - key: luogo
@@ -1389,6 +1409,8 @@ profiles:
       default: []
     - key: rischi
       value: rischi
+    - key: crisi
+      value: crisi
     - key: dipendenze
       default: []
     - key: pressione
@@ -1466,6 +1488,8 @@ profiles:
       default: rotta
     - key: stato
       default: bozza
+    - key: depth_level
+      default: rapido
     - key: stato_rotta
       value: stato_rotta
     - key: mondo
@@ -1488,6 +1512,8 @@ profiles:
       value: risorse
     - key: rischi
       value: rischi
+    - key: crisi
+      value: crisi
     - key: pedaggi
       value: pedaggi
     - key: conseguenze_se_bloccata
@@ -1564,6 +1590,8 @@ profiles:
       default: cultura
     - key: stato
       default: bozza
+    - key: depth_level
+      default: rapido
     - key: canonico
       default: false
     - key: stato_canonico
@@ -1580,6 +1608,8 @@ profiles:
       value: fazioni
     - key: usi
       default: []
+    - key: valore_dominante
+      value: valore_dominante
     - key: tabu
       default: []
     - key: feste
@@ -1618,7 +1648,17 @@ profiles:
       default: []
     - key: conflitti_interni
       default: []
+    - key: tensione_culturale
+      value: tensione_culturale
+    - key: conflitto_generato
+      value: conflitto_generato
+    - key: costo_sociale
+      value: costo_sociale
     - key: relazioni
+      default: []
+    - key: missioni
+      default: []
+    - key: conflitti
       default: []
     - key: gancio
       value: gancio
@@ -1913,6 +1953,8 @@ profiles:
       value: tipo
     - key: stato
       value: stato
+    - key: depth_level
+      default: rapido
     - key: canonico
       value: canonico
     - key: mondo
@@ -2068,6 +2110,8 @@ profiles:
       value: tipo
     - key: stato
       value: stato
+    - key: depth_level
+      default: giocabile
     - key: mondo
       value: mondo
     - key: size
@@ -2169,12 +2213,20 @@ profiles:
       value: sottotipo
     - key: stato
       value: stato
+    - key: depth_level
+      default: rapido
     - key: canonico
       value: canonico
     - key: stato_canonico
       value: stato_canonico
     - key: mondo
       value: mondo
+    - key: gancio
+      value: gancio
+    - key: uso_al_tavolo
+      value: uso_al_tavolo
+    - key: player_safe
+      value: player_safe
     - key: divinita
       value: divinita
     - key: templi
@@ -2199,8 +2251,20 @@ profiles:
       value: propaga_a
     - key: entita_impattate
       value: entita_impattate
+    - key: dogma
+      value: dogma
     - key: dogmi
       value: dogmi
+    - key: costo_sociale
+      value: costo_sociale
+    - key: reazione_a_violazione
+      value: reazione_a_violazione
+    - key: missioni
+      default: []
+    - key: conflitti
+      default: []
+    - key: connessioni
+      default: []
     - key: rituali
       value: rituali
     - key: misteri
@@ -3491,6 +3555,8 @@ profiles:
       value: tipo
     - key: stato
       value: stato
+    - key: depth_level
+      default: rapido
     - key: mondo
       value: mondo
     - key: luoghi
@@ -3507,6 +3573,8 @@ profiles:
       value: usi
     - key: scarsita
       value: scarsita
+    - key: crisi
+      value: crisi
     - key: rischi
       value: rischi
     - key: dipendenze

@@ -118,6 +118,14 @@ render_checks:
         field: 'text'
         tag: 'table'
         message: 'renderQualityReportOperationalGaps: output senza buchi operativi'
+      - contains: 'Regione Giocabile incompleta'
+        field: 'text'
+        tag: 'table'
+        message: 'renderQualityReportOperationalGaps: output senza gate Regione Giocabile'
+      - contains: 'Region to Session incompleto'
+        field: 'text'
+        tag: 'table'
+        message: 'renderQualityReportOperationalGaps: output senza gate Region to Session'
   - call: renderQualityReportPublicSafety
     expects:
       - contains: 'pubblico: true con campi segreti'

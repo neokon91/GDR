@@ -7,6 +7,7 @@ families:
     frontmatter_profile: luogo
     runtime_profile: luogo
     required_frontmatter_fields:
+      - depth_level
       - origine
       - tensione
       - dipendenze
@@ -45,6 +46,7 @@ families:
     frontmatter_profile: fazione
     runtime_profile: fazione
     required_frontmatter_fields:
+      - depth_level
       - origine
       - tensione
       - dipendenze
@@ -80,6 +82,7 @@ families:
     frontmatter_profile: missione
     runtime_profile: missione
     required_frontmatter_fields:
+      - depth_level
       - origine
       - causa
       - tensione
@@ -120,6 +123,7 @@ families:
     frontmatter_profile: tracciato
     runtime_profile: tracciato
     required_frontmatter_fields:
+      - depth_level
       - origine
       - causa
       - tensione
@@ -158,6 +162,7 @@ families:
     frontmatter_profile: incontro
     runtime_profile: incontro
     required_frontmatter_fields:
+      - depth_level
       - luogo
       - missioni
       - fazioni
@@ -199,6 +204,7 @@ families:
     frontmatter_profile: creatura
     runtime_profile: creatura
     required_frontmatter_fields:
+      - depth_level
       - mondo
       - habitat
       - luoghi
@@ -237,6 +243,7 @@ families:
     frontmatter_profile: oggetto
     runtime_profile: oggetto
     required_frontmatter_fields:
+      - depth_level
       - mondo
       - luogo
       - proprietario
@@ -271,12 +278,152 @@ families:
       - meta_bind
       - dataview
       - bases
+  cultura:
+    reason: La cultura deve produrre identita visibile, attrito sociale, scelta e conseguenze, non solo colore locale.
+    frontmatter_profile: cultura
+    runtime_profile: cultura
+    required_frontmatter_fields:
+      - depth_level
+      - valore_dominante
+      - tensione_culturale
+      - conflitto_generato
+      - costo_sociale
+      - gancio
+      - uso_al_tavolo
+      - player_safe
+      - prossima_mossa
+      - missioni
+      - conseguenze
+      - propaga_a
+      - connessioni
+    required_runtime_prompts:
+      - valore_dominante
+      - tensione_culturale
+      - conflitto_generato
+      - costo_sociale
+      - gancio
+      - uso_al_tavolo
+      - player_safe
+      - prossima_mossa
+    required_sections:
+      - profondita_lore
+      - giocabilita
+      - continuita
+      - pubblicazione
+    required_tabs:
+      - profondita_fantasy
+    plugin_surfaces:
+      - meta_bind
+      - dataview
+      - bases
+  religione:
+    reason: Religioni e culti devono creare dogmi, costi sociali, violazioni, missioni e reazioni.
+    frontmatter_profile: culto
+    runtime_profile: culto
+    required_frontmatter_fields:
+      - depth_level
+      - dogma
+      - costo_sociale
+      - reazione_a_violazione
+      - gancio
+      - uso_al_tavolo
+      - player_safe
+      - pressione
+      - prossima_mossa
+      - missioni
+      - conseguenze
+      - propaga_a
+      - connessioni
+    required_runtime_prompts:
+      - dogma
+      - costo_sociale
+      - reazione_a_violazione
+      - gancio
+      - uso_al_tavolo
+      - player_safe
+      - prossima_mossa
+      - conseguenze
+      - missioni
+    required_sections:
+      - profondita_lore
+      - giocabilita
+      - continuita
+      - pubblicazione
+    required_tabs:
+      - profondita_fantasy
+    plugin_surfaces:
+      - meta_bind
+      - dataview
+      - bases
+  risorsa:
+    reason: La risorsa deve seguire la catena dipendenza -> crisi -> pressione -> missione.
+    frontmatter_profile: risorsa_mondo
+    runtime_profile: risorsa_mondo
+    required_frontmatter_fields:
+      - depth_level
+      - uso_narrativo
+      - dipendenze
+      - crisi
+      - pressione
+      - gancio
+      - uso_al_tavolo
+      - player_safe
+      - prossima_mossa
+      - missioni
+      - conseguenze
+      - propaga_a
+      - connessioni
+    required_runtime_prompts:
+      - uso_narrativo
+      - dipendenze
+      - crisi
+      - pressione
+      - prossima_mossa
+      - missioni
+      - conseguenze
+    required_sections:
+      - profondita_lore
+      - giocabilita
+      - continuita
+      - pubblicazione
+    required_tabs:
+      - profondita_fantasy
+    plugin_surfaces:
+      - meta_bind
+      - dataview
+      - bases
 contracts:
   fields_must_exist_in_yaml_catalog: true
   runtime_prompts_must_exist: true
   frontmatter_profiles_must_expose_required_fields: true
   sections_and_tabs_must_exist_before_jinja_use: true
   no_dashboard_required: true
+  depth_levels:
+    purpose: Ridurre attrito permettendo profondita selettiva invece di chiedere sempre la scheda massima.
+    field: depth_level
+    default: giocabile
+    values:
+      rapido:
+        required_fields:
+          - gancio
+          - uso_al_tavolo
+      giocabile:
+        extends: rapido
+        required_fields:
+          - pressione
+          - prossima_mossa
+          - connessioni
+      profondo:
+        extends: giocabile
+        required_fields:
+          - dipendenze
+          - costo_sociale
+          - evoluzione_se_ignorata
+          - propaga_a
+    creation_policy:
+      new_entity_default: rapido
+      table_relevant_default: giocabile
+      recurring_or_canon_entity_default: profondo
   playability_gate:
     purpose: Ogni famiglia deve esporre abbastanza leve per diventare scena, scelta o conseguenza senza imporre un asse tematico proprietario.
     min_groups_present: 3

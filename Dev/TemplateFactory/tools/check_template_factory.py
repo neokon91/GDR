@@ -41,6 +41,8 @@ REQUIRED_MODULES = {
     "post_session_cockpit",
     "preparation_cockpit",
     "quality_report_cockpit",
+    "region_playability_contract",
+    "region_to_session_contract",
     "table_materials_cockpit",
     "template_blueprints",
     "sections",

@@ -12,22 +12,22 @@ pages:
       tipo: onboarding
       stato: pronto
     body: |
-      Questa e la pagina da usare quando non sai cosa aprire. Il vault distribuito e gia configurato: se vuoi giocare oggi, parti da Prima Sessione; se vuoi costruire con calma, crea un mondo minimo, prepara una sessione, gioca, poi Aggiorna Il Mondo.
+      Questa e la pagina da usare quando non sai cosa aprire. Il vault distribuito e gia configurato: parti da Prima Sessione o Regione Giocabile, prepara una sessione, gioca, poi chiudi le conseguenze.
 
       ## Primo Passo
 
       > [!scena] Percorso guidato
-      > Scegli una strada sola: Prima Sessione per arrivare al tavolo, Crea Mondo per fondare il Codex, Prepara quando hai gia un'idea giocabile. Se Obsidian chiede di abilitare gli strumenti inclusi nel vault, conferma solo se hai scaricato questa copia dalla release ufficiale.
+      > Scegli una strada sola: Prima Sessione se vuoi giocare oggi, Regione Giocabile se vuoi costruire un territorio minimo, Prepara quando hai gia un'idea giocabile. Se Obsidian chiede di abilitare gli strumenti inclusi nel vault, conferma solo se hai scaricato questa copia dalla release ufficiale.
 
       <!-- workflow:quick_actions:start onboarding_utente -->
       > [!regia] Azioni rapide
       > Scegliere subito se giocare oggi, creare un mondo minimo o tornare al tavolo.
       >
-      > **Crea mondo** - non hai ancora un mondo giocabile
-      <!-- workflow:button nuovo-mondo-homebrew -->
-      >
       > **Prima sessione** - vuoi giocare oggi senza completare tutto il Codex
       <!-- workflow:button prima-sessione-in-15-minuti-risorse-prima-sessione-in-15-minuti -->
+      >
+      > **Regione giocabile** - vuoi creare il minimo territorio che produce gioco
+      <!-- workflow:button regione-giocabile-risorse-regione-giocabile -->
       >
       > **Prepara sessione** - hai un mondo o almeno un'idea pronta da giocare
       <!-- workflow:button preparazione-sessione-risorse-preparazione-sessione -->
@@ -35,11 +35,14 @@ pages:
       > **Gioca** - sei al tavolo o vuoi vedere il cockpit live
       <!-- workflow:button gioca-hub-durante-il-gioco-durante-il-gioco -->
       >
-      > **Chiudi e aggiorna** - la sessione e finita e devi decidere conseguenze
-      <!-- workflow:button fuori-scena-hub-cosa-succede-fuori-scena-cosa-succede-fuori-scena -->
+      > **Post sessione** - il tavolo e finito e devi salvare conseguenze
+      <!-- workflow:button post-sessione-guidato-risorse-post-sessione-guidato -->
       >
       > [!regia]- Se ti perdi
       > Aprire solo le viste di supporto, non nuove strade parallele.
+      >
+      > **Crea mondo** - vuoi fondare un mondo minimo prima della regione
+      <!-- workflow:button nuovo-mondo-homebrew -->
       >
       > **Recupero strumenti** - pulsanti, tabelle o pagina iniziale non rispondono
       <!-- workflow:button setup-guidato-risorse-setup-guidato -->
@@ -47,11 +50,11 @@ pages:
       > **Worldbuilder** - vuoi espandere il mondo dopo il primo giro
       <!-- workflow:button worldbuilder-worldbuilder-dashboard-2 -->
       >
-      > **Regione giocabile** - vuoi dare profondita al primo territorio senza perdere il tavolo
-      <!-- workflow:button regione-giocabile-risorse-regione-giocabile -->
-      >
       > **Bibbia del mondo** - vuoi consolidare tono e canone
       <!-- workflow:button bibbia-del-mondo-bibbia-del-mondo-2 -->
+      >
+      > **Fuori scena** - devi decidere reazioni tra una sessione e l'altra
+      <!-- workflow:button fuori-scena-hub-cosa-succede-fuori-scena-cosa-succede-fuori-scena -->
       >
       > **Vista giocatori** - devi mostrare materiale senza segreti DM
       <!-- workflow:button vista-giocatori-hub-vista-giocatori-vista-giocatori -->
