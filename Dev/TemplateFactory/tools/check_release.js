@@ -7,20 +7,20 @@ const { loadReleaseBoundary } = require("./release_boundary_utils");
 
 const ROOT = process.cwd();
 const NAMING_CONTRACT_SOURCE = "Dev/TemplateFactory/modules/naming_contract.yaml";
-const RELEASE_EXPECTED_VERSION = "1.0.0";
-const RELEASE_EXPECTED_DATE = "2026-05-21";
+const RELEASE_EXPECTED_VERSION = "1.0.1";
+const RELEASE_EXPECTED_DATE = "2026-05-29";
 const RELEASE_CHANGELOG_MARKERS = [
-    "[[Dev/Smoke Demo Finale]]",
-    "Gate statico M3",
+    "Release finale pulita",
+    "entity_model.yaml",
     "TemplateFactory ora copre",
     "Calendarium e selezionabile",
     "smistamento -> canonizzazione",
     "dist/vault-gdr-clean.zip"
 ];
 const RELEASE_DOC_MARKERS = [
+    "npm run release:final",
     "npm run release:clean",
-    "npm run release:demo",
-    "Il percorso consegnabile e `npm run release:demo`",
+    "Il percorso consegnabile standard e `npm run release:final`",
     "Non promettere che lo ZIP sia una app standalone",
     "Apri lo ZIP in Obsidian e fai lo smoke manuale"
 ];

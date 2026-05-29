@@ -272,4 +272,4 @@ if (errors.length) {
     process.exit(1);
 }
 
-console.log("Smoke statico OK: onboarding, vista giocatori, live e post-sessione verificati senza demo sorgente.");
+console.log("Smoke statico OK: onboarding, vista giocatori, live e post-sessione verificati senza contenuti di collaudo in sorgente.");

@@ -74,7 +74,7 @@ Le note di porting private non sono documentazione stabile del repository: ogni 
 
 Il vault usa un layer interno sopra Meta Bind, Templater, JS Engine e Metadata Menu. Non e un plugin Obsidian separato: e un contratto di file e configurazioni verificato da `npm run check`.
 
-- I bundle plugin/temi Obsidian sono tracciati solo per release apribile offline; `obsidian_plugin_bundle_contract.yaml` e `check:plugin-bundles` limitano i file ammessi e bloccano configurazioni/stato JSON tracciati per errore.
+- I bundle plugin/temi Obsidian non sono sorgente tracciato; `obsidian_plugin_bundle_contract.yaml` e `check:plugin-bundles` bloccano `main.js`, `styles.css`, temi vendorizzati e configurazioni plugin tracciate per errore. I bundle locali ignorati possono essere copiati nella release finale, così l'utente li accetta all'apertura.
 - Meta Bind: input e pulsanti da YAML, configurazione JSON generata.
 - Templater: wrapper funzione generati in `z.automazioni/templater`.
 - JS Engine: viste riusabili in `z.engine/`.
@@ -90,7 +90,7 @@ Per le pagine di supporto, non inserire blob opachi direttamente in `resource_su
 
 `z.engine/session_views.js` resta il bridge pubblico per le chiamate DataviewJS esistenti. Le famiglie gia estratte vivono in moduli dedicati (`session_maps.js`, `session_dnd.js`, `session_player.js`, cockpit e runtime sessione).
 
-Gli export pubblici e la registry dei moduli runtime sono dichiarati in `Dev/TemplateFactory/modules/runtime_exports.yaml`; il bridge legge il JSON generato `z.automazioni/data/runtime/runtime_exports.json`. Gli scenari minimi di render sono in `Dev/TemplateFactory/modules/runtime_render_contract.yaml`; le sorgenti Dataview simulate sono in `Dev/TemplateFactory/modules/runtime_dataview_contract.yaml`. `session_views.js` pubblica automaticamente gli export `render*`; `check:runtime-load` usa manifest e fixture `Dev/TemplateFactory/tools/fixtures/runtime_demo_pages.json` per impedire drift.
+Gli export pubblici e la registry dei moduli runtime sono dichiarati in `Dev/TemplateFactory/modules/runtime_exports.yaml`; il bridge legge il JSON generato `z.automazioni/data/runtime/runtime_exports.json`. Gli scenari minimi di render sono in `Dev/TemplateFactory/modules/runtime_render_contract.yaml`; le sorgenti Dataview simulate sono in `Dev/TemplateFactory/modules/runtime_dataview_contract.yaml`. `session_views.js` pubblica automaticamente gli export `render*`; `check:runtime-load` usa manifest e fixture `Dev/TemplateFactory/tools/fixtures/runtime_fixture_pages.json` per impedire drift.
 
 Il troubleshooting plugin runtime passa da `Dev/TemplateFactory/modules/runtime_plugin_profile.yaml` e dal JSON generato `z.automazioni/data/runtime/plugin_profile.json`: non aggiungere dizionari statici di plugin, sintomi o fallback dentro `session_views.js`.
 
@@ -127,10 +127,9 @@ python -m pip install -r requirements-dev.txt
 npm run sync:sources
 npm run check
 npm run release:clean
-npm run release:demo
 ```
 
-`npm ci` e `requirements-dev.txt` mantengono la toolchain di sviluppo riproducibile. `npm run sync:sources` materializza output ignorati necessari ai check locali e alla CI. `npm run check` valida pipeline, plugin, runtime, workflow, azioni Meta Bind, regole PG, release, demo, import, repo hygiene e sintassi JS. `npm run release:clean` crea la copia consegnabile; `npm run release:demo` aggiunge la demo generata.
+`npm ci` e `requirements-dev.txt` mantengono la toolchain di sviluppo riproducibile. `npm run sync:sources` materializza output ignorati necessari ai check locali e alla CI. `npm run check` valida pipeline, plugin, runtime, workflow, azioni Meta Bind, regole PG, release, import, repo hygiene e sintassi JS. `npm run release:clean` crea la copia consegnabile.
 
 `obsidian_config.yaml` non puo puntare a bookmark, workspace o file statici mancanti: `render_obsidian_config.py --check` accetta solo path esistenti o output dichiarati in `source_pipeline.yaml`.
 

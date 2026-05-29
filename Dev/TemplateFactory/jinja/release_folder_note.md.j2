@@ -43,7 +43,11 @@ LIMIT 20
 {% endif %}
 {% for action in workflow.get("quick_actions", []) %}>
 > **{{ action.get("label", "") }}** - {{ action.get("use_when", "") }}
+> `BUTTON[{{ action.get("button", "") }}]`
 <!-- workflow:button {{ action.get("button", "") }} -->
+{% set fallback = button_fallback(action.get("button", ""), button_templates) %}
+{% if fallback %}> {{ fallback }}
+{% endif %}
 {% endfor %}
 {% for group in workflow.get("action_groups", {}).values() %}>
 > [!regia]- {{ group.get("label", "") }}
@@ -51,7 +55,11 @@ LIMIT 20
 {% endif %}
 {% for action in group.get("actions", []) %}>
 > **{{ action.get("label", "") }}** - {{ action.get("use_when", "") }}
+> `BUTTON[{{ action.get("button", "") }}]`
 <!-- workflow:button {{ action.get("button", "") }} -->
+{% set fallback = button_fallback(action.get("button", ""), button_templates) %}
+{% if fallback %}> {{ fallback }}
+{% endif %}
 {% endfor %}
 {% endfor %}
 <!-- workflow:quick_actions:end {{ workflow_id }} -->

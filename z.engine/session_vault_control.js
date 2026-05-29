@@ -7,6 +7,8 @@
     hasText,
     isReal,
     pageTitle,
+    playabilityGateCounts,
+    playabilityIssue,
     pluginStatus,
     readJsonRel,
     renderEmptyState
@@ -104,26 +106,8 @@
     ];
   }
 
-  const PLAYABILITY_GATES = ["tavolo", "movimento", "conseguenza", "collegamento"];
-  const PLAYABILITY_GATE_ACTIONS = {
-    tavolo: "Manuale: compila uso_al_tavolo, scena o posta. Workflow: Worldbuilder, Preparazione sessione o Materiali al tavolo.",
-    movimento: "Manuale: compila prossima_mossa o pressione. Workflow: Motore mondo vivo o Task DM.",
-    conseguenza: "Manuale: compila conseguenze, propaga_a o entita_impattate. Workflow: Post Sessione Guidato.",
-    collegamento: "Manuale: collega mondo, luogo, fazione, missione o conseguenza. Workflow: Worldbuilder o Codex tabellare."
-  };
-  const MOVING_ENTITY_KINDS = new Set(["fazione", "culto", "religione", "png", "personaggio", "missione", "conflitto", "relazione", "rotta", "tracciato", "clock"]);
-  const CONSEQUENCE_ENTITY_KINDS = new Set(["luogo", "fazione", "culto", "religione", "png", "personaggio", "missione", "conflitto", "relazione", "rotta", "tracciato", "clock", "incontro"]);
-
   function items(value) {
     return Array.isArray(value) ? value : value ? [value] : [];
-  }
-
-  function anyValue(page, fields) {
-    return fields.some(field => hasLinks(page?.[field]) || hasText(page?.[field]));
-  }
-
-  function positiveNumber(page, fields) {
-    return fields.some(field => Number(page?.[field] ?? 0) > 0);
   }
 
   function normalizedKind(value) {
@@ -171,49 +155,22 @@
     return operationalKind && operationalState;
   }
 
-  function requiredEntityGates(page) {
-    const kind = vaultEntityKind(page);
-    const gates = ["tavolo", "collegamento"];
-    if (MOVING_ENTITY_KINDS.has(kind)) gates.splice(1, 0, "movimento");
-    if (CONSEQUENCE_ENTITY_KINDS.has(kind)) gates.splice(gates.length - 1, 0, "conseguenza");
-    return gates;
-  }
-
-  function entityGateCoverage(page) {
-    const links = vaultEntityLinkCount(page);
-    return {
-      tavolo: anyValue(page, ["uso_al_tavolo", "promessa_al_tavolo", "scene", "scena", "gancio", "posta", "obiettivo", "obiettivo_giocabile", "indizi", "missioni"]),
-      movimento: anyValue(page, ["prossima_mossa", "mosse", "innesco", "avanza_se", "tracciati", "clock"]) || positiveNumber(page, ["pressione", "pericolo"]),
-      conseguenza: anyValue(page, ["conseguenza", "conseguenze", "conseguenze_se_bloccata", "effetti", "impatto", "propaga_a", "entita_impattate", "cambiamenti_quotidiani", "cosa_cambia"]),
-      collegamento: links >= 2
-    };
-  }
-
   function liveEntityGateRows(dv) {
     return pages(dv, '"Mondi" OR "Risorse/Mappe"', page => liveEntityCandidate(page))
-      .map(page => {
-        const coverage = entityGateCoverage(page);
-        const missingGates = requiredEntityGates(page).filter(gate => !coverage[gate]);
-        const missingLabel = missingGates.join(", ");
-        return {
-          page,
-          problem: missingGates.length ? `mancano: ${missingLabel}` : "gate completi",
-          missingLabel,
-          missingGates,
-          action: missingGates[0] ? PLAYABILITY_GATE_ACTIONS[missingGates[0]] : "Nessuna azione richiesta.",
-          workflow: [...new Set(missingGates.map(gate => PLAYABILITY_GATE_ACTIONS[gate]))].join(" | "),
-          priority: missingGates.length
-        };
-      })
-      .filter(row => row.missingGates.length)
+      .map(page => playabilityIssue({
+        page,
+        category: vaultEntityKind(page),
+        profile: "vault",
+        links: vaultEntityLinkCount(page),
+        candidate: true,
+        priorityBase: 0
+      }))
+      .filter(Boolean)
       .sort((left, right) => right.priority - left.priority || (right.page?.file?.mtime ?? 0) - (left.page?.file?.mtime ?? 0));
   }
 
   function gateCounts(rows) {
-    return PLAYABILITY_GATES.reduce((counts, gate) => {
-      counts[gate] = rows.filter(row => row.missingGates.includes(gate)).length;
-      return counts;
-    }, {});
+    return playabilityGateCounts(rows);
   }
 
   function vaultControlData(dv) {

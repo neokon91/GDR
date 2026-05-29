@@ -105,7 +105,12 @@ def validate_tracked_generated(pipeline: dict[str, Any], errors: list[str]) -> N
             stderr=subprocess.PIPE,
             check=False,
         )
-        if result.returncode == 0 and result.stdout.strip():
+        present_files = [
+            line.strip()
+            for line in result.stdout.splitlines()
+            if line.strip() and (ROOT / line.strip()).exists()
+        ]
+        if result.returncode == 0 and present_files:
             fail(errors, f"{generated_path}: output generato tracciato da Git")
 
     for generated_path in sorted(generated_markdown_files_from_pipeline(pipeline, errors)):
@@ -117,7 +122,12 @@ def validate_tracked_generated(pipeline: dict[str, Any], errors: list[str]) -> N
             stderr=subprocess.PIPE,
             check=False,
         )
-        if result.returncode == 0 and result.stdout.strip():
+        present_files = [
+            line.strip()
+            for line in result.stdout.splitlines()
+            if line.strip() and (ROOT / line.strip()).exists()
+        ]
+        if result.returncode == 0 and present_files:
             fail(errors, f"{generated_path}: output Markdown generato tracciato da Git")
 
     result = subprocess.run(
@@ -128,7 +138,12 @@ def validate_tracked_generated(pipeline: dict[str, Any], errors: list[str]) -> N
         stderr=subprocess.PIPE,
         check=False,
     )
-    if result.returncode == 0 and result.stdout.strip():
+    present_files = [
+        line.strip()
+        for line in result.stdout.splitlines()
+        if line.strip() and (ROOT / line.strip()).exists()
+    ]
+    if result.returncode == 0 and present_files:
         fail(errors, "dist: pacchetto release generato tracciato da Git")
 
 
@@ -144,7 +159,13 @@ def tracked_json_files(errors: list[str]) -> set[str]:
     if result.returncode != 0:
         fail(errors, f"git ls-files *.json fallito: {result.stderr.strip()}")
         return set()
-    return {line.strip().replace("\\", "/") for line in result.stdout.splitlines() if line.strip()}
+    return {
+        rel_path
+        for line in result.stdout.splitlines()
+        if line.strip()
+        for rel_path in [line.strip().replace("\\", "/")]
+        if (ROOT / rel_path).exists()
+    }
 
 
 def obsidian_config_targets(errors: list[str]) -> set[str]:

@@ -7,7 +7,8 @@ const ROOT = process.cwd();
 const DATA_FILE = "z.automazioni/data/workflows/quick_actions.json";
 const META_BIND_CONFIG = ".obsidian/plugins/obsidian-meta-bind-plugin/data.json";
 const BUTTON_ID_PATTERN = /^[A-Za-z0-9][A-Za-z0-9_-]*$/;
-const BUTTON_PATTERN = /`BUTTON\[([^\]\n]+)\]`/g;
+const INLINE_BUTTON_PATTERN = /`BUTTON\[([^\]\n]+)\]`/g;
+const NAKED_BUTTON_PATTERN = /(^|[^`])BUTTON\[([^\]\n]+)\](?!`)/g;
 
 function buttonDeclaration(button) {
     return `<!-- workflow:button ${button} -->`;
@@ -74,12 +75,12 @@ function main() {
             const text = existsRel(ROOT, entry)
                 ? readTextRel(ROOT, entry)
                 : renderMaterializedUserFile(virtualFile, data.workflows ?? {});
-        const block = workflowBlock(text, workflowId);
-        const visibleWorkflowButtons = [...block.matchAll(BUTTON_PATTERN)].map(match => match[1]);
-        if (visibleWorkflowButtons.length) {
-            errors.push(`${workflowId}: ${entry} espone sintassi Meta Bind visibile nel blocco workflow (${visibleWorkflowButtons.join(", ")})`);
-        }
-        for (const action of allActions) {
+            const block = workflowBlock(text, workflowId);
+            const visibleWorkflowButtons = new Set([...block.matchAll(INLINE_BUTTON_PATTERN)].map(match => match[1]));
+            for (const match of block.matchAll(NAKED_BUTTON_PATTERN)) {
+                errors.push(`${workflowId}: ${entry} usa BUTTON[${match[2]}] senza inline code Meta Bind`);
+            }
+            for (const action of allActions) {
                 const button = String(action.button ?? "");
                 if (!button) {
                     errors.push(`${workflowId}: quick action senza button`);
@@ -94,6 +95,9 @@ function main() {
                 if (!buttonIds.has(button)) {
                     errors.push(`${workflowId}: BUTTON[${button}] non presente nella configurazione Meta Bind`);
                 }
+                if (!visibleWorkflowButtons.has(button)) {
+                    errors.push(`${workflowId}: ${entry} non espone \`BUTTON[${button}]\` nel blocco workflow`);
+                }
                 if (!text.includes(buttonDeclaration(button))) {
                     errors.push(`${workflowId}: ${entry} non dichiara workflow:button ${button}`);
                 }
@@ -101,8 +105,11 @@ function main() {
 
             const outsideWorkflowBlocks = stripWorkflowBlocks(text);
             let match;
-            while ((match = BUTTON_PATTERN.exec(outsideWorkflowBlocks))) {
-                errors.push(`${workflowId}: ${entry} espone BUTTON[${match[1]}] fuori dal blocco workflow dichiarativo`);
+            while ((match = INLINE_BUTTON_PATTERN.exec(outsideWorkflowBlocks))) {
+                errors.push(`${workflowId}: ${entry} espone \`BUTTON[${match[1]}]\` fuori dal blocco workflow dichiarativo`);
+            }
+            while ((match = NAKED_BUTTON_PATTERN.exec(outsideWorkflowBlocks))) {
+                errors.push(`${workflowId}: ${entry} espone BUTTON[${match[2]}] fuori dal blocco workflow dichiarativo`);
             }
         }
     }

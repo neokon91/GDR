@@ -122,7 +122,6 @@ def validate_release_boundary_contract(modules: dict[str, dict], errors: list[st
     forbidden_paths = set(str(path) for path in boundary.get("forbidden_paths", []) or [])
     for rel_path in (
         "Dev/TemplateFactory/modules/worldbuilding_depth_axes.yaml",
-        "Dev/TemplateFactory/modules/demo_contract.yaml",
     ):
         if rel_path not in forbidden_paths:
             fail(f"release_boundary.forbidden_paths: modulo dev/riservato non vietato ({rel_path})", errors)

@@ -64,6 +64,7 @@ function buttonDeclaration(button) {
 }
 
 const VISIBLE_BUTTON_PATTERN = /`BUTTON\[([^\]\n]+)\]`/g;
+const NAKED_BUTTON_PATTERN = /(^|[^`])BUTTON\[([^\]\n]+)\](?!`)/g;
 
 function validateContract(primaryPath) {
     if (USER_PATH.id !== "user_path") errors.push(`${USER_PATH_FILE}: id non valido`);
@@ -135,13 +136,16 @@ function main() {
                 errors.push(`${label}: blocco utente espone marker vietato (${marker})`);
             }
         }
-        const visibleButtons = [...block.matchAll(VISIBLE_BUTTON_PATTERN)].map(match => match[1]);
-        if (visibleButtons.length) {
-            errors.push(`${label}: blocco utente espone sintassi tecnica Meta Bind (${visibleButtons.join(", ")})`);
+        const visibleButtons = new Set([...block.matchAll(VISIBLE_BUTTON_PATTERN)].map(match => match[1]));
+        for (const match of block.matchAll(NAKED_BUTTON_PATTERN)) {
+            errors.push(`${label}: BUTTON[${match[2]}] non usa inline code Meta Bind`);
         }
         for (const button of requiredButtons) {
             if (!buttonIds.has(button)) {
                 errors.push(`${label}: pulsante Meta Bind non configurato (${button})`);
+            }
+            if (!visibleButtons.has(button)) {
+                errors.push(`${label}: pulsante Meta Bind visibile mancante (\`BUTTON[${button}]\`)`);
             }
             if (!block.includes(buttonDeclaration(button))) {
                 errors.push(`${label}: azione primaria non esposta (${button})`);

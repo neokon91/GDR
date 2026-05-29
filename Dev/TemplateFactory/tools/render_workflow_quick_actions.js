@@ -6,6 +6,7 @@ const { materializedUserFileMap, renderMaterializedUserFile } = require("./relea
 
 const ROOT = process.cwd();
 const DATA_FILE = "z.automazioni/data/workflows/quick_actions.json";
+const META_BIND_CONFIG = ".obsidian/plugins/obsidian-meta-bind-plugin/data.json";
 const CHECK_ONLY = process.argv.includes("--check");
 
 function fail(errors) {
@@ -21,17 +22,41 @@ function markers(workflowId) {
     };
 }
 
-function renderAction(lines, action) {
+function firstAction(buttonTemplates, button) {
+    const template = buttonTemplates.get(button);
+    return Array.isArray(template?.actions) ? template.actions[0] : null;
+}
+
+function fallbackText(buttonTemplates, button) {
+    const action = firstAction(buttonTemplates, button);
+    if (!action) return "";
+    if (action.type === "open" && action.link) return `Fallback: apri ${action.link}.`;
+    if (action.type === "templaterCreateNote" && action.templateFile) {
+        const folder = action.folderPath ? ` in ${action.folderPath}` : "";
+        return `Fallback: crea una nota da ${action.templateFile}${folder}.`;
+    }
+    if (action.type === "runTemplaterFile" && action.templateFile) {
+        return `Fallback: esegui ${action.templateFile} da Templater.`;
+    }
+    return "";
+}
+
+function renderAction(lines, action, buttonTemplates) {
     const label = String(action.label ?? "").trim();
     const useWhen = String(action.use_when ?? "").trim();
     const button = String(action.button ?? "").trim();
+    const fallback = fallbackText(buttonTemplates, button);
 
     lines.push(">");
     lines.push(`> **${label}**${useWhen ? ` - ${useWhen}` : ""}`);
-    if (button) lines.push(`<!-- workflow:button ${button} -->`);
+    if (button) {
+        lines.push(`> \`BUTTON[${button}]\``);
+        lines.push(`<!-- workflow:button ${button} -->`);
+    }
+    if (fallback) lines.push(`> ${fallback}`);
 }
 
-function renderBlock(workflowId, workflow) {
+function renderBlock(workflowId, workflow, buttonTemplates) {
     const lines = [];
     const plugins = workflow.required_plugins ?? [];
     const actionGroups = workflow.action_groups ?? {};
@@ -45,7 +70,7 @@ function renderBlock(workflowId, workflow) {
     }
 
     for (const action of workflow.quick_actions ?? []) {
-        renderAction(lines, action);
+        renderAction(lines, action, buttonTemplates);
     }
 
     for (const group of Object.values(actionGroups)) {
@@ -53,7 +78,7 @@ function renderBlock(workflowId, workflow) {
         lines.push(`> [!regia]- ${group.label}`);
         if (group.purpose) lines.push(`> ${group.purpose}`);
         for (const action of group.actions ?? []) {
-            renderAction(lines, action);
+            renderAction(lines, action, buttonTemplates);
         }
     }
 
@@ -74,6 +99,8 @@ function replaceBlock(text, workflowId, block) {
 function main() {
     const errors = [];
     const data = readJson(repoPath(ROOT, DATA_FILE), null);
+    const metaBind = readJson(repoPath(ROOT, META_BIND_CONFIG), {});
+    const buttonTemplates = new Map((metaBind.buttonTemplates ?? []).map(button => [String(button.id ?? ""), button]));
     const virtualFiles = materializedUserFileMap(ROOT);
 
     if (!data || data.generated_by !== "generate_workflow_data") {
@@ -81,7 +108,7 @@ function main() {
     }
 
     for (const [workflowId, workflow] of Object.entries(data.workflows ?? {})) {
-        const block = renderBlock(workflowId, workflow);
+        const block = renderBlock(workflowId, workflow, buttonTemplates);
 
         for (const entry of workflow.entry_points ?? []) {
             const file = repoPath(ROOT, entry);

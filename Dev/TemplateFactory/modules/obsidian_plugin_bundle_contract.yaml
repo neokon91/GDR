@@ -1,35 +1,24 @@
 id: obsidian_plugin_bundle_contract
-purpose: Contratto di repo hygiene per i bundle plugin Obsidian vendorizzati nella release.
+purpose: Contratto di repo hygiene per plugin Obsidian dichiarati senza bundle vendorizzati.
 version: 0.1.0
 plugin_matrix: Dev/TemplateFactory/modules/plugin_matrix.yaml
 plugin_contracts: Dev/TemplateFactory/modules/plugin_contracts.yaml
 policy:
-  mode: vendored_release_plugins
-  rationale: I bundle plugin sono tracciati solo per consegnare una release Obsidian apribile offline; configurazioni e stato plugin restano generati o ignorati.
+  mode: declared_external_plugins
+  rationale: Il repository dichiara plugin, configurazioni e fallback, ma non versiona bundle terzi main.js/styles.css/theme.css. I bundle locali ignorati possono essere copiati nella ZIP finale; la repo resta YAML/Jinja/JS proprio.
   plugin_root: .obsidian/plugins
   theme_root: .obsidian/themes
   snippet_root: .obsidian/snippets
-  required_plugin_files:
-    - manifest.json
-    - main.js
-  allowed_plugin_tracked_files:
-    - manifest.json
-    - main.js
-    - styles.css
+  allowed_plugin_tracked_files: []
   allowed_plugin_local_generated_files:
     - data.json
     - brat-migrations.json
-  require_all_matrix_plugins_vendored: true
-  require_manifest_id_matches_directory: true
-  require_contract_version_matches_manifest: true
+  forbid_tracked_plugin_bundles: true
+  forbid_tracked_themes: true
   forbid_tracked_plugin_config_json: true
 themes:
-  required:
-    - ITS Theme
-    - Minimal
-  allowed_tracked_files:
-    - manifest.json
-    - theme.css
+  required: []
+  allowed_tracked_files: []
 snippets:
   required:
     - gdr-vault.css

@@ -9,8 +9,7 @@ const { releasePluginProfile } = require("./release_plugin_profile");
 
 const ROOT = process.cwd();
 const CONTRACT_CHECK = process.argv.includes("--contract-check");
-const WITH_DEMO = !process.argv.includes("--no-demo");
-const OUT = path.resolve(ROOT, optionValue("--out", WITH_DEMO ? "dist/vault-gdr-manual-test" : "dist/vault-gdr-manual-test-clean"));
+const OUT = path.resolve(ROOT, optionValue("--out", "dist/vault-gdr-manual-test"));
 const REPORT_MD = path.resolve(ROOT, optionValue("--report", "dist/manual-release-test.md"));
 const REPORT_JSON = path.resolve(ROOT, optionValue("--json", "dist/manual-release-test.json"));
 const {
@@ -45,8 +44,7 @@ function usage() {
         "  --contract-check   valida solo manual_acceptance.yaml e non crea la release",
         "  --out <path>       cartella release manuale, default dist/vault-gdr-manual-test",
         "  --report <path>    report Markdown, default dist/manual-release-test.md",
-        "  --json <path>      manifest JSON, default dist/manual-release-test.json",
-        "  --no-demo          prepara release senza demo"
+        "  --json <path>      manifest JSON, default dist/manual-release-test.json"
     ].join("\n"));
 }
 
@@ -114,8 +112,7 @@ function buildRelease() {
         "Dev/TemplateFactory/tools/release_clean.js",
         "--quiet",
         "--out",
-        OUT,
-        ...(WITH_DEMO ? ["--with-demo"] : [])
+        OUT
     ], { cwd: ROOT, stdio: "inherit" });
 }
 
@@ -173,7 +170,6 @@ Atteso all'apertura: \`Inizia Qui.md\` in modalita lettura, con homepage configu
 
 - Release: \`${manifest.vaultPath}\`
 - Zip: \`${manifest.zipPath || "non creato"}\`
-- Demo inclusa: \`${manifest.withDemo ? "si" : "no"}\`
 - Plugin attesi: \`${manifest.expectedPluginCount}\`
 
 ## Workflow Manuali Da Provare
@@ -223,7 +219,6 @@ function main() {
         generatedAt: new Date().toISOString(),
         mode: "manual-release-open",
         launchesObsidian: false,
-        withDemo: WITH_DEMO,
         vaultPath: OUT,
         zipPath,
         reportPath: REPORT_MD,

@@ -10,6 +10,9 @@ def fail(message: str, errors: list[str]) -> None:
 
 
 BUTTON_ID_PATTERN = re.compile(r"^[A-Za-z0-9][A-Za-z0-9_-]*$")
+FENCED_CODE_PATTERN = re.compile(r"(?ms)^[ >]*```(?!`).*?^[ >]*```(?!`)")
+INLINE_CODE_PATTERN = re.compile(r"`[^`\n]+`")
+NAKED_META_BIND_PATTERN = re.compile(r"\b(INPUT|BUTTON)\[([^\]\n]+)\]")
 
 
 def validate_workflow_button_id(workflow_id: str, context: str, button: str, errors: list[str]) -> None:
@@ -27,6 +30,12 @@ def metabind_input_field(input_body: str) -> str:
     if ":" in body:
         return body.rsplit(":", 1)[-1].strip()
     return ""
+
+
+def strip_plugin_code_surfaces(text: str) -> str:
+    """Rimuove inline code e code fence: Meta Bind monta i controlli solo li."""
+    without_fences = FENCED_CODE_PATTERN.sub("", text)
+    return INLINE_CODE_PATTERN.sub("", without_fences)
 
 
 def validate_plugin_surface_contracts(modules: dict[str, dict], errors: list[str]) -> None:
@@ -77,6 +86,8 @@ def validate_plugin_surface_contracts(modules: dict[str, dict], errors: list[str
             fail(f"{rel_path}: usare macros/dataview_blocks.j2 per il bridge DataviewJS runtime", errors)
         if re.search(r"modules\.dataview_blocks\.blocks\.[A-Za-z0-9_]+\.code", text):
             fail(f"{rel_path}: usare macros/dataview_blocks.j2 invece di leggere .code direttamente", errors)
+        for match in NAKED_META_BIND_PATTERN.finditer(strip_plugin_code_surfaces(text)):
+            fail(f"{rel_path}: {match.group(1)}[{match.group(2)}] non e in inline code o blocco meta-bind", errors)
         for match in re.finditer(r"INPUT\[([^\]]+)\]", text):
             field = metabind_input_field(match.group(1))
             if field and field not in known_fields:

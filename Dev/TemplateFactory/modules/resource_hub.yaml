@@ -80,7 +80,7 @@ sections:
       - Uso
     rows:
       - link: '[[Risorse/Primo Avvio Strumenti]]'
-        text: Cosa fare se Obsidian chiede di abilitare gli strumenti inclusi.
+        text: Cosa fare se Obsidian chiede di abilitare i plugin inclusi.
       - link: '[[Risorse/Se Qualcosa Non Funziona]]'
         text: Diagnosi rapida quando pulsanti, tabelle o viste non rispondono.
       - link: '[[Risorse/Controllo Vault]]'

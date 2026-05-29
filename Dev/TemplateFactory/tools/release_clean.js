@@ -3,7 +3,6 @@
 const fs = require("fs");
 const path = require("path");
 const { execFileSync } = require("child_process");
-const { generateDemoWorld } = require("./generate_demo_world");
 const { readJson, rel: relativePath, repoPath } = require("./node_utils");
 const { loadReleaseBoundary, renderedMaterializedUserFiles } = require("./release_boundary_utils");
 const { releasePluginProfile } = require("./release_plugin_profile");
@@ -23,7 +22,6 @@ function optionValue(name, fallback) {
 const OUT = path.resolve(ROOT, optionValue("--out", "dist/vault-gdr-clean"));
 const DIST = path.dirname(OUT);
 const ZIP = `${OUT}.zip`;
-const INCLUDE_DEMO = process.argv.includes("--with-demo");
 const QUIET = process.argv.includes("--quiet");
 const TEMPLATE_FACTORY_RENDERER = repoPath(ROOT, "Dev/TemplateFactory/tools/render_template_factory.py");
 const RELEASE_BOUNDARY = loadReleaseBoundary(ROOT);
@@ -40,11 +38,10 @@ const EXCLUDED_FILES = new Set(COPY_POLICY.excluded_files ?? []);
 const REQUIRED_RELEASE_FILES = RELEASE_BOUNDARY.required_files ?? [];
 const REQUIRED_USER_IGNORE_FILTERS = COPY_POLICY.required_user_ignore_filters ?? [];
 const RUNTIME_TEMPLATE_MODULES = RELEASE_BOUNDARY.runtime_template_modules ?? [];
+const BRIDGE_RUNTIME_MODULES = RELEASE_BOUNDARY.bridge_runtime_modules ?? [];
+const FORBIDDEN_TEXT_MARKERS = RELEASE_BOUNDARY.forbidden_text_markers ?? [];
 const GENERATED_RELEASE_ROOTS = new Set(RELEASE_BOUNDARY.generated_release_roots ?? []);
 const enabledPlugins = RELEASE_PLUGIN_PROFILE.enabledPluginSet;
-const GENERATED_RELEASE_DEMO_NOTE = INCLUDE_DEMO
-    ? "- `Demo Regno Di Prova.md` come scenario dimostrativo generato, con regione giocabile e materiale player-safe;\n"
-    : "";
 const GENERATED_RELEASE_NOTES = {
     "LEGGIMI.md": `# Vault GDR
 
@@ -58,9 +55,9 @@ Apri questa cartella in Obsidian come vault e parti da \`Inizia Qui.md\`.
 - \`Vista Giocatori\` per recap, handout, mappe pubbliche e materiale condivisibile;
 - \`Party Control\` per PG, HP, missioni, inventario e flags;
 - \`Quality Report\` per copertura, buchi operativi e controllo anti-segreti;
-- atlante, mappe, template, automazioni, plugin e configurazioni gia inclusi;
+- atlante, mappe, template, automazioni e configurazioni gia inclusi;
 - \`Risorse/Regione Giocabile.md\` per trasformare un territorio in materiale giocabile;
-${GENERATED_RELEASE_DEMO_NOTE}- SRD 5.2.1 italiano come modulo regolamentare separato.
+- SRD 5.2.1 italiano come modulo regolamentare separato.
 
 Le cartelle tecniche e il compendio SRD sono inclusi per far funzionare automazioni, template e riferimenti, ma sono nascosti dalla navigazione normale del vault.
 
@@ -68,7 +65,7 @@ Le cartelle tecniche e il compendio SRD sono inclusi per far funzionare automazi
 
 1. Apri Obsidian.
 2. Scegli \`Apri cartella come vault\`.
-3. Se Obsidian chiede conferma per gli strumenti inclusi, abilitali solo se hai scaricato il vault dalla release ufficiale.
+3. Se Obsidian chiede conferma per i plugin inclusi, abilitali solo se hai scaricato il vault dalla release ufficiale.
 4. Apri \`Inizia Qui.md\`.
 5. Usa \`Risorse/Setup Guidato.md\` solo se pulsanti, tabelle o pagina iniziale non rispondono.
 
@@ -159,7 +156,6 @@ const GENERATED_RELEASE_JSON = {
                 title: "Primo utilizzo",
                 items: [
                     { type: "file", path: "Inizia Qui.md", title: "Inizia Qui" },
-                    ...(INCLUDE_DEMO ? [{ type: "file", path: "Demo Regno Di Prova.md", title: "Demo Regno Di Prova" }] : []),
                     { type: "file", path: "Risorse/Prima Sessione In 15 Minuti.md", title: "Prima Sessione In 15 Minuti" },
                     { type: "file", path: "Risorse/Setup Guidato.md", title: "Setup Guidato" }
                 ]
@@ -190,6 +186,10 @@ const GENERATED_RELEASE_JSON = {
 
 function rel(file) {
     return relativePath(ROOT, file);
+}
+
+function asArray(value) {
+    return Array.isArray(value) ? value : [];
 }
 
 function topSegment(relPath) {
@@ -287,6 +287,37 @@ function walkRelease(dir, files = []) {
     return files;
 }
 
+function specPath(spec) {
+    return String(spec?.path ?? "").replace(/\\/g, "/").trim();
+}
+
+function runtimeModulePaths(manifest) {
+    const paths = new Set();
+    for (const group of Object.values(manifest.runtime_modules ?? {})) {
+        for (const spec of asArray(group)) {
+            const modulePath = specPath(spec);
+            if (modulePath) paths.add(modulePath);
+        }
+    }
+    return paths;
+}
+
+function commonJsRuntimePaths(manifest, errors) {
+    const runtime = manifest.commonjs_runtime ?? {};
+    const entrypoints = asArray(runtime.entrypoints).map(specPath).filter(Boolean);
+    const localDependencies = asArray(runtime.local_dependencies).map(specPath).filter(Boolean);
+    const dataDependencies = asArray(runtime.data_dependencies).map(specPath).filter(Boolean);
+    if (!entrypoints.length) errors.push("runtime_exports.json senza commonjs_runtime.entrypoints");
+    if (!localDependencies.length) errors.push("runtime_exports.json senza commonjs_runtime.local_dependencies");
+    return [...entrypoints, ...localDependencies, ...dataDependencies];
+}
+
+function resolveJsRequire(sourceFile, request) {
+    const raw = path.resolve(path.dirname(sourceFile), request);
+    const candidates = [raw, `${raw}.js`, path.join(raw, "index.js")];
+    return candidates.find(candidate => fs.existsSync(candidate)) ?? candidates[1];
+}
+
 function validateReleaseLinks(releaseEntries, errors) {
     const fileEntries = releaseEntries.filter(entry => fs.statSync(repoPath(OUT, entry)).isFile());
     const exactTargets = new Set(fileEntries);
@@ -309,6 +340,54 @@ function validateReleaseLinks(releaseEntries, errors) {
             if (!matchesTarget) {
                 errors.push(`wikilink mancante nella release: ${entry} -> [[${match[1]}]]`);
             }
+        }
+    }
+}
+
+function validateReleaseText(releaseEntries, errors) {
+    const extensions = new Set([".md", ".yaml", ".yml", ".json", ".js"]);
+    for (const entry of releaseEntries) {
+        const file = repoPath(OUT, entry);
+        if (!fs.existsSync(file) || !fs.statSync(file).isFile()) continue;
+        if (!extensions.has(path.extname(entry).toLowerCase())) continue;
+        const text = fs.readFileSync(file, "utf8");
+        for (const marker of FORBIDDEN_TEXT_MARKERS) {
+            if (text.includes(marker)) {
+                errors.push(`${entry}: marker riservato/dev-only nella release (${marker})`);
+            }
+        }
+    }
+}
+
+function validateReleaseRuntime(releaseEntries, errors) {
+    const runtimeManifest = readJson(repoPath(OUT, "z.automazioni/data/runtime/runtime_exports.json"), { runtime_modules: {}, commonjs_runtime: {} });
+    const runtimePaths = runtimeModulePaths(runtimeManifest);
+
+    for (const relPath of commonJsRuntimePaths(runtimeManifest, errors)) {
+        if (!fs.existsSync(repoPath(OUT, relPath))) errors.push(`dipendenza runtime dichiarata mancante: ${relPath}`);
+    }
+
+    for (const moduleName of BRIDGE_RUNTIME_MODULES) {
+        const modulePath = `z.engine/${moduleName}`;
+        if (!runtimePaths.has(modulePath)) errors.push(`runtime_exports.json non dichiara ${modulePath}`);
+        if (!fs.existsSync(repoPath(OUT, modulePath))) errors.push(`modulo bridge mancante: ${modulePath}`);
+    }
+
+    const releaseSet = new Set(releaseEntries);
+    const requirePattern = /\b(?:require|optionalRequire)\s*\(\s*["'](\.{1,2}\/[^"']+)["']\s*\)/g;
+    const adapterReadPattern = /app\.vault\.adapter\.read\(\s*["']([^"']+)["']\s*\)/g;
+    for (const entry of releaseEntries.filter(item => item.endsWith(".js") && (item.startsWith("z.automazioni/") || item.startsWith("z.engine/")))) {
+        const file = repoPath(OUT, entry);
+        if (!fs.statSync(file).isFile()) continue;
+        const source = fs.readFileSync(file, "utf8");
+        let match;
+        while ((match = requirePattern.exec(source))) {
+            const resolved = resolveJsRequire(file, match[1]);
+            if (!fs.existsSync(resolved)) errors.push(`require locale mancante in ${entry} -> ${match[1]}`);
+        }
+        while ((match = adapterReadPattern.exec(source))) {
+            const target = match[1].replace(/\\/g, "/");
+            if (!releaseSet.has(target)) errors.push(`app.vault.adapter.read punta a file assente in ${entry} -> ${target}`);
         }
     }
 }
@@ -361,33 +440,14 @@ function validateRelease() {
     }
 
     validateReleaseLinks(releaseEntries, errors);
+    validateReleaseText(releaseEntries, errors);
+    validateReleaseRuntime(releaseEntries, errors);
 
-    const pluginRoot = repoPath(OUT, ".obsidian/plugins");
     const releaseCommunityPlugins = readJson(repoPath(OUT, ".obsidian/community-plugins.json"), []);
     const expectedPluginList = [...RELEASE_PLUGIN_PROFILE.enabledPlugins].sort();
     const releasePluginList = [...releaseCommunityPlugins].sort();
     if (JSON.stringify(releasePluginList) !== JSON.stringify(expectedPluginList)) {
         errors.push(`profilo plugin release non allineato: attesi ${expectedPluginList.join(", ")}, trovati ${releasePluginList.join(", ")}`);
-    }
-
-    if (fs.existsSync(pluginRoot)) {
-        const bundledPlugins = fs.readdirSync(pluginRoot, { withFileTypes: true })
-            .filter(entry => entry.isDirectory())
-            .map(entry => entry.name);
-
-        for (const pluginId of bundledPlugins) {
-            if (!enabledPlugins.has(pluginId)) {
-                errors.push(`plugin non abilitato incluso nella release: ${pluginId}`);
-            }
-        }
-        for (const pluginId of RELEASE_PLUGIN_PROFILE.enabledPlugins) {
-            if (!fs.existsSync(repoPath(OUT, `.obsidian/plugins/${pluginId}/manifest.json`))) {
-                errors.push(`manifest plugin profilo release mancante: ${pluginId}`);
-            }
-            if (!fs.existsSync(repoPath(OUT, `.obsidian/plugins/${pluginId}/main.js`))) {
-                errors.push(`main plugin profilo release mancante: ${pluginId}`);
-            }
-        }
     }
 
     const homepageConfig = readJson(repoPath(OUT, ".obsidian/plugins/homepage/data.json"), {});
@@ -525,10 +585,6 @@ materializeTemplates(OUT);
 copyRuntimeTemplateModules();
 materializeGeneratedReleaseRoots();
 writeGeneratedReleaseNotes();
-if (INCLUDE_DEMO) {
-    const result = generateDemoWorld({ outDir: OUT, force: true });
-    if (!QUIET) console.log(`Demo utente generata: ${result.files.length} file in ${rel(result.root)}`);
-}
 validateRelease();
 
 const zipped = zipIfAvailable();
@@ -537,4 +593,13 @@ if (zipped && !QUIET) {
     console.log(`Zip utente creato: ${rel(ZIP)}`);
 } else if (!zipped) {
     console.log("Zip utente non creato: comando zip non disponibile.");
+}
+
+if (zipped) {
+    try {
+        execFileSync("unzip", ["-tq", ZIP], { cwd: ROOT, stdio: "ignore" });
+    } catch {
+        console.error("Zip release non valido: unzip -tq fallito");
+        process.exit(1);
+    }
 }

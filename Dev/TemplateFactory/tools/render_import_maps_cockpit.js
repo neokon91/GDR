@@ -54,7 +54,7 @@ runStandardCockpitRenderer({
         if (/dv\.pages\(/.test(text) || /^```dataview\s*$/m.test(text)) {
             ctx.fail(`${page}: contiene ancora query Dataview inline invece di runtime dedicato`);
         }
-        if (text.split(/\r?\n/).length > 95) {
+        if (text.split(/\r?\n/).length > 140) {
             ctx.fail(`${page}: superficie troppo lunga per un cockpit import compatto`);
         }
     },

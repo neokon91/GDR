@@ -52,7 +52,7 @@ Questa nota e tecnica. Serve solo a chi cura il vault, non al DM che lo usa per 
 - `z.engine`: le dashboard possono importare componenti JS da qui; non duplicare logica lunga nei blocchi DataviewJS.
 - `.obsidian/plugins/obsidian-meta-bind-plugin/data.json`: contiene input template e button template operativi, ma e generato da YAML.
 - `.obsidian/plugins/metadata-menu/data.json` e `z.fileclass/`: insieme definiscono lo schema operativo; i target generati non vanno tracciati.
-- `.obsidian/plugins`: il vault include plugin e configurazioni necessarie.
+- `.obsidian/plugins/*/data.json`: configurazioni generate; i bundle plugin terzi possono esistere localmente per la ZIP, ma non sono sorgente Git.
 - `SRD`: puo essere rigenerato da `Dev/TemplateFactory/tools/import_srd.js`, ma resta fuori dall'indice Git.
 - `Inizia Qui.md` resta l'unica dashboard root in release, ma nel repository e generata da YAML/Jinja.
 

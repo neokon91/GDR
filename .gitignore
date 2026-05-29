@@ -39,8 +39,10 @@ z.modelli/
 Dev/plugin_matrix.json
 .obsidian/*.json
 .obsidian/**/*.json
-!.obsidian/plugins/*/manifest.json
-!.obsidian/themes/*/manifest.json
+.obsidian/plugins/*/manifest.json
+.obsidian/plugins/*/main.js
+.obsidian/plugins/*/styles.css
+.obsidian/themes/
 z.automazioni/data/
 z.automazioni/templater/
 Hub/

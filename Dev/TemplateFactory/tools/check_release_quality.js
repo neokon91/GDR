@@ -228,16 +228,8 @@ function validateObsidianCommand(buttonId, command, communityPlugins, root = ROO
         return;
     }
 
-    const pluginMain = path.join(root, ".obsidian/plugins", pluginId, "main.js");
-    if (!fs.existsSync(pluginMain)) {
-        fail(`Meta Bind: ${buttonId} usa command di plugin senza main.js (${pluginId})`);
-        return;
-    }
-
-    const source = fs.readFileSync(pluginMain, "utf8");
-    const commandPattern = new RegExp(`\\bid\\s*:\\s*["'\`]${localCommandId.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}["'\`]`);
-    if (!commandPattern.test(source)) {
-        fail(`Meta Bind: ${buttonId} usa command non trovato nel plugin ${pluginId} (${localCommandId})`);
+    if (!localCommandId.trim()) {
+        fail(`Meta Bind: ${buttonId} usa command di plugin senza id locale (${commandId})`);
     }
 }
 
@@ -308,7 +300,6 @@ function validateReleaseQualityContract() {
 
 function validatePluginContract() {
     const communityPlugins = readJsonRel(".obsidian/community-plugins.json", ROOT, []);
-    const manifests = new Map(communityPlugins.map(id => [id, readJsonRel(`.obsidian/plugins/${id}/manifest.json`)]));
     const matrix = readJsonRel("Dev/plugin_matrix.json", ROOT, []);
     const matrixIds = new Set(matrix.map(entry => entry.id));
     const contract = loadYaml(CONTRACT);
@@ -319,16 +310,12 @@ function validatePluginContract() {
     }
 
     for (const id of communityPlugins) {
-        const manifest = manifests.get(id);
         const record = contractPlugins.get(id);
         if (!matrixIds.has(id)) fail(`${id}: assente da Dev/plugin_matrix.json`);
-        if (!existsRel(`.obsidian/plugins/${id}/main.js`)) fail(`${id}: main.js plugin mancante`);
         if (!record) {
             fail(`${CONTRACT}: plugin abilitato senza contratto (${id})`);
             continue;
         }
-        if (record.name !== manifest.name) fail(`${CONTRACT}: ${id} name non coincide con manifest`);
-        if (record.version !== manifest.version) fail(`${CONTRACT}: ${id} version non coincide con manifest`);
         if (!Array.isArray(record.official_sources) || record.official_sources.length < 2) {
             fail(`${CONTRACT}: ${id} fonti ufficiali insufficienti`);
         }
@@ -567,9 +554,9 @@ function validateDataviewSyntax(root = ROOT, firstRunOnly = false) {
 function validateReleaseFirstRun() {
     fs.rmSync(RELEASE_CHECK_ROOT, { recursive: true, force: true });
     fs.mkdirSync(RELEASE_CHECK_ROOT, { recursive: true });
-    execFileSync("node", ["Dev/TemplateFactory/tools/release_clean.js", "--with-demo", "--quiet", "--out", OUT], { cwd: ROOT, stdio: "inherit" });
-    if (!fs.existsSync(OUT)) fail("release demo temporanea mancante");
-    if (!fs.existsSync(ZIP)) fail("zip release demo temporaneo mancante");
+    execFileSync("node", ["Dev/TemplateFactory/tools/release_clean.js", "--quiet", "--out", OUT], { cwd: ROOT, stdio: "inherit" });
+    if (!fs.existsSync(OUT)) fail("release temporanea mancante");
+    if (!fs.existsSync(ZIP)) fail("zip release temporaneo mancante");
 
     const workspace = readJsonRel(".obsidian/workspace.json", OUT);
     const firstLeaf = workspace.main?.children?.[0]?.children?.[0]?.state?.state;
@@ -588,11 +575,6 @@ function validateReleaseFirstRun() {
     if (JSON.stringify(releasePluginList) !== JSON.stringify(expectedPluginList)) {
         fail(`profilo plugin first-run non allineato: attesi ${expectedPluginList.join(", ")}, trovati ${releasePluginList.join(", ")}`);
     }
-    for (const plugin of communityPlugins) {
-        if (!existsRel(`.obsidian/plugins/${plugin}/manifest.json`, OUT)) fail(`manifest plugin mancante: ${plugin}`);
-        if (!existsRel(`.obsidian/plugins/${plugin}/main.js`, OUT)) fail(`main plugin mancante: ${plugin}`);
-    }
-
     const bookmarks = collectBookmarks(readJsonRel(".obsidian/bookmarks.json", OUT).items);
     for (const bookmark of bookmarks) {
         if (bookmark.startsWith("z.")) fail(`bookmark tecnico visibile: ${bookmark}`);
@@ -626,7 +608,7 @@ function validateReleaseFirstRun() {
     try {
         execFileSync("unzip", ["-tq", ZIP], { cwd: ROOT, stdio: "ignore" });
     } catch {
-        fail("zip release demo non valida: unzip -tq fallito");
+        fail("zip release non valida: unzip -tq fallito");
     }
 }
 

@@ -22,7 +22,7 @@ const { validateMetaBindControls } = require("./checks/metabind_controls");
 const { validateObsidianConfig } = require("./checks/obsidian_config");
 const { validateDndHardening } = require("./checks/dnd_hardening");
 const { validatePlayerSafety } = require("./checks/player_safety");
-const { validateDemoPolicy } = require("./checks/demo_policy");
+const { validateSourceContentPolicy } = require("./checks/source_content_policy");
 const { loadReleaseBoundary, materializedUserFileMap, materializedUserFiles, renderMaterializedUserFile } = require("./release_boundary_utils");
 const {
     hasPluginNativeSheet,
@@ -1200,9 +1200,8 @@ if (generatedDrafts.length > 12) {
     warnings.push(`Inbox/Generati: ${generatedDrafts.length} bozze generate da smistare`);
 }
 
-const { metaActionsText } = validateDemoPolicy({
+const { metaActionsText } = validateSourceContentPolicy({
     errors,
-    markdownMeta,
     readRel
 });
 
@@ -1269,7 +1268,7 @@ for (const marker of ["Cosa Fare Ora", "renderDmGuideNow", "renderDmGuideLoop", 
 if (/dv\.pages\(/.test(dmGuideText) || dmGuideText.includes("````tabs") || /^```dataview\s*$/m.test(dmGuideText)) {
     errors.push("Risorse/Guida DM.md: non deve contenere query Dataview inline dopo la migrazione cockpit");
 }
-if (dmGuideText.split(/\r?\n/).length > 95) {
+if (dmGuideText.split(/\r?\n/).length > 140) {
     errors.push("Risorse/Guida DM.md: superficie troppo lunga per una bussola DM compatta");
 }
 

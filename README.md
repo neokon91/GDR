@@ -17,19 +17,19 @@ Apri [[Inizia Qui]] per il primo avvio. Il percorso principale passa da [[Risors
 - **Regione giocabile**: ponte tra worldbuilding profondo e tavolo, con luoghi, poteri, pressioni, segreti, missioni e materiale player-safe.
 - **Compatibilita 5.5e sobria**: creature, incontri, oggetti, party e riferimenti SRD sono pensati per fantasy D&D-like, ma restano scaffolding operativo e non una ripubblicazione completa del regolamento.
 - **Markdown-first**: i contenuti restano nel vault dell'utente.
-- **Release pulita**: il vault può generare una copia consegnabile con `npm run release:clean`.
+- **Release finale**: il vault genera una copia consegnabile pulita usando `npm run release:final`.
 
 ## Primo Avvio In 5 Minuti
 
 1. Scarica lo ZIP della release.
-2. Estrai lo ZIP, apri la cartella in Obsidian e abilita gli strumenti inclusi solo se la release arriva da fonte affidabile.
+2. Estrai lo ZIP, apri la cartella in Obsidian e accetta/abilita i plugin community inclusi solo se la release arriva da fonte affidabile.
 3. Vai su [[Inizia Qui]]. Apri [[Risorse/Setup Guidato]] solo se pulsanti, tabelle o pagina iniziale non rispondono.
 4. Scegli una strada: **Prima sessione** per giocare subito, **Crea mondo** per fondare l'ambientazione, **Regione giocabile** per rendere un territorio pronto al tavolo.
 5. Quando hai obiettivo, luogo, pressione e materiale essenziale, passa a **Prepara sessione**, poi **Gioca**, poi **Chiudi e aggiorna**.
 
 ## Aspetto GDR
 
-La release utente include gia snippet, tema e configurazioni principali. Normalmente non devi configurare nulla.
+La release utente include lo snippet, le configurazioni principali e, quando preparata dal manutentore, i plugin community da accettare all'apertura. I bundle plugin restano fuori da Git.
 
 Se l'aspetto non sembra quello previsto:
 
@@ -39,16 +39,6 @@ Se l'aspetto non sembra quello previsto:
 4. Consigliato: tema **Minimal** e pannello **Style Settings > GDR Vault** per palette, densità di dashboard, tabelle e callout.
 
 Lo snippet non aggiunge dipendenze. Migliora dashboard, callout, card, pulsanti e Vista Giocatori usando classi CSS compatibili con Obsidian, Dataview e Meta Bind.
-
-## Demo Inclusa Nella Release
-
-La demo non vive nel repository come note da mantenere a mano. La release senza demo si crea con `npm run release:clean`; quella con demo si crea con:
-
-```bash
-npm run release:demo
-```
-
-La demo crea `Demo Regno Di Prova.md` dentro la release pulita e mostra un percorso minimo ma completo: mondo, regione giocabile, campagna, tre luoghi, cultura locale, tre fazioni, conflitto, segreto DM separato dal materiale player-safe, missione, sessione, clock, incontro, creatura, oggetto, dispensa e conseguenza propagabile.
 
 ## Flusso Rapido
 
@@ -137,7 +127,7 @@ Se dashboard, pulsanti o tabelle non funzionano, apri [[Risorse/Primo Avvio Stru
 - Il layer operativo interno e documentato in [[Dev/Sviluppo Vault]]: input Meta Bind, pulsanti, wizard, JS views e fileClass.
 - Per controlli e sviluppo del vault, vedi [[Dev/Sviluppo Vault]].
 - Per preparare una release o una copia pulita, apri [[Dev/RELEASE]] e [[Risorse/Controllo Vault]].
-- Per creare una copia consegnabile, usa `npm run release:clean`; per includere la demo generata usa `npm run release:demo`.
+- Per creare la copia consegnabile standard, usa `npm run release:final`: produce sempre `dist/vault-gdr-clean` e `dist/vault-gdr-clean.zip`.
 - Per importare mappe esterne come bozze, apri [[Risorse/Importare Mappe]] o usa `npm run import:azgaar`.
 - Non modificare manualmente le note in `SRD` nella release: sono un riferimento regolamentare separato e possono essere rigenerate.
 
@@ -154,6 +144,7 @@ Comandi principali dal root del vault:
 
 ```bash
 npm run check
+npm run release:final
 npm run sync:sources
 npm run check:repo
 npm run clean:repo
@@ -161,11 +152,10 @@ npm run import:srd
 npm run import:srd-data
 npm run import:azgaar
 npm run release:clean
-npm run release:demo
 npm run prepare:manual-release-test
 ```
 
-`npm run check` valida pipeline dichiarativa, plugin obbligatori, link, template Meta Bind, helper Templater, file del layer interno, input template, pulsanti, preset Metadata Menu, igiene del repository, sintassi tooling e contratti runtime statici. Non apre Obsidian. Per una prova umana della release usa `npm run prepare:manual-release-test`, poi apri manualmente la cartella indicata e rimanda il feedback. `npm run sync:sources` materializza gli output ignorati necessari al vault locale. `npm run release:clean` rigenera i template runtime da TemplateFactory prima di creare la copia consegnabile. `npm run release:demo` crea la stessa release includendo la demo generata nello ZIP. `npm run clean:repo` rimuove solo artefatti locali e temporanei ignorati.
+`npm run release:final` e il percorso operativo normale: rigenera i sorgenti, verifica versione, runtime, JS e diff, poi costruisce una sola release finale pulita con zip validato. `npm run check` resta l'audit completo: valida pipeline dichiarativa, plugin obbligatori, link, template Meta Bind, helper Templater, file del layer interno, input template, pulsanti, preset Metadata Menu, igiene del repository, sintassi tooling e contratti runtime statici. Non apre Obsidian. Per una prova umana della release usa `npm run prepare:manual-release-test`, poi apri manualmente la cartella indicata e rimanda il feedback. `npm run sync:sources` materializza gli output ignorati necessari al vault locale. `npm run release:clean` crea la release pulita senza i controlli mirati di `release:final`. `npm run clean:repo` rimuove solo artefatti locali e temporanei ignorati.
 
 
 

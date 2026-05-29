@@ -17,6 +17,7 @@ sys.dont_write_bytecode = True
 ROOT = Path(__file__).resolve().parents[3]
 BOUNDARY = ROOT / "Dev" / "TemplateFactory" / "modules" / "release_boundary.yaml"
 WORKFLOWS = ROOT / "z.automazioni" / "data" / "workflows" / "quick_actions.json"
+METABIND = ROOT / ".obsidian" / "plugins" / "obsidian-meta-bind-plugin" / "data.json"
 JINJA = ROOT / "Dev" / "TemplateFactory" / "jinja"
 TEMPLATE = "release_folder_note.md.j2"
 
@@ -67,15 +68,38 @@ def build_env() -> Environment:
     )
 
 
+def button_fallback(button_id: str, button_templates: dict[str, dict[str, Any]]) -> str:
+    template = button_templates.get(str(button_id), {})
+    actions = template.get("actions")
+    action = actions[0] if isinstance(actions, list) and actions else {}
+    if not isinstance(action, dict):
+        return ""
+    if action.get("type") == "open" and action.get("link"):
+        return f"Fallback: apri {action['link']}."
+    if action.get("type") == "templaterCreateNote" and action.get("templateFile"):
+        folder = f" in {action['folderPath']}" if action.get("folderPath") else ""
+        return f"Fallback: crea una nota da {action['templateFile']}{folder}."
+    if action.get("type") == "runTemplaterFile" and action.get("templateFile"):
+        return f"Fallback: esegui {action['templateFile']} da Templater."
+    return ""
+
+
 def render_notes(errors: list[str]) -> dict[str, str]:
     boundary = load_yaml(BOUNDARY)
     workflows_data = load_json(WORKFLOWS)
+    metabind_data = load_json(METABIND)
     workflows = workflows_data.get("workflows", {})
     if not isinstance(workflows, dict):
         errors.append(f"{WORKFLOWS.relative_to(ROOT)}: workflows mancante o non valido")
         workflows = {}
+    button_templates = {
+        str(button.get("id", "")): button
+        for button in metabind_data.get("buttonTemplates", [])
+        if isinstance(button, dict) and str(button.get("id", "")).strip()
+    }
 
     env = build_env()
+    env.globals["button_fallback"] = button_fallback
     template = env.get_template(TEMPLATE)
     rendered: dict[str, str] = {}
 
@@ -106,6 +130,7 @@ def render_notes(errors: list[str]) -> dict[str, str]:
             empty_state=empty_state(file, rel_path),
             workflow_blocks=[str(item) for item in workflow_blocks],
             workflows=workflows,
+            button_templates=button_templates,
         )
         if not text.endswith("\n"):
             text += "\n"

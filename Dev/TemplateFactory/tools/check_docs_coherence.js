@@ -23,36 +23,26 @@ function requireText(relPath, markers) {
 }
 
 const readme = requireText("README.md", [
-    "La release utente include gia snippet, tema e configurazioni principali.",
+    "La release utente include lo snippet, le configurazioni principali",
     "Il repository sorgente non traccia `SRD/`, `z.bases/`, `z.fileclass/`, `z.bacheche/`, `z.modelli/` o i JSON generati",
     "Non e una app standalone e non e un rules engine completo",
-    "La release senza demo si crea con `npm run release:clean`; quella con demo si crea con:",
-    "npm run release:demo",
-    "Demo Regno Di Prova.md"
+    "Release finale",
+    "npm run release:final"
 ]);
 
 const release = requireText("Dev/RELEASE.md", [
+    "npm run release:final",
     "npm run release:clean",
-    "npm run release:demo",
-    "Il percorso consegnabile e `npm run release:demo`",
+    "Il percorso consegnabile standard e `npm run release:final`",
     "Non promettere che lo ZIP sia una app standalone, un rules engine completo o una ripubblicazione del regolamento 5.5e",
     "rigenerato nella release",
-    "dist/vault-gdr-clean.zip",
-    "Demo Regno Di Prova.md"
+    "dist/vault-gdr-clean.zip"
 ]);
 
 requireText("Dev/Sviluppo Vault.md", [
     "`SRD/` non e sorgente tracciato",
     "Le note di porting private non sono documentazione stabile del repository",
     "`z.bacheche`: bacheche Kanban per preparazione e creature, generate da `Dev/TemplateFactory/modules/bacheche.yaml`"
-]);
-
-const smokeDemo = requireText("Dev/Smoke Demo Finale.md", [
-    "Per una release consegnabile con demo usa `npm run release:demo`",
-    "Percorso normale per la release demo",
-    "generate:demo-world",
-    "npm run check:demo-contract",
-    "Il check `npm run check:demo-contract` genera la demo in una cartella temporanea"
 ]);
 
 requireText("Dev/TemplateFactory/tools/release_clean.js", [
@@ -67,8 +57,8 @@ const license = requireText("LICENSE.md", [
 ]);
 
 const packageJson = readJson(repoPath(ROOT, "package.json"), {});
-if (!packageJson.scripts?.["release:demo"]) {
-    errors.push("package.json: script release:demo mancante");
+if (!packageJson.scripts?.["release:final"]) {
+    errors.push("package.json: script release:final mancante");
 }
 if (!packageJson.scripts?.check?.includes("npm run check:docs")) {
     errors.push("package.json: npm run check non esegue check:docs");
@@ -86,34 +76,18 @@ if (fs.existsSync(repoPath(ROOT, "Dev/Release Pulita.md"))) {
 
 for (const [relPath, text] of [
     ["README.md", readme],
-    ["Dev/RELEASE.md", release],
-    ["Dev/Smoke Demo Finale.md", smokeDemo]
+    ["Dev/RELEASE.md", release]
 ]) {
-    if (text.includes("Demo Brumafonda.md")) {
-        errors.push(`${relPath}: riferimento obsoleto a Demo Brumafonda.md`);
-    }
     if (text.includes("Attiva `gdr-vault`") && relPath === "README.md" && !text.includes("Normalmente non devi configurare nulla")) {
         errors.push("README.md: snippet presentato come setup obbligatorio invece che recupero");
     }
 }
 
-if (readme.includes("generate:demo-world")) {
-    errors.push("README.md: non deve esporre generate:demo-world come percorso utente o release");
-}
-if (release.includes("generate:demo-world") && !release.includes("solo uno strumento interno di manutenzione")) {
-    errors.push("Dev/RELEASE.md: generate:demo-world citato senza chiarire che e solo manutenzione interna");
-}
-if (smokeDemo.includes("generate:demo-world") && !smokeDemo.includes("Per debug del solo generatore")) {
-    errors.push("Dev/Smoke Demo Finale.md: generate:demo-world citato senza separarlo dal percorso release:demo");
-}
 for (const [relPath, text] of [
     ["README.md", readme],
-    ["Dev/RELEASE.md", release],
-    ["Dev/Smoke Demo Finale.md", smokeDemo]
+    ["Dev/RELEASE.md", release]
 ]) {
     for (const marker of [
-        "genera la demo dopo `npm run release:clean`",
-        "Va generata da script dentro `dist/` dopo la creazione della release pulita",
         "## Primi 5 Minuti",
         "D&D 5.5/SRD"
     ]) {
@@ -136,7 +110,6 @@ if (!firstStartSection) {
 for (const [relPath, text] of [
     ["README.md", readme],
     ["Dev/RELEASE.md", release],
-    ["Dev/Smoke Demo Finale.md", smokeDemo],
     ["Dev/Sviluppo Vault.md", readTextRel(ROOT, "Dev/Sviluppo Vault.md", "")],
     ["LICENSE.md", license],
     ["Dev/TemplateFactory/README.md", readTextRel(ROOT, "Dev/TemplateFactory/README.md", "")]
@@ -177,8 +150,8 @@ for (const relPath of [
     ...walkMarkdown("z.bacheche")
 ]) {
     const text = readTextRel(ROOT, relPath, "");
-    if (/`BUTTON\[[^\]\n]+\]`/.test(text)) {
-        errors.push(`${relPath}: espone sintassi Meta Bind BUTTON[...] come testo visibile`);
+    if (/(^|[^`])BUTTON\[[^\]\n]+\](?!`)/.test(text)) {
+        errors.push(`${relPath}: espone BUTTON[...] senza inline code Meta Bind`);
     }
 }
 
@@ -188,8 +161,18 @@ for (const relPath of [
     "Dev/TemplateFactory/modules/resource_support_pages.yaml"
 ]) {
     const text = readTextRel(ROOT, relPath, "");
-    if (/`BUTTON\[[^\]\n]+\]`/.test(text)) {
-        errors.push(`${relPath}: sorgente pagina contiene BUTTON[...] visibile invece di workflow:button`);
+    if (/`BUTTON\[[^\]\n]+\]`|(^|[^`])BUTTON\[[^\]\n]+\](?!`)/.test(text)) {
+        errors.push(`${relPath}: sorgente pagina contiene BUTTON[...] invece di workflow:button`);
+    }
+}
+
+for (const [relPath, text] of [
+    ["README.md", readme],
+    ["Dev/RELEASE.md", release],
+    ["Dev/Sviluppo Vault.md", readTextRel(ROOT, "Dev/Sviluppo Vault.md", "")]
+]) {
+    if (/demo/i.test(text)) {
+        errors.push(`${relPath}: riferimento demo non ammesso`);
     }
 }
 
@@ -199,4 +182,4 @@ if (errors.length) {
     process.exit(1);
 }
 
-console.log("Documentazione OK: README, release e demo allineati.");
+console.log("Documentazione OK: README e release allineati.");

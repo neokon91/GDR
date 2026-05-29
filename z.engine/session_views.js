@@ -272,17 +272,24 @@
   if (!runtimeManifest?.runtime_modules) throw new Error("Runtime exports non generato: esegui npm run sync:sources.");
 
   const runtimeModuleGroups = runtimeManifest.runtime_modules;
-  const runtimeViews = await loadRuntimeModules(moduleSpecs(runtimeModuleGroups.shared_context), sharedViewContext);
+  const sharedSpecs = moduleSpecs(runtimeModuleGroups.shared_context);
+  const playabilitySpec = sharedSpecs.find(([key]) => key === "playability");
+  const playability = await loadRuntimeModule(playabilitySpec?.[1] ?? "z.engine/session_playability.js", sharedViewContext);
+  const runtimeContext = { ...sharedViewContext, ...playability };
+  const runtimeViews = {
+    playability,
+    ...await loadRuntimeModules(sharedSpecs.filter(([key]) => key !== "playability"), runtimeContext)
+  };
   const continuityViews = runtimeViews.continuity;
   const continuityContext = {
-    ...sharedViewContext,
+    ...runtimeContext,
     continuityAction: continuityViews.continuityAction,
     continuityIssues: continuityViews.continuityIssues,
     continuityStatus: continuityViews.continuityStatus
   };
   Object.assign(runtimeViews, await loadRuntimeModules(moduleSpecs(runtimeModuleGroups.continuity_context), continuityContext));
   Object.assign(runtimeViews, await loadRuntimeModules(moduleSpecs(runtimeModuleGroups.session_context), {
-    ...sharedViewContext,
+    ...runtimeContext,
     continuityIssues: continuityViews.continuityIssues
   }));
 
@@ -391,100 +398,41 @@
     return fields.reduce((total, key) => total + (hasValue(dv, page?.[key]) ? dvItems(dv, page?.[key]).filter(Boolean).length || 1 : 0), 0);
   }
 
-  function normalizedGateKind(value) {
-    return String(value ?? "")
-      .trim()
-      .toLowerCase()
-      .normalize("NFD")
-      .replace(/[\u0300-\u036f]/g, "");
-  }
-
-  const PLAYABILITY_GATES = ["tavolo", "movimento", "conseguenza", "collegamento"];
-  const PLAYABILITY_GATE_LABELS = {
-    tavolo: "tavolo",
-    movimento: "movimento",
-    conseguenza: "conseguenza",
-    collegamento: "collegamento"
-  };
-  const PLAYABILITY_GATE_ACTIONS = {
-    tavolo: "Manuale: compila uso_al_tavolo, scena o posta. Pulsante: Nuova missione o Nuovo incontro.",
-    movimento: "Manuale: compila prossima_mossa o pressione. Pulsante: Motore mondo vivo o Nuovo clock.",
-    conseguenza: "Manuale: compila conseguenze, propaga_a o entita_impattate. Workflow: Post Sessione Guidato o Controllo vault.",
-    collegamento: "Manuale: collega mondo, luogo, fazione, missione o conseguenza. Superficie: Codex editabile o Nuova relazione."
-  };
-  const LIVE_WORLD_CATEGORIES = new Set([
-    "luogo", "fazione", "religione", "culto", "personaggio", "png", "missione", "conflitto",
-    "relazione", "rotta", "mercato", "tracciato", "clock", "incontro", "creatura", "risorsa",
-    "cultura", "lingua", "evento storico", "cosmologia", "segreto", "mistero"
-  ]);
-  const MOVING_WORLD_CATEGORIES = new Set([
-    "fazione", "religione", "culto", "personaggio", "png", "missione", "conflitto",
-    "relazione", "rotta", "mercato", "tracciato", "clock"
-  ]);
-  const CONSEQUENCE_WORLD_CATEGORIES = new Set([
-    "luogo", "fazione", "religione", "culto", "personaggio", "png", "missione", "conflitto",
-    "relazione", "rotta", "mercato", "tracciato", "clock", "incontro", "evento storico", "cosmologia"
-  ]);
-
   function worldbuilderGateCategory(page) {
-    return normalizedGateKind(worldbuilderCategory(page));
+    return playability.normalizePlayabilityKind(worldbuilderCategory(page));
   }
 
   function worldbuilderIsLiveEntity(page) {
-    const category = worldbuilderGateCategory(page);
-    if (["mondo", "dashboard", "sessione", "risorsa"].includes(category)) return false;
-    if (LIVE_WORLD_CATEGORIES.has(category)) return true;
-    return String(page?.file?.folder ?? "").startsWith("Mondi/");
-  }
-
-  function anyWorldbuilderField(dv, page, fields) {
-    return fields.some(field => hasValue(dv, page?.[field]));
-  }
-
-  function positiveWorldbuilderNumber(page, fields) {
-    return fields.some(field => Number(page?.[field] ?? 0) > 0);
+    return playability.playabilityIsCandidate(worldbuilderGateCategory(page), "worldbuilder", {
+      folder: page?.file?.folder
+    });
   }
 
   function worldbuilderRequiredGates(page) {
-    const category = worldbuilderGateCategory(page);
-    const gates = ["tavolo", "collegamento"];
-    if (MOVING_WORLD_CATEGORIES.has(category)) gates.splice(1, 0, "movimento");
-    if (CONSEQUENCE_WORLD_CATEGORIES.has(category)) gates.splice(gates.length - 1, 0, "conseguenza");
-    return gates;
+    return playability.playabilityRequiredGates(worldbuilderGateCategory(page), "worldbuilder");
   }
 
   function worldbuilderGateCoverage(dv, page, links = worldbuilderLinkCount(dv, page)) {
-    return {
-      tavolo: anyWorldbuilderField(dv, page, ["uso_al_tavolo", "promessa_al_tavolo", "scene", "scena", "gancio", "posta", "obiettivo", "obiettivo_giocabile", "indizi", "missioni"]),
-      movimento: anyWorldbuilderField(dv, page, ["prossima_mossa", "mosse", "innesco", "avanza_se", "tracciati", "clock"]) || positiveWorldbuilderNumber(page, ["pressione", "pericolo"]),
-      conseguenza: anyWorldbuilderField(dv, page, ["conseguenza", "conseguenze", "conseguenze_se_bloccata", "effetti", "impatto", "propaga_a", "entita_impattate", "cambiamenti_quotidiani", "cosa_cambia"]),
-      collegamento: links >= 2
-    };
+    return playability.playabilityGateCoverage(page, {
+      links,
+      hasValue: value => hasValue(dv, value)
+    });
   }
 
   function worldbuilderLiveGateRow(dv, page, links = worldbuilderLinkCount(dv, page)) {
-    if (!worldbuilderIsLiveEntity(page)) return null;
-    const coverage = worldbuilderGateCoverage(dv, page, links);
-    const missingGates = worldbuilderRequiredGates(page).filter(gate => !coverage[gate]);
-    if (!missingGates.length) return null;
-    const missingLabel = missingGates.map(gate => PLAYABILITY_GATE_LABELS[gate]).join(", ");
-    const workflows = [...new Set(missingGates.map(gate => PLAYABILITY_GATE_ACTIONS[gate]))].join(" | ");
-    return {
+    const issue = playability.playabilityIssue({
       page,
-      problem: `mancano: ${missingLabel}`,
-      missingLabel,
-      missingGates,
-      action: PLAYABILITY_GATE_ACTIONS[missingGates[0]],
-      workflow: workflows,
-      priority: 6 + missingGates.length
-    };
+      category: worldbuilderGateCategory(page),
+      profile: "worldbuilder",
+      links,
+      hasValue: value => hasValue(dv, value),
+      folder: page?.file?.folder
+    });
+    return issue && worldbuilderIsLiveEntity(page) ? issue : null;
   }
 
   function worldbuilderGateCounts(rows) {
-    return PLAYABILITY_GATES.reduce((counts, gate) => {
-      counts[gate] = rows.filter(row => row.missingGates?.includes(gate)).length;
-      return counts;
-    }, {});
+    return playability.playabilityGateCounts(rows);
   }
 
   function worldbuilderScope(dv, worldLink = "", campaignLinks = []) {
@@ -843,38 +791,38 @@
         cls: `gdr-info-card compact ${entryPoints.length && !missingEntries.length ? "gdr-kind-ready" : "gdr-kind-missing"}`
       }));
 
-      for (const plugin of simple ? [] : plugins) {
-        const status = pluginStatus(plugin);
-        cards.push(cardHtml({
-          title: plugin,
-          meta: status.ok === true ? "Plugin attivo" : status.ok === false ? "Plugin da attivare" : "Verifica manuale",
-          body: pluginSymptom(plugin),
-          importa: status.ok === true
-            ? `Plugin attivo: ${status.id}.`
-            : `${pluginManualAction(plugin)} ID plugin: ${status.id}.`,
-          cls: `gdr-info-card compact ${status.ok === true ? "gdr-kind-ready" : "gdr-kind-missing"}`
-        }));
-      }
-
-      for (const action of actions) {
-        cards.push(renderActionCard(action));
-      }
-
-      for (const group of actionGroups) {
-        cards.push(cardHtml({
-          title: group.label || "Gruppo azioni",
-          meta: `${asArray(group.actions).length} azioni secondarie`,
-          body: group.purpose || "Gruppo operativo dichiarato nel workflow YAML.",
-          importa: "Usalo solo quando il flusso principale non basta.",
-          cls: "gdr-info-card compact gdr-kind-ready"
-        }));
-
-        for (const action of asArray(group.actions)) {
-          cards.push(renderActionCard(action, true));
-        }
-      }
-
       if (!simple) {
+        for (const plugin of plugins) {
+          const status = pluginStatus(plugin);
+          cards.push(cardHtml({
+            title: plugin,
+            meta: status.ok === true ? "Plugin attivo" : status.ok === false ? "Plugin da attivare" : "Verifica manuale",
+            body: pluginSymptom(plugin),
+            importa: status.ok === true
+              ? `Plugin attivo: ${status.id}.`
+              : `${pluginManualAction(plugin)} ID plugin: ${status.id}.`,
+            cls: `gdr-info-card compact ${status.ok === true ? "gdr-kind-ready" : "gdr-kind-missing"}`
+          }));
+        }
+
+        for (const action of actions) {
+          cards.push(renderActionCard(action));
+        }
+
+        for (const group of actionGroups) {
+          cards.push(cardHtml({
+            title: group.label || "Gruppo azioni",
+            meta: `${asArray(group.actions).length} azioni secondarie`,
+            body: group.purpose || "Gruppo operativo dichiarato nel workflow YAML.",
+            importa: "Usalo solo quando il flusso principale non basta.",
+            cls: "gdr-info-card compact gdr-kind-ready"
+          }));
+
+          for (const action of asArray(group.actions)) {
+            cards.push(renderActionCard(action, true));
+          }
+        }
+
         cards.push(cardHtml({
           title: "Se un controllo non risponde",
           meta: "Fallback operativo",
@@ -985,7 +933,7 @@
 
   async function renderVaultReadiness(dv, mode = "start") {
     const essential = [
-      ["Pulsanti e creazione note", ["Meta Bind", "Templater"], "Se non sono pronti, abilita gli strumenti inclusi e riavvia Obsidian."],
+      ["Pulsanti e creazione note", ["Meta Bind", "Templater"], "Se non sono pronti, abilita i plugin richiesti e riavvia Obsidian."],
       ["Dashboard e tabelle", ["Dataview"], "Se non e pronto, le dashboard restano vuote o mostrano codice."],
       ["Aspetto", [], "Rende leggibili le dashboard.", ".obsidian/snippets/gdr-vault.css"]
     ];

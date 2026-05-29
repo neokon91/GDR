@@ -60,7 +60,7 @@ panels:
       - testo player-safe mancante
   showcase:
     runtime_view: renderQualityReportShowcase
-    promise: Trovare materiale pronto da mostrare in release, screenshot o demo.
+    promise: Trovare materiale pronto da mostrare in release, screenshot o vista giocatori.
     answers:
       - mappe pubbliche
       - dispense pronte

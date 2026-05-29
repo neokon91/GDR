@@ -5,7 +5,6 @@ const os = require("os");
 const path = require("path");
 const { execFileSync } = require("child_process");
 const { repoPath } = require("./node_utils");
-const { DEMO_FILES } = require("./generate_demo_world");
 const { releasePluginProfile } = require("./release_plugin_profile");
 
 const ROOT = process.cwd();
@@ -13,9 +12,7 @@ const TEMP_ROOT = fs.mkdtempSync(path.join(os.tmpdir(), "vault-gdr-release-check
 const OUT = path.join(TEMP_ROOT, "vault-gdr-clean");
 const ZIP = `${OUT}.zip`;
 const BOUNDARY = "Dev/TemplateFactory/modules/release_boundary.yaml";
-const INCLUDE_DEMO = process.argv.includes("--with-demo");
 const KEEP_ARTIFACT = process.argv.includes("--keep");
-const DEMO_RELEASE_PATHS = new Set([...DEMO_FILES, "Mondi/Porto di Prova Demo.md"]);
 
 function loadYaml(relPath) {
     const script = [
@@ -111,7 +108,6 @@ function validateOutput(errors) {
         if (existsRel(OUT, relPath)) fail(errors, `percorso vietato nella release: ${relPath}`);
     }
     for (const relPath of asArray(releaseBoundary.forbidden_paths)) {
-        if (INCLUDE_DEMO && DEMO_RELEASE_PATHS.has(relPath)) continue;
         if (existsRel(OUT, relPath)) fail(errors, `materiale dev/riservato vietato nella release: ${relPath}`);
     }
 
@@ -134,11 +130,8 @@ function validateOutput(errors) {
     for (const marker of asArray(releaseBoundary.leggimi_markers)) {
         if (!readme.includes(marker)) fail(errors, `LEGGIMI.md release incompleto (${marker})`);
     }
-    if (INCLUDE_DEMO && !readme.includes("Demo Regno Di Prova.md")) {
-        fail(errors, "LEGGIMI.md release demo senza riferimento a Demo Regno Di Prova.md");
-    }
-    if (!INCLUDE_DEMO && readme.includes("Demo Regno Di Prova.md")) {
-        fail(errors, "LEGGIMI.md release pulita cita la demo anche senza --with-demo");
+    if (readme.includes("Regno Di Prova.md")) {
+        fail(errors, "LEGGIMI.md release pulita cita materiale dimostrativo");
     }
 
     const plugins = JSON.parse(fs.readFileSync(path.join(OUT, ".obsidian/community-plugins.json"), "utf8"));
@@ -148,13 +141,10 @@ function validateOutput(errors) {
         fail(errors, `profilo plugin release non allineato: attesi ${expectedPlugins.join(", ")}, trovati ${releasePlugins.join(", ")}`);
     }
     for (const plugin of releasePluginProfileContract.enabledPlugins) {
-        if (!existsRel(OUT, `.obsidian/plugins/${plugin}/manifest.json`)) fail(errors, `manifest plugin profilo release mancante: ${plugin}`);
-        if (!existsRel(OUT, `.obsidian/plugins/${plugin}/main.js`)) fail(errors, `main plugin profilo release mancante: ${plugin}`);
+        if (!plugins.includes(plugin)) fail(errors, `plugin profilo release non abilitato: ${plugin}`);
     }
     for (const plugin of asArray(releaseBoundary.required_plugins)) {
         if (!plugins.includes(plugin)) fail(errors, `plugin richiesto non abilitato nella release: ${plugin}`);
-        if (!existsRel(OUT, `.obsidian/plugins/${plugin}/manifest.json`)) fail(errors, `manifest plugin richiesto mancante nella release: ${plugin}`);
-        if (!existsRel(OUT, `.obsidian/plugins/${plugin}/main.js`)) fail(errors, `main plugin richiesto mancante nella release: ${plugin}`);
     }
 
     const homepage = JSON.parse(fs.readFileSync(path.join(OUT, ".obsidian/plugins/homepage/data.json"), "utf8")).homepages?.["Main Homepage"];
@@ -210,7 +200,7 @@ function validateZip(errors) {
 const errors = [];
 
 try {
-    execFileSync("node", ["Dev/TemplateFactory/tools/release_clean.js", "--quiet", "--out", OUT, ...(INCLUDE_DEMO ? ["--with-demo"] : [])], { cwd: ROOT, stdio: "inherit" });
+    execFileSync("node", ["Dev/TemplateFactory/tools/release_clean.js", "--quiet", "--out", OUT], { cwd: ROOT, stdio: "inherit" });
     validateOutput(errors);
     validateZip(errors);
 } finally {

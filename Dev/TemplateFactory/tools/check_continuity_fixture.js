@@ -3,7 +3,7 @@
 const fs = require("fs");
 const os = require("os");
 const path = require("path");
-const { FIXTURE_SCENARIO, generateDemoFixture } = require("./generate_demo_fixture");
+const { FIXTURE_SCENARIO, generateContinuityFixture } = require("./generate_continuity_fixture");
 const { registerWorldChoice } = require("../../../z.automazioni/continuity_state");
 const { hasAny, hasValue, parseFrontmatter, readTextRel } = require("./node_utils");
 
@@ -169,7 +169,7 @@ function validateScenarioContract(pages) {
     if (!session || !consequence || !track || !encounter || !creature || !object) return;
 
     if (!asArray(session.decisioni_prese).includes(SCENARIO.choice)) fail(`${SCENARIO.session}: scelta scenario non registrata`);
-    if (!asArray(session.conseguenze).some(value => String(value).includes(SCENARIO.consequenceText) || String(value).includes("Continuita Demo Conseguenza"))) {
+    if (!asArray(session.conseguenze).some(value => String(value).includes(SCENARIO.consequenceText) || String(value).includes("Continuita Fixture Conseguenza"))) {
         fail(`${SCENARIO.session}: conseguenza scenario non collegata`);
     }
     if (session.propagazione_stato !== "applicata") fail(`${SCENARIO.session}: propagazione_stato scenario non applicata`);
@@ -222,7 +222,7 @@ function validateDndHardening(page, kind) {
 const tempParent = fs.mkdtempSync(path.join(os.tmpdir(), "gdr-continuity-fixture-"));
 
 try {
-    const result = generateDemoFixture({
+    const result = generateContinuityFixture({
         root: tempParent,
         outDir: "fixture",
         create: true,
@@ -258,7 +258,7 @@ try {
         if (!hasValue(fm.conseguenze)) fail(`${session.rel}: conseguenza non registrata`);
         if (!hasValue(fm.entita_impattate)) fail(`${session.rel}: entita_impattate vuoto`);
         if (fm.propagazione_stato !== "applicata") fail(`${session.rel}: propagazione_stato non applicata`);
-        if (!includesLink(fm.tracciati, "Continuita Demo Marea")) fail(`${session.rel}: tracciato non collegato`);
+        if (!includesLink(fm.tracciati, "Continuita Fixture Marea")) fail(`${session.rel}: tracciato non collegato`);
         validateDndHardening(session, "sessione");
     }
 
@@ -293,7 +293,7 @@ try {
     if (object) validateDndHardening(object, "oggetto");
 
     const start = pages.get(SCENARIO.start);
-    if (!start) fail("Fixture continuita: indice visuale Continuita Demo - Start.md mancante");
+    if (!start) fail("Fixture continuita: indice visuale Continuita Fixture - Start.md mancante");
     if (start && !start.text.includes("Hub/Durante il Gioco")) fail(`${start.rel}: link smoke Durante il Gioco mancante`);
     if (start && !start.text.includes("Risorse/Post Sessione Guidato")) fail(`${start.rel}: link smoke Post Sessione mancante`);
 

@@ -104,14 +104,14 @@ pages:
   - path: VERSION.md
     title: Versione Vault
     body: |
-      Versione: `1.0.0`
+      Versione: `1.0.1`
 
-      Data: 2026-05-21
+      Data: 2026-05-29
 
 
       ## Compatibilità
 
       - Obsidian con plugin community abilitati.
-      - Plugin inclusi nella cartella `.obsidian/plugins`.
+      - Plugin community dichiarati in configurazione e da accettare/abilitare all'apertura.
       - Tema consigliato: Minimal.
       - Snippet consigliato: `gdr-vault`.

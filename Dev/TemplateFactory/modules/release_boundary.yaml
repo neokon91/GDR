@@ -1,5 +1,5 @@
 id: release_boundary
-purpose: Contratto dichiarativo per tenere la release utente separata da materiali sviluppo, demo sorgente e contenuti riservati.
+purpose: Contratto dichiarativo per tenere la release utente separata da materiali sviluppo e contenuti riservati.
 version: 0.1.0
 required_files:
   - Inizia Qui.md
@@ -199,10 +199,6 @@ forbidden_roots:
 forbidden_paths:
   - docs
   - Dev/TemplateFactory/modules/worldbuilding_depth_axes.yaml
-  - Dev/TemplateFactory/modules/demo_contract.yaml
-  - Mondi/[Demo] Regno di Prova.md
-  - Mondi/Porto di Prova Demo.md
-  - Campagne/Sale Sotto La Nebbia/Sale Sotto La Nebbia.md
 forbidden_text_markers:
   - idea_originale_riservata
   - non_inclusa_nella_licenza_generale_del_vault
@@ -248,6 +244,7 @@ forbidden_automation_prefixes:
   - run_source_pipeline
   - template_factory_
 bridge_runtime_modules:
+  - session_playability.js
   - session_continuity.js
   - session_runtime.js
   - session_dnd.js

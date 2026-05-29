@@ -1,9 +1,13 @@
 # Changelog
 
-## Unreleased
+## 1.0.1 - 2026-05-29
 
 ### Aggiunto
 
+- Versione release riallineata a `1.0.1` del 2026-05-29 dopo la stabilizzazione post-1.0.0.
+- Release finale pulita come percorso consegnabile standard tramite `npm run release:final`.
+- Demo generata estesa con party PG collegato a campagna, sessione e incontro, cosi Party Control e flusso combattimento sono provabili nello smoke manuale.
+- Kernel runtime condiviso per i gate di giocabilita usati da Worldbuilder, Controllo Vault e Controllo Worldbuilding.
 - `Dev/TemplateFactory/tools/` separa tooling repo, check, renderer, importer, release script e fixture tecniche dal runtime vault `z.automazioni`; `check:repo` blocca il ritorno di tooling dev nella cartella runtime.
 - [[Dev/Roadmap/1.1 Kernel Architetturale]] come roadmap proposta per build riproducibile, runtime modulare, test dominio, plugin layer a profili e traiettoria narrativa/adattatori meccanici.
 - `check:srd-import-source` e pin commit per `import_srd.js`, evitando release SRD dipendenti da branch remoto mobile.
@@ -18,7 +22,7 @@
 - `naming_contract.yaml` e `check:naming` impediscono il ritorno di alias di milestone in codice, pipeline e runtime attivo.
 - `check:meta-actions` verifica con frontmatter mockato le azioni Meta Bind critiche: scelta mondo, applica conseguenza, propaga entita e recap pubblico player-safe.
 - `check:release-boundary` verifica su release temporanea copy policy, esclusioni dev, marker vietati, runtime bridge e dipendenze JS locali.
-- `obsidian_plugin_bundle_contract.yaml` e `check:plugin-bundles` rendono esplicita la policy dei plugin/temi Obsidian vendorizzati, bloccando bundle non dichiarati e configurazioni JSON tracciate per errore.
+- `obsidian_plugin_bundle_contract.yaml` e `check:plugin-bundles` rendono esplicita la policy anti-vendor: plugin e temi terzi non sono sorgente tracciato, mentre YAML e JSON generati dichiarano configurazione e requisiti.
 - `runtime_exports.yaml` dichiara moduli ed export pubblici `z.engine`, `runtime_render_contract.yaml` dichiara gli scenari minimi di render e `runtime_dataview_contract.yaml` dichiara le sorgenti Dataview simulate; `check_runtime_load.js` ora e un runner generico su manifest e fixture invece di mantenere liste, route, dati e asserzioni massive inline.
 - `runtime_plugin_profile.yaml` e `render_runtime_plugin_profile.js` spostano da `session_views.js` a YAML/JSON generato il profilo plugin runtime per troubleshooting, fallback workflow e readiness.
 - `runtime_exports.yaml` governa anche la registry dei moduli caricati da `session_views.js`; `check_runtime_load.js` genera il JSON runtime usato dal bridge e valida export/render senza registry hardcoded.
@@ -58,16 +62,14 @@
 - `source_pipeline.yaml` dichiara MD/JSON generati da YAML/Jinja; `check:generation-contract` verifica il piano di render e blocca output generati non dichiarati nella pipeline.
 - Le preview `Dev/TemplateFactory/examples/generated`, `dist`, `SRD`, `z.modelli`, `z.bacheche`, `z.bases`, `z.fileclass`, JSON runtime e JSON plugin generati non sono tracciati: restano output locale/release generato dai sorgenti.
 - Workflow dichiarativi per dashboard DM, preparazione, live, post-sessione, fuori scena, worldbuilding, atlante, canone, compendium, Bibbia del mondo, economia, lore, motore mondo vivo e iniziativa.
-- `npm run release:demo` genera una release pulita con demo utente inclusa nello ZIP.
-- `generate_demo_world.js` crea `Demo Regno Di Prova.md` e uno scenario minimo con mondo, campagna, luogo, fazione, missione, sessione attiva, clock, incontro, creatura, oggetto, dispensa e conseguenza propagabile.
-- `check:docs` verifica coerenza tra README, checklist release e contratto demo.
+- Gli scenari dimostrativi non sono piu sorgente attivo: smoke statico, runtime fixture e accettazione manuale coprono il flusso senza mantenere contenuti demo in Git.
 - M6 Continuity Engine: azioni Meta Bind per applicare conseguenze e propagare entita con stato esplicito, backlink, aggiornamenti richiesti, pressione e prossima mossa opzionale.
 - Viste runtime riusabili `renderContinuityQueue`, `renderPropagationTargets` e `renderContinuityGaps` in `z.engine/session_views.js`.
 - TemplateFactory genera schede con tabs logici e callout funzionali che contengono Meta Bind, Dataview, DataviewJS, riferimenti Bases ed Excalidraw.
-- Scenario demo storico rimosso dal sorgente: la demo finale verrà generata da script quando template e runtime saranno stabili.
-- [[Dev/Smoke Demo Finale]] come checklist manuale di collaudo visuale, sicurezza per i giocatori e raccolta evidenze screenshot/GIF.
-- Gate statico M3 in `npm run check` per verificare presenza demo, recap pubblico, mappa/dispensa pubbliche, player-safe e controlli di [[Vista Giocatori]].
-- `npm run check:smoke` come gate dedicato per la parte automatizzabile dello smoke demo finale.
+- Scenario dimostrativo storico rimosso dal sorgente: il collaudo passa da fixture runtime, smoke statico e release temporanea.
+- [[Dev/Smoke 1.0 Professionale]] come checklist manuale di collaudo visuale, sicurezza per i giocatori e raccolta evidenze screenshot/GIF.
+- Gate statico in `npm run check` per verificare recap pubblico, mappa/dispensa pubbliche, player-safe e controlli di [[Vista Giocatori]].
+- `npm run check:smoke` come gate dedicato per la parte automatizzabile dello smoke finale.
 - `npm run check:release` come gate dedicato per versione, changelog e verifica release pulita.
 - La release non include più una demo manuale mantenuta nota per nota.
 - `Dev/TemplateFactory/modules/plugin_matrix.yaml` come sorgente della matrice plugin; `Dev/plugin_matrix.json` resta output locale generato.
@@ -177,7 +179,6 @@
 
 - `npm run check:user-path`
 - `npm run check:docs`
-- `npm run release:demo`
 - `npm run check` rieseguito dopo M6 Continuity Engine e rigenerazione TemplateFactory.
 - `npm run check`
 - `npm run check:continuity`
@@ -187,7 +188,7 @@
 - `npm run check:importers`
 - `npm run check:metadata`
 - `npm run release:clean`
-- Gate statico M3 demo/player-safe rieseguito il 2026-05-21.
+- Gate statico player-safe rieseguito il 2026-05-21.
 - `dist/vault-gdr-clean.zip` creato localmente come artefatto ignorato da Git.
 
 ## 1.0.0 - 2026-05-20

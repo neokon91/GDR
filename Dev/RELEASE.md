@@ -2,33 +2,32 @@
 
 Questa checklist serve a preparare una copia pubblicabile del vault. Si esegue dal repository sorgente: la cartella `Dev/` non entra nella release utente.
 
+Il percorso consegnabile standard e `npm run release:final`.
+
 ## Prima Della Release
 
-1. Se hai modificato YAML, Jinja o generatori, esegui `npm run sync:sources`.
-2. Esegui:
+1. Aggiorna [[VERSION]].
+2. Aggiorna [[Dev/CHANGELOG]].
+3. Crea la release finale standard:
 
 ```bash
-npm run check
+npm run release:final
 ```
 
-3. Aggiorna [[VERSION]].
-4. Aggiorna [[Dev/CHANGELOG]].
-5. Crea la release utente senza demo:
+`release:final` rigenera i sorgenti, verifica versione, runtime, JS e diff, poi crea `dist/vault-gdr-clean` e `dist/vault-gdr-clean.zip` validando direttamente quell'artefatto.
+
+Prima di pubblicare per utenti non tecnici, apri il vault sorgente in Obsidian con i plugin community installati localmente: i bundle ignorati da Git vengono copiati nella ZIP, cosi l'utente deve solo accettarli all'apertura.
+
+4. Esegui `npm run check` solo per audit completo prima di tag/GitHub Release o dopo modifiche strutturali a pipeline, plugin, runtime o importatori.
+5. Se serve costruire solo la copia pulita senza i controlli mirati:
 
 ```bash
 npm run release:clean
 ```
 
-Oppure crea direttamente la release con demo utente inclusa:
-
-```bash
-npm run release:demo
-```
-
-6. Se la release include la demo, esegui [[Dev/Smoke Demo Finale]] sulla release generata. Il percorso consegnabile e `npm run release:demo`; `npm run generate:demo-world` e solo uno strumento interno di manutenzione.
-7. Apri lo ZIP in Obsidian e fai lo smoke manuale sulle pagine elencate sotto.
-8. Screenshot e GIF sono utili per pubblicazione e store page, ma non sostituiscono i gate tecnici o lo smoke manuale.
-9. Crea tag o GitHub Release solo dopo controlli puliti.
+6. Apri lo ZIP in Obsidian e fai lo smoke manuale sulle pagine elencate sotto.
+7. Screenshot e GIF sono utili per pubblicazione e store page, ma non sostituiscono i gate tecnici o lo smoke manuale.
+8. Crea tag o GitHub Release solo dopo controlli puliti.
 
 ## ZIP Utente
 
@@ -39,7 +38,7 @@ Non promettere che lo ZIP sia una app standalone, un rules engine completo o una
 
 ## Cosa Non Rimuovere
 
-- `.obsidian/plugins`: contiene plugin e configurazioni necessarie al comportamento custom del vault.
+- `.obsidian/plugins/*/data.json`: contiene configurazioni generate per i plugin; i bundle plugin terzi sono input locale ignorato da Git e possono entrare solo nella ZIP finale.
 - `.obsidian/snippets/gdr-vault.css`: definisce dashboard, callout e vista tavolo.
 - `z.modelli`: template usati dai pulsanti, materializzati da TemplateFactory.
 - `z.automazioni`: script Templater e controlli tecnici.
@@ -48,7 +47,6 @@ Non promettere che lo ZIP sia una app standalone, un rules engine completo o una
 ## Cosa Controllare A Mano
 
 - `dist/vault-gdr-clean.zip` si apre su [[Inizia Qui]] con configurazione Obsidian gia inclusa.
-- Se generata, `Demo Regno Di Prova.md` esiste nella release pulita e collega mondo, regione giocabile, campagna, sessione e materiale player-safe.
 - Le dashboard non mostrano errori Dataview.
 - I pulsanti Meta Bind aprono o creano note.
 - [[Risorse/Regione Giocabile]] mostra azioni comprensibili, non sintassi tecnica, e porta verso luogo, fazione, conflitto, missione, sessione e materiali player-safe.

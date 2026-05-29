@@ -2,7 +2,7 @@ id: runtime_render_contract
 purpose: Contratto dichiarativo degli scenari minimi di render DataviewJS verificati dal runtime Obsidian.
 version: 0.1.0
 bridge: z.engine/session_views.js
-fixture: Dev/TemplateFactory/tools/fixtures/runtime_demo_pages.json
+fixture: Dev/TemplateFactory/tools/fixtures/runtime_fixture_pages.json
 dataview_contract: Dev/TemplateFactory/modules/runtime_dataview_contract.yaml
 render_checks:
   - call: renderWorkflowCommandDeck
@@ -182,7 +182,7 @@ render_checks:
         message: 'renderWorldBibleReadiness: output senza metriche player-safe'
   - call: renderWorldBibleIdentity
     expects:
-      - contains: 'Mondo Demo'
+      - contains: 'Mondo Fixture'
         message: 'renderWorldBibleIdentity: output senza identita mondo'
   - call: renderWorldBibleArticles
     expects:

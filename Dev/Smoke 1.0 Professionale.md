@@ -86,9 +86,9 @@ Ogni voce va verificata in Obsidian, non solo con `npm run check`. L'obiettivo e
 - [ ] [[z.bacheche/Manutenzione Vault]] contiene solo task tecniche o operative, non fiction.
 - [ ] `npm run release:clean` genera una ZIP senza file di sviluppo.
 
-## Demo Finale
+## Scenario Finale
 
-- [ ] La demo e creata solo dopo il completamento dei flussi precedenti.
-- [ ] Ogni nota demo usa template ufficiali.
-- [ ] Ogni elemento demo passa controlli, mappe, player-safe e smoke visuale.
-- [ ] [[Dev/Smoke Demo Finale]] passa in Obsidian e ha screenshot/GIF di evidenza solo nella fase finale pre-release.
+- [ ] Lo scenario di collaudo e creato solo dopo il completamento dei flussi precedenti.
+- [ ] Ogni nota di collaudo usa template ufficiali.
+- [ ] Ogni elemento passa controlli, mappe, player-safe e smoke visuale.
+- [ ] Lo scenario finale passa in Obsidian e ha screenshot/GIF di evidenza solo nella fase finale pre-release.

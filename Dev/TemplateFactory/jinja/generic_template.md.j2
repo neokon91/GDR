@@ -48,10 +48,14 @@ tab: Tavolo
 > Posta: `INPUT[text:posta]`
 >
 > Rischi:
+> ```meta-bind
 > INPUT[list:rischi]
+> ```
 >
 > Ricompense:
+> ```meta-bind
 > INPUT[list:ricompense]
+> ```
 >
 > Prossima mossa: `INPUT[prossima_mossa][:prossima_mossa]`
 >
@@ -60,7 +64,9 @@ tab: Tavolo
 > Causa: `INPUT[text:causa]`
 >
 > Effetti:
+> ```meta-bind
 > INPUT[list:effetti]
+> ```
 {% endif %}
 
 > [!lettura]- Versione Pubblica
@@ -93,7 +99,9 @@ tab: Connessioni
 > Tag: `INPUT[tags][:tags]`
 {% if blueprint.get("continuity_fields", false) %}>
 > Aggiornamenti richiesti:
+> ```meta-bind
 > INPUT[list:aggiornamenti_richiesti]
+> ```
 >
 > Stato propagazione: `INPUT[text:propagazione_stato]`
 {% endif %}
@@ -180,7 +188,9 @@ tab: PNG
 > Fazioni: `INPUT[fazioni][:fazioni]`
 >
 > Segreti rivelati:
+> ```meta-bind
 > INPUT[list:segreti_rivelati]
+> ```
 
 > [!regia]- Stato PNG
 {{ dvw.quoted_runtime_block(modules.dataview_blocks.blocks.playability_family_cards, 'dv, dv.current(), "png"') }}
@@ -239,12 +249,16 @@ tab: Continuita
 > Causa: `INPUT[text:causa]`
 >
 > Effetti:
+> ```meta-bind
 > INPUT[list:effetti]
+> ```
 >
 > Entita impattate: `INPUT[entita_impattate][:entita_impattate]`
 >
 > Aggiornamenti richiesti:
+> ```meta-bind
 > INPUT[list:aggiornamenti_richiesti]
+> ```
 >
 > Stato propagazione: `INPUT[text:propagazione_stato]`
 

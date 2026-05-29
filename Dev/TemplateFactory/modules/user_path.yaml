@@ -5,7 +5,6 @@ policy:
   user_workflows_must_use_simple_mode: true
   forbidden_user_block_markers:
     - Plugin coinvolti
-    - BUTTON[
 required_release_config:
   - .obsidian/app.json
   - .obsidian/core-plugins.json

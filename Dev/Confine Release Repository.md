@@ -44,7 +44,7 @@ La release non deve includere strumenti di manutenzione repository, import massi
 ## Regole
 
 - Nessun plugin installato viene escluso se e abilitato e necessario a una funzione reale.
-- Nessuna demo sorgente entra nel repository. La demo utente entra solo quando la release viene generata con `npm run release:demo`.
+- Nessun contenuto dimostrativo sorgente entra nel repository. Gli scenari di collaudo vivono nella release temporanea o nel vault locale, non in Git.
 - Nessun artefatto `dist/` resta nel repository sorgente.
 - `SRD`, `z.modelli`, `z.bacheche`, `z.bases`, `z.fileclass` e JSON generati non devono dipendere dallo stato locale del manutentore: `npm run release:clean` deve rigenerarli prima di creare la ZIP utente.
 - Ogni modifica al confine release deve aggiornare `release_boundary.yaml` e, se cambia la copia effettiva, `Dev/TemplateFactory/tools/release_clean.js`.

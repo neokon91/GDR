@@ -5,9 +5,11 @@ policy:
   source_roots:
     - Dev/TemplateFactory/modules
     - Dev/TemplateFactory/jinja
+    - Dev/TemplateFactory/tools
+  runtime_output_roots:
     - z.automazioni
     - z.engine
-  rule: Per sviluppo umano partire da questa pipeline; i singoli script restano dettagli implementativi.
+  rule: Per sviluppo umano partire da YAML/Jinja e generatori TemplateFactory; JSON, template materializzati e runtime Obsidian sono output del vault.
   no_repo_output_roots:
     - dist
     - z.modelli
@@ -55,14 +57,12 @@ steps:
       - Dev/TemplateFactory/tools/render_plugin_matrix.py
       - --check
   obsidian_plugin_bundles:
-    purpose: Verifica che i bundle plugin/temi Obsidian tracciati siano dichiarati, minimi e coerenti con matrice e contratti.
+    purpose: Verifica che plugin Obsidian siano dichiarati da YAML senza bundle terzi tracciati nella repo.
     sources:
       - Dev/TemplateFactory/modules/obsidian_plugin_bundle_contract.yaml
       - Dev/TemplateFactory/modules/plugin_matrix.yaml
       - Dev/TemplateFactory/modules/plugin_contracts.yaml
       - .obsidian/community-plugins.json
-      - .obsidian/plugins
-      - .obsidian/themes
       - .obsidian/snippets
       - Dev/TemplateFactory/tools/check_obsidian_plugin_bundles.js
     outputs:
@@ -365,6 +365,7 @@ steps:
       - Dev/TemplateFactory/modules/bases_views.yaml
       - Dev/TemplateFactory/modules/frontmatter_profiles.yaml
       - Risorse/Controllo Vault.md
+      - z.engine/session_playability.js
       - z.engine/session_vault_control.js
       - z.engine/session_views.js
     outputs:
@@ -530,6 +531,7 @@ steps:
       - Dev/TemplateFactory/modules/bases_views.yaml
       - Dev/TemplateFactory/modules/frontmatter_profiles.yaml
       - Hub/Controllo Worldbuilding.md
+      - z.engine/session_playability.js
       - z.engine/session_worldbuilding_control.js
       - z.engine/session_views.js
     outputs:
@@ -856,7 +858,8 @@ steps:
       - z.automazioni/data/runtime/plugin_profile.json
       - z.automazioni/data/runtime/session_context.json
       - z.automazioni/data/runtime/generated_drafts_cockpit.json
-      - Dev/TemplateFactory/tools/fixtures/runtime_demo_pages.json
+      - z.engine/session_playability.js
+      - Dev/TemplateFactory/tools/fixtures/runtime_fixture_pages.json
       - Dev/TemplateFactory/tools/check_runtime_load.js
     outputs:
       - z.automazioni/data/runtime/runtime_exports.json

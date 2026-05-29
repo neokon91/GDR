@@ -50,7 +50,6 @@ required_surfaces:
     - Dev/TemplateFactory/modules/runtime_plugin_profile.yaml
     - Dev/TemplateFactory/modules/entity_depth.yaml
     - Dev/TemplateFactory/modules/worldbuilding_depth_axes.yaml
-    - Dev/TemplateFactory/modules/demo_contract.yaml
     - Dev/TemplateFactory/modules/release_boundary.yaml
     - Dev/TemplateFactory/modules/release_quality_contract.yaml
     - Dev/TemplateFactory/modules/taxonomy_depth.yaml
@@ -86,7 +85,6 @@ required_surfaces:
     - Risorse/FAQ.md
     - Dev/Confine Release Repository.md
     - Dev/Smoke 1.0 Professionale.md
-    - Dev/Smoke Demo Finale.md
     - Dev/Roadmap/1.0 Professionale.md
     - Dev/Roadmap/Roadmap.md
     - Dev/Indice Connettore GPT.md
@@ -108,7 +106,7 @@ required_surfaces:
     - Dev/TemplateFactory/tools/import_map.js
     - z.automazioni/continuity_event_model.js
     - z.automazioni/continuity_state.js
-    - Dev/TemplateFactory/tools/generate_demo_fixture.js
+    - Dev/TemplateFactory/tools/generate_continuity_fixture.js
     - Dev/TemplateFactory/tools/check_continuity_event_model.js
     - Dev/TemplateFactory/tools/check_continuity_fixture.js
     - Dev/TemplateFactory/tools/check_meta_actions_behavior.js
@@ -117,7 +115,7 @@ required_surfaces:
     - Dev/TemplateFactory/tools/check_naming_contract.js
     - Dev/TemplateFactory/tools/render_runtime_plugin_profile.js
     - Dev/TemplateFactory/tools/check_runtime_load.js
-    - Dev/TemplateFactory/tools/fixtures/runtime_demo_pages.json
+    - Dev/TemplateFactory/tools/fixtures/runtime_fixture_pages.json
     - Dev/TemplateFactory/tools/check_smoke.js
     - Dev/TemplateFactory/tools/check_validation_contract.js
     - Dev/TemplateFactory/tools/check_user_path.js

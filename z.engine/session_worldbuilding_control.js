@@ -8,6 +8,8 @@
     isReal,
     linkKey,
     pageTitle,
+    playabilityGateCounts,
+    playabilityIssue,
     pluginStatus,
     readJsonRel,
     renderEmptyState
@@ -89,89 +91,23 @@
     rows.push({ group, page, problem, action, priority, ...extra });
   }
 
-  function normalizedGateKind(value) {
-    return String(value ?? "")
-      .trim()
-      .toLowerCase()
-      .normalize("NFD")
-      .replace(/[\u0300-\u036f]/g, "");
-  }
-
-  const PLAYABILITY_GATES = ["tavolo", "movimento", "conseguenza", "collegamento"];
-  const PLAYABILITY_GATE_ACTIONS = {
-    tavolo: "Manuale: compila uso_al_tavolo, scena o posta. Pulsante: Nuova missione o Nuovo incontro.",
-    movimento: "Manuale: compila prossima_mossa o pressione. Pulsante: Motore mondo vivo o Nuovo clock.",
-    conseguenza: "Manuale: compila conseguenze, propaga_a o entita_impattate. Workflow: Post Sessione Guidato o Controllo vault.",
-    collegamento: "Manuale: collega mondo, luogo, fazione, missione o conseguenza. Superficie: Codex editabile o Nuova relazione."
-  };
-  const LIVE_ENTITY_CATEGORIES = new Set([
-    "luogo", "fazione", "religione", "culto", "personaggio", "png", "missione", "conflitto",
-    "relazione", "rotta", "mercato", "tracciato", "clock", "incontro", "creatura",
-    "cultura", "lingua", "evento storico", "cosmologia", "segreto", "mistero"
-  ]);
-  const MOVING_ENTITY_CATEGORIES = new Set([
-    "fazione", "religione", "culto", "personaggio", "png", "missione", "conflitto",
-    "relazione", "rotta", "mercato", "tracciato", "clock"
-  ]);
-  const CONSEQUENCE_ENTITY_CATEGORIES = new Set([
-    "luogo", "fazione", "religione", "culto", "personaggio", "png", "missione", "conflitto",
-    "relazione", "rotta", "mercato", "tracciato", "clock", "incontro", "evento storico", "cosmologia"
-  ]);
-
-  function positiveNumber(page, fields) {
-    return fields.some(field => Number(page?.[field] ?? 0) > 0);
-  }
-
-  function gateCategory(page) {
-    return normalizedGateKind(controlCategory(page));
-  }
-
-  function isLiveEntity(page) {
-    const category = gateCategory(page);
-    if (["mondo", "dashboard", "sessione", "risorsa", "compendium", "dispensa", "mappa"].includes(category)) return false;
-    return LIVE_ENTITY_CATEGORIES.has(category) || String(page?.file?.folder ?? "").startsWith("Mondi/");
-  }
-
-  function requiredGates(page) {
-    const category = gateCategory(page);
-    const gates = ["tavolo", "collegamento"];
-    if (MOVING_ENTITY_CATEGORIES.has(category)) gates.splice(1, 0, "movimento");
-    if (CONSEQUENCE_ENTITY_CATEGORIES.has(category)) gates.splice(gates.length - 1, 0, "conseguenza");
-    return gates;
-  }
-
-  function gateCoverage(dv, page, links = linkCount(dv, page)) {
-    return {
-      tavolo: anyValue(dv, page, ["uso_al_tavolo", "promessa_al_tavolo", "scene", "scena", "gancio", "posta", "obiettivo", "obiettivo_giocabile", "indizi", "missioni"]),
-      movimento: anyValue(dv, page, ["prossima_mossa", "mosse", "innesco", "avanza_se", "tracciati", "clock"]) || positiveNumber(page, ["pressione", "pericolo"]),
-      conseguenza: anyValue(dv, page, ["conseguenza", "conseguenze", "conseguenze_se_bloccata", "effetti", "impatto", "propaga_a", "entita_impattate", "cambiamenti_quotidiani", "cosa_cambia"]),
-      collegamento: links >= 2
-    };
-  }
-
   function liveGateIssue(dv, page, links = linkCount(dv, page)) {
-    if (!isLiveEntity(page)) return null;
-    const coverage = gateCoverage(dv, page, links);
-    const missingGates = requiredGates(page).filter(gate => !coverage[gate]);
-    if (!missingGates.length) return null;
-    const missingLabel = missingGates.join(", ");
-    return {
-      group: "Giocabilita",
+    const issue = playabilityIssue({
       page,
-      problem: `mancano: ${missingLabel}`,
-      missingLabel,
-      missingGates,
-      action: PLAYABILITY_GATE_ACTIONS[missingGates[0]],
-      workflow: [...new Set(missingGates.map(gate => PLAYABILITY_GATE_ACTIONS[gate]))].join(" | "),
-      priority: 6 + missingGates.length
+      category: controlCategory(page),
+      profile: "worldbuildingControl",
+      links,
+      hasValue: value => hasValue(dv, value),
+      folder: page?.file?.folder
+    });
+    return issue && {
+      ...issue,
+      group: "Giocabilita",
     };
   }
 
   function gateCounts(rows) {
-    return PLAYABILITY_GATES.reduce((counts, gate) => {
-      counts[gate] = rows.filter(row => row.missingGates?.includes(gate)).length;
-      return counts;
-    }, {});
+    return playabilityGateCounts(rows);
   }
 
   function sorted(rows) {

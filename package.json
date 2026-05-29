@@ -1,10 +1,10 @@
 {
   "name": "vault-gdr",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": true,
   "description": "Vault Obsidian per preparare e gestire campagne GDR fantasy in italiano.",
   "scripts": {
-    "check": "npm run check:source-pipeline && node Dev/TemplateFactory/tools/check_vault.js && npm run check:generation-contract && npm run check:workflow-actions && npm run check:user-path && npm run check:demo-contract && npm run check:release-artifact && npm run check:release-boundary && npm run check:release-quality && npm run check:docs && npm run check:smoke && npm run check:continuity && npm run check:continuity-events && npm run check:meta-actions && npm run check:pg-mechanics && npm run check:release && npm run check:importers && npm run check:repo && npm run check:js && npm run check:diff",
+    "check": "npm run check:source-pipeline && node Dev/TemplateFactory/tools/check_vault.js && npm run check:generation-contract && npm run check:workflow-actions && npm run check:user-path && npm run check:release-artifact && npm run check:release-boundary && npm run check:release-quality && npm run check:docs && npm run check:smoke && npm run check:continuity && npm run check:continuity-events && npm run check:meta-actions && npm run check:pg-mechanics && npm run check:release && npm run check:importers && npm run check:repo && npm run check:js && npm run check:diff",
     "import:srd-data": "node Dev/TemplateFactory/tools/import_srd_character_data.js",
     "check:srd-character-data": "node Dev/TemplateFactory/tools/check_srd_character_data.js",
     "check:layer": "node Dev/TemplateFactory/tools/check_vault.js",
@@ -31,7 +31,6 @@
     "check:release-quality-contract": "node Dev/TemplateFactory/tools/check_release_quality.js --contract-check",
     "check:user-path": "node Dev/TemplateFactory/tools/check_user_path.js",
     "check:metadata": "python3 Dev/TemplateFactory/tools/render_metadata_surfaces.py --check",
-    "check:demo-contract": "node Dev/TemplateFactory/tools/check_demo_contract.js",
     "check:docs": "node Dev/TemplateFactory/tools/check_docs_coherence.js",
     "check:smoke": "node Dev/TemplateFactory/tools/check_smoke.js",
     "check:runtime-load": "node Dev/TemplateFactory/tools/check_runtime_load.js",
@@ -41,7 +40,7 @@
     "check:meta-actions": "node Dev/TemplateFactory/tools/check_meta_actions_behavior.js",
     "check:pg-mechanics": "node Dev/TemplateFactory/tools/check_pg_mechanics.js",
     "check:release": "node Dev/TemplateFactory/tools/check_release.js",
-    "check:release-artifact": "node Dev/TemplateFactory/tools/check_release_artifact.js --with-demo",
+    "check:release-artifact": "node Dev/TemplateFactory/tools/check_release_artifact.js",
     "check:release-boundary": "node Dev/TemplateFactory/tools/check_release_boundary_behavior.js",
     "check:manual-release-test": "node Dev/TemplateFactory/tools/prepare_manual_release_test.js --contract-check",
     "check:srd-import-source": "node Dev/TemplateFactory/tools/check_srd_import_source.js",
@@ -68,15 +67,13 @@
     "check:js": "node Dev/TemplateFactory/tools/check_js.js",
     "check:diff": "git diff --check",
     "clean:repo": "node Dev/TemplateFactory/tools/repo_hygiene.js --fix",
-    "generate:demo-fixture": "node Dev/TemplateFactory/tools/generate_demo_fixture.js --out dist/vault-gdr-clean --force",
-    "generate:demo-world": "node Dev/TemplateFactory/tools/generate_demo_world.js --out dist/vault-gdr-clean --force",
     "import:map": "node Dev/TemplateFactory/tools/import_map.js",
     "import:srd": "node Dev/TemplateFactory/tools/import_srd.js",
     "import:azgaar": "node Dev/TemplateFactory/tools/import_azgaar_geojson.js",
     "import:watabou:city": "node Dev/TemplateFactory/tools/import_watabou_city.js",
     "import:watabou:dungeon": "node Dev/TemplateFactory/tools/import_watabou_dungeon.js",
+    "release:final": "node Dev/TemplateFactory/tools/release_final.js",
     "release:clean": "node Dev/TemplateFactory/tools/release_clean.js",
-    "release:demo": "node Dev/TemplateFactory/tools/release_clean.js --with-demo",
     "check:release-quality": "node Dev/TemplateFactory/tools/check_release_quality.js"
   }
 }

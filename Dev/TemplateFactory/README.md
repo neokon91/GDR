@@ -88,7 +88,7 @@ npm run audit:templates
 
 `check:obsidian-config` valida anche che bookmark e workspace puntino a file esistenti o output dichiarati in `source_pipeline.yaml`.
 
-`check:plugin-bundles` valida la scelta di distribuire plugin e temi Obsidian vendorizzati: solo `manifest.json`, `main.js` e `styles.css` possono essere tracciati nei plugin, mentre `data.json` e stato locale restano generati/ignorati.
+`check:plugin-bundles` valida che i plugin Obsidian siano dichiarati da YAML senza bundle terzi tracciati: niente `main.js`, `styles.css`, temi vendorizzati o stato locale in Git. I bundle locali ignorati restano ammessi per generare una ZIP dove l'utente deve solo accettare i plugin all'apertura.
 
 `check:naming` blocca il ritorno di nomi di milestone nel codice attivo: gli alias storici restano solo in changelog/roadmap, mentre runtime e check devono usare nomi di dominio.
 
@@ -178,7 +178,7 @@ Le viste `renderDnd55MaterialPipeline` e `renderCombatReadiness` sono runtime di
 
 Il render finale valida anche i blocchi Tabs: ogni blocco ` ````tabs ` deve essere chiuso, contenere almeno una `tab:`, non avere testo prima della prima tab, non avere tab duplicate o vuote e non annidare altri blocchi Tabs a quattro backtick.
 
-`demo_contract.yaml` definisce la demo finale come contratto di codice: generatori ammessi, sorgenti demo vietate, gate richiesti e scenario minimo. Il controllo dedicato e `npm run check:demo-contract`.
+Lo smoke finale non ha piu un contratto di scenario sorgente: usa `runtime_render_contract.yaml`, `manual_acceptance.yaml`, `release_quality_contract.yaml` e `check:smoke` per verificare render, accettazione manuale e sicurezza giocatori senza mantenere contenuti dimostrativi in Git.
 
 `release_boundary.yaml` dichiara cosa deve entrare o restare fuori dalla release utente: file richiesti, radici vietate, marker riservati/dev-only, plugin obbligatori e moduli runtime caricati dal bridge.
 

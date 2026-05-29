@@ -3,7 +3,6 @@ purpose: Contratto dei gate statici applicati alla release pulita prima del test
 version: 0.1.0
 first_run_pages:
   - Inizia Qui.md
-  - Demo Regno Di Prova.md
   - Risorse/Setup Guidato.md
   - Risorse/Prima Sessione In 15 Minuti.md
   - Hub/1. DM Dashboard.md

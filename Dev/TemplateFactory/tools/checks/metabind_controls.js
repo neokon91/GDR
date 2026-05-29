@@ -5,7 +5,19 @@ const TEMPLATE_PATTERN = /templateFile:\s*["']([^"']+)["']/g;
 const INLINE_BUTTON_PATTERN = /`BUTTON\[([^\]\n]+)\]`/g;
 const INLINE_LIST_INPUT_PATTERN = /`INPUT\[list:[^\]\n]+\]`/g;
 const COMPLEX_INLINE_INPUT_PATTERN = /`INPUT\[[^\]\n]*(?:optionQuery|useLinks|allowOther|suggester|Suggester)\([^\]\n]*\]`/g;
+const NAKED_META_BIND_FIELD_PATTERN = /\b(INPUT|BUTTON)\[([^\]\n]+)\]/g;
 const TEMPLATER_USER_PATTERN = /tp\.user\.([A-Za-z0-9_]+)/g;
+
+function stripMarkdownCode(text) {
+    return String(text ?? "")
+        .replace(/````[\s\S]*?````/g, "")
+        .replace(/```[\s\S]*?```/g, "")
+        .replace(/`[^`\n]+`/g, "");
+}
+
+function shouldValidateNakedFields(fileRel) {
+    return !fileRel.startsWith("Dev/");
+}
 
 function validateMetaBindControls({
     errors,
@@ -110,6 +122,13 @@ function validateMetaBindControls({
 
             while ((match = INLINE_LIST_INPUT_PATTERN.exec(text))) {
                 errors.push(`${fileRel}: INPUT Meta Bind list in inline code; usare riga o blocco meta-bind`);
+            }
+
+            if (shouldValidateNakedFields(fileRel)) {
+                const nonCodeText = stripMarkdownCode(text);
+                while ((match = NAKED_META_BIND_FIELD_PATTERN.exec(nonCodeText))) {
+                    errors.push(`${fileRel}: ${match[1]}[${match[2]}] non e in inline code o blocco meta-bind`);
+                }
             }
         }
     }

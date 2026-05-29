@@ -17,7 +17,7 @@ plugins:
   local_scope: Nessuna logica di gioco; non deve essere prerequisito per capire il
     vault
   visible_failure: Icone assenti o rumorose, ma nessun blocco rotto
-  release_contract: Manifest incluso, data.json valido, non usato come navigazione
+  release_contract: Plugin dichiarato, data.json valido quando presente, non usato come navigazione
     primaria
   gates:
   - check:release-quality
@@ -140,7 +140,6 @@ plugins:
   visible_failure: Contenuto generato non smistato o confuso con lore canonica
   release_contract: Smistamento/canonizzazione passano da workflow e controlli
   gates:
-  - check:demo-contract
   - check:workflow-actions
   - check:vault
   manual_smoke: Aprire una pagina che usa Generatore di Contenuti Fantasy, verificare

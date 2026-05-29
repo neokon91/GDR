@@ -41,7 +41,7 @@ Usa questa nota come porta d'ingresso. Non duplicare decisioni tecniche in file 
 | Sintassi e responsabilita plugin | `Dev/TemplateFactory/modules/plugin_bindings.yaml` |
 | Contratti plugin e release | `Dev/TemplateFactory/modules/plugin_matrix.yaml` e `Dev/TemplateFactory/modules/plugin_contracts.yaml` |
 | Confini della ZIP utente | [[Dev/Confine Release Repository]] |
-| Verifica release | [[Dev/RELEASE]] e [[Dev/Smoke Demo Finale]] |
+| Verifica release | [[Dev/RELEASE]] e [[Dev/Smoke 1.0 Professionale]] |
 | Template, YAML e superfici generate | [[Dev/TemplateFactory/README]] |
 | Scheda PG, SRD e output generati | [[Dev/Sviluppo Vault]] |
 

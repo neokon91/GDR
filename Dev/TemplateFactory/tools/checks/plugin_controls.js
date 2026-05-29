@@ -1,5 +1,3 @@
-const fs = require("fs");
-
 const REQUIRED_PLUGIN_MATRIX_FIELDS = ["id", "name", "class", "function", "guide", "operational", "smoke"];
 
 function validatePluginControls({
@@ -12,7 +10,6 @@ function validatePluginControls({
     isVirtualUserPath,
     pluginBindings,
     pluginMatrix,
-    repoPath,
     requiredPlugins,
     targetPath,
     tasksConfig
@@ -20,10 +17,6 @@ function validatePluginControls({
     for (const plugin of requiredPlugins) {
         if (!communityPlugins.includes(plugin)) {
             errors.push(`Plugin obbligatorio non abilitato: ${plugin}`);
-        }
-
-        if (!fs.existsSync(repoPath(".obsidian/plugins", plugin, "manifest.json"))) {
-            errors.push(`Plugin obbligatorio non incluso: ${plugin}`);
         }
     }
 
@@ -33,14 +26,6 @@ function validatePluginControls({
         }
         if (tasksConfig.loggingOptions?.minLevels?.["tasks.Cache"] !== "error") {
             errors.push("Tasks: tasks.Cache deve loggare solo errori per evitare warning sui callout custom");
-        }
-    }
-
-    const hexCartographerMain = repoPath(".obsidian/plugins/hex-cartographer/main.js");
-    if (communityPlugins.includes("hex-cartographer") && fs.existsSync(hexCartographerMain)) {
-        const hexSource = fs.readFileSync(hexCartographerMain, "utf8");
-        if (!hexSource.includes("const activeFilePath = leaf.view.file.path")) {
-            errors.push("Hex Cartographer: manca patch difensiva activeFilePath su active-leaf-change");
         }
     }
 

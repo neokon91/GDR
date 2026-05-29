@@ -227,7 +227,7 @@ pages:
         - Bases
         - Maps
     body: |
-      Maps per Bases aggiunge una vista mappa ai file `.base`. Il plugin community `maps` e installato nel vault come **Maps 0.1.6**.
+      Maps per Bases aggiunge una vista mappa ai file `.base`. Il plugin community `maps` e dichiarato nei requisiti del vault e va accettato/abilitato all'apertura se incluso nella ZIP.
 
       ## Viste
 
@@ -311,7 +311,7 @@ pages:
     body: |
       Questa pagina serve quando apri il vault per la prima volta o quando pulsanti, tabelle e dashboard non funzionano.
 
-      Il vault include strumenti già configurati. Servono a far funzionare dashboard, pulsanti, tabelle, schede creatura, bacheche e campi guidati. Se Obsidian chiede se vuoi fidarti degli strumenti inclusi, conferma solo se hai scaricato il vault da una fonte affidabile.
+      Il vault include strumenti già configurati. Servono a far funzionare dashboard, pulsanti, tabelle, schede creatura, bacheche e campi guidati. Se Obsidian chiede se vuoi fidarti dei plugin inclusi, conferma solo se hai scaricato il vault da una fonte affidabile.
 
       ## Controllo Rapido
 
@@ -320,9 +320,9 @@ pages:
       | I pulsanti aprono pagine o creano note | Tutto bene | Puoi partire da [[Inizia Qui]]. |
       | Le tabelle mostrano righe o messaggi leggibili | Tutto bene | Puoi usare dashboard e indici. |
       | I pulsanti non fanno nulla | Strumenti non attivi | Controlla le impostazioni degli strumenti community in Obsidian. |
-      | Le tabelle mostrano codice | Strumenti non attivi | Riabilita gli strumenti inclusi e riapri la nota. |
-      | I mostri non appaiono come schede | Strumento creature non attivo | Riabilita gli strumenti inclusi e riapri la nota creatura. |
-      | I tiri `dice:` restano testo | Strumento tiri non attivo | Riabilita gli strumenti inclusi. |
+      | Le tabelle mostrano codice | Strumenti non attivi | Riabilita i plugin richiesti e riapri la nota. |
+      | I mostri non appaiono come schede | Strumento creature non attivo | Riabilita i plugin richiesti e riapri la nota creatura. |
+      | I tiri `dice:` restano testo | Strumento tiri non attivo | Riabilita i plugin richiesti. |
 
       ## Strumenti Necessari
 
@@ -472,7 +472,7 @@ pages:
 
       ## Obsidian Mi Chiede Se Fidarmi Degli Strumenti
 
-      Conferma solo se hai scaricato il vault da una fonte affidabile. Gli strumenti inclusi servono a dashboard, pulsanti, tabelle e campi interattivi.
+      Conferma solo se hai scaricato il vault da una fonte affidabile. I plugin inclusi servono a dashboard, pulsanti, tabelle e campi interattivi.
 
       ## Le Tabelle Non Si Vedono
 
@@ -533,7 +533,7 @@ pages:
       tab: Sintomi
 
       > [!lettura] Problemi Comuni
-      > Tabelle, pulsanti, tiri rapidi e schede creatura usano strumenti inclusi nel vault. Se qualcosa non risponde, parti da [[Risorse/Primo Avvio Strumenti]].
+      > Tabelle, pulsanti, tiri rapidi e schede creatura usano plugin dichiarati dal vault. Se qualcosa non risponde, parti da [[Risorse/Primo Avvio Strumenti]].
 
       tab: Qualità
 
@@ -557,7 +557,7 @@ pages:
       1. Controlla gli strumenti necessari in [[Risorse/Primo Avvio Strumenti]].
       2. Riavvia Obsidian dopo averli abilitati o aggiornati.
       3. Apri [[1. DM Dashboard]] e poi [[Risorse/Controllo Vault]].
-      4. Se una vista mostra testo tecnico invece del risultato, uno strumento incluso probabilmente manca o non e attivo.
+      4. Se una vista mostra testo tecnico invece del risultato, un plugin richiesto probabilmente manca o non e attivo.
 
       ## Problemi Comuni
 

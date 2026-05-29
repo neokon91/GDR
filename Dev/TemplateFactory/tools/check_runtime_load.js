@@ -272,19 +272,19 @@ function routeMatches(query, route) {
     return route.exact !== undefined || route.contains !== undefined || requiredTerms.length > 0 || optionalTerms.length > 0;
 }
 
-function pagesForSource(source, demoPages, sourceRoutes) {
+function pagesForSource(source, fixturePages, sourceRoutes) {
     const query = String(source ?? "");
     const route = sourceRoutes.find(candidate => routeMatches(query, candidate));
     if (!route) return [];
 
     const prefixes = stringList(route, "include_prefixes");
-    return demoPages.filter(page => {
+    return fixturePages.filter(page => {
         const filePath = String(page?.file?.path ?? "");
         return prefixes.some(prefix => filePath.startsWith(prefix));
     });
 }
 
-function makeDataviewMock(rendered, demoPages, sourceRoutes) {
+function makeDataviewMock(rendered, fixturePages, sourceRoutes) {
     return {
         array(items) {
             return pageCollection(Array.isArray(items) ? items : items ? [items] : []);
@@ -298,11 +298,11 @@ function makeDataviewMock(rendered, demoPages, sourceRoutes) {
             rendered.push({ tag: `h${level}`, text, innerHTML: text });
         },
         pages(source) {
-            return pageCollection(pagesForSource(source, demoPages, sourceRoutes));
+            return pageCollection(pagesForSource(source, fixturePages, sourceRoutes));
         },
         page(link) {
             const key = String(link?.path ?? link ?? "");
-            return demoPages.find(page => page.file.path === key || page.file.link === key || page.file.name === key || page.file.name === key.replace(/\.md$/, "")) ?? null;
+            return fixturePages.find(page => page.file.path === key || page.file.link === key || page.file.name === key || page.file.name === key.replace(/\.md$/, "")) ?? null;
         },
         paragraph(text) {
             rendered.push({ tag: "p", text, innerHTML: text });
@@ -422,7 +422,7 @@ const REQUIRED_MODULES = [
 const RENDER_CHECKS = requireObjectArray(RUNTIME_RENDER_CONTRACT, "render_checks", RUNTIME_RENDER_CONTRACT_SOURCE);
 const SOURCE_ROUTES = requireObjectArray(RUNTIME_DATAVIEW_CONTRACT, "source_routes", RUNTIME_DATAVIEW_CONTRACT_SOURCE);
 validateSourceRoutes(SOURCE_ROUTES, RUNTIME_DATAVIEW_CONTRACT_SOURCE);
-const RUNTIME_FIXTURE = String(RUNTIME_DATAVIEW_CONTRACT.fixture ?? RUNTIME_RENDER_CONTRACT.fixture ?? RUNTIME_EXPORTS.fixture ?? "Dev/TemplateFactory/tools/fixtures/runtime_demo_pages.json").trim();
+const RUNTIME_FIXTURE = String(RUNTIME_DATAVIEW_CONTRACT.fixture ?? RUNTIME_RENDER_CONTRACT.fixture ?? RUNTIME_EXPORTS.fixture ?? "Dev/TemplateFactory/tools/fixtures/runtime_fixture_pages.json").trim();
 const RUNTIME_DATA = String(RUNTIME_EXPORTS.runtime_data ?? "z.automazioni/data/runtime/runtime_exports.json").trim();
 const RUNTIME_DATA_PAYLOAD = {
     generated_by: "check_runtime_load",
@@ -492,8 +492,8 @@ async function main() {
 
         if (!errors.length) {
             const rendered = [];
-            const demoPages = readJsonRel(RUNTIME_FIXTURE);
-            const dv = makeDataviewMock(rendered, demoPages, SOURCE_ROUTES);
+            const fixturePages = readJsonRel(RUNTIME_FIXTURE);
+            const dv = makeDataviewMock(rendered, fixturePages, SOURCE_ROUTES);
             await runRenderChecks(views, dv, rendered, RENDER_CHECKS);
         }
     }

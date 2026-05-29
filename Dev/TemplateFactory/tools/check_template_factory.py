@@ -66,7 +66,6 @@ REQUIRED_MODULES = {
     "entity_depth",
     "entity_model",
     "worldbuilding_depth_axes",
-    "demo_contract",
     "generated_drafts_cockpit",
     "release_boundary",
     "taxonomy_depth",
