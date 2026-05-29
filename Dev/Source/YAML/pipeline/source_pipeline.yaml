@@ -838,17 +838,17 @@ steps:
     sources:
       - Dev/Source/YAML/quality/user_path.yaml
       - Dev/Source/YAML/json/workflows.yaml
-      - Dev/Tools/node-legacy/check_user_path.js
+      - Dev/Tools/python/check_user_path.py
       - z.automazioni/data/workflows/quick_actions.json
       - .obsidian/plugins/obsidian-meta-bind-plugin/data.json
     outputs:
       - memoria
     render:
-      - node
-      - Dev/Tools/node-legacy/check_user_path.js
+      - python3
+      - Dev/Tools/python/check_user_path.py
     check:
-      - node
-      - Dev/Tools/node-legacy/check_user_path.js
+      - python3
+      - Dev/Tools/python/check_user_path.py
   validation_contract:
     purpose: Verifica i contratti YAML usati dai check di dominio e qualita delle note.
     sources:
@@ -856,27 +856,28 @@ steps:
       - Dev/Source/YAML/canonical/fields_core.yaml
       - Dev/Source/YAML/canonical/frontmatter_profiles.yaml
       - Dev/Source/YAML/canonical/runtime_profiles.yaml
+      - Dev/Tools/python/check_validation_contract.py
     outputs:
       - memoria
     render:
-      - node
-      - Dev/Tools/node-legacy/check_validation_contract.js
+      - python3
+      - Dev/Tools/python/check_validation_contract.py
     check:
-      - node
-      - Dev/Tools/node-legacy/check_validation_contract.js
+      - python3
+      - Dev/Tools/python/check_validation_contract.py
   naming_contract:
     purpose: Verifica che codice, pipeline e runtime usino nomi di dominio e non alias di milestone.
     sources:
       - Dev/Source/YAML/quality/naming_contract.yaml
-      - Dev/Tools/node-legacy/check_naming_contract.js
+      - Dev/Tools/python/check_naming_contract.py
     outputs:
       - memoria
     render:
-      - node
-      - Dev/Tools/node-legacy/check_naming_contract.js
+      - python3
+      - Dev/Tools/python/check_naming_contract.py
     check:
-      - node
-      - Dev/Tools/node-legacy/check_naming_contract.js
+      - python3
+      - Dev/Tools/python/check_naming_contract.py
   session_context_contract:
     purpose: Genera il contratto JSON letto dal core sessione e dal registry percorsi runtime.
     sources:

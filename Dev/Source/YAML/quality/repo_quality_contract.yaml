@@ -106,14 +106,14 @@ required_surfaces:
     - Dev/Tools/node-legacy/check_meta_actions_behavior.js
     - Dev/Tools/node-legacy/check_plugin_usage_audit.js
     - Dev/Tools/node-legacy/check_obsidian_plugin_bundles.js
-    - Dev/Tools/node-legacy/check_naming_contract.js
+    - Dev/Tools/python/check_naming_contract.py
     - Dev/Tools/python/render_runtime_plugin_profile.py
     - Dev/Tools/python/render_workflow_quick_actions.py
     - Dev/Tools/node-legacy/check_runtime_load.js
     - Dev/Tests/fixtures/runtime_fixture_pages.json
     - Dev/Tools/node-legacy/check_smoke.js
-    - Dev/Tools/node-legacy/check_validation_contract.js
-    - Dev/Tools/node-legacy/check_user_path.js
+    - Dev/Tools/python/check_validation_contract.py
+    - Dev/Tools/python/check_user_path.py
     - Dev/Tools/node-legacy/check_repo_quality_contract.js
     - Dev/Tools/node-legacy/check_release_artifact.js
     - Dev/Tools/node-legacy/check_release_boundary_behavior.js
