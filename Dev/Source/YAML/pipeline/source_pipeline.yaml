@@ -64,15 +64,15 @@ steps:
       - Dev/Source/YAML/json/plugin_matrix.yaml
       - Dev/Source/YAML/canonical/plugin_contracts.yaml
       - .obsidian/snippets
-      - Dev/Tools/node-legacy/check_obsidian_plugin_bundles.js
+      - Dev/Tools/python/check_obsidian_plugin_bundles.py
     outputs:
       - memoria
     render:
-      - node
-      - Dev/Tools/node-legacy/check_obsidian_plugin_bundles.js
+      - python3
+      - Dev/Tools/python/check_obsidian_plugin_bundles.py
     check:
-      - node
-      - Dev/Tools/node-legacy/check_obsidian_plugin_bundles.js
+      - python3
+      - Dev/Tools/python/check_obsidian_plugin_bundles.py
   entity_model_contract:
     purpose: Verifica il catalogo YAML delle categorie entita e impedisce il ritorno della nota lunga in Risorse.
     sources:
@@ -80,15 +80,15 @@ steps:
       - Dev/Source/YAML/canonical/fields_core.yaml
       - Dev/Source/YAML/canonical/frontmatter_profiles.yaml
       - Dev/Source/YAML/canonical/validation_contract.yaml
-      - Dev/Tools/node-legacy/check_entity_model.js
+      - Dev/Tools/python/check_entity_model.py
     outputs:
       - memoria
     render:
-      - node
-      - Dev/Tools/node-legacy/check_entity_model.js
+      - python3
+      - Dev/Tools/python/check_entity_model.py
     check:
-      - node
-      - Dev/Tools/node-legacy/check_entity_model.js
+      - python3
+      - Dev/Tools/python/check_entity_model.py
   templater_wrappers:
     purpose: Genera i wrapper richiesti da Templater nella user_scripts_folder.
     sources:
@@ -298,14 +298,15 @@ steps:
       - Dev/Source/YAML/quality/manual_acceptance.yaml
       - Dev/Source/YAML/pipeline/source_pipeline.yaml
       - Dev/plugin_matrix.json
+      - Dev/Tools/python/check_plugin_usage_audit.py
     outputs:
       - memoria
     render:
-      - node
-      - Dev/Tools/node-legacy/check_plugin_usage_audit.js
+      - python3
+      - Dev/Tools/python/check_plugin_usage_audit.py
     check:
-      - node
-      - Dev/Tools/node-legacy/check_plugin_usage_audit.js
+      - python3
+      - Dev/Tools/python/check_plugin_usage_audit.py
   workflow_blocks:
     purpose: Renderizza blocchi azioni rapide dentro le pagine operative.
     sources:

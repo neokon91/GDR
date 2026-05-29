@@ -104,8 +104,8 @@ required_surfaces:
     - Dev/Tools/node-legacy/check_continuity_event_model.js
     - Dev/Tools/node-legacy/check_continuity_fixture.js
     - Dev/Tools/node-legacy/check_meta_actions_behavior.js
-    - Dev/Tools/node-legacy/check_plugin_usage_audit.js
-    - Dev/Tools/node-legacy/check_obsidian_plugin_bundles.js
+    - Dev/Tools/python/check_plugin_usage_audit.py
+    - Dev/Tools/python/check_obsidian_plugin_bundles.py
     - Dev/Tools/python/check_naming_contract.py
     - Dev/Tools/python/render_runtime_plugin_profile.py
     - Dev/Tools/python/render_workflow_quick_actions.py
