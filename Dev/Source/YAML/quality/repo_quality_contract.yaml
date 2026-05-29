@@ -110,7 +110,7 @@ required_surfaces:
     - Dev/Tools/python/render_runtime_plugin_profile.py
     - Dev/Tools/python/render_workflow_quick_actions.py
     - Dev/Tools/node-legacy/check_runtime_load.js
-    - Dev/Tests/fixtures/runtime_fixture_pages.json
+    - Dev/Tests/fixtures/runtime_fixture_pages.yaml
     - Dev/Tools/node-legacy/check_smoke.js
     - Dev/Tools/python/check_validation_contract.py
     - Dev/Tools/python/check_user_path.py

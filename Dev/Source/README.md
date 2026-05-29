@@ -139,7 +139,7 @@ Il resto del file è Markdown statico generato da Jinja: tab, callout, input Met
 
 ## Regola Generator
 
-Gli script runtime in `z.automazioni/` devono restare sottili. Check, renderer, importer CLI, release script e fixture tecniche stanno in `Dev/Tools/`:
+Gli script runtime in `z.automazioni/` devono restare sottili. Check, renderer, importer CLI e release script stanno in `Dev/Tools/`; i fixture dati stanno in YAML (`YAML/quality/importer_fixtures.yaml` o `Dev/Tests/fixtures/`):
 
 - JS raccoglie input, sceglie file esistenti, calcola valori e collega note.
 - `YAML/canonical/runtime_profiles.yaml` dichiara prompt, opzioni e default.

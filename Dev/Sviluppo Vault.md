@@ -96,7 +96,7 @@ Per le pagine di supporto, non inserire blob opachi direttamente in `resource_su
 
 `z.engine/session_views.js` resta il bridge pubblico per le chiamate DataviewJS esistenti. Le famiglie gia estratte vivono in moduli dedicati (`session_maps.js`, `session_dnd.js`, `session_player.js`, cockpit e runtime sessione).
 
-Gli export pubblici e la registry dei moduli runtime sono dichiarati in `Dev/Source/YAML/json/runtime_exports.yaml`; il bridge legge il JSON generato `z.automazioni/data/runtime/runtime_exports.json`. Gli scenari minimi di render sono in `Dev/Source/YAML/json/runtime_render_contract.yaml`; le sorgenti Dataview simulate sono in `Dev/Source/YAML/json/runtime_dataview_contract.yaml`. `session_views.js` pubblica automaticamente gli export `render*`; `check:runtime-load` usa manifest e fixture `Dev/Tests/fixtures/runtime_fixture_pages.json` per impedire drift.
+Gli export pubblici e la registry dei moduli runtime sono dichiarati in `Dev/Source/YAML/json/runtime_exports.yaml`; il bridge legge il JSON generato `z.automazioni/data/runtime/runtime_exports.json`. Gli scenari minimi di render sono in `Dev/Source/YAML/json/runtime_render_contract.yaml`; le sorgenti Dataview simulate sono in `Dev/Source/YAML/json/runtime_dataview_contract.yaml`. `session_views.js` pubblica automaticamente gli export `render*`; `check:runtime-load` usa manifest e fixture `Dev/Tests/fixtures/runtime_fixture_pages.yaml` per impedire drift.
 
 Il troubleshooting plugin runtime passa da `Dev/Source/YAML/json/runtime_plugin_profile.yaml` e dal JSON generato `z.automazioni/data/runtime/plugin_profile.json`: non aggiungere dizionari statici di plugin, sintomi o fallback dentro `session_views.js`.
 

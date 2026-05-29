@@ -2,7 +2,7 @@ id: runtime_render_contract
 purpose: Contratto dichiarativo degli scenari minimi di render DataviewJS verificati dal runtime Obsidian.
 version: 0.1.0
 bridge: z.engine/session_views.js
-fixture: Dev/Tests/fixtures/runtime_fixture_pages.json
+fixture: Dev/Tests/fixtures/runtime_fixture_pages.yaml
 dataview_contract: Dev/Source/YAML/json/runtime_dataview_contract.yaml
 render_checks:
   - call: renderWorkflowCommandDeck

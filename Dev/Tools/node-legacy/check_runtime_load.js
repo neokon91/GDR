@@ -36,6 +36,11 @@ function readJsonRel(relPath) {
     }
 }
 
+function readStructuredRel(relPath) {
+    if (/\.ya?ml$/i.test(relPath)) return loadYamlModule(relPath);
+    return readJsonRel(relPath);
+}
+
 function isPlainObject(value) {
     return value !== null && typeof value === "object" && !Array.isArray(value);
 }
@@ -422,7 +427,7 @@ const REQUIRED_MODULES = [
 const RENDER_CHECKS = requireObjectArray(RUNTIME_RENDER_CONTRACT, "render_checks", RUNTIME_RENDER_CONTRACT_SOURCE);
 const SOURCE_ROUTES = requireObjectArray(RUNTIME_DATAVIEW_CONTRACT, "source_routes", RUNTIME_DATAVIEW_CONTRACT_SOURCE);
 validateSourceRoutes(SOURCE_ROUTES, RUNTIME_DATAVIEW_CONTRACT_SOURCE);
-const RUNTIME_FIXTURE = String(RUNTIME_DATAVIEW_CONTRACT.fixture ?? RUNTIME_RENDER_CONTRACT.fixture ?? RUNTIME_EXPORTS.fixture ?? "Dev/Tests/fixtures/runtime_fixture_pages.json").trim();
+const RUNTIME_FIXTURE = String(RUNTIME_DATAVIEW_CONTRACT.fixture ?? RUNTIME_RENDER_CONTRACT.fixture ?? RUNTIME_EXPORTS.fixture ?? "Dev/Tests/fixtures/runtime_fixture_pages.yaml").trim();
 const RUNTIME_DATA = String(RUNTIME_EXPORTS.runtime_data ?? "z.automazioni/data/runtime/runtime_exports.json").trim();
 const RUNTIME_DATA_PAYLOAD = {
     generated_by: "check_runtime_load",
@@ -492,7 +497,7 @@ async function main() {
 
         if (!errors.length) {
             const rendered = [];
-            const fixturePages = readJsonRel(RUNTIME_FIXTURE);
+            const fixturePages = readStructuredRel(RUNTIME_FIXTURE);
             const dv = makeDataviewMock(rendered, fixturePages, SOURCE_ROUTES);
             await runRenderChecks(views, dv, rendered, RENDER_CHECKS);
         }

@@ -68,6 +68,7 @@ const FORBIDDEN_TRACKED_GENERATED_FILES = [
     "Risorse/Prima Sessione In 15 Minuti.md",
     "Risorse/Primo Avvio Strumenti.md",
     "Risorse/Quality Report.md",
+    "Risorse/Regione Giocabile.md",
     "Risorse/Se Qualcosa Non Funziona.md",
     "Risorse/Setup Guidato.md",
     "Risorse/Smistamento Bozze Generate.md",

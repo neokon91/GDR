@@ -228,9 +228,6 @@ def validate_json_source_boundary(pipeline: dict[str, Any], errors: list[str]) -
     native_json = {
         "package.json",
         "package-lock.json",
-        "Dev/Examples/importers/azgaar_sample.geojson",
-        "Dev/Examples/importers/watabou_city_sample.json",
-        "Dev/Examples/importers/watabou_dungeon_sample.json",
     }
 
     for rel_path in tracked_json_files(errors):

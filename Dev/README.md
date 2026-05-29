@@ -17,8 +17,8 @@ Questa cartella contiene solo documentazione essenziale, contratti YAML/JS e too
 | `Source/Assets/` | Asset sorgente consumati dalla pipeline. |
 | `Tools/python/` | Tooling di sviluppo primario. |
 | `Tools/node-legacy/` | Check, importer e release script JS esistenti, isolati dal runtime Obsidian. |
-| `Examples/` | Input tecnici per importer e casi locali non utente. |
-| `Tests/fixtures/` | Fixture tecniche usate dai check runtime. |
+| `Examples/` | Esempi YAML locali non utente. |
+| `Tests/fixtures/` | Fixture YAML tecniche usate dai check runtime. |
 
 ## Contratto Architetturale
 

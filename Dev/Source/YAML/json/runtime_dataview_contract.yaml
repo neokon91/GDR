@@ -1,7 +1,7 @@
 id: runtime_dataview_contract
 purpose: Contratto dichiarativo delle sorgenti Dataview simulate dal runtime check.
 version: 0.1.0
-fixture: Dev/Tests/fixtures/runtime_fixture_pages.json
+fixture: Dev/Tests/fixtures/runtime_fixture_pages.yaml
 source_routes:
   - id: mondi_e_mappe
     when_all:

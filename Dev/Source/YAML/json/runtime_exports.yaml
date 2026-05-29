@@ -2,7 +2,7 @@ id: runtime_exports
 purpose: Contratto dichiarativo degli export pubblici z.engine/session_views.js e dei moduli runtime richiesti.
 version: 0.1.0
 bridge: z.engine/session_views.js
-fixture: Dev/Tests/fixtures/runtime_fixture_pages.json
+fixture: Dev/Tests/fixtures/runtime_fixture_pages.yaml
 render_contract: Dev/Source/YAML/json/runtime_render_contract.yaml
 runtime_data: z.automazioni/data/runtime/runtime_exports.json
 commonjs_runtime:

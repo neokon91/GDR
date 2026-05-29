@@ -67,6 +67,7 @@
     "check:js": "node Dev/Tools/node-legacy/check_js.js",
     "check:diff": "git diff --check",
     "clean:repo": "node Dev/Tools/node-legacy/repo_hygiene.js --fix",
+    "clean:generated": "python3 Dev/Tools/python/clean_generated_outputs.py",
     "import:map": "node Dev/Tools/node-legacy/import_map.js",
     "import:srd": "node Dev/Tools/node-legacy/import_srd.js",
     "import:azgaar": "node Dev/Tools/node-legacy/import_azgaar_geojson.js",

@@ -1,0 +1,57 @@
+id: importer_fixtures
+purpose: Fixture tecniche YAML per verificare gli importer senza tracciare JSON o GeoJSON sorgente.
+version: 0.1.0
+fixtures:
+  azgaar:
+    type: FeatureCollection
+    features:
+    - type: Feature
+      properties:
+        id: 1
+        name: Porto di Test
+        type: town
+        layer: burgs
+      geometry:
+        type: Point
+        coordinates:
+        - 12.345
+        - 45.678
+    - type: Feature
+      properties:
+        id: 2
+        name: Marca di Test
+        type: state
+        layer: states
+      geometry:
+        type: Polygon
+        coordinates:
+        - - - 10
+            - 40
+          - - 11
+            - 40
+          - - 11
+            - 41
+          - - 10
+            - 41
+          - - 10
+            - 40
+  watabou_city:
+    name: Citta di Test
+    population: 2400
+    center:
+    - 12.345
+    - 45.678
+    wards:
+    - name: Porto Vecchio
+    - name: Mercato Alto
+    buildings:
+    - id: 1
+    - id: 2
+    - id: 3
+  watabou_dungeon:
+    name: Cripta di Test
+    rooms:
+    - id: 1
+      note: Ingresso sigillato
+    - id: 2
+      note: Altare fratturato

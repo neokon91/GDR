@@ -17,5 +17,6 @@ I renderer di profili runtime e blocchi workflow stanno in Python: `python/rende
 Il JSON operativo dei workflow sta in Python: `python/render_workflow_data.py`.
 I dati SRD personaggio stanno in Python: `python/render_srd_character_data.py`.
 Il contratto qualita repo sta in Python: `python/check_repo_quality_contract.py`.
+La pulizia degli output locali generati sta in Python: `python/clean_generated_outputs.py` (`npm run clean:generated`).
 
 I check YAML dichiarativi nuovi o migrati stanno in Python, inclusi `python/check_user_path.py`, `python/check_naming_contract.py`, `python/check_validation_contract.py`, `python/check_entity_model.py`, `python/check_obsidian_plugin_bundles.py` e `python/check_plugin_usage_audit.py`.

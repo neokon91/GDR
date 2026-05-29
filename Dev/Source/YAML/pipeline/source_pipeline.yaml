@@ -197,6 +197,7 @@ steps:
       - Risorse/Prima Sessione In 15 Minuti.md
       - Risorse/Primo Avvio Strumenti.md
       - Risorse/Quality Report.md
+      - Risorse/Regione Giocabile.md
       - Risorse/Se Qualcosa Non Funziona.md
       - Risorse/Setup Guidato.md
       - Risorse/Smistamento Bozze Generate.md
@@ -920,7 +921,7 @@ steps:
       - z.automazioni/data/runtime/session_context.json
       - z.automazioni/data/runtime/generated_drafts_cockpit.json
       - z.engine/session_playability.js
-      - Dev/Tests/fixtures/runtime_fixture_pages.json
+      - Dev/Tests/fixtures/runtime_fixture_pages.yaml
       - Dev/Tools/node-legacy/check_runtime_load.js
     outputs:
       - z.automazioni/data/runtime/runtime_exports.json
