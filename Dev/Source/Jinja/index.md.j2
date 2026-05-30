@@ -1,0 +1,35 @@
+# {{ page.title }}
+
+{% if page.intro %}
+*{{ page.intro }}*
+{% endif %}
+
+> [!example] Crea
+{% for t in templates if t.category == page.category %}
+> `BUTTON[crea-{{ t.id }}]`
+{% endfor %}
+
+## Tutte le voci
+```dataview
+table without id file.link as Nome{% for c in page.columns %}, {{ c.field }} as "{{ c.label }}"{% endfor +%}
+from ""
+where categoria = "{{ page.category }}" and stato != "archiviata"
+sort {{ page.get('sort', 'file.name asc') }}
+```
+
+## 🔥 Fronti caldi
+```dataview
+table without id file.link as Nome, pressione as Pressione, prossima_mossa as "Prossima mossa"
+from ""
+where categoria = "{{ page.category }}" and pressione >= 5 and stato != "archiviata"
+sort pressione desc
+limit 8
+```
+
+## Bozze da rifinire
+```dataview
+list
+from ""
+where categoria = "{{ page.category }}" and stato = "bozza"
+sort file.mtime desc
+```

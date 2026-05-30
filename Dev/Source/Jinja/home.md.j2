@@ -1,5 +1,12 @@
 # 🏠 GDR — Home
 
+{% if pages %}
+> [!abstract] Indici
+{% for p in pages -%}
+> [[{{ p.file }}|{{ p.title }}]]
+{% endfor %}
+{% endif %}
+
 > [!example] Crea
 {% for t in templates -%}
 > `BUTTON[crea-{{ t.id }}]`
@@ -15,6 +22,24 @@ where categoria = "sessione" and attiva = true
 ```dataview
 list
 where stato = "in gioco"
+```
+
+## 🔥 Fronti caldi
+Cosa preme nel mondo adesso — ordina per pressione. Ogni riga è una mossa pronta da giocare.
+```dataview
+table without id file.link as Fronte, pressione as Pressione, prossima_mossa as "Prossima mossa", categoria as Categoria
+from ""
+where pressione >= 5 and stato != "archiviata"
+sort pressione desc
+limit 12
+```
+
+## 🤝 Trame (alleati / rivali)
+```dataview
+table without id file.link as Chi, alleati as Alleati, rivali as Rivali
+from ""
+where alleati or rivali
+sort file.name asc
 ```
 
 ## Da rifinire (bozze)

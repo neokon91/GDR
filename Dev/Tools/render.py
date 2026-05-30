@@ -53,16 +53,31 @@ def write_text(path: Path, text: str) -> None:
     path.write_text(text.rstrip() + "\n", encoding="utf-8")
 
 
+def load_pages() -> list[dict[str, Any]]:
+    """Pagine-indice (hub per dominio). Assenti = lista vuota (opzionali)."""
+    path = YAML_DIR / "pages.yaml"
+    if not path.is_file():
+        return []
+    return (yaml.safe_load(path.read_text(encoding="utf-8")) or {}).get("pages", []) or []
+
+
+def generated_note_names() -> list[str]:
+    """Note generate alla radice: Home/LEGGIMI + una per ogni pagina-indice.
+    Derivata da pages.yaml cosi' clean() le rimuove tutte senza nomi hard-coded."""
+    return [*GENERATED_NOTES, *(f"{p['file']}.md" for p in load_pages())]
+
+
 def clean() -> None:
     """Rimuove solo gli artefatti puramente generati (z.modelli, z.automazioni,
-    Home/LEGGIMI). NON tocca .obsidian (config e plugin installati dall'utente)
-    ne' i contenuti. Ripulisce anche residui legacy nel repo di sviluppo (ROOT)."""
+    z.classi, Home/LEGGIMI, pagine-indice). NON tocca .obsidian (config e plugin
+    installati dall'utente) ne' i contenuti. Pulisce anche residui legacy in ROOT."""
+    notes = generated_note_names()
     for base in (VAULT, ROOT):
         for name in GENERATED_DIRS:
             path = base / name
             if path.is_dir():
                 shutil.rmtree(path)
-        for rel in GENERATED_NOTES:
+        for rel in notes:
             path = base / rel
             if path.is_file():
                 path.unlink()
@@ -275,10 +290,18 @@ def build() -> dict[str, str]:
         write_text(VAULT / "z.classi" / f"{category}.md", fileclass_note(core, category))
     merge_plugin_config(obsidian, "metadata-menu", {"classFilesPath": "z.classi/"})
 
+    pages = load_pages()
     for name, jinja_name in (("Home.md", "home.md.j2"), ("LEGGIMI.md", "leggimi.md.j2")):
-        text = env.get_template(jinja_name).render(core=core, plugins=plugins, templates=templates)
+        text = env.get_template(jinja_name).render(core=core, plugins=plugins, templates=templates, pages=pages)
         write_text(VAULT / name, text)
         rendered[name] = text
+
+    # Pagine-indice per dominio (hub navigabili), una per voce di pages.yaml.
+    index_template = env.get_template("index.md.j2")
+    for page in pages:
+        text = index_template.render(core=core, plugins=plugins, templates=templates, page=page)
+        write_text(VAULT / f"{page['file']}.md", text)
+        rendered[f"{page['file']}.md"] = text
 
     # Scaffolding delle cartelle contenuti (idempotente): mostra la struttura
     # senza mai sovrascrivere note esistenti.
@@ -361,6 +384,13 @@ def check() -> int:
                 errors.append(f"relazioni[{source_cat}].{rel.get('field')}: target '{target}' non dichiarato")
             elif (categories.get(target) or {}).get("folder", target) not in folders:
                 errors.append(f"relazioni[{source_cat}].{rel.get('field')}: cartella di '{target}' non in folders")
+
+    # Pagine-indice: categoria dichiarata e template index disponibile.
+    if load_pages() and not (JINJA_DIR / "index.md.j2").exists():
+        errors.append("index.md.j2 mancante (richiesto da pages.yaml)")
+    for page in load_pages():
+        if page.get("category") not in categories:
+            errors.append(f"page {page.get('id')}: categoria non dichiarata ({page.get('category')})")
 
     if errors:
         for error in errors:

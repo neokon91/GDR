@@ -1,0 +1,60 @@
+id: pages
+version: 0.1.0
+purpose: >
+  Pagine-indice per dominio (hub navigabili con dashboard su misura). Generate
+  da render.py via Jinja (index.md.j2) nella radice del vault, accanto a Home.
+  'file' = nome file (senza .md); 'category' = categoria mostrata; 'columns' =
+  colonne Dataview (field del frontmatter, anche relazioni); 'sort' = clausola
+  Dataview (default "file.name asc"). I bottoni "Crea" della categoria sono
+  inclusi automaticamente.
+pages:
+  - id: atlante
+    file: Atlante
+    title: "🗺️ Atlante"
+    category: luogo
+    intro: Tutti i luoghi del mondo, dal più caldo al più quieto.
+    sort: "pressione desc"
+    columns:
+      - { field: tipo,      label: Tipo }
+      - { field: regione,   label: Regione }
+      - { field: pressione, label: Pressione }
+  - id: bestiario
+    file: Bestiario
+    title: "🐾 Bestiario"
+    category: creatura
+    intro: Le creature del mondo. Apri una scheda per lo statblock 5e.
+    sort: "tipo asc"
+    columns:
+      - { field: tipo,      label: Tipo }
+      - { field: mondo,     label: Mondo }
+      - { field: pressione, label: Pressione }
+  - id: fazioni
+    file: Fazioni
+    title: "⚔️ Fazioni"
+    category: fazione
+    intro: Chi muove i fili — sede, alleanze, pressione.
+    sort: "pressione desc"
+    columns:
+      - { field: tipo,      label: Tipo }
+      - { field: sede,      label: Sede }
+      - { field: pressione, label: Pressione }
+  - id: cast
+    file: Cast
+    title: "🎭 Cast"
+    category: personaggio
+    intro: PG e PNG, con affiliazione e base.
+    sort: "file.name asc"
+    columns:
+      - { field: tipo,      label: Ruolo }
+      - { field: fazione,   label: Affiliazione }
+      - { field: luogo,     label: Base }
+      - { field: pressione, label: Pressione }
+  - id: cronologia
+    file: Cronologia
+    title: "📜 Cronologia"
+    category: evento
+    intro: Gli eventi del mondo in ordine di tempo.
+    sort: "quando asc"
+    columns:
+      - { field: quando,    label: Quando }
+      - { field: mondo,     label: Mondo }
