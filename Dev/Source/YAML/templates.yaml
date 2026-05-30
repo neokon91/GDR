@@ -1,6 +1,8 @@
 id: templates
 version: 0.1.0
 purpose: Template Obsidian generati da Jinja e agganciati a JS Templater.
+# primary: true -> bottone nella barra "Crea" principale di Home (i fondamentali).
+# Gli altri restano creabili dalla sezione "Altri tipi" e dalle pagine-indice.
 templates:
   - id: mondo
     title: Mondo
@@ -8,6 +10,7 @@ templates:
     default_type: mondo
     target: z.modelli/Mondo.md
     jinja: entity.md.j2
+    primary: true
   - id: cosmologia
     title: Cosmologia
     category: cosmologia
@@ -20,6 +23,7 @@ templates:
     default_type: sito di interesse
     target: z.modelli/Luogo.md
     jinja: entity.md.j2
+    primary: true
   - id: cultura
     title: Cultura
     category: cultura
@@ -32,12 +36,14 @@ templates:
     default_type: gilda
     target: z.modelli/Fazione.md
     jinja: entity.md.j2
+    primary: true
   - id: evento
     title: Evento
     category: evento
     default_type: evento storico
     target: z.modelli/Evento.md
     jinja: event.md.j2
+    primary: true
   - id: lingua
     title: Lingua
     category: lingua
@@ -50,66 +56,110 @@ templates:
     default_type: pg
     target: z.modelli/PG.md
     jinja: character.md.j2
+    primary: true
   - id: png
     title: PNG
     category: personaggio
     default_type: png
     target: z.modelli/PNG.md
     jinja: character.md.j2
+    primary: true
   - id: creatura
     title: Creatura
     category: creatura
     default_type: bestia
     target: z.modelli/Creatura.md
     jinja: creature.md.j2
+    primary: true
   - id: incontro
     title: Incontro
     category: incontro
     default_type: incontro
     target: z.modelli/Incontro.md
     jinja: encounter.md.j2
-  - id: trappola
-    title: Trappola
-    category: incontro
-    default_type: trappola
-    target: z.modelli/Trappola.md
-    jinja: encounter.md.j2
-  - id: pericolo_ambientale
-    title: Pericolo Ambientale
-    category: incontro
-    default_type: pericolo ambientale
-    target: z.modelli/Pericolo Ambientale.md
-    jinja: encounter.md.j2
+    primary: true
   - id: oggetto
     title: Oggetto
     category: oggetto
     default_type: strumento
     target: z.modelli/Oggetto.md
-    jinja: entity.md.j2
+    jinja: reference.md.j2
+    primary: true
   - id: oggetto_magico
     title: Oggetto Magico
     category: oggetto
     default_type: oggetto magico
     target: z.modelli/Oggetto Magico.md
-    jinja: entity.md.j2
+    jinja: reference.md.j2
+    primary: true
   - id: incantesimo
     title: Incantesimo
-    category: regola
-    default_type: incantesimo
+    category: incantesimo
+    default_type: evocazione
     target: z.modelli/Incantesimo.md
-    jinja: entity.md.j2
+    jinja: spell.md.j2
+    primary: true
+  - id: insidia
+    title: Insidia
+    category: insidia
+    default_type: trappola
+    target: z.modelli/Insidia.md
+    jinja: hazard.md.j2
+  - id: classe
+    title: Classe
+    category: classe
+    default_type: marziale
+    target: z.modelli/Classe.md
+    jinja: class.md.j2
+  - id: sottoclasse
+    title: Sottoclasse
+    category: sottoclasse
+    default_type: sottoclasse
+    target: z.modelli/Sottoclasse.md
+    jinja: subclass.md.j2
+  - id: specie
+    title: Specie
+    category: specie
+    default_type: comune
+    target: z.modelli/Specie.md
+    jinja: reference.md.j2
+  - id: background
+    title: Background
+    category: background
+    default_type: background
+    target: z.modelli/Background.md
+    jinja: reference.md.j2
+  - id: talento
+    title: Talento
+    category: talento
+    default_type: origine
+    target: z.modelli/Talento.md
+    jinja: reference.md.j2
+  - id: divinita
+    title: Divinità
+    category: divinita
+    default_type: divinità maggiore
+    target: z.modelli/Divinita.md
+    jinja: reference.md.j2
+  - id: bastione
+    title: Bastione
+    category: bastione
+    default_type: bastione
+    target: z.modelli/Bastione.md
+    jinja: reference.md.j2
   - id: regola
     title: Regola
     category: regola
-    default_type: regola
+    default_type: regola della casa
     target: z.modelli/Regola.md
-    jinja: entity.md.j2
+    jinja: reference.md.j2
   - id: sessione
     title: Sessione
     category: sessione
     default_type: sessione
     target: z.modelli/Sessione.md
     jinja: session.md.j2
+    primary: true
   - id: nota_rapida
     title: Nota Rapida
     category: nota
@@ -123,3 +173,6 @@ actions:
   - id: archivia
     title: Archivia
     target: z.modelli/azioni/Archivia.md
+  - id: collega
+    title: Collega
+    target: z.modelli/azioni/Collega.md

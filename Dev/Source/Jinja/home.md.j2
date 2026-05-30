@@ -8,7 +8,12 @@
 {% endif %}
 
 > [!example] Crea
-{% for t in templates -%}
+{% for t in templates if t.get('primary') -%}
+> `BUTTON[crea-{{ t.id }}]`
+{% endfor %}
+
+> [!example]- Altri tipi
+{% for t in templates if not t.get('primary') -%}
 > `BUTTON[crea-{{ t.id }}]`
 {% endfor %}
 
@@ -40,6 +45,14 @@ table without id file.link as Chi, alleati as Alleati, rivali as Rivali
 from ""
 where alleati or rivali
 sort file.name asc
+```
+
+## ✅ Da fare
+Scrivi un task in qualunque nota con `- [ ] ...`: comparirà qui.
+```tasks
+not done
+sort by priority
+limit 15
 ```
 
 ## Da rifinire (bozze)

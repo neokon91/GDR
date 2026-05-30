@@ -132,8 +132,14 @@ async function runWizard(tp, template, core) {
   const categorySpec = core.categories[category] ?? {};
   const wizard = (core.creation ?? {})[category] ?? {};
 
-  // Il nome è sempre obbligatorio: X qui annulla la creazione.
-  const name = String(await tp.system.prompt(`Nome ${template.title}`, "", true)).trim();
+  // Il nome è sempre obbligatorio e NON vuoto: X (Escape) o invio vuoto ripetuto
+  // annulla. Senza questo guard un nome vuoto creava "<cartella>/.md".
+  let name = "";
+  for (let attempt = 0; attempt < 3 && !name; attempt++) {
+    const label = attempt ? `Nome ${template.title} — obbligatorio` : `Nome ${template.title}`;
+    name = String(await tp.system.prompt(label, "", true)).trim();
+  }
+  if (!name) throw new Error("Nome vuoto");
 
   const questions = [...(wizard.fields ?? []), ...(wizard.body ?? [])];
   const captured = {};

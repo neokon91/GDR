@@ -290,6 +290,32 @@ def build() -> dict[str, str]:
         write_text(VAULT / "z.classi" / f"{category}.md", fileclass_note(core, category))
     merge_plugin_config(obsidian, "metadata-menu", {"classFilesPath": "z.classi/"})
 
+    # Iconize: icona (emoji) per cartella di categoria. Chiavi top-level
+    # percorso->emoji nel data.json (emojiStyle native); 'settings' preservato.
+    folders = core.get("folders", {})
+    icons = {folders[key]: emoji for key, emoji in (plugins.get("folder_icons") or {}).items() if key in folders}
+    if icons:
+        merge_plugin_config(obsidian, "obsidian-icon-folder", icons)
+
+    # Callout Manager: callout GDR custom (id/color/icon) in callouts.custom,
+    # preservando settings/detection. Degradano a callout standard se assenti.
+    cm_dir = obsidian / "plugins" / "callout-manager"
+    if cm_dir.is_dir() and plugins.get("callouts"):
+        cm = read_json(cm_dir / "data.json")
+        cm = cm if isinstance(cm, dict) else {}
+        callouts_cfg = cm.get("callouts") if isinstance(cm.get("callouts"), dict) else {}
+        custom = callouts_cfg.get("custom") if isinstance(callouts_cfg.get("custom"), list) else []
+        known = {c.get("id") for c in custom if isinstance(c, dict)}
+        changed = False
+        for callout in plugins["callouts"]:
+            if callout["id"] not in known:
+                custom.append({"id": callout["id"], "color": callout["color"], "icon": callout["icon"]})
+                changed = True
+        if changed:
+            callouts_cfg["custom"] = custom
+            cm["callouts"] = callouts_cfg
+            write_json(cm_dir / "data.json", cm)
+
     pages = load_pages()
     for name, jinja_name in (("Home.md", "home.md.j2"), ("LEGGIMI.md", "leggimi.md.j2")):
         text = env.get_template(jinja_name).render(core=core, plugins=plugins, templates=templates, pages=pages)
@@ -302,6 +328,22 @@ def build() -> dict[str, str]:
         text = index_template.render(core=core, plugins=plugins, templates=templates, page=page)
         write_text(VAULT / f"{page['file']}.md", text)
         rendered[f"{page['file']}.md"] = text
+
+    # Bookmarks (core): le poche pagine di riferimento a un clic. Non distruttivo:
+    # aggiunge solo le voci mancanti, preservando i bookmark dell'utente.
+    bookmark_targets = [("Home.md", "🏠 Home"), *((f"{p['file']}.md", p["title"]) for p in pages)]
+    bookmarks = read_json(obsidian / "bookmarks.json")
+    bookmarks = bookmarks if isinstance(bookmarks, dict) else {}
+    items = bookmarks.get("items") if isinstance(bookmarks.get("items"), list) else []
+    known = {it.get("path") for it in items if isinstance(it, dict)}
+    added = False
+    for path, title in bookmark_targets:
+        if path not in known:
+            items.append({"type": "file", "path": path, "title": title})
+            added = True
+    if added:
+        bookmarks["items"] = items
+        write_json(obsidian / "bookmarks.json", bookmarks)
 
     # Scaffolding delle cartelle contenuti (idempotente): mostra la struttura
     # senza mai sovrascrivere note esistenti.

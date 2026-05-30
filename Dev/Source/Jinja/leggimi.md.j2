@@ -25,13 +25,51 @@ Apri *Impostazioni → Plugin della comunità* e installa/abilita:
   applicano già il template alla creazione.
 
 ## 3. Come si usa
-- Apri **Home.md**: bottoni `Crea` per ogni tipo di nota + cruscotti Dataview.
+- Apri **Home.md**: bottoni `Crea` (i fondamentali; gli altri sotto *Altri tipi*) +
+  cruscotti, e i collegamenti agli **Indici** (Atlante, Bestiario, Fazioni, Cast, Cronologia).
+- Le pagine di riferimento (Home + Indici) sono già nei **Bookmarks** (icona segnalibro a sinistra).
 - Ogni nota lore ha il tab **Al tavolo** (uso al tavolo, gancio, pressione): è la
   superficie giocabile, il cuore del vault.
 - Apri **Mondi/Creature/Goblin**: esempio di statblock 5.5e (entra nel bestiario).
 - Apri **Mondi/Incontri/Imboscata sulla Strada**: il tab *Combattimento* usa il blocco
   `encounter` che raggruppa le creature per nome dal bestiario.
 
-## 4. Layout statblock
+## 4. Creare e collegare
+- **Crea** una nota dai bottoni in Home (o nell'indice di dominio): un wizard chiede
+  l'essenziale; il resto lo rifinisci nei tab con i campi `INPUT`/slider.
+- **Collega** due note quando vuoi (anche dopo): nel tab *Collegamenti* premi
+  **`Collega`**, scegli il tipo di relazione e la nota — scrive il link tipizzato e
+  quello inverso. Il pannello *Vista* mostra anche **"Citato da"** (chi ti referenzia).
+- Preferisci il pannello **Proprietà** di Obsidian? I campi sono tipizzati (Metadata
+  Menu): `stato`/`tipo` sono menu a tendina, le relazioni sono link.
+
+## 5. Calendario in-game (Calendarium) — opzionale
+Il calendario è specifico del tuo mondo, quindi va creato una volta a mano:
+*Impostazioni → Calendarium → New Calendar* (parti da un preset o creane uno).
+Poi gli **Eventi** (campo `quando`) e le **Sessioni** (`data`) possono essere mostrati
+sul calendario aggiungendo `fc-date`. Intanto la pagina **Cronologia** ordina già gli
+eventi per `quando`, senza configurazione.
+
+## 6. Mappe (Zoom Map)
+Per mappe grandi pannabili/zoomabili:
+1. Metti l'immagine nel vault (es. una cartella `Mappe/` o tra gli allegati).
+2. Nella nota, aggiungi un blocco:
+   ````
+   ```zoommap
+   imageBases:
+     - path: Mappe/continente.png
+   ```
+   ````
+**Dove agganciare cosa:** la mappa del continente/regno va sul **Mondo**; la mappa
+locale (città, regione) sul **Luogo** di tipo *regione/insediamento*; la pianta di un
+dungeon sul **Luogo** di tipo *dungeon/struttura*. Collega poi i punti d'interesse con
+i normali `[[link]]` alle note Luogo.
+
+## 7. Callout GDR (Callout Manager)
+I callout **Uso al tavolo**, **Gancio** e **Segreto** hanno colore/icona propri
+(iniettati in Callout Manager). Se preferisci aspetti diversi: *Impostazioni →
+Callout Manager*. Senza il plugin restano callout normali, leggibili lo stesso.
+
+## 8. Layout statblock
 Il blocco statblock usa il layout `{{ core.statblock.layout }}`. Per lo stile 2024/5.5e,
 importa un layout in Fantasy Statblocks e aggiorna `statblock.layout` in `Dev/Source/YAML/core.yaml`.

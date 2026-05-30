@@ -96,6 +96,18 @@
 {% endif %}
 {%- endmacro %}
 
+{# Scheda di sistema: campi STRUTTURATI per categoria (core.scheda) come callout
+   di dati Meta Bind. Controparte "regole 5.5e" di tavolo(). Vuoto = niente callout. #}
+{% macro scheda(category) -%}
+{% set campi = core.get('scheda', {}).get(category, []) %}
+{% if campi %}
+> [!abstract] Scheda
+{% for fid in campi %}
+> {{ field(fid) }}
+{% endfor %}
+{% endif %}
+{%- endmacro %}
+
 {# Relazioni tipizzate: link semantici scoped alla cartella della categoria
    target. Single source: core.relazioni[categoria]. Vuoto = niente callout. #}
 {% macro relazioni(category) -%}
@@ -113,7 +125,8 @@
 {% endif %}
 {%- endmacro %}
 
-{# Collegamenti (ancore della nota). with_mondo=false per la categoria mondo. #}
+{# Collegamenti (ancore della nota) + azione Collega (link tipizzato e reciproco
+   post-creazione). with_mondo=false per la categoria mondo. #}
 {% macro collegamenti(with_mondo=true, with_sessioni=true) -%}
 > [!example] Collegamenti
 {% if with_mondo %}
@@ -125,6 +138,9 @@
 >
 > {{ field('sessioni') }}
 {% endif %}
+
+> [!tip] Collega
+> Aggiungi una relazione (anche dopo la creazione): `BUTTON[collega-nota]`
 {%- endmacro %}
 
 {# Scheda statistiche PG (5e): caratteristiche editabili + modificatori calcolati.

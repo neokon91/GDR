@@ -1,0 +1,24 @@
+{% import '_macros.j2' as m with context -%}
+<% await tp.user.create_entity(tp, "{{ template.id }}") %>
+# `=this.nome`
+
+{{ m.identita_card(template) }}
+
+````tabs
+--- Insidia
+
+{{ m.scheda(template.category) }}
+--- Scena
+
+{{ m.wizard_body(template.category) }}
+> [!tip]- Tiri
+> `dice: 1d20`
+
+--- Collegamenti
+
+{{ m.relazioni(template.category) }}
+{{ m.collegamenti(with_sessioni=false) }}
+--- Vista
+
+{{ m.vista() }}
+````

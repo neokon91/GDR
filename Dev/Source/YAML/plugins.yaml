@@ -42,11 +42,53 @@ metabind_inputs:
   connessioni: INPUT[inlineListSuggester(optionQuery("Mondi"), useLinks(partial), allowOther)]
   sessioni: INPUT[inlineListSuggester(optionQuery("Mondi/Sessioni"), useLinks(partial), allowOther)]
   pressione: INPUT[slider(minValue(0), maxValue(10), stepSize(1), addLabels)]
+  rarita: INPUT[inlineSelect(option(comune), option(non comune), option(raro), option(molto raro), option(leggendario), option(artefatto))]
+  tier: INPUT[inlineSelect(option(1-4), option(5-10), option(11-16), option(17-20))]
+  minaccia: INPUT[inlineSelect(option(moderata), option(pericolosa), option(letale))]
+  dado_vita: INPUT[inlineSelect(option(d6), option(d8), option(d10), option(d12))]
+  incantesimi: INPUT[inlineSelect(option(nessuno), option(metà), option(piena), option(patto))]
+  taglia: INPUT[inlineSelect(option(minuscola), option(piccola), option(media), option(grande), option(enorme), option(mastodontica))]
   testo: INPUT[text]
   testo_area: INPUT[textArea]
+# Icone cartella (Iconize): chiave = chiave di core.folders, valore = emoji.
+# render.py le mappa sul percorso reale e le inietta in obsidian-icon-folder.
+folder_icons:
+  mondo: "🌍"
+  cosmologia: "🌌"
+  luogo: "🗺️"
+  cultura: "🎏"
+  fazione: "⚔️"
+  evento: "📜"
+  lingua: "🗣️"
+  personaggio: "🎭"
+  creatura: "🐾"
+  incontro: "🎲"
+  oggetto: "🎒"
+  incantesimo: "✨"
+  regola: "📕"
+  sessione: "📅"
+  insidia: "⚠️"
+  classe: "🛡️"
+  sottoclasse: "🎓"
+  specie: "🧬"
+  background: "📖"
+  talento: "⭐"
+  divinita: "☀️"
+  bastione: "🏰"
+  inbox: "📥"
+# Callout GDR custom (Callout Manager): identità visiva delle note. render.py li
+# inietta in callout-manager (callouts.custom). color = "R, G, B"; icon = id lucide.
+# Degradano a callout standard se il plugin non è attivo.
+callouts:
+  - { id: tavolo,  color: "201, 64, 64",   icon: lucide-swords }
+  - { id: gancio,  color: "191, 130, 42",  icon: lucide-anchor }
+  - { id: segreto, color: "138, 74, 173",  icon: lucide-eye-off }
 # Solo bottoni-azione: eseguono un file Templater su z.modelli/azioni/.
 # I bottoni "Crea <Titolo>" sono generati da templates.yaml (id: crea-<id>).
 buttons:
+  - id: collega-nota
+    label: Collega
+    action: collega
   - id: marca-canonico
     label: Marca Canonico
     action: marca_canonico

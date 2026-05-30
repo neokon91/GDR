@@ -13,8 +13,18 @@ folders:
   creatura: Mondi/Creature
   incontro: Mondi/Incontri
   oggetto: Mondi/Oggetti
+  incantesimo: Mondi/Incantesimi
   regola: Mondi/Regole
   sessione: Mondi/Sessioni
+  # Sistema 5.5e — riferimento e homebrew
+  insidia: Mondi/Insidie
+  classe: Mondi/Classi
+  sottoclasse: Mondi/Sottoclassi
+  specie: Mondi/Specie
+  background: Mondi/Background
+  talento: Mondi/Talenti
+  divinita: Mondi/Divinita
+  bastione: Mondi/Bastioni
   inbox: Inbox
 # Registro campi: unica fonte per label e widget dei campi editabili nelle note.
 # I template Jinja li emettono via la macro field('<id>') (vedi Jinja/_macros.j2).
@@ -35,14 +45,61 @@ fields:
   apertura:       { label: Apertura,             widget: text }
   scena_corrente: { label: Scena corrente,       widget: text }
   quando:         { label: Quando,               widget: text }
+  # Sistema 5.5e — oggetti magici
+  rarita:         { label: Rarità,               widget: rarita }
+  sintonia:       { label: Sintonia,             widget: text }
+  # Sistema 5.5e — incantesimi
+  livello:        { label: Livello,              widget: number }
+  tempo_lancio:   { label: Tempo di lancio,      widget: text }
+  gittata:        { label: Gittata,              widget: text }
+  componenti:     { label: Componenti,           widget: text }
+  durata:         { label: Durata,               widget: text }
+  classi:         { label: Classi,               widget: text }
+  # Sistema 5.5e — insidie (trappole/pericoli)
+  tier:           { label: Livello di gioco,     widget: tier }
+  minaccia:       { label: Minaccia,             widget: minaccia }
+  prova:          { label: Prova,                widget: text }
+  danno:          { label: Danno / Effetto,      widget: text }
+  # Sistema 5.5e — classe homebrew
+  dado_vita:      { label: Dado vita,            widget: dado_vita }
+  car_primaria:   { label: Caratteristica primaria, widget: text }
+  ts_competenze:  { label: TS competenti,        widget: text }
+  incantesimi:    { label: Incantesimi,          widget: incantesimi }
+  # Sistema 5.5e — specie
+  taglia:         { label: Taglia,               widget: taglia }
+  velocita:       { label: Velocità,             widget: text }
+  tipo_creatura:  { label: Tipo di creatura,     widget: text }
+  lignaggio:      { label: Lignaggio,            widget: text }
+  # Sistema 5.5e — background / talento / divinità
+  car_background: { label: Caratteristiche,      widget: text }
+  strumento:      { label: Competenza in strumenti, widget: text }
+  talento_origine: { label: "Talento d'origine", widget: text }
+  prerequisito:   { label: Prerequisito,         widget: text }
+  ripetibile:     { label: Ripetibile,           widget: text }
+  dominio:        { label: Dominio,              widget: text }
+  allineamento:   { label: Allineamento,         widget: text }
+  simbolo:        { label: Simbolo,              widget: text }
 
 # Superficie giocabile (IL differenziatore): ogni nota lore la espone, sempre.
 # Single source renderizzato dalla macro tavolo(); i campi sono in core.fields.
 # 'pressione' e' speciale: la macro aggiunge l'etichetta calcolata e prossima_mossa.
 tavolo:
-  - { field: uso_al_tavolo, callout: danger,  title: Uso al tavolo }
-  - { field: gancio,        callout: quote,   title: Gancio, fold: true }
+  - { field: uso_al_tavolo, callout: tavolo,  title: Uso al tavolo }
+  - { field: gancio,        callout: gancio,  title: Gancio, fold: true }
   - { field: pressione,     callout: warning, title: Pressione }
+
+# Scheda di sistema: campi STRUTTURATI per categoria, mostrati dalla macro
+# scheda(categoria) come callout di dati (Meta Bind). Single source; i campi sono
+# in core.fields. È la controparte "regole 5.5e" della superficie giocabile.
+scheda:
+  oggetto:     [rarita, sintonia]
+  incantesimo: [livello, tempo_lancio, gittata, componenti, durata, classi]
+  insidia:     [tier, minaccia, prova, danno]
+  classe:      [dado_vita, car_primaria, ts_competenze, incantesimi]
+  specie:      [taglia, velocita, tipo_creatura, lignaggio]
+  background:  [car_background, strumento, talento_origine]
+  talento:     [prerequisito, ripetibile]
+  divinita:    [dominio, allineamento, simbolo]
 
 # Statblock (Fantasy Statblocks): layout usato dal blocco ```statblock```.
 # Sostituisci col nome del layout installato (es. un layout 2024/5.5e).
@@ -69,8 +126,6 @@ categories:
     subtypes:
       - legge cosmica
       - piano o aldila
-      - divinita
-      - pantheon
   luogo:
     folder: luogo
     subtypes:
@@ -134,8 +189,8 @@ categories:
     folder: incontro
     subtypes:
       - incontro
-      - trappola
-      - pericolo ambientale
+      - agguato
+      - inseguimento
   oggetto:
     folder: oggetto
     subtypes:
@@ -148,16 +203,71 @@ categories:
       - veleno
       - tesoro
       - veicolo o cavalcatura
+  incantesimo:
+    folder: incantesimo
+    subtypes:
+      - abiurazione
+      - ammaliamento
+      - divinazione
+      - evocazione
+      - illusione
+      - invocazione
+      - necromanzia
+      - trasmutazione
   regola:
     folder: regola
     subtypes:
-      - incantesimo
-      - regola
-      - bastione
+      - regola della casa
+      - regola variante
   sessione:
     folder: sessione
     subtypes:
       - sessione
+  insidia:
+    folder: insidia
+    subtypes:
+      - trappola
+      - pericolo naturale
+      - effetto ambientale
+  classe:
+    folder: classe
+    subtypes:
+      - marziale
+      - incantatore
+      - mezzo incantatore
+      - esperto
+  sottoclasse:
+    folder: sottoclasse
+    subtypes:
+      - sottoclasse
+  specie:
+    folder: specie
+    subtypes:
+      - comune
+      - esotica
+      - mostruosa
+  background:
+    folder: background
+    subtypes:
+      - background
+  talento:
+    folder: talento
+    subtypes:
+      - origine
+      - generale
+      - stile di combattimento
+      - epico
+  divinita:
+    folder: divinita
+    subtypes:
+      - divinità maggiore
+      - divinità minore
+      - semidio
+      - pantheon
+  bastione:
+    folder: bastione
+    subtypes:
+      - bastione
   nota:
     folder: inbox
     subtypes:
@@ -242,6 +352,8 @@ relazioni:
   oggetto:
     - { field: proprietario,   label: Proprietario,   category: personaggio }
     - { field: dove,           label: Dove si trova,  category: luogo }
+  sottoclasse:
+    - { field: classe,         label: Classe,         category: classe }
 
 # Wizard di creazione per categoria (letto da create_entity.js).
 # Ogni domanda: { field, prompt, ... }
@@ -264,7 +376,7 @@ creation:
       - { field: aspetto, prompt: "Tratto distintivo: voce, aspetto, manierismo", heading: "Aspetto" }
       - { field: desiderio, prompt: "Cosa vuole davvero", heading: "Vuole" }
       - { field: paura, prompt: "Cosa teme o evita", heading: "Teme" }
-      - { field: segreto, prompt: "Segreto (non mostrare ai giocatori)", callout: warning, title: "Segreto", fold: true }
+      - { field: segreto, prompt: "Segreto (non mostrare ai giocatori)", callout: segreto, title: "Segreto", fold: true }
   luogo:
     fields:
       - { field: tipo, prompt: "Tipo di luogo", from: subtypes, required: true }
@@ -273,7 +385,7 @@ creation:
       - { field: funzione, prompt: "Cos'e' / a cosa serve", heading: "Funzione" }
       - { field: controllo, prompt: "Chi o cosa lo controlla", heading: "Controllo" }
       - { field: tensione, prompt: "Tensione o pericolo presente", heading: "Tensione" }
-      - { field: segreto, prompt: "Segreto del luogo", callout: warning, title: "Segreto", fold: true }
+      - { field: segreto, prompt: "Segreto del luogo", callout: segreto, title: "Segreto", fold: true }
   fazione:
     fields:
       - { field: tipo, prompt: "Tipo di fazione", from: subtypes, required: true }
@@ -283,7 +395,7 @@ creation:
       - { field: metodo, prompt: "Come opera (metodi, stile)", heading: "Metodi" }
       - { field: risorsa, prompt: "Risorsa o potere chiave", heading: "Risorse" }
       - { field: tensione, prompt: "Conflitto o rivalita'", heading: "Tensione" }
-      - { field: segreto, prompt: "Segreto della fazione", callout: warning, title: "Segreto", fold: true }
+      - { field: segreto, prompt: "Segreto della fazione", callout: segreto, title: "Segreto", fold: true }
   incontro:
     fields:
       - { field: tipo, prompt: "Tipo di incontro", from: subtypes, required: true }
@@ -314,7 +426,7 @@ creation:
     body:
       - { field: natura, prompt: "Cos'e' / come si manifesta", heading: "Natura" }
       - { field: influenza, prompt: "Come tocca il mondo mortale", heading: "Influenza" }
-      - { field: segreto, prompt: "Verita' nascosta", callout: warning, title: "Segreto", fold: true }
+      - { field: segreto, prompt: "Verita' nascosta", callout: segreto, title: "Segreto", fold: true }
   cultura:
     fields:
       - { field: tipo, prompt: "Tipo di cultura", from: subtypes, required: true }
@@ -334,11 +446,20 @@ creation:
   oggetto:
     fields:
       - { field: tipo, prompt: "Tipo di oggetto", from: subtypes, required: true }
-      - { field: mondo, prompt: "Mondo", from: notes, category: mondo, link: true, required: true }
+      - { field: mondo, prompt: "Mondo (opzionale)", from: notes, category: mondo, link: true, optional: true }
+      - { field: rarita, prompt: "Rarità (se magico)", from: list, options: [comune, non comune, raro, molto raro, leggendario, artefatto], optional: true }
+      - { field: sintonia, prompt: "Sintonia richiesta? (es. sì, da un druido)", optional: true }
     body:
       - { field: descrizione_oggetto, prompt: "Aspetto e fattura", heading: "Aspetto" }
       - { field: effetto, prompt: "Cosa fa: regole/effetto al tavolo", heading: "Effetto" }
-      - { field: provenienza, prompt: "Rarita', costo, come si ottiene", heading: "Provenienza" }
+      - { field: provenienza, prompt: "Costo, come si ottiene", heading: "Provenienza" }
+  incantesimo:
+    fields:
+      - { field: tipo, prompt: "Scuola di magia", from: subtypes, required: true }
+      - { field: mondo, prompt: "Mondo (opzionale)", from: notes, category: mondo, link: true, optional: true }
+    body:
+      - { field: effetto, prompt: "Effetto dell'incantesimo", heading: "Effetto" }
+      - { field: a_livello_superiore, prompt: "Ai livelli superiori", heading: "Ai livelli superiori" }
   regola:
     fields:
       - { field: tipo, prompt: "Tipo di regola", from: subtypes, required: true }
@@ -354,6 +475,57 @@ creation:
     body:
       - { field: ecologia, prompt: "Ecologia: dove vive, abitudini", heading: "Ecologia" }
       - { field: tattiche, prompt: "Tattiche in combattimento", heading: "Tattiche" }
+  # --- Sistema 5.5e: i campi strutturati (scheda) si compilano nei tab; il
+  #     wizard cattura tipo/relazioni e il corpo discorsivo. ---
+  insidia:
+    fields:
+      - { field: tipo, prompt: "Tipo di insidia", from: subtypes, required: true }
+      - { field: mondo, prompt: "Mondo (opzionale)", from: notes, category: mondo, link: true, optional: true }
+    body:
+      - { field: innesco, prompt: "Innesco: cosa la attiva", heading: "Innesco" }
+      - { field: effetto, prompt: "Effetto: cosa succede (TxC/CD + danno)", heading: "Effetto" }
+      - { field: contromisure, prompt: "Contromisure: individuare / disinnescare", heading: "Contromisure" }
+  classe:
+    fields:
+      - { field: tipo, prompt: "Tipo di classe", from: subtypes, required: true }
+    body:
+      - { field: descrizione, prompt: "Concept della classe", heading: "Concept" }
+      - { field: progressione, prompt: "Privilegi salienti per livello", heading: "Progressione" }
+  sottoclasse:
+    fields:
+      - { field: classe, prompt: "Classe di appartenenza", from: notes, category: classe, link: true, required: true }
+    body:
+      - { field: privilegi, prompt: "Privilegi (livelli 3/6/10/14)", heading: "Privilegi" }
+  specie:
+    fields:
+      - { field: tipo, prompt: "Tipo di specie", from: subtypes, required: true }
+    body:
+      - { field: tratti, prompt: "Tratti di specie", heading: "Tratti" }
+  background:
+    fields:
+      - { field: tipo, prompt: "Tipo", from: subtypes, required: true }
+    body:
+      - { field: descrizione, prompt: "Chi era prima dell'avventura", heading: "Descrizione" }
+      - { field: equipaggiamento, prompt: "Equipaggiamento iniziale", heading: "Equipaggiamento" }
+  talento:
+    fields:
+      - { field: tipo, prompt: "Categoria del talento", from: subtypes, required: true }
+    body:
+      - { field: benefici, prompt: "Benefici del talento", heading: "Benefici" }
+  divinita:
+    fields:
+      - { field: tipo, prompt: "Rango divino", from: subtypes, required: true }
+      - { field: mondo, prompt: "Mondo (opzionale)", from: notes, category: mondo, link: true, optional: true }
+    body:
+      - { field: dogmi, prompt: "Dogmi e aspettative", heading: "Dogmi" }
+      - { field: culto, prompt: "Culto: fedeli, riti, templi", heading: "Culto" }
+  bastione:
+    fields:
+      - { field: tipo, prompt: "Tipo", from: subtypes, required: true }
+      - { field: mondo, prompt: "Mondo (opzionale)", from: notes, category: mondo, link: true, optional: true }
+    body:
+      - { field: descrizione, prompt: "Cos'e' il bastione", heading: "Descrizione" }
+      - { field: strutture, prompt: "Strutture speciali e ordini di bastione", heading: "Strutture" }
   # La sessione ha un layout proprio (session.md.j2): niente 'body' wizard
   # (duplicherebbe i campi gia' renderizzati). Questi prompt facoltativi
   # pre-compilano la preparazione; i campi restano editabili nel template.

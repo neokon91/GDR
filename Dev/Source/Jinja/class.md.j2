@@ -1,0 +1,36 @@
+{% import '_macros.j2' as m with context -%}
+<% await tp.user.create_entity(tp, "{{ template.id }}") %>
+# `=this.nome`
+
+{{ m.identita_card(template) }}
+
+````tabs
+--- Classe
+
+{{ m.scheda(template.category) }}
+--- Progressione
+
+{{ m.wizard_body(template.category) }}
+> [!example]- Tabella dei livelli
+> | Liv | Comp. | Privilegi |
+> |----|----|----|
+{% for n in range(1, 21) %}
+> | {{ n }} | | |
+{% endfor %}
+
+--- Sottoclassi
+
+La sottoclasse si sceglie al **livello 3**.
+```dataview
+list
+from ""
+where categoria = "sottoclasse" and classe = this.file.link
+```
+
+--- Collegamenti
+
+{{ m.collegamenti(with_sessioni=false) }}
+--- Vista
+
+{{ m.vista() }}
+````
