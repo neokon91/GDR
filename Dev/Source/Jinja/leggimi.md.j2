@@ -1,0 +1,31 @@
+# LEGGIMI — Vault GDR
+
+Questa cartella è un vault Obsidian **generato**: aprila in Obsidian e tienila aperta;
+rilancia `npm run build` nel repo per vedere i cambiamenti dal vivo. Le tue note in
+`Mondi/`, `Inbox/`, ecc. e i plugin che installi qui **non vengono toccati** dai rebuild.
+
+## 1. Plugin community richiesti
+Apri *Impostazioni → Plugin della comunità* e installa/abilita:
+{% for p in plugins.plugins %}
+- **{{ p.name }}** (`{{ p.id }}`)
+{%- endfor %}
+
+> [!warning] Senza questi plugin
+> Senza **Tabs** le note a schede appaiono come testo grezzo; senza **Fantasy
+> Statblocks** e **Initiative Tracker** non vedi statblock e combattimento.
+
+## 2. Impostazioni da abilitare una volta
+- **Fantasy Statblocks → "Parse Frontmatter in Notes"**: ON. Serve perché le note
+  creatura (`statblock: true`) entrino nel bestiario e siano usabili nell'iniziativa.
+- **Initiative Tracker → Party**: crea una party con i tuoi PG per popolarla negli incontri.
+- **Templater → "Trigger Templater on new file creation"**: opzionale; i bottoni `Crea`
+  applicano già il template alla creazione.
+
+## 3. Come si usa
+- Apri **Home.md**: bottoni `Crea` per ogni tipo di nota + cruscotti Dataview.
+- Apri **Mondi/Creature/Goblin**: esempio di statblock 5.5e.
+- Apri **Mondi/Incontri/Imboscata sulla Strada**: blocco iniziativa (premi play).
+
+## 4. Layout statblock
+Il blocco statblock usa il layout `{{ core.statblock.layout }}`. Per lo stile 2024/5.5e,
+importa un layout in Fantasy Statblocks e aggiorna `statblock.layout` in `Dev/Source/YAML/core.yaml`.

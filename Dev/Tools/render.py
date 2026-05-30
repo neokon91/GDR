@@ -10,11 +10,11 @@ import sys
 from pathlib import Path
 from typing import Any
 
-# Cattura gli id usati nei Jinja come field('id') / field("id").
-FIELD_REF_RE = re.compile(r"""field\(\s*['"]([a-z0-9_]+)['"]""")
-
 import yaml
 from jinja2 import Environment, FileSystemLoader, StrictUndefined
+
+# Cattura gli id usati nei Jinja come field('id') / field("id").
+FIELD_REF_RE = re.compile(r"""field\(\s*['"]([a-z0-9_]+)['"]""")
 
 ROOT = Path(__file__).resolve().parents[2]
 SOURCE = ROOT / "Dev" / "Source"
@@ -23,31 +23,25 @@ JINJA_DIR = SOURCE / "Jinja"
 JS_DIR = SOURCE / "JS"
 SAMPLES_DIR = SOURCE / "Samples"
 
-# Cartelle del vault che il build/release assembla a partire dalle sorgenti.
-VAULT_GENERATED = ("z.modelli", "z.automazioni", ".obsidian")
+# Unico target di output: il vault Obsidian vivo. Si apre questa cartella in
+# Obsidian e si rilancia `build` per vedere i cambiamenti dal vivo. Il repo di
+# sviluppo (ROOT) resta pulito: nessun artefatto generato fuori da qui.
+VAULT = ROOT / "dist" / "GDR-vault"
 
-# Cartelle interamente generate dal build: sicure da rimuovere per intero.
-GENERATED_DIRS = [
-    ROOT / "z.automazioni",
-    ROOT / "z.modelli",
-    ROOT / "Dev" / "Build",
-    ROOT / "dist",
-]
+# Sottocartelle interamente generate: sicure da azzerare a ogni build.
+GENERATED_DIRS = ("z.modelli", "z.automazioni")
 
-# File generati dentro .obsidian: la cartella contiene anche configurazione
-# utente (temi, hotkey, snippet, dati di altri plugin), quindi si rimuovono
-# solo i singoli file prodotti dal build, mai l'intera directory.
-OBSIDIAN_GENERATED_FILES = [
-    ROOT / ".obsidian" / "community-plugins.json",
-    ROOT / ".obsidian" / "plugins" / "templater-obsidian" / "data.json",
-    ROOT / ".obsidian" / "plugins" / "dataview" / "data.json",
-    ROOT / ".obsidian" / "plugins" / "obsidian-meta-bind-plugin" / "data.json",
-]
+# File generati dentro .obsidian: la cartella ospita anche config utente e i
+# plugin installati, quindi si toccano solo questi file, mai il resto.
+OBSIDIAN_GENERATED = (
+    ".obsidian/community-plugins.json",
+    ".obsidian/plugins/templater-obsidian/data.json",
+    ".obsidian/plugins/dataview/data.json",
+    ".obsidian/plugins/obsidian-meta-bind-plugin/data.json",
+)
 
-# Note generate alla radice del vault (non sorgenti utente).
-ROOT_GENERATED_FILES = [
-    ROOT / "Home.md",
-]
+# Note generate alla radice del vault (non contenuti utente).
+GENERATED_NOTES = ("Home.md", "LEGGIMI.md")
 
 
 def load_yaml(name: str) -> dict[str, Any]:
@@ -69,14 +63,21 @@ def write_text(path: Path, text: str) -> None:
 
 
 def clean() -> None:
-    for path in GENERATED_DIRS:
-        if path.is_dir():
-            shutil.rmtree(path)
-        elif path.exists():
-            path.unlink()
-    for path in OBSIDIAN_GENERATED_FILES + ROOT_GENERATED_FILES:
-        if path.exists():
-            path.unlink()
+    """Rimuove solo gli artefatti generati. Non tocca i contenuti utente, i
+    plugin installati o la config di Obsidian. Ripulisce sia il vault sia
+    eventuali residui legacy nel repo di sviluppo (ROOT)."""
+    for base in (VAULT, ROOT):
+        for name in GENERATED_DIRS:
+            path = base / name
+            if path.is_dir():
+                shutil.rmtree(path)
+        for rel in OBSIDIAN_GENERATED + GENERATED_NOTES:
+            path = base / rel
+            if path.is_file():
+                path.unlink()
+    legacy_build = ROOT / "Dev" / "Build"
+    if legacy_build.is_dir():
+        shutil.rmtree(legacy_build)
 
 
 def template_folder(core: dict[str, Any], category: str) -> str:
@@ -143,11 +144,11 @@ def build() -> dict[str, str]:
         "templates": templates,
     }
 
-    write_json(ROOT / "z.automazioni" / "data" / "core.json", payload)
+    write_json(VAULT / "z.automazioni" / "data" / "core.json", payload)
 
-    (ROOT / "z.automazioni").mkdir(parents=True, exist_ok=True)
+    # I sorgenti JS restano gestiti in Dev/Source/JS e vengono copiati nel vault.
     for source in sorted(JS_DIR.glob("*.js")):
-        shutil.copy2(source, ROOT / "z.automazioni" / source.name)
+        shutil.copy2(source, VAULT / "z.automazioni" / source.name)
 
     env = Environment(
         loader=FileSystemLoader(str(JINJA_DIR)),
@@ -159,37 +160,56 @@ def build() -> dict[str, str]:
     rendered: dict[str, str] = {}
     for template in templates:
         jinja = env.get_template(template["jinja"])
-        target = ROOT / template["target"]
         text = jinja.render(core=core, plugins=plugins, template=template)
-        write_text(target, text)
-        rendered[str(target.relative_to(ROOT))] = text
+        write_text(VAULT / template["target"], text)
+        rendered[template["target"]] = text
 
     action_template = env.get_template("action.md.j2")
     for action in actions:
-        target = ROOT / action["target"]
         text = action_template.render(action=action)
-        write_text(target, text)
-        rendered[str(target.relative_to(ROOT))] = text
+        write_text(VAULT / action["target"], text)
+        rendered[action["target"]] = text
 
-    write_json(ROOT / ".obsidian" / "community-plugins.json", [p["id"] for p in plugins.get("plugins", [])])
-    write_json(ROOT / ".obsidian" / "plugins" / "templater-obsidian" / "data.json", {
+    write_json(VAULT / ".obsidian" / "community-plugins.json", [p["id"] for p in plugins.get("plugins", [])])
+    write_json(VAULT / ".obsidian" / "plugins" / "templater-obsidian" / "data.json", {
         "templates_folder": "z.modelli",
         "user_scripts_folder": "z.automazioni",
         "enable_folder_templates": False,
         "syntax_highlighting": True,
     })
-    write_json(ROOT / ".obsidian" / "plugins" / "dataview" / "data.json", {
+    write_json(VAULT / ".obsidian" / "plugins" / "dataview" / "data.json", {
         "enableDataviewJs": True,
         "renderNullAs": "",
     })
-    write_json(ROOT / ".obsidian" / "plugins" / "obsidian-meta-bind-plugin" / "data.json", meta_bind_config(plugins, core, templates))
+    write_json(VAULT / ".obsidian" / "plugins" / "obsidian-meta-bind-plugin" / "data.json", meta_bind_config(plugins, core, templates))
 
-    home = env.get_template("home.md.j2")
-    home_text = home.render(core=core, plugins=plugins, templates=templates)
-    write_text(ROOT / "Home.md", home_text)
-    rendered["Home.md"] = home_text
+    for name, jinja_name in (("Home.md", "home.md.j2"), ("LEGGIMI.md", "leggimi.md.j2")):
+        text = env.get_template(jinja_name).render(core=core, plugins=plugins, templates=templates)
+        write_text(VAULT / name, text)
+        rendered[name] = text
+
+    # Scaffolding delle cartelle contenuti (idempotente): mostra la struttura
+    # senza mai sovrascrivere note esistenti.
+    for folder in core.get("folders", {}).values():
+        (VAULT / folder).mkdir(parents=True, exist_ok=True)
 
     return rendered
+
+
+def seed_samples() -> int:
+    """Copia i contenuti di esempio nel vault, senza sovrascrivere note gia'
+    presenti (non distrugge il lavoro dell'utente)."""
+    if not SAMPLES_DIR.exists():
+        return 0
+    copied = 0
+    for sample in sorted(SAMPLES_DIR.rglob("*.md")):
+        dest = VAULT / sample.relative_to(SAMPLES_DIR)
+        if dest.exists():
+            continue
+        dest.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(sample, dest)
+        copied += 1
+    return copied
 
 
 def check() -> int:
@@ -216,7 +236,7 @@ def check() -> int:
         if not (JINJA_DIR / jinja).exists():
             errors.append(f"{template.get('id')}: Jinja mancante ({jinja})")
 
-    # Ogni widget non-text del registro deve avere un template Meta Bind.
+    # Ogni widget non-text/number del registro deve avere un template Meta Bind.
     for field_id, spec in fields.items():
         widget = (spec or {}).get("widget")
         if widget and widget not in ("text", "number") and widget not in metabind:
@@ -238,63 +258,30 @@ def check() -> int:
     return 0
 
 
-def release() -> Path:
-    """Assembla un vault Obsidian autonomo e testabile in dist/, con
-    contenuti di esempio e zip pronto da aprire."""
-    clean()
-    build()
-
-    core = load_yaml("core.yaml")
-    dist = ROOT / "dist"
-    vault = dist / "GDR-vault"
-    if vault.exists():
-        shutil.rmtree(vault)
-    vault.mkdir(parents=True)
-
-    for name in VAULT_GENERATED:
-        src = ROOT / name
-        if src.exists():
-            shutil.copytree(src, vault / name)
-    shutil.copy2(ROOT / "Home.md", vault / "Home.md")
-
-    # Scaffolding delle cartelle contenuti, cosi' il vault mostra la struttura.
-    for folder in core.get("folders", {}).values():
-        (vault / folder).mkdir(parents=True, exist_ok=True)
-
-    # Contenuti di esempio gia' compilati (Dev/Source/Samples/<path nel vault>).
-    samples = 0
-    if SAMPLES_DIR.exists():
-        for sample in sorted(SAMPLES_DIR.rglob("*.md")):
-            dest = vault / sample.relative_to(SAMPLES_DIR)
-            dest.parent.mkdir(parents=True, exist_ok=True)
-            shutil.copy2(sample, dest)
-            samples += 1
-
-    archive = shutil.make_archive(str(dist / "gdr-vault"), "zip", vault)
-    print(f"Release OK: {vault.relative_to(ROOT)}/ + {Path(archive).relative_to(ROOT)} ({samples} esempi).")
-    return vault
-
-
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Renderer minimo YAML/Jinja/JS per Obsidian.")
-    parser.add_argument("--clean", action="store_true", help="Rimuove solo output generati.")
+    parser = argparse.ArgumentParser(description="Genera il vault Obsidian GDR in dist/GDR-vault da sorgenti YAML/Jinja/JS.")
+    parser.add_argument("--clean", action="store_true", help="Rimuove solo gli artefatti generati (non i contenuti/plugin).")
     parser.add_argument("--check", action="store_true", help="Valida YAML/Jinja senza scrivere output.")
-    parser.add_argument("--release", action="store_true", help="Assembla un vault testabile in dist/ con esempi e zip.")
+    parser.add_argument("--seed", action="store_true", help="Copia i contenuti di esempio (senza sovrascrivere note esistenti).")
     args = parser.parse_args()
 
     if args.clean:
         clean()
-        print("Output generati rimossi.")
+        print("Artefatti generati rimossi.")
         return 0
     if args.check:
         return check()
-    if args.release:
-        release()
-        return 0
 
+    first_run = not VAULT.exists()
     clean()
     rendered = build()
-    print(f"Build OK: {len(rendered)} template, {len(list(JS_DIR.glob('*.js')))} JS runtime.")
+    seeded = seed_samples() if (args.seed or first_run) else 0
+
+    rel = VAULT.relative_to(ROOT)
+    print(f"Build OK: {len(rendered)} note generate, {len(list(JS_DIR.glob('*.js')))} JS runtime.")
+    if seeded:
+        print(f"Esempi copiati: {seeded}.")
+    print(f"Vault: {rel}/  — apri questa cartella in Obsidian.")
     return 0
 
 

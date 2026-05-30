@@ -7,7 +7,6 @@
     "build": "python3 Dev/Tools/render.py",
     "check": "python3 Dev/Tools/render.py --check && find Dev/Source/JS -name '*.js' -print0 | xargs -0 -n1 node --check",
     "clean": "python3 Dev/Tools/render.py --clean",
-    "release": "python3 Dev/Tools/render.py --release",
-    "sync:sources": "python3 Dev/Tools/render.py"
+    "seed": "python3 Dev/Tools/render.py --seed"
   }
 }

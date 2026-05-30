@@ -7,15 +7,21 @@ tab: Statblock
 
 ```statblock
 layout: {{ core.statblock.layout }}
-monster: "=this.nome"
+name: <% tp.file.title %>
+size: Medio
+type: umanoide
+alignment: ""
+ac: 10
+hp: 10
+hit_dice: ""
+speed: 9 m
+stats: [10, 10, 10, 10, 10, 10]
+cr: "0"
+senses: ""
+languages: ""
+traits: []
+actions: []
 ```
-
-> [!info]- Modifica rapida
-> {{ m.field('ac') }}
->
-> {{ m.field('hp') }}
->
-> {{ m.field('cr') }}
 
 tab: Scena
 

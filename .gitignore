@@ -8,20 +8,6 @@ __pycache__/
 *.py[cod]
 .pytest_cache/
 
-# Generated Obsidian output (ancorati alla radice del vault)
-/.obsidian/*.json
-/.obsidian/plugins/*/data.json
-/z.automazioni/
-/z.modelli/
-/Home.md
-Dev/Build/
+# Il vault Obsidian generato vive interamente in dist/ (output, non sorgente).
 dist/
-
-# User vault content (solo alla radice: NON tocca Dev/Source/Samples/)
-/Campagne/
-/Giocatori/
-/Inbox/
-/Import/
-/Mondi/
-/SRD/
-/docs/
+Dev/Build/

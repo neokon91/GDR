@@ -34,9 +34,6 @@ fields:
   apertura:       { label: Apertura,             widget: text }
   scena_corrente: { label: Scena corrente,       widget: text }
   quando:         { label: Quando,               widget: text }
-  ac:             { label: CA, widget: number }
-  hp:             { label: PF, widget: number }
-  cr:             { label: GS, widget: text }
 
 # Statblock (Fantasy Statblocks): layout usato dal blocco ```statblock```.
 # Sostituisci col nome del layout installato (es. un layout 2024/5.5e).
