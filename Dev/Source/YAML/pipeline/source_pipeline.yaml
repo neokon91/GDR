@@ -641,9 +641,9 @@ steps:
     - z.automazioni/data/runtime/session_context.json
     - z.automazioni/data/runtime/generated_drafts_cockpit.json
     - Dev/Source/JS/z.engine/session_playability.js
-    - Dev/Tools/node-legacy/render_runtime_exports.js
+    - Dev/Tools/python/render_runtime_exports.py
     outputs:
     - z.automazioni/data/runtime/runtime_exports.json
     render:
-    - node
-    - Dev/Tools/node-legacy/render_runtime_exports.js
+    - python3
+    - Dev/Tools/python/render_runtime_exports.py
