@@ -74,15 +74,12 @@ def build_profile(errors: list[str]) -> tuple[dict[str, Any], str]:
     source_paths = profile_source.get("sources") if isinstance(profile_source.get("sources"), dict) else {}
     plugin_matrix_path = str(source_paths.get("plugin_matrix") or "Dev/Source/YAML/json/plugin_matrix.yaml")
     plugin_contracts_path = str(source_paths.get("plugin_contracts") or "Dev/Source/YAML/canonical/plugin_contracts.yaml")
-    workflows_path = str(source_paths.get("workflows") or "Dev/Source/YAML/json/workflows.yaml")
     output_path = str(profile_source.get("output") or "z.automazioni/data/runtime/plugin_profile.json")
 
     plugin_matrix = load_yaml(plugin_matrix_path, errors)
     plugin_contracts = load_yaml(plugin_contracts_path, errors)
-    workflows = load_yaml(workflows_path, errors)
     require_id(plugin_matrix, "plugin_matrix", plugin_matrix_path, errors)
     require_id(plugin_contracts, "plugin_contracts", plugin_contracts_path, errors)
-    require_id(workflows, "workflows", workflows_path, errors)
 
     matrix_by_id = {
         str(plugin.get("id") or "").strip(): plugin
@@ -142,34 +139,21 @@ def build_profile(errors: list[str]) -> tuple[dict[str, Any], str]:
             continue
         plugins_by_label[label]["manual_action"] = str(action).strip()
 
-    workflow_plugins: dict[str, list[str]] = {}
-    workflow_items = workflows.get("workflows") if isinstance(workflows.get("workflows"), dict) else {}
-    for workflow_id, workflow in workflow_items.items():
-        workflow_data = workflow if isinstance(workflow, dict) else {}
-        required_plugins = normalize_list(workflow_data.get("required_plugins"))
-        if not required_plugins:
-            continue
-        workflow_plugins[str(workflow_id)] = required_plugins
-        for label in required_plugins:
-            if label not in plugins_by_label:
-                errors.append(f"{workflows_path}: {workflow_id}.required_plugins contiene plugin non profilato ({label})")
-
-    default_workflow_plugins = normalize_list(defaults.get("workflow_plugins"))
-    for label in default_workflow_plugins:
+    default_support_plugins = normalize_list(defaults.get("support_plugins"))
+    for label in default_support_plugins:
         if label not in plugins_by_label:
-            errors.append(f"{SOURCE}: defaults.workflow_plugins contiene plugin non profilato ({label})")
+            errors.append(f"{SOURCE}: defaults.support_plugins contiene plugin non profilato ({label})")
 
     profile = {
         "generated_from": {
             "runtime_plugin_profile": SOURCE,
             "plugin_matrix": plugin_matrix_path,
             "plugin_contracts": plugin_contracts_path,
-            "workflows": workflows_path,
         },
-        "default_workflow_plugins": default_workflow_plugins,
+        "default_support_plugins": default_support_plugins,
         "default_manual_action": default_manual_action,
         "plugins_by_label": {key: plugins_by_label[key] for key in sorted(plugins_by_label, key=js_locale_key)},
-        "workflow_plugins": {key: workflow_plugins[key] for key in sorted(workflow_plugins, key=js_locale_key)},
+        "support_plugins": {},
     }
     return profile, output_path
 
@@ -201,7 +185,7 @@ def main() -> int:
     print(
         "Runtime plugin profile OK: "
         f"{len(profile.get('plugins_by_label') or {})} label plugin, "
-        f"{len(profile.get('workflow_plugins') or {})} workflow."
+        "solo plugin essenziali."
     )
     return 0
 

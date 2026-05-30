@@ -4,15 +4,8 @@
   "private": true,
   "description": "Vault Obsidian per preparare e gestire campagne GDR fantasy in italiano.",
   "scripts": {
-    "build": "npm run release:final",
-    "release:final": "python3 Dev/Tools/python/release_final.py",
-    "release:clean": "python3 Dev/Tools/python/release_clean.py",
     "sync:sources": "python3 Dev/Tools/python/run_source_pipeline.py --mode render --outputs-only",
     "clean:generated": "python3 Dev/Tools/python/clean_generated_outputs.py",
-    "import:srd": "python3 Dev/Tools/python/import_srd.py",
-    "import:map": "python3 Dev/Tools/python/import_map.py",
-    "import:azgaar": "python3 Dev/Tools/python/import_azgaar_geojson.py",
-    "import:watabou:city": "python3 Dev/Tools/python/import_watabou_city.py",
-    "import:watabou:dungeon": "python3 Dev/Tools/python/import_watabou_dungeon.py"
+    "import:srd": "python3 Dev/Tools/python/import_srd.py"
   }
 }

@@ -28,7 +28,7 @@ async function trappola(tp) {
             fonti: [...riferimentiSrd, ...riferimentiRegola, luogo],
             riferimentiSrd,
             riferimentiRegola,
-            tabelle: ["[[Risorse/Tabelle/Tabelle#^complicazioni]]"],
+            tabelle: [],
             tags: ["dnd55/homebrew", "gdr/bozza"]
         })
     });

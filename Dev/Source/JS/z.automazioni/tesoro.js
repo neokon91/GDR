@@ -28,7 +28,7 @@ async function tesoro(tp) {
             fonti: [...riferimentiSrd, ...riferimentiRegola, proprietario, luogo, ...ricompense],
             riferimentiSrd,
             riferimentiRegola,
-            tabelle: ["[[Risorse/Tabelle/Tabelle#^complicazioni]]"],
+            tabelle: [],
             tags: ["dnd55/homebrew", "gdr/bozza"]
         })
     });

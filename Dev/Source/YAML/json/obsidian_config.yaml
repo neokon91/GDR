@@ -4,3569 +4,1321 @@ version: 0.1.0
 policy:
   source_of_truth: Questo file e la fonte umana per i JSON Obsidian controllati dal progetto.
   native_json_exceptions:
-  - .obsidian/workspace.json
+    - .obsidian/workspace.json
   delegated_generated_targets:
-  - .obsidian/plugins/obsidian-meta-bind-plugin/data.json
+    - .obsidian/plugins/obsidian-meta-bind-plugin/data.json
   forbidden_json_targets:
-  - .obsidian/**/manifest.json
+    - .obsidian/**/manifest.json
   rule: 'I JSON dichiarati qui non si editano a mano: modificare YAML e rigenerare.'
 configs:
-- target: .obsidian/app.json
-  data:
-    promptDelete: false
-    alwaysUpdateLinks: true
-    propertiesInDocument: hidden
-    userIgnoreFilters:
-    - SRD/
-    - z.automazioni/
-    - z.bacheche/
-    - z.bases/
-    - z.engine/
-    - z.fileclass/
-    - z.modelli/
-- target: .obsidian/appearance.json
-  data:
-    cssTheme: Minimal
-    accentColor: ''
-    enabledCssSnippets:
-    - gdr-vault
-- target: .obsidian/bookmarks.json
-  data:
-    items:
-    - type: group
-      ctime: 1779275400000
-      title: Al Tavolo
-      items:
-      - type: file
-        ctime: 1779275400000
-        path: Hub/Durante il Gioco.md
-        title: Durante il Gioco
-      - type: file
-        ctime: 1779275400000
-        path: Risorse/Preparazione Sessione.md
-        title: Preparazione Sessione
-      - type: file
-        ctime: 1779275400000
-        path: Risorse/Task DM.md
-        title: Task DM
-      - type: file
-        ctime: 1779275400000
-        path: Risorse/Iniziativa e Combattimenti.md
-        title: Iniziativa
-    - type: group
-      ctime: 1779275400000
-      title: Worldbuilding
-      items:
-      - type: file
-        ctime: 1779275400000
-        path: Hub/Worldbuilder Dashboard.md
-        title: Worldbuilder Dashboard
-      - type: file
-        ctime: 1779275400000
-        path: Risorse/Mappe/Mappe.md
-        title: Mappe
-      - type: file
-        ctime: 1779275400000
-        path: Risorse/Mappe/Schema Relazioni GDR.excalidraw.md
-        title: Schema Relazioni GDR
-      - type: file
-        ctime: 1779275400000
-        path: z.bases/Atlante Mappe.base
-        title: Atlante Mappe
-    - type: group
-      ctime: 1779275400000
-      title: Manutenzione
-      items:
-      - type: file
-        ctime: 1779275400000
-        path: Risorse/Controllo Vault.md
-        title: Controllo Vault
-      - type: file
-        ctime: 1779275400000
-        path: Risorse/Se Qualcosa Non Funziona.md
-        title: Recupero Strumenti
-      - type: file
-        ctime: 1779275400000
-        path: Risorse/Primo Avvio Strumenti.md
-        title: Primo Avvio Strumenti
-- target: .obsidian/community-plugins.json
-  data:
-  - obsidian-icon-folder
-  - media-extended
-  - obsidian-5e-statblocks
-  - dataview
-  - table-editor-obsidian
-  - templater-obsidian
-  - obsidian-kanban
-  - fantasy-content-generator
-  - calendarium
-  - obsidian-meta-bind-plugin
-  - js-engine
-  - metadata-menu
-  - homepage
-  - callout-manager
-  - folder-notes
-  - obsidian42-brat
-  - obsidian-dice-roller
-  - initiative-tracker
-  - obsidian-excalidraw-plugin
-  - hex-cartographer
-  - zoom-map
-  - obsidian-style-settings
-  - tabs
-  - obsidian-tasks-plugin
-  - advanced-canvas
-  - obsidian-linter
-  - maps
-- target: .obsidian/core-plugins.json
-  data:
-    file-explorer: true
-    global-search: true
-    switcher: true
-    graph: true
-    backlink: true
-    canvas: true
-    outgoing-link: true
-    tag-pane: true
-    footnotes: false
-    properties: true
-    page-preview: true
-    daily-notes: true
-    templates: true
-    note-composer: true
-    command-palette: true
-    slash-command: false
-    editor-status: true
-    bookmarks: true
-    markdown-importer: false
-    zk-prefixer: false
-    random-note: false
-    outline: true
-    word-count: true
-    slides: false
-    audio-recorder: false
-    workspaces: true
-    file-recovery: true
-    publish: false
-    sync: true
-    bases: true
-    webviewer: true
-- target: .obsidian/graph.json
-  data:
-    collapse-filter: true
-    search: ''
-    showTags: false
-    showAttachments: false
-    hideUnresolved: false
-    showOrphans: true
-    collapse-color-groups: true
-    colorGroups: []
-    collapse-display: true
-    showArrow: false
-    textFadeMultiplier: 0
-    nodeSizeMultiplier: 1
-    lineSizeMultiplier: 1
-    collapse-forces: true
-    centerStrength: 0.518713248970312
-    repelStrength: 10
-    linkStrength: 1
-    linkDistance: 250
-    scale: 0.25883865621816177
-    close: false
-- target: .obsidian/plugins/calendarium/data.json
-  data:
-    autoParse: true
-    calendars:
-    - name: Calendario Del Mondo
-      description: Calendario neutro incluso per campagne originali. Rinominabile dal DM senza dipendenze da ambientazioni protette.
-      path: []
-      supportInlineEvents: false
-      inlineEventTag: calendarium
-      showIntercalarySeparately: true
-      static:
-        displayDayNumber: false
-        incrementDay: true
-        displayMoons: true
-        firstWeekDay: 1
-        overflow: true
-        weekdays:
-        - type: day
-          name: Sunday
-          id: ID_19ea684b4a08
-        - type: day
-          name: Monday
-          id: ID_2928b90ab949
-        - type: day
-          name: Tuesday
-          id: ID_0ad9a8f9e95b
-        - type: day
-          name: Wednesday
-          id: ID_195a4b290bc9
-        - type: day
-          name: Thursday
-          id: ID_abe8c89b0999
-        - type: day
-          name: Friday
-          id: ID_2b5b8a79fa4a
-        - type: day
-          name: Saturday
-          id: ID_1a78cb79c8cb
-        months:
-        - name: January
-          type: month
-          length: 31
-          interval: 1
-          offset: 0
-          id: ID_e9997a780b3a
-        - name: February
-          type: month
-          length: 28
-          interval: 1
-          offset: 0
-          id: ID_b8c9ebeb0b89
-        - name: March
-          type: month
-          length: 31
-          interval: 1
-          offset: 0
-          id: ID_b83bda2b9be8
-        - name: April
-          type: month
-          length: 30
-          interval: 1
-          offset: 0
-          id: ID_29baea7b28ab
-        - name: May
-          type: month
-          length: 31
-          interval: 1
-          offset: 0
-          id: ID_6a3899fad909
-        - name: June
-          type: month
-          length: 30
-          interval: 1
-          offset: 0
-          id: ID_384aeb1afa8a
-        - name: July
-          type: month
-          length: 31
-          interval: 1
-          offset: 0
-          id: ID_48b8cba87b8a
-        - name: August
-          type: month
-          length: 31
-          interval: 1
-          offset: 0
-          id: ID_fa0b1a6bab8a
-        - name: September
-          type: month
-          length: 30
-          interval: 1
-          offset: 0
-          id: ID_da880b8af849
-        - name: October
-          type: month
-          length: 31
-          interval: 1
-          offset: 0
-          id: ID_babba8186968
-        - name: November
-          type: month
-          length: 30
-          interval: 1
-          offset: 0
-          id: ID_da582bfaf9b9
-        - name: December
-          type: month
-          length: 31
-          interval: 1
-          offset: 0
-          id: ID_ba1bab4a3a28
-        moons:
-        - name: Moon
-          cycle: 29.530588853
-          offset: 9.24953
-          faceColor: '#ffffff'
-          shadowColor: '#000000'
-          id: ID_a9ab186b1819
-        leapDays:
-        - name: Leap Day
-          type: leapday
-          interval:
-          - ignore: false
-            exclusive: false
-            interval: 400
-          - ignore: false
-            exclusive: true
-            interval: 100
-          - ignore: false
-            exclusive: false
-            interval: 4
-          offset: 0
-          timespan: 1
-          intercalary: false
-          id: ID_b91ad86a887a
-        eras:
-        - name: Before Christ
-          format: '{{era_name}}'
-          id: ID_9a2978c92baa
-          endsYear: false
-          isEvent: false
-          type: era
-          category: null
-          isStartingEra: true
-          date:
-            year: 1
-            month: 0
-            day: 1
-        - name: Anno Domini
-          format: '{{era_name}}'
-          date:
-            year: 1
-            month: 0
-            day: 1
-          id: ID_a8db38899a2b
-          endsYear: false
-          isEvent: false
-          type: era
-          category: null
-          isStartingEra: false
-        offset: 0
-        padDays: 2
-        padMonths: 2
-      seasonal:
-        seasons:
-        - id: STANDARD_WINTER
-          name: Winter
-          color: '#ADD8E6'
-          kind: Winter
-          type: Periodic
-          duration: 91.310625
-          weatherOffset: 56
-          weatherPeak: 5
-        - id: STANDARD_SPRING
-          name: Spring
-          kind: Spring
-          color: '#90EE90'
-          type: Periodic
-          duration: 91.310625
-          weatherOffset: 56
-          weatherPeak: 5
-        - id: STANDARD_SUMMER
-          name: Summer
-          kind: Summer
-          color: '#FFFF00'
-          type: Periodic
-          duration: 91.310625
-          weatherOffset: 56
-          weatherPeak: 5
-        - id: STANDARD_AUTUMN
-          name: Autumn
-          kind: Autumn
-          color: '#DAA520'
-          type: Periodic
-          duration: 91.310625
-          weatherOffset: 56
-          weatherPeak: 5
-        offset: -12.5
-        type: Periodic
-        displayColors: true
-        interpolateColors: true
-        weather:
-          enabled: false
-          seed: 1
-          tempUnits: Imperial
-          windUnits: Metric
-          primaryWindDirection: E
-          freezingPoint: 0
-      locations: []
-      current:
-        day: 20
-        month: 4
-        year: 2026
-        name: Oggi
-      events: []
-      id: ID_gdr_generic_calendar
-      categories: []
-    configDirectory: null
-    dailyNotes: false
-    dateFormat: YYYY-MM-DD
-    defaultCalendar: ID_gdr_generic_calendar
-    eventPreview: true
-    exit:
-      saving: false
-      event: false
-      calendar: false
-      savingEvent: false
-    eventFrontmatter: true
-    parseDates: false
-    version:
-      major: 2
-      minor: 1
-      patch: 0
-      beta: null
-    debug: false
-    askedToMoveFC: false
-    askedAboutSync: true
-    syncBehavior: Always
-    inlineEventsTag: calendarium
-    paths:
-    - - Mondi
-    - - Campagne
-- target: .obsidian/plugins/callout-manager/data.json
-  data:
-    callouts:
-      custom:
-      - scena
-      - indizio
-      - segreto
-      - incontro
-      - tesoro
-      - png
-      - luogo
-      - missione
-      - handout
-      - regola
-      - pericolo
-      - lettura
-      - timer
-      settings:
-        scena:
-        - changes:
-            color: 83, 119, 161
-            icon: lucide-clapperboard
-        indizio:
-        - changes:
-            color: 196, 143, 54
-            icon: lucide-search
-        segreto:
-        - changes:
-            color: 127, 92, 160
-            icon: lucide-key-round
-        incontro:
-        - changes:
-            color: 166, 72, 64
-            icon: lucide-swords
-        tesoro:
-        - changes:
-            color: 194, 154, 70
-            icon: lucide-gem
-        png:
-        - changes:
-            color: 73, 138, 126
-            icon: lucide-user-round
-        luogo:
-        - changes:
-            color: 91, 130, 86
-            icon: lucide-map-pin
-        missione:
-        - changes:
-            color: 74, 112, 168
-            icon: lucide-scroll-text
-        handout:
-        - changes:
-            color: 143, 112, 72
-            icon: lucide-file-text
-        regola:
-        - changes:
-            color: 88, 115, 137
-            icon: lucide-scale
-        pericolo:
-        - changes:
-            color: 181, 76, 58
-            icon: lucide-triangle-alert
-        lettura:
-        - changes:
-            color: 119, 97, 77
-            icon: lucide-book-open-text
-        timer:
-        - changes:
-            color: 166, 89, 52
-            icon: lucide-clock-3
-    calloutDetection:
-      obsidian: true
-      theme: true
-      snippet: true
-- target: .obsidian/plugins/dataview/data.json
-  data:
-    renderNullAs: \-
-    taskCompletionTracking: false
-    taskCompletionUseEmojiShorthand: false
-    taskCompletionText: completion
-    taskCompletionDateFormat: yyyy-MM-dd
-    recursiveSubTaskCompletion: false
-    warnOnEmptyResult: true
-    refreshEnabled: true
-    refreshInterval: 2500
-    defaultDateFormat: MMMM dd, yyyy
-    defaultDateTimeFormat: h:mm a - MMMM dd, yyyy
-    maxRecursiveRenderDepth: 4
-    tableIdColumnName: File
-    tableGroupColumnName: Group
-    showResultCount: true
-    allowHtml: true
-    inlineQueryPrefix: '='
-    inlineJsQueryPrefix: $=
-    inlineQueriesInCodeblocks: true
-    enableInlineDataview: true
-    enableDataviewJs: true
-    enableInlineDataviewJs: true
-    prettyRenderInlineFields: true
-    prettyRenderInlineFieldsInLivePreview: true
-    dataviewJsKeyword: dataviewjs
-- target: .obsidian/plugins/fantasy-content-generator/data.json
-  data:
-    enableCurrency: true
-    citySettings:
-      prefixArray:
-      - Alba
-      - Antica
-      - Borgo
-      - Castel
-      - Colle
-      - Costa
-      - Fossa
-      - Forte
-      - Luna
-      - Monte
-      - Nuova
-      - Ponte
-      - Porto
-      - Rocca
-      - Selva
-      - Torre
-      - Valle
-      suffixArray:
-      - argento
-      - bruma
-      - cervo
-      - drago
-      - ferro
-      - fonte
-      - gelo
-      - lupo
-      - mare
-      - mora
-      - nebbia
-      - ombra
-      - pietra
-      - quercia
-      - riva
-      - rossa
-      - soglia
-      - spina
-      - stella
-      - vento
-    innSettings:
-      prefixes:
-      - Il Vecchio
-      - La Dorata
-      - Il Rosso
-      - La Quieta
-      - Il Felice
-      - La Stanca
-      - Il Nobile
-      - La Mezzanotte
-      - Il Ramingo
-      - La Benedetta
-      - Il Fumante
-      - La Sghemba
-      innType:
-      - Locanda
-      - Taverna
-      - Osteria
-      - Rifugio
-      - Posta
-      nouns:
-      - Drago
-      - Grifone
-      - Cinghiale
-      - Corvo
-      - Unicorno
-      - Mantello
-      - Calice
-      - Martello
-      - Viandante
-      - Lupo
-      - Gatto
-      - Falcone
-      - Gigante
-      - Pellegrino
-      - Mago
-      - Re
-      desc:
-      - nel cuore del mercato cittadino, tra bancarelle rumorose e strade sempre affollate.
-      - ai margini di un villaggio agricolo, con stalle pulite e una sala comune scaldata dal camino.
-      - sopra il porto, dove l'odore di salsedine si mescola a quello di zuppa speziata.
-      - lungo una strada di pellegrinaggio, frequentata da mercanti, messaggeri e avventurieri in cerca di lavoro.
-      - dentro le mura di una rocca di confine, sorvegliata da guardie stanche e sospettose.
-      - all'imbocco di una foresta antica, dove i clienti parlano a bassa voce dopo il tramonto.
-      - vicino a una miniera abbandonata, con camere economiche e molte porte rinforzate.
-      - su una collina battuta dal vento, celebre per il sidro forte e per le mappe appese alle travi.
-      - in un quartiere di artigiani, con tavoli lunghi, birra scura e contratti conclusi sottovoce.
-      - presso un guado trafficato, rifugio naturale per carovane, cacciatori di taglie e contrabbandieri.
-      rumors:
-      - Un carovaniere giura di aver visto luci verdi muoversi tra le rovine oltre il vecchio ponte.
-      - Il fabbro locale paga bene chi scopre chi ruba ferro benedetto dalla sua forgia.
-      - Una nobile decaduta cerca una scorta discreta per raggiungere una cripta di famiglia.
-      - Si dice che il pozzo dietro la locanda restituisca monete antiche quando la luna e' piena.
-      - Un apprendista speziale e' scomparso dopo aver comprato una mappa macchiata di sangue.
-      - Le guardie chiudono gli occhi su un culto che si riunisce sotto il magazzino del grano.
-      - Un bardo ubriaco sostiene che il nuovo prete non proietta ombra al tramonto.
-      - Ogni notte qualcuno lascia fiori freschi davanti alla casa bruciata del vecchio magistrato.
-      - Una creatura enorme e' stata udita sotto le assi del molo, ma i pescatori negano tutto.
-      - Un mercante offre una ricompensa per recuperare una cassa consegnata alla persona sbagliata.
-    currencyTypes:
-    - name: mo
-      rarity: rare
-    - name: mr
-      rarity: common
-    - name: ma
-      rarity: common
-    - name: mp
-      rarity: rarest
-    currencyFrequency: 50
-    drinkSettings:
-      adj:
-      - Ambrato
-      - Antico
-      - Aspro
-      - Balsamico
-      - Bruciante
-      - Celestiale
-      - Cremoso
-      - Dolce
-      - Dorato
-      - Erbaceo
-      - Fumante
-      - Gelido
-      - Incantato
-      - Lunare
-      - Mielato
-      - Nero
-      - Piccante
-      - Rosso
-      - Sacro
-      - Selvatico
-      - Speziato
-      - Spettrale
-      - Torbido
-      - Vellutato
-      - Verde
-      nouns:
-      - Ale
-      - Amaro
-      - Birra
-      - Brandy
-      - Distillato
-      - Elisir
-      - Idromele
-      - Infuso
-      - Liquore
-      - Sidro
-      - Tisana
-      - Tonico
-      - Vino
-    lootSettings:
-      adj:
-      - antico
-      - arrugginito
-      - benedetto
-      - cesellato
-      - crepato
-      - dorato
-      - insanguinato
-      - lucido
-      - misterioso
-      - polveroso
-      - prezioso
-      - scheggiato
-      items:
-      - item: amuleto
-        weight: 0.2
-      - item: anello
-        weight: 0.2
-      - item: borsa di gemme
-        weight: 0.1
-      - item: chiave
-        weight: 0.4
-      - item: daga
-        weight: 0.3
-      - item: diario
-        weight: 0.3
-      - item: fiala
-        weight: 0.3
-      - item: mappa
-        weight: 0.3
-      - item: pergamena
-        weight: 0.4
-      - item: reliquia
-        weight: 0.1
-      - item: spada
-        weight: 0.2
-      - item: talismano
-        weight: 0.2
-    groupSettings:
-      adj:
-      - Argenteo
-      - Cremisi
-      - Dimenticato
-      - Dorato
-      - Errante
-      - Ferreo
-      - Nascosto
-      - Nero
-      - Notturno
-      - Scarlatto
-      - Senza Volto
-      - Silente
-      - Spezzato
-      - Velato
-      - Verde
-      nouns:
-      - Artiglio
-      - Cerchio
-      - Corona
-      - Fiamma
-      - Lama
-      - Lancia
-      - Mano
-      - Maschera
-      - Occhio
-      - Rosa
-      - Sigillo
-      - Soglia
-      - Stella
-      - Torre
-      - Velo
-      nounsP:
-      - Artigli
-      - Cerchi
-      - Corone
-      - Fiamme
-      - Lame
-      - Lance
-      - Mani
-      - Maschere
-      - Occhi
-      - Rose
-      - Sigilli
-      - Soglie
-      - Stelle
-      - Torri
-      - Veli
-      groupTypes:
-      - confraternita
-      - compagnia
-      - culto
-      - gilda
-      - ordine
-      - patto
-      - setta
-      - societa
-      singleDescriptors:
-      - esiliati
-      - guardiani
-      - mercenari
-      - mistici
-      - ribelli
-      - sacerdoti
-      - sapienti
-      - spie
-      - viandanti
-    dungeonSettings:
-      dungeonTypes:
-      - Bastione
-      - Catacomba
-      - Cripta
-      - Fortezza
-      - Galleria
-      - Labirinto
-      - Miniera
-      - Prigione
-      - Rifugio
-      - Rovina
-      - Santuario
-      - Tomba
-      - Torre
-      adjectives:
-      - Abbandonata
-      - Antica
-      - Arcana
-      - Corrotta
-      - Dimenticata
-      - Gelida
-      - Infestata
-      - Maledetta
-      - Nascosta
-      - Oscura
-      - Perduta
-      - Profanata
-      - Sepolta
-      - Silenziosa
-      - Spezzata
-      nouns:
-      - Drago
-      - Eremita
-      - Gigante
-      - Lich
-      - Oracolo
-      - Principe
-      - Regina
-      - Reietto
-      - Santo
-      - Serpente
-      - Strega
-      - Titano
-      - Vampiro
-      - Vegliardo
-      - Wyrm
-      locations:
-      - un castello abbandonato in una landa desolata
-      - un tempio sotterraneo sotto le montagne
-      - una citta dimenticata nel deserto
-      - una rovina antica in mezzo al mare
-      - una grotta profonda dentro una catena montuosa
-      - un ghiacciaio ai confini del mondo
-      - una palude buia e maledetta
-      - un cimitero avvolto dalla nebbia
-      - una fortezza nascosta tra le nuvole
-      - un bosco incantato oltre il confine del regno
-      - una miniera sigillata dopo un crollo
-      - un monastero scavato nella scogliera
-      - un laboratorio nascosto sotto una villa nobiliare
-      - una cripta sotto la piazza del mercato
-      - un santuario perduto dietro una cascata
-      randomDesc:
-      - custodita da iscrizioni che cambiano quando nessuno le osserva
-      - piena di passaggi segreti e stanze murate
-      - protetta da guardiani vincolati da un antico giuramento
-      - infestata dagli spiriti di una battaglia dimenticata
-      - costruita con una pietra nera che assorbe la luce
-      - sigillata da magia rituale ormai instabile
-      - ricca di reliquie, mappe e tesori contesi
-      - attraversata da corridoi che portano su altri piani
-      - dominata da una creatura che non vuole essere svegliata
-      - trasformata in rifugio da banditi, cultisti o esuli
-      - avvolta da una nebbia che confonde memoria e direzione
-      - nata come prigione per qualcosa che non doveva uscire
-    inlineCallout: '@'
-- target: .obsidian/plugins/folder-notes/data.json
-  data:
-    syncFolderName: true
-    ctrlKey: true
-    altKey: false
-    hideFolderNote: true
-    templatePath: ''
-    autoCreate: false
-    autoCreateFocusFiles: true
-    autoCreateForAttachmentFolder: false
-    autoCreateForFiles: false
-    enableCollapsing: false
-    excludeFolders: []
-    whitelistFolders: []
-    showDeleteConfirmation: true
-    underlineFolder: true
-    stopWhitespaceCollapsing: true
-    underlineFolderInPath: true
-    openFolderNoteOnClickInPath: true
-    openInNewTab: false
-    focusExistingTab: false
-    oldFolderNoteName: '{{folder_name}}'
-    folderNoteName: '{{folder_name}}'
-    folderNoteType: .md
-    disableFolderHighlighting: false
-    newFolderNoteName: '{{folder_name}}'
-    storageLocation: insideFolder
-    syncDelete: false
-    showRenameConfirmation: true
-    defaultOverview:
-      id: ''
-      folderPath: ''
-      title: '{{folderName}} overview'
-      showTitle: false
-      depth: 3
-      includeTypes:
-      - folder
-      - markdown
-      style: list
-      disableFileTag: false
-      sortBy: name
-      sortByAsc: true
-      showEmptyFolders: false
-      onlyIncludeSubfolders: false
-      storeFolderCondition: true
-      showFolderNotes: false
-      disableCollapseIcon: true
-      alwaysCollapse: false
-      autoSync: true
-      allowDragAndDrop: true
-      hideLinkList: true
-      hideFolderOverview: false
-      useActualLinks: false
-      fmtpIntegration: false
-      titleSize: 1
-      isInCallout: false
-      useWikilinks: true
-    useSubmenus: true
-    syncMove: true
-    frontMatterTitle:
-      enabled: false
-      explorer: true
-      path: true
-    settingsTab: general
-    supportedFileTypes:
-    - md
-    - canvas
-    - base
-    boldName: false
-    boldNameInPath: false
-    cursiveName: false
-    cursiveNameInPath: false
-    disableOpenFolderNoteOnClick: false
-    openByClick: true
-    openWithCtrl: false
-    openWithAlt: false
-    excludeFolderDefaultSettings:
-      type: folder
-      path: ''
-      id: 04116d9b-06aa-4101-85c7-b33f752d6589
-      subFolders: true
-      disableSync: true
-      disableAutoCreate: true
-      disableFolderNote: false
-      enableCollapsing: false
-      position: 0
-      excludeFromFolderOverview: false
-      string: ''
-      hideInSettings: false
-      detached: false
-      showFolderNote: false
-    excludePatternDefaultSettings:
-      type: pattern
-      path: ''
-      id: 34c85baa-9abd-4faa-b7cf-0abca883a1ba
-      subFolders: true
-      disableSync: true
-      disableAutoCreate: true
-      disableFolderNote: false
-      enableCollapsing: false
-      position: 0
-      excludeFromFolderOverview: false
-      string: ''
-      hideInSettings: false
-      detached: false
-      showFolderNote: false
-    hideCollapsingIcon: false
-    hideCollapsingIconForEmptyFolders: false
-    tabManagerEnabled: true
-    ignoreAttachmentFolder: true
-    deleteFilesAction: trash
-    openSidebar:
-      mobile: false
-      desktop: true
-    highlightFolder: true
-    persistentSettingsTab:
-      afterRestart: true
-      afterChangingTab: true
-    firstTimeInsertOverview: true
-    fvGlobalSettings:
-      autoUpdateLinks: false
-    hideFolderNoteNameInPath: false
-- target: .obsidian/plugins/homepage/data.json
-  data:
-    version: 4
-    homepages:
-      Main Homepage:
-        value: Inizia Qui
-        kind: File
-        openOnStartup: true
-        openMode: Replace all open notes
-        manualOpenMode: Keep open notes
-        view: Default view
-        revertView: true
-        openWhenEmpty: true
-        refreshDataview: false
-        autoCreate: false
-        autoScroll: false
-        pin: false
-        commands: []
-        alwaysApply: false
-        hideReleaseNotes: false
-    separateMobile: false
-- target: .obsidian/plugins/initiative-tracker/data.json
-  data:
-    players: []
-    parties: []
-    defaultParty: null
-    statuses:
-    - name: Blinded
-      id: Blinded
-      description: 'A blinded creature can’t see and automatically fails any ability check that requires sight.
-
-        Attack rolls against the creature have advantage, and the creature’s Attack rolls have disadvantage.'
-    - name: Charmed
-      id: Charmed
-      description: 'A charmed creature can’t Attack the charmer or target the charmer with harmful Abilities or magical Effects.
-
-        The charmer has advantage on any ability check to interact socially with the creature.'
-    - name: Concentrating
-      id: Concentrating
-      description: 'Some spells require you to maintain concentration in order to keep their magic active. If you lose concentration, such a spell ends.
-
-        A creature loses concentration when: it casts another spell that requires concentration, is incapacitated, or dies.
-
-        When a creature takes damage, it must make a constitution saving throw with a DC of 10 or half the damage it took, whichever is higher. On a failure, concentration is lost.'
-    - name: Deafened
-      id: Deafened
-      description: A deafened creature can’t hear and automatically fails any ability check that requires hearing.
-    - name: Frightened
-      id: Frightened
-      description: 'A frightened creature has disadvantage on Ability Checks and Attack rolls while the source of its fear is within Line of Sight.
-
-        The creature can’t willingly move closer to the source of its fear.'
-    - name: Grappled
-      id: Grappled
-      description: 'A grappled creature’s speed becomes 0, and it can’t benefit from any bonus to its speed.
-
-        The condition ends if the Grappler is incapacitated.
-
-        The condition also ends if an Effect removes the grappled creature from the reach of the Grappler or Grappling Effect, such as when a creature is hurled away by the Thunderwave spell.'
-    - name: Incapacitated
-      id: Incapacitated
-      description: An incapacitated creature can’t take Actions or Reactions.
-    - name: Invisible
-      id: Invisible
-      description: 'An invisible creature is impossible to see without the aid of magic or a Special sense. For the Purpose of Hiding, the creature is heavily obscured. The creature’s Location can be detected by any noise it makes or any tracks it leaves.
-
-        Attack rolls against the creature have disadvantage, and the creature’s Attack rolls have advantage.'
-    - name: Paralyzed
-      id: Paralyzed
-      description: 'A paralyzed creature is incapacitated and can’t move or speak.
-
-        The creature automatically fails Strength and Dexterity Saving Throws.
-
-        Attack rolls against the creature have advantage.
-
-        Any Attack that hits the creature is a critical hit if the attacker is within 5 feet of the creature.'
-    - name: Petrified
-      id: Petrified
-      description: 'A petrified creature is transformed, along with any nonmagical object it is wearing or carrying, into a solid inanimate substance (usually stone). Its weight increases by a factor of ten, and it ceases aging.
-
-        The creature is incapacitated, can’t move or speak, and is unaware of its surroundings.
-
-        Attack rolls against the creature have advantage.
-
-        The creature automatically fails Strength and Dexterity Saving Throws.
-
-        The creature has Resistance to all damage.
-
-        The creature is immune to poison and disease, although a poison or disease already in its system is suspended, not neutralized.'
-    - name: Poisoned
-      id: Poisoned
-      description: A poisoned creature has disadvantage on Attack rolls and Ability Checks.
-    - name: Prone
-      id: Prone
-      description: 'A prone creature’s only Movement option is to crawl, unless it stands up and thereby ends the condition.
-
-        The creature has disadvantage on Attack rolls.
-
-        An Attack roll against the creature has advantage if the attacker is within 5 feet of the creature. Otherwise, the Attack roll has disadvantage.'
-    - name: Reacted
-      id: Reacted
-      description: 'A creature, unless otherwise specified, gets one reaction per round of combat.
-
-        A reaction is an instant response to a trigger of some kind, which can occur on your turn or on someone else’s.
-
-        A reaction can be spent to make an opportunity attack, do a readied action, or use an ability that requires a reaction.
-
-        A creature that has already reacted cannot use a reaction until the start of its turn.'
-    - name: Restrained
-      id: Restrained
-      description: 'A restrained creature’s speed becomes 0, and it can’t benefit from any bonus to its speed.
-
-        Attack rolls against the creature have advantage, and the creature’s Attack rolls have disadvantage.
-
-        The creature has disadvantage on Dexterity Saving Throws.'
-    - name: Stunned
-      id: Stunned
-      description: 'A stunned creature is incapacitated, can’t move, and can speak only falteringly.
-
-        The creature automatically fails Strength and Dexterity Saving Throws.
-
-        Attack rolls against the creature have advantage.'
-    - name: Unconscious
-      id: Unconscious
-      description: 'An unconscious creature is incapacitated, can’t move or speak, and is unaware of its surroundings.
-
-        The creature drops whatever it’s holding and falls prone.
-
-        The creature automatically fails Strength and Dexterity Saving Throws.
-
-        Attack rolls against the creature have advantage.
-
-        Any Attack that hits the creature is a critical hit if the attacker is within 5 feet of the creature.'
-    unconsciousId: Unconscious
-    version:
-    - 13
-    - 0
-    - 21
-    canUseDiceRoll: true
-    preferStatblockLink: true
-    initiative: 1d20 + %mod%
-    modifier: null
-    sync: false
-    playerMarker: default
-    monsterMarker: default
-    state:
-      creatures: []
-      state: false
-      name: null
-      round: 1
-      logFile: ''
-      rollHP: false
-    condense: false
-    clamp: true
-    autoStatus: true
-    beginnerTips: true
-    displayDifficulty: true
-    encounters: {}
-    warnedAboutImports: false
-    openState:
-      battle: true
-      party: true
-      status: true
-      plugin: true
-      player: true
-      builder: true
-    hpOverflow: ignore
-    additiveTemp: false
-    rpgSystem: dnd5e
-    logging: false
-    logFolder: /
-    resolveTies: playerFirst
-    useLegacy: false
-    diplayPlayerHPValues: true
-    rollHP: false
-    descending: true
-    builder:
-      showParty: true
-      showXP: true
-      sidebarIcon: true
-    rollPlayerInitiatives: 0
-- target: .obsidian/plugins/media-extended/data.json
-  data:
-    __VERSION__: 2
-    release.previous-version: 4.2.4
-- target: .obsidian/plugins/metadata-menu/data.json
-  data:
-    presetFields:
-    - name: mondo
-      id: mondo
-      type: File
-      options: {}
-    - name: stato
-      id: stato
-      type: Select
-      options:
-        sourceType: ValuesList
-        valuesList:
-          '0': bozza
-          '1': preparazione
-          '2': pronto
-          '3': in corso
-          '4': in gioco
-          '5': giocata
-          '6': da smistare
-          '7': collegata
-          '8': canonica
-          '9': archiviata
-          '10': ignorata
-    - name: stato_canonico
-      id: stato_canonico
-      type: Select
-      options:
-        sourceType: ValuesList
-        valuesList:
-          '0': canonico
-          '1': rumor
-          '2': leggenda
-          '3': falso
-          '4': retcon
-    - name: canonico
-      id: canonico
-      type: Boolean
-      options: {}
-    - name: pressione
-      id: pressione
-      type: Number
-      options: {}
-    - name: prossima_mossa
-      id: prossima_mossa
-      type: Input
-      options: {}
-    - name: connessioni
-      id: connessioni
-      type: MultiFile
-      options: {}
-    - name: player_safe
-      id: player_safe
-      type: Input
-      options: {}
-    - name: entita_impattate
-      id: entita_impattate
-      type: MultiFile
-      options: {}
-    - name: propaga_a
-      id: propaga_a
-      type: MultiFile
-      options: {}
-    - name: sessioni
-      id: sessioni
-      type: MultiFile
-      options: {}
-    - name: luoghi
-      id: luoghi
-      type: MultiFile
-      options: {}
-    - name: fazioni
-      id: fazioni
-      type: MultiFile
-      options: {}
-    - name: missioni
-      id: missioni
-      type: MultiFile
-      options: {}
-    - name: tracciati
-      id: tracciati
-      type: MultiFile
-      options: {}
-    fileClassQueries: []
-    displayFieldsInContextMenu: true
-    globallyIgnoredFields: []
-    classFilesPath: z.fileclass/
-    isAutosuggestEnabled: true
-    fileClassAlias: fileClass
-    settingsVersion: '5.0'
-    firstDayOfWeek: 1
-    enableLinks: true
-    enableTabHeader: true
-    enableEditor: true
-    enableBacklinks: true
-    enableStarred: true
-    enableFileExplorer: true
-    enableSearch: true
-    enableProperties: true
-    tableViewMaxRecords: 20
-    frontmatterListDisplay: asArray
-    fileClassExcludedFolders:
-    - SRD
-    - z.automazioni
-    - z.bacheche
-    - z.fileclass
-    - z.modelli
-    showIndexingStatusInStatusBar: false
-    fileIndexingExcludedFolders:
-    - SRD
-    - z.automazioni
-    - z.bacheche
-    - z.fileclass
-    - z.modelli
-    fileIndexingExcludedExtensions:
-    - .excalidraw.md
-    fileIndexingExcludedRegex: []
-    frontmatterOnly: false
-    showFileClassSelectInModal: true
-    chooseFileClassAtFileCreation: false
-    autoInsertFieldsAtFileClassInsertion: false
-    fileClassIcon: package
-    isAutoCalculationEnabled: true
-    disableDataviewPrompt: false
-- target: .obsidian/plugins/obsidian-5e-statblocks/data.json
-  data:
-    monsters: []
-    defaultLayouts: {}
-    layouts:
-    - blocks:
-      - type: inline
-        id: 7bfa0ab97a5a
-        properties: []
-        hasRule: true
-        nested:
-        - type: group
-          id: 091a2868e9bb
-          properties:
-          - name
-          - size
-          - type
-          - subtype
-          - alignment
-          nested:
-          - type: inline
-            id: 0adabb2a3bdb
-            properties: []
-            hasRule: false
-            nested:
-            - type: heading
-              id: bb89b93b1a9b
-              properties:
-              - name
-              conditioned: true
-              size: 1
-            - type: inline
-              id: 987afba87b9a
-              properties: []
-              hasRule: false
-              nested:
-              - type: action
-                id: a8795ad82a89
-                icon: sword
-                callback: 'try { InitiativeTracker.newEncounter({roll: true, creatures: [monster]}); } catch(e) {}'
-              - type: action
-                id: 992948eb9a58
-                icon: plus-with-circle
-                callback: try { InitiativeTracker.addCreatures([monster]); } catch(e) {}
-          - type: subheading
-            id: 092bfbe80848
-            properties:
-            - size
-            - type
-            - subtype
-            - alignment
-            conditioned: true
-            separator: ', '
-          conditioned: true
-        - type: image
-          id: 3a2928eabbb9
-          properties:
-          - image
-      - type: group
-        id: 7a9b78db1b69
-        properties:
-        - ac
-        - hp
-        - speed
-        nested:
-        - type: property
-          id: bacb795aaafa
-          properties:
-          - ac
-          display: Classe Armatura
-          conditioned: true
-          callback: const ac = [monster.ac];if ("ac_class" in monster) {ac.push(`(${monster.ac_class})`);}return ac.join(" ");
-        - type: property
-          id: 180a6b98db59
-          properties:
-          - hp
-          display: Punti Ferita
-          dice: true
-          diceProperty: hit_dice
-          diceCallback: "if (\"hit_dice\" in monster) {\n  return [{ text: monster[\"hit_dice\"] }];\n} else {\n  return property;\n}"
-          callback: "let str = [monster.hp];\nif (monster.hit_dice?.length) {\n  str.push(`(${monster.hit_dice})`);\n}\nreturn str.join(\" \");"
-          conditioned: true
-        - type: property
-          id: fae838c9983b
-          display: Velocità
-          properties:
-          - speed
-          conditioned: true
-        hasRule: true
-        conditioned: true
-      - type: table
-        id: 3beadb0b7a1a
-        properties:
-        - stats
-        headers:
-        - For
-        - Des
-        - Cos
-        - Int
-        - Sag
-        - Car
-        calculate: true
-        hasRule: true
-        conditioned: true
-      - type: table
-        id: 9b48db9abb2a
-        properties:
-        - fage_stats
-        headers:
-        - Accuracy
-        - Communication
-        - Constitution
-        - Dexterity
-        - Fighting
-        - Intelligence
-        - Perception
-        - Strength
-        - Willpower
-        calculate: false
-        hasRule: true
-        conditioned: true
-      - type: group
-        id: 5b088838fb28
-        properties:
-        - saves
-        - skillsaves
-        - damage_immunities
-        - damage_resistances
-        - damage_vulnerabilities
-        - condition_immunities
-        - cr
-        - languages
-        - senses
-        nested:
-        - type: saves
-          id: f90a09bab999
-          display: Tiri salvezza
-          properties:
-          - saves
-          conditioned: true
-        - type: saves
-          id: 29da1b392b89
-          display: Abilità
-          properties:
-          - skillsaves
-          conditioned: true
-        - type: property
-          id: 880bf90ad84a
-          display: Resistenza ai danni
-          properties:
-          - damage_resistances
-          conditioned: true
-        - type: property
-          id: faf93aa90ab9
-          display: Immunità ai Danni
-          properties:
-          - damage_immunities
-          conditioned: true
-        - type: property
-          id: faf8fa6849bb
-          display: Immunità alle Condizioni
-          properties:
-          - condition_immunities
-          conditioned: true
-        - type: property
-          id: c8dbe97bbb09
-          display: Vulnerabilità ai Danni
-          properties:
-          - damage_vulnerabilities
-          conditioned: true
-        - type: property
-          id: 280818bb99aa
-          display: Sensi
-          properties:
-          - senses
-          conditioned: true
-        - type: property
-          id: c9a98b49d828
-          display: Lingue
-          properties:
-          - languages
-          fallback: '-'
-        - type: inline
-          id: 4a0b69393a58
-          properties: []
-          conditioned: true
-          nested:
-          - type: property
-            id: 485af85a8b4b
-            display: Difficoltà
-            properties:
-            - cr
-            callback: "const CR = {\n    \"0\": {\n        cr: \"0\",\n        value: 0,\n        xp: 10\n    },\n    \"1/8\": {\n        cr: \"1/8\",\n        value: 0.125,\n        xp: 25\n    },\n    \"1/4\": {\n        cr: \"1/4\",\n\n        value: 0.25,\n        xp: 50\n    },\n    \"1/2\": {\n        cr: \"1/2\",\n        value: 0.5,\n        xp: 100\n    },\n    \"0.125\": {\n        cr: \"1/8\",\n        value: 0.125,\n        xp: 25\n    },\n    \"0.25\": {\n        cr: \"1/4\",\n\n        value: 0.25,\n        xp: 50\n    },\n    \"0.5\": {\n        cr: \"1/2\",\n        value: 0.5,\n        xp: 100\n    },\n    \"1\": {\n        cr: \"1\",\n        value: 1,\n        xp: 200\n    },\n    \"2\": {\n        cr: \"2\",\n        value: 2,\n        xp: 450\n    },\n    \"3\": {\n        cr: \"3\",\n        value: 3,\n        xp: 700\n    },\n    \"4\": {\n        cr: \"4\",\n        value: 4,\n        xp: 1100\n    },\n    \"5\": {\n        cr: \"5\",\n        value: 5,\n        xp:\
-              \ 1800\n    },\n    \"6\": {\n        cr: \"6\",\n        value: 6,\n        xp: 2300\n    },\n    \"7\": {\n        cr: \"7\",\n        value: 7,\n        xp: 2900\n    },\n    \"8\": {\n        cr: \"8\",\n        value: 8,\n        xp: 3900\n    },\n    \"9\": {\n        cr: \"9\",\n        value: 9,\n        xp: 5000\n    },\n    \"10\": {\n        cr: \"10\",\n        value: 10,\n        xp: 5900\n    },\n    \"11\": {\n        cr: \"11\",\n        value: 11,\n        xp: 7200\n    },\n    \"12\": {\n        cr: \"12\",\n        value: 12,\n        xp: 8400\n    },\n    \"13\": {\n        cr: \"13\",\n        value: 13,\n        xp: 10000\n    },\n    \"14\": {\n        cr: \"14\",\n        value: 14,\n        xp: 11500\n    },\n    \"15\": {\n        cr: \"15\",\n        value: 15,\n        xp: 13000\n    },\n    \"16\": {\n        cr: \"16\",\n        value: 16,\n        xp: 15000\n    },\n    \"17\": {\n        cr: \"17\",\n        value: 17,\n        xp: 18000\n  \
-              \  },\n    \"18\": {\n        cr: \"18\",\n        value: 18,\n        xp: 20000\n    },\n    \"19\": {\n        cr: \"19\",\n        value: 19,\n        xp: 22000\n    },\n    \"20\": {\n        cr: \"20\",\n        value: 20,\n        xp: 25000\n    },\n    \"21\": {\n        cr: \"21\",\n        value: 21,\n        xp: 33000\n    },\n    \"22\": {\n        cr: \"22\",\n        value: 22,\n        xp: 41000\n    },\n    \"23\": {\n        cr: \"23\",\n        value: 23,\n        xp: 50000\n    },\n    \"24\": {\n        cr: \"24\",\n        value: 24,\n        xp: 62000\n    },\n    \"25\": {\n        cr: \"25\",\n        value: 25,\n        xp: 75000\n    },\n    \"26\": {\n        cr: \"26\",\n        value: 26,\n        xp: 90000\n    },\n    \"27\": {\n        cr: \"27\",\n        value: 27,\n        xp: 105000\n    },\n    \"28\": {\n        cr: \"28\",\n        value: 28,\n        xp: 120000\n    },\n    \"29\": {\n        cr: \"29\",\n        value: 29,\n        xp:\
-              \ 135000\n    },\n    \"30\": {\n        cr: \"30\",\n        value: 30,\n        xp: 155000\n    }\n};                        \nif (\"cr\" in monster && monster.cr in CR) {\n    return `${CR[\n        monster.cr\n    ].cr} (${CR[\n        monster.cr\n    ].xp.toLocaleString()} XP)`;\n}\nreturn \"\";"
-            fallback: '-'
-          - type: property
-            id: a8c81a0bcbdb
-            display: Competenza Bonus
-            properties:
-            - cr
-            callback: "const CR = {\n    \"0\": {\n        cr: \"0\",\n        value: 0,\n        xp: 0\n    },\n    \"1/8\": {\n        cr: \"1/8\",\n        value: 0.125,\n        xp: 25\n    },\n    \"1/4\": {\n        cr: \"1/4\",\n\n        value: 0.25,\n        xp: 50\n    },\n    \"1/2\": {\n        cr: \"1/2\",\n        value: 0.5,\n        xp: 100\n    },\n    \"0.125\": {\n        cr: \"1/8\",\n        value: 0.125,\n        xp: 25\n    },\n    \"0.25\": {\n        cr: \"1/4\",\n\n        value: 0.25,\n        xp: 50\n    },\n    \"0.5\": {\n        cr: \"1/2\",\n        value: 0.5,\n        xp: 100\n    },\n    \"1\": {\n        cr: \"1\",\n        value: 1,\n        xp: 200\n    },\n    \"2\": {\n        cr: \"2\",\n        value: 2,\n        xp: 450\n    },\n    \"3\": {\n        cr: \"3\",\n        value: 3,\n        xp: 700\n    },\n    \"4\": {\n        cr: \"4\",\n        value: 4,\n        xp: 1100\n    },\n    \"5\": {\n        cr: \"5\",\n        value: 5,\n        xp:\
-              \ 1800\n    },\n    \"6\": {\n        cr: \"6\",\n        value: 6,\n        xp: 2300\n    },\n    \"7\": {\n        cr: \"7\",\n        value: 7,\n        xp: 2900\n    },\n    \"8\": {\n        cr: \"8\",\n        value: 8,\n        xp: 3900\n    },\n    \"9\": {\n        cr: \"9\",\n        value: 9,\n        xp: 5000\n    },\n    \"10\": {\n        cr: \"10\",\n        value: 10,\n        xp: 5900\n    },\n    \"11\": {\n        cr: \"11\",\n        value: 11,\n        xp: 7200\n    },\n    \"12\": {\n        cr: \"12\",\n        value: 12,\n        xp: 8400\n    },\n    \"13\": {\n        cr: \"13\",\n        value: 13,\n        xp: 10000\n    },\n    \"14\": {\n        cr: \"14\",\n        value: 14,\n        xp: 11500\n    },\n    \"15\": {\n        cr: \"15\",\n        value: 15,\n        xp: 13000\n    },\n    \"16\": {\n        cr: \"16\",\n        value: 16,\n        xp: 15000\n    },\n    \"17\": {\n        cr: \"17\",\n        value: 17,\n        xp: 18000\n  \
-              \  },\n    \"18\": {\n        cr: \"18\",\n        value: 18,\n        xp: 20000\n    },\n    \"19\": {\n        cr: \"19\",\n        value: 19,\n        xp: 22000\n    },\n    \"20\": {\n        cr: \"20\",\n        value: 20,\n        xp: 25000\n    },\n    \"21\": {\n        cr: \"21\",\n        value: 21,\n        xp: 33000\n    },\n    \"22\": {\n        cr: \"22\",\n        value: 22,\n        xp: 41000\n    },\n    \"23\": {\n        cr: \"23\",\n        value: 23,\n        xp: 50000\n    },\n    \"24\": {\n        cr: \"24\",\n        value: 24,\n        xp: 62000\n    },\n    \"25\": {\n        cr: \"25\",\n        value: 25,\n        xp: 75000\n    },\n    \"26\": {\n        cr: \"26\",\n        value: 26,\n        xp: 90000\n    },\n    \"27\": {\n        cr: \"27\",\n        value: 27,\n        xp: 105000\n    },\n    \"28\": {\n        cr: \"28\",\n        value: 28,\n        xp: 120000\n    },\n    \"29\": {\n        cr: \"29\",\n        value: 29,\n        xp:\
-              \ 135000\n    },\n    \"30\": {\n        cr: \"30\",\n        value: 30,\n        xp: 155000\n    }\n};           \nif (\"cr\" in monster && monster.cr in CR) {\n    return `+${Math.max(\n            Math.floor(2 + ((CR[monster.cr]?.value ?? 0) - 1) / 4),\n            2\n        )}`;\n}\nreturn \"\";"
-            fallback: '-'
-        conditioned: true
-        hasRule: true
-      - type: traits
-        id: d9ab3a5afb99
-        properties:
-        - traits
-        conditioned: true
-        dice: true
-        heading: ''
-      - type: spells
-        id: f8ebd8b8bbd9
-        properties:
-        - spells
-        conditioned: true
-        dice: true
-        heading: Incantesimi
-      - type: text
-        id: 6b9b497a08d8
-        properties:
-        - spellsNotes
-        conditioned: true
-        text: null
-      - type: traits
-        id: cafbe97a595b
-        properties:
-        - actions
-        heading: Azioni
-        conditioned: true
-        dice: true
-      - type: traits
-        id: 9b5a2ab89bba
-        properties:
-        - bonus_actions
-        heading: Azioni Bonus
-        conditioned: true
-        dice: true
-      - type: group
-        id: daf9f84a0a3b
-        properties:
-        - legendary_description
-        - legendary_actions
-        heading: Descrizione Leggendaria
-        nested:
-        - type: text
-          id: ca8b8bdabbd8
-          properties:
-          - legendary_description
-          conditioned: true
-          text: null
-          heading: ''
-        - type: traits
-          id: db5878d9fbba
-          properties:
-          - legendary_actions
-          conditioned: true
-          dice: true
-          heading: Azioni Leggendarie
-        conditioned: true
-      - type: group
-        id: 3aabf9d949b8
-        properties:
-        - mythic_description
-        - mythic_actions
-        heading: Mythic Actions
-        nested:
-        - type: text
-          id: 49ebaa7a4a89
-          properties:
-          - mythic_description
-          conditioned: true
-          text: null
-        - type: traits
-          id: 081a0a4ae87a
-          properties:
-          - mythic_actions
-          conditioned: true
-          dice: true
-        conditioned: true
-      - type: traits
-        id: 0beb2b0aaa8b
-        properties:
-        - reactions
-        heading: Reactions
-        conditioned: true
-        dice: true
-      - type: traits
-        id: 09ab3a6b2bba
-        properties:
-        - lair_actions
-        heading: Azioni della Tana
-        conditioned: true
-        dice: true
-      - type: traits
-        id: 0aa8aa4a8b9b
-        properties:
-        - regional_effects
-        heading: Effetti Regionali
-        conditioned: true
-        dice: true
-      name: Basic 5e Layout ITA
-      id: aa0a584b6a5b
-      diceParsing: []
-    - blocks:
-      - type: inline
-        id: 55it-header-inline
-        properties: []
-        hasRule: true
-        nested:
-        - type: group
-          id: 55it-header-group
-          properties:
-          - name
-          - size
-          - type
-          - subtype
-          - alignment
-          nested:
-          - type: inline
-            id: 55it-title-actions-inline
-            properties: []
-            hasRule: false
-            nested:
-            - type: heading
-              id: 55it-name-heading
-              properties:
-              - name
-              conditioned: true
-              size: 1
-            - type: inline
-              id: 55it-initiative-tracker-actions
-              properties: []
-              hasRule: false
-              nested:
-              - type: action
-                id: 55it-start-encounter-action
-                icon: sword
-                callback: 'try { InitiativeTracker.newEncounter({roll: true, creatures: [monster]}); } catch(e) {}'
-              - type: action
-                id: 55it-add-creature-action
-                icon: plus-with-circle
-                callback: try { InitiativeTracker.addCreatures([monster]); } catch(e) {}
-          - type: subheading
-            id: 55it-subheading
-            properties:
-            - size
-            - type
-            - subtype
-            - alignment
-            conditioned: true
-            separator: ', '
-          conditioned: true
-        - type: image
-          id: 55it-image
-          properties:
-          - image
-      - type: group
-        id: 55it-core-defenses
-        properties:
-        - stats
-        - ac
-        - hp
-        - hit_dice
-        - speed
-        nested:
-        - type: inline
-          id: 55it-ac-initiative-inline
-          properties: []
-          hasRule: false
-          conditioned: true
-          nested:
-          - type: property
-            id: 55it-ac
-            properties:
-            - ac
-            display: CA
-            conditioned: true
-            callback: const ac = [monster.ac]; if (monster.ac_class) ac.push(`(${monster.ac_class})`); return ac.join(' ');
-          - type: property
-            id: 55it-initiative
-            properties:
-            - stats
-            display: Iniziativa
-            conditioned: true
-            callback: 'const stats = Array.isArray(monster.stats) ? monster.stats : [10,10,10,10,10,10]; const dex = Number(stats[1] ?? 10); const mod = Math.floor((dex - 10) / 2); const score = 10 + mod; return `${mod >= 0 ? ''+'' : ''''}${mod} (${score})`;'
-        - type: property
-          id: 55it-hp
-          properties:
-          - hp
-          display: PF
-          dice: true
-          diceProperty: hit_dice
-          diceCallback: 'if (monster.hit_dice) { return [{ text: monster.hit_dice }]; } return property;'
-          callback: const out = [monster.hp]; if (monster.hit_dice) out.push(`(${monster.hit_dice})`); return out.join(' ');
-          conditioned: true
-        - type: property
-          id: 55it-speed
-          display: Velocità
-          properties:
-          - speed
-          conditioned: true
-        hasRule: true
-        conditioned: true
-      - type: table
-        id: 55it-stats-table
-        properties:
-        - stats
-        headers:
-        - For
-        - Des
-        - Cos
-        - Int
-        - Sag
-        - Car
-        calculate: true
-        hasRule: true
-        conditioned: true
-      - type: table
-        id: 55it-fage-stats-compat
-        properties:
-        - fage_stats
-        headers:
-        - Accuracy
-        - Communication
-        - Constitution
-        - Dexterity
-        - Fighting
-        - Intelligence
-        - Perception
-        - Strength
-        - Willpower
-        calculate: false
-        hasRule: true
-        conditioned: true
-      - type: group
-        id: 55it-details
-        properties:
-        - saves
-        - skillsaves
-        - damage_immunities
-        - damage_resistances
-        - damage_vulnerabilities
-        - condition_immunities
-        - gear
-        - cr
-        - languages
-        - senses
-        nested:
-        - type: saves
-          id: 55it-saves
-          display: Tiri Salvezza
-          properties:
-          - saves
-          conditioned: true
-        - type: saves
-          id: 55it-skills
-          display: Abilità
-          properties:
-          - skillsaves
-          conditioned: true
-        - type: property
-          id: 55it-resistances
-          display: Resistenze
-          properties:
-          - damage_resistances
-          conditioned: true
-        - type: property
-          id: 55it-immunities
-          display: Immunità
-          properties:
-          - damage_immunities
-          conditioned: true
-        - type: property
-          id: 55it-condition-immunities
-          display: Immunità alle Condizioni
-          properties:
-          - condition_immunities
-          conditioned: true
-        - type: property
-          id: 55it-vulnerabilities
-          display: Vulnerabilità
-          properties:
-          - damage_vulnerabilities
-          conditioned: true
-        - type: property
-          id: 55it-gear
-          display: Equipaggiamento
-          properties:
-          - gear
-          conditioned: true
-        - type: property
-          id: 55it-senses
-          display: Sensi
-          properties:
-          - senses
-          conditioned: true
-        - type: property
-          id: 55it-languages
-          display: Linguaggi
-          properties:
-          - languages
-          fallback: —
-        - type: inline
-          id: 55it-cr-pb-inline
-          properties: []
-          conditioned: true
-          nested:
-          - type: property
-            id: 55it-cr
-            display: GS
-            properties:
-            - cr
-            callback: const CR = {"0":{cr:"0",value:0,xp:10},"1/8":{cr:"1/8",value:.125,xp:25},"1/4":{cr:"1/4",value:.25,xp:50},"1/2":{cr:"1/2",value:.5,xp:100},"0.125":{cr:"1/8",value:.125,xp:25},"0.25":{cr:"1/4",value:.25,xp:50},"0.5":{cr:"1/2",value:.5,xp:100},"1":{cr:"1",value:1,xp:200},"2":{cr:"2",value:2,xp:450},"3":{cr:"3",value:3,xp:700},"4":{cr:"4",value:4,xp:1100},"5":{cr:"5",value:5,xp:1800},"6":{cr:"6",value:6,xp:2300},"7":{cr:"7",value:7,xp:2900},"8":{cr:"8",value:8,xp:3900},"9":{cr:"9",value:9,xp:5000},"10":{cr:"10",value:10,xp:5900},"11":{cr:"11",value:11,xp:7200},"12":{cr:"12",value:12,xp:8400},"13":{cr:"13",value:13,xp:10000},"14":{cr:"14",value:14,xp:11500},"15":{cr:"15",value:15,xp:13000},"16":{cr:"16",value:16,xp:15000},"17":{cr:"17",value:17,xp:18000},"18":{cr:"18",value:18,xp:20000},"19":{cr:"19",value:19,xp:22000},"20":{cr:"20",value:20,xp:25000},"21":{cr:"21",value:21,xp:33000},"22":{cr:"22",value:22,xp:41000},"23":{cr:"23",value:23,xp:50000},"24":{cr:"24",value:24,xp:62000},"25":{cr:"25",value:25,xp:75000},"26":{cr:"26",value:26,xp:90000},"27":{cr:"27",value:27,xp:105000},"28":{cr:"28",value:28,xp:120000},"29":{cr:"29",value:29,xp:135000},"30":{cr:"30",value:30,xp:155000}};
-              if (monster.cr && monster.cr in CR) return `${CR[monster.cr].cr} (${CR[monster.cr].xp.toLocaleString()} PE)`; return monster.cr ?? '';
-            fallback: —
-          - type: property
-            id: 55it-pb
-            display: PB
-            properties:
-            - cr
-            callback: 'const CR = {"0":0,"1/8":.125,"1/4":.25,"1/2":.5,"0.125":.125,"0.25":.25,"0.5":.5,"1":1,"2":2,"3":3,"4":4,"5":5,"6":6,"7":7,"8":8,"9":9,"10":10,"11":11,"12":12,"13":13,"14":14,"15":15,"16":16,"17":17,"18":18,"19":19,"20":20,"21":21,"22":22,"23":23,"24":24,"25":25,"26":26,"27":27,"28":28,"29":29,"30":30}; if (monster.pb) return String(monster.pb).startsWith(''+'') ? monster.pb : `+${monster.pb}`; if (monster.proficiency_bonus) return String(monster.proficiency_bonus).startsWith(''+'') ? monster.proficiency_bonus : `+${monster.proficiency_bonus}`; if (monster.cr && monster.cr in CR) return `+${Math.max(Math.floor(2 + ((CR[monster.cr] ?? 0) - 1) / 4), 2)}`; return '''';'
-            fallback: —
-        conditioned: true
-        hasRule: true
-      - type: traits
-        id: 55it-traits
-        properties:
-        - traits
-        conditioned: true
-        dice: true
-        heading: ''
-      - type: spells
-        id: 55it-spells
-        properties:
-        - spells
-        conditioned: true
-        dice: true
-        heading: Incantesimi
-      - type: text
-        id: 55it-spells-notes
-        properties:
-        - spellsNotes
-        conditioned: true
-        text: null
-      - type: traits
-        id: 55it-actions
-        properties:
-        - actions
-        heading: Azioni
-        conditioned: true
-        dice: true
-      - type: traits
-        id: 55it-bonus-actions
-        properties:
-        - bonus_actions
-        heading: Azioni Bonus
-        conditioned: true
-        dice: true
-      - type: traits
-        id: 55it-reactions
-        properties:
-        - reactions
-        heading: Reazioni
-        conditioned: true
-        dice: true
-      - type: group
-        id: 55it-legendary-group
-        properties:
-        - legendary_description
-        - legendary_actions
-        heading: Azioni Leggendarie
-        nested:
-        - type: text
-          id: 55it-legendary-description
-          properties:
-          - legendary_description
-          conditioned: true
-          text: null
-          heading: ''
-        - type: traits
-          id: 55it-legendary-actions
-          properties:
-          - legendary_actions
-          conditioned: true
-          dice: true
-          heading: ''
-        conditioned: true
-      - type: group
-        id: 55it-mythic-group
-        properties:
-        - mythic_description
-        - mythic_actions
-        heading: Azioni Mitiche
-        nested:
-        - type: text
-          id: 55it-mythic-description
-          properties:
-          - mythic_description
-          conditioned: true
-          text: null
-        - type: traits
-          id: 55it-mythic-actions
-          properties:
-          - mythic_actions
-          conditioned: true
-          dice: true
-          heading: ''
-        conditioned: true
-      - type: traits
-        id: 55it-lair-actions
-        properties:
-        - lair_actions
-        heading: Azioni della Tana
-        conditioned: true
-        dice: true
-      - type: traits
-        id: 55it-regional-effects
-        properties:
-        - regional_effects
-        heading: Effetti Regionali
-        conditioned: true
-        dice: true
-      name: D&D 5.5 Layout ITA - Compatibile 5e
-      id: 094b38db081b
-      diceParsing: []
-    default: aa0a584b6a5b
-    useDice: true
-    renderDice: false
-    export: true
-    showAdvanced: true
-    version:
-      major: 4
-      minor: 10
-      patch: 3
-    paths:
-    - /
-    autoParse: true
-    disableSRD: false
-    tryToRenderLinks: true
-    debug: false
-    notifiedOfFantasy: false
-    hideConditionHelp: false
-    alwaysImport: false
-    defaultLayoutsIntegrated: true
-    atomicWrite: false
-- target: .obsidian/plugins/obsidian-dice-roller/data.json
-  data:
-    position: RIGHT
-    showFudgeIcon: false
-    rollLinksForTags: false
-    copyContentButton: true
-    customFormulas: []
-    displayFormulaForMod: true
-    displayResultsInline: false
-    displayFormulaAfter: false
-    escapeDiceMod: true
-    signed: false
-    displayLookupRoll: true
-    formulas: {}
-    defaultRoll: 1
-    defaultFace: 100
-    renderer: false
-    renderAllDice: false
-    addToView: false
-    renderTime: 2000
-    colorfulDice: false
-    scaler: 1
-    diceColor: '#202020'
-    textColor: '#ffffff'
-    textFont: Arial
-    showLeafOnStartup: true
-    narrativeSymbolSet: Genesys
-    displayAsSymbols: false
-    displayAsEmbed: true
-    round: None
-    initialDisplay: Roll
-    icons:
-    - id: dice-roller-d4
-      shape: Triangle
-      formula: d4
-      text: '4'
-    - id: dice-roller-d6
-      shape: Square
-      formula: d6
-      text: '6'
-    - id: dice-roller-d8
-      shape: Diamond
-      formula: d8
-      text: '8'
-    - id: dice-roller-d10
-      shape: Diamond
-      formula: d10
-      text: '10'
-    - id: dice-roller-d12
-      shape: Dodecahedron
-      formula: d12
-      text: '12'
-    - id: dice-roller-d20
-      shape: Icosahedron
-      formula: d20
-      text: '20'
-    - id: dice-roller-d100
-      shape: Circle
-      formula: d%
-      text: '%'
-    showRenderNotice: true
-    diceModTemplateFolders: {}
-    replaceDiceModInLivePreview: true
-    viewResults: []
-    version: 11.4.2
-- target: .obsidian/plugins/obsidian-excalidraw-plugin/data.json
-  data:
-    copyLinkToElemenetAnchorTo100: false
-    copyFrameLinkByName: false
-    disableDoubleClickTextEditing: false
-    phoneFooterSafeAreaPadding: false
-    folder: Risorse/Mappe
-    cropFolder: ''
-    annotateFolder: ''
-    embedUseExcalidrawFolder: false
-    templateFilePath: z.modelli/mappe/Mappa Excalidraw Fronti.excalidraw.md
-    scriptFolderPath: Excalidraw/Scripts
-    fontAssetsPath: Excalidraw/CJK Fonts
-    loadChineseFonts: false
-    loadJapaneseFonts: false
-    loadKoreanFonts: false
-    compress: true
-    decompressForMDView: false
-    onceOffCompressFlagReset: true
-    onceOffGPTVersionReset: true
-    autosave: true
-    autosaveIntervalDesktop: 60000
-    autosaveIntervalMobile: 30000
-    drawingFilenamePrefix: 'Drawing '
-    drawingEmbedPrefixWithFilename: true
-    drawingFilnameEmbedPostfix: ' '
-    drawingFilenameDateTime: YYYY-MM-DD HH.mm.ss
-    useExcalidrawExtension: true
-    cropSuffix: ''
-    cropPrefix: cropped_
-    annotateSuffix: ''
-    annotatePrefix: annotated_
-    annotatePreserveSize: false
-    displaySVGInPreview: false
-    previewImageType: SVG
-    renderingConcurrency: 3
-    imageCacheRetentionDays: 30
-    allowImageCache: true
-    allowImageCacheInScene: true
-    displayExportedImageIfAvailable: false
-    previewMatchObsidianTheme: false
-    width: '400'
-    height: ''
-    overrideObsidianFontSize: false
-    dynamicStyling: colorful
-    isLeftHanded: false
-    desktopUIMode: tray
-    tabletUIMode: compact
-    phoneUIMode: mobile
-    iframeMatchExcalidrawTheme: true
-    matchTheme: false
-    matchThemeAlways: false
-    matchThemeTrigger: false
-    defaultMode: normal
-    defaultPenMode: never
-    penModeDoubleTapEraser: true
-    penModeSingleFingerPanning: true
-    penModeCrosshairVisible: true
-    panWithRightMouseButton: false
-    renderImageInMarkdownReadingMode: true
-    renderImageInHoverPreviewForMDNotes: false
-    renderImageInMarkdownToPDF: false
-    allowPinchZoom: false
-    allowWheelZoom: false
-    zoomToFitOnOpen: true
-    zoomToFitOnResize: false
-    zoomToFitMaxLevel: 2
-    zoomStep: 0.05
-    zoomMin: 0.1
-    zoomMax: 30
-    linkPrefix: 📍
-    urlPrefix: 🌐
-    parseTODO: false
-    todo: ☐
-    done: 🗹
-    hoverPreviewWithoutCTRL: true
-    linkOpacity: 1
-    openInAdjacentPane: true
-    showSecondOrderLinks: true
-    focusOnFileTab: true
-    openInMainWorkspace: true
-    showLinkBrackets: false
-    syncElementLinkWithText: false
-    allowCtrlClick: true
-    forceWrap: false
-    pageTransclusionCharLimit: 200
-    wordWrappingDefault: 0
-    removeTransclusionQuoteSigns: true
-    iframelyAllowed: false
-    pngExportScale: 1
-    exportWithTheme: true
-    exportWithBackground: true
-    exportPaddingSVG: 10
-    exportEmbedScene: false
-    keepInSync: false
-    autoexportSVG: false
-    autoexportPNG: false
-    autoExportLightAndDark: false
-    autoexportExcalidraw: false
-    embedType: excalidraw
-    embedMarkdownCommentLinks: true
-    embedWikiLink: true
-    syncExcalidraw: false
-    experimentalFileType: false
-    experimentalFileTag: ✏️
-    experimentalLivePreview: true
-    fadeOutExcalidrawMarkup: false
-    loadPropertySuggestions: false
-    experimentalEnableFourthFont: false
-    experimantalFourthFont: Virgil
-    addDummyTextElement: false
-    zoteroCompatibility: false
-    fieldSuggester: true
-    enableOnloadScripts: false
-    compatibilityMode: false
-    drawingOpenCount: 0
-    library: deprecated
-    library2:
-      type: excalidrawlib
-      version: 2
-      source: https://github.com/zsviczian/obsidian-excalidraw-plugin/releases/tag2.23.3
-      libraryItems: []
-    imageElementNotice: true
-    mdSVGwidth: 500
-    mdSVGmaxHeight: 800
-    mdFont: Virgil
-    mdFontColor: Black
-    mdBorderColor: Black
-    mdCSS: ''
-    scriptEngineSettings: {}
-    previousRelease: 2.23.3
-    showReleaseNotes: true
-    excalidrawMasteryPromoCollapsed: false
-    compareManifestToPluginVersion: true
-    showNewVersionNotification: true
-    latexBoilerplate: \color{green}e=mc^2
-    latexPreambleLocation: preamble.sty
-    taskboneEnabled: false
-    taskboneAPIkey: ''
-    pinnedScripts: []
-    sidepanelTabs: []
-    customPens:
-    - type: default
-      freedrawOnly: false
-      strokeColor: '#000000'
-      backgroundColor: transparent
-      fillStyle: hachure
-      strokeWidth: 0
-      roughness: 0
-      penOptions:
-        highlighter: false
-        constantPressure: false
-        hasOutline: false
-        outlineWidth: 1
-        options:
-          thinning: 0.6
-          smoothing: 0.5
-          streamline: 0.5
-          easing: easeOutSine
-          start:
-            cap: true
-            taper: 0
-            easing: linear
-          end:
-            cap: true
-            taper: 0
-            easing: linear
-    - type: highlighter
-      freedrawOnly: true
-      strokeColor: '#FFC47C'
-      backgroundColor: '#FFC47C'
-      fillStyle: solid
-      strokeWidth: 2
-      roughness: null
-      penOptions:
-        highlighter: true
-        constantPressure: true
-        hasOutline: true
-        outlineWidth: 4
-        options:
-          thinning: 1
-          smoothing: 0.5
-          streamline: 0.5
-          easing: linear
-          start:
-            taper: 0
-            cap: true
-            easing: linear
-          end:
-            taper: 0
-            cap: true
-            easing: linear
-    - type: finetip
-      freedrawOnly: false
-      strokeColor: '#3E6F8D'
-      backgroundColor: transparent
-      fillStyle: hachure
-      strokeWidth: 0.5
-      roughness: 0
-      penOptions:
-        highlighter: false
-        hasOutline: false
-        outlineWidth: 1
-        constantPressure: true
-        options:
-          smoothing: 0.4
-          thinning: -0.5
-          streamline: 0.4
-          easing: linear
-          start:
-            taper: 5
-            cap: false
-            easing: linear
-          end:
-            taper: 5
-            cap: false
-            easing: linear
-    - type: fountain
-      freedrawOnly: false
-      strokeColor: '#000000'
-      backgroundColor: transparent
-      fillStyle: hachure
-      strokeWidth: 2
-      roughness: 0
-      penOptions:
-        highlighter: false
-        constantPressure: false
-        hasOutline: false
-        outlineWidth: 1
-        options:
-          smoothing: 0.2
-          thinning: 0.6
-          streamline: 0.2
-          easing: easeInOutSine
-          start:
-            taper: 150
-            cap: true
-            easing: linear
-          end:
-            taper: 1
-            cap: true
-            easing: linear
-    - type: marker
-      freedrawOnly: true
-      strokeColor: '#B83E3E'
-      backgroundColor: '#FF7C7C'
-      fillStyle: dashed
-      strokeWidth: 2
-      roughness: 3
-      penOptions:
-        highlighter: false
-        constantPressure: true
-        hasOutline: true
-        outlineWidth: 4
-        options:
-          thinning: 1
-          smoothing: 0.5
-          streamline: 0.5
-          easing: linear
-          start:
-            taper: 0
-            cap: true
-            easing: linear
-          end:
-            taper: 0
-            cap: true
-            easing: linear
-    - type: thick-thin
-      freedrawOnly: true
-      strokeColor: '#CECDCC'
-      backgroundColor: transparent
-      fillStyle: hachure
-      strokeWidth: 0
-      roughness: null
-      penOptions:
-        highlighter: true
-        constantPressure: true
-        hasOutline: false
-        outlineWidth: 1
-        options:
-          thinning: 1
-          smoothing: 0.5
-          streamline: 0.5
-          easing: linear
-          start:
-            taper: 0
-            cap: true
-            easing: linear
-          end:
-            cap: true
-            taper: true
-            easing: linear
-    - type: thin-thick-thin
-      freedrawOnly: true
-      strokeColor: '#CECDCC'
-      backgroundColor: transparent
-      fillStyle: hachure
-      strokeWidth: 0
-      roughness: null
-      penOptions:
-        highlighter: true
-        constantPressure: true
-        hasOutline: false
-        outlineWidth: 1
-        options:
-          thinning: 1
-          smoothing: 0.5
-          streamline: 0.5
-          easing: linear
-          start:
-            cap: true
-            taper: true
-            easing: linear
-          end:
-            cap: true
-            taper: true
-            easing: linear
-    - type: default
-      freedrawOnly: false
-      strokeColor: '#000000'
-      backgroundColor: transparent
-      fillStyle: hachure
-      strokeWidth: 0
-      roughness: 0
-      penOptions:
-        highlighter: false
-        constantPressure: false
-        hasOutline: false
-        outlineWidth: 1
-        options:
-          thinning: 0.6
-          smoothing: 0.5
-          streamline: 0.5
-          easing: easeOutSine
-          start:
-            cap: true
-            taper: 0
-            easing: linear
-          end:
-            cap: true
-            taper: 0
-            easing: linear
-    - type: default
-      freedrawOnly: false
-      strokeColor: '#000000'
-      backgroundColor: transparent
-      fillStyle: hachure
-      strokeWidth: 0
-      roughness: 0
-      penOptions:
-        highlighter: false
-        constantPressure: false
-        hasOutline: false
-        outlineWidth: 1
-        options:
-          thinning: 0.6
-          smoothing: 0.5
-          streamline: 0.5
-          easing: easeOutSine
-          start:
-            cap: true
-            taper: 0
-            easing: linear
-          end:
-            cap: true
-            taper: 0
-            easing: linear
-    - type: default
-      freedrawOnly: false
-      strokeColor: '#000000'
-      backgroundColor: transparent
-      fillStyle: hachure
-      strokeWidth: 0
-      roughness: 0
-      penOptions:
-        highlighter: false
-        constantPressure: false
-        hasOutline: false
-        outlineWidth: 1
-        options:
-          thinning: 0.6
-          smoothing: 0.5
-          streamline: 0.5
-          easing: easeOutSine
-          start:
-            cap: true
-            taper: 0
-            easing: linear
-          end:
-            cap: true
-            taper: 0
-            easing: linear
-    numberOfCustomPens: 0
-    pdfScale: 4
-    pdfBorderBox: true
-    pdfFrame: false
-    pdfGapSize: 20
-    pdfGroupPages: false
-    pdfLockAfterImport: true
-    pdfNumColumns: 1
-    pdfNumRows: 1
-    pdfDirection: right
-    pdfImportScale: 0.3
-    gridSettings:
-      DYNAMIC_COLOR: true
-      COLOR: '#000000'
-      OPACITY: 50
-      GRID_DIRECTION:
-        horizontal: true
-        vertical: true
-    laserSettings:
-      DECAY_LENGTH: 50
-      DECAY_TIME: 1000
-      COLOR: '#ff0000'
-    embeddableMarkdownDefaults:
-      useObsidianDefaults: false
-      backgroundMatchCanvas: false
-      backgroundMatchElement: true
-      backgroundColor: '#fff'
-      backgroundOpacity: 60
-      borderMatchElement: true
-      borderColor: '#fff'
-      borderOpacity: 0
-      filenameVisible: false
-    markdownNodeOneClickEditing: false
-    canvasImmersiveEmbed: true
-    startupScriptPath: ''
-    aiEnabled: true
-    aiVerboseLogging: false
-    aiProviderProfiles:
-      OpenAI:
-        provider: openai
-        apiKey: ''
-        baseURL: https://api.openai.com/v1
-      Anthropic:
-        provider: anthropic
-        apiKey: ''
-        baseURL: https://api.anthropic.com/v1
-      Google Gemini:
-        provider: google
-        apiKey: ''
-        baseURL: https://generativelanguage.googleapis.com/v1beta
-      xAI:
-        provider: xai
-        apiKey: ''
-        baseURL: https://api.x.ai/v1
-      OpenAI-compatible:
-        provider: openai-compatible
-        apiKey: ''
-        baseURL: https://api.openai.com/v1
-    aiTextModelConfigs:
-      gpt-5-mini:
-        providerId: OpenAI
-        model: gpt-5-mini
-        endpoint: ''
-        multimodalSupport: true
-      claude-sonnet-4-5:
-        providerId: Anthropic
-        model: claude-sonnet-4-5
-        endpoint: ''
-        multimodalSupport: true
-      gemini-2.5-pro:
-        providerId: Google Gemini
-        model: gemini-2.5-pro
-        endpoint: ''
-        multimodalSupport: true
-      grok-4-fast:
-        providerId: xAI
-        model: grok-4-fast
-        endpoint: ''
-        multimodalSupport: true
-    aiImageModelConfigs:
-      dall-e-2:
-        providerId: OpenAI
-        model: dall-e-2
-        supportedSizes:
-        - 256x256
-        - 512x512
-        - 1024x1024
-        supportsPromptImageTransforms: true
-        supportsMaskImageEdits: true
-      dall-e-3:
-        providerId: OpenAI
-        model: dall-e-3
-        supportedSizes:
-        - 1024x1024
-        - 1792x1024
-        - 1024x1792
-        supportsPromptImageTransforms: false
-        supportsMaskImageEdits: false
-      gpt-image-1:
-        providerId: OpenAI
-        model: gpt-image-1
-        supportedSizes:
-        - 1024x1024
-        - 1536x1024
-        - 1024x1536
-        supportsPromptImageTransforms: true
-        supportsMaskImageEdits: true
-      gpt-image-1-mini:
-        providerId: OpenAI
-        model: gpt-image-1-mini
-        supportedSizes:
-        - 1024x1024
-        - 1536x1024
-        - 1024x1536
-        supportsPromptImageTransforms: true
-        supportsMaskImageEdits: true
-      gpt-image-1.5:
-        providerId: OpenAI
-        model: gpt-image-1.5
-        supportedSizes:
-        - 1024x1024
-        - 1536x1024
-        - 1024x1536
-        supportsPromptImageTransforms: true
-        supportsMaskImageEdits: true
-      gpt-image-2:
-        providerId: OpenAI
-        model: gpt-image-2
-        supportedSizes:
-        - 1024x1024
-        - 1536x1024
-        - 1024x1536
-        - 2048x2048
-        supportsPromptImageTransforms: true
-        supportsMaskImageEdits: true
-      gemini-2.5-flash-image:
-        providerId: Google Gemini
-        model: gemini-2.5-flash-image
-        supportedSizes:
-        - 1024x1024
-        supportsPromptImageTransforms: true
-        supportsMaskImageEdits: false
-      gemini-3.1-flash-image-preview:
-        providerId: Google Gemini
-        model: gemini-3.1-flash-image-preview
-        supportedSizes:
-        - 1024x1024
-        supportsPromptImageTransforms: true
-        supportsMaskImageEdits: false
-      gemini-3-pro-image-preview:
-        providerId: Google Gemini
-        model: gemini-3-pro-image-preview
-        supportedSizes:
-        - 1024x1024
-        supportsPromptImageTransforms: true
-        supportsMaskImageEdits: false
-      grok-imagine-image-quality:
-        providerId: xAI
-        model: grok-imagine-image-quality
-        supportedSizes:
-        - 1024x1024
-        supportsPromptImageTransforms: true
-        supportsMaskImageEdits: false
-      grok-imagine-image-pro:
-        providerId: xAI
-        model: grok-imagine-image-pro
-        supportedSizes:
-        - 1024x1024
-        supportsPromptImageTransforms: true
-        supportsMaskImageEdits: false
-    aiDefaultTextModel: gpt-5-mini
-    aiDefaultImageGenerationModel: gpt-image-1
-    aiDefaultMaxOutgoingTokens: 0
-    aiDefaultMaxResponseTokens: 0
-    modifierKeyConfig:
-      Mac:
-        LocalFileDragAction:
-          defaultAction: image-import
-          rules:
-          - shift: false
-            ctrl_cmd: false
-            alt_opt: false
-            meta_ctrl: false
-            result: image-import
-          - shift: true
-            ctrl_cmd: false
-            alt_opt: true
-            meta_ctrl: false
-            result: link
-          - shift: true
-            ctrl_cmd: false
-            alt_opt: false
-            meta_ctrl: false
-            result: image-url
-          - shift: false
-            ctrl_cmd: false
-            alt_opt: true
-            meta_ctrl: false
-            result: embeddable
-        WebBrowserDragAction:
-          defaultAction: image-url
-          rules:
-          - shift: false
-            ctrl_cmd: false
-            alt_opt: false
-            meta_ctrl: false
-            result: image-url
-          - shift: true
-            ctrl_cmd: false
-            alt_opt: true
-            meta_ctrl: false
-            result: link
-          - shift: false
-            ctrl_cmd: false
-            alt_opt: true
-            meta_ctrl: false
-            result: embeddable
-          - shift: true
-            ctrl_cmd: false
-            alt_opt: false
-            meta_ctrl: false
-            result: image-import
-        InternalDragAction:
-          defaultAction: link
-          rules:
-          - shift: false
-            ctrl_cmd: false
-            alt_opt: false
-            meta_ctrl: false
-            result: link
-          - shift: false
-            ctrl_cmd: false
-            alt_opt: false
-            meta_ctrl: true
-            result: embeddable
-          - shift: true
-            ctrl_cmd: false
-            alt_opt: false
-            meta_ctrl: false
-            result: image
-          - shift: true
-            ctrl_cmd: false
-            alt_opt: false
-            meta_ctrl: true
-            result: image-fullsize
-        LinkClickAction:
-          defaultAction: new-tab
-          rules:
-          - shift: true
-            ctrl_cmd: true
-            alt_opt: false
-            meta_ctrl: false
-            result: active-pane
-          - shift: false
-            ctrl_cmd: true
-            alt_opt: false
-            meta_ctrl: false
-            result: new-tab
-          - shift: false
-            ctrl_cmd: true
-            alt_opt: true
-            meta_ctrl: false
-            result: new-pane
-          - shift: true
-            ctrl_cmd: true
-            alt_opt: true
-            meta_ctrl: false
-            result: popout-window
-          - shift: false
-            ctrl_cmd: true
-            alt_opt: false
-            meta_ctrl: true
-            result: md-properties
-      Win:
-        LocalFileDragAction:
-          defaultAction: image-import
-          rules:
-          - shift: false
-            ctrl_cmd: false
-            alt_opt: false
-            meta_ctrl: false
-            result: image-import
-          - shift: false
-            ctrl_cmd: true
-            alt_opt: false
-            meta_ctrl: false
-            result: link
-          - shift: true
-            ctrl_cmd: false
-            alt_opt: false
-            meta_ctrl: false
-            result: image-url
-          - shift: true
-            ctrl_cmd: true
-            alt_opt: false
-            meta_ctrl: false
-            result: embeddable
-        WebBrowserDragAction:
-          defaultAction: image-url
-          rules:
-          - shift: false
-            ctrl_cmd: false
-            alt_opt: false
-            meta_ctrl: false
-            result: image-url
-          - shift: false
-            ctrl_cmd: true
-            alt_opt: false
-            meta_ctrl: false
-            result: link
-          - shift: true
-            ctrl_cmd: true
-            alt_opt: false
-            meta_ctrl: false
-            result: embeddable
-          - shift: true
-            ctrl_cmd: false
-            alt_opt: false
-            meta_ctrl: false
-            result: image-import
-        InternalDragAction:
-          defaultAction: link
-          rules:
-          - shift: false
-            ctrl_cmd: false
-            alt_opt: false
-            meta_ctrl: false
-            result: link
-          - shift: true
-            ctrl_cmd: true
-            alt_opt: false
-            meta_ctrl: false
-            result: embeddable
-          - shift: true
-            ctrl_cmd: false
-            alt_opt: false
-            meta_ctrl: false
-            result: image
-          - shift: false
-            ctrl_cmd: true
-            alt_opt: true
-            meta_ctrl: false
-            result: image-fullsize
-        LinkClickAction:
-          defaultAction: new-tab
-          rules:
-          - shift: false
-            ctrl_cmd: false
-            alt_opt: false
-            meta_ctrl: false
-            result: active-pane
-          - shift: false
-            ctrl_cmd: true
-            alt_opt: false
-            meta_ctrl: false
-            result: new-tab
-          - shift: false
-            ctrl_cmd: true
-            alt_opt: true
-            meta_ctrl: false
-            result: new-pane
-          - shift: true
-            ctrl_cmd: true
-            alt_opt: true
-            meta_ctrl: false
-            result: popout-window
-          - shift: false
-            ctrl_cmd: true
-            alt_opt: false
-            meta_ctrl: true
-            result: md-properties
-    slidingPanesSupport: false
-    areaZoomLimit: 1
-    longPressDesktop: 500
-    longPressMobile: 500
-    doubleClickLinkOpenViewMode: true
-    rank: Bronze
-    modifierKeyOverrides:
-    - modifiers:
-      - Mod
-      key: Enter
-    - modifiers:
-      - Mod
-      key: k
-    - modifiers:
-      - Mod
-      key: G
-    showSplashscreen: true
-    pdfSettings:
-      pageSize: A4
-      pageOrientation: portrait
-      fitToPage: 1
-      paperColor: white
-      customPaperColor: '#ffffff'
-      alignment: center
-      margin: normal
-    disableContextMenu: false
-- target: .obsidian/plugins/obsidian-icon-folder/data.json
-  data:
-    settings:
-      migrated: 6
-      iconPacksPath: .obsidian/icons
-      fontSize: 16
-      emojiStyle: native
-      iconColor: null
-      recentlyUsedIcons:
-      - 🔅
-      - 🏠
-      - LiHome
-      - 🤖
-      - LiBoxes
-      recentlyUsedIconsSize: 5
-      rules: []
-      extraMargin:
-        top: 0
-        right: 4
-        bottom: 0
-        left: 0
-      iconInTabsEnabled: false
-      iconInTitleEnabled: false
-      iconInTitlePosition: above
-      iconInFrontmatterEnabled: false
-      iconInFrontmatterFieldName: icon
-      iconColorInFrontmatterFieldName: iconColor
-      iconsBackgroundCheckEnabled: false
-      iconsInNotesEnabled: true
-      iconsInLinksEnabled: true
-      iconIdentifier: ':'
-      lucideIconPackType: native
-      debugMode: false
-      useInternalPlugins: false
-    Inizia Qui.md: LiCompass
-    VERSION.md: LiBadgeCheck
-    Dev: LiFolderCog
-    Hub/1. DM Dashboard.md: LiHome
-    Inbox: LiInbox
-    Inbox/Inbox.md: LiInbox
-    Campagne: LiScrollText
-    Campagne/Campagne.md: LiScrollText
-    Mondi: LiGlobe2
-    Mondi/Mondo.md: LiGlobe2
-    Mondi/Personaggi: LiUsers
-    Mondi/Personaggi/Personaggi.md: LiUsers
-    Mondi/Luoghi: LiMapPinned
-    Mondi/Luoghi/Luoghi.md: LiMapPinned
-    Mondi/Creature: LiSkull
-    Mondi/Creature/Creature.md: LiSkull
-    Mondi/Fazioni: LiShield
-    Mondi/Fazioni/Fazioni.md: LiShield
-    Mondi/Religioni: LiLandmark
-    Mondi/Religioni/Religioni.md: LiLandmark
-    Mondi/Oggetti: LiGem
-    Mondi/Oggetti/Oggetti.md: LiGem
-    Mondi/Missioni: LiScroll
-    Mondi/Missioni/Missioni.md: LiScroll
-    Mondi/Incontri: LiSwords
-    Mondi/Incontri/Incontri.md: LiSwords
-    Mondi/Dispense: LiFileText
-    Mondi/Dispense/Dispense.md: LiFileText
-    Mondi/Sessioni: LiCalendarDays
-    Mondi/Sessioni/Sessioni.md: LiCalendarDays
-    Mondi/Calendario.md: LiCalendar
-    Risorse: LiArchive
-    Risorse/Risorse.md: LiArchive
-    Risorse/Mappe: LiMap
-    Risorse/Mappe/Mappe.md: LiMap
-    Risorse/Immagini: LiImage
-    Risorse/Immagini/Immagini.md: LiImage
-    Risorse/Audio: LiMusic
-    Risorse/Audio/Audio.md: LiMusic
-    Risorse/Video: LiVideo
-    Risorse/Video/Video.md: LiVideo
-    Risorse/Tabelle: LiTable2
-    Risorse/Dispense: LiFiles
-    Risorse/Dispense/Dispense.md: LiFiles
-    Risorse/Callout GDR.md: LiPanelTop
-    Risorse/Guida DM.md: LiBookOpen
-    Risorse/FAQ.md: LiCircleHelp
-    Risorse/Controllo Vault.md: LiClipboardList
-    Risorse/Setup Guidato.md: LiBadgeCheck
-    Dev/Sviluppo Vault.md: LiRoute
-    Risorse/Preparazione Sessione.md: LiListChecks
-    z.modelli: LiFileCode2
-    z.automazioni: LiCog
-    z.automazioni/entita: LiCog
-    z.bacheche: LiKanban
-    z.bacheche/Post Sessione.md: LiClipboardCheck
-- target: .obsidian/plugins/obsidian-linter/data.json
-  data:
-    ruleConfigs:
-      add-blank-line-after-yaml:
-        enabled: true
-      dedupe-yaml-array-values:
-        enabled: false
-        dedupe-alias-key: true
-        dedupe-tag-key: true
-        dedupe-array-keys: true
-        ignore-keys: ''
-      escape-yaml-special-characters:
-        enabled: false
-        try-to-escape-single-line-arrays: false
-      force-yaml-escape:
-        enabled: false
-        force-yaml-escape-keys: ''
-      format-tags-in-yaml:
-        enabled: false
-      format-yaml-array:
-        enabled: false
-        alias-key: true
-        tag-key: true
-        default-array-style: single-line
-        default-array-keys: true
-        force-single-line-array-style: ''
-        force-multi-line-array-style: ''
-      insert-yaml-attributes:
-        enabled: false
-        text-to-insert: "aliases: \ntags: "
-      move-tags-to-yaml:
-        enabled: false
-        how-to-handle-existing-tags: Nothing
-        tags-to-ignore: ''
-      remove-yaml-keys:
-        enabled: false
-        yaml-keys-to-remove: ''
-      sort-yaml-array-values:
-        enabled: false
-        sort-alias-key: true
-        sort-tag-key: true
-        sort-array-keys: true
-        ignore-keys: ''
-        sort-order: Ascending Alphabetical
-      yaml-key-sort:
-        enabled: false
-        yaml-key-priority-sort-order: ''
-        priority-keys-at-start-of-yaml: true
-        yaml-sort-order-for-other-keys: None
-      yaml-timestamp:
-        enabled: false
-        date-created: true
-        date-created-key: date created
-        date-created-source-of-truth: file system
-        date-modified: true
-        date-modified-key: date modified
-        date-modified-source-of-truth: file system
-        format: dddd, MMMM Do YYYY, h:mm:ss a
-        convert-to-utc: false
-        update-on-file-contents-updated: never
-      yaml-title:
-        enabled: false
-        title-key: title
-        mode: first-h1-or-filename-if-h1-missing
-      yaml-title-alias:
-        enabled: false
-        preserve-existing-alias-section-style: true
-        keep-alias-that-matches-the-filename: false
-        use-yaml-key-to-keep-track-of-old-filename-or-heading: true
-        alias-helper-key: linter-yaml-title-alias
-      capitalize-headings:
-        enabled: false
-        style: Title Case
-        ignore-case-words: true
-        ignore-words: macOS, iOS, iPhone, iPad, JavaScript, TypeScript, AppleScript, I
-        lowercase-words: a, an, the, aboard, about, abt., above, abreast, absent, across, after, against, along, aloft, alongside, amid, amidst, mid, midst, among, amongst, anti, apropos, around, round, as, aslant, astride, at, atop, ontop, bar, barring, before, B4, behind, below, beneath, neath, beside, besides, between, 'tween, beyond, but, by, chez, circa, c., ca., come, concerning, contra, counting, cum, despite, spite, down, during, effective, ere, except, excepting, excluding, failing, following, for, from, in, including, inside, into, less, like, minus, modulo, mod, near, nearer, nearest, next, notwithstanding, of, o', off, offshore, on, onto, opposite, out, outside, over, o'er, pace, past, pending, per, plus, post, pre, pro, qua, re, regarding, respecting, sans, save, saving, short, since, sub, than, through, thru, throughout, thruout, till, times, to, t', touching, toward, towards, under, underneath, unlike, until, unto, up, upon, versus, vs., v., via, vice, vis-à-vis, wanting,
-          with, w/, w., c̄, within, w/i, without, 'thout, w/o, abroad, adrift, aft, afterward, afterwards, ahead, apart, ashore, aside, away, back, backward, backwards, beforehand, downhill, downstage, downstairs, downstream, downward, downwards, downwind, east, eastward, eastwards, forth, forward, forwards, heavenward, heavenwards, hence, henceforth, here, hereby, herein, hereof, hereto, herewith, home, homeward, homewards, indoors, inward, inwards, leftward, leftwards, north, northeast, northward, northwards, northwest, now, onward, onwards, outdoors, outward, outwards, overboard, overhead, overland, overseas, rightward, rightwards, seaward, seawards, skywards, skyward, south, southeast, southwards, southward, southwest, then, thence, thenceforth, there, thereby, therein, thereof, thereto, therewith, together, underfoot, underground, uphill, upstage, upstairs, upstream, upward, upwards, upwind, west, westward, westwards, when, whence, where, whereby, wherein, whereto, wherewith, although,
-          because, considering, given, granted, if, lest, once, provided, providing, seeing, so, supposing, though, unless, whenever, whereas, wherever, while, whilst, ago, inasmuch, even, whether, whose, whoever, why, how, whatever, what, both, and, or, either, neither, nor, just, rather, such, that, yet, is, it
-      file-name-heading:
-        enabled: false
-      header-increment:
-        enabled: false
-        start-at-h2: false
-      headings-start-line:
-        enabled: false
-      remove-trailing-punctuation-in-heading:
-        enabled: false
-        punctuation-to-remove: .,;:!。，；：！
-      footnote-after-punctuation:
-        enabled: false
-      move-footnotes-to-the-bottom:
-        enabled: false
-        include-blank-line-between-footnotes: false
-      re-index-footnotes:
-        enabled: false
-      auto-correct-common-misspellings:
-        enabled: false
-        ignore-words: ''
-        skip-words-with-multiple-capitals: false
-        extra-auto-correct-files: []
-      blockquote-style:
-        enabled: false
-        style: space
-      convert-bullet-list-markers:
-        enabled: false
-      default-language-for-code-fences:
-        enabled: false
-        default-language: ''
-      emphasis-style:
-        enabled: false
-        style: consistent
-      no-bare-urls:
-        enabled: false
-        no-bare-uris: false
-      ordered-list-style:
-        enabled: false
-        number-style: ascending
-        list-end-style: .
-      proper-ellipsis:
-        enabled: false
-      quote-style:
-        enabled: false
-        single-quote-enabled: true
-        single-quote-style: ''''''
-        double-quote-enabled: true
-        double-quote-style: '""'
-      remove-consecutive-list-markers:
-        enabled: false
-      remove-empty-list-markers:
-        enabled: false
-      remove-hyphenated-line-breaks:
-        enabled: false
-      remove-multiple-spaces:
-        enabled: false
-      strong-style:
-        enabled: false
-        style: consistent
-      two-spaces-between-lines-with-content:
-        enabled: false
-        line-break-indicator: '  '
-      unordered-list-style:
-        enabled: false
-        list-style: consistent
-      compact-yaml:
-        enabled: false
-        inner-new-lines: false
-      consecutive-blank-lines:
-        enabled: true
-      convert-spaces-to-tabs:
-        enabled: false
-        tabsize: 4
-      empty-line-around-blockquotes:
-        enabled: false
-      empty-line-around-code-fences:
-        enabled: false
-      empty-line-around-horizontal-rules:
-        enabled: false
-      empty-line-around-math-blocks:
-        enabled: false
-      empty-line-around-tables:
-        enabled: false
-      heading-blank-lines:
-        enabled: false
-        bottom: true
-        empty-line-after-yaml: true
-      line-break-at-document-end:
-        enabled: true
-      move-math-block-indicators-to-their-own-line:
-        enabled: false
-      paragraph-blank-lines:
-        enabled: false
-      remove-empty-lines-between-list-markers-and-checklists:
-        enabled: false
-      remove-link-spacing:
-        enabled: false
-      remove-space-around-characters:
-        enabled: false
-        include-fullwidth-forms: true
-        include-cjk-symbols-and-punctuation: true
-        include-dashes: true
-        other-symbols: ''
-      remove-space-before-or-after-characters:
-        enabled: false
-        characters-to-remove-space-before: ',!?;:).’”]'
-        characters-to-remove-space-after: ¿¡‘“([
-      space-after-list-markers:
-        enabled: false
-      space-between-chinese-japanese-or-korean-and-english-or-numbers:
-        enabled: false
-        english-symbols-punctuation-before: -+;:'"°%$)]
-        english-symbols-punctuation-after: -+'"([¥$
-      trailing-spaces:
-        enabled: true
-        two-space-line-break: false
-      add-blockquote-indentation-on-paste:
-        enabled: false
-      prevent-double-checklist-indicator-on-paste:
-        enabled: false
-      prevent-double-list-item-indicator-on-paste:
-        enabled: false
-      proper-ellipsis-on-paste:
-        enabled: false
-      remove-hyphens-on-paste:
-        enabled: false
-      remove-leading-or-trailing-whitespace-on-paste:
-        enabled: false
-      remove-leftover-footnotes-from-quote-on-paste:
-        enabled: false
-      remove-multiple-blank-lines-on-paste:
-        enabled: false
-    lintOnSave: false
-    recordLintOnSaveLogs: false
-    displayChanged: true
-    suppressMessageWhenNoChange: false
-    lintOnFileChange: false
-    displayLintOnFileChangeNotice: false
-    settingsConvertedToConfigKeyValues: true
-    additionalFileExtensions: []
-    foldersToIgnore:
-    - SRD
-    - Risorse/Mappe
-    - .obsidian
-    filesToIgnore: []
-    linterLocale: system-default
-    logLevel: ERROR
-    lintCommands: []
-    customRegexes: []
-    commonStyles:
-      aliasArrayStyle: single-line
-      tagArrayStyle: single-line
-      minimumNumberOfDollarSignsToBeAMathBlock: 2
-      escapeCharacter: '"'
-      removeUnnecessaryEscapeCharsForMultiLineArrays: false
-- target: .obsidian/plugins/obsidian-style-settings/data.json
-  data:
-    minimal-style@@base@@light: '#2288BB'
-    gdr-vault@@gdr-palette: gdr-palette-scriptorium
-    gdr-vault@@gdr-readable-width: 1120
-    gdr-vault@@gdr-dashboard-density: 0.75rem
-    gdr-vault@@gdr-table-density: 0.42rem
-    gdr-vault@@gdr-card-depth: 0 8px 22px rgba(0, 0, 0, 0.08)
-    gdr-vault@@gdr-callout-density: 0.85rem
-- target: .obsidian/plugins/obsidian-tasks-plugin/data.json
-  data:
-    globalFilter: '#task'
-    removeGlobalFilter: false
-    globalQuery: ''
-    taskFormat: tasksPluginEmoji
-    loggingOptions:
-      minLevels:
-        ? ''
-        : error
-        tasks: error
-        tasks.Cache: error
-        tasks.Events: error
-        tasks.File: error
-        tasks.Query: error
-        tasks.Task: error
-- target: .obsidian/plugins/obsidian42-brat/brat-migrations.json
-  data:
-    appliedMigrations:
-    - tokens-to-secretstorage-v1
-- target: .obsidian/plugins/table-editor-obsidian/data.json
-  data:
-    formatType: normal
-    showRibbonIcon: true
-    bindEnter: true
-    bindTab: true
-- target: .obsidian/plugins/templater-obsidian/data.json
-  data:
-    command_timeout: 10
-    templates_folder: z.modelli
-    templates_pairs: []
-    trigger_on_file_creation: false
-    auto_jump_to_cursor: false
-    enable_system_commands: false
-    shell_path: ''
-    user_scripts_folder: z.automazioni/templater
-    enable_folder_templates: false
-    folder_templates: []
-    enable_file_templates: false
-    file_templates: []
-    syntax_highlighting: true
-    syntax_highlighting_mobile: false
-    enabled_templates_hotkeys: []
-    startup_templates: []
-    intellisense_render: 1
-    ignore_folders_on_creation: []
-- target: .obsidian/types.json
-  data:
-    types:
-      aliases: aliases
-      cssclasses: multitext
-      tags: tags
-      id: text
-      nome: text
-      categoria: text
-      tipo: text
-      sottotipo: text
-      stato: text
-      canonico: checkbox
-      mondo: text
-      mondi: multitext
-      data: date
-      data_mondo: text
-      campagne: multitext
-      luogo: text
-      luogo_padre: text
-      luoghi: multitext
-      continenti: multitext
-      personaggi: multitext
-      creature: multitext
-      fazioni: multitext
-      religioni: multitext
-      relazioni: multitext
-      risorse: multitext
-      problemi: multitext
-      scene: multitext
-      ricompense: multitext
-      committente: text
-      sessioni: multitext
-      leader: multitext
-      alleati: multitext
-      nemici: multitext
-      templi: multitext
-      divinita: multitext
-      proprietario: text
-      giocatore: text
-      classe: text
-      livello: number
-      livello_attuale: number
-      specie: text
-      background: text
-      tono: text
-      tema: text
-      tecnologia: text
-      magia: text
-      segreto: text
-      atteggiamento: text
-      ruolo: text
-      rarita: text
-      sintonia: checkbox
-      cariche: number
-      maledizione: checkbox
-      bioma: text
-      popolazione: number
-      stabilita: number
-      pericolo: number
-      hp_massimi: number
-      hp_attuali: number
-      statblock: checkbox
-      name: text
-      type: text
-      size: text
-      alignment: text
-      ac: number
-      hp: number
-      speed: text
-      cr: text
-      TQ_explain: checkbox
-      TQ_extra_instructions: text
-      TQ_short_mode: checkbox
-      TQ_show_backlink: checkbox
-      TQ_show_cancelled_date: checkbox
-      TQ_show_created_date: checkbox
-      TQ_show_depends_on: checkbox
-      TQ_show_done_date: checkbox
-      TQ_show_due_date: checkbox
-      TQ_show_edit_button: checkbox
-      TQ_show_id: checkbox
-      TQ_show_on_completion: checkbox
-      TQ_show_postpone_button: checkbox
-      TQ_show_priority: checkbox
-      TQ_show_recurrence_rule: checkbox
-      TQ_show_scheduled_date: checkbox
-      TQ_show_start_date: checkbox
-      TQ_show_tags: checkbox
-      TQ_show_task_count: checkbox
-      TQ_show_toolbar: checkbox
-      TQ_show_tree: checkbox
-      TQ_show_urgency: checkbox
-- target: .obsidian/workspaces.json
-  data:
-    workspaces:
-      DM al tavolo:
-        main:
-          id: workspace-dm-main
-          type: split
-          children:
-          - id: workspace-dm-tabs
-            type: tabs
-            children:
-            - id: workspace-dm-durante
-              type: leaf
-              state:
-                type: markdown
-                state:
-                  file: Hub/Durante il Gioco.md
-                  mode: preview
-                  source: false
-                icon: lucide-file
-                title: Durante il Gioco
-            - id: workspace-dm-materiali
-              type: leaf
-              state:
-                type: markdown
-                state:
-                  file: Risorse/Materiali Al Tavolo.md
-                  mode: preview
-                  source: false
-                icon: lucide-file
-                title: Materiali Al Tavolo
-            - id: workspace-dm-iniziativa
-              type: leaf
-              state:
-                type: markdown
-                state:
-                  file: Risorse/Iniziativa e Combattimenti.md
-                  mode: preview
-                  source: false
-                icon: lucide-file
-                title: Iniziativa
-            currentTab: 0
-          direction: vertical
-        left:
-          id: workspace-dm-left
-          type: split
-          children:
-          - id: workspace-dm-left-tabs
-            type: tabs
-            children:
-            - id: workspace-dm-bookmarks
-              type: leaf
-              state:
-                type: bookmarks
-                state: {}
-                icon: lucide-bookmark
-                title: Segnalibri
-            - id: workspace-dm-files
-              type: leaf
-              state:
-                type: file-explorer
-                state:
-                  sortOrder: alphabetical
-                  autoReveal: false
-                icon: lucide-folder-closed
-                title: Esplora risorse
-            currentTab: 0
-          direction: horizontal
-          width: 300
-        right:
-          id: workspace-dm-right
-          type: split
-          children:
-          - id: workspace-dm-right-tabs
-            type: tabs
-            children:
-            - id: workspace-dm-init-tracker
-              type: leaf
-              state:
-                type: initiative-tracker-view
-                state: {}
-                icon: initiative-tracker
-                title: Initiative Tracker
-            - id: workspace-dm-dice
-              type: leaf
-              state:
-                type: DICE_ROLLER_VIEW
-                state: {}
-                icon: dices
-                title: Dice Tray
-            - id: workspace-dm-outline
-              type: leaf
-              state:
-                type: outline
-                state:
-                  followCursor: false
-                  showSearch: false
-                  searchQuery: ''
-                icon: lucide-list
-                title: Struttura
-            currentTab: 0
-          direction: horizontal
-          width: 260
-          collapsed: false
-        active: workspace-dm-durante
-      Worldbuilding:
-        main:
-          id: workspace-world-main
-          type: split
-          children:
-          - id: workspace-world-tabs
-            type: tabs
-            children:
-            - id: workspace-world-dashboard
-              type: leaf
-              state:
-                type: markdown
-                state:
-                  file: Hub/Worldbuilder Dashboard.md
-                  mode: preview
-                  source: false
-                icon: lucide-file
-                title: Worldbuilder Dashboard
-            - id: workspace-world-mappe
-              type: leaf
-              state:
-                type: markdown
-                state:
-                  file: Risorse/Mappe/Mappe.md
-                  mode: preview
-                  source: false
-                icon: lucide-file
-                title: Mappe
-            - id: workspace-world-schema
-              type: leaf
-              state:
-                type: markdown
-                state:
-                  file: Risorse/Mappe/Schema Relazioni GDR.excalidraw.md
-                  mode: preview
-                  source: false
-                icon: lucide-file
-                title: Schema Relazioni GDR
-            currentTab: 0
-          direction: vertical
-        left:
-          id: workspace-world-left
-          type: split
-          children:
-          - id: workspace-world-left-tabs
-            type: tabs
-            children:
-            - id: workspace-world-files
-              type: leaf
-              state:
-                type: file-explorer
-                state:
-                  sortOrder: alphabetical
-                  autoReveal: false
-                icon: lucide-folder-closed
-                title: Esplora risorse
-            - id: workspace-world-bookmarks
-              type: leaf
-              state:
-                type: bookmarks
-                state: {}
-                icon: lucide-bookmark
-                title: Segnalibri
-            currentTab: 0
-          direction: horizontal
-          width: 300
-        right:
-          id: workspace-world-right
-          type: split
-          children:
-          - id: workspace-world-right-tabs
-            type: tabs
-            children:
-            - id: workspace-world-backlinks
-              type: leaf
-              state:
-                type: backlink
-                state:
-                  collapseAll: false
-                  extraContext: false
-                  sortOrder: alphabetical
-                  showSearch: false
-                  searchQuery: ''
-                  backlinkCollapsed: false
-                  unlinkedCollapsed: true
-                icon: links-coming-in
-                title: Riferimenti
-            - id: workspace-world-properties
-              type: leaf
-              state:
-                type: all-properties
-                state:
-                  sortOrder: frequency
-                  showSearch: false
-                  searchQuery: ''
-                icon: lucide-archive
-                title: Tutte le proprieta
-            currentTab: 0
-          direction: horizontal
-          width: 260
-          collapsed: false
-        active: workspace-world-dashboard
-      Manutenzione:
-        main:
-          id: workspace-maint-main
-          type: split
-          children:
-          - id: workspace-maint-tabs
-            type: tabs
-            children:
-            - id: workspace-maint-controllo
-              type: leaf
-              state:
-                type: markdown
-                state:
-                  file: Risorse/Controllo Vault.md
-                  mode: preview
-                  source: false
-                icon: lucide-file
-                title: Controllo Vault
-            - id: workspace-maint-recupero
-              type: leaf
-              state:
-                type: markdown
-                state:
-                  file: Risorse/Se Qualcosa Non Funziona.md
-                  mode: preview
-                  source: false
-                icon: lucide-file
-                title: Recupero Strumenti
-            - id: workspace-maint-primo-avvio
-              type: leaf
-              state:
-                type: markdown
-                state:
-                  file: Risorse/Primo Avvio Strumenti.md
-                  mode: preview
-                  source: false
-                icon: lucide-file
-                title: Primo Avvio Strumenti
-            currentTab: 0
-          direction: vertical
-        left:
-          id: workspace-maint-left
-          type: split
-          children:
-          - id: workspace-maint-left-tabs
-            type: tabs
-            children:
-            - id: workspace-maint-search
-              type: leaf
-              state:
-                type: search
-                state:
-                  query: ''
-                  matchingCase: false
-                  explainSearch: false
-                  collapseAll: false
-                  extraContext: false
-                  sortOrder: alphabetical
+  - target: .obsidian/app.json
+    data:
+      promptDelete: false
+      alwaysUpdateLinks: true
+      propertiesInDocument: hidden
+      userIgnoreFilters:
+        - SRD/
+        - z.automazioni/
+        - z.bases/
+        - z.engine/
+        - z.fileclass/
+        - z.modelli/
+  - target: .obsidian/appearance.json
+    data:
+      cssTheme: Minimal
+      accentColor: ''
+      enabledCssSnippets:
+        - gdr-vault
+  - target: .obsidian/community-plugins.json
+    data:
+      - obsidian-5e-statblocks
+      - dataview
+      - templater-obsidian
+      - obsidian-meta-bind-plugin
+      - js-engine
+      - metadata-menu
+      - callout-manager
+      - obsidian-dice-roller
+      - initiative-tracker
+      - tabs
+      - obsidian-tasks-plugin
+  - target: .obsidian/core-plugins.json
+    data:
+      file-explorer: true
+      global-search: true
+      switcher: true
+      graph: true
+      backlink: true
+      outgoing-link: true
+      tag-pane: true
+      footnotes: false
+      properties: true
+      page-preview: true
+      daily-notes: true
+      templates: true
+      note-composer: true
+      command-palette: true
+      slash-command: false
+      editor-status: true
+      bookmarks: true
+      markdown-importer: false
+      zk-prefixer: false
+      random-note: false
+      outline: true
+      word-count: true
+      slides: false
+      workspaces: true
+      file-recovery: true
+      publish: false
+      sync: true
+      bases: true
+      webviewer: true
+  - target: .obsidian/graph.json
+    data:
+      collapse-filter: true
+      search: ''
+      showTags: false
+      showAttachments: false
+      hideUnresolved: false
+      showOrphans: true
+      collapse-color-groups: true
+      colorGroups: []
+      collapse-display: true
+      showArrow: false
+      textFadeMultiplier: 0
+      nodeSizeMultiplier: 1
+      lineSizeMultiplier: 1
+      collapse-forces: true
+      centerStrength: 0.518713248970312
+      repelStrength: 10
+      linkStrength: 1
+      linkDistance: 250
+      scale: 0.25883865621816177
+      close: false
+  - target: .obsidian/plugins/callout-manager/data.json
+    data:
+      callouts:
+        custom:
+          - scena
+          - indizio
+          - segreto
+          - incontro
+          - tesoro
+          - png
+          - luogo
+          - missione
+          - handout
+          - regola
+          - pericolo
+          - lettura
+          - timer
+        settings:
+          scena:
+            - changes:
+                color: 83, 119, 161
+                icon: lucide-clapperboard
+          indizio:
+            - changes:
+                color: 196, 143, 54
                 icon: lucide-search
-                title: Ricerca
-            - id: workspace-maint-bookmarks
-              type: leaf
-              state:
-                type: bookmarks
-                state: {}
-                icon: lucide-bookmark
-                title: Segnalibri
-            currentTab: 0
-          direction: horizontal
-          width: 300
-        right:
-          id: workspace-maint-right
-          type: split
-          children:
-          - id: workspace-maint-right-tabs
-            type: tabs
-            children:
-            - id: workspace-maint-outline
-              type: leaf
-              state:
-                type: outline
-                state:
-                  followCursor: false
-                  showSearch: false
-                  searchQuery: ''
-                icon: lucide-list
-                title: Struttura
-            - id: workspace-maint-properties
-              type: leaf
-              state:
-                type: all-properties
-                state:
-                  sortOrder: frequency
-                  showSearch: false
-                  searchQuery: ''
-                icon: lucide-archive
-                title: Tutte le proprieta
-            currentTab: 0
-          direction: horizontal
-          width: 260
-          collapsed: false
-        active: workspace-maint-controllo
-    active: ''
+          segreto:
+            - changes:
+                color: 127, 92, 160
+                icon: lucide-key-round
+          incontro:
+            - changes:
+                color: 166, 72, 64
+                icon: lucide-swords
+          tesoro:
+            - changes:
+                color: 194, 154, 70
+                icon: lucide-gem
+          png:
+            - changes:
+                color: 73, 138, 126
+                icon: lucide-user-round
+          luogo:
+            - changes:
+                color: 91, 130, 86
+                icon: lucide-map-pin
+          missione:
+            - changes:
+                color: 74, 112, 168
+                icon: lucide-scroll-text
+          handout:
+            - changes:
+                color: 143, 112, 72
+                icon: lucide-file-text
+          regola:
+            - changes:
+                color: 88, 115, 137
+                icon: lucide-scale
+          pericolo:
+            - changes:
+                color: 181, 76, 58
+                icon: lucide-triangle-alert
+          lettura:
+            - changes:
+                color: 119, 97, 77
+                icon: lucide-book-open-text
+          timer:
+            - changes:
+                color: 166, 89, 52
+                icon: lucide-clock-3
+      calloutDetection:
+        obsidian: true
+        theme: true
+        snippet: true
+  - target: .obsidian/plugins/dataview/data.json
+    data:
+      renderNullAs: \-
+      taskCompletionTracking: false
+      taskCompletionUseEmojiShorthand: false
+      taskCompletionText: completion
+      taskCompletionDateFormat: yyyy-MM-dd
+      recursiveSubTaskCompletion: false
+      warnOnEmptyResult: true
+      refreshEnabled: true
+      refreshInterval: 2500
+      defaultDateFormat: MMMM dd, yyyy
+      defaultDateTimeFormat: h:mm a - MMMM dd, yyyy
+      maxRecursiveRenderDepth: 4
+      tableIdColumnName: File
+      tableGroupColumnName: Group
+      showResultCount: true
+      allowHtml: true
+      inlineQueryPrefix: '='
+      inlineJsQueryPrefix: $=
+      inlineQueriesInCodeblocks: true
+      enableInlineDataview: true
+      enableDataviewJs: true
+      enableInlineDataviewJs: true
+      prettyRenderInlineFields: true
+      prettyRenderInlineFieldsInLivePreview: true
+      dataviewJsKeyword: dataviewjs
+  - target: .obsidian/plugins/initiative-tracker/data.json
+    data:
+      players: []
+      parties: []
+      defaultParty: null
+      statuses:
+        - name: Blinded
+          id: Blinded
+          description: 'A blinded creature can’t see and automatically fails any ability check that requires sight.
+
+            Attack rolls against the creature have advantage, and the creature’s Attack rolls have disadvantage.'
+        - name: Charmed
+          id: Charmed
+          description: 'A charmed creature can’t Attack the charmer or target the charmer with harmful Abilities or magical Effects.
+
+            The charmer has advantage on any ability check to interact socially with the creature.'
+        - name: Concentrating
+          id: Concentrating
+          description: 'Some spells require you to maintain concentration in order to keep their magic active. If you lose concentration, such a spell ends.
+
+            A creature loses concentration when: it casts another spell that requires concentration, is incapacitated, or dies.
+
+            When a creature takes damage, it must make a constitution saving throw with a DC of 10 or half the damage it took, whichever is higher. On a failure, concentration is lost.'
+        - name: Deafened
+          id: Deafened
+          description: A deafened creature can’t hear and automatically fails any ability check that requires hearing.
+        - name: Frightened
+          id: Frightened
+          description: 'A frightened creature has disadvantage on Ability Checks and Attack rolls while the source of its fear is within Line of Sight.
+
+            The creature can’t willingly move closer to the source of its fear.'
+        - name: Grappled
+          id: Grappled
+          description: 'A grappled creature’s speed becomes 0, and it can’t benefit from any bonus to its speed.
+
+            The condition ends if the Grappler is incapacitated.
+
+            The condition also ends if an Effect removes the grappled creature from the reach of the Grappler or Grappling Effect, such as when a creature is hurled away by the Thunderwave spell.'
+        - name: Incapacitated
+          id: Incapacitated
+          description: An incapacitated creature can’t take Actions or Reactions.
+        - name: Invisible
+          id: Invisible
+          description: 'An invisible creature is impossible to see without the aid of magic or a Special sense. For the Purpose of Hiding, the creature is heavily obscured. The creature’s Location can be detected by any noise it makes or any tracks it leaves.
+
+            Attack rolls against the creature have disadvantage, and the creature’s Attack rolls have advantage.'
+        - name: Paralyzed
+          id: Paralyzed
+          description: 'A paralyzed creature is incapacitated and can’t move or speak.
+
+            The creature automatically fails Strength and Dexterity Saving Throws.
+
+            Attack rolls against the creature have advantage.
+
+            Any Attack that hits the creature is a critical hit if the attacker is within 5 feet of the creature.'
+        - name: Petrified
+          id: Petrified
+          description: 'A petrified creature is transformed, along with any nonmagical object it is wearing or carrying, into a solid inanimate substance (usually stone). Its weight increases by a factor of ten, and it ceases aging.
+
+            The creature is incapacitated, can’t move or speak, and is unaware of its surroundings.
+
+            Attack rolls against the creature have advantage.
+
+            The creature automatically fails Strength and Dexterity Saving Throws.
+
+            The creature has Resistance to all damage.
+
+            The creature is immune to poison and disease, although a poison or disease already in its system is suspended, not neutralized.'
+        - name: Poisoned
+          id: Poisoned
+          description: A poisoned creature has disadvantage on Attack rolls and Ability Checks.
+        - name: Prone
+          id: Prone
+          description: 'A prone creature’s only Movement option is to crawl, unless it stands up and thereby ends the condition.
+
+            The creature has disadvantage on Attack rolls.
+
+            An Attack roll against the creature has advantage if the attacker is within 5 feet of the creature. Otherwise, the Attack roll has disadvantage.'
+        - name: Reacted
+          id: Reacted
+          description: 'A creature, unless otherwise specified, gets one reaction per round of combat.
+
+            A reaction is an instant response to a trigger of some kind, which can occur on your turn or on someone else’s.
+
+            A reaction can be spent to make an opportunity attack, do a readied action, or use an ability that requires a reaction.
+
+            A creature that has already reacted cannot use a reaction until the start of its turn.'
+        - name: Restrained
+          id: Restrained
+          description: 'A restrained creature’s speed becomes 0, and it can’t benefit from any bonus to its speed.
+
+            Attack rolls against the creature have advantage, and the creature’s Attack rolls have disadvantage.
+
+            The creature has disadvantage on Dexterity Saving Throws.'
+        - name: Stunned
+          id: Stunned
+          description: 'A stunned creature is incapacitated, can’t move, and can speak only falteringly.
+
+            The creature automatically fails Strength and Dexterity Saving Throws.
+
+            Attack rolls against the creature have advantage.'
+        - name: Unconscious
+          id: Unconscious
+          description: 'An unconscious creature is incapacitated, can’t move or speak, and is unaware of its surroundings.
+
+            The creature drops whatever it’s holding and falls prone.
+
+            The creature automatically fails Strength and Dexterity Saving Throws.
+
+            Attack rolls against the creature have advantage.
+
+            Any Attack that hits the creature is a critical hit if the attacker is within 5 feet of the creature.'
+      unconsciousId: Unconscious
+      version:
+        - 13
+        - 0
+        - 21
+      canUseDiceRoll: true
+      preferStatblockLink: true
+      initiative: 1d20 + %mod%
+      modifier: null
+      sync: false
+      playerMarker: default
+      monsterMarker: default
+      state:
+        creatures: []
+        state: false
+        name: null
+        round: 1
+        logFile: ''
+        rollHP: false
+      condense: false
+      clamp: true
+      autoStatus: true
+      beginnerTips: true
+      displayDifficulty: true
+      encounters: {}
+      warnedAboutImports: false
+      openState:
+        battle: true
+        party: true
+        status: true
+        plugin: true
+        player: true
+        builder: true
+      hpOverflow: ignore
+      additiveTemp: false
+      rpgSystem: dnd5e
+      logging: false
+      logFolder: /
+      resolveTies: playerFirst
+      useLegacy: false
+      diplayPlayerHPValues: true
+      rollHP: false
+      descending: true
+      builder:
+        showParty: true
+        showXP: true
+        sidebarIcon: true
+      rollPlayerInitiatives: 0
+  - target: .obsidian/plugins/metadata-menu/data.json
+    data:
+      presetFields:
+        - name: mondo
+          id: mondo
+          type: File
+          options: {}
+        - name: stato
+          id: stato
+          type: Select
+          options:
+            sourceType: ValuesList
+            valuesList:
+              '0': bozza
+              '1': preparazione
+              '2': pronto
+              '3': in corso
+              '4': in gioco
+              '5': giocata
+              '6': da smistare
+              '7': collegata
+              '8': canonica
+              '9': archiviata
+              '10': ignorata
+        - name: stato_canonico
+          id: stato_canonico
+          type: Select
+          options:
+            sourceType: ValuesList
+            valuesList:
+              '0': canonico
+              '1': rumor
+              '2': leggenda
+              '3': falso
+              '4': retcon
+        - name: canonico
+          id: canonico
+          type: Boolean
+          options: {}
+        - name: pressione
+          id: pressione
+          type: Number
+          options: {}
+        - name: prossima_mossa
+          id: prossima_mossa
+          type: Input
+          options: {}
+        - name: connessioni
+          id: connessioni
+          type: MultiFile
+          options: {}
+        - name: player_safe
+          id: player_safe
+          type: Input
+          options: {}
+        - name: entita_impattate
+          id: entita_impattate
+          type: MultiFile
+          options: {}
+        - name: propaga_a
+          id: propaga_a
+          type: MultiFile
+          options: {}
+        - name: sessioni
+          id: sessioni
+          type: MultiFile
+          options: {}
+        - name: luoghi
+          id: luoghi
+          type: MultiFile
+          options: {}
+        - name: fazioni
+          id: fazioni
+          type: MultiFile
+          options: {}
+        - name: missioni
+          id: missioni
+          type: MultiFile
+          options: {}
+        - name: tracciati
+          id: tracciati
+          type: MultiFile
+          options: {}
+      fileClassQueries: []
+      displayFieldsInContextMenu: true
+      globallyIgnoredFields: []
+      classFilesPath: z.fileclass/
+      isAutosuggestEnabled: true
+      fileClassAlias: fileClass
+      settingsVersion: '5.0'
+      firstDayOfWeek: 1
+      enableLinks: true
+      enableTabHeader: true
+      enableEditor: true
+      enableBacklinks: true
+      enableStarred: true
+      enableFileExplorer: true
+      enableSearch: true
+      enableProperties: true
+      tableViewMaxRecords: 20
+      frontmatterListDisplay: asArray
+      fileClassExcludedFolders:
+        - SRD
+        - z.automazioni
+        - z.fileclass
+        - z.modelli
+      showIndexingStatusInStatusBar: false
+      fileIndexingExcludedFolders:
+        - SRD
+        - z.automazioni
+        - z.fileclass
+        - z.modelli
+      fileIndexingExcludedExtensions: []
+      fileIndexingExcludedRegex: []
+      frontmatterOnly: false
+      showFileClassSelectInModal: true
+      chooseFileClassAtFileCreation: false
+      autoInsertFieldsAtFileClassInsertion: false
+      fileClassIcon: package
+      isAutoCalculationEnabled: true
+      disableDataviewPrompt: false
+  - target: .obsidian/plugins/obsidian-5e-statblocks/data.json
+    data:
+      monsters: []
+      defaultLayouts: {}
+      layouts:
+        - blocks:
+            - type: inline
+              id: 7bfa0ab97a5a
+              properties: []
+              hasRule: true
+              nested:
+                - type: group
+                  id: 091a2868e9bb
+                  properties:
+                    - name
+                    - size
+                    - type
+                    - subtype
+                    - alignment
+                  nested:
+                    - type: inline
+                      id: 0adabb2a3bdb
+                      properties: []
+                      hasRule: false
+                      nested:
+                        - type: heading
+                          id: bb89b93b1a9b
+                          properties:
+                            - name
+                          conditioned: true
+                          size: 1
+                        - type: inline
+                          id: 987afba87b9a
+                          properties: []
+                          hasRule: false
+                          nested:
+                            - type: action
+                              id: a8795ad82a89
+                              icon: sword
+                              callback: 'try { InitiativeTracker.newEncounter({roll: true, creatures: [monster]}); } catch(e) {}'
+                            - type: action
+                              id: 992948eb9a58
+                              icon: plus-with-circle
+                              callback: try { InitiativeTracker.addCreatures([monster]); } catch(e) {}
+                    - type: subheading
+                      id: 092bfbe80848
+                      properties:
+                        - size
+                        - type
+                        - subtype
+                        - alignment
+                      conditioned: true
+                      separator: ', '
+                  conditioned: true
+                - type: image
+                  id: 3a2928eabbb9
+                  properties:
+                    - image
+            - type: group
+              id: 7a9b78db1b69
+              properties:
+                - ac
+                - hp
+                - speed
+              nested:
+                - type: property
+                  id: bacb795aaafa
+                  properties:
+                    - ac
+                  display: Classe Armatura
+                  conditioned: true
+                  callback: const ac = [monster.ac];if ("ac_class" in monster) {ac.push(`(${monster.ac_class})`);}return ac.join(" ");
+                - type: property
+                  id: 180a6b98db59
+                  properties:
+                    - hp
+                  display: Punti Ferita
+                  dice: true
+                  diceProperty: hit_dice
+                  diceCallback: "if (\"hit_dice\" in monster) {\n  return [{ text: monster[\"hit_dice\"] }];\n} else {\n  return property;\n}"
+                  callback: "let str = [monster.hp];\nif (monster.hit_dice?.length) {\n  str.push(`(${monster.hit_dice})`);\n}\nreturn str.join(\" \");"
+                  conditioned: true
+                - type: property
+                  id: fae838c9983b
+                  display: Velocità
+                  properties:
+                    - speed
+                  conditioned: true
+              hasRule: true
+              conditioned: true
+            - type: table
+              id: 3beadb0b7a1a
+              properties:
+                - stats
+              headers:
+                - For
+                - Des
+                - Cos
+                - Int
+                - Sag
+                - Car
+              calculate: true
+              hasRule: true
+              conditioned: true
+            - type: table
+              id: 9b48db9abb2a
+              properties:
+                - fage_stats
+              headers:
+                - Accuracy
+                - Communication
+                - Constitution
+                - Dexterity
+                - Fighting
+                - Intelligence
+                - Perception
+                - Strength
+                - Willpower
+              calculate: false
+              hasRule: true
+              conditioned: true
+            - type: group
+              id: 5b088838fb28
+              properties:
+                - saves
+                - skillsaves
+                - damage_immunities
+                - damage_resistances
+                - damage_vulnerabilities
+                - condition_immunities
+                - cr
+                - languages
+                - senses
+              nested:
+                - type: saves
+                  id: f90a09bab999
+                  display: Tiri salvezza
+                  properties:
+                    - saves
+                  conditioned: true
+                - type: saves
+                  id: 29da1b392b89
+                  display: Abilità
+                  properties:
+                    - skillsaves
+                  conditioned: true
+                - type: property
+                  id: 880bf90ad84a
+                  display: Resistenza ai danni
+                  properties:
+                    - damage_resistances
+                  conditioned: true
+                - type: property
+                  id: faf93aa90ab9
+                  display: Immunità ai Danni
+                  properties:
+                    - damage_immunities
+                  conditioned: true
+                - type: property
+                  id: faf8fa6849bb
+                  display: Immunità alle Condizioni
+                  properties:
+                    - condition_immunities
+                  conditioned: true
+                - type: property
+                  id: c8dbe97bbb09
+                  display: Vulnerabilità ai Danni
+                  properties:
+                    - damage_vulnerabilities
+                  conditioned: true
+                - type: property
+                  id: 280818bb99aa
+                  display: Sensi
+                  properties:
+                    - senses
+                  conditioned: true
+                - type: property
+                  id: c9a98b49d828
+                  display: Lingue
+                  properties:
+                    - languages
+                  fallback: '-'
+                - type: inline
+                  id: 4a0b69393a58
+                  properties: []
+                  conditioned: true
+                  nested:
+                    - type: property
+                      id: 485af85a8b4b
+                      display: Difficoltà
+                      properties:
+                        - cr
+                      callback: "const CR = {\n    \"0\": {\n        cr: \"0\",\n        value: 0,\n        xp: 10\n    },\n    \"1/8\": {\n        cr: \"1/8\",\n        value: 0.125,\n        xp: 25\n    },\n    \"1/4\": {\n        cr: \"1/4\",\n\n        value: 0.25,\n        xp: 50\n    },\n    \"1/2\": {\n        cr: \"1/2\",\n        value: 0.5,\n        xp: 100\n    },\n    \"0.125\": {\n        cr: \"1/8\",\n        value: 0.125,\n        xp: 25\n    },\n    \"0.25\": {\n        cr: \"1/4\",\n\n        value: 0.25,\n        xp: 50\n    },\n    \"0.5\": {\n        cr: \"1/2\",\n        value: 0.5,\n        xp: 100\n    },\n    \"1\": {\n        cr: \"1\",\n        value: 1,\n        xp: 200\n    },\n    \"2\": {\n        cr: \"2\",\n        value: 2,\n        xp: 450\n    },\n    \"3\": {\n        cr: \"3\",\n        value: 3,\n        xp: 700\n    },\n    \"4\": {\n        cr: \"4\",\n        value: 4,\n        xp: 1100\n    },\n    \"5\": {\n        cr: \"5\",\n        value: 5,\n\
+                        \        xp: 1800\n    },\n    \"6\": {\n        cr: \"6\",\n        value: 6,\n        xp: 2300\n    },\n    \"7\": {\n        cr: \"7\",\n        value: 7,\n        xp: 2900\n    },\n    \"8\": {\n        cr: \"8\",\n        value: 8,\n        xp: 3900\n    },\n    \"9\": {\n        cr: \"9\",\n        value: 9,\n        xp: 5000\n    },\n    \"10\": {\n        cr: \"10\",\n        value: 10,\n        xp: 5900\n    },\n    \"11\": {\n        cr: \"11\",\n        value: 11,\n        xp: 7200\n    },\n    \"12\": {\n        cr: \"12\",\n        value: 12,\n        xp: 8400\n    },\n    \"13\": {\n        cr: \"13\",\n        value: 13,\n        xp: 10000\n    },\n    \"14\": {\n        cr: \"14\",\n        value: 14,\n        xp: 11500\n    },\n    \"15\": {\n        cr: \"15\",\n        value: 15,\n        xp: 13000\n    },\n    \"16\": {\n        cr: \"16\",\n        value: 16,\n        xp: 15000\n    },\n    \"17\": {\n        cr: \"17\",\n        value: 17,\n\
+                        \        xp: 18000\n    },\n    \"18\": {\n        cr: \"18\",\n        value: 18,\n        xp: 20000\n    },\n    \"19\": {\n        cr: \"19\",\n        value: 19,\n        xp: 22000\n    },\n    \"20\": {\n        cr: \"20\",\n        value: 20,\n        xp: 25000\n    },\n    \"21\": {\n        cr: \"21\",\n        value: 21,\n        xp: 33000\n    },\n    \"22\": {\n        cr: \"22\",\n        value: 22,\n        xp: 41000\n    },\n    \"23\": {\n        cr: \"23\",\n        value: 23,\n        xp: 50000\n    },\n    \"24\": {\n        cr: \"24\",\n        value: 24,\n        xp: 62000\n    },\n    \"25\": {\n        cr: \"25\",\n        value: 25,\n        xp: 75000\n    },\n    \"26\": {\n        cr: \"26\",\n        value: 26,\n        xp: 90000\n    },\n    \"27\": {\n        cr: \"27\",\n        value: 27,\n        xp: 105000\n    },\n    \"28\": {\n        cr: \"28\",\n        value: 28,\n        xp: 120000\n    },\n    \"29\": {\n        cr: \"29\",\n\
+                        \        value: 29,\n        xp: 135000\n    },\n    \"30\": {\n        cr: \"30\",\n        value: 30,\n        xp: 155000\n    }\n};                        \nif (\"cr\" in monster && monster.cr in CR) {\n    return `${CR[\n        monster.cr\n    ].cr} (${CR[\n        monster.cr\n    ].xp.toLocaleString()} XP)`;\n}\nreturn \"\";"
+                      fallback: '-'
+                    - type: property
+                      id: a8c81a0bcbdb
+                      display: Competenza Bonus
+                      properties:
+                        - cr
+                      callback: "const CR = {\n    \"0\": {\n        cr: \"0\",\n        value: 0,\n        xp: 0\n    },\n    \"1/8\": {\n        cr: \"1/8\",\n        value: 0.125,\n        xp: 25\n    },\n    \"1/4\": {\n        cr: \"1/4\",\n\n        value: 0.25,\n        xp: 50\n    },\n    \"1/2\": {\n        cr: \"1/2\",\n        value: 0.5,\n        xp: 100\n    },\n    \"0.125\": {\n        cr: \"1/8\",\n        value: 0.125,\n        xp: 25\n    },\n    \"0.25\": {\n        cr: \"1/4\",\n\n        value: 0.25,\n        xp: 50\n    },\n    \"0.5\": {\n        cr: \"1/2\",\n        value: 0.5,\n        xp: 100\n    },\n    \"1\": {\n        cr: \"1\",\n        value: 1,\n        xp: 200\n    },\n    \"2\": {\n        cr: \"2\",\n        value: 2,\n        xp: 450\n    },\n    \"3\": {\n        cr: \"3\",\n        value: 3,\n        xp: 700\n    },\n    \"4\": {\n        cr: \"4\",\n        value: 4,\n        xp: 1100\n    },\n    \"5\": {\n        cr: \"5\",\n        value: 5,\n\
+                        \        xp: 1800\n    },\n    \"6\": {\n        cr: \"6\",\n        value: 6,\n        xp: 2300\n    },\n    \"7\": {\n        cr: \"7\",\n        value: 7,\n        xp: 2900\n    },\n    \"8\": {\n        cr: \"8\",\n        value: 8,\n        xp: 3900\n    },\n    \"9\": {\n        cr: \"9\",\n        value: 9,\n        xp: 5000\n    },\n    \"10\": {\n        cr: \"10\",\n        value: 10,\n        xp: 5900\n    },\n    \"11\": {\n        cr: \"11\",\n        value: 11,\n        xp: 7200\n    },\n    \"12\": {\n        cr: \"12\",\n        value: 12,\n        xp: 8400\n    },\n    \"13\": {\n        cr: \"13\",\n        value: 13,\n        xp: 10000\n    },\n    \"14\": {\n        cr: \"14\",\n        value: 14,\n        xp: 11500\n    },\n    \"15\": {\n        cr: \"15\",\n        value: 15,\n        xp: 13000\n    },\n    \"16\": {\n        cr: \"16\",\n        value: 16,\n        xp: 15000\n    },\n    \"17\": {\n        cr: \"17\",\n        value: 17,\n\
+                        \        xp: 18000\n    },\n    \"18\": {\n        cr: \"18\",\n        value: 18,\n        xp: 20000\n    },\n    \"19\": {\n        cr: \"19\",\n        value: 19,\n        xp: 22000\n    },\n    \"20\": {\n        cr: \"20\",\n        value: 20,\n        xp: 25000\n    },\n    \"21\": {\n        cr: \"21\",\n        value: 21,\n        xp: 33000\n    },\n    \"22\": {\n        cr: \"22\",\n        value: 22,\n        xp: 41000\n    },\n    \"23\": {\n        cr: \"23\",\n        value: 23,\n        xp: 50000\n    },\n    \"24\": {\n        cr: \"24\",\n        value: 24,\n        xp: 62000\n    },\n    \"25\": {\n        cr: \"25\",\n        value: 25,\n        xp: 75000\n    },\n    \"26\": {\n        cr: \"26\",\n        value: 26,\n        xp: 90000\n    },\n    \"27\": {\n        cr: \"27\",\n        value: 27,\n        xp: 105000\n    },\n    \"28\": {\n        cr: \"28\",\n        value: 28,\n        xp: 120000\n    },\n    \"29\": {\n        cr: \"29\",\n\
+                        \        value: 29,\n        xp: 135000\n    },\n    \"30\": {\n        cr: \"30\",\n        value: 30,\n        xp: 155000\n    }\n};           \nif (\"cr\" in monster && monster.cr in CR) {\n    return `+${Math.max(\n            Math.floor(2 + ((CR[monster.cr]?.value ?? 0) - 1) / 4),\n            2\n        )}`;\n}\nreturn \"\";"
+                      fallback: '-'
+              conditioned: true
+              hasRule: true
+            - type: traits
+              id: d9ab3a5afb99
+              properties:
+                - traits
+              conditioned: true
+              dice: true
+              heading: ''
+            - type: spells
+              id: f8ebd8b8bbd9
+              properties:
+                - spells
+              conditioned: true
+              dice: true
+              heading: Incantesimi
+            - type: text
+              id: 6b9b497a08d8
+              properties:
+                - spellsNotes
+              conditioned: true
+              text: null
+            - type: traits
+              id: cafbe97a595b
+              properties:
+                - actions
+              heading: Azioni
+              conditioned: true
+              dice: true
+            - type: traits
+              id: 9b5a2ab89bba
+              properties:
+                - bonus_actions
+              heading: Azioni Bonus
+              conditioned: true
+              dice: true
+            - type: group
+              id: daf9f84a0a3b
+              properties:
+                - legendary_description
+                - legendary_actions
+              heading: Descrizione Leggendaria
+              nested:
+                - type: text
+                  id: ca8b8bdabbd8
+                  properties:
+                    - legendary_description
+                  conditioned: true
+                  text: null
+                  heading: ''
+                - type: traits
+                  id: db5878d9fbba
+                  properties:
+                    - legendary_actions
+                  conditioned: true
+                  dice: true
+                  heading: Azioni Leggendarie
+              conditioned: true
+            - type: group
+              id: 3aabf9d949b8
+              properties:
+                - mythic_description
+                - mythic_actions
+              heading: Mythic Actions
+              nested:
+                - type: text
+                  id: 49ebaa7a4a89
+                  properties:
+                    - mythic_description
+                  conditioned: true
+                  text: null
+                - type: traits
+                  id: 081a0a4ae87a
+                  properties:
+                    - mythic_actions
+                  conditioned: true
+                  dice: true
+              conditioned: true
+            - type: traits
+              id: 0beb2b0aaa8b
+              properties:
+                - reactions
+              heading: Reactions
+              conditioned: true
+              dice: true
+            - type: traits
+              id: 09ab3a6b2bba
+              properties:
+                - lair_actions
+              heading: Azioni della Tana
+              conditioned: true
+              dice: true
+            - type: traits
+              id: 0aa8aa4a8b9b
+              properties:
+                - regional_effects
+              heading: Effetti Regionali
+              conditioned: true
+              dice: true
+          name: Basic 5e Layout ITA
+          id: aa0a584b6a5b
+          diceParsing: []
+        - blocks:
+            - type: inline
+              id: 55it-header-inline
+              properties: []
+              hasRule: true
+              nested:
+                - type: group
+                  id: 55it-header-group
+                  properties:
+                    - name
+                    - size
+                    - type
+                    - subtype
+                    - alignment
+                  nested:
+                    - type: inline
+                      id: 55it-title-actions-inline
+                      properties: []
+                      hasRule: false
+                      nested:
+                        - type: heading
+                          id: 55it-name-heading
+                          properties:
+                            - name
+                          conditioned: true
+                          size: 1
+                        - type: inline
+                          id: 55it-initiative-tracker-actions
+                          properties: []
+                          hasRule: false
+                          nested:
+                            - type: action
+                              id: 55it-start-encounter-action
+                              icon: sword
+                              callback: 'try { InitiativeTracker.newEncounter({roll: true, creatures: [monster]}); } catch(e) {}'
+                            - type: action
+                              id: 55it-add-creature-action
+                              icon: plus-with-circle
+                              callback: try { InitiativeTracker.addCreatures([monster]); } catch(e) {}
+                    - type: subheading
+                      id: 55it-subheading
+                      properties:
+                        - size
+                        - type
+                        - subtype
+                        - alignment
+                      conditioned: true
+                      separator: ', '
+                  conditioned: true
+                - type: image
+                  id: 55it-image
+                  properties:
+                    - image
+            - type: group
+              id: 55it-core-defenses
+              properties:
+                - stats
+                - ac
+                - hp
+                - hit_dice
+                - speed
+              nested:
+                - type: inline
+                  id: 55it-ac-initiative-inline
+                  properties: []
+                  hasRule: false
+                  conditioned: true
+                  nested:
+                    - type: property
+                      id: 55it-ac
+                      properties:
+                        - ac
+                      display: CA
+                      conditioned: true
+                      callback: const ac = [monster.ac]; if (monster.ac_class) ac.push(`(${monster.ac_class})`); return ac.join(' ');
+                    - type: property
+                      id: 55it-initiative
+                      properties:
+                        - stats
+                      display: Iniziativa
+                      conditioned: true
+                      callback: 'const stats = Array.isArray(monster.stats) ? monster.stats : [10,10,10,10,10,10]; const dex = Number(stats[1] ?? 10); const mod = Math.floor((dex - 10) / 2); const score = 10 + mod; return `${mod >= 0 ? ''+'' : ''''}${mod} (${score})`;'
+                - type: property
+                  id: 55it-hp
+                  properties:
+                    - hp
+                  display: PF
+                  dice: true
+                  diceProperty: hit_dice
+                  diceCallback: 'if (monster.hit_dice) { return [{ text: monster.hit_dice }]; } return property;'
+                  callback: const out = [monster.hp]; if (monster.hit_dice) out.push(`(${monster.hit_dice})`); return out.join(' ');
+                  conditioned: true
+                - type: property
+                  id: 55it-speed
+                  display: Velocità
+                  properties:
+                    - speed
+                  conditioned: true
+              hasRule: true
+              conditioned: true
+            - type: table
+              id: 55it-stats-table
+              properties:
+                - stats
+              headers:
+                - For
+                - Des
+                - Cos
+                - Int
+                - Sag
+                - Car
+              calculate: true
+              hasRule: true
+              conditioned: true
+            - type: table
+              id: 55it-fage-stats-compat
+              properties:
+                - fage_stats
+              headers:
+                - Accuracy
+                - Communication
+                - Constitution
+                - Dexterity
+                - Fighting
+                - Intelligence
+                - Perception
+                - Strength
+                - Willpower
+              calculate: false
+              hasRule: true
+              conditioned: true
+            - type: group
+              id: 55it-details
+              properties:
+                - saves
+                - skillsaves
+                - damage_immunities
+                - damage_resistances
+                - damage_vulnerabilities
+                - condition_immunities
+                - gear
+                - cr
+                - languages
+                - senses
+              nested:
+                - type: saves
+                  id: 55it-saves
+                  display: Tiri Salvezza
+                  properties:
+                    - saves
+                  conditioned: true
+                - type: saves
+                  id: 55it-skills
+                  display: Abilità
+                  properties:
+                    - skillsaves
+                  conditioned: true
+                - type: property
+                  id: 55it-resistances
+                  display: Resistenze
+                  properties:
+                    - damage_resistances
+                  conditioned: true
+                - type: property
+                  id: 55it-immunities
+                  display: Immunità
+                  properties:
+                    - damage_immunities
+                  conditioned: true
+                - type: property
+                  id: 55it-condition-immunities
+                  display: Immunità alle Condizioni
+                  properties:
+                    - condition_immunities
+                  conditioned: true
+                - type: property
+                  id: 55it-vulnerabilities
+                  display: Vulnerabilità
+                  properties:
+                    - damage_vulnerabilities
+                  conditioned: true
+                - type: property
+                  id: 55it-gear
+                  display: Equipaggiamento
+                  properties:
+                    - gear
+                  conditioned: true
+                - type: property
+                  id: 55it-senses
+                  display: Sensi
+                  properties:
+                    - senses
+                  conditioned: true
+                - type: property
+                  id: 55it-languages
+                  display: Linguaggi
+                  properties:
+                    - languages
+                  fallback: —
+                - type: inline
+                  id: 55it-cr-pb-inline
+                  properties: []
+                  conditioned: true
+                  nested:
+                    - type: property
+                      id: 55it-cr
+                      display: GS
+                      properties:
+                        - cr
+                      callback: const CR = {"0":{cr:"0",value:0,xp:10},"1/8":{cr:"1/8",value:.125,xp:25},"1/4":{cr:"1/4",value:.25,xp:50},"1/2":{cr:"1/2",value:.5,xp:100},"0.125":{cr:"1/8",value:.125,xp:25},"0.25":{cr:"1/4",value:.25,xp:50},"0.5":{cr:"1/2",value:.5,xp:100},"1":{cr:"1",value:1,xp:200},"2":{cr:"2",value:2,xp:450},"3":{cr:"3",value:3,xp:700},"4":{cr:"4",value:4,xp:1100},"5":{cr:"5",value:5,xp:1800},"6":{cr:"6",value:6,xp:2300},"7":{cr:"7",value:7,xp:2900},"8":{cr:"8",value:8,xp:3900},"9":{cr:"9",value:9,xp:5000},"10":{cr:"10",value:10,xp:5900},"11":{cr:"11",value:11,xp:7200},"12":{cr:"12",value:12,xp:8400},"13":{cr:"13",value:13,xp:10000},"14":{cr:"14",value:14,xp:11500},"15":{cr:"15",value:15,xp:13000},"16":{cr:"16",value:16,xp:15000},"17":{cr:"17",value:17,xp:18000},"18":{cr:"18",value:18,xp:20000},"19":{cr:"19",value:19,xp:22000},"20":{cr:"20",value:20,xp:25000},"21":{cr:"21",value:21,xp:33000},"22":{cr:"22",value:22,xp:41000},"23":{cr:"23",value:23,xp:50000},"24":{cr:"24",value:24,xp:62000},"25":{cr:"25",value:25,xp:75000},"26":{cr:"26",value:26,xp:90000},"27":{cr:"27",value:27,xp:105000},"28":{cr:"28",value:28,xp:120000},"29":{cr:"29",value:29,xp:135000},"30":{cr:"30",value:30,xp:155000}};
+                        if (monster.cr && monster.cr in CR) return `${CR[monster.cr].cr} (${CR[monster.cr].xp.toLocaleString()} PE)`; return monster.cr ?? '';
+                      fallback: —
+                    - type: property
+                      id: 55it-pb
+                      display: PB
+                      properties:
+                        - cr
+                      callback: 'const CR = {"0":0,"1/8":.125,"1/4":.25,"1/2":.5,"0.125":.125,"0.25":.25,"0.5":.5,"1":1,"2":2,"3":3,"4":4,"5":5,"6":6,"7":7,"8":8,"9":9,"10":10,"11":11,"12":12,"13":13,"14":14,"15":15,"16":16,"17":17,"18":18,"19":19,"20":20,"21":21,"22":22,"23":23,"24":24,"25":25,"26":26,"27":27,"28":28,"29":29,"30":30}; if (monster.pb) return String(monster.pb).startsWith(''+'') ? monster.pb : `+${monster.pb}`; if (monster.proficiency_bonus) return String(monster.proficiency_bonus).startsWith(''+'') ? monster.proficiency_bonus : `+${monster.proficiency_bonus}`; if (monster.cr && monster.cr in CR) return `+${Math.max(Math.floor(2 + ((CR[monster.cr] ?? 0) - 1) / 4), 2)}`; return '''';'
+                      fallback: —
+              conditioned: true
+              hasRule: true
+            - type: traits
+              id: 55it-traits
+              properties:
+                - traits
+              conditioned: true
+              dice: true
+              heading: ''
+            - type: spells
+              id: 55it-spells
+              properties:
+                - spells
+              conditioned: true
+              dice: true
+              heading: Incantesimi
+            - type: text
+              id: 55it-spells-notes
+              properties:
+                - spellsNotes
+              conditioned: true
+              text: null
+            - type: traits
+              id: 55it-actions
+              properties:
+                - actions
+              heading: Azioni
+              conditioned: true
+              dice: true
+            - type: traits
+              id: 55it-bonus-actions
+              properties:
+                - bonus_actions
+              heading: Azioni Bonus
+              conditioned: true
+              dice: true
+            - type: traits
+              id: 55it-reactions
+              properties:
+                - reactions
+              heading: Reazioni
+              conditioned: true
+              dice: true
+            - type: group
+              id: 55it-legendary-group
+              properties:
+                - legendary_description
+                - legendary_actions
+              heading: Azioni Leggendarie
+              nested:
+                - type: text
+                  id: 55it-legendary-description
+                  properties:
+                    - legendary_description
+                  conditioned: true
+                  text: null
+                  heading: ''
+                - type: traits
+                  id: 55it-legendary-actions
+                  properties:
+                    - legendary_actions
+                  conditioned: true
+                  dice: true
+                  heading: ''
+              conditioned: true
+            - type: group
+              id: 55it-mythic-group
+              properties:
+                - mythic_description
+                - mythic_actions
+              heading: Azioni Mitiche
+              nested:
+                - type: text
+                  id: 55it-mythic-description
+                  properties:
+                    - mythic_description
+                  conditioned: true
+                  text: null
+                - type: traits
+                  id: 55it-mythic-actions
+                  properties:
+                    - mythic_actions
+                  conditioned: true
+                  dice: true
+                  heading: ''
+              conditioned: true
+            - type: traits
+              id: 55it-lair-actions
+              properties:
+                - lair_actions
+              heading: Azioni della Tana
+              conditioned: true
+              dice: true
+            - type: traits
+              id: 55it-regional-effects
+              properties:
+                - regional_effects
+              heading: Effetti Regionali
+              conditioned: true
+              dice: true
+          name: D&D 5.5 Layout ITA - Compatibile 5e
+          id: 094b38db081b
+          diceParsing: []
+      default: aa0a584b6a5b
+      useDice: true
+      renderDice: false
+      export: true
+      showAdvanced: true
+      version:
+        major: 4
+        minor: 10
+        patch: 3
+      paths:
+        - /
+      autoParse: true
+      disableSRD: false
+      tryToRenderLinks: true
+      debug: false
+      notifiedOfFantasy: false
+      hideConditionHelp: false
+      alwaysImport: false
+      defaultLayoutsIntegrated: true
+      atomicWrite: false
+  - target: .obsidian/plugins/obsidian-dice-roller/data.json
+    data:
+      position: RIGHT
+      showFudgeIcon: false
+      rollLinksForTags: false
+      copyContentButton: true
+      customFormulas: []
+      displayFormulaForMod: true
+      displayResultsInline: false
+      displayFormulaAfter: false
+      escapeDiceMod: true
+      signed: false
+      displayLookupRoll: true
+      formulas: {}
+      defaultRoll: 1
+      defaultFace: 100
+      renderer: false
+      renderAllDice: false
+      addToView: false
+      renderTime: 2000
+      colorfulDice: false
+      scaler: 1
+      diceColor: '#202020'
+      textColor: '#ffffff'
+      textFont: Arial
+      showLeafOnStartup: true
+      narrativeSymbolSet: Genesys
+      displayAsSymbols: false
+      displayAsEmbed: true
+      round: None
+      initialDisplay: Roll
+      icons:
+        - id: dice-roller-d4
+          shape: Triangle
+          formula: d4
+          text: '4'
+        - id: dice-roller-d6
+          shape: Square
+          formula: d6
+          text: '6'
+        - id: dice-roller-d8
+          shape: Diamond
+          formula: d8
+          text: '8'
+        - id: dice-roller-d10
+          shape: Diamond
+          formula: d10
+          text: '10'
+        - id: dice-roller-d12
+          shape: Dodecahedron
+          formula: d12
+          text: '12'
+        - id: dice-roller-d20
+          shape: Icosahedron
+          formula: d20
+          text: '20'
+        - id: dice-roller-d100
+          shape: Circle
+          formula: d%
+          text: '%'
+      showRenderNotice: true
+      diceModTemplateFolders: {}
+      replaceDiceModInLivePreview: true
+      viewResults: []
+      version: 11.4.2
+  - target: .obsidian/plugins/obsidian-tasks-plugin/data.json
+    data:
+      globalFilter: '#task'
+      removeGlobalFilter: false
+      globalQuery: ''
+      taskFormat: tasksPluginEmoji
+      loggingOptions:
+        minLevels:
+          ? ''
+          : error
+          tasks: error
+          tasks.Cache: error
+          tasks.Events: error
+          tasks.File: error
+          tasks.Query: error
+          tasks.Task: error
+  - target: .obsidian/plugins/templater-obsidian/data.json
+    data:
+      command_timeout: 10
+      templates_folder: z.modelli
+      templates_pairs: []
+      trigger_on_file_creation: false
+      auto_jump_to_cursor: false
+      enable_system_commands: false
+      shell_path: ''
+      user_scripts_folder: z.automazioni/templater
+      enable_folder_templates: false
+      folder_templates: []
+      enable_file_templates: false
+      file_templates: []
+      syntax_highlighting: true
+      syntax_highlighting_mobile: false
+      enabled_templates_hotkeys: []
+      startup_templates: []
+      intellisense_render: 1
+      ignore_folders_on_creation: []
+  - target: .obsidian/types.json
+    data:
+      types:
+        aliases: aliases
+        cssclasses: multitext
+        tags: tags
+        id: text
+        nome: text
+        categoria: text
+        tipo: text
+        sottotipo: text
+        stato: text
+        canonico: checkbox
+        mondo: text
+        mondi: multitext
+        data: date
+        data_mondo: text
+        campagne: multitext
+        luogo: text
+        luogo_padre: text
+        luoghi: multitext
+        continenti: multitext
+        personaggi: multitext
+        creature: multitext
+        fazioni: multitext
+        religioni: multitext
+        relazioni: multitext
+        risorse: multitext
+        problemi: multitext
+        scene: multitext
+        ricompense: multitext
+        committente: text
+        sessioni: multitext
+        leader: multitext
+        alleati: multitext
+        nemici: multitext
+        templi: multitext
+        divinita: multitext
+        proprietario: text
+        giocatore: text
+        classe: text
+        livello: number
+        livello_attuale: number
+        specie: text
+        background: text
+        tono: text
+        tema: text
+        tecnologia: text
+        magia: text
+        segreto: text
+        atteggiamento: text
+        ruolo: text
+        rarita: text
+        sintonia: checkbox
+        cariche: number
+        maledizione: checkbox
+        bioma: text
+        popolazione: number
+        stabilita: number
+        pericolo: number
+        hp_massimi: number
+        hp_attuali: number
+        statblock: checkbox
+        name: text
+        type: text
+        size: text
+        alignment: text
+        ac: number
+        hp: number
+        speed: text
+        cr: text
+        TQ_explain: checkbox
+        TQ_extra_instructions: text
+        TQ_short_mode: checkbox
+        TQ_show_backlink: checkbox
+        TQ_show_cancelled_date: checkbox
+        TQ_show_created_date: checkbox
+        TQ_show_depends_on: checkbox
+        TQ_show_done_date: checkbox
+        TQ_show_due_date: checkbox
+        TQ_show_edit_button: checkbox
+        TQ_show_id: checkbox
+        TQ_show_on_completion: checkbox
+        TQ_show_postpone_button: checkbox
+        TQ_show_priority: checkbox
+        TQ_show_recurrence_rule: checkbox
+        TQ_show_scheduled_date: checkbox
+        TQ_show_start_date: checkbox
+        TQ_show_tags: checkbox
+        TQ_show_task_count: checkbox
+        TQ_show_toolbar: checkbox
+        TQ_show_tree: checkbox
+        TQ_show_urgency: checkbox

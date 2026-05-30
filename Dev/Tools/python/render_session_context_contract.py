@@ -16,12 +16,12 @@ sys.dont_write_bytecode = True
 ROOT = Path(__file__).resolve().parents[3]
 RUNTIME_PROFILES = ROOT / "Dev" / "Source" / "YAML" / "canonical" / "runtime_profiles.yaml"
 TEMPLATE_ROUTER = ROOT / "Dev" / "Source" / "YAML" / "canonical" / "template_router.yaml"
-WORLD_TAXONOMY = ROOT / "Dev" / "Source" / "YAML" / "canonical" / "world_taxonomy.yaml"
+ONTOLOGY_CLASSES = ROOT / "Dev" / "Source" / "YAML" / "canonical" / "ontology" / "classes.yaml"
+ONTOLOGY_RELATIONS = ROOT / "Dev" / "Source" / "YAML" / "canonical" / "ontology" / "relations.yaml"
+ONTOLOGY_PROJECTIONS = ROOT / "Dev" / "Source" / "YAML" / "canonical" / "ontology" / "projections.yaml"
 FIELDS_CORE = ROOT / "Dev" / "Source" / "YAML" / "canonical" / "fields_core.yaml"
 ENTITY_MODEL = ROOT / "Dev" / "Source" / "YAML" / "canonical" / "entity_model.yaml"
-RELEASE_BOUNDARY = ROOT / "Dev" / "Source" / "YAML" / "quality" / "release_boundary.yaml"
-RESOURCE_INDEXES = ROOT / "Dev" / "Source" / "YAML" / "render" / "resource_indexes.yaml"
-RESOURCE_SUPPORT_PAGES = ROOT / "Dev" / "Source" / "YAML" / "render" / "resource_support_pages.yaml"
+VALIDATION_CONTRACT = ROOT / "Dev" / "Source" / "YAML" / "canonical" / "validation_contract.yaml"
 TEMPLATE_BLUEPRINTS = ROOT / "Dev" / "Source" / "YAML" / "render" / "template_blueprints.yaml"
 TARGET = ROOT / "z.automazioni" / "data" / "runtime" / "session_context.json"
 
@@ -84,42 +84,9 @@ def normalize_template_ref(value: Any) -> str:
     return template[:-3] if template.endswith(".md") else template
 
 
-def parent_folder(rel_path: Any) -> str:
-    path = str(rel_path or "").replace("\\", "/").strip()
-    if not path or "/" not in path:
-        return ""
-    return path.rsplit("/", 1)[0]
-
-
-def declared_runtime_folders(
-    release_boundary: dict[str, Any],
-    resource_indexes: dict[str, Any],
-    resource_support_pages: dict[str, Any],
-) -> set[str]:
-    folders: set[str] = set()
-
-    for item in release_boundary.get("materialized_user_files") or []:
-        if isinstance(item, dict):
-            folder = parent_folder(item.get("path"))
-            if folder:
-                folders.add(folder)
-
-    for module in (resource_indexes, resource_support_pages):
-        for item in module.get("indexes") or module.get("pages") or []:
-            if isinstance(item, dict):
-                folder = parent_folder(item.get("path"))
-                if folder:
-                    folders.add(folder)
-
-    return folders
-
-
 def validate_path_registry(
     contracts: dict[str, Any],
     entity_model: dict[str, Any],
-    release_boundary: dict[str, Any],
-    resource_indexes: dict[str, Any],
-    resource_support_pages: dict[str, Any],
     errors: list[str],
 ) -> dict[str, str]:
     path_contract = contracts.get("path_registry")
@@ -133,7 +100,6 @@ def validate_path_registry(
         return {}
 
     categories = entity_model.get("categories") if isinstance(entity_model.get("categories"), dict) else {}
-    known_folders = declared_runtime_folders(release_boundary, resource_indexes, resource_support_pages)
     registry: dict[str, str] = {}
 
     for key, spec in paths.items():
@@ -164,12 +130,6 @@ def validate_path_registry(
                     f"{RUNTIME_PROFILES.relative_to(ROOT)}: path_registry.paths.{key_text}.folder "
                     f"non allineato a entity_model.{entity_category}.folder ({folder} != {model_folder})",
                 )
-        elif folder not in known_folders:
-            fail(
-                errors,
-                f"{RUNTIME_PROFILES.relative_to(ROOT)}: path_registry.paths.{key_text}.folder "
-                f"non dichiarato da release/resource contracts ({folder})",
-            )
 
     return registry
 
@@ -616,6 +576,291 @@ def rule_reachable(rule: dict[str, Any], routes: list[dict[str, str]]) -> bool:
     return False
 
 
+def label_from_type(value: Any) -> str:
+    text = str(value or "").strip()
+    return text[:1].upper() + text[1:] if text else ""
+
+
+def iter_ontology_classes(ontology_classes: dict[str, Any]) -> list[tuple[str, str, dict[str, Any]]]:
+    classes: list[tuple[str, str, dict[str, Any]]] = []
+    for domain_id, domain in (ontology_classes.get("domains") or {}).items():
+        if not isinstance(domain, dict):
+            continue
+        for class_id, class_spec in (domain.get("classes") or {}).items():
+            if isinstance(class_spec, dict):
+                classes.append((str(domain_id), str(class_id), class_spec))
+    return classes
+
+
+def build_world_taxonomy_from_ontology(
+    ontology_classes: dict[str, Any],
+    ontology_projections: dict[str, Any],
+    errors: list[str],
+) -> dict[str, Any]:
+    source = f"{ONTOLOGY_CLASSES.relative_to(ROOT)} + {ONTOLOGY_PROJECTIONS.relative_to(ROOT)}"
+    projection = ontology_projections.get("world_taxonomy")
+    if not isinstance(projection, dict) or not projection:
+        fail(errors, f"{source}: world_taxonomy deve essere mappa non vuota")
+        projection = {}
+
+    kinds: dict[str, Any] = {}
+    for _domain_id, class_id, class_spec in iter_ontology_classes(ontology_classes):
+        router_kind = str(class_spec.get("router_kind") or "").strip()
+        if not router_kind:
+            continue
+        if router_kind in kinds:
+            fail(errors, f"{source}: router_kind duplicato ({router_kind})")
+            continue
+
+        label = str(class_spec.get("label") or label_from_type(class_id)).strip()
+        folder = str(class_spec.get("folder_key") or "").strip()
+        category = str(class_spec.get("entity_category") or class_id).strip()
+        types = normalized_list(class_spec.get("types"))
+        kinds[router_kind] = {
+            "label": label,
+            "default_folder": folder,
+            "families": [
+                {
+                    "id": router_kind,
+                    "label": label,
+                    "folder": folder,
+                    "category": category,
+                    "items": [{"id": type_id, "label": label_from_type(type_id)} for type_id in types],
+                }
+            ],
+        }
+
+    return {
+        "id": "world_taxonomy",
+        "purpose": "Router creativo worldbuilding derivato dall'ontologia.",
+        "version": "0.3.0",
+        "kinds": kinds,
+        "template_routes": projection.get("template_routes") or {},
+    }
+
+
+def validate_ontology_classes(
+    ontology_classes: dict[str, Any],
+    entity_model: dict[str, Any],
+    errors: list[str],
+) -> dict[str, Any]:
+    source = str(ONTOLOGY_CLASSES.relative_to(ROOT))
+    if not isinstance(ontology_classes, dict) or not ontology_classes:
+        fail(errors, f"{source} deve essere mappa non vuota")
+        return {}
+
+    raw_domains = ontology_classes.get("domains")
+    if not isinstance(raw_domains, dict) or not raw_domains:
+        fail(errors, f"{source}.domains deve essere mappa non vuota")
+        raw_domains = {}
+
+    categories = entity_model.get("categories") if isinstance(entity_model.get("categories"), dict) else {}
+    classes: dict[str, Any] = {}
+    router_kinds: dict[str, str] = {}
+
+    for domain_id, domain in raw_domains.items():
+        domain_key = str(domain_id or "").strip()
+        if not domain_key or any(char.isspace() for char in domain_key):
+            fail(errors, f"{source}.domains contiene key non valida ({domain_id})")
+            continue
+        if not isinstance(domain, dict):
+            fail(errors, f"{source}.domains.{domain_key} deve essere mappa")
+            continue
+
+        raw_classes = domain.get("classes")
+        if not isinstance(raw_classes, dict) or not raw_classes:
+            fail(errors, f"{source}.domains.{domain_key}.classes deve essere mappa non vuota")
+            raw_classes = {}
+
+        for class_id, class_spec in raw_classes.items():
+            class_key = str(class_id or "").strip()
+            if not class_key or any(char.isspace() for char in class_key):
+                fail(errors, f"{source}.domains.{domain_key}.classes contiene key non valida ({class_id})")
+                continue
+            if class_key in classes:
+                fail(errors, f"{source}: classe duplicata ({class_key})")
+                continue
+            if not isinstance(class_spec, dict):
+                fail(errors, f"{source}.domains.{domain_key}.classes.{class_key} deve essere mappa")
+                continue
+
+            label = require_text(errors, source, class_spec.get("label"), f"domains.{domain_key}.classes.{class_key}.label")
+            entity_category = require_text(errors, source, class_spec.get("entity_category"), f"domains.{domain_key}.classes.{class_key}.entity_category")
+            if entity_category and entity_category not in categories:
+                fail(errors, f"{source}.domains.{domain_key}.classes.{class_key}.entity_category non dichiarata in entity_model ({entity_category})")
+
+            types = normalized_list(class_spec.get("types"))
+            if not types:
+                fail(errors, f"{source}.domains.{domain_key}.classes.{class_key}.types deve essere lista non vuota")
+
+            default_type = str(class_spec.get("default_type") or "").strip()
+            if default_type and types and default_type not in types:
+                fail(errors, f"{source}.domains.{domain_key}.classes.{class_key}.default_type non presente in types ({default_type})")
+
+            router_kind = str(class_spec.get("router_kind") or "").strip()
+            if router_kind:
+                if router_kind in router_kinds:
+                    fail(errors, f"{source}: router_kind duplicato ({router_kind}) in {router_kinds[router_kind]} e {class_key}")
+                router_kinds[router_kind] = class_key
+
+            classes[class_key] = {
+                "domain": domain_key,
+                "label": label,
+                "entity_category": entity_category,
+                "types": types,
+                "validation_authority": class_spec.get("validation_authority") is True,
+                **({"router_kind": router_kind} if router_kind else {}),
+                **({"default_type": default_type} if default_type else {}),
+                **({"frontmatter_profile": str(class_spec.get("frontmatter_profile")).strip()} if class_spec.get("frontmatter_profile") else {}),
+                **({"frontmatter_profiles": normalized_list(class_spec.get("frontmatter_profiles"))} if class_spec.get("frontmatter_profiles") else {}),
+                **({"body_model": str(class_spec.get("body_model")).strip()} if class_spec.get("body_model") else {}),
+                **({"frontmatter_policy": str(class_spec.get("frontmatter_policy")).strip()} if class_spec.get("frontmatter_policy") else {}),
+            }
+
+    return classes
+
+
+def storage_matches_field_type(storage: str, field_type: str) -> bool:
+    if storage == "wikilink":
+        return field_type == "wikilink"
+    if storage == "wikilink_list":
+        return field_type == "wikilink_list"
+    if storage == "wikilink_target_list":
+        return field_type in {"wikilink_target_list", "wikilink_list"}
+    if storage == "list":
+        return "list" in field_type
+    if storage == "text":
+        return field_type in {"text", "select"}
+    if storage == "derived":
+        return True
+    return False
+
+
+def validate_ontology_relations(
+    ontology_relations: dict[str, Any],
+    classes: dict[str, Any],
+    fields_core: dict[str, Any],
+    errors: list[str],
+) -> dict[str, Any]:
+    source = str(ONTOLOGY_RELATIONS.relative_to(ROOT))
+    if not isinstance(ontology_relations, dict) or not ontology_relations:
+        fail(errors, f"{source} deve essere mappa non vuota")
+        return {}
+
+    raw_relations = ontology_relations.get("relations")
+    if not isinstance(raw_relations, dict) or not raw_relations:
+        fail(errors, f"{source}.relations deve essere mappa non vuota")
+        raw_relations = {}
+
+    class_ids = set(classes)
+    fields = field_catalog(fields_core)
+    allowed_cardinalities = {"one", "zero_or_one", "many"}
+    allowed_storage = {"wikilink", "wikilink_list", "wikilink_target_list", "list", "text", "derived"}
+    relations: dict[str, Any] = {}
+
+    for relation_id, relation in raw_relations.items():
+        relation_key = str(relation_id or "").strip()
+        if not relation_key or any(char.isspace() for char in relation_key):
+            fail(errors, f"{source}.relations contiene key non valida ({relation_id})")
+            continue
+        if not isinstance(relation, dict):
+            fail(errors, f"{source}.relations.{relation_key} deve essere mappa")
+            continue
+
+        label = require_text(errors, source, relation.get("label"), f"relations.{relation_key}.label")
+        field = require_text(errors, source, relation.get("field"), f"relations.{relation_key}.field")
+        field_def = fields.get(field)
+        if field and not field_def:
+            fail(errors, f"{source}.relations.{relation_key}.field non dichiarato in fields_core ({field})")
+
+        domain = normalized_list(relation.get("domain"))
+        if not domain:
+            fail(errors, f"{source}.relations.{relation_key}.domain deve essere lista non vuota")
+        for class_id in domain:
+            if class_id not in class_ids:
+                fail(errors, f"{source}.relations.{relation_key}.domain usa classe non dichiarata ({class_id})")
+
+        range_values = normalized_list(relation.get("range"))
+        if not range_values:
+            fail(errors, f"{source}.relations.{relation_key}.range deve essere lista non vuota")
+        for class_id in range_values:
+            if class_id not in class_ids:
+                fail(errors, f"{source}.relations.{relation_key}.range usa classe non dichiarata ({class_id})")
+
+        cardinality = require_text(errors, source, relation.get("cardinality"), f"relations.{relation_key}.cardinality")
+        if cardinality and cardinality not in allowed_cardinalities:
+            fail(errors, f"{source}.relations.{relation_key}.cardinality non valida ({cardinality})")
+
+        storage = require_text(errors, source, relation.get("storage"), f"relations.{relation_key}.storage")
+        if storage and storage not in allowed_storage:
+            fail(errors, f"{source}.relations.{relation_key}.storage non valido ({storage})")
+        if storage and field_def and not storage_matches_field_type(storage, str(field_def.get("type") or "")):
+            fail(
+                errors,
+                f"{source}.relations.{relation_key}.storage non compatibile con fields_core.{field}.type "
+                f"({storage} != {field_def.get('type')})",
+            )
+
+        required_for = normalized_list(relation.get("required_for"))
+        for class_id in required_for:
+            if class_id not in class_ids:
+                fail(errors, f"{source}.relations.{relation_key}.required_for usa classe non dichiarata ({class_id})")
+            if domain and class_id not in domain:
+                fail(errors, f"{source}.relations.{relation_key}.required_for non appartiene al domain ({class_id})")
+
+        relations[relation_key] = {
+            "label": label,
+            "field": field,
+            "domain": domain,
+            "range": range_values,
+            "cardinality": cardinality,
+            "storage": storage,
+            **({"inverse": str(relation.get("inverse")).strip()} if relation.get("inverse") else {}),
+            **({"required_for": required_for} if required_for else {}),
+        }
+
+    return relations
+
+
+def authoritative_types_by_category(classes: dict[str, Any]) -> dict[str, list[str]]:
+    values: dict[str, list[str]] = {}
+    for class_spec in classes.values():
+        if class_spec.get("validation_authority") is not True:
+            continue
+        category = str(class_spec.get("entity_category") or "").strip()
+        if not category:
+            continue
+        values.setdefault(category, [])
+        for type_id in normalized_list(class_spec.get("types")):
+            if type_id not in values[category]:
+                values[category].append(type_id)
+    return values
+
+
+def validate_authoritative_types(
+    classes: dict[str, Any],
+    validation_contract: dict[str, Any],
+    entity_model: dict[str, Any],
+    errors: list[str],
+) -> None:
+    expected = authoritative_types_by_category(classes)
+    source = str(VALIDATION_CONTRACT.relative_to(ROOT))
+    allowed = validation_contract.get("allowed_types_by_category")
+    if not isinstance(allowed, dict):
+        fail(errors, f"{source}.allowed_types_by_category deve essere mappa")
+        allowed = {}
+
+    categories = entity_model.get("categories") if isinstance(entity_model.get("categories"), dict) else {}
+    for category, types in expected.items():
+        validation_types = normalized_list(allowed.get(category))
+        if validation_types != types:
+            fail(errors, f"{source}.allowed_types_by_category.{category} non allineato all'ontologia ({validation_types} != {types})")
+
+        entity_types = normalized_list((categories.get(category) or {}).get("types") if isinstance(categories.get(category), dict) else [])
+        if entity_types and entity_types != types:
+            fail(errors, f"{ENTITY_MODEL.relative_to(ROOT)}.categories.{category}.types non allineato all'ontologia ({entity_types} != {types})")
+
+
 def validate_world_taxonomy(
     taxonomy: dict[str, Any],
     template_blueprints: dict[str, Any],
@@ -624,7 +869,7 @@ def validate_world_taxonomy(
     template_router: dict[str, Any],
     errors: list[str],
 ) -> dict[str, Any]:
-    source = str(WORLD_TAXONOMY.relative_to(ROOT))
+    source = f"{ONTOLOGY_CLASSES.relative_to(ROOT)} + {ONTOLOGY_PROJECTIONS.relative_to(ROOT)}"
     if not isinstance(taxonomy, dict) or not taxonomy:
         fail(errors, f"{source} deve essere mappa non vuota")
         return {}
@@ -818,12 +1063,12 @@ def validate_world_taxonomy(
 def validate_contract(
     runtime_profiles: dict[str, Any],
     template_router_contract: dict[str, Any],
-    world_taxonomy: dict[str, Any],
+    ontology_classes: dict[str, Any],
+    ontology_relations: dict[str, Any],
+    ontology_projections: dict[str, Any],
     fields_core: dict[str, Any],
     entity_model: dict[str, Any],
-    release_boundary: dict[str, Any],
-    resource_indexes: dict[str, Any],
-    resource_support_pages: dict[str, Any],
+    validation_contract: dict[str, Any],
     template_blueprints: dict[str, Any],
     errors: list[str],
 ) -> dict[str, Any]:
@@ -844,14 +1089,12 @@ def validate_contract(
     path_registry = validate_path_registry(
         contracts,
         entity_model,
-        release_boundary,
-        resource_indexes,
-        resource_support_pages,
         errors,
     )
     template_router = validate_template_router(template_router_contract, template_blueprints, path_registry, errors)
+    raw_world_taxonomy = build_world_taxonomy_from_ontology(ontology_classes, ontology_projections, errors)
     world_taxonomy = validate_world_taxonomy(
-        world_taxonomy,
+        raw_world_taxonomy,
         template_blueprints,
         path_registry,
         entity_model,
@@ -887,6 +1130,10 @@ def validate_contract(
         if "link" not in field_type:
             fail(errors, f"{RUNTIME_PROFILES.relative_to(ROOT)}: link_fields.{field} non e campo link ({field_type})")
 
+    ontology_class_map = validate_ontology_classes(ontology_classes, entity_model, errors)
+    ontology_relation_map = validate_ontology_relations(ontology_relations, ontology_class_map, fields_core, errors)
+    validate_authoritative_types(ontology_class_map, validation_contract, entity_model, errors)
+
     return {
         "active_states": active_states,
         "play_states": play_states,
@@ -895,6 +1142,10 @@ def validate_contract(
         "path_registry": path_registry,
         "template_router": template_router,
         "world_taxonomy": world_taxonomy,
+        "ontology": {
+            "classes": ontology_class_map,
+            "relations": ontology_relation_map,
+        },
     }
 
 
@@ -910,22 +1161,22 @@ def main() -> int:
     errors: list[str] = []
     runtime_profiles = load_yaml(RUNTIME_PROFILES, errors)
     template_router = load_yaml(TEMPLATE_ROUTER, errors)
-    world_taxonomy = load_yaml(WORLD_TAXONOMY, errors)
+    ontology_classes = load_yaml(ONTOLOGY_CLASSES, errors)
+    ontology_relations = load_yaml(ONTOLOGY_RELATIONS, errors)
+    ontology_projections = load_yaml(ONTOLOGY_PROJECTIONS, errors)
     fields_core = load_yaml(FIELDS_CORE, errors)
     entity_model = load_yaml(ENTITY_MODEL, errors)
-    release_boundary = load_yaml(RELEASE_BOUNDARY, errors)
-    resource_indexes = load_yaml(RESOURCE_INDEXES, errors)
-    resource_support_pages = load_yaml(RESOURCE_SUPPORT_PAGES, errors)
+    validation_contract = load_yaml(VALIDATION_CONTRACT, errors)
     template_blueprints = load_yaml(TEMPLATE_BLUEPRINTS, errors)
     contract = validate_contract(
         runtime_profiles,
         template_router,
-        world_taxonomy,
+        ontology_classes,
+        ontology_relations,
+        ontology_projections,
         fields_core,
         entity_model,
-        release_boundary,
-        resource_indexes,
-        resource_support_pages,
+        validation_contract,
         template_blueprints,
         errors,
     )
@@ -954,7 +1205,9 @@ def main() -> int:
         f"{len(contract['link_fields'])} campi link, "
         f"{len(contract['path_registry'])} percorsi runtime, "
         f"{len(contract['template_router']['prompt_routes']) + len(contract['template_router']['delegated_routes']) + len(contract['template_router']['creative_routes'])} route template, "
-        f"{len(contract['world_taxonomy']['kinds'])} tassonomie worldbuilding."
+        f"{len(contract['world_taxonomy']['kinds'])} tassonomie worldbuilding, "
+        f"{len(contract['ontology']['classes'])} classi ontologia, "
+        f"{len(contract['ontology']['relations'])} relazioni ontologia."
     )
     return 0
 

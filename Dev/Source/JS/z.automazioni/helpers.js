@@ -76,9 +76,6 @@ module.exports = {
     getFileFromLink: noteHelpers.getFileFromLink,
     getFileByPathOrBasename: noteHelpers.getFileByPathOrBasename,
     getWorldFromLink: noteHelpers.getWorldFromLink,
-    getCalendarFromLink: noteHelpers.getCalendarFromLink,
-    getPreferredCalendar: noteHelpers.getPreferredCalendar,
-    promptCalendar: noteHelpers.promptCalendar,
     normalizeFieldArray: noteHelpers.normalizeFieldArray,
     getActiveSessionFile: noteHelpers.getActiveSessionFile,
     getActiveSessionContext: noteHelpers.getActiveSessionContext,
@@ -117,9 +114,5 @@ module.exports = {
     chooseCompendium: noteHelpers.chooseCompendium,
     chooseHandouts: noteHelpers.chooseHandouts,
     chooseSessions: noteHelpers.chooseSessions,
-    chooseCampaigns: noteHelpers.chooseCampaigns,
-    chooseMaps: noteHelpers.chooseMaps,
-    chooseAudio: noteHelpers.chooseAudio,
-    chooseImages: noteHelpers.chooseImages,
-    chooseVideos: noteHelpers.chooseVideos
+    chooseCampaigns: noteHelpers.chooseCampaigns
 };

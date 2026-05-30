@@ -64,7 +64,7 @@ layouts:
       - id: live
         label: Live
         sections:
-          - cockpit
+          - vista
           - appunti_live
       - id: dopo
         label: Dopo
@@ -72,26 +72,6 @@ layouts:
           - conseguenze
           - recap_pubblico
           - recap_dm
-  map_asset:
-    syntax: tabs
-    tabs:
-      - id: mappa
-        label: Mappa
-        sections:
-          - cosa_mostra
-          - pin
-      - id: dm
-        label: DM
-        sections:
-          - layer_dm
-      - id: pubblico
-        label: Pubblico
-        sections:
-          - layer_pubblico
-      - id: fallback
-        label: Fallback
-        sections:
-          - fallback_markdown
   dnd55_material:
     syntax: tabs
     tabs:
@@ -113,6 +93,30 @@ layouts:
         sections:
           - continuita
           - ricompense
+  worldbuilding_source_of_truth:
+    syntax: tabs
+    tabs:
+      - id: fonti
+        label: Fonti
+        sections:
+          - source_yaml
+          - source_jinja
+      - id: plugin
+        label: Plugin
+        sections:
+          - plugin_core
+          - plugin_visuali
+          - plugin_tavolo
+      - id: rendering
+        label: Rendering
+        sections:
+          - pipeline
+          - output_generati
+      - id: controlli
+        label: Controlli
+        sections:
+          - check
+          - fallback_markdown
 syntax:
   open: '````tabs'
   tab_marker: 'tab: {{ label }}'

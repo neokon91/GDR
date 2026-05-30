@@ -5,115 +5,61 @@ policy:
   target_folder: z.automazioni/templater
   rule: 'Non editare i wrapper a mano: aggiungere o rinominare funzioni qui e rigenerare.'
 wrappers:
-- name: arco_da_conflitto
-  module: ../arco_da_conflitto
-- name: avventura
-  module: ../avventura
-- name: background_dnd
-  module: ../background_dnd
-- name: campagna
-  module: ../campagna
-- name: campagna_da_regione
-  module: ../campagna_da_regione
-- name: classe_dnd
-  module: ../classe_dnd
-- name: compendium_mondo
-  module: ../compendium_mondo
-- name: conflitto
-  module: ../conflitto
-- name: cosmologia
-  module: ../cosmologia
-- name: creatura
-  module: ../creatura
-- name: culto
-  module: ../culto
-- name: cultura
-  module: ../cultura
-- name: dispensa
-  module: ../dispensa
-- name: dm
-  module: ../dm
-- name: era_storica
-  module: ../era_storica
-- name: evento_storico
-  module: ../evento_storico
-- name: fazione
-  module: ../fazione
-- name: incantesimo
-  module: ../incantesimo
-- name: incontro
-  module: ../incontro
-- name: lingua
-  module: ../lingua
-- name: live_conseguenza
-  module: ../live_conseguenza
-- name: live_evento
-  module: ../live_evento
-- name: live_luogo
-  module: ../live_luogo
-- name: live_nota
-  module: ../live_nota
-- name: live_png
-  module: ../live_png
-- name: lore_capture
-  module: ../lore_capture
-- name: luogo
-  module: ../luogo
-- name: mappa
-  module: ../mappa
-- name: mercato
-  module: ../mercato
-- name: meta_actions
-  module: ../meta_actions
-- name: missione
-  module: ../missione
-- name: mondo
-  module: ../mondo
-- name: nota_rapida
-  module: ../nota_rapida
-- name: nuovo_mondo_homebrew
-  module: ../nuovo_mondo_homebrew
-- name: oggetto
-  module: ../oggetto
-- name: oggetto_magico
-  module: ../oggetto_magico
-- name: one_shot
-  module: ../one_shot
-- name: pericolo_ambientale
-  module: ../pericolo_ambientale
-- name: personaggio
-  module: ../personaggio
-- name: pg
-  module: ../pg
-- name: png
-  module: ../png
-- name: regola_dnd
-  module: ../regola_dnd
-- name: relazione
-  module: ../relazione
-- name: ricorrenza_calendario
-  module: ../ricorrenza_calendario
-- name: risorsa_mondo
-  module: ../risorsa_mondo
-- name: rotta
-  module: ../rotta
-- name: session_live_update
-  module: ../session_live_update
-- name: sessione
-  module: ../sessione
-- name: specie_dnd
-  module: ../specie_dnd
-- name: talento_dnd
-  module: ../talento_dnd
-- name: template_router
-  module: ../template_router
-- name: tesoro
-  module: ../tesoro
-- name: tracciato
-  module: ../tracciato
-- name: trappola
-  module: ../trappola
-- name: wizard_layer
-  module: ../wizard_layer
-- name: world_entity
-  module: ../world_entity
+  - name: cosmologia
+    module: ../cosmologia
+  - name: creatura
+    module: ../creatura
+  - name: cultura
+    module: ../cultura
+  - name: dm
+    module: ../dm
+  - name: incantesimo
+    module: ../incantesimo
+  - name: incontro
+    module: ../incontro
+  - name: live_conseguenza
+    module: ../live_conseguenza
+  - name: lore_capture
+    module: ../lore_capture
+  - name: luogo
+    module: ../luogo
+  - name: meta_actions
+    module: ../meta_actions
+  - name: missione
+    module: ../missione
+  - name: mondo
+    module: ../mondo
+  - name: nota_rapida
+    module: ../nota_rapida
+  - name: nuovo_mondo_homebrew
+    module: ../nuovo_mondo_homebrew
+  - name: oggetto
+    module: ../oggetto
+  - name: oggetto_magico
+    module: ../oggetto_magico
+  - name: pericolo_ambientale
+    module: ../pericolo_ambientale
+  - name: personaggio
+    module: ../personaggio
+  - name: pg
+    module: ../pg
+  - name: png
+    module: ../png
+  - name: regola_dnd
+    module: ../regola_dnd
+  - name: relazione
+    module: ../relazione
+  - name: sessione
+    module: ../sessione
+  - name: template_router
+    module: ../template_router
+  - name: tesoro
+    module: ../tesoro
+  - name: tracciato
+    module: ../tracciato
+  - name: trappola
+    module: ../trappola
+  - name: wizard_layer
+    module: ../wizard_layer
+  - name: world_entity
+    module: ../world_entity

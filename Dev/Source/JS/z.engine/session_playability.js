@@ -20,14 +20,14 @@ ctx => {
     worldbuilder: {
       tavolo: "Manuale: compila uso_al_tavolo, scena o posta. Pulsante: Nuova missione o Nuovo incontro.",
       movimento: "Manuale: compila prossima_mossa o pressione. Pulsante: Motore mondo vivo o Nuovo clock.",
-      conseguenza: "Manuale: compila conseguenze, propaga_a o entita_impattate. Workflow: Post Sessione Guidato o Controllo vault.",
+      conseguenza: "Manuale: compila conseguenze, propaga_a o entita_impattate. Superficie: post sessione o controllo vault.",
       collegamento: "Manuale: collega mondo, luogo, fazione, missione o conseguenza. Superficie: Codex editabile o Nuova relazione."
     },
     vault: {
-      tavolo: "Manuale: compila uso_al_tavolo, scena o posta. Workflow: Worldbuilder, Preparazione sessione o Materiali al tavolo.",
-      movimento: "Manuale: compila prossima_mossa o pressione. Workflow: Motore mondo vivo o Task DM.",
-      conseguenza: "Manuale: compila conseguenze, propaga_a o entita_impattate. Workflow: Post Sessione Guidato.",
-      collegamento: "Manuale: collega mondo, luogo, fazione, missione o conseguenza. Workflow: Worldbuilder o Codex tabellare."
+      tavolo: "Manuale: compila uso_al_tavolo, scena o posta. Superficie: worldbuilder, preparazione sessione o materiali al tavolo.",
+      movimento: "Manuale: compila prossima_mossa o pressione. Superficie: tracciati o task DM.",
+      conseguenza: "Manuale: compila conseguenze, propaga_a o entita_impattate. Superficie: post sessione.",
+      collegamento: "Manuale: collega mondo, luogo, fazione, missione o conseguenza. Superficie: worldbuilder o Codex tabellare."
     }
   };
 
@@ -52,7 +52,7 @@ ctx => {
     },
     worldbuildingControl: {
       actions: "worldbuilder",
-      exclude: new Set(["mondo", "dashboard", "sessione", "risorsa", "compendium", "dispensa", "mappa"]),
+      exclude: new Set(["mondo", "dashboard", "sessione", "risorsa", "compendium", "dispensa"]),
       live: new Set([
         "luogo", "fazione", "religione", "culto", "personaggio", "png", "missione", "conflitto",
         "relazione", "rotta", "mercato", "tracciato", "clock", "incontro", "creatura",
@@ -150,14 +150,14 @@ ctx => {
     if (!missingGates.length) return null;
 
     const missingLabel = missingGates.map(gate => PLAYABILITY_GATE_LABELS[gate] ?? gate).join(", ");
-    const workflow = [...new Set(missingGates.map(gate => playabilityAction(gate, profile)))].join(" | ");
+    const azioni = [...new Set(missingGates.map(gate => playabilityAction(gate, profile)))].join(" | ");
     return {
       page,
       problem: `mancano: ${missingLabel}`,
       missingLabel,
       missingGates,
       action: playabilityAction(missingGates[0], profile),
-      workflow,
+      workflow: azioni,
       priority: priorityBase + missingGates.length
     };
   }

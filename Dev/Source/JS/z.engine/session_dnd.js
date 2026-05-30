@@ -60,7 +60,7 @@
       renderEmptyState(dv, {
         title: "Nessuna sessione attiva",
         action: "Attiva o apri una sessione prima di controllare incontri, creature e ricompense.",
-        link: "Risorse/Preparazione Sessione.md"
+        link: ""
       });
       return;
     }

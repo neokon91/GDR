@@ -15,15 +15,8 @@ async function nuovo_mondo_homebrew(tp) {
     ], "Preset creativo");
     const promise = await helpers.promptRequired(tp, "Promessa del mondo");
     const tone = await helpers.promptRequired(tp, "Tono");
-    const genre = await helpers.promptOptional(tp, "Genere o contaminazione");
-    const magic = await helpers.promptRequired(tp, "Livello magia");
-    const calendar = await helpers.promptOptional(tp, "Calendario Calendarium del mondo");
-    const scale = await helpers.promptRequired(tp, "Scala iniziale");
-    const conflict = await helpers.promptRequired(tp, "Conflitto centrale");
-    const constraints = await helpers.promptOptional(tp, "Vincoli creativi");
-    const avoid = await helpers.promptOptional(tp, "Temi da evitare");
     const locations = [];
-    const powers = [];
+    const cosmologies = [];
     const cultures = [];
 
     for (let index = 1; index <= 3; index += 1) {
@@ -31,23 +24,21 @@ async function nuovo_mondo_homebrew(tp) {
     }
 
     for (let index = 1; index <= 3; index += 1) {
-        powers.push(await helpers.promptRequired(tp, `Potere/fazione fondativa ${index}`));
+        cosmologies.push(await helpers.promptRequired(tp, `Legge cosmica, divinita o piano fondativo ${index}`));
     }
 
     for (let index = 1; index <= 2; index += 1) {
         cultures.push(await helpers.promptRequired(tp, `Cultura fondativa ${index}`));
     }
 
-    const mystery = await helpers.promptRequired(tp, "Mistero fondativo");
-    const pressure = await helpers.promptRequired(tp, "Pressione iniziale");
     const worldFolder = helpers.path("mondi");
     await helpers.moveNote(tp, worldFolder, name);
 
     async function createSeed(folderKey, seedName, category, type, extra = {}) {
         const folder = helpers.path(folderKey);
         const fileClassByCategory = {
-            cultura: "compendium",
-            fazione: "fazione",
+            cultura: "cultura",
+            cosmologia: "cosmologia",
             luogo: "luogo"
         };
         await helpers.ensureFolder(folder);
@@ -60,6 +51,7 @@ async function nuovo_mondo_homebrew(tp) {
             `categoria: ${helpers.yamlQuote(category)}`,
             `fileClass: ${helpers.yamlQuote(fileClassByCategory[category] ?? "compendium")}`,
             `tipo: ${helpers.yamlQuote(type)}`,
+            ...(category === "luogo" ? [`funzione_luogo: ${helpers.yamlQuote(extra.funzione_luogo ?? "")}`] : []),
             "stato: bozza",
             `mondo: "[[${name}]]"`,
             `gancio: ${helpers.yamlQuote(`Elemento fondativo di ${name}.`)}`,
@@ -67,16 +59,7 @@ async function nuovo_mondo_homebrew(tp) {
             `player_safe: ${helpers.yamlQuote(seedName)}`,
             "connessioni: []",
             "fonti: []",
-            "riferimenti_srd: []",
-            "riferimenti_regola: []",
-            "sezioni_collegate: []",
-            "blocchi_collegati: []",
-            "tabelle_collegate: []",
             "tags: [\"mondo/lore\", \"gdr/bozza\"]",
-            "pressione: 0",
-            "prossima_mossa: \"\"",
-            "pubblico: false",
-            ...Object.entries(extra).map(([key, value]) => `${key}: ${helpers.yamlQuote(value)}`),
             "---",
             `# ${seedName}`,
             "",
@@ -95,19 +78,21 @@ async function nuovo_mondo_homebrew(tp) {
     }
 
     const locationLinks = [];
-    const powerLinks = [];
+    const cosmologyLinks = [];
     const cultureLinks = [];
 
     for (const location of locations) {
-        locationLinks.push(await createSeed("luoghi", location, "luogo", "luogo fondativo"));
+        locationLinks.push(await createSeed("luoghi", location, "luogo", "sito di interesse", {
+            funzione_luogo: "luogo fondativo"
+        }));
     }
 
-    for (const power of powers) {
-        powerLinks.push(await createSeed("fazioni", power, "fazione", "fazione generica"));
+    for (const cosmology of cosmologies) {
+        cosmologyLinks.push(await createSeed("cosmologia", cosmology, "cosmologia", "legge cosmica"));
     }
 
     for (const culture of cultures) {
-        cultureLinks.push(await createSeed("culture", culture, "cultura", "cultura"));
+        cultureLinks.push(await createSeed("culture", culture, "cultura", "civilta"));
     }
 
     return await helpers.renderFrontmatter("nuovo_mondo_homebrew", {
@@ -116,33 +101,17 @@ async function nuovo_mondo_homebrew(tp) {
         categoria: 'mondo',
         fileClass: 'mondo',
         stato: 'bozza',
+        canonico: 'false',
         tono: helpers.yamlQuote(tone),
         tema: helpers.yamlQuote(preset.id),
-        genere: helpers.yamlQuote(genre),
-        scala: helpers.yamlQuote(scale),
-        magia: helpers.yamlQuote(magic),
-        calendario: helpers.yamlQuote(calendar),
         premessa: helpers.yamlQuote(promise),
         gancio: helpers.yamlQuote(promise),
-        conflitto_centrale: helpers.yamlQuote(conflict),
-        vincoli: helpers.yamlQuote(constraints),
-        non_vogliamo: helpers.inlineYamlTextList([avoid]),
-        luoghi_iconici: helpers.inlineYamlList(locationLinks),
-        fazioni_principali: helpers.inlineYamlList(powerLinks),
+        regioni: helpers.inlineYamlList(locationLinks),
         culture_fondative: helpers.inlineYamlList(cultureLinks),
-        misteri_pubblici: helpers.inlineYamlTextList([mystery]),
-        pressione_iniziale: helpers.yamlQuote(pressure),
-        prossime_entita_consigliate: '["religione o mito", "risorsa contesa", "rotta", "relazione", "evento storico", "missione da conflitto"]',
-        materiale_pubblico: '[]',
         campagne: '[]',
-        relazioni_chiave: '[]',
-        canonico: 'false',
-        fonti: helpers.inlineYamlWikilinkList([...locationLinks, ...powerLinks, ...cultureLinks]),
-        riferimenti_srd: '[]',
-        riferimenti_regola: '[]',
-        sezioni_collegate: '[]',
-        blocchi_collegati: '[]',
-        tabelle_collegate: '[]',
+        cosmologie: helpers.inlineYamlWikilinkList(cosmologyLinks),
+        fonti: helpers.inlineYamlWikilinkList([...locationLinks, ...cosmologyLinks, ...cultureLinks]),
+        connessioni: helpers.inlineYamlWikilinkList([...locationLinks, ...cosmologyLinks, ...cultureLinks]),
         tags: helpers.inlineYamlTextList(["dnd55/homebrew", "mondo/lore", "gdr/bozza"])
     });
 }

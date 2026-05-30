@@ -25,12 +25,7 @@ allowed_tags:
   world:
     - mondo/canone
     - mondo/lore
-    - mondo/mappa
     - mondo/relazioni
-  plugin_assets:
-    - excalidraw
-    - mappa
-    - relazioni
 contracts:
   tags_are_optional: true
   category_type_state_are_primary_taxonomy: true

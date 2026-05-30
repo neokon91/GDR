@@ -15,7 +15,7 @@ async function nota_rapida(tp) {
         "Tipo di nota rapida"
     );
     const collegamenti = helpers.appendUniqueLink(
-        await helpers.chooseCoreConnection(tp, "Collega a luogo, PNG, fazione, missione, clock o mappa"),
+        await helpers.chooseCoreConnection(tp, "Collega a luogo, PNG, fazione, missione o clock"),
         activeContext.link
     );
 

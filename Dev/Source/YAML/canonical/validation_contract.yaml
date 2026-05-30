@@ -115,101 +115,42 @@ session_playability_policy:
     - recap_pubblico
   min_world_anchors: 3
   world_anchor_groups:
-    - [mondo]
-    - [luoghi, luogo]
-    - [fazioni, personaggi]
-    - [missioni]
-    - [tracciati, pressioni]
-    - [mappe, incontri, materiale_pronto]
+    - - mondo
+    - - luoghi
+      - luogo
+    - - fazioni
+      - personaggi
+    - - missioni
+    - - tracciati
+      - pressioni
+    - - incontri
+      - materiale_pronto
   encounter_material_field: materiale_pronto
-map_review_policy:
-  playable_uses:
-    - zoom
-    - esagoni
-    - dungeon
-    - scena
-  structured_uses:
-    - fronte
-    - indizi
-    - regione
-  table_use_any_of_fields:
-    - uso_al_tavolo
-    - gancio
-  visibility_any_of_fields:
-    - player_safe
-    - cosa_mostrare
-    - luoghi
-    - luogo
-  dm_private_any_of_fields:
-    - cosa_nascondere
-    - prossima_mossa
-    - segreti
-    - versione_giocatori
-  ready_playable_link_any_of_fields:
-    - luogo
-    - luoghi
-    - incontri
-    - missioni
-  ready_structural_link_any_of_fields:
-    - mondo
-    - fazioni
-    - personaggi
-    - missioni
-    - luoghi
-  zoom_use: zoom
 allowed_types_by_category:
+  azione:
+    - azione
+  background:
+    - background
   campagna:
     - campagna
+  classe:
+    - classe
   conflitto:
     - conflitto
     - guerra
     - crisi
     - rivalità
   cosmologia:
-    - piano
-    - reame divino
-    - aldilà
-    - principio cosmico
-    - soglia
-    - legge arcana
-    - scuola o tradizione magica
-    - risorsa magica
-    - fenomeno magico
-    - patto
-    - contaminazione
-    - soglia o portale
-    - anomalia
-    - piano reame o aldila
-    - mistero arcano
+    - legge cosmica
+    - piano o aldila
+    - divinita
+    - pantheon
   creatura:
-    - habitat
-    - migrazione
-    - catena alimentare
-    - variante regionale
-    - creatura sacra
-    - mostro sociale
-    - specie senziente
-    - predatore territoriale
-    - piaga sciame o invasione
-    - ecosistema da definire
+    - creatura
   cultura:
-    - cultura
-    - popolo
-    - etnia
-    - tradizione
-    - festa o calendario rituale
-    - tabu
-    - rito di passaggio
-    - costume quotidiano
-    - cucina e ospitalita
-    - matrimonio famiglia e parentela
-    - funerali e memoria
-    - duello onore e vendetta
-    - arte musica teatro moda
-    - cultura da definire
+    - civilta
   dispensa:
     - lettera
-    - mappa
     - documento
     - indizio
     - dispensa
@@ -238,10 +179,9 @@ allowed_types_by_category:
     - gilda
     - ordine rituale
   incontro:
-    - combattimento
-    - esplorazione
-    - pericolo ambientale
-    - trappola
+    - incontro
+  incantesimo:
+    - incantesimo
   lingua:
     - lingua
     - dialetto
@@ -255,19 +195,10 @@ allowed_types_by_category:
     - conseguenza
     - idea
   luogo:
-    - città
-    - villaggio
-    - capitale
-    - porto
-    - fortezza
-    - rovina
-    - dungeon
     - regione
-    - regno
-    - tempio
-    - foresta
-    - montagna
-    - luogo fondativo
+    - insediamento
+    - sito di interesse
+    - habitat
   missione:
     - incarico
     - ricerca
@@ -283,12 +214,20 @@ allowed_types_by_category:
   mondo:
     - mondo
   oggetto:
-    - oggetto
+    - arma
+    - armatura
+    - scudo
+    - strumento
+    - veleno
+    - oggetto meraviglioso
     - oggetto magico
-    - chiave
+  pericolo ambientale:
+    - pericolo ambientale
   personaggio:
     - pg
     - png
+  regola:
+    - regola
   religione:
     - divinità
     - soglia
@@ -331,7 +270,6 @@ allowed_types_by_category:
     - oggetto di prestigio
     - leva economica da definire
     - aspetto
-    - audio
     - audit plugin
     - calendario diegetico
     - canon control
@@ -349,7 +287,6 @@ allowed_types_by_category:
     - guida
     - guida plugin
     - guida rapida
-    - immagini
     - indice
     - indice connettore gpt
     - indice mercati
@@ -359,9 +296,6 @@ allowed_types_by_category:
     - lore
     - lore hub
     - lore review
-    - mappa
-    - mappe
-    - media
     - mistero
     - motore mondo vivo
     - onboarding
@@ -378,7 +312,6 @@ allowed_types_by_category:
     - supporto
     - sviluppo
     - tabelle
-    - video
   sessione:
     - sessione di campagna
     - sessione zero
@@ -386,6 +319,8 @@ allowed_types_by_category:
     - downtime
     - finale
     - one-shot
+  specie:
+    - specie
   societa:
     - ceto sociale
     - clan casata o famiglia
@@ -405,8 +340,20 @@ allowed_types_by_category:
     - minaccia
     - viaggio
     - progetto
+  talento:
+    - talento
+  tesoro:
+    - tesoro
+  trappola:
+    - trappola
 required_fields_by_category:
+  azione:
+    - stato
+  background:
+    - stato
   campagna:
+    - stato
+  classe:
     - stato
   conflitto:
     - stato
@@ -433,6 +380,8 @@ required_fields_by_category:
     - pressione
   incontro:
     - stato
+  incantesimo:
+    - stato
   lingua:
     - stato
     - mondo
@@ -456,7 +405,11 @@ required_fields_by_category:
     - stato
   oggetto:
     - stato
+  pericolo ambientale:
+    - stato
   personaggio:
+    - stato
+  regola:
     - stato
   religione:
     - stato
@@ -471,6 +424,8 @@ required_fields_by_category:
     - stato
     - attiva
     - mondo
+  specie:
+    - stato
   societa:
     - stato
     - mondo
@@ -480,6 +435,12 @@ required_fields_by_category:
     - progress_value
     - progress_max
     - prossima_mossa
+  talento:
+    - stato
+  tesoro:
+    - stato
+  trappola:
+    - stato
 state_ready_requirements:
   pronto:
     mondo:
@@ -683,8 +644,7 @@ playability_rules:
     require_any_of:
       - eresie
       - rituali
-      - calendario_rituale
-    warning: religione pronta senza eresie, rituali o calendario rituale
+    warning: religione pronta senza eresie, rituali
   - id: religion_requires_violation_reaction
     path_prefix: Mondi/Religioni/
     categoria: religione
@@ -695,33 +655,6 @@ playability_rules:
       - conseguenze
       - missioni
     warning: religione senza costo sociale, reazione a violazione o missione generata
-  - id: economic_entity_requires_crisis_chain
-    path_prefixes:
-      - Mondi/Risorse/
-      - Mondi/Rotte/
-      - Mondi/Mercati/
-    categoria: risorsa
-    stato_not: archiviata
-    require_any_of:
-      - crisi
-      - rischi
-      - conseguenze_se_bloccata
-      - missioni
-    warning: economia senza crisi, rischio, conseguenza di blocco o missione collegata
-  - id: pressured_economy_requires_mission_or_track
-    path_prefixes:
-      - Mondi/Risorse/
-      - Mondi/Rotte/
-      - Mondi/Mercati/
-    categoria: risorsa
-    number_field_gt:
-      field: pressione
-      value: 0
-    require_any_of:
-      - missioni
-      - tracciati
-      - conflitti
-    warning: economia sotto pressione senza missione, tracciato o conflitto collegato
   - id: major_political_territory_requires_capital
     path_prefix: Mondi/Luoghi/
     categoria: luogo

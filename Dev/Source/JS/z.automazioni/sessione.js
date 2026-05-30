@@ -6,7 +6,7 @@ async function sessione(tp) {
     const titolo = await helpers.promptRequired(tp, "Titolo della sessione", "Sessione");
     const data = await helpers.promptOptional(tp, "Data", tp.date.now("YYYY-MM-DD")) || tp.date.now("YYYY-MM-DD");
     const id = helpers.slugify(`${data}-${titolo}`);
-    const creazioneCompleta = await helpers.askYesNo(tp, "Vuoi collegare subito cast, luoghi, materiali e media? Scegli No per una sessione rapida.");
+    const creazioneCompleta = await helpers.askYesNo(tp, "Vuoi collegare subito cast, luoghi e materiali? Scegli No per una sessione rapida.");
     const mondo = route.mondo || await helpers.chooseWorld(tp, "Mondo della sessione");
     const context = { world: mondo };
     const routeList = key => helpers.normalizeFieldArray(route[key]);
@@ -31,7 +31,6 @@ async function sessione(tp) {
     const tracciatiDaRotta = routeList("tracciati");
     const fazioniDaRotta = routeList("fazioni");
     const campagne = creazioneCompleta ? (campagneDaRotta.length ? campagneDaRotta : await helpers.chooseCampaigns(tp, "Campagne collegate", context)) : [];
-    const calendario = await helpers.promptCalendar(tp, { world: mondo, campaigns: campagne });
     const luoghi = creazioneCompleta ? (luoghiDaRotta.length ? luoghiDaRotta : await helpers.chooseLocations(tp, "Luoghi in scena", context)) : [];
     const personaggi = creazioneCompleta ? await helpers.choosePeople(tp, "Personaggi in scena", context) : [];
     const missioni = creazioneCompleta ? (missioniDaRotta.length ? missioniDaRotta : await helpers.chooseMissions(tp, "Missioni vive", context)) : [];
@@ -39,10 +38,6 @@ async function sessione(tp) {
     const creature = creazioneCompleta ? await helpers.chooseCreatures(tp, "Creature in scena", context) : [];
     const incontri = creazioneCompleta ? await helpers.chooseEncounters(tp, "Incontri previsti", context) : [];
     const dispense = creazioneCompleta ? await helpers.chooseHandouts(tp, "Dispense previste", context) : [];
-    const mappe = creazioneCompleta ? await helpers.chooseMaps(tp, "Mappe previste", context) : [];
-    const audio = creazioneCompleta ? await helpers.chooseAudio(tp, "Audio previsti", context) : [];
-    const immagini = creazioneCompleta ? await helpers.chooseImages(tp, "Immagini previste", context) : [];
-    const video = creazioneCompleta ? await helpers.chooseVideos(tp, "Video previsti", context) : [];
     const fazioni = creazioneCompleta ? (fazioniDaRotta.length ? fazioniDaRotta : await helpers.chooseFactions(tp, "Fazioni in scena", context)) : [];
     const oggetti = creazioneCompleta ? await helpers.chooseObjects(tp, "Oggetti in scena", context) : [];
     const riferimentiRegola = creazioneCompleta ? await helpers.promptWikilinkTargets(tp, prompts.riferimenti_regola ?? "Riferimenti regola o SRD da tenere aperti") : [];
@@ -58,11 +53,6 @@ async function sessione(tp) {
         tipo: selectedType?.id ?? "",
         data: data,
         data_mondo: "",
-        fc_calendar: helpers.yamlQuote(calendario),
-        fc_date: "",
-        fc_category: 'sessione',
-        fc_display_name: helpers.yamlQuote(titolo),
-        fc_end: "",
         stato: 'preparazione',
         attiva: 'false',
         mondo: mondo,
@@ -74,10 +64,6 @@ async function sessione(tp) {
         creature: helpers.inlineYamlList(creature),
         incontri: helpers.inlineYamlList(incontri),
         dispense: helpers.inlineYamlList(dispense),
-        mappe: helpers.inlineYamlList(mappe),
-        audio: helpers.inlineYamlList(audio),
-        immagini: helpers.inlineYamlList(immagini),
-        video: helpers.inlineYamlList(video),
         fazioni: helpers.inlineYamlList(fazioni),
         oggetti: helpers.inlineYamlList(oggetti),
         appunti_live: '[]',
@@ -98,12 +84,12 @@ async function sessione(tp) {
         recap_dm: '[]',
         prossima_apertura: "",
         output_sessione: '[]',
-        fonti: helpers.inlineYamlWikilinkList([...campagne, ...luoghi, ...personaggi, ...missioni, ...tracciati, ...dispense, ...mappe]),
+        fonti: helpers.inlineYamlWikilinkList([...campagne, ...luoghi, ...personaggi, ...missioni, ...tracciati, ...dispense, ...oggetti]),
         riferimenti_srd: helpers.inlineYamlWikilinkList(riferimentiRegola),
         riferimenti_regola: helpers.inlineYamlWikilinkList(riferimentiRegola),
         sezioni_collegate: '[]',
         blocchi_collegati: '[]',
-        tabelle_collegate: helpers.inlineYamlWikilinkList(["[[Risorse/Tabelle/Tabelle#^complicazioni]]"]),
+        tabelle_collegate: '[]',
         tags: helpers.inlineYamlTextList(["gdr/bozza"])
     });
 }

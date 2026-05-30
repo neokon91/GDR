@@ -48,25 +48,6 @@ function createNoteCore({
         return getFrontmatter(file)?.mondo ?? "";
     }
 
-    function getCalendarFromLink(link) {
-        const file = getFileFromLink(link);
-        const frontmatter = getFrontmatter(file);
-        return String(frontmatter?.calendario ?? frontmatter?.["fc-calendar"] ?? "").trim();
-    }
-
-    function getPreferredCalendar({ world = "", campaigns = [], fallback = "" } = {}) {
-        const campaignCalendar = normalizeFieldArray(campaigns)
-            .map(getCalendarFromLink)
-            .find(Boolean);
-
-        return campaignCalendar || getCalendarFromLink(world) || String(fallback ?? "").trim();
-    }
-
-    async function promptCalendar(tp, context = {}, message = "Calendario Calendarium") {
-        const preferred = getPreferredCalendar(context);
-        return await promptOptional(tp, message, preferred);
-    }
-
     function fileLink(file) {
         return file ? `[[${file.basename}]]` : "";
     }
@@ -128,16 +109,13 @@ function createNoteCore({
         appendUniqueLink,
         fileLink,
         frontmatterHasLink,
-        getCalendarFromLink,
         getFileByPathOrBasename,
         getFileFromLink,
         getFrontmatter,
         getLinkTargetName,
-        getPreferredCalendar,
         getWorldFromLink,
         normalizeFieldArray,
-        processFrontmatter,
-        promptCalendar
+        processFrontmatter
     };
 }
 

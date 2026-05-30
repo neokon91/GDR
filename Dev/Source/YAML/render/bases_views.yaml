@@ -5,6 +5,7 @@ views:
   worldbuilding_codex:
     file: z.bases/Worldbuilding.base
     source_folders:
+      - Mondi
       - Mondi/Culture
       - Mondi/Religioni
       - Mondi/Societa
@@ -23,27 +24,15 @@ views:
       - tipo
       - stato
       - mondo
+      - stato_canonico
+      - grado_certezza
+      - fonti
+      - versioni_contrapposte
       - uso_al_tavolo
       - player_safe
       - connessioni
     formulas:
       - prontezza
-    fallback_dataview_block: linked_connections_table
-  atlas_maps:
-    file: z.bases/Atlante Mappe.base
-    source_folders:
-      - Risorse/Mappe
-      - Mondi/Luoghi
-    required_fields:
-      - nome
-      - tipo
-      - stato
-      - coordinates
-      - layer_mappa
-      - icon
-      - color
-    map_view: true
-    fallback_dataview_block: map_assets
   luoghi:
     file: z.bases/Luoghi.base
     source_folders:
@@ -53,48 +42,17 @@ views:
       - stato
       - tipo
       - mondo
+      - scala_geografica
       - luogo_padre
+      - memoria_del_territorio
+      - tracce_passato
+      - cultura_dominante
+      - autorita
       - pericolo
       - pressione
       - fazioni
       - missioni
       - connessioni
-    fallback_dataview_block: linked_connections_table
-  fazioni:
-    file: z.bases/Fazioni.base
-    source_folders:
-      - Mondi/Fazioni
-    required_fields:
-      - nome
-      - stato
-      - tipo
-      - mondo
-      - pressione
-      - prossima_mossa
-      - luoghi
-      - missioni
-      - connessioni
-      - propaga_a
-    fallback_dataview_block: linked_connections_table
-  economia:
-    file: z.bases/Economia.base
-    source_folders:
-      - Mondi/Risorse
-      - Mondi/Rotte
-      - Mondi/Mercati
-    required_fields:
-      - nome
-      - stato
-      - tipo
-      - mondo
-      - pressione
-      - prossima_mossa
-      - luoghi
-      - fazioni_controllanti
-      - risorse
-      - rotte
-      - mercati
-    fallback_dataview_block: linked_connections_table
   missioni:
     file: z.bases/Missioni.base
     source_folders:
@@ -110,7 +68,6 @@ views:
       - luoghi
       - fazioni
       - ricompense
-    fallback_dataview_block: linked_connections_table
   png:
     file: z.bases/PNG.base
     source_folders:
@@ -123,7 +80,6 @@ views:
       - pressione
       - prossima_mossa
       - missioni
-    fallback_dataview_block: linked_connections_table
   sessions:
     file: z.bases/Incontri.base
     source_folders:
@@ -137,457 +93,43 @@ views:
       - creature
       - personaggi
       - sessioni
-      - mappe
       - ricompense
-    fallback_markdown: encounter
 contracts:
   base_fields_must_exist_in_fields_core_or_domain_module: true
-  every_map_view_needs_markdown_table_fallback: true
   formulas_should_remain_lightweight: true
-
 generated_bases:
-  readme: |-
-    # z.bases
+  readme: '# z.bases
 
-    Viste Bases pilota per il vault.
 
-    Queste viste non sostituiscono Dataview: servono come layer modificabile sopra i metadati principali, utile a chi vuole correggere stato, pressione, collegamenti e prossime mosse senza toccare query.
+    Viste Bases leggere per correggere frontmatter e relazioni senza duplicare vista.
+
 
     | Base | Uso |
-    | --- | --- |
-    | `Missioni.base` | Missioni aperte, sotto pressione, per campagna, chiusura e vista completa. |
-    | `Worldbuilding.base` | Culture, religioni, societa e cosmologia: Codex vivo, collegamenti, pubblicazione e propagazione. |
-    | `Fazioni.base` | Fazioni in movimento, pressione, relazioni, mondo e archivio. |
-    | `Economia.base` | Risorse, rotte, mercati, pressioni economiche e archivio. |
-    | `PNG.base` | PNG in gioco, pressione, segreti/leve, archivio e schede rapide. |
-    | `Luoghi.base` | Luoghi attivi, pericolosi, per mondo e gerarchia. |
-    | `Incontri.base` | Incontri pronti, pericolo alto, per sessione e da completare. |
-    | `Atlante Mappe.base` | Mappa, tabella, layer e dati marker. |
 
-    Regola: aggiungere qui solo viste su frontmatter gia stabile. Le viste aggregate, i controlli complessi e le card operative restano in Dataview/DataviewJS.
+    | --- | --- |
+
+    | `Worldbuilding.base` | Mondo, cultura, cosmologia e note lore fondamentali. |
+
+    | `Luoghi.base` | Regioni, insediamenti e siti di interesse. |
+
+    | `Fazioni.base` | Poteri, culti e organizzazioni. |
+
+    | `Missioni.base` | Obiettivi e pressioni giocabili. |
+
+    | `PNG.base` | Personaggi non giocanti in uso. |
+
+    | `Incontri.base` | Incontri e pericoli 5.5e. |
+
+
+    Regola: Bases corregge dati; Dataview/JS mostra feedback; Jinja/Templater crea note.'
   files:
-    atlas_maps:
-      file: z.bases/Atlante Mappe.base
-      content:
-        filters:
-          and:
-          - file.folder == "Mondi/Luoghi"
-          - note.coordinates
-        properties:
-          file.name:
-            displayName: Luogo
-          note.stato:
-            displayName: Stato
-          note.tipo:
-            displayName: Tipo
-          note.mondo:
-            displayName: Mondo
-          note.coordinates:
-            displayName: Coordinate
-          note.layer_mappa:
-            displayName: Layer
-          note.icon:
-            displayName: Icona
-          note.color:
-            displayName: Colore
-        views:
-        - type: map
-          name: Mappa
-          order:
-          - file.name
-          - note.tipo
-          - note.stato
-          - note.mondo
-          - note.layer_mappa
-          coordinates: note.coordinates
-          markerIcon: note.icon
-          markerColor: note.color
-          defaultZoom: 13
-        - type: table
-          name: Tabella
-          order:
-          - file.name
-          - note.tipo
-          - note.stato
-          - note.mondo
-          - note.coordinates
-          - note.layer_mappa
-          - note.icon
-          - note.color
-          sort:
-          - property: note.layer_mappa
-            direction: ASC
-          - property: file.name
-            direction: ASC
-        - type: table
-          name: Per layer
-          order:
-          - note.layer_mappa
-          - file.name
-          - note.tipo
-          - note.stato
-          - note.mondo
-          - note.coordinates
-          sort:
-          - property: note.layer_mappa
-            direction: ASC
-          - property: note.tipo
-            direction: ASC
-          - property: file.name
-            direction: ASC
-        - type: table
-          name: Dati marker
-          order:
-          - file.name
-          - note.coordinates
-          - note.icon
-          - note.color
-          - note.layer_mappa
-          sort:
-          - property: note.icon
-            direction: ASC
-          - property: file.name
-            direction: ASC
-    economia:
-      file: z.bases/Economia.base
-      content:
-        filters:
-          or:
-          - file.folder == "Mondi/Risorse"
-          - file.folder == "Mondi/Rotte"
-          - file.folder == "Mondi/Mercati"
-        formulas:
-          stato_operativo: if(stato == "archiviata" || stato == "ignorata" || stato == "conclusa", "chiusa", if(pressione, if(prossima_mossa, "pressione", "manca mossa"), "stabile"))
-        properties:
-          formula.stato_operativo:
-            displayName: Stato operativo
-          nome:
-            displayName: Nome
-          stato:
-            displayName: Stato
-          tipo:
-            displayName: Tipo
-          mondo:
-            displayName: Mondo
-          pressione:
-            displayName: Pressione
-          prossima_mossa:
-            displayName: Prossima mossa
-          luoghi:
-            displayName: Luoghi
-          luogo:
-            displayName: Luogo
-          regioni:
-            displayName: Regioni
-          fazioni_controllanti:
-            displayName: Fazioni controllanti
-          risorse:
-            displayName: Risorse
-          rotte:
-            displayName: Rotte
-          mercati:
-            displayName: Mercati
-          scarsita:
-            displayName: Scarsita
-          uso_narrativo:
-            displayName: Uso narrativo
-          stato_rotta:
-            displayName: Stato rotta
-          partenza:
-            displayName: Partenza
-          arrivo:
-            displayName: Arrivo
-          risorse_trasportate:
-            displayName: Risorse trasportate
-          pedaggi:
-            displayName: Pedaggi
-          rischi:
-            displayName: Rischi
-          connessioni:
-            displayName: Connessioni
-        views:
-        - type: table
-          name: Pressioni economiche
-          limit: 30
-          groupBy:
-            property: formula.stato_operativo
-            direction: ASC
-          filters:
-            and:
-            - file.name != "Risorse"
-            - file.name != "Rotte"
-            - file.name != "Mercati"
-            - stato != "archiviata"
-          order:
-          - nome
-          - tipo
-          - stato
-          - formula.stato_operativo
-          - pressione
-          - prossima_mossa
-          - luoghi
-          - fazioni_controllanti
-          sort:
-          - property: pressione
-            direction: DESC
-          - property: nome
-            direction: ASC
-        - type: table
-          name: Risorse
-          filters:
-            and:
-            - file.folder == "Mondi/Risorse"
-            - file.name != "Risorse"
-            - stato != "archiviata"
-          order:
-          - nome
-          - stato
-          - formula.stato_operativo
-          - luoghi
-          - fazioni_controllanti
-          - scarsita
-          - uso_narrativo
-          - rotte
-          - mercati
-          - pressione
-          - prossima_mossa
-          sort:
-          - property: pressione
-            direction: DESC
-          - property: nome
-            direction: ASC
-        - type: table
-          name: Rotte
-          filters:
-            and:
-            - file.folder == "Mondi/Rotte"
-            - file.name != "Rotte"
-            - stato != "archiviata"
-          order:
-          - nome
-          - stato_rotta
-          - formula.stato_operativo
-          - partenza
-          - arrivo
-          - risorse_trasportate
-          - fazioni_controllanti
-          - pressione
-          - prossima_mossa
-          sort:
-          - property: stato_rotta
-            direction: ASC
-          - property: pressione
-            direction: DESC
-        - type: table
-          name: Mercati
-          filters:
-            and:
-            - file.folder == "Mondi/Mercati"
-            - file.name != "Mercati"
-            - stato != "archiviata"
-          order:
-          - nome
-          - luogo
-          - formula.stato_operativo
-          - fazioni_controllanti
-          - risorse
-          - rotte
-          - pedaggi
-          - rischi
-          - pressione
-          - prossima_mossa
-          sort:
-          - property: pressione
-            direction: DESC
-          - property: nome
-            direction: ASC
-        - type: table
-          name: Archivio
-          filters:
-            or:
-            - stato == "archiviata"
-            - stato == "ignorata"
-            - stato == "conclusa"
-          order:
-          - nome
-          - tipo
-          - stato
-          - formula.stato_operativo
-          - mondo
-          - prossima_mossa
-          sort:
-          - property: stato
-            direction: ASC
-          - property: nome
-            direction: ASC
-    fazioni:
-      file: z.bases/Fazioni.base
-      content:
-        filters:
-          and:
-          - file.folder == "Mondi/Fazioni"
-          - file.name != "Fazioni"
-        formulas:
-          stato_operativo: if(stato == "archiviata" || stato == "ignorata" || stato == "conclusa", "chiusa", if(mondo, if(pressione, if(prossima_mossa, "pressione", "manca mossa"), "stabile"), "manca mondo"))
-        properties:
-          formula.stato_operativo:
-            displayName: Stato operativo
-          nome:
-            displayName: Nome
-          stato:
-            displayName: Stato
-          tipo:
-            displayName: Tipo
-          mondo:
-            displayName: Mondo
-          leader:
-            displayName: Leader
-          pressione:
-            displayName: Pressione
-          prossima_mossa:
-            displayName: Prossima mossa
-          agenda:
-            displayName: Agenda
-          obiettivo:
-            displayName: Obiettivo
-          origine:
-            displayName: Origine
-          tensione:
-            displayName: Tensione
-          costo_sociale:
-            displayName: Costo sociale
-          evoluzione_se_ignorata:
-            displayName: Evoluzione se ignorata
-          alleati:
-            displayName: Alleati
-          rivali:
-            displayName: Rivali
-          luoghi:
-            displayName: Luoghi
-          personaggi:
-            displayName: Personaggi
-          missioni:
-            displayName: Missioni
-          relazioni:
-            displayName: Relazioni
-          connessioni:
-            displayName: Connessioni
-          propaga_a:
-            displayName: Propaga a
-        views:
-        - type: table
-          name: In movimento
-          limit: 30
-          groupBy:
-            property: formula.stato_operativo
-            direction: ASC
-          filters:
-            and:
-            - stato != "archiviata"
-          order:
-          - nome
-          - stato
-          - formula.stato_operativo
-          - tipo
-          - pressione
-          - prossima_mossa
-          - leader
-          - luoghi
-          sort:
-          - property: pressione
-            direction: DESC
-          - property: nome
-            direction: ASC
-        - type: table
-          name: Pressione
-          limit: 20
-          groupBy:
-            property: formula.stato_operativo
-            direction: ASC
-          filters:
-            and:
-            - stato != "archiviata"
-            - pressione
-          order:
-          - nome
-          - pressione
-          - formula.stato_operativo
-          - agenda
-          - obiettivo
-          - origine
-          - tensione
-          - costo_sociale
-          - evoluzione_se_ignorata
-          - prossima_mossa
-          - alleati
-          - rivali
-          - propaga_a
-          sort:
-          - property: pressione
-            direction: DESC
-          - property: prossima_mossa
-            direction: ASC
-        - type: table
-          name: Relazioni
-          filters:
-            and:
-            - stato != "archiviata"
-          order:
-          - nome
-          - leader
-          - formula.stato_operativo
-          - alleati
-          - rivali
-          - relazioni
-          - personaggi
-          - missioni
-          sort:
-          - property: nome
-            direction: ASC
-        - type: table
-          name: Per mondo
-          filters:
-            and:
-            - stato != "archiviata"
-          order:
-          - nome
-          - mondo
-          - formula.stato_operativo
-          - tipo
-          - luoghi
-          - missioni
-          - prossima_mossa
-          sort:
-          - property: mondo
-            direction: ASC
-          - property: nome
-            direction: ASC
-        - type: table
-          name: Archivio
-          filters:
-            or:
-            - stato == "archiviata"
-            - stato == "ignorata"
-            - stato == "conclusa"
-          order:
-          - nome
-          - stato
-          - formula.stato_operativo
-          - tipo
-          - mondo
-          - prossima_mossa
-          sort:
-          - property: stato
-            direction: ASC
-          - property: nome
-            direction: ASC
     sessions:
       file: z.bases/Incontri.base
       content:
         filters:
           and:
-          - file.folder == "Mondi/Incontri"
-          - file.name != "Incontri"
+            - file.folder == "Mondi/Incontri"
+            - file.name != "Incontri"
         properties:
           nome:
             displayName: Nome
@@ -607,8 +149,6 @@ generated_bases:
             displayName: Personaggi
           sessioni:
             displayName: Sessioni
-          mappe:
-            displayName: Mappe
           ricompense:
             displayName: Ricompense
           gancio:
@@ -624,98 +164,96 @@ generated_bases:
           conseguenze:
             displayName: Conseguenze
         views:
-        - type: table
-          name: Pronti
-          filters:
-            and:
-            - stato != "archiviata"
-          order:
-          - nome
-          - stato
-          - tipo
-          - luogo
-          - pericolo
-          - pressione
-          - creature
-          - personaggi
-          - gancio
-          - uso_al_tavolo
-          sort:
-          - property: stato
-            direction: ASC
-          - property: pericolo
-            direction: DESC
-        - type: table
-          name: Pericolo alto
-          filters:
-            and:
-            - stato != "archiviata"
-            - pericolo
-          order:
-          - nome
-          - stato
-          - pericolo
-          - pressione
-          - luogo
-          - creature
-          - prossima_mossa
-          - entita_impattate
-          - propaga_a
-          - conseguenze
-          sort:
-          - property: pericolo
-            direction: DESC
-          - property: pressione
-            direction: DESC
-        - type: table
-          name: Per sessione
-          filters:
-            and:
-            - stato != "archiviata"
-          order:
-          - nome
-          - stato
-          - sessioni
-          - luogo
-          - mappe
-          - personaggi
-          - ricompense
-          - uso_al_tavolo
-          sort:
-          - property: sessioni
-            direction: ASC
-          - property: stato
-            direction: ASC
-        - type: table
-          name: Da completare
-          filters:
-            or:
-            - '!creature'
-            - '!luogo'
-            - stato == "bozza"
-          order:
-          - nome
-          - stato
-          - tipo
-          - luogo
-          - creature
-          - mappe
-          - prossima_mossa
-          - entita_impattate
-          - propaga_a
-          - conseguenze
-          sort:
-          - property: stato
-            direction: ASC
-          - property: nome
-            direction: ASC
+          - type: table
+            name: Pronti
+            filters:
+              and:
+                - stato != "archiviata"
+            order:
+              - nome
+              - stato
+              - tipo
+              - luogo
+              - pericolo
+              - pressione
+              - creature
+              - personaggi
+              - gancio
+              - uso_al_tavolo
+            sort:
+              - property: stato
+                direction: ASC
+              - property: pericolo
+                direction: DESC
+          - type: table
+            name: Pericolo alto
+            filters:
+              and:
+                - stato != "archiviata"
+                - pericolo
+            order:
+              - nome
+              - stato
+              - pericolo
+              - pressione
+              - luogo
+              - creature
+              - prossima_mossa
+              - entita_impattate
+              - propaga_a
+              - conseguenze
+            sort:
+              - property: pericolo
+                direction: DESC
+              - property: pressione
+                direction: DESC
+          - type: table
+            name: Per sessione
+            filters:
+              and:
+                - stato != "archiviata"
+            order:
+              - nome
+              - stato
+              - sessioni
+              - luogo
+              - personaggi
+              - ricompense
+              - uso_al_tavolo
+            sort:
+              - property: sessioni
+                direction: ASC
+              - property: stato
+                direction: ASC
+          - type: table
+            name: Da completare
+            filters:
+              or:
+                - '!creature'
+                - '!luogo'
+                - stato == "bozza"
+            order:
+              - nome
+              - stato
+              - tipo
+              - luogo
+              - creature
+              - prossima_mossa
+              - entita_impattate
+              - propaga_a
+              - conseguenze
+            sort:
+              - property: stato
+                direction: ASC
+              - property: nome
+                direction: ASC
     luoghi:
       file: z.bases/Luoghi.base
       content:
         filters:
           and:
-          - file.folder == "Mondi/Luoghi"
-          - file.name != "Luoghi"
+            - file.folder == "Mondi/Luoghi"
+            - file.name != "Luoghi"
         properties:
           nome:
             displayName: Nome
@@ -727,8 +265,24 @@ generated_bases:
             displayName: Tipologia
           mondo:
             displayName: Mondo
+          scala_geografica:
+            displayName: Scala geografica
           luogo_padre:
             displayName: Luogo padre
+          memoria_del_territorio:
+            displayName: Memoria territorio
+          tracce_passato:
+            displayName: Tracce passato
+          funzione_storica:
+            displayName: Funzione storica
+          funzione_attuale:
+            displayName: Funzione attuale
+          abitanti:
+            displayName: Abitanti
+          cultura_dominante:
+            displayName: Cultura dominante
+          autorita:
+            displayName: Autorita
           pericolo:
             displayName: Pericolo
           pressione:
@@ -758,88 +312,94 @@ generated_bases:
           connessioni:
             displayName: Connessioni
         views:
-        - type: table
-          name: Attivi
-          filters:
-            and:
-            - stato != "archiviata"
-          order:
-          - nome
-          - stato
-          - tipo
-          - tipologia
-          - pericolo
-          - pressione
-          - luogo_padre
-          - governante
-          sort:
-          - property: pericolo
-            direction: DESC
-          - property: nome
-            direction: ASC
-        - type: table
-          name: Pericolosi
-          filters:
-            and:
-            - stato != "archiviata"
-            - pericolo
-          order:
-          - nome
-          - stato
-          - tipo
-          - pericolo
-          - pressione
-          - origine
-          - tensione
-          - bisogno_quotidiano
-          - prossima_mossa
-          - missioni
-          - personaggi
-          sort:
-          - property: pericolo
-            direction: DESC
-          - property: pressione
-            direction: DESC
-        - type: table
-          name: Per mondo
-          filters:
-            and:
-            - stato != "archiviata"
-          order:
-          - nome
-          - mondo
-          - tipo
-          - luogo_padre
-          - fazioni
-          - governante
-          - promessa_al_tavolo
-          sort:
-          - property: mondo
-            direction: ASC
-          - property: luogo_padre
-            direction: ASC
-          - property: nome
-            direction: ASC
-        - type: table
-          name: Gerarchia
-          order:
-          - nome
-          - tipo
-          - stato
-          - luogo_padre
-          - mondo
-          sort:
-          - property: luogo_padre
-            direction: ASC
-          - property: nome
-            direction: ASC
+          - type: table
+            name: Attivi
+            filters:
+              and:
+                - stato != "archiviata"
+            order:
+              - nome
+              - stato
+              - tipo
+              - tipologia
+              - scala_geografica
+              - pericolo
+              - pressione
+              - luogo_padre
+              - cultura_dominante
+              - governante
+            sort:
+              - property: pericolo
+                direction: DESC
+              - property: nome
+                direction: ASC
+          - type: table
+            name: Pericolosi
+            filters:
+              and:
+                - stato != "archiviata"
+                - pericolo
+            order:
+              - nome
+              - stato
+              - tipo
+              - pericolo
+              - pressione
+              - origine
+              - tensione
+              - bisogno_quotidiano
+              - prossima_mossa
+              - missioni
+              - personaggi
+            sort:
+              - property: pericolo
+                direction: DESC
+              - property: pressione
+                direction: DESC
+          - type: table
+            name: Per mondo
+            filters:
+              and:
+                - stato != "archiviata"
+            order:
+              - nome
+              - mondo
+              - tipo
+              - scala_geografica
+              - luogo_padre
+              - memoria_del_territorio
+              - tracce_passato
+              - fazioni
+              - governante
+              - promessa_al_tavolo
+            sort:
+              - property: mondo
+                direction: ASC
+              - property: luogo_padre
+                direction: ASC
+              - property: nome
+                direction: ASC
+          - type: table
+            name: Gerarchia
+            order:
+              - nome
+              - tipo
+              - stato
+              - scala_geografica
+              - luogo_padre
+              - mondo
+            sort:
+              - property: luogo_padre
+                direction: ASC
+              - property: nome
+                direction: ASC
     missioni:
       file: z.bases/Missioni.base
       content:
         filters:
           and:
-          - file.folder == "Mondi/Missioni"
-          - file.name != "Missioni"
+            - file.folder == "Mondi/Missioni"
+            - file.name != "Missioni"
         formulas:
           stato_operativo: if(stato == "archiviata" || stato == "completata" || stato == "fallita", "chiusa", if(mondo, if(prossima_mossa, if(pressione, "pressione", "ok"), "manca mossa"), "manca mondo"))
         properties:
@@ -871,8 +431,6 @@ generated_bases:
             displayName: Scadenza
           prossima_mossa:
             displayName: Prossima mossa
-          fc-calendar:
-            displayName: Calendario
           connessioni:
             displayName: Connessioni
           campagna:
@@ -890,128 +448,128 @@ generated_bases:
           propaga_a:
             displayName: Propaga a
         views:
-        - type: table
-          name: Aperte
-          limit: 30
-          groupBy:
-            property: formula.stato_operativo
-            direction: ASC
-          filters:
-            and:
-            - stato != "archiviata"
-            - stato != "completata"
-            - stato != "fallita"
-          order:
-          - nome
-          - stato
-          - formula.stato_operativo
-          - tipo
-          - pressione
-          - origine
-          - causa
-          - tensione
-          - scadenza_mondo
-          - prossima_mossa
-          - mondo
-          - committente
-          sort:
-          - property: pressione
-            direction: DESC
-          - property: scadenza_mondo
-            direction: ASC
-        - type: table
-          name: Sotto pressione
-          limit: 20
-          groupBy:
-            property: formula.stato_operativo
-            direction: ASC
-          filters:
-            and:
-            - stato != "archiviata"
-            - stato != "completata"
-            - stato != "fallita"
-            - pressione
-          order:
-          - nome
-          - stato
-          - formula.stato_operativo
-          - pressione
-          - scadenza_mondo
-          - prossima_mossa
-          - entita_impattate
-          - propaga_a
-          - fazioni
-          - luoghi
-          sort:
-          - property: pressione
-            direction: DESC
-          - property: prossima_mossa
-            direction: ASC
-        - type: table
-          name: Per campagna
-          filters:
-            and:
-            - stato != "archiviata"
-          order:
-          - nome
-          - stato
-          - formula.stato_operativo
-          - campagna
-          - campagne
-          - mondo
-          - committente
-          - luoghi
-          - fazioni
-          sort:
-          - property: campagna
-            direction: ASC
-          - property: stato
-            direction: ASC
-          - property: nome
-            direction: ASC
-        - type: table
-          name: Chiusura
-          filters:
-            or:
-            - stato == "completata"
-            - stato == "fallita"
-            - stato == "archiviata"
-          order:
-          - nome
-          - stato
-          - formula.stato_operativo
-          - tipo
-          - mondo
-          - ricompense
-          - prossima_mossa
-          sort:
-          - property: stato
-            direction: ASC
-          - property: nome
-            direction: ASC
-        - type: table
-          name: Tutte
-          order:
-          - nome
-          - stato
-          - formula.stato_operativo
-          - tipo
-          - mondo
-          - pressione
-          - scadenza_mondo
-          - prossima_mossa
-          sort:
-          - property: stato
-            direction: ASC
-          - property: nome
-            direction: ASC
+          - type: table
+            name: Aperte
+            limit: 30
+            groupBy:
+              property: formula.stato_operativo
+              direction: ASC
+            filters:
+              and:
+                - stato != "archiviata"
+                - stato != "completata"
+                - stato != "fallita"
+            order:
+              - nome
+              - stato
+              - formula.stato_operativo
+              - tipo
+              - pressione
+              - origine
+              - causa
+              - tensione
+              - scadenza_mondo
+              - prossima_mossa
+              - mondo
+              - committente
+            sort:
+              - property: pressione
+                direction: DESC
+              - property: scadenza_mondo
+                direction: ASC
+          - type: table
+            name: Sotto pressione
+            limit: 20
+            groupBy:
+              property: formula.stato_operativo
+              direction: ASC
+            filters:
+              and:
+                - stato != "archiviata"
+                - stato != "completata"
+                - stato != "fallita"
+                - pressione
+            order:
+              - nome
+              - stato
+              - formula.stato_operativo
+              - pressione
+              - scadenza_mondo
+              - prossima_mossa
+              - entita_impattate
+              - propaga_a
+              - fazioni
+              - luoghi
+            sort:
+              - property: pressione
+                direction: DESC
+              - property: prossima_mossa
+                direction: ASC
+          - type: table
+            name: Per campagna
+            filters:
+              and:
+                - stato != "archiviata"
+            order:
+              - nome
+              - stato
+              - formula.stato_operativo
+              - campagna
+              - campagne
+              - mondo
+              - committente
+              - luoghi
+              - fazioni
+            sort:
+              - property: campagna
+                direction: ASC
+              - property: stato
+                direction: ASC
+              - property: nome
+                direction: ASC
+          - type: table
+            name: Chiusura
+            filters:
+              or:
+                - stato == "completata"
+                - stato == "fallita"
+                - stato == "archiviata"
+            order:
+              - nome
+              - stato
+              - formula.stato_operativo
+              - tipo
+              - mondo
+              - ricompense
+              - prossima_mossa
+            sort:
+              - property: stato
+                direction: ASC
+              - property: nome
+                direction: ASC
+          - type: table
+            name: Tutte
+            order:
+              - nome
+              - stato
+              - formula.stato_operativo
+              - tipo
+              - mondo
+              - pressione
+              - scadenza_mondo
+              - prossima_mossa
+            sort:
+              - property: stato
+                direction: ASC
+              - property: nome
+                direction: ASC
     png:
       file: z.bases/PNG.base
       content:
         filters:
           and:
-          - file.folder == "Mondi/Personaggi"
-          - tipo == "png"
+            - file.folder == "Mondi/Personaggi"
+            - tipo == "png"
         properties:
           nome:
             displayName: Nome
@@ -1040,110 +598,111 @@ generated_bases:
           missioni:
             displayName: Missioni
         views:
-        - type: table
-          name: In gioco
-          filters:
-            and:
-            - stato != "archiviata"
-          order:
-          - nome
-          - stato
-          - ruolo
-          - luogo
-          - fazioni
-          - pressione
-          - prossima_mossa
-          sort:
-          - property: stato
-            direction: ASC
-          - property: nome
-            direction: ASC
-        - type: table
-          name: Pressione
-          filters:
-            and:
-            - stato != "archiviata"
-            - pressione
-          order:
-          - nome
-          - stato
-          - pressione
-          - vuole
-          - leva
-          - prossima_mossa
-          - missioni
-          sort:
-          - property: pressione
-            direction: DESC
-          - property: stato
-            direction: ASC
-        - type: table
-          name: Segreti e leve
-          filters:
-            and:
-            - stato != "archiviata"
-          order:
-          - nome
-          - ruolo
-          - sa
-          - segreto
-          - leva
-          - relazioni
-          sort:
-          - property: ruolo
-            direction: ASC
-          - property: nome
-            direction: ASC
-        - type: table
-          name: Archivio
-          filters:
-            or:
-            - stato == "archiviata"
-            - stato == "morto"
-            - stato == "scomparso"
-          order:
-          - nome
-          - stato
-          - ruolo
-          - luogo
-          - fazioni
-          - relazioni
-          sort:
-          - property: stato
-            direction: ASC
-          - property: nome
-            direction: ASC
-        - type: cards
-          name: Schede rapide
-          filters:
-            and:
-            - stato != "archiviata"
-          order:
-          - nome
-          - ruolo
-          - luogo
-          - fazioni
-          - prossima_mossa
-          cardSize: 240
+          - type: table
+            name: In gioco
+            filters:
+              and:
+                - stato != "archiviata"
+            order:
+              - nome
+              - stato
+              - ruolo
+              - luogo
+              - fazioni
+              - pressione
+              - prossima_mossa
+            sort:
+              - property: stato
+                direction: ASC
+              - property: nome
+                direction: ASC
+          - type: table
+            name: Pressione
+            filters:
+              and:
+                - stato != "archiviata"
+                - pressione
+            order:
+              - nome
+              - stato
+              - pressione
+              - vuole
+              - leva
+              - prossima_mossa
+              - missioni
+            sort:
+              - property: pressione
+                direction: DESC
+              - property: stato
+                direction: ASC
+          - type: table
+            name: Segreti e leve
+            filters:
+              and:
+                - stato != "archiviata"
+            order:
+              - nome
+              - ruolo
+              - sa
+              - segreto
+              - leva
+              - relazioni
+            sort:
+              - property: ruolo
+                direction: ASC
+              - property: nome
+                direction: ASC
+          - type: table
+            name: Archivio
+            filters:
+              or:
+                - stato == "archiviata"
+                - stato == "morto"
+                - stato == "scomparso"
+            order:
+              - nome
+              - stato
+              - ruolo
+              - luogo
+              - fazioni
+              - relazioni
+            sort:
+              - property: stato
+                direction: ASC
+              - property: nome
+                direction: ASC
+          - type: cards
+            name: Schede rapide
+            filters:
+              and:
+                - stato != "archiviata"
+            order:
+              - nome
+              - ruolo
+              - luogo
+              - fazioni
+              - prossima_mossa
+            cardSize: 240
     worldbuilding_codex:
       file: z.bases/Worldbuilding.base
       content:
         filters:
           or:
-          - file.folder == "Mondi/Culture"
-          - file.folder == "Mondi/Religioni"
-          - file.folder == "Mondi/Societa"
-          - file.folder == "Mondi/Cosmologia"
-          - file.folder == "Mondi/Conflitti"
-          - file.folder == "Mondi/Creature"
-          - file.folder == "Mondi/Lingue"
-          - file.folder == "Mondi/Mercati"
-          - file.folder == "Mondi/Relazioni"
-          - file.folder == "Mondi/Risorse"
-          - file.folder == "Mondi/Rotte"
-          - file.folder == "Mondi/Timeline"
+            - file.folder == "Mondi"
+            - file.folder == "Mondi/Culture"
+            - file.folder == "Mondi/Religioni"
+            - file.folder == "Mondi/Societa"
+            - file.folder == "Mondi/Cosmologia"
+            - file.folder == "Mondi/Conflitti"
+            - file.folder == "Mondi/Creature"
+            - file.folder == "Mondi/Lingue"
+            - file.folder == "Mondi/Mercati"
+            - file.folder == "Mondi/Relazioni"
+            - file.folder == "Mondi/Risorse"
+            - file.folder == "Mondi/Rotte"
+            - file.folder == "Mondi/Timeline"
         formulas:
-          prontezza: if(stato == "archiviata", "archivio", if(mondo, if(uso_al_tavolo, if(player_safe, if(connessioni, "pronta", "manca connessioni"), "manca player-safe"), "manca uso"), "manca mondo"))
+          prontezza: if(stato == "archiviata", "archivio", if(mondo, if(stato_canonico, if(connessioni, "codex collegato", "manca connessioni"), "manca canone"), "manca mondo"))
         properties:
           formula.prontezza:
             displayName: Prontezza
@@ -1157,8 +716,20 @@ generated_bases:
             displayName: Famiglia creativa
           stato:
             displayName: Stato
+          stato_canonico:
+            displayName: Stato canonico
+          grado_certezza:
+            displayName: Grado certezza
           mondo:
             displayName: Mondo
+          principi_realta:
+            displayName: Principi realta
+          leggi_del_mondo:
+            displayName: Leggi del mondo
+          leggi_metafisiche:
+            displayName: Leggi metafisiche
+          cosmologie:
+            displayName: Cosmologie
           gancio:
             displayName: Gancio
           identita:
@@ -1171,6 +742,12 @@ generated_bases:
             displayName: Pubblico
           canonico:
             displayName: Canonico
+          fonti:
+            displayName: Fonti
+          versioni_contrapposte:
+            displayName: Versioni contrapposte
+          memoria_pubblica:
+            displayName: Memoria pubblica
           pressione:
             displayName: Pressione
           prossima_mossa:
@@ -1201,164 +778,180 @@ generated_bases:
             displayName: Luoghi sacri
           divinita:
             displayName: Divinita
+          religioni_collegate:
+            displayName: Religioni collegate
+          culture_collegate:
+            displayName: Culture collegate
         views:
-        - type: table
-          name: Codex vivo
-          limit: 40
-          groupBy:
-            property: formula.prontezza
-            direction: ASC
-          filters:
-            and:
-            - file.name != "Culture"
-            - file.name != "Religioni"
-            - file.name != "Societa"
-            - file.name != "Cosmologia"
-            - file.name != "Conflitti"
-            - file.name != "Creature"
-            - file.name != "Lingue"
-            - file.name != "Mercati"
-            - file.name != "Relazioni"
-            - file.name != "Risorse"
-            - file.name != "Rotte"
-            - file.name != "Timeline"
-            - stato != "archiviata"
-          order:
-          - nome
-          - categoria
-          - tipo
-          - stato
-          - formula.prontezza
-          - mondo
-          - gancio
-          - uso_al_tavolo
-          - player_safe
-          sort:
-          - property: mondo
-            direction: ASC
-          - property: categoria
-            direction: ASC
-          - property: nome
-            direction: ASC
-        - type: table
-          name: Da collegare
-          limit: 30
-          groupBy:
-            property: formula.prontezza
-            direction: ASC
-          filters:
-            and:
-            - file.name != "Culture"
-            - file.name != "Religioni"
-            - file.name != "Societa"
-            - file.name != "Cosmologia"
-            - file.name != "Conflitti"
-            - file.name != "Creature"
-            - file.name != "Lingue"
-            - file.name != "Mercati"
-            - file.name != "Relazioni"
-            - file.name != "Risorse"
-            - file.name != "Rotte"
-            - file.name != "Timeline"
-            - stato != "archiviata"
-          order:
-          - nome
-          - categoria
-          - tipo
-          - mondo
-          - formula.prontezza
-          - connessioni
-          - luoghi
-          - fazioni
-          - relazioni
-          sort:
-          - property: mondo
-            direction: ASC
-          - property: categoria
-            direction: ASC
-        - type: table
-          name: Pubblicabili
-          filters:
-            and:
-            - file.name != "Culture"
-            - file.name != "Religioni"
-            - file.name != "Societa"
-            - file.name != "Cosmologia"
-            - file.name != "Conflitti"
-            - file.name != "Creature"
-            - file.name != "Lingue"
-            - file.name != "Mercati"
-            - file.name != "Relazioni"
-            - file.name != "Risorse"
-            - file.name != "Rotte"
-            - file.name != "Timeline"
-            - stato != "archiviata"
-          order:
-          - nome
-          - categoria
-          - pubblico
-          - formula.prontezza
-          - player_safe
-          - canonico
-          - uso_al_tavolo
-          sort:
-          - property: pubblico
-            direction: DESC
-          - property: nome
-            direction: ASC
-        - type: table
-          name: Pressione e propagazione
-          limit: 30
-          groupBy:
-            property: formula.prontezza
-            direction: ASC
-          filters:
-            and:
-            - file.name != "Culture"
-            - file.name != "Religioni"
-            - file.name != "Societa"
-            - file.name != "Cosmologia"
-            - file.name != "Conflitti"
-            - file.name != "Creature"
-            - file.name != "Lingue"
-            - file.name != "Mercati"
-            - file.name != "Relazioni"
-            - file.name != "Risorse"
-            - file.name != "Rotte"
-            - file.name != "Timeline"
-            - stato != "archiviata"
-          order:
-          - nome
-          - categoria
-          - pressione
-          - formula.prontezza
-          - prossima_mossa
-          - entita_impattate
-          - propaga_a
-          - connessioni
-          sort:
-          - property: pressione
-            direction: DESC
-          - property: prossima_mossa
-            direction: ASC
-        - type: table
-          name: Sacro e arcano
-          filters:
-            and:
-            - stato != "archiviata"
-          order:
-          - nome
-          - categoria
-          - tipo
-          - mondo
-          - formula.prontezza
-          - divinita
-          - templi
-          - luoghi_sacri
-          - luoghi
-          - prossima_mossa
-          sort:
-          - property: categoria
-            direction: ASC
-          - property: nome
-            direction: ASC
+          - type: table
+            name: Codex vivo
+            limit: 40
+            groupBy:
+              property: formula.prontezza
+              direction: ASC
+            filters:
+              and:
+                - file.name != "Culture"
+                - file.name != "Religioni"
+                - file.name != "Societa"
+                - file.name != "Cosmologia"
+                - file.name != "Conflitti"
+                - file.name != "Creature"
+                - file.name != "Lingue"
+                - file.name != "Mercati"
+                - file.name != "Relazioni"
+                - file.name != "Risorse"
+                - file.name != "Rotte"
+                - file.name != "Timeline"
+                - stato != "archiviata"
+            order:
+              - nome
+              - categoria
+              - tipo
+              - stato
+              - stato_canonico
+              - grado_certezza
+              - formula.prontezza
+              - mondo
+              - fonti
+              - versioni_contrapposte
+              - gancio
+              - uso_al_tavolo
+              - player_safe
+            sort:
+              - property: mondo
+                direction: ASC
+              - property: categoria
+                direction: ASC
+              - property: nome
+                direction: ASC
+          - type: table
+            name: Da collegare
+            limit: 30
+            groupBy:
+              property: formula.prontezza
+              direction: ASC
+            filters:
+              and:
+                - file.name != "Culture"
+                - file.name != "Religioni"
+                - file.name != "Societa"
+                - file.name != "Cosmologia"
+                - file.name != "Conflitti"
+                - file.name != "Creature"
+                - file.name != "Lingue"
+                - file.name != "Mercati"
+                - file.name != "Relazioni"
+                - file.name != "Risorse"
+                - file.name != "Rotte"
+                - file.name != "Timeline"
+                - stato != "archiviata"
+            order:
+              - nome
+              - categoria
+              - tipo
+              - mondo
+              - formula.prontezza
+              - connessioni
+              - fonti
+              - versioni_contrapposte
+              - propaga_a
+              - luoghi
+              - fazioni
+              - relazioni
+            sort:
+              - property: mondo
+                direction: ASC
+              - property: categoria
+                direction: ASC
+          - type: table
+            name: Pubblicabili
+            filters:
+              and:
+                - file.name != "Culture"
+                - file.name != "Religioni"
+                - file.name != "Societa"
+                - file.name != "Cosmologia"
+                - file.name != "Conflitti"
+                - file.name != "Creature"
+                - file.name != "Lingue"
+                - file.name != "Mercati"
+                - file.name != "Relazioni"
+                - file.name != "Risorse"
+                - file.name != "Rotte"
+                - file.name != "Timeline"
+                - stato != "archiviata"
+            order:
+              - nome
+              - categoria
+              - pubblico
+              - formula.prontezza
+              - memoria_pubblica
+              - stato_canonico
+              - player_safe
+              - canonico
+              - uso_al_tavolo
+            sort:
+              - property: pubblico
+                direction: DESC
+              - property: nome
+                direction: ASC
+          - type: table
+            name: Pressione e propagazione
+            limit: 30
+            groupBy:
+              property: formula.prontezza
+              direction: ASC
+            filters:
+              and:
+                - file.name != "Culture"
+                - file.name != "Religioni"
+                - file.name != "Societa"
+                - file.name != "Cosmologia"
+                - file.name != "Conflitti"
+                - file.name != "Creature"
+                - file.name != "Lingue"
+                - file.name != "Mercati"
+                - file.name != "Relazioni"
+                - file.name != "Risorse"
+                - file.name != "Rotte"
+                - file.name != "Timeline"
+                - stato != "archiviata"
+            order:
+              - nome
+              - categoria
+              - pressione
+              - formula.prontezza
+              - prossima_mossa
+              - entita_impattate
+              - propaga_a
+              - connessioni
+            sort:
+              - property: pressione
+                direction: DESC
+              - property: prossima_mossa
+                direction: ASC
+          - type: table
+            name: Sacro e arcano
+            filters:
+              and:
+                - stato != "archiviata"
+            order:
+              - nome
+              - categoria
+              - tipo
+              - mondo
+              - formula.prontezza
+              - leggi_metafisiche
+              - religioni_collegate
+              - culture_collegate
+              - divinita
+              - templi
+              - luoghi_sacri
+              - luoghi
+              - prossima_mossa
+            sort:
+              - property: categoria
+                direction: ASC
+              - property: nome
+                direction: ASC

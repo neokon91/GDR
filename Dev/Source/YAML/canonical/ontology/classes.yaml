@@ -1,0 +1,241 @@
+id: ontology_classes
+purpose: Classi semantiche canoniche del vault; definiscono cosa esiste prima di template, profili frontmatter e viste.
+version: 0.1.0
+policy:
+  rule: Le classi descrivono il modello concettuale; i sottotipi restano pochi e giocabili.
+  frontmatter_rule: Il frontmatter conserva solo stato, relazioni e campi operativi; la lore vive nel corpo nota.
+  projection_rule: Router, validation e runtime consumano questa ontologia direttamente o tramite projection YAML esplicite.
+domains:
+  worldbuilding:
+    purpose: Fondazioni lore usate per costruire ambientazione, geografia, cosmologia e identita culturali.
+    classes:
+      mondo:
+        label: Mondo
+        entity_category: mondo
+        validation_authority: true
+        router_kind: mondo
+        folder_key: mondi
+        default_type: mondo
+        types:
+          - mondo
+        frontmatter_profile: mondo
+        body_model: lore_foundation
+      cosmologia:
+        label: Cosmologia
+        entity_category: cosmologia
+        validation_authority: true
+        router_kind: cosmologia
+        folder_key: cosmologia
+        default_type: legge cosmica
+        types:
+          - legge cosmica
+          - piano o aldila
+          - divinita
+          - pantheon
+        frontmatter_profile: cosmologia
+        body_model: metaphysics_lore
+      luogo:
+        label: Luogo
+        entity_category: luogo
+        validation_authority: true
+        router_kind: luogo
+        folder_key: luoghi
+        default_type: sito di interesse
+        types:
+          - regione
+          - insediamento
+          - sito di interesse
+        frontmatter_profile: luogo
+        body_model: geography_lore
+      cultura:
+        label: Cultura
+        entity_category: cultura
+        validation_authority: true
+        router_kind: cultura
+        folder_key: culture
+        default_type: civilta
+        types:
+          - civilta
+        frontmatter_profile: cultura
+        body_model: culture_lore
+      ecologia:
+        label: Ecologia
+        entity_category: luogo
+        validation_authority: true
+        router_kind: ecologia
+        folder_key: luoghi
+        default_type: habitat
+        types:
+          - habitat
+        frontmatter_profile: luogo
+        body_model: habitat_lore
+  gioco_5_5e:
+    purpose: Entita meccaniche e operative per usare la lore con D&D 5.5e.
+    classes:
+      personaggio:
+        label: Personaggio
+        entity_category: personaggio
+        validation_authority: true
+        default_type: png
+        types:
+          - pg
+          - png
+        frontmatter_profiles:
+          - pg
+          - png
+        frontmatter_policy: nested_mechanics_allowed
+      creatura:
+        label: Creatura
+        entity_category: creatura
+        validation_authority: true
+        default_type: creatura
+        types:
+          - creatura
+        frontmatter_profile: creatura
+        frontmatter_policy: nested_statblock_allowed
+      incontro:
+        label: Incontro
+        entity_category: incontro
+        validation_authority: true
+        default_type: incontro
+        types:
+          - incontro
+        frontmatter_profile: incontro
+      trappola:
+        label: Trappola
+        entity_category: trappola
+        validation_authority: true
+        default_type: trappola
+        types:
+          - trappola
+        frontmatter_profile: trappola
+      pericolo_ambientale:
+        label: Pericolo ambientale
+        entity_category: pericolo ambientale
+        validation_authority: true
+        default_type: pericolo ambientale
+        types:
+          - pericolo ambientale
+        frontmatter_profile: pericolo_ambientale
+      oggetto:
+        label: Oggetto
+        entity_category: oggetto
+        validation_authority: true
+        default_type: oggetto magico
+        types:
+          - arma
+          - armatura
+          - scudo
+          - strumento
+          - veleno
+          - oggetto meraviglioso
+          - oggetto magico
+        frontmatter_profile: oggetto
+      incantesimo:
+        label: Incantesimo
+        entity_category: incantesimo
+        validation_authority: true
+        default_type: incantesimo
+        types:
+          - incantesimo
+        frontmatter_profile: incantesimo
+      regola:
+        label: Regola
+        entity_category: regola
+        validation_authority: true
+        default_type: regola
+        types:
+          - regola
+        frontmatter_profile: regola
+      classe:
+        label: Classe
+        entity_category: classe
+        validation_authority: true
+        default_type: classe
+        types:
+          - classe
+        frontmatter_profile: classe
+      specie:
+        label: Specie
+        entity_category: specie
+        validation_authority: true
+        default_type: specie
+        types:
+          - specie
+        frontmatter_profile: specie
+      background:
+        label: Background
+        entity_category: background
+        validation_authority: true
+        default_type: background
+        types:
+          - background
+        frontmatter_profile: background
+      talento:
+        label: Talento
+        entity_category: talento
+        validation_authority: true
+        default_type: talento
+        types:
+          - talento
+        frontmatter_profile: talento
+      tesoro:
+        label: Tesoro
+        entity_category: tesoro
+        validation_authority: true
+        default_type: tesoro
+        types:
+          - tesoro
+        frontmatter_profile: tesoro
+  campaign_ops:
+    purpose: Entita che trasformano la lore in gioco persistente e conseguenze.
+    classes:
+      fazione:
+        label: Fazione
+        entity_category: fazione
+        default_type: fazione generica
+        types:
+          - fazione generica
+          - culto
+          - gilda
+          - confraternita
+      religione:
+        label: Religione
+        entity_category: religione
+        default_type: divinita
+        types:
+          - divinita
+          - pantheon
+          - ordine religioso
+          - luogo sacro
+      missione:
+        label: Missione
+        entity_category: missione
+        default_type: missione
+        types:
+          - missione
+          - incarico
+          - mistero
+          - viaggio
+      tracciato:
+        label: Tracciato
+        entity_category: tracciato
+        default_type: clock
+        types:
+          - clock
+          - progress track
+          - fronte
+      sessione:
+        label: Sessione
+        entity_category: sessione
+        default_type: sessione di campagna
+        types:
+          - sessione di campagna
+          - sessione zero
+          - interludio
+      campagna:
+        label: Campagna
+        entity_category: campagna
+        default_type: campagna
+        types:
+          - campagna

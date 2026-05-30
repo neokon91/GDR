@@ -5,8 +5,8 @@ policy:
   scope: categorie operative di mondo, campagna e sessione
   rule: La playability non e un punteggio; una categoria e giocabile quando espone leve verificabili per scena, conflitto, scelta, conseguenza e prossima mossa.
   do_not_add:
-    - nuovi cockpit
-    - nuovi workflow principali
+    - nuovi vista
+    - nuovi flussi paralleli
     - logica JS quando basta YAML
 playability:
   genera_scene:

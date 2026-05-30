@@ -416,6 +416,7 @@ body.theme-dark {
 .callout[data-callout="ricompensa"],
 .callout[data-callout="png"],
 .callout[data-callout="luogo"],
+.callout[data-callout="mappa"],
 .callout[data-callout="fazione"],
 .callout[data-callout="missione"],
 .callout[data-callout="cultura"],
@@ -477,6 +478,11 @@ body.theme-dark {
 .callout[data-callout="luogo"] {
   --callout-color: var(--gdr-luogo-rgb);
   --callout-icon: lucide-map-pin;
+}
+
+.callout[data-callout="mappa"] {
+  --callout-color: var(--gdr-luogo-rgb);
+  --callout-icon: lucide-map;
 }
 
 .callout[data-callout="fazione"] {

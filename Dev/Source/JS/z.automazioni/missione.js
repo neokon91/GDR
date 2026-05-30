@@ -28,7 +28,6 @@ async function missione(tp) {
     const tracciati = creazioneCompleta ? await helpers.chooseTracks(tp, prompts.tracciati ?? "Clock o tracciati collegati", context) : [];
     const ricompense = creazioneCompleta ? await helpers.chooseObjects(tp, prompts.ricompense ?? "Ricompense", context) : [];
     const scadenzaMondo = creazioneCompleta ? await helpers.promptOptional(tp, prompts.scadenza_mondo ?? "Scadenza nel mondo") : "";
-    const calendario = await helpers.promptCalendar(tp, { world: mondo }, prompts.calendario ?? "Calendario Calendarium");
     const ostacolo = creazioneCompleta ? await helpers.promptOptional(tp, prompts.ostacolo ?? "Ostacolo principale") : "";
     const rischio = creazioneCompleta ? await helpers.promptOptional(tp, prompts.rischi ?? "Rischio principale per i PG o per il mondo") : "";
     const entitaImpattate = creazioneCompleta ? await helpers.chooseConnections(tp, prompts.entita_impattate ?? "Entita direttamente impattate dalla missione", context) : [];
@@ -79,8 +78,6 @@ async function missione(tp) {
         segreti: helpers.inlineYamlTextList([segreto]),
         connessioni: helpers.inlineYamlList(connessioni),
         scadenza_mondo: helpers.yamlQuote(scadenzaMondo),
-        fc_calendar: helpers.yamlQuote(calendario),
-        fc_display_name: helpers.yamlQuote(name),
         fonti: helpers.inlineYamlWikilinkList([...fontiGranulari, ...sessioni, committente, ...connessioni]),
         riferimenti_srd: '[]',
         riferimenti_regola: helpers.inlineYamlWikilinkList(riferimentiRegola),

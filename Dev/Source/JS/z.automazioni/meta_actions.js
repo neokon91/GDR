@@ -1,6 +1,5 @@
 async function meta_actions(tp, action = "") {
     const helpers = tp.user.helpers;
-    const generatedDraftTargets = require("./data/runtime/generated_drafts_cockpit.json").generated_targets ?? {};
     const optionalRequire = modulePath => {
         if (typeof require !== "function") return null;
         try {
@@ -22,87 +21,6 @@ async function meta_actions(tp, action = "") {
 
     const notice = message => new Notice(message);
     const privatePublicPattern = /\b(dm|segreto|segreti|nascost[oaie]?|verita|verità|prossima mossa|mosse segrete|retroscena|non rivelare)\b/i;
-    const generatedTargetRule = frontmatter => {
-        const category = String(frontmatter?.categoria ?? "");
-        const type = String(frontmatter?.tipo ?? "");
-        return (generatedDraftTargets.rules ?? []).find(rule =>
-            (rule.category && rule.category === category)
-            || (rule.type && rule.type === type)
-        );
-    };
-    const generatedTargetFolder = frontmatter => {
-        const rule = generatedTargetRule(frontmatter);
-        return rule?.folder
-            ?? helpers.path(rule?.path_key ?? generatedDraftTargets.fallback_path_key ?? "inbox");
-    };
-    const hasGeneratedAnchor = frontmatter => [
-        frontmatter.mondo,
-        frontmatter.luogo,
-        frontmatter.luogo_padre,
-        frontmatter.campagne,
-        frontmatter.sessioni
-    ].some(value => helpers.normalizeFieldArray(value).length > 0 || String(value ?? "").trim());
-    const uniqueMarkdownPath = (folder, basename) => {
-        const safeName = String(basename ?? "Bozza Generata").replace(/[\\/:*?"<>|]/g, "-").trim() || "Bozza Generata";
-        let target = `${folder}/${safeName}.md`;
-        let index = 2;
-
-        while (app.vault.getAbstractFileByPath(target)) {
-            target = `${folder}/${safeName} ${index}.md`;
-            index += 1;
-        }
-
-        return target;
-    };
-    const moveCurrentFileTo = async folder => {
-        const file = currentFile();
-        await helpers.ensureFolder(folder);
-        const targetPath = uniqueMarkdownPath(folder, file.basename);
-        await (app.fileManager?.renameFile
-            ? app.fileManager.renameFile(file, targetPath)
-            : app.vault.rename(file, targetPath));
-        return targetPath;
-    };
-    const applyGeneratedWorkflow = async ({ canonize }) => {
-        const file = currentFile();
-        const meta = currentMeta();
-
-        if (meta.plugin !== "fantasy-content-generator") {
-            notice("La nota attiva non viene dal Generatore di Contenuti Fantasy.");
-            return "";
-        }
-
-        if (!hasGeneratedAnchor(meta)) {
-            notice("Aggiungi prima mondo, luogo, campagna o sessione alla bozza generata.");
-            return "";
-        }
-
-        const targetFolder = generatedTargetFolder(meta);
-        await helpers.processFrontmatter(file, fm => {
-            fm.stato = fm.stato === "bozza" ? "pronto" : fm.stato;
-            fm.smistato_il = today;
-            fm.destinazione_smistamento = targetFolder;
-            fm.origine_bozza = file.path;
-            fm.fonte = fm.fonte || "fantasy-content-generator";
-
-            if (canonize) {
-                fm.canonico = true;
-                fm.stato_canonico = "canonico";
-                fm.canonizzato_il = today;
-            } else {
-                fm.canonico = false;
-                fm.stato_canonico = fm.stato_canonico || "rumor";
-            }
-        });
-
-        const targetPath = file.path.startsWith(`${targetFolder}/`)
-            ? file.path
-            : await moveCurrentFileTo(targetFolder);
-        notice(canonize
-            ? `Bozza canonizzata in ${targetPath}.`
-            : `Bozza smistata in ${targetPath}.`);
-        return "";
-    };
 
     const chooseTrack = async () => {
         const file = currentFile();
@@ -206,14 +124,6 @@ async function meta_actions(tp, action = "") {
         });
         notice("Nota marcata canonica.");
         return "";
-    }
-
-    if (action === "smista_bozza_generata") {
-        return await applyGeneratedWorkflow({ canonize: false });
-    }
-
-    if (action === "canonizza_bozza_generata") {
-        return await applyGeneratedWorkflow({ canonize: true });
     }
 
     if (action === "marca_rumor") {

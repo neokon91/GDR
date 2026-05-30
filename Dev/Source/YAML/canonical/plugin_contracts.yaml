@@ -1,307 +1,130 @@
 id: plugin_contracts
 purpose: 'Contratto unico plugin/release: fonti ufficiali, uso locale ed errori visibili.'
 version: 0.1.0
-policy: Ogni plugin incluso deve avere comportamento ufficiale studiato, uso locale limitato e fallback leggibile.
+policy: Ogni plugin incluso deve servire creazione note, frontmatter, lettura lore o supporto 5.5e concreto.
 plugins:
-- id: obsidian-icon-folder
-  name: Iconize
-  version: 2.14.7
-  official_sources:
-  - https://github.com/obsidianmd/obsidian-releases/blob/master/community-plugins.json
-  - https://github.com/florianwoelki/obsidian-iconize
-  - https://github.com/florianwoelki/obsidian-iconize#readme
-  official_capability: Icone cartelle e orientamento visuale
-  local_scope: Nessuna logica di gioco; non deve essere prerequisito per capire il vault
-  visible_failure: Icone assenti o rumorose, ma nessun blocco rotto
-  release_contract: Plugin dichiarato, data.json valido quando presente, non usato come navigazione primaria
-- id: media-extended
-  name: Media Extended
-  version: 4.2.4
-  official_sources:
-  - https://github.com/obsidianmd/obsidian-releases/blob/master/community-plugins.json
-  - https://github.com/aidenlx/media-extended
-  - https://github.com/aidenlx/media-extended#readme
-  official_capability: Playback e gestione media in note di scena
-  local_scope: Usarlo solo per materiali audio/video realmente pronti; indici Dataview restano fallback
-  visible_failure: Embed media non renderizzati o controlli assenti
-  release_contract: Le pagine media devono restare leggibili senza playback
-- id: obsidian-5e-statblocks
-  name: Fantasy Statblocks
-  version: 4.10.3
-  official_sources:
-  - https://github.com/obsidianmd/obsidian-releases/blob/master/community-plugins.json
-  - https://github.com/Obsidian-TTRPG-Community/fantasy-statblocks
-  - https://plugins.javalent.com/statblocks
-  official_capability: Blocchi statblock e parsing creature fantasy
-  local_scope: Creature con frontmatter coerente; non inventare sintassi statblock fuori plugin
-  visible_failure: Schede creatura grezze o errori su blocchi statblock
-  release_contract: Mostri/creature mantengono statblock e campi verificabili
-- id: dataview
-  name: Dataview
-  version: 0.5.68
-  official_sources:
-  - https://github.com/obsidianmd/obsidian-releases/blob/master/community-plugins.json
-  - https://github.com/blacksmithgu/obsidian-dataview
-  - https://blacksmithgu.github.io/obsidian-dataview/
-  - https://blacksmithgu.github.io/obsidian-dataview/api/intro/
-  official_capability: Query TABLE/LIST/TASK e blocchi DataviewJS
-  local_scope: JS abilitato; blocchi devono compilare e avere fallback leggibile
-  visible_failure: Codice dataviewjs visibile, errori rossi, tabelle vuote incomprensibili
-  release_contract: enableDataviewJs true, blocchi DataviewJS compilati staticamente
-- id: table-editor-obsidian
-  name: Advanced Tables
-  version: 0.23.2
-  official_sources:
-  - https://github.com/obsidianmd/obsidian-releases/blob/master/community-plugins.json
-  - https://github.com/tgrosinger/advanced-tables-obsidian
-  - https://github.com/tgrosinger/advanced-tables-obsidian#readme
-  official_capability: Editing tabelle Markdown
-  local_scope: Solo supporto editing; non dipendere da funzioni runtime
-  visible_failure: Nessun errore critico, al massimo editing meno comodo
-  release_contract: Tabelle restano Markdown standard
-- id: templater-obsidian
-  name: Templater
-  version: 2.20.4
-  official_sources:
-  - https://github.com/obsidianmd/obsidian-releases/blob/master/community-plugins.json
-  - https://github.com/silentvoid13/Templater
-  - https://silentvoid13.github.io/Templater/
-  - https://silentvoid13.github.io/Templater/user-functions/script-user-functions.html
-  official_capability: Esecuzione tp.user.* e template creation
-  local_scope: Templater vede solo wrapper funzione in z.automazioni/templater; niente object exports
-  visible_failure: Errore Templater export object/function o template non eseguito
-  release_contract: user_scripts_folder isolato, 54 wrapper importati e verificati come funzioni
-- id: obsidian-kanban
-  name: Kanban
-  version: 2.0.51
-  official_sources:
-  - https://github.com/obsidianmd/obsidian-releases/blob/master/community-plugins.json
-  - https://github.com/obsidian-community/obsidian-kanban
-  - https://publish.obsidian.md/kanban/Obsidian+Kanban+Plugin
-  official_capability: Bacheche Markdown con frontmatter kanban-plugin
-  local_scope: Bacheche sono supporto operativo, non workflow unico obbligatorio
-  visible_failure: Board non renderizzata, ma contenuto Markdown ancora leggibile
-  release_contract: Frontmatter board e fallback link/workflow presenti
-- id: fantasy-content-generator
-  name: Generatore di Contenuti Fantasy
-  version: 1.2.4
-  official_sources:
-  - https://github.com/obsidianmd/obsidian-releases/blob/master/community-plugins.json
-  - https://github.com/gregory-jagermeister/Fantasy-Content-Generator
-  - https://github.com/gregory-jagermeister/Fantasy-Content-Generator#readme
-  official_capability: Generazione bozze fantasy
-  local_scope: Solo bozze in Inbox/Generati; mai canonico automatico
-  visible_failure: Contenuto generato non smistato o confuso con lore canonica
-  release_contract: Smistamento/canonizzazione passano da workflow e controlli
-- id: calendarium
-  name: Calendarium
-  version: 2.1.0
-  official_sources:
-  - https://github.com/obsidianmd/obsidian-releases/blob/master/community-plugins.json
-  - https://github.com/javalent/calendarium
-  - https://plugins.javalent.com/calendarium
-  official_capability: Calendari, fc-date e scadenze diegetiche
-  local_scope: Un solo calendario neutro; nessun calendario proprietario come default
-  visible_failure: Errori calendario o riferimenti a setting protetti
-  release_contract: defaultCalendar neutro e marker vietati assenti
-- id: obsidian-meta-bind-plugin
-  name: Meta Bind
-  version: 1.4.10
-  official_sources:
-  - https://github.com/obsidianmd/obsidian-releases/blob/master/community-plugins.json
-  - https://github.com/mprojectscode/obsidian-meta-bind-plugin
-  - https://www.moritzjung.dev/obsidian-meta-bind-plugin-docs/
-  - https://www.moritzjung.dev/obsidian-meta-bind-plugin-docs/guides/inputfields/
-  - https://www.moritzjung.dev/obsidian-meta-bind-plugin-docs/guides/buttons/
-  official_capability: INPUT, BUTTON e azioni operative
-  local_scope: Button solo da template globali; input complessi in blocchi meta-bind; target sempre esistenti
-  visible_failure: BUTTON grezzi, input non renderizzati, azioni verso file mancanti
-  release_contract: Tutti BUTTON/INPUT e templateFile verificati contro data.json
-- id: js-engine
-  name: JS Engine
-  version: 0.3.5
-  official_sources:
-  - https://github.com/obsidianmd/obsidian-releases/blob/master/community-plugins.json
-  - https://github.com/mprojectscode/obsidian-js-engine-plugin
-  - https://www.moritzjung.dev/obsidian-js-engine-plugin-docs/
-  official_capability: Esecuzione JS avanzata in note
-  local_scope: Opzionale; runtime condiviso resta in z.engine e DataviewJS
-  visible_failure: Blocchi JS non renderizzati o doppione di DataviewJS
-  release_contract: Nessuna dipendenza critica dal plugin per primo percorso utente
-- id: metadata-menu
-  name: Metadata Menu
-  version: 0.8.12
-  official_sources:
-  - https://github.com/obsidianmd/obsidian-releases/blob/master/community-plugins.json
-  - https://github.com/mdelobelle/metadatamenu
-  - https://mdelobelle.github.io/metadatamenu/
-  official_capability: FileClass, presetFields e gestione metadata
-  local_scope: Preset coerenti con Meta Bind/Bases; non deve riscrivere campi a caso
-  visible_failure: Campi incoerenti, suggerimenti mancanti, classi non trovate
-  release_contract: classFilesPath e preset principali verificati
-- id: homepage
-  name: Homepage
-  version: 4.4.2
-  official_sources:
-  - https://github.com/obsidianmd/obsidian-releases/blob/master/community-plugins.json
-  - https://github.com/mirnovov/obsidian-homepage
-  - https://github.com/mirnovov/obsidian-homepage#readme
-  official_capability: Apertura automatica su nota iniziale
-  local_scope: Deve aprire Inizia Qui; non creare pagine nuove automaticamente
-  visible_failure: Vault apre vuoto o pagina tecnica
-  release_contract: openOnStartup e target verificati in repo e release
-- id: callout-manager
-  name: Callout Manager
-  version: 1.1.1
-  official_sources:
-  - https://github.com/obsidianmd/obsidian-releases/blob/master/community-plugins.json
-  - https://github.com/eth-p/obsidian-callout-manager
-  - https://github.com/eth-p/obsidian-callout-manager#readme
-  official_capability: Callout custom e resa semantica
-  local_scope: Callout devono restare blockquote leggibili senza plugin
-  visible_failure: Callout non colorati ma testo leggibile
-  release_contract: Tipi callout custom configurati e fallback Markdown presente
-- id: folder-notes
-  name: Folder notes
-  version: 1.8.19
-  official_sources:
-  - https://github.com/obsidianmd/obsidian-releases/blob/master/community-plugins.json
-  - https://github.com/lostpaul/obsidian-folder-notes
-  - https://lostpaul.github.io/obsidian-folder-notes/
-  official_capability: Note indice per cartelle
-  local_scope: Navigazione assistita, non dipendenza logica
-  visible_failure: Cartella non apre indice, ma note restano accessibili
-  release_contract: Config presente e indici cartella verificati indirettamente
-- id: obsidian42-brat
-  name: BRAT
-  version: 2.0.4
-  official_sources:
-  - https://github.com/obsidianmd/obsidian-releases/blob/master/community-plugins.json
-  - https://github.com/tfthacker/obsidian42-brat
-  - https://tfthacker.com/BRAT
-  official_capability: Gestione plugin beta
-  local_scope: Fuori dal percorso DM; non deve essere necessario al primo uso
-  visible_failure: Rumore tecnico o update beta non richiesti
-  release_contract: Documentato come manutenzione, non workflow utente
-- id: obsidian-dice-roller
-  name: Dice Roller
-  version: 11.4.2
-  official_sources:
-  - https://github.com/obsidianmd/obsidian-releases/blob/master/community-plugins.json
-  - https://github.com/Obsidian-TTRPG-Community/dice-roller
-  - https://plugins.javalent.com/dice-roller
-  official_capability: Sintassi dice e tabelle casuali
-  local_scope: Usare solo dove il testo resta comprensibile senza roll automatico
-  visible_failure: 'dice: visibile come testo invece di roll'
-  release_contract: Tabelle e guide restano Markdown leggibile
-- id: initiative-tracker
-  name: Initiative Tracker
-  version: 13.0.21
-  official_sources:
-  - https://github.com/obsidianmd/obsidian-releases/blob/master/community-plugins.json
-  - https://github.com/Obsidian-TTRPG-Community/initiative-tracker
-  - https://plugins.javalent.com/it
-  official_capability: Encounter e iniziativa
-  local_scope: Solo incontri preparati; nomi creature coerenti con statblock
-  visible_failure: Encounter non caricato o creature non trovate
-  release_contract: Template incontro/creatura e riferimenti verificati
-- id: obsidian-excalidraw-plugin
-  name: Excalidraw
-  version: 2.23.3
-  official_sources:
-  - https://github.com/obsidianmd/obsidian-releases/blob/master/community-plugins.json
-  - https://github.com/zsviczian/obsidian-excalidraw-plugin
-  - https://github.com/zsviczian/obsidian-excalidraw-plugin#readme
-  - https://excalidraw-obsidian.online/
-  official_capability: Disegni .excalidraw.md e mappe fronti
-  local_scope: Nuove mappe in Risorse/Mappe con template dedicato; niente path mancanti
-  visible_failure: Disegni aperti in Markdown grezzo o template non trovato
-  release_contract: folder/templateFilePath verificati e target esistenti
-- id: hex-cartographer
-  name: Hex Cartographer
-  version: 1.0.2
-  official_sources:
-  - https://github.com/obsidianmd/obsidian-releases/blob/master/community-plugins.json
-  - https://github.com/taroslord/Hex-Cartographer
-  - https://github.com/taroslord/Hex-Cartographer#readme
-  official_capability: Mappe esagonali
-  local_scope: Opzionale guidato; non deve bloccare flusso base
-  visible_failure: Mappa esagonale non renderizzata
-  release_contract: Patch difensiva e presenza plugin verificate
-- id: zoom-map
-  name: 'TTRPG Tools: Maps'
-  version: 1.9.5
-  official_sources:
-  - https://github.com/obsidianmd/obsidian-releases/blob/master/community-plugins.json
-  - https://github.com/jareika/zoom-map
-  - https://github.com/jareika/zoom-map#readme
-  official_capability: Mappe zoomabili e pin
-  local_scope: Opzionale per mappe tavolo; fallback via mappe Markdown/Dataview
-  visible_failure: Mappa non interattiva o pin assenti
-  release_contract: Uso limitato e guide mappa presenti
-- id: obsidian-style-settings
-  name: Style Settings
-  version: 1.0.9
-  official_sources:
-  - https://github.com/obsidianmd/obsidian-releases/blob/master/community-plugins.json
-  - https://github.com/obsidian-community/obsidian-style-settings
-  - https://github.com/obsidian-community/obsidian-style-settings#readme
-  official_capability: Impostazioni snippet CSS
-  local_scope: Solo controlli visuali; contenuto non dipende dallo stile
-  visible_failure: Aspetto meno rifinito ma funzionale
-  release_contract: Snippet gdr-vault e setting presenti
-- id: tabs
-  name: Tabs
-  version: 1.1.8
-  official_sources:
-  - https://github.com/obsidianmd/obsidian-releases/blob/master/community-plugins.json
-  - https://github.com/xhuajin/obsidian-tabs
-  - https://github.com/xhuajin/obsidian-tabs#readme
-  official_capability: Blocchi tabs
-  local_scope: Ridurre scrolling; contenuto deve restare ordinato anche se tabs non renderizza
-  visible_failure: Blocchi tabs grezzi o sezioni lunghe
-  release_contract: Dashboard/template chiave verificati come plugin-native
-- id: obsidian-tasks-plugin
-  name: Tasks
-  version: 8.0.0
-  official_sources:
-  - https://github.com/obsidianmd/obsidian-releases/blob/master/community-plugins.json
-  - https://github.com/obsidian-tasks-group/obsidian-tasks
-  - https://publish.obsidian.md/tasks/
-  official_capability: 'Query tasks con globalFilter #task'
-  local_scope: Solo task DM operative, non lore/canone
-  visible_failure: Task non visibili o warning cache
-  release_contract: globalFilter e loggingOptions verificati
-- id: advanced-canvas
-  name: Advanced Canvas
-  version: 6.1.6
-  official_sources:
-  - https://github.com/obsidianmd/obsidian-releases/blob/master/community-plugins.json
-  - https://github.com/developer-mike/obsidian-advanced-canvas
-  - https://github.com/developer-mike/obsidian-advanced-canvas#readme
-  official_capability: Estensione canvas core
-  local_scope: Supporto visuale, non percorso base
-  visible_failure: Canvas meno potente ma file apribili
-  release_contract: Canvas non richiesto per primo percorso utente
-- id: obsidian-linter
-  name: Linter
-  version: 1.31.2
-  official_sources:
-  - https://github.com/obsidianmd/obsidian-releases/blob/master/community-plugins.json
-  - https://github.com/platers/obsidian-linter
-  - https://platers.github.io/obsidian-linter/
-  official_capability: Lint manuale Markdown
-  local_scope: Mai lint distruttivo/on save su release utente
-  visible_failure: Formattazione automatica che altera frontmatter/template
-  release_contract: Config prudente e documentata come manutenzione
-- id: maps
-  name: Maps
-  version: 0.1.6
-  official_sources:
-  - https://github.com/obsidianmd/obsidian-releases/blob/master/community-plugins.json
-  - https://github.com/obsidianmd/obsidian-maps
-  - https://github.com/obsidianmd/obsidian-maps#readme
-  official_capability: Map view per Bases
-  local_scope: Solo su .base/coordinate; tabella resta fallback
-  visible_failure: Vista mappa non disponibile, ma Bases tabellare leggibile
-  release_contract: Atlante Mappe.base e fields coordinate/icon/color presenti
+  - id: obsidian-5e-statblocks
+    name: Fantasy Statblocks
+    version: 4.10.3
+    official_sources:
+      - https://github.com/obsidianmd/obsidian-releases/blob/master/community-plugins.json
+      - https://github.com/Obsidian-TTRPG-Community/fantasy-statblocks
+      - https://plugins.javalent.com/statblocks
+    official_capability: Blocchi statblock e parsing creature fantasy
+    local_scope: Creature con frontmatter coerente; non inventare sintassi statblock fuori plugin
+    visible_failure: Schede creatura grezze o errori su blocchi statblock
+    release_contract: Mostri/creature mantengono statblock e campi verificabili
+  - id: dataview
+    name: Dataview
+    version: 0.5.68
+    official_sources:
+      - https://github.com/obsidianmd/obsidian-releases/blob/master/community-plugins.json
+      - https://github.com/blacksmithgu/obsidian-dataview
+      - https://blacksmithgu.github.io/obsidian-dataview/
+      - https://blacksmithgu.github.io/obsidian-dataview/api/intro/
+    official_capability: Query TABLE/LIST/TASK e blocchi DataviewJS
+    local_scope: JS abilitato; blocchi devono compilare e avere corpo nota leggibile
+    visible_failure: Codice dataviewjs visibile, errori rossi, tabelle vuote incomprensibili
+    release_contract: enableDataviewJs true, blocchi DataviewJS compilati staticamente
+  - id: templater-obsidian
+    name: Templater
+    version: 2.20.4
+    official_sources:
+      - https://github.com/obsidianmd/obsidian-releases/blob/master/community-plugins.json
+      - https://github.com/silentvoid13/Templater
+      - https://silentvoid13.github.io/Templater/
+      - https://silentvoid13.github.io/Templater/user-functions/script-user-functions.html
+    official_capability: Esecuzione tp.user.* e template creation
+    local_scope: Templater vede solo wrapper funzione in z.automazioni/templater; niente object exports
+    visible_failure: Errore Templater export object/function o template non eseguito
+    release_contract: user_scripts_folder isolato, 54 wrapper importati e verificati come funzioni
+  - id: obsidian-meta-bind-plugin
+    name: Meta Bind
+    version: 1.4.10
+    official_sources:
+      - https://github.com/obsidianmd/obsidian-releases/blob/master/community-plugins.json
+      - https://github.com/mprojectscode/obsidian-meta-bind-plugin
+      - https://www.moritzjung.dev/obsidian-meta-bind-plugin-docs/
+      - https://www.moritzjung.dev/obsidian-meta-bind-plugin-docs/guides/inputfields/
+      - https://www.moritzjung.dev/obsidian-meta-bind-plugin-docs/guides/buttons/
+    official_capability: INPUT, BUTTON e azioni operative
+    local_scope: Button solo da template globali; input complessi in blocchi meta-bind; target sempre esistenti
+    visible_failure: BUTTON grezzi, input non renderizzati, azioni verso file mancanti
+    release_contract: Tutti BUTTON/INPUT e templateFile verificati contro data.json
+  - id: js-engine
+    name: JS Engine
+    version: 0.3.5
+    official_sources:
+      - https://github.com/obsidianmd/obsidian-releases/blob/master/community-plugins.json
+      - https://github.com/mprojectscode/obsidian-js-engine-plugin
+      - https://www.moritzjung.dev/obsidian-js-engine-plugin-docs/
+    official_capability: Esecuzione JS avanzata in note
+    local_scope: Opzionale; runtime condiviso resta in z.engine e DataviewJS
+    visible_failure: Blocchi JS non renderizzati o doppione di DataviewJS
+    release_contract: Nessuna dipendenza critica dal plugin per primo percorso utente
+  - id: metadata-menu
+    name: Metadata Menu
+    version: 0.8.12
+    official_sources:
+      - https://github.com/obsidianmd/obsidian-releases/blob/master/community-plugins.json
+      - https://github.com/mdelobelle/metadatamenu
+      - https://mdelobelle.github.io/metadatamenu/
+    official_capability: FileClass, presetFields e gestione metadata
+    local_scope: Preset coerenti con Meta Bind/Bases; non deve riscrivere campi a caso
+    visible_failure: Campi incoerenti, suggerimenti mancanti, classi non trovate
+    release_contract: classFilesPath e preset principali verificati
+  - id: callout-manager
+    name: Callout Manager
+    version: 1.1.1
+    official_sources:
+      - https://github.com/obsidianmd/obsidian-releases/blob/master/community-plugins.json
+      - https://github.com/eth-p/obsidian-callout-manager
+      - https://github.com/eth-p/obsidian-callout-manager#readme
+    official_capability: Callout custom e resa semantica
+    local_scope: Callout devono restare blockquote leggibili senza plugin
+    visible_failure: Callout non colorati ma testo leggibile
+    release_contract: Tipi callout custom configurati e corpo nota Markdown presente
+  - id: obsidian-dice-roller
+    name: Dice Roller
+    version: 11.4.2
+    official_sources:
+      - https://github.com/obsidianmd/obsidian-releases/blob/master/community-plugins.json
+      - https://github.com/Obsidian-TTRPG-Community/dice-roller
+      - https://plugins.javalent.com/dice-roller
+    official_capability: Sintassi dice e tabelle casuali
+    local_scope: Usare solo dove il testo resta comprensibile senza roll automatico
+    visible_failure: 'dice: visibile come testo invece di roll'
+    release_contract: Tabelle e guide restano Markdown leggibile
+  - id: initiative-tracker
+    name: Initiative Tracker
+    version: 13.0.21
+    official_sources:
+      - https://github.com/obsidianmd/obsidian-releases/blob/master/community-plugins.json
+      - https://github.com/Obsidian-TTRPG-Community/initiative-tracker
+      - https://plugins.javalent.com/it
+    official_capability: Encounter e iniziativa
+    local_scope: Solo incontri preparati; nomi creature coerenti con statblock
+    visible_failure: Encounter non caricato o creature non trovate
+    release_contract: Template incontro/creatura e riferimenti verificati
+  - id: tabs
+    name: Tabs
+    version: 1.1.8
+    official_sources:
+      - https://github.com/obsidianmd/obsidian-releases/blob/master/community-plugins.json
+      - https://github.com/xhuajin/obsidian-tabs
+      - https://github.com/xhuajin/obsidian-tabs#readme
+    official_capability: Blocchi tabs
+    local_scope: Ridurre scrolling; contenuto deve restare ordinato anche se tabs non renderizza
+    visible_failure: Blocchi tabs grezzi o sezioni lunghe
+    release_contract: Dashboard/template chiave verificati come plugin-native
+  - id: obsidian-tasks-plugin
+    name: Tasks
+    version: 8.0.0
+    official_sources:
+      - https://github.com/obsidianmd/obsidian-releases/blob/master/community-plugins.json
+      - https://github.com/obsidian-tasks-group/obsidian-tasks
+      - https://publish.obsidian.md/tasks/
+    official_capability: 'Query tasks con globalFilter #task'
+    local_scope: Solo task DM operative, non lore/canone
+    visible_failure: Task non visibili o warning cache
+    release_contract: globalFilter e loggingOptions verificati

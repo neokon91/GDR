@@ -27,7 +27,7 @@ async function lore_capture(tp, routeOptions = {}) {
     const sessioni = route.useActiveSession && activeContext.link
         ? [activeContext.link]
         : await helpers.chooseSessions(tp, "Sessione collegata", context);
-    const collegamenti = await helpers.chooseCoreConnection(tp, "Collega l'appunto a luogo, PNG, fazione, missione, clock o mappa", context);
+    const collegamenti = await helpers.chooseCoreConnection(tp, "Collega l'appunto a luogo, PNG, fazione, missione o clock", context);
     const entitaImpattate = selectedType?.id === "conseguenza"
         ? await helpers.chooseConnections(tp, "Entita impattate dalla conseguenza", context)
         : collegamenti;
@@ -35,8 +35,6 @@ async function lore_capture(tp, routeOptions = {}) {
         ? await helpers.chooseConnections(tp, "Dove deve propagarsi", context)
         : [];
     const fontiGranulari = await helpers.promptWikilinkTargets(tp, prompts.fonti ?? "Fonti granulari dell'appunto (opzionale: Nota#Sezione o Nota#^blocco)");
-    const calendario = await helpers.promptCalendar(tp, { world: mondo });
-
     const created = await helpers.moveNote(tp, "Inbox", name);
     // Gli eventi live devono tornare nella sessione attiva per il post-sessione e la canonizzazione.
     await helpers.linkCreatedNoteToActiveSession(created, { sessionField: "appunti_live" });
@@ -63,10 +61,6 @@ async function lore_capture(tp, routeOptions = {}) {
         propaga_a: helpers.inlineYamlList(propagaA),
         data_mondo: "",
         data_reale: "",
-        fc_calendar: helpers.yamlQuote(calendario),
-        fc_date: "",
-        fc_category: 'conseguenza',
-        fc_display_name: helpers.yamlQuote(name),
         giocabile: 'false',
         causa: "",
         stato_mondo: '[]',

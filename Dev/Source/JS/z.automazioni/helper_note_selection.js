@@ -298,7 +298,6 @@ function createNoteSelectionHelpers({
                 PATHS.risorse_mondo,
                 PATHS.mercati,
                 PATHS.oggetti,
-                PATHS.mappe,
                 PATHS.culture,
                 PATHS.timeline,
                 PATHS.storia
@@ -317,8 +316,7 @@ function createNoteSelectionHelpers({
                 PATHS.personaggi,
                 PATHS.fazioni,
                 PATHS.missioni,
-                PATHS.tracciati,
-                PATHS.mappe
+                PATHS.tracciati
             ]),
             message,
             {
@@ -406,24 +404,7 @@ function createNoteSelectionHelpers({
         return await chooseNotesByPath(tp, PATHS.campagne, message, context);
     }
 
-    async function chooseMaps(tp, message = "Mappe collegate", context = {}) {
-        return await chooseNotesByPath(tp, PATHS.mappe, message, context);
-    }
-
-    async function chooseAudio(tp, message = "Audio collegati", context = {}) {
-        return await chooseNotesByPath(tp, PATHS.audio, message, context);
-    }
-
-    async function chooseImages(tp, message = "Immagini collegate", context = {}) {
-        return await chooseNotesByPath(tp, PATHS.immagini, message, context);
-    }
-
-    async function chooseVideos(tp, message = "Video collegati", context = {}) {
-        return await chooseNotesByPath(tp, PATHS.video, message, context);
-    }
-
     return {
-        chooseAudio,
         chooseCampaigns,
         chooseCompendium,
         chooseConnections,
@@ -432,10 +413,8 @@ function createNoteSelectionHelpers({
         chooseEncounters,
         chooseFactions,
         chooseHandouts,
-        chooseImages,
         chooseLocation,
         chooseLocations,
-        chooseMaps,
         chooseMarkets,
         chooseMissions,
         chooseNoteByFrontmatter,
@@ -450,7 +429,6 @@ function createNoteSelectionHelpers({
         chooseRoutes,
         chooseSessions,
         chooseTracks,
-        chooseVideos,
         chooseWorld,
         chooseWorldResources,
         getMarkdownFilesByFrontmatter,

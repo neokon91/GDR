@@ -9,11 +9,13 @@ sections:
       - identita
       - player_safe
       - segreto
-    fallback: |-
-      ### Identita
+    fallback: '### Identita
+
       - Identita:
+
       - Versione pubblica:
-      - Note DM:
+
+      - Note DM:'
   uso_al_tavolo:
     title: Uso Al Tavolo
     callout: missione
@@ -24,14 +26,19 @@ sections:
       - rischi
       - conseguenza_potenziale
       - prossima_mossa
-    fallback: |-
-      ### Uso al tavolo
+    fallback: '### Uso al tavolo
+
       - Uso:
+
       - Scelta:
+
       - Posta:
+
       - Rischi:
+
       - Conseguenza:
-      - Prossima mossa:
+
+      - Prossima mossa:'
   connessioni:
     title: Collegala Subito
     callout: regia
@@ -40,12 +47,15 @@ sections:
       - luoghi
       - fazioni
       - missioni
-    fallback: |-
-      ### Connessioni
+    fallback: '### Connessioni
+
       - Connessioni:
+
       - Luoghi:
+
       - Fazioni:
-      - Missioni:
+
+      - Missioni:'
   profondita_lore:
     title: Profondita Fantasy
     callout: scena
@@ -57,15 +67,21 @@ sections:
       - simboli_visibili
       - bisogno_quotidiano
       - costo_sociale
-    fallback: |-
-      ### Profondita fantasy
+    fallback: '### Profondita fantasy
+
       - Origine:
+
       - Causa:
+
       - Tensione:
+
       - Dipendenze:
+
       - Simboli visibili:
+
       - Bisogno quotidiano:
-      - Costo sociale:
+
+      - Costo sociale:'
   giocabilita:
     title: Giocabilita
     callout: missione
@@ -79,17 +95,25 @@ sections:
       - scene_pronte
       - ostacoli
       - prossima_mossa
-    fallback: |-
-      ### Giocabilita
+    fallback: '### Giocabilita
+
       - Gancio:
+
       - Uso al tavolo:
+
       - Scelta:
+
       - Posta:
+
       - Rischi:
+
       - Ricompense:
+
       - Scene pronte:
+
       - Ostacoli:
-      - Prossima mossa:
+
+      - Prossima mossa:'
   continuita:
     title: Continuita
     callout: timer
@@ -100,14 +124,19 @@ sections:
       - propaga_a
       - aggiornamenti_richiesti
       - propagazione_stato
-    fallback: |-
-      ### Continuita
+    fallback: '### Continuita
+
       - Evoluzione se ignorata:
+
       - Conseguenze:
+
       - Entita impattate:
+
       - Propaga a:
+
       - Aggiornamenti richiesti:
-      - Stato propagazione:
+
+      - Stato propagazione:'
   pubblicazione:
     title: Pubblicazione
     callout: lettura
@@ -118,14 +147,19 @@ sections:
       - canonico
       - stato_canonico
       - segreto
-    fallback: |-
-      ### Pubblicazione
+    fallback: '### Pubblicazione
+
       - Player-safe:
+
       - Versione player-safe:
+
       - Pubblico:
+
       - Canonico:
+
       - Stato canonico:
-      - Note DM:
+
+      - Note DM:'
   propagazione:
     title: Propagazione
     callout: timer
@@ -133,94 +167,81 @@ sections:
       - entita_impattate
       - propaga_a
       - pressione
-    fallback: |-
-      ### Propagazione
+    fallback: '### Propagazione
+
       - Entita impattate:
+
       - Propaga a:
-      - Pressione:
+
+      - Pressione:'
   player_safe:
     title: Cosa Sa Un Abitante
     callout: lettura
     fields:
       - abitante_sa
       - player_safe
-    fallback: |-
-      ### Versione pubblica
-      - Cosa si puo dire:
+    fallback: '### Versione pubblica
+
+      - Cosa si puo dire:'
   controllo:
     title: Controllo
     dataview_block: feedback_creazione
-    fallback: |-
-      ### Controllo
-      - Verificare mondo, uso al tavolo, player-safe e connessioni.
+    fallback: '### Controllo
+
+      - Verificare mondo, uso al tavolo, player-safe e connessioni.'
   obiettivo:
     title: Obiettivo
     callout: scena
     fields:
       - obiettivo
-    fallback: |-
-      ### Obiettivo
-      - Obiettivo:
+    fallback: '### Obiettivo
+
+      - Obiettivo:'
   prima_scena:
     title: Prima Scena
     callout: scena
     fields:
       - apertura
-    fallback: |-
-      ### Prima scena
-      - Apertura:
+    fallback: '### Prima scena
+
+      - Apertura:'
   scelta:
     title: Scelta Concreta
     callout: missione
     fields:
       - scelta
-    fallback: |-
-      ### Scelta concreta
-      - Scelta:
+    fallback: '### Scelta concreta
+
+      - Scelta:'
   pressione:
     title: Pressione
     callout: timer
     fields:
       - pressioni
       - pressione
-    fallback: |-
-      ### Pressione
-      - Pressioni:
+    fallback: '### Pressione
+
+      - Pressioni:'
   materiali:
     title: Materiali
     callout: lettura
     fields:
       - materiale_pronto
       - dispense
-      - mappe
-      - audio
-      - immagini
-      - video
-    fallback: |-
-      ### Materiali
-      - Materiali pronti:
+    fallback: '### Materiali
+
+      - Materiali pronti:'
   incontri:
     title: Incontri
     callout: conflitto
     fields:
       - incontri
       - creature
-    fallback: |-
-      ### Incontri
+    fallback: '### Incontri
+
       | Incontro | Creature | Note |
-      | --- | --- | --- |
-  media:
-    title: Media
-    callout: lettura
-    fields:
-      - audio
-      - immagini
-      - video
-    fallback: |-
-      ### Media
-      - Audio:
-      - Immagini:
-      - Video:
+
+      | --- | --- | --- |'
   post_sessione:
     title: Post Sessione
     callout: timer
@@ -228,50 +249,13 @@ sections:
       - conseguenze
       - recap_pubblico
       - recap_dm
-    fallback: |-
-      ### Post sessione
+    fallback: '### Post sessione
+
       - Conseguenze:
+
       - Recap pubblico:
-      - Recap DM:
-  cosa_mostra:
-    title: Cosa Mostra
-    callout: scena
-    fields:
-      - cosa_mostra
-      - coordinates
-    fallback: |-
-      ### Cosa mostra
-      - Descrizione:
-      - Coordinate:
-  layer_dm:
-    title: Layer DM
-    callout: segreto
-    fields:
-      - layer_dm
-      - cosa_nascondere
-    fallback: |-
-      ### Layer DM
-      - Segreti:
-  layer_pubblico:
-    title: Layer Pubblico
-    callout: lettura
-    fields:
-      - layer_pubblico
-      - player_safe
-    fallback: |-
-      ### Layer pubblico
-      - Mostrabile:
-  pin:
-    title: Pin
-    callout: regia
-    fields:
-      - coordinates
-      - luoghi
-      - connessioni
-    fallback: |-
-      ### Pin
-      | Pin | Coordinate | Nota |
-      | --- | --- | --- |
+
+      - Recap DM:'
   note_collegate:
     title: Note Collegate
     callout: regia
@@ -280,58 +264,65 @@ sections:
       - fazioni
       - missioni
       - connessioni
-    fallback: |-
-      ### Note collegate
+    fallback: '### Note collegate
+
       - Luoghi:
+
       - Fazioni:
-      - Missioni:
+
+      - Missioni:'
   task_operativi:
     title: Prossime Azioni
     tasks_block: prossime_azioni
-    fallback: |-
-      ### Prossime azioni
-      - [ ] Da definire #task
+    fallback: '### Prossime azioni
+
+      - [ ] Da definire #task'
   statblock:
     title: Statblock
     plugin_block: fantasy_statblocks
-    fallback: |-
-      ### Statistiche
+    fallback: '### Statistiche
+
       | Campo | Valore |
+
       | --- | --- |
+
       | CA |  |
+
       | PF |  |
-      | Azioni |  |
+
+      | Azioni |  |'
   encounter:
     title: Incontro
     plugin_block: initiative_tracker
-    fallback: |-
-      ### Incontro
+    fallback: '### Incontro
+
       | Nome | Iniziativa | CA | PF | Condizioni |
-      | --- | --- | --- | --- | --- |
+
+      | --- | --- | --- | --- | --- |'
   terreno:
     title: Terreno
     callout: scena
     fields:
       - terreno
-    fallback: |-
-      ### Terreno
-      - Terreno:
+    fallback: '### Terreno
+
+      - Terreno:'
   complicazioni:
     title: Complicazioni
     callout: conflitto
     fields:
       - complicazioni
-    fallback: |-
-      ### Complicazioni
-      - `dice: [[Risorse/Tabelle/Tabelle#^complicazioni]]`
+    fallback: '### Complicazioni
+
+      - `dice: 1d6`'
   ricompense:
     title: Ricompense
     callout: lettura
     fields:
       - ricompense
-    fallback: |-
-      ### Ricompense
-      - Ricompense:
+    fallback: '### Ricompense
+
+      - Ricompense:'
   dnd55_mondo:
     title: Collegamento Al Mondo
     callout: regia
@@ -343,14 +334,19 @@ sections:
       - sessioni
       - entita_impattate
       - propaga_a
-    fallback: |-
-      ### Collegamento al mondo
+    fallback: '### Collegamento al mondo
+
       - Luogo o habitat:
+
       - Fazioni:
+
       - Missioni:
+
       - Sessioni:
+
       - Entita impattate:
-      - Propaga a:
+
+      - Propaga a:'
   dnd55_tavolo:
     title: Pronto Al Tavolo
     callout: conflitto
@@ -360,18 +356,22 @@ sections:
       - player_safe
       - prossima_mossa
       - encounter_creatures
-    fallback: |-
-      ### Pronto al tavolo
+    fallback: '### Pronto al tavolo
+
       - Gancio:
+
       - Uso:
+
       - Mostrabile:
+
       - Se ignorato:
-      - Initiative Tracker:
+
+      - Initiative Tracker:'
   fallback_markdown:
     title: Fallback Markdown
-    fallback: |-
-      ### Fallback
-      Questa sezione deve restare usabile anche senza plugin.
+    fallback: '### Fallback
+
+      Questa sezione deve restare usabile anche senza plugin.'
 contracts:
   body_generated_by: jinja
   no_templater_inside_sections: true

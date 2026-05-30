@@ -1,6 +1,9 @@
 id: fields_core
 purpose: Campi canonici condivisi da template, fileClass, Bases, Dataview e controlli.
 version: 0.2.0
+organization:
+  rule: fields_core registra campi atomici condivisi; classi, tipi e relazioni stanno in canonical/ontology.
+  level_0_scope: solo definizioni di campo riusabili da frontmatter, plugin, Bases, Dataview e controlli.
 fields:
   identity:
     - name: id
@@ -24,8 +27,11 @@ fields:
       source: taxonomy
       use: famiglia principale della nota
       values:
+        - azione
         - avventura
+        - background
         - campagna
+        - classe
         - conflitto
         - cosmologia
         - creatura
@@ -34,6 +40,7 @@ fields:
         - evento storico
         - fazione
         - incontro
+        - incantesimo
         - lingua
         - lore capture
         - luogo
@@ -41,19 +48,60 @@ fields:
         - mondo
         - nota rapida
         - oggetto
+        - pericolo ambientale
         - personaggio
+        - regola
         - religione
         - relazione
         - risorsa
         - sessione
         - societa
+        - specie
         - srd
+        - talento
+        - tesoro
         - tracciato
+        - trappola
     - name: tipo
       type: select
       required: true
       source: taxonomy
       use: sottotipo giocabile
+      values:
+        - mondo
+        - legge cosmica
+        - piano o aldila
+        - divinita
+        - pantheon
+        - regione
+        - insediamento
+        - sito di interesse
+        - civilta
+        - habitat
+        - pg
+        - png
+        - classe
+        - specie
+        - background
+        - talento
+        - creatura
+        - incontro
+        - trappola
+        - pericolo ambientale
+        - arma
+        - armatura
+        - scudo
+        - strumento
+        - veleno
+        - oggetto meraviglioso
+        - oggetto magico
+        - incantesimo
+        - regola
+        - condizione
+        - azione
+        - bastione
+        - tesoro
+        - veicolo o cavalcatura
     - name: stato
       type: select
       required: true
@@ -90,6 +138,11 @@ fields:
       required: false
       source: metadata_menu
       use: fileClass Metadata Menu da applicare alla famiglia nota
+    - name: tono
+      type: text
+      required: false
+      source: meta_bind
+      use: tono dominante di mondo, campagna o nota fondativa
   world_links:
     - name: mondo
       type: wikilink
@@ -101,6 +154,31 @@ fields:
       required: false
       source: meta_bind
       use: ancore geografiche
+    - name: luoghi_collegati
+      type: wikilink_list
+      required: false
+      source: meta_bind
+      use: luoghi semanticamente collegati senza gerarchia diretta
+    - name: cosmologie
+      type: wikilink_list
+      required: false
+      source: meta_bind
+      use: cosmologie o verita metafisiche collegate
+    - name: culture_fondative
+      type: wikilink_list
+      required: false
+      source: meta_bind
+      use: culture che fondano o definiscono un mondo
+    - name: culture_collegate
+      type: wikilink_list
+      required: false
+      source: meta_bind
+      use: culture collegate da una relazione semantica specifica
+    - name: religioni_collegate
+      type: wikilink_list
+      required: false
+      source: meta_bind
+      use: religioni collegate da una relazione semantica specifica
     - name: fazioni
       type: wikilink_list
       required: false
@@ -177,7 +255,7 @@ fields:
       required: false
       source: obsidian
       use: tag italiani opzionali e controllati
-  table_use:
+  presentation:
     - name: identita
       type: text
       required: false
@@ -218,7 +296,7 @@ fields:
       required: false
       source: meta_bind
       use: impatto concreto durante la sessione
-  entity_depth:
+  lore_depth:
     - name: depth_level
       type: select
       required: false
@@ -303,7 +381,7 @@ fields:
       required: false
       source: meta_bind
       use: crisi economica, sociale o materiale che genera pressione
-  pressure:
+  pressure_continuity:
     - name: pressione
       type: number
       required: false
@@ -359,6 +437,11 @@ fields:
       required: false
       source: meta_bind
       use: scadenza diegetica della pressione
+    - name: rischi
+      type: list
+      required: false
+      source: meta_bind
+      use: rischi concreti per PG, mondo o scena
     - name: aggiornamenti_richiesti
       type: list
       required: false
@@ -373,7 +456,7 @@ fields:
         - da propagare
         - propagata
         - ignorata
-  public_safety:
+  canon_publication:
     - name: pubblico
       type: boolean
       required: false
@@ -395,6 +478,46 @@ fields:
         - leggenda
         - falso
         - retcon
+    - name: grado_certezza
+      type: select
+      required: false
+      source: metadata_menu
+      use: grado di stabilita o verifica dell'informazione
+      values:
+        - bozza
+        - verificata
+        - contraddetta
+        - segreta
+    - name: memoria_pubblica
+      type: list
+      required: false
+      source: meta_bind
+      use: cosa culture, istituzioni o popoli ricordano pubblicamente
+    - name: versioni_alternative
+      type: list
+      required: false
+      source: meta_bind
+      use: varianti non ancora risolte di una verita di lore
+    - name: versioni_contrapposte
+      type: list
+      required: false
+      source: meta_bind
+      use: versioni incompatibili sostenute da fonti o gruppi diversi
+    - name: contraddice
+      type: wikilink_list
+      required: false
+      source: meta_bind
+      use: note o verita che questa scheda mette in tensione
+    - name: retcon_di
+      type: wikilink_list
+      required: false
+      source: meta_bind
+      use: materiale sostituito o reinterpretato da questa scheda
+    - name: retcon_motivo
+      type: text
+      required: false
+      source: meta_bind
+      use: motivo esplicito della correzione canonica
   session:
     - name: data
       type: date
@@ -461,26 +584,6 @@ fields:
       required: false
       source: meta_bind
       use: dispense collegate alla sessione
-    - name: mappe
-      type: wikilink_list
-      required: false
-      source: meta_bind
-      use: mappe collegate alla sessione
-    - name: audio
-      type: wikilink_list
-      required: false
-      source: meta_bind
-      use: audio collegati alla sessione
-    - name: immagini
-      type: wikilink_list
-      required: false
-      source: meta_bind
-      use: immagini collegate alla sessione
-    - name: video
-      type: wikilink_list
-      required: false
-      source: meta_bind
-      use: video collegati alla sessione
     - name: scena_corrente
       type: text
       required: false
@@ -541,104 +644,6 @@ fields:
       required: false
       source: meta_bind
       use: mosse del mondo dopo la sessione
-  calendarium:
-    - name: calendario
-      type: text
-      required: false
-      source: calendarium
-      use: calendario preferito su mondo o campagna
-    - name: fc-calendar
-      type: text
-      required: false
-      source: calendarium
-      use: calendario diegetico configurato
-    - name: fc-date
-      type: text
-      required: false
-      source: calendarium
-      use: data evento nel calendario diegetico
-    - name: fc-category
-      type: select
-      required: false
-      source: calendarium
-      use: categoria evento calendario
-      values:
-        - sessione
-        - scadenza
-        - festa
-        - pericolo
-        - conseguenza
-    - name: fc-display-name
-      type: text
-      required: false
-      source: calendarium
-      use: nome mostrato nel calendario
-    - name: fc-end
-      type: text
-      required: false
-      source: calendarium
-      use: fine evento nel calendario diegetico
-  maps:
-    - name: cosa_mostra
-      type: text
-      required: false
-      source: meta_bind
-      use: descrizione visibile della mappa
-    - name: cosa_mostrare
-      type: text
-      required: false
-      source: meta_bind
-      use: descrizione player-safe o porzione mostrabile della mappa
-    - name: versione_giocatori
-      type: wikilink
-      required: false
-      source: meta_bind
-      use: versione separata della mappa destinata ai giocatori
-    - name: layer_dm
-      type: list
-      required: false
-      source: meta_bind
-      use: elementi nascosti o solo DM
-    - name: layer_pubblico
-      type: list
-      required: false
-      source: meta_bind
-      use: elementi mostrabili ai giocatori
-    - name: cosa_nascondere
-      type: text
-      required: false
-      source: meta_bind
-      use: contenuto da non mostrare ai giocatori
-    - name: coordinates
-      type: coordinates
-      required: false
-      source: bases_maps
-      use: coordinate marker mappa
-    - name: icon
-      type: text
-      required: false
-      source: bases_maps
-      use: icona marker mappa
-    - name: color
-      type: text
-      required: false
-      source: bases_maps
-      use: colore marker mappa
-    - name: uso
-      type: select
-      required: false
-      source: metadata_menu
-      use: uso operativo della risorsa o mappa
-    - name: layer_mappa
-      type: text
-      required: false
-      source: bases_maps
-      use: layer o gruppo visuale della mappa
-    - name: tipo_mappa
-      type: text
-      required: false
-      source: metadata_menu
-      use: tipo tecnico o narrativo della mappa
   encounter:
     - name: creature
       type: wikilink_list
@@ -695,38 +700,7 @@ fields:
       required: false
       source: initiative_tracker
       use: creature testuali passate a Initiative Tracker
-  media:
-    - name: tono
-      type: text
-      required: false
-      source: metadata_menu
-      use: tono della risorsa media
-    - name: campagna
-      type: wikilink
-      required: false
-      source: metadata_menu
-      use: campagna collegata alla risorsa
-    - name: scena
-      type: text
-      required: false
-      source: metadata_menu
-      use: scena suggerita per la risorsa
-    - name: timestamp
-      type: text
-      required: false
-      source: metadata_menu
-      use: punto temporale utile nel media
-    - name: file
-      type: text
-      required: false
-      source: metadata_menu
-      use: percorso file locale o allegato
-    - name: url
-      type: text
-      required: false
-      source: metadata_menu
-      use: URL esterno della risorsa
-  domain_specific:
+  worldbuilding_lore:
     - name: cultura
       type: wikilink
       required: false
@@ -762,6 +736,56 @@ fields:
       required: false
       source: metadata_menu
       use: funzione narrativa o scenica
+    - name: descrizione_lunga
+      type: text
+      required: false
+      source: meta_bind
+      use: corpo descrittivo esteso della nota lore
+    - name: immagine_fondativa
+      type: text
+      required: false
+      source: meta_bind
+      use: immagine, simbolo o frase visuale che fissa l'entita
+    - name: principi_realta
+      type: list
+      required: false
+      source: meta_bind
+      use: leggi profonde che definiscono cosa e possibile nel mondo
+    - name: leggi_del_mondo
+      type: list
+      required: false
+      source: meta_bind
+      use: regole fictionali globali non riducibili a meccanica
+    - name: leggi_metafisiche
+      type: list
+      required: false
+      source: meta_bind
+      use: leggi cosmologiche o arcane stabili
+    - name: soglie_accesso
+      type: list
+      required: false
+      source: meta_bind
+      use: condizioni, luoghi o riti che danno accesso a piani o stati cosmici
+    - name: morte_aldila
+      type: list
+      required: false
+      source: meta_bind
+      use: verita o dottrine su morte, anime e aldila
+    - name: effetti_su_morte
+      type: list
+      required: false
+      source: meta_bind
+      use: effetti su resurrezione, non morti, lutto o passaggio delle anime
+    - name: dottrine_religiose
+      type: list
+      required: false
+      source: meta_bind
+      use: letture religiose di una verita cosmologica o culturale
+    - name: fenomeni_visibili
+      type: list
+      required: false
+      source: meta_bind
+      use: manifestazioni osservabili nel mondo
     - name: segreti
       type: list
       required: false
@@ -772,6 +796,123 @@ fields:
       required: false
       source: metadata_menu
       use: verita privata del DM non mostrabile ai giocatori
+    - name: divinita
+      type: wikilink_list
+      required: false
+      source: bases
+      use: divinita collegate
+    - name: luoghi_sacri
+      type: wikilink_list
+      required: false
+      source: bases
+      use: luoghi sacri collegati
+    - name: templi
+      type: wikilink_list
+      required: false
+      source: bases
+      use: templi collegati
+    - name: famiglia_creativa
+      type: text
+      required: false
+      source: bases
+      use: raggruppamento creativo per worldbuilding
+  geography_lore:
+    - name: famiglia_luogo
+      type: select
+      required: false
+      source: metadata_menu
+      use: famiglia operativa del luogo
+    - name: funzione_luogo
+      type: select
+      required: false
+      source: metadata_menu
+      use: funzione descrittiva di un sito di interesse senza trasformarla in tipo canonico
+    - name: tipologia
+      type: text
+      required: false
+      source: bases
+      use: tipologia descrittiva usata in viste esistenti
+    - name: bioma
+      type: text
+      required: false
+      source: metadata_menu
+      use: bioma o ambiente dominante
+    - name: luogo_padre
+      type: wikilink
+      required: false
+      source: metadata_menu
+      use: luogo contenitore o gerarchico
+    - name: governante
+      type: wikilink
+      required: false
+      source: metadata_menu
+      use: autorita o governo locale
+    - name: autorita
+      type: wikilink_list
+      required: false
+      source: meta_bind
+      use: autorita riconosciute, contese o invisibili
+    - name: popolazione
+      type: text
+      required: false
+      source: metadata_menu
+      use: popolazione stimata o descrizione demografica
+    - name: abitanti
+      type: list
+      required: false
+      source: meta_bind
+      use: abitanti, presenze o gruppi ricorrenti
+    - name: cultura_dominante
+      type: text
+      required: false
+      source: meta_bind
+      use: cultura o identita dominante del territorio
+    - name: scala_geografica
+      type: text
+      required: false
+      source: meta_bind
+      use: scala del luogo, da punto locale a sistema territoriale
+    - name: confini
+      type: list
+      required: false
+      source: meta_bind
+      use: confini naturali, politici, sociali o magici
+    - name: risorse_strategiche
+      type: list
+      required: false
+      source: meta_bind
+      use: risorse che rendono il territorio importante
+    - name: stabilita
+      type: number
+      required: false
+      source: metadata_menu
+      use: stabilita politica o sociale del luogo
+    - name: impressione
+      type: text
+      required: false
+      source: metadata_menu
+      use: prima impressione sensoriale o geografica
+    - name: memoria_del_territorio
+      type: list
+      required: false
+      source: meta_bind
+      use: memoria storica, mitica o traumatica impressa nel territorio
+    - name: tracce_passato
+      type: list
+      required: false
+      source: meta_bind
+      use: rovine, toponimi, cicatrici o rituali che mostrano il passato
+    - name: funzione_storica
+      type: text
+      required: false
+      source: meta_bind
+      use: funzione del luogo nel passato
+    - name: funzione_attuale
+      type: text
+      required: false
+      source: meta_bind
+      use: funzione del luogo nel presente
+  faction_social:
     - name: leader
       type: wikilink
       required: false
@@ -787,61 +928,6 @@ fields:
       required: false
       source: metadata_menu
       use: rivali o oppositori collegati
-    - name: famiglia_luogo
-      type: select
-      required: false
-      source: metadata_menu
-      use: famiglia operativa del luogo
-    - name: luogo_padre
-      type: wikilink
-      required: false
-      source: metadata_menu
-      use: luogo contenitore o gerarchico
-    - name: governante
-      type: wikilink
-      required: false
-      source: metadata_menu
-      use: autorita o governo locale
-    - name: stabilita
-      type: number
-      required: false
-      source: metadata_menu
-      use: stabilita politica o sociale del luogo
-    - name: impressione
-      type: text
-      required: false
-      source: metadata_menu
-      use: prima impressione al tavolo
-    - name: tensione
-      type: text
-      required: false
-      source: metadata_menu
-      use: tensione o problema visibile
-    - name: fazioni_controllanti
-      type: wikilink_list
-      required: false
-      source: metadata_menu
-      use: fazioni che controllano risorsa, rotta o mercato
-    - name: rotte
-      type: wikilink_list
-      required: false
-      source: metadata_menu
-      use: rotte collegate
-    - name: mercati
-      type: wikilink_list
-      required: false
-      source: metadata_menu
-      use: mercati collegati
-    - name: pedaggi
-      type: list
-      required: false
-      source: metadata_menu
-      use: costi, tasse o vincoli di transito
-    - name: rischi
-      type: list
-      required: false
-      source: metadata_menu
-      use: rischi operativi o ambientali
     - name: committente
       type: wikilink
       required: false
@@ -897,76 +983,6 @@ fields:
       required: false
       source: metadata_menu
       use: eventi collegati
-    - name: mese
-      type: text
-      required: false
-      source: calendarium
-      use: mese diegetico
-    - name: stagione
-      type: text
-      required: false
-      source: calendarium
-      use: stagione diegetica
-    - name: festa
-      type: text
-      required: false
-      source: calendarium
-      use: festa o ricorrenza
-    - name: tabu_stagionali
-      type: list
-      required: false
-      source: calendarium
-      use: tabu o vincoli stagionali
-    - name: scadenze_rituali
-      type: list
-      required: false
-      source: calendarium
-      use: scadenze rituali o culturali
-    - name: conseguenze_data_passata
-      type: list
-      required: false
-      source: calendarium
-      use: conseguenze se la data passa
-    - name: pressioni_da_avanzare
-      type: wikilink_list
-      required: false
-      source: calendarium
-      use: pressioni o clock da avanzare alla data
-    - name: scarsita
-      type: number
-      required: false
-      source: metadata_menu
-      use: livello di scarsita della risorsa
-    - name: luoghi_dipendenti
-      type: wikilink_list
-      required: false
-      source: metadata_menu
-      use: luoghi dipendenti dalla risorsa
-    - name: stato_rotta
-      type: select
-      required: false
-      source: metadata_menu
-      use: stato specifico di apertura della rotta
-    - name: partenza
-      type: wikilink
-      required: false
-      source: metadata_menu
-      use: punto di partenza della rotta
-    - name: arrivo
-      type: wikilink
-      required: false
-      source: metadata_menu
-      use: punto di arrivo della rotta
-    - name: risorse_trasportate
-      type: wikilink_list
-      required: false
-      source: metadata_menu
-      use: risorse trasportate dalla rotta
-    - name: conseguenze_se_bloccata
-      type: list
-      required: false
-      source: metadata_menu
-      use: conseguenze se la rotta si interrompe
     - name: agenda
       type: list
       required: false
@@ -977,36 +993,192 @@ fields:
       required: false
       source: bases
       use: alleati collegati
-    - name: divinita
-      type: wikilink_list
-      required: false
-      source: bases
-      use: divinita collegate
-    - name: famiglia_creativa
-      type: text
-      required: false
-      source: bases
-      use: raggruppamento creativo per worldbuilding
-    - name: luoghi_sacri
-      type: wikilink_list
-      required: false
-      source: bases
-      use: luoghi sacri collegati
     - name: promessa_al_tavolo
       type: text
       required: false
       source: bases
       use: promessa pratica da portare in sessione
-    - name: templi
-      type: wikilink_list
-      required: false
-      source: bases
-      use: templi collegati
-    - name: tipologia
+  dnd_5_5e_core:
+    - name: fonte
       type: text
       required: false
-      source: bases
-      use: tipologia descrittiva usata in viste esistenti
+      source: srd
+      use: fonte o riferimento regolamentare primario
+    - name: classe
+      type: text
+      required: false
+      source: srd
+      use: classe del personaggio o classe collegata
+    - name: sottoclasse
+      type: text
+      required: false
+      source: srd
+      use: sottoclasse o archetipo
+    - name: specie
+      type: text
+      required: false
+      source: srd
+      use: specie giocabile o creatura collegata
+    - name: background
+      type: text
+      required: false
+      source: srd
+      use: background del personaggio
+    - name: talento
+      type: text
+      required: false
+      source: srd
+      use: talento 5.5e
+    - name: prerequisito
+      type: text
+      required: false
+      source: srd
+      use: prerequisito meccanico o narrativo
+    - name: beneficio
+      type: list
+      required: false
+      source: srd
+      use: benefici meccanici o fictionali
+    - name: privilegi
+      type: list
+      required: false
+      source: srd
+      use: privilegi di classe o opzione
+    - name: competenze
+      type: list
+      required: false
+      source: srd
+      use: competenze concesse o richieste
+    - name: equipaggiamento
+      type: list
+      required: false
+      source: srd
+      use: equipaggiamento concesso o richiesto
+    - name: strumenti
+      type: list
+      required: false
+      source: srd
+      use: strumenti, kit o competenze strumento
+    - name: incantesimi
+      type: list
+      required: false
+      source: srd
+      use: incantesimi collegati o conosciuti
+    - name: livello_incantesimo
+      type: text
+      required: false
+      source: srd
+      use: livello dell'incantesimo
+    - name: scuola
+      type: text
+      required: false
+      source: srd
+      use: scuola di magia
+    - name: tempo_lancio
+      type: text
+      required: false
+      source: srd
+      use: tempo di lancio
+    - name: gittata
+      type: text
+      required: false
+      source: srd
+      use: gittata dell'effetto
+    - name: componenti
+      type: list
+      required: false
+      source: srd
+      use: componenti dell'incantesimo
+    - name: durata
+      type: text
+      required: false
+      source: srd
+      use: durata dell'effetto
+    - name: effetti
+      type: list
+      required: false
+      source: srd
+      use: effetti meccanici o fictionali
+    - name: limiti
+      type: list
+      required: false
+      source: srd
+      use: limiti, eccezioni o vincoli
+    - name: regola
+      type: text
+      required: false
+      source: srd
+      use: regola sintetica
+    - name: rarita
+      type: text
+      required: false
+      source: srd
+      use: rarita di oggetti e tesori
+    - name: valore
+      type: text
+      required: false
+      source: srd
+      use: valore monetario o stima
+    - name: sintonia
+      type: boolean
+      required: false
+      source: srd
+      use: richiede sintonia
+    - name: cariche
+      type: text
+      required: false
+      source: srd
+      use: cariche o usi disponibili
+    - name: maledizione
+      type: boolean
+      required: false
+      source: srd
+      use: presenza di maledizione o drawback
+    - name: proprietario
+      type: wikilink
+      required: false
+      source: meta_bind
+      use: proprietario o custode dell'oggetto
+    - name: cd
+      type: number
+      required: false
+      source: srd
+      use: classe difficolta
+    - name: danno
+      type: text
+      required: false
+      source: srd
+      use: danno o dado danno
+    - name: contromisure
+      type: list
+      required: false
+      source: srd
+      use: modi per evitare, disinnescare o mitigare
+    - name: segnali
+      type: list
+      required: false
+      source: srd
+      use: segni anticipatori di pericolo
+    - name: veleno
+      type: text
+      required: false
+      source: srd
+      use: veleno come oggetto, rischio o tratto
+    - name: bastione
+      type: wikilink
+      required: false
+      source: meta_bind
+      use: bastione o struttura persistente di campagna
+    - name: veicolo
+      type: text
+      required: false
+      source: srd
+      use: veicolo terrestre, navale o speciale
+    - name: cavalcatura
+      type: text
+      required: false
+      source: srd
+      use: cavalcatura o creatura da trasporto
   pg_mechanics:
     - name: proficiency_bonus
       type: number

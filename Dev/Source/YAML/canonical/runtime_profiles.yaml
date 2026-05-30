@@ -21,10 +21,6 @@ runtime_contracts:
       - creature
       - incontri
       - dispense
-      - mappe
-      - audio
-      - immagini
-      - video
       - fazioni
       - oggetti
       - appunti_live
@@ -65,165 +61,77 @@ runtime_contracts:
       religioni:
         folder: Mondi/Religioni
         entity_category: religione
-      societa:
-        folder: Mondi/Societa
-        entity_category: societa
       relazioni:
         folder: Mondi/Relazioni
         entity_category: relazione
       sessioni:
         folder: Mondi/Sessioni
         entity_category: sessione
-      mappe:
-        folder: Risorse/Mappe
-      audio:
-        folder: Risorse/Audio
-      immagini:
-        folder: Risorse/Immagini
-      video:
-        folder: Risorse/Video
       culture:
         folder: Mondi/Culture
         entity_category: cultura
-      lingue:
-        folder: Mondi/Lingue
-        entity_category: lingua
-      storia:
-        folder: Mondi/Storia
-      timeline:
-        folder: Mondi/Timeline
-        entity_category: evento storico
-      conflitti:
-        folder: Mondi/Conflitti
-        entity_category: conflitto
       cosmologia:
         folder: Mondi/Cosmologia
         entity_category: cosmologia
       tracciati:
         folder: Mondi/Tracciati
         entity_category: tracciato
-      rotte:
-        folder: Mondi/Rotte
-      risorse_mondo:
-        folder: Mondi/Risorse
-        entity_category: risorsa
-      mercati:
-        folder: Mondi/Mercati
       compendium:
         folder: Mondi/Compendium
-      calendario_diegetico:
-        folder: Mondi/Calendario Diegetico
 profiles:
-  fazione:
-    name_prompt: Nome della fazione
-    completion_prompt: Vuoi compilare rete, luoghi e relazioni ora? Scegli No per una fazione rapida.
-    type_prompt: Tipo di fazione
-    world_prompt: Mondo della fazione
-    connection_prompt: Connessioni vive della fazione
-    type_route_key: tipoFazione
-    type_options:
-    - label: Gilda
-      id: gilda
-    - label: Confraternita
-      id: confraternita
-    - label: Casata
-      id: casata
-    - label: Ordine militare
-      id: ordine militare
-    - label: Compagnia mercantile
-      id: compagnia mercantile
-    - label: Banda criminale
-      id: banda criminale
-    - label: Movimento ribelle
-      id: movimento ribelle
-    - label: Governo
-      id: governo
-    - label: Culto politico
-      id: culto politico
-    prompts:
-      obiettivo: Obiettivo pubblico
-      origine: Origine, fondazione o trauma che spiega la fazione
-      tensione: Tensione interna o conflitto politico attivo
-      dipendenze: Dipendenze materiali, sociali o magiche della fazione
-      simboli_visibili: Simboli, uniformi, pratiche o segni riconoscibili
-      costo_sociale: Chi paga il prezzo dell'agenda della fazione
-      evoluzione_se_ignorata: Come evolve se i PG non intervengono
-      gancio: 'Gancio giocabile: perche questa fazione entra in scena?'
-      player_safe: Versione player-safe mostrabile
-      obiettivo_nascosto: Obiettivo nascosto
-      pressione: Pressione da 0 a 10
-      prossima_mossa: Prossima mossa se nessuno interviene
-      segreto: Segreto o verità scomoda
-      leader: Leader della fazione
-      luoghi: Luoghi controllati o importanti
-      personaggi: Membri, alleati o nemici come PNG
-      missioni: Missioni collegate alla fazione
-      alleati: Fazioni alleate
-      rivali: Fazioni rivali o nemiche
-      scadenza_mondo: Scadenza nel mondo
-      domanda_aperta: Domanda aperta sulla fazione
   luogo:
     name_prompt: Nome del luogo
-    completion_prompt: Vuoi compilare collegamenti e lore ora? Scegli No per un luogo rapido.
+    completion_prompt: Vuoi collegare luogo padre, fazioni, PNG e missioni ora? Scegli No per una scheda rapida.
     type_prompt: Tipo di luogo
     biome_prompt: Bioma
     world_prompt: Mondo del luogo
-    connection_prompt: Connessioni vive del luogo
+    connection_prompt: Connessioni canoniche del luogo
     type_route_key: subtype
     type_options:
-    - label: Città
-      id: città
-    - label: Villaggio
-      id: villaggio
-    - label: Capitale
-      id: capitale
-    - label: Porto
-      id: porto
-    - label: Fortezza
-      id: fortezza
-    - label: Rovina
-      id: rovina
-    - label: Dungeon
-      id: dungeon
-    - label: Regione
-      id: regione
-    - label: Regno
-      id: regno
-    - label: Tempio
-      id: tempio
-    - label: Foresta
-      id: foresta
-    - label: Montagna
-      id: montagna
-    - label: Luogo fondativo
-      id: luogo fondativo
+      - label: Regione
+        id: regione
+      - label: Insediamento
+        id: insediamento
+      - label: Sito di interesse
+        id: sito di interesse
     biome_options:
-    - label: Foresta
-      id: foresta
-    - label: Deserto
-      id: deserto
-    - label: Montagna
-      id: montagna
-    - label: Costa
-      id: costa
-    - label: Palude
-      id: palude
-    - label: Tundra
-      id: tundra
-    - label: Sottosuolo
-      id: sottosuolo
+      - label: Foresta
+        id: foresta
+      - label: Deserto
+        id: deserto
+      - label: Montagna
+        id: montagna
+      - label: Costa
+        id: costa
+      - label: Palude
+        id: palude
+      - label: Tundra
+        id: tundra
+      - label: Sottosuolo
+        id: sottosuolo
     prompts:
+      funzione_luogo: Funzione del sito di interesse
       pericolo: Pericolo da 0 a 10
       origine: Origine storica, fisica o mitica del luogo
-      gancio: 'Gancio giocabile: perche questo luogo importa adesso?'
-      impressione: Prima impressione
+      scala_geografica: Scala geografica o funzione territoriale
+      impressione: Prima immagine sensoriale e geografica
+      descrizione_lunga: Descrizione estesa del luogo
+      immagine_fondativa: Immagine fondativa o simbolo visuale del luogo
+      memoria_del_territorio: Memoria storica, mitica o traumatica impressa nel territorio
+      tracce_passato: Rovine, toponimi, cicatrici, confini o rituali che mostrano il passato
+      funzione_storica: Funzione del luogo nel passato
+      funzione_attuale: Funzione del luogo nel presente
+      abitanti: Abitanti, popoli o presenze ricorrenti
+      cultura_dominante: Cultura dominante o identita locale
+      autorita: Autorita riconosciute, contese o invisibili
       tensione: Tensione o conflitto locale
       dipendenze: Dipendenze materiali, politiche o naturali del luogo
       simboli_visibili: Segni visibili, suoni, rituali o architetture distintive
       bisogno_quotidiano: Bisogno quotidiano che rende vivo il luogo
       costo_sociale: Chi soffre se il luogo cambia o resta com'e
       evoluzione_se_ignorata: Come evolve se nessuno interviene
-      uso_al_tavolo: 'Uso al tavolo: scelta, rischio o scena che produce'
+      gancio: Perche questo luogo importa nel presente della campagna
+      uso_al_tavolo: Scelta, rischio o scena che puo emergere dal luogo
       player_safe: Versione player-safe mostrabile
       luogo_padre: Luogo o regione superiore
       governante: Governante o referente
@@ -232,7 +140,9 @@ profiles:
       missioni: Missioni collegate al luogo
       funzione_narrativa: Funzione narrativa del luogo
       verita_nascosta: Verità nascosta o segreto
-      domanda_aperta: Domanda aperta da esplorare al tavolo
+      fonti: Fonti, note madri o appunti da cui deriva il luogo
+      versioni_contrapposte: Versioni contraddittorie su origine, proprieta o memoria del luogo
+      domanda_aperta: Domanda aperta sul luogo
   missione:
     name_prompt: Nome della missione
     completion_prompt: Vuoi compilare collegamenti e dettagli ora? Scegli No per una missione rapida.
@@ -241,24 +151,24 @@ profiles:
     connection_prompt: Connessioni vive della missione
     pressure_default: '3'
     type_options:
-    - label: Incarico
-      id: incarico
-    - label: Ricerca
-      id: ricerca
-    - label: Mistero
-      id: mistero
-    - label: Salvataggio
-      id: salvataggio
-    - label: Caccia
-      id: caccia
-    - label: Viaggio
-      id: viaggio
-    - label: Fronte
-      id: fronte
-    - label: Trama personale
-      id: trama personale
-    - label: Missione di fazione
-      id: missione di fazione
+      - label: Incarico
+        id: incarico
+      - label: Ricerca
+        id: ricerca
+      - label: Mistero
+        id: mistero
+      - label: Salvataggio
+        id: salvataggio
+      - label: Caccia
+        id: caccia
+      - label: Viaggio
+        id: viaggio
+      - label: Fronte
+        id: fronte
+      - label: Trama personale
+        id: trama personale
+      - label: Missione di fazione
+        id: missione di fazione
     prompts:
       pressione: Pressione da 0 a 10
       origine: Origine della missione
@@ -279,7 +189,6 @@ profiles:
       tracciati: Clock o tracciati collegati
       ricompense: Ricompense
       scadenza_mondo: Scadenza nel mondo
-      calendario: Calendario Calendarium
       ostacolo: Ostacolo principale
       rischi: Rischio principale per i PG o per il mondo
       entita_impattate: Entita direttamente impattate dalla missione
@@ -297,20 +206,20 @@ profiles:
     progress_max_default: '6'
     progress_value_default: '0'
     type_options:
-    - label: Clock
-      id: clock
-    - label: Progress track
-      id: progress track
-    - label: Fronte
-      id: fronte
-    - label: Rituale
-      id: rituale
-    - label: Minaccia
-      id: minaccia
-    - label: Viaggio
-      id: viaggio
-    - label: Progetto
-      id: progetto
+      - label: Clock
+        id: clock
+      - label: Progress track
+        id: progress track
+      - label: Fronte
+        id: fronte
+      - label: Rituale
+        id: rituale
+      - label: Minaccia
+        id: minaccia
+      - label: Viaggio
+        id: viaggio
+      - label: Progetto
+        id: progetto
     prompts:
       progress_max: Segmenti totali
       progress_value: Segmenti gia segnati
@@ -339,24 +248,24 @@ profiles:
     world_prompt: Mondo della relazione
     connection_prompt: Connessioni vive della relazione
     type_options:
-    - label: Alleanza
-      id: alleanza
-    - label: Rivalità
-      id: rivalità
-    - label: Guerra fredda
-      id: guerra fredda
-    - label: Vassallaggio
-      id: vassallaggio
-    - label: Trattato
-      id: trattato
-    - label: Debito
-      id: debito
-    - label: Faida
-      id: faida
-    - label: Patto religioso
-      id: patto religioso
-    - label: Tradimento
-      id: tradimento
+      - label: Alleanza
+        id: alleanza
+      - label: Rivalità
+        id: rivalità
+      - label: Guerra fredda
+        id: guerra fredda
+      - label: Vassallaggio
+        id: vassallaggio
+      - label: Trattato
+        id: trattato
+      - label: Debito
+        id: debito
+      - label: Faida
+        id: faida
+      - label: Patto religioso
+        id: patto religioso
+      - label: Tradimento
+        id: tradimento
     prompts:
       soggetti: Soggetti coinvolti
       origine: Origine della relazione
@@ -381,20 +290,20 @@ profiles:
     ability_scores_default: 10 10 10 10 10 10
     status_prompt: Stato del PNG
     status_options:
-    - label: Bozza
-      id: bozza
-    - label: Pronto
-      id: pronto
-    - label: In gioco
-      id: in gioco
-    - label: Ostile
-      id: ostile
-    - label: Scomparso
-      id: scomparso
-    - label: Morto
-      id: morto
-    - label: Archiviata
-      id: archiviata
+      - label: Bozza
+        id: bozza
+      - label: Pronto
+        id: pronto
+      - label: In gioco
+        id: in gioco
+      - label: Ostile
+        id: ostile
+      - label: Scomparso
+        id: scomparso
+      - label: Morto
+        id: morto
+      - label: Archiviata
+        id: archiviata
     prompts:
       ruolo: Ruolo o professione
       atteggiamento: Atteggiamento iniziale
@@ -425,20 +334,20 @@ profiles:
     ability_scores_default: 10 10 10 10 10 10
     status_prompt: Stato del personaggio
     status_options:
-    - label: Bozza
-      id: bozza
-    - label: Pronto
-      id: pronto
-    - label: In gioco
-      id: in gioco
-    - label: Ostile
-      id: ostile
-    - label: Scomparso
-      id: scomparso
-    - label: Morto
-      id: morto
-    - label: Archiviata
-      id: archiviata
+      - label: Bozza
+        id: bozza
+      - label: Pronto
+        id: pronto
+      - label: In gioco
+        id: in gioco
+      - label: Ostile
+        id: ostile
+      - label: Scomparso
+        id: scomparso
+      - label: Morto
+        id: morto
+      - label: Archiviata
+        id: archiviata
     prompts:
       ruolo: Ruolo o professione
       allineamento: Allineamento
@@ -464,22 +373,22 @@ profiles:
     type_prompt: Tipo di incontro
     type_route_key: tipoIncontro
     type_options:
-    - label: Combattimento
-      id: combattimento
-    - label: Negoziazione
-      id: negoziazione
-    - label: Esplorazione
-      id: esplorazione
-    - label: Ostacolo
-      id: ostacolo
-    - label: Inseguimento
-      id: inseguimento
-    - label: Trappola
-      id: trappola
-    - label: Pericolo ambientale
-      id: pericolo ambientale
-    - label: Scena sociale
-      id: scena sociale
+      - label: Combattimento
+        id: combattimento
+      - label: Negoziazione
+        id: negoziazione
+      - label: Esplorazione
+        id: esplorazione
+      - label: Ostacolo
+        id: ostacolo
+      - label: Inseguimento
+        id: inseguimento
+      - label: Trappola
+        id: trappola
+      - label: Pericolo ambientale
+        id: pericolo ambientale
+      - label: Scena sociale
+        id: scena sociale
     prompts:
       luogo: Luogo dell'incontro
       pericolo: Pericolo da 0 a 10
@@ -487,8 +396,6 @@ profiles:
       fazioni: Fazioni collegate
       creature: Creature coinvolte
       personaggi: Personaggi coinvolti
-      mappe: Mappe dell'incontro
-      audio: Audio dell'incontro
       ricompense: Ricompense
       gancio: Perche questo incontro entra in scena
       uso_al_tavolo: Uso al tavolo
@@ -504,31 +411,33 @@ profiles:
     world_prompt: Mondo dell'oggetto
     connection_prompt: Connessioni vive dell'oggetto
     type_options:
-    - label: Oggetto comune
-      id: oggetto comune
-    - label: Reliquia
-      id: reliquia
-    - label: Indizio fisico
-      id: indizio fisico
-    - label: Chiave
-      id: chiave
-    - label: Tesoro
-      id: tesoro
-    - label: Artefatto
-      id: artefatto
+      - label: Arma
+        id: arma
+      - label: Armatura
+        id: armatura
+      - label: Scudo
+        id: scudo
+      - label: Strumento
+        id: strumento
+      - label: Veleno
+        id: veleno
+      - label: Oggetto meraviglioso
+        id: oggetto meraviglioso
+      - label: Oggetto magico
+        id: oggetto magico
     rarity_options:
-    - label: Comune
-      id: comune
-    - label: Non comune
-      id: non comune
-    - label: Raro
-      id: raro
-    - label: Molto raro
-      id: molto raro
-    - label: Leggendario
-      id: leggendario
-    - label: Artefatto
-      id: artefatto
+      - label: Comune
+        id: comune
+      - label: Non comune
+        id: non comune
+      - label: Raro
+        id: raro
+      - label: Molto raro
+        id: molto raro
+      - label: Leggendario
+        id: leggendario
+      - label: Artefatto
+        id: artefatto
     prompts:
       proprietario: Proprietario
       luogo: Luogo dell'oggetto
@@ -541,51 +450,9 @@ profiles:
       prossima_mossa: Cosa cambia se viene usato, perso o ignorato
       entita_impattate: Entita che cambiano quando l'oggetto viene usato o perso
       propaga_a: Note a cui propagare effetti dell'oggetto
-  mercato:
-    name_prompt: Nome del mercato o nodo commerciale
-    world_prompt: Mondo del nodo
-    connection_prompt: Connessioni vive del mercato
-    prompts:
-      luogo: Luogo principale
-      fazioni: Fazioni che lo controllano
-      risorse: Risorse trattate
-      rischio: Rischio o tensione commerciale
-      gancio: Gancio giocabile del nodo
-      uso_al_tavolo: Uso al tavolo
-      player_safe: Versione player-safe
-      prossima_mossa: Prossima mossa
-  rotta:
-    name_prompt: Nome della rotta
-    world_prompt: Mondo della rotta
-    connection_prompt: Connessioni vive della rotta
-    status_prompt: Stato della rotta
-    status_options:
-    - label: Aperta
-      id: aperta
-    - label: Chiusa
-      id: chiusa
-    - label: Contesa
-      id: contesa
-    - label: Maledetta
-      id: maledetta
-    - label: Interrotta
-      id: interrotta
-    prompts:
-      partenza: Luogo di partenza
-      arrivo: Luogo di arrivo
-      regioni: Regioni attraversate
-      fazioni: Fazioni controllanti
-      risorse: Risorse trasportate
-      rischio: Rischio principale
-      pedaggio: Pedaggio o costo di passaggio
-      conseguenza: Conseguenza se bloccata
-      gancio: Gancio giocabile della rotta
-      uso_al_tavolo: Uso al tavolo
-      player_safe: Versione player-safe
-      prossima_mossa: Prossima mossa della rotta
   cultura:
     name_prompt: Nome della cultura o popolo
-    completion_prompt: Vuoi compilare domande di worldbuilding profondo ora? Scegli No per una cultura rapida.
+    completion_prompt: Vuoi collegare luoghi, fazioni e religioni ora? Scegli No per una scheda rapida.
     world_prompt: Mondo della cultura
     connection_prompt: Connessioni vive della cultura
     prompts:
@@ -608,30 +475,37 @@ profiles:
       proibito: Cosa considera proibito o mostruoso
       vita_quotidiana: Dettaglio di vita quotidiana
       rapporto_stranieri: Rapporto con stranieri o vicini
-  adventure:
-    name_prompt: Nome
-    prompts: {}
-  one_shot:
-    name_prompt: Nome
-    prompts: {}
-  arco_da_conflitto:
-    name_prompt: Nome
-    prompts: {}
-  campagna:
-    name_prompt: Nome
-    prompts: {}
-  campagna_da_regione:
-    name_prompt: Nome
-    prompts: {}
-  compendium_mondo:
-    name_prompt: Nome
-    prompts: {}
-  conflitto:
-    name_prompt: Nome
-    prompts: {}
   cosmologia:
-    name_prompt: Nome
-    prompts: {}
+    name_prompt: Nome della legge cosmica, piano, divinita o pantheon
+    world_prompt: Mondo della cosmologia
+    connection_prompt: Connessioni canoniche della cosmologia
+    type_options:
+      - label: Legge cosmica
+        id: legge cosmica
+      - label: Piano o aldila
+        id: piano o aldila
+      - label: Divinita
+        id: divinita
+      - label: Pantheon
+        id: pantheon
+    prompts:
+      tipo: Tipo cosmologico
+      regola: Regola che cambia la realta ordinaria
+      principi_realta: Principi di realta governati da questa cosmologia
+      origine_funzione: Origine o funzione cosmologica
+      leggi_metafisiche: Leggi metafisiche stabili
+      soglie_accesso: Soglie, riti, luoghi o condizioni di accesso
+      morte_aldila: Cosa implica per morte, anime, antenati o aldila
+      effetti_su_morte: Effetti concreti su morte, resurrezione, non morti e lutto
+      dottrine_religiose: Dottrine religiose che la interpretano
+      religioni_collegate: Religioni collegate
+      culture_collegate: Culture che la vivono o la temono
+      luoghi_sacri: Luoghi sacri o geografici in cui si manifesta
+      effetti_su_magia: Effetti su magia, rituali e limiti arcani
+      effetti_su_culture: Effetti su istituzioni, costumi o paure sociali
+      fenomeni_visibili: Fenomeni visibili nel mondo materiale
+      fonti: Fonti della verita cosmologica
+      versioni_contrapposte: Versioni contraddittorie o dottrinali
   creatura:
     name_prompt: Nome della creatura
     type_prompt: Tipo della creatura
@@ -643,37 +517,64 @@ profiles:
       damage_options: dnd55_options.tipi_danno
       condition_options: dnd55_options.condizioni
     type_options:
-    - {label: Aberrazione, id: aberrazione}
-    - {label: Bestia, id: bestia}
-    - {label: Celestiale, id: celestiale}
-    - {label: Costrutto, id: costrutto}
-    - {label: Drago, id: drago}
-    - {label: Elementale, id: elementale}
-    - {label: Folletto, id: folletto}
-    - {label: Gigante, id: gigante}
-    - {label: Immondo, id: immondo}
-    - {label: Melma, id: melma}
-    - {label: Mostruosita, id: mostruosita}
-    - {label: Non morto, id: non morto}
-    - {label: Umanoide, id: umanoide}
-    - {label: Vegetale, id: vegetale}
+      - label: Aberrazione
+        id: aberrazione
+      - label: Bestia
+        id: bestia
+      - label: Celestiale
+        id: celestiale
+      - label: Costrutto
+        id: costrutto
+      - label: Drago
+        id: drago
+      - label: Elementale
+        id: elementale
+      - label: Folletto
+        id: folletto
+      - label: Gigante
+        id: gigante
+      - label: Immondo
+        id: immondo
+      - label: Melma
+        id: melma
+      - label: Mostruosita
+        id: mostruosita
+      - label: Non morto
+        id: non morto
+      - label: Umanoide
+        id: umanoide
+      - label: Vegetale
+        id: vegetale
     size_options:
-    - {label: Minuscola, id: minuscola}
-    - {label: Piccola, id: piccola}
-    - {label: Media, id: media}
-    - {label: Grande, id: grande}
-    - {label: Enorme, id: enorme}
-    - {label: Mastodontica, id: mastodontica}
+      - label: Minuscola
+        id: minuscola
+      - label: Piccola
+        id: piccola
+      - label: Grande
+        id: grande
+      - label: Enorme
+        id: enorme
+      - label: Mastodontica
+        id: mastodontica
     alignment_options:
-    - {label: Legale buono, id: legale buono}
-    - {label: Neutrale buono, id: neutrale buono}
-    - {label: Caotico buono, id: caotico buono}
-    - {label: Legale neutrale, id: legale neutrale}
-    - {label: Neutrale, id: neutrale}
-    - {label: Caotico neutrale, id: caotico neutrale}
-    - {label: Legale malvagio, id: legale malvagio}
-    - {label: Neutrale malvagio, id: neutrale malvagio}
-    - {label: Caotico malvagio, id: caotico malvagio}
+      - label: Legale buono
+        id: legale buono
+      - label: Neutrale buono
+        id: neutrale buono
+      - label: Caotico buono
+        id: caotico buono
+      - label: Legale neutrale
+        id: legale neutrale
+      - label: Neutrale
+        id: neutrale
+      - label: Caotico neutrale
+        id: caotico neutrale
+      - label: Legale malvagio
+        id: legale malvagio
+      - label: Neutrale malvagio
+        id: neutrale malvagio
+      - label: Caotico malvagio
+        id: caotico malvagio
     prompts:
       mondo: Mondo della creatura
       luoghi: Luoghi o habitat collegati
@@ -693,47 +594,34 @@ profiles:
       stats: Caratteristiche D&D 5.5
       fonti: Fonti granulari della creatura
       riferimenti_regola: Riferimenti regola per statblock e GS
-  culto:
-    name_prompt: Nome
-    prompts:
-      dogma: Dogma operativo che crea vincoli o scelte
-      costo_sociale: Costo sociale per chi obbedisce o viola la fede
-      reazione_a_violazione: Reazione a violazione di dogma, tabu o rito
-      gancio: Gancio giocabile della religione o culto
-      uso_al_tavolo: Uso al tavolo
-      player_safe: Versione player-safe
-      pressione: Pressione religiosa da 0 a 10
-      prossima_mossa: Prossima mossa se nessuno interviene
-      conseguenze: Conseguenze religiose o sociali
-      missioni: Missioni generate dalla fede
-  dispensa:
-    name_prompt: Nome
-    prompts: {}
-  era_storica:
-    name_prompt: Nome
-    prompts: {}
-  evento_storico:
-    name_prompt: Nome
-    prompts: {}
-  azgaar_import:
-    name_prompt: Nome
-    prompts: {}
-  lingua:
-    name_prompt: Nome
-    prompts: {}
-  live_nota:
-    name_prompt: Nome
-    prompts: {}
   lore_capture:
     name_prompt: Nome
     prompts:
       fonti: Fonti granulari dell'appunto
-  mappa:
-    name_prompt: Nome
-    prompts: {}
   mondo:
-    name_prompt: Nome
-    prompts: {}
+    name_prompt: Nome del mondo
+    connection_prompt: Connessioni canoniche del mondo
+    prompts:
+      tono: Tono fondativo
+      tema: Tema portante
+      principi_realta: Principi di realta
+      leggi_del_mondo: Leggi del mondo non riducibili a regole di gioco
+      cosmologie: Cosmologie, piani o principi collegati
+      tecnologia: Tecnologia e infrastruttura materiale
+      magia: Posto della magia nel mondo
+      premessa: Premessa del mondo
+      descrizione_lunga: Descrizione estesa dell'ambientazione
+      immagine_fondativa: Immagine fondativa del mondo
+      conflitto_centrale: Conflitto centrale
+      contraddizioni_centrali: Contraddizioni che reggono tensioni e misteri
+      continenti: Continenti o macro-aree
+      regioni: Regioni fondative
+      culture_fondative: Culture fondative
+      fazioni_principali: Fazioni principali
+      religioni: Religioni o culti principali
+      memoria_pubblica: Cosa il mondo ricorda o racconta di se stesso
+      versioni_contrapposte: Versioni incompatibili del canone
+      fonti: Fonti primarie e appunti fondativi
   nota_rapida:
     name_prompt: Nome
     prompts: {}
@@ -745,15 +633,23 @@ profiles:
     option_sources:
       rarity_options: dnd55_options.rarita
     rarity_options:
-    - {label: Comune, id: comune}
-    - {label: Non comune, id: non comune}
-    - {label: Raro, id: raro}
-    - {label: Molto raro, id: molto raro}
-    - {label: Leggendario, id: leggendario}
-    - {label: Artefatto, id: artefatto}
+      - label: Comune
+        id: comune
+      - label: Non comune
+        id: non comune
+      - label: Raro
+        id: raro
+      - label: Molto raro
+        id: molto raro
+      - label: Leggendario
+        id: leggendario
+      - label: Artefatto
+        id: artefatto
     boolean_options:
-    - {label: "No", id: "false"}
-    - {label: "Si", id: "true"}
+      - label: 'No'
+        id: 'false'
+      - label: Si
+        id: 'true'
     prompts:
       rarita: Rarita
       sintonia: Richiede sintonia
@@ -797,66 +693,6 @@ profiles:
       player_safe: Descrizione mostrabile ai giocatori
       riferimenti_srd: Riferimenti SRD granulari dell'incantesimo
       riferimenti_regola: Riferimenti regola granulari dell'incantesimo
-  classe_dnd:
-    name_prompt: Nome della classe D&D
-    option_sources:
-      class_options: dnd55_options.classi
-    prompts:
-      fonte: Fonte SRD o homebrew
-      classe: Nome tecnico della classe
-      privilegi: Privilegi chiave
-      competenze: Competenze iniziali
-      equipaggiamento: Equipaggiamento iniziale
-      incantesimi: Regole di magia o lista incantesimi
-      culture: Culture o societa dove e comune
-      uso_al_tavolo: Promessa di gioco
-      player_safe: Descrizione mostrabile ai giocatori
-      riferimenti_srd: Riferimenti SRD della classe
-      riferimenti_regola: Riferimenti regola della classe
-  specie_dnd:
-    name_prompt: Nome della specie D&D
-    option_sources:
-      species_options: dnd55_options.specie
-    prompts:
-      fonte: Fonte SRD o homebrew
-      specie: Nome tecnico della specie
-      tratti: Tratti meccanici
-      lingue: Lingue tipiche
-      culture: Culture collegate
-      luoghi: Luoghi o regioni di origine
-      uso_al_tavolo: Promessa di gioco
-      player_safe: Descrizione mostrabile ai giocatori
-      riferimenti_srd: Riferimenti SRD della specie
-      riferimenti_regola: Riferimenti regola della specie
-  background_dnd:
-    name_prompt: Nome del background D&D
-    option_sources:
-      background_options: dnd55_options.background
-    prompts:
-      fonte: Fonte SRD o homebrew
-      background: Nome tecnico del background
-      competenze: Competenze
-      strumenti: Strumenti
-      equipaggiamento: Equipaggiamento
-      fazioni: Fazioni collegate
-      culture: Culture collegate
-      uso_al_tavolo: Gancio per campagna
-      player_safe: Descrizione mostrabile ai giocatori
-      riferimenti_srd: Riferimenti SRD del background
-      riferimenti_regola: Riferimenti regola del background
-  talento_dnd:
-    name_prompt: Nome del talento D&D
-    prompts:
-      fonte: Fonte SRD o homebrew
-      talento: Nome tecnico del talento
-      prerequisito: Prerequisito
-      beneficio: Beneficio meccanico
-      culture: Culture dove e comune
-      fazioni: Fazioni che lo insegnano
-      uso_al_tavolo: Uso concreto al tavolo
-      player_safe: Descrizione mostrabile ai giocatori
-      riferimenti_srd: Riferimenti SRD del talento
-      riferimenti_regola: Riferimenti regola del talento
   regola_dnd:
     name_prompt: Nome della regola D&D
     prompts:
@@ -919,32 +755,10 @@ profiles:
   pg:
     name_prompt: Nome
     prompts: {}
-  ricorrenza_calendario:
-    name_prompt: Nome
-    prompts: {}
-  risorsa_mondo:
-    name_prompt: Nome
-    prompts:
-      uso_narrativo: Uso narrativo o strategico
-      dipendenze: Chi o cosa dipende dalla risorsa
-      crisi: Crisi prodotta da scarsita, monopolio o interruzione
-      pressione: Pressione economica da 0 a 10
-      prossima_mossa: Prossima mossa economica
-      missioni: Missioni generate dalla crisi economica
-      conseguenze: Conseguenze se la risorsa manca o cambia controllo
   sessione:
     name_prompt: Nome
     prompts:
       riferimenti_regola: Riferimenti regola o SRD da tenere aperti
   world_entity:
-    name_prompt: Nome
-    prompts: {}
-  watabou_city_luogo:
-    name_prompt: Nome
-    prompts: {}
-  watabou_city_mappa:
-    name_prompt: Nome
-    prompts: {}
-  watabou_dungeon_luogo:
     name_prompt: Nome
     prompts: {}

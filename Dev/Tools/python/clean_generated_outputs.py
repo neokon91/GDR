@@ -18,7 +18,6 @@ OBSIDIAN_CONFIG = ROOT / "Dev" / "Source" / "YAML" / "json" / "obsidian_config.y
 GENERATED_DIRS = [
     "Dev/Build/template-previews",
     "Hub",
-    "z.bacheche",
     "z.automazioni/data",
     "z.automazioni/templater",
     "z.bases",

@@ -29,7 +29,7 @@ async function incantesimo(tp) {
     return await helpers.renderFrontmatter("incantesimo", {
         id,
         nome: helpers.yamlQuote(name),
-        tipo: "homebrew",
+        tipo: "incantesimo",
         stato: "bozza",
         fonte: helpers.yamlQuote(fonte),
         livello_incantesimo: helpers.yamlQuote(livello),

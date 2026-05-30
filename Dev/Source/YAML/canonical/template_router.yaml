@@ -2,29 +2,6 @@ id: template_router
 purpose: Contratto dichiarativo delle route Templater che scelgono template o delegano a runtime creativi.
 version: 0.1.0
 prompt_routes:
-  - id: fazione
-    prompt: Che tipo di fazione vuoi creare?
-    options:
-      - label: Fazione generica
-        id: fazione
-        template: z.modelli/fazione/Fazione
-        set_route:
-          tipoFazione: ""
-      - label: Gilda
-        id: gilda
-        template: z.modelli/fazione/Gilda
-        set_route:
-          tipoFazione: gilda
-      - label: Confraternita
-        id: confraternita
-        template: z.modelli/fazione/Confraternita
-        set_route:
-          tipoFazione: confraternita
-      - label: Culto politico
-        id: culto politico
-        template: z.modelli/fazione/Fazione
-        set_route:
-          tipoFazione: culto politico
   - id: personaggio
     prompt: Che tipo di personaggio vuoi creare?
     options:
@@ -34,9 +11,6 @@ prompt_routes:
       - label: PG
         id: pg
         template: z.modelli/personaggio/PG
-      - label: Divinità o entità
-        id: divinita
-        template: z.modelli/personaggio/Divinità
 delegated_routes:
   - id: dm
     handler: dm
@@ -62,76 +36,16 @@ dm_content:
     - label: Pericolo ambientale
       id: pericolo ambientale
       template: z.modelli/dm/Pericolo Ambientale
-    - label: Avventura
-      id: avventura
-      template: z.modelli/dm/Avventura
-    - label: One-Shot
-      id: one-shot
-      template: z.modelli/dm/One-Shot
-    - label: Campagna
-      id: campagna
-      template: z.modelli/dm/Campagna
 wizard_routes:
-  appunto_live:
-    handler: lore_capture
-    route:
-      defaultName: Appunto live
-      useActiveSession: true
   conseguenza:
     handler: lore_capture
     route:
       tipo: conseguenza
       defaultName: Conseguenza emersa
       useActiveSession: true
-  nuova_entita_viva:
-    handler: create_from_template
-    prompt: Che entita viva vuoi creare?
-    options:
-      - label: Nuovo mondo homebrew
-        template: z.modelli/wizard/Nuovo Mondo Homebrew.md
-        path_key: mondi
-      - label: PNG vivo
-        template: z.modelli/personaggio/PNG.md
-        path_key: personaggi
-      - label: Luogo vivo
-        template: z.modelli/Luogo Router.md
-        path_key: luoghi
-      - label: Fazione viva
-        template: z.modelli/Fazione Router.md
-        path_key: fazioni
-      - label: Societa
-        template: z.modelli/Societa Router.md
-        path_key: societa
-      - label: Cultura
-        template: z.modelli/Cultura Router.md
-        path_key: culture
-      - label: Religione o mito
-        template: z.modelli/Religione Router.md
-        path_key: religioni
-      - label: Economia o risorsa
-        template: z.modelli/Economia Router.md
-        path_key: risorse_mondo
-      - label: Magia o cosmologia
-        template: z.modelli/Magia Router.md
-        path_key: cosmologia
-      - label: Storia
-        template: z.modelli/Storia Router.md
-        path_key: timeline
-      - label: Ecologia o creatura
-        template: z.modelli/Ecologia Router.md
-        path_key: creature
-      - label: Missione viva
-        template: z.modelli/dm/Missione.md
-        path_key: missioni
-      - label: Clock o tracciato
-        template: z.modelli/dm/Tracciato.md
-        path_key: tracciati
 creative_routes:
+  - mondo
   - luogo
+  - cosmologia
   - cultura
-  - religione
-  - economia
-  - magia
-  - storia
   - ecologia
-  - societa

@@ -19,19 +19,9 @@
       .array();
   }
 
-  function publicMapRows(dv, limit = 4) {
-    return dv.pages('"Risorse/Mappe"')
-      .where(p => publicCandidate(p, "mappa"))
-      .sort(p => p.file.mtime, "desc")
-      .limit(limit)
-      .array();
-  }
-
   function publicCard(page, category) {
     const title = pageTitle(page);
-    const meta = category === "mappa"
-      ? [page.uso, "mappa condivisa"].filter(Boolean).join(" · ")
-      : category === "missione"
+    const meta = category === "missione"
         ? "obiettivo conosciuto"
         : category === "personaggio"
           ? "volto noto"
@@ -62,8 +52,7 @@
       ["Missioni", publicRows(dv, '"Mondi/Missioni"', "missione", 99).length, "obiettivi visibili"],
       ["PNG", publicRows(dv, '"Mondi/Personaggi"', "personaggio", 99).length, "volti noti"],
       ["Luoghi", publicRows(dv, '"Mondi/Luoghi"', "luogo", 99).length, "posti scoperti"],
-      ["Handout", publicRows(dv, '"Mondi/Dispense"', "dispensa", 99).length, "materiali consegnati"],
-      ["Mappe", publicMapRows(dv, 99).length, "atlante condiviso"]
+      ["Handout", publicRows(dv, '"Mondi/Dispense"', "dispensa", 99).length, "materiali consegnati"]
     ];
 
     const grid = dv.el("div", "", { cls: "gdr-stat-grid gdr-player-stats" });
@@ -98,26 +87,8 @@
     })).join("");
   }
 
-  function renderPlayerMap(dv) {
-    const map = publicMapRows(dv, 1)[0];
-    if (!map) {
-      dv.paragraph("Nessuna mappa pubblica disponibile.");
-      return;
-    }
-
-    const panel = dv.el("div", "", { cls: "gdr-card-grid compact" });
-    panel.innerHTML = cardHtml({
-      title: pageTitle(map),
-      meta: [map.uso, map.mondo?.path ? map.mondo.path.split("/").pop().replace(/\.md$/, "") : ""].filter(Boolean).join(" · "),
-      body: fieldText(map.player_safe ?? map.luoghi ?? map.luogo) || "Mappa pubblica pronta.",
-      link: map.file.path,
-      badge: "Mappa condivisa",
-      cls: "gdr-info-card compact gdr-card-player gdr-kind-mappa"
-    });
-  }
-
   function renderPublicSafety(dv) {
-    const risky = dv.pages('"Mondi" OR "Risorse/Mappe"')
+    const risky = dv.pages('"Mondi"')
       .where(p => isReal(p) && p.pubblico === true && hasPrivateFields(p))
       .sort(p => p.file.path, "asc")
       .limit(12)
@@ -132,17 +103,14 @@
   }
 
   function renderPlayerPortalStatus(dv) {
-    const risky = dv.pages('"Mondi" OR "Risorse/Mappe"')
+    const risky = dv.pages('"Mondi"')
       .where(p => isReal(p) && p.pubblico === true && hasPrivateFields(p))
       .array();
-    const missingSafeText = dv.pages('"Mondi" OR "Risorse/Mappe"')
+    const missingSafeText = dv.pages('"Mondi"')
       .where(p => isReal(p) && p.pubblico === true && !hasText(p.player_safe) && !hasText(p.recap_pubblico) && p.categoria !== "sessione")
       .array();
     const sessionsWithoutRecap = dv.pages('"Mondi/Sessioni"')
       .where(p => isReal(p) && p.stato === "giocata" && !hasText(p.recap_pubblico))
-      .array();
-    const publicMapsWithoutText = dv.pages('"Risorse/Mappe"')
-      .where(p => isReal(p) && p.pubblico === true && !hasText(p.player_safe) && !hasLinks(p.luoghi) && !hasText(p.cosa_mostrare))
       .array();
     const deliveredHandouts = publicRows(dv, '"Mondi/Dispense"', "dispensa", 99);
 
@@ -150,7 +118,6 @@
       ["Anti-segreti", !risky.length, risky.map(pageTitle).join(", ") || "Nessuna nota pubblica contiene campi DM evidenti."],
       ["Testo player-safe", !missingSafeText.length, missingSafeText.map(pageTitle).join(", ") || "Le note pubbliche hanno testo mostrabile o recap."],
       ["Recap", !sessionsWithoutRecap.length, sessionsWithoutRecap.map(pageTitle).join(", ") || "Le sessioni giocate hanno recap pubblico o non sono esposte."],
-      ["Mappe", !publicMapsWithoutText.length, publicMapsWithoutText.map(pageTitle).join(", ") || "Le mappe pubbliche hanno descrizione, luoghi o cosa mostrare."],
       ["Dispense", deliveredHandouts.length > 0, deliveredHandouts.map(pageTitle).join(", ") || "Nessun handout consegnato ancora visibile."]
     ];
 
@@ -169,8 +136,7 @@
       ["Obiettivi", publicRows(dv, '"Mondi/Missioni"', "missione"), "missione"],
       ["PNG conosciuti", publicRows(dv, '"Mondi/Personaggi"', "personaggio"), "personaggio"],
       ["Luoghi scoperti", publicRows(dv, '"Mondi/Luoghi"', "luogo"), "luogo"],
-      ["Handout", publicRows(dv, '"Mondi/Dispense"', "dispensa"), "dispensa"],
-      ["Mappe condivise", publicMapRows(dv), "mappa"]
+      ["Handout", publicRows(dv, '"Mondi/Dispense"', "dispensa"), "dispensa"]
     ];
 
     for (const [title, pages, category] of sections) {
@@ -185,7 +151,6 @@
   }
 
   return {
-    renderPlayerMap,
     renderPlayerPortalStatus,
     renderPlayerRecap,
     renderPlayerView,

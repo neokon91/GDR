@@ -7,26 +7,24 @@ bindings:
     runtime: true
     responsibility: crea, sposta, rinomina e inizializza la nota prima del corpo statico
     entry_syntax:
-      - "<% await tp.user.nome_script(tp) %>"
+      - <% await tp.user.nome_script(tp) %>
     forbidden_in_generated_body:
-      - "<%* codice JS Templater sparso %>"
-      - "<%= espressioni runtime dentro sezioni Jinja %>"
+      - <%* codice JS Templater sparso %>
+      - <%= espressioni runtime dentro sezioni Jinja %>
     local_scripts: z.automazioni
     output_targets:
       - z.modelli
-      - z.modelli/wizard
-      - z.modelli/azioni
   meta_bind:
     plugin_id: obsidian-meta-bind-plugin
     runtime: true
     responsibility: modifica campi YAML e lancia azioni esplicite dopo creazione nota
     inline_inputs:
-      - "INPUT[text:campo]"
-      - "INPUT[toggle:campo]"
-      - "INPUT[slider(minValue(0), maxValue(10), stepSize(1), addLabels):pressione]"
-      - "INPUT[inlineListSuggester(optionQuery(\"Mondi\"), useLinks(partial), allowOther):connessioni]"
+      - INPUT[text:campo]
+      - INPUT[toggle:campo]
+      - INPUT[slider(minValue(0), maxValue(10), stepSize(1), addLabels):pressione]
+      - INPUT[inlineListSuggester(optionQuery("Mondi"), useLinks(partial), allowOther):connessioni]
     button_syntax:
-      - "BUTTON[id-template]"
+      - BUTTON[id-template]
     config_path: .obsidian/plugins/obsidian-meta-bind-plugin/data.json
     generated_from:
       - metabind_inputs
@@ -36,8 +34,8 @@ bindings:
     runtime: true
     responsibility: viste, indici e controlli leggibili senza modificare file
     codeblocks:
-      - "```dataview"
-      - "```dataviewjs"
+      - '```dataview'
+      - '```dataviewjs'
     use_for:
       - indici
       - dashboard
@@ -51,9 +49,11 @@ bindings:
       - componenti dashboard complessi
     local_modules:
       - z.engine/gdr_views.js
+      - z.engine/session_core.js
+      - z.engine/session_continuity.js
       - z.engine/session_dnd.js
-      - z.engine/session_maps.js
       - z.engine/session_player.js
+      - z.engine/session_runtime.js
       - z.engine/session_views.js
   metadata_menu:
     plugin_id: metadata-menu
@@ -62,31 +62,14 @@ bindings:
     config_path: .obsidian/plugins/metadata-menu/data.json
     output_targets:
       - z.fileclass
-  bases:
-    runtime: true
-    responsibility: viste editabili e contratti tabellari sulle properties
-    extension: .base
-    use_for:
-      - correzione tabellare frontmatter
-      - mappe con Maps per Bases
-      - formule leggere
   tasks:
     plugin_id: obsidian-tasks-plugin
     runtime: true
     responsibility: task operative e manutenzione
-    global_filter: "#task"
+    global_filter: '#task'
     use_for:
       - lavoro operativo DM
       - manutenzione
-  calendarium:
-    plugin_id: calendarium
-    runtime: true
-    fields:
-      - fc-calendar
-      - fc-date
-      - fc-category
-      - fc-display-name
-      - fc-end
   statblocks:
     plugin_id: obsidian-5e-statblocks
     runtime: true
@@ -106,46 +89,8 @@ bindings:
     runtime: true
     responsibility: tiri inline e tabelle casuali
     inline_syntax:
-      - "dice: 1d20"
-      - "dice: [[Risorse/Tabelle/Tabelle#^id-tabella]]"
-  excalidraw:
-    plugin_id: obsidian-excalidraw-plugin
-    runtime: true
-    responsibility: mappe e diagrammi visuali con fallback testuale
-    output_folder: Risorse/Mappe
-    extension: .excalidraw.md
-  canvas:
-    plugin_id: advanced-canvas
-    runtime: true
-    responsibility: reti visuali di note e fronti
-    extension: .canvas
-  media_extended:
-    plugin_id: media-extended
-    runtime: true
-    fields:
-      - media
-      - timestamp
-      - scena
-  maps:
-    plugin_id: maps
-    runtime: true
-    responsibility: vista mappa dentro Bases
-    use_for:
-      - atlante
-      - marker
-      - coordinate
-  ttrpg_tools_maps:
-    plugin_id: zoom-map
-    runtime: true
-    responsibility: mappe zoomabili con marker, layer e misure
-  hex_cartographer_plugin:
-    plugin_id: hex-cartographer
-    runtime: true
-    responsibility: mappe esagonali e hexcrawl
-  iconize:
-    plugin_id: obsidian-icon-folder
-    runtime: true
-    config_path: .obsidian/plugins/obsidian-icon-folder/data.json
+      - 'dice: 1d20'
+      - 'dice: 1d6'
   tabs:
     plugin_id: tabs
     runtime: true
@@ -155,74 +100,9 @@ bindings:
     plugin_id: callout-manager
     runtime: true
     responsibility: vocabolario visuale dei callout GDR
-    syntax: "> [!tipo]"
-  style_settings:
-    plugin_id: obsidian-style-settings
-    runtime: true
-    config_path: .obsidian/plugins/obsidian-style-settings/data.json
-  folder_notes:
-    plugin_id: folder-notes
-    runtime: true
-    responsibility: note indice di cartella per navigazione iniziale e release pulita
-    config_path: .obsidian/plugins/folder-notes/data.json
-    use_for:
-      - indici cartella
-      - primo orientamento
-      - fallback navigazione
-  homepage:
-    plugin_id: homepage
-    runtime: true
-    responsibility: apertura controllata del vault su Inizia Qui
-    config_path: .obsidian/plugins/homepage/data.json
-    use_for:
-      - onboarding
-      - primo avvio
-  kanban:
-    plugin_id: obsidian-kanban
-    runtime: true
-    responsibility: bacheche Markdown operative per preparazione, post-sessione e manutenzione
-    frontmatter:
-      - kanban-plugin: board
-    output_targets:
-      - z.bacheche
-  fantasy_content_generator:
-    plugin_id: fantasy-content-generator
-    runtime: true
-    responsibility: bozze fantasy in Inbox/Generati da smistare, mai canone automatico
-    output_targets:
-      - Inbox/Generati
-    required_frontmatter:
-      - plugin
-      - generatore
-      - canonico
-      - stato_canonico
-  advanced_tables:
-    plugin_id: table-editor-obsidian
-    runtime: false
-    responsibility: editing manuale di tabelle Markdown senza dipendenze runtime
-    config_path: .obsidian/plugins/table-editor-obsidian/data.json
-    use_for:
-      - tabelle casuali
-      - tabelle guida
-  linter:
-    plugin_id: obsidian-linter
-    runtime: false
-    config_path: .obsidian/plugins/obsidian-linter/data.json
-  brat:
-    plugin_id: obsidian42-brat
-    runtime: false
-    use_for:
-      - manutenzione plugin
-aliases:
-  fantasy_statblocks: statblocks
-  ttrpg_maps: ttrpg_tools_maps
-  maps_per_bases: maps
-  callouts: callout_manager
-  jsengine: js_engine
-  dice: dice_roller
-  hex_cartographer: hex_cartographer_plugin
+    syntax: '> [!tipo]'
 runtime_boundaries:
   jinja: sviluppo only; produce Markdown statico e non deve essere richiesto in Obsidian
   templater: una sola entry iniziale per template generato
-  meta_bind: unico livello che modifica YAML in lettura/uso della nota
+  meta_bind: modifica frontmatter solo da controlli espliciti
   dataview_js_engine: rendering e feedback senza side effect su file

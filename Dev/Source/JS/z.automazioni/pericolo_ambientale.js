@@ -30,7 +30,7 @@ async function pericoloAmbientale(tp) {
             fonti: [...riferimentiSrd, ...riferimentiRegola, ...luoghi],
             riferimentiSrd,
             riferimentiRegola,
-            tabelle: ["[[Risorse/Tabelle/Tabelle#^complicazioni]]"],
+            tabelle: [],
             tags: ["dnd55/homebrew", "gdr/bozza"]
         })
     });

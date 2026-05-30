@@ -81,7 +81,6 @@
       return (page?.pubblico === true || page?.stato === "in gioco") && hasText(page?.player_safe);
     }
     if (category === "dispensa") return page?.stato === "consegnato";
-    if (category === "mappa") return page?.pubblico === true;
     if (category === "sessione") return page?.pubblico === true || page?.stato === "giocata";
     if (category === "tracciato") return page?.pubblico === true;
     if (page?.pubblico === true) return true;

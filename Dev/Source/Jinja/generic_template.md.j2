@@ -3,27 +3,41 @@
 # `=this.nome`
 {% set families = blueprint.get("target_family", []) %}
 {% set blueprint_name = blueprint_id | default("") %}
+{% set is_world = "mondo" in families or blueprint_name in ["mondo", "nuovo_mondo_homebrew"] %}
+{% set is_cosmology = "cosmologia" in families or blueprint_name == "cosmologia" %}
 {% set is_place = "luogo" in families or blueprint_name.startswith("luogo_") or blueprint_name.startswith("geografia_") or blueprint_name.startswith("politica_") or "live luogo" in families %}
+{% set is_culture = "cultura" in families or blueprint_name == "cultura" %}
 {% set is_faction = "fazione" in families or "religione" in families or "culto" in families or blueprint_name.startswith("fazione_") or blueprint_name.startswith("religione_") %}
 {% set is_png = "png" in families or "live png" in families or blueprint_name in ["png", "pg", "live_png", "personaggio_divinita"] or "personaggio" in families %}
 {% set is_relation = "relazione" in families %}
 {% set is_track = "tracciato" in families %}
 {% set is_continuity = blueprint.get("continuity_fields", false) or "conseguenza" in families or "evento storico" in families or blueprint_name == "wizard_conseguenza" %}
+{% set is_deep_lore = blueprint.get("lore_foundation", false) or is_world or is_cosmology %}
+{% set is_lore_entity = is_world or is_cosmology or is_place or is_culture %}
 {% set depth_profile_ids = blueprint.get("depth_profiles", []) %}
 
+{% if is_lore_entity %}
 ````tabs
 tab: Stato
 
 > [!infoboxwiki]- {{ blueprint.get("template_title", label) }}
+{% if is_world %}
+> Tipo: `INPUT[text:tipo]`
+{% else %}
 > Mondo: `INPUT[mondo][:mondo]`
+>
+> Tipo: `INPUT[text:tipo]`
+{% endif %}
+{% if is_place %}
+>
+> Funzione luogo: `INPUT[text:funzione_luogo]`
+{% endif %}
 >
 > Stato: `INPUT[stato][:stato]`
 >
-> Pubblico: `INPUT[toggle:pubblico]`
->
 > Canonico: `INPUT[canonico][:canonico]`
 >
-> La scheda e usabile quando ha almeno un gancio, una connessione viva e una conseguenza o prossima mossa.
+> Grado certezza: `INPUT[text:grado_certezza]`
 
 > [!regia] Azioni Scheda
 > `BUTTON[marca-canonico]`
@@ -34,14 +48,374 @@ tab: Stato
 >
 > `BUTTON[archivia-nota]`
 
+tab: Lore
+
+> [!scena] Descrizione
+> _Da sviluppare nel corpo nota._
+>
+
+> [!timeline]- Memoria e origine
+> _Da sviluppare nel corpo nota._
+>
+
+> [!lettura]- Versione pubblica
+> `INPUT[text:player_safe]`
+
+> [!segreto]- Verita privata
+> _Da sviluppare nel corpo nota._
+>
+
+{% if is_world %}
+tab: Fondazioni
+
+> [!magia] Principi della realta
+> _Da sviluppare nel corpo nota._
+>
+
+> [!conflitto]- Tensioni fondative
+> _Da sviluppare nel corpo nota._
+>
+
+> [!cultura]- Culture, geografia e memoria
+> _Da sviluppare nel corpo nota._
+>
+
+{% elif is_cosmology %}
+tab: Cosmologia
+
+> [!magia] Verita metafisica
+> Regola sintetica: `INPUT[text:regola]`
+>
+>
+
+> [!religione]- Dottrine e interpretazioni
+> _Da sviluppare nel corpo nota._
+>
+
+> [!pericolo]- Manifestazioni e costi
+> Pericolo: `INPUT[text:pericolo]`
+>
+> _Da sviluppare nel corpo nota._
+
+{% elif is_place %}
+tab: Territorio
+
+> [!luogo] Inquadramento
+> Bioma: `INPUT[text:bioma]`
+>
+> Scala: `INPUT[text:scala_geografica]`
+>
+> Luogo padre: `INPUT[luogo_padre][:luogo_padre]`
+
+> [!timeline]- Memoria del luogo
+> _Da sviluppare nel corpo nota._
+>
+
+> [!cultura]- Presenze e autorita
+> Abitanti: `INPUT[text:abitanti]`
+>
+> Cultura dominante: `INPUT[text:cultura_dominante]`
+>
+> Autorita: `INPUT[autorita][:autorita]`
+
+> [!regia]- Stato luogo
+{{ dvw.quoted_runtime_block(modules.dataview_blocks.blocks.playability_family_cards, 'dv, dv.current(), "luogo"') }}
+
+{% elif is_culture %}
+tab: Cultura
+
+> [!cultura] Identita
+> Tratto distintivo: `INPUT[text:tratto_distintivo]`
+>
+> Valore dominante: `INPUT[text:valore_dominante]`
+>
+> Tensione culturale: `INPUT[text:tensione_culturale]`
+
+> [!timeline]- Memoria, riti e vita quotidiana
+> _Da sviluppare nel corpo nota._
+>
+
+> [!conflitto]- Fratture e tabu
+> _Da sviluppare nel corpo nota._
+>
+
+{% endif %}
 tab: Tavolo
 
+> [!scena] Uso in gioco
+> Gancio: `INPUT[text:gancio]`
+>
+> Uso al tavolo: `INPUT[text:uso_al_tavolo]`
+>
+> Prossima mossa: `INPUT[prossima_mossa][:prossima_mossa]`
+{% if is_place %}
+>
+> Pericolo: `INPUT[text:pericolo]`
+{% endif %}
+
+> [!missione]- Scene, scelte e conseguenze
+> _Da sviluppare nel corpo nota._
+>
+
+tab: Connessioni
+
+> [!regia] Collegamenti operativi
+> Connessioni: `INPUT[connessioni][:connessioni]`
+>
+> Fonti: `INPUT[fonti][:fonti]`
+{% if is_world %}
+>
+> Cosmologie: `INPUT[cosmologie][:cosmologie]`
+>
+> Regioni: `INPUT[regioni][:regioni]`
+>
+> Culture fondative: `INPUT[culture_fondative][:culture_fondative]`
+>
+> Campagne: `INPUT[campagne][:campagne]`
+{% elif is_cosmology %}
+>
+> Divinita: `INPUT[divinita][:divinita]`
+>
+> Religioni: `INPUT[religioni][:religioni]`
+>
+> Culture collegate: `INPUT[culture_collegate][:culture_collegate]`
+>
+> Luoghi sacri: `INPUT[luoghi_sacri][:luoghi_sacri]`
+>
+> Luoghi collegati: `INPUT[luoghi_collegati][:luoghi_collegati]`
+{% elif is_place %}
+>
+> Fazioni: `INPUT[fazioni][:fazioni]`
+>
+> Personaggi: `INPUT[personaggi][:personaggi]`
+>
+> Missioni: `INPUT[missioni][:missioni]`
+>
+> Sessioni: `INPUT[sessioni][:sessioni]`
+{% elif is_culture %}
+>
+> Luoghi: `INPUT[luoghi][:luoghi]`
+>
+> Lingue: `INPUT[lingue][:lingue]`
+>
+> Religioni: `INPUT[religioni][:religioni]`
+>
+> Fazioni: `INPUT[fazioni][:fazioni]`
+{% endif %}
+
+> [!conflitto]- Note che puntano qui
+{{ dvw.quoted_block(modules.dataview_blocks.blocks.linked_connections_table) }}
+
+tab: Controllo
+
+> [!regia] Qualita scheda
+{{ dvw.quoted_runtime_block(modules.dataview_blocks.blocks.feedback_creazione, "dv") }}
+
+{% if blueprint.get("world_impact", true) %}
+> [!timer] Impatto sul mondo
+{{ dvw.quoted_runtime_block(modules.dataview_blocks.blocks.world_impact, "dv") }}
+{% endif %}
+````
+
+## Fallback Markdown
+
+| Blocco | Valore |
+| --- | --- |
+| Identita |  |
+| Verita canonica |  |
+| Memoria |  |
+| Versione pubblica |  |
+{% if is_world %}| Principi realta |  |
+| Cosmologie |  |
+| Regioni |  |
+| Culture fondative |  |
+{% elif is_cosmology %}| Regola cosmica |  |
+| Dottrine |  |
+| Manifestazioni |  |
+{% elif is_place %}| Territorio |  |
+| Memoria del luogo |  |
+| Presenze |  |
+| Funzione luogo |  |
+{% elif is_culture %}| Identita culturale |  |
+| Vita quotidiana |  |
+| Fratture e tabu |  |
+{% endif %}| Gancio |  |
+| Uso al tavolo |  |
+| Connessioni |  |
+{% else %}
+````tabs
+tab: Stato
+
+> [!infoboxwiki]- {{ blueprint.get("template_title", label) }}
+{% if is_world %}
+> Tipo: `INPUT[text:tipo]`
+>
+> Scala: `INPUT[text:scala]`
+{% else %}
+> Mondo: `INPUT[mondo][:mondo]`
+{% endif %}
+>
+> Stato: `INPUT[stato][:stato]`
+>
+> Pubblico: `INPUT[toggle:pubblico]`
+>
+> Canonico: `INPUT[canonico][:canonico]`
+>
+{% if is_deep_lore %}
+> La scheda e solida quando chiarisce verita, fonti, memoria, contraddizioni e collegamenti canonici.
+{% else %}
+> La scheda e usabile quando ha almeno un gancio, una connessione viva e una conseguenza o prossima mossa.
+{% endif %}
+
+> [!regia] Azioni Scheda
+> `BUTTON[marca-canonico]`
+>
+> `BUTTON[marca-rumor]`
+>
+> `BUTTON[collega-sessione-attiva]`
+>
+> `BUTTON[archivia-nota]`
+
+{% if is_deep_lore %}
+tab: Lore
+
+> [!scena] Descrizione E Immagine Fondativa
+> Descrizione lunga: `INPUT[text:descrizione_lunga]`
+>
+> Immagine fondativa: `INPUT[text:immagine_fondativa]`
+>
+> Identita: `INPUT[text:identita]`
+
+> [!timeline]- Memoria, Versioni, Fonti
+> Memoria pubblica:
+> ```meta-bind
+> INPUT[list:memoria_pubblica]
+> ```
+>
+> Versioni contrapposte:
+> ```meta-bind
+> INPUT[list:versioni_contrapposte]
+> ```
+>
+> Fonti: `INPUT[fonti][:fonti]`
+
+> [!regia]- Canone E Propagazione
+> Stato canonico: `INPUT[text:stato_canonico]`
+>
+> Grado certezza: `INPUT[text:grado_certezza]`
+>
+> Contraddice: `INPUT[contraddice][:contraddice]`
+>
+> Retcon di: `INPUT[retcon_di][:retcon_di]`
+>
+> Motivo retcon: `INPUT[text:retcon_motivo]`
+>
+> Entita impattate: `INPUT[entita_impattate][:entita_impattate]`
+>
+> Propaga a: `INPUT[propaga_a][:propaga_a]`
+
+{% endif %}
+{% if is_world %}
+tab: Mondo
+
+> [!magia] Leggi Del Mondo
+> Principi di realta:
+> ```meta-bind
+> INPUT[list:principi_realta]
+> ```
+>
+> Leggi del mondo:
+> ```meta-bind
+> INPUT[list:leggi_del_mondo]
+> ```
+>
+> Magia: `INPUT[text:magia]`
+>
+> Tecnologia: `INPUT[text:tecnologia]`
+>
+> Cosmologie: `INPUT[cosmologie][:cosmologie]`
+
+> [!cultura]- Fondazioni Storiche E Sociali
+> Culture fondative: `INPUT[culture_fondative][:culture_fondative]`
+>
+> Religioni: `INPUT[religioni][:religioni]`
+>
+> Fazioni principali: `INPUT[fazioni_principali][:fazioni_principali]`
+>
+> Continenti: `INPUT[continenti][:continenti]`
+>
+> Regioni: `INPUT[regioni][:regioni]`
+>
+> Contraddizioni centrali:
+> ```meta-bind
+> INPUT[list:contraddizioni_centrali]
+> ```
+
+{% endif %}
+{% if is_cosmology %}
+tab: Cosmologia
+
+> [!magia] Leggi Metafisiche
+> Principi di realta:
+> ```meta-bind
+> INPUT[list:principi_realta]
+> ```
+>
+> Leggi metafisiche:
+> ```meta-bind
+> INPUT[list:leggi_metafisiche]
+> ```
+>
+> Soglie di accesso:
+> ```meta-bind
+> INPUT[list:soglie_accesso]
+> ```
+>
+> Morte e aldila:
+> ```meta-bind
+> INPUT[list:morte_aldila]
+> ```
+>
+> Effetti su morte:
+> ```meta-bind
+> INPUT[list:effetti_su_morte]
+> ```
+
+> [!religione]- Interpretazioni E Manifestazioni
+> Dottrine religiose:
+> ```meta-bind
+> INPUT[list:dottrine_religiose]
+> ```
+>
+> Religioni collegate: `INPUT[religioni_collegate][:religioni_collegate]`
+>
+> Culture collegate: `INPUT[culture_collegate][:culture_collegate]`
+>
+> Luoghi sacri: `INPUT[luoghi_sacri][:luoghi_sacri]`
+>
+> Fenomeni visibili:
+> ```meta-bind
+> INPUT[list:fenomeni_visibili]
+> ```
+
+{% endif %}
+tab: Tavolo
+
+{% if is_deep_lore %}
+> [!scena] Presenza In Campagna
+> Identita: `INPUT[text:identita]`
+>
+> Perche importa ora: `INPUT[text:gancio]`
+>
+> Uso eventuale in scena: `INPUT[text:uso_al_tavolo]`
+{% else %}
 > [!scena] Identita Al Tavolo
 > `INPUT[text:identita]`
 >
 > Gancio: `INPUT[text:gancio]`
 >
 > Uso al tavolo: `INPUT[text:uso_al_tavolo]`
+{% endif %}
 
 > [!missione] Scelta E Conseguenza
 > Scelta: `INPUT[text:scelta]`
@@ -118,29 +492,59 @@ tab: Connessioni
 > - [[z.bases/Fazioni.base]]
 > - [[z.bases/Missioni.base]]
 > - [[z.bases/PNG.base]]
-> - [[Risorse/Mappe/Schema Relazioni GDR.excalidraw]]
 
 {% if is_place %}
 tab: Territorio
 
-> [!mappa] Mappa E Presenza
-> Coordinate: `INPUT[text:coordinates]`
+> [!luogo] Geografia E Territorio
+> Scala geografica: `INPUT[text:scala_geografica]`
 >
-> Mappe:
+> Bioma: `INPUT[text:bioma]`
+>
+> Luogo padre: `INPUT[luogo_padre][:luogo_padre]`
+>
+> Confini:
 > ```meta-bind
-> INPUT[inlineListSuggester(optionQuery("Risorse/Mappe"), useLinks(partial), allowOther):mappe]
+> INPUT[list:confini]
 > ```
 >
-> Layer mappa: `INPUT[text:layer_mappa]`
->
-> Icona: `INPUT[text:icon]`
->
-> Colore marker: `INPUT[text:color]`
+> Risorse strategiche:
+> ```meta-bind
+> INPUT[list:risorse_strategiche]
+> ```
 
-> [!lettura]- Strumenti Cartografici
-> - [[z.bases/Atlante Mappe.base]] apre la vista Maps per Bases sui marker con `coordinates`.
-> - [[Risorse/Mappe/Schema Relazioni GDR.excalidraw]] collega il luogo ai fronti visuali.
-> - [[Risorse/Canvas Per GDR]] serve per reti di quartiere, dungeon, rotte o fronti territoriali.
+> [!timeline]- Memoria Del Territorio
+> Origine: `INPUT[text:origine]`
+>
+> Memoria del territorio:
+> ```meta-bind
+> INPUT[list:memoria_del_territorio]
+> ```
+>
+> Tracce del passato:
+> ```meta-bind
+> INPUT[list:tracce_passato]
+> ```
+>
+> Funzione storica: `INPUT[text:funzione_storica]`
+>
+> Funzione attuale: `INPUT[text:funzione_attuale]`
+
+> [!cultura]- Abitanti E Autorita
+> Abitanti:
+> ```meta-bind
+> INPUT[list:abitanti]
+> ```
+>
+> Cultura dominante: `INPUT[text:cultura_dominante]`
+>
+> Autorita: `INPUT[autorita][:autorita]`
+>
+> Culture: `INPUT[culture][:culture]`
+>
+> Religioni: `INPUT[religioni][:religioni]`
+>
+> Fazioni: `INPUT[fazioni][:fazioni]`
 
 > [!regia]- Stato Luogo
 {{ dvw.quoted_runtime_block(modules.dataview_blocks.blocks.playability_family_cards, 'dv, dv.current(), "luogo"') }}
@@ -294,7 +698,11 @@ tab: Profondita
 >
 > Note: `INPUT[text:profondita_note]`
 >
+{% if is_deep_lore %}
+> Usa questi assi solo quando una scelta di canone deve propagarsi a geografia, cosmologia, cultura o storia.
+{% else %}
 > Usa questi assi solo quando la scheda torna in scena o deve spiegare una scelta concreta.
+{% endif %}
 
 {% for profile_id in depth_profile_ids %}
 {% set depth_profile = modules.worldbuilding_depth_axes.profiles.get(profile_id) %}
@@ -309,7 +717,11 @@ tab: Profondita
 >
 > 1: {{ axis.low }} · 3: {{ axis.mid }} · 5: {{ axis.high }}
 >
+{% if is_deep_lore %}
+> Impatto lore: {{ axis.table_use }}
+{% else %}
 > Uso al tavolo: {{ axis.table_use }}
+{% endif %}
 {% endfor %}
 {% endif %}
 {% endfor %}
@@ -332,6 +744,29 @@ tab: Controllo
 | Blocco | Valore |
 | --- | --- |
 | Identita |  |
+{% if is_deep_lore %}| Descrizione lunga |  |
+| Immagine fondativa |  |
+| Stato canonico |  |
+| Grado certezza |  |
+| Fonti |  |
+| Versioni contrapposte |  |
+{% endif %}{% if is_world %}| Principi realta |  |
+| Leggi del mondo |  |
+| Cosmologie |  |
+| Culture fondative |  |
+| Contraddizioni centrali |  |
+{% endif %}{% if is_cosmology %}| Leggi metafisiche |  |
+| Soglie accesso |  |
+| Morte e aldila |  |
+| Effetti su morte |  |
+| Dottrine religiose |  |
+{% endif %}{% if is_place %}| Scala geografica |  |
+| Coordinate |  |
+| Memoria del territorio |  |
+| Tracce passato |  |
+| Abitanti |  |
+| Autorita |  |
+{% endif %}
 | Gancio |  |
 | Uso al tavolo |  |
 | Prossima mossa |  |
@@ -349,3 +784,4 @@ tab: Controllo
 {% endif %}{% if blueprint.get("publication_fields", false) %}| Memoria pubblica |  |
 {% endif %}
 | Versione pubblica |  |
+{% endif %}

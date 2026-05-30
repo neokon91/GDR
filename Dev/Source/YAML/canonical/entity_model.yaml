@@ -17,7 +17,7 @@ policy:
     - varianti speculative
     - contenuti finti di collaudo
   inbox_for_uncertain_content: Inbox/Inbox
-  replaces_tracked_note: Risorse/Modello Entità.md
+  replaces_tracked_note: z.modelli/worldbuilding/Entita Worldbuilding.md
 common_fields:
   required:
     - nome
@@ -44,9 +44,10 @@ categories:
     label: Mondo
     folder: Mondi
     priority: essential
-    purpose: Contiene le verita dell'ambientazione e collega luoghi, fazioni, religioni e campagne.
+    purpose: Fissa le fondazioni della realta, della memoria storica e delle regole profonde dell'ambientazione.
     create_when:
-      - piu luoghi, fazioni o campagne condividono le stesse regole narrative
+      - piu luoghi, culture, cosmologie o campagne condividono le stesse leggi del mondo
+      - serve una fonte primaria per decidere cosa e vero, rumor, leggenda o retcon
     types:
       - mondo
     required_fields:
@@ -55,12 +56,18 @@ categories:
       - tono
       - tema
     useful_fields:
+      - principi_realta
+      - leggi_del_mondo
+      - cosmologie
       - tecnologia
       - magia
       - continenti
+      - regioni
+      - culture_fondative
       - fazioni
       - religioni
       - campagne
+      - memoria_pubblica
       - canonico
     template_blueprints:
       - mondo
@@ -99,30 +106,33 @@ categories:
     label: Luogo
     folder: Mondi/Luoghi
     priority: essential
-    purpose: Descrive dove succedono le cose e collega incontri, PNG, fazioni, segreti e risorse.
+    purpose: Descrive territorio, geografia, memoria stratificata, abitanti e pressioni locali prima dell'uso scenico.
     create_when:
+      - il territorio spiega culture, rotte, conflitti, risorse o memoria del mondo
       - i personaggi possono andarci, tornarci o parlarne come punto importante
     types:
-      - villaggio
-      - capitale
-      - porto
-      - fortezza
-      - rovina
-      - dungeon
       - regione
-      - regno
-      - tempio
-      - foresta
-      - montagna
+      - insediamento
+      - sito di interesse
+      - habitat
     required_fields:
       - categoria
       - stato
       - mondo
       - tipo
     useful_fields:
+      - scala_geografica
       - tipologia
       - bioma
       - luogo_padre
+      - confini
+      - memoria_del_territorio
+      - tracce_passato
+      - funzione_storica
+      - funzione_attuale
+      - abitanti
+      - cultura_dominante
+      - autorita
       - pericolo
       - fazioni
       - religioni
@@ -241,10 +251,7 @@ categories:
     create_when:
       - la scena ha luogo, posta, pericolo, creature o ricompense da usare al tavolo
     types:
-      - combattimento
-      - esplorazione
-      - pericolo ambientale
-      - trappola
+      - incontro
     required_fields:
       - categoria
       - stato
@@ -268,9 +275,13 @@ categories:
     create_when:
       - l'oggetto puo cambiare decisioni, missioni, relazioni o conseguenze
     types:
-      - oggetto
+      - arma
+      - armatura
+      - scudo
+      - strumento
+      - veleno
+      - oggetto meraviglioso
       - oggetto magico
-      - chiave
     required_fields:
       - categoria
       - stato
@@ -293,15 +304,7 @@ categories:
     create_when:
       - la creatura e abitante, minaccia o risorsa ricorrente dell'ambientazione
     types:
-      - habitat
-      - migrazione
-      - catena alimentare
-      - variante regionale
-      - creatura sacra
-      - mostro sociale
-      - specie senziente
-      - predatore territoriale
-      - ecosistema da definire
+      - creatura
     required_fields:
       - categoria
       - stato
@@ -415,14 +418,7 @@ categories:
     create_when:
       - la cultura influenza scene, conflitti, accoglienza o informazioni
     types:
-      - cultura
-      - popolo
-      - etnia
-      - tradizione
-      - tabu
-      - rito di passaggio
-      - costume quotidiano
-      - cultura da definire
+      - civilta
     required_fields:
       - categoria
       - stato
@@ -502,7 +498,6 @@ categories:
       - tracciati
       - incontri
       - dispense
-      - mappe
       - recap_pubblico
   campagna:
     label: Campagna
@@ -523,6 +518,216 @@ categories:
       - regione
       - luogo
       - sessioni
+  classe:
+    label: Classe
+    folder: Mondi/Compendium
+    priority: essential
+    purpose: Rende una classe 5.5e materiale di gioco collegabile a PG, culture, fazioni e mondo.
+    create_when:
+      - la classe e homebrew, reinterpretata per l'ambientazione o serve come riferimento ricorrente
+    types:
+      - classe
+    required_fields:
+      - categoria
+      - stato
+    useful_fields:
+      - fonte
+      - classe
+      - sottoclasse
+      - privilegi
+      - competenze
+      - equipaggiamento
+      - incantesimi
+      - mondo
+      - culture
+      - fazioni
+    template_blueprints:
+      - classe_dnd
+  specie:
+    label: Specie
+    folder: Mondi/Compendium
+    priority: essential
+    purpose: Collega specie giocabili, tratti, habitat, culture e distribuzione nel mondo.
+    create_when:
+      - la specie ha ruolo culturale, geografico o meccanico ricorrente
+    types:
+      - specie
+    required_fields:
+      - categoria
+      - stato
+    useful_fields:
+      - fonte
+      - specie
+      - tratti
+      - lingue
+      - mondo
+      - culture
+      - luoghi
+      - habitat
+    template_blueprints:
+      - specie_dnd
+  background:
+    label: Background
+    folder: Mondi/Compendium
+    priority: essential
+    purpose: Lega origine del personaggio, competenze, strumenti, luoghi, culture e fazioni.
+    create_when:
+      - il background definisce un'origine giocabile o un aggancio stabile all'ambientazione
+    types:
+      - background
+    required_fields:
+      - categoria
+      - stato
+    useful_fields:
+      - fonte
+      - background
+      - competenze
+      - strumenti
+      - equipaggiamento
+      - mondo
+      - fazioni
+      - culture
+      - luoghi
+    template_blueprints:
+      - background_dnd
+  talento:
+    label: Talento
+    folder: Mondi/Compendium
+    priority: essential
+    purpose: Registra talenti, prerequisiti, benefici e agganci sociali o culturali.
+    create_when:
+      - il talento e homebrew, concesso da una cultura/fazione o ricorre in campagna
+    types:
+      - talento
+    required_fields:
+      - categoria
+      - stato
+    useful_fields:
+      - fonte
+      - talento
+      - prerequisito
+      - beneficio
+      - mondo
+      - culture
+      - fazioni
+    template_blueprints:
+      - talento_dnd
+  incantesimo:
+    label: Incantesimo
+    folder: Mondi/Compendium
+    priority: essential
+    purpose: Tiene insieme regola, fonte, limiti, culture, fazioni e conseguenze magiche.
+    create_when:
+      - l'incantesimo e homebrew, reinterpretato o importante per il funzionamento del mondo
+    types:
+      - incantesimo
+    required_fields:
+      - categoria
+      - stato
+    useful_fields:
+      - fonte
+      - livello_incantesimo
+      - scuola
+      - tempo_lancio
+      - gittata
+      - componenti
+      - durata
+      - effetti
+      - limiti
+      - mondo
+      - culture
+      - fazioni
+    template_blueprints:
+      - incantesimo
+  regola:
+    label: Regola
+    folder: Mondi/Compendium
+    priority: essential
+    purpose: Conserva regole 5.5e, interpretazioni locali e riferimenti SRD da usare al tavolo.
+    create_when:
+      - una regola va chiarita, reinterpretata, homebrewata o richiamata spesso
+    types:
+      - regola
+    required_fields:
+      - categoria
+      - stato
+    useful_fields:
+      - fonte
+      - regola
+      - limiti
+      - effetti
+      - uso_al_tavolo
+      - player_safe
+    template_blueprints:
+      - regola_dnd
+  trappola:
+    label: Trappola
+    folder: Mondi/Incontri
+    priority: essential
+    purpose: Prepara trappole con innesco, CD, danno, contromisure e conseguenze.
+    create_when:
+      - la trappola e un elemento persistente o riusabile di scena
+    types:
+      - trappola
+    required_fields:
+      - categoria
+      - stato
+    useful_fields:
+      - fonte
+      - pericolo
+      - innesco
+      - cd
+      - danno
+      - contromisure
+      - conseguenze
+      - luogo
+    template_blueprints:
+      - trappola
+  pericolo ambientale:
+    label: Pericolo Ambientale
+    folder: Mondi/Incontri
+    priority: essential
+    purpose: Rende giocabili rischi ambientali, segnali, CD, danni, contromisure e territori coinvolti.
+    create_when:
+      - il pericolo ambientale e una regola di scena o un rischio ricorrente del territorio
+    types:
+      - pericolo ambientale
+    required_fields:
+      - categoria
+      - stato
+    useful_fields:
+      - bioma
+      - pericolo
+      - cd
+      - danno
+      - segnali
+      - contromisure
+      - conseguenze
+      - luoghi
+    template_blueprints:
+      - pericolo_ambientale
+  tesoro:
+    label: Tesoro
+    folder: Mondi/Compendium
+    priority: essential
+    purpose: Gestisce ricompense, valore, rarita, proprietario e gancio di campagna.
+    create_when:
+      - il tesoro e ricompensa, leva narrativa o contenuto riusabile
+    types:
+      - tesoro
+    required_fields:
+      - categoria
+      - stato
+    useful_fields:
+      - fonte
+      - rarita
+      - valore
+      - ricompense
+      - proprietario
+      - luogo
+      - gancio
+    template_blueprints:
+      - tesoro_dnd
   conflitto:
     label: Conflitto
     folder: Mondi/Conflitti
@@ -572,23 +777,29 @@ categories:
     label: Cosmologia
     folder: Mondi/Cosmologia
     priority: defer
-    purpose: Regola piani, soglie, leggi arcane e principi cosmici solo quando diventano giocabili.
+    purpose: Regola piani, soglie, leggi arcane, morte, divino e contraddizioni metafisiche del mondo.
     create_when:
-      - una legge cosmica produce scelta, costo o conseguenza al tavolo
+      - una legge cosmica fonda magia, religione, morte, geografia sacra o limiti della realta
+      - serve distinguere verita cosmica, dottrina religiosa, leggenda e versione contraddittoria
     types:
-      - piano
-      - reame divino
-      - principio cosmico
-      - soglia
-      - legge arcana
-      - patto
-      - anomalia
-      - mistero arcano
+      - legge cosmica
+      - piano o aldila
+      - divinita
+      - pantheon
     required_fields:
       - categoria
       - stato
       - mondo
     useful_fields:
+      - principi_realta
+      - leggi_metafisiche
+      - soglie_accesso
+      - morte_aldila
+      - effetti_su_morte
+      - religioni_collegate
+      - culture_collegate
+      - luoghi_sacri
+      - versioni_contrapposte
       - simboli_visibili
       - costo_sociale
       - evoluzione_se_ignorata
@@ -621,7 +832,6 @@ categories:
       - il contenuto va consegnato, letto o riusato in sessione
     types:
       - lettera
-      - mappa
       - documento
       - indizio
       - dispensa

@@ -40,15 +40,15 @@
   }
 
   const pluginProfile = await readJsonRel("z.automazioni/data/runtime/plugin_profile.json", {
-    default_workflow_plugins: ["Dataview", "Meta Bind", "Templater", "Tasks", "Dice Roller", "Fantasy Statblocks"],
-    default_manual_action: "Abilita il plugin dai plugin community e usa il fallback Markdown della pagina.",
+    default_support_plugins: ["Dataview", "Meta Bind", "Templater", "Tasks", "Dice Roller", "Fantasy Statblocks"],
+    default_manual_action: "Abilita il plugin dai plugin community e riapri la nota.",
     plugins_by_label: {},
-    workflow_plugins: {}
+    support_plugins: {}
   });
   const pluginByLabel = pluginProfile.plugins_by_label ?? {};
-  const workflowPluginFallbacks = pluginProfile.workflow_plugins ?? {};
-  const defaultWorkflowPlugins = asArray(pluginProfile.default_workflow_plugins).length
-    ? asArray(pluginProfile.default_workflow_plugins)
+  const supportPluginFallbacks = pluginProfile.support_plugins ?? {};
+  const defaultSupportPlugins = asArray(pluginProfile.default_support_plugins).length
+    ? asArray(pluginProfile.default_support_plugins)
     : ["Dataview", "Meta Bind", "Templater", "Tasks", "Dice Roller", "Fantasy Statblocks"];
 
   function pluginInfo(label) {
@@ -74,7 +74,7 @@
   function pluginManualAction(label) {
     return pluginInfo(label).manual_action
       ?? pluginProfile.default_manual_action
-      ?? "Abilita il plugin dai plugin community e usa il fallback Markdown della pagina.";
+      ?? "Abilita il plugin dai plugin community e riapri la nota.";
   }
 
   function describeButtonTemplate(template) {
@@ -183,11 +183,11 @@
 
     const actions = [];
     if (active) {
-      actions.push({ title: "Gioca la sessione attiva", meta: active.file.name, body: "Apri il cockpit del tavolo.", link: "Hub/Durante il Gioco.md" });
+      actions.push({ title: "Gioca la sessione attiva", meta: active.file.name, body: "Apri la vista del tavolo.", link: active.file.path });
     } else if (prep) {
-      actions.push({ title: "Finisci la preparazione", meta: prep.file.name, body: "C'e una sessione in preparazione.", link: "Risorse/Preparazione Sessione.md" });
+      actions.push({ title: "Finisci la preparazione", meta: prep.file.name, body: "C'e una sessione in preparazione.", link: prep.file.path });
     } else {
-      actions.push({ title: "Crea una sessione", meta: "Nessuna sessione attiva", body: "Parti da Preparazione Sessione.", link: "Risorse/Preparazione Sessione.md" });
+      actions.push({ title: "Crea una sessione", meta: "Nessuna sessione attiva", body: "Crea una sessione e collegala al mondo.", link: "" });
     }
 
     if (inbox.length) {
@@ -348,7 +348,7 @@
         title: `${ok ? "OK" : "Manca"} · ${label}`,
         meta: pageTitle(world),
         body: ok ? readyText : "Completa questo punto prima di usare il mondo come base per una campagna.",
-        importa: fieldText(world.prossime_entita_consigliate) || "Quando i sei blocchi sono verdi, passa a mappe, relazioni e prima sessione.",
+        importa: fieldText(world.prossime_entita_consigliate) || "Quando i sei blocchi sono verdi, passa a luoghi, relazioni e prima sessione.",
         link: world.file.path,
         cls: `gdr-info-card compact ${ok ? "gdr-kind-ready" : "gdr-kind-missing"}`
       });
@@ -356,13 +356,6 @@
 
     const grid = dv.el("div", "", { cls: "gdr-card-grid compact" });
     grid.innerHTML = cards.join("");
-  }
-
-  async function readWorldbuildingCockpit() {
-    return readJsonRel("z.automazioni/data/runtime/worldbuilding_cockpit.json", {
-      surfaces: [],
-      queues: []
-    });
   }
 
   function dvItems(dv, value) {
@@ -378,7 +371,6 @@
     const category = String(page?.categoria ?? page?.tipo ?? "").trim();
     if (category) return category;
     const folder = String(page?.file?.folder ?? "");
-    if (folder.includes("Risorse/Mappe")) return "mappa";
     if (folder.includes("Mondi/Luoghi")) return "luogo";
     if (folder.includes("Mondi/Fazioni")) return "fazione";
     if (folder.includes("Mondi/Missioni")) return "missione";
@@ -391,7 +383,7 @@
       "mondo", "campagna", "campagne", "luogo", "luogo_padre", "partenza", "arrivo",
       "luoghi", "regioni", "culture", "lingue", "religioni", "fazioni", "fazioni_controllanti",
       "personaggi", "missioni", "conflitti", "sessioni", "relazioni", "risorse",
-      "risorse_trasportate", "rotte", "mercati", "mappe", "propaga_a", "entita_impattate",
+      "risorse_trasportate", "rotte", "mercati", "propaga_a", "entita_impattate",
       "connessioni", "collegamenti", "indizi", "segreti"
     ];
 
@@ -450,11 +442,7 @@
     const pages = dv.pages('"Mondi" OR "Campagne" OR "Inbox"')
       .where(inScope)
       .array();
-    const maps = dv.pages('"Risorse/Mappe"')
-      .where(page => real(page) && matchesWorld(page))
-      .array();
-
-    return { pages, maps, inScope, selectedWorld, selectedCampaigns };
+    return { pages, inScope, selectedWorld, selectedCampaigns };
   }
 
   function worldbuilderMissingRows(dv, context) {
@@ -481,23 +469,11 @@
       if (category === "luogo" && !hasValue(dv, page.fazioni) && !hasValue(dv, page.governante)) {
         add(page, "luogo senza potere", "Collega chi controlla, minaccia o usa questo luogo.", 4);
       }
-      if (category === "luogo" && !hasValue(dv, page.mappa) && !hasValue(dv, page.mappe) && !hasValue(dv, page.coordinates)) {
-        add(page, "luogo senza mappa o coordinate", "Collega una mappa o compila coordinate per l'atlante.", 2);
-      }
       if (["fazione", "religione", "conflitto", "relazione"].includes(category) && Number(page.pressione ?? 0) > 0 && !hasValue(dv, page.prossima_mossa)) {
         add(page, "pressione senza prossima mossa", "Decidi cosa fa se i PG non intervengono.", 5);
       }
       if (category === "missione" && !hasValue(dv, page.fazioni) && !hasValue(dv, page.luoghi)) {
         add(page, "missione senza appigli", "Collega luogo, fazione o committente.", 4);
-      }
-    }
-
-    for (const map of context.maps) {
-      if (!hasValue(dv, map.luogo) && !hasValue(dv, map.luoghi)) {
-        add(map, "mappa senza luoghi", "Collega almeno un luogo alla mappa.", 3);
-      }
-      if (map.pubblico === true && !hasValue(dv, map.player_safe) && !hasValue(dv, map.cosa_mostrare)) {
-        add(map, "mappa pubblica senza testo sicuro", "Scrivi cosa possono vedere i giocatori.", 4);
       }
     }
 
@@ -520,15 +496,14 @@
   }
 
   function worldbuilderPublicRows(dv, context) {
-    const candidates = [...context.pages, ...context.maps];
-    return candidates
+    return context.pages
       .filter(page => {
         const category = worldbuilderCategory(page);
         return publicCandidate(page, category)
           || page.pubblico === true
           || hasValue(dv, page.player_safe)
           || hasValue(dv, page.versione_giocatori)
-          || (["missione", "luogo", "dispensa", "mappa", "sessione"].includes(category) && ["pronto", "in gioco", "giocata", "consegnato"].includes(String(page.stato ?? "")));
+          || (["missione", "luogo", "dispensa", "sessione"].includes(category) && ["pronto", "in gioco", "giocata", "consegnato"].includes(String(page.stato ?? "")));
       })
       .sort((left, right) => (hasPrivateFields(left) === hasPrivateFields(right) ? 0 : hasPrivateFields(left) ? 1 : -1));
   }
@@ -540,7 +515,6 @@
     const ready = worldbuilderReadyRows(dv, context);
     const pressureRows = worldbuilderPressureRows(dv, context);
     const publicRows = worldbuilderPublicRows(dv, context);
-    const mapRows = context.maps.filter(page => hasValue(dv, page.coordinates) || hasValue(dv, page.luogo) || hasValue(dv, page.luoghi));
     const next = !worlds.length
       ? ["Fai adesso: crea mondo", "Nessun mondo operativo nel filtro.", "Usa Nuovo mondo guidato e torna qui."]
       : missing.length
@@ -556,14 +530,14 @@
         title: next[0],
         meta: next[1],
         body: next[2],
-        importa: "Il cockpit privilegia il prossimo passo, non la completezza enciclopedica.",
+        importa: "La vista privilegia il prossimo passo, non la completezza enciclopedica.",
         cls: `gdr-info-card compact ${missing.length || !worlds.length ? "gdr-kind-missing" : "gdr-kind-ready"}`
       }),
       cardHtml({
         title: "Cosa manca",
         meta: `${missing.length} interventi`,
         body: missing[0]?.problem ?? "Nessun buco pratico evidente.",
-        importa: missing[0]?.action ?? "Passa a pressioni, mappe o materiale player-safe.",
+        importa: missing[0]?.action ?? "Passa a pressioni, connessioni o materiale player-safe.",
         link: missing[0]?.page?.file?.path ?? "",
         cls: `gdr-info-card compact ${missing.length ? "gdr-kind-missing" : "gdr-kind-ready"}`
       }),
@@ -587,17 +561,9 @@
         title: "Player-safe",
         meta: `${publicRows.length} candidati`,
         body: publicRows[0] ? pageTitle(publicRows[0]) : "Niente da consegnare per ora.",
-        importa: publicRows[0] ? fieldText(publicRows[0].player_safe ?? publicRows[0].recap_pubblico ?? publicRows[0].versione_giocatori) || "Verifica che non contenga campi DM." : "Compila player_safe su dispense, luoghi, mappe o missioni.",
+        importa: publicRows[0] ? fieldText(publicRows[0].player_safe ?? publicRows[0].recap_pubblico ?? publicRows[0].versione_giocatori) || "Verifica che non contenga campi DM." : "Compila player_safe su dispense, luoghi o missioni.",
         link: publicRows[0]?.pubblico === true && !hasPrivateFields(publicRows[0]) ? publicRows[0].file?.path ?? "" : "",
         cls: `gdr-info-card compact ${publicRows.length ? "gdr-kind-ready" : "gdr-kind-missing"}`
-      }),
-      cardHtml({
-        title: "Mappe",
-        meta: `${mapRows.length} supporti`,
-        body: mapRows[0] ? pageTitle(mapRows[0]) : "Nessuna mappa o coordinata trovata.",
-        importa: mapRows[0] ? fieldText(mapRows[0].uso_al_tavolo ?? mapRows[0].luogo ?? mapRows[0].luoghi) : "Collega coordinate, mappa o layer a un luogo giocabile.",
-        link: mapRows[0]?.file?.path ?? "",
-        cls: `gdr-info-card compact ${mapRows.length ? "gdr-kind-ready" : "gdr-kind-missing"}`
       })
     ];
     const grid = dv.el("div", "", { cls: "gdr-card-grid compact gdr-worldbuilder-now" });
@@ -633,8 +599,12 @@
   }
 
   async function renderWorldbuilderQueues(dv, worldLink = "", campaignLinks = []) {
-    const cockpit = await readWorldbuildingCockpit();
-    const labels = new Map((cockpit.queues ?? []).map(queue => [queue.id, queue.label]));
+    const labels = new Map([
+      ["missing", "Buchi"],
+      ["ready", "Pronte"],
+      ["pressure", "Pressioni"],
+      ["public", "Player-safe"]
+    ]);
     const context = worldbuilderScope(dv, worldLink, campaignLinks);
     const missing = worldbuilderMissingRows(dv, context).slice(0, 12);
     const ready = worldbuilderReadyRows(dv, context).slice(0, 12);
@@ -651,8 +621,8 @@
 
     renderTable(
       "missing",
-      ["Nota", "Manca", "Azione", "Workflow esistente"],
-      missing.map(row => [row.page.file?.link ?? row.page.file?.path, row.missingLabel ?? row.problem, row.action, row.workflow ?? "Manuale: modifica i campi indicati nella nota."]),
+      ["Nota", "Manca", "Azione", "Nota"],
+      missing.map(row => [row.page.file?.link ?? row.page.file?.path, row.missingLabel ?? row.problem, row.action, "Modifica i campi indicati nella nota."]),
       "Nessun buco pratico evidente con i filtri correnti."
     );
     renderTable(
@@ -673,173 +643,6 @@
       publicRows.map(page => [page.file?.link ?? page.file?.path, hasPrivateFields(page) ? "da ripulire" : page.pubblico === true ? "pubblica" : page.stato ?? "", fieldText(page.player_safe ?? page.recap_pubblico ?? page.versione_giocatori) || "da compilare"]),
       "Nessun materiale player-safe nel filtro corrente."
     );
-  }
-
-  async function renderWorldbuilderSurfaceLinks(dv) {
-    const cockpit = await readWorldbuildingCockpit();
-    const surfaces = cockpit.surfaces ?? [];
-    if (!surfaces.length) {
-      renderEmptyState(dv, {
-        title: "Superfici non configurate",
-        action: "Rigenera il contratto worldbuilding cockpit dalla pipeline sorgenti.",
-        button: "npm run sync:sources"
-      });
-      return;
-    }
-
-    const grid = dv.el("div", "", { cls: "gdr-card-grid compact gdr-worldbuilder-surfaces" });
-    grid.innerHTML = surfaces.map(surface => {
-      const status = pluginStatus(surface.plugin);
-      const state = status.ok === true
-        ? "attiva"
-        : surface.generated_release
-          ? "generata in release"
-          : "fallback Markdown";
-      return cardHtml({
-        title: surface.label,
-        meta: `${surface.role} · ${state}`,
-        body: surface.action,
-        importa: surface.why,
-        link: surface.target,
-        badge: surface.badge,
-        cls: `gdr-info-card compact ${status.ok === false ? "gdr-kind-missing" : "gdr-kind-ready"}`
-      });
-    }).join("");
-  }
-
-  async function renderWorkflowCommandDeck(dv, workflowId, options = {}) {
-    const dataPath = "z.automazioni/data/workflows/quick_actions.json";
-
-    try {
-      const raw = await app.vault.adapter.read(dataPath);
-      const data = JSON.parse(raw);
-      const workflow = data.workflows?.[workflowId];
-      const metaBind = await readJsonRel(".obsidian/plugins/obsidian-meta-bind-plugin/data.json", {});
-      const buttonTemplates = new Map(asArray(metaBind?.buttonTemplates).map(button => [String(button.id ?? ""), button]));
-
-      if (!workflow) {
-        renderEmptyState(dv, {
-          title: "Flusso non trovato",
-          action: `Aggiungi ${workflowId} a Dev/Source/YAML/json/workflows.yaml e rigenera i dati workflow.`,
-          button: "npm run generate:workflow-data"
-        });
-        return;
-      }
-
-      const plugins = asArray(workflow.required_plugins);
-      const entryPoints = asArray(workflow.entry_points);
-      const actions = asArray(workflow.quick_actions);
-      const actionGroups = Object.values(workflow.action_groups ?? {});
-      const diagnostic = options.mode === "diagnostic";
-      const simple = !diagnostic && (options.mode === "simple" || workflow.audience === "user");
-      const entryStates = await Promise.all(entryPoints.map(async entry => [entry, await canReadRel(entry)]));
-      const missingEntries = entryStates.filter(([, ok]) => !ok).map(([entry]) => entry);
-      const metaBindStatus = pluginStatus("Meta Bind");
-      const grid = dv.el("div", "", { cls: "gdr-card-grid compact" });
-      const cards = [];
-      const renderActionCard = (action, secondary = false) => {
-        const button = String(action.button ?? "");
-        const template = buttonTemplates.get(button);
-        const metaBindReady = metaBindStatus.ok === true;
-        const configured = Boolean(template);
-        const ready = Boolean(button && configured && metaBindReady);
-        const missingReason = !button
-          ? "Pulsante mancante nel workflow YAML."
-          : !configured
-            ? "Template Meta Bind non configurato."
-            : !metaBindReady
-              ? "Plugin Meta Bind non attivo."
-              : "Azione pronta.";
-        const fallback = !button
-          ? "Correggi Dev/Source/YAML/json/workflows.yaml."
-          : !configured
-            ? `Aggiungi ${button} in .obsidian/plugins/obsidian-meta-bind-plugin/data.json.`
-            : !metaBindReady
-              ? `Abilita Meta Bind (${metaBindStatus.id}) nei plugin community.`
-              : describeButtonTemplate(template);
-
-        if (simple) {
-          return cardHtml({
-            title: action.label || button || (secondary ? "Azione secondaria" : "Azione"),
-            meta: ready ? (secondary ? "Opzione utile" : "Azione principale") : "Azione da controllare",
-            body: action.use_when || "Usala quando serve.",
-            importa: ready
-              ? "Se non risponde, usa la tabella di fallback in fondo alla pagina."
-              : "Se il comando non compare come pulsante, apri Setup Guidato o Controllo Vault.",
-            cls: `gdr-info-card compact ${ready ? "gdr-kind-ready" : "gdr-kind-missing"}`
-          });
-        }
-
-        return cardHtml({
-          title: action.label || button || (secondary ? "Azione secondaria" : "Azione"),
-          meta: button ? `BUTTON[${button}] · ${ready ? "Pronto" : "Da controllare"}` : "Pulsante mancante",
-          body: action.use_when || "Condizione d'uso non dichiarata.",
-          importa: `${missingReason} Fallback: ${fallback}`,
-          cls: `gdr-info-card compact ${ready ? "gdr-kind-ready" : "gdr-kind-missing"}`
-        });
-      };
-
-      cards.push(cardHtml({
-        title: simple ? "Percorso" : "Flusso operativo",
-        meta: simple ? "Pronto da usare" : workflowId,
-        body: workflow.user_goal || "Obiettivo workflow non dichiarato.",
-        importa: entryPoints.length
-          ? missingEntries.length
-            ? simple ? "Una pagina del percorso non e leggibile: apri Setup Guidato." : `Entry point mancanti: ${missingEntries.join(", ")}.`
-            : simple ? "Segui le azioni nell'ordine in cui compaiono." : `Entry point verificati: ${entryPoints.join(", ")}.`
-          : "Manca una pagina operativa collegata.",
-        cls: `gdr-info-card compact ${entryPoints.length && !missingEntries.length ? "gdr-kind-ready" : "gdr-kind-missing"}`
-      }));
-
-      if (!simple) {
-        for (const plugin of plugins) {
-          const status = pluginStatus(plugin);
-          cards.push(cardHtml({
-            title: plugin,
-            meta: status.ok === true ? "Plugin attivo" : status.ok === false ? "Plugin da attivare" : "Verifica manuale",
-            body: pluginSymptom(plugin),
-            importa: status.ok === true
-              ? `Plugin attivo: ${status.id}.`
-              : `${pluginManualAction(plugin)} ID plugin: ${status.id}.`,
-            cls: `gdr-info-card compact ${status.ok === true ? "gdr-kind-ready" : "gdr-kind-missing"}`
-          }));
-        }
-
-        for (const action of actions) {
-          cards.push(renderActionCard(action));
-        }
-
-        for (const group of actionGroups) {
-          cards.push(cardHtml({
-            title: group.label || "Gruppo azioni",
-            meta: `${asArray(group.actions).length} azioni secondarie`,
-            body: group.purpose || "Gruppo operativo dichiarato nel workflow YAML.",
-            importa: "Usalo solo quando il flusso principale non basta.",
-            cls: "gdr-info-card compact gdr-kind-ready"
-          }));
-
-          for (const action of asArray(group.actions)) {
-            cards.push(renderActionCard(action, true));
-          }
-        }
-
-        cards.push(cardHtml({
-          title: "Se un controllo non risponde",
-          meta: "Fallback operativo",
-          body: "Leggi la condizione d'uso dell'azione, apri manualmente la pagina o il template indicato e completa i campi richiesti nella nota.",
-          importa: "Il deck ora distingue plugin mancanti, template Meta Bind assenti ed entry point non leggibili.",
-          cls: "gdr-info-card compact"
-        }));
-      }
-
-      grid.innerHTML = cards.join("");
-    } catch (error) {
-      renderEmptyState(dv, {
-        title: "Workflow runtime non disponibile",
-        action: `Rigenera ${dataPath}; errore: ${error.message}`,
-        button: "npm run generate:workflow-data"
-      });
-    }
   }
 
   function renderOnboardingReadiness(dv) {
@@ -873,7 +676,7 @@
         meta: `${worlds.length} mondo/i trovati`,
         body: "Crea o apri una sessione e collegala al mondo.",
         importa: "Ti serve solo una prima scena pronta da giocare.",
-        button: "BUTTON[preparazione-sessione-risorse-preparazione-sessione]",
+        button: "BUTTON[nuova-sessione-z-modelli-dm-sessione-md]",
         cls: "gdr-info-card compact gdr-kind-ready"
       };
     } else if (active) {
@@ -882,7 +685,7 @@
         meta: pageTitle(active) || "Sessione attiva",
         body: "Apri il tavolo operativo e cattura quello che succede senza riordinare tutto subito.",
         importa: "Il riordino arriva dopo la sessione.",
-        button: "BUTTON[gioca-hub-durante-il-gioco-durante-il-gioco]",
+        button: "",
         cls: "gdr-info-card compact gdr-kind-ready"
       };
     } else if (played.length && openConsequences.length) {
@@ -891,7 +694,7 @@
         meta: `${openConsequences.length} conseguenze o mosse aperte`,
         body: "Scegli cosa cambia davvero e prepara la prossima mossa.",
         importa: "Questo evita che gli appunti restino scollegati.",
-        button: "BUTTON[fuori-scena-hub-cosa-succede-fuori-scena-cosa-succede-fuori-scena]",
+        button: "BUTTON[wizard-conseguenza]",
         cls: "gdr-info-card compact gdr-kind-ready"
       };
     } else {
@@ -900,7 +703,7 @@
         meta: `${sessions.length} sessione/i nel vault`,
         body: "Apri Preparazione Sessione e rendi attiva quella che vuoi giocare.",
         importa: "Una sola sessione attiva rende chiaro il tavolo operativo.",
-        button: "BUTTON[preparazione-sessione-risorse-preparazione-sessione]",
+        button: "BUTTON[nuova-sessione-z-modelli-dm-sessione-md]",
         cls: "gdr-info-card compact gdr-kind-ready"
       };
     }
@@ -909,8 +712,8 @@
     grid.innerHTML = cardHtml(card);
   }
 
-  function renderPluginTroubleshooting(dv, workflowId = "") {
-    const labels = workflowPluginFallbacks[workflowId] ?? defaultWorkflowPlugins;
+  function renderPluginTroubleshooting(dv, surfaceId = "") {
+    const labels = supportPluginFallbacks[surfaceId] ?? defaultSupportPlugins;
     const grid = dv.el("div", "", { cls: "gdr-card-grid compact" });
 
     grid.innerHTML = labels.map(label => {
@@ -923,10 +726,10 @@
         cls: `gdr-info-card compact ${status.ok === true ? "gdr-kind-ready" : "gdr-kind-missing"}`
       });
     }).join("") + cardHtml({
-      title: "Fallback manuale",
-      meta: workflowId || "generale",
-      body: "Se un pulsante non esegue l'azione, usa il testo del workflow come procedura manuale e aggiorna i campi YAML dalla nota.",
-      importa: "Il vault deve restare usabile anche senza automazione perfetta.",
+      title: "Uso manuale",
+      meta: surfaceId || "generale",
+      body: "Se un pulsante non esegue l'azione, apri il template o la nota collegata e aggiorna i campi YAML direttamente.",
+      importa: "Il runtime segnala lo stato dei plugin senza mantenere superfici parallele.",
       cls: "gdr-info-card compact"
     });
   }
@@ -939,13 +742,13 @@
     ];
     const setupOnly = [
       ["Campi guidati", ["Metadata Menu"], "Aiuta a compilare le note, ma puoi iniziare anche senza."],
-      ["Pagina iniziale", ["Homepage"], "Apre automaticamente Inizia Qui."],
-      ["Prima sessione", [], "Percorso pratico per giocare subito.", "Risorse/Prima Sessione In 15 Minuti.md"],
+      ["Pagina iniziale", [], "Apri direttamente la vista o la nota operativa che stai usando."],
+      ["Prima sessione", [], "Percorso pratico da gestire dentro la sessione attiva."],
       ["Fuori scena", [], "Serve dopo la sessione.", "Hub/Cosa Succede Fuori Scena.md"]
     ];
     const rows = mode === "setup" ? [...essential, ...setupOnly] : [
       ["Stato", ["Meta Bind", "Templater", "Dataview"], "Puoi iniziare da Crea mondo o Prepara sessione.", ".obsidian/snippets/gdr-vault.css"],
-      ["Percorso rapido", [], "Disponibile se vuoi giocare subito.", "Risorse/Prima Sessione In 15 Minuti.md"]
+      ["Percorso rapido", [], "Disponibile dentro la sessione attiva."]
     ];
     const checks = [];
 
@@ -994,7 +797,7 @@
         ["Controllo", page.fazioni_controllanti ?? page.fazioni, "Collega chi controlla prezzo, accesso o rischio."],
         ["Pressione", page.pressione, "Misura quanto il nodo economico sta cambiando."],
         ["Missioni", page.missioni, "Collega obiettivi che possono alterare il nodo."],
-        ["Mappa", page.mappa ?? page.mappe, "Collega marker, mappa o layer cartografico."]
+        ["Luogo", page.luogo ?? page.luoghi, "Collega il contesto geografico o sociale."]
       ],
       dispensa: [
         ["Pubblico", page.pubblico === true ? "Consegnabile ai giocatori." : "", "Decidi se questa dispensa e player-safe."],
@@ -1004,8 +807,8 @@
         ["Mondo", page.mondo, "Collega il contesto narrativo."]
       ],
       luogo: [
-        ["Coordinate", page.coordinates, "Compila coordinate se il luogo deve apparire in Atlante Mappe."],
-        ["Mappe", page.mappe ?? page.mappa, "Collega una mappa zoom, pubblica o DM."],
+        ["Scala", page.scala_geografica ?? page.funzione_luogo, "Definisci scala o funzione del luogo."],
+        ["Luogo padre", page.luogo_padre, "Collega regione, insediamento o sito superiore."],
         ["Controllo", page.fazioni ?? page.fazioni_controllanti, "Collega chi controlla, minaccia o usa questo luogo."],
         ["Missioni", page.missioni, "Collega missioni che possono cambiare lo stato del luogo."],
         ["Prossima mossa", page.prossima_mossa, "Definisci cosa succede qui se nessuno interviene."]
@@ -1058,9 +861,7 @@
       cls: `gdr-info-card compact ${fieldText(value) ? "gdr-kind-ready" : "gdr-kind-missing"}`
     })).join("");
 
-    if (family === "luogo") {
-      dv.paragraph("Usa Atlante Mappe per controllare marker e coordinate; usa Excalidraw o Canvas quando il luogo diventa rete di fronti o scene.");
-    } else if (family === "tracciato") {
+    if (family === "tracciato") {
       dv.paragraph("Un tracciato e utile quando pressione, innesco e prossima mossa trasformano tempo in conseguenze.");
     } else {
       dv.paragraph("Questa vista misura se la scheda produce gioco, connessioni e continuita invece di restare descrizione isolata.");
@@ -1085,11 +886,9 @@
     renderPartyControl,
     renderPluginTroubleshooting,
     renderVaultReadiness,
-    renderWorkflowCommandDeck,
     renderWorldCreationStatus,
     renderWorldbuilderNow,
     renderWorldbuilderQueues,
-    renderWorldbuilderReadiness,
-    renderWorldbuilderSurfaceLinks
+    renderWorldbuilderReadiness
   };
 })()

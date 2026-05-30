@@ -90,8 +90,7 @@ def collect_field_names(fields_core: dict[str, Any]) -> set[str]:
 
 
 def plugin_key(name: str, bindings: dict[str, Any]) -> str:
-    aliases = bindings.get("aliases", {})
-    return str(aliases.get(name, name))
+    return str(name)
 
 
 def known_frontmatter_fields(modules: dict[str, dict[str, Any]]) -> set[str]:
@@ -146,8 +145,6 @@ def validate_rendered(name: str, rendered: str) -> list[str]:
         errors.append(f"{name}: output contiene blocco Templater multilinea")
     if len(templater_tags) != 1:
         errors.append(f"{name}: output contiene {len(templater_tags)} tag Templater invece di 1")
-    if "Fallback" not in rendered and "fallback" not in rendered:
-        errors.append(f"{name}: output senza fallback Markdown esplicito")
     errors.extend(validate_tabs_blocks(name, rendered))
     errors.extend(validate_plugin_native_sheet(name, rendered))
 
@@ -237,9 +234,6 @@ def validate_plugin_native_sheet(name: str, rendered: str) -> list[str]:
             errors.append(f"{name}: scheda lunga senza callout funzionali")
         if not any(marker in rendered for marker in dynamic_markers):
             errors.append(f"{name}: scheda lunga senza blocchi dinamici o controlli plugin")
-        if "## Fallback Markdown" not in rendered:
-            errors.append(f"{name}: scheda lunga senza fallback Markdown strutturato")
-
         callout_headers = list(re.finditer(r"(?m)^> \[![^\]]+\].*$", rendered))
         for index, match in enumerate(callout_headers):
             start = match.end()
@@ -253,7 +247,7 @@ def validate_plugin_native_sheet(name: str, rendered: str) -> list[str]:
                 errors.append(f"{name}: callout vuoto ({match.group(0).strip()})")
 
     if name == "session":
-        required_tabs = ("Prepara", "Ancore", "Tavolo", "Mappa", "Live", "Dopo")
+        required_tabs = ("Prepara", "Ancore", "Tavolo", "Live", "Dopo")
         for tab in required_tabs:
             if f"tab: {tab}" not in rendered:
                 errors.append(f"{name}: tab sessione giocabile mancante ({tab})")
@@ -261,16 +255,13 @@ def validate_plugin_native_sheet(name: str, rendered: str) -> list[str]:
         tab_chunks = re.split(r"(?m)^tab: ", rendered)
         for chunk in tab_chunks[1:]:
             tab_name, _, body = chunk.partition("\n")
-            if not any(marker in body for marker in dynamic_markers) and not any(
-                link in body for link in ("[[z.bases/", ".excalidraw", "Canvas")
-            ):
+            if not any(marker in body for marker in dynamic_markers) and "[[z.bases/" not in body:
                 errors.append(f"{name}: tab senza funzione plugin reale ({tab_name.strip()})")
 
         required_runtime_views = (
             "renderPlayableOutline",
             "renderSessionAnchorCards",
             "renderSessionMaterialCards",
-            "renderSessionMapCards",
             "renderSessionLiveCards",
             "renderSessionPostCards",
         )
@@ -278,7 +269,7 @@ def validate_plugin_native_sheet(name: str, rendered: str) -> list[str]:
             if view not in rendered:
                 errors.append(f"{name}: vista DataviewJS giocabile mancante ({view})")
 
-        required_plugins = ("```tasks", "[[z.bases/", "Atlante Mappe.base", ".excalidraw", "Canvas", "dice: 1d20")
+        required_plugins = ("```tasks", "[[z.bases/", "dice: 1d20")
         for marker in required_plugins:
             if marker not in rendered:
                 errors.append(f"{name}: integrazione plugin giocabile mancante ({marker})")
@@ -288,7 +279,7 @@ def validate_plugin_native_sheet(name: str, rendered: str) -> list[str]:
             "luogo",
             name == "luogo" or name == "live_luogo" or name.startswith(("luogo_", "geografia_", "politica_")),
             "Territorio",
-            ("renderPlayabilityFamilyCards", '"luogo"', "Atlante Mappe.base", ".excalidraw", "Canvas"),
+            ("renderPlayabilityFamilyCards", '"luogo"', "luogo_padre", "autorita"),
         ),
         (
             "fazione",
@@ -316,7 +307,7 @@ def validate_plugin_native_sheet(name: str, rendered: str) -> list[str]:
         ),
         (
             "continuita",
-            name in {"conseguenza", "evento_storico", "wizard_conseguenza"},
+            name in {"conseguenza", "evento_storico"},
             "Continuita",
             ("renderPlayabilityFamilyCards", '"continuita"', "aggiornamenti_richiesti", "propagazione_stato"),
         ),

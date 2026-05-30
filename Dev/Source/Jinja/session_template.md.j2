@@ -65,21 +65,6 @@ tab: Tavolo
 > INPUT[inlineListSuggester(optionQuery("Mondi/Dispense"), useLinks(partial), allowOther):dispense]
 > ```
 >
-> Audio:
-> ```meta-bind
-> INPUT[inlineListSuggester(optionQuery("Risorse/Audio"), useLinks(partial), allowOther):audio]
-> ```
->
-> Immagini:
-> ```meta-bind
-> INPUT[inlineListSuggester(optionQuery("Risorse/Immagini"), useLinks(partial), allowOther):immagini]
-> ```
->
-> Video:
-> ```meta-bind
-> INPUT[inlineListSuggester(optionQuery("Risorse/Video"), useLinks(partial), allowOther):video]
-> ```
->
 > Riferimenti SRD: `INPUT[riferimenti_srd][:riferimenti_srd]`
 >
 > Riferimenti regola: `INPUT[riferimenti_regola][:riferimenti_regola]`
@@ -102,41 +87,17 @@ tab: Tavolo
 >
 > - [ ] Completa obiettivo, apertura e scelta #task
 > - [ ] Collega almeno tre ancore mondo #task
-> - [ ] Prepara almeno un incontro, handout, mappa o media #task
-
-tab: Mappa
-
-> [!mappa] Mappe E Scene Visuali
-> Mappe:
-> ```meta-bind
-> INPUT[inlineListSuggester(optionQuery("Risorse/Mappe"), useLinks(partial), allowOther):mappe]
-> ```
->
-> Luogo corrente: `INPUT[text:luogo_corrente]`
->
-> `BUTTON[nuova-mappa-zoom-z-modelli-mappe-mappa-zoom-md]`
->
-> `BUTTON[nuova-mappa-fronti-z-modelli-mappe-mappa-excalidraw-fronti-excalidraw-md-2]`
-
-> [!lettura]- Atlante E Fronti
-> - [[z.bases/Atlante Mappe.base]] usa Maps per Bases sui marker con `coordinates`.
-> - [[Risorse/Mappe/Schema Relazioni GDR.excalidraw]] mantiene lo schema visuale dei fronti.
-> - [[Risorse/Canvas Per GDR]] definisce quando usare Canvas per reti di scena con nodi canonici.
-
-> [!regia]- Mappe Sessione
-{{ dvw.quoted_runtime_block(modules.dataview_blocks.blocks.session_map_cards) }}
+> - [ ] Prepara almeno un incontro, handout o oggetto pronto #task
 
 tab: Live
 
-> [!regia] Cockpit
+> [!regia] Vista Tavolo
 > Attiva al tavolo: `INPUT[toggle:attiva]`
 >
 > Scena corrente: `INPUT[text:scena_corrente]`
 >
 > Tiro rapido: `dice: 1d20`
 >
-> `BUTTON[durante-il-gioco-durante-il-gioco]`
-
 > [!timer]- Decisioni E Conseguenze
 > Decisioni:
 > ```meta-bind
@@ -196,8 +157,6 @@ tab: Dopo
 | Pressioni |  |
 | Ancore mondo |  |
 | Incontri |  |
-| Mappe |  |
 | Dispense |  |
-| Media |  |
 | Decisioni |  |
 | Conseguenze |  |

@@ -2,45 +2,138 @@ id: entity_depth
 purpose: Contratti YAML per aumentare profondita, giocabilita e continuita delle entita fantasy senza spostare logica in JS.
 version: 0.1.0
 families:
+  mondo:
+    reason: Il mondo deve fondare realta, tono, memoria, cosmologie, geografia e canone prima di generare entita figlie.
+    frontmatter_profile: mondo
+    runtime_profile: mondo
+    required_frontmatter_fields:
+      - stato_canonico
+      - grado_certezza
+      - principi_realta
+      - leggi_del_mondo
+      - cosmologie
+      - continenti
+      - regioni
+      - culture_fondative
+      - memoria_pubblica
+      - versioni_contrapposte
+      - fonti
+      - connessioni
+    required_runtime_prompts:
+      - tono
+      - tema
+      - principi_realta
+      - leggi_del_mondo
+      - cosmologie
+      - memoria_pubblica
+    required_sections:
+      - fondazioni_lore
+      - cosmologia
+      - geografia
+      - canone
+    required_tabs:
+      - lore
+      - mondo
+      - profondita_fantasy
+    plugin_surfaces:
+      - meta_bind
+      - dataview
+      - bases
+      - callouts
+      - tabs
+  cosmologia:
+    reason: La cosmologia deve spiegare leggi metafisiche, morte, soglie, religioni e contraddizioni canoniche.
+    frontmatter_profile: cosmologia
+    runtime_profile: cosmologia
+    required_frontmatter_fields:
+      - stato_canonico
+      - grado_certezza
+      - principi_realta
+      - leggi_metafisiche
+      - soglie_accesso
+      - morte_aldila
+      - effetti_su_morte
+      - dottrine_religiose
+      - religioni_collegate
+      - culture_collegate
+      - luoghi_sacri
+      - versioni_contrapposte
+      - fonti
+      - connessioni
+    required_runtime_prompts:
+      - regola
+      - origine_funzione
+      - leggi_metafisiche
+      - soglie_accesso
+      - morte_aldila
+      - effetti_su_morte
+      - fenomeni_visibili
+    required_sections:
+      - fondazioni_lore
+      - leggi_metafisiche
+      - interpretazioni
+      - canone
+    required_tabs:
+      - lore
+      - cosmologia
+      - profondita_fantasy
+    plugin_surfaces:
+      - meta_bind
+      - dataview
+      - bases
+      - callouts
+      - tabs
   luogo:
-    reason: Il luogo deve produrre esplorazione, pressione, risorse, scena e conseguenze.
+    reason: Il luogo deve conservare geografia, memoria, abitanti, autorita, risorse e stratificazione prima della scena.
     frontmatter_profile: luogo
     runtime_profile: luogo
     required_frontmatter_fields:
       - depth_level
+      - scala_geografica
+      - bioma
       - origine
+      - impressione
+      - descrizione_lunga
+      - memoria_del_territorio
+      - tracce_passato
+      - funzione_storica
+      - funzione_attuale
+      - abitanti
+      - cultura_dominante
+      - autorita
       - tensione
       - dipendenze
       - simboli_visibili
       - bisogno_quotidiano
       - costo_sociale
       - evoluzione_se_ignorata
-      - gancio
-      - uso_al_tavolo
-      - player_safe
-      - prossima_mossa
+      - fonti
       - connessioni
     required_runtime_prompts:
       - origine
+      - impressione
+      - scala_geografica
+      - memoria_del_territorio
+      - tracce_passato
       - dipendenze
       - simboli_visibili
       - bisogno_quotidiano
       - costo_sociale
       - evoluzione_se_ignorata
     required_sections:
-      - profondita_lore
-      - giocabilita
+      - fondazioni_lore
+      - geografia
+      - memoria
       - continuita
-      - pubblicazione
+      - descrizione
     required_tabs:
+      - lore
+      - territorio
       - profondita_fantasy
     plugin_surfaces:
       - meta_bind
       - dataview
       - bases
-      - maps
-      - excalidraw
-      - canvas
   fazione:
     reason: La fazione deve avere agenda, risorse, dipendenze, costo sociale, pressione e propagazione.
     frontmatter_profile: fazione
@@ -117,7 +210,6 @@ families:
       - dataview
       - bases
       - tasks
-      - calendarium
   tracciato:
     reason: Il tracciato deve rendere visibile una pressione, il modo in cui avanza e cosa cambia nel mondo.
     frontmatter_profile: tracciato

@@ -335,7 +335,6 @@ families:
     plugin_surfaces:
       - meta_bind
       - dataview
-      - calendarium
       - bases
     profile_contracts:
       culto:
@@ -359,16 +358,6 @@ families:
           - morte_aldila
           - effetti_su_magia
           - misteri
-      ricorrenza_calendario:
-        required_frontmatter_fields:
-          - nome
-          - categoria
-          - mondo
-          - data_mondo
-          - festa
-          - scadenze_rituali
-          - conseguenze
-          - fc-calendar
   world_history_geography_ecology:
     reason: Storia, geografia ed ecologia devono mostrare causa, luogo, specie, memoria pubblica e impatto al tavolo.
     required_sections:
@@ -381,9 +370,6 @@ families:
     plugin_surfaces:
       - meta_bind
       - dataview
-      - maps
-      - excalidraw
-      - canvas
     profile_contracts:
       era_storica:
         required_frontmatter_fields:
@@ -415,15 +401,6 @@ families:
           - tensione
           - bisogno_quotidiano
           - evoluzione_se_ignorata
-      mappa:
-        required_frontmatter_fields:
-          - nome
-          - categoria
-          - mondo
-          - luogo
-          - coordinates
-          - layer_mappa
-          - player_safe
       lore_capture:
         required_frontmatter_fields:
           - nome

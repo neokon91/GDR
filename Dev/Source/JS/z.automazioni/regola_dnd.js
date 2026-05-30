@@ -11,7 +11,7 @@ async function regolaDnd(tp) {
     return await helpers.renderFrontmatter("regola_dnd", {
         id: helpers.slugify(name),
         nome: helpers.yamlQuote(name),
-        tipo: "homebrew",
+        tipo: "regola",
         stato: "bozza",
         fonte: helpers.yamlQuote(await helpers.promptOptional(tp, prompts.fonte ?? "Fonte SRD o homebrew", "homebrew") || "homebrew"),
         regola: helpers.yamlQuote(await helpers.promptOptional(tp, prompts.regola ?? "Regola sintetica")),

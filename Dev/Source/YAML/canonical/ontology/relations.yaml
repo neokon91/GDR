@@ -1,0 +1,354 @@
+id: ontology_relations
+purpose: Relazioni semantiche tra classi, campi frontmatter e link Obsidian.
+version: 0.1.0
+policy:
+  rule: Le relazioni descrivono domain, range e cardinalita; non aggiungono lore descrittiva nel frontmatter.
+  storage_rule: I campi relazione devono puntare a campi atomici dichiarati in fields_core.
+relations:
+  appartiene_a_mondo:
+    label: Appartiene a mondo
+    field: mondo
+    domain:
+      - cosmologia
+      - luogo
+      - ecologia
+      - cultura
+      - religione
+      - fazione
+      - personaggio
+      - creatura
+      - incontro
+      - trappola
+      - pericolo_ambientale
+      - oggetto
+      - incantesimo
+      - regola
+      - missione
+      - tracciato
+      - sessione
+      - campagna
+    range:
+      - mondo
+    cardinality: one
+    inverse: contiene_entita
+    storage: wikilink
+    required_for:
+      - cosmologia
+      - luogo
+      - cultura
+  contiene_luogo:
+    label: Contiene luogo
+    field: luogo_padre
+    domain:
+      - luogo
+      - ecologia
+    range:
+      - luogo
+    cardinality: zero_or_one
+    inverse: luoghi_figli
+    storage: wikilink
+  usa_luoghi:
+    label: Usa luoghi
+    field: luoghi
+    domain:
+      - cultura
+      - religione
+      - fazione
+      - missione
+      - sessione
+      - campagna
+    range:
+      - luogo
+    cardinality: many
+    storage: wikilink_list
+  collega_regioni:
+    label: Collega regioni
+    field: regioni
+    domain:
+      - mondo
+    range:
+      - luogo
+    cardinality: many
+    storage: wikilink_list
+  definisce_cosmologie:
+    label: Definisce cosmologie
+    field: cosmologie
+    domain:
+      - mondo
+    range:
+      - cosmologia
+    cardinality: many
+    storage: wikilink_list
+  ha_culture_fondative:
+    label: Ha culture fondative
+    field: culture_fondative
+    domain:
+      - mondo
+    range:
+      - cultura
+    cardinality: many
+    storage: wikilink_list
+  collega_culture:
+    label: Collega culture
+    field: culture_collegate
+    domain:
+      - cosmologia
+      - luogo
+      - ecologia
+      - religione
+      - fazione
+    range:
+      - cultura
+    cardinality: many
+    storage: wikilink_list
+  collega_religioni:
+    label: Collega religioni
+    field: religioni_collegate
+    domain:
+      - cosmologia
+      - cultura
+      - luogo
+      - ecologia
+    range:
+      - religione
+    cardinality: many
+    storage: wikilink_list
+  usa_religioni:
+    label: Usa religioni
+    field: religioni
+    domain:
+      - mondo
+      - cosmologia
+      - cultura
+      - luogo
+      - ecologia
+      - fazione
+    range:
+      - religione
+    cardinality: many
+    storage: wikilink_list
+  ha_divinita:
+    label: Ha divinita
+    field: divinita
+    domain:
+      - cosmologia
+      - religione
+      - cultura
+    range:
+      - cosmologia
+      - religione
+    cardinality: many
+    storage: wikilink_list
+  ha_luoghi_sacri:
+    label: Ha luoghi sacri
+    field: luoghi_sacri
+    domain:
+      - cosmologia
+      - religione
+      - cultura
+    range:
+      - luogo
+    cardinality: many
+    storage: wikilink_list
+  collega_luoghi:
+    label: Collega luoghi
+    field: luoghi_collegati
+    domain:
+      - cosmologia
+      - religione
+      - fazione
+    range:
+      - luogo
+    cardinality: many
+    storage: wikilink_list
+  coinvolge_fazioni:
+    label: Coinvolge fazioni
+    field: fazioni
+    domain:
+      - luogo
+      - ecologia
+      - cultura
+      - missione
+      - sessione
+      - campagna
+      - incontro
+    range:
+      - fazione
+    cardinality: many
+    storage: wikilink_list
+  coinvolge_personaggi:
+    label: Coinvolge personaggi
+    field: personaggi
+    domain:
+      - luogo
+      - ecologia
+      - fazione
+      - missione
+      - sessione
+      - campagna
+      - incontro
+    range:
+      - personaggio
+    cardinality: many
+    storage: wikilink_list
+  coinvolge_creature:
+    label: Coinvolge creature
+    field: creature
+    domain:
+      - luogo
+      - ecologia
+      - missione
+      - sessione
+      - incontro
+    range:
+      - creatura
+    cardinality: many
+    storage: wikilink_list
+  usa_oggetti:
+    label: Usa oggetti
+    field: oggetti
+    domain:
+      - personaggio
+      - creatura
+      - missione
+      - incontro
+      - tesoro
+    range:
+      - oggetto
+    cardinality: many
+    storage: wikilink_list
+  usa_incantesimi:
+    label: Usa incantesimi
+    field: incantesimi
+    domain:
+      - personaggio
+      - creatura
+      - classe
+      - regola
+    range:
+      - incantesimo
+    cardinality: many
+    storage: list
+  produce_missioni:
+    label: Produce missioni
+    field: missioni
+    domain:
+      - mondo
+      - cosmologia
+      - luogo
+      - ecologia
+      - cultura
+      - fazione
+      - sessione
+      - campagna
+    range:
+      - missione
+    cardinality: many
+    storage: wikilink_list
+  compare_in_sessioni:
+    label: Compare in sessioni
+    field: sessioni
+    domain:
+      - mondo
+      - cosmologia
+      - luogo
+      - ecologia
+      - cultura
+      - fazione
+      - personaggio
+      - creatura
+      - missione
+    range:
+      - sessione
+    cardinality: many
+    storage: wikilink_list
+  connessione_generica:
+    label: Connessione generica
+    field: connessioni
+    domain:
+      - mondo
+      - cosmologia
+      - luogo
+      - ecologia
+      - cultura
+      - religione
+      - fazione
+      - personaggio
+      - creatura
+      - incontro
+      - trappola
+      - pericolo_ambientale
+      - oggetto
+      - incantesimo
+      - regola
+      - missione
+      - tracciato
+      - sessione
+      - campagna
+    range:
+      - mondo
+      - cosmologia
+      - luogo
+      - ecologia
+      - cultura
+      - religione
+      - fazione
+      - personaggio
+      - creatura
+      - incontro
+      - trappola
+      - pericolo_ambientale
+      - oggetto
+      - incantesimo
+      - regola
+      - missione
+      - tracciato
+      - sessione
+      - campagna
+    cardinality: many
+    storage: wikilink_list
+  cita_fonti:
+    label: Cita fonti
+    field: fonti
+    domain:
+      - mondo
+      - cosmologia
+      - luogo
+      - ecologia
+      - cultura
+      - religione
+      - fazione
+      - personaggio
+      - creatura
+      - incontro
+      - trappola
+      - pericolo_ambientale
+      - oggetto
+      - incantesimo
+      - regola
+      - missione
+      - tracciato
+      - sessione
+      - campagna
+    range:
+      - mondo
+      - cosmologia
+      - luogo
+      - ecologia
+      - cultura
+      - religione
+      - fazione
+      - personaggio
+      - creatura
+      - incontro
+      - trappola
+      - pericolo_ambientale
+      - oggetto
+      - incantesimo
+      - regola
+      - missione
+      - tracciato
+      - sessione
+      - campagna
+    cardinality: many
+    storage: wikilink_target_list

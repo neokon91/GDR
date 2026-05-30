@@ -43,16 +43,15 @@ context => {
     const session = source ?? dv.current();
     const groups = [
       ["Incontri", session.incontri, "Collega o crea incontri pronti da giocare.", "BUTTON[nuovo-incontro-z-modelli-dm-incontro-md-default]"],
-      ["Dispense", session.dispense, "Collega handout, indizi o testi da consegnare.", "BUTTON[nuova-dispensa-z-modelli-dispensa-md-default]"],
-      ["Mappe", session.mappe, "Collega una mappa zoom, pubblica o DM.", "BUTTON[nuova-mappa-zoom-z-modelli-mappe-mappa-zoom-md]"],
-      ["Media", [...asArray(session.audio), ...asArray(session.immagini), ...asArray(session.video)], "Audio, immagini e video restano opzionali ma devono essere pronti prima del tavolo.", ""]
+      ["Note", session.dispense, "Collega appunti, indizi o testi da consegnare.", "BUTTON[nuova-nota-rapida-z-modelli-nota-rapida-md]"],
+      ["Oggetti", session.oggetti, "Collega oggetti, tesori o strumenti che possono entrare in scena.", "BUTTON[nuovo-oggetto-z-modelli-oggetto-md]"]
     ];
     const grid = dv.el("div", "", { cls: "gdr-card-grid compact" });
 
     grid.innerHTML = groups.map(([title, value, fallback, button]) => cardHtml({
       title,
       body: fieldText(value) || fallback,
-      importa: button || "Controlla i link media prima della sessione.",
+      importa: button || "Controlla i link del materiale prima della sessione.",
       cls: `gdr-info-card compact ${fieldText(value) ? "gdr-kind-ready" : "gdr-kind-missing"}`
     })).join("");
   }
@@ -181,7 +180,7 @@ context => {
       renderEmptyState(dv, {
         title: "Nessuna sessione live",
         action: "Apri Preparazione Sessione, scegli una sessione pronta e imposta attiva.",
-        link: "Risorse/Preparazione Sessione.md",
+        link: "",
         button: "BUTTON[nuova-sessione-z-modelli-dm-sessione-md]"
       });
       return;
@@ -192,8 +191,6 @@ context => {
       .array()
       .filter(p => p.stato !== "archiviata" && p.stato !== "ignorata");
     const encounterPages = pagesFromLinks(dv, active.incontri ?? []).array();
-    const mapPages = pagesFromLinks(dv, active.mappe ?? []).array();
-    const mediaCount = linkedCount("audio") + linkedCount("immagini") + linkedCount("video");
     const party = dv.pages('"Mondi/Personaggi"')
       .where(p => isReal(p) && p.tipo === "pg" && p.stato !== "archiviata")
       .sort(p => p.giocatore ?? p.nome ?? p.file.name, "asc")
@@ -221,28 +218,14 @@ context => {
         title: "Incontri e tiri",
         meta: `${encounterPages.length} incontri collegati`,
         body: encounterPages.map(pageTitle).join(", ") || "Apri un incontro o usa tabelle rapide quando serve una scena risolta subito.",
-        link: encounterPages[0]?.file?.path ?? "Risorse/Iniziativa e Combattimenti.md",
+        link: encounterPages[0]?.file?.path ?? "",
         cls: encounterPages.length ? "gdr-kind-ready" : "gdr-kind-missing"
-      },
-      {
-        title: "Mappe",
-        meta: `${mapPages.length} mappe collegate`,
-        body: mapPages.map(pageTitle).join(", ") || "Collega una mappa alla sessione, all'incontro o al luogo della scena.",
-        link: mapPages[0]?.file?.path ?? "Risorse/Mappe/Mappe.md",
-        cls: mapPages.length ? "gdr-kind-ready" : "gdr-kind-missing"
-      },
-      {
-        title: "Media",
-        meta: `${mediaCount} risorse collegate`,
-        body: fieldText([...(active.audio ?? []), ...(active.immagini ?? []), ...(active.video ?? [])]) || "Audio, immagini e video restano opzionali ma devono essere pronti prima del tavolo.",
-        link: "Risorse/Media Scene.md",
-        cls: mediaCount ? "gdr-kind-ready" : ""
       },
       {
         title: "Party",
         meta: `${party.length} PG`,
         body: partyStatus,
-        link: "Hub/Party Control.md",
+        link: party[0]?.file?.path ?? "",
         cls: party.length ? "gdr-kind-ready" : "gdr-kind-missing"
       }
     ];
@@ -256,7 +239,7 @@ context => {
       cls: `gdr-info-card compact ${card.cls}`
     })).join("");
 
-    dv.paragraph("Sequenza live: aggiorna scena -> cattura decisione o appunto -> usa incontro, tiro, mappa o media -> registra conseguenza.");
+    dv.paragraph("Sequenza live: aggiorna scena -> cattura decisione o appunto -> usa incontro, tiro o materiale pronto -> registra conseguenza.");
   }
 
   function renderPostSessionCommandCenter(dv) {
@@ -269,8 +252,8 @@ context => {
     if (!session) {
       renderEmptyState(dv, {
         title: "Nessuna sessione da chiudere",
-        action: "Apri Durante il Gioco o scegli una sessione giocata.",
-        link: "Hub/Durante il Gioco.md"
+        action: "Scegli una sessione giocata o crea una conseguenza.",
+        link: ""
       });
       return;
     }
@@ -308,13 +291,13 @@ context => {
           ? `Gap da chiudere: ${[...new Set(continuityGaps)].join(", ")}`
           : "Ogni conseguenza ha bersaglio, stato o prossima mossa verificabile.",
         cls: continuityGaps.length ? "gdr-kind-missing" : "gdr-kind-ready",
-        link: "Hub/Motore Mondo Vivo.md"
+        link: session.file.path
       },
       {
         title: "Missioni e clock",
         body: impacted.map(p => `${pageTitle(p)}${p.prossima_mossa ? `: ${fieldText(p.prossima_mossa)}` : ""}`).join(" · ") || "Collega o aggiorna missioni, clock, fazioni e luoghi toccati.",
         cls: impacted.length ? "gdr-kind-ready" : "gdr-kind-missing",
-        link: "Hub/Cosa Succede Fuori Scena.md"
+        link: session.file.path
       },
       {
         title: "Recap pubblico",
@@ -347,7 +330,7 @@ context => {
       ["Obiettivo", session.obiettivo, "Ricorda cosa deve produrre la sessione."],
       ["Scelta", session.scelta, "Metti davanti ai giocatori una decisione che cambia qualcosa."],
       ["Pressione", session.pressioni ?? session.tracciati, "Fai avanzare questa cosa se il party esita."],
-      ["Materiale pronto", session.materiale_pronto ?? [...asArray(session.incontri), ...asArray(session.dispense), ...asArray(session.mappe)], "Usa almeno un elemento preparato al tavolo."]
+      ["Materiale pronto", session.materiale_pronto ?? [...asArray(session.incontri), ...asArray(session.dispense), ...asArray(session.oggetti)], "Usa almeno un elemento preparato al tavolo."]
     ];
 
     const grid = dv.el("div", "", { cls: "gdr-card-grid compact" });

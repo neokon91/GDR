@@ -12,7 +12,6 @@ function fieldForSession(frontmatter) {
     if (category === "incontro") return "incontri";
     if (category === "oggetto") return "oggetti";
     if (category === "dispensa") return "dispense";
-    if (category === "risorsa" && type === "mappa") return "mappe";
     return "appunti_live";
 }
 
@@ -222,10 +221,6 @@ async function openNextLiveSession(tp, context) {
         creature: helpers.normalizeFieldArray(sourceMeta.creature),
         incontri: helpers.normalizeFieldArray(sourceMeta.incontri),
         dispense: helpers.normalizeFieldArray(sourceMeta.dispense),
-        mappe: helpers.normalizeFieldArray(sourceMeta.mappe),
-        audio: helpers.normalizeFieldArray(sourceMeta.audio),
-        immagini: helpers.normalizeFieldArray(sourceMeta.immagini),
-        video: helpers.normalizeFieldArray(sourceMeta.video),
         fazioni: helpers.normalizeFieldArray(sourceMeta.fazioni),
         oggetti: helpers.normalizeFieldArray(sourceMeta.oggetti),
         appunti_live: []
@@ -285,11 +280,6 @@ async function openNextLiveSession(tp, context) {
         tipo: sourceMeta.tipo || "sessione di campagna",
         data: date,
         data_mondo: "",
-        "fc-calendar": sourceMeta["fc-calendar"] || sourceMeta.fc_calendar || "",
-        "fc-date": "",
-        "fc-category": "sessione",
-        "fc-display-name": title,
-        "fc-end": "",
         stato: "preparazione",
         attiva: true,
         mondo: sourceMeta.mondo,
