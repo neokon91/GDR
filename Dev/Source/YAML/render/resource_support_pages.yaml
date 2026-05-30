@@ -1966,7 +1966,7 @@ pages:
         - relazioni
     pre_title: |
       ==⚠  Switch to EXCALIDRAW VIEW in the MORE OPTIONS menu of this document. ⚠==
-    body_file: Dev/Source/Assets/resource_support/schema_relazioni_gdr.excalidraw.body.md
+    body_file: Dev/Source/Assets/resource_support/schema_relazioni_gdr.excalidraw.body.j2
 
   - path: Risorse/Materiali Al Tavolo.md
     title: Materiali Al Tavolo

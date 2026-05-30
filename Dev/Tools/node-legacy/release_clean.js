@@ -253,6 +253,30 @@ function copyDir(source, target, base = source) {
     }
 }
 
+function copyTree(source, target) {
+    if (!fs.existsSync(source)) return;
+    fs.mkdirSync(target, { recursive: true });
+    for (const entry of fs.readdirSync(source, { withFileTypes: true })) {
+        const sourcePath = path.join(source, entry.name);
+        const targetPath = path.join(target, entry.name);
+        if (entry.isDirectory()) {
+            copyTree(sourcePath, targetPath);
+        } else if (entry.isFile()) {
+            fs.mkdirSync(path.dirname(targetPath), { recursive: true });
+            fs.copyFileSync(sourcePath, targetPath);
+        }
+    }
+}
+
+function materializeObsidianSources() {
+    copyTree(repoPath(ROOT, "Dev/Source/Obsidian/.obsidian"), repoPath(OUT, ".obsidian"));
+}
+
+function materializeRuntimeSources() {
+    copyTree(repoPath(ROOT, "Dev/Source/JS/z.automazioni"), repoPath(OUT, "z.automazioni"));
+    copyTree(repoPath(ROOT, "Dev/Source/JS/z.engine"), repoPath(OUT, "z.engine"));
+}
+
 function writeGeneratedReleaseNotes() {
     for (const [file, text] of Object.entries(GENERATED_RELEASE_NOTES)) {
         fs.writeFileSync(repoPath(OUT, file), text);
@@ -601,6 +625,8 @@ function materializeGeneratedReleaseRoots() {
 fs.rmSync(OUT, { recursive: true, force: true });
 fs.mkdirSync(DIST, { recursive: true });
 copyDir(ROOT, OUT, ROOT);
+materializeObsidianSources();
+materializeRuntimeSources();
 materializeTemplates(OUT);
 copyRuntimeTemplateModules();
 materializeGeneratedReleaseRoots();

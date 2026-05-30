@@ -1,4 +1,20 @@
-const { readJson, repoPath } = require("./node_utils");
+const { execFileSync } = require("child_process");
+const { repoPath } = require("./node_utils");
+
+function readPluginMatrix(root) {
+    const source = repoPath(root, "Dev/Source/YAML/json/plugin_matrix.yaml");
+    const script = [
+        "import json, sys, yaml",
+        "with open(sys.argv[1], encoding='utf-8') as handle:",
+        "    data = yaml.safe_load(handle) or {}",
+        "print(json.dumps(data.get('plugins') or [], ensure_ascii=False))"
+    ].join("\n");
+    const stdout = execFileSync("python3", ["-c", script, source], {
+        encoding: "utf8",
+        maxBuffer: 1024 * 1024
+    });
+    return JSON.parse(stdout);
+}
 
 function asList(value) {
     return Array.isArray(value) ? value.map(item => String(item)) : [];
@@ -9,10 +25,10 @@ function pluginTier(entry) {
 }
 
 function releasePluginProfile(root, releaseBoundary) {
-    const matrix = readJson(repoPath(root, "Dev/plugin_matrix.json"), []);
+    const matrix = readPluginMatrix(root);
     const profile = releaseBoundary.release_plugin_profile;
     if (!Array.isArray(matrix) || matrix.length === 0) {
-        throw new Error("Dev/plugin_matrix.json non dichiara plugin per il profilo release");
+        throw new Error("plugin_matrix.yaml non dichiara plugin per il profilo release");
     }
     if (!profile || typeof profile !== "object" || Object.keys(profile).length === 0) {
         throw new Error("release_boundary.release_plugin_profile non dichiarato");

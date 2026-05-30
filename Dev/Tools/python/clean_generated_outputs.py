@@ -27,7 +27,10 @@ GENERATED_DIRS = [
 ]
 
 PRUNE_ROOTS = [
+    ".obsidian",
+    "Dev/Build",
     "Risorse",
+    "z.automazioni",
 ]
 
 

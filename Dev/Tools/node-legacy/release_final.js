@@ -5,8 +5,7 @@ const fs = require("fs");
 const path = require("path");
 
 const ROOT = process.cwd();
-const skipSync = process.argv.includes("--skip-sync");
-const quiet = process.argv.includes("--quiet");
+const keepGenerated = process.argv.includes("--keep-generated");
 
 function optionValue(name, fallback) {
     const index = process.argv.indexOf(name);
@@ -21,36 +20,25 @@ function optionValue(name, fallback) {
 
 const out = optionValue("--out", "dist/vault-gdr-clean");
 const zip = `${out}.zip`;
+const defaultOut = out.replace(/\\/g, "/") === "dist/vault-gdr-clean";
+
+if (defaultOut) {
+    fs.rmSync(path.join(ROOT, "dist"), { recursive: true, force: true });
+}
 
 const steps = [
-    ...(skipSync ? [] : [{
-        label: "Rigenera sorgenti",
-        command: ["python3", "Dev/Tools/python/run_source_pipeline.py", "--mode", "render"]
-    }]),
     {
-        label: "Verifica versione release",
-        command: ["node", "Dev/Tools/node-legacy/check_release.js"]
+        label: "Genera output YAML/Jinja",
+        command: ["python3", "Dev/Tools/python/run_source_pipeline.py", "--mode", "render", "--outputs-only"]
     },
     {
-        label: "Verifica runtime Obsidian",
-        command: ["node", "Dev/Tools/node-legacy/check_runtime_load.js"]
-    },
-    {
-        label: "Verifica sintassi JS",
-        command: ["node", "Dev/Tools/node-legacy/check_js.js"]
-    },
-    {
-        label: "Verifica diff",
-        command: ["git", "diff", "--check"]
-    },
-    {
-        label: "Crea release finale pulita",
+        label: "Crea vault release in dist",
         command: [
             "node",
             "Dev/Tools/node-legacy/release_clean.js",
             "--out",
             out,
-            ...(quiet ? ["--quiet"] : [])
+            "--quiet"
         ]
     }
 ];
@@ -64,7 +52,25 @@ function runStep(step) {
     });
 }
 
-for (const step of steps) runStep(step);
+let exitCode = 0;
+try {
+    for (const step of steps) runStep(step);
+} catch (error) {
+    exitCode = Number.isInteger(error.status) ? error.status : 1;
+} finally {
+    if (!keepGenerated) {
+        try {
+            runStep({
+                label: "Pulisci output generati dalla root",
+                command: ["python3", "Dev/Tools/python/clean_generated_outputs.py"]
+            });
+        } catch (error) {
+            exitCode = exitCode || (Number.isInteger(error.status) ? error.status : 1);
+        }
+    }
+}
+
+if (exitCode !== 0) process.exit(exitCode);
 
 if (!fs.existsSync(path.join(ROOT, out))) {
     console.error(`Release finale mancante: ${out}`);

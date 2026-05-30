@@ -15,6 +15,7 @@ sys.dont_write_bytecode = True
 ROOT = Path(__file__).resolve().parents[3]
 SOURCE = ROOT / "Dev" / "Source" / "YAML" / "render" / "templater_wrappers.yaml"
 TARGET_DIR = ROOT / "z.automazioni" / "templater"
+SOURCE_MODULE_DIR = ROOT / "Dev" / "Source" / "JS" / "z.automazioni"
 NAME_PATTERN = re.compile(r"^[A-Za-z_][A-Za-z0-9_]*$")
 
 
@@ -53,8 +54,8 @@ def load_source(errors: list[str]) -> list[dict[str, str]]:
         if module != f"../{name}":
             fail(errors, f"{SOURCE.relative_to(ROOT)}: {name} deve puntare a ../{name}")
             continue
-        if not (ROOT / "z.automazioni" / f"{name}.js").exists():
-            fail(errors, f"z.automazioni/{name}.js mancante per wrapper {name}")
+        if not (SOURCE_MODULE_DIR / f"{name}.js").exists():
+            fail(errors, f"Dev/Source/JS/z.automazioni/{name}.js mancante per wrapper {name}")
             continue
         result.append({"name": name, "module": module})
     return result

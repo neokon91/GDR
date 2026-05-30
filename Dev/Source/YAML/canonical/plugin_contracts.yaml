@@ -1,10 +1,7 @@
 id: plugin_contracts
-purpose: 'Contratto unico plugin/release: fonti ufficiali, uso locale, errori visibili
-  e gate.'
+purpose: 'Contratto unico plugin/release: fonti ufficiali, uso locale ed errori visibili.'
 version: 0.1.0
-checked_at: '2026-05-26'
-policy: 'Contratto operativo profondo: ogni plugin incluso deve avere comportamento
-  ufficiale studiato, uso locale limitato, rischi di errore visibile e gate di verifica.'
+policy: Ogni plugin incluso deve avere comportamento ufficiale studiato, uso locale limitato e fallback leggibile.
 plugins:
 - id: obsidian-icon-folder
   name: Iconize
@@ -14,16 +11,9 @@ plugins:
   - https://github.com/florianwoelki/obsidian-iconize
   - https://github.com/florianwoelki/obsidian-iconize#readme
   official_capability: Icone cartelle e orientamento visuale
-  local_scope: Nessuna logica di gioco; non deve essere prerequisito per capire il
-    vault
+  local_scope: Nessuna logica di gioco; non deve essere prerequisito per capire il vault
   visible_failure: Icone assenti o rumorose, ma nessun blocco rotto
-  release_contract: Plugin dichiarato, data.json valido quando presente, non usato come navigazione
-    primaria
-  gates:
-  - check:release-quality
-  - check:repo
-  manual_smoke: Aprire una pagina che usa Iconize, verificare resa plugin e fallback
-    Markdown senza errori visibili.
+  release_contract: Plugin dichiarato, data.json valido quando presente, non usato come navigazione primaria
 - id: media-extended
   name: Media Extended
   version: 4.2.4
@@ -32,15 +22,9 @@ plugins:
   - https://github.com/aidenlx/media-extended
   - https://github.com/aidenlx/media-extended#readme
   official_capability: Playback e gestione media in note di scena
-  local_scope: Usarlo solo per materiali audio/video realmente pronti; indici Dataview
-    restano fallback
+  local_scope: Usarlo solo per materiali audio/video realmente pronti; indici Dataview restano fallback
   visible_failure: Embed media non renderizzati o controlli assenti
   release_contract: Le pagine media devono restare leggibili senza playback
-  gates:
-  - check:release-quality
-  - check:vault
-  manual_smoke: Aprire una pagina che usa Media Extended, verificare resa plugin e
-    fallback Markdown senza errori visibili.
 - id: obsidian-5e-statblocks
   name: Fantasy Statblocks
   version: 4.10.3
@@ -49,16 +33,9 @@ plugins:
   - https://github.com/Obsidian-TTRPG-Community/fantasy-statblocks
   - https://plugins.javalent.com/statblocks
   official_capability: Blocchi statblock e parsing creature fantasy
-  local_scope: Creature con frontmatter coerente; non inventare sintassi statblock
-    fuori plugin
+  local_scope: Creature con frontmatter coerente; non inventare sintassi statblock fuori plugin
   visible_failure: Schede creatura grezze o errori su blocchi statblock
   release_contract: Mostri/creature mantengono statblock e campi verificabili
-  gates:
-  - check:vault
-  - check:templates
-  - check:release-quality
-  manual_smoke: Aprire una pagina che usa Fantasy Statblocks, verificare resa plugin
-    e fallback Markdown senza errori visibili.
 - id: dataview
   name: Dataview
   version: 0.5.68
@@ -71,12 +48,6 @@ plugins:
   local_scope: JS abilitato; blocchi devono compilare e avere fallback leggibile
   visible_failure: Codice dataviewjs visibile, errori rossi, tabelle vuote incomprensibili
   release_contract: enableDataviewJs true, blocchi DataviewJS compilati staticamente
-  gates:
-  - check:release-quality
-  - check:smoke
-  - check:runtime-load
-  manual_smoke: Aprire una pagina che usa Dataview, verificare resa plugin e fallback
-    Markdown senza errori visibili.
 - id: table-editor-obsidian
   name: Advanced Tables
   version: 0.23.2
@@ -88,10 +59,6 @@ plugins:
   local_scope: Solo supporto editing; non dipendere da funzioni runtime
   visible_failure: Nessun errore critico, al massimo editing meno comodo
   release_contract: Tabelle restano Markdown standard
-  gates:
-  - check:release-quality
-  manual_smoke: Aprire una pagina che usa Advanced Tables, verificare resa plugin
-    e fallback Markdown senza errori visibili.
 - id: templater-obsidian
   name: Templater
   version: 2.20.4
@@ -101,17 +68,9 @@ plugins:
   - https://silentvoid13.github.io/Templater/
   - https://silentvoid13.github.io/Templater/user-functions/script-user-functions.html
   official_capability: Esecuzione tp.user.* e template creation
-  local_scope: Templater vede solo wrapper funzione in z.automazioni/templater; niente
-    object exports
+  local_scope: Templater vede solo wrapper funzione in z.automazioni/templater; niente object exports
   visible_failure: Errore Templater export object/function o template non eseguito
-  release_contract: user_scripts_folder isolato, 54 wrapper importati e verificati
-    come funzioni
-  gates:
-  - check:release-quality
-  - check:release-quality
-  - check:release-artifact
-  manual_smoke: Aprire una pagina che usa Templater, verificare resa plugin e fallback
-    Markdown senza errori visibili.
+  release_contract: user_scripts_folder isolato, 54 wrapper importati e verificati come funzioni
 - id: obsidian-kanban
   name: Kanban
   version: 2.0.51
@@ -123,11 +82,6 @@ plugins:
   local_scope: Bacheche sono supporto operativo, non workflow unico obbligatorio
   visible_failure: Board non renderizzata, ma contenuto Markdown ancora leggibile
   release_contract: Frontmatter board e fallback link/workflow presenti
-  gates:
-  - check:vault
-  - check:release-quality
-  manual_smoke: Aprire una pagina che usa Kanban, verificare resa plugin e fallback
-    Markdown senza errori visibili.
 - id: fantasy-content-generator
   name: Generatore di Contenuti Fantasy
   version: 1.2.4
@@ -139,11 +93,6 @@ plugins:
   local_scope: Solo bozze in Inbox/Generati; mai canonico automatico
   visible_failure: Contenuto generato non smistato o confuso con lore canonica
   release_contract: Smistamento/canonizzazione passano da workflow e controlli
-  gates:
-  - check:workflow-actions
-  - check:vault
-  manual_smoke: Aprire una pagina che usa Generatore di Contenuti Fantasy, verificare
-    resa plugin e fallback Markdown senza errori visibili.
 - id: calendarium
   name: Calendarium
   version: 2.1.0
@@ -155,12 +104,6 @@ plugins:
   local_scope: Un solo calendario neutro; nessun calendario proprietario come default
   visible_failure: Errori calendario o riferimenti a setting protetti
   release_contract: defaultCalendar neutro e marker vietati assenti
-  gates:
-  - check:release-quality
-  - check:vault
-  - check:release-artifact
-  manual_smoke: Aprire una pagina che usa Calendarium, verificare resa plugin e fallback
-    Markdown senza errori visibili.
 - id: obsidian-meta-bind-plugin
   name: Meta Bind
   version: 1.4.10
@@ -171,16 +114,9 @@ plugins:
   - https://www.moritzjung.dev/obsidian-meta-bind-plugin-docs/guides/inputfields/
   - https://www.moritzjung.dev/obsidian-meta-bind-plugin-docs/guides/buttons/
   official_capability: INPUT, BUTTON e azioni operative
-  local_scope: Button solo da template globali; input complessi in blocchi meta-bind;
-    target sempre esistenti
+  local_scope: Button solo da template globali; input complessi in blocchi meta-bind; target sempre esistenti
   visible_failure: BUTTON grezzi, input non renderizzati, azioni verso file mancanti
   release_contract: Tutti BUTTON/INPUT e templateFile verificati contro data.json
-  gates:
-  - check:release-quality
-  - check:workflow-actions
-  - check:vault
-  manual_smoke: Aprire una pagina che usa Meta Bind, verificare resa plugin e fallback
-    Markdown senza errori visibili.
 - id: js-engine
   name: JS Engine
   version: 0.3.5
@@ -192,11 +128,6 @@ plugins:
   local_scope: Opzionale; runtime condiviso resta in z.engine e DataviewJS
   visible_failure: Blocchi JS non renderizzati o doppione di DataviewJS
   release_contract: Nessuna dipendenza critica dal plugin per primo percorso utente
-  gates:
-  - check:release-quality
-  - check:runtime-load
-  manual_smoke: Aprire una pagina che usa JS Engine, verificare resa plugin e fallback
-    Markdown senza errori visibili.
 - id: metadata-menu
   name: Metadata Menu
   version: 0.8.12
@@ -208,12 +139,6 @@ plugins:
   local_scope: Preset coerenti con Meta Bind/Bases; non deve riscrivere campi a caso
   visible_failure: Campi incoerenti, suggerimenti mancanti, classi non trovate
   release_contract: classFilesPath e preset principali verificati
-  gates:
-  - check:release-quality
-  - check:vault
-  - check:metadata
-  manual_smoke: Aprire una pagina che usa Metadata Menu, verificare resa plugin e
-    fallback Markdown senza errori visibili.
 - id: homepage
   name: Homepage
   version: 4.4.2
@@ -225,11 +150,6 @@ plugins:
   local_scope: Deve aprire Inizia Qui; non creare pagine nuove automaticamente
   visible_failure: Vault apre vuoto o pagina tecnica
   release_contract: openOnStartup e target verificati in repo e release
-  gates:
-  - check:release-quality
-  - check:release-artifact
-  manual_smoke: Aprire una pagina che usa Homepage, verificare resa plugin e fallback
-    Markdown senza errori visibili.
 - id: callout-manager
   name: Callout Manager
   version: 1.1.1
@@ -241,11 +161,6 @@ plugins:
   local_scope: Callout devono restare blockquote leggibili senza plugin
   visible_failure: Callout non colorati ma testo leggibile
   release_contract: Tipi callout custom configurati e fallback Markdown presente
-  gates:
-  - check:vault
-  - check:release-quality
-  manual_smoke: Aprire una pagina che usa Callout Manager, verificare resa plugin
-    e fallback Markdown senza errori visibili.
 - id: folder-notes
   name: Folder notes
   version: 1.8.19
@@ -257,11 +172,6 @@ plugins:
   local_scope: Navigazione assistita, non dipendenza logica
   visible_failure: Cartella non apre indice, ma note restano accessibili
   release_contract: Config presente e indici cartella verificati indirettamente
-  gates:
-  - check:release-quality
-  - check:vault
-  manual_smoke: Aprire una pagina che usa Folder notes, verificare resa plugin e fallback
-    Markdown senza errori visibili.
 - id: obsidian42-brat
   name: BRAT
   version: 2.0.4
@@ -273,11 +183,6 @@ plugins:
   local_scope: Fuori dal percorso DM; non deve essere necessario al primo uso
   visible_failure: Rumore tecnico o update beta non richiesti
   release_contract: Documentato come manutenzione, non workflow utente
-  gates:
-  - check:release-quality
-  - check:user-path
-  manual_smoke: Aprire una pagina che usa BRAT, verificare resa plugin e fallback
-    Markdown senza errori visibili.
 - id: obsidian-dice-roller
   name: Dice Roller
   version: 11.4.2
@@ -289,11 +194,6 @@ plugins:
   local_scope: Usare solo dove il testo resta comprensibile senza roll automatico
   visible_failure: 'dice: visibile come testo invece di roll'
   release_contract: Tabelle e guide restano Markdown leggibile
-  gates:
-  - check:vault
-  - check:release-quality
-  manual_smoke: Aprire una pagina che usa Dice Roller, verificare resa plugin e fallback
-    Markdown senza errori visibili.
 - id: initiative-tracker
   name: Initiative Tracker
   version: 13.0.21
@@ -305,12 +205,6 @@ plugins:
   local_scope: Solo incontri preparati; nomi creature coerenti con statblock
   visible_failure: Encounter non caricato o creature non trovate
   release_contract: Template incontro/creatura e riferimenti verificati
-  gates:
-  - check:vault
-  - check:templates
-  - check:release-quality
-  manual_smoke: Aprire una pagina che usa Initiative Tracker, verificare resa plugin
-    e fallback Markdown senza errori visibili.
 - id: obsidian-excalidraw-plugin
   name: Excalidraw
   version: 2.23.3
@@ -323,11 +217,6 @@ plugins:
   local_scope: Nuove mappe in Risorse/Mappe con template dedicato; niente path mancanti
   visible_failure: Disegni aperti in Markdown grezzo o template non trovato
   release_contract: folder/templateFilePath verificati e target esistenti
-  gates:
-  - check:release-quality
-  - check:vault
-  manual_smoke: Aprire una pagina che usa Excalidraw, verificare resa plugin e fallback
-    Markdown senza errori visibili.
 - id: hex-cartographer
   name: Hex Cartographer
   version: 1.0.2
@@ -339,11 +228,6 @@ plugins:
   local_scope: Opzionale guidato; non deve bloccare flusso base
   visible_failure: Mappa esagonale non renderizzata
   release_contract: Patch difensiva e presenza plugin verificate
-  gates:
-  - check:vault
-  - check:release-quality
-  manual_smoke: Aprire una pagina che usa Hex Cartographer, verificare resa plugin
-    e fallback Markdown senza errori visibili.
 - id: zoom-map
   name: 'TTRPG Tools: Maps'
   version: 1.9.5
@@ -355,11 +239,6 @@ plugins:
   local_scope: Opzionale per mappe tavolo; fallback via mappe Markdown/Dataview
   visible_failure: Mappa non interattiva o pin assenti
   release_contract: Uso limitato e guide mappa presenti
-  gates:
-  - check:release-quality
-  - check:vault
-  manual_smoke: 'Aprire una pagina che usa TTRPG Tools: Maps, verificare resa plugin
-    e fallback Markdown senza errori visibili.'
 - id: obsidian-style-settings
   name: Style Settings
   version: 1.0.9
@@ -371,11 +250,6 @@ plugins:
   local_scope: Solo controlli visuali; contenuto non dipende dallo stile
   visible_failure: Aspetto meno rifinito ma funzionale
   release_contract: Snippet gdr-vault e setting presenti
-  gates:
-  - check:release-quality
-  - check:release-artifact
-  manual_smoke: Aprire una pagina che usa Style Settings, verificare resa plugin e
-    fallback Markdown senza errori visibili.
 - id: tabs
   name: Tabs
   version: 1.1.8
@@ -384,15 +258,9 @@ plugins:
   - https://github.com/xhuajin/obsidian-tabs
   - https://github.com/xhuajin/obsidian-tabs#readme
   official_capability: Blocchi tabs
-  local_scope: Ridurre scrolling; contenuto deve restare ordinato anche se tabs non
-    renderizza
+  local_scope: Ridurre scrolling; contenuto deve restare ordinato anche se tabs non renderizza
   visible_failure: Blocchi tabs grezzi o sezioni lunghe
   release_contract: Dashboard/template chiave verificati come plugin-native
-  gates:
-  - check:vault
-  - check:release-quality
-  manual_smoke: Aprire una pagina che usa Tabs, verificare resa plugin e fallback
-    Markdown senza errori visibili.
 - id: obsidian-tasks-plugin
   name: Tasks
   version: 8.0.0
@@ -404,11 +272,6 @@ plugins:
   local_scope: Solo task DM operative, non lore/canone
   visible_failure: Task non visibili o warning cache
   release_contract: globalFilter e loggingOptions verificati
-  gates:
-  - check:release-quality
-  - check:vault
-  manual_smoke: Aprire una pagina che usa Tasks, verificare resa plugin e fallback
-    Markdown senza errori visibili.
 - id: advanced-canvas
   name: Advanced Canvas
   version: 6.1.6
@@ -420,11 +283,6 @@ plugins:
   local_scope: Supporto visuale, non percorso base
   visible_failure: Canvas meno potente ma file apribili
   release_contract: Canvas non richiesto per primo percorso utente
-  gates:
-  - check:release-quality
-  - check:user-path
-  manual_smoke: Aprire una pagina che usa Advanced Canvas, verificare resa plugin
-    e fallback Markdown senza errori visibili.
 - id: obsidian-linter
   name: Linter
   version: 1.31.2
@@ -436,11 +294,6 @@ plugins:
   local_scope: Mai lint distruttivo/on save su release utente
   visible_failure: Formattazione automatica che altera frontmatter/template
   release_contract: Config prudente e documentata come manutenzione
-  gates:
-  - check:release-quality
-  - check:release-quality
-  manual_smoke: Aprire una pagina che usa Linter, verificare resa plugin e fallback
-    Markdown senza errori visibili.
 - id: maps
   name: Maps
   version: 0.1.6
@@ -452,9 +305,3 @@ plugins:
   local_scope: Solo su .base/coordinate; tabella resta fallback
   visible_failure: Vista mappa non disponibile, ma Bases tabellare leggibile
   release_contract: Atlante Mappe.base e fields coordinate/icon/color presenti
-  gates:
-  - check:release-artifact
-  - check:vault
-  - check:release-quality
-  manual_smoke: Aprire una pagina che usa Maps, verificare resa plugin e fallback
-    Markdown senza errori visibili.

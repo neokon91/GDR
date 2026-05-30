@@ -178,8 +178,7 @@ configs:
     autoParse: true
     calendars:
     - name: Calendario Del Mondo
-      description: Calendario neutro incluso per campagne originali. Rinominabile dal DM senza dipendenze da ambientazioni
-        protette.
+      description: Calendario neutro incluso per campagne originali. Rinominabile dal DM senza dipendenze da ambientazioni protette.
       path: []
       supportInlineEvents: false
       inlineEventTag: calendarium
@@ -1015,20 +1014,17 @@ configs:
         The charmer has advantage on any ability check to interact socially with the creature.'
     - name: Concentrating
       id: Concentrating
-      description: 'Some spells require you to maintain concentration in order to keep their magic active. If you lose concentration,
-        such a spell ends.
+      description: 'Some spells require you to maintain concentration in order to keep their magic active. If you lose concentration, such a spell ends.
 
         A creature loses concentration when: it casts another spell that requires concentration, is incapacitated, or dies.
 
-        When a creature takes damage, it must make a constitution saving throw with a DC of 10 or half the damage it took,
-        whichever is higher. On a failure, concentration is lost.'
+        When a creature takes damage, it must make a constitution saving throw with a DC of 10 or half the damage it took, whichever is higher. On a failure, concentration is lost.'
     - name: Deafened
       id: Deafened
       description: A deafened creature can’t hear and automatically fails any ability check that requires hearing.
     - name: Frightened
       id: Frightened
-      description: 'A frightened creature has disadvantage on Ability Checks and Attack rolls while the source of its fear
-        is within Line of Sight.
+      description: 'A frightened creature has disadvantage on Ability Checks and Attack rolls while the source of its fear is within Line of Sight.
 
         The creature can’t willingly move closer to the source of its fear.'
     - name: Grappled
@@ -1037,16 +1033,13 @@ configs:
 
         The condition ends if the Grappler is incapacitated.
 
-        The condition also ends if an Effect removes the grappled creature from the reach of the Grappler or Grappling Effect,
-        such as when a creature is hurled away by the Thunderwave spell.'
+        The condition also ends if an Effect removes the grappled creature from the reach of the Grappler or Grappling Effect, such as when a creature is hurled away by the Thunderwave spell.'
     - name: Incapacitated
       id: Incapacitated
       description: An incapacitated creature can’t take Actions or Reactions.
     - name: Invisible
       id: Invisible
-      description: 'An invisible creature is impossible to see without the aid of magic or a Special sense. For the Purpose
-        of Hiding, the creature is heavily obscured. The creature’s Location can be detected by any noise it makes or any
-        tracks it leaves.
+      description: 'An invisible creature is impossible to see without the aid of magic or a Special sense. For the Purpose of Hiding, the creature is heavily obscured. The creature’s Location can be detected by any noise it makes or any tracks it leaves.
 
         Attack rolls against the creature have disadvantage, and the creature’s Attack rolls have advantage.'
     - name: Paralyzed
@@ -1060,8 +1053,7 @@ configs:
         Any Attack that hits the creature is a critical hit if the attacker is within 5 feet of the creature.'
     - name: Petrified
       id: Petrified
-      description: 'A petrified creature is transformed, along with any nonmagical object it is wearing or carrying, into
-        a solid inanimate substance (usually stone). Its weight increases by a factor of ten, and it ceases aging.
+      description: 'A petrified creature is transformed, along with any nonmagical object it is wearing or carrying, into a solid inanimate substance (usually stone). Its weight increases by a factor of ten, and it ceases aging.
 
         The creature is incapacitated, can’t move or speak, and is unaware of its surroundings.
 
@@ -1071,8 +1063,7 @@ configs:
 
         The creature has Resistance to all damage.
 
-        The creature is immune to poison and disease, although a poison or disease already in its system is suspended, not
-        neutralized.'
+        The creature is immune to poison and disease, although a poison or disease already in its system is suspended, not neutralized.'
     - name: Poisoned
       id: Poisoned
       description: A poisoned creature has disadvantage on Attack rolls and Ability Checks.
@@ -1082,8 +1073,7 @@ configs:
 
         The creature has disadvantage on Attack rolls.
 
-        An Attack roll against the creature has advantage if the attacker is within 5 feet of the creature. Otherwise, the
-        Attack roll has disadvantage.'
+        An Attack roll against the creature has advantage if the attacker is within 5 feet of the creature. Otherwise, the Attack roll has disadvantage.'
     - name: Reacted
       id: Reacted
       description: 'A creature, unless otherwise specified, gets one reaction per round of combat.
@@ -1365,8 +1355,7 @@ configs:
           - ac
           display: Classe Armatura
           conditioned: true
-          callback: const ac = [monster.ac];if ("ac_class" in monster) {ac.push(`(${monster.ac_class})`);}return ac.join("
-            ");
+          callback: const ac = [monster.ac];if ("ac_class" in monster) {ac.push(`(${monster.ac_class})`);}return ac.join(" ");
         - type: property
           id: 180a6b98db59
           properties:
@@ -1374,10 +1363,8 @@ configs:
           display: Punti Ferita
           dice: true
           diceProperty: hit_dice
-          diceCallback: "if (\"hit_dice\" in monster) {\n  return [{ text: monster[\"hit_dice\"] }];\n} else {\n  return property;\n\
-            }"
-          callback: "let str = [monster.hp];\nif (monster.hit_dice?.length) {\n  str.push(`(${monster.hit_dice})`);\n}\nreturn\
-            \ str.join(\" \");"
+          diceCallback: "if (\"hit_dice\" in monster) {\n  return [{ text: monster[\"hit_dice\"] }];\n} else {\n  return property;\n}"
+          callback: "let str = [monster.hp];\nif (monster.hit_dice?.length) {\n  str.push(`(${monster.hit_dice})`);\n}\nreturn str.join(\" \");"
           conditioned: true
         - type: property
           id: fae838c9983b
@@ -1489,74 +1476,20 @@ configs:
             display: Difficoltà
             properties:
             - cr
-            callback: "const CR = {\n    \"0\": {\n        cr: \"0\",\n        value: 0,\n        xp: 10\n    },\n    \"1/8\"\
-              : {\n        cr: \"1/8\",\n        value: 0.125,\n        xp: 25\n    },\n    \"1/4\": {\n        cr: \"1/4\"\
-              ,\n\n        value: 0.25,\n        xp: 50\n    },\n    \"1/2\": {\n        cr: \"1/2\",\n        value: 0.5,\n\
-              \        xp: 100\n    },\n    \"0.125\": {\n        cr: \"1/8\",\n        value: 0.125,\n        xp: 25\n  \
-              \  },\n    \"0.25\": {\n        cr: \"1/4\",\n\n        value: 0.25,\n        xp: 50\n    },\n    \"0.5\": {\n\
-              \        cr: \"1/2\",\n        value: 0.5,\n        xp: 100\n    },\n    \"1\": {\n        cr: \"1\",\n    \
-              \    value: 1,\n        xp: 200\n    },\n    \"2\": {\n        cr: \"2\",\n        value: 2,\n        xp: 450\n\
-              \    },\n    \"3\": {\n        cr: \"3\",\n        value: 3,\n        xp: 700\n    },\n    \"4\": {\n      \
-              \  cr: \"4\",\n        value: 4,\n        xp: 1100\n    },\n    \"5\": {\n        cr: \"5\",\n        value:\
-              \ 5,\n        xp: 1800\n    },\n    \"6\": {\n        cr: \"6\",\n        value: 6,\n        xp: 2300\n    },\n\
-              \    \"7\": {\n        cr: \"7\",\n        value: 7,\n        xp: 2900\n    },\n    \"8\": {\n        cr: \"\
-              8\",\n        value: 8,\n        xp: 3900\n    },\n    \"9\": {\n        cr: \"9\",\n        value: 9,\n   \
-              \     xp: 5000\n    },\n    \"10\": {\n        cr: \"10\",\n        value: 10,\n        xp: 5900\n    },\n \
-              \   \"11\": {\n        cr: \"11\",\n        value: 11,\n        xp: 7200\n    },\n    \"12\": {\n        cr:\
-              \ \"12\",\n        value: 12,\n        xp: 8400\n    },\n    \"13\": {\n        cr: \"13\",\n        value:\
-              \ 13,\n        xp: 10000\n    },\n    \"14\": {\n        cr: \"14\",\n        value: 14,\n        xp: 11500\n\
-              \    },\n    \"15\": {\n        cr: \"15\",\n        value: 15,\n        xp: 13000\n    },\n    \"16\": {\n\
-              \        cr: \"16\",\n        value: 16,\n        xp: 15000\n    },\n    \"17\": {\n        cr: \"17\",\n  \
-              \      value: 17,\n        xp: 18000\n    },\n    \"18\": {\n        cr: \"18\",\n        value: 18,\n     \
-              \   xp: 20000\n    },\n    \"19\": {\n        cr: \"19\",\n        value: 19,\n        xp: 22000\n    },\n \
-              \   \"20\": {\n        cr: \"20\",\n        value: 20,\n        xp: 25000\n    },\n    \"21\": {\n        cr:\
-              \ \"21\",\n        value: 21,\n        xp: 33000\n    },\n    \"22\": {\n        cr: \"22\",\n        value:\
-              \ 22,\n        xp: 41000\n    },\n    \"23\": {\n        cr: \"23\",\n        value: 23,\n        xp: 50000\n\
-              \    },\n    \"24\": {\n        cr: \"24\",\n        value: 24,\n        xp: 62000\n    },\n    \"25\": {\n\
-              \        cr: \"25\",\n        value: 25,\n        xp: 75000\n    },\n    \"26\": {\n        cr: \"26\",\n  \
-              \      value: 26,\n        xp: 90000\n    },\n    \"27\": {\n        cr: \"27\",\n        value: 27,\n     \
-              \   xp: 105000\n    },\n    \"28\": {\n        cr: \"28\",\n        value: 28,\n        xp: 120000\n    },\n\
-              \    \"29\": {\n        cr: \"29\",\n        value: 29,\n        xp: 135000\n    },\n    \"30\": {\n       \
-              \ cr: \"30\",\n        value: 30,\n        xp: 155000\n    }\n};                        \nif (\"cr\" in monster\
-              \ && monster.cr in CR) {\n    return `${CR[\n        monster.cr\n    ].cr} (${CR[\n        monster.cr\n    ].xp.toLocaleString()}\
-              \ XP)`;\n}\nreturn \"\";"
+            callback: "const CR = {\n    \"0\": {\n        cr: \"0\",\n        value: 0,\n        xp: 10\n    },\n    \"1/8\": {\n        cr: \"1/8\",\n        value: 0.125,\n        xp: 25\n    },\n    \"1/4\": {\n        cr: \"1/4\",\n\n        value: 0.25,\n        xp: 50\n    },\n    \"1/2\": {\n        cr: \"1/2\",\n        value: 0.5,\n        xp: 100\n    },\n    \"0.125\": {\n        cr: \"1/8\",\n        value: 0.125,\n        xp: 25\n    },\n    \"0.25\": {\n        cr: \"1/4\",\n\n        value: 0.25,\n        xp: 50\n    },\n    \"0.5\": {\n        cr: \"1/2\",\n        value: 0.5,\n        xp: 100\n    },\n    \"1\": {\n        cr: \"1\",\n        value: 1,\n        xp: 200\n    },\n    \"2\": {\n        cr: \"2\",\n        value: 2,\n        xp: 450\n    },\n    \"3\": {\n        cr: \"3\",\n        value: 3,\n        xp: 700\n    },\n    \"4\": {\n        cr: \"4\",\n        value: 4,\n        xp: 1100\n    },\n    \"5\": {\n        cr: \"5\",\n        value: 5,\n        xp:\
+              \ 1800\n    },\n    \"6\": {\n        cr: \"6\",\n        value: 6,\n        xp: 2300\n    },\n    \"7\": {\n        cr: \"7\",\n        value: 7,\n        xp: 2900\n    },\n    \"8\": {\n        cr: \"8\",\n        value: 8,\n        xp: 3900\n    },\n    \"9\": {\n        cr: \"9\",\n        value: 9,\n        xp: 5000\n    },\n    \"10\": {\n        cr: \"10\",\n        value: 10,\n        xp: 5900\n    },\n    \"11\": {\n        cr: \"11\",\n        value: 11,\n        xp: 7200\n    },\n    \"12\": {\n        cr: \"12\",\n        value: 12,\n        xp: 8400\n    },\n    \"13\": {\n        cr: \"13\",\n        value: 13,\n        xp: 10000\n    },\n    \"14\": {\n        cr: \"14\",\n        value: 14,\n        xp: 11500\n    },\n    \"15\": {\n        cr: \"15\",\n        value: 15,\n        xp: 13000\n    },\n    \"16\": {\n        cr: \"16\",\n        value: 16,\n        xp: 15000\n    },\n    \"17\": {\n        cr: \"17\",\n        value: 17,\n        xp: 18000\n  \
+              \  },\n    \"18\": {\n        cr: \"18\",\n        value: 18,\n        xp: 20000\n    },\n    \"19\": {\n        cr: \"19\",\n        value: 19,\n        xp: 22000\n    },\n    \"20\": {\n        cr: \"20\",\n        value: 20,\n        xp: 25000\n    },\n    \"21\": {\n        cr: \"21\",\n        value: 21,\n        xp: 33000\n    },\n    \"22\": {\n        cr: \"22\",\n        value: 22,\n        xp: 41000\n    },\n    \"23\": {\n        cr: \"23\",\n        value: 23,\n        xp: 50000\n    },\n    \"24\": {\n        cr: \"24\",\n        value: 24,\n        xp: 62000\n    },\n    \"25\": {\n        cr: \"25\",\n        value: 25,\n        xp: 75000\n    },\n    \"26\": {\n        cr: \"26\",\n        value: 26,\n        xp: 90000\n    },\n    \"27\": {\n        cr: \"27\",\n        value: 27,\n        xp: 105000\n    },\n    \"28\": {\n        cr: \"28\",\n        value: 28,\n        xp: 120000\n    },\n    \"29\": {\n        cr: \"29\",\n        value: 29,\n        xp:\
+              \ 135000\n    },\n    \"30\": {\n        cr: \"30\",\n        value: 30,\n        xp: 155000\n    }\n};                        \nif (\"cr\" in monster && monster.cr in CR) {\n    return `${CR[\n        monster.cr\n    ].cr} (${CR[\n        monster.cr\n    ].xp.toLocaleString()} XP)`;\n}\nreturn \"\";"
             fallback: '-'
           - type: property
             id: a8c81a0bcbdb
             display: Competenza Bonus
             properties:
             - cr
-            callback: "const CR = {\n    \"0\": {\n        cr: \"0\",\n        value: 0,\n        xp: 0\n    },\n    \"1/8\"\
-              : {\n        cr: \"1/8\",\n        value: 0.125,\n        xp: 25\n    },\n    \"1/4\": {\n        cr: \"1/4\"\
-              ,\n\n        value: 0.25,\n        xp: 50\n    },\n    \"1/2\": {\n        cr: \"1/2\",\n        value: 0.5,\n\
-              \        xp: 100\n    },\n    \"0.125\": {\n        cr: \"1/8\",\n        value: 0.125,\n        xp: 25\n  \
-              \  },\n    \"0.25\": {\n        cr: \"1/4\",\n\n        value: 0.25,\n        xp: 50\n    },\n    \"0.5\": {\n\
-              \        cr: \"1/2\",\n        value: 0.5,\n        xp: 100\n    },\n    \"1\": {\n        cr: \"1\",\n    \
-              \    value: 1,\n        xp: 200\n    },\n    \"2\": {\n        cr: \"2\",\n        value: 2,\n        xp: 450\n\
-              \    },\n    \"3\": {\n        cr: \"3\",\n        value: 3,\n        xp: 700\n    },\n    \"4\": {\n      \
-              \  cr: \"4\",\n        value: 4,\n        xp: 1100\n    },\n    \"5\": {\n        cr: \"5\",\n        value:\
-              \ 5,\n        xp: 1800\n    },\n    \"6\": {\n        cr: \"6\",\n        value: 6,\n        xp: 2300\n    },\n\
-              \    \"7\": {\n        cr: \"7\",\n        value: 7,\n        xp: 2900\n    },\n    \"8\": {\n        cr: \"\
-              8\",\n        value: 8,\n        xp: 3900\n    },\n    \"9\": {\n        cr: \"9\",\n        value: 9,\n   \
-              \     xp: 5000\n    },\n    \"10\": {\n        cr: \"10\",\n        value: 10,\n        xp: 5900\n    },\n \
-              \   \"11\": {\n        cr: \"11\",\n        value: 11,\n        xp: 7200\n    },\n    \"12\": {\n        cr:\
-              \ \"12\",\n        value: 12,\n        xp: 8400\n    },\n    \"13\": {\n        cr: \"13\",\n        value:\
-              \ 13,\n        xp: 10000\n    },\n    \"14\": {\n        cr: \"14\",\n        value: 14,\n        xp: 11500\n\
-              \    },\n    \"15\": {\n        cr: \"15\",\n        value: 15,\n        xp: 13000\n    },\n    \"16\": {\n\
-              \        cr: \"16\",\n        value: 16,\n        xp: 15000\n    },\n    \"17\": {\n        cr: \"17\",\n  \
-              \      value: 17,\n        xp: 18000\n    },\n    \"18\": {\n        cr: \"18\",\n        value: 18,\n     \
-              \   xp: 20000\n    },\n    \"19\": {\n        cr: \"19\",\n        value: 19,\n        xp: 22000\n    },\n \
-              \   \"20\": {\n        cr: \"20\",\n        value: 20,\n        xp: 25000\n    },\n    \"21\": {\n        cr:\
-              \ \"21\",\n        value: 21,\n        xp: 33000\n    },\n    \"22\": {\n        cr: \"22\",\n        value:\
-              \ 22,\n        xp: 41000\n    },\n    \"23\": {\n        cr: \"23\",\n        value: 23,\n        xp: 50000\n\
-              \    },\n    \"24\": {\n        cr: \"24\",\n        value: 24,\n        xp: 62000\n    },\n    \"25\": {\n\
-              \        cr: \"25\",\n        value: 25,\n        xp: 75000\n    },\n    \"26\": {\n        cr: \"26\",\n  \
-              \      value: 26,\n        xp: 90000\n    },\n    \"27\": {\n        cr: \"27\",\n        value: 27,\n     \
-              \   xp: 105000\n    },\n    \"28\": {\n        cr: \"28\",\n        value: 28,\n        xp: 120000\n    },\n\
-              \    \"29\": {\n        cr: \"29\",\n        value: 29,\n        xp: 135000\n    },\n    \"30\": {\n       \
-              \ cr: \"30\",\n        value: 30,\n        xp: 155000\n    }\n};           \nif (\"cr\" in monster && monster.cr\
-              \ in CR) {\n    return `+${Math.max(\n            Math.floor(2 + ((CR[monster.cr]?.value ?? 0) - 1) / 4),\n\
-              \            2\n        )}`;\n}\nreturn \"\";"
+            callback: "const CR = {\n    \"0\": {\n        cr: \"0\",\n        value: 0,\n        xp: 0\n    },\n    \"1/8\": {\n        cr: \"1/8\",\n        value: 0.125,\n        xp: 25\n    },\n    \"1/4\": {\n        cr: \"1/4\",\n\n        value: 0.25,\n        xp: 50\n    },\n    \"1/2\": {\n        cr: \"1/2\",\n        value: 0.5,\n        xp: 100\n    },\n    \"0.125\": {\n        cr: \"1/8\",\n        value: 0.125,\n        xp: 25\n    },\n    \"0.25\": {\n        cr: \"1/4\",\n\n        value: 0.25,\n        xp: 50\n    },\n    \"0.5\": {\n        cr: \"1/2\",\n        value: 0.5,\n        xp: 100\n    },\n    \"1\": {\n        cr: \"1\",\n        value: 1,\n        xp: 200\n    },\n    \"2\": {\n        cr: \"2\",\n        value: 2,\n        xp: 450\n    },\n    \"3\": {\n        cr: \"3\",\n        value: 3,\n        xp: 700\n    },\n    \"4\": {\n        cr: \"4\",\n        value: 4,\n        xp: 1100\n    },\n    \"5\": {\n        cr: \"5\",\n        value: 5,\n        xp:\
+              \ 1800\n    },\n    \"6\": {\n        cr: \"6\",\n        value: 6,\n        xp: 2300\n    },\n    \"7\": {\n        cr: \"7\",\n        value: 7,\n        xp: 2900\n    },\n    \"8\": {\n        cr: \"8\",\n        value: 8,\n        xp: 3900\n    },\n    \"9\": {\n        cr: \"9\",\n        value: 9,\n        xp: 5000\n    },\n    \"10\": {\n        cr: \"10\",\n        value: 10,\n        xp: 5900\n    },\n    \"11\": {\n        cr: \"11\",\n        value: 11,\n        xp: 7200\n    },\n    \"12\": {\n        cr: \"12\",\n        value: 12,\n        xp: 8400\n    },\n    \"13\": {\n        cr: \"13\",\n        value: 13,\n        xp: 10000\n    },\n    \"14\": {\n        cr: \"14\",\n        value: 14,\n        xp: 11500\n    },\n    \"15\": {\n        cr: \"15\",\n        value: 15,\n        xp: 13000\n    },\n    \"16\": {\n        cr: \"16\",\n        value: 16,\n        xp: 15000\n    },\n    \"17\": {\n        cr: \"17\",\n        value: 17,\n        xp: 18000\n  \
+              \  },\n    \"18\": {\n        cr: \"18\",\n        value: 18,\n        xp: 20000\n    },\n    \"19\": {\n        cr: \"19\",\n        value: 19,\n        xp: 22000\n    },\n    \"20\": {\n        cr: \"20\",\n        value: 20,\n        xp: 25000\n    },\n    \"21\": {\n        cr: \"21\",\n        value: 21,\n        xp: 33000\n    },\n    \"22\": {\n        cr: \"22\",\n        value: 22,\n        xp: 41000\n    },\n    \"23\": {\n        cr: \"23\",\n        value: 23,\n        xp: 50000\n    },\n    \"24\": {\n        cr: \"24\",\n        value: 24,\n        xp: 62000\n    },\n    \"25\": {\n        cr: \"25\",\n        value: 25,\n        xp: 75000\n    },\n    \"26\": {\n        cr: \"26\",\n        value: 26,\n        xp: 90000\n    },\n    \"27\": {\n        cr: \"27\",\n        value: 27,\n        xp: 105000\n    },\n    \"28\": {\n        cr: \"28\",\n        value: 28,\n        xp: 120000\n    },\n    \"29\": {\n        cr: \"29\",\n        value: 29,\n        xp:\
+              \ 135000\n    },\n    \"30\": {\n        cr: \"30\",\n        value: 30,\n        xp: 155000\n    }\n};           \nif (\"cr\" in monster && monster.cr in CR) {\n    return `+${Math.max(\n            Math.floor(2 + ((CR[monster.cr]?.value ?? 0) - 1) / 4),\n            2\n        )}`;\n}\nreturn \"\";"
             fallback: '-'
         conditioned: true
         hasRule: true
@@ -1741,9 +1674,7 @@ configs:
             - stats
             display: Iniziativa
             conditioned: true
-            callback: 'const stats = Array.isArray(monster.stats) ? monster.stats : [10,10,10,10,10,10]; const dex = Number(stats[1]
-              ?? 10); const mod = Math.floor((dex - 10) / 2); const score = 10 + mod; return `${mod >= 0 ? ''+'' : ''''}${mod}
-              (${score})`;'
+            callback: 'const stats = Array.isArray(monster.stats) ? monster.stats : [10,10,10,10,10,10]; const dex = Number(stats[1] ?? 10); const mod = Math.floor((dex - 10) / 2); const score = 10 + mod; return `${mod >= 0 ? ''+'' : ''''}${mod} (${score})`;'
         - type: property
           id: 55it-hp
           properties:
@@ -1872,19 +1803,14 @@ configs:
             properties:
             - cr
             callback: const CR = {"0":{cr:"0",value:0,xp:10},"1/8":{cr:"1/8",value:.125,xp:25},"1/4":{cr:"1/4",value:.25,xp:50},"1/2":{cr:"1/2",value:.5,xp:100},"0.125":{cr:"1/8",value:.125,xp:25},"0.25":{cr:"1/4",value:.25,xp:50},"0.5":{cr:"1/2",value:.5,xp:100},"1":{cr:"1",value:1,xp:200},"2":{cr:"2",value:2,xp:450},"3":{cr:"3",value:3,xp:700},"4":{cr:"4",value:4,xp:1100},"5":{cr:"5",value:5,xp:1800},"6":{cr:"6",value:6,xp:2300},"7":{cr:"7",value:7,xp:2900},"8":{cr:"8",value:8,xp:3900},"9":{cr:"9",value:9,xp:5000},"10":{cr:"10",value:10,xp:5900},"11":{cr:"11",value:11,xp:7200},"12":{cr:"12",value:12,xp:8400},"13":{cr:"13",value:13,xp:10000},"14":{cr:"14",value:14,xp:11500},"15":{cr:"15",value:15,xp:13000},"16":{cr:"16",value:16,xp:15000},"17":{cr:"17",value:17,xp:18000},"18":{cr:"18",value:18,xp:20000},"19":{cr:"19",value:19,xp:22000},"20":{cr:"20",value:20,xp:25000},"21":{cr:"21",value:21,xp:33000},"22":{cr:"22",value:22,xp:41000},"23":{cr:"23",value:23,xp:50000},"24":{cr:"24",value:24,xp:62000},"25":{cr:"25",value:25,xp:75000},"26":{cr:"26",value:26,xp:90000},"27":{cr:"27",value:27,xp:105000},"28":{cr:"28",value:28,xp:120000},"29":{cr:"29",value:29,xp:135000},"30":{cr:"30",value:30,xp:155000}};
-              if (monster.cr && monster.cr in CR) return `${CR[monster.cr].cr} (${CR[monster.cr].xp.toLocaleString()} PE)`;
-              return monster.cr ?? '';
+              if (monster.cr && monster.cr in CR) return `${CR[monster.cr].cr} (${CR[monster.cr].xp.toLocaleString()} PE)`; return monster.cr ?? '';
             fallback: —
           - type: property
             id: 55it-pb
             display: PB
             properties:
             - cr
-            callback: 'const CR = {"0":0,"1/8":.125,"1/4":.25,"1/2":.5,"0.125":.125,"0.25":.25,"0.5":.5,"1":1,"2":2,"3":3,"4":4,"5":5,"6":6,"7":7,"8":8,"9":9,"10":10,"11":11,"12":12,"13":13,"14":14,"15":15,"16":16,"17":17,"18":18,"19":19,"20":20,"21":21,"22":22,"23":23,"24":24,"25":25,"26":26,"27":27,"28":28,"29":29,"30":30};
-              if (monster.pb) return String(monster.pb).startsWith(''+'') ? monster.pb : `+${monster.pb}`; if (monster.proficiency_bonus)
-              return String(monster.proficiency_bonus).startsWith(''+'') ? monster.proficiency_bonus : `+${monster.proficiency_bonus}`;
-              if (monster.cr && monster.cr in CR) return `+${Math.max(Math.floor(2 + ((CR[monster.cr] ?? 0) - 1) / 4), 2)}`;
-              return '''';'
+            callback: 'const CR = {"0":0,"1/8":.125,"1/4":.25,"1/2":.5,"0.125":.125,"0.25":.25,"0.5":.5,"1":1,"2":2,"3":3,"4":4,"5":5,"6":6,"7":7,"8":8,"9":9,"10":10,"11":11,"12":12,"13":13,"14":14,"15":15,"16":16,"17":17,"18":18,"19":19,"20":20,"21":21,"22":22,"23":23,"24":24,"25":25,"26":26,"27":27,"28":28,"29":29,"30":30}; if (monster.pb) return String(monster.pb).startsWith(''+'') ? monster.pb : `+${monster.pb}`; if (monster.proficiency_bonus) return String(monster.proficiency_bonus).startsWith(''+'') ? monster.proficiency_bonus : `+${monster.proficiency_bonus}`; if (monster.cr && monster.cr in CR) return `+${Math.max(Math.floor(2 + ((CR[monster.cr] ?? 0) - 1) / 4), 2)}`; return '''';'
             fallback: —
         conditioned: true
         hasRule: true
@@ -2900,8 +2826,6 @@ configs:
     Inizia Qui.md: LiCompass
     VERSION.md: LiBadgeCheck
     Dev: LiFolderCog
-    Dev/CHANGELOG.md: LiListChecks
-    Dev/RELEASE.md: LiPackageCheck
     Hub/1. DM Dashboard.md: LiHome
     Inbox: LiInbox
     Inbox/Inbox.md: LiInbox
@@ -3030,26 +2954,9 @@ configs:
         style: Title Case
         ignore-case-words: true
         ignore-words: macOS, iOS, iPhone, iPad, JavaScript, TypeScript, AppleScript, I
-        lowercase-words: a, an, the, aboard, about, abt., above, abreast, absent, across, after, against, along, aloft, alongside,
-          amid, amidst, mid, midst, among, amongst, anti, apropos, around, round, as, aslant, astride, at, atop, ontop, bar,
-          barring, before, B4, behind, below, beneath, neath, beside, besides, between, 'tween, beyond, but, by, chez, circa,
-          c., ca., come, concerning, contra, counting, cum, despite, spite, down, during, effective, ere, except, excepting,
-          excluding, failing, following, for, from, in, including, inside, into, less, like, minus, modulo, mod, near, nearer,
-          nearest, next, notwithstanding, of, o', off, offshore, on, onto, opposite, out, outside, over, o'er, pace, past,
-          pending, per, plus, post, pre, pro, qua, re, regarding, respecting, sans, save, saving, short, since, sub, than,
-          through, thru, throughout, thruout, till, times, to, t', touching, toward, towards, under, underneath, unlike, until,
-          unto, up, upon, versus, vs., v., via, vice, vis-à-vis, wanting, with, w/, w., c̄, within, w/i, without, 'thout,
-          w/o, abroad, adrift, aft, afterward, afterwards, ahead, apart, ashore, aside, away, back, backward, backwards, beforehand,
-          downhill, downstage, downstairs, downstream, downward, downwards, downwind, east, eastward, eastwards, forth, forward,
-          forwards, heavenward, heavenwards, hence, henceforth, here, hereby, herein, hereof, hereto, herewith, home, homeward,
-          homewards, indoors, inward, inwards, leftward, leftwards, north, northeast, northward, northwards, northwest, now,
-          onward, onwards, outdoors, outward, outwards, overboard, overhead, overland, overseas, rightward, rightwards, seaward,
-          seawards, skywards, skyward, south, southeast, southwards, southward, southwest, then, thence, thenceforth, there,
-          thereby, therein, thereof, thereto, therewith, together, underfoot, underground, uphill, upstage, upstairs, upstream,
-          upward, upwards, upwind, west, westward, westwards, when, whence, where, whereby, wherein, whereto, wherewith, although,
-          because, considering, given, granted, if, lest, once, provided, providing, seeing, so, supposing, though, unless,
-          whenever, whereas, wherever, while, whilst, ago, inasmuch, even, whether, whose, whoever, why, how, whatever, what,
-          both, and, or, either, neither, nor, just, rather, such, that, yet, is, it
+        lowercase-words: a, an, the, aboard, about, abt., above, abreast, absent, across, after, against, along, aloft, alongside, amid, amidst, mid, midst, among, amongst, anti, apropos, around, round, as, aslant, astride, at, atop, ontop, bar, barring, before, B4, behind, below, beneath, neath, beside, besides, between, 'tween, beyond, but, by, chez, circa, c., ca., come, concerning, contra, counting, cum, despite, spite, down, during, effective, ere, except, excepting, excluding, failing, following, for, from, in, including, inside, into, less, like, minus, modulo, mod, near, nearer, nearest, next, notwithstanding, of, o', off, offshore, on, onto, opposite, out, outside, over, o'er, pace, past, pending, per, plus, post, pre, pro, qua, re, regarding, respecting, sans, save, saving, short, since, sub, than, through, thru, throughout, thruout, till, times, to, t', touching, toward, towards, under, underneath, unlike, until, unto, up, upon, versus, vs., v., via, vice, vis-à-vis, wanting,
+          with, w/, w., c̄, within, w/i, without, 'thout, w/o, abroad, adrift, aft, afterward, afterwards, ahead, apart, ashore, aside, away, back, backward, backwards, beforehand, downhill, downstage, downstairs, downstream, downward, downwards, downwind, east, eastward, eastwards, forth, forward, forwards, heavenward, heavenwards, hence, henceforth, here, hereby, herein, hereof, hereto, herewith, home, homeward, homewards, indoors, inward, inwards, leftward, leftwards, north, northeast, northward, northwards, northwest, now, onward, onwards, outdoors, outward, outwards, overboard, overhead, overland, overseas, rightward, rightwards, seaward, seawards, skywards, skyward, south, southeast, southwards, southward, southwest, then, thence, thenceforth, there, thereby, therein, thereof, thereto, therewith, together, underfoot, underground, uphill, upstage, upstairs, upstream, upward, upwards, upwind, west, westward, westwards, when, whence, where, whereby, wherein, whereto, wherewith, although,
+          because, considering, given, granted, if, lest, once, provided, providing, seeing, so, supposing, though, unless, whenever, whereas, wherever, while, whilst, ago, inasmuch, even, whether, whose, whoever, why, how, whatever, what, both, and, or, either, neither, nor, just, rather, such, that, yet, is, it
       file-name-heading:
         enabled: false
       header-increment:

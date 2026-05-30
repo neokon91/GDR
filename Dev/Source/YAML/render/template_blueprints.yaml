@@ -1565,7 +1565,6 @@ outputs:
   markdown_templates: z.modelli
   fileclasses: z.fileclass
   bases: z.bases
-  checks: Dev/Tools/node-legacy/check_vault.js
 jinja_contract:
   role: generatore_statico
   allowed:

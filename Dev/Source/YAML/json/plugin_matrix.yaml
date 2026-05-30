@@ -1,239 +1,198 @@
 id: plugin_matrix
-purpose: Matrice operativa dei plugin generata da YAML per mantenere leggibile il
-  contratto plugin.
+purpose: Matrice operativa dei plugin generata da YAML per mantenere leggibile il contratto plugin.
 version: 0.1.0
 audit_policy:
   required_tiers:
-    - core
-    - supporto
-    - opzionale
-    - manutenzione
+  - core
+  - supporto
+  - opzionale
+  - manutenzione
   minimum_gates_by_tier:
     core: 2
     supporto: 2
   support_light_allowed:
-    - obsidian-icon-folder
-    - obsidian-style-settings
-    - table-editor-obsidian
+  - obsidian-icon-folder
+  - obsidian-style-settings
+  - table-editor-obsidian
   optional_allowed:
-    - fantasy-content-generator
-    - zoom-map
-    - hex-cartographer
+  - fantasy-content-generator
+  - zoom-map
+  - hex-cartographer
   maintenance_allowed:
-    - obsidian-linter
-    - obsidian42-brat
+  - obsidian-linter
+  - obsidian42-brat
   release_enabled:
     require_contract: true
     require_binding: true
     require_runtime_probe: true
     require_resolved_surfaces:
-      - guide
-      - operational
-      - smoke
+    - guide
+    - operational
+    - smoke
 value_review:
   title: Riesame Valore Quotidiano
   principle: Crea -> Prepara -> Gioca -> Aggiorna
   purpose: Registro sintetico del valore quotidiano dei plugin; sostituisce documentazione plugin manuale.
   areas:
-    - label: Mappe
-      decision: Usare mappe, marker e basi solo quando riducono tempo di orientamento o rendono il tavolo piu leggibile.
-    - label: Canvas / Excalidraw
-      decision: Usare reti visuali per fronti, indizi e causalita, non come decorazione.
-    - label: Calendarium
-      decision: Tenere date, scadenze e sessioni collegate a conseguenze giocabili.
-    - label: Fantasy Content Generator
-      decision: Produrre bozze da smistare, mai canone automatico.
-    - label: Media
-      decision: Portare al tavolo solo audio, immagini e video gia contestualizzati.
-    - label: Tasks / Kanban
-      decision: Tenere preparazione, post-sessione e manutenzione fuori dalla memoria del DM.
+  - label: Mappe
+    decision: Usare mappe, marker e basi solo quando riducono tempo di orientamento o rendono il tavolo piu leggibile.
+  - label: Canvas / Excalidraw
+    decision: Usare reti visuali per fronti, indizi e causalita, non come decorazione.
+  - label: Calendarium
+    decision: Tenere date, scadenze e sessioni collegate a conseguenze giocabili.
+  - label: Fantasy Content Generator
+    decision: Produrre bozze da smistare, mai canone automatico.
+  - label: Media
+    decision: Portare al tavolo solo audio, immagini e video gia contestualizzati.
+  - label: Tasks / Kanban
+    decision: Tenere preparazione, post-sessione e manutenzione fuori dalla memoria del DM.
 plugins:
 - id: dataview
   name: Dataview
   class: core
   function: Dashboard, indici e controlli automatici su frontmatter e link.
-  guide: Dev/Source/YAML/canonical/plugin_contracts.yaml
   operational: Hub/1. DM Dashboard.md
-  smoke: Dev/Smoke 1.0 Professionale.md
 - id: templater-obsidian
   name: Templater
   class: core
   function: Wizard e template generati senza YAML manuale.
-  guide: Dev/Sviluppo Vault.md
   operational: z.modelli/dm/Sessione.md
-  smoke: Dev/Smoke 1.0 Professionale.md
 - id: obsidian-meta-bind-plugin
   name: Meta Bind
   class: core
   function: Pulsanti, input e azioni operative nel corpo nota.
-  guide: Dev/Source/YAML/canonical/plugin_contracts.yaml
   operational: Inizia Qui.md
-  smoke: Dev/Smoke 1.0 Professionale.md
 - id: js-engine
   name: JS Engine
   class: core tecnico
   function: Runtime riusabile per viste complesse e cockpit.
-  guide: Dev/Source/YAML/canonical/plugin_contracts.yaml
   operational: z.engine/session_views.js
-  smoke: Dev/Smoke 1.0 Professionale.md
 - id: metadata-menu
   name: Metadata Menu
   class: core dati
   function: FileClass e campi guidati per note operative.
-  guide: Dev/Source/YAML/canonical/plugin_contracts.yaml
   operational: z.fileclass/sessione.md
-  smoke: Dev/Smoke 1.0 Professionale.md
 - id: folder-notes
   name: Folder Notes
   class: core navigazione
   function: Cartelle principali apribili come indici utili.
-  guide: Dev/Source/YAML/canonical/plugin_contracts.yaml
   operational: Mondi/Mondo.md
-  smoke: Dev/Smoke 1.0 Professionale.md
 - id: homepage
   name: Homepage
   class: core onboarding
   function: Primo avvio su Inizia Qui.
-  guide: Dev/Source/YAML/canonical/plugin_contracts.yaml
   operational: Inizia Qui.md
-  smoke: Dev/Smoke 1.0 Professionale.md
 - id: callout-manager
   name: Callout Manager
   class: core lettura
   function: Callout GDR coerenti per scene, segreti e tavolo.
   guide: Risorse/Callout GDR.md
   operational: Hub/Durante il Gioco.md
-  smoke: Dev/Smoke 1.0 Professionale.md
 - id: obsidian-5e-statblocks
   name: Fantasy Statblocks
   class: core combattimento
   function: Schede creatura e mostri richiamabili dagli incontri.
   guide: Risorse/Iniziativa e Combattimenti.md
   operational: z.modelli/Creatura.md
-  smoke: Dev/Smoke 1.0 Professionale.md
 - id: obsidian-excalidraw-plugin
   name: Excalidraw
   class: core mappe visuali
   function: Fronti, relazioni, indizi e mappe linkate.
   guide: Risorse/Excalidraw Per GDR.md
   operational: Risorse/Mappe/Mappe.md
-  smoke: Dev/Smoke 1.0 Professionale.md
 - id: obsidian-kanban
   name: Kanban
   class: supporto DM
   function: Bacheche operative per preparazione, post-sessione e manutenzione.
-  guide: Dev/Source/YAML/canonical/plugin_contracts.yaml
   operational: z.bacheche/Manutenzione Vault.md
-  smoke: Dev/Smoke 1.0 Professionale.md
 - id: obsidian-tasks-plugin
   name: Tasks
   class: supporto DM
   function: Task operative con priorita e scadenze, non lore.
   guide: Risorse/Task DM.md
   operational: Risorse/Task DM.md
-  smoke: Dev/Smoke 1.0 Professionale.md
 - id: maps
   name: Maps per Bases
   class: supporto mappe
   function: Marker geografici da Bases con coordinates, icon e color.
   guide: Risorse/Mappe Bases.md
   operational: z.bases/Atlante Mappe.base
-  smoke: Dev/Smoke 1.0 Professionale.md
 - id: initiative-tracker
   name: Initiative Tracker
   class: supporto tavolo
   function: Combattimenti preparati con blocchi encounter.
   guide: Risorse/Iniziativa e Combattimenti.md
   operational: z.bases/Incontri.base
-  smoke: Dev/Smoke 1.0 Professionale.md
 - id: obsidian-dice-roller
   name: Dice Roller
   class: supporto tavolo
   function: Tiri rapidi e tabelle casuali con block id stabili.
   guide: Risorse/Tabelle/Tabelle.md
   operational: Risorse/Tabelle/Tabelle.md
-  smoke: Dev/Smoke 1.0 Professionale.md
 - id: calendarium
   name: Calendarium
   class: supporto tempo
   function: Calendari, eventi, scadenze e date diegetiche.
   guide: Mondi/Calendario.md
   operational: Mondi/Calendario.md
-  smoke: Dev/Smoke 1.0 Professionale.md
 - id: advanced-canvas
   name: Advanced Canvas
   class: supporto reti vive
   function: Canvas strutturali di note, gruppi e connessioni.
   guide: Risorse/Canvas Per GDR.md
   operational: Risorse/Mappe/Schema Relazioni GDR.excalidraw.md
-  smoke: Dev/Smoke 1.0 Professionale.md
 - id: media-extended
   name: Media Extended
   class: supporto tavolo
   function: Audio, immagini e video pronti con contesto di scena.
   guide: Risorse/Media Scene.md
   operational: Hub/Durante il Gioco.md
-  smoke: Dev/Smoke 1.0 Professionale.md
 - id: fantasy-content-generator
   name: Fantasy Content Generator
   class: opzionale guidato
   function: Bozze in Inbox/Generati da smistare e canonizzare manualmente.
   guide: Risorse/Smistamento Bozze Generate.md
   operational: Risorse/Smistamento Bozze Generate.md
-  smoke: Dev/Smoke 1.0 Professionale.md
 - id: obsidian-icon-folder
   name: Iconize
   class: supporto orientamento
   function: Icone per orientamento visivo, senza sostituire indici.
-  guide: Dev/Source/YAML/json/plugin_matrix.yaml
   operational: Inizia Qui.md
-  smoke: Dev/Smoke 1.0 Professionale.md
 - id: tabs
   name: Tabs
   class: supporto UX
   function: Schede in dashboard e template lunghi per ridurre scrolling.
-  guide: Dev/Source/YAML/canonical/plugin_contracts.yaml
   operational: Hub/Worldbuilder Dashboard.md
-  smoke: Dev/Smoke 1.0 Professionale.md
 - id: obsidian-style-settings
   name: Style Settings
   class: supporto visuale
   function: Opzioni visuali dello snippet senza modifica CSS manuale.
   guide: Risorse/Setup Guidato.md
   operational: Inizia Qui.md
-  smoke: Dev/Smoke 1.0 Professionale.md
 - id: table-editor-obsidian
   name: Advanced Tables
   class: supporto editing
   function: Editing rapido di tabelle Markdown e tabelle casuali.
-  guide: Dev/Source/YAML/json/plugin_matrix.yaml
   operational: Risorse/Tabelle/Tabelle.md
-  smoke: Dev/Smoke 1.0 Professionale.md
 - id: zoom-map
   name: 'TTRPG Tools: Maps'
   class: opzionale guidato mappe tavolo
   function: Mappe zoomabili con pin e riferimenti al tavolo.
   guide: Risorse/Mappe/Mappe.md
   operational: Risorse/Mappe/Mappe.md
-  smoke: Dev/Smoke 1.0 Professionale.md
 - id: hex-cartographer
   name: Hex Cartographer
   class: opzionale guidato esplorazione
   function: Hexcrawl collegato a territori, incontri e conseguenze.
   guide: Risorse/Mappe/Mappe.md
   operational: Risorse/Mappe/Mappe.md
-  smoke: Dev/Smoke 1.0 Professionale.md
 - id: obsidian-linter
   name: Linter
   class: manutenzione
   function: Pulizia manuale prudente, mai lint distruttivo.
-  guide: Dev/Sviluppo Vault.md
   operational: z.bacheche/Manutenzione Vault.md
-  smoke: Dev/Smoke 1.0 Professionale.md
 - id: obsidian42-brat
   name: BRAT
   class: manutenzione
   function: Gestione plugin beta/non ufficiali fuori dal flusso DM.
-  guide: Dev/Source/YAML/json/plugin_matrix.yaml
   operational: z.bacheche/Manutenzione Vault.md
-  smoke: Dev/Smoke 1.0 Professionale.md

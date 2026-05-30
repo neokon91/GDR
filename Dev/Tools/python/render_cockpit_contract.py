@@ -53,6 +53,12 @@ def read_text_rel(rel_path: str, default: str = "") -> str:
     return path.read_text(encoding="utf-8") if path.exists() else default
 
 
+def source_rel_path(rel_path: str) -> str:
+    if rel_path.startswith("z.engine/") or rel_path.startswith("z.automazioni/"):
+        return f"Dev/Source/JS/{rel_path}"
+    return rel_path
+
+
 def required_text(ctx: Context, value: Any, label: str) -> str:
     text = str(value if value is not None else "").strip()
     if not text:
@@ -141,9 +147,9 @@ def validate_dashboard(ctx: Context, contract: dict[str, Any], config: dict[str,
     runtime_views = required_string_array(ctx, dashboard.get("required_runtime_views"), "dashboard.required_runtime_views")
     sections = required_string_array(ctx, dashboard.get("required_visible_sections"), "dashboard.required_visible_sections")
     text = read_text_rel(page)
-    runtime = read_text_rel("z.engine/session_views.js")
+    runtime = read_text_rel(source_rel_path("z.engine/session_views.js"))
     runtime_module = config.get("runtime_module")
-    module_text = read_text_rel(runtime_module) if runtime_module else ""
+    module_text = read_text_rel(source_rel_path(runtime_module)) if runtime_module else ""
     exported_by_render_bridge = (
         bool(runtime_module)
         and runtime_exports_declare_module(ctx, runtime_module)

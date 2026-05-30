@@ -47,7 +47,15 @@ def validate_command(step_id: str, mode: str, command: Any, errors: list[str]) -
     return normalized
 
 
-def validate_pipeline(data: dict[str, Any], mode: str, errors: list[str]) -> list[tuple[str, list[str]]]:
+def concrete_outputs(step: dict[str, Any]) -> bool:
+    for output in step.get("outputs") or []:
+        rel_path = str(output)
+        if rel_path and rel_path != "memoria":
+            return True
+    return False
+
+
+def validate_pipeline(data: dict[str, Any], errors: list[str], outputs_only: bool = False) -> list[tuple[str, list[str]]]:
     commands: list[tuple[str, list[str]]] = []
     steps = data.get("steps") if isinstance(data.get("steps"), dict) else {}
     no_repo_output_roots = set(data.get("policy", {}).get("no_repo_output_roots", []) or [])
@@ -65,7 +73,9 @@ def validate_pipeline(data: dict[str, Any], mode: str, errors: list[str]) -> lis
         if not isinstance(step, dict):
             fail(errors, f"{PIPELINE.relative_to(ROOT)}: step non valido {step_id}")
             continue
-        for key in ("purpose", "sources", "outputs", "render", "check"):
+        if outputs_only and not concrete_outputs(step):
+            continue
+        for key in ("purpose", "sources", "outputs", "render"):
             if key not in step:
                 fail(errors, f"{PIPELINE.relative_to(ROOT)}: {step_id} senza {key}")
         release_only = step.get("release_only") is True
@@ -73,23 +83,14 @@ def validate_pipeline(data: dict[str, Any], mode: str, errors: list[str]) -> lis
             source_text = str(source)
             source_path = ROOT / source_text
             source_is_glob = any(char in source_text for char in "*?[]")
-            generated_during_render = mode == "render" and source_generated_by_previous_step(source_text)
+            generated_during_render = source_generated_by_previous_step(source_text)
             if not source_is_glob and not source_path.exists() and not generated_during_render:
-                generated_during_check = mode == "check" and source_generated_by_previous_step(source_text)
-                if generated_during_check:
-                    fail(
-                        errors,
-                        f"{PIPELINE.relative_to(ROOT)}: {step_id} source generato mancante {source}; eseguire npm run sync:sources",
-                    )
-                else:
-                    fail(errors, f"{PIPELINE.relative_to(ROOT)}: {step_id} source mancante {source}")
+                fail(errors, f"{PIPELINE.relative_to(ROOT)}: {step_id} source mancante {source}")
         for output in step.get("outputs") or []:
             first = str(output).split("/", 1)[0]
             if first in no_repo_output_roots and not release_only:
                 fail(errors, f"{PIPELINE.relative_to(ROOT)}: {step_id} output {first} richiede release_only")
-        command = validate_command(step_id, mode, step.get(mode), errors)
-        if release_only and mode == "render" and command and "--check" not in command:
-            fail(errors, f"{PIPELINE.relative_to(ROOT)}: {step_id} release_only deve validare in memoria durante sync:sources")
+        command = validate_command(step_id, "render", step.get("render"), errors)
         if command:
             commands.append((str(step_id), command))
         for output in step.get("outputs") or []:
@@ -107,24 +108,20 @@ def run_commands(commands: list[tuple[str, list[str]]]) -> int:
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Esegue la pipeline unica YAML/Jinja/codice -> output vault.")
-    parser.add_argument("--mode", choices=["check", "render"], default="check")
+    parser = argparse.ArgumentParser(description="Esegue la pipeline YAML/Jinja/codice -> output vault.")
+    parser.add_argument("--mode", choices=["render"], default="render")
+    parser.add_argument("--outputs-only", action="store_true", help="Esegue solo gli step che materializzano output.")
     parser.add_argument("--list", action="store_true", help="Mostra gli step senza eseguirli.")
     args = parser.parse_args()
 
     errors: list[str] = []
     data = load_pipeline(errors)
-    commands = validate_pipeline(data, args.mode, errors)
+    commands = validate_pipeline(data, errors, outputs_only=args.outputs_only)
 
     if errors:
         print("Source pipeline non valida:", file=sys.stderr)
         for error in errors:
             print(f"- {error}", file=sys.stderr)
-        if any("source generato mancante" in error for error in errors):
-            print(
-                "\nOutput generati assenti: esegui `npm run sync:sources` e poi ripeti `npm run check`.",
-                file=sys.stderr,
-            )
         return 1
 
     if args.list:
