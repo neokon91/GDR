@@ -140,8 +140,8 @@ states:
 creation:
   personaggio:
     fields:
-      - { field: tipo, prompt: "Tipo di personaggio", from: subtypes }
-      - { field: mondo, prompt: "Mondo di appartenenza", from: notes, category: mondo, link: true }
+      - { field: tipo, prompt: "Tipo di personaggio", from: subtypes, required: true }
+      - { field: mondo, prompt: "Mondo di appartenenza", from: notes, category: mondo, link: true, required: true }
       - { field: fazione, prompt: "Fazione (opzionale)", from: notes, category: fazione, link: true, optional: true }
       - { field: luogo, prompt: "Dove si trova di solito (opzionale)", from: notes, category: luogo, link: true, optional: true }
     body:
@@ -153,8 +153,8 @@ creation:
       - { field: segreto, prompt: "Segreto (non mostrare ai giocatori)", callout: warning, title: "Segreto", fold: true }
   luogo:
     fields:
-      - { field: tipo, prompt: "Tipo di luogo", from: subtypes }
-      - { field: mondo, prompt: "Mondo", from: notes, category: mondo, link: true }
+      - { field: tipo, prompt: "Tipo di luogo", from: subtypes, required: true }
+      - { field: mondo, prompt: "Mondo", from: notes, category: mondo, link: true, required: true }
     body:
       - { field: funzione, prompt: "Cos'e' / a cosa serve", heading: "Funzione" }
       - { field: controllo, prompt: "Chi o cosa lo controlla", heading: "Controllo" }
@@ -163,8 +163,8 @@ creation:
       - { field: segreto, prompt: "Segreto del luogo", callout: warning, title: "Segreto", fold: true }
   fazione:
     fields:
-      - { field: tipo, prompt: "Tipo di fazione", from: subtypes }
-      - { field: mondo, prompt: "Mondo", from: notes, category: mondo, link: true }
+      - { field: tipo, prompt: "Tipo di fazione", from: subtypes, required: true }
+      - { field: mondo, prompt: "Mondo", from: notes, category: mondo, link: true, required: true }
     body:
       - { field: obiettivo, prompt: "Cosa vuole ottenere la fazione", heading: "Obiettivo" }
       - { field: metodo, prompt: "Come opera (metodi, stile)", heading: "Metodi" }
@@ -173,8 +173,8 @@ creation:
       - { field: segreto, prompt: "Segreto della fazione", callout: warning, title: "Segreto", fold: true }
   incontro:
     fields:
-      - { field: tipo, prompt: "Tipo di incontro", from: subtypes }
-      - { field: mondo, prompt: "Mondo", from: notes, category: mondo, link: true }
+      - { field: tipo, prompt: "Tipo di incontro", from: subtypes, required: true }
+      - { field: mondo, prompt: "Mondo", from: notes, category: mondo, link: true, required: true }
       - { field: luogo, prompt: "Dove avviene (opzionale)", from: notes, category: luogo, link: true, optional: true }
       - { field: creature, prompt: "Creature coinvolte", from: notes, category: creatura, link: true, multi: true }
     body:
@@ -183,8 +183,8 @@ creation:
       - { field: posta, prompt: "Posta in gioco: cosa succede se va male", heading: "Posta in gioco" }
   evento:
     fields:
-      - { field: tipo, prompt: "Tipo di evento", from: subtypes }
-      - { field: mondo, prompt: "Mondo", from: notes, category: mondo, link: true }
+      - { field: tipo, prompt: "Tipo di evento", from: subtypes, required: true }
+      - { field: mondo, prompt: "Mondo", from: notes, category: mondo, link: true, required: true }
       - { field: quando, prompt: "Quando (data del mondo)" }
     body:
       - { field: cosa, prompt: "Cosa accade", heading: "Cosa accade" }

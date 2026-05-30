@@ -74,7 +74,9 @@ function notesByCategory(category) {
     .sort((a, b) => a.basename.localeCompare(b.basename));
 }
 
-async function chooseNotes(tp, question) {
+// req = obbligatorio: throw_on_cancel=true, premere X (Escape) lancia un'eccezione
+// che ferma il wizard. Per i facoltativi (req=false) X salta solo quel campo.
+async function chooseNotes(tp, question, req) {
   const files = notesByCategory(question.category);
   if (question.multi) {
     const picked = [];
@@ -89,44 +91,69 @@ async function chooseNotes(tp, question) {
     return picked;
   }
   if (!files.length) {
-    const typed = await prompt(tp, `${question.prompt} (nessuna nota: digita il nome)`);
-    return typed ? `[[${typed}]]` : "";
+    const typed = await tp.system.prompt(`${question.prompt} (digita il nome)`, "", req);
+    return typed ? `[[${String(typed).trim()}]]` : "";
   }
-  const items = question.optional ? ["(nessuno)", ...files.map(f => f.basename)] : files.map(f => f.basename);
-  const values = question.optional ? [null, ...files] : files;
-  const choice = await tp.system.suggester(items, values, false, question.prompt);
+  const names = files.map(f => f.basename);
+  const items = req ? names : ["(nessuno)", ...names];
+  const values = req ? files : [null, ...files];
+  const choice = await tp.system.suggester(items, values, req, question.prompt);
   return choice ? `[[${choice.basename}]]` : "";
 }
 
 async function ask(tp, question, template, core) {
+  const req = Boolean(question.required);
   switch (question.from) {
     case "subtypes": {
       const subs = core.categories[template.category]?.subtypes ?? [template.default_type];
-      return choose(tp, subs, question.prompt, template.default_type);
+      const v = await tp.system.suggester(subs, subs, req, question.prompt);
+      return String(v ?? template.default_type);
     }
-    case "list":
-      return choose(tp, question.options ?? [], question.prompt);
+    case "list": {
+      const opts = question.options ?? [];
+      const v = await tp.system.suggester(opts, opts, req, question.prompt);
+      return String(v ?? "");
+    }
     case "notes":
-      return chooseNotes(tp, question);
-    default:
-      return prompt(tp, question.prompt, question.default ?? "");
+      return chooseNotes(tp, question, req);
+    default: {
+      const v = await tp.system.prompt(question.prompt, question.default ?? "", req);
+      return String(v ?? "").trim();
+    }
   }
 }
 
-async function create_entity(tp, templateId = "") {
-  const core = await loadCore();
-  const template = core.templates.find(item => item.id === templateId);
-  if (!template) throw new Error(`Template non dichiarato: ${templateId}`);
+function emptyFor(question) {
+  return question.multi ? [] : "";
+}
 
+async function runWizard(tp, template, core) {
   const category = template.category;
   const categorySpec = core.categories[category] ?? {};
   const wizard = (core.creation ?? {})[category] ?? {};
 
-  const name = await prompt(tp, `Nome ${template.title}`);
+  // Il nome è sempre obbligatorio: X qui annulla la creazione.
+  const name = String(await tp.system.prompt(`Nome ${template.title}`, "", true)).trim();
 
+  const questions = [...(wizard.fields ?? []), ...(wizard.body ?? [])];
   const captured = {};
-  for (const question of [...(wizard.fields ?? []), ...(wizard.body ?? [])]) {
-    captured[question.field] = await ask(tp, question, template, core);
+
+  // Campi obbligatori: X annulla l'intero wizard.
+  for (const q of questions.filter(q => q.required)) {
+    captured[q.field] = await ask(tp, q, template, core);
+  }
+
+  // Facoltativi: l'utente sceglie se compilarli ora o dopo nella nota.
+  const optional = questions.filter(q => !q.required);
+  let fillNow = false;
+  if (optional.length) {
+    fillNow = await tp.system.suggester(
+      ["Sì, compila ora", "No, li compilo dopo nella nota"],
+      [true, false], false, "Compilare i campi facoltativi ora?"
+    ) === true;
+  }
+  for (const q of optional) {
+    captured[q.field] = fillNow ? await ask(tp, q, template, core) : emptyFor(q);
   }
 
   const folderKey = categorySpec.folder ?? category;
@@ -151,8 +178,20 @@ async function create_entity(tp, templateId = "") {
     data.attiva = false;
     data.data = tp.date.now("YYYY-MM-DD");
   }
-
   return frontmatter(data);
+}
+
+async function create_entity(tp, templateId = "") {
+  const core = await loadCore();
+  const template = core.templates.find(item => item.id === templateId);
+  if (!template) throw new Error(`Template non dichiarato: ${templateId}`);
+  try {
+    return await runWizard(tp, template, core);
+  } catch (e) {
+    // X su un campo obbligatorio (throw_on_cancel) -> annulla in modo pulito.
+    new Notice("Creazione annullata.");
+    return frontmatter({ categoria: template.category, stato: "bozza", tags: ["gdr/bozza"] });
+  }
 }
 
 module.exports = create_entity;
