@@ -1,11 +1,12 @@
 {
   "name": "vault-gdr",
-  "version": "1.0.1",
+  "version": "0.1.0",
   "private": true,
-  "description": "Vault Obsidian per preparare e gestire campagne GDR fantasy in italiano.",
+  "description": "Sorgenti minimi YAML/Jinja/JS per vault Obsidian GDR.",
   "scripts": {
-    "sync:sources": "python3 Dev/Tools/python/run_source_pipeline.py --mode render --outputs-only",
-    "clean:generated": "python3 Dev/Tools/python/clean_generated_outputs.py",
-    "import:srd": "python3 Dev/Tools/python/import_srd.py"
+    "build": "python3 Dev/Tools/render.py",
+    "check": "python3 Dev/Tools/render.py --check && find Dev/Source/JS -name '*.js' -print0 | xargs -0 -n1 node --check",
+    "clean": "python3 Dev/Tools/render.py --clean",
+    "sync:sources": "python3 Dev/Tools/render.py"
   }
 }

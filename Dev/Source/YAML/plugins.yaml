@@ -1,0 +1,48 @@
+id: obsidian_plugins
+version: 0.1.0
+purpose: Solo plugin fondamentali usati dai template.
+plugins:
+  - id: templater-obsidian
+    name: Templater
+  - id: dataview
+    name: Dataview
+  - id: obsidian-meta-bind-plugin
+    name: Meta Bind
+  - id: js-engine
+    name: JS Engine
+  - id: tabs
+    name: Tabs
+  - id: callout-manager
+    name: Callout Manager
+  - id: obsidian-tasks-plugin
+    name: Tasks
+  - id: obsidian-dice-roller
+    name: Dice Roller
+  - id: obsidian-5e-statblocks
+    name: Fantasy Statblocks
+metabind_inputs:
+  stato: INPUT[inlineSelect(option(bozza), option(pronto), option(in gioco), option(giocata), option(archiviata))]
+  mondo: INPUT[suggester(optionQuery("Mondi"), useLinks(partial), allowOther)]
+  connessioni: INPUT[inlineListSuggester(optionQuery("Mondi"), useLinks(partial), allowOther)]
+  sessioni: INPUT[inlineListSuggester(optionQuery("Mondi/Sessioni"), useLinks(partial), allowOther)]
+  pressione: INPUT[slider(minValue(0), maxValue(10), stepSize(1), addLabels)]
+  testo: INPUT[text]
+buttons:
+  - id: nuova-sessione
+    label: Nuova Sessione
+    template: z.modelli/Sessione.md
+    folder: Mondi/Sessioni
+  - id: nuovo-incontro
+    label: Nuovo Incontro
+    template: z.modelli/Incontro.md
+    folder: Mondi/Incontri
+  - id: nota-rapida
+    label: Nota Rapida
+    template: z.modelli/Nota Rapida.md
+    folder: Inbox
+  - id: marca-canonico
+    label: Marca Canonico
+    action: marca_canonico
+  - id: archivia-nota
+    label: Archivia
+    action: archivia

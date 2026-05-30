@@ -1,0 +1,107 @@
+id: templates
+version: 0.1.0
+purpose: Template Obsidian generati da Jinja e agganciati a JS Templater.
+templates:
+  - id: mondo
+    title: Mondo
+    category: mondo
+    default_type: mondo
+    target: z.modelli/Mondo.md
+    jinja: entity.md.j2
+  - id: cosmologia
+    title: Cosmologia
+    category: cosmologia
+    default_type: legge cosmica
+    target: z.modelli/Cosmologia.md
+    jinja: entity.md.j2
+  - id: luogo
+    title: Luogo
+    category: luogo
+    default_type: sito di interesse
+    target: z.modelli/Luogo.md
+    jinja: entity.md.j2
+  - id: cultura
+    title: Cultura
+    category: cultura
+    default_type: civilta
+    target: z.modelli/Cultura.md
+    jinja: entity.md.j2
+  - id: pg
+    title: PG
+    category: personaggio
+    default_type: pg
+    target: z.modelli/PG.md
+    jinja: entity.md.j2
+  - id: png
+    title: PNG
+    category: personaggio
+    default_type: png
+    target: z.modelli/PNG.md
+    jinja: entity.md.j2
+  - id: creatura
+    title: Creatura
+    category: creatura
+    default_type: creatura
+    target: z.modelli/Creatura.md
+    jinja: encounter.md.j2
+  - id: incontro
+    title: Incontro
+    category: incontro
+    default_type: incontro
+    target: z.modelli/Incontro.md
+    jinja: encounter.md.j2
+  - id: trappola
+    title: Trappola
+    category: incontro
+    default_type: trappola
+    target: z.modelli/Trappola.md
+    jinja: encounter.md.j2
+  - id: pericolo_ambientale
+    title: Pericolo Ambientale
+    category: incontro
+    default_type: pericolo ambientale
+    target: z.modelli/Pericolo Ambientale.md
+    jinja: encounter.md.j2
+  - id: oggetto
+    title: Oggetto
+    category: oggetto
+    default_type: strumento
+    target: z.modelli/Oggetto.md
+    jinja: entity.md.j2
+  - id: oggetto_magico
+    title: Oggetto Magico
+    category: oggetto
+    default_type: oggetto magico
+    target: z.modelli/Oggetto Magico.md
+    jinja: entity.md.j2
+  - id: incantesimo
+    title: Incantesimo
+    category: regola
+    default_type: incantesimo
+    target: z.modelli/Incantesimo.md
+    jinja: entity.md.j2
+  - id: regola
+    title: Regola
+    category: regola
+    default_type: regola
+    target: z.modelli/Regola.md
+    jinja: entity.md.j2
+  - id: sessione
+    title: Sessione
+    category: sessione
+    default_type: sessione
+    target: z.modelli/Sessione.md
+    jinja: session.md.j2
+  - id: nota_rapida
+    title: Nota Rapida
+    category: nota
+    default_type: appunto
+    target: z.modelli/Nota Rapida.md
+    jinja: entity.md.j2
+actions:
+  - id: marca_canonico
+    title: Marca Canonico
+    target: z.modelli/azioni/Marca Canonico.md
+  - id: archivia
+    title: Archivia
+    target: z.modelli/azioni/Archivia.md

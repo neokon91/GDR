@@ -1,0 +1,110 @@
+id: gdr_core
+version: 0.1.0
+purpose: Fonte minima per ontologia, campi e cartelle del vault.
+folders:
+  mondo: Mondi
+  cosmologia: Mondi/Cosmologia
+  luogo: Mondi/Luoghi
+  cultura: Mondi/Culture
+  personaggio: Mondi/Personaggi
+  creatura: Mondi/Creature
+  incontro: Mondi/Incontri
+  oggetto: Mondi/Oggetti
+  regola: Mondi/Regole
+  sessione: Mondi/Sessioni
+  inbox: Inbox
+fields:
+  identity:
+    - id
+    - nome
+    - categoria
+    - tipo
+    - stato
+  logic:
+    - mondo
+    - connessioni
+    - sessioni
+    - fonti
+    - tags
+  lore:
+    - descrizione
+    - origine
+    - tensione
+    - memoria
+    - player_safe
+    - segreto
+  table:
+    - gancio
+    - uso_al_tavolo
+    - prossima_mossa
+    - pressione
+    - conseguenze
+categories:
+  mondo:
+    folder: mondo
+    subtypes:
+      - mondo
+  cosmologia:
+    folder: cosmologia
+    subtypes:
+      - legge cosmica
+      - piano o aldila
+      - divinita
+      - pantheon
+  luogo:
+    folder: luogo
+    subtypes:
+      - regione
+      - insediamento
+      - sito di interesse
+  cultura:
+    folder: cultura
+    subtypes:
+      - civilta
+  personaggio:
+    folder: personaggio
+    subtypes:
+      - pg
+      - png
+  creatura:
+    folder: creatura
+    subtypes:
+      - creatura
+  incontro:
+    folder: incontro
+    subtypes:
+      - incontro
+      - trappola
+      - pericolo ambientale
+  oggetto:
+    folder: oggetto
+    subtypes:
+      - arma
+      - armatura
+      - scudo
+      - oggetto meraviglioso
+      - strumento
+      - oggetto magico
+      - veleno
+      - tesoro
+      - veicolo o cavalcatura
+  regola:
+    folder: regola
+    subtypes:
+      - incantesimo
+      - regola
+      - bastione
+  sessione:
+    folder: sessione
+    subtypes:
+      - sessione
+  nota:
+    folder: inbox
+    subtypes:
+      - appunto
+states:
+  - bozza
+  - pronto
+  - in gioco
+  - giocata
+  - archiviata

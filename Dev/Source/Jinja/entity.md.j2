@@ -1,0 +1,50 @@
+<% await tp.user.create_entity(tp, "{{ template.id }}") %>
+# `=this.nome`
+
+````tabs
+tab: Lore
+
+> [!info] Identita
+> Categoria: `{{ template.category }}`
+>
+> Tipo: `INPUT[text:tipo]`
+>
+> Stato: `INPUT[stato][:stato]`
+
+> [!note]- Descrizione
+> Scrivi qui il contenuto lore vero della nota.
+
+> [!quote]- Versione player-safe
+> `INPUT[text:player_safe]`
+
+tab: Logica
+
+> [!example] Collegamenti
+{% if template.category != "mondo" %}
+> Mondo: `INPUT[mondo][:mondo]`
+>
+{% endif %}
+> Connessioni: `INPUT[connessioni][:connessioni]`
+>
+> Sessioni: `INPUT[sessioni][:sessioni]`
+
+> [!warning]- Pressione
+> Pressione: `INPUT[pressione][:pressione]`
+>
+> Prossima mossa: `INPUT[text:prossima_mossa]`
+
+tab: Vista
+
+```dataviewjs
+const source = await dv.io.load("z.automazioni/views.js");
+eval(source);
+renderEntityPanel(dv, dv.current());
+```
+
+tab: Azioni
+
+> [!tip] Azioni
+> `BUTTON[marca-canonico]`
+>
+> `BUTTON[archivia-nota]`
+````

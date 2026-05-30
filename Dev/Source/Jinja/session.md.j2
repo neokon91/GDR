@@ -1,0 +1,45 @@
+<% await tp.user.create_entity(tp, "{{ template.id }}") %>
+# `=this.nome`
+
+````tabs
+tab: Prepara
+
+> [!target] Obiettivo
+> `INPUT[text:obiettivo]`
+
+> [!quote]- Apertura
+> `INPUT[text:apertura]`
+
+> [!warning]- Pressioni
+> Pressione: `INPUT[pressione][:pressione]`
+>
+> Prossima mossa: `INPUT[text:prossima_mossa]`
+
+tab: Tavolo
+
+> [!info] Live
+> Scena corrente: `INPUT[text:scena_corrente]`
+>
+> Tiro rapido: `dice: 1d20`
+
+> [!todo]- Task
+> ```tasks
+> not done
+> path includes Mondi/Sessioni
+> ```
+
+tab: Collegamenti
+
+> [!example] Ancore
+> Mondo: `INPUT[mondo][:mondo]`
+>
+> Connessioni: `INPUT[connessioni][:connessioni]`
+
+tab: Vista
+
+```dataviewjs
+const source = await dv.io.load("z.automazioni/views.js");
+eval(source);
+renderSessionPanel(dv, dv.current());
+```
+````

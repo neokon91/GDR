@@ -1,12 +1,5 @@
-# Local operating-system files
 .DS_Store
 Thumbs.db
-
-# Local Obsidian workspace state
-.obsidian/workspace.json
-.obsidian/workspace-mobile.json
-
-# Temporary/editor files
 *.tmp
 *.bak
 *.orig
@@ -15,34 +8,19 @@ __pycache__/
 *.py[cod]
 .pytest_cache/
 
-# Generated release packages
+# Generated Obsidian output
+.obsidian/*.json
+.obsidian/plugins/*/data.json
+z.automazioni/
+z.modelli/
+Dev/Build/
 dist/
 
-# User/runtime vault folders
+# User vault content
 Campagne/
 Giocatori/
 Inbox/
 Import/
 Mondi/
-docs/
-
-# Generated vault reference modules
 SRD/
-z.bases/
-z.fileclass/
-
-# Generated Obsidian templates
-z.modelli/
-
-# Output generati dalla source pipeline: restano locali, non sorgente tracciato.
-Dev/plugin_matrix.json
-.obsidian/*.json
-.obsidian/**/*.json
-.obsidian/plugins/*/manifest.json
-.obsidian/plugins/*/main.js
-.obsidian/plugins/*/styles.css
-.obsidian/themes/
-z.automazioni/data/
-z.automazioni/templater/
-# Local TemplateFactory previews and review reports
-Dev/Build/template-previews/
+docs/

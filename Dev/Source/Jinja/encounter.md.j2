@@ -1,0 +1,43 @@
+<% await tp.user.create_entity(tp, "{{ template.id }}") %>
+# `=this.nome`
+
+````tabs
+tab: Scena
+
+> [!danger] Uso al tavolo
+> `INPUT[text:uso_al_tavolo]`
+
+> [!warning]- Pericolo
+> Pressione: `INPUT[pressione][:pressione]`
+>
+> Prossima mossa: `INPUT[text:prossima_mossa]`
+
+tab: 5.5e
+
+> [!info] Dati gioco
+> CA: `INPUT[text:ca]`
+>
+> PF: `INPUT[text:pf]`
+>
+> CD: `INPUT[text:cd]`
+>
+> Danno: `INPUT[text:danno]`
+
+> [!tip]- Tiri
+> `dice: 1d20`
+
+tab: Collegamenti
+
+> [!example] Ancore
+> Mondo: `INPUT[mondo][:mondo]`
+>
+> Connessioni: `INPUT[connessioni][:connessioni]`
+
+tab: Vista
+
+```dataviewjs
+const source = await dv.io.load("z.automazioni/views.js");
+eval(source);
+renderEntityPanel(dv, dv.current());
+```
+````
