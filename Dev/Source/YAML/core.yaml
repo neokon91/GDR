@@ -30,10 +30,14 @@ fields:
   obiettivo:      { label: Obiettivo,            widget: text }
   apertura:       { label: Apertura,             widget: text }
   scena_corrente: { label: Scena corrente,       widget: text }
-  ca:             { label: CA,                    widget: text }
-  pf:             { label: PF,                    widget: text }
-  cd:             { label: CD,                    widget: text }
-  danno:          { label: Danno,                 widget: text }
+  ac:             { label: CA, widget: number }
+  hp:             { label: PF, widget: number }
+  cr:             { label: GS, widget: text }
+
+# Statblock (Fantasy Statblocks): layout usato dal blocco ```statblock```.
+# Sostituisci col nome del layout installato (es. un layout 2024/5.5e).
+statblock:
+  layout: Basic 5e Layout
 categories:
   mondo:
     folder: mondo

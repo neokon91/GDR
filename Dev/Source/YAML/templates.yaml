@@ -43,7 +43,7 @@ templates:
     category: creatura
     default_type: creatura
     target: z.modelli/Creatura.md
-    jinja: encounter.md.j2
+    jinja: creature.md.j2
   - id: incontro
     title: Incontro
     category: incontro

@@ -3,26 +3,29 @@
 # `=this.nome`
 
 ````tabs
+tab: Statblock
+
+```statblock
+layout: {{ core.statblock.layout }}
+monster: "=this.nome"
+```
+
+> [!info]- Modifica rapida
+> {{ m.field('ac') }}
+>
+> {{ m.field('hp') }}
+>
+> {{ m.field('cr') }}
+
 tab: Scena
 
 > [!danger] Uso al tavolo
 > {{ m.field('uso_al_tavolo', label=false) }}
 
-> [!warning]- Pericolo
+> [!warning]- Pressione
 > {{ m.field('pressione') }}
 >
 > {{ m.field('prossima_mossa') }}
-
-tab: Combattimento
-
-```encounter
-# Aggiungi creature per nome dal bestiario, es. "3: Goblin".
-creatures:
-  - 1: Goblin
-```
-
-> [!tip]- Tiri
-> `dice: 1d20`
 
 tab: Collegamenti
 
@@ -30,6 +33,8 @@ tab: Collegamenti
 > {{ m.field('mondo') }}
 >
 > {{ m.field('connessioni') }}
+>
+> {{ m.field('sessioni') }}
 
 tab: Vista
 

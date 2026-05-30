@@ -20,6 +20,8 @@ plugins:
     name: Dice Roller
   - id: obsidian-5e-statblocks
     name: Fantasy Statblocks
+  - id: initiative-tracker
+    name: Initiative Tracker
 metabind_inputs:
   stato: INPUT[inlineSelect(option(bozza), option(pronto), option(in gioco), option(giocata), option(archiviata))]
   mondo: INPUT[suggester(optionQuery("Mondi"), useLinks(partial), allowOther)]

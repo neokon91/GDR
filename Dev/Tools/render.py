@@ -205,7 +205,7 @@ def check() -> int:
     # Ogni widget non-text del registro deve avere un template Meta Bind.
     for field_id, spec in fields.items():
         widget = (spec or {}).get("widget")
-        if widget and widget != "text" and widget not in metabind:
+        if widget and widget not in ("text", "number") and widget not in metabind:
             errors.append(f"campo {field_id}: widget '{widget}' assente da metabind_inputs")
 
     # Ogni field('<id>') usato nei Jinja deve esistere nel registro core.fields.

@@ -5,6 +5,6 @@
 {% macro field(id, label=true) -%}
 {%- set f = core.fields[id] -%}
 {%- if label %}{{ f.label }}: {% endif -%}
-{%- if f.widget == 'text' -%}`INPUT[text:{{ id }}]`
+{%- if f.widget in ['text', 'number'] -%}`INPUT[{{ f.widget }}:{{ id }}]`
 {%- else -%}`INPUT[{{ f.widget }}][:{{ id }}]`{%- endif -%}
 {%- endmacro %}

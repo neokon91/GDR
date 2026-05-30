@@ -43,6 +43,26 @@ async function create_entity(tp, templateId = "") {
     frontmatter.data = tp.date.now("YYYY-MM-DD");
   }
 
+  if (category === "creatura") {
+    // Campi letti da Fantasy Statblocks (chiavi inglesi) + registrazione nel
+    // bestiario per Initiative Tracker. Valori base da rifinire o importare.
+    frontmatter.statblock = true;
+    frontmatter.name = name;
+    frontmatter.size = "Medio";
+    frontmatter.type = "";
+    frontmatter.alignment = "";
+    frontmatter.ac = 10;
+    frontmatter.hp = 10;
+    frontmatter.hit_dice = "";
+    frontmatter.speed = "9 m";
+    frontmatter.stats = [10, 10, 10, 10, 10, 10];
+    frontmatter.cr = "0";
+    frontmatter.senses = "";
+    frontmatter.languages = "";
+    frontmatter.traits = [];
+    frontmatter.actions = [];
+  }
+
   return helpers.frontmatter(frontmatter);
 }
 
