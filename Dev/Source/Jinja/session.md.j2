@@ -5,36 +5,28 @@
 ````tabs
 tab: Prepara
 
-> [!target] Obiettivo
+> [!scena] Obiettivo
 > {{ m.field('obiettivo', label=false) }}
 
-> [!quote]- Apertura
+> [!lettura]- Apertura
 > {{ m.field('apertura', label=false) }}
 
-> [!warning]- Pressioni
+> [!timer]- Pressioni
 > {{ m.field('pressione') }}
 >
 > {{ m.field('prossima_mossa') }}
 
 tab: Tavolo
 
-> [!info] Live
+> [!scena] Live
 > {{ m.field('scena_corrente') }}
->
-> Tiro rapido: `dice: 1d20`
-
-> [!todo]- Task
-> ```tasks
-> not done
-> path includes Mondi/Sessioni
-> ```
 
 tab: Collegamenti
 
-> [!example] Ancore
-> Mondo: `INPUT[mondo][:mondo]`
+> [!luogo] Ancore
+> {{ m.field('mondo') }}
 >
-> Connessioni: `INPUT[connessioni][:connessioni]`
+> {{ m.field('connessioni') }}
 
 tab: Vista
 

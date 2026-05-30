@@ -5,28 +5,23 @@
 ````tabs
 tab: Scena
 
-> [!danger] Uso al tavolo
+> [!incontro] Uso al tavolo
 > {{ m.field('uso_al_tavolo', label=false) }}
 
-> [!warning]- Pericolo
+> [!pericolo]- Pericolo
 > {{ m.field('pressione') }}
 >
 > {{ m.field('prossima_mossa') }}
 
-tab: Combattimento
+tab: Creature
 
-```encounter
-# Aggiungi creature per nome dal bestiario, es. "3: Goblin".
-creatures:
-  - 1: Goblin
+```dataview
+list from [[]] where categoria = "creatura"
 ```
-
-> [!tip]- Tiri
-> `dice: 1d20`
 
 tab: Collegamenti
 
-> [!example] Ancore
+> [!luogo] Ancore
 > {{ m.field('mondo') }}
 >
 > {{ m.field('connessioni') }}
