@@ -21,8 +21,27 @@ function pressureLabel(value) {
   return `🟢 Calma (${p})`;
 }
 
+// Reciprocita': chi cita questa nota (le relazioni in frontmatter sono
+// unidirezionali; i backlink danno il senso inverso). Raggruppa per categoria,
+// mostra la pressione: "chi dipende da me e quanto scotta".
+function renderBacklinks(dv, page) {
+  const links = asArray(page.file && page.file.inlinks)
+    .map(link => { try { return dv.page(link.path ?? link); } catch (e) { return null; } })
+    .filter(Boolean);
+  if (!links.length) {
+    dv.paragraph("*Nessuna nota lo cita ancora.*");
+    return;
+  }
+  const rows = links
+    .map(p => [p.file.link, text(p.categoria) || "—", pressureLabel(p.pressione)])
+    .sort((a, b) => String(a[1]).localeCompare(String(b[1])));
+  dv.paragraph("**Citato da:**");
+  dv.table(["Nota", "Categoria", "Pressione"], rows);
+}
+
 // Pannello "pronto al tavolo?": stato della superficie giocabile a colpo d'occhio.
-// Non duplica i tab di input: mostra COSA manca per usare la nota in scena.
+// Non duplica i tab di input: mostra COSA manca per usare la nota in scena, poi
+// la reciprocita' (chi la cita).
 function renderEntityPanel(dv, page) {
   const root = dv.el("div", "", { cls: "gdr-grid" });
   root.innerHTML = [
@@ -31,6 +50,7 @@ function renderEntityPanel(dv, page) {
     card("Pressione", pressureLabel(page.pressione), Number(page.pressione) >= 7 ? "missing" : "ready"),
     card("Prossima mossa", text(page.prossima_mossa), page.prossima_mossa ? "ready" : "missing")
   ].join("");
+  renderBacklinks(dv, page);
 }
 
 // Risolve i link di una pagina ed estrae i "fronti": pressione + prossima mossa,

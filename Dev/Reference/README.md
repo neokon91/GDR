@@ -19,3 +19,4 @@ Ogni file cita la doc ufficiale; le parti critiche sono verificate dal sorgente.
 
 Architettura invariata: **YAML** sorgente → `render.py` genera **JSON** (per i JS) e rende
 **Jinja → MD**; i JS sono autonomi e leggono il JSON via `app.vault.adapter.read`.
+Architettura completa, modello YAML e workflow: vedi [`README.md`](../../README.md) alla radice.

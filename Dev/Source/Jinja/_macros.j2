@@ -127,6 +127,21 @@
 {% endif %}
 {%- endmacro %}
 
+{# Scheda statistiche PG (5e): caratteristiche editabili + modificatori calcolati.
+   Iniziativa via computed; ogni modificatore via compute_into -> salvato in
+   mod_<car> (interrogabile da Dataview). Single source: core.caratteristiche. #}
+{% macro scheda_pg() -%}
+> [!info] In gioco
+> CA `INPUT[number:ca]` · PF `INPUT[number:pf]`/`INPUT[number:pf_max]` · Velocità `INPUT[number:velocita]` m
+>
+> Competenza +`INPUT[number:competenza]` · Iniziativa {{ computed('floor(({destrezza} - 10) / 2)') }}
+
+> [!abstract] Caratteristiche
+{% for c in core.caratteristiche %}
+> **{{ c.sigla }}** `INPUT[number:{{ c.id }}]` · mod {{ compute_into('floor(({' ~ c.id ~ '} - 10) / 2)', 'mod_' ~ c.id) }}
+{% endfor %}
+{%- endmacro %}
+
 {# Pannello vista (dataviewjs). fn = funzione esposta da z.automazioni/views.js. #}
 {% macro vista(fn='renderEntityPanel') -%}
 ```dataviewjs

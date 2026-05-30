@@ -49,13 +49,13 @@ templates:
     category: personaggio
     default_type: pg
     target: z.modelli/PG.md
-    jinja: entity.md.j2
+    jinja: character.md.j2
   - id: png
     title: PNG
     category: personaggio
     default_type: png
     target: z.modelli/PNG.md
-    jinja: entity.md.j2
+    jinja: character.md.j2
   - id: creatura
     title: Creatura
     category: creatura

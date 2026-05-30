@@ -1,0 +1,33 @@
+{% import '_macros.j2' as m with context -%}
+<% await tp.user.create_entity(tp, "{{ template.id }}") %>
+# `=this.nome`
+
+{{ m.identita_card(template) }}
+
+````tabs
+--- Scheda
+
+{{ m.scheda_pg() }}
+--- Lore
+
+> [!note]- Descrizione
+> Chi è, com'è, cosa porta in scena.
+
+> [!quote]- Versione player-safe
+> {{ m.field('player_safe', label=false) }}
+
+{{ m.wizard_body(template.category) }}
+--- Al tavolo
+
+{{ m.tavolo() }}
+--- Carattere
+
+{{ m.carattere(template.category) }}
+--- Collegamenti
+
+{{ m.relazioni(template.category) }}
+{{ m.collegamenti() }}
+--- Vista
+
+{{ m.vista() }}
+````

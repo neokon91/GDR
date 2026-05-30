@@ -48,6 +48,17 @@ tavolo:
 # Sostituisci col nome del layout installato (es. un layout 2024/5.5e).
 statblock:
   layout: Basic 5e Layout
+
+# Caratteristiche 5e per la scheda PG (macro scheda_pg). id = chiave frontmatter
+# (INPUT[number]); il modificatore e' calcolato e SALVATO in mod_<id> (compute_into)
+# cosi' e' interrogabile da Dataview e dalle altre note.
+caratteristiche:
+  - { id: forza,        sigla: FOR }
+  - { id: destrezza,    sigla: DES }
+  - { id: costituzione, sigla: COS }
+  - { id: intelligenza, sigla: INT }
+  - { id: saggezza,     sigla: SAG }
+  - { id: carisma,      sigla: CAR }
 categories:
   mondo:
     folder: mondo
