@@ -29,7 +29,7 @@ SAMPLES_DIR = SOURCE / "Samples"
 VAULT = ROOT / "dist" / "GDR-vault"
 
 # Sottocartelle interamente generate: sicure da azzerare a ogni build.
-GENERATED_DIRS = ("z.modelli", "z.automazioni")
+GENERATED_DIRS = ("z.modelli", "z.automazioni", "z.classi")
 
 # Note generate alla radice del vault (non contenuti utente).
 GENERATED_NOTES = ("Home.md", "LEGGIMI.md")
@@ -146,6 +146,46 @@ def action_buttons(plugins: dict[str, Any]) -> list[dict[str, Any]]:
     return buttons
 
 
+def fileclass_fields(core: dict[str, Any], category: str) -> list[dict[str, Any]]:
+    """Campi tipizzati Metadata Menu per una categoria, derivati dal wizard YAML.
+    Mapping: notes->File/MultiFile, pressione/number->Number, resto->Input."""
+    fields: list[dict[str, Any]] = []
+    seen: set[str] = set()
+
+    def add(field_id: str, ftype: str) -> None:
+        if field_id in seen:
+            return
+        seen.add(field_id)
+        fields.append({"name": field_id, "type": ftype, "options": {}, "path": "", "id": field_id})
+
+    add("stato", "Input")
+    if category != "mondo":
+        add("mondo", "File")
+    creation = (core.get("creation", {}) or {}).get(category, {})
+    for question in (creation.get("fields", []) or []) + (creation.get("body", []) or []):
+        field_id = question["field"]
+        if question.get("from") == "notes":
+            add(field_id, "MultiFile" if question.get("multi") else "File")
+        elif field_id == "pressione" or question.get("from") == "number":
+            add(field_id, "Number")
+        else:
+            add(field_id, "Input")
+    add("connessioni", "MultiFile")
+    add("sessioni", "MultiFile")
+    return fields
+
+
+def fileclass_note(core: dict[str, Any], category: str) -> str:
+    frontmatter = {
+        "fields": fileclass_fields(core, category),
+        "filesPaths": [template_folder(core, category)],
+        "mapWithTag": False,
+        "tagNames": [],
+    }
+    dumped = yaml.safe_dump(frontmatter, allow_unicode=True, sort_keys=False)
+    return f"---\n{dumped}---\n\n# fileClass: {category}\n"
+
+
 def meta_bind_config(plugins: dict[str, Any], core: dict[str, Any], templates: list[dict[str, Any]]) -> dict[str, Any]:
     return {
         "enableJs": True,
@@ -212,6 +252,11 @@ def build() -> dict[str, str]:
     })
     merge_plugin_config(obsidian, "dataview", {"enableDataviewJs": True})
     merge_plugin_config(obsidian, "obsidian-meta-bind-plugin", meta_bind_config(plugins, core, templates))
+
+    # Metadata Menu: uno fileClass per categoria (schema campi tipizzati).
+    for category in core.get("categories", {}):
+        write_text(VAULT / "z.classi" / f"{category}.md", fileclass_note(core, category))
+    merge_plugin_config(obsidian, "metadata-menu", {"classFilesPath": "z.classi/"})
 
     for name, jinja_name in (("Home.md", "home.md.j2"), ("LEGGIMI.md", "leggimi.md.j2")):
         text = env.get_template(jinja_name).render(core=core, plugins=plugins, templates=templates)
