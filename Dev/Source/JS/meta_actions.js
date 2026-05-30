@@ -1,4 +1,9 @@
-const helpers = require("./helpers");
+// Azioni sulla nota attiva (marca canonico / archivia). Autonomo: nessun require.
+
+async function updateFrontmatter(file, updater) {
+  if (!file || !app.fileManager?.processFrontMatter) return;
+  await app.fileManager.processFrontMatter(file, updater);
+}
 
 async function meta_actions(tp, action = "") {
   const file = app.workspace.getActiveFile?.() ?? tp.config?.target_file;
@@ -8,7 +13,7 @@ async function meta_actions(tp, action = "") {
   }
 
   if (action === "marca_canonico") {
-    await helpers.updateFrontmatter(file, fm => {
+    await updateFrontmatter(file, fm => {
       fm.canonico = true;
       if (fm.stato === "bozza") fm.stato = "pronto";
     });
@@ -17,7 +22,7 @@ async function meta_actions(tp, action = "") {
   }
 
   if (action === "archivia") {
-    await helpers.updateFrontmatter(file, fm => {
+    await updateFrontmatter(file, fm => {
       fm.stato = "archiviata";
       fm.archiviata_il = tp.date.now("YYYY-MM-DD");
     });

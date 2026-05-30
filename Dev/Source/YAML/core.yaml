@@ -128,3 +128,26 @@ states:
   - in gioco
   - giocata
   - archiviata
+# Wizard di creazione per categoria (letto da create_entity.js).
+# Ogni domanda: { field, prompt, ... }
+#   from: subtypes  -> suggester sui subtypes della categoria
+#   from: notes, category: X, link: true  -> suggester sulle note esistenti di
+#         categoria X -> salva un link [[..]] (multi: true per piu' scelte)
+#   from: list, options: [...]  -> suggester su opzioni fisse
+#   (default)       -> testo libero
+# fields -> frontmatter; body -> sezioni markdown pre-compilate nel corpo
+#   (heading: "Titolo" come ## ; oppure callout: quote/warning/... title/fold)
+creation:
+  personaggio:
+    fields:
+      - { field: tipo, prompt: "Tipo di personaggio", from: subtypes }
+      - { field: mondo, prompt: "Mondo di appartenenza", from: notes, category: mondo, link: true }
+      - { field: fazione, prompt: "Fazione (opzionale)", from: notes, category: fazione, link: true, optional: true }
+      - { field: luogo, prompt: "Dove si trova di solito (opzionale)", from: notes, category: luogo, link: true, optional: true }
+    body:
+      - { field: ruolo, prompt: "Ruolo o occupazione", heading: "Ruolo" }
+      - { field: aspetto, prompt: "Tratto distintivo: voce, aspetto, manierismo", heading: "Aspetto" }
+      - { field: desiderio, prompt: "Cosa vuole davvero", heading: "Vuole" }
+      - { field: paura, prompt: "Cosa teme o evita", heading: "Teme" }
+      - { field: gancio, prompt: "Gancio per il tavolo: perche' i PG lo incontrano", callout: quote, title: "Gancio" }
+      - { field: segreto, prompt: "Segreto (non mostrare ai giocatori)", callout: warning, title: "Segreto", fold: true }

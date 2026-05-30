@@ -3,7 +3,7 @@
 # `=this.nome`
 
 ````tabs
---- Lore
+tab: Lore
 
 > [!info] Identita
 > Categoria: `{{ template.category }}`
@@ -18,7 +18,7 @@
 > [!quote]- Versione player-safe
 > {{ m.field('player_safe', label=false) }}
 
---- Logica
+tab: Logica
 
 > [!example] Collegamenti
 {% if template.category != "mondo" -%}
@@ -34,7 +34,7 @@
 >
 > {{ m.field('prossima_mossa') }}
 
---- Vista
+tab: Vista
 
 ```dataviewjs
 const source = await dv.io.load("z.automazioni/views.js");
@@ -42,7 +42,7 @@ eval(source);
 renderEntityPanel(dv, dv.current());
 ```
 
---- Azioni
+tab: Azioni
 
 > [!tip] Azioni
 > `BUTTON[marca-canonico]`

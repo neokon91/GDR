@@ -3,7 +3,7 @@
 # `=this.nome`
 
 ````tabs
---- Statblock
+tab: Statblock
 
 ```statblock
 layout: {{ core.statblock.layout }}
@@ -23,7 +23,7 @@ traits: []
 actions: []
 ```
 
---- Scena
+tab: Scena
 
 > [!danger] Uso al tavolo
 > {{ m.field('uso_al_tavolo', label=false) }}
@@ -33,7 +33,7 @@ actions: []
 >
 > {{ m.field('prossima_mossa') }}
 
---- Collegamenti
+tab: Collegamenti
 
 > [!example] Ancore
 > {{ m.field('mondo') }}
@@ -42,7 +42,7 @@ actions: []
 >
 > {{ m.field('sessioni') }}
 
---- Vista
+tab: Vista
 
 ```dataviewjs
 const source = await dv.io.load("z.automazioni/views.js");

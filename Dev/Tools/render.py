@@ -108,36 +108,6 @@ def union_list(path: Path, values: list[str]) -> None:
         write_json(path, merged)
 
 
-def bundle_user_script(entry: str, core_payload: dict[str, Any]) -> str:
-    """Impacchetta un entry-point Templater in un file autonomo. I require tra
-    user-script non funzionano in Templater, quindi helpers.js e core.json
-    vengono inlinati tramite uno shim di require, includendo i sorgenti verbatim."""
-    helpers_src = (JS_DIR / "helpers.js").read_text(encoding="utf-8")
-    entry_src = (JS_DIR / entry).read_text(encoding="utf-8")
-    core_literal = json.dumps(core_payload, ensure_ascii=False)
-    # Nomi esterni con prefisso __ per non collidere con `const core`/`const
-    # helpers` dichiarati dentro i sorgenti inlinati (eviterebbero la TDZ).
-    return "\n".join([
-        f"// Auto-generato dal build (Dev/Tools/render.py). Sorgente: Dev/Source/JS/{entry}",
-        "// Non modificare qui: i require sono risolti da uno shim per Templater.",
-        f"const __CORE__ = {core_literal};",
-        "",
-        "const __HELPERS__ = (function () {",
-        "  const module = { exports: {} }, exports = module.exports;",
-        '  const require = (id) => { if (id === "./data/core.json") return __CORE__; throw new Error("require non risolto: " + id); };',
-        helpers_src,
-        "  return module.exports;",
-        "})();",
-        "",
-        "module.exports = (function () {",
-        "  const module = { exports: {} }, exports = module.exports;",
-        '  const require = (id) => { if (id === "./helpers") return __HELPERS__; throw new Error("require non risolto: " + id); };',
-        entry_src,
-        "  return module.exports;",
-        "})();",
-    ])
-
-
 def template_folder(core: dict[str, Any], category: str) -> str:
     folders = core.get("folders", {})
     folder_key = (core.get("categories", {}).get(category) or {}).get("folder", category)
@@ -199,20 +169,23 @@ def build() -> dict[str, str]:
         "fields": core.get("fields", {}),
         "categories": core.get("categories", {}),
         "states": core.get("states", []),
+        "creation": core.get("creation", {}),
         "templates": templates,
     }
 
-    # Entry-point Templater: bundle autonomi (i require tra user-script non
-    # funzionano in app). views.js e' autonomo: caricato dai blocchi dataviewjs.
-    for entry in ("create_entity.js", "meta_actions.js"):
-        write_text(VAULT / "z.automazioni" / entry, bundle_user_script(entry, payload))
-    shutil.copy2(JS_DIR / "views.js", VAULT / "z.automazioni" / "views.js")
+    # YAML -> JSON che gli script JS leggono a runtime via app.vault.adapter.read.
+    write_json(VAULT / "z.automazioni" / "data" / "core.json", payload)
+    # Gli script Templater sono autonomi (niente require/bundling): copia 1:1.
+    for source in sorted(JS_DIR.glob("*.js")):
+        shutil.copy2(source, VAULT / "z.automazioni" / source.name)
 
     env = Environment(
         loader=FileSystemLoader(str(JINJA_DIR)),
         undefined=StrictUndefined,
         autoescape=False,
         keep_trailing_newline=True,
+        trim_blocks=True,
+        lstrip_blocks=True,
     )
 
     rendered: dict[str, str] = {}

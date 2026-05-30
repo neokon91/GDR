@@ -3,7 +3,7 @@
 # `=this.nome`
 
 ````tabs
---- Lore
+tab: Lore
 
 > [!info] Identita
 > Categoria: `{{ template.category }}`
@@ -21,7 +21,7 @@
 > [!quote]- Versione player-safe
 > {{ m.field('player_safe', label=false) }}
 
---- Logica
+tab: Logica
 
 > [!example] Collegamenti
 > {{ m.field('mondo') }}
@@ -35,7 +35,7 @@
 >
 > {{ m.field('prossima_mossa') }}
 
---- Cronologia mondo
+tab: Cronologia mondo
 
 ```dataview
 table without id file.link as Evento, quando as Quando, mondo as Mondo
@@ -44,7 +44,7 @@ where categoria = "evento"
 sort quando asc
 ```
 
---- Azioni
+tab: Azioni
 
 > [!tip] Azioni
 > `BUTTON[marca-canonico]`
