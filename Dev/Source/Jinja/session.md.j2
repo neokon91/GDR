@@ -3,32 +3,40 @@
 # `=this.nome`
 
 ````tabs
-tab: Prepara
+--- Prepara
 
-> [!scena] Obiettivo
+> [!tip] Obiettivo
 > {{ m.field('obiettivo', label=false) }}
 
-> [!lettura]- Apertura
+> [!quote]- Apertura
 > {{ m.field('apertura', label=false) }}
 
-> [!timer]- Pressioni
+> [!warning]- Pressioni
 > {{ m.field('pressione') }}
 >
 > {{ m.field('prossima_mossa') }}
 
-tab: Tavolo
+--- Tavolo
 
-> [!scena] Live
+> [!info] Live
 > {{ m.field('scena_corrente') }}
+>
+> Tiro rapido: `dice: 1d20`
 
-tab: Collegamenti
+> [!todo]- Task
+> ```tasks
+> not done
+> path includes Mondi/Sessioni
+> ```
 
-> [!luogo] Ancore
+--- Collegamenti
+
+> [!example] Ancore
 > {{ m.field('mondo') }}
 >
 > {{ m.field('connessioni') }}
 
-tab: Vista
+--- Vista
 
 ```dataviewjs
 const source = await dv.io.load("z.automazioni/views.js");

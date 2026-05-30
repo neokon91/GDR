@@ -3,30 +3,33 @@
 # `=this.nome`
 
 ````tabs
-tab: Scena
+--- Scena
 
-> [!incontro] Uso al tavolo
+> [!danger] Uso al tavolo
 > {{ m.field('uso_al_tavolo', label=false) }}
 
-> [!pericolo]- Pericolo
+> [!warning]- Pericolo
 > {{ m.field('pressione') }}
 >
 > {{ m.field('prossima_mossa') }}
 
-tab: Creature
+> [!tip]- Tiri
+> `dice: 1d20`
+
+--- Creature
 
 ```dataview
 list from [[]] where categoria = "creatura"
 ```
 
-tab: Collegamenti
+--- Collegamenti
 
-> [!luogo] Ancore
+> [!example] Ancore
 > {{ m.field('mondo') }}
 >
 > {{ m.field('connessioni') }}
 
-tab: Vista
+--- Vista
 
 ```dataviewjs
 const source = await dv.io.load("z.automazioni/views.js");

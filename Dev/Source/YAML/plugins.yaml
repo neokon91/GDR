@@ -1,8 +1,8 @@
 id: obsidian_plugins
 version: 0.1.0
 purpose: Solo plugin fondamentali usati dai template.
-# Allineati ai plugin realmente installati nel vault. NB: niente
-# dice-roller / initiative-tracker / tasks (non installati).
+# Allineati ai plugin realmente installati in dist/GDR-vault (verificato dai
+# main.js). NB: tabs = tab-panels; niente initiative-tracker.
 plugins:
   - id: templater-obsidian
     name: Templater
@@ -12,24 +12,30 @@ plugins:
     name: Meta Bind
   - id: js-engine
     name: JS Engine
-  - id: tabs
-    name: Tabs
+  - id: tab-panels
+    name: Tab Panels
   - id: callout-manager
     name: Callout Manager
   - id: obsidian-5e-statblocks
     name: Fantasy Statblocks
   - id: metadata-menu
     name: Metadata Menu
-  - id: folder-notes
-    name: Folder Notes
   - id: obsidian-icon-folder
     name: Iconize
-  - id: homepage
-    name: Homepage
   - id: calendarium
     name: Calendarium
-  - id: media-extended
-    name: Media Extended
+  - id: obsidian-dice-roller
+    name: Dice Roller
+  - id: obsidian-tasks-plugin
+    name: Tasks
+  - id: obsidian-excalidraw-plugin
+    name: Excalidraw
+  - id: zoom-map
+    name: Zoom Map
+  - id: fantasy-content-generator
+    name: Fantasy Content Generator
+  - id: obsidian42-brat
+    name: BRAT
 metabind_inputs:
   stato: INPUT[inlineSelect(option(bozza), option(pronto), option(in gioco), option(giocata), option(archiviata))]
   mondo: INPUT[suggester(optionQuery("Mondi"), useLinks(partial), allowOther)]
