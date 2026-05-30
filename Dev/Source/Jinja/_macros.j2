@@ -1,0 +1,10 @@
+{# Emette un campo editabile dal registro core.fields.
+   field('id')              -> "Label: `INPUT[...]`"
+   field('id', label=false) -> "`INPUT[...]`" (solo widget, label altrove)
+   Va importato con contesto: {% import '_macros.j2' as m with context %} #}
+{% macro field(id, label=true) -%}
+{%- set f = core.fields[id] -%}
+{%- if label %}{{ f.label }}: {% endif -%}
+{%- if f.widget == 'text' -%}`INPUT[text:{{ id }}]`
+{%- else -%}`INPUT[{{ f.widget }}][:{{ id }}]`{%- endif -%}
+{%- endmacro %}

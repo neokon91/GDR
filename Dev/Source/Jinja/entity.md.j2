@@ -1,3 +1,4 @@
+{% import '_macros.j2' as m with context -%}
 <% await tp.user.create_entity(tp, "{{ template.id }}") %>
 # `=this.nome`
 
@@ -7,31 +8,31 @@ tab: Lore
 > [!info] Identita
 > Categoria: `{{ template.category }}`
 >
-> Tipo: `INPUT[text:tipo]`
+> {{ m.field('tipo') }}
 >
-> Stato: `INPUT[stato][:stato]`
+> {{ m.field('stato') }}
 
 > [!note]- Descrizione
 > Scrivi qui il contenuto lore vero della nota.
 
 > [!quote]- Versione player-safe
-> `INPUT[text:player_safe]`
+> {{ m.field('player_safe', label=false) }}
 
 tab: Logica
 
 > [!example] Collegamenti
-{% if template.category != "mondo" %}
-> Mondo: `INPUT[mondo][:mondo]`
+{% if template.category != "mondo" -%}
+> {{ m.field('mondo') }}
 >
-{% endif %}
-> Connessioni: `INPUT[connessioni][:connessioni]`
+{% endif -%}
+> {{ m.field('connessioni') }}
 >
-> Sessioni: `INPUT[sessioni][:sessioni]`
+> {{ m.field('sessioni') }}
 
 > [!warning]- Pressione
-> Pressione: `INPUT[pressione][:pressione]`
+> {{ m.field('pressione') }}
 >
-> Prossima mossa: `INPUT[text:prossima_mossa]`
+> {{ m.field('prossima_mossa') }}
 
 tab: Vista
 

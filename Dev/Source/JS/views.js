@@ -15,7 +15,7 @@ function card(title, body, cls = "") {
 function renderEntityPanel(dv, page) {
   const root = dv.el("div", "", { cls: "gdr-grid" });
   root.innerHTML = [
-    card("Uso al tavolo", text(page.uso_al_tavolo || page.gancio), "ready"),
+    card("Uso al tavolo", text(page.uso_al_tavolo), page.uso_al_tavolo ? "ready" : "missing"),
     card("Prossima mossa", text(page.prossima_mossa), page.prossima_mossa ? "ready" : "missing"),
     card("Connessioni", asArray(page.connessioni).join(", "), asArray(page.connessioni).length ? "ready" : "missing")
   ].join("");

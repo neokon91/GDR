@@ -9,7 +9,6 @@ async function meta_actions(tp, action = "") {
 
   if (action === "marca_canonico") {
     await helpers.updateFrontmatter(file, fm => {
-      fm.stato_canonico = "canonico";
       fm.canonico = true;
       if (fm.stato === "bozza") fm.stato = "pronto";
     });

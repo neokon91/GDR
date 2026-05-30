@@ -13,32 +13,27 @@ folders:
   regola: Mondi/Regole
   sessione: Mondi/Sessioni
   inbox: Inbox
+# Registro campi: unica fonte per label e widget dei campi editabili nelle note.
+# I template Jinja li emettono via la macro field('<id>') (vedi Jinja/_macros.j2).
+# widget: 'text' -> INPUT[text:<id>]; altrimenti nome di un template Meta Bind
+# dichiarato in plugins.yaml:metabind_inputs -> INPUT[<widget>][:<id>].
 fields:
-  identity:
-    - id
-    - nome
-    - categoria
-    - tipo
-    - stato
-  logic:
-    - mondo
-    - connessioni
-    - sessioni
-    - fonti
-    - tags
-  lore:
-    - descrizione
-    - origine
-    - tensione
-    - memoria
-    - player_safe
-    - segreto
-  table:
-    - gancio
-    - uso_al_tavolo
-    - prossima_mossa
-    - pressione
-    - conseguenze
+  tipo:           { label: Tipo,                 widget: text }
+  stato:          { label: Stato,                widget: stato }
+  mondo:          { label: Mondo,                widget: mondo }
+  connessioni:    { label: Connessioni,          widget: connessioni }
+  sessioni:       { label: Sessioni,             widget: sessioni }
+  pressione:      { label: Pressione,            widget: pressione }
+  prossima_mossa: { label: Prossima mossa,       widget: text }
+  uso_al_tavolo:  { label: Uso al tavolo,        widget: text }
+  player_safe:    { label: Versione player-safe, widget: text }
+  obiettivo:      { label: Obiettivo,            widget: text }
+  apertura:       { label: Apertura,             widget: text }
+  scena_corrente: { label: Scena corrente,       widget: text }
+  ca:             { label: CA,                    widget: text }
+  pf:             { label: PF,                    widget: text }
+  cd:             { label: CD,                    widget: text }
+  danno:          { label: Danno,                 widget: text }
 categories:
   mondo:
     folder: mondo

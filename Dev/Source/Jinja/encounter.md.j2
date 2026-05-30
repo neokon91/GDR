@@ -1,3 +1,4 @@
+{% import '_macros.j2' as m with context -%}
 <% await tp.user.create_entity(tp, "{{ template.id }}") %>
 # `=this.nome`
 
@@ -5,23 +6,23 @@
 tab: Scena
 
 > [!danger] Uso al tavolo
-> `INPUT[text:uso_al_tavolo]`
+> {{ m.field('uso_al_tavolo', label=false) }}
 
 > [!warning]- Pericolo
-> Pressione: `INPUT[pressione][:pressione]`
+> {{ m.field('pressione') }}
 >
-> Prossima mossa: `INPUT[text:prossima_mossa]`
+> {{ m.field('prossima_mossa') }}
 
 tab: 5.5e
 
 > [!info] Dati gioco
-> CA: `INPUT[text:ca]`
+> {{ m.field('ca') }}
 >
-> PF: `INPUT[text:pf]`
+> {{ m.field('pf') }}
 >
-> CD: `INPUT[text:cd]`
+> {{ m.field('cd') }}
 >
-> Danno: `INPUT[text:danno]`
+> {{ m.field('danno') }}
 
 > [!tip]- Tiri
 > `dice: 1d20`
@@ -29,9 +30,9 @@ tab: 5.5e
 tab: Collegamenti
 
 > [!example] Ancore
-> Mondo: `INPUT[mondo][:mondo]`
+> {{ m.field('mondo') }}
 >
-> Connessioni: `INPUT[connessioni][:connessioni]`
+> {{ m.field('connessioni') }}
 
 tab: Vista
 

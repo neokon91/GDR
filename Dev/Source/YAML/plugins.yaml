@@ -27,19 +27,9 @@ metabind_inputs:
   sessioni: INPUT[inlineListSuggester(optionQuery("Mondi/Sessioni"), useLinks(partial), allowOther)]
   pressione: INPUT[slider(minValue(0), maxValue(10), stepSize(1), addLabels)]
   testo: INPUT[text]
+# Solo bottoni-azione: eseguono un file Templater su z.modelli/azioni/.
+# I bottoni "Crea <Titolo>" sono generati da templates.yaml (id: crea-<id>).
 buttons:
-  - id: nuova-sessione
-    label: Nuova Sessione
-    template: z.modelli/Sessione.md
-    folder: Mondi/Sessioni
-  - id: nuovo-incontro
-    label: Nuovo Incontro
-    template: z.modelli/Incontro.md
-    folder: Mondi/Incontri
-  - id: nota-rapida
-    label: Nota Rapida
-    template: z.modelli/Nota Rapida.md
-    folder: Inbox
   - id: marca-canonico
     label: Marca Canonico
     action: marca_canonico
