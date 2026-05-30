@@ -133,6 +133,27 @@ field_catalog:
   - conflitto_centrale
   - continenti
   - continuita
+  - profondita_note
+  - profondita_fazione_struttura
+  - profondita_fazione_scopo
+  - profondita_fazione_metodo_operativo
+  - profondita_fazione_legalita
+  - profondita_cultura_valori_dominanti
+  - profondita_cultura_dinamica_linguaggi
+  - profondita_cultura_relazione_morte
+  - profondita_magia_fonte_magia
+  - profondita_magia_metodo_magia
+  - profondita_magia_costo_magia
+  - profondita_magia_rischio
+  - profondita_luogo_stabilita_spaziale
+  - profondita_luogo_coerenza_temporale
+  - profondita_luogo_presenza_magica
+  - profondita_luogo_sacralita
+  - profondita_regione_giocabile_densita_operativa
+  - profondita_regione_giocabile_pressione_sistemica
+  - profondita_regione_giocabile_differenza_culturale
+  - profondita_regione_giocabile_accessibilita_player_safe
+  - profondita_regione_giocabile_memoria_canonica
   - contraddice
   - crea_conseguenza
   - cssclasses

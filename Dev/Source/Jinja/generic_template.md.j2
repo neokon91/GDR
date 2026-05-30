@@ -9,6 +9,7 @@
 {% set is_relation = "relazione" in families %}
 {% set is_track = "tracciato" in families %}
 {% set is_continuity = blueprint.get("continuity_fields", false) or "conseguenza" in families or "evento storico" in families or blueprint_name == "wizard_conseguenza" %}
+{% set depth_profile_ids = blueprint.get("depth_profiles", []) %}
 
 ````tabs
 tab: Stato
@@ -285,6 +286,36 @@ tab: Pubblicazione
 > Questo tab serve a trasformare continuita e lore in materiale leggibile fuori dalla singola sessione.
 {% endif %}
 
+{% if depth_profile_ids %}
+tab: Profondita
+
+> [!regia] Profondita Selettiva
+> Livello: `INPUT[depth_level][:depth_level]`
+>
+> Note: `INPUT[text:profondita_note]`
+>
+> Usa questi assi solo quando la scheda torna in scena o deve spiegare una scelta concreta.
+
+{% for profile_id in depth_profile_ids %}
+{% set depth_profile = modules.worldbuilding_depth_axes.profiles.get(profile_id) %}
+{% if depth_profile %}
+> [!scena]- {{ profile_id | replace("_", " ") | title }}
+> {{ depth_profile.intent }}
+{% for axis_id, axis in depth_profile.axes.items() %}
+>
+> **{{ axis.label }}** - {{ axis.question }}
+>
+> `INPUT[slider(minValue(1), maxValue(5), stepSize(1), addLabels):profondita_{{ profile_id }}_{{ axis_id }}]`
+>
+> 1: {{ axis.low }} · 3: {{ axis.mid }} · 5: {{ axis.high }}
+>
+> Uso al tavolo: {{ axis.table_use }}
+{% endfor %}
+{% endif %}
+{% endfor %}
+
+{% endif %}
+
 tab: Controllo
 
 > [!regia] Qualita Scheda
@@ -305,6 +336,10 @@ tab: Controllo
 | Uso al tavolo |  |
 | Prossima mossa |  |
 | Conseguenza potenziale |  |
+{% if depth_profile_ids %}| Depth level |  |
+| Profili profondita | {{ depth_profile_ids | join(", ") }} |
+| Note profondita |  |
+{% endif %}
 {% if blueprint.get("continuity_fields", false) %}| Causa |  |
 | Effetti |  |
 {% endif %}| Connessioni |  |

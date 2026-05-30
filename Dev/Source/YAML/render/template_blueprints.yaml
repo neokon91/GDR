@@ -143,6 +143,8 @@ blueprints:
     templater_entry: <% await tp.user.mondo(tp) %>
     template_title: Mondo
     world_impact: true
+    depth_profiles:
+    - magia
     output:
       folder: z.modelli
       files:
@@ -157,6 +159,11 @@ blueprints:
     templater_entry: <% await tp.user.world_entity(tp) %>
     template_title: Entita Worldbuilding
     world_impact: true
+    depth_profiles:
+    - luogo
+    - fazione
+    - cultura
+    - magia
     output:
       folder: z.modelli/worldbuilding
       files:
@@ -171,6 +178,8 @@ blueprints:
     templater_entry: <% await tp.user.cultura(tp) %>
     template_title: Cultura
     world_impact: true
+    depth_profiles:
+    - cultura
     output:
       folder: z.modelli/worldbuilding
       files:
@@ -186,6 +195,9 @@ blueprints:
     templater_entry: <% await tp.user.culto(tp) %>
     template_title: Religione o Culto
     world_impact: true
+    depth_profiles:
+    - fazione
+    - magia
     output:
       folder: z.modelli/fazione
       files:
@@ -200,6 +212,8 @@ blueprints:
     templater_entry: <% await tp.user.fazione(tp) %>
     template_title: Fazione
     world_impact: true
+    depth_profiles:
+    - fazione
     output:
       folder: z.modelli/fazione
       files:
@@ -214,6 +228,10 @@ blueprints:
     templater_entry: <% await tp.user.luogo(tp) %>
     template_title: Luogo
     world_impact: true
+    depth_profiles:
+    - luogo
+    - regione_giocabile
+    - magia
     output:
       folder: z.modelli/luogo
       files:
@@ -327,6 +345,8 @@ blueprints:
     - incantesimo
     templater_entry: <% await tp.user.incantesimo(tp) %>
     template_title: Incantesimo
+    depth_profiles:
+    - magia
     output:
       folder: z.modelli/dnd
       files:
@@ -688,6 +708,8 @@ blueprints:
     templater_entry: <% await tp.user.cosmologia(tp) %>
     template_title: Cosmologia
     world_impact: true
+    depth_profiles:
+    - magia
     output:
       folder: z.modelli/worldbuilding
       files:
@@ -950,6 +972,8 @@ blueprints:
     templater_entry: '<% await tp.user.fazione(tp, { tipoFazione: "gilda" }) %>'
     template_title: Gilda
     world_impact: true
+    depth_profiles:
+    - fazione
     output:
       folder: z.modelli/fazione
       files:
@@ -964,6 +988,8 @@ blueprints:
     templater_entry: '<% await tp.user.fazione(tp, { tipoFazione: "confraternita" }) %>'
     template_title: Confraternita
     world_impact: true
+    depth_profiles:
+    - fazione
     output:
       folder: z.modelli/fazione
       files:
@@ -978,6 +1004,9 @@ blueprints:
     templater_entry: '<% await tp.user.luogo(tp, { category: "insediamento" }) %>'
     template_title: Insediamento
     world_impact: true
+    depth_profiles:
+    - luogo
+    - regione_giocabile
     output:
       folder: z.modelli/luogo
       files:
@@ -992,6 +1021,9 @@ blueprints:
     templater_entry: '<% await tp.user.luogo(tp, { subtype: "tempio" }) %>'
     template_title: Tempio
     world_impact: true
+    depth_profiles:
+    - luogo
+    - magia
     output:
       folder: z.modelli/luogo
       files:
@@ -1006,6 +1038,9 @@ blueprints:
     templater_entry: '<% await tp.user.luogo(tp, { subtype: "dungeon" }) %>'
     template_title: Dungeon
     world_impact: true
+    depth_profiles:
+    - luogo
+    - magia
     output:
       folder: z.modelli/luogo
       files:
@@ -1020,6 +1055,9 @@ blueprints:
     templater_entry: '<% await tp.user.luogo(tp, { subtype: "rovina" }) %>'
     template_title: Rovina
     world_impact: true
+    depth_profiles:
+    - luogo
+    - magia
     output:
       folder: z.modelli/luogo
       files:
@@ -1034,6 +1072,9 @@ blueprints:
     templater_entry: '<% await tp.user.luogo(tp, { category: "regione naturale" }) %>'
     template_title: Regione Naturale
     world_impact: true
+    depth_profiles:
+    - luogo
+    - regione_giocabile
     output:
       folder: z.modelli/luogo
       files:
@@ -1076,6 +1117,10 @@ blueprints:
     templater_entry: '<% await tp.user.luogo(tp, { category: "geografia" }) %>'
     template_title: Regione
     world_impact: true
+    depth_profiles:
+    - luogo
+    - regione_giocabile
+    - magia
     output:
       folder: z.modelli/geografia
       files:
@@ -1483,6 +1528,8 @@ blueprints:
     templater_entry: <% await tp.user.nuovo_mondo_homebrew(tp) %>
     template_title: Nuovo Mondo Homebrew
     world_impact: true
+    depth_profiles:
+    - magia
     output:
       folder: z.modelli/wizard
       files:
