@@ -8,3 +8,14 @@
 {%- if f.widget in ['text', 'number'] -%}`INPUT[{{ f.widget }}:{{ id }}]`
 {%- else -%}`INPUT[{{ f.widget }}][:{{ id }}]`{%- endif -%}
 {%- endmacro %}
+
+{# Rende i campi 'body' del wizard (core.creation[categoria]) come callout
+   editabili (pre-compilati dal wizard nel frontmatter). #}
+{% macro wizard_body(category) -%}
+{% set wiz = core.get('creation', {}).get(category, {}) %}
+{% for q in wiz.get('body', []) %}
+> [!{{ q.get('callout', 'note') }}]{{ '-' if q.get('fold') else '' }} {{ q.get('title') or q.get('heading') or q.field }}
+> `INPUT[textArea:{{ q.field }}]`
+
+{% endfor %}
+{%- endmacro %}
