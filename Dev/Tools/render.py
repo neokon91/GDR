@@ -31,15 +31,6 @@ VAULT = ROOT / "dist" / "GDR-vault"
 # Sottocartelle interamente generate: sicure da azzerare a ogni build.
 GENERATED_DIRS = ("z.modelli", "z.automazioni")
 
-# File generati dentro .obsidian: la cartella ospita anche config utente e i
-# plugin installati, quindi si toccano solo questi file, mai il resto.
-OBSIDIAN_GENERATED = (
-    ".obsidian/community-plugins.json",
-    ".obsidian/plugins/templater-obsidian/data.json",
-    ".obsidian/plugins/dataview/data.json",
-    ".obsidian/plugins/obsidian-meta-bind-plugin/data.json",
-)
-
 # Note generate alla radice del vault (non contenuti utente).
 GENERATED_NOTES = ("Home.md", "LEGGIMI.md")
 
@@ -63,21 +54,88 @@ def write_text(path: Path, text: str) -> None:
 
 
 def clean() -> None:
-    """Rimuove solo gli artefatti generati. Non tocca i contenuti utente, i
-    plugin installati o la config di Obsidian. Ripulisce sia il vault sia
-    eventuali residui legacy nel repo di sviluppo (ROOT)."""
+    """Rimuove solo gli artefatti puramente generati (z.modelli, z.automazioni,
+    Home/LEGGIMI). NON tocca .obsidian (config e plugin installati dall'utente)
+    ne' i contenuti. Ripulisce anche residui legacy nel repo di sviluppo (ROOT)."""
     for base in (VAULT, ROOT):
         for name in GENERATED_DIRS:
             path = base / name
             if path.is_dir():
                 shutil.rmtree(path)
-        for rel in OBSIDIAN_GENERATED + GENERATED_NOTES:
+        for rel in GENERATED_NOTES:
             path = base / rel
             if path.is_file():
                 path.unlink()
     legacy_build = ROOT / "Dev" / "Build"
     if legacy_build.is_dir():
         shutil.rmtree(legacy_build)
+
+
+def read_json(path: Path) -> Any:
+    if path.is_file():
+        try:
+            return json.loads(path.read_text(encoding="utf-8"))
+        except (ValueError, OSError):
+            return None
+    return None
+
+
+def merge_json(path: Path, updates: dict[str, Any]) -> None:
+    """Aggiorna solo le chiavi gestite dalla pipeline, preservando il resto
+    della config (impostazioni utente). Scrive solo se qualcosa cambia."""
+    data = read_json(path)
+    data = data if isinstance(data, dict) else {}
+    merged = {**data, **updates}
+    if merged != data:
+        write_json(path, merged)
+
+
+def merge_plugin_config(obsidian: Path, plugin_id: str, updates: dict[str, Any]) -> None:
+    """Inietta la config generata solo se il plugin e' gia' installato: non
+    crea cartelle plugin fittizie (romperebbero Obsidian)."""
+    plugin_dir = obsidian / "plugins" / plugin_id
+    if plugin_dir.is_dir():
+        merge_json(plugin_dir / "data.json", updates)
+
+
+def union_list(path: Path, values: list[str]) -> None:
+    """Unione ordinata: garantisce le voci della pipeline senza rimuovere
+    quelle aggiunte dall'utente."""
+    existing = read_json(path)
+    existing = existing if isinstance(existing, list) else []
+    merged = list(dict.fromkeys([*existing, *values]))
+    if merged != existing:
+        write_json(path, merged)
+
+
+def bundle_user_script(entry: str, core_payload: dict[str, Any]) -> str:
+    """Impacchetta un entry-point Templater in un file autonomo. I require tra
+    user-script non funzionano in Templater, quindi helpers.js e core.json
+    vengono inlinati tramite uno shim di require, includendo i sorgenti verbatim."""
+    helpers_src = (JS_DIR / "helpers.js").read_text(encoding="utf-8")
+    entry_src = (JS_DIR / entry).read_text(encoding="utf-8")
+    core_literal = json.dumps(core_payload, ensure_ascii=False)
+    # Nomi esterni con prefisso __ per non collidere con `const core`/`const
+    # helpers` dichiarati dentro i sorgenti inlinati (eviterebbero la TDZ).
+    return "\n".join([
+        f"// Auto-generato dal build (Dev/Tools/render.py). Sorgente: Dev/Source/JS/{entry}",
+        "// Non modificare qui: i require sono risolti da uno shim per Templater.",
+        f"const __CORE__ = {core_literal};",
+        "",
+        "const __HELPERS__ = (function () {",
+        "  const module = { exports: {} }, exports = module.exports;",
+        '  const require = (id) => { if (id === "./data/core.json") return __CORE__; throw new Error("require non risolto: " + id); };',
+        helpers_src,
+        "  return module.exports;",
+        "})();",
+        "",
+        "module.exports = (function () {",
+        "  const module = { exports: {} }, exports = module.exports;",
+        '  const require = (id) => { if (id === "./helpers") return __HELPERS__; throw new Error("require non risolto: " + id); };',
+        entry_src,
+        "  return module.exports;",
+        "})();",
+    ])
 
 
 def template_folder(core: dict[str, Any], category: str) -> str:
@@ -144,11 +202,11 @@ def build() -> dict[str, str]:
         "templates": templates,
     }
 
-    write_json(VAULT / "z.automazioni" / "data" / "core.json", payload)
-
-    # I sorgenti JS restano gestiti in Dev/Source/JS e vengono copiati nel vault.
-    for source in sorted(JS_DIR.glob("*.js")):
-        shutil.copy2(source, VAULT / "z.automazioni" / source.name)
+    # Entry-point Templater: bundle autonomi (i require tra user-script non
+    # funzionano in app). views.js e' autonomo: caricato dai blocchi dataviewjs.
+    for entry in ("create_entity.js", "meta_actions.js"):
+        write_text(VAULT / "z.automazioni" / entry, bundle_user_script(entry, payload))
+    shutil.copy2(JS_DIR / "views.js", VAULT / "z.automazioni" / "views.js")
 
     env = Environment(
         loader=FileSystemLoader(str(JINJA_DIR)),
@@ -170,18 +228,17 @@ def build() -> dict[str, str]:
         write_text(VAULT / action["target"], text)
         rendered[action["target"]] = text
 
-    write_json(VAULT / ".obsidian" / "community-plugins.json", [p["id"] for p in plugins.get("plugins", [])])
-    write_json(VAULT / ".obsidian" / "plugins" / "templater-obsidian" / "data.json", {
+    # Config .obsidian: merge non distruttivo. Le impostazioni e i plugin
+    # installati dall'utente sono preservati; si aggiornano solo le chiavi che
+    # la pipeline possiede (cartelle Templater, dataviewjs, pulsanti Meta Bind).
+    obsidian = VAULT / ".obsidian"
+    union_list(obsidian / "community-plugins.json", [p["id"] for p in plugins.get("plugins", [])])
+    merge_plugin_config(obsidian, "templater-obsidian", {
         "templates_folder": "z.modelli",
         "user_scripts_folder": "z.automazioni",
-        "enable_folder_templates": False,
-        "syntax_highlighting": True,
     })
-    write_json(VAULT / ".obsidian" / "plugins" / "dataview" / "data.json", {
-        "enableDataviewJs": True,
-        "renderNullAs": "",
-    })
-    write_json(VAULT / ".obsidian" / "plugins" / "obsidian-meta-bind-plugin" / "data.json", meta_bind_config(plugins, core, templates))
+    merge_plugin_config(obsidian, "dataview", {"enableDataviewJs": True})
+    merge_plugin_config(obsidian, "obsidian-meta-bind-plugin", meta_bind_config(plugins, core, templates))
 
     for name, jinja_name in (("Home.md", "home.md.j2"), ("LEGGIMI.md", "leggimi.md.j2")):
         text = env.get_template(jinja_name).render(core=core, plugins=plugins, templates=templates)
