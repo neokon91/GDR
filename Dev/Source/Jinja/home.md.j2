@@ -1,0 +1,44 @@
+# 🏠 GDR — Home
+
+> [!example] Crea
+{% for t in templates -%}
+> `BUTTON[crea-{{ t.id }}]`
+{% endfor %}
+
+## Sessione attiva
+```dataview
+list
+where categoria = "sessione" and attiva = true
+```
+
+## In gioco
+```dataview
+list
+where stato = "in gioco"
+```
+
+## Da rifinire (bozze)
+```dataview
+table without id file.link as Nota, categoria as Categoria, mondo as Mondo
+from ""
+where stato = "bozza" and categoria
+sort file.mtime desc
+limit 20
+```
+
+## Cronologia eventi
+```dataview
+table without id file.link as Evento, quando as Quando, mondo as Mondo
+from ""
+where categoria = "evento"
+sort quando asc
+```
+
+## Note per categoria
+```dataview
+table without id length(rows) as N
+from ""
+where categoria
+group by categoria as Categoria
+sort Categoria asc
+```

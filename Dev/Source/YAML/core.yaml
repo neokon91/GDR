@@ -6,6 +6,9 @@ folders:
   cosmologia: Mondi/Cosmologia
   luogo: Mondi/Luoghi
   cultura: Mondi/Culture
+  fazione: Mondi/Fazioni
+  evento: Mondi/Eventi
+  lingua: Mondi/Lingue
   personaggio: Mondi/Personaggi
   creatura: Mondi/Creature
   incontro: Mondi/Incontri
@@ -30,6 +33,7 @@ fields:
   obiettivo:      { label: Obiettivo,            widget: text }
   apertura:       { label: Apertura,             widget: text }
   scena_corrente: { label: Scena corrente,       widget: text }
+  quando:         { label: Quando,               widget: text }
   ac:             { label: CA, widget: number }
   hp:             { label: PF, widget: number }
   cr:             { label: GS, widget: text }
@@ -60,6 +64,26 @@ categories:
     folder: cultura
     subtypes:
       - civilta
+  fazione:
+    folder: fazione
+    subtypes:
+      - gilda
+      - ordine
+      - casata
+      - culto
+      - fazione politica
+      - banda
+  evento:
+    folder: evento
+    subtypes:
+      - evento storico
+      - evento di campagna
+  lingua:
+    folder: lingua
+    subtypes:
+      - lingua
+      - dialetto
+      - codice o gergo
   personaggio:
     folder: personaggio
     subtypes:

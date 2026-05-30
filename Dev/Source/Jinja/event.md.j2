@@ -1,0 +1,53 @@
+{% import '_macros.j2' as m with context -%}
+<% await tp.user.create_entity(tp, "{{ template.id }}") %>
+# `=this.nome`
+
+````tabs
+tab: Lore
+
+> [!info] Identita
+> Categoria: `{{ template.category }}`
+>
+> {{ m.field('tipo') }}
+>
+> {{ m.field('stato') }}
+
+> [!abstract] Cronologia
+> {{ m.field('quando') }}
+
+> [!note]- Descrizione
+> Cosa accade, chi coinvolge e perche' conta al tavolo.
+
+> [!quote]- Versione player-safe
+> {{ m.field('player_safe', label=false) }}
+
+tab: Logica
+
+> [!example] Collegamenti
+> {{ m.field('mondo') }}
+>
+> {{ m.field('connessioni') }}
+>
+> {{ m.field('sessioni') }}
+
+> [!warning]- Pressione
+> {{ m.field('pressione') }}
+>
+> {{ m.field('prossima_mossa') }}
+
+tab: Cronologia mondo
+
+```dataview
+table without id file.link as Evento, quando as Quando, mondo as Mondo
+from ""
+where categoria = "evento"
+sort quando asc
+```
+
+tab: Azioni
+
+> [!tip] Azioni
+> `BUTTON[marca-canonico]`
+>
+> `BUTTON[archivia-nota]`
+````

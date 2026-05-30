@@ -21,6 +21,10 @@ SOURCE = ROOT / "Dev" / "Source"
 YAML_DIR = SOURCE / "YAML"
 JINJA_DIR = SOURCE / "Jinja"
 JS_DIR = SOURCE / "JS"
+SAMPLES_DIR = SOURCE / "Samples"
+
+# Cartelle del vault che il build/release assembla a partire dalle sorgenti.
+VAULT_GENERATED = ("z.modelli", "z.automazioni", ".obsidian")
 
 # Cartelle interamente generate dal build: sicure da rimuovere per intero.
 GENERATED_DIRS = [
@@ -38,6 +42,11 @@ OBSIDIAN_GENERATED_FILES = [
     ROOT / ".obsidian" / "plugins" / "templater-obsidian" / "data.json",
     ROOT / ".obsidian" / "plugins" / "dataview" / "data.json",
     ROOT / ".obsidian" / "plugins" / "obsidian-meta-bind-plugin" / "data.json",
+]
+
+# Note generate alla radice del vault (non sorgenti utente).
+ROOT_GENERATED_FILES = [
+    ROOT / "Home.md",
 ]
 
 
@@ -65,7 +74,7 @@ def clean() -> None:
             shutil.rmtree(path)
         elif path.exists():
             path.unlink()
-    for path in OBSIDIAN_GENERATED_FILES:
+    for path in OBSIDIAN_GENERATED_FILES + ROOT_GENERATED_FILES:
         if path.exists():
             path.unlink()
 
@@ -175,6 +184,11 @@ def build() -> dict[str, str]:
     })
     write_json(ROOT / ".obsidian" / "plugins" / "obsidian-meta-bind-plugin" / "data.json", meta_bind_config(plugins, core, templates))
 
+    home = env.get_template("home.md.j2")
+    home_text = home.render(core=core, plugins=plugins, templates=templates)
+    write_text(ROOT / "Home.md", home_text)
+    rendered["Home.md"] = home_text
+
     return rendered
 
 
@@ -224,10 +238,48 @@ def check() -> int:
     return 0
 
 
+def release() -> Path:
+    """Assembla un vault Obsidian autonomo e testabile in dist/, con
+    contenuti di esempio e zip pronto da aprire."""
+    clean()
+    build()
+
+    core = load_yaml("core.yaml")
+    dist = ROOT / "dist"
+    vault = dist / "GDR-vault"
+    if vault.exists():
+        shutil.rmtree(vault)
+    vault.mkdir(parents=True)
+
+    for name in VAULT_GENERATED:
+        src = ROOT / name
+        if src.exists():
+            shutil.copytree(src, vault / name)
+    shutil.copy2(ROOT / "Home.md", vault / "Home.md")
+
+    # Scaffolding delle cartelle contenuti, cosi' il vault mostra la struttura.
+    for folder in core.get("folders", {}).values():
+        (vault / folder).mkdir(parents=True, exist_ok=True)
+
+    # Contenuti di esempio gia' compilati (Dev/Source/Samples/<path nel vault>).
+    samples = 0
+    if SAMPLES_DIR.exists():
+        for sample in sorted(SAMPLES_DIR.rglob("*.md")):
+            dest = vault / sample.relative_to(SAMPLES_DIR)
+            dest.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(sample, dest)
+            samples += 1
+
+    archive = shutil.make_archive(str(dist / "gdr-vault"), "zip", vault)
+    print(f"Release OK: {vault.relative_to(ROOT)}/ + {Path(archive).relative_to(ROOT)} ({samples} esempi).")
+    return vault
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Renderer minimo YAML/Jinja/JS per Obsidian.")
     parser.add_argument("--clean", action="store_true", help="Rimuove solo output generati.")
     parser.add_argument("--check", action="store_true", help="Valida YAML/Jinja senza scrivere output.")
+    parser.add_argument("--release", action="store_true", help="Assembla un vault testabile in dist/ con esempi e zip.")
     args = parser.parse_args()
 
     if args.clean:
@@ -236,6 +288,9 @@ def main() -> int:
         return 0
     if args.check:
         return check()
+    if args.release:
+        release()
+        return 0
 
     clean()
     rendered = build()

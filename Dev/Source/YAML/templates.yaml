@@ -26,6 +26,24 @@ templates:
     default_type: civilta
     target: z.modelli/Cultura.md
     jinja: entity.md.j2
+  - id: fazione
+    title: Fazione
+    category: fazione
+    default_type: gilda
+    target: z.modelli/Fazione.md
+    jinja: entity.md.j2
+  - id: evento
+    title: Evento
+    category: evento
+    default_type: evento storico
+    target: z.modelli/Evento.md
+    jinja: event.md.j2
+  - id: lingua
+    title: Lingua
+    category: lingua
+    default_type: lingua
+    target: z.modelli/Lingua.md
+    jinja: entity.md.j2
   - id: pg
     title: PG
     category: personaggio
