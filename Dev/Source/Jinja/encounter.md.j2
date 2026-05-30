@@ -3,7 +3,7 @@
 # `=this.nome`
 
 ````tabs
-tab: Scena
+--- Scena
 
 > [!danger] Uso al tavolo
 > {{ m.field('uso_al_tavolo', label=false) }}
@@ -13,7 +13,7 @@ tab: Scena
 >
 > {{ m.field('prossima_mossa') }}
 
-tab: Combattimento
+--- Combattimento
 
 ```encounter
 # Aggiungi creature per nome dal bestiario, es. "3: Goblin".
@@ -24,14 +24,14 @@ creatures:
 > [!tip]- Tiri
 > `dice: 1d20`
 
-tab: Collegamenti
+--- Collegamenti
 
 > [!example] Ancore
 > {{ m.field('mondo') }}
 >
 > {{ m.field('connessioni') }}
 
-tab: Vista
+--- Vista
 
 ```dataviewjs
 const source = await dv.io.load("z.automazioni/views.js");

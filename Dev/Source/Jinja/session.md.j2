@@ -3,7 +3,7 @@
 # `=this.nome`
 
 ````tabs
-tab: Prepara
+--- Prepara
 
 > [!target] Obiettivo
 > {{ m.field('obiettivo', label=false) }}
@@ -16,7 +16,7 @@ tab: Prepara
 >
 > {{ m.field('prossima_mossa') }}
 
-tab: Tavolo
+--- Tavolo
 
 > [!info] Live
 > {{ m.field('scena_corrente') }}
@@ -29,14 +29,14 @@ tab: Tavolo
 > path includes Mondi/Sessioni
 > ```
 
-tab: Collegamenti
+--- Collegamenti
 
 > [!example] Ancore
 > Mondo: `INPUT[mondo][:mondo]`
 >
 > Connessioni: `INPUT[connessioni][:connessioni]`
 
-tab: Vista
+--- Vista
 
 ```dataviewjs
 const source = await dv.io.load("z.automazioni/views.js");

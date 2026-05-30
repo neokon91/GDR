@@ -10,8 +10,8 @@ plugins:
     name: Meta Bind
   - id: js-engine
     name: JS Engine
-  - id: tabs
-    name: Tabs
+  - id: tab-panels
+    name: Tab Panels
   - id: callout-manager
     name: Callout Manager
   - id: obsidian-tasks-plugin
