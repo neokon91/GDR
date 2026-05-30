@@ -627,7 +627,7 @@ class ReleaseBuilder:
             )
         if "SRD" in self.generated_release_roots:
             self.run_command(
-                ["node", str(ROOT / "Dev" / "Tools" / "node-legacy" / "import_srd.js")],
+                ["python3", str(ROOT / "Dev" / "Tools" / "python" / "import_srd.py")],
                 cwd=self.out,
                 quiet=self.quiet,
             )

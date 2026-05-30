@@ -9,7 +9,7 @@
     "release:clean": "python3 Dev/Tools/python/release_clean.py",
     "sync:sources": "python3 Dev/Tools/python/run_source_pipeline.py --mode render --outputs-only",
     "clean:generated": "python3 Dev/Tools/python/clean_generated_outputs.py",
-    "import:srd": "node Dev/Tools/node-legacy/import_srd.js",
+    "import:srd": "python3 Dev/Tools/python/import_srd.py",
     "import:map": "node Dev/Tools/node-legacy/import_map.js",
     "import:azgaar": "node Dev/Tools/node-legacy/import_azgaar_geojson.js",
     "import:watabou:city": "node Dev/Tools/node-legacy/import_watabou_city.js",
