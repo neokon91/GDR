@@ -174,6 +174,7 @@ async function runWizard(tp, template, core) {
     tags: ["gdr/bozza"],
     ...captured,
   };
+  if (category === "creatura") data.statblock = "inline";
   if (category === "sessione") {
     data.attiva = false;
     data.data = tp.date.now("YYYY-MM-DD");

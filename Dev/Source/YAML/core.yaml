@@ -196,3 +196,10 @@ creation:
       - { field: tono, prompt: "Tono e atmosfera del mondo", heading: "Tono" }
       - { field: conflitto, prompt: "Conflitto centrale", heading: "Conflitto centrale" }
       - { field: gancio, prompt: "Gancio iniziale per i PG", callout: quote, title: "Gancio" }
+  creatura:
+    fields:
+      - { field: mondo, prompt: "Mondo", from: notes, category: mondo, link: true, required: true }
+    body:
+      - { field: ecologia, prompt: "Ecologia: dove vive, abitudini", heading: "Ecologia" }
+      - { field: tattiche, prompt: "Tattiche in combattimento", heading: "Tattiche" }
+      - { field: gancio, prompt: "Gancio per il tavolo", callout: quote, title: "Gancio" }
