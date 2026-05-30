@@ -2,15 +2,10 @@
 <% await tp.user.create_entity(tp, "{{ template.id }}") %>
 # `=this.nome`
 
+{{ m.identita_card(template) }}
+
 ````tabs
 --- Lore
-
-> [!info] Identita
-> Categoria: `{{ template.category }}`
->
-> {{ m.field('tipo') }}
->
-> {{ m.field('stato') }}
 
 > [!abstract] Cronologia
 > {{ m.field('quando') }}
@@ -22,21 +17,9 @@
 > {{ m.field('player_safe', label=false) }}
 
 {{ m.wizard_body(template.category) }}
+--- Al tavolo
 
---- Logica
-
-> [!example] Collegamenti
-> {{ m.field('mondo') }}
->
-> {{ m.field('connessioni') }}
->
-> {{ m.field('sessioni') }}
-
-> [!warning]- Pressione
-> {{ m.field('pressione') }}
->
-> {{ m.field('prossima_mossa') }}
-
+{{ m.tavolo() }}
 --- Cronologia mondo
 
 ```dataview
@@ -46,7 +29,13 @@ where categoria = "evento"
 sort quando asc
 ```
 
---- Azioni
+--- Collegamenti
+
+{{ m.relazioni(template.category) }}
+{{ m.collegamenti() }}
+--- Vista
+
+{{ m.vista() }}
 
 > [!tip] Azioni
 > `BUTTON[marca-canonico]`

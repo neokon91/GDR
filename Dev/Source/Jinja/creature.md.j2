@@ -2,6 +2,8 @@
 <% await tp.user.create_entity(tp, "{{ template.id }}") %>
 # `=this.nome`
 
+{{ m.identita_card(template) }}
+
 ````tabs
 --- Statblock
 
@@ -23,31 +25,23 @@ traits: []
 actions: []
 ```
 
---- Scena
+--- Al tavolo
 
-> [!danger] Uso al tavolo
-> {{ m.field('uso_al_tavolo', label=false) }}
+{{ m.tavolo() }}
+--- Lore
 
-> [!warning]- Pressione
-> {{ m.field('pressione') }}
->
-> {{ m.field('prossima_mossa') }}
+> [!note]- Descrizione
+> {{ m.field('player_safe', label=false) }}
 
 {{ m.wizard_body(template.category) }}
+--- Carattere
+
+{{ m.carattere(template.category) }}
 --- Collegamenti
 
-> [!example] Ancore
-> {{ m.field('mondo') }}
->
-> {{ m.field('connessioni') }}
->
-> {{ m.field('sessioni') }}
-
+{{ m.relazioni(template.category) }}
+{{ m.collegamenti() }}
 --- Vista
 
-```dataviewjs
-const source = await dv.io.load("z.automazioni/views.js");
-eval(source);
-renderEntityPanel(dv, dv.current());
-```
+{{ m.vista() }}
 ````

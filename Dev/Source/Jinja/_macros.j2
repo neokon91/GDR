@@ -19,3 +19,119 @@
 
 {% endfor %}
 {%- endmacro %}
+
+{# --- Campi SOLA-LETTURA / CALCOLATI (Meta Bind VIEW) ------------------------
+   Controparte read-only di field()/INPUT. Mostrano un valore senza renderlo
+   editabile: utili per infobox/intestazioni che riflettono il frontmatter
+   (modificato altrove). Modello: FantasyWorld JINJA/components/macro.jinja. #}
+
+{# view('mondo') -> `VIEW[{mondo} ?? "—"]` — mostra il valore (math), "—" se vuoto. #}
+{% macro view(path) -%}
+`VIEW[{{ "{" ~ path ~ "}" }} ?? "—"]`
+{%- endmacro %}
+
+{# view_md('mondo') -> rende il markdown del valore (link [[..]], grassetto...). #}
+{% macro view_md(path) -%}
+`VIEW[{{ "{" ~ path ~ "}" }}][text(renderMarkdown)]`
+{%- endmacro %}
+
+{# Campo calcolato sola-lettura da un'espressione Meta Bind.
+   computed('floor(({pressione}) / 2)') -> `VIEW[floor(({pressione}) / 2)]`.
+   Riferimenti alle proprieta' tra graffe: {prop}, annidati {a.b.c}.
+   Supporta ternari/confronti, es:
+   computed('{pressione} >= 7 ? "Crisi" : ({pressione} >= 4 ? "Tensione" : "Calma")') #}
+{% macro computed(expr) -%}
+`VIEW[{{ expr }}]`
+{%- endmacro %}
+
+{# Come computed ma SALVA il risultato in 'dest' (VIEW[expr][math:dest]).
+   compute_into('{forza} - 10', 'mod_forza'). #}
+{% macro compute_into(expr, dest) -%}
+`VIEW[{{ expr }}][math:{{ dest }}]`
+{%- endmacro %}
+
+{# === COMPONENTI CONDIVISI (DRY) =============================================
+   Un'unica definizione, riusata da tutti i template. Evita il copia-incolla di
+   intestazioni, superficie giocabile, collegamenti e pannelli. #}
+
+{# Card identita' (intestazione sopra le tab): tipo/mondo sola-lettura
+   (si editano dalle Properties / Metadata Menu Select), stato editabile inline. #}
+{% macro identita_card(template) -%}
+> [!info] {{ template.title }}
+{% if template.category != "mondo" %}
+> **Tipo**: {{ view('tipo') }} · **Mondo**: {{ view_md('mondo') }}
+{% else %}
+> **Tipo**: {{ view('tipo') }}
+{% endif %}
+>
+> **Stato**: {{ field('stato', label=false) }}
+{%- endmacro %}
+
+{# Superficie giocabile UNIVERSALE (il differenziatore). Single source: core.tavolo.
+   'pressione' mostra l'etichetta di rischio calcolata (computed) + prossima_mossa. #}
+{% macro tavolo() -%}
+{% for t in core.tavolo %}
+{% if t.field == 'pressione' %}
+> [!{{ t.callout }}] {{ t.title }} — {{ computed('{pressione} >= 7 ? "🔴 Crisi" : ({pressione} >= 4 ? "🟠 Tensione" : "🟢 Calma")') }}
+> {{ field('pressione') }}
+>
+> {{ field('prossima_mossa') }}
+{% else %}
+> [!{{ t.callout }}]{{ '-' if t.get('fold') else '' }} {{ t.title }}
+> {{ field(t.field, label=false) }}
+{% endif %}
+
+{% endfor %}
+{%- endmacro %}
+
+{# Assi tematici come slider Meta Bind: identita' di sistema interrogabile da
+   Dataview. Single source: core.assi_tematici[categoria]. #}
+{% macro carattere(category) -%}
+{% set assi = core.get('assi_tematici', {}).get(category, []) %}
+{% if assi %}
+> [!abstract] Carattere
+{% for a in assi %}
+> **{{ a.sinistra }}** `INPUT[slider(minValue(0), maxValue(10), addLabels):{{ a.id }}]` **{{ a.destra }}**
+{% endfor %}
+{% endif %}
+{%- endmacro %}
+
+{# Relazioni tipizzate: link semantici scoped alla cartella della categoria
+   target. Single source: core.relazioni[categoria]. Vuoto = niente callout. #}
+{% macro relazioni(category) -%}
+{% set rels = core.get('relazioni', {}).get(category, []) %}
+{% if rels %}
+> [!example] Relazioni
+{% for r in rels %}
+{% set folder = core.folders[core.categories[r.category].folder] %}
+{% if r.get('multi') %}
+> **{{ r.label }}**: `INPUT[inlineListSuggester(optionQuery("{{ folder }}"), useLinks(partial), allowOther):{{ r.field }}]`
+{% else %}
+> **{{ r.label }}**: `INPUT[suggester(optionQuery("{{ folder }}"), useLinks(partial), allowOther):{{ r.field }}]`
+{% endif %}
+{% endfor %}
+{% endif %}
+{%- endmacro %}
+
+{# Collegamenti (ancore della nota). with_mondo=false per la categoria mondo. #}
+{% macro collegamenti(with_mondo=true, with_sessioni=true) -%}
+> [!example] Collegamenti
+{% if with_mondo %}
+> {{ field('mondo') }}
+>
+{% endif %}
+> {{ field('connessioni') }}
+{% if with_sessioni %}
+>
+> {{ field('sessioni') }}
+{% endif %}
+{%- endmacro %}
+
+{# Pannello vista (dataviewjs). fn = funzione esposta da z.automazioni/views.js. #}
+{% macro vista(fn='renderEntityPanel') -%}
+```dataviewjs
+const source = await dv.io.load("z.automazioni/views.js");
+eval(source);
+{{ fn }}(dv, dv.current());
+```
+{%- endmacro %}

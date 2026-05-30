@@ -12,19 +12,25 @@ Apri *Impostazioni → Plugin della comunità* e installa/abilita:
 
 > [!warning] Senza questi plugin
 > Senza **Tab Panels** le note a schede appaiono come testo grezzo; senza
-> **Fantasy Statblocks** e **Initiative Tracker** non vedi statblock e combattimento.
+> **Fantasy Statblocks** non vedi gli statblock né il blocco `encounter`; senza
+> **Meta Bind** i campi `INPUT`/`VIEW` (incluso il tab *Carattere*) restano testo grezzo.
 
 ## 2. Impostazioni da abilitare una volta
 - **Fantasy Statblocks → "Parse Frontmatter in Notes"**: ON. Serve perché le note
-  creatura (`statblock: true`) entrino nel bestiario e siano usabili nell'iniziativa.
-- **Initiative Tracker → Party**: crea una party con i tuoi PG per popolarla negli incontri.
+  creatura (`statblock: inline`) entrino nel bestiario e siano richiamabili per nome
+  nel blocco `encounter` degli incontri.
+- **Meta Bind → "Enable JS"**: ON (lo imposta la build). Necessario per i pulsanti e le
+  viste calcolate (`VIEW[...]`).
 - **Templater → "Trigger Templater on new file creation"**: opzionale; i bottoni `Crea`
   applicano già il template alla creazione.
 
 ## 3. Come si usa
 - Apri **Home.md**: bottoni `Crea` per ogni tipo di nota + cruscotti Dataview.
-- Apri **Mondi/Creature/Goblin**: esempio di statblock 5.5e.
-- Apri **Mondi/Incontri/Imboscata sulla Strada**: blocco iniziativa (premi play).
+- Ogni nota lore ha il tab **Al tavolo** (uso al tavolo, gancio, pressione): è la
+  superficie giocabile, il cuore del vault.
+- Apri **Mondi/Creature/Goblin**: esempio di statblock 5.5e (entra nel bestiario).
+- Apri **Mondi/Incontri/Imboscata sulla Strada**: il tab *Combattimento* usa il blocco
+  `encounter` che raggruppa le creature per nome dal bestiario.
 
 ## 4. Layout statblock
 Il blocco statblock usa il layout `{{ core.statblock.layout }}`. Per lo stile 2024/5.5e,

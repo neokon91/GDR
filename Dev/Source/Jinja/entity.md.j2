@@ -2,15 +2,10 @@
 <% await tp.user.create_entity(tp, "{{ template.id }}") %>
 # `=this.nome`
 
+{{ m.identita_card(template) }}
+
 ````tabs
 --- Lore
-
-> [!info] Identita
-> Categoria: `{{ template.category }}`
->
-> {{ m.field('tipo') }}
->
-> {{ m.field('stato') }}
 
 > [!note]- Descrizione
 > Scrivi qui il contenuto lore vero della nota.
@@ -19,31 +14,21 @@
 > {{ m.field('player_safe', label=false) }}
 
 {{ m.wizard_body(template.category) }}
---- Logica
+--- Al tavolo
 
-> [!example] Collegamenti
-{% if template.category != "mondo" -%}
-> {{ m.field('mondo') }}
->
-{% endif -%}
-> {{ m.field('connessioni') }}
->
-> {{ m.field('sessioni') }}
+{{ m.tavolo() }}
+{% if core.get('assi_tematici', {}).get(template.category) %}
+--- Carattere
 
-> [!warning]- Pressione
-> {{ m.field('pressione') }}
->
-> {{ m.field('prossima_mossa') }}
+{{ m.carattere(template.category) }}
+{% endif %}
+--- Collegamenti
 
+{{ m.relazioni(template.category) }}
+{{ m.collegamenti(with_mondo=(template.category != "mondo")) }}
 --- Vista
 
-```dataviewjs
-const source = await dv.io.load("z.automazioni/views.js");
-eval(source);
-renderEntityPanel(dv, dv.current());
-```
-
---- Azioni
+{{ m.vista() }}
 
 > [!tip] Azioni
 > `BUTTON[marca-canonico]`

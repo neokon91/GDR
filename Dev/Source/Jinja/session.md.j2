@@ -31,16 +31,8 @@
 
 --- Collegamenti
 
-> [!example] Ancore
-> {{ m.field('mondo') }}
->
-> {{ m.field('connessioni') }}
-
+{{ m.collegamenti(with_sessioni=false) }}
 --- Vista
 
-```dataviewjs
-const source = await dv.io.load("z.automazioni/views.js");
-eval(source);
-renderSessionPanel(dv, dv.current());
-```
+{{ m.vista('renderSessionPanel') }}
 ````

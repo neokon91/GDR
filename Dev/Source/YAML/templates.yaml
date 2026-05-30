@@ -59,7 +59,7 @@ templates:
   - id: creatura
     title: Creatura
     category: creatura
-    default_type: creatura
+    default_type: bestia
     target: z.modelli/Creatura.md
     jinja: creature.md.j2
   - id: incontro

@@ -146,30 +146,47 @@ def action_buttons(plugins: dict[str, Any]) -> list[dict[str, Any]]:
     return buttons
 
 
+def values_list(values: list[str]) -> dict[str, str]:
+    """Opzioni di un Select Metadata Menu: oggetto con chiavi intere da "1"
+    (formato del plugin, verificato in main.js: options.valuesList)."""
+    return {str(i + 1): value for i, value in enumerate(values)}
+
+
 def fileclass_fields(core: dict[str, Any], category: str) -> list[dict[str, Any]]:
     """Campi tipizzati Metadata Menu per una categoria, derivati dal wizard YAML.
-    Mapping: notes->File/MultiFile, pressione/number->Number, resto->Input."""
+    Mapping: stato/tipo->Select (opzioni da states/subtypes), notes->File/MultiFile,
+    pressione/number->Number, resto->Input."""
     fields: list[dict[str, Any]] = []
     seen: set[str] = set()
 
-    def add(field_id: str, ftype: str) -> None:
+    def add(field_id: str, ftype: str, options: dict[str, Any] | None = None) -> None:
         if field_id in seen:
             return
         seen.add(field_id)
-        fields.append({"name": field_id, "type": ftype, "options": {}, "path": "", "id": field_id})
+        fields.append({"name": field_id, "type": ftype, "options": options or {}, "path": "", "id": field_id})
 
-    add("stato", "Input")
+    def select(field_id: str, choices: list[str]) -> None:
+        add(field_id, "Select", {"sourceType": "ValuesList", "valuesList": values_list(choices)})
+
+    select("stato", core.get("states", []) or [])
+    subtypes = (core.get("categories", {}).get(category) or {}).get("subtypes", []) or []
+    if subtypes:
+        select("tipo", subtypes)
     if category != "mondo":
         add("mondo", "File")
     creation = (core.get("creation", {}) or {}).get(category, {})
     for question in (creation.get("fields", []) or []) + (creation.get("body", []) or []):
         field_id = question["field"]
+        if field_id in seen:
+            continue
         if question.get("from") == "notes":
             add(field_id, "MultiFile" if question.get("multi") else "File")
         elif field_id == "pressione" or question.get("from") == "number":
             add(field_id, "Number")
         else:
             add(field_id, "Input")
+    for rel in (core.get("relazioni", {}) or {}).get(category, []) or []:
+        add(rel["field"], "MultiFile" if rel.get("multi") else "File")
     add("connessioni", "MultiFile")
     add("sessioni", "MultiFile")
     return fields
@@ -325,6 +342,25 @@ def check() -> int:
         for field_id in FIELD_REF_RE.findall(path.read_text(encoding="utf-8")):
             if field_id not in fields:
                 errors.append(f"{path.name}: campo '{field_id}' non nel registro core.fields")
+
+    # La superficie giocabile (core.tavolo) è renderizzata da macro: i suoi campi
+    # non passano dal controllo field('id') sopra, quindi validali qui.
+    for entry in core.get("tavolo", []) or []:
+        field_id = entry.get("field")
+        if field_id not in fields:
+            errors.append(f"tavolo: campo '{field_id}' non nel registro core.fields")
+
+    # Le relazioni tipizzate puntano a una categoria target con cartella risolvibile
+    # (la macro relazioni() costruisce un suggester su quella cartella).
+    for source_cat, rels in (core.get("relazioni", {}) or {}).items():
+        if source_cat not in categories:
+            errors.append(f"relazioni: categoria '{source_cat}' non dichiarata")
+        for rel in rels or []:
+            target = rel.get("category")
+            if target not in categories:
+                errors.append(f"relazioni[{source_cat}].{rel.get('field')}: target '{target}' non dichiarato")
+            elif (categories.get(target) or {}).get("folder", target) not in folders:
+                errors.append(f"relazioni[{source_cat}].{rel.get('field')}: cartella di '{target}' non in folders")
 
     if errors:
         for error in errors:

@@ -43,6 +43,7 @@ metabind_inputs:
   sessioni: INPUT[inlineListSuggester(optionQuery("Mondi/Sessioni"), useLinks(partial), allowOther)]
   pressione: INPUT[slider(minValue(0), maxValue(10), stepSize(1), addLabels)]
   testo: INPUT[text]
+  testo_area: INPUT[textArea]
 # Solo bottoni-azione: eseguono un file Templater su z.modelli/azioni/.
 # I bottoni "Crea <Titolo>" sono generati da templates.yaml (id: crea-<id>).
 buttons:

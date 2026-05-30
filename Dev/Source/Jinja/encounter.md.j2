@@ -2,39 +2,28 @@
 <% await tp.user.create_entity(tp, "{{ template.id }}") %>
 # `=this.nome`
 
+{{ m.identita_card(template) }}
+
 ````tabs
 --- Scena
 
-> [!danger] Uso al tavolo
-> {{ m.field('uso_al_tavolo', label=false) }}
-
-> [!warning]- Pericolo
-> {{ m.field('pressione') }}
->
-> {{ m.field('prossima_mossa') }}
-
-{{ m.wizard_body(template.category) }}
+{{ m.tavolo() }}
 > [!tip]- Tiri
 > `dice: 1d20`
 
---- Creature
+--- Combattimento
 
-```dataview
-list from [[]] where categoria = "creatura"
+```encounter
+name: <% tp.file.title %>
+creatures:
+  - 1: Nome Creatura
 ```
 
 --- Collegamenti
 
-> [!example] Ancore
-> {{ m.field('mondo') }}
->
-> {{ m.field('connessioni') }}
-
+{{ m.relazioni(template.category) }}
+{{ m.collegamenti() }}
 --- Vista
 
-```dataviewjs
-const source = await dv.io.load("z.automazioni/views.js");
-eval(source);
-renderEntityPanel(dv, dv.current());
-```
+{{ m.vista() }}
 ````

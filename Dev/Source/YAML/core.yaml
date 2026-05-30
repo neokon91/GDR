@@ -28,12 +28,21 @@ fields:
   sessioni:       { label: Sessioni,             widget: sessioni }
   pressione:      { label: Pressione,            widget: pressione }
   prossima_mossa: { label: Prossima mossa,       widget: text }
-  uso_al_tavolo:  { label: Uso al tavolo,        widget: text }
+  uso_al_tavolo:  { label: Uso al tavolo,        widget: testo_area }
+  gancio:         { label: Gancio,               widget: testo_area }
   player_safe:    { label: Versione player-safe, widget: text }
   obiettivo:      { label: Obiettivo,            widget: text }
   apertura:       { label: Apertura,             widget: text }
   scena_corrente: { label: Scena corrente,       widget: text }
   quando:         { label: Quando,               widget: text }
+
+# Superficie giocabile (IL differenziatore): ogni nota lore la espone, sempre.
+# Single source renderizzato dalla macro tavolo(); i campi sono in core.fields.
+# 'pressione' e' speciale: la macro aggiunge l'etichetta calcolata e prossima_mossa.
+tavolo:
+  - { field: uso_al_tavolo, callout: danger,  title: Uso al tavolo }
+  - { field: gancio,        callout: quote,   title: Gancio, fold: true }
+  - { field: pressione,     callout: warning, title: Pressione }
 
 # Statblock (Fantasy Statblocks): layout usato dal blocco ```statblock```.
 # Sostituisci col nome del layout installato (es. un layout 2024/5.5e).
@@ -57,10 +66,17 @@ categories:
       - regione
       - insediamento
       - sito di interesse
+      - struttura
+      - dungeon
+      - rovina
+      - landmark naturale
   cultura:
     folder: cultura
     subtypes:
       - civilta
+      - popolo
+      - tradizione
+      - religione
   fazione:
     folder: fazione
     subtypes:
@@ -89,7 +105,20 @@ categories:
   creatura:
     folder: creatura
     subtypes:
-      - creatura
+      - aberrazione
+      - bestia
+      - celestiale
+      - costrutto
+      - drago
+      - elementale
+      - fata
+      - gigante
+      - immondo
+      - melma
+      - mostruosita
+      - non-morto
+      - umanoide
+      - vegetale
   incontro:
     folder: incontro
     subtypes:
@@ -128,6 +157,81 @@ states:
   - in gioco
   - giocata
   - archiviata
+
+# Assi tematici: spettri 0-10 che danno a un'entita' un'identita' di sistema,
+# leggibile a colpo d'occhio e interrogabile da Dataview. Renderizzati dalla
+# macro carattere(categoria) come slider Meta Bind; il valore vive nel
+# frontmatter sotto l'id dell'asse. Single source dell'identita' tematica.
+assi_tematici:
+  mondo:
+    - { id: civilta_natura,       sinistra: Civilta,    destra: Natura }
+    - { id: ordine_caos,          sinistra: Ordine,     destra: Caos }
+    - { id: magia_rara_diffusa,   sinistra: Magia rara, destra: Magia diffusa }
+  luogo:
+    - { id: sicuro_pericoloso,    sinistra: Sicuro,     destra: Pericoloso }
+    - { id: prospero_misero,      sinistra: Prospero,   destra: Misero }
+    - { id: noto_segreto,         sinistra: Noto,       destra: Segreto }
+  fazione:
+    - { id: ordine_caos,          sinistra: Ordine,     destra: Caos }
+    - { id: segreta_palese,       sinistra: Segreta,    destra: Palese }
+    - { id: dottrina_pragmatismo, sinistra: Dottrina,   destra: Pragmatismo }
+  personaggio:
+    - { id: lecito_caotico,       sinistra: Lecito,     destra: Caotico }
+    - { id: altruista_egoista,    sinistra: Altruista,  destra: Egoista }
+    - { id: calmo_volatile,       sinistra: Calmo,      destra: Volatile }
+  cultura:
+    - { id: tradizione_innovazione, sinistra: Tradizione, destra: Innovazione }
+    - { id: aperta_chiusa,        sinistra: Aperta,     destra: Chiusa }
+    - { id: gerarchica_egualitaria, sinistra: Gerarchica, destra: Egualitaria }
+  creatura:
+    - { id: docile_ostile,        sinistra: Docile,     destra: Ostile }
+    - { id: solitaria_gregaria,   sinistra: Solitaria,  destra: Gregaria }
+    - { id: mondana_magica,       sinistra: Mondana,    destra: Magica }
+  oggetto:
+    - { id: comune_leggendario,   sinistra: Comune,     destra: Leggendario }
+    - { id: sicuro_rischioso,     sinistra: Sicuro,     destra: Rischioso }
+
+# Relazioni tipizzate: link SEMANTICI fra entita', scoped alla cartella della
+# categoria target. Single source renderizzato dalla macro relazioni(categoria)
+# come suggester Meta Bind (singolo) o inlineListSuggester (multi). Si affiancano
+# a 'connessioni' (catch-all libero). Interrogabili da Dataview (es. alleati/rivali).
+#   { field, label, category (target), multi? }
+relazioni:
+  personaggio:
+    - { field: fazione,        label: Affiliazione,   category: fazione }
+    - { field: luogo,          label: Base,           category: luogo }
+    - { field: alleati,        label: Alleati,        category: personaggio, multi: true }
+    - { field: rivali,         label: Rivali,         category: personaggio, multi: true }
+  fazione:
+    - { field: sede,           label: Sede,           category: luogo }
+    - { field: figure,         label: Figure chiave,  category: personaggio, multi: true }
+    - { field: alleati,        label: Alleate,        category: fazione, multi: true }
+    - { field: rivali,         label: Rivali,         category: fazione, multi: true }
+  luogo:
+    - { field: regione,        label: Regione,        category: luogo }
+    - { field: controllata_da, label: Controllata da, category: fazione }
+    - { field: abitanti,       label: Figure,         category: personaggio, multi: true }
+  cultura:
+    - { field: regioni,        label: Regioni,        category: luogo, multi: true }
+    - { field: lingua,         label: Lingua,         category: lingua }
+  lingua:
+    - { field: parlata_in,     label: Parlata in,     category: luogo, multi: true }
+    - { field: culture,        label: Culture,        category: cultura, multi: true }
+  cosmologia:
+    - { field: divinita,       label: Divinita legate,category: cosmologia, multi: true }
+  evento:
+    - { field: luogo,          label: Luogo,          category: luogo }
+    - { field: coinvolti,      label: Coinvolti,      category: personaggio, multi: true }
+    - { field: fazioni,        label: Fazioni,        category: fazione, multi: true }
+  incontro:
+    - { field: luogo,          label: Luogo,          category: luogo }
+    - { field: creature,       label: Creature,       category: creatura, multi: true }
+  creatura:
+    - { field: habitat,        label: Habitat,        category: luogo, multi: true }
+  oggetto:
+    - { field: proprietario,   label: Proprietario,   category: personaggio }
+    - { field: dove,           label: Dove si trova,  category: luogo }
+
 # Wizard di creazione per categoria (letto da create_entity.js).
 # Ogni domanda: { field, prompt, ... }
 #   from: subtypes  -> suggester sui subtypes della categoria
@@ -149,7 +253,6 @@ creation:
       - { field: aspetto, prompt: "Tratto distintivo: voce, aspetto, manierismo", heading: "Aspetto" }
       - { field: desiderio, prompt: "Cosa vuole davvero", heading: "Vuole" }
       - { field: paura, prompt: "Cosa teme o evita", heading: "Teme" }
-      - { field: gancio, prompt: "Gancio per il tavolo: perche' i PG lo incontrano", callout: quote, title: "Gancio" }
       - { field: segreto, prompt: "Segreto (non mostrare ai giocatori)", callout: warning, title: "Segreto", fold: true }
   luogo:
     fields:
@@ -159,7 +262,6 @@ creation:
       - { field: funzione, prompt: "Cos'e' / a cosa serve", heading: "Funzione" }
       - { field: controllo, prompt: "Chi o cosa lo controlla", heading: "Controllo" }
       - { field: tensione, prompt: "Tensione o pericolo presente", heading: "Tensione" }
-      - { field: gancio, prompt: "Gancio per il tavolo", callout: quote, title: "Gancio" }
       - { field: segreto, prompt: "Segreto del luogo", callout: warning, title: "Segreto", fold: true }
   fazione:
     fields:
@@ -189,17 +291,63 @@ creation:
     body:
       - { field: cosa, prompt: "Cosa accade", heading: "Cosa accade" }
       - { field: conseguenza, prompt: "Conseguenza per il presente", heading: "Conseguenza" }
-      - { field: gancio, prompt: "Gancio per il tavolo", callout: quote, title: "Gancio" }
   mondo:
     fields: []
     body:
       - { field: tono, prompt: "Tono e atmosfera del mondo", heading: "Tono" }
       - { field: conflitto, prompt: "Conflitto centrale", heading: "Conflitto centrale" }
-      - { field: gancio, prompt: "Gancio iniziale per i PG", callout: quote, title: "Gancio" }
+  cosmologia:
+    fields:
+      - { field: tipo, prompt: "Tipo cosmologico", from: subtypes, required: true }
+      - { field: mondo, prompt: "Mondo", from: notes, category: mondo, link: true, required: true }
+    body:
+      - { field: natura, prompt: "Cos'e' / come si manifesta", heading: "Natura" }
+      - { field: influenza, prompt: "Come tocca il mondo mortale", heading: "Influenza" }
+      - { field: segreto, prompt: "Verita' nascosta", callout: warning, title: "Segreto", fold: true }
+  cultura:
+    fields:
+      - { field: tipo, prompt: "Tipo di cultura", from: subtypes, required: true }
+      - { field: mondo, prompt: "Mondo", from: notes, category: mondo, link: true, required: true }
+    body:
+      - { field: valori, prompt: "Valori e tabu", heading: "Valori" }
+      - { field: vita, prompt: "Vita quotidiana, riti, estetica", heading: "Vita" }
+      - { field: tensione, prompt: "Attrito con altre culture", heading: "Tensione" }
+  lingua:
+    fields:
+      - { field: tipo, prompt: "Tipo di lingua", from: subtypes, required: true }
+      - { field: mondo, prompt: "Mondo", from: notes, category: mondo, link: true, required: true }
+    body:
+      - { field: chi_parla, prompt: "Chi la parla", heading: "Parlanti" }
+      - { field: suono, prompt: "Suono e scrittura", heading: "Suono e scrittura" }
+      - { field: lessico, prompt: "Parole/frasi chiave usabili al tavolo", heading: "Lessico" }
+  oggetto:
+    fields:
+      - { field: tipo, prompt: "Tipo di oggetto", from: subtypes, required: true }
+      - { field: mondo, prompt: "Mondo", from: notes, category: mondo, link: true, required: true }
+    body:
+      - { field: descrizione_oggetto, prompt: "Aspetto e fattura", heading: "Aspetto" }
+      - { field: effetto, prompt: "Cosa fa: regole/effetto al tavolo", heading: "Effetto" }
+      - { field: provenienza, prompt: "Rarita', costo, come si ottiene", heading: "Provenienza" }
+  regola:
+    fields:
+      - { field: tipo, prompt: "Tipo di regola", from: subtypes, required: true }
+      - { field: mondo, prompt: "Mondo (opzionale)", from: notes, category: mondo, link: true, optional: true }
+    body:
+      - { field: cosa_regola, prompt: "Cosa regola / cosa fa", heading: "Cosa" }
+      - { field: come_funziona, prompt: "Come funziona al tavolo", heading: "Come" }
+      - { field: eccezioni, prompt: "Eccezioni e casi limite", heading: "Eccezioni" }
   creatura:
     fields:
+      - { field: tipo, prompt: "Tipo di creatura (5e)", from: subtypes, required: true }
       - { field: mondo, prompt: "Mondo", from: notes, category: mondo, link: true, required: true }
     body:
       - { field: ecologia, prompt: "Ecologia: dove vive, abitudini", heading: "Ecologia" }
       - { field: tattiche, prompt: "Tattiche in combattimento", heading: "Tattiche" }
-      - { field: gancio, prompt: "Gancio per il tavolo", callout: quote, title: "Gancio" }
+  # La sessione ha un layout proprio (session.md.j2): niente 'body' wizard
+  # (duplicherebbe i campi gia' renderizzati). Questi prompt facoltativi
+  # pre-compilano la preparazione; i campi restano editabili nel template.
+  sessione:
+    fields:
+      - { field: mondo, prompt: "Mondo della sessione", from: notes, category: mondo, link: true, optional: true }
+      - { field: obiettivo, prompt: "Obiettivo della sessione (cosa deve accadere)", optional: true }
+      - { field: apertura, prompt: "Scena d'apertura", optional: true }

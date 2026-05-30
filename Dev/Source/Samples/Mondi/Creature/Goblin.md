@@ -2,7 +2,7 @@
 id: goblin
 nome: Goblin
 categoria: creatura
-tipo: creatura
+tipo: umanoide
 stato: pronto
 mondo: "[[Aethelgard]]"
 connessioni: ["[[Imboscata sulla Strada]]"]
