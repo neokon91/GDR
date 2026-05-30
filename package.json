@@ -10,9 +10,9 @@
     "sync:sources": "python3 Dev/Tools/python/run_source_pipeline.py --mode render --outputs-only",
     "clean:generated": "python3 Dev/Tools/python/clean_generated_outputs.py",
     "import:srd": "python3 Dev/Tools/python/import_srd.py",
-    "import:map": "node Dev/Tools/node-legacy/import_map.js",
-    "import:azgaar": "node Dev/Tools/node-legacy/import_azgaar_geojson.js",
-    "import:watabou:city": "node Dev/Tools/node-legacy/import_watabou_city.js",
-    "import:watabou:dungeon": "node Dev/Tools/node-legacy/import_watabou_dungeon.js"
+    "import:map": "python3 Dev/Tools/python/import_map.py",
+    "import:azgaar": "python3 Dev/Tools/python/import_azgaar_geojson.py",
+    "import:watabou:city": "python3 Dev/Tools/python/import_watabou_city.py",
+    "import:watabou:dungeon": "python3 Dev/Tools/python/import_watabou_dungeon.py"
   }
 }
