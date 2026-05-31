@@ -1,186 +1,70 @@
 #!/usr/bin/env python3
+"""Orchestratore della pipeline GDR: genera il vault Obsidian in dist/GDR-vault
+dalle sorgenti YAML/Jinja/JS. Il modello dati e l'IO stanno in common.py, la
+generazione SRD in build_srd.py, la validazione in validate.py; qui restano la
+build() (render template + config .obsidian), clean()/seed() e la CLI.
+
+Re-esporta i nomi pubblici dei moduli così i test (e gli usi storici) possono
+continuare a riferirli come render.<nome>."""
 
 from __future__ import annotations
 
 import argparse
-import json
-import re
 import shutil
-import sys
 from pathlib import Path
 from typing import Any
 
 import yaml
 from jinja2 import Environment, FileSystemLoader, StrictUndefined
 
-# Cattura gli id usati nei Jinja come field('id') / field("id").
-FIELD_REF_RE = re.compile(r"""field\(\s*['"]([a-z0-9_]+)['"]""")
-
-ROOT = Path(__file__).resolve().parents[2]
-SOURCE = ROOT / "Dev" / "Source"
-YAML_DIR = SOURCE / "YAML"
-JINJA_DIR = SOURCE / "Jinja"
-JS_DIR = SOURCE / "JS"
-SAMPLES_DIR = SOURCE / "Samples"
-SRD_DIR = SOURCE / "SRD"  # SRD 5.2.1 vendorizzata (markdown, CC-BY-4.0)
-STATBLOCKS_DIR = SOURCE / "statblocks"  # layout Fantasy Statblocks (uno per file)
-
-# Unico target di output: il vault Obsidian vivo. Si apre questa cartella in
-# Obsidian e si rilancia `build` per vedere i cambiamenti dal vivo. Il repo di
-# sviluppo (ROOT) resta pulito: nessun artefatto generato fuori da qui.
-VAULT = ROOT / "dist" / "GDR-vault"
-
-# Sottocartelle interamente generate: sicure da azzerare a ogni build. Il prefisso
-# 'z.' le tiene in fondo; uno snippet CSS le nasconde dall'esploratore (vedi
-# write_workspace_chrome). Restano indicizzate, quindi i plugin funzionano.
-# z.* = cartelle di SISTEMA (nascoste dall'esploratore + escluse da ricerca).
-# SRD = generata ma USER-FACING (navigabile/cercabile): in GENERATED_DIRS solo
-# per il wipe-and-regen del clean, NON tra le nascoste.
-HIDDEN_DIRS = ("z.modelli", "z.automazioni", "z.classi")
-GENERATED_DIRS = (*HIDDEN_DIRS, "SRD")
-
-# Cartella delle pagine-indice (hub): tiene la radice pulita.
-INDEX_DIR = "Indici"
-
-# Note generate alla radice del vault (non contenuti utente).
-GENERATED_NOTES = ("Home.md", "LEGGIMI.md")
-
-
-def load_yaml(name: str) -> dict[str, Any]:
-    path = YAML_DIR / name
-    data = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
-    if not isinstance(data, dict):
-        raise ValueError(f"{path}: YAML root non mappa")
-    return data
-
-
-# Lo schema delle entità 5.5e vive in system.yaml, separato dall'ontologia
-# worldbuilding di core.yaml. I due si fondono in un unico 'core': i template,
-# i JS (core.json) e i test consumano il modello unificato senza sapere dello
-# split. Il confine (chi sta dove) è validato da check() (vedi validate_split).
-SYSTEM_YAML = "system.yaml"
-
-# Schema per-entità: un file YAML per categoria in Dev/Source/YAML/entities/.
-# Ogni file è single source di tutto ciò che è specifico dell'entità (tassonomia,
-# campi, scheda, assi, relazioni, wizard) + il wiring dei suoi template. render.py
-# li distribuisce nelle sezioni globali di 'core' (vedi apply_entities) e ne
-# raccoglie i template (vedi entity_templates). È l'evoluzione per-entità dello
-# split core/system: gli elementi comuni restano condivisi (core.yaml + macro).
-ENTITIES_DIRNAME = "entities"
-
-
-def deep_merge(base: dict[str, Any], overlay: dict[str, Any]) -> dict[str, Any]:
-    """Fonde 'overlay' dentro 'base': i dict si fondono ricorsivamente per chiave,
-    gli altri valori (liste/scalari) li sovrascrive overlay. Lo split è lossless,
-    quindi in pratica i due file non condividono chiavi (lo garantisce check)."""
-    merged = dict(base)
-    for key, value in overlay.items():
-        current = merged.get(key)
-        if isinstance(current, dict) and isinstance(value, dict):
-            merged[key] = deep_merge(current, value)
-        else:
-            merged[key] = value
-    return merged
-
-
-def load_core_parts() -> tuple[dict[str, Any], dict[str, Any]]:
-    """Le due metà del modello: core.yaml (worldbuilding) e system.yaml (5.5e).
-    system.yaml assente -> {} (lo split è opzionale, per retrocompatibilità)."""
-    core = load_yaml("core.yaml")
-    system = load_yaml(SYSTEM_YAML) if (YAML_DIR / SYSTEM_YAML).is_file() else {}
-    return core, system
-
-
-def load_entities() -> list[dict[str, Any]]:
-    """Gli schemi per-entità (Dev/Source/YAML/entities/*.yaml), in ordine di nome.
-    Cartella assente -> lista vuota (lo split per-entità è incrementale)."""
-    entities_dir = YAML_DIR / ENTITIES_DIRNAME
-    if not entities_dir.is_dir():
-        return []
-    out = []
-    for path in sorted(entities_dir.glob("*.yaml")):
-        data = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
-        if isinstance(data, dict) and data.get("id"):
-            out.append(data)
-    return out
-
-
-# Sezioni-mappa che un file-entità contribuisce a 'core', keyate per id-entità.
-_ENTITY_SECTIONS = (("scheda", "scheda"), ("assi", "assi_tematici"),
-                    ("relazioni", "relazioni"), ("creation", "creation"))
-
-
-def apply_entities(core: dict[str, Any], entities: list[dict[str, Any]]) -> dict[str, Any]:
-    """Distribuisce ogni file-entità nelle sezioni globali di 'core': folders,
-    categories (folder+subtypes), fields, scheda, assi_tematici, relazioni,
-    creation. Ritorna un nuovo dict (non muta l'input)."""
-    merged = dict(core)
-    for section in ("folders", "fields", "categories", "scheda", "assi_tematici", "relazioni", "creation"):
-        merged[section] = dict(merged.get(section, {}) or {})
-    for entity in entities:
-        eid = entity["id"]
-        merged["folders"][eid] = entity["folder"]
-        merged["categories"][eid] = {"folder": eid, "subtypes": entity.get("subtypes", []) or []}
-        for field_id, spec in (entity.get("fields") or {}).items():
-            merged["fields"][field_id] = spec
-        for src_key, dest_key in _ENTITY_SECTIONS:
-            if entity.get(src_key) is not None:
-                merged[dest_key][eid] = entity[src_key]
-    return merged
-
-
-def entity_templates(entities: list[dict[str, Any]]) -> list[dict[str, Any]]:
-    """I template dichiarati dai file-entità (con category = id-entità), ordinati
-    per il campo 'order' dell'entità (preserva l'ordine curato dei bottoni Home).
-    Sono appesi a quelli di templates.yaml."""
-    templates = []
-    for entity in sorted(entities, key=lambda e: e.get("order", 10**9)):
-        for template in entity.get("templates", []) or []:
-            templates.append({**template, "category": entity["id"]})
-    return templates
-
-
-def load_core() -> dict[str, Any]:
-    """Modello unificato (core.yaml + system.yaml + entities/*.yaml). Unico
-    ingresso per build()/check()/test: i consumatori vedono un solo 'core'."""
-    core, system = load_core_parts()
-    return apply_entities(deep_merge(core, system), load_entities())
-
-
-def load_templates() -> list[dict[str, Any]]:
-    """Tutti i template: quelli di templates.yaml + quelli dei file-entità."""
-    base = load_yaml("templates.yaml").get("templates", []) or []
-    return base + entity_templates(load_entities())
-
-
-def write_json(path: Path, data: Any) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-
-
-def write_text(path: Path, text: str) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(text.rstrip() + "\n", encoding="utf-8")
-
-
-def load_pages() -> list[dict[str, Any]]:
-    """Pagine-indice (hub per dominio). Assenti = lista vuota (opzionali)."""
-    path = YAML_DIR / "pages.yaml"
-    if not path.is_file():
-        return []
-    return (yaml.safe_load(path.read_text(encoding="utf-8")) or {}).get("pages", []) or []
-
-
-def generated_note_names() -> list[str]:
-    """Note generate: Home/LEGGIMI alla radice + una pagina-indice per voce di
-    pages.yaml (in INDEX_DIR/). Cosi' clean() le rimuove senza nomi hard-coded."""
-    return [*GENERATED_NOTES, *(f"{INDEX_DIR}/{p['file']}.md" for p in load_pages())]
+from common import (  # noqa: F401 (re-export per i test/usi storici)
+    GENERATED_DIRS,
+    GENERATED_NOTES,
+    HIDDEN_DIRS,
+    INDEX_DIR,
+    JINJA_DIR,
+    JS_DIR,
+    ROOT,
+    SAMPLES_DIR,
+    SOURCE,
+    SRD_DIR,
+    STATBLOCKS_DIR,
+    VAULT,
+    apply_entities,
+    deep_merge,
+    entity_templates,
+    generated_note_names,
+    load_core,
+    load_core_parts,
+    load_entities,
+    load_pages,
+    load_templates,
+    load_yaml,
+    read_json,
+    template_folder,
+    write_json,
+    write_text,
+)
+from build_srd import (  # noqa: F401 (re-export per i test)
+    SRD_GEN,
+    build_srd,
+    load_srd,
+    srd_statblock_yaml,
+)
+from validate import (  # noqa: F401 (re-export per i test)
+    CORE_ONLY_SECTIONS,
+    PARTITIONED_SECTIONS,
+    SYSTEM_ONLY_SECTIONS,
+    check,
+    validate_entities,
+    validate_split,
+)
 
 
 def clean() -> None:
     """Rimuove solo gli artefatti puramente generati (z.modelli, z.automazioni,
-    z.classi, Home/LEGGIMI, pagine-indice). NON tocca .obsidian (config e plugin
-    installati dall'utente) ne' i contenuti. Pulisce anche residui legacy in ROOT."""
+    z.classi, SRD, Home/LEGGIMI, pagine-indice). NON tocca .obsidian (config e
+    plugin dell'utente) ne' i contenuti. Pulisce anche residui legacy in ROOT."""
     notes = generated_note_names()
     for base in (VAULT, ROOT):
         for name in GENERATED_DIRS:
@@ -196,28 +80,7 @@ def clean() -> None:
         shutil.rmtree(legacy_build)
 
 
-def read_json(path: Path) -> Any:
-    if path.is_file():
-        try:
-            return json.loads(path.read_text(encoding="utf-8"))
-        except (ValueError, OSError):
-            return None
-    return None
-
-
-def load_statblock_layouts() -> list[dict[str, Any]]:
-    """Layout Fantasy Statblocks vendorizzati (Dev/Source/statblocks/*.json), uno
-    per file. Ognuno deve essere un oggetto con id+name; gli altri sono ignorati."""
-    if not STATBLOCKS_DIR.is_dir():
-        return []
-    layouts = []
-    for path in sorted(STATBLOCKS_DIR.glob("*.json")):
-        data = read_json(path)
-        if isinstance(data, dict) and data.get("id") and data.get("name"):
-            layouts.append(data)
-    return layouts
-
-
+# --- Config .obsidian (merge non distruttivo) -------------------------------
 def merge_json(path: Path, updates: dict[str, Any]) -> None:
     """Aggiorna solo le chiavi gestite dalla pipeline, preservando il resto
     della config (impostazioni utente). Scrive solo se qualcosa cambia."""
@@ -276,14 +139,22 @@ def write_workspace_chrome(obsidian: Path) -> None:
     union_list_key(obsidian / "app.json", "userIgnoreFilters", [f"{d}/" for d in HIDDEN_DIRS])
 
 
-def template_folder(core: dict[str, Any], category: str) -> str:
-    folders = core.get("folders", {})
-    folder_key = (core.get("categories", {}).get(category) or {}).get("folder", category)
-    return folders.get(folder_key) or folders.get(category) or "Inbox"
+def load_statblock_layouts() -> list[dict[str, Any]]:
+    """Layout Fantasy Statblocks vendorizzati (Dev/Source/statblocks/*.json), uno
+    per file. Ognuno deve essere un oggetto con id+name; gli altri sono ignorati."""
+    if not STATBLOCKS_DIR.is_dir():
+        return []
+    layouts = []
+    for path in sorted(STATBLOCKS_DIR.glob("*.json")):
+        data = read_json(path)
+        if isinstance(data, dict) and data.get("id") and data.get("name"):
+            layouts.append(data)
+    return layouts
 
 
+# --- Bottoni e fileClass (derivati dal modello) -----------------------------
 def creation_buttons(core: dict[str, Any], templates: list[dict[str, Any]]) -> list[dict[str, Any]]:
-    """Un bottone 'Crea <Titolo>' per ogni template, derivato da templates.yaml."""
+    """Un bottone 'Crea <Titolo>' per ogni template, derivato dai file-entità."""
     buttons = []
     for template in templates:
         buttons.append({
@@ -385,195 +256,11 @@ def meta_bind_config(plugins: dict[str, Any], core: dict[str, Any], templates: l
     }
 
 
-# --- SRD 5.2.1 (CC-BY-4.0), traduzione italiana ----------------------------
-# I JSON tipizzati vendorizzati in Dev/Source/SRD/ (da github massimobarbieri/
-# DND-SRD-IT) sono generati in note per-voce in un albero di SOLA LETTURA SRD/,
-# separato dall'homebrew. I mostri diventano statblock Fantasy Statblocks.
-# Config: { json, dest (sottocartella), cat (categoria), fm (campi -> frontmatter) }.
-SRD_GEN = [
-    {"json": "srd_5_2_1_spells.json",      "dest": "Incantesimi",     "cat": "srd-incantesimo", "fm": ["livello", "scuola", "classi", "tempo_lancio", "gittata", "componenti", "durata"]},
-    {"json": "srd_5_2_1_magic_items.json", "dest": "Oggetti",         "cat": "srd-oggetto",     "fm": ["tipo_base", "rarita", "richiede_sintonia"]},
-    {"json": "srd_5_2_1_feats.json",       "dest": "Talenti",         "cat": "srd-talento",     "fm": ["categoria", "prerequisito", "ripetibile"]},
-    {"json": "srd_5_2_1_species.json",     "dest": "Specie",          "cat": "srd-specie",      "fm": ["tipo_creatura", "taglia", "velocita"]},
-    {"json": "srd_5_2_1_backgrounds.json", "dest": "Background",      "cat": "srd-background",  "fm": ["talento_origine"]},
-    {"json": "srd_5_2_1_languages.json",   "dest": "Lingue",          "cat": "srd-lingua",      "fm": []},
-    {"json": "srd_5_2_1_equipment.json",   "dest": "Equipaggiamento", "cat": "srd-equipaggiamento", "fm": []},
-    {"json": "srd_5_2_1_rules.json",       "dest": "Regole",          "cat": "srd-regola",      "fm": []},
-    {"json": "srd_5_2_1_classes.json",     "dest": "Classi",          "cat": "srd-classe",      "fm": []},
-]
-
-SRD_ATTRIBUTION = (
-    "Quest'opera include materiale tratto dal **System Reference Document 5.2.1** "
-    "(\"SRD 5.2.1\") di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd. "
-    "Il SRD 5.2.1 è concesso in licenza ai sensi della "
-    "[CC-BY-4.0](https://creativecommons.org/licenses/by/4.0/legalcode). "
-    "Traduzione italiana: [massimobarbieri/DND-SRD-IT](https://github.com/massimobarbieri/DND-SRD-IT)."
-)
-
-
-def srd_slug(name: str) -> str:
-    """Nome file leggibile e sicuro per Obsidian (toglie i caratteri vietati)."""
-    cleaned = re.sub(r'[\\/:*?"<>|#\[\]^]', "", str(name)).strip()
-    return cleaned or "voce"
-
-
-def frontmatter_block(data: dict[str, Any]) -> str:
-    dumped = yaml.safe_dump(data, allow_unicode=True, sort_keys=False)
-    return f"---\n{dumped}---\n\n"
-
-
-def load_srd(name: str) -> list[dict[str, Any]]:
-    path = SRD_DIR / name
-    if not path.is_file():
-        return []
-    data = json.loads(path.read_text(encoding="utf-8"))
-    return data if isinstance(data, list) else []
-
-
-def _join(value: Any) -> str:
-    return ", ".join(str(v) for v in value) if isinstance(value, list) else str(value or "")
-
-
-def srd_header(entry: dict[str, Any], cat: str) -> str:
-    """Infobox (callout) coi dati salienti, su misura per categoria. '' se nessuno."""
-    def parts(*pairs):
-        return " · ".join(f"**{lab}** {entry.get(k)}" for lab, k in pairs if entry.get(k))
-    if cat == "srd-incantesimo":
-        liv = str(entry.get("livello", ""))
-        testa = f"Trucchetto · {entry.get('scuola', '')}" if liv in ("0", "") else f"Livello {liv} · {entry.get('scuola', '')}"
-        righe = [f"> [!abstract] {testa}"]
-        mecc = parts(("Lancio", "tempo_lancio"), ("Gittata", "gittata"), ("Componenti", "componenti"), ("Durata", "durata"))
-        if mecc:
-            righe.append(f"> {mecc}")
-        if entry.get("classi"):
-            righe.append(f"> **Classi** {_join(entry['classi'])}")
-        return "\n".join(righe)
-    if cat == "srd-oggetto":
-        sint = entry.get("richiede_sintonia")
-        extra = " · richiede sintonia" if sint and sint not in (False, "no", "No", "") else ""
-        testa = " · ".join(x for x in (entry.get("tipo_base", ""), str(entry.get("rarita", "") or "")) if x)
-        return f"> [!abstract] {testa}{extra}" if testa or extra else ""
-    if cat == "srd-talento":
-        line = f"> [!abstract] Talento{(' · ' + str(entry.get('categoria'))) if entry.get('categoria') else ''}"
-        if entry.get("prerequisito"):
-            line += f"\n> **Prerequisito** {entry['prerequisito']}"
-        return line
-    if cat == "srd-specie":
-        return f"> [!abstract] {entry.get('tipo_creatura', '')} · Taglia {entry.get('taglia', '')} · Velocità {entry.get('velocita', '')}"
-    if cat == "srd-background" and entry.get("talento_origine"):
-        return f"> [!abstract] Background · Talento d'origine: {entry['talento_origine']}"
-    if cat == "srd-condizione":
-        return "> [!warning] Condizione"
-    return ""
-
-
-def srd_note(entry: dict[str, Any], cat: str, fm_fields: list[str]) -> str:
-    fm: dict[str, Any] = {"nome": entry.get("nome", ""), "categoria": cat, "srd": True, "fonte": "SRD 5.2.1"}
-    for key in fm_fields:
-        val = entry.get(key)
-        if isinstance(val, (str, int, float, bool)) and val != "":
-            fm[key] = val
-        elif isinstance(val, list) and val:
-            fm[key] = val
-    parts: list[str] = [f"# {entry.get('nome', '')}"]
-    header = srd_header(entry, cat)
-    if header:
-        parts.append(header)
-    for key in ("descrizione", "beneficio"):
-        if isinstance(entry.get(key), str) and entry[key].strip():
-            parts.append(entry[key].strip())
-    for sez in entry.get("sezioni") or []:
-        if isinstance(sez, dict) and (sez.get("titolo") or sez.get("descrizione")):
-            parts.append(f"### {sez.get('titolo', '')}\n\n{sez.get('descrizione', '')}".strip())
-    scaling = [s for s in (entry.get("scaling") or []) if isinstance(s, dict)]
-    if scaling:
-        body = "\n>\n".join(f"> **{s.get('nome', '')}** — {s.get('descrizione', '')}" for s in scaling)
-        parts.append(f"> [!tip]- Potenziamento\n{body}")
-    return frontmatter_block(fm) + "\n\n".join(parts) + "\n"
-
-
-def srd_statblock_yaml(monster: dict[str, Any], layout: str) -> str:
-    """Mappa un mostro JSON IT sul formato statblock di Fantasy Statblocks."""
-    car = monster.get("caratteristiche", {}) or {}
-    order = ["forza", "destrezza", "costituzione", "intelligenza", "saggezza", "carisma"]
-    hp = monster.get("punti_ferita", {}) or {}
-    cr = monster.get("grado_sfida", {}) or {}
-    vel = monster.get("velocita", {}) or {}
-    sensi = monster.get("sensi", {}) or {}
-    lingue = monster.get("lingue", [])
-
-    def actions(key: str) -> list[dict[str, str]]:
-        return [{"name": a.get("nome", ""), "desc": a.get("descrizione", "")}
-                for a in (monster.get(key) or []) if isinstance(a, dict)]
-
-    sb = {
-        "layout": layout,
-        "name": monster.get("nome", ""),
-        "size": monster.get("dimensione", ""),
-        "type": monster.get("tipo", ""),
-        "alignment": monster.get("allineamento", ""),
-        "ac": monster.get("classe_armatura", ""),
-        "hp": hp.get("media", "") if isinstance(hp, dict) else hp,
-        "hit_dice": hp.get("formula", "") if isinstance(hp, dict) else "",
-        "speed": ", ".join(str(v) if t == "camminata" else f"{t} {v}" for t, v in vel.items()) if isinstance(vel, dict) else str(vel),
-        "stats": [int((car.get(k) or {}).get("punteggio", 10)) for k in order],
-        "senses": ", ".join(f"{t.replace('_', ' ')} {v}" for t, v in sensi.items()) if isinstance(sensi, dict) else str(sensi),
-        "languages": ", ".join(lingue) if isinstance(lingue, list) else str(lingue),
-        "cr": str(cr.get("valore", "")) if isinstance(cr, dict) else str(cr),
-        "traits": actions("tratti"),
-        "actions": actions("azioni"),
-        "legendary_actions": actions("azioni_leggendarie"),
-    }
-    return yaml.safe_dump(sb, allow_unicode=True, sort_keys=False)
-
-
-def build_srd(core: dict[str, Any]) -> int:
-    """Genera l'albero SRD/ (sola lettura) dai JSON IT vendorizzati. Ritorna il
-    numero di note scritte. Cartella sorgente assente -> 0 (SRD opzionale)."""
-    if not SRD_DIR.is_dir():
-        return 0
-    write_text(VAULT / "SRD" / "LICENZA.md", f"# Licenza SRD\n\n{SRD_ATTRIBUTION}\n")
-    written = 0
-    for spec in SRD_GEN:
-        for entry in load_srd(spec["json"]):
-            write_text(VAULT / "SRD" / spec["dest"] / f"{srd_slug(entry.get('nome'))}.md",
-                       srd_note(entry, spec["cat"], spec["fm"]))
-            written += 1
-    # Glossario: condizioni in una cartella dedicata, il resto in Glossario.
-    for entry in load_srd("srd_5_2_1_rules_glossary.json"):
-        cond = entry.get("descrittore") == "condizione"
-        dest, cat = ("Condizioni", "srd-condizione") if cond else ("Glossario", "srd-glossario")
-        write_text(VAULT / "SRD" / dest / f"{srd_slug(entry.get('nome'))}.md",
-                   srd_note(entry, cat, ["descrittore"]))
-        written += 1
-    # Mostri -> statblock (statblock: inline => entra nel bestiario di Fantasy Statblocks).
-    layout = (core.get("statblock", {}) or {}).get("layout", "Basic 5e Layout")
-    for monster in load_srd("srd_5_2_1_monsters.json"):
-        fm = {"nome": monster.get("nome", ""), "categoria": "srd-mostro", "srd": True,
-              "fonte": "SRD 5.2.1", "statblock": "inline"}
-        content = frontmatter_block(fm) + f"# {monster.get('nome', '')}\n\n```statblock\n{srd_statblock_yaml(monster, layout)}```\n"
-        write_text(VAULT / "SRD" / "Mostri" / f"{srd_slug(monster.get('nome'))}.md", content)
-        written += 1
-    index = (
-        "# 📚 SRD 5.2.1 (italiano)\n\n"
-        "Riferimento ufficiale 5.5e in italiano, **sola lettura**: si rigenera a ogni build, "
-        "non modificarlo (il tuo homebrew va in `Mondi/`). I mostri sono statblock e popolano "
-        "il bestiario di Fantasy Statblocks (richiamabili con `monster: Nome`).\n\n"
-        f"> [!quote]- Licenza\n> {SRD_ATTRIBUTION}\n\n"
-        "## Contenuto\n"
-        '```dataview\ntable without id length(rows) as Voci\nfrom "SRD"\n'
-        "where srd\ngroup by categoria as Categoria\nsort Categoria asc\n```\n"
-    )
-    write_text(VAULT / "SRD" / "Indice.md", index)
-    return written
-
-
 def build() -> dict[str, str]:
     core = load_core()
     plugins = load_yaml("plugins.yaml")
-    template_data = load_yaml("templates.yaml")
     templates = load_templates()
-    actions = template_data.get("actions", [])
+    actions = load_yaml("templates.yaml").get("actions", [])
 
     payload = {
         "folders": core.get("folders", {}),
@@ -736,190 +423,6 @@ def seed_samples() -> int:
         shutil.copy2(sample, dest)
         copied += 1
     return copied
-
-
-# Identificatore che diventa chiave di frontmatter / cartella: snake_case.
-SNAKE_RE = re.compile(r"^[a-z][a-z0-9_]*$")
-
-# Sezioni "di piano": devono restare nel rispettivo file. tavolo/assi_tematici/
-# states (il differenziatore worldbuilding) solo in core.yaml; scheda/statblock/
-# caratteristiche (i meccanismi 5.5e) solo in system.yaml.
-CORE_ONLY_SECTIONS = ("tavolo", "assi_tematici", "states")
-SYSTEM_ONLY_SECTIONS = ("scheda", "statblock", "caratteristiche")
-
-# Sezioni-mappa (id -> definizione) partizionate fra i due file: gli stessi id
-# non devono comparire in entrambi (dup-ID).
-PARTITIONED_SECTIONS = ("folders", "fields", "categories", "creation", "relazioni")
-
-
-def validate_split(core_raw: dict[str, Any], system_raw: dict[str, Any], merged: dict[str, Any]) -> list[str]:
-    """Valida il confine core/system + dup-ID + snake_case + shape del modello
-    fuso. Ritorna la lista degli errori (vuota = tutto a posto)."""
-    errors: list[str] = []
-
-    # 1) Confine: ogni sezione "di piano" vive in un solo file.
-    for section in CORE_ONLY_SECTIONS:
-        if section in system_raw:
-            errors.append(f"confine: '{section}' è worldbuilding -> va in core.yaml, non in system.yaml")
-    for section in SYSTEM_ONLY_SECTIONS:
-        if section in core_raw:
-            errors.append(f"confine: '{section}' è di sistema 5.5e -> va in system.yaml, non in core.yaml")
-
-    # 2) dup-ID: nessun id partizionato compare in entrambi i file.
-    for section in PARTITIONED_SECTIONS:
-        shared = set(core_raw.get(section, {}) or {}) & set(system_raw.get(section, {}) or {})
-        for key in sorted(shared):
-            errors.append(f"dup-ID: '{key}' definito sia in core.{section} sia in system.{section}")
-
-    # 3) snake_case: gli identificatori che diventano chiavi di frontmatter/cartelle.
-    def snake(scope: str, names: Any) -> None:
-        for name in names or []:
-            if name is not None and not SNAKE_RE.match(str(name)):
-                errors.append(f"snake_case: '{name}' in {scope} non è snake_case")
-
-    snake("folders", merged.get("folders", {}))
-    snake("fields", merged.get("fields", {}))
-    snake("categories", merged.get("categories", {}))
-    snake("caratteristiche", [c.get("id") for c in merged.get("caratteristiche", []) or []])
-    for cat, assi in (merged.get("assi_tematici", {}) or {}).items():
-        snake(f"assi_tematici[{cat}]", [a.get("id") for a in assi or []])
-    for cat, rels in (merged.get("relazioni", {}) or {}).items():
-        snake(f"relazioni[{cat}]", [r.get("field") for r in rels or []])
-
-    # 4) shape: struttura attesa delle sezioni del modello.
-    fields = merged.get("fields", {}) or {}
-    folders = merged.get("folders", {}) or {}
-    for fid, spec in fields.items():
-        if not isinstance(spec, dict) or not spec.get("label") or not spec.get("widget"):
-            errors.append(f"shape: campo '{fid}' senza label/widget")
-    for cat, spec in (merged.get("categories", {}) or {}).items():
-        if not isinstance(spec, dict) or not spec.get("folder") or not spec.get("subtypes"):
-            errors.append(f"shape: categoria '{cat}' senza folder/subtypes")
-        elif spec.get("folder") not in folders:
-            errors.append(f"shape: categoria '{cat}' -> folder '{spec.get('folder')}' non in folders")
-    for entry in merged.get("tavolo", []) or []:
-        if not all(entry.get(k) for k in ("field", "callout", "title")):
-            errors.append(f"shape: voce tavolo {entry} senza field/callout/title")
-    for cat, campi in (merged.get("scheda", {}) or {}).items():
-        for fid in campi or []:
-            if fid not in fields:
-                errors.append(f"shape: scheda[{cat}] -> campo '{fid}' non in fields")
-    for cat, rels in (merged.get("relazioni", {}) or {}).items():
-        for rel in rels or []:
-            if not all(rel.get(k) for k in ("field", "label", "category")):
-                errors.append(f"shape: relazioni[{cat}] voce {rel} senza field/label/category")
-    for entry in merged.get("caratteristiche", []) or []:
-        if not entry.get("id") or not entry.get("sigla"):
-            errors.append(f"shape: caratteristica {entry} senza id/sigla")
-    for cat, assi in (merged.get("assi_tematici", {}) or {}).items():
-        for a in assi or []:
-            if not all(a.get(k) for k in ("id", "sinistra", "destra")):
-                errors.append(f"shape: assi_tematici[{cat}] voce {a} senza id/sinistra/destra")
-    return errors
-
-
-def validate_entities(core_raw: dict[str, Any], system_raw: dict[str, Any],
-                      entities: list[dict[str, Any]], merged: dict[str, Any]) -> list[str]:
-    """Valida i file-entità: shape minima + nessuna collisione di id-categoria o
-    di campo con core.yaml/system.yaml (un'entità non ridefinisce cose globali)."""
-    errors: list[str] = []
-    base_cats = set(core_raw.get("categories", {}) or {}) | set(system_raw.get("categories", {}) or {})
-    base_fields = set(core_raw.get("fields", {}) or {}) | set(system_raw.get("fields", {}) or {})
-    seen_ids: set[str] = set()
-    for entity in entities:
-        eid = entity.get("id")
-        if not eid or not entity.get("folder"):
-            errors.append(f"entity {entity.get('id')!r}: manca id o folder")
-            continue
-        if eid in seen_ids:
-            errors.append(f"entity '{eid}': id duplicato fra i file-entità")
-        seen_ids.add(eid)
-        if eid in base_cats:
-            errors.append(f"entity '{eid}': categoria già in core.yaml/system.yaml (dup)")
-        for field_id in (entity.get("fields") or {}):
-            if field_id in base_fields:
-                errors.append(f"entity '{eid}': campo '{field_id}' già in core/system (dup)")
-        for template in entity.get("templates", []) or []:
-            for key in ("id", "title", "jinja", "target"):
-                if not template.get(key):
-                    errors.append(f"entity '{eid}': template senza '{key}'")
-    return errors
-
-
-def check() -> int:
-    errors: list[str] = []
-    core_raw, system_raw = load_core_parts()
-    entities = load_entities()
-    core = apply_entities(deep_merge(core_raw, system_raw), entities)
-    errors.extend(validate_split(core_raw, system_raw, core))
-    errors.extend(validate_entities(core_raw, system_raw, entities, core))
-    plugins = load_yaml("plugins.yaml")
-    categories = core.get("categories", {})
-    folders = core.get("folders", {})
-    fields = core.get("fields", {})
-    metabind = plugins.get("metabind_inputs") or {}
-
-    # Le categorie dei template (templates.yaml + file-entità) devono essere
-    # dichiarate e avere una cartella risolvibile (i bottoni 'Crea ...' creano la
-    # nota in quella cartella).
-    for template in load_templates():
-        category = template.get("category")
-        if category not in categories:
-            errors.append(f"{template.get('id')}: categoria non dichiarata ({category})")
-        else:
-            folder_key = (categories.get(category) or {}).get("folder", category)
-            if folder_key not in folders:
-                errors.append(f"{template.get('id')}: cartella '{folder_key}' non in folders")
-        jinja = str(template.get("jinja", ""))
-        if not (JINJA_DIR / jinja).exists():
-            errors.append(f"{template.get('id')}: Jinja mancante ({jinja})")
-
-    # Ogni widget non-text/number del registro deve avere un template Meta Bind.
-    for field_id, spec in fields.items():
-        widget = (spec or {}).get("widget")
-        if widget and widget not in ("text", "number") and widget not in metabind:
-            errors.append(f"campo {field_id}: widget '{widget}' assente da metabind_inputs")
-
-    # Ogni field('<id>') usato nei Jinja deve esistere nel registro core.fields.
-    # I partial (_*.j2) definiscono le macro, non le usano: vanno esclusi.
-    for path in sorted(JINJA_DIR.glob("*.j2")):
-        if path.name.startswith("_"):
-            continue
-        for field_id in FIELD_REF_RE.findall(path.read_text(encoding="utf-8")):
-            if field_id not in fields:
-                errors.append(f"{path.name}: campo '{field_id}' non nel registro core.fields")
-
-    # La superficie giocabile (core.tavolo) è renderizzata da macro: i suoi campi
-    # non passano dal controllo field('id') sopra, quindi validali qui.
-    for entry in core.get("tavolo", []) or []:
-        field_id = entry.get("field")
-        if field_id not in fields:
-            errors.append(f"tavolo: campo '{field_id}' non nel registro core.fields")
-
-    # Le relazioni tipizzate puntano a una categoria target con cartella risolvibile
-    # (la macro relazioni() costruisce un suggester su quella cartella).
-    for source_cat, rels in (core.get("relazioni", {}) or {}).items():
-        if source_cat not in categories:
-            errors.append(f"relazioni: categoria '{source_cat}' non dichiarata")
-        for rel in rels or []:
-            target = rel.get("category")
-            if target not in categories:
-                errors.append(f"relazioni[{source_cat}].{rel.get('field')}: target '{target}' non dichiarato")
-            elif (categories.get(target) or {}).get("folder", target) not in folders:
-                errors.append(f"relazioni[{source_cat}].{rel.get('field')}: cartella di '{target}' non in folders")
-
-    # Pagine-indice: categoria dichiarata e template index disponibile.
-    if load_pages() and not (JINJA_DIR / "index.md.j2").exists():
-        errors.append("index.md.j2 mancante (richiesto da pages.yaml)")
-    for page in load_pages():
-        if page.get("category") not in categories:
-            errors.append(f"page {page.get('id')}: categoria non dichiarata ({page.get('category')})")
-
-    if errors:
-        for error in errors:
-            print(f"- {error}", file=sys.stderr)
-        return 1
-    return 0
 
 
 def main() -> int:
