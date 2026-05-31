@@ -143,6 +143,7 @@ await views.renderAxesRadar(container, app, page);
 
 > [!example] Relazioni
 > **Habitat**: `INPUT[inlineListSuggester(optionQuery("Mondi/Luoghi"), useLinks(partial), allowOther):habitat]`
+> **Specie**: `INPUT[suggester(optionQuery("Mondi/Specie"), useLinks(partial), allowOther):specie]`
 
 > [!example] Collegamenti
 > Mondo: `INPUT[mondo][:mondo]`

@@ -9,6 +9,9 @@
 ````tabs
 --- Lore
 
+> [!abstract] Scheda
+> Stato: `INPUT[stato_cosmico][:stato_cosmico]`
+> Allineamento: `INPUT[allineamento][:allineamento]`
 
 > [!note]- Descrizione
 > Scrivi qui il contenuto lore vero della nota.

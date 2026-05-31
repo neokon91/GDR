@@ -13,6 +13,13 @@ templates:
   jinja: reference.md.j2
 subtypes:
 - bastione
+relazioni:
+- field: luogo
+  label: Posizione
+  category: luogo
+- field: proprietario
+  label: Proprietario
+  category: personaggio
 creation:
   fields:
   - field: tipo

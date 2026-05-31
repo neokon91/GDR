@@ -28,6 +28,8 @@
 
 --- Collegamenti
 
+> [!example] Relazioni
+> **Sistema magico**: `INPUT[suggester(optionQuery("Mondi/Magia"), useLinks(partial), allowOther):sistema_magico]`
 
 > [!example] Collegamenti
 > Mondo: `INPUT[mondo][:mondo]`

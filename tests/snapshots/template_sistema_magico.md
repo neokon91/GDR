@@ -9,6 +9,8 @@
 ````tabs
 --- Lore
 
+> [!abstract] Scheda
+> Fonte del potere: `INPUT[fonte_potere][:fonte_potere]`
 
 > [!note]- Descrizione
 > Scrivi qui il contenuto lore vero della nota.

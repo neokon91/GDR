@@ -18,6 +18,9 @@ subtypes:
 scheda:
 - portata
 relazioni:
+- field: epoca
+  label: Epoca
+  category: epoca
 - field: luogo
   label: Luogo
   category: luogo
@@ -28,6 +31,10 @@ relazioni:
 - field: fazioni
   label: Fazioni
   category: fazione
+  multi: true
+- field: miti
+  label: Miti generati
+  category: mito
   multi: true
 creation:
   fields:

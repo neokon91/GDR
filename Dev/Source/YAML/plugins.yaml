@@ -59,6 +59,9 @@ metabind_inputs:
   clima: INPUT[inlineSelect(option(temperato), option(arido), option(tropicale), option(artico), option(montano), option(costiero), option(sotterraneo))]
   portata: INPUT[inlineSelect(option(locale), option(regionale), option(nazionale), option(globale))]
   allineamento: INPUT[inlineSelect(option(Legale Buono), option(Neutrale Buono), option(Caotico Buono), option(Legale Neutrale), option(Neutrale), option(Caotico Neutrale), option(Legale Malvagio), option(Neutrale Malvagio), option(Caotico Malvagio))]
+  stato_cosmico: INPUT[inlineSelect(option(attivo), option(dormiente), option(sigillato), option(disperso), option(distrutto))]
+  fonte_potere: INPUT[inlineSelect(option(arcana), option(divina), option(primordiale), option(patto), option(innata), option(elementale))]
+  accessibilita: INPUT[inlineSelect(option(aperto), option(soglie), option(rituale), option(sigillato))]
   testo: INPUT[text]
   testo_area: INPUT[textArea]
 # Icone cartella (Iconize): chiave = chiave di core.folders, valore = emoji.

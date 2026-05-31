@@ -41,6 +41,9 @@ relazioni:
   label: Habitat
   category: luogo
   multi: true
+- field: specie
+  label: Specie
+  category: specie
 creation:
   fields:
   - field: tipo

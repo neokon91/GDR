@@ -19,6 +19,10 @@ subtypes:
 - piano astrale
 - semipiano
 - aldilà
+# Campo query-abile: "tutti i piani accessibili solo per rituale".
+fields:
+  accessibilita: { label: Accessibilità, widget: accessibilita }
+scheda: [accessibilita]
 relazioni:
 - field: leggi
   label: Leggi che lo governano

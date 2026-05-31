@@ -111,3 +111,32 @@ await views.renderAxesCompare(container, app, dv, page);
 
 La logica vive in `z.automazioni/views.js` (radar SVG, niente plugin grafici): se la
 aggiorni, tutti i blocchi si aggiornano senza ricreare le note.
+
+## 11. Tassonomia: quale categoria quando
+Le categorie sono stratificate dal metafisico al tavolo. Quando non sei sicuro su quale
+usare, queste sono le distinzioni che contano:
+
+**Strato cosmico (il "perché" del mondo)**
+- **Cosmologia** — il quadro d'insieme/concetto cosmico generale (usala come panoramica).
+- **Legge fondamentale** — un principio-polarità che regola la realtà (Vita↔Morte, Forma↔Distorsione).
+- **Dominio** — una sfera ontologica che *connette* leggi, magie, entità e piani (il nodo-hub).
+- **Entità primordiale** — un essere *pre-divino* che incarna una legge; le divinità ne discendono.
+- **Divinità** — un'entità *venerata*, attiva nel culto (distinta dalla primordiale, che è cosmica).
+- **Piano** — un livello di realtà con proprie leggi e abitanti (≠ Luogo, che è nel mondo materiale).
+- **Sistema magico** — *come* funziona la magia (fonte/metodo/costo); ≠ Incantesimo (l'effetto singolo).
+- **Mito** / **Profezia** — un racconto/leggenda · un presagio con condizioni d'avveramento.
+
+**Strato sociopolitico (chi comanda / chi si aggrega)** — il cluster più confondibile:
+- **Cultura** — un popolo e i suoi valori/lingua/riti (l'identità condivisa, non l'organizzazione).
+- **Regno** — un'entità *politica con territorio e sovranità* (sopra le fazioni).
+- **Fazione** — un *gruppo d'interesse* con un'agenda (gilda, casata, cospirazione, esercito).
+- **Istituzione** — un *corpo formale* duraturo (accademia, ordine, corte, tribunale).
+- **Culto** — una *religione organizzata* (clero, dottrina, riti); venera una o più Divinità.
+
+**Altri confini utili**
+- **Luogo** è il centro di gravità: quasi tutto vi si collega. Un **Piano** non è un Luogo.
+- **Creatura** = essere del mondo (lore + statblock); **Specie** = ascendenza/razza (sistema 5.5e).
+- **Evento** accade nel tempo (legalo a un'**Epoca**); diventando leggenda genera un **Mito**.
+
+Tutte le categorie hanno il tab *Collegamenti* con relazioni *tipizzate*: usalo per
+intrecciarle (es. un Regno → le sue Istituzioni e Fazioni; una Divinità → i suoi Culti).

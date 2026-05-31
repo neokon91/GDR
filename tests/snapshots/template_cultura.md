@@ -109,6 +109,7 @@ await views.renderAxesRadar(container, app, page);
 > [!example] Relazioni
 > **Regioni**: `INPUT[inlineListSuggester(optionQuery("Mondi/Luoghi"), useLinks(partial), allowOther):regioni]`
 > **Lingua**: `INPUT[suggester(optionQuery("Mondi/Lingue"), useLinks(partial), allowOther):lingua]`
+> **Istituzioni**: `INPUT[inlineListSuggester(optionQuery("Mondi/Istituzioni"), useLinks(partial), allowOther):istituzioni]`
 
 > [!example] Collegamenti
 > Mondo: `INPUT[mondo][:mondo]`

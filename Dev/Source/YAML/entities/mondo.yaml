@@ -14,6 +14,22 @@ templates:
   primary: true
 subtypes:
 - mondo
+relazioni:
+- field: cosmologia
+  label: Cosmologia
+  category: cosmologia
+- field: sistemi_magici
+  label: Sistemi magici
+  category: sistema_magico
+  multi: true
+- field: regni
+  label: Regni
+  category: regno
+  multi: true
+- field: culture
+  label: Culture
+  category: cultura
+  multi: true
 scheda:
 - scala
 - genere

@@ -9,6 +9,8 @@
 ````tabs
 --- Lore
 
+> [!abstract] Scheda
+> Poli: `INPUT[text:poli]`
 
 > [!note]- Descrizione
 > Scrivi qui il contenuto lore vero della nota.

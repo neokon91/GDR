@@ -21,6 +21,9 @@
 
 --- Collegamenti
 
+> [!example] Relazioni
+> **Posizione**: `INPUT[suggester(optionQuery("Mondi/Luoghi"), useLinks(partial), allowOther):luogo]`
+> **Proprietario**: `INPUT[suggester(optionQuery("Mondi/Personaggi"), useLinks(partial), allowOther):proprietario]`
 
 > [!example] Collegamenti
 > Mondo: `INPUT[mondo][:mondo]`

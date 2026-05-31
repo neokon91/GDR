@@ -24,6 +24,10 @@ relazioni:
 - field: lingua
   label: Lingua
   category: lingua
+- field: istituzioni
+  label: Istituzioni
+  category: istituzione
+  multi: true
 creation:
   fields:
   - field: tipo

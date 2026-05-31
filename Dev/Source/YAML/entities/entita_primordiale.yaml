@@ -18,6 +18,10 @@ subtypes:
 - entità del vuoto
 - aspetto incarnato
 - dormiente
+# Campi query-abili (stato nel cosmo + allineamento): "tutte le primordiali dormienti".
+fields:
+  stato_cosmico: { label: Stato, widget: stato_cosmico }
+scheda: [stato_cosmico, allineamento]
 relazioni:
 - field: legge
   label: Legge incarnata

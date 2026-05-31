@@ -9,6 +9,8 @@
 ````tabs
 --- Lore
 
+> [!abstract] Scheda
+> Accessibilità: `INPUT[accessibilita][:accessibilita]`
 
 > [!note]- Descrizione
 > Scrivi qui il contenuto lore vero della nota.

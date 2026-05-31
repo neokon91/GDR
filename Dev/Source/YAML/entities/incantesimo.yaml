@@ -21,6 +21,10 @@ subtypes:
 - invocazione
 - necromanzia
 - trasmutazione
+relazioni:
+- field: sistema_magico
+  label: Sistema magico
+  category: sistema_magico
 scheda:
 - livello
 - tempo_lancio

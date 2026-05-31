@@ -24,6 +24,10 @@ relazioni:
 - field: origine
   label: Origine primordiale
   category: entita_primordiale
+- field: culti
+  label: Culti
+  category: culto
+  multi: true
 scheda:
 - dominio
 - allineamento

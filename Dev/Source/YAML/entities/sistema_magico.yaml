@@ -18,6 +18,10 @@ subtypes:
 - arte proibita
 - dono innato
 - tecnica rituale
+# Campo query-abile: "tutti i sistemi a fonte divina".
+fields:
+  fonte_potere: { label: Fonte del potere, widget: fonte_potere }
+scheda: [fonte_potere]
 relazioni:
 - field: leggi
   label: Leggi su cui poggia

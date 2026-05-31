@@ -86,6 +86,7 @@ await views.renderAxesRadar(container, app, page);
 > [!example] Relazioni
 > **Domini cosmici**: `INPUT[inlineListSuggester(optionQuery("Mondi/Domini"), useLinks(partial), allowOther):domini]`
 > **Origine primordiale**: `INPUT[suggester(optionQuery("Mondi/Primordiali"), useLinks(partial), allowOther):origine]`
+> **Culti**: `INPUT[inlineListSuggester(optionQuery("Mondi/Culti"), useLinks(partial), allowOther):culti]`
 
 > [!example] Collegamenti
 > Mondo: `INPUT[mondo][:mondo]`

@@ -15,6 +15,10 @@ subtypes:
 - polarità
 - principio assoluto
 - vincolo cosmico
+# Campo query-abile: i due poli della legge (es. "Vita ↔ Morte").
+fields:
+  poli: { label: Poli, widget: text }
+scheda: [poli]
 relazioni:
 - field: dominio
   label: Dominio che la esprime

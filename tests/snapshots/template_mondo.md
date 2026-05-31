@@ -117,6 +117,11 @@ await views.renderAxesRadar(container, app, page);
 
 --- Collegamenti
 
+> [!example] Relazioni
+> **Cosmologia**: `INPUT[suggester(optionQuery("Mondi/Cosmologia"), useLinks(partial), allowOther):cosmologia]`
+> **Sistemi magici**: `INPUT[inlineListSuggester(optionQuery("Mondi/Magia"), useLinks(partial), allowOther):sistemi_magici]`
+> **Regni**: `INPUT[inlineListSuggester(optionQuery("Mondi/Regni"), useLinks(partial), allowOther):regni]`
+> **Culture**: `INPUT[inlineListSuggester(optionQuery("Mondi/Culture"), useLinks(partial), allowOther):culture]`
 
 > [!example] Collegamenti
 > Connessioni: `INPUT[connessioni][:connessioni]`
