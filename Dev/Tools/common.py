@@ -194,7 +194,8 @@ def load_pages() -> list[dict[str, Any]]:
 def generated_note_names() -> list[str]:
     """Note generate: Home/LEGGIMI alla radice + una pagina-indice per voce di
     pages.yaml (in INDEX_DIR/). Cosi' clean() le rimuove senza nomi hard-coded."""
-    return [*GENERATED_NOTES, *(f"{INDEX_DIR}/{p['file']}.md" for p in load_pages())]
+    return [*GENERATED_NOTES, f"{INDEX_DIR}/Ponte Mondo-Sistema.md",
+            *(f"{INDEX_DIR}/{p['file']}.md" for p in load_pages())]
 
 
 def template_folder(core: dict[str, Any], category: str) -> str:
