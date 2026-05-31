@@ -53,13 +53,29 @@
 > [!abstract] Sistema
 > **Classe**: `VIEW[{classe} ?? "—"]` · **Specie**: `VIEW[{specie} ?? "—"]` · **Background**: `VIEW[{background} ?? "—"]`
 >
-> **Taglia**: `VIEW[{taglia} ?? "—"]` · **Velocità**: `VIEW[{velocita} ?? "—"]` m
+> **Taglia**: `VIEW[{taglia} ?? "—"]` · **Velocità**: `VIEW[{velocita} ?? "—"]` m · **Scurovisione**: `VIEW[{scurovisione} ?? "—"]`
 >
-> **TS competenti**: `VIEW[{ts_competenti} ?? "—"]`
+> **Armatura**: `VIEW[{armatura} ?? "—"]` · **Scudo**: `VIEW[{scudo} ?? "—"]`
 >
-> **Competenze**: `VIEW[{competenze_abilita} ?? "—"]`
+> **TS competenti**: `VIEW[{ts_competenti} ?? "—"]` · **Competenze (abilità)**: `VIEW[{competenze_abilita} ?? "—"]`
 >
-> **Talenti**: `VIEW[{talenti} ?? "—"]`
+> **Armi**: `VIEW[{competenze_armi} ?? "—"]` · **Armature**: `VIEW[{competenze_armature} ?? "—"]` · **Strumenti**: `VIEW[{competenze_strumenti} ?? "—"]`
+>
+> **Lingue**: `VIEW[{lingue} ?? "—"]`
+>
+> **Privilegi di classe**: `VIEW[{privilegi_classe} ?? "—"]` · **Talenti**: `VIEW[{talenti} ?? "—"]`
+>
+> **Tratti di specie**: `VIEW[{tratti_specie} ?? "—"]`
+
+> [!note]- Inventario
+> `VIEW[{inventario} ?? "—"]`
+
+> [!note]- Incantesimi (1º livello)
+> Incantatore: `VIEW[{incantatore} ?? "—"]` · slot di 1º: `VIEW[{slot_1} ?? "—"]`
+>
+> **Trucchetti**: `VIEW[{trucchetti} ?? "—"]`
+>
+> **Preparati (1º)**: `VIEW[{incantesimi} ?? "—"]`
 --- Lore
 
 > [!abstract] Scheda

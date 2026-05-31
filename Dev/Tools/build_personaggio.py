@@ -45,6 +45,63 @@ def _speed(value: Any) -> int:
     return int(match.group()) if match else 9
 
 
+def _int_or_none(value: Any) -> int | None:
+    s = str(value if value is not None else "").strip()
+    return int(s) if s.isdigit() else None
+
+
+def _armor_categories(prose: str) -> list[str]:
+    """Da 'Armature leggere, medie e pesanti; scudi.' -> categorie indossabili."""
+    norm = _norm(prose)
+    cats = [c for c, key in (("leggera", "legger"), ("media", "medi"),
+                             ("pesante", "pesant"), ("scudo", "scud")) if key in norm]
+    return cats
+
+
+def _equipment_options(prose: str) -> dict[str, str]:
+    """'A: ...; oppure B: ...' -> {'A': '...', 'B': '...'} (B opzionale)."""
+    text = re.sub(r"\s+", " ", str(prose or "")).strip()
+    if not text:
+        return {}
+    match = re.match(r"\s*A\s*:\s*(.*?)\s*(?:;?\s*oppure\s*|;\s*)B\s*:\s*(.*)", text, re.IGNORECASE)
+    if match:
+        return {"A": match.group(1).strip(" .;"), "B": match.group(2).strip(" .;")}
+    return {"A": text.strip(" .;")}
+
+
+def _level1(progressione: list[Any]) -> dict[str, Any]:
+    """Dati di 1º livello dalla tabella di progressione SRD (privilegi, trucchetti,
+    incantesimi preparati, slot per livello)."""
+    row = (progressione or [{}])[0] or {}
+    privilegi = [p.strip() for p in re.split(r",|;", str(row.get("Privilegi di classe", ""))) if p.strip()]
+    slot = {str(n): _int_or_none(row.get(f"Slot {n}")) for n in range(1, 10)}
+    slot = {n: v for n, v in slot.items() if v}
+    return {
+        "privilegi": privilegi,
+        "trucchetti": _int_or_none(row.get("Trucchetti")),
+        "incantesimi_preparati": _int_or_none(row.get("Incantesimi preparati")),
+        "slot": slot,
+    }
+
+
+def _spell_pool(liste: list[Any]) -> dict[str, list[str]]:
+    """Da liste_incantesimi -> {'trucchetti': [...], 'livello_1': [...]} (solo i
+    livelli rilevanti a PG di 1º livello: trucchetti + incantesimi di 1º)."""
+    trucchetti: list[str] = []
+    livello_1: list[str] = []
+    for lista in liste or []:
+        for riga in lista.get("righe", []) or []:
+            liv = _norm(riga.get("Livello"))
+            nome = str(riga.get("Incantesimo", "")).strip()
+            if not nome:
+                continue
+            if liv.startswith("trucch") and nome not in trucchetti:
+                trucchetti.append(nome)
+            elif liv == "1" and nome not in livello_1:
+                livello_1.append(nome)
+    return {"trucchetti": sorted(trucchetti), "livello_1": sorted(livello_1)}
+
+
 def parse_class_skills(prose: str, all_skill_ids: list[str], label_to_id: dict[str, str]) -> dict[str, Any]:
     """Da una frase SRD ('Due a scelta tra Atletica, Intimidire o ...') ricava
     {scelte: N, opzioni: [id...]}. Senza elenco esplicito -> tutte le 18 abilità."""
@@ -85,6 +142,8 @@ def build_personaggio_options(core: dict[str, Any] | None = None) -> dict[str, A
     classi: dict[str, Any] = {}
     for cls in load_srd("srd_5_2_1_classes.json"):
         comp = cls.get("competenze", {}) or {}
+        prog1 = _level1(cls.get("progressione"))
+        incantatore = bool(prog1["slot"] or prog1["trucchetti"])
         classi[cls["id"]] = {
             "label": cls.get("nome", cls["id"]),
             "dado_vita": _hit_die(cls.get("dado_vita")),
@@ -93,15 +152,26 @@ def build_personaggio_options(core: dict[str, Any] | None = None) -> dict[str, A
             "abilita": parse_class_skills(comp.get("abilita", ""), all_skill_ids, label_to_id),
             "competenze_armi": comp.get("armi", ""),
             "competenze_armature": comp.get("armature", ""),
+            "competenze_armature_cat": _armor_categories(comp.get("armature", "")),
+            "competenze_strumenti": comp.get("strumenti", ""),
+            "equipaggiamento": _equipment_options(cls.get("equipaggiamento_iniziale", "")),
+            "privilegi_l1": prog1["privilegi"],
+            "incantatore": incantatore,
+            "trucchetti_noti": prog1["trucchetti"],
+            "incantesimi_preparati": prog1["incantesimi_preparati"],
+            "slot_l1": prog1["slot"],
+            "incantesimi_pool": _spell_pool(cls.get("liste_incantesimi")) if incantatore else {},
         }
 
     specie: dict[str, Any] = {}
     for sp in load_srd("srd_5_2_1_species.json"):
+        tratti = sp.get("tratti_sintesi", "")
         specie[sp["id"]] = {
             "label": sp.get("nome", sp["id"]),
             "taglia": sp.get("taglia", ""),
             "velocita": _speed(sp.get("velocita")),
-            "tratti": sp.get("tratti_sintesi", ""),
+            "tratti": tratti,
+            "scurovisione": "scurovision" in _norm(tratti),
         }
 
     background: dict[str, Any] = {}
@@ -123,6 +193,8 @@ def build_personaggio_options(core: dict[str, Any] | None = None) -> dict[str, A
         "abilita": abilita,
         "generazione_caratteristiche": pg_rules.get("generazione_caratteristiche", {}),
         "aumento_background": pg_rules.get("aumento_background", {}),
+        "armature": pg_rules.get("armature", {}),
+        "lingue": pg_rules.get("lingue", {}),
         "classi": classi,
         "specie": specie,
         "background": background,

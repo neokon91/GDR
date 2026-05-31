@@ -128,9 +128,57 @@ async function scegliAbilitaClasse(tp, classe, giaCompetenti, abilita) {
     return scelte;
 }
 
+// Scelta multipla da un pool di stringhe (trucchetti, lingue...): n scelte
+// distinte. Il mock di test seleziona sempre la prima disponibile.
+async function scegliMulti(tp, titolo, pool, n) {
+    const scelte = [];
+    const disponibili = [...(pool || [])];
+    for (let i = 0; i < (n || 0) && disponibili.length > 0; i += 1) {
+        const v = await tp.system.suggester(disponibili, disponibili, false, `${titolo} (${i + 1}/${n})`);
+        if (v == null) break;
+        scelte.push(v);
+        disponibili.splice(disponibili.indexOf(v), 1);
+    }
+    return scelte;
+}
+
+// Armatura indossata: filtra per le categorie consentite dalla classe (sempre
+// 'nessuna' disponibile). Ritorna {id, ca_base, dex_max, categoria}.
+async function scegliArmatura(tp, classe, opt) {
+    const tabella = opt.armature || {};
+    const consentite = new Set(classe.competenze_armature_cat || []);
+    const ids = Object.keys(tabella).filter(id =>
+        tabella[id].categoria === "nessuna" || consentite.has(tabella[id].categoria));
+    if (ids.length === 0) return { id: "nessuna", ca_base: 10, dex_max: null };
+    const id = await tp.system.suggester(ids.map(i => tabella[i].label || i), ids, false, "Armatura indossata");
+    return { id, ...(tabella[id] || { ca_base: 10, dex_max: null }) };
+}
+
+// CA = ca_base + min(mod DES, dex_max) + scudo. dex_max null = nessun limite.
+function calcolaCA(armatura, modDes, scudo) {
+    const cap = armatura.dex_max == null ? modDes : Math.min(modDes, armatura.dex_max);
+    return (armatura.ca_base || 10) + cap + (scudo ? 2 : 0);
+}
+
+// Incantesimi a PG di 1º livello: trucchetti (trucchetti_noti) + incantesimi di
+// 1º (incantesimi_preparati) dai pool della classe. Niente per i non-incantatori.
+async function scegliIncantesimi(tp, classe) {
+    if (!classe.incantatore) return { trucchetti: [], preparati: [], slot: classe.slot_l1 || {} };
+    const pool = classe.incantesimi_pool || {};
+    const trucchetti = await scegliMulti(tp, "Trucchetto", pool.trucchetti || [], classe.trucchetti_noti || 0);
+    const preparati = await scegliMulti(tp, "Incantesimo di 1º livello", pool.livello_1 || [], classe.incantesimi_preparati || 0);
+    return { trucchetti, preparati, slot: classe.slot_l1 || {} };
+}
+
 function listaYaml(items) {
     if (!items || items.length === 0) return " []";
     return `\n${items.map(x => `  - ${x}`).join("\n")}`;
+}
+
+// Variante quotata per liste di testo libero (lingue, incantesimi, inventario).
+function listaYamlQ(items) {
+    if (!items || items.length === 0) return " []";
+    return `\n${items.map(x => `  - ${JSON.stringify(String(x))}`).join("\n")}`;
 }
 
 // Frontmatter con ID stabili. Competenze come FLAG 0/1 (ts_<stat>, prof_<skill>):
@@ -140,6 +188,7 @@ function frontmatter(pg) {
     const righeCar = pg.ordine_caratteristiche.map(s => `${s}: ${car[s]}`).join("\n");
     const righeTs = pg.ordine_caratteristiche.map(s => `ts_${s}: ${pg.ts_competenti.includes(s) ? 1 : 0}`).join("\n");
     const righeAb = pg.abilita_ids.map(id => `prof_${id}: ${pg.competenze_abilita.includes(id) ? 1 : 0}`).join("\n");
+    const slotRighe = Object.entries(pg.slot || {}).map(([n, q]) => `slot_${n}: ${q}`).join("\n");
     return `---
 nome: ${JSON.stringify(String(pg.nome ?? ""))}
 categoria: personaggio
@@ -151,13 +200,26 @@ livello: 1
 competenza: 2
 taglia: ${pg.taglia}
 velocita: ${pg.velocita}
+scurovisione: ${pg.scurovisione ? "true" : "false"}
 ca: ${pg.ca}
 pf: ${pg.pf}
 pf_max: ${pg.pf}
+armatura: ${pg.armatura}
+scudo: ${pg.scudo ? "true" : "false"}
 ${righeCar}
 ${righeTs}
 ${righeAb}
-talenti:${listaYaml(pg.talenti)}
+tratti_specie: ${JSON.stringify(String(pg.tratti_specie ?? ""))}
+competenze_armi: ${JSON.stringify(String(pg.competenze_armi ?? ""))}
+competenze_armature: ${JSON.stringify(String(pg.competenze_armature ?? ""))}
+competenze_strumenti: ${JSON.stringify(String(pg.competenze_strumenti ?? ""))}
+lingue:${listaYamlQ(pg.lingue)}
+privilegi_classe:${listaYamlQ(pg.privilegi_classe)}
+inventario:${listaYamlQ(pg.inventario)}
+incantatore: ${pg.incantatore ? "true" : "false"}
+trucchetti:${listaYamlQ(pg.trucchetti)}
+incantesimi:${listaYamlQ(pg.incantesimi)}
+${slotRighe ? slotRighe + "\n" : ""}talenti:${listaYaml(pg.talenti)}
 stato: bozza
 ---
 `;
@@ -184,11 +246,40 @@ async function crea_pg(tp) {
     const abilitaClasse = await scegliAbilitaClasse(tp, classe, abilitaBackground, opt.abilita || {});
     const competenzeAbilita = Array.from(new Set([...abilitaBackground, ...abilitaClasse]));
 
+    // Equipaggiamento iniziale (scelta SRD A/B) -> inventario.
+    const equip = classe.equipaggiamento || {};
+    const equipKeys = Object.keys(equip);
+    let inventario = [];
+    if (equipKeys.length) {
+        const scelto = equipKeys.length > 1
+            ? await tp.system.suggester(equipKeys.map(k => `${k}: ${equip[k]}`), equipKeys, false, "Equipaggiamento iniziale")
+            : equipKeys[0];
+        inventario = String(equip[scelto] || "").split(",").map(s => s.trim()).filter(Boolean);
+    }
+
+    // Armatura + scudo -> CA (SRD: ca_base + min(modDES, dex_max) + scudo).
+    const armatura = await scegliArmatura(tp, classe, opt);
+    let scudo = false;
+    if ((classe.competenze_armature_cat || []).includes("scudo")) {
+        scudo = !!(await tp.system.suggester(["Sì", "No"], [true, false], false, "Imbraccia uno scudo?"));
+    }
+    const ca = calcolaCA(armatura, mod(caratteristiche.destrezza), scudo);
+
+    // Lingue (2024): Comune + N a scelta dal background d'origine.
+    const lingueCfg = opt.lingue || {};
+    const comune = lingueCfg.comune || "Comune";
+    const standard = (lingueCfg.standard || []).filter(l => l !== comune);
+    const lingue = [comune, ...await scegliMulti(tp, "Lingua", standard, lingueCfg.numero_a_scelta || 0)];
+
+    // Incantesimi di 1º livello (solo incantatori).
+    const magia = await scegliIncantesimi(tp, classe);
+
     const pf = Math.max(1, (classe.dado_vita || 8) + mod(caratteristiche.costituzione));
-    const ca = 10 + mod(caratteristiche.destrezza);
     const talentoOrigine = background.talento_origine
         ? String(background.talento_origine).trim().toLowerCase().replace(/[^a-z0-9]+/g, "_").replace(/^_+|_+$/g, "")
         : "";
+    const strumenti = [classe.competenze_strumenti, background.strumenti]
+        .map(s => String(s || "").trim().replace(/\.$/, "")).filter(Boolean).join("; ");
 
     return frontmatter({
         nome,
@@ -197,13 +288,27 @@ async function crea_pg(tp) {
         background: backgroundId,
         taglia: specie.taglia || "",
         velocita: specie.velocita || 9,
+        scurovisione: !!specie.scurovisione,
+        tratti_specie: specie.tratti || "",
         ca,
         pf,
+        armatura: armatura.id || "nessuna",
+        scudo,
         caratteristiche,
         ordine_caratteristiche: opt.caratteristiche,
         abilita_ids: Object.keys(opt.abilita || {}),
         ts_competenti: classe.tiri_salvezza || [],
         competenze_abilita: competenzeAbilita,
+        competenze_armi: classe.competenze_armi || "",
+        competenze_armature: classe.competenze_armature || "",
+        competenze_strumenti: strumenti,
+        lingue,
+        privilegi_classe: classe.privilegi_l1 || [],
+        inventario,
+        incantatore: !!classe.incantatore,
+        trucchetti: magia.trucchetti,
+        incantesimi: magia.preparati,
+        slot: magia.slot,
         talenti: talentoOrigine ? [talentoOrigine] : [],
     });
 }

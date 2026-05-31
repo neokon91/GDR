@@ -26,3 +26,28 @@ generazione_caratteristiche:
 # Schemi di aumento caratteristiche del background (2024): l'utente sceglie.
 aumento_background:
   schemi: ["+2/+1", "+1/+1/+1"]
+
+# Armature SRD 5.2.1 (per il calcolo CA). ca_base = CA dell'armatura; dex_max =
+# massimo bonus di Destrezza applicabile (null = nessun limite; 0 = nessun bonus).
+# La scheda calcola: CA = ca_base + min(mod_DES, dex_max) + (2 se scudo). SRD JSON
+# tiene le armature in prosa nell'equipaggiamento → tabella curata qui.
+armature:
+  nessuna:        { label: "Nessuna (senza armatura)", categoria: nessuna, ca_base: 10, dex_max: null }
+  imbottita:      { label: "Imbottita",                categoria: leggera, ca_base: 11, dex_max: null }
+  cuoio:          { label: "Cuoio",                    categoria: leggera, ca_base: 11, dex_max: null }
+  cuoio_borchiato: { label: "Cuoio borchiato",         categoria: leggera, ca_base: 12, dex_max: null }
+  pelle:          { label: "Pelle",                    categoria: media,   ca_base: 12, dex_max: 2 }
+  camicia_maglia: { label: "Camicia di maglia",        categoria: media,   ca_base: 13, dex_max: 2 }
+  corazza_scaglie: { label: "Corazza a scaglie",       categoria: media,   ca_base: 14, dex_max: 2 }
+  corazza:        { label: "Corazza di piastre",       categoria: media,   ca_base: 14, dex_max: 2 }
+  mezza_armatura: { label: "Mezza armatura",           categoria: media,   ca_base: 15, dex_max: 2 }
+  cotta_maglia:   { label: "Cotta di maglia",          categoria: pesante, ca_base: 16, dex_max: 0 }
+  corazza_piastre: { label: "Corazza di piastre pesante", categoria: pesante, ca_base: 18, dex_max: 0 }
+  piastre:        { label: "Armatura completa",        categoria: pesante, ca_base: 18, dex_max: 0 }
+
+# Lingue (2024): ogni PG conosce il Comune + N lingue standard a scelta dal
+# background d'origine. La scelta è guidata dal wizard; elenco curato (SRD).
+lingue:
+  comune: Comune
+  numero_a_scelta: 2
+  standard: [Comune, Nanico, Elfico, Gigante, Gnomesco, Goblin, Halfling, Orchesco, Draconico, Silvano, Abissale, Celestiale, Infernale, Profondo, Primordiale, Sottocomune]

@@ -15,13 +15,29 @@
 > [!abstract] Sistema
 > **Classe**: {{ m.view('classe') }} · **Specie**: {{ m.view('specie') }} · **Background**: {{ m.view('background') }}
 >
-> **Taglia**: {{ m.view('taglia') }} · **Velocità**: {{ m.view('velocita') }} m
+> **Taglia**: {{ m.view('taglia') }} · **Velocità**: {{ m.view('velocita') }} m · **Scurovisione**: {{ m.view('scurovisione') }}
 >
-> **TS competenti**: {{ m.view('ts_competenti') }}
+> **Armatura**: {{ m.view('armatura') }} · **Scudo**: {{ m.view('scudo') }}
 >
-> **Competenze**: {{ m.view('competenze_abilita') }}
+> **TS competenti**: {{ m.view('ts_competenti') }} · **Competenze (abilità)**: {{ m.view('competenze_abilita') }}
 >
-> **Talenti**: {{ m.view('talenti') }}
+> **Armi**: {{ m.view('competenze_armi') }} · **Armature**: {{ m.view('competenze_armature') }} · **Strumenti**: {{ m.view('competenze_strumenti') }}
+>
+> **Lingue**: {{ m.view('lingue') }}
+>
+> **Privilegi di classe**: {{ m.view('privilegi_classe') }} · **Talenti**: {{ m.view('talenti') }}
+>
+> **Tratti di specie**: {{ m.view('tratti_specie') }}
+
+> [!note]- Inventario
+> {{ m.view('inventario') }}
+
+> [!note]- Incantesimi (1º livello)
+> Incantatore: {{ m.view('incantatore') }} · slot di 1º: {{ m.view('slot_1') }}
+>
+> **Trucchetti**: {{ m.view('trucchetti') }}
+>
+> **Preparati (1º)**: {{ m.view('incantesimi') }}
 --- Lore
 
 {{ m.scheda(template.category) }}

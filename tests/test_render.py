@@ -31,11 +31,35 @@ def _snapshot(name: str, content: str) -> str:
 _PG_HARNESS = """
 const fs = require("fs");
 const data = fs.readFileSync(process.argv[2], "utf8");
+const wantClass = process.argv[4] || null;
 global.app = { vault: { adapter: { read: async () => data } } };
-const tp = { system: { prompt: async () => "Test PG", suggester: async (l, v) => v[0] },
-             file: { move: async () => {} } };
+const tp = { system: {
+    prompt: async () => "Test PG",
+    suggester: async (l, v, _f, title) => {
+        if (wantClass && title && String(title).startsWith("Classe")) {
+            const i = v.indexOf(wantClass); return v[i >= 0 ? i : 0];
+        }
+        return v[0];
+    } },
+    file: { move: async () => {} } };
 require(process.argv[3])(tp).then(fm => process.stdout.write(fm));
 """
+
+
+def _run_crea_pg(tmp_path, classe=None):
+    """Esegue crea_pg.js col mock Templater; ritorna (opzioni, frontmatter dict)."""
+    import build_personaggio
+    opt = build_personaggio.build_personaggio_options(CORE)
+    pj = tmp_path / "personaggio.json"
+    pj.write_text(json.dumps(opt, ensure_ascii=False), encoding="utf-8")
+    harness = tmp_path / "harness.js"
+    harness.write_text(_PG_HARNESS, encoding="utf-8")
+    args = ["node", str(harness), str(pj), str(render.JS_DIR / "crea_pg.js")]
+    if classe:
+        args.append(classe)
+    res = subprocess.run(args, capture_output=True, text=True)
+    assert res.returncode == 0, res.stderr
+    return opt, yaml.safe_load(res.stdout.split("---")[1])
 
 CORE = render.load_core()
 PLUGINS = render.load_yaml("plugins.yaml")
@@ -202,18 +226,10 @@ def test_personaggio_options():
 
 @pytest.mark.skipif(not shutil.which("node") or not render.SRD_DIR.is_dir(), reason="node/SRD assenti")
 def test_crea_personaggio_e2e(tmp_path):
-    """crea_personaggio.js applica le regole 5.5e end-to-end (mock Templater):
-    frontmatter YAML valido, PF=dado_vita+mod COS, TS della classe, 18 flag prof."""
-    import build_personaggio
-    opt = build_personaggio.build_personaggio_options(CORE)
-    pj = tmp_path / "personaggio.json"
-    pj.write_text(json.dumps(opt, ensure_ascii=False), encoding="utf-8")
-    harness = tmp_path / "harness.js"
-    harness.write_text(_PG_HARNESS, encoding="utf-8")
-    res = subprocess.run(["node", str(harness), str(pj), str(render.JS_DIR / "crea_pg.js")],
-                         capture_output=True, text=True)
-    assert res.returncode == 0, res.stderr
-    fm = yaml.safe_load(res.stdout.split("---")[1])
+    """crea_pg.js applica le regole 5.5e end-to-end (mock Templater): frontmatter
+    YAML valido, PF=dado_vita+mod COS, TS della classe, 18 flag prof + i dati SRD
+    di 1º livello (specie/competenze/lingue/privilegi/CA da armatura)."""
+    opt, fm = _run_crea_pg(tmp_path)
     assert fm["categoria"] == "personaggio" and fm["tipo"] == "pg"
     assert fm["classe"] in opt["classi"]
     classe = opt["classi"][fm["classe"]]
@@ -221,6 +237,28 @@ def test_crea_personaggio_e2e(tmp_path):
     for stat in classe["tiri_salvezza"]:
         assert fm[f"ts_{stat}"] == 1
     assert sum(1 for k in fm if k.startswith("prof_")) == 18
+    # Ottimizzazioni SRD L1: tratti specie, competenze, lingue, privilegi, CA armatura.
+    assert isinstance(fm["scurovisione"], bool)
+    assert fm["lingue"][0] == opt["lingue"]["comune"]
+    assert fm["privilegi_classe"] == classe["privilegi_l1"]
+    assert fm["competenze_armi"] == classe["competenze_armi"]
+    arm = opt["armature"][fm["armatura"]]
+    mod_des = (fm["destrezza"] - 10) // 2
+    cap = mod_des if arm["dex_max"] is None else min(mod_des, arm["dex_max"])
+    assert fm["ca"] == arm["ca_base"] + cap + (2 if fm["scudo"] else 0)
+
+
+def test_crea_personaggio_caster_e2e(tmp_path):
+    """Per un incantatore (mago) il wizard applica trucchetti/incantesimi/slot di
+    1º livello dalla progressione e dai pool SRD della classe."""
+    opt, fm = _run_crea_pg(tmp_path, classe="mago")
+    mago = opt["classi"]["mago"]
+    assert fm["classe"] == "mago" and fm["incantatore"] is True
+    assert len(fm["trucchetti"]) == mago["trucchetti_noti"]
+    assert len(fm["incantesimi"]) == mago["incantesimi_preparati"]
+    assert fm["slot_1"] == mago["slot_l1"]["1"]
+    assert set(fm["trucchetti"]).issubset(set(mago["incantesimi_pool"]["trucchetti"]))
+    assert set(fm["incantesimi"]).issubset(set(mago["incantesimi_pool"]["livello_1"]))
 
 
 @pytest.mark.skipif(not render.SRD_DIR.is_dir(), reason="SRD non vendorizzata")
