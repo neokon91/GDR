@@ -1,6 +1,12 @@
 id: gdr_core
 version: 0.1.0
-purpose: Fonte minima per ontologia, campi e cartelle del vault.
+purpose: >-
+  Ontologia del core loop di worldbuilding: cartelle, categorie di lore,
+  superficie giocabile (tavolo), assi tematici, relazioni e wizard di lore.
+  È il piano "mondo" del vault; lo schema delle entità di sistema 5.5e vive in
+  system.yaml, che render.py FONDE qui (deep_merge) in un unico 'core'.
+  Confine (validato da check): qui mai scheda/statblock/caratteristiche né le
+  categorie di sistema (classe/specie/oggetto/incantesimo/...).
 folders:
   mondo: Mondi
   cosmologia: Mondi/Cosmologia
@@ -12,24 +18,13 @@ folders:
   personaggio: Mondi/Personaggi
   creatura: Mondi/Creature
   incontro: Mondi/Incontri
-  oggetto: Mondi/Oggetti
-  incantesimo: Mondi/Incantesimi
-  regola: Mondi/Regole
   sessione: Mondi/Sessioni
-  # Sistema 5.5e — riferimento e homebrew
-  insidia: Mondi/Insidie
-  classe: Mondi/Classi
-  sottoclasse: Mondi/Sottoclassi
-  specie: Mondi/Specie
-  background: Mondi/Background
-  talento: Mondi/Talenti
-  divinita: Mondi/Divinita
-  bastione: Mondi/Bastioni
   inbox: Inbox
 # Registro campi: unica fonte per label e widget dei campi editabili nelle note.
 # I template Jinja li emettono via la macro field('<id>') (vedi Jinja/_macros.j2).
 # widget: 'text' -> INPUT[text:<id>]; altrimenti nome di un template Meta Bind
 # dichiarato in plugins.yaml:metabind_inputs -> INPUT[<widget>][:<id>].
+# I campi di sistema 5.5e (rarità, livello, dado_vita, ...) sono in system.fields.
 fields:
   tipo:           { label: Tipo,                 widget: text }
   stato:          { label: Stato,                widget: stato }
@@ -45,40 +40,7 @@ fields:
   apertura:       { label: Apertura,             widget: text }
   scena_corrente: { label: Scena corrente,       widget: text }
   quando:         { label: Quando,               widget: text }
-  # Sistema 5.5e — oggetti magici
-  rarita:         { label: Rarità,               widget: rarita }
-  sintonia:       { label: Sintonia,             widget: text }
-  # Sistema 5.5e — incantesimi
-  livello:        { label: Livello,              widget: number }
-  tempo_lancio:   { label: Tempo di lancio,      widget: text }
-  gittata:        { label: Gittata,              widget: text }
-  componenti:     { label: Componenti,           widget: text }
-  durata:         { label: Durata,               widget: text }
-  classi:         { label: Classi,               widget: text }
-  # Sistema 5.5e — insidie (trappole/pericoli)
-  tier:           { label: Livello di gioco,     widget: tier }
-  minaccia:       { label: Minaccia,             widget: minaccia }
-  prova:          { label: Prova,                widget: text }
-  danno:          { label: Danno / Effetto,      widget: text }
-  # Sistema 5.5e — classe homebrew
-  dado_vita:      { label: Dado vita,            widget: dado_vita }
-  car_primaria:   { label: Caratteristica primaria, widget: text }
-  ts_competenze:  { label: TS competenti,        widget: text }
-  incantesimi:    { label: Incantesimi,          widget: incantesimi }
-  # Sistema 5.5e — specie
-  taglia:         { label: Taglia,               widget: taglia }
-  velocita:       { label: Velocità,             widget: text }
-  tipo_creatura:  { label: Tipo di creatura,     widget: text }
-  lignaggio:      { label: Lignaggio,            widget: text }
-  # Sistema 5.5e — background / talento / divinità
-  car_background: { label: Caratteristiche,      widget: text }
-  strumento:      { label: Competenza in strumenti, widget: text }
-  talento_origine: { label: "Talento d'origine", widget: text }
-  prerequisito:   { label: Prerequisito,         widget: text }
-  ripetibile:     { label: Ripetibile,           widget: text }
-  dominio:        { label: Dominio,              widget: text }
   allineamento:   { label: Allineamento,         widget: allineamento }
-  simbolo:        { label: Simbolo,              widget: text }
   # Worldbuilding — campi strutturati di lore (mostrati da scheda(), tipizzati in fileClass)
   epoca:          { label: Epoca,                widget: text }
   scala:          { label: Scala,                widget: scala }
@@ -99,41 +61,6 @@ tavolo:
   - { field: gancio,        callout: gancio,  title: Gancio, fold: true }
   - { field: pressione,     callout: warning, title: Pressione }
 
-# Scheda di sistema: campi STRUTTURATI per categoria, mostrati dalla macro
-# scheda(categoria) come callout di dati (Meta Bind). Single source; i campi sono
-# in core.fields. È la controparte "regole 5.5e" della superficie giocabile.
-scheda:
-  # Lore (worldbuilding)
-  mondo:       [scala, genere, epoca, temi]
-  luogo:       [clima, popolazione]
-  fazione:     [portata, motto]
-  personaggio: [allineamento, pronomi, eta]
-  evento:      [portata]
-  # Sistema 5.5e
-  oggetto:     [rarita, sintonia]
-  incantesimo: [livello, tempo_lancio, gittata, componenti, durata, classi]
-  insidia:     [tier, minaccia, prova, danno]
-  classe:      [dado_vita, car_primaria, ts_competenze, incantesimi]
-  specie:      [taglia, velocita, tipo_creatura, lignaggio]
-  background:  [car_background, strumento, talento_origine]
-  talento:     [prerequisito, ripetibile]
-  divinita:    [dominio, allineamento, simbolo]
-
-# Statblock (Fantasy Statblocks): layout usato dal blocco ```statblock```.
-# Sostituisci col nome del layout installato (es. un layout 2024/5.5e).
-statblock:
-  layout: Basic 5e Layout
-
-# Caratteristiche 5e per la scheda PG (macro scheda_pg). id = chiave frontmatter
-# (INPUT[number]); il modificatore e' calcolato e SALVATO in mod_<id> (compute_into)
-# cosi' e' interrogabile da Dataview e dalle altre note.
-caratteristiche:
-  - { id: forza,        sigla: FOR }
-  - { id: destrezza,    sigla: DES }
-  - { id: costituzione, sigla: COS }
-  - { id: intelligenza, sigla: INT }
-  - { id: saggezza,     sigla: SAG }
-  - { id: carisma,      sigla: CAR }
 categories:
   mondo:
     folder: mondo
@@ -209,83 +136,10 @@ categories:
       - incontro
       - agguato
       - inseguimento
-  oggetto:
-    folder: oggetto
-    subtypes:
-      - arma
-      - armatura
-      - scudo
-      - oggetto meraviglioso
-      - strumento
-      - oggetto magico
-      - veleno
-      - tesoro
-      - veicolo o cavalcatura
-  incantesimo:
-    folder: incantesimo
-    subtypes:
-      - abiurazione
-      - ammaliamento
-      - divinazione
-      - evocazione
-      - illusione
-      - invocazione
-      - necromanzia
-      - trasmutazione
-  regola:
-    folder: regola
-    subtypes:
-      - regola della casa
-      - regola variante
   sessione:
     folder: sessione
     subtypes:
       - sessione
-  insidia:
-    folder: insidia
-    subtypes:
-      - trappola
-      - pericolo naturale
-      - effetto ambientale
-  classe:
-    folder: classe
-    subtypes:
-      - marziale
-      - incantatore
-      - mezzo incantatore
-      - esperto
-  sottoclasse:
-    folder: sottoclasse
-    subtypes:
-      - sottoclasse
-  specie:
-    folder: specie
-    subtypes:
-      - comune
-      - esotica
-      - mostruosa
-  background:
-    folder: background
-    subtypes:
-      - background
-  talento:
-    folder: talento
-    subtypes:
-      - origine
-      - generale
-      - stile di combattimento
-      - epico
-  divinita:
-    folder: divinita
-    subtypes:
-      - divinità maggiore
-      - divinità minore
-      - semidio
-      - pantheon
-  bastione:
-    folder: bastione
-    subtypes:
-      - bastione
   nota:
     folder: inbox
     subtypes:
@@ -301,6 +155,7 @@ states:
 # leggibile a colpo d'occhio e interrogabile da Dataview. Renderizzati dalla
 # macro carattere(categoria) come slider Meta Bind; il valore vive nel
 # frontmatter sotto l'id dell'asse. Single source dell'identita' tematica.
+# (oggetto è categoria di sistema ma ha comunque un "carattere" worldbuilding.)
 assi_tematici:
   mondo:
     - { id: civilta_natura,       sinistra: Civilta,    destra: Natura }
@@ -335,6 +190,7 @@ assi_tematici:
 # come suggester Meta Bind (singolo) o inlineListSuggester (multi). Si affiancano
 # a 'connessioni' (catch-all libero). Interrogabili da Dataview (es. alleati/rivali).
 #   { field, label, category (target), multi? }
+# Le relazioni delle entità di sistema (oggetto, sottoclasse) sono in system.relazioni.
 relazioni:
   personaggio:
     - { field: fazione,        label: Affiliazione,   category: fazione }
@@ -367,13 +223,8 @@ relazioni:
     - { field: creature,       label: Creature,       category: creatura, multi: true }
   creatura:
     - { field: habitat,        label: Habitat,        category: luogo, multi: true }
-  oggetto:
-    - { field: proprietario,   label: Proprietario,   category: personaggio }
-    - { field: dove,           label: Dove si trova,  category: luogo }
-  sottoclasse:
-    - { field: classe,         label: Classe,         category: classe }
 
-# Wizard di creazione per categoria (letto da create_entity.js).
+# Wizard di creazione per categoria (letto da create_entity.js dopo il merge).
 # Ogni domanda: { field, prompt, ... }
 #   from: subtypes  -> suggester sui subtypes della categoria
 #   from: notes, category: X, link: true  -> suggester sulle note esistenti di
@@ -382,6 +233,7 @@ relazioni:
 #   (default)       -> testo libero
 # fields -> frontmatter; body -> sezioni markdown pre-compilate nel corpo
 #   (heading: "Titolo" come ## ; oppure callout: quote/warning/... title/fold)
+# I wizard delle entità di sistema 5.5e sono in system.creation.
 creation:
   personaggio:
     fields:
@@ -479,31 +331,6 @@ creation:
       - { field: suono, prompt: "Come suona", heading: "Suono" }
       - { field: scrittura, prompt: "Sistema di scrittura / alfabeto", heading: "Scrittura" }
       - { field: lessico, prompt: "Parole/frasi chiave usabili al tavolo", heading: "Lessico" }
-  oggetto:
-    fields:
-      - { field: tipo, prompt: "Tipo di oggetto", from: subtypes, required: true }
-      - { field: mondo, prompt: "Mondo (opzionale)", from: notes, category: mondo, link: true, optional: true }
-      - { field: rarita, prompt: "Rarità (se magico)", from: list, options: [comune, non comune, raro, molto raro, leggendario, artefatto], optional: true }
-      - { field: sintonia, prompt: "Sintonia richiesta? (es. sì, da un druido)", optional: true }
-    body:
-      - { field: descrizione_oggetto, prompt: "Aspetto e fattura", heading: "Aspetto" }
-      - { field: effetto, prompt: "Cosa fa: regole/effetto al tavolo", heading: "Effetto" }
-      - { field: provenienza, prompt: "Costo, come si ottiene", heading: "Provenienza" }
-  incantesimo:
-    fields:
-      - { field: tipo, prompt: "Scuola di magia", from: subtypes, required: true }
-      - { field: mondo, prompt: "Mondo (opzionale)", from: notes, category: mondo, link: true, optional: true }
-    body:
-      - { field: effetto, prompt: "Effetto dell'incantesimo", heading: "Effetto" }
-      - { field: a_livello_superiore, prompt: "Ai livelli superiori", heading: "Ai livelli superiori" }
-  regola:
-    fields:
-      - { field: tipo, prompt: "Tipo di regola", from: subtypes, required: true }
-      - { field: mondo, prompt: "Mondo (opzionale)", from: notes, category: mondo, link: true, optional: true }
-    body:
-      - { field: cosa_regola, prompt: "Cosa regola / cosa fa", heading: "Cosa" }
-      - { field: come_funziona, prompt: "Come funziona al tavolo", heading: "Come" }
-      - { field: eccezioni, prompt: "Eccezioni e casi limite", heading: "Eccezioni" }
   creatura:
     fields:
       - { field: tipo, prompt: "Tipo di creatura (5e)", from: subtypes, required: true }
@@ -511,57 +338,6 @@ creation:
     body:
       - { field: ecologia, prompt: "Ecologia: dove vive, abitudini", heading: "Ecologia" }
       - { field: tattiche, prompt: "Tattiche in combattimento", heading: "Tattiche" }
-  # --- Sistema 5.5e: i campi strutturati (scheda) si compilano nei tab; il
-  #     wizard cattura tipo/relazioni e il corpo discorsivo. ---
-  insidia:
-    fields:
-      - { field: tipo, prompt: "Tipo di insidia", from: subtypes, required: true }
-      - { field: mondo, prompt: "Mondo (opzionale)", from: notes, category: mondo, link: true, optional: true }
-    body:
-      - { field: innesco, prompt: "Innesco: cosa la attiva", heading: "Innesco" }
-      - { field: effetto, prompt: "Effetto: cosa succede (TxC/CD + danno)", heading: "Effetto" }
-      - { field: contromisure, prompt: "Contromisure: individuare / disinnescare", heading: "Contromisure" }
-  classe:
-    fields:
-      - { field: tipo, prompt: "Tipo di classe", from: subtypes, required: true }
-    body:
-      - { field: descrizione, prompt: "Concept della classe", heading: "Concept" }
-      - { field: progressione, prompt: "Privilegi salienti per livello", heading: "Progressione" }
-  sottoclasse:
-    fields:
-      - { field: classe, prompt: "Classe di appartenenza", from: notes, category: classe, link: true, required: true }
-    body:
-      - { field: privilegi, prompt: "Privilegi (livelli 3/6/10/14)", heading: "Privilegi" }
-  specie:
-    fields:
-      - { field: tipo, prompt: "Tipo di specie", from: subtypes, required: true }
-    body:
-      - { field: tratti, prompt: "Tratti di specie", heading: "Tratti" }
-  background:
-    fields:
-      - { field: tipo, prompt: "Tipo", from: subtypes, required: true }
-    body:
-      - { field: descrizione, prompt: "Chi era prima dell'avventura", heading: "Descrizione" }
-      - { field: equipaggiamento, prompt: "Equipaggiamento iniziale", heading: "Equipaggiamento" }
-  talento:
-    fields:
-      - { field: tipo, prompt: "Categoria del talento", from: subtypes, required: true }
-    body:
-      - { field: benefici, prompt: "Benefici del talento", heading: "Benefici" }
-  divinita:
-    fields:
-      - { field: tipo, prompt: "Rango divino", from: subtypes, required: true }
-      - { field: mondo, prompt: "Mondo (opzionale)", from: notes, category: mondo, link: true, optional: true }
-    body:
-      - { field: dogmi, prompt: "Dogmi e aspettative", heading: "Dogmi" }
-      - { field: culto, prompt: "Culto: fedeli, riti, templi", heading: "Culto" }
-  bastione:
-    fields:
-      - { field: tipo, prompt: "Tipo", from: subtypes, required: true }
-      - { field: mondo, prompt: "Mondo (opzionale)", from: notes, category: mondo, link: true, optional: true }
-    body:
-      - { field: descrizione, prompt: "Cos'e' il bastione", heading: "Descrizione" }
-      - { field: strutture, prompt: "Strutture speciali e ordini di bastione", heading: "Strutture" }
   # La sessione ha un layout proprio (session.md.j2): niente 'body' wizard
   # (duplicherebbe i campi gia' renderizzati). Questi prompt facoltativi
   # pre-compilano la preparazione; i campi restano editabili nel template.

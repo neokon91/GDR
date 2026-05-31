@@ -53,6 +53,42 @@ def load_yaml(name: str) -> dict[str, Any]:
     return data
 
 
+# Lo schema delle entità 5.5e vive in system.yaml, separato dall'ontologia
+# worldbuilding di core.yaml. I due si fondono in un unico 'core': i template,
+# i JS (core.json) e i test consumano il modello unificato senza sapere dello
+# split. Il confine (chi sta dove) è validato da check() (vedi validate_split).
+SYSTEM_YAML = "system.yaml"
+
+
+def deep_merge(base: dict[str, Any], overlay: dict[str, Any]) -> dict[str, Any]:
+    """Fonde 'overlay' dentro 'base': i dict si fondono ricorsivamente per chiave,
+    gli altri valori (liste/scalari) li sovrascrive overlay. Lo split è lossless,
+    quindi in pratica i due file non condividono chiavi (lo garantisce check)."""
+    merged = dict(base)
+    for key, value in overlay.items():
+        current = merged.get(key)
+        if isinstance(current, dict) and isinstance(value, dict):
+            merged[key] = deep_merge(current, value)
+        else:
+            merged[key] = value
+    return merged
+
+
+def load_core_parts() -> tuple[dict[str, Any], dict[str, Any]]:
+    """Le due metà del modello: core.yaml (worldbuilding) e system.yaml (5.5e).
+    system.yaml assente -> {} (lo split è opzionale, per retrocompatibilità)."""
+    core = load_yaml("core.yaml")
+    system = load_yaml(SYSTEM_YAML) if (YAML_DIR / SYSTEM_YAML).is_file() else {}
+    return core, system
+
+
+def load_core() -> dict[str, Any]:
+    """Modello unificato (core.yaml + system.yaml fusi). Unico ingresso per
+    build()/check()/test: i consumatori vedono un solo 'core' completo."""
+    core, system = load_core_parts()
+    return deep_merge(core, system)
+
+
 def write_json(path: Path, data: Any) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
@@ -456,7 +492,7 @@ def build_srd(core: dict[str, Any]) -> int:
 
 
 def build() -> dict[str, str]:
-    core = load_yaml("core.yaml")
+    core = load_core()
     plugins = load_yaml("plugins.yaml")
     template_data = load_yaml("templates.yaml")
     templates = template_data.get("templates", [])
@@ -619,9 +655,91 @@ def seed_samples() -> int:
     return copied
 
 
+# Identificatore che diventa chiave di frontmatter / cartella: snake_case.
+SNAKE_RE = re.compile(r"^[a-z][a-z0-9_]*$")
+
+# Sezioni "di piano": devono restare nel rispettivo file. tavolo/assi_tematici/
+# states (il differenziatore worldbuilding) solo in core.yaml; scheda/statblock/
+# caratteristiche (i meccanismi 5.5e) solo in system.yaml.
+CORE_ONLY_SECTIONS = ("tavolo", "assi_tematici", "states")
+SYSTEM_ONLY_SECTIONS = ("scheda", "statblock", "caratteristiche")
+
+# Sezioni-mappa (id -> definizione) partizionate fra i due file: gli stessi id
+# non devono comparire in entrambi (dup-ID).
+PARTITIONED_SECTIONS = ("folders", "fields", "categories", "creation", "relazioni")
+
+
+def validate_split(core_raw: dict[str, Any], system_raw: dict[str, Any], merged: dict[str, Any]) -> list[str]:
+    """Valida il confine core/system + dup-ID + snake_case + shape del modello
+    fuso. Ritorna la lista degli errori (vuota = tutto a posto)."""
+    errors: list[str] = []
+
+    # 1) Confine: ogni sezione "di piano" vive in un solo file.
+    for section in CORE_ONLY_SECTIONS:
+        if section in system_raw:
+            errors.append(f"confine: '{section}' è worldbuilding -> va in core.yaml, non in system.yaml")
+    for section in SYSTEM_ONLY_SECTIONS:
+        if section in core_raw:
+            errors.append(f"confine: '{section}' è di sistema 5.5e -> va in system.yaml, non in core.yaml")
+
+    # 2) dup-ID: nessun id partizionato compare in entrambi i file.
+    for section in PARTITIONED_SECTIONS:
+        shared = set(core_raw.get(section, {}) or {}) & set(system_raw.get(section, {}) or {})
+        for key in sorted(shared):
+            errors.append(f"dup-ID: '{key}' definito sia in core.{section} sia in system.{section}")
+
+    # 3) snake_case: gli identificatori che diventano chiavi di frontmatter/cartelle.
+    def snake(scope: str, names: Any) -> None:
+        for name in names or []:
+            if name is not None and not SNAKE_RE.match(str(name)):
+                errors.append(f"snake_case: '{name}' in {scope} non è snake_case")
+
+    snake("folders", merged.get("folders", {}))
+    snake("fields", merged.get("fields", {}))
+    snake("categories", merged.get("categories", {}))
+    snake("caratteristiche", [c.get("id") for c in merged.get("caratteristiche", []) or []])
+    for cat, assi in (merged.get("assi_tematici", {}) or {}).items():
+        snake(f"assi_tematici[{cat}]", [a.get("id") for a in assi or []])
+    for cat, rels in (merged.get("relazioni", {}) or {}).items():
+        snake(f"relazioni[{cat}]", [r.get("field") for r in rels or []])
+
+    # 4) shape: struttura attesa delle sezioni del modello.
+    fields = merged.get("fields", {}) or {}
+    folders = merged.get("folders", {}) or {}
+    for fid, spec in fields.items():
+        if not isinstance(spec, dict) or not spec.get("label") or not spec.get("widget"):
+            errors.append(f"shape: campo '{fid}' senza label/widget")
+    for cat, spec in (merged.get("categories", {}) or {}).items():
+        if not isinstance(spec, dict) or not spec.get("folder") or not spec.get("subtypes"):
+            errors.append(f"shape: categoria '{cat}' senza folder/subtypes")
+        elif spec.get("folder") not in folders:
+            errors.append(f"shape: categoria '{cat}' -> folder '{spec.get('folder')}' non in folders")
+    for entry in merged.get("tavolo", []) or []:
+        if not all(entry.get(k) for k in ("field", "callout", "title")):
+            errors.append(f"shape: voce tavolo {entry} senza field/callout/title")
+    for cat, campi in (merged.get("scheda", {}) or {}).items():
+        for fid in campi or []:
+            if fid not in fields:
+                errors.append(f"shape: scheda[{cat}] -> campo '{fid}' non in fields")
+    for cat, rels in (merged.get("relazioni", {}) or {}).items():
+        for rel in rels or []:
+            if not all(rel.get(k) for k in ("field", "label", "category")):
+                errors.append(f"shape: relazioni[{cat}] voce {rel} senza field/label/category")
+    for entry in merged.get("caratteristiche", []) or []:
+        if not entry.get("id") or not entry.get("sigla"):
+            errors.append(f"shape: caratteristica {entry} senza id/sigla")
+    for cat, assi in (merged.get("assi_tematici", {}) or {}).items():
+        for a in assi or []:
+            if not all(a.get(k) for k in ("id", "sinistra", "destra")):
+                errors.append(f"shape: assi_tematici[{cat}] voce {a} senza id/sinistra/destra")
+    return errors
+
+
 def check() -> int:
     errors: list[str] = []
-    core = load_yaml("core.yaml")
+    core_raw, system_raw = load_core_parts()
+    core = deep_merge(core_raw, system_raw)
+    errors.extend(validate_split(core_raw, system_raw, core))
     plugins = load_yaml("plugins.yaml")
     template_data = load_yaml("templates.yaml")
     categories = core.get("categories", {})

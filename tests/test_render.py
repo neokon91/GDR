@@ -10,7 +10,7 @@ from jinja2 import Environment, FileSystemLoader, StrictUndefined
 
 import render
 
-CORE = render.load_yaml("core.yaml")
+CORE = render.load_core()
 PLUGINS = render.load_yaml("plugins.yaml")
 TEMPLATES = render.load_yaml("templates.yaml")["templates"]
 PAGES = render.load_pages()
@@ -28,8 +28,31 @@ def _env() -> Environment:
 
 
 def test_check_passes():
-    """check() valida YAML/Jinja (field, tavolo, relazioni, categorie pagine)."""
+    """check() valida YAML/Jinja (split, field, tavolo, relazioni, pagine)."""
     assert render.check() == 0
+
+
+def test_no_duplicate_ids():
+    """Lo split è una partizione: nessun id condiviso fra core.yaml e system.yaml
+    nelle sezioni-mappa (folders/fields/categories/creation/relazioni)."""
+    core_raw, system_raw = render.load_core_parts()
+    assert system_raw, "system.yaml mancante o vuoto"
+    for section in render.PARTITIONED_SECTIONS:
+        shared = set(core_raw.get(section, {}) or {}) & set(system_raw.get(section, {}) or {})
+        assert not shared, f"{section}: id condivisi fra core e system: {sorted(shared)}"
+
+
+def test_split_planes():
+    """Confine: le sezioni di piano stanno nel file giusto e il merge include
+    tutte le categorie di entrambi i piani."""
+    core_raw, system_raw = render.load_core_parts()
+    for section in render.CORE_ONLY_SECTIONS:
+        assert section not in system_raw, f"'{section}' (worldbuilding) non deve stare in system.yaml"
+    for section in render.SYSTEM_ONLY_SECTIONS:
+        assert section not in core_raw, f"'{section}' (sistema) non deve stare in core.yaml"
+    merged_cats = set(CORE.get("categories", {}))
+    assert {"mondo", "personaggio", "incontro"} <= merged_cats  # worldbuilding
+    assert {"classe", "incantesimo", "oggetto"} <= merged_cats  # sistema 5.5e
 
 
 @pytest.mark.parametrize("tpl", TEMPLATES, ids=[t["id"] for t in TEMPLATES])
