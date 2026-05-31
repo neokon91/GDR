@@ -5,27 +5,28 @@ Worldbuilder, DM 5/5.5e) + backlog prioritizzato. Lo stato tecnico dettagliato �
 in [architecture](architecture.md) / [data_model](data_model.md) /
 [rules_layer](rules_layer.md) / [plugin_contracts](plugin_contracts.md).
 
-> Aggiornata dopo: attivazione **Bases / JS Engine / Dice Roller**, arricchimento
-> bespoke entità lore, **radar assi tematici** + **assi ricchi 1-5** (valori/
-> etichette/descrizioni), **fix js-engine** (CommonJS), refactor di ottimizzazione
-> (split assi per-entità, test snelliti), **8 nuove categorie lore** da FantasyWorld
-> (epoca/mito/culto/profezia/regno/istituzione/bioma/ecosistema) e **jinja opzionale**
-> (default `_entity_base.j2`), e **doc plugin completa** (`Dev/Reference/`, 20 schede).
-> Tutto committato e pushato su `origin/main`.
+> Aggiornata dopo i tre lavori di **Fase 1 (fondamenta)**: **grafo cosmologico** da
+> FantasyWorld (5 categorie nuove: sistema_magico/dominio/legge_fondamentale/
+> entita_primordiale/piano, cross-linkate) + assi divinita/lingua/specie; **PG di 1º
+> livello SRD-completo** (specie/competenze/lingue/CA-armatura/equip/incantesimi);
+> **note SRD** col contenuto recuperato (blocchi+tabelle). Prima: doc plugin (20 schede),
+> 8 categorie lore, jinja opzionale, radar assi. **36 categorie, 20 con assi.** Tutto
+> committato/pushato/buildato su `origin/main` (HEAD `cc150c5`).
 
 ## Dove siamo (sintesi)
 
 Pipeline matura: sorgenti YAML/Jinja/JS → `render.py` (modulare) → `dist/GDR-vault`.
-Modello fuso core+system+entities (**31 categorie**, 16 con assi), **trinità per-entità**
+Modello fuso core+system+entities (**36 categorie**, 20 con assi), **trinità per-entità**
 (YAML + Jinja `_entity_base` + `crea_<id>.js`), con gli **assi tematici scorporati** in
 `YAML/assi/<id>.yaml` (formato ricco 1-5). **Jinja opzionale**: le entità uniformi non
-dichiarano `jinja` → ereditano `_entity_base.j2` (le 8 nuove categorie non hanno guscio).
-Differenziatore: **superficie giocabile**
-su ogni nota lore (`uso_al_tavolo`/`gancio`/`pressione`/`prossima_mossa`).
-Rules-engine PG (SRD+overlay → wizard `crea_pg` → scheda ricca). SRD 5.2.1 IT
-(1389 note + 334 mostri statblock, layout IT 2024). Pannelli dinamici via **JS Engine**
-(`views.js`: pannello Vista, backlink, **radar assi**, confronto entità). Indici come
-**Bases** (`.base`) + hub Dataview (fallback). Home a 2 aree, Homepage, **129 test**, check 0.
+dichiarano `jinja` → ereditano `_entity_base.j2`. **Grafo cosmologico** connesso
+(dominio↔leggi↔entità primordiali↔piani↔sistemi magici). Differenziatore: **superficie
+giocabile** su ogni nota lore (`uso_al_tavolo`/`gancio`/`pressione`/`prossima_mossa`).
+**Rules-engine PG di 1º livello SRD-completo** (specie/competenze/lingue/CA-armatura/
+equip/incantesimi → wizard `crea_pg` → scheda ricca). SRD 5.2.1 IT (1389 note col
+contenuto pieno — condizioni/tabelle — + 334 mostri statblock, layout IT 2024). Pannelli
+dinamici via **JS Engine** (`views.js`: Vista, backlink, **radar assi**, confronto). Indici
+come **Bases** (`.base`) + hub Dataview (fallback). Home a 2 aree, Homepage, **145 test**, check 0.
 **Stadio prodotto: scaffold ricco e solido; l'esperienza in-app è ancora da confermare.**
 
 ## 🎯 Visione: due suite integrate ma separate
@@ -122,32 +123,36 @@ sopra i sistemi avanzati (vedi backlog).
 - **Pregi**: SRD 5.2.1 IT a portata (incantesimi/oggetti/mostri/condizioni), statblock
   (layout IT 2024), superficie giocabile, incontri con Fantasy Statblocks + **Initiative
   Tracker**, **Dice Roller** (macro `tiri()`: d20/vantaggio/svantaggio in PG e incontro;
-  `diceRolling` negli statblock), rules-engine PG livello 1.
+  `diceRolling` negli statblock), **rules-engine PG di 1º livello SRD-completo** (specie/
+  competenze/lingue/CA-armatura/equip/privilegi/incantesimi), note SRD col contenuto pieno.
 - **Gap al tavolo**:
   - **Difficoltà incontri**: l'incontro cita avversari a prosa ma niente budget XP/
     letalità 5e né pre-popolamento del blocco `encounter` dalle creature collegate.
-  - **PG oltre il 1º livello**: il rules-engine fa il livello 1; mancano avanzamento,
-    slot incantesimo, privilegi di classe, inventario.
-  - **Quick-ref condizioni/regole** durante il gioco (le 15 condizioni SRD ci sono come
-    note, ma non c'è un richiamo rapido in scheda/incontro).
+  - **PG oltre il 1º livello**: il 1º livello è completo; manca l'**avanzamento 2-20**
+    (slot per livello, privilegi ai livelli successivi, ASI, sottoclasse). → Fase 2.
+  - **Quick-ref condizioni/regole**: le 15 condizioni ora hanno gli effetti pieni nelle
+    note SRD; manca ancora un richiamo *rapido* in scheda/incontro durante il gioco.
 - **Azione**: **difficoltà incontri** (budget XP + auto-popola da creature collegate) è
-  il prossimo lift DM a maggior valore; la progressione PG è un lift maggiore.
+  il prossimo lift DM a maggior valore; la progressione PG 2-20 è un lift maggiore.
 
 ## ✅ Backlog prioritizzato
 
 Riorganizzato per **fasi** (direzione utente): prima le *fondamenta* delle due suite, poi
 i sistemi avanzati. La QA in-app è igiene continua, non una fase a sé.
 
-### Fase 1 — Fondamenta (finire prima di costruirci sopra)
+### Fase 1 — Fondamenta (sostanzialmente coperta)
 **Suite Worldbuilding**
-1. **Completare l'import idee da FantasyWorld** — esaurire categorie/seed/relazioni ancora
-   da portare (oltre alle 8 aggiunte): chiudere l'ontologia e i seed-assi del mondo.
+1. ✅ **Import idee da FantasyWorld** — grafo cosmologico a 5 nodi (sistema_magico/dominio/
+   legge_fondamentale/entita_primordiale/piano) cross-linkato + assi divinita/lingua/specie.
+   *Residuo*: seed FW minori come campi/subtypes (rito/dottrina/simbolo/titolo/conflitto/
+   genealogia), non categorie.
 
 **Suite Sistema / DM**
-2. **Ottimizzare PG per SRD** — rules-engine corretto e completo rispetto all'SRD 5.2.1
-   (matematica scheda, scelte di creazione fedeli alle regole).
-3. **Ottimizzare le note SRD stesse** — qualità/coerenza delle 1389 note + 334 statblock
-   (layout IT 2024, link, condizioni, dati).
+2. ✅ **PG per SRD (1º livello)** — specie (tratti/scurovisione), competenze armi/armature/
+   strumenti + lingue, CA da armatura, equipaggiamento SRD A/B, privilegi di classe L1,
+   incantesimi L1 (trucchetti/preparati/slot) per i caster. *La progressione 2-20 è in Fase 2.*
+3. ✅ **Note SRD** — recuperato il contenuto perso: effetti delle condizioni, tratti, privilegi
+   (blocchi) e tabelle (progressione classe/lignaggi/risultati) — 0 heading vuoti su 1053 voci.
 
 ### Fase 2 — Verso un vault ultra-pro (poi, in sequenza da valutare)
 4. **Clock & conseguenze** (fronti/progress-clock, esiti che muovono il mondo) — il
@@ -167,14 +172,17 @@ i sistemi avanzati. La QA in-app è igiene continua, non una fase a sé.
   embeddata nelle note.
 - Generazione nomi/spunti (Fantasy Content Generator) e integrazioni minori quando comodo.
 
-### ✅ Fatto in questa tornata
-- **Doc plugin** in `Dev/Reference/` — 20 schede (una per plugin installato) + gotcha
-  *callout collassati* in `obsidian-core`.
-- **Roadmap** riallineata a HEAD e riorganizzata sulle due suite.
+### ✅ Fatto (sessione 2026-05-31)
+- **Doc plugin** in `Dev/Reference/` — 20 schede + gotcha *callout collassati*.
+- **Fase 1 fondamenta**: grafo cosmologico (5 categorie), PG-SRD di 1º livello completo,
+  note SRD col contenuto recuperato. Tutto committato/pushato/buildato (`cc150c5`).
+- **Roadmap** riorganizzata sulle due suite e aggiornata a Fase 1 coperta.
 
 ## Come ripartire
 
-**129 test verdi**, check 0. Leggi questo file + la memoria (`project-northstar.md`).
-Direzione: **Fase 1 — fondamenta**. Primo passo a scelta fra le tre tracce di fondamenta:
-(1) chiudere l'import FantasyWorld lato worldbuilding, oppure (2)/(3) ottimizzare PG-SRD e
-le note SRD lato sistema. QA in-app sul pezzo che si tocca, prima di passare oltre.
+**145 test verdi**, check 0; HEAD `cc150c5` (tutto pushato+buildato). Leggi questo file
++ la memoria (`project-northstar.md`, `vault-due-suite.md`). **Fase 1 fondamenta coperta**
+→ prossimi candidati: (a) **QA in-app** di tutto il lavoro (rischio #1: PG nuovo mago/
+guerriero, grafo cosmologia, note SRD/condizioni, radar su divinita/oggetto); (b) seed FW
+minori come campi/subtypes; poi **Fase 2** (clock & conseguenze → ponte fra le due suite,
+difficoltà incontri, progressione PG 2-20, timeline/mappe).
