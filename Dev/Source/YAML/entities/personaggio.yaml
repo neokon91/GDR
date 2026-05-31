@@ -1,0 +1,104 @@
+# Schema per-entità: personaggio. Single source di tassonomia, scheda, assi,
+# relazioni, wizard e wiring template. render.py lo distribuisce nel
+# modello globale 'core' (apply_entities) e raccoglie i template.
+# I campi sono nel registro centrale (core.yaml/system.yaml).
+id: personaggio
+folder: Mondi/Personaggi
+order: 8
+templates:
+- id: pg
+  title: PG
+  default_type: pg
+  target: z.modelli/PG.md
+  jinja: character.md.j2
+  primary: true
+- id: png
+  title: PNG
+  default_type: png
+  target: z.modelli/PNG.md
+  jinja: character.md.j2
+  primary: true
+subtypes:
+- pg
+- png
+scheda:
+- allineamento
+- pronomi
+- eta
+assi:
+- id: lecito_caotico
+  sinistra: Lecito
+  destra: Caotico
+- id: altruista_egoista
+  sinistra: Altruista
+  destra: Egoista
+- id: calmo_volatile
+  sinistra: Calmo
+  destra: Volatile
+relazioni:
+- field: fazione
+  label: Affiliazione
+  category: fazione
+- field: luogo
+  label: Base
+  category: luogo
+- field: alleati
+  label: Alleati
+  category: personaggio
+  multi: true
+- field: rivali
+  label: Rivali
+  category: personaggio
+  multi: true
+creation:
+  fields:
+  - field: tipo
+    prompt: Tipo di personaggio
+    from: subtypes
+    required: true
+  - field: mondo
+    prompt: Mondo di appartenenza
+    from: notes
+    category: mondo
+    link: true
+    required: true
+  - field: fazione
+    prompt: Fazione (opzionale)
+    from: notes
+    category: fazione
+    link: true
+    optional: true
+  - field: luogo
+    prompt: Dove si trova di solito (opzionale)
+    from: notes
+    category: luogo
+    link: true
+    optional: true
+  body:
+  - field: ruolo
+    prompt: Ruolo o occupazione
+    heading: Ruolo
+  - field: aspetto
+    prompt: 'Tratto distintivo: voce, aspetto, manierismo'
+    heading: Aspetto
+  - field: desiderio
+    prompt: Cosa vuole davvero
+    heading: Vuole
+  - field: paura
+    prompt: Cosa teme o evita
+    heading: Teme
+  - field: voce
+    prompt: 'Come parla: tono, tic, cadenza'
+    heading: Voce
+  - field: oggetto
+    prompt: Un oggetto che porta sempre con sé
+    heading: Oggetto
+  - field: frase
+    prompt: Una battuta tipica (da dire al tavolo)
+    callout: quote
+    title: Frase tipica
+  - field: segreto
+    prompt: Segreto (non mostrare ai giocatori)
+    callout: segreto
+    title: Segreto
+    fold: true

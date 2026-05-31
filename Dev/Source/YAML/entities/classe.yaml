@@ -1,0 +1,36 @@
+# Schema per-entità: classe. Single source di tassonomia, scheda, assi,
+# relazioni, wizard e wiring template. render.py lo distribuisce nel
+# modello globale 'core' (apply_entities) e raccoglie i template.
+# I campi sono nel registro centrale (core.yaml/system.yaml).
+id: classe
+folder: Mondi/Classi
+order: 14
+templates:
+- id: classe
+  title: Classe
+  default_type: marziale
+  target: z.modelli/Classe.md
+  jinja: class.md.j2
+subtypes:
+- marziale
+- incantatore
+- mezzo incantatore
+- esperto
+scheda:
+- dado_vita
+- car_primaria
+- ts_competenze
+- incantesimi
+creation:
+  fields:
+  - field: tipo
+    prompt: Tipo di classe
+    from: subtypes
+    required: true
+  body:
+  - field: descrizione
+    prompt: Concept della classe
+    heading: Concept
+  - field: progressione
+    prompt: Privilegi salienti per livello
+    heading: Progressione

@@ -1,0 +1,15 @@
+# Schema per-entità: nota. Single source di tassonomia, scheda, assi,
+# relazioni, wizard e wiring template. render.py lo distribuisce nel
+# modello globale 'core' (apply_entities) e raccoglie i template.
+# I campi sono nel registro centrale (core.yaml/system.yaml).
+id: nota
+folder: Inbox
+order: 23
+templates:
+- id: nota_rapida
+  title: Nota Rapida
+  default_type: appunto
+  target: z.modelli/Nota Rapida.md
+  jinja: nota.md.j2
+subtypes:
+- appunto

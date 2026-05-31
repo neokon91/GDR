@@ -1,0 +1,38 @@
+# Schema per-entità: regola. Single source di tassonomia, scheda, assi,
+# relazioni, wizard e wiring template. render.py lo distribuisce nel
+# modello globale 'core' (apply_entities) e raccoglie i template.
+# I campi sono nel registro centrale (core.yaml/system.yaml).
+id: regola
+folder: Mondi/Regole
+order: 21
+templates:
+- id: regola
+  title: Regola
+  default_type: regola della casa
+  target: z.modelli/Regola.md
+  jinja: reference.md.j2
+subtypes:
+- regola della casa
+- regola variante
+creation:
+  fields:
+  - field: tipo
+    prompt: Tipo di regola
+    from: subtypes
+    required: true
+  - field: mondo
+    prompt: Mondo (opzionale)
+    from: notes
+    category: mondo
+    link: true
+    optional: true
+  body:
+  - field: cosa_regola
+    prompt: Cosa regola / cosa fa
+    heading: Cosa
+  - field: come_funziona
+    prompt: Come funziona al tavolo
+    heading: Come
+  - field: eccezioni
+    prompt: Eccezioni e casi limite
+    heading: Eccezioni

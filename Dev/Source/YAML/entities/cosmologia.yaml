@@ -1,0 +1,48 @@
+# Schema per-entità: cosmologia. Single source di tassonomia, scheda, assi,
+# relazioni, wizard e wiring template. render.py lo distribuisce nel
+# modello globale 'core' (apply_entities) e raccoglie i template.
+# I campi sono nel registro centrale (core.yaml/system.yaml).
+id: cosmologia
+folder: Mondi/Cosmologia
+order: 2
+templates:
+- id: cosmologia
+  title: Cosmologia
+  default_type: legge cosmica
+  target: z.modelli/Cosmologia.md
+  jinja: cosmologia.md.j2
+subtypes:
+- legge cosmica
+- piano o aldila
+relazioni:
+- field: divinita
+  label: Divinita legate
+  category: cosmologia
+  multi: true
+creation:
+  fields:
+  - field: tipo
+    prompt: Tipo cosmologico
+    from: subtypes
+    required: true
+  - field: mondo
+    prompt: Mondo
+    from: notes
+    category: mondo
+    link: true
+    required: true
+  body:
+  - field: natura
+    prompt: Cos'e' / come si manifesta
+    heading: Natura
+  - field: influenza
+    prompt: Come tocca il mondo mortale
+    heading: Influenza
+  - field: manifestazioni
+    prompt: Come si vede nel mondo (segni, fenomeni)
+    heading: Manifestazioni
+  - field: segreto
+    prompt: Verita' nascosta
+    callout: segreto
+    title: Segreto
+    fold: true

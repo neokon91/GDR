@@ -1,0 +1,30 @@
+# Schema per-entità: sessione. Single source di tassonomia, scheda, assi,
+# relazioni, wizard e wiring template. render.py lo distribuisce nel
+# modello globale 'core' (apply_entities) e raccoglie i template.
+# I campi sono nel registro centrale (core.yaml/system.yaml).
+id: sessione
+folder: Mondi/Sessioni
+order: 22
+templates:
+- id: sessione
+  title: Sessione
+  default_type: sessione
+  target: z.modelli/Sessione.md
+  jinja: session.md.j2
+  primary: true
+subtypes:
+- sessione
+creation:
+  fields:
+  - field: mondo
+    prompt: Mondo della sessione
+    from: notes
+    category: mondo
+    link: true
+    optional: true
+  - field: obiettivo
+    prompt: Obiettivo della sessione (cosa deve accadere)
+    optional: true
+  - field: apertura
+    prompt: Scena d'apertura
+    optional: true

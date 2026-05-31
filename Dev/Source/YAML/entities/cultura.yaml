@@ -1,0 +1,67 @@
+# Schema per-entità: cultura. Single source di tassonomia, scheda, assi,
+# relazioni, wizard e wiring template. render.py lo distribuisce nel
+# modello globale 'core' (apply_entities) e raccoglie i template.
+# I campi sono nel registro centrale (core.yaml/system.yaml).
+id: cultura
+folder: Mondi/Culture
+order: 4
+templates:
+- id: cultura
+  title: Cultura
+  default_type: civilta
+  target: z.modelli/Cultura.md
+  jinja: cultura.md.j2
+subtypes:
+- civilta
+- popolo
+- tradizione
+- religione
+assi:
+- id: tradizione_innovazione
+  sinistra: Tradizione
+  destra: Innovazione
+- id: aperta_chiusa
+  sinistra: Aperta
+  destra: Chiusa
+- id: gerarchica_egualitaria
+  sinistra: Gerarchica
+  destra: Egualitaria
+relazioni:
+- field: regioni
+  label: Regioni
+  category: luogo
+  multi: true
+- field: lingua
+  label: Lingua
+  category: lingua
+creation:
+  fields:
+  - field: tipo
+    prompt: Tipo di cultura
+    from: subtypes
+    required: true
+  - field: mondo
+    prompt: Mondo
+    from: notes
+    category: mondo
+    link: true
+    required: true
+  body:
+  - field: valori
+    prompt: Valori fondanti
+    heading: Valori
+  - field: vita
+    prompt: Vita quotidiana
+    heading: Vita
+  - field: riti
+    prompt: Riti di passaggio, feste
+    heading: Riti
+  - field: tabu
+    prompt: 'Tabù: cosa è proibito'
+    heading: Tabù
+  - field: estetica
+    prompt: 'Estetica: arte, moda, architettura'
+    heading: Estetica
+  - field: tensione
+    prompt: Attrito con altre culture
+    heading: Tensione

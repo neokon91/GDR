@@ -1,29 +1,15 @@
 id: gdr_system
 version: 0.1.0
 purpose: >-
-  Schema delle entità di sistema D&D 5.5e (2024). È il piano "regole" del vault,
-  separato dall'ontologia worldbuilding (core.yaml). render.py lo FONDE dentro
-  core (deep_merge): i template e i JS vedono un unico 'core' completo.
-  Confine (validato da check): qui vivono scheda/statblock/caratteristiche e le
-  categorie classe/sottoclasse/specie/background/talento/divinita/bastione/
-  incantesimo/oggetto/insidia/regola; mai tavolo/assi_tematici/states (core).
-folders:
-  oggetto: Mondi/Oggetti
-  incantesimo: Mondi/Incantesimi
-  regola: Mondi/Regole
-  insidia: Mondi/Insidie
-  classe: Mondi/Classi
-  sottoclasse: Mondi/Sottoclassi
-  specie: Mondi/Specie
-  background: Mondi/Background
-  talento: Mondi/Talenti
-  divinita: Mondi/Divinita
-  bastione: Mondi/Bastioni
-
-# Registro campi di SISTEMA: label e widget dei campi 5.5e (oggetti magici,
-# incantesimi, insidie, classe, specie, background, talento, divinità). Stessa
-# convenzione di core.fields; fusi nello stesso registro. I campi condivisi/lore
-# (tipo, stato, allineamento, ...) restano in core.yaml.
+  Globali del piano "regole" D&D 5.5e condivisi: registro dei campi di sistema,
+  layout statblock e caratteristiche PG. Lo schema specifico delle entità di
+  sistema (classe/specie/oggetto/incantesimo/...) vive in entities/*.yaml.
+  render.py fonde tutto in un unico 'core'. Confine (validato da check): qui
+  vivono scheda? no — scheda è per-entità; qui solo statblock/caratteristiche +
+  i campi di sistema. Mai tavolo/assi_tematici/states (core.yaml).
+# Registro campi di SISTEMA 5.5e (oggetti magici, incantesimi, insidie, classe,
+# specie, background, talento, divinità). Stessa convenzione di core.fields; fusi
+# nello stesso registro centrale. I campi condivisi/lore stanno in core.fields.
 fields:
   # Oggetti magici
   rarita:         { label: Rarità,               widget: rarita }
@@ -59,30 +45,8 @@ fields:
   dominio:        { label: Dominio,              widget: text }
   simbolo:        { label: Simbolo,              widget: text }
 
-# Scheda di sistema: campi STRUTTURATI per categoria, mostrati dalla macro
-# scheda(categoria) come callout di dati (Meta Bind). È la controparte "regole
-# 5.5e" della superficie giocabile (tavolo, in core). Single source; i campi
-# sono nel registro fuso (core.fields + system.fields). Include anche le
-# categorie di lore (mondo/luogo/...): scheda è un MECCANISMO di sistema, anche
-# quando caratterizza un'entità worldbuilding.
-scheda:
-  # Lore (worldbuilding)
-  mondo:       [scala, genere, epoca, temi]
-  luogo:       [clima, popolazione]
-  personaggio: [allineamento, pronomi, eta]
-  evento:      [portata]
-  # Sistema 5.5e
-  oggetto:     [rarita, sintonia]
-  incantesimo: [livello, tempo_lancio, gittata, componenti, durata, classi]
-  insidia:     [tier, minaccia, prova, danno]
-  classe:      [dado_vita, car_primaria, ts_competenze, incantesimi]
-  specie:      [taglia, velocita, tipo_creatura, lignaggio]
-  background:  [car_background, strumento, talento_origine]
-  talento:     [prerequisito, ripetibile]
-  divinita:    [dominio, allineamento, simbolo]
-
 # Statblock (Fantasy Statblocks): layout usato dal blocco ```statblock```.
-# Sostituisci col nome del layout installato (es. un layout 2024/5.5e).
+# Sostituisci col nome di un layout installato (es. un layout 2024/5.5e italiano).
 statblock:
   layout: Basic 5e Layout
 
@@ -96,168 +60,3 @@ caratteristiche:
   - { id: intelligenza, sigla: INT }
   - { id: saggezza,     sigla: SAG }
   - { id: carisma,      sigla: CAR }
-
-categories:
-  oggetto:
-    folder: oggetto
-    subtypes:
-      - arma
-      - armatura
-      - scudo
-      - oggetto meraviglioso
-      - strumento
-      - oggetto magico
-      - veleno
-      - tesoro
-      - veicolo o cavalcatura
-  incantesimo:
-    folder: incantesimo
-    subtypes:
-      - abiurazione
-      - ammaliamento
-      - divinazione
-      - evocazione
-      - illusione
-      - invocazione
-      - necromanzia
-      - trasmutazione
-  regola:
-    folder: regola
-    subtypes:
-      - regola della casa
-      - regola variante
-  insidia:
-    folder: insidia
-    subtypes:
-      - trappola
-      - pericolo naturale
-      - effetto ambientale
-  classe:
-    folder: classe
-    subtypes:
-      - marziale
-      - incantatore
-      - mezzo incantatore
-      - esperto
-  sottoclasse:
-    folder: sottoclasse
-    subtypes:
-      - sottoclasse
-  specie:
-    folder: specie
-    subtypes:
-      - comune
-      - esotica
-      - mostruosa
-  background:
-    folder: background
-    subtypes:
-      - background
-  talento:
-    folder: talento
-    subtypes:
-      - origine
-      - generale
-      - stile di combattimento
-      - epico
-  divinita:
-    folder: divinita
-    subtypes:
-      - divinità maggiore
-      - divinità minore
-      - semidio
-      - pantheon
-  bastione:
-    folder: bastione
-    subtypes:
-      - bastione
-
-# Relazioni tipizzate delle entità di sistema (vedi core.relazioni per il
-# formato e le relazioni di lore). I target possono essere categorie di lore
-# (es. oggetto -> proprietario/luogo): il modello fuso le risolve comunque.
-relazioni:
-  oggetto:
-    - { field: proprietario,   label: Proprietario,   category: personaggio }
-    - { field: dove,           label: Dove si trova,  category: luogo }
-  sottoclasse:
-    - { field: classe,         label: Classe,         category: classe }
-
-# Wizard di creazione delle entità di sistema (vedi core.creation per il
-# formato; letti insieme da create_entity.js dopo il merge). I campi strutturati
-# (scheda) si compilano nei tab; il wizard cattura tipo/relazioni e il corpo
-# discorsivo.
-creation:
-  oggetto:
-    fields:
-      - { field: tipo, prompt: "Tipo di oggetto", from: subtypes, required: true }
-      - { field: mondo, prompt: "Mondo (opzionale)", from: notes, category: mondo, link: true, optional: true }
-      - { field: rarita, prompt: "Rarità (se magico)", from: list, options: [comune, non comune, raro, molto raro, leggendario, artefatto], optional: true }
-      - { field: sintonia, prompt: "Sintonia richiesta? (es. sì, da un druido)", optional: true }
-    body:
-      - { field: descrizione_oggetto, prompt: "Aspetto e fattura", heading: "Aspetto" }
-      - { field: effetto, prompt: "Cosa fa: regole/effetto al tavolo", heading: "Effetto" }
-      - { field: provenienza, prompt: "Costo, come si ottiene", heading: "Provenienza" }
-  incantesimo:
-    fields:
-      - { field: tipo, prompt: "Scuola di magia", from: subtypes, required: true }
-      - { field: mondo, prompt: "Mondo (opzionale)", from: notes, category: mondo, link: true, optional: true }
-    body:
-      - { field: effetto, prompt: "Effetto dell'incantesimo", heading: "Effetto" }
-      - { field: a_livello_superiore, prompt: "Ai livelli superiori", heading: "Ai livelli superiori" }
-  regola:
-    fields:
-      - { field: tipo, prompt: "Tipo di regola", from: subtypes, required: true }
-      - { field: mondo, prompt: "Mondo (opzionale)", from: notes, category: mondo, link: true, optional: true }
-    body:
-      - { field: cosa_regola, prompt: "Cosa regola / cosa fa", heading: "Cosa" }
-      - { field: come_funziona, prompt: "Come funziona al tavolo", heading: "Come" }
-      - { field: eccezioni, prompt: "Eccezioni e casi limite", heading: "Eccezioni" }
-  insidia:
-    fields:
-      - { field: tipo, prompt: "Tipo di insidia", from: subtypes, required: true }
-      - { field: mondo, prompt: "Mondo (opzionale)", from: notes, category: mondo, link: true, optional: true }
-    body:
-      - { field: innesco, prompt: "Innesco: cosa la attiva", heading: "Innesco" }
-      - { field: effetto, prompt: "Effetto: cosa succede (TxC/CD + danno)", heading: "Effetto" }
-      - { field: contromisure, prompt: "Contromisure: individuare / disinnescare", heading: "Contromisure" }
-  classe:
-    fields:
-      - { field: tipo, prompt: "Tipo di classe", from: subtypes, required: true }
-    body:
-      - { field: descrizione, prompt: "Concept della classe", heading: "Concept" }
-      - { field: progressione, prompt: "Privilegi salienti per livello", heading: "Progressione" }
-  sottoclasse:
-    fields:
-      - { field: classe, prompt: "Classe di appartenenza", from: notes, category: classe, link: true, required: true }
-    body:
-      - { field: privilegi, prompt: "Privilegi (livelli 3/6/10/14)", heading: "Privilegi" }
-  specie:
-    fields:
-      - { field: tipo, prompt: "Tipo di specie", from: subtypes, required: true }
-    body:
-      - { field: tratti, prompt: "Tratti di specie", heading: "Tratti" }
-  background:
-    fields:
-      - { field: tipo, prompt: "Tipo", from: subtypes, required: true }
-    body:
-      - { field: descrizione, prompt: "Chi era prima dell'avventura", heading: "Descrizione" }
-      - { field: equipaggiamento, prompt: "Equipaggiamento iniziale", heading: "Equipaggiamento" }
-  talento:
-    fields:
-      - { field: tipo, prompt: "Categoria del talento", from: subtypes, required: true }
-    body:
-      - { field: benefici, prompt: "Benefici del talento", heading: "Benefici" }
-  divinita:
-    fields:
-      - { field: tipo, prompt: "Rango divino", from: subtypes, required: true }
-      - { field: mondo, prompt: "Mondo (opzionale)", from: notes, category: mondo, link: true, optional: true }
-    body:
-      - { field: dogmi, prompt: "Dogmi e aspettative", heading: "Dogmi" }
-      - { field: culto, prompt: "Culto: fedeli, riti, templi", heading: "Culto" }
-  bastione:
-    fields:
-      - { field: tipo, prompt: "Tipo", from: subtypes, required: true }
-      - { field: mondo, prompt: "Mondo (opzionale)", from: notes, category: mondo, link: true, optional: true }
-    body:
-      - { field: descrizione, prompt: "Cos'e' il bastione", heading: "Descrizione" }
-      - { field: strutture, prompt: "Strutture speciali e ordini di bastione", heading: "Strutture" }

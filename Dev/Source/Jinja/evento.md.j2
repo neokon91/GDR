@@ -1,12 +1,8 @@
-{% import '_macros.j2' as m with context -%}
-<% await tp.user.create_entity(tp, "{{ template.id }}") %>
-# `=this.nome`
-
-{{ m.identita_card(template) }}
-
-````tabs
---- Lore
-
+{# Evento: scheletro condiviso + Lore con cronologia (quando/portata) e una tab
+   extra "Cronologia mondo". Lo schema è in YAML/entities/evento.yaml. #}
+{% extends '_entity_base.j2' %}
+{% block lore %}
+{% import '_macros.j2' as m with context %}
 > [!abstract] Cronologia
 > {{ m.field('quando') }}
 >
@@ -19,9 +15,8 @@
 > {{ m.field('player_safe', label=false) }}
 
 {{ m.wizard_body(template.category) }}
---- Al tavolo
-
-{{ m.tavolo() }}
+{% endblock %}
+{% block extra_tabs %}
 --- Cronologia mondo
 
 ```dataview
@@ -31,16 +26,4 @@ where categoria = "evento"
 sort quando asc
 ```
 
---- Collegamenti
-
-{{ m.relazioni(template.category) }}
-{{ m.collegamenti() }}
---- Vista
-
-{{ m.vista() }}
-
-> [!tip] Azioni
-> `BUTTON[marca-canonico]`
->
-> `BUTTON[archivia-nota]`
-````
+{% endblock %}

@@ -1,0 +1,58 @@
+# Schema per-entità: evento. Single source di tassonomia, scheda, assi,
+# relazioni, wizard e wiring template. render.py lo distribuisce nel
+# modello globale 'core' (apply_entities) e raccoglie i template.
+# I campi sono nel registro centrale (core.yaml/system.yaml).
+id: evento
+folder: Mondi/Eventi
+order: 6
+templates:
+- id: evento
+  title: Evento
+  default_type: evento storico
+  target: z.modelli/Evento.md
+  jinja: evento.md.j2
+  primary: true
+subtypes:
+- evento storico
+- evento di campagna
+scheda:
+- portata
+relazioni:
+- field: luogo
+  label: Luogo
+  category: luogo
+- field: coinvolti
+  label: Coinvolti
+  category: personaggio
+  multi: true
+- field: fazioni
+  label: Fazioni
+  category: fazione
+  multi: true
+creation:
+  fields:
+  - field: tipo
+    prompt: Tipo di evento
+    from: subtypes
+    required: true
+  - field: mondo
+    prompt: Mondo
+    from: notes
+    category: mondo
+    link: true
+    required: true
+  - field: quando
+    prompt: Quando (data del mondo)
+  body:
+  - field: cause
+    prompt: 'Cause: perché è successo'
+    heading: Cause
+  - field: cosa
+    prompt: Cosa accade
+    heading: Cosa accade
+  - field: conseguenza
+    prompt: Conseguenza per il presente
+    heading: Conseguenza
+  - field: eredita
+    prompt: Cosa ne resta oggi (ganci vivi)
+    heading: Eredità

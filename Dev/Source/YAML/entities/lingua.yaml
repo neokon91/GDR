@@ -1,0 +1,51 @@
+# Schema per-entità: lingua. Single source di tassonomia, scheda, assi,
+# relazioni, wizard e wiring template. render.py lo distribuisce nel
+# modello globale 'core' (apply_entities) e raccoglie i template.
+# I campi sono nel registro centrale (core.yaml/system.yaml).
+id: lingua
+folder: Mondi/Lingue
+order: 7
+templates:
+- id: lingua
+  title: Lingua
+  default_type: lingua
+  target: z.modelli/Lingua.md
+  jinja: lingua.md.j2
+subtypes:
+- lingua
+- dialetto
+- codice o gergo
+relazioni:
+- field: parlata_in
+  label: Parlata in
+  category: luogo
+  multi: true
+- field: culture
+  label: Culture
+  category: cultura
+  multi: true
+creation:
+  fields:
+  - field: tipo
+    prompt: Tipo di lingua
+    from: subtypes
+    required: true
+  - field: mondo
+    prompt: Mondo
+    from: notes
+    category: mondo
+    link: true
+    required: true
+  body:
+  - field: chi_parla
+    prompt: Chi la parla
+    heading: Parlanti
+  - field: suono
+    prompt: Come suona
+    heading: Suono
+  - field: scrittura
+    prompt: Sistema di scrittura / alfabeto
+    heading: Scrittura
+  - field: lessico
+    prompt: Parole/frasi chiave usabili al tavolo
+    heading: Lessico

@@ -1,0 +1,32 @@
+# Schema per-entità: background. Single source di tassonomia, scheda, assi,
+# relazioni, wizard e wiring template. render.py lo distribuisce nel
+# modello globale 'core' (apply_entities) e raccoglie i template.
+# I campi sono nel registro centrale (core.yaml/system.yaml).
+id: background
+folder: Mondi/Background
+order: 17
+templates:
+- id: background
+  title: Background
+  default_type: background
+  target: z.modelli/Background.md
+  jinja: reference.md.j2
+subtypes:
+- background
+scheda:
+- car_background
+- strumento
+- talento_origine
+creation:
+  fields:
+  - field: tipo
+    prompt: Tipo
+    from: subtypes
+    required: true
+  body:
+  - field: descrizione
+    prompt: Chi era prima dell'avventura
+    heading: Descrizione
+  - field: equipaggiamento
+    prompt: Equipaggiamento iniziale
+    heading: Equipaggiamento

@@ -1,0 +1,31 @@
+# Schema per-entità: talento. Single source di tassonomia, scheda, assi,
+# relazioni, wizard e wiring template. render.py lo distribuisce nel
+# modello globale 'core' (apply_entities) e raccoglie i template.
+# I campi sono nel registro centrale (core.yaml/system.yaml).
+id: talento
+folder: Mondi/Talenti
+order: 18
+templates:
+- id: talento
+  title: Talento
+  default_type: origine
+  target: z.modelli/Talento.md
+  jinja: reference.md.j2
+subtypes:
+- origine
+- generale
+- stile di combattimento
+- epico
+scheda:
+- prerequisito
+- ripetibile
+creation:
+  fields:
+  - field: tipo
+    prompt: Categoria del talento
+    from: subtypes
+    required: true
+  body:
+  - field: benefici
+    prompt: Benefici del talento
+    heading: Benefici

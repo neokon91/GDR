@@ -1,0 +1,44 @@
+# Schema per-entità: insidia. Single source di tassonomia, scheda, assi,
+# relazioni, wizard e wiring template. render.py lo distribuisce nel
+# modello globale 'core' (apply_entities) e raccoglie i template.
+# I campi sono nel registro centrale (core.yaml/system.yaml).
+id: insidia
+folder: Mondi/Insidie
+order: 13
+templates:
+- id: insidia
+  title: Insidia
+  default_type: trappola
+  target: z.modelli/Insidia.md
+  jinja: hazard.md.j2
+subtypes:
+- trappola
+- pericolo naturale
+- effetto ambientale
+scheda:
+- tier
+- minaccia
+- prova
+- danno
+creation:
+  fields:
+  - field: tipo
+    prompt: Tipo di insidia
+    from: subtypes
+    required: true
+  - field: mondo
+    prompt: Mondo (opzionale)
+    from: notes
+    category: mondo
+    link: true
+    optional: true
+  body:
+  - field: innesco
+    prompt: 'Innesco: cosa la attiva'
+    heading: Innesco
+  - field: effetto
+    prompt: 'Effetto: cosa succede (TxC/CD + danno)'
+    heading: Effetto
+  - field: contromisure
+    prompt: 'Contromisure: individuare / disinnescare'
+    heading: Contromisure

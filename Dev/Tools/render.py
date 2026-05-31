@@ -130,10 +130,11 @@ def apply_entities(core: dict[str, Any], entities: list[dict[str, Any]]) -> dict
 
 
 def entity_templates(entities: list[dict[str, Any]]) -> list[dict[str, Any]]:
-    """I template dichiarati dai file-entità (con category = id-entità). Sono
-    appesi a quelli di templates.yaml finché tutte le entità non sono migrate."""
+    """I template dichiarati dai file-entità (con category = id-entità), ordinati
+    per il campo 'order' dell'entità (preserva l'ordine curato dei bottoni Home).
+    Sono appesi a quelli di templates.yaml."""
     templates = []
-    for entity in entities:
+    for entity in sorted(entities, key=lambda e: e.get("order", 10**9)):
         for template in entity.get("templates", []) or []:
             templates.append({**template, "category": entity["id"]})
     return templates

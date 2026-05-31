@@ -1,0 +1,49 @@
+# Schema per-entità: incantesimo. Single source di tassonomia, scheda, assi,
+# relazioni, wizard e wiring template. render.py lo distribuisce nel
+# modello globale 'core' (apply_entities) e raccoglie i template.
+# I campi sono nel registro centrale (core.yaml/system.yaml).
+id: incantesimo
+folder: Mondi/Incantesimi
+order: 12
+templates:
+- id: incantesimo
+  title: Incantesimo
+  default_type: evocazione
+  target: z.modelli/Incantesimo.md
+  jinja: spell.md.j2
+  primary: true
+subtypes:
+- abiurazione
+- ammaliamento
+- divinazione
+- evocazione
+- illusione
+- invocazione
+- necromanzia
+- trasmutazione
+scheda:
+- livello
+- tempo_lancio
+- gittata
+- componenti
+- durata
+- classi
+creation:
+  fields:
+  - field: tipo
+    prompt: Scuola di magia
+    from: subtypes
+    required: true
+  - field: mondo
+    prompt: Mondo (opzionale)
+    from: notes
+    category: mondo
+    link: true
+    optional: true
+  body:
+  - field: effetto
+    prompt: Effetto dell'incantesimo
+    heading: Effetto
+  - field: a_livello_superiore
+    prompt: Ai livelli superiori
+    heading: Ai livelli superiori

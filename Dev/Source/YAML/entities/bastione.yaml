@@ -1,0 +1,34 @@
+# Schema per-entità: bastione. Single source di tassonomia, scheda, assi,
+# relazioni, wizard e wiring template. render.py lo distribuisce nel
+# modello globale 'core' (apply_entities) e raccoglie i template.
+# I campi sono nel registro centrale (core.yaml/system.yaml).
+id: bastione
+folder: Mondi/Bastioni
+order: 20
+templates:
+- id: bastione
+  title: Bastione
+  default_type: bastione
+  target: z.modelli/Bastione.md
+  jinja: reference.md.j2
+subtypes:
+- bastione
+creation:
+  fields:
+  - field: tipo
+    prompt: Tipo
+    from: subtypes
+    required: true
+  - field: mondo
+    prompt: Mondo (opzionale)
+    from: notes
+    category: mondo
+    link: true
+    optional: true
+  body:
+  - field: descrizione
+    prompt: Cos'e' il bastione
+    heading: Descrizione
+  - field: strutture
+    prompt: Strutture speciali e ordini di bastione
+    heading: Strutture

@@ -10,6 +10,7 @@
 # sezioni body leggibili.
 id: fazione
 folder: Mondi/Fazioni
+order: 5
 templates:
   - id: fazione
     title: Fazione

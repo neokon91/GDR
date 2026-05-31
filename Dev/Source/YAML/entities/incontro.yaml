@@ -1,0 +1,60 @@
+# Schema per-entità: incontro. Single source di tassonomia, scheda, assi,
+# relazioni, wizard e wiring template. render.py lo distribuisce nel
+# modello globale 'core' (apply_entities) e raccoglie i template.
+# I campi sono nel registro centrale (core.yaml/system.yaml).
+id: incontro
+folder: Mondi/Incontri
+order: 10
+templates:
+- id: incontro
+  title: Incontro
+  default_type: incontro
+  target: z.modelli/Incontro.md
+  jinja: encounter.md.j2
+  primary: true
+subtypes:
+- incontro
+- agguato
+- inseguimento
+relazioni:
+- field: luogo
+  label: Luogo
+  category: luogo
+- field: creature
+  label: Creature
+  category: creatura
+  multi: true
+creation:
+  fields:
+  - field: tipo
+    prompt: Tipo di incontro
+    from: subtypes
+    required: true
+  - field: mondo
+    prompt: Mondo
+    from: notes
+    category: mondo
+    link: true
+    required: true
+  - field: luogo
+    prompt: Dove avviene (opzionale)
+    from: notes
+    category: luogo
+    link: true
+    optional: true
+  - field: creature
+    prompt: Creature coinvolte
+    from: notes
+    category: creatura
+    link: true
+    multi: true
+  body:
+  - field: obiettivo
+    prompt: Obiettivo della scena
+    heading: Obiettivo
+  - field: complicazione
+    prompt: Terreno o complicazione
+    heading: Complicazione
+  - field: posta
+    prompt: 'Posta in gioco: cosa succede se va male'
+    heading: Posta in gioco

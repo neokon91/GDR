@@ -1,29 +1,18 @@
 id: gdr_core
 version: 0.1.0
 purpose: >-
-  Ontologia del core loop di worldbuilding: cartelle, categorie di lore,
-  superficie giocabile (tavolo), assi tematici, relazioni e wizard di lore.
-  È il piano "mondo" del vault; lo schema delle entità di sistema 5.5e vive in
-  system.yaml, che render.py FONDE qui (deep_merge) in un unico 'core'.
-  Confine (validato da check): qui mai scheda/statblock/caratteristiche né le
-  categorie di sistema (classe/specie/oggetto/incantesimo/...).
-folders:
-  mondo: Mondi
-  cosmologia: Mondi/Cosmologia
-  luogo: Mondi/Luoghi
-  cultura: Mondi/Culture
-  evento: Mondi/Eventi
-  lingua: Mondi/Lingue
-  personaggio: Mondi/Personaggi
-  creatura: Mondi/Creature
-  incontro: Mondi/Incontri
-  sessione: Mondi/Sessioni
-  inbox: Inbox
+  Globali del worldbuilding condivisi da TUTTE le entità: registro campi
+  trasversali, superficie giocabile (tavolo) e stati del flusso. Lo schema
+  specifico di ogni entità (tassonomia, scheda, assi, relazioni, wizard,
+  template) vive in entities/*.yaml; lo schema di sistema 5.5e in system.yaml.
+  render.py fonde tutto in un unico 'core'. Confine (validato da check): qui mai
+  scheda/statblock/caratteristiche né categorie/relazioni/creation per-entità.
 # Registro campi: unica fonte per label e widget dei campi editabili nelle note.
 # I template Jinja li emettono via la macro field('<id>') (vedi Jinja/_macros.j2).
 # widget: 'text' -> INPUT[text:<id>]; altrimenti nome di un template Meta Bind
 # dichiarato in plugins.yaml:metabind_inputs -> INPUT[<widget>][:<id>].
-# I campi di sistema 5.5e (rarità, livello, dado_vita, ...) sono in system.fields.
+# È un registro CENTRALE condiviso: i campi specifici di sistema 5.5e stanno in
+# system.fields; un'entità può dichiararne di propri in entities/<x>.yaml:fields.
 fields:
   tipo:           { label: Tipo,                 widget: text }
   stato:          { label: Stato,                widget: stato }
@@ -40,7 +29,7 @@ fields:
   scena_corrente: { label: Scena corrente,       widget: text }
   quando:         { label: Quando,               widget: text }
   allineamento:   { label: Allineamento,         widget: allineamento }
-  # Worldbuilding — campi strutturati di lore (mostrati da scheda(), tipizzati in fileClass)
+  # Campi strutturati di lore (mostrati da scheda(), tipizzati in fileClass)
   epoca:          { label: Epoca,                widget: text }
   scala:          { label: Scala,                widget: scala }
   genere:         { label: Genere,               widget: genere }
@@ -59,258 +48,10 @@ tavolo:
   - { field: gancio,        callout: gancio,  title: Gancio, fold: true }
   - { field: pressione,     callout: warning, title: Pressione }
 
-categories:
-  mondo:
-    folder: mondo
-    subtypes:
-      - mondo
-  cosmologia:
-    folder: cosmologia
-    subtypes:
-      - legge cosmica
-      - piano o aldila
-  luogo:
-    folder: luogo
-    subtypes:
-      - regione
-      - insediamento
-      - sito di interesse
-      - struttura
-      - dungeon
-      - rovina
-      - landmark naturale
-  cultura:
-    folder: cultura
-    subtypes:
-      - civilta
-      - popolo
-      - tradizione
-      - religione
-  evento:
-    folder: evento
-    subtypes:
-      - evento storico
-      - evento di campagna
-  lingua:
-    folder: lingua
-    subtypes:
-      - lingua
-      - dialetto
-      - codice o gergo
-  personaggio:
-    folder: personaggio
-    subtypes:
-      - pg
-      - png
-  creatura:
-    folder: creatura
-    subtypes:
-      - aberrazione
-      - bestia
-      - celestiale
-      - costrutto
-      - drago
-      - elementale
-      - fata
-      - gigante
-      - immondo
-      - melma
-      - mostruosita
-      - non-morto
-      - umanoide
-      - vegetale
-  incontro:
-    folder: incontro
-    subtypes:
-      - incontro
-      - agguato
-      - inseguimento
-  sessione:
-    folder: sessione
-    subtypes:
-      - sessione
-  nota:
-    folder: inbox
-    subtypes:
-      - appunto
+# Stati del flusso (condivisi): Select 'stato' nelle fileClass e nell'identità.
 states:
   - bozza
   - pronto
   - in gioco
   - giocata
   - archiviata
-
-# Assi tematici: spettri 0-10 che danno a un'entita' un'identita' di sistema,
-# leggibile a colpo d'occhio e interrogabile da Dataview. Renderizzati dalla
-# macro carattere(categoria) come slider Meta Bind; il valore vive nel
-# frontmatter sotto l'id dell'asse. Single source dell'identita' tematica.
-# (oggetto è categoria di sistema ma ha comunque un "carattere" worldbuilding.)
-assi_tematici:
-  mondo:
-    - { id: civilta_natura,       sinistra: Civilta,    destra: Natura }
-    - { id: ordine_caos,          sinistra: Ordine,     destra: Caos }
-    - { id: magia_rara_diffusa,   sinistra: Magia rara, destra: Magia diffusa }
-  luogo:
-    - { id: sicuro_pericoloso,    sinistra: Sicuro,     destra: Pericoloso }
-    - { id: prospero_misero,      sinistra: Prospero,   destra: Misero }
-    - { id: noto_segreto,         sinistra: Noto,       destra: Segreto }
-  personaggio:
-    - { id: lecito_caotico,       sinistra: Lecito,     destra: Caotico }
-    - { id: altruista_egoista,    sinistra: Altruista,  destra: Egoista }
-    - { id: calmo_volatile,       sinistra: Calmo,      destra: Volatile }
-  cultura:
-    - { id: tradizione_innovazione, sinistra: Tradizione, destra: Innovazione }
-    - { id: aperta_chiusa,        sinistra: Aperta,     destra: Chiusa }
-    - { id: gerarchica_egualitaria, sinistra: Gerarchica, destra: Egualitaria }
-  creatura:
-    - { id: docile_ostile,        sinistra: Docile,     destra: Ostile }
-    - { id: solitaria_gregaria,   sinistra: Solitaria,  destra: Gregaria }
-    - { id: mondana_magica,       sinistra: Mondana,    destra: Magica }
-  oggetto:
-    - { id: comune_leggendario,   sinistra: Comune,     destra: Leggendario }
-    - { id: sicuro_rischioso,     sinistra: Sicuro,     destra: Rischioso }
-
-# Relazioni tipizzate: link SEMANTICI fra entita', scoped alla cartella della
-# categoria target. Single source renderizzato dalla macro relazioni(categoria)
-# come suggester Meta Bind (singolo) o inlineListSuggester (multi). Si affiancano
-# a 'connessioni' (catch-all libero). Interrogabili da Dataview (es. alleati/rivali).
-#   { field, label, category (target), multi? }
-# Le relazioni delle entità di sistema (oggetto, sottoclasse) sono in system.relazioni.
-relazioni:
-  personaggio:
-    - { field: fazione,        label: Affiliazione,   category: fazione }
-    - { field: luogo,          label: Base,           category: luogo }
-    - { field: alleati,        label: Alleati,        category: personaggio, multi: true }
-    - { field: rivali,         label: Rivali,         category: personaggio, multi: true }
-  luogo:
-    - { field: regione,        label: Regione,        category: luogo }
-    - { field: controllata_da, label: Controllata da, category: fazione }
-    - { field: abitanti,       label: Figure,         category: personaggio, multi: true }
-  cultura:
-    - { field: regioni,        label: Regioni,        category: luogo, multi: true }
-    - { field: lingua,         label: Lingua,         category: lingua }
-  lingua:
-    - { field: parlata_in,     label: Parlata in,     category: luogo, multi: true }
-    - { field: culture,        label: Culture,        category: cultura, multi: true }
-  cosmologia:
-    - { field: divinita,       label: Divinita legate,category: cosmologia, multi: true }
-  evento:
-    - { field: luogo,          label: Luogo,          category: luogo }
-    - { field: coinvolti,      label: Coinvolti,      category: personaggio, multi: true }
-    - { field: fazioni,        label: Fazioni,        category: fazione, multi: true }
-  incontro:
-    - { field: luogo,          label: Luogo,          category: luogo }
-    - { field: creature,       label: Creature,       category: creatura, multi: true }
-  creatura:
-    - { field: habitat,        label: Habitat,        category: luogo, multi: true }
-
-# Wizard di creazione per categoria (letto da create_entity.js dopo il merge).
-# Ogni domanda: { field, prompt, ... }
-#   from: subtypes  -> suggester sui subtypes della categoria
-#   from: notes, category: X, link: true  -> suggester sulle note esistenti di
-#         categoria X -> salva un link [[..]] (multi: true per piu' scelte)
-#   from: list, options: [...]  -> suggester su opzioni fisse
-#   (default)       -> testo libero
-# fields -> frontmatter; body -> sezioni markdown pre-compilate nel corpo
-#   (heading: "Titolo" come ## ; oppure callout: quote/warning/... title/fold)
-# I wizard delle entità di sistema 5.5e sono in system.creation.
-creation:
-  personaggio:
-    fields:
-      - { field: tipo, prompt: "Tipo di personaggio", from: subtypes, required: true }
-      - { field: mondo, prompt: "Mondo di appartenenza", from: notes, category: mondo, link: true, required: true }
-      - { field: fazione, prompt: "Fazione (opzionale)", from: notes, category: fazione, link: true, optional: true }
-      - { field: luogo, prompt: "Dove si trova di solito (opzionale)", from: notes, category: luogo, link: true, optional: true }
-    body:
-      - { field: ruolo, prompt: "Ruolo o occupazione", heading: "Ruolo" }
-      - { field: aspetto, prompt: "Tratto distintivo: voce, aspetto, manierismo", heading: "Aspetto" }
-      - { field: desiderio, prompt: "Cosa vuole davvero", heading: "Vuole" }
-      - { field: paura, prompt: "Cosa teme o evita", heading: "Teme" }
-      - { field: voce, prompt: "Come parla: tono, tic, cadenza", heading: "Voce" }
-      - { field: oggetto, prompt: "Un oggetto che porta sempre con sé", heading: "Oggetto" }
-      - { field: frase, prompt: "Una battuta tipica (da dire al tavolo)", callout: quote, title: "Frase tipica" }
-      - { field: segreto, prompt: "Segreto (non mostrare ai giocatori)", callout: segreto, title: "Segreto", fold: true }
-  luogo:
-    fields:
-      - { field: tipo, prompt: "Tipo di luogo", from: subtypes, required: true }
-      - { field: mondo, prompt: "Mondo", from: notes, category: mondo, link: true, required: true }
-    body:
-      - { field: funzione, prompt: "Cos'e' / a cosa serve", heading: "Funzione" }
-      - { field: controllo, prompt: "Chi o cosa lo controlla", heading: "Controllo" }
-      - { field: atmosfera, prompt: "Atmosfera: cosa si vede, sente, odora", heading: "Atmosfera" }
-      - { field: storia, prompt: "Cosa è successo qui (passato che pesa)", heading: "Storia" }
-      - { field: tensione, prompt: "Tensione o pericolo presente", heading: "Tensione" }
-      - { field: segreto, prompt: "Segreto del luogo", callout: segreto, title: "Segreto", fold: true }
-  incontro:
-    fields:
-      - { field: tipo, prompt: "Tipo di incontro", from: subtypes, required: true }
-      - { field: mondo, prompt: "Mondo", from: notes, category: mondo, link: true, required: true }
-      - { field: luogo, prompt: "Dove avviene (opzionale)", from: notes, category: luogo, link: true, optional: true }
-      - { field: creature, prompt: "Creature coinvolte", from: notes, category: creatura, link: true, multi: true }
-    body:
-      - { field: obiettivo, prompt: "Obiettivo della scena", heading: "Obiettivo" }
-      - { field: complicazione, prompt: "Terreno o complicazione", heading: "Complicazione" }
-      - { field: posta, prompt: "Posta in gioco: cosa succede se va male", heading: "Posta in gioco" }
-  evento:
-    fields:
-      - { field: tipo, prompt: "Tipo di evento", from: subtypes, required: true }
-      - { field: mondo, prompt: "Mondo", from: notes, category: mondo, link: true, required: true }
-      - { field: quando, prompt: "Quando (data del mondo)" }
-    body:
-      - { field: cause, prompt: "Cause: perché è successo", heading: "Cause" }
-      - { field: cosa, prompt: "Cosa accade", heading: "Cosa accade" }
-      - { field: conseguenza, prompt: "Conseguenza per il presente", heading: "Conseguenza" }
-      - { field: eredita, prompt: "Cosa ne resta oggi (ganci vivi)", heading: "Eredità" }
-  mondo:
-    fields:
-      - { field: temi, prompt: "Temi della campagna", from: list, options: [politico, guerra, mistero, sopravvivenza, esplorazione, horror, intrigo, redenzione], multi: true, optional: true }
-    body:
-      - { field: tono, prompt: "Tono e atmosfera del mondo", heading: "Tono" }
-      - { field: conflitto, prompt: "Conflitto centrale", heading: "Conflitto centrale" }
-      - { field: magia, prompt: "Ruolo della magia nel mondo", heading: "Magia" }
-      - { field: poteri, prompt: "Chi detiene il potere", heading: "Poteri" }
-      - { field: verita_nascosta, prompt: "La verità nascosta del mondo", callout: segreto, title: "Verità nascosta", fold: true }
-  cosmologia:
-    fields:
-      - { field: tipo, prompt: "Tipo cosmologico", from: subtypes, required: true }
-      - { field: mondo, prompt: "Mondo", from: notes, category: mondo, link: true, required: true }
-    body:
-      - { field: natura, prompt: "Cos'e' / come si manifesta", heading: "Natura" }
-      - { field: influenza, prompt: "Come tocca il mondo mortale", heading: "Influenza" }
-      - { field: manifestazioni, prompt: "Come si vede nel mondo (segni, fenomeni)", heading: "Manifestazioni" }
-      - { field: segreto, prompt: "Verita' nascosta", callout: segreto, title: "Segreto", fold: true }
-  cultura:
-    fields:
-      - { field: tipo, prompt: "Tipo di cultura", from: subtypes, required: true }
-      - { field: mondo, prompt: "Mondo", from: notes, category: mondo, link: true, required: true }
-    body:
-      - { field: valori, prompt: "Valori fondanti", heading: "Valori" }
-      - { field: vita, prompt: "Vita quotidiana", heading: "Vita" }
-      - { field: riti, prompt: "Riti di passaggio, feste", heading: "Riti" }
-      - { field: tabu, prompt: "Tabù: cosa è proibito", heading: "Tabù" }
-      - { field: estetica, prompt: "Estetica: arte, moda, architettura", heading: "Estetica" }
-      - { field: tensione, prompt: "Attrito con altre culture", heading: "Tensione" }
-  lingua:
-    fields:
-      - { field: tipo, prompt: "Tipo di lingua", from: subtypes, required: true }
-      - { field: mondo, prompt: "Mondo", from: notes, category: mondo, link: true, required: true }
-    body:
-      - { field: chi_parla, prompt: "Chi la parla", heading: "Parlanti" }
-      - { field: suono, prompt: "Come suona", heading: "Suono" }
-      - { field: scrittura, prompt: "Sistema di scrittura / alfabeto", heading: "Scrittura" }
-      - { field: lessico, prompt: "Parole/frasi chiave usabili al tavolo", heading: "Lessico" }
-  creatura:
-    fields:
-      - { field: tipo, prompt: "Tipo di creatura (5e)", from: subtypes, required: true }
-      - { field: mondo, prompt: "Mondo", from: notes, category: mondo, link: true, required: true }
-    body:
-      - { field: ecologia, prompt: "Ecologia: dove vive, abitudini", heading: "Ecologia" }
-      - { field: tattiche, prompt: "Tattiche in combattimento", heading: "Tattiche" }
-  # La sessione ha un layout proprio (session.md.j2): niente 'body' wizard
-  # (duplicherebbe i campi gia' renderizzati). Questi prompt facoltativi
-  # pre-compilano la preparazione; i campi restano editabili nel template.
-  sessione:
-    fields:
-      - { field: mondo, prompt: "Mondo della sessione", from: notes, category: mondo, link: true, optional: true }
-      - { field: obiettivo, prompt: "Obiettivo della sessione (cosa deve accadere)", optional: true }
-      - { field: apertura, prompt: "Scena d'apertura", optional: true }

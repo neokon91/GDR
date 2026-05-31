@@ -1,0 +1,65 @@
+# Schema per-entità: mondo. Single source di tassonomia, scheda, assi,
+# relazioni, wizard e wiring template. render.py lo distribuisce nel
+# modello globale 'core' (apply_entities) e raccoglie i template.
+# I campi sono nel registro centrale (core.yaml/system.yaml).
+id: mondo
+folder: Mondi
+order: 1
+templates:
+- id: mondo
+  title: Mondo
+  default_type: mondo
+  target: z.modelli/Mondo.md
+  jinja: mondo.md.j2
+  primary: true
+subtypes:
+- mondo
+scheda:
+- scala
+- genere
+- epoca
+- temi
+assi:
+- id: civilta_natura
+  sinistra: Civilta
+  destra: Natura
+- id: ordine_caos
+  sinistra: Ordine
+  destra: Caos
+- id: magia_rara_diffusa
+  sinistra: Magia rara
+  destra: Magia diffusa
+creation:
+  fields:
+  - field: temi
+    prompt: Temi della campagna
+    from: list
+    options:
+    - politico
+    - guerra
+    - mistero
+    - sopravvivenza
+    - esplorazione
+    - horror
+    - intrigo
+    - redenzione
+    multi: true
+    optional: true
+  body:
+  - field: tono
+    prompt: Tono e atmosfera del mondo
+    heading: Tono
+  - field: conflitto
+    prompt: Conflitto centrale
+    heading: Conflitto centrale
+  - field: magia
+    prompt: Ruolo della magia nel mondo
+    heading: Magia
+  - field: poteri
+    prompt: Chi detiene il potere
+    heading: Poteri
+  - field: verita_nascosta
+    prompt: La verità nascosta del mondo
+    callout: segreto
+    title: Verità nascosta
+    fold: true

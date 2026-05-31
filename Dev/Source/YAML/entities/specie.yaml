@@ -1,0 +1,32 @@
+# Schema per-entità: specie. Single source di tassonomia, scheda, assi,
+# relazioni, wizard e wiring template. render.py lo distribuisce nel
+# modello globale 'core' (apply_entities) e raccoglie i template.
+# I campi sono nel registro centrale (core.yaml/system.yaml).
+id: specie
+folder: Mondi/Specie
+order: 16
+templates:
+- id: specie
+  title: Specie
+  default_type: comune
+  target: z.modelli/Specie.md
+  jinja: reference.md.j2
+subtypes:
+- comune
+- esotica
+- mostruosa
+scheda:
+- taglia
+- velocita
+- tipo_creatura
+- lignaggio
+creation:
+  fields:
+  - field: tipo
+    prompt: Tipo di specie
+    from: subtypes
+    required: true
+  body:
+  - field: tratti
+    prompt: Tratti di specie
+    heading: Tratti

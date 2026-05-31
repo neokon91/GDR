@@ -1,0 +1,31 @@
+# Schema per-entità: sottoclasse. Single source di tassonomia, scheda, assi,
+# relazioni, wizard e wiring template. render.py lo distribuisce nel
+# modello globale 'core' (apply_entities) e raccoglie i template.
+# I campi sono nel registro centrale (core.yaml/system.yaml).
+id: sottoclasse
+folder: Mondi/Sottoclassi
+order: 15
+templates:
+- id: sottoclasse
+  title: Sottoclasse
+  default_type: sottoclasse
+  target: z.modelli/Sottoclasse.md
+  jinja: subclass.md.j2
+subtypes:
+- sottoclasse
+relazioni:
+- field: classe
+  label: Classe
+  category: classe
+creation:
+  fields:
+  - field: classe
+    prompt: Classe di appartenenza
+    from: notes
+    category: classe
+    link: true
+    required: true
+  body:
+  - field: privilegi
+    prompt: Privilegi (livelli 3/6/10/14)
+    heading: Privilegi

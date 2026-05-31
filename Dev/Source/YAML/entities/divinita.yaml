@@ -1,0 +1,41 @@
+# Schema per-entità: divinita. Single source di tassonomia, scheda, assi,
+# relazioni, wizard e wiring template. render.py lo distribuisce nel
+# modello globale 'core' (apply_entities) e raccoglie i template.
+# I campi sono nel registro centrale (core.yaml/system.yaml).
+id: divinita
+folder: Mondi/Divinita
+order: 19
+templates:
+- id: divinita
+  title: Divinità
+  default_type: divinità maggiore
+  target: z.modelli/Divinita.md
+  jinja: reference.md.j2
+subtypes:
+- divinità maggiore
+- divinità minore
+- semidio
+- pantheon
+scheda:
+- dominio
+- allineamento
+- simbolo
+creation:
+  fields:
+  - field: tipo
+    prompt: Rango divino
+    from: subtypes
+    required: true
+  - field: mondo
+    prompt: Mondo (opzionale)
+    from: notes
+    category: mondo
+    link: true
+    optional: true
+  body:
+  - field: dogmi
+    prompt: Dogmi e aspettative
+    heading: Dogmi
+  - field: culto
+    prompt: 'Culto: fedeli, riti, templi'
+    heading: Culto

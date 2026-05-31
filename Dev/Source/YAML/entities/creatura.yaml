@@ -1,0 +1,63 @@
+# Schema per-entità: creatura. Single source di tassonomia, scheda, assi,
+# relazioni, wizard e wiring template. render.py lo distribuisce nel
+# modello globale 'core' (apply_entities) e raccoglie i template.
+# I campi sono nel registro centrale (core.yaml/system.yaml).
+id: creatura
+folder: Mondi/Creature
+order: 9
+templates:
+- id: creatura
+  title: Creatura
+  default_type: bestia
+  target: z.modelli/Creatura.md
+  jinja: creature.md.j2
+  primary: true
+subtypes:
+- aberrazione
+- bestia
+- celestiale
+- costrutto
+- drago
+- elementale
+- fata
+- gigante
+- immondo
+- melma
+- mostruosita
+- non-morto
+- umanoide
+- vegetale
+assi:
+- id: docile_ostile
+  sinistra: Docile
+  destra: Ostile
+- id: solitaria_gregaria
+  sinistra: Solitaria
+  destra: Gregaria
+- id: mondana_magica
+  sinistra: Mondana
+  destra: Magica
+relazioni:
+- field: habitat
+  label: Habitat
+  category: luogo
+  multi: true
+creation:
+  fields:
+  - field: tipo
+    prompt: Tipo di creatura (5e)
+    from: subtypes
+    required: true
+  - field: mondo
+    prompt: Mondo
+    from: notes
+    category: mondo
+    link: true
+    required: true
+  body:
+  - field: ecologia
+    prompt: 'Ecologia: dove vive, abitudini'
+    heading: Ecologia
+  - field: tattiche
+    prompt: Tattiche in combattimento
+    heading: Tattiche

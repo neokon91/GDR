@@ -1,0 +1,83 @@
+# Schema per-entità: oggetto. Single source di tassonomia, scheda, assi,
+# relazioni, wizard e wiring template. render.py lo distribuisce nel
+# modello globale 'core' (apply_entities) e raccoglie i template.
+# I campi sono nel registro centrale (core.yaml/system.yaml).
+id: oggetto
+folder: Mondi/Oggetti
+order: 11
+templates:
+- id: oggetto
+  title: Oggetto
+  default_type: strumento
+  target: z.modelli/Oggetto.md
+  jinja: reference.md.j2
+  primary: true
+- id: oggetto_magico
+  title: Oggetto Magico
+  default_type: oggetto magico
+  target: z.modelli/Oggetto Magico.md
+  jinja: reference.md.j2
+  primary: true
+subtypes:
+- arma
+- armatura
+- scudo
+- oggetto meraviglioso
+- strumento
+- oggetto magico
+- veleno
+- tesoro
+- veicolo o cavalcatura
+scheda:
+- rarita
+- sintonia
+assi:
+- id: comune_leggendario
+  sinistra: Comune
+  destra: Leggendario
+- id: sicuro_rischioso
+  sinistra: Sicuro
+  destra: Rischioso
+relazioni:
+- field: proprietario
+  label: Proprietario
+  category: personaggio
+- field: dove
+  label: Dove si trova
+  category: luogo
+creation:
+  fields:
+  - field: tipo
+    prompt: Tipo di oggetto
+    from: subtypes
+    required: true
+  - field: mondo
+    prompt: Mondo (opzionale)
+    from: notes
+    category: mondo
+    link: true
+    optional: true
+  - field: rarita
+    prompt: Rarità (se magico)
+    from: list
+    options:
+    - comune
+    - non comune
+    - raro
+    - molto raro
+    - leggendario
+    - artefatto
+    optional: true
+  - field: sintonia
+    prompt: Sintonia richiesta? (es. sì, da un druido)
+    optional: true
+  body:
+  - field: descrizione_oggetto
+    prompt: Aspetto e fattura
+    heading: Aspetto
+  - field: effetto
+    prompt: 'Cosa fa: regole/effetto al tavolo'
+    heading: Effetto
+  - field: provenienza
+    prompt: Costo, come si ottiene
+    heading: Provenienza
