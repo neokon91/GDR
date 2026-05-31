@@ -39,12 +39,16 @@ calcolata (Calma/Tensione/Crisi). È il differenziatore: lore già pronta a esse
   da `grado_sfida`) + campo `gs` su `creatura` homebrew.
 - **Calcolo** (`views.renderEncounter`, tab *Combattimento*): budget del gruppo
   (`pg_livello`×`pg_numero`) vs XP totale delle creature collegate (`pe` diretto o `cr_xp[gs]`)
-  → etichetta difficoltà (Banale/Bassa/Moderata/Alta/Mortale) + la **lista pronta** per il
-  blocco `encounter` (Initiative Tracker).
+  → etichetta difficoltà (Banale/Bassa/Moderata/Alta/Mortale).
+- **Auto-riscrittura del blocco** (`meta_actions.aggiorna_encounter`, bottone *Aggiorna
+  encounter*): riscrive il fence ```` ```encounter ```` dalle creature in *Collegamenti*
+  (conta per nome — occorrenze ripetute = quantità — risolve i link al basename, allinea
+  `name:` al titolo, preserva `players:`). Niente più copia-incolla della lista.
 
 ## Azioni (`meta_actions.js` + bottoni)
 `collega` (link reciproco), `marca_canonico`, `archivia`, `applica_profilo`,
-`scatena_conseguenza`, `sali_di_livello` (delega a `tp.user.sali_pg`). Esposte come bottoni
+`scatena_conseguenza`, `sali_di_livello` (delega a `tp.user.sali_pg`), `aggiorna_encounter`
+(riscrive il blocco `encounter` dalle creature collegate). Esposte come bottoni
 Meta Bind: `plugins.yaml:buttons` → `templates.yaml:actions` → `action.md.j2` genera il file
 azione che chiama `tp.user.meta_actions(tp, "<id>")`.
 

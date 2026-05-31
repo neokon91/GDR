@@ -25,3 +25,6 @@ actions:
   - id: sali_di_livello
     title: Sali di livello
     target: z.modelli/azioni/Sali di livello.md
+  - id: aggiorna_encounter
+    title: Aggiorna encounter
+    target: z.modelli/azioni/Aggiorna encounter.md

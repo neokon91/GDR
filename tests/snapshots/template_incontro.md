@@ -59,6 +59,9 @@ Avvia il combattimento dal blocco (Initiative Tracker). Aggiungi le creature per
 nome dal bestiario (SRD / Fantasy Statblocks) con `- <numero>: <Nome>`; `players: true`
 include il gruppo.
 
+> [!tip] Sincronizza dalle creature collegate
+> Riscrive il blocco qui sotto dalle creature in *Collegamenti* (niente copia-incolla): `BUTTON[aggiorna-encounter]`
+
 ```encounter
 name: <% tp.file.title %>
 players: true

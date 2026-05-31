@@ -13,6 +13,20 @@ async function loadCore() {
   }
 }
 
+// Nome di una creatura da un link del frontmatter: risolve [[Nota]] al basename
+// reale (così combacia con lo statblock del bestiario); fallback all'alias o
+// all'ultimo segmento se il link non risolve.
+function linkName(link, sourcePath) {
+  const raw = String(link ?? "").trim();
+  const m = raw.match(/\[\[([^\]]+)\]\]/);
+  const inner = m ? m[1] : raw;
+  const target = inner.split("|")[0].split("#")[0].trim();
+  const dest = app.metadataCache?.getFirstLinkpathDest?.(target, sourcePath || "");
+  if (dest && dest.basename) return dest.basename;
+  const alias = inner.includes("|") ? inner.split("|").slice(1).join("|").trim() : "";
+  return alias || target.split("/").pop() || "";
+}
+
 // Aggiunge un valore a una lista del frontmatter senza duplicati.
 function pushUnique(fm, key, value) {
   const list = Array.isArray(fm[key]) ? fm[key] : (fm[key] ? [fm[key]] : []);
@@ -144,6 +158,35 @@ ${conseguenza}
   return "";
 }
 
+// Riscrive il blocco ```encounter``` della nota dalle creature collegate
+// (frontmatter 'creature'): rigenera la lista `creatures:` (per nome × quantità,
+// le occorrenze ripetute = più creature, coerente con la difficoltà) e allinea
+// `name:` al titolo della nota; preserva `players:`. Toglie il copia-incolla.
+async function aggiorna_encounter(tp, file) {
+  const fm = app.metadataCache.getFileCache(file)?.frontmatter ?? {};
+  const creature = Array.isArray(fm.creature) ? fm.creature : (fm.creature ? [fm.creature] : []);
+  const counts = {};
+  for (const l of creature) {
+    const nome = linkName(l, file.path);
+    if (nome) counts[nome] = (counts[nome] || 0) + 1;
+  }
+  const righe = Object.entries(counts).map(([n, q]) => `  - ${q}: ${n}`);
+
+  const data = await app.vault.read(file);
+  const re = /```encounter\r?\n[\s\S]*?\r?\n```/;
+  const cur = data.match(re);
+  if (!cur) { new Notice("Nessun blocco ```encounter``` in questa nota."); return ""; }
+  const pm = cur[0].match(/^players\s*:\s*(.+)$/m);
+  const players = pm ? pm[1].trim() : "true";
+  const lista = righe.length ? righe.join("\n") : "  # Collega le creature (tab Collegamenti) e ripremi.";
+  const blocco = "```encounter\nname: " + file.basename + "\nplayers: " + players + "\ncreatures:\n" + lista + "\n```";
+  await app.vault.modify(file, data.replace(re, blocco));
+  new Notice(righe.length
+    ? `Blocco encounter aggiornato: ${creature.length} creatura/e collegate.`
+    : "Blocco encounter aggiornato (nessuna creatura collegata).");
+  return "";
+}
+
 async function meta_actions(tp, action = "") {
   const file = app.workspace.getActiveFile?.() ?? tp.config?.target_file;
   if (!file) {
@@ -179,6 +222,10 @@ async function meta_actions(tp, action = "") {
 
   if (action === "scatena_conseguenza") {
     return await scatena_conseguenza(tp, file);
+  }
+
+  if (action === "aggiorna_encounter") {
+    return await aggiorna_encounter(tp, file);
   }
 
   if (action === "sali_di_livello") {

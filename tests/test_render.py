@@ -345,6 +345,42 @@ def test_encounter_xp(tmp_path):
 
 
 @pytest.mark.skipif(not shutil.which("node"), reason="node assente")
+def test_aggiorna_encounter_e2e(tmp_path):
+    """meta_actions.aggiorna_encounter riscrive il blocco ```encounter``` dalle
+    creature collegate (mock Obsidian): conta per nome (occorrenze ripetute =
+    quantità), risolve i link al basename e allinea name al titolo, preservando
+    players. Toglie il copia-incolla del residuo Fase 2."""
+    harness = tmp_path / "enc_rewrite.js"
+    harness.write_text(
+        'const body = "# Incontro\\n\\n```encounter\\nname: Vecchio\\n'
+        'players: false\\ncreatures:\\n  - 1: Nome Creatura\\n```\\n\\nfine";\n'
+        'let saved = null;\n'
+        'const file = { basename: "Imboscata", path: "Incontri/Imboscata.md" };\n'
+        'global.Notice = class { constructor(m){} };\n'
+        'global.app = {\n'
+        '  workspace: { getActiveFile: () => file },\n'
+        '  metadataCache: {\n'
+        '    getFileCache: () => ({ frontmatter: { creature: ["[[Goblin]]","[[Goblin]]","[[Orco|Bruto]]"] } }),\n'
+        '    getFirstLinkpathDest: (t) => ({ basename: t }),\n'
+        '  },\n'
+        '  vault: { read: async () => body, modify: async (f, d) => { saved = d; } },\n'
+        '};\n'
+        f'const meta = require({json.dumps(str(render.JS_DIR / "meta_actions.js"))});\n'
+        'meta({}, "aggiorna_encounter").then(() => process.stdout.write(saved));\n',
+        encoding="utf-8")
+    res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
+    assert res.returncode == 0, res.stderr
+    out = res.stdout
+    assert "name: Imboscata" in out          # name allineato al titolo della nota
+    assert "players: false" in out           # players preservato
+    assert "  - 2: Goblin" in out            # occorrenze ripetute -> quantità
+    assert "  - 1: Orco" in out              # link risolto al basename del target
+    assert "Nome Creatura" not in out        # placeholder sostituito
+    assert out.count("```encounter") == 1    # un solo blocco, ben formato
+    assert out.startswith("# Incontro") and out.rstrip().endswith("fine")  # corpo preservato
+
+
+@pytest.mark.skipif(not shutil.which("node"), reason="node assente")
 def test_sali_pg_e2e(tmp_path):
     """sali_pg.js sale un PG di livello (mock Obsidian): un mago L1->L2 aggiorna
     livello/competenza/slot dalla progressione e i PF (media fissa + mod COS)."""

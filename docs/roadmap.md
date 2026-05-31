@@ -133,8 +133,9 @@ sopra i sistemi avanzati (vedi backlog).
 - **Gap al tavolo (residui)**:
   - **Quick-ref condizioni/regole**: le 15 condizioni hanno gli effetti pieni nelle note
     SRD, ma manca un richiamo *rapido* in scheda/incontro durante il gioco.
-  - **Encounter block**: la difficoltà mostra la lista creature pronta, ma il blocco
-    `encounter` non si auto-riscrive (copia-incolla).
+  - ✅ **Encounter block auto-riscritto**: il bottone *Aggiorna encounter*
+    (`meta_actions.aggiorna_encounter`) riscrive il fence `encounter` dalle creature
+    collegate (conta per nome, risolve i link, preserva `players`). Niente più copia-incolla.
   - **Level-up avanzato**: scelte di sottoclasse multiple/feature opzionali oltre il
     set base; il motore copre il flusso standard.
 - **Azione**: tutto da **confermare in-app** (rischio #1); poi quick-ref condizioni e le
@@ -164,8 +165,9 @@ i sistemi avanzati. La QA in-app è igiene continua, non una fase a sé.
    *Scatena conseguenza* crea un evento collegato e azzera il clock (ponte gioco→mondo);
    dashboard **Fronti** (clock pieni/in corso + conseguenze-storia). Vedi [play_layer](play_layer.md).
 5. ✅ **Difficoltà incontri** — budget XP 2024 vs GS delle creature collegate (GS/PE
-   interrogabili) + lista pronta per il blocco `encounter`. *Residui*: quick-ref condizioni
-   in scheda/incontro; auto-riscrittura del blocco encounter (ora solo lista suggerita).
+   interrogabili) + ✅ **auto-riscrittura del blocco `encounter`** (bottone *Aggiorna
+   encounter* → `meta_actions.aggiorna_encounter`). *Residuo*: quick-ref condizioni in
+   scheda/incontro.
 6. ✅ **Progressione PG 2-20** — *sali di livello interattivo*: PF/competenza/slot
    automatici + scelte (ASI/talento, sottoclasse, nuovi incantesimi). Vedi [rules_layer](rules_layer.md).
 7. **Profondità worldbuilding** (residuo): timeline/calendario (Calendarium), mappe
@@ -221,6 +223,6 @@ docs (`architecture`/`data_model`/`rules_layer`/`play_layer`/`plugin_contracts`)
 - **QA in-app** (rischio #1, molto alto): crea un PG e fai *Sali di livello*; prova clock →
   *Scatena conseguenza* (+ Indici/Fronti); collega creature a un incontro e leggi la
   difficoltà; archetipo/profilo su un culto; Ponte; note SRD (condizioni/classi).
-- **Residui Fase 2**: quick-ref condizioni al tavolo; auto-riscrittura blocco encounter;
-  timeline/mappe (Calendarium/Excalidraw); level-up scelte avanzate.
+- **Residui Fase 2**: quick-ref condizioni al tavolo; timeline/mappe (Calendarium/Excalidraw);
+  level-up scelte avanzate. (✅ auto-riscrittura blocco encounter — `aggiorna_encounter`.)
 - **Recuperi FantasyWorld** (#9-11): sistema astrologico/personalità, glossari subtypes, alberi evolutivi.
