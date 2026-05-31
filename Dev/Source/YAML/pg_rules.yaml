@@ -1,0 +1,50 @@
+id: pg_rules
+version: 0.1.0
+purpose: >-
+  Overlay curato per il rules-engine PG: i dati 5.5e NON presenti (o in prosa)
+  nei JSON SRD. build_personaggio.py fonde questo con SRD classes/species/
+  backgrounds e genera z.automazioni/data/personaggio.json (le opzioni che
+  crea_personaggio.js legge a runtime). Le caratteristiche (6) vengono dal
+  modello (system.caratteristiche); qui stanno abilità e generazione punteggi.
+
+# Le 18 abilità 5e (2024): id = chiave stabile (frontmatter), label = etichetta,
+# caratteristica = abilità di base per il bonus. Il converter usa la label
+# (normalizzata) per mappare i nomi-in-prosa delle scelte di classe SRD -> id.
+abilita:
+  acrobazia:          { label: Acrobazia,          caratteristica: destrezza }
+  addestrare_animali: { label: Addestrare Animali, caratteristica: saggezza }
+  arcano:             { label: Arcano,             caratteristica: intelligenza }
+  atletica:           { label: Atletica,           caratteristica: forza }
+  furtivita:          { label: Furtività,          caratteristica: destrezza }
+  indagare:           { label: Indagare,           caratteristica: intelligenza }
+  inganno:            { label: Inganno,            caratteristica: carisma }
+  intimidire:         { label: Intimidire,         caratteristica: carisma }
+  intrattenere:       { label: Intrattenere,       caratteristica: carisma }
+  intuizione:         { label: Intuizione,         caratteristica: saggezza }
+  medicina:           { label: Medicina,           caratteristica: saggezza }
+  natura:             { label: Natura,             caratteristica: intelligenza }
+  percezione:         { label: Percezione,         caratteristica: saggezza }
+  persuasione:        { label: Persuasione,        caratteristica: carisma }
+  rapidita_di_mano:   { label: Rapidità di Mano,   caratteristica: destrezza }
+  religione:          { label: Religione,          caratteristica: intelligenza }
+  sopravvivenza:      { label: Sopravvivenza,      caratteristica: saggezza }
+  storia:             { label: Storia,             caratteristica: intelligenza }
+
+# Generazione delle caratteristiche (metodi 2024). point_buy: costi per valore.
+generazione_caratteristiche:
+  metodi:
+    array_standard:
+      label: Array standard
+      valori: [15, 14, 13, 12, 10, 8]
+    point_buy:
+      label: Acquisto punti
+      punti: 27
+      minimo: 8
+      massimo: 15
+      costi: { 8: 0, 9: 1, 10: 2, 11: 3, 12: 4, 13: 5, 14: 7, 15: 9 }
+    manuale:
+      label: Inserimento manuale
+
+# Schemi di aumento caratteristiche del background (2024): l'utente sceglie.
+aumento_background:
+  schemi: ["+2/+1", "+1/+1/+1"]

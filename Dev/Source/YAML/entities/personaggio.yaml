@@ -10,7 +10,7 @@ templates:
   title: PG
   default_type: pg
   target: z.modelli/PG.md
-  jinja: character.md.j2
+  jinja: pg.md.j2
   primary: true
 - id: png
   title: PNG

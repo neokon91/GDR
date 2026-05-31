@@ -132,6 +132,28 @@ def test_fs_layouts_valid():
 
 
 @pytest.mark.skipif(not render.SRD_DIR.is_dir(), reason="SRD non vendorizzata")
+def test_personaggio_options():
+    """Il converter rules-engine PG: struttura + parser scelte-abilità di classe
+    (tutte mappano a id abilità validi, scelte plausibili)."""
+    import build_personaggio
+    opt = build_personaggio.build_personaggio_options(CORE)
+    assert len(opt["abilita"]) == 18
+    assert len(opt["caratteristiche"]) == 6
+    assert opt["classi"] and opt["specie"] and opt["background"]
+    skill_ids = set(opt["abilita"])
+    for cid, classe in opt["classi"].items():
+        ab = classe["abilita"]
+        assert 1 <= ab["scelte"] <= 4, f"{cid}: scelte fuori range"
+        assert ab["opzioni"], f"{cid}: nessuna opzione abilità"
+        assert all(o in skill_ids for o in ab["opzioni"]), f"{cid}: opzione non valida"
+        assert classe["dado_vita"] >= 6
+        assert all(s in opt["caratteristiche"] for s in classe["tiri_salvezza"])
+    for bg in opt["background"].values():
+        assert all(s in opt["caratteristiche"] for s in bg["punteggi_caratteristica"])
+        assert all(s in skill_ids for s in bg["competenze_abilita"])
+
+
+@pytest.mark.skipif(not render.SRD_DIR.is_dir(), reason="SRD non vendorizzata")
 def test_srd_counts_and_statblock():
     """Conteggi attesi + il mostro si mappa su uno statblock Fantasy Statblocks."""
     assert len(render.load_srd("srd_5_2_1_spells.json")) > 300

@@ -51,6 +51,7 @@ from build_srd import (  # noqa: F401 (re-export per i test)
     load_srd,
     srd_statblock_yaml,
 )
+from build_personaggio import build_personaggio_options  # noqa: F401 (re-export)
 from validate import (  # noqa: F401 (re-export per i test)
     CORE_ONLY_SECTIONS,
     PARTITIONED_SECTIONS,
@@ -273,6 +274,8 @@ def build() -> dict[str, str]:
 
     # YAML -> JSON che gli script JS leggono a runtime via app.vault.adapter.read.
     write_json(VAULT / "z.automazioni" / "data" / "core.json", payload)
+    # Opzioni del rules-engine PG (SRD + pg_rules.yaml) per crea_personaggio.js.
+    write_json(VAULT / "z.automazioni" / "data" / "personaggio.json", build_personaggio_options(core))
     # Gli script Templater sono autonomi (niente require/bundling): copia 1:1.
     for source in sorted(JS_DIR.glob("*.js")):
         shutil.copy2(source, VAULT / "z.automazioni" / source.name)
