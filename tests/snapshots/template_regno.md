@@ -15,12 +15,6 @@
 > Portata: `INPUT[portata][:portata]`
 > Popolazione: `INPUT[text:popolazione]`
 
-> [!note]- Descrizione
-> Scrivi qui il contenuto lore vero della nota.
-
-> [!quote]- Versione player-safe
-> `INPUT[text:player_safe]`
-
 > [!note] Storia
 > `INPUT[textArea:storia_regno]`
 

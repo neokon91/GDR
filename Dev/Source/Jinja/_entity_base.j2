@@ -16,12 +16,11 @@
 
 {% block lore %}
 {{ m.scheda(template.category) }}
+{% if not core.get('creation', {}).get(template.category, {}).get('body') %}
 > [!note]- Descrizione
-> Scrivi qui il contenuto lore vero della nota.
+> Scrivi qui il contenuto della nota.
 
-> [!quote]- Versione player-safe
-> {{ m.field('player_safe', label=false) }}
-
+{% endif %}
 {{ m.wizard_body(template.category) }}
 {% endblock %}
 --- Al tavolo

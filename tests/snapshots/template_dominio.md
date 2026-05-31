@@ -10,12 +10,6 @@
 --- Lore
 
 
-> [!note]- Descrizione
-> Scrivi qui il contenuto lore vero della nota.
-
-> [!quote]- Versione player-safe
-> `INPUT[text:player_safe]`
-
 > [!note] Natura
 > `INPUT[textArea:natura]`
 

@@ -13,12 +13,6 @@
 > Stato: `INPUT[stato_cosmico][:stato_cosmico]`
 > Allineamento: `INPUT[allineamento][:allineamento]`
 
-> [!note]- Descrizione
-> Scrivi qui il contenuto lore vero della nota.
-
-> [!quote]- Versione player-safe
-> `INPUT[text:player_safe]`
-
 > [!note] Ruolo cosmico
 > `INPUT[textArea:ruolo_cosmico]`
 

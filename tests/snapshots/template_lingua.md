@@ -12,12 +12,6 @@
 > [!abstract] Scheda
 > Vitalità: `INPUT[vitalita][:vitalita]`
 
-> [!note]- Descrizione
-> Scrivi qui il contenuto lore vero della nota.
-
-> [!quote]- Versione player-safe
-> `INPUT[text:player_safe]`
-
 > [!note] Parlanti
 > `INPUT[textArea:chi_parla]`
 

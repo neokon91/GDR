@@ -12,12 +12,6 @@
 > [!abstract] Scheda
 > Portata: `INPUT[portata][:portata]`
 
-> [!note]- Descrizione
-> Scrivi qui il contenuto lore vero della nota.
-
-> [!quote]- Versione player-safe
-> `INPUT[text:player_safe]`
-
 > [!note] Missione
 > `INPUT[textArea:missione]`
 

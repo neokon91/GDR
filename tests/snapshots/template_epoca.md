@@ -13,12 +13,6 @@
 > Inizio: `INPUT[text:inizio]`
 > Fine: `INPUT[text:fine]`
 
-> [!note]- Descrizione
-> Scrivi qui il contenuto lore vero della nota.
-
-> [!quote]- Versione player-safe
-> `INPUT[text:player_safe]`
-
 > [!note] Panorama
 > `INPUT[textArea:panorama]`
 

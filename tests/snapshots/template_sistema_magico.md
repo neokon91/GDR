@@ -12,12 +12,6 @@
 > [!abstract] Scheda
 > Fonte del potere: `INPUT[fonte_potere][:fonte_potere]`
 
-> [!note]- Descrizione
-> Scrivi qui il contenuto lore vero della nota.
-
-> [!quote]- Versione player-safe
-> `INPUT[text:player_safe]`
-
 > [!note] Fonte
 > `INPUT[textArea:fonte]`
 

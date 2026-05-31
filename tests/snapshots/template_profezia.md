@@ -12,12 +12,6 @@
 > [!abstract] Scheda
 > Stato d'avveramento: `INPUT[stato_profezia][:stato_profezia]`
 
-> [!note]- Descrizione
-> Scrivi qui il contenuto lore vero della nota.
-
-> [!quote]- Versione player-safe
-> `INPUT[text:player_safe]`
-
 > [!note] Testo
 > `INPUT[textArea:testo]`
 

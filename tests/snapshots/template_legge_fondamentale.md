@@ -12,12 +12,6 @@
 > [!abstract] Scheda
 > Poli: `INPUT[text:poli]`
 
-> [!note]- Descrizione
-> Scrivi qui il contenuto lore vero della nota.
-
-> [!quote]- Versione player-safe
-> `INPUT[text:player_safe]`
-
 > [!note] Polarità
 > `INPUT[textArea:polarita]`
 
