@@ -80,12 +80,52 @@
 --- Carattere
 
 > [!abstract] Carattere
-> **Lecito** `INPUT[slider(minValue(0), maxValue(10), addLabels):lecito_caotico]` **Caotico**
-> **Altruista** `INPUT[slider(minValue(0), maxValue(10), addLabels):altruista_egoista]` **Egoista**
-> **Calmo** `INPUT[slider(minValue(0), maxValue(10), addLabels):calmo_volatile]` **Volatile**
+> **Moralità** `INPUT[slider(minValue(1), maxValue(5), addLabels):moralita]`
+> **Lealtà** `INPUT[slider(minValue(1), maxValue(5), addLabels):lealta]`
+> **Temperamento** `INPUT[slider(minValue(1), maxValue(5), addLabels):temperamento]`
+> **Socievolezza** `INPUT[slider(minValue(1), maxValue(5), addLabels):socievolezza]`
+> **Approccio** `INPUT[slider(minValue(1), maxValue(5), addLabels):approccio]`
+
+> [!note]- Moralità — Quanto antepone gli altri a sé stesso.
+> **1 · Altruista** — Si sacrifica per gli altri; il bene comune prima di tutto.
+> **2 · Generoso** — Aiuta volentieri, ma bada anche a sé.
+> **3 · Pragmatico** — Bilancia interesse proprio e altrui secondo il caso.
+> **4 · Interessato** — Mette sé al primo posto; aiuta se ne ricava qualcosa.
+> **5 · Spietato** — Usa gli altri senza scrupoli; solo il proprio tornaconto conta.
+
+> [!note]- Lealtà — Rapporto con regole, autorità e patti.
+> **1 · Leale** — Rispetta leggi e parola data; l'ordine è un valore.
+> **2 · Affidabile** — Mantiene gli impegni, ma sa essere flessibile.
+> **3 · Indipendente** — Segue il proprio codice; obbedisce se ha senso.
+> **4 · Insofferente** — Mal sopporta regole e autorità; le aggira.
+> **5 · Ribelle** — Rifiuta ogni vincolo; la libertà sopra tutto.
+
+> [!note]- Temperamento — Come reagisce sotto pressione.
+> **1 · Glaciale** — Imperturbabile; nulla scalfisce la sua calma.
+> **2 · Calmo** — Misurato; perde il controllo solo all'estremo.
+> **3 · Equilibrato** — Reagisce in proporzione; emotivo ma controllato.
+> **4 · Impulsivo** — Agisce d'istinto; l'emozione guida le scelte.
+> **5 · Volatile** — Esplosivo e imprevedibile; un attimo e cambia tutto.
+
+> [!note]- Socievolezza — Come si pone con le altre persone.
+> **1 · Solitario** — Evita gli altri; sta bene da solo.
+> **2 · Riservato** — Pochi legami scelti; diffida degli estranei.
+> **3 · Cordiale** — Si adatta alla compagnia; né schivo né invadente.
+> **4 · Espansivo** — Cerca gli altri; a suo agio in mezzo alla gente.
+> **5 · Magnetico** — Calamita l'attenzione; trascina e influenza chi incontra.
+
+> [!note]- Approccio — Come affronta i problemi.
+> **1 · Metodico** — Pianifica tutto; niente lasciato al caso.
+> **2 · Riflessivo** — Pondera prima di agire; valuta le opzioni.
+> **3 · Versatile** — Pensa e agisce a seconda di ciò che serve.
+> **4 · Pratico** — Impara facendo; preferisce l'azione all'analisi.
+> **5 · Istintivo** — Si fida del proprio fiuto; decide nell'istante.
 
 ```js-engine
-const views = await engine.importJs("z.automazioni/views.js");
+const src = await app.vault.adapter.read("z.automazioni/views.js");
+const mod = { exports: {} };
+new Function("module", "exports", src)(mod, mod.exports);
+const views = mod.exports;
 const dv = app.plugins.plugins.dataview && app.plugins.plugins.dataview.api;
 const file = app.workspace.getActiveFile();
 const page = dv && file ? dv.page(file.path) : null;
@@ -112,7 +152,10 @@ await views.renderAxesRadar(container, app, page);
 --- Vista
 
 ```js-engine
-const views = await engine.importJs("z.automazioni/views.js");
+const src = await app.vault.adapter.read("z.automazioni/views.js");
+const mod = { exports: {} };
+new Function("module", "exports", src)(mod, mod.exports);
+const views = mod.exports;
 const dv = app.plugins.plugins.dataview && app.plugins.plugins.dataview.api;
 const file = app.workspace.getActiveFile();
 const page = dv && file ? dv.page(file.path) : null;

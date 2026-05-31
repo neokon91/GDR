@@ -98,7 +98,10 @@ qualunque e aggiungi nel suo frontmatter `confronta: [[Entità A]], [[Entità B]
 
 ````
 ```js-engine
-const views = await engine.importJs("z.automazioni/views.js");
+const src = await app.vault.adapter.read("z.automazioni/views.js");
+const mod = { exports: {} };
+new Function("module", "exports", src)(mod, mod.exports);
+const views = mod.exports;
 const dv = app.plugins.plugins.dataview && app.plugins.plugins.dataview.api;
 const file = app.workspace.getActiveFile();
 const page = dv && file ? dv.page(file.path) : null;

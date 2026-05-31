@@ -55,12 +55,52 @@
 --- Carattere
 
 > [!abstract] Carattere
-> **Ordine** `INPUT[slider(minValue(0), maxValue(10), addLabels):ordine_caos]` **Caos**
-> **Immanente** `INPUT[slider(minValue(0), maxValue(10), addLabels):immanente_trascendente]` **Trascendente**
-> **Attiva** `INPUT[slider(minValue(0), maxValue(10), addLabels):attiva_silente]` **Silente**
+> **Presenza Cosmica** `INPUT[slider(minValue(1), maxValue(5), addLabels):presenza]`
+> **Attività** `INPUT[slider(minValue(1), maxValue(5), addLabels):attivita]`
+> **Ordine cosmico** `INPUT[slider(minValue(1), maxValue(5), addLabels):ordine]`
+> **Stabilità** `INPUT[slider(minValue(1), maxValue(5), addLabels):stabilita_cosmica]`
+> **Percezione** `INPUT[slider(minValue(1), maxValue(5), addLabels):percezione]`
+
+> [!note]- Presenza Cosmica — Dove e come questo principio esiste nel cosmo.
+> **1 · Trascendente** — Oltre il cosmo, non localizzabile né accessibile; puro principio.
+> **2 · Diffusa** — Presente in molti piani ma debolmente; ovunque e in nessun luogo.
+> **3 · Focalizzata** — Una sede principale, ma può agire altrove; dominio non esclusivo.
+> **4 · Ancorata** — Legata a un luogo, piano o popolo; fuori è muta o assente.
+> **5 · Immanente** — È il mondo stesso; ogni cosa è sua emanazione vivente.
+
+> [!note]- Attività — Quanto questo principio agisce sul mondo o resta inerte.
+> **1 · Silente** — Non esercita volontà; osserva senza agire. Puro fondamento.
+> **2 · Risonante** — Presente ma non coercitiva; sincronicità, ispirazioni, segnali sottili.
+> **3 · Reattiva** — Interviene su invocazioni, sacrifici o squilibri cosmici.
+> **4 · Attiva** — Guida, premia, punisce; plasma la storia tramite segni ed eventi.
+> **5 · Interventista** — Agisce di continuo; nulla accade senza la sua volontà diretta.
+
+> [!note]- Ordine cosmico — Se il principio tende all'ordine o al disordine.
+> **1 · Caotico** — Forza di disordine e trasgressione; rompe ogni schema.
+> **2 · Tendente al caos** — Favorisce libertà, mutamento, individualismo.
+> **3 · Neutrale** — Senza orientamento definito; oltre ordine e caos.
+> **4 · Tendente all'ordine** — Favorisce armonia, regole, strutture.
+> **5 · Legale** — Impone equilibrio e coerenza; rifiuta la deviazione.
+
+> [!note]- Stabilità — Quanto il principio è immutabile o in mutamento.
+> **1 · Eterna** — Immutabile da sempre; non cambia né può essere alterata.
+> **2 · Persistente** — Stabile, ma manifesta variazioni lente nel tempo.
+> **3 · Ciclica** — Si manifesta in fasi, epoche o intervalli ricorrenti.
+> **4 · Instabile** — Vacilla; può indebolirsi, eclissarsi o essere aggirata.
+> **5 · Morente** — In dissoluzione o già infranta; lascia il posto a un nuovo ordine.
+
+> [!note]- Percezione — Quanto il principio è visibile o nascosto ai mortali.
+> **1 · Manifesta** — Evidente a tutti; le sue tracce sono ovunque, innegabili.
+> **2 · Nota** — Riconosciuta da culti e sapienti; documentata, studiata.
+> **3 · Velata** — Si intuisce da segni e presagi; richiede interpretazione.
+> **4 · Occulta** — Nota solo a iniziati; celata sotto miti o falsità.
+> **5 · Ignota** — Nessuno la conosce; opera nell'ombra del mondo.
 
 ```js-engine
-const views = await engine.importJs("z.automazioni/views.js");
+const src = await app.vault.adapter.read("z.automazioni/views.js");
+const mod = { exports: {} };
+new Function("module", "exports", src)(mod, mod.exports);
+const views = mod.exports;
 const dv = app.plugins.plugins.dataview && app.plugins.plugins.dataview.api;
 const file = app.workspace.getActiveFile();
 const page = dv && file ? dv.page(file.path) : null;
@@ -85,7 +125,10 @@ await views.renderAxesRadar(container, app, page);
 --- Vista
 
 ```js-engine
-const views = await engine.importJs("z.automazioni/views.js");
+const src = await app.vault.adapter.read("z.automazioni/views.js");
+const mod = { exports: {} };
+new Function("module", "exports", src)(mod, mod.exports);
+const views = mod.exports;
 const dv = app.plugins.plugins.dataview && app.plugins.plugins.dataview.api;
 const file = app.workspace.getActiveFile();
 const page = dv && file ? dv.page(file.path) : null;

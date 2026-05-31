@@ -103,21 +103,33 @@ function renderSessionPanel(dv, page) {
 }
 
 // === Radar degli assi tematici =============================================
-// Disegna gli assi (0-10, coppie sinistra↔destra) come radar SVG inline (niente
-// dipendenze esterne). La definizione degli assi per categoria sta in core.json
-// (render.py la scrive nel payload) -> il componente la carica a runtime e così
-// funziona per QUALSIASI categoria, abilitando il confronto fra entità.
+// Disegna gli assi come radar SVG inline (niente dipendenze esterne). Asse nel
+// formato ricco (vedi macro carattere): {id, nome, valori:{1..5:{etichetta}}}
+// -> scala 1-5. La definizione per categoria sta in core.json (render.py la scrive
+// nel payload) -> il componente la carica a runtime e così funziona per QUALSIASI
+// categoria, abilitando il confronto fra entità. axisMax resta parametrico per
+// non incrostare la scala nel disegno.
 
 const RADAR_PALETTE = [
   "var(--text-accent)", "var(--color-red)", "var(--color-green)",
   "var(--color-orange)", "var(--color-purple)", "var(--color-cyan)",
 ];
 
-// Valore di un asse normalizzato a [0,10]; vuoto/non numerico -> 5 (neutro).
-function clampAxis(value) {
+// Scala massima di un asse (valori 1-5 -> 5). Parametrico via il numero di valori.
+function axisMax(axis) {
+  return axis && axis.valori ? Object.keys(axis.valori).length : 5;
+}
+
+// Etichetta del vertice: il nome dell'asse.
+function axisLabel(axis) {
+  return (axis && (axis.nome || axis.id)) || "";
+}
+
+// Valore numerico di un asse clampato a [0, max]; vuoto/non numerico -> centro.
+function clampAxis(value, max = 10) {
   const n = Number(value);
-  if (!Number.isFinite(n)) return 5;
-  return Math.max(0, Math.min(10, n));
+  if (!Number.isFinite(n)) return max / 2;
+  return Math.max(0, Math.min(max, n));
 }
 
 function polarPoint(cx, cy, r, angleDeg) {
@@ -129,8 +141,9 @@ function svgEscape(value) {
   return String(value ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 }
 
-// SVG (stringa) di un radar. axes = [{id, sinistra, destra}]; series =
-// [{name, values:[0..10], color}]. <3 assi -> "" (un radar ha bisogno di 3 raggi).
+// SVG (stringa) di un radar. axes = [{id, nome|destra, valori?}]; series =
+// [{name, values:[raw], color}]. I valori grezzi sono clampati per-asse alla sua
+// scala (5 ricco / 10 polare). <3 assi -> "" (un radar ha bisogno di 3 raggi).
 function radarSvg(axes, series) {
   const N = (axes || []).length;
   if (N < 3) return "";
@@ -146,10 +159,13 @@ function radarSvg(axes, series) {
     g += `<line x1="${cx}" y1="${cy}" x2="${ex.toFixed(1)}" y2="${ey.toFixed(1)}" stroke="var(--background-modifier-border)" stroke-width="0.5"/>`;
     const [lx, ly] = polarPoint(cx, cy, R + 13, i * step);
     const anchor = lx > cx + 1 ? "start" : (lx < cx - 1 ? "end" : "middle");
-    g += `<text x="${lx.toFixed(1)}" y="${ly.toFixed(1)}" font-size="8" fill="var(--text-muted)" text-anchor="${anchor}" dominant-baseline="middle">${svgEscape(a.destra || a.id)}</text>`;
+    g += `<text x="${lx.toFixed(1)}" y="${ly.toFixed(1)}" font-size="8" fill="var(--text-muted)" text-anchor="${anchor}" dominant-baseline="middle">${svgEscape(axisLabel(a))}</text>`;
   });
   series.forEach((s) => {
-    const poly = axes.map((_, i) => polarPoint(cx, cy, R * clampAxis(s.values[i]) / 10, i * step).map((n) => n.toFixed(1)).join(",")).join(" ");
+    const poly = axes.map((a, i) => {
+      const m = axisMax(a);
+      return polarPoint(cx, cy, R * clampAxis(s.values[i], m) / m, i * step).map((n) => n.toFixed(1)).join(",");
+    }).join(" ");
     g += `<polygon points="${poly}" fill="${s.color}" fill-opacity="0.18" stroke="${s.color}" stroke-width="1.5"/>`;
   });
   series.forEach((s, i) => {
@@ -187,7 +203,7 @@ async function renderAxesRadar(container, app, page) {
   }
   const core = await loadCoreData(app);
   const axes = axesFor(core, page.categoria);
-  const values = axes.map((a) => clampAxis(page[a.id]));
+  const values = axes.map((a) => page[a.id]);
   const name = page.nome || (page.file && page.file.name) || "—";
   injectSvg(container, radarSvg(axes, [{ name, values, color: RADAR_PALETTE[0] }]),
     "Servono almeno 3 assi tematici per il radar.");
@@ -213,7 +229,7 @@ async function renderAxesCompare(container, app, dv, page) {
     .filter((p) => p.categoria === category)
     .map((p, i) => ({
       name: p.file ? p.file.name : (p.nome || "—"),
-      values: axes.map((a) => clampAxis(p[a.id])),
+      values: axes.map((a) => p[a.id]),
       color: RADAR_PALETTE[i % RADAR_PALETTE.length],
     }));
   injectSvg(container, radarSvg(axes, series),

@@ -32,10 +32,54 @@ fields:
   forma_governo: { label: Forma di governo,     widget: text }
   fondazione:    { label: Epoca di fondazione,  widget: text }
 scheda: [portata, motto, forma_governo, fondazione]
+# Assi tematici nel formato RICCO (seed FantasyWorld assi_tematici_fazione.yaml):
+# 5 assi-chiave su scala 1-5 con etichetta + descrizione per valore.
 assi:
-  - { id: ordine_caos,          sinistra: Ordine,   destra: Caos }
-  - { id: segreta_palese,       sinistra: Segreta,  destra: Palese }
-  - { id: dottrina_pragmatismo, sinistra: Dottrina, destra: Pragmatismo }
+- id: struttura
+  nome: Struttura
+  descrizione: Grado di organizzazione interna e rigidità della catena di comando.
+  valori:
+    1: { etichetta: Orizzontale, descrizione: "Nessuna struttura fissa; decisioni collettive. Cellule, bande, reti informali." }
+    2: { etichetta: Consiliare,  descrizione: "Potere distribuito tra circoli; decisioni per consultazione. Alleanze, logge." }
+    3: { etichetta: "Semi-gerarchica", descrizione: "Capi e ruoli riconosciuti, ma con margini di autonomia. Gerarchia fluida." }
+    4: { etichetta: Gerarchica,  descrizione: "Catena di comando definita; gradi e responsabilità chiari, decisioni dall'alto." }
+    5: { etichetta: Piramidale,  descrizione: "Vertice assoluto; ogni ruolo per statuto o lignaggio. Ordini militari, regimi." }
+- id: scopo
+  nome: Scopo Primario
+  descrizione: Natura dell'obiettivo perseguito, da ideale astratto a interesse concreto.
+  valori:
+    1: { etichetta: "Ideale puro", descrizione: "Fine astratto o trascendente (giustizia, verità); sacrifica i risultati alla visione." }
+    2: { etichetta: Visionario,    descrizione: "Idealistico ma con piani concreti. Riformisti, ordini morali, rivoluzionari." }
+    3: { etichetta: Equilibrato,   descrizione: "Fine sia simbolico che pratico; l'ideale guida ma non è la sola motivazione." }
+    4: { etichetta: Opportunista,  descrizione: "Mira a vantaggi materiali con una facciata ideologica per legittimarsi." }
+    5: { etichetta: Pragmatico,    descrizione: "Solo sopravvivenza, espansione, guadagno. Gilde mercenarie, cartelli." }
+- id: metodo_operativo
+  nome: Metodo Operativo
+  descrizione: Grado di visibilità e trasparenza con cui la fazione agisce.
+  valori:
+    1: { etichetta: Occulto,    descrizione: "Esistenza segreta o negata; spionaggio, cospirazioni, riti nascosti." }
+    2: { etichetta: Discreto,   descrizione: "Nota a pochi; agisce via emissari o organizzazioni di copertura." }
+    3: { etichetta: Ambivalente, descrizione: "Doppia faccia: identità pubblica rispettabile, fini alternativi celati." }
+    4: { etichetta: Controllato, descrizione: "Nota e riconosciuta, ma cauta; l'agenda completa non è pubblica." }
+    5: { etichetta: Palese,     descrizione: "Agisce apertamente, dichiara i suoi scopi. Governi, ordini, movimenti." }
+- id: legalita
+  nome: Legalità
+  descrizione: Status rispetto all'ordinamento politico e giuridico dominante.
+  valori:
+    1: { etichetta: Illegale,   descrizione: "Fuorilegge, perseguitata; i membri rischiano arresto o morte. Ribelli, congiure." }
+    2: { etichetta: Tollerata,  descrizione: "Senza riconoscimento, ma tollerata per convenienza o paura. Ai margini." }
+    3: { etichetta: "Semi-legale", descrizione: "Riconoscimento limitato o ambiguo; opera con vincoli o stigma." }
+    4: { etichetta: Legale,     descrizione: "Pienamente legale; sedi, insegne, potere negoziale. Non dominante." }
+    5: { etichetta: Ufficiale,  descrizione: "Organo del potere; coincide col governo o l'autorità religiosa/statale." }
+- id: etica_conflitto
+  nome: Etica del Conflitto
+  descrizione: Approccio della fazione alla guerra, al dominio e all'autodifesa.
+  valori:
+    1: { etichetta: Difensiva,  descrizione: "Conflitto solo per autodifesa; privilegia diplomazia e resistenza." }
+    2: { etichetta: Reattiva,   descrizione: "Accetta la guerra per proteggere alleati o ideali, in modo proporzionato." }
+    3: { etichetta: Equilibrata, descrizione: "La guerra è un'opzione sempre disponibile, valutata caso per caso." }
+    4: { etichetta: Dominante,  descrizione: "Previene le minacce con la forza; conquista e deterrenza nella dottrina." }
+    5: { etichetta: Espansionista, descrizione: "Il conflitto è sacro o glorioso; ogni ostacolo è nemico. Imperi, crociate." }
 relazioni:
   - { field: sede,      label: Sede,          category: luogo }
   - { field: fondatori, label: Fondatori,     category: personaggio, multi: true }

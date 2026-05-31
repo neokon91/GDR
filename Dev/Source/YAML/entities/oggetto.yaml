@@ -31,13 +31,54 @@ subtypes:
 scheda:
 - rarita
 - sintonia
+# Assi tematici nel formato RICCO (seed FantasyWorld assi_tematici_artefatto.yaml):
+# 5 assi-chiave su scala 1-5 con etichetta + descrizione per valore.
 assi:
-- id: comune_leggendario
-  sinistra: Comune
-  destra: Leggendario
-- id: sicuro_rischioso
-  sinistra: Sicuro
-  destra: Rischioso
+- id: natura_materiale
+  nome: Natura Materiale
+  descrizione: Livello di lavorazione e qualità della materia dell'oggetto.
+  valori:
+    1: { etichetta: Grezza,    descrizione: "Rudimentale, naturale o primitivo: un osso, una pietra, un ramo sacro." }
+    2: { etichetta: Forgiata,  descrizione: "Tecniche tradizionali, lavorato a mano. Spade, bastoni rituali, talismani." }
+    3: { etichetta: Fine,      descrizione: "Alta qualità: ornamenti, bilanciamenti, iscrizioni, fattura eccelsa." }
+    4: { etichetta: Avanzata,  descrizione: "Tecnica sopraffina, tecnomagica o alchemica; meccanismi invisibili." }
+    5: { etichetta: Perfetta,  descrizione: "Forma perfetta: geometria sacra, materia impossibile, forgia divina." }
+- id: origine
+  nome: Origine
+  descrizione: Da dove nasce l'artefatto, dal mondo fisico ai piani superiori.
+  valori:
+    1: { etichetta: Naturale,   descrizione: "Nato dalla natura, trasformato solo marginalmente. Cristalli, pietre vive." }
+    2: { etichetta: Umana,      descrizione: "Forgiato da mani mortali; frutto di cultura, artigianato, tecnologia." }
+    3: { etichetta: Alchemica,  descrizione: "Creato con scienza mistica, infusione magica, manipolazione arcana." }
+    4: { etichetta: Spirituale, descrizione: "Nato da entità sovrannaturali, spiriti, sogni; ha un'anima o memoria." }
+    5: { etichetta: Divina,     descrizione: "Creato da una divinità o principio cosmico; potere intrinseco, irripetibile." }
+- id: funzione
+  nome: Funzione
+  descrizione: Uso per cui l'oggetto è stato creato, dal pratico al sacro.
+  valori:
+    1: { etichetta: Utilitaria, descrizione: "Uso quotidiano o funzionale; può diventare sacro solo in seconda istanza." }
+    2: { etichetta: "Arcana",   descrizione: "Usato in rituali o incantesimi; scopo pratico in contesti soprannaturali." }
+    3: { etichetta: Versatile,  descrizione: "Sia strumento che reliquia; può essere usato e venerato." }
+    4: { etichetta: Simbolico,  descrizione: "Venerato come simbolo; esposto, onorato, valore rappresentativo." }
+    5: { etichetta: Sacro,      descrizione: "Non si usa, si custodisce: emanazione divina o reliquia cosmica." }
+- id: potere_attivo
+  nome: Potere Attivo
+  descrizione: Grado di potere e autonomia d'azione dell'oggetto.
+  valori:
+    1: { etichetta: Dormiente,  descrizione: "Nessun potere attivo; serve solo come focus o supporto." }
+    2: { etichetta: Attivabile, descrizione: "Poteri solo tramite atti specifici: comandi, rituali, volontà dell'utente." }
+    3: { etichetta: Reattivo,   descrizione: "Reagisce all'ambiente o allo stato d'animo; può attivarsi da solo." }
+    4: { etichetta: "Semi-autonomo", descrizione: "Volontà debole; sceglie se attivarsi, comunica con sogni e impulsi." }
+    5: { etichetta: Senziente,  descrizione: "Ha coscienza propria; parla, sceglie, rifiuta comandi, ha uno scopo." }
+- id: legame
+  nome: Legame Spirituale
+  descrizione: Relazione vincolante tra l'artefatto e il suo portatore.
+  valori:
+    1: { etichetta: Libero,     descrizione: "Usabile da chiunque; nessun legame richiesto o generato." }
+    2: { etichetta: Empatico,   descrizione: "Legame simbolico; migliora con la compatibilità, ma non vincola." }
+    3: { etichetta: Ereditario, descrizione: "Si lega a stirpi o eletti; può rifiutarsi di funzionare con altri." }
+    4: { etichetta: Legato,     descrizione: "Vincolato all'anima del portatore; rompere il legame causa danni." }
+    5: { etichetta: Vincolante, descrizione: "Legame definitivo o consumante; il portatore è posseduto o trasfigurato." }
 relazioni:
 - field: proprietario
   label: Proprietario

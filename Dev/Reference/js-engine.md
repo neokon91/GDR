@@ -13,11 +13,19 @@ return engine.markdown.create('*test*');
 - `engine.markdown.create(md)` — crea markdown renderizzabile da una stringa.
 - `engine.markdown.createBuilder()` — builder: `createHeading(level, text)`,
   `createParagraph(text)`, ... poi `return markdownBuilder`.
-- `engine.importJs(path)` — importa un modulo JS dal vault (alternativa a `dv.io.load`).
+- `engine.importJs(path)` — importa un modulo JS dal vault con `import()` **ESM**.
+  ⚠️ NON vede `module.exports` (CommonJS): un file con `module.exports = {...}`
+  importato così dà un namespace vuoto → `views.fn is not a function`. Per moduli
+  CommonJS condivisi (es. `views.js`, usato anche da Templater) leggerli e valutarli
+  come CommonJS: `const src = await app.vault.adapter.read(path); const mod={exports:{}};
+  new Function("module","exports", src)(mod, mod.exports); const m = mod.exports;`
 - `engine.meta`, `engine.message`, `engine.query`, `engine.lib`.
 - Argomenti disponibili nel blocco: `engine`, `app`, `component`, `container`, `context`.
 
 ## Quando usarlo vs dataviewjs
-JS Engine è più adatto a viste/markdown dinamici riutilizzabili e a importare moduli JS
-puliti; dataviewjs è legato all'indice Dataview. In questo progetto le viste usano
-dataviewjs + `dv.io.load`; valutare `engine.importJs` per moduli condivisi.
+JS Engine è più adatto a viste/markdown dinamici riutilizzabili. In questo progetto è
+lo **standard** per i pannelli (macro `vista`/`grafico_assi`/`confronto_assi`): il
+blocco carica `z.automazioni/views.js` (CommonJS via new Function, vedi sopra) e
+ritorna `engine.markdown.create(...)` o disegna nel `container`. La logica vive in
+`views.js` → aggiornarla si propaga alle note senza ricrearle. Le **query** (backlink,
+fronti) usano la Dataview API (`app.plugins.plugins.dataview.api`).

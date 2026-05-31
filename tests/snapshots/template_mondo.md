@@ -63,12 +63,52 @@
 --- Carattere
 
 > [!abstract] Carattere
-> **Civilta** `INPUT[slider(minValue(0), maxValue(10), addLabels):civilta_natura]` **Natura**
-> **Ordine** `INPUT[slider(minValue(0), maxValue(10), addLabels):ordine_caos]` **Caos**
-> **Magia rara** `INPUT[slider(minValue(0), maxValue(10), addLabels):magia_rara_diffusa]` **Magia diffusa**
+> **Diffusione della Magia** `INPUT[slider(minValue(1), maxValue(5), addLabels):diffusione_magia]`
+> **Tono** `INPUT[slider(minValue(1), maxValue(5), addLabels):tono]`
+> **Ordine Politico** `INPUT[slider(minValue(1), maxValue(5), addLabels):ordine_politico]`
+> **Civiltà e Natura** `INPUT[slider(minValue(1), maxValue(5), addLabels):civilta_natura]`
+> **Età Storica** `INPUT[slider(minValue(1), maxValue(5), addLabels):eta_storica]`
+
+> [!note]- Diffusione della Magia — Quanto la magia è presente e accessibile nel mondo.
+> **1 · Assente** — Mondo mondano; la magia è mito o non esiste affatto.
+> **2 · Rara** — Esiste ma è rarissima e temuta; pochi la padroneggiano.
+> **3 · Presente** — Conosciuta e usata da specialisti; parte della società.
+> **4 · Diffusa** — Pervade la vita quotidiana; tecnomagia, mercati arcani.
+> **5 · Onnipresente** — La realtà stessa è magia; ogni cosa ne è intrisa.
+
+> [!note]- Tono — L'atmosfera emotiva dominante del mondo.
+> **1 · Luminoso** — Eroico e speranzoso; il bene tende a trionfare.
+> **2 · Avventuroso** — Pericoli e meraviglie; il coraggio paga.
+> **3 · Ambiguo** — Zone grigie; scelte difficili senza risposte nette.
+> **4 · Cupo** — Mondo duro; la sopravvivenza ha un prezzo, la fiducia è rara.
+> **5 · Grimdark** — Disperato e spietato; la speranza è un lusso, vince chi cede meno.
+
+> [!note]- Ordine Politico — Quanto il mondo è stabile o nel caos.
+> **1 · Stabile** — Imperi saldi, pace duratura; l'ordine è la norma.
+> **2 · Ordinato** — Tensioni gestite; le istituzioni reggono.
+> **3 · Conteso** — Equilibri fragili; potenze rivali, conflitti latenti.
+> **4 · Turbolento** — Guerre, crisi, troni vacillanti; il futuro è incerto.
+> **5 · Caos** — Collasso o anarchia; nessuna autorità regge davvero.
+
+> [!note]- Civiltà e Natura — Equilibrio tra mondo civilizzato e natura selvaggia.
+> **1 · Urbanizzato** — Città ovunque; la natura è marginale o addomesticata.
+> **2 · Coltivato** — Civiltà estesa con frontiere selvagge ai margini.
+> **3 · In equilibrio** — Insediamenti e natura selvaggia si bilanciano.
+> **4 · Selvaggio** — Natura dominante; la civiltà è isole sparse e fragili.
+> **5 · Incontaminato** — Natura primordiale; la civiltà è quasi assente o perduta.
+
+> [!note]- Età Storica — A che punto del suo arco storico si trova il mondo.
+> **1 · Aurora** — Mondo giovane; popoli nascenti, terre inesplorate.
+> **2 · Ascesa** — Civiltà in espansione; scoperte, conquiste, crescita.
+> **3 · Apogeo** — Picco di splendore; grandi potenze al culmine.
+> **4 · Declino** — Decadenza; antichi splendori che si sgretolano.
+> **5 · Rovina** — Dopo un cataclisma; rovine di un'era perduta tra i sopravvissuti.
 
 ```js-engine
-const views = await engine.importJs("z.automazioni/views.js");
+const src = await app.vault.adapter.read("z.automazioni/views.js");
+const mod = { exports: {} };
+new Function("module", "exports", src)(mod, mod.exports);
+const views = mod.exports;
 const dv = app.plugins.plugins.dataview && app.plugins.plugins.dataview.api;
 const file = app.workspace.getActiveFile();
 const page = dv && file ? dv.page(file.path) : null;
@@ -88,7 +128,10 @@ await views.renderAxesRadar(container, app, page);
 --- Vista
 
 ```js-engine
-const views = await engine.importJs("z.automazioni/views.js");
+const src = await app.vault.adapter.read("z.automazioni/views.js");
+const mod = { exports: {} };
+new Function("module", "exports", src)(mod, mod.exports);
+const views = mod.exports;
 const dv = app.plugins.plugins.dataview && app.plugins.plugins.dataview.api;
 const file = app.workspace.getActiveFile();
 const page = dv && file ? dv.page(file.path) : null;

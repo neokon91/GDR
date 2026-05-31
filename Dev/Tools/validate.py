@@ -103,8 +103,12 @@ def validate_split(core_raw: dict[str, Any], system_raw: dict[str, Any], merged:
             errors.append(f"shape: abilità '{aid}' senza label o con caratteristica non valida")
     for cat, assi in (merged.get("assi_tematici", {}) or {}).items():
         for a in assi or []:
-            if not all(a.get(k) for k in ("id", "sinistra", "destra")):
-                errors.append(f"shape: assi_tematici[{cat}] voce {a} senza id/sinistra/destra")
+            # Formato RICCO: {id, nome, valori:{n:{etichetta, descrizione}}}.
+            if not (a.get("id") and a.get("nome") and a.get("valori")):
+                errors.append(f"shape: assi_tematici[{cat}] voce {a} senza id/nome/valori")
+            for k, v in (a.get("valori") or {}).items():
+                if not isinstance(v, dict) or not v.get("etichetta"):
+                    errors.append(f"shape: assi_tematici[{cat}].{a.get('id')} valore {k} senza etichetta")
     return errors
 
 
@@ -161,8 +165,12 @@ def validate_entity_schema(entities: list[dict[str, Any]]) -> list[str]:
             missing = {"field", "label", "category"} - set(rel)
             need(not missing, f"entity {eid}: relazione senza {sorted(missing)}")
         for ax in entity.get("assi", []) or []:
-            missing = {"id", "sinistra", "destra"} - set(ax)
-            need(not missing, f"entity {eid}: asse senza {sorted(missing)}")
+            # Formato RICCO: {id, nome, valori:{n:{etichetta, descrizione}}}.
+            need(ax.get("id") and ax.get("nome") and isinstance(ax.get("valori"), dict),
+                 f"entity {eid}: asse {ax.get('id', '?')} senza id/nome/valori")
+            for n, v in (ax.get("valori") or {}).items():
+                need(isinstance(v, dict) and v.get("etichetta"),
+                     f"entity {eid}: asse {ax.get('id')} valore {n} senza etichetta")
         creation = entity.get("creation") or {}
         need(isinstance(creation, dict), f"entity {eid}: 'creation' non è mappa")
         for question in (creation.get("fields", []) or []) + (creation.get("body", []) or []):

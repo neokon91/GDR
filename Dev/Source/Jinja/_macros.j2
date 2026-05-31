@@ -84,14 +84,24 @@
 {% endfor %}
 {%- endmacro %}
 
-{# Assi tematici come slider Meta Bind: identita' di sistema interrogabile da
-   Dataview. Single source: core.assi_tematici[categoria]. #}
+{# Assi tematici (formato RICCO, seed FantasyWorld): identita' di sistema
+   interrogabile da Dataview. Single source: core.assi_tematici[categoria].
+   Ogni asse = {id, nome, descrizione, valori:{1..5:{etichetta, descrizione}}}
+   -> slider 1-5 + una legenda pieghevole con le 5 etichette/descrizioni.
+   Sotto, se >= 3 assi, il radar (grafico_assi) li visualizza. #}
 {% macro carattere(category) -%}
 {% set assi = core.get('assi_tematici', {}).get(category, []) %}
 {% if assi %}
 > [!abstract] Carattere
 {% for a in assi %}
-> **{{ a.sinistra }}** `INPUT[slider(minValue(0), maxValue(10), addLabels):{{ a.id }}]` **{{ a.destra }}**
+> **{{ a.nome }}** `INPUT[slider(minValue(1), maxValue(5), addLabels):{{ a.id }}]`
+{% endfor %}
+{% for a in assi %}
+
+> [!note]- {{ a.nome }}{{ (" — " ~ a.descrizione) if a.get('descrizione') else "" }}
+{% for k, v in a.valori | dictsort %}
+> **{{ k }} · {{ v.etichetta }}** — {{ v.get('descrizione', '') }}
+{% endfor %}
 {% endfor %}
 {% if assi | length >= 3 %}
 
@@ -201,13 +211,19 @@
 {%- endmacro %}
 
 {# Pannello vista (JS Engine). fn = funzione esposta da z.automazioni/views.js,
-   importata a runtime: aggiornare views.js si propaga alle note senza ricrearle
-   (il corpo nota resta un thin import+call). La funzione ritorna markdown, reso
+   caricata a runtime: aggiornare views.js si propaga alle note senza ricrearle
+   (il corpo nota resta un thin loader+call). La funzione ritorna markdown, reso
    da engine.markdown.create; le query (backlink/fronti) usano la Dataview API.
-   page=null (Dataview assente o nessuna nota attiva) -> messaggio di fallback. #}
+   page=null (Dataview assente o nessuna nota attiva) -> messaggio di fallback.
+   NB: views.js è CommonJS (module.exports, condiviso con Templater). js-engine
+   importJs() usa import() ESM e NON vedrebbe module.exports -> lo valutiamo come
+   CommonJS con new Function("module","exports", src). #}
 {% macro vista(fn='renderEntityPanel') -%}
 ```js-engine
-const views = await engine.importJs("z.automazioni/views.js");
+const src = await app.vault.adapter.read("z.automazioni/views.js");
+const mod = { exports: {} };
+new Function("module", "exports", src)(mod, mod.exports);
+const views = mod.exports;
 const dv = app.plugins.plugins.dataview && app.plugins.plugins.dataview.api;
 const file = app.workspace.getActiveFile();
 const page = dv && file ? dv.page(file.path) : null;
@@ -221,7 +237,10 @@ return engine.markdown.create(views.{{ fn }}(dv, page));
    Chiamato da carattere() quando la categoria ha >= 3 assi. #}
 {% macro grafico_assi() -%}
 ```js-engine
-const views = await engine.importJs("z.automazioni/views.js");
+const src = await app.vault.adapter.read("z.automazioni/views.js");
+const mod = { exports: {} };
+new Function("module", "exports", src)(mod, mod.exports);
+const views = mod.exports;
 const dv = app.plugins.plugins.dataview && app.plugins.plugins.dataview.api;
 const file = app.workspace.getActiveFile();
 const page = dv && file ? dv.page(file.path) : null;
@@ -235,7 +254,10 @@ await views.renderAxesRadar(container, app, page);
    (renderAxesCompare). Vedi LEGGIMI per lo snippet copia-incolla. #}
 {% macro confronto_assi() -%}
 ```js-engine
-const views = await engine.importJs("z.automazioni/views.js");
+const src = await app.vault.adapter.read("z.automazioni/views.js");
+const mod = { exports: {} };
+new Function("module", "exports", src)(mod, mod.exports);
+const views = mod.exports;
 const dv = app.plugins.plugins.dataview && app.plugins.plugins.dataview.api;
 const file = app.workspace.getActiveFile();
 const page = dv && file ? dv.page(file.path) : null;

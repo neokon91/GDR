@@ -2,6 +2,9 @@
 # relazioni, wizard e wiring template. render.py lo distribuisce nel
 # modello globale 'core' (apply_entities) e raccoglie i template.
 # I campi sono nel registro centrale (core.yaml/system.yaml).
+# Assi tematici nel formato RICCO (seed FantasyWorld assi_tematici_luogo.yaml):
+# ogni asse è una scala 1-5 con etichetta + descrizione per valore. La macro
+# carattere() rende slider 1-5 + legenda; il radar (views.js) usa scala 1-5.
 id: luogo
 folder: Mondi/Luoghi
 order: 3
@@ -24,18 +27,51 @@ scheda:
 - clima
 - popolazione
 assi:
-- id: sicuro_pericoloso
-  sinistra: Sicuro
-  destra: Pericoloso
-- id: prospero_misero
-  sinistra: Prospero
-  destra: Misero
-- id: selvaggio_civilizzato
-  sinistra: Selvaggio
-  destra: Civilizzato
-- id: noto_segreto
-  sinistra: Noto
-  destra: Segreto
+- id: stabilita_spaziale
+  nome: Stabilità Spaziale
+  descrizione: Quanto lo spazio del luogo è fisso e misurabile, o mutevole e illusorio.
+  valori:
+    1: { etichetta: Solido,    descrizione: "Confini chiari e immutabili; geografia costante, coordinate affidabili." }
+    2: { etichetta: Plastico,  descrizione: "Alcune caratteristiche cambiano lievemente nel tempo o con le condizioni." }
+    3: { etichetta: Anomalo,   descrizione: "Anomalie localizzate: stanze impossibili, passaggi che appaiono solo a volte." }
+    4: { etichetta: Instabile, descrizione: "Si trasforma spesso o imprevedibilmente; la mappa perde validità." }
+    5: { etichetta: Mutante,   descrizione: "Nessuna forma definita; cambia con la volontà o la magia, spazio concettuale." }
+- id: coerenza_temporale
+  nome: Coerenza Temporale
+  descrizione: Come scorre il tempo nel luogo, se normalmente o alterato.
+  valori:
+    1: { etichetta: Lineare,    descrizione: "Tempo stabile e prevedibile; ore, giorni e anni scorrono normalmente." }
+    2: { etichetta: Ondulato,   descrizione: "Accelera o rallenta leggermente in alcune zone, senza conseguenze gravi." }
+    3: { etichetta: Distorto,   descrizione: "Varia in modo netto: accelerazioni, ripetizioni, ritardi o salti." }
+    4: { etichetta: Fratturato, descrizione: "Più flussi temporali simultanei; gli eventi non seguono un ordine." }
+    5: { etichetta: Atemporale, descrizione: "Tempo assente o negato; il luogo è congelato, eterno, fuori dal tempo." }
+- id: presenza_magica
+  nome: Presenza Magica
+  descrizione: Quantità e densità della magia presente nel luogo.
+  valori:
+    1: { etichetta: Nulla,        descrizione: "Nessuna magia; gli incantesimi faticano o falliscono. Luogo morto sul piano arcano." }
+    2: { etichetta: Debole,       descrizione: "Magia latente; piccole reazioni o presenze residue." }
+    3: { etichetta: Attiva,       descrizione: "Risponde alla magia; può ospitare nodi, fonti o rituali. Effetti normali." }
+    4: { etichetta: Densa,        descrizione: "La magia permea tutto; oggetti si incantano, creature mutano." }
+    5: { etichetta: Sovraccarica, descrizione: "Fonte vivente di energia; la magia si manifesta senza controllo." }
+- id: sacralita
+  nome: Sacralità
+  descrizione: Valore spirituale, mistico o religioso del luogo.
+  valori:
+    1: { etichetta: Profano,    descrizione: "Privo di significato spirituale, o impuro/blasfemo." }
+    2: { etichetta: Neutro,     descrizione: "Nessuna connotazione sacra o empia; solo un luogo fisico." }
+    3: { etichetta: Rituale,    descrizione: "Usato per pratiche religiose o cultuali, ma non sacro in sé." }
+    4: { etichetta: Benedetto,  descrizione: "Sacro per uno o più culti; reliquie, miracoli, presenze divine." }
+    5: { etichetta: "Axis Mundi", descrizione: "Centro del mondo, contatto coi piani; archetipo vivente, nodo cosmico." }
+- id: civilizzazione
+  nome: Civilizzazione
+  descrizione: Grado di presenza e influenza di civiltà intelligenti.
+  valori:
+    1: { etichetta: Selvaggio,   descrizione: "Natura primordiale, nessuna presenza intelligente; ambiente incontaminato." }
+    2: { etichetta: Marginale,   descrizione: "Piccoli insediamenti, ruderi o tribù; influenza civilizzata minima." }
+    3: { etichetta: Colonizzato, descrizione: "Villaggi, rotte, campi o torri; presenza stabile ma dispersa." }
+    4: { etichetta: Urbanizzato, descrizione: "Città, templi, fortezze; il luogo è plasmato da architettura e cultura." }
+    5: { etichetta: Iperevoluto, descrizione: "Tecnomagia, città viventi, coscienze collettive; civilizzazione pura." }
 relazioni:
 - field: regione
   label: Regione
