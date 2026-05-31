@@ -1,0 +1,40 @@
+# Assi tematici (formato ricco 1-5) per l'entità 'regno'.
+# Adattati da FantasyWorld assi_tematici_civilta (sottoinsieme curato) + autorati.
+id: regno
+assi:
+- id: coesione_politica
+  nome: Coesione Politica
+  descrizione: Quanto il potere è unificato o disperso nel regno.
+  valori:
+    1: { etichetta: Tribale,      descrizione: "Clan e famiglie autonomi; unità solo simbolica." }
+    2: { etichetta: Confederale,  descrizione: "Nuclei cooperano via consigli; decisioni lente." }
+    3: { etichetta: Policentrica, descrizione: "Più centri di potere con autorità centrale debole." }
+    4: { etichetta: Centralizzata, descrizione: "Autorità unificata; periferie soggette a leggi comuni." }
+    5: { etichetta: Monolitica,   descrizione: "Potere assoluto e indiviso; la dissidenza è tradimento." }
+- id: stabilita
+  nome: Stabilità
+  descrizione: Solidità del regno nel presente.
+  valori:
+    1: { etichetta: "Sull'orlo", descrizione: "Collasso imminente; guerra civile o invasione." }
+    2: { etichetta: Fragile,    descrizione: "Crisi aperte; il trono vacilla." }
+    3: { etichetta: Contesa,    descrizione: "Tensioni gestite; equilibrio precario ma in piedi." }
+    4: { etichetta: Salda,      descrizione: "Istituzioni solide; le crisi sono contenute." }
+    5: { etichetta: Granitica,  descrizione: "Ordine duraturo; pace e continuità da generazioni." }
+- id: apertura
+  nome: Apertura
+  descrizione: Atteggiamento verso stranieri, idee e altri popoli.
+  valori:
+    1: { etichetta: Isolazionista, descrizione: "Chiuso e diffidente; confini sigillati." }
+    2: { etichetta: Protezionista, descrizione: "Scambi limitati e sorvegliati." }
+    3: { etichetta: Pragmatico,    descrizione: "Aperto per convenienza; alleanze mutevoli." }
+    4: { etichetta: Aperto,        descrizione: "Commerci e migrazioni incoraggiati; cosmopolita." }
+    5: { etichetta: Cosmopolita,   descrizione: "Crocevia di popoli; identità plurale e fluida." }
+- id: proiezione
+  nome: Proiezione
+  descrizione: Quanto il regno cerca di espandersi o influenzare fuori dai confini.
+  valori:
+    1: { etichetta: Ripiegato,    descrizione: "Solo sopravvivenza interna; nessuna ambizione esterna." }
+    2: { etichetta: Difensivo,    descrizione: "Tutela i confini; non cerca espansione." }
+    3: { etichetta: Influente,    descrizione: "Pesa nella diplomazia regionale; gioca di sponda." }
+    4: { etichetta: Espansionista, descrizione: "Conquista o colonizza attivamente." }
+    5: { etichetta: Egemonico,    descrizione: "Mira al dominio totale; impero in marcia." }

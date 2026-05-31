@@ -1,0 +1,40 @@
+# Assi tematici (formato ricco 1-5) per l'entità 'mito'.
+# Autorati sullo standard FantasyWorld (manca un seed assi 'mito').
+id: mito
+assi:
+- id: veridicita
+  nome: Veridicità
+  descrizione: Quanto il mito corrisponde a fatti reali del mondo.
+  valori:
+    1: { etichetta: Invenzione, descrizione: "Pura finzione; nessun nucleo di verità." }
+    2: { etichetta: Distorto,   descrizione: "Lontano dai fatti; un seme reale gonfiato fino all'irriconoscibile." }
+    3: { etichetta: Romanzato,  descrizione: "Vero a metà; fatti reali avvolti di leggenda." }
+    4: { etichetta: Fedele,     descrizione: "Aderente ai fatti, con poche aggiunte simboliche." }
+    5: { etichetta: Rivelato,   descrizione: "Letteralmente vero; verità sacra travestita da mito." }
+- id: diffusione
+  nome: Diffusione
+  descrizione: Quanto il mito è conosciuto nel mondo.
+  valori:
+    1: { etichetta: Perduto,    descrizione: "Dimenticato; lo conosce forse un solo erudite o reliquia." }
+    2: { etichetta: Esoterico,  descrizione: "Noto solo a iniziati, culti o studiosi." }
+    3: { etichetta: Regionale,  descrizione: "Diffuso in un popolo o regione." }
+    4: { etichetta: Diffuso,    descrizione: "Conosciuto da molte culture, in varianti." }
+    5: { etichetta: Universale, descrizione: "Lo conoscono tutti; fondamento culturale condiviso." }
+- id: tono
+  nome: Tono
+  descrizione: L'atmosfera morale del racconto.
+  valori:
+    1: { etichetta: Luminoso, descrizione: "Eroico, consolatorio; promette salvezza." }
+    2: { etichetta: Edificante, descrizione: "Morale ed esemplare; insegna virtù." }
+    3: { etichetta: Ambiguo,  descrizione: "Tragico o a doppio taglio; nessuna lezione netta." }
+    4: { etichetta: Cupo,     descrizione: "Ammonitore; parla di colpa, caduta, perdita." }
+    5: { etichetta: Maledetto, descrizione: "Sinistro; raccontarlo o crederci porta sventura." }
+- id: vitalita
+  nome: Vitalità
+  descrizione: Quanto il mito agisce ancora nel presente.
+  valori:
+    1: { etichetta: Morto,     descrizione: "Curiosità d'archivio; nessun effetto sul presente." }
+    2: { etichetta: Dormiente, descrizione: "Ricordato ma inerte; nessuno ci agisce sopra." }
+    3: { etichetta: Vivo,      descrizione: "Ispira riti, nomi, usanze ancora praticate." }
+    4: { etichetta: Operante,  descrizione: "Muove fazioni e culti; orienta scelte e conflitti." }
+    5: { etichetta: Profetico, descrizione: "Si sta avverando; il mondo si muove sul suo copione." }

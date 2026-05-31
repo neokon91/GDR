@@ -1,0 +1,40 @@
+# Assi tematici (formato ricco 1-5) per l'entità 'bioma'.
+# Autorati sullo standard FantasyWorld (manca un seed assi 'bioma').
+id: bioma
+assi:
+- id: ostilita
+  nome: Ostilità
+  descrizione: Quanto il bioma è pericoloso per chi lo attraversa.
+  valori:
+    1: { etichetta: Ospitale,   descrizione: "Sicuro e accogliente; sopravvivere è facile." }
+    2: { etichetta: Mite,       descrizione: "Pochi pericoli, gestibili con prudenza." }
+    3: { etichetta: Aspro,      descrizione: "Duro; richiede preparazione e rispetto." }
+    4: { etichetta: Ostile,     descrizione: "Insidie costanti; il bioma vuole respingerti." }
+    5: { etichetta: Letale,     descrizione: "Mortale; sopravvivere è un'impresa rara." }
+- id: fertilita
+  nome: Fertilità
+  descrizione: Quanta vita e risorse il bioma sostiene.
+  valori:
+    1: { etichetta: Sterile,    descrizione: "Quasi morto; nulla cresce, nulla resta." }
+    2: { etichetta: Magro,      descrizione: "Vita scarsa e tenace; risorse rare." }
+    3: { etichetta: Modesto,    descrizione: "Sostiene una vita stabile ma non abbondante." }
+    4: { etichetta: Rigoglioso, descrizione: "Vita ricca; risorse e specie in quantità." }
+    5: { etichetta: Lussureggiante, descrizione: "Esplosione di vita; sovrabbondante e vorace." }
+- id: magia_ambientale
+  nome: Magia Ambientale
+  descrizione: Quanto la magia permea il bioma.
+  valori:
+    1: { etichetta: Mondano,    descrizione: "Nessuna magia; natura ordinaria." }
+    2: { etichetta: Toccato,    descrizione: "Tracce o residui magici occasionali." }
+    3: { etichetta: Intriso,    descrizione: "La magia è percepibile; fenomeni regolari." }
+    4: { etichetta: Carico,     descrizione: "La magia plasma flora, fauna e clima." }
+    5: { etichetta: Saturo,     descrizione: "Realtà alterata; la magia detta le regole." }
+- id: accessibilita
+  nome: Accessibilità
+  descrizione: Quanto è facile raggiungere e percorrere il bioma.
+  valori:
+    1: { etichetta: Aperto,     descrizione: "Facile da attraversare; rotte e accessi noti." }
+    2: { etichetta: Praticabile, descrizione: "Percorribile con guida o sentieri." }
+    3: { etichetta: Impervio,   descrizione: "Difficile; ostacoli naturali continui." }
+    4: { etichetta: Remoto,     descrizione: "Isolato; pochi sanno come arrivarci." }
+    5: { etichetta: Inaccessibile, descrizione: "Quasi irraggiungibile; barriere estreme o magiche." }

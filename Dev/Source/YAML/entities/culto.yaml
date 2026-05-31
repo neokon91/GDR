@@ -1,0 +1,67 @@
+# Schema per-entità: culto (lore, religione). Religione organizzata: dottrina,
+# clero, riti, fedeli. Distinto da divinità (l'entità venerata) e fazione
+# (organizzazione politica). Assi in assi/culto.yaml. Seed FantasyWorld t.culto +
+# assi_tematici_culto.yaml (mix curato).
+id: culto
+folder: Mondi/Culti
+order: 26
+templates:
+- id: culto
+  title: Culto
+  default_type: religione
+  target: z.modelli/Culto.md
+  primary: true
+subtypes:
+- religione
+- ordine
+- setta
+- culto misterico
+- fede popolare
+relazioni:
+- field: divinita
+  label: Divinità venerate
+  category: divinita
+  multi: true
+- field: luogo_sacro
+  label: Luogo sacro
+  category: luogo
+- field: capi
+  label: Figure di spicco
+  category: personaggio
+  multi: true
+- field: fazione
+  label: Braccio politico
+  category: fazione
+creation:
+  fields:
+  - field: tipo
+    prompt: Tipo di culto
+    from: subtypes
+    required: true
+  - field: mondo
+    prompt: Mondo
+    from: notes
+    category: mondo
+    link: true
+    required: true
+  body:
+  - field: dottrina
+    prompt: 'Dottrina: cosa insegna, cosa promette'
+    heading: Dottrina
+  - field: riti
+    prompt: 'Riti e pratiche: come si onora il sacro'
+    heading: Riti
+  - field: gerarchia
+    prompt: 'Clero e gerarchia: chi comanda, come si entra'
+    heading: Gerarchia
+  - field: tabu
+    prompt: 'Tabù e peccati: cosa è proibito'
+    heading: Tabù
+  - field: presente
+    prompt: 'Stato attuale: diffusione, alleati, nemici'
+    heading: Nel presente
+  - field: segreto
+    prompt: Il segreto del culto (eresia, verità occulta)
+    callout: segreto
+    title: Segreto
+    fold: true

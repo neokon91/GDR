@@ -1,0 +1,130 @@
+<% await tp.user.crea_mito(tp) %>
+# `=this.nome`
+
+> [!info] Mito
+> **Tipo**: `VIEW[{tipo} ?? "—"]` · **Mondo**: `VIEW[{mondo}][text(renderMarkdown)]`
+>
+> **Stato**: `INPUT[stato][:stato]`
+
+````tabs
+--- Lore
+
+
+> [!note]- Descrizione
+> Scrivi qui il contenuto lore vero della nota.
+
+> [!quote]- Versione player-safe
+> `INPUT[text:player_safe]`
+
+> [!note] Narrazione
+> `INPUT[textArea:narrazione]`
+
+> [!note] Nucleo simbolico
+> `INPUT[textArea:nucleo]`
+
+> [!note] Interpretazioni
+> `INPUT[textArea:interpretazioni]`
+
+> [!note] Nel presente
+> `INPUT[textArea:presente]`
+
+> [!segreto]- Segreto
+> `INPUT[textArea:segreto]`
+
+
+--- Al tavolo
+
+> [!tavolo] Uso al tavolo
+> `INPUT[testo_area][:uso_al_tavolo]`
+
+> [!gancio]- Gancio
+> `INPUT[testo_area][:gancio]`
+
+> [!warning] Pressione — `VIEW[{pressione} >= 7 ? "🔴 Crisi" : ({pressione} >= 4 ? "🟠 Tensione" : "🟢 Calma")]`
+> Pressione: `INPUT[pressione][:pressione]`
+>
+> Prossima mossa: `INPUT[text:prossima_mossa]`
+
+
+--- Carattere
+
+> [!abstract] Carattere
+> **Veridicità** `INPUT[slider(minValue(1), maxValue(5), addLabels):veridicita]`
+> **Diffusione** `INPUT[slider(minValue(1), maxValue(5), addLabels):diffusione]`
+> **Tono** `INPUT[slider(minValue(1), maxValue(5), addLabels):tono]`
+> **Vitalità** `INPUT[slider(minValue(1), maxValue(5), addLabels):vitalita]`
+
+> [!note]- Veridicità — Quanto il mito corrisponde a fatti reali del mondo.
+> **1 · Invenzione** — Pura finzione; nessun nucleo di verità.
+> **2 · Distorto** — Lontano dai fatti; un seme reale gonfiato fino all'irriconoscibile.
+> **3 · Romanzato** — Vero a metà; fatti reali avvolti di leggenda.
+> **4 · Fedele** — Aderente ai fatti, con poche aggiunte simboliche.
+> **5 · Rivelato** — Letteralmente vero; verità sacra travestita da mito.
+
+> [!note]- Diffusione — Quanto il mito è conosciuto nel mondo.
+> **1 · Perduto** — Dimenticato; lo conosce forse un solo erudite o reliquia.
+> **2 · Esoterico** — Noto solo a iniziati, culti o studiosi.
+> **3 · Regionale** — Diffuso in un popolo o regione.
+> **4 · Diffuso** — Conosciuto da molte culture, in varianti.
+> **5 · Universale** — Lo conoscono tutti; fondamento culturale condiviso.
+
+> [!note]- Tono — L'atmosfera morale del racconto.
+> **1 · Luminoso** — Eroico, consolatorio; promette salvezza.
+> **2 · Edificante** — Morale ed esemplare; insegna virtù.
+> **3 · Ambiguo** — Tragico o a doppio taglio; nessuna lezione netta.
+> **4 · Cupo** — Ammonitore; parla di colpa, caduta, perdita.
+> **5 · Maledetto** — Sinistro; raccontarlo o crederci porta sventura.
+
+> [!note]- Vitalità — Quanto il mito agisce ancora nel presente.
+> **1 · Morto** — Curiosità d'archivio; nessun effetto sul presente.
+> **2 · Dormiente** — Ricordato ma inerte; nessuno ci agisce sopra.
+> **3 · Vivo** — Ispira riti, nomi, usanze ancora praticate.
+> **4 · Operante** — Muove fazioni e culti; orienta scelte e conflitti.
+> **5 · Profetico** — Si sta avverando; il mondo si muove sul suo copione.
+
+```js-engine
+const src = await app.vault.adapter.read("z.automazioni/views.js");
+const mod = { exports: {} };
+new Function("module", "exports", src)(mod, mod.exports);
+const views = mod.exports;
+const dv = app.plugins.plugins.dataview && app.plugins.plugins.dataview.api;
+const file = app.workspace.getActiveFile();
+const page = dv && file ? dv.page(file.path) : null;
+await views.renderAxesRadar(container, app, page);
+```
+
+--- Collegamenti
+
+> [!example] Relazioni
+> **Epoca raccontata**: `INPUT[suggester(optionQuery("Mondi/Epoche"), useLinks(partial), allowOther):epoca_raccontata]`
+> **Divinità coinvolte**: `INPUT[inlineListSuggester(optionQuery("Mondi/Divinita"), useLinks(partial), allowOther):divinita]`
+> **Luogo simbolico**: `INPUT[suggester(optionQuery("Mondi/Luoghi"), useLinks(partial), allowOther):luogo]`
+> **Culti che lo tramandano**: `INPUT[inlineListSuggester(optionQuery("Mondi/Culti"), useLinks(partial), allowOther):culti]`
+
+> [!example] Collegamenti
+> Mondo: `INPUT[mondo][:mondo]`
+>
+> Connessioni: `INPUT[connessioni][:connessioni]`
+>
+> Sessioni: `INPUT[sessioni][:sessioni]`
+
+> [!tip] Collega
+> Aggiungi una relazione (anche dopo la creazione): `BUTTON[collega-nota]`
+--- Vista
+
+```js-engine
+const src = await app.vault.adapter.read("z.automazioni/views.js");
+const mod = { exports: {} };
+new Function("module", "exports", src)(mod, mod.exports);
+const views = mod.exports;
+const dv = app.plugins.plugins.dataview && app.plugins.plugins.dataview.api;
+const file = app.workspace.getActiveFile();
+const page = dv && file ? dv.page(file.path) : null;
+return engine.markdown.create(views.renderEntityPanel(dv, page));
+```
+
+> [!tip] Azioni
+> `BUTTON[marca-canonico]`
+>
+> `BUTTON[archivia-nota]`
+````

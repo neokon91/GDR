@@ -1,0 +1,49 @@
+# Assi tematici (formato ricco 1-5) per l'entità 'culto'.
+# Adattati da FantasyWorld assi_tematici_culto.yaml (sottoinsieme curato).
+id: culto
+assi:
+- id: struttura
+  nome: Struttura
+  descrizione: Grado di organizzazione interna e rigidità della gerarchia.
+  valori:
+    1: { etichetta: Anarchico,   descrizione: "Nessuna gerarchia; fluido, spontaneo, decentralizzato." }
+    2: { etichetta: Comunitario, descrizione: "Guide senza autorità vincolante; decisioni collettive." }
+    3: { etichetta: "Semi-istituzionale", descrizione: "Struttura leggera; incarichi riconosciuti ma locali." }
+    4: { etichetta: Gerarchico,  descrizione: "Gerarchia formalizzata, con margini di eccezione." }
+    5: { etichetta: Dogmatico,   descrizione: "Piramide rigida; autorità centrale, sacra, indiscutibile." }
+- id: rivelazione
+  nome: Rivelazione
+  descrizione: Quanto la verità sacra è riservata a pochi o aperta a tutti.
+  valori:
+    1: { etichetta: Iniziatico, descrizione: "Verità occulta, solo per gradi e riti segreti." }
+    2: { etichetta: Filtrata,   descrizione: "Sapere parziale ai neofiti; le verità profonde celate." }
+    3: { etichetta: Misto,      descrizione: "Molto pubblico, ma un nucleo segreto per gli iniziati." }
+    4: { etichetta: Aperta,     descrizione: "Insegnamenti divulgati via predicazione e testi." }
+    5: { etichetta: Universale, descrizione: "Verità per tutti; missionaria, nessun segreto." }
+- id: trascendenza
+  nome: Trascendenza
+  descrizione: Quanto il divino è immerso nel mondo o separato e superiore.
+  valori:
+    1: { etichetta: Immanente,   descrizione: "Il divino permea tutto; sacro e mondo non si distinguono." }
+    2: { etichetta: Diffuso,     descrizione: "Presente ovunque, ma non tutto è sacro in egual misura." }
+    3: { etichetta: Ambivalente, descrizione: "Sia immanente che trascendente; si incarna e supera." }
+    4: { etichetta: Separato,    descrizione: "Distinto dalla creazione; si manifesta in eletti." }
+    5: { etichetta: Trascendente, descrizione: "Del tutto altro; piano superiore, accessibile per grazia." }
+- id: legalita
+  nome: Legalità
+  descrizione: Posizione del culto rispetto all'autorità vigente.
+  valori:
+    1: { etichetta: Illegale,   descrizione: "Proibito e perseguitato; clandestino." }
+    2: { etichetta: Tollerato,  descrizione: "Non legale ma tollerato, a profilo basso." }
+    3: { etichetta: Riconosciuto, descrizione: "Riconoscimento limitato; status minoritario." }
+    4: { etichetta: Accettato,  descrizione: "Pienamente legale e rispettato, non dominante." }
+    5: { etichetta: Ufficiale,  descrizione: "Religione di stato, legata al potere politico." }
+- id: motivazione
+  nome: Motivazione
+  descrizione: La spinta emotiva alla base della fede.
+  valori:
+    1: { etichetta: Paura,      descrizione: "Timore reverenziale; si agisce per evitare punizioni." }
+    2: { etichetta: Placazione, descrizione: "Offerte e riti per mantenere la benevolenza divina." }
+    3: { etichetta: Equilibrata, descrizione: "Timore e gratitudine insieme; obbedienza e fiducia." }
+    4: { etichetta: Fiducia,    descrizione: "Si onora per scelta; la divinità è giusta e guida." }
+    5: { etichetta: Amore,      descrizione: "Legame affettivo profondo; si cerca l'unione, l'estasi." }

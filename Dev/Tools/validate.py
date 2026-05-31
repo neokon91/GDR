@@ -134,7 +134,8 @@ def validate_entities(core_raw: dict[str, Any], system_raw: dict[str, Any],
             if field_id in base_fields:
                 errors.append(f"entity '{eid}': campo '{field_id}' già in core/system (dup)")
         for template in entity.get("templates", []) or []:
-            for key in ("id", "title", "jinja", "target"):
+            # 'jinja' è opzionale: assente -> scheletro condiviso _entity_base.j2.
+            for key in ("id", "title", "target"):
                 if not template.get(key):
                     errors.append(f"entity '{eid}': template senza '{key}'")
     return errors
@@ -156,7 +157,7 @@ def validate_entity_schema(entities: list[dict[str, Any]]) -> list[str]:
         need(isinstance(entity.get("order", 0), int), f"entity {eid}: 'order' non è intero")
         need(isinstance(entity.get("subtypes", []), list), f"entity {eid}: 'subtypes' non è lista")
         for tpl in entity.get("templates", []) or []:
-            missing = {"id", "title", "target", "jinja"} - set(tpl)
+            missing = {"id", "title", "target"} - set(tpl)  # 'jinja' opzionale (default _entity_base.j2)
             need(not missing, f"entity {eid}: template '{tpl.get('id', '?')}' senza {sorted(missing)}")
         for fid, spec in (entity.get("fields") or {}).items():
             need(isinstance(spec, dict) and spec.get("label") and spec.get("widget"),

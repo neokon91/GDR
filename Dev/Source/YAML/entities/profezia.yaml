@@ -1,0 +1,59 @@
+# Schema per-entità: profezia (lore, narrativo). Predizione/presagio con condizioni
+# di avveramento: gancio narrativo forte. Si lega a eventi/personaggi/culti.
+# Assi in assi/profezia.yaml. Seed FantasyWorld t.profezia.yaml.
+id: profezia
+folder: Mondi/Profezie
+order: 27
+templates:
+- id: profezia
+  title: Profezia
+  default_type: divinatoria
+  target: z.modelli/Profezia.md
+subtypes:
+- cosmica
+- divinatoria
+- di rinascita
+- distruttiva
+- personale
+relazioni:
+- field: riguarda
+  label: Chi riguarda
+  category: personaggio
+  multi: true
+- field: evento
+  label: Evento legato
+  category: evento
+- field: culti
+  label: Culti che la custodiscono
+  category: culto
+  multi: true
+creation:
+  fields:
+  - field: tipo
+    prompt: Tipo di profezia
+    from: subtypes
+    required: true
+  - field: mondo
+    prompt: Mondo
+    from: notes
+    category: mondo
+    link: true
+    required: true
+  body:
+  - field: testo
+    prompt: 'Il testo della profezia (le parole, anche criptiche)'
+    heading: Testo
+  - field: interpretazioni
+    prompt: Interpretazioni possibili (cosa si crede significhi)
+    heading: Interpretazioni
+  - field: condizioni
+    prompt: Condizioni di avveramento (cosa deve accadere)
+    heading: Condizioni
+  - field: segni
+    prompt: 'Segni e manifestazioni: come capire che si avvera'
+    heading: Segni
+  - field: segreto
+    prompt: La verità sull'avveramento (cosa il DM sa davvero)
+    callout: segreto
+    title: Segreto
+    fold: true

@@ -19,6 +19,9 @@
 > `BUTTON[crea-oggetto]`
 > `BUTTON[crea-oggetto_magico]`
 > `BUTTON[crea-incantesimo]`
+> `BUTTON[crea-epoca]`
+> `BUTTON[crea-culto]`
+> `BUTTON[crea-regno]`
 
 > [!example]- Altri tipi
 > `BUTTON[crea-cosmologia]`
@@ -34,6 +37,11 @@
 > `BUTTON[crea-bastione]`
 > `BUTTON[crea-regola]`
 > `BUTTON[crea-nota_rapida]`
+> `BUTTON[crea-mito]`
+> `BUTTON[crea-profezia]`
+> `BUTTON[crea-istituzione]`
+> `BUTTON[crea-bioma]`
+> `BUTTON[crea-ecosistema]`
 
 ## 🤝 Trame (alleati / rivali)
 ```dataview

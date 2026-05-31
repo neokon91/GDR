@@ -45,6 +45,10 @@ ENTITIES_DIRNAME = "entities"
 # (glossario coeso, formato ricco 1-5). load_entities li rifonde nell'entità: i file
 # entities/*.yaml restano snelli, gli assi sono sfogliabili/confrontabili a parte.
 ASSI_DIRNAME = "assi"
+# Template Jinja di default: le entità "uniformi" non devono dichiarare 'jinja'
+# nel loro file — ricevono lo scheletro condiviso _entity_base.j2 (riempito da
+# YAML + macro). Solo le entità bespoke dichiarano un proprio template.
+DEFAULT_JINJA = "_entity_base.j2"
 
 
 # --- IO ---------------------------------------------------------------------
@@ -157,7 +161,9 @@ def entity_templates(entities: list[dict[str, Any]]) -> list[dict[str, Any]]:
     templates = []
     for entity in sorted(entities, key=lambda e: e.get("order", 10**9)):
         for template in entity.get("templates", []) or []:
-            templates.append({**template, "category": entity["id"]})
+            tmpl = {**template, "category": entity["id"]}
+            tmpl.setdefault("jinja", DEFAULT_JINJA)  # entità uniformi -> scheletro condiviso
+            templates.append(tmpl)
     return templates
 
 

@@ -1,0 +1,60 @@
+# Schema per-entità: ecosistema (lore, natura). Rete dinamica di specie, risorse e
+# cicli in equilibrio o tensione. Più focalizzato del bioma (che è il "luogo");
+# l'ecosistema è la "rete di relazioni". Assi in assi/ecosistema.yaml.
+# Seed FantasyWorld t.ecosistema.yaml.
+id: ecosistema
+folder: Mondi/Ecosistemi
+order: 31
+templates:
+- id: ecosistema
+  title: Ecosistema
+  default_type: naturale
+  target: z.modelli/Ecosistema.md
+subtypes:
+- naturale
+- magico
+- sacro
+- mutato
+- instabile
+- artificiale
+relazioni:
+- field: bioma
+  label: Bioma
+  category: bioma
+- field: specie
+  label: Specie coinvolte
+  category: creatura
+  multi: true
+- field: luogo
+  label: Dove si trova
+  category: luogo
+creation:
+  fields:
+  - field: tipo
+    prompt: Tipo di ecosistema
+    from: subtypes
+    required: true
+  - field: mondo
+    prompt: Mondo
+    from: notes
+    category: mondo
+    link: true
+    required: true
+  body:
+  - field: composizione
+    prompt: 'Composizione: chi e cosa lo abita'
+    heading: Composizione
+  - field: equilibri
+    prompt: 'Equilibri: catene, simbiosi, predatori/prede'
+    heading: Equilibri
+  - field: cicli
+    prompt: 'Cicli: stagioni, migrazioni, rigenerazione'
+    heading: Cicli
+  - field: minacce
+    prompt: 'Minacce: cosa lo sta spezzando'
+    heading: Minacce
+  - field: segreto
+    prompt: Il segreto dell'ecosistema
+    callout: segreto
+    title: Segreto
+    fold: true

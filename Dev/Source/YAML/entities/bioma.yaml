@@ -1,0 +1,64 @@
+# Schema per-entità: bioma (lore, natura). Regione ecologica: clima, flora/fauna,
+# fenomeni. Arricchisce luoghi e creature con ecologia. Assi in assi/bioma.yaml.
+# Seed FantasyWorld t.bioma.yaml.
+id: bioma
+folder: Mondi/Biomi
+order: 30
+templates:
+- id: bioma
+  title: Bioma
+  default_type: foresta
+  target: z.modelli/Bioma.md
+subtypes:
+- foresta
+- deserto
+- tundra
+- oceano
+- montagna
+- pianura
+- palude
+- sotterraneo
+- planare
+scheda: [clima]
+relazioni:
+- field: luoghi
+  label: Luoghi
+  category: luogo
+  multi: true
+- field: specie
+  label: Specie tipiche
+  category: creatura
+  multi: true
+creation:
+  fields:
+  - field: tipo
+    prompt: Tipo di bioma
+    from: subtypes
+    required: true
+  - field: mondo
+    prompt: Mondo
+    from: notes
+    category: mondo
+    link: true
+    required: true
+  - field: clima
+    prompt: Clima
+    optional: true
+  body:
+  - field: geografia
+    prompt: 'Geografia: com''è fatto, cosa lo distingue'
+    heading: Geografia
+  - field: flora_fauna
+    prompt: Flora e fauna caratteristiche
+    heading: Flora e fauna
+  - field: fenomeni
+    prompt: 'Fenomeni: meteo, magia ambientale, pericoli naturali'
+    heading: Fenomeni
+  - field: risorse
+    prompt: 'Risorse: cosa offre (e cosa attira)'
+    heading: Risorse
+  - field: segreto
+    prompt: Cosa nasconde il bioma
+    callout: segreto
+    title: Segreto
+    fold: true

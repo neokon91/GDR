@@ -86,6 +86,14 @@ folder_icons:
   talento: "⭐"
   divinita: "☀️"
   bastione: "🏰"
+  epoca: "⏳"
+  mito: "📖"
+  culto: "🕯️"
+  profezia: "🔮"
+  regno: "👑"
+  istituzione: "🏛️"
+  bioma: "🌲"
+  ecosistema: "🌿"
   inbox: "📥"
 # Callout GDR custom (Callout Manager): identità visiva delle note. render.py li
 # inietta in callout-manager (callouts.custom). color = "R, G, B"; icon = id lucide.

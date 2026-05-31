@@ -1,0 +1,40 @@
+# Assi tematici (formato ricco 1-5) per l'entità 'profezia'.
+# Autorati sullo standard FantasyWorld (manca un seed assi 'profezia').
+id: profezia
+assi:
+- id: chiarezza
+  nome: Chiarezza
+  descrizione: Quanto la profezia è comprensibile o criptica.
+  valori:
+    1: { etichetta: Ermetica,  descrizione: "Incomprensibile; simboli puri, nessun appiglio." }
+    2: { etichetta: Oscura,    descrizione: "Enigmatica; richiede chiavi e interpreti." }
+    3: { etichetta: Allusiva,  descrizione: "Immagini leggibili ma ambigue; più letture valide." }
+    4: { etichetta: Chiara,    descrizione: "Senso evidente, con qualche dettaglio velato." }
+    5: { etichetta: Esplicita, descrizione: "Dice apertamente cosa, chi, quando." }
+- id: avveramento
+  nome: Avveramento
+  descrizione: Quanto la profezia è vicina a compiersi.
+  valori:
+    1: { etichetta: Remota,    descrizione: "Lontanissima; nessun segno ancora." }
+    2: { etichetta: Latente,   descrizione: "Condizioni assenti; potrebbe non avverarsi mai." }
+    3: { etichetta: "In moto", descrizione: "I primi segni appaiono; gli ingranaggi girano." }
+    4: { etichetta: Imminente, descrizione: "Quasi tutte le condizioni soddisfatte; sta accadendo." }
+    5: { etichetta: "In atto", descrizione: "Si sta compiendo ora; resta solo l'esito." }
+- id: esito
+  nome: Esito atteso
+  descrizione: Cosa promette la profezia se si avvera.
+  valori:
+    1: { etichetta: Salvezza,    descrizione: "Liberazione, alba, rinascita per il mondo." }
+    2: { etichetta: Benedizione, descrizione: "Bene per alcuni; un dono o un erede atteso." }
+    3: { etichetta: Svolta,      descrizione: "Cambio epocale ambiguo; né bene né male netti." }
+    4: { etichetta: Sventura,    descrizione: "Caduta, lutto, fine di un ordine." }
+    5: { etichetta: Catastrofe,  descrizione: "Rovina cosmica; fine del mondo o di un'era." }
+- id: malleabilita
+  nome: Malleabilità
+  descrizione: Quanto le scelte mortali possono cambiarne il corso.
+  valori:
+    1: { etichetta: Ineluttabile, descrizione: "Si avvera comunque; ogni resistenza la realizza." }
+    2: { etichetta: Rigida,       descrizione: "Si può ritardare, non evitare." }
+    3: { etichetta: Condizionata, descrizione: "Dipende da scelte precise; ha bivi reali." }
+    4: { etichetta: Fragile,      descrizione: "Facile da deviare; basta poco a spezzarla." }
+    5: { etichetta: Aperta,       descrizione: "Solo una possibilità tra tante; il futuro è libero." }

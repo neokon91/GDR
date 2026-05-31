@@ -1,0 +1,80 @@
+# Schema per-entità: regno (lore, politico). Entità politica sopra fazione/luogo:
+# confini, governo, dinastia. Struttura il potere del mondo. Assi in assi/regno.yaml.
+# Seed FantasyWorld t.regno.yaml + assi_tematici_civilta (adattati).
+id: regno
+folder: Mondi/Regni
+order: 28
+templates:
+- id: regno
+  title: Regno
+  default_type: regno
+  target: z.modelli/Regno.md
+  primary: true
+subtypes:
+- regno
+- impero
+- repubblica
+- città-stato
+- confederazione
+- dominio
+fields:
+  governo: { label: Forma di governo, widget: text }
+  sovrano: { label: Sovrano,          widget: text }
+scheda: [governo, sovrano, portata, popolazione]
+relazioni:
+- field: capitale
+  label: Capitale
+  category: luogo
+- field: territori
+  label: Territori
+  category: luogo
+  multi: true
+- field: cultura
+  label: Cultura dominante
+  category: cultura
+- field: fazioni
+  label: Fazioni di corte
+  category: fazione
+  multi: true
+creation:
+  fields:
+  - field: tipo
+    prompt: Tipo di regno
+    from: subtypes
+    required: true
+  - field: mondo
+    prompt: Mondo
+    from: notes
+    category: mondo
+    link: true
+    required: true
+  - field: capitale
+    prompt: Capitale (opzionale)
+    from: notes
+    category: luogo
+    link: true
+    optional: true
+  body:
+  - field: storia_regno
+    prompt: 'Storia: fondazione, ascesa, crisi'
+    heading: Storia
+  - field: societa
+    prompt: 'Società: popolo, classi, vita quotidiana'
+    heading: Società
+  - field: economia
+    prompt: 'Economia e risorse: di cosa vive'
+    heading: Economia
+  - field: forza
+    prompt: 'Forza: esercito, magia, alleanze'
+    heading: Forza
+  - field: relazioni_estere
+    prompt: Rapporti con altri regni (alleati, rivali)
+    heading: Relazioni estere
+  - field: tensione
+    prompt: Tensione presente (cosa minaccia il regno)
+    heading: Tensione
+  - field: segreto
+    prompt: Il segreto del trono
+    callout: segreto
+    title: Segreto
+    fold: true

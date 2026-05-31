@@ -1,0 +1,68 @@
+# Schema per-entità: epoca (lore, temporale). Grande periodo storico/cosmico che
+# raccoglie eventi e archi. Sblocca la timeline: gli eventi si collegano a un'epoca.
+# Assi in assi/epoca.yaml. Niente 'jinja' -> usa lo scheletro _entity_base.j2.
+# Seed FantasyWorld t.epoca.yaml + assi_tematici_epoca.yaml (mix curato).
+id: epoca
+folder: Mondi/Epoche
+order: 24
+templates:
+- id: epoca
+  title: Epoca
+  default_type: era storica
+  target: z.modelli/Epoca.md
+  primary: true
+subtypes:
+- era cosmica
+- era storica
+- era mitica
+- età
+- eone
+fields:
+  inizio: { label: Inizio, widget: text }
+  fine:   { label: Fine,   widget: text }
+scheda: [inizio, fine]
+relazioni:
+- field: eventi
+  label: Eventi principali
+  category: evento
+  multi: true
+- field: divinita
+  label: Divinità dominanti
+  category: divinita
+  multi: true
+creation:
+  fields:
+  - field: tipo
+    prompt: Tipo di epoca
+    from: subtypes
+    required: true
+  - field: mondo
+    prompt: Mondo
+    from: notes
+    category: mondo
+    link: true
+    required: true
+  - field: inizio
+    prompt: Inizio (data/era del mondo)
+    optional: true
+  - field: fine
+    prompt: Fine (data/era del mondo)
+    optional: true
+  body:
+  - field: panorama
+    prompt: Panorama dell'epoca (com'era il mondo)
+    heading: Panorama
+  - field: principi
+    prompt: Principi dominanti (leggi, divinità, forze)
+    heading: Principi dominanti
+  - field: sviluppi
+    prompt: Sviluppi narrativi (cosa è cambiato)
+    heading: Sviluppi
+  - field: eredita
+    prompt: Tracce nel presente (cosa ne resta oggi)
+    heading: Eredità
+  - field: segreto
+    prompt: Verità nascosta dell'epoca
+    callout: segreto
+    title: Segreto
+    fold: true

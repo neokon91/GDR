@@ -1,0 +1,62 @@
+# Schema per-entità: mito (lore, narrativo). Racconto simbolico: origini, leggende,
+# dicerie. Distinto da evento (fatto storico): il mito è narrazione, può essere
+# falso o distorto. Assi in assi/mito.yaml. Seed FantasyWorld t.mito.yaml.
+id: mito
+folder: Mondi/Miti
+order: 25
+templates:
+- id: mito
+  title: Mito
+  default_type: leggenda
+  target: z.modelli/Mito.md
+subtypes:
+- mito di origine
+- leggenda
+- diceria
+- dottrina
+- sogno profetico
+relazioni:
+- field: epoca_raccontata
+  label: Epoca raccontata
+  category: epoca
+- field: divinita
+  label: Divinità coinvolte
+  category: divinita
+  multi: true
+- field: luogo
+  label: Luogo simbolico
+  category: luogo
+- field: culti
+  label: Culti che lo tramandano
+  category: culto
+  multi: true
+creation:
+  fields:
+  - field: tipo
+    prompt: Tipo di mito
+    from: subtypes
+    required: true
+  - field: mondo
+    prompt: Mondo
+    from: notes
+    category: mondo
+    link: true
+    required: true
+  body:
+  - field: narrazione
+    prompt: La narrazione (il racconto come si tramanda)
+    heading: Narrazione
+  - field: nucleo
+    prompt: 'Nucleo simbolico: cosa significa davvero'
+    heading: Nucleo simbolico
+  - field: interpretazioni
+    prompt: 'Interpretazioni: ortodossa, eretica, esoterica'
+    heading: Interpretazioni
+  - field: presente
+    prompt: 'Funzione nel presente: riti, simboli, ganci vivi'
+    heading: Nel presente
+  - field: segreto
+    prompt: Cosa nasconde o distorce il mito (la verità vera)
+    callout: segreto
+    title: Segreto
+    fold: true

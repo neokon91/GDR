@@ -1,0 +1,49 @@
+# Assi tematici (formato ricco 1-5) per l'entità 'epoca'.
+# Adattati da FantasyWorld assi_tematici_epoca.yaml (sottoinsieme curato).
+id: epoca
+assi:
+- id: presenza_divina
+  nome: Presenza Divina
+  descrizione: Quanto gli dèi sono coinvolti nel mondo durante l'epoca.
+  valori:
+    1: { etichetta: Assente,      descrizione: "Gli dèi sono ignoti o silenti; il sacro non si percepisce." }
+    2: { etichetta: Remota,       descrizione: "Esistono ma distanti; parlano per segni oscuri, raramente agiscono." }
+    3: { etichetta: Intermittente, descrizione: "Appaiono e intervengono, ma in modo irregolare e ambiguo." }
+    4: { etichetta: Attiva,       descrizione: "Camminano tra i mortali, parlano per profeti; la storia è anche divina." }
+    5: { etichetta: Immanente,    descrizione: "Il divino è ovunque; ogni cosa è sacra o sua emanazione." }
+- id: accesso_magia
+  nome: Accesso alla Magia
+  descrizione: Quanto la magia è disponibile e libera nell'epoca.
+  valori:
+    1: { etichetta: Sigillata, descrizione: "Assente, perduta o proibita; solo frammenti leggendari." }
+    2: { etichetta: Occulta,   descrizione: "Esiste ma nascosta; praticata da iniziati o in segreto." }
+    3: { etichetta: Regolata,  descrizione: "Riconosciuta ma incanalata da leggi, scuole, divieti." }
+    4: { etichetta: Fluida,    descrizione: "Diffusa e usata ampiamente, con costi o limiti residui." }
+    5: { etichetta: Pervasiva, descrizione: "La realtà è tessuta di magia; tutto ne è partecipe." }
+- id: centralita_mortale
+  nome: Centralità Mortale
+  descrizione: Quanto i popoli mortali (non gli dèi) decidono il destino del mondo.
+  valori:
+    1: { etichetta: "Dominio divino",  descrizione: "Gli dèi controllano tutto; i mortali sono strumenti." }
+    2: { etichetta: Sorveglianza,      descrizione: "Le divinità guidano; i mortali agiscono ma sottomessi." }
+    3: { etichetta: Coesistenza,       descrizione: "Dèi e mortali convivono; l'iniziativa è contesa." }
+    4: { etichetta: "Predominio mortale", descrizione: "I mortali decidono; gli dèi sono in ritiro." }
+    5: { etichetta: "Ascesa dei mortali", descrizione: "I mortali hanno superato o sostituito gli dèi." }
+- id: stabilita_geopolitica
+  nome: Stabilità Geopolitica
+  descrizione: Ordine politico e coesione territoriale dell'epoca.
+  valori:
+    1: { etichetta: Frammentata,    descrizione: "Micro-regni e clan rivali; guerra e caos endemici." }
+    2: { etichetta: Turbolenta,     descrizione: "Regni instabili, confini mutevoli, guerre frequenti." }
+    3: { etichetta: Bilanciata,     descrizione: "Equilibrio fragile ma presente; trattati riconosciuti." }
+    4: { etichetta: Centralizzata,  descrizione: "Imperi forti mantengono la pace; ordine egemone." }
+    5: { etichetta: Unificata,      descrizione: "Un unico ordine globale; pace duratura o impero universale." }
+- id: storicita
+  nome: Storicità
+  descrizione: Quanto l'epoca è ricordata come mito o come storia documentata.
+  valori:
+    1: { etichetta: Mitica,       descrizione: "Avvolta nel mito; nessuna cronaca, solo archetipi." }
+    2: { etichetta: Leggendaria,  descrizione: "Eventi trasfigurati in epica; cronologie ambigue." }
+    3: { etichetta: Ambigua,      descrizione: "Tra mito e storia; frammenti scritti e reliquie." }
+    4: { etichetta: Cronachistica, descrizione: "Ben documentata; annali, mappe, genealogie." }
+    5: { etichetta: Documentata,  descrizione: "Registrata e studiata; la storia è scienza." }

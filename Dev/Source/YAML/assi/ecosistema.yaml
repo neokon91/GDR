@@ -1,0 +1,31 @@
+# Assi tematici (formato ricco 1-5) per l'entità 'ecosistema'.
+# Autorati sullo standard FantasyWorld (manca un seed assi 'ecosistema').
+id: ecosistema
+assi:
+- id: equilibrio
+  nome: Equilibrio
+  descrizione: Quanto la rete di specie è stabile o sul punto di crollare.
+  valori:
+    1: { etichetta: Collassante, descrizione: "In rovina; estinzioni a catena in corso." }
+    2: { etichetta: Fragile,     descrizione: "Squilibrato; un colpo basta a romperlo." }
+    3: { etichetta: Teso,        descrizione: "Equilibrio precario, mantenuto a fatica." }
+    4: { etichetta: Stabile,     descrizione: "Robusto; assorbe gli shock e si riprende." }
+    5: { etichetta: Autopoietico, descrizione: "Si autoregola e rigenera; quasi indistruttibile." }
+- id: diversita
+  nome: Diversità
+  descrizione: Quanto è vario il ventaglio di specie e ruoli.
+  valori:
+    1: { etichetta: Monocultura, descrizione: "Una o due specie dominano tutto." }
+    2: { etichetta: Povero,      descrizione: "Poche specie; ruoli ecologici scoperti." }
+    3: { etichetta: Vario,       descrizione: "Discreta varietà; catene complete." }
+    4: { etichetta: Ricco,       descrizione: "Molte specie e nicchie; rete fitta." }
+    5: { etichetta: Esuberante,  descrizione: "Biodiversità estrema; ruoli ridondanti e resilienti." }
+- id: naturalezza
+  nome: Naturalezza
+  descrizione: Quanto l'ecosistema è naturale o plasmato/artificiale.
+  valori:
+    1: { etichetta: Selvatico,   descrizione: "Del tutto naturale; nessuna mano intelligente." }
+    2: { etichetta: Influenzato, descrizione: "Tracce di presenza civile, ai margini." }
+    3: { etichetta: Gestito,     descrizione: "Coltivato o regolato da una civiltà." }
+    4: { etichetta: Ingegnerizzato, descrizione: "Progettato con magia o tecnica; funzionale a uno scopo." }
+    5: { etichetta: Artificiale, descrizione: "Interamente costruito; vive solo per intervento esterno." }
