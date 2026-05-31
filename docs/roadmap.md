@@ -159,6 +159,9 @@ i sistemi avanzati. La QA in-app è igiene continua, non una fase a sé.
    incantesimi L1 (trucchetti/preparati/slot) per i caster. *La progressione 2-20 è in Fase 2.*
 3. ✅ **Note SRD** — recuperato il contenuto perso: effetti delle condizioni, tratti, privilegi
    (blocchi) e tabelle (progressione classe/lignaggi/risultati) — 0 heading vuoti su 1053 voci.
+   *Affinato*: `srd_note` ora rende **tutto** il JSON — **creature evocate inline** (callout
+   statblock negli incantesimi di evocazione), footer **Vedi anche** coi link risolti
+   (`srd_id_index`), e de-duplica le prose ripetute (basta talenti col testo 3 volte).
 
 ### Fase 2 — Verso un vault ultra-pro (gran parte FATTA)
 4. ✅ **Clock & conseguenze** — clock a segmenti (4/6/8) sulla superficie tavolo; bottone

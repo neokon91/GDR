@@ -94,6 +94,81 @@ def _righe(righe: list[Any]) -> str:
     return f"{head}\n{sep}\n{body}"
 
 
+def _mod(value: Any) -> str:
+    """Modificatore di caratteristica come stringa segnata (+3, 0, -4)."""
+    try:
+        n = int(value)
+    except (TypeError, ValueError):
+        return str(value)
+    return f"+{n}" if n >= 0 else str(n)
+
+
+# Ordine + sigle delle sei caratteristiche (per gli statblock inline).
+_ABILITY = (("forza", "For"), ("destrezza", "Des"), ("costituzione", "Cos"),
+            ("intelligenza", "Int"), ("saggezza", "Sag"), ("carisma", "Car"))
+
+
+def _creatura_evocata(creature: list[Any]) -> str:
+    """Statblock delle creature evocate inline da un incantesimo (es. Animare
+    oggetti) come callout collassabile: dati di gioco completi senza dipendere da
+    Fantasy Statblocks. Salta i tiri_salvezza_base (= ai modificatori, ridondanti)."""
+    out: list[str] = []
+    for cre in creature or []:
+        if not isinstance(cre, dict):
+            continue
+        sb = cre.get("statblock")
+        if not isinstance(sb, dict):
+            continue
+        nome = str(cre.get("nome", "")).strip()
+        righe = [f"> [!example]- Creatura evocata: {nome}" if nome else "> [!example]- Creatura evocata"]
+        sub = ", ".join(x for x in (str(sb.get("tipo", "")).strip(), str(sb.get("allineamento", "")).strip()) if x)
+        if sub:
+            righe.append(f"> *{sub}*")
+        meta = " · ".join(f"**{lab}** {sb[k]}" for lab, k in
+                          (("CA", "classe_armatura"), ("PF", "punti_ferita"), ("Velocità", "velocita"))
+                          if sb.get(k) not in (None, ""))
+        if meta:
+            righe.append(f"> {meta}")
+        car = sb.get("caratteristiche") or {}
+        abil = " · ".join(f"**{lab}** {(car.get(k) or {}).get('valore', '?')} ({_mod((car.get(k) or {}).get('modificatore', 0))})"
+                          for k, lab in _ABILITY if car.get(k))
+        if abil:
+            righe.append(f"> {abil}")
+        for lab, k in (("Immunità ai danni", "immunita_danni"), ("Immunità alle condizioni", "immunita_condizioni"),
+                       ("Sensi", "sensi"), ("Lingue", "lingue"), ("Bonus competenza", "bonus_competenza")):
+            if sb.get(k):
+                righe.append(f"> **{lab}** {sb[k]}")
+        azioni = [a for a in (sb.get("azioni") or []) if isinstance(a, dict) and a.get("nome")]
+        if azioni:
+            righe.append(">")
+            righe.append("> **Azioni**")
+            for a in azioni:
+                desc = str(a.get("descrizione") or "").strip()
+                righe.append(f"> **{a['nome']}** — {desc}" if desc and desc != "---" else f"> **{a['nome']}**")
+        out.append("\n".join(righe))
+    return "\n\n".join(out)
+
+
+def _vedi_anche(ids: list[Any], links: dict[str, str]) -> str:
+    """Cross-reference 'vedi_anche' del glossario come footer: link [[Nome]] se
+    l'id risolve a una voce SRD, altrimenti il termine in chiaro."""
+    refs = []
+    for rid in ids or []:
+        nome = (links or {}).get(str(rid))
+        refs.append(f"[[{nome}]]" if nome else str(rid).replace("_", " "))
+    return ("> [!info]- Vedi anche\n> " + " · ".join(refs)) if refs else ""
+
+
+def srd_id_index() -> dict[str, str]:
+    """Mappa id->nome su TUTTE le voci SRD (per risolvere i link 'vedi_anche')."""
+    idx: dict[str, str] = {}
+    for name in [s["json"] for s in SRD_GEN] + ["srd_5_2_1_rules_glossary.json", "srd_5_2_1_monsters.json"]:
+        for entry in load_srd(name):
+            if isinstance(entry, dict) and entry.get("id") and entry.get("nome"):
+                idx.setdefault(str(entry["id"]), str(entry["nome"]))
+    return idx
+
+
 def srd_header(entry: dict[str, Any], cat: str) -> str:
     """Infobox (callout) coi dati salienti, su misura per categoria. '' se nessuno."""
     def parts(*pairs):
@@ -127,7 +202,8 @@ def srd_header(entry: dict[str, Any], cat: str) -> str:
     return ""
 
 
-def srd_note(entry: dict[str, Any], cat: str, fm_fields: list[str]) -> str:
+def srd_note(entry: dict[str, Any], cat: str, fm_fields: list[str],
+             links: dict[str, str] | None = None) -> str:
     fm: dict[str, Any] = {"nome": entry.get("nome", ""), "categoria": cat, "srd": True, "fonte": "SRD 5.2.1"}
     for key in fm_fields:
         val = entry.get(key)
@@ -139,8 +215,21 @@ def srd_note(entry: dict[str, Any], cat: str, fm_fields: list[str]) -> str:
     header = srd_header(entry, cat)
     if header:
         parts.append(header)
+
+    # De-duplica le PROSE ripetute: molte voci (es. talenti) ripetono lo stesso
+    # testo in descrizione + beneficio + sezione "Beneficio". Tracciamo i blocchi
+    # già scritti (normalizzati) e saltiamo i duplicati. Tabelle/blocchi restano.
+    seen: set[str] = set()
+
+    def once(text: str) -> bool:
+        norm = re.sub(r"\s+", " ", str(text)).strip().lower()
+        if not norm or norm in seen:
+            return False
+        seen.add(norm)
+        return True
+
     for key in ("descrizione", "beneficio"):
-        if isinstance(entry.get(key), str) and entry[key].strip():
+        if isinstance(entry.get(key), str) and entry[key].strip() and once(entry[key]):
             parts.append(entry[key].strip())
     for sez in entry.get("sezioni") or []:
         if not isinstance(sez, dict):
@@ -148,8 +237,9 @@ def srd_note(entry: dict[str, Any], cat: str, fm_fields: list[str]) -> str:
         blocco: list[str] = []
         if sez.get("titolo"):
             blocco.append(f"### {sez['titolo']}")
-        if str(sez.get("descrizione") or "").strip():
-            blocco.append(sez["descrizione"].strip())
+        desc = str(sez.get("descrizione") or "").strip()
+        if desc and once(desc):
+            blocco.append(desc)
         if sez.get("blocchi"):
             blocco.append(_blocchi(sez["blocchi"]))
         if sez.get("righe"):
@@ -162,6 +252,23 @@ def srd_note(entry: dict[str, Any], cat: str, fm_fields: list[str]) -> str:
     if scaling:
         body = "\n>\n".join(f"> **{s.get('nome', '')}** — {s.get('descrizione', '')}" for s in scaling)
         parts.append(f"> [!tip]- Potenziamento\n{body}")
+    # Creature evocate inline (incantesimi): statblock di gioco completo.
+    evocate = _creatura_evocata(entry.get("creature_evocate_inline") or [])
+    if evocate:
+        parts.append(evocate)
+    # Riferimento a una creatura evocata dal bestiario (se non già mostrata inline).
+    # Path-qualificato a SRD/Mostri/ per disambiguare da eventuali omonimi (es. lo
+    # stesso incantesimo "Insetto gigante" e il mostro omonimo).
+    ref = entry.get("creatura_evocata")
+    if isinstance(ref, dict) and ref.get("id") and not (entry.get("creature_evocate_inline")):
+        nome_ref = (links or {}).get(str(ref["id"]))
+        if nome_ref:
+            link = f"SRD/Mostri/{nome_ref}|{nome_ref}" if ref.get("fonte") == "mostri" else nome_ref
+            parts.append(f"> [!example] Creatura evocata\n> [[{link}]]")
+    # Cross-reference (glossario): footer "Vedi anche".
+    vedi = _vedi_anche(entry.get("vedi_anche") or [], links or {})
+    if vedi:
+        parts.append(vedi)
     return frontmatter_block(fm) + "\n\n".join(parts) + "\n"
 
 
@@ -206,18 +313,20 @@ def build_srd(core: dict[str, Any]) -> int:
     if not SRD_DIR.is_dir():
         return 0
     write_text(VAULT / "SRD" / "LICENZA.md", f"# Licenza SRD\n\n{SRD_ATTRIBUTION}\n")
+    # Indice id->nome su tutte le voci, per risolvere i link 'vedi_anche'/evocate.
+    links = srd_id_index()
     written = 0
     for spec in SRD_GEN:
         for entry in load_srd(spec["json"]):
             write_text(VAULT / "SRD" / spec["dest"] / f"{srd_slug(entry.get('nome'))}.md",
-                       srd_note(entry, spec["cat"], spec["fm"]))
+                       srd_note(entry, spec["cat"], spec["fm"], links))
             written += 1
     # Glossario: condizioni in una cartella dedicata, il resto in Glossario.
     for entry in load_srd("srd_5_2_1_rules_glossary.json"):
         cond = entry.get("descrittore") == "condizione"
         dest, cat = ("Condizioni", "srd-condizione") if cond else ("Glossario", "srd-glossario")
         write_text(VAULT / "SRD" / dest / f"{srd_slug(entry.get('nome'))}.md",
-                   srd_note(entry, cat, ["descrittore"]))
+                   srd_note(entry, cat, ["descrittore"], links))
         written += 1
     # Mostri -> statblock (statblock: inline => entra nel bestiario di Fantasy Statblocks).
     layout = (core.get("statblock", {}) or {}).get("layout", "Basic 5e Layout")

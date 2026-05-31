@@ -48,6 +48,7 @@ from build_srd import (  # noqa: F401 (re-export per i test)
     SRD_GEN,
     build_srd,
     load_srd,
+    srd_note,
     srd_statblock_yaml,
 )
 from build_personaggio import build_personaggio_options  # noqa: F401 (re-export)

@@ -419,3 +419,36 @@ def test_srd_counts_and_statblock():
     assert sum(1 for g in glossary if g.get("descrittore") == "condizione") == 15
     sb = render.srd_statblock_yaml(monsters[0], "Basic 5e Layout")
     assert "name:" in sb and "stats:" in sb and "actions:" in sb
+
+
+def test_srd_note_dedup_and_extras():
+    """srd_note (funzione pura): de-duplica le prose ripetute (descrizione/
+    beneficio/sezione, tipico dei talenti), rende lo statblock delle creature
+    evocate inline e il footer 'Vedi anche' coi link risolti."""
+    entry = {
+        "nome": "Prova",
+        "descrizione": "Stesso testo benefico.",
+        "beneficio": "Stesso testo benefico.",
+        "sezioni": [
+            {"titolo": "Beneficio", "descrizione": "Stesso testo benefico."},
+            {"titolo": "Extra", "descrizione": "Testo diverso."},
+        ],
+        "creature_evocate_inline": [{"nome": "Famiglio", "statblock": {
+            "tipo": "Bestia Minuscola", "allineamento": "neutrale",
+            "classe_armatura": 12, "punti_ferita": "5", "velocita": "3 m",
+            "caratteristiche": {"forza": {"valore": 3, "modificatore": "-4"},
+                                "destrezza": {"valore": 15, "modificatore": 2}},
+            "azioni": [{"nome": "Morso", "descrizione": "1 danno perforante."}],
+        }}],
+        "vedi_anche": ["afferrato", "id_inesistente"],
+    }
+    out = render.srd_note(entry, "srd-talento", [], {"afferrato": "Afferrato"})
+    assert out.count("Stesso testo benefico.") == 1   # de-dup: una sola volta
+    assert "Testo diverso." in out                     # sezione distinta preservata
+    assert "### Beneficio" not in out                  # sezione svuotata dal dedup -> niente heading vuoto
+    assert "[!example]- Creatura evocata: Famiglio" in out
+    assert "**CA** 12" in out
+    assert "**For** 3 (-4)" in out and "**Des** 15 (+2)" in out
+    assert "**Morso** — 1 danno perforante." in out
+    assert "[[Afferrato]]" in out                       # vedi_anche risolto a link
+    assert "id inesistente" in out                      # id non risolto -> testo in chiaro

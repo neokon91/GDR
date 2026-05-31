@@ -59,7 +59,7 @@ tutti importano `common`).
 | Modulo | Responsabilità |
 |---|---|
 | `common.py` | Percorsi, IO (`load_yaml`/`write_*`/`read_json`), e il **modello**: `deep_merge`, `load_core_parts`, `load_entities`, `apply_entities`, `entity_templates`, `load_core`, `load_templates`, `load_pages`, `template_folder`. |
-| `build_srd.py` | Genera l'albero `SRD/` (sola lettura) dai JSON IT vendorizzati; i mostri diventano statblock Fantasy Statblocks. |
+| `build_srd.py` | Genera l'albero `SRD/` (sola lettura) dai JSON IT vendorizzati. `srd_note` rende **tutto** il contenuto della voce: infobox per categoria, descrizione/sezioni (tabelle di progressione, blocchi-effetto, liste incantesimi), potenziamento, **creature evocate inline** (callout statblock), e footer **Vedi anche** coi link risolti (`srd_id_index`), de-duplicando le prose ripetute. I mostri diventano statblock Fantasy Statblocks. |
 | `build_personaggio.py` | Converter del rules-engine PG: SRD + `pg_rules.yaml` → `personaggio.json`. |
 | `validate.py` | `check()` + `validate_split`/`validate_entities`: confine core/system, dup-ID, snake_case, shape, template/Jinja. |
 | `render.py` | `build()` orchestratore snello (~25 righe) che delega a helper nominati (`write_engine_data`/`render_notes`/`write_obsidian_config`/…), `clean()`, CLI. Re-esporta i nomi pubblici dei moduli. |
