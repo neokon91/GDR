@@ -41,7 +41,11 @@ legendary_actions: []
 {{ m.tavolo() }}
 --- Lore
 
-> [!note]- Descrizione
+{{ m.scheda(template.category) }}
+> [!note]- Aspetto e indole
+> Com'è fatta, come si muove, che impressione dà. I numeri 5e sono nel tab Statblock.
+
+> [!quote]- Versione player-safe
 > {{ m.field('player_safe', label=false) }}
 
 {{ m.wizard_body(template.category) }}

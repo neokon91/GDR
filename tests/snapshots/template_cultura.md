@@ -56,6 +56,14 @@
 > **Aperta** `INPUT[slider(minValue(0), maxValue(10), addLabels):aperta_chiusa]` **Chiusa**
 > **Gerarchica** `INPUT[slider(minValue(0), maxValue(10), addLabels):gerarchica_egualitaria]` **Egualitaria**
 
+```js-engine
+const views = await engine.importJs("z.automazioni/views.js");
+const dv = app.plugins.plugins.dataview && app.plugins.plugins.dataview.api;
+const file = app.workspace.getActiveFile();
+const page = dv && file ? dv.page(file.path) : null;
+await views.renderAxesRadar(container, app, page);
+```
+
 --- Collegamenti
 
 > [!example] Relazioni
@@ -73,9 +81,12 @@
 > Aggiungi una relazione (anche dopo la creazione): `BUTTON[collega-nota]`
 --- Vista
 
-```dataviewjs
-const source = await dv.io.load("z.automazioni/views.js");
-new Function("dv", source + "\n;return renderEntityPanel(dv, dv.current());")(dv);
+```js-engine
+const views = await engine.importJs("z.automazioni/views.js");
+const dv = app.plugins.plugins.dataview && app.plugins.plugins.dataview.api;
+const file = app.workspace.getActiveFile();
+const page = dv && file ? dv.page(file.path) : null;
+return engine.markdown.create(views.renderEntityPanel(dv, page));
 ```
 
 > [!tip] Azioni

@@ -52,6 +52,7 @@ metabind_inputs:
   dado_vita: INPUT[inlineSelect(option(d6), option(d8), option(d10), option(d12))]
   incantesimi: INPUT[inlineSelect(option(nessuno), option(metà), option(piena), option(patto))]
   taglia: INPUT[inlineSelect(option(minuscola), option(piccola), option(media), option(grande), option(enorme), option(mastodontica))]
+  dieta: INPUT[inlineSelect(option(carnivoro), option(erbivoro), option(onnivoro), option(spazzino), option(si nutre di magia), option(non si nutre))]
   scala: INPUT[inlineSelect(option(mondo), option(continente), option(regno), option(regione), option(insediamento))]
   genere: INPUT[inlineSelect(option(high fantasy), option(dark fantasy), option(sword & sorcery), option(grimdark), option(eroico), option(weird))]
   temi: INPUT[inlineListSuggester(option(politico), option(guerra), option(mistero), option(sopravvivenza), option(esplorazione), option(horror), option(intrigo), option(redenzione))]

@@ -30,6 +30,9 @@ assi:
 - id: prospero_misero
   sinistra: Prospero
   destra: Misero
+- id: selvaggio_civilizzato
+  sinistra: Selvaggio
+  destra: Civilizzato
 - id: noto_segreto
   sinistra: Noto
   destra: Segreto
@@ -57,15 +60,18 @@ creation:
     link: true
     required: true
   body:
+  - field: geografia
+    prompt: 'Geografia: dov''e'', com''e'' fatto, cosa lo circonda'
+    heading: Geografia
   - field: funzione
-    prompt: Cos'e' / a cosa serve
+    prompt: Cos'e' / a cosa serve, perche' importa
     heading: Funzione
-  - field: controllo
-    prompt: Chi o cosa lo controlla
-    heading: Controllo
   - field: atmosfera
     prompt: 'Atmosfera: cosa si vede, sente, odora'
     heading: Atmosfera
+  - field: abitanti
+    prompt: Chi o cosa lo abita (popolo, fazioni, creature)
+    heading: Abitanti
   - field: storia
     prompt: Cosa è successo qui (passato che pesa)
     heading: Storia

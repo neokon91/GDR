@@ -52,12 +52,21 @@ creation:
   - field: conflitto
     prompt: Conflitto centrale
     heading: Conflitto centrale
+  - field: geografia
+    prompt: 'Geografia: continenti, regioni, luoghi-chiave'
+    heading: Geografia
+  - field: popoli
+    prompt: Popoli e culture che lo abitano
+    heading: Popoli
   - field: magia
     prompt: Ruolo della magia nel mondo
     heading: Magia
   - field: poteri
-    prompt: Chi detiene il potere
+    prompt: Chi detiene il potere (fazioni, troni, poteri occulti)
     heading: Poteri
+  - field: storia
+    prompt: 'Storia: ere passate, eventi che pesano sul presente'
+    heading: Storia
   - field: verita_nascosta
     prompt: La verità nascosta del mondo
     callout: segreto

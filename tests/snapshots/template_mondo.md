@@ -15,8 +15,8 @@
 > Epoca: `INPUT[text:epoca]`
 > Temi: `INPUT[temi][:temi]`
 
-> [!note]- Descrizione
-> Scrivi qui il contenuto lore vero della nota.
+> [!note]- Premessa
+> L'idea in una frase: il pitch del mondo, cosa lo rende unico, che storie ci si giocano.
 
 > [!quote]- Versione player-safe
 > `INPUT[text:player_safe]`
@@ -27,11 +27,20 @@
 > [!note] Conflitto centrale
 > `INPUT[textArea:conflitto]`
 
+> [!note] Geografia
+> `INPUT[textArea:geografia]`
+
+> [!note] Popoli
+> `INPUT[textArea:popoli]`
+
 > [!note] Magia
 > `INPUT[textArea:magia]`
 
 > [!note] Poteri
 > `INPUT[textArea:poteri]`
+
+> [!note] Storia
+> `INPUT[textArea:storia]`
 
 > [!segreto]- Verità nascosta
 > `INPUT[textArea:verita_nascosta]`
@@ -58,6 +67,14 @@
 > **Ordine** `INPUT[slider(minValue(0), maxValue(10), addLabels):ordine_caos]` **Caos**
 > **Magia rara** `INPUT[slider(minValue(0), maxValue(10), addLabels):magia_rara_diffusa]` **Magia diffusa**
 
+```js-engine
+const views = await engine.importJs("z.automazioni/views.js");
+const dv = app.plugins.plugins.dataview && app.plugins.plugins.dataview.api;
+const file = app.workspace.getActiveFile();
+const page = dv && file ? dv.page(file.path) : null;
+await views.renderAxesRadar(container, app, page);
+```
+
 --- Collegamenti
 
 
@@ -70,9 +87,12 @@
 > Aggiungi una relazione (anche dopo la creazione): `BUTTON[collega-nota]`
 --- Vista
 
-```dataviewjs
-const source = await dv.io.load("z.automazioni/views.js");
-new Function("dv", source + "\n;return renderEntityPanel(dv, dv.current());")(dv);
+```js-engine
+const views = await engine.importJs("z.automazioni/views.js");
+const dv = app.plugins.plugins.dataview && app.plugins.plugins.dataview.api;
+const file = app.workspace.getActiveFile();
+const page = dv && file ? dv.page(file.path) : null;
+return engine.markdown.create(views.renderEntityPanel(dv, page));
 ```
 
 > [!tip] Azioni

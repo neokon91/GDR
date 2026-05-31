@@ -88,6 +88,9 @@ creation:
   - field: paura
     prompt: Cosa teme o evita
     heading: Teme
+  - field: storia
+    prompt: 'Storia: da dove viene, cosa l''ha formato'
+    heading: Storia
   - field: voce
     prompt: 'Come parla: tono, tic, cadenza'
     heading: Voce

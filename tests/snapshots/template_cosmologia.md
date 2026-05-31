@@ -10,8 +10,8 @@
 --- Lore
 
 
-> [!note]- Descrizione
-> Scrivi qui il contenuto lore vero della nota.
+> [!note]- Natura cosmica
+> Cos'è questo principio, dove sta nella struttura del mondo, come lo percepiscono i mortali.
 
 > [!quote]- Versione player-safe
 > `INPUT[text:player_safe]`
@@ -19,11 +19,20 @@
 > [!note] Natura
 > `INPUT[textArea:natura]`
 
+> [!note] Principio
+> `INPUT[textArea:principio]`
+
 > [!note] Influenza
 > `INPUT[textArea:influenza]`
 
 > [!note] Manifestazioni
 > `INPUT[textArea:manifestazioni]`
+
+> [!note] Abitanti
+> `INPUT[textArea:abitanti]`
+
+> [!note] Accesso
+> `INPUT[textArea:accesso]`
 
 > [!segreto]- Segreto
 > `INPUT[textArea:segreto]`
@@ -43,10 +52,26 @@
 > Prossima mossa: `INPUT[text:prossima_mossa]`
 
 
+--- Carattere
+
+> [!abstract] Carattere
+> **Ordine** `INPUT[slider(minValue(0), maxValue(10), addLabels):ordine_caos]` **Caos**
+> **Immanente** `INPUT[slider(minValue(0), maxValue(10), addLabels):immanente_trascendente]` **Trascendente**
+> **Attiva** `INPUT[slider(minValue(0), maxValue(10), addLabels):attiva_silente]` **Silente**
+
+```js-engine
+const views = await engine.importJs("z.automazioni/views.js");
+const dv = app.plugins.plugins.dataview && app.plugins.plugins.dataview.api;
+const file = app.workspace.getActiveFile();
+const page = dv && file ? dv.page(file.path) : null;
+await views.renderAxesRadar(container, app, page);
+```
+
 --- Collegamenti
 
 > [!example] Relazioni
 > **Divinita legate**: `INPUT[inlineListSuggester(optionQuery("Mondi/Cosmologia"), useLinks(partial), allowOther):divinita]`
+> **Luoghi che la manifestano**: `INPUT[inlineListSuggester(optionQuery("Mondi/Luoghi"), useLinks(partial), allowOther):luoghi]`
 
 > [!example] Collegamenti
 > Mondo: `INPUT[mondo][:mondo]`
@@ -59,9 +84,12 @@
 > Aggiungi una relazione (anche dopo la creazione): `BUTTON[collega-nota]`
 --- Vista
 
-```dataviewjs
-const source = await dv.io.load("z.automazioni/views.js");
-new Function("dv", source + "\n;return renderEntityPanel(dv, dv.current());")(dv);
+```js-engine
+const views = await engine.importJs("z.automazioni/views.js");
+const dv = app.plugins.plugins.dataview && app.plugins.plugins.dataview.api;
+const file = app.workspace.getActiveFile();
+const page = dv && file ? dv.page(file.path) : null;
+return engine.markdown.create(views.renderEntityPanel(dv, page));
 ```
 
 > [!tip] Azioni

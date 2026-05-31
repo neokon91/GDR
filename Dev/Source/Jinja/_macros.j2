@@ -93,6 +93,10 @@
 {% for a in assi %}
 > **{{ a.sinistra }}** `INPUT[slider(minValue(0), maxValue(10), addLabels):{{ a.id }}]` **{{ a.destra }}**
 {% endfor %}
+{% if assi | length >= 3 %}
+
+{{ grafico_assi() }}
+{% endif %}
 {% endif %}
 {%- endmacro %}
 
@@ -143,6 +147,14 @@
 > Aggiungi una relazione (anche dopo la creazione): `BUTTON[collega-nota]`
 {%- endmacro %}
 
+{# Tiri rapidi (Dice Roller): d20 normale/vantaggio/svantaggio, inline e
+   cliccabili (richiede Dice Roller attivo). Aggiungi a mano il bonus dalla
+   scheda. Callout pieghevole per non ingombrare. Riusato da PG e incontro. #}
+{% macro tiri() -%}
+> [!tip]- Tiri
+> Normale `dice: 1d20` · Vantaggio `dice: 2d20kh1` · Svantaggio `dice: 2d20kl1`
+{%- endmacro %}
+
 {# Scheda statistiche PG (5e): caratteristiche editabili + modificatori calcolati.
    Iniziativa via computed; ogni modificatore via compute_into -> salvato in
    mod_<car> (interrogabile da Dataview). Single source: core.caratteristiche. #}
@@ -184,14 +196,49 @@
 {% for aid, a in core.abilita.items() %}
 | {{ a.label }} ({{ a.caratteristica[:3] | upper }}) | {{ computed('floor(({' ~ a.caratteristica ~ '} - 10) / 2) + ({prof_' ~ aid ~ '} * {competenza})') }} | `INPUT[inlineSelect(option(0, "—"), option(1, "✓"), option(2, "✓✓")):prof_{{ aid }}]` |
 {% endfor %}
+
+{{ tiri() }}
 {%- endmacro %}
 
-{# Pannello vista (dataviewjs). fn = funzione esposta da z.automazioni/views.js.
-   NB: eval() in dataviewjs (strict) NON espone le function declaration allo scope
-   chiamante -> uso new Function, che le definisce nel suo corpo e poi le invoca. #}
+{# Pannello vista (JS Engine). fn = funzione esposta da z.automazioni/views.js,
+   importata a runtime: aggiornare views.js si propaga alle note senza ricrearle
+   (il corpo nota resta un thin import+call). La funzione ritorna markdown, reso
+   da engine.markdown.create; le query (backlink/fronti) usano la Dataview API.
+   page=null (Dataview assente o nessuna nota attiva) -> messaggio di fallback. #}
 {% macro vista(fn='renderEntityPanel') -%}
-```dataviewjs
-const source = await dv.io.load("z.automazioni/views.js");
-new Function("dv", source + "\n;return {{ fn }}(dv, dv.current());")(dv);
+```js-engine
+const views = await engine.importJs("z.automazioni/views.js");
+const dv = app.plugins.plugins.dataview && app.plugins.plugins.dataview.api;
+const file = app.workspace.getActiveFile();
+const page = dv && file ? dv.page(file.path) : null;
+return engine.markdown.create(views.{{ fn }}(dv, page));
+```
+{%- endmacro %}
+
+{# Radar degli assi tematici (JS Engine): visualizza gli assi 0-10 della NOTA
+   CORRENTE come radar SVG, sotto gli slider del tab Carattere. La definizione
+   degli assi è in core.json (render.py); il disegno in views.js (renderAxesRadar).
+   Chiamato da carattere() quando la categoria ha >= 3 assi. #}
+{% macro grafico_assi() -%}
+```js-engine
+const views = await engine.importJs("z.automazioni/views.js");
+const dv = app.plugins.plugins.dataview && app.plugins.plugins.dataview.api;
+const file = app.workspace.getActiveFile();
+const page = dv && file ? dv.page(file.path) : null;
+await views.renderAxesRadar(container, app, page);
+```
+{%- endmacro %}
+
+{# Radar di CONFRONTO fra entità (JS Engine): skin riusabile, da incollare in
+   QUALSIASI nota. Sovrappone gli assi delle entità elencate nel frontmatter
+   `confronta: [[A]], [[B]]` (stessa categoria). Disegno in views.js
+   (renderAxesCompare). Vedi LEGGIMI per lo snippet copia-incolla. #}
+{% macro confronto_assi() -%}
+```js-engine
+const views = await engine.importJs("z.automazioni/views.js");
+const dv = app.plugins.plugins.dataview && app.plugins.plugins.dataview.api;
+const file = app.workspace.getActiveFile();
+const page = dv && file ? dv.page(file.path) : null;
+await views.renderAxesCompare(container, app, dv, page);
 ```
 {%- endmacro %}

@@ -8,15 +8,17 @@ plugin fittizi). Le impostazioni e i contenuti dell'utente sono preservati.
 | Plugin | Cosa scrive la pipeline | Sorgente |
 |---|---|---|
 | **Templater** | `templates_folder: z.modelli`, `user_scripts_folder: z.automazioni`. Gli script JS sono copiati 1:1 in `z.automazioni/` e richiamati come `tp.user.<nome>`. | `Dev/Source/JS/` |
-| **Dataview** | `enableDataviewJs: true`. Le viste (`views.js`) sono caricate dai template via `dv.io.load`. | macro `vista()` |
+| **Dataview** | `enableDataviewJs: true`. Le pagine-indice (`index.md.j2`) usano blocchi ` ```dataview `; il pannello *Vista* interroga la Dataview API (backlink/fronti). | `index.md.j2`, `views.js` |
+| **JS Engine** | Standard per i pannelli dinamici: la macro `vista()` emette un blocco ` ```js-engine ` che fa `engine.importJs("z.automazioni/views.js")` + `engine.markdown.create`. `views.js` **ritorna markdown**; aggiornarlo si propaga alle note senza ricrearle (logica condivisa, non embeddata). | macro `vista()`, `views.js` |
+| **Bases** (core) | Una vista-DB nativa (`.base`) per dominio in `Indici/`, dalla stessa single-source di `pages.yaml` (filtro categoria, colonne, sort). Gli hub Dataview `.md` restano come fallback. `bases` abilitato in `core-plugins.json`. | `bases_doc()` da `pages.yaml` |
 | **Meta Bind** | `enableJs`, `inputFieldTemplates` (da `metabind_inputs`), `buttonTemplates` (un "Crea <X>" per template + le azioni). Le note usano `INPUT[...]`/`VIEW[...]`/`BUTTON[...]`. | `plugins.yaml`, template-entità |
 | **Metadata Menu** | Un **fileClass** per categoria in `z.classi/` (campi tipizzati: Select per stato/tipo, File/MultiFile per i link, Number/Input per il resto) + `classFilesPath`. | `fileclass_fields()` dal modello |
-| **Fantasy Statblocks** | Union per id dei layout in `obsidian-5e-statblocks/data.json` (NON cambia il default). Layout IT 5e/5.5e. I mostri SRD sono note con `statblock: inline`. | `Dev/Source/statblocks/*.json` |
+| **Fantasy Statblocks** | Union per id dei layout in `obsidian-5e-statblocks/data.json` (NON cambia il default) + `diceRolling: true` (attacchi/danni cliccabili). Layout IT 5e/5.5e. I mostri SRD sono note con `statblock: inline`. | `Dev/Source/statblocks/*.json` |
 | **Initiative Tracker** | Solo dichiarato (community-plugins); usato via blocco ` ```encounter ` (combattimento + iniziativa, legge il bestiario di Fantasy Statblocks). | `encounter.md.j2` |
-| **Dice Roller** | Solo dichiarato; usato via ` `dice: …` ` inline (tiri al tavolo). | `encounter.md.j2` |
+| **Dice Roller** | Macro `tiri()` (d20 Normale/Vantaggio/Svantaggio, ` `dice: …` ` inline) in scheda PG + incontro; più `diceRolling` negli statblock (vedi Fantasy Statblocks). | macro `tiri()`, `encounter.md.j2`, `pg.md.j2` |
 | **Iconize** | Mappa percorso-cartella → emoji nel `data.json` (emojiStyle native). | `plugins.yaml:folder_icons` |
 | **Callout Manager** | Aggiunge i callout GDR custom (`tavolo`/`gancio`/`segreto`: id/color/icon) in `callouts.custom`; degradano a standard se assenti. | `plugins.yaml:callouts` |
-| **Bookmarks** (core) | Aggiunge (senza rimuovere) Home + le pagine-indice + l'indice SRD. | `pages.yaml` |
+| **Bookmarks** (core) | Aggiunge (senza rimuovere) Home + le pagine-indice (`.md` + `.base`) + l'indice SRD. | `pages.yaml` |
 | **community-plugins.json** | Union degli id dei plugin dichiarati. | `plugins.yaml:plugins` |
 
 ## Workspace chrome (non plugin)
@@ -32,6 +34,8 @@ plugin fittizi). Le impostazioni e i contenuti dell'utente sono preservati.
   (sola lettura / calcolato-e-salvato), `BUTTON[id]`.
 - Tab Panels: blocco ` ````tabs ` con separatori `--- <Titolo>`.
 - Statblock: blocco ` ```statblock ` con `layout:` dal modello.
+- JS Engine: blocco ` ```js-engine ` (pannello *Vista*); Dice Roller: ` `dice: 1d20` ` inline.
+- Bases: file `.base` (YAML) accanto agli hub `.md` in `Indici/`.
 
 ## Verifica in-app necessaria
 

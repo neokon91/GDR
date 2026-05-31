@@ -29,8 +29,8 @@
 > Pronomi: `INPUT[text:pronomi]`
 > Età: `INPUT[text:eta]`
 
-> [!note]- Descrizione
-> Chi è, com'è, cosa porta in scena.
+> [!note]- Chi è
+> In una riga: ruolo, impressione che lascia, cosa porta in scena.
 
 > [!quote]- Versione player-safe
 > `INPUT[text:player_safe]`
@@ -46,6 +46,9 @@
 
 > [!note] Teme
 > `INPUT[textArea:paura]`
+
+> [!note] Storia
+> `INPUT[textArea:storia]`
 
 > [!note] Voce
 > `INPUT[textArea:voce]`
@@ -81,6 +84,14 @@
 > **Altruista** `INPUT[slider(minValue(0), maxValue(10), addLabels):altruista_egoista]` **Egoista**
 > **Calmo** `INPUT[slider(minValue(0), maxValue(10), addLabels):calmo_volatile]` **Volatile**
 
+```js-engine
+const views = await engine.importJs("z.automazioni/views.js");
+const dv = app.plugins.plugins.dataview && app.plugins.plugins.dataview.api;
+const file = app.workspace.getActiveFile();
+const page = dv && file ? dv.page(file.path) : null;
+await views.renderAxesRadar(container, app, page);
+```
+
 --- Collegamenti
 
 > [!example] Relazioni
@@ -100,8 +111,11 @@
 > Aggiungi una relazione (anche dopo la creazione): `BUTTON[collega-nota]`
 --- Vista
 
-```dataviewjs
-const source = await dv.io.load("z.automazioni/views.js");
-new Function("dv", source + "\n;return renderEntityPanel(dv, dv.current());")(dv);
+```js-engine
+const views = await engine.importJs("z.automazioni/views.js");
+const dv = app.plugins.plugins.dataview && app.plugins.plugins.dataview.api;
+const file = app.workspace.getActiveFile();
+const page = dv && file ? dv.page(file.path) : null;
+return engine.markdown.create(views.renderEntityPanel(dv, page));
 ```
 ````

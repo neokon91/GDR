@@ -8,7 +8,7 @@ Obsidian). Il repo di sviluppo resta pulito; il vault è ricostruibile.
 Dev/Source/                      Dev/Tools/                    dist/GDR-vault/
   YAML/ (modello)        ─┐
   Jinja/ (template)       ├─▶  render.py (orchestratore)  ─▶   z.modelli/ (template)
-  JS/ (runtime Templater) │      ├─ common.py   (modello+IO)     z.automazioni/ (JS + *.json)
+  JS/ (Templater+JSEngine)│      ├─ common.py   (modello+IO)     z.automazioni/ (JS + *.json)
   SRD/ (JSON IT)          │      ├─ build_srd.py                 z.classi/ (fileClass)
   statblocks/ (FS)       ─┘      ├─ build_personaggio.py         SRD/ (sola lettura)
                                  └─ validate.py                  Home/LEGGIMI/Indici/
@@ -69,9 +69,10 @@ tutti importano `common`).
 3. Rende ogni template Jinja → `z.modelli/`, le azioni, Home/LEGGIMI, le pagine-indice.
 4. Config `.obsidian` **non distruttiva** (merge): community-plugins, Templater,
    Dataview, Meta Bind (input+button), Metadata Menu (fileClass), Iconize,
-   Callout Manager, Fantasy Statblocks (layout), Bookmarks. Vedi
+   Callout Manager, Fantasy Statblocks (layout + dice), core (Bookmarks/Bases). Vedi
    [plugin_contracts.md](plugin_contracts.md).
-5. `build_srd(core)` → albero `SRD/`. Snippet CSS che nasconde le `z.*`.
+5. `build_srd(core)` → albero `SRD/`. Pagine-indice `.base` (Bases) accanto agli hub
+   `.md` in `Indici/`. Snippet CSS che nasconde le `z.*`.
 
 ## Regole operative
 

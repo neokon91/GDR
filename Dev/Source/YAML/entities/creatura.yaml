@@ -1,7 +1,9 @@
-# Schema per-entità: creatura. Single source di tassonomia, scheda, assi,
-# relazioni, wizard e wiring template. render.py lo distribuisce nel
-# modello globale 'core' (apply_entities) e raccoglie i template.
-# I campi sono nel registro centrale (core.yaml/system.yaml).
+# Schema per-entità: creatura (lore + statblock 5.5e). Single source di tassonomia,
+# campi, scheda, assi, relazioni, wizard e wiring template. render.py lo distribuisce
+# nel modello globale 'core' (apply_entities) e raccoglie i template.
+# I numeri 5e vivono nel blocco ```statblock``` (creature.md.j2); QUI il lore =
+# ecologia, comportamento, mito. Arricchito da FantasyWorld t.bestiario.yaml +
+# assi_tematici_specie.yaml con criterio "mix curato" (fm interrogabile + prosa).
 id: creatura
 folder: Mondi/Creature
 order: 9
@@ -27,6 +29,13 @@ subtypes:
 - non-morto
 - umanoide
 - vegetale
+# Campi specifici della creatura (i trasversali stanno in core.yaml; 'taglia' è
+# condiviso con specie e resta in system.yaml). Pensati per query future
+# (dieta/ruolo come filtri nel bestiario Bases/Dataview).
+fields:
+  ruolo_ecologico: { label: Ruolo ecologico, widget: text }
+  dieta:           { label: Dieta,           widget: dieta }
+scheda: [taglia, ruolo_ecologico, dieta]
 assi:
 - id: docile_ostile
   sinistra: Docile
@@ -34,6 +43,9 @@ assi:
 - id: solitaria_gregaria
   sinistra: Solitaria
   destra: Gregaria
+- id: stanziale_migratoria
+  sinistra: Stanziale
+  destra: Migratoria
 - id: mondana_magica
   sinistra: Mondana
   destra: Magica
@@ -56,8 +68,22 @@ creation:
     required: true
   body:
   - field: ecologia
-    prompt: 'Ecologia: dove vive, abitudini'
+    prompt: 'Ecologia: habitat, ruolo nell''ecosistema, dieta'
     heading: Ecologia
+  - field: aspetto
+    prompt: 'Aspetto: taglia, corporatura, tratti distintivi, segni di pericolo'
+    heading: Aspetto
+  - field: comportamento
+    prompt: 'Comportamento: indole, abitudini, come caccia o si difende'
+    heading: Comportamento
   - field: tattiche
-    prompt: Tattiche in combattimento
+    prompt: Tattiche in combattimento (apertura, asso nella manica, fuga)
     heading: Tattiche
+  - field: mito
+    prompt: Mito e reputazione (leggende, come la vedono le civilta')
+    heading: Mito e reputazione
+  - field: segreto
+    prompt: Segreto o debolezza nascosta
+    callout: segreto
+    title: Segreto
+    fold: true

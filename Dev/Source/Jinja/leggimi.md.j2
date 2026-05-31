@@ -13,7 +13,8 @@ Apri *Impostazioni → Plugin della comunità* e installa/abilita:
 > [!warning] Senza questi plugin
 > Senza **Tab Panels** le note a schede appaiono come testo grezzo; senza
 > **Fantasy Statblocks** non vedi gli statblock né il blocco `encounter`; senza
-> **Meta Bind** i campi `INPUT`/`VIEW` (incluso il tab *Carattere*) restano testo grezzo.
+> **Meta Bind** i campi `INPUT`/`VIEW` (incluso il tab *Carattere*) restano testo grezzo;
+> senza **JS Engine** il pannello *Vista* (card "pronto al tavolo?" + "Citato da") non si rende.
 
 ## 2. Impostazioni da abilitare una volta
 - **Fantasy Statblocks → "Parse Frontmatter in Notes"**: ON. Serve perché le note
@@ -27,7 +28,11 @@ Apri *Impostazioni → Plugin della comunità* e installa/abilita:
 ## 3. Come si usa
 - Apri **Home.md**: bottoni `Crea` (i fondamentali; gli altri sotto *Altri tipi*) +
   cruscotti, e i collegamenti agli **Indici** (Atlante, Bestiario, Fazioni, Cast, Cronologia).
+- Ogni indice esiste in due forme: la pagina `.md` (dashboard Dataview) e una vista
+  **Bases** `.base` nativa accanto ad essa — usa quella che preferisci.
 - Le pagine di riferimento (Home + Indici) sono già nei **Bookmarks** (icona segnalibro a sinistra).
+- Nelle schede PG e negli incontri il callout **Tiri** ha i `dice:` cliccabili (Dice Roller):
+  d20 normale, con vantaggio e con svantaggio.
 - Ogni nota lore ha il tab **Al tavolo** (uso al tavolo, gancio, pressione): è la
   superficie giocabile, il cuore del vault.
 - Apri **Mondi/Creature/Goblin**: esempio di statblock 5.5e (entra nel bestiario).
@@ -85,3 +90,24 @@ un layout **"GDR — 5.5e (2024)"** in Fantasy Statblocks (non attivo, per sicur
 Per provarlo: *Impostazioni → Fantasy Statblocks → Layouts* e selezionalo come predefinito.
 Se ti convince, dimmelo e lo imposto di default nella pipeline (`statblock.layout` in
 `Dev/Source/YAML/core.yaml`).
+
+## 10. Radar degli assi + confronto fra entità (JS Engine)
+Nel tab **Carattere** (entità con ≥3 assi) gli slider sono affiancati da un **radar**
+che disegna gli assi tematici della nota corrente (richiede **JS Engine**).
+
+Per **confrontare più entità** sullo stesso radar, incolla questo blocco in una nota
+qualunque e aggiungi nel suo frontmatter `confronta: [[Entità A]], [[Entità B]]`
+(stessa categoria — gli assi devono combaciare):
+
+````
+```js-engine
+const views = await engine.importJs("z.automazioni/views.js");
+const dv = app.plugins.plugins.dataview && app.plugins.plugins.dataview.api;
+const file = app.workspace.getActiveFile();
+const page = dv && file ? dv.page(file.path) : null;
+await views.renderAxesCompare(container, app, dv, page);
+```
+````
+
+La logica vive in `z.automazioni/views.js` (radar SVG, niente plugin grafici): se la
+aggiorni, tutti i blocchi si aggiornano senza ricreare le note.

@@ -1,3 +1,16 @@
-{# Luogo: usa lo scheletro condiviso (_entity_base.j2). Per renderlo specifico,
-   sovrascrivi i blocchi {% block lore %} / {% block extra_tabs %}. #}
+{# Luogo — template per-entità. Estende lo scheletro condiviso e personalizza la
+   tab Lore (identità del luogo + body arricchito da FantasyWorld t.luogo.yaml).
+   Tutto il resto (tavolo/carattere/collegamenti/vista) viene da _entity_base.j2;
+   lo schema è in YAML/entities/luogo.yaml. #}
 {% extends '_entity_base.j2' %}
+{% block lore %}
+{% import '_macros.j2' as m with context %}
+{{ m.scheda(template.category) }}
+> [!note]- Colpo d'occhio
+> Cos'è il luogo, che impressione dà entrandoci, perché conta nella storia.
+
+> [!quote]- Versione player-safe
+> {{ m.field('player_safe', label=false) }}
+
+{{ m.wizard_body(template.category) }}
+{% endblock %}

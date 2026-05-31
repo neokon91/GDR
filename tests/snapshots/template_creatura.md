@@ -54,14 +54,34 @@ legendary_actions: []
 
 --- Lore
 
-> [!note]- Descrizione
+> [!abstract] Scheda
+> Taglia: `INPUT[taglia][:taglia]`
+> Ruolo ecologico: `INPUT[text:ruolo_ecologico]`
+> Dieta: `INPUT[dieta][:dieta]`
+
+> [!note]- Aspetto e indole
+> Com'è fatta, come si muove, che impressione dà. I numeri 5e sono nel tab Statblock.
+
+> [!quote]- Versione player-safe
 > `INPUT[text:player_safe]`
 
 > [!note] Ecologia
 > `INPUT[textArea:ecologia]`
 
+> [!note] Aspetto
+> `INPUT[textArea:aspetto]`
+
+> [!note] Comportamento
+> `INPUT[textArea:comportamento]`
+
 > [!note] Tattiche
 > `INPUT[textArea:tattiche]`
+
+> [!note] Mito e reputazione
+> `INPUT[textArea:mito]`
+
+> [!segreto]- Segreto
+> `INPUT[textArea:segreto]`
 
 
 --- Carattere
@@ -69,7 +89,16 @@ legendary_actions: []
 > [!abstract] Carattere
 > **Docile** `INPUT[slider(minValue(0), maxValue(10), addLabels):docile_ostile]` **Ostile**
 > **Solitaria** `INPUT[slider(minValue(0), maxValue(10), addLabels):solitaria_gregaria]` **Gregaria**
+> **Stanziale** `INPUT[slider(minValue(0), maxValue(10), addLabels):stanziale_migratoria]` **Migratoria**
 > **Mondana** `INPUT[slider(minValue(0), maxValue(10), addLabels):mondana_magica]` **Magica**
+
+```js-engine
+const views = await engine.importJs("z.automazioni/views.js");
+const dv = app.plugins.plugins.dataview && app.plugins.plugins.dataview.api;
+const file = app.workspace.getActiveFile();
+const page = dv && file ? dv.page(file.path) : null;
+await views.renderAxesRadar(container, app, page);
+```
 
 --- Collegamenti
 
@@ -87,8 +116,11 @@ legendary_actions: []
 > Aggiungi una relazione (anche dopo la creazione): `BUTTON[collega-nota]`
 --- Vista
 
-```dataviewjs
-const source = await dv.io.load("z.automazioni/views.js");
-new Function("dv", source + "\n;return renderEntityPanel(dv, dv.current());")(dv);
+```js-engine
+const views = await engine.importJs("z.automazioni/views.js");
+const dv = app.plugins.plugins.dataview && app.plugins.plugins.dataview.api;
+const file = app.workspace.getActiveFile();
+const page = dv && file ? dv.page(file.path) : null;
+return engine.markdown.create(views.renderEntityPanel(dv, page));
 ```
 ````

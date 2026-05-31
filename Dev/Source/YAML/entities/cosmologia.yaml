@@ -1,7 +1,10 @@
-# Schema per-entità: cosmologia. Single source di tassonomia, scheda, assi,
-# relazioni, wizard e wiring template. render.py lo distribuisce nel
-# modello globale 'core' (apply_entities) e raccoglie i template.
-# I campi sono nel registro centrale (core.yaml/system.yaml).
+# Schema per-entità: cosmologia (lore). Single source di tassonomia, scheda, assi,
+# relazioni, wizard e wiring template. render.py lo distribuisce nel modello
+# globale 'core' (apply_entities) e raccoglie i template.
+# Copre i principi cosmici del mondo: leggi, piani, forze primordiali, concetti.
+# Arricchito da FantasyWorld t.piano.yaml / t.legge.yaml + assi_tematici_divinita
+# con criterio "mix curato" (profondita' nelle sezioni body, fm leggero perche'
+# entita' astratta).
 id: cosmologia
 folder: Mondi/Cosmologia
 order: 2
@@ -14,10 +17,26 @@ templates:
 subtypes:
 - legge cosmica
 - piano o aldila
+- forza primordiale
+- concetto cosmico
+assi:
+- id: ordine_caos
+  sinistra: Ordine
+  destra: Caos
+- id: immanente_trascendente
+  sinistra: Immanente
+  destra: Trascendente
+- id: attiva_silente
+  sinistra: Attiva
+  destra: Silente
 relazioni:
 - field: divinita
   label: Divinita legate
   category: cosmologia
+  multi: true
+- field: luoghi
+  label: Luoghi che la manifestano
+  category: luogo
   multi: true
 creation:
   fields:
@@ -35,12 +54,21 @@ creation:
   - field: natura
     prompt: Cos'e' / come si manifesta
     heading: Natura
+  - field: principio
+    prompt: Cosa governa o definisce (il principio attivo)
+    heading: Principio
   - field: influenza
-    prompt: Come tocca il mondo mortale
+    prompt: Come tocca il mondo mortale (magia, destino, vita)
     heading: Influenza
   - field: manifestazioni
-    prompt: Come si vede nel mondo (segni, fenomeni)
+    prompt: Come si vede nel mondo (segni, fenomeni, presagi)
     heading: Manifestazioni
+  - field: abitanti
+    prompt: 'Chi o cosa la abita/incarna (per piani e forze)'
+    heading: Abitanti
+  - field: accesso
+    prompt: 'Come ci si arriva o vi si attinge (per piani, riti, soglie)'
+    heading: Accesso
   - field: segreto
     prompt: Verita' nascosta
     callout: segreto

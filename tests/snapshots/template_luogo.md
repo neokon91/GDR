@@ -13,20 +13,23 @@
 > Clima: `INPUT[clima][:clima]`
 > Popolazione: `INPUT[text:popolazione]`
 
-> [!note]- Descrizione
-> Scrivi qui il contenuto lore vero della nota.
+> [!note]- Colpo d'occhio
+> Cos'è il luogo, che impressione dà entrandoci, perché conta nella storia.
 
 > [!quote]- Versione player-safe
 > `INPUT[text:player_safe]`
 
+> [!note] Geografia
+> `INPUT[textArea:geografia]`
+
 > [!note] Funzione
 > `INPUT[textArea:funzione]`
 
-> [!note] Controllo
-> `INPUT[textArea:controllo]`
-
 > [!note] Atmosfera
 > `INPUT[textArea:atmosfera]`
+
+> [!note] Abitanti
+> `INPUT[textArea:abitanti]`
 
 > [!note] Storia
 > `INPUT[textArea:storia]`
@@ -57,7 +60,16 @@
 > [!abstract] Carattere
 > **Sicuro** `INPUT[slider(minValue(0), maxValue(10), addLabels):sicuro_pericoloso]` **Pericoloso**
 > **Prospero** `INPUT[slider(minValue(0), maxValue(10), addLabels):prospero_misero]` **Misero**
+> **Selvaggio** `INPUT[slider(minValue(0), maxValue(10), addLabels):selvaggio_civilizzato]` **Civilizzato**
 > **Noto** `INPUT[slider(minValue(0), maxValue(10), addLabels):noto_segreto]` **Segreto**
+
+```js-engine
+const views = await engine.importJs("z.automazioni/views.js");
+const dv = app.plugins.plugins.dataview && app.plugins.plugins.dataview.api;
+const file = app.workspace.getActiveFile();
+const page = dv && file ? dv.page(file.path) : null;
+await views.renderAxesRadar(container, app, page);
+```
 
 --- Collegamenti
 
@@ -77,9 +89,12 @@
 > Aggiungi una relazione (anche dopo la creazione): `BUTTON[collega-nota]`
 --- Vista
 
-```dataviewjs
-const source = await dv.io.load("z.automazioni/views.js");
-new Function("dv", source + "\n;return renderEntityPanel(dv, dv.current());")(dv);
+```js-engine
+const views = await engine.importJs("z.automazioni/views.js");
+const dv = app.plugins.plugins.dataview && app.plugins.plugins.dataview.api;
+const file = app.workspace.getActiveFile();
+const page = dv && file ? dv.page(file.path) : null;
+return engine.markdown.create(views.renderEntityPanel(dv, page));
 ```
 
 > [!tip] Azioni

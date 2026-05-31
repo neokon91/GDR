@@ -1,3 +1,16 @@
-{# Cosmologia: usa lo scheletro condiviso (_entity_base.j2). Per renderla
-   specifica, sovrascrivi i blocchi {% block lore %} / {% block extra_tabs %}. #}
+{# Cosmologia — template per-entità. Estende lo scheletro condiviso e personalizza
+   la tab Lore (natura cosmica + body arricchito da FantasyWorld t.piano/t.legge).
+   Tutto il resto (tavolo/carattere/collegamenti/vista) viene da _entity_base.j2;
+   lo schema è in YAML/entities/cosmologia.yaml. #}
 {% extends '_entity_base.j2' %}
+{% block lore %}
+{% import '_macros.j2' as m with context %}
+{{ m.scheda(template.category) }}
+> [!note]- Natura cosmica
+> Cos'è questo principio, dove sta nella struttura del mondo, come lo percepiscono i mortali.
+
+> [!quote]- Versione player-safe
+> {{ m.field('player_safe', label=false) }}
+
+{{ m.wizard_body(template.category) }}
+{% endblock %}

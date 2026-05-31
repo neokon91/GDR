@@ -66,7 +66,7 @@ def clean() -> None:
     """Rimuove solo gli artefatti puramente generati (z.modelli, z.automazioni,
     z.classi, SRD, Home/LEGGIMI, pagine-indice). NON tocca .obsidian (config e
     plugin dell'utente) ne' i contenuti. Pulisce anche residui legacy in ROOT."""
-    notes = generated_note_names()
+    notes = generated_note_names() + [f"{INDEX_DIR}/{p['file']}.base" for p in load_pages()]
     for base in (VAULT, ROOT):
         for name in GENERATED_DIRS:
             path = base / name
@@ -149,6 +149,11 @@ HIDE_FOLDERS_SNIPPET = """/* GDR — generato. Snippet del vault (nascondi z.* +
 }
 .gdr-card.ready { border-left-color: var(--color-green); }
 .gdr-card.missing { border-left-color: var(--color-red); opacity: 0.85; }
+
+/* Radar degli assi tematici (views.js: renderAxesRadar / renderAxesCompare). */
+.gdr-radar { display: flex; justify-content: center; margin: 8px 0; }
+.gdr-radar-svg { width: 100%; max-width: 300px; height: auto; }
+.gdr-radar-empty { color: var(--text-muted); font-size: var(--font-ui-small); }
 """
 
 
@@ -165,8 +170,9 @@ def write_workspace_chrome(obsidian: Path) -> None:
 # propertiesInDocument 'hidden': nasconde il pannello Proprietà nelle note — GDR
 # si edita via Meta Bind nel corpo, le proprietà grezze sarebbero ridondanti.
 APP_SETTINGS = {"propertiesInDocument": "hidden"}
-# Plugin core usati dalla pipeline (bookmarks legge il bookmarks.json generato).
-CORE_PLUGINS = ("bookmarks",)
+# Plugin core usati dalla pipeline: bookmarks legge il bookmarks.json generato;
+# bases rende le viste-indice native (.base) generate in INDEX_DIR/.
+CORE_PLUGINS = ("bookmarks", "bases")
 
 
 def write_core_settings(obsidian: Path) -> None:
@@ -333,6 +339,42 @@ def meta_bind_config(plugins: dict[str, Any], core: dict[str, Any], templates: l
     }
 
 
+# --- Bases (core): viste-indice native (.base) ------------------------------
+# Schema verificato sui .base reali dell'utente (Obsidian 1.12): nei CONTESTI
+# di espressione (filters/order/sort.property) le proprietà del frontmatter sono
+# NUDE (`categoria`, `pressione`); `file.name` è il nome nota, `formula.X` una
+# formula. Solo nelle MAPPE (properties/columnSize) la chiave è `note.<campo>`.
+def bases_doc(page: dict[str, Any]) -> dict[str, Any]:
+    """Documento Bases (.base) per una pagina-indice, dalla STESSA single-source
+    di pages.yaml: filtra per categoria (escludendo le archiviate) ed espone le
+    colonne della pagina come vista tabellare nativa. Gli hub Dataview restano
+    come fallback non distruttivo finché lo schema è confermato in-app."""
+    category = page["category"]
+    columns = page.get("columns", []) or []
+    order = ["file.name"] + [col["field"] for col in columns]
+    # properties: displayName per le colonne (chiave = id risolto: note.<campo>).
+    properties = {"file.name": {"displayName": "Nome"}}
+    for col in columns:
+        properties[f"note.{col['field']}"] = {"displayName": col["label"]}
+    parts = (page.get("sort") or "file.name asc").split()
+    sort = []
+    if parts:
+        direction = "DESC" if len(parts) > 1 and parts[1].lower() == "desc" else "ASC"
+        sort = [{"property": parts[0], "direction": direction}]
+    return {
+        "filters": {"and": [f'categoria == "{category}"', 'stato != "archiviata"']},
+        "properties": properties,
+        "views": [{"type": "table", "name": "Tutte le voci", "order": order, "sort": sort}],
+    }
+
+
+def write_bases(pages: list[dict[str, Any]]) -> None:
+    """Scrive una vista Base (.base) per pagina in INDEX_DIR/ (accanto all'hub)."""
+    for page in pages:
+        dumped = yaml.safe_dump(bases_doc(page), allow_unicode=True, sort_keys=False)
+        write_text(VAULT / INDEX_DIR / f"{page['file']}.base", dumped)
+
+
 def build() -> dict[str, str]:
     core = load_core()
     plugins = load_yaml("plugins.yaml")
@@ -344,6 +386,9 @@ def build() -> dict[str, str]:
         "fields": core.get("fields", {}),
         "categories": core.get("categories", {}),
         "states": core.get("states", []),
+        # assi_tematici: serve a views.js per disegnare il radar del Carattere e il
+        # confronto fra entità (carica gli assi per categoria a runtime).
+        "assi_tematici": core.get("assi_tematici", {}),
         "creation": core.get("creation", {}),
         "templates": templates,
     }
@@ -436,6 +481,11 @@ def build() -> dict[str, str]:
             layouts = fs_data.get("layouts") if isinstance(fs_data.get("layouts"), list) else []
             known = {l.get("id") for l in layouts if isinstance(l, dict)}
             changed = False
+            # Dice Roller: rende cliccabili attacchi/danni negli statblock (mostri
+            # SRD + creature). Default consigliato, non distruttivo (solo se off).
+            if fs_data.get("diceRolling") is not True:
+                fs_data["diceRolling"] = True
+                changed = True
             for fs_layout in load_statblock_layouts():
                 if fs_layout.get("id") not in known:
                     layouts.append(fs_layout)
@@ -459,6 +509,10 @@ def build() -> dict[str, str]:
         write_text(VAULT / rel, text)
         rendered[rel] = text
 
+    # Bases (core): una vista DB nativa (.base) per pagina, stessa single-source
+    # degli hub. Additivo: gli hub Dataview restano come fallback.
+    write_bases(pages)
+
     # SRD 5.2.1 (CC-BY-4.0, IT): albero di sola lettura, separato dall'homebrew.
     srd_count = build_srd(core)
     if srd_count:
@@ -469,6 +523,7 @@ def build() -> dict[str, str]:
     bookmark_targets = [("Home.md", "🏠 Home"), *((f"{INDEX_DIR}/{p['file']}.md", p["title"]) for p in pages)]
     if (VAULT / "SRD" / "Indice.md").is_file():
         bookmark_targets.append(("SRD/Indice.md", "📚 SRD"))
+    bookmark_targets += [(f"{INDEX_DIR}/{p['file']}.base", f"{p['title']} · Base") for p in pages]
     bookmarks = read_json(obsidian / "bookmarks.json")
     bookmarks = bookmarks if isinstance(bookmarks, dict) else {}
     items = bookmarks.get("items") if isinstance(bookmarks.get("items"), list) else []
