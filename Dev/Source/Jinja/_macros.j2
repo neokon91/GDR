@@ -107,7 +107,31 @@
 
 {{ grafico_assi() }}
 {% endif %}
+{% if core.get('archetipi', {}).get(category) %}
+
+{{ profilo() }}
 {% endif %}
+{% endif %}
+{%- endmacro %}
+
+{# Profilo (JS Engine): tag coerenti derivati dalle combinazioni di valori-assi
+   (core.archetipi[categoria], seed FantasyWorld). renderProfilo legge gli assi
+   della nota e mostra gli archetipi che combaciano; il bottone 'Applica profilo'
+   scrive i tag 'profilo/*' in frontmatter senza residui (meta_actions). #}
+{% macro profilo() -%}
+```js-engine
+const src = await app.vault.adapter.read("z.automazioni/views.js");
+const mod = { exports: {} };
+new Function("module", "exports", src)(mod, mod.exports);
+const views = mod.exports;
+const dv = app.plugins.plugins.dataview && app.plugins.plugins.dataview.api;
+const file = app.workspace.getActiveFile();
+const page = dv && file ? dv.page(file.path) : null;
+return engine.markdown.create(await views.renderProfilo(app, page));
+```
+
+> [!tip] Profilo
+> Assegna i tag coerenti derivati dagli assi: `BUTTON[applica-profilo]`
 {%- endmacro %}
 
 {# Scheda di sistema: campi STRUTTURATI per categoria (core.scheda) come callout

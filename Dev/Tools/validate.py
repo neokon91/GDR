@@ -101,7 +101,9 @@ def validate_split(core_raw: dict[str, Any], system_raw: dict[str, Any], merged:
     for aid, spec in (merged.get("abilita", {}) or {}).items():
         if not isinstance(spec, dict) or not spec.get("label") or spec.get("caratteristica") not in car_ids:
             errors.append(f"shape: abilità '{aid}' senza label o con caratteristica non valida")
+    axis_ids: dict[str, set] = {}
     for cat, assi in (merged.get("assi_tematici", {}) or {}).items():
+        axis_ids[cat] = {a.get("id") for a in (assi or [])}
         for a in assi or []:
             # Formato RICCO: {id, nome, valori:{n:{etichetta, descrizione}}}.
             if not (a.get("id") and a.get("nome") and a.get("valori")):
@@ -109,6 +111,15 @@ def validate_split(core_raw: dict[str, Any], system_raw: dict[str, Any], merged:
             for k, v in (a.get("valori") or {}).items():
                 if not isinstance(v, dict) or not v.get("etichetta"):
                     errors.append(f"shape: assi_tematici[{cat}].{a.get('id')} valore {k} senza etichetta")
+    # Archetipi: {id, nome, quando:{asse: comparatore}, tag:[...]}. 'quando' deve
+    # riferire assi reali della categoria (cattura i typo che spegnerebbero il match).
+    for cat, archs in (merged.get("archetipi", {}) or {}).items():
+        for a in archs or []:
+            if not (a.get("id") and a.get("nome") and a.get("tag")):
+                errors.append(f"shape: archetipi[{cat}] voce {a} senza id/nome/tag")
+            for axis in (a.get("quando") or {}):
+                if axis not in axis_ids.get(cat, set()):
+                    errors.append(f"shape: archetipi[{cat}].{a.get('id')} -> asse '{axis}' non in assi_tematici[{cat}]")
     return errors
 
 

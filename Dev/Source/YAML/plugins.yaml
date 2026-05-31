@@ -126,3 +126,6 @@ buttons:
   - id: archivia-nota
     label: Archivia
     action: archivia
+  - id: applica-profilo
+    label: Applica profilo
+    action: applica_profilo

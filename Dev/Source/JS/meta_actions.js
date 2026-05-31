@@ -56,6 +56,46 @@ async function collega(tp, file) {
   return "";
 }
 
+// --- Profilo: tag coerenti derivati dalle combinazioni di valori-assi --------
+function matchesCond(value, cond) {
+  const v = Number(value);
+  if (!Number.isFinite(v)) return false;
+  const c = String(cond).trim();
+  let m;
+  if ((m = c.match(/^(>=|<=|>|<|==|=)\s*(\d+)$/))) {
+    const n = Number(m[2]);
+    return m[1] === ">=" ? v >= n : m[1] === "<=" ? v <= n
+         : m[1] === ">" ? v > n : m[1] === "<" ? v < n : v === n;
+  }
+  if ((m = c.match(/^(\d+)\s*-\s*(\d+)$/))) return v >= Number(m[1]) && v <= Number(m[2]);
+  if (/^\d+$/.test(c)) return v === Number(c);
+  return false;
+}
+
+// Riscrive i tag 'profilo/*' del frontmatter dai valori-assi correnti: RIMUOVE i
+// vecchi profilo/* (niente residui se cambi gli assi) e aggiunge quelli attuali.
+async function applica_profilo(tp, file) {
+  const core = await loadCore();
+  const fm = app.metadataCache.getFileCache(file)?.frontmatter ?? {};
+  const archetipi = (core.archetipi ?? {})[fm.categoria] ?? [];
+  if (!archetipi.length) {
+    new Notice("Nessun archetipo per questa categoria.");
+    return "";
+  }
+  const matches = archetipi.filter(a =>
+    Object.entries(a.quando ?? {}).every(([axis, cond]) => matchesCond(fm[axis], cond)));
+  const derived = [...new Set(matches.flatMap(a => (a.tag ?? []).map(t => `profilo/${t}`)))];
+  await updateFrontmatter(file, f => {
+    const cur = Array.isArray(f.tags) ? f.tags : (f.tags ? [f.tags] : []);
+    const kept = cur.filter(t => !String(t).startsWith("profilo/"));
+    f.tags = [...new Set([...kept, ...derived])];
+  });
+  new Notice(derived.length
+    ? `Profilo applicato: ${matches.map(a => a.nome).join(", ")}`
+    : "Nessun archetipo combacia: tag profilo/* rimossi.");
+  return "";
+}
+
 async function meta_actions(tp, action = "") {
   const file = app.workspace.getActiveFile?.() ?? tp.config?.target_file;
   if (!file) {
@@ -83,6 +123,10 @@ async function meta_actions(tp, action = "") {
 
   if (action === "collega") {
     return await collega(tp, file);
+  }
+
+  if (action === "applica_profilo") {
+    return await applica_profilo(tp, file);
   }
 
   new Notice(`Azione non gestita: ${action}`);

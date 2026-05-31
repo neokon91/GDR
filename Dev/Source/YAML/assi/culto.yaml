@@ -47,3 +47,11 @@ assi:
     3: { etichetta: Equilibrata, descrizione: "Timore e gratitudine insieme; obbedienza e fiducia." }
     4: { etichetta: Fiducia,    descrizione: "Si onora per scelta; la divinità è giusta e guida." }
     5: { etichetta: Amore,      descrizione: "Legame affettivo profondo; si cerca l'unione, l'estasi." }
+
+# Archetipi: combinazioni di valori-assi -> tag coerenti (renderProfilo / applica_profilo).
+archetipi:
+- { id: teocrazia,    nome: "Teocrazia di stato",   quando: { struttura: ">=4", legalita: "5" },        tag: [teocrazia, ufficiale] }
+- { id: setta,        nome: "Setta iniziatica",      quando: { rivelazione: "<=2", struttura: ">=4" },    tag: [setta, iniziatica] }
+- { id: proibito,     nome: "Culto proibito",        quando: { legalita: "<=2" },                          tag: [proibito, clandestino] }
+- { id: popolare,     nome: "Fede popolare",         quando: { struttura: "<=2", rivelazione: ">=4" },     tag: [popolare, diffusa] }
+- { id: mistico,      nome: "Misticismo estatico",   quando: { motivazione: ">=4", trascendenza: "<=2" }, tag: [mistico, estatico] }

@@ -261,6 +261,28 @@ def test_crea_personaggio_caster_e2e(tmp_path):
     assert set(fm["incantesimi"]).issubset(set(mago["incantesimi_pool"]["livello_1"]))
 
 
+@pytest.mark.skipif(not shutil.which("node"), reason="node assente")
+def test_profilo_match(tmp_path):
+    """views.archetipiMatch: una combinazione di valori-assi attiva l'archetipo
+    atteso (teocrazia su 'culto' con struttura/legalità alti), sui dati reali."""
+    archetipi = CORE.get("archetipi", {}).get("culto") or []
+    assert archetipi, "archetipi 'culto' assenti dal modello"
+    harness = tmp_path / "profilo.js"
+    harness.write_text(
+        'const fs=require("fs");'
+        f'const src=fs.readFileSync({json.dumps(str(render.JS_DIR / "views.js"))},"utf8");'
+        'const m={exports:{}};new Function("module","exports",src)(m,m.exports);'
+        f'const a={json.dumps(archetipi, ensure_ascii=False)};'
+        'const r=m.exports.archetipiMatch(a,{struttura:5,legalita:5,rivelazione:3});'
+        'process.stdout.write(JSON.stringify({ids:r.map(x=>x.id),tags:m.exports.profiloTags(r)}));',
+        encoding="utf-8")
+    res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
+    assert res.returncode == 0, res.stderr
+    out = json.loads(res.stdout)
+    assert "teocrazia" in out["ids"]
+    assert "profilo/ufficiale" in out["tags"]
+
+
 @pytest.mark.skipif(not render.SRD_DIR.is_dir(), reason="SRD non vendorizzata")
 def test_srd_counts_and_statblock():
     """Conteggi attesi + il mostro si mappa su uno statblock Fantasy Statblocks."""

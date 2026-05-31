@@ -16,3 +16,6 @@ actions:
   - id: collega
     title: Collega
     target: z.modelli/azioni/Collega.md
+  - id: applica_profilo
+    title: Applica profilo
+    target: z.modelli/azioni/Applica profilo.md

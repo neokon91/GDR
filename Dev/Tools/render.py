@@ -389,6 +389,11 @@ def build() -> dict[str, str]:
         # assi_tematici: serve a views.js per disegnare il radar del Carattere e il
         # confronto fra entità (carica gli assi per categoria a runtime).
         "assi_tematici": core.get("assi_tematici", {}),
+        # relazioni: usate da meta_actions.collega (link tipizzato reciproco).
+        # archetipi: combinazioni di valori-assi -> tag, derivati da views.renderProfilo
+        # e applicati da meta_actions.applica_profilo.
+        "relazioni": core.get("relazioni", {}),
+        "archetipi": core.get("archetipi", {}),
         "creation": core.get("creation", {}),
         "templates": templates,
     }

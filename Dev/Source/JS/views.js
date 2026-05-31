@@ -236,7 +236,54 @@ async function renderAxesCompare(container, app, dv, page) {
     `Confronto: servono ≥3 assi e ≥1 entità di categoria "${category}".`);
 }
 
+// --- Profilo: tag coerenti derivati dalle combinazioni di valori-assi ---------
+// Un archetipo combacia se TUTTE le sue condizioni `quando` (per-asse) sono vere.
+// Comparatori: ">=N" "<=N" ">N" "<N" "==N"/"N" (uguaglianza) "N-M" (intervallo).
+function matchesCond(value, cond) {
+  const v = Number(value);
+  if (!Number.isFinite(v)) return false;
+  const c = String(cond).trim();
+  let m;
+  if ((m = c.match(/^(>=|<=|>|<|==|=)\s*(\d+)$/))) {
+    const n = Number(m[2]);
+    return m[1] === ">=" ? v >= n : m[1] === "<=" ? v <= n
+         : m[1] === ">" ? v > n : m[1] === "<" ? v < n : v === n;
+  }
+  if ((m = c.match(/^(\d+)\s*-\s*(\d+)$/))) return v >= Number(m[1]) && v <= Number(m[2]);
+  if (/^\d+$/.test(c)) return v === Number(c);
+  return false;
+}
+
+function archetipiMatch(archetipi, page) {
+  return (archetipi || []).filter((a) =>
+    Object.entries(a.quando || {}).every(([axis, cond]) => matchesCond(page[axis], cond)));
+}
+
+// Tag derivati (namespaced 'profilo/<tag>') dagli archetipi che combaciano.
+function profiloTags(matches) {
+  const tags = matches.flatMap((a) => (a.tag || []).map((t) => `profilo/${t}`));
+  return [...new Set(tags)];
+}
+
+// Pannello "Profilo" (markdown): archetipi che combaciano coi valori-assi correnti
+// + i tag coerenti. Si ri-deriva live al variare degli slider. Il bottone
+// 'Applica profilo' (meta_actions) li scrive in frontmatter senza residui.
+async function renderProfilo(app, page) {
+  if (!page) return "*Apri la nota per il profilo.*";
+  const core = await loadCoreData(app);
+  const archetipi = (core.archetipi || {})[page.categoria] || [];
+  if (!archetipi.length) return "*Nessun archetipo definito per questa categoria.*";
+  const matches = archetipiMatch(archetipi, page);
+  if (!matches.length) {
+    return "> [!abstract] Profilo\n> Nessun archetipo combacia con i valori attuali — regola gli assi o lascia un profilo libero.";
+  }
+  const nomi = matches.map((a) => `**${a.nome}**`).join(" · ");
+  const tags = profiloTags(matches).map((t) => `#${t}`).join(" ");
+  return `> [!abstract] Profilo (derivato dagli assi)\n> ${nomi}\n>\n> ${tags}`;
+}
+
 module.exports = {
   renderEntityPanel, renderSessionPanel, renderBacklinks,
   renderAxesRadar, renderAxesCompare, radarSvg, clampAxis,
+  renderProfilo, archetipiMatch, profiloTags, matchesCond,
 };

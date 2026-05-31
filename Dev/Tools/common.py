@@ -120,19 +120,22 @@ def load_entities() -> list[dict[str, Any]]:
         if isinstance(data, dict) and data.get("id"):
             # Rifondi gli assi scorporati (assi/<id>.yaml) se l'entità non li dichiara
             # inline (retrocompat: un'entità può ancora tenere 'assi' nel proprio file).
-            if "assi" not in data:
-                assi_file = assi_dir / f"{data['id']}.yaml"
-                if assi_file.is_file():
-                    assi_doc = yaml.safe_load(assi_file.read_text(encoding="utf-8")) or {}
-                    if assi_doc.get("assi"):
-                        data["assi"] = assi_doc["assi"]
+            # Stesso file ospita gli 'archetipi' (combinazioni di valori-assi -> tag).
+            assi_file = assi_dir / f"{data['id']}.yaml"
+            if assi_file.is_file():
+                assi_doc = yaml.safe_load(assi_file.read_text(encoding="utf-8")) or {}
+                if "assi" not in data and assi_doc.get("assi"):
+                    data["assi"] = assi_doc["assi"]
+                if "archetipi" not in data and assi_doc.get("archetipi"):
+                    data["archetipi"] = assi_doc["archetipi"]
             out.append(data)
     return out
 
 
 # Sezioni-mappa che un file-entità contribuisce a 'core', keyate per id-entità.
 _ENTITY_SECTIONS = (("scheda", "scheda"), ("assi", "assi_tematici"),
-                    ("relazioni", "relazioni"), ("creation", "creation"))
+                    ("relazioni", "relazioni"), ("creation", "creation"),
+                    ("archetipi", "archetipi"))
 
 
 def apply_entities(core: dict[str, Any], entities: list[dict[str, Any]]) -> dict[str, Any]:
@@ -140,7 +143,7 @@ def apply_entities(core: dict[str, Any], entities: list[dict[str, Any]]) -> dict
     categories (folder+subtypes), fields, scheda, assi_tematici, relazioni,
     creation. Ritorna un nuovo dict (non muta l'input)."""
     merged = dict(core)
-    for section in ("folders", "fields", "categories", "scheda", "assi_tematici", "relazioni", "creation"):
+    for section in ("folders", "fields", "categories", "scheda", "assi_tematici", "relazioni", "creation", "archetipi"):
         merged[section] = dict(merged.get(section, {}) or {})
     for entity in entities:
         eid = entity["id"]

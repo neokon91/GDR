@@ -46,3 +46,11 @@ assi:
     3: { etichetta: "Ambiguo", descrizione: "La magia ha risvolti sacri e pratici. Il suo uso è valutato caso per caso." }
     4: { etichetta: "Sacrale funzionale", descrizione: "Ogni incanto richiede rispetto, riti e intenzione. Il potere è un prestito spirituale." }
     5: { etichetta: "Liturgico", descrizione: "Ogni forma magica è un atto liturgico. La magia è comunione con il divino o con le forze cosmiche. Usarla è una preghiera." }
+
+# Archetipi: combinazioni di valori-assi -> tag coerenti (renderProfilo / applica_profilo).
+archetipi:
+- { id: selvaggia,    nome: "Magia selvaggia",        quando: { metodo_magia: "<=2", rischio: ">=4" },        tag: [selvaggia, pericolosa] }
+- { id: liturgica,    nome: "Arte liturgica",         quando: { ethos_magico: ">=4", metodo_magia: ">=4" },   tag: [liturgica, rituale] }
+- { id: dono,         nome: "Dono innato",            quando: { fonte_magia: "<=2", costo_magia: "<=2" },     tag: [innata, dono] }
+- { id: patto,        nome: "Patto sacrificale",      quando: { costo_magia: ">=4", fonte_magia: ">=4" },     tag: [patto, sacrificale] }
+- { id: accademica,   nome: "Magia accademica",       quando: { rischio: "<=2", metodo_magia: ">=4" },        tag: [accademica, sicura] }

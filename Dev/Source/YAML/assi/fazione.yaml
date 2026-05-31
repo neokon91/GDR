@@ -109,3 +109,11 @@ assi:
       etichetta: Espansionista
       descrizione: Il conflitto è sacro o glorioso; ogni ostacolo è nemico. Imperi,
         crociate.
+
+# Archetipi: combinazioni di valori-assi -> tag coerenti (renderProfilo / applica_profilo).
+archetipi:
+- { id: gilda,        nome: "Gilda pragmatica",       quando: { scopo: ">=4", legalita: ">=4" },              tag: [gilda, lecita] }
+- { id: cospirazione, nome: "Cospirazione occulta",   quando: { metodo_operativo: "<=2", legalita: "<=2" },   tag: [cospirazione, occulta] }
+- { id: militante,    nome: "Ordine militante",       quando: { struttura: ">=4", etica_conflitto: ">=4" },   tag: [militante, espansionista] }
+- { id: movimento,    nome: "Movimento idealista",    quando: { scopo: "<=2", struttura: "<=2" },             tag: [movimento, idealista] }
+- { id: istituzione,  nome: "Corpo ufficiale",        quando: { legalita: "5", struttura: ">=4" },            tag: [ufficiale, istituzionale] }
