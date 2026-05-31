@@ -257,8 +257,8 @@ def test_crea_personaggio_caster_e2e(tmp_path):
     assert len(fm["trucchetti"]) == mago["trucchetti_noti"]
     assert len(fm["incantesimi"]) == mago["incantesimi_preparati"]
     assert fm["slot_1"] == mago["slot_l1"]["1"]
-    assert set(fm["trucchetti"]).issubset(set(mago["incantesimi_pool"]["trucchetti"]))
-    assert set(fm["incantesimi"]).issubset(set(mago["incantesimi_pool"]["livello_1"]))
+    assert set(fm["trucchetti"]).issubset(set(mago["incantesimi_pool"]["0"]))
+    assert set(fm["incantesimi"]).issubset(set(mago["incantesimi_pool"]["1"]))
 
 
 @pytest.mark.skipif(not shutil.which("node"), reason="node assente")
@@ -342,6 +342,35 @@ def test_encounter_xp(tmp_path):
     assert res.returncode == 0, res.stderr
     out = json.loads(res.stdout)
     assert out["pe"] == 5900 and out["gs"] == cr_xp["3"] and out["frac"] == cr_xp["1/2"]
+
+
+@pytest.mark.skipif(not shutil.which("node"), reason="node assente")
+def test_sali_pg_e2e(tmp_path):
+    """sali_pg.js sale un PG di livello (mock Obsidian): un mago L1->L2 aggiorna
+    livello/competenza/slot dalla progressione e i PF (media fissa + mod COS)."""
+    import build_personaggio
+    pj = tmp_path / "personaggio.json"
+    pj.write_text(json.dumps(build_personaggio.build_personaggio_options(CORE), ensure_ascii=False), encoding="utf-8")
+    harness = tmp_path / "sali.js"
+    harness.write_text(
+        'const fs=require("fs");'
+        f'const data=fs.readFileSync({json.dumps(str(pj))},"utf8");'
+        'global.Notice=class{constructor(m){}};'
+        'const fm={tipo:"pg",classe:"mago",livello:1,costituzione:14,pf:8,pf_max:8,competenza:2,slot_1:2,'
+        'trucchetti:["a","b","c"],incantesimi:["s1","s2","s3","s4"]};'
+        'const file={basename:"Test",path:"x.md"};'
+        'global.app={workspace:{getActiveFile:()=>file},metadataCache:{getFileCache:()=>({frontmatter:fm})},'
+        'vault:{adapter:{read:async()=>data}},fileManager:{processFrontMatter:async(f,fn)=>fn(fm)}};'
+        'const tp={system:{suggester:async(l,v)=>v[0]}};'
+        f'require({json.dumps(str(render.JS_DIR / "sali_pg.js"))})(tp)'
+        '.then(()=>process.stdout.write(JSON.stringify(fm)));',
+        encoding="utf-8")
+    res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
+    assert res.returncode == 0, res.stderr
+    fm = json.loads(res.stdout)
+    assert fm["livello"] == 2
+    assert fm["pf_max"] == 14  # 8 + (floor(6/2)+1) + mod(COS 14)=+2 = 8+4+2
+    assert fm["competenza"] == 2 and fm["slot_1"] == 3
 
 
 @pytest.mark.skipif(not render.SRD_DIR.is_dir(), reason="SRD non vendorizzata")

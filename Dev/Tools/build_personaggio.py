@@ -69,37 +69,50 @@ def _equipment_options(prose: str) -> dict[str, str]:
     return {"A": text.strip(" .;")}
 
 
-def _level1(progressione: list[Any]) -> dict[str, Any]:
-    """Dati di 1º livello dalla tabella di progressione SRD (privilegi, trucchetti,
-    incantesimi preparati, slot per livello)."""
-    row = (progressione or [{}])[0] or {}
+_ASI_RE = re.compile(r"aumento dei punteggi", re.I)
+_SUB_RE = re.compile(r"sottoclasse", re.I)
+
+
+def _prog_row(row: dict[str, Any]) -> dict[str, Any]:
+    """Una riga di progressione SRD -> {livello, competenza, privilegi, trucchetti,
+    preparati, slot}."""
+    row = row or {}
     privilegi = [p.strip() for p in re.split(r",|;", str(row.get("Privilegi di classe", ""))) if p.strip()]
     slot = {str(n): _int_or_none(row.get(f"Slot {n}")) for n in range(1, 10)}
-    slot = {n: v for n, v in slot.items() if v}
+    comp = re.sub(r"\D", "", str(row.get("Bonus di competenza", "")))
     return {
+        "livello": _int_or_none(row.get("Livello")),
+        "competenza": int(comp) if comp else None,
         "privilegi": privilegi,
         "trucchetti": _int_or_none(row.get("Trucchetti")),
-        "incantesimi_preparati": _int_or_none(row.get("Incantesimi preparati")),
-        "slot": slot,
+        "preparati": _int_or_none(row.get("Incantesimi preparati")),
+        "slot": {n: v for n, v in slot.items() if v},
     }
 
 
+def _progressione(prog: list[Any]) -> list[dict[str, Any]]:
+    """Tabella di progressione 1-20 normalizzata (lista di _prog_row)."""
+    return [_prog_row(r) for r in (prog or []) if isinstance(r, dict)]
+
+
 def _spell_pool(liste: list[Any]) -> dict[str, list[str]]:
-    """Da liste_incantesimi -> {'trucchetti': [...], 'livello_1': [...]} (solo i
-    livelli rilevanti a PG di 1º livello: trucchetti + incantesimi di 1º)."""
-    trucchetti: list[str] = []
-    livello_1: list[str] = []
+    """Da liste_incantesimi -> pool per livello {'0': [trucchetti], '1': [...], ...,
+    '9': [...]} (ordinati). '0' = trucchetti; serve alla selezione incantesimi a
+    ogni livello (creazione + sali di livello)."""
+    pool: dict[str, list[str]] = {}
     for lista in liste or []:
         for riga in lista.get("righe", []) or []:
             liv = _norm(riga.get("Livello"))
             nome = str(riga.get("Incantesimo", "")).strip()
             if not nome:
                 continue
-            if liv.startswith("trucch") and nome not in trucchetti:
-                trucchetti.append(nome)
-            elif liv == "1" and nome not in livello_1:
-                livello_1.append(nome)
-    return {"trucchetti": sorted(trucchetti), "livello_1": sorted(livello_1)}
+            key = "0" if liv.startswith("trucch") else (liv if liv.isdigit() else None)
+            if key is None:
+                continue
+            pool.setdefault(key, [])
+            if nome not in pool[key]:
+                pool[key].append(nome)
+    return {k: sorted(v) for k, v in pool.items()}
 
 
 def parse_class_skills(prose: str, all_skill_ids: list[str], label_to_id: dict[str, str]) -> dict[str, Any]:
@@ -142,8 +155,12 @@ def build_personaggio_options(core: dict[str, Any] | None = None) -> dict[str, A
     classi: dict[str, Any] = {}
     for cls in load_srd("srd_5_2_1_classes.json"):
         comp = cls.get("competenze", {}) or {}
-        prog1 = _level1(cls.get("progressione"))
+        prog = _progressione(cls.get("progressione"))
+        prog1 = prog[0] if prog else _prog_row({})
         incantatore = bool(prog1["slot"] or prog1["trucchetti"])
+        sottoclasse_srd = cls.get("sottoclasse_srd")
+        livelli_asi = [r["livello"] for r in prog if any(_ASI_RE.search(p) for p in r["privilegi"])]
+        sub_levels = [r["livello"] for r in prog if any(_SUB_RE.search(p) for p in r["privilegi"])]
         classi[cls["id"]] = {
             "label": cls.get("nome", cls["id"]),
             "dado_vita": _hit_die(cls.get("dado_vita")),
@@ -158,9 +175,14 @@ def build_personaggio_options(core: dict[str, Any] | None = None) -> dict[str, A
             "privilegi_l1": prog1["privilegi"],
             "incantatore": incantatore,
             "trucchetti_noti": prog1["trucchetti"],
-            "incantesimi_preparati": prog1["incantesimi_preparati"],
+            "incantesimi_preparati": prog1["preparati"],
             "slot_l1": prog1["slot"],
             "incantesimi_pool": _spell_pool(cls.get("liste_incantesimi")) if incantatore else {},
+            # Progressione 2-20 (sali di livello interattivo):
+            "progressione": prog,
+            "sottoclasse": sottoclasse_srd.get("nome") if isinstance(sottoclasse_srd, dict) else None,
+            "livello_sottoclasse": sub_levels[0] if sub_levels else None,
+            "livelli_asi": livelli_asi,
         }
 
     specie: dict[str, Any] = {}

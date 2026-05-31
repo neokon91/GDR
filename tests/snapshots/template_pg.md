@@ -76,6 +76,20 @@
 > **Trucchetti**: `VIEW[{trucchetti} ?? "—"]`
 >
 > **Preparati (1º)**: `VIEW[{incantesimi} ?? "—"]`
+
+```js-engine
+const src = await app.vault.adapter.read("z.automazioni/views.js");
+const mod = { exports: {} };
+new Function("module", "exports", src)(mod, mod.exports);
+const views = mod.exports;
+const dv = app.plugins.plugins.dataview && app.plugins.plugins.dataview.api;
+const file = app.workspace.getActiveFile();
+const page = dv && file ? dv.page(file.path) : null;
+return engine.markdown.create(await views.renderProgressione(app, page));
+```
+
+> [!tip] Avanza di livello
+> Applica PF/competenza/slot e guida le scelte (ASI/talento/sottoclasse/incantesimi): `BUTTON[sali-di-livello]`
 --- Lore
 
 > [!abstract] Scheda

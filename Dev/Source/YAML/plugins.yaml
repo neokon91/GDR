@@ -135,3 +135,6 @@ buttons:
   - id: scatena-conseguenza
     label: Scatena conseguenza
     action: scatena_conseguenza
+  - id: sali-di-livello
+    label: Sali di livello
+    action: sali_di_livello

@@ -364,10 +364,42 @@ async function renderEncounter(app, dv, page) {
   return out + dettaglio + blocco;
 }
 
+// --- Progressione PG: riepilogo del livello + anteprima del prossimo ----------
+async function loadPersonaggio(app) {
+  try { return JSON.parse(await app.vault.adapter.read("z.automazioni/data/personaggio.json")); }
+  catch (e) { return {}; }
+}
+
+// Pannello (markdown) per la scheda PG: privilegi acquisiti fino al livello +
+// anteprima del livello successivo (privilegi/slot). La tabella 1-20 completa è
+// nella nota SRD della classe. Usa personaggio.json (progressione per classe).
+async function renderProgressione(app, page) {
+  if (!page) return "*Apri la scheda PG.*";
+  const opt = await loadPersonaggio(app);
+  const classe = (opt.classi || {})[page.classe];
+  if (!classe || !Array.isArray(classe.progressione)) return "*Classe senza progressione.*";
+  const liv = Math.max(1, Math.min(20, Math.floor(Number(page.livello) || 1)));
+  const rows = classe.progressione;
+  const noASI = (p) => !/aumento dei punteggi/i.test(p);
+  const acquisiti = rows.slice(0, liv).flatMap((r) => r.privilegi || []).filter(noASI);
+  let out = `> [!abstract] Progressione — ${classe.label} · livello ${liv}\n`;
+  out += `> **Privilegi**: ${acquisiti.length ? acquisiti.join(", ") : "—"}\n`;
+  if (liv < 20) {
+    const next = rows[liv] || {};
+    const np = (next.privilegi || []).join(", ") || "—";
+    const sl = Object.entries(next.slot || {}).map(([n, q]) => `${n}º×${q}`).join(" ");
+    out += `>\n> **Al livello ${liv + 1}**: ${np}${sl ? ` · slot ${sl}` : ""}\n`;
+  } else {
+    out += `>\n> Livello massimo raggiunto.\n`;
+  }
+  return out;
+}
+
 module.exports = {
   renderEntityPanel, renderSessionPanel, renderBacklinks,
   renderAxesRadar, renderAxesCompare, radarSvg, clampAxis,
   renderProfilo, archetipiMatch, profiloTags, matchesCond,
   renderClock, clockSvg,
   renderEncounter, xpForCreature,
+  renderProgressione,
 };

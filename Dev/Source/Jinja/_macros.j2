@@ -299,6 +299,26 @@ return engine.markdown.create(await views.renderEncounter(app, dv, page));
 ```
 {%- endmacro %}
 
+{# Progressione PG (JS Engine): privilegi acquisiti al livello + anteprima del
+   prossimo (views.renderProgressione, da personaggio.json). Il bottone 'Sali di
+   livello' (statico, processato da Meta Bind) applica PF/competenza/slot e guida
+   le scelte (ASI/talento/sottoclasse/incantesimi) via meta_actions -> sali_pg. #}
+{% macro progressione() -%}
+```js-engine
+const src = await app.vault.adapter.read("z.automazioni/views.js");
+const mod = { exports: {} };
+new Function("module", "exports", src)(mod, mod.exports);
+const views = mod.exports;
+const dv = app.plugins.plugins.dataview && app.plugins.plugins.dataview.api;
+const file = app.workspace.getActiveFile();
+const page = dv && file ? dv.page(file.path) : null;
+return engine.markdown.create(await views.renderProgressione(app, page));
+```
+
+> [!tip] Avanza di livello
+> Applica PF/competenza/slot e guida le scelte (ASI/talento/sottoclasse/incantesimi): `BUTTON[sali-di-livello]`
+{%- endmacro %}
+
 {# Radar degli assi tematici (JS Engine): visualizza gli assi 0-10 della NOTA
    CORRENTE come radar SVG, sotto gli slider del tab Carattere. La definizione
    degli assi è in core.json (render.py); il disegno in views.js (renderAxesRadar).

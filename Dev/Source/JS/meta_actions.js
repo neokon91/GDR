@@ -181,6 +181,12 @@ async function meta_actions(tp, action = "") {
     return await scatena_conseguenza(tp, file);
   }
 
+  if (action === "sali_di_livello") {
+    // Motore di level-up PG dedicato (script Templater autonomo).
+    if (tp.user && tp.user.sali_pg) return await tp.user.sali_pg(tp);
+    new Notice("sali_pg non disponibile."); return "";
+  }
+
   new Notice(`Azione non gestita: ${action}`);
   return "";
 }

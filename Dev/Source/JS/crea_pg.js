@@ -165,8 +165,8 @@ function calcolaCA(armatura, modDes, scudo) {
 async function scegliIncantesimi(tp, classe) {
     if (!classe.incantatore) return { trucchetti: [], preparati: [], slot: classe.slot_l1 || {} };
     const pool = classe.incantesimi_pool || {};
-    const trucchetti = await scegliMulti(tp, "Trucchetto", pool.trucchetti || [], classe.trucchetti_noti || 0);
-    const preparati = await scegliMulti(tp, "Incantesimo di 1º livello", pool.livello_1 || [], classe.incantesimi_preparati || 0);
+    const trucchetti = await scegliMulti(tp, "Trucchetto", pool["0"] || [], classe.trucchetti_noti || 0);
+    const preparati = await scegliMulti(tp, "Incantesimo di 1º livello", pool["1"] || [], classe.incantesimi_preparati || 0);
     return { trucchetti, preparati, slot: classe.slot_l1 || {} };
 }
 
