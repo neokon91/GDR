@@ -1,0 +1,35 @@
+{
+  "id": "gdr-5e-2024",
+  "name": "GDR — 5.5e (2024)",
+  "edited": true,
+  "version": 1,
+  "blocks": [
+    {"type": "group", "id": "g1", "properties": ["name"], "nested": [
+      {"type": "heading", "id": "g2", "properties": ["name"], "conditioned": true},
+      {"type": "subheading", "id": "g3", "properties": ["size", "type", "subtype", "alignment"], "conditioned": true}
+    ]},
+    {"type": "inline", "id": "g4", "properties": [], "hasRule": true, "nested": [
+      {"type": "property", "id": "g5", "properties": ["ac"], "display": "CA", "conditioned": true},
+      {"type": "property", "id": "g6", "properties": ["initiative"], "display": "Iniziativa", "conditioned": true},
+      {"type": "property", "id": "g7", "properties": ["hp"], "display": "PF", "conditioned": true},
+      {"type": "property", "id": "g8", "properties": ["speed"], "display": "Velocità", "conditioned": true}
+    ]},
+    {"type": "saves", "id": "g9", "properties": ["stats"], "conditioned": true},
+    {"type": "inline", "id": "g10", "properties": [], "hasRule": true, "nested": [
+      {"type": "property", "id": "g11", "properties": ["saves"], "display": "Tiri Salvezza", "conditioned": true},
+      {"type": "property", "id": "g12", "properties": ["skillsaves"], "display": "Abilità", "conditioned": true},
+      {"type": "property", "id": "g13", "properties": ["damage_vulnerabilities"], "display": "Vulnerabilità", "conditioned": true},
+      {"type": "property", "id": "g14", "properties": ["damage_resistances"], "display": "Resistenze", "conditioned": true},
+      {"type": "property", "id": "g15", "properties": ["damage_immunities"], "display": "Immunità ai Danni", "conditioned": true},
+      {"type": "property", "id": "g16", "properties": ["condition_immunities"], "display": "Immunità alle Condizioni", "conditioned": true},
+      {"type": "property", "id": "g17", "properties": ["senses"], "display": "Sensi", "conditioned": true},
+      {"type": "property", "id": "g18", "properties": ["languages"], "display": "Lingue", "conditioned": true},
+      {"type": "property", "id": "g19", "properties": ["cr"], "display": "Grado Sfida", "conditioned": true}
+    ]},
+    {"type": "traits", "id": "g20", "properties": ["traits"], "conditioned": true},
+    {"type": "traits", "id": "g21", "properties": ["actions"], "heading": "Azioni", "conditioned": true},
+    {"type": "traits", "id": "g22", "properties": ["bonus_actions"], "heading": "Azioni Bonus", "conditioned": true},
+    {"type": "traits", "id": "g23", "properties": ["reactions"], "heading": "Reazioni", "conditioned": true},
+    {"type": "traits", "id": "g24", "properties": ["legendary_actions"], "heading": "Azioni Leggendarie", "conditioned": true}
+  ]
+}

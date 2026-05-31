@@ -79,6 +79,9 @@ Parti da **`SRD/Indice.md`** (anche nei segnalibri). I **mostri** sono statblock
 con "Parse Frontmatter in Notes" ON entrano nel bestiario di **Fantasy Statblocks** e li
 richiami con `monster: Nome` in qualunque incontro.
 
-## 9. Layout statblock
-Il blocco statblock usa il layout `{{ core.statblock.layout }}`. Per lo stile 2024/5.5e,
-importa un layout in Fantasy Statblocks e aggiorna `statblock.layout` in `Dev/Source/YAML/core.yaml`.
+## 9. Layout statblock (2024)
+Di default gli statblock usano `{{ core.statblock.layout }}`. La build installa anche
+un layout **"GDR — 5.5e (2024)"** in Fantasy Statblocks (non attivo, per sicurezza).
+Per provarlo: *Impostazioni → Fantasy Statblocks → Layouts* e selezionalo come predefinito.
+Se ti convince, dimmelo e lo imposto di default nella pipeline (`statblock.layout` in
+`Dev/Source/YAML/core.yaml`).

@@ -542,6 +542,19 @@ def build() -> dict[str, str]:
             cm["callouts"] = callouts_cfg
             write_json(cm_dir / "data.json", cm)
 
+    # Fantasy Statblocks: rende disponibile un layout 2024 (NON default: lo
+    # selezioni tu in FS). Union per id, preserva default e layout esistenti.
+    fs_layout = read_json(SOURCE / "statblock-2024.json")
+    fs_dir = obsidian / "plugins" / "obsidian-5e-statblocks"
+    if isinstance(fs_layout, dict) and fs_dir.is_dir():
+        fs_data = read_json(fs_dir / "data.json")
+        if isinstance(fs_data, dict):
+            layouts = fs_data.get("layouts") if isinstance(fs_data.get("layouts"), list) else []
+            if not any(isinstance(l, dict) and l.get("id") == fs_layout.get("id") for l in layouts):
+                layouts.append(fs_layout)
+                fs_data["layouts"] = layouts
+                write_json(fs_dir / "data.json", fs_data)
+
     pages = load_pages()
     for name, jinja_name in (("Home.md", "home.md.j2"), ("LEGGIMI.md", "leggimi.md.j2")):
         text = env.get_template(jinja_name).render(core=core, plugins=plugins, templates=templates, pages=pages)
