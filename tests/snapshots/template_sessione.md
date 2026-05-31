@@ -41,7 +41,6 @@
 
 ```dataviewjs
 const source = await dv.io.load("z.automazioni/views.js");
-eval(source);
-renderSessionPanel(dv, dv.current());
+new Function("dv", source + "\n;return renderSessionPanel(dv, dv.current());")(dv);
 ```
 ````

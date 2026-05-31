@@ -31,7 +31,6 @@ I privilegi di sottoclasse si ottengono ai livelli **3 / 6 / 10 / 14**.
 
 ```dataviewjs
 const source = await dv.io.load("z.automazioni/views.js");
-eval(source);
-renderEntityPanel(dv, dv.current());
+new Function("dv", source + "\n;return renderEntityPanel(dv, dv.current());")(dv);
 ```
 ````

@@ -186,11 +186,12 @@
 {% endfor %}
 {%- endmacro %}
 
-{# Pannello vista (dataviewjs). fn = funzione esposta da z.automazioni/views.js. #}
+{# Pannello vista (dataviewjs). fn = funzione esposta da z.automazioni/views.js.
+   NB: eval() in dataviewjs (strict) NON espone le function declaration allo scope
+   chiamante -> uso new Function, che le definisce nel suo corpo e poi le invoca. #}
 {% macro vista(fn='renderEntityPanel') -%}
 ```dataviewjs
 const source = await dv.io.load("z.automazioni/views.js");
-eval(source);
-{{ fn }}(dv, dv.current());
+new Function("dv", source + "\n;return {{ fn }}(dv, dv.current());")(dv);
 ```
 {%- endmacro %}

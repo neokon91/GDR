@@ -45,10 +45,10 @@ fields:
   dominio:        { label: Dominio,              widget: text }
   simbolo:        { label: Simbolo,              widget: text }
 
-# Statblock (Fantasy Statblocks): layout usato dal blocco ```statblock```.
-# Sostituisci col nome di un layout installato (es. un layout 2024/5.5e italiano).
+# Statblock (Fantasy Statblocks): layout usato dal blocco ```statblock``` (creature
+# + mostri SRD). Il layout IT 2024 è vendorizzato in statblocks/ e iniettato in FS.
 statblock:
-  layout: Basic 5e Layout
+  layout: D&D 5.5 Layout ITA - Compatibile 5e
 
 # Caratteristiche 5e per la scheda PG (macro scheda_pg). id = chiave frontmatter
 # (INPUT[number]); il modificatore e' calcolato e SALVATO in mod_<id> (compute_into)

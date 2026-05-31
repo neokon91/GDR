@@ -141,6 +141,26 @@ def write_workspace_chrome(obsidian: Path) -> None:
     union_list_key(obsidian / "app.json", "userIgnoreFilters", [f"{d}/" for d in HIDDEN_DIRS])
 
 
+# Impostazioni core consigliate, iniettate non distruttivamente così la config è
+# riproducibile dal vault generato (non dipende da settaggi manuali).
+# propertiesInDocument 'hidden': nasconde il pannello Proprietà nelle note — GDR
+# si edita via Meta Bind nel corpo, le proprietà grezze sarebbero ridondanti.
+APP_SETTINGS = {"propertiesInDocument": "hidden"}
+# Plugin core usati dalla pipeline (bookmarks legge il bookmarks.json generato).
+CORE_PLUGINS = ("bookmarks",)
+
+
+def write_core_settings(obsidian: Path) -> None:
+    """Default core consigliati: nasconde le Proprietà nelle note e abilita i
+    plugin core usati. Non distruttivo (merge; preserva il resto della config)."""
+    merge_json(obsidian / "app.json", APP_SETTINGS)
+    core_plugins = read_json(obsidian / "core-plugins.json")
+    if isinstance(core_plugins, dict):
+        updated = {**core_plugins, **{pid: True for pid in CORE_PLUGINS if not core_plugins.get(pid)}}
+        if updated != core_plugins:
+            write_json(obsidian / "core-plugins.json", updated)
+
+
 def crea_wrapper_js(template: dict[str, Any]) -> str:
     """Wizard di creazione per-template generato: `tp.user.crea_<id>` delega al
     motore condiviso create_entity.js. Le entità bespoke hanno un crea_<id>.js
@@ -421,6 +441,8 @@ def build() -> dict[str, str]:
 
     # Pulizia esploratore: nasconde le cartelle z.* + le esclude da ricerca/grafo.
     write_workspace_chrome(obsidian)
+    # Default core consigliati (proprietà nascoste, bookmarks) — config riproducibile.
+    write_core_settings(obsidian)
 
     # Scaffolding delle cartelle contenuti (idempotente): mostra la struttura
     # senza mai sovrascrivere note esistenti.

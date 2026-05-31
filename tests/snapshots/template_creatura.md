@@ -10,7 +10,7 @@
 --- Statblock
 
 ```statblock
-layout: Basic 5e Layout
+layout: D&D 5.5 Layout ITA - Compatibile 5e
 name: <% tp.file.title %>
 size: Medio
 type: umanoide
@@ -89,7 +89,6 @@ legendary_actions: []
 
 ```dataviewjs
 const source = await dv.io.load("z.automazioni/views.js");
-eval(source);
-renderEntityPanel(dv, dv.current());
+new Function("dv", source + "\n;return renderEntityPanel(dv, dv.current());")(dv);
 ```
 ````

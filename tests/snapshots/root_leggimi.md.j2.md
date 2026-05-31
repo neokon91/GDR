@@ -77,7 +77,7 @@ con "Parse Frontmatter in Notes" ON entrano nel bestiario di **Fantasy Statblock
 richiami con `monster: Nome` in qualunque incontro.
 
 ## 9. Layout statblock (2024)
-Di default gli statblock usano `Basic 5e Layout`. La build installa anche
+Di default gli statblock usano `D&D 5.5 Layout ITA - Compatibile 5e`. La build installa anche
 un layout **"GDR — 5.5e (2024)"** in Fantasy Statblocks (non attivo, per sicurezza).
 Per provarlo: *Impostazioni → Fantasy Statblocks → Layouts* e selezionalo come predefinito.
 Se ti convince, dimmelo e lo imposto di default nella pipeline (`statblock.layout` in
