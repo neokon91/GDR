@@ -73,7 +73,7 @@ sopra i sistemi avanzati (vedi backlog).
 - **Pregi**: trinità per-entità + **assi scorporati** (file entità snelli, assi come
   glossario coeso). `render.py` modulare (common/build_srd/build_personaggio/validate),
   merge lossless, validazione forte (confine/dup/snake/shape/entity-schema/assi),
-  snapshot + e2e wizard. Test (**129**, ridondanti sussunti dagli snapshot).
+  snapshot + e2e wizard (PG base + caster). Test (**145**, ridondanti sussunti dagli snapshot).
   Nuova entità = 1 YAML (+1 assi); Jinja solo per layout custom (default `_entity_base.j2`).
 - **Debito/fragilità**:
   - **Logica embeddata nelle note**: il blocco `js-engine`/`statblock`/`dataview`
@@ -93,12 +93,12 @@ sopra i sistemi avanzati (vedi backlog).
     **callout-manager** (qui il gotcha *callout collassati*), **iconize**, **homepage** —
     e quelli installati-ma-non-integrati (initiative-tracker/calendarium/excalidraw/
     zoom-map/fantasy-content-generator/brat). Richiesta utente: una per plugin, con gotcha.
-  - **Test**: 129 verdi ma coprono la *generazione*, non il runtime Obsidian
+  - **Test**: 145 verdi ma coprono la *generazione*, non il runtime Obsidian
     (Meta Bind/Dataview/Templater/JS Engine) — gap inerente, colmabile solo con QA manuale.
 
 ## 🌍 Worldbuilder
 
-- **Pregi**: ontologia ricca (31 categorie), relazioni tipizzate, **assi tematici 1-5
+- **Pregi**: ontologia ricca (36 categorie, grafo cosmologico connesso), relazioni tipizzate, **assi tematici 1-5
   con etichette+descrizioni** (seed FantasyWorld, formato "fatto bene") + **radar** di
   carattere e **confronto fra entità**. Entità lore arricchite bespoke (luogo/mondo/
   fazione/cultura/oggetto/creatura/cosmologia/personaggio).
