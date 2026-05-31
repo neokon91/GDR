@@ -47,7 +47,9 @@ lo schema da `core.json`). Le entità bespoke hanno invece un `crea_<id>.js`
 **hand-authored** in `Dev/Source/JS/` che fa da override.
 
 Esempio completo (bespoke): il **PG** (`entities/personaggio.yaml` + `pg.md.j2` +
-`crea_pg.js`), vedi [rules_layer.md](rules_layer.md).
+`crea_pg.js`, + `sali_pg.js` per il level-up), vedi [rules_layer.md](rules_layer.md).
+Le meccaniche al tavolo (clock/conseguenze, archetipi/profilo, difficoltà incontri)
+sono in [play_layer.md](play_layer.md).
 
 ## I moduli di `render.py`
 
@@ -66,7 +68,8 @@ tutti importano `common`).
 
 1. `load_core()` (modello fuso) + `load_templates()` (templates.yaml + entità).
 2. Scrive `z.automazioni/data/{core.json,personaggio.json}` (dati per i JS) e copia i JS 1:1.
-3. Rende ogni template Jinja → `z.modelli/`, le azioni, Home/LEGGIMI, le pagine-indice.
+3. Rende ogni template Jinja → `z.modelli/`, le azioni, Home/LEGGIMI, le pagine-indice
+   e le dashboard auto **Ponte Mondo↔Sistema** e **Fronti** (`Indici/`).
 4. Config `.obsidian` **non distruttiva** (merge): community-plugins, Templater,
    Dataview, Meta Bind (input+button), Metadata Menu (fileClass), Iconize,
    Callout Manager, Fantasy Statblocks (layout + dice), core (Bookmarks/Bases). Vedi

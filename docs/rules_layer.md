@@ -22,26 +22,37 @@ SRD JSON (Dev/Source/SRD/srd_5_2_1_{classes,species,backgrounds,feats}.json)
 Fonde lo **strutturato** dell'SRD con l'**overlay curato** e *parsa la prosa*
 dove serve. Output `personaggio.json`:
 
-- `caratteristiche` (6), `abilita` (18, da system.yaml), `generazione_caratteristiche`.
-- `classi[id]`: `dado_vita` (`"D12"`→12), `tiri_salvezza` (nomi→id), `abilita`
-  `{scelte, opzioni}` — **parsato** dalla prosa SRD (`"Due a scelta tra …"` →
-  count + lista; senza lista → tutte le 18). Validato su 12/12 classi.
-- `specie[id]`: taglia, velocità (numerica), tratti.
+- `caratteristiche` (6), `abilita` (18, da system.yaml), `generazione_caratteristiche`,
+  `aumento_background`, `armature` (tabella CA: ca_base/dex_max), `lingue` (Comune + N).
+- `classi[id]`: `dado_vita`, `tiri_salvezza`, `caratteristica_primaria`, `abilita`
+  `{scelte, opzioni}` (**parsato** dalla prosa; 12/12 classi), `competenze_armi/armature`
+  (+ `_cat` per la CA) `/strumenti`, `equipaggiamento` (A/B), `privilegi_l1`, `incantatore`,
+  `trucchetti_noti`, `incantesimi_preparati`, `slot_l1`, `incantesimi_pool` (per livello
+  `"0"`-`"9"`), **`progressione`** (1-20: competenza/privilegi/trucchetti/preparati/slot),
+  `sottoclasse`, `livello_sottoclasse`, `livelli_asi`.
+- `specie[id]`: taglia, velocità (numerica), tratti, `scurovisione`.
 - `background[id]`: `punteggi_caratteristica` (ASI), `talento_origine`,
-  `competenze_abilita` (id).
+  `competenze_abilita` (id), `strumenti`.
 
 ## 2. Wizard (`crea_pg.js`)
 
 Script Templater **autonomo**, separato da `create_entity.js`. Legge
-`personaggio.json` con `app.vault.adapter.read`. Passi: nome → classe → specie →
-background → caratteristiche (array standard / point-buy / manuale) → ASI del
-background (+2/+1 o +1/+1/+1) → scelte-abilità di classe. Applica:
+`personaggio.json`. Passi: nome → classe → specie → background → caratteristiche
+(array/point-buy/manuale) → ASI background → scelte-abilità di classe → equipaggiamento
+A/B → armatura+scudo → lingue → incantesimi (caster). Applica (PG **di 1º livello
+SRD-completo**):
 
-- **PF** = `dado_vita + mod(COS)` · **CA** = `10 + mod(DES)` · **competenza** = 2.
+- **PF** = `dado_vita + mod(COS)` · **CA** = dall'**armatura** indossata
+  (`ca_base + min(mod DES, dex_max) + scudo`) · **competenza** = 2.
+- **Specie**: `scurovisione` + `tratti_specie`. **Competenze**: `competenze_armi/armature/
+  strumenti` + `lingue` (Comune + N). **Equipaggiamento** SRD (A/B) → `inventario`.
+  **Privilegi** di classe L1. **Incantatore**: `trucchetti`/`incantesimi` (preparati) dal
+  pool + `slot_1`. **Talento** d'origine dal background.
 - **Frontmatter** con ID stabili: `classe`/`specie`/`background` = id; caratteristiche
-  *flat* (`forza: 15`, compat con `scheda_pg`); competenze come **flag 0/1**
-  `ts_<car>` (tiri salvezza) e `prof_<abilita>` (abilità) — così la scheda li usa
-  in matematica Meta Bind. `nome` quotato.
+  *flat*; competenze come **flag 0/1** `ts_<car>`/`prof_<abilita>` (matematica Meta Bind);
+  `nome` quotato.
+- **Preset archetipo** (categorie con `archetipi`): pre-compila i valori-assi + i tag
+  `profilo/*` (vedi [play_layer](play_layer.md)).
 
 ## 3. Presentazione (`scheda_pg_rules()` in `_macros.j2`)
 
@@ -55,6 +66,20 @@ background (+2/+1 o +1/+1/+1) → scelte-abilità di classe. Applica:
 I derivati sono **presentazionali** (VIEW/compute_into); le scelte strutturali
 (quali competenze) sono nel frontmatter (flag), interrogabili da Dataview.
 
+## 4. Sali di livello 2-20 (`sali_pg.js`)
+
+Motore di level-up **interattivo** (`tp.user.sali_pg`, richiamato dal bottone *Sali di
+livello* via `meta_actions`). Legge `personaggio.json` + il frontmatter del PG attivo,
+applica il livello successivo dalla `progressione` della classe:
+
+- **Deterministico**: PF += `floor(dado_vita/2)+1 + mod(COS)` (media fissa); `competenza`,
+  `slot_<n>` dalla riga di progressione; `livello`.
+- **Scelte guidate**: ASI ai `livelli_asi` (`+2` / `+1+1` / talento), `sottoclasse` al
+  `livello_sottoclasse` (l'SRD ne ha una per classe), nuovi `trucchetti`/`incantesimi`
+  dal pool (fino al max livello castabile) quando i conteggi crescono.
+- Scrive via `app.fileManager.processFrontMatter`. La vista `renderProgressione` (scheda PG)
+  mostra i privilegi acquisiti + l'anteprima del livello successivo.
+
 ## Estendere
 
 - Nuova classe/specie/background SRD → ricade automaticamente nel converter.
@@ -64,5 +89,7 @@ I derivati sono **presentazionali** (VIEW/compute_into); le scelte strutturali
 
 ## Test
 
-`test_personaggio_options` (parser 12/12 classi) e `test_crea_personaggio_e2e`
-(mock di Templater via node: esegue il wizard e valida YAML + regole applicate).
+Mock di Templater via node (eseguono i wizard reali e validano YAML + regole):
+`test_personaggio_options` (parser 12/12 classi), `test_crea_personaggio_e2e` +
+`test_crea_personaggio_caster_e2e` (creazione, anche caster), `test_preset_valori`
+(preset archetipo), `test_sali_pg_e2e` (mago L1→L2).

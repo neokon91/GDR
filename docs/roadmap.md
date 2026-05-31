@@ -3,31 +3,32 @@
 Brief di stato e priorità per riprendere il lavoro. Quattro lenti (PM, Architect,
 Worldbuilder, DM 5/5.5e) + backlog prioritizzato. Lo stato tecnico dettagliato è
 in [architecture](architecture.md) / [data_model](data_model.md) /
-[rules_layer](rules_layer.md) / [plugin_contracts](plugin_contracts.md).
+[rules_layer](rules_layer.md) / [play_layer](play_layer.md) / [plugin_contracts](plugin_contracts.md).
 
-> Aggiornata dopo i tre lavori di **Fase 1 (fondamenta)**: **grafo cosmologico** da
-> FantasyWorld (5 categorie nuove: sistema_magico/dominio/legge_fondamentale/
-> entita_primordiale/piano, cross-linkate) + assi divinita/lingua/specie; **PG di 1º
-> livello SRD-completo** (specie/competenze/lingue/CA-armatura/equip/incantesimi);
-> **note SRD** col contenuto recuperato (blocchi+tabelle). Prima: doc plugin (20 schede),
-> 8 categorie lore, jinja opzionale, radar assi. **36 categorie, 20 con assi.** Tutto
-> committato/pushato/buildato su `origin/main` (HEAD `cc150c5`).
+> Aggiornata dopo **Fase 1 (fondamenta)** + un grosso blocco di **Fase 2**. Fase 1:
+> grafo cosmologico (5 categorie nuove) + assi, PG di 1º livello SRD-completo, note SRD
+> col contenuto pieno. Fase 2: **tag-da-assi** (archetipi/profilo) + **preset in
+> creazione**, **dashboard-ponte Mondo↔Sistema** + **dashboard Fronti**, **clock &
+> conseguenze** (ponte gioco→mondo), **difficoltà incontri** (budget XP 2024),
+> **progressione PG 2-20** (sali di livello interattivo), LEGGIMI con onboarding non
+> tecnico. **36 categorie, 20 con assi.** Tutto committato/pushato/buildato su
+> `origin/main` (HEAD `5c7522c`). **Da confermare in-app (rischio #1).**
 
 ## Dove siamo (sintesi)
 
 Pipeline matura: sorgenti YAML/Jinja/JS → `render.py` (modulare) → `dist/GDR-vault`.
 Modello fuso core+system+entities (**36 categorie**, 20 con assi), **trinità per-entità**
-(YAML + Jinja `_entity_base` + `crea_<id>.js`), con gli **assi tematici scorporati** in
-`YAML/assi/<id>.yaml` (formato ricco 1-5). **Jinja opzionale**: le entità uniformi non
-dichiarano `jinja` → ereditano `_entity_base.j2`. **Grafo cosmologico** connesso
-(dominio↔leggi↔entità primordiali↔piani↔sistemi magici). Differenziatore: **superficie
-giocabile** su ogni nota lore (`uso_al_tavolo`/`gancio`/`pressione`/`prossima_mossa`).
-**Rules-engine PG di 1º livello SRD-completo** (specie/competenze/lingue/CA-armatura/
-equip/incantesimi → wizard `crea_pg` → scheda ricca). SRD 5.2.1 IT (1389 note col
-contenuto pieno — condizioni/tabelle — + 334 mostri statblock, layout IT 2024). Pannelli
-dinamici via **JS Engine** (`views.js`: Vista, backlink, **radar assi**, confronto). Indici
-come **Bases** (`.base`) + hub Dataview (fallback). Home a 2 aree, Homepage, **145 test**, check 0.
-**Stadio prodotto: scaffold ricco e solido; l'esperienza in-app è ancora da confermare.**
+(YAML + Jinja `_entity_base` + `crea_<id>.js`), assi scorporati in `YAML/assi/<id>.yaml`
+(formato ricco 1-5) con **archetipi** (combinazioni di valori-assi → tag, in creazione e
+in nota). **Grafo cosmologico** connesso. Differenziatore: **superficie giocabile** su ogni
+nota lore (`uso_al_tavolo`/`gancio`/`pressione`/`prossima_mossa`) + **clock & conseguenze**
+(un fronte pieno crea un evento → muove il mondo). **Rules-engine PG 1-20** (creazione
+SRD-completa + sali di livello interattivo: PF/competenza/slot + ASI/sottoclasse/
+incantesimi). **Difficoltà incontri** (budget XP 2024 vs GS delle creature). SRD 5.2.1 IT
+(1389 note + 334 statblock). Pannelli **JS Engine** (`views.js`: Vista, radar assi, profilo,
+clock, difficoltà incontro, progressione). Indici **Bases** `.base` + hub Dataview;
+dashboard auto **Ponte Mondo↔Sistema** e **Fronti**. Home a 2 aree, Homepage, **153 test**, check 0.
+**Stadio prodotto: scaffold ricco e profondo; l'esperienza in-app è in gran parte da confermare.**
 
 ## 🎯 Visione: due suite integrate ma separate
 
@@ -73,7 +74,8 @@ sopra i sistemi avanzati (vedi backlog).
 - **Pregi**: trinità per-entità + **assi scorporati** (file entità snelli, assi come
   glossario coeso). `render.py` modulare (common/build_srd/build_personaggio/validate),
   merge lossless, validazione forte (confine/dup/snake/shape/entity-schema/assi),
-  snapshot + e2e wizard (PG base + caster). Test (**145**, ridondanti sussunti dagli snapshot).
+  snapshot + e2e wizard (creazione PG/caster, preset, level-up, profilo, clock, incontri).
+  Test (**153**, ridondanti sussunti dagli snapshot).
   Nuova entità = 1 YAML (+1 assi); Jinja solo per layout custom (default `_entity_base.j2`).
 - **Debito/fragilità**:
   - **Logica embeddata nelle note**: il blocco `js-engine`/`statblock`/`dataview`
@@ -93,7 +95,7 @@ sopra i sistemi avanzati (vedi backlog).
     **callout-manager** (qui il gotcha *callout collassati*), **iconize**, **homepage** —
     e quelli installati-ma-non-integrati (initiative-tracker/calendarium/excalidraw/
     zoom-map/fantasy-content-generator/brat). Richiesta utente: una per plugin, con gotcha.
-  - **Test**: 145 verdi ma coprono la *generazione*, non il runtime Obsidian
+  - **Test**: 153 verdi ma coprono la *generazione* (+ i wizard JS via node), non il runtime Obsidian
     (Meta Bind/Dataview/Templater/JS Engine) — gap inerente, colmabile solo con QA manuale.
 
 ## 🌍 Worldbuilder
@@ -123,17 +125,18 @@ sopra i sistemi avanzati (vedi backlog).
 - **Pregi**: SRD 5.2.1 IT a portata (incantesimi/oggetti/mostri/condizioni), statblock
   (layout IT 2024), superficie giocabile, incontri con Fantasy Statblocks + **Initiative
   Tracker**, **Dice Roller** (macro `tiri()`: d20/vantaggio/svantaggio in PG e incontro;
-  `diceRolling` negli statblock), **rules-engine PG di 1º livello SRD-completo** (specie/
-  competenze/lingue/CA-armatura/equip/privilegi/incantesimi), note SRD col contenuto pieno.
-- **Gap al tavolo**:
-  - **Difficoltà incontri**: l'incontro cita avversari a prosa ma niente budget XP/
-    letalità 5e né pre-popolamento del blocco `encounter` dalle creature collegate.
-  - **PG oltre il 1º livello**: il 1º livello è completo; manca l'**avanzamento 2-20**
-    (slot per livello, privilegi ai livelli successivi, ASI, sottoclasse). → Fase 2.
-  - **Quick-ref condizioni/regole**: le 15 condizioni ora hanno gli effetti pieni nelle
-    note SRD; manca ancora un richiamo *rapido* in scheda/incontro durante il gioco.
-- **Azione**: **difficoltà incontri** (budget XP + auto-popola da creature collegate) è
-  il prossimo lift DM a maggior valore; la progressione PG 2-20 è un lift maggiore.
+  `diceRolling` negli statblock), **rules-engine PG 1-20** (creazione SRD-completa + sali
+  di livello interattivo), **difficoltà incontri** (budget XP 2024), **clock & conseguenze**
+  al tavolo, note SRD col contenuto pieno.
+- **Gap al tavolo (residui)**:
+  - **Quick-ref condizioni/regole**: le 15 condizioni hanno gli effetti pieni nelle note
+    SRD, ma manca un richiamo *rapido* in scheda/incontro durante il gioco.
+  - **Encounter block**: la difficoltà mostra la lista creature pronta, ma il blocco
+    `encounter` non si auto-riscrive (copia-incolla).
+  - **Level-up avanzato**: scelte di sottoclasse multiple/feature opzionali oltre il
+    set base; il motore copre il flusso standard.
+- **Azione**: tutto da **confermare in-app** (rischio #1); poi quick-ref condizioni e le
+  rifiniture sopra.
 
 ## ✅ Backlog prioritizzato
 
@@ -154,21 +157,25 @@ i sistemi avanzati. La QA in-app è igiene continua, non una fase a sé.
 3. ✅ **Note SRD** — recuperato il contenuto perso: effetti delle condizioni, tratti, privilegi
    (blocchi) e tabelle (progressione classe/lignaggi/risultati) — 0 heading vuoti su 1053 voci.
 
-### Fase 2 — Verso un vault ultra-pro (poi, in sequenza da valutare)
-4. **Clock & conseguenze** (fronti/progress-clock, esiti che muovono il mondo) — il
-   **ponte fra le due suite**: la giocata cambia il worldbuilding.
-5. **Strumenti DM al tavolo**: difficoltà incontri (budget XP + auto-popola `encounter`
-   dalle creature collegate; Initiative Tracker già cablato a livello base), quick-ref
-   condizioni.
-6. **Progressione PG** oltre il 1º livello: avanzamento, slot incantesimo, privilegi,
-   inventario.
-7. **Profondità worldbuilding**: timeline/calendario (Calendarium), mappe (Excalidraw/
-   TTRPG Tools-Maps), legami cosmologia↔culto↔divinità più ricchi.
+### Fase 2 — Verso un vault ultra-pro (gran parte FATTA)
+4. ✅ **Clock & conseguenze** — clock a segmenti (4/6/8) sulla superficie tavolo; bottone
+   *Scatena conseguenza* crea un evento collegato e azzera il clock (ponte gioco→mondo);
+   dashboard **Fronti** (clock pieni/in corso + conseguenze-storia). Vedi [play_layer](play_layer.md).
+5. ✅ **Difficoltà incontri** — budget XP 2024 vs GS delle creature collegate (GS/PE
+   interrogabili) + lista pronta per il blocco `encounter`. *Residui*: quick-ref condizioni
+   in scheda/incontro; auto-riscrittura del blocco encounter (ora solo lista suggerita).
+6. ✅ **Progressione PG 2-20** — *sali di livello interattivo*: PF/competenza/slot
+   automatici + scelte (ASI/talento, sottoclasse, nuovi incantesimi). Vedi [rules_layer](rules_layer.md).
+7. **Profondità worldbuilding** (residuo): timeline/calendario (Calendarium), mappe
+   (Excalidraw/TTRPG Tools-Maps), legami cosmologia↔culto↔divinità più ricchi.
+8. ✅ **Arricchimento tassonomico** — **tag-da-assi** (archetipi: combinazioni di valori →
+   tag, vista *Profilo* + bottone *Applica*) + **preset in creazione** (archetipo→pre-compila
+   gli assi). Vedi [play_layer](play_layer.md).
 
 ### 🔮 Da recuperare da FantasyWorld (analizzato 2026-05-31, NON ancora importato)
 Materiale ricco in `/Users/andrea/Desktop/projects/FantasyWorld/JSON/`, da valutare quando
 le fondamenta saranno rifinite. In ordine di valore:
-8. **Sistema astrologico / psico-archetipico** (`JSON/astrologia/`, sistema
+9. **Sistema astrologico / psico-archetipico** (`JSON/astrologia/`, sistema
    "tarocchi_psicoarchetipici") — un layer *destino/personalità* completo e coeso: **segni
    zodiacali** (12, con elemento/modalità/archetipo/MBTI/pianeti dominanti), **arcani
    maggiori** (tarocchi), **archetipi** di personalità, **pianeti** (10), **case** (12),
@@ -177,13 +184,13 @@ le fondamenta saranno rifinite. In ordine di valore:
    `tema_natale`/`archetipo` su **personaggio** (profilo rapido) + categorie astrologiche
    opzionali (segno/arcano/pianeta) per i mondi dove l'astrologia conta. **Differenziatore
    worldbuilding forte** (profondità del personaggio); pesante, quindi opt-in per mondo.
-9. **Glossari di categoria FW** (`JSON/generale/glossari/*_cat.json`) — tassonomie curate
-   (`categorie`+`sottotipi`) per fazione/evento/epoca/civiltà/artefatto/luogo/lingua/culto.
-   *Recupero*: arricchire i **subtypes** delle categorie esistenti quando serve più
-   granularità (edit YAML puro).
-10. **Alberi evolutivi** (`JSON/TTRPG/alberi_evolutivi.json`) — abilità per parte-del-corpo
-    → grado → potere (skill-tree). *Recupero*: sistema di **progressione abilità** (poteri di
-    creatura o avanzamento PG homebrew); si lega alla Fase 2 #6 (progressione PG).
+10. **Glossari di categoria FW** (`JSON/generale/glossari/*_cat.json`) — tassonomie curate
+    (`categorie`+`sottotipi`) per fazione/evento/epoca/civiltà/artefatto/luogo/lingua/culto.
+    *Recupero*: arricchire i **subtypes** delle categorie esistenti quando serve più
+    granularità (edit YAML puro).
+11. **Alberi evolutivi** (`JSON/TTRPG/alberi_evolutivi.json`) — abilità per parte-del-corpo
+    → grado → potere (skill-tree). *Recupero*: poteri di creatura o un binario homebrew che
+    estende la progressione PG (#6, già fatta per le classi SRD).
 - *Solo contenuto del suo mondo (NON schema, non riusare)*: `personaggio.json`/`luogo.json`/
   `organizzazioni.json`/`politica.json`/`world_building/divinita|leggi` = istanze del mondo FW.
 
@@ -195,16 +202,22 @@ le fondamenta saranno rifinite. In ordine di valore:
 - Generazione nomi/spunti (Fantasy Content Generator) e integrazioni minori quando comodo.
 
 ### ✅ Fatto (sessione 2026-05-31)
-- **Doc plugin** in `Dev/Reference/` — 20 schede + gotcha *callout collassati*.
-- **Fase 1 fondamenta**: grafo cosmologico (5 categorie), PG-SRD di 1º livello completo,
-  note SRD col contenuto recuperato. Tutto committato/pushato/buildato (`cc150c5`).
-- **Roadmap** riorganizzata sulle due suite e aggiornata a Fase 1 coperta.
+- **Fase 1 fondamenta**: doc plugin (20 schede), grafo cosmologico (5 categorie), PG-SRD
+  di 1º livello, note SRD col contenuto recuperato.
+- **Fase 2 (gran parte)**: tag-da-assi (archetipi/profilo) + preset in creazione; dashboard
+  **Ponte Mondo↔Sistema** + **Fronti**; **clock & conseguenze**; **difficoltà incontri**
+  (2024); **progressione PG 2-20**; LEGGIMI onboarding non tecnico. HEAD `5c7522c`.
+- **Docs** allineati: nuovo [play_layer](play_layer.md); aggiornati rules_layer/data_model/
+  architecture/plugin_contracts.
 
 ## Come ripartire
 
-**145 test verdi**, check 0; HEAD `cc150c5` (tutto pushato+buildato). Leggi questo file
-+ la memoria (`project-northstar.md`, `vault-due-suite.md`). **Fase 1 fondamenta coperta**
-→ prossimi candidati: (a) **QA in-app** di tutto il lavoro (rischio #1: PG nuovo mago/
-guerriero, grafo cosmologia, note SRD/condizioni, radar su divinita/oggetto); (b) seed FW
-minori come campi/subtypes; poi **Fase 2** (clock & conseguenze → ponte fra le due suite,
-difficoltà incontri, progressione PG 2-20, timeline/mappe).
+**153 test verdi**, check 0; HEAD `5c7522c` (tutto pushato+buildato). Leggi questo file + i
+docs (`architecture`/`data_model`/`rules_layer`/`play_layer`/`plugin_contracts`) + la memoria
+(`project-northstar`, `vault-due-suite`). **Fasi 1-2 in gran parte coperte** → prossimi:
+- **QA in-app** (rischio #1, molto alto): crea un PG e fai *Sali di livello*; prova clock →
+  *Scatena conseguenza* (+ Indici/Fronti); collega creature a un incontro e leggi la
+  difficoltà; archetipo/profilo su un culto; Ponte; note SRD (condizioni/classi).
+- **Residui Fase 2**: quick-ref condizioni al tavolo; auto-riscrittura blocco encounter;
+  timeline/mappe (Calendarium/Excalidraw); level-up scelte avanzate.
+- **Recuperi FantasyWorld** (#9-11): sistema astrologico/personalità, glossari subtypes, alberi evolutivi.

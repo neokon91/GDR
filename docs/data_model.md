@@ -14,7 +14,8 @@ core = apply_entities( deep_merge(core.yaml, system.yaml), entities/*.yaml )
   file non condividono chiavi — lo garantisce il check dup-ID).
 - `apply_entities` distribuisce ogni file-entità nelle sezioni globali di `core`:
   `folders[id]`, `categories[id]={folder,subtypes}`, `fields`, `scheda[id]`,
-  `assi_tematici[id]`, `relazioni[id]`, `creation[id]`.
+  `assi_tematici[id]`, `relazioni[id]`, `creation[id]`, `archetipi[id]`. Gli **assi**
+  e gli **archetipi** sono scorporati in `YAML/assi/<id>.yaml` (rifusi qui).
 
 ## `core.yaml` — globali worldbuilding
 
@@ -32,6 +33,7 @@ core = apply_entities( deep_merge(core.yaml, system.yaml), entities/*.yaml )
 | `statblock` | `{layout}` per il blocco ` ```statblock ` (Fantasy Statblocks). |
 | `caratteristiche` | Le 6 abilità di base `{id, sigla}`. |
 | `abilita` | Le 18 abilità 5e `{id: {label, caratteristica}}` (scheda PG + converter). |
+| `xp` | Difficoltà incontri: `cr_xp` (GS→PE) + `budget_2024` (Bassa/Moderata/Alta per personaggio). Usato da `views.renderEncounter`. |
 
 ## `entities/<id>.yaml` — schema per-entità
 
@@ -45,8 +47,6 @@ subtypes: [gilda, ordine, …]
 fields:                     # (opzionale) campi esclusivi dell'entità
   motto: { label: Motto, widget: text }
 scheda: [portata, motto, …] # campi mostrati dalla macro scheda()
-assi:                       # assi tematici (macro carattere())
-  - { id, sinistra, destra }
 relazioni:                  # link tipizzati (macro relazioni())
   - { field, label, category, multi? }
 creation:                   # wizard (letto da create_entity.js / generato)
@@ -57,11 +57,16 @@ creation:                   # wizard (letto da create_entity.js / generato)
 `from`: `subtypes` (suggester sui subtypes) · `notes`+`category`+`link` (suggester
 sulle note di quella categoria → link `[[..]]`) · `list`+`options` · default = testo libero.
 
+**Assi & archetipi** vivono in `YAML/assi/<id>.yaml` (scorporati, rifusi da `load_entities`):
+`assi:` formato ricco `{id, nome, descrizione, valori:{1..5:{etichetta, descrizione}}}`
+(macro `carattere()` + radar); `archetipi:` `{id, nome, quando:{asse: comparatore}, tag}`
+(tag-da-assi + preset in creazione, vedi [play_layer](play_layer.md)).
+
 ## Overlay e altri file
 
 | File | Ruolo |
 |---|---|
-| `pg_rules.yaml` | Overlay curato del rules-engine PG: `generazione_caratteristiche` (array/point-buy), `aumento_background`. (Le abilità stanno in `system.yaml`.) |
+| `pg_rules.yaml` | Overlay curato del rules-engine PG: `generazione_caratteristiche` (array/point-buy), `aumento_background`, `armature` (CA), `lingue`. (Le abilità stanno in `system.yaml`.) |
 | `templates.yaml` | Solo `actions` (bottoni su nota esistente); i template di creazione sono nei file-entità. |
 | `pages.yaml` | Pagine-indice (hub per dominio) → `index.md.j2`. |
 | `plugins.yaml` | `plugins`, `metabind_inputs`, `buttons`, `folder_icons`, `callouts`. |
@@ -73,5 +78,6 @@ sulle note di quella categoria → link `[[..]]`) · `list`+`options` · default
 - **dup-ID**: `folders`/`fields`/`categories`/`creation`/`relazioni` disgiunti fra i file.
 - **snake_case**: tutti gli id (campi, categorie, folder, abilità, assi, relazioni).
 - **shape**: ogni campo ha label+widget; categoria folder risolvibile+subtypes;
-  scheda→fields; relazioni field/label/category; abilità con caratteristica valida.
+  scheda→fields; relazioni field/label/category; abilità con caratteristica valida;
+  **archetipi** con id/nome/tag e `quando` che riferisce assi reali della categoria.
 - **entità**: nessuna collisione id-categoria/campo con core/system; template con id/title/jinja/target.

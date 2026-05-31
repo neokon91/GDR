@@ -41,7 +41,8 @@ scrive sul vault Obsidian reale.
 
 Approfondimenti in [`docs/`](docs/): [architecture](docs/architecture.md) ·
 [data_model](docs/data_model.md) · [plugin_contracts](docs/plugin_contracts.md) ·
-[rules_layer](docs/rules_layer.md) · **[roadmap & analisi](docs/roadmap.md)**.
+[rules_layer](docs/rules_layer.md) · [play_layer](docs/play_layer.md) ·
+**[roadmap & analisi](docs/roadmap.md)**.
 
 ## Struttura
 
@@ -53,7 +54,7 @@ Dev/Source/JS/        create_entity.js · crea_pg.js · meta_actions.js · views
 Dev/Source/SRD/       JSON SRD 5.2.1 IT · statblocks/ layout Fantasy Statblocks
 Dev/Tools/            common.py · build_srd.py · build_personaggio.py · validate.py · render.py
 Dev/Reference/        cheat-sheet sintassi dei plugin installati
-docs/                 architecture · data_model · plugin_contracts · rules_layer
+docs/                 architecture · data_model · rules_layer · play_layer · plugin_contracts
 ```
 
 ## Il modello (YAML)
