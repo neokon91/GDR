@@ -16,7 +16,6 @@ SOURCE = ROOT / "Dev" / "Source"
 YAML_DIR = SOURCE / "YAML"
 JINJA_DIR = SOURCE / "Jinja"
 JS_DIR = SOURCE / "JS"
-SAMPLES_DIR = SOURCE / "Samples"
 SRD_DIR = SOURCE / "SRD"  # SRD 5.2.1 vendorizzata (JSON IT, CC-BY-4.0)
 STATBLOCKS_DIR = SOURCE / "statblocks"  # layout Fantasy Statblocks (uno per file)
 

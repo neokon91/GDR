@@ -6,7 +6,7 @@ rilancia `npm run build` nel repo per vedere i cambiamenti dal vivo. Le tue note
 
 ## 1. Plugin community richiesti
 Apri *Impostazioni → Plugin della comunità* e installa/abilita:
-- **Templater** (`templater-obsidian`)- **Dataview** (`dataview`)- **Meta Bind** (`obsidian-meta-bind-plugin`)- **JS Engine** (`js-engine`)- **Tab Panels** (`tab-panels`)- **Callout Manager** (`callout-manager`)- **Fantasy Statblocks** (`obsidian-5e-statblocks`)- **Metadata Menu** (`metadata-menu`)- **Iconize** (`obsidian-icon-folder`)- **Calendarium** (`calendarium`)- **Dice Roller** (`obsidian-dice-roller`)- **Tasks** (`obsidian-tasks-plugin`)- **Excalidraw** (`obsidian-excalidraw-plugin`)- **Zoom Map** (`zoom-map`)- **Fantasy Content Generator** (`fantasy-content-generator`)- **BRAT** (`obsidian42-brat`)
+- **Templater** (`templater-obsidian`)- **Dataview** (`dataview`)- **Meta Bind** (`obsidian-meta-bind-plugin`)- **JS Engine** (`js-engine`)- **Tab Panels** (`tab-panels`)- **Callout Manager** (`callout-manager`)- **Fantasy Statblocks** (`obsidian-5e-statblocks`)- **Metadata Menu** (`metadata-menu`)- **Iconize** (`obsidian-icon-folder`)- **Calendarium** (`calendarium`)- **Dice Roller** (`obsidian-dice-roller`)- **Tasks** (`obsidian-tasks-plugin`)- **Excalidraw** (`obsidian-excalidraw-plugin`)- **Zoom Map** (`zoom-map`)- **Fantasy Content Generator** (`fantasy-content-generator`)- **BRAT** (`obsidian42-brat`)- **Homepage** (`homepage`)- **Initiative Tracker** (`initiative-tracker`)
 > [!warning] Senza questi plugin
 > Senza **Tab Panels** le note a schede appaiono come testo grezzo; senza
 > **Fantasy Statblocks** non vedi gli statblock né il blocco `encounter`; senza

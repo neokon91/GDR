@@ -36,6 +36,10 @@ plugins:
     name: Fantasy Content Generator
   - id: obsidian42-brat
     name: BRAT
+  - id: homepage
+    name: Homepage
+  - id: initiative-tracker
+    name: Initiative Tracker
 metabind_inputs:
   stato: INPUT[inlineSelect(option(bozza), option(pronto), option(in gioco), option(giocata), option(archiviata))]
   mondo: INPUT[suggester(optionQuery("Mondi"), useLinks(partial), allowOther)]

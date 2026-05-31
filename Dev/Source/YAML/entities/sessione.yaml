@@ -11,6 +11,7 @@ templates:
   default_type: sessione
   target: z.modelli/Sessione.md
   jinja: session.md.j2
+  area: gioco
   primary: true
 subtypes:
 - sessione

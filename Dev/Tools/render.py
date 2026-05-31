@@ -25,7 +25,6 @@ from common import (  # noqa: F401 (re-export per i test/usi storici)
     JINJA_DIR,
     JS_DIR,
     ROOT,
-    SAMPLES_DIR,
     SOURCE,
     SRD_DIR,
     STATBLOCKS_DIR,
@@ -126,10 +125,30 @@ def union_list_key(path: Path, key: str, values: list[str]) -> None:
 # Snippet CSS generato: nasconde le cartelle di sistema (z.*) dall'esploratore.
 # Restano indicizzate (data-path presente), quindi Templater/Metadata Menu/Dataview
 # continuano a vederle: nascondiamo solo la riga nell'albero dei file.
-HIDE_FOLDERS_SNIPPET = """/* GDR — generato. Nasconde le cartelle di sistema (z.*) dall'esploratore. */
+HIDE_FOLDERS_SNIPPET = """/* GDR — generato. Snippet del vault (nascondi z.* + stile pannelli Vista). */
+
+/* Nasconde le cartelle di sistema (z.*) dall'esploratore. */
 .nav-folder.tree-item:has(> .tree-item-self[data-path^="z."]) {
   display: none;
 }
+
+/* Card del pannello Vista (views.js: renderEntityPanel). Variabili del tema. */
+.gdr-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 8px;
+  margin: 8px 0;
+}
+.gdr-card {
+  border: 1px solid var(--background-modifier-border);
+  border-left: 3px solid var(--background-modifier-border);
+  border-radius: 8px;
+  padding: 8px 10px;
+  background: var(--background-secondary);
+  font-size: var(--font-ui-small);
+}
+.gdr-card.ready { border-left-color: var(--color-green); }
+.gdr-card.missing { border-left-color: var(--color-red); opacity: 0.85; }
 """
 
 
@@ -159,6 +178,30 @@ def write_core_settings(obsidian: Path) -> None:
         updated = {**core_plugins, **{pid: True for pid in CORE_PLUGINS if not core_plugins.get(pid)}}
         if updated != core_plugins:
             write_json(obsidian / "core-plugins.json", updated)
+
+
+# Config del plugin Homepage: apre Home all'avvio. Scritta SOLO al primo setup
+# (se manca data.json) per non sovrascrivere le scelte dell'utente.
+HOMEPAGE_CONFIG = {
+    "version": 4,
+    "homepages": {"Main Homepage": {
+        "value": "Home", "kind": "File", "openOnStartup": True,
+        "openMode": "Replace all open notes", "manualOpenMode": "Replace all open notes",
+        "view": "Default view", "revertView": True, "openWhenEmpty": False,
+        "refreshDataview": True, "autoCreate": False, "autoScroll": False,
+        "pin": False, "commands": [], "alwaysApply": False, "hideReleaseNotes": False,
+    }},
+    "separateMobile": False,
+}
+
+
+def write_homepage(obsidian: Path) -> None:
+    """Configura Homepage per aprire Home all'avvio — solo se non già configurato
+    (rispetta le scelte dell'utente; il plugin dev'essere installato)."""
+    plugin_dir = obsidian / "plugins" / "homepage"
+    data_json = plugin_dir / "data.json"
+    if plugin_dir.is_dir() and not data_json.is_file():
+        write_json(data_json, HOMEPAGE_CONFIG)
 
 
 def crea_wrapper_js(template: dict[str, Any]) -> str:
@@ -443,6 +486,8 @@ def build() -> dict[str, str]:
     write_workspace_chrome(obsidian)
     # Default core consigliati (proprietà nascoste, bookmarks) — config riproducibile.
     write_core_settings(obsidian)
+    # Homepage: apre Home all'avvio (solo se non già configurato).
+    write_homepage(obsidian)
 
     # Scaffolding delle cartelle contenuti (idempotente): mostra la struttura
     # senza mai sovrascrivere note esistenti.
@@ -452,27 +497,10 @@ def build() -> dict[str, str]:
     return rendered
 
 
-def seed_samples() -> int:
-    """Copia i contenuti di esempio nel vault, senza sovrascrivere note gia'
-    presenti (non distrugge il lavoro dell'utente)."""
-    if not SAMPLES_DIR.exists():
-        return 0
-    copied = 0
-    for sample in sorted(SAMPLES_DIR.rglob("*.md")):
-        dest = VAULT / sample.relative_to(SAMPLES_DIR)
-        if dest.exists():
-            continue
-        dest.parent.mkdir(parents=True, exist_ok=True)
-        shutil.copy2(sample, dest)
-        copied += 1
-    return copied
-
-
 def main() -> int:
     parser = argparse.ArgumentParser(description="Genera il vault Obsidian GDR in dist/GDR-vault da sorgenti YAML/Jinja/JS.")
     parser.add_argument("--clean", action="store_true", help="Rimuove solo gli artefatti generati (non i contenuti/plugin).")
     parser.add_argument("--check", action="store_true", help="Valida YAML/Jinja senza scrivere output.")
-    parser.add_argument("--seed", action="store_true", help="Copia i contenuti di esempio (senza sovrascrivere note esistenti).")
     args = parser.parse_args()
 
     if args.clean:
@@ -482,15 +510,11 @@ def main() -> int:
     if args.check:
         return check()
 
-    first_run = not VAULT.exists()
     clean()
     rendered = build()
-    seeded = seed_samples() if (args.seed or first_run) else 0
 
     rel = VAULT.relative_to(ROOT)
     print(f"Build OK: {len(rendered)} note generate, {len(list(JS_DIR.glob('*.js')))} JS runtime.")
-    if seeded:
-        print(f"Esempi copiati: {seeded}.")
     print(f"Vault: {rel}/  — apri questa cartella in Obsidian.")
     return 0
 

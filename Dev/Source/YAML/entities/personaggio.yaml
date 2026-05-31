@@ -11,6 +11,7 @@ templates:
   default_type: pg
   target: z.modelli/PG.md
   jinja: pg.md.j2
+  area: gioco
   primary: true
 - id: png
   title: PNG

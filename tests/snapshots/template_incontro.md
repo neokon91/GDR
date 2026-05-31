@@ -26,8 +26,13 @@
 
 --- Combattimento
 
+Avvia il combattimento dal blocco (Initiative Tracker). Aggiungi le creature per
+nome dal bestiario (SRD / Fantasy Statblocks) con `- <numero>: <Nome>`; `players: true`
+include il gruppo.
+
 ```encounter
 name: <% tp.file.title %>
+players: true
 creatures:
   - 1: Nome Creatura
 ```

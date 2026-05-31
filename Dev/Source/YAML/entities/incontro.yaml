@@ -11,6 +11,7 @@ templates:
   default_type: incontro
   target: z.modelli/Incontro.md
   jinja: encounter.md.j2
+  area: gioco
   primary: true
 subtypes:
 - incontro

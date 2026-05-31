@@ -60,7 +60,7 @@ tutti importano `common`).
 | `build_srd.py` | Genera l'albero `SRD/` (sola lettura) dai JSON IT vendorizzati; i mostri diventano statblock Fantasy Statblocks. |
 | `build_personaggio.py` | Converter del rules-engine PG: SRD + `pg_rules.yaml` → `personaggio.json`. |
 | `validate.py` | `check()` + `validate_split`/`validate_entities`: confine core/system, dup-ID, snake_case, shape, template/Jinja. |
-| `render.py` | `build()` (render template + config `.obsidian` non distruttiva), `clean()`, `seed_samples()`, CLI. Re-esporta i nomi pubblici dei moduli. |
+| `render.py` | `build()` (render template + config `.obsidian` non distruttiva), `clean()`, CLI. Re-esporta i nomi pubblici dei moduli. |
 
 ## Pipeline di build (`render.py build()`)
 

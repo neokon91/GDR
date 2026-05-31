@@ -1,5 +1,7 @@
 # 🏠 GDR — Home
 
+````tabs
+--- 🌍 Worldbuilding
 {% if pages %}
 > [!abstract] Indici
 {% for p in pages -%}
@@ -8,12 +10,52 @@
 {% endif %}
 
 > [!example] Crea
-{% for t in templates if t.get('primary') -%}
+{% for t in templates if t.get('area') != 'gioco' and t.get('primary') -%}
 > `BUTTON[crea-{{ t.id }}]`
 {% endfor %}
 
 > [!example]- Altri tipi
-{% for t in templates if not t.get('primary') -%}
+{% for t in templates if t.get('area') != 'gioco' and not t.get('primary') -%}
+> `BUTTON[crea-{{ t.id }}]`
+{% endfor %}
+
+## 🤝 Trame (alleati / rivali)
+```dataview
+table without id file.link as Chi, alleati as Alleati, rivali as Rivali
+from ""
+where alleati or rivali
+sort file.name asc
+```
+
+## Cronologia eventi
+```dataview
+table without id file.link as Evento, quando as Quando, mondo as Mondo
+from ""
+where categoria = "evento"
+sort quando asc
+```
+
+## Note per categoria
+```dataview
+table without id length(rows) as N
+from ""
+where categoria
+group by categoria as Categoria
+sort Categoria asc
+```
+
+## Da rifinire (bozze)
+```dataview
+table without id file.link as Nota, categoria as Categoria, mondo as Mondo
+from ""
+where stato = "bozza" and categoria
+sort file.mtime desc
+limit 20
+```
+
+--- 🎲 Al tavolo
+> [!example] Crea
+{% for t in templates if t.get('area') == 'gioco' -%}
 > `BUTTON[crea-{{ t.id }}]`
 {% endfor %}
 
@@ -39,14 +81,6 @@ sort pressione desc
 limit 12
 ```
 
-## 🤝 Trame (alleati / rivali)
-```dataview
-table without id file.link as Chi, alleati as Alleati, rivali as Rivali
-from ""
-where alleati or rivali
-sort file.name asc
-```
-
 ## ✅ Da fare
 Scrivi un task in qualunque nota con `- [ ] ...`: comparirà qui.
 ```tasks
@@ -54,29 +88,4 @@ not done
 sort by priority
 limit 15
 ```
-
-## Da rifinire (bozze)
-```dataview
-table without id file.link as Nota, categoria as Categoria, mondo as Mondo
-from ""
-where stato = "bozza" and categoria
-sort file.mtime desc
-limit 20
-```
-
-## Cronologia eventi
-```dataview
-table without id file.link as Evento, quando as Quando, mondo as Mondo
-from ""
-where categoria = "evento"
-sort quando asc
-```
-
-## Note per categoria
-```dataview
-table without id length(rows) as N
-from ""
-where categoria
-group by categoria as Categoria
-sort Categoria asc
-```
+````

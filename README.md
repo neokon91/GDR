@@ -33,7 +33,6 @@ Dev/Source/{YAML,Jinja,JS}  ──►  Dev/Tools/render.py  ──►  dist/GDR-
 | `npm run check` | Valida YAML/Jinja e `node --check` sui JS. **Non scrive.** |
 | `npm run build` | Genera il vault in `dist/GDR-vault/` (non distruttivo). |
 | `npm run clean` | Rimuove solo gli artefatti generati (mai `.obsidian`/contenuti). |
-| `npm run seed`  | Copia i contenuti di esempio (copy-if-absent). |
 
 Verifica sempre con `npm run check` o un render standalone a stdout; il `build`
 scrive sul vault Obsidian reale.
@@ -42,7 +41,7 @@ scrive sul vault Obsidian reale.
 
 Approfondimenti in [`docs/`](docs/): [architecture](docs/architecture.md) ·
 [data_model](docs/data_model.md) · [plugin_contracts](docs/plugin_contracts.md) ·
-[rules_layer](docs/rules_layer.md).
+[rules_layer](docs/rules_layer.md) · **[roadmap & analisi](docs/roadmap.md)**.
 
 ## Struttura
 

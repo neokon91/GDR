@@ -12,6 +12,8 @@ plugin fittizi). Le impostazioni e i contenuti dell'utente sono preservati.
 | **Meta Bind** | `enableJs`, `inputFieldTemplates` (da `metabind_inputs`), `buttonTemplates` (un "Crea <X>" per template + le azioni). Le note usano `INPUT[...]`/`VIEW[...]`/`BUTTON[...]`. | `plugins.yaml`, template-entità |
 | **Metadata Menu** | Un **fileClass** per categoria in `z.classi/` (campi tipizzati: Select per stato/tipo, File/MultiFile per i link, Number/Input per il resto) + `classFilesPath`. | `fileclass_fields()` dal modello |
 | **Fantasy Statblocks** | Union per id dei layout in `obsidian-5e-statblocks/data.json` (NON cambia il default). Layout IT 5e/5.5e. I mostri SRD sono note con `statblock: inline`. | `Dev/Source/statblocks/*.json` |
+| **Initiative Tracker** | Solo dichiarato (community-plugins); usato via blocco ` ```encounter ` (combattimento + iniziativa, legge il bestiario di Fantasy Statblocks). | `encounter.md.j2` |
+| **Dice Roller** | Solo dichiarato; usato via ` `dice: …` ` inline (tiri al tavolo). | `encounter.md.j2` |
 | **Iconize** | Mappa percorso-cartella → emoji nel `data.json` (emojiStyle native). | `plugins.yaml:folder_icons` |
 | **Callout Manager** | Aggiunge i callout GDR custom (`tavolo`/`gancio`/`segreto`: id/color/icon) in `callouts.custom`; degradano a standard se assenti. | `plugins.yaml:callouts` |
 | **Bookmarks** (core) | Aggiunge (senza rimuovere) Home + le pagine-indice + l'indice SRD. | `pages.yaml` |

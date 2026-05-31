@@ -1,5 +1,7 @@
 # 🏠 GDR — Home
 
+````tabs
+--- 🌍 Worldbuilding
 > [!abstract] Indici
 > [[Atlante|🗺️ Atlante]]
 > [[Bestiario|🐾 Bestiario]]
@@ -12,14 +14,11 @@
 > `BUTTON[crea-luogo]`
 > `BUTTON[crea-fazione]`
 > `BUTTON[crea-evento]`
-> `BUTTON[crea-pg]`
 > `BUTTON[crea-png]`
 > `BUTTON[crea-creatura]`
-> `BUTTON[crea-incontro]`
 > `BUTTON[crea-oggetto]`
 > `BUTTON[crea-oggetto_magico]`
 > `BUTTON[crea-incantesimo]`
-> `BUTTON[crea-sessione]`
 
 > [!example]- Altri tipi
 > `BUTTON[crea-cosmologia]`
@@ -35,6 +34,46 @@
 > `BUTTON[crea-bastione]`
 > `BUTTON[crea-regola]`
 > `BUTTON[crea-nota_rapida]`
+
+## 🤝 Trame (alleati / rivali)
+```dataview
+table without id file.link as Chi, alleati as Alleati, rivali as Rivali
+from ""
+where alleati or rivali
+sort file.name asc
+```
+
+## Cronologia eventi
+```dataview
+table without id file.link as Evento, quando as Quando, mondo as Mondo
+from ""
+where categoria = "evento"
+sort quando asc
+```
+
+## Note per categoria
+```dataview
+table without id length(rows) as N
+from ""
+where categoria
+group by categoria as Categoria
+sort Categoria asc
+```
+
+## Da rifinire (bozze)
+```dataview
+table without id file.link as Nota, categoria as Categoria, mondo as Mondo
+from ""
+where stato = "bozza" and categoria
+sort file.mtime desc
+limit 20
+```
+
+--- 🎲 Al tavolo
+> [!example] Crea
+> `BUTTON[crea-pg]`
+> `BUTTON[crea-incontro]`
+> `BUTTON[crea-sessione]`
 
 ## Sessione attiva
 ```dataview
@@ -58,14 +97,6 @@ sort pressione desc
 limit 12
 ```
 
-## 🤝 Trame (alleati / rivali)
-```dataview
-table without id file.link as Chi, alleati as Alleati, rivali as Rivali
-from ""
-where alleati or rivali
-sort file.name asc
-```
-
 ## ✅ Da fare
 Scrivi un task in qualunque nota con `- [ ] ...`: comparirà qui.
 ```tasks
@@ -73,29 +104,4 @@ not done
 sort by priority
 limit 15
 ```
-
-## Da rifinire (bozze)
-```dataview
-table without id file.link as Nota, categoria as Categoria, mondo as Mondo
-from ""
-where stato = "bozza" and categoria
-sort file.mtime desc
-limit 20
-```
-
-## Cronologia eventi
-```dataview
-table without id file.link as Evento, quando as Quando, mondo as Mondo
-from ""
-where categoria = "evento"
-sort quando asc
-```
-
-## Note per categoria
-```dataview
-table without id length(rows) as N
-from ""
-where categoria
-group by categoria as Categoria
-sort Categoria asc
-```
+````
