@@ -16,6 +16,7 @@ subtypes:
 - evento storico
 - evento di campagna
 - conflitto
+- conseguenza
 scheda:
 - portata
 relazioni:

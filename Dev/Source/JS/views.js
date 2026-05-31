@@ -282,8 +282,40 @@ async function renderProfilo(app, page) {
   return `> [!abstract] Profilo (derivato dagli assi)\n> ${nomi}\n>\n> ${tags}`;
 }
 
+// --- Clock & conseguenze: orologio a segmenti (progress-clock) ---------------
+// SVG di un orologio a N segmenti, i primi `filled` pieni. Nessuna dipendenza.
+function clockSvg(n, filled) {
+  n = Math.max(1, Math.floor(Number(n) || 0));
+  filled = Math.max(0, Math.min(n, Math.floor(Number(filled) || 0)));
+  const R = 34, cx = 40, cy = 40, sectors = [];
+  for (let i = 0; i < n; i++) {
+    const [x0, y0] = polarPoint(cx, cy, R, (360 / n) * i);
+    const [x1, y1] = polarPoint(cx, cy, R, (360 / n) * (i + 1));
+    const large = 360 / n > 180 ? 1 : 0;
+    const col = i < filled ? "var(--color-red, #c94040)" : "var(--background-modifier-border, #d0d0d0)";
+    sectors.push(`<path d="M${cx},${cy} L${x0.toFixed(1)},${y0.toFixed(1)} A${R},${R} 0 ${large} 1 ${x1.toFixed(1)},${y1.toFixed(1)} Z" fill="${col}" stroke="var(--background-primary,#fff)" stroke-width="1.5"/>`);
+  }
+  return `<svg viewBox="0 0 80 80" class="gdr-clock-svg" width="88" height="88" xmlns="http://www.w3.org/2000/svg">${sectors.join("")}</svg>`;
+}
+
+// Disegna l'orologio del fronte corrente (clock_dim segmenti, clock pieni).
+async function renderClock(container, app, page) {
+  if (!page) { container.createEl("p", { text: "Apri la nota per il clock.", cls: "gdr-radar-empty" }); return; }
+  const n = Math.floor(Number(page.clock_dim) || 0);
+  if (!n) {
+    container.createEl("p", { text: "Imposta i segmenti del clock per tracciare questo fronte.", cls: "gdr-radar-empty" });
+    return;
+  }
+  const filled = Math.max(0, Math.min(n, Math.floor(Number(page.clock) || 0)));
+  const wrap = container.createEl("div", { cls: "gdr-clock" });
+  wrap.innerHTML = clockSvg(n, filled);
+  container.createEl("p", { cls: "gdr-clock-label",
+    text: filled >= n ? `⚠️ Clock PIENO (${filled}/${n}) — scatena la conseguenza` : `Clock ${filled}/${n}` });
+}
+
 module.exports = {
   renderEntityPanel, renderSessionPanel, renderBacklinks,
   renderAxesRadar, renderAxesCompare, radarSvg, clampAxis,
   renderProfilo, archetipiMatch, profiloTags, matchesCond,
+  renderClock, clockSvg,
 };

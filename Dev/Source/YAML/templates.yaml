@@ -19,3 +19,6 @@ actions:
   - id: applica_profilo
     title: Applica profilo
     target: z.modelli/azioni/Applica profilo.md
+  - id: scatena_conseguenza
+    title: Scatena conseguenza
+    target: z.modelli/azioni/Scatena conseguenza.md

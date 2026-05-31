@@ -66,6 +66,8 @@ metabind_inputs:
   veridicita: INPUT[inlineSelect(option(vero), option(parziale), option(falso), option(ignoto))]
   vitalita: INPUT[inlineSelect(option(viva), option(liturgica), option(franca), option(morta), option(segreta))]
   salute: INPUT[inlineSelect(option(stabile), option(fragile), option(in collasso), option(rigenerante))]
+  clock_dim: INPUT[inlineSelect(option(4), option(6), option(8))]
+  legame: INPUT[suggester(optionQuery("Mondi"), useLinks(partial), allowOther)]
   testo: INPUT[text]
   testo_area: INPUT[textArea]
 # Icone cartella (Iconize): chiave = chiave di core.folders, valore = emoji.
@@ -129,3 +131,6 @@ buttons:
   - id: applica-profilo
     label: Applica profilo
     action: applica_profilo
+  - id: scatena-conseguenza
+    label: Scatena conseguenza
+    action: scatena_conseguenza

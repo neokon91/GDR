@@ -96,6 +96,54 @@ async function applica_profilo(tp, file) {
   return "";
 }
 
+async function ensureFolder(path) {
+  let cur = "";
+  for (const part of String(path || "").split("/").filter(Boolean)) {
+    cur = cur ? `${cur}/${part}` : part;
+    if (!app.vault.getAbstractFileByPath(cur)) { try { await app.vault.createFolder(cur); } catch (e) { /* esiste */ } }
+  }
+}
+
+// Scatena la conseguenza di un fronte: crea un EVENTO collegato che documenta
+// l'esito (la giocata diventa storia del mondo) e AZZERA il clock del fronte.
+// È il ponte gioco -> worldbuilding.
+async function scatena_conseguenza(tp, file) {
+  const core = await loadCore();
+  const fm = app.metadataCache.getFileCache(file)?.frontmatter ?? {};
+  const conseguenza = String(fm.conseguenza ?? "").trim();
+  if (!conseguenza) { new Notice("Nessuna conseguenza descritta su questo fronte."); return ""; }
+  const fronte = file.basename;
+  const folder = (core.folders ?? {})["evento"] ?? "Mondi/Eventi";
+  await ensureFolder(folder);
+  const title = `Conseguenza — ${fronte}`;
+  let path = `${folder}/${title}.md`;
+  for (let i = 2; app.vault.getAbstractFileByPath(path); i++) path = `${folder}/${title} (${i}).md`;
+  const su = fm.conseguenza_su ? String(fm.conseguenza_su) : "";
+  const when = tp.date ? tp.date.now("YYYY-MM-DD") : "";
+  const conn = [`"[[${fronte}]]"`, ...(su ? [JSON.stringify(su)] : [])].join(", ");
+  const content = `---
+nome: ${JSON.stringify(title)}
+categoria: evento
+tipo: conseguenza
+mondo: ${fm.mondo ? JSON.stringify(String(fm.mondo)) : "''"}
+quando: ${JSON.stringify(when)}
+stato: bozza
+connessioni: [${conn}]
+tags: ["gdr/bozza"]
+---
+# ${title}
+
+## Cosa accade
+${conseguenza}
+
+> Fronte d'origine: [[${fronte}]]${su ? `\n> Colpisce: ${su}` : ""}
+`;
+  await app.vault.create(path, content);
+  await updateFrontmatter(file, f => { f.clock = 0; pushUnique(f, "connessioni", `[[${title}]]`); });
+  new Notice(`Conseguenza scatenata → evento "${title}"; clock azzerato.`);
+  return "";
+}
+
 async function meta_actions(tp, action = "") {
   const file = app.workspace.getActiveFile?.() ?? tp.config?.target_file;
   if (!file) {
@@ -127,6 +175,10 @@ async function meta_actions(tp, action = "") {
 
   if (action === "applica_profilo") {
     return await applica_profilo(tp, file);
+  }
+
+  if (action === "scatena_conseguenza") {
+    return await scatena_conseguenza(tp, file);
   }
 
   new Notice(`Azione non gestita: ${action}`);

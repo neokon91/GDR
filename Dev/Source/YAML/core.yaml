@@ -21,6 +21,12 @@ fields:
   sessioni:       { label: Sessioni,             widget: sessioni }
   pressione:      { label: Pressione,            widget: pressione }
   prossima_mossa: { label: Prossima mossa,       widget: text }
+  # Clock & conseguenze (Fase 2): un fronte traccia un orologio a segmenti che,
+  # pieno, scatena una conseguenza nel mondo (vedi macro clock() + meta_actions).
+  clock_dim:      { label: "Clock (segmenti)",   widget: clock_dim }
+  clock:          { label: "Clock (pieni)",      widget: number }
+  conseguenza:    { label: Conseguenza,          widget: testo_area }
+  conseguenza_su: { label: Conseguenza su,       widget: legame }
   uso_al_tavolo:  { label: Uso al tavolo,        widget: testo_area }
   gancio:         { label: Gancio,               widget: testo_area }
   player_safe:    { label: Versione player-safe, widget: text }

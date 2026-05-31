@@ -41,7 +41,25 @@
 >
 > Prossima mossa: `INPUT[text:prossima_mossa]`
 
+**⏳ Fronte** — clock `INPUT[number:clock]` / `INPUT[clock_dim][:clock_dim]` segmenti
+```js-engine
+const src = await app.vault.adapter.read("z.automazioni/views.js");
+const mod = { exports: {} };
+new Function("module", "exports", src)(mod, mod.exports);
+const views = mod.exports;
+const dv = app.plugins.plugins.dataview && app.plugins.plugins.dataview.api;
+const file = app.workspace.getActiveFile();
+const page = dv && file ? dv.page(file.path) : null;
+await views.renderClock(container, app, page);
+```
 
+> [!warning]- Conseguenza (quando il clock è pieno)
+> `INPUT[testo_area][:conseguenza]`
+>
+> Bersaglio: `INPUT[legame][:conseguenza_su]`
+
+> [!tip] Scatena
+> Clock pieno? `BUTTON[scatena-conseguenza]` — crea l'evento-conseguenza collegato e azzera il clock.
 --- Carattere
 
 > [!abstract] Carattere

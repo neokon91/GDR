@@ -303,6 +303,24 @@ def test_preset_valori(tmp_path):
     assert valori.get("struttura", 0) >= 4 and valori.get("legalita") == 5
 
 
+@pytest.mark.skipif(not shutil.which("node"), reason="node assente")
+def test_clock_svg(tmp_path):
+    """views.clockSvg disegna N segmenti, i primi `filled` evidenziati (clock visivo)."""
+    harness = tmp_path / "clock.js"
+    harness.write_text(
+        'const fs=require("fs");'
+        f'const src=fs.readFileSync({json.dumps(str(render.JS_DIR / "views.js"))},"utf8");'
+        'const m={exports:{}};new Function("module","exports",src)(m,m.exports);'
+        'const svg=m.exports.clockSvg(6,2);'
+        'process.stdout.write(JSON.stringify({ok:svg.startsWith("<svg")&&!svg.includes("undefined"),'
+        'paths:(svg.match(/<path/g)||[]).length,filled:(svg.match(/c94040/g)||[]).length}));',
+        encoding="utf-8")
+    res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
+    assert res.returncode == 0, res.stderr
+    out = json.loads(res.stdout)
+    assert out["ok"] and out["paths"] == 6 and out["filled"] == 2
+
+
 @pytest.mark.skipif(not render.SRD_DIR.is_dir(), reason="SRD non vendorizzata")
 def test_srd_counts_and_statblock():
     """Conteggi attesi + il mostro si mappa su uno statblock Fantasy Statblocks."""
