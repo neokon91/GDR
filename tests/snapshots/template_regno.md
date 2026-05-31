@@ -110,7 +110,10 @@ await views.renderAxesRadar(container, app, page);
 > **Capitale**: `INPUT[suggester(optionQuery("Mondi/Luoghi"), useLinks(partial), allowOther):capitale]`
 > **Territori**: `INPUT[inlineListSuggester(optionQuery("Mondi/Luoghi"), useLinks(partial), allowOther):territori]`
 > **Cultura dominante**: `INPUT[suggester(optionQuery("Mondi/Culture"), useLinks(partial), allowOther):cultura]`
+> **Dinastia / sovrani**: `INPUT[inlineListSuggester(optionQuery("Mondi/Personaggi"), useLinks(partial), allowOther):dinastia]`
 > **Fazioni di corte**: `INPUT[inlineListSuggester(optionQuery("Mondi/Fazioni"), useLinks(partial), allowOther):fazioni]`
+> **Regni alleati**: `INPUT[inlineListSuggester(optionQuery("Mondi/Regni"), useLinks(partial), allowOther):alleati]`
+> **Regni rivali**: `INPUT[inlineListSuggester(optionQuery("Mondi/Regni"), useLinks(partial), allowOther):rivali]`
 
 > [!example] Collegamenti
 > Mondo: `INPUT[mondo][:mondo]`

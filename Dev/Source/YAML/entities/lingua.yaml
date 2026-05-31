@@ -15,6 +15,10 @@ subtypes:
 - lingua
 - dialetto
 - codice o gergo
+# Campo query-abile: stato vitale della lingua ("lingue morte/liturgiche").
+fields:
+  vitalita: { label: Vitalità, widget: vitalita }
+scheda: [vitalita]
 relazioni:
 - field: parlata_in
   label: Parlata in

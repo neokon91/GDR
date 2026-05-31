@@ -16,6 +16,8 @@ subtypes:
 - popolo
 - tradizione
 - religione
+# Diffusione/portata della cultura (riusa il campo select condiviso 'portata').
+scheda: [portata]
 relazioni:
 - field: regioni
   label: Regioni

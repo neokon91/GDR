@@ -9,6 +9,8 @@
 ````tabs
 --- Lore
 
+> [!abstract] Scheda
+> Vitalità: `INPUT[vitalita][:vitalita]`
 
 > [!note]- Descrizione
 > Scrivi qui il contenuto lore vero della nota.

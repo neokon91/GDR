@@ -17,6 +17,10 @@ subtypes:
 - mutato
 - instabile
 - artificiale
+# Campo query-abile: salute della rete ecologica ("ecosistemi in collasso").
+fields:
+  salute: { label: Salute, widget: salute }
+scheda: [salute]
 relazioni:
 - field: bioma
   label: Bioma

@@ -22,7 +22,11 @@ templates:
 subtypes:
 - pg
 - png
+# Titolo/rango del personaggio (re, arcimago, gran sacerdote...): seed FantasyWorld.
+fields:
+  titolo: { label: Titolo o rango, widget: text }
 scheda:
+- titolo
 - allineamento
 - pronomi
 - eta
@@ -30,6 +34,10 @@ relazioni:
 - field: fazione
   label: Affiliazione
   category: fazione
+- field: parenti
+  label: Parenti / stirpe
+  category: personaggio
+  multi: true
 - field: luogo
   label: Base
   category: luogo

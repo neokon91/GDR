@@ -62,6 +62,10 @@ metabind_inputs:
   stato_cosmico: INPUT[inlineSelect(option(attivo), option(dormiente), option(sigillato), option(disperso), option(distrutto))]
   fonte_potere: INPUT[inlineSelect(option(arcana), option(divina), option(primordiale), option(patto), option(innata), option(elementale))]
   accessibilita: INPUT[inlineSelect(option(aperto), option(soglie), option(rituale), option(sigillato))]
+  stato_profezia: INPUT[inlineSelect(option(latente), option(in corso), option(avverata), option(scongiurata), option(fallita))]
+  veridicita: INPUT[inlineSelect(option(vero), option(parziale), option(falso), option(ignoto))]
+  vitalita: INPUT[inlineSelect(option(viva), option(liturgica), option(franca), option(morta), option(segreta))]
+  salute: INPUT[inlineSelect(option(stabile), option(fragile), option(in collasso), option(rigenerante))]
   testo: INPUT[text]
   testo_area: INPUT[textArea]
 # Icone cartella (Iconize): chiave = chiave di core.folders, valore = emoji.

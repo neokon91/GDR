@@ -15,6 +15,10 @@ subtypes:
 - diceria
 - dottrina
 - sogno profetico
+# Campo query-abile per il DM: quanto il mito corrisponde alla verità del mondo.
+fields:
+  veridicita: { label: Veridicità, widget: veridicita }
+scheda: [veridicita]
 relazioni:
 - field: epoca_raccontata
   label: Epoca raccontata

@@ -9,6 +9,8 @@
 ````tabs
 --- Lore
 
+> [!abstract] Scheda
+> Portata: `INPUT[portata][:portata]`
 
 > [!note]- Descrizione
 > Scrivi qui il contenuto lore vero della nota.

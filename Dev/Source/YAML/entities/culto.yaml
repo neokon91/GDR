@@ -17,6 +17,8 @@ subtypes:
 - setta
 - culto misterico
 - fede popolare
+# Portata/diffusione del culto (riusa il campo select condiviso 'portata').
+scheda: [portata]
 relazioni:
 - field: divinita
   label: Divinità venerate

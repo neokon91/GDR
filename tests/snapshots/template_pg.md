@@ -79,6 +79,7 @@
 --- Lore
 
 > [!abstract] Scheda
+> Titolo o rango: `INPUT[text:titolo]`
 > Allineamento: `INPUT[allineamento][:allineamento]`
 > Pronomi: `INPUT[text:pronomi]`
 > Età: `INPUT[text:eta]`
@@ -190,6 +191,7 @@ await views.renderAxesRadar(container, app, page);
 
 > [!example] Relazioni
 > **Affiliazione**: `INPUT[suggester(optionQuery("Mondi/Fazioni"), useLinks(partial), allowOther):fazione]`
+> **Parenti / stirpe**: `INPUT[inlineListSuggester(optionQuery("Mondi/Personaggi"), useLinks(partial), allowOther):parenti]`
 > **Base**: `INPUT[suggester(optionQuery("Mondi/Luoghi"), useLinks(partial), allowOther):luogo]`
 > **Alleati**: `INPUT[inlineListSuggester(optionQuery("Mondi/Personaggi"), useLinks(partial), allowOther):alleati]`
 > **Rivali**: `INPUT[inlineListSuggester(optionQuery("Mondi/Personaggi"), useLinks(partial), allowOther):rivali]`

@@ -15,6 +15,10 @@ subtypes:
 - di rinascita
 - distruttiva
 - personale
+# Campo query-abile per il DM: "tutte le profezie ancora in corso".
+fields:
+  stato_profezia: { label: Stato d'avveramento, widget: stato_profezia }
+scheda: [stato_profezia]
 relazioni:
 - field: riguarda
   label: Chi riguarda

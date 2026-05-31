@@ -9,6 +9,8 @@
 ````tabs
 --- Lore
 
+> [!abstract] Scheda
+> Veridicità: `INPUT[veridicita][:veridicita]`
 
 > [!note]- Descrizione
 > Scrivi qui il contenuto lore vero della nota.

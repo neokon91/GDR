@@ -32,9 +32,21 @@ relazioni:
 - field: cultura
   label: Cultura dominante
   category: cultura
+- field: dinastia
+  label: Dinastia / sovrani
+  category: personaggio
+  multi: true
 - field: fazioni
   label: Fazioni di corte
   category: fazione
+  multi: true
+- field: alleati
+  label: Regni alleati
+  category: regno
+  multi: true
+- field: rivali
+  label: Regni rivali
+  category: regno
   multi: true
 creation:
   fields:

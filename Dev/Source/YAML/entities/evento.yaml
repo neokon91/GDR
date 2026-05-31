@@ -15,6 +15,7 @@ templates:
 subtypes:
 - evento storico
 - evento di campagna
+- conflitto
 scheda:
 - portata
 relazioni:

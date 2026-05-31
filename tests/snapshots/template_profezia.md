@@ -9,6 +9,8 @@
 ````tabs
 --- Lore
 
+> [!abstract] Scheda
+> Stato d'avveramento: `INPUT[stato_profezia][:stato_profezia]`
 
 > [!note]- Descrizione
 > Scrivi qui il contenuto lore vero della nota.
