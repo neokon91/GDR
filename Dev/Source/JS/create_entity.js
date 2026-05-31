@@ -140,6 +140,32 @@ function emptyFor(question) {
   return question.multi ? [] : "";
 }
 
+// --- Archetipi (preset): valore-asse rappresentativo da un comparatore `quando`.
+// ">=N"/"N"/"==N" -> N ; ">N" -> N+1 ; "<N" -> N-1 ; "<=N" -> N ; "N-M" -> media.
+function presetValore(cond) {
+  const c = String(cond).trim();
+  let m;
+  if ((m = c.match(/^(>=|<=|>|<|==|=)\s*(\d+)$/))) {
+    const n = Number(m[2]);
+    return m[1] === ">" ? n + 1 : m[1] === "<" ? n - 1 : n;
+  }
+  if ((m = c.match(/^(\d+)\s*-\s*(\d+)$/))) return Math.round((Number(m[1]) + Number(m[2])) / 2);
+  if (/^\d+$/.test(c)) return Number(c);
+  return null;
+}
+
+// Valori-assi di preset di un archetipo: 'valori' esplicito se presente, altrimenti
+// derivati da 'quando' (gli assi non citati restano al default dell'utente).
+function presetValori(arch) {
+  if (arch.valori) return arch.valori;
+  const out = {};
+  for (const [axis, cond] of Object.entries(arch.quando || {})) {
+    const v = presetValore(cond);
+    if (v != null) out[axis] = Math.max(1, Math.min(5, v));
+  }
+  return out;
+}
+
 async function runWizard(tp, template, core) {
   const category = template.category;
   const categorySpec = core.categories[category] ?? {};
@@ -175,6 +201,21 @@ async function runWizard(tp, template, core) {
     captured[q.field] = fillNow ? await ask(tp, q, template, core) : emptyFor(q);
   }
 
+  // Archetipo (opzionale): se la categoria ha un catalogo, pre-compila i valori
+  // degli assi tematici + i tag 'profilo/*' coerenti. "(personalizzato)" salta.
+  const archetipi = (core.archetipi ?? {})[category] ?? [];
+  let preset = {};
+  let profiloTags = [];
+  if (archetipi.length) {
+    const chosen = await tp.system.suggester(
+      ["(personalizzato)", ...archetipi.map(a => a.nome)],
+      [null, ...archetipi], false, `Archetipo di ${template.title} (opzionale)`);
+    if (chosen) {
+      preset = presetValori(chosen);
+      profiloTags = (chosen.tag ?? []).map(t => `profilo/${t}`);
+    }
+  }
+
   const folderKey = categorySpec.folder ?? category;
   const folder = core.folders[folderKey] ?? core.folders[category] ?? "Inbox";
   await ensureFolder(folder);
@@ -190,7 +231,8 @@ async function runWizard(tp, template, core) {
     mondo: captured.mondo ?? "",
     connessioni: [],
     sessioni: session ? [`[[${session.basename}]]`] : [],
-    tags: ["gdr/bozza"],
+    tags: ["gdr/bozza", ...profiloTags],
+    ...preset,
     ...captured,
   };
   if (category === "creatura") data.statblock = "inline";
@@ -214,4 +256,5 @@ async function create_entity(tp, templateId = "") {
   }
 }
 
+create_entity.presetValori = presetValori;  // esposto per i test
 module.exports = create_entity;

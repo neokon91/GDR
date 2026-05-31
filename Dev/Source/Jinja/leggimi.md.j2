@@ -1,8 +1,46 @@
-# LEGGIMI — Vault GDR
+# 👋 Benvenuto — il tuo mondo e il tuo tavolo
 
-Questa cartella è un vault Obsidian **generato**: aprila in Obsidian e tienila aperta;
-rilancia `npm run build` nel repo per vedere i cambiamenti dal vivo. Le tue note in
-`Mondi/`, `Inbox/`, ecc. e i plugin che installi qui **non vengono toccati** dai rebuild.
+Questo è il tuo **vault di gioco di ruolo**: un posto solo per *costruire un mondo*
+(luoghi, popoli, divinità, segreti) e *giocarci* a D&D 5.5e (personaggi, incontri,
+dadi, regole). Non serve essere tecnici: si lavora a **bottoni** e **menù**.
+
+> [!tip] Le tue cose sono al sicuro
+> Tutto quello che crei vive nella cartella **`Mondi/`** ed è **tuo**: non viene mai
+> sovrascritto. La cartella **`SRD/`** sono le regole ufficiali (sola lettura). Le
+> cartelle che iniziano con `z.` sono "il motore": puoi ignorarle.
+
+## ▶️ Per iniziare in 3 passi
+1. **Una volta sola**: installa i plugin e attiva due impostazioni → vedi *Setup
+   iniziale* (§1–§2) qui sotto. Senza, le schede appaiono come testo grezzo.
+2. **Apri `Home`**: è la tua plancia. Da lì crei tutto e raggiungi gli indici.
+3. **Crea il tuo primo mondo**: in Home premi **Crea → Mondo**, rispondi a poche
+   domande e parti. Poi popolalo (luoghi, personaggi, fazioni…) sempre da Home.
+
+## 🧭 Come si usa, in breve
+- **Creare**: ogni bottone **Crea** apre un *aiutante* che ti fa qualche domanda (il
+  minimo necessario); il resto lo scrivi con calma nella nota, nei campi e negli slider.
+- **Collegare**: nel tab *Collegamenti* di una nota premi **Collega**, scegli il tipo
+  di legame e l'altra nota: il collegamento si scrive nei due sensi, da solo.
+- **Il "carattere" delle cose** (tab *Carattere*): gli **slider** descrivono l'indole
+  (es. un culto più *dogmatico* o più *anarchico*). Sotto, il **Profilo** ti suggerisce
+  etichette coerenti (es. *Teocrazia di stato*) e il bottone **Applica profilo** le salva
+  come tag. Quando crei, puoi anche partire da un **archetipo** già pronto.
+- **Un personaggio giocante**: **Crea → PG**, scegli classe/specie/background e
+  l'aiutante riempie la scheda (punti ferita, tiri salvezza, abilità, incantesimi).
+- **Al tavolo**: in Home c'è il riquadro *Al tavolo*; ogni incontro ha i tiri di dado
+  cliccabili e il combattimento con l'iniziativa.
+- **Dove trovo le cose**: **Home** (plancia), **Indici** (Atlante/Bestiario/Cast/…),
+  **Ponte Mondo↔Sistema** (cosa del mondo ha già statistiche di gioco), **SRD** (regole
+  ufficiali). Sono tutte nei segnalibri, a sinistra.
+
+> [!question]- Ho sbagliato qualcosa, si rompe?
+> No. Le note sono testo semplice: puoi modificarle o cancellarle liberamente. Se una
+> scheda sembra "testo grezzo", quasi sempre manca un plugin del *Setup iniziale*.
+
+---
+## 🔧 Setup iniziale (una volta sola)
+Le sezioni numerate qui sotto servono a preparare il vault la prima volta e come
+riferimento. Falle una volta, poi puoi dimenticartene.
 
 ## 1. Plugin community richiesti
 Apri *Impostazioni → Plugin della comunità* e installa/abilita:

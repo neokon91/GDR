@@ -283,6 +283,26 @@ def test_profilo_match(tmp_path):
     assert "profilo/ufficiale" in out["tags"]
 
 
+@pytest.mark.skipif(not shutil.which("node"), reason="node assente")
+def test_preset_valori(tmp_path):
+    """create_entity.presetValori deriva i valori-assi dal 'quando' di un archetipo
+    (preset in creazione): teocrazia -> struttura>=4 e legalita==5, sui dati reali."""
+    archetipi = CORE.get("archetipi", {}).get("culto") or []
+    teo = next((a for a in archetipi if a["id"] == "teocrazia"), None)
+    assert teo, "archetipo 'teocrazia' assente"
+    harness = tmp_path / "preset.js"
+    harness.write_text(
+        'const fs=require("fs");'
+        f'const src=fs.readFileSync({json.dumps(str(render.JS_DIR / "create_entity.js"))},"utf8");'
+        'const m={exports:{}};new Function("module","exports","require",src)(m,m.exports,require);'
+        f'process.stdout.write(JSON.stringify(m.exports.presetValori({json.dumps(teo, ensure_ascii=False)})));',
+        encoding="utf-8")
+    res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
+    assert res.returncode == 0, res.stderr
+    valori = json.loads(res.stdout)
+    assert valori.get("struttura", 0) >= 4 and valori.get("legalita") == 5
+
+
 @pytest.mark.skipif(not render.SRD_DIR.is_dir(), reason="SRD non vendorizzata")
 def test_srd_counts_and_statblock():
     """Conteggi attesi + il mostro si mappa su uno statblock Fantasy Statblocks."""
