@@ -1,0 +1,198 @@
+[
+  {
+    "id": "accolito",
+    "nome": "Accolito",
+    "tipo": "background",
+    "capitolo": "Origini dei personaggi",
+    "pagine_sorgente": 93,
+    "punteggi_caratteristica": [
+      "Intelligenza",
+      "Saggezza",
+      "Carisma"
+    ],
+    "talento_origine": "Iniziato alla magia (chierico)",
+    "competenze": {
+      "abilita": [
+        "Intuizione",
+        "Religione"
+      ],
+      "strumenti": "scorte da calligrafo."
+    },
+    "equipaggiamento_alternativo": "50 mo",
+    "descrizione": "Intelligenza, Saggezza, Carisma; Iniziato alla magia (chierico); Intuizione e Religione; scorte da calligrafo.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Voce": "Punteggi di caratteristica",
+            "Riepilogo": "Intelligenza, Saggezza, Carisma"
+          },
+          {
+            "Voce": "Talento",
+            "Riepilogo": "Iniziato alla magia (chierico)"
+          },
+          {
+            "Voce": "Abilita",
+            "Riepilogo": "Intuizione e Religione"
+          },
+          {
+            "Voce": "Strumenti",
+            "Riepilogo": "scorte da calligrafo."
+          },
+          {
+            "Voce": "Equipaggiamento alternativo",
+            "Riepilogo": "50 mo"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "criminale",
+    "nome": "Criminale",
+    "tipo": "background",
+    "capitolo": "Origini dei personaggi",
+    "pagine_sorgente": 93,
+    "punteggi_caratteristica": [
+      "Destrezza",
+      "Costituzione",
+      "Intelligenza"
+    ],
+    "talento_origine": "Allerta",
+    "competenze": {
+      "abilita": [
+        "Rapidita di mano",
+        "Furtivita"
+      ],
+      "strumenti": "arnesi da scasso."
+    },
+    "equipaggiamento_alternativo": "50 mo",
+    "descrizione": "Destrezza, Costituzione, Intelligenza; Allerta; Rapidita di mano e Furtivita; arnesi da scasso.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Voce": "Punteggi di caratteristica",
+            "Riepilogo": "Destrezza, Costituzione, Intelligenza"
+          },
+          {
+            "Voce": "Talento",
+            "Riepilogo": "Allerta"
+          },
+          {
+            "Voce": "Abilita",
+            "Riepilogo": "Rapidita di mano e Furtivita"
+          },
+          {
+            "Voce": "Strumenti",
+            "Riepilogo": "arnesi da scasso."
+          },
+          {
+            "Voce": "Equipaggiamento alternativo",
+            "Riepilogo": "50 mo"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "sapiente",
+    "nome": "Sapiente",
+    "tipo": "background",
+    "capitolo": "Origini dei personaggi",
+    "pagine_sorgente": 93,
+    "punteggi_caratteristica": [
+      "Costituzione",
+      "Intelligenza",
+      "Saggezza"
+    ],
+    "talento_origine": "Iniziato alla magia (mago)",
+    "competenze": {
+      "abilita": [
+        "Arcano",
+        "Storia"
+      ],
+      "strumenti": "scorte da calligrafo."
+    },
+    "equipaggiamento_alternativo": "50 mo",
+    "descrizione": "Costituzione, Intelligenza, Saggezza; Iniziato alla magia (mago); Arcano e Storia; scorte da calligrafo.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Voce": "Punteggi di caratteristica",
+            "Riepilogo": "Costituzione, Intelligenza, Saggezza"
+          },
+          {
+            "Voce": "Talento",
+            "Riepilogo": "Iniziato alla magia (mago)"
+          },
+          {
+            "Voce": "Abilita",
+            "Riepilogo": "Arcano e Storia"
+          },
+          {
+            "Voce": "Strumenti",
+            "Riepilogo": "scorte da calligrafo."
+          },
+          {
+            "Voce": "Equipaggiamento alternativo",
+            "Riepilogo": "50 mo"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "soldato",
+    "nome": "Soldato",
+    "tipo": "background",
+    "capitolo": "Origini dei personaggi",
+    "pagine_sorgente": 93,
+    "punteggi_caratteristica": [
+      "Forza",
+      "Destrezza",
+      "Costituzione"
+    ],
+    "talento_origine": "Aggressore selvaggio",
+    "competenze": {
+      "abilita": [
+        "Atletica",
+        "Intimidire"
+      ],
+      "strumenti": "un gioco a scelta."
+    },
+    "equipaggiamento_alternativo": "50 mo",
+    "descrizione": "Forza, Destrezza, Costituzione; Aggressore selvaggio; Atletica e Intimidire; un gioco a scelta.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Voce": "Punteggi di caratteristica",
+            "Riepilogo": "Forza, Destrezza, Costituzione"
+          },
+          {
+            "Voce": "Talento",
+            "Riepilogo": "Aggressore selvaggio"
+          },
+          {
+            "Voce": "Abilita",
+            "Riepilogo": "Atletica e Intimidire"
+          },
+          {
+            "Voce": "Strumenti",
+            "Riepilogo": "un gioco a scelta."
+          },
+          {
+            "Voce": "Equipaggiamento alternativo",
+            "Riepilogo": "50 mo"
+          }
+        ]
+      }
+    ]
+  }
+]

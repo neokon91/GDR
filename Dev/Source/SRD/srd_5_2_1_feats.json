@@ -1,0 +1,308 @@
+[
+  {
+    "id": "abile",
+    "nome": "Abile",
+    "tipo": "talento",
+    "categoria": "Origini",
+    "capitolo": "Talenti",
+    "pagine_sorgente": "98-99",
+    "prerequisito": "",
+    "ripetibile": true,
+    "beneficio": "Ottieni competenza in una combinazione di tre abilita o strumenti a scelta; ripetibile.",
+    "descrizione": "Ottieni competenza in una combinazione di tre abilita o strumenti a scelta; ripetibile.",
+    "sezioni": [
+      {
+        "titolo": "Beneficio",
+        "descrizione": "Ottieni competenza in una combinazione di tre abilita o strumenti a scelta; ripetibile."
+      }
+    ]
+  },
+  {
+    "id": "aggressore_selvaggio",
+    "nome": "Aggressore selvaggio",
+    "tipo": "talento",
+    "categoria": "Origini",
+    "capitolo": "Talenti",
+    "pagine_sorgente": "98-99",
+    "prerequisito": "",
+    "ripetibile": false,
+    "beneficio": "Una volta per turno, quando colpisci con un'arma, tiri due volte i danni dell'arma e scegli il risultato.",
+    "descrizione": "Una volta per turno, quando colpisci con un'arma, tiri due volte i danni dell'arma e scegli il risultato.",
+    "sezioni": [
+      {
+        "titolo": "Beneficio",
+        "descrizione": "Una volta per turno, quando colpisci con un'arma, tiri due volte i danni dell'arma e scegli il risultato."
+      }
+    ]
+  },
+  {
+    "id": "allerta",
+    "nome": "Allerta",
+    "tipo": "talento",
+    "categoria": "Origini",
+    "capitolo": "Talenti",
+    "pagine_sorgente": "98-99",
+    "prerequisito": "",
+    "ripetibile": false,
+    "beneficio": "Aggiungi il bonus di competenza all'iniziativa e puoi scambiare il risultato con un alleato consenziente nello stesso combattimento.",
+    "descrizione": "Aggiungi il bonus di competenza all'iniziativa e puoi scambiare il risultato con un alleato consenziente nello stesso combattimento.",
+    "sezioni": [
+      {
+        "titolo": "Beneficio",
+        "descrizione": "Aggiungi il bonus di competenza all'iniziativa e puoi scambiare il risultato con un alleato consenziente nello stesso combattimento."
+      }
+    ]
+  },
+  {
+    "id": "iniziato_alla_magia",
+    "nome": "Iniziato alla magia",
+    "tipo": "talento",
+    "categoria": "Origini",
+    "capitolo": "Talenti",
+    "pagine_sorgente": "98-99",
+    "prerequisito": "",
+    "ripetibile": false,
+    "beneficio": "Scegli lista da chierico, druido o mago; ottieni due trucchetti, un incantesimo di 1º livello e possibilita di sostituirli salendo di livello.",
+    "descrizione": "Scegli lista da chierico, druido o mago; ottieni due trucchetti, un incantesimo di 1º livello e possibilita di sostituirli salendo di livello.",
+    "sezioni": [
+      {
+        "titolo": "Beneficio",
+        "descrizione": "Scegli lista da chierico, druido o mago; ottieni due trucchetti, un incantesimo di 1º livello e possibilita di sostituirli salendo di livello."
+      }
+    ]
+  },
+  {
+    "id": "aumento_dei_punteggi_di_caratteristica",
+    "nome": "Aumento dei punteggi di caratteristica",
+    "tipo": "talento",
+    "categoria": "Generale",
+    "capitolo": "Talenti",
+    "pagine_sorgente": "98-99",
+    "prerequisito": "4º livello o superiore",
+    "ripetibile": true,
+    "beneficio": "Dal 4º livello, aumenta un punteggio di 2 o due punteggi di 1, massimo 20; ripetibile.",
+    "descrizione": "Dal 4º livello, aumenta un punteggio di 2 o due punteggi di 1, massimo 20; ripetibile.",
+    "sezioni": [
+      {
+        "titolo": "Beneficio",
+        "descrizione": "Dal 4º livello, aumenta un punteggio di 2 o due punteggi di 1, massimo 20; ripetibile."
+      }
+    ]
+  },
+  {
+    "id": "lottatore",
+    "nome": "Lottatore",
+    "tipo": "talento",
+    "categoria": "Generale",
+    "capitolo": "Talenti",
+    "pagine_sorgente": "98-99",
+    "prerequisito": "4º livello o superiore; Forza o Destrezza 13+",
+    "ripetibile": false,
+    "beneficio": "Dal 4º livello con Forza o Destrezza 13; aumenta Forza o Destrezza, migliora colpi senz'armi, attacchi contro creature afferrate e movimento in lotta.",
+    "descrizione": "Dal 4º livello con Forza o Destrezza 13; aumenta Forza o Destrezza, migliora colpi senz'armi, attacchi contro creature afferrate e movimento in lotta.",
+    "sezioni": [
+      {
+        "titolo": "Beneficio",
+        "descrizione": "Dal 4º livello con Forza o Destrezza 13; aumenta Forza o Destrezza, migliora colpi senz'armi, attacchi contro creature afferrate e movimento in lotta."
+      }
+    ]
+  },
+  {
+    "id": "combattere_con_armi_possenti",
+    "nome": "Combattere con armi possenti",
+    "tipo": "talento",
+    "categoria": "Stile di combattimento",
+    "capitolo": "Talenti",
+    "pagine_sorgente": "99-100",
+    "prerequisito": "Privilegio Stile di combattimento",
+    "ripetibile": false,
+    "beneficio": "Con armi da mischia a due mani o versatili impugnate a due mani, i risultati 1 o 2 ai danni valgono 3.",
+    "descrizione": "Con armi da mischia a due mani o versatili impugnate a due mani, i risultati 1 o 2 ai danni valgono 3.",
+    "sezioni": [
+      {
+        "titolo": "Beneficio",
+        "descrizione": "Con armi da mischia a due mani o versatili impugnate a due mani, i risultati 1 o 2 ai danni valgono 3."
+      }
+    ]
+  },
+  {
+    "id": "combattere_con_due_armi",
+    "nome": "Combattere con due armi",
+    "tipo": "talento",
+    "categoria": "Stile di combattimento",
+    "capitolo": "Talenti",
+    "pagine_sorgente": "99-100",
+    "prerequisito": "Privilegio Stile di combattimento",
+    "ripetibile": false,
+    "beneficio": "Aggiungi il modificatore di caratteristica al danno dell'attacco extra da arma leggera se non gia aggiunto.",
+    "descrizione": "Aggiungi il modificatore di caratteristica al danno dell'attacco extra da arma leggera se non gia aggiunto.",
+    "sezioni": [
+      {
+        "titolo": "Beneficio",
+        "descrizione": "Aggiungi il modificatore di caratteristica al danno dell'attacco extra da arma leggera se non gia aggiunto."
+      }
+    ]
+  },
+  {
+    "id": "difesa",
+    "nome": "Difesa",
+    "tipo": "talento",
+    "categoria": "Stile di combattimento",
+    "capitolo": "Talenti",
+    "pagine_sorgente": "99-100",
+    "prerequisito": "Privilegio Stile di combattimento",
+    "ripetibile": false,
+    "beneficio": "Con armatura leggera, media o pesante ottieni +1 alla Classe Armatura.",
+    "descrizione": "Con armatura leggera, media o pesante ottieni +1 alla Classe Armatura.",
+    "sezioni": [
+      {
+        "titolo": "Beneficio",
+        "descrizione": "Con armatura leggera, media o pesante ottieni +1 alla Classe Armatura."
+      }
+    ]
+  },
+  {
+    "id": "tiro",
+    "nome": "Tiro",
+    "tipo": "talento",
+    "categoria": "Stile di combattimento",
+    "capitolo": "Talenti",
+    "pagine_sorgente": "99-100",
+    "prerequisito": "Privilegio Stile di combattimento",
+    "ripetibile": false,
+    "beneficio": "Ottieni +2 ai tiri per colpire con armi a distanza.",
+    "descrizione": "Ottieni +2 ai tiri per colpire con armi a distanza.",
+    "sezioni": [
+      {
+        "titolo": "Beneficio",
+        "descrizione": "Ottieni +2 ai tiri per colpire con armi a distanza."
+      }
+    ]
+  },
+  {
+    "id": "dono_del_fato",
+    "nome": "Dono del fato",
+    "tipo": "talento",
+    "categoria": "Dono epico",
+    "capitolo": "Talenti",
+    "pagine_sorgente": "99-100",
+    "prerequisito": "19º livello o superiore",
+    "ripetibile": false,
+    "beneficio": "+1 a una caratteristica, massimo 30; 2d4 come bonus o penalita a una prova con d20 entro 18 m.",
+    "descrizione": "+1 a una caratteristica, massimo 30; 2d4 come bonus o penalita a una prova con d20 entro 18 m.",
+    "sezioni": [
+      {
+        "titolo": "Beneficio",
+        "descrizione": "+1 a una caratteristica, massimo 30; 2d4 come bonus o penalita a una prova con d20 entro 18 m."
+      }
+    ]
+  },
+  {
+    "id": "dono_della_vista_pura",
+    "nome": "Dono della vista pura",
+    "tipo": "talento",
+    "categoria": "Dono epico",
+    "capitolo": "Talenti",
+    "pagine_sorgente": "99-100",
+    "prerequisito": "19º livello o superiore",
+    "ripetibile": false,
+    "beneficio": "+1 a una caratteristica, massimo 30; vista pura 18 m.",
+    "descrizione": "+1 a una caratteristica, massimo 30; vista pura 18 m.",
+    "sezioni": [
+      {
+        "titolo": "Beneficio",
+        "descrizione": "+1 a una caratteristica, massimo 30; vista pura 18 m."
+      }
+    ]
+  },
+  {
+    "id": "dono_delle_abilita_di_combattimento",
+    "nome": "Dono delle abilita di combattimento",
+    "tipo": "talento",
+    "categoria": "Dono epico",
+    "capitolo": "Talenti",
+    "pagine_sorgente": "99-100",
+    "prerequisito": "19º livello o superiore",
+    "ripetibile": false,
+    "beneficio": "+1 a una caratteristica, massimo 30; un tiro per colpire mancato puo comunque colpire, una volta per turno.",
+    "descrizione": "+1 a una caratteristica, massimo 30; un tiro per colpire mancato puo comunque colpire, una volta per turno.",
+    "sezioni": [
+      {
+        "titolo": "Beneficio",
+        "descrizione": "+1 a una caratteristica, massimo 30; un tiro per colpire mancato puo comunque colpire, una volta per turno."
+      }
+    ]
+  },
+  {
+    "id": "dono_dell_offensiva_irresistibile",
+    "nome": "Dono dell'offensiva irresistibile",
+    "tipo": "talento",
+    "categoria": "Dono epico",
+    "capitolo": "Talenti",
+    "pagine_sorgente": "99-100",
+    "prerequisito": "19º livello o superiore",
+    "ripetibile": false,
+    "beneficio": "+1 a Forza o Destrezza, massimo 30; ignori resistenza a danni fisici e infliggi danni extra con 20 naturale.",
+    "descrizione": "+1 a Forza o Destrezza, massimo 30; ignori resistenza a danni fisici e infliggi danni extra con 20 naturale.",
+    "sezioni": [
+      {
+        "titolo": "Beneficio",
+        "descrizione": "+1 a Forza o Destrezza, massimo 30; ignori resistenza a danni fisici e infliggi danni extra con 20 naturale."
+      }
+    ]
+  },
+  {
+    "id": "dono_dello_spirito_notturno",
+    "nome": "Dono dello spirito notturno",
+    "tipo": "talento",
+    "categoria": "Dono epico",
+    "capitolo": "Talenti",
+    "pagine_sorgente": "99-100",
+    "prerequisito": "19º livello o superiore",
+    "ripetibile": false,
+    "beneficio": "+1 a una caratteristica, massimo 30; in oscurita o luce fioca puoi diventare invisibile e resisti ai danni non psichici o radiosi.",
+    "descrizione": "+1 a una caratteristica, massimo 30; in oscurita o luce fioca puoi diventare invisibile e resisti ai danni non psichici o radiosi.",
+    "sezioni": [
+      {
+        "titolo": "Beneficio",
+        "descrizione": "+1 a una caratteristica, massimo 30; in oscurita o luce fioca puoi diventare invisibile e resisti ai danni non psichici o radiosi."
+      }
+    ]
+  },
+  {
+    "id": "dono_del_richiamo_degli_incantesimi",
+    "nome": "Dono del richiamo degli incantesimi",
+    "tipo": "talento",
+    "categoria": "Dono epico",
+    "capitolo": "Talenti",
+    "pagine_sorgente": "99-100",
+    "prerequisito": "Incantesimi",
+    "ripetibile": false,
+    "beneficio": "Richiede Incantesimi; +1 a Intelligenza, Saggezza o Carisma, massimo 30; puoi non consumare slot di livello 1-4 con tiro 1d4 corrispondente.",
+    "descrizione": "Richiede Incantesimi; +1 a Intelligenza, Saggezza o Carisma, massimo 30; puoi non consumare slot di livello 1-4 con tiro 1d4 corrispondente.",
+    "sezioni": [
+      {
+        "titolo": "Beneficio",
+        "descrizione": "Richiede Incantesimi; +1 a Intelligenza, Saggezza o Carisma, massimo 30; puoi non consumare slot di livello 1-4 con tiro 1d4 corrispondente."
+      }
+    ]
+  },
+  {
+    "id": "dono_del_viaggio_dimensionale",
+    "nome": "Dono del viaggio dimensionale",
+    "tipo": "talento",
+    "categoria": "Dono epico",
+    "capitolo": "Talenti",
+    "pagine_sorgente": "99-100",
+    "prerequisito": "19º livello o superiore",
+    "ripetibile": false,
+    "beneficio": "+1 a una caratteristica, massimo 30; dopo Attacco o Magia puoi teletrasportarti fino a 9 m.",
+    "descrizione": "+1 a una caratteristica, massimo 30; dopo Attacco o Magia puoi teletrasportarti fino a 9 m.",
+    "sezioni": [
+      {
+        "titolo": "Beneficio",
+        "descrizione": "+1 a una caratteristica, massimo 30; dopo Attacco o Magia puoi teletrasportarti fino a 9 m."
+      }
+    ]
+  }
+]

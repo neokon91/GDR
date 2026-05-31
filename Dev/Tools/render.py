@@ -22,14 +22,24 @@ YAML_DIR = SOURCE / "YAML"
 JINJA_DIR = SOURCE / "Jinja"
 JS_DIR = SOURCE / "JS"
 SAMPLES_DIR = SOURCE / "Samples"
+SRD_DIR = SOURCE / "SRD"  # SRD 5.2.1 vendorizzata (markdown, CC-BY-4.0)
 
 # Unico target di output: il vault Obsidian vivo. Si apre questa cartella in
 # Obsidian e si rilancia `build` per vedere i cambiamenti dal vivo. Il repo di
 # sviluppo (ROOT) resta pulito: nessun artefatto generato fuori da qui.
 VAULT = ROOT / "dist" / "GDR-vault"
 
-# Sottocartelle interamente generate: sicure da azzerare a ogni build.
-GENERATED_DIRS = ("z.modelli", "z.automazioni", "z.classi")
+# Sottocartelle interamente generate: sicure da azzerare a ogni build. Il prefisso
+# 'z.' le tiene in fondo; uno snippet CSS le nasconde dall'esploratore (vedi
+# write_workspace_chrome). Restano indicizzate, quindi i plugin funzionano.
+# z.* = cartelle di SISTEMA (nascoste dall'esploratore + escluse da ricerca).
+# SRD = generata ma USER-FACING (navigabile/cercabile): in GENERATED_DIRS solo
+# per il wipe-and-regen del clean, NON tra le nascoste.
+HIDDEN_DIRS = ("z.modelli", "z.automazioni", "z.classi")
+GENERATED_DIRS = (*HIDDEN_DIRS, "SRD")
+
+# Cartella delle pagine-indice (hub): tiene la radice pulita.
+INDEX_DIR = "Indici"
 
 # Note generate alla radice del vault (non contenuti utente).
 GENERATED_NOTES = ("Home.md", "LEGGIMI.md")
@@ -62,9 +72,9 @@ def load_pages() -> list[dict[str, Any]]:
 
 
 def generated_note_names() -> list[str]:
-    """Note generate alla radice: Home/LEGGIMI + una per ogni pagina-indice.
-    Derivata da pages.yaml cosi' clean() le rimuove tutte senza nomi hard-coded."""
-    return [*GENERATED_NOTES, *(f"{p['file']}.md" for p in load_pages())]
+    """Note generate: Home/LEGGIMI alla radice + una pagina-indice per voce di
+    pages.yaml (in INDEX_DIR/). Cosi' clean() le rimuove senza nomi hard-coded."""
+    return [*GENERATED_NOTES, *(f"{INDEX_DIR}/{p['file']}.md" for p in load_pages())]
 
 
 def clean() -> None:
@@ -121,6 +131,36 @@ def union_list(path: Path, values: list[str]) -> None:
     merged = list(dict.fromkeys([*existing, *values]))
     if merged != existing:
         write_json(path, merged)
+
+
+def union_list_key(path: Path, key: str, values: list[str]) -> None:
+    """Come union_list ma per una lista DENTRO una chiave di un JSON-oggetto
+    (preserva le altre chiavi e le voci utente). Per app.json/appearance.json."""
+    data = read_json(path)
+    data = data if isinstance(data, dict) else {}
+    existing = data.get(key) if isinstance(data.get(key), list) else []
+    merged = list(dict.fromkeys([*existing, *values]))
+    if merged != existing:
+        data[key] = merged
+        write_json(path, data)
+
+
+# Snippet CSS generato: nasconde le cartelle di sistema (z.*) dall'esploratore.
+# Restano indicizzate (data-path presente), quindi Templater/Metadata Menu/Dataview
+# continuano a vederle: nascondiamo solo la riga nell'albero dei file.
+HIDE_FOLDERS_SNIPPET = """/* GDR — generato. Nasconde le cartelle di sistema (z.*) dall'esploratore. */
+.nav-folder.tree-item:has(> .tree-item-self[data-path^="z."]) {
+  display: none;
+}
+"""
+
+
+def write_workspace_chrome(obsidian: Path) -> None:
+    """Pulizia dell'esploratore: snippet CSS che nasconde le z.* + esclusione da
+    ricerca/grafo/suggerimenti (userIgnoreFilters). Tutto non distruttivo."""
+    write_text(obsidian / "snippets" / "gdr.css", HIDE_FOLDERS_SNIPPET)
+    union_list_key(obsidian / "appearance.json", "enabledCssSnippets", ["gdr"])
+    union_list_key(obsidian / "app.json", "userIgnoreFilters", [f"{d}/" for d in HIDDEN_DIRS])
 
 
 def template_folder(core: dict[str, Any], category: str) -> str:
@@ -200,6 +240,9 @@ def fileclass_fields(core: dict[str, Any], category: str) -> list[dict[str, Any]
             add(field_id, "Number")
         else:
             add(field_id, "Input")
+    # Campi strutturati della scheda (worldbuilding/sistema): tipizzati in Properties.
+    for field_id in (core.get("scheda", {}) or {}).get(category, []) or []:
+        add(field_id, "Number" if field_id == "livello" else "Input")
     for rel in (core.get("relazioni", {}) or {}).get(category, []) or []:
         add(rel["field"], "MultiFile" if rel.get("multi") else "File")
     add("connessioni", "MultiFile")
@@ -227,6 +270,153 @@ def meta_bind_config(plugins: dict[str, Any], core: dict[str, Any], templates: l
         ],
         "buttonTemplates": creation_buttons(core, templates) + action_buttons(plugins),
     }
+
+
+# --- SRD 5.2.1 (CC-BY-4.0), traduzione italiana ----------------------------
+# I JSON tipizzati vendorizzati in Dev/Source/SRD/ (da github massimobarbieri/
+# DND-SRD-IT) sono generati in note per-voce in un albero di SOLA LETTURA SRD/,
+# separato dall'homebrew. I mostri diventano statblock Fantasy Statblocks.
+# Config: { json, dest (sottocartella), cat (categoria), fm (campi -> frontmatter) }.
+SRD_GEN = [
+    {"json": "srd_5_2_1_spells.json",      "dest": "Incantesimi",     "cat": "srd-incantesimo", "fm": ["livello", "scuola", "classi", "tempo_lancio", "gittata", "componenti", "durata"]},
+    {"json": "srd_5_2_1_magic_items.json", "dest": "Oggetti",         "cat": "srd-oggetto",     "fm": ["tipo_base", "rarita", "richiede_sintonia"]},
+    {"json": "srd_5_2_1_feats.json",       "dest": "Talenti",         "cat": "srd-talento",     "fm": ["categoria", "prerequisito", "ripetibile"]},
+    {"json": "srd_5_2_1_species.json",     "dest": "Specie",          "cat": "srd-specie",      "fm": ["tipo_creatura", "taglia", "velocita"]},
+    {"json": "srd_5_2_1_backgrounds.json", "dest": "Background",      "cat": "srd-background",  "fm": ["talento_origine"]},
+    {"json": "srd_5_2_1_languages.json",   "dest": "Lingue",          "cat": "srd-lingua",      "fm": []},
+    {"json": "srd_5_2_1_equipment.json",   "dest": "Equipaggiamento", "cat": "srd-equipaggiamento", "fm": []},
+    {"json": "srd_5_2_1_rules.json",       "dest": "Regole",          "cat": "srd-regola",      "fm": []},
+    {"json": "srd_5_2_1_classes.json",     "dest": "Classi",          "cat": "srd-classe",      "fm": []},
+]
+
+SRD_ATTRIBUTION = (
+    "Quest'opera include materiale tratto dal **System Reference Document 5.2.1** "
+    "(\"SRD 5.2.1\") di Wizards of the Coast LLC, disponibile su https://www.dndbeyond.com/srd. "
+    "Il SRD 5.2.1 è concesso in licenza ai sensi della "
+    "[CC-BY-4.0](https://creativecommons.org/licenses/by/4.0/legalcode). "
+    "Traduzione italiana: [massimobarbieri/DND-SRD-IT](https://github.com/massimobarbieri/DND-SRD-IT)."
+)
+
+
+def srd_slug(name: str) -> str:
+    """Nome file leggibile e sicuro per Obsidian (toglie i caratteri vietati)."""
+    cleaned = re.sub(r'[\\/:*?"<>|#\[\]^]', "", str(name)).strip()
+    return cleaned or "voce"
+
+
+def frontmatter_block(data: dict[str, Any]) -> str:
+    dumped = yaml.safe_dump(data, allow_unicode=True, sort_keys=False)
+    return f"---\n{dumped}---\n\n"
+
+
+def load_srd(name: str) -> list[dict[str, Any]]:
+    path = SRD_DIR / name
+    if not path.is_file():
+        return []
+    data = json.loads(path.read_text(encoding="utf-8"))
+    return data if isinstance(data, list) else []
+
+
+def srd_body(entry: dict[str, Any]) -> str:
+    """Corpo markdown di una voce SRD: descrizione/beneficio + sezioni + scaling."""
+    parts: list[str] = []
+    for key in ("descrizione", "beneficio"):
+        if isinstance(entry.get(key), str) and entry[key].strip():
+            parts.append(entry[key].strip())
+    for sez in entry.get("sezioni") or []:
+        if isinstance(sez, dict):
+            parts.append(f"## {sez.get('titolo', '')}\n\n{sez.get('descrizione', '')}".strip())
+    for sc in entry.get("scaling") or []:
+        if isinstance(sc, dict):
+            parts.append(f"## {sc.get('nome', '')}\n\n{sc.get('descrizione', '')}".strip())
+    return "\n\n".join(p for p in parts if p)
+
+
+def srd_note(entry: dict[str, Any], cat: str, fm_fields: list[str]) -> str:
+    fm: dict[str, Any] = {"nome": entry.get("nome", ""), "categoria": cat, "srd": True, "fonte": "SRD 5.2.1"}
+    for key in fm_fields:
+        val = entry.get(key)
+        if isinstance(val, (str, int, float, bool)) and val != "":
+            fm[key] = val
+        elif isinstance(val, list) and val:
+            fm[key] = val
+    return frontmatter_block(fm) + f"# {entry.get('nome', '')}\n\n{srd_body(entry)}\n"
+
+
+def srd_statblock_yaml(monster: dict[str, Any], layout: str) -> str:
+    """Mappa un mostro JSON IT sul formato statblock di Fantasy Statblocks."""
+    car = monster.get("caratteristiche", {}) or {}
+    order = ["forza", "destrezza", "costituzione", "intelligenza", "saggezza", "carisma"]
+    hp = monster.get("punti_ferita", {}) or {}
+    cr = monster.get("grado_sfida", {}) or {}
+    vel = monster.get("velocita", {}) or {}
+    sensi = monster.get("sensi", {}) or {}
+    lingue = monster.get("lingue", [])
+
+    def actions(key: str) -> list[dict[str, str]]:
+        return [{"name": a.get("nome", ""), "desc": a.get("descrizione", "")}
+                for a in (monster.get(key) or []) if isinstance(a, dict)]
+
+    sb = {
+        "layout": layout,
+        "name": monster.get("nome", ""),
+        "size": monster.get("dimensione", ""),
+        "type": monster.get("tipo", ""),
+        "alignment": monster.get("allineamento", ""),
+        "ac": monster.get("classe_armatura", ""),
+        "hp": hp.get("media", "") if isinstance(hp, dict) else hp,
+        "hit_dice": hp.get("formula", "") if isinstance(hp, dict) else "",
+        "speed": ", ".join(str(v) if t == "camminata" else f"{t} {v}" for t, v in vel.items()) if isinstance(vel, dict) else str(vel),
+        "stats": [int((car.get(k) or {}).get("punteggio", 10)) for k in order],
+        "senses": ", ".join(f"{t.replace('_', ' ')} {v}" for t, v in sensi.items()) if isinstance(sensi, dict) else str(sensi),
+        "languages": ", ".join(lingue) if isinstance(lingue, list) else str(lingue),
+        "cr": str(cr.get("valore", "")) if isinstance(cr, dict) else str(cr),
+        "traits": actions("tratti"),
+        "actions": actions("azioni"),
+        "legendary_actions": actions("azioni_leggendarie"),
+    }
+    return yaml.safe_dump(sb, allow_unicode=True, sort_keys=False)
+
+
+def build_srd(core: dict[str, Any]) -> int:
+    """Genera l'albero SRD/ (sola lettura) dai JSON IT vendorizzati. Ritorna il
+    numero di note scritte. Cartella sorgente assente -> 0 (SRD opzionale)."""
+    if not SRD_DIR.is_dir():
+        return 0
+    write_text(VAULT / "SRD" / "LICENZA.md", f"# Licenza SRD\n\n{SRD_ATTRIBUTION}\n")
+    written = 0
+    for spec in SRD_GEN:
+        for entry in load_srd(spec["json"]):
+            write_text(VAULT / "SRD" / spec["dest"] / f"{srd_slug(entry.get('nome'))}.md",
+                       srd_note(entry, spec["cat"], spec["fm"]))
+            written += 1
+    # Glossario: condizioni in una cartella dedicata, il resto in Glossario.
+    for entry in load_srd("srd_5_2_1_rules_glossary.json"):
+        cond = entry.get("descrittore") == "condizione"
+        dest, cat = ("Condizioni", "srd-condizione") if cond else ("Glossario", "srd-glossario")
+        write_text(VAULT / "SRD" / dest / f"{srd_slug(entry.get('nome'))}.md",
+                   srd_note(entry, cat, ["descrittore"]))
+        written += 1
+    # Mostri -> statblock (statblock: inline => entra nel bestiario di Fantasy Statblocks).
+    layout = (core.get("statblock", {}) or {}).get("layout", "Basic 5e Layout")
+    for monster in load_srd("srd_5_2_1_monsters.json"):
+        fm = {"nome": monster.get("nome", ""), "categoria": "srd-mostro", "srd": True,
+              "fonte": "SRD 5.2.1", "statblock": "inline"}
+        content = frontmatter_block(fm) + f"# {monster.get('nome', '')}\n\n```statblock\n{srd_statblock_yaml(monster, layout)}```\n"
+        write_text(VAULT / "SRD" / "Mostri" / f"{srd_slug(monster.get('nome'))}.md", content)
+        written += 1
+    index = (
+        "# 📚 SRD 5.2.1 (italiano)\n\n"
+        "Riferimento ufficiale 5.5e in italiano, **sola lettura**: si rigenera a ogni build, "
+        "non modificarlo (il tuo homebrew va in `Mondi/`). I mostri sono statblock e popolano "
+        "il bestiario di Fantasy Statblocks (richiamabili con `monster: Nome`).\n\n"
+        f"> [!quote]- Licenza\n> {SRD_ATTRIBUTION}\n\n"
+        "## Contenuto\n"
+        '```dataview\ntable without id length(rows) as Voci\nfrom "SRD"\n'
+        "where srd\ngroup by categoria as Categoria\nsort Categoria asc\n```\n"
+    )
+    write_text(VAULT / "SRD" / "Indice.md", index)
+    return written
 
 
 def build() -> dict[str, str]:
@@ -322,16 +512,24 @@ def build() -> dict[str, str]:
         write_text(VAULT / name, text)
         rendered[name] = text
 
-    # Pagine-indice per dominio (hub navigabili), una per voce di pages.yaml.
+    # Pagine-indice per dominio (hub navigabili) in INDEX_DIR/, radice pulita.
     index_template = env.get_template("index.md.j2")
     for page in pages:
+        rel = f"{INDEX_DIR}/{page['file']}.md"
         text = index_template.render(core=core, plugins=plugins, templates=templates, page=page)
-        write_text(VAULT / f"{page['file']}.md", text)
-        rendered[f"{page['file']}.md"] = text
+        write_text(VAULT / rel, text)
+        rendered[rel] = text
+
+    # SRD 5.2.1 (CC-BY-4.0, IT): albero di sola lettura, separato dall'homebrew.
+    srd_count = build_srd(core)
+    if srd_count:
+        print(f"SRD: {srd_count} voci generate in SRD/.")
 
     # Bookmarks (core): le poche pagine di riferimento a un clic. Non distruttivo:
     # aggiunge solo le voci mancanti, preservando i bookmark dell'utente.
-    bookmark_targets = [("Home.md", "🏠 Home"), *((f"{p['file']}.md", p["title"]) for p in pages)]
+    bookmark_targets = [("Home.md", "🏠 Home"), *((f"{INDEX_DIR}/{p['file']}.md", p["title"]) for p in pages)]
+    if (VAULT / "SRD" / "Indice.md").is_file():
+        bookmark_targets.append(("SRD/Indice.md", "📚 SRD"))
     bookmarks = read_json(obsidian / "bookmarks.json")
     bookmarks = bookmarks if isinstance(bookmarks, dict) else {}
     items = bookmarks.get("items") if isinstance(bookmarks.get("items"), list) else []
@@ -344,6 +542,9 @@ def build() -> dict[str, str]:
     if added:
         bookmarks["items"] = items
         write_json(obsidian / "bookmarks.json", bookmarks)
+
+    # Pulizia esploratore: nasconde le cartelle z.* + le esclude da ricerca/grafo.
+    write_workspace_chrome(obsidian)
 
     # Scaffolding delle cartelle contenuti (idempotente): mostra la struttura
     # senza mai sovrascrivere note esistenti.

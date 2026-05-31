@@ -111,6 +111,19 @@ async function ask(tp, question, template, core) {
     }
     case "list": {
       const opts = question.options ?? [];
+      // multi: scelte ripetute finché l'utente sceglie "(fine)" -> array.
+      if (question.multi) {
+        const picked = [];
+        const pool = [...opts];
+        while (pool.length) {
+          const label = `${question.prompt}${picked.length ? ` — scelti ${picked.length}` : ""}`;
+          const choice = await tp.system.suggester(["(fine)", ...pool], [null, ...pool], false, label);
+          if (!choice) break;
+          picked.push(choice);
+          pool.splice(pool.indexOf(choice), 1);
+        }
+        return picked;
+      }
       const v = await tp.system.suggester(opts, opts, req, question.prompt);
       return String(v ?? "");
     }

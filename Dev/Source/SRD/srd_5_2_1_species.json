@@ -1,0 +1,255 @@
+[
+  {
+    "id": "dragonide",
+    "nome": "Dragonide",
+    "tipo": "specie",
+    "tipo_creatura": "Umanoide",
+    "capitolo": "Origini dei personaggi",
+    "pagine_sorgente": "93-97",
+    "taglia": "Media",
+    "velocita": "9 m",
+    "tratti_sintesi": "discendenza draconica, soffio, resistenza al danno scelto, scurovisione e volo draconico dal 5º livello",
+    "descrizione": "Media, 9 m; discendenza draconica, soffio, resistenza al danno scelto, scurovisione e volo draconico dal 5º livello.",
+    "sezioni": [
+      {
+        "titolo": "Tratti",
+        "descrizione": "discendenza draconica, soffio, resistenza al danno scelto, scurovisione e volo draconico dal 5º livello."
+      },
+      {
+        "titolo": "Antenati draconici",
+        "righe": [
+          {
+            "Antenato": "Argento",
+            "Danno": "Freddo"
+          },
+          {
+            "Antenato": "Bianco",
+            "Danno": "Freddo"
+          },
+          {
+            "Antenato": "Blu",
+            "Danno": "Fulmine"
+          },
+          {
+            "Antenato": "Bronzo",
+            "Danno": "Fulmine"
+          },
+          {
+            "Antenato": "Nero",
+            "Danno": "Acido"
+          },
+          {
+            "Antenato": "Oro",
+            "Danno": "Fuoco"
+          },
+          {
+            "Antenato": "Ottone",
+            "Danno": "Fuoco"
+          },
+          {
+            "Antenato": "Rame",
+            "Danno": "Acido"
+          },
+          {
+            "Antenato": "Rosso",
+            "Danno": "Fuoco"
+          },
+          {
+            "Antenato": "Verde",
+            "Danno": "Veleno"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "elfo",
+    "nome": "Elfo",
+    "tipo": "specie",
+    "tipo_creatura": "Umanoide",
+    "capitolo": "Origini dei personaggi",
+    "pagine_sorgente": "93-97",
+    "taglia": "Media",
+    "velocita": "9 m",
+    "tratti_sintesi": "scurovisione, lignaggio elfico, retaggio fatato, sensi acuti e trance",
+    "descrizione": "Media, 9 m; scurovisione, lignaggio elfico, retaggio fatato, sensi acuti e trance.",
+    "sezioni": [
+      {
+        "titolo": "Tratti",
+        "descrizione": "scurovisione, lignaggio elfico, retaggio fatato, sensi acuti e trance."
+      },
+      {
+        "titolo": "Lignaggi elfici",
+        "righe": [
+          {
+            "Lignaggio": "Drow",
+            "Livello 1": "scurovisione 36 m e luci danzanti",
+            "Livello 3": "luminescenza",
+            "Livello 5": "oscurita"
+          },
+          {
+            "Lignaggio": "Elfo alto",
+            "Livello 1": "prestidigitazione sostituibile dopo riposo lungo",
+            "Livello 3": "individuazione del magico",
+            "Livello 5": "passo velato"
+          },
+          {
+            "Lignaggio": "Elfo dei boschi",
+            "Livello 1": "velocita +1,5 m e artificio druidico",
+            "Livello 3": "passo veloce",
+            "Livello 5": "passare senza tracce"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "gnomo",
+    "nome": "Gnomo",
+    "tipo": "specie",
+    "tipo_creatura": "Umanoide",
+    "capitolo": "Origini dei personaggi",
+    "pagine_sorgente": "93-97",
+    "taglia": "Piccola",
+    "velocita": "9 m",
+    "tratti_sintesi": "astuzia gnomesca, lignaggio delle foreste o delle rocce e scurovisione",
+    "descrizione": "Piccola, 9 m; astuzia gnomesca, lignaggio delle foreste o delle rocce e scurovisione.",
+    "sezioni": [
+      {
+        "titolo": "Tratti",
+        "descrizione": "astuzia gnomesca, lignaggio delle foreste o delle rocce e scurovisione."
+      }
+    ]
+  },
+  {
+    "id": "goliath",
+    "nome": "Goliath",
+    "tipo": "specie",
+    "tipo_creatura": "Umanoide",
+    "capitolo": "Origini dei personaggi",
+    "pagine_sorgente": "93-97",
+    "taglia": "Media",
+    "velocita": "10",
+    "tratti_sintesi": "costituzione robusta, discendenza gigantica e forma Grande dal 5º livello",
+    "descrizione": "Media, 10,5 m; costituzione robusta, discendenza gigantica e forma Grande dal 5º livello.",
+    "sezioni": [
+      {
+        "titolo": "Tratti",
+        "descrizione": "costituzione robusta, discendenza gigantica e forma Grande dal 5º livello."
+      }
+    ]
+  },
+  {
+    "id": "halfling",
+    "nome": "Halfling",
+    "tipo": "specie",
+    "tipo_creatura": "Umanoide",
+    "capitolo": "Origini dei personaggi",
+    "pagine_sorgente": "93-97",
+    "taglia": "Piccola",
+    "velocita": "9 m",
+    "tratti_sintesi": "agilita halfling, coraggio, fortuna e furtivita innata",
+    "descrizione": "Piccola, 9 m; agilita halfling, coraggio, fortuna e furtivita innata.",
+    "sezioni": [
+      {
+        "titolo": "Tratti",
+        "descrizione": "agilita halfling, coraggio, fortuna e furtivita innata."
+      }
+    ]
+  },
+  {
+    "id": "nano",
+    "nome": "Nano",
+    "tipo": "specie",
+    "tipo_creatura": "Umanoide",
+    "capitolo": "Origini dei personaggi",
+    "pagine_sorgente": "93-97",
+    "taglia": "Media",
+    "velocita": "9 m",
+    "tratti_sintesi": "esperto minatore, resilienza nanica, robustezza nanica e scurovisione superiore",
+    "descrizione": "Media, 9 m; esperto minatore, resilienza nanica, robustezza nanica e scurovisione superiore.",
+    "sezioni": [
+      {
+        "titolo": "Tratti",
+        "descrizione": "esperto minatore, resilienza nanica, robustezza nanica e scurovisione superiore."
+      }
+    ]
+  },
+  {
+    "id": "orco",
+    "nome": "Orco",
+    "tipo": "specie",
+    "tipo_creatura": "Umanoide",
+    "capitolo": "Origini dei personaggi",
+    "pagine_sorgente": "93-97",
+    "taglia": "Media",
+    "velocita": "9 m",
+    "tratti_sintesi": "resistenza implacabile, scarica di adrenalina e scurovisione superiore",
+    "descrizione": "Media, 9 m; resistenza implacabile, scarica di adrenalina e scurovisione superiore.",
+    "sezioni": [
+      {
+        "titolo": "Tratti",
+        "descrizione": "resistenza implacabile, scarica di adrenalina e scurovisione superiore."
+      }
+    ]
+  },
+  {
+    "id": "tiefling",
+    "nome": "Tiefling",
+    "tipo": "specie",
+    "tipo_creatura": "Umanoide",
+    "capitolo": "Origini dei personaggi",
+    "pagine_sorgente": "93-97",
+    "taglia": "Piccola o Media",
+    "velocita": "9 m",
+    "tratti_sintesi": "retaggio immondo, presenza ultraterrena e scurovisione",
+    "descrizione": "Piccola o Media, 9 m; retaggio immondo, presenza ultraterrena e scurovisione.",
+    "sezioni": [
+      {
+        "titolo": "Tratti",
+        "descrizione": "retaggio immondo, presenza ultraterrena e scurovisione."
+      },
+      {
+        "titolo": "Retaggi immondi",
+        "righe": [
+          {
+            "Retaggio": "Abissale",
+            "Livello 1": "resistenza veleno e spruzzo velenoso",
+            "Livello 3": "raggio di infermita",
+            "Livello 5": "blocca persone"
+          },
+          {
+            "Retaggio": "Ctonio",
+            "Livello 1": "resistenza necrotico e tocco gelido",
+            "Livello 3": "vita falsata",
+            "Livello 5": "raggio di affaticamento"
+          },
+          {
+            "Retaggio": "Infernale",
+            "Livello 1": "resistenza fuoco e dardo di fuoco",
+            "Livello 3": "intimorire infernale",
+            "Livello 5": "oscurita"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "umano",
+    "nome": "Umano",
+    "tipo": "specie",
+    "tipo_creatura": "Umanoide",
+    "capitolo": "Origini dei personaggi",
+    "pagine_sorgente": "93-97",
+    "taglia": "Piccola o Media",
+    "velocita": "9 m",
+    "tratti_sintesi": "intraprendente, pluriabilita e un talento Origini a scelta",
+    "descrizione": "Piccola o Media, 9 m; intraprendente, pluriabilita e un talento Origini a scelta.",
+    "sezioni": [
+      {
+        "titolo": "Tratti",
+        "descrizione": "intraprendente, pluriabilita e un talento Origini a scelta."
+      }
+    ]
+  }
+]

@@ -48,6 +48,12 @@ metabind_inputs:
   dado_vita: INPUT[inlineSelect(option(d6), option(d8), option(d10), option(d12))]
   incantesimi: INPUT[inlineSelect(option(nessuno), option(metà), option(piena), option(patto))]
   taglia: INPUT[inlineSelect(option(minuscola), option(piccola), option(media), option(grande), option(enorme), option(mastodontica))]
+  scala: INPUT[inlineSelect(option(mondo), option(continente), option(regno), option(regione), option(insediamento))]
+  genere: INPUT[inlineSelect(option(high fantasy), option(dark fantasy), option(sword & sorcery), option(grimdark), option(eroico), option(weird))]
+  temi: INPUT[inlineListSuggester(option(politico), option(guerra), option(mistero), option(sopravvivenza), option(esplorazione), option(horror), option(intrigo), option(redenzione))]
+  clima: INPUT[inlineSelect(option(temperato), option(arido), option(tropicale), option(artico), option(montano), option(costiero), option(sotterraneo))]
+  portata: INPUT[inlineSelect(option(locale), option(regionale), option(nazionale), option(globale))]
+  allineamento: INPUT[inlineSelect(option(Legale Buono), option(Neutrale Buono), option(Caotico Buono), option(Legale Neutrale), option(Neutrale), option(Caotico Neutrale), option(Legale Malvagio), option(Neutrale Malvagio), option(Caotico Malvagio))]
   testo: INPUT[text]
   testo_area: INPUT[textArea]
 # Icone cartella (Iconize): chiave = chiave di core.folders, valore = emoji.

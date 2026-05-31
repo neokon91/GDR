@@ -1,0 +1,4318 @@
+[
+  {
+    "id": "armature",
+    "nome": "Armature",
+    "capitolo": "Equipaggiamento",
+    "categoria": "Equipaggiamento",
+    "pagine_sorgente": "104-105",
+    "descrizione": "Le armature determinano la Classe Armatura di base e sono divise in leggere, medie e pesanti. Uno scudo fornisce un bonus alla CA se chi lo usa ha la competenza appropriata.",
+    "sezioni": [
+      {
+        "titolo": "Classi armatura",
+        "righe": [
+          {
+            "Voce": "Armature leggere",
+            "Riepilogo": "Imbottita 11 + Des con svantaggio a Furtivita; cuoio 11 + Des; cuoio borchiato 12 + Des."
+          },
+          {
+            "Voce": "Armature medie",
+            "Riepilogo": "Usano il modificatore di Destrezza massimo +2; includono pelle, giaco di maglia, corazza a scaglie, corazza di piastre e mezza armatura."
+          },
+          {
+            "Voce": "Armature pesanti",
+            "Riepilogo": "Corazza ad anelli CA 14, cotta di maglia CA 16, corazza a strisce CA 17, armatura a piastre CA 18."
+          },
+          {
+            "Voce": "Scudo",
+            "Riepilogo": "+2 alla CA; richiede un'azione di Utilizzo per indossarlo o toglierlo."
+          }
+        ]
+      },
+      {
+        "titolo": "Regole di competenza",
+        "blocchi": [
+          {
+            "nome": "Forza",
+            "descrizione": "Se un'armatura indica un requisito di Forza, la velocita del portatore si riduce di 3 metri se il punteggio e inferiore."
+          },
+          {
+            "nome": "Furtivita",
+            "descrizione": "La voce Svantaggio nella tabella impone svantaggio alle prove di Destrezza (Furtivita)."
+          },
+          {
+            "nome": "Senza competenza",
+            "descrizione": "Indossare armatura leggera, media o pesante senza competenza impone svantaggio alle prove con d20 di Forza o Destrezza e impedisce di lanciare incantesimi."
+          },
+          {
+            "nome": "Una alla volta",
+            "descrizione": "Una creatura puo indossare una sola armatura e impugnare un solo scudo alla volta."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "armi",
+    "nome": "Armi",
+    "capitolo": "Equipaggiamento",
+    "categoria": "Equipaggiamento",
+    "pagine_sorgente": "101-104",
+    "descrizione": "Le armi sono divise in semplici e da guerra, da mischia o a distanza. La competenza consente di aggiungere il bonus di competenza al tiro per colpire.",
+    "sezioni": [
+      {
+        "titolo": "Categorie e uso",
+        "righe": [
+          {
+            "Voce": "Categoria",
+            "Riepilogo": "Semplice o da guerra; le competenze nelle armi sono spesso legate a queste categorie."
+          },
+          {
+            "Voce": "Tipo",
+            "Riepilogo": "Da mischia per bersagli entro 1,5 metri; a distanza per attaccare piu lontano."
+          },
+          {
+            "Voce": "Danni",
+            "Riepilogo": "Ogni arma indica dado e tipo di danno."
+          },
+          {
+            "Voce": "Padronanza",
+            "Riepilogo": "Ogni arma ha una proprieta di padronanza usabile solo con il privilegio appropriato."
+          }
+        ]
+      },
+      {
+        "titolo": "Proprieta comuni",
+        "righe": [
+          {
+            "Voce": "Accurata",
+            "Riepilogo": "Usa Forza o Destrezza per tiro per colpire e danni, scegliendo lo stesso modificatore."
+          },
+          {
+            "Voce": "A due mani",
+            "Riepilogo": "Richiede due mani quando l'arma viene usata per attaccare."
+          },
+          {
+            "Voce": "Gittata",
+            "Riepilogo": "Indica gittata normale e lunga; oltre la normale si attacca con svantaggio, oltre la lunga non si attacca."
+          },
+          {
+            "Voce": "Lancio",
+            "Riepilogo": "L'arma puo essere scagliata effettuando un attacco a distanza."
+          },
+          {
+            "Voce": "Leggera",
+            "Riepilogo": "Permette un attacco con azione bonus se si attacca con un'altra arma leggera."
+          },
+          {
+            "Voce": "Munizioni",
+            "Riepilogo": "Richiede munizioni, consumate a ogni attacco; dopo il combattimento se ne recupera meta arrotondata per difetto."
+          },
+          {
+            "Voce": "Pesante",
+            "Riepilogo": "Richiede Forza 13 per armi pesanti da mischia o Destrezza 13 per armi pesanti a distanza, altrimenti i tiri per colpire hanno svantaggio."
+          },
+          {
+            "Voce": "Portata",
+            "Riepilogo": "Aggiunge 1,5 metri alla portata per attaccare e per gli attacchi di opportunita."
+          },
+          {
+            "Voce": "Ricarica",
+            "Riepilogo": "Consente una sola munizione quando si usa un'azione, azione bonus o reazione per fare fuoco."
+          },
+          {
+            "Voce": "Versatile",
+            "Riepilogo": "Puo essere usata a una o due mani; a due mani usa il danno indicato tra parentesi."
+          }
+        ]
+      },
+      {
+        "titolo": "Proprieta di padronanza",
+        "righe": [
+          {
+            "Voce": "Colpo di striscio",
+            "Riepilogo": "Un mancato contro una creatura puo infliggere danni pari al modificatore di caratteristica usato per colpire."
+          },
+          {
+            "Voce": "Doppio fendente",
+            "Riepilogo": "Dopo un colpo in mischia, permette un secondo attacco contro un bersaglio entro 1,5 metri dal primo, una volta per turno."
+          },
+          {
+            "Voce": "Fiaccare",
+            "Riepilogo": "Il bersaglio colpito ha svantaggio al prossimo tiro per colpire prima del tuo prossimo turno."
+          },
+          {
+            "Voce": "Graffio",
+            "Riepilogo": "L'attacco extra della proprieta leggera puo fare parte dell'azione di Attacco invece che dell'azione bonus, una volta per turno."
+          },
+          {
+            "Voce": "Lentezza",
+            "Riepilogo": "Riduce la velocita della creatura colpita di 3 metri fino all'inizio del tuo prossimo turno."
+          },
+          {
+            "Voce": "Rovesciamento",
+            "Riepilogo": "Puo far cadere prono il bersaglio se non supera il tiro salvezza richiesto."
+          },
+          {
+            "Voce": "Spinta",
+            "Riepilogo": "Puo spingere una creatura Grande o inferiore di almeno 3 metri."
+          },
+          {
+            "Voce": "Vessazione",
+            "Riepilogo": "Dopo aver colpito e inflitto danni, hai vantaggio al prossimo tiro per colpire contro quella creatura prima della fine del tuo prossimo turno."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "attivare_oggetti_magici",
+    "nome": "Attivare oggetti magici",
+    "capitolo": "Oggetti magici",
+    "categoria": "Oggetti magici",
+    "pagine_sorgente": 234,
+    "descrizione": "Di solito attivare un oggetto magico richiede un'azione di Magia. La categoria o la descrizione del singolo oggetto specificano eventuali procedure particolari.",
+    "sezioni": [
+      {
+        "titolo": "Modalita di attivazione",
+        "righe": [
+          {
+            "Voce": "Parola d'ordine",
+            "Riepilogo": "Deve essere pronunciata in modo udibile; non funziona dove i suoni sono soppressi, come in silenzio."
+          },
+          {
+            "Voce": "Consumabili",
+            "Riepilogo": "Una volta usato, un oggetto consumabile perde la sua magia."
+          },
+          {
+            "Voce": "Pozioni",
+            "Riepilogo": "Bere una pozione o somministrarla richiede un'azione bonus; applicare un olio puo richiedere piu tempo."
+          },
+          {
+            "Voce": "Cariche",
+            "Riepilogo": "Alcuni oggetti consumano cariche; identificare rivela le cariche rimanenti e una creatura sintonizzata conosce cariche e recupero."
+          },
+          {
+            "Voce": "Alba successiva",
+            "Riepilogo": "Se l'evento di ricarica non esiste nel mondo o piano, il GM decide quando l'oggetto si ricarica."
+          }
+        ]
+      },
+      {
+        "titolo": "Incantesimi dagli oggetti",
+        "righe": [
+          {
+            "Voce": "Slot e componenti",
+            "Riepilogo": "L'incantesimo non consuma slot e non richiede componenti, salvo diversa indicazione."
+          },
+          {
+            "Voce": "Livello",
+            "Riepilogo": "Viene lanciato al livello piu basso possibile di incantesimo e incantatore, salvo diversa indicazione."
+          },
+          {
+            "Voce": "Concentrazione",
+            "Riepilogo": "Se l'incantesimo richiede concentrazione, chi usa l'oggetto deve concentrarsi."
+          },
+          {
+            "Voce": "Caratteristica da incantatore",
+            "Riepilogo": "Se richiesta, chi usa piu caratteristiche sceglie quale usare; chi non ne ha usa modificatore +0 e bonus di competenza."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "avanzamento_livelli_superiori",
+    "nome": "Avanzamento e livelli superiori",
+    "capitolo": "Creazione del personaggio",
+    "categoria": "Creazione personaggio",
+    "pagine_sorgente": "25-27",
+    "descrizione": "L'avanzamento di livello aumenta capacita, punti ferita e talvolta bonus di competenza o modificatori. Il GM puo far partire il gruppo da un livello superiore al 1º.",
+    "sezioni": [
+      {
+        "titolo": "Avanzamento",
+        "righe": [
+          {
+            "Voce": "Privilegi",
+            "Riepilogo": "A ogni nuovo livello annota i privilegi indicati dalla classe."
+          },
+          {
+            "Voce": "Punti ferita",
+            "Riepilogo": "Aggiungi il valore previsto dalla classe per i livelli successivi al 1º."
+          },
+          {
+            "Voce": "Bonus di competenza",
+            "Riepilogo": "Quando aumenta, aggiorna tutti i numeri della scheda che lo includono."
+          },
+          {
+            "Voce": "Modificatori",
+            "Riepilogo": "Se un punteggio diventa pari e cambia modificatore, aggiorna tutti i valori collegati."
+          },
+          {
+            "Voce": "Costituzione",
+            "Riepilogo": "Se il modificatore aumenta di 1, i PF massimi aumentano di 1 per ogni livello del personaggio."
+          }
+        ]
+      },
+      {
+        "titolo": "Fasce di gioco",
+        "righe": [
+          {
+            "Voce": "1-4",
+            "Riepilogo": "Apprendisti avventurieri; minacce locali."
+          },
+          {
+            "Voce": "5-10",
+            "Riepilogo": "Avventurieri affermati; minacce per citta e regni."
+          },
+          {
+            "Voce": "11-16",
+            "Riepilogo": "Potere raro tra gli avventurieri; minacce continentali."
+          },
+          {
+            "Voce": "17-20",
+            "Riepilogo": "Archetipi eroici; destino del mondo o multiverso."
+          }
+        ]
+      },
+      {
+        "titolo": "Equipaggiamento a livelli superiori",
+        "righe": [
+          {
+            "Livello di partenza": "2-4",
+            "Equipaggiamento e denaro": "Equipaggiamento ordinario, 1 oggetto comune"
+          },
+          {
+            "Livello di partenza": "5-10",
+            "Equipaggiamento e denaro": "500 mo + 1d10 x 25 mo + equipaggiamento ordinario; 1 comune, 1 non comune"
+          },
+          {
+            "Livello di partenza": "11-16",
+            "Equipaggiamento e denaro": "5.000 mo + 1d10 x 250 mo + equipaggiamento ordinario; 2 comuni, 3 non comuni, 1 raro"
+          },
+          {
+            "Livello di partenza": "17-20",
+            "Equipaggiamento e denaro": "20.000 mo + 1d10 x 250 mo + equipaggiamento ordinario; 2 comuni, 4 non comuni, 3 rari, 1 molto raro"
+          }
+        ]
+      },
+      {
+        "titolo": "Avanzamento dei personaggi",
+        "righe": [
+          {
+            "Livello": "1",
+            "PE minimi": "0",
+            "Bonus di competenza": "+2"
+          },
+          {
+            "Livello": "2",
+            "PE minimi": "300",
+            "Bonus di competenza": "+2"
+          },
+          {
+            "Livello": "3",
+            "PE minimi": "900",
+            "Bonus di competenza": "+2"
+          },
+          {
+            "Livello": "4",
+            "PE minimi": "2.700",
+            "Bonus di competenza": "+2"
+          },
+          {
+            "Livello": "5",
+            "PE minimi": "6.500",
+            "Bonus di competenza": "+3"
+          },
+          {
+            "Livello": "6",
+            "PE minimi": "14.000",
+            "Bonus di competenza": "+3"
+          },
+          {
+            "Livello": "7",
+            "PE minimi": "23.000",
+            "Bonus di competenza": "+3"
+          },
+          {
+            "Livello": "8",
+            "PE minimi": "34.000",
+            "Bonus di competenza": "+3"
+          },
+          {
+            "Livello": "9",
+            "PE minimi": "48.000",
+            "Bonus di competenza": "+4"
+          },
+          {
+            "Livello": "10",
+            "PE minimi": "64.000",
+            "Bonus di competenza": "+4"
+          },
+          {
+            "Livello": "11",
+            "PE minimi": "85.000",
+            "Bonus di competenza": "+4"
+          },
+          {
+            "Livello": "12",
+            "PE minimi": "100.000",
+            "Bonus di competenza": "+4"
+          },
+          {
+            "Livello": "13",
+            "PE minimi": "120.000",
+            "Bonus di competenza": "+5"
+          },
+          {
+            "Livello": "14",
+            "PE minimi": "140.000",
+            "Bonus di competenza": "+5"
+          },
+          {
+            "Livello": "15",
+            "PE minimi": "165.000",
+            "Bonus di competenza": "+5"
+          },
+          {
+            "Livello": "16",
+            "PE minimi": "195.000",
+            "Bonus di competenza": "+5"
+          },
+          {
+            "Livello": "17",
+            "PE minimi": "225.000",
+            "Bonus di competenza": "+6"
+          },
+          {
+            "Livello": "18",
+            "PE minimi": "265.000",
+            "Bonus di competenza": "+6"
+          },
+          {
+            "Livello": "19",
+            "PE minimi": "305.000",
+            "Bonus di competenza": "+6"
+          },
+          {
+            "Livello": "20",
+            "PE minimi": "355.000",
+            "Bonus di competenza": "+6"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "azioni",
+    "nome": "Azioni",
+    "capitolo": "Come si gioca",
+    "categoria": "Azioni",
+    "pagine_sorgente": "10-11",
+    "descrizione": "Quando una creatura fa qualcosa di diverso dal muoversi o comunicare, in genere effettua un'azione. Molte azioni sono definite dal gioco, ma il GM puo risolvere azioni improvvisate.",
+    "sezioni": [
+      {
+        "titolo": "Azioni principali",
+        "righe": [
+          {
+            "Voce": "Aiuto",
+            "Riepilogo": "Aiuti un'altra creatura in una prova di caratteristica o in un tiro per colpire, oppure somministri cure di pronto soccorso."
+          },
+          {
+            "Voce": "Attacco",
+            "Riepilogo": "Effettui un attacco con un'arma o un colpo senz'armi."
+          },
+          {
+            "Voce": "Disimpegno",
+            "Riepilogo": "Il tuo movimento non provoca attacchi di opportunita per il resto del turno."
+          },
+          {
+            "Voce": "Influenza",
+            "Riepilogo": "Effettui una prova sociale per modificare l'atteggiamento di una creatura."
+          },
+          {
+            "Voce": "Magia",
+            "Riepilogo": "Lanci un incantesimo, usi un oggetto magico o un privilegio magico."
+          },
+          {
+            "Voce": "Nascondersi",
+            "Riepilogo": "Effettui una prova di Destrezza (Furtivita)."
+          },
+          {
+            "Voce": "Prepararsi",
+            "Riepilogo": "Prepari un'azione in risposta a una circostanza."
+          },
+          {
+            "Voce": "Ricerca",
+            "Riepilogo": "Effettui una prova di Saggezza legata a intuizione, medicina, percezione o sopravvivenza."
+          },
+          {
+            "Voce": "Scatto",
+            "Riepilogo": "Ottieni movimento extra pari alla tua velocita per il resto del turno."
+          },
+          {
+            "Voce": "Schivata",
+            "Riepilogo": "I tiri per colpire contro di te hanno svantaggio e i tuoi TS su Destrezza hanno vantaggio fino all'inizio del tuo turno successivo."
+          },
+          {
+            "Voce": "Studio",
+            "Riepilogo": "Effettui una prova di Intelligenza legata a conoscenze."
+          },
+          {
+            "Voce": "Utilizzo",
+            "Riepilogo": "Usi un oggetto non magico."
+          }
+        ]
+      },
+      {
+        "titolo": "Azioni speciali",
+        "blocchi": [
+          {
+            "nome": "Azioni bonus",
+            "descrizione": "Puoi effettuare un'azione bonus solo quando una regola lo consente. Nel tuo turno puoi effettuarne una sola."
+          },
+          {
+            "nome": "Reazioni",
+            "descrizione": "Una reazione e una risposta istantanea a un innesco. Dopo averla usata, non puoi usarne un'altra fino all'inizio del tuo turno successivo."
+          }
+        ]
+      },
+      {
+        "titolo": "Abilita",
+        "righe": [
+          {
+            "Abilità": "Acrobazia",
+            "Caratteristica": "Destrezza",
+            "Uso tipico": "rimanere in piedi in una situazione difficile o eseguire acrobazie"
+          },
+          {
+            "Abilità": "Addestrare animali",
+            "Caratteristica": "Saggezza",
+            "Uso tipico": "calmare o controllare animali"
+          },
+          {
+            "Abilità": "Arcano",
+            "Caratteristica": "Intelligenza",
+            "Uso tipico": "ricordare conoscenze su incantesimi, oggetti magici e piani"
+          },
+          {
+            "Abilità": "Atletica",
+            "Caratteristica": "Forza",
+            "Uso tipico": "saltare, scalare, nuotare o lottare contro resistenza fisica"
+          },
+          {
+            "Abilità": "Furtivita",
+            "Caratteristica": "Destrezza",
+            "Uso tipico": "muoversi senza essere notati"
+          },
+          {
+            "Abilità": "Indagare",
+            "Caratteristica": "Intelligenza",
+            "Uso tipico": "cercare indizi e fare deduzioni"
+          },
+          {
+            "Abilità": "Inganno",
+            "Caratteristica": "Carisma",
+            "Uso tipico": "mentire o nascondere intenzioni"
+          },
+          {
+            "Abilità": "Intimidire",
+            "Caratteristica": "Carisma",
+            "Uso tipico": "influenzare tramite minacce o presenza"
+          },
+          {
+            "Abilità": "Intuizione",
+            "Caratteristica": "Saggezza",
+            "Uso tipico": "leggere intenzioni ed emozioni"
+          },
+          {
+            "Abilità": "Intrattenere",
+            "Caratteristica": "Carisma",
+            "Uso tipico": "esibirsi davanti a un pubblico"
+          },
+          {
+            "Abilità": "Medicina",
+            "Caratteristica": "Saggezza",
+            "Uso tipico": "stabilizzare, diagnosticare o curare"
+          },
+          {
+            "Abilità": "Natura",
+            "Caratteristica": "Intelligenza",
+            "Uso tipico": "ricordare informazioni su ambiente, animali e piante"
+          },
+          {
+            "Abilità": "Percezione",
+            "Caratteristica": "Saggezza",
+            "Uso tipico": "notare dettagli, creature o pericoli"
+          },
+          {
+            "Abilità": "Persuasione",
+            "Caratteristica": "Carisma",
+            "Uso tipico": "influenzare con tatto o argomenti"
+          },
+          {
+            "Abilità": "Rapidita di mano",
+            "Caratteristica": "Destrezza",
+            "Uso tipico": "borseggiare, manipolare o nascondere oggetti"
+          },
+          {
+            "Abilità": "Religione",
+            "Caratteristica": "Intelligenza",
+            "Uso tipico": "ricordare conoscenze su divinita, riti e culti"
+          },
+          {
+            "Abilità": "Sopravvivenza",
+            "Caratteristica": "Saggezza",
+            "Uso tipico": "seguire tracce, orientarsi e vivere nelle terre selvagge"
+          },
+          {
+            "Abilità": "Storia",
+            "Caratteristica": "Intelligenza",
+            "Uso tipico": "ricordare eventi, popoli e luoghi storici"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "azioni_leggendarie_uso_limitato",
+    "nome": "Azioni leggendarie e uso limitato",
+    "capitolo": "Mostri",
+    "categoria": "Mostri",
+    "pagine_sorgente": "292-293",
+    "descrizione": "Alcune sezioni della scheda di un mostro hanno regole specifiche per azioni bonus, reazioni, azioni leggendarie e recupero degli utilizzi.",
+    "sezioni": [
+      {
+        "titolo": "Azioni speciali",
+        "righe": [
+          {
+            "Voce": "Azione bonus",
+            "Riepilogo": "Se il mostro ha azioni bonus, sono indicate nella relativa sezione."
+          },
+          {
+            "Voce": "Reazioni",
+            "Riepilogo": "Sono elencate con i rispettivi fattori scatenanti."
+          },
+          {
+            "Voce": "Azioni leggendarie",
+            "Riepilogo": "Si compiono immediatamente dopo il turno di un'altra creatura; una sola alla volta e solo se il mostro puo agire."
+          },
+          {
+            "Voce": "Utilizzi leggendari",
+            "Riepilogo": "La scheda indica quanti utilizzi possiede il mostro; recupera tutti gli utilizzi all'inizio di ogni suo turno."
+          }
+        ]
+      },
+      {
+        "titolo": "Uso limitato",
+        "righe": [
+          {
+            "Voce": "X/giorno",
+            "Riepilogo": "La voce puo essere usata X volte e recupera gli usi consumati al termine di un riposo lungo."
+          },
+          {
+            "Voce": "Ricarica X-Y",
+            "Riepilogo": "Dopo l'uso, all'inizio di ogni turno del mostro tira 1d6; se il risultato rientra nell'intervallo, l'uso torna disponibile."
+          },
+          {
+            "Voce": "Ricarica dopo riposo",
+            "Riepilogo": "La voce puo essere usata una volta e torna disponibile dopo un riposo breve o lungo."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "bersagli_tiri_effetti_incantesimi",
+    "nome": "Bersagli, tiri ed effetti",
+    "capitolo": "Incantesimi",
+    "categoria": "Incantesimi",
+    "pagine_sorgente": "120-121",
+    "descrizione": "Gli effetti di un incantesimo specificano bersagli, tiri salvezza, tiri per colpire e risultati. Gli esiti oltre il testo dell'incantesimo restano a discrezione del GM.",
+    "sezioni": [
+      {
+        "titolo": "Bersagli",
+        "righe": [
+          {
+            "Voce": "Percorso libero",
+            "Riepilogo": "Per bersagliare qualcosa serve un percorso libero; il bersaglio non deve essere dietro copertura totale."
+          },
+          {
+            "Voce": "Se stessi",
+            "Riepilogo": "Se l'incantesimo bersaglia una creatura a scelta, l'incantatore puo scegliere se stesso salvo vincoli contrari."
+          },
+          {
+            "Voce": "Area di effetto",
+            "Riepilogo": "Cono, cubo, cilindro, emanazione, linea o sfera determinano quali bersagli sono colpiti."
+          },
+          {
+            "Voce": "Accorgersi",
+            "Riepilogo": "Una creatura puo non accorgersi di essere bersagliata se l'effetto non e percettibile."
+          },
+          {
+            "Voce": "Bersaglio non valido",
+            "Riepilogo": "Non accade nulla al bersaglio, ma uno slot speso viene consumato; di norma sembra che il bersaglio abbia superato il tiro salvezza."
+          }
+        ]
+      },
+      {
+        "titolo": "Tiri",
+        "righe": [
+          {
+            "Voce": "CD incantesimo",
+            "Riepilogo": "8 + modificatore di caratteristica da incantatore + bonus di competenza."
+          },
+          {
+            "Voce": "Attacco incantesimo",
+            "Riepilogo": "Modificatore di caratteristica da incantatore + bonus di competenza."
+          },
+          {
+            "Voce": "Tiri salvezza",
+            "Riepilogo": "L'incantesimo indica caratteristica usata e cosa accade in caso di successo o fallimento."
+          },
+          {
+            "Voce": "Tiri per colpire",
+            "Riepilogo": "Alcuni incantesimi richiedono un tiro per determinare se l'effetto colpisce il bersaglio."
+          }
+        ]
+      },
+      {
+        "titolo": "Combinare effetti",
+        "blocchi": [
+          {
+            "nome": "Incantesimi diversi",
+            "descrizione": "Gli effetti di incantesimi diversi si sommano finche le rispettive durate si sovrappongono."
+          },
+          {
+            "nome": "Stesso incantesimo",
+            "descrizione": "Gli effetti dello stesso incantesimo lanciato piu volte non si combinano: si applica solo l'effetto piu potente."
+          },
+          {
+            "nome": "Pari potenza",
+            "descrizione": "Se gli effetti sono ugualmente potenti, si applica quello piu recente mentre le durate si sovrappongono."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "caratteristiche_allineamento_personaggio",
+    "nome": "Caratteristiche e allineamento",
+    "capitolo": "Creazione del personaggio",
+    "categoria": "Creazione personaggio",
+    "pagine_sorgente": "23-24",
+    "descrizione": "I punteggi di caratteristica possono essere generati con serie standard, generazione casuale o costo in punti. L'allineamento descrive ideali e atteggiamenti etici.",
+    "sezioni": [
+      {
+        "titolo": "Generare e modificare punteggi",
+        "righe": [
+          {
+            "Voce": "Serie standard",
+            "Riepilogo": "15, 14, 13, 12, 10, 8."
+          },
+          {
+            "Voce": "Generazione casuale",
+            "Riepilogo": "Tira 4d6, somma i tre piu alti; ripeti fino a ottenere sei numeri."
+          },
+          {
+            "Voce": "Costo in punti",
+            "Riepilogo": "27 punti; punteggi disponibili da 8 a 15 con costi da 0 a 9."
+          },
+          {
+            "Voce": "Background",
+            "Riepilogo": "Aumenta un punteggio di 2 e un altro di 1, oppure tre punteggi di 1; nessun incremento oltre 20."
+          },
+          {
+            "Voce": "Modificatori",
+            "Riepilogo": "Usa la tabella dei modificatori: 10-11 vale +0, 12-13 +1, 14-15 +2, 16-17 +3, 18-19 +4, 20 +5."
+          }
+        ]
+      },
+      {
+        "titolo": "Allineamenti",
+        "righe": [
+          {
+            "Voce": "LB",
+            "Riepilogo": "Agisce nel modo considerato giusto dalla societa."
+          },
+          {
+            "Voce": "NB",
+            "Riepilogo": "Fa del suo meglio senza sentirsi rigidamente vincolato dalle regole."
+          },
+          {
+            "Voce": "CB",
+            "Riepilogo": "Segue la coscienza senza curarsi troppo delle aspettative."
+          },
+          {
+            "Voce": "LN",
+            "Riepilogo": "Segue legge, tradizione o codici personali."
+          },
+          {
+            "Voce": "N",
+            "Riepilogo": "Evita questioni morali e fa cio che sembra migliore volta per volta."
+          },
+          {
+            "Voce": "CN",
+            "Riepilogo": "Segue i propri capricci e mette la liberta personale al primo posto."
+          },
+          {
+            "Voce": "LM/NM/CM",
+            "Riepilogo": "Allineamenti malvagi da concordare con il GM prima di creare il personaggio."
+          }
+        ],
+        "blocchi": [
+          {
+            "nome": "Senza allineamento",
+            "descrizione": "Molte creature prive di mente razionale sono senza allineamento."
+          }
+        ]
+      },
+      {
+        "titolo": "Costi in punti del punteggio di caratteristica",
+        "righe": [
+          {
+            "Punteggio": "8",
+            "Costo": "0"
+          },
+          {
+            "Punteggio": "9",
+            "Costo": "1"
+          },
+          {
+            "Punteggio": "10",
+            "Costo": "2"
+          },
+          {
+            "Punteggio": "11",
+            "Costo": "3"
+          },
+          {
+            "Punteggio": "12",
+            "Costo": "4"
+          },
+          {
+            "Punteggio": "13",
+            "Costo": "5"
+          },
+          {
+            "Punteggio": "14",
+            "Costo": "7"
+          },
+          {
+            "Punteggio": "15",
+            "Costo": "9"
+          }
+        ]
+      },
+      {
+        "titolo": "Serie standard per classe",
+        "righe": [
+          {
+            "Classe": "Barbaro",
+            "For": "15",
+            "Des": "13",
+            "Cos": "14",
+            "Int": "10",
+            "Sag": "12",
+            "Car": "8"
+          },
+          {
+            "Classe": "Bardo",
+            "For": "8",
+            "Des": "14",
+            "Cos": "12",
+            "Int": "13",
+            "Sag": "10",
+            "Car": "15"
+          },
+          {
+            "Classe": "Chierico",
+            "For": "14",
+            "Des": "8",
+            "Cos": "13",
+            "Int": "10",
+            "Sag": "15",
+            "Car": "12"
+          },
+          {
+            "Classe": "Druido",
+            "For": "8",
+            "Des": "12",
+            "Cos": "14",
+            "Int": "13",
+            "Sag": "15",
+            "Car": "10"
+          },
+          {
+            "Classe": "Guerriero",
+            "For": "15",
+            "Des": "14",
+            "Cos": "13",
+            "Int": "8",
+            "Sag": "10",
+            "Car": "12"
+          },
+          {
+            "Classe": "Ladro",
+            "For": "12",
+            "Des": "15",
+            "Cos": "13",
+            "Int": "14",
+            "Sag": "10",
+            "Car": "8"
+          },
+          {
+            "Classe": "Mago",
+            "For": "8",
+            "Des": "12",
+            "Cos": "13",
+            "Int": "15",
+            "Sag": "14",
+            "Car": "10"
+          },
+          {
+            "Classe": "Monaco",
+            "For": "12",
+            "Des": "15",
+            "Cos": "13",
+            "Int": "10",
+            "Sag": "14",
+            "Car": "8"
+          },
+          {
+            "Classe": "Paladino",
+            "For": "15",
+            "Des": "10",
+            "Cos": "13",
+            "Int": "8",
+            "Sag": "12",
+            "Car": "14"
+          },
+          {
+            "Classe": "Ranger",
+            "For": "12",
+            "Des": "15",
+            "Cos": "13",
+            "Int": "8",
+            "Sag": "14",
+            "Car": "10"
+          },
+          {
+            "Classe": "Stregone",
+            "For": "10",
+            "Des": "13",
+            "Cos": "14",
+            "Int": "8",
+            "Sag": "12",
+            "Car": "15"
+          },
+          {
+            "Classe": "Warlock",
+            "For": "8",
+            "Des": "14",
+            "Cos": "13",
+            "Int": "12",
+            "Sag": "10",
+            "Car": "15"
+          }
+        ]
+      },
+      {
+        "titolo": "Punteggi di caratteristica e modificatori",
+        "righe": [
+          {
+            "Punteggio": "3",
+            "Modificatore": "-4"
+          },
+          {
+            "Punteggio": "4-5",
+            "Modificatore": "-3"
+          },
+          {
+            "Punteggio": "6-7",
+            "Modificatore": "-2"
+          },
+          {
+            "Punteggio": "8-9",
+            "Modificatore": "-1"
+          },
+          {
+            "Punteggio": "10-11",
+            "Modificatore": "+0"
+          },
+          {
+            "Punteggio": "12-13",
+            "Modificatore": "+1"
+          },
+          {
+            "Punteggio": "14-15",
+            "Modificatore": "+2"
+          },
+          {
+            "Punteggio": "16-17",
+            "Modificatore": "+3"
+          },
+          {
+            "Punteggio": "18-19",
+            "Modificatore": "+4"
+          },
+          {
+            "Punteggio": "20",
+            "Modificatore": "+5"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "categorie_oggetti_magici",
+    "nome": "Categorie di oggetti magici",
+    "capitolo": "Oggetti magici",
+    "categoria": "Oggetti magici",
+    "pagine_sorgente": "232-233",
+    "descrizione": "Ogni oggetto magico appartiene a una categoria che ne descrive forma, uso tipico e regole generali. Le descrizioni dei singoli oggetti possono modificare queste regole.",
+    "sezioni": [
+      {
+        "titolo": "Categorie",
+        "righe": [
+          {
+            "Voce": "Anelli",
+            "Riepilogo": "Devono essere indossati su un dito o simile affinche la magia funzioni, salvo diversa indicazione."
+          },
+          {
+            "Voce": "Armature",
+            "Riepilogo": "Sono versioni magiche di armature; devono essere indossate per funzionare, salvo diversa indicazione."
+          },
+          {
+            "Voce": "Armi",
+            "Riepilogo": "Sono versioni magiche di armi; se non specificano il tipo, puo essere scelto o determinato casualmente."
+          },
+          {
+            "Voce": "Bacchette",
+            "Riepilogo": "Di norma possono essere usate come focus arcano, salvo diversa indicazione."
+          },
+          {
+            "Voce": "Bastoni",
+            "Riepilogo": "Di norma possono essere usati come bastoni ferrati non magici e come focus arcano."
+          },
+          {
+            "Voce": "Oggetti meravigliosi",
+            "Riepilogo": "Includono abiti, accessori, borse, tappeti, statuette, corni, strumenti musicali e altri oggetti speciali."
+          },
+          {
+            "Voce": "Pergamene",
+            "Riepilogo": "Sono consumabili; la magia si libera leggendo la pergamena e poi non puo piu essere usata."
+          },
+          {
+            "Voce": "Pozioni",
+            "Riepilogo": "Sono infusi da bere o oli da applicare; di solito una fiala contiene 30 grammi di liquido."
+          },
+          {
+            "Voce": "Verghe",
+            "Riepilogo": "Sono scettri in metallo, legno o osso e possono essere focus arcani salvo diversa indicazione."
+          }
+        ]
+      },
+      {
+        "titolo": "Regole aggiuntive",
+        "righe": [
+          {
+            "Voce": "Munizioni magiche",
+            "Riepilogo": "Le munizioni scagliate da un'arma magica con proprieta munizioni sono considerate magiche."
+          },
+          {
+            "Voce": "Prerequisiti di sintonia",
+            "Riepilogo": "Se e richiesto essere di una classe, la creatura deve appartenere a quella classe; se e richiesto essere incantatore, deve poter lanciare almeno un incantesimo tramite tratti o privilegi."
+          },
+          {
+            "Voce": "Oggetti su misura",
+            "Riepilogo": "Il GM puo decidere che un oggetto non si adatti a qualsiasi anatomia o forma corporea."
+          },
+          {
+            "Voce": "Oggetti in coppia",
+            "Riepilogo": "Il GM puo ammettere eccezioni quando un oggetto abbinato non puo essere indossato normalmente, pur richiedendo il pezzo corrispondente."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "cavalcature_e_veicoli",
+    "nome": "Cavalcature e veicoli",
+    "capitolo": "Equipaggiamento",
+    "categoria": "Equipaggiamento",
+    "pagine_sorgente": "113-114",
+    "descrizione": "Cavalcature, veicoli da tiro, veicoli aerei e imbarcazioni permettono di trasportare creature e carichi. Gli animali da tiro possono spostare cinque volte la loro capacita di trasporto quando trainano veicoli adatti.",
+    "sezioni": [
+      {
+        "titolo": "Regole e veicoli",
+        "righe": [
+          {
+            "Voce": "Bardatura",
+            "Riepilogo": "Qualsiasi armatura puo essere acquistata come bardatura: costa quattro volte il normale e pesa il doppio."
+          },
+          {
+            "Voce": "Sella militare",
+            "Riepilogo": "Conferisce vantaggio alle prove per non farsi disarcionare."
+          },
+          {
+            "Voce": "Veicoli da tiro",
+            "Riepilogo": "Biga, carretto, carro, carrozza e slitta hanno peso e costo specifici."
+          },
+          {
+            "Voce": "Veicoli grandi",
+            "Riepilogo": "Navi e veicoli aerei indicano velocita, equipaggio, passeggeri, carico, CA, PF, soglia di danno e costo."
+          },
+          {
+            "Voce": "Riparazioni",
+            "Riepilogo": "Riparare una nave richiede normalmente 1 giorno e 20 mo per punto ferita; in cantiere navale tempo e costo si dimezzano."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "combattimenti",
+    "nome": "Combattimenti",
+    "capitolo": "Strumenti di gioco",
+    "categoria": "Strumenti di gioco",
+    "pagine_sorgente": "230-231",
+    "descrizione": "La costruzione di combattimenti usa obiettivi di difficolta, budget di PE e scelta ragionata delle creature. Terreno, posizioni, gruppi misti e motivi per muoversi rendono gli incontri piu interessanti.",
+    "sezioni": [
+      {
+        "titolo": "Difficolta e gestione",
+        "righe": [
+          {
+            "Voce": "Facile",
+            "Riepilogo": "Dovrebbe essere vinto senza vittime, pur potendo richiedere risorse di guarigione."
+          },
+          {
+            "Voce": "Media",
+            "Riepilogo": "Senza cure e risorse puo andare male; possibile eliminazione temporanea e bassa possibilita di morte."
+          },
+          {
+            "Voce": "Difficile",
+            "Riepilogo": "Puo essere letale e richiede tattiche intelligenti, prontezza e fortuna."
+          },
+          {
+            "Voce": "Budget PE",
+            "Riepilogo": "Moltiplica il valore per personaggio della tabella per il numero di personaggi, poi spendi PE senza superare il budget."
+          },
+          {
+            "Voce": "Molte creature",
+            "Riepilogo": "Oltre due creature per personaggio aumenta il rischio di picchi di danno; usa creature deboli, soprattutto ai livelli 1-2."
+          },
+          {
+            "Voce": "GS 0",
+            "Riepilogo": "Creature con GS 0, soprattutto da 0 PE, vanno usate con parsimonia; per molte creature usa sciami."
+          },
+          {
+            "Voce": "Schede statistiche",
+            "Riepilogo": "Oltre due o tre schede diverse in un incontro puo essere scoraggiante."
+          },
+          {
+            "Voce": "Creature potenti",
+            "Riepilogo": "Una creatura con GS superiore al livello del gruppo puo eliminare personaggi con una sola azione."
+          }
+        ]
+      },
+      {
+        "titolo": "Budget di PE per personaggio",
+        "righe": [
+          {
+            "Livello del gruppo": "1",
+            "Facile": "50",
+            "Media": "75",
+            "Difficile": "100"
+          },
+          {
+            "Livello del gruppo": "2",
+            "Facile": "100",
+            "Media": "150",
+            "Difficile": "200"
+          },
+          {
+            "Livello del gruppo": "3",
+            "Facile": "150",
+            "Media": "225",
+            "Difficile": "400"
+          },
+          {
+            "Livello del gruppo": "4",
+            "Facile": "250",
+            "Media": "375",
+            "Difficile": "500"
+          },
+          {
+            "Livello del gruppo": "5",
+            "Facile": "500",
+            "Media": "750",
+            "Difficile": "1.100"
+          },
+          {
+            "Livello del gruppo": "6",
+            "Facile": "600",
+            "Media": "1.000",
+            "Difficile": "1.400"
+          },
+          {
+            "Livello del gruppo": "7",
+            "Facile": "750",
+            "Media": "1.300",
+            "Difficile": "1.700"
+          },
+          {
+            "Livello del gruppo": "8",
+            "Facile": "1.000",
+            "Media": "1.700",
+            "Difficile": "2.100"
+          },
+          {
+            "Livello del gruppo": "9",
+            "Facile": "1.300",
+            "Media": "2.000",
+            "Difficile": "2.600"
+          },
+          {
+            "Livello del gruppo": "10",
+            "Facile": "1.600",
+            "Media": "2.300",
+            "Difficile": "3.100"
+          },
+          {
+            "Livello del gruppo": "11",
+            "Facile": "1.900",
+            "Media": "2.900",
+            "Difficile": "4.100"
+          },
+          {
+            "Livello del gruppo": "12",
+            "Facile": "2.200",
+            "Media": "3.700",
+            "Difficile": "4.700"
+          },
+          {
+            "Livello del gruppo": "13",
+            "Facile": "2.600",
+            "Media": "4.200",
+            "Difficile": "5.400"
+          },
+          {
+            "Livello del gruppo": "14",
+            "Facile": "2.900",
+            "Media": "4.900",
+            "Difficile": "6.200"
+          },
+          {
+            "Livello del gruppo": "15",
+            "Facile": "3.300",
+            "Media": "5.400",
+            "Difficile": "7.800"
+          },
+          {
+            "Livello del gruppo": "16",
+            "Facile": "3.800",
+            "Media": "6.100",
+            "Difficile": "9.800"
+          },
+          {
+            "Livello del gruppo": "17",
+            "Facile": "4.500",
+            "Media": "7.200",
+            "Difficile": "11.700"
+          },
+          {
+            "Livello del gruppo": "18",
+            "Facile": "5.000",
+            "Media": "8.700",
+            "Difficile": "14.200"
+          },
+          {
+            "Livello del gruppo": "19",
+            "Facile": "5.500",
+            "Media": "10.700",
+            "Difficile": "17.200"
+          },
+          {
+            "Livello del gruppo": "20",
+            "Facile": "6.400",
+            "Media": "13.200",
+            "Difficile": "22.000"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "combattimento",
+    "nome": "Combattimento",
+    "capitolo": "Come si gioca",
+    "categoria": "Combattimento",
+    "pagine_sorgente": "14-18",
+    "descrizione": "Il combattimento e organizzato in round e turni. Nel proprio turno una creatura puo muoversi fino alla propria velocita ed effettuare un'azione, oltre a eventuali azioni bonus o reazioni concesse da regole specifiche.",
+    "sezioni": [
+      {
+        "titolo": "Ordine di combattimento",
+        "righe": [
+          {
+            "Voce": "Iniziativa",
+            "Riepilogo": "Determina l'ordine dei turni."
+          },
+          {
+            "Voce": "Round",
+            "Riepilogo": "Rappresenta circa 6 secondi nel mondo di gioco."
+          },
+          {
+            "Voce": "Turno",
+            "Riepilogo": "La creatura puo muoversi e compiere un'azione."
+          }
+        ]
+      },
+      {
+        "titolo": "Taglie e spazio",
+        "righe": [
+          {
+            "Voce": "Minuscola",
+            "Riepilogo": "75 x 75 cm"
+          },
+          {
+            "Voce": "Piccola",
+            "Riepilogo": "1,5 m x 1,5 m"
+          },
+          {
+            "Voce": "Media",
+            "Riepilogo": "1,5 m x 1,5 m"
+          },
+          {
+            "Voce": "Grande",
+            "Riepilogo": "3 m x 3 m"
+          },
+          {
+            "Voce": "Enorme",
+            "Riepilogo": "4,5 m x 4,5 m"
+          },
+          {
+            "Voce": "Mastodontica",
+            "Riepilogo": "6 m x 6 m"
+          }
+        ]
+      },
+      {
+        "titolo": "Attacchi",
+        "blocchi": [
+          {
+            "nome": "Attacchi a distanza",
+            "descrizione": "Oltre la gittata normale il tiro subisce svantaggio; oltre la gittata lunga non e possibile attaccare."
+          },
+          {
+            "nome": "Attacchi in mischia",
+            "descrizione": "Una creatura di norma ha portata di 1,5 metri, salvo indicazioni diverse."
+          },
+          {
+            "nome": "Combattere sott'acqua",
+            "descrizione": "Alcune armi sono ostacolate e tutto cio che si trova sott'acqua ha resistenza ai danni da fuoco."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "competenza",
+    "nome": "Competenza",
+    "capitolo": "Come si gioca",
+    "categoria": "Prove",
+    "pagine_sorgente": "8-10",
+    "descrizione": "Il bonus di competenza rappresenta l'addestramento di una creatura. Si applica a prove con d20 quando la creatura usa una competenza appropriata, agli attacchi con incantesimo e al calcolo delle CD degli incantesimi.",
+    "sezioni": [
+      {
+        "titolo": "Bonus di competenza",
+        "righe": [
+          {
+            "Voce": "Fino a 4",
+            "Riepilogo": "+2"
+          },
+          {
+            "Voce": "5-8",
+            "Riepilogo": "+3"
+          },
+          {
+            "Voce": "9-12",
+            "Riepilogo": "+4"
+          },
+          {
+            "Voce": "13-16",
+            "Riepilogo": "+5"
+          },
+          {
+            "Voce": "17-20",
+            "Riepilogo": "+6"
+          },
+          {
+            "Voce": "21-24",
+            "Riepilogo": "+7"
+          },
+          {
+            "Voce": "25-28",
+            "Riepilogo": "+8"
+          },
+          {
+            "Voce": "29-30",
+            "Riepilogo": "+9"
+          }
+        ]
+      },
+      {
+        "titolo": "Regole",
+        "blocchi": [
+          {
+            "nome": "I bonus non si accumulano",
+            "descrizione": "Il bonus di competenza non puo essere aggiunto allo stesso tiro piu di una volta. Se viene moltiplicato o diviso, puo esserlo una sola volta."
+          },
+          {
+            "nome": "Competenze nelle abilita",
+            "descrizione": "Quando una prova di caratteristica riguarda un'abilita in cui la creatura e competente, si aggiunge il bonus di competenza."
+          },
+          {
+            "nome": "Competenze negli strumenti",
+            "descrizione": "Quando uno strumento e rilevante e la creatura ne e competente, si aggiunge il bonus di competenza. Se sono rilevanti sia abilita sia strumento, la prova puo avere vantaggio."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "compilare_scheda_personaggio",
+    "nome": "Compilare la scheda del personaggio",
+    "capitolo": "Creazione del personaggio",
+    "categoria": "Creazione personaggio",
+    "pagine_sorgente": "24-25",
+    "descrizione": "Dopo le scelte iniziali si registrano privilegi di classe, tiri salvezza, abilita, percezione passiva, punti ferita, Dadi Vita, iniziativa, Classe Armatura, attacchi e incantesimi.",
+    "sezioni": [
+      {
+        "titolo": "Numeri principali",
+        "righe": [
+          {
+            "Voce": "Tiri salvezza",
+            "Riepilogo": "Se competente, aggiungi bonus di competenza al modificatore di caratteristica appropriato."
+          },
+          {
+            "Voce": "Abilita",
+            "Riepilogo": "Se competente, aggiungi bonus di competenza al modificatore associato all'abilita."
+          },
+          {
+            "Voce": "Percezione passiva",
+            "Riepilogo": "10 + modificatore di Saggezza (Percezione), inclusi modificatori applicabili."
+          },
+          {
+            "Voce": "Iniziativa",
+            "Riepilogo": "Usa il modificatore di Destrezza."
+          },
+          {
+            "Voce": "CA base",
+            "Riepilogo": "Senza armatura o scudo, 10 + modificatore di Destrezza."
+          },
+          {
+            "Voce": "Attacco in mischia",
+            "Riepilogo": "Modificatore di Forza + bonus di competenza, se competente e salvo proprieta diverse."
+          },
+          {
+            "Voce": "Attacco a distanza",
+            "Riepilogo": "Modificatore di Destrezza + bonus di competenza, se competente e salvo proprieta diverse."
+          },
+          {
+            "Voce": "CD incantesimo",
+            "Riepilogo": "8 + modificatore da incantatore + bonus di competenza."
+          },
+          {
+            "Voce": "Attacco incantesimo",
+            "Riepilogo": "Modificatore da incantatore + bonus di competenza."
+          }
+        ]
+      },
+      {
+        "titolo": "Punti ferita al 1º livello",
+        "righe": [
+          {
+            "Classe": "Barbaro",
+            "Punti ferita massimi": "12 + modificatore di Cos"
+          },
+          {
+            "Classe": "Guerriero, paladino o ranger",
+            "Punti ferita massimi": "10 + modificatore di Cos"
+          },
+          {
+            "Classe": "Bardo, chierico, druido, monaco, ladro o warlock",
+            "Punti ferita massimi": "8 + modificatore di Cos"
+          },
+          {
+            "Classe": "Stregone o mago",
+            "Punti ferita massimi": "6 + modificatore di Cos"
+          }
+        ],
+        "blocchi": [
+          {
+            "nome": "Dadi Vita",
+            "descrizione": "La classe indica il tipo di Dado Vita; al 1º livello il personaggio ha 1 Dado Vita."
+          },
+          {
+            "nome": "Incantesimi preparati",
+            "descrizione": "Se la classe fornisce Incantesimi o Magia del patto, annota slot, trucchetti e incantesimi preparati dalla tabella della classe."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "componenti_durata_incantesimi",
+    "nome": "Componenti e durata",
+    "capitolo": "Incantesimi",
+    "categoria": "Incantesimi",
+    "pagine_sorgente": 120,
+    "descrizione": "Le componenti sono i requisiti fisici necessari al lancio di un incantesimo. La durata indica per quanto tempo l'effetto persiste dopo il lancio.",
+    "sezioni": [
+      {
+        "titolo": "Componenti",
+        "righe": [
+          {
+            "Voce": "Verbale (V)",
+            "Riepilogo": "Richiede una cantilena a voce normale; non funziona se la creatura e imbavagliata o in silenzio magico."
+          },
+          {
+            "Voce": "Somatica (S)",
+            "Riepilogo": "Richiede gesti energici o movimenti elaborati e almeno una mano libera."
+          },
+          {
+            "Voce": "Materiale (M)",
+            "Riepilogo": "Richiede materiali indicati tra parentesi; non sono consumati salvo diversa indicazione."
+          },
+          {
+            "Voce": "Borsa o focus",
+            "Riepilogo": "Se il materiale non ha costo e non viene consumato, puo essere sostituito da borsa per componenti o focus da incantatore consentito dal privilegio."
+          },
+          {
+            "Voce": "Mano libera",
+            "Riepilogo": "La mano usata per materiali o focus puo essere la stessa usata per componenti somatiche."
+          }
+        ]
+      },
+      {
+        "titolo": "Durata",
+        "righe": [
+          {
+            "Voce": "Concentrazione",
+            "Riepilogo": "Segue le regole di concentrazione."
+          },
+          {
+            "Voce": "Istantanea",
+            "Riepilogo": "L'incantesimo appare solo per un momento e poi scompare."
+          },
+          {
+            "Voce": "Intervallo",
+            "Riepilogo": "La durata e espressa in round, minuti, ore o altre unita simili."
+          },
+          {
+            "Voce": "Interrompere",
+            "Riepilogo": "Se un incantesimo a intervallo e in corso, l'incantatore puo interromperlo senza azione se non e incapacitato."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "componenti_statistiche_mostri",
+    "nome": "Componenti statistiche dei mostri",
+    "capitolo": "Mostri",
+    "categoria": "Mostri",
+    "pagine_sorgente": "290-292",
+    "descrizione": "Le componenti numeriche della scheda spiegano CA, iniziativa, punti ferita, velocita, abilita, difese, attrezzatura, sensi, lingue, GS, PE e bonus di competenza.",
+    "sezioni": [
+      {
+        "titolo": "Combattimento e caratteristiche",
+        "righe": [
+          {
+            "Voce": "Classe Armatura",
+            "Riepilogo": "Include armatura naturale, Destrezza, attrezzatura e altre difese."
+          },
+          {
+            "Voce": "Iniziativa",
+            "Riepilogo": "Indica modificatore e punteggio fisso tra parentesi; il punteggio puo essere usato al posto del tiro."
+          },
+          {
+            "Voce": "Punti ferita",
+            "Riepilogo": "Presentati come numero e formula con Dadi Vita; si usa il numero o si tira la formula, non entrambi."
+          },
+          {
+            "Voce": "Velocita",
+            "Riepilogo": "Indica la velocita base e possibili velocita speciali come nuoto, scalata, scavo o volo."
+          },
+          {
+            "Voce": "Abilita",
+            "Riepilogo": "I bonus derivano da modificatore di caratteristica, bonus di competenza e possibili altri modificatori."
+          }
+        ]
+      },
+      {
+        "titolo": "Dadi Vita per taglia",
+        "righe": [
+          {
+            "Taglia": "Minuscola",
+            "Dado Vita": "d4",
+            "PF medi per dado": "2,5"
+          },
+          {
+            "Taglia": "Piccola",
+            "Dado Vita": "d6",
+            "PF medi per dado": "3,5"
+          },
+          {
+            "Taglia": "Media",
+            "Dado Vita": "d8",
+            "PF medi per dado": "4,5"
+          },
+          {
+            "Taglia": "Grande",
+            "Dado Vita": "d10",
+            "PF medi per dado": "5,5"
+          },
+          {
+            "Taglia": "Enorme",
+            "Dado Vita": "d12",
+            "PF medi per dado": "6,5"
+          },
+          {
+            "Taglia": "Mastodontica",
+            "Dado Vita": "d20",
+            "PF medi per dado": "10,5"
+          }
+        ]
+      },
+      {
+        "titolo": "Punti esperienza per grado di sfida",
+        "righe": [
+          {
+            "GS": "14",
+            "PE": "11.500"
+          },
+          {
+            "GS": "15",
+            "PE": "13.000"
+          },
+          {
+            "GS": "16",
+            "PE": "15.000"
+          },
+          {
+            "GS": "17",
+            "PE": "18.000"
+          },
+          {
+            "GS": "18",
+            "PE": "20.000"
+          },
+          {
+            "GS": "19",
+            "PE": "22.000"
+          },
+          {
+            "GS": "20",
+            "PE": "25.000"
+          },
+          {
+            "GS": "21",
+            "PE": "33.000"
+          },
+          {
+            "GS": "22",
+            "PE": "41.000"
+          },
+          {
+            "GS": "23",
+            "PE": "50.000"
+          },
+          {
+            "GS": "24",
+            "PE": "62.000"
+          },
+          {
+            "GS": "25",
+            "PE": "75.000"
+          },
+          {
+            "GS": "26",
+            "PE": "90.000"
+          },
+          {
+            "GS": "27",
+            "PE": "105.000"
+          },
+          {
+            "GS": "28",
+            "PE": "120.000"
+          },
+          {
+            "GS": "29",
+            "PE": "135.000"
+          },
+          {
+            "GS": "30",
+            "PE": "155.000"
+          }
+        ]
+      },
+      {
+        "titolo": "Bonus di competenza per grado di sfida",
+        "righe": [
+          {
+            "GS": "17-20",
+            "BC": "+6"
+          },
+          {
+            "GS": "21-24",
+            "BC": "+7"
+          },
+          {
+            "GS": "25-28",
+            "BC": "+8"
+          },
+          {
+            "GS": "29-30",
+            "BC": "+9"
+          }
+        ],
+        "blocchi": [
+          {
+            "nome": "Attrezzatura",
+            "descrizione": "I mostri hanno competenza nel loro equipaggiamento. Gli oggetti recuperabili usano le regole di Equipaggiamento quando vengono usati da altri."
+          },
+          {
+            "nome": "Sensi e lingue",
+            "descrizione": "Sensi include Percezione passiva e sensi speciali; Lingue indica cio che il mostro puo usare per comunicare o comprendere."
+          },
+          {
+            "nome": "Equipaggiare mostri",
+            "descrizione": "Il GM puo aggiungere equipaggiamento, ma oggetti magici orientati al combattimento possono alterare il grado di sfida."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "creare_background",
+    "nome": "Creare un background",
+    "capitolo": "Strumenti di gioco",
+    "categoria": "Strumenti di gioco",
+    "pagine_sorgente": "220-221",
+    "descrizione": "Un background contestualizza la vita del personaggio prima dell'avventura. Il GM puo crearne o personalizzarne uno per riflettere il tema della campagna o del mondo.",
+    "sezioni": [
+      {
+        "titolo": "Procedura",
+        "righe": [
+          {
+            "Voce": "1. Caratteristiche",
+            "Riepilogo": "Scegli tre caratteristiche appropriate al background."
+          },
+          {
+            "Voce": "2. Talento",
+            "Riepilogo": "Scegli un talento della categoria Origini."
+          },
+          {
+            "Voce": "3. Abilita",
+            "Riepilogo": "Scegli due abilita appropriate; non devono corrispondere per forza alle caratteristiche aumentate."
+          },
+          {
+            "Voce": "4. Strumento",
+            "Riepilogo": "Scegli uno strumento usato nella pratica o associato al background."
+          },
+          {
+            "Voce": "5. Equipaggiamento",
+            "Riepilogo": "Assembla un pacchetto del valore di 50 mo, oro non speso incluso; non includere armi da guerra o armature."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "creare_oggetti_magici",
+    "nome": "Creare oggetti magici",
+    "capitolo": "Oggetti magici",
+    "categoria": "Oggetti magici",
+    "pagine_sorgente": 235,
+    "descrizione": "Creare oggetti magici richiede competenza in Arcano, strumenti appropriati, eventuali incantesimi preparati, tempo e materie prime. Pozioni di guarigione e pergamene magiche seguono le regole di Equipaggiamento.",
+    "sezioni": [
+      {
+        "titolo": "Strumenti per categoria",
+        "righe": [
+          {
+            "Categoria di oggetto": "Anello",
+            "Strumento richiesto": "Strumenti da gioielliere"
+          },
+          {
+            "Categoria di oggetto": "Armature",
+            "Strumento richiesto": "Strumenti da conciatore, da fabbro o da tessitore, a seconda del tipo di armatura"
+          },
+          {
+            "Categoria di oggetto": "Arma",
+            "Strumento richiesto": "Strumenti da conciatore, da fabbro o da intagliatore, a seconda del tipo di arma"
+          },
+          {
+            "Categoria di oggetto": "Bacchetta",
+            "Strumento richiesto": "Strumenti da intagliatore"
+          },
+          {
+            "Categoria di oggetto": "Bastone",
+            "Strumento richiesto": "Strumenti da intagliatore"
+          },
+          {
+            "Categoria di oggetto": "Oggetti meravigliosi",
+            "Strumento richiesto": "Strumenti da inventore o lo strumento necessario per costruire l'oggetto non magico su cui si basa l'oggetto magico"
+          },
+          {
+            "Categoria di oggetto": "Pergamena",
+            "Strumento richiesto": "Scorte da calligrafo"
+          },
+          {
+            "Categoria di oggetto": "Pozione",
+            "Strumento richiesto": "Scorte da alchimista o borsa da erborista"
+          },
+          {
+            "Categoria di oggetto": "Verga",
+            "Strumento richiesto": "Strumenti da intagliatore"
+          }
+        ]
+      },
+      {
+        "titolo": "Tempi e costi",
+        "righe": [
+          {
+            "Rarità dell'oggetto": "Comune",
+            "Tempo": "5 giorni",
+            "Costo": "50 mo"
+          },
+          {
+            "Rarità dell'oggetto": "Non comune",
+            "Tempo": "10 giorni",
+            "Costo": "200 mo"
+          },
+          {
+            "Rarità dell'oggetto": "Raro",
+            "Tempo": "50 giorni",
+            "Costo": "2.000 mo"
+          },
+          {
+            "Rarità dell'oggetto": "Molto raro",
+            "Tempo": "125 giorni",
+            "Costo": "20.000 mo"
+          },
+          {
+            "Rarità dell'oggetto": "Leggendario",
+            "Tempo": "250 giorni",
+            "Costo": "100.000 mo"
+          }
+        ],
+        "blocchi": [
+          {
+            "nome": "Competenza",
+            "descrizione": "Creatore e assistenti devono avere competenza in Arcano e nello strumento richiesto."
+          },
+          {
+            "nome": "Incantesimi",
+            "descrizione": "Se l'oggetto permette di lanciare incantesimi, tutti gli incantesimi devono essere preparati ogni giorno dedicato alla creazione."
+          },
+          {
+            "nome": "Assistenti",
+            "descrizione": "Il tempo si divide per il numero di personaggi che lavorano, se il GM consente assistenti."
+          },
+          {
+            "nome": "Materie prime",
+            "descrizione": "In una citta c'e il 75% di probabilita che siano disponibili, altrove il 25%; se mancano, si ricontrolla dopo almeno 7 giorni."
+          },
+          {
+            "nome": "Consumabili",
+            "descrizione": "Tempo e costo sono dimezzati per consumabili diversi dalle pergamene magiche."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "creare_personaggio",
+    "nome": "Creare il personaggio",
+    "capitolo": "Creazione del personaggio",
+    "categoria": "Creazione personaggio",
+    "pagine_sorgente": 21,
+    "descrizione": "La creazione del personaggio parte dalla scelta di una scheda e procede attraverso classe, origini, punteggi di caratteristica, allineamento e dettagli finali.",
+    "sezioni": [
+      {
+        "titolo": "Fasi principali",
+        "righe": [
+          {
+            "Voce": "1. Classe",
+            "Riepilogo": "Descrive vocazione, talenti speciali e tattiche preferite del personaggio."
+          },
+          {
+            "Voce": "2. Origini",
+            "Riepilogo": "Comprendono background, specie e lingue."
+          },
+          {
+            "Voce": "3. Caratteristiche",
+            "Riepilogo": "Determinano gran parte delle azioni del personaggio."
+          },
+          {
+            "Voce": "4. Allineamento",
+            "Riepilogo": "Rappresenta la bussola morale del personaggio."
+          },
+          {
+            "Voce": "5. Dettagli",
+            "Riepilogo": "Completa la scheda usando le scelte precedenti."
+          }
+        ]
+      },
+      {
+        "titolo": "Panoramica classi",
+        "righe": [
+          {
+            "Classe": "Barbaro",
+            "Predilige": "Battaglia",
+            "Caratteristiche primarie": "Forza",
+            "Complessità": "Media"
+          },
+          {
+            "Classe": "Bardo",
+            "Predilige": "Esibizione",
+            "Caratteristiche primarie": "Carisma",
+            "Complessità": "Alta"
+          },
+          {
+            "Classe": "Chierico",
+            "Predilige": "Dèi",
+            "Caratteristiche primarie": "Saggezza",
+            "Complessità": "Media"
+          },
+          {
+            "Classe": "Druido",
+            "Predilige": "Natura",
+            "Caratteristiche primarie": "Saggezza",
+            "Complessità": "Alta"
+          },
+          {
+            "Classe": "Guerriero",
+            "Predilige": "Armi",
+            "Caratteristiche primarie": "Forza o Destrezza",
+            "Complessità": "Bassa"
+          },
+          {
+            "Classe": "Ladro",
+            "Predilige": "Furtività",
+            "Caratteristiche primarie": "Destrezza",
+            "Complessità": "Bassa"
+          },
+          {
+            "Classe": "Mago",
+            "Predilige": "Libri di incantesimi",
+            "Caratteristiche primarie": "Intelligenza",
+            "Complessità": "Media"
+          },
+          {
+            "Classe": "Monaco",
+            "Predilige": "Combattimento senz'armi",
+            "Caratteristiche primarie": "Destrezza e Saggezza",
+            "Complessità": "Alta"
+          },
+          {
+            "Classe": "Paladino",
+            "Predilige": "Difesa",
+            "Caratteristiche primarie": "Forza e Carisma",
+            "Complessità": "Media"
+          },
+          {
+            "Classe": "Ranger",
+            "Predilige": "Sopravvivenza",
+            "Caratteristiche primarie": "Destrezza e Saggezza",
+            "Complessità": "Media"
+          },
+          {
+            "Classe": "Stregone",
+            "Predilige": "Potere",
+            "Caratteristiche primarie": "Carisma",
+            "Complessità": "Alta"
+          },
+          {
+            "Classe": "Warlock",
+            "Predilige": "Scienze occulte",
+            "Caratteristiche primarie": "Carisma",
+            "Complessità": "Alta"
+          }
+        ],
+        "blocchi": [
+          {
+            "nome": "Livello e PE",
+            "descrizione": "In genere un personaggio inizia al 1º livello con 0 PE. Se parte dal 3º livello o oltre, annota anche la sottoclasse."
+          },
+          {
+            "nome": "Armature",
+            "descrizione": "La classe puo fornire competenze nelle armature; annotale sulla scheda del personaggio."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "danni_e_guarigione",
+    "nome": "Danni e guarigione",
+    "capitolo": "Come si gioca",
+    "categoria": "Combattimento",
+    "pagine_sorgente": "18-20",
+    "descrizione": "I punti ferita rappresentano resistenza e volonta di vivere. I danni riducono i punti ferita attuali; arrivare a 0 punti ferita introduce regole specifiche per morte, stabilizzazione e recupero.",
+    "sezioni": [
+      {
+        "titolo": "Tipi di danno",
+        "righe": [
+          {
+            "Voce": "Resistenza",
+            "Riepilogo": "I danni del tipo rilevante sono dimezzati, arrotondando per difetto."
+          },
+          {
+            "Voce": "Vulnerabilita",
+            "Riepilogo": "I danni del tipo rilevante sono raddoppiati."
+          },
+          {
+            "Voce": "Immunita",
+            "Riepilogo": "I danni o effetti rilevanti non si applicano."
+          }
+        ]
+      },
+      {
+        "titolo": "Regole a 0 punti ferita",
+        "blocchi": [
+          {
+            "nome": "Tiri salvezza contro morte",
+            "descrizione": "All'inizio del turno a 0 punti ferita si tira 1d20. Con 10 o piu e un successo, altrimenti un fallimento. Tre successi rendono stabile; tre fallimenti causano la morte."
+          },
+          {
+            "nome": "Ottenere 1 o 20",
+            "descrizione": "Un 1 naturale conta come due fallimenti. Un 20 naturale fa recuperare 1 punto ferita."
+          },
+          {
+            "nome": "Stabilizzare un personaggio",
+            "descrizione": "Con l'azione di Aiuto si puo stabilizzare una creatura a 0 punti ferita superando una prova di Saggezza (Medicina) con CD 10."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "effetti_ambientali",
+    "nome": "Effetti ambientali",
+    "capitolo": "Strumenti di gioco",
+    "categoria": "Strumenti di gioco",
+    "pagine_sorgente": "223-224",
+    "descrizione": "Gli ambienti estremi impongono rischi aggiuntivi come indebolimento, terreno difficile, cadute, oscuramento, svantaggi alle prove o interferenze con volo e attacchi a distanza.",
+    "sezioni": [
+      {
+        "titolo": "Pericoli ambientali",
+        "righe": [
+          {
+            "Voce": "Acque gelide",
+            "Riepilogo": "Dopo minuti pari alla Costituzione, ogni minuto richiede TS Costituzione CD 10 o 1 livello di indebolimento."
+          },
+          {
+            "Voce": "Acque profonde",
+            "Riepilogo": "Dopo 1 ora oltre 30 metri, chi non ha velocita di nuoto supera TS Costituzione CD 10 o ottiene indebolimento."
+          },
+          {
+            "Voce": "Alta quota",
+            "Riepilogo": "Oltre 3.000 metri ogni ora vale come 2 ore di viaggio; adattamento dopo 30 giorni, non oltre 6.000 metri salvo nativi."
+          },
+          {
+            "Voce": "Caldo estremo",
+            "Riepilogo": "A 38 gradi o piu senza acqua, TS Costituzione ogni ora: CD 5 nella prima ora, +1 per ogni ora successiva."
+          },
+          {
+            "Voce": "Freddo estremo",
+            "Riepilogo": "A -18 gradi o meno, TS Costituzione CD 10 ogni ora o 1 livello di indebolimento."
+          },
+          {
+            "Voce": "Ghiaccio scivoloso",
+            "Riepilogo": "Terreno difficile; TS Destrezza CD 10 o prono quando ci si muove sopra per la prima volta in un turno o vi si inizia il turno."
+          },
+          {
+            "Voce": "Ghiaccio sottile",
+            "Riepilogo": "Regge 3d10 x 5 kg per quadrato di 3 metri; se superato si rompe sopra acque gelide."
+          },
+          {
+            "Voce": "Precipitazioni abbondanti",
+            "Riepilogo": "Area leggermente oscurata, svantaggio a Percezione e pioggia battente spegne fiamme scoperte."
+          },
+          {
+            "Voce": "Vento forte",
+            "Riepilogo": "Svantaggio agli attacchi a distanza con armi, spegne fiamme, disperde nebbia e puo far cadere creature volanti."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "equipaggiamento_avventura",
+    "nome": "Equipaggiamento d'avventura",
+    "capitolo": "Equipaggiamento",
+    "categoria": "Equipaggiamento",
+    "pagine_sorgente": "107-113",
+    "descrizione": "L'equipaggiamento d'avventura raccoglie attrezzi, contenitori, dotazioni, focus, munizioni e oggetti di consumo usati spesso durante l'esplorazione.",
+    "sezioni": [
+      {
+        "titolo": "Oggetti notevoli",
+        "righe": [
+          {
+            "Voce": "Acido",
+            "Riepilogo": "Come parte dell'azione di Attacco, una fiala puo infliggere 2d6 danni da acido se il bersaglio fallisce un TS su Destrezza."
+          },
+          {
+            "Voce": "Acqua santa",
+            "Riepilogo": "Lanciata contro immondi o non morti puo infliggere 2d8 danni radiosi su TS su Destrezza fallito."
+          },
+          {
+            "Voce": "Antitossina",
+            "Riepilogo": "Come azione bonus, fornisce vantaggio ai tiri salvezza per evitare o interrompere avvelenato."
+          },
+          {
+            "Voce": "Borsa del guaritore",
+            "Riepilogo": "Ha dieci usi; con un'azione di Utilizzo stabilizza una creatura a 0 PF senza prova di Medicina."
+          },
+          {
+            "Voce": "Fuoco dell'alchimista",
+            "Riepilogo": "Puo incendiare un bersaglio e infliggere 1d4 danni da fuoco."
+          },
+          {
+            "Voce": "Olio",
+            "Riepilogo": "Puo coprire bersagli o superfici e aggiungere o infliggere danni da fuoco; alimenta lampade e lanterne per 6 ore."
+          },
+          {
+            "Voce": "Pozione di guarigione",
+            "Riepilogo": "Oggetto magico bevuto o somministrato come azione bonus; fa recuperare 2d4 + 2 PF."
+          },
+          {
+            "Voce": "Rete",
+            "Riepilogo": "Puo trattenere una creatura entro 4,5 metri se fallisce un TS su Destrezza; una creatura Enorme o superiore supera automaticamente."
+          },
+          {
+            "Voce": "Triboli",
+            "Riepilogo": "Coprono un'area di 1,5 metri quadrati; possono infliggere 1 danno perforante e ridurre la velocita a 0."
+          },
+          {
+            "Voce": "Veleno base",
+            "Riepilogo": "Come azione bonus si applica a un'arma o a tre munizioni; aggiunge 1d4 danni da veleno."
+          }
+        ]
+      },
+      {
+        "titolo": "Focus e munizioni",
+        "righe": [
+          {
+            "Voce": "Focus arcano",
+            "Riepilogo": "Bacchetta, bastone, cristallo, globo o verga per maghi, stregoni e warlock."
+          },
+          {
+            "Voce": "Focus druidico",
+            "Riepilogo": "Bacchetta di tasso, bastone di legno o rametto di vischio per druidi e ranger."
+          },
+          {
+            "Voce": "Simbolo sacro",
+            "Riepilogo": "Amuleto, emblema o reliquiario usato da chierici e paladini come focus da incantatore."
+          },
+          {
+            "Voce": "Munizioni",
+            "Riepilogo": "Aghi, frecce, proiettili per arma da fuoco, proiettili da fionda e quadrelli hanno quantita, contenitore, peso e costo propri."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "esplorazione",
+    "nome": "Esplorazione",
+    "capitolo": "Come si gioca",
+    "categoria": "Esplorazione",
+    "pagine_sorgente": "12-14",
+    "descrizione": "L'esplorazione copre il modo in cui gli avventurieri interagiscono con ambienti pericolosi o misteriosi, inclusi visione, illuminazione, nascondersi, oggetti, pericoli e viaggio.",
+    "sezioni": [
+      {
+        "titolo": "Regole rilevanti",
+        "blocchi": [
+          {
+            "nome": "Visione e illuminazione",
+            "descrizione": "Gli effetti che limitano la vista possono ostacolare attacchi, percezione e lancio di incantesimi."
+          },
+          {
+            "nome": "Nascondersi",
+            "descrizione": "Il GM decide quando e possibile nascondersi. Quando una creatura prova a farlo, usa l'azione di Nascondersi."
+          },
+          {
+            "nome": "Interazioni con oggetti",
+            "descrizione": "In combattimento o in tempo limitato e possibile una sola interazione libera per turno; interazioni aggiuntive richiedono l'azione di Utilizzo."
+          },
+          {
+            "nome": "Viaggiare",
+            "descrizione": "Il passo di viaggio influenza furtivita, percezione e sopravvivenza."
+          }
+        ]
+      },
+      {
+        "titolo": "Passo di viaggio",
+        "righe": [
+          {
+            "Passo": "Veloce",
+            "Al minuto": "120 m/min",
+            "All ora": "6 km/ora",
+            "Al giorno": "45 km/giorno",
+            "Effetto": "penalita alla Percezione passiva"
+          },
+          {
+            "Passo": "Normale",
+            "Al minuto": "90 m/min",
+            "All ora": "4,5 km/ora",
+            "Al giorno": "36 km/giorno",
+            "Effetto": "-"
+          },
+          {
+            "Passo": "Lento",
+            "Al minuto": "60 m/min",
+            "All ora": "3 km/ora",
+            "Al giorno": "27 km/giorno",
+            "Effetto": "consente Furtivita"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "gestire_azioni_mostri",
+    "nome": "Gestire azioni e attacchi dei mostri",
+    "capitolo": "Mostri",
+    "categoria": "Mostri",
+    "pagine_sorgente": "290, 292",
+    "descrizione": "Per far agire un mostro in linea con il suo grado di sfida, il GM dovrebbe usare spesso capacita speciali, Multiattacco, azioni bonus, reazioni e azioni leggendarie quando disponibili.",
+    "sezioni": [
+      {
+        "titolo": "Gestione in combattimento",
+        "righe": [
+          {
+            "Voce": "Capacita speciali",
+            "Riepilogo": "Se infliggono molti danni e hanno usi limitati, usale rapidamente e spesso."
+          },
+          {
+            "Voce": "Multiattacco",
+            "Riepilogo": "Usalo ogni turno in cui il mostro non impiega una delle sue abilita piu potenti."
+          },
+          {
+            "Voce": "Azioni bonus, reazioni, leggendarie",
+            "Riepilogo": "Se presenti nella scheda, usale il piu spesso possibile."
+          }
+        ]
+      },
+      {
+        "titolo": "Informazioni sugli attacchi",
+        "righe": [
+          {
+            "Voce": "Attacco",
+            "Riepilogo": "Indica tipo, bonus al tiro per colpire, portata o gittata e conseguenze se colpisce."
+          },
+          {
+            "Voce": "Colpito",
+            "Riepilogo": "Danni o effetti che si verificano quando l'attacco colpisce."
+          },
+          {
+            "Voce": "Mancato",
+            "Riepilogo": "Effetti che si verificano quando l'attacco manca."
+          },
+          {
+            "Voce": "Colpito o mancato",
+            "Riepilogo": "Effetti che avvengono indipendentemente dall'esito del tiro."
+          },
+          {
+            "Voce": "Danni",
+            "Riepilogo": "La scheda fornisce numero e formula; si usa il numero o si tira la formula, non entrambi."
+          },
+          {
+            "Voce": "Tiro salvezza",
+            "Riepilogo": "L'effetto indica caratteristica, CD, bersagli e conseguenze di successo o fallimento; danni dimezzati significa arrotondati per difetto."
+          }
+        ]
+      },
+      {
+        "titolo": "Incantesimi dei mostri",
+        "righe": [
+          {
+            "Voce": "Dati",
+            "Riepilogo": "La scheda indica caratteristica da incantatore, CD e bonus di attacco se necessari."
+          },
+          {
+            "Voce": "Livello",
+            "Riepilogo": "Salvo diversa indicazione, un incantesimo di 1º livello o superiore e lanciato al livello piu basso possibile."
+          },
+          {
+            "Voce": "Restrizioni",
+            "Riepilogo": "La scheda puo imporre restrizioni speciali, come un incantesimo che funziona solo sul mostro stesso."
+          },
+          {
+            "Voce": "Componenti",
+            "Riepilogo": "Il tratto Incantesimo indica se il mostro ignora componenti; se servono, il mostro possiede quelle materiali richieste."
+          },
+          {
+            "Voce": "Tempi lunghi",
+            "Riepilogo": "Per tempi di lancio di 1 minuto o piu, il mostro deve usare l'azione di Magia ogni turno e mantenere concentrazione, salvo diversa indicazione."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "maledizioni_e_contagi_magici",
+    "nome": "Maledizioni e contagi magici",
+    "capitolo": "Strumenti di gioco",
+    "categoria": "Strumenti di gioco",
+    "pagine_sorgente": "221-223",
+    "descrizione": "Le maledizioni sono fardelli magici che durano per un tempo specifico o finche non vengono rimossi. I contagi magici sono effetti avversi e contagiosi di origine magica.",
+    "sezioni": [
+      {
+        "titolo": "Maledizioni",
+        "righe": [
+          {
+            "Voce": "Scagliare maledizione",
+            "Riepilogo": "Fornisce un metro di paragone: durata 1 minuto come livello 3, durata fino a dissoluzione come livello 9."
+          },
+          {
+            "Voce": "Creature maledette",
+            "Riepilogo": "Il GM decide come rimuovi maledizione interagisce con creature dalle origini maledette."
+          },
+          {
+            "Voce": "Oggetti maledetti",
+            "Riepilogo": "Possono essere creati deliberatamente o derivare da eventi soprannaturali."
+          },
+          {
+            "Voce": "Narrative",
+            "Riepilogo": "Possono essere punizioni divine o violazioni di tabu; dovrebbero avere causa e possibile espiazione."
+          },
+          {
+            "Voce": "Ambientali",
+            "Riepilogo": "Luoghi intrisi di male possono infliggere maledizioni a chi vi entra."
+          },
+          {
+            "Voce": "Possessione demoniaca",
+            "Riepilogo": "TS Carisma CD 15; su fallimento un'entita puo controllare la creatura quando ottiene 1 a una prova con d20."
+          }
+        ]
+      },
+      {
+        "titolo": "Contagi magici",
+        "righe": [
+          {
+            "Voce": "Convalescenza",
+            "Riepilogo": "Dopo 3 giorni senza interrompere riposi lunghi, TS Costituzione CD 15; su successo vantaggio per debellare il contagio per 24 ore."
+          },
+          {
+            "Voce": "Epidemia fognaria",
+            "Riepilogo": "CD 11; causa indebolimento e ostacola recupero di PF e riduzione dell'indebolimento."
+          },
+          {
+            "Voce": "Febbre da gallina",
+            "Riepilogo": "CD 13; causa indebolimento, risata incapacitante e puo diffondersi entro emanazione di 3 metri."
+          },
+          {
+            "Voce": "Vista putrefatta",
+            "Riepilogo": "CD 15; causa accecato, puo essere curata magicamente o soppressa con unguento da borsa da erborista."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "monete_e_commercio",
+    "nome": "Monete e commercio",
+    "capitolo": "Equipaggiamento",
+    "categoria": "Equipaggiamento",
+    "pagine_sorgente": 101,
+    "descrizione": "Le monete sono la valuta principale degli avventurieri. L'equipaggiamento puo essere rivenduto a meta del prezzo d'acquisto, mentre merci, pietre preziose e opere d'arte mantengono il loro valore di mercato. I valori delle singole monete sono disponibili nel dataset equipaggiamento.",
+    "sezioni": [
+      {
+        "titolo": "Peso e rivendita",
+        "blocchi": [
+          {
+            "nome": "Peso",
+            "descrizione": "Una moneta pesa circa dieci grammi; cinquanta monete pesano circa mezzo chilogrammo."
+          },
+          {
+            "nome": "Rivendita",
+            "descrizione": "L'equipaggiamento si rivende normalmente a meta prezzo. Merci e oggetti di valore preservano il valore di mercato."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "multiclasse_e_monili",
+    "nome": "Multiclasse e monili",
+    "capitolo": "Creazione del personaggio",
+    "categoria": "Creazione personaggio",
+    "pagine_sorgente": "27-31",
+    "descrizione": "Il multiclasse consente di acquisire livelli in piu classi. I monili sono piccoli oggetti misteriosi opzionali che possono arricchire personaggi, dungeon o creature.",
+    "sezioni": [
+      {
+        "titolo": "Regole multiclasse",
+        "righe": [
+          {
+            "Voce": "Prerequisiti",
+            "Riepilogo": "Serve 13 o piu nella caratteristica primaria della nuova classe e delle classi attuali."
+          },
+          {
+            "Voce": "PE",
+            "Riepilogo": "Il costo di livello si basa sul livello totale del personaggio."
+          },
+          {
+            "Voce": "PF e Dadi Vita",
+            "Riepilogo": "La nuova classe fornisce PF da livello successivo al 1º; i Dadi Vita delle classi si sommano."
+          },
+          {
+            "Voce": "Bonus competenza",
+            "Riepilogo": "Basato sul livello totale, non sui livelli di una singola classe."
+          },
+          {
+            "Voce": "Competenze",
+            "Riepilogo": "Il primo livello in una nuova classe fornisce solo alcune competenze di partenza."
+          },
+          {
+            "Voce": "Classe Armatura",
+            "Riepilogo": "Se esistono piu modi di calcolarla, se ne usa uno solo alla volta."
+          },
+          {
+            "Voce": "Attacco extra",
+            "Riepilogo": "Privilegi Attacco extra da piu classi non sono cumulativi, salvo eccezioni specifiche."
+          },
+          {
+            "Voce": "Incantesimi",
+            "Riepilogo": "Gli incantesimi preparati si determinano per classe; gli slot combinano livelli da incantatore secondo le regole multiclasse."
+          },
+          {
+            "Voce": "Magia del patto",
+            "Riepilogo": "Slot da Magia del patto e Incantesimi possono essere usati reciprocamente per lanciare incantesimi preparati appropriati."
+          }
+        ]
+      },
+      {
+        "titolo": "Uso dei monili",
+        "righe": [
+          {
+            "Voce": "Uso",
+            "Riepilogo": "Quando crei il personaggio puoi tirare una volta sulla tabella Monili."
+          },
+          {
+            "Voce": "Funzione",
+            "Riepilogo": "Un monile e un oggetto semplice e minuscolo con un sottile velo di mistero."
+          },
+          {
+            "Voce": "GM",
+            "Riepilogo": "Il GM puo usare la tabella per arredare dungeon o riempire le tasche di una creatura."
+          }
+        ]
+      },
+      {
+        "titolo": "Incantatore multiclasse: slot incantesimo 1-9",
+        "righe": [
+          {
+            "Livello": "1",
+            "Slot 1": "2",
+            "Slot 2": "-",
+            "Slot 3": "-",
+            "Slot 4": "-",
+            "Slot 5": "-",
+            "Slot 6": "-",
+            "Slot 7": "-",
+            "Slot 8": "-",
+            "Slot 9": "-"
+          },
+          {
+            "Livello": "2",
+            "Slot 1": "3",
+            "Slot 2": "-",
+            "Slot 3": "-",
+            "Slot 4": "-",
+            "Slot 5": "-",
+            "Slot 6": "-",
+            "Slot 7": "-",
+            "Slot 8": "-",
+            "Slot 9": "-"
+          },
+          {
+            "Livello": "3",
+            "Slot 1": "4",
+            "Slot 2": "2",
+            "Slot 3": "-",
+            "Slot 4": "-",
+            "Slot 5": "-",
+            "Slot 6": "-",
+            "Slot 7": "-",
+            "Slot 8": "-",
+            "Slot 9": "-"
+          },
+          {
+            "Livello": "4",
+            "Slot 1": "4",
+            "Slot 2": "3",
+            "Slot 3": "-",
+            "Slot 4": "-",
+            "Slot 5": "-",
+            "Slot 6": "-",
+            "Slot 7": "-",
+            "Slot 8": "-",
+            "Slot 9": "-"
+          },
+          {
+            "Livello": "5",
+            "Slot 1": "4",
+            "Slot 2": "3",
+            "Slot 3": "2",
+            "Slot 4": "-",
+            "Slot 5": "-",
+            "Slot 6": "-",
+            "Slot 7": "-",
+            "Slot 8": "-",
+            "Slot 9": "-"
+          },
+          {
+            "Livello": "6",
+            "Slot 1": "4",
+            "Slot 2": "3",
+            "Slot 3": "3",
+            "Slot 4": "-",
+            "Slot 5": "-",
+            "Slot 6": "-",
+            "Slot 7": "-",
+            "Slot 8": "-",
+            "Slot 9": "-"
+          },
+          {
+            "Livello": "7",
+            "Slot 1": "4",
+            "Slot 2": "3",
+            "Slot 3": "3",
+            "Slot 4": "1",
+            "Slot 5": "-",
+            "Slot 6": "-",
+            "Slot 7": "-",
+            "Slot 8": "-",
+            "Slot 9": "-"
+          },
+          {
+            "Livello": "8",
+            "Slot 1": "4",
+            "Slot 2": "3",
+            "Slot 3": "3",
+            "Slot 4": "2",
+            "Slot 5": "-",
+            "Slot 6": "-",
+            "Slot 7": "-",
+            "Slot 8": "-",
+            "Slot 9": "-"
+          },
+          {
+            "Livello": "9",
+            "Slot 1": "4",
+            "Slot 2": "3",
+            "Slot 3": "3",
+            "Slot 4": "3",
+            "Slot 5": "1",
+            "Slot 6": "-",
+            "Slot 7": "-",
+            "Slot 8": "-",
+            "Slot 9": "-"
+          },
+          {
+            "Livello": "10",
+            "Slot 1": "4",
+            "Slot 2": "3",
+            "Slot 3": "3",
+            "Slot 4": "3",
+            "Slot 5": "2",
+            "Slot 6": "-",
+            "Slot 7": "-",
+            "Slot 8": "-",
+            "Slot 9": "-"
+          },
+          {
+            "Livello": "11",
+            "Slot 1": "4",
+            "Slot 2": "3",
+            "Slot 3": "3",
+            "Slot 4": "3",
+            "Slot 5": "2",
+            "Slot 6": "1",
+            "Slot 7": "-",
+            "Slot 8": "-",
+            "Slot 9": "-"
+          },
+          {
+            "Livello": "12",
+            "Slot 1": "4",
+            "Slot 2": "3",
+            "Slot 3": "3",
+            "Slot 4": "3",
+            "Slot 5": "2",
+            "Slot 6": "1",
+            "Slot 7": "-",
+            "Slot 8": "-",
+            "Slot 9": "-"
+          },
+          {
+            "Livello": "13",
+            "Slot 1": "4",
+            "Slot 2": "3",
+            "Slot 3": "3",
+            "Slot 4": "3",
+            "Slot 5": "2",
+            "Slot 6": "1",
+            "Slot 7": "1",
+            "Slot 8": "-",
+            "Slot 9": "-"
+          },
+          {
+            "Livello": "14",
+            "Slot 1": "4",
+            "Slot 2": "3",
+            "Slot 3": "3",
+            "Slot 4": "3",
+            "Slot 5": "2",
+            "Slot 6": "1",
+            "Slot 7": "1",
+            "Slot 8": "-",
+            "Slot 9": "-"
+          },
+          {
+            "Livello": "15",
+            "Slot 1": "4",
+            "Slot 2": "3",
+            "Slot 3": "3",
+            "Slot 4": "3",
+            "Slot 5": "2",
+            "Slot 6": "1",
+            "Slot 7": "1",
+            "Slot 8": "1",
+            "Slot 9": "-"
+          },
+          {
+            "Livello": "16",
+            "Slot 1": "4",
+            "Slot 2": "3",
+            "Slot 3": "3",
+            "Slot 4": "3",
+            "Slot 5": "2",
+            "Slot 6": "1",
+            "Slot 7": "1",
+            "Slot 8": "1",
+            "Slot 9": "-"
+          },
+          {
+            "Livello": "17",
+            "Slot 1": "4",
+            "Slot 2": "3",
+            "Slot 3": "3",
+            "Slot 4": "3",
+            "Slot 5": "2",
+            "Slot 6": "1",
+            "Slot 7": "1",
+            "Slot 8": "1",
+            "Slot 9": "1"
+          },
+          {
+            "Livello": "18",
+            "Slot 1": "4",
+            "Slot 2": "3",
+            "Slot 3": "3",
+            "Slot 4": "3",
+            "Slot 5": "3",
+            "Slot 6": "1",
+            "Slot 7": "1",
+            "Slot 8": "1",
+            "Slot 9": "1"
+          },
+          {
+            "Livello": "19",
+            "Slot 1": "4",
+            "Slot 2": "3",
+            "Slot 3": "3",
+            "Slot 4": "3",
+            "Slot 5": "3",
+            "Slot 6": "2",
+            "Slot 7": "1",
+            "Slot 8": "1",
+            "Slot 9": "1"
+          },
+          {
+            "Livello": "20",
+            "Slot 1": "4",
+            "Slot 2": "3",
+            "Slot 3": "3",
+            "Slot 4": "3",
+            "Slot 5": "3",
+            "Slot 6": "2",
+            "Slot 7": "2",
+            "Slot 8": "1",
+            "Slot 9": "1"
+          }
+        ]
+      },
+      {
+        "titolo": "Monili",
+        "righe": [
+          {
+            "1d100": "01",
+            "Monile": "Una mano di goblin mummificata"
+          },
+          {
+            "1d100": "02",
+            "Monile": "Un frammento di cristallo che risplende debolmente alla luce della luna"
+          },
+          {
+            "1d100": "03",
+            "Monile": "Una moneta d'oro forgiata in una terra ignota"
+          },
+          {
+            "1d100": "04",
+            "Monile": "Un diario scritto in una lingua ignota"
+          },
+          {
+            "1d100": "05",
+            "Monile": "Un anello di ottone che non si consuma mai"
+          },
+          {
+            "1d100": "06",
+            "Monile": "Un vecchio pezzo degli scacchi fatto in vetro"
+          },
+          {
+            "1d100": "07",
+            "Monile": "Un paio di dadi fatto in ossa di falange; ognuno mostra il simbolo di un teschio sul lato che normalmente mostrerebbe sei punti"
+          },
+          {
+            "1d100": "08",
+            "Monile": "Un piccolo idolo che raffigura una creatura da incubo e fa fare brutti sogni a chi dorme nelle sue vicinanze"
+          },
+          {
+            "1d100": "09",
+            "Monile": "Una ciocca di capelli"
+          },
+          {
+            "1d100": "10",
+            "Monile": "L'atto di proprietà di un appezzamento di terra in un reame sconosciuto"
+          },
+          {
+            "1d100": "11",
+            "Monile": "Un cubetto fatto di un materiale sconosciuto del peso di 30 grammi"
+          },
+          {
+            "1d100": "12",
+            "Monile": "Una piccola bambola di pezza trafitta da aghi"
+          },
+          {
+            "1d100": "13",
+            "Monile": "Una zanna di una bestia sconosciuta"
+          },
+          {
+            "1d100": "14",
+            "Monile": "Una scaglia enorme, forse appartenente a un drago"
+          },
+          {
+            "1d100": "15",
+            "Monile": "Una sgargiante piuma verde"
+          },
+          {
+            "1d100": "16",
+            "Monile": "Una vecchia carta da chiromante su cui compare il ritratto del personaggio"
+          },
+          {
+            "1d100": "17",
+            "Monile": "Un globo di vetro pieno di sbuffi di fumo"
+          },
+          {
+            "1d100": "18",
+            "Monile": "Un uovo da mezzo chilo dal guscio color rosso chiaro"
+          },
+          {
+            "1d100": "19",
+            "Monile": "Un tubo per soffiare bolle di sapone"
+          },
+          {
+            "1d100": "20",
+            "Monile": "Un vaso di vetro che contiene uno strano pezzo di carne immerso in un liquido conservante"
+          },
+          {
+            "1d100": "21",
+            "Monile": "Un carillon di fattura gnomesca il cui motivo richiama vagamente una melodia che il personaggio ricorda dall'infanzia"
+          },
+          {
+            "1d100": "22",
+            "Monile": "Una statuetta di legno con le fattezze di un halfling strafottente"
+          },
+          {
+            "1d100": "23",
+            "Monile": "Un globo di ottone ricoperto di strane incisioni runiche"
+          },
+          {
+            "1d100": "24",
+            "Monile": "Un disco di pietra multicolore"
+          },
+          {
+            "1d100": "25",
+            "Monile": "Un'icona d'argento a forma di corvo"
+          },
+          {
+            "1d100": "26",
+            "Monile": "Un sacchetto contenente quarantasette denti, tra cui uno marcio"
+          },
+          {
+            "1d100": "27",
+            "Monile": "Un frammento di ossidiana che risulta sempre caldo al tatto"
+          },
+          {
+            "1d100": "28",
+            "Monile": "Un artiglio di drago che pende da una collana in cuoio"
+          },
+          {
+            "1d100": "29",
+            "Monile": "Un paio di vecchi calzini"
+          },
+          {
+            "1d100": "30",
+            "Monile": "Un libro vuoto le cui pagine non si lasciano sporcare da inchiostro, gesso, grafite o qualsiasi altra sostanza o segno"
+          },
+          {
+            "1d100": "31",
+            "Monile": "Un distintivo d'argento a forma di una stella a cinque punte"
+          },
+          {
+            "1d100": "32",
+            "Monile": "Un coltello appartenuto a un parente"
+          },
+          {
+            "1d100": "33",
+            "Monile": "Una fiala di vetro piena di unghie tagliate"
+          },
+          {
+            "1d100": "34",
+            "Monile": "Un congegno di metallo rettangolare con due minuscole coppe di metallo a un'estremità che emettono scintille quando bagnate"
+          },
+          {
+            "1d100": "35",
+            "Monile": "Un guanto bianco ricoperto di lustrini della taglia di un umano"
+          },
+          {
+            "1d100": "36",
+            "Monile": "Una veste con cento minuscole tasche"
+          },
+          {
+            "1d100": "37",
+            "Monile": "Una pietra priva di peso"
+          },
+          {
+            "1d100": "38",
+            "Monile": "Un ritratto appena abbozzato di un goblin"
+          },
+          {
+            "1d100": "39",
+            "Monile": "Una fiala di vetro vuota che emana un buon profumo"
+          },
+          {
+            "1d100": "40",
+            "Monile": "Una gemma che sembra un pezzo di carbone quando viene esaminata da chiunque al di fuori del personaggio"
+          },
+          {
+            "1d100": "41",
+            "Monile": "Un pezzo di stoffa strappato di una vecchia bandiera"
+          },
+          {
+            "1d100": "42",
+            "Monile": "Una mostrina dei gradi di un legionario scomparso"
+          },
+          {
+            "1d100": "43",
+            "Monile": "Un campanello d'argento senza batacchio"
+          },
+          {
+            "1d100": "44",
+            "Monile": "Una lampada con all'interno un canarino meccanico"
+          },
+          {
+            "1d100": "45",
+            "Monile": "Uno scrigno in miniatura scolpito per apparire dotato di numerose zampe alla base"
+          },
+          {
+            "1d100": "46",
+            "Monile": "Uno spiritello morto all'interno di una bottiglia di vetro trasparente"
+          },
+          {
+            "1d100": "47",
+            "Monile": "Un cilindro di metallo privo di qualsiasi apertura ma che sembra pieno di un liquido, di sabbia, di ragni o di vetri rotti (a scelta del giocatore)"
+          },
+          {
+            "1d100": "48",
+            "Monile": "Un globo di vetro pieno d'acqua al cui interno nuota un pesce rosso meccanico"
+          },
+          {
+            "1d100": "49",
+            "Monile": "Un cucchiaio d'argento con una M incisa sul manico"
+          },
+          {
+            "1d100": "50",
+            "Monile": "Un fischietto in legno dorato"
+          },
+          {
+            "1d100": "51",
+            "Monile": "Uno scarabeo morto, grande quanto la mano di un uomo"
+          },
+          {
+            "1d100": "52",
+            "Monile": "Due soldatini giocattolo, di cui uno privo della testa"
+          },
+          {
+            "1d100": "53",
+            "Monile": "Uno scrigno pieno di bottoni di tutte le taglie"
+          },
+          {
+            "1d100": "54",
+            "Monile": "Una candela impossibile da accendere"
+          },
+          {
+            "1d100": "55",
+            "Monile": "Una minuscola gabbia priva di porticina"
+          },
+          {
+            "1d100": "56",
+            "Monile": "Una vecchia chiave"
+          },
+          {
+            "1d100": "57",
+            "Monile": "Una mappa del tesoro indecifrabile"
+          },
+          {
+            "1d100": "58",
+            "Monile": "L'elsa di una spada infranta"
+          },
+          {
+            "1d100": "59",
+            "Monile": "Una zampa di coniglio"
+          },
+          {
+            "1d100": "60",
+            "Monile": "Un occhio di vetro"
+          },
+          {
+            "1d100": "61",
+            "Monile": "Un medaglione contenente il ritratto di una persona orribile"
+          },
+          {
+            "1d100": "62",
+            "Monile": "Un teschio d'argento grande come una moneta"
+          },
+          {
+            "1d100": "63",
+            "Monile": "Una maschera di alabastro"
+          },
+          {
+            "1d100": "64",
+            "Monile": "Un cono di incenso nero appiccicoso e dal pessimo odore"
+          },
+          {
+            "1d100": "65",
+            "Monile": "Un berretto da notte che, quando indossato, fa fare al portatore sogni piacevoli"
+          },
+          {
+            "1d100": "66",
+            "Monile": "Un singolo tribolo fatto d'osso"
+          },
+          {
+            "1d100": "67",
+            "Monile": "La montatura di un monocolo dorato privo di lente"
+          },
+          {
+            "1d100": "68",
+            "Monile": "Un cubo con spigolo di 2,5 cm, con ogni faccia dipinta di un colore diverso"
+          },
+          {
+            "1d100": "69",
+            "Monile": "Una maniglia di cristallo di una porta"
+          },
+          {
+            "1d100": "70",
+            "Monile": "Un pacchetto pieno di polvere rosa"
+          },
+          {
+            "1d100": "71",
+            "Monile": "Una strofa di una magnifica canzone, scritta come una serie di note musicali su due frammenti di pergamena"
+          },
+          {
+            "1d100": "72",
+            "Monile": "Un orecchino d'argento a forma di goccia contenente una vera lacrima"
+          },
+          {
+            "1d100": "73",
+            "Monile": "Il guscio di un uovo su cui sono raffigurate scene di varie disgrazie dipinte con inquietante precisione"
+          },
+          {
+            "1d100": "74",
+            "Monile": "Un ventaglio che, una volta aperto, mostra un gatto addormentato"
+          },
+          {
+            "1d100": "75",
+            "Monile": "Una serie di flauti in osso"
+          },
+          {
+            "1d100": "76",
+            "Monile": "Un quadrifoglio custodito tra le pagine di un manuale di galateo"
+          },
+          {
+            "1d100": "77",
+            "Monile": "Una pergamena su cui è stato disegnato un marchingegno meccanico"
+          },
+          {
+            "1d100": "78",
+            "Monile": "Un elegante fodero che non si adatta a nessuna lama che il personaggio abbia mai visto"
+          },
+          {
+            "1d100": "79",
+            "Monile": "Un invito a una festa a cui è stato commesso un delitto"
+          },
+          {
+            "1d100": "80",
+            "Monile": "Un pentacolo di bronzo con l'immagine di una testa di ratto incisa al centro"
+          },
+          {
+            "1d100": "81",
+            "Monile": "Un fazzoletto viola su cui è stato ricamato il nome di un potente arcimago"
+          },
+          {
+            "1d100": "82",
+            "Monile": "Metà della planimetria di un tempio, un castello o una struttura di altro tipo"
+          },
+          {
+            "1d100": "83",
+            "Monile": "Un pezzo di stoffa ripiegato che, una volta spiegato, si trasforma in un elegante mantello"
+          },
+          {
+            "1d100": "84",
+            "Monile": "La ricevuta di un deposito presso una banca di una città molto lontana"
+          },
+          {
+            "1d100": "85",
+            "Monile": "Un diario con sette pagine mancanti"
+          },
+          {
+            "1d100": "86",
+            "Monile": "Una tabacchiera d'argento vuota con la scritta \"sogni\" incisa sul coperchio"
+          },
+          {
+            "1d100": "87",
+            "Monile": "Un simbolo sacro in ferro dedicato a un dio sconosciuto"
+          },
+          {
+            "1d100": "88",
+            "Monile": "Un libro che racconta la storia dell'ascesa e della caduta di un eroe leggendario, privo dell'ultimo capitolo"
+          },
+          {
+            "1d100": "89",
+            "Monile": "Una fiala di sangue di drago"
+          },
+          {
+            "1d100": "90",
+            "Monile": "Un'antica freccia di fattura elfica"
+          },
+          {
+            "1d100": "91",
+            "Monile": "Un ago impossibile da piegare"
+          },
+          {
+            "1d100": "92",
+            "Monile": "Un'elegante spilla di fattura nanica"
+          },
+          {
+            "1d100": "93",
+            "Monile": "Una bottiglia di vino vuota con un'elegante etichetta che recita \"Enoteca del Mago dei Vini, Torchietto del drago, 331422-W\""
+          },
+          {
+            "1d100": "94",
+            "Monile": "La tessera di un mosaico dalla superficie lucida e multicolore"
+          },
+          {
+            "1d100": "95",
+            "Monile": "Un topo pietrificato"
+          },
+          {
+            "1d100": "96",
+            "Monile": "Una bandiera nera da pirata decorata con le tibie incrociate e il teschio di un drago"
+          },
+          {
+            "1d100": "97",
+            "Monile": "Un minuscolo granchio o ragno meccanico che si anima e si sposta quando nessuno lo osserva"
+          },
+          {
+            "1d100": "98",
+            "Monile": "Un vaso di vetro pieno di lardo con un'etichetta che recita: \"Grasso di Grifone\""
+          },
+          {
+            "1d100": "99",
+            "Monile": "Uno scrigno di legno con il fondo di ceramica che contiene un verme vivo con una testa a ogni estremità del suo corpo"
+          },
+          {
+            "1d100": "00",
+            "Monile": "Un'urna di metallo contenente le ceneri di un eroe"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "oggetti_magici_e_creazione",
+    "nome": "Oggetti magici e creazione",
+    "capitolo": "Equipaggiamento",
+    "categoria": "Equipaggiamento",
+    "pagine_sorgente": "115-117",
+    "descrizione": "Il capitolo equipaggiamento riepiloga identificazione e sintonia degli oggetti magici, oltre alle regole per creare oggetti non magici, pozioni di guarigione e pergamene magiche.",
+    "sezioni": [
+      {
+        "titolo": "Oggetti magici",
+        "righe": [
+          {
+            "Voce": "Identificare",
+            "Riepilogo": "L'incantesimo identificare e il metodo piu rapido; in alternativa un riposo breve a contatto con l'oggetto ne rivela proprieta e uso, ma non le maledizioni."
+          },
+          {
+            "Voce": "Sintonia",
+            "Riepilogo": "Richiede un riposo breve concentrandosi sull'oggetto e mantenendo contatto fisico; non puo coincidere con il riposo usato per identificarlo."
+          },
+          {
+            "Voce": "Limite",
+            "Riepilogo": "Una creatura puo essere in sintonia con al massimo tre oggetti magici e non con piu copie dello stesso oggetto."
+          },
+          {
+            "Voce": "Fine sintonia",
+            "Riepilogo": "Termina se i prerequisiti non sono piu soddisfatti, l'oggetto resta oltre 30 metri per almeno 24 ore, il portatore muore, un'altra creatura entra in sintonia o il portatore termina volontariamente la sintonia."
+          }
+        ]
+      },
+      {
+        "titolo": "Creazione",
+        "righe": [
+          {
+            "Voce": "Oggetti non magici",
+            "Riepilogo": "Richiedono strumento, competenza, materie prime pari a meta del costo e tempo pari al costo in mo diviso 10 giorni, arrotondando in alto."
+          },
+          {
+            "Voce": "Aiuto",
+            "Riepilogo": "Piu personaggi competenti possono ridurre il tempo dividendo i giorni necessari per il numero di lavoratori."
+          },
+          {
+            "Voce": "Pozione di guarigione",
+            "Riepilogo": "Con competenza nella borsa da erborista: 25 mo di materie prime e 1 giorno di lavoro."
+          },
+          {
+            "Voce": "Pergamene magiche",
+            "Riepilogo": "Richiedono competenza in Arcano o scorte da calligrafo, incantesimo preparato e componenti materiali richieste."
+          }
+        ]
+      },
+      {
+        "titolo": "Costi pergamene magiche",
+        "righe": [
+          {
+            "Livello incantesimo": "Trucchetto",
+            "Tempo": "1 giorno",
+            "Costo": "15 mo"
+          },
+          {
+            "Livello incantesimo": "1",
+            "Tempo": "1 giorno",
+            "Costo": "25 mo"
+          },
+          {
+            "Livello incantesimo": "2",
+            "Tempo": "3 giorni",
+            "Costo": "100 mo"
+          },
+          {
+            "Livello incantesimo": "3",
+            "Tempo": "5 giorni",
+            "Costo": "150 mo"
+          },
+          {
+            "Livello incantesimo": "4",
+            "Tempo": "10 giorni",
+            "Costo": "1.000 mo"
+          },
+          {
+            "Livello incantesimo": "5",
+            "Tempo": "25 giorni",
+            "Costo": "1.500 mo"
+          },
+          {
+            "Livello incantesimo": "6",
+            "Tempo": "40 giorni",
+            "Costo": "10.000 mo"
+          },
+          {
+            "Livello incantesimo": "7",
+            "Tempo": "50 giorni",
+            "Costo": "12.500 mo"
+          },
+          {
+            "Livello incantesimo": "8",
+            "Tempo": "60 giorni",
+            "Costo": "15.000 mo"
+          },
+          {
+            "Livello incantesimo": "9",
+            "Tempo": "120 giorni",
+            "Costo": "50.000 mo"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "oggetti_magici_senzienti",
+    "nome": "Oggetti magici senzienti",
+    "capitolo": "Oggetti magici",
+    "categoria": "Oggetti magici",
+    "pagine_sorgente": "236-237",
+    "descrizione": "Alcuni oggetti magici possiedono coscienza e personalita. Il GM controlla questi oggetti e le loro proprieta attivate; il rapporto con il possessore puo generare collaborazione o conflitto.",
+    "sezioni": [
+      {
+        "titolo": "Tratti",
+        "righe": [
+          {
+            "Voce": "Caratteristiche",
+            "Riepilogo": "L'oggetto ha Intelligenza, Saggezza e Carisma scelti dal GM o determinati con 4d6 scartando il risultato piu basso."
+          },
+          {
+            "Voce": "Allineamento",
+            "Riepilogo": "Ha un allineamento scelto dal GM o determinato casualmente."
+          },
+          {
+            "Voce": "Comunicazione",
+            "Riepilogo": "Comunica tramite emozioni, parlando, o parlando e comunicando telepaticamente."
+          },
+          {
+            "Voce": "Sensi",
+            "Riepilogo": "Puo avere udito e visione entro 9, 18 o 36 metri, oppure scurovisione e udito entro 36 metri."
+          },
+          {
+            "Voce": "Scopo speciale",
+            "Riepilogo": "Puo avere un obiettivo, come proteggere creature, cercare conoscenza, distruggere nemici o servire una divinita."
+          }
+        ]
+      },
+      {
+        "titolo": "Conflitto",
+        "righe": [
+          {
+            "Voce": "Innesco",
+            "Riepilogo": "Se il possessore agisce contro allineamento o scopo dell'oggetto, puo nascere un conflitto."
+          },
+          {
+            "Voce": "Tiro salvezza",
+            "Riepilogo": "Il possessore effettua un TS su Carisma con CD 12 + modificatore di Carisma dell'oggetto."
+          },
+          {
+            "Voce": "Richieste",
+            "Riepilogo": "L'oggetto puo chiedere di perseguire il suo scopo, eliminare cio che disprezza, essere ceduto o restare sempre vicino."
+          },
+          {
+            "Voce": "Ritorsioni",
+            "Riepilogo": "Se rifiutato, puo impedire la sintonia, sopprimere proprieta attivate o tentare di controllare il portatore."
+          },
+          {
+            "Voce": "Controllo",
+            "Riepilogo": "Il controllo impone affascinato per 1d12 ore su TS fallito; il portatore ripete il TS se subisce danni."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "origini_lingue_personaggio",
+    "nome": "Origini e lingue del personaggio",
+    "capitolo": "Creazione del personaggio",
+    "categoria": "Creazione personaggio",
+    "pagine_sorgente": "21-23",
+    "descrizione": "Le origini del personaggio derivano da background, specie e lingue. Background e classe forniscono anche competenze ed equipaggiamento iniziale.",
+    "sezioni": [
+      {
+        "titolo": "Origini",
+        "righe": [
+          {
+            "Voce": "Background",
+            "Riepilogo": "Rappresenta luogo e occupazione che hanno formato maggiormente il personaggio; fornisce talento, due abilita e uno strumento."
+          },
+          {
+            "Voce": "Equipaggiamento",
+            "Riepilogo": "Background e classe forniscono equipaggiamento iniziale; le monete possono essere spese subito."
+          },
+          {
+            "Voce": "Specie",
+            "Riepilogo": "Opzioni SRD: Dragonide, elfo, gnomo, goliath, halfling, nano, orco, tiefling e umano."
+          },
+          {
+            "Voce": "Taglia e velocita",
+            "Riepilogo": "Sono determinate dalla specie e vanno annotate sulla scheda."
+          },
+          {
+            "Voce": "Passato",
+            "Riepilogo": "Background e specie aiutano a definire famiglia, amicizie, legami, organizzazioni e motivazione all'avventura."
+          }
+        ]
+      },
+      {
+        "titolo": "Punteggi di caratteristica e background",
+        "righe": [
+          {
+            "Caratteristica": "Forza",
+            "Background": "Soldato"
+          },
+          {
+            "Caratteristica": "Destrezza",
+            "Background": "Soldato"
+          },
+          {
+            "Caratteristica": "Costituzione",
+            "Background": "Soldato"
+          },
+          {
+            "Caratteristica": "Intelligenza",
+            "Background": "Accolito"
+          },
+          {
+            "Caratteristica": "Saggezza",
+            "Background": "Accolito"
+          },
+          {
+            "Caratteristica": "Carisma",
+            "Background": "Accolito"
+          }
+        ]
+      },
+      {
+        "titolo": "Lingue",
+        "righe": [
+          {
+            "Voce": "Base",
+            "Riepilogo": "Il personaggio conosce il Comune e altre due lingue scelte o determinate casualmente."
+          },
+          {
+            "Voce": "Standard",
+            "Riepilogo": "Lingua dei segni comune, Draconico, Nanico, Elfico, Gigante, Gnomesco, Goblin, Halfling, Orchesco."
+          },
+          {
+            "Voce": "Rare",
+            "Riepilogo": "Abissale, Celestiale, Druidico, Gergo delle profondita, Infernale, Primordiale, Silvano, Sottocomune, Gergo ladresco."
+          },
+          {
+            "Voce": "Primordiale",
+            "Riepilogo": "Include i dialetti Aquan, Auran, Ignan e Terran; parlanti di dialetti diversi comunicano tra loro."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ottenere_incantesimi",
+    "nome": "Ottenere incantesimi",
+    "capitolo": "Incantesimi",
+    "categoria": "Incantesimi",
+    "pagine_sorgente": 118,
+    "descrizione": "Prima di lanciare un incantesimo, una creatura deve averlo preparato, averlo sempre preparato tramite un privilegio o accedervi tramite un oggetto magico.",
+    "sezioni": [
+      {
+        "titolo": "Preparazione degli incantesimi per classe",
+        "righe": [
+          {
+            "Voce": "Bardo",
+            "Riepilogo": "Modifica quando acquisisce un livello; cambia un incantesimo."
+          },
+          {
+            "Voce": "Chierico",
+            "Riepilogo": "Modifica quando completa un riposo lungo; cambia qualsiasi numero di incantesimi."
+          },
+          {
+            "Voce": "Druido",
+            "Riepilogo": "Modifica quando completa un riposo lungo; cambia qualsiasi numero di incantesimi."
+          },
+          {
+            "Voce": "Mago",
+            "Riepilogo": "Modifica quando completa un riposo lungo; cambia qualsiasi numero di incantesimi."
+          },
+          {
+            "Voce": "Paladino",
+            "Riepilogo": "Modifica quando completa un riposo lungo; cambia un incantesimo."
+          },
+          {
+            "Voce": "Ranger",
+            "Riepilogo": "Modifica quando completa un riposo lungo; cambia un incantesimo."
+          },
+          {
+            "Voce": "Stregone",
+            "Riepilogo": "Modifica quando acquisisce un livello; cambia un incantesimo."
+          },
+          {
+            "Voce": "Warlock",
+            "Riepilogo": "Modifica quando acquisisce un livello; cambia un incantesimo."
+          }
+        ],
+        "blocchi": [
+          {
+            "nome": "Mostri",
+            "descrizione": "Quasi tutti i mostri che lanciano incantesimi non modificano la lista degli incantesimi preparati, ma il GM puo ritoccarla."
+          },
+          {
+            "nome": "Sempre preparati",
+            "descrizione": "Un incantesimo sempre preparato non conta nel numero di incantesimi della lista modificabile del personaggio."
+          },
+          {
+            "nome": "Armatura",
+            "descrizione": "Un incantatore deve essere competente nell'armatura che indossa per lanciare incantesimi mentre la indossa."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "passo_di_viaggio",
+    "nome": "Passo di viaggio",
+    "capitolo": "Strumenti di gioco",
+    "categoria": "Strumenti di gioco",
+    "pagine_sorgente": 220,
+    "descrizione": "Il terreno predominante determina il passo massimo di viaggio. Strade, velocita dei viaggiatori, viaggio prolungato, movimenti speciali e veicoli possono modificare il modo in cui il gruppo si sposta.",
+    "sezioni": [
+      {
+        "titolo": "Fattori del viaggio",
+        "righe": [
+          {
+            "Voce": "Strade",
+            "Riepilogo": "Una strada in buone condizioni aumenta il passo massimo di un grado, da lento a normale o da normale a veloce."
+          },
+          {
+            "Voce": "Viaggiatori lenti",
+            "Riepilogo": "Il gruppo deve muoversi a passo lento se la velocita di un membro e ridotta alla meta o meno."
+          },
+          {
+            "Voce": "Oltre 8 ore",
+            "Riepilogo": "Alla fine di ogni ora extra, ogni personaggio supera un TS su Costituzione o ottiene 1 livello di indebolimento; CD 10 + ore oltre l'ottava."
+          },
+          {
+            "Voce": "Movimenti speciali",
+            "Riepilogo": "Chilometri all'ora = velocita divisa 2; passo normale = km/h per ore di viaggio; veloce x 1,33; lento x 0,66."
+          },
+          {
+            "Voce": "Veicoli",
+            "Riepilogo": "Chi viaggia su un veicolo usa la velocita del veicolo in km/h e non sceglie un passo di viaggio."
+          }
+        ]
+      },
+      {
+        "titolo": "Terreni",
+        "righe": [
+          {
+            "Terreno": "Artico",
+            "Passo massimo": "veloce con equipaggiamento adeguato",
+            "CD foraggiare": "20",
+            "CD orientarsi": "10",
+            "CD cercare": "10"
+          },
+          {
+            "Terreno": "Costiero",
+            "Passo massimo": "normale",
+            "CD foraggiare": "10",
+            "CD orientarsi": "5",
+            "CD cercare": "15"
+          },
+          {
+            "Terreno": "Deserto",
+            "Passo massimo": "normale",
+            "CD foraggiare": "20",
+            "CD orientarsi": "10",
+            "CD cercare": "10"
+          },
+          {
+            "Terreno": "Foresta",
+            "Passo massimo": "normale",
+            "CD foraggiare": "10",
+            "CD orientarsi": "15",
+            "CD cercare": "15"
+          },
+          {
+            "Terreno": "Prateria",
+            "Passo massimo": "veloce",
+            "CD foraggiare": "15",
+            "CD orientarsi": "5",
+            "CD cercare": "15"
+          },
+          {
+            "Terreno": "Montagna o palude",
+            "Passo massimo": "lento",
+            "CD foraggiare": "-",
+            "CD orientarsi": "-",
+            "CD cercare": "-"
+          },
+          {
+            "Terreno": "Sottosuolo o urbano",
+            "Passo massimo": "normale",
+            "CD foraggiare": "-",
+            "CD orientarsi": "-",
+            "CD cercare": "-"
+          },
+          {
+            "Terreno": "Sull'acqua",
+            "Passo massimo": "Il movimento dipende dal veicolo.",
+            "CD foraggiare": "-",
+            "CD orientarsi": "-",
+            "CD cercare": "-"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "paura_e_stress_mentale",
+    "nome": "Paura e stress mentale",
+    "capitolo": "Strumenti di gioco",
+    "categoria": "Strumenti di gioco",
+    "pagine_sorgente": "224-225",
+    "descrizione": "Paura e stress mentale sono regole opzionali da discutere con i giocatori all'inizio della campagna. La paura usa spesso la condizione spaventato; lo stress mentale usa spesso danni psichici.",
+    "sezioni": [
+      {
+        "titolo": "Paura e stress",
+        "righe": [
+          {
+            "Voce": "Paura CD 10",
+            "Riepilogo": "Evento innocuo ma terrificante."
+          },
+          {
+            "Voce": "Paura CD 15",
+            "Riepilogo": "Manifestazione illusoria delle peggiori paure visibile solo al personaggio."
+          },
+          {
+            "Voce": "Paura CD 20",
+            "Riepilogo": "Portale verso l'Abisso o scena soprannaturale estrema."
+          },
+          {
+            "Voce": "Stress CD 10",
+            "Riepilogo": "Sostanza allucinogena: 1d6 danni psichici."
+          },
+          {
+            "Voce": "Stress CD 15",
+            "Riepilogo": "Idolo immondo che attacca la psiche: 3d6 danni psichici."
+          },
+          {
+            "Voce": "Stress CD 20",
+            "Riepilogo": "Trappola magica che spedisce nel Reame Remoto: 9d6 danni psichici."
+          },
+          {
+            "Voce": "Effetti prolungati",
+            "Riepilogo": "Breve termine 1d10 minuti, lungo termine 1d10 x 10 ore o indefinito finche rimosso."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "pozioni_maledizioni_resilienza",
+    "nome": "Pozioni, maledizioni e resilienza",
+    "capitolo": "Oggetti magici",
+    "categoria": "Oggetti magici",
+    "pagine_sorgente": "233-235",
+    "descrizione": "Le pozioni possono interagire in modo imprevedibile, gli oggetti maledetti nascondono spesso la loro natura e gli oggetti magici sono generalmente piu resistenti delle controparti non magiche.",
+    "sezioni": [
+      {
+        "titolo": "Miscibilita delle pozioni",
+        "righe": [
+          {
+            "1d100": "01",
+            "Risultato": "Entrambe le pozioni perdono i loro effetti e la miscela genera un'esplosione magica in una sfera di 1,5 metri di raggio centrata su se stessa. Ogni creatura nell'area subisce 4d10 danni da forza."
+          },
+          {
+            "1d100": "02-08",
+            "Risultato": "Entrambe le pozioni perdono i loro effetti e la miscela diventa un veleno da ingestione a tua scelta."
+          },
+          {
+            "1d100": "09-15",
+            "Risultato": "Entrambe le pozioni perdono i loro effetti."
+          },
+          {
+            "1d100": "16-25",
+            "Risultato": "Una delle pozioni perde il suo effetto."
+          },
+          {
+            "1d100": "26-35",
+            "Risultato": "Entrambe le pozioni funzionano, ma i loro effetti numerici e la durata sono dimezzati. Se una pozione non ha effetto numerico né durata, perde il suo effetto."
+          },
+          {
+            "1d100": "36-90",
+            "Risultato": "Entrambe le pozioni funzionano normalmente."
+          },
+          {
+            "1d100": "91-99",
+            "Risultato": "Entrambe le pozioni funzionano, ma gli effetti numerici e la durata di una pozione sono raddoppiati. Se nessuna delle due pozioni ha valori raddoppiabili, entrambe funzionano normalmente."
+          },
+          {
+            "1d100": "00",
+            "Risultato": "Solo una pozione funziona, ma il suo effetto è permanente a discrezione del GM."
+          }
+        ]
+      },
+      {
+        "titolo": "Maledizioni e resilienza",
+        "righe": [
+          {
+            "Voce": "Maledizioni",
+            "Riepilogo": "La descrizione indica se un oggetto e maledetto; identificare e la maggior parte dei metodi di identificazione non rivelano la maledizione."
+          },
+          {
+            "Voce": "Sintonia maledetta",
+            "Riepilogo": "La sintonia con un oggetto maledetto non puo essere interrotta volontariamente finche la maledizione non viene spezzata."
+          },
+          {
+            "Voce": "Resilienza",
+            "Riepilogo": "Un oggetto magico e tenace almeno quanto un oggetto non magico del suo genere; quasi tutti, eccetto pozioni e pergamene, hanno resistenza a tutti i danni."
+          },
+          {
+            "Voce": "Manufatti",
+            "Riepilogo": "Possono essere distrutti solo con misure speciali, spesso scoperte tramite ricerca o missione."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "prove_con_d20",
+    "nome": "Prove con d20",
+    "capitolo": "Come si gioca",
+    "categoria": "Prove",
+    "pagine_sorgente": "6-8",
+    "descrizione": "Quando l'esito di un'azione e incerto, si effettua una prova con d20. Le prove con d20 includono prove di caratteristica, tiri salvezza e tiri per colpire.",
+    "sezioni": [
+      {
+        "titolo": "Procedura",
+        "righe": [
+          {
+            "Voce": "1",
+            "Riepilogo": "Tira 1d20. Con vantaggio o svantaggio tira due d20 e usa rispettivamente il maggiore o il minore."
+          },
+          {
+            "Voce": "2",
+            "Riepilogo": "Aggiungi il modificatore di caratteristica rilevante, il bonus di competenza se applicabile e altri bonus o penalita."
+          },
+          {
+            "Voce": "3",
+            "Riepilogo": "Confronta il totale con la CD o la CA. Il tiro riesce se il totale e pari o superiore al bersaglio."
+          }
+        ]
+      },
+      {
+        "titolo": "Classi Difficolta tipiche",
+        "righe": [
+          {
+            "Voce": "Molto facile",
+            "Riepilogo": "CD 5"
+          },
+          {
+            "Voce": "Facile",
+            "Riepilogo": "CD 10"
+          },
+          {
+            "Voce": "Media",
+            "Riepilogo": "CD 15"
+          },
+          {
+            "Voce": "Difficile",
+            "Riepilogo": "CD 20"
+          },
+          {
+            "Voce": "Molto difficile",
+            "Riepilogo": "CD 25"
+          },
+          {
+            "Voce": "Quasi impossibile",
+            "Riepilogo": "CD 30"
+          }
+        ]
+      },
+      {
+        "titolo": "Tiri salvezza",
+        "righe": [
+          {
+            "Voce": "Forza",
+            "Riepilogo": "Resistere fisicamente alla forza diretta."
+          },
+          {
+            "Voce": "Destrezza",
+            "Riepilogo": "Schivare pericoli."
+          },
+          {
+            "Voce": "Costituzione",
+            "Riepilogo": "Sopravvivere a un pericolo tossico."
+          },
+          {
+            "Voce": "Intelligenza",
+            "Riepilogo": "Riconoscere un'illusione come falsa."
+          },
+          {
+            "Voce": "Saggezza",
+            "Riepilogo": "Resistere a un attacco psichico."
+          },
+          {
+            "Voce": "Carisma",
+            "Riepilogo": "Affermare la propria identita."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "rarita_e_valore_oggetti_magici",
+    "nome": "Rarita e valore degli oggetti magici",
+    "capitolo": "Oggetti magici",
+    "categoria": "Oggetti magici",
+    "pagine_sorgente": "233-234",
+    "descrizione": "La rarita misura approssimativamente il potere di un oggetto magico e puo aiutare a definirne disponibilita e valore nelle campagne in cui gli oggetti magici si comprano o vendono.",
+    "sezioni": [
+      {
+        "titolo": "Valori per rarita",
+        "righe": [
+          {
+            "Rarità": "Comune",
+            "Valore base": "100 mo"
+          },
+          {
+            "Rarità": "Non comune",
+            "Valore base": "400 mo"
+          },
+          {
+            "Rarità": "Raro",
+            "Valore base": "4.000 mo"
+          },
+          {
+            "Rarità": "Molto raro",
+            "Valore base": "40.000 mo"
+          },
+          {
+            "Rarità": "Leggendario",
+            "Valore base": "200.000 mo"
+          },
+          {
+            "Rarità": "Manufatto",
+            "Valore base": "Inestimabile"
+          }
+        ],
+        "blocchi": [
+          {
+            "nome": "Consumabili",
+            "descrizione": "Il valore e dimezzato per un oggetto consumabile diverso da una pergamena magica."
+          },
+          {
+            "nome": "Pergamene magiche",
+            "descrizione": "Il valore di una pergamena magica e pari al doppio del costo di scrittura della pergamena."
+          },
+          {
+            "nome": "Oggetto incorporato",
+            "descrizione": "Se l'oggetto magico incorpora un oggetto con costo d'acquisto, come arma o armatura, quel costo si aggiunge al valore magico."
+          }
+        ]
+      },
+      {
+        "titolo": "Disponibilita indicativa",
+        "righe": [
+          {
+            "Voce": "Comune",
+            "Riepilogo": "Spesso acquistabile in una cittadina o una citta grande."
+          },
+          {
+            "Voce": "Non comune e raro",
+            "Riepilogo": "Solitamente reperibile solo nelle citta grandi."
+          },
+          {
+            "Voce": "Molto raro e oltre",
+            "Riepilogo": "Potrebbe essere venduto solo in luoghi meravigliosi, come una citta su un altro piano di esistenza."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ritmo_di_gioco",
+    "nome": "Ritmo di gioco",
+    "capitolo": "Come si gioca",
+    "categoria": "Fondamenti",
+    "pagine_sorgente": 5,
+    "descrizione": "Il gioco si sviluppa attorno a tre pilastri: interazioni sociali, esplorazione e combattimento. Il ciclo base prevede che il Game Master descriva una scena, i giocatori dichiarino cosa fanno i personaggi e il GM narri i risultati, chiedendo tiri quando l'esito e incerto.",
+    "sezioni": [
+      {
+        "titolo": "Schema base",
+        "righe": [
+          {
+            "Voce": "1",
+            "Riepilogo": "Il GM descrive la scena."
+          },
+          {
+            "Voce": "2",
+            "Riepilogo": "I giocatori descrivono le azioni dei personaggi."
+          },
+          {
+            "Voce": "3",
+            "Riepilogo": "Il GM narra i risultati e, se serve, chiede un tiro."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "scheda_statistiche_mostro",
+    "nome": "Scheda delle statistiche del mostro",
+    "capitolo": "Mostri",
+    "categoria": "Mostri",
+    "pagine_sorgente": 289,
+    "descrizione": "Ogni mostro possiede una scheda delle statistiche che raccoglie le regole necessarie per usarlo nel gioco, dai dati generali alle azioni disponibili.",
+    "sezioni": [
+      {
+        "titolo": "Sezioni della scheda",
+        "righe": [
+          {
+            "Voce": "Nome e dati generali",
+            "Riepilogo": "Nome, taglia, tipo di creatura con eventuali descrittori e allineamento."
+          },
+          {
+            "Voce": "Statistiche di combattimento",
+            "Riepilogo": "Classe Armatura, punti ferita, velocita e iniziativa."
+          },
+          {
+            "Voce": "Punteggi di caratteristica",
+            "Riepilogo": "Caratteristiche, modificatori e tiri salvezza del mostro."
+          },
+          {
+            "Voce": "Altri dettagli",
+            "Riepilogo": "Sensi, Lingue, GS e, se presenti, abilita, resistenze, immunità e attrezzatura."
+          },
+          {
+            "Voce": "Tratti",
+            "Riepilogo": "Caratteristiche sempre attive o attive in determinate situazioni."
+          },
+          {
+            "Voce": "Azioni",
+            "Riepilogo": "Azioni specifiche del mostro, oltre alle azioni generali del capitolo Come si gioca."
+          },
+          {
+            "Voce": "Azioni bonus",
+            "Riepilogo": "Azioni bonus del mostro, se presenti."
+          },
+          {
+            "Voce": "Reazioni e leggendarie",
+            "Riepilogo": "Reazioni e azioni leggendarie, se presenti."
+          }
+        ]
+      },
+      {
+        "titolo": "Tipo, descrittori e allineamento",
+        "righe": [
+          {
+            "Voce": "Tipo di creatura",
+            "Riepilogo": "Aberrazioni, Bestie, Celestiali, Costrutti, Draghi, Elementali, Folletti, Giganti, Immondi, Melme, Mostruosita, Non morti, Umanoidi e Vegetali."
+          },
+          {
+            "Voce": "Descrittori",
+            "Riepilogo": "Categorie aggiuntive tra parentesi dopo il tipo; non hanno regole proprie ma possono essere richiamate da effetti di gioco."
+          },
+          {
+            "Voce": "Allineamento",
+            "Riepilogo": "Suggerimento predefinito per interpretare la creatura; il GM puo modificarlo per esigenze narrative."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "scuole_tempo_gittata_incantesimi",
+    "nome": "Scuole, tempo e gittata",
+    "capitolo": "Incantesimi",
+    "categoria": "Incantesimi",
+    "pagine_sorgente": "119-120",
+    "descrizione": "Ogni descrizione di incantesimo indica scuola, tempo di lancio e gittata. Queste voci determinano come e dove l'incantesimo puo essere lanciato.",
+    "sezioni": [
+      {
+        "titolo": "Scuole di magia",
+        "righe": [
+          {
+            "Voce": "Abiurazione",
+            "Riepilogo": "Previene o inverte effetti dannosi."
+          },
+          {
+            "Voce": "Ammaliamento",
+            "Riepilogo": "Influenza la mente altrui."
+          },
+          {
+            "Voce": "Divinazione",
+            "Riepilogo": "Rivela informazioni."
+          },
+          {
+            "Voce": "Evocazione",
+            "Riepilogo": "Trasporta creature od oggetti."
+          },
+          {
+            "Voce": "Illusione",
+            "Riepilogo": "Inganna mente o sensi."
+          },
+          {
+            "Voce": "Invocazione",
+            "Riepilogo": "Canalizza energia per creare effetti spesso distruttivi."
+          },
+          {
+            "Voce": "Necromanzia",
+            "Riepilogo": "Manipola vita e morte."
+          },
+          {
+            "Voce": "Trasmutazione",
+            "Riepilogo": "Trasforma creature od oggetti."
+          }
+        ]
+      },
+      {
+        "titolo": "Tempo di lancio",
+        "righe": [
+          {
+            "Voce": "Azione di Magia",
+            "Riepilogo": "La maggior parte degli incantesimi richiede una singola azione di Magia."
+          },
+          {
+            "Voce": "Un solo slot per turno",
+            "Riepilogo": "In un turno si puo spendere un solo slot per lanciare un incantesimo."
+          },
+          {
+            "Voce": "Reazione",
+            "Riepilogo": "Un incantesimo con tempo di reazione si lancia in risposta all'innesco indicato."
+          },
+          {
+            "Voce": "Azione bonus",
+            "Riepilogo": "Alcuni incantesimi con azione bonus rispondono a un innesco definito nell'incantesimo."
+          },
+          {
+            "Voce": "Tempi lunghi",
+            "Riepilogo": "Se il tempo e 1 minuto o piu, serve un'azione di Magia ogni turno e concentrazione; se la concentrazione si interrompe, l'incantesimo fallisce senza consumare slot."
+          }
+        ]
+      },
+      {
+        "titolo": "Gittata",
+        "righe": [
+          {
+            "Voce": "Distanza",
+            "Riepilogo": "La gittata e espressa in metri."
+          },
+          {
+            "Voce": "Contatto",
+            "Riepilogo": "L'effetto ha origine su qualcosa che l'incantatore deve toccare entro la portata definita."
+          },
+          {
+            "Voce": "Incantatore",
+            "Riepilogo": "L'incantesimo viene lanciato sull'incantatore o si irradia da lui."
+          },
+          {
+            "Voce": "Effetti mobili",
+            "Riepilogo": "Non sono limitati dalla gittata dopo il lancio, salvo diversa indicazione."
+          }
+        ],
+        "blocchi": [
+          {
+            "nome": "Identificare un incantesimo in corso",
+            "descrizione": "Per identificare un incantesimo non istantaneo osservabile, si usa l'azione di Studio e si supera una prova di Intelligenza (Arcano) con CD 15."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "sei_caratteristiche",
+    "nome": "Le sei caratteristiche",
+    "capitolo": "Come si gioca",
+    "categoria": "Fondamenti",
+    "pagine_sorgente": "5-6",
+    "descrizione": "Tutte le creature hanno sei caratteristiche che misurano capacita fisiche e mentali. Ogni punteggio produce un modificatore usato nelle prove con d20.",
+    "sezioni": [
+      {
+        "titolo": "Modificatori di caratteristica",
+        "righe": [
+          {
+            "Punteggio": "1",
+            "Modificatore": "-5"
+          },
+          {
+            "Punteggio": "2-3",
+            "Modificatore": "-4"
+          },
+          {
+            "Punteggio": "4-5",
+            "Modificatore": "-3"
+          },
+          {
+            "Punteggio": "6-7",
+            "Modificatore": "-2"
+          },
+          {
+            "Punteggio": "8-9",
+            "Modificatore": "-1"
+          },
+          {
+            "Punteggio": "10-11",
+            "Modificatore": "+0"
+          },
+          {
+            "Punteggio": "12-13",
+            "Modificatore": "+1"
+          },
+          {
+            "Punteggio": "14-15",
+            "Modificatore": "+2"
+          },
+          {
+            "Punteggio": "16-17",
+            "Modificatore": "+3"
+          },
+          {
+            "Punteggio": "18-19",
+            "Modificatore": "+4"
+          },
+          {
+            "Punteggio": "20-21",
+            "Modificatore": "+5"
+          },
+          {
+            "Punteggio": "22-23",
+            "Modificatore": "+6"
+          },
+          {
+            "Punteggio": "24-25",
+            "Modificatore": "+7"
+          },
+          {
+            "Punteggio": "26-27",
+            "Modificatore": "+8"
+          },
+          {
+            "Punteggio": "28-29",
+            "Modificatore": "+9"
+          },
+          {
+            "Punteggio": "30",
+            "Modificatore": "+10"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "slot_e_lancio_incantesimi",
+    "nome": "Slot e lancio degli incantesimi",
+    "capitolo": "Incantesimi",
+    "categoria": "Incantesimi",
+    "pagine_sorgente": "118-119",
+    "descrizione": "Gli slot incantesimo rappresentano il potenziale magico di una creatura. Lanciare un incantesimo di 1º livello o superiore consuma normalmente uno slot di livello pari o superiore.",
+    "sezioni": [
+      {
+        "titolo": "Livello e slot",
+        "righe": [
+          {
+            "Voce": "Livelli",
+            "Riepilogo": "Gli incantesimi hanno livello da 0 a 9; i trucchetti sono di livello 0."
+          },
+          {
+            "Voce": "Consumo",
+            "Riepilogo": "Quando lanci un incantesimo, consumi uno slot di livello pari o superiore a quello dell'incantesimo."
+          },
+          {
+            "Voce": "Riposo lungo",
+            "Riepilogo": "Completare un riposo lungo ripristina tutti gli slot incantesimo spesi."
+          },
+          {
+            "Voce": "Slot superiore",
+            "Riepilogo": "Un incantesimo lanciato con uno slot superiore assume quel livello per quel lancio."
+          }
+        ]
+      },
+      {
+        "titolo": "Senza spendere slot",
+        "righe": [
+          {
+            "Voce": "Trucchetti",
+            "Riepilogo": "Si lanciano senza usare slot incantesimo."
+          },
+          {
+            "Voce": "Rituali",
+            "Riepilogo": "Richiedono 10 minuti in piu, non consumano slot e devono essere preparati."
+          },
+          {
+            "Voce": "Capacita speciali",
+            "Riepilogo": "Possono permettere lanci senza slot, spesso con limiti giornalieri o altre restrizioni."
+          },
+          {
+            "Voce": "Oggetti magici",
+            "Riepilogo": "Pergamene e altri oggetti possono contenere incantesimi lanciabili senza slot secondo la loro descrizione."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "spese_servizi_e_stile_di_vita",
+    "nome": "Spese, servizi e stile di vita",
+    "capitolo": "Equipaggiamento",
+    "categoria": "Equipaggiamento",
+    "pagine_sorgente": "114-115",
+    "descrizione": "Le spese dello stile di vita coprono vitto, alloggio, manutenzione dell'attrezzatura e bisogni ordinari. Il GM puo usarle per determinare rischi e percezione sociale.",
+    "sezioni": [
+      {
+        "titolo": "Stili di vita",
+        "righe": [
+          {
+            "Voce": "Miserabile",
+            "Riepilogo": "Gratis."
+          },
+          {
+            "Voce": "Squallido",
+            "Riepilogo": "1 ma al giorno."
+          },
+          {
+            "Voce": "Povero",
+            "Riepilogo": "2 ma al giorno."
+          },
+          {
+            "Voce": "Modesto",
+            "Riepilogo": "1 mo al giorno."
+          },
+          {
+            "Voce": "Agiato",
+            "Riepilogo": "2 mo al giorno."
+          },
+          {
+            "Voce": "Ricco",
+            "Riepilogo": "4 mo al giorno."
+          },
+          {
+            "Voce": "Aristocratico",
+            "Riepilogo": "10 mo al giorno."
+          }
+        ]
+      },
+      {
+        "titolo": "Servizi",
+        "righe": [
+          {
+            "Voce": "Gregario abile",
+            "Riepilogo": "2 mo al giorno."
+          },
+          {
+            "Voce": "Gregario inesperto",
+            "Riepilogo": "2 ma al giorno."
+          },
+          {
+            "Voce": "Messaggero",
+            "Riepilogo": "2 mr per 1,5 km."
+          },
+          {
+            "Voce": "Servizi magici: trucchetto",
+            "Riepilogo": "Disponibile in villaggio, cittadina o citta; costo 30 mo."
+          },
+          {
+            "Voce": "Servizi magici: livello 1",
+            "Riepilogo": "Disponibile in villaggio, cittadina o citta; costo 50 mo."
+          },
+          {
+            "Voce": "Servizi magici: livello 2",
+            "Riepilogo": "Disponibile in villaggio, cittadina o citta; costo 200 mo."
+          },
+          {
+            "Voce": "Servizi magici: livello 3",
+            "Riepilogo": "Solo cittadina o citta; costo 300 mo."
+          },
+          {
+            "Voce": "Servizi magici: livelli 4-5",
+            "Riepilogo": "Solo cittadina o citta; costo 2.000 mo."
+          },
+          {
+            "Voce": "Servizi magici: livelli 6-8",
+            "Riepilogo": "Solo citta; costo 20.000 mo."
+          },
+          {
+            "Voce": "Servizi magici: livello 9",
+            "Riepilogo": "Solo citta; costo 100.000 mo."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "strumenti",
+    "nome": "Strumenti",
+    "capitolo": "Equipaggiamento",
+    "categoria": "Equipaggiamento",
+    "pagine_sorgente": "105-107",
+    "descrizione": "Gli strumenti aiutano nelle prove di caratteristica, nella creazione di oggetti o in entrambe le cose. Ogni strumento indica caratteristica, utilizzi, creazioni ed eventuali varianti.",
+    "sezioni": [
+      {
+        "titolo": "Regole generali",
+        "righe": [
+          {
+            "Voce": "Competenza",
+            "Riepilogo": "Se una creatura ha competenza nello strumento, aggiunge il bonus di competenza alle prove effettuate con esso."
+          },
+          {
+            "Voce": "Abilita e strumento",
+            "Riepilogo": "Se la creatura e competente anche nell'abilita usata per la prova, effettua la prova con vantaggio."
+          },
+          {
+            "Voce": "Utilizzo",
+            "Riepilogo": "Lo strumento puo fornire una o piu opzioni per l'azione di Utilizzo, spesso con CD indicata."
+          },
+          {
+            "Voce": "Creazioni",
+            "Riepilogo": "Lo strumento elenca oggetti che puo aiutare a creare secondo le regole di creazione."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "talenti_origini_generali",
+    "nome": "Talenti Origini e Generali",
+    "capitolo": "Talenti",
+    "categoria": "Talenti",
+    "pagine_sorgente": "98-99",
+    "descrizione": "I talenti sono organizzati per categoria e indicano prerequisiti, benefici ed eventuale ripetibilita. I talenti Origini sono disponibili tramite background o opzioni simili; quelli Generali richiedono di norma il 4º livello o superiore.",
+    "sezioni": [
+      {
+        "titolo": "Elementi di un talento",
+        "righe": [
+          {
+            "Voce": "Categoria",
+            "Riepilogo": "Origini, Generale, Stile di combattimento o Dono epico."
+          },
+          {
+            "Voce": "Prerequisito",
+            "Riepilogo": "Deve essere soddisfatto salvo privilegi che consentano di ignorarlo; un prerequisito di classe richiede almeno 1 livello in quella classe."
+          },
+          {
+            "Voce": "Beneficio",
+            "Riepilogo": "Chi possiede il talento ottiene i benefici descritti."
+          },
+          {
+            "Voce": "Ripetibile",
+            "Riepilogo": "Un talento puo essere ottenuto una sola volta, salvo indicazione diversa."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "talenti_stile_doni_epici",
+    "nome": "Talenti Stile di combattimento e Doni epici",
+    "capitolo": "Talenti",
+    "categoria": "Talenti",
+    "pagine_sorgente": "99-100",
+    "descrizione": "I talenti Stile di combattimento richiedono il privilegio omonimo e migliorano un approccio marziale. I Doni epici richiedono il 19º livello o superiore e aumentano caratteristiche fino a 30 con benefici leggendari.",
+    "sezioni": [
+      {
+        "titolo": "Categorie",
+        "descrizione": "I talenti Stile di combattimento richiedono il privilegio omonimo e migliorano un approccio marziale. I Doni epici richiedono il 19º livello o superiore e aumentano caratteristiche fino a 30 con benefici leggendari."
+      }
+    ]
+  },
+  {
+    "id": "trappole",
+    "nome": "Trappole",
+    "capitolo": "Strumenti di gioco",
+    "categoria": "Strumenti di gioco",
+    "pagine_sorgente": "227-230",
+    "descrizione": "Le trappole funzionano meglio se usate con parsimonia. Le migliori sono distrazioni superabili o enigmi mortali che richiedono attenzione, abilita e lavoro di squadra.",
+    "sezioni": [
+      {
+        "titolo": "Componenti ed esempi",
+        "righe": [
+          {
+            "Voce": "Gravita e livelli",
+            "Riepilogo": "Una trappola puo essere una seccatura o una minaccia mortale per personaggi di certi livelli."
+          },
+          {
+            "Voce": "Innesco",
+            "Riepilogo": "Spesso si attiva entrando in un'area, toccando un oggetto, calpestando una piastra, tirando un cavo o aprendo una serratura."
+          },
+          {
+            "Voce": "Durata",
+            "Riepilogo": "Puo essere istantanea, misurata in round/minuti/ore, o durare fino a distruzione o dissoluzione."
+          },
+          {
+            "Voce": "Ago avvelenato",
+            "Riepilogo": "Serratura trappola; Percezione CD 15 per individuarlo, Rapidita di mano CD 15 per disattivarlo."
+          },
+          {
+            "Voce": "Crollo del tetto",
+            "Riepilogo": "Cavo teso; TS Destrezza CD 13 o 2d10 danni contundenti e terreno difficile."
+          },
+          {
+            "Voce": "Dardi avvelenati",
+            "Riepilogo": "Piastra a pressione; TS Destrezza CD 13 o 1d3 dardi da 1d6 veleno ciascuno."
+          },
+          {
+            "Voce": "Pietra rotolante",
+            "Riepilogo": "Piastra a pressione; pietra con iniziativa +8, CA 17, 100 PF, soglia danno 10."
+          },
+          {
+            "Voce": "Statua del soffio di fuoco",
+            "Riepilogo": "Piastra a pressione; cono di fuoco, glifo individuabile e disarmabile."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "veleno",
+    "nome": "Veleno",
+    "capitolo": "Strumenti di gioco",
+    "categoria": "Strumenti di gioco",
+    "pagine_sorgente": "225-226",
+    "descrizione": "I veleni sono sostanze insidiose e spesso illegali. Possono essere da contatto, ferimento, inalazione o ingestione, e alcuni possono essere estratti da creature velenose.",
+    "sezioni": [
+      {
+        "titolo": "Tipi ed esempi",
+        "righe": [
+          {
+            "Voce": "Contatto",
+            "Riepilogo": "Cosparso su un oggetto, resta attivo finche viene toccato o lavato via."
+          },
+          {
+            "Voce": "Ferimento",
+            "Riepilogo": "Applicato con azione bonus ad armi o munizioni, ha effetto quando viene trasmesso tramite una ferita."
+          },
+          {
+            "Voce": "Inalazione",
+            "Riepilogo": "Polveri e gas colpiscono creature entro cubo di 1,5 metri; trattenere il respiro non basta."
+          },
+          {
+            "Voce": "Ingestione",
+            "Riepilogo": "Richiede ingerire una dose intera; una dose parziale puo concedere vantaggio al TS o dimezzare i danni."
+          },
+          {
+            "Voce": "Estrazione",
+            "Riepilogo": "1d6 minuti e prova Intelligenza (Natura) CD 20 con sostanze da avvelenatore; fallire di 5 o piu espone al veleno."
+          },
+          {
+            "Voce": "Veleno di verme purpureo",
+            "Riepilogo": "2.000 mo, ferimento, CD 21; 10d6 danni da veleno o meta."
+          },
+          {
+            "Voce": "Veleno di viverna",
+            "Riepilogo": "1.200 mo, ferimento, CD 14; 7d6 danni da veleno o meta."
+          }
+        ]
+      }
+    ]
+  }
+]

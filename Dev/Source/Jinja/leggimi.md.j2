@@ -70,6 +70,15 @@ I callout **Uso al tavolo**, **Gancio** e **Segreto** hanno colore/icona propri
 (iniettati in Callout Manager). Se preferisci aspetti diversi: *Impostazioni →
 Callout Manager*. Senza il plugin restano callout normali, leggibili lo stesso.
 
-## 8. Layout statblock
+## 8. SRD ufficiale (5.2.1, italiano)
+La cartella **`SRD/`** contiene il riferimento ufficiale 5.5e **in italiano** (incantesimi,
+oggetti magici, talenti, specie, background, condizioni, glossario, regole, classi, **mostri**),
+sotto licenza CC-BY-4.0 (vedi `SRD/LICENZA.md`, traduzione *massimobarbieri/DND-SRD-IT*).
+**Sola lettura**: si rigenera a ogni build, non modificarla — il tuo homebrew va in `Mondi/`.
+Parti da **`SRD/Indice.md`** (anche nei segnalibri). I **mostri** sono statblock già pronti:
+con "Parse Frontmatter in Notes" ON entrano nel bestiario di **Fantasy Statblocks** e li
+richiami con `monster: Nome` in qualunque incontro.
+
+## 9. Layout statblock
 Il blocco statblock usa il layout `{{ core.statblock.layout }}`. Per lo stile 2024/5.5e,
 importa un layout in Fantasy Statblocks e aggiorna `statblock.layout` in `Dev/Source/YAML/core.yaml`.

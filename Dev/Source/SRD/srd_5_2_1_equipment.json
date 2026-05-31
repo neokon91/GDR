@@ -1,0 +1,5082 @@
+[
+  {
+    "id": "ascia",
+    "nome": "Ascia",
+    "tipo": "arma",
+    "categoria": "Mischia semplice",
+    "pagine_sorgente": "101-104",
+    "danni": "1d6 taglienti",
+    "proprieta": [
+      "lancio 6/18",
+      "leggera"
+    ],
+    "padronanza": "Vessazione",
+    "peso": "1 kg",
+    "costo": "5 mo",
+    "descrizione": "Mischia semplice; danni 1d6 taglienti; padronanza Vessazione.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Categoria": "Mischia semplice",
+            "Nome": "Ascia",
+            "Danni": "1d6 taglienti",
+            "Proprietà": "lancio 6/18, leggera",
+            "Padronanza": "Vessazione",
+            "Peso": "1 kg",
+            "Costo": "5 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "bastone_ferrato",
+    "nome": "Bastone ferrato",
+    "tipo": "arma",
+    "categoria": "Mischia semplice",
+    "pagine_sorgente": "101-104",
+    "danni": "1d6 contundenti",
+    "proprieta": [
+      "versatile 1d8"
+    ],
+    "padronanza": "Rovesciamento",
+    "peso": "2 kg",
+    "costo": "2 ma",
+    "descrizione": "Mischia semplice; danni 1d6 contundenti; padronanza Rovesciamento.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Categoria": "Mischia semplice",
+            "Nome": "Bastone ferrato",
+            "Danni": "1d6 contundenti",
+            "Proprietà": "versatile 1d8",
+            "Padronanza": "Rovesciamento",
+            "Peso": "2 kg",
+            "Costo": "2 ma"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "falcetto",
+    "nome": "Falcetto",
+    "tipo": "arma",
+    "categoria": "Mischia semplice",
+    "pagine_sorgente": "101-104",
+    "danni": "1d4 taglienti",
+    "proprieta": [
+      "leggera"
+    ],
+    "padronanza": "Graffio",
+    "peso": "1 kg",
+    "costo": "1 mo",
+    "descrizione": "Mischia semplice; danni 1d4 taglienti; padronanza Graffio.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Categoria": "Mischia semplice",
+            "Nome": "Falcetto",
+            "Danni": "1d4 taglienti",
+            "Proprietà": "leggera",
+            "Padronanza": "Graffio",
+            "Peso": "1 kg",
+            "Costo": "1 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "giavellotto",
+    "nome": "Giavellotto",
+    "tipo": "arma",
+    "categoria": "Mischia semplice",
+    "pagine_sorgente": "101-104",
+    "danni": "1d6 perforanti",
+    "proprieta": [
+      "lancio 9/36"
+    ],
+    "padronanza": "Lentezza",
+    "peso": "1 kg",
+    "costo": "5 ma",
+    "descrizione": "Mischia semplice; danni 1d6 perforanti; padronanza Lentezza.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Categoria": "Mischia semplice",
+            "Nome": "Giavellotto",
+            "Danni": "1d6 perforanti",
+            "Proprietà": "lancio 9/36",
+            "Padronanza": "Lentezza",
+            "Peso": "1 kg",
+            "Costo": "5 ma"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "lancia",
+    "nome": "Lancia",
+    "tipo": "arma",
+    "categoria": "Mischia semplice",
+    "pagine_sorgente": "101-104",
+    "danni": "1d6 perforanti",
+    "proprieta": [
+      "lancio 6/18",
+      "versatile 1d8"
+    ],
+    "padronanza": "Fiaccare",
+    "peso": "1,5 kg",
+    "costo": "1 mo",
+    "descrizione": "Mischia semplice; danni 1d6 perforanti; padronanza Fiaccare.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Categoria": "Mischia semplice",
+            "Nome": "Lancia",
+            "Danni": "1d6 perforanti",
+            "Proprietà": "lancio 6/18, versatile 1d8",
+            "Padronanza": "Fiaccare",
+            "Peso": "1,5 kg",
+            "Costo": "1 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "martello_leggero",
+    "nome": "Martello leggero",
+    "tipo": "arma",
+    "categoria": "Mischia semplice",
+    "pagine_sorgente": "101-104",
+    "danni": "1d4 contundenti",
+    "proprieta": [
+      "lancio 6/18",
+      "leggera"
+    ],
+    "padronanza": "Graffio",
+    "peso": "1 kg",
+    "costo": "2 mo",
+    "descrizione": "Mischia semplice; danni 1d4 contundenti; padronanza Graffio.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Categoria": "Mischia semplice",
+            "Nome": "Martello leggero",
+            "Danni": "1d4 contundenti",
+            "Proprietà": "lancio 6/18, leggera",
+            "Padronanza": "Graffio",
+            "Peso": "1 kg",
+            "Costo": "2 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "mazza",
+    "nome": "Mazza",
+    "tipo": "arma",
+    "categoria": "Mischia semplice",
+    "pagine_sorgente": "101-104",
+    "danni": "1d6 contundenti",
+    "proprieta": [],
+    "padronanza": "Fiaccare",
+    "peso": "2 kg",
+    "costo": "5 mo",
+    "descrizione": "Mischia semplice; danni 1d6 contundenti; padronanza Fiaccare.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Categoria": "Mischia semplice",
+            "Nome": "Mazza",
+            "Danni": "1d6 contundenti",
+            "Proprietà": "-",
+            "Padronanza": "Fiaccare",
+            "Peso": "2 kg",
+            "Costo": "5 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "pugnale",
+    "nome": "Pugnale",
+    "tipo": "arma",
+    "categoria": "Mischia semplice",
+    "pagine_sorgente": "101-104",
+    "danni": "1d4 perforanti",
+    "proprieta": [
+      "accurata",
+      "lancio 6/18",
+      "leggera"
+    ],
+    "padronanza": "Graffio",
+    "peso": "0,5 kg",
+    "costo": "2 mo",
+    "descrizione": "Mischia semplice; danni 1d4 perforanti; padronanza Graffio.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Categoria": "Mischia semplice",
+            "Nome": "Pugnale",
+            "Danni": "1d4 perforanti",
+            "Proprietà": "accurata, lancio 6/18, leggera",
+            "Padronanza": "Graffio",
+            "Peso": "0,5 kg",
+            "Costo": "2 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "randello_pesante",
+    "nome": "Randello pesante",
+    "tipo": "arma",
+    "categoria": "Mischia semplice",
+    "pagine_sorgente": "101-104",
+    "danni": "1d8 contundenti",
+    "proprieta": [
+      "due mani"
+    ],
+    "padronanza": "Spinta",
+    "peso": "5 kg",
+    "costo": "2 ma",
+    "descrizione": "Mischia semplice; danni 1d8 contundenti; padronanza Spinta.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Categoria": "Mischia semplice",
+            "Nome": "Randello pesante",
+            "Danni": "1d8 contundenti",
+            "Proprietà": "due mani",
+            "Padronanza": "Spinta",
+            "Peso": "5 kg",
+            "Costo": "2 ma"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "randello",
+    "nome": "Randello",
+    "tipo": "arma",
+    "categoria": "Mischia semplice",
+    "pagine_sorgente": "101-104",
+    "danni": "1d4 contundenti",
+    "proprieta": [
+      "leggera"
+    ],
+    "padronanza": "Lentezza",
+    "peso": "1 kg",
+    "costo": "1 ma",
+    "descrizione": "Mischia semplice; danni 1d4 contundenti; padronanza Lentezza.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Categoria": "Mischia semplice",
+            "Nome": "Randello",
+            "Danni": "1d4 contundenti",
+            "Proprietà": "leggera",
+            "Padronanza": "Lentezza",
+            "Peso": "1 kg",
+            "Costo": "1 ma"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "arco_corto",
+    "nome": "Arco corto",
+    "tipo": "arma",
+    "categoria": "Distanza semplice",
+    "pagine_sorgente": "101-104",
+    "danni": "1d6 perforanti",
+    "proprieta": [
+      "due mani",
+      "munizioni 24/96"
+    ],
+    "padronanza": "Vessazione",
+    "peso": "1 kg",
+    "costo": "25 mo",
+    "descrizione": "Distanza semplice; danni 1d6 perforanti; padronanza Vessazione.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Categoria": "Distanza semplice",
+            "Nome": "Arco corto",
+            "Danni": "1d6 perforanti",
+            "Proprietà": "due mani, munizioni 24/96",
+            "Padronanza": "Vessazione",
+            "Peso": "1 kg",
+            "Costo": "25 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "balestra_leggera",
+    "nome": "Balestra leggera",
+    "tipo": "arma",
+    "categoria": "Distanza semplice",
+    "pagine_sorgente": "101-104",
+    "danni": "1d8 perforanti",
+    "proprieta": [
+      "due mani",
+      "munizioni 24/96",
+      "ricarica"
+    ],
+    "padronanza": "Lentezza",
+    "peso": "2,5 kg",
+    "costo": "25 mo",
+    "descrizione": "Distanza semplice; danni 1d8 perforanti; padronanza Lentezza.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Categoria": "Distanza semplice",
+            "Nome": "Balestra leggera",
+            "Danni": "1d8 perforanti",
+            "Proprietà": "due mani, munizioni 24/96, ricarica",
+            "Padronanza": "Lentezza",
+            "Peso": "2,5 kg",
+            "Costo": "25 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "dardo",
+    "nome": "Dardo",
+    "tipo": "arma",
+    "categoria": "Distanza semplice",
+    "pagine_sorgente": "101-104",
+    "danni": "1d4 perforanti",
+    "proprieta": [
+      "accurata",
+      "lancio 6/18"
+    ],
+    "padronanza": "Vessazione",
+    "peso": "0,125 kg",
+    "costo": "5 mr",
+    "descrizione": "Distanza semplice; danni 1d4 perforanti; padronanza Vessazione.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Categoria": "Distanza semplice",
+            "Nome": "Dardo",
+            "Danni": "1d4 perforanti",
+            "Proprietà": "accurata, lancio 6/18",
+            "Padronanza": "Vessazione",
+            "Peso": "0,125 kg",
+            "Costo": "5 mr"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "fionda",
+    "nome": "Fionda",
+    "tipo": "arma",
+    "categoria": "Distanza semplice",
+    "pagine_sorgente": "101-104",
+    "danni": "1d4 contundenti",
+    "proprieta": [
+      "munizioni 9/36"
+    ],
+    "padronanza": "Lentezza",
+    "peso": "-",
+    "costo": "1 ma",
+    "descrizione": "Distanza semplice; danni 1d4 contundenti; padronanza Lentezza.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Categoria": "Distanza semplice",
+            "Nome": "Fionda",
+            "Danni": "1d4 contundenti",
+            "Proprietà": "munizioni 9/36",
+            "Padronanza": "Lentezza",
+            "Peso": "-",
+            "Costo": "1 ma"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "alabarda",
+    "nome": "Alabarda",
+    "tipo": "arma",
+    "categoria": "Mischia da guerra",
+    "pagine_sorgente": "101-104",
+    "danni": "1d10 taglienti",
+    "proprieta": [
+      "due mani",
+      "pesante",
+      "portata"
+    ],
+    "padronanza": "Doppio fendente",
+    "peso": "3 kg",
+    "costo": "20 mo",
+    "descrizione": "Mischia da guerra; danni 1d10 taglienti; padronanza Doppio fendente.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Categoria": "Mischia da guerra",
+            "Nome": "Alabarda",
+            "Danni": "1d10 taglienti",
+            "Proprietà": "due mani, pesante, portata",
+            "Padronanza": "Doppio fendente",
+            "Peso": "3 kg",
+            "Costo": "20 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "ascia_bipenne",
+    "nome": "Ascia bipenne",
+    "tipo": "arma",
+    "categoria": "Mischia da guerra",
+    "pagine_sorgente": "101-104",
+    "danni": "1d12 taglienti",
+    "proprieta": [
+      "due mani",
+      "pesante"
+    ],
+    "padronanza": "Doppio fendente",
+    "peso": "3,5 kg",
+    "costo": "30 mo",
+    "descrizione": "Mischia da guerra; danni 1d12 taglienti; padronanza Doppio fendente.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Categoria": "Mischia da guerra",
+            "Nome": "Ascia bipenne",
+            "Danni": "1d12 taglienti",
+            "Proprietà": "due mani, pesante",
+            "Padronanza": "Doppio fendente",
+            "Peso": "3,5 kg",
+            "Costo": "30 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "ascia_da_battaglia",
+    "nome": "Ascia da battaglia",
+    "tipo": "arma",
+    "categoria": "Mischia da guerra",
+    "pagine_sorgente": "101-104",
+    "danni": "1d8 taglienti",
+    "proprieta": [
+      "versatile 1d10"
+    ],
+    "padronanza": "Rovesciamento",
+    "peso": "2 kg",
+    "costo": "10 mo",
+    "descrizione": "Mischia da guerra; danni 1d8 taglienti; padronanza Rovesciamento.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Categoria": "Mischia da guerra",
+            "Nome": "Ascia da battaglia",
+            "Danni": "1d8 taglienti",
+            "Proprietà": "versatile 1d10",
+            "Padronanza": "Rovesciamento",
+            "Peso": "2 kg",
+            "Costo": "10 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "falcione",
+    "nome": "Falcione",
+    "tipo": "arma",
+    "categoria": "Mischia da guerra",
+    "pagine_sorgente": "101-104",
+    "danni": "1d10 taglienti",
+    "proprieta": [
+      "due mani",
+      "pesante",
+      "portata"
+    ],
+    "padronanza": "Colpo di striscio",
+    "peso": "3 kg",
+    "costo": "20 mo",
+    "descrizione": "Mischia da guerra; danni 1d10 taglienti; padronanza Colpo di striscio.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Categoria": "Mischia da guerra",
+            "Nome": "Falcione",
+            "Danni": "1d10 taglienti",
+            "Proprietà": "due mani, pesante, portata",
+            "Padronanza": "Colpo di striscio",
+            "Peso": "3 kg",
+            "Costo": "20 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "frusta",
+    "nome": "Frusta",
+    "tipo": "arma",
+    "categoria": "Mischia da guerra",
+    "pagine_sorgente": "101-104",
+    "danni": "1d4 taglienti",
+    "proprieta": [
+      "accurata",
+      "portata"
+    ],
+    "padronanza": "Lentezza",
+    "peso": "1,5 kg",
+    "costo": "2 mo",
+    "descrizione": "Mischia da guerra; danni 1d4 taglienti; padronanza Lentezza.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Categoria": "Mischia da guerra",
+            "Nome": "Frusta",
+            "Danni": "1d4 taglienti",
+            "Proprietà": "accurata, portata",
+            "Padronanza": "Lentezza",
+            "Peso": "1,5 kg",
+            "Costo": "2 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "lancia_da_cavaliere",
+    "nome": "Lancia da cavaliere",
+    "tipo": "arma",
+    "categoria": "Mischia da guerra",
+    "pagine_sorgente": "101-104",
+    "danni": "1d10 perforanti",
+    "proprieta": [
+      "due mani eccetto in sella",
+      "pesante",
+      "portata"
+    ],
+    "padronanza": "Rovesciamento",
+    "peso": "3 kg",
+    "costo": "10 mo",
+    "descrizione": "Mischia da guerra; danni 1d10 perforanti; padronanza Rovesciamento.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Categoria": "Mischia da guerra",
+            "Nome": "Lancia da cavaliere",
+            "Danni": "1d10 perforanti",
+            "Proprietà": "due mani eccetto in sella, pesante, portata",
+            "Padronanza": "Rovesciamento",
+            "Peso": "3 kg",
+            "Costo": "10 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "maglio",
+    "nome": "Maglio",
+    "tipo": "arma",
+    "categoria": "Mischia da guerra",
+    "pagine_sorgente": "101-104",
+    "danni": "2d6 contundenti",
+    "proprieta": [
+      "due mani",
+      "pesante"
+    ],
+    "padronanza": "Rovesciamento",
+    "peso": "5 kg",
+    "costo": "10 mo",
+    "descrizione": "Mischia da guerra; danni 2d6 contundenti; padronanza Rovesciamento.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Categoria": "Mischia da guerra",
+            "Nome": "Maglio",
+            "Danni": "2d6 contundenti",
+            "Proprietà": "due mani, pesante",
+            "Padronanza": "Rovesciamento",
+            "Peso": "5 kg",
+            "Costo": "10 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "martello_da_guerra",
+    "nome": "Martello da guerra",
+    "tipo": "arma",
+    "categoria": "Mischia da guerra",
+    "pagine_sorgente": "101-104",
+    "danni": "1d8 contundenti",
+    "proprieta": [
+      "versatile 1d10"
+    ],
+    "padronanza": "Spinta",
+    "peso": "2,5 kg",
+    "costo": "15 mo",
+    "descrizione": "Mischia da guerra; danni 1d8 contundenti; padronanza Spinta.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Categoria": "Mischia da guerra",
+            "Nome": "Martello da guerra",
+            "Danni": "1d8 contundenti",
+            "Proprietà": "versatile 1d10",
+            "Padronanza": "Spinta",
+            "Peso": "2,5 kg",
+            "Costo": "15 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "mazza_chiodata",
+    "nome": "Mazza chiodata",
+    "tipo": "arma",
+    "categoria": "Mischia da guerra",
+    "pagine_sorgente": "101-104",
+    "danni": "1d8 perforanti",
+    "proprieta": [],
+    "padronanza": "Fiaccare",
+    "peso": "2 kg",
+    "costo": "15 mo",
+    "descrizione": "Mischia da guerra; danni 1d8 perforanti; padronanza Fiaccare.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Categoria": "Mischia da guerra",
+            "Nome": "Mazza chiodata",
+            "Danni": "1d8 perforanti",
+            "Proprietà": "-",
+            "Padronanza": "Fiaccare",
+            "Peso": "2 kg",
+            "Costo": "15 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "mazzafrusto",
+    "nome": "Mazzafrusto",
+    "tipo": "arma",
+    "categoria": "Mischia da guerra",
+    "pagine_sorgente": "101-104",
+    "danni": "1d8 contundenti",
+    "proprieta": [],
+    "padronanza": "Fiaccare",
+    "peso": "1 kg",
+    "costo": "10 mo",
+    "descrizione": "Mischia da guerra; danni 1d8 contundenti; padronanza Fiaccare.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Categoria": "Mischia da guerra",
+            "Nome": "Mazzafrusto",
+            "Danni": "1d8 contundenti",
+            "Proprietà": "-",
+            "Padronanza": "Fiaccare",
+            "Peso": "1 kg",
+            "Costo": "10 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "picca",
+    "nome": "Picca",
+    "tipo": "arma",
+    "categoria": "Mischia da guerra",
+    "pagine_sorgente": "101-104",
+    "danni": "1d10 perforanti",
+    "proprieta": [
+      "due mani",
+      "pesante",
+      "portata"
+    ],
+    "padronanza": "Spinta",
+    "peso": "9 kg",
+    "costo": "5 mo",
+    "descrizione": "Mischia da guerra; danni 1d10 perforanti; padronanza Spinta.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Categoria": "Mischia da guerra",
+            "Nome": "Picca",
+            "Danni": "1d10 perforanti",
+            "Proprietà": "due mani, pesante, portata",
+            "Padronanza": "Spinta",
+            "Peso": "9 kg",
+            "Costo": "5 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "piccone_da_guerra",
+    "nome": "Piccone da guerra",
+    "tipo": "arma",
+    "categoria": "Mischia da guerra",
+    "pagine_sorgente": "101-104",
+    "danni": "1d8 perforanti",
+    "proprieta": [
+      "versatile 1d10"
+    ],
+    "padronanza": "Fiaccare",
+    "peso": "1 kg",
+    "costo": "5 mo",
+    "descrizione": "Mischia da guerra; danni 1d8 perforanti; padronanza Fiaccare.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Categoria": "Mischia da guerra",
+            "Nome": "Piccone da guerra",
+            "Danni": "1d8 perforanti",
+            "Proprietà": "versatile 1d10",
+            "Padronanza": "Fiaccare",
+            "Peso": "1 kg",
+            "Costo": "5 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "scimitarra",
+    "nome": "Scimitarra",
+    "tipo": "arma",
+    "categoria": "Mischia da guerra",
+    "pagine_sorgente": "101-104",
+    "danni": "1d6 taglienti",
+    "proprieta": [
+      "accurata",
+      "leggera"
+    ],
+    "padronanza": "Graffio",
+    "peso": "1,5 kg",
+    "costo": "25 mo",
+    "descrizione": "Mischia da guerra; danni 1d6 taglienti; padronanza Graffio.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Categoria": "Mischia da guerra",
+            "Nome": "Scimitarra",
+            "Danni": "1d6 taglienti",
+            "Proprietà": "accurata, leggera",
+            "Padronanza": "Graffio",
+            "Peso": "1,5 kg",
+            "Costo": "25 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "spada_corta",
+    "nome": "Spada corta",
+    "tipo": "arma",
+    "categoria": "Mischia da guerra",
+    "pagine_sorgente": "101-104",
+    "danni": "1d6 perforanti",
+    "proprieta": [
+      "accurata",
+      "leggera"
+    ],
+    "padronanza": "Vessazione",
+    "peso": "1 kg",
+    "costo": "10 mo",
+    "descrizione": "Mischia da guerra; danni 1d6 perforanti; padronanza Vessazione.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Categoria": "Mischia da guerra",
+            "Nome": "Spada corta",
+            "Danni": "1d6 perforanti",
+            "Proprietà": "accurata, leggera",
+            "Padronanza": "Vessazione",
+            "Peso": "1 kg",
+            "Costo": "10 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "spada_lunga",
+    "nome": "Spada lunga",
+    "tipo": "arma",
+    "categoria": "Mischia da guerra",
+    "pagine_sorgente": "101-104",
+    "danni": "1d8 taglienti",
+    "proprieta": [
+      "versatile 1d10"
+    ],
+    "padronanza": "Fiaccare",
+    "peso": "1,5 kg",
+    "costo": "15 mo",
+    "descrizione": "Mischia da guerra; danni 1d8 taglienti; padronanza Fiaccare.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Categoria": "Mischia da guerra",
+            "Nome": "Spada lunga",
+            "Danni": "1d8 taglienti",
+            "Proprietà": "versatile 1d10",
+            "Padronanza": "Fiaccare",
+            "Peso": "1,5 kg",
+            "Costo": "15 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "spadone",
+    "nome": "Spadone",
+    "tipo": "arma",
+    "categoria": "Mischia da guerra",
+    "pagine_sorgente": "101-104",
+    "danni": "2d6 taglienti",
+    "proprieta": [
+      "due mani",
+      "pesante"
+    ],
+    "padronanza": "Colpo di striscio",
+    "peso": "3 kg",
+    "costo": "50 mo",
+    "descrizione": "Mischia da guerra; danni 2d6 taglienti; padronanza Colpo di striscio.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Categoria": "Mischia da guerra",
+            "Nome": "Spadone",
+            "Danni": "2d6 taglienti",
+            "Proprietà": "due mani, pesante",
+            "Padronanza": "Colpo di striscio",
+            "Peso": "3 kg",
+            "Costo": "50 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "stocco",
+    "nome": "Stocco",
+    "tipo": "arma",
+    "categoria": "Mischia da guerra",
+    "pagine_sorgente": "101-104",
+    "danni": "1d8 perforanti",
+    "proprieta": [
+      "accurata"
+    ],
+    "padronanza": "Vessazione",
+    "peso": "1 kg",
+    "costo": "25 mo",
+    "descrizione": "Mischia da guerra; danni 1d8 perforanti; padronanza Vessazione.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Categoria": "Mischia da guerra",
+            "Nome": "Stocco",
+            "Danni": "1d8 perforanti",
+            "Proprietà": "accurata",
+            "Padronanza": "Vessazione",
+            "Peso": "1 kg",
+            "Costo": "25 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "tridente",
+    "nome": "Tridente",
+    "tipo": "arma",
+    "categoria": "Mischia da guerra",
+    "pagine_sorgente": "101-104",
+    "danni": "1d8 perforanti",
+    "proprieta": [
+      "lancio 6/18",
+      "versatile 1d10"
+    ],
+    "padronanza": "Rovesciamento",
+    "peso": "2 kg",
+    "costo": "5 mo",
+    "descrizione": "Mischia da guerra; danni 1d8 perforanti; padronanza Rovesciamento.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Categoria": "Mischia da guerra",
+            "Nome": "Tridente",
+            "Danni": "1d8 perforanti",
+            "Proprietà": "lancio 6/18, versatile 1d10",
+            "Padronanza": "Rovesciamento",
+            "Peso": "2 kg",
+            "Costo": "5 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "arco_lungo",
+    "nome": "Arco lungo",
+    "tipo": "arma",
+    "categoria": "Distanza da guerra",
+    "pagine_sorgente": "101-104",
+    "danni": "1d8 perforanti",
+    "proprieta": [
+      "due mani",
+      "munizioni 45/180",
+      "pesante"
+    ],
+    "padronanza": "Lentezza",
+    "peso": "1 kg",
+    "costo": "50 mo",
+    "descrizione": "Distanza da guerra; danni 1d8 perforanti; padronanza Lentezza.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Categoria": "Distanza da guerra",
+            "Nome": "Arco lungo",
+            "Danni": "1d8 perforanti",
+            "Proprietà": "due mani, munizioni 45/180, pesante",
+            "Padronanza": "Lentezza",
+            "Peso": "1 kg",
+            "Costo": "50 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "balestra_a_mano",
+    "nome": "Balestra a mano",
+    "tipo": "arma",
+    "categoria": "Distanza da guerra",
+    "pagine_sorgente": "101-104",
+    "danni": "1d6 perforanti",
+    "proprieta": [
+      "leggera",
+      "munizioni 9/36",
+      "ricarica"
+    ],
+    "padronanza": "Vessazione",
+    "peso": "1,5 kg",
+    "costo": "75 mo",
+    "descrizione": "Distanza da guerra; danni 1d6 perforanti; padronanza Vessazione.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Categoria": "Distanza da guerra",
+            "Nome": "Balestra a mano",
+            "Danni": "1d6 perforanti",
+            "Proprietà": "leggera, munizioni 9/36, ricarica",
+            "Padronanza": "Vessazione",
+            "Peso": "1,5 kg",
+            "Costo": "75 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "balestra_pesante",
+    "nome": "Balestra pesante",
+    "tipo": "arma",
+    "categoria": "Distanza da guerra",
+    "pagine_sorgente": "101-104",
+    "danni": "1d10 perforanti",
+    "proprieta": [
+      "due mani",
+      "munizioni 30/120",
+      "pesante",
+      "ricarica"
+    ],
+    "padronanza": "Spinta",
+    "peso": "9 kg",
+    "costo": "50 mo",
+    "descrizione": "Distanza da guerra; danni 1d10 perforanti; padronanza Spinta.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Categoria": "Distanza da guerra",
+            "Nome": "Balestra pesante",
+            "Danni": "1d10 perforanti",
+            "Proprietà": "due mani, munizioni 30/120, pesante, ricarica",
+            "Padronanza": "Spinta",
+            "Peso": "9 kg",
+            "Costo": "50 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "cerbottana",
+    "nome": "Cerbottana",
+    "tipo": "arma",
+    "categoria": "Distanza da guerra",
+    "pagine_sorgente": "101-104",
+    "danni": "1 perforante",
+    "proprieta": [
+      "munizioni 7/30",
+      "ricarica"
+    ],
+    "padronanza": "Vessazione",
+    "peso": "0,5 kg",
+    "costo": "10 mo",
+    "descrizione": "Distanza da guerra; danni 1 perforante; padronanza Vessazione.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Categoria": "Distanza da guerra",
+            "Nome": "Cerbottana",
+            "Danni": "1 perforante",
+            "Proprietà": "munizioni 7/30, ricarica",
+            "Padronanza": "Vessazione",
+            "Peso": "0,5 kg",
+            "Costo": "10 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "moschetto",
+    "nome": "Moschetto",
+    "tipo": "arma",
+    "categoria": "Distanza da guerra",
+    "pagine_sorgente": "101-104",
+    "danni": "1d12 perforanti",
+    "proprieta": [
+      "due mani",
+      "munizioni 12/36",
+      "ricarica"
+    ],
+    "padronanza": "Lentezza",
+    "peso": "5 kg",
+    "costo": "500 mo",
+    "descrizione": "Distanza da guerra; danni 1d12 perforanti; padronanza Lentezza.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Categoria": "Distanza da guerra",
+            "Nome": "Moschetto",
+            "Danni": "1d12 perforanti",
+            "Proprietà": "due mani, munizioni 12/36, ricarica",
+            "Padronanza": "Lentezza",
+            "Peso": "5 kg",
+            "Costo": "500 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "pistola",
+    "nome": "Pistola",
+    "tipo": "arma",
+    "categoria": "Distanza da guerra",
+    "pagine_sorgente": "101-104",
+    "danni": "1d10 perforanti",
+    "proprieta": [
+      "munizioni 9/27",
+      "ricarica"
+    ],
+    "padronanza": "Vessazione",
+    "peso": "1,5 kg",
+    "costo": "250 mo",
+    "descrizione": "Distanza da guerra; danni 1d10 perforanti; padronanza Vessazione.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Categoria": "Distanza da guerra",
+            "Nome": "Pistola",
+            "Danni": "1d10 perforanti",
+            "Proprietà": "munizioni 9/27, ricarica",
+            "Padronanza": "Vessazione",
+            "Peso": "1,5 kg",
+            "Costo": "250 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "armatura_imbottita",
+    "nome": "Armatura imbottita",
+    "tipo": "armatura",
+    "categoria": "Leggera",
+    "pagine_sorgente": "104-105",
+    "classe_armatura": "11 + Des",
+    "forza": "-",
+    "furtivita": "Svantaggio",
+    "peso": "4 kg",
+    "costo": "5 mo",
+    "descrizione": "Leggera; Classe Armatura 11 + Des; costo 5 mo.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Categoria": "Leggera",
+            "Armatura": "Armatura imbottita",
+            "Classe Armatura": "11 + Des",
+            "Forza": "-",
+            "Furtività": "Svantaggio",
+            "Peso": "4 kg",
+            "Costo": "5 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "armatura_di_cuoio",
+    "nome": "Armatura di cuoio",
+    "tipo": "armatura",
+    "categoria": "Leggera",
+    "pagine_sorgente": "104-105",
+    "classe_armatura": "11 + Des",
+    "forza": "-",
+    "furtivita": "-",
+    "peso": "5 kg",
+    "costo": "10 mo",
+    "descrizione": "Leggera; Classe Armatura 11 + Des; costo 10 mo.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Categoria": "Leggera",
+            "Armatura": "Armatura di cuoio",
+            "Classe Armatura": "11 + Des",
+            "Forza": "-",
+            "Furtività": "-",
+            "Peso": "5 kg",
+            "Costo": "10 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "armatura_di_cuoio_borchiato",
+    "nome": "Armatura di cuoio borchiato",
+    "tipo": "armatura",
+    "categoria": "Leggera",
+    "pagine_sorgente": "104-105",
+    "classe_armatura": "12 + Des",
+    "forza": "-",
+    "furtivita": "-",
+    "peso": "6,5 kg",
+    "costo": "45 mo",
+    "descrizione": "Leggera; Classe Armatura 12 + Des; costo 45 mo.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Categoria": "Leggera",
+            "Armatura": "Armatura di cuoio borchiato",
+            "Classe Armatura": "12 + Des",
+            "Forza": "-",
+            "Furtività": "-",
+            "Peso": "6,5 kg",
+            "Costo": "45 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "armatura_di_pelle",
+    "nome": "Armatura di pelle",
+    "tipo": "armatura",
+    "categoria": "Media",
+    "pagine_sorgente": "104-105",
+    "classe_armatura": "12 + Des max 2",
+    "forza": "-",
+    "furtivita": "-",
+    "peso": "6 kg",
+    "costo": "10 mo",
+    "descrizione": "Media; Classe Armatura 12 + Des max 2; costo 10 mo.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Categoria": "Media",
+            "Armatura": "Armatura di pelle",
+            "Classe Armatura": "12 + Des max 2",
+            "Forza": "-",
+            "Furtività": "-",
+            "Peso": "6 kg",
+            "Costo": "10 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "giaco_di_maglia",
+    "nome": "Giaco di maglia",
+    "tipo": "armatura",
+    "categoria": "Media",
+    "pagine_sorgente": "104-105",
+    "classe_armatura": "13 + Des max 2",
+    "forza": "-",
+    "furtivita": "-",
+    "peso": "10 kg",
+    "costo": "50 mo",
+    "descrizione": "Media; Classe Armatura 13 + Des max 2; costo 50 mo.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Categoria": "Media",
+            "Armatura": "Giaco di maglia",
+            "Classe Armatura": "13 + Des max 2",
+            "Forza": "-",
+            "Furtività": "-",
+            "Peso": "10 kg",
+            "Costo": "50 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "corazza_a_scaglie",
+    "nome": "Corazza a scaglie",
+    "tipo": "armatura",
+    "categoria": "Media",
+    "pagine_sorgente": "104-105",
+    "classe_armatura": "14 + Des max 2",
+    "forza": "-",
+    "furtivita": "Svantaggio",
+    "peso": "22,5 kg",
+    "costo": "50 mo",
+    "descrizione": "Media; Classe Armatura 14 + Des max 2; costo 50 mo.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Categoria": "Media",
+            "Armatura": "Corazza a scaglie",
+            "Classe Armatura": "14 + Des max 2",
+            "Forza": "-",
+            "Furtività": "Svantaggio",
+            "Peso": "22,5 kg",
+            "Costo": "50 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "corazza_di_piastre",
+    "nome": "Corazza di piastre",
+    "tipo": "armatura",
+    "categoria": "Media",
+    "pagine_sorgente": "104-105",
+    "classe_armatura": "14 + Des max 2",
+    "forza": "-",
+    "furtivita": "-",
+    "peso": "10 kg",
+    "costo": "400 mo",
+    "descrizione": "Media; Classe Armatura 14 + Des max 2; costo 400 mo.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Categoria": "Media",
+            "Armatura": "Corazza di piastre",
+            "Classe Armatura": "14 + Des max 2",
+            "Forza": "-",
+            "Furtività": "-",
+            "Peso": "10 kg",
+            "Costo": "400 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "mezza_armatura",
+    "nome": "Mezza armatura",
+    "tipo": "armatura",
+    "categoria": "Media",
+    "pagine_sorgente": "104-105",
+    "classe_armatura": "15 + Des max 2",
+    "forza": "-",
+    "furtivita": "Svantaggio",
+    "peso": "20 kg",
+    "costo": "750 mo",
+    "descrizione": "Media; Classe Armatura 15 + Des max 2; costo 750 mo.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Categoria": "Media",
+            "Armatura": "Mezza armatura",
+            "Classe Armatura": "15 + Des max 2",
+            "Forza": "-",
+            "Furtività": "Svantaggio",
+            "Peso": "20 kg",
+            "Costo": "750 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "corazza_ad_anelli",
+    "nome": "Corazza ad anelli",
+    "tipo": "armatura",
+    "categoria": "Pesante",
+    "pagine_sorgente": "104-105",
+    "classe_armatura": "14",
+    "forza": "-",
+    "furtivita": "Svantaggio",
+    "peso": "20 kg",
+    "costo": "30 mo",
+    "descrizione": "Pesante; Classe Armatura 14; costo 30 mo.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Categoria": "Pesante",
+            "Armatura": "Corazza ad anelli",
+            "Classe Armatura": "14",
+            "Forza": "-",
+            "Furtività": "Svantaggio",
+            "Peso": "20 kg",
+            "Costo": "30 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "cotta_di_maglia",
+    "nome": "Cotta di maglia",
+    "tipo": "armatura",
+    "categoria": "Pesante",
+    "pagine_sorgente": "104-105",
+    "classe_armatura": "16",
+    "forza": "For 13",
+    "furtivita": "Svantaggio",
+    "peso": "27,5 kg",
+    "costo": "75 mo",
+    "descrizione": "Pesante; Classe Armatura 16; costo 75 mo.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Categoria": "Pesante",
+            "Armatura": "Cotta di maglia",
+            "Classe Armatura": "16",
+            "Forza": "For 13",
+            "Furtività": "Svantaggio",
+            "Peso": "27,5 kg",
+            "Costo": "75 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "corazza_a_strisce",
+    "nome": "Corazza a strisce",
+    "tipo": "armatura",
+    "categoria": "Pesante",
+    "pagine_sorgente": "104-105",
+    "classe_armatura": "17",
+    "forza": "For 15",
+    "furtivita": "Svantaggio",
+    "peso": "30 kg",
+    "costo": "200 mo",
+    "descrizione": "Pesante; Classe Armatura 17; costo 200 mo.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Categoria": "Pesante",
+            "Armatura": "Corazza a strisce",
+            "Classe Armatura": "17",
+            "Forza": "For 15",
+            "Furtività": "Svantaggio",
+            "Peso": "30 kg",
+            "Costo": "200 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "armatura_a_piastre",
+    "nome": "Armatura a piastre",
+    "tipo": "armatura",
+    "categoria": "Pesante",
+    "pagine_sorgente": "104-105",
+    "classe_armatura": "18",
+    "forza": "For 15",
+    "furtivita": "Svantaggio",
+    "peso": "32,5 kg",
+    "costo": "1.500 mo",
+    "descrizione": "Pesante; Classe Armatura 18; costo 1.500 mo.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Categoria": "Pesante",
+            "Armatura": "Armatura a piastre",
+            "Classe Armatura": "18",
+            "Forza": "For 15",
+            "Furtività": "Svantaggio",
+            "Peso": "32,5 kg",
+            "Costo": "1.500 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "scudo",
+    "nome": "Scudo",
+    "tipo": "scudo",
+    "categoria": "Scudo",
+    "pagine_sorgente": "104-105",
+    "classe_armatura": "+2",
+    "forza": "-",
+    "furtivita": "-",
+    "peso": "3 kg",
+    "costo": "10 mo",
+    "descrizione": "Scudo; Classe Armatura +2; costo 10 mo.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Categoria": "Scudo",
+            "Armatura": "Scudo",
+            "Classe Armatura": "+2",
+            "Forza": "-",
+            "Furtività": "-",
+            "Peso": "3 kg",
+            "Costo": "10 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "abiti_da_viaggiatore",
+    "nome": "Abiti da viaggiatore",
+    "tipo": "equipaggiamento_avventura",
+    "categoria": "Equipaggiamento d'avventura",
+    "pagine_sorgente": "107-113",
+    "peso": "2 kg",
+    "costo": "2 mo",
+    "descrizione": "Peso 2 kg; costo 2 mo.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Oggetto": "Abiti da viaggiatore",
+            "Peso": "2 kg",
+            "Costo": "2 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "abiti_eleganti",
+    "nome": "Abiti eleganti",
+    "tipo": "equipaggiamento_avventura",
+    "categoria": "Equipaggiamento d'avventura",
+    "pagine_sorgente": "107-113",
+    "peso": "3 kg",
+    "costo": "15 mo",
+    "descrizione": "Peso 3 kg; costo 15 mo.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Oggetto": "Abiti eleganti",
+            "Peso": "3 kg",
+            "Costo": "15 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "acciarino_e_pietra_focaia",
+    "nome": "Acciarino e pietra focaia",
+    "tipo": "equipaggiamento_avventura",
+    "categoria": "Equipaggiamento d'avventura",
+    "pagine_sorgente": "107-113",
+    "peso": "0,5 kg",
+    "costo": "5 ma",
+    "descrizione": "Peso 0,5 kg; costo 5 ma.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Oggetto": "Acciarino e pietra focaia",
+            "Peso": "0,5 kg",
+            "Costo": "5 ma"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "acido",
+    "nome": "Acido",
+    "tipo": "equipaggiamento_avventura",
+    "categoria": "Equipaggiamento d'avventura",
+    "pagine_sorgente": "107-113",
+    "peso": "0,5 kg",
+    "costo": "25 mo",
+    "descrizione": "Come parte dell'azione di Attacco, una fiala puo infliggere 2d6 danni da acido se il bersaglio fallisce un TS su Destrezza.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Oggetto": "Acido",
+            "Peso": "0,5 kg",
+            "Costo": "25 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "acqua_santa",
+    "nome": "Acqua santa",
+    "tipo": "equipaggiamento_avventura",
+    "categoria": "Equipaggiamento d'avventura",
+    "pagine_sorgente": "107-113",
+    "peso": "0,5 kg",
+    "costo": "25 mo",
+    "descrizione": "Lanciata contro immondi o non morti puo infliggere 2d8 danni radiosi su TS su Destrezza fallito.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Oggetto": "Acqua santa",
+            "Peso": "0,5 kg",
+            "Costo": "25 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "ampolla",
+    "nome": "Ampolla",
+    "tipo": "equipaggiamento_avventura",
+    "categoria": "Equipaggiamento d'avventura",
+    "pagine_sorgente": "107-113",
+    "peso": "0,5 kg",
+    "costo": "2 mr",
+    "descrizione": "Peso 0,5 kg; costo 2 mr.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Oggetto": "Ampolla",
+            "Peso": "0,5 kg",
+            "Costo": "2 mr"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "antitossina",
+    "nome": "Antitossina",
+    "tipo": "equipaggiamento_avventura",
+    "categoria": "Equipaggiamento d'avventura",
+    "pagine_sorgente": "107-113",
+    "peso": "-",
+    "costo": "50 mo",
+    "descrizione": "Come azione bonus, fornisce vantaggio ai tiri salvezza per evitare o interrompere avvelenato.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Oggetto": "Antitossina",
+            "Peso": "-",
+            "Costo": "50 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "ariete_portatile",
+    "nome": "Ariete portatile",
+    "tipo": "equipaggiamento_avventura",
+    "categoria": "Equipaggiamento d'avventura",
+    "pagine_sorgente": "107-113",
+    "peso": "17,5 kg",
+    "costo": "4 mo",
+    "descrizione": "Peso 17,5 kg; costo 4 mo.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Oggetto": "Ariete portatile",
+            "Peso": "17,5 kg",
+            "Costo": "4 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "asta",
+    "nome": "Asta",
+    "tipo": "equipaggiamento_avventura",
+    "categoria": "Equipaggiamento d'avventura",
+    "pagine_sorgente": "107-113",
+    "peso": "3,5 kg",
+    "costo": "5 mr",
+    "descrizione": "Peso 3,5 kg; costo 5 mr.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Oggetto": "Asta",
+            "Peso": "3,5 kg",
+            "Costo": "5 mr"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "attrezzi_da_scalatore",
+    "nome": "Attrezzi da scalatore",
+    "tipo": "equipaggiamento_avventura",
+    "categoria": "Equipaggiamento d'avventura",
+    "pagine_sorgente": "107-113",
+    "peso": "6 kg",
+    "costo": "25 mo",
+    "descrizione": "Peso 6 kg; costo 25 mo.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Oggetto": "Attrezzi da scalatore",
+            "Peso": "6 kg",
+            "Costo": "25 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "barile",
+    "nome": "Barile",
+    "tipo": "equipaggiamento_avventura",
+    "categoria": "Equipaggiamento d'avventura",
+    "pagine_sorgente": "107-113",
+    "peso": "35 kg",
+    "costo": "2 mo",
+    "descrizione": "Peso 35 kg; costo 2 mo.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Oggetto": "Barile",
+            "Peso": "35 kg",
+            "Costo": "2 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "borsa",
+    "nome": "Borsa",
+    "tipo": "equipaggiamento_avventura",
+    "categoria": "Equipaggiamento d'avventura",
+    "pagine_sorgente": "107-113",
+    "peso": "0,5 kg",
+    "costo": "5 ma",
+    "descrizione": "Peso 0,5 kg; costo 5 ma.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Oggetto": "Borsa",
+            "Peso": "0,5 kg",
+            "Costo": "5 ma"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "borsa_del_guaritore",
+    "nome": "Borsa del guaritore",
+    "tipo": "equipaggiamento_avventura",
+    "categoria": "Equipaggiamento d'avventura",
+    "pagine_sorgente": "107-113",
+    "peso": "1,5 kg",
+    "costo": "5 mo",
+    "descrizione": "Ha dieci usi; con un'azione di Utilizzo stabilizza una creatura a 0 PF senza prova di Medicina.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Oggetto": "Borsa del guaritore",
+            "Peso": "1,5 kg",
+            "Costo": "5 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "borsa_per_componenti",
+    "nome": "Borsa per componenti",
+    "tipo": "equipaggiamento_avventura",
+    "categoria": "Equipaggiamento d'avventura",
+    "pagine_sorgente": "107-113",
+    "peso": "1 kg",
+    "costo": "25 mo",
+    "descrizione": "Peso 1 kg; costo 25 mo.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Oggetto": "Borsa per componenti",
+            "Peso": "1 kg",
+            "Costo": "25 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "bottiglia_di_vetro",
+    "nome": "Bottiglia di vetro",
+    "tipo": "equipaggiamento_avventura",
+    "categoria": "Equipaggiamento d'avventura",
+    "pagine_sorgente": "107-113",
+    "peso": "1 kg",
+    "costo": "2 mo",
+    "descrizione": "Peso 1 kg; costo 2 mo.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Oggetto": "Bottiglia di vetro",
+            "Peso": "1 kg",
+            "Costo": "2 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "brocca",
+    "nome": "Brocca",
+    "tipo": "equipaggiamento_avventura",
+    "categoria": "Equipaggiamento d'avventura",
+    "pagine_sorgente": "107-113",
+    "peso": "2 kg",
+    "costo": "2 mr",
+    "descrizione": "Peso 2 kg; costo 2 mr.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Oggetto": "Brocca",
+            "Peso": "2 kg",
+            "Costo": "2 mr"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "campanella",
+    "nome": "Campanella",
+    "tipo": "equipaggiamento_avventura",
+    "categoria": "Equipaggiamento d'avventura",
+    "pagine_sorgente": "107-113",
+    "peso": "-",
+    "costo": "1 mo",
+    "descrizione": "Peso -; costo 1 mo.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Oggetto": "Campanella",
+            "Peso": "-",
+            "Costo": "1 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "candela",
+    "nome": "Candela",
+    "tipo": "equipaggiamento_avventura",
+    "categoria": "Equipaggiamento d'avventura",
+    "pagine_sorgente": "107-113",
+    "peso": "-",
+    "costo": "1 mr",
+    "descrizione": "Peso -; costo 1 mr.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Oggetto": "Candela",
+            "Peso": "-",
+            "Costo": "1 mr"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "cannocchiale",
+    "nome": "Cannocchiale",
+    "tipo": "equipaggiamento_avventura",
+    "categoria": "Equipaggiamento d'avventura",
+    "pagine_sorgente": "107-113",
+    "peso": "0,5 kg",
+    "costo": "1.000 mo",
+    "descrizione": "Peso 0,5 kg; costo 1.000 mo.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Oggetto": "Cannocchiale",
+            "Peso": "0,5 kg",
+            "Costo": "1.000 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "carrucola_e_paranco",
+    "nome": "Carrucola e paranco",
+    "tipo": "equipaggiamento_avventura",
+    "categoria": "Equipaggiamento d'avventura",
+    "pagine_sorgente": "107-113",
+    "peso": "2,5 kg",
+    "costo": "1 mo",
+    "descrizione": "Peso 2,5 kg; costo 1 mo.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Oggetto": "Carrucola e paranco",
+            "Peso": "2,5 kg",
+            "Costo": "1 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "carta",
+    "nome": "Carta",
+    "tipo": "equipaggiamento_avventura",
+    "categoria": "Equipaggiamento d'avventura",
+    "pagine_sorgente": "107-113",
+    "peso": "-",
+    "costo": "2 ma",
+    "descrizione": "Peso -; costo 2 ma.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Oggetto": "Carta",
+            "Peso": "-",
+            "Costo": "2 ma"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "catena",
+    "nome": "Catena",
+    "tipo": "equipaggiamento_avventura",
+    "categoria": "Equipaggiamento d'avventura",
+    "pagine_sorgente": "107-113",
+    "peso": "5 kg",
+    "costo": "5 mo",
+    "descrizione": "Peso 5 kg; costo 5 mo.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Oggetto": "Catena",
+            "Peso": "5 kg",
+            "Costo": "5 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "cesto",
+    "nome": "Cesto",
+    "tipo": "equipaggiamento_avventura",
+    "categoria": "Equipaggiamento d'avventura",
+    "pagine_sorgente": "107-113",
+    "peso": "1 kg",
+    "costo": "4 ma",
+    "descrizione": "Peso 1 kg; costo 4 ma.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Oggetto": "Cesto",
+            "Peso": "1 kg",
+            "Costo": "4 ma"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "coperta",
+    "nome": "Coperta",
+    "tipo": "equipaggiamento_avventura",
+    "categoria": "Equipaggiamento d'avventura",
+    "pagine_sorgente": "107-113",
+    "peso": "1,5 kg",
+    "costo": "5 ma",
+    "descrizione": "Peso 1,5 kg; costo 5 ma.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Oggetto": "Coperta",
+            "Peso": "1,5 kg",
+            "Costo": "5 ma"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "corda",
+    "nome": "Corda",
+    "tipo": "equipaggiamento_avventura",
+    "categoria": "Equipaggiamento d'avventura",
+    "pagine_sorgente": "107-113",
+    "peso": "2,5 kg",
+    "costo": "1 mo",
+    "descrizione": "Peso 2,5 kg; costo 1 mo.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Oggetto": "Corda",
+            "Peso": "2,5 kg",
+            "Costo": "1 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "costume",
+    "nome": "Costume",
+    "tipo": "equipaggiamento_avventura",
+    "categoria": "Equipaggiamento d'avventura",
+    "pagine_sorgente": "107-113",
+    "peso": "2 kg",
+    "costo": "5 mo",
+    "descrizione": "Peso 2 kg; costo 5 mo.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Oggetto": "Costume",
+            "Peso": "2 kg",
+            "Costo": "5 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "custodia_per_mappe_o_pergamene",
+    "nome": "Custodia per mappe o pergamene",
+    "tipo": "equipaggiamento_avventura",
+    "categoria": "Equipaggiamento d'avventura",
+    "pagine_sorgente": "107-113",
+    "peso": "0,5 kg",
+    "costo": "1 mo",
+    "descrizione": "Peso 0,5 kg; costo 1 mo.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Oggetto": "Custodia per mappe o pergamene",
+            "Peso": "0,5 kg",
+            "Costo": "1 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "custodia_per_quadrelli",
+    "nome": "Custodia per quadrelli",
+    "tipo": "equipaggiamento_avventura",
+    "categoria": "Equipaggiamento d'avventura",
+    "pagine_sorgente": "107-113",
+    "peso": "0,5 kg",
+    "costo": "1 mo",
+    "descrizione": "Peso 0,5 kg; costo 1 mo.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Oggetto": "Custodia per quadrelli",
+            "Peso": "0,5 kg",
+            "Costo": "1 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "dotazione_da_avventuriero",
+    "nome": "Dotazione da avventuriero",
+    "tipo": "equipaggiamento_avventura",
+    "categoria": "Equipaggiamento d'avventura",
+    "pagine_sorgente": "107-113",
+    "peso": "27,5 kg",
+    "costo": "12 mo",
+    "descrizione": "Peso 27,5 kg; costo 12 mo.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Oggetto": "Dotazione da avventuriero",
+            "Peso": "27,5 kg",
+            "Costo": "12 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "dotazione_da_diplomatico",
+    "nome": "Dotazione da diplomatico",
+    "tipo": "equipaggiamento_avventura",
+    "categoria": "Equipaggiamento d'avventura",
+    "pagine_sorgente": "107-113",
+    "peso": "19,5 kg",
+    "costo": "39 mo",
+    "descrizione": "Peso 19,5 kg; costo 39 mo.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Oggetto": "Dotazione da diplomatico",
+            "Peso": "19,5 kg",
+            "Costo": "39 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "dotazione_da_esploratore",
+    "nome": "Dotazione da esploratore",
+    "tipo": "equipaggiamento_avventura",
+    "categoria": "Equipaggiamento d'avventura",
+    "pagine_sorgente": "107-113",
+    "peso": "27,5 kg",
+    "costo": "10 mo",
+    "descrizione": "Peso 27,5 kg; costo 10 mo.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Oggetto": "Dotazione da esploratore",
+            "Peso": "27,5 kg",
+            "Costo": "10 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "dotazione_da_intrattenitore",
+    "nome": "Dotazione da intrattenitore",
+    "tipo": "equipaggiamento_avventura",
+    "categoria": "Equipaggiamento d'avventura",
+    "pagine_sorgente": "107-113",
+    "peso": "29 kg",
+    "costo": "40 mo",
+    "descrizione": "Peso 29 kg; costo 40 mo.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Oggetto": "Dotazione da intrattenitore",
+            "Peso": "29 kg",
+            "Costo": "40 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "dotazione_da_sacerdote",
+    "nome": "Dotazione da sacerdote",
+    "tipo": "equipaggiamento_avventura",
+    "categoria": "Equipaggiamento d'avventura",
+    "pagine_sorgente": "107-113",
+    "peso": "14 kg",
+    "costo": "33 mo",
+    "descrizione": "Peso 14 kg; costo 33 mo.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Oggetto": "Dotazione da sacerdote",
+            "Peso": "14 kg",
+            "Costo": "33 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "dotazione_da_scassinatore",
+    "nome": "Dotazione da scassinatore",
+    "tipo": "equipaggiamento_avventura",
+    "categoria": "Equipaggiamento d'avventura",
+    "pagine_sorgente": "107-113",
+    "peso": "19 kg",
+    "costo": "16 mo",
+    "descrizione": "Peso 19 kg; costo 16 mo.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Oggetto": "Dotazione da scassinatore",
+            "Peso": "19 kg",
+            "Costo": "16 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "dotazione_da_studioso",
+    "nome": "Dotazione da studioso",
+    "tipo": "equipaggiamento_avventura",
+    "categoria": "Equipaggiamento d'avventura",
+    "pagine_sorgente": "107-113",
+    "peso": "11 kg",
+    "costo": "40 mo",
+    "descrizione": "Peso 11 kg; costo 40 mo.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Oggetto": "Dotazione da studioso",
+            "Peso": "11 kg",
+            "Costo": "40 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "faretra",
+    "nome": "Faretra",
+    "tipo": "equipaggiamento_avventura",
+    "categoria": "Equipaggiamento d'avventura",
+    "pagine_sorgente": "107-113",
+    "peso": "0,5 kg",
+    "costo": "1 mo",
+    "descrizione": "Peso 0,5 kg; costo 1 mo.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Oggetto": "Faretra",
+            "Peso": "0,5 kg",
+            "Costo": "1 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "fiala",
+    "nome": "Fiala",
+    "tipo": "equipaggiamento_avventura",
+    "categoria": "Equipaggiamento d'avventura",
+    "pagine_sorgente": "107-113",
+    "peso": "-",
+    "costo": "1 mo",
+    "descrizione": "Peso -; costo 1 mo.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Oggetto": "Fiala",
+            "Peso": "-",
+            "Costo": "1 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "fischietto_da_richiamo",
+    "nome": "Fischietto da richiamo",
+    "tipo": "equipaggiamento_avventura",
+    "categoria": "Equipaggiamento d'avventura",
+    "pagine_sorgente": "107-113",
+    "peso": "-",
+    "costo": "5 mr",
+    "descrizione": "Peso -; costo 5 mr.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Oggetto": "Fischietto da richiamo",
+            "Peso": "-",
+            "Costo": "5 mr"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "focus_arcano",
+    "nome": "Focus arcano",
+    "tipo": "equipaggiamento_avventura",
+    "categoria": "Equipaggiamento d'avventura",
+    "pagine_sorgente": "107-113",
+    "peso": "variabile",
+    "costo": "variabile",
+    "descrizione": "Bacchetta, bastone, cristallo, globo o verga per maghi, stregoni e warlock.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Oggetto": "Focus arcano",
+            "Peso": "variabile",
+            "Costo": "variabile"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "focus_druidico",
+    "nome": "Focus druidico",
+    "tipo": "equipaggiamento_avventura",
+    "categoria": "Equipaggiamento d'avventura",
+    "pagine_sorgente": "107-113",
+    "peso": "variabile",
+    "costo": "variabile",
+    "descrizione": "Bacchetta di tasso, bastone di legno o rametto di vischio per druidi e ranger.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Oggetto": "Focus druidico",
+            "Peso": "variabile",
+            "Costo": "variabile"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "forziere",
+    "nome": "Forziere",
+    "tipo": "equipaggiamento_avventura",
+    "categoria": "Equipaggiamento d'avventura",
+    "pagine_sorgente": "107-113",
+    "peso": "12,5 kg",
+    "costo": "5 mo",
+    "descrizione": "Peso 12,5 kg; costo 5 mo.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Oggetto": "Forziere",
+            "Peso": "12,5 kg",
+            "Costo": "5 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "fuoco_dell_alchimista",
+    "nome": "Fuoco dell'alchimista",
+    "tipo": "equipaggiamento_avventura",
+    "categoria": "Equipaggiamento d'avventura",
+    "pagine_sorgente": "107-113",
+    "peso": "0,5 kg",
+    "costo": "50 mo",
+    "descrizione": "Puo incendiare un bersaglio e infliggere 1d4 danni da fuoco.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Oggetto": "Fuoco dell'alchimista",
+            "Peso": "0,5 kg",
+            "Costo": "50 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "giaciglio",
+    "nome": "Giaciglio",
+    "tipo": "equipaggiamento_avventura",
+    "categoria": "Equipaggiamento d'avventura",
+    "pagine_sorgente": "107-113",
+    "peso": "3,5 kg",
+    "costo": "1 mo",
+    "descrizione": "Peso 3,5 kg; costo 1 mo.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Oggetto": "Giaciglio",
+            "Peso": "3,5 kg",
+            "Costo": "1 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "inchiostro",
+    "nome": "Inchiostro",
+    "tipo": "equipaggiamento_avventura",
+    "categoria": "Equipaggiamento d'avventura",
+    "pagine_sorgente": "107-113",
+    "peso": "-",
+    "costo": "10 mo",
+    "descrizione": "Peso -; costo 10 mo.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Oggetto": "Inchiostro",
+            "Peso": "-",
+            "Costo": "10 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "lampada",
+    "nome": "Lampada",
+    "tipo": "equipaggiamento_avventura",
+    "categoria": "Equipaggiamento d'avventura",
+    "pagine_sorgente": "107-113",
+    "peso": "0,5 kg",
+    "costo": "5 ma",
+    "descrizione": "Peso 0,5 kg; costo 5 ma.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Oggetto": "Lampada",
+            "Peso": "0,5 kg",
+            "Costo": "5 ma"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "lanterna_a_lente_sporgente",
+    "nome": "Lanterna a lente sporgente",
+    "tipo": "equipaggiamento_avventura",
+    "categoria": "Equipaggiamento d'avventura",
+    "pagine_sorgente": "107-113",
+    "peso": "1 kg",
+    "costo": "10 mo",
+    "descrizione": "Peso 1 kg; costo 10 mo.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Oggetto": "Lanterna a lente sporgente",
+            "Peso": "1 kg",
+            "Costo": "10 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "lanterna_schermabile",
+    "nome": "Lanterna schermabile",
+    "tipo": "equipaggiamento_avventura",
+    "categoria": "Equipaggiamento d'avventura",
+    "pagine_sorgente": "107-113",
+    "peso": "1 kg",
+    "costo": "5 mo",
+    "descrizione": "Peso 1 kg; costo 5 mo.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Oggetto": "Lanterna schermabile",
+            "Peso": "1 kg",
+            "Costo": "5 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "lente_d_ingrandimento",
+    "nome": "Lente d'ingrandimento",
+    "tipo": "equipaggiamento_avventura",
+    "categoria": "Equipaggiamento d'avventura",
+    "pagine_sorgente": "107-113",
+    "peso": "-",
+    "costo": "100 mo",
+    "descrizione": "Peso -; costo 100 mo.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Oggetto": "Lente d'ingrandimento",
+            "Peso": "-",
+            "Costo": "100 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "libro",
+    "nome": "Libro",
+    "tipo": "equipaggiamento_avventura",
+    "categoria": "Equipaggiamento d'avventura",
+    "pagine_sorgente": "107-113",
+    "peso": "2,5 kg",
+    "costo": "25 mo",
+    "descrizione": "Peso 2,5 kg; costo 25 mo.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Oggetto": "Libro",
+            "Peso": "2,5 kg",
+            "Costo": "25 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "manette",
+    "nome": "Manette",
+    "tipo": "equipaggiamento_avventura",
+    "categoria": "Equipaggiamento d'avventura",
+    "pagine_sorgente": "107-113",
+    "peso": "3 kg",
+    "costo": "2 mo",
+    "descrizione": "Peso 3 kg; costo 2 mo.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Oggetto": "Manette",
+            "Peso": "3 kg",
+            "Costo": "2 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "mappa",
+    "nome": "Mappa",
+    "tipo": "equipaggiamento_avventura",
+    "categoria": "Equipaggiamento d'avventura",
+    "pagine_sorgente": "107-113",
+    "peso": "-",
+    "costo": "1 mo",
+    "descrizione": "Peso -; costo 1 mo.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Oggetto": "Mappa",
+            "Peso": "-",
+            "Costo": "1 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "munizioni",
+    "nome": "Munizioni",
+    "tipo": "equipaggiamento_avventura",
+    "categoria": "Equipaggiamento d'avventura",
+    "pagine_sorgente": "107-113",
+    "peso": "variabile",
+    "costo": "variabile",
+    "descrizione": "Aghi, frecce, proiettili per arma da fuoco, proiettili da fionda e quadrelli hanno quantita, contenitore, peso e costo propri.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Oggetto": "Munizioni",
+            "Peso": "variabile",
+            "Costo": "variabile"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "olio",
+    "nome": "Olio",
+    "tipo": "equipaggiamento_avventura",
+    "categoria": "Equipaggiamento d'avventura",
+    "pagine_sorgente": "107-113",
+    "peso": "0,5 kg",
+    "costo": "1 ma",
+    "descrizione": "Puo coprire bersagli o superfici e aggiungere o infliggere danni da fuoco; alimenta lampade e lanterne per 6 ore.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Oggetto": "Olio",
+            "Peso": "0,5 kg",
+            "Costo": "1 ma"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "otre",
+    "nome": "Otre",
+    "tipo": "equipaggiamento_avventura",
+    "categoria": "Equipaggiamento d'avventura",
+    "pagine_sorgente": "107-113",
+    "peso": "2,5 kg pieno",
+    "costo": "2 ma",
+    "descrizione": "Peso 2,5 kg pieno; costo 2 ma.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Oggetto": "Otre",
+            "Peso": "2,5 kg pieno",
+            "Costo": "2 ma"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "pala",
+    "nome": "Pala",
+    "tipo": "equipaggiamento_avventura",
+    "categoria": "Equipaggiamento d'avventura",
+    "pagine_sorgente": "107-113",
+    "peso": "2,5 kg",
+    "costo": "2 mo",
+    "descrizione": "Peso 2,5 kg; costo 2 mo.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Oggetto": "Pala",
+            "Peso": "2,5 kg",
+            "Costo": "2 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "pennino",
+    "nome": "Pennino",
+    "tipo": "equipaggiamento_avventura",
+    "categoria": "Equipaggiamento d'avventura",
+    "pagine_sorgente": "107-113",
+    "peso": "-",
+    "costo": "2 mr",
+    "descrizione": "Peso -; costo 2 mr.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Oggetto": "Pennino",
+            "Peso": "-",
+            "Costo": "2 mr"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "pentola_di_ferro",
+    "nome": "Pentola di ferro",
+    "tipo": "equipaggiamento_avventura",
+    "categoria": "Equipaggiamento d'avventura",
+    "pagine_sorgente": "107-113",
+    "peso": "5 kg",
+    "costo": "2 mo",
+    "descrizione": "Peso 5 kg; costo 2 mo.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Oggetto": "Pentola di ferro",
+            "Peso": "5 kg",
+            "Costo": "2 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "pergamena",
+    "nome": "Pergamena",
+    "tipo": "equipaggiamento_avventura",
+    "categoria": "Equipaggiamento d'avventura",
+    "pagine_sorgente": "107-113",
+    "peso": "-",
+    "costo": "1 ma",
+    "descrizione": "Peso -; costo 1 ma.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Oggetto": "Pergamena",
+            "Peso": "-",
+            "Costo": "1 ma"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "pergamena_magica_livello_1",
+    "nome": "Pergamena magica livello 1",
+    "tipo": "equipaggiamento_avventura",
+    "categoria": "Equipaggiamento d'avventura",
+    "pagine_sorgente": "107-113",
+    "peso": "-",
+    "costo": "50 mo",
+    "descrizione": "Peso -; costo 50 mo.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Oggetto": "Pergamena magica livello 1",
+            "Peso": "-",
+            "Costo": "50 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "pergamena_magica_trucchetto",
+    "nome": "Pergamena magica trucchetto",
+    "tipo": "equipaggiamento_avventura",
+    "categoria": "Equipaggiamento d'avventura",
+    "pagine_sorgente": "107-113",
+    "peso": "-",
+    "costo": "30 mo",
+    "descrizione": "Peso -; costo 30 mo.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Oggetto": "Pergamena magica trucchetto",
+            "Peso": "-",
+            "Costo": "30 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "piede_di_porco",
+    "nome": "Piede di porco",
+    "tipo": "equipaggiamento_avventura",
+    "categoria": "Equipaggiamento d'avventura",
+    "pagine_sorgente": "107-113",
+    "peso": "2,5 kg",
+    "costo": "2 mo",
+    "descrizione": "Peso 2,5 kg; costo 2 mo.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Oggetto": "Piede di porco",
+            "Peso": "2,5 kg",
+            "Costo": "2 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "pozione_di_guarigione",
+    "nome": "Pozione di guarigione",
+    "tipo": "equipaggiamento_avventura",
+    "categoria": "Equipaggiamento d'avventura",
+    "pagine_sorgente": "107-113",
+    "peso": "0,25 kg",
+    "costo": "50 mo",
+    "descrizione": "Oggetto magico bevuto o somministrato come azione bonus; fa recuperare 2d4 + 2 PF.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Oggetto": "Pozione di guarigione",
+            "Peso": "0,25 kg",
+            "Costo": "50 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "profumo",
+    "nome": "Profumo",
+    "tipo": "equipaggiamento_avventura",
+    "categoria": "Equipaggiamento d'avventura",
+    "pagine_sorgente": "107-113",
+    "peso": "-",
+    "costo": "5 mo",
+    "descrizione": "Peso -; costo 5 mo.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Oggetto": "Profumo",
+            "Peso": "-",
+            "Costo": "5 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "rampino",
+    "nome": "Rampino",
+    "tipo": "equipaggiamento_avventura",
+    "categoria": "Equipaggiamento d'avventura",
+    "pagine_sorgente": "107-113",
+    "peso": "2 kg",
+    "costo": "2 mo",
+    "descrizione": "Peso 2 kg; costo 2 mo.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Oggetto": "Rampino",
+            "Peso": "2 kg",
+            "Costo": "2 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "razioni",
+    "nome": "Razioni",
+    "tipo": "equipaggiamento_avventura",
+    "categoria": "Equipaggiamento d'avventura",
+    "pagine_sorgente": "107-113",
+    "peso": "1 kg",
+    "costo": "5 ma",
+    "descrizione": "Peso 1 kg; costo 5 ma.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Oggetto": "Razioni",
+            "Peso": "1 kg",
+            "Costo": "5 ma"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "rete",
+    "nome": "Rete",
+    "tipo": "equipaggiamento_avventura",
+    "categoria": "Equipaggiamento d'avventura",
+    "pagine_sorgente": "107-113",
+    "peso": "1,5 kg",
+    "costo": "1 mo",
+    "descrizione": "Puo trattenere una creatura entro 4,5 metri se fallisce un TS su Destrezza; una creatura Enorme o superiore supera automaticamente.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Oggetto": "Rete",
+            "Peso": "1,5 kg",
+            "Costo": "1 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "sacco",
+    "nome": "Sacco",
+    "tipo": "equipaggiamento_avventura",
+    "categoria": "Equipaggiamento d'avventura",
+    "pagine_sorgente": "107-113",
+    "peso": "0,25 kg",
+    "costo": "1 mr",
+    "descrizione": "Peso 0,25 kg; costo 1 mr.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Oggetto": "Sacco",
+            "Peso": "0,25 kg",
+            "Costo": "1 mr"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "scala_a_pioli",
+    "nome": "Scala a pioli",
+    "tipo": "equipaggiamento_avventura",
+    "categoria": "Equipaggiamento d'avventura",
+    "pagine_sorgente": "107-113",
+    "peso": "12,5 kg",
+    "costo": "1 ma",
+    "descrizione": "Peso 12,5 kg; costo 1 ma.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Oggetto": "Scala a pioli",
+            "Peso": "12,5 kg",
+            "Costo": "1 ma"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "secchio",
+    "nome": "Secchio",
+    "tipo": "equipaggiamento_avventura",
+    "categoria": "Equipaggiamento d'avventura",
+    "pagine_sorgente": "107-113",
+    "peso": "1 kg",
+    "costo": "5 mr",
+    "descrizione": "Peso 1 kg; costo 5 mr.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Oggetto": "Secchio",
+            "Peso": "1 kg",
+            "Costo": "5 mr"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "serratura",
+    "nome": "Serratura",
+    "tipo": "equipaggiamento_avventura",
+    "categoria": "Equipaggiamento d'avventura",
+    "pagine_sorgente": "107-113",
+    "peso": "0,5 kg",
+    "costo": "10 mo",
+    "descrizione": "Peso 0,5 kg; costo 10 mo.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Oggetto": "Serratura",
+            "Peso": "0,5 kg",
+            "Costo": "10 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "sfere_metalliche",
+    "nome": "Sfere metalliche",
+    "tipo": "equipaggiamento_avventura",
+    "categoria": "Equipaggiamento d'avventura",
+    "pagine_sorgente": "107-113",
+    "peso": "1 kg",
+    "costo": "1 mo",
+    "descrizione": "Peso 1 kg; costo 1 mo.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Oggetto": "Sfere metalliche",
+            "Peso": "1 kg",
+            "Costo": "1 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "simbolo_sacro",
+    "nome": "Simbolo sacro",
+    "tipo": "equipaggiamento_avventura",
+    "categoria": "Equipaggiamento d'avventura",
+    "pagine_sorgente": "107-113",
+    "peso": "variabile",
+    "costo": "variabile",
+    "descrizione": "Amuleto, emblema o reliquiario usato da chierici e paladini come focus da incantatore.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Oggetto": "Simbolo sacro",
+            "Peso": "variabile",
+            "Costo": "variabile"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "spago",
+    "nome": "Spago",
+    "tipo": "equipaggiamento_avventura",
+    "categoria": "Equipaggiamento d'avventura",
+    "pagine_sorgente": "107-113",
+    "peso": "-",
+    "costo": "1 ma",
+    "descrizione": "Peso -; costo 1 ma.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Oggetto": "Spago",
+            "Peso": "-",
+            "Costo": "1 ma"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "specchio",
+    "nome": "Specchio",
+    "tipo": "equipaggiamento_avventura",
+    "categoria": "Equipaggiamento d'avventura",
+    "pagine_sorgente": "107-113",
+    "peso": "0,25 kg",
+    "costo": "5 mo",
+    "descrizione": "Peso 0,25 kg; costo 5 mo.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Oggetto": "Specchio",
+            "Peso": "0,25 kg",
+            "Costo": "5 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "spuntoni_di_ferro",
+    "nome": "Spuntoni di ferro",
+    "tipo": "equipaggiamento_avventura",
+    "categoria": "Equipaggiamento d'avventura",
+    "pagine_sorgente": "107-113",
+    "peso": "2,5 kg",
+    "costo": "1 mo",
+    "descrizione": "Peso 2,5 kg; costo 1 mo.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Oggetto": "Spuntoni di ferro",
+            "Peso": "2,5 kg",
+            "Costo": "1 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "tagliola",
+    "nome": "Tagliola",
+    "tipo": "equipaggiamento_avventura",
+    "categoria": "Equipaggiamento d'avventura",
+    "pagine_sorgente": "107-113",
+    "peso": "12,5 kg",
+    "costo": "5 mo",
+    "descrizione": "Peso 12,5 kg; costo 5 mo.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Oggetto": "Tagliola",
+            "Peso": "12,5 kg",
+            "Costo": "5 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "tenda",
+    "nome": "Tenda",
+    "tipo": "equipaggiamento_avventura",
+    "categoria": "Equipaggiamento d'avventura",
+    "pagine_sorgente": "107-113",
+    "peso": "10 kg",
+    "costo": "2 mo",
+    "descrizione": "Peso 10 kg; costo 2 mo.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Oggetto": "Tenda",
+            "Peso": "10 kg",
+            "Costo": "2 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "torcia",
+    "nome": "Torcia",
+    "tipo": "equipaggiamento_avventura",
+    "categoria": "Equipaggiamento d'avventura",
+    "pagine_sorgente": "107-113",
+    "peso": "0,5 kg",
+    "costo": "1 mr",
+    "descrizione": "Peso 0,5 kg; costo 1 mr.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Oggetto": "Torcia",
+            "Peso": "0,5 kg",
+            "Costo": "1 mr"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "triboli",
+    "nome": "Triboli",
+    "tipo": "equipaggiamento_avventura",
+    "categoria": "Equipaggiamento d'avventura",
+    "pagine_sorgente": "107-113",
+    "peso": "1 kg",
+    "costo": "1 mo",
+    "descrizione": "Coprono un'area di 1,5 metri quadrati; possono infliggere 1 danno perforante e ridurre la velocita a 0.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Oggetto": "Triboli",
+            "Peso": "1 kg",
+            "Costo": "1 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "tunica",
+    "nome": "Tunica",
+    "tipo": "equipaggiamento_avventura",
+    "categoria": "Equipaggiamento d'avventura",
+    "pagine_sorgente": "107-113",
+    "peso": "2 kg",
+    "costo": "1 mo",
+    "descrizione": "Peso 2 kg; costo 1 mo.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Oggetto": "Tunica",
+            "Peso": "2 kg",
+            "Costo": "1 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "veleno_base",
+    "nome": "Veleno base",
+    "tipo": "equipaggiamento_avventura",
+    "categoria": "Equipaggiamento d'avventura",
+    "pagine_sorgente": "107-113",
+    "peso": "-",
+    "costo": "100 mo",
+    "descrizione": "Come azione bonus si applica a un'arma o a tre munizioni; aggiunge 1d4 danni da veleno.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Oggetto": "Veleno base",
+            "Peso": "-",
+            "Costo": "100 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "zaino",
+    "nome": "Zaino",
+    "tipo": "equipaggiamento_avventura",
+    "categoria": "Equipaggiamento d'avventura",
+    "pagine_sorgente": "107-113",
+    "peso": "2,5 kg",
+    "costo": "2 mo",
+    "descrizione": "Peso 2,5 kg; costo 2 mo.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Oggetto": "Zaino",
+            "Peso": "2,5 kg",
+            "Costo": "2 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "scorte_da_alchimista",
+    "nome": "Scorte da alchimista",
+    "tipo": "strumento",
+    "categoria": "Strumenti",
+    "pagine_sorgente": "105-107",
+    "caratteristica": "Intelligenza",
+    "descrizione": "Intelligenza; identificare sostanze o appiccare fuoco; crea acido, fuoco dell'alchimista e altri oggetti.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Voce": "Scorte da alchimista",
+            "Riepilogo": "Intelligenza; identificare sostanze o appiccare fuoco; crea acido, fuoco dell'alchimista e altri oggetti."
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "strumenti_da_fabbro",
+    "nome": "Strumenti da fabbro",
+    "tipo": "strumento",
+    "categoria": "Strumenti",
+    "pagine_sorgente": "105-107",
+    "caratteristica": "Forza",
+    "descrizione": "Forza; forzare porte o contenitori; crea molte armi, armature medie e pesanti e oggetti metallici.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Voce": "Strumenti da fabbro",
+            "Riepilogo": "Forza; forzare porte o contenitori; crea molte armi, armature medie e pesanti e oggetti metallici."
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "strumenti_da_falegname",
+    "nome": "Strumenti da falegname",
+    "tipo": "strumento",
+    "categoria": "Strumenti",
+    "pagine_sorgente": "105-107",
+    "caratteristica": "Forza",
+    "descrizione": "Forza; sigillare o forzare contenitori; crea oggetti di legno come aste, barili e scale.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Voce": "Strumenti da falegname",
+            "Riepilogo": "Forza; sigillare o forzare contenitori; crea oggetti di legno come aste, barili e scale."
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "arnesi_da_scasso",
+    "nome": "Arnesi da scasso",
+    "tipo": "strumento",
+    "categoria": "Strumenti",
+    "pagine_sorgente": "105-107",
+    "caratteristica": "Destrezza",
+    "descrizione": "Destrezza; scassinare serrature o disattivare trappole.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Voce": "Arnesi da scasso",
+            "Riepilogo": "Destrezza; scassinare serrature o disattivare trappole."
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "borsa_da_erborista",
+    "nome": "Borsa da erborista",
+    "tipo": "strumento",
+    "categoria": "Strumenti",
+    "pagine_sorgente": "105-107",
+    "caratteristica": "Intelligenza",
+    "descrizione": "Intelligenza; identificare piante; crea antitossina, candele e pozioni di guarigione.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Voce": "Borsa da erborista",
+            "Riepilogo": "Intelligenza; identificare piante; crea antitossina, candele e pozioni di guarigione."
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "strumento_musicale",
+    "nome": "Strumento musicale",
+    "tipo": "strumento",
+    "categoria": "Strumenti",
+    "pagine_sorgente": "105-107",
+    "caratteristica": "Carisma",
+    "descrizione": "Carisma; suonare o improvvisare; ogni variante richiede competenza separata.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Voce": "Strumento musicale",
+            "Riepilogo": "Carisma; suonare o improvvisare; ogni variante richiede competenza separata."
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "trucchi_per_il_camuffamento",
+    "nome": "Trucchi per il camuffamento",
+    "tipo": "strumento",
+    "categoria": "Strumenti",
+    "pagine_sorgente": "105-107",
+    "caratteristica": "Carisma",
+    "descrizione": "Carisma; truccarsi; crea costumi.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Voce": "Trucchi per il camuffamento",
+            "Riepilogo": "Carisma; truccarsi; crea costumi."
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "cammello",
+    "nome": "Cammello",
+    "tipo": "cavalcatura",
+    "categoria": "Cavalcature",
+    "pagine_sorgente": "113-114",
+    "capacita_trasporto": "225 kg",
+    "costo": "50 mo",
+    "descrizione": "Capacita di trasporto 225 kg; costo 50 mo.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Oggetto": "Cammello",
+            "Capacità di trasporto": "225 kg",
+            "Costo": "50 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "cavallo_da_galoppo",
+    "nome": "Cavallo da galoppo",
+    "tipo": "cavalcatura",
+    "categoria": "Cavalcature",
+    "pagine_sorgente": "113-114",
+    "capacita_trasporto": "240 kg",
+    "costo": "75 mo",
+    "descrizione": "Capacita di trasporto 240 kg; costo 75 mo.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Oggetto": "Cavallo da galoppo",
+            "Capacità di trasporto": "240 kg",
+            "Costo": "75 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "cavallo_da_guerra",
+    "nome": "Cavallo da guerra",
+    "tipo": "cavalcatura",
+    "categoria": "Cavalcature",
+    "pagine_sorgente": "113-114",
+    "capacita_trasporto": "270 kg",
+    "costo": "400 mo",
+    "descrizione": "Capacita di trasporto 270 kg; costo 400 mo.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Oggetto": "Cavallo da guerra",
+            "Capacità di trasporto": "270 kg",
+            "Costo": "400 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "cavallo_da_tiro",
+    "nome": "Cavallo da tiro",
+    "tipo": "cavalcatura",
+    "categoria": "Cavalcature",
+    "pagine_sorgente": "113-114",
+    "capacita_trasporto": "270 kg",
+    "costo": "50 mo",
+    "descrizione": "Capacita di trasporto 270 kg; costo 50 mo.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Oggetto": "Cavallo da tiro",
+            "Capacità di trasporto": "270 kg",
+            "Costo": "50 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "elefante",
+    "nome": "Elefante",
+    "tipo": "cavalcatura",
+    "categoria": "Cavalcature",
+    "pagine_sorgente": "113-114",
+    "capacita_trasporto": "660 kg",
+    "costo": "200 mo",
+    "descrizione": "Capacita di trasporto 660 kg; costo 200 mo.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Oggetto": "Elefante",
+            "Capacità di trasporto": "660 kg",
+            "Costo": "200 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "mastino",
+    "nome": "Mastino",
+    "tipo": "cavalcatura",
+    "categoria": "Cavalcature",
+    "pagine_sorgente": "113-114",
+    "capacita_trasporto": "97,5 kg",
+    "costo": "25 mo",
+    "descrizione": "Capacita di trasporto 97,5 kg; costo 25 mo.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Oggetto": "Mastino",
+            "Capacità di trasporto": "97,5 kg",
+            "Costo": "25 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "mulo",
+    "nome": "Mulo",
+    "tipo": "cavalcatura",
+    "categoria": "Cavalcature",
+    "pagine_sorgente": "113-114",
+    "capacita_trasporto": "210 kg",
+    "costo": "8 mo",
+    "descrizione": "Capacita di trasporto 210 kg; costo 8 mo.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Oggetto": "Mulo",
+            "Capacità di trasporto": "210 kg",
+            "Costo": "8 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "pony",
+    "nome": "Pony",
+    "tipo": "cavalcatura",
+    "categoria": "Cavalcature",
+    "pagine_sorgente": "113-114",
+    "capacita_trasporto": "112,5 kg",
+    "costo": "30 mo",
+    "descrizione": "Capacita di trasporto 112,5 kg; costo 30 mo.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Oggetto": "Pony",
+            "Capacità di trasporto": "112,5 kg",
+            "Costo": "30 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "biga",
+    "nome": "Biga",
+    "tipo": "veicolo_da_tiro",
+    "categoria": "Finimenti e veicoli da tiro",
+    "pagine_sorgente": "113-114",
+    "peso": "50 kg",
+    "costo": "250 mo",
+    "descrizione": "Peso 50 kg; costo 250 mo.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Oggetto": "Biga",
+            "Peso": "50 kg",
+            "Costo": "250 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "carretto",
+    "nome": "Carretto",
+    "tipo": "veicolo_da_tiro",
+    "categoria": "Finimenti e veicoli da tiro",
+    "pagine_sorgente": "113-114",
+    "peso": "100 kg",
+    "costo": "15 mo",
+    "descrizione": "Peso 100 kg; costo 15 mo.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Oggetto": "Carretto",
+            "Peso": "100 kg",
+            "Costo": "15 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "carro",
+    "nome": "Carro",
+    "tipo": "veicolo_da_tiro",
+    "categoria": "Finimenti e veicoli da tiro",
+    "pagine_sorgente": "113-114",
+    "peso": "200 kg",
+    "costo": "35 mo",
+    "descrizione": "Peso 200 kg; costo 35 mo.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Oggetto": "Carro",
+            "Peso": "200 kg",
+            "Costo": "35 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "carrozza",
+    "nome": "Carrozza",
+    "tipo": "veicolo_da_tiro",
+    "categoria": "Finimenti e veicoli da tiro",
+    "pagine_sorgente": "113-114",
+    "peso": "300 kg",
+    "costo": "100 mo",
+    "descrizione": "Peso 300 kg; costo 100 mo.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Oggetto": "Carrozza",
+            "Peso": "300 kg",
+            "Costo": "100 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "nutrimento_al_giorno",
+    "nome": "Nutrimento al giorno",
+    "tipo": "finimento_o_servizio",
+    "categoria": "Finimenti e veicoli da tiro",
+    "pagine_sorgente": "113-114",
+    "peso": "5 kg",
+    "costo": "5 mr",
+    "descrizione": "Peso 5 kg; costo 5 mr.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Oggetto": "Nutrimento al giorno",
+            "Peso": "5 kg",
+            "Costo": "5 mr"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "sella_da_galoppo",
+    "nome": "Sella da galoppo",
+    "tipo": "finimento_o_servizio",
+    "categoria": "Finimenti e veicoli da tiro",
+    "pagine_sorgente": "113-114",
+    "peso": "12,5 kg",
+    "costo": "10 mo",
+    "descrizione": "Peso 12,5 kg; costo 10 mo.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Oggetto": "Sella da galoppo",
+            "Peso": "12,5 kg",
+            "Costo": "10 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "sella_esotica",
+    "nome": "Sella esotica",
+    "tipo": "finimento_o_servizio",
+    "categoria": "Finimenti e veicoli da tiro",
+    "pagine_sorgente": "113-114",
+    "peso": "20 kg",
+    "costo": "60 mo",
+    "descrizione": "Peso 20 kg; costo 60 mo.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Oggetto": "Sella esotica",
+            "Peso": "20 kg",
+            "Costo": "60 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "sella_militare",
+    "nome": "Sella militare",
+    "tipo": "finimento_o_servizio",
+    "categoria": "Finimenti e veicoli da tiro",
+    "pagine_sorgente": "113-114",
+    "peso": "15 kg",
+    "costo": "20 mo",
+    "descrizione": "Peso 15 kg; costo 20 mo.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Oggetto": "Sella militare",
+            "Peso": "15 kg",
+            "Costo": "20 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "slitta",
+    "nome": "Slitta",
+    "tipo": "veicolo_da_tiro",
+    "categoria": "Finimenti e veicoli da tiro",
+    "pagine_sorgente": "113-114",
+    "peso": "150 kg",
+    "costo": "20 mo",
+    "descrizione": "Peso 150 kg; costo 20 mo.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Oggetto": "Slitta",
+            "Peso": "150 kg",
+            "Costo": "20 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "stallaggio_al_giorno",
+    "nome": "Stallaggio al giorno",
+    "tipo": "finimento_o_servizio",
+    "categoria": "Finimenti e veicoli da tiro",
+    "pagine_sorgente": "113-114",
+    "peso": "-",
+    "costo": "5 ma",
+    "descrizione": "Peso -; costo 5 ma.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Oggetto": "Stallaggio al giorno",
+            "Peso": "-",
+            "Costo": "5 ma"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "barca_a_remi",
+    "nome": "Barca a remi",
+    "tipo": "veicolo",
+    "categoria": "Veicoli aerei e imbarcazioni",
+    "pagine_sorgente": "113-114",
+    "velocita": "2,25 km/h",
+    "equipaggio": "1",
+    "passeggeri": "3",
+    "carico": "-",
+    "classe_armatura": "11",
+    "punti_ferita": "50",
+    "soglia_danno": "-",
+    "costo": "50 mo",
+    "descrizione": "Velocita 2,25 km/h; costo 50 mo.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Nave": "Barca a remi",
+            "Velocità": "2,25 km/h",
+            "Equipaggio": "1",
+            "Passeggeri": "3",
+            "Carico": "-",
+            "CA": "11",
+            "PF": "50",
+            "Soglia di danno": "-",
+            "Costo": "50 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "barcone",
+    "nome": "Barcone",
+    "tipo": "veicolo",
+    "categoria": "Veicoli aerei e imbarcazioni",
+    "pagine_sorgente": "113-114",
+    "velocita": "1,5 km/h",
+    "equipaggio": "1",
+    "passeggeri": "6",
+    "carico": "1/2 t",
+    "classe_armatura": "15",
+    "punti_ferita": "100",
+    "soglia_danno": "10",
+    "costo": "3.000 mo",
+    "descrizione": "Velocita 1,5 km/h; costo 3.000 mo.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Nave": "Barcone",
+            "Velocità": "1,5 km/h",
+            "Equipaggio": "1",
+            "Passeggeri": "6",
+            "Carico": "1/2 t",
+            "CA": "15",
+            "PF": "100",
+            "Soglia di danno": "10",
+            "Costo": "3.000 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "dirigibile",
+    "nome": "Dirigibile",
+    "tipo": "veicolo",
+    "categoria": "Veicoli aerei e imbarcazioni",
+    "pagine_sorgente": "113-114",
+    "velocita": "12 km/h",
+    "equipaggio": "10",
+    "passeggeri": "20",
+    "carico": "1 t",
+    "classe_armatura": "13",
+    "punti_ferita": "300",
+    "soglia_danno": "-",
+    "costo": "40.000 mo",
+    "descrizione": "Velocita 12 km/h; costo 40.000 mo.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Nave": "Dirigibile",
+            "Velocità": "12 km/h",
+            "Equipaggio": "10",
+            "Passeggeri": "20",
+            "Carico": "1 t",
+            "CA": "13",
+            "PF": "300",
+            "Soglia di danno": "-",
+            "Costo": "40.000 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "galea",
+    "nome": "Galea",
+    "tipo": "veicolo",
+    "categoria": "Veicoli aerei e imbarcazioni",
+    "pagine_sorgente": "113-114",
+    "velocita": "6 km/h",
+    "equipaggio": "80",
+    "passeggeri": "-",
+    "carico": "150 t",
+    "classe_armatura": "15",
+    "punti_ferita": "500",
+    "soglia_danno": "20",
+    "costo": "30.000 mo",
+    "descrizione": "Velocita 6 km/h; costo 30.000 mo.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Nave": "Galea",
+            "Velocità": "6 km/h",
+            "Equipaggio": "80",
+            "Passeggeri": "-",
+            "Carico": "150 t",
+            "CA": "15",
+            "PF": "500",
+            "Soglia di danno": "20",
+            "Costo": "30.000 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "nave_a_vela",
+    "nome": "Nave a vela",
+    "tipo": "veicolo",
+    "categoria": "Veicoli aerei e imbarcazioni",
+    "pagine_sorgente": "113-114",
+    "velocita": "3 km/h",
+    "equipaggio": "20",
+    "passeggeri": "20",
+    "carico": "100 t",
+    "classe_armatura": "15",
+    "punti_ferita": "300",
+    "soglia_danno": "15",
+    "costo": "10.000 mo",
+    "descrizione": "Velocita 3 km/h; costo 10.000 mo.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Nave": "Nave a vela",
+            "Velocità": "3 km/h",
+            "Equipaggio": "20",
+            "Passeggeri": "20",
+            "Carico": "100 t",
+            "CA": "15",
+            "PF": "300",
+            "Soglia di danno": "15",
+            "Costo": "10.000 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "nave_da_guerra",
+    "nome": "Nave da guerra",
+    "tipo": "veicolo",
+    "categoria": "Veicoli aerei e imbarcazioni",
+    "pagine_sorgente": "113-114",
+    "velocita": "3,75 km/h",
+    "equipaggio": "60",
+    "passeggeri": "60",
+    "carico": "200 t",
+    "classe_armatura": "15",
+    "punti_ferita": "500",
+    "soglia_danno": "20",
+    "costo": "25.000 mo",
+    "descrizione": "Velocita 3,75 km/h; costo 25.000 mo.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Nave": "Nave da guerra",
+            "Velocità": "3,75 km/h",
+            "Equipaggio": "60",
+            "Passeggeri": "60",
+            "Carico": "200 t",
+            "CA": "15",
+            "PF": "500",
+            "Soglia di danno": "20",
+            "Costo": "25.000 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "nave_lunga",
+    "nome": "Nave lunga",
+    "tipo": "veicolo",
+    "categoria": "Veicoli aerei e imbarcazioni",
+    "pagine_sorgente": "113-114",
+    "velocita": "4,5 km/h",
+    "equipaggio": "40",
+    "passeggeri": "150",
+    "carico": "10 t",
+    "classe_armatura": "15",
+    "punti_ferita": "300",
+    "soglia_danno": "15",
+    "costo": "10.000 mo",
+    "descrizione": "Velocita 4,5 km/h; costo 10.000 mo.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Nave": "Nave lunga",
+            "Velocità": "4,5 km/h",
+            "Equipaggio": "40",
+            "Passeggeri": "150",
+            "Carico": "10 t",
+            "CA": "15",
+            "PF": "300",
+            "Soglia di danno": "15",
+            "Costo": "10.000 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "birra_boccale",
+    "nome": "Birra Boccale",
+    "tipo": "vitto_alloggio",
+    "categoria": "Vitto e alloggio",
+    "pagine_sorgente": "114-115",
+    "oggetto": "Birra",
+    "dettaglio": "Boccale",
+    "costo": "4 mr",
+    "descrizione": "Birra (Boccale): 4 mr.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Oggetto": "Birra",
+            "Dettaglio": "Boccale",
+            "Costo": "4 mr"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "fetta_di_formaggio",
+    "nome": "Fetta di formaggio",
+    "tipo": "vitto_alloggio",
+    "categoria": "Vitto e alloggio",
+    "pagine_sorgente": "114-115",
+    "oggetto": "Fetta di formaggio",
+    "dettaglio": "—",
+    "costo": "1 ma",
+    "descrizione": "Fetta di formaggio (—): 1 ma.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Oggetto": "Fetta di formaggio",
+            "Dettaglio": "—",
+            "Costo": "1 ma"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "locanda_squallido",
+    "nome": "Locanda Squallido",
+    "tipo": "vitto_alloggio",
+    "categoria": "Vitto e alloggio",
+    "pagine_sorgente": "114-115",
+    "oggetto": "Locanda",
+    "dettaglio": "Squallido",
+    "costo": "7 mr",
+    "descrizione": "Locanda (Squallido): 7 mr.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Oggetto": "Locanda",
+            "Dettaglio": "Squallido",
+            "Costo": "7 mr"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "locanda_povero",
+    "nome": "Locanda Povero",
+    "tipo": "vitto_alloggio",
+    "categoria": "Vitto e alloggio",
+    "pagine_sorgente": "114-115",
+    "oggetto": "Locanda",
+    "dettaglio": "Povero",
+    "costo": "1 ma",
+    "descrizione": "Locanda (Povero): 1 ma.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Oggetto": "Locanda",
+            "Dettaglio": "Povero",
+            "Costo": "1 ma"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "locanda_modesto",
+    "nome": "Locanda Modesto",
+    "tipo": "vitto_alloggio",
+    "categoria": "Vitto e alloggio",
+    "pagine_sorgente": "114-115",
+    "oggetto": "Locanda",
+    "dettaglio": "Modesto",
+    "costo": "5 ma",
+    "descrizione": "Locanda (Modesto): 5 ma.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Oggetto": "Locanda",
+            "Dettaglio": "Modesto",
+            "Costo": "5 ma"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "locanda_agiato",
+    "nome": "Locanda Agiato",
+    "tipo": "vitto_alloggio",
+    "categoria": "Vitto e alloggio",
+    "pagine_sorgente": "114-115",
+    "oggetto": "Locanda",
+    "dettaglio": "Agiato",
+    "costo": "8 ma",
+    "descrizione": "Locanda (Agiato): 8 ma.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Oggetto": "Locanda",
+            "Dettaglio": "Agiato",
+            "Costo": "8 ma"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "locanda_ricco",
+    "nome": "Locanda Ricco",
+    "tipo": "vitto_alloggio",
+    "categoria": "Vitto e alloggio",
+    "pagine_sorgente": "114-115",
+    "oggetto": "Locanda",
+    "dettaglio": "Ricco",
+    "costo": "2 mo",
+    "descrizione": "Locanda (Ricco): 2 mo.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Oggetto": "Locanda",
+            "Dettaglio": "Ricco",
+            "Costo": "2 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "locanda_aristocratico",
+    "nome": "Locanda Aristocratico",
+    "tipo": "vitto_alloggio",
+    "categoria": "Vitto e alloggio",
+    "pagine_sorgente": "114-115",
+    "oggetto": "Locanda",
+    "dettaglio": "Aristocratico",
+    "costo": "4 mo",
+    "descrizione": "Locanda (Aristocratico): 4 mo.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Oggetto": "Locanda",
+            "Dettaglio": "Aristocratico",
+            "Costo": "4 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "pagnotta",
+    "nome": "Pagnotta",
+    "tipo": "vitto_alloggio",
+    "categoria": "Vitto e alloggio",
+    "pagine_sorgente": "114-115",
+    "oggetto": "Pagnotta",
+    "dettaglio": "—",
+    "costo": "2 mr",
+    "descrizione": "Pagnotta (—): 2 mr.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Oggetto": "Pagnotta",
+            "Dettaglio": "—",
+            "Costo": "2 mr"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "pasto_squallido",
+    "nome": "Pasto Squallido",
+    "tipo": "vitto_alloggio",
+    "categoria": "Vitto e alloggio",
+    "pagine_sorgente": "114-115",
+    "oggetto": "Pasto",
+    "dettaglio": "Squallido",
+    "costo": "1 mr",
+    "descrizione": "Pasto (Squallido): 1 mr.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Oggetto": "Pasto",
+            "Dettaglio": "Squallido",
+            "Costo": "1 mr"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "pasto_povero",
+    "nome": "Pasto Povero",
+    "tipo": "vitto_alloggio",
+    "categoria": "Vitto e alloggio",
+    "pagine_sorgente": "114-115",
+    "oggetto": "Pasto",
+    "dettaglio": "Povero",
+    "costo": "2 mr",
+    "descrizione": "Pasto (Povero): 2 mr.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Oggetto": "Pasto",
+            "Dettaglio": "Povero",
+            "Costo": "2 mr"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "pasto_modesto",
+    "nome": "Pasto Modesto",
+    "tipo": "vitto_alloggio",
+    "categoria": "Vitto e alloggio",
+    "pagine_sorgente": "114-115",
+    "oggetto": "Pasto",
+    "dettaglio": "Modesto",
+    "costo": "1 ma",
+    "descrizione": "Pasto (Modesto): 1 ma.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Oggetto": "Pasto",
+            "Dettaglio": "Modesto",
+            "Costo": "1 ma"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "pasto_agiato",
+    "nome": "Pasto Agiato",
+    "tipo": "vitto_alloggio",
+    "categoria": "Vitto e alloggio",
+    "pagine_sorgente": "114-115",
+    "oggetto": "Pasto",
+    "dettaglio": "Agiato",
+    "costo": "2 ma",
+    "descrizione": "Pasto (Agiato): 2 ma.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Oggetto": "Pasto",
+            "Dettaglio": "Agiato",
+            "Costo": "2 ma"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "pasto_ricco",
+    "nome": "Pasto Ricco",
+    "tipo": "vitto_alloggio",
+    "categoria": "Vitto e alloggio",
+    "pagine_sorgente": "114-115",
+    "oggetto": "Pasto",
+    "dettaglio": "Ricco",
+    "costo": "3 ma",
+    "descrizione": "Pasto (Ricco): 3 ma.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Oggetto": "Pasto",
+            "Dettaglio": "Ricco",
+            "Costo": "3 ma"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "pasto_aristocratico",
+    "nome": "Pasto Aristocratico",
+    "tipo": "vitto_alloggio",
+    "categoria": "Vitto e alloggio",
+    "pagine_sorgente": "114-115",
+    "oggetto": "Pasto",
+    "dettaglio": "Aristocratico",
+    "costo": "6 ma",
+    "descrizione": "Pasto (Aristocratico): 6 ma.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Oggetto": "Pasto",
+            "Dettaglio": "Aristocratico",
+            "Costo": "6 ma"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "vino_comune",
+    "nome": "Vino Comune",
+    "tipo": "vitto_alloggio",
+    "categoria": "Vitto e alloggio",
+    "pagine_sorgente": "114-115",
+    "oggetto": "Vino",
+    "dettaglio": "Comune",
+    "costo": "2 ma",
+    "descrizione": "Vino (Comune): 2 ma.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Oggetto": "Vino",
+            "Dettaglio": "Comune",
+            "Costo": "2 ma"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "vino_pregiato",
+    "nome": "Vino Pregiato",
+    "tipo": "vitto_alloggio",
+    "categoria": "Vitto e alloggio",
+    "pagine_sorgente": "114-115",
+    "oggetto": "Vino",
+    "dettaglio": "Pregiato",
+    "costo": "10 mo",
+    "descrizione": "Vino (Pregiato): 10 mo.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Oggetto": "Vino",
+            "Dettaglio": "Pregiato",
+            "Costo": "10 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "gregario_abile",
+    "nome": "Gregario abile",
+    "tipo": "servizio",
+    "categoria": "Gregari",
+    "pagine_sorgente": "114-115",
+    "disponibilita": "—",
+    "costo": "2 mo al giorno",
+    "descrizione": "Disponibilita —; costo 2 mo al giorno.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Categoria": "Gregari",
+            "Servizio/Livello": "Gregario abile",
+            "Disponibilità": "—",
+            "Costo": "2 mo al giorno"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "gregario_inesperto",
+    "nome": "Gregario inesperto",
+    "tipo": "servizio",
+    "categoria": "Gregari",
+    "pagine_sorgente": "114-115",
+    "disponibilita": "—",
+    "costo": "2 ma al giorno",
+    "descrizione": "Disponibilita —; costo 2 ma al giorno.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Categoria": "Gregari",
+            "Servizio/Livello": "Gregario inesperto",
+            "Disponibilità": "—",
+            "Costo": "2 ma al giorno"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "messaggero",
+    "nome": "Messaggero",
+    "tipo": "servizio",
+    "categoria": "Gregari",
+    "pagine_sorgente": "114-115",
+    "disponibilita": "—",
+    "costo": "2 mr per 1,5 km",
+    "descrizione": "Disponibilita —; costo 2 mr per 1,5 km.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Categoria": "Gregari",
+            "Servizio/Livello": "Messaggero",
+            "Disponibilità": "—",
+            "Costo": "2 mr per 1,5 km"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "servizio_magico_trucchetto",
+    "nome": "Servizio magico Trucchetto",
+    "tipo": "servizio",
+    "categoria": "Servizi magici",
+    "pagine_sorgente": "114-115",
+    "disponibilita": "Villaggio, cittadina o città",
+    "costo": "30 mo",
+    "descrizione": "Disponibilita Villaggio, cittadina o città; costo 30 mo.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Categoria": "Servizi magici",
+            "Servizio/Livello": "Trucchetto",
+            "Disponibilità": "Villaggio, cittadina o città",
+            "Costo": "30 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "servizio_magico_1",
+    "nome": "Servizio magico 1",
+    "tipo": "servizio",
+    "categoria": "Servizi magici",
+    "pagine_sorgente": "114-115",
+    "disponibilita": "Villaggio, cittadina o città",
+    "costo": "50 mo",
+    "descrizione": "Disponibilita Villaggio, cittadina o città; costo 50 mo.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Categoria": "Servizi magici",
+            "Servizio/Livello": "1",
+            "Disponibilità": "Villaggio, cittadina o città",
+            "Costo": "50 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "servizio_magico_2",
+    "nome": "Servizio magico 2",
+    "tipo": "servizio",
+    "categoria": "Servizi magici",
+    "pagine_sorgente": "114-115",
+    "disponibilita": "Villaggio, cittadina o città",
+    "costo": "200 mo",
+    "descrizione": "Disponibilita Villaggio, cittadina o città; costo 200 mo.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Categoria": "Servizi magici",
+            "Servizio/Livello": "2",
+            "Disponibilità": "Villaggio, cittadina o città",
+            "Costo": "200 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "servizio_magico_3",
+    "nome": "Servizio magico 3",
+    "tipo": "servizio",
+    "categoria": "Servizi magici",
+    "pagine_sorgente": "114-115",
+    "disponibilita": "Solo cittadina o città",
+    "costo": "300 mo",
+    "descrizione": "Disponibilita Solo cittadina o città; costo 300 mo.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Categoria": "Servizi magici",
+            "Servizio/Livello": "3",
+            "Disponibilità": "Solo cittadina o città",
+            "Costo": "300 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "servizio_magico_4_5",
+    "nome": "Servizio magico 4-5",
+    "tipo": "servizio",
+    "categoria": "Servizi magici",
+    "pagine_sorgente": "114-115",
+    "disponibilita": "Solo cittadina o città",
+    "costo": "2.000 mo",
+    "descrizione": "Disponibilita Solo cittadina o città; costo 2.000 mo.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Categoria": "Servizi magici",
+            "Servizio/Livello": "4-5",
+            "Disponibilità": "Solo cittadina o città",
+            "Costo": "2.000 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "servizio_magico_6_8",
+    "nome": "Servizio magico 6-8",
+    "tipo": "servizio",
+    "categoria": "Servizi magici",
+    "pagine_sorgente": "114-115",
+    "disponibilita": "Solo città",
+    "costo": "20.000 mo",
+    "descrizione": "Disponibilita Solo città; costo 20.000 mo.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Categoria": "Servizi magici",
+            "Servizio/Livello": "6-8",
+            "Disponibilità": "Solo città",
+            "Costo": "20.000 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "servizio_magico_9",
+    "nome": "Servizio magico 9",
+    "tipo": "servizio",
+    "categoria": "Servizi magici",
+    "pagine_sorgente": "114-115",
+    "disponibilita": "Solo città",
+    "costo": "100.000 mo",
+    "descrizione": "Disponibilita Solo città; costo 100.000 mo.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Categoria": "Servizi magici",
+            "Servizio/Livello": "9",
+            "Disponibilità": "Solo città",
+            "Costo": "100.000 mo"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "moneta_di_rame_mr",
+    "nome": "Moneta di rame (mr)",
+    "tipo": "moneta",
+    "categoria": "Valuta",
+    "pagine_sorgente": 101,
+    "valore_in_mo": "1/100",
+    "descrizione": "Valore in monete d'oro: 1/100.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Moneta": "Moneta di rame (mr)",
+            "Valore in mo": "1/100"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "moneta_d_argento_ma",
+    "nome": "Moneta d'argento (ma)",
+    "tipo": "moneta",
+    "categoria": "Valuta",
+    "pagine_sorgente": 101,
+    "valore_in_mo": "1/10",
+    "descrizione": "Valore in monete d'oro: 1/10.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Moneta": "Moneta d'argento (ma)",
+            "Valore in mo": "1/10"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "moneta_di_electrum_me",
+    "nome": "Moneta di electrum (me)",
+    "tipo": "moneta",
+    "categoria": "Valuta",
+    "pagine_sorgente": 101,
+    "valore_in_mo": "1/2",
+    "descrizione": "Valore in monete d'oro: 1/2.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Moneta": "Moneta di electrum (me)",
+            "Valore in mo": "1/2"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "moneta_d_oro_mo",
+    "nome": "Moneta d'oro (mo)",
+    "tipo": "moneta",
+    "categoria": "Valuta",
+    "pagine_sorgente": 101,
+    "valore_in_mo": "1",
+    "descrizione": "Valore in monete d'oro: 1.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Moneta": "Moneta d'oro (mo)",
+            "Valore in mo": "1"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  },
+  {
+    "id": "moneta_di_platino_mp",
+    "nome": "Moneta di platino (mp)",
+    "tipo": "moneta",
+    "categoria": "Valuta",
+    "pagine_sorgente": 101,
+    "valore_in_mo": "10",
+    "descrizione": "Valore in monete d'oro: 10.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Moneta": "Moneta di platino (mp)",
+            "Valore in mo": "10"
+          }
+        ]
+      }
+    ],
+    "capitolo": "Equipaggiamento"
+  }
+]

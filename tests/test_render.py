@@ -67,3 +67,25 @@ def test_fileclass_well_formed(category):
 @pytest.mark.parametrize("js", sorted(render.JS_DIR.glob("*.js")), ids=lambda p: p.name)
 def test_js_syntax(js):
     assert subprocess.run(["node", "--check", str(js)], capture_output=True).returncode == 0
+
+
+@pytest.mark.skipif(not render.SRD_DIR.is_dir(), reason="SRD non vendorizzata")
+@pytest.mark.parametrize("spec", render.SRD_GEN, ids=[s["dest"] for s in render.SRD_GEN])
+def test_srd_json_loads(spec):
+    """Ogni JSON SRD carica una lista di voci con 'nome'."""
+    entries = render.load_srd(spec["json"])
+    assert entries, f"{spec['json']} -> 0 voci"
+    for entry in entries[:30]:
+        assert entry.get("nome")
+
+
+@pytest.mark.skipif(not render.SRD_DIR.is_dir(), reason="SRD non vendorizzata")
+def test_srd_counts_and_statblock():
+    """Conteggi attesi + il mostro si mappa su uno statblock Fantasy Statblocks."""
+    assert len(render.load_srd("srd_5_2_1_spells.json")) > 300
+    monsters = render.load_srd("srd_5_2_1_monsters.json")
+    assert len(monsters) > 300
+    glossary = render.load_srd("srd_5_2_1_rules_glossary.json")
+    assert sum(1 for g in glossary if g.get("descrittore") == "condizione") == 15
+    sb = render.srd_statblock_yaml(monsters[0], "Basic 5e Layout")
+    assert "name:" in sb and "stats:" in sb and "actions:" in sb

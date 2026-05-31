@@ -1,0 +1,432 @@
+[
+  {
+    "id": "comune",
+    "nome": "Comune",
+    "tipo": "lingua",
+    "categoria": "Standard",
+    "capitolo": "Origini dei personaggi",
+    "pagine_sorgente": "21-23",
+    "tiro_casuale": "—",
+    "descrizione": "Lingua standard. Tiro casuale 1d12: —.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Voce": "Categoria",
+            "Riepilogo": "Standard"
+          },
+          {
+            "Voce": "Tiro casuale",
+            "Riepilogo": "—"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "lingua_dei_segni_comune",
+    "nome": "Lingua dei segni comune",
+    "tipo": "lingua",
+    "categoria": "Standard",
+    "capitolo": "Origini dei personaggi",
+    "pagine_sorgente": "21-23",
+    "tiro_casuale": "1",
+    "descrizione": "Lingua standard. Tiro casuale 1d12: 1.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Voce": "Categoria",
+            "Riepilogo": "Standard"
+          },
+          {
+            "Voce": "Tiro casuale",
+            "Riepilogo": "1"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "draconico",
+    "nome": "Draconico",
+    "tipo": "lingua",
+    "categoria": "Standard",
+    "capitolo": "Origini dei personaggi",
+    "pagine_sorgente": "21-23",
+    "tiro_casuale": "2",
+    "descrizione": "Lingua standard. Tiro casuale 1d12: 2.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Voce": "Categoria",
+            "Riepilogo": "Standard"
+          },
+          {
+            "Voce": "Tiro casuale",
+            "Riepilogo": "2"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "nanico",
+    "nome": "Nanico",
+    "tipo": "lingua",
+    "categoria": "Standard",
+    "capitolo": "Origini dei personaggi",
+    "pagine_sorgente": "21-23",
+    "tiro_casuale": "3-4",
+    "descrizione": "Lingua standard. Tiro casuale 1d12: 3-4.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Voce": "Categoria",
+            "Riepilogo": "Standard"
+          },
+          {
+            "Voce": "Tiro casuale",
+            "Riepilogo": "3-4"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "elfico",
+    "nome": "Elfico",
+    "tipo": "lingua",
+    "categoria": "Standard",
+    "capitolo": "Origini dei personaggi",
+    "pagine_sorgente": "21-23",
+    "tiro_casuale": "5-6",
+    "descrizione": "Lingua standard. Tiro casuale 1d12: 5-6.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Voce": "Categoria",
+            "Riepilogo": "Standard"
+          },
+          {
+            "Voce": "Tiro casuale",
+            "Riepilogo": "5-6"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "gigante",
+    "nome": "Gigante",
+    "tipo": "lingua",
+    "categoria": "Standard",
+    "capitolo": "Origini dei personaggi",
+    "pagine_sorgente": "21-23",
+    "tiro_casuale": "7",
+    "descrizione": "Lingua standard. Tiro casuale 1d12: 7.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Voce": "Categoria",
+            "Riepilogo": "Standard"
+          },
+          {
+            "Voce": "Tiro casuale",
+            "Riepilogo": "7"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "gnomesco",
+    "nome": "Gnomesco",
+    "tipo": "lingua",
+    "categoria": "Standard",
+    "capitolo": "Origini dei personaggi",
+    "pagine_sorgente": "21-23",
+    "tiro_casuale": "8",
+    "descrizione": "Lingua standard. Tiro casuale 1d12: 8.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Voce": "Categoria",
+            "Riepilogo": "Standard"
+          },
+          {
+            "Voce": "Tiro casuale",
+            "Riepilogo": "8"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "goblin",
+    "nome": "Goblin",
+    "tipo": "lingua",
+    "categoria": "Standard",
+    "capitolo": "Origini dei personaggi",
+    "pagine_sorgente": "21-23",
+    "tiro_casuale": "9",
+    "descrizione": "Lingua standard. Tiro casuale 1d12: 9.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Voce": "Categoria",
+            "Riepilogo": "Standard"
+          },
+          {
+            "Voce": "Tiro casuale",
+            "Riepilogo": "9"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "halfling",
+    "nome": "Halfling",
+    "tipo": "lingua",
+    "categoria": "Standard",
+    "capitolo": "Origini dei personaggi",
+    "pagine_sorgente": "21-23",
+    "tiro_casuale": "10-11",
+    "descrizione": "Lingua standard. Tiro casuale 1d12: 10-11.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Voce": "Categoria",
+            "Riepilogo": "Standard"
+          },
+          {
+            "Voce": "Tiro casuale",
+            "Riepilogo": "10-11"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "orchesco",
+    "nome": "Orchesco",
+    "tipo": "lingua",
+    "categoria": "Standard",
+    "capitolo": "Origini dei personaggi",
+    "pagine_sorgente": "21-23",
+    "tiro_casuale": "12",
+    "descrizione": "Lingua standard. Tiro casuale 1d12: 12.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Voce": "Categoria",
+            "Riepilogo": "Standard"
+          },
+          {
+            "Voce": "Tiro casuale",
+            "Riepilogo": "12"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "abissale",
+    "nome": "Abissale",
+    "tipo": "lingua",
+    "categoria": "Rara",
+    "capitolo": "Origini dei personaggi",
+    "pagine_sorgente": "21-23",
+    "descrizione": "Lingua rara.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Voce": "Categoria",
+            "Riepilogo": "Rara"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "celestiale",
+    "nome": "Celestiale",
+    "tipo": "lingua",
+    "categoria": "Rara",
+    "capitolo": "Origini dei personaggi",
+    "pagine_sorgente": "21-23",
+    "descrizione": "Lingua rara.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Voce": "Categoria",
+            "Riepilogo": "Rara"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "druidico",
+    "nome": "Druidico",
+    "tipo": "lingua",
+    "categoria": "Rara",
+    "capitolo": "Origini dei personaggi",
+    "pagine_sorgente": "21-23",
+    "descrizione": "Lingua rara.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Voce": "Categoria",
+            "Riepilogo": "Rara"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "gergo_delle_profondita",
+    "nome": "Gergo delle profondita",
+    "tipo": "lingua",
+    "categoria": "Rara",
+    "capitolo": "Origini dei personaggi",
+    "pagine_sorgente": "21-23",
+    "descrizione": "Lingua rara.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Voce": "Categoria",
+            "Riepilogo": "Rara"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "infernale",
+    "nome": "Infernale",
+    "tipo": "lingua",
+    "categoria": "Rara",
+    "capitolo": "Origini dei personaggi",
+    "pagine_sorgente": "21-23",
+    "descrizione": "Lingua rara.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Voce": "Categoria",
+            "Riepilogo": "Rara"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "primordiale",
+    "nome": "Primordiale",
+    "tipo": "lingua",
+    "categoria": "Rara",
+    "capitolo": "Origini dei personaggi",
+    "pagine_sorgente": "21-23",
+    "descrizione": "Lingua rara. Include i dialetti Aquan, Auran, Ignan e Terran.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Voce": "Categoria",
+            "Riepilogo": "Rara"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "silvano",
+    "nome": "Silvano",
+    "tipo": "lingua",
+    "categoria": "Rara",
+    "capitolo": "Origini dei personaggi",
+    "pagine_sorgente": "21-23",
+    "descrizione": "Lingua rara.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Voce": "Categoria",
+            "Riepilogo": "Rara"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "sottocomune",
+    "nome": "Sottocomune",
+    "tipo": "lingua",
+    "categoria": "Rara",
+    "capitolo": "Origini dei personaggi",
+    "pagine_sorgente": "21-23",
+    "descrizione": "Lingua rara.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Voce": "Categoria",
+            "Riepilogo": "Rara"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "gergo_ladresco",
+    "nome": "Gergo ladresco",
+    "tipo": "lingua",
+    "categoria": "Rara",
+    "capitolo": "Origini dei personaggi",
+    "pagine_sorgente": "21-23",
+    "descrizione": "Lingua rara.",
+    "sezioni": [
+      {
+        "titolo": "Dettagli",
+        "righe": [
+          {
+            "Voce": "Categoria",
+            "Riepilogo": "Rara"
+          }
+        ]
+      }
+    ]
+  }
+]

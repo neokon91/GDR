@@ -1,0 +1,2060 @@
+[
+  {
+    "id": "accecato",
+    "nome": "Accecato",
+    "lettera": "A",
+    "descrittore": "condizione",
+    "pagine_sorgente": 202,
+    "descrizione": "Condizione che impedisce di vedere.",
+    "sezioni": [
+      {
+        "titolo": "Effetti",
+        "blocchi": [
+          {
+            "nome": "Non è in grado di vedere",
+            "descrizione": "La creatura fallisce automaticamente le prove di caratteristica che richiedono la vista."
+          },
+          {
+            "nome": "Influenza sugli attacchi",
+            "descrizione": "I tiri per colpire contro la creatura hanno vantaggio, mentre i suoi tiri per colpire hanno svantaggio."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "affascinato",
+    "nome": "Affascinato",
+    "lettera": "A",
+    "descrittore": "condizione",
+    "pagine_sorgente": 202,
+    "descrizione": "Condizione causata da chi esercita fascino sulla creatura.",
+    "sezioni": [
+      {
+        "titolo": "Effetti",
+        "blocchi": [
+          {
+            "nome": "Non può attaccare chi lo ha affascinato",
+            "descrizione": "La creatura non può attaccare chi l'ha affascinata né bersagliarlo con abilità o effetti magici dannosi."
+          },
+          {
+            "nome": "Vantaggio sociale",
+            "descrizione": "Chi ha affascinato la creatura ha vantaggio alle prove di caratteristica per interagire socialmente con essa."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "afferrare",
+    "nome": "Afferrare",
+    "lettera": "A",
+    "pagine_sorgente": "202-203",
+    "vedi_anche": [
+      "colpo_senz_armi",
+      "afferrato"
+    ],
+    "descrizione": "Una creatura può afferrarne un'altra, spesso tramite colpo senz'armi o tramite attacchi speciali dei mostri.",
+    "sezioni": [
+      {
+        "titolo": "Regole",
+        "blocchi": [
+          {
+            "nome": "Condizione afferrato",
+            "descrizione": "Una creatura afferrata subisce la condizione \"afferrato\"."
+          },
+          {
+            "nome": "Una presa per ogni mano",
+            "descrizione": "Una creatura deve avere una mano libera, o una parte del corpo indicata dalla regola, per mantenere una presa."
+          },
+          {
+            "nome": "Sfuggire a una presa",
+            "descrizione": "La creatura afferrata può usare un'azione per effettuare una prova di Forza (Atletica) o Destrezza (Acrobazia) contro la CD della presa. La condizione termina anche se chi afferra è incapacitato, se la distanza supera la portata o se chi afferra lascia andare il bersaglio."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "afferrato",
+    "nome": "Afferrato",
+    "lettera": "A",
+    "descrittore": "condizione",
+    "pagine_sorgente": 203,
+    "descrizione": "Condizione subita da una creatura tenuta in presa.",
+    "sezioni": [
+      {
+        "titolo": "Effetti",
+        "blocchi": [
+          {
+            "nome": "Velocità 0",
+            "descrizione": "La velocità della creatura è 0 e non può aumentare."
+          },
+          {
+            "nome": "Influenza sugli attacchi",
+            "descrizione": "La creatura ha svantaggio ai tiri per colpire contro bersagli diversi da chi l'ha afferrata."
+          },
+          {
+            "nome": "Movibile",
+            "descrizione": "Chi ha afferrato la creatura può trascinarla o spostarla, pagando movimento extra salvo eccezioni di taglia."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "aiuto",
+    "nome": "Aiuto",
+    "lettera": "A",
+    "descrittore": "azione",
+    "pagine_sorgente": 203,
+    "descrizione": "Con l'azione di Aiuto una creatura supporta un alleato in una prova di caratteristica o in un tiro per colpire.",
+    "sezioni": [
+      {
+        "titolo": "Opzioni",
+        "blocchi": [
+          {
+            "nome": "Aiuto a una prova di caratteristica",
+            "descrizione": "Scegli una competenza in un'abilità o strumento e un alleato che puoi aiutare. L'alleato ha vantaggio alla prossima prova pertinente prima dell'inizio del tuo turno successivo."
+          },
+          {
+            "nome": "Aiuto a un tiro per colpire",
+            "descrizione": "Distrai un nemico entro 1,5 metri da te, concedendo vantaggio al prossimo tiro per colpire di un alleato contro quel nemico prima dell'inizio del tuo turno successivo."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "al_giorno",
+    "nome": "Al giorno",
+    "lettera": "A",
+    "pagine_sorgente": 203,
+    "descrizione": "Se una regola permette un uso per un certo numero di volte al giorno, dopo aver esaurito gli usi occorre terminare un riposo lungo per riusarli."
+  },
+  {
+    "id": "alleato",
+    "nome": "Alleato",
+    "lettera": "A",
+    "pagine_sorgente": 203,
+    "descrizione": "Una creatura è alleata se appartiene al gruppo del personaggio, gli è amica, combatte al suo fianco o è indicata come alleata da una regola o dal GM."
+  },
+  {
+    "id": "allineamento",
+    "nome": "Allineamento",
+    "lettera": "A",
+    "pagine_sorgente": 203,
+    "vedi_anche": [
+      "creazione_del_personaggio"
+    ],
+    "descrizione": "L'allineamento descrive ideali e atteggiamenti etici di una creatura combinando moralità e rapporto con l'ordine."
+  },
+  {
+    "id": "amichevole",
+    "nome": "Amichevole",
+    "lettera": "A",
+    "descrittore": "atteggiamento",
+    "pagine_sorgente": 203,
+    "vedi_anche": [
+      "influenza"
+    ],
+    "descrizione": "Una creatura amichevole ha un'opinione positiva del personaggio. Il personaggio ha vantaggio a una prova di caratteristica per influenzarla."
+  },
+  {
+    "id": "area_di_effetto",
+    "nome": "Area di effetto",
+    "lettera": "A",
+    "pagine_sorgente": 203,
+    "vedi_anche": [
+      "cilindro",
+      "cono",
+      "cubo",
+      "emanazione",
+      "linea",
+      "sfera",
+      "copertura"
+    ],
+    "descrizione": "Molti incantesimi e privilegi indicano un'area di effetto. Ogni area ha un punto di origine e può essere bloccata da ostruzioni che forniscono copertura totale.",
+    "sezioni": [
+      {
+        "titolo": "Forme",
+        "descrizione": "| Forma | Tipo |\n| --- | --- |\n| Cilindro | area di effetto |\n| Cono | area di effetto |\n| Cubo | area di effetto |\n| Emanazione | area di effetto |\n| Linea | area di effetto |\n| Sfera | area di effetto |"
+      }
+    ]
+  },
+  {
+    "id": "arma",
+    "nome": "Arma",
+    "lettera": "A",
+    "pagine_sorgente": 203,
+    "vedi_anche": [
+      "equipaggiamento"
+    ],
+    "descrizione": "Un'arma è un oggetto della categoria delle armi semplici o da guerra."
+  },
+  {
+    "id": "armi_improvvisate",
+    "nome": "Armi improvvisate",
+    "lettera": "A",
+    "pagine_sorgente": "203-204",
+    "descrizione": "Un'arma improvvisata è un oggetto usato come arma alla buona, o un'arma usata in modo contrario al suo scopo normale.",
+    "sezioni": [
+      {
+        "titolo": "Regole",
+        "blocchi": [
+          {
+            "nome": "Competenza",
+            "descrizione": "Non si aggiunge il bonus di competenza ai tiri per colpire con un'arma improvvisata."
+          },
+          {
+            "nome": "Danni",
+            "descrizione": "Se colpisce, infligge 1d4 danni del tipo scelto dal GM."
+          },
+          {
+            "nome": "Gittata",
+            "descrizione": "Ha gittata normale 6 metri e gittata lunga 18 metri."
+          },
+          {
+            "nome": "Equivalenti delle armi",
+            "descrizione": "Se assomiglia a un'arma semplice o da guerra, il GM può usarne le regole."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "arrotondare_per_difetto",
+    "nome": "Arrotondare per difetto",
+    "lettera": "A",
+    "pagine_sorgente": 204,
+    "descrizione": "Quando si divide o moltiplica un numero nel gioco, si arrotonda per difetto se il risultato è frazionario, salvo regole che dicano diversamente."
+  },
+  {
+    "id": "assordato",
+    "nome": "Assordato",
+    "lettera": "A",
+    "descrittore": "condizione",
+    "pagine_sorgente": 204,
+    "descrizione": "Condizione che impedisce di sentire.",
+    "sezioni": [
+      {
+        "titolo": "Effetti",
+        "blocchi": [
+          {
+            "nome": "Non è in grado di sentire",
+            "descrizione": "La creatura non può sentire e fallisce automaticamente le prove di caratteristica che richiedono l'udito."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "attacchi_di_opportunita",
+    "nome": "Attacchi di opportunità",
+    "lettera": "A",
+    "pagine_sorgente": 204,
+    "vedi_anche": [
+      "combattimento"
+    ],
+    "descrizione": "Una creatura può effettuare un attacco di opportunità quando una creatura che vede esce dalla sua portata. Usa la reazione per eseguire un attacco in mischia con arma o colpo senz'armi."
+  },
+  {
+    "id": "attacco",
+    "nome": "Attacco",
+    "lettera": "A",
+    "descrittore": "azione",
+    "pagine_sorgente": 204,
+    "descrizione": "Con l'azione di Attacco, una creatura effettua un tiro per colpire con un'arma o con un colpo senz'armi.",
+    "sezioni": [
+      {
+        "titolo": "Regole",
+        "blocchi": [
+          {
+            "nome": "Equipaggiarsi con le armi e riporle",
+            "descrizione": "Durante l'azione di Attacco puoi anche equipaggiare o riporre un'arma prima o dopo l'attacco."
+          },
+          {
+            "nome": "Muoversi tra un attacco e l'altro",
+            "descrizione": "Se puoi effettuare più attacchi, puoi usare parte o tutto il movimento tra un attacco e l'altro."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "attacco_con_arma",
+    "nome": "Attacco con arma",
+    "lettera": "A",
+    "pagine_sorgente": 204,
+    "vedi_anche": [
+      "arma"
+    ],
+    "descrizione": "Un attacco con arma è un tiro per colpire effettuato con un'arma."
+  },
+  {
+    "id": "attacco_con_incantesimo",
+    "nome": "Attacco con incantesimo",
+    "lettera": "A",
+    "pagine_sorgente": 204,
+    "vedi_anche": [
+      "incantesimo"
+    ],
+    "descrizione": "Un attacco con incantesimo è un tiro per colpire effettuato come parte di un incantesimo o di un altro effetto magico."
+  },
+  {
+    "id": "atteggiamento",
+    "nome": "Atteggiamento",
+    "lettera": "A",
+    "pagine_sorgente": 204,
+    "vedi_anche": [
+      "amichevole",
+      "ostile",
+      "indifferente",
+      "influenza"
+    ],
+    "descrizione": "Ogni mostro ha un atteggiamento iniziale verso il personaggio: amichevole, ostile o indifferente."
+  },
+  {
+    "id": "avvelenato",
+    "nome": "Avvelenato",
+    "lettera": "A",
+    "descrittore": "condizione",
+    "pagine_sorgente": 204,
+    "descrizione": "Condizione causata da veleno o effetti simili.",
+    "sezioni": [
+      {
+        "titolo": "Effetti",
+        "blocchi": [
+          {
+            "nome": "Influenza sulle prove di caratteristica e sugli attacchi",
+            "descrizione": "La creatura ha svantaggio ai tiri per colpire e alle prove di caratteristica."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "avventura",
+    "nome": "Avventura",
+    "lettera": "A",
+    "pagine_sorgente": 204,
+    "vedi_anche": [
+      "incontro"
+    ],
+    "descrizione": "Un'avventura è una serie di incontri che, giocati, compongono una storia."
+  },
+  {
+    "id": "azione",
+    "nome": "Azione",
+    "lettera": "A",
+    "pagine_sorgente": 204,
+    "vedi_anche": [
+      "aiuto",
+      "attacco",
+      "disimpegno",
+      "influenza",
+      "magia",
+      "nascondersi",
+      "prepararsi",
+      "ricerca",
+      "scatto",
+      "schivata",
+      "studio",
+      "utilizzo"
+    ],
+    "descrizione": "Nel proprio turno, una creatura può effettuare un'azione scegliendo tra quelle disponibili o tra azioni speciali concesse dai privilegi."
+  },
+  {
+    "id": "azione_bonus",
+    "nome": "Azione bonus",
+    "lettera": "A",
+    "pagine_sorgente": 205,
+    "vedi_anche": [
+      "azioni"
+    ],
+    "descrizione": "Un'azione bonus è un'azione speciale eseguibile nello stesso turno di un'azione. Una creatura non può effettuare più di un'azione bonus per turno e ne dispone solo se una regola lo indica."
+  },
+  {
+    "id": "bersaglio",
+    "nome": "Bersaglio",
+    "lettera": "B",
+    "pagine_sorgente": 205,
+    "descrizione": "Un bersaglio è una creatura o un oggetto scelto da un tiro per colpire, da un effetto che impone un tiro salvezza o da un incantesimo o altro fenomeno."
+  },
+  {
+    "id": "caduta",
+    "nome": "Caduta",
+    "lettera": "C",
+    "descrittore": "pericolo",
+    "pagine_sorgente": 205,
+    "descrizione": "Una creatura che cade subisce 1d6 danni contundenti per ogni 3 metri di caduta, fino a 20d6, e cade prona quando atterra salvo che eviti i danni.",
+    "sezioni": [
+      {
+        "titolo": "Acqua o liquidi",
+        "blocchi": [
+          {
+            "nome": "Reazione",
+            "descrizione": "Cadendo in acqua o altro liquido, la creatura può usare la reazione per superare una prova di Forza (Atletica) o Destrezza (Acrobazia) con CD 15. Se riesce, i danni della caduta sono dimezzati."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "campagna",
+    "nome": "Campagna",
+    "lettera": "C",
+    "pagine_sorgente": 205,
+    "vedi_anche": [
+      "avventura"
+    ],
+    "descrizione": "Una campagna è una serie di avventure."
+  },
+  {
+    "id": "capacita_di_trasporto",
+    "nome": "Capacità di trasporto",
+    "lettera": "C",
+    "pagine_sorgente": 205,
+    "descrizione": "La taglia e il punteggio di Forza determinano il peso massimo che una creatura può trasportare, trascinare, sollevare o spingere.",
+    "sezioni": [
+      {
+        "titolo": "Capacità di trasporto",
+        "righe": [
+          {
+            "chiave": "Minuscola",
+            "valore": "For x 3,75 kg"
+          },
+          {
+            "chiave": "Piccola/Media",
+            "valore": "For x 7,5 kg"
+          },
+          {
+            "chiave": "Grande",
+            "valore": "For x 15 kg"
+          },
+          {
+            "chiave": "Enorme",
+            "valore": "For x 30 kg"
+          },
+          {
+            "chiave": "Mastodontica",
+            "valore": "For x 60 kg"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "cilindro",
+    "nome": "Cilindro",
+    "lettera": "C",
+    "descrittore": "area di effetto",
+    "pagine_sorgente": 205,
+    "descrizione": "Un cilindro è un'area di effetto che si estende in linee rette da un punto di origine al centro della parte circolare superiore o inferiore. Il punto di origine è incluso nell'area."
+  },
+  {
+    "id": "classe_armatura",
+    "nome": "Classe Armatura",
+    "lettera": "C",
+    "pagine_sorgente": 205,
+    "vedi_anche": [
+      "tiro_per_colpire"
+    ],
+    "descrizione": "La Classe Armatura (CA) è il numero bersaglio per un tiro per colpire. La CA base di un personaggio è 10 + modificatore di Destrezza, salvo metodi alternativi concessi dalle regole."
+  },
+  {
+    "id": "classe_difficolta",
+    "nome": "Classe Difficoltà",
+    "lettera": "C",
+    "pagine_sorgente": 205,
+    "vedi_anche": [
+      "prove_con_d20"
+    ],
+    "descrizione": "La Classe Difficoltà (CD) è il numero bersaglio per una prova di caratteristica o un tiro salvezza."
+  },
+  {
+    "id": "colpo_critico",
+    "nome": "Colpo critico",
+    "lettera": "C",
+    "pagine_sorgente": 205,
+    "vedi_anche": [
+      "danni_e_guarigione"
+    ],
+    "descrizione": "Se un tiro per colpire ottiene 20 sul d20, l'attacco colpisce a prescindere da modificatori o CA e infligge dadi extra: tira due volte tutti i dadi di danno dell'attacco e poi aggiungi i modificatori rilevanti."
+  },
+  {
+    "id": "colpo_senz_armi",
+    "nome": "Colpo senz'armi",
+    "lettera": "C",
+    "pagine_sorgente": "205-206",
+    "vedi_anche": [
+      "afferrare"
+    ],
+    "descrizione": "Un colpo senz'armi è un attacco in mischia che usa il corpo per danneggiare, afferrare o spingere un bersaglio entro 1,5 metri.",
+    "sezioni": [
+      {
+        "titolo": "Opzioni",
+        "blocchi": [
+          {
+            "nome": "Danni",
+            "descrizione": "Effettui un tiro per colpire con bonus pari a modificatore di Forza + bonus di competenza. Se colpisce, infligge danni contundenti pari a 1 + modificatore di Forza."
+          },
+          {
+            "nome": "Presa",
+            "descrizione": "Il bersaglio deve superare un TS su Forza o Destrezza, altrimenti è afferrato. La CD è 8 + modificatore di Forza + bonus di competenza."
+          },
+          {
+            "nome": "Spinta",
+            "descrizione": "Il bersaglio deve superare un TS su Forza o Destrezza, altrimenti è spinto di 1,5 metri o diventa prono. La CD è 8 + modificatore di Forza + bonus di competenza."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "competenza_glossario",
+    "nome": "Competenza",
+    "lettera": "C",
+    "pagine_sorgente": 206,
+    "vedi_anche": [
+      "competenza"
+    ],
+    "descrizione": "Se una creatura ha competenza in qualcosa, aggiunge il bonus di competenza alle prove con d20 effettuate per usarla."
+  },
+  {
+    "id": "competenza_nelle_armature",
+    "nome": "Competenza nelle armature",
+    "lettera": "C",
+    "pagine_sorgente": 206,
+    "vedi_anche": [
+      "armatura",
+      "svantaggio"
+    ],
+    "descrizione": "La competenza nelle armature permette di usare una categoria di armatura senza penalità. Senza competenza, una creatura ha svantaggio alle prove con d20 di Forza o Destrezza e non può lanciare incantesimi; uno scudo senza competenza non concede il bonus alla CA."
+  },
+  {
+    "id": "concentrazione",
+    "nome": "Concentrazione",
+    "lettera": "C",
+    "pagine_sorgente": 206,
+    "descrizione": "Alcuni incantesimi ed effetti richiedono concentrazione. Se il creatore perde la concentrazione, l'effetto termina.",
+    "sezioni": [
+      {
+        "titolo": "Interruzioni",
+        "blocchi": [
+          {
+            "nome": "Un altro effetto di concentrazione",
+            "descrizione": "La concentrazione termina quando inizi a lanciare un incantesimo o attivi un effetto che richiede concentrazione."
+          },
+          {
+            "nome": "Danni",
+            "descrizione": "Quando subisci danni, devi superare un TS su Costituzione. La CD è 10 o metà dei danni subiti, scegliendo il valore più alto, fino a massimo 30."
+          },
+          {
+            "nome": "Incapacitato o morto",
+            "descrizione": "La concentrazione termina se sei incapacitato o muori."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "condizione",
+    "nome": "Condizione",
+    "lettera": "C",
+    "pagine_sorgente": 206,
+    "descrizione": "Una condizione è uno stato di gioco temporaneo. Le condizioni non si accumulano, salvo l'indebolimento.",
+    "sezioni": [
+      {
+        "titolo": "Condizioni del glossario",
+        "descrizione": "| Condizione | ID |\n| --- | --- |\n| Accecato | accecato |\n| Affascinato | affascinato |\n| Afferrato | afferrato |\n| Assordato | assordato |\n| Avvelenato | avvelenato |\n| Incapacitato | incapacitato |\n| Indebolimento | indebolimento |\n| Invisibile | invisibile |\n| Paralizzato | paralizzato |\n| Pietrificato | pietrificato |\n| Privo di sensi | privo_di_sensi |\n| Prono | prono |\n| Spaventato | spaventato |\n| Stordito | stordito |\n| Trattenuto | trattenuto |"
+      }
+    ]
+  },
+  {
+    "id": "cono",
+    "nome": "Cono",
+    "lettera": "C",
+    "descrittore": "area di effetto",
+    "pagine_sorgente": 206,
+    "descrizione": "Un cono è un'area di effetto che si estende in linee rette da un punto di origine nella direzione scelta. La larghezza in un punto è pari alla distanza di quel punto dall'origine. Il punto di origine non è incluso salvo scelta contraria del creatore."
+  },
+  {
+    "id": "copertura",
+    "nome": "Copertura",
+    "lettera": "C",
+    "pagine_sorgente": 206,
+    "vedi_anche": [
+      "combattimento"
+    ],
+    "descrizione": "La copertura protegge un bersaglio dietro un ostacolo. Se più gradi si applicano, vale solo il più protettivo.",
+    "sezioni": [
+      {
+        "titolo": "Gradi",
+        "descrizione": "| Grado | Effetto |\n| --- | --- |\n| Mezza copertura | +2 alla CA e ai TS su Destrezza |\n| Tre quarti di copertura | +5 alla CA e ai TS su Destrezza |\n| Copertura totale | Il bersaglio non può essere bersagliato direttamente |"
+      }
+    ]
+  },
+  {
+    "id": "creatura",
+    "nome": "Creatura",
+    "lettera": "C",
+    "pagine_sorgente": 206,
+    "vedi_anche": [
+      "tipo_di_creatura"
+    ],
+    "descrizione": "Qualsiasi essere nel gioco, incluso un personaggio giocante, è una creatura."
+  },
+  {
+    "id": "cubo",
+    "nome": "Cubo",
+    "lettera": "C",
+    "descrittore": "area di effetto",
+    "pagine_sorgente": 206,
+    "descrizione": "Un cubo è un'area di effetto che si estende in linee rette da un punto di origine su una delle sue facce. La dimensione è la lunghezza di ogni lato. Il punto di origine non è incluso salvo scelta contraria del creatore."
+  },
+  {
+    "id": "dadi_vita",
+    "nome": "Dadi Vita",
+    "lettera": "D",
+    "pagine_sorgente": 207,
+    "vedi_anche": [
+      "riposo_breve"
+    ],
+    "descrizione": "I Dadi Vita aiutano a determinare i punti ferita massimi di un personaggio e possono essere spesi durante un riposo breve per recuperare punti ferita."
+  },
+  {
+    "id": "danni",
+    "nome": "Danni",
+    "lettera": "D",
+    "pagine_sorgente": 207,
+    "descrizione": "I danni rappresentano ciò che fa perdere punti ferita a creature e oggetti colpiti."
+  },
+  {
+    "id": "disidratazione",
+    "nome": "Disidratazione",
+    "lettera": "D",
+    "descrittore": "pericolo",
+    "pagine_sorgente": 207,
+    "vedi_anche": [
+      "indebolimento"
+    ],
+    "descrizione": "Una creatura che beve meno della metà dell'acqua necessaria in un giorno ottiene 1 livello di indebolimento alla fine della giornata. L'indebolimento da disidratazione si rimuove solo bevendo l'intera quantità richiesta in un giorno.",
+    "sezioni": [
+      {
+        "titolo": "Fabbisogno d'acqua giornaliero",
+        "descrizione": "| Taglia | Acqua |\n| --- | --- |\n| Minuscola | 1 litro |\n| Piccola | 4 litri |\n| Media | 4 litri |\n| Grande | 16 litri |\n| Enorme | 64 litri |\n| Mastodontica | 256 litri |"
+      }
+    ]
+  },
+  {
+    "id": "disimpegno",
+    "nome": "Disimpegno",
+    "lettera": "D",
+    "descrittore": "azione",
+    "pagine_sorgente": 207,
+    "descrizione": "Se una creatura effettua l'azione di Disimpegno, il suo movimento non provoca attacchi di opportunità per il resto del turno."
+  },
+  {
+    "id": "effetti_simultanei",
+    "nome": "Effetti simultanei",
+    "lettera": "E",
+    "pagine_sorgente": 207,
+    "descrizione": "Se due o più eventi accadono nello stesso momento in un turno, chi sta giocando quel turno decide l'ordine degli eventi."
+  },
+  {
+    "id": "effetto_magico",
+    "nome": "Effetto magico",
+    "lettera": "E",
+    "pagine_sorgente": 207,
+    "descrizione": "Un effetto è magico se viene creato da un incantesimo, da un oggetto magico o da un fenomeno che una regola definisce magico."
+  },
+  {
+    "id": "emanazione",
+    "nome": "Emanazione",
+    "lettera": "E",
+    "descrittore": "area di effetto",
+    "pagine_sorgente": 207,
+    "descrizione": "Un'emanazione è un'area di effetto che si estende in linee rette da una creatura o da un oggetto in tutte le direzioni. Di norma si muove con la propria origine. L'origine non è inclusa salvo scelta contraria del creatore."
+  },
+  {
+    "id": "fluttuare",
+    "nome": "Fluttuare",
+    "lettera": "F",
+    "pagine_sorgente": 207,
+    "vedi_anche": [
+      "volare"
+    ],
+    "descrizione": "Una creatura che fluttua mentre è in volo evita di cadere in determinate circostanze, secondo la regola o l'effetto che le concede tale capacità."
+  },
+  {
+    "id": "focus_da_incantatore",
+    "nome": "Focus da incantatore",
+    "lettera": "F",
+    "pagine_sorgente": 207,
+    "vedi_anche": [
+      "incantesimo"
+    ],
+    "descrizione": "Un focus da incantatore può sostituire componenti materiali di un incantesimo se tali materiali non sono consumati e non hanno un costo specificato."
+  },
+  {
+    "id": "grado_di_sfida",
+    "nome": "Grado di sfida",
+    "lettera": "G",
+    "pagine_sorgente": 207,
+    "vedi_anche": [
+      "scheda_delle_statistiche"
+    ],
+    "descrizione": "Il grado di sfida (GS) indica quanto è grave la minaccia di un mostro per un gruppo di quattro personaggi. Circostanze e numero di personaggi possono modificare la minaccia effettiva."
+  },
+  {
+    "id": "guarigione",
+    "nome": "Guarigione",
+    "lettera": "G",
+    "pagine_sorgente": 207,
+    "vedi_anche": [
+      "danni_e_guarigione"
+    ],
+    "descrizione": "La guarigione è il modo in cui una creatura recupera punti ferita."
+  },
+  {
+    "id": "illusioni",
+    "nome": "Illusioni",
+    "lettera": "I",
+    "pagine_sorgente": 207,
+    "descrizione": "Incantesimi e altri effetti possono creare illusioni magiche. La descrizione dell'effetto stabilisce cosa fa l'illusione e in che modo inganna sensi o facoltà mentali."
+  },
+  {
+    "id": "immunita",
+    "nome": "Immunità",
+    "lettera": "I",
+    "pagine_sorgente": 208,
+    "descrizione": "Se una creatura è immune a un tipo di danno o a una condizione, non ne subisce gli effetti."
+  },
+  {
+    "id": "in_fiamme",
+    "nome": "In fiamme",
+    "lettera": "I",
+    "descrittore": "pericolo",
+    "pagine_sorgente": 208,
+    "descrizione": "Una creatura o un oggetto in fiamme subisce 1d4 danni da fuoco all'inizio di ogni suo turno. Una creatura può usare un'azione per gettarsi prona e rotolare per estinguere le fiamme."
+  },
+  {
+    "id": "incantesimo",
+    "nome": "Incantesimo",
+    "lettera": "I",
+    "pagine_sorgente": 208,
+    "descrizione": "Un incantesimo è un effetto magico con le caratteristiche descritte nel capitolo Incantesimi."
+  },
+  {
+    "id": "incapacitato",
+    "nome": "Incapacitato",
+    "lettera": "I",
+    "descrittore": "condizione",
+    "pagine_sorgente": 208,
+    "descrizione": "Condizione che impedisce azioni e concentrazione.",
+    "sezioni": [
+      {
+        "titolo": "Effetti",
+        "blocchi": [
+          {
+            "nome": "Inattività",
+            "descrizione": "La creatura non può effettuare azioni, azioni bonus o reazioni."
+          },
+          {
+            "nome": "Nessuna concentrazione",
+            "descrizione": "La concentrazione della creatura è interrotta."
+          },
+          {
+            "nome": "Senza parole",
+            "descrizione": "La creatura non può parlare."
+          },
+          {
+            "nome": "Sorpresa",
+            "descrizione": "Se è incapacitata quando tira per l'iniziativa, subisce svantaggio al tiro."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "incontro",
+    "nome": "Incontro",
+    "lettera": "I",
+    "pagine_sorgente": 208,
+    "vedi_anche": [
+      "interazioni_sociali",
+      "esplorazione",
+      "combattimento"
+    ],
+    "descrizione": "Un incontro è una scena di un'avventura appartenente ad almeno uno dei tre pilastri del gioco: interazioni sociali, esplorazione o combattimento."
+  },
+  {
+    "id": "indebolimento",
+    "nome": "Indebolimento",
+    "lettera": "I",
+    "descrittore": "condizione",
+    "pagine_sorgente": 208,
+    "descrizione": "Condizione cumulativa che rappresenta deterioramento fisico o mentale.",
+    "sezioni": [
+      {
+        "titolo": "Effetti",
+        "blocchi": [
+          {
+            "nome": "Livelli di indebolimento",
+            "descrizione": "Ogni volta che ricevi questa condizione ottieni 1 livello. A 6 livelli muori."
+          },
+          {
+            "nome": "Influenza sulle prove con d20",
+            "descrizione": "Quando effettui una prova con d20, il risultato è ridotto del doppio del tuo livello di indebolimento."
+          },
+          {
+            "nome": "Velocità ridotta",
+            "descrizione": "La velocità è ridotta di 1,5 metri per livello di indebolimento."
+          },
+          {
+            "nome": "Rimozione dei livelli",
+            "descrizione": "Terminando un riposo lungo perdi 1 livello di indebolimento. A livello 0 la condizione termina."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "indifferente",
+    "nome": "Indifferente",
+    "lettera": "I",
+    "descrittore": "atteggiamento",
+    "pagine_sorgente": 208,
+    "vedi_anche": [
+      "influenza"
+    ],
+    "descrizione": "Una creatura indifferente non desidera aiutare né ostacolare il personaggio. È l'atteggiamento predefinito dei mostri."
+  },
+  {
+    "id": "influenza",
+    "nome": "Influenza",
+    "lettera": "I",
+    "descrittore": "azione",
+    "pagine_sorgente": "208-209",
+    "descrizione": "Con l'azione di Influenza, una creatura esorta un mostro a fare qualcosa. Il GM stabilisce se il mostro è ben disposto, maldisposto o esitante.",
+    "sezioni": [
+      {
+        "titolo": "Esiti",
+        "blocchi": [
+          {
+            "nome": "Ben disposto",
+            "descrizione": "Se la richiesta si allinea ai desideri del mostro, il mostro la soddisfa senza prova."
+          },
+          {
+            "nome": "Maldisposto",
+            "descrizione": "Se la richiesta è sgradita o contraria all'allineamento del mostro, il mostro rifiuta senza prova."
+          },
+          {
+            "nome": "Esitante",
+            "descrizione": "Se il mostro esita, serve una prova di caratteristica con CD 15 o pari all'Intelligenza del mostro, scegliendo il valore più alto."
+          }
+        ]
+      },
+      {
+        "titolo": "Prove di Influenza",
+        "descrizione": "| Prova | Interazione |\n| --- | --- |\n| Carisma (Inganno) | Ingannare un mostro che capisce il personaggio |\n| Carisma (Intimidire) | Intimidire un mostro |\n| Carisma (Intrattenere) | Intrattenere un mostro |\n| Carisma (Persuasione) | Persuadere un mostro che capisce il personaggio |\n| Saggezza (Addestrare animali) | Persuadere gentilmente una bestia o una mostruosità |"
+      }
+    ]
+  },
+  {
+    "id": "iniziativa",
+    "nome": "Iniziativa",
+    "lettera": "I",
+    "pagine_sorgente": "208-209",
+    "vedi_anche": [
+      "combattimento"
+    ],
+    "descrizione": "L'iniziativa determina l'ordine dei turni in combattimento. Il punteggio di iniziativa è 10 + modificatore di Destrezza, modificato di +5 con vantaggio o -5 con svantaggio."
+  },
+  {
+    "id": "invisibile",
+    "nome": "Invisibile",
+    "lettera": "I",
+    "descrittore": "condizione",
+    "pagine_sorgente": 209,
+    "descrizione": "Condizione di chi non può essere visto normalmente.",
+    "sezioni": [
+      {
+        "titolo": "Effetti",
+        "blocchi": [
+          {
+            "nome": "Sorpresa",
+            "descrizione": "Se la creatura è invisibile quando tira per l'iniziativa, ha vantaggio al tiro."
+          },
+          {
+            "nome": "Occultamento",
+            "descrizione": "La creatura non è influenzata da effetti che richiedono vista del bersaglio, salvo che il creatore dell'effetto riesca a vederla."
+          },
+          {
+            "nome": "Influenza sugli attacchi",
+            "descrizione": "I tiri per colpire contro la creatura hanno svantaggio e i suoi tiri per colpire hanno vantaggio, salvo contro creature che riescono a vederla."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ispirazione_eroica",
+    "nome": "Ispirazione eroica",
+    "lettera": "I",
+    "pagine_sorgente": 209,
+    "descrizione": "Un personaggio con Ispirazione eroica può spenderla per ripetere il tiro di un dado subito dopo averlo tirato, usando obbligatoriamente il nuovo risultato. Se la ottiene quando già la possiede, può donarla a un personaggio che non ce l'ha."
+  },
+  {
+    "id": "leggermente_oscurata",
+    "nome": "Leggermente oscurata",
+    "lettera": "L",
+    "pagine_sorgente": 209,
+    "vedi_anche": [
+      "luce_fioca",
+      "oscurita",
+      "esplorazione"
+    ],
+    "descrizione": "In un'area leggermente oscurata, una creatura che cerca di vedere qualcosa subisce svantaggio alle prove di Saggezza (Percezione)."
+  },
+  {
+    "id": "linea",
+    "nome": "Linea",
+    "lettera": "L",
+    "descrittore": "area di effetto",
+    "pagine_sorgente": 209,
+    "descrizione": "Una linea è un'area di effetto che si estende da un punto di origine in linea retta lungo la sua lunghezza e copre una larghezza indicata dall'effetto. Il punto di origine non è incluso salvo scelta contraria del creatore."
+  },
+  {
+    "id": "luce_fioca",
+    "nome": "Luce fioca",
+    "lettera": "L",
+    "pagine_sorgente": 209,
+    "vedi_anche": [
+      "leggermente_oscurata",
+      "esplorazione"
+    ],
+    "descrizione": "Un'area con luce fioca è leggermente oscurata."
+  },
+  {
+    "id": "luce_intensa",
+    "nome": "Luce intensa",
+    "lettera": "L",
+    "pagine_sorgente": 209,
+    "vedi_anche": [
+      "esplorazione"
+    ],
+    "descrizione": "La luce intensa rappresenta la normale illuminazione."
+  },
+  {
+    "id": "maestria",
+    "nome": "Maestria",
+    "lettera": "M",
+    "pagine_sorgente": 209,
+    "vedi_anche": [
+      "competenza"
+    ],
+    "descrizione": "La maestria migliora una competenza in un'abilità: quando effettui una prova con quella competenza, il bonus di competenza è raddoppiato, salvo che sia già raddoppiato da un altro privilegio."
+  },
+  {
+    "id": "magia",
+    "nome": "Magia",
+    "lettera": "M",
+    "descrittore": "azione",
+    "pagine_sorgente": 209,
+    "vedi_anche": [
+      "concentrazione"
+    ],
+    "descrizione": "Con l'azione di Magia lanci un incantesimo con tempo di lancio di un'azione, oppure usi un privilegio o oggetto magico che richiede questa azione. Se il lancio richiede 1 minuto o più, devi usare l'azione di Magia a ogni turno e mantenere concentrazione."
+  },
+  {
+    "id": "maledizioni",
+    "nome": "Maledizioni",
+    "lettera": "M",
+    "pagine_sorgente": 209,
+    "descrizione": "Alcuni effetti maledicono creature o oggetti e ne definiscono le conseguenze. Le maledizioni possono essere rimosse da magie appropriate, come rimuovi maledizione o ristorare superiore."
+  },
+  {
+    "id": "malnutrizione",
+    "nome": "Malnutrizione",
+    "lettera": "M",
+    "descrittore": "pericolo",
+    "pagine_sorgente": "209-210",
+    "vedi_anche": [
+      "indebolimento"
+    ],
+    "descrizione": "Una creatura che consuma meno della metà del cibo richiesto in un giorno deve superare un TS su Costituzione con CD 10 o ottenere 1 livello di indebolimento. Senza cibo per 5 giorni ottiene automaticamente indebolimento alla fine del quinto giorno e dei giorni successivi.",
+    "sezioni": [
+      {
+        "titolo": "Fabbisogno di cibo giornaliero",
+        "descrizione": "| Taglia | Cibo |\n| --- | --- |\n| Minuscola | 125 grammi |\n| Piccola | 0,5 chili |\n| Media | 0,5 chili |\n| Grande | 2 chili |\n| Enorme | 8 chili |\n| Mastodontica | 32 chili |"
+      }
+    ]
+  },
+  {
+    "id": "morte",
+    "nome": "Morte",
+    "lettera": "M",
+    "pagine_sorgente": 210,
+    "descrizione": "Una creatura morta non ha punti ferita e non può recuperarne finché non viene riportata in vita dalla magia. Quando torna in vita, conserva condizioni, contagi o maledizioni ancora in corso, perde un livello di indebolimento se ne aveva, e perde la sintonia con gli oggetti magici."
+  },
+  {
+    "id": "mostro",
+    "nome": "Mostro",
+    "lettera": "M",
+    "pagine_sorgente": 210,
+    "vedi_anche": [
+      "creatura",
+      "personaggio_non_giocante"
+    ],
+    "descrizione": "Una creatura controllata dal GM è un mostro, anche se è benevola."
+  },
+  {
+    "id": "mutaforma",
+    "nome": "Mutaforma",
+    "lettera": "M",
+    "pagine_sorgente": 210,
+    "descrizione": "Se un effetto consente di mutare forma, la descrizione dell'effetto indica cosa accade. Salvo diversa indicazione, condizioni, incantesimi, maledizioni ed effetti in corso si trasmettono alla nuova forma."
+  },
+  {
+    "id": "nascondersi",
+    "nome": "Nascondersi",
+    "lettera": "N",
+    "descrittore": "azione",
+    "pagine_sorgente": 210,
+    "descrizione": "Con l'azione di Nascondersi provi a nasconderti superando una prova di Destrezza (Furtività) con CD 15 mentre sei in un'area pesantemente oscurata, dietro tre quarti di copertura o copertura totale, e fuori dal campo visivo dei nemici.",
+    "sezioni": [
+      {
+        "titolo": "Fine della condizione nascosta",
+        "blocchi": [
+          {
+            "nome": "Rumore",
+            "descrizione": "Termina se emetti un suono più forte di un sussurro."
+          },
+          {
+            "nome": "Attacco o magia verbale",
+            "descrizione": "Termina se effettui un tiro per colpire o lanci un incantesimo con componente verbale."
+          },
+          {
+            "nome": "Trovato",
+            "descrizione": "Termina se un nemico ti trova."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "nemico",
+    "nome": "Nemico",
+    "lettera": "N",
+    "pagine_sorgente": 210,
+    "descrizione": "Una creatura è nemica se combatte contro il personaggio, agisce per danneggiarlo o è indicata come nemica da una regola o dal GM."
+  },
+  {
+    "id": "nuotare",
+    "nome": "Nuotare",
+    "lettera": "N",
+    "pagine_sorgente": 210,
+    "vedi_anche": [
+      "velocita_di_nuoto"
+    ],
+    "descrizione": "Quando nuoti, ogni 30 centimetri di movimento costano 30 centimetri extra, o 60 centimetri extra in terreno difficile. Una velocità di nuoto ignora questi costi extra."
+  },
+  {
+    "id": "oggetto",
+    "nome": "Oggetto",
+    "lettera": "O",
+    "pagine_sorgente": 210,
+    "vedi_anche": [
+      "rompere_gli_oggetti"
+    ],
+    "descrizione": "Un oggetto è una cosa distinta e non vivente. Oggetti compositi, come edifici, comprendono più oggetti."
+  },
+  {
+    "id": "oscurita",
+    "nome": "Oscurità",
+    "lettera": "O",
+    "pagine_sorgente": 210,
+    "vedi_anche": [
+      "pesantemente_oscurata",
+      "esplorazione"
+    ],
+    "descrizione": "Un'area di oscurità è pesantemente oscurata."
+  },
+  {
+    "id": "ostile",
+    "nome": "Ostile",
+    "lettera": "O",
+    "descrittore": "atteggiamento",
+    "pagine_sorgente": 210,
+    "vedi_anche": [
+      "influenza"
+    ],
+    "descrizione": "Una creatura ostile ha un'opinione negativa del personaggio. Il personaggio subisce svantaggio a una prova di caratteristica per influenzarla."
+  },
+  {
+    "id": "paralizzato",
+    "nome": "Paralizzato",
+    "lettera": "P",
+    "descrittore": "condizione",
+    "pagine_sorgente": 210,
+    "descrizione": "Condizione che blocca movimento e difesa.",
+    "sezioni": [
+      {
+        "titolo": "Effetti",
+        "blocchi": [
+          {
+            "nome": "Incapacitato",
+            "descrizione": "La creatura ha la condizione incapacitato."
+          },
+          {
+            "nome": "Velocità 0",
+            "descrizione": "La velocità è 0 e non può aumentare."
+          },
+          {
+            "nome": "Influenza sui tiri salvezza",
+            "descrizione": "La creatura fallisce automaticamente i TS su Forza e Destrezza."
+          },
+          {
+            "nome": "Influenza sugli attacchi",
+            "descrizione": "I tiri per colpire contro la creatura hanno vantaggio."
+          },
+          {
+            "nome": "Colpi critici automatici",
+            "descrizione": "Ogni tiro per colpire che la colpisce è critico se l'attaccante è entro 1,5 metri."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "percezione_passiva",
+    "nome": "Percezione passiva",
+    "lettera": "P",
+    "pagine_sorgente": 211,
+    "descrizione": "La Percezione passiva misura la consapevolezza generale dell'ambiente. È pari a 10 + bonus alla prova di Saggezza (Percezione), con +5 in caso di vantaggio e -5 in caso di svantaggio."
+  },
+  {
+    "id": "percezione_tellurica",
+    "nome": "Percezione tellurica",
+    "lettera": "P",
+    "pagine_sorgente": 211,
+    "descrizione": "Una creatura con percezione tellurica individua creature e oggetti in movimento entro un raggio specifico se entrambi sono a contatto con la stessa superficie o liquido. Non individua bersagli in aria e non conta come vista."
+  },
+  {
+    "id": "pericolo",
+    "nome": "Pericolo",
+    "lettera": "P",
+    "pagine_sorgente": 211,
+    "vedi_anche": [
+      "caduta",
+      "disidratazione",
+      "in_fiamme",
+      "malnutrizione",
+      "soffocamento"
+    ],
+    "descrizione": "Un pericolo è un rischio ambientale."
+  },
+  {
+    "id": "personaggio_giocante",
+    "nome": "Personaggio giocante",
+    "lettera": "P",
+    "pagine_sorgente": 211,
+    "vedi_anche": [
+      "creazione_del_personaggio"
+    ],
+    "descrizione": "Un personaggio giocante è un personaggio controllato da un giocatore."
+  },
+  {
+    "id": "personaggio_non_giocante",
+    "nome": "Personaggio non giocante",
+    "lettera": "P",
+    "pagine_sorgente": 211,
+    "vedi_anche": [
+      "mostro"
+    ],
+    "descrizione": "Un personaggio non giocante (PNG) è un mostro con nome proprio e personalità distinta."
+  },
+  {
+    "id": "pesantemente_oscurata",
+    "nome": "Pesantemente oscurata",
+    "lettera": "P",
+    "pagine_sorgente": 211,
+    "vedi_anche": [
+      "accecato",
+      "oscurita",
+      "esplorazione"
+    ],
+    "descrizione": "Se cerchi di scorgere qualcosa in un'area pesantemente oscurata, hai la condizione accecato."
+  },
+  {
+    "id": "pietrificato",
+    "nome": "Pietrificato",
+    "lettera": "P",
+    "descrittore": "condizione",
+    "pagine_sorgente": 211,
+    "descrizione": "Condizione che trasforma la creatura in sostanza solida inanimata.",
+    "sezioni": [
+      {
+        "titolo": "Effetti",
+        "blocchi": [
+          {
+            "nome": "Trasformazione in sostanza inanimata",
+            "descrizione": "La creatura e gli oggetti non magici indossati o trasportati diventano una sostanza solida inanimata; la creatura smette di invecchiare e il peso è decuplicato."
+          },
+          {
+            "nome": "Incapacitato",
+            "descrizione": "La creatura ha la condizione incapacitato."
+          },
+          {
+            "nome": "Velocità 0",
+            "descrizione": "La velocità è 0 e non può aumentare."
+          },
+          {
+            "nome": "Influenza sugli attacchi",
+            "descrizione": "I tiri per colpire contro la creatura hanno vantaggio."
+          },
+          {
+            "nome": "Influenza sui tiri salvezza",
+            "descrizione": "La creatura fallisce automaticamente i TS su Forza e Destrezza."
+          },
+          {
+            "nome": "Resistenza ai danni",
+            "descrizione": "La creatura è resistente a tutti i danni."
+          },
+          {
+            "nome": "Immunità ai veleni",
+            "descrizione": "La creatura è immune alla condizione avvelenato."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "portata",
+    "nome": "Portata",
+    "lettera": "P",
+    "pagine_sorgente": 211,
+    "descrizione": "Una creatura ha portata di 1,5 metri salvo diversa indicazione di una regola."
+  },
+  {
+    "id": "possessione",
+    "nome": "Possessione",
+    "lettera": "P",
+    "pagine_sorgente": 211,
+    "descrizione": "Alcuni effetti fanno possedere una creatura da un'altra creatura o entità. L'effetto definisce come avviene la possessione; alcune magie possono impedirla o terminarla."
+  },
+  {
+    "id": "prepararsi",
+    "nome": "Prepararsi",
+    "lettera": "P",
+    "descrittore": "azione",
+    "pagine_sorgente": 211,
+    "descrizione": "Con l'azione di Prepararsi scegli una circostanza percettibile come innesco e un'azione o movimento da eseguire con la tua reazione prima dell'inizio del tuo turno successivo.",
+    "sezioni": [
+      {
+        "titolo": "Incantesimi preparati",
+        "blocchi": [
+          {
+            "nome": "Concentrazione",
+            "descrizione": "Preparare un incantesimo richiede lanciarlo normalmente e trattenere la magia con concentrazione fino all'innesco. Se la concentrazione termina, l'incantesimo si dissipa senza effetto."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "privo_di_sensi",
+    "nome": "Privo di sensi",
+    "lettera": "P",
+    "descrittore": "condizione",
+    "pagine_sorgente": 212,
+    "descrizione": "Condizione di una creatura non cosciente.",
+    "sezioni": [
+      {
+        "titolo": "Effetti",
+        "blocchi": [
+          {
+            "nome": "Inerte",
+            "descrizione": "La creatura ha le condizioni incapacitato e prono e lascia cadere ciò che impugna."
+          },
+          {
+            "nome": "Velocità 0",
+            "descrizione": "La velocità è 0 e non può aumentare."
+          },
+          {
+            "nome": "Influenza sugli attacchi",
+            "descrizione": "I tiri per colpire contro la creatura hanno vantaggio."
+          },
+          {
+            "nome": "Influenza sui tiri salvezza",
+            "descrizione": "La creatura fallisce automaticamente i TS su Forza e Destrezza."
+          },
+          {
+            "nome": "Colpi critici automatici",
+            "descrizione": "Ogni tiro per colpire che la colpisce è critico se l'attaccante è entro 1,5 metri."
+          },
+          {
+            "nome": "Ignaro",
+            "descrizione": "La creatura non è consapevole di ciò che la circonda."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "prono",
+    "nome": "Prono",
+    "lettera": "P",
+    "descrittore": "condizione",
+    "pagine_sorgente": 212,
+    "descrizione": "Condizione di una creatura a terra.",
+    "sezioni": [
+      {
+        "titolo": "Effetti",
+        "blocchi": [
+          {
+            "nome": "Movimento limitato",
+            "descrizione": "La creatura può solo strisciare o spendere metà della velocità per rialzarsi. Se la velocità è 0, non può rialzarsi."
+          },
+          {
+            "nome": "Influenza sugli attacchi",
+            "descrizione": "La creatura ha svantaggio ai tiri per colpire. Gli attacchi contro di lei hanno vantaggio entro 1,5 metri, altrimenti svantaggio."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "prova_con_d20",
+    "nome": "Prova con D20",
+    "lettera": "P",
+    "pagine_sorgente": 212,
+    "vedi_anche": [
+      "prove_con_d20"
+    ],
+    "descrizione": "Le prove con d20 includono prove di caratteristica, tiri per colpire e tiri salvezza. Se un elemento influenza le prove con d20, influenza tutti e tre questi tiri."
+  },
+  {
+    "id": "prova_di_caratteristica",
+    "nome": "Prova di caratteristica",
+    "lettera": "P",
+    "pagine_sorgente": 212,
+    "vedi_anche": [
+      "prove_con_d20",
+      "competenza"
+    ],
+    "descrizione": "Una prova di caratteristica è una prova con d20 che rappresenta l'uso di una caratteristica o di un'abilità collegata per superare una sfida."
+  },
+  {
+    "id": "punteggio_di_caratteristica_e_modificatore",
+    "nome": "Punteggio di caratteristica e modificatore",
+    "lettera": "P",
+    "pagine_sorgente": 212,
+    "vedi_anche": [
+      "sei_caratteristiche"
+    ],
+    "descrizione": "Una creatura ha sei punteggi di caratteristica, ciascuno con un modificatore. Quando effettui una prova con d20 relativa a una caratteristica, o una regola lo richiede, aggiungi il modificatore corrispondente."
+  },
+  {
+    "id": "punti_esperienza",
+    "nome": "Punti esperienza",
+    "lettera": "P",
+    "pagine_sorgente": 212,
+    "vedi_anche": [
+      "avanzamento_di_livello"
+    ],
+    "descrizione": "I punti esperienza (PE) sono assegnati dal GM superando sfide e completando avventure. Quando il totale supera una soglia, il livello aumenta."
+  },
+  {
+    "id": "punti_ferita",
+    "nome": "Punti ferita",
+    "lettera": "P",
+    "pagine_sorgente": 212,
+    "vedi_anche": [
+      "rompere_gli_oggetti",
+      "danni_e_guarigione"
+    ],
+    "descrizione": "I punti ferita (PF) misurano quanto è difficile uccidere o distruggere una creatura o oggetto. I danni li riducono e la guarigione li ripristina, entro il massimo e non sotto 0."
+  },
+  {
+    "id": "punti_ferita_temporanei",
+    "nome": "Punti ferita temporanei",
+    "lettera": "P",
+    "pagine_sorgente": 212,
+    "vedi_anche": [
+      "danni_e_guarigione"
+    ],
+    "descrizione": "I punti ferita temporanei sono concessi da alcuni effetti e ammortizzano la perdita dei punti ferita reali."
+  },
+  {
+    "id": "reazione",
+    "nome": "Reazione",
+    "lettera": "R",
+    "pagine_sorgente": 212,
+    "vedi_anche": [
+      "attacchi_di_opportunita",
+      "azioni"
+    ],
+    "descrizione": "Una reazione è un'azione speciale eseguita in risposta a un innesco. Dopo averla usata, non puoi usarne un'altra fino all'inizio del tuo turno successivo."
+  },
+  {
+    "id": "resistenza",
+    "nome": "Resistenza",
+    "lettera": "R",
+    "pagine_sorgente": 212,
+    "vedi_anche": [
+      "danni_e_guarigione"
+    ],
+    "descrizione": "Se una creatura ha resistenza a un tipo di danno, i danni di quel tipo sono dimezzati, arrotondando per difetto. Si applica una sola volta per istanza di danno."
+  },
+  {
+    "id": "ricerca",
+    "nome": "Ricerca",
+    "lettera": "R",
+    "descrittore": "azione",
+    "pagine_sorgente": "212-213",
+    "descrizione": "Con l'azione di Ricerca effettui una prova di Saggezza per discernere qualcosa che non sia ovvio.",
+    "sezioni": [
+      {
+        "titolo": "Ricerca",
+        "descrizione": "| Abilità | Elemento da individuare |\n| --- | --- |\n| Intuizione | Stato mentale di una creatura |\n| Medicina | Malattia o causa di morte di una creatura |\n| Percezione | Creature o oggetti nascosti |\n| Sopravvivenza | Tracce o cibo |"
+      }
+    ]
+  },
+  {
+    "id": "riposo_breve",
+    "nome": "Riposo breve",
+    "lettera": "R",
+    "pagine_sorgente": 213,
+    "descrizione": "Un riposo breve è 1 ora di inattività leggera. Per iniziarlo devi avere almeno 1 punto ferita. Alla fine puoi spendere Dadi Vita e recuperare capacità che si ricaricano con riposo breve.",
+    "sezioni": [
+      {
+        "titolo": "Interruzione",
+        "blocchi": [
+          {
+            "nome": "Eventi",
+            "descrizione": "Tirare per l'iniziativa, lanciare un incantesimo diverso da un trucchetto o subire danni interrompe il riposo e impedisce di riceverne i benefici."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "riposo_lungo",
+    "nome": "Riposo lungo",
+    "lettera": "R",
+    "pagine_sorgente": 213,
+    "vedi_anche": [
+      "riposo_breve"
+    ],
+    "descrizione": "Un riposo lungo è un periodo di almeno 8 ore, con almeno 6 ore di sonno e non più di 2 ore di attività poco impegnative. Dopo un riposo lungo devi aspettare almeno 16 ore prima di iniziarne un altro.",
+    "sezioni": [
+      {
+        "titolo": "Benefici",
+        "blocchi": [
+          {
+            "nome": "Recupero",
+            "descrizione": "Recuperi tutti i punti ferita perduti e tutti i Dadi Vita spesi; i punti ferita massimi e i punteggi di caratteristica ridotti tornano normali."
+          },
+          {
+            "nome": "Indebolimento",
+            "descrizione": "Se hai indebolimento, questo diminuisce di 1 livello."
+          },
+          {
+            "nome": "Capacità speciali",
+            "descrizione": "Le capacità che si ricaricano con un riposo lungo si ricaricano come indicato."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "rituale",
+    "nome": "Rituale",
+    "lettera": "R",
+    "pagine_sorgente": 213,
+    "vedi_anche": [
+      "incantesimo"
+    ],
+    "descrizione": "Se hai preparato un incantesimo con descrittore rituale, puoi lanciarlo come rituale. Richiede 10 minuti in più, non consuma slot e non può essere lanciato a livello superiore."
+  },
+  {
+    "id": "rompere_gli_oggetti",
+    "nome": "Rompere gli oggetti",
+    "lettera": "R",
+    "pagine_sorgente": "213-214",
+    "descrizione": "Gli oggetti possono essere danneggiati da attacchi o incantesimi. Un oggetto fragile può essere rotto automaticamente a discrezione del GM con l'azione di Attacco o Utilizzo.",
+    "sezioni": [
+      {
+        "titolo": "Classe Armatura degli oggetti",
+        "descrizione": "| Materiale | CA |\n| --- | --- |\n| Stoffa, carta, corda | 11 |\n| Cristallo, vetro, ghiaccio | 13 |\n| Legno | 15 |\n| Pietra | 17 |\n| Ferro, acciaio | 19 |\n| Mithral | 21 |\n| Adamantio | 23 |"
+      },
+      {
+        "titolo": "Punti ferita degli oggetti",
+        "righe": [
+          {
+            "chiave": "Minuscola",
+            "valore": "2 (1d4)"
+          },
+          {
+            "chiave": "Piccola",
+            "valore": "3 (1d6)"
+          },
+          {
+            "chiave": "Media",
+            "valore": "4 (1d8)"
+          },
+          {
+            "chiave": "Grande",
+            "valore": "5 (1d10)"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "saltare",
+    "nome": "Saltare",
+    "lettera": "S",
+    "pagine_sorgente": 214,
+    "vedi_anche": [
+      "salto_in_lungo",
+      "salto_in_alto"
+    ],
+    "descrizione": "Quando salti puoi compiere un salto in lungo o un salto in alto."
+  },
+  {
+    "id": "salto_in_alto",
+    "nome": "Salto in alto",
+    "lettera": "S",
+    "pagine_sorgente": 214,
+    "descrizione": "Con rincorsa di almeno 3 metri, salti in alto di 3 + modificatore di Forza moltiplicato per 30 centimetri, minimo 0. Da fermo raggiungi metà altezza. Ogni 30 centimetri saltati costano 30 centimetri di movimento."
+  },
+  {
+    "id": "salto_in_lungo",
+    "nome": "Salto in lungo",
+    "lettera": "S",
+    "pagine_sorgente": 214,
+    "descrizione": "Con rincorsa di almeno 3 metri, salti in lungo di una distanza pari al punteggio di Forza moltiplicato per 30 centimetri. Da fermo copri metà distanza. Ogni 30 centimetri saltati costano 30 centimetri di movimento."
+  },
+  {
+    "id": "sanguinante",
+    "nome": "Sanguinante",
+    "lettera": "S",
+    "pagine_sorgente": 214,
+    "descrizione": "Una creatura è sanguinante se le rimane metà o meno dei suoi punti ferita."
+  },
+  {
+    "id": "scalare",
+    "nome": "Scalare",
+    "lettera": "S",
+    "pagine_sorgente": 214,
+    "vedi_anche": [
+      "velocita_di_scalata"
+    ],
+    "descrizione": "Quando scali, ogni 30 centimetri di movimento costano 30 centimetri extra, o 60 centimetri extra in terreno difficile. Una velocità di scalata ignora questi costi extra."
+  },
+  {
+    "id": "scatto",
+    "nome": "Scatto",
+    "lettera": "S",
+    "descrittore": "azione",
+    "pagine_sorgente": 214,
+    "vedi_anche": [
+      "velocita"
+    ],
+    "descrizione": "Con l'azione di Scatto ottieni movimento extra per il turno pari alla tua velocità dopo i modificatori. Se hai velocità speciali, puoi scegliere quale usare."
+  },
+  {
+    "id": "scheda_del_personaggio",
+    "nome": "Scheda del personaggio",
+    "lettera": "S",
+    "pagine_sorgente": 215,
+    "vedi_anche": [
+      "creazione_del_personaggio"
+    ],
+    "descrizione": "La scheda del personaggio è una nota digitale o cartacea usata per tenere traccia delle informazioni del personaggio."
+  },
+  {
+    "id": "scheda_delle_statistiche",
+    "nome": "Scheda delle statistiche",
+    "lettera": "S",
+    "pagine_sorgente": 215,
+    "descrizione": "Una scheda delle statistiche contiene le statistiche di gioco di un mostro: taglia, tipo, allineamento, CA, iniziativa, PF, velocità, caratteristiche, abilità, resistenze, immunità, sensi, lingue, GS e azioni."
+  },
+  {
+    "id": "schivata",
+    "nome": "Schivata",
+    "lettera": "S",
+    "descrittore": "azione",
+    "pagine_sorgente": 215,
+    "descrizione": "Con l'azione di Schivata, fino all'inizio del tuo turno successivo gli attacchi contro di te hanno svantaggio se vedi l'attaccante e i tuoi TS su Destrezza hanno vantaggio. Perdi il beneficio se sei incapacitato o la velocità scende a 0."
+  },
+  {
+    "id": "scurovisione",
+    "nome": "Scurovisione",
+    "lettera": "S",
+    "pagine_sorgente": 215,
+    "vedi_anche": [
+      "esplorazione"
+    ],
+    "descrizione": "Con scurovisione vedi in luce fioca come luce intensa e in oscurità come luce fioca entro un raggio specificato. Nell'oscurità distingui solo sfumature di grigio."
+  },
+  {
+    "id": "sfera",
+    "nome": "Sfera",
+    "lettera": "S",
+    "descrittore": "area di effetto",
+    "pagine_sorgente": 216,
+    "descrizione": "Una sfera è un'area di effetto che si estende in tutte le direzioni da un punto di origine. L'effetto ne specifica il raggio. Il punto di origine è incluso."
+  },
+  {
+    "id": "sintonia",
+    "nome": "Sintonia",
+    "lettera": "S",
+    "pagine_sorgente": 216,
+    "vedi_anche": [
+      "oggetti_magici"
+    ],
+    "descrizione": "Alcuni oggetti magici richiedono sintonia prima di poter usare le loro proprietà. Una creatura può essere in sintonia con al massimo tre oggetti magici alla volta."
+  },
+  {
+    "id": "soffocamento",
+    "nome": "Soffocamento",
+    "lettera": "S",
+    "descrittore": "pericolo",
+    "pagine_sorgente": 216,
+    "descrizione": "Una creatura può trattenere il fiato per 1 + modificatore di Costituzione minuti, minimo 30 secondi. Quando resta senza fiato o soffoca, ottiene 1 livello di indebolimento alla fine di ogni suo turno finché non respira di nuovo."
+  },
+  {
+    "id": "soglia_di_danno",
+    "nome": "Soglia di danno",
+    "lettera": "S",
+    "pagine_sorgente": 216,
+    "descrizione": "Una creatura o oggetto con soglia di danno è immune ai danni inferiori alla soglia da un singolo attacco o effetto. Se i danni raggiungono o superano la soglia, subisce l'intera istanza di danno."
+  },
+  {
+    "id": "sorpresa",
+    "nome": "Sorpresa",
+    "lettera": "S",
+    "pagine_sorgente": 216,
+    "vedi_anche": [
+      "combattimento"
+    ],
+    "descrizione": "Una creatura colta alla sprovvista all'inizio del combattimento è sorpresa e subisce svantaggio al tiro per l'iniziativa."
+  },
+  {
+    "id": "spaventato",
+    "nome": "Spaventato",
+    "lettera": "S",
+    "descrittore": "condizione",
+    "pagine_sorgente": 216,
+    "descrizione": "Condizione causata dalla paura.",
+    "sezioni": [
+      {
+        "titolo": "Effetti",
+        "blocchi": [
+          {
+            "nome": "Influenza sulle prove di caratteristica e sugli attacchi",
+            "descrizione": "La creatura ha svantaggio alle prove di caratteristica e ai tiri per colpire finché la fonte della paura è nel suo campo visivo."
+          },
+          {
+            "nome": "Non è in grado di avvicinarsi",
+            "descrizione": "La creatura non può avvicinarsi volontariamente alla fonte della paura."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "spazio_libero",
+    "nome": "Spazio libero",
+    "lettera": "S",
+    "pagine_sorgente": 216,
+    "descrizione": "Uno spazio è libero se nessuna creatura si trova al suo interno e non è completamente pieno di oggetti."
+  },
+  {
+    "id": "spazio_occupato",
+    "nome": "Spazio occupato",
+    "lettera": "S",
+    "pagine_sorgente": 216,
+    "descrizione": "Uno spazio è occupato se una creatura si trova al suo interno o se è completamente pieno di oggetti."
+  },
+  {
+    "id": "stabile",
+    "nome": "Stabile",
+    "lettera": "S",
+    "pagine_sorgente": 216,
+    "vedi_anche": [
+      "danni_e_guarigione"
+    ],
+    "descrizione": "Una creatura è stabile se ha 0 punti ferita ma non deve effettuare tiri salvezza contro morte."
+  },
+  {
+    "id": "stordito",
+    "nome": "Stordito",
+    "lettera": "S",
+    "descrittore": "condizione",
+    "pagine_sorgente": 216,
+    "descrizione": "Condizione che impedisce di agire e rende vulnerabili.",
+    "sezioni": [
+      {
+        "titolo": "Effetti",
+        "blocchi": [
+          {
+            "nome": "Incapacitato",
+            "descrizione": "La creatura ha la condizione incapacitato."
+          },
+          {
+            "nome": "Influenza sui tiri salvezza",
+            "descrizione": "La creatura fallisce automaticamente i TS su Forza e Destrezza."
+          },
+          {
+            "nome": "Influenza sugli attacchi",
+            "descrizione": "I tiri per colpire contro la creatura hanno vantaggio."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "strisciare",
+    "nome": "Strisciare",
+    "lettera": "S",
+    "pagine_sorgente": 216,
+    "vedi_anche": [
+      "velocita"
+    ],
+    "descrizione": "Quando strisci, ogni 30 centimetri di movimento costano 30 centimetri extra, o 60 centimetri extra in terreno difficile."
+  },
+  {
+    "id": "studio",
+    "nome": "Studio",
+    "lettera": "S",
+    "descrittore": "azione",
+    "pagine_sorgente": 216,
+    "descrizione": "Con l'azione di Studio effettui una prova di Intelligenza per analizzare memoria, libri, indizi o altre fonti di conoscenza.",
+    "sezioni": [
+      {
+        "titolo": "Aree di conoscenza",
+        "descrizione": "| Abilità | Aree |\n| --- | --- |\n| Arcano | Incantesimi, oggetti magici, simboli occulti, tradizioni magiche, piani di esistenza e alcune creature |\n| Indagare | Trappole, cifrari, indovinelli e congegni |\n| Natura | Terreno, flora, tempo atmosferico e alcune creature |\n| Religione | Divinità, riti, gerarchie religiose, simboli sacri, culti e alcune creature |\n| Storia | Eventi e personaggi storici, civiltà, guerre e alcune creature |"
+      }
+    ]
+  },
+  {
+    "id": "svantaggio",
+    "nome": "Svantaggio",
+    "lettera": "S",
+    "pagine_sorgente": 217,
+    "vedi_anche": [
+      "prove_con_d20"
+    ],
+    "descrizione": "Se hai svantaggio a una prova con d20, tiri due d20 e usi il risultato più basso. Più svantaggi non si accumulano e vantaggio e svantaggio sullo stesso tiro si annullano."
+  },
+  {
+    "id": "taglia",
+    "nome": "Taglia",
+    "lettera": "T",
+    "pagine_sorgente": 217,
+    "vedi_anche": [
+      "rompere_gli_oggetti",
+      "combattimento"
+    ],
+    "descrizione": "Ogni creatura o oggetto ha una categoria di taglia: Minuscola, Piccola, Media, Grande, Enorme o Mastodontica. La taglia di una creatura determina lo spazio occupato in combattimento; quella di un oggetto influenza i suoi punti ferita."
+  },
+  {
+    "id": "telepatia",
+    "nome": "Telepatia",
+    "lettera": "T",
+    "pagine_sorgente": 217,
+    "descrizione": "La telepatia è un'abilità magica che consente a una creatura di comunicare mentalmente con un'altra creatura entro un raggio specificato.",
+    "sezioni": [
+      {
+        "titolo": "Regole",
+        "blocchi": [
+          {
+            "nome": "Comprensione",
+            "descrizione": "La creatura contattata non deve parlare la stessa lingua, ma deve comprendere almeno una lingua o essere telepatica."
+          },
+          {
+            "nome": "Contatto",
+            "descrizione": "La creatura telepatica può iniziare o terminare il contatto in qualsiasi momento senza azione, ma il contatto termina se una delle due creature è incapacitata, esce dal raggio o se la creatura telepatica contatta un'altra creatura."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "teletrasporto",
+    "nome": "Teletrasporto",
+    "lettera": "T",
+    "pagine_sorgente": 217,
+    "descrizione": "Il teletrasporto è trasporto magico istantaneo: scompari e riappari altrove senza muoverti nello spazio intermedio. Non consuma movimento e non provoca attacchi di opportunità, salvo diversa indicazione.",
+    "sezioni": [
+      {
+        "titolo": "Regole",
+        "blocchi": [
+          {
+            "nome": "Equipaggiamento",
+            "descrizione": "Quando ti teletrasporti, anche l'equipaggiamento indossato o trasportato si teletrasporta."
+          },
+          {
+            "nome": "Spazio occupato",
+            "descrizione": "Se lo spazio di destinazione è occupato o bloccato, appari nello spazio libero più vicino a tua scelta."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "terreno_difficile",
+    "nome": "Terreno difficile",
+    "lettera": "T",
+    "pagine_sorgente": 217,
+    "descrizione": "In terreno difficile, ogni 30 centimetri di movimento costano 30 centimetri extra. Il terreno difficile non è cumulativo.",
+    "sezioni": [
+      {
+        "titolo": "Esempi",
+        "descrizione": "| Elemento | Effetto |\n| --- | --- |\n| Creatura non minuscola o non alleata | Rende difficile lo spazio |\n| Mobili grandi | Rendono difficile lo spazio |\n| Neve alta, ghiaccio, detriti o sottobosco | Rendono difficile lo spazio |\n| Liquido fino agli stinchi o alla vita | Rende difficile lo spazio |\n| Apertura stretta | Rende difficile lo spazio |\n| Pendenza di 20 gradi o più | Rende difficile lo spazio |"
+      }
+    ]
+  },
+  {
+    "id": "tipi_di_danno",
+    "nome": "Tipi di danno",
+    "lettera": "T",
+    "pagine_sorgente": 217,
+    "descrizione": "Gli attacchi e altri effetti dannosi infliggono vari tipi di danno. I tipi non hanno regole proprie, ma altre regole, come resistenza o vulnerabilità, possono farvi riferimento.",
+    "sezioni": [
+      {
+        "titolo": "Tipi di danno",
+        "descrizione": "| Tipo | Esempi |\n| --- | --- |\n| Acido | Liquidi corrosivi, enzimi digestivi |\n| Contundente | Oggetti contundenti, stritolamento, caduta |\n| Forza | Pura energia magica |\n| Freddo | Acqua gelata, getti ghiacciati |\n| Fulmine | Elettricità |\n| Fuoco | Fiamme, calore insopportabile |\n| Necrotico | Energia in grado di risucchiare la vita |\n| Perforante | Zanne, oggetti perforanti |\n| Psichico | Energia in grado di spezzare la mente |\n| Radioso | Energia sacra, radiazione incandescente |\n| Tagliente | Artigli, oggetti taglienti |\n| Tuono | Suono concussivo |\n| Veleno | Gas tossico, veleno |"
+      }
+    ]
+  },
+  {
+    "id": "tipo_di_creatura",
+    "nome": "Tipo di creatura",
+    "lettera": "T",
+    "pagine_sorgente": 218,
+    "descrizione": "Ogni creatura ha un descrittore che identifica il tipo di creatura. I tipi non hanno regole proprie, ma alcune regole influenzano certi tipi diversamente.",
+    "sezioni": [
+      {
+        "titolo": "Tipi",
+        "descrizione": "| Tipo | Note |\n| --- | --- |\n| Aberrazione | Tipo di creatura |\n| Bestia | Tipo di creatura |\n| Celestiale | Tipo di creatura |\n| Costrutto | Tipo di creatura |\n| Drago | Tipo di creatura |\n| Elementale | Tipo di creatura |\n| Folletto | Tipo di creatura |\n| Gigante | Tipo di creatura |\n| Immondo | Tipo di creatura |\n| Melma | Tipo di creatura |\n| Mostruosità | Tipo di creatura |\n| Non morto | Tipo di creatura |\n| Umanoide | Tipo di creatura |\n| Vegetale | Tipo di creatura |"
+      }
+    ]
+  },
+  {
+    "id": "tiro_per_colpire",
+    "nome": "Tiro per colpire",
+    "lettera": "T",
+    "pagine_sorgente": 218,
+    "vedi_anche": [
+      "prove_con_d20"
+    ],
+    "descrizione": "Un tiro per colpire è una prova con d20 che rappresenta un attacco con arma, colpo senz'armi o incantesimo."
+  },
+  {
+    "id": "tiro_per_i_danni",
+    "nome": "Tiro per i danni",
+    "lettera": "T",
+    "pagine_sorgente": 218,
+    "vedi_anche": [
+      "danni_e_guarigione"
+    ],
+    "descrizione": "Un tiro per i danni è un tiro di dado, con eventuali modificatori, che infligge danni a un bersaglio."
+  },
+  {
+    "id": "tiro_salvezza",
+    "nome": "Tiro salvezza",
+    "lettera": "T",
+    "pagine_sorgente": 218,
+    "vedi_anche": [
+      "prove_con_d20"
+    ],
+    "descrizione": "Un tiro salvezza rappresenta il tentativo di evitare o resistere a una minaccia. Di norma si effettua solo quando una regola lo richiede, ma puoi scegliere di fallirlo senza tirare."
+  },
+  {
+    "id": "tiro_salvezza_contro_morte",
+    "nome": "Tiro salvezza contro morte",
+    "lettera": "T",
+    "pagine_sorgente": 218,
+    "vedi_anche": [
+      "danni_e_guarigione"
+    ],
+    "descrizione": "Un personaggio giocante effettua un tiro salvezza contro morte se inizia il proprio turno con 0 punti ferita."
+  },
+  {
+    "id": "tramortire_una_creatura",
+    "nome": "Tramortire una creatura",
+    "lettera": "T",
+    "pagine_sorgente": 218,
+    "descrizione": "Quando stai per ridurre una creatura a 0 punti ferita con un attacco in mischia, puoi invece ridurla a 1 punto ferita. La creatura diventa priva di sensi e inizia un riposo breve."
+  },
+  {
+    "id": "trattenuto",
+    "nome": "Trattenuto",
+    "lettera": "T",
+    "descrittore": "condizione",
+    "pagine_sorgente": 218,
+    "descrizione": "Condizione che impedisce movimento e ostacola difesa e attacchi.",
+    "sezioni": [
+      {
+        "titolo": "Effetti",
+        "blocchi": [
+          {
+            "nome": "Velocità 0",
+            "descrizione": "La velocità è 0 e non può aumentare."
+          },
+          {
+            "nome": "Influenza sugli attacchi",
+            "descrizione": "I tiri per colpire contro la creatura hanno vantaggio, mentre i suoi tiri per colpire hanno svantaggio."
+          },
+          {
+            "nome": "Influenza sui tiri salvezza",
+            "descrizione": "La creatura ha svantaggio ai TS su Destrezza."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "trucchetto",
+    "nome": "Trucchetto",
+    "lettera": "T",
+    "pagine_sorgente": 218,
+    "vedi_anche": [
+      "incantesimo"
+    ],
+    "descrizione": "Un trucchetto è un incantesimo di livello 0 che si lancia senza slot incantesimo."
+  },
+  {
+    "id": "utilizzo",
+    "nome": "Utilizzo",
+    "lettera": "U",
+    "descrittore": "azione",
+    "pagine_sorgente": 218,
+    "descrizione": "Quando l'utilizzo di un oggetto richiede un'azione, effettui l'azione di Utilizzo. Le interazioni semplici con oggetti possono avvenire mentre fai altro, salvo diversa indicazione."
+  },
+  {
+    "id": "vantaggio",
+    "nome": "Vantaggio",
+    "lettera": "V",
+    "pagine_sorgente": 218,
+    "vedi_anche": [
+      "prove_con_d20"
+    ],
+    "descrizione": "Se hai vantaggio a una prova con d20, tiri due d20 e usi il risultato più alto. Più vantaggi non si accumulano e vantaggio e svantaggio sullo stesso tiro si annullano."
+  },
+  {
+    "id": "velocita",
+    "nome": "Velocità",
+    "lettera": "V",
+    "pagine_sorgente": "218-219",
+    "vedi_anche": [
+      "nuotare",
+      "saltare",
+      "scalare",
+      "strisciare",
+      "volare",
+      "combattimento"
+    ],
+    "descrizione": "La velocità è la distanza in metri che una creatura può percorrere quando si muove nel suo turno.",
+    "sezioni": [
+      {
+        "titolo": "Regole",
+        "blocchi": [
+          {
+            "nome": "Velocità speciali",
+            "descrizione": "Se hai più velocità, scegli quale usare e puoi passare da un tipo all'altro sottraendo dalla nuova velocità la distanza già percorsa."
+          },
+          {
+            "nome": "Modifiche alle velocità",
+            "descrizione": "Se un effetto aumenta o diminuisce la velocità per un periodo, anche le velocità speciali aumentano o diminuiscono della stessa quantità e durata."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "velocita_di_nuoto",
+    "nome": "Velocità di nuoto",
+    "lettera": "V",
+    "pagine_sorgente": 219,
+    "vedi_anche": [
+      "nuotare",
+      "velocita"
+    ],
+    "descrizione": "La velocità di nuoto permette di nuotare senza spendere movimento extra normalmente associato al nuoto."
+  },
+  {
+    "id": "velocita_di_scalata",
+    "nome": "Velocità di scalata",
+    "lettera": "V",
+    "pagine_sorgente": 219,
+    "vedi_anche": [
+      "scalare",
+      "velocita"
+    ],
+    "descrizione": "La velocità di scalata può sostituire la velocità per arrampicarsi su superfici verticali senza spendere movimento extra normalmente associato alla scalata."
+  },
+  {
+    "id": "velocita_di_scavo",
+    "nome": "Velocità di scavo",
+    "lettera": "V",
+    "pagine_sorgente": 219,
+    "vedi_anche": [
+      "velocita"
+    ],
+    "descrizione": "Una creatura con velocità di scavo può usarla per muoversi attraverso sabbia, terra, fango o ghiaccio. Non può scavare nella roccia solida salvo tratto specifico."
+  },
+  {
+    "id": "velocita_di_volo",
+    "nome": "Velocità di volo",
+    "lettera": "V",
+    "pagine_sorgente": 219,
+    "vedi_anche": [
+      "volare",
+      "velocita"
+    ],
+    "descrizione": "La velocità di volo permette di spostarsi in aria. Finché la possiedi, puoi restare sospeso fino ad atterrare, cadere o morire."
+  },
+  {
+    "id": "vista_cieca",
+    "nome": "Vista cieca",
+    "lettera": "V",
+    "pagine_sorgente": 219,
+    "descrizione": "Con vista cieca puoi vedere entro un raggio specifico senza affidarti alla vista. Entro quel raggio vedi ciò che non è dietro copertura totale, anche se sei accecato o in oscurità, e vedi ciò che è invisibile."
+  },
+  {
+    "id": "vista_pura",
+    "nome": "Vista pura",
+    "lettera": "V",
+    "pagine_sorgente": 219,
+    "descrizione": "La vista pura migliora la vista entro un raggio specifico, permettendo di vedere attraverso oscurità, invisibilità, illusioni visive, trasformazioni magiche e nel Piano Etereo."
+  },
+  {
+    "id": "volare",
+    "nome": "Volare",
+    "lettera": "V",
+    "pagine_sorgente": 219,
+    "vedi_anche": [
+      "caduta",
+      "velocita_di_volo"
+    ],
+    "descrizione": "Mentre voli, cadi se sei incapacitato o prono, o se la tua velocità di volo scende a 0. Puoi restare sospeso se sei in grado di fluttuare."
+  },
+  {
+    "id": "vulnerabilita",
+    "nome": "Vulnerabilità",
+    "lettera": "V",
+    "pagine_sorgente": 219,
+    "vedi_anche": [
+      "danni_e_guarigione"
+    ],
+    "descrizione": "Se sei vulnerabile a un tipo di danno, i danni di quel tipo che subisci sono raddoppiati. La vulnerabilità si applica una sola volta per ogni istanza di danno."
+  }
+]
