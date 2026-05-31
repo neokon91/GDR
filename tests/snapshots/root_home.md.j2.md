@@ -53,7 +53,7 @@ sort quando asc
 
 ## Note per categoria
 ```dataview
-table without id length(rows) as N
+table without id Categoria, length(rows) as Note
 from ""
 where categoria
 group by categoria as Categoria
