@@ -317,19 +317,41 @@ def load_srd(name: str) -> list[dict[str, Any]]:
     return data if isinstance(data, list) else []
 
 
-def srd_body(entry: dict[str, Any]) -> str:
-    """Corpo markdown di una voce SRD: descrizione/beneficio + sezioni + scaling."""
-    parts: list[str] = []
-    for key in ("descrizione", "beneficio"):
-        if isinstance(entry.get(key), str) and entry[key].strip():
-            parts.append(entry[key].strip())
-    for sez in entry.get("sezioni") or []:
-        if isinstance(sez, dict):
-            parts.append(f"## {sez.get('titolo', '')}\n\n{sez.get('descrizione', '')}".strip())
-    for sc in entry.get("scaling") or []:
-        if isinstance(sc, dict):
-            parts.append(f"## {sc.get('nome', '')}\n\n{sc.get('descrizione', '')}".strip())
-    return "\n\n".join(p for p in parts if p)
+def _join(value: Any) -> str:
+    return ", ".join(str(v) for v in value) if isinstance(value, list) else str(value or "")
+
+
+def srd_header(entry: dict[str, Any], cat: str) -> str:
+    """Infobox (callout) coi dati salienti, su misura per categoria. '' se nessuno."""
+    def parts(*pairs):
+        return " · ".join(f"**{lab}** {entry.get(k)}" for lab, k in pairs if entry.get(k))
+    if cat == "srd-incantesimo":
+        liv = str(entry.get("livello", ""))
+        testa = f"Trucchetto · {entry.get('scuola', '')}" if liv in ("0", "") else f"Livello {liv} · {entry.get('scuola', '')}"
+        righe = [f"> [!abstract] {testa}"]
+        mecc = parts(("Lancio", "tempo_lancio"), ("Gittata", "gittata"), ("Componenti", "componenti"), ("Durata", "durata"))
+        if mecc:
+            righe.append(f"> {mecc}")
+        if entry.get("classi"):
+            righe.append(f"> **Classi** {_join(entry['classi'])}")
+        return "\n".join(righe)
+    if cat == "srd-oggetto":
+        sint = entry.get("richiede_sintonia")
+        extra = " · richiede sintonia" if sint and sint not in (False, "no", "No", "") else ""
+        testa = " · ".join(x for x in (entry.get("tipo_base", ""), str(entry.get("rarita", "") or "")) if x)
+        return f"> [!abstract] {testa}{extra}" if testa or extra else ""
+    if cat == "srd-talento":
+        line = f"> [!abstract] Talento{(' · ' + str(entry.get('categoria'))) if entry.get('categoria') else ''}"
+        if entry.get("prerequisito"):
+            line += f"\n> **Prerequisito** {entry['prerequisito']}"
+        return line
+    if cat == "srd-specie":
+        return f"> [!abstract] {entry.get('tipo_creatura', '')} · Taglia {entry.get('taglia', '')} · Velocità {entry.get('velocita', '')}"
+    if cat == "srd-background" and entry.get("talento_origine"):
+        return f"> [!abstract] Background · Talento d'origine: {entry['talento_origine']}"
+    if cat == "srd-condizione":
+        return "> [!warning] Condizione"
+    return ""
 
 
 def srd_note(entry: dict[str, Any], cat: str, fm_fields: list[str]) -> str:
@@ -340,7 +362,21 @@ def srd_note(entry: dict[str, Any], cat: str, fm_fields: list[str]) -> str:
             fm[key] = val
         elif isinstance(val, list) and val:
             fm[key] = val
-    return frontmatter_block(fm) + f"# {entry.get('nome', '')}\n\n{srd_body(entry)}\n"
+    parts: list[str] = [f"# {entry.get('nome', '')}"]
+    header = srd_header(entry, cat)
+    if header:
+        parts.append(header)
+    for key in ("descrizione", "beneficio"):
+        if isinstance(entry.get(key), str) and entry[key].strip():
+            parts.append(entry[key].strip())
+    for sez in entry.get("sezioni") or []:
+        if isinstance(sez, dict) and (sez.get("titolo") or sez.get("descrizione")):
+            parts.append(f"### {sez.get('titolo', '')}\n\n{sez.get('descrizione', '')}".strip())
+    scaling = [s for s in (entry.get("scaling") or []) if isinstance(s, dict)]
+    if scaling:
+        body = "\n>\n".join(f"> **{s.get('nome', '')}** — {s.get('descrizione', '')}" for s in scaling)
+        parts.append(f"> [!tip]- Potenziamento\n{body}")
+    return frontmatter_block(fm) + "\n\n".join(parts) + "\n"
 
 
 def srd_statblock_yaml(monster: dict[str, Any], layout: str) -> str:
