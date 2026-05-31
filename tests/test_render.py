@@ -12,7 +12,7 @@ import render
 
 CORE = render.load_core()
 PLUGINS = render.load_yaml("plugins.yaml")
-TEMPLATES = render.load_yaml("templates.yaml")["templates"]
+TEMPLATES = render.load_templates()
 PAGES = render.load_pages()
 
 
@@ -40,6 +40,23 @@ def test_no_duplicate_ids():
     for section in render.PARTITIONED_SECTIONS:
         shared = set(core_raw.get(section, {}) or {}) & set(system_raw.get(section, {}) or {})
         assert not shared, f"{section}: id condivisi fra core e system: {sorted(shared)}"
+
+
+def test_entities_merge():
+    """I file-entità (entities/*.yaml) contribuiscono a 'core' e ai template, e
+    non collidono con core.yaml/system.yaml (validato anche da check)."""
+    entities = render.load_entities()
+    if not entities:
+        pytest.skip("nessun file-entità (split per-entità non ancora avviato)")
+    core_raw, system_raw = render.load_core_parts()
+    assert not render.validate_entities(core_raw, system_raw, entities, CORE)
+    for entity in entities:
+        eid = entity["id"]
+        assert eid in CORE["categories"], f"{eid} non fuso in categories"
+        assert CORE["folders"].get(eid) == entity["folder"]
+        for template in entity.get("templates", []):
+            assert any(t["id"] == template["id"] and t["category"] == eid
+                       for t in TEMPLATES), f"template {template['id']} mancante"
 
 
 def test_split_planes():

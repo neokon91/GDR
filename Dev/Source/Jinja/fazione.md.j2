@@ -1,0 +1,16 @@
+{# FAZIONE — template per-entità. Estende lo scheletro condiviso e personalizza
+   solo la tab Lore (identità ricca: scheda + storia + body arricchito da
+   FantasyWorld t.fazione.json). Tutto il resto (tavolo/carattere/collegamenti/
+   vista) viene da _entity_base.j2; lo schema è in YAML/entities/fazione.yaml. #}
+{% extends '_entity_base.j2' %}
+{% block lore %}
+{% import '_macros.j2' as m with context %}
+{{ m.scheda(template.category) }}
+> [!note]- Identità
+> Cosa rappresenta la fazione, simboli, reputazione e percezione pubblica.
+
+> [!quote]- Versione player-safe
+> {{ m.field('player_safe', label=false) }}
+
+{{ m.wizard_body(template.category) }}
+{% endblock %}

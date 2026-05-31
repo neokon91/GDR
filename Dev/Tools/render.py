@@ -60,6 +60,14 @@ def load_yaml(name: str) -> dict[str, Any]:
 # split. Il confine (chi sta dove) è validato da check() (vedi validate_split).
 SYSTEM_YAML = "system.yaml"
 
+# Schema per-entità: un file YAML per categoria in Dev/Source/YAML/entities/.
+# Ogni file è single source di tutto ciò che è specifico dell'entità (tassonomia,
+# campi, scheda, assi, relazioni, wizard) + il wiring dei suoi template. render.py
+# li distribuisce nelle sezioni globali di 'core' (vedi apply_entities) e ne
+# raccoglie i template (vedi entity_templates). È l'evoluzione per-entità dello
+# split core/system: gli elementi comuni restano condivisi (core.yaml + macro).
+ENTITIES_DIRNAME = "entities"
+
 
 def deep_merge(base: dict[str, Any], overlay: dict[str, Any]) -> dict[str, Any]:
     """Fonde 'overlay' dentro 'base': i dict si fondono ricorsivamente per chiave,
@@ -83,11 +91,65 @@ def load_core_parts() -> tuple[dict[str, Any], dict[str, Any]]:
     return core, system
 
 
+def load_entities() -> list[dict[str, Any]]:
+    """Gli schemi per-entità (Dev/Source/YAML/entities/*.yaml), in ordine di nome.
+    Cartella assente -> lista vuota (lo split per-entità è incrementale)."""
+    entities_dir = YAML_DIR / ENTITIES_DIRNAME
+    if not entities_dir.is_dir():
+        return []
+    out = []
+    for path in sorted(entities_dir.glob("*.yaml")):
+        data = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
+        if isinstance(data, dict) and data.get("id"):
+            out.append(data)
+    return out
+
+
+# Sezioni-mappa che un file-entità contribuisce a 'core', keyate per id-entità.
+_ENTITY_SECTIONS = (("scheda", "scheda"), ("assi", "assi_tematici"),
+                    ("relazioni", "relazioni"), ("creation", "creation"))
+
+
+def apply_entities(core: dict[str, Any], entities: list[dict[str, Any]]) -> dict[str, Any]:
+    """Distribuisce ogni file-entità nelle sezioni globali di 'core': folders,
+    categories (folder+subtypes), fields, scheda, assi_tematici, relazioni,
+    creation. Ritorna un nuovo dict (non muta l'input)."""
+    merged = dict(core)
+    for section in ("folders", "fields", "categories", "scheda", "assi_tematici", "relazioni", "creation"):
+        merged[section] = dict(merged.get(section, {}) or {})
+    for entity in entities:
+        eid = entity["id"]
+        merged["folders"][eid] = entity["folder"]
+        merged["categories"][eid] = {"folder": eid, "subtypes": entity.get("subtypes", []) or []}
+        for field_id, spec in (entity.get("fields") or {}).items():
+            merged["fields"][field_id] = spec
+        for src_key, dest_key in _ENTITY_SECTIONS:
+            if entity.get(src_key) is not None:
+                merged[dest_key][eid] = entity[src_key]
+    return merged
+
+
+def entity_templates(entities: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """I template dichiarati dai file-entità (con category = id-entità). Sono
+    appesi a quelli di templates.yaml finché tutte le entità non sono migrate."""
+    templates = []
+    for entity in entities:
+        for template in entity.get("templates", []) or []:
+            templates.append({**template, "category": entity["id"]})
+    return templates
+
+
 def load_core() -> dict[str, Any]:
-    """Modello unificato (core.yaml + system.yaml fusi). Unico ingresso per
-    build()/check()/test: i consumatori vedono un solo 'core' completo."""
+    """Modello unificato (core.yaml + system.yaml + entities/*.yaml). Unico
+    ingresso per build()/check()/test: i consumatori vedono un solo 'core'."""
     core, system = load_core_parts()
-    return deep_merge(core, system)
+    return apply_entities(deep_merge(core, system), load_entities())
+
+
+def load_templates() -> list[dict[str, Any]]:
+    """Tutti i template: quelli di templates.yaml + quelli dei file-entità."""
+    base = load_yaml("templates.yaml").get("templates", []) or []
+    return base + entity_templates(load_entities())
 
 
 def write_json(path: Path, data: Any) -> None:
@@ -509,7 +571,7 @@ def build() -> dict[str, str]:
     core = load_core()
     plugins = load_yaml("plugins.yaml")
     template_data = load_yaml("templates.yaml")
-    templates = template_data.get("templates", [])
+    templates = load_templates()
     actions = template_data.get("actions", [])
 
     payload = {
@@ -755,21 +817,51 @@ def validate_split(core_raw: dict[str, Any], system_raw: dict[str, Any], merged:
     return errors
 
 
+def validate_entities(core_raw: dict[str, Any], system_raw: dict[str, Any],
+                      entities: list[dict[str, Any]], merged: dict[str, Any]) -> list[str]:
+    """Valida i file-entità: shape minima + nessuna collisione di id-categoria o
+    di campo con core.yaml/system.yaml (un'entità non ridefinisce cose globali)."""
+    errors: list[str] = []
+    base_cats = set(core_raw.get("categories", {}) or {}) | set(system_raw.get("categories", {}) or {})
+    base_fields = set(core_raw.get("fields", {}) or {}) | set(system_raw.get("fields", {}) or {})
+    seen_ids: set[str] = set()
+    for entity in entities:
+        eid = entity.get("id")
+        if not eid or not entity.get("folder"):
+            errors.append(f"entity {entity.get('id')!r}: manca id o folder")
+            continue
+        if eid in seen_ids:
+            errors.append(f"entity '{eid}': id duplicato fra i file-entità")
+        seen_ids.add(eid)
+        if eid in base_cats:
+            errors.append(f"entity '{eid}': categoria già in core.yaml/system.yaml (dup)")
+        for field_id in (entity.get("fields") or {}):
+            if field_id in base_fields:
+                errors.append(f"entity '{eid}': campo '{field_id}' già in core/system (dup)")
+        for template in entity.get("templates", []) or []:
+            for key in ("id", "title", "jinja", "target"):
+                if not template.get(key):
+                    errors.append(f"entity '{eid}': template senza '{key}'")
+    return errors
+
+
 def check() -> int:
     errors: list[str] = []
     core_raw, system_raw = load_core_parts()
-    core = deep_merge(core_raw, system_raw)
+    entities = load_entities()
+    core = apply_entities(deep_merge(core_raw, system_raw), entities)
     errors.extend(validate_split(core_raw, system_raw, core))
+    errors.extend(validate_entities(core_raw, system_raw, entities, core))
     plugins = load_yaml("plugins.yaml")
-    template_data = load_yaml("templates.yaml")
     categories = core.get("categories", {})
     folders = core.get("folders", {})
     fields = core.get("fields", {})
     metabind = plugins.get("metabind_inputs") or {}
 
-    # Le categorie dei template devono essere dichiarate e avere una cartella
-    # risolvibile (i bottoni 'Crea ...' creano la nota in quella cartella).
-    for template in template_data.get("templates", []):
+    # Le categorie dei template (templates.yaml + file-entità) devono essere
+    # dichiarate e avere una cartella risolvibile (i bottoni 'Crea ...' creano la
+    # nota in quella cartella).
+    for template in load_templates():
         category = template.get("category")
         if category not in categories:
             errors.append(f"{template.get('id')}: categoria non dichiarata ({category})")

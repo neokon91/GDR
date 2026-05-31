@@ -69,7 +69,6 @@ scheda:
   # Lore (worldbuilding)
   mondo:       [scala, genere, epoca, temi]
   luogo:       [clima, popolazione]
-  fazione:     [portata, motto]
   personaggio: [allineamento, pronomi, eta]
   evento:      [portata]
   # Sistema 5.5e

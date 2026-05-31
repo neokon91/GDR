@@ -1,0 +1,55 @@
+# Schema per-entità: FAZIONE (lore). Single source di tutto ciò che è specifico
+# della fazione: tassonomia, campi, scheda, assi, relazioni, wizard E wiring del
+# template. render.py distribuisce questi blocchi nel modello globale 'core'
+# (folders/fields/categories/scheda/assi_tematici/relazioni/creation) e raccoglie
+# i 'templates'. Gli elementi comuni a tutte le entità restano condivisi:
+#   - campi trasversali (tipo/stato/mondo/pressione/tavolo...) in core.yaml;
+#   - lo scheletro della nota in Jinja/_entity_base.j2 (macro condivise).
+# Arricchito da FantasyWorld t.fazione.json con criterio "mix curato": un
+# sottoinsieme interrogabile va in frontmatter (scheda), la profondità nelle
+# sezioni body leggibili.
+id: fazione
+folder: Mondi/Fazioni
+templates:
+  - id: fazione
+    title: Fazione
+    default_type: gilda
+    target: z.modelli/Fazione.md
+    jinja: fazione.md.j2
+    primary: true
+subtypes:
+  - gilda
+  - ordine
+  - casata
+  - culto
+  - fazione politica
+  - banda
+# Campi specifici della fazione. (I trasversali stanno in core.yaml; 'portata' è
+# condiviso con evento e resta in system.yaml.)
+fields:
+  motto:         { label: Motto,                widget: text }
+  forma_governo: { label: Forma di governo,     widget: text }
+  fondazione:    { label: Epoca di fondazione,  widget: text }
+scheda: [portata, motto, forma_governo, fondazione]
+assi:
+  - { id: ordine_caos,          sinistra: Ordine,   destra: Caos }
+  - { id: segreta_palese,       sinistra: Segreta,  destra: Palese }
+  - { id: dottrina_pragmatismo, sinistra: Dottrina, destra: Pragmatismo }
+relazioni:
+  - { field: sede,      label: Sede,          category: luogo }
+  - { field: fondatori, label: Fondatori,     category: personaggio, multi: true }
+  - { field: figure,    label: Figure chiave, category: personaggio, multi: true }
+  - { field: alleati,   label: Alleate,       category: fazione, multi: true }
+  - { field: rivali,    label: Rivali,        category: fazione, multi: true }
+creation:
+  fields:
+    - { field: tipo, prompt: "Tipo di fazione", from: subtypes, required: true }
+    - { field: mondo, prompt: "Mondo", from: notes, category: mondo, link: true, required: true }
+  body:
+    - { field: obiettivo, prompt: "Cosa vuole ottenere la fazione", heading: "Obiettivo" }
+    - { field: metodo, prompt: "Come opera (metodi, stile)", heading: "Metodi" }
+    - { field: gerarchia, prompt: "Ruoli, capi, come si entra", heading: "Gerarchia" }
+    - { field: influenza, prompt: "Impatto su civiltà, culti e riti associati", heading: "Influenza" }
+    - { field: presente, prompt: "Stato attuale, tracce nel mondo, segreti rivelati", heading: "Nel presente" }
+    - { field: tensione, prompt: "Conflitto o rivalita'", heading: "Tensione" }
+    - { field: segreto, prompt: "Segreto della fazione", callout: segreto, title: "Segreto", fold: true }
