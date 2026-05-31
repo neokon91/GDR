@@ -30,7 +30,7 @@ SNAKE_RE = re.compile(r"^[a-z][a-z0-9_]*$")
 # states (il differenziatore worldbuilding) solo in core.yaml; scheda/statblock/
 # caratteristiche (i meccanismi 5.5e) solo in system.yaml.
 CORE_ONLY_SECTIONS = ("tavolo", "assi_tematici", "states")
-SYSTEM_ONLY_SECTIONS = ("scheda", "statblock", "caratteristiche")
+SYSTEM_ONLY_SECTIONS = ("scheda", "statblock", "caratteristiche", "abilita")
 
 # Sezioni-mappa (id -> definizione) partizionate fra i due file: gli stessi id
 # non devono comparire in entrambi (dup-ID).
@@ -65,6 +65,7 @@ def validate_split(core_raw: dict[str, Any], system_raw: dict[str, Any], merged:
     snake("folders", merged.get("folders", {}))
     snake("fields", merged.get("fields", {}))
     snake("categories", merged.get("categories", {}))
+    snake("abilita", merged.get("abilita", {}))
     snake("caratteristiche", [c.get("id") for c in merged.get("caratteristiche", []) or []])
     for cat, assi in (merged.get("assi_tematici", {}) or {}).items():
         snake(f"assi_tematici[{cat}]", [a.get("id") for a in assi or []])
@@ -96,6 +97,10 @@ def validate_split(core_raw: dict[str, Any], system_raw: dict[str, Any], merged:
     for entry in merged.get("caratteristiche", []) or []:
         if not entry.get("id") or not entry.get("sigla"):
             errors.append(f"shape: caratteristica {entry} senza id/sigla")
+    car_ids = {c.get("id") for c in merged.get("caratteristiche", []) or []}
+    for aid, spec in (merged.get("abilita", {}) or {}).items():
+        if not isinstance(spec, dict) or not spec.get("label") or spec.get("caratteristica") not in car_ids:
+            errors.append(f"shape: abilità '{aid}' senza label o con caratteristica non valida")
     for cat, assi in (merged.get("assi_tematici", {}) or {}).items():
         for a in assi or []:
             if not all(a.get(k) for k in ("id", "sinistra", "destra")):

@@ -158,6 +158,34 @@
 {% endfor %}
 {%- endmacro %}
 
+{# Scheda PG RICCA (rules-engine): "In gioco" + tabella caratteristiche (valore/
+   mod/TS) + tabella delle 18 abilità (bonus/competenza). Legge i flag 0/1
+   ts_<car> e prof_<abilita> che crea_personaggio.js popola: TS = mod + ts*comp,
+   bonus abilità = mod(car) + prof*comp (prof=2 -> competenza, cioè maestria).
+   Single source: core.caratteristiche + core.abilita. Usata da pg.md.j2. #}
+{% macro scheda_pg_rules() -%}
+> [!info] In gioco
+> CA `INPUT[number:ca]` · PF `INPUT[number:pf]`/`INPUT[number:pf_max]` · Velocità `INPUT[number:velocita]` m
+>
+> Competenza +`INPUT[number:competenza]` · Iniziativa {{ computed('floor(({destrezza} - 10) / 2)') }}
+
+**Caratteristiche**
+
+| Car | Valore | Mod | TS | Comp |
+|:--|:-:|:-:|:-:|:-:|
+{% for c in core.caratteristiche %}
+| **{{ c.sigla }}** | `INPUT[number:{{ c.id }}]` | {{ compute_into('floor(({' ~ c.id ~ '} - 10) / 2)', 'mod_' ~ c.id) }} | {{ computed('floor(({' ~ c.id ~ '} - 10) / 2) + ({ts_' ~ c.id ~ '} * {competenza})') }} | `INPUT[inlineSelect(option(0, "—"), option(1, "✓")):ts_{{ c.id }}]` |
+{% endfor %}
+
+**Abilità**
+
+| Abilità | Bonus | Comp |
+|:--|:-:|:-:|
+{% for aid, a in core.abilita.items() %}
+| {{ a.label }} ({{ a.caratteristica[:3] | upper }}) | {{ computed('floor(({' ~ a.caratteristica ~ '} - 10) / 2) + ({prof_' ~ aid ~ '} * {competenza})') }} | `INPUT[inlineSelect(option(0, "—"), option(1, "✓"), option(2, "✓✓")):prof_{{ aid }}]` |
+{% endfor %}
+{%- endmacro %}
+
 {# Pannello vista (dataviewjs). fn = funzione esposta da z.automazioni/views.js. #}
 {% macro vista(fn='renderEntityPanel') -%}
 ```dataviewjs

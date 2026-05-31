@@ -2,13 +2,26 @@
 sul vault (nessun build). Mirror automatizzato di `npm run check` + render
 standalone, eseguibile con `npm test`."""
 
+import json
 import shutil
 import subprocess
 
 import pytest
+import yaml
 from jinja2 import Environment, FileSystemLoader, StrictUndefined
 
 import render
+
+# Mock di Templater per testare crea_personaggio.js fuori da Obsidian: sceglie
+# sempre la prima opzione e legge personaggio.json dal path passato.
+_PG_HARNESS = """
+const fs = require("fs");
+const data = fs.readFileSync(process.argv[2], "utf8");
+global.app = { vault: { adapter: { read: async () => data } } };
+const tp = { system: { prompt: async () => "Test PG", suggester: async (l, v) => v[0] },
+             file: { move: async () => {} } };
+require(process.argv[3])(tp).then(fm => process.stdout.write(fm));
+"""
 
 CORE = render.load_core()
 PLUGINS = render.load_yaml("plugins.yaml")
@@ -151,6 +164,29 @@ def test_personaggio_options():
     for bg in opt["background"].values():
         assert all(s in opt["caratteristiche"] for s in bg["punteggi_caratteristica"])
         assert all(s in skill_ids for s in bg["competenze_abilita"])
+
+
+@pytest.mark.skipif(not shutil.which("node") or not render.SRD_DIR.is_dir(), reason="node/SRD assenti")
+def test_crea_personaggio_e2e(tmp_path):
+    """crea_personaggio.js applica le regole 5.5e end-to-end (mock Templater):
+    frontmatter YAML valido, PF=dado_vita+mod COS, TS della classe, 18 flag prof."""
+    import build_personaggio
+    opt = build_personaggio.build_personaggio_options(CORE)
+    pj = tmp_path / "personaggio.json"
+    pj.write_text(json.dumps(opt, ensure_ascii=False), encoding="utf-8")
+    harness = tmp_path / "harness.js"
+    harness.write_text(_PG_HARNESS, encoding="utf-8")
+    res = subprocess.run(["node", str(harness), str(pj), str(render.JS_DIR / "crea_personaggio.js")],
+                         capture_output=True, text=True)
+    assert res.returncode == 0, res.stderr
+    fm = yaml.safe_load(res.stdout.split("---")[1])
+    assert fm["categoria"] == "personaggio" and fm["tipo"] == "pg"
+    assert fm["classe"] in opt["classi"]
+    classe = opt["classi"][fm["classe"]]
+    assert fm["pf"] == max(1, classe["dado_vita"] + (fm["costituzione"] - 10) // 2)
+    for stat in classe["tiri_salvezza"]:
+        assert fm[f"ts_{stat}"] == 1
+    assert sum(1 for k in fm if k.startswith("prof_")) == 18
 
 
 @pytest.mark.skipif(not render.SRD_DIR.is_dir(), reason="SRD non vendorizzata")

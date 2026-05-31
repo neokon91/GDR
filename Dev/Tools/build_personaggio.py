@@ -72,7 +72,7 @@ def build_personaggio_options(core: dict[str, Any] | None = None) -> dict[str, A
 
     car_ids = [c["id"] for c in core.get("caratteristiche", []) or []]
     name_to_stat = {_norm(cid): cid for cid in car_ids}
-    abilita = pg_rules.get("abilita", {}) or {}
+    abilita = core.get("abilita", {}) or {}
     label_to_id = {_norm(spec.get("label")): aid for aid, spec in abilita.items()}
     all_skill_ids = list(abilita.keys())
 

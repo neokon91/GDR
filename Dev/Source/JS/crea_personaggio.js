@@ -111,13 +111,14 @@ async function applicaAumentoBackground(tp, stats, bg, opt) {
 
 // Scelte-abilità di classe: 'scelte' fra 'opzioni', escludendo quelle già
 // competenti dal background.
-async function scegliAbilitaClasse(tp, classe, giaCompetenti) {
+async function scegliAbilitaClasse(tp, classe, giaCompetenti, abilita) {
     const config = (classe && classe.abilita) || { scelte: 0, opzioni: [] };
     const scelte = [];
     const disponibili = (config.opzioni || []).filter(id => !giaCompetenti.includes(id));
+    const etichetta = id => (abilita[id] && abilita[id].label) || id;
     for (let i = 0; i < (config.scelte || 0) && disponibili.length > 0; i += 1) {
         const id = await tp.system.suggester(
-            disponibili, disponibili, false, `Competenza in abilità (${i + 1}/${config.scelte})`
+            disponibili.map(etichetta), disponibili, false, `Competenza in abilità (${i + 1}/${config.scelte})`
         );
         if (!id) break;
         scelte.push(id);
@@ -131,11 +132,15 @@ function listaYaml(items) {
     return `\n${items.map(x => `  - ${x}`).join("\n")}`;
 }
 
+// Frontmatter con ID stabili. Competenze come FLAG 0/1 (ts_<stat>, prof_<skill>):
+// così la scheda PG calcola TS/bonus con Meta Bind (mod + flag * competenza).
 function frontmatter(pg) {
     const car = pg.caratteristiche;
-    const righeCar = pg.ordine_caratteristiche.map(stat => `${stat}: ${car[stat]}`).join("\n");
+    const righeCar = pg.ordine_caratteristiche.map(s => `${s}: ${car[s]}`).join("\n");
+    const righeTs = pg.ordine_caratteristiche.map(s => `ts_${s}: ${pg.ts_competenti.includes(s) ? 1 : 0}`).join("\n");
+    const righeAb = pg.abilita_ids.map(id => `prof_${id}: ${pg.competenze_abilita.includes(id) ? 1 : 0}`).join("\n");
     return `---
-nome: ${pg.nome}
+nome: ${JSON.stringify(String(pg.nome ?? ""))}
 categoria: personaggio
 tipo: pg
 classe: ${pg.classe}
@@ -149,8 +154,8 @@ ca: ${pg.ca}
 pf: ${pg.pf}
 pf_max: ${pg.pf}
 ${righeCar}
-ts_competenti:${listaYaml(pg.ts_competenti)}
-competenze_abilita:${listaYaml(pg.competenze_abilita)}
+${righeTs}
+${righeAb}
 talenti:${listaYaml(pg.talenti)}
 stato: bozza
 ---
@@ -175,7 +180,7 @@ async function crea_personaggio(tp) {
     caratteristiche = await applicaAumentoBackground(tp, caratteristiche, background, opt);
 
     const abilitaBackground = background.competenze_abilita || [];
-    const abilitaClasse = await scegliAbilitaClasse(tp, classe, abilitaBackground);
+    const abilitaClasse = await scegliAbilitaClasse(tp, classe, abilitaBackground, opt.abilita || {});
     const competenzeAbilita = Array.from(new Set([...abilitaBackground, ...abilitaClasse]));
 
     const pf = Math.max(1, (classe.dado_vita || 8) + mod(caratteristiche.costituzione));
@@ -195,6 +200,7 @@ async function crea_personaggio(tp) {
         pf,
         caratteristiche,
         ordine_caratteristiche: opt.caratteristiche,
+        abilita_ids: Object.keys(opt.abilita || {}),
         ts_competenti: classe.tiri_salvezza || [],
         competenze_abilita: competenzeAbilita,
         talenti: talentoOrigine ? [talentoOrigine] : [],

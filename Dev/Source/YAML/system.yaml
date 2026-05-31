@@ -60,3 +60,26 @@ caratteristiche:
   - { id: intelligenza, sigla: INT }
   - { id: saggezza,     sigla: SAG }
   - { id: carisma,      sigla: CAR }
+
+# Le 18 abilità 5e (2024): id = chiave stabile (frontmatter prof_<id>), label =
+# etichetta, caratteristica = abilità di base per il bonus. Usate dalla scheda PG
+# (macro abilita_pg) e dal converter rules-engine (mappa prosa SRD -> id).
+abilita:
+  acrobazia:          { label: Acrobazia,          caratteristica: destrezza }
+  addestrare_animali: { label: Addestrare Animali, caratteristica: saggezza }
+  arcano:             { label: Arcano,             caratteristica: intelligenza }
+  atletica:           { label: Atletica,           caratteristica: forza }
+  furtivita:          { label: Furtività,          caratteristica: destrezza }
+  indagare:           { label: Indagare,           caratteristica: intelligenza }
+  inganno:            { label: Inganno,            caratteristica: carisma }
+  intimidire:         { label: Intimidire,         caratteristica: carisma }
+  intrattenere:       { label: Intrattenere,       caratteristica: carisma }
+  intuizione:         { label: Intuizione,         caratteristica: saggezza }
+  medicina:           { label: Medicina,           caratteristica: saggezza }
+  natura:             { label: Natura,             caratteristica: intelligenza }
+  percezione:         { label: Percezione,         caratteristica: saggezza }
+  persuasione:        { label: Persuasione,        caratteristica: carisma }
+  rapidita_di_mano:   { label: Rapidità di Mano,   caratteristica: destrezza }
+  religione:          { label: Religione,          caratteristica: intelligenza }
+  sopravvivenza:      { label: Sopravvivenza,      caratteristica: saggezza }
+  storia:             { label: Storia,             caratteristica: intelligenza }
