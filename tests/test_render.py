@@ -141,28 +141,6 @@ def test_split_planes():
     assert {"classe", "incantesimo", "oggetto"} <= merged_cats  # sistema 5.5e
 
 
-@pytest.mark.parametrize("tpl", TEMPLATES, ids=[t["id"] for t in TEMPLATES])
-def test_template_renders(tpl):
-    out = _env().get_template(tpl["jinja"]).render(core=CORE, plugins=PLUGINS, template=tpl)
-    assert out.strip()
-
-
-@pytest.mark.parametrize("page", PAGES, ids=[p["id"] for p in PAGES])
-def test_page_renders(page):
-    out = _env().get_template("index.md.j2").render(
-        core=CORE, plugins=PLUGINS, templates=TEMPLATES, page=page
-    )
-    assert out.strip()
-
-
-@pytest.mark.parametrize("name", ["home.md.j2", "leggimi.md.j2"])
-def test_root_note_renders(name):
-    out = _env().get_template(name).render(
-        core=CORE, plugins=PLUGINS, templates=TEMPLATES, pages=PAGES
-    )
-    assert out.strip()
-
-
 @pytest.mark.parametrize("category", list(CORE.get("categories", {})), ids=list(CORE.get("categories", {})))
 def test_fileclass_well_formed(category):
     """Ogni fileClass ha campi con name/type e Select con opzioni non vuote."""

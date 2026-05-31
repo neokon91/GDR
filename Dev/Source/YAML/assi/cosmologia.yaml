@@ -1,0 +1,100 @@
+# Assi tematici (formato ricco 1-5) per l'entità 'cosmologia'.
+# Scorporati da entities/cosmologia.yaml; render.py li rifonde in core.assi_tematici.
+id: cosmologia
+assi:
+- id: presenza
+  nome: Presenza Cosmica
+  descrizione: Dove e come questo principio esiste nel cosmo.
+  valori:
+    1:
+      etichetta: Trascendente
+      descrizione: Oltre il cosmo, non localizzabile né accessibile; puro principio.
+    2:
+      etichetta: Diffusa
+      descrizione: Presente in molti piani ma debolmente; ovunque e in nessun luogo.
+    3:
+      etichetta: Focalizzata
+      descrizione: Una sede principale, ma può agire altrove; dominio non esclusivo.
+    4:
+      etichetta: Ancorata
+      descrizione: Legata a un luogo, piano o popolo; fuori è muta o assente.
+    5:
+      etichetta: Immanente
+      descrizione: È il mondo stesso; ogni cosa è sua emanazione vivente.
+- id: attivita
+  nome: Attività
+  descrizione: Quanto questo principio agisce sul mondo o resta inerte.
+  valori:
+    1:
+      etichetta: Silente
+      descrizione: Non esercita volontà; osserva senza agire. Puro fondamento.
+    2:
+      etichetta: Risonante
+      descrizione: Presente ma non coercitiva; sincronicità, ispirazioni, segnali
+        sottili.
+    3:
+      etichetta: Reattiva
+      descrizione: Interviene su invocazioni, sacrifici o squilibri cosmici.
+    4:
+      etichetta: Attiva
+      descrizione: Guida, premia, punisce; plasma la storia tramite segni ed eventi.
+    5:
+      etichetta: Interventista
+      descrizione: Agisce di continuo; nulla accade senza la sua volontà diretta.
+- id: ordine
+  nome: Ordine cosmico
+  descrizione: Se il principio tende all'ordine o al disordine.
+  valori:
+    1:
+      etichetta: Caotico
+      descrizione: Forza di disordine e trasgressione; rompe ogni schema.
+    2:
+      etichetta: Tendente al caos
+      descrizione: Favorisce libertà, mutamento, individualismo.
+    3:
+      etichetta: Neutrale
+      descrizione: Senza orientamento definito; oltre ordine e caos.
+    4:
+      etichetta: Tendente all'ordine
+      descrizione: Favorisce armonia, regole, strutture.
+    5:
+      etichetta: Legale
+      descrizione: Impone equilibrio e coerenza; rifiuta la deviazione.
+- id: stabilita_cosmica
+  nome: Stabilità
+  descrizione: Quanto il principio è immutabile o in mutamento.
+  valori:
+    1:
+      etichetta: Eterna
+      descrizione: Immutabile da sempre; non cambia né può essere alterata.
+    2:
+      etichetta: Persistente
+      descrizione: Stabile, ma manifesta variazioni lente nel tempo.
+    3:
+      etichetta: Ciclica
+      descrizione: Si manifesta in fasi, epoche o intervalli ricorrenti.
+    4:
+      etichetta: Instabile
+      descrizione: Vacilla; può indebolirsi, eclissarsi o essere aggirata.
+    5:
+      etichetta: Morente
+      descrizione: In dissoluzione o già infranta; lascia il posto a un nuovo ordine.
+- id: percezione
+  nome: Percezione
+  descrizione: Quanto il principio è visibile o nascosto ai mortali.
+  valori:
+    1:
+      etichetta: Manifesta
+      descrizione: Evidente a tutti; le sue tracce sono ovunque, innegabili.
+    2:
+      etichetta: Nota
+      descrizione: Riconosciuta da culti e sapienti; documentata, studiata.
+    3:
+      etichetta: Velata
+      descrizione: Si intuisce da segni e presagi; richiede interpretazione.
+    4:
+      etichetta: Occulta
+      descrizione: Nota solo a iniziati; celata sotto miti o falsità.
+    5:
+      etichetta: Ignota
+      descrizione: Nessuno la conosce; opera nell'ombra del mondo.

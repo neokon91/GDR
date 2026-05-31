@@ -36,54 +36,6 @@ fields:
   ruolo_ecologico: { label: Ruolo ecologico, widget: text }
   dieta:           { label: Dieta,           widget: dieta }
 scheda: [taglia, ruolo_ecologico, dieta]
-# Assi tematici nel formato RICCO (seed FantasyWorld assi_tematici_specie.yaml +
-# autorati per indole/natura): 5 assi su scala 1-5 con etichetta + descrizione.
-assi:
-- id: indole
-  nome: Indole
-  descrizione: Disposizione della creatura verso chi incontra.
-  valori:
-    1: { etichetta: Docile,    descrizione: "Mansueta, non aggressiva; fugge o ignora più che attaccare." }
-    2: { etichetta: Schiva,    descrizione: "Diffidente; evita il contatto, reagisce solo se messa alle strette." }
-    3: { etichetta: Territoriale, descrizione: "Tollerante finché non si invade il suo spazio; allora difende." }
-    4: { etichetta: Aggressiva, descrizione: "Incline all'attacco; caccia o assale per istinto o fame." }
-    5: { etichetta: Feroce,    descrizione: "Ostile e spietata; uccide oltre il bisogno, vive per la violenza." }
-- id: socialita
-  nome: Socialità
-  descrizione: Grado di coesione e struttura sociale della creatura.
-  valori:
-    1: { etichetta: Solitaria,    descrizione: "Vive e caccia da sola; legami rari o solo riproduttivi." }
-    2: { etichetta: Individualista, descrizione: "Convive in prossimità ma autonoma; interazioni utilitaristiche." }
-    3: { etichetta: Aggregativa,  descrizione: "Gruppi flessibili (branchi, clan) per necessità territoriale o biologica." }
-    4: { etichetta: Comunitaria,  descrizione: "Comunità organizzate con ruoli distinti e relazioni stabili." }
-    5: { etichetta: Ipercollettiva, descrizione: "L'individuo non esiste: colonia, alveare, coscienza distribuita." }
-- id: mobilita
-  nome: Mobilità
-  descrizione: Rapporto della creatura col territorio e il movimento.
-  valori:
-    1: { etichetta: Radicata,    descrizione: "Legata a un solo bioma; non può o non vuole spostarsi." }
-    2: { etichetta: Territoriale, descrizione: "Confini definiti; viaggia ma torna sempre al proprio habitat." }
-    3: { etichetta: Adattiva,    descrizione: "Si adatta a vari ambienti; nucleo d'origine ma non vincolata." }
-    4: { etichetta: Migratoria,  descrizione: "Migra seguendo rotte, cicli stagionali o necessità." }
-    5: { etichetta: Errante,     descrizione: "Sempre in movimento; nessuna terra propria, vagabonda per natura." }
-- id: natura
-  nome: Natura
-  descrizione: Quanto la creatura è ordinaria o intrisa di magia.
-  valori:
-    1: { etichetta: Mondana,     descrizione: "Bestia naturale; nessun tratto soprannaturale." }
-    2: { etichetta: Insolita,    descrizione: "Tratti fuori dal comune (taglia, resistenza), ma ancora naturale." }
-    3: { etichetta: Toccata,     descrizione: "Magia latente o residua: un'abilità, un'aura, un'origine arcana." }
-    4: { etichetta: Magica,      descrizione: "Apertamente soprannaturale; poteri, incantesimi, forma mutevole." }
-    5: { etichetta: Aberrante,   descrizione: "Essere di pura magia o altri piani; piega le leggi della realtà." }
-- id: intelletto
-  nome: Intelletto
-  descrizione: Livello di coscienza e capacità cognitiva.
-  valori:
-    1: { etichetta: Istintivo,   descrizione: "Agisce per puro istinto; nessun pensiero astratto." }
-    2: { etichetta: Astuto,      descrizione: "Furbizia animale; trappole, finte, apprendimento limitato." }
-    3: { etichetta: Senziente,   descrizione: "Linguaggio e ragionamento; cultura semplice possibile." }
-    4: { etichetta: Sapiente,    descrizione: "Pensiero simbolico ed etico; strategie, inganni elaborati." }
-    5: { etichetta: Geniale,     descrizione: "Mente superiore o aliena; piani secolari, concetti iperoggettivi." }
 relazioni:
 - field: habitat
   label: Habitat

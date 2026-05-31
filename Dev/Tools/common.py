@@ -41,6 +41,10 @@ GENERATED_NOTES = ("Home.md", "LEGGIMI.md")
 # schema per-entità in entities/*.yaml. Tutto si fonde in un unico 'core'.
 SYSTEM_YAML = "system.yaml"
 ENTITIES_DIRNAME = "entities"
+# Assi tematici scorporati dai file-entità: un file per entità in YAML/assi/<id>.yaml
+# (glossario coeso, formato ricco 1-5). load_entities li rifonde nell'entità: i file
+# entities/*.yaml restano snelli, gli assi sono sfogliabili/confrontabili a parte.
+ASSI_DIRNAME = "assi"
 
 
 # --- IO ---------------------------------------------------------------------
@@ -105,10 +109,19 @@ def load_entities() -> list[dict[str, Any]]:
     entities_dir = YAML_DIR / ENTITIES_DIRNAME
     if not entities_dir.is_dir():
         return []
+    assi_dir = YAML_DIR / ASSI_DIRNAME
     out = []
     for path in sorted(entities_dir.glob("*.yaml")):
         data = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
         if isinstance(data, dict) and data.get("id"):
+            # Rifondi gli assi scorporati (assi/<id>.yaml) se l'entità non li dichiara
+            # inline (retrocompat: un'entità può ancora tenere 'assi' nel proprio file).
+            if "assi" not in data:
+                assi_file = assi_dir / f"{data['id']}.yaml"
+                if assi_file.is_file():
+                    assi_doc = yaml.safe_load(assi_file.read_text(encoding="utf-8")) or {}
+                    if assi_doc.get("assi"):
+                        data["assi"] = assi_doc["assi"]
             out.append(data)
     return out
 
