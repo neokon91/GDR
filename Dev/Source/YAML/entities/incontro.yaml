@@ -17,6 +17,11 @@ subtypes:
 - incontro
 - agguato
 - inseguimento
+# Gruppo di riferimento per il calcolo della difficoltà (views.renderEncounter).
+fields:
+  pg_livello: { label: Livello del gruppo, widget: number }
+  pg_numero:  { label: Numero di PG,       widget: number }
+scheda: [pg_livello, pg_numero]
 relazioni:
 - field: luogo
   label: Luogo
@@ -49,6 +54,12 @@ creation:
     category: creatura
     link: true
     multi: true
+  - field: pg_livello
+    prompt: Livello medio del gruppo (per la difficoltà)
+    optional: true
+  - field: pg_numero
+    prompt: Numero di personaggi
+    optional: true
   body:
   - field: obiettivo
     prompt: Obiettivo della scena

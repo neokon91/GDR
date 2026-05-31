@@ -313,9 +313,61 @@ async function renderClock(container, app, page) {
     text: filled >= n ? `⚠️ Clock PIENO (${filled}/${n}) — scatena la conseguenza` : `Clock ${filled}/${n}` });
 }
 
+// --- Difficoltà incontri (DMG 2024) ------------------------------------------
+// XP di una creatura: 'pe' diretto (mostri SRD) o derivato dal 'gs' via cr_xp.
+function xpForCreature(p, core) {
+  if (p && p.pe != null && Number(p.pe) > 0) return Number(p.pe);
+  const cr = (core.xp || {}).cr_xp || {};
+  const gs = p && p.gs != null ? String(p.gs) : "";
+  return Number(cr[gs] || 0);
+}
+
+// Pannello difficoltà (markdown): budget del gruppo vs XP totale delle creature
+// collegate + la lista pronta per il blocco `encounter` (Initiative Tracker).
+async function renderEncounter(app, dv, page) {
+  if (!page || !dv) return "*Dataview non attivo o nessuna nota.*";
+  const core = await loadCoreData(app);
+  const xp = core.xp || {};
+  const liv = Math.max(0, Math.min(20, Math.floor(Number(page.pg_livello) || 0)));
+  const num = Math.max(0, Math.floor(Number(page.pg_numero) || 0));
+  const creature = asArray(page.creature).map((l) => resolve(dv, l)).filter(Boolean);
+  let totale = 0;
+  const counts = {};
+  const righe = [];
+  for (const c of creature) {
+    const x = xpForCreature(c, core);
+    totale += x;
+    const nome = c.file ? c.file.name : (c.nome || "—");
+    counts[nome] = (counts[nome] || 0) + 1;
+    righe.push(`- ${nome}: GS ${c.gs != null ? c.gs : "?"} · ${x} PE`);
+  }
+  let out = "> [!abstract] Difficoltà incontro\n";
+  if (!liv || !num) {
+    out += "> Imposta **Livello del gruppo** e **Numero di PG** (tab Scena / Proprietà) per la stima.\n";
+  } else {
+    const b = (xp.budget_2024 || {})[String(liv)] || [0, 0, 0];
+    const bassa = b[0] * num, mod = b[1] * num, alta = b[2] * num;
+    let label = "Banale";
+    if (totale >= alta) label = totale >= alta * 1.25 ? "Mortale ☠️" : "Alta";
+    else if (totale >= mod) label = "Moderata";
+    else if (totale >= bassa) label = "Bassa";
+    out += `> Gruppo: **${num}× liv ${liv}** · XP nemici: **${totale}**\n>\n`;
+    out += `> Budget: Bassa ${bassa} · Moderata ${mod} · Alta ${alta}\n>\n`;
+    out += `> → **Difficoltà: ${label}**\n`;
+  }
+  const dettaglio = righe.length ? "\n\n" + righe.join("\n")
+    : "\n\n*Collega le creature (tab Collegamenti) per la stima.*";
+  const blocco = Object.keys(counts).length
+    ? "\n\n**Per il blocco `encounter`** (copia sotto `creatures:`):\n```\n"
+      + Object.entries(counts).map(([n, q]) => `  - ${q}: ${n}`).join("\n") + "\n```"
+    : "";
+  return out + dettaglio + blocco;
+}
+
 module.exports = {
   renderEntityPanel, renderSessionPanel, renderBacklinks,
   renderAxesRadar, renderAxesCompare, radarSvg, clampAxis,
   renderProfilo, archetipiMatch, profiloTags, matchesCond,
   renderClock, clockSvg,
+  renderEncounter, xpForCreature,
 };

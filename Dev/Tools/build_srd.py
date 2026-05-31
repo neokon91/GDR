@@ -224,6 +224,13 @@ def build_srd(core: dict[str, Any]) -> int:
     for monster in load_srd("srd_5_2_1_monsters.json"):
         fm = {"nome": monster.get("nome", ""), "categoria": "srd-mostro", "srd": True,
               "fonte": "SRD 5.2.1", "statblock": "inline"}
+        # gs/pe nel frontmatter (interrogabili): servono al calcolo difficoltà incontri.
+        gs = monster.get("grado_sfida") or {}
+        if isinstance(gs, dict):
+            if gs.get("valore") is not None:
+                fm["gs"] = str(gs["valore"])
+            if gs.get("punti_esperienza") is not None:
+                fm["pe"] = gs["punti_esperienza"]
         content = frontmatter_block(fm) + f"# {monster.get('nome', '')}\n\n```statblock\n{srd_statblock_yaml(monster, layout)}```\n"
         write_text(VAULT / "SRD" / "Mostri" / f"{srd_slug(monster.get('nome'))}.md", content)
         written += 1

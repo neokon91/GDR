@@ -283,6 +283,22 @@ return engine.markdown.create(views.{{ fn }}(dv, page));
 ```
 {%- endmacro %}
 
+{# Difficoltà incontro (JS Engine): budget XP 2024 del gruppo (pg_livello × pg_numero)
+   vs XP totale delle creature collegate (gs/pe) -> etichetta difficoltà + la lista
+   pronta per il blocco `encounter`. Logica in views.renderEncounter. #}
+{% macro difficolta() -%}
+```js-engine
+const src = await app.vault.adapter.read("z.automazioni/views.js");
+const mod = { exports: {} };
+new Function("module", "exports", src)(mod, mod.exports);
+const views = mod.exports;
+const dv = app.plugins.plugins.dataview && app.plugins.plugins.dataview.api;
+const file = app.workspace.getActiveFile();
+const page = dv && file ? dv.page(file.path) : null;
+return engine.markdown.create(await views.renderEncounter(app, dv, page));
+```
+{%- endmacro %}
+
 {# Radar degli assi tematici (JS Engine): visualizza gli assi 0-10 della NOTA
    CORRENTE come radar SVG, sotto gli slider del tab Carattere. La definizione
    degli assi è in core.json (render.py); il disegno in views.js (renderAxesRadar).

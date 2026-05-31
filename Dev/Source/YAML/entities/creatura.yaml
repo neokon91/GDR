@@ -35,7 +35,8 @@ subtypes:
 fields:
   ruolo_ecologico: { label: Ruolo ecologico, widget: text }
   dieta:           { label: Dieta,           widget: dieta }
-scheda: [taglia, ruolo_ecologico, dieta]
+  gs:              { label: Grado di sfida,   widget: gs }
+scheda: [taglia, gs, ruolo_ecologico, dieta]
 relazioni:
 - field: habitat
   label: Habitat

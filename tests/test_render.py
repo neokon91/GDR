@@ -321,6 +321,29 @@ def test_clock_svg(tmp_path):
     assert out["ok"] and out["paths"] == 6 and out["filled"] == 2
 
 
+@pytest.mark.skipif(not shutil.which("node"), reason="node assente")
+def test_encounter_xp(tmp_path):
+    """views.xpForCreature: 'pe' diretto (SRD) o derivato dal 'gs' via cr_xp, sui dati
+    reali (le tabelle xp del modello)."""
+    cr_xp = (CORE.get("xp", {}) or {}).get("cr_xp") or {}
+    assert cr_xp.get("2") == 450, "tabella cr_xp assente/errata"
+    harness = tmp_path / "enc.js"
+    harness.write_text(
+        'const fs=require("fs");'
+        f'const src=fs.readFileSync({json.dumps(str(render.JS_DIR / "views.js"))},"utf8");'
+        'const m={exports:{}};new Function("module","exports",src)(m,m.exports);'
+        f'const core={json.dumps({"xp": CORE.get("xp", {})}, ensure_ascii=False)};'
+        'process.stdout.write(JSON.stringify({'
+        'pe:m.exports.xpForCreature({pe:5900},core),'
+        'gs:m.exports.xpForCreature({gs:"3"},core),'
+        'frac:m.exports.xpForCreature({gs:"1/2"},core)}));',
+        encoding="utf-8")
+    res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
+    assert res.returncode == 0, res.stderr
+    out = json.loads(res.stdout)
+    assert out["pe"] == 5900 and out["gs"] == cr_xp["3"] and out["frac"] == cr_xp["1/2"]
+
+
 @pytest.mark.skipif(not render.SRD_DIR.is_dir(), reason="SRD non vendorizzata")
 def test_srd_counts_and_statblock():
     """Conteggi attesi + il mostro si mappa su uno statblock Fantasy Statblocks."""

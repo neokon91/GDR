@@ -74,6 +74,7 @@ await views.renderClock(container, app, page);
 
 > [!abstract] Scheda
 > Taglia: `INPUT[taglia][:taglia]`
+> Grado di sfida: `INPUT[gs][:gs]`
 > Ruolo ecologico: `INPUT[text:ruolo_ecologico]`
 > Dieta: `INPUT[dieta][:dieta]`
 

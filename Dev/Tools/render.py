@@ -394,6 +394,8 @@ def build() -> dict[str, str]:
         # e applicati da meta_actions.applica_profilo.
         "relazioni": core.get("relazioni", {}),
         "archetipi": core.get("archetipi", {}),
+        # xp: tabelle CR->XP + budget 2024, per views.renderEncounter (difficoltà).
+        "xp": core.get("xp", {}),
         "creation": core.get("creation", {}),
         "templates": templates,
     }
