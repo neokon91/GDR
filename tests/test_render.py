@@ -102,18 +102,16 @@ def test_srd_json_loads(spec):
         assert entry.get("nome")
 
 
-def test_fs_layout_valid():
-    """Il layout Fantasy Statblocks 2024 è JSON valido con blocchi a id univoci."""
-    import json as _json
-    path = render.SOURCE / "statblock-2024.json"
-    if not path.is_file():
-        pytest.skip("layout FS assente")
-    layout = _json.loads(path.read_text(encoding="utf-8"))
-    assert layout.get("id") and layout.get("name")
-    blocks = layout.get("blocks")
-    assert isinstance(blocks, list) and blocks
-    ids = [b.get("id") for b in blocks]
-    assert len(ids) == len(set(ids)), "id dei blocchi non univoci"
+def test_fs_layouts_valid():
+    """I layout Fantasy Statblocks IT (Dev/Source/statblocks/*.json) sono JSON
+    validi, con id/name e blocchi non vuoti; gli id dei layout sono univoci."""
+    layouts = render.load_statblock_layouts()
+    assert len(layouts) >= 2, "attesi almeno i layout 5e e 5.5e italiani"
+    layout_ids = [l["id"] for l in layouts]
+    assert len(layout_ids) == len(set(layout_ids)), "id dei layout non univoci"
+    for layout in layouts:
+        assert layout.get("name")
+        assert isinstance(layout.get("blocks"), list) and layout["blocks"]
 
 
 @pytest.mark.skipif(not render.SRD_DIR.is_dir(), reason="SRD non vendorizzata")

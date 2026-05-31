@@ -23,6 +23,7 @@ JINJA_DIR = SOURCE / "Jinja"
 JS_DIR = SOURCE / "JS"
 SAMPLES_DIR = SOURCE / "Samples"
 SRD_DIR = SOURCE / "SRD"  # SRD 5.2.1 vendorizzata (markdown, CC-BY-4.0)
+STATBLOCKS_DIR = SOURCE / "statblocks"  # layout Fantasy Statblocks (uno per file)
 
 # Unico target di output: il vault Obsidian vivo. Si apre questa cartella in
 # Obsidian e si rilancia `build` per vedere i cambiamenti dal vivo. Il repo di
@@ -139,6 +140,19 @@ def read_json(path: Path) -> Any:
         except (ValueError, OSError):
             return None
     return None
+
+
+def load_statblock_layouts() -> list[dict[str, Any]]:
+    """Layout Fantasy Statblocks vendorizzati (Dev/Source/statblocks/*.json), uno
+    per file. Ognuno deve essere un oggetto con id+name; gli altri sono ignorati."""
+    if not STATBLOCKS_DIR.is_dir():
+        return []
+    layouts = []
+    for path in sorted(STATBLOCKS_DIR.glob("*.json")):
+        data = read_json(path)
+        if isinstance(data, dict) and data.get("id") and data.get("name"):
+            layouts.append(data)
+    return layouts
 
 
 def merge_json(path: Path, updates: dict[str, Any]) -> None:
@@ -578,16 +592,22 @@ def build() -> dict[str, str]:
             cm["callouts"] = callouts_cfg
             write_json(cm_dir / "data.json", cm)
 
-    # Fantasy Statblocks: rende disponibile un layout 2024 (NON default: lo
-    # selezioni tu in FS). Union per id, preserva default e layout esistenti.
-    fs_layout = read_json(SOURCE / "statblock-2024.json")
+    # Fantasy Statblocks: rende disponibili i layout italiani 5e/5.5e (uno per
+    # file in Dev/Source/statblocks/). NON cambia il default: li selezioni tu in
+    # FS. Union per id: preserva default e layout esistenti dell'utente.
     fs_dir = obsidian / "plugins" / "obsidian-5e-statblocks"
-    if isinstance(fs_layout, dict) and fs_dir.is_dir():
+    if fs_dir.is_dir():
         fs_data = read_json(fs_dir / "data.json")
         if isinstance(fs_data, dict):
             layouts = fs_data.get("layouts") if isinstance(fs_data.get("layouts"), list) else []
-            if not any(isinstance(l, dict) and l.get("id") == fs_layout.get("id") for l in layouts):
-                layouts.append(fs_layout)
+            known = {l.get("id") for l in layouts if isinstance(l, dict)}
+            changed = False
+            for fs_layout in load_statblock_layouts():
+                if fs_layout.get("id") not in known:
+                    layouts.append(fs_layout)
+                    known.add(fs_layout.get("id"))
+                    changed = True
+            if changed:
                 fs_data["layouts"] = layouts
                 write_json(fs_dir / "data.json", fs_data)
 

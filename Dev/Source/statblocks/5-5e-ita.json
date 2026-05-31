@@ -1,0 +1,461 @@
+{
+  "blocks": [
+    {
+      "type": "inline",
+      "id": "55it-header-inline",
+      "properties": [],
+      "hasRule": true,
+      "nested": [
+        {
+          "type": "group",
+          "id": "55it-header-group",
+          "properties": [
+            "name",
+            "size",
+            "type",
+            "subtype",
+            "alignment"
+          ],
+          "nested": [
+            {
+              "type": "inline",
+              "id": "55it-title-actions-inline",
+              "properties": [],
+              "hasRule": false,
+              "nested": [
+                {
+                  "type": "heading",
+                  "id": "55it-name-heading",
+                  "properties": [
+                    "name"
+                  ],
+                  "conditioned": true,
+                  "size": 1
+                },
+                {
+                  "type": "inline",
+                  "id": "55it-initiative-tracker-actions",
+                  "properties": [],
+                  "hasRule": false,
+                  "nested": [
+                    {
+                      "type": "action",
+                      "id": "55it-start-encounter-action",
+                      "icon": "sword",
+                      "callback": "try { InitiativeTracker.newEncounter({roll: true, creatures: [monster]}); } catch(e) {}"
+                    },
+                    {
+                      "type": "action",
+                      "id": "55it-add-creature-action",
+                      "icon": "plus-with-circle",
+                      "callback": "try { InitiativeTracker.addCreatures([monster]); } catch(e) {}"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "subheading",
+              "id": "55it-subheading",
+              "properties": [
+                "size",
+                "type",
+                "subtype",
+                "alignment"
+              ],
+              "conditioned": true,
+              "separator": ", "
+            }
+          ],
+          "conditioned": true
+        },
+        {
+          "type": "image",
+          "id": "55it-image",
+          "properties": [
+            "image"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "group",
+      "id": "55it-core-defenses",
+      "properties": [
+        "stats",
+        "ac",
+        "hp",
+        "hit_dice",
+        "speed"
+      ],
+      "nested": [
+        {
+          "type": "inline",
+          "id": "55it-ac-initiative-inline",
+          "properties": [],
+          "hasRule": false,
+          "conditioned": true,
+          "nested": [
+            {
+              "type": "property",
+              "id": "55it-ac",
+              "properties": [
+                "ac"
+              ],
+              "display": "CA",
+              "conditioned": true,
+              "callback": "const ac = [monster.ac]; if (monster.ac_class) ac.push(`(${monster.ac_class})`); return ac.join(' ');"
+            },
+            {
+              "type": "property",
+              "id": "55it-initiative",
+              "properties": [
+                "stats"
+              ],
+              "display": "Iniziativa",
+              "conditioned": true,
+              "callback": "const stats = Array.isArray(monster.stats) ? monster.stats : [10,10,10,10,10,10]; const dex = Number(stats[1] ?? 10); const mod = Math.floor((dex - 10) / 2); const score = 10 + mod; return `${mod >= 0 ? '+' : ''}${mod} (${score})`;"
+            }
+          ]
+        },
+        {
+          "type": "property",
+          "id": "55it-hp",
+          "properties": [
+            "hp"
+          ],
+          "display": "PF",
+          "dice": true,
+          "diceProperty": "hit_dice",
+          "diceCallback": "if (monster.hit_dice) { return [{ text: monster.hit_dice }]; } return property;",
+          "callback": "const out = [monster.hp]; if (monster.hit_dice) out.push(`(${monster.hit_dice})`); return out.join(' ');",
+          "conditioned": true
+        },
+        {
+          "type": "property",
+          "id": "55it-speed",
+          "display": "Velocità",
+          "properties": [
+            "speed"
+          ],
+          "conditioned": true
+        }
+      ],
+      "hasRule": true,
+      "conditioned": true
+    },
+    {
+      "type": "table",
+      "id": "55it-stats-table",
+      "properties": [
+        "stats"
+      ],
+      "headers": [
+        "For",
+        "Des",
+        "Cos",
+        "Int",
+        "Sag",
+        "Car"
+      ],
+      "calculate": true,
+      "hasRule": true,
+      "conditioned": true
+    },
+    {
+      "type": "table",
+      "id": "55it-fage-stats-compat",
+      "properties": [
+        "fage_stats"
+      ],
+      "headers": [
+        "Accuracy",
+        "Communication",
+        "Constitution",
+        "Dexterity",
+        "Fighting",
+        "Intelligence",
+        "Perception",
+        "Strength",
+        "Willpower"
+      ],
+      "calculate": false,
+      "hasRule": true,
+      "conditioned": true
+    },
+    {
+      "type": "group",
+      "id": "55it-details",
+      "properties": [
+        "saves",
+        "skillsaves",
+        "damage_immunities",
+        "damage_resistances",
+        "damage_vulnerabilities",
+        "condition_immunities",
+        "gear",
+        "cr",
+        "languages",
+        "senses"
+      ],
+      "nested": [
+        {
+          "type": "saves",
+          "id": "55it-saves",
+          "display": "Tiri Salvezza",
+          "properties": [
+            "saves"
+          ],
+          "conditioned": true
+        },
+        {
+          "type": "saves",
+          "id": "55it-skills",
+          "display": "Abilità",
+          "properties": [
+            "skillsaves"
+          ],
+          "conditioned": true
+        },
+        {
+          "type": "property",
+          "id": "55it-resistances",
+          "display": "Resistenze",
+          "properties": [
+            "damage_resistances"
+          ],
+          "conditioned": true
+        },
+        {
+          "type": "property",
+          "id": "55it-immunities",
+          "display": "Immunità",
+          "properties": [
+            "damage_immunities"
+          ],
+          "conditioned": true
+        },
+        {
+          "type": "property",
+          "id": "55it-condition-immunities",
+          "display": "Immunità alle Condizioni",
+          "properties": [
+            "condition_immunities"
+          ],
+          "conditioned": true
+        },
+        {
+          "type": "property",
+          "id": "55it-vulnerabilities",
+          "display": "Vulnerabilità",
+          "properties": [
+            "damage_vulnerabilities"
+          ],
+          "conditioned": true
+        },
+        {
+          "type": "property",
+          "id": "55it-gear",
+          "display": "Equipaggiamento",
+          "properties": [
+            "gear"
+          ],
+          "conditioned": true
+        },
+        {
+          "type": "property",
+          "id": "55it-senses",
+          "display": "Sensi",
+          "properties": [
+            "senses"
+          ],
+          "conditioned": true
+        },
+        {
+          "type": "property",
+          "id": "55it-languages",
+          "display": "Linguaggi",
+          "properties": [
+            "languages"
+          ],
+          "fallback": "—"
+        },
+        {
+          "type": "inline",
+          "id": "55it-cr-pb-inline",
+          "properties": [],
+          "conditioned": true,
+          "nested": [
+            {
+              "type": "property",
+              "id": "55it-cr",
+              "display": "GS",
+              "properties": [
+                "cr"
+              ],
+              "callback": "const CR = {\"0\":{cr:\"0\",value:0,xp:10},\"1/8\":{cr:\"1/8\",value:.125,xp:25},\"1/4\":{cr:\"1/4\",value:.25,xp:50},\"1/2\":{cr:\"1/2\",value:.5,xp:100},\"0.125\":{cr:\"1/8\",value:.125,xp:25},\"0.25\":{cr:\"1/4\",value:.25,xp:50},\"0.5\":{cr:\"1/2\",value:.5,xp:100},\"1\":{cr:\"1\",value:1,xp:200},\"2\":{cr:\"2\",value:2,xp:450},\"3\":{cr:\"3\",value:3,xp:700},\"4\":{cr:\"4\",value:4,xp:1100},\"5\":{cr:\"5\",value:5,xp:1800},\"6\":{cr:\"6\",value:6,xp:2300},\"7\":{cr:\"7\",value:7,xp:2900},\"8\":{cr:\"8\",value:8,xp:3900},\"9\":{cr:\"9\",value:9,xp:5000},\"10\":{cr:\"10\",value:10,xp:5900},\"11\":{cr:\"11\",value:11,xp:7200},\"12\":{cr:\"12\",value:12,xp:8400},\"13\":{cr:\"13\",value:13,xp:10000},\"14\":{cr:\"14\",value:14,xp:11500},\"15\":{cr:\"15\",value:15,xp:13000},\"16\":{cr:\"16\",value:16,xp:15000},\"17\":{cr:\"17\",value:17,xp:18000},\"18\":{cr:\"18\",value:18,xp:20000},\"19\":{cr:\"19\",value:19,xp:22000},\"20\":{cr:\"20\",value:20,xp:25000},\"21\":{cr:\"21\",value:21,xp:33000},\"22\":{cr:\"22\",value:22,xp:41000},\"23\":{cr:\"23\",value:23,xp:50000},\"24\":{cr:\"24\",value:24,xp:62000},\"25\":{cr:\"25\",value:25,xp:75000},\"26\":{cr:\"26\",value:26,xp:90000},\"27\":{cr:\"27\",value:27,xp:105000},\"28\":{cr:\"28\",value:28,xp:120000},\"29\":{cr:\"29\",value:29,xp:135000},\"30\":{cr:\"30\",value:30,xp:155000}}; if (monster.cr && monster.cr in CR) return `${CR[monster.cr].cr} (${CR[monster.cr].xp.toLocaleString()} PE)`; return monster.cr ?? '';",
+              "fallback": "—"
+            },
+            {
+              "type": "property",
+              "id": "55it-pb",
+              "display": "PB",
+              "properties": [
+                "cr"
+              ],
+              "callback": "const CR = {\"0\":0,\"1/8\":.125,\"1/4\":.25,\"1/2\":.5,\"0.125\":.125,\"0.25\":.25,\"0.5\":.5,\"1\":1,\"2\":2,\"3\":3,\"4\":4,\"5\":5,\"6\":6,\"7\":7,\"8\":8,\"9\":9,\"10\":10,\"11\":11,\"12\":12,\"13\":13,\"14\":14,\"15\":15,\"16\":16,\"17\":17,\"18\":18,\"19\":19,\"20\":20,\"21\":21,\"22\":22,\"23\":23,\"24\":24,\"25\":25,\"26\":26,\"27\":27,\"28\":28,\"29\":29,\"30\":30}; if (monster.pb) return String(monster.pb).startsWith('+') ? monster.pb : `+${monster.pb}`; if (monster.proficiency_bonus) return String(monster.proficiency_bonus).startsWith('+') ? monster.proficiency_bonus : `+${monster.proficiency_bonus}`; if (monster.cr && monster.cr in CR) return `+${Math.max(Math.floor(2 + ((CR[monster.cr] ?? 0) - 1) / 4), 2)}`; return '';",
+              "fallback": "—"
+            }
+          ]
+        }
+      ],
+      "conditioned": true,
+      "hasRule": true
+    },
+    {
+      "type": "traits",
+      "id": "55it-traits",
+      "properties": [
+        "traits"
+      ],
+      "conditioned": true,
+      "dice": true,
+      "heading": ""
+    },
+    {
+      "type": "spells",
+      "id": "55it-spells",
+      "properties": [
+        "spells"
+      ],
+      "conditioned": true,
+      "dice": true,
+      "heading": "Incantesimi"
+    },
+    {
+      "type": "text",
+      "id": "55it-spells-notes",
+      "properties": [
+        "spellsNotes"
+      ],
+      "conditioned": true,
+      "text": null
+    },
+    {
+      "type": "traits",
+      "id": "55it-actions",
+      "properties": [
+        "actions"
+      ],
+      "heading": "Azioni",
+      "conditioned": true,
+      "dice": true
+    },
+    {
+      "type": "traits",
+      "id": "55it-bonus-actions",
+      "properties": [
+        "bonus_actions"
+      ],
+      "heading": "Azioni Bonus",
+      "conditioned": true,
+      "dice": true
+    },
+    {
+      "type": "traits",
+      "id": "55it-reactions",
+      "properties": [
+        "reactions"
+      ],
+      "heading": "Reazioni",
+      "conditioned": true,
+      "dice": true
+    },
+    {
+      "type": "group",
+      "id": "55it-legendary-group",
+      "properties": [
+        "legendary_description",
+        "legendary_actions"
+      ],
+      "heading": "Azioni Leggendarie",
+      "nested": [
+        {
+          "type": "text",
+          "id": "55it-legendary-description",
+          "properties": [
+            "legendary_description"
+          ],
+          "conditioned": true,
+          "text": null,
+          "heading": ""
+        },
+        {
+          "type": "traits",
+          "id": "55it-legendary-actions",
+          "properties": [
+            "legendary_actions"
+          ],
+          "conditioned": true,
+          "dice": true,
+          "heading": ""
+        }
+      ],
+      "conditioned": true
+    },
+    {
+      "type": "group",
+      "id": "55it-mythic-group",
+      "properties": [
+        "mythic_description",
+        "mythic_actions"
+      ],
+      "heading": "Azioni Mitiche",
+      "nested": [
+        {
+          "type": "text",
+          "id": "55it-mythic-description",
+          "properties": [
+            "mythic_description"
+          ],
+          "conditioned": true,
+          "text": null
+        },
+        {
+          "type": "traits",
+          "id": "55it-mythic-actions",
+          "properties": [
+            "mythic_actions"
+          ],
+          "conditioned": true,
+          "dice": true,
+          "heading": ""
+        }
+      ],
+      "conditioned": true
+    },
+    {
+      "type": "traits",
+      "id": "55it-lair-actions",
+      "properties": [
+        "lair_actions"
+      ],
+      "heading": "Azioni della Tana",
+      "conditioned": true,
+      "dice": true
+    },
+    {
+      "type": "traits",
+      "id": "55it-regional-effects",
+      "properties": [
+        "regional_effects"
+      ],
+      "heading": "Effetti Regionali",
+      "conditioned": true,
+      "dice": true
+    }
+  ],
+  "name": "D&D 5.5 Layout ITA - Compatibile 5e",
+  "id": "094b38db081b",
+  "diceParsing": []
+}
