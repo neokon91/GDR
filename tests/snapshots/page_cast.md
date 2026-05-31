@@ -1,0 +1,32 @@
+# 🎭 Cast
+
+*PG e PNG, con affiliazione e base.*
+
+> [!example] Crea
+> `BUTTON[crea-pg]`
+> `BUTTON[crea-png]`
+
+## Tutte le voci
+```dataview
+table without id file.link as Nome, tipo as "Ruolo", fazione as "Affiliazione", luogo as "Base", pressione as "Pressione"
+from ""
+where categoria = "personaggio" and stato != "archiviata"
+sort file.name asc
+```
+
+## 🔥 Fronti caldi
+```dataview
+table without id file.link as Nome, pressione as Pressione, prossima_mossa as "Prossima mossa"
+from ""
+where categoria = "personaggio" and pressione >= 5 and stato != "archiviata"
+sort pressione desc
+limit 8
+```
+
+## Bozze da rifinire
+```dataview
+list
+from ""
+where categoria = "personaggio" and stato = "bozza"
+sort file.mtime desc
+```

@@ -1,0 +1,42 @@
+<% await tp.user.create_entity(tp, "regola") %>
+# `=this.nome`
+
+> [!info] Regola
+> **Tipo**: `VIEW[{tipo} ?? "—"]` · **Mondo**: `VIEW[{mondo}][text(renderMarkdown)]`
+>
+> **Stato**: `INPUT[stato][:stato]`
+
+````tabs
+--- Lore
+
+> [!note]- Descrizione
+> Cosa è, com'è, perché conta al tavolo.
+
+> [!note] Cosa
+> `INPUT[textArea:cosa_regola]`
+
+> [!note] Come
+> `INPUT[textArea:come_funziona]`
+
+> [!note] Eccezioni
+> `INPUT[textArea:eccezioni]`
+
+
+--- Collegamenti
+
+
+> [!example] Collegamenti
+> Mondo: `INPUT[mondo][:mondo]`
+>
+> Connessioni: `INPUT[connessioni][:connessioni]`
+
+> [!tip] Collega
+> Aggiungi una relazione (anche dopo la creazione): `BUTTON[collega-nota]`
+--- Vista
+
+```dataviewjs
+const source = await dv.io.load("z.automazioni/views.js");
+eval(source);
+renderEntityPanel(dv, dv.current());
+```
+````

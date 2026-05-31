@@ -58,6 +58,7 @@ from validate import (  # noqa: F401 (re-export per i test)
     SYSTEM_ONLY_SECTIONS,
     check,
     validate_entities,
+    validate_entity_schema,
     validate_split,
 )
 

@@ -136,6 +136,40 @@ def validate_entities(core_raw: dict[str, Any], system_raw: dict[str, Any],
     return errors
 
 
+def validate_entity_schema(entities: list[dict[str, Any]]) -> list[str]:
+    """Schema strutturale dei file-entità: tipi e chiavi richieste. Complementa
+    validate_entities (collisioni) con un controllo di forma per-file."""
+    errors: list[str] = []
+
+    def need(cond: Any, msg: str) -> None:
+        if not cond:
+            errors.append(msg)
+
+    for entity in entities:
+        eid = entity.get("id", "?")
+        need(isinstance(entity.get("id"), str), f"entity {eid}: 'id' non è stringa")
+        need(isinstance(entity.get("folder"), str) and entity.get("folder"), f"entity {eid}: 'folder' mancante/non stringa")
+        need(isinstance(entity.get("order", 0), int), f"entity {eid}: 'order' non è intero")
+        need(isinstance(entity.get("subtypes", []), list), f"entity {eid}: 'subtypes' non è lista")
+        for tpl in entity.get("templates", []) or []:
+            missing = {"id", "title", "target", "jinja"} - set(tpl)
+            need(not missing, f"entity {eid}: template '{tpl.get('id', '?')}' senza {sorted(missing)}")
+        for fid, spec in (entity.get("fields") or {}).items():
+            need(isinstance(spec, dict) and spec.get("label") and spec.get("widget"),
+                 f"entity {eid}: campo '{fid}' senza label/widget")
+        for rel in entity.get("relazioni", []) or []:
+            missing = {"field", "label", "category"} - set(rel)
+            need(not missing, f"entity {eid}: relazione senza {sorted(missing)}")
+        for ax in entity.get("assi", []) or []:
+            missing = {"id", "sinistra", "destra"} - set(ax)
+            need(not missing, f"entity {eid}: asse senza {sorted(missing)}")
+        creation = entity.get("creation") or {}
+        need(isinstance(creation, dict), f"entity {eid}: 'creation' non è mappa")
+        for question in (creation.get("fields", []) or []) + (creation.get("body", []) or []):
+            need("field" in question and "prompt" in question, f"entity {eid}: domanda wizard senza field/prompt")
+    return errors
+
+
 def check() -> int:
     errors: list[str] = []
     core_raw, system_raw = load_core_parts()
@@ -143,6 +177,7 @@ def check() -> int:
     core = apply_entities(deep_merge(core_raw, system_raw), entities)
     errors.extend(validate_split(core_raw, system_raw, core))
     errors.extend(validate_entities(core_raw, system_raw, entities, core))
+    errors.extend(validate_entity_schema(entities))
     plugins = load_yaml("plugins.yaml")
     categories = core.get("categories", {})
     folders = core.get("folders", {})

@@ -3,14 +3,28 @@ sul vault (nessun build). Mirror automatizzato di `npm run check` + render
 standalone, eseguibile con `npm test`."""
 
 import json
+import os
 import shutil
 import subprocess
+from pathlib import Path
 
 import pytest
 import yaml
 from jinja2 import Environment, FileSystemLoader, StrictUndefined
 
 import render
+
+# Snapshot dei render: golden file in tests/snapshots/. Rigenera con
+# UPDATE_SNAPSHOTS=1 pytest (es. dopo una modifica VOLUTA dell'output).
+SNAP_DIR = Path(__file__).parent / "snapshots"
+
+
+def _snapshot(name: str, content: str) -> str:
+    SNAP_DIR.mkdir(exist_ok=True)
+    path = SNAP_DIR / name
+    if os.environ.get("UPDATE_SNAPSHOTS") or not path.is_file():
+        path.write_text(content, encoding="utf-8")
+    return path.read_text(encoding="utf-8")
 
 # Mock di Templater per testare crea_personaggio.js fuori da Obsidian: sceglie
 # sempre la prima opzione e legge personaggio.json dal path passato.
@@ -53,6 +67,30 @@ def test_no_duplicate_ids():
     for section in render.PARTITIONED_SECTIONS:
         shared = set(core_raw.get(section, {}) or {}) & set(system_raw.get(section, {}) or {})
         assert not shared, f"{section}: id condivisi fra core e system: {sorted(shared)}"
+
+
+def test_entity_schema():
+    """Schema strutturale dei file-entità (tipi + chiavi richieste)."""
+    assert render.validate_entity_schema(render.load_entities()) == []
+
+
+@pytest.mark.parametrize("tpl", TEMPLATES, ids=[t["id"] for t in TEMPLATES])
+def test_template_snapshot(tpl):
+    """Il render di ogni template combacia col golden (tests/snapshots/)."""
+    out = _env().get_template(tpl["jinja"]).render(core=CORE, plugins=PLUGINS, template=tpl)
+    assert out == _snapshot(f"template_{tpl['id']}.md", out)
+
+
+@pytest.mark.parametrize("page", PAGES, ids=[p["id"] for p in PAGES])
+def test_page_snapshot(page):
+    out = _env().get_template("index.md.j2").render(core=CORE, plugins=PLUGINS, templates=TEMPLATES, page=page)
+    assert out == _snapshot(f"page_{page['id']}.md", out)
+
+
+@pytest.mark.parametrize("name", ["home.md.j2", "leggimi.md.j2"])
+def test_root_note_snapshot(name):
+    out = _env().get_template(name).render(core=CORE, plugins=PLUGINS, templates=TEMPLATES, pages=PAGES)
+    assert out == _snapshot(f"root_{name}.md", out)
 
 
 def test_entities_merge():
