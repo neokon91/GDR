@@ -165,6 +165,28 @@ i sistemi avanzati. La QA in-app è igiene continua, non una fase a sé.
 7. **Profondità worldbuilding**: timeline/calendario (Calendarium), mappe (Excalidraw/
    TTRPG Tools-Maps), legami cosmologia↔culto↔divinità più ricchi.
 
+### 🔮 Da recuperare da FantasyWorld (analizzato 2026-05-31, NON ancora importato)
+Materiale ricco in `/Users/andrea/Desktop/projects/FantasyWorld/JSON/`, da valutare quando
+le fondamenta saranno rifinite. In ordine di valore:
+8. **Sistema astrologico / psico-archetipico** (`JSON/astrologia/`, sistema
+   "tarocchi_psicoarchetipici") — un layer *destino/personalità* completo e coeso: **segni
+   zodiacali** (12, con elemento/modalità/archetipo/MBTI/pianeti dominanti), **arcani
+   maggiori** (tarocchi), **archetipi** di personalità, **pianeti** (10), **case** (12),
+   **cammini** + dei del cammino, **elementi** (4), **piani astrali**, e **tema natale**
+   (profilo MBTI + elemento/modalità/segno/arcano per un personaggio). *Recupero*: un campo
+   `tema_natale`/`archetipo` su **personaggio** (profilo rapido) + categorie astrologiche
+   opzionali (segno/arcano/pianeta) per i mondi dove l'astrologia conta. **Differenziatore
+   worldbuilding forte** (profondità del personaggio); pesante, quindi opt-in per mondo.
+9. **Glossari di categoria FW** (`JSON/generale/glossari/*_cat.json`) — tassonomie curate
+   (`categorie`+`sottotipi`) per fazione/evento/epoca/civiltà/artefatto/luogo/lingua/culto.
+   *Recupero*: arricchire i **subtypes** delle categorie esistenti quando serve più
+   granularità (edit YAML puro).
+10. **Alberi evolutivi** (`JSON/TTRPG/alberi_evolutivi.json`) — abilità per parte-del-corpo
+    → grado → potere (skill-tree). *Recupero*: sistema di **progressione abilità** (poteri di
+    creatura o avanzamento PG homebrew); si lega alla Fase 2 #6 (progressione PG).
+- *Solo contenuto del suo mondo (NON schema, non riusare)*: `personaggio.json`/`luogo.json`/
+  `organizzazioni.json`/`politica.json`/`world_building/divinita|leggi` = istanze del mondo FW.
+
 ### Trasversale / continuo
 - **QA in-app** su ogni pezzo di fondamenta prima di allargare (rischio #1).
 - **Quick-win architetturali**: eliminare i 3 thin-shell `cultura`/`lingua`/`nota.md.j2`
