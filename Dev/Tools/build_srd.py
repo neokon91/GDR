@@ -56,6 +56,44 @@ def _join(value: Any) -> str:
     return ", ".join(str(v) for v in value) if isinstance(value, list) else str(value or "")
 
 
+def _blocchi(blocchi: list[Any]) -> str:
+    """Sotto-blocchi di una sezione ({nome, descrizione}) -> paragrafi in grassetto.
+    È qui che vivono effetti condizioni, tratti di specie, privilegi di classe."""
+    out: list[str] = []
+    for b in blocchi or []:
+        if not isinstance(b, dict):
+            continue
+        nome = str(b.get("nome", "")).strip()
+        desc = str(b.get("descrizione", "")).strip()
+        if nome and desc:
+            out.append(f"**{nome}** — {desc}")
+        elif nome or desc:
+            out.append(nome or desc)
+    return "\n\n".join(out)
+
+
+def _cell(value: Any) -> str:
+    """Cella di tabella markdown: niente a-capo, pipe escappate."""
+    return re.sub(r"\s*\n\s*", " ", str(value if value is not None else "")).replace("|", "\\|").strip()
+
+
+def _righe(righe: list[Any]) -> str:
+    """Righe tabellari (list di dict) -> tabella markdown. È qui che vivono le
+    tabelle di progressione classe, i lignaggi di specie, i risultati spell."""
+    rows = [r for r in righe or [] if isinstance(r, dict)]
+    if not rows:
+        return ""
+    cols: list[str] = []
+    for row in rows:
+        for key in row:
+            if key not in cols:
+                cols.append(key)
+    head = "| " + " | ".join(cols) + " |"
+    sep = "|" + "|".join(["---"] * len(cols)) + "|"
+    body = "\n".join("| " + " | ".join(_cell(row.get(c)) for c in cols) + " |" for row in rows)
+    return f"{head}\n{sep}\n{body}"
+
+
 def srd_header(entry: dict[str, Any], cat: str) -> str:
     """Infobox (callout) coi dati salienti, su misura per categoria. '' se nessuno."""
     def parts(*pairs):
@@ -105,8 +143,21 @@ def srd_note(entry: dict[str, Any], cat: str, fm_fields: list[str]) -> str:
         if isinstance(entry.get(key), str) and entry[key].strip():
             parts.append(entry[key].strip())
     for sez in entry.get("sezioni") or []:
-        if isinstance(sez, dict) and (sez.get("titolo") or sez.get("descrizione")):
-            parts.append(f"### {sez.get('titolo', '')}\n\n{sez.get('descrizione', '')}".strip())
+        if not isinstance(sez, dict):
+            continue
+        blocco: list[str] = []
+        if sez.get("titolo"):
+            blocco.append(f"### {sez['titolo']}")
+        if str(sez.get("descrizione") or "").strip():
+            blocco.append(sez["descrizione"].strip())
+        if sez.get("blocchi"):
+            blocco.append(_blocchi(sez["blocchi"]))
+        if sez.get("righe"):
+            blocco.append(_righe(sez["righe"]))
+        contenuto = [b for b in blocco if b]
+        # Salta le sezioni col solo titolo (niente heading vuoti).
+        if contenuto and not (len(contenuto) == 1 and sez.get("titolo")):
+            parts.append("\n\n".join(contenuto))
     scaling = [s for s in (entry.get("scaling") or []) if isinstance(s, dict)]
     if scaling:
         body = "\n>\n".join(f"> **{s.get('nome', '')}** — {s.get('descrizione', '')}" for s in scaling)
