@@ -1,0 +1,35 @@
+{# Dashboard "Fronti": tutti gli orologi (clock) attivi a colpo d'occhio + le
+   conseguenze già scatenate (storia). Auto-generata (Dataview), sola lettura.
+   Si rigenera a ogni build; interroga il vault a runtime. #}
+# ⏳ Fronti — orologi attivi
+
+> [!info] A cosa serve
+> Tutti i fronti con un **clock** in corso: quanto sono vicini a scatenarsi e cosa
+> accadrà. Quando un clock è **pieno**, apri il fronte e premi *Scatena conseguenza*
+> (crea l'evento e azzera il clock). Imposti un clock dal tab *Al tavolo* di una nota.
+
+## 🔴 Pieni — pronti a scatenare
+```dataview
+table without id file.link as Fronte, (clock + "/" + clock_dim) as Clock, conseguenza as Conseguenza, conseguenza_su as Bersaglio
+from ""
+where clock_dim and clock >= clock_dim and stato != "archiviata"
+sort file.name asc
+```
+
+## ⏳ In corso
+```dataview
+table without id file.link as Fronte, (clock + "/" + clock_dim) as Clock, prossima_mossa as "Prossima mossa", conseguenza as Conseguenza
+from ""
+where clock_dim and clock < clock_dim and stato != "archiviata"
+sort (clock / clock_dim) desc
+```
+
+## 📜 Conseguenze scatenate — storia del mondo
+Gli eventi nati da un clock pieno: la giocata che ha mosso il worldbuilding.
+```dataview
+table without id file.link as Evento, mondo as Mondo, quando as Quando
+from ""
+where categoria = "evento" and tipo = "conseguenza" and stato != "archiviata"
+sort quando desc
+limit 20
+```
