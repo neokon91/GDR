@@ -16,6 +16,11 @@
 > Cosa è, com'è, perché conta al tavolo.
 
 {{ m.wizard_body(template.category) }}
+{% if core.get('assi_tematici', {}).get(template.category) %}
+--- Carattere
+
+{{ m.carattere(template.category) }}
+{% endif %}
 --- Collegamenti
 
 {{ m.relazioni(template.category) }}

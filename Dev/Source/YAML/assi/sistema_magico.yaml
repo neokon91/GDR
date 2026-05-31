@@ -1,0 +1,48 @@
+# Assi tematici (formato ricco 1-5) per 'sistema_magico'. Mix curato da FantasyWorld assi_tematici_magia.
+id: sistema_magico
+assi:
+- id: fonte_magia
+  nome: Fonte della Magia
+  descrizione: "Origine ontologica del potere magico. Indica se proviene dall’interno dell’essere o da forze esterne."
+  valori:
+    1: { etichetta: "Innata", descrizione: "La magia nasce da dentro: sangue, anima, volontà. È parte dell’essenza dell’incantatore." }
+    2: { etichetta: "Latente", descrizione: "L’individuo la canalizza interiormente, pur richiedendo addestramento o risveglio." }
+    3: { etichetta: "Equilibrata", descrizione: "La magia è frutto di sintesi tra forze interiori e canali esterni (divinità, elementi, archetipi)." }
+    4: { etichetta: "Evocata", descrizione: "La magia viene invocata da entità, dimensioni o simboli esterni attraverso rituali e mediazioni." }
+    5: { etichetta: "Donata", descrizione: "È un dono condizionato da potenze superiori o artefatti. L’utente è solo canale, mai sorgente." }
+- id: metodo_magia
+  nome: Metodo Magico
+  descrizione: "Questo asse definisce come viene eseguita la magia: spontaneamente o tramite linguaggi e strutture. Ogni valore rappresenta un diverso grado di formalizzazione tra impulso e algoritmo."
+  valori:
+    1: { etichetta: "Selvaggio", descrizione: "La magia è selvaggia, emotiva, improvvisata. Non segue regole fisse." }
+    2: { etichetta: "Alchemico", descrizione: "Basata su esperienza, prove, tentativi. Si sviluppa con l’intuizione e la sperimentazione." }
+    3: { etichetta: "Interpretativo", descrizione: "Esistono pattern o formule, ma con margini interpretativi o creativi." }
+    4: { etichetta: "Codificato", descrizione: "Riti, formule, sigilli e tecniche codificate. Richiede studio disciplinato." }
+    5: { etichetta: "Meccanico", descrizione: "La magia è trattata come scienza esatta o tecnologia. Formula = effetto prevedibile." }
+- id: costo_magia
+  nome: Costo Esistenziale
+  descrizione: "Prezzo ontologico, fisico o spirituale pagato per l’uso della magia."
+  valori:
+    1: { etichetta: "Nullo", descrizione: "Nessun costo. La magia è naturale e fluida, come respirare." }
+    2: { etichetta: "Residuale", descrizione: "Lievi stanchezze, consumi energetici, ma reversibili o trascurabili." }
+    3: { etichetta: "Bilanciato", descrizione: "Ogni effetto ha un costo proporzionale (tempo di vita, emozione, memoria)." }
+    4: { etichetta: "Gravoso", descrizione: "La magia consuma l’essenza vitale, logora la mente o deteriora il corpo." }
+    5: { etichetta: "Sacrificio", descrizione: "Ogni incanto implica perdita irreversibile: sangue, anime, tempo vitale o verità spirituale." }
+- id: rischio
+  nome: Rischio Esistenziale
+  descrizione: "Grado di pericolo intrinseco nell’uso della magia: effetti collaterali, corruzione, contaminazione dell’anima o della realtà."
+  valori:
+    1: { etichetta: "Sicura", descrizione: "Nessun rischio. La magia è armonica, stabile, non altera l’equilibrio spirituale." }
+    2: { etichetta: "Fragile", descrizione: "Richiede cautela rituale. Piccoli errori generano distorsioni lievi." }
+    3: { etichetta: "Instabile", descrizione: "Ogni incanto ha margini di fallimento o inversione. Serve competenza e fortuna." }
+    4: { etichetta: "Pericolosa", descrizione: "Rischi di contaminazione psichica, squarci dimensionali, entità parassite o mutazioni." }
+    5: { etichetta: "Corrompente", descrizione: "L’uso prolungato logora anima, corpo o mondo. Magia proibita o degenerativa, legata al Vuoto, alla Follia o all’Entropia." }
+- id: ethos_magico
+  nome: Ethos Magico
+  descrizione: "Visione morale, rituale e simbolica del potere magico."
+  valori:
+    1: { etichetta: "Utilitarista", descrizione: "La magia è uno strumento, privo di sacralità o tabù. Chi può usarla, lo fa." }
+    2: { etichetta: "Professionale", descrizione: "È rispettata come arte, ma trattata come disciplina funzionale o professione." }
+    3: { etichetta: "Ambiguo", descrizione: "La magia ha risvolti sacri e pratici. Il suo uso è valutato caso per caso." }
+    4: { etichetta: "Sacrale funzionale", descrizione: "Ogni incanto richiede rispetto, riti e intenzione. Il potere è un prestito spirituale." }
+    5: { etichetta: "Liturgico", descrizione: "Ogni forma magica è un atto liturgico. La magia è comunione con il divino o con le forze cosmiche. Usarla è una preghiera." }

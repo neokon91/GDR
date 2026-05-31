@@ -11,18 +11,33 @@ order: 2
 templates:
 - id: cosmologia
   title: Cosmologia
-  default_type: legge cosmica
+  default_type: quadro cosmico
   target: z.modelli/Cosmologia.md
   jinja: cosmologia.md.j2
 subtypes:
-- legge cosmica
-- piano o aldila
-- forza primordiale
+- quadro cosmico
 - concetto cosmico
+- mistero cosmico
 relazioni:
-- field: divinita
-  label: Divinita legate
-  category: cosmologia
+- field: domini
+  label: Domini
+  category: dominio
+  multi: true
+- field: leggi
+  label: Leggi fondamentali
+  category: legge_fondamentale
+  multi: true
+- field: primordiali
+  label: Entità primordiali
+  category: entita_primordiale
+  multi: true
+- field: piani
+  label: Piani d'esistenza
+  category: piano
+  multi: true
+- field: sistemi_magici
+  label: Sistemi magici
+  category: sistema_magico
   multi: true
 - field: luoghi
   label: Luoghi che la manifestano

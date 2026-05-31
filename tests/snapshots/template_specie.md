@@ -24,6 +24,61 @@
 > `INPUT[textArea:tratti]`
 
 
+--- Carattere
+
+> [!abstract] Carattere
+> **Socialità** `INPUT[slider(minValue(1), maxValue(5), addLabels):socialita]`
+> **Predisposizione Magica** `INPUT[slider(minValue(1), maxValue(5), addLabels):predisposizione_magica]`
+> **Complessità Mentale** `INPUT[slider(minValue(1), maxValue(5), addLabels):complessita_mentale]`
+> **Memoria Ancestrale** `INPUT[slider(minValue(1), maxValue(5), addLabels):memoria_ancestrale]`
+> **Longevità Percettiva** `INPUT[slider(minValue(1), maxValue(5), addLabels):longevita_percettiva]`
+
+> [!note]- Socialità — Descrive il grado di coesione e la struttura sociale della specie. Esprime se tende all’isolamento individuale o alla formazione di comunità stabili, gerarchiche o simbiotiche.
+> **1 · Solitaria** — La specie è tendenzialmente isolata. I suoi membri vivono, cacciano, si riproducono e viaggiano in solitaria. I legami sociali sono rari, fugaci o ritualizzati. Tipico di specie predatrici, eremite o planarie.
+> **2 · Individualista** — I membri convivono in prossimità, ma conservano una forte autonomia. Le interazioni sono utilitaristiche o funzionali. I legami affettivi o rituali sono limitati a eventi specifici.
+> **3 · Aggregativa** — La razza forma gruppi flessibili e adattabili (branchi, clan, famiglie estese). Le relazioni sono stabili ma variabili, e dipendono da necessità territoriali, culturali o biologiche.
+> **4 · Comunitaria** — La coesione sociale è elevata. I membri vivono in comunità organizzate, con ruoli distinti e relazioni stabili. Esistono strutture rituali, familiari o etiche condivise. La cultura è fortemente interpersonale.
+> **5 · Ipercollettiva** — L’individuo non esiste come entità autonoma. Tutto è subordinato al collettivo, alla colonia, all’intelligenza alveare o al legame spirituale. La razza agisce come un’unica coscienza distribuita.
+
+> [!note]- Predisposizione Magica — Grado in cui la magia è presente come qualità innata nella razza. Esprime se il potere arcano, spirituale o primordiale è latente, eccezionale o immediatamente naturale per i suoi membri.
+> **1 · Latente** — La magia è rara e difficile da manifestare. Serve talento, studio o contatti straordinari per risvegliarla. La maggioranza della razza vive senza magia attiva.
+> **2 · Accessibile con fatica** — Alcuni membri riescono a usare la magia con addestramento o predisposizione. La razza può apprenderla, ma è un traguardo, non una condizione. Presente ma non diffusa.
+> **3 · Intrinseca condizionata** — La razza ha una relazione naturale con la magia, ma essa si manifesta solo in certe condizioni: emozioni, riti, maturazione o ambienti particolari. La magia è dormiente e ciclica.
+> **4 · Inerente parziale** — La magia è parte attiva della fisiologia o dell’anima. Quasi tutti i membri la possiedono in forma spontanea o passiva. Il loro corpo, parola o sangue è magico.
+> **5 · Inerente totale** — La magia è costitutiva dell’essere. Ogni membro ne è un canale vivo. Ogni gesto ha potenziale arcano. La razza è fatta di mana, flusso, incanto o essenza primordiale.
+
+> [!note]- Complessità Mentale — Livello di evoluzione cognitiva e coscienza interiore della razza. Esprime se il pensiero è istintivo e limitato o se include strutture metacognitive, collettive o archetipiche.
+> **1 · Semplice** — La razza possiede una coscienza funzionale, diretta, legata al presente. A gisce per istinti, emozioni o necessità concrete. Non sviluppa pensiero astratto o memoria complessa.
+> **2 · Cognitiva basilare** — La razza è capace di linguaggio, apprendimento, memoria culturale. Il pensiero è lineare, pragmatico. La riflessione astratta o simbolica è possibile, ma limitata.
+> **3 · Coscienza strutturata** — La razza possiede pensiero simbolico, etico e creativo. Può riflettere su se stessa, costruire sistemi morali o filosofici. Vive in una cultura complessa e stratificata.
+> **4 · Metacognitiva** — La razza è consapevole della propria mente, soggettività e limiti cognitivi. Può riflettere sul pensiero, sul tempo, sulla percezione. Spesso sviluppa teorie metafisiche o psicoarchetipiche.
+> **5 · Iperevoluta** — La coscienza della razza è multidimensionale. Ogni mente è stratificata, collettiva o transindividuale. La razza può coesistere in stati simultanei, comprendere concetti iperoggettivi o comunicare con entità astratte.
+
+> [!note]- Memoria Ancestrale — Grado di connessione della razza con la propria storia profonda, la linea ancestrale o l’origine cosmica. Esprime se la razza conserva coscientemente ricordi passati, archetipi antichi o conoscenze ereditarie.
+> **1 · Assente** — La razza non possiede memoria storica o genetica. Ogni generazione vive isolata, senza trasmissione profonda del sapere. Le origini sono ignote o irrilevanti. Perfetta per razze giovani, instabili o artificiali.
+> **2 · Parziale** — La razza conserva miti, leggende o cicatrici storiche, ma non ha accesso diretto alla memoria passata. I ricordi sono trasmessi oralmente o culturalmente, non vissuti come reali.
+> **3 · Simbolica** — La razza vive attraverso archetipi, sogni ricorrenti, simboli e riti. La memoria si esprime in forma mitica, ma non sempre consapevole. È presente nel linguaggio, nella forma, nella spiritualità.
+> **4 · Collettiva** — I membri condividono una memoria interiore comune. Ogni nuova vita riporta esperienze passate, anche se non sempre razionalizzate. Esiste un archivio animico, onirico o magico che connette le generazioni.
+> **5 · Totale** — Ogni individuo ricorda pienamente tutte le vite passate, proprie o della stirpe. La razza è eterna nel pensiero, nella coscienza o nello spirito. La memoria è uno stato costante, parte dell’identità personale e collettiva.
+
+> [!note]- Longevità Percettiva — Percezione del tempo, della durata e del senso storico della specie. Indica se la specie vive nel presente, si proietta nel futuro o percepisce il tempo come un ciclo eterno o un mito sacro.
+> **1 · Presente** — La specie vive nell’attimo. Il passato è dimenticato o irrilevante, il futuro incerto. Le decisioni sono immediate, le tradizioni minime. Perfetto per specie istintive o giovani.
+> **2 · Lineare breve** — La specie riconosce passato e futuro, ma in scala ridotta. Ha una storia recente, una memoria corta o una cultura instabile. Il tempo è vissuto come sequenza limitata di eventi significativi.
+> **3 · Storica** — La specie costruisce miti, cronache e genealogie. Ha memoria lunga, mantiene archivi, insegna la storia. Le decisioni sono ponderate nel tempo. Il tempo è una linea da custodire.
+> **4 · Ciclica** — Il tempo è visto come ripetizione cosmica. La specie vive secondo cicli (epoche, eoni, rinascite). Il passato ritorna sotto nuove forme. La cultura è rituale, profetica o archetipica.
+> **5 · Atemporale** — La specie non percepisce il tempo come sequenza. Tutto è simultaneo, simbolico o mitico. Vive nel sogno, nella memoria eterna, nella coscienza collettiva. Il tempo lineare è illusione.
+
+```js-engine
+const src = await app.vault.adapter.read("z.automazioni/views.js");
+const mod = { exports: {} };
+new Function("module", "exports", src)(mod, mod.exports);
+const views = mod.exports;
+const dv = app.plugins.plugins.dataview && app.plugins.plugins.dataview.api;
+const file = app.workspace.getActiveFile();
+const page = dv && file ? dv.page(file.path) : null;
+await views.renderAxesRadar(container, app, page);
+```
+
 --- Collegamenti
 
 

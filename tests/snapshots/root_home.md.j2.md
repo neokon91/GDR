@@ -22,6 +22,11 @@
 > `BUTTON[crea-epoca]`
 > `BUTTON[crea-culto]`
 > `BUTTON[crea-regno]`
+> `BUTTON[crea-sistema_magico]`
+> `BUTTON[crea-dominio]`
+> `BUTTON[crea-legge_fondamentale]`
+> `BUTTON[crea-entita_primordiale]`
+> `BUTTON[crea-piano]`
 
 > [!example]- Altri tipi
 > `BUTTON[crea-cosmologia]`

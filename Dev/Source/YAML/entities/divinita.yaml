@@ -16,6 +16,14 @@ subtypes:
 - divinità minore
 - semidio
 - pantheon
+relazioni:
+- field: domini
+  label: Domini cosmici
+  category: dominio
+  multi: true
+- field: origine
+  label: Origine primordiale
+  category: entita_primordiale
 scheda:
 - dominio
 - allineamento

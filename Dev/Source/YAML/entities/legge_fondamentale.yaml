@@ -1,0 +1,59 @@
+# Schema per-entità: legge_fondamentale (lore). Principio cosmico assoluto, di norma
+# una POLARITÀ (Vita/Morte, Forma/Distorsione, Luce/Ombra, Verità/Illusione...): la
+# tensione fra i due poli regola un aspetto della realtà. Seed FantasyWorld
+# JSON/cosmologia/leggi_fondamentali/*.json (9 leggi). Nodo del grafo cosmologico.
+id: legge_fondamentale
+folder: Mondi/Leggi
+order: 34
+templates:
+- id: legge_fondamentale
+  title: Legge fondamentale
+  default_type: polarità
+  target: z.modelli/Legge fondamentale.md
+  primary: true
+subtypes:
+- polarità
+- principio assoluto
+- vincolo cosmico
+relazioni:
+- field: dominio
+  label: Dominio che la esprime
+  category: dominio
+- field: incarnata_da
+  label: Incarnata da
+  category: entita_primordiale
+  multi: true
+- field: piani
+  label: Piani che la riflettono
+  category: piano
+  multi: true
+creation:
+  fields:
+  - field: tipo
+    prompt: Forma della legge
+    from: subtypes
+    required: true
+  - field: mondo
+    prompt: Mondo
+    from: notes
+    category: mondo
+    link: true
+    required: true
+  body:
+  - field: polarita
+    prompt: 'Polarità: i due poli in tensione (es. Vita ↔ Morte)'
+    heading: Polarità
+  - field: principio
+    prompt: 'Principio: cosa regola, come tiene insieme la realtà'
+    heading: Principio
+  - field: rottura
+    prompt: 'Rottura: cosa accade se la legge si spezza o si sbilancia'
+    heading: Quando si spezza
+  - field: manifestazioni
+    prompt: 'Manifestazioni: come si percepisce nel mondo (fenomeni, presagi)'
+    heading: Manifestazioni
+  - field: segreto
+    prompt: La verità che pochi conoscono su questa legge
+    callout: segreto
+    title: Segreto
+    fold: true

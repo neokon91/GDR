@@ -1,0 +1,48 @@
+# Assi tematici (formato ricco 1-5) per 'specie'. Mix curato da FantasyWorld assi_tematici_specie.
+id: specie
+assi:
+- id: socialita
+  nome: Socialità
+  descrizione: "Descrive il grado di coesione e la struttura sociale della specie. Esprime se tende all’isolamento individuale o alla formazione di comunità stabili, gerarchiche o simbiotiche."
+  valori:
+    1: { etichetta: "Solitaria", descrizione: "La specie è tendenzialmente isolata. I suoi membri vivono, cacciano, si riproducono e viaggiano in solitaria. I legami sociali sono rari, fugaci o ritualizzati. Tipico di specie predatrici, eremite o planarie." }
+    2: { etichetta: "Individualista", descrizione: "I membri convivono in prossimità, ma conservano una forte autonomia. Le interazioni sono utilitaristiche o funzionali. I legami affettivi o rituali sono limitati a eventi specifici." }
+    3: { etichetta: "Aggregativa", descrizione: "La razza forma gruppi flessibili e adattabili (branchi, clan, famiglie estese). Le relazioni sono stabili ma variabili, e dipendono da necessità territoriali, culturali o biologiche." }
+    4: { etichetta: "Comunitaria", descrizione: "La coesione sociale è elevata. I membri vivono in comunità organizzate, con ruoli distinti e relazioni stabili. Esistono strutture rituali, familiari o etiche condivise. La cultura è fortemente interpersonale." }
+    5: { etichetta: "Ipercollettiva", descrizione: "L’individuo non esiste come entità autonoma. Tutto è subordinato al collettivo, alla colonia, all’intelligenza alveare o al legame spirituale. La razza agisce come un’unica coscienza distribuita." }
+- id: predisposizione_magica
+  nome: Predisposizione Magica
+  descrizione: "Grado in cui la magia è presente come qualità innata nella razza. Esprime se il potere arcano, spirituale o primordiale è latente, eccezionale o immediatamente naturale per i suoi membri."
+  valori:
+    1: { etichetta: "Latente", descrizione: "La magia è rara e difficile da manifestare. Serve talento, studio o contatti straordinari per risvegliarla. La maggioranza della razza vive senza magia attiva." }
+    2: { etichetta: "Accessibile con fatica", descrizione: "Alcuni membri riescono a usare la magia con addestramento o predisposizione. La razza può apprenderla, ma è un traguardo, non una condizione. Presente ma non diffusa." }
+    3: { etichetta: "Intrinseca condizionata", descrizione: "La razza ha una relazione naturale con la magia, ma essa si manifesta solo in certe condizioni: emozioni, riti, maturazione o ambienti particolari. La magia è dormiente e ciclica." }
+    4: { etichetta: "Inerente parziale", descrizione: "La magia è parte attiva della fisiologia o dell’anima. Quasi tutti i membri la possiedono in forma spontanea o passiva. Il loro corpo, parola o sangue è magico." }
+    5: { etichetta: "Inerente totale", descrizione: "La magia è costitutiva dell’essere. Ogni membro ne è un canale vivo. Ogni gesto ha potenziale arcano. La razza è fatta di mana, flusso, incanto o essenza primordiale." }
+- id: complessita_mentale
+  nome: Complessità Mentale
+  descrizione: "Livello di evoluzione cognitiva e coscienza interiore della razza. Esprime se il pensiero è istintivo e limitato o se include strutture metacognitive, collettive o archetipiche."
+  valori:
+    1: { etichetta: "Semplice", descrizione: "La razza possiede una coscienza funzionale, diretta, legata al presente. A gisce per istinti, emozioni o necessità concrete. Non sviluppa pensiero astratto o memoria complessa." }
+    2: { etichetta: "Cognitiva basilare", descrizione: "La razza è capace di linguaggio, apprendimento, memoria culturale. Il pensiero è lineare, pragmatico. La riflessione astratta o simbolica è possibile, ma limitata." }
+    3: { etichetta: "Coscienza strutturata", descrizione: "La razza possiede pensiero simbolico, etico e creativo. Può riflettere su se stessa, costruire sistemi morali o filosofici. Vive in una cultura complessa e stratificata." }
+    4: { etichetta: "Metacognitiva", descrizione: "La razza è consapevole della propria mente, soggettività e limiti cognitivi. Può riflettere sul pensiero, sul tempo, sulla percezione. Spesso sviluppa teorie metafisiche o psicoarchetipiche." }
+    5: { etichetta: "Iperevoluta", descrizione: "La coscienza della razza è multidimensionale. Ogni mente è stratificata, collettiva o transindividuale. La razza può coesistere in stati simultanei, comprendere concetti iperoggettivi o comunicare con entità astratte." }
+- id: memoria_ancestrale
+  nome: Memoria Ancestrale
+  descrizione: "Grado di connessione della razza con la propria storia profonda, la linea ancestrale o l’origine cosmica. Esprime se la razza conserva coscientemente ricordi passati, archetipi antichi o conoscenze ereditarie."
+  valori:
+    1: { etichetta: "Assente", descrizione: "La razza non possiede memoria storica o genetica. Ogni generazione vive isolata, senza trasmissione profonda del sapere. Le origini sono ignote o irrilevanti. Perfetta per razze giovani, instabili o artificiali." }
+    2: { etichetta: "Parziale", descrizione: "La razza conserva miti, leggende o cicatrici storiche, ma non ha accesso diretto alla memoria passata. I ricordi sono trasmessi oralmente o culturalmente, non vissuti come reali." }
+    3: { etichetta: "Simbolica", descrizione: "La razza vive attraverso archetipi, sogni ricorrenti, simboli e riti. La memoria si esprime in forma mitica, ma non sempre consapevole. È presente nel linguaggio, nella forma, nella spiritualità." }
+    4: { etichetta: "Collettiva", descrizione: "I membri condividono una memoria interiore comune. Ogni nuova vita riporta esperienze passate, anche se non sempre razionalizzate. Esiste un archivio animico, onirico o magico che connette le generazioni." }
+    5: { etichetta: "Totale", descrizione: "Ogni individuo ricorda pienamente tutte le vite passate, proprie o della stirpe. La razza è eterna nel pensiero, nella coscienza o nello spirito. La memoria è uno stato costante, parte dell’identità personale e collettiva." }
+- id: longevita_percettiva
+  nome: Longevità Percettiva
+  descrizione: "Percezione del tempo, della durata e del senso storico della specie. Indica se la specie vive nel presente, si proietta nel futuro o percepisce il tempo come un ciclo eterno o un mito sacro."
+  valori:
+    1: { etichetta: "Presente", descrizione: "La specie vive nell’attimo. Il passato è dimenticato o irrilevante, il futuro incerto. Le decisioni sono immediate, le tradizioni minime. Perfetto per specie istintive o giovani." }
+    2: { etichetta: "Lineare breve", descrizione: "La specie riconosce passato e futuro, ma in scala ridotta. Ha una storia recente, una memoria corta o una cultura instabile. Il tempo è vissuto come sequenza limitata di eventi significativi." }
+    3: { etichetta: "Storica", descrizione: "La specie costruisce miti, cronache e genealogie. Ha memoria lunga, mantiene archivi, insegna la storia. Le decisioni sono ponderate nel tempo. Il tempo è una linea da custodire." }
+    4: { etichetta: "Ciclica", descrizione: "Il tempo è visto come ripetizione cosmica. La specie vive secondo cicli (epoche, eoni, rinascite). Il passato ritorna sotto nuove forme. La cultura è rituale, profetica o archetipica." }
+    5: { etichetta: "Atemporale", descrizione: "La specie non percepisce il tempo come sequenza. Tutto è simultaneo, simbolico o mitico. Vive nel sogno, nella memoria eterna, nella coscienza collettiva. Il tempo lineare è illusione." }

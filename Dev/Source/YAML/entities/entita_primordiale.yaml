@@ -1,0 +1,68 @@
+# Schema per-entità: entita_primordiale (lore). Essere pre-divino che incarna una
+# legge fondamentale e appartiene a un dominio; le divinità ne discendono. Distinta
+# da divinita (venerata, attiva nel culto) e da creatura (essere del mondo). Seed
+# FantasyWorld JSON/cosmologia/entita_primordiali.json (dominio/legge_fondamentale/
+# stato/volonta/ruolo_cosmico/allineamento). Nodo del grafo cosmologico.
+id: entita_primordiale
+folder: Mondi/Primordiali
+order: 35
+templates:
+- id: entita_primordiale
+  title: Entità primordiale
+  default_type: forza primordiale
+  target: z.modelli/Entita primordiale.md
+  primary: true
+subtypes:
+- forza primordiale
+- titano
+- entità del vuoto
+- aspetto incarnato
+- dormiente
+relazioni:
+- field: legge
+  label: Legge incarnata
+  category: legge_fondamentale
+- field: dominio
+  label: Dominio
+  category: dominio
+- field: divinita
+  label: Divinità discese
+  category: divinita
+  multi: true
+- field: luoghi
+  label: Luoghi (prigioni, santuari)
+  category: luogo
+  multi: true
+creation:
+  fields:
+  - field: tipo
+    prompt: Natura primordiale
+    from: subtypes
+    required: true
+  - field: mondo
+    prompt: Mondo
+    from: notes
+    category: mondo
+    link: true
+    required: true
+  body:
+  - field: ruolo_cosmico
+    prompt: 'Ruolo cosmico: la sua funzione nell''ordine (o disordine) del cosmo'
+    heading: Ruolo cosmico
+  - field: volonta
+    prompt: 'Volontà: cosa vuole, cosa muove la sua azione'
+    heading: Volontà
+  - field: stato
+    prompt: 'Stato attuale: attivo, dormiente, sigillato, disperso'
+    heading: Stato
+  - field: eredita
+    prompt: 'Eredità: cosa ha lasciato (divinità, stirpi, luoghi, leggi)'
+    heading: Eredità
+  - field: manifestazioni
+    prompt: 'Manifestazioni: segni del suo risveglio o della sua presenza'
+    heading: Manifestazioni
+  - field: segreto
+    prompt: Il vero nome o la verità sigillata su di essa
+    callout: segreto
+    title: Segreto
+    fold: true

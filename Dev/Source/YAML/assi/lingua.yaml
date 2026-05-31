@@ -1,0 +1,48 @@
+# Assi tematici (formato ricco 1-5) per 'lingua'. Mix curato da FantasyWorld assi_tematici_lingua.
+id: lingua
+assi:
+- id: complessita
+  nome: Complessità
+  descrizione: "Struttura interna della lingua, in termini di grammatica, fonologia, sintassi e irregolarità."
+  valori:
+    1: { etichetta: "Semplice", descrizione: "Struttura diretta, poche regole, vocabolario essenziale. Lingua quotidiana o infantile." }
+    2: { etichetta: "Ridotta", descrizione: "Morfologia limitata, poche eccezioni. Tipica di lingue funzionali o pidgin." }
+    3: { etichetta: "Bilanciata", descrizione: "Struttura regolare, con varietà ma senza eccessiva complessità. Equilibrio tra espressività e accessibilità." }
+    4: { etichetta: "Complessa", descrizione: "Ricca di casi, declinazioni, eccezioni e costruzioni sintattiche articolate. Tipica di lingue antiche o colte." }
+    5: { etichetta: "Ipersistemica", descrizione: "Struttura estremamente sofisticata o multidimensionale. Richiede anni di studio. Può riflettere logiche magiche, metafisiche o matematiche." }
+- id: formalita
+  nome: Formalità
+  descrizione: "Livello di codifica rituale, cerimoniale o solenne nella lingua. Indica quanto il suo uso sia quotidiano o sacralizzato."
+  valori:
+    1: { etichetta: "Orale spontanea", descrizione: "Usata in modo informale, istintivo, nel parlato comune. Poco adatta alla scrittura o ai riti." }
+    2: { etichetta: "Colloquiale", descrizione: "Lingua usata nel parlato sociale, con alcune regole e registri, ma priva di sacralità." }
+    3: { etichetta: "Neutra", descrizione: "Lingua polivalente, usata sia in contesti pubblici che privati. Adatta a vari registri." }
+    4: { etichetta: "Solenne", descrizione: "Usata in cerimonie, trattati, preghiere. Richiede formulae codificate e rispetto della forma." }
+    5: { etichetta: "Rituale", descrizione: "Ogni parola ha valore liturgico o magico. La pronuncia errata può alterare il significato o causare effetti indesiderati." }
+- id: funzione
+  nome: Polivalenza
+  descrizione: "Natura della lingua in relazione alla sua funzione: strumento pratico o veicolo simbolico/sacro."
+  valori:
+    1: { etichetta: "Funzionale", descrizione: "Usata solo per comunicare informazioni o comandi. Priva di valore simbolico." }
+    2: { etichetta: "Descrittiva", descrizione: "Serve a descrivere e trasmettere sapere, ma senza implicazioni metafisiche." }
+    3: { etichetta: "Poetica", descrizione: "Ricca di simboli, allegorie e potenza evocativa. Linguaggio della cultura e della memoria." }
+    4: { etichetta: "Sacrale", descrizione: "Ha un valore spirituale o religioso. Le parole possono invocare o celebrare potenze superiori." }
+    5: { etichetta: "Magica", descrizione: "Le parole sono potere. Pronunciare equivale ad agire. È una lingua performativa." }
+- id: origine
+  nome: Origine
+  descrizione: "Processo attraverso cui la lingua è nata: evoluzione naturale o creazione deliberata."
+  valori:
+    1: { etichetta: "Naturale", descrizione: "Nata spontaneamente da una comunità attraverso secoli di mutazioni linguistiche." }
+    2: { etichetta: "Evoluta", descrizione: "Ha una storia, ma con influenze significative esterne (invasioni, magie, interventi religiosi)." }
+    3: { etichetta: "Riformata", descrizione: "Modificata volontariamente in epoca tarda per scopi politici, religiosi o esoterici." }
+    4: { etichetta: "Artificiale", descrizione: "Inventata consapevolmente da studiosi, sacerdoti o ordini mistici. Può avere struttura regolare." }
+    5: { etichetta: "Iniettata", descrizione: "Imposta da entità divine, cosmiche o arcane. Lingua rivelata, non nata, ma trasmessa integralmente." }
+- id: accesso
+  nome: Conoscibilità
+  descrizione: "Accessibilità e diffusione della lingua. Misura quanto è parlata o riservata a élite selezionate."
+  valori:
+    1: { etichetta: "Diffusa", descrizione: "Lingua comune, conosciuta dalla maggioranza della popolazione o del piano di esistenza." }
+    2: { etichetta: "Comune rituale", descrizione: "Usata in contesti pubblici e rituali, ma non per uso domestico o quotidiano." }
+    3: { etichetta: "Specializzata", descrizione: "Parlata da caste, mestieri o regioni specifiche. Serve per scopi pratici o culturali specifici." }
+    4: { etichetta: "Occulta", descrizione: "Insegnata solo a membri selezionati di gilde, culti o ordini magici. La sua esistenza può essere nascosta." }
+    5: { etichetta: "Proibita", descrizione: "La lingua è segreta e vietata. Solo chi è destinato o maledetto può comprenderla. Parlare può avere effetti cosmici o letali." }

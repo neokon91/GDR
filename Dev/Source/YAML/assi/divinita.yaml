@@ -1,0 +1,48 @@
+# Assi tematici (formato ricco 1-5) per 'divinita'. Mix curato da FantasyWorld assi_tematici_divinita.
+id: divinita
+assi:
+- id: presenza_cosmica
+  nome: Presenza Cosmica
+  descrizione: "Determina dove e come la divinità esiste nel cosmo. Unisce la densità ontologica alla distribuzione planare."
+  valori:
+    1: { etichetta: "Trascendente", descrizione: "Esiste oltre il cosmo, non localizzabile, né accessibile. È puro principio." }
+    2: { etichetta: "Diffusa", descrizione: "Presente in molteplici piani e luoghi, ma non incarnata né vincolata. Si manifesta ovunque ma debolmente." }
+    3: { etichetta: "Focalizzata", descrizione: "Possiede una sede principale, ma può agire altrove. Il suo dominio è localizzato, ma non esclusivo." }
+    4: { etichetta: "Ancorata", descrizione: "Legata profondamente a un luogo, piano o popolo. Fuori da esso è muta o assente." }
+    5: { etichetta: "Immanente", descrizione: "È il mondo stesso. Ogni cosa è sua emanazione, esistenza, manifestazione vivente." }
+- id: volonta
+  nome: Volontà
+  descrizione: "Intensità e modalità con cui la divinità esercita la propria volontà nel cosmo. Esprime se agisce in modo diretto e visibile, oppure lascia che gli eventi seguano un proprio corso senza interferire."
+  valori:
+    1: { etichetta: "Silente", descrizione: "La divinità non esercita volontà apparente. Osserva senza agire, non impartisce ordini né influisce sugli eventi. Il libero arbitrio è assoluto, la divinità è puro fondamento, non guida." }
+    2: { etichetta: "Risonante", descrizione: "La volontà divina è presente ma non coercitiva. Si manifesta in sincronicità, ispirazioni o segnali sottili. I fedeli la percepiscono, ma non ricevono comandi né miracoli diretti." }
+    3: { etichetta: "Reattiva", descrizione: "La divinità interviene in risposta a invocazioni, sacrifici o squilibri cosmici. La sua volontà si attiva quando necessaria, ma non domina il flusso degli eventi." }
+    4: { etichetta: "Attiva", descrizione: "La divinità guida, consiglia, punisce, premia. È presente nel mondo attraverso i suoi campioni, i segni e gli eventi. La sua volontà plasma la storia e il destino dei suoi seguaci." }
+    5: { etichetta: "Interventista", descrizione: "La divinità agisce costantemente. Impone la sua visione, determina eventi, plasma la realtà. Nulla accade senza la sua volontà diretta. I fedeli sono strumenti della sua missione." }
+- id: etica_divina
+  nome: Etica Divina
+  descrizione: "Atteggiamento della divinità nei confronti delle azioni morali, delle scelte dei mortali e dell’ordine etico del cosmo. Esprime se la divinità lascia libertà totale, oppure impone un codice e giudica chi lo infrange."
+  valori:
+    1: { etichetta: "Indifferente", descrizione: "La divinità non si interessa dell’etica umana o del concetto di bene e male. Le azioni non hanno conseguenze spirituali. Ogni giudizio è un’illusione mortale." }
+    2: { etichetta: "Osservatrice", descrizione: "La divinità contempla il comportamento umano, ma non interviene. La moralità è vista come esperienza o prova. Può fornire simboli o sfide, ma senza punizioni o premi." }
+    3: { etichetta: "Ambigua", descrizione: "La divinità esprime un’etica fluida o paradossale. I suoi giudizi cambiano nel tempo o variano secondo il contesto. Può premiare un atto e punirlo altrove. Il mistero è parte della sua giustizia." }
+    4: { etichetta: "Normativa", descrizione: "La divinità impone un codice etico. Riconosce il merito, punisce l’empietà o il crimine spirituale. I riti, le regole e la condotta morale sono centrali per il culto." }
+    5: { etichetta: "Giudicante", descrizione: "La divinità è giudice assoluto. Valuta ogni azione, anche i pensieri, e interviene direttamente. Le anime sono pesate, punite o salvate. Il suo culto è legge spirituale." }
+- id: interazione_divina
+  nome: Modalità di Interazione
+  descrizione: "Esprime il modo in cui la divinità comunica, si rivela e si relaziona con il mondo sensibile o spirituale. Unisce i canali comunicativi e la trasparenza simbolica del messaggio divino."
+  valori:
+    1: { etichetta: "Ineffabile", descrizione: "Nessuna comunicazione verbale o esplicita. Solo stati mistici, simboli interiori, esperienze estatiche." }
+    2: { etichetta: "Simbolica", descrizione: "Opera tramite enigmi, sogni, archetipi, oracoli e visioni. Interazione per decodifica iniziatica." }
+    3: { etichetta: "Stratificata", descrizione: "Parla a più livelli. Parte del messaggio è chiaro, parte è occulto o misterico. Necessita interpretazione." }
+    4: { etichetta: "Esplicita", descrizione: "Comunica tramite parole, profeti, testi sacri, precetti. Messaggio diretto, ma mediato." }
+    5: { etichetta: "Totale", descrizione: "Ogni essere percepisce la sua voce. La realtà stessa è linguaggio divino. Interazione continua e universale." }
+- id: incarnazione
+  nome: Incarnazione
+  descrizione: "Grado con cui la divinità assume forma, figura o presenza concreta. Esprime se resta un principio puro e astratto, oppure si manifesta in corpi, avatar, oggetti, esseri viventi o ambienti."
+  valori:
+    1: { etichetta: "Pura", descrizione: "La divinità non ha alcuna forma. È concetto, energia, presenza astratta. Non è mai visibile né rappresentabile. Ogni tentativo di raffigurazione è eresia o illusione." }
+    2: { etichetta: "Impalpabile", descrizione: "Assume forme solo simboliche: fuoco, luce, suono, vento, ombra. Non è antropomorfa né stabile. È percepita, ma non fissabile in immagini o idoli." }
+    3: { etichetta: "Parziale", descrizione: "Può manifestarsi in avatar temporanei, animali sacri, oggetti leggendari o fenomeni naturali. Non ha un’unica forma, ma assume veicoli transitori o epifanici." }
+    4: { etichetta: "Iconica", descrizione: "Ha una forma costante, riconoscibile, spesso antropomorfa o mitica. È rappresentata nei templi, statue, sogni. I suoi simboli e tratti sono codificati nel culto." }
+    5: { etichetta: "Manifesta", descrizione: "La divinità esiste fisicamente nel mondo, incarnata in corpi, regni, luoghi sacri o persone viventi. Può camminare, parlare, combattere. È un essere tangibile e attivo nella realtà." }

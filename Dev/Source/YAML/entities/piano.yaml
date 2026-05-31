@@ -1,0 +1,65 @@
+# Schema per-entità: piano (lore). Piano d'esistenza / aldilà: un livello di realtà
+# con proprie leggi, abitanti e accessi (astrale, elementale, onirico, spirituale,
+# semipiano). Distinto da luogo (sito nel mondo materiale). Seed FantasyWorld
+# JSON/cosmologia/piani_di_esistenza/*.json (origine/leggi/funzione_cosmica/
+# caratteristiche/accessibilità/abitanti). Nodo del grafo cosmologico.
+id: piano
+folder: Mondi/Piani
+order: 36
+templates:
+- id: piano
+  title: Piano d'esistenza
+  default_type: piano spirituale
+  target: z.modelli/Piano.md
+  primary: true
+subtypes:
+- piano elementale
+- piano spirituale
+- piano onirico
+- piano astrale
+- semipiano
+- aldilà
+relazioni:
+- field: leggi
+  label: Leggi che lo governano
+  category: legge_fondamentale
+  multi: true
+- field: dominio
+  label: Dominio cosmico
+  category: dominio
+- field: abitanti
+  label: Abitanti
+  category: creatura
+  multi: true
+- field: soglie
+  label: Soglie / accessi
+  category: luogo
+  multi: true
+creation:
+  fields:
+  - field: tipo
+    prompt: Tipo di piano
+    from: subtypes
+    required: true
+  - field: mondo
+    prompt: Mondo (opzionale)
+    from: notes
+    category: mondo
+    link: true
+    optional: true
+  body:
+  - field: natura
+    prompt: 'Natura: cos''è, che aspetto e sostanza ha'
+    heading: Natura
+  - field: funzione_cosmica
+    prompt: 'Funzione cosmica: che ruolo svolge nel multiverso'
+    heading: Funzione cosmica
+  - field: caratteristiche
+    prompt: 'Caratteristiche: leggi fisiche, ambiente, pericoli'
+    heading: Caratteristiche
+  - field: accesso
+    prompt: 'Accesso: come si entra e si esce (soglie, riti, condizioni)'
+    heading: Accesso
+  - field: influenza
+    prompt: 'Influenza: come tocca il mondo materiale'
+    heading: Influenza

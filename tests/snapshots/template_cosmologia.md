@@ -110,7 +110,11 @@ await views.renderAxesRadar(container, app, page);
 --- Collegamenti
 
 > [!example] Relazioni
-> **Divinita legate**: `INPUT[inlineListSuggester(optionQuery("Mondi/Cosmologia"), useLinks(partial), allowOther):divinita]`
+> **Domini**: `INPUT[inlineListSuggester(optionQuery("Mondi/Domini"), useLinks(partial), allowOther):domini]`
+> **Leggi fondamentali**: `INPUT[inlineListSuggester(optionQuery("Mondi/Leggi"), useLinks(partial), allowOther):leggi]`
+> **Entità primordiali**: `INPUT[inlineListSuggester(optionQuery("Mondi/Primordiali"), useLinks(partial), allowOther):primordiali]`
+> **Piani d'esistenza**: `INPUT[inlineListSuggester(optionQuery("Mondi/Piani"), useLinks(partial), allowOther):piani]`
+> **Sistemi magici**: `INPUT[inlineListSuggester(optionQuery("Mondi/Magia"), useLinks(partial), allowOther):sistemi_magici]`
 > **Luoghi che la manifestano**: `INPUT[inlineListSuggester(optionQuery("Mondi/Luoghi"), useLinks(partial), allowOther):luoghi]`
 
 > [!example] Collegamenti

@@ -1,0 +1,73 @@
+# Schema per-entità: sistema_magico (lore). Il "come funziona la magia" del mondo:
+# fonte, metodo, costo, rischi. Distinto da incantesimo (effetto puntuale SRD) e da
+# cosmologia (i principi). Assi in assi/sistema_magico.yaml. Seed FantasyWorld
+# JSON/cosmologia/magia.json + assi_tematici_magia (mix curato). Nodo del grafo
+# cosmologico: dominio · legge_fondamentale · entita_primordiale · piano.
+id: sistema_magico
+folder: Mondi/Magia
+order: 32
+templates:
+- id: sistema_magico
+  title: Sistema magico
+  default_type: tradizione arcana
+  target: z.modelli/Sistema magico.md
+  primary: true
+subtypes:
+- tradizione arcana
+- disciplina elementale
+- arte proibita
+- dono innato
+- tecnica rituale
+relazioni:
+- field: leggi
+  label: Leggi su cui poggia
+  category: legge_fondamentale
+  multi: true
+- field: dominio
+  label: Dominio cosmico
+  category: dominio
+- field: fonti
+  label: Fonti / risonanze
+  category: entita_primordiale
+  multi: true
+- field: piani
+  label: Piani di risonanza
+  category: piano
+  multi: true
+- field: luoghi_nodo
+  label: Luoghi-nodo
+  category: luogo
+  multi: true
+creation:
+  fields:
+  - field: tipo
+    prompt: Tipo di magia
+    from: subtypes
+    required: true
+  - field: mondo
+    prompt: Mondo
+    from: notes
+    category: mondo
+    link: true
+    required: true
+  body:
+  - field: fonte
+    prompt: 'Fonte: da dove viene il potere'
+    heading: Fonte
+  - field: metodo
+    prompt: 'Metodo: come si pratica (parole, gesti, sangue, patti)'
+    heading: Metodo
+  - field: costo
+    prompt: 'Costo e limiti: cosa esige da chi la usa'
+    heading: Costo
+  - field: rischi
+    prompt: 'Rischi: cosa va storto, corruzione, ricaduta'
+    heading: Rischi
+  - field: manifestazioni
+    prompt: 'Manifestazioni: come si riconosce nel mondo'
+    heading: Manifestazioni
+  - field: segreto
+    prompt: La verità nascosta sulla sua origine o sul suo prezzo
+    callout: segreto
+    title: Segreto
+    fold: true

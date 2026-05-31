@@ -1,0 +1,64 @@
+# Schema per-entità: dominio (lore). Il HUB connettivo della cosmologia: una sfera
+# ontologica (Identità, Dissoluzione, Flusso Temporale, Trasformazione, Ciclo della
+# Vita) che lega leggi, magie, entità primordiali e piani. Seed FantasyWorld
+# JSON/cosmologia/domini.json (ogni dominio = nome/descrizione + leggi_fondamentali/
+# magie/entità_collegate/piani_collegati → qui relazioni tipizzate).
+id: dominio
+folder: Mondi/Domini
+order: 33
+templates:
+- id: dominio
+  title: Dominio
+  default_type: sfera ontologica
+  target: z.modelli/Dominio.md
+  primary: true
+subtypes:
+- sfera ontologica
+- principio attivo
+- aspetto cosmico
+relazioni:
+- field: leggi
+  label: Leggi fondamentali
+  category: legge_fondamentale
+  multi: true
+- field: sistemi_magici
+  label: Magie del dominio
+  category: sistema_magico
+  multi: true
+- field: entita
+  label: Entità collegate
+  category: entita_primordiale
+  multi: true
+- field: piani
+  label: Piani collegati
+  category: piano
+  multi: true
+- field: divinita
+  label: Divinità affini
+  category: divinita
+  multi: true
+creation:
+  fields:
+  - field: tipo
+    prompt: Natura del dominio
+    from: subtypes
+    required: true
+  - field: mondo
+    prompt: Mondo
+    from: notes
+    category: mondo
+    link: true
+    required: true
+  body:
+  - field: natura
+    prompt: 'Natura: cosa governa, di cosa è la sfera'
+    heading: Natura
+  - field: dinamica
+    prompt: 'Dinamica: come opera, cosa mette in moto nel cosmo'
+    heading: Dinamica
+  - field: tensione
+    prompt: 'Tensione: con quali domini confligge o si bilancia'
+    heading: Tensione
+  - field: manifestazioni
+    prompt: 'Manifestazioni: segni del dominio nel mondo mortale'
+    heading: Manifestazioni
