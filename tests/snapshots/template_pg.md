@@ -1,4 +1,4 @@
-<% await tp.user.crea_personaggio(tp) %>
+<% await tp.user.crea_pg(tp) %>
 # `=this.nome`
 
 > [!info] PG

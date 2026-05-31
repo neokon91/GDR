@@ -1,4 +1,4 @@
-<% await tp.user.create_entity(tp, "regola") %>
+<% await tp.user.crea_regola(tp) %>
 # `=this.nome`
 
 > [!info] Regola

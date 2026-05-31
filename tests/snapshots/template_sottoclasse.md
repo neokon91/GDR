@@ -1,4 +1,4 @@
-<% await tp.user.create_entity(tp, "sottoclasse") %>
+<% await tp.user.crea_sottoclasse(tp) %>
 # `=this.nome`
 
 > [!info] Sottoclasse

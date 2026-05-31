@@ -6,7 +6,7 @@
    Esempio: vedi fazione.md.j2. È il "solo le parti in comune" condiviso fra le
    entità; lo specifico vive nel template per-entità + nel suo file YAML. #}
 {% import '_macros.j2' as m with context -%}
-<% await tp.user.create_entity(tp, "{{ template.id }}") %>
+<% await tp.user.crea_{{ template.id }}(tp) %>
 # `=this.nome`
 
 {{ m.identita_card(template) }}

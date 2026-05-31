@@ -1,4 +1,4 @@
-<% await tp.user.create_entity(tp, "evento") %>
+<% await tp.user.crea_evento(tp) %>
 # `=this.nome`
 
 > [!info] Evento

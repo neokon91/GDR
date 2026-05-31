@@ -1,4 +1,4 @@
-<% await tp.user.create_entity(tp, "png") %>
+<% await tp.user.crea_png(tp) %>
 # `=this.nome`
 
 > [!info] PNG

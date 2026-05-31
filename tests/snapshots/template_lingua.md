@@ -1,4 +1,4 @@
-<% await tp.user.create_entity(tp, "lingua") %>
+<% await tp.user.crea_lingua(tp) %>
 # `=this.nome`
 
 > [!info] Lingua

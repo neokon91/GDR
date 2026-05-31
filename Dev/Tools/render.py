@@ -141,6 +141,18 @@ def write_workspace_chrome(obsidian: Path) -> None:
     union_list_key(obsidian / "app.json", "userIgnoreFilters", [f"{d}/" for d in HIDDEN_DIRS])
 
 
+def crea_wrapper_js(template: dict[str, Any]) -> str:
+    """Wizard di creazione per-template generato: `tp.user.crea_<id>` delega al
+    motore condiviso create_entity.js. Le entità bespoke hanno un crea_<id>.js
+    hand-authored in JS/ (override) e non passano di qui."""
+    tid = template["id"]
+    return (
+        f'// GENERATO da render.py — wizard del template "{tid}" (categoria {template["category"]}).\n'
+        f'// Delega al motore create_entity.js; lo schema è in entities/{template["category"]}.yaml.\n'
+        f'module.exports = async (tp) => tp.user.create_entity(tp, "{tid}");\n'
+    )
+
+
 def load_statblock_layouts() -> list[dict[str, Any]]:
     """Layout Fantasy Statblocks vendorizzati (Dev/Source/statblocks/*.json), uno
     per file. Ognuno deve essere un oggetto con id+name; gli altri sono ignorati."""
@@ -280,6 +292,11 @@ def build() -> dict[str, str]:
     # Gli script Templater sono autonomi (niente require/bundling): copia 1:1.
     for source in sorted(JS_DIR.glob("*.js")):
         shutil.copy2(source, VAULT / "z.automazioni" / source.name)
+    # Un wizard di creazione per-template (tp.user.crea_<id>): genera un wrapper
+    # sul motore create_entity.js, salvo override hand-authored crea_<id>.js in JS/.
+    for template in templates:
+        if not (JS_DIR / f"crea_{template['id']}.js").is_file():
+            write_text(VAULT / "z.automazioni" / f"crea_{template['id']}.js", crea_wrapper_js(template))
 
     env = Environment(
         loader=FileSystemLoader(str(JINJA_DIR)),

@@ -1,4 +1,4 @@
-<% await tp.user.create_entity(tp, "sessione") %>
+<% await tp.user.crea_sessione(tp) %>
 # `=this.nome`
 
 ````tabs

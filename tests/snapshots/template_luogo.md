@@ -1,4 +1,4 @@
-<% await tp.user.create_entity(tp, "luogo") %>
+<% await tp.user.crea_luogo(tp) %>
 # `=this.nome`
 
 > [!info] Luogo

@@ -1,9 +1,9 @@
-{# PG — rules-engine. Alla creazione invoca crea_personaggio (legge le opzioni
+{# PG — rules-engine. Alla creazione invoca crea_pg (legge le opzioni
    da z.automazioni/data/personaggio.json, applica le regole 5.5e e scrive un
    frontmatter strutturato con ID stabili). Il pannello "Sistema" mostra le
    scelte applicate; la scheda numerica è editabile (scheda_pg). #}
 {% import '_macros.j2' as m with context -%}
-<% await tp.user.crea_personaggio(tp) %>
+<% await tp.user.crea_pg(tp) %>
 # `=this.nome`
 
 {{ m.identita_card(template) }}

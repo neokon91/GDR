@@ -1,4 +1,4 @@
-<% await tp.user.create_entity(tp, "oggetto_magico") %>
+<% await tp.user.crea_oggetto_magico(tp) %>
 # `=this.nome`
 
 > [!info] Oggetto Magico

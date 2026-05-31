@@ -50,7 +50,7 @@ Approfondimenti in [`docs/`](docs/): [architecture](docs/architecture.md) ·
 Dev/Source/YAML/      core.yaml · system.yaml · entities/*.yaml · pg_rules.yaml
                       plugins.yaml · templates.yaml · pages.yaml
 Dev/Source/Jinja/     _macros.j2 · _entity_base.j2 + un template per entità
-Dev/Source/JS/        create_entity.js · crea_personaggio.js · meta_actions.js · views.js
+Dev/Source/JS/        create_entity.js · crea_pg.js · meta_actions.js · views.js
 Dev/Source/SRD/       JSON SRD 5.2.1 IT · statblocks/ layout Fantasy Statblocks
 Dev/Tools/            common.py · build_srd.py · build_personaggio.py · validate.py · render.py
 Dev/Reference/        cheat-sheet sintassi dei plugin installati

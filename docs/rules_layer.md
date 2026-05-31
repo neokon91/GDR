@@ -12,7 +12,7 @@ SRD JSON (Dev/Source/SRD/srd_5_2_1_{classes,species,backgrounds,feats}.json)
         │  build_personaggio.py (converter)
         ▼
   z.automazioni/data/personaggio.json   (opzioni del rules-engine)
-        │  crea_personaggio.js (wizard Templater, a runtime)
+        │  crea_pg.js (wizard Templater, a runtime)
         ▼
   frontmatter della nota PG  ──▶  pg.md.j2 / macro scheda_pg_rules()  (presentazione)
 ```
@@ -30,7 +30,7 @@ dove serve. Output `personaggio.json`:
 - `background[id]`: `punteggi_caratteristica` (ASI), `talento_origine`,
   `competenze_abilita` (id).
 
-## 2. Wizard (`crea_personaggio.js`)
+## 2. Wizard (`crea_pg.js`)
 
 Script Templater **autonomo**, separato da `create_entity.js`. Legge
 `personaggio.json` con `app.vault.adapter.read`. Passi: nome → classe → specie →

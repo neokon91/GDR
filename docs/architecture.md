@@ -41,8 +41,13 @@ Ogni entità tende a essere descritta da tre file:
    suggester, applica le regole e stampa il frontmatter. Il template Jinja in
    alto chiama solo `tp.user.crea_<id>(tp)`.
 
-Esempio completo: il **PG** (`entities/personaggio.yaml` + `pg.md.j2` +
-`crea_personaggio.js`), vedi [rules_layer.md](rules_layer.md).
+Il wizard delle entità "uniformi" è **generato**: `render.py` produce un
+`crea_<id>.js` minimale che delega al motore condiviso `create_entity.js` (legge
+lo schema da `core.json`). Le entità bespoke hanno invece un `crea_<id>.js`
+**hand-authored** in `Dev/Source/JS/` che fa da override.
+
+Esempio completo (bespoke): il **PG** (`entities/personaggio.yaml` + `pg.md.j2` +
+`crea_pg.js`), vedi [rules_layer.md](rules_layer.md).
 
 ## I moduli di `render.py`
 

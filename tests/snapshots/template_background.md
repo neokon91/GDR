@@ -1,4 +1,4 @@
-<% await tp.user.create_entity(tp, "background") %>
+<% await tp.user.crea_background(tp) %>
 # `=this.nome`
 
 > [!info] Background

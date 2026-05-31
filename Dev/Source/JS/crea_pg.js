@@ -1,4 +1,5 @@
-// crea_personaggio.js — rules-engine PG 5.5e (SEPARATO da create_entity.js).
+// crea_pg.js — rules-engine PG 5.5e (wizard hand-authored, override del
+// generico create_entity.js per il template "pg"; esposto come tp.user.crea_pg).
 // Legge le opzioni in z.automazioni/data/personaggio.json (generate da
 // build_personaggio.py da SRD + pg_rules.yaml), guida la creazione (classe/
 // specie/background + caratteristiche), APPLICA le regole iniziali (PF, TS,
@@ -162,7 +163,7 @@ stato: bozza
 `;
 }
 
-async function crea_personaggio(tp) {
+async function crea_pg(tp) {
     const opt = await caricaOpzioni();
 
     const nome = await tp.system.prompt("Nome del personaggio");
@@ -207,4 +208,4 @@ async function crea_personaggio(tp) {
     });
 }
 
-module.exports = crea_personaggio;
+module.exports = crea_pg;

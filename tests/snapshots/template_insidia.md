@@ -1,4 +1,4 @@
-<% await tp.user.create_entity(tp, "insidia") %>
+<% await tp.user.crea_insidia(tp) %>
 # `=this.nome`
 
 > [!info] Insidia

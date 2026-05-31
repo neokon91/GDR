@@ -75,6 +75,24 @@ def test_entity_schema():
 
 
 @pytest.mark.parametrize("tpl", TEMPLATES, ids=[t["id"] for t in TEMPLATES])
+def test_crea_js_present(tpl):
+    """Ogni template ha un crea_<id>.js: hand-authored in JS/ o generato (wrapper)."""
+    if (render.JS_DIR / f"crea_{tpl['id']}.js").is_file():
+        return  # override hand-authored
+    js = render.crea_wrapper_js(tpl)
+    assert f'create_entity(tp, "{tpl["id"]}")' in js
+
+
+@pytest.mark.skipif(not shutil.which("node"), reason="node assente")
+def test_crea_wrapper_valid(tmp_path):
+    """Il wrapper generato è JS sintatticamente valido."""
+    js = render.crea_wrapper_js({"id": "luogo", "category": "luogo"})
+    f = tmp_path / "crea_luogo.js"
+    f.write_text(js, encoding="utf-8")
+    assert subprocess.run(["node", "--check", str(f)], capture_output=True).returncode == 0
+
+
+@pytest.mark.parametrize("tpl", TEMPLATES, ids=[t["id"] for t in TEMPLATES])
 def test_template_snapshot(tpl):
     """Il render di ogni template combacia col golden (tests/snapshots/)."""
     out = _env().get_template(tpl["jinja"]).render(core=CORE, plugins=PLUGINS, template=tpl)
@@ -214,7 +232,7 @@ def test_crea_personaggio_e2e(tmp_path):
     pj.write_text(json.dumps(opt, ensure_ascii=False), encoding="utf-8")
     harness = tmp_path / "harness.js"
     harness.write_text(_PG_HARNESS, encoding="utf-8")
-    res = subprocess.run(["node", str(harness), str(pj), str(render.JS_DIR / "crea_personaggio.js")],
+    res = subprocess.run(["node", str(harness), str(pj), str(render.JS_DIR / "crea_pg.js")],
                          capture_output=True, text=True)
     assert res.returncode == 0, res.stderr
     fm = yaml.safe_load(res.stdout.split("---")[1])

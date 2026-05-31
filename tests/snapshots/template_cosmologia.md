@@ -1,4 +1,4 @@
-<% await tp.user.create_entity(tp, "cosmologia") %>
+<% await tp.user.crea_cosmologia(tp) %>
 # `=this.nome`
 
 > [!info] Cosmologia

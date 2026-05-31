@@ -1,4 +1,4 @@
-<% await tp.user.create_entity(tp, "cultura") %>
+<% await tp.user.crea_cultura(tp) %>
 # `=this.nome`
 
 > [!info] Cultura

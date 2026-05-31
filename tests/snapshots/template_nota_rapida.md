@@ -1,4 +1,4 @@
-<% await tp.user.create_entity(tp, "nota_rapida") %>
+<% await tp.user.crea_nota_rapida(tp) %>
 # `=this.nome`
 
 > [!info] Nota Rapida
