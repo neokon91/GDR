@@ -10,7 +10,7 @@ templates:
   title: Lingua
   default_type: lingua
   target: z.modelli/Lingua.md
-  jinja: lingua.md.j2
+  # Niente 'jinja' -> usa lo scheletro condiviso _entity_base.j2 (riempito da YAML+macro).
 subtypes:
 - lingua
 - dialetto

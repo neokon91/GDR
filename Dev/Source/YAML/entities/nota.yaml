@@ -10,6 +10,6 @@ templates:
   title: Nota Rapida
   default_type: appunto
   target: z.modelli/Nota Rapida.md
-  jinja: nota.md.j2
+  # Niente 'jinja' -> usa lo scheletro condiviso _entity_base.j2 (riempito da YAML+macro).
 subtypes:
 - appunto

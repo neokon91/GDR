@@ -375,12 +375,24 @@ def write_bases(pages: list[dict[str, Any]]) -> None:
         write_text(VAULT / INDEX_DIR / f"{page['file']}.base", dumped)
 
 
-def build() -> dict[str, str]:
-    core = load_core()
-    plugins = load_yaml("plugins.yaml")
-    templates = load_templates()
-    actions = load_yaml("templates.yaml").get("actions", [])
+def jinja_env() -> Environment:
+    """Ambiente Jinja della pipeline. StrictUndefined: un campo mancante è un
+    errore (non una stringa vuota); trim/lstrip_blocks tengono pulito l'output."""
+    return Environment(
+        loader=FileSystemLoader(str(JINJA_DIR)),
+        undefined=StrictUndefined,
+        autoescape=False,
+        keep_trailing_newline=True,
+        trim_blocks=True,
+        lstrip_blocks=True,
+    )
 
+
+def write_engine_data(core: dict[str, Any], templates: list[dict[str, Any]]) -> None:
+    """Dati e script che il JS Engine legge a runtime: il payload core.json
+    (modello distillato per views.js), le opzioni del rules-engine PG, gli script
+    Templater (copia 1:1) e un wizard di creazione per-template (wrapper sul
+    motore create_entity.js, salvo override hand-authored crea_<id>.js in JS/)."""
     payload = {
         "folders": core.get("folders", {}),
         "fields": core.get("fields", {}),
@@ -399,7 +411,6 @@ def build() -> dict[str, str]:
         "creation": core.get("creation", {}),
         "templates": templates,
     }
-
     # YAML -> JSON che gli script JS leggono a runtime via app.vault.adapter.read.
     write_json(VAULT / "z.automazioni" / "data" / "core.json", payload)
     # Opzioni del rules-engine PG (SRD + pg_rules.yaml) per crea_personaggio.js.
@@ -407,25 +418,20 @@ def build() -> dict[str, str]:
     # Gli script Templater sono autonomi (niente require/bundling): copia 1:1.
     for source in sorted(JS_DIR.glob("*.js")):
         shutil.copy2(source, VAULT / "z.automazioni" / source.name)
-    # Un wizard di creazione per-template (tp.user.crea_<id>): genera un wrapper
-    # sul motore create_entity.js, salvo override hand-authored crea_<id>.js in JS/.
     for template in templates:
         if not (JS_DIR / f"crea_{template['id']}.js").is_file():
             write_text(VAULT / "z.automazioni" / f"crea_{template['id']}.js", crea_wrapper_js(template))
 
-    env = Environment(
-        loader=FileSystemLoader(str(JINJA_DIR)),
-        undefined=StrictUndefined,
-        autoescape=False,
-        keep_trailing_newline=True,
-        trim_blocks=True,
-        lstrip_blocks=True,
-    )
 
+def render_notes(env: Environment, core: dict[str, Any], plugins: dict[str, Any],
+                 templates: list[dict[str, Any]], actions: list[dict[str, Any]],
+                 pages: list[dict[str, Any]]) -> dict[str, str]:
+    """Rende tutti i Jinja sul vault e ritorna {target: testo}: le note-modello
+    (z.modelli/), le azioni Templater, le note di radice (Home/LEGGIMI/Ponte/
+    Fronti) e le pagine-indice per dominio (Indici/, per tenere pulita la radice)."""
     rendered: dict[str, str] = {}
     for template in templates:
-        jinja = env.get_template(template["jinja"])
-        text = jinja.render(core=core, plugins=plugins, template=template)
+        text = env.get_template(template["jinja"]).render(core=core, plugins=plugins, template=template)
         write_text(VAULT / template["target"], text)
         rendered[template["target"]] = text
 
@@ -435,32 +441,43 @@ def build() -> dict[str, str]:
         write_text(VAULT / action["target"], text)
         rendered[action["target"]] = text
 
-    # Config .obsidian: merge non distruttivo. Le impostazioni e i plugin
-    # installati dall'utente sono preservati; si aggiornano solo le chiavi che
-    # la pipeline possiede (cartelle Templater, dataviewjs, pulsanti Meta Bind).
-    obsidian = VAULT / ".obsidian"
-    union_list(obsidian / "community-plugins.json", [p["id"] for p in plugins.get("plugins", [])])
-    merge_plugin_config(obsidian, "templater-obsidian", {
-        "templates_folder": "z.modelli",
-        "user_scripts_folder": "z.automazioni",
-    })
-    merge_plugin_config(obsidian, "dataview", {"enableDataviewJs": True})
-    merge_plugin_config(obsidian, "obsidian-meta-bind-plugin", meta_bind_config(plugins, core, templates))
+    for name, jinja_name in (("Home.md", "home.md.j2"), ("LEGGIMI.md", "leggimi.md.j2"),
+                             (f"{INDEX_DIR}/Ponte Mondo-Sistema.md", "ponte.md.j2"),
+                             (f"{INDEX_DIR}/Fronti.md", "fronti.md.j2")):
+        text = env.get_template(jinja_name).render(core=core, plugins=plugins, templates=templates, pages=pages)
+        write_text(VAULT / name, text)
+        rendered[name] = text
 
-    # Metadata Menu: uno fileClass per categoria (schema campi tipizzati).
+    index_template = env.get_template("index.md.j2")
+    for page in pages:
+        rel = f"{INDEX_DIR}/{page['file']}.md"
+        text = index_template.render(core=core, plugins=plugins, templates=templates, page=page)
+        write_text(VAULT / rel, text)
+        rendered[rel] = text
+    return rendered
+
+
+# --- Config .obsidian (merge non distruttivo, un writer per plugin) ----------
+def write_metadata_menu(obsidian: Path, core: dict[str, Any]) -> None:
+    """Metadata Menu: uno fileClass per categoria (schema campi tipizzati) in
+    z.classi/, e il puntamento del plugin a quella cartella."""
     for category in core.get("categories", {}):
         write_text(VAULT / "z.classi" / f"{category}.md", fileclass_note(core, category))
     merge_plugin_config(obsidian, "metadata-menu", {"classFilesPath": "z.classi/"})
 
-    # Iconize: icona (emoji) per cartella di categoria. Chiavi top-level
-    # percorso->emoji nel data.json (emojiStyle native); 'settings' preservato.
+
+def write_iconize(obsidian: Path, core: dict[str, Any], plugins: dict[str, Any]) -> None:
+    """Iconize: icona (emoji) per cartella di categoria. Chiavi top-level
+    percorso->emoji nel data.json (emojiStyle native); 'settings' preservato."""
     folders = core.get("folders", {})
     icons = {folders[key]: emoji for key, emoji in (plugins.get("folder_icons") or {}).items() if key in folders}
     if icons:
         merge_plugin_config(obsidian, "obsidian-icon-folder", icons)
 
-    # Callout Manager: callout GDR custom (id/color/icon) in callouts.custom,
-    # preservando settings/detection. Degradano a callout standard se assenti.
+
+def write_callout_manager(obsidian: Path, plugins: dict[str, Any]) -> None:
+    """Callout Manager: callout GDR custom (id/color/icon) in callouts.custom,
+    preservando settings/detection. Degradano a callout standard se assenti."""
     cm_dir = obsidian / "plugins" / "callout-manager"
     if cm_dir.is_dir() and plugins.get("callouts"):
         cm = read_json(cm_dir / "data.json")
@@ -478,9 +495,12 @@ def build() -> dict[str, str]:
             cm["callouts"] = callouts_cfg
             write_json(cm_dir / "data.json", cm)
 
-    # Fantasy Statblocks: rende disponibili i layout italiani 5e/5.5e (uno per
-    # file in Dev/Source/statblocks/). NON cambia il default: li selezioni tu in
-    # FS. Union per id: preserva default e layout esistenti dell'utente.
+
+def write_statblock_layouts(obsidian: Path) -> None:
+    """Fantasy Statblocks: rende disponibili i layout italiani 5e/5.5e (uno per
+    file in Dev/Source/statblocks/) + abilita il Dice Roller negli statblock. NON
+    cambia il default (li selezioni tu in FS). Union per id: preserva default e
+    layout esistenti dell'utente."""
     fs_dir = obsidian / "plugins" / "obsidian-5e-statblocks"
     if fs_dir.is_dir():
         fs_data = read_json(fs_dir / "data.json")
@@ -502,33 +522,11 @@ def build() -> dict[str, str]:
                 fs_data["layouts"] = layouts
                 write_json(fs_dir / "data.json", fs_data)
 
-    pages = load_pages()
-    for name, jinja_name in (("Home.md", "home.md.j2"), ("LEGGIMI.md", "leggimi.md.j2"),
-                             (f"{INDEX_DIR}/Ponte Mondo-Sistema.md", "ponte.md.j2"),
-                             (f"{INDEX_DIR}/Fronti.md", "fronti.md.j2")):
-        text = env.get_template(jinja_name).render(core=core, plugins=plugins, templates=templates, pages=pages)
-        write_text(VAULT / name, text)
-        rendered[name] = text
 
-    # Pagine-indice per dominio (hub navigabili) in INDEX_DIR/, radice pulita.
-    index_template = env.get_template("index.md.j2")
-    for page in pages:
-        rel = f"{INDEX_DIR}/{page['file']}.md"
-        text = index_template.render(core=core, plugins=plugins, templates=templates, page=page)
-        write_text(VAULT / rel, text)
-        rendered[rel] = text
-
-    # Bases (core): una vista DB nativa (.base) per pagina, stessa single-source
-    # degli hub. Additivo: gli hub Dataview restano come fallback.
-    write_bases(pages)
-
-    # SRD 5.2.1 (CC-BY-4.0, IT): albero di sola lettura, separato dall'homebrew.
-    srd_count = build_srd(core)
-    if srd_count:
-        print(f"SRD: {srd_count} voci generate in SRD/.")
-
-    # Bookmarks (core): le poche pagine di riferimento a un clic. Non distruttivo:
-    # aggiunge solo le voci mancanti, preservando i bookmark dell'utente.
+def write_bookmarks(obsidian: Path, pages: list[dict[str, Any]]) -> None:
+    """Bookmarks (core): le poche pagine di riferimento a un clic (Home, hub, SRD
+    se generata, Base per pagina). Non distruttivo: aggiunge solo le voci mancanti,
+    preservando i bookmark dell'utente. Va dopo build_srd (referenzia SRD/Indice)."""
     bookmark_targets = [("Home.md", "🏠 Home"), *((f"{INDEX_DIR}/{p['file']}.md", p["title"]) for p in pages)]
     if (VAULT / "SRD" / "Indice.md").is_file():
         bookmark_targets.append(("SRD/Indice.md", "📚 SRD"))
@@ -546,18 +544,65 @@ def build() -> dict[str, str]:
         bookmarks["items"] = items
         write_json(obsidian / "bookmarks.json", bookmarks)
 
+
+def write_obsidian_config(obsidian: Path, core: dict[str, Any], plugins: dict[str, Any],
+                          templates: list[dict[str, Any]], pages: list[dict[str, Any]]) -> None:
+    """Config .obsidian: merge NON distruttivo. Le impostazioni e i plugin
+    installati dall'utente sono preservati; si aggiornano solo le chiavi che la
+    pipeline possiede (Templater, Dataview, Meta Bind, Metadata Menu, Iconize,
+    Callout Manager, Fantasy Statblocks, bookmarks, chrome esploratore, default
+    core, homepage)."""
+    union_list(obsidian / "community-plugins.json", [p["id"] for p in plugins.get("plugins", [])])
+    merge_plugin_config(obsidian, "templater-obsidian", {
+        "templates_folder": "z.modelli",
+        "user_scripts_folder": "z.automazioni",
+    })
+    merge_plugin_config(obsidian, "dataview", {"enableDataviewJs": True})
+    merge_plugin_config(obsidian, "obsidian-meta-bind-plugin", meta_bind_config(plugins, core, templates))
+    write_metadata_menu(obsidian, core)
+    write_iconize(obsidian, core, plugins)
+    write_callout_manager(obsidian, plugins)
+    write_statblock_layouts(obsidian)
+    write_bookmarks(obsidian, pages)
     # Pulizia esploratore: nasconde le cartelle z.* + le esclude da ricerca/grafo.
     write_workspace_chrome(obsidian)
-    # Default core consigliati (proprietà nascoste, bookmarks) — config riproducibile.
+    # Default core consigliati (proprietà nascoste, plugin core) — config riproducibile.
     write_core_settings(obsidian)
     # Homepage: apre Home all'avvio (solo se non già configurato).
     write_homepage(obsidian)
 
-    # Scaffolding delle cartelle contenuti (idempotente): mostra la struttura
-    # senza mai sovrascrivere note esistenti.
+
+def scaffold_folders(core: dict[str, Any]) -> None:
+    """Scaffolding delle cartelle contenuti (idempotente): mostra la struttura
+    senza mai sovrascrivere note esistenti."""
     for folder in core.get("folders", {}).values():
         (VAULT / folder).mkdir(parents=True, exist_ok=True)
 
+
+def build() -> dict[str, str]:
+    """Orchestratore della build: carica il modello, scrive dati+script del JS
+    Engine, rende tutte le note, genera Bases e SRD, scrive la config .obsidian
+    e scaffolda le cartelle contenuti. Ritorna {target: testo} delle note rese."""
+    core = load_core()
+    plugins = load_yaml("plugins.yaml")
+    templates = load_templates()
+    actions = load_yaml("templates.yaml").get("actions", [])
+    pages = load_pages()
+
+    write_engine_data(core, templates)
+    rendered = render_notes(jinja_env(), core, plugins, templates, actions, pages)
+    # Bases (core): una vista DB nativa (.base) per pagina, stessa single-source
+    # degli hub. Additivo: gli hub Dataview restano come fallback.
+    write_bases(pages)
+
+    # SRD 5.2.1 (CC-BY-4.0, IT): albero di sola lettura, separato dall'homebrew.
+    # Prima della config .obsidian, che vi appende un bookmark.
+    srd_count = build_srd(core)
+    if srd_count:
+        print(f"SRD: {srd_count} voci generate in SRD/.")
+
+    write_obsidian_config(VAULT / ".obsidian", core, plugins, templates, pages)
+    scaffold_folders(core)
     return rendered
 
 

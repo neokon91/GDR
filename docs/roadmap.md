@@ -83,12 +83,14 @@ sopra i sistemi avanzati (vedi backlog).
     propagano** alle note esistenti. Il loader js-engine (CommonJS via `new Function`)
     *attenua* (la logica vera è in `views.js`, importata a runtime) ma il blocco-guscio
     resta nel corpo. Tendere a note sottili + logica condivisa.
-  - **Thin shell Jinja residui**: il default `_entity_base.j2` ora esiste
-    (`common.DEFAULT_JINJA`) e le 8 nuove categorie lo sfruttano senza guscio, ma i 3
-    file `cultura`/`lingua`/`nota.md.j2` (solo `{% extends %}`) sono ancora su disco →
-    eliminabili subito ora che erediterebbero il default (quick win #6, residuo).
-  - **`build()` lunga** (~170 righe in render.py): orchestrazione + config plugin in
-    un'unica funzione. Spezzabile in `write_obsidian_config()` ecc.
+  - ✅ **Thin shell Jinja eliminati**: il default `_entity_base.j2`
+    (`common.DEFAULT_JINJA`) è ora l'unico guscio condiviso; i 3 file
+    `cultura`/`lingua`/`nota.md.j2` (solo `{% extends %}`) sono stati rimossi e le
+    relative entità ereditano il default (output dei modelli byte-identico).
+  - ✅ **`build()` spezzata**: da ~184 righe a un orchestratore di ~25 che delega a
+    helper nominati (`write_engine_data`/`render_notes`/`write_obsidian_config` con un
+    writer per plugin/`scaffold_folders`). Refactor a output invariato (manifest del
+    vault byte-identico).
   - **Doc plugin parziale**: `Dev/Reference/` ha 10 schede (core/templater/dataview/
     js-engine/tab-panels/meta-bind/metadata-menu/statblocks/tasks/dice). Mancano i
     plugin già cablati nella pipeline ma non documentati — **bases** (`.base`),
@@ -196,9 +198,10 @@ le fondamenta saranno rifinite. In ordine di valore:
 
 ### Trasversale / continuo
 - **QA in-app** su ogni pezzo di fondamenta prima di allargare (rischio #1).
-- **Quick-win architetturali**: eliminare i 3 thin-shell `cultura`/`lingua`/`nota.md.j2`
-  (jinja default già attivo); spezzare `build()` in render.py; ridurre la logica
-  embeddata nelle note.
+- **Quick-win architetturali**: ✅ eliminati i 3 thin-shell `cultura`/`lingua`/`nota.md.j2`
+  (ereditano `_entity_base.j2`); ✅ spezzata `build()` in render.py (helper nominati,
+  output invariato). *Residuo*: ridurre la logica embeddata nelle note (il blocco-guscio
+  `js-engine` nel corpo) — **cambia l'output delle note → richiede QA in-app**, quindi a sé.
 - Generazione nomi/spunti (Fantasy Content Generator) e integrazioni minori quando comodo.
 
 ### ✅ Fatto (sessione 2026-05-31)

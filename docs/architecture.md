@@ -62,20 +62,26 @@ tutti importano `common`).
 | `build_srd.py` | Genera l'albero `SRD/` (sola lettura) dai JSON IT vendorizzati; i mostri diventano statblock Fantasy Statblocks. |
 | `build_personaggio.py` | Converter del rules-engine PG: SRD + `pg_rules.yaml` → `personaggio.json`. |
 | `validate.py` | `check()` + `validate_split`/`validate_entities`: confine core/system, dup-ID, snake_case, shape, template/Jinja. |
-| `render.py` | `build()` (render template + config `.obsidian` non distruttiva), `clean()`, CLI. Re-esporta i nomi pubblici dei moduli. |
+| `render.py` | `build()` orchestratore snello (~25 righe) che delega a helper nominati (`write_engine_data`/`render_notes`/`write_obsidian_config`/…), `clean()`, CLI. Re-esporta i nomi pubblici dei moduli. |
 
 ## Pipeline di build (`render.py build()`)
 
-1. `load_core()` (modello fuso) + `load_templates()` (templates.yaml + entità).
-2. Scrive `z.automazioni/data/{core.json,personaggio.json}` (dati per i JS) e copia i JS 1:1.
-3. Rende ogni template Jinja → `z.modelli/`, le azioni, Home/LEGGIMI, le pagine-indice
-   e le dashboard auto **Ponte Mondo↔Sistema** e **Fronti** (`Indici/`).
-4. Config `.obsidian` **non distruttiva** (merge): community-plugins, Templater,
-   Dataview, Meta Bind (input+button), Metadata Menu (fileClass), Iconize,
-   Callout Manager, Fantasy Statblocks (layout + dice), core (Bookmarks/Bases). Vedi
-   [plugin_contracts.md](plugin_contracts.md).
-5. `build_srd(core)` → albero `SRD/`. Pagine-indice `.base` (Bases) accanto agli hub
-   `.md` in `Indici/`. Snippet CSS che nasconde le `z.*`.
+`build()` è un orchestratore di **funzioni nominate** (una per fase, niente
+monolite): carica il modello e delega.
+
+1. `load_core()` (modello fuso) + `load_templates()` (templates.yaml + entità) + `load_pages()`.
+2. `write_engine_data()` — scrive `z.automazioni/data/{core.json,personaggio.json}`
+   (dati per i JS), copia i JS 1:1, genera i wrapper `crea_<id>.js` mancanti.
+3. `render_notes(jinja_env(), …)` — rende ogni template Jinja → `z.modelli/`, le azioni,
+   Home/LEGGIMI, le pagine-indice e le dashboard auto **Ponte Mondo↔Sistema** e **Fronti**
+   (`Indici/`). Ritorna `{target: testo}`. Poi `write_bases()` (viste `.base`).
+4. `build_srd(core)` → albero `SRD/` (prima della config: i bookmark referenziano `SRD/Indice`).
+5. `write_obsidian_config()` — config `.obsidian` **non distruttiva** (merge), un writer
+   per plugin: community-plugins, Templater, Dataview, Meta Bind (input+button),
+   `write_metadata_menu` (fileClass), `write_iconize`, `write_callout_manager`,
+   `write_statblock_layouts` (layout + dice), `write_bookmarks`, chrome esploratore,
+   default core, homepage. Vedi [plugin_contracts.md](plugin_contracts.md).
+6. `scaffold_folders()` — crea le cartelle contenuti mancanti (idempotente).
 
 ## Regole operative
 
