@@ -212,10 +212,13 @@ le fondamenta saranno rifinite. In ordine di valore:
    `tema_natale`/`archetipo` su **personaggio** (profilo rapido) + categorie astrologiche
    opzionali (segno/arcano/pianeta) per i mondi dove l'astrologia conta. **Differenziatore
    worldbuilding forte** (profondità del personaggio); pesante, quindi opt-in per mondo.
-10. **Glossari di categoria FW** (`JSON/generale/glossari/*_cat.json`) — tassonomie curate
-    (`categorie`+`sottotipi`) per fazione/evento/epoca/civiltà/artefatto/luogo/lingua/culto.
-    *Recupero*: arricchire i **subtypes** delle categorie esistenti quando serve più
-    granularità (edit YAML puro).
+10. 🔄 **Glossari di categoria FW** (`JSON/generale/glossari/*_cat.json`) — IN CORSO:
+    **classificazione a 2 livelli** `famiglia` (curata, con descrizioni + legenda
+    auto-documentante) **+** `tipo` (subtypes). Plumbing generico (common→`core.categories`,
+    fileClass select, macro `classificazione`, validate); famiglia query-abile/editabile.
+    Fatte: **luogo** (8 famiglie), **fazione** (7), **personaggio** (8 *ruoli narrativi* per png).
+    Da estendere: evento/cultura/divinità + minori (specie/epoca/lingua/dominio). *(Le famiglie
+    possono in futuro presettare gli assi, stile archetipi.)*
 11. **Alberi evolutivi** (`JSON/TTRPG/alberi_evolutivi.json`) — abilità per parte-del-corpo
     → grado → potere (skill-tree). *Recupero*: poteri di creatura o un binario homebrew che
     estende la progressione PG (#6, già fatta per le classi SRD).

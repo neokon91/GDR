@@ -148,7 +148,14 @@ def apply_entities(core: dict[str, Any], entities: list[dict[str, Any]]) -> dict
     for entity in entities:
         eid = entity["id"]
         merged["folders"][eid] = entity["folder"]
-        merged["categories"][eid] = {"folder": eid, "subtypes": entity.get("subtypes", []) or []}
+        cat = {"folder": eid, "subtypes": entity.get("subtypes", []) or []}
+        # Classificazione a 2 livelli (opzionale): le 'famiglie' (con descrizione)
+        # affiancano i subtypes come dimensione tematica curata; 'famiglia_label'
+        # personalizza l'etichetta (es. "Ruolo" per personaggio).
+        if entity.get("famiglie"):
+            cat["famiglie"] = entity["famiglie"]
+            cat["famiglia_label"] = entity.get("famiglia_label", "Famiglia")
+        merged["categories"][eid] = cat
         for field_id, spec in (entity.get("fields") or {}).items():
             merged["fields"][field_id] = spec
         for src_key, dest_key in _ENTITY_SECTIONS:

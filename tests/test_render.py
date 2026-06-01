@@ -165,6 +165,19 @@ def test_split_planes():
     assert {"classe", "incantesimo", "oggetto"} <= merged_cats  # sistema 5.5e
 
 
+def test_famiglie_classification():
+    """Classificazione a 2 livelli: le 'famiglie' confluiscono in core.categories
+    (con label personalizzabile) e generano un select 'famiglia' nel fileClass."""
+    cats = CORE.get("categories", {})
+    luogo = cats.get("luogo", {})
+    assert luogo.get("famiglie") and all(f.get("nome") and f.get("descrizione") for f in luogo["famiglie"])
+    assert cats.get("personaggio", {}).get("famiglia_label") == "Ruolo narrativo"  # label custom
+    assert "famiglie" not in cats.get("mondo", {})  # entità senza famiglie: niente classificazione
+    fields = {f["name"]: f for f in render.fileclass_fields(CORE, "luogo")}
+    assert fields.get("famiglia", {}).get("type") == "Select"
+    assert fields["famiglia"]["options"]["valuesList"]  # opzioni non vuote
+
+
 @pytest.mark.parametrize("category", list(CORE.get("categories", {})), ids=list(CORE.get("categories", {})))
 def test_fileclass_well_formed(category):
     """Ogni fileClass ha campi con name/type e Select con opzioni non vuote."""

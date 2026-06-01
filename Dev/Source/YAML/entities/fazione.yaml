@@ -25,6 +25,16 @@ subtypes:
   - culto
   - fazione politica
   - banda
+# Classificazione a 2 livelli: la 'famiglia' (scopo/natura, seed FantasyWorld
+# fazione_cat) affianca il 'tipo' (forma). Select + legenda auto-documentante.
+famiglie:
+  - { nome: militare,       descrizione: "Strutturata attorno al dominio delle arti belliche: eserciti, ordini armati, caste guerriere." }
+  - { nome: religiosa,      descrizione: "Devota a un'entità, principio o pantheon; si fonda su dogmi, rituali e rivelazioni." }
+  - { nome: arcana,         descrizione: "Dedicata allo studio, controllo o protezione della magia: ordini, gilde, circoli occulti." }
+  - { nome: rivoluzionaria, descrizione: "Mira a sovvertire l'ordine costituito: moti insurrezionali, cellule clandestine." }
+  - { nome: egemonica,      descrizione: "Integrata nel potere vigente: caste, organi ufficiali, bracci di controllo istituzionale." }
+  - { nome: mercantile,     descrizione: "Orientata a risorse, potere economico o controllo logistico: corporazioni, reti commerciali." }
+  - { nome: profetica,      descrizione: "Fondata su visioni, cicli cosmici o profezie; agisce in funzione di un evento atteso." }
 # Campi specifici della fazione. (I trasversali stanno in core.yaml; 'portata' è
 # condiviso con evento e resta in system.yaml.)
 fields:

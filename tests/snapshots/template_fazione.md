@@ -7,6 +7,17 @@
 >
 > **Stato**: `INPUT[stato][:stato]`
 
+> [!info] Famiglia: `INPUT[inlineSelect(option(militare), option(religiosa), option(arcana), option(rivoluzionaria), option(egemonica), option(mercantile), option(profetica)):famiglia]`
+
+> [!note]- Cosa significa ogni famiglia
+> **militare** — Strutturata attorno al dominio delle arti belliche: eserciti, ordini armati, caste guerriere.
+> **religiosa** — Devota a un'entità, principio o pantheon; si fonda su dogmi, rituali e rivelazioni.
+> **arcana** — Dedicata allo studio, controllo o protezione della magia: ordini, gilde, circoli occulti.
+> **rivoluzionaria** — Mira a sovvertire l'ordine costituito: moti insurrezionali, cellule clandestine.
+> **egemonica** — Integrata nel potere vigente: caste, organi ufficiali, bracci di controllo istituzionale.
+> **mercantile** — Orientata a risorse, potere economico o controllo logistico: corporazioni, reti commerciali.
+> **profetica** — Fondata su visioni, cicli cosmici o profezie; agisce in funzione di un evento atteso.
+
 ````tabs
 --- Lore
 

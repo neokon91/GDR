@@ -81,6 +81,24 @@
 > **Stato**: {{ field('stato', label=false) }}
 {%- endmacro %}
 
+{# Classificazione a 2 livelli (famiglia + tipo): se la categoria ha 'famiglie',
+   un select Meta Bind editabile per la famiglia + una legenda PIEGHEVOLE
+   auto-documentante (cosa significa ogni famiglia). Vuoto se niente famiglie:
+   resta il solo 'tipo' (subtypes) come prima. #}
+{% macro classificazione(category) -%}
+{%- set meta = core.get('categories', {}).get(category, {}) -%}
+{%- set fam = meta.get('famiglie', []) -%}
+{%- if fam -%}
+{%- set label = meta.get('famiglia_label', 'Famiglia') %}
+> [!info] {{ label }}: `INPUT[inlineSelect({% for f in fam %}option({{ f.nome }}){{ ', ' if not loop.last }}{% endfor %}):famiglia]`
+
+> [!note]- Cosa significa ogni {{ label | lower }}
+{% for f in fam %}
+> **{{ f.nome }}** — {{ f.get('descrizione', '') }}
+{% endfor %}
+{% endif -%}
+{%- endmacro %}
+
 {# Superficie giocabile UNIVERSALE (il differenziatore). Single source: core.tavolo.
    'pressione' mostra l'etichetta di rischio calcolata (computed) + prossima_mossa. #}
 {% macro tavolo() -%}

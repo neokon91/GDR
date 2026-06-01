@@ -20,6 +20,17 @@ subtypes:
 - dungeon
 - rovina
 - landmark naturale
+# Classificazione a 2 livelli: la 'famiglia' (natura del luogo, seed FantasyWorld
+# luogo_cat) affianca il 'tipo' (forma/scala). Select + legenda auto-documentante.
+famiglie:
+- { nome: insediamento,      descrizione: "Luogo stabilmente abitato o urbanizzato, con strutture create da civiltà intelligenti." }
+- { nome: rovina,            descrizione: "Resto di un luogo distrutto, dimenticato o caduto; custodisce eco di civiltà passate o cataclismi." }
+- { nome: santuario,         descrizione: "Spazio con forte carica spirituale, usato per riti, culti o contatto con entità superiori." }
+- { nome: confine,           descrizione: "Punto di transizione tra realtà, epoche o stati dell'essere: soglia, varco, non-luogo." }
+- { nome: selvaggio,         descrizione: "Spazio non civilizzato, primordiale, vivo: natura pura o ambiente magico incontaminato." }
+- { nome: onirico,           descrizione: "Luogo tra sogno, memoria e inconscio: sognato, astrale o condiviso psichicamente." }
+- { nome: interdimensionale, descrizione: "Nodo tra piani, crocevia metafisico o intersezione ontologica; instabile o multistrato." }
+- { nome: simbolico,         descrizione: "Non ha senso fisico: rappresenta concetti, leggi o archetipi. Esiste per significato." }
 scheda:
 - clima
 - popolazione

@@ -7,6 +7,18 @@
 >
 > **Stato**: `INPUT[stato][:stato]`
 
+> [!info] Famiglia: `INPUT[inlineSelect(option(insediamento), option(rovina), option(santuario), option(confine), option(selvaggio), option(onirico), option(interdimensionale), option(simbolico)):famiglia]`
+
+> [!note]- Cosa significa ogni famiglia
+> **insediamento** — Luogo stabilmente abitato o urbanizzato, con strutture create da civiltà intelligenti.
+> **rovina** — Resto di un luogo distrutto, dimenticato o caduto; custodisce eco di civiltà passate o cataclismi.
+> **santuario** — Spazio con forte carica spirituale, usato per riti, culti o contatto con entità superiori.
+> **confine** — Punto di transizione tra realtà, epoche o stati dell'essere: soglia, varco, non-luogo.
+> **selvaggio** — Spazio non civilizzato, primordiale, vivo: natura pura o ambiente magico incontaminato.
+> **onirico** — Luogo tra sogno, memoria e inconscio: sognato, astrale o condiviso psichicamente.
+> **interdimensionale** — Nodo tra piani, crocevia metafisico o intersezione ontologica; instabile o multistrato.
+> **simbolico** — Non ha senso fisico: rappresenta concetti, leggi o archetipi. Esiste per significato.
+
 ````tabs
 --- Lore
 

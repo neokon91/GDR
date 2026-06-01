@@ -293,9 +293,15 @@ def fileclass_fields(core: dict[str, Any], category: str) -> list[dict[str, Any]
         add(field_id, "Select", {"sourceType": "ValuesList", "valuesList": values_list(choices)})
 
     select("stato", core.get("states", []) or [])
-    subtypes = (core.get("categories", {}).get(category) or {}).get("subtypes", []) or []
+    cat_meta = core.get("categories", {}).get(category) or {}
+    subtypes = cat_meta.get("subtypes", []) or []
     if subtypes:
         select("tipo", subtypes)
+    # Classificazione a 2 livelli: la 'famiglia' (select dalle famiglie curate) come
+    # Property tipizzata e interrogabile, accanto a 'tipo'.
+    famiglie = [f["nome"] for f in (cat_meta.get("famiglie") or []) if isinstance(f, dict) and f.get("nome")]
+    if famiglie:
+        select("famiglia", famiglie)
     if category != "mondo":
         add("mondo", "File")
     creation = (core.get("creation", {}) or {}).get(category, {})

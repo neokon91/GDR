@@ -7,6 +7,18 @@
 >
 > **Stato**: `INPUT[stato][:stato]`
 
+> [!info] Ruolo narrativo: `INPUT[inlineSelect(option(alleato), option(antagonista), option(mentore), option(patrono), option(rivale), option(mercante), option(contatto), option(gregario)):famiglia]`
+
+> [!note]- Cosa significa ogni ruolo narrativo
+> **alleato** — Sta dalla parte del gruppo: aiuta, copre, combatte al loro fianco.
+> **antagonista** — Si oppone attivamente al gruppo o ne ostacola gli obiettivi; non per forza un nemico.
+> **mentore** — Guida, istruisce o protegge il gruppo; offre saggezza, addestramento o risorse.
+> **patrono** — Commissiona, finanzia o dà missioni; ha potere e un'agenda propria.
+> **rivale** — Compete col gruppo (onore, risorse, gloria) senza volerne la rovina.
+> **mercante** — Fornisce beni, servizi o informazioni in cambio di qualcosa.
+> **contatto** — Nodo di informazioni o accesso: introduce, fa da ponte, apre porte.
+> **gregario** — Comparsa ricorrente o seguace: dà colore e continuità alla scena.
+
 ````tabs
 --- Scheda
 

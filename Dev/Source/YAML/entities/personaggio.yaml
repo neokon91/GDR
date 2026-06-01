@@ -22,6 +22,19 @@ templates:
 subtypes:
 - pg
 - png
+# Classificazione a 2 livelli: il 'ruolo' narrativo (rispetto al gruppo) affianca il
+# 'tipo' (pg/png). Pensato soprattutto per i PNG; il select + legenda sono sulla
+# scheda PNG (character.md.j2), non sul PG.
+famiglia_label: Ruolo narrativo
+famiglie:
+- { nome: alleato,     descrizione: "Sta dalla parte del gruppo: aiuta, copre, combatte al loro fianco." }
+- { nome: antagonista, descrizione: "Si oppone attivamente al gruppo o ne ostacola gli obiettivi; non per forza un nemico." }
+- { nome: mentore,     descrizione: "Guida, istruisce o protegge il gruppo; offre saggezza, addestramento o risorse." }
+- { nome: patrono,     descrizione: "Commissiona, finanzia o dà missioni; ha potere e un'agenda propria." }
+- { nome: rivale,      descrizione: "Compete col gruppo (onore, risorse, gloria) senza volerne la rovina." }
+- { nome: mercante,    descrizione: "Fornisce beni, servizi o informazioni in cambio di qualcosa." }
+- { nome: contatto,    descrizione: "Nodo di informazioni o accesso: introduce, fa da ponte, apre porte." }
+- { nome: gregario,    descrizione: "Comparsa ricorrente o seguace: dà colore e continuità alla scena." }
 # Titolo/rango del personaggio (re, arcimago, gran sacerdote...): seed FantasyWorld.
 fields:
   titolo: { label: Titolo o rango, widget: text }

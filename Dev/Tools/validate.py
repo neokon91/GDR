@@ -167,6 +167,8 @@ def validate_entity_schema(entities: list[dict[str, Any]]) -> list[str]:
         need(isinstance(entity.get("folder"), str) and entity.get("folder"), f"entity {eid}: 'folder' mancante/non stringa")
         need(isinstance(entity.get("order", 0), int), f"entity {eid}: 'order' non è intero")
         need(isinstance(entity.get("subtypes", []), list), f"entity {eid}: 'subtypes' non è lista")
+        for fam in entity.get("famiglie", []) or []:
+            need(isinstance(fam, dict) and fam.get("nome"), f"entity {eid}: famiglia senza 'nome'")
         for tpl in entity.get("templates", []) or []:
             missing = {"id", "title", "target"} - set(tpl)  # 'jinja' opzionale (default _entity_base.j2)
             need(not missing, f"entity {eid}: template '{tpl.get('id', '?')}' senza {sorted(missing)}")
