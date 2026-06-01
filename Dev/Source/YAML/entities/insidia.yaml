@@ -28,6 +28,17 @@ scheda:
 - minaccia
 - prova
 - danno
+# Relazioni tipizzate: collegano l'insidia al grafo (prima era orfana) — i luoghi
+# dove si trova e le creature che la incarnano o la innescano (sciami, guardiani).
+relazioni:
+- field: luoghi
+  label: Luoghi
+  category: luogo
+  multi: true
+- field: creature
+  label: Creature collegate
+  category: creatura
+  multi: true
 creation:
   fields:
   - field: tipo

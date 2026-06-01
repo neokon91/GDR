@@ -48,6 +48,9 @@
 
 --- Collegamenti
 
+> [!example] Relazioni
+> **Luoghi**: `INPUT[inlineListSuggester(optionQuery("Mondi/Luoghi"), useLinks(partial), allowOther):luoghi]`
+> **Creature collegate**: `INPUT[inlineListSuggester(optionQuery("Mondi/Creature"), useLinks(partial), allowOther):creature]`
 
 > [!example] Collegamenti
 > Mondo: `INPUT[mondo][:mondo]`
