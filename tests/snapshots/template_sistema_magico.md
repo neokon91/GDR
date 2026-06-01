@@ -127,18 +127,8 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > **4 · Indipendente** — Agisce con volontà propria. L’incantatore può solo orientarne l’intento. Talvolta resiste o reagisce.
 > **5 · Vivente** — È un'entità senziente, spirituale o cosmica. Stabilisce un patto con l’incantatore. Agisce secondo i propri scopi o principi.
 
-```meta-bind-js-view
-{fonte_magia} as fonte_magia
-{metodo_magia} as metodo_magia
-{costo_magia} as costo_magia
-{rischio} as rischio
-{ethos_magico} as ethos_magico
-{accessibilita} as accessibilita
-{entropia} as entropia
-{autonomia} as autonomia
-hidden
----
-return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "sistema_magico", typeof context !== "undefined" ? context : null);
+```js-engine
+return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "sistema_magico", null);
 ```
 
 ```js-engine

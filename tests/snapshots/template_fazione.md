@@ -156,18 +156,8 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > **4 · Rinnovamento** — La crisi è accolta come occasione. Il culto rifonda sé stesso, cambia dottrina, simboli o leadership. Il passato resta, ma è rifuso in un nuovo inizio. Spesso si genera un “secondo culto”.
 > **5 · Metamorfosi** — La sconfitta è parte della fede stessa. La fazione muta forma, scopo e persino nome. Ogni crisi è una mutazione sacra. Nessuna identità è fissa. Ideale per fazioni legate al Vuoto, alla Rinascita o all’Inganno.
 
-```meta-bind-js-view
-{struttura} as struttura
-{scopo} as scopo
-{metodo_operativo} as metodo_operativo
-{legalita} as legalita
-{etica_conflitto} as etica_conflitto
-{relazione_potere} as relazione_potere
-{coesione} as coesione
-{reazione_fallimento} as reazione_fallimento
-hidden
----
-return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "fazione", typeof context !== "undefined" ? context : null);
+```js-engine
+return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "fazione", null);
 ```
 
 ```js-engine

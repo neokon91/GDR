@@ -69,11 +69,10 @@ nome: `(await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 `module.exports`), risolve `dv`/`page` e fa `engine.markdown.create`. Aggiornare `views.js`
 (la logica) o `boot.mjs` (il guscio) si propaga a tutte le note senza ricrearle.
 
-**Radar reattivo** (`meta-bind-js-view`): il radar del tab *Carattere* è l'unico pannello che
-usa `meta-bind-js-view` invece di `js-engine` — gli assi della categoria sono *bind target*
-Meta Bind, così il radar si **ridisegna live** mentre muovi gli slider (gira comunque dentro
-JS Engine, che `meta-bind-js-view` richiede). Il corpo delega a `boot.radar`; disegno in
-`views.radarMarkdownFromValues`; fallback al frontmatter della nota se i binding non popolano
-(resta non-reattivo, mai rotto).
-*La reattività va confermata in-app.* Gli altri pannelli `VIEW` (etichette-assi, ritratto,
-pressione, modificatori PG) sono già reattivi via Meta Bind.
+**Radar degli assi** (`js-engine` → `boot.radar`): il radar del tab *Carattere* legge i
+valori-assi dal **frontmatter** della nota e disegna `views.radarMarkdownFromValues`. Si
+ridisegna alla **riapertura/ri-render** della nota, non live mentre muovi lo slider. *(Una
+variante `meta-bind-js-view` per la reattività live era stata tentata ma dava
+`META_BIND_ERROR` in-app su Meta Bind 1.4.x — verificato 2026-06-01 — quindi è stata
+abbandonata a favore di js-engine, che rende sempre.)* Le **etichette-valore** degli assi
+restano comunque reattive (VIEW Meta Bind), come ritratto/pressione/modificatori PG.

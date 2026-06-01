@@ -92,14 +92,8 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > **4 · Remoto** — Isolato; pochi sanno come arrivarci.
 > **5 · Inaccessibile** — Quasi irraggiungibile; barriere estreme o magiche.
 
-```meta-bind-js-view
-{ostilita} as ostilita
-{fertilita} as fertilita
-{magia_ambientale} as magia_ambientale
-{accessibilita} as accessibilita
-hidden
----
-return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "bioma", typeof context !== "undefined" ? context : null);
+```js-engine
+return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "bioma", null);
 ```
 
 --- Collegamenti

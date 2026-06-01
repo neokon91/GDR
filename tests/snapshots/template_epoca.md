@@ -138,18 +138,8 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > **4 · Rivelazione Progressiva** — La luce cosmica aumenta. Le forze sacre emergono, le leggi vengono comprese, la realtà è decifrabile. Il mondo diventa leggibile, i piani si ordinano, le divinità parlano o si manifestano.
 > **5 · Illuminazione Totale** — Tutto è chiaro. L’epoca culmina in un’apertura cosmica, in cui il sapere sacro, l’ordine metafisico e l’armonia sono pienamente manifesti. Le tenebre sono dissolte o integrate. L’universo è trasparente all’intelletto divino o mortale.
 
-```meta-bind-js-view
-{presenza_divina} as presenza_divina
-{accesso_magia} as accesso_magia
-{centralita_mortale} as centralita_mortale
-{stabilita_geopolitica} as stabilita_geopolitica
-{storicita} as storicita
-{equilibrio_cosmico} as equilibrio_cosmico
-{dominanza_tecnologica} as dominanza_tecnologica
-{luce_cosmica} as luce_cosmica
-hidden
----
-return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "epoca", typeof context !== "undefined" ? context : null);
+```js-engine
+return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "epoca", null);
 ```
 
 --- Collegamenti

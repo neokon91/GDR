@@ -92,14 +92,8 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > **4 · Fragile** — Facile da deviare; basta poco a spezzarla.
 > **5 · Aperta** — Solo una possibilità tra tante; il futuro è libero.
 
-```meta-bind-js-view
-{chiarezza} as chiarezza
-{avveramento} as avveramento
-{esito} as esito
-{malleabilita} as malleabilita
-hidden
----
-return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "profezia", typeof context !== "undefined" ? context : null);
+```js-engine
+return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "profezia", null);
 ```
 
 --- Collegamenti

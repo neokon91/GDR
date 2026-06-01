@@ -113,18 +113,8 @@
 > **4 · Aperta** — La divinità è accessibile alla maggior parte degli esseri senzienti. Il culto è diffuso, i riti sono noti, l’interazione è incoraggiata ma richiede dedizione.
 > **5 · Universale** — Tutti, indipendentemente da cultura, status o preparazione, possono accedere alla divinità. Essa risponde anche a preghiere non rituali. È presente in ogni cuore e ogni luogo.
 
-```meta-bind-js-view
-{presenza_cosmica} as presenza_cosmica
-{volonta} as volonta
-{etica_divina} as etica_divina
-{interazione_divina} as interazione_divina
-{incarnazione} as incarnazione
-{polarita_cosmica} as polarita_cosmica
-{interazione} as interazione
-{accessibilita} as accessibilita
-hidden
----
-return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "divinita", typeof context !== "undefined" ? context : null);
+```js-engine
+return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "divinita", null);
 ```
 
 --- Collegamenti

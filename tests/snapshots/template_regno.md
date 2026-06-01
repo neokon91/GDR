@@ -106,14 +106,8 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > **4 · Espansionista** — Conquista o colonizza attivamente.
 > **5 · Egemonico** — Mira al dominio totale; impero in marcia.
 
-```meta-bind-js-view
-{coesione_politica} as coesione_politica
-{stabilita} as stabilita
-{apertura} as apertura
-{proiezione} as proiezione
-hidden
----
-return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "regno", typeof context !== "undefined" ? context : null);
+```js-engine
+return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "regno", null);
 ```
 
 --- Collegamenti

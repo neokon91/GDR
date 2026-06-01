@@ -84,13 +84,8 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > **4 · Ingegnerizzato** — Progettato con magia o tecnica; funzionale a uno scopo.
 > **5 · Artificiale** — Interamente costruito; vive solo per intervento esterno.
 
-```meta-bind-js-view
-{equilibrio} as equilibrio
-{diversita} as diversita
-{naturalezza} as naturalezza
-hidden
----
-return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "ecosistema", typeof context !== "undefined" ? context : null);
+```js-engine
+return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "ecosistema", null);
 ```
 
 --- Collegamenti

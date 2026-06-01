@@ -30,11 +30,14 @@ link morti nel primo passo guidato. Un mini-mondo curato (~8-15 note che attrave
 incluse Goblin + Imboscata) risolve in un colpo: foglio bianco + link morti + dashboard vuote +
 time-to-first-win.
 
-**Il blocco #2 (Architect, + caveat di DM e PM): QA in-app mai fatta** (rischio #1 storico). I
-199 test coprono la *generazione*, non il *runtime* Obsidian: Meta Bind/Dataview/Templater/JS
-Engine/Fantasy Statblocks non confermati in questa build (unico smoke test: caricamento
-`boot.mjs`). Per un non-tecnico un blocco reso come testo grezzo è indistinguibile da "rotto".
-*Bloccato ora: computer-use offline → smoke test rinviato a sessione con Obsidian pilotabile.*
+**Il blocco #2 (Architect, + caveat di DM e PM): QA in-app.** ✅ **Smoke test in-app eseguito
+(2026-06-01b)**: verificati in Obsidian — Home/tab-panels, **statblock 5.5e** (initiative, saves/
+abilità con label IT, resist./immunità, GS con PE+CB), **statblock 5e via `monster:`** (due tab a
+dati condivisi → FS risolve la creatura), **note-cartella** (clic cartella → indice + Dataview +
+bottone Crea), **Media** (icona), Iconize. **Bug trovato e CORRETTO**: il radar reattivo
+`meta-bind-js-view` dava `META_BIND_ERROR` (Meta Bind 1.4.x) → convertito a `js-engine`/`boot.radar`
+(rende sempre, non-reattivo). *Restano da provare i 5 path mutativi (sali_pg/aggiorna_encounter/
+scatena/collega/applica_profilo) e i pannelli clock/difficoltà/timeline/tema-natale con dati reali.*
 
 ### Checklist pre-beta (prioritizzata)
 **Bloccanti:**
@@ -44,8 +47,9 @@ Engine/Fantasy Statblocks non confermati in questa build (unico smoke test: cari
 2. **Riallineare il LEGGIMI**: o l'esempio rende validi i link Goblin/Imboscata, o si tolgono;
    correggere §2 (chiede di abilitare impostazioni che la build già imposta — Meta Bind enableJs,
    FS autoParse); rendere il LEGGIMI **in vista** (bookmark + callout in cima a Home).
-3. **Smoke test in-app** dei 12 pannelli `boot.mjs` + 5 path mutativi (collega/scatena/aggiorna/
-   sali_pg/applica_profilo) + reattività live radar — appena Obsidian è pilotabile.
+3. **Smoke test in-app** — ✅ fatto sui pannelli di rendering + statblock 5e/5.5e + folder-notes
+   (radar bug corretto). *Resta*: i 5 path mutativi (collega/scatena/aggiorna/sali_pg/applica_profilo)
+   con una nota reale, idealmente creando un PG e un incontro dai bottoni.
 
 **Quasi-gratis (alto valore/basso sforzo):**
 4. Chiudere i **legami tipizzati mancanti** del grafo (Worldbuilder): `luogo`→{piano,cosmologia,

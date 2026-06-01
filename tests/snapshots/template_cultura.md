@@ -142,18 +142,8 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > **4 · Liberatoria-esperienziale** — L’arte è mezzo di trasformazione personale. L’individuo si esprime attraverso colore, danza, suono, performance. L’estetica è sperimentazione e soglia di libertà.
 > **5 · Trascendente-sacrale** — L’arte è portale verso altri piani. Ogni opera è un sigillo, un’entità vivente, una soglia ontica. Le forme sono mantram visivi, e la bellezza è rivelazione del divino.
 
-```meta-bind-js-view
-{valori_dominanti} as valori_dominanti
-{relazione_morte} as relazione_morte
-{ritualizzazione_vita} as ritualizzazione_vita
-{relazione_altrove} as relazione_altrove
-{costruzione_identitaria} as costruzione_identitaria
-{sistema_tabu} as sistema_tabu
-{posizione_se_natura} as posizione_se_natura
-{espressione_estetica} as espressione_estetica
-hidden
----
-return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "cultura", typeof context !== "undefined" ? context : null);
+```js-engine
+return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "cultura", null);
 ```
 
 --- Collegamenti

@@ -371,19 +371,15 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > Applica PF/competenza/slot e guida le scelte (ASI/talento/sottoclasse/incantesimi): `BUTTON[sali-di-livello]`
 {%- endmacro %}
 
-{# Radar degli assi tematici REATTIVO (meta-bind-js-view: gira dentro JS Engine,
-   ma con i valori-assi BINDATI da Meta Bind → il radar si ridisegna live mentre
-   muovi gli slider, senza riaprire la nota). Gli assi della categoria diventano
-   bind target; il corpo delega a boot.radar (guscio unico), disegno in
-   views.radarMarkdownFromValues. Difensivo: se i binding non popolano (es. API
-   diversa), ricade sul frontmatter della nota attiva → non-reattivo, mai rotto. #}
+{# Radar degli assi tematici (JS Engine): boot.radar legge i valori-assi dal
+   frontmatter della nota attiva e disegna il radar (views.radarMarkdownFromValues).
+   NB: era un meta-bind-js-view per la reattività live, ma quella variante dava
+   MB_PARSING/META_BIND_ERROR in-app (Meta Bind 1.4.x) → tornato a js-engine, che
+   rende sempre. Si ridisegna alla riapertura/ri-render della nota, non live mentre
+   muovi lo slider (le etichette-valore degli assi restano comunque reattive via VIEW). #}
 {% macro grafico_assi(category) -%}
-{% set assi = core.get('assi_tematici', {}).get(category, []) %}
-```meta-bind-js-view
-{% for a in assi %}{{ '{' ~ a.id ~ '}' }} as {{ a.id }}
-{% endfor %}hidden
----
-return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "{{ category }}", typeof context !== "undefined" ? context : null);
+```js-engine
+return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "{{ category }}", null);
 ```
 {%- endmacro %}
 

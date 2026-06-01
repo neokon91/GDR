@@ -94,17 +94,8 @@
 > **4 · Tendente all’ordine** — Esprime armonia, regole, strutture. Funziona meglio in contesti rituali e gerarchici.
 > **5 · Legale** — Impone equilibrio, disciplina, coerenza spirituale o cosmica. Rifiuta l’uso improprio o deviante.
 
-```meta-bind-js-view
-{natura_materiale} as natura_materiale
-{origine} as origine
-{funzione} as funzione
-{potere_attivo} as potere_attivo
-{legame} as legame
-{influenza_realta} as influenza_realta
-{allineamento} as allineamento
-hidden
----
-return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "oggetto", typeof context !== "undefined" ? context : null);
+```js-engine
+return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "oggetto", null);
 ```
 
 --- Collegamenti

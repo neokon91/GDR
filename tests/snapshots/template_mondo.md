@@ -122,15 +122,8 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > **4 · Declino** — Decadenza; antichi splendori che si sgretolano.
 > **5 · Rovina** — Dopo un cataclisma; rovine di un'era perduta tra i sopravvissuti.
 
-```meta-bind-js-view
-{diffusione_magia} as diffusione_magia
-{tono} as tono
-{ordine_politico} as ordine_politico
-{civilta_natura} as civilta_natura
-{eta_storica} as eta_storica
-hidden
----
-return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "mondo", typeof context !== "undefined" ? context : null);
+```js-engine
+return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "mondo", null);
 ```
 
 --- Mappa

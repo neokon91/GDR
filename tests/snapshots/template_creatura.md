@@ -159,15 +159,8 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > **4 · Sapiente** — Pensiero simbolico ed etico; strategie, inganni elaborati.
 > **5 · Geniale** — Mente superiore o aliena; piani secolari, concetti iperoggettivi.
 
-```meta-bind-js-view
-{indole} as indole
-{socialita} as socialita
-{mobilita} as mobilita
-{natura} as natura
-{intelletto} as intelletto
-hidden
----
-return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "creatura", typeof context !== "undefined" ? context : null);
+```js-engine
+return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "creatura", null);
 ```
 
 --- Collegamenti

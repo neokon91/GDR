@@ -94,14 +94,8 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > **4 · Operante** — Muove fazioni e culti; orienta scelte e conflitti.
 > **5 · Profetico** — Si sta avverando; il mondo si muove sul suo copione.
 
-```meta-bind-js-view
-{veridicita} as veridicita
-{diffusione} as diffusione
-{tono} as tono
-{vitalita} as vitalita
-hidden
----
-return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "mito", typeof context !== "undefined" ? context : null);
+```js-engine
+return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "mito", null);
 ```
 
 --- Collegamenti

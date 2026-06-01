@@ -211,15 +211,8 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > **4 · Pratico** — Impara facendo; preferisce l'azione all'analisi.
 > **5 · Istintivo** — Si fida del proprio fiuto; decide nell'istante.
 
-```meta-bind-js-view
-{moralita} as moralita
-{lealta} as lealta
-{temperamento} as temperamento
-{socievolezza} as socievolezza
-{approccio} as approccio
-hidden
----
-return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "personaggio", typeof context !== "undefined" ? context : null);
+```js-engine
+return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "personaggio", null);
 ```
 
 --- Collegamenti

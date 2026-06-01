@@ -89,15 +89,8 @@
 > **4 · Ciclica** — Il tempo è visto come ripetizione cosmica. La specie vive secondo cicli (epoche, eoni, rinascite). Il passato ritorna sotto nuove forme. La cultura è rituale, profetica o archetipica.
 > **5 · Atemporale** — La specie non percepisce il tempo come sequenza. Tutto è simultaneo, simbolico o mitico. Vive nel sogno, nella memoria eterna, nella coscienza collettiva. Il tempo lineare è illusione.
 
-```meta-bind-js-view
-{socialita} as socialita
-{predisposizione_magica} as predisposizione_magica
-{complessita_mentale} as complessita_mentale
-{memoria_ancestrale} as memoria_ancestrale
-{longevita_percettiva} as longevita_percettiva
-hidden
----
-return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "specie", typeof context !== "undefined" ? context : null);
+```js-engine
+return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "specie", null);
 ```
 
 --- Collegamenti

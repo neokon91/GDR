@@ -153,18 +153,8 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > **4 · Riflettente** — Il luogo si adatta alla mente di chi entra. Modifica forma, colori o eventi in base alle emozioni. Ogni visitatore lo percepisce diversamente.
 > **5 · Empatico** — Il luogo ha una volontà psichica attiva. Comunica, seduce, manipola o giudica. Può fondersi con la coscienza, rivelando traumi, desideri o verità.
 
-```meta-bind-js-view
-{stabilita_spaziale} as stabilita_spaziale
-{coerenza_temporale} as coerenza_temporale
-{presenza_magica} as presenza_magica
-{sacralita} as sacralita
-{civilizzazione} as civilizzazione
-{pericolosita_ontologica} as pericolosita_ontologica
-{stratificazione_dimensionale} as stratificazione_dimensionale
-{risonanza_psichica} as risonanza_psichica
-hidden
----
-return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "luogo", typeof context !== "undefined" ? context : null);
+```js-engine
+return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "luogo", null);
 ```
 
 --- Mappa

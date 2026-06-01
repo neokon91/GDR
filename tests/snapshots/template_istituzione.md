@@ -97,14 +97,8 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > **4 · Retta** — Fedele alla missione; abusi rari e puniti.
 > **5 · Esemplare** — Incorruttibile; incarna il proprio ideale.
 
-```meta-bind-js-view
-{prestigio} as prestigio
-{trasparenza} as trasparenza
-{rigidita} as rigidita
-{integrita} as integrita
-hidden
----
-return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "istituzione", typeof context !== "undefined" ? context : null);
+```js-engine
+return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "istituzione", null);
 ```
 
 --- Collegamenti

@@ -119,15 +119,8 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > **4 · Occulta** — Nota solo a iniziati; celata sotto miti o falsità.
 > **5 · Ignota** — Nessuno la conosce; opera nell'ombra del mondo.
 
-```meta-bind-js-view
-{presenza} as presenza
-{attivita} as attivita
-{ordine} as ordine
-{stabilita_cosmica} as stabilita_cosmica
-{percezione} as percezione
-hidden
----
-return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "cosmologia", typeof context !== "undefined" ? context : null);
+```js-engine
+return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "cosmologia", null);
 ```
 
 --- Collegamenti

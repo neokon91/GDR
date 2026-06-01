@@ -129,18 +129,8 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > **4 · Mediato flessibile** — Il contatto con il divino è affidato a ruoli specifici, ma non è necessariamente esclusivo. I riti ufficiali sono richiesti per le manifestazioni maggiori del sacro.
 > **5 · Mediato** — Solo tramite clero, testi sacri, liturgie o artefatti consacrati si può accedere al divino. La fede passa attraverso una struttura di mediazione istituzionale e rituale. Il fedele non può comunicare da sé.
 
-```meta-bind-js-view
-{struttura} as struttura
-{rivelazione} as rivelazione
-{trascendenza} as trascendenza
-{legalita} as legalita
-{motivazione} as motivazione
-{ordine} as ordine
-{missione} as missione
-{contatto_divino} as contatto_divino
-hidden
----
-return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "culto", typeof context !== "undefined" ? context : null);
+```js-engine
+return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "culto", null);
 ```
 
 ```js-engine

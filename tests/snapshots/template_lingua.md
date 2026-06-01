@@ -134,18 +134,8 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > **4 · Simbolica** — Ogni parola è un simbolo con significati spirituali, mistici o archetipici.
 > **5 · Multiplanare** — Ogni parola esiste in più livelli semantici: reale, spirituale, magico, onirico. Serve un’iniziazione per comprenderla pienamente.
 
-```meta-bind-js-view
-{complessita} as complessita
-{formalita} as formalita
-{funzione} as funzione
-{origine} as origine
-{accesso} as accesso
-{effetto_magico} as effetto_magico
-{rischio} as rischio
-{stratificazione} as stratificazione
-hidden
----
-return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "lingua", typeof context !== "undefined" ? context : null);
+```js-engine
+return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "lingua", null);
 ```
 
 --- Collegamenti

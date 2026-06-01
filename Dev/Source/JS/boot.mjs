@@ -65,10 +65,11 @@ export async function panel(engine, app, container, name) {
   return engine.markdown.create(out);
 }
 
-// Radar reattivo (meta-bind-js-view): i valori-assi arrivano bindati da Meta Bind
-// (context.bound) così il radar si ridisegna mentre muovi gli slider; se i binding
-// non popolano, fallback al frontmatter della nota attiva (non-reattivo, mai rotto).
-// Carica anche core.json (catalogo assi). Disegno in views.radarMarkdownFromValues.
+// Radar degli assi (js-engine): legge i valori-assi dal frontmatter della nota
+// attiva e disegna il radar (views.radarMarkdownFromValues). Il param `context`
+// resta per compatibilità (variante meta-bind-js-view con context.bound), ma il
+// macro grafico_assi ora passa null → si usa il frontmatter. Si ridisegna alla
+// riapertura/ri-render della nota. Carica core.json (catalogo assi).
 export async function radar(engine, app, category, context) {
   const views = await loadViews(app);
   const core = JSON.parse(await app.vault.adapter.read("z.automazioni/data/core.json"));
