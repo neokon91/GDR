@@ -584,9 +584,10 @@ def write_callout_manager(obsidian: Path, plugins: dict[str, Any]) -> None:
 
 def write_statblock_layouts(obsidian: Path) -> None:
     """Fantasy Statblocks: rende disponibili i layout italiani 5e/5.5e (uno per
-    file in Dev/Source/statblocks/) + abilita il Dice Roller negli statblock. NON
-    cambia il default (li selezioni tu in FS). Union per id: preserva default e
-    layout esistenti dell'utente."""
+    file in Dev/Source/statblocks/), abilita il Dice Roller negli statblock e
+    autoParse (registra le creature nel bestiario → `monster:` risolve). NON
+    cambia il layout di default (lo scegli tu in FS). Union per id: preserva
+    default e layout esistenti dell'utente."""
     fs_dir = obsidian / "plugins" / "obsidian-5e-statblocks"
     if fs_dir.is_dir():
         fs_data = read_json(fs_dir / "data.json")
@@ -598,6 +599,12 @@ def write_statblock_layouts(obsidian: Path) -> None:
             # SRD + creature). Default consigliato, non distruttivo (solo se off).
             if fs_data.get("diceRolling") is not True:
                 fs_data["diceRolling"] = True
+                changed = True
+            # autoParse ("Parse Frontmatter in Notes"): registra nel bestiario le
+            # note con `statblock: inline` (mostri SRD + creature) → i riferimenti
+            # `monster:` risolvono (tab 5e del template creatura, blocchi encounter).
+            if fs_data.get("autoParse") is not True:
+                fs_data["autoParse"] = True
                 changed = True
             for fs_layout in load_statblock_layouts():
                 if fs_layout.get("id") not in known:

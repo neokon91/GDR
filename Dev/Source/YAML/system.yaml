@@ -46,9 +46,12 @@ fields:
   simbolo:        { label: Simbolo,              widget: text }
 
 # Statblock (Fantasy Statblocks): layout usato dal blocco ```statblock``` (creature
-# + mostri SRD). Il layout IT 2024 è vendorizzato in statblocks/ e iniettato in FS.
+# + mostri SRD). I layout IT sono vendorizzati in statblocks/ e iniettati in FS.
+# `layout` = resa 5.5e fedele (default, mostri SRD); `layout_5e` = resa classica 5e
+# (secondo tab nel template creatura, stessa creatura via `monster:`).
 statblock:
   layout: D&D 5.5 Layout ITA - Compatibile 5e
+  layout_5e: Basic 5e Layout ITA
 
 # Caratteristiche 5e per la scheda PG (macro scheda_pg). id = chiave frontmatter
 # (INPUT[number]); il modificatore e' calcolato e SALVATO in mod_<id> (compute_into)

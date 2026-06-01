@@ -292,38 +292,80 @@ def srd_note(entry: dict[str, Any], cat: str, fm_fields: list[str],
     return frontmatter_block(fm) + "\n\n".join(parts) + "\n"
 
 
-def srd_statblock_yaml(monster: dict[str, Any], layout: str) -> str:
-    """Mappa un mostro JSON IT sul formato statblock di Fantasy Statblocks."""
+def _csv(value: Any) -> str:
+    """Lista IT -> stringa 'a, b, c' (per resistenze/immunità/equip)."""
+    if isinstance(value, list):
+        return ", ".join(str(x) for x in value if x)
+    return str(value or "")
+
+
+def srd_statblock_yaml(monster: dict[str, Any], layout: str, core: dict[str, Any] | None = None) -> str:
+    """Mappa un mostro JSON IT sul formato statblock di Fantasy Statblocks (5.5e).
+    Emette TUTTI i campi 2024 che il layout sa mostrare: iniziativa, tiri salvezza
+    competenti, abilità, resistenze/immunità/vulnerabilità, equipaggiamento, azioni
+    bonus/reazioni/leggendarie (con descrizione), GS + bonus di competenza. I campi
+    vuoti sono omessi (il layout è 'conditioned'). `core` fornisce le label IT delle
+    abilità (fallback al titolo dello slug)."""
     car = monster.get("caratteristiche", {}) or {}
     order = ["forza", "destrezza", "costituzione", "intelligenza", "saggezza", "carisma"]
+    sigle = dict(_ABILITY)  # forza -> For
+    skill_labels = {k: (v.get("label") or k.replace("_", " ").title())
+                    for k, v in ((core or {}).get("abilita") or {}).items()}
     hp = monster.get("punti_ferita", {}) or {}
     cr = monster.get("grado_sfida", {}) or {}
     vel = monster.get("velocita", {}) or {}
     sensi = monster.get("sensi", {}) or {}
+    ini = monster.get("iniziativa", {}) or {}
+    leg = monster.get("azioni_leggendarie", {}) or {}
     lingue = monster.get("lingue", [])
 
     def actions(key: str) -> list[dict[str, str]]:
         return [{"name": a.get("nome", ""), "desc": a.get("descrizione", "")}
                 for a in (monster.get(key) or []) if isinstance(a, dict)]
 
-    sb = {
+    # Tiri salvezza: solo quelli COMPETENTI (ts != modificatore), in formato FS.
+    saves = [{sigle.get(k, k): (car.get(k) or {}).get("tiro_salvezza")}
+             for k in order
+             if (car.get(k) or {}).get("tiro_salvezza") is not None
+             and (car.get(k) or {}).get("tiro_salvezza") != (car.get(k) or {}).get("modificatore")]
+    skillsaves = [{skill_labels.get(k, k.replace("_", " ").title()): v}
+                  for k, v in (monster.get("abilita") or {}).items()]
+
+    sb: dict[str, Any] = {
         "layout": layout,
         "name": monster.get("nome", ""),
         "size": monster.get("dimensione", ""),
         "type": monster.get("tipo", ""),
+        "subtype": monster.get("sottotipo", ""),
         "alignment": monster.get("allineamento", ""),
         "ac": monster.get("classe_armatura", ""),
         "hp": hp.get("media", "") if isinstance(hp, dict) else hp,
         "hit_dice": hp.get("formula", "") if isinstance(hp, dict) else "",
         "speed": ", ".join(str(v) if t == "camminata" else f"{t} {v}" for t, v in vel.items()) if isinstance(vel, dict) else str(vel),
+        "initiative": (f"{'+' if (ini.get('bonus') or 0) >= 0 else ''}{ini.get('bonus')} ({ini.get('valore')})"
+                       if ini.get("bonus") is not None else ""),
         "stats": [int((car.get(k) or {}).get("punteggio", 10)) for k in order],
+        "saves": saves,
+        "skillsaves": skillsaves,
+        "damage_resistances": _csv(monster.get("resistenze")),
+        "damage_immunities": _csv(monster.get("immunita_danni")),
+        "condition_immunities": _csv(monster.get("immunita_condizione")),
+        "damage_vulnerabilities": _csv(monster.get("vulnerabilita")),
+        "gear": _csv(monster.get("equipaggiamento")),
         "senses": ", ".join(f"{t.replace('_', ' ')} {v}" for t, v in sensi.items()) if isinstance(sensi, dict) else str(sensi),
         "languages": ", ".join(lingue) if isinstance(lingue, list) else str(lingue),
         "cr": str(cr.get("valore", "")) if isinstance(cr, dict) else str(cr),
+        "pb": monster.get("bonus_competenza"),
         "traits": actions("tratti"),
         "actions": actions("azioni"),
-        "legendary_actions": actions("azioni_leggendarie"),
+        "bonus_actions": actions("azioni_bonus"),
+        "reactions": actions("reazioni"),
+        "legendary_description": leg.get("descrizione_utilizzi", ""),
+        "legendary_actions": [{"name": a.get("nome", ""), "desc": a.get("descrizione", "")}
+                              for a in (leg.get("azioni") or []) if isinstance(a, dict)],
     }
+    # Omette i campi vuoti (il layout li nasconderebbe comunque): note più pulite.
+    sb = {k: v for k, v in sb.items() if v not in ("", [], None, {})}
     return yaml.safe_dump(sb, allow_unicode=True, sort_keys=False)
 
 
@@ -360,7 +402,7 @@ def build_srd(core: dict[str, Any]) -> int:
                 fm["gs"] = str(gs["valore"])
             if gs.get("punti_esperienza") is not None:
                 fm["pe"] = gs["punti_esperienza"]
-        content = frontmatter_block(fm) + f"# {monster.get('nome', '')}\n\n```statblock\n{srd_statblock_yaml(monster, layout)}```\n"
+        content = frontmatter_block(fm) + f"# {monster.get('nome', '')}\n\n```statblock\n{srd_statblock_yaml(monster, layout, core)}```\n"
         write_text(VAULT / "SRD" / "Mostri" / f"{srd_slug(monster.get('nome'))}.md", content)
         written += 1
     index = (

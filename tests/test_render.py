@@ -622,8 +622,15 @@ def test_srd_counts_and_statblock():
     assert len(monsters) > 300
     glossary = render.load_srd("srd_5_2_1_rules_glossary.json")
     assert sum(1 for g in glossary if g.get("descrittore") == "condizione") == 15
-    sb = render.srd_statblock_yaml(monsters[0], "Basic 5e Layout")
+    sb = render.srd_statblock_yaml(monsters[0], "Basic 5e Layout", CORE)
     assert "name:" in sb and "stats:" in sb and "actions:" in sb
+    # Mappatura 5.5e completa: un mostro ricco espone i campi 2024.
+    vampiro = next((m for m in monsters if m.get("nome") == "Vampiro"), None)
+    if vampiro:
+        vsb = render.srd_statblock_yaml(vampiro, "x", CORE)
+        for field in ("initiative:", "saves:", "skillsaves:", "bonus_actions:",
+                      "legendary_description:", "pb:"):
+            assert field in vsb, f"campo 5.5e mancante: {field}"
 
 
 @pytest.mark.skipif(not render.SRD_DIR.is_dir(), reason="SRD non vendorizzata")

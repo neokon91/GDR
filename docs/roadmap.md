@@ -247,6 +247,14 @@ le fondamenta saranno rifinite. In ordine di valore:
   bundlati → si caricano col trust-prompt a prescindere dallo store; serve solo per aggiornarli).
 
 ### ✅ Fatto (sessione 2026-06-01)
+- **Statblock 5e → 5.5e (Fantasy Statblocks)**: il layout `5-5e-ita` era già fedele al 2024
+  ma `srd_statblock_yaml` mappava ~metà dei campi. Ora mappa TUTTO il 2024 (initiative,
+  saves/skillsaves con label IT da core.abilita, resist./immunità/vulnerab., gear,
+  bonus_actions, reactions, leggendarie+descrizione, GS+pb; campi vuoti omessi). Layout:
+  initiative preferisce il valore esplicito. Template **creatura a due tab** (scelta utente):
+  *Statblock 5.5e* inline + *Statblock 5e* via `monster:` (stessa creatura, `layout_5e`, zero
+  duplicazione). `autoParse` (FS) abilitato dalla pipeline → `monster:` risolve out-of-the-box.
+  Calendarium: Gregorian importato dall'utente in dist. **199 test.**
 - **Plugin sottoutilizzati cablati** (analisi + 3 di 4):
   - **Folder Notes**: nota-cartella auto-indice per ogni categoria (`Mondi/<X>/<X>.md`, resa con
     `index.md.j2`) — cliccare la cartella apre l'indice. `folder_index_pages` + `write_folder_notes`

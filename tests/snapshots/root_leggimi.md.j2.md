@@ -138,12 +138,16 @@ Parti da **`SRD/Indice.md`** (anche nei segnalibri). I **mostri** sono statblock
 con "Parse Frontmatter in Notes" ON entrano nel bestiario di **Fantasy Statblocks** e li
 richiami con `monster: Nome` in qualunque incontro.
 
-## 9. Layout statblock (2024)
-Di default gli statblock usano `D&D 5.5 Layout ITA - Compatibile 5e`. La build installa anche
-un layout **"GDR — 5.5e (2024)"** in Fantasy Statblocks (non attivo, per sicurezza).
-Per provarlo: *Impostazioni → Fantasy Statblocks → Layouts* e selezionalo come predefinito.
-Se ti convince, dimmelo e lo imposto di default nella pipeline (`statblock.layout` in
-`Dev/Source/YAML/core.yaml`).
+## 9. Statblock: 5.5e (2024) e 5e
+Gli statblock usano di default `D&D 5.5 Layout ITA - Compatibile 5e`, una resa **fedele al 2024**:
+mostra Iniziativa, la griglia caratteristiche, GS con **PE e bonus di competenza**, tiri
+salvezza/abilità, equipaggiamento, azioni bonus/reazioni/leggendarie. I mostri SRD sono già
+mappati su tutti questi campi.
+
+Nel template **Creatura** trovi **due tab**: *Statblock 5.5e* (dove inserisci i numeri) e
+*Statblock 5e* (la **stessa** creatura resa in stile classico `Basic 5e Layout ITA`,
+via `monster:` — non riscrivi nulla). Per cambiare lo stile di un singolo blocco, modifica la
+riga `layout:`. Entrambi i layout IT sono vendorizzati e installati in Fantasy Statblocks.
 
 ## 10. Radar degli assi + confronto fra entità (JS Engine)
 Nel tab **Carattere** (entità con ≥3 assi) gli slider sono affiancati da un **radar**

@@ -15,7 +15,7 @@
 > | **Stato** | `INPUT[stato][:stato]` |
 
 ````tabs
---- Statblock
+--- Statblock 5.5e
 
 ```statblock
 layout: D&D 5.5 Layout ITA - Compatibile 5e
@@ -36,14 +36,25 @@ damage_vulnerabilities: ""
 damage_resistances: ""
 damage_immunities: ""
 condition_immunities: ""
+gear: ""
 senses: Percezione passiva 10
 languages: Comune
 cr: "1"
+pb: "+2"
 traits: []
 actions: []
 bonus_actions: []
 reactions: []
+legendary_description: ""
 legendary_actions: []
+```
+
+--- Statblock 5e
+
+> Stessa creatura, resa **classica 5e** (cambia solo il layout). I numeri si modificano nel tab *Statblock 5.5e*: questa scheda li rispecchia (richiede `statblock: inline`, già impostato dal wizard).
+```statblock
+layout: Basic 5e Layout ITA
+monster: <% tp.file.title %>
 ```
 
 --- Al tavolo
