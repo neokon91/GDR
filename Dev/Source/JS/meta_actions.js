@@ -265,4 +265,7 @@ async function meta_actions(tp, action = "") {
   return "";
 }
 
+// Esposto per il test-guardia anti-drift: matchesCond deve dare risultati
+// identici alla copia in views.js (le due non devono divergere).
+meta_actions.matchesCond = matchesCond;
 module.exports = meta_actions;

@@ -174,9 +174,16 @@ function radarSvg(axes, series) {
   return `<svg viewBox="0 0 ${W} ${H}" class="gdr-radar-svg" xmlns="http://www.w3.org/2000/svg">${g}</svg>`;
 }
 
+// core.json è immutabile a runtime (lo riscrive solo render.py a build): lo
+// leggiamo una volta sola per sessione (cache per-modulo). I pannelli si
+// ri-renderizzano spesso e prima rileggevano il file ad ogni render. Dopo una
+// rebuild basta riaprire/ricaricare la nota (come già per views.js stesso).
+let _coreCache = null;
 async function loadCoreData(app) {
+  if (_coreCache) return _coreCache;
   try {
-    return JSON.parse(await app.vault.adapter.read("z.automazioni/data/core.json"));
+    _coreCache = JSON.parse(await app.vault.adapter.read("z.automazioni/data/core.json"));
+    return _coreCache;
   } catch (e) {
     return {};
   }

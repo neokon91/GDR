@@ -26,6 +26,15 @@ async function loadViews(app) {
   return _viewsCache;
 }
 
+// core.json (catalogo) letto una volta sola per sessione: lo riscrive solo
+// render.py a build, quindi è immutabile a runtime. Usato dal radar.
+let _coreCache = null;
+async function loadCore(app) {
+  if (_coreCache) return _coreCache;
+  _coreCache = JSON.parse(await app.vault.adapter.read("z.automazioni/data/core.json"));
+  return _coreCache;
+}
+
 // Dataview API + pagina della nota attiva (null se Dataview assente o nessuna nota).
 function dvPage(app) {
   const dv = app.plugins.plugins.dataview && app.plugins.plugins.dataview.api;
@@ -72,7 +81,7 @@ export async function panel(engine, app, container, name) {
 // riapertura/ri-render della nota. Carica core.json (catalogo assi).
 export async function radar(engine, app, category, context) {
   const views = await loadViews(app);
-  const core = JSON.parse(await app.vault.adapter.read("z.automazioni/data/core.json"));
+  const core = await loadCore(app);
   let valori = {};
   try {
     valori = context && context.bound ? context.bound : {};

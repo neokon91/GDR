@@ -734,3 +734,38 @@ def test_fcg_it_settings():
     assert all(inn.get(k) for k in ("prefixes", "innType", "nouns", "desc", "rumors")), "innSettings incompleto"
     assert all(s["drinkSettings"].get(k) for k in ("adj", "nouns")), "drinkSettings incompleto"
     assert s["currencyTypes"] and all(c.get("name") and c.get("rarity") for c in s["currencyTypes"])
+
+
+@pytest.mark.skipif(not shutil.which("node"), reason="node assente")
+def test_anti_drift_matchescond(tmp_path):
+    """Anti-drift: la logica dei comparatori 'matchesCond' è duplicata in views.js
+    e meta_actions.js (script autonomi, niente modulo condiviso). Questo guard
+    verifica che (1) le due copie diano risultati IDENTICI sugli stessi input, e
+    (2) l'invariante preset↔match regga: per ogni archetipo reale i valori-assi
+    derivati da create_entity.presetValori soddisfano matchesCond sul 'quando'."""
+    vectors = [(5, ">=4"), (3, ">=4"), (2, "<=2"), (5, ">3"), (3, "<3"), (4, "4"),
+               (4, "==4"), (3, "2-4"), (5, "2-4"), (1, "3"), ("x", ">=2"), (None, "4")]
+    archetipi = [a for lst in (CORE.get("archetipi") or {}).values() for a in lst]
+    harness = tmp_path / "drift.js"
+    harness.write_text(
+        'const fs=require("fs");'
+        'function load(p){const s=fs.readFileSync(p,"utf8");const m={exports:{}};'
+        'new Function("module","exports",s)(m,m.exports);return m.exports;}'
+        f'const views=load({json.dumps(str(render.JS_DIR / "views.js"))});'
+        f'const meta=load({json.dumps(str(render.JS_DIR / "meta_actions.js"))});'
+        f'const crea=require({json.dumps(str(render.JS_DIR / "create_entity.js"))});'
+        f'const vec={json.dumps(vectors)};'
+        f'const archs={json.dumps(archetipi, ensure_ascii=False)};'
+        'const diff=vec.filter(([v,c])=>Boolean(views.matchesCond(v,c))!==Boolean(meta.matchesCond(v,c)));'
+        'const inv=[];'
+        'for(const a of archs){const vals=crea.presetValori(a);'
+        'for(const [ax,cond] of Object.entries(a.quando||{})){'
+        'if((ax in vals)&&!views.matchesCond(vals[ax],cond)) inv.push((a.nome||"?")+":"+ax);}}'
+        'process.stdout.write(JSON.stringify({diff, inv}));',
+        encoding="utf-8")
+    res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
+    assert res.returncode == 0, res.stderr
+    out = json.loads(res.stdout)
+    assert out["diff"] == [], f"matchesCond diverge tra views e meta_actions: {out['diff']}"
+    assert out["inv"] == [], f"preset non soddisfa matchesCond: {out['inv']}"
+    assert archetipi, "nessun archetipo: l'invariante preset↔match non è stata esercitata"
