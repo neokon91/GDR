@@ -135,6 +135,16 @@ def test_root_note_snapshot(name):
     assert out == _snapshot(f"root_{name}.md", out)
 
 
+FOLDER_NOTES = render.folder_index_pages(CORE, PLUGINS)
+
+
+@pytest.mark.parametrize("fn", FOLDER_NOTES, ids=[f["page"]["category"] for f in FOLDER_NOTES])
+def test_folder_note_snapshot(fn):
+    """Le note-cartella (auto-indice per categoria, Folder Notes) combaciano col golden."""
+    out = _env().get_template("index.md.j2").render(core=CORE, plugins=PLUGINS, templates=TEMPLATES, page=fn["page"])
+    assert out == _snapshot(f"folder_{fn['page']['category']}.md", out)
+
+
 def test_entities_merge():
     """I file-entità (entities/*.yaml) contribuiscono a 'core' e ai template, e
     non collidono con core.yaml/system.yaml (validato anche da check)."""

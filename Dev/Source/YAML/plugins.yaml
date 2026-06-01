@@ -40,6 +40,8 @@ plugins:
     name: Homepage
   - id: initiative-tracker
     name: Initiative Tracker
+  - id: folder-notes
+    name: Folder Notes
 metabind_inputs:
   stato: INPUT[inlineSelect(option(bozza), option(pronto), option(in gioco), option(giocata), option(archiviata))]
   mondo: INPUT[suggester(optionQuery("Mondi"), useLinks(partial), allowOther)]

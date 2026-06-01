@@ -17,6 +17,14 @@ path includes Mondi/Sessioni
 sort by due
 ```
 
+## Convenzione GDR (fili narrativi + prep)
+Tag per dare senso ai task, interrogati da Home:
+- `#gancio` — un gancio da seminare al tavolo. `#trama` — un filo/trama aperto.
+  → Home *Al tavolo* → **🧵 Fili narrativi** (`(tags include #gancio) OR (tags include #trama)`, sort by due).
+- `#prep` — voce della checklist di prep di sessione (template `sessione`, tab *Prepara*).
+Es: `- [ ] Il duca scopre il tradimento #trama 📅 2025-01-30`.
+
 ## Note pipeline
-Plugin installato in dist/GDR-vault → i blocchi ` ```tasks ` rendono. Usato nel template
-sessione per i task aperti delle sessioni.
+Plugin installato in dist/GDR-vault → i blocchi ` ```tasks ` rendono. Usato in: template
+**sessione** (checklist *Prep di sessione* + task della sessione) e **Home** (🧵 Fili
+narrativi taggati + ✅ Da fare, che esclude #gancio/#trama per non duplicare).

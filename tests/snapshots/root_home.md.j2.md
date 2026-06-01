@@ -111,10 +111,21 @@ sort (clock / clock_dim) desc, pressione desc
 limit 12
 ```
 
-## ✅ Da fare
-Scrivi un task in qualunque nota con `- [ ] ...`: comparirà qui.
+## 🧵 Fili narrativi
+Ganci da seminare (`#gancio`) e trame aperte (`#trama`). Scrivi in qualunque nota un task
+taggato — es. `- [ ] Il duca scopre il tradimento #trama 📅 2025-01-30` — e comparirà qui.
 ```tasks
 not done
+(tags include #gancio) OR (tags include #trama)
+sort by due
+limit 20
+```
+
+## ✅ Da fare
+Ogni altro task aperto (`- [ ] ...`) scritto in una nota. I fili narrativi stanno qui sopra.
+```tasks
+not done
+(tags do not include #gancio) AND (tags do not include #trama)
 sort by priority
 limit 15
 ```

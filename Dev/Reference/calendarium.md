@@ -2,8 +2,12 @@
 
 Versione vault: **v2.1.0** (Jeremy Valentine). Doc: https://plugins.javalent.com/calendarium
 
-> **Stato: installato, NON ancora cablato.** Candidato per la **timeline/cronologia**
-> (roadmap Worldbuilder #4). La categoria `epoca` esiste già come dato; manca la vista.
+> **Stato: parsing eventi cablato; calendario per-mondo da creare in-app.** La pipeline
+> abilita lo scan automatico (`write_calendarium`: `autoParse`/`parseDates`/`eventFrontmatter`
+> + `inlineEventsTag: #cronologia`). La **definizione del calendario** (mesi/ere/lune) è
+> contenuto per-mondo: si crea una volta dai preset di Calendarium (opt-in), non la cabla la
+> pipeline. ⚠️ Da confermare in-app (l'iniezione di un calendario default è rinviata a una
+> sessione con QA Obsidian: lo schema oggetto-calendario v2.1 non è verificabile a secco).
 
 ## Cos'è
 Crea **calendari fantasy/sci-fi custom** (ere, mesi, settimane irregolari) con eventi

@@ -69,6 +69,8 @@ def clean() -> None:
     z.classi, SRD, Home/LEGGIMI, pagine-indice). NON tocca .obsidian (config e
     plugin dell'utente) ne' i contenuti. Pulisce anche residui legacy in ROOT."""
     notes = generated_note_names() + [f"{INDEX_DIR}/{p['file']}.base" for p in load_pages()]
+    # Note-cartella auto-indice (Folder Notes): derivate dal modello, rimosse qui.
+    notes += [fp["target"] for fp in folder_index_pages(load_core(), load_yaml("plugins.yaml"))]
     for base in (VAULT, ROOT):
         for name in GENERATED_DIRS:
             path = base / name
@@ -210,6 +212,32 @@ def write_homepage(obsidian: Path) -> None:
     data_json = plugin_dir / "data.json"
     if plugin_dir.is_dir() and not data_json.is_file():
         write_json(data_json, HOMEPAGE_CONFIG)
+
+
+def write_folder_notes(obsidian: Path) -> None:
+    """Folder Notes: la nota omonima dentro ogni cartella (Mondi/<X>/<X>.md) è la
+    sua nota-cartella (auto-indice generato da folder_index_pages). Allinea le
+    chiavi-chiave alla convenzione; merge non distruttivo (preserva il resto)."""
+    merge_plugin_config(obsidian, "folder-notes", {
+        "folderNoteType": ".md",
+        "storageLocation": "insideFolder",
+        "folderNoteName": "{{folder_name}}",
+        "hideFolderNote": True,
+    })
+
+
+def write_calendarium(obsidian: Path) -> None:
+    """Calendarium ('tempo del mondo'): abilita lo scan automatico degli eventi
+    dalle note (frontmatter `fc-date`/`fc-calendar` + tag inline `#cronologia`),
+    così quando si attiva un calendario gli eventi datati vi compaiono soli. La
+    DEFINIZIONE del calendario (mesi/ere/lune) è contenuto per-mondo: si crea una
+    volta in-app dai preset di Calendarium (opt-in), non la cabla la pipeline."""
+    merge_plugin_config(obsidian, "calendarium", {
+        "autoParse": True,
+        "parseDates": True,
+        "eventFrontmatter": True,
+        "inlineEventsTag": "#cronologia",
+    })
 
 
 def crea_wrapper_js(template: dict[str, Any]) -> str:
@@ -438,6 +466,42 @@ def write_engine_data(core: dict[str, Any], templates: list[dict[str, Any]]) -> 
             write_text(VAULT / "z.automazioni" / f"crea_{template['id']}.js", crea_wrapper_js(template))
 
 
+# Categorie senza nota-cartella auto-indice: 'mondo' (la sua cartella è la radice
+# Mondi/) e 'nota' (Inbox, scratch). Tutte le altre hanno una sottocartella propria.
+FOLDER_NOTE_SKIP = {"mondo", "nota"}
+
+
+def folder_index_pages(core: dict[str, Any], plugins: dict[str, Any]) -> list[dict[str, Any]]:
+    """Per ogni categoria con una sottocartella sotto Mondi/, una 'nota-cartella'
+    (convenzione Folder Notes: nota omonima dentro la cartella) che fa da indice
+    auto della categoria. Riusa index.md.j2 sintetizzando un `page` minimale; la
+    nota appare cliccando la cartella nell'esploratore. Ritorna [{target, page}]."""
+    folders = core.get("folders", {})
+    icons = plugins.get("folder_icons") or {}
+    out: list[dict[str, Any]] = []
+    for cat, meta in core.get("categories", {}).items():
+        if cat in FOLDER_NOTE_SKIP:
+            continue
+        folder = folders.get(meta.get("folder", cat)) or folders.get(cat)
+        if not folder or "/" not in folder:
+            continue  # solo le categorie con sottocartella dedicata
+        basename = folder.split("/")[-1]
+        icon = icons.get(cat, "")
+        out.append({
+            "target": f"{folder}/{basename}.md",
+            "page": {
+                "id": f"cartella_{cat}",
+                "file": basename,
+                "title": f"{icon} {basename}".strip(),
+                "category": cat,
+                "intro": "Tutte le voci di questa categoria. Clicca la cartella per tornare qui.",
+                "sort": "file.name asc",
+                "columns": [{"field": "tipo", "label": "Tipo"}, {"field": "mondo", "label": "Mondo"}],
+            },
+        })
+    return out
+
+
 def render_notes(env: Environment, core: dict[str, Any], plugins: dict[str, Any],
                  templates: list[dict[str, Any]], actions: list[dict[str, Any]],
                  pages: list[dict[str, Any]]) -> dict[str, str]:
@@ -469,6 +533,13 @@ def render_notes(env: Environment, core: dict[str, Any], plugins: dict[str, Any]
         text = index_template.render(core=core, plugins=plugins, templates=templates, page=page)
         write_text(VAULT / rel, text)
         rendered[rel] = text
+
+    # Note-cartella (Folder Notes): un auto-indice per ogni categoria, dentro la
+    # sua cartella Mondi/<X>/, reso con lo stesso index.md.j2.
+    for fp in folder_index_pages(core, plugins):
+        text = index_template.render(core=core, plugins=plugins, templates=templates, page=fp["page"])
+        write_text(VAULT / fp["target"], text)
+        rendered[fp["target"]] = text
     return rendered
 
 
@@ -578,6 +649,8 @@ def write_obsidian_config(obsidian: Path, core: dict[str, Any], plugins: dict[st
     write_iconize(obsidian, core, plugins)
     write_callout_manager(obsidian, plugins)
     write_statblock_layouts(obsidian)
+    write_folder_notes(obsidian)
+    write_calendarium(obsidian)
     write_bookmarks(obsidian, pages)
     # Pulizia esploratore: nasconde le cartelle z.* + le esclude da ricerca/grafo.
     write_workspace_chrome(obsidian)

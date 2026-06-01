@@ -241,9 +241,23 @@ le fondamenta saranno rifinite. In ordine di valore:
   (ereditano `_entity_base.j2`); ✅ spezzata `build()` in render.py (helper nominati,
   output invariato); ✅ **ridotto il guscio js-engine** (corpo nota = una riga via `boot.mjs`
   ESM). Tutti i quick-win architetturali chiusi.
-- Generazione nomi/spunti (Fantasy Content Generator) e integrazioni minori quando comodo.
+- **Plugin non sfruttati** (analisi fatta): ✅ Folder Notes, Tasks, Calendarium (vedi sotto).
+  *Rinviato*: **Fantasy Content Generator** (l'utente lo vuole in corpo+wizard, ma quando il
+  wizard sarà strutturato meglio). *Igiene*: BRAT è opzionale per lo ZIP (i plugin sono
+  bundlati → si caricano col trust-prompt a prescindere dallo store; serve solo per aggiornarli).
 
 ### ✅ Fatto (sessione 2026-06-01)
+- **Plugin sottoutilizzati cablati** (analisi + 3 di 4):
+  - **Folder Notes**: nota-cartella auto-indice per ogni categoria (`Mondi/<X>/<X>.md`, resa con
+    `index.md.j2`) — cliccare la cartella apre l'indice. `folder_index_pages` + `write_folder_notes`
+    + 34 snapshot; `clean()` le rimuove.
+  - **Tasks**: convenzione `#gancio`/`#trama` (fili narrativi) + `#prep` (checklist sessione);
+    Home *Al tavolo* → 🧵 Fili narrativi + ✅ Da fare; template `sessione` con checklist prep.
+  - **Calendarium**: primer di parsing eventi cablato (`autoParse`/`parseDates`/`eventFrontmatter`
+    + `inlineEventsTag: #cronologia`). Il calendario (mesi/ere) è contenuto per-mondo → creato
+    in-app dai preset (opt-in); iniezione di un default RINVIATA a una sessione con QA Obsidian.
+  - **Igiene**: rimosse 2 voci-plugin fantasma (`tabs`/`media-extended`, abilitate senza cartella)
+    dal vault. Schede `Dev/Reference/` aggiornate (+ nuova `folder-notes.md`). **199 test.**
 - **Guscio js-engine ridotto** (ultimo quick-win architetturale): nuovo `boot.mjs` (ESM via
   `engine.importJs`) concentra loader CommonJS di `views.js` + `dv`/`page` + `markdown.create`;
   il corpo nota passa a **una riga** per pannello (≈1000 righe di boilerplate in meno negli
