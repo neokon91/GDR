@@ -626,7 +626,8 @@ def write_bookmarks(obsidian: Path, pages: list[dict[str, Any]]) -> None:
     """Bookmarks (core): le poche pagine di riferimento a un clic (Home, hub, SRD
     se generata, Base per pagina). Non distruttivo: aggiunge solo le voci mancanti,
     preservando i bookmark dell'utente. Va dopo build_srd (referenzia SRD/Indice)."""
-    bookmark_targets = [("Home.md", "🏠 Home"), *((f"{INDEX_DIR}/{p['file']}.md", p["title"]) for p in pages)]
+    bookmark_targets = [("LEGGIMI.md", "👋 LEGGIMI"), ("Home.md", "🏠 Home"),
+                        *((f"{INDEX_DIR}/{p['file']}.md", p["title"]) for p in pages)]
     if (VAULT / "SRD" / "Indice.md").is_file():
         bookmark_targets.append(("SRD/Indice.md", "📚 SRD"))
     bookmark_targets += [(f"{INDEX_DIR}/{p['file']}.base", f"{p['title']} · Base") for p in pages]

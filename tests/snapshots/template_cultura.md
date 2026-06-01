@@ -152,6 +152,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "cul
 > **Regioni**: `INPUT[inlineListSuggester(optionQuery("Mondi/Luoghi"), useLinks(partial), allowOther):regioni]`
 > **Lingua**: `INPUT[suggester(optionQuery("Mondi/Lingue"), useLinks(partial), allowOther):lingua]`
 > **Istituzioni**: `INPUT[inlineListSuggester(optionQuery("Mondi/Istituzioni"), useLinks(partial), allowOther):istituzioni]`
+> **Specie**: `INPUT[inlineListSuggester(optionQuery("Mondi/Specie"), useLinks(partial), allowOther):specie]`
 
 > [!example] Collegamenti
 > Mondo: `INPUT[mondo][:mondo]`

@@ -45,6 +45,15 @@ relazioni:
   label: Figure
   category: personaggio
   multi: true
+- field: bioma
+  label: Bioma
+  category: bioma
+- field: cultura
+  label: Cultura dominante
+  category: cultura
+- field: piano
+  label: Piano
+  category: piano
 creation:
   fields:
   - field: tipo

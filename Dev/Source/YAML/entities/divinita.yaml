@@ -38,6 +38,9 @@ relazioni:
   label: Culti
   category: culto
   multi: true
+- field: piano
+  label: Piano di dimora
+  category: piano
 scheda:
 - dominio
 - allineamento

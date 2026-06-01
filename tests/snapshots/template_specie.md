@@ -95,6 +95,9 @@ return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "spe
 
 --- Collegamenti
 
+> [!example] Relazioni
+> **Regione d'origine**: `INPUT[inlineListSuggester(optionQuery("Mondi/Luoghi"), useLinks(partial), allowOther):origine]`
+> **Culture associate**: `INPUT[inlineListSuggester(optionQuery("Mondi/Culture"), useLinks(partial), allowOther):culture]`
 
 > [!example] Collegamenti
 > Mondo: `INPUT[mondo][:mondo]`

@@ -357,8 +357,10 @@ async function renderEncounter(app, dv, page) {
   } else {
     const b = (xp.budget_2024 || {})[String(liv)] || [0, 0, 0];
     const bassa = b[0] * num, mod = b[1] * num, alta = b[2] * num;
+    // Difficoltà 2024 (DMG): solo Bassa/Moderata/Alta (niente tier "Mortale", abolito
+    // nel 2024). Oltre il budget Alta non è un tier: lo segnaliamo come avviso.
     let label = "Banale";
-    if (totale >= alta) label = totale >= alta * 1.25 ? "Mortale ☠️" : "Alta";
+    if (totale >= alta) label = totale > alta * 1.5 ? "Alta ⚠️ (oltre budget)" : "Alta";
     else if (totale >= mod) label = "Moderata";
     else if (totale >= bassa) label = "Bassa";
     out += `> Gruppo: **${num}× liv ${liv}** · XP nemici: **${totale}**\n>\n`;

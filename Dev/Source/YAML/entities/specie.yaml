@@ -26,6 +26,15 @@ famiglie:
 - { nome: onirica,      descrizione: "Nata nei sogni cosmici, nell'inconscio collettivo o nei piani onirici." }
 - { nome: elementale,   descrizione: "Composta o generata dagli elementi primari (fuoco, acqua, aria, terra, etere)." }
 - { nome: sintetica,    descrizione: "Creata artificialmente tramite magia, alchimia o tecnologia." }
+relazioni:
+- field: origine
+  label: Regione d'origine
+  category: luogo
+  multi: true
+- field: culture
+  label: Culture associate
+  category: cultura
+  multi: true
 scheda:
 - taglia
 - velocita

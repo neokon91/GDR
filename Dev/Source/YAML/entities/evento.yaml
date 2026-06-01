@@ -48,6 +48,14 @@ relazioni:
   label: Miti generati
   category: mito
   multi: true
+- field: divinita
+  label: Divinità coinvolte
+  category: divinita
+  multi: true
+- field: culti
+  label: Culti coinvolti
+  category: culto
+  multi: true
 creation:
   fields:
   - field: tipo

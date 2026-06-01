@@ -41,6 +41,10 @@ relazioni:
   label: Istituzioni
   category: istituzione
   multi: true
+- field: specie
+  label: Specie
+  category: specie
+  multi: true
 creation:
   fields:
   - field: tipo

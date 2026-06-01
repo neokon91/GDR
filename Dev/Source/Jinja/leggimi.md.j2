@@ -1,5 +1,13 @@
 # 👋 Benvenuto — il tuo mondo e il tuo tavolo
 
+> [!warning] 🧪 Stai testando una **beta**
+> Grazie per provarlo! Il vault parte **vuoto** (nessun mondo d'esempio): all'inizio le
+> dashboard di *Home* e gli *Indici* sono spogli — è normale, si riempiono man mano che crei.
+> Cose ancora **acerbe/da rifinire**: il radar del *Carattere* si ridisegna riaprendo la nota
+> (non mentre muovi lo slider); il *Sali di livello* copre le scelte SRD di base; il generatore
+> di nomi non è ancora agganciato. **Segnala** intoppi, cose poco chiare o impressioni a chi ti
+> ha condiviso il vault — è esattamente ciò che serve in questa fase.
+
 Questo è il tuo **vault di gioco di ruolo**: un posto solo per *costruire un mondo*
 (luoghi, popoli, divinità, segreti) e *giocarci* a D&D 5.5e (personaggi, incontri,
 dadi, regole). Non serve essere tecnici: si lavora a **bottoni** e **menù**.
