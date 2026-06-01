@@ -769,3 +769,27 @@ def test_anti_drift_matchescond(tmp_path):
     assert out["diff"] == [], f"matchesCond diverge tra views e meta_actions: {out['diff']}"
     assert out["inv"] == [], f"preset non soddisfa matchesCond: {out['inv']}"
     assert archetipi, "nessun archetipo: l'invariante preset↔match non è stata esercitata"
+
+
+@pytest.mark.skipif(not shutil.which("node"), reason="node assente")
+def test_famiglia_preset(tmp_path):
+    """create_entity.famigliaPreset: la famiglia col campo 'assi' pre-compila i
+    valori-assi (cultura/guerriera); famiglia senza preset o inesistente -> {}.
+    Gli id-asse dei preset sono validati da validate (shape: famiglie)."""
+    spec = (CORE.get("categories") or {}).get("cultura") or {}
+    assert spec.get("famiglie"), "cultura senza famiglie"
+    harness = tmp_path / "fam.js"
+    harness.write_text(
+        f'const crea=require({json.dumps(str(render.JS_DIR / "create_entity.js"))});'
+        f'const spec={json.dumps(spec, ensure_ascii=False)};'
+        'process.stdout.write(JSON.stringify({'
+        'guer:crea.famigliaPreset(spec,"guerriera"),'
+        'nom:crea.famigliaPreset(spec,"nomadica"),'
+        'x:crea.famigliaPreset(spec,"inesistente")}));',
+        encoding="utf-8")
+    res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
+    assert res.returncode == 0, res.stderr
+    out = json.loads(res.stdout)
+    assert out["guer"] == {"valori_dominanti": 3, "relazione_morte": 2, "ritualizzazione_vita": 4}
+    assert out["nom"] == {}      # famiglia senza preset
+    assert out["x"] == {}        # famiglia inesistente

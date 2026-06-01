@@ -154,6 +154,14 @@ function presetValore(cond) {
   return null;
 }
 
+// Valori-assi di preset di una FAMIGLIA: la famiglia scelta (classificazione a 2
+// livelli) può pre-compilare gli assi tematici col campo opzionale `assi`
+// (mappa asseId -> valore 1-5). Stile archetipi, ma a partire dalla famiglia.
+function famigliaPreset(categorySpec, nome) {
+  const fam = (categorySpec.famiglie || []).find((f) => f.nome === nome);
+  return (fam && fam.assi) || {};
+}
+
 // Valori-assi di preset di un archetipo: 'valori' esplicito se presente, altrimenti
 // derivati da 'quando' (gli assi non citati restano al default dell'utente).
 function presetValori(arch) {
@@ -201,6 +209,20 @@ async function runWizard(tp, template, core) {
     captured[q.field] = fillNow ? await ask(tp, q, template, core) : emptyFor(q);
   }
 
+  // Famiglia (classificazione a 2 livelli, opzionale): se la categoria ha famiglie,
+  // chiedila; la famiglia scelta può pre-compilare gli assi (campo `assi`). È il
+  // livello tematico "ampio"; l'archetipo sotto la rifinisce (e ha la precedenza).
+  const famiglie = categorySpec.famiglie ?? [];
+  let famiglia = "";
+  let preFamiglia = {};
+  if (famiglie.length) {
+    const chosen = await tp.system.suggester(
+      ["(nessuna)", ...famiglie.map((f) => f.nome)],
+      [null, ...famiglie], false,
+      `${categorySpec.famiglia_label ?? "Famiglia"} di ${template.title} (opzionale)`);
+    if (chosen) { famiglia = chosen.nome; preFamiglia = famigliaPreset(categorySpec, chosen.nome); }
+  }
+
   // Archetipo (opzionale): se la categoria ha un catalogo, pre-compila i valori
   // degli assi tematici + i tag 'profilo/*' coerenti. "(personalizzato)" salta.
   const archetipi = (core.archetipi ?? {})[category] ?? [];
@@ -232,6 +254,8 @@ async function runWizard(tp, template, core) {
     connessioni: [],
     sessioni: session ? [`[[${session.basename}]]`] : [],
     tags: ["gdr/bozza", ...profiloTags],
+    ...(famiglia ? { famiglia } : {}),
+    ...preFamiglia,
     ...preset,
     ...captured,
   };
@@ -256,5 +280,6 @@ async function create_entity(tp, templateId = "") {
   }
 }
 
-create_entity.presetValori = presetValori;  // esposto per i test
+create_entity.presetValori = presetValori;    // esposto per i test
+create_entity.famigliaPreset = famigliaPreset;  // esposto per i test
 module.exports = create_entity;

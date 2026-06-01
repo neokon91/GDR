@@ -18,14 +18,24 @@ subtypes:
 - religione
 # Classificazione a 2 livelli: la 'famiglia' (indole, seed FW glossario_cultura)
 # affianca il 'tipo'. Select + legenda auto-documentante.
+# La famiglia può pre-compilare gli assi tematici (campo opzionale 'assi':
+# asseId -> valore 1-5) — il wizard li propone alla scelta della famiglia, come
+# i preset degli archetipi. Esempio curato su alcune famiglie; le altre restano
+# senza preset (l'utente compila gli assi a mano).
 famiglie:
-- { nome: ancestrale, descrizione: "Radicata nelle origini mitiche, nella trasmissione orale e nei cicli naturali." }
+- nome: ancestrale
+  descrizione: "Radicata nelle origini mitiche, nella trasmissione orale e nei cicli naturali."
+  assi: { valori_dominanti: 2, relazione_morte: 5, ritualizzazione_vita: 5 }
 - { nome: sciamanica, descrizione: "Integra visibile e invisibile: pratiche spirituali, viaggi dell'anima, dialogo con l'Altrove." }
 - { nome: iniziatica, descrizione: "Fondata sul passaggio, la prova e la trasformazione." }
-- { nome: dogmatica,  descrizione: "Del sacro immutabile, del rito stabilito, della gerarchia indiscutibile." }
+- nome: dogmatica
+  descrizione: "Del sacro immutabile, del rito stabilito, della gerarchia indiscutibile."
+  assi: { valori_dominanti: 3, relazione_morte: 2, ritualizzazione_vita: 4 }
 - { nome: fluida,     descrizione: "In perenne mutamento; abbraccia molteplicità e trasformazione." }
 - { nome: sincretica, descrizione: "Dell'intreccio: fonde tradizioni e significati." }
-- { nome: guerriera,  descrizione: "Fondata sul conflitto, sulla prova e sulla conquista." }
+- nome: guerriera
+  descrizione: "Fondata sul conflitto, sulla prova e sulla conquista."
+  assi: { valori_dominanti: 3, relazione_morte: 2, ritualizzazione_vita: 4 }
 - { nome: nomadica,   descrizione: "Del movimento, dell'adattamento e della non-fissazione." }
 # Diffusione/portata + stile dei nomi (il generatore homebrew genera.js legge
 # stile_nomi per comporre nomi a tema della cultura).

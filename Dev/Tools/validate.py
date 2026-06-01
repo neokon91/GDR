@@ -128,6 +128,15 @@ def validate_split(core_raw: dict[str, Any], system_raw: dict[str, Any], merged:
             for axis in (a.get("quando") or {}):
                 if axis not in axis_ids.get(cat, set()):
                     errors.append(f"shape: archetipi[{cat}].{a.get('id')} -> asse '{axis}' non in assi_tematici[{cat}]")
+    # Famiglie: il preset 'assi' (opzionale) deve riferire assi reali della
+    # categoria (anti-typo), valori 1-5; lo usa create_entity.famigliaPreset.
+    for cat, spec in (merged.get("categories", {}) or {}).items():
+        for fam in (spec or {}).get("famiglie", []) or []:
+            for axis, val in (fam.get("assi") or {}).items():
+                if axis not in axis_ids.get(cat, set()):
+                    errors.append(f"shape: famiglie[{cat}].{fam.get('nome')} -> asse '{axis}' non in assi_tematici[{cat}]")
+                elif not (isinstance(val, int) and 1 <= val <= 5):
+                    errors.append(f"shape: famiglie[{cat}].{fam.get('nome')}.{axis} = {val} fuori 1-5")
     return errors
 
 
