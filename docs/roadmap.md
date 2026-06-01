@@ -11,7 +11,7 @@ in [architecture](architecture.md) / [data_model](data_model.md) /
 > **auto-riscrittura del blocco encounter**, **timeline navigabile** (pannello *Linea del
 > tempo* sulla pagina Cronologia) e **tab Mappe** su luogo/mondo. Doc plugin **completa**
 > (21 schede). **36 categorie, 20 con assi.** Tutto committato/pushato/buildato su
-> `origin/main` (HEAD `cbba25b`), **159 test verdi**, check 0. *L'esperienza in-app resta in
+> `origin/main` (HEAD `64c1514`), **160 test verdi**, check 0. *L'esperienza in-app resta in
 > gran parte da confermare (rischio #1, QA deferita su scelta utente — ci si appoggia ai test).*
 
 ## Dove siamo (sintesi)
@@ -30,7 +30,7 @@ XP 2024 vs GS delle creature) + **auto-riscrittura del blocco `encounter`**. SRD
 Vista, radar assi, profilo, clock, difficoltà incontro, progressione, linea del tempo, mappa,
 quick-ref condizioni).
 Indici **Bases** `.base` + hub Dataview; dashboard auto **Ponte Mondo↔Sistema** e **Fronti**.
-Home a 2 aree, Homepage, **159 test**, check 0. **Stadio prodotto: scaffold ricco e profondo;
+Home a 2 aree, Homepage, **160 test**, check 0. **Stadio prodotto: scaffold ricco e profondo;
 l'esperienza in-app è in gran parte da confermare (QA deferita su scelta utente).**
 
 ## 🎯 Visione: due suite integrate ma separate
@@ -58,7 +58,7 @@ sopra i sistemi avanzati (vedi backlog).
   e dall'**auto-encounter** (tavolo).
 - **Rischio #1 — debito di verifica in-app (standing)**: tutta la pipeline è *generata* e
   *poco confermata* in Obsidian. Su scelta utente la **QA in-app è deferita**: ci si appoggia
-  ai **159 test** (generazione + wizard/renderer JS via node), che però **non coprono il
+  ai **160 test** (generazione + wizard/renderer JS via node), che però **non coprono il
   runtime Obsidian** (Meta Bind/Dataview/Templater/JS Engine). Il vecchio bug
   `views.renderEntityPanel` ricorda che certi bug vivono solo nel runtime. *Va fatta prima o
   poi*, idealmente a blocchi (PG/sali-livello; clock→conseguenza; incontro+aggiorna-encounter;
@@ -85,7 +85,7 @@ sopra i sistemi avanzati (vedi backlog).
   common/build_srd/build_personaggio/validate, merge lossless, validazione forte
   (confine/dup/snake/shape/entity-schema/assi). Snapshot + e2e wizard/renderer via node
   (PG/caster, preset, level-up, profilo, clock, incontri, **timeline**, **mappa**,
-  **condizioni**, **srd_note**, **aggiorna_encounter**). Test (**159**, ridondanti sussunti dagli snapshot).
+  **condizioni**, **srd_note**, **aggiorna_encounter**). Test (**160**, ridondanti sussunti dagli snapshot).
   Nuova entità = 1 YAML (+1 assi); Jinja solo per layout custom (default `_entity_base.j2`).
 - **Debito/fragilità**:
   - **Logica embeddata nelle note** (ultimo residuo): la *logica* vive in `views.js`
@@ -106,7 +106,7 @@ sopra i sistemi avanzati (vedi backlog).
     fantasy-statblocks/tasks/dice-roller/**bases**/**callout-manager**/**iconize**/
     **homepage**/initiative-tracker/calendarium/excalidraw/zoom-map/
     fantasy-content-generator/brat), coi gotcha (es. callout collassati).
-  - **Test**: **159 verdi** ma coprono la *generazione* (+ wizard/renderer JS via node), non il
+  - **Test**: **160 verdi** ma coprono la *generazione* (+ wizard/renderer JS via node), non il
     runtime Obsidian (Meta Bind/Dataview/Templater/JS Engine) — gap inerente, colmabile solo con QA manuale.
 
 ## 🌍 Worldbuilder
@@ -239,7 +239,11 @@ le fondamenta saranno rifinite. In ordine di valore:
 - **Timeline navigabile** (pannello su Cronologia) + **tab Mappe** (luogo/mondo). (`f9dc160`)
 - **Docs** riallineate (roadmap + 4 lenti, play_layer/architecture, LEGGIMI). (`584eb08`)
 - **Quick-ref condizioni** — callout *Condizioni 5.5e* (15, da `core.condizioni`/SRD) in
-  scheda PG e incontro (`views.renderCondizioni`). **159 test**, check 0.
+  scheda PG e incontro (`views.renderCondizioni`). (`cbba25b`)
+- **Template reattivi** (profondità+bellezza): etichette-valore attive sugli assi del
+  Carattere + ritratto calcolato/icona in `identita_card` (`VIEW` reattivo); radar migrato a
+  **`meta-bind-js-view`** (ridisegno live, fallback al frontmatter; reattività da QA).
+  **160 test**, check 0. HEAD `64c1514`.
 
 ### ✅ Fatto (sessione 2026-05-31)
 - **Fase 1 fondamenta**: doc plugin (poi completata a 21 schede), grafo cosmologico (5 categorie),
@@ -252,7 +256,7 @@ le fondamenta saranno rifinite. In ordine di valore:
 
 ## Come ripartire
 
-**159 test verdi**, check 0; HEAD `cbba25b` (tutto pushato+buildato). Leggi questo file + i
+**160 test verdi**, check 0; HEAD `64c1514` (tutto pushato+buildato). Leggi questo file + i
 docs (`architecture`/`data_model`/`rules_layer`/`play_layer`/`plugin_contracts`) + la memoria
 (`project-northstar`, `vault-due-suite`). **Fasi 1-2 coperte + rifiniture** → prossimi:
 - **Residui Fase 2**: level-up scelte avanzate (quick-ref condizioni ✅).
