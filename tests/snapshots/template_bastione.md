@@ -2,9 +2,13 @@
 # `=this.nome`
 
 > [!info] 🏰 Bastione
-> **Tipo**: `VIEW[{tipo} ?? "—"]` · **Mondo**: `VIEW[{mondo}][text(renderMarkdown)]`
+> `INPUT[ritratto][:ritratto]`
 >
-> **Stato**: `INPUT[stato][:stato]`
+> | | |
+> |:--|:--|
+> | **Tipo** | `VIEW[{tipo} ?? "—"]` |
+> | **Mondo** | `VIEW[{mondo}][text(renderMarkdown)]` |
+> | **Stato** | `INPUT[stato][:stato]` |
 
 ````tabs
 --- Lore

@@ -54,31 +54,33 @@
    Un'unica definizione, riusata da tutti i template. Evita il copia-incolla di
    intestazioni, superficie giocabile, collegamenti e pannelli. #}
 
-{# Ritratto calcolato (read-only, REATTIVO): i campi-scheda strutturati della
-   categoria come strip di VIEW — un'identità a colpo d'occhio sopra le tab, che
-   riflette i valori del frontmatter. Vuoto se la categoria non ha campi-scheda. #}
-{% macro ritratto(category) -%}
-{%- set campi = core.get('scheda', {}).get(category, []) -%}
-{%- if campi %}
-> {% for fid in campi %}**{{ core.fields[fid].label }}** {{ view(fid) }}{% if not loop.last %} · {% endif %}{% endfor %}
-
-{% endif -%}
-{%- endmacro %}
-
-{# Card identita' (intestazione sopra le tab): icona della categoria + tipo/mondo
-   sola-lettura (si editano dalle Properties / Metadata Menu Select), il ritratto
-   calcolato dei campi strutturati, e lo stato editabile inline. #}
+{# Infobox stile wiki (intestazione sopra le tab): icona + titolo, un RITRATTO
+   opzionale (immagine, solo per le categorie "visive") e una TABELLA dei fatti
+   chiave — tipo/mondo/famiglia + i campi-scheda (sola lettura reattiva, VIEW),
+   con lo stato editabile. I campi inline in tabella sono lo stesso pattern già
+   usato e funzionante in scheda_pg_rules. Single source: core.scheda/categories. #}
 {% macro identita_card(template) -%}
 {%- set icon = plugins.get('folder_icons', {}).get(template.category, '') -%}
+{%- set cat = core.get('categories', {}).get(template.category, {}) -%}
+{%- set scheda = core.get('scheda', {}).get(template.category, []) -%}
 > [!info] {{ (icon ~ ' ') if icon else '' }}{{ template.title }}
-{% if template.category != "mondo" %}
-> **Tipo**: {{ view('tipo') }} · **Mondo**: {{ view_md('mondo') }}
-{% else %}
-> **Tipo**: {{ view('tipo') }}
-{% endif %}
-{{ ritratto(template.category) -}}
+{% if template.category in core.get('ritratto_categorie', []) %}
+> {{ field('ritratto', label=false) }}
 >
-> **Stato**: {{ field('stato', label=false) }}
+{% endif %}
+> | | |
+> |:--|:--|
+> | **Tipo** | {{ view('tipo') }} |
+{% if template.category != "mondo" %}
+> | **Mondo** | {{ view_md('mondo') }} |
+{% endif %}
+{% if cat.get('famiglie') %}
+> | **{{ cat.get('famiglia_label', 'Famiglia') }}** | {{ view('famiglia') }} |
+{% endif %}
+{% for fid in scheda %}
+> | **{{ core.fields[fid].label }}** | {{ view(fid) }} |
+{% endfor %}
+> | **Stato** | {{ field('stato', label=false) }} |
 {%- endmacro %}
 
 {# Classificazione a 2 livelli (famiglia + tipo): se la categoria ha 'famiglie',

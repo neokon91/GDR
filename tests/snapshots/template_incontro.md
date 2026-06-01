@@ -2,10 +2,14 @@
 # `=this.nome`
 
 > [!info] 🎲 Incontro
-> **Tipo**: `VIEW[{tipo} ?? "—"]` · **Mondo**: `VIEW[{mondo}][text(renderMarkdown)]`
-> **Livello del gruppo** `VIEW[{pg_livello} ?? "—"]` · **Numero di PG** `VIEW[{pg_numero} ?? "—"]`
->
-> **Stato**: `INPUT[stato][:stato]`
+> | | |
+> |:--|:--|
+> | **Tipo** | `VIEW[{tipo} ?? "—"]` |
+> | **Mondo** | `VIEW[{mondo}][text(renderMarkdown)]` |
+> | **Famiglia** | `VIEW[{famiglia} ?? "—"]` |
+> | **Livello del gruppo** | `VIEW[{pg_livello} ?? "—"]` |
+> | **Numero di PG** | `VIEW[{pg_numero} ?? "—"]` |
+> | **Stato** | `INPUT[stato][:stato]` |
 
 > [!info] Famiglia: `INPUT[inlineSelect(option(combattimento), option(sociale), option(esplorazione), option(enigma), option(inseguimento), option(ambientale)):famiglia]`
 

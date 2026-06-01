@@ -2,10 +2,12 @@
 # `=this.nome`
 
 > [!info] 🌿 Ecosistema
-> **Tipo**: `VIEW[{tipo} ?? "—"]` · **Mondo**: `VIEW[{mondo}][text(renderMarkdown)]`
-> **Salute** `VIEW[{salute} ?? "—"]`
->
-> **Stato**: `INPUT[stato][:stato]`
+> | | |
+> |:--|:--|
+> | **Tipo** | `VIEW[{tipo} ?? "—"]` |
+> | **Mondo** | `VIEW[{mondo}][text(renderMarkdown)]` |
+> | **Salute** | `VIEW[{salute} ?? "—"]` |
+> | **Stato** | `INPUT[stato][:stato]` |
 
 ````tabs
 --- Lore

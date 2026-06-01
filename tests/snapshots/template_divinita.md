@@ -2,10 +2,17 @@
 # `=this.nome`
 
 > [!info] ☀️ Divinità
-> **Tipo**: `VIEW[{tipo} ?? "—"]` · **Mondo**: `VIEW[{mondo}][text(renderMarkdown)]`
-> **Dominio** `VIEW[{dominio} ?? "—"]` · **Allineamento** `VIEW[{allineamento} ?? "—"]` · **Simbolo** `VIEW[{simbolo} ?? "—"]`
+> `INPUT[ritratto][:ritratto]`
 >
-> **Stato**: `INPUT[stato][:stato]`
+> | | |
+> |:--|:--|
+> | **Tipo** | `VIEW[{tipo} ?? "—"]` |
+> | **Mondo** | `VIEW[{mondo}][text(renderMarkdown)]` |
+> | **Famiglia** | `VIEW[{famiglia} ?? "—"]` |
+> | **Dominio** | `VIEW[{dominio} ?? "—"]` |
+> | **Allineamento** | `VIEW[{allineamento} ?? "—"]` |
+> | **Simbolo** | `VIEW[{simbolo} ?? "—"]` |
+> | **Stato** | `INPUT[stato][:stato]` |
 
 > [!info] Famiglia: `INPUT[inlineSelect(option(primordiale), option(archetipica), option(elementale), option(culturale), option(mitica), option(spirituale), option(onirica)):famiglia]`
 

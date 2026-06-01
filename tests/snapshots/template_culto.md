@@ -2,10 +2,14 @@
 # `=this.nome`
 
 > [!info] 🕯️ Culto
-> **Tipo**: `VIEW[{tipo} ?? "—"]` · **Mondo**: `VIEW[{mondo}][text(renderMarkdown)]`
-> **Portata** `VIEW[{portata} ?? "—"]`
+> `INPUT[ritratto][:ritratto]`
 >
-> **Stato**: `INPUT[stato][:stato]`
+> | | |
+> |:--|:--|
+> | **Tipo** | `VIEW[{tipo} ?? "—"]` |
+> | **Mondo** | `VIEW[{mondo}][text(renderMarkdown)]` |
+> | **Portata** | `VIEW[{portata} ?? "—"]` |
+> | **Stato** | `INPUT[stato][:stato]` |
 
 ````tabs
 --- Lore

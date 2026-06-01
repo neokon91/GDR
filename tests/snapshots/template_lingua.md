@@ -2,10 +2,13 @@
 # `=this.nome`
 
 > [!info] 🗣️ Lingua
-> **Tipo**: `VIEW[{tipo} ?? "—"]` · **Mondo**: `VIEW[{mondo}][text(renderMarkdown)]`
-> **Vitalità** `VIEW[{vitalita} ?? "—"]`
->
-> **Stato**: `INPUT[stato][:stato]`
+> | | |
+> |:--|:--|
+> | **Tipo** | `VIEW[{tipo} ?? "—"]` |
+> | **Mondo** | `VIEW[{mondo}][text(renderMarkdown)]` |
+> | **Famiglia** | `VIEW[{famiglia} ?? "—"]` |
+> | **Vitalità** | `VIEW[{vitalita} ?? "—"]` |
+> | **Stato** | `INPUT[stato][:stato]` |
 
 > [!info] Famiglia: `INPUT[inlineSelect(option(primordiale), option(divina), option(planare), option(elementale), option(ancestrale), option(rituale), option(arcana), option(segreta)):famiglia]`
 

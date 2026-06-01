@@ -2,10 +2,14 @@
 # `=this.nome`
 
 > [!info] 📖 Mito
-> **Tipo**: `VIEW[{tipo} ?? "—"]` · **Mondo**: `VIEW[{mondo}][text(renderMarkdown)]`
-> **Veridicità** `VIEW[{veridicita} ?? "—"]`
+> `INPUT[ritratto][:ritratto]`
 >
-> **Stato**: `INPUT[stato][:stato]`
+> | | |
+> |:--|:--|
+> | **Tipo** | `VIEW[{tipo} ?? "—"]` |
+> | **Mondo** | `VIEW[{mondo}][text(renderMarkdown)]` |
+> | **Veridicità** | `VIEW[{veridicita} ?? "—"]` |
+> | **Stato** | `INPUT[stato][:stato]` |
 
 ````tabs
 --- Lore

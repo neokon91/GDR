@@ -2,10 +2,16 @@
 # `=this.nome`
 
 > [!info] ⚠️ Insidia
-> **Tipo**: `VIEW[{tipo} ?? "—"]` · **Mondo**: `VIEW[{mondo}][text(renderMarkdown)]`
-> **Livello di gioco** `VIEW[{tier} ?? "—"]` · **Minaccia** `VIEW[{minaccia} ?? "—"]` · **Prova** `VIEW[{prova} ?? "—"]` · **Danno / Effetto** `VIEW[{danno} ?? "—"]`
->
-> **Stato**: `INPUT[stato][:stato]`
+> | | |
+> |:--|:--|
+> | **Tipo** | `VIEW[{tipo} ?? "—"]` |
+> | **Mondo** | `VIEW[{mondo}][text(renderMarkdown)]` |
+> | **Famiglia** | `VIEW[{famiglia} ?? "—"]` |
+> | **Livello di gioco** | `VIEW[{tier} ?? "—"]` |
+> | **Minaccia** | `VIEW[{minaccia} ?? "—"]` |
+> | **Prova** | `VIEW[{prova} ?? "—"]` |
+> | **Danno / Effetto** | `VIEW[{danno} ?? "—"]` |
+> | **Stato** | `INPUT[stato][:stato]` |
 
 > [!info] Famiglia: `INPUT[inlineSelect(option(meccanica), option(magica), option(naturale), option(biologica), option(ambientale)):famiglia]`
 

@@ -2,10 +2,12 @@
 # `=this.nome`
 
 > [!info] 🪄 Sistema magico
-> **Tipo**: `VIEW[{tipo} ?? "—"]` · **Mondo**: `VIEW[{mondo}][text(renderMarkdown)]`
-> **Fonte del potere** `VIEW[{fonte_potere} ?? "—"]`
->
-> **Stato**: `INPUT[stato][:stato]`
+> | | |
+> |:--|:--|
+> | **Tipo** | `VIEW[{tipo} ?? "—"]` |
+> | **Mondo** | `VIEW[{mondo}][text(renderMarkdown)]` |
+> | **Fonte del potere** | `VIEW[{fonte_potere} ?? "—"]` |
+> | **Stato** | `INPUT[stato][:stato]` |
 
 ````tabs
 --- Lore

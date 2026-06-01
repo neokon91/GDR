@@ -2,10 +2,17 @@
 # `=this.nome`
 
 > [!info] 🐾 Creatura
-> **Tipo**: `VIEW[{tipo} ?? "—"]` · **Mondo**: `VIEW[{mondo}][text(renderMarkdown)]`
-> **Taglia** `VIEW[{taglia} ?? "—"]` · **Grado di sfida** `VIEW[{gs} ?? "—"]` · **Ruolo ecologico** `VIEW[{ruolo_ecologico} ?? "—"]` · **Dieta** `VIEW[{dieta} ?? "—"]`
+> `INPUT[ritratto][:ritratto]`
 >
-> **Stato**: `INPUT[stato][:stato]`
+> | | |
+> |:--|:--|
+> | **Tipo** | `VIEW[{tipo} ?? "—"]` |
+> | **Mondo** | `VIEW[{mondo}][text(renderMarkdown)]` |
+> | **Taglia** | `VIEW[{taglia} ?? "—"]` |
+> | **Grado di sfida** | `VIEW[{gs} ?? "—"]` |
+> | **Ruolo ecologico** | `VIEW[{ruolo_ecologico} ?? "—"]` |
+> | **Dieta** | `VIEW[{dieta} ?? "—"]` |
+> | **Stato** | `INPUT[stato][:stato]` |
 
 ````tabs
 --- Statblock

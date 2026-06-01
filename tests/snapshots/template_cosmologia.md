@@ -2,9 +2,12 @@
 # `=this.nome`
 
 > [!info] 🌌 Cosmologia
-> **Tipo**: `VIEW[{tipo} ?? "—"]` · **Mondo**: `VIEW[{mondo}][text(renderMarkdown)]`
->
-> **Stato**: `INPUT[stato][:stato]`
+> | | |
+> |:--|:--|
+> | **Tipo** | `VIEW[{tipo} ?? "—"]` |
+> | **Mondo** | `VIEW[{mondo}][text(renderMarkdown)]` |
+> | **Famiglia** | `VIEW[{famiglia} ?? "—"]` |
+> | **Stato** | `INPUT[stato][:stato]` |
 
 > [!info] Famiglia: `INPUT[inlineSelect(option(origine), option(struttura), option(forze), option(destino), option(mistero)):famiglia]`
 

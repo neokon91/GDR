@@ -2,10 +2,18 @@
 # `=this.nome`
 
 > [!info] ⚔️ Fazione
-> **Tipo**: `VIEW[{tipo} ?? "—"]` · **Mondo**: `VIEW[{mondo}][text(renderMarkdown)]`
-> **Portata** `VIEW[{portata} ?? "—"]` · **Motto** `VIEW[{motto} ?? "—"]` · **Forma di governo** `VIEW[{forma_governo} ?? "—"]` · **Epoca di fondazione** `VIEW[{fondazione} ?? "—"]`
+> `INPUT[ritratto][:ritratto]`
 >
-> **Stato**: `INPUT[stato][:stato]`
+> | | |
+> |:--|:--|
+> | **Tipo** | `VIEW[{tipo} ?? "—"]` |
+> | **Mondo** | `VIEW[{mondo}][text(renderMarkdown)]` |
+> | **Famiglia** | `VIEW[{famiglia} ?? "—"]` |
+> | **Portata** | `VIEW[{portata} ?? "—"]` |
+> | **Motto** | `VIEW[{motto} ?? "—"]` |
+> | **Forma di governo** | `VIEW[{forma_governo} ?? "—"]` |
+> | **Epoca di fondazione** | `VIEW[{fondazione} ?? "—"]` |
+> | **Stato** | `INPUT[stato][:stato]` |
 
 > [!info] Famiglia: `INPUT[inlineSelect(option(militare), option(religiosa), option(arcana), option(rivoluzionaria), option(egemonica), option(mercantile), option(profetica)):famiglia]`
 

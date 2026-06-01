@@ -2,10 +2,17 @@
 # `=this.nome`
 
 > [!info] ✨ Incantesimo
-> **Tipo**: `VIEW[{tipo} ?? "—"]` · **Mondo**: `VIEW[{mondo}][text(renderMarkdown)]`
-> **Livello** `VIEW[{livello} ?? "—"]` · **Tempo di lancio** `VIEW[{tempo_lancio} ?? "—"]` · **Gittata** `VIEW[{gittata} ?? "—"]` · **Componenti** `VIEW[{componenti} ?? "—"]` · **Durata** `VIEW[{durata} ?? "—"]` · **Classi** `VIEW[{classi} ?? "—"]`
->
-> **Stato**: `INPUT[stato][:stato]`
+> | | |
+> |:--|:--|
+> | **Tipo** | `VIEW[{tipo} ?? "—"]` |
+> | **Mondo** | `VIEW[{mondo}][text(renderMarkdown)]` |
+> | **Livello** | `VIEW[{livello} ?? "—"]` |
+> | **Tempo di lancio** | `VIEW[{tempo_lancio} ?? "—"]` |
+> | **Gittata** | `VIEW[{gittata} ?? "—"]` |
+> | **Componenti** | `VIEW[{componenti} ?? "—"]` |
+> | **Durata** | `VIEW[{durata} ?? "—"]` |
+> | **Classi** | `VIEW[{classi} ?? "—"]` |
+> | **Stato** | `INPUT[stato][:stato]` |
 
 ````tabs
 --- Meccanica

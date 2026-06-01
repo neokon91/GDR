@@ -2,10 +2,14 @@
 # `=this.nome`
 
 > [!info] 📖 Background
-> **Tipo**: `VIEW[{tipo} ?? "—"]` · **Mondo**: `VIEW[{mondo}][text(renderMarkdown)]`
-> **Caratteristiche** `VIEW[{car_background} ?? "—"]` · **Competenza in strumenti** `VIEW[{strumento} ?? "—"]` · **Talento d'origine** `VIEW[{talento_origine} ?? "—"]`
->
-> **Stato**: `INPUT[stato][:stato]`
+> | | |
+> |:--|:--|
+> | **Tipo** | `VIEW[{tipo} ?? "—"]` |
+> | **Mondo** | `VIEW[{mondo}][text(renderMarkdown)]` |
+> | **Caratteristiche** | `VIEW[{car_background} ?? "—"]` |
+> | **Competenza in strumenti** | `VIEW[{strumento} ?? "—"]` |
+> | **Talento d'origine** | `VIEW[{talento_origine} ?? "—"]` |
+> | **Stato** | `INPUT[stato][:stato]` |
 
 ````tabs
 --- Scheda

@@ -2,10 +2,16 @@
 # `=this.nome`
 
 > [!info] 🗺️ Luogo
-> **Tipo**: `VIEW[{tipo} ?? "—"]` · **Mondo**: `VIEW[{mondo}][text(renderMarkdown)]`
-> **Clima** `VIEW[{clima} ?? "—"]` · **Popolazione** `VIEW[{popolazione} ?? "—"]`
+> `INPUT[ritratto][:ritratto]`
 >
-> **Stato**: `INPUT[stato][:stato]`
+> | | |
+> |:--|:--|
+> | **Tipo** | `VIEW[{tipo} ?? "—"]` |
+> | **Mondo** | `VIEW[{mondo}][text(renderMarkdown)]` |
+> | **Famiglia** | `VIEW[{famiglia} ?? "—"]` |
+> | **Clima** | `VIEW[{clima} ?? "—"]` |
+> | **Popolazione** | `VIEW[{popolazione} ?? "—"]` |
+> | **Stato** | `INPUT[stato][:stato]` |
 
 > [!info] Famiglia: `INPUT[inlineSelect(option(insediamento), option(rovina), option(santuario), option(confine), option(selvaggio), option(onirico), option(interdimensionale), option(simbolico)):famiglia]`
 

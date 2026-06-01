@@ -2,10 +2,18 @@
 # `=this.nome`
 
 > [!info] 🎭 PNG
-> **Tipo**: `VIEW[{tipo} ?? "—"]` · **Mondo**: `VIEW[{mondo}][text(renderMarkdown)]`
-> **Titolo o rango** `VIEW[{titolo} ?? "—"]` · **Allineamento** `VIEW[{allineamento} ?? "—"]` · **Pronomi** `VIEW[{pronomi} ?? "—"]` · **Età** `VIEW[{eta} ?? "—"]`
+> `INPUT[ritratto][:ritratto]`
 >
-> **Stato**: `INPUT[stato][:stato]`
+> | | |
+> |:--|:--|
+> | **Tipo** | `VIEW[{tipo} ?? "—"]` |
+> | **Mondo** | `VIEW[{mondo}][text(renderMarkdown)]` |
+> | **Ruolo narrativo** | `VIEW[{famiglia} ?? "—"]` |
+> | **Titolo o rango** | `VIEW[{titolo} ?? "—"]` |
+> | **Allineamento** | `VIEW[{allineamento} ?? "—"]` |
+> | **Pronomi** | `VIEW[{pronomi} ?? "—"]` |
+> | **Età** | `VIEW[{eta} ?? "—"]` |
+> | **Stato** | `INPUT[stato][:stato]` |
 
 > [!info] Ruolo narrativo: `INPUT[inlineSelect(option(alleato), option(antagonista), option(mentore), option(patrono), option(rivale), option(mercante), option(contatto), option(gregario)):famiglia]`
 

@@ -2,10 +2,15 @@
 # `=this.nome`
 
 > [!info] 🎏 Cultura
-> **Tipo**: `VIEW[{tipo} ?? "—"]` · **Mondo**: `VIEW[{mondo}][text(renderMarkdown)]`
-> **Portata** `VIEW[{portata} ?? "—"]`
+> `INPUT[ritratto][:ritratto]`
 >
-> **Stato**: `INPUT[stato][:stato]`
+> | | |
+> |:--|:--|
+> | **Tipo** | `VIEW[{tipo} ?? "—"]` |
+> | **Mondo** | `VIEW[{mondo}][text(renderMarkdown)]` |
+> | **Famiglia** | `VIEW[{famiglia} ?? "—"]` |
+> | **Portata** | `VIEW[{portata} ?? "—"]` |
+> | **Stato** | `INPUT[stato][:stato]` |
 
 > [!info] Famiglia: `INPUT[inlineSelect(option(ancestrale), option(sciamanica), option(iniziatica), option(dogmatica), option(fluida), option(sincretica), option(guerriera), option(nomadica)):famiglia]`
 

@@ -2,10 +2,18 @@
 # `=this.nome`
 
 > [!info] 🧬 Specie
-> **Tipo**: `VIEW[{tipo} ?? "—"]` · **Mondo**: `VIEW[{mondo}][text(renderMarkdown)]`
-> **Taglia** `VIEW[{taglia} ?? "—"]` · **Velocità** `VIEW[{velocita} ?? "—"]` · **Tipo di creatura** `VIEW[{tipo_creatura} ?? "—"]` · **Lignaggio** `VIEW[{lignaggio} ?? "—"]`
+> `INPUT[ritratto][:ritratto]`
 >
-> **Stato**: `INPUT[stato][:stato]`
+> | | |
+> |:--|:--|
+> | **Tipo** | `VIEW[{tipo} ?? "—"]` |
+> | **Mondo** | `VIEW[{mondo}][text(renderMarkdown)]` |
+> | **Famiglia** | `VIEW[{famiglia} ?? "—"]` |
+> | **Taglia** | `VIEW[{taglia} ?? "—"]` |
+> | **Velocità** | `VIEW[{velocita} ?? "—"]` |
+> | **Tipo di creatura** | `VIEW[{tipo_creatura} ?? "—"]` |
+> | **Lignaggio** | `VIEW[{lignaggio} ?? "—"]` |
+> | **Stato** | `INPUT[stato][:stato]` |
 
 > [!info] Famiglia: `INPUT[inlineSelect(option(ancestrale), option(spirituale), option(cosmica), option(mortale), option(corrompibile), option(onirica), option(elementale), option(sintetica)):famiglia]`
 

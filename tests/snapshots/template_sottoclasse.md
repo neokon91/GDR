@@ -2,9 +2,11 @@
 # `=this.nome`
 
 > [!info] 🎓 Sottoclasse
-> **Tipo**: `VIEW[{tipo} ?? "—"]` · **Mondo**: `VIEW[{mondo}][text(renderMarkdown)]`
->
-> **Stato**: `INPUT[stato][:stato]`
+> | | |
+> |:--|:--|
+> | **Tipo** | `VIEW[{tipo} ?? "—"]` |
+> | **Mondo** | `VIEW[{mondo}][text(renderMarkdown)]` |
+> | **Stato** | `INPUT[stato][:stato]` |
 
 ````tabs
 --- Privilegi

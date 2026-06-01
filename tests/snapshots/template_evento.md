@@ -2,10 +2,13 @@
 # `=this.nome`
 
 > [!info] 📜 Evento
-> **Tipo**: `VIEW[{tipo} ?? "—"]` · **Mondo**: `VIEW[{mondo}][text(renderMarkdown)]`
-> **Portata** `VIEW[{portata} ?? "—"]`
->
-> **Stato**: `INPUT[stato][:stato]`
+> | | |
+> |:--|:--|
+> | **Tipo** | `VIEW[{tipo} ?? "—"]` |
+> | **Mondo** | `VIEW[{mondo}][text(renderMarkdown)]` |
+> | **Famiglia** | `VIEW[{famiglia} ?? "—"]` |
+> | **Portata** | `VIEW[{portata} ?? "—"]` |
+> | **Stato** | `INPUT[stato][:stato]` |
 
 > [!info] Famiglia: `INPUT[inlineSelect(option(cosmico), option(epocale), option(mitico), option(sacrale), option(catastrofico), option(fondativo), option(transizionale)):famiglia]`
 

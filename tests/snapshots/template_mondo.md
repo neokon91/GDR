@@ -2,10 +2,16 @@
 # `=this.nome`
 
 > [!info] 🌍 Mondo
-> **Tipo**: `VIEW[{tipo} ?? "—"]`
-> **Scala** `VIEW[{scala} ?? "—"]` · **Genere** `VIEW[{genere} ?? "—"]` · **Epoca** `VIEW[{epoca} ?? "—"]` · **Temi** `VIEW[{temi} ?? "—"]`
+> `INPUT[ritratto][:ritratto]`
 >
-> **Stato**: `INPUT[stato][:stato]`
+> | | |
+> |:--|:--|
+> | **Tipo** | `VIEW[{tipo} ?? "—"]` |
+> | **Scala** | `VIEW[{scala} ?? "—"]` |
+> | **Genere** | `VIEW[{genere} ?? "—"]` |
+> | **Epoca** | `VIEW[{epoca} ?? "—"]` |
+> | **Temi** | `VIEW[{temi} ?? "—"]` |
+> | **Stato** | `INPUT[stato][:stato]` |
 
 ````tabs
 --- Lore

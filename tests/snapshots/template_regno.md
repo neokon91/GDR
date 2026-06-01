@@ -2,10 +2,17 @@
 # `=this.nome`
 
 > [!info] 👑 Regno
-> **Tipo**: `VIEW[{tipo} ?? "—"]` · **Mondo**: `VIEW[{mondo}][text(renderMarkdown)]`
-> **Forma di governo** `VIEW[{governo} ?? "—"]` · **Sovrano** `VIEW[{sovrano} ?? "—"]` · **Portata** `VIEW[{portata} ?? "—"]` · **Popolazione** `VIEW[{popolazione} ?? "—"]`
+> `INPUT[ritratto][:ritratto]`
 >
-> **Stato**: `INPUT[stato][:stato]`
+> | | |
+> |:--|:--|
+> | **Tipo** | `VIEW[{tipo} ?? "—"]` |
+> | **Mondo** | `VIEW[{mondo}][text(renderMarkdown)]` |
+> | **Forma di governo** | `VIEW[{governo} ?? "—"]` |
+> | **Sovrano** | `VIEW[{sovrano} ?? "—"]` |
+> | **Portata** | `VIEW[{portata} ?? "—"]` |
+> | **Popolazione** | `VIEW[{popolazione} ?? "—"]` |
+> | **Stato** | `INPUT[stato][:stato]` |
 
 ````tabs
 --- Lore

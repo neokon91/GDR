@@ -2,10 +2,13 @@
 # `=this.nome`
 
 > [!info] 🌑 Entità primordiale
-> **Tipo**: `VIEW[{tipo} ?? "—"]` · **Mondo**: `VIEW[{mondo}][text(renderMarkdown)]`
-> **Stato** `VIEW[{stato_cosmico} ?? "—"]` · **Allineamento** `VIEW[{allineamento} ?? "—"]`
->
-> **Stato**: `INPUT[stato][:stato]`
+> | | |
+> |:--|:--|
+> | **Tipo** | `VIEW[{tipo} ?? "—"]` |
+> | **Mondo** | `VIEW[{mondo}][text(renderMarkdown)]` |
+> | **Stato** | `VIEW[{stato_cosmico} ?? "—"]` |
+> | **Allineamento** | `VIEW[{allineamento} ?? "—"]` |
+> | **Stato** | `INPUT[stato][:stato]` |
 
 ````tabs
 --- Lore

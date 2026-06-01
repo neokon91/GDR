@@ -2,10 +2,15 @@
 # `=this.nome`
 
 > [!info] 🎒 Oggetto
-> **Tipo**: `VIEW[{tipo} ?? "—"]` · **Mondo**: `VIEW[{mondo}][text(renderMarkdown)]`
-> **Rarità** `VIEW[{rarita} ?? "—"]` · **Sintonia** `VIEW[{sintonia} ?? "—"]`
+> `INPUT[ritratto][:ritratto]`
 >
-> **Stato**: `INPUT[stato][:stato]`
+> | | |
+> |:--|:--|
+> | **Tipo** | `VIEW[{tipo} ?? "—"]` |
+> | **Mondo** | `VIEW[{mondo}][text(renderMarkdown)]` |
+> | **Rarità** | `VIEW[{rarita} ?? "—"]` |
+> | **Sintonia** | `VIEW[{sintonia} ?? "—"]` |
+> | **Stato** | `INPUT[stato][:stato]` |
 
 ````tabs
 --- Scheda

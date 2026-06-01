@@ -2,10 +2,14 @@
 # `=this.nome`
 
 > [!info] ⏳ Epoca
-> **Tipo**: `VIEW[{tipo} ?? "—"]` · **Mondo**: `VIEW[{mondo}][text(renderMarkdown)]`
-> **Inizio** `VIEW[{inizio} ?? "—"]` · **Fine** `VIEW[{fine} ?? "—"]`
->
-> **Stato**: `INPUT[stato][:stato]`
+> | | |
+> |:--|:--|
+> | **Tipo** | `VIEW[{tipo} ?? "—"]` |
+> | **Mondo** | `VIEW[{mondo}][text(renderMarkdown)]` |
+> | **Famiglia** | `VIEW[{famiglia} ?? "—"]` |
+> | **Inizio** | `VIEW[{inizio} ?? "—"]` |
+> | **Fine** | `VIEW[{fine} ?? "—"]` |
+> | **Stato** | `INPUT[stato][:stato]` |
 
 > [!info] Famiglia: `INPUT[inlineSelect(option(fondativa), option(transizionale), option(stabilizzante), option(degenerativa), option(ciclica), option(apocrifa), option(liminale)):famiglia]`
 

@@ -2,10 +2,13 @@
 # `=this.nome`
 
 > [!info] ⭐ Talento
-> **Tipo**: `VIEW[{tipo} ?? "—"]` · **Mondo**: `VIEW[{mondo}][text(renderMarkdown)]`
-> **Prerequisito** `VIEW[{prerequisito} ?? "—"]` · **Ripetibile** `VIEW[{ripetibile} ?? "—"]`
->
-> **Stato**: `INPUT[stato][:stato]`
+> | | |
+> |:--|:--|
+> | **Tipo** | `VIEW[{tipo} ?? "—"]` |
+> | **Mondo** | `VIEW[{mondo}][text(renderMarkdown)]` |
+> | **Prerequisito** | `VIEW[{prerequisito} ?? "—"]` |
+> | **Ripetibile** | `VIEW[{ripetibile} ?? "—"]` |
+> | **Stato** | `INPUT[stato][:stato]` |
 
 ````tabs
 --- Scheda
