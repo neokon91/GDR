@@ -11,7 +11,7 @@ in [architecture](architecture.md) / [data_model](data_model.md) /
 > **auto-riscrittura del blocco encounter**, **timeline navigabile** (pannello *Linea del
 > tempo* sulla pagina Cronologia) e **tab Mappe** su luogo/mondo. Doc plugin **completa**
 > (21 schede). **36 categorie, 20 con assi.** Tutto committato/pushato/buildato su
-> `origin/main` (HEAD `f9dc160`), **157 test verdi**, check 0. *L'esperienza in-app resta in
+> `origin/main` (HEAD `f9dc160`), **159 test verdi**, check 0. *L'esperienza in-app resta in
 > gran parte da confermare (rischio #1, QA deferita su scelta utente — ci si appoggia ai test).*
 
 ## Dove siamo (sintesi)
@@ -27,9 +27,10 @@ nota lore (`uso_al_tavolo`/`gancio`/`pressione`/`prossima_mossa`) + **clock & co
 interattivo: PF/competenza/slot + ASI/sottoclasse/incantesimi). **Difficoltà incontri** (budget
 XP 2024 vs GS delle creature) + **auto-riscrittura del blocco `encounter`**. SRD 5.2.1 IT
 (1389 note + 334 statblock, ogni voce rende tutto il JSON). Pannelli **JS Engine** (`views.js`:
-Vista, radar assi, profilo, clock, difficoltà incontro, progressione, linea del tempo, mappa).
+Vista, radar assi, profilo, clock, difficoltà incontro, progressione, linea del tempo, mappa,
+quick-ref condizioni).
 Indici **Bases** `.base` + hub Dataview; dashboard auto **Ponte Mondo↔Sistema** e **Fronti**.
-Home a 2 aree, Homepage, **157 test**, check 0. **Stadio prodotto: scaffold ricco e profondo;
+Home a 2 aree, Homepage, **159 test**, check 0. **Stadio prodotto: scaffold ricco e profondo;
 l'esperienza in-app è in gran parte da confermare (QA deferita su scelta utente).**
 
 ## 🎯 Visione: due suite integrate ma separate
@@ -57,7 +58,7 @@ sopra i sistemi avanzati (vedi backlog).
   e dall'**auto-encounter** (tavolo).
 - **Rischio #1 — debito di verifica in-app (standing)**: tutta la pipeline è *generata* e
   *poco confermata* in Obsidian. Su scelta utente la **QA in-app è deferita**: ci si appoggia
-  ai **157 test** (generazione + wizard/renderer JS via node), che però **non coprono il
+  ai **159 test** (generazione + wizard/renderer JS via node), che però **non coprono il
   runtime Obsidian** (Meta Bind/Dataview/Templater/JS Engine). Il vecchio bug
   `views.renderEntityPanel` ricorda che certi bug vivono solo nel runtime. *Va fatta prima o
   poi*, idealmente a blocchi (PG/sali-livello; clock→conseguenza; incontro+aggiorna-encounter;
@@ -84,7 +85,7 @@ sopra i sistemi avanzati (vedi backlog).
   common/build_srd/build_personaggio/validate, merge lossless, validazione forte
   (confine/dup/snake/shape/entity-schema/assi). Snapshot + e2e wizard/renderer via node
   (PG/caster, preset, level-up, profilo, clock, incontri, **timeline**, **mappa**,
-  **srd_note**, **aggiorna_encounter**). Test (**157**, ridondanti sussunti dagli snapshot).
+  **condizioni**, **srd_note**, **aggiorna_encounter**). Test (**159**, ridondanti sussunti dagli snapshot).
   Nuova entità = 1 YAML (+1 assi); Jinja solo per layout custom (default `_entity_base.j2`).
 - **Debito/fragilità**:
   - **Logica embeddata nelle note** (ultimo residuo): la *logica* vive in `views.js`
@@ -105,7 +106,7 @@ sopra i sistemi avanzati (vedi backlog).
     fantasy-statblocks/tasks/dice-roller/**bases**/**callout-manager**/**iconize**/
     **homepage**/initiative-tracker/calendarium/excalidraw/zoom-map/
     fantasy-content-generator/brat), coi gotcha (es. callout collassati).
-  - **Test**: **157 verdi** ma coprono la *generazione* (+ wizard/renderer JS via node), non il
+  - **Test**: **159 verdi** ma coprono la *generazione* (+ wizard/renderer JS via node), non il
     runtime Obsidian (Meta Bind/Dataview/Templater/JS Engine) — gap inerente, colmabile solo con QA manuale.
 
 ## 🌍 Worldbuilder
@@ -143,15 +144,16 @@ sopra i sistemi avanzati (vedi backlog).
   di livello interattivo), **difficoltà incontri** (budget XP 2024), **clock & conseguenze**
   al tavolo, note SRD col contenuto pieno.
 - **Gap al tavolo (residui)**:
-  - **Quick-ref condizioni/regole**: le 15 condizioni hanno gli effetti pieni nelle note
-    SRD, ma manca un richiamo *rapido* in scheda/incontro durante il gioco.
+  - ✅ **Quick-ref condizioni**: callout pieghevole *Condizioni 5.5e* (le 15, nome linkato
+    alla nota SRD + effetti compatti) in **scheda PG** (tab *Al tavolo*) e **incontro** (tab
+    *Combattimento*). Dati da `core.condizioni` (note SRD), `views.renderCondizioni`.
   - ✅ **Encounter block auto-riscritto**: il bottone *Aggiorna encounter*
     (`meta_actions.aggiorna_encounter`) riscrive il fence `encounter` dalle creature
     collegate (conta per nome, risolve i link, preserva `players`). Niente più copia-incolla.
   - **Level-up avanzato**: scelte di sottoclasse multiple/feature opzionali oltre il
     set base; il motore copre il flusso standard.
-- **Azione**: i residui DM sono ora **quick-ref condizioni** al tavolo e **level-up avanzato**
-  (encounter auto-riscritto ✅). Conferma in-app deferita (rischio #1).
+- **Azione**: il residuo DM è ora il **level-up avanzato** (sottoclassi multiple/feature
+  opzionali); encounter auto-riscritto ✅ e quick-ref condizioni ✅. Conferma in-app deferita (rischio #1).
 
 ## ✅ Backlog prioritizzato
 
@@ -181,8 +183,8 @@ i sistemi avanzati. La QA in-app è igiene continua, non una fase a sé.
    dashboard **Fronti** (clock pieni/in corso + conseguenze-storia). Vedi [play_layer](play_layer.md).
 5. ✅ **Difficoltà incontri** — budget XP 2024 vs GS delle creature collegate (GS/PE
    interrogabili) + ✅ **auto-riscrittura del blocco `encounter`** (bottone *Aggiorna
-   encounter* → `meta_actions.aggiorna_encounter`). *Residuo*: quick-ref condizioni in
-   scheda/incontro.
+   encounter* → `meta_actions.aggiorna_encounter`) + ✅ **quick-ref condizioni** (callout
+   *Condizioni 5.5e* in scheda PG e incontro, `views.renderCondizioni`).
 6. ✅ **Progressione PG 2-20** — *sali di livello interattivo*: PF/competenza/slot
    automatici + scelte (ASI/talento, sottoclasse, nuovi incantesimi). Vedi [rules_layer](rules_layer.md).
 7. **Profondità worldbuilding**: ✅ **timeline navigabile** (pannello *Linea del tempo* su
@@ -230,8 +232,9 @@ le fondamenta saranno rifinite. In ordine di valore:
 - **Note SRD complete** — `srd_note` rende tutto il JSON: creature evocate inline, footer
   *Vedi anche* (link risolti), de-dup prose. (`cbbdb08`)
 - **Timeline navigabile** (pannello su Cronologia) + **tab Mappe** (luogo/mondo). (`f9dc160`)
-- **Docs**: roadmap + 4 lenti riallineate; play_layer/architecture aggiornati; LEGGIMI con
-  timeline/mappe/auto-encounter. **157 test**, check 0. HEAD `f9dc160`.
+- **Docs** riallineate (roadmap + 4 lenti, play_layer/architecture, LEGGIMI). (`584eb08`)
+- **Quick-ref condizioni** — callout *Condizioni 5.5e* (15, da `core.condizioni`/SRD) in
+  scheda PG e incontro (`views.renderCondizioni`). **159 test**, check 0.
 
 ### ✅ Fatto (sessione 2026-05-31)
 - **Fase 1 fondamenta**: doc plugin (poi completata a 21 schede), grafo cosmologico (5 categorie),
@@ -244,10 +247,10 @@ le fondamenta saranno rifinite. In ordine di valore:
 
 ## Come ripartire
 
-**157 test verdi**, check 0; HEAD `f9dc160` (tutto pushato+buildato). Leggi questo file + i
+**159 test verdi**, check 0; HEAD `f9dc160` (tutto pushato+buildato). Leggi questo file + i
 docs (`architecture`/`data_model`/`rules_layer`/`play_layer`/`plugin_contracts`) + la memoria
 (`project-northstar`, `vault-due-suite`). **Fasi 1-2 coperte + rifiniture** → prossimi:
-- **Residui Fase 2**: quick-ref condizioni al tavolo; level-up scelte avanzate.
+- **Residui Fase 2**: level-up scelte avanzate (quick-ref condizioni ✅).
 - **Recuperi FantasyWorld** (#9-11): **#9 sistema astrologico/tema natale** (il differenziatore
   "wow", opt-in per mondo), #10 glossari subtypes, #11 alberi evolutivi.
 - **Worldbuilding**: legami pantheon/cosmologia più ricchi; generazione nomi/spunti.

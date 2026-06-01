@@ -58,5 +58,6 @@ azione che chiama `tp.user.meta_actions(tp, "<id>")`.
 `renderEncounter`, `renderProgressione`, `renderTimeline` (linea del tempo: eventi per
 epoca, ordinati per `quando`; pannello in cima alla pagina *Cronologia*, opt-in via
 `pages.yaml:panel: timeline`), `renderMap` (tab *Mappa* su luogo/mondo: embed del campo
-`mappa` — Excalidraw/immagine/nota). Caricati a runtime (CommonJS via `new Function`);
-aggiornare `views.js` si propaga alle note senza ricrearle.
+`mappa` — Excalidraw/immagine/nota), `renderCondizioni` (quick-ref delle 15 condizioni
+5.5e da `core.condizioni`/SRD: scheda PG *Al tavolo* + incontro *Combattimento*). Caricati a
+runtime (CommonJS via `new Function`); aggiornare `views.js` si propaga alle note senza ricrearle.

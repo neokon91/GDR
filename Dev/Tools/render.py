@@ -48,6 +48,7 @@ from build_srd import (  # noqa: F401 (re-export per i test)
     SRD_GEN,
     build_srd,
     load_srd,
+    srd_condizioni,
     srd_note,
     srd_statblock_yaml,
 )
@@ -409,6 +410,9 @@ def write_engine_data(core: dict[str, Any], templates: list[dict[str, Any]]) -> 
         "archetipi": core.get("archetipi", {}),
         # xp: tabelle CR->XP + budget 2024, per views.renderEncounter (difficoltà).
         "xp": core.get("xp", {}),
+        # condizioni: le 15 condizioni 5.5e (compatte) per views.renderCondizioni
+        # (quick-ref al tavolo: scheda PG + incontro). Dalle note SRD del glossario.
+        "condizioni": srd_condizioni(),
         "creation": core.get("creation", {}),
         "templates": templates,
     }

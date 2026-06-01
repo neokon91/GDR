@@ -169,6 +169,26 @@ def srd_id_index() -> dict[str, str]:
     return idx
 
 
+def srd_condizioni() -> list[dict[str, Any]]:
+    """Le 15 condizioni 5.5e in forma COMPATTA per il quick-ref a runtime (core.json):
+    {nome, descrizione, effetti:[{nome, descrizione}]}. Gli effetti pieni stanno nelle
+    note SRD/Condizioni/; qui solo l'essenziale per il richiamo al tavolo. [] se SRD assente."""
+    out: list[dict[str, Any]] = []
+    for g in load_srd("srd_5_2_1_rules_glossary.json"):
+        if not isinstance(g, dict) or g.get("descrittore") != "condizione":
+            continue
+        effetti = []
+        for sez in g.get("sezioni") or []:
+            for b in (sez.get("blocchi") or []) if isinstance(sez, dict) else []:
+                if isinstance(b, dict) and (b.get("nome") or b.get("descrizione")):
+                    effetti.append({"nome": str(b.get("nome", "")).strip(),
+                                    "descrizione": str(b.get("descrizione", "")).strip()})
+        out.append({"nome": g.get("nome", ""),
+                    "descrizione": str(g.get("descrizione", "")).strip(),
+                    "effetti": effetti})
+    return out
+
+
 def srd_header(entry: dict[str, Any], cat: str) -> str:
     """Infobox (callout) coi dati salienti, su misura per categoria. '' se nessuno."""
     def parts(*pairs):

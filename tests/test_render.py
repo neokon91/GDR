@@ -416,6 +416,30 @@ def test_render_timeline(tmp_path):
 
 
 @pytest.mark.skipif(not shutil.which("node"), reason="node assente")
+def test_render_condizioni(tmp_path):
+    """views.condizioniMarkdown: callout pieghevole con le condizioni (nome linkato
+    alla nota SRD + effetti compatti), e messaggio se la lista è vuota."""
+    harness = tmp_path / "cond.js"
+    harness.write_text(
+        'const fs=require("fs");'
+        f'const src=fs.readFileSync({json.dumps(str(render.JS_DIR / "views.js"))},"utf8");'
+        'const m={exports:{}};new Function("module","exports",src)(m,m.exports);'
+        'const cond=[{nome:"Accecato",descrizione:"Non vede.",effetti:['
+        '{nome:"Vista",descrizione:"Fallisce le prove basate sulla vista."},'
+        '{nome:"Attacchi",descrizione:"Attacchi contro: vantaggio."}]}];'
+        'process.stdout.write(JSON.stringify({'
+        'full:m.exports.condizioniMarkdown(cond),empty:m.exports.condizioniMarkdown([])}));',
+        encoding="utf-8")
+    res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
+    assert res.returncode == 0, res.stderr
+    out = json.loads(res.stdout)
+    assert "[!quote]- 📋 Condizioni 5.5e (quick-ref)" in out["full"]
+    assert "**[[Accecato]]**" in out["full"]                       # nome linkato alla nota SRD
+    assert "Fallisce le prove basate sulla vista. Attacchi contro: vantaggio." in out["full"]  # effetti uniti
+    assert "non disponibili" in out["empty"]                       # lista vuota -> messaggio
+
+
+@pytest.mark.skipif(not shutil.which("node"), reason="node assente")
 def test_render_map(tmp_path):
     """views.renderMap: embed ![[..]] della mappa collegata (Link Dataview o
     stringa), con suggerimento se il campo è vuoto."""
@@ -479,6 +503,18 @@ def test_srd_counts_and_statblock():
     assert sum(1 for g in glossary if g.get("descrittore") == "condizione") == 15
     sb = render.srd_statblock_yaml(monsters[0], "Basic 5e Layout")
     assert "name:" in sb and "stats:" in sb and "actions:" in sb
+
+
+@pytest.mark.skipif(not render.SRD_DIR.is_dir(), reason="SRD non vendorizzata")
+def test_srd_condizioni():
+    """srd_condizioni: le 15 condizioni 5.5e in forma compatta (nome + effetti) per
+    il quick-ref runtime; gli effetti pieni stanno nelle note SRD/Condizioni/."""
+    cond = render.srd_condizioni()
+    assert len(cond) == 15
+    nomi = {c["nome"] for c in cond}
+    assert {"Accecato", "Afferrato", "Spaventato"} <= nomi
+    acc = next(c for c in cond if c["nome"] == "Accecato")
+    assert acc["effetti"] and all(e.get("descrizione") for e in acc["effetti"])
 
 
 def test_srd_note_dedup_and_extras():

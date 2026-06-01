@@ -471,6 +471,24 @@ async function renderTimeline(app, dv, page) {
   return `**${eventi.length} eventi** · ${eras} ${eras === 1 ? "epoca" : "epoche"}\n\n` + blocchi.join("\n\n");
 }
 
+// --- Quick-ref condizioni 5.5e -----------------------------------------------
+// Callout pieghevole con le 15 condizioni (nome linkato alla nota SRD + effetti
+// compatti): richiamo rapido al tavolo. Pure (riceve la lista da core.condizioni).
+function condizioniMarkdown(condizioni) {
+  const lista = condizioni || [];
+  if (!lista.length) return "*Condizioni SRD non disponibili (genera l'SRD).*";
+  const righe = lista.map((c) => {
+    const eff = (c.effetti || []).map((e) => text(e.descrizione)).filter(Boolean).join(" ");
+    return `> **[[${text(c.nome)}]]** — ${eff || text(c.descrizione)}`;
+  });
+  return `> [!quote]- 📋 Condizioni 5.5e (quick-ref)\n${righe.join("\n>\n")}`;
+}
+
+async function renderCondizioni(app) {
+  const core = await loadCoreData(app);
+  return condizioniMarkdown(core.condizioni);
+}
+
 // --- Mappa (luogo/mondo) -----------------------------------------------------
 // Embed della mappa collegata (campo 'mappa'): un disegno Excalidraw, un'immagine
 // o una nota. Se vuoto, un suggerimento su come crearne una. Ritorna markdown
@@ -496,4 +514,5 @@ module.exports = {
   renderProgressione,
   renderTimeline, quandoNum, epocaLabel,
   renderMap,
+  renderCondizioni, condizioniMarkdown,
 };

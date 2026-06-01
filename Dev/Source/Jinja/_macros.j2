@@ -299,6 +299,19 @@ return engine.markdown.create(await views.renderEncounter(app, dv, page));
 ```
 {%- endmacro %}
 
+{# Quick-ref condizioni 5.5e (JS Engine): callout pieghevole con le 15 condizioni
+   (nome + effetti compatti) per il richiamo rapido al tavolo. Da core.condizioni
+   (note SRD), logica in views.renderCondizioni. #}
+{% macro condizioni() -%}
+```js-engine
+const src = await app.vault.adapter.read("z.automazioni/views.js");
+const mod = { exports: {} };
+new Function("module", "exports", src)(mod, mod.exports);
+const views = mod.exports;
+return engine.markdown.create(await views.renderCondizioni(app));
+```
+{%- endmacro %}
+
 {# Tab Mappa (luogo/mondo): collega ed embedda una mappa (disegno Excalidraw,
    immagine o nota) col campo 'mappa'; l'embed vive in views.renderMap. #}
 {% macro mappa() -%}

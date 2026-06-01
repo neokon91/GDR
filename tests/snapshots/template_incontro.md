@@ -69,6 +69,13 @@ creatures:
   - 1: Nome Creatura
 ```
 
+```js-engine
+const src = await app.vault.adapter.read("z.automazioni/views.js");
+const mod = { exports: {} };
+new Function("module", "exports", src)(mod, mod.exports);
+const views = mod.exports;
+return engine.markdown.create(await views.renderCondizioni(app));
+```
 --- Collegamenti
 
 > [!example] Relazioni
