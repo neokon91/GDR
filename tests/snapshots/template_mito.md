@@ -97,15 +97,25 @@ await views.renderClock(container, app, page);
 > **4 · Operante** — Muove fazioni e culti; orienta scelte e conflitti.
 > **5 · Profetico** — Si sta avverando; il mondo si muove sul suo copione.
 
-```js-engine
+```meta-bind-js-view
+{veridicita} as veridicita
+{diffusione} as diffusione
+{tono} as tono
+{vitalita} as vitalita
+hidden
+---
 const src = await app.vault.adapter.read("z.automazioni/views.js");
 const mod = { exports: {} };
 new Function("module", "exports", src)(mod, mod.exports);
 const views = mod.exports;
-const dv = app.plugins.plugins.dataview && app.plugins.plugins.dataview.api;
-const file = app.workspace.getActiveFile();
-const page = dv && file ? dv.page(file.path) : null;
-await views.renderAxesRadar(container, app, page);
+const core = JSON.parse(await app.vault.adapter.read("z.automazioni/data/core.json"));
+let valori = {};
+try { valori = (typeof context !== "undefined" && context && context.bound) ? context.bound : {}; } catch (e) {}
+if (!Object.values(valori).some((v) => v != null)) {
+  const f = app.workspace.getActiveFile();
+  valori = f ? ((app.metadataCache.getFileCache(f) || {}).frontmatter || {}) : {};
+}
+return engine.markdown.create(views.radarMarkdownFromValues(core, "mito", valori, ""));
 ```
 
 --- Collegamenti

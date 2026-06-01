@@ -108,15 +108,26 @@ await views.renderClock(container, app, page);
 > **4 · Sacrale funzionale** — Ogni incanto richiede rispetto, riti e intenzione. Il potere è un prestito spirituale.
 > **5 · Liturgico** — Ogni forma magica è un atto liturgico. La magia è comunione con il divino o con le forze cosmiche. Usarla è una preghiera.
 
-```js-engine
+```meta-bind-js-view
+{fonte_magia} as fonte_magia
+{metodo_magia} as metodo_magia
+{costo_magia} as costo_magia
+{rischio} as rischio
+{ethos_magico} as ethos_magico
+hidden
+---
 const src = await app.vault.adapter.read("z.automazioni/views.js");
 const mod = { exports: {} };
 new Function("module", "exports", src)(mod, mod.exports);
 const views = mod.exports;
-const dv = app.plugins.plugins.dataview && app.plugins.plugins.dataview.api;
-const file = app.workspace.getActiveFile();
-const page = dv && file ? dv.page(file.path) : null;
-await views.renderAxesRadar(container, app, page);
+const core = JSON.parse(await app.vault.adapter.read("z.automazioni/data/core.json"));
+let valori = {};
+try { valori = (typeof context !== "undefined" && context && context.bound) ? context.bound : {}; } catch (e) {}
+if (!Object.values(valori).some((v) => v != null)) {
+  const f = app.workspace.getActiveFile();
+  valori = f ? ((app.metadataCache.getFileCache(f) || {}).frontmatter || {}) : {};
+}
+return engine.markdown.create(views.radarMarkdownFromValues(core, "sistema_magico", valori, ""));
 ```
 
 ```js-engine

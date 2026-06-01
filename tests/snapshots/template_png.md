@@ -141,15 +141,26 @@ await views.renderClock(container, app, page);
 > **4 · Pratico** — Impara facendo; preferisce l'azione all'analisi.
 > **5 · Istintivo** — Si fida del proprio fiuto; decide nell'istante.
 
-```js-engine
+```meta-bind-js-view
+{moralita} as moralita
+{lealta} as lealta
+{temperamento} as temperamento
+{socievolezza} as socievolezza
+{approccio} as approccio
+hidden
+---
 const src = await app.vault.adapter.read("z.automazioni/views.js");
 const mod = { exports: {} };
 new Function("module", "exports", src)(mod, mod.exports);
 const views = mod.exports;
-const dv = app.plugins.plugins.dataview && app.plugins.plugins.dataview.api;
-const file = app.workspace.getActiveFile();
-const page = dv && file ? dv.page(file.path) : null;
-await views.renderAxesRadar(container, app, page);
+const core = JSON.parse(await app.vault.adapter.read("z.automazioni/data/core.json"));
+let valori = {};
+try { valori = (typeof context !== "undefined" && context && context.bound) ? context.bound : {}; } catch (e) {}
+if (!Object.values(valori).some((v) => v != null)) {
+  const f = app.workspace.getActiveFile();
+  valori = f ? ((app.metadataCache.getFileCache(f) || {}).frontmatter || {}) : {};
+}
+return engine.markdown.create(views.radarMarkdownFromValues(core, "personaggio", valori, ""));
 ```
 
 --- Collegamenti

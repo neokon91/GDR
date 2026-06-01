@@ -71,15 +71,26 @@
 > **4 · Iconica** — Ha una forma costante, riconoscibile, spesso antropomorfa o mitica. È rappresentata nei templi, statue, sogni. I suoi simboli e tratti sono codificati nel culto.
 > **5 · Manifesta** — La divinità esiste fisicamente nel mondo, incarnata in corpi, regni, luoghi sacri o persone viventi. Può camminare, parlare, combattere. È un essere tangibile e attivo nella realtà.
 
-```js-engine
+```meta-bind-js-view
+{presenza_cosmica} as presenza_cosmica
+{volonta} as volonta
+{etica_divina} as etica_divina
+{interazione_divina} as interazione_divina
+{incarnazione} as incarnazione
+hidden
+---
 const src = await app.vault.adapter.read("z.automazioni/views.js");
 const mod = { exports: {} };
 new Function("module", "exports", src)(mod, mod.exports);
 const views = mod.exports;
-const dv = app.plugins.plugins.dataview && app.plugins.plugins.dataview.api;
-const file = app.workspace.getActiveFile();
-const page = dv && file ? dv.page(file.path) : null;
-await views.renderAxesRadar(container, app, page);
+const core = JSON.parse(await app.vault.adapter.read("z.automazioni/data/core.json"));
+let valori = {};
+try { valori = (typeof context !== "undefined" && context && context.bound) ? context.bound : {}; } catch (e) {}
+if (!Object.values(valori).some((v) => v != null)) {
+  const f = app.workspace.getActiveFile();
+  valori = f ? ((app.metadataCache.getFileCache(f) || {}).frontmatter || {}) : {};
+}
+return engine.markdown.create(views.radarMarkdownFromValues(core, "divinita", valori, ""));
 ```
 
 --- Collegamenti

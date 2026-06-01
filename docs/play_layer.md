@@ -61,3 +61,11 @@ epoca, ordinati per `quando`; pannello in cima alla pagina *Cronologia*, opt-in 
 `mappa` — Excalidraw/immagine/nota), `renderCondizioni` (quick-ref delle 15 condizioni
 5.5e da `core.condizioni`/SRD: scheda PG *Al tavolo* + incontro *Combattimento*). Caricati a
 runtime (CommonJS via `new Function`); aggiornare `views.js` si propaga alle note senza ricrearle.
+
+**Radar reattivo** (`meta-bind-js-view`): il radar del tab *Carattere* è l'unico pannello che
+usa `meta-bind-js-view` invece di `js-engine` — gli assi della categoria sono *bind target*
+Meta Bind, così il radar si **ridisegna live** mentre muovi gli slider (gira comunque dentro
+JS Engine, che `meta-bind-js-view` richiede). Disegno in `views.radarMarkdownFromValues`;
+fallback al frontmatter della nota se i binding non popolano (resta non-reattivo, mai rotto).
+*La reattività va confermata in-app.* Gli altri pannelli `VIEW` (etichette-assi, ritratto,
+pressione, modificatori PG) sono già reattivi via Meta Bind.

@@ -117,7 +117,9 @@ sopra i sistemi avanzati (vedi backlog).
   fazione/cultura/oggetto/creatura/cosmologia/personaggio). **Template reattivi**: gli slider
   del Carattere mostrano l'**etichetta-valore attiva** (es. *4 · Gerarchico*) e l'header un
   **ritratto calcolato** (icona categoria + campi-scheda), entrambi `VIEW` Meta Bind che si
-  aggiornano live col frontmatter.
+  aggiornano live col frontmatter; il **radar** ora è `meta-bind-js-view` (si ridisegna mentre
+  muovi gli slider — *reattività da confermare in-app*, con fallback al frontmatter se i binding
+  non popolano).
 - **Gap per mondi profondi**:
   - ✅ **Timeline/storia**: la categoria **epoca** + la **vista cronologica** ora ci sono —
     pagina *Cronologia* col pannello **Linea del tempo** (`views.renderTimeline`): eventi

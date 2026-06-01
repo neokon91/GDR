@@ -114,15 +114,26 @@ await views.renderClock(container, app, page);
 > **4 · Occulta** — Nota solo a iniziati; celata sotto miti o falsità.
 > **5 · Ignota** — Nessuno la conosce; opera nell'ombra del mondo.
 
-```js-engine
+```meta-bind-js-view
+{presenza} as presenza
+{attivita} as attivita
+{ordine} as ordine
+{stabilita_cosmica} as stabilita_cosmica
+{percezione} as percezione
+hidden
+---
 const src = await app.vault.adapter.read("z.automazioni/views.js");
 const mod = { exports: {} };
 new Function("module", "exports", src)(mod, mod.exports);
 const views = mod.exports;
-const dv = app.plugins.plugins.dataview && app.plugins.plugins.dataview.api;
-const file = app.workspace.getActiveFile();
-const page = dv && file ? dv.page(file.path) : null;
-await views.renderAxesRadar(container, app, page);
+const core = JSON.parse(await app.vault.adapter.read("z.automazioni/data/core.json"));
+let valori = {};
+try { valori = (typeof context !== "undefined" && context && context.bound) ? context.bound : {}; } catch (e) {}
+if (!Object.values(valori).some((v) => v != null)) {
+  const f = app.workspace.getActiveFile();
+  valori = f ? ((app.metadataCache.getFileCache(f) || {}).frontmatter || {}) : {};
+}
+return engine.markdown.create(views.radarMarkdownFromValues(core, "cosmologia", valori, ""));
 ```
 
 --- Collegamenti

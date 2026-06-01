@@ -120,15 +120,26 @@ await views.renderClock(container, app, page);
 > **4 · Dominante** — Previene le minacce con la forza; conquista e deterrenza nella dottrina.
 > **5 · Espansionista** — Il conflitto è sacro o glorioso; ogni ostacolo è nemico. Imperi, crociate.
 
-```js-engine
+```meta-bind-js-view
+{struttura} as struttura
+{scopo} as scopo
+{metodo_operativo} as metodo_operativo
+{legalita} as legalita
+{etica_conflitto} as etica_conflitto
+hidden
+---
 const src = await app.vault.adapter.read("z.automazioni/views.js");
 const mod = { exports: {} };
 new Function("module", "exports", src)(mod, mod.exports);
 const views = mod.exports;
-const dv = app.plugins.plugins.dataview && app.plugins.plugins.dataview.api;
-const file = app.workspace.getActiveFile();
-const page = dv && file ? dv.page(file.path) : null;
-await views.renderAxesRadar(container, app, page);
+const core = JSON.parse(await app.vault.adapter.read("z.automazioni/data/core.json"));
+let valori = {};
+try { valori = (typeof context !== "undefined" && context && context.bound) ? context.bound : {}; } catch (e) {}
+if (!Object.values(valori).some((v) => v != null)) {
+  const f = app.workspace.getActiveFile();
+  valori = f ? ((app.metadataCache.getFileCache(f) || {}).frontmatter || {}) : {};
+}
+return engine.markdown.create(views.radarMarkdownFromValues(core, "fazione", valori, ""));
 ```
 
 ```js-engine

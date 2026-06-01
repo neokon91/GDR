@@ -158,7 +158,7 @@ await views.renderClock(container, app, page);
 {% endfor %}
 {% if assi | length >= 3 %}
 
-{{ grafico_assi() }}
+{{ grafico_assi(category) }}
 {% endif %}
 {% if core.get('archetipi', {}).get(category) %}
 
@@ -376,20 +376,30 @@ return engine.markdown.create(await views.renderProgressione(app, page));
 > Applica PF/competenza/slot e guida le scelte (ASI/talento/sottoclasse/incantesimi): `BUTTON[sali-di-livello]`
 {%- endmacro %}
 
-{# Radar degli assi tematici (JS Engine): visualizza gli assi 0-10 della NOTA
-   CORRENTE come radar SVG, sotto gli slider del tab Carattere. La definizione
-   degli assi è in core.json (render.py); il disegno in views.js (renderAxesRadar).
-   Chiamato da carattere() quando la categoria ha >= 3 assi. #}
-{% macro grafico_assi() -%}
-```js-engine
+{# Radar degli assi tematici REATTIVO (meta-bind-js-view: gira dentro JS Engine,
+   ma con i valori-assi BINDATI da Meta Bind → il radar si ridisegna live mentre
+   muovi gli slider, senza riaprire la nota). Gli assi della categoria diventano
+   bind target; la logica di disegno è in views.radarMarkdownFromValues.
+   Difensivo: se i binding non popolano (es. API diversa), ricade sul frontmatter
+   della nota attiva → al peggio resta non-reattivo, mai rotto. #}
+{% macro grafico_assi(category) -%}
+{% set assi = core.get('assi_tematici', {}).get(category, []) %}
+```meta-bind-js-view
+{% for a in assi %}{{ '{' ~ a.id ~ '}' }} as {{ a.id }}
+{% endfor %}hidden
+---
 const src = await app.vault.adapter.read("z.automazioni/views.js");
 const mod = { exports: {} };
 new Function("module", "exports", src)(mod, mod.exports);
 const views = mod.exports;
-const dv = app.plugins.plugins.dataview && app.plugins.plugins.dataview.api;
-const file = app.workspace.getActiveFile();
-const page = dv && file ? dv.page(file.path) : null;
-await views.renderAxesRadar(container, app, page);
+const core = JSON.parse(await app.vault.adapter.read("z.automazioni/data/core.json"));
+let valori = {};
+try { valori = (typeof context !== "undefined" && context && context.bound) ? context.bound : {}; } catch (e) {}
+if (!Object.values(valori).some((v) => v != null)) {
+  const f = app.workspace.getActiveFile();
+  valori = f ? ((app.metadataCache.getFileCache(f) || {}).frontmatter || {}) : {};
+}
+return engine.markdown.create(views.radarMarkdownFromValues(core, "{{ category }}", valori, ""));
 ```
 {%- endmacro %}
 

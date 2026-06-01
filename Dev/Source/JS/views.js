@@ -209,6 +209,16 @@ async function renderAxesRadar(container, app, page) {
     "Servono almeno 3 assi tematici per il radar.");
 }
 
+// Radar come MARKDOWN (SVG inline) dai valori-assi passati, per il pannello
+// REATTIVO meta-bind-js-view: i valori arrivano dai binding Meta Bind e si
+// aggiornano live mentre muovi gli slider. 'valori' = {asseId: valore}.
+function radarMarkdownFromValues(core, category, valori, name) {
+  const axes = axesFor(core, category);
+  const values = axes.map((a) => (valori || {})[a.id]);
+  const svg = radarSvg(axes, [{ name: name || "—", values, color: RADAR_PALETTE[0] }]);
+  return svg ? `<div class="gdr-radar">${svg}</div>` : "*Servono almeno 3 assi tematici per il radar.*";
+}
+
 // Radar di CONFRONTO fra entità: skin riusabile, richiamabile in qualsiasi nota.
 // Sovrappone gli assi delle note elencate nel frontmatter `confronta` (lista di
 // link); usa la categoria della prima entità risolta (devono condividere gli assi).
@@ -515,4 +525,5 @@ module.exports = {
   renderTimeline, quandoNum, epocaLabel,
   renderMap,
   renderCondizioni, condizioniMarkdown,
+  radarMarkdownFromValues,
 };

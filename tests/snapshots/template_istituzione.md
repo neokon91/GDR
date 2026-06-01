@@ -100,15 +100,25 @@ await views.renderClock(container, app, page);
 > **4 · Retta** — Fedele alla missione; abusi rari e puniti.
 > **5 · Esemplare** — Incorruttibile; incarna il proprio ideale.
 
-```js-engine
+```meta-bind-js-view
+{prestigio} as prestigio
+{trasparenza} as trasparenza
+{rigidita} as rigidita
+{integrita} as integrita
+hidden
+---
 const src = await app.vault.adapter.read("z.automazioni/views.js");
 const mod = { exports: {} };
 new Function("module", "exports", src)(mod, mod.exports);
 const views = mod.exports;
-const dv = app.plugins.plugins.dataview && app.plugins.plugins.dataview.api;
-const file = app.workspace.getActiveFile();
-const page = dv && file ? dv.page(file.path) : null;
-await views.renderAxesRadar(container, app, page);
+const core = JSON.parse(await app.vault.adapter.read("z.automazioni/data/core.json"));
+let valori = {};
+try { valori = (typeof context !== "undefined" && context && context.bound) ? context.bound : {}; } catch (e) {}
+if (!Object.values(valori).some((v) => v != null)) {
+  const f = app.workspace.getActiveFile();
+  valori = f ? ((app.metadataCache.getFileCache(f) || {}).frontmatter || {}) : {};
+}
+return engine.markdown.create(views.radarMarkdownFromValues(core, "istituzione", valori, ""));
 ```
 
 --- Collegamenti

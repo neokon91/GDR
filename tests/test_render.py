@@ -440,6 +440,29 @@ def test_render_condizioni(tmp_path):
 
 
 @pytest.mark.skipif(not shutil.which("node"), reason="node assente")
+def test_radar_markdown_from_values(tmp_path):
+    """views.radarMarkdownFromValues: SVG inline (.gdr-radar) dai valori-assi passati
+    (alimenta il radar REATTIVO meta-bind-js-view); messaggio se < 3 assi."""
+    harness = tmp_path / "radar.js"
+    harness.write_text(
+        'const fs=require("fs");'
+        f'const src=fs.readFileSync({json.dumps(str(render.JS_DIR / "views.js"))},"utf8");'
+        'const m={exports:{}};new Function("module","exports",src)(m,m.exports);'
+        'const v5={1:{},2:{},3:{},4:{},5:{}};'
+        'const ax=(id)=>({id,nome:id,valori:v5});'
+        'const core={assi_tematici:{culto:[ax("a"),ax("b"),ax("c")],poche:[ax("a")]}};'
+        'process.stdout.write(JSON.stringify({'
+        'full:m.exports.radarMarkdownFromValues(core,"culto",{a:4,b:2,c:5},"Test"),'
+        'few:m.exports.radarMarkdownFromValues(core,"poche",{a:3},"Test")}));',
+        encoding="utf-8")
+    res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
+    assert res.returncode == 0, res.stderr
+    out = json.loads(res.stdout)
+    assert out["full"].startswith('<div class="gdr-radar">') and "<svg" in out["full"]
+    assert "Servono almeno 3 assi" in out["few"]
+
+
+@pytest.mark.skipif(not shutil.which("node"), reason="node assente")
 def test_render_map(tmp_path):
     """views.renderMap: embed ![[..]] della mappa collegata (Link Dataview o
     stringa), con suggerimento se il campo è vuoto."""
