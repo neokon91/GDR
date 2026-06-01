@@ -187,6 +187,23 @@ async function aggiorna_encounter(tp, file) {
   return "";
 }
 
+// Riposo lungo (PG): PF al massimo, PF temporanei e tiri salvezza contro morte
+// azzerati, slot incantesimo recuperati (azzera gli slot_uso_* esistenti). Lo slot
+// breve in 5.5e si gioca coi dadi vita (manuale), quindi non c'è auto-reset.
+async function riposo_lungo(file) {
+  await updateFrontmatter(file, fm => {
+    if (fm.pf_max != null) fm.pf = Number(fm.pf_max) || 0;
+    fm.pf_temp = 0;
+    fm.ts_morte_successi = 0;
+    fm.ts_morte_fallimenti = 0;
+    for (let n = 1; n <= 9; n++) {
+      if (fm["slot_uso_" + n] != null) fm["slot_uso_" + n] = 0;
+    }
+  });
+  new Notice("Riposo lungo: PF al massimo, slot e tiri salvezza contro morte recuperati.");
+  return "";
+}
+
 async function meta_actions(tp, action = "") {
   const file = app.workspace.getActiveFile?.() ?? tp.config?.target_file;
   if (!file) {
@@ -226,6 +243,10 @@ async function meta_actions(tp, action = "") {
 
   if (action === "aggiorna_encounter") {
     return await aggiorna_encounter(tp, file);
+  }
+
+  if (action === "riposo_lungo") {
+    return await riposo_lungo(file);
   }
 
   if (action === "sali_di_livello") {

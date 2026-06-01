@@ -25,6 +25,9 @@ actions:
   - id: sali_di_livello
     title: Sali di livello
     target: z.modelli/azioni/Sali di livello.md
+  - id: riposo_lungo
+    title: Riposo lungo
+    target: z.modelli/azioni/Riposo lungo.md
   - id: aggiorna_encounter
     title: Aggiorna encounter
     target: z.modelli/azioni/Aggiorna encounter.md

@@ -19,9 +19,26 @@
 --- Scheda
 
 > [!info] In gioco
-> CA `INPUT[number:ca]` · PF `INPUT[number:pf]`/`INPUT[number:pf_max]` · Velocità `INPUT[number:velocita]` m
+> CA `INPUT[number:ca]` · PF `INPUT[number:pf]`/`INPUT[number:pf_max]` · PF temp `INPUT[number:pf_temp]` · Velocità `INPUT[number:velocita]` m
 >
 > Competenza +`INPUT[number:competenza]` · Iniziativa `VIEW[floor(({destrezza} - 10) / 2)]`
+>
+> **A 0 PF** — TS morte: successi `INPUT[inlineSelect(option(0, "—"), option(1, "1"), option(2, "2"), option(3, "3 ✓")):ts_morte_successi]` · fallimenti `INPUT[inlineSelect(option(0, "—"), option(1, "1"), option(2, "2"), option(3, "3 ☠")):ts_morte_fallimenti]`
+>
+> Fine giornata: `BUTTON[riposo-lungo]` (PF al massimo, slot e TS morte azzerati)
+
+> [!note]- Slot incantesimo (caster)
+> | Liv | Max | Spesi | Rimasti |
+> |:-:|:-:|:-:|:-:|
+> | 1° | `VIEW[{slot_1} ?? "—"]` | `INPUT[number:slot_uso_1]` | `VIEW[({slot_1} ?? 0) > 0 ? (({slot_1}) - ({slot_uso_1} ?? 0)) : "—"]` |
+> | 2° | `VIEW[{slot_2} ?? "—"]` | `INPUT[number:slot_uso_2]` | `VIEW[({slot_2} ?? 0) > 0 ? (({slot_2}) - ({slot_uso_2} ?? 0)) : "—"]` |
+> | 3° | `VIEW[{slot_3} ?? "—"]` | `INPUT[number:slot_uso_3]` | `VIEW[({slot_3} ?? 0) > 0 ? (({slot_3}) - ({slot_uso_3} ?? 0)) : "—"]` |
+> | 4° | `VIEW[{slot_4} ?? "—"]` | `INPUT[number:slot_uso_4]` | `VIEW[({slot_4} ?? 0) > 0 ? (({slot_4}) - ({slot_uso_4} ?? 0)) : "—"]` |
+> | 5° | `VIEW[{slot_5} ?? "—"]` | `INPUT[number:slot_uso_5]` | `VIEW[({slot_5} ?? 0) > 0 ? (({slot_5}) - ({slot_uso_5} ?? 0)) : "—"]` |
+> | 6° | `VIEW[{slot_6} ?? "—"]` | `INPUT[number:slot_uso_6]` | `VIEW[({slot_6} ?? 0) > 0 ? (({slot_6}) - ({slot_uso_6} ?? 0)) : "—"]` |
+> | 7° | `VIEW[{slot_7} ?? "—"]` | `INPUT[number:slot_uso_7]` | `VIEW[({slot_7} ?? 0) > 0 ? (({slot_7}) - ({slot_uso_7} ?? 0)) : "—"]` |
+> | 8° | `VIEW[{slot_8} ?? "—"]` | `INPUT[number:slot_uso_8]` | `VIEW[({slot_8} ?? 0) > 0 ? (({slot_8}) - ({slot_uso_8} ?? 0)) : "—"]` |
+> | 9° | `VIEW[{slot_9} ?? "—"]` | `INPUT[number:slot_uso_9]` | `VIEW[({slot_9} ?? 0) > 0 ? (({slot_9}) - ({slot_uso_9} ?? 0)) : "—"]` |
 
 **Caratteristiche**
 

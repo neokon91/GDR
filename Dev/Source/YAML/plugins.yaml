@@ -144,6 +144,9 @@ buttons:
   - id: sali-di-livello
     label: Sali di livello
     action: sali_di_livello
+  - id: riposo-lungo
+    label: Riposo lungo
+    action: riposo_lungo
   - id: aggiorna-encounter
     label: Aggiorna encounter
     action: aggiorna_encounter
