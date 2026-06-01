@@ -230,6 +230,14 @@ sopra i sistemi avanzati (vedi backlog).
 - **Azione**: timeline + mappe ✅, generazione nomi (FCG) ✅, calendario (Calendarium) ✅.
   Prossimi: legami pantheon/cosmologia più ricchi e il **sistema astrologico/tema natale**
   (#9, recupero FantasyWorld) come profondità-personaggio opt-in.
+- **Analisi wizard/YAML (2026-06-01)** — il modello ha relazioni tipizzate ricche ma il
+  **wizard non legge `core.relazioni`** (33/36 categorie nascono con 0-1 link): la connessione
+  è un passo manuale successivo. `insidia` orfana → ✅ wired (`65b29b0`). **Aperti** (scelta
+  utente: rinviati): **(a) wizard "connetti alla creazione"** — offrire le relazioni della
+  categoria nel wizard (leva massima sulla connessione, data-driven); **(b) assi allo strato
+  cosmico** (dominio/entita_primordiale/legge_fondamentale/piano senza assi → Carattere vuoto)
+  + scheda per cosmologia/dominio; **(c) inverse tipizzati** (campo `inverse` sulle relazioni →
+  Collega/wizard scrivono il reverse tipizzato invece del generico `connessioni`).
 
 ## 🎲 DM (D&D 5/5.5e)
 
