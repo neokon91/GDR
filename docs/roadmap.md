@@ -11,7 +11,7 @@ in [architecture](architecture.md) / [data_model](data_model.md) /
 > **auto-riscrittura del blocco encounter**, **timeline navigabile** (pannello *Linea del
 > tempo* sulla pagina Cronologia) e **tab Mappe** su luogo/mondo. Doc plugin **completa**
 > (21 schede). **36 categorie, 20 con assi.** Tutto committato/pushato/buildato su
-> `origin/main` (HEAD `f9dc160`), **159 test verdi**, check 0. *L'esperienza in-app resta in
+> `origin/main` (HEAD `cbba25b`), **159 test verdi**, check 0. *L'esperienza in-app resta in
 > gran parte da confermare (rischio #1, QA deferita su scelta utente — ci si appoggia ai test).*
 
 ## Dove siamo (sintesi)
@@ -247,7 +247,7 @@ le fondamenta saranno rifinite. In ordine di valore:
 
 ## Come ripartire
 
-**159 test verdi**, check 0; HEAD `f9dc160` (tutto pushato+buildato). Leggi questo file + i
+**159 test verdi**, check 0; HEAD `cbba25b` (tutto pushato+buildato). Leggi questo file + i
 docs (`architecture`/`data_model`/`rules_layer`/`play_layer`/`plugin_contracts`) + la memoria
 (`project-northstar`, `vault-due-suite`). **Fasi 1-2 coperte + rifiniture** → prossimi:
 - **Residui Fase 2**: level-up scelte avanzate (quick-ref condizioni ✅).
