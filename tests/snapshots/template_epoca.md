@@ -81,6 +81,9 @@ await views.renderClock(container, app, page);
 > **Centralità Mortale** `INPUT[slider(minValue(1), maxValue(5), addLabels):centralita_mortale]` → `VIEW[{centralita_mortale} == 5 ? "5 · Ascesa dei mortali" : ({centralita_mortale} == 4 ? "4 · Predominio mortale" : ({centralita_mortale} == 3 ? "3 · Coesistenza" : ({centralita_mortale} == 2 ? "2 · Sorveglianza" : ({centralita_mortale} == 1 ? "1 · Dominio divino" : ("—")))))]`
 > **Stabilità Geopolitica** `INPUT[slider(minValue(1), maxValue(5), addLabels):stabilita_geopolitica]` → `VIEW[{stabilita_geopolitica} == 5 ? "5 · Unificata" : ({stabilita_geopolitica} == 4 ? "4 · Centralizzata" : ({stabilita_geopolitica} == 3 ? "3 · Bilanciata" : ({stabilita_geopolitica} == 2 ? "2 · Turbolenta" : ({stabilita_geopolitica} == 1 ? "1 · Frammentata" : ("—")))))]`
 > **Storicità** `INPUT[slider(minValue(1), maxValue(5), addLabels):storicita]` → `VIEW[{storicita} == 5 ? "5 · Documentata" : ({storicita} == 4 ? "4 · Cronachistica" : ({storicita} == 3 ? "3 · Ambigua" : ({storicita} == 2 ? "2 · Leggendaria" : ({storicita} == 1 ? "1 · Mitica" : ("—")))))]`
+> **Equilibrio Cosmologico** `INPUT[slider(minValue(1), maxValue(5), addLabels):equilibrio_cosmico]` → `VIEW[{equilibrio_cosmico} == 5 ? "5 · Equilibrata" : ({equilibrio_cosmico} == 4 ? "4 · Ordinata" : ({equilibrio_cosmico} == 3 ? "3 · In bilico" : ({equilibrio_cosmico} == 2 ? "2 · Instabile" : ({equilibrio_cosmico} == 1 ? "1 · Caotica" : ("—")))))]`
+> **Dominanza Tecnologica** `INPUT[slider(minValue(1), maxValue(5), addLabels):dominanza_tecnologica]` → `VIEW[{dominanza_tecnologica} == 5 ? "5 · Post-magica" : ({dominanza_tecnologica} == 4 ? "4 · Tecno-magica" : ({dominanza_tecnologica} == 3 ? "3 · Artigianale mista" : ({dominanza_tecnologica} == 2 ? "2 · Tradizionale magica" : ({dominanza_tecnologica} == 1 ? "1 · Arcaica" : ("—")))))]`
+> **Luce Cosmica** `INPUT[slider(minValue(1), maxValue(5), addLabels):luce_cosmica]` → `VIEW[{luce_cosmica} == 5 ? "5 · Illuminazione Totale" : ({luce_cosmica} == 4 ? "4 · Rivelazione Progressiva" : ({luce_cosmica} == 3 ? "3 · Penombra Ciclica" : ({luce_cosmica} == 2 ? "2 · Tetro Mistero" : ({luce_cosmica} == 1 ? "1 · Oscurità Primordiale" : ("—")))))]`
 
 > [!note]- Presenza Divina — Quanto gli dèi sono coinvolti nel mondo durante l'epoca.
 > **1 · Assente** — Gli dèi sono ignoti o silenti; il sacro non si percepisce.
@@ -117,12 +120,36 @@ await views.renderClock(container, app, page);
 > **4 · Cronachistica** — Ben documentata; annali, mappe, genealogie.
 > **5 · Documentata** — Registrata e studiata; la storia è scienza.
 
+> [!note]- Equilibrio Cosmologico — Grado di stabilità tra le forze fondamentali dell’universo (materia, spirito, ordine, caos, tempo, spazio). Indica se i piani esistenziali e le leggi cosmiche sono in equilibrio, o se prevalgono squilibri, fratture o crisi.
+> **1 · Caotica** — L’epoca è dominata dall’instabilità. I piani si sovrappongono o collassano, le leggi cosmiche sono fluide o violate. La realtà muta imprevedibilmente. Crisi, frammentazione e guerre cosmiche sono comuni.
+> **2 · Instabile** — Esistono parvenze di ordine, ma continuamente minacciate. Il conflitto tra forze cosmiche è aperto o latente. Alcuni piani sono stabili, altri collassano o interferiscono. Il mondo vive sul filo della frattura.
+> **3 · In bilico** — L’equilibrio tra le forze fondamentali è raggiunto a fatica e mantenuto da entità, rituali o cicli. È fragile ma reale. Una svolta, un evento o una profezia può spezzarlo o consolidarlo.
+> **4 · Ordinata** — Le leggi cosmiche sono rispettate. I piani sono distinti e stabili. L’ordine regna nella struttura metafisica del cosmo. Le crisi esistono ma sono contenute o ritualizzate.
+> **5 · Equilibrata** — L’epoca è il culmine dell’armonia cosmica. Le forze opposte sono perfettamente bilanciate. La realtà è coesa, il ciclo della vita e della morte è stabile, i flussi magici scorrono senza distorsioni.
+
+> [!note]- Dominanza Tecnologica — Livello di sviluppo tecnologico, magico o tecno-magico predominante nell’epoca. Esprime quanto la civiltà faccia affidamento su strumenti, incantesimi o fusioni avanzate tra le due forze.
+> **1 · Arcaica** — La tecnologia è primitiva o inesistente. Strumenti in pietra, legno o osso, agricoltura rudimentale, conoscenze empiriche. Magia rara o assente. L’epoca è dominata dalla sopravvivenza.
+> **2 · Tradizionale magica** — La tecnologia è elementare, ma la magia ha ruolo centrale. Oggetti incantati, guarigione spirituale, rituali agricoli. La conoscenza è orale, trasmessa da druidi, sciamani o stregoni.
+> **3 · Artigianale mista** — Convivenza di tecnologie medievali e magia pratica. Forgiatura, alchimia, runologia, costruzione di golem o armi incantate. La magia inizia a essere sistematizzata o codificata.
+> **4 · Tecno-magica** — Fusione di scienza e magia. Motrici arcane, città fluttuanti, automi coscienti, comunicazione astrale. La conoscenza è formalizzata in accademie o corporazioni. La magia è replicabile.
+> **5 · Post-magica** — La magia è diventata tecnologia. Artefatti funzionano come macchine, leggi magiche sono standardizzate. L’epoca è dominata da civilizzazioni che piegano le leggi cosmiche a fini scientifici o militari.
+
+> [!note]- Luce Cosmica — Grado di trasparenza spirituale, visibilità metafisica e permeazione della verità cosmica. Indica se l’epoca è dominata da tenebre occulte, ignoranza e frammentazione o da rivelazione, ordine e consapevolezza.
+> **1 · Oscurità Primordiale** — L’universo è avvolto da tenebre originarie. La conoscenza è quasi assente, le forze primigenie dominano, la realtà è opaca, instabile e incomprensibile. Non esistono ancora legge, parola o coscienza.
+> **2 · Tetro Mistero** — L’epoca è velata, dominata da enigmi, divieti, culti oscuri o forze ignote. Alcuni spiragli di sapere emergono, ma la verità è ancora nascosta e minacciosa. La luce esiste solo come promessa lontana.
+> **3 · Penombra Ciclica** — L’equilibrio tra luce e ombra è dinamico. L’epoca attraversa fasi di rivelazione e oblio. La conoscenza è parziale, contestata o riservata a pochi. Vi è tensione tra chiarezza e oscuramento.
+> **4 · Rivelazione Progressiva** — La luce cosmica aumenta. Le forze sacre emergono, le leggi vengono comprese, la realtà è decifrabile. Il mondo diventa leggibile, i piani si ordinano, le divinità parlano o si manifestano.
+> **5 · Illuminazione Totale** — Tutto è chiaro. L’epoca culmina in un’apertura cosmica, in cui il sapere sacro, l’ordine metafisico e l’armonia sono pienamente manifesti. Le tenebre sono dissolte o integrate. L’universo è trasparente all’intelletto divino o mortale.
+
 ```meta-bind-js-view
 {presenza_divina} as presenza_divina
 {accesso_magia} as accesso_magia
 {centralita_mortale} as centralita_mortale
 {stabilita_geopolitica} as stabilita_geopolitica
 {storicita} as storicita
+{equilibrio_cosmico} as equilibrio_cosmico
+{dominanza_tecnologica} as dominanza_tecnologica
+{luce_cosmica} as luce_cosmica
 hidden
 ---
 const src = await app.vault.adapter.read("z.automazioni/views.js");

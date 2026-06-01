@@ -103,3 +103,21 @@ assi:
     5:
       etichetta: Vincolante
       descrizione: Legame definitivo o consumante; il portatore è posseduto o trasfigurato.
+- id: influenza_realta
+  nome: Influenza sulla Realtà
+  descrizione: "Descrive il grado in cui l’oggetto modifica l’ambiente, le leggi fisiche o i piani di esistenza con la sua sola presenza."
+  valori:
+    1: { etichetta: "Passivo", descrizione: "Non influenza il mondo circostante se non quando attivamente usato." }
+    2: { etichetta: "Vibrazione magica", descrizione: "Emana un’aura percettibile solo da sensitivi o creature spirituali." }
+    3: { etichetta: "Distorsivo lieve", descrizione: "Influenza lievemente la realtà circostante. Presenze evanescenti, suoni, sogni, variazioni atmosferiche." }
+    4: { etichetta: "Distorsivo forte", descrizione: "La sua presenza altera il destino, l’equilibrio magico o gli eventi. Può causare prodigi o catastrofi involontarie." }
+    5: { etichetta: "Alterante", descrizione: "L’oggetto modifica stabilmente la realtà. Piegamento dello spazio, apertura di fratture dimensionali, manipolazione delle probabilità o delle leggi cosmiche." }
+- id: allineamento
+  nome: Allineamento Intrinseco
+  descrizione: "Natura etica o cosmica interna dell’oggetto. Esprime se è legato a forze di ordine o disordine, indipendentemente dall’uso."
+  valori:
+    1: { etichetta: "Caotico", descrizione: "L’oggetto porta instabilità, trasgressione o cambiamento radicale. Non può essere controllato completamente." }
+    2: { etichetta: "Tendente al caos", descrizione: "Favorisce l’autonomia, la rottura delle regole o l’individualismo." }
+    3: { etichetta: "Neutrale", descrizione: "L’oggetto non ha un orientamento etico o cosmico definito. Risponde al volere del portatore." }
+    4: { etichetta: "Tendente all’ordine", descrizione: "Esprime armonia, regole, strutture. Funziona meglio in contesti rituali e gerarchici." }
+    5: { etichetta: "Legale", descrizione: "Impone equilibrio, disciplina, coerenza spirituale o cosmica. Rifiuta l’uso improprio o deviante." }

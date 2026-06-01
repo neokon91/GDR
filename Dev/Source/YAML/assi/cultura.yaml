@@ -109,3 +109,30 @@ assi:
     5:
       etichetta: Fluida
       descrizione: Molteplice e mutevole; si appartiene a più gruppi, l'io è in evoluzione.
+- id: sistema_tabu
+  nome: Tabù e Purificazioni
+  descrizione: "Insieme di interdizioni simboliche, divieti sacri, comportamenti proibiti e pratiche di purificazione. Esprime quali atti, parole, oggetti o stati sono considerati impuri, pericolosi o proibiti, e come la cultura gestisce la trasgressione, l’espiazione e il ritorno all’ordine."
+  valori:
+    1: { etichetta: "Nessuna codificazione", descrizione: "Non esistono tabù formalizzati. Ogni comportamento è valutato in base alla situazione. L’impurità non è concetto rilevante. La trasgressione è rara o irrilevante." }
+    2: { etichetta: "Tabù impliciti", descrizione: "Esistono interdizioni trasmesse per consuetudine o vergogna, ma mai dichiarate apertamente. L’impurità è temuta ma non definita. Le purificazioni sono occasionali, intuitive." }
+    3: { etichetta: "Sistema codificato", descrizione: "La cultura possiede regole chiare su ciò che è puro e impuro. Ogni tabù ha rito di espiazione. Alcune parole, gesti o contatti sono proibiti. L’ordine sociale dipende dalla conformità." }
+    4: { etichetta: "Sistema iniziatico", descrizione: "I tabù proteggono segreti mistici o verità pericolose. Trasgredire implica trasformazione. Le purificazioni sono prove rituali. La colpa è soglia di passaggio, non solo errore." }
+    5: { etichetta: "Sistema sacrale assoluto", descrizione: "Ogni gesto ha valore ontologico. La realtà è attraversata da linee invisibili di sacro e profano. Violare un tabù è squarciare l’ordine cosmico. Le purificazioni sono pratiche lunghe, dolorose, mitiche." }
+- id: posizione_se_natura
+  nome: Sé e Natura
+  descrizione: "Visione del rapporto tra l’individuo (e la collettività) e il mondo naturale. Esprime se la natura è esterna, nemica, maestra o parte integrante del sé culturale. Determina anche il modo in cui la cultura interpreta animali, elementi, stagioni e territori."
+  valori:
+    1: { etichetta: "Antagonismo o dominio", descrizione: "La natura è pericolosa, caotica, da conquistare o contenere. L’essere umano è separato e superiore. Gli animali e le foreste sono ostacoli o risorse." }
+    2: { etichetta: "Separazione rispettosa", descrizione: "La cultura riconosce la potenza della natura, ma mantiene la distanza. Esistono confini, santuari, regole di rispetto. L’ambiente è sacro ma “altro”." }
+    3: { etichetta: "Armonia funzionale", descrizione: "La natura è partner dell’esistenza. Si sviluppano pratiche agricole, mediche, architettoniche ispirate ai ritmi naturali. L’ecosistema è modello." }
+    4: { etichetta: "Simbiosi rituale", descrizione: "L’essere umano è parte della natura. Gli alberi sono antenati, gli animali alleati, i fiumi antenne cosmiche. Ogni gesto è coesistenza rituale." }
+    5: { etichetta: "Identità naturale", descrizione: "Non esiste distinzione tra natura e cultura. L’individuo è foresta, vento, animale, pietra. Il sé si dissolve nel cosmo vivente. La coscienza è ecologica, totale." }
+- id: espressione_estetica
+  nome: Espressione Estetica e Artistica
+  descrizione: "Modalità con cui la cultura concepisce, produce e interpreta l’estetica: arte, bellezza, forma e manifestazione simbolica. Esprime se l’arte è funzionale, rituale, liberatoria o trascendente, e quale ruolo giocano i segni visivi, i suoni e le forme corporee nell’identità collettiva."
+  valori:
+    1: { etichetta: "Primitiva-funzionale", descrizione: "L’estetica è legata alla sopravvivenza o alla funzione pratica. Ogni oggetto ha valore solo in base alla sua utilità. La decorazione è rara, simbolica o inconscia." }
+    2: { etichetta: "Tradizionale-ripetitiva", descrizione: "L’arte segue modelli trasmessi, codici fissi, motivi ancestrali. La bellezza è ripetizione del sacro. Innovare è trasgressione." }
+    3: { etichetta: "Rappresentativa-narrativa", descrizione: "L’estetica racconta storie: affreschi, statue, melodie rituali. Ogni opera è memoria, ogni suono è mito. L’arte ha scopo pedagogico, simbolico o mnemonico." }
+    4: { etichetta: "Liberatoria-esperienziale", descrizione: "L’arte è mezzo di trasformazione personale. L’individuo si esprime attraverso colore, danza, suono, performance. L’estetica è sperimentazione e soglia di libertà." }
+    5: { etichetta: "Trascendente-sacrale", descrizione: "L’arte è portale verso altri piani. Ogni opera è un sigillo, un’entità vivente, una soglia ontica. Le forme sono mantram visivi, e la bellezza è rivelazione del divino." }

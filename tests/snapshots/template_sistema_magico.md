@@ -72,6 +72,9 @@ await views.renderClock(container, app, page);
 > **Costo Esistenziale** `INPUT[slider(minValue(1), maxValue(5), addLabels):costo_magia]` → `VIEW[{costo_magia} == 5 ? "5 · Sacrificio" : ({costo_magia} == 4 ? "4 · Gravoso" : ({costo_magia} == 3 ? "3 · Bilanciato" : ({costo_magia} == 2 ? "2 · Residuale" : ({costo_magia} == 1 ? "1 · Nullo" : ("—")))))]`
 > **Rischio Esistenziale** `INPUT[slider(minValue(1), maxValue(5), addLabels):rischio]` → `VIEW[{rischio} == 5 ? "5 · Corrompente" : ({rischio} == 4 ? "4 · Pericolosa" : ({rischio} == 3 ? "3 · Instabile" : ({rischio} == 2 ? "2 · Fragile" : ({rischio} == 1 ? "1 · Sicura" : ("—")))))]`
 > **Ethos Magico** `INPUT[slider(minValue(1), maxValue(5), addLabels):ethos_magico]` → `VIEW[{ethos_magico} == 5 ? "5 · Liturgico" : ({ethos_magico} == 4 ? "4 · Sacrale funzionale" : ({ethos_magico} == 3 ? "3 · Ambiguo" : ({ethos_magico} == 2 ? "2 · Professionale" : ({ethos_magico} == 1 ? "1 · Utilitarista" : ("—")))))]`
+> **Accessibilità** `INPUT[slider(minValue(1), maxValue(5), addLabels):accessibilita]` → `VIEW[{accessibilita} == 5 ? "5 · Universale" : ({accessibilita} == 4 ? "4 · Canonizzata" : ({accessibilita} == 3 ? "3 · Iniziatica" : ({accessibilita} == 2 ? "2 · Elitaria" : ({accessibilita} == 1 ? "1 · Occulta" : ("—")))))]`
+> **Entropia Arcana** `INPUT[slider(minValue(1), maxValue(5), addLabels):entropia]` → `VIEW[{entropia} == 5 ? "5 · Auto-distruttiva" : ({entropia} == 4 ? "4 · Instabile" : ({entropia} == 3 ? "3 · Equilibrata" : ({entropia} == 2 ? "2 · Ciclica" : ({entropia} == 1 ? "1 · Auto-rigenerativa" : ("—")))))]`
+> **Autonomia Magica** `INPUT[slider(minValue(1), maxValue(5), addLabels):autonomia]` → `VIEW[{autonomia} == 5 ? "5 · Vivente" : ({autonomia} == 4 ? "4 · Indipendente" : ({autonomia} == 3 ? "3 · Semi-autonoma" : ({autonomia} == 2 ? "2 · Risonante" : ({autonomia} == 1 ? "1 · Volontaria" : ("—")))))]`
 
 > [!note]- Fonte della Magia — Origine ontologica del potere magico. Indica se proviene dall’interno dell’essere o da forze esterne.
 > **1 · Innata** — La magia nasce da dentro: sangue, anima, volontà. È parte dell’essenza dell’incantatore.
@@ -108,12 +111,36 @@ await views.renderClock(container, app, page);
 > **4 · Sacrale funzionale** — Ogni incanto richiede rispetto, riti e intenzione. Il potere è un prestito spirituale.
 > **5 · Liturgico** — Ogni forma magica è un atto liturgico. La magia è comunione con il divino o con le forze cosmiche. Usarla è una preghiera.
 
+> [!note]- Accessibilità — Quanto la magia è diffusa o riservata. Rappresenta se è prerogativa di pochi o bene comune.
+> **1 · Occulta** — Rivelata solo a iniziati o prescelti. Occulta, criptata o vietata.
+> **2 · Elitaria** — Riservata a caste, lignaggi, accademie o spiriti affini. Non accessibile alla massa.
+> **3 · Iniziatica** — Può essere appresa, ma richiede requisiti severi: sacrifici, prove, talenti rari.
+> **4 · Canonizzata** — È accessibile a chi studia, prega o si dedica con disciplina. Presente in ordini o scuole.
+> **5 · Universale** — Potenzialmente accessibile a tutti. Si trasmette per eredità, esposizione o contatto. Nessuna barriera istituzionale.
+
+> [!note]- Entropia Arcana — Stabilità interna del sistema magico e suo potenziale degenerativo. Misura quanto l’uso prolungato conduca a corruzione, decadimento o esplosione mistica.
+> **1 · Auto-rigenerativa** — La magia si autorigenera, purifica e stabilizza nel tempo. Ogni utilizzo rafforza l’equilibrio del sistema.
+> **2 · Ciclica** — Funziona in cicli di accumulo e dissipazione. Un uso corretto la mantiene stabile, ma è soggetta a fasi di esaurimento.
+> **3 · Equilibrata** — Non degenera né si stabilizza. Il sistema resta stabile solo se usato con prudenza e misura.
+> **4 · Instabile** — Ogni uso accumula instabilità. La magia rischia di sfuggire al controllo o causare effetti collaterali progressivi.
+> **5 · Auto-distruttiva** — Ogni utilizzo corrompe l’utilizzatore o il mondo. Il potere si consuma e trascina con sé il tessuto della realtà. Tipica di magie proibite, demoniache o del Vuoto.
+
+> [!note]- Autonomia Magica — Livello di indipendenza o volontà della magia stessa. Indica se è uno strumento, un’entità o una coscienza attiva.
+> **1 · Volontaria** — La magia obbedisce pienamente alla volontà del praticante. È uno strumento neutro e inerte fino a invocazione.
+> **2 · Risonante** — Risponde all’intenzione, all’emozione o allo stato dell’anima. Ha una certa reattività spirituale.
+> **3 · Semi-autonoma** — La magia può manifestarsi spontaneamente o suggerire vie proprie, ma è generalmente controllabile.
+> **4 · Indipendente** — Agisce con volontà propria. L’incantatore può solo orientarne l’intento. Talvolta resiste o reagisce.
+> **5 · Vivente** — È un'entità senziente, spirituale o cosmica. Stabilisce un patto con l’incantatore. Agisce secondo i propri scopi o principi.
+
 ```meta-bind-js-view
 {fonte_magia} as fonte_magia
 {metodo_magia} as metodo_magia
 {costo_magia} as costo_magia
 {rischio} as rischio
 {ethos_magico} as ethos_magico
+{accessibilita} as accessibilita
+{entropia} as entropia
+{autonomia} as autonomia
 hidden
 ---
 const src = await app.vault.adapter.read("z.automazioni/views.js");

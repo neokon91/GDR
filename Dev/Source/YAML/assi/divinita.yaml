@@ -46,3 +46,30 @@ assi:
     3: { etichetta: "Parziale", descrizione: "Può manifestarsi in avatar temporanei, animali sacri, oggetti leggendari o fenomeni naturali. Non ha un’unica forma, ma assume veicoli transitori o epifanici." }
     4: { etichetta: "Iconica", descrizione: "Ha una forma costante, riconoscibile, spesso antropomorfa o mitica. È rappresentata nei templi, statue, sogni. I suoi simboli e tratti sono codificati nel culto." }
     5: { etichetta: "Manifesta", descrizione: "La divinità esiste fisicamente nel mondo, incarnata in corpi, regni, luoghi sacri o persone viventi. Può camminare, parlare, combattere. È un essere tangibile e attivo nella realtà." }
+- id: polarita_cosmica
+  nome: Polarità Cosmica
+  descrizione: "Posizionamento della divinità all’interno dei conflitti cosmici, morali o metafisici. Esprime se essa si mantiene al di sopra delle polarità (es. bene/male, ordine/caos), oppure prende posizione attiva in una fazione o visione del cosmo."
+  valori:
+    1: { etichetta: "Neutrale", descrizione: "La divinità trascende ogni dualismo. Non prende parte a nessuna causa, conflitto o opposizione. È pura presenza o principio oltre bene e male, ordine e caos." }
+    2: { etichetta: "Equilibratrice", descrizione: "La divinità interviene solo per bilanciare gli eccessi. Non è parte di una fazione, ma agisce per impedire la vittoria di uno dei poli. Sacralizza l’armonia cosmica." }
+    3: { etichetta: "Ambivalente", descrizione: "La divinità mostra tratti sia di una parte che dell’altra, o cambia posizione in base ai cicli, alle epoche o ai suoi avatar. È complessa, contraddittoria o ciclica." }
+    4: { etichetta: "Allineata", descrizione: "La divinità sostiene chiaramente una fazione cosmica (es. Luce, Ordine, Caos), pur tollerando l’esistenza dell’opposto. I suoi culti sono schierati ma non fanatici." }
+    5: { etichetta: "Militante", descrizione: "La divinità combatte attivamente per l’annientamento dell’opposto. Vede la propria parte come assoluta verità e l’altra come errore da distruggere. I suoi culti sono crociati, inquisitori o apocalittici." }
+- id: interazione
+  nome: Modalità di Interazione
+  descrizione: "Esprime il modo in cui la divinità comunica, si rivela e si relaziona con il mondo sensibile o spirituale. Unisce i canali comunicativi e la trasparenza simbolica del messaggio divino."
+  valori:
+    1: { etichetta: "Ineffabile", descrizione: "Nessuna comunicazione verbale o esplicita. Solo stati mistici, simboli interiori, esperienze estatiche." }
+    2: { etichetta: "Simbolica", descrizione: "Opera tramite enigmi, sogni, archetipi, oracoli e visioni. Interazione per decodifica iniziatica." }
+    3: { etichetta: "Stratificata", descrizione: "Parla a più livelli. Parte del messaggio è chiaro, parte è occulto o misterico. Necessita interpretazione." }
+    4: { etichetta: "Esplicita", descrizione: "Comunica tramite parole, profeti, testi sacri, precetti. Messaggio diretto, ma mediato." }
+    5: { etichetta: "Totale", descrizione: "Ogni essere percepisce la sua voce. La realtà stessa è linguaggio divino. Interazione continua e universale." }
+- id: accessibilita
+  nome: Accessibilità Cultuale
+  descrizione: "Misura quanto è semplice o complesso stabilire una relazione autentica, efficace e riconosciuta con la divinità. Indica se essa si offre liberamente a chiunque o richiede iniziazioni, lignaggi o stati particolari per essere raggiunta."
+  valori:
+    1: { etichetta: "Elitaria", descrizione: "Solo pochi eletti, nati con un dono o parte di lignaggi spirituali, possono accedere alla divinità. Il culto è chiuso, riservato e spesso misterico. Il contatto è un privilegio raro." }
+    2: { etichetta: "Iniziatica", descrizione: "L'accesso è possibile ma subordinato a riti, prove o studi. La divinità si rivela gradualmente e solo a chi ha attraversato un percorso specifico. Il culto è strutturato e gerarchico." }
+    3: { etichetta: "Condizionata", descrizione: "Chiunque può cercare la divinità, ma solo in particolari condizioni: rituali, momenti cosmici, stati d’animo o purificazione. L’accesso è selettivo ma non chiuso." }
+    4: { etichetta: "Aperta", descrizione: "La divinità è accessibile alla maggior parte degli esseri senzienti. Il culto è diffuso, i riti sono noti, l’interazione è incoraggiata ma richiede dedizione." }
+    5: { etichetta: "Universale", descrizione: "Tutti, indipendentemente da cultura, status o preparazione, possono accedere alla divinità. Essa risponde anche a preghiere non rituali. È presente in ogni cuore e ogni luogo." }

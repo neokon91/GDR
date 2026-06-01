@@ -72,6 +72,9 @@ await views.renderClock(container, app, page);
 > **Trascendenza** `INPUT[slider(minValue(1), maxValue(5), addLabels):trascendenza]` → `VIEW[{trascendenza} == 5 ? "5 · Trascendente" : ({trascendenza} == 4 ? "4 · Separato" : ({trascendenza} == 3 ? "3 · Ambivalente" : ({trascendenza} == 2 ? "2 · Diffuso" : ({trascendenza} == 1 ? "1 · Immanente" : ("—")))))]`
 > **Legalità** `INPUT[slider(minValue(1), maxValue(5), addLabels):legalita]` → `VIEW[{legalita} == 5 ? "5 · Ufficiale" : ({legalita} == 4 ? "4 · Accettato" : ({legalita} == 3 ? "3 · Riconosciuto" : ({legalita} == 2 ? "2 · Tollerato" : ({legalita} == 1 ? "1 · Illegale" : ("—")))))]`
 > **Motivazione** `INPUT[slider(minValue(1), maxValue(5), addLabels):motivazione]` → `VIEW[{motivazione} == 5 ? "5 · Amore" : ({motivazione} == 4 ? "4 · Fiducia" : ({motivazione} == 3 ? "3 · Equilibrata" : ({motivazione} == 2 ? "2 · Placazione" : ({motivazione} == 1 ? "1 · Paura" : ("—")))))]`
+> **Ordine** `INPUT[slider(minValue(1), maxValue(5), addLabels):ordine]` → `VIEW[{ordine} == 5 ? "5 · Caotico" : ({ordine} == 4 ? "4 · Sovversivo" : ({ordine} == 3 ? "3 · Neutrale dinamico" : ({ordine} == 2 ? "2 · Ordinato" : ({ordine} == 1 ? "1 · Armonico" : ("—")))))]`
+> **Missione** `INPUT[slider(minValue(1), maxValue(5), addLabels):missione]` → `VIEW[{missione} == 5 ? "5 · Missionaria" : ({missione} == 4 ? "4 · Propagandista" : ({missione} == 3 ? "3 · Opportunista" : ({missione} == 2 ? "2 · Conservativo" : ({missione} == 1 ? "1 · Inerziale" : ("—")))))]`
+> **Contatto Divino** `INPUT[slider(minValue(1), maxValue(5), addLabels):contatto_divino]` → `VIEW[{contatto_divino} == 5 ? "5 · Mediato" : ({contatto_divino} == 4 ? "4 · Mediato flessibile" : ({contatto_divino} == 3 ? "3 · Misto" : ({contatto_divino} == 2 ? "2 · Intuitivo" : ({contatto_divino} == 1 ? "1 · Diretto" : ("—")))))]`
 
 > [!note]- Struttura — Grado di organizzazione interna e rigidità della gerarchia.
 > **1 · Anarchico** — Nessuna gerarchia; fluido, spontaneo, decentralizzato.
@@ -108,12 +111,36 @@ await views.renderClock(container, app, page);
 > **4 · Fiducia** — Si onora per scelta; la divinità è giusta e guida.
 > **5 · Amore** — Legame affettivo profondo; si cerca l'unione, l'estasi.
 
+> [!note]- Ordine — Rapporto del culto con l’idea di ordine universale. Esprime quanto il culto promuova equilibrio, ciclicità e stabilità, oppure alimenti disordine, mutamento e crisi come aspetti sacri del cosmo.
+> **1 · Armonico** — Il culto si fonda sull’armonia cosmica. Venera l’equilibrio tra opposti, la ciclicità naturale e le leggi immutabili dell’universo. Spesso promuove stabilità, moderazione e conservazione spirituale.
+> **2 · Ordinato** — Il culto valorizza la struttura e la coerenza, ma ammette forme controllate di mutamento. Il disordine è tollerato come eccezione da rimettere in equilibrio. Rituale e regolazione sono centrali.
+> **3 · Neutrale dinamico** — Il culto riconosce che ordine e caos sono entrambi necessari. Favorisce il cambiamento ciclico, la trasformazione bilanciata, e considera crisi e rigenerazione parti di un unico disegno.
+> **4 · Sovversivo** — Il culto abbraccia la trasformazione. Cerca la rottura degli equilibri attuali per rivelare verità nascoste o generare nuove realtà. La distruzione è vista come mezzo sacro.
+> **5 · Caotico** — Il culto è devoto all’entropia, all’instabilità, al crollo dell’ordine. Vede nel caos puro la verità ultima, e nel disfacimento la rivelazione. Perfetto per culti del Vuoto, della Follia o dell’Apocalisse.
+
+> [!note]- Missione — Tendenza del culto a trasmettersi, propagarsi e convertire nuovi adepti. Esprime quanto esso si espanda attivamente oltre il suo contesto originario o preferisca restare confinato e stabile.
+> **1 · Inerziale** — Il culto non cerca espansione. È tramandato solo per tradizione familiare o locale. Non ha intenzione né struttura per diffondersi. Tipico di culti ancestrali, rurali o etnici chiusi.
+> **2 · Conservativo** — Il culto è legato a un territorio o a una comunità specifica. Può accogliere nuovi membri, ma non attivamente. La continuità prevale sulla diffusione.
+> **3 · Opportunista** — Il culto si diffonde quando possibile, soprattutto per influenza culturale o migrazioni. Non ha un vero proselitismo, ma si adatta e attecchisce in nuovi contesti quando le condizioni lo favoriscono.
+> **4 · Propagandista** — Il culto dispone di strumenti per diffondersi: predicatori, testi, emissari. Mira a crescere in modo controllato, senza imporsi con la forza. È spesso supportato da mecenati o autorità locali.
+> **5 · Missionaria** — La diffusione è un dovere sacro. Il culto mira alla conversione globale, anche tramite imposizione, crociate o annessione. Considera ogni non adepto come ignorante, corrotto o perduto.
+
+> [!note]- Contatto Divino — Modalità con cui i fedeli stabiliscono una connessione con il sacro. Rappresenta il grado di immediatezza o mediazione nella comunicazione con la divinità o le forze spirituali.
+> **1 · Diretto** — Il contatto con il divino avviene attraverso esperienze personali: visioni, sogni, estasi, trance, possessione. Ogni fedele può accedere autonomamente al sacro senza bisogno di interpreti.
+> **2 · Intuitivo** — La comunicazione è ancora personale, ma filtrata da simboli, presagi, animali guida, segni della natura o pratiche rituali spontanee. L’esperienza richiede sensibilità o predisposizione spirituale.
+> **3 · Misto** — Alcuni accedono direttamente, altri tramite figure di guida (sciamani, profeti, oracoli). Il culto ammette forme parallele di connessione, combinando immediatezza e mediazione sociale.
+> **4 · Mediato flessibile** — Il contatto con il divino è affidato a ruoli specifici, ma non è necessariamente esclusivo. I riti ufficiali sono richiesti per le manifestazioni maggiori del sacro.
+> **5 · Mediato** — Solo tramite clero, testi sacri, liturgie o artefatti consacrati si può accedere al divino. La fede passa attraverso una struttura di mediazione istituzionale e rituale. Il fedele non può comunicare da sé.
+
 ```meta-bind-js-view
 {struttura} as struttura
 {rivelazione} as rivelazione
 {trascendenza} as trascendenza
 {legalita} as legalita
 {motivazione} as motivazione
+{ordine} as ordine
+{missione} as missione
+{contatto_divino} as contatto_divino
 hidden
 ---
 const src = await app.vault.adapter.read("z.automazioni/views.js");

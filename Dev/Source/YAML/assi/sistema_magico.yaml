@@ -48,6 +48,33 @@ assi:
     5: { etichetta: "Liturgico", descrizione: "Ogni forma magica è un atto liturgico. La magia è comunione con il divino o con le forze cosmiche. Usarla è una preghiera." }
 
 # Archetipi: combinazioni di valori-assi -> tag coerenti (renderProfilo / applica_profilo).
+- id: accessibilita
+  nome: Accessibilità
+  descrizione: "Quanto la magia è diffusa o riservata. Rappresenta se è prerogativa di pochi o bene comune."
+  valori:
+    1: { etichetta: "Occulta", descrizione: "Rivelata solo a iniziati o prescelti. Occulta, criptata o vietata." }
+    2: { etichetta: "Elitaria", descrizione: "Riservata a caste, lignaggi, accademie o spiriti affini. Non accessibile alla massa." }
+    3: { etichetta: "Iniziatica", descrizione: "Può essere appresa, ma richiede requisiti severi: sacrifici, prove, talenti rari." }
+    4: { etichetta: "Canonizzata", descrizione: "È accessibile a chi studia, prega o si dedica con disciplina. Presente in ordini o scuole." }
+    5: { etichetta: "Universale", descrizione: "Potenzialmente accessibile a tutti. Si trasmette per eredità, esposizione o contatto. Nessuna barriera istituzionale." }
+- id: entropia
+  nome: Entropia Arcana
+  descrizione: "Stabilità interna del sistema magico e suo potenziale degenerativo. Misura quanto l’uso prolungato conduca a corruzione, decadimento o esplosione mistica."
+  valori:
+    1: { etichetta: "Auto-rigenerativa", descrizione: "La magia si autorigenera, purifica e stabilizza nel tempo. Ogni utilizzo rafforza l’equilibrio del sistema." }
+    2: { etichetta: "Ciclica", descrizione: "Funziona in cicli di accumulo e dissipazione. Un uso corretto la mantiene stabile, ma è soggetta a fasi di esaurimento." }
+    3: { etichetta: "Equilibrata", descrizione: "Non degenera né si stabilizza. Il sistema resta stabile solo se usato con prudenza e misura." }
+    4: { etichetta: "Instabile", descrizione: "Ogni uso accumula instabilità. La magia rischia di sfuggire al controllo o causare effetti collaterali progressivi." }
+    5: { etichetta: "Auto-distruttiva", descrizione: "Ogni utilizzo corrompe l’utilizzatore o il mondo. Il potere si consuma e trascina con sé il tessuto della realtà. Tipica di magie proibite, demoniache o del Vuoto." }
+- id: autonomia
+  nome: Autonomia Magica
+  descrizione: "Livello di indipendenza o volontà della magia stessa. Indica se è uno strumento, un’entità o una coscienza attiva."
+  valori:
+    1: { etichetta: "Volontaria", descrizione: "La magia obbedisce pienamente alla volontà del praticante. È uno strumento neutro e inerte fino a invocazione." }
+    2: { etichetta: "Risonante", descrizione: "Risponde all’intenzione, all’emozione o allo stato dell’anima. Ha una certa reattività spirituale." }
+    3: { etichetta: "Semi-autonoma", descrizione: "La magia può manifestarsi spontaneamente o suggerire vie proprie, ma è generalmente controllabile." }
+    4: { etichetta: "Indipendente", descrizione: "Agisce con volontà propria. L’incantatore può solo orientarne l’intento. Talvolta resiste o reagisce." }
+    5: { etichetta: "Vivente", descrizione: "È un'entità senziente, spirituale o cosmica. Stabilisce un patto con l’incantatore. Agisce secondo i propri scopi o principi." }
 archetipi:
 - { id: selvaggia,    nome: "Magia selvaggia",        quando: { metodo_magia: "<=2", rischio: ">=4" },        tag: [selvaggia, pericolosa] }
 - { id: liturgica,    nome: "Arte liturgica",         quando: { ethos_magico: ">=4", metodo_magia: ">=4" },   tag: [liturgica, rituale] }

@@ -46,6 +46,9 @@
 > **Etica Divina** `INPUT[slider(minValue(1), maxValue(5), addLabels):etica_divina]` → `VIEW[{etica_divina} == 5 ? "5 · Giudicante" : ({etica_divina} == 4 ? "4 · Normativa" : ({etica_divina} == 3 ? "3 · Ambigua" : ({etica_divina} == 2 ? "2 · Osservatrice" : ({etica_divina} == 1 ? "1 · Indifferente" : ("—")))))]`
 > **Modalità di Interazione** `INPUT[slider(minValue(1), maxValue(5), addLabels):interazione_divina]` → `VIEW[{interazione_divina} == 5 ? "5 · Totale" : ({interazione_divina} == 4 ? "4 · Esplicita" : ({interazione_divina} == 3 ? "3 · Stratificata" : ({interazione_divina} == 2 ? "2 · Simbolica" : ({interazione_divina} == 1 ? "1 · Ineffabile" : ("—")))))]`
 > **Incarnazione** `INPUT[slider(minValue(1), maxValue(5), addLabels):incarnazione]` → `VIEW[{incarnazione} == 5 ? "5 · Manifesta" : ({incarnazione} == 4 ? "4 · Iconica" : ({incarnazione} == 3 ? "3 · Parziale" : ({incarnazione} == 2 ? "2 · Impalpabile" : ({incarnazione} == 1 ? "1 · Pura" : ("—")))))]`
+> **Polarità Cosmica** `INPUT[slider(minValue(1), maxValue(5), addLabels):polarita_cosmica]` → `VIEW[{polarita_cosmica} == 5 ? "5 · Militante" : ({polarita_cosmica} == 4 ? "4 · Allineata" : ({polarita_cosmica} == 3 ? "3 · Ambivalente" : ({polarita_cosmica} == 2 ? "2 · Equilibratrice" : ({polarita_cosmica} == 1 ? "1 · Neutrale" : ("—")))))]`
+> **Modalità di Interazione** `INPUT[slider(minValue(1), maxValue(5), addLabels):interazione]` → `VIEW[{interazione} == 5 ? "5 · Totale" : ({interazione} == 4 ? "4 · Esplicita" : ({interazione} == 3 ? "3 · Stratificata" : ({interazione} == 2 ? "2 · Simbolica" : ({interazione} == 1 ? "1 · Ineffabile" : ("—")))))]`
+> **Accessibilità Cultuale** `INPUT[slider(minValue(1), maxValue(5), addLabels):accessibilita]` → `VIEW[{accessibilita} == 5 ? "5 · Universale" : ({accessibilita} == 4 ? "4 · Aperta" : ({accessibilita} == 3 ? "3 · Condizionata" : ({accessibilita} == 2 ? "2 · Iniziatica" : ({accessibilita} == 1 ? "1 · Elitaria" : ("—")))))]`
 
 > [!note]- Presenza Cosmica — Determina dove e come la divinità esiste nel cosmo. Unisce la densità ontologica alla distribuzione planare.
 > **1 · Trascendente** — Esiste oltre il cosmo, non localizzabile, né accessibile. È puro principio.
@@ -82,12 +85,36 @@
 > **4 · Iconica** — Ha una forma costante, riconoscibile, spesso antropomorfa o mitica. È rappresentata nei templi, statue, sogni. I suoi simboli e tratti sono codificati nel culto.
 > **5 · Manifesta** — La divinità esiste fisicamente nel mondo, incarnata in corpi, regni, luoghi sacri o persone viventi. Può camminare, parlare, combattere. È un essere tangibile e attivo nella realtà.
 
+> [!note]- Polarità Cosmica — Posizionamento della divinità all’interno dei conflitti cosmici, morali o metafisici. Esprime se essa si mantiene al di sopra delle polarità (es. bene/male, ordine/caos), oppure prende posizione attiva in una fazione o visione del cosmo.
+> **1 · Neutrale** — La divinità trascende ogni dualismo. Non prende parte a nessuna causa, conflitto o opposizione. È pura presenza o principio oltre bene e male, ordine e caos.
+> **2 · Equilibratrice** — La divinità interviene solo per bilanciare gli eccessi. Non è parte di una fazione, ma agisce per impedire la vittoria di uno dei poli. Sacralizza l’armonia cosmica.
+> **3 · Ambivalente** — La divinità mostra tratti sia di una parte che dell’altra, o cambia posizione in base ai cicli, alle epoche o ai suoi avatar. È complessa, contraddittoria o ciclica.
+> **4 · Allineata** — La divinità sostiene chiaramente una fazione cosmica (es. Luce, Ordine, Caos), pur tollerando l’esistenza dell’opposto. I suoi culti sono schierati ma non fanatici.
+> **5 · Militante** — La divinità combatte attivamente per l’annientamento dell’opposto. Vede la propria parte come assoluta verità e l’altra come errore da distruggere. I suoi culti sono crociati, inquisitori o apocalittici.
+
+> [!note]- Modalità di Interazione — Esprime il modo in cui la divinità comunica, si rivela e si relaziona con il mondo sensibile o spirituale. Unisce i canali comunicativi e la trasparenza simbolica del messaggio divino.
+> **1 · Ineffabile** — Nessuna comunicazione verbale o esplicita. Solo stati mistici, simboli interiori, esperienze estatiche.
+> **2 · Simbolica** — Opera tramite enigmi, sogni, archetipi, oracoli e visioni. Interazione per decodifica iniziatica.
+> **3 · Stratificata** — Parla a più livelli. Parte del messaggio è chiaro, parte è occulto o misterico. Necessita interpretazione.
+> **4 · Esplicita** — Comunica tramite parole, profeti, testi sacri, precetti. Messaggio diretto, ma mediato.
+> **5 · Totale** — Ogni essere percepisce la sua voce. La realtà stessa è linguaggio divino. Interazione continua e universale.
+
+> [!note]- Accessibilità Cultuale — Misura quanto è semplice o complesso stabilire una relazione autentica, efficace e riconosciuta con la divinità. Indica se essa si offre liberamente a chiunque o richiede iniziazioni, lignaggi o stati particolari per essere raggiunta.
+> **1 · Elitaria** — Solo pochi eletti, nati con un dono o parte di lignaggi spirituali, possono accedere alla divinità. Il culto è chiuso, riservato e spesso misterico. Il contatto è un privilegio raro.
+> **2 · Iniziatica** — L'accesso è possibile ma subordinato a riti, prove o studi. La divinità si rivela gradualmente e solo a chi ha attraversato un percorso specifico. Il culto è strutturato e gerarchico.
+> **3 · Condizionata** — Chiunque può cercare la divinità, ma solo in particolari condizioni: rituali, momenti cosmici, stati d’animo o purificazione. L’accesso è selettivo ma non chiuso.
+> **4 · Aperta** — La divinità è accessibile alla maggior parte degli esseri senzienti. Il culto è diffuso, i riti sono noti, l’interazione è incoraggiata ma richiede dedizione.
+> **5 · Universale** — Tutti, indipendentemente da cultura, status o preparazione, possono accedere alla divinità. Essa risponde anche a preghiere non rituali. È presente in ogni cuore e ogni luogo.
+
 ```meta-bind-js-view
 {presenza_cosmica} as presenza_cosmica
 {volonta} as volonta
 {etica_divina} as etica_divina
 {interazione_divina} as interazione_divina
 {incarnazione} as incarnazione
+{polarita_cosmica} as polarita_cosmica
+{interazione} as interazione
+{accessibilita} as accessibilita
 hidden
 ---
 const src = await app.vault.adapter.read("z.automazioni/views.js");

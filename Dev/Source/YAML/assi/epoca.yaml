@@ -47,3 +47,30 @@ assi:
     3: { etichetta: Ambigua,      descrizione: "Tra mito e storia; frammenti scritti e reliquie." }
     4: { etichetta: Cronachistica, descrizione: "Ben documentata; annali, mappe, genealogie." }
     5: { etichetta: Documentata,  descrizione: "Registrata e studiata; la storia è scienza." }
+- id: equilibrio_cosmico
+  nome: Equilibrio Cosmologico
+  descrizione: "Grado di stabilità tra le forze fondamentali dell’universo (materia, spirito, ordine, caos, tempo, spazio). Indica se i piani esistenziali e le leggi cosmiche sono in equilibrio, o se prevalgono squilibri, fratture o crisi."
+  valori:
+    1: { etichetta: "Caotica", descrizione: "L’epoca è dominata dall’instabilità. I piani si sovrappongono o collassano, le leggi cosmiche sono fluide o violate. La realtà muta imprevedibilmente. Crisi, frammentazione e guerre cosmiche sono comuni." }
+    2: { etichetta: "Instabile", descrizione: "Esistono parvenze di ordine, ma continuamente minacciate. Il conflitto tra forze cosmiche è aperto o latente. Alcuni piani sono stabili, altri collassano o interferiscono. Il mondo vive sul filo della frattura." }
+    3: { etichetta: "In bilico", descrizione: "L’equilibrio tra le forze fondamentali è raggiunto a fatica e mantenuto da entità, rituali o cicli. È fragile ma reale. Una svolta, un evento o una profezia può spezzarlo o consolidarlo." }
+    4: { etichetta: "Ordinata", descrizione: "Le leggi cosmiche sono rispettate. I piani sono distinti e stabili. L’ordine regna nella struttura metafisica del cosmo. Le crisi esistono ma sono contenute o ritualizzate." }
+    5: { etichetta: "Equilibrata", descrizione: "L’epoca è il culmine dell’armonia cosmica. Le forze opposte sono perfettamente bilanciate. La realtà è coesa, il ciclo della vita e della morte è stabile, i flussi magici scorrono senza distorsioni." }
+- id: dominanza_tecnologica
+  nome: Dominanza Tecnologica
+  descrizione: "Livello di sviluppo tecnologico, magico o tecno-magico predominante nell’epoca. Esprime quanto la civiltà faccia affidamento su strumenti, incantesimi o fusioni avanzate tra le due forze."
+  valori:
+    1: { etichetta: "Arcaica", descrizione: "La tecnologia è primitiva o inesistente. Strumenti in pietra, legno o osso, agricoltura rudimentale, conoscenze empiriche. Magia rara o assente. L’epoca è dominata dalla sopravvivenza." }
+    2: { etichetta: "Tradizionale magica", descrizione: "La tecnologia è elementare, ma la magia ha ruolo centrale. Oggetti incantati, guarigione spirituale, rituali agricoli. La conoscenza è orale, trasmessa da druidi, sciamani o stregoni." }
+    3: { etichetta: "Artigianale mista", descrizione: "Convivenza di tecnologie medievali e magia pratica. Forgiatura, alchimia, runologia, costruzione di golem o armi incantate. La magia inizia a essere sistematizzata o codificata." }
+    4: { etichetta: "Tecno-magica", descrizione: "Fusione di scienza e magia. Motrici arcane, città fluttuanti, automi coscienti, comunicazione astrale. La conoscenza è formalizzata in accademie o corporazioni. La magia è replicabile." }
+    5: { etichetta: "Post-magica", descrizione: "La magia è diventata tecnologia. Artefatti funzionano come macchine, leggi magiche sono standardizzate. L’epoca è dominata da civilizzazioni che piegano le leggi cosmiche a fini scientifici o militari." }
+- id: luce_cosmica
+  nome: Luce Cosmica
+  descrizione: "Grado di trasparenza spirituale, visibilità metafisica e permeazione della verità cosmica. Indica se l’epoca è dominata da tenebre occulte, ignoranza e frammentazione o da rivelazione, ordine e consapevolezza."
+  valori:
+    1: { etichetta: "Oscurità Primordiale", descrizione: "L’universo è avvolto da tenebre originarie. La conoscenza è quasi assente, le forze primigenie dominano, la realtà è opaca, instabile e incomprensibile. Non esistono ancora legge, parola o coscienza." }
+    2: { etichetta: "Tetro Mistero", descrizione: "L’epoca è velata, dominata da enigmi, divieti, culti oscuri o forze ignote. Alcuni spiragli di sapere emergono, ma la verità è ancora nascosta e minacciosa. La luce esiste solo come promessa lontana." }
+    3: { etichetta: "Penombra Ciclica", descrizione: "L’equilibrio tra luce e ombra è dinamico. L’epoca attraversa fasi di rivelazione e oblio. La conoscenza è parziale, contestata o riservata a pochi. Vi è tensione tra chiarezza e oscuramento." }
+    4: { etichetta: "Rivelazione Progressiva", descrizione: "La luce cosmica aumenta. Le forze sacre emergono, le leggi vengono comprese, la realtà è decifrabile. Il mondo diventa leggibile, i piani si ordinano, le divinità parlano o si manifestano." }
+    5: { etichetta: "Illuminazione Totale", descrizione: "Tutto è chiaro. L’epoca culmina in un’apertura cosmica, in cui il sapere sacro, l’ordine metafisico e l’armonia sono pienamente manifesti. Le tenebre sono dissolte o integrate. L’universo è trasparente all’intelletto divino o mortale." }

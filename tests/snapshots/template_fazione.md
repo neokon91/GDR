@@ -95,6 +95,9 @@ await views.renderClock(container, app, page);
 > **Metodo Operativo** `INPUT[slider(minValue(1), maxValue(5), addLabels):metodo_operativo]` → `VIEW[{metodo_operativo} == 5 ? "5 · Palese" : ({metodo_operativo} == 4 ? "4 · Controllato" : ({metodo_operativo} == 3 ? "3 · Ambivalente" : ({metodo_operativo} == 2 ? "2 · Discreto" : ({metodo_operativo} == 1 ? "1 · Occulto" : ("—")))))]`
 > **Legalità** `INPUT[slider(minValue(1), maxValue(5), addLabels):legalita]` → `VIEW[{legalita} == 5 ? "5 · Ufficiale" : ({legalita} == 4 ? "4 · Legale" : ({legalita} == 3 ? "3 · Semi-legale" : ({legalita} == 2 ? "2 · Tollerata" : ({legalita} == 1 ? "1 · Illegale" : ("—")))))]`
 > **Etica del Conflitto** `INPUT[slider(minValue(1), maxValue(5), addLabels):etica_conflitto]` → `VIEW[{etica_conflitto} == 5 ? "5 · Espansionista" : ({etica_conflitto} == 4 ? "4 · Dominante" : ({etica_conflitto} == 3 ? "3 · Equilibrata" : ({etica_conflitto} == 2 ? "2 · Reattiva" : ({etica_conflitto} == 1 ? "1 · Difensiva" : ("—")))))]`
+> **Relazione col Potere** `INPUT[slider(minValue(1), maxValue(5), addLabels):relazione_potere]` → `VIEW[{relazione_potere} == 5 ? "5 · Strumentale" : ({relazione_potere} == 4 ? "4 · Collaborativa tattica" : ({relazione_potere} == 3 ? "3 · Ambigua" : ({relazione_potere} == 2 ? "2 · Ostile selettiva" : ({relazione_potere} == 1 ? "1 · Indipendente assoluta" : ("—")))))]`
+> **Coesione** `INPUT[slider(minValue(1), maxValue(5), addLabels):coesione]` → `VIEW[{coesione} == 5 ? "5 · Organico" : ({coesione} == 4 ? "4 · Coordinata centralmente" : ({coesione} == 3 ? "3 · Modulata" : ({coesione} == 2 ? "2 · Decentrata" : ({coesione} == 1 ? "1 · Cellulare" : ("—")))))]`
+> **Reazione al Fallimento** `INPUT[slider(minValue(1), maxValue(5), addLabels):reazione_fallimento]` → `VIEW[{reazione_fallimento} == 5 ? "5 · Metamorfosi" : ({reazione_fallimento} == 4 ? "4 · Rinnovamento" : ({reazione_fallimento} == 3 ? "3 · Elaborazione" : ({reazione_fallimento} == 2 ? "2 · Rigidità" : ({reazione_fallimento} == 1 ? "1 · Negazione" : ("—")))))]`
 
 > [!note]- Struttura — Grado di organizzazione interna e rigidità della catena di comando.
 > **1 · Orizzontale** — Nessuna struttura fissa; decisioni collettive. Cellule, bande, reti informali.
@@ -131,12 +134,36 @@ await views.renderClock(container, app, page);
 > **4 · Dominante** — Previene le minacce con la forza; conquista e deterrenza nella dottrina.
 > **5 · Espansionista** — Il conflitto è sacro o glorioso; ogni ostacolo è nemico. Imperi, crociate.
 
+> [!note]- Relazione col Potere — Atteggiamento della fazione nei confronti dei poteri costituiti (regni, imperi, caste, chiese, corporazioni). Indica se agisce in autonomia, li sfida, li serve o li strumentalizza per propri fini.
+> **1 · Indipendente assoluta** — La fazione si tiene lontana da ogni forma di potere centralizzato. È autonoma, autarchica, spesso isolazionista. Rifiuta compromessi con autorità, leggi o sistemi dominanti.
+> **2 · Ostile selettiva** — La fazione è in conflitto con alcune autorità specifiche (un impero, una chiesa, una corporazione), ma non con il concetto di potere in sé. Può sostenere poteri alternativi o ribelli.
+> **3 · Ambigua** — La fazione collabora con certi poteri e si oppone ad altri. Mantiene una posizione fluida, a seconda dei contesti. Può essere alleata, nemica o neutrale. Spesso agisce come terza forza.
+> **4 · Collaborativa tattica** — La fazione si appoggia ai poteri dominanti per sopravvivere, influenzare o infiltrare. Cerca protezione, accesso a risorse o legittimazione. Spesso manipola le autorità dall’interno.
+> **5 · Strumentale** — La fazione è completamente subordinata o parte integrante di un potere superiore. È braccio armato, organo magico, casta servente o culto di stato. Agisce per conto di chi comanda.
+
+> [!note]- Coesione — Struttura interna della fazione in termini di interconnessione tra i suoi membri e cellule operative. Indica se agisce come una rete frammentata o come un corpo unitario interdipendente.
+> **1 · Cellulare** — La fazione è composta da cellule autonome, spesso ignare le une delle altre. Ogni nucleo opera in modo indipendente. Perfetto per movimenti clandestini, reti segrete, insurrezioni diffuse.
+> **2 · Decentrata** — Esistono più centri decisionali o nuclei regionali semi-autonomi. Le comunicazioni sono lente o filtrate. Le strategie possono divergere, ma condividono visione generale.
+> **3 · Modulata** — Le parti della fazione sono coordinate, ma mantengono una certa autonomia logistica o dottrinale. La coesione è funzionale ma non assoluta. Le divisioni tematiche o operative sono ben strutturate.
+> **4 · Coordinata centralmente** — Esiste un comando centrale che regola tutte le sezioni. La disciplina è forte, l’unità ideologica mantenuta. Le singole parti eseguono ordini ma possono offrire feedback strutturati.
+> **5 · Organico** — La fazione agisce come un singolo organismo. Ogni parte è perfettamente integrata. La volontà centrale è percepita e seguita in modo istintivo o mistico. Tipico di intelligenze collettive, fazioni guidate da mente-alveare o spiriti egemoni.
+
+> [!note]- Reazione al Fallimento — Modalità con cui la fazione affronta la sconfitta, la perdita di potere o le crisi interne. Indica se nega, resiste, rimuove il trauma oppure se lo integra, trasforma e ne rinasce.
+> **1 · Negazione** — Il fallimento è rimosso dalla memoria o negato. La fazione insiste nella stessa via, ignorando gli esiti. Spesso riscrive la storia o si rifugia nel dogma per non cambiare.
+> **2 · Rigidità** — La fazione riconosce la crisi ma non cambia. Tende a irrigidirsi, incolpare esterni o rafforzare i propri principi, sperando in una rivalsa futura. Il trauma è visto come prova da superare senza mutare.
+> **3 · Elaborazione** — La fazione analizza la sconfitta, ne discute le cause, e cerca un equilibrio tra ciò che deve essere conservato e ciò che può essere riformato. L’identità si adatta senza perdersi.
+> **4 · Rinnovamento** — La crisi è accolta come occasione. Il culto rifonda sé stesso, cambia dottrina, simboli o leadership. Il passato resta, ma è rifuso in un nuovo inizio. Spesso si genera un “secondo culto”.
+> **5 · Metamorfosi** — La sconfitta è parte della fede stessa. La fazione muta forma, scopo e persino nome. Ogni crisi è una mutazione sacra. Nessuna identità è fissa. Ideale per fazioni legate al Vuoto, alla Rinascita o all’Inganno.
+
 ```meta-bind-js-view
 {struttura} as struttura
 {scopo} as scopo
 {metodo_operativo} as metodo_operativo
 {legalita} as legalita
 {etica_conflitto} as etica_conflitto
+{relazione_potere} as relazione_potere
+{coesione} as coesione
+{reazione_fallimento} as reazione_fallimento
 hidden
 ---
 const src = await app.vault.adapter.read("z.automazioni/views.js");

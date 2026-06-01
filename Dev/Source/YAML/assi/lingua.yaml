@@ -46,3 +46,30 @@ assi:
     3: { etichetta: "Specializzata", descrizione: "Parlata da caste, mestieri o regioni specifiche. Serve per scopi pratici o culturali specifici." }
     4: { etichetta: "Occulta", descrizione: "Insegnata solo a membri selezionati di gilde, culti o ordini magici. La sua esistenza può essere nascosta." }
     5: { etichetta: "Proibita", descrizione: "La lingua è segreta e vietata. Solo chi è destinato o maledetto può comprenderla. Parlare può avere effetti cosmici o letali." }
+- id: effetto_magico
+  nome: Effetto Magico
+  descrizione: "Capacità della lingua di generare effetti concreti nella realtà attraverso la sola enunciazione."
+  valori:
+    1: { etichetta: "Inerte", descrizione: "Non produce alcun effetto al di fuori della comunicazione." }
+    2: { etichetta: "Carica", descrizione: "Può amplificare l’emozione o l’intento del parlante, ma senza effetto oggettivo." }
+    3: { etichetta: "Condizionata", descrizione: "Produce effetti magici solo se accompagnata da gesti, rituali o componenti specifici." }
+    4: { etichetta: "Attivante", descrizione: "Attiva direttamente oggetti magici, portali o sigilli tramite parole chiave o formule." }
+    5: { etichetta: "Performativa", descrizione: "Parlare **è** agire. Ogni parola pronunciata realizza un effetto magico reale, permanente o cosmico." }
+- id: rischio
+  nome: Rischio Ontologico
+  descrizione: "Rischio esistenziale associato all’uso della lingua. Più è elevato, più l’uso comporta instabilità metafisica o danni all’essere."
+  valori:
+    1: { etichetta: "Sicura", descrizione: "Nessun pericolo. La lingua è stabile e non influisce sull’essenza." }
+    2: { etichetta: "Faticosa", descrizione: "Richiede energia spirituale o concentrazione intensa. Abuso può esaurire la mente o l’anima." }
+    3: { etichetta: "Corrosiva", descrizione: "L’uso costante erode i ricordi, altera la percezione o consuma la personalità." }
+    4: { etichetta: "Instabile", descrizione: "Parlare può causare mutazioni, frammentazioni dell’identità o squilibri planari." }
+    5: { etichetta: "Distruttiva", descrizione: "Ogni parola modifica il reale e chi la pronuncia. Può spezzare le leggi cosmiche. Uso prolungato implica annichilimento del sé o perdita dell’identità ontologica." }
+- id: stratificazione
+  nome: Stratificazione
+  descrizione: "Livelli di significato presenti in ogni parola. Misura la complessità semantica della lingua."
+  valori:
+    1: { etichetta: "Unilivello", descrizione: "Ogni parola ha un significato chiaro e unico." }
+    2: { etichetta: "Ambivalente", descrizione: "Le parole possono avere doppi sensi o ambiguità culturali." }
+    3: { etichetta: "Polisemica", descrizione: "Ogni parola può significare più cose a seconda del contesto o dell'intonazione." }
+    4: { etichetta: "Simbolica", descrizione: "Ogni parola è un simbolo con significati spirituali, mistici o archetipici." }
+    5: { etichetta: "Multiplanare", descrizione: "Ogni parola esiste in più livelli semantici: reale, spirituale, magico, onirico. Serve un’iniziazione per comprenderla pienamente." }

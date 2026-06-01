@@ -105,3 +105,30 @@ assi:
       etichetta: Iperevoluto
       descrizione: Tecnomagia, città viventi, coscienze collettive; civilizzazione
         pura.
+- id: pericolosita_ontologica
+  nome: Pericolosità Ontologica
+  descrizione: "Capacità del luogo di alterare, corrompere o minacciare la stabilità dell’essere, della mente o dell’anima."
+  valori:
+    1: { etichetta: "Sicuro", descrizione: "Nessun rischio particolare. Il luogo è stabile, integro, non influisce sulla realtà o sull’identità dell’osservatore." }
+    2: { etichetta: "Alieno", descrizione: "L’ambiente ha regole insolite ma non pericolose. Stimola sogni strani, percezioni nuove o visioni simboliche." }
+    3: { etichetta: "Instabile", descrizione: "Il luogo distorce la mente o l’essenza dell’individuo. Le leggi della realtà vacillano. Identità e tempo possono frammentarsi." }
+    4: { etichetta: "Corrompente", descrizione: "Il luogo genera mutazioni, possessioni, paradossi. Ogni permanenza altera profondamente l’essere. L’accesso richiede protezioni rituali o sacrifici spirituali." }
+    5: { etichetta: "Corrosivo", descrizione: "Il luogo annulla o riscrive l’esistenza. L’identità si dissolve, le memorie vengono risucchiate. È una “bocca cosmica” che devasta anima e realtà. Tipico di luoghi del Vuoto o dell’Abisso." }
+- id: stratificazione_dimensionale
+  nome: Stratificazione Dimensionale
+  descrizione: "Livelli di realtà che coesistono o si intersecano nel luogo."
+  valori:
+    1: { etichetta: "Monoplanare", descrizione: "Il luogo esiste su un solo livello dimensionale. Non vi sono interferenze da altri piani o realtà." }
+    2: { etichetta: "Semi-velato", descrizione: "Si percepiscono echi o tracce di altri piani (ombre, sogni, apparizioni). Alcuni rituali rivelano livelli nascosti." }
+    3: { etichetta: "Intersezione", descrizione: "Il luogo è un crocevia. Due o più piani si sovrappongono parzialmente. Magie o creature extradimensionali possono emergere." }
+    4: { etichetta: "Sospeso", descrizione: "Il luogo oscilla fra due realtà. Le leggi fisiche cambiano ciclicamente. Le entità sembrano appartenere a piani multipli." }
+    5: { etichetta: "Multi-planare", descrizione: "Il luogo esiste simultaneamente su più piani. I confini tra sogno, realtà, spirito e magia sono dissolti. Ogni punto può condurre altrove. Tipico di Axis Mundi, Nexus, Sancta Cosmici." }
+- id: risonanza_psichica
+  nome: Risonanza Psichica
+  descrizione: "Interazione tra coscienza dell’individuo e “mente” del luogo. Indica se il luogo è passivo o reagisce ai pensieri, emozioni, ricordi di chi lo visita."
+  valori:
+    1: { etichetta: "Neutro", descrizione: "Il luogo non presenta alcuna risonanza psichica. È materia inerte, priva di eco spirituale o coscienza." }
+    2: { etichetta: "Memorizzante", descrizione: "Il luogo conserva echi degli eventi passati. Si manifestano sogni residui, memorie ancestrali, impronte emozionali." }
+    3: { etichetta: "Suggestivo", descrizione: "Il luogo influisce su stati d’animo e visioni. Genera ispirazioni, incubi, euforia o inquietudine. La sua presenza condiziona l’esperienza soggettiva." }
+    4: { etichetta: "Riflettente", descrizione: "Il luogo si adatta alla mente di chi entra. Modifica forma, colori o eventi in base alle emozioni. Ogni visitatore lo percepisce diversamente." }
+    5: { etichetta: "Empatico", descrizione: "Il luogo ha una volontà psichica attiva. Comunica, seduce, manipola o giudica. Può fondersi con la coscienza, rivelando traumi, desideri o verità." }

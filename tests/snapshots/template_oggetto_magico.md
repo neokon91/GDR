@@ -37,6 +37,8 @@
 > **Funzione** `INPUT[slider(minValue(1), maxValue(5), addLabels):funzione]` → `VIEW[{funzione} == 5 ? "5 · Sacro" : ({funzione} == 4 ? "4 · Simbolico" : ({funzione} == 3 ? "3 · Versatile" : ({funzione} == 2 ? "2 · Arcana" : ({funzione} == 1 ? "1 · Utilitaria" : ("—")))))]`
 > **Potere Attivo** `INPUT[slider(minValue(1), maxValue(5), addLabels):potere_attivo]` → `VIEW[{potere_attivo} == 5 ? "5 · Senziente" : ({potere_attivo} == 4 ? "4 · Semi-autonomo" : ({potere_attivo} == 3 ? "3 · Reattivo" : ({potere_attivo} == 2 ? "2 · Attivabile" : ({potere_attivo} == 1 ? "1 · Dormiente" : ("—")))))]`
 > **Legame Spirituale** `INPUT[slider(minValue(1), maxValue(5), addLabels):legame]` → `VIEW[{legame} == 5 ? "5 · Vincolante" : ({legame} == 4 ? "4 · Legato" : ({legame} == 3 ? "3 · Ereditario" : ({legame} == 2 ? "2 · Empatico" : ({legame} == 1 ? "1 · Libero" : ("—")))))]`
+> **Influenza sulla Realtà** `INPUT[slider(minValue(1), maxValue(5), addLabels):influenza_realta]` → `VIEW[{influenza_realta} == 5 ? "5 · Alterante" : ({influenza_realta} == 4 ? "4 · Distorsivo forte" : ({influenza_realta} == 3 ? "3 · Distorsivo lieve" : ({influenza_realta} == 2 ? "2 · Vibrazione magica" : ({influenza_realta} == 1 ? "1 · Passivo" : ("—")))))]`
+> **Allineamento Intrinseco** `INPUT[slider(minValue(1), maxValue(5), addLabels):allineamento]` → `VIEW[{allineamento} == 5 ? "5 · Legale" : ({allineamento} == 4 ? "4 · Tendente all’ordine" : ({allineamento} == 3 ? "3 · Neutrale" : ({allineamento} == 2 ? "2 · Tendente al caos" : ({allineamento} == 1 ? "1 · Caotico" : ("—")))))]`
 
 > [!note]- Natura Materiale — Livello di lavorazione e qualità della materia dell'oggetto.
 > **1 · Grezza** — Rudimentale, naturale o primitivo: un osso, una pietra, un ramo sacro.
@@ -73,12 +75,28 @@
 > **4 · Legato** — Vincolato all'anima del portatore; rompere il legame causa danni.
 > **5 · Vincolante** — Legame definitivo o consumante; il portatore è posseduto o trasfigurato.
 
+> [!note]- Influenza sulla Realtà — Descrive il grado in cui l’oggetto modifica l’ambiente, le leggi fisiche o i piani di esistenza con la sua sola presenza.
+> **1 · Passivo** — Non influenza il mondo circostante se non quando attivamente usato.
+> **2 · Vibrazione magica** — Emana un’aura percettibile solo da sensitivi o creature spirituali.
+> **3 · Distorsivo lieve** — Influenza lievemente la realtà circostante. Presenze evanescenti, suoni, sogni, variazioni atmosferiche.
+> **4 · Distorsivo forte** — La sua presenza altera il destino, l’equilibrio magico o gli eventi. Può causare prodigi o catastrofi involontarie.
+> **5 · Alterante** — L’oggetto modifica stabilmente la realtà. Piegamento dello spazio, apertura di fratture dimensionali, manipolazione delle probabilità o delle leggi cosmiche.
+
+> [!note]- Allineamento Intrinseco — Natura etica o cosmica interna dell’oggetto. Esprime se è legato a forze di ordine o disordine, indipendentemente dall’uso.
+> **1 · Caotico** — L’oggetto porta instabilità, trasgressione o cambiamento radicale. Non può essere controllato completamente.
+> **2 · Tendente al caos** — Favorisce l’autonomia, la rottura delle regole o l’individualismo.
+> **3 · Neutrale** — L’oggetto non ha un orientamento etico o cosmico definito. Risponde al volere del portatore.
+> **4 · Tendente all’ordine** — Esprime armonia, regole, strutture. Funziona meglio in contesti rituali e gerarchici.
+> **5 · Legale** — Impone equilibrio, disciplina, coerenza spirituale o cosmica. Rifiuta l’uso improprio o deviante.
+
 ```meta-bind-js-view
 {natura_materiale} as natura_materiale
 {origine} as origine
 {funzione} as funzione
 {potere_attivo} as potere_attivo
 {legame} as legame
+{influenza_realta} as influenza_realta
+{allineamento} as allineamento
 hidden
 ---
 const src = await app.vault.adapter.read("z.automazioni/views.js");

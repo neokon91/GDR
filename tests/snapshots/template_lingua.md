@@ -78,6 +78,9 @@ await views.renderClock(container, app, page);
 > **Polivalenza** `INPUT[slider(minValue(1), maxValue(5), addLabels):funzione]` → `VIEW[{funzione} == 5 ? "5 · Magica" : ({funzione} == 4 ? "4 · Sacrale" : ({funzione} == 3 ? "3 · Poetica" : ({funzione} == 2 ? "2 · Descrittiva" : ({funzione} == 1 ? "1 · Funzionale" : ("—")))))]`
 > **Origine** `INPUT[slider(minValue(1), maxValue(5), addLabels):origine]` → `VIEW[{origine} == 5 ? "5 · Iniettata" : ({origine} == 4 ? "4 · Artificiale" : ({origine} == 3 ? "3 · Riformata" : ({origine} == 2 ? "2 · Evoluta" : ({origine} == 1 ? "1 · Naturale" : ("—")))))]`
 > **Conoscibilità** `INPUT[slider(minValue(1), maxValue(5), addLabels):accesso]` → `VIEW[{accesso} == 5 ? "5 · Proibita" : ({accesso} == 4 ? "4 · Occulta" : ({accesso} == 3 ? "3 · Specializzata" : ({accesso} == 2 ? "2 · Comune rituale" : ({accesso} == 1 ? "1 · Diffusa" : ("—")))))]`
+> **Effetto Magico** `INPUT[slider(minValue(1), maxValue(5), addLabels):effetto_magico]` → `VIEW[{effetto_magico} == 5 ? "5 · Performativa" : ({effetto_magico} == 4 ? "4 · Attivante" : ({effetto_magico} == 3 ? "3 · Condizionata" : ({effetto_magico} == 2 ? "2 · Carica" : ({effetto_magico} == 1 ? "1 · Inerte" : ("—")))))]`
+> **Rischio Ontologico** `INPUT[slider(minValue(1), maxValue(5), addLabels):rischio]` → `VIEW[{rischio} == 5 ? "5 · Distruttiva" : ({rischio} == 4 ? "4 · Instabile" : ({rischio} == 3 ? "3 · Corrosiva" : ({rischio} == 2 ? "2 · Faticosa" : ({rischio} == 1 ? "1 · Sicura" : ("—")))))]`
+> **Stratificazione** `INPUT[slider(minValue(1), maxValue(5), addLabels):stratificazione]` → `VIEW[{stratificazione} == 5 ? "5 · Multiplanare" : ({stratificazione} == 4 ? "4 · Simbolica" : ({stratificazione} == 3 ? "3 · Polisemica" : ({stratificazione} == 2 ? "2 · Ambivalente" : ({stratificazione} == 1 ? "1 · Unilivello" : ("—")))))]`
 
 > [!note]- Complessità — Struttura interna della lingua, in termini di grammatica, fonologia, sintassi e irregolarità.
 > **1 · Semplice** — Struttura diretta, poche regole, vocabolario essenziale. Lingua quotidiana o infantile.
@@ -114,12 +117,36 @@ await views.renderClock(container, app, page);
 > **4 · Occulta** — Insegnata solo a membri selezionati di gilde, culti o ordini magici. La sua esistenza può essere nascosta.
 > **5 · Proibita** — La lingua è segreta e vietata. Solo chi è destinato o maledetto può comprenderla. Parlare può avere effetti cosmici o letali.
 
+> [!note]- Effetto Magico — Capacità della lingua di generare effetti concreti nella realtà attraverso la sola enunciazione.
+> **1 · Inerte** — Non produce alcun effetto al di fuori della comunicazione.
+> **2 · Carica** — Può amplificare l’emozione o l’intento del parlante, ma senza effetto oggettivo.
+> **3 · Condizionata** — Produce effetti magici solo se accompagnata da gesti, rituali o componenti specifici.
+> **4 · Attivante** — Attiva direttamente oggetti magici, portali o sigilli tramite parole chiave o formule.
+> **5 · Performativa** — Parlare **è** agire. Ogni parola pronunciata realizza un effetto magico reale, permanente o cosmico.
+
+> [!note]- Rischio Ontologico — Rischio esistenziale associato all’uso della lingua. Più è elevato, più l’uso comporta instabilità metafisica o danni all’essere.
+> **1 · Sicura** — Nessun pericolo. La lingua è stabile e non influisce sull’essenza.
+> **2 · Faticosa** — Richiede energia spirituale o concentrazione intensa. Abuso può esaurire la mente o l’anima.
+> **3 · Corrosiva** — L’uso costante erode i ricordi, altera la percezione o consuma la personalità.
+> **4 · Instabile** — Parlare può causare mutazioni, frammentazioni dell’identità o squilibri planari.
+> **5 · Distruttiva** — Ogni parola modifica il reale e chi la pronuncia. Può spezzare le leggi cosmiche. Uso prolungato implica annichilimento del sé o perdita dell’identità ontologica.
+
+> [!note]- Stratificazione — Livelli di significato presenti in ogni parola. Misura la complessità semantica della lingua.
+> **1 · Unilivello** — Ogni parola ha un significato chiaro e unico.
+> **2 · Ambivalente** — Le parole possono avere doppi sensi o ambiguità culturali.
+> **3 · Polisemica** — Ogni parola può significare più cose a seconda del contesto o dell'intonazione.
+> **4 · Simbolica** — Ogni parola è un simbolo con significati spirituali, mistici o archetipici.
+> **5 · Multiplanare** — Ogni parola esiste in più livelli semantici: reale, spirituale, magico, onirico. Serve un’iniziazione per comprenderla pienamente.
+
 ```meta-bind-js-view
 {complessita} as complessita
 {formalita} as formalita
 {funzione} as funzione
 {origine} as origine
 {accesso} as accesso
+{effetto_magico} as effetto_magico
+{rischio} as rischio
+{stratificazione} as stratificazione
 hidden
 ---
 const src = await app.vault.adapter.read("z.automazioni/views.js");
