@@ -70,8 +70,10 @@ callout *Calendario*; `73041f5`, verificato in-app: evento datato → calendario
 nomi (FCG) FATTA** (suggester inline `@` + bottone Genera su PNG/luogo/fazione; `e591a5d`,
 verificato in-app); ✅ **generatore homebrew IT** (`0b6e6ad`) + **FCG italianizzato** (`53e20b1`);
 ✅ **solidità JS** — cache `core.json` (views/boot) + **guard anti-drift** `matchesCond`
-(test-guardia, non modulo condiviso) (`a876bcc`). Restano: spell management inline; assi allo
-strato cosmico; famiglie→preset assi; report gap copertura categorie.
+(test-guardia, non modulo condiviso) (`a876bcc`); ✅ **famiglie→preset assi** (la famiglia
+pre-compila gli assi, stile archetipi; `75814c1`); ✅ **epoche sul calendario** (intervallo
+`fc-date→fc-end`; `cfbbf13`). Restano: spell management inline; assi allo strato cosmico;
+report gap copertura categorie; plugin/YAML lato UI (Metadata Menu/mappe/Initiative, da QA).
 
 ### Una riga per lente
 - **🌍 Worldbuilder** — *pronto-con-riserve*. Ontologia profonda e in più punti avanti su
@@ -388,14 +390,17 @@ le fondamenta saranno rifinite. In ordine di valore:
 
 ## Come ripartire
 
-**204 test verdi**, check 0; HEAD `a876bcc` (post-beta: **ponte Calendarium** `73041f5` +
+**205 test verdi**, check 0; HEAD `cfbbf13` (post-beta: **ponte Calendarium** `73041f5` +
 **aggancio FCG** `e591a5d`, verificati in-app, + **generatore homebrew IT** `0b6e6ad` +
 **FCG italianizzato** `53e20b1` (*QA in-app pendente — computer-use disconnesso*) +
 **solidità JS** cache+anti-drift `a876bcc`; prima: smoke test + 3 bug runtime + risorse
 combattimento + quick-win analisi). **Unica vera riserva beta rimasta: il mondo-esempio
 (blocco #1, rinviato).** *Filoni (scelta utente): generatore IT ✅, italianizzazione FCG ✅
-(parziale), solidità ✅ (cache+anti-drift); resta **plugin/YAML** + opz. famiglie→preset assi,
-report gap copertura. QA in-app dei 3 ✅ pendenti quando torna computer-use.*
+(parziale), solidità ✅ (cache+anti-drift), famiglie→preset assi ✅, epoche→calendario ✅.
+Resta del filone plugin/YAML solo la parte UI (Metadata Menu/mappe/Initiative, **da QA**) e
+opz. report gap copertura. **5 feature post-beta con QA in-app pendente** (computer-use
+disconnesso): generatore, FCG italiano, prompt-famiglia wizard, epoca-calendario, + i flussi
+runtime. Tab-extra data-driven valutato e **non fatto** (payoff marginale: il lore bespoke resta).*
 Leggi questo file + i
 docs (`architecture`/`data_model`/`rules_layer`/`play_layer`/`plugin_contracts`) + la memoria
 (`project-northstar`, `vault-due-suite`). **Fasi 1-2 coperte + rifiniture** → prossimi:
