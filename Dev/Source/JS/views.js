@@ -533,6 +533,26 @@ async function renderTemaNatale(app, page) {
   return temaNataleMarkdown(core.astrologia, page);
 }
 
+// --- Rete di collegamenti (tabella) ------------------------------------------
+// Le relazioni TIPIZZATE forward della nota (core.relazioni[categoria]) risolte
+// → tabella | Relazione | Nota | Tipo | Pressione |. Complementa "Citato da"
+// (backlink, in uscita ↔ in entrata). "" se la nota non ha ancora collegamenti.
+async function renderConnessioni(app, dv, page) {
+  if (!dv || !page) return "";
+  const core = await loadCoreData(app);
+  const rels = (core.relazioni || {})[text(page.categoria)] || [];
+  const rows = [];
+  for (const r of rels) {
+    for (const link of asArray(page[r.field])) {
+      const p = resolve(dv, link);
+      if (p) rows.push(`| ${r.label} | ${noteLink(p)} | ${text(p.categoria) || "—"} | ${pressureLabel(p.pressione)} |`);
+    }
+  }
+  if (!rows.length) return "";
+  return ["**🕸 Rete di collegamenti**", "", "| Relazione | Nota | Tipo | Pressione |",
+          "|:--|:--|:--|:--|", ...rows].join("\n");
+}
+
 // --- Mappa (luogo/mondo) -----------------------------------------------------
 // Embed della mappa collegata (campo 'mappa'): un disegno Excalidraw, un'immagine
 // o una nota. Se vuoto, un suggerimento su come crearne una. Ritorna markdown
@@ -561,4 +581,5 @@ module.exports = {
   renderCondizioni, condizioniMarkdown,
   radarMarkdownFromValues,
   renderTemaNatale, temaNataleMarkdown,
+  renderConnessioni,
 };

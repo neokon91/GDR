@@ -10,8 +10,10 @@ dadi, regole). Non serve essere tecnici: si lavora a **bottoni** e **menù**.
 > cartelle che iniziano con `z.` sono "il motore": puoi ignorarle.
 
 ## ▶️ Per iniziare in 3 passi
-1. **Una volta sola**: installa i plugin e attiva due impostazioni → vedi *Setup
-   iniziale* (§1–§2) qui sotto. Senza, le schede appaiono come testo grezzo.
+1. **Apri questo vault in Obsidian** (*Apri cartella come vault*). La prima volta
+   Obsidian chiede di **fidarti dell'autore e abilitare i plugin**: clicca
+   **«Trust author and enable plugins»**. I plugin sono già inclusi nel vault — non
+   devi installare niente. *(Se una scheda appare come testo grezzo: §1 qui sotto.)*
 2. **Apri `Home`**: è la tua plancia. Da lì crei tutto e raggiungi gli indici.
 3. **Crea il tuo primo mondo**: in Home premi **Crea → Mondo**, rispondi a poche
    domande e parti. Poi popolalo (luoghi, personaggi, fazioni…) sempre da Home.
@@ -46,8 +48,10 @@ dadi, regole). Non serve essere tecnici: si lavora a **bottoni** e **menù**.
 Le sezioni numerate qui sotto servono a preparare il vault la prima volta e come
 riferimento. Falle una volta, poi puoi dimenticartene.
 
-## 1. Plugin community richiesti
-Apri *Impostazioni → Plugin della comunità* e installa/abilita:
+## 1. Plugin community (già inclusi)
+Sono **già nel vault**: di norma basta accettare il *trust prompt* all'apertura (vedi i 3
+passi). Se qualcosa non si rende, apri *Impostazioni → Plugin della comunità*, assicurati
+che **Restricted mode** sia OFF e che questi siano **abilitati**:
 - **Templater** (`templater-obsidian`)- **Dataview** (`dataview`)- **Meta Bind** (`obsidian-meta-bind-plugin`)- **JS Engine** (`js-engine`)- **Tab Panels** (`tab-panels`)- **Callout Manager** (`callout-manager`)- **Fantasy Statblocks** (`obsidian-5e-statblocks`)- **Metadata Menu** (`metadata-menu`)- **Iconize** (`obsidian-icon-folder`)- **Calendarium** (`calendarium`)- **Dice Roller** (`obsidian-dice-roller`)- **Tasks** (`obsidian-tasks-plugin`)- **Excalidraw** (`obsidian-excalidraw-plugin`)- **Zoom Map** (`zoom-map`)- **Fantasy Content Generator** (`fantasy-content-generator`)- **BRAT** (`obsidian42-brat`)- **Homepage** (`homepage`)- **Initiative Tracker** (`initiative-tracker`)
 > [!warning] Senza questi plugin
 > Senza **Tab Panels** le note a schede appaiono come testo grezzo; senza

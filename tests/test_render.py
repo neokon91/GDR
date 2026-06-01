@@ -458,6 +458,34 @@ def test_render_condizioni(tmp_path):
 
 
 @pytest.mark.skipif(not shutil.which("node"), reason="node assente")
+def test_render_connessioni(tmp_path):
+    """views.renderConnessioni: tabella delle relazioni tipizzate forward risolte
+    (Relazione/Nota/Tipo/Pressione); vuoto se nessun collegamento."""
+    harness = tmp_path / "conn.js"
+    harness.write_text(
+        'const fs=require("fs");'
+        f'const src=fs.readFileSync({json.dumps(str(render.JS_DIR / "views.js"))},"utf8");'
+        'const m={exports:{}};new Function("module","exports",src)(m,m.exports);'
+        'const core={relazioni:{fazione:[{field:"alleati",label:"Alleati"},{field:"capi",label:"Capi"}]}};'
+        'global.app={vault:{adapter:{read:async()=>JSON.stringify(core)}}};'
+        'const target={file:{name:"Casa Rossa"},categoria:"fazione",pressione:6};'
+        'const dv={page:(l)=>((l&&l.path?l.path:l)==="[[Casa Rossa]]"?target:null)};'
+        'const page={categoria:"fazione",alleati:["[[Casa Rossa]]"],capi:null};'
+        'Promise.all(['
+        '  m.exports.renderConnessioni(app,dv,page),'
+        '  m.exports.renderConnessioni(app,dv,{categoria:"fazione"}),'
+        ']).then(([a,b])=>process.stdout.write(JSON.stringify({a,b})));',
+        encoding="utf-8")
+    res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
+    assert res.returncode == 0, res.stderr
+    out = json.loads(res.stdout)
+    assert "🕸 Rete di collegamenti" in out["a"]
+    assert "| Alleati | [[Casa Rossa]] | fazione |" in out["a"]   # relazione risolta in riga
+    assert "Tensione (6)" in out["a"]                              # pressione etichettata
+    assert out["b"] == ""                                          # nessun collegamento -> vuoto
+
+
+@pytest.mark.skipif(not shutil.which("node"), reason="node assente")
 def test_radar_markdown_from_values(tmp_path):
     """views.radarMarkdownFromValues: SVG inline (.gdr-radar) dai valori-assi passati
     (alimenta il radar REATTIVO meta-bind-js-view); messaggio se < 3 assi."""
