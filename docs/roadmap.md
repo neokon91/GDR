@@ -49,20 +49,20 @@ Collega) idealmente creando un PG + un incontro dai bottoni.*
 1. **Mondo-esempio popolato** (sforzo medio, opt-in/cancellabile in `Mondi/Esempio/`): Mondo + 2-3
    Luoghi (uno con mappa) + 1-2 Fazioni con clock + 2-3 PNG (uno col tema natale) + 1 PG + **Goblin**
    + **Imboscata sulla Strada** + 1-2 Eventi datati + 1 cosmologia/divinità/culto collegati.
-2. **Riallineare il LEGGIMI** — ✅ link morti Goblin/Imboscata tolti (→ SRD/flusso Crea) + §2
-   corretto (impostazioni già messe dalla build) [`7babc61`]. *Resta*: rendere il LEGGIMI **in vista**
-   (bookmark + callout in cima a Home).
+2. ✅ **LEGGIMI riallineato**: link morti Goblin/Imboscata tolti (→ SRD/flusso Crea) + §2 corretto
+   [`7babc61`]; LEGGIMI **in vista** (bookmark + callout in cima a Home) + blocco beta [`e2e31e4`].
 3. **Smoke test in-app** — ✅ fatto: rendering (statblock 5e/5.5e, radar, folder-notes), **wizard di
    creazione** e **chain meta_actions** (Collega) — 2 bug corretti. *Resta (basso rischio)*: gli
    altri bottoni mutativi (sali_pg/aggiorna_encounter/scatena/applica_profilo) creando un PG + un
    incontro dai bottoni — stesso chain di Collega, già validato.
 
-**Quasi-gratis (alto valore/basso sforzo):**
-4. Chiudere i **legami tipizzati mancanti** del grafo (Worldbuilder): `luogo`→{piano,cosmologia,
-   cultura,bioma}; `divinita`→piano; `evento`→{divinita,culto}; `cultura`→specie; `specie`→relazioni.
-5. Correggere la **label difficoltà "Mortale ☠️"** (non-2024) in `views.renderEncounter`.
-6. Blocco **"stai testando una beta"** nel LEGGIMI: cosa è atteso-incompleto (reattività radar,
-   level-up avanzato, FCG non agganciato) + canale di feedback.
+**Quasi-gratis — ✅ FATTI** (`e2e31e4`):
+4. ✅ **Legami tipizzati** aggiunti: `luogo`→{bioma,cultura,piano}; `divinita`→piano;
+   `evento`→{divinita,culti}; `cultura`→specie; `specie`→{luogo,culture}.
+5. ✅ **Label "Mortale ☠️" rimossa** (non-2024) in `views.renderEncounter` → solo Bassa/Moderata/Alta
+   (oltre budget Alta = avviso, non tier).
+6. ✅ Blocco **"stai testando una beta"** nel LEGGIMI (cosa è acerbo + feedback) + callout in cima a
+   Home che linka il LEGGIMI + **LEGGIMI nei bookmark** (chiude anche "LEGGIMI in vista" del blocco #2).
 
 **Post-beta / medio sforzo:** tracking risorse combattimento (PF temp/slot spesi/TS morte + riposo
 lungo); spell management inline; assi allo strato cosmico; calendario/tempo strutturato; generazione
@@ -376,8 +376,8 @@ le fondamenta saranno rifinite. In ordine di valore:
 
 ## Come ripartire
 
-**199 test verdi**, check 0; HEAD `1b02340` (cartella Media + statblock 5.5e + plugin cablati +
-guscio js-engine). **Vedi ↑ "Verdetto beta — analisi 4 lenti": il blocco #1 è il mondo-esempio.**
+**199 test verdi**, check 0; HEAD `e2e31e4` (smoke test in-app fatto + 2 bug runtime corretti +
+quick-win analisi). **Unica vera riserva beta rimasta: il mondo-esempio (blocco #1, rinviato).**
 Leggi questo file + i
 docs (`architecture`/`data_model`/`rules_layer`/`play_layer`/`plugin_contracts`) + la memoria
 (`project-northstar`, `vault-due-suite`). **Fasi 1-2 coperte + rifiniture** → prossimi:
