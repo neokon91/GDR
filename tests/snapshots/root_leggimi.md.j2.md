@@ -63,14 +63,16 @@ che **Restricted mode** sia OFF e che questi siano **abilitati**:
 > **Meta Bind** i campi `INPUT`/`VIEW` (incluso il tab *Carattere*) restano testo grezzo;
 > senza **JS Engine** il pannello *Vista* (card "pronto al tavolo?" + "Citato da") non si rende.
 
-## 2. Impostazioni da abilitare una volta
-- **Fantasy Statblocks → "Parse Frontmatter in Notes"**: ON. Serve perché le note
-  creatura (`statblock: inline`) entrino nel bestiario e siano richiamabili per nome
-  nel blocco `encounter` degli incontri.
-- **Meta Bind → "Enable JS"**: ON (lo imposta la build). Necessario per i pulsanti e le
-  viste calcolate (`VIEW[...]`).
-- **Templater → "Trigger Templater on new file creation"**: opzionale; i bottoni `Crea`
+## 2. Impostazioni (già pronte)
+La build imposta da sé le opzioni che servono — di norma **non devi toccare nulla**:
+- **Fantasy Statblocks → "Parse Frontmatter in Notes"**: già ON (le note creatura e i
+  mostri SRD entrano nel bestiario e sono richiamabili per nome con `monster:`/`encounter`).
+- **Meta Bind → "Enable JS"**: già ON (pulsanti e viste calcolate `VIEW[...]`).
+- **Templater → "Trigger Templater on new file creation"**: non serve; i bottoni `Crea`
   applicano già il template alla creazione.
+
+Se qualcosa appare come *testo grezzo*, è quasi sempre un plugin del §1 non abilitato
+(controlla *Impostazioni → Plugin della comunità*, **Restricted mode OFF**).
 
 ## 3. Come si usa
 - Apri **Home.md**: bottoni `Crea` (i fondamentali; gli altri sotto *Altri tipi*) +
@@ -82,10 +84,11 @@ che **Restricted mode** sia OFF e che questi siano **abilitati**:
   d20 normale, con vantaggio e con svantaggio.
 - Ogni nota lore ha il tab **Al tavolo** (uso al tavolo, gancio, pressione): è la
   superficie giocabile, il cuore del vault.
-- Apri **Mondi/Creature/Goblin**: esempio di statblock 5.5e (entra nel bestiario).
-- Apri **Mondi/Incontri/Imboscata sulla Strada**: il tab *Combattimento* usa il blocco
-  `encounter` che raggruppa le creature per nome dal bestiario. Collega le creature (tab
-  *Collegamenti*) e premi **Aggiorna encounter**: il blocco si riscrive da solo.
+- Vuoi vedere uno **statblock 5.5e** subito? Apri un mostro SRD già pronto, es.
+  **SRD/Mostri/Goblin guerriero** (Iniziativa, GS con PE+CB, azioni — entra nel bestiario).
+- Per un **incontro**: *Crea → Incontro*, collega le creature nel tab *Collegamenti* e premi
+  **Aggiorna encounter** nel tab *Combattimento*: il blocco `encounter` (che raggruppa le
+  creature per nome dal bestiario) si riscrive da solo.
 
 ## 4. Creare e collegare
 - **Crea** una nota dai bottoni in Home (o nell'indice di dominio): un wizard chiede
