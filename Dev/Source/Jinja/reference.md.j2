@@ -19,6 +19,9 @@
 > Cosa è, com'è, perché conta al tavolo.
 
 {{ m.wizard_body(template.category) }}
+{% if template.category == 'bastione' %}
+{{ m.ordini_bastione() }}
+{% endif %}
 {% if core.get('assi_tematici', {}).get(template.category) %}
 --- Carattere
 

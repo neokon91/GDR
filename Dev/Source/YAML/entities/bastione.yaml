@@ -12,18 +12,29 @@ templates:
   target: z.modelli/Bastione.md
   jinja: reference.md.j2
 subtypes:
-- bastione
+- torre
+- fortezza
+- santuario
+- rifugio
+- laboratorio
+- avamposto
+- tenuta
+# Bastione 2024 (DMG): livello = PG minimo (5+); difensori = n. difensori del
+# bastione. Le strutture speciali emettono ordini al turno di bastione (7 giorni).
+scheda:
+- livello
+- difensori
 relazioni:
-- field: luogo
-  label: Posizione
-  category: luogo
 - field: proprietario
   label: Proprietario
   category: personaggio
+- field: luogo
+  label: Posizione
+  category: luogo
 creation:
   fields:
   - field: tipo
-    prompt: Tipo
+    prompt: Tipo di bastione
     from: subtypes
     required: true
   - field: mondo
@@ -34,8 +45,11 @@ creation:
     optional: true
   body:
   - field: descrizione
-    prompt: Cos'e' il bastione
+    prompt: "Cos'è il bastione: aspetto, storia, ruolo"
     heading: Descrizione
   - field: strutture
-    prompt: Strutture speciali e ordini di bastione
+    prompt: "Strutture (base e speciali) e l'ordine che ciascuna emette al turno"
     heading: Strutture
+  - field: turno
+    prompt: "Turno di bastione (ogni 7 giorni): ordini dati, esiti, eventi"
+    heading: Turno di bastione

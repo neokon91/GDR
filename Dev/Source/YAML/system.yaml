@@ -14,6 +14,8 @@ fields:
   # Oggetti magici
   rarita:         { label: Rarità,               widget: rarita }
   sintonia:       { label: Sintonia,             widget: text }
+  # Bastione (2024): numero di difensori del bastione (livello = PG min, 5+).
+  difensori:      { label: Difensori,            widget: number }
   # Incantesimi
   livello:        { label: Livello,              widget: number }
   tempo_lancio:   { label: Tempo di lancio,      widget: text }

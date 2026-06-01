@@ -8,9 +8,17 @@
 > |:--|:--|
 > | **Tipo** | `VIEW[{tipo} ?? "—"]` |
 > | **Mondo** | `VIEW[{mondo}][text(renderMarkdown)]` |
+> | **Livello** | `VIEW[{livello} ?? "—"]` |
+> | **Difensori** | `VIEW[{difensori} ?? "—"]` |
 > | **Stato** | `INPUT[stato][:stato]` |
 
 ````tabs
+--- Scheda
+
+> [!abstract] Scheda
+> Livello: `INPUT[number:livello]`
+> Difensori: `INPUT[number:difensori]`
+
 --- Lore
 
 > [!note]- Descrizione
@@ -22,12 +30,31 @@
 > [!note] Strutture
 > `INPUT[textArea:strutture]`
 
+> [!note] Turno di bastione
+> `INPUT[textArea:turno]`
 
+
+> [!quote]- 🏰 Ordini di bastione 2024 (quick-ref)
+> Ogni **struttura speciale** emette un ordine al **turno di bastione** (ogni 7 giorni):
+>
+> **Fabbricare** *(Craft)* — produce un oggetto (equipaggiamento, pozione, oggetto magico…).
+>
+> **Commerciare** *(Trade)* — compra o vende beni per oro.
+>
+> **Reclutare** *(Recruit)* — aggiunge difensori al bastione.
+>
+> **Raccogliere** *(Harvest)* — raccoglie risorse o materiali.
+>
+> **Ricercare** *(Research)* — ottiene informazioni o appunti.
+>
+> **Potenziare** *(Empower)* — dà un beneficio magico temporaneo a chi parte all'avventura.
+>
+> **Mantenere** *(Maintain)* — la struttura rende oro / si autosostiene.
 --- Collegamenti
 
 > [!example] Relazioni
-> **Posizione**: `INPUT[suggester(optionQuery("Mondi/Luoghi"), useLinks(partial), allowOther):luogo]`
 > **Proprietario**: `INPUT[suggester(optionQuery("Mondi/Personaggi"), useLinks(partial), allowOther):proprietario]`
+> **Posizione**: `INPUT[suggester(optionQuery("Mondi/Luoghi"), useLinks(partial), allowOther):luogo]`
 
 > [!example] Collegamenti
 > Mondo: `INPUT[mondo][:mondo]`

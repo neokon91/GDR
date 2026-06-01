@@ -377,6 +377,29 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 ```
 {%- endmacro %}
 
+{# Quick-ref ordini di bastione 2024 (statico): i 7 ordini che una struttura
+   speciale può emettere al turno di bastione (7 giorni). Contenuto fisso (regole
+   stabili); usato dalla scheda bastione. NB: il catalogo completo delle strutture
+   speciali 2024 non è nel SRD → qui solo gli ordini. #}
+{% macro ordini_bastione() -%}
+> [!quote]- 🏰 Ordini di bastione 2024 (quick-ref)
+> Ogni **struttura speciale** emette un ordine al **turno di bastione** (ogni 7 giorni):
+>
+> **Fabbricare** *(Craft)* — produce un oggetto (equipaggiamento, pozione, oggetto magico…).
+>
+> **Commerciare** *(Trade)* — compra o vende beni per oro.
+>
+> **Reclutare** *(Recruit)* — aggiunge difensori al bastione.
+>
+> **Raccogliere** *(Harvest)* — raccoglie risorse o materiali.
+>
+> **Ricercare** *(Research)* — ottiene informazioni o appunti.
+>
+> **Potenziare** *(Empower)* — dà un beneficio magico temporaneo a chi parte all'avventura.
+>
+> **Mantenere** *(Maintain)* — la struttura rende oro / si autosostiene.
+{%- endmacro %}
+
 {# Quick-ref maestria delle armi 2024 (JS Engine): callout pieghevole con le 8
    proprietà (nome + effetto), per il richiamo rapido al tavolo. Da core.maestrie
    (system.yaml). Logica in views.renderMaestrie. #}
