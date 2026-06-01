@@ -41,7 +41,7 @@ relazioni:
 - field: controllata_da
   label: Controllata da
   category: fazione
-- field: abitanti
+- field: figure
   label: Figure
   category: personaggio
   multi: true

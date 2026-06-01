@@ -793,3 +793,35 @@ def test_famiglia_preset(tmp_path):
     assert out["guer"] == {"valori_dominanti": 3, "relazione_morte": 2, "ritualizzazione_vita": 4}
     assert out["nom"] == {}      # famiglia senza preset
     assert out["x"] == {}        # famiglia inesistente
+
+
+@pytest.mark.skipif(not shutil.which("node"), reason="node assente")
+def test_relations_to_ask(tmp_path):
+    """create_entity.relationsToAsk: il wizard offre le relazioni della categoria
+    escludendo quelle già chieste come creation.fields (no doppio-prompt).
+    personaggio: fazione/luogo (in creation) esclusi, parenti/alleati/rivali inclusi;
+    luogo: tutte le relazioni (creation = solo tipo+mondo)."""
+    def asked(cat):
+        cr = (CORE.get("creation") or {}).get(cat) or {}
+        return [q["field"] for q in (cr.get("fields") or []) + (cr.get("body") or [])]
+    rel = CORE.get("relazioni") or {}
+
+    def expected(cat):
+        return {r["field"] for r in rel.get(cat, [])} - set(asked(cat))
+
+    harness = tmp_path / "rta.js"
+    harness.write_text(
+        f'const crea=require({json.dumps(str(render.JS_DIR / "create_entity.js"))});'
+        f'const rel={json.dumps(rel, ensure_ascii=False)};'
+        f'const asked={json.dumps({"personaggio": asked("personaggio"), "luogo": asked("luogo")}, ensure_ascii=False)};'
+        'const f=(c)=>crea.relationsToAsk(rel[c], asked[c]).map(r=>r.field);'
+        'process.stdout.write(JSON.stringify({png:f("personaggio"), luogo:f("luogo")}));',
+        encoding="utf-8")
+    res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
+    assert res.returncode == 0, res.stderr
+    out = json.loads(res.stdout)
+    # Esclude le relazioni già chieste come creation.fields/body (no doppio-prompt).
+    assert set(out["png"]) == expected("personaggio")
+    assert set(out["luogo"]) == expected("luogo")
+    assert "fazione" not in out["png"] and "luogo" not in out["png"]   # già in creation.fields
+    assert {"parenti", "alleati", "rivali"} <= set(out["png"])

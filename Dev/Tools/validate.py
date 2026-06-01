@@ -137,6 +137,16 @@ def validate_split(core_raw: dict[str, Any], system_raw: dict[str, Any], merged:
                     errors.append(f"shape: famiglie[{cat}].{fam.get('nome')} -> asse '{axis}' non in assi_tematici[{cat}]")
                 elif not (isinstance(val, int) and 1 <= val <= 5):
                     errors.append(f"shape: famiglie[{cat}].{fam.get('nome')}.{axis} = {val} fuori 1-5")
+    # Una relazione NON deve collidere con un campo BODY (prosa) della stessa
+    # categoria: stessa chiave frontmatter -> doppio bind nella nota (textArea del
+    # body + suggester della relazione). La collisione con un creation FIELD (link)
+    # è invece intenzionale (è lo stesso legame, chiesto nel wizard e reso una volta).
+    creation = merged.get("creation", {}) or {}
+    for cat, rels in (merged.get("relazioni", {}) or {}).items():
+        body = {q.get("field") for q in (creation.get(cat, {}) or {}).get("body", []) or []}
+        for r in rels or []:
+            if r.get("field") in body:
+                errors.append(f"collisione: relazioni[{cat}].{r.get('field')} coincide con un campo body (doppio bind nella nota)")
     return errors
 
 

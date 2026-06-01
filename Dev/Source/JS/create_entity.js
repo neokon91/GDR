@@ -154,6 +154,14 @@ function presetValore(cond) {
   return null;
 }
 
+// Relazioni della categoria da offrire nel wizard: tutte quelle NON già chieste
+// come creation.fields (evita il doppio-prompt per i pochi link hand-aggiunti
+// al wizard, es. personaggio.fazione/luogo). Le altre restano post-creazione.
+function relationsToAsk(relazioni, askedFields) {
+  const asked = new Set(askedFields || []);
+  return (relazioni || []).filter((r) => r && r.field && !asked.has(r.field));
+}
+
 // Valori-assi di preset di una FAMIGLIA: la famiglia scelta (classificazione a 2
 // livelli) può pre-compilare gli assi tematici col campo opzionale `assi`
 // (mappa asseId -> valore 1-5). Stile archetipi, ma a partire dalla famiglia.
@@ -207,6 +215,25 @@ async function runWizard(tp, template, core) {
   }
   for (const q of optional) {
     captured[q.field] = fillNow ? await ask(tp, q, template, core) : emptyFor(q);
+  }
+
+  // Collegamenti tipizzati (relazioni della categoria): il wizard li offre ALLA
+  // CREAZIONE, così l'entità nasce agganciata al grafo invece che isola (prima
+  // i legami erano solo un passo manuale post-creazione: macro Collegamenti /
+  // bottone Collega). Opzionali e skippabili; salta quelli già chiesti come
+  // creation.fields (es. personaggio.fazione/luogo). Scrive solo i non vuoti.
+  const relsToAsk = relationsToAsk((core.relazioni ?? {})[category], questions.map((q) => q.field));
+  if (relsToAsk.length) {
+    const connect = await tp.system.suggester(
+      ["Sì, collega ora", "No, collego dopo (tab Collegamenti / Collega)"],
+      [true, false], false, `Collegare ${template.title} ad altre note ora?`
+    ) === true;
+    if (connect) {
+      for (const r of relsToAsk) {
+        const val = await chooseNotes(tp, { field: r.field, prompt: r.label, category: r.category, multi: r.multi }, false);
+        if (Array.isArray(val) ? val.length : val) captured[r.field] = val;
+      }
+    }
   }
 
   // Famiglia (classificazione a 2 livelli, opzionale): se la categoria ha famiglie,
@@ -280,6 +307,7 @@ async function create_entity(tp, templateId = "") {
   }
 }
 
-create_entity.presetValori = presetValori;    // esposto per i test
+create_entity.presetValori = presetValori;      // esposto per i test
 create_entity.famigliaPreset = famigliaPreset;  // esposto per i test
+create_entity.relationsToAsk = relationsToAsk;  // esposto per i test
 module.exports = create_entity;
