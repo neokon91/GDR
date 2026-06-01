@@ -308,8 +308,8 @@ le fondamenta saranno rifinite. In ordine di valore:
 
 ## Come ripartire
 
-**199 test verdi**, check 0; HEAD `91b7ef4` (plugin Folder Notes/Tasks/Calendarium cablati;
-guscio js-engine ridotto a `42669ed`, smoke test in-app OK). Leggi questo file + i
+**199 test verdi**, check 0; HEAD `58b54bf` (statblock 5.5e completo + creatura 2-tab;
+plugin Folder Notes/Tasks/Calendarium a `91b7ef4`; guscio js-engine `42669ed`). Leggi questo file + i
 docs (`architecture`/`data_model`/`rules_layer`/`play_layer`/`plugin_contracts`) + la memoria
 (`project-northstar`, `vault-due-suite`). **Fasi 1-2 coperte + rifiniture** → prossimi:
 - **Residui Fase 2**: level-up scelte avanzate (quick-ref condizioni ✅).
