@@ -5,14 +5,14 @@ Worldbuilder, DM 5/5.5e) + backlog prioritizzato. Lo stato tecnico dettagliato �
 in [architecture](architecture.md) / [data_model](data_model.md) /
 [rules_layer](rules_layer.md) / [play_layer](play_layer.md) / [plugin_contracts](plugin_contracts.md).
 
-> Aggiornata dopo **Fase 1 (fondamenta)** + un grosso blocco di **Fase 2**. Fase 1:
-> grafo cosmologico (5 categorie nuove) + assi, PG di 1º livello SRD-completo, note SRD
-> col contenuto pieno. Fase 2: **tag-da-assi** (archetipi/profilo) + **preset in
-> creazione**, **dashboard-ponte Mondo↔Sistema** + **dashboard Fronti**, **clock &
-> conseguenze** (ponte gioco→mondo), **difficoltà incontri** (budget XP 2024),
-> **progressione PG 2-20** (sali di livello interattivo), LEGGIMI con onboarding non
-> tecnico. **36 categorie, 20 con assi.** Tutto committato/pushato/buildato su
-> `origin/main` (HEAD `5c7522c`). **Da confermare in-app (rischio #1).**
+> Aggiornata a sessione **2026-06-01**. **Fasi 1-2 coperte** + rifiniture di questa sessione:
+> **quick-win architetturali** (3 thin-shell jinja eliminati, `build()` spezzata in helper),
+> **note SRD complete** (creature evocate inline, footer *Vedi anche*, de-dup prose),
+> **auto-riscrittura del blocco encounter**, **timeline navigabile** (pannello *Linea del
+> tempo* sulla pagina Cronologia) e **tab Mappe** su luogo/mondo. Doc plugin **completa**
+> (21 schede). **36 categorie, 20 con assi.** Tutto committato/pushato/buildato su
+> `origin/main` (HEAD `f9dc160`), **157 test verdi**, check 0. *L'esperienza in-app resta in
+> gran parte da confermare (rischio #1, QA deferita su scelta utente — ci si appoggia ai test).*
 
 ## Dove siamo (sintesi)
 
@@ -22,13 +22,15 @@ Modello fuso core+system+entities (**36 categorie**, 20 con assi), **trinità pe
 (formato ricco 1-5) con **archetipi** (combinazioni di valori-assi → tag, in creazione e
 in nota). **Grafo cosmologico** connesso. Differenziatore: **superficie giocabile** su ogni
 nota lore (`uso_al_tavolo`/`gancio`/`pressione`/`prossima_mossa`) + **clock & conseguenze**
-(un fronte pieno crea un evento → muove il mondo). **Rules-engine PG 1-20** (creazione
-SRD-completa + sali di livello interattivo: PF/competenza/slot + ASI/sottoclasse/
-incantesimi). **Difficoltà incontri** (budget XP 2024 vs GS delle creature). SRD 5.2.1 IT
-(1389 note + 334 statblock). Pannelli **JS Engine** (`views.js`: Vista, radar assi, profilo,
-clock, difficoltà incontro, progressione). Indici **Bases** `.base` + hub Dataview;
-dashboard auto **Ponte Mondo↔Sistema** e **Fronti**. Home a 2 aree, Homepage, **153 test**, check 0.
-**Stadio prodotto: scaffold ricco e profondo; l'esperienza in-app è in gran parte da confermare.**
+(un fronte pieno crea un evento → muove il mondo) + **timeline** (eventi per epoca) e **mappe**
+(tab Mappa su luogo/mondo). **Rules-engine PG 1-20** (creazione SRD-completa + sali di livello
+interattivo: PF/competenza/slot + ASI/sottoclasse/incantesimi). **Difficoltà incontri** (budget
+XP 2024 vs GS delle creature) + **auto-riscrittura del blocco `encounter`**. SRD 5.2.1 IT
+(1389 note + 334 statblock, ogni voce rende tutto il JSON). Pannelli **JS Engine** (`views.js`:
+Vista, radar assi, profilo, clock, difficoltà incontro, progressione, linea del tempo, mappa).
+Indici **Bases** `.base` + hub Dataview; dashboard auto **Ponte Mondo↔Sistema** e **Fronti**.
+Home a 2 aree, Homepage, **157 test**, check 0. **Stadio prodotto: scaffold ricco e profondo;
+l'esperienza in-app è in gran parte da confermare (QA deferita su scelta utente).**
 
 ## 🎯 Visione: due suite integrate ma separate
 
@@ -38,8 +40,8 @@ distinte e riconoscibili:
   tipizzate, assi-carattere, timeline, mappe, pantheon/cosmologia. Metro: profondità e
   coerenza.
 - **Suite DM (gestione gioco + sistema)** — *al tavolo* e *regole 5.5e*: SRD, statblock,
-  incontri/iniziativa, dadi, rules-engine PG, e a tendere clock/conseguenze. Metro:
-  immediatezza e correttezza di sistema.
+  incontri/iniziativa, dadi, rules-engine PG 1-20, clock/conseguenze, difficoltà incontri.
+  Metro: immediatezza e correttezza di sistema.
 
 **Integrate ma separate**: si collegano (una creatura del mondo alimenta un incontro, un
 luogo fa da scena, un fronte muove la trama) ma restano due esperienze distinte. La
@@ -51,38 +53,45 @@ sopra i sistemi avanzati (vedi backlog).
 
 - **Valore**: prodotto mono-utente (DM/worldbuilder) che connette mondo profondo e
   tavolo 5.5e. Il differenziatore (superficie giocabile + assi-carattere visualizzati)
-  è chiaro e ora anche *mostrato* (radar).
-- **Rischio #1 — debito di verifica in-app (cresciuto)**: l'ultima ondata (radar,
-  fix js-engine, assi 1-5, Bases) è tutta *generata* e *quasi nulla confermata* in
-  Obsidian. Serve una **QA pass strutturata** prima di allargare ancora. Il fix
-  `views.renderEntityPanel` è la prova che i bug vivono nel runtime, non nei test.
-- **Propagazione**: la logica vive nel CORPO delle note alla creazione → le note
-  vecchie non ricevono i fix (js-engine, radar, assi). Per un mono-utente è gestibile
-  (ricrea/edita), ma è attrito; va comunicato e, dove possibile, ridotto.
-- **Onboarding assente**: niente sample (scelta utente) e niente getting-started.
-  Un DM nuovo non sa da dove iniziare. Manca una guida "crea il tuo primo mondo".
-- **Core loop** sessione → incontro → fronti: i pezzi ci sono ma non sono ancora
-  "tutto a un clic" al tavolo (vedi DM).
-- **Priorità (direzione utente)**: completare le **fondamenta delle due suite** —
-  import idee FantasyWorld (worldbuilding) + ottimizzazione PG-SRD e note SRD (sistema) —
-  **prima** di aggiungere i sistemi avanzati (clock/conseguenze, timeline, mappe). La
-  **QA in-app** resta un'igiene *continua* (rischio #1): si applica a ogni pezzo di
-  fondamenta man mano, non come fase unica a parte.
+  è chiaro e *mostrato* (radar); ora rinforzato da **timeline** e **mappe** (worldbuilding)
+  e dall'**auto-encounter** (tavolo).
+- **Rischio #1 — debito di verifica in-app (standing)**: tutta la pipeline è *generata* e
+  *poco confermata* in Obsidian. Su scelta utente la **QA in-app è deferita**: ci si appoggia
+  ai **157 test** (generazione + wizard/renderer JS via node), che però **non coprono il
+  runtime Obsidian** (Meta Bind/Dataview/Templater/JS Engine). Il vecchio bug
+  `views.renderEntityPanel` ricorda che certi bug vivono solo nel runtime. *Va fatta prima o
+  poi*, idealmente a blocchi (PG/sali-livello; clock→conseguenza; incontro+aggiorna-encounter;
+  timeline; mappe).
+- **Propagazione**: la *logica* vive in `views.js` (importata a runtime → si propaga alle note
+  senza ricrearle); resta nel corpo solo il **guscio loader** js-engine (~6 righe). Attrito
+  minimo per un mono-utente; ridurre il guscio è l'ultimo quick-win architetturale (a sé,
+  perché cambia l'output → QA).
+- **Onboarding**: il **LEGGIMI** è completo (3 passi + setup + tassonomia "quale categoria
+  quando"). Manca ancora un **mondo-esempio** pronto (scelta utente: niente sample) per chi
+  vuole "vedere" prima di creare.
+- **Core loop** sessione → incontro → fronti: i pezzi ci sono e più fluidi (auto-encounter,
+  clock→conseguenza); resta da confermare in-app la catena completa.
+- **Priorità (direzione utente)**: **fondamenta delle due suite + Fase 2 sostanzialmente
+  fatte**. Prossimo valore: rifiniture (quick-ref condizioni, level-up avanzato) e **recuperi
+  FantasyWorld** (#9 sistema astrologico/tema natale su tutti). La **QA in-app** resta igiene
+  *continua* deferita (rischio #1).
 
 ## 🏗️ Architect
 
 - **Pregi**: trinità per-entità + **assi scorporati** (file entità snelli, assi come
-  glossario coeso). `render.py` modulare (common/build_srd/build_personaggio/validate),
-  merge lossless, validazione forte (confine/dup/snake/shape/entity-schema/assi),
-  snapshot + e2e wizard (creazione PG/caster, preset, level-up, profilo, clock, incontri).
-  Test (**153**, ridondanti sussunti dagli snapshot).
+  glossario coeso). `render.py` **snello** — `build()` orchestratore (~25 righe) che delega a
+  helper nominati (`write_engine_data`/`render_notes`/`write_obsidian_config`/…), moduli
+  common/build_srd/build_personaggio/validate, merge lossless, validazione forte
+  (confine/dup/snake/shape/entity-schema/assi). Snapshot + e2e wizard/renderer via node
+  (PG/caster, preset, level-up, profilo, clock, incontri, **timeline**, **mappa**,
+  **srd_note**, **aggiorna_encounter**). Test (**157**, ridondanti sussunti dagli snapshot).
   Nuova entità = 1 YAML (+1 assi); Jinja solo per layout custom (default `_entity_base.j2`).
 - **Debito/fragilità**:
-  - **Logica embeddata nelle note**: il blocco `js-engine`/`statblock`/`dataview`
-    finisce nel corpo alla creazione → modifiche a `views.js`/macro **non si
-    propagano** alle note esistenti. Il loader js-engine (CommonJS via `new Function`)
-    *attenua* (la logica vera è in `views.js`, importata a runtime) ma il blocco-guscio
-    resta nel corpo. Tendere a note sottili + logica condivisa.
+  - **Logica embeddata nelle note** (ultimo residuo): la *logica* vive in `views.js`
+    (importata a runtime → **si propaga** alle note esistenti), ma il **guscio loader**
+    js-engine (CommonJS via `new Function`, ~6 righe) resta nel corpo delle ~38 note coi
+    pannelli. Accorciarlo (ESM `importJs`) cambierebbe l'output → richiede QA in-app: a sé,
+    ROI basso. *(Thin-shell, `build()`, doc-plugin: ✅ chiusi sotto.)*
   - ✅ **Thin shell Jinja eliminati**: il default `_entity_base.j2`
     (`common.DEFAULT_JINJA`) è ora l'unico guscio condiviso; i 3 file
     `cultura`/`lingua`/`nota.md.j2` (solo `{% extends %}`) sono stati rimossi e le
@@ -96,8 +105,8 @@ sopra i sistemi avanzati (vedi backlog).
     fantasy-statblocks/tasks/dice-roller/**bases**/**callout-manager**/**iconize**/
     **homepage**/initiative-tracker/calendarium/excalidraw/zoom-map/
     fantasy-content-generator/brat), coi gotcha (es. callout collassati).
-  - **Test**: 153 verdi ma coprono la *generazione* (+ i wizard JS via node), non il runtime Obsidian
-    (Meta Bind/Dataview/Templater/JS Engine) — gap inerente, colmabile solo con QA manuale.
+  - **Test**: **157 verdi** ma coprono la *generazione* (+ wizard/renderer JS via node), non il
+    runtime Obsidian (Meta Bind/Dataview/Templater/JS Engine) — gap inerente, colmabile solo con QA manuale.
 
 ## 🌍 Worldbuilder
 
@@ -121,8 +130,9 @@ sopra i sistemi avanzati (vedi backlog).
   - **Generazione**: Fantasy Content Generator non agganciato (nomi/spunti rapidi).
   - **Fronti/clock** (`pressione`+`prossima_mossa`, stile Blades) ottimi → si possono
     approfondire con progress-clock e agende di fazione nel tempo.
-- **Azione**: timeline + mappe sono i due salti di valore worldbuilding più grossi;
-  poi pantheon/cosmologia.
+- **Azione**: timeline + mappe ✅ (i due salti più grossi) **fatti**. Prossimi: legami
+  pantheon/cosmologia più ricchi, generazione nomi/spunti, e il **sistema astrologico/
+  tema natale** (#9, recupero FantasyWorld) come profondità-personaggio opt-in.
 
 ## 🎲 DM (D&D 5/5.5e)
 
@@ -140,8 +150,8 @@ sopra i sistemi avanzati (vedi backlog).
     collegate (conta per nome, risolve i link, preserva `players`). Niente più copia-incolla.
   - **Level-up avanzato**: scelte di sottoclasse multiple/feature opzionali oltre il
     set base; il motore copre il flusso standard.
-- **Azione**: tutto da **confermare in-app** (rischio #1); poi quick-ref condizioni e le
-  rifiniture sopra.
+- **Azione**: i residui DM sono ora **quick-ref condizioni** al tavolo e **level-up avanzato**
+  (encounter auto-riscritto ✅). Conferma in-app deferita (rischio #1).
 
 ## ✅ Backlog prioritizzato
 
@@ -175,8 +185,10 @@ i sistemi avanzati. La QA in-app è igiene continua, non una fase a sé.
    scheda/incontro.
 6. ✅ **Progressione PG 2-20** — *sali di livello interattivo*: PF/competenza/slot
    automatici + scelte (ASI/talento, sottoclasse, nuovi incantesimi). Vedi [rules_layer](rules_layer.md).
-7. **Profondità worldbuilding** (residuo): timeline/calendario (Calendarium), mappe
-   (Excalidraw/TTRPG Tools-Maps), legami cosmologia↔culto↔divinità più ricchi.
+7. **Profondità worldbuilding**: ✅ **timeline navigabile** (pannello *Linea del tempo* su
+   Cronologia, `views.renderTimeline`) + ✅ **mappe** (tab Mappa su luogo/mondo, campo `mappa`
+   + `views.renderMap`). *Residuo*: legami cosmologia↔culto↔divinità più ricchi; calendario
+   strutturato (Calendarium) se servisse.
 8. ✅ **Arricchimento tassonomico** — **tag-da-assi** (archetipi: combinazioni di valori →
    tag, vista *Profilo* + bottone *Applica*) + **preset in creazione** (archetipo→pre-compila
    gli assi). Vedi [play_layer](play_layer.md).
@@ -211,9 +223,19 @@ le fondamenta saranno rifinite. In ordine di valore:
   `js-engine` nel corpo) — **cambia l'output delle note → richiede QA in-app**, quindi a sé.
 - Generazione nomi/spunti (Fantasy Content Generator) e integrazioni minori quando comodo.
 
+### ✅ Fatto (sessione 2026-06-01)
+- **Quick-win architetturali** (output invariato, manifest byte-identico): 3 thin-shell jinja
+  eliminati; `build()` spezzata in helper nominati. (`8c29ad4`)
+- **Auto-riscrittura blocco encounter** — bottone *Aggiorna encounter* (`meta_actions`). (`9c87ca5`)
+- **Note SRD complete** — `srd_note` rende tutto il JSON: creature evocate inline, footer
+  *Vedi anche* (link risolti), de-dup prose. (`cbbdb08`)
+- **Timeline navigabile** (pannello su Cronologia) + **tab Mappe** (luogo/mondo). (`f9dc160`)
+- **Docs**: roadmap + 4 lenti riallineate; play_layer/architecture aggiornati; LEGGIMI con
+  timeline/mappe/auto-encounter. **157 test**, check 0. HEAD `f9dc160`.
+
 ### ✅ Fatto (sessione 2026-05-31)
-- **Fase 1 fondamenta**: doc plugin (20 schede), grafo cosmologico (5 categorie), PG-SRD
-  di 1º livello, note SRD col contenuto recuperato.
+- **Fase 1 fondamenta**: doc plugin (poi completata a 21 schede), grafo cosmologico (5 categorie),
+  PG-SRD di 1º livello, note SRD col contenuto recuperato.
 - **Fase 2 (gran parte)**: tag-da-assi (archetipi/profilo) + preset in creazione; dashboard
   **Ponte Mondo↔Sistema** + **Fronti**; **clock & conseguenze**; **difficoltà incontri**
   (2024); **progressione PG 2-20**; LEGGIMI onboarding non tecnico. HEAD `5c7522c`.
@@ -222,12 +244,14 @@ le fondamenta saranno rifinite. In ordine di valore:
 
 ## Come ripartire
 
-**153 test verdi**, check 0; HEAD `5c7522c` (tutto pushato+buildato). Leggi questo file + i
+**157 test verdi**, check 0; HEAD `f9dc160` (tutto pushato+buildato). Leggi questo file + i
 docs (`architecture`/`data_model`/`rules_layer`/`play_layer`/`plugin_contracts`) + la memoria
-(`project-northstar`, `vault-due-suite`). **Fasi 1-2 in gran parte coperte** → prossimi:
-- **QA in-app** (rischio #1, molto alto): crea un PG e fai *Sali di livello*; prova clock →
-  *Scatena conseguenza* (+ Indici/Fronti); collega creature a un incontro e leggi la
-  difficoltà; archetipo/profilo su un culto; Ponte; note SRD (condizioni/classi).
-- **Residui Fase 2**: quick-ref condizioni al tavolo; timeline/mappe (Calendarium/Excalidraw);
-  level-up scelte avanzate. (✅ auto-riscrittura blocco encounter — `aggiorna_encounter`.)
-- **Recuperi FantasyWorld** (#9-11): sistema astrologico/personalità, glossari subtypes, alberi evolutivi.
+(`project-northstar`, `vault-due-suite`). **Fasi 1-2 coperte + rifiniture** → prossimi:
+- **Residui Fase 2**: quick-ref condizioni al tavolo; level-up scelte avanzate.
+- **Recuperi FantasyWorld** (#9-11): **#9 sistema astrologico/tema natale** (il differenziatore
+  "wow", opt-in per mondo), #10 glossari subtypes, #11 alberi evolutivi.
+- **Worldbuilding**: legami pantheon/cosmologia più ricchi; generazione nomi/spunti.
+- **QA in-app** (rischio #1, deferita su scelta utente): quando si vuole, a blocchi — crea un PG
+  e *Sali di livello*; clock → *Scatena conseguenza* (+ Fronti); incontro + *Aggiorna encounter*;
+  **Cronologia** (timeline); **tab Mappa** su un luogo; archetipo/profilo; note SRD.
+- **Architettura** (a sé, ROI basso): ridurre il guscio js-engine nelle note.

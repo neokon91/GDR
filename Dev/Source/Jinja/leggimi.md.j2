@@ -27,8 +27,12 @@ dadi, regole). Non serve essere tecnici: si lavora a **bottoni** e **menù**.
   come tag. Quando crei, puoi anche partire da un **archetipo** già pronto.
 - **Un personaggio giocante**: **Crea → PG**, scegli classe/specie/background e
   l'aiutante riempie la scheda (punti ferita, tiri salvezza, abilità, incantesimi).
+- **Mappe e linea del tempo**: ogni *Luogo* e *Mondo* ha un tab **Mappa** — colleghi un
+  disegno o un'immagine e la vedi dentro la nota. La pagina **Cronologia** mostra i tuoi
+  **eventi su una linea del tempo**, raggruppati per epoca e ordinati nel tempo.
 - **Al tavolo**: in Home c'è il riquadro *Al tavolo*; ogni incontro ha i tiri di dado
-  cliccabili e il combattimento con l'iniziativa.
+  cliccabili e il combattimento con l'iniziativa. Nel tab *Combattimento* il bottone
+  **Aggiorna encounter** riempie la lista delle creature dalle note che hai collegato.
 - **Dove trovo le cose**: **Home** (plancia), **Indici** (Atlante/Bestiario/Cast/…),
   **Ponte Mondo↔Sistema** (cosa del mondo ha già statistiche di gioco), **SRD** (regole
   ufficiali). Sono tutte nei segnalibri, a sinistra.
@@ -75,7 +79,8 @@ Apri *Impostazioni → Plugin della comunità* e installa/abilita:
   superficie giocabile, il cuore del vault.
 - Apri **Mondi/Creature/Goblin**: esempio di statblock 5.5e (entra nel bestiario).
 - Apri **Mondi/Incontri/Imboscata sulla Strada**: il tab *Combattimento* usa il blocco
-  `encounter` che raggruppa le creature per nome dal bestiario.
+  `encounter` che raggruppa le creature per nome dal bestiario. Collega le creature (tab
+  *Collegamenti*) e premi **Aggiorna encounter**: il blocco si riscrive da solo.
 
 ## 4. Creare e collegare
 - **Crea** una nota dai bottoni in Home (o nell'indice di dominio): un wizard chiede
@@ -86,27 +91,31 @@ Apri *Impostazioni → Plugin della comunità* e installa/abilita:
 - Preferisci il pannello **Proprietà** di Obsidian? I campi sono tipizzati (Metadata
   Menu): `stato`/`tipo` sono menu a tendina, le relazioni sono link.
 
-## 5. Calendario in-game (Calendarium) — opzionale
-Il calendario è specifico del tuo mondo, quindi va creato una volta a mano:
-*Impostazioni → Calendarium → New Calendar* (parti da un preset o creane uno).
-Poi gli **Eventi** (campo `quando`) e le **Sessioni** (`data`) possono essere mostrati
-sul calendario aggiungendo `fc-date`. Intanto la pagina **Cronologia** ordina già gli
-eventi per `quando`, senza configurazione.
+## 5. Linea del tempo e calendario
+La pagina **Cronologia** (nei segnalibri) mostra in cima una **Linea del tempo**: tutti i
+tuoi **Eventi** raggruppati per **Epoca** e ordinati per data del mondo (campo `quando`),
+in riquadri apribili — senza alcuna configurazione. Per far apparire un evento, basta crearlo
+con un `quando` e, se vuoi, collegarlo a un'**Epoca**.
 
-## 6. Mappe (Zoom Map)
-Per mappe grandi pannabili/zoomabili:
-1. Metti l'immagine nel vault (es. una cartella `Mappe/` o tra gli allegati).
-2. Nella nota, aggiungi un blocco:
-   ````
-   ```zoommap
-   imageBases:
-     - path: Mappe/continente.png
-   ```
-   ````
-**Dove agganciare cosa:** la mappa del continente/regno va sul **Mondo**; la mappa
-locale (città, regione) sul **Luogo** di tipo *regione/insediamento*; la pianta di un
-dungeon sul **Luogo** di tipo *dungeon/struttura*. Collega poi i punti d'interesse con
-i normali `[[link]]` alle note Luogo.
+*Opzionale (Calendarium)*: se vuoi un **calendario** vero del tuo mondo, va creato una volta a
+mano: *Impostazioni → Calendarium → New Calendar* (parti da un preset). Poi Eventi e Sessioni
+si possono mostrare sul calendario aggiungendo `fc-date` nel frontmatter.
+
+## 6. Mappe
+Ogni **Luogo** e **Mondo** ha un tab **Mappa** già pronto. Nel campo *Mappa* colleghi:
+- un **disegno Excalidraw** (disegni la mappa a mano dentro Obsidian), oppure
+- un'**immagine** che hai trascinato nel vault, oppure
+- un'altra **nota**.
+La mappa appare subito embeddata nella scheda. Se il campo è vuoto, il tab ti spiega come
+crearne una.
+
+**Dove agganciare cosa:** la mappa del continente/regno va sul **Mondo**; la mappa locale
+(città, regione) sul **Luogo** di tipo *regione/insediamento*; la pianta di un dungeon sul
+**Luogo** di tipo *dungeon/struttura*. Collega poi i punti d'interesse con i normali
+`[[link]]` alle note Luogo.
+
+*Per mappe molto grandi, pannabili/zoomabili* (Zoom Map): metti l'immagine nel vault e usa un
+blocco `zoommap` con `imageBases: [{ path: Mappe/continente.png }]`.
 
 ## 7. Callout GDR (Callout Manager)
 I callout **Uso al tavolo**, **Gancio** e **Segreto** hanno colore/icona propri
