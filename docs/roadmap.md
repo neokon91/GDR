@@ -235,10 +235,13 @@ sopra i sistemi avanzati (vedi backlog).
   `insidia` orfana → ✅ wired (`65b29b0`); ✅ **(a) wizard "connetti alla creazione"** — offre
   le relazioni della categoria nel wizard (gate opzionale, dedup vs creation.fields; `16dc3ab`),
   + corretta la collisione `luogo.abitanti` relazione↔body (→ `figure`) + guard in validate.
-  **Aperti** (rinviati): **(b) assi allo strato cosmico** (dominio/entita_primordiale/
+  ✅ **(c) inverse tipizzati** — *auto-derivati* (niente authoring): `Collega` scrive il reverse
+  tipizzato quando la coppia è univoca (`reciprocalField`; ambiguo/assente → generico
+  `connessioni`) + **dashboard "Rete del mondo"** (orfani/snodi via Dataview `file.inlinks`)
+  (`51acb45`). **Aperti**: **(b) assi allo strato cosmico** (dominio/entita_primordiale/
   legge_fondamentale/piano senza assi → Carattere vuoto) + scheda per cosmologia/dominio;
-  **(c) inverse tipizzati** (campo `inverse` sulle relazioni → reverse tipizzato invece del
-  generico `connessioni`).
+  *residuo*: inverse anche nel wizard-connect (oggi solo `Collega`); CSS feel-wiki; maestrie
+  armi + Bastioni 2024.
 
 ## 🎲 DM (D&D 5/5.5e)
 
@@ -399,18 +402,19 @@ le fondamenta saranno rifinite. In ordine di valore:
 
 ## Come ripartire
 
-**206 test verdi**, check 0; HEAD `16dc3ab` (post-beta: **ponte Calendarium** `73041f5` +
+**208 test verdi**, check 0; HEAD `51acb45` (post-beta: **ponte Calendarium** `73041f5` +
 **aggancio FCG** `e591a5d`, verificati in-app, + **generatore homebrew IT** `0b6e6ad` +
 **FCG italianizzato** `53e20b1` + **solidità JS** `a876bcc` + **wire insidia** `65b29b0` +
-**wizard connetti-alla-creazione** `16dc3ab` (*QA in-app pendente — computer-use disconnesso*);
-prima: smoke test + 3 bug runtime + risorse combattimento + quick-win analisi). **Unica vera
-riserva beta rimasta: il mondo-esempio (blocco #1, rinviato).** *Filoni (scelta utente):
-generatore IT ✅, italianizzazione FCG ✅ (parziale), solidità ✅, famiglie→preset assi ✅,
-epoche→calendario ✅, wizard connetti-alla-creazione ✅. Resta del filone plugin/YAML solo la
-parte UI (Metadata Menu/mappe/Initiative, **da QA**); aperti opz. (b) assi cosmici, (c) inverse
-tipizzati, report gap copertura. **6 feature post-beta con QA in-app pendente** (computer-use
-disconnesso): generatore, FCG italiano, prompt-famiglia wizard, epoca-calendario, wizard
-connetti, + flussi runtime. Tab-extra data-driven valutato e **non fatto** (payoff marginale).*
+**wizard connetti-alla-creazione** `16dc3ab` + **connessione** (inverse tipizzati in Collega +
+dashboard Rete del mondo) `51acb45` (*QA in-app pendente — computer-use disconnesso*); prima:
+smoke test + 3 bug runtime + risorse combattimento + quick-win analisi). **Unica vera riserva
+beta rimasta: il mondo-esempio (blocco #1, rinviato).** *Filoni (scelta utente): generatore IT ✅,
+italianizzazione FCG ✅ (parziale), solidità ✅, famiglie→preset assi ✅, epoche→calendario ✅,
+wizard connetti ✅, inverse tipizzati + dashboard rete ✅. In corso (scelta utente): **CSS
+feel-wiki**, **5.5e maestrie armi + Bastioni**. Mappe = **Zoom Map** (no Leaflet, scelta utente);
+no Breadcrumbs. **7 feature post-beta con QA in-app pendente** (computer-use disconnesso):
+generatore, FCG italiano, prompt-famiglia wizard, epoca-calendario, wizard connetti, Collega
+inverso + dashboard, + flussi runtime. Tab-extra data-driven valutato e **non fatto**.*
 Leggi questo file + i
 docs (`architecture`/`data_model`/`rules_layer`/`play_layer`/`plugin_contracts`) + la memoria
 (`project-northstar`, `vault-due-suite`). **Fasi 1-2 coperte + rifiniture** → prossimi:
