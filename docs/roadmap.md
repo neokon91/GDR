@@ -11,7 +11,7 @@ in [architecture](architecture.md) / [data_model](data_model.md) /
 > **auto-riscrittura del blocco encounter**, **timeline navigabile** (pannello *Linea del
 > tempo* sulla pagina Cronologia) e **tab Mappe** su luogo/mondo. Doc plugin **completa**
 > (21 schede). **36 categorie, 20 con assi.** Tutto committato/pushato/buildato su
-> `origin/main` (HEAD `af354c3`), **161 test verdi**, check 0. *L'esperienza in-app resta in
+> `origin/main` (HEAD `51bd020`), **161 test verdi**, check 0. *L'esperienza in-app resta in
 > gran parte da confermare (rischio #1, QA deferita su scelta utente — ci si appoggia ai test).*
 
 ## Dove siamo (sintesi)
@@ -112,9 +112,9 @@ sopra i sistemi avanzati (vedi backlog).
 ## 🌍 Worldbuilder
 
 - **Pregi**: ontologia ricca (36 categorie, grafo cosmologico connesso), **classificazione a 2
-  livelli** (famiglia tematica curata + tipo, su 9 entità lore, con legenda auto-documentante),
-  relazioni tipizzate, **assi tematici 1-5
-  con etichette+descrizioni** (seed FantasyWorld, formato "fatto bene") + **radar** di
+  livelli** (famiglia tematica curata + tipo, su **14 entità**, con legenda auto-documentante),
+  relazioni tipizzate, **assi tematici 1-5 con etichette+descrizioni** (seed FantasyWorld,
+  formato "fatto bene"; **~8 per entità** dopo l'integrazione assi FW) + **radar** di
   carattere e **confronto fra entità**. Entità lore arricchite bespoke (luogo/mondo/
   fazione/cultura/oggetto/creatura/cosmologia/personaggio). **Template reattivi**: gli slider
   del Carattere mostrano l'**etichetta-valore attiva** (es. *4 · Gerarchico*) e l'header un
@@ -250,8 +250,11 @@ le fondamenta saranno rifinite. In ordine di valore:
   Carattere + ritratto calcolato/icona in `identita_card` (`VIEW` reattivo); radar migrato a
   **`meta-bind-js-view`** (ridisegno live, fallback al frontmatter; reattività da QA). (`64c1514`)
 - **Classificazione a 2 livelli** (`famiglia` + tipo, recupero #10): plumbing generico +
-  **9 entità** lore con famiglie curate FW (luogo/fazione/evento/cultura/divinità/specie/
-  epoca/lingua + ruoli png), legenda auto-documentante. **161 test**, check 0. HEAD `af354c3`.
+  **14 entità** — famiglie curate FW (luogo/fazione/evento/cultura/divinità/specie/epoca/
+  lingua) + ruoli png + minori hand-authored (cosmologia/dominio/legge/incontro/insidia),
+  legenda auto-documentante. (`5800a20`+`af354c3`+`13a7816`)
+- **Assi integrati da FantasyWorld** (espansione curata 5→~8): 9 entità portate a 8 assi
+  (i 3 FW più distintivi mancanti); le 5 senza assi restano tali. **161 test**. HEAD `51bd020`.
 
 ### ✅ Fatto (sessione 2026-05-31)
 - **Fase 1 fondamenta**: doc plugin (poi completata a 21 schede), grafo cosmologico (5 categorie),
@@ -264,7 +267,7 @@ le fondamenta saranno rifinite. In ordine di valore:
 
 ## Come ripartire
 
-**161 test verdi**, check 0; HEAD `af354c3` (tutto pushato+buildato). Leggi questo file + i
+**161 test verdi**, check 0; HEAD `51bd020` (tutto pushato+buildato). Leggi questo file + i
 docs (`architecture`/`data_model`/`rules_layer`/`play_layer`/`plugin_contracts`) + la memoria
 (`project-northstar`, `vault-due-suite`). **Fasi 1-2 coperte + rifiniture** → prossimi:
 - **Residui Fase 2**: level-up scelte avanzate (quick-ref condizioni ✅).
