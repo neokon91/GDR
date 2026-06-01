@@ -256,13 +256,17 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
    agenda. 'quando' resta l'etichetta in prosa (e la nostra timeline); fc-date è
    la data macchina nel formato del calendario attivo. Calendario/categoria sono
    opzionali (destinazione / colore); vuoti = calendario di default. #}
-{% macro calendario() -%}
+{% macro calendario(range=false) -%}
 > [!abstract]- Calendario
-> Data: {{ field('fc-date', label=false) }} — nel formato del calendario attivo (Gregorian: AAAA-MM-GG).
+> {{ 'Inizio' if range else 'Data' }}: {{ field('fc-date', label=false) }} — nel formato del calendario attivo (Gregorian: AAAA-MM-GG).
+{% if range %}
+>
+> Fine: {{ field('fc-end', label=false) }} — l'epoca compare come intervallo sul calendario.
+{% endif %}
 >
 > Calendario: {{ field('fc-calendar', label=false) }} · Categoria: {{ field('fc-category', label=false) }}
 >
-> Compila *Data* per far comparire l'evento sul calendario. Lascia vuoti calendario/categoria per il calendario di default.
+> Compila *{{ 'Inizio (e Fine)' if range else 'Data' }}* per far comparire {{ "l'epoca" if range else "l'evento" }} sul calendario. Lascia vuoti calendario/categoria per il calendario di default.
 {%- endmacro %}
 
 {# Generazione nomi/spunti (Fantasy Content Generator, opzionale): due vie.

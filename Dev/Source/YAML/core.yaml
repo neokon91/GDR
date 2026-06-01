@@ -40,6 +40,7 @@ fields:
   # del calendario attivo (Gregorian: YYYY-MM-DD). fc-calendar/fc-category sono
   # opzionali (nome del calendario di destinazione / categoria-colore).
   fc-date:        { label: "Data (calendario)",  widget: text }
+  fc-end:         { label: "Fine (calendario)",  widget: text }
   fc-calendar:    { label: "Calendario",         widget: text }
   fc-category:    { label: "Categoria evento",   widget: text }
   allineamento:   { label: Allineamento,         widget: allineamento }

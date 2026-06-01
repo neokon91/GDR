@@ -10,6 +10,7 @@ templates:
   title: Epoca
   default_type: era storica
   target: z.modelli/Epoca.md
+  jinja: epoca.md.j2
   primary: true
 subtypes:
 - era cosmica
@@ -57,6 +58,12 @@ creation:
     optional: true
   - field: fine
     prompt: Fine (data/era del mondo)
+    optional: true
+  - field: fc-date
+    prompt: 'Inizio sul calendario (opz., formato del calendario attivo, es. 0001-01-01)'
+    optional: true
+  - field: fc-end
+    prompt: 'Fine sul calendario (opz., es. 0500-12-31)'
     optional: true
   body:
   - field: panorama

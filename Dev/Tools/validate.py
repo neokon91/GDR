@@ -30,7 +30,7 @@ SNAKE_RE = re.compile(r"^[a-z][a-z0-9_]*$")
 # terzo le richiede col nome esatto. fc-* = chiavi-evento di Calendarium (ponte
 # 'tempo del mondo'): il plugin legge fc-date/fc-calendar/fc-category dal
 # frontmatter, quindi i nomi col trattino sono obbligati, non un refuso.
-INTEROP_FIELDS = {"fc-date", "fc-calendar", "fc-category"}
+INTEROP_FIELDS = {"fc-date", "fc-end", "fc-calendar", "fc-category"}
 
 # Sezioni "di piano": devono restare nel rispettivo file. tavolo/assi_tematici/
 # states (il differenziatore worldbuilding) solo in core.yaml; scheda/statblock/

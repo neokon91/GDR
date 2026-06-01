@@ -142,6 +142,16 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "epoca", null);
 ```
 
+--- Cronologia
+
+> [!abstract]- Calendario
+> Inizio: `INPUT[text:fc-date]` — nel formato del calendario attivo (Gregorian: AAAA-MM-GG).
+>
+> Fine: `INPUT[text:fc-end]` — l'epoca compare come intervallo sul calendario.
+>
+> Calendario: `INPUT[text:fc-calendar]` · Categoria: `INPUT[text:fc-category]`
+>
+> Compila *Inizio (e Fine)* per far comparire l'epoca sul calendario. Lascia vuoti calendario/categoria per il calendario di default.
 --- Collegamenti
 
 > [!example] Relazioni
