@@ -64,17 +64,18 @@ Collega) idealmente creando un PG + un incontro dai bottoni.*
 6. ✅ Blocco **"stai testando una beta"** nel LEGGIMI (cosa è acerbo + feedback) + callout in cima a
    Home che linka il LEGGIMI + **LEGGIMI nei bookmark** (chiude anche "LEGGIMI in vista" del blocco #2).
 
-**Post-beta / medio sforzo:** tracking risorse combattimento (PF temp/slot spesi/TS morte + riposo
-lungo); spell management inline; assi allo strato cosmico; calendario/tempo strutturato; generazione
-nomi (FCG); `clean()` robusto + cache `core.json` in boot + anti-drift JS (matchesCond duplicato).
+**Post-beta / medio sforzo:** ✅ **risorse combattimento FATTE** (PF temp, TS morte, tabella slot,
+Riposo lungo — `205af81`, verificate in-app). Restano: spell management inline; assi allo strato
+cosmico; calendario/tempo strutturato; generazione nomi (FCG); `clean()` robusto + cache `core.json`
+in boot + anti-drift JS (matchesCond duplicato).
 
 ### Una riga per lente
 - **🌍 Worldbuilder** — *pronto-con-riserve*. Ontologia profonda e in più punti avanti su
   Obsidian-TTRPG-Community/FantasyWorld (strato cosmico, tema natale, assi-carattere, guida
   tassonomica). Riserva: profondità invisibile al primo avvio → mondo-esempio.
-- **🎲 DM 5.5e** — *pronto-con-riserve*. Statblock 2024 fedeli, PG SRD-completo, level-up 2-20,
-  condizioni/budget incontri corretti. Riserve: link-morti onboarding, label "Mortale", manca
-  tracking risorse in combattimento.
+- **🎲 DM 5.5e** — *pronto*. Statblock 2024 fedeli, PG SRD-completo, level-up 2-20, condizioni/budget
+  incontri corretti, **risorse combattimento** (PF temp/TS morte/slot/Riposo lungo). Riserve DM
+  originali tutte chiuse (link-morti ✅, label Mortale ✅, tracking risorse ✅). Resta opz.: spell mgmt inline.
 - **🏗️ Architect** — *pronto-con-riserve*. Single-source validata, pipeline idempotente, merge
   config non distruttivo, guscio JS isolato, test su logica reale. Riserva unica forte: **zero
   copertura runtime** (i 199 test danno falsa sicurezza) → smoke test in-app.
@@ -376,7 +377,7 @@ le fondamenta saranno rifinite. In ordine di valore:
 
 ## Come ripartire
 
-**199 test verdi**, check 0; HEAD `e2e31e4` (smoke test in-app fatto + 2 bug runtime corretti +
+**199 test verdi**, check 0; HEAD `205af81` (smoke test + 3 bug runtime corretti + risorse combattimento +
 quick-win analisi). **Unica vera riserva beta rimasta: il mondo-esempio (blocco #1, rinviato).**
 Leggi questo file + i
 docs (`architecture`/`data_model`/`rules_layer`/`play_layer`/`plugin_contracts`) + la memoria
