@@ -218,7 +218,9 @@ sopra i sistemi avanzati (vedi backlog).
   - ✅ **Generazione**: due vie su PNG/luogo/fazione. **Generatore homebrew** (italiano,
     a tema, legato all'ontologia via `stile_nomi`): nomi persona/toponimi/fazioni, bottone
     *Genera (locale)* (`generatori.yaml`+`genera.js`, `0b6e6ad`; QA in-app pendente). + **FCG**
-    (rapido, EN): suggester inline `@` + bottone *Genera* (modale) (`e591a5d`).
+    (rapido): suggester inline `@` + bottone *Genera* (modale) (`e591a5d`), ora **italianizzato**
+    nei generatori configurabili (monete/locande/bevande via `fcg_it.yaml`, `53e20b1`; QA
+    pendente). *Rinviati FCG*: dungeon/gruppi/bottino/città (frasi/branching).
   - **Fronti/clock** (`pressione`+`prossima_mossa`, stile Blades) ottimi → si possono
     approfondire con progress-clock e agende di fazione nel tempo.
 - **Azione**: timeline + mappe ✅, generazione nomi (FCG) ✅, calendario (Calendarium) ✅.
@@ -384,12 +386,12 @@ le fondamenta saranno rifinite. In ordine di valore:
 
 ## Come ripartire
 
-**202 test verdi**, check 0; HEAD `0b6e6ad` (post-beta: **ponte Calendarium** `73041f5` +
-**aggancio FCG** `e591a5d`, verificati in-app, + **generatore homebrew IT** `0b6e6ad`, *QA
-in-app pendente — computer-use disconnesso*; prima: smoke test + 3 bug runtime + risorse
-combattimento + quick-win analisi). **Unica vera riserva beta rimasta: il mondo-esempio
-(blocco #1, rinviato).** *Filoni in corso (scelta utente): generatore IT ✅, poi
-italianizzazione FCG via config, solidità (anti-drift JS/cache/clean/validazione), plugin/YAML.*
+**203 test verdi**, check 0; HEAD `53e20b1` (post-beta: **ponte Calendarium** `73041f5` +
+**aggancio FCG** `e591a5d`, verificati in-app, + **generatore homebrew IT** `0b6e6ad` +
+**FCG italianizzato** `53e20b1`, *QA in-app pendente — computer-use disconnesso*; prima:
+smoke test + 3 bug runtime + risorse combattimento + quick-win analisi). **Unica vera riserva
+beta rimasta: il mondo-esempio (blocco #1, rinviato).** *Filoni (scelta utente): generatore IT ✅,
+italianizzazione FCG ✅ (parziale), poi solidità (anti-drift JS/cache/clean/validazione), plugin/YAML.*
 Leggi questo file + i
 docs (`architecture`/`data_model`/`rules_layer`/`play_layer`/`plugin_contracts`) + la memoria
 (`project-northstar`, `vault-due-suite`). **Fasi 1-2 coperte + rifiniture** → prossimi:
