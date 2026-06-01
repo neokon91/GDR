@@ -11,7 +11,7 @@ in [architecture](architecture.md) / [data_model](data_model.md) /
 > **auto-riscrittura del blocco encounter**, **timeline navigabile** (pannello *Linea del
 > tempo* sulla pagina Cronologia) e **tab Mappe** su luogo/mondo. Doc plugin **completa**
 > (21 schede). **36 categorie, 20 con assi.** Tutto committato/pushato/buildato su
-> `origin/main` (HEAD `51bd020`), **161 test verdi**, check 0. *L'esperienza in-app resta in
+> `origin/main` (HEAD `5d71c7e`), **163 test verdi**, check 0. *L'esperienza in-app resta in
 > gran parte da confermare (rischio #1, QA deferita su scelta utente — ci si appoggia ai test).*
 
 ## Dove siamo (sintesi)
@@ -28,9 +28,9 @@ interattivo: PF/competenza/slot + ASI/sottoclasse/incantesimi). **Difficoltà in
 XP 2024 vs GS delle creature) + **auto-riscrittura del blocco `encounter`**. SRD 5.2.1 IT
 (1389 note + 334 statblock, ogni voce rende tutto il JSON). Pannelli **JS Engine** (`views.js`:
 Vista, radar assi, profilo, clock, difficoltà incontro, progressione, linea del tempo, mappa,
-quick-ref condizioni).
+quick-ref condizioni, tema natale).
 Indici **Bases** `.base` + hub Dataview; dashboard auto **Ponte Mondo↔Sistema** e **Fronti**.
-Home a 2 aree, Homepage, **161 test**, check 0. **Stadio prodotto: scaffold ricco e profondo;
+Home a 2 aree, Homepage, **163 test**, check 0. **Stadio prodotto: scaffold ricco e profondo;
 l'esperienza in-app è in gran parte da confermare (QA deferita su scelta utente).**
 
 ## 🎯 Visione: due suite integrate ma separate
@@ -58,7 +58,7 @@ sopra i sistemi avanzati (vedi backlog).
   e dall'**auto-encounter** (tavolo).
 - **Rischio #1 — debito di verifica in-app (standing)**: tutta la pipeline è *generata* e
   *poco confermata* in Obsidian. Su scelta utente la **QA in-app è deferita**: ci si appoggia
-  ai **161 test** (generazione + wizard/renderer JS via node), che però **non coprono il
+  ai **163 test** (generazione + wizard/renderer JS via node), che però **non coprono il
   runtime Obsidian** (Meta Bind/Dataview/Templater/JS Engine). Il vecchio bug
   `views.renderEntityPanel` ricorda che certi bug vivono solo nel runtime. *Va fatta prima o
   poi*, idealmente a blocchi (PG/sali-livello; clock→conseguenza; incontro+aggiorna-encounter;
@@ -74,8 +74,8 @@ sopra i sistemi avanzati (vedi backlog).
   clock→conseguenza); resta da confermare in-app la catena completa.
 - **Priorità (direzione utente)**: **fondamenta delle due suite + Fase 2 sostanzialmente
   fatte**. Prossimo valore: rifiniture (quick-ref condizioni, level-up avanzato) e **recuperi
-  FantasyWorld** (#9 sistema astrologico/tema natale su tutti). La **QA in-app** resta igiene
-  *continua* deferita (rischio #1).
+  FantasyWorld** (#9 tema natale ✅ fatto; restano legami cosmo, glossari subtypes residui,
+  alberi evolutivi). La **QA in-app** resta igiene *continua* deferita (rischio #1).
 
 ## 🏗️ Architect
 
@@ -85,7 +85,7 @@ sopra i sistemi avanzati (vedi backlog).
   common/build_srd/build_personaggio/validate, merge lossless, validazione forte
   (confine/dup/snake/shape/entity-schema/assi). Snapshot + e2e wizard/renderer via node
   (PG/caster, preset, level-up, profilo, clock, incontri, **timeline**, **mappa**,
-  **condizioni**, **srd_note**, **aggiorna_encounter**). Test (**161**, ridondanti sussunti dagli snapshot).
+  **condizioni**, **srd_note**, **aggiorna_encounter**). Test (**163**, ridondanti sussunti dagli snapshot).
   Nuova entità = 1 YAML (+1 assi); Jinja solo per layout custom (default `_entity_base.j2`).
 - **Debito/fragilità**:
   - **Logica embeddata nelle note** (ultimo residuo): la *logica* vive in `views.js`
@@ -106,7 +106,7 @@ sopra i sistemi avanzati (vedi backlog).
     fantasy-statblocks/tasks/dice-roller/**bases**/**callout-manager**/**iconize**/
     **homepage**/initiative-tracker/calendarium/excalidraw/zoom-map/
     fantasy-content-generator/brat), coi gotcha (es. callout collassati).
-  - **Test**: **161 verdi** ma coprono la *generazione* (+ wizard/renderer JS via node), non il
+  - **Test**: **163 verdi** ma coprono la *generazione* (+ wizard/renderer JS via node), non il
     runtime Obsidian (Meta Bind/Dataview/Templater/JS Engine) — gap inerente, colmabile solo con QA manuale.
 
 ## 🌍 Worldbuilder
@@ -205,15 +205,14 @@ i sistemi avanzati. La QA in-app è igiene continua, non una fase a sé.
 ### 🔮 Da recuperare da FantasyWorld (analizzato 2026-05-31, NON ancora importato)
 Materiale ricco in `/Users/andrea/Desktop/projects/FantasyWorld/JSON/`, da valutare quando
 le fondamenta saranno rifinite. In ordine di valore:
-9. **Sistema astrologico / psico-archetipico** (`JSON/astrologia/`, sistema
-   "tarocchi_psicoarchetipici") — un layer *destino/personalità* completo e coeso: **segni
-   zodiacali** (12, con elemento/modalità/archetipo/MBTI/pianeti dominanti), **arcani
-   maggiori** (tarocchi), **archetipi** di personalità, **pianeti** (10), **case** (12),
-   **cammini** + dei del cammino, **elementi** (4), **piani astrali**, e **tema natale**
-   (profilo MBTI + elemento/modalità/segno/arcano per un personaggio). *Recupero*: un campo
-   `tema_natale`/`archetipo` su **personaggio** (profilo rapido) + categorie astrologiche
-   opzionali (segno/arcano/pianeta) per i mondi dove l'astrologia conta. **Differenziatore
-   worldbuilding forte** (profondità del personaggio); pesante, quindi opt-in per mondo.
+9. ✅ **Tema natale / psico-archetipico** (`JSON/astrologia/`) — importato come layer
+   **personalità + allineamento per i personaggi** (soprattutto PNG, scelta utente). Una
+   scelta (**segno**) → profilo derivato coerente: **archetipo** psico-astrale + elemento/
+   modalità + **MBTI** + manifestazioni + **ombra**; **arcano** (carta del destino) opzionale;
+   **allineamento D&D** accanto. Catalogo distillato in `astrologia.yaml` (12 segni/22 arcani/
+   4 elementi) → `core.json`; `views.renderTemaNatale`; campi `segno`/`arcano` su personaggio.
+   *Espansione futura (rinviata)*: categorie astrologiche (segno/arcano/pianeta) come entità
+   per i mondi dove l'astrologia conta davvero, e i layer pesanti (case/cammini/pianeti/piani).
 10. ✅ **Glossari di categoria FW** (`JSON/generale/glossari/*_cat.json`) — **classificazione
     a 2 livelli** `famiglia` (curata, con descrizioni + legenda auto-documentante) **+** `tipo`
     (subtypes). Plumbing generico (common→`core.categories`, fileClass select, macro
@@ -254,7 +253,10 @@ le fondamenta saranno rifinite. In ordine di valore:
   lingua) + ruoli png + minori hand-authored (cosmologia/dominio/legge/incontro/insidia),
   legenda auto-documentante. (`5800a20`+`af354c3`+`13a7816`)
 - **Assi integrati da FantasyWorld** (espansione curata 5→~8): 9 entità portate a 8 assi
-  (i 3 FW più distintivi mancanti); le 5 senza assi restano tali. **161 test**. HEAD `51bd020`.
+  (i 3 FW più distintivi mancanti); le 5 senza assi restano tali. (`51bd020`)
+- **Tema natale** (#9, personalità + allineamento per i personaggi): segno → archetipo/
+  elemento/MBTI/ombra + arcano + allineamento D&D (`astrologia.yaml`→core.json,
+  `views.renderTemaNatale`, campi segno/arcano su pg+png). **163 test**. HEAD `5d71c7e`.
 
 ### ✅ Fatto (sessione 2026-05-31)
 - **Fase 1 fondamenta**: doc plugin (poi completata a 21 schede), grafo cosmologico (5 categorie),
@@ -267,7 +269,7 @@ le fondamenta saranno rifinite. In ordine di valore:
 
 ## Come ripartire
 
-**161 test verdi**, check 0; HEAD `51bd020` (tutto pushato+buildato). Leggi questo file + i
+**163 test verdi**, check 0; HEAD `5d71c7e` (tutto pushato+buildato). Leggi questo file + i
 docs (`architecture`/`data_model`/`rules_layer`/`play_layer`/`plugin_contracts`) + la memoria
 (`project-northstar`, `vault-due-suite`). **Fasi 1-2 coperte + rifiniture** → prossimi:
 - **Residui Fase 2**: level-up scelte avanzate (quick-ref condizioni ✅).
