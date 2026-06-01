@@ -133,6 +133,22 @@ const page = dv && file ? dv.page(file.path) : null;
 await views.renderAxesRadar(container, app, page);
 ```
 
+--- Mappa
+
+> [!info] Mappa
+> Collega una mappa: `INPUT[mappa][:mappa]`
+>
+> Disegnala con **Excalidraw**, usa **Zoom Map** per immagini grandi, o trascina un'immagine nel vault e collegala.
+```js-engine
+const src = await app.vault.adapter.read("z.automazioni/views.js");
+const mod = { exports: {} };
+new Function("module", "exports", src)(mod, mod.exports);
+const views = mod.exports;
+const dv = app.plugins.plugins.dataview && app.plugins.plugins.dataview.api;
+const file = app.workspace.getActiveFile();
+const page = dv && file ? dv.page(file.path) : null;
+return engine.markdown.create(await views.renderMap(app, dv, page));
+```
 --- Collegamenti
 
 > [!example] Relazioni

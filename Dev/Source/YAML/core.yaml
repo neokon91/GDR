@@ -42,6 +42,8 @@ fields:
   temi:           { label: Temi,                 widget: temi }
   clima:          { label: Clima,                widget: clima }
   popolazione:    { label: Popolazione,          widget: text }
+  # Mappa collegata (luogo/mondo): link a un disegno Excalidraw, un'immagine o una nota.
+  mappa:          { label: Mappa,                widget: mappa }
   portata:        { label: Portata,              widget: portata }
   pronomi:        { label: Pronomi,              widget: text }
   eta:            { label: Età,                  widget: text }

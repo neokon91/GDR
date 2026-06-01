@@ -381,6 +381,66 @@ def test_aggiorna_encounter_e2e(tmp_path):
 
 
 @pytest.mark.skipif(not shutil.which("node"), reason="node assente")
+def test_render_timeline(tmp_path):
+    """views.renderTimeline: raggruppa gli eventi per epoca (callout), li ordina
+    per 'quando', esclude le archiviate, mette 'Senza epoca' in fondo, risolve i
+    link epoca e mostra l'intervallo inizio–fine dell'epoca."""
+    harness = tmp_path / "timeline.js"
+    harness.write_text(
+        'const fs=require("fs");'
+        f'const src=fs.readFileSync({json.dumps(str(render.JS_DIR / "views.js"))},"utf8");'
+        'const m={exports:{}};new Function("module","exports",src)(m,m.exports);'
+        # Dataset: 1 epoca + 3 eventi attivi (2 nell\'epoca, 1 senza) + 1 archiviato.
+        'const era={file:{name:"Prima",path:"ep/Prima.md"},categoria:"epoca",inizio:"anno 0",fine:"anno 500"};'
+        'const all=[era,'
+        ' {file:{name:"Guerra",path:"e/G.md"},categoria:"evento",stato:"pronto",quando:"anno 300",epoca:{path:"ep/Prima.md"},portata:"globale",tipo:"conflitto"},'
+        ' {file:{name:"Fondazione",path:"e/F.md"},categoria:"evento",stato:"pronto",quando:"anno 100",epoca:{path:"ep/Prima.md"},portata:"regionale"},'
+        ' {file:{name:"Presagio",path:"e/P.md"},categoria:"evento",stato:"bozza",quando:"anno 50"},'
+        ' {file:{name:"Vecchio",path:"e/V.md"},categoria:"evento",stato:"archiviata",quando:"anno 1"}];'
+        'const dv={pages:()=>({where:(fn)=>({array:()=>all.filter(fn)})}),'
+        ' page:(l)=>{const p=l&&l.path?l.path:l;return all.find(x=>x.file&&(x.file.path===p||x.file.name===p))||null;}};'
+        'm.exports.renderTimeline({},dv,null).then(out=>process.stdout.write(out));',
+        encoding="utf-8")
+    res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
+    assert res.returncode == 0, res.stderr
+    out = res.stdout
+    assert out.startswith("**3 eventi** · 1 epoca")        # archiviato escluso; 1 epoca
+    assert "🏛 Prima · anno 0 – anno 500 (2)" in out        # link epoca risolto + intervallo + conteggio
+    assert "🌫 Senza epoca" in out                          # evento senza epoca raggruppato
+    # ordinamento per 'quando' dentro l'epoca: Fondazione (100) prima di Guerra (300)
+    assert out.index("[[Fondazione]]") < out.index("[[Guerra]]")
+    # l'epoca (inizio 0) precede 'Senza epoca' (in fondo)
+    assert out.index("🏛 Prima") < out.index("🌫 Senza epoca")
+    assert "**anno 100** [[Fondazione]] · regionale" in out
+    assert "[[Vecchio]]" not in out                          # archiviato non compare
+
+
+@pytest.mark.skipif(not shutil.which("node"), reason="node assente")
+def test_render_map(tmp_path):
+    """views.renderMap: embed ![[..]] della mappa collegata (Link Dataview o
+    stringa), con suggerimento se il campo è vuoto."""
+    harness = tmp_path / "map.js"
+    harness.write_text(
+        'const fs=require("fs");'
+        f'const src=fs.readFileSync({json.dumps(str(render.JS_DIR / "views.js"))},"utf8");'
+        'const m={exports:{}};new Function("module","exports",src)(m,m.exports);'
+        'const link={mappa:{path:"Mondi/Mappe/Valdoria.excalidraw.md"}};'
+        'const str={mappa:"[[Atlante.png]]"};'
+        'Promise.all(['
+        '  m.exports.renderMap({},{},link),'
+        '  m.exports.renderMap({},{},str),'
+        '  m.exports.renderMap({},{},{}),'
+        ']).then(([a,b,c])=>process.stdout.write(JSON.stringify({a,b,c})));',
+        encoding="utf-8")
+    res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
+    assert res.returncode == 0, res.stderr
+    out = json.loads(res.stdout)
+    assert out["a"] == "![[Valdoria.excalidraw]]"   # Link risolto al basename (senza .md)
+    assert out["b"] == "![[Atlante.png]]"            # stringa [[..]] -> embed immagine
+    assert out["c"].startswith("> [!tip] Nessuna mappa")  # campo vuoto -> guida
+
+
+@pytest.mark.skipif(not shutil.which("node"), reason="node assente")
 def test_sali_pg_e2e(tmp_path):
     """sali_pg.js sale un PG di livello (mock Obsidian): un mago L1->L2 aggiorna
     livello/competenza/slot dalla progressione e i PF (media fissa + mod COS)."""

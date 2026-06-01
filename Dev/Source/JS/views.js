@@ -395,6 +395,98 @@ async function renderProgressione(app, page) {
   return out;
 }
 
+// --- Timeline / cronologia ---------------------------------------------------
+// Estrae il primo intero da una data del mondo testuale ("anno 1234", "1200 PE")
+// per ordinare; null se non c'è un numero (allora si ordina per stringa).
+function quandoNum(value) {
+  const m = String(value == null ? "" : value).match(/-?\d+/);
+  return m ? parseInt(m[0], 10) : null;
+}
+
+function cmpQuando(a, b) {
+  const na = quandoNum(a), nb = quandoNum(b);
+  if (na != null && nb != null) return na - nb;
+  if (na != null) return -1;
+  if (nb != null) return 1;
+  return String(a == null ? "" : a).localeCompare(String(b == null ? "" : b));
+}
+
+// Nome dell'epoca da un link del frontmatter (oggetto Link Dataview o stringa).
+function epocaLabel(dv, link) {
+  if (!link) return "";
+  const p = resolve(dv, link);
+  if (p && p.file) return p.file.name;
+  if (link.path) return String(link.path).split("/").pop().replace(/\.md$/, "");
+  return text(link).replace(/\[\[|\]\]/g, "").split("|")[0].trim();
+}
+
+// Linea del tempo navigabile: tutti gli eventi raggruppati per epoca (callout
+// pieghevole), ordinati per 'quando'; le epoche si ordinano per 'inizio' (poi per
+// primo evento), "Senza epoca" in fondo. Ritorna markdown (i [[link]] si rendono).
+// La pagina Cronologia la mostra in cima, con la tabella sotto come dettaglio.
+async function renderTimeline(app, dv, page) {
+  if (!dv) return "*Dataview non attivo.*";
+  const eventi = dv.pages()
+    .where((p) => p && text(p.categoria) === "evento" && text(p.stato) !== "archiviata")
+    .array();
+  if (!eventi.length) {
+    return "> [!info] Nessun evento\n> Crea un **Evento** (campo *Quando* + un'*Epoca*) per popolare la linea del tempo.";
+  }
+  const eraInfo = {};
+  for (const ep of dv.pages().where((p) => p && text(p.categoria) === "epoca").array()) {
+    if (ep.file) eraInfo[ep.file.name] = { inizio: ep.inizio, fine: ep.fine };
+  }
+  const SENZA = "Senza epoca";
+  const groups = new Map();
+  for (const e of eventi) {
+    const key = epocaLabel(dv, e.epoca) || SENZA;
+    if (!groups.has(key)) groups.set(key, []);
+    groups.get(key).push(e);
+  }
+  const sortKey = (name) => {
+    if (name === SENZA) return [1, Infinity];
+    const ini = quandoNum((eraInfo[name] || {}).inizio);
+    if (ini != null) return [0, ini];
+    const first = groups.get(name).map((e) => quandoNum(e.quando)).filter((n) => n != null).sort((a, b) => a - b)[0];
+    return [0, first == null ? Infinity : first];
+  };
+  const ordered = [...groups.keys()].sort((a, b) => {
+    const ka = sortKey(a), kb = sortKey(b);
+    return ka[0] - kb[0] || ka[1] - kb[1] || a.localeCompare(b);
+  });
+  const blocchi = [];
+  for (const name of ordered) {
+    const evs = groups.get(name).slice().sort((a, b) => cmpQuando(a.quando, b.quando));
+    const info = eraInfo[name] || {};
+    const span = [text(info.inizio), text(info.fine)].filter(Boolean).join(" – ");
+    const testa = name === SENZA ? `🌫 ${SENZA}` : `🏛 ${name}`;
+    const righe = [`> [!abstract]- ${testa}${span ? ` · ${span}` : ""} (${evs.length})`];
+    for (const e of evs) {
+      const meta = [text(e.portata), text(e.tipo)].filter(Boolean).join(" · ");
+      righe.push(`> - **${text(e.quando) || "—"}** ${noteLink(e)}${meta ? ` · ${meta}` : ""}`);
+    }
+    blocchi.push(righe.join("\n"));
+  }
+  const eras = ordered.filter((n) => n !== SENZA).length;
+  return `**${eventi.length} eventi** · ${eras} ${eras === 1 ? "epoca" : "epoche"}\n\n` + blocchi.join("\n\n");
+}
+
+// --- Mappa (luogo/mondo) -----------------------------------------------------
+// Embed della mappa collegata (campo 'mappa'): un disegno Excalidraw, un'immagine
+// o una nota. Se vuoto, un suggerimento su come crearne una. Ritorna markdown
+// (l'embed ![[..]] si rende; gestisce Link Dataview o stringa).
+async function renderMap(app, dv, page) {
+  if (!page) return "*Apri una nota.*";
+  const raw = page.mappa;
+  let name = "";
+  if (raw && raw.path) name = String(raw.path).split("/").pop().replace(/\.md$/, "");
+  else if (raw) name = text(raw).replace(/^\[\[/, "").replace(/\]\]$/, "").split("|")[0].trim();
+  if (!name) {
+    return "> [!tip] Nessuna mappa\n> Imposta il campo **Mappa** qui sopra: disegnala con **Excalidraw** (mappa a mano), usa **Zoom Map** per immagini grandi, o trascina un'immagine nel vault e collegala.";
+  }
+  return `![[${name}]]`;
+}
+
 module.exports = {
   renderEntityPanel, renderSessionPanel, renderBacklinks,
   renderAxesRadar, renderAxesCompare, radarSvg, clampAxis,
@@ -402,4 +494,6 @@ module.exports = {
   renderClock, clockSvg,
   renderEncounter, xpForCreature,
   renderProgressione,
+  renderTimeline, quandoNum, epocaLabel,
+  renderMap,
 };

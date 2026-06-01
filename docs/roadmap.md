@@ -91,12 +91,11 @@ sopra i sistemi avanzati (vedi backlog).
     helper nominati (`write_engine_data`/`render_notes`/`write_obsidian_config` con un
     writer per plugin/`scaffold_folders`). Refactor a output invariato (manifest del
     vault byte-identico).
-  - **Doc plugin parziale**: `Dev/Reference/` ha 10 schede (core/templater/dataview/
-    js-engine/tab-panels/meta-bind/metadata-menu/statblocks/tasks/dice). Mancano i
-    plugin già cablati nella pipeline ma non documentati — **bases** (`.base`),
-    **callout-manager** (qui il gotcha *callout collassati*), **iconize**, **homepage** —
-    e quelli installati-ma-non-integrati (initiative-tracker/calendarium/excalidraw/
-    zoom-map/fantasy-content-generator/brat). Richiesta utente: una per plugin, con gotcha.
+  - ✅ **Doc plugin completa**: `Dev/Reference/` ha **21 schede** — una per ogni plugin
+    cablato (core/templater/dataview/meta-bind/js-engine/tab-panels/metadata-menu/
+    fantasy-statblocks/tasks/dice-roller/**bases**/**callout-manager**/**iconize**/
+    **homepage**/initiative-tracker/calendarium/excalidraw/zoom-map/
+    fantasy-content-generator/brat), coi gotcha (es. callout collassati).
   - **Test**: 153 verdi ma coprono la *generazione* (+ i wizard JS via node), non il runtime Obsidian
     (Meta Bind/Dataview/Templater/JS Engine) — gap inerente, colmabile solo con QA manuale.
 
@@ -107,11 +106,14 @@ sopra i sistemi avanzati (vedi backlog).
   carattere e **confronto fra entità**. Entità lore arricchite bespoke (luogo/mondo/
   fazione/cultura/oggetto/creatura/cosmologia/personaggio).
 - **Gap per mondi profondi**:
-  - **Timeline/storia**: la categoria **epoca** ora esiste (gli eventi possono collegarsi
-    a un'epoca) → ere/epoche coperte come dato. Manca ancora la **vista cronologica**
-    (Calendarium non integrato): calendario/asse temporale navigabile.
-  - **Mappe**: nessuna integrazione (Excalidraw / Zoom Map oltre il doc LEGGIMI) —
-    luoghi/mondi le vogliono.
+  - ✅ **Timeline/storia**: la categoria **epoca** + la **vista cronologica** ora ci sono —
+    pagina *Cronologia* col pannello **Linea del tempo** (`views.renderTimeline`): eventi
+    raggruppati per epoca (callout pieghevoli), ordinati per `quando`. *Residuo*: un
+    calendario vero e proprio (Calendarium con date strutturate) se servisse.
+  - ✅ **Mappe**: luogo e mondo hanno una **tab Mappa** (campo `mappa` + embed via
+    `views.renderMap`) che mostra un disegno **Excalidraw**, un'immagine o una nota; se
+    vuota guida a crearne una (Excalidraw / Zoom Map / immagine trascinata). *Residuo*:
+    mappe interattive con pin cliccabili (Zoom Map avanzato).
   - **Cosmologia/pantheon**: le categorie **divinità**, **culto** e **mito** ora esistono
     → il pantheon è coperto come dato. Restano da approfondire i **legami**
     cosmologia↔luogo↔culto↔divinità e gli oggetti che FantasyWorld aveva (leggi/entità

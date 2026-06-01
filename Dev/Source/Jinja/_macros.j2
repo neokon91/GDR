@@ -299,6 +299,25 @@ return engine.markdown.create(await views.renderEncounter(app, dv, page));
 ```
 {%- endmacro %}
 
+{# Tab Mappa (luogo/mondo): collega ed embedda una mappa (disegno Excalidraw,
+   immagine o nota) col campo 'mappa'; l'embed vive in views.renderMap. #}
+{% macro mappa() -%}
+> [!info] Mappa
+> Collega una mappa: {{ field('mappa', label=false) }}
+>
+> Disegnala con **Excalidraw**, usa **Zoom Map** per immagini grandi, o trascina un'immagine nel vault e collegala.
+```js-engine
+const src = await app.vault.adapter.read("z.automazioni/views.js");
+const mod = { exports: {} };
+new Function("module", "exports", src)(mod, mod.exports);
+const views = mod.exports;
+const dv = app.plugins.plugins.dataview && app.plugins.plugins.dataview.api;
+const file = app.workspace.getActiveFile();
+const page = dv && file ? dv.page(file.path) : null;
+return engine.markdown.create(await views.renderMap(app, dv, page));
+```
+{%- endmacro %}
+
 {# Progressione PG (JS Engine): privilegi acquisiti al livello + anteprima del
    prossimo (views.renderProgressione, da personaggio.json). Il bottone 'Sali di
    livello' (statico, processato da Meta Bind) applica PF/competenza/slot e guida

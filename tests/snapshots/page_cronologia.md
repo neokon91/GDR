@@ -5,6 +5,16 @@
 > [!example] Crea
 > `BUTTON[crea-evento]`
 
+## 🕰 Linea del tempo
+```js-engine
+const src = await app.vault.adapter.read("z.automazioni/views.js");
+const mod = { exports: {} };
+new Function("module", "exports", src)(mod, mod.exports);
+const views = mod.exports;
+const dv = app.plugins.plugins.dataview && app.plugins.plugins.dataview.api;
+return engine.markdown.create(await views.renderTimeline(app, dv));
+```
+
 ## Tutte le voci
 ```dataview
 table without id file.link as Nome, quando as "Quando", mondo as "Mondo"

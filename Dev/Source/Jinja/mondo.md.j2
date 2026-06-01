@@ -14,3 +14,9 @@
 
 {{ m.wizard_body(template.category) }}
 {% endblock %}
+{% block extra_tabs %}
+{% import '_macros.j2' as m with context %}
+--- Mappa
+
+{{ m.mappa() }}
+{% endblock %}

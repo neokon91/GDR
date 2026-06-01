@@ -54,6 +54,8 @@ pages:
     title: "📜 Cronologia"
     category: evento
     intro: Gli eventi del mondo in ordine di tempo.
+    # Pannello timeline (views.renderTimeline): eventi per epoca, in cima alla pagina.
+    panel: timeline
     sort: "quando asc"
     columns:
       - { field: quando,    label: Quando }
