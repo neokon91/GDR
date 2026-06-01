@@ -65,9 +65,10 @@ Collega) idealmente creando un PG + un incontro dai bottoni.*
    Home che linka il LEGGIMI + **LEGGIMI nei bookmark** (chiude anche "LEGGIMI in vista" del blocco #2).
 
 **Post-beta / medio sforzo:** ✅ **risorse combattimento FATTE** (PF temp, TS morte, tabella slot,
-Riposo lungo — `205af81`, verificate in-app). Restano: spell management inline; assi allo strato
-cosmico; calendario/tempo strutturato; generazione nomi (FCG); `clean()` robusto + cache `core.json`
-in boot + anti-drift JS (matchesCond duplicato).
+Riposo lungo — `205af81`, verificate in-app); ✅ **ponte Calendarium FATTO** (`evento`→`fc-date`,
+callout *Calendario*; `73041f5`, verificato in-app: evento datato → calendario). Restano: spell
+management inline; assi allo strato cosmico; generazione nomi (FCG); `clean()` robusto + cache
+`core.json` in boot + anti-drift JS (matchesCond duplicato).
 
 ### Una riga per lente
 - **🌍 Worldbuilder** — *pronto-con-riserve*. Ontologia profonda e in più punti avanti su
@@ -202,8 +203,9 @@ sopra i sistemi avanzati (vedi backlog).
 - **Gap per mondi profondi**:
   - ✅ **Timeline/storia**: la categoria **epoca** + la **vista cronologica** ora ci sono —
     pagina *Cronologia* col pannello **Linea del tempo** (`views.renderTimeline`): eventi
-    raggruppati per epoca (callout pieghevoli), ordinati per `quando`. *Residuo*: un
-    calendario vero e proprio (Calendarium con date strutturate) se servisse.
+    raggruppati per epoca (callout pieghevoli), ordinati per `quando`. ✅ **Calendario vero
+    e proprio**: `evento` emette `fc-date` → compare su **Calendarium** (callout *Calendario*,
+    `73041f5`, verificato in-app). Il calendario del mondo si crea in-app dai preset (opt-in).
   - ✅ **Mappe**: luogo e mondo hanno una **tab Mappa** (campo `mappa` + embed via
     `views.renderMap`) che mostra un disegno **Excalidraw**, un'immagine o una nota; se
     vuota guida a crearne una (Excalidraw / Zoom Map / immagine trascinata). *Residuo*:
@@ -273,8 +275,8 @@ i sistemi avanzati. La QA in-app è igiene continua, non una fase a sé.
    automatici + scelte (ASI/talento, sottoclasse, nuovi incantesimi). Vedi [rules_layer](rules_layer.md).
 7. **Profondità worldbuilding**: ✅ **timeline navigabile** (pannello *Linea del tempo* su
    Cronologia, `views.renderTimeline`) + ✅ **mappe** (tab Mappa su luogo/mondo, campo `mappa`
-   + `views.renderMap`). *Residuo*: legami cosmologia↔culto↔divinità più ricchi; calendario
-   strutturato (Calendarium) se servisse.
+   + `views.renderMap`) + ✅ **calendario strutturato** (ponte `evento`→`fc-date`→Calendarium,
+   `73041f5`). *Residuo*: legami cosmologia↔culto↔divinità più ricchi.
 8. ✅ **Arricchimento tassonomico** — **tag-da-assi** (archetipi: combinazioni di valori →
    tag, vista *Profilo* + bottone *Applica*) + **preset in creazione** (archetipo→pre-compila
    gli assi). Vedi [play_layer](play_layer.md).
@@ -377,8 +379,9 @@ le fondamenta saranno rifinite. In ordine di valore:
 
 ## Come ripartire
 
-**199 test verdi**, check 0; HEAD `205af81` (smoke test + 3 bug runtime corretti + risorse combattimento +
-quick-win analisi). **Unica vera riserva beta rimasta: il mondo-esempio (blocco #1, rinviato).**
+**199 test verdi**, check 0; HEAD `73041f5` (post-beta: **ponte Calendarium** `evento`→`fc-date`,
+verificato in-app; prima: smoke test + 3 bug runtime + risorse combattimento + quick-win analisi).
+**Unica vera riserva beta rimasta: il mondo-esempio (blocco #1, rinviato).**
 Leggi questo file + i
 docs (`architecture`/`data_model`/`rules_layer`/`play_layer`/`plugin_contracts`) + la memoria
 (`project-northstar`, `vault-due-suite`). **Fasi 1-2 coperte + rifiniture** → prossimi:
