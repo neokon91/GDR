@@ -286,7 +286,8 @@ le fondamenta saranno rifinite. In ordine di valore:
 
 ## Come ripartire
 
-**164 test verdi**, check 0; HEAD `c600232` (tutto pushato+buildato). Leggi questo file + i
+**165 test verdi**, check 0; HEAD `42669ed` (guscio js-engine ridotto, tutto pushato+buildato
++ smoke test in-app OK). Leggi questo file + i
 docs (`architecture`/`data_model`/`rules_layer`/`play_layer`/`plugin_contracts`) + la memoria
 (`project-northstar`, `vault-due-suite`). **Fasi 1-2 coperte + rifiniture** → prossimi:
 - **Residui Fase 2**: level-up scelte avanzate (quick-ref condizioni ✅).
