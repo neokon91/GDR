@@ -66,9 +66,10 @@ Collega) idealmente creando un PG + un incontro dai bottoni.*
 
 **Post-beta / medio sforzo:** ✅ **risorse combattimento FATTE** (PF temp, TS morte, tabella slot,
 Riposo lungo — `205af81`, verificate in-app); ✅ **ponte Calendarium FATTO** (`evento`→`fc-date`,
-callout *Calendario*; `73041f5`, verificato in-app: evento datato → calendario). Restano: spell
-management inline; assi allo strato cosmico; generazione nomi (FCG); `clean()` robusto + cache
-`core.json` in boot + anti-drift JS (matchesCond duplicato).
+callout *Calendario*; `73041f5`, verificato in-app: evento datato → calendario); ✅ **generazione
+nomi (FCG) FATTA** (suggester inline `@` + bottone Genera su PNG/luogo/fazione; `e591a5d`,
+verificato in-app). Restano: spell management inline; assi allo strato cosmico; `clean()` robusto
++ cache `core.json` in boot + anti-drift JS (matchesCond duplicato).
 
 ### Una riga per lente
 - **🌍 Worldbuilder** — *pronto-con-riserve*. Ontologia profonda e in più punti avanti su
@@ -214,12 +215,13 @@ sopra i sistemi avanzati (vedi backlog).
     → il pantheon è coperto come dato. Restano da approfondire i **legami**
     cosmologia↔luogo↔culto↔divinità e gli oggetti che FantasyWorld aveva (leggi/entità
     primordiali/domini) come relazioni tipizzate vere.
-  - **Generazione**: Fantasy Content Generator non agganciato (nomi/spunti rapidi).
+  - ✅ **Generazione**: Fantasy Content Generator agganciato (nomi/spunti) — suggester
+    inline `@` + bottone *Genera* (modale) su PNG/luogo/fazione (`e591a5d`).
   - **Fronti/clock** (`pressione`+`prossima_mossa`, stile Blades) ottimi → si possono
     approfondire con progress-clock e agende di fazione nel tempo.
-- **Azione**: timeline + mappe ✅ (i due salti più grossi) **fatti**. Prossimi: legami
-  pantheon/cosmologia più ricchi, generazione nomi/spunti, e il **sistema astrologico/
-  tema natale** (#9, recupero FantasyWorld) come profondità-personaggio opt-in.
+- **Azione**: timeline + mappe ✅, generazione nomi (FCG) ✅, calendario (Calendarium) ✅.
+  Prossimi: legami pantheon/cosmologia più ricchi e il **sistema astrologico/tema natale**
+  (#9, recupero FantasyWorld) come profondità-personaggio opt-in.
 
 ## 🎲 DM (D&D 5/5.5e)
 
@@ -312,10 +314,11 @@ le fondamenta saranno rifinite. In ordine di valore:
   (ereditano `_entity_base.j2`); ✅ spezzata `build()` in render.py (helper nominati,
   output invariato); ✅ **ridotto il guscio js-engine** (corpo nota = una riga via `boot.mjs`
   ESM). Tutti i quick-win architetturali chiusi.
-- **Plugin non sfruttati** (analisi fatta): ✅ Folder Notes, Tasks, Calendarium (vedi sotto).
-  *Rinviato*: **Fantasy Content Generator** (l'utente lo vuole in corpo+wizard, ma quando il
-  wizard sarà strutturato meglio). *Igiene*: BRAT è opzionale per lo ZIP (i plugin sono
-  bundlati → si caricano col trust-prompt a prescindere dallo store; serve solo per aggiornarli).
+- **Plugin non sfruttati** (analisi fatta): ✅ Folder Notes, Tasks, Calendarium (vedi sotto) +
+  ✅ **Fantasy Content Generator** (in corpo nota: suggester inline `@` + bottone *Genera*;
+  niente hook wizard perché FCG non espone un'API richiamabile — `e591a5d`). *Igiene*: BRAT è
+  opzionale per lo ZIP (i plugin sono bundlati → si caricano col trust-prompt a prescindere
+  dallo store; serve solo per aggiornarli).
 
 ### ✅ Fatto (sessione 2026-06-01)
 - **Statblock 5e → 5.5e (Fantasy Statblocks)**: il layout `5-5e-ita` era già fedele al 2024
@@ -379,8 +382,9 @@ le fondamenta saranno rifinite. In ordine di valore:
 
 ## Come ripartire
 
-**199 test verdi**, check 0; HEAD `73041f5` (post-beta: **ponte Calendarium** `evento`→`fc-date`,
-verificato in-app; prima: smoke test + 3 bug runtime + risorse combattimento + quick-win analisi).
+**199 test verdi**, check 0; HEAD `e591a5d` (post-beta: **ponte Calendarium** `evento`→`fc-date`
+`73041f5` + **aggancio FCG** suggester inline/bottone Genera `e591a5d`, entrambi verificati
+in-app; prima: smoke test + 3 bug runtime + risorse combattimento + quick-win analisi).
 **Unica vera riserva beta rimasta: il mondo-esempio (blocco #1, rinviato).**
 Leggi questo file + i
 docs (`architecture`/`data_model`/`rules_layer`/`play_layer`/`plugin_contracts`) + la memoria
@@ -388,7 +392,7 @@ docs (`architecture`/`data_model`/`rules_layer`/`play_layer`/`plugin_contracts`)
 - **Residui Fase 2**: level-up scelte avanzate (quick-ref condizioni ✅).
 - **Recuperi FantasyWorld** (#9-11): **#9 sistema astrologico/tema natale** (il differenziatore
   "wow", opt-in per mondo), #10 glossari subtypes, #11 alberi evolutivi.
-- **Worldbuilding**: legami pantheon/cosmologia più ricchi; generazione nomi/spunti.
+- **Worldbuilding**: legami pantheon/cosmologia più ricchi (generazione nomi/spunti ✅, FCG).
 - **QA in-app** (rischio #1, deferita su scelta utente): quando si vuole, a blocchi — crea un PG
   e *Sali di livello*; clock → *Scatena conseguenza* (+ Fronti); incontro + *Aggiorna encounter*;
   **Cronologia** (timeline); **tab Mappa** su un luogo; archetipo/profilo; note SRD.
