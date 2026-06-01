@@ -9,7 +9,7 @@
 
 ```statblock
 layout: {{ core.statblock.layout }}
-name: <% tp.file.title %>
+name: <% tp.config.target_file.basename %>
 size: Medio
 type: umanoide
 subtype: ""
@@ -44,7 +44,7 @@ legendary_actions: []
 > Stessa creatura, resa **classica 5e** (cambia solo il layout). I numeri si modificano nel tab *Statblock 5.5e*: questa scheda li rispecchia (richiede `statblock: inline`, già impostato dal wizard).
 ```statblock
 layout: {{ core.statblock.layout_5e }}
-monster: <% tp.file.title %>
+monster: <% tp.config.target_file.basename %>
 ```
 
 --- Al tavolo

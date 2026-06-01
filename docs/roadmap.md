@@ -31,25 +31,31 @@ incluse Goblin + Imboscata) risolve in un colpo: foglio bianco + link morti + da
 time-to-first-win.
 
 **Il blocco #2 (Architect, + caveat di DM e PM): QA in-app.** ✅ **Smoke test in-app eseguito
-(2026-06-01b)**: verificati in Obsidian — Home/tab-panels, **statblock 5.5e** (initiative, saves/
-abilità con label IT, resist./immunità, GS con PE+CB), **statblock 5e via `monster:`** (due tab a
-dati condivisi → FS risolve la creatura), **note-cartella** (clic cartella → indice + Dataview +
-bottone Crea), **Media** (icona), Iconize. **Bug trovato e CORRETTO**: il radar reattivo
-`meta-bind-js-view` dava `META_BIND_ERROR` (Meta Bind 1.4.x) → convertito a `js-engine`/`boot.radar`
-(rende sempre, non-reattivo). *Restano da provare i 5 path mutativi (sali_pg/aggiorna_encounter/
-scatena/collega/applica_profilo) e i pannelli clock/difficoltà/timeline/tema-natale con dati reali.*
+(2026-06-01b)**: verificati in Obsidian — Home/tab-panels; **statblock 5.5e** (initiative, saves/
+abilità con label IT, resist./immunità, GS con PE+CB); **statblock 5e via `monster:`** (due tab a
+dati condivisi → FS risolve la creatura); **note-cartella** (clic cartella → indice + Dataview +
+bottone Crea); **Media** (icona) + Iconize; **wizard di creazione** (`create_entity`: bottone Crea
+→ Templater → modali → nota + rename, con fallback per vault vuoto); **chain `meta_actions`** (bottone
+**Collega** → legame tipizzato **reciproco** scritto in frontmatter via `processFrontMatter`).
+**Due bug trovati e CORRETTI**: (1) radar reattivo `meta-bind-js-view` → `META_BIND_ERROR`
+(Meta Bind 1.4.x) → convertito a `js-engine`/`boot.radar`; (2) statblock con `name: Untitled`
+(`<% tp.file.title %>` è uno snapshot pre-rename di Templater → ogni creatura si registrava come
+"Untitled") → `<% tp.config.target_file.basename %>`. *Restano da provare gli altri path mutativi
+(sali_pg/aggiorna_encounter/scatena/applica_profilo — stesso chain meta_actions, già validato con
+Collega) idealmente creando un PG + un incontro dai bottoni.*
 
 ### Checklist pre-beta (prioritizzata)
 **Bloccanti:**
 1. **Mondo-esempio popolato** (sforzo medio, opt-in/cancellabile in `Mondi/Esempio/`): Mondo + 2-3
    Luoghi (uno con mappa) + 1-2 Fazioni con clock + 2-3 PNG (uno col tema natale) + 1 PG + **Goblin**
    + **Imboscata sulla Strada** + 1-2 Eventi datati + 1 cosmologia/divinità/culto collegati.
-2. **Riallineare il LEGGIMI**: o l'esempio rende validi i link Goblin/Imboscata, o si tolgono;
-   correggere §2 (chiede di abilitare impostazioni che la build già imposta — Meta Bind enableJs,
-   FS autoParse); rendere il LEGGIMI **in vista** (bookmark + callout in cima a Home).
-3. **Smoke test in-app** — ✅ fatto sui pannelli di rendering + statblock 5e/5.5e + folder-notes
-   (radar bug corretto). *Resta*: i 5 path mutativi (collega/scatena/aggiorna/sali_pg/applica_profilo)
-   con una nota reale, idealmente creando un PG e un incontro dai bottoni.
+2. **Riallineare il LEGGIMI** — ✅ link morti Goblin/Imboscata tolti (→ SRD/flusso Crea) + §2
+   corretto (impostazioni già messe dalla build) [`7babc61`]. *Resta*: rendere il LEGGIMI **in vista**
+   (bookmark + callout in cima a Home).
+3. **Smoke test in-app** — ✅ fatto: rendering (statblock 5e/5.5e, radar, folder-notes), **wizard di
+   creazione** e **chain meta_actions** (Collega) — 2 bug corretti. *Resta (basso rischio)*: gli
+   altri bottoni mutativi (sali_pg/aggiorna_encounter/scatena/applica_profilo) creando un PG + un
+   incontro dai bottoni — stesso chain di Collega, già validato.
 
 **Quasi-gratis (alto valore/basso sforzo):**
 4. Chiudere i **legami tipizzati mancanti** del grafo (Worldbuilder): `luogo`→{piano,cosmologia,

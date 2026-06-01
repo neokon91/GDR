@@ -19,7 +19,7 @@
 
 ```statblock
 layout: D&D 5.5 Layout ITA - Compatibile 5e
-name: <% tp.file.title %>
+name: <% tp.config.target_file.basename %>
 size: Medio
 type: umanoide
 subtype: ""
@@ -54,7 +54,7 @@ legendary_actions: []
 > Stessa creatura, resa **classica 5e** (cambia solo il layout). I numeri si modificano nel tab *Statblock 5.5e*: questa scheda li rispecchia (richiede `statblock: inline`, già impostato dal wizard).
 ```statblock
 layout: Basic 5e Layout ITA
-monster: <% tp.file.title %>
+monster: <% tp.config.target_file.basename %>
 ```
 
 --- Al tavolo
