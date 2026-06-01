@@ -1,7 +1,7 @@
 <% await tp.user.crea_bioma(tp) %>
 # `=this.nome`
 
-> [!info] 🌲 Bioma
+> [!infobox] 🌲 Bioma
 > | | |
 > |:--|:--|
 > | **Tipo** | `VIEW[{tipo} ?? "—"]` |

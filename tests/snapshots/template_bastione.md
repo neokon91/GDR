@@ -1,7 +1,7 @@
 <% await tp.user.crea_bastione(tp) %>
 # `=this.nome`
 
-> [!info] 🏰 Bastione
+> [!infobox] 🏰 Bastione
 > `INPUT[ritratto][:ritratto]`
 >
 > | | |

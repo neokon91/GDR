@@ -1,7 +1,7 @@
 <% await tp.user.crea_regola(tp) %>
 # `=this.nome`
 
-> [!info] 📕 Regola
+> [!infobox] 📕 Regola
 > | | |
 > |:--|:--|
 > | **Tipo** | `VIEW[{tipo} ?? "—"]` |

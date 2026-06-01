@@ -1,7 +1,7 @@
 <% await tp.user.crea_piano(tp) %>
 # `=this.nome`
 
-> [!info] 🌀 Piano d'esistenza
+> [!infobox] 🌀 Piano d'esistenza
 > | | |
 > |:--|:--|
 > | **Tipo** | `VIEW[{tipo} ?? "—"]` |

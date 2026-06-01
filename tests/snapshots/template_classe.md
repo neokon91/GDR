@@ -1,7 +1,7 @@
 <% await tp.user.crea_classe(tp) %>
 # `=this.nome`
 
-> [!info] 🛡️ Classe
+> [!infobox] 🛡️ Classe
 > | | |
 > |:--|:--|
 > | **Tipo** | `VIEW[{tipo} ?? "—"]` |

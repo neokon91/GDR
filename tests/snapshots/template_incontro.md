@@ -1,7 +1,7 @@
 <% await tp.user.crea_incontro(tp) %>
 # `=this.nome`
 
-> [!info] 🎲 Incontro
+> [!infobox] 🎲 Incontro
 > | | |
 > |:--|:--|
 > | **Tipo** | `VIEW[{tipo} ?? "—"]` |

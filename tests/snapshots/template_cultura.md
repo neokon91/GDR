@@ -1,7 +1,7 @@
 <% await tp.user.crea_cultura(tp) %>
 # `=this.nome`
 
-> [!info] 🎏 Cultura
+> [!infobox] 🎏 Cultura
 > `INPUT[ritratto][:ritratto]`
 >
 > | | |

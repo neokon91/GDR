@@ -158,6 +158,57 @@ HIDE_FOLDERS_SNIPPET = """/* GDR — generato. Snippet del vault (nascondi z.* +
 .gdr-radar { display: flex; justify-content: center; margin: 8px 0; }
 .gdr-radar-svg { width: 100%; max-width: 300px; height: auto; }
 .gdr-radar-empty { color: var(--text-muted); font-size: var(--font-ui-small); }
+
+/* === Feel wiki (rifinitura) — tutto su variabili del tema (chiaro/scuro). === */
+
+/* Infobox (macro identita_card): scheda d'identità in cima alla nota. Box
+   distinto + ritratto incorniciato + tabella-fatti compatta (chiave in muted). */
+.callout[data-callout="infobox"] {
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 10px;
+  background: var(--background-secondary);
+  padding: 0.5em 0.9em 0.7em;
+}
+.callout[data-callout="infobox"] > .callout-title {
+  font-size: var(--font-ui-medium);
+  border-bottom: 1px solid var(--background-modifier-border);
+  padding-bottom: 0.3em;
+  margin-bottom: 0.4em;
+}
+.callout[data-callout="infobox"] table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: var(--font-ui-small);
+}
+.callout[data-callout="infobox"] td {
+  border: none;
+  padding: 2px 6px;
+  vertical-align: top;
+}
+.callout[data-callout="infobox"] td:first-child {
+  color: var(--text-muted);
+  white-space: nowrap;
+  width: 1%;
+}
+/* Ritratto (se reso come immagine): incorniciato e centrato, non a tutta pagina. */
+.callout[data-callout="infobox"] img {
+  display: block;
+  margin: 0.2em auto 0.5em;
+  max-width: 220px;
+  max-height: 260px;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid var(--background-modifier-border);
+}
+
+/* Tabelle dentro i callout (relazioni/scheda/condizioni): più compatte. */
+.callout th, .callout td { padding: 3px 8px; }
+.callout table { font-size: var(--font-ui-small); }
+
+/* Pannello Vista: lieve feedback hover per dare profondità alle card. */
+.gdr-card { transition: border-left-width 80ms ease; }
+.gdr-card:hover { border-left-width: 5px; }
 """
 
 

@@ -1,7 +1,7 @@
 <% await tp.user.crea_legge_fondamentale(tp) %>
 # `=this.nome`
 
-> [!info] ⚖️ Legge fondamentale
+> [!infobox] ⚖️ Legge fondamentale
 > | | |
 > |:--|:--|
 > | **Tipo** | `VIEW[{tipo} ?? "—"]` |

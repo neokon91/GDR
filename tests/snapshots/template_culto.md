@@ -1,7 +1,7 @@
 <% await tp.user.crea_culto(tp) %>
 # `=this.nome`
 
-> [!info] 🕯️ Culto
+> [!infobox] 🕯️ Culto
 > `INPUT[ritratto][:ritratto]`
 >
 > | | |

@@ -1,7 +1,7 @@
 <% await tp.user.crea_epoca(tp) %>
 # `=this.nome`
 
-> [!info] ⏳ Epoca
+> [!infobox] ⏳ Epoca
 > | | |
 > |:--|:--|
 > | **Tipo** | `VIEW[{tipo} ?? "—"]` |

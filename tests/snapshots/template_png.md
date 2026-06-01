@@ -1,7 +1,7 @@
 <% await tp.user.crea_png(tp) %>
 # `=this.nome`
 
-> [!info] 🎭 PNG
+> [!infobox] 🎭 PNG
 > `INPUT[ritratto][:ritratto]`
 >
 > | | |

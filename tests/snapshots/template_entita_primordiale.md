@@ -1,7 +1,7 @@
 <% await tp.user.crea_entita_primordiale(tp) %>
 # `=this.nome`
 
-> [!info] 🌑 Entità primordiale
+> [!infobox] 🌑 Entità primordiale
 > | | |
 > |:--|:--|
 > | **Tipo** | `VIEW[{tipo} ?? "—"]` |

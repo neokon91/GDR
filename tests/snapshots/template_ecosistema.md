@@ -1,7 +1,7 @@
 <% await tp.user.crea_ecosistema(tp) %>
 # `=this.nome`
 
-> [!info] 🌿 Ecosistema
+> [!infobox] 🌿 Ecosistema
 > | | |
 > |:--|:--|
 > | **Tipo** | `VIEW[{tipo} ?? "—"]` |

@@ -1,7 +1,7 @@
 <% await tp.user.crea_cosmologia(tp) %>
 # `=this.nome`
 
-> [!info] 🌌 Cosmologia
+> [!infobox] 🌌 Cosmologia
 > | | |
 > |:--|:--|
 > | **Tipo** | `VIEW[{tipo} ?? "—"]` |

@@ -1,7 +1,7 @@
 <% await tp.user.crea_istituzione(tp) %>
 # `=this.nome`
 
-> [!info] 🏛️ Istituzione
+> [!infobox] 🏛️ Istituzione
 > `INPUT[ritratto][:ritratto]`
 >
 > | | |

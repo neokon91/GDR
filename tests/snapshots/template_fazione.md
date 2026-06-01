@@ -1,7 +1,7 @@
 <% await tp.user.crea_fazione(tp) %>
 # `=this.nome`
 
-> [!info] ⚔️ Fazione
+> [!infobox] ⚔️ Fazione
 > `INPUT[ritratto][:ritratto]`
 >
 > | | |

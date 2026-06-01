@@ -1,7 +1,7 @@
 <% await tp.user.crea_lingua(tp) %>
 # `=this.nome`
 
-> [!info] 🗣️ Lingua
+> [!infobox] 🗣️ Lingua
 > | | |
 > |:--|:--|
 > | **Tipo** | `VIEW[{tipo} ?? "—"]` |

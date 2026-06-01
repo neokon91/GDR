@@ -1,7 +1,7 @@
 <% await tp.user.crea_background(tp) %>
 # `=this.nome`
 
-> [!info] 📖 Background
+> [!infobox] 📖 Background
 > | | |
 > |:--|:--|
 > | **Tipo** | `VIEW[{tipo} ?? "—"]` |

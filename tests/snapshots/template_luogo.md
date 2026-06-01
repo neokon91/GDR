@@ -1,7 +1,7 @@
 <% await tp.user.crea_luogo(tp) %>
 # `=this.nome`
 
-> [!info] 🗺️ Luogo
+> [!infobox] 🗺️ Luogo
 > `INPUT[ritratto][:ritratto]`
 >
 > | | |

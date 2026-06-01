@@ -1,7 +1,7 @@
 <% await tp.user.crea_talento(tp) %>
 # `=this.nome`
 
-> [!info] ⭐ Talento
+> [!infobox] ⭐ Talento
 > | | |
 > |:--|:--|
 > | **Tipo** | `VIEW[{tipo} ?? "—"]` |

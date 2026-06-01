@@ -1,7 +1,7 @@
 <% await tp.user.crea_regno(tp) %>
 # `=this.nome`
 
-> [!info] 👑 Regno
+> [!infobox] 👑 Regno
 > `INPUT[ritratto][:ritratto]`
 >
 > | | |

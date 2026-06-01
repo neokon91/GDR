@@ -126,6 +126,9 @@ callouts:
   - { id: tavolo,  color: "201, 64, 64",   icon: lucide-swords }
   - { id: gancio,  color: "191, 130, 42",  icon: lucide-anchor }
   - { id: segreto, color: "138, 74, 173",  icon: lucide-eye-off }
+  # Infobox stile wiki (macro identita_card): intestazione d'identità in cima alla
+  # nota. Stile pesante in gdr.css; qui solo colore/icona (degrada a callout base).
+  - { id: infobox, color: "90, 110, 140",  icon: lucide-scroll-text }
 # Bottoni-azione: 'action' esegue un file Templater su z.modelli/azioni/ (serve
 # anche l'entry in templates.yaml:actions); 'command' lancia un comando di
 # Obsidian (nessuna azione-nota). I bottoni "Crea <Titolo>" sono generati da

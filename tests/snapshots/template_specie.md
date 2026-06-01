@@ -1,7 +1,7 @@
 <% await tp.user.crea_specie(tp) %>
 # `=this.nome`
 
-> [!info] 🧬 Specie
+> [!infobox] 🧬 Specie
 > `INPUT[ritratto][:ritratto]`
 >
 > | | |

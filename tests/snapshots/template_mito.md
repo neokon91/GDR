@@ -1,7 +1,7 @@
 <% await tp.user.crea_mito(tp) %>
 # `=this.nome`
 
-> [!info] 📖 Mito
+> [!infobox] 📖 Mito
 > `INPUT[ritratto][:ritratto]`
 >
 > | | |

@@ -1,7 +1,7 @@
 <% await tp.user.crea_profezia(tp) %>
 # `=this.nome`
 
-> [!info] 🔮 Profezia
+> [!infobox] 🔮 Profezia
 > | | |
 > |:--|:--|
 > | **Tipo** | `VIEW[{tipo} ?? "—"]` |

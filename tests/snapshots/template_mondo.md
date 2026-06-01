@@ -1,7 +1,7 @@
 <% await tp.user.crea_mondo(tp) %>
 # `=this.nome`
 
-> [!info] 🌍 Mondo
+> [!infobox] 🌍 Mondo
 > `INPUT[ritratto][:ritratto]`
 >
 > | | |

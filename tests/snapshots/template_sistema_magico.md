@@ -1,7 +1,7 @@
 <% await tp.user.crea_sistema_magico(tp) %>
 # `=this.nome`
 
-> [!info] 🪄 Sistema magico
+> [!infobox] 🪄 Sistema magico
 > | | |
 > |:--|:--|
 > | **Tipo** | `VIEW[{tipo} ?? "—"]` |

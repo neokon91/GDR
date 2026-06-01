@@ -1,7 +1,7 @@
 <% await tp.user.crea_oggetto_magico(tp) %>
 # `=this.nome`
 
-> [!info] 🎒 Oggetto Magico
+> [!infobox] 🎒 Oggetto Magico
 > `INPUT[ritratto][:ritratto]`
 >
 > | | |

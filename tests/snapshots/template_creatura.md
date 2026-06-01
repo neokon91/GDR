@@ -1,7 +1,7 @@
 <% await tp.user.crea_creatura(tp) %>
 # `=this.nome`
 
-> [!info] 🐾 Creatura
+> [!infobox] 🐾 Creatura
 > `INPUT[ritratto][:ritratto]`
 >
 > | | |

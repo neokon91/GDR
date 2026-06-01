@@ -1,7 +1,7 @@
 <% await tp.user.crea_oggetto(tp) %>
 # `=this.nome`
 
-> [!info] 🎒 Oggetto
+> [!infobox] 🎒 Oggetto
 > `INPUT[ritratto][:ritratto]`
 >
 > | | |

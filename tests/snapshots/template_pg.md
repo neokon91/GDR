@@ -1,7 +1,7 @@
 <% await tp.user.crea_pg(tp) %>
 # `=this.nome`
 
-> [!info] 🎭 PG
+> [!infobox] 🎭 PG
 > `INPUT[ritratto][:ritratto]`
 >
 > | | |

@@ -1,7 +1,7 @@
 <% await tp.user.crea_evento(tp) %>
 # `=this.nome`
 
-> [!info] 📜 Evento
+> [!infobox] 📜 Evento
 > | | |
 > |:--|:--|
 > | **Tipo** | `VIEW[{tipo} ?? "—"]` |

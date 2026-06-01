@@ -1,7 +1,7 @@
 <% await tp.user.crea_sottoclasse(tp) %>
 # `=this.nome`
 
-> [!info] 🎓 Sottoclasse
+> [!infobox] 🎓 Sottoclasse
 > | | |
 > |:--|:--|
 > | **Tipo** | `VIEW[{tipo} ?? "—"]` |

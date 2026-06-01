@@ -1,7 +1,7 @@
 <% await tp.user.crea_nota_rapida(tp) %>
 # `=this.nome`
 
-> [!info] Nota Rapida
+> [!infobox] Nota Rapida
 > | | |
 > |:--|:--|
 > | **Tipo** | `VIEW[{tipo} ?? "—"]` |

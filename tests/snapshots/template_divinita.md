@@ -1,7 +1,7 @@
 <% await tp.user.crea_divinita(tp) %>
 # `=this.nome`
 
-> [!info] ☀️ Divinità
+> [!infobox] ☀️ Divinità
 > `INPUT[ritratto][:ritratto]`
 >
 > | | |

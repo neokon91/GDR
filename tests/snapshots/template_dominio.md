@@ -1,7 +1,7 @@
 <% await tp.user.crea_dominio(tp) %>
 # `=this.nome`
 
-> [!info] 🌐 Dominio
+> [!infobox] 🌐 Dominio
 > | | |
 > |:--|:--|
 > | **Tipo** | `VIEW[{tipo} ?? "—"]` |

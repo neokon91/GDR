@@ -1,7 +1,7 @@
 <% await tp.user.crea_incantesimo(tp) %>
 # `=this.nome`
 
-> [!info] ✨ Incantesimo
+> [!infobox] ✨ Incantesimo
 > | | |
 > |:--|:--|
 > | **Tipo** | `VIEW[{tipo} ?? "—"]` |

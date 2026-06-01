@@ -1,7 +1,7 @@
 <% await tp.user.crea_insidia(tp) %>
 # `=this.nome`
 
-> [!info] ⚠️ Insidia
+> [!infobox] ⚠️ Insidia
 > | | |
 > |:--|:--|
 > | **Tipo** | `VIEW[{tipo} ?? "—"]` |
