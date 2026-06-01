@@ -1,7 +1,7 @@
 <% await tp.user.crea_sottoclasse(tp) %>
 # `=this.nome`
 
-> [!info] Sottoclasse
+> [!info] 🎓 Sottoclasse
 > **Tipo**: `VIEW[{tipo} ?? "—"]` · **Mondo**: `VIEW[{mondo}][text(renderMarkdown)]`
 >
 > **Stato**: `INPUT[stato][:stato]`

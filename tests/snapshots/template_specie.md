@@ -1,8 +1,9 @@
 <% await tp.user.crea_specie(tp) %>
 # `=this.nome`
 
-> [!info] Specie
+> [!info] 🧬 Specie
 > **Tipo**: `VIEW[{tipo} ?? "—"]` · **Mondo**: `VIEW[{mondo}][text(renderMarkdown)]`
+> **Taglia** `VIEW[{taglia} ?? "—"]` · **Velocità** `VIEW[{velocita} ?? "—"]` · **Tipo di creatura** `VIEW[{tipo_creatura} ?? "—"]` · **Lignaggio** `VIEW[{lignaggio} ?? "—"]`
 >
 > **Stato**: `INPUT[stato][:stato]`
 
@@ -27,11 +28,11 @@
 --- Carattere
 
 > [!abstract] Carattere
-> **Socialità** `INPUT[slider(minValue(1), maxValue(5), addLabels):socialita]`
-> **Predisposizione Magica** `INPUT[slider(minValue(1), maxValue(5), addLabels):predisposizione_magica]`
-> **Complessità Mentale** `INPUT[slider(minValue(1), maxValue(5), addLabels):complessita_mentale]`
-> **Memoria Ancestrale** `INPUT[slider(minValue(1), maxValue(5), addLabels):memoria_ancestrale]`
-> **Longevità Percettiva** `INPUT[slider(minValue(1), maxValue(5), addLabels):longevita_percettiva]`
+> **Socialità** `INPUT[slider(minValue(1), maxValue(5), addLabels):socialita]` → `VIEW[{socialita} == 5 ? "5 · Ipercollettiva" : ({socialita} == 4 ? "4 · Comunitaria" : ({socialita} == 3 ? "3 · Aggregativa" : ({socialita} == 2 ? "2 · Individualista" : ({socialita} == 1 ? "1 · Solitaria" : ("—")))))]`
+> **Predisposizione Magica** `INPUT[slider(minValue(1), maxValue(5), addLabels):predisposizione_magica]` → `VIEW[{predisposizione_magica} == 5 ? "5 · Inerente totale" : ({predisposizione_magica} == 4 ? "4 · Inerente parziale" : ({predisposizione_magica} == 3 ? "3 · Intrinseca condizionata" : ({predisposizione_magica} == 2 ? "2 · Accessibile con fatica" : ({predisposizione_magica} == 1 ? "1 · Latente" : ("—")))))]`
+> **Complessità Mentale** `INPUT[slider(minValue(1), maxValue(5), addLabels):complessita_mentale]` → `VIEW[{complessita_mentale} == 5 ? "5 · Iperevoluta" : ({complessita_mentale} == 4 ? "4 · Metacognitiva" : ({complessita_mentale} == 3 ? "3 · Coscienza strutturata" : ({complessita_mentale} == 2 ? "2 · Cognitiva basilare" : ({complessita_mentale} == 1 ? "1 · Semplice" : ("—")))))]`
+> **Memoria Ancestrale** `INPUT[slider(minValue(1), maxValue(5), addLabels):memoria_ancestrale]` → `VIEW[{memoria_ancestrale} == 5 ? "5 · Totale" : ({memoria_ancestrale} == 4 ? "4 · Collettiva" : ({memoria_ancestrale} == 3 ? "3 · Simbolica" : ({memoria_ancestrale} == 2 ? "2 · Parziale" : ({memoria_ancestrale} == 1 ? "1 · Assente" : ("—")))))]`
+> **Longevità Percettiva** `INPUT[slider(minValue(1), maxValue(5), addLabels):longevita_percettiva]` → `VIEW[{longevita_percettiva} == 5 ? "5 · Atemporale" : ({longevita_percettiva} == 4 ? "4 · Ciclica" : ({longevita_percettiva} == 3 ? "3 · Storica" : ({longevita_percettiva} == 2 ? "2 · Lineare breve" : ({longevita_percettiva} == 1 ? "1 · Presente" : ("—")))))]`
 
 > [!note]- Socialità — Descrive il grado di coesione e la struttura sociale della specie. Esprime se tende all’isolamento individuale o alla formazione di comunità stabili, gerarchiche o simbiotiche.
 > **1 · Solitaria** — La specie è tendenzialmente isolata. I suoi membri vivono, cacciano, si riproducono e viaggiano in solitaria. I legami sociali sono rari, fugaci o ritualizzati. Tipico di specie predatrici, eremite o planarie.

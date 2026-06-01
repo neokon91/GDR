@@ -1,7 +1,7 @@
 <% await tp.user.crea_regola(tp) %>
 # `=this.nome`
 
-> [!info] Regola
+> [!info] 📕 Regola
 > **Tipo**: `VIEW[{tipo} ?? "—"]` · **Mondo**: `VIEW[{mondo}][text(renderMarkdown)]`
 >
 > **Stato**: `INPUT[stato][:stato]`

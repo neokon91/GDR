@@ -1,8 +1,9 @@
 <% await tp.user.crea_lingua(tp) %>
 # `=this.nome`
 
-> [!info] Lingua
+> [!info] 🗣️ Lingua
 > **Tipo**: `VIEW[{tipo} ?? "—"]` · **Mondo**: `VIEW[{mondo}][text(renderMarkdown)]`
+> **Vitalità** `VIEW[{vitalita} ?? "—"]`
 >
 > **Stato**: `INPUT[stato][:stato]`
 
@@ -60,11 +61,11 @@ await views.renderClock(container, app, page);
 --- Carattere
 
 > [!abstract] Carattere
-> **Complessità** `INPUT[slider(minValue(1), maxValue(5), addLabels):complessita]`
-> **Formalità** `INPUT[slider(minValue(1), maxValue(5), addLabels):formalita]`
-> **Polivalenza** `INPUT[slider(minValue(1), maxValue(5), addLabels):funzione]`
-> **Origine** `INPUT[slider(minValue(1), maxValue(5), addLabels):origine]`
-> **Conoscibilità** `INPUT[slider(minValue(1), maxValue(5), addLabels):accesso]`
+> **Complessità** `INPUT[slider(minValue(1), maxValue(5), addLabels):complessita]` → `VIEW[{complessita} == 5 ? "5 · Ipersistemica" : ({complessita} == 4 ? "4 · Complessa" : ({complessita} == 3 ? "3 · Bilanciata" : ({complessita} == 2 ? "2 · Ridotta" : ({complessita} == 1 ? "1 · Semplice" : ("—")))))]`
+> **Formalità** `INPUT[slider(minValue(1), maxValue(5), addLabels):formalita]` → `VIEW[{formalita} == 5 ? "5 · Rituale" : ({formalita} == 4 ? "4 · Solenne" : ({formalita} == 3 ? "3 · Neutra" : ({formalita} == 2 ? "2 · Colloquiale" : ({formalita} == 1 ? "1 · Orale spontanea" : ("—")))))]`
+> **Polivalenza** `INPUT[slider(minValue(1), maxValue(5), addLabels):funzione]` → `VIEW[{funzione} == 5 ? "5 · Magica" : ({funzione} == 4 ? "4 · Sacrale" : ({funzione} == 3 ? "3 · Poetica" : ({funzione} == 2 ? "2 · Descrittiva" : ({funzione} == 1 ? "1 · Funzionale" : ("—")))))]`
+> **Origine** `INPUT[slider(minValue(1), maxValue(5), addLabels):origine]` → `VIEW[{origine} == 5 ? "5 · Iniettata" : ({origine} == 4 ? "4 · Artificiale" : ({origine} == 3 ? "3 · Riformata" : ({origine} == 2 ? "2 · Evoluta" : ({origine} == 1 ? "1 · Naturale" : ("—")))))]`
+> **Conoscibilità** `INPUT[slider(minValue(1), maxValue(5), addLabels):accesso]` → `VIEW[{accesso} == 5 ? "5 · Proibita" : ({accesso} == 4 ? "4 · Occulta" : ({accesso} == 3 ? "3 · Specializzata" : ({accesso} == 2 ? "2 · Comune rituale" : ({accesso} == 1 ? "1 · Diffusa" : ("—")))))]`
 
 > [!note]- Complessità — Struttura interna della lingua, in termini di grammatica, fonologia, sintassi e irregolarità.
 > **1 · Semplice** — Struttura diretta, poche regole, vocabolario essenziale. Lingua quotidiana o infantile.

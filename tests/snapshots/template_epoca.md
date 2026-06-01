@@ -1,8 +1,9 @@
 <% await tp.user.crea_epoca(tp) %>
 # `=this.nome`
 
-> [!info] Epoca
+> [!info] ⏳ Epoca
 > **Tipo**: `VIEW[{tipo} ?? "—"]` · **Mondo**: `VIEW[{mondo}][text(renderMarkdown)]`
+> **Inizio** `VIEW[{inizio} ?? "—"]` · **Fine** `VIEW[{fine} ?? "—"]`
 >
 > **Stato**: `INPUT[stato][:stato]`
 
@@ -64,11 +65,11 @@ await views.renderClock(container, app, page);
 --- Carattere
 
 > [!abstract] Carattere
-> **Presenza Divina** `INPUT[slider(minValue(1), maxValue(5), addLabels):presenza_divina]`
-> **Accesso alla Magia** `INPUT[slider(minValue(1), maxValue(5), addLabels):accesso_magia]`
-> **Centralità Mortale** `INPUT[slider(minValue(1), maxValue(5), addLabels):centralita_mortale]`
-> **Stabilità Geopolitica** `INPUT[slider(minValue(1), maxValue(5), addLabels):stabilita_geopolitica]`
-> **Storicità** `INPUT[slider(minValue(1), maxValue(5), addLabels):storicita]`
+> **Presenza Divina** `INPUT[slider(minValue(1), maxValue(5), addLabels):presenza_divina]` → `VIEW[{presenza_divina} == 5 ? "5 · Immanente" : ({presenza_divina} == 4 ? "4 · Attiva" : ({presenza_divina} == 3 ? "3 · Intermittente" : ({presenza_divina} == 2 ? "2 · Remota" : ({presenza_divina} == 1 ? "1 · Assente" : ("—")))))]`
+> **Accesso alla Magia** `INPUT[slider(minValue(1), maxValue(5), addLabels):accesso_magia]` → `VIEW[{accesso_magia} == 5 ? "5 · Pervasiva" : ({accesso_magia} == 4 ? "4 · Fluida" : ({accesso_magia} == 3 ? "3 · Regolata" : ({accesso_magia} == 2 ? "2 · Occulta" : ({accesso_magia} == 1 ? "1 · Sigillata" : ("—")))))]`
+> **Centralità Mortale** `INPUT[slider(minValue(1), maxValue(5), addLabels):centralita_mortale]` → `VIEW[{centralita_mortale} == 5 ? "5 · Ascesa dei mortali" : ({centralita_mortale} == 4 ? "4 · Predominio mortale" : ({centralita_mortale} == 3 ? "3 · Coesistenza" : ({centralita_mortale} == 2 ? "2 · Sorveglianza" : ({centralita_mortale} == 1 ? "1 · Dominio divino" : ("—")))))]`
+> **Stabilità Geopolitica** `INPUT[slider(minValue(1), maxValue(5), addLabels):stabilita_geopolitica]` → `VIEW[{stabilita_geopolitica} == 5 ? "5 · Unificata" : ({stabilita_geopolitica} == 4 ? "4 · Centralizzata" : ({stabilita_geopolitica} == 3 ? "3 · Bilanciata" : ({stabilita_geopolitica} == 2 ? "2 · Turbolenta" : ({stabilita_geopolitica} == 1 ? "1 · Frammentata" : ("—")))))]`
+> **Storicità** `INPUT[slider(minValue(1), maxValue(5), addLabels):storicita]` → `VIEW[{storicita} == 5 ? "5 · Documentata" : ({storicita} == 4 ? "4 · Cronachistica" : ({storicita} == 3 ? "3 · Ambigua" : ({storicita} == 2 ? "2 · Leggendaria" : ({storicita} == 1 ? "1 · Mitica" : ("—")))))]`
 
 > [!note]- Presenza Divina — Quanto gli dèi sono coinvolti nel mondo durante l'epoca.
 > **1 · Assente** — Gli dèi sono ignoti o silenti; il sacro non si percepisce.

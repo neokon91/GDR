@@ -1,8 +1,9 @@
 <% await tp.user.crea_piano(tp) %>
 # `=this.nome`
 
-> [!info] Piano d'esistenza
+> [!info] 🌀 Piano d'esistenza
 > **Tipo**: `VIEW[{tipo} ?? "—"]` · **Mondo**: `VIEW[{mondo}][text(renderMarkdown)]`
+> **Accessibilità** `VIEW[{accessibilita} ?? "—"]`
 >
 > **Stato**: `INPUT[stato][:stato]`
 

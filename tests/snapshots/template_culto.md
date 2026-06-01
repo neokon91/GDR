@@ -1,8 +1,9 @@
 <% await tp.user.crea_culto(tp) %>
 # `=this.nome`
 
-> [!info] Culto
+> [!info] 🕯️ Culto
 > **Tipo**: `VIEW[{tipo} ?? "—"]` · **Mondo**: `VIEW[{mondo}][text(renderMarkdown)]`
+> **Portata** `VIEW[{portata} ?? "—"]`
 >
 > **Stato**: `INPUT[stato][:stato]`
 
@@ -66,11 +67,11 @@ await views.renderClock(container, app, page);
 --- Carattere
 
 > [!abstract] Carattere
-> **Struttura** `INPUT[slider(minValue(1), maxValue(5), addLabels):struttura]`
-> **Rivelazione** `INPUT[slider(minValue(1), maxValue(5), addLabels):rivelazione]`
-> **Trascendenza** `INPUT[slider(minValue(1), maxValue(5), addLabels):trascendenza]`
-> **Legalità** `INPUT[slider(minValue(1), maxValue(5), addLabels):legalita]`
-> **Motivazione** `INPUT[slider(minValue(1), maxValue(5), addLabels):motivazione]`
+> **Struttura** `INPUT[slider(minValue(1), maxValue(5), addLabels):struttura]` → `VIEW[{struttura} == 5 ? "5 · Dogmatico" : ({struttura} == 4 ? "4 · Gerarchico" : ({struttura} == 3 ? "3 · Semi-istituzionale" : ({struttura} == 2 ? "2 · Comunitario" : ({struttura} == 1 ? "1 · Anarchico" : ("—")))))]`
+> **Rivelazione** `INPUT[slider(minValue(1), maxValue(5), addLabels):rivelazione]` → `VIEW[{rivelazione} == 5 ? "5 · Universale" : ({rivelazione} == 4 ? "4 · Aperta" : ({rivelazione} == 3 ? "3 · Misto" : ({rivelazione} == 2 ? "2 · Filtrata" : ({rivelazione} == 1 ? "1 · Iniziatico" : ("—")))))]`
+> **Trascendenza** `INPUT[slider(minValue(1), maxValue(5), addLabels):trascendenza]` → `VIEW[{trascendenza} == 5 ? "5 · Trascendente" : ({trascendenza} == 4 ? "4 · Separato" : ({trascendenza} == 3 ? "3 · Ambivalente" : ({trascendenza} == 2 ? "2 · Diffuso" : ({trascendenza} == 1 ? "1 · Immanente" : ("—")))))]`
+> **Legalità** `INPUT[slider(minValue(1), maxValue(5), addLabels):legalita]` → `VIEW[{legalita} == 5 ? "5 · Ufficiale" : ({legalita} == 4 ? "4 · Accettato" : ({legalita} == 3 ? "3 · Riconosciuto" : ({legalita} == 2 ? "2 · Tollerato" : ({legalita} == 1 ? "1 · Illegale" : ("—")))))]`
+> **Motivazione** `INPUT[slider(minValue(1), maxValue(5), addLabels):motivazione]` → `VIEW[{motivazione} == 5 ? "5 · Amore" : ({motivazione} == 4 ? "4 · Fiducia" : ({motivazione} == 3 ? "3 · Equilibrata" : ({motivazione} == 2 ? "2 · Placazione" : ({motivazione} == 1 ? "1 · Paura" : ("—")))))]`
 
 > [!note]- Struttura — Grado di organizzazione interna e rigidità della gerarchia.
 > **1 · Anarchico** — Nessuna gerarchia; fluido, spontaneo, decentralizzato.

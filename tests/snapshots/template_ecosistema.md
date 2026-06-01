@@ -1,8 +1,9 @@
 <% await tp.user.crea_ecosistema(tp) %>
 # `=this.nome`
 
-> [!info] Ecosistema
+> [!info] 🌿 Ecosistema
 > **Tipo**: `VIEW[{tipo} ?? "—"]` · **Mondo**: `VIEW[{mondo}][text(renderMarkdown)]`
+> **Salute** `VIEW[{salute} ?? "—"]`
 >
 > **Stato**: `INPUT[stato][:stato]`
 
@@ -63,9 +64,9 @@ await views.renderClock(container, app, page);
 --- Carattere
 
 > [!abstract] Carattere
-> **Equilibrio** `INPUT[slider(minValue(1), maxValue(5), addLabels):equilibrio]`
-> **Diversità** `INPUT[slider(minValue(1), maxValue(5), addLabels):diversita]`
-> **Naturalezza** `INPUT[slider(minValue(1), maxValue(5), addLabels):naturalezza]`
+> **Equilibrio** `INPUT[slider(minValue(1), maxValue(5), addLabels):equilibrio]` → `VIEW[{equilibrio} == 5 ? "5 · Autopoietico" : ({equilibrio} == 4 ? "4 · Stabile" : ({equilibrio} == 3 ? "3 · Teso" : ({equilibrio} == 2 ? "2 · Fragile" : ({equilibrio} == 1 ? "1 · Collassante" : ("—")))))]`
+> **Diversità** `INPUT[slider(minValue(1), maxValue(5), addLabels):diversita]` → `VIEW[{diversita} == 5 ? "5 · Esuberante" : ({diversita} == 4 ? "4 · Ricco" : ({diversita} == 3 ? "3 · Vario" : ({diversita} == 2 ? "2 · Povero" : ({diversita} == 1 ? "1 · Monocultura" : ("—")))))]`
+> **Naturalezza** `INPUT[slider(minValue(1), maxValue(5), addLabels):naturalezza]` → `VIEW[{naturalezza} == 5 ? "5 · Artificiale" : ({naturalezza} == 4 ? "4 · Ingegnerizzato" : ({naturalezza} == 3 ? "3 · Gestito" : ({naturalezza} == 2 ? "2 · Influenzato" : ({naturalezza} == 1 ? "1 · Selvatico" : ("—")))))]`
 
 > [!note]- Equilibrio — Quanto la rete di specie è stabile o sul punto di crollare.
 > **1 · Collassante** — In rovina; estinzioni a catena in corso.

@@ -1,8 +1,9 @@
 <% await tp.user.crea_mondo(tp) %>
 # `=this.nome`
 
-> [!info] Mondo
+> [!info] 🌍 Mondo
 > **Tipo**: `VIEW[{tipo} ?? "—"]`
+> **Scala** `VIEW[{scala} ?? "—"]` · **Genere** `VIEW[{genere} ?? "—"]` · **Epoca** `VIEW[{epoca} ?? "—"]` · **Temi** `VIEW[{temi} ?? "—"]`
 >
 > **Stato**: `INPUT[stato][:stato]`
 
@@ -81,11 +82,11 @@ await views.renderClock(container, app, page);
 --- Carattere
 
 > [!abstract] Carattere
-> **Diffusione della Magia** `INPUT[slider(minValue(1), maxValue(5), addLabels):diffusione_magia]`
-> **Tono** `INPUT[slider(minValue(1), maxValue(5), addLabels):tono]`
-> **Ordine Politico** `INPUT[slider(minValue(1), maxValue(5), addLabels):ordine_politico]`
-> **Civiltà e Natura** `INPUT[slider(minValue(1), maxValue(5), addLabels):civilta_natura]`
-> **Età Storica** `INPUT[slider(minValue(1), maxValue(5), addLabels):eta_storica]`
+> **Diffusione della Magia** `INPUT[slider(minValue(1), maxValue(5), addLabels):diffusione_magia]` → `VIEW[{diffusione_magia} == 5 ? "5 · Onnipresente" : ({diffusione_magia} == 4 ? "4 · Diffusa" : ({diffusione_magia} == 3 ? "3 · Presente" : ({diffusione_magia} == 2 ? "2 · Rara" : ({diffusione_magia} == 1 ? "1 · Assente" : ("—")))))]`
+> **Tono** `INPUT[slider(minValue(1), maxValue(5), addLabels):tono]` → `VIEW[{tono} == 5 ? "5 · Grimdark" : ({tono} == 4 ? "4 · Cupo" : ({tono} == 3 ? "3 · Ambiguo" : ({tono} == 2 ? "2 · Avventuroso" : ({tono} == 1 ? "1 · Luminoso" : ("—")))))]`
+> **Ordine Politico** `INPUT[slider(minValue(1), maxValue(5), addLabels):ordine_politico]` → `VIEW[{ordine_politico} == 5 ? "5 · Caos" : ({ordine_politico} == 4 ? "4 · Turbolento" : ({ordine_politico} == 3 ? "3 · Conteso" : ({ordine_politico} == 2 ? "2 · Ordinato" : ({ordine_politico} == 1 ? "1 · Stabile" : ("—")))))]`
+> **Civiltà e Natura** `INPUT[slider(minValue(1), maxValue(5), addLabels):civilta_natura]` → `VIEW[{civilta_natura} == 5 ? "5 · Incontaminato" : ({civilta_natura} == 4 ? "4 · Selvaggio" : ({civilta_natura} == 3 ? "3 · In equilibrio" : ({civilta_natura} == 2 ? "2 · Coltivato" : ({civilta_natura} == 1 ? "1 · Urbanizzato" : ("—")))))]`
+> **Età Storica** `INPUT[slider(minValue(1), maxValue(5), addLabels):eta_storica]` → `VIEW[{eta_storica} == 5 ? "5 · Rovina" : ({eta_storica} == 4 ? "4 · Declino" : ({eta_storica} == 3 ? "3 · Apogeo" : ({eta_storica} == 2 ? "2 · Ascesa" : ({eta_storica} == 1 ? "1 · Aurora" : ("—")))))]`
 
 > [!note]- Diffusione della Magia — Quanto la magia è presente e accessibile nel mondo.
 > **1 · Assente** — Mondo mondano; la magia è mito o non esiste affatto.

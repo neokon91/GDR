@@ -1,8 +1,9 @@
 <% await tp.user.crea_cultura(tp) %>
 # `=this.nome`
 
-> [!info] Cultura
+> [!info] 🎏 Cultura
 > **Tipo**: `VIEW[{tipo} ?? "—"]` · **Mondo**: `VIEW[{mondo}][text(renderMarkdown)]`
+> **Portata** `VIEW[{portata} ?? "—"]`
 >
 > **Stato**: `INPUT[stato][:stato]`
 
@@ -66,11 +67,11 @@ await views.renderClock(container, app, page);
 --- Carattere
 
 > [!abstract] Carattere
-> **Valori Dominanti** `INPUT[slider(minValue(1), maxValue(5), addLabels):valori_dominanti]`
-> **Relazione con la Morte** `INPUT[slider(minValue(1), maxValue(5), addLabels):relazione_morte]`
-> **Ciclo Rituale della Vita** `INPUT[slider(minValue(1), maxValue(5), addLabels):ritualizzazione_vita]`
-> **Relazione con l'Altrove** `INPUT[slider(minValue(1), maxValue(5), addLabels):relazione_altrove]`
-> **Costruzione dell'Identità** `INPUT[slider(minValue(1), maxValue(5), addLabels):costruzione_identitaria]`
+> **Valori Dominanti** `INPUT[slider(minValue(1), maxValue(5), addLabels):valori_dominanti]` → `VIEW[{valori_dominanti} == 5 ? "5 · Potere" : ({valori_dominanti} == 4 ? "4 · Conoscenza" : ({valori_dominanti} == 3 ? "3 · Onore" : ({valori_dominanti} == 2 ? "2 · Armonia" : ({valori_dominanti} == 1 ? "1 · Sopravvivenza" : ("—")))))]`
+> **Relazione con la Morte** `INPUT[slider(minValue(1), maxValue(5), addLabels):relazione_morte]` → `VIEW[{relazione_morte} == 5 ? "5 · Coabitazione" : ({relazione_morte} == 4 ? "4 · Trascendenza" : ({relazione_morte} == 3 ? "3 · Iniziazione" : ({relazione_morte} == 2 ? "2 · Sacralizzazione" : ({relazione_morte} == 1 ? "1 · Rimozione" : ("—")))))]`
+> **Ciclo Rituale della Vita** `INPUT[slider(minValue(1), maxValue(5), addLabels):ritualizzazione_vita]` → `VIEW[{ritualizzazione_vita} == 5 ? "5 · Ciclico" : ({ritualizzazione_vita} == 4 ? "4 · Iniziatico" : ({ritualizzazione_vita} == 3 ? "3 · Simbolico" : ({ritualizzazione_vita} == 2 ? "2 · Tradizionale" : ({ritualizzazione_vita} == 1 ? "1 · Spontaneo" : ("—")))))]`
+> **Relazione con l'Altrove** `INPUT[slider(minValue(1), maxValue(5), addLabels):relazione_altrove]` → `VIEW[{relazione_altrove} == 5 ? "5 · Bi-planare" : ({relazione_altrove} == 4 ? "4 · Integrato" : ({relazione_altrove} == 3 ? "3 · Rituale" : ({relazione_altrove} == 2 ? "2 · Visionario" : ({relazione_altrove} == 1 ? "1 · Tabù" : ("—")))))]`
+> **Costruzione dell'Identità** `INPUT[slider(minValue(1), maxValue(5), addLabels):costruzione_identitaria]` → `VIEW[{costruzione_identitaria} == 5 ? "5 · Fluida" : ({costruzione_identitaria} == 4 ? "4 · Iniziatica" : ({costruzione_identitaria} == 3 ? "3 · Comunitaria" : ({costruzione_identitaria} == 2 ? "2 · Per ruoli" : ({costruzione_identitaria} == 1 ? "1 · Ereditaria" : ("—")))))]`
 
 > [!note]- Valori Dominanti — I principi che la cultura considera sacri o fondamentali.
 > **1 · Sopravvivenza** — Tutto è subordinato a sicurezza, difesa, continuità. Virtù: resilienza, sacrificio.

@@ -1,8 +1,9 @@
 <% await tp.user.crea_mito(tp) %>
 # `=this.nome`
 
-> [!info] Mito
+> [!info] 📖 Mito
 > **Tipo**: `VIEW[{tipo} ?? "—"]` · **Mondo**: `VIEW[{mondo}][text(renderMarkdown)]`
+> **Veridicità** `VIEW[{veridicita} ?? "—"]`
 >
 > **Stato**: `INPUT[stato][:stato]`
 
@@ -63,10 +64,10 @@ await views.renderClock(container, app, page);
 --- Carattere
 
 > [!abstract] Carattere
-> **Veridicità** `INPUT[slider(minValue(1), maxValue(5), addLabels):veridicita]`
-> **Diffusione** `INPUT[slider(minValue(1), maxValue(5), addLabels):diffusione]`
-> **Tono** `INPUT[slider(minValue(1), maxValue(5), addLabels):tono]`
-> **Vitalità** `INPUT[slider(minValue(1), maxValue(5), addLabels):vitalita]`
+> **Veridicità** `INPUT[slider(minValue(1), maxValue(5), addLabels):veridicita]` → `VIEW[{veridicita} == 5 ? "5 · Rivelato" : ({veridicita} == 4 ? "4 · Fedele" : ({veridicita} == 3 ? "3 · Romanzato" : ({veridicita} == 2 ? "2 · Distorto" : ({veridicita} == 1 ? "1 · Invenzione" : ("—")))))]`
+> **Diffusione** `INPUT[slider(minValue(1), maxValue(5), addLabels):diffusione]` → `VIEW[{diffusione} == 5 ? "5 · Universale" : ({diffusione} == 4 ? "4 · Diffuso" : ({diffusione} == 3 ? "3 · Regionale" : ({diffusione} == 2 ? "2 · Esoterico" : ({diffusione} == 1 ? "1 · Perduto" : ("—")))))]`
+> **Tono** `INPUT[slider(minValue(1), maxValue(5), addLabels):tono]` → `VIEW[{tono} == 5 ? "5 · Maledetto" : ({tono} == 4 ? "4 · Cupo" : ({tono} == 3 ? "3 · Ambiguo" : ({tono} == 2 ? "2 · Edificante" : ({tono} == 1 ? "1 · Luminoso" : ("—")))))]`
+> **Vitalità** `INPUT[slider(minValue(1), maxValue(5), addLabels):vitalita]` → `VIEW[{vitalita} == 5 ? "5 · Profetico" : ({vitalita} == 4 ? "4 · Operante" : ({vitalita} == 3 ? "3 · Vivo" : ({vitalita} == 2 ? "2 · Dormiente" : ({vitalita} == 1 ? "1 · Morto" : ("—")))))]`
 
 > [!note]- Veridicità — Quanto il mito corrisponde a fatti reali del mondo.
 > **1 · Invenzione** — Pura finzione; nessun nucleo di verità.

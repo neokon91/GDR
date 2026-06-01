@@ -1,8 +1,9 @@
 <% await tp.user.crea_incontro(tp) %>
 # `=this.nome`
 
-> [!info] Incontro
+> [!info] 🎲 Incontro
 > **Tipo**: `VIEW[{tipo} ?? "—"]` · **Mondo**: `VIEW[{mondo}][text(renderMarkdown)]`
+> **Livello del gruppo** `VIEW[{pg_livello} ?? "—"]` · **Numero di PG** `VIEW[{pg_numero} ?? "—"]`
 >
 > **Stato**: `INPUT[stato][:stato]`
 

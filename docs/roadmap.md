@@ -114,7 +114,10 @@ sopra i sistemi avanzati (vedi backlog).
 - **Pregi**: ontologia ricca (36 categorie, grafo cosmologico connesso), relazioni tipizzate, **assi tematici 1-5
   con etichette+descrizioni** (seed FantasyWorld, formato "fatto bene") + **radar** di
   carattere e **confronto fra entità**. Entità lore arricchite bespoke (luogo/mondo/
-  fazione/cultura/oggetto/creatura/cosmologia/personaggio).
+  fazione/cultura/oggetto/creatura/cosmologia/personaggio). **Template reattivi**: gli slider
+  del Carattere mostrano l'**etichetta-valore attiva** (es. *4 · Gerarchico*) e l'header un
+  **ritratto calcolato** (icona categoria + campi-scheda), entrambi `VIEW` Meta Bind che si
+  aggiornano live col frontmatter.
 - **Gap per mondi profondi**:
   - ✅ **Timeline/storia**: la categoria **epoca** + la **vista cronologica** ora ci sono —
     pagina *Cronologia* col pannello **Linea del tempo** (`views.renderTimeline`): eventi

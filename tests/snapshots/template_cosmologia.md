@@ -1,7 +1,7 @@
 <% await tp.user.crea_cosmologia(tp) %>
 # `=this.nome`
 
-> [!info] Cosmologia
+> [!info] 🌌 Cosmologia
 > **Tipo**: `VIEW[{tipo} ?? "—"]` · **Mondo**: `VIEW[{mondo}][text(renderMarkdown)]`
 >
 > **Stato**: `INPUT[stato][:stato]`
@@ -73,11 +73,11 @@ await views.renderClock(container, app, page);
 --- Carattere
 
 > [!abstract] Carattere
-> **Presenza Cosmica** `INPUT[slider(minValue(1), maxValue(5), addLabels):presenza]`
-> **Attività** `INPUT[slider(minValue(1), maxValue(5), addLabels):attivita]`
-> **Ordine cosmico** `INPUT[slider(minValue(1), maxValue(5), addLabels):ordine]`
-> **Stabilità** `INPUT[slider(minValue(1), maxValue(5), addLabels):stabilita_cosmica]`
-> **Percezione** `INPUT[slider(minValue(1), maxValue(5), addLabels):percezione]`
+> **Presenza Cosmica** `INPUT[slider(minValue(1), maxValue(5), addLabels):presenza]` → `VIEW[{presenza} == 5 ? "5 · Immanente" : ({presenza} == 4 ? "4 · Ancorata" : ({presenza} == 3 ? "3 · Focalizzata" : ({presenza} == 2 ? "2 · Diffusa" : ({presenza} == 1 ? "1 · Trascendente" : ("—")))))]`
+> **Attività** `INPUT[slider(minValue(1), maxValue(5), addLabels):attivita]` → `VIEW[{attivita} == 5 ? "5 · Interventista" : ({attivita} == 4 ? "4 · Attiva" : ({attivita} == 3 ? "3 · Reattiva" : ({attivita} == 2 ? "2 · Risonante" : ({attivita} == 1 ? "1 · Silente" : ("—")))))]`
+> **Ordine cosmico** `INPUT[slider(minValue(1), maxValue(5), addLabels):ordine]` → `VIEW[{ordine} == 5 ? "5 · Legale" : ({ordine} == 4 ? "4 · Tendente all'ordine" : ({ordine} == 3 ? "3 · Neutrale" : ({ordine} == 2 ? "2 · Tendente al caos" : ({ordine} == 1 ? "1 · Caotico" : ("—")))))]`
+> **Stabilità** `INPUT[slider(minValue(1), maxValue(5), addLabels):stabilita_cosmica]` → `VIEW[{stabilita_cosmica} == 5 ? "5 · Morente" : ({stabilita_cosmica} == 4 ? "4 · Instabile" : ({stabilita_cosmica} == 3 ? "3 · Ciclica" : ({stabilita_cosmica} == 2 ? "2 · Persistente" : ({stabilita_cosmica} == 1 ? "1 · Eterna" : ("—")))))]`
+> **Percezione** `INPUT[slider(minValue(1), maxValue(5), addLabels):percezione]` → `VIEW[{percezione} == 5 ? "5 · Ignota" : ({percezione} == 4 ? "4 · Occulta" : ({percezione} == 3 ? "3 · Velata" : ({percezione} == 2 ? "2 · Nota" : ({percezione} == 1 ? "1 · Manifesta" : ("—")))))]`
 
 > [!note]- Presenza Cosmica — Dove e come questo principio esiste nel cosmo.
 > **1 · Trascendente** — Oltre il cosmo, non localizzabile né accessibile; puro principio.

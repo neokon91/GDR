@@ -1,8 +1,9 @@
 <% await tp.user.crea_creatura(tp) %>
 # `=this.nome`
 
-> [!info] Creatura
+> [!info] 🐾 Creatura
 > **Tipo**: `VIEW[{tipo} ?? "—"]` · **Mondo**: `VIEW[{mondo}][text(renderMarkdown)]`
+> **Taglia** `VIEW[{taglia} ?? "—"]` · **Grado di sfida** `VIEW[{gs} ?? "—"]` · **Ruolo ecologico** `VIEW[{ruolo_ecologico} ?? "—"]` · **Dieta** `VIEW[{dieta} ?? "—"]`
 >
 > **Stato**: `INPUT[stato][:stato]`
 
@@ -106,11 +107,11 @@ await views.renderClock(container, app, page);
 --- Carattere
 
 > [!abstract] Carattere
-> **Indole** `INPUT[slider(minValue(1), maxValue(5), addLabels):indole]`
-> **Socialità** `INPUT[slider(minValue(1), maxValue(5), addLabels):socialita]`
-> **Mobilità** `INPUT[slider(minValue(1), maxValue(5), addLabels):mobilita]`
-> **Natura** `INPUT[slider(minValue(1), maxValue(5), addLabels):natura]`
-> **Intelletto** `INPUT[slider(minValue(1), maxValue(5), addLabels):intelletto]`
+> **Indole** `INPUT[slider(minValue(1), maxValue(5), addLabels):indole]` → `VIEW[{indole} == 5 ? "5 · Feroce" : ({indole} == 4 ? "4 · Aggressiva" : ({indole} == 3 ? "3 · Territoriale" : ({indole} == 2 ? "2 · Schiva" : ({indole} == 1 ? "1 · Docile" : ("—")))))]`
+> **Socialità** `INPUT[slider(minValue(1), maxValue(5), addLabels):socialita]` → `VIEW[{socialita} == 5 ? "5 · Ipercollettiva" : ({socialita} == 4 ? "4 · Comunitaria" : ({socialita} == 3 ? "3 · Aggregativa" : ({socialita} == 2 ? "2 · Individualista" : ({socialita} == 1 ? "1 · Solitaria" : ("—")))))]`
+> **Mobilità** `INPUT[slider(minValue(1), maxValue(5), addLabels):mobilita]` → `VIEW[{mobilita} == 5 ? "5 · Errante" : ({mobilita} == 4 ? "4 · Migratoria" : ({mobilita} == 3 ? "3 · Adattiva" : ({mobilita} == 2 ? "2 · Territoriale" : ({mobilita} == 1 ? "1 · Radicata" : ("—")))))]`
+> **Natura** `INPUT[slider(minValue(1), maxValue(5), addLabels):natura]` → `VIEW[{natura} == 5 ? "5 · Aberrante" : ({natura} == 4 ? "4 · Magica" : ({natura} == 3 ? "3 · Toccata" : ({natura} == 2 ? "2 · Insolita" : ({natura} == 1 ? "1 · Mondana" : ("—")))))]`
+> **Intelletto** `INPUT[slider(minValue(1), maxValue(5), addLabels):intelletto]` → `VIEW[{intelletto} == 5 ? "5 · Geniale" : ({intelletto} == 4 ? "4 · Sapiente" : ({intelletto} == 3 ? "3 · Senziente" : ({intelletto} == 2 ? "2 · Astuto" : ({intelletto} == 1 ? "1 · Istintivo" : ("—")))))]`
 
 > [!note]- Indole — Disposizione della creatura verso chi incontra.
 > **1 · Docile** — Mansueta, non aggressiva; fugge o ignora più che attaccare.

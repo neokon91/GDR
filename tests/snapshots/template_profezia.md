@@ -1,8 +1,9 @@
 <% await tp.user.crea_profezia(tp) %>
 # `=this.nome`
 
-> [!info] Profezia
+> [!info] 🔮 Profezia
 > **Tipo**: `VIEW[{tipo} ?? "—"]` · **Mondo**: `VIEW[{mondo}][text(renderMarkdown)]`
+> **Stato d'avveramento** `VIEW[{stato_profezia} ?? "—"]`
 >
 > **Stato**: `INPUT[stato][:stato]`
 
@@ -63,10 +64,10 @@ await views.renderClock(container, app, page);
 --- Carattere
 
 > [!abstract] Carattere
-> **Chiarezza** `INPUT[slider(minValue(1), maxValue(5), addLabels):chiarezza]`
-> **Avveramento** `INPUT[slider(minValue(1), maxValue(5), addLabels):avveramento]`
-> **Esito atteso** `INPUT[slider(minValue(1), maxValue(5), addLabels):esito]`
-> **Malleabilità** `INPUT[slider(minValue(1), maxValue(5), addLabels):malleabilita]`
+> **Chiarezza** `INPUT[slider(minValue(1), maxValue(5), addLabels):chiarezza]` → `VIEW[{chiarezza} == 5 ? "5 · Esplicita" : ({chiarezza} == 4 ? "4 · Chiara" : ({chiarezza} == 3 ? "3 · Allusiva" : ({chiarezza} == 2 ? "2 · Oscura" : ({chiarezza} == 1 ? "1 · Ermetica" : ("—")))))]`
+> **Avveramento** `INPUT[slider(minValue(1), maxValue(5), addLabels):avveramento]` → `VIEW[{avveramento} == 5 ? "5 · In atto" : ({avveramento} == 4 ? "4 · Imminente" : ({avveramento} == 3 ? "3 · In moto" : ({avveramento} == 2 ? "2 · Latente" : ({avveramento} == 1 ? "1 · Remota" : ("—")))))]`
+> **Esito atteso** `INPUT[slider(minValue(1), maxValue(5), addLabels):esito]` → `VIEW[{esito} == 5 ? "5 · Catastrofe" : ({esito} == 4 ? "4 · Sventura" : ({esito} == 3 ? "3 · Svolta" : ({esito} == 2 ? "2 · Benedizione" : ({esito} == 1 ? "1 · Salvezza" : ("—")))))]`
+> **Malleabilità** `INPUT[slider(minValue(1), maxValue(5), addLabels):malleabilita]` → `VIEW[{malleabilita} == 5 ? "5 · Aperta" : ({malleabilita} == 4 ? "4 · Fragile" : ({malleabilita} == 3 ? "3 · Condizionata" : ({malleabilita} == 2 ? "2 · Rigida" : ({malleabilita} == 1 ? "1 · Ineluttabile" : ("—")))))]`
 
 > [!note]- Chiarezza — Quanto la profezia è comprensibile o criptica.
 > **1 · Ermetica** — Incomprensibile; simboli puri, nessun appiglio.

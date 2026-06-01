@@ -1,8 +1,9 @@
 <% await tp.user.crea_regno(tp) %>
 # `=this.nome`
 
-> [!info] Regno
+> [!info] 👑 Regno
 > **Tipo**: `VIEW[{tipo} ?? "—"]` · **Mondo**: `VIEW[{mondo}][text(renderMarkdown)]`
+> **Forma di governo** `VIEW[{governo} ?? "—"]` · **Sovrano** `VIEW[{sovrano} ?? "—"]` · **Portata** `VIEW[{portata} ?? "—"]` · **Popolazione** `VIEW[{popolazione} ?? "—"]`
 >
 > **Stato**: `INPUT[stato][:stato]`
 
@@ -72,10 +73,10 @@ await views.renderClock(container, app, page);
 --- Carattere
 
 > [!abstract] Carattere
-> **Coesione Politica** `INPUT[slider(minValue(1), maxValue(5), addLabels):coesione_politica]`
-> **Stabilità** `INPUT[slider(minValue(1), maxValue(5), addLabels):stabilita]`
-> **Apertura** `INPUT[slider(minValue(1), maxValue(5), addLabels):apertura]`
-> **Proiezione** `INPUT[slider(minValue(1), maxValue(5), addLabels):proiezione]`
+> **Coesione Politica** `INPUT[slider(minValue(1), maxValue(5), addLabels):coesione_politica]` → `VIEW[{coesione_politica} == 5 ? "5 · Monolitica" : ({coesione_politica} == 4 ? "4 · Centralizzata" : ({coesione_politica} == 3 ? "3 · Policentrica" : ({coesione_politica} == 2 ? "2 · Confederale" : ({coesione_politica} == 1 ? "1 · Tribale" : ("—")))))]`
+> **Stabilità** `INPUT[slider(minValue(1), maxValue(5), addLabels):stabilita]` → `VIEW[{stabilita} == 5 ? "5 · Granitica" : ({stabilita} == 4 ? "4 · Salda" : ({stabilita} == 3 ? "3 · Contesa" : ({stabilita} == 2 ? "2 · Fragile" : ({stabilita} == 1 ? "1 · Sull'orlo" : ("—")))))]`
+> **Apertura** `INPUT[slider(minValue(1), maxValue(5), addLabels):apertura]` → `VIEW[{apertura} == 5 ? "5 · Cosmopolita" : ({apertura} == 4 ? "4 · Aperto" : ({apertura} == 3 ? "3 · Pragmatico" : ({apertura} == 2 ? "2 · Protezionista" : ({apertura} == 1 ? "1 · Isolazionista" : ("—")))))]`
+> **Proiezione** `INPUT[slider(minValue(1), maxValue(5), addLabels):proiezione]` → `VIEW[{proiezione} == 5 ? "5 · Egemonico" : ({proiezione} == 4 ? "4 · Espansionista" : ({proiezione} == 3 ? "3 · Influente" : ({proiezione} == 2 ? "2 · Difensivo" : ({proiezione} == 1 ? "1 · Ripiegato" : ("—")))))]`
 
 > [!note]- Coesione Politica — Quanto il potere è unificato o disperso nel regno.
 > **1 · Tribale** — Clan e famiglie autonomi; unità solo simbolica.

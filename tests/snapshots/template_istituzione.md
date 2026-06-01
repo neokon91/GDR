@@ -1,8 +1,9 @@
 <% await tp.user.crea_istituzione(tp) %>
 # `=this.nome`
 
-> [!info] Istituzione
+> [!info] 🏛️ Istituzione
 > **Tipo**: `VIEW[{tipo} ?? "—"]` · **Mondo**: `VIEW[{mondo}][text(renderMarkdown)]`
+> **Portata** `VIEW[{portata} ?? "—"]`
 >
 > **Stato**: `INPUT[stato][:stato]`
 
@@ -66,10 +67,10 @@ await views.renderClock(container, app, page);
 --- Carattere
 
 > [!abstract] Carattere
-> **Prestigio** `INPUT[slider(minValue(1), maxValue(5), addLabels):prestigio]`
-> **Trasparenza** `INPUT[slider(minValue(1), maxValue(5), addLabels):trasparenza]`
-> **Rigidità** `INPUT[slider(minValue(1), maxValue(5), addLabels):rigidita]`
-> **Integrità** `INPUT[slider(minValue(1), maxValue(5), addLabels):integrita]`
+> **Prestigio** `INPUT[slider(minValue(1), maxValue(5), addLabels):prestigio]` → `VIEW[{prestigio} == 5 ? "5 · Egemone" : ({prestigio} == 4 ? "4 · Autorevole" : ({prestigio} == 3 ? "3 · Affermata" : ({prestigio} == 2 ? "2 · Minore" : ({prestigio} == 1 ? "1 · Marginale" : ("—")))))]`
+> **Trasparenza** `INPUT[slider(minValue(1), maxValue(5), addLabels):trasparenza]` → `VIEW[{trasparenza} == 5 ? "5 · Cerimoniale" : ({trasparenza} == 4 ? "4 · Aperta" : ({trasparenza} == 3 ? "3 · Discreta" : ({trasparenza} == 2 ? "2 · Riservata" : ({trasparenza} == 1 ? "1 · Occulta" : ("—")))))]`
+> **Rigidità** `INPUT[slider(minValue(1), maxValue(5), addLabels):rigidita]` → `VIEW[{rigidita} == 5 ? "5 · Inflessibile" : ({rigidita} == 4 ? "4 · Burocratica" : ({rigidita} == 3 ? "3 · Strutturata" : ({rigidita} == 2 ? "2 · Flessibile" : ({rigidita} == 1 ? "1 · Informale" : ("—")))))]`
+> **Integrità** `INPUT[slider(minValue(1), maxValue(5), addLabels):integrita]` → `VIEW[{integrita} == 5 ? "5 · Esemplare" : ({integrita} == 4 ? "4 · Retta" : ({integrita} == 3 ? "3 · Pragmatica" : ({integrita} == 2 ? "2 · Compromessa" : ({integrita} == 1 ? "1 · Corrotta" : ("—")))))]`
 
 > [!note]- Prestigio — Quanto l'istituzione conta nella società.
 > **1 · Marginale** — Quasi ignota o screditata; nessun peso reale.

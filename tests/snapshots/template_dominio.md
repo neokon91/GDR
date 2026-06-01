@@ -1,7 +1,7 @@
 <% await tp.user.crea_dominio(tp) %>
 # `=this.nome`
 
-> [!info] Dominio
+> [!info] 🌐 Dominio
 > **Tipo**: `VIEW[{tipo} ?? "—"]` · **Mondo**: `VIEW[{mondo}][text(renderMarkdown)]`
 >
 > **Stato**: `INPUT[stato][:stato]`

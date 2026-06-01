@@ -1,8 +1,9 @@
 <% await tp.user.crea_pg(tp) %>
 # `=this.nome`
 
-> [!info] PG
+> [!info] 🎭 PG
 > **Tipo**: `VIEW[{tipo} ?? "—"]` · **Mondo**: `VIEW[{mondo}][text(renderMarkdown)]`
+> **Titolo o rango** `VIEW[{titolo} ?? "—"]` · **Allineamento** `VIEW[{allineamento} ?? "—"]` · **Pronomi** `VIEW[{pronomi} ?? "—"]` · **Età** `VIEW[{eta} ?? "—"]`
 >
 > **Stato**: `INPUT[stato][:stato]`
 
@@ -174,11 +175,11 @@ return engine.markdown.create(await views.renderCondizioni(app));
 --- Carattere
 
 > [!abstract] Carattere
-> **Moralità** `INPUT[slider(minValue(1), maxValue(5), addLabels):moralita]`
-> **Lealtà** `INPUT[slider(minValue(1), maxValue(5), addLabels):lealta]`
-> **Temperamento** `INPUT[slider(minValue(1), maxValue(5), addLabels):temperamento]`
-> **Socievolezza** `INPUT[slider(minValue(1), maxValue(5), addLabels):socievolezza]`
-> **Approccio** `INPUT[slider(minValue(1), maxValue(5), addLabels):approccio]`
+> **Moralità** `INPUT[slider(minValue(1), maxValue(5), addLabels):moralita]` → `VIEW[{moralita} == 5 ? "5 · Spietato" : ({moralita} == 4 ? "4 · Interessato" : ({moralita} == 3 ? "3 · Pragmatico" : ({moralita} == 2 ? "2 · Generoso" : ({moralita} == 1 ? "1 · Altruista" : ("—")))))]`
+> **Lealtà** `INPUT[slider(minValue(1), maxValue(5), addLabels):lealta]` → `VIEW[{lealta} == 5 ? "5 · Ribelle" : ({lealta} == 4 ? "4 · Insofferente" : ({lealta} == 3 ? "3 · Indipendente" : ({lealta} == 2 ? "2 · Affidabile" : ({lealta} == 1 ? "1 · Leale" : ("—")))))]`
+> **Temperamento** `INPUT[slider(minValue(1), maxValue(5), addLabels):temperamento]` → `VIEW[{temperamento} == 5 ? "5 · Volatile" : ({temperamento} == 4 ? "4 · Impulsivo" : ({temperamento} == 3 ? "3 · Equilibrato" : ({temperamento} == 2 ? "2 · Calmo" : ({temperamento} == 1 ? "1 · Glaciale" : ("—")))))]`
+> **Socievolezza** `INPUT[slider(minValue(1), maxValue(5), addLabels):socievolezza]` → `VIEW[{socievolezza} == 5 ? "5 · Magnetico" : ({socievolezza} == 4 ? "4 · Espansivo" : ({socievolezza} == 3 ? "3 · Cordiale" : ({socievolezza} == 2 ? "2 · Riservato" : ({socievolezza} == 1 ? "1 · Solitario" : ("—")))))]`
+> **Approccio** `INPUT[slider(minValue(1), maxValue(5), addLabels):approccio]` → `VIEW[{approccio} == 5 ? "5 · Istintivo" : ({approccio} == 4 ? "4 · Pratico" : ({approccio} == 3 ? "3 · Versatile" : ({approccio} == 2 ? "2 · Riflessivo" : ({approccio} == 1 ? "1 · Metodico" : ("—")))))]`
 
 > [!note]- Moralità — Quanto antepone gli altri a sé stesso.
 > **1 · Altruista** — Si sacrifica per gli altri; il bene comune prima di tutto.

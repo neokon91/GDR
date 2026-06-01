@@ -1,8 +1,9 @@
 <% await tp.user.crea_divinita(tp) %>
 # `=this.nome`
 
-> [!info] Divinità
+> [!info] ☀️ Divinità
 > **Tipo**: `VIEW[{tipo} ?? "—"]` · **Mondo**: `VIEW[{mondo}][text(renderMarkdown)]`
+> **Dominio** `VIEW[{dominio} ?? "—"]` · **Allineamento** `VIEW[{allineamento} ?? "—"]` · **Simbolo** `VIEW[{simbolo} ?? "—"]`
 >
 > **Stato**: `INPUT[stato][:stato]`
 
@@ -29,11 +30,11 @@
 --- Carattere
 
 > [!abstract] Carattere
-> **Presenza Cosmica** `INPUT[slider(minValue(1), maxValue(5), addLabels):presenza_cosmica]`
-> **Volontà** `INPUT[slider(minValue(1), maxValue(5), addLabels):volonta]`
-> **Etica Divina** `INPUT[slider(minValue(1), maxValue(5), addLabels):etica_divina]`
-> **Modalità di Interazione** `INPUT[slider(minValue(1), maxValue(5), addLabels):interazione_divina]`
-> **Incarnazione** `INPUT[slider(minValue(1), maxValue(5), addLabels):incarnazione]`
+> **Presenza Cosmica** `INPUT[slider(minValue(1), maxValue(5), addLabels):presenza_cosmica]` → `VIEW[{presenza_cosmica} == 5 ? "5 · Immanente" : ({presenza_cosmica} == 4 ? "4 · Ancorata" : ({presenza_cosmica} == 3 ? "3 · Focalizzata" : ({presenza_cosmica} == 2 ? "2 · Diffusa" : ({presenza_cosmica} == 1 ? "1 · Trascendente" : ("—")))))]`
+> **Volontà** `INPUT[slider(minValue(1), maxValue(5), addLabels):volonta]` → `VIEW[{volonta} == 5 ? "5 · Interventista" : ({volonta} == 4 ? "4 · Attiva" : ({volonta} == 3 ? "3 · Reattiva" : ({volonta} == 2 ? "2 · Risonante" : ({volonta} == 1 ? "1 · Silente" : ("—")))))]`
+> **Etica Divina** `INPUT[slider(minValue(1), maxValue(5), addLabels):etica_divina]` → `VIEW[{etica_divina} == 5 ? "5 · Giudicante" : ({etica_divina} == 4 ? "4 · Normativa" : ({etica_divina} == 3 ? "3 · Ambigua" : ({etica_divina} == 2 ? "2 · Osservatrice" : ({etica_divina} == 1 ? "1 · Indifferente" : ("—")))))]`
+> **Modalità di Interazione** `INPUT[slider(minValue(1), maxValue(5), addLabels):interazione_divina]` → `VIEW[{interazione_divina} == 5 ? "5 · Totale" : ({interazione_divina} == 4 ? "4 · Esplicita" : ({interazione_divina} == 3 ? "3 · Stratificata" : ({interazione_divina} == 2 ? "2 · Simbolica" : ({interazione_divina} == 1 ? "1 · Ineffabile" : ("—")))))]`
+> **Incarnazione** `INPUT[slider(minValue(1), maxValue(5), addLabels):incarnazione]` → `VIEW[{incarnazione} == 5 ? "5 · Manifesta" : ({incarnazione} == 4 ? "4 · Iconica" : ({incarnazione} == 3 ? "3 · Parziale" : ({incarnazione} == 2 ? "2 · Impalpabile" : ({incarnazione} == 1 ? "1 · Pura" : ("—")))))]`
 
 > [!note]- Presenza Cosmica — Determina dove e come la divinità esiste nel cosmo. Unisce la densità ontologica alla distribuzione planare.
 > **1 · Trascendente** — Esiste oltre il cosmo, non localizzabile, né accessibile. È puro principio.

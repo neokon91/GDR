@@ -1,8 +1,9 @@
 <% await tp.user.crea_insidia(tp) %>
 # `=this.nome`
 
-> [!info] Insidia
+> [!info] ⚠️ Insidia
 > **Tipo**: `VIEW[{tipo} ?? "—"]` · **Mondo**: `VIEW[{mondo}][text(renderMarkdown)]`
+> **Livello di gioco** `VIEW[{tier} ?? "—"]` · **Minaccia** `VIEW[{minaccia} ?? "—"]` · **Prova** `VIEW[{prova} ?? "—"]` · **Danno / Effetto** `VIEW[{danno} ?? "—"]`
 >
 > **Stato**: `INPUT[stato][:stato]`
 

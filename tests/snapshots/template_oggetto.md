@@ -1,8 +1,9 @@
 <% await tp.user.crea_oggetto(tp) %>
 # `=this.nome`
 
-> [!info] Oggetto
+> [!info] 🎒 Oggetto
 > **Tipo**: `VIEW[{tipo} ?? "—"]` · **Mondo**: `VIEW[{mondo}][text(renderMarkdown)]`
+> **Rarità** `VIEW[{rarita} ?? "—"]` · **Sintonia** `VIEW[{sintonia} ?? "—"]`
 >
 > **Stato**: `INPUT[stato][:stato]`
 
@@ -31,11 +32,11 @@
 --- Carattere
 
 > [!abstract] Carattere
-> **Natura Materiale** `INPUT[slider(minValue(1), maxValue(5), addLabels):natura_materiale]`
-> **Origine** `INPUT[slider(minValue(1), maxValue(5), addLabels):origine]`
-> **Funzione** `INPUT[slider(minValue(1), maxValue(5), addLabels):funzione]`
-> **Potere Attivo** `INPUT[slider(minValue(1), maxValue(5), addLabels):potere_attivo]`
-> **Legame Spirituale** `INPUT[slider(minValue(1), maxValue(5), addLabels):legame]`
+> **Natura Materiale** `INPUT[slider(minValue(1), maxValue(5), addLabels):natura_materiale]` → `VIEW[{natura_materiale} == 5 ? "5 · Perfetta" : ({natura_materiale} == 4 ? "4 · Avanzata" : ({natura_materiale} == 3 ? "3 · Fine" : ({natura_materiale} == 2 ? "2 · Forgiata" : ({natura_materiale} == 1 ? "1 · Grezza" : ("—")))))]`
+> **Origine** `INPUT[slider(minValue(1), maxValue(5), addLabels):origine]` → `VIEW[{origine} == 5 ? "5 · Divina" : ({origine} == 4 ? "4 · Spirituale" : ({origine} == 3 ? "3 · Alchemica" : ({origine} == 2 ? "2 · Umana" : ({origine} == 1 ? "1 · Naturale" : ("—")))))]`
+> **Funzione** `INPUT[slider(minValue(1), maxValue(5), addLabels):funzione]` → `VIEW[{funzione} == 5 ? "5 · Sacro" : ({funzione} == 4 ? "4 · Simbolico" : ({funzione} == 3 ? "3 · Versatile" : ({funzione} == 2 ? "2 · Arcana" : ({funzione} == 1 ? "1 · Utilitaria" : ("—")))))]`
+> **Potere Attivo** `INPUT[slider(minValue(1), maxValue(5), addLabels):potere_attivo]` → `VIEW[{potere_attivo} == 5 ? "5 · Senziente" : ({potere_attivo} == 4 ? "4 · Semi-autonomo" : ({potere_attivo} == 3 ? "3 · Reattivo" : ({potere_attivo} == 2 ? "2 · Attivabile" : ({potere_attivo} == 1 ? "1 · Dormiente" : ("—")))))]`
+> **Legame Spirituale** `INPUT[slider(minValue(1), maxValue(5), addLabels):legame]` → `VIEW[{legame} == 5 ? "5 · Vincolante" : ({legame} == 4 ? "4 · Legato" : ({legame} == 3 ? "3 · Ereditario" : ({legame} == 2 ? "2 · Empatico" : ({legame} == 1 ? "1 · Libero" : ("—")))))]`
 
 > [!note]- Natura Materiale — Livello di lavorazione e qualità della materia dell'oggetto.
 > **1 · Grezza** — Rudimentale, naturale o primitivo: un osso, una pietra, un ramo sacro.

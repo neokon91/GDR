@@ -1,8 +1,9 @@
 <% await tp.user.crea_entita_primordiale(tp) %>
 # `=this.nome`
 
-> [!info] Entità primordiale
+> [!info] 🌑 Entità primordiale
 > **Tipo**: `VIEW[{tipo} ?? "—"]` · **Mondo**: `VIEW[{mondo}][text(renderMarkdown)]`
+> **Stato** `VIEW[{stato_cosmico} ?? "—"]` · **Allineamento** `VIEW[{allineamento} ?? "—"]`
 >
 > **Stato**: `INPUT[stato][:stato]`
 

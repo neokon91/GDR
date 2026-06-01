@@ -1,8 +1,9 @@
 <% await tp.user.crea_legge_fondamentale(tp) %>
 # `=this.nome`
 
-> [!info] Legge fondamentale
+> [!info] ⚖️ Legge fondamentale
 > **Tipo**: `VIEW[{tipo} ?? "—"]` · **Mondo**: `VIEW[{mondo}][text(renderMarkdown)]`
+> **Poli** `VIEW[{poli} ?? "—"]`
 >
 > **Stato**: `INPUT[stato][:stato]`
 

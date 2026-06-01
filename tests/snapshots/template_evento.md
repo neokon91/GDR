@@ -1,8 +1,9 @@
 <% await tp.user.crea_evento(tp) %>
 # `=this.nome`
 
-> [!info] Evento
+> [!info] 📜 Evento
 > **Tipo**: `VIEW[{tipo} ?? "—"]` · **Mondo**: `VIEW[{mondo}][text(renderMarkdown)]`
+> **Portata** `VIEW[{portata} ?? "—"]`
 >
 > **Stato**: `INPUT[stato][:stato]`
 

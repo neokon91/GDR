@@ -54,15 +54,29 @@
    Un'unica definizione, riusata da tutti i template. Evita il copia-incolla di
    intestazioni, superficie giocabile, collegamenti e pannelli. #}
 
-{# Card identita' (intestazione sopra le tab): tipo/mondo sola-lettura
-   (si editano dalle Properties / Metadata Menu Select), stato editabile inline. #}
+{# Ritratto calcolato (read-only, REATTIVO): i campi-scheda strutturati della
+   categoria come strip di VIEW — un'identità a colpo d'occhio sopra le tab, che
+   riflette i valori del frontmatter. Vuoto se la categoria non ha campi-scheda. #}
+{% macro ritratto(category) -%}
+{%- set campi = core.get('scheda', {}).get(category, []) -%}
+{%- if campi %}
+> {% for fid in campi %}**{{ core.fields[fid].label }}** {{ view(fid) }}{% if not loop.last %} · {% endif %}{% endfor %}
+
+{% endif -%}
+{%- endmacro %}
+
+{# Card identita' (intestazione sopra le tab): icona della categoria + tipo/mondo
+   sola-lettura (si editano dalle Properties / Metadata Menu Select), il ritratto
+   calcolato dei campi strutturati, e lo stato editabile inline. #}
 {% macro identita_card(template) -%}
-> [!info] {{ template.title }}
+{%- set icon = plugins.get('folder_icons', {}).get(template.category, '') -%}
+> [!info] {{ (icon ~ ' ') if icon else '' }}{{ template.title }}
 {% if template.category != "mondo" %}
 > **Tipo**: {{ view('tipo') }} · **Mondo**: {{ view_md('mondo') }}
 {% else %}
 > **Tipo**: {{ view('tipo') }}
 {% endif %}
+{{ ritratto(template.category) -}}
 >
 > **Stato**: {{ field('stato', label=false) }}
 {%- endmacro %}
@@ -117,12 +131,23 @@ await views.renderClock(container, app, page);
    Ogni asse = {id, nome, descrizione, valori:{1..5:{etichetta, descrizione}}}
    -> slider 1-5 + una legenda pieghevole con le 5 etichette/descrizioni.
    Sotto, se >= 3 assi, il radar (grafico_assi) li visualizza. #}
+{# Etichetta-valore ATTIVA di un asse: un VIEW reattivo che mostra "4 · Gerarchico"
+   per il valore corrente (dalla valori-map), aggiornandosi mentre muovi lo slider.
+   Ternario annidato sui 5 valori (stesso pattern reattivo di tavolo()/pressione). #}
+{% macro asse_etichetta(a) -%}
+{%- set ns = namespace(expr='"—"') -%}
+{%- for k, v in a.valori | dictsort -%}
+{%- set ns.expr = '{' ~ a.id ~ '} == ' ~ k ~ ' ? "' ~ k ~ ' · ' ~ (v.etichetta | string | replace('"', "'")) ~ '" : (' ~ ns.expr ~ ')' -%}
+{%- endfor -%}
+`VIEW[{{ ns.expr }}]`
+{%- endmacro %}
+
 {% macro carattere(category) -%}
 {% set assi = core.get('assi_tematici', {}).get(category, []) %}
 {% if assi %}
 > [!abstract] Carattere
 {% for a in assi %}
-> **{{ a.nome }}** `INPUT[slider(minValue(1), maxValue(5), addLabels):{{ a.id }}]`
+> **{{ a.nome }}** `INPUT[slider(minValue(1), maxValue(5), addLabels):{{ a.id }}]` → {{ asse_etichetta(a) }}
 {% endfor %}
 {% for a in assi %}
 

@@ -1,8 +1,9 @@
 <% await tp.user.crea_classe(tp) %>
 # `=this.nome`
 
-> [!info] Classe
+> [!info] 🛡️ Classe
 > **Tipo**: `VIEW[{tipo} ?? "—"]` · **Mondo**: `VIEW[{mondo}][text(renderMarkdown)]`
+> **Dado vita** `VIEW[{dado_vita} ?? "—"]` · **Caratteristica primaria** `VIEW[{car_primaria} ?? "—"]` · **TS competenti** `VIEW[{ts_competenze} ?? "—"]` · **Incantesimi** `VIEW[{incantesimi} ?? "—"]`
 >
 > **Stato**: `INPUT[stato][:stato]`
 

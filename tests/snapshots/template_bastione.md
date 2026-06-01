@@ -1,7 +1,7 @@
 <% await tp.user.crea_bastione(tp) %>
 # `=this.nome`
 
-> [!info] Bastione
+> [!info] 🏰 Bastione
 > **Tipo**: `VIEW[{tipo} ?? "—"]` · **Mondo**: `VIEW[{mondo}][text(renderMarkdown)]`
 >
 > **Stato**: `INPUT[stato][:stato]`

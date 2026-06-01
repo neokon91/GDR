@@ -1,8 +1,9 @@
 <% await tp.user.crea_luogo(tp) %>
 # `=this.nome`
 
-> [!info] Luogo
+> [!info] 🗺️ Luogo
 > **Tipo**: `VIEW[{tipo} ?? "—"]` · **Mondo**: `VIEW[{mondo}][text(renderMarkdown)]`
+> **Clima** `VIEW[{clima} ?? "—"]` · **Popolazione** `VIEW[{popolazione} ?? "—"]`
 >
 > **Stato**: `INPUT[stato][:stato]`
 
@@ -76,11 +77,11 @@ await views.renderClock(container, app, page);
 --- Carattere
 
 > [!abstract] Carattere
-> **Stabilità Spaziale** `INPUT[slider(minValue(1), maxValue(5), addLabels):stabilita_spaziale]`
-> **Coerenza Temporale** `INPUT[slider(minValue(1), maxValue(5), addLabels):coerenza_temporale]`
-> **Presenza Magica** `INPUT[slider(minValue(1), maxValue(5), addLabels):presenza_magica]`
-> **Sacralità** `INPUT[slider(minValue(1), maxValue(5), addLabels):sacralita]`
-> **Civilizzazione** `INPUT[slider(minValue(1), maxValue(5), addLabels):civilizzazione]`
+> **Stabilità Spaziale** `INPUT[slider(minValue(1), maxValue(5), addLabels):stabilita_spaziale]` → `VIEW[{stabilita_spaziale} == 5 ? "5 · Mutante" : ({stabilita_spaziale} == 4 ? "4 · Instabile" : ({stabilita_spaziale} == 3 ? "3 · Anomalo" : ({stabilita_spaziale} == 2 ? "2 · Plastico" : ({stabilita_spaziale} == 1 ? "1 · Solido" : ("—")))))]`
+> **Coerenza Temporale** `INPUT[slider(minValue(1), maxValue(5), addLabels):coerenza_temporale]` → `VIEW[{coerenza_temporale} == 5 ? "5 · Atemporale" : ({coerenza_temporale} == 4 ? "4 · Fratturato" : ({coerenza_temporale} == 3 ? "3 · Distorto" : ({coerenza_temporale} == 2 ? "2 · Ondulato" : ({coerenza_temporale} == 1 ? "1 · Lineare" : ("—")))))]`
+> **Presenza Magica** `INPUT[slider(minValue(1), maxValue(5), addLabels):presenza_magica]` → `VIEW[{presenza_magica} == 5 ? "5 · Sovraccarica" : ({presenza_magica} == 4 ? "4 · Densa" : ({presenza_magica} == 3 ? "3 · Attiva" : ({presenza_magica} == 2 ? "2 · Debole" : ({presenza_magica} == 1 ? "1 · Nulla" : ("—")))))]`
+> **Sacralità** `INPUT[slider(minValue(1), maxValue(5), addLabels):sacralita]` → `VIEW[{sacralita} == 5 ? "5 · Axis Mundi" : ({sacralita} == 4 ? "4 · Benedetto" : ({sacralita} == 3 ? "3 · Rituale" : ({sacralita} == 2 ? "2 · Neutro" : ({sacralita} == 1 ? "1 · Profano" : ("—")))))]`
+> **Civilizzazione** `INPUT[slider(minValue(1), maxValue(5), addLabels):civilizzazione]` → `VIEW[{civilizzazione} == 5 ? "5 · Iperevoluto" : ({civilizzazione} == 4 ? "4 · Urbanizzato" : ({civilizzazione} == 3 ? "3 · Colonizzato" : ({civilizzazione} == 2 ? "2 · Marginale" : ({civilizzazione} == 1 ? "1 · Selvaggio" : ("—")))))]`
 
 > [!note]- Stabilità Spaziale — Quanto lo spazio del luogo è fisso e misurabile, o mutevole e illusorio.
 > **1 · Solido** — Confini chiari e immutabili; geografia costante, coordinate affidabili.

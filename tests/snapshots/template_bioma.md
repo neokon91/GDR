@@ -1,8 +1,9 @@
 <% await tp.user.crea_bioma(tp) %>
 # `=this.nome`
 
-> [!info] Bioma
+> [!info] 🌲 Bioma
 > **Tipo**: `VIEW[{tipo} ?? "—"]` · **Mondo**: `VIEW[{mondo}][text(renderMarkdown)]`
+> **Clima** `VIEW[{clima} ?? "—"]`
 >
 > **Stato**: `INPUT[stato][:stato]`
 
@@ -63,10 +64,10 @@ await views.renderClock(container, app, page);
 --- Carattere
 
 > [!abstract] Carattere
-> **Ostilità** `INPUT[slider(minValue(1), maxValue(5), addLabels):ostilita]`
-> **Fertilità** `INPUT[slider(minValue(1), maxValue(5), addLabels):fertilita]`
-> **Magia Ambientale** `INPUT[slider(minValue(1), maxValue(5), addLabels):magia_ambientale]`
-> **Accessibilità** `INPUT[slider(minValue(1), maxValue(5), addLabels):accessibilita]`
+> **Ostilità** `INPUT[slider(minValue(1), maxValue(5), addLabels):ostilita]` → `VIEW[{ostilita} == 5 ? "5 · Letale" : ({ostilita} == 4 ? "4 · Ostile" : ({ostilita} == 3 ? "3 · Aspro" : ({ostilita} == 2 ? "2 · Mite" : ({ostilita} == 1 ? "1 · Ospitale" : ("—")))))]`
+> **Fertilità** `INPUT[slider(minValue(1), maxValue(5), addLabels):fertilita]` → `VIEW[{fertilita} == 5 ? "5 · Lussureggiante" : ({fertilita} == 4 ? "4 · Rigoglioso" : ({fertilita} == 3 ? "3 · Modesto" : ({fertilita} == 2 ? "2 · Magro" : ({fertilita} == 1 ? "1 · Sterile" : ("—")))))]`
+> **Magia Ambientale** `INPUT[slider(minValue(1), maxValue(5), addLabels):magia_ambientale]` → `VIEW[{magia_ambientale} == 5 ? "5 · Saturo" : ({magia_ambientale} == 4 ? "4 · Carico" : ({magia_ambientale} == 3 ? "3 · Intriso" : ({magia_ambientale} == 2 ? "2 · Toccato" : ({magia_ambientale} == 1 ? "1 · Mondano" : ("—")))))]`
+> **Accessibilità** `INPUT[slider(minValue(1), maxValue(5), addLabels):accessibilita]` → `VIEW[{accessibilita} == 5 ? "5 · Inaccessibile" : ({accessibilita} == 4 ? "4 · Remoto" : ({accessibilita} == 3 ? "3 · Impervio" : ({accessibilita} == 2 ? "2 · Praticabile" : ({accessibilita} == 1 ? "1 · Aperto" : ("—")))))]`
 
 > [!note]- Ostilità — Quanto il bioma è pericoloso per chi lo attraversa.
 > **1 · Ospitale** — Sicuro e accogliente; sopravvivere è facile.

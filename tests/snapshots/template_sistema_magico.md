@@ -1,8 +1,9 @@
 <% await tp.user.crea_sistema_magico(tp) %>
 # `=this.nome`
 
-> [!info] Sistema magico
+> [!info] 🪄 Sistema magico
 > **Tipo**: `VIEW[{tipo} ?? "—"]` · **Mondo**: `VIEW[{mondo}][text(renderMarkdown)]`
+> **Fonte del potere** `VIEW[{fonte_potere} ?? "—"]`
 >
 > **Stato**: `INPUT[stato][:stato]`
 
@@ -66,11 +67,11 @@ await views.renderClock(container, app, page);
 --- Carattere
 
 > [!abstract] Carattere
-> **Fonte della Magia** `INPUT[slider(minValue(1), maxValue(5), addLabels):fonte_magia]`
-> **Metodo Magico** `INPUT[slider(minValue(1), maxValue(5), addLabels):metodo_magia]`
-> **Costo Esistenziale** `INPUT[slider(minValue(1), maxValue(5), addLabels):costo_magia]`
-> **Rischio Esistenziale** `INPUT[slider(minValue(1), maxValue(5), addLabels):rischio]`
-> **Ethos Magico** `INPUT[slider(minValue(1), maxValue(5), addLabels):ethos_magico]`
+> **Fonte della Magia** `INPUT[slider(minValue(1), maxValue(5), addLabels):fonte_magia]` → `VIEW[{fonte_magia} == 5 ? "5 · Donata" : ({fonte_magia} == 4 ? "4 · Evocata" : ({fonte_magia} == 3 ? "3 · Equilibrata" : ({fonte_magia} == 2 ? "2 · Latente" : ({fonte_magia} == 1 ? "1 · Innata" : ("—")))))]`
+> **Metodo Magico** `INPUT[slider(minValue(1), maxValue(5), addLabels):metodo_magia]` → `VIEW[{metodo_magia} == 5 ? "5 · Meccanico" : ({metodo_magia} == 4 ? "4 · Codificato" : ({metodo_magia} == 3 ? "3 · Interpretativo" : ({metodo_magia} == 2 ? "2 · Alchemico" : ({metodo_magia} == 1 ? "1 · Selvaggio" : ("—")))))]`
+> **Costo Esistenziale** `INPUT[slider(minValue(1), maxValue(5), addLabels):costo_magia]` → `VIEW[{costo_magia} == 5 ? "5 · Sacrificio" : ({costo_magia} == 4 ? "4 · Gravoso" : ({costo_magia} == 3 ? "3 · Bilanciato" : ({costo_magia} == 2 ? "2 · Residuale" : ({costo_magia} == 1 ? "1 · Nullo" : ("—")))))]`
+> **Rischio Esistenziale** `INPUT[slider(minValue(1), maxValue(5), addLabels):rischio]` → `VIEW[{rischio} == 5 ? "5 · Corrompente" : ({rischio} == 4 ? "4 · Pericolosa" : ({rischio} == 3 ? "3 · Instabile" : ({rischio} == 2 ? "2 · Fragile" : ({rischio} == 1 ? "1 · Sicura" : ("—")))))]`
+> **Ethos Magico** `INPUT[slider(minValue(1), maxValue(5), addLabels):ethos_magico]` → `VIEW[{ethos_magico} == 5 ? "5 · Liturgico" : ({ethos_magico} == 4 ? "4 · Sacrale funzionale" : ({ethos_magico} == 3 ? "3 · Ambiguo" : ({ethos_magico} == 2 ? "2 · Professionale" : ({ethos_magico} == 1 ? "1 · Utilitarista" : ("—")))))]`
 
 > [!note]- Fonte della Magia — Origine ontologica del potere magico. Indica se proviene dall’interno dell’essere o da forze esterne.
 > **1 · Innata** — La magia nasce da dentro: sangue, anima, volontà. È parte dell’essenza dell’incantatore.

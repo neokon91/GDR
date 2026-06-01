@@ -1,8 +1,9 @@
 <% await tp.user.crea_background(tp) %>
 # `=this.nome`
 
-> [!info] Background
+> [!info] 📖 Background
 > **Tipo**: `VIEW[{tipo} ?? "—"]` · **Mondo**: `VIEW[{mondo}][text(renderMarkdown)]`
+> **Caratteristiche** `VIEW[{car_background} ?? "—"]` · **Competenza in strumenti** `VIEW[{strumento} ?? "—"]` · **Talento d'origine** `VIEW[{talento_origine} ?? "—"]`
 >
 > **Stato**: `INPUT[stato][:stato]`
 

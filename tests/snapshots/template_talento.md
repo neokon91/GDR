@@ -1,8 +1,9 @@
 <% await tp.user.crea_talento(tp) %>
 # `=this.nome`
 
-> [!info] Talento
+> [!info] ⭐ Talento
 > **Tipo**: `VIEW[{tipo} ?? "—"]` · **Mondo**: `VIEW[{mondo}][text(renderMarkdown)]`
+> **Prerequisito** `VIEW[{prerequisito} ?? "—"]` · **Ripetibile** `VIEW[{ripetibile} ?? "—"]`
 >
 > **Stato**: `INPUT[stato][:stato]`
 
