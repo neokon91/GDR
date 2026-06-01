@@ -1,0 +1,338 @@
+# Sistema astrologico / psico-archetipico (recupero #9, FantasyWorld JSON/astrologia).
+# Catalogo del TEMA NATALE per i personaggi (soprattutto PNG): scelto un SEGNO si
+# deriva elemento/modalità/archetipo/MBTI; l'ARCANO è la carta del destino opzionale.
+# Distillato fedele da astro_segni/archetipi/elementi/arcani_maggiori. Sola lettura,
+# rigenerabile. Reso da views.renderTemaNatale; emesso in core.json (write_engine_data).
+elementi:
+- nome: Fuoco
+  qualita: Volontà, ispirazione, coraggio
+  funzioni: intuizione, azione, idealismo
+  polarita: espansiva
+- nome: Acqua
+  qualita: empatia, sensibilità, introspezione
+  funzioni: sentimento introverso, percezione intuitiva
+  polarita: ricettiva
+- nome: Aria
+  qualita: razionalità, apertura, analisi
+  funzioni: pensiero introverso, intuizione estroversa
+  polarita: dinamica
+- nome: Terra
+  qualita: concretezza, disciplina, realismo
+  funzioni: sensazione introversa, pensiero estroverso
+  polarita: strutturante
+segni:
+- nome: Ariete
+  elemento: Fuoco
+  modalita: cardinale
+  funzione: Inizio, impulso, autoaffermazione
+  mbti:
+  - ESTP
+  - ENTJ
+  archetipo: Il Pioniere
+  parola_chiave: Iniziazione
+  funzione_archetipica: iniziatore, spinta vitale, rischio creativo
+  manifestazioni:
+  - Viandante in fiamme
+  - Bambino con spada
+  - Fuoco senz’ombra
+  ombra:
+  - L’Impulsivo
+  - Il Distruttore
+- nome: Toro
+  elemento: Terra
+  modalita: fissa
+  funzione: Stabilità, godimento, sicurezza
+  mbti:
+  - ISFJ
+  - ISTJ
+  archetipo: Il Custode della Forma
+  parola_chiave: Radicamento
+  funzione_archetipica: protezione, stabilità, godimento incarnato
+  manifestazioni:
+  - Gigante silenzioso
+  - Statua viva
+  - Giardino eterno
+  ombra:
+  - Il Possessivo
+  - Il Bloccato
+- nome: Gemelli
+  elemento: Aria
+  modalita: mutevole
+  funzione: Connessione, gioco mentale, comunicazione
+  mbti:
+  - ENTP
+  - ENFP
+  archetipo: Il Mutaforma Mentale
+  parola_chiave: Connessione
+  funzione_archetipica: connessione, adattamento, pensiero multiplo
+  manifestazioni:
+  - Serpente parlante
+  - Specchio errante
+  - Uccello dai mille nomi
+  ombra:
+  - Il Bugiardo
+  - Il Disperso
+- nome: Cancro
+  elemento: Acqua
+  modalita: cardinale
+  funzione: Cura, protezione, appartenenza
+  mbti:
+  - ISFJ
+  - ENFJ
+  archetipo: La Madre Cosmica
+  parola_chiave: Accoglienza
+  funzione_archetipica: accoglienza, nutrimento, memoria affettiva
+  manifestazioni:
+  - Fonte interiore
+  - Madre delle maree
+  - Sfera d'acqua che canta
+  ombra:
+  - La Soffocante
+  - La Dipendente
+- nome: Leone
+  elemento: Fuoco
+  modalita: fissa
+  funzione: Orgoglio, espressione, leadership
+  mbti:
+  - INTJ
+  - INFJ
+  archetipo: Il Sovrano del Sé
+  parola_chiave: Espressione
+  funzione_archetipica: espressione creativa, centralità dell’essere, volontà
+  manifestazioni:
+  - Corona fiammeggiante
+  - Cuore di luce
+  - Felino regale
+  ombra:
+  - Il Narcisista
+  - Il Tiranno
+- nome: Vergine
+  elemento: Terra
+  modalita: mutevole
+  funzione: Servizio, analisi, purificazione
+  mbti:
+  - ISTJ
+  - INTJ
+  archetipo: L’Alchimista del Quotidiano
+  parola_chiave: Perfezionamento
+  funzione_archetipica: discernimento, purificazione, servizio sacro
+  manifestazioni:
+  - Spirale di polvere
+  - Fiore che cresce in un libro
+  - Macchina rituale
+  ombra:
+  - Il Critico
+  - Il Servo Vuoto
+- nome: Bilancia
+  elemento: Aria
+  modalita: cardinale
+  funzione: Armonia, giustizia, relazione consapevole
+  mbti:
+  - ENFJ
+  - ESFJ
+  archetipo: Il Diplomatico Sacro
+  parola_chiave: Armonia
+  funzione_archetipica: equilibrio, relazione, bellezza condivisa
+  manifestazioni:
+  - Bilancia fluttuante
+  - Due specchi che si guardano
+  - Corda che vibra tra due cuori
+  ombra:
+  - Il Compiacente
+  - Il Giudicante
+- nome: Scorpione
+  elemento: Acqua
+  modalita: fissa
+  funzione: Intensità, desiderio, rinascita
+  mbti:
+  - INFP
+  - INFJ
+  archetipo: Il Trasmutatore d’Ombra
+  parola_chiave: Rinascita
+  funzione_archetipica: intensità, trasformazione, morte simbolica
+  manifestazioni:
+  - Serpente che muta pelle
+  - Pozzo che riflette stelle
+  - Cuore trafitto che canta
+  ombra:
+  - Il Vendicatore
+  - L’Ossessivo
+- nome: Sagittario
+  elemento: Fuoco
+  modalita: mutevole
+  funzione: Espansione, ricerca di senso, visione
+  mbti:
+  - ENFP
+  - ESFP
+  archetipo: L’Esploratore Spirituale
+  parola_chiave: Espansione
+  funzione_archetipica: espansione di coscienza, ricerca di senso
+  manifestazioni:
+  - Centauro che sorride
+  - Arco che punta alle costellazioni
+  - Pergamena fiammeggiante
+  ombra:
+  - Il Fuggiasco
+  - Il Predicatore
+- nome: Capricorno
+  elemento: Terra
+  modalita: cardinale
+  funzione: Responsabilità, struttura, autorealizzazione
+  mbti:
+  - ESTJ
+  - ENTJ
+  archetipo: Il Costruttore del Destino
+  parola_chiave: Realizzazione
+  funzione_archetipica: struttura, responsabilità, realizzazione karmica
+  manifestazioni:
+  - Scala infinita
+  - Montagna che parla
+  - Clessidra con fiamma
+  ombra:
+  - Il Cinico
+  - Il Duro di Cuore
+- nome: Acquario
+  elemento: Aria
+  modalita: fissa
+  funzione: Innovazione, futuro, coscienza collettiva
+  mbti:
+  - INTP
+  - ENTP
+  archetipo: Il Visionario Ribelle
+  parola_chiave: Rivoluzione
+  funzione_archetipica: progresso, ribellione creativa, mente collettiva
+  manifestazioni:
+  - Occhio dentro la tempesta
+  - Labirinto elettrico
+  - Vela spezzata che vola
+  ombra:
+  - Il Fanatico
+  - Il Solitario
+- nome: Pesci
+  elemento: Acqua
+  modalita: mutevole
+  funzione: Fusione, trascendenza, sogno
+  mbti:
+  - INFP
+  - ISFP
+  archetipo: Il Mistico Compassionevole
+  parola_chiave: Trascendenza
+  funzione_archetipica: trascendenza, empatia, dissoluzione del Sé
+  manifestazioni:
+  - Oceano che dorme
+  - Cielo liquido
+  - Maschera che svanisce
+  ombra:
+  - Il Martire
+  - Il Dissociato
+arcani:
+- numero: '0'
+  nome: Il Matto
+  parola_chiave: Inizio
+  ruolo: Chiamata all’avventura. La nascita della coscienza libera.
+  ombra: Impulsività cieca
+- numero: '1'
+  nome: Il Bagatto
+  parola_chiave: Potenziale creativo
+  ruolo: Manifestazione dell’intento attraverso il linguaggio e la mente.
+  ombra: Manipolazione mentale
+- numero: '2'
+  nome: La Papessa
+  parola_chiave: Intuizione profonda
+  ruolo: Contatto con l’inconscio e le memorie originarie.
+  ombra: Chiusura emotiva
+- numero: '3'
+  nome: L’Imperatrice
+  parola_chiave: Fertilità e sicurezza
+  ruolo: Manifestazione della vita, del corpo, della materia fertile.
+  ombra: Attaccamento materiale
+- numero: '4'
+  nome: L’Imperatore
+  parola_chiave: Struttura
+  ruolo: Definizione delle leggi e dei confini. Sovranità dell’Io.
+  ombra: Rigidità, dominio
+- numero: '5'
+  nome: Il Papa
+  parola_chiave: Guida interiore
+  ruolo: Trasmissione spirituale attraverso l’ordine e il rito.
+  ombra: Dogmatismo
+- numero: '6'
+  nome: Gli Amanti
+  parola_chiave: Scelta relazionale
+  ruolo: Confronto tra polarità, fusione, attrazione e libertà.
+  ombra: Indecisione, dipendenza
+- numero: '7'
+  nome: Il Carro
+  parola_chiave: Vittoria personale
+  ruolo: Avanzare con volontà e direzione. Ma verso dove?
+  ombra: Dominio egotico
+- numero: '8'
+  nome: La Giustizia
+  parola_chiave: Equilibrio
+  ruolo: Giudizio interiore e cosmico. Karma e armonia.
+  ombra: Soffocamento etico
+- numero: '9'
+  nome: L’Eremita
+  parola_chiave: Introspezione
+  ruolo: Il ritiro che precede la rivelazione.
+  ombra: Isolamento sterile
+- numero: '10'
+  nome: La Ruota della Fortuna
+  parola_chiave: Cambiamento
+  ruolo: Ciclo del destino e accettazione del mutamento.
+  ombra: Fatalismo
+- numero: '11'
+  nome: La Forza
+  parola_chiave: Dominio interiore
+  ruolo: La tenerezza come vera forza.
+  ombra: Soppressione
+- numero: '12'
+  nome: L’Appeso
+  parola_chiave: Sospensione
+  ruolo: Abbandono dell’ego, apertura al flusso.
+  ombra: Rinuncia sterile
+- numero: '13'
+  nome: La Morte
+  parola_chiave: Fine e Rinascita
+  ruolo: Trasformazione radicale. Abbandono del vecchio sé.
+  ombra: Paura del cambiamento
+- numero: '14'
+  nome: La Temperanza
+  parola_chiave: Sintesi
+  ruolo: Alchimia dei contrari. Riconciliazione interiore.
+  ombra: Conciliazione forzata
+- numero: '15'
+  nome: Il Diavolo
+  parola_chiave: Ossessione
+  ruolo: Confronto con i desideri più profondi e l’ombra.
+  ombra: Illusione di potere
+- numero: '16'
+  nome: La Torre
+  parola_chiave: Crollo
+  ruolo: Rottura delle illusioni. Verità rivelata.
+  ombra: Distruzione caotica
+- numero: '17'
+  nome: La Stella
+  parola_chiave: Ispirazione
+  ruolo: Visione superiore. Guarigione cosmica.
+  ombra: Utopia irrealizzabile
+- numero: '18'
+  nome: La Luna
+  parola_chiave: Mistero
+  ruolo: Navigare nel mondo onirico e intuitivo.
+  ombra: Inganno, illusione
+- numero: '19'
+  nome: Il Sole
+  parola_chiave: Verità e Gioia
+  ruolo: Realizzazione luminosa del Sé autentico.
+  ombra: Ego abbagliante
+- numero: '20'
+  nome: Il Giudizio
+  parola_chiave: Rinascita
+  ruolo: Risveglio dell’anima collettiva.
+  ombra: Senso di colpa cosmico
+- numero: '21'
+  nome: Il Mondo
+  parola_chiave: Compimento
+  ruolo: Integrazione finale. Unione tra tutti gli archetipi.
+  ombra: Falsa conclusione

@@ -70,6 +70,8 @@ metabind_inputs:
   gs: INPUT[inlineSelect(option(0), option(1/8), option(1/4), option(1/2), option(1), option(2), option(3), option(4), option(5), option(6), option(7), option(8), option(9), option(10), option(11), option(12), option(13), option(14), option(15), option(16), option(17), option(18), option(19), option(20))]
   legame: INPUT[suggester(optionQuery("Mondi"), useLinks(partial), allowOther)]
   mappa: INPUT[suggester(optionQuery("Mondi"), useLinks(partial), allowOther)]
+  segno: INPUT[inlineSelect(option(Ariete), option(Toro), option(Gemelli), option(Cancro), option(Leone), option(Vergine), option(Bilancia), option(Scorpione), option(Sagittario), option(Capricorno), option(Acquario), option(Pesci))]
+  arcano: INPUT[inlineSelect(option(Il Matto), option(Il Bagatto), option(La Papessa), option(L’Imperatrice), option(L’Imperatore), option(Il Papa), option(Gli Amanti), option(Il Carro), option(La Giustizia), option(L’Eremita), option(La Ruota della Fortuna), option(La Forza), option(L’Appeso), option(La Morte), option(La Temperanza), option(Il Diavolo), option(La Torre), option(La Stella), option(La Luna), option(Il Sole), option(Il Giudizio), option(Il Mondo))]
   testo: INPUT[text]
   testo_area: INPUT[textArea]
 # Icone cartella (Iconize): chiave = chiave di core.folders, valore = emoji.

@@ -419,6 +419,9 @@ def write_engine_data(core: dict[str, Any], templates: list[dict[str, Any]]) -> 
         # condizioni: le 15 condizioni 5.5e (compatte) per views.renderCondizioni
         # (quick-ref al tavolo: scheda PG + incontro). Dalle note SRD del glossario.
         "condizioni": srd_condizioni(),
+        # astrologia: catalogo tema natale (segni/arcani/elementi) per views.renderTemaNatale
+        # (profilo personalità dei personaggi, soprattutto PNG). Da astrologia.yaml (opzionale).
+        "astrologia": load_yaml("astrologia.yaml") if (SOURCE / "YAML" / "astrologia.yaml").is_file() else {},
         "creation": core.get("creation", {}),
         "templates": templates,
     }

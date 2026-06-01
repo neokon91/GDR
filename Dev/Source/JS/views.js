@@ -499,6 +499,40 @@ async function renderCondizioni(app) {
   return condizioniMarkdown(core.condizioni);
 }
 
+// --- Tema natale (personalità psico-astrale, recupero #9) --------------------
+// Profilo di personalità di un personaggio (soprattutto PNG): scelto un SEGNO si
+// deriva elemento/modalità/archetipo/MBTI; l'ARCANO è la carta del destino
+// opzionale; l'allineamento D&D resta accanto come bussola morale. Dal catalogo
+// core.astrologia. Pure (riceve astrologia + i valori del personaggio).
+function temaNataleMarkdown(astro, p) {
+  const segnoNome = text(p && p.segno);
+  if (!segnoNome) {
+    return "> [!tip] Tema natale\n> Scegli un **Segno** qui sopra per generare il profilo: archetipo, temperamento (elemento), MBTI e *ombra*.";
+  }
+  const s = ((astro || {}).segni || []).find((x) => text(x.nome) === segnoNome);
+  if (!s) return "*Segno non riconosciuto.*";
+  const mbti = Array.isArray(s.mbti) && s.mbti.length ? ` · MBTI ${s.mbti.join("/")}` : "";
+  const out = [
+    `> [!quote] ${s.nome} · ${s.elemento} ${s.modalita} · *${s.archetipo}* — «${s.parola_chiave}»`,
+    `> ${s.funzione_archetipica}${mbti}`,
+  ];
+  if (Array.isArray(s.manifestazioni) && s.manifestazioni.length) out.push(`> **In scena**: ${s.manifestazioni.join(" · ")}`);
+  if (Array.isArray(s.ombra) && s.ombra.length) out.push(`> **⚠ Ombra**: ${s.ombra.join(", ")}`);
+  const arcNome = text(p && p.arcano);
+  if (arcNome) {
+    const a = ((astro || {}).arcani || []).find((x) => text(x.nome) === arcNome);
+    if (a) out.push(`>\n> **🔮 Arcano ${a.numero} · ${a.nome}** — ${a.ruolo}${a.ombra ? ` *(ombra: ${a.ombra})*` : ""}`);
+  }
+  if (p && p.allineamento) out.push(`>\n> **⚖ Allineamento**: ${text(p.allineamento)}`);
+  return out.join("\n");
+}
+
+async function renderTemaNatale(app, page) {
+  if (!page) return "*Apri una scheda personaggio.*";
+  const core = await loadCoreData(app);
+  return temaNataleMarkdown(core.astrologia, page);
+}
+
 // --- Mappa (luogo/mondo) -----------------------------------------------------
 // Embed della mappa collegata (campo 'mappa'): un disegno Excalidraw, un'immagine
 // o una nota. Se vuoto, un suggerimento su come crearne una. Ritorna markdown
@@ -526,4 +560,5 @@ module.exports = {
   renderMap,
   renderCondizioni, condizioniMarkdown,
   radarMarkdownFromValues,
+  renderTemaNatale, temaNataleMarkdown,
 };

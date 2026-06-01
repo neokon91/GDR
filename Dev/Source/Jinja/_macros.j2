@@ -355,6 +355,24 @@ return engine.markdown.create(await views.renderCondizioni(app));
 ```
 {%- endmacro %}
 
+{# Tema natale (personalità psico-astrale, #9): scelto un segno si deriva
+   archetipo/elemento/MBTI/ombra; l'arcano è opzionale; l'allineamento D&D resta
+   accanto. Profilo per i personaggi (soprattutto PNG). Logica in views.renderTemaNatale. #}
+{% macro tema_natale() -%}
+> [!abstract] Tema natale
+> Segno: {{ field('segno', label=false) }} · Arcano: {{ field('arcano', label=false) }}
+```js-engine
+const src = await app.vault.adapter.read("z.automazioni/views.js");
+const mod = { exports: {} };
+new Function("module", "exports", src)(mod, mod.exports);
+const views = mod.exports;
+const dv = app.plugins.plugins.dataview && app.plugins.plugins.dataview.api;
+const file = app.workspace.getActiveFile();
+const page = dv && file ? dv.page(file.path) : null;
+return engine.markdown.create(await views.renderTemaNatale(app, page));
+```
+{%- endmacro %}
+
 {# Tab Mappa (luogo/mondo): collega ed embedda una mappa (disegno Excalidraw,
    immagine o nota) col campo 'mappa'; l'embed vive in views.renderMap. #}
 {% macro mappa() -%}

@@ -47,6 +47,9 @@ fields:
   portata:        { label: Portata,              widget: portata }
   pronomi:        { label: Pronomi,              widget: text }
   eta:            { label: Età,                  widget: text }
+  # Tema natale (recupero #9, astrologia.yaml): segno → profilo derivato; arcano opzionale.
+  segno:          { label: Segno,                widget: segno }
+  arcano:         { label: Arcano,               widget: arcano }
 
 # Superficie giocabile (IL differenziatore): ogni nota lore la espone, sempre.
 # Single source renderizzato dalla macro tavolo(); i campi sono in core.fields.

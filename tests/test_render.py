@@ -480,6 +480,43 @@ def test_radar_markdown_from_values(tmp_path):
     assert "Servono almeno 3 assi" in out["few"]
 
 
+def test_astrologia_catalog():
+    """Catalogo tema natale (astrologia.yaml): 12 segni (con archetipo/elemento/
+    mbti), 22 arcani, 4 elementi — recupero #9."""
+    a = render.load_yaml("astrologia.yaml")
+    assert len(a["segni"]) == 12 and len(a["arcani"]) == 22 and len(a["elementi"]) == 4
+    ari = next(s for s in a["segni"] if s["nome"] == "Ariete")
+    assert ari["archetipo"] == "Il Pioniere" and ari["elemento"] == "Fuoco"
+    assert ari["mbti"] and ari["ombra"]  # MBTI + ombra presenti
+    assert all(s.get("archetipo") and s.get("elemento") for s in a["segni"])
+
+
+@pytest.mark.skipif(not shutil.which("node"), reason="node assente")
+def test_tema_natale(tmp_path):
+    """views.temaNataleMarkdown: dal segno deriva archetipo/elemento/MBTI/ombra,
+    aggiunge l'arcano (destino) e l'allineamento D&D; suggerimento se vuoto."""
+    a = render.load_yaml("astrologia.yaml")
+    harness = tmp_path / "tema.js"
+    harness.write_text(
+        'const fs=require("fs");'
+        f'const src=fs.readFileSync({json.dumps(str(render.JS_DIR / "views.js"))},"utf8");'
+        'const m={exports:{}};new Function("module","exports",src)(m,m.exports);'
+        f'const astro={json.dumps(a, ensure_ascii=False)};'
+        'process.stdout.write(JSON.stringify({'
+        'full:m.exports.temaNataleMarkdown(astro,{segno:"Ariete",arcano:"Il Matto",allineamento:"Caotico Buono"}),'
+        'empty:m.exports.temaNataleMarkdown(astro,{})}));',
+        encoding="utf-8")
+    res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
+    assert res.returncode == 0, res.stderr
+    out = json.loads(res.stdout)
+    assert "*Il Pioniere*" in out["full"] and "Fuoco cardinale" in out["full"]  # archetipo + elemento/modalità
+    assert "MBTI ESTP/ENTJ" in out["full"]                                       # MBTI derivato
+    assert "Ombra" in out["full"] and "Il Distruttore" in out["full"]            # ombra (per i difetti)
+    assert "Arcano 0 · Il Matto" in out["full"]                                  # arcano destino
+    assert "Caotico Buono" in out["full"]                                        # allineamento D&D accanto
+    assert out["empty"].startswith("> [!tip] Tema natale")                       # vuoto -> guida
+
+
 @pytest.mark.skipif(not shutil.which("node"), reason="node assente")
 def test_render_map(tmp_path):
     """views.renderMap: embed ![[..]] della mappa collegata (Link Dataview o
