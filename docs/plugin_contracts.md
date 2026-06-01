@@ -30,6 +30,9 @@ plugin fittizi). Le impostazioni e i contenuti dell'utente sono preservati.
   di sistema `z.*` dall'esploratore (restano **indicizzate**: i plugin le vedono).
 - `app.json:userIgnoreFilters` esclude le `z.*` da ricerca/grafo. L'albero `SRD/`
   resta navigabile e cercabile.
+- `app.json:attachmentFolderPath` = **`Media/`**: cartella unica per i file utente
+  (ritratti/mappe/immagini) e destinazione degli allegati trascinati. Scaffoldata
+  (`MEDIA_FOLDER`) + icona Iconize; non è una categoria.
 
 ## Sintassi che i template emettono
 

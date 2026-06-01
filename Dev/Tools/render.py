@@ -173,7 +173,12 @@ def write_workspace_chrome(obsidian: Path) -> None:
 # riproducibile dal vault generato (non dipende da settaggi manuali).
 # propertiesInDocument 'hidden': nasconde il pannello Proprietà nelle note — GDR
 # si edita via Meta Bind nel corpo, le proprietà grezze sarebbero ridondanti.
-APP_SETTINGS = {"propertiesInDocument": "hidden"}
+# Cartella unica per i file media dell'utente (ritratti, mappe, immagini): è anche
+# la destinazione degli allegati di Obsidian, così trascinare un'immagine la deposita
+# qui invece di sparpagliarla. Non è una categoria: scaffoldata a parte + icona.
+MEDIA_FOLDER = "Media"
+MEDIA_ICON = "🖼️"
+APP_SETTINGS = {"propertiesInDocument": "hidden", "attachmentFolderPath": MEDIA_FOLDER}
 # Plugin core usati dalla pipeline: bookmarks legge il bookmarks.json generato;
 # bases rende le viste-indice native (.base) generate in INDEX_DIR/.
 CORE_PLUGINS = ("bookmarks", "bases")
@@ -557,6 +562,7 @@ def write_iconize(obsidian: Path, core: dict[str, Any], plugins: dict[str, Any])
     percorso->emoji nel data.json (emojiStyle native); 'settings' preservato."""
     folders = core.get("folders", {})
     icons = {folders[key]: emoji for key, emoji in (plugins.get("folder_icons") or {}).items() if key in folders}
+    icons[MEDIA_FOLDER] = MEDIA_ICON  # cartella media (non categoria)
     if icons:
         merge_plugin_config(obsidian, "obsidian-icon-folder", icons)
 
@@ -672,6 +678,8 @@ def scaffold_folders(core: dict[str, Any]) -> None:
     senza mai sovrascrivere note esistenti."""
     for folder in core.get("folders", {}).values():
         (VAULT / folder).mkdir(parents=True, exist_ok=True)
+    # Cartella media utente (ritratti/mappe/immagini): destinazione degli allegati.
+    (VAULT / MEDIA_FOLDER).mkdir(parents=True, exist_ok=True)
 
 
 def build() -> dict[str, str]:
