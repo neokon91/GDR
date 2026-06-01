@@ -44,6 +44,8 @@ order: 5                    # ordine dei bottoni Home (preserva la sequenza cura
 templates:                  # uno o più template di creazione (category = id)
   - { id, title, default_type, target, jinja, primary? }
 subtypes: [gilda, ordine, …]
+famiglie:                   # (opzionale) classificazione a 2 livelli (tema curato)
+  - { nome, descrizione, assi? }   # 'assi':{asseId:1-5} = preset assi in creazione
 fields:                     # (opzionale) campi esclusivi dell'entità
   motto: { label: Motto, widget: text }
 scheda: [portata, motto, …] # campi mostrati dalla macro scheda()
@@ -69,7 +71,10 @@ sulle note di quella categoria → link `[[..]]`) · `list`+`options` · default
 | `pg_rules.yaml` | Overlay curato del rules-engine PG: `generazione_caratteristiche` (array/point-buy), `aumento_background`, `armature` (CA), `lingue`. (Le abilità stanno in `system.yaml`.) |
 | `templates.yaml` | Solo `actions` (bottoni su nota esistente); i template di creazione sono nei file-entità. |
 | `pages.yaml` | Pagine-indice (hub per dominio) → `index.md.j2`. |
-| `plugins.yaml` | `plugins`, `metabind_inputs`, `buttons`, `folder_icons`, `callouts`. |
+| `plugins.yaml` | `plugins`, `metabind_inputs`, `buttons` (`action` o `command`), `folder_icons`, `callouts`. |
+| `astrologia.yaml` | Catalogo tema natale (segni/arcani/elementi) → `core.json` (`views.renderTemaNatale`). |
+| `generatori.yaml` | Generatore homebrew di nomi (stili/affissi/forme) → `core.json` (`genera.js`). |
+| `fcg_it.yaml` | Liste italiane per i generatori configurabili di Fantasy Content Generator (iniettate nel suo `data.json`). |
 
 ## Confine validato (`validate.py`)
 
@@ -77,7 +82,11 @@ sulle note di quella categoria → link `[[..]]`) · `list`+`options` · default
 - **system-only**: `scheda`, `statblock`, `caratteristiche`, `abilita` (mai in core.yaml).
 - **dup-ID**: `folders`/`fields`/`categories`/`creation`/`relazioni` disgiunti fra i file.
 - **snake_case**: tutti gli id (campi, categorie, folder, abilità, assi, relazioni).
+  Eccezione `INTEROP_FIELDS` = `fc-date`/`fc-end`/`fc-calendar`/`fc-category` (col trattino:
+  chiavi-evento richieste da Calendarium; Meta Bind 1.4.x le binda).
 - **shape**: ogni campo ha label+widget; categoria folder risolvibile+subtypes;
   scheda→fields; relazioni field/label/category; abilità con caratteristica valida;
-  **archetipi** con id/nome/tag e `quando` che riferisce assi reali della categoria.
+  **archetipi** con id/nome/tag e `quando` che riferisce assi reali; **famiglie** con `assi`
+  preset che riferiscono assi reali (1-5); **anti-drift**: opzioni del select `stile_nomi`
+  (metabind) == stili di `generatori.yaml`.
 - **entità**: nessuna collisione id-categoria/campo con core/system; template con id/title/jinja/target.

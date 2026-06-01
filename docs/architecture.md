@@ -71,7 +71,9 @@ monolite): carica il modello e delega.
 
 1. `load_core()` (modello fuso) + `load_templates()` (templates.yaml + entità) + `load_pages()`.
 2. `write_engine_data()` — scrive `z.automazioni/data/{core.json,personaggio.json}`
-   (dati per i JS), copia i JS 1:1, genera i wrapper `crea_<id>.js` mancanti.
+   (dati per i JS; `core.json` include anche `astrologia`/`generatori`), copia i JS 1:1
+   (`views.js`, `boot.mjs`, `meta_actions.js`, `create_entity.js`, `sali_pg.js`, `genera.js`),
+   genera i wrapper `crea_<id>.js` mancanti. *(I JS cache-ano `core.json` per-modulo.)*
 3. `render_notes(jinja_env(), …)` — rende ogni template Jinja → `z.modelli/`, le azioni,
    Home/LEGGIMI, le pagine-indice e le dashboard auto **Ponte Mondo↔Sistema** e **Fronti**
    (`Indici/`). Ritorna `{target: testo}`. Poi `write_bases()` (viste `.base`).
@@ -79,8 +81,10 @@ monolite): carica il modello e delega.
 5. `write_obsidian_config()` — config `.obsidian` **non distruttiva** (merge), un writer
    per plugin: community-plugins, Templater, Dataview, Meta Bind (input+button),
    `write_metadata_menu` (fileClass), `write_iconize`, `write_callout_manager`,
-   `write_statblock_layouts` (layout + dice), `write_bookmarks`, chrome esploratore,
-   default core, homepage. Vedi [plugin_contracts.md](plugin_contracts.md).
+   `write_statblock_layouts` (layout + dice), `write_folder_notes`, `write_calendarium`
+   (parsing + ponte `fc-*`), `write_fantasy_content_generator` (trigger inline + liste IT
+   da `fcg_it.yaml`), `write_bookmarks`, chrome esploratore, default core, homepage.
+   Vedi [plugin_contracts.md](plugin_contracts.md).
 6. `scaffold_folders()` — crea le cartelle contenuti mancanti (idempotente).
 
 ## Regole operative

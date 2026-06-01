@@ -117,7 +117,7 @@ function candidatiStile(gen, file) {
   for (const k of keys) {
     const v = fm[k];
     for (const link of Array.isArray(v) ? v : (v ? [v] : [])) {
-      const dest = linkDest(link, file.path);
+      const dest = linkDest(link, file && file.path);
       if (!dest) continue;
       const dfm = fmOf(dest);
       push(dfm.stile_nomi);
