@@ -68,8 +68,10 @@ Collega) idealmente creando un PG + un incontro dai bottoni.*
 Riposo lungo — `205af81`, verificate in-app); ✅ **ponte Calendarium FATTO** (`evento`→`fc-date`,
 callout *Calendario*; `73041f5`, verificato in-app: evento datato → calendario); ✅ **generazione
 nomi (FCG) FATTA** (suggester inline `@` + bottone Genera su PNG/luogo/fazione; `e591a5d`,
-verificato in-app). Restano: spell management inline; assi allo strato cosmico; `clean()` robusto
-+ cache `core.json` in boot + anti-drift JS (matchesCond duplicato).
+verificato in-app); ✅ **generatore homebrew IT** (`0b6e6ad`) + **FCG italianizzato** (`53e20b1`);
+✅ **solidità JS** — cache `core.json` (views/boot) + **guard anti-drift** `matchesCond`
+(test-guardia, non modulo condiviso) (`a876bcc`). Restano: spell management inline; assi allo
+strato cosmico; famiglie→preset assi; report gap copertura categorie.
 
 ### Una riga per lente
 - **🌍 Worldbuilder** — *pronto-con-riserve*. Ontologia profonda e in più punti avanti su
@@ -386,12 +388,14 @@ le fondamenta saranno rifinite. In ordine di valore:
 
 ## Come ripartire
 
-**203 test verdi**, check 0; HEAD `53e20b1` (post-beta: **ponte Calendarium** `73041f5` +
+**204 test verdi**, check 0; HEAD `a876bcc` (post-beta: **ponte Calendarium** `73041f5` +
 **aggancio FCG** `e591a5d`, verificati in-app, + **generatore homebrew IT** `0b6e6ad` +
-**FCG italianizzato** `53e20b1`, *QA in-app pendente — computer-use disconnesso*; prima:
-smoke test + 3 bug runtime + risorse combattimento + quick-win analisi). **Unica vera riserva
-beta rimasta: il mondo-esempio (blocco #1, rinviato).** *Filoni (scelta utente): generatore IT ✅,
-italianizzazione FCG ✅ (parziale), poi solidità (anti-drift JS/cache/clean/validazione), plugin/YAML.*
+**FCG italianizzato** `53e20b1` (*QA in-app pendente — computer-use disconnesso*) +
+**solidità JS** cache+anti-drift `a876bcc`; prima: smoke test + 3 bug runtime + risorse
+combattimento + quick-win analisi). **Unica vera riserva beta rimasta: il mondo-esempio
+(blocco #1, rinviato).** *Filoni (scelta utente): generatore IT ✅, italianizzazione FCG ✅
+(parziale), solidità ✅ (cache+anti-drift); resta **plugin/YAML** + opz. famiglie→preset assi,
+report gap copertura. QA in-app dei 3 ✅ pendenti quando torna computer-use.*
 Leggi questo file + i
 docs (`architecture`/`data_model`/`rules_layer`/`play_layer`/`plugin_contracts`) + la memoria
 (`project-northstar`, `vault-due-suite`). **Fasi 1-2 coperte + rifiniture** → prossimi:
