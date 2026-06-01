@@ -5,6 +5,11 @@ Versione vault: **v1.2.4** (Gregory Jagermeister).
 > **Stato: cablato (in corpo nota), verificato in-app.** Due vie alla generazione di
 > nomi/spunti su PNG/luogo/fazione (macro `genera_nome()` nel loro Lore). **NON** nel
 > wizard: FCG non espone un'API di generazione richiamabile (scelta utente: saltare l'hook).
+>
+> **Vedi anche il generatore HOMEBREW** (`Dev/Source/YAML/generatori.yaml` + `genera.js`,
+> bottone *Genera (locale)*): nomi **italiani e a tema**, legati all'ontologia (lo
+> `stile_nomi` di cultura/specie). È la via primaria per i nomi che contano; FCG resta per
+> spunti rapidi generici (EN).
 
 ## Cos'è
 Generatore di contenuti fantasy/TTRPG: **nomi** (PNG, luoghi, taverne…), spunti, tabelle

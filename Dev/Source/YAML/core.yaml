@@ -60,6 +60,9 @@ fields:
   arcano:         { label: Arcano,               widget: arcano }
   # Ritratto/immagine (infobox stile wiki): un'immagine del vault (Meta Bind imageSuggester).
   ritratto:       { label: Ritratto,             widget: ritratto }
+  # Stile dei nomi (generatore homebrew): su cultura/specie sceglie lo stile da cui
+  # genera.js compone nomi a tema. Opzioni = stili di generatori.yaml (vedi metabind).
+  stile_nomi:     { label: Stile dei nomi,       widget: stile_nomi }
 
 # Categorie il cui infobox mostra il selettore Ritratto (immagine): quelle "visive".
 # Le altre (regole/concetti astratti) restano senza per non ingombrare.

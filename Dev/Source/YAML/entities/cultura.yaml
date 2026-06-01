@@ -27,8 +27,9 @@ famiglie:
 - { nome: sincretica, descrizione: "Dell'intreccio: fonde tradizioni e significati." }
 - { nome: guerriera,  descrizione: "Fondata sul conflitto, sulla prova e sulla conquista." }
 - { nome: nomadica,   descrizione: "Del movimento, dell'adattamento e della non-fissazione." }
-# Diffusione/portata della cultura (riusa il campo select condiviso 'portata').
-scheda: [portata]
+# Diffusione/portata + stile dei nomi (il generatore homebrew genera.js legge
+# stile_nomi per comporre nomi a tema della cultura).
+scheda: [portata, stile_nomi]
 relazioni:
 - field: regioni
   label: Regioni

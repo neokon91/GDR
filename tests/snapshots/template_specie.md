@@ -13,6 +13,7 @@
 > | **Velocità** | `VIEW[{velocita} ?? "—"]` |
 > | **Tipo di creatura** | `VIEW[{tipo_creatura} ?? "—"]` |
 > | **Lignaggio** | `VIEW[{lignaggio} ?? "—"]` |
+> | **Stile dei nomi** | `VIEW[{stile_nomi} ?? "—"]` |
 > | **Stato** | `INPUT[stato][:stato]` |
 
 > [!info] Famiglia: `INPUT[inlineSelect(option(ancestrale), option(spirituale), option(cosmica), option(mortale), option(corrompibile), option(onirica), option(elementale), option(sintetica)):famiglia]`
@@ -35,6 +36,7 @@
 > Velocità: `INPUT[text:velocita]`
 > Tipo di creatura: `INPUT[text:tipo_creatura]`
 > Lignaggio: `INPUT[text:lignaggio]`
+> Stile dei nomi: `INPUT[stile_nomi][:stile_nomi]`
 
 --- Lore
 

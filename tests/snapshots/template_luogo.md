@@ -33,8 +33,8 @@
 > Popolazione: `INPUT[text:popolazione]`
 
 > [!tip]- Genera nome/spunto
-> In linea (modalità modifica): `@` + categoria (es. `@HumanFemale`, `@Settlement`, `@InnsTaverns`) → scegli dal popup.
-> Generatore completo: `BUTTON[genera-contenuto]` — il risultato va negli appunti, poi incolla.
+> **Locale** (italiano, a tema): `BUTTON[genera-locale]` — nome di persona/luogo/fazione dallo *stile* della cultura/specie collegata (o scelto). Inserisce al cursore.
+> **FCG** (rapido, EN): in modifica `@` + categoria (es. `@HumanFemale`, `@Settlement`) → popup · oppure il generatore completo `BUTTON[genera-contenuto]` (→ appunti).
 > [!note]- Colpo d'occhio
 > Cos'è il luogo, che impressione dà entrandoci, perché conta nella storia.
 

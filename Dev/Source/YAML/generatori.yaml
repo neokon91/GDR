@@ -1,0 +1,101 @@
+# Generatore homebrew di nomi/spunti — italiano e legato all'ontologia.
+# render.py lo carica in core.json (sezione 'generatori'); genera.js (Templater)
+# compone i nomi a runtime. Espandibile a mano: aggiungere stili/sillabe qui.
+#
+# MODELLO. 'stili' = come comporre i nomi di PERSONA (sillabe). I TOPONIMI
+# riusano le sillabe dello stile scelto + gli affissi globali (toponimi:), così
+# un luogo riflette la cultura della sua gente. Le FAZIONI usano forme
+# templatizzate ({nome}=persona, {luogo}=toponimo, gli altri pescano dalle liste).
+# Il campo 'stile_nomi' sulle entità cultura/specie sceglie lo stile; il
+# generatore lo risolve dai link della nota (o lo chiede).
+id: generatori
+version: 0.1.0
+purpose: Generatore nomi/spunti homebrew (italiano, a tema).
+
+stili:
+  romanzo:
+    label: Romanzo (latino)
+    persona:
+      inizi: [Aur, Cor, Val, Mar, Luc, Sev, Tib, Cas, Fab, Rem, Ott, Vinc, Lel, Dec]
+      centri: ["", "el", "in", "an", "or", "il", "ent"]
+      fini_m: [io, eo, us, ano, ico, ino, aro, ente]
+      fini_f: [ia, ea, a, ina, ella, ora, enzia]
+    cognomi: [Aurelii, Corvini, Valenti, di Marca, Severi, Tiberii, Cassi, Fabri, Ottavii]
+  nordico:
+    label: Nordico
+    persona:
+      inizi: [Bj, Sig, Thor, Ulf, Rag, Hild, Ein, Gun, Sven, Ast, Vald, Hak, Frey, Yng]
+      centri: ["", "ar", "or", "un", "val", "rid", "gn"]
+      fini_m: [orn, ar, ulf, nar, vid, mund, grim, dan]
+      fini_f: [run, hild, dis, gerd, unn, a, veig]
+    cognomi: [Bjornsson, Ulfdottir, Ravnsen, Stormkald, Iverthing, Skaldson]
+  silvano:
+    label: Silvano (élfico)
+    persona:
+      inizi: [Ae, Lai, Syl, Eli, Tha, Cae, Niam, Ily, Fae, Aer, Loth, Vael, Ela, Rin]
+      centri: ["", "la", "ri", "no", "el", "wy", "the"]
+      fini_m: [riel, andil, los, wyn, thir, aen, mil]
+      fini_f: [riel, wen, eth, lia, ynn, ae, sil]
+    cognomi: [Lathuil, Sylvaranth, Aeloria, Nimathen, Caelorn, Faelith]
+  montano:
+    label: Montano (nanico)
+    persona:
+      inizi: [Bal, Dur, Thr, Grom, Kaz, Bro, Dwal, Bru, Tor, Khar, Grun, Bof, Nor, Dain]
+      centri: ["", "in", "or", "dum", "ar", "gni", "kk"]
+      fini_m: [in, ar, drin, gar, mund, oth, nir, rakk]
+      fini_f: [is, ra, din, hild, na, gunn, rid]
+    cognomi: [Martelpietra, Barbaferro, Fendiroccia, Forgiacupa, Spaccamonti, Vena d'Oro]
+  tribale:
+    label: Tribale (orchesco)
+    persona:
+      inizi: [Gro, Kar, Urz, Mog, Sha, Grik, Vra, Hru, Naz, Dro, Ghaz, Brak, Zug, Mor]
+      centri: ["", "ag", "ur", "ok", "az", "gor", "ush"]
+      fini_m: [sh, g, ak, og, ur, nak, rok, gash]
+      fini_f: [a, ka, sha, gra, ila, ush, na]
+    cognomi: [Spaccateschi, Mangiaferro, dei Tre Zanne, Brucianebbia, Rompiscudo]
+  esotico:
+    label: Esotico (arcano/deserto)
+    persona:
+      inizi: [Az, Sah, Zir, Nef, Kal, Ras, Jah, Mir, Sel, Tah, Zan, Yas, Adh, Suy]
+      centri: ["", "ar", "ee", "ir", "an", "ud", "ay"]
+      fini_m: [ar, im, ud, an, esh, ir, aan, yd]
+      fini_f: [a, ira, een, ara, isha, ah, yel]
+    cognomi: [al-Sahir, Zirran, della Sabbia, Mirelin, ibn-Tahar, del Velo]
+
+# Affissi toponomastici globali (italiani, a tema): la RADICE è composta dalle
+# sillabe dello stile scelto, così il luogo "suona" come la cultura.
+toponimi:
+  prefissi: [Alto, Forte, Porto, Valle, Pietra, Colle, Monte, Capo, Borgo, Lago, Vado, Roccia]
+  suffissi: [borgo, valle, monte, porto, fosso, caro, lade, gard, holm, mar, reth, dun]
+
+# Fazioni: forme templatizzate. Placeholder: {nome}=nome di persona generato,
+# {luogo}=toponimo generato, {sintagma}/{nucleo_pl}/{aggettivo} dalle liste qui.
+fazioni:
+  # {aggettivo} è femminile (Rossa/Nera…): solo dopo nomi femminili (Mano/Setta/
+  # Lama). I nomi maschili (Ordine/Patto/Circolo) usano {sintagma} (del/della/di…).
+  forme:
+    - "L'Ordine {sintagma}"
+    - "La Confraternita {sintagma}"
+    - "I {nucleo_pl} di {luogo}"
+    - "La Mano {aggettivo}"
+    - "La Setta {aggettivo}"
+    - "La Lama {aggettivo}"
+    - "Il Patto {sintagma}"
+    - "I Figli {sintagma}"
+    - "La Compagnia {sintagma}"
+    - "Il Circolo {sintagma}"
+    - "Gli Araldi {sintagma}"
+    - "La Casata di {nome}"
+  sintagma:
+    - "del Corvo"
+    - "della Fiamma"
+    - "di {nome}"
+    - "di {luogo}"
+    - "del Silenzio"
+    - "della Cenere"
+    - "dell'Alba"
+    - "della Spada Spezzata"
+    - "del Velo"
+    - "delle Tre Lune"
+  nucleo_pl: [Corvi, Lupi, Sussurri, Aspidi, Veggenti, Cinque, Senzavolto, Raminghi, Custodi, Erranti]
+  aggettivo: [Rossa, Nera, Spezzata, Eterna, Cinerea, Velata, Argentea, Silente, Cremisi, Infranta]

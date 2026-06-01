@@ -10,6 +10,7 @@
 > | **Mondo** | `VIEW[{mondo}][text(renderMarkdown)]` |
 > | **Famiglia** | `VIEW[{famiglia} ?? "—"]` |
 > | **Portata** | `VIEW[{portata} ?? "—"]` |
+> | **Stile dei nomi** | `VIEW[{stile_nomi} ?? "—"]` |
 > | **Stato** | `INPUT[stato][:stato]` |
 
 > [!info] Famiglia: `INPUT[inlineSelect(option(ancestrale), option(sciamanica), option(iniziatica), option(dogmatica), option(fluida), option(sincretica), option(guerriera), option(nomadica)):famiglia]`
@@ -29,6 +30,7 @@
 
 > [!abstract] Scheda
 > Portata: `INPUT[portata][:portata]`
+> Stile dei nomi: `INPUT[stile_nomi][:stile_nomi]`
 
 > [!note] Valori
 > `INPUT[textArea:valori]`

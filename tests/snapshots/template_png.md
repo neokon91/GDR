@@ -52,8 +52,8 @@
 > Età: `INPUT[text:eta]`
 
 > [!tip]- Genera nome/spunto
-> In linea (modalità modifica): `@` + categoria (es. `@HumanFemale`, `@Settlement`, `@InnsTaverns`) → scegli dal popup.
-> Generatore completo: `BUTTON[genera-contenuto]` — il risultato va negli appunti, poi incolla.
+> **Locale** (italiano, a tema): `BUTTON[genera-locale]` — nome di persona/luogo/fazione dallo *stile* della cultura/specie collegata (o scelto). Inserisce al cursore.
+> **FCG** (rapido, EN): in modifica `@` + categoria (es. `@HumanFemale`, `@Settlement`) → popup · oppure il generatore completo `BUTTON[genera-contenuto]` (→ appunti).
 > [!note]- Chi è
 > In una riga: ruolo, impressione che lascia, cosa porta in scena.
 

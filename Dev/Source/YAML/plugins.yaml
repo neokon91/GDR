@@ -75,6 +75,9 @@ metabind_inputs:
   ritratto: INPUT[imageSuggester()]
   segno: INPUT[inlineSelect(option(Ariete), option(Toro), option(Gemelli), option(Cancro), option(Leone), option(Vergine), option(Bilancia), option(Scorpione), option(Sagittario), option(Capricorno), option(Acquario), option(Pesci))]
   arcano: INPUT[inlineSelect(option(Il Matto), option(Il Bagatto), option(La Papessa), option(L’Imperatrice), option(L’Imperatore), option(Il Papa), option(Gli Amanti), option(Il Carro), option(La Giustizia), option(L’Eremita), option(La Ruota della Fortuna), option(La Forza), option(L’Appeso), option(La Morte), option(La Temperanza), option(Il Diavolo), option(La Torre), option(La Stella), option(La Luna), option(Il Sole), option(Il Giudizio), option(Il Mondo))]
+  # Stili del generatore homebrew (genera.js): le opzioni DEVONO combaciare con
+  # le chiavi di generatori.yaml:stili (validate lo impone, anti-drift).
+  stile_nomi: INPUT[inlineSelect(option(romanzo, "Romanzo latino"), option(nordico, "Nordico"), option(silvano, "Silvano elfico"), option(montano, "Montano nanico"), option(tribale, "Tribale orchesco"), option(esotico, "Esotico arcano"))]
   testo: INPUT[text]
   testo_area: INPUT[textArea]
 # Icone cartella (Iconize): chiave = chiave di core.folders, valore = emoji.
@@ -157,3 +160,7 @@ buttons:
   - id: genera-contenuto
     label: Genera
     command: fantasy-content-generator:open-fantasy-generator
+  # Generatore homebrew (italiano, a tema): bottone Templater -> tp.user.genera.
+  - id: genera-locale
+    label: Genera (locale)
+    action: genera

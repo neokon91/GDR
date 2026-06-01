@@ -255,6 +255,12 @@ async function meta_actions(tp, action = "") {
     new Notice("sali_pg non disponibile."); return "";
   }
 
+  if (action === "genera") {
+    // Generatore homebrew di nomi/spunti (script Templater autonomo).
+    if (tp.user && tp.user.genera) return await tp.user.genera(tp);
+    new Notice("genera non disponibile."); return "";
+  }
+
   new Notice(`Azione non gestita: ${action}`);
   return "";
 }

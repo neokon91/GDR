@@ -676,3 +676,50 @@ def test_srd_note_dedup_and_extras():
     assert "**Morso** — 1 danno perforante." in out
     assert "[[Afferrato]]" in out                       # vedi_anche risolto a link
     assert "id inesistente" in out                      # id non risolto -> testo in chiaro
+
+
+def test_generatori_catalog():
+    """generatori.yaml (generatore homebrew): stili con parti-nome complete +
+    affissi toponimi + forme fazioni; le opzioni del select stile_nomi combaciano
+    con gli stili (anti-drift, stesso check di validate)."""
+    import re as _re
+    g = render.load_yaml("generatori.yaml")
+    stili = g["stili"]
+    assert len(stili) >= 4
+    for sid, s in stili.items():
+        p = s["persona"]
+        assert p["inizi"] and p["fini_m"] and p["fini_f"], sid
+        assert s.get("label"), sid
+    assert g["toponimi"]["prefissi"] and g["toponimi"]["suffissi"]
+    faz = g["fazioni"]
+    assert faz["forme"] and faz["sintagma"] and faz["nucleo_pl"] and faz["aggettivo"]
+    decl = (render.load_yaml("plugins.yaml").get("metabind_inputs") or {}).get("stile_nomi", "")
+    assert set(_re.findall(r"option\(\s*([a-z_]+)", decl)) == set(stili)
+
+
+@pytest.mark.skipif(not shutil.which("node"), reason="node assente")
+def test_genera_e2e(tmp_path):
+    """genera.js: per ogni stile compone persona/toponimo/fazione non vuoti; le
+    fazioni risolvono tutti i placeholder ({..}); generaLista dà opzioni distinte."""
+    gen = render.load_yaml("generatori.yaml")
+    harness = tmp_path / "g.js"
+    harness.write_text(
+        'const fs=require("fs");'
+        f'const genera=require({json.dumps(str(render.JS_DIR / "genera.js"))});'
+        f'const gen={json.dumps(gen, ensure_ascii=False)};'
+        'let s=7;const rng=()=>(s=(s*1103515245+12345)&0x7fffffff)/0x7fffffff;'
+        'const out={};'
+        'for(const st of Object.keys(gen.stili)){'
+        '  out[st]={p:genera.generaPersona(gen,st,rng),t:genera.generaToponimo(gen,st,rng),f:genera.generaFazione(gen,st,rng)};'
+        '}'
+        'out.__lista=genera.generaLista(gen,"persona",Object.keys(gen.stili)[0],8,rng);'
+        'process.stdout.write(JSON.stringify(out));',
+        encoding="utf-8")
+    res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
+    assert res.returncode == 0, res.stderr
+    out = json.loads(res.stdout)
+    for st in gen["stili"]:
+        assert out[st]["p"] and out[st]["t"] and out[st]["f"], st
+        assert "{" not in out[st]["f"], f"placeholder non risolto ({st}): {out[st]['f']}"
+        assert out[st]["f"][0].isupper()
+    assert len(set(out["__lista"])) >= 6   # generaLista: opzioni distinte

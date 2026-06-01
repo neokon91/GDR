@@ -475,6 +475,9 @@ def write_engine_data(core: dict[str, Any], templates: list[dict[str, Any]]) -> 
         # astrologia: catalogo tema natale (segni/arcani/elementi) per views.renderTemaNatale
         # (profilo personalità dei personaggi, soprattutto PNG). Da astrologia.yaml (opzionale).
         "astrologia": load_yaml("astrologia.yaml") if (SOURCE / "YAML" / "astrologia.yaml").is_file() else {},
+        # generatori: catalogo stili/affissi per il generatore homebrew di nomi/spunti
+        # (genera.js: nomi persona/toponimi/fazioni in italiano, a tema). Da generatori.yaml.
+        "generatori": load_yaml("generatori.yaml") if (SOURCE / "YAML" / "generatori.yaml").is_file() else {},
         "creation": core.get("creation", {}),
         "templates": templates,
     }

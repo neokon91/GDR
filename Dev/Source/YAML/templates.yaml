@@ -31,3 +31,6 @@ actions:
   - id: aggiorna_encounter
     title: Aggiorna encounter
     target: z.modelli/azioni/Aggiorna encounter.md
+  - id: genera
+    title: Genera (locale)
+    target: z.modelli/azioni/Genera (locale).md

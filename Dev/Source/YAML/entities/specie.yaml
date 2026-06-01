@@ -40,6 +40,8 @@ scheda:
 - velocita
 - tipo_creatura
 - lignaggio
+# Stile dei nomi (generatore homebrew genera.js): compone nomi a tema della specie.
+- stile_nomi
 creation:
   fields:
   - field: tipo

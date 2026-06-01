@@ -235,6 +235,18 @@ def check() -> int:
         if widget and widget not in ("text", "number") and widget not in metabind:
             errors.append(f"campo {field_id}: widget '{widget}' assente da metabind_inputs")
 
+    # Anti-drift: le opzioni del select 'stile_nomi' (plugins.metabind_inputs)
+    # devono combaciare con gli stili di generatori.yaml, che genera.js legge a
+    # runtime. Così aggiungere uno stile in un solo posto è un errore esplicito.
+    try:
+        gen_stili = set((load_yaml("generatori.yaml").get("stili") or {}))
+    except Exception:
+        gen_stili = set()
+    if gen_stili:
+        opt_ids = set(re.findall(r"option\(\s*([a-z_]+)", str(metabind.get("stile_nomi", ""))))
+        if opt_ids != gen_stili:
+            errors.append(f"stile_nomi: opzioni metabind {sorted(opt_ids)} != stili generatori.yaml {sorted(gen_stili)}")
+
     # Ogni field('<id>') usato nei Jinja deve esistere nel registro core.fields.
     # I partial (_*.j2) definiscono le macro, non le usano: vanno esclusi.
     for path in sorted(JINJA_DIR.glob("*.j2")):
