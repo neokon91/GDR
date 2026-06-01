@@ -402,19 +402,17 @@ le fondamenta saranno rifinite. In ordine di valore:
 
 ## Come ripartire
 
-**208 test verdi**, check 0; HEAD `51acb45` (post-beta: **ponte Calendarium** `73041f5` +
-**aggancio FCG** `e591a5d`, verificati in-app, + **generatore homebrew IT** `0b6e6ad` +
-**FCG italianizzato** `53e20b1` + **solidità JS** `a876bcc` + **wire insidia** `65b29b0` +
-**wizard connetti-alla-creazione** `16dc3ab` + **connessione** (inverse tipizzati in Collega +
-dashboard Rete del mondo) `51acb45` (*QA in-app pendente — computer-use disconnesso*); prima:
-smoke test + 3 bug runtime + risorse combattimento + quick-win analisi). **Unica vera riserva
-beta rimasta: il mondo-esempio (blocco #1, rinviato).** *Filoni (scelta utente): generatore IT ✅,
-italianizzazione FCG ✅ (parziale), solidità ✅, famiglie→preset assi ✅, epoche→calendario ✅,
-wizard connetti ✅, inverse tipizzati + dashboard rete ✅. In corso (scelta utente): **CSS
-feel-wiki**, **5.5e maestrie armi + Bastioni**. Mappe = **Zoom Map** (no Leaflet, scelta utente);
-no Breadcrumbs. **7 feature post-beta con QA in-app pendente** (computer-use disconnesso):
-generatore, FCG italiano, prompt-famiglia wizard, epoca-calendario, wizard connetti, Collega
-inverso + dashboard, + flussi runtime. Tab-extra data-driven valutato e **non fatto**.*
+**210 test verdi**, check 0; HEAD `6484fde`. **Post-beta (tutto pushato)**: ponte Calendarium
+`73041f5` + aggancio FCG `e591a5d` (verificati in-app) + generatore homebrew IT `0b6e6ad` +
+FCG italianizzato `53e20b1` + solidità JS `a876bcc` + wire insidia `65b29b0` + wizard
+connetti-alla-creazione `16dc3ab` + connessione (inverse tipizzati in Collega + dashboard Rete
+del mondo) `51acb45` + **CSS feel-wiki** (infobox) `bc8f018` + **quick-ref maestrie armi 2024**
+`6f633f6` + **Bastioni 2024** (schema + ordini) `6484fde`. **Unica vera riserva beta rimasta:
+il mondo-esempio (blocco #1, rinviato).** *Mappe = **Zoom Map** (no Leaflet/Breadcrumbs, scelta
+utente). Residui 5.5e: maestrie mappa-per-arma + scelta in creazione PG (dati 2024 non nel SRD);
+Bastioni catalogo strutture + turno interattivo. Altri residui: (b) assi cosmici; inverse anche
+nel wizard; report gap copertura. **~10 feature post-beta con QA in-app PENDENTE** (computer-use
+disconnesso): tutti i flussi/rese runtime sopra. Tab-extra data-driven valutato e **non fatto**.*
 Leggi questo file + i
 docs (`architecture`/`data_model`/`rules_layer`/`play_layer`/`plugin_contracts`) + la memoria
 (`project-northstar`, `vault-due-suite`). **Fasi 1-2 coperte + rifiniture** → prossimi:
