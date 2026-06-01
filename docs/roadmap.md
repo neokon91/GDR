@@ -11,7 +11,7 @@ in [architecture](architecture.md) / [data_model](data_model.md) /
 > **auto-riscrittura del blocco encounter**, **timeline navigabile** (pannello *Linea del
 > tempo* sulla pagina Cronologia) e **tab Mappe** su luogo/mondo. Doc plugin **completa**
 > (21 schede). **36 categorie, 20 con assi.** Tutto committato/pushato/buildato su
-> `origin/main` (HEAD `5d71c7e`), **163 test verdi**, check 0. *L'esperienza in-app resta in
+> `origin/main` (HEAD `c600232`), **164 test verdi**, check 0. *L'esperienza in-app resta in
 > gran parte da confermare (rischio #1, QA deferita su scelta utente — ci si appoggia ai test).*
 
 ## Dove siamo (sintesi)
@@ -28,9 +28,10 @@ interattivo: PF/competenza/slot + ASI/sottoclasse/incantesimi). **Difficoltà in
 XP 2024 vs GS delle creature) + **auto-riscrittura del blocco `encounter`**. SRD 5.2.1 IT
 (1389 note + 334 statblock, ogni voce rende tutto il JSON). Pannelli **JS Engine** (`views.js`:
 Vista, radar assi, profilo, clock, difficoltà incontro, progressione, linea del tempo, mappa,
-quick-ref condizioni, tema natale).
+quick-ref condizioni, tema natale, rete collegamenti). **Note stile wiki**: infobox con
+tabella-fatti + ritratto (immagine), tabelle di relazione.
 Indici **Bases** `.base` + hub Dataview; dashboard auto **Ponte Mondo↔Sistema** e **Fronti**.
-Home a 2 aree, Homepage, **163 test**, check 0. **Stadio prodotto: scaffold ricco e profondo;
+Home a 2 aree, Homepage, **164 test**, check 0. **Stadio prodotto: scaffold ricco e profondo;
 l'esperienza in-app è in gran parte da confermare (QA deferita su scelta utente).**
 
 ## 🎯 Visione: due suite integrate ma separate
@@ -58,7 +59,7 @@ sopra i sistemi avanzati (vedi backlog).
   e dall'**auto-encounter** (tavolo).
 - **Rischio #1 — debito di verifica in-app (standing)**: tutta la pipeline è *generata* e
   *poco confermata* in Obsidian. Su scelta utente la **QA in-app è deferita**: ci si appoggia
-  ai **163 test** (generazione + wizard/renderer JS via node), che però **non coprono il
+  ai **164 test** (generazione + wizard/renderer JS via node), che però **non coprono il
   runtime Obsidian** (Meta Bind/Dataview/Templater/JS Engine). Il vecchio bug
   `views.renderEntityPanel` ricorda che certi bug vivono solo nel runtime. *Va fatta prima o
   poi*, idealmente a blocchi (PG/sali-livello; clock→conseguenza; incontro+aggiorna-encounter;
@@ -68,8 +69,9 @@ sopra i sistemi avanzati (vedi backlog).
   minimo per un mono-utente; ridurre il guscio è l'ultimo quick-win architetturale (a sé,
   perché cambia l'output → QA).
 - **Onboarding**: il **LEGGIMI** è completo (3 passi + setup + tassonomia "quale categoria
-  quando"). Manca ancora un **mondo-esempio** pronto (scelta utente: niente sample) per chi
-  vuole "vedere" prima di creare.
+  quando"). **Distribuzione = vault ZIP** (scelta utente): il tester apre → *trust prompt* →
+  plugin abilitati, niente install manuale (LEGGIMI riscritto per questo flusso). Resta
+  opzionale un **mondo-esempio** pronto per chi vuole "vedere" prima di creare.
 - **Core loop** sessione → incontro → fronti: i pezzi ci sono e più fluidi (auto-encounter,
   clock→conseguenza); resta da confermare in-app la catena completa.
 - **Priorità (direzione utente)**: **fondamenta delle due suite + Fase 2 sostanzialmente
@@ -85,7 +87,7 @@ sopra i sistemi avanzati (vedi backlog).
   common/build_srd/build_personaggio/validate, merge lossless, validazione forte
   (confine/dup/snake/shape/entity-schema/assi). Snapshot + e2e wizard/renderer via node
   (PG/caster, preset, level-up, profilo, clock, incontri, **timeline**, **mappa**,
-  **condizioni**, **srd_note**, **aggiorna_encounter**). Test (**163**, ridondanti sussunti dagli snapshot).
+  **condizioni**, **srd_note**, **aggiorna_encounter**). Test (**164**, ridondanti sussunti dagli snapshot).
   Nuova entità = 1 YAML (+1 assi); Jinja solo per layout custom (default `_entity_base.j2`).
 - **Debito/fragilità**:
   - **Logica embeddata nelle note** (ultimo residuo): la *logica* vive in `views.js`
@@ -106,7 +108,7 @@ sopra i sistemi avanzati (vedi backlog).
     fantasy-statblocks/tasks/dice-roller/**bases**/**callout-manager**/**iconize**/
     **homepage**/initiative-tracker/calendarium/excalidraw/zoom-map/
     fantasy-content-generator/brat), coi gotcha (es. callout collassati).
-  - **Test**: **163 verdi** ma coprono la *generazione* (+ wizard/renderer JS via node), non il
+  - **Test**: **164 verdi** ma coprono la *generazione* (+ wizard/renderer JS via node), non il
     runtime Obsidian (Meta Bind/Dataview/Templater/JS Engine) — gap inerente, colmabile solo con QA manuale.
 
 ## 🌍 Worldbuilder
@@ -256,7 +258,11 @@ le fondamenta saranno rifinite. In ordine di valore:
   (i 3 FW più distintivi mancanti); le 5 senza assi restano tali. (`51bd020`)
 - **Tema natale** (#9, personalità + allineamento per i personaggi): segno → archetipo/
   elemento/MBTI/ombra + arcano + allineamento D&D (`astrologia.yaml`→core.json,
-  `views.renderTemaNatale`, campi segno/arcano su pg+png). **163 test**. HEAD `5d71c7e`.
+  `views.renderTemaNatale`, campi segno/arcano su pg+png). (`5d71c7e`)
+- **Cura del corpo nota** (feel wiki): `identita_card` → **infobox** con tabella-fatti
+  (VIEW reattivi) + **ritratto** opzionale (Meta Bind imageSuggester, categorie "visive");
+  **tabelle di relazione** (`views.renderConnessioni` → rete in *Collegamenti*). LEGGIMI per
+  distribuzione **ZIP** (trust-prompt). **164 test**. HEAD `c600232`.
 
 ### ✅ Fatto (sessione 2026-05-31)
 - **Fase 1 fondamenta**: doc plugin (poi completata a 21 schede), grafo cosmologico (5 categorie),
@@ -269,7 +275,7 @@ le fondamenta saranno rifinite. In ordine di valore:
 
 ## Come ripartire
 
-**163 test verdi**, check 0; HEAD `5d71c7e` (tutto pushato+buildato). Leggi questo file + i
+**164 test verdi**, check 0; HEAD `c600232` (tutto pushato+buildato). Leggi questo file + i
 docs (`architecture`/`data_model`/`rules_layer`/`play_layer`/`plugin_contracts`) + la memoria
 (`project-northstar`, `vault-due-suite`). **Fasi 1-2 coperte + rifiniture** → prossimi:
 - **Residui Fase 2**: level-up scelte avanzate (quick-ref condizioni ✅).
