@@ -851,3 +851,32 @@ def test_reciprocal_field(tmp_path):
     assert out["cultura"] == "regioni"   # coppia univoca -> inverso tipizzato
     assert out["fazione"] is None        # ambiguo (figure+fondatori) -> generico
     assert out["epoca"] == "eventi"      # univoca
+
+
+def test_maestrie_catalog():
+    """system.yaml maestrie_armi: 8 proprietà di maestria 2024 (nome/en/effetto).
+    NB: solo gli effetti (la mappa arma→proprietà non è nel SRD 5.2.1)."""
+    m = CORE.get("maestrie_armi") or []
+    assert len(m) == 8
+    nomi = {x["nome"] for x in m}
+    assert {"Fendente", "Ribalta", "Tormenta", "Spinta"} <= nomi
+    assert all(x.get("nome") and x.get("en") and x.get("effetto") for x in m)
+
+
+@pytest.mark.skipif(not shutil.which("node"), reason="node assente")
+def test_render_maestrie(tmp_path):
+    """views.maestrieMarkdown: callout quick-ref con le 8 maestrie (nome + effetto)."""
+    m = CORE.get("maestrie_armi") or []
+    harness = tmp_path / "ma.js"
+    harness.write_text(
+        'const fs=require("fs");'
+        f'const s=fs.readFileSync({json.dumps(str(render.JS_DIR / "views.js"))},"utf8");'
+        'const mod={exports:{}};new Function("module","exports",s)(mod,mod.exports);'
+        f'const m={json.dumps(m, ensure_ascii=False)};'
+        'process.stdout.write(mod.exports.maestrieMarkdown(m));',
+        encoding="utf-8")
+    res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
+    assert res.returncode == 0, res.stderr
+    out = res.stdout
+    assert "Maestria delle armi 2024" in out
+    assert "**Ribalta**" in out and "Prono" in out

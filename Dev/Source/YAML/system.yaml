@@ -147,3 +147,18 @@ xp:
     "18": [5000, 8700, 14200]
     "19": [5500, 10700, 17200]
     "20": [6400, 13200, 22000]
+
+# Maestria delle armi (2024): le 8 proprietà di maestria, per il quick-ref al
+# tavolo (views.renderMaestrie). NB: quale arma abbia quale proprietà e quante
+# maestrie ottenga ogni classe NON sono nei dati SRD 5.2.1 → qui c'è solo il
+# glossario degli EFFETTI (stabili); la mappa per-arma + scelta in creazione PG
+# resta da fare con dati 2024 autorevoli. Distanze in metri come il resto del vault.
+maestrie_armi:
+  - { nome: Fendente, en: Cleave,  effetto: "Se colpisci, infliggi i danni dell'arma (senza modificatore) a una 2ª creatura entro 1,5 m della prima e a portata. Una volta per turno." }
+  - { nome: Sfregio,  en: Graze,   effetto: "Se manchi l'attacco, infliggi comunque danni pari al tuo modificatore di caratteristica (stesso tipo dell'arma)." }
+  - { nome: Tacca,    en: Nick,    effetto: "L'attacco extra del combattere con due armi lo fai come parte dell'azione di Attacco (una volta per turno), non come azione bonus." }
+  - { nome: Spinta,   en: Push,    effetto: "Se colpisci, puoi spingere il bersaglio (taglia Grande o inferiore) fino a 3 m in linea retta lontano da te." }
+  - { nome: Fiacca,   en: Sap,     effetto: "Se colpisci, il bersaglio ha svantaggio al suo prossimo tiro per colpire prima dell'inizio del tuo prossimo turno." }
+  - { nome: Rallenta, en: Slow,    effetto: "Se colpisci e infliggi danni, la velocità del bersaglio cala di 3 m fino all'inizio del tuo prossimo turno." }
+  - { nome: Ribalta,  en: Topple,  effetto: "Se colpisci, il bersaglio fa un TS su Costituzione (CD 8 + mod. caratteristica d'attacco + comp.) o cade Prono." }
+  - { nome: Tormenta, en: Vex,     effetto: "Se colpisci e infliggi danni, hai vantaggio al tuo prossimo tiro per colpire contro quel bersaglio entro la fine del tuo prossimo turno." }

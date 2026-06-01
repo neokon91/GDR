@@ -184,6 +184,9 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderCondizioni");
 ```
+```js-engine
+return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderMaestrie");
+```
 --- Carattere
 
 > [!abstract] Carattere

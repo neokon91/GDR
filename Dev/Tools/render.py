@@ -530,6 +530,9 @@ def write_engine_data(core: dict[str, Any], templates: list[dict[str, Any]]) -> 
         # condizioni: le 15 condizioni 5.5e (compatte) per views.renderCondizioni
         # (quick-ref al tavolo: scheda PG + incontro). Dalle note SRD del glossario.
         "condizioni": srd_condizioni(),
+        # maestrie: le 8 proprietà di maestria delle armi 2024 (quick-ref al tavolo,
+        # views.renderMaestrie). Da system.yaml (il SRD 5.2.1 non le mappa per-arma).
+        "maestrie": core.get("maestrie_armi", []),
         # astrologia: catalogo tema natale (segni/arcani/elementi) per views.renderTemaNatale
         # (profilo personalità dei personaggi, soprattutto PNG). Da astrologia.yaml (opzionale).
         "astrologia": load_yaml("astrologia.yaml") if (SOURCE / "YAML" / "astrologia.yaml").is_file() else {},

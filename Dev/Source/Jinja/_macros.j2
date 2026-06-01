@@ -377,6 +377,15 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 ```
 {%- endmacro %}
 
+{# Quick-ref maestria delle armi 2024 (JS Engine): callout pieghevole con le 8
+   proprietà (nome + effetto), per il richiamo rapido al tavolo. Da core.maestrie
+   (system.yaml). Logica in views.renderMaestrie. #}
+{% macro maestrie() -%}
+```js-engine
+return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderMaestrie");
+```
+{%- endmacro %}
+
 {# Tema natale (personalità psico-astrale, #9): scelto un segno si deriva
    archetipo/elemento/MBTI/ombra; l'arcano è opzionale; l'allineamento D&D resta
    accanto. Profilo per i personaggi (soprattutto PNG). Logica in views.renderTemaNatale. #}

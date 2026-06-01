@@ -58,6 +58,7 @@ const PANELS = {
   renderEncounter: { mode: "md", args: (a, d) => [a, d.dv, d.page] },
   renderMap: { mode: "md", args: (a, d) => [a, d.dv, d.page] },
   renderCondizioni: { mode: "md", args: (a) => [a] },
+  renderMaestrie: { mode: "md", args: (a) => [a] },
   renderTimeline: { mode: "md", args: (a, d) => [a, d.dv] },
   renderClock: { mode: "dom", args: (a, d, cont) => [cont, a, d.page] },
   renderAxesCompare: { mode: "dom", args: (a, d, cont) => [cont, a, d.dv, d.page] },

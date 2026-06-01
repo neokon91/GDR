@@ -508,6 +508,21 @@ async function renderCondizioni(app) {
   return condizioniMarkdown(core.condizioni);
 }
 
+// Quick-ref delle 8 proprietà di maestria delle armi (2024): callout pieghevole
+// nome + effetto. Da core.maestrie (system.yaml). NB: la mappa arma→proprietà e
+// i conteggi per classe non sono nei dati SRD → qui solo gli effetti.
+function maestrieMarkdown(maestrie) {
+  const lista = maestrie || [];
+  if (!lista.length) return "*Maestrie delle armi non disponibili.*";
+  const righe = lista.map((m) => `> **${text(m.nome)}** *(${text(m.en)})* — ${text(m.effetto)}`);
+  return `> [!quote]- ⚔️ Maestria delle armi 2024 (quick-ref)\n${righe.join("\n>\n")}`;
+}
+
+async function renderMaestrie(app) {
+  const core = await loadCoreData(app);
+  return maestrieMarkdown(core.maestrie);
+}
+
 // --- Tema natale (personalità psico-astrale, recupero #9) --------------------
 // Profilo di personalità di un personaggio (soprattutto PNG): scelto un SEGNO si
 // deriva elemento/modalità/archetipo/MBTI; l'ARCANO è la carta del destino
@@ -588,6 +603,7 @@ module.exports = {
   renderTimeline, quandoNum, epocaLabel,
   renderMap,
   renderCondizioni, condizioniMarkdown,
+  renderMaestrie, maestrieMarkdown,
   radarMarkdownFromValues,
   renderTemaNatale, temaNataleMarkdown,
   renderConnessioni,
