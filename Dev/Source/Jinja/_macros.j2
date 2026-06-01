@@ -251,6 +251,20 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 ```
 {%- endmacro %}
 
+{# Ponte Calendarium ('tempo del mondo'): campi fc-* editabili che il plugin
+   (autoParse) legge dal frontmatter per far comparire l'evento sul calendario/
+   agenda. 'quando' resta l'etichetta in prosa (e la nostra timeline); fc-date è
+   la data macchina nel formato del calendario attivo. Calendario/categoria sono
+   opzionali (destinazione / colore); vuoti = calendario di default. #}
+{% macro calendario() -%}
+> [!abstract]- Calendario
+> Data: {{ field('fc-date', label=false) }} — nel formato del calendario attivo (Gregorian: AAAA-MM-GG).
+>
+> Calendario: {{ field('fc-calendar', label=false) }} · Categoria: {{ field('fc-category', label=false) }}
+>
+> Compila *Data* per far comparire l'evento sul calendario. Lascia vuoti calendario/categoria per il calendario di default.
+{%- endmacro %}
+
 {# Tiri rapidi (Dice Roller): d20 normale/vantaggio/svantaggio, inline e
    cliccabili (richiede Dice Roller attivo). Aggiungi a mano il bonus dalla
    scheda. Callout pieghevole per non ingombrare. Riusato da PG e incontro. #}

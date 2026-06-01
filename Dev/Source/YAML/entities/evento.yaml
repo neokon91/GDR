@@ -70,6 +70,8 @@ creation:
     required: true
   - field: quando
     prompt: Quando (data del mondo)
+  - field: fc-date
+    prompt: 'Data sul calendario (opz., formato del calendario attivo, es. 1492-07-20)'
   body:
   - field: cause
     prompt: 'Cause: perché è successo'

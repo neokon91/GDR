@@ -26,6 +26,12 @@ FIELD_REF_RE = re.compile(r"""field\(\s*['"]([a-z0-9_]+)['"]""")
 # Identificatore che diventa chiave di frontmatter / cartella: snake_case.
 SNAKE_RE = re.compile(r"^[a-z][a-z0-9_]*$")
 
+# Eccezioni di interoperabilità: chiavi-campo NON snake_case perché un plugin
+# terzo le richiede col nome esatto. fc-* = chiavi-evento di Calendarium (ponte
+# 'tempo del mondo'): il plugin legge fc-date/fc-calendar/fc-category dal
+# frontmatter, quindi i nomi col trattino sono obbligati, non un refuso.
+INTEROP_FIELDS = {"fc-date", "fc-calendar", "fc-category"}
+
 # Sezioni "di piano": devono restare nel rispettivo file. tavolo/assi_tematici/
 # states (il differenziatore worldbuilding) solo in core.yaml; scheda/statblock/
 # caratteristiche (i meccanismi 5.5e) solo in system.yaml.
@@ -59,7 +65,9 @@ def validate_split(core_raw: dict[str, Any], system_raw: dict[str, Any], merged:
     # 3) snake_case: gli identificatori che diventano chiavi di frontmatter/cartelle.
     def snake(scope: str, names: Any) -> None:
         for name in names or []:
-            if name is not None and not SNAKE_RE.match(str(name)):
+            if name is None or (scope == "fields" and name in INTEROP_FIELDS):
+                continue
+            if not SNAKE_RE.match(str(name)):
                 errors.append(f"snake_case: '{name}' in {scope} non è snake_case")
 
     snake("folders", merged.get("folders", {}))

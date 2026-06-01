@@ -34,6 +34,14 @@ fields:
   apertura:       { label: Apertura,             widget: text }
   scena_corrente: { label: Scena corrente,       widget: text }
   quando:         { label: Quando,               widget: text }
+  # Ponte Calendarium ('tempo del mondo'): chiavi fc-* lette dal plugin per far
+  # comparire un evento sul calendario/agenda. 'quando' resta l'etichetta in
+  # prosa (e alimenta la nostra timeline); fc-date è la data macchina nel formato
+  # del calendario attivo (Gregorian: YYYY-MM-DD). fc-calendar/fc-category sono
+  # opzionali (nome del calendario di destinazione / categoria-colore).
+  fc-date:        { label: "Data (calendario)",  widget: text }
+  fc-calendar:    { label: "Calendario",         widget: text }
+  fc-category:    { label: "Categoria evento",   widget: text }
   allineamento:   { label: Allineamento,         widget: allineamento }
   # Campi strutturati di lore (mostrati da scheda(), tipizzati in fileClass)
   epoca:          { label: Epoca,                widget: text }

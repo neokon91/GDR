@@ -29,6 +29,13 @@
 >
 > Portata: `INPUT[portata][:portata]`
 
+> [!abstract]- Calendario
+> Data: `INPUT[text:fc-date]` — nel formato del calendario attivo (Gregorian: AAAA-MM-GG).
+>
+> Calendario: `INPUT[text:fc-calendar]` · Categoria: `INPUT[text:fc-category]`
+>
+> Compila *Data* per far comparire l'evento sul calendario. Lascia vuoti calendario/categoria per il calendario di default.
+
 > [!note]- Descrizione
 > Cosa accade, chi coinvolge e perche' conta al tavolo.
 

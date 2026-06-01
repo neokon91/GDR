@@ -2,12 +2,15 @@
 
 Versione vault: **v2.1.0** (Jeremy Valentine). Doc: https://plugins.javalent.com/calendarium
 
-> **Stato: parsing eventi cablato; calendario per-mondo da creare in-app.** La pipeline
-> abilita lo scan automatico (`write_calendarium`: `autoParse`/`parseDates`/`eventFrontmatter`
-> + `inlineEventsTag: #cronologia`). La **definizione del calendario** (mesi/ere/lune) è
-> contenuto per-mondo: si crea una volta dai preset di Calendarium (opt-in), non la cabla la
-> pipeline. ⚠️ Da confermare in-app (l'iniezione di un calendario default è rinviata a una
-> sessione con QA Obsidian: lo schema oggetto-calendario v2.1 non è verificabile a secco).
+> **Stato: ponte evento→calendario cablato; calendario per-mondo da creare in-app.** La
+> pipeline abilita lo scan automatico (`write_calendarium`: `autoParse`/`parseDates`/
+> `eventFrontmatter` + `inlineEventsTag: #cronologia`) **e** l'entità `evento` emette le
+> chiavi-evento `fc-*` (campo `fc-date` nel wizard + callout *Calendario* editabile con
+> `fc-date`/`fc-calendar`/`fc-category`, macro `calendario()`). Compilando *Data* l'evento
+> compare sul calendario. La **definizione del calendario** (mesi/ere/lune) resta contenuto
+> per-mondo: si crea una volta dai preset di Calendarium (opt-in, scelta utente), non la cabla
+> la pipeline — l'iniezione di un default è stata valutata e **non** fatta (schema oggetto-
+> calendario v2.1 complesso/version-sensitive; hai già importato il Gregorian a mano).
 
 ## Cos'è
 Crea **calendari fantasy/sci-fi custom** (ere, mesi, settimane irregolari) con eventi
@@ -19,11 +22,17 @@ Gli eventi si dichiarano via frontmatter su note normali (chiavi `fc-*`, es.
 calendario stesso è un oggetto in `data.json`. La sintassi `fc-*` va **verificata in-app**
 sulla v2.1 prima di generarla dalla pipeline (lo schema è cambiato fra major).
 
-## Aggancio previsto (roadmap #4)
-- Un **calendario del mondo** per `mondo` (o condiviso) definito una volta.
-- `evento` ed `epoca` emettono `fc-date`/`fc-calendar`/`fc-category` nel frontmatter →
-  compaiono sulla timeline. `epoca` fornisce ere/epoche; `evento` i punti datati.
-- Collegare `quando`/`portata` degli eventi al sistema-date del calendario.
+## Aggancio (roadmap #4) — fatto
+- **`evento` emette `fc-date`** (+ `fc-calendar`/`fc-category` opzionali) nel frontmatter →
+  compare sul calendario/agenda. `quando` resta l'etichetta in prosa (e alimenta la nostra
+  `renderTimeline`); `fc-date` è la data **macchina** nel formato del calendario attivo.
+- Un **calendario del mondo** si definisce una volta in-app dai preset (opt-in). Senza
+  `fc-calendar` l'evento va al calendario di default (i `paths` lo assegnano).
+- ⚠️ **Trattino nei field-id**: `fc-*` è whitelisted in `validate.INTEROP_FIELDS`
+  (non snake_case di proposito: chiavi richieste dal plugin). Meta Bind 1.4.x ammette il
+  trattino negli identificatori → `INPUT[text:fc-date]` bind-a correttamente.
+- *Residuo*: `epoca` potrebbe emettere ere come `fc-date` con `fc-end` (range) per disegnare
+  le epoche sul calendario; non fatto (le epoche vivono già nella nostra timeline).
 
 ## ⚠️ Gotcha
 - **Date non-gregoriane**: con calendari custom le date sono stringhe interpretate dal
