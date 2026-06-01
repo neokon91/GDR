@@ -193,8 +193,13 @@ def test_fileclass_well_formed(category):
 
 
 @pytest.mark.skipif(not shutil.which("node"), reason="node non disponibile")
-@pytest.mark.parametrize("js", sorted(render.JS_DIR.glob("*.js")), ids=lambda p: p.name)
+@pytest.mark.parametrize(
+    "js",
+    sorted(render.JS_DIR.glob("*.js")) + sorted(render.JS_DIR.glob("*.mjs")),
+    ids=lambda p: p.name,
+)
 def test_js_syntax(js):
+    # node --check deduce CommonJS/ESM dall'estensione (.js vs .mjs).
     assert subprocess.run(["node", "--check", str(js)], capture_output=True).returncode == 0
 
 

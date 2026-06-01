@@ -149,19 +149,13 @@ qualunque e aggiungi nel suo frontmatter `confronta: [[Entità A]], [[Entità B]
 
 ````
 ```js-engine
-const src = await app.vault.adapter.read("z.automazioni/views.js");
-const mod = { exports: {} };
-new Function("module", "exports", src)(mod, mod.exports);
-const views = mod.exports;
-const dv = app.plugins.plugins.dataview && app.plugins.plugins.dataview.api;
-const file = app.workspace.getActiveFile();
-const page = dv && file ? dv.page(file.path) : null;
-await views.renderAxesCompare(container, app, dv, page);
+return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderAxesCompare");
 ```
 ````
 
-La logica vive in `z.automazioni/views.js` (radar SVG, niente plugin grafici): se la
-aggiorni, tutti i blocchi si aggiornano senza ricreare le note.
+La logica vive in `z.automazioni/views.js` (radar SVG, niente plugin grafici), caricata
+dal guscio unico `z.automazioni/boot.mjs`: se le aggiorni, tutti i blocchi si aggiornano
+senza ricreare le note.
 
 ## 11. Tassonomia: quale categoria quando
 Le categorie sono stratificate dal metafisico al tavolo. Quando non sei sicuro su quale

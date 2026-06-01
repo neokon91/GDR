@@ -429,8 +429,9 @@ def write_engine_data(core: dict[str, Any], templates: list[dict[str, Any]]) -> 
     write_json(VAULT / "z.automazioni" / "data" / "core.json", payload)
     # Opzioni del rules-engine PG (SRD + pg_rules.yaml) per crea_personaggio.js.
     write_json(VAULT / "z.automazioni" / "data" / "personaggio.json", build_personaggio_options(core))
-    # Gli script Templater sono autonomi (niente require/bundling): copia 1:1.
-    for source in sorted(JS_DIR.glob("*.js")):
+    # Gli script Templater (.js CommonJS) e il guscio JS Engine (.mjs ESM) sono
+    # autonomi (niente require/bundling): copia 1:1.
+    for source in sorted(JS_DIR.glob("*.js")) + sorted(JS_DIR.glob("*.mjs")):
         shutil.copy2(source, VAULT / "z.automazioni" / source.name)
     for template in templates:
         if not (JS_DIR / f"crea_{template['id']}.js").is_file():
@@ -637,7 +638,8 @@ def main() -> int:
     rendered = build()
 
     rel = VAULT.relative_to(ROOT)
-    print(f"Build OK: {len(rendered)} note generate, {len(list(JS_DIR.glob('*.js')))} JS runtime.")
+    js_runtime = len(list(JS_DIR.glob('*.js'))) + len(list(JS_DIR.glob('*.mjs')))
+    print(f"Build OK: {len(rendered)} note generate, {js_runtime} JS runtime.")
     print(f"Vault: {rel}/  — apri questa cartella in Obsidian.")
     return 0
 

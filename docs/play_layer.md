@@ -59,13 +59,21 @@ azione che chiama `tp.user.meta_actions(tp, "<id>")`.
 epoca, ordinati per `quando`; pannello in cima alla pagina *Cronologia*, opt-in via
 `pages.yaml:panel: timeline`), `renderMap` (tab *Mappa* su luogo/mondo: embed del campo
 `mappa` — Excalidraw/immagine/nota), `renderCondizioni` (quick-ref delle 15 condizioni
-5.5e da `core.condizioni`/SRD: scheda PG *Al tavolo* + incontro *Combattimento*). Caricati a
-runtime (CommonJS via `new Function`); aggiornare `views.js` si propaga alle note senza ricrearle.
+5.5e da `core.condizioni`/SRD: scheda PG *Al tavolo* + incontro *Combattimento*).
+
+Il corpo nota di ogni pannello è **una riga** che importa il guscio unico
+`z.automazioni/boot.mjs` (modulo ESM via `engine.importJs`) e gli delega il pannello per
+nome: `(await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderX")`.
+`boot.mjs` concentra in un solo posto ciò che prima era ripetuto in ogni blocco — carica
+`views.js` come CommonJS (`new Function`, perché `importJs` usa `import()` ESM e non vedrebbe
+`module.exports`), risolve `dv`/`page` e fa `engine.markdown.create`. Aggiornare `views.js`
+(la logica) o `boot.mjs` (il guscio) si propaga a tutte le note senza ricrearle.
 
 **Radar reattivo** (`meta-bind-js-view`): il radar del tab *Carattere* è l'unico pannello che
 usa `meta-bind-js-view` invece di `js-engine` — gli assi della categoria sono *bind target*
 Meta Bind, così il radar si **ridisegna live** mentre muovi gli slider (gira comunque dentro
-JS Engine, che `meta-bind-js-view` richiede). Disegno in `views.radarMarkdownFromValues`;
-fallback al frontmatter della nota se i binding non popolano (resta non-reattivo, mai rotto).
+JS Engine, che `meta-bind-js-view` richiede). Il corpo delega a `boot.radar`; disegno in
+`views.radarMarkdownFromValues`; fallback al frontmatter della nota se i binding non popolano
+(resta non-reattivo, mai rotto).
 *La reattività va confermata in-app.* Gli altri pannelli `VIEW` (etichette-assi, ritratto,
 pressione, modificatori PG) sono già reattivi via Meta Bind.

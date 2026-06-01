@@ -7,12 +7,7 @@
 
 ## 🕰 Linea del tempo
 ```js-engine
-const src = await app.vault.adapter.read("z.automazioni/views.js");
-const mod = { exports: {} };
-new Function("module", "exports", src)(mod, mod.exports);
-const views = mod.exports;
-const dv = app.plugins.plugins.dataview && app.plugins.plugins.dataview.api;
-return engine.markdown.create(await views.renderTimeline(app, dv));
+return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderTimeline");
 ```
 
 ## Tutte le voci

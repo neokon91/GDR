@@ -65,9 +65,12 @@ sopra i sistemi avanzati (vedi backlog).
   poi*, idealmente a blocchi (PG/sali-livello; clock→conseguenza; incontro+aggiorna-encounter;
   timeline; mappe).
 - **Propagazione**: la *logica* vive in `views.js` (importata a runtime → si propaga alle note
-  senza ricrearle); resta nel corpo solo il **guscio loader** js-engine (~6 righe). Attrito
-  minimo per un mono-utente; ridurre il guscio è l'ultimo quick-win architetturale (a sé,
-  perché cambia l'output → QA).
+  senza ricrearle); ✅ il **guscio** nel corpo è ora **una riga** che importa `boot.mjs` (ESM)
+  e gli delega il pannello per nome — eliminato il blocco loader ripetuto (~1000 righe in meno
+  nelle note generate). ✅ **Verificato in-app** (smoke test): `engine.importJs("…/boot.mjs")`
+  risolve l'ESM (export `panel`/`radar`), `panel→renderCondizioni` popola il callout e
+  `radar` disegna l'SVG degli assi. Resta separata la sola *reattività live* del radar
+  `meta-bind-js-view` (binding Meta Bind, già da QA prima di questo cambio).
 - **Onboarding**: il **LEGGIMI** è completo (3 passi + setup + tassonomia "quale categoria
   quando"). **Distribuzione = vault ZIP** (scelta utente): il tester apre → *trust prompt* →
   plugin abilitati, niente install manuale (LEGGIMI riscritto per questo flusso). Resta
@@ -90,11 +93,14 @@ sopra i sistemi avanzati (vedi backlog).
   **condizioni**, **srd_note**, **aggiorna_encounter**). Test (**164**, ridondanti sussunti dagli snapshot).
   Nuova entità = 1 YAML (+1 assi); Jinja solo per layout custom (default `_entity_base.j2`).
 - **Debito/fragilità**:
-  - **Logica embeddata nelle note** (ultimo residuo): la *logica* vive in `views.js`
-    (importata a runtime → **si propaga** alle note esistenti), ma il **guscio loader**
-    js-engine (CommonJS via `new Function`, ~6 righe) resta nel corpo delle ~38 note coi
-    pannelli. Accorciarlo (ESM `importJs`) cambierebbe l'output → richiede QA in-app: a sé,
-    ROI basso. *(Thin-shell, `build()`, doc-plugin: ✅ chiusi sotto.)*
+  - ✅ **Guscio js-engine ridotto** (ultimo residuo architetturale): introdotto
+    `Dev/Source/JS/boot.mjs` (modulo **ESM**, caricato con `engine.importJs`) che concentra il
+    caricamento CommonJS di `views.js` (`new Function`), la risoluzione `dv`/`page` e
+    `engine.markdown.create`. Il corpo nota passa da ~8 righe a **una** per pannello
+    (`.panel(engine, app, container, "renderX")`); ~1000 righe di boilerplate in meno negli
+    snapshot. `new Function` ora vive in **un solo posto**. ✅ **Verificato in-app** (smoke
+    test: `importJs` risolve l'ESM, `panel→renderCondizioni` popola, `radar` disegna l'SVG).
+    *(Thin-shell, `build()`, doc-plugin: ✅ chiusi sotto.)*
   - ✅ **Thin shell Jinja eliminati**: il default `_entity_base.j2`
     (`common.DEFAULT_JINJA`) è ora l'unico guscio condiviso; i 3 file
     `cultura`/`lingua`/`nota.md.j2` (solo `{% extends %}`) sono stati rimossi e le
@@ -233,11 +239,16 @@ le fondamenta saranno rifinite. In ordine di valore:
 - **QA in-app** su ogni pezzo di fondamenta prima di allargare (rischio #1).
 - **Quick-win architetturali**: ✅ eliminati i 3 thin-shell `cultura`/`lingua`/`nota.md.j2`
   (ereditano `_entity_base.j2`); ✅ spezzata `build()` in render.py (helper nominati,
-  output invariato). *Residuo*: ridurre la logica embeddata nelle note (il blocco-guscio
-  `js-engine` nel corpo) — **cambia l'output delle note → richiede QA in-app**, quindi a sé.
+  output invariato); ✅ **ridotto il guscio js-engine** (corpo nota = una riga via `boot.mjs`
+  ESM). Tutti i quick-win architetturali chiusi.
 - Generazione nomi/spunti (Fantasy Content Generator) e integrazioni minori quando comodo.
 
 ### ✅ Fatto (sessione 2026-06-01)
+- **Guscio js-engine ridotto** (ultimo quick-win architetturale): nuovo `boot.mjs` (ESM via
+  `engine.importJs`) concentra loader CommonJS di `views.js` + `dv`/`page` + `markdown.create`;
+  il corpo nota passa a **una riga** per pannello (≈1000 righe di boilerplate in meno negli
+  snapshot). **165 test** (build/`node --check` su `.js`+`.mjs`) + ✅ **smoke test in-app**
+  superato (importJs ESM, panel, radar). (da committare)
 - **Quick-win architetturali** (output invariato, manifest byte-identico): 3 thin-shell jinja
   eliminati; `build()` spezzata in helper nominati. (`8c29ad4`)
 - **Auto-riscrittura blocco encounter** — bottone *Aggiorna encounter* (`meta_actions`). (`9c87ca5`)
@@ -285,4 +296,5 @@ docs (`architecture`/`data_model`/`rules_layer`/`play_layer`/`plugin_contracts`)
 - **QA in-app** (rischio #1, deferita su scelta utente): quando si vuole, a blocchi — crea un PG
   e *Sali di livello*; clock → *Scatena conseguenza* (+ Fronti); incontro + *Aggiorna encounter*;
   **Cronologia** (timeline); **tab Mappa** su un luogo; archetipo/profilo; note SRD.
-- **Architettura** (a sé, ROI basso): ridurre il guscio js-engine nelle note.
+  ✅ Il **guscio `boot.mjs`** (tocca *tutti* i pannelli) è già confermato via smoke test
+  (importJs ESM + panel + radar); resta da provare i flussi sopra e la *reattività live* del radar.
