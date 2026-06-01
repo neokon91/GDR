@@ -51,6 +51,9 @@
 > Pronomi: `INPUT[text:pronomi]`
 > Età: `INPUT[text:eta]`
 
+> [!tip]- Genera nome/spunto
+> In linea (modalità modifica): `@` + categoria (es. `@HumanFemale`, `@Settlement`, `@InnsTaverns`) → scegli dal popup.
+> Generatore completo: `BUTTON[genera-contenuto]` — il risultato va negli appunti, poi incolla.
 > [!note]- Chi è
 > In una riga: ruolo, impressione che lascia, cosa porta in scena.
 

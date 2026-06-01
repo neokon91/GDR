@@ -245,6 +245,19 @@ def write_calendarium(obsidian: Path) -> None:
     })
 
 
+def write_fantasy_content_generator(obsidian: Path) -> None:
+    """Fantasy Content Generator (generazione nomi/spunti): pinna il trigger del
+    suggester INLINE. Digitando il trigger + una categoria nell'editor (es. @Orc)
+    compare un popup che inserisce il nome generato IN LINEA — niente clipboard.
+    Merge non distruttivo (il plugin riempie il resto da DEFAULT_SETTINGS). Il
+    bottone 'Genera' apre invece il MODALE completo (azione command, vedi
+    action_buttons): genera → clipboard → incolli. FCG non espone un'API di
+    generazione richiamabile, quindi niente aggancio nel wizard (scelta utente)."""
+    merge_plugin_config(obsidian, "fantasy-content-generator", {
+        "inlineCallout": "@",
+    })
+
+
 def crea_wrapper_js(template: dict[str, Any]) -> str:
     """Wizard di creazione per-template generato: `tp.user.crea_<id>` delega al
     motore condiviso create_entity.js. Le entità bespoke hanno un crea_<id>.js
@@ -290,15 +303,22 @@ def creation_buttons(core: dict[str, Any], templates: list[dict[str, Any]]) -> l
 
 
 def action_buttons(plugins: dict[str, Any]) -> list[dict[str, Any]]:
-    """Bottoni che eseguono un'azione Templater (marca canonico, archivia, ...)."""
+    """Bottoni-azione: o eseguono un file Templater (marca canonico, archivia, ...)
+    o lanciano un comando di Obsidian (button con 'command', es. aprire il modale
+    del Fantasy Content Generator). I command-button NON richiedono un'azione-nota
+    in templates.yaml (nessun runTemplaterFile da risolvere)."""
     buttons = []
     for button in plugins.get("buttons", []):
-        target = f"z.modelli/azioni/{button['label']}.md"
+        if button.get("command"):
+            action = {"type": "command", "command": button["command"]}
+        else:
+            target = f"z.modelli/azioni/{button['label']}.md"
+            action = {"type": "runTemplaterFile", "templateFile": target}
         buttons.append({
             "id": button["id"],
             "label": button["label"],
             "style": "destructive" if button["id"] == "archivia-nota" else "primary",
-            "actions": [{"type": "runTemplaterFile", "templateFile": target}],
+            "actions": [action],
         })
     return buttons
 
@@ -665,6 +685,7 @@ def write_obsidian_config(obsidian: Path, core: dict[str, Any], plugins: dict[st
     write_statblock_layouts(obsidian)
     write_folder_notes(obsidian)
     write_calendarium(obsidian)
+    write_fantasy_content_generator(obsidian)
     write_bookmarks(obsidian, pages)
     # Pulizia esploratore: nasconde le cartelle z.* + le esclude da ricerca/grafo.
     write_workspace_chrome(obsidian)

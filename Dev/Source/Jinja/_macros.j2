@@ -265,6 +265,19 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > Compila *Data* per far comparire l'evento sul calendario. Lascia vuoti calendario/categoria per il calendario di default.
 {%- endmacro %}
 
+{# Generazione nomi/spunti (Fantasy Content Generator, opzionale): due vie.
+   INLINE — nel corpo nota in modalità modifica digita `@` + una categoria
+   (es. @HumanFemale, @Settlement, @InnsTaverns) e scegli dal popup: il nome
+   generato si inserisce in linea (niente appunti). MODALE — il bottone Genera
+   apre il generatore completo; il risultato va negli appunti, poi incolli.
+   Spunti GENERICI (non legati all'ontologia/assi): curali e tipizzali dopo.
+   Richiede il plugin attivo. #}
+{% macro genera_nome() -%}
+> [!tip]- Genera nome/spunto
+> In linea (modalità modifica): `@` + categoria (es. `@HumanFemale`, `@Settlement`, `@InnsTaverns`) → scegli dal popup.
+> Generatore completo: `BUTTON[genera-contenuto]` — il risultato va negli appunti, poi incolla.
+{%- endmacro %}
+
 {# Tiri rapidi (Dice Roller): d20 normale/vantaggio/svantaggio, inline e
    cliccabili (richiede Dice Roller attivo). Aggiungi a mano il bonus dalla
    scheda. Callout pieghevole per non ingombrare. Riusato da PG e incontro. #}

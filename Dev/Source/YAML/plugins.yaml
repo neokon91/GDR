@@ -123,8 +123,10 @@ callouts:
   - { id: tavolo,  color: "201, 64, 64",   icon: lucide-swords }
   - { id: gancio,  color: "191, 130, 42",  icon: lucide-anchor }
   - { id: segreto, color: "138, 74, 173",  icon: lucide-eye-off }
-# Solo bottoni-azione: eseguono un file Templater su z.modelli/azioni/.
-# I bottoni "Crea <Titolo>" sono generati da templates.yaml (id: crea-<id>).
+# Bottoni-azione: 'action' esegue un file Templater su z.modelli/azioni/ (serve
+# anche l'entry in templates.yaml:actions); 'command' lancia un comando di
+# Obsidian (nessuna azione-nota). I bottoni "Crea <Titolo>" sono generati da
+# templates.yaml (id: crea-<id>).
 buttons:
   - id: collega-nota
     label: Collega
@@ -150,3 +152,8 @@ buttons:
   - id: aggiorna-encounter
     label: Aggiorna encounter
     action: aggiorna_encounter
+  # Command-button: lancia un comando di Obsidian (niente azione-nota Templater).
+  # Genera apre il modale del Fantasy Content Generator (nomi/spunti → clipboard).
+  - id: genera-contenuto
+    label: Genera
+    command: fantasy-content-generator:open-fantasy-generator

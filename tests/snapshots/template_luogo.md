@@ -32,6 +32,9 @@
 > Clima: `INPUT[clima][:clima]`
 > Popolazione: `INPUT[text:popolazione]`
 
+> [!tip]- Genera nome/spunto
+> In linea (modalità modifica): `@` + categoria (es. `@HumanFemale`, `@Settlement`, `@InnsTaverns`) → scegli dal popup.
+> Generatore completo: `BUTTON[genera-contenuto]` — il risultato va negli appunti, poi incolla.
 > [!note]- Colpo d'occhio
 > Cos'è il luogo, che impressione dà entrandoci, perché conta nella storia.
 

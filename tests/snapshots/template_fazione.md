@@ -35,6 +35,9 @@
 > Forma di governo: `INPUT[text:forma_governo]`
 > Epoca di fondazione: `INPUT[text:fondazione]`
 
+> [!tip]- Genera nome/spunto
+> In linea (modalità modifica): `@` + categoria (es. `@HumanFemale`, `@Settlement`, `@InnsTaverns`) → scegli dal popup.
+> Generatore completo: `BUTTON[genera-contenuto]` — il risultato va negli appunti, poi incolla.
 > [!note]- Identità
 > Cosa rappresenta la fazione, simboli, reputazione e percezione pubblica.
 
