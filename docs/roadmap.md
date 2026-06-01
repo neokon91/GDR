@@ -231,13 +231,14 @@ sopra i sistemi avanzati (vedi backlog).
   Prossimi: legami pantheon/cosmologia più ricchi e il **sistema astrologico/tema natale**
   (#9, recupero FantasyWorld) come profondità-personaggio opt-in.
 - **Analisi wizard/YAML (2026-06-01)** — il modello ha relazioni tipizzate ricche ma il
-  **wizard non legge `core.relazioni`** (33/36 categorie nascono con 0-1 link): la connessione
-  è un passo manuale successivo. `insidia` orfana → ✅ wired (`65b29b0`). **Aperti** (scelta
-  utente: rinviati): **(a) wizard "connetti alla creazione"** — offrire le relazioni della
-  categoria nel wizard (leva massima sulla connessione, data-driven); **(b) assi allo strato
-  cosmico** (dominio/entita_primordiale/legge_fondamentale/piano senza assi → Carattere vuoto)
-  + scheda per cosmologia/dominio; **(c) inverse tipizzati** (campo `inverse` sulle relazioni →
-  Collega/wizard scrivono il reverse tipizzato invece del generico `connessioni`).
+  wizard non leggeva `core.relazioni` (33/36 categorie nascevano con 0-1 link). Fatti:
+  `insidia` orfana → ✅ wired (`65b29b0`); ✅ **(a) wizard "connetti alla creazione"** — offre
+  le relazioni della categoria nel wizard (gate opzionale, dedup vs creation.fields; `16dc3ab`),
+  + corretta la collisione `luogo.abitanti` relazione↔body (→ `figure`) + guard in validate.
+  **Aperti** (rinviati): **(b) assi allo strato cosmico** (dominio/entita_primordiale/
+  legge_fondamentale/piano senza assi → Carattere vuoto) + scheda per cosmologia/dominio;
+  **(c) inverse tipizzati** (campo `inverse` sulle relazioni → reverse tipizzato invece del
+  generico `connessioni`).
 
 ## 🎲 DM (D&D 5/5.5e)
 
@@ -398,17 +399,18 @@ le fondamenta saranno rifinite. In ordine di valore:
 
 ## Come ripartire
 
-**205 test verdi**, check 0; HEAD `cfbbf13` (post-beta: **ponte Calendarium** `73041f5` +
+**206 test verdi**, check 0; HEAD `16dc3ab` (post-beta: **ponte Calendarium** `73041f5` +
 **aggancio FCG** `e591a5d`, verificati in-app, + **generatore homebrew IT** `0b6e6ad` +
-**FCG italianizzato** `53e20b1` (*QA in-app pendente — computer-use disconnesso*) +
-**solidità JS** cache+anti-drift `a876bcc`; prima: smoke test + 3 bug runtime + risorse
-combattimento + quick-win analisi). **Unica vera riserva beta rimasta: il mondo-esempio
-(blocco #1, rinviato).** *Filoni (scelta utente): generatore IT ✅, italianizzazione FCG ✅
-(parziale), solidità ✅ (cache+anti-drift), famiglie→preset assi ✅, epoche→calendario ✅.
-Resta del filone plugin/YAML solo la parte UI (Metadata Menu/mappe/Initiative, **da QA**) e
-opz. report gap copertura. **5 feature post-beta con QA in-app pendente** (computer-use
-disconnesso): generatore, FCG italiano, prompt-famiglia wizard, epoca-calendario, + i flussi
-runtime. Tab-extra data-driven valutato e **non fatto** (payoff marginale: il lore bespoke resta).*
+**FCG italianizzato** `53e20b1` + **solidità JS** `a876bcc` + **wire insidia** `65b29b0` +
+**wizard connetti-alla-creazione** `16dc3ab` (*QA in-app pendente — computer-use disconnesso*);
+prima: smoke test + 3 bug runtime + risorse combattimento + quick-win analisi). **Unica vera
+riserva beta rimasta: il mondo-esempio (blocco #1, rinviato).** *Filoni (scelta utente):
+generatore IT ✅, italianizzazione FCG ✅ (parziale), solidità ✅, famiglie→preset assi ✅,
+epoche→calendario ✅, wizard connetti-alla-creazione ✅. Resta del filone plugin/YAML solo la
+parte UI (Metadata Menu/mappe/Initiative, **da QA**); aperti opz. (b) assi cosmici, (c) inverse
+tipizzati, report gap copertura. **6 feature post-beta con QA in-app pendente** (computer-use
+disconnesso): generatore, FCG italiano, prompt-famiglia wizard, epoca-calendario, wizard
+connetti, + flussi runtime. Tab-extra data-driven valutato e **non fatto** (payoff marginale).*
 Leggi questo file + i
 docs (`architecture`/`data_model`/`rules_layer`/`play_layer`/`plugin_contracts`) + la memoria
 (`project-northstar`, `vault-due-suite`). **Fasi 1-2 coperte + rifiniture** → prossimi:
