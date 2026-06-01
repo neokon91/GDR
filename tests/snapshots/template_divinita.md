@@ -7,6 +7,17 @@
 >
 > **Stato**: `INPUT[stato][:stato]`
 
+> [!info] Famiglia: `INPUT[inlineSelect(option(primordiale), option(archetipica), option(elementale), option(culturale), option(mitica), option(spirituale), option(onirica)):famiglia]`
+
+> [!note]- Cosa significa ogni famiglia
+> **primordiale** — Preesistente alla creazione dei piani e delle leggi strutturate.
+> **archetipica** — Incarna forze universali o concetti eterni.
+> **elementale** — Collegata a uno degli elementi fondamentali o ai loro derivati.
+> **culturale** — Creata, immaginata o evocata dai mortali.
+> **mitica** — Figura simbolica o alchemica, nata dalla convergenza cosmica.
+> **spirituale** — Legata al ciclo dell'anima, alla morte, alla purificazione o al karma.
+> **onirica** — Nata dall'inconscio collettivo, dai sogni cosmici o da archetipi inconsci.
+
 ````tabs
 --- Scheda
 

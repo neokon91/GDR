@@ -15,6 +15,17 @@ subtypes:
 - lingua
 - dialetto
 - codice o gergo
+# Classificazione a 2 livelli: la 'famiglia' (registro, seed FW lingua_cat)
+# affianca il 'tipo'. Select + legenda auto-documentante.
+famiglie:
+- { nome: primordiale, descrizione: "Linguaggi originari, emanazioni cosmiche o divine anteriori alla realtà ordinata." }
+- { nome: divina,      descrizione: "Idiomi delle entità divine o delle sfere celesti, spesso incomprensibili ai mortali." }
+- { nome: planare,     descrizione: "Associati a uno o più piani; riflettono le proprietà metafisiche del piano." }
+- { nome: elementale,  descrizione: "Linguaggi naturali legati ai quattro elementi primari." }
+- { nome: ancestrale,  descrizione: "Idiomi di civiltà estinte o epoche dimenticate." }
+- { nome: rituale,     descrizione: "Usati per scopi cerimoniali, religiosi o liturgici." }
+- { nome: arcana,      descrizione: "Linguaggi specialistici per incantesimi, formule, sigilli e grimori." }
+- { nome: segreta,     descrizione: "Codici cifrati e idiomi criptici di sette, ladri, spie o ordini iniziatici." }
 # Campo query-abile: stato vitale della lingua ("lingue morte/liturgiche").
 fields:
   vitalita: { label: Vitalità, widget: vitalita }

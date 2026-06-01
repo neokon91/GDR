@@ -7,6 +7,18 @@
 >
 > **Stato**: `INPUT[stato][:stato]`
 
+> [!info] Famiglia: `INPUT[inlineSelect(option(ancestrale), option(sciamanica), option(iniziatica), option(dogmatica), option(fluida), option(sincretica), option(guerriera), option(nomadica)):famiglia]`
+
+> [!note]- Cosa significa ogni famiglia
+> **ancestrale** — Radicata nelle origini mitiche, nella trasmissione orale e nei cicli naturali.
+> **sciamanica** — Integra visibile e invisibile: pratiche spirituali, viaggi dell'anima, dialogo con l'Altrove.
+> **iniziatica** — Fondata sul passaggio, la prova e la trasformazione.
+> **dogmatica** — Del sacro immutabile, del rito stabilito, della gerarchia indiscutibile.
+> **fluida** — In perenne mutamento; abbraccia molteplicità e trasformazione.
+> **sincretica** — Dell'intreccio: fonde tradizioni e significati.
+> **guerriera** — Fondata sul conflitto, sulla prova e sulla conquista.
+> **nomadica** — Del movimento, dell'adattamento e della non-fissazione.
+
 ````tabs
 --- Lore
 

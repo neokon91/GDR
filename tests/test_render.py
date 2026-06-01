@@ -176,6 +176,10 @@ def test_famiglie_classification():
     fields = {f["name"]: f for f in render.fileclass_fields(CORE, "luogo")}
     assert fields.get("famiglia", {}).get("type") == "Select"
     assert fields["famiglia"]["options"]["valuesList"]  # opzioni non vuote
+    # le 9 categorie classificate a 2 livelli (batch 1+2)
+    con_famiglie = {c for c, m in cats.items() if m.get("famiglie")}
+    assert {"luogo", "fazione", "personaggio", "evento", "cultura", "divinita",
+            "specie", "epoca", "lingua"} <= con_famiglie
 
 
 @pytest.mark.parametrize("category", list(CORE.get("categories", {})), ids=list(CORE.get("categories", {})))

@@ -16,6 +16,17 @@ subtypes:
 - popolo
 - tradizione
 - religione
+# Classificazione a 2 livelli: la 'famiglia' (indole, seed FW glossario_cultura)
+# affianca il 'tipo'. Select + legenda auto-documentante.
+famiglie:
+- { nome: ancestrale, descrizione: "Radicata nelle origini mitiche, nella trasmissione orale e nei cicli naturali." }
+- { nome: sciamanica, descrizione: "Integra visibile e invisibile: pratiche spirituali, viaggi dell'anima, dialogo con l'Altrove." }
+- { nome: iniziatica, descrizione: "Fondata sul passaggio, la prova e la trasformazione." }
+- { nome: dogmatica,  descrizione: "Del sacro immutabile, del rito stabilito, della gerarchia indiscutibile." }
+- { nome: fluida,     descrizione: "In perenne mutamento; abbraccia molteplicità e trasformazione." }
+- { nome: sincretica, descrizione: "Dell'intreccio: fonde tradizioni e significati." }
+- { nome: guerriera,  descrizione: "Fondata sul conflitto, sulla prova e sulla conquista." }
+- { nome: nomadica,   descrizione: "Del movimento, dell'adattamento e della non-fissazione." }
 # Diffusione/portata della cultura (riusa il campo select condiviso 'portata').
 scheda: [portata]
 relazioni:

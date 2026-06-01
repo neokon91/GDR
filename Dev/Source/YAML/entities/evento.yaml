@@ -17,6 +17,16 @@ subtypes:
 - evento di campagna
 - conflitto
 - conseguenza
+# Classificazione a 2 livelli: la 'famiglia' (registro cosmico, seed FW evento_cat)
+# affianca il 'tipo'. Select + legenda auto-documentante.
+famiglie:
+- { nome: cosmico,       descrizione: "Coinvolge l'equilibrio dell'universo: nascita o morte di leggi fondamentali, piani o entità primordiali." }
+- { nome: epocale,       descrizione: "Marca un prima e un dopo nella linea storica, aprendo o chiudendo un'epoca." }
+- { nome: mitico,        descrizione: "Evento archetipico tramandato in forma simbolica o leggendaria." }
+- { nome: sacrale,       descrizione: "Implica un contatto diretto col divino o una trasformazione spirituale profonda." }
+- { nome: catastrofico,  descrizione: "Evento distruttivo su scala vasta." }
+- { nome: fondativo,     descrizione: "Genera un ordine, una civiltà, un pantheon o un piano." }
+- { nome: transizionale, descrizione: "Segna un passaggio tra stati dell'essere, condizioni metafisiche o ordini narrativi." }
 scheda:
 - portata
 relazioni:

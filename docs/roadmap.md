@@ -212,13 +212,14 @@ le fondamenta saranno rifinite. In ordine di valore:
    `tema_natale`/`archetipo` su **personaggio** (profilo rapido) + categorie astrologiche
    opzionali (segno/arcano/pianeta) per i mondi dove l'astrologia conta. **Differenziatore
    worldbuilding forte** (profondità del personaggio); pesante, quindi opt-in per mondo.
-10. 🔄 **Glossari di categoria FW** (`JSON/generale/glossari/*_cat.json`) — IN CORSO:
-    **classificazione a 2 livelli** `famiglia` (curata, con descrizioni + legenda
-    auto-documentante) **+** `tipo` (subtypes). Plumbing generico (common→`core.categories`,
-    fileClass select, macro `classificazione`, validate); famiglia query-abile/editabile.
-    Fatte: **luogo** (8 famiglie), **fazione** (7), **personaggio** (8 *ruoli narrativi* per png).
-    Da estendere: evento/cultura/divinità + minori (specie/epoca/lingua/dominio). *(Le famiglie
-    possono in futuro presettare gli assi, stile archetipi.)*
+10. ✅ **Glossari di categoria FW** (`JSON/generale/glossari/*_cat.json`) — **classificazione
+    a 2 livelli** `famiglia` (curata, con descrizioni + legenda auto-documentante) **+** `tipo`
+    (subtypes). Plumbing generico (common→`core.categories`, fileClass select, macro
+    `classificazione`, validate); famiglia query-abile/editabile. **9 entità**: luogo (8),
+    fazione (7), evento (7), cultura (8), divinità (7), specie (8), epoca (7), lingua (8) +
+    personaggio (8 *ruoli narrativi* per png). *Residuo*: dominio (le famiglie FW = portfolio
+    divini, ≠ il nostro hub cosmologico → da hand-authorare). *Le famiglie possono in futuro
+    **presettare gli assi**, stile archetipi.*
 11. **Alberi evolutivi** (`JSON/TTRPG/alberi_evolutivi.json`) — abilità per parte-del-corpo
     → grado → potere (skill-tree). *Recupero*: poteri di creatura o un binario homebrew che
     estende la progressione PG (#6, già fatta per le classi SRD).

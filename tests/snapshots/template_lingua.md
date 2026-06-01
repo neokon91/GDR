@@ -7,6 +7,18 @@
 >
 > **Stato**: `INPUT[stato][:stato]`
 
+> [!info] Famiglia: `INPUT[inlineSelect(option(primordiale), option(divina), option(planare), option(elementale), option(ancestrale), option(rituale), option(arcana), option(segreta)):famiglia]`
+
+> [!note]- Cosa significa ogni famiglia
+> **primordiale** — Linguaggi originari, emanazioni cosmiche o divine anteriori alla realtà ordinata.
+> **divina** — Idiomi delle entità divine o delle sfere celesti, spesso incomprensibili ai mortali.
+> **planare** — Associati a uno o più piani; riflettono le proprietà metafisiche del piano.
+> **elementale** — Linguaggi naturali legati ai quattro elementi primari.
+> **ancestrale** — Idiomi di civiltà estinte o epoche dimenticate.
+> **rituale** — Usati per scopi cerimoniali, religiosi o liturgici.
+> **arcana** — Linguaggi specialistici per incantesimi, formule, sigilli e grimori.
+> **segreta** — Codici cifrati e idiomi criptici di sette, ladri, spie o ordini iniziatici.
+
 ````tabs
 --- Lore
 

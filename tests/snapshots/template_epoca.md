@@ -7,6 +7,17 @@
 >
 > **Stato**: `INPUT[stato][:stato]`
 
+> [!info] Famiglia: `INPUT[inlineSelect(option(fondativa), option(transizionale), option(stabilizzante), option(degenerativa), option(ciclica), option(apocrifa), option(liminale)):famiglia]`
+
+> [!note]- Cosa significa ogni famiglia
+> **fondativa** — Dà origine a strutture cosmiche fondamentali: leggi, piani, razze, civiltà, entità primordiali.
+> **transizionale** — Periodo di passaggio, mutazione o riformulazione ontologica.
+> **stabilizzante** — L'universo trova una forma durevole, ordinata o codificata.
+> **degenerativa** — L'equilibrio si corrompe, le leggi si incrinano, le civiltà decadono.
+> **ciclica** — Epoca destinata a ripetersi o riemergere.
+> **apocrifa** — Epoca dimenticata, rimossa o occultata.
+> **liminale** — Esiste tra due stati dell'essere: confini, piani e identità incerti.
+
 ````tabs
 --- Lore
 

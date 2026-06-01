@@ -16,6 +16,16 @@ subtypes:
 - divinità minore
 - semidio
 - pantheon
+# Classificazione a 2 livelli: la 'famiglia' (natura, seed FW glossario_divinita)
+# affianca il 'tipo' (rango). Select + legenda auto-documentante.
+famiglie:
+- { nome: primordiale, descrizione: "Preesistente alla creazione dei piani e delle leggi strutturate." }
+- { nome: archetipica, descrizione: "Incarna forze universali o concetti eterni." }
+- { nome: elementale,  descrizione: "Collegata a uno degli elementi fondamentali o ai loro derivati." }
+- { nome: culturale,   descrizione: "Creata, immaginata o evocata dai mortali." }
+- { nome: mitica,      descrizione: "Figura simbolica o alchemica, nata dalla convergenza cosmica." }
+- { nome: spirituale,  descrizione: "Legata al ciclo dell'anima, alla morte, alla purificazione o al karma." }
+- { nome: onirica,     descrizione: "Nata dall'inconscio collettivo, dai sogni cosmici o da archetipi inconsci." }
 relazioni:
 - field: domini
   label: Domini cosmici

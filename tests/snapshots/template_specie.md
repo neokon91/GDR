@@ -7,6 +7,18 @@
 >
 > **Stato**: `INPUT[stato][:stato]`
 
+> [!info] Famiglia: `INPUT[inlineSelect(option(ancestrale), option(spirituale), option(cosmica), option(mortale), option(corrompibile), option(onirica), option(elementale), option(sintetica)):famiglia]`
+
+> [!note]- Cosa significa ogni famiglia
+> **ancestrale** — Antichissima, nata nei primordi del cosmo o da eventi mitici.
+> **spirituale** — Legata al ciclo delle anime, al karma o a piani spirituali.
+> **cosmica** — Opera su scala universale o planare.
+> **mortale** — Finita nel tempo: soggetta a nascita, crescita e morte.
+> **corrompibile** — Nata pura o neutra, ma molto influenzabile da mutazioni, magie o traumi.
+> **onirica** — Nata nei sogni cosmici, nell'inconscio collettivo o nei piani onirici.
+> **elementale** — Composta o generata dagli elementi primari (fuoco, acqua, aria, terra, etere).
+> **sintetica** — Creata artificialmente tramite magia, alchimia o tecnologia.
+
 ````tabs
 --- Scheda
 

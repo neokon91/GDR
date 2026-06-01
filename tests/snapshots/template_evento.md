@@ -7,6 +7,17 @@
 >
 > **Stato**: `INPUT[stato][:stato]`
 
+> [!info] Famiglia: `INPUT[inlineSelect(option(cosmico), option(epocale), option(mitico), option(sacrale), option(catastrofico), option(fondativo), option(transizionale)):famiglia]`
+
+> [!note]- Cosa significa ogni famiglia
+> **cosmico** — Coinvolge l'equilibrio dell'universo: nascita o morte di leggi fondamentali, piani o entità primordiali.
+> **epocale** — Marca un prima e un dopo nella linea storica, aprendo o chiudendo un'epoca.
+> **mitico** — Evento archetipico tramandato in forma simbolica o leggendaria.
+> **sacrale** — Implica un contatto diretto col divino o una trasformazione spirituale profonda.
+> **catastrofico** — Evento distruttivo su scala vasta.
+> **fondativo** — Genera un ordine, una civiltà, un pantheon o un piano.
+> **transizionale** — Segna un passaggio tra stati dell'essere, condizioni metafisiche o ordini narrativi.
+
 ````tabs
 --- Lore
 

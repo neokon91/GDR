@@ -15,6 +15,17 @@ subtypes:
 - comune
 - esotica
 - mostruosa
+# Classificazione a 2 livelli: la 'famiglia' (origine, seed FW glossario_razza)
+# affianca il 'tipo' (rarità). Select + legenda auto-documentante.
+famiglie:
+- { nome: ancestrale,   descrizione: "Antichissima, nata nei primordi del cosmo o da eventi mitici." }
+- { nome: spirituale,   descrizione: "Legata al ciclo delle anime, al karma o a piani spirituali." }
+- { nome: cosmica,      descrizione: "Opera su scala universale o planare." }
+- { nome: mortale,      descrizione: "Finita nel tempo: soggetta a nascita, crescita e morte." }
+- { nome: corrompibile, descrizione: "Nata pura o neutra, ma molto influenzabile da mutazioni, magie o traumi." }
+- { nome: onirica,      descrizione: "Nata nei sogni cosmici, nell'inconscio collettivo o nei piani onirici." }
+- { nome: elementale,   descrizione: "Composta o generata dagli elementi primari (fuoco, acqua, aria, terra, etere)." }
+- { nome: sintetica,    descrizione: "Creata artificialmente tramite magia, alchimia o tecnologia." }
 scheda:
 - taglia
 - velocita

@@ -17,6 +17,16 @@ subtypes:
 - era mitica
 - età
 - eone
+# Classificazione a 2 livelli: la 'famiglia' (funzione cosmica, seed FW epoca_cat)
+# affianca il 'tipo'. Select + legenda auto-documentante.
+famiglie:
+- { nome: fondativa,     descrizione: "Dà origine a strutture cosmiche fondamentali: leggi, piani, razze, civiltà, entità primordiali." }
+- { nome: transizionale, descrizione: "Periodo di passaggio, mutazione o riformulazione ontologica." }
+- { nome: stabilizzante, descrizione: "L'universo trova una forma durevole, ordinata o codificata." }
+- { nome: degenerativa,  descrizione: "L'equilibrio si corrompe, le leggi si incrinano, le civiltà decadono." }
+- { nome: ciclica,       descrizione: "Epoca destinata a ripetersi o riemergere." }
+- { nome: apocrifa,      descrizione: "Epoca dimenticata, rimossa o occultata." }
+- { nome: liminale,      descrizione: "Esiste tra due stati dell'essere: confini, piani e identità incerti." }
 fields:
   inizio: { label: Inizio, widget: text }
   fine:   { label: Fine,   widget: text }
