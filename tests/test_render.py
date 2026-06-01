@@ -723,3 +723,14 @@ def test_genera_e2e(tmp_path):
         assert "{" not in out[st]["f"], f"placeholder non risolto ({st}): {out[st]['f']}"
         assert out[st]["f"][0].isupper()
     assert len(set(out["__lista"])) >= 6   # generaLista: opzioni distinte
+
+
+def test_fcg_it_settings():
+    """fcg_it.yaml: i gruppi override hanno TUTTE le chiavi che il generatore FCG
+    legge (il merge del plugin è shallow → una chiave mancante romperebbe quel
+    generatore). Struttura dal reverse di DEFAULT_SETTINGS."""
+    s = render.load_yaml("fcg_it.yaml")["settings"]
+    inn = s["innSettings"]
+    assert all(inn.get(k) for k in ("prefixes", "innType", "nouns", "desc", "rumors")), "innSettings incompleto"
+    assert all(s["drinkSettings"].get(k) for k in ("adj", "nouns")), "drinkSettings incompleto"
+    assert s["currencyTypes"] and all(c.get("name") and c.get("rarity") for c in s["currencyTypes"])

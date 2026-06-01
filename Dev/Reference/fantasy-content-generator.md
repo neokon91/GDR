@@ -26,6 +26,14 @@ chiamabile da Templater/JS Engine → niente generazione nel wizard.
 ## Aggancio (roadmap #8) — fatto
 - **`write_fantasy_content_generator`** (render.py): pinna `inlineCallout: "@"`
   (merge non distruttivo; il plugin riempie il resto da DEFAULT_SETTINGS).
+- **Italianizzazione (config)** — `fcg_it.yaml` → liste italiane per i generatori
+  **configurabili**: monete (`currencyTypes`), **locande** (`innSettings`), **bevande**
+  (`drinkSettings`). Replica la struttura ESATTA di DEFAULT_SETTINGS (merge shallow →
+  servono tutte le chiavi del gruppo) e tutto MASCHILE per la concordanza, dato l'ordine
+  fisso di composizione (es. `prefixes + nouns + innType` → "La Taverna del Corvo Nero").
+  *Rinviati* (frasi/branching o ridondanti coi toponimi homebrew, QA in-app): `dungeonSettings`,
+  `groupSettings`, `lootSettings`, `citySettings`. *Non traducibili* (hardcoded): nomi-per-razza
+  ed etichette del menu.
 - **Bottone Genera** (Meta Bind `command`): `plugins.yaml:buttons` con campo `command`
   (`genera-contenuto`); `action_buttons()` emette `{type:"command", command:…}` →
   i command-button NON richiedono un'azione-nota Templater. Apre il modale.

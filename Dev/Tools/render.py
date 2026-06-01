@@ -252,10 +252,17 @@ def write_fantasy_content_generator(obsidian: Path) -> None:
     Merge non distruttivo (il plugin riempie il resto da DEFAULT_SETTINGS). Il
     bottone 'Genera' apre invece il MODALE completo (azione command, vedi
     action_buttons): genera → clipboard → incolli. FCG non espone un'API di
-    generazione richiamabile, quindi niente aggancio nel wizard (scelta utente)."""
-    merge_plugin_config(obsidian, "fantasy-content-generator", {
-        "inlineCallout": "@",
-    })
+    generazione richiamabile, quindi niente aggancio nel wizard (scelta utente).
+
+    Inietta inoltre le liste ITALIANE per i generatori configurabili (fcg_it.yaml:
+    monete/locande/bevande): replica la struttura esatta di DEFAULT_SETTINGS e ne
+    cambia solo i valori (il merge del plugin è shallow → ogni gruppo override
+    deve avere tutte le sue chiavi). I generatori non configurabili (nomi per
+    razza) ed etichette restano in inglese."""
+    config = {"inlineCallout": "@"}
+    if (SOURCE / "YAML" / "fcg_it.yaml").is_file():
+        config.update(load_yaml("fcg_it.yaml").get("settings", {}))
+    merge_plugin_config(obsidian, "fantasy-content-generator", config)
 
 
 def crea_wrapper_js(template: dict[str, Any]) -> str:
