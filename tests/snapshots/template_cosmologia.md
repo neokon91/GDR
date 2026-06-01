@@ -6,6 +6,15 @@
 >
 > **Stato**: `INPUT[stato][:stato]`
 
+> [!info] Famiglia: `INPUT[inlineSelect(option(origine), option(struttura), option(forze), option(destino), option(mistero)):famiglia]`
+
+> [!note]- Cosa significa ogni famiglia
+> **origine** — Come e da cosa nasce la realtà: principi e atti primigeni.
+> **struttura** — Come è ordinato il cosmo: piani, leggi, gerarchie dell'essere.
+> **forze** — Le energie e i poteri che muovono e reggono il mondo.
+> **destino** — Dove tende la realtà: cicli, fine, rinascita, scopo ultimo.
+> **mistero** — Ciò che resta ignoto o inconoscibile: enigmi e verità nascoste.
+
 ````tabs
 --- Lore
 

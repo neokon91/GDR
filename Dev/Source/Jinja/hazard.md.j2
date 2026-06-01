@@ -4,6 +4,9 @@
 
 {{ m.identita_card(template) }}
 
+{% if core.get('categories', {}).get(template.category, {}).get('famiglie') %}
+{{ m.classificazione(template.category) }}
+{% endif %}
 ````tabs
 --- Insidia
 

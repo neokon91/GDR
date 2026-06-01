@@ -15,6 +15,14 @@ subtypes:
 - trappola
 - pericolo naturale
 - effetto ambientale
+# Classificazione a 2 livelli: la 'famiglia' (natura/innesco) affianca il 'tipo'.
+# Select + legenda auto-documentante.
+famiglie:
+- { nome: meccanica,  descrizione: "Trappola fisica: lame, fosse, pressione, congegni." }
+- { nome: magica,     descrizione: "Trappola arcana: glifi, maledizioni, effetti incantati." }
+- { nome: naturale,   descrizione: "Pericolo dell'ambiente: frane, gas, gelo, correnti." }
+- { nome: biologica,  descrizione: "Minaccia vivente: spore, veleni, parassiti, malattie." }
+- { nome: ambientale, descrizione: "Condizione persistente dell'area: oscurità, terreno, clima." }
 scheda:
 - tier
 - minaccia

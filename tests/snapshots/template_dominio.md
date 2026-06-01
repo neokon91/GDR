@@ -6,6 +6,18 @@
 >
 > **Stato**: `INPUT[stato][:stato]`
 
+> [!info] Famiglia: `INPUT[inlineSelect(option(ordine), option(caos), option(vita), option(morte), option(natura), option(conoscenza), option(energia), option(fato)):famiglia]`
+
+> [!note]- Cosa significa ogni famiglia
+> **ordine** — La sfera della struttura, della legge e della stabilità.
+> **caos** — La sfera del mutamento, dell'imprevedibile e della distruzione.
+> **vita** — La sfera della crescita, della nascita e della fertilità.
+> **morte** — La sfera della fine, del trapasso e dell'oltretomba.
+> **natura** — La sfera del mondo vivente, degli elementi e dei cicli naturali.
+> **conoscenza** — La sfera del sapere, della mente e della verità.
+> **energia** — La sfera del potere grezzo, della magia e delle forze primarie.
+> **fato** — La sfera del destino, del tempo e degli eventi predeterminati.
+
 ````tabs
 --- Lore
 

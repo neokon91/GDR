@@ -7,6 +7,16 @@
 >
 > **Stato**: `INPUT[stato][:stato]`
 
+> [!info] Famiglia: `INPUT[inlineSelect(option(esistenziale), option(morale), option(causale), option(formale), option(temporale), option(magica)):famiglia]`
+
+> [!note]- Cosa significa ogni famiglia
+> **esistenziale** — Regge l'essere e il non-essere: vita, morte, presenza.
+> **morale** — Regge bene e male, luce e ombra, colpa e redenzione.
+> **causale** — Regge causa ed effetto, destino e libero arbitrio, caso.
+> **formale** — Regge forma e dissoluzione, ordine ed entropia, identità.
+> **temporale** — Regge tempo, durata, eternità e ciclicità.
+> **magica** — Regge il flusso dell'energia, il vuoto e i limiti del potere.
+
 ````tabs
 --- Lore
 

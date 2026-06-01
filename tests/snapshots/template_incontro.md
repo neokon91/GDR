@@ -7,6 +7,16 @@
 >
 > **Stato**: `INPUT[stato][:stato]`
 
+> [!info] Famiglia: `INPUT[inlineSelect(option(combattimento), option(sociale), option(esplorazione), option(enigma), option(inseguimento), option(ambientale)):famiglia]`
+
+> [!note]- Cosa significa ogni famiglia
+> **combattimento** — Scontro: l'obiettivo è prevalere sul nemico.
+> **sociale** — Interazione: persuadere, negoziare, ingannare, intimidire.
+> **esplorazione** — Scoperta: attraversare, cercare, orientarsi nell'ignoto.
+> **enigma** — Rompicapo: risolvere un puzzle, un indovinello, un meccanismo.
+> **inseguimento** — Movimento: rincorrere o fuggire, con poste e ostacoli.
+> **ambientale** — Sopravvivenza: l'ambiente stesso è la minaccia.
+
 ````tabs
 --- Scena
 

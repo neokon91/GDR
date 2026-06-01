@@ -15,6 +15,15 @@ subtypes:
 - polarità
 - principio assoluto
 - vincolo cosmico
+# Classificazione a 2 livelli: la 'famiglia' (ambito di realtà retto dalla legge)
+# affianca il 'tipo'. Select + legenda auto-documentante.
+famiglie:
+- { nome: esistenziale, descrizione: "Regge l'essere e il non-essere: vita, morte, presenza." }
+- { nome: morale,       descrizione: "Regge bene e male, luce e ombra, colpa e redenzione." }
+- { nome: causale,      descrizione: "Regge causa ed effetto, destino e libero arbitrio, caso." }
+- { nome: formale,      descrizione: "Regge forma e dissoluzione, ordine ed entropia, identità." }
+- { nome: temporale,    descrizione: "Regge tempo, durata, eternità e ciclicità." }
+- { nome: magica,       descrizione: "Regge il flusso dell'energia, il vuoto e i limiti del potere." }
 # Campo query-abile: i due poli della legge (es. "Vita ↔ Morte").
 fields:
   poli: { label: Poli, widget: text }

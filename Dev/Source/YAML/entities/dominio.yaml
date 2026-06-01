@@ -16,6 +16,17 @@ subtypes:
 - sfera ontologica
 - principio attivo
 - aspetto cosmico
+# Classificazione a 2 livelli: la 'famiglia' (ambito di realtà governato) affianca il
+# 'tipo' (forma della sfera). Select + legenda auto-documentante.
+famiglie:
+- { nome: ordine,      descrizione: "La sfera della struttura, della legge e della stabilità." }
+- { nome: caos,        descrizione: "La sfera del mutamento, dell'imprevedibile e della distruzione." }
+- { nome: vita,        descrizione: "La sfera della crescita, della nascita e della fertilità." }
+- { nome: morte,       descrizione: "La sfera della fine, del trapasso e dell'oltretomba." }
+- { nome: natura,      descrizione: "La sfera del mondo vivente, degli elementi e dei cicli naturali." }
+- { nome: conoscenza,  descrizione: "La sfera del sapere, della mente e della verità." }
+- { nome: energia,     descrizione: "La sfera del potere grezzo, della magia e delle forze primarie." }
+- { nome: fato,        descrizione: "La sfera del destino, del tempo e degli eventi predeterminati." }
 relazioni:
 - field: leggi
   label: Leggi fondamentali

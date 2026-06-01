@@ -17,6 +17,15 @@ subtypes:
 - incontro
 - agguato
 - inseguimento
+# Classificazione a 2 livelli: la 'famiglia' (scopo della scena) affianca il 'tipo'
+# (forma). Aiuta a variare il ritmo al tavolo. Select + legenda auto-documentante.
+famiglie:
+- { nome: combattimento, descrizione: "Scontro: l'obiettivo è prevalere sul nemico." }
+- { nome: sociale,       descrizione: "Interazione: persuadere, negoziare, ingannare, intimidire." }
+- { nome: esplorazione,  descrizione: "Scoperta: attraversare, cercare, orientarsi nell'ignoto." }
+- { nome: enigma,        descrizione: "Rompicapo: risolvere un puzzle, un indovinello, un meccanismo." }
+- { nome: inseguimento,  descrizione: "Movimento: rincorrere o fuggire, con poste e ostacoli." }
+- { nome: ambientale,    descrizione: "Sopravvivenza: l'ambiente stesso è la minaccia." }
 # Gruppo di riferimento per il calcolo della difficoltà (views.renderEncounter).
 fields:
   pg_livello: { label: Livello del gruppo, widget: number }

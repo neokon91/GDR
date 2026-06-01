@@ -217,11 +217,11 @@ le fondamenta saranno rifinite. In ordine di valore:
 10. ✅ **Glossari di categoria FW** (`JSON/generale/glossari/*_cat.json`) — **classificazione
     a 2 livelli** `famiglia` (curata, con descrizioni + legenda auto-documentante) **+** `tipo`
     (subtypes). Plumbing generico (common→`core.categories`, fileClass select, macro
-    `classificazione`, validate); famiglia query-abile/editabile. **9 entità**: luogo (8),
-    fazione (7), evento (7), cultura (8), divinità (7), specie (8), epoca (7), lingua (8) +
-    personaggio (8 *ruoli narrativi* per png). *Residuo*: dominio (le famiglie FW = portfolio
-    divini, ≠ il nostro hub cosmologico → da hand-authorare). *Le famiglie possono in futuro
-    **presettare gli assi**, stile archetipi.*
+    `classificazione`, validate); famiglia query-abile/editabile. **14 entità**: luogo/fazione/
+    evento/cultura/divinità/specie/epoca/lingua (famiglie curate FW) + personaggio (*ruoli
+    narrativi* png) + le **minori** hand-authored (cosmologia=questione cosmica, dominio=ambito
+    di realtà, legge_fondamentale=ambito retto, incontro=scopo scena, insidia=natura). *Le
+    famiglie possono in futuro **presettare gli assi**, stile archetipi.*
 11. **Alberi evolutivi** (`JSON/TTRPG/alberi_evolutivi.json`) — abilità per parte-del-corpo
     → grado → potere (skill-tree). *Recupero*: poteri di creatura o un binario homebrew che
     estende la progressione PG (#6, già fatta per le classi SRD).

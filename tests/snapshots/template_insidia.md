@@ -7,6 +7,15 @@
 >
 > **Stato**: `INPUT[stato][:stato]`
 
+> [!info] Famiglia: `INPUT[inlineSelect(option(meccanica), option(magica), option(naturale), option(biologica), option(ambientale)):famiglia]`
+
+> [!note]- Cosa significa ogni famiglia
+> **meccanica** — Trappola fisica: lame, fosse, pressione, congegni.
+> **magica** — Trappola arcana: glifi, maledizioni, effetti incantati.
+> **naturale** — Pericolo dell'ambiente: frane, gas, gelo, correnti.
+> **biologica** — Minaccia vivente: spore, veleni, parassiti, malattie.
+> **ambientale** — Condizione persistente dell'area: oscurità, terreno, clima.
+
 ````tabs
 --- Insidia
 
