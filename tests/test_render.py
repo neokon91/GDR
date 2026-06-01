@@ -129,7 +129,7 @@ def test_page_snapshot(page):
     assert out == _snapshot(f"page_{page['id']}.md", out)
 
 
-@pytest.mark.parametrize("name", ["home.md.j2", "leggimi.md.j2", "ponte.md.j2", "fronti.md.j2"])
+@pytest.mark.parametrize("name", ["home.md.j2", "leggimi.md.j2", "ponte.md.j2", "fronti.md.j2", "rete.md.j2"])
 def test_root_note_snapshot(name):
     out = _env().get_template(name).render(core=CORE, plugins=PLUGINS, templates=TEMPLATES, pages=PAGES)
     assert out == _snapshot(f"root_{name}.md", out)
@@ -825,3 +825,29 @@ def test_relations_to_ask(tmp_path):
     assert set(out["luogo"]) == expected("luogo")
     assert "fazione" not in out["png"] and "luogo" not in out["png"]   # già in creation.fields
     assert {"parenti", "alleati", "rivali"} <= set(out["png"])
+
+
+@pytest.mark.skipif(not shutil.which("node"), reason="node assente")
+def test_reciprocal_field(tmp_path):
+    """meta_actions.reciprocalField: inverso TIPIZZATO quando la coppia è univoca
+    (linkando luogo→cultura, cultura ha solo 'regioni'→luogo); null (→ generico
+    connessioni) se ambiguo (personaggio→fazione: fazione ha figure E fondatori)."""
+    rel = CORE.get("relazioni") or {}
+    harness = tmp_path / "rf.js"
+    harness.write_text(
+        'const fs=require("fs");'
+        f'const s=fs.readFileSync({json.dumps(str(render.JS_DIR / "meta_actions.js"))},"utf8");'
+        'const m={exports:{}};new Function("module","exports",s)(m,m.exports);'
+        f'const rel={json.dumps(rel, ensure_ascii=False)};'
+        'const rf=m.exports.reciprocalField;'
+        'process.stdout.write(JSON.stringify({'
+        'cultura:(rf(rel,"cultura","luogo")||{}).field||null,'
+        'fazione:(rf(rel,"fazione","personaggio")||{}).field||null,'
+        'epoca:(rf(rel,"epoca","evento")||{}).field||null}));',
+        encoding="utf-8")
+    res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
+    assert res.returncode == 0, res.stderr
+    out = json.loads(res.stdout)
+    assert out["cultura"] == "regioni"   # coppia univoca -> inverso tipizzato
+    assert out["fazione"] is None        # ambiguo (figure+fondatori) -> generico
+    assert out["epoca"] == "eventi"      # univoca

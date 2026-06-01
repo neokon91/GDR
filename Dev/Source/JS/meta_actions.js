@@ -34,10 +34,21 @@ function pushUnique(fm, key, value) {
   fm[key] = list;
 }
 
+// Campo-relazione RECIPROCO sul target: se la categoria target ha ESATTAMENTE
+// una relazione che punta alla categoria sorgente, è l'inverso tipizzato (es.
+// luogo.cultura → cultura ha solo 'regioni'→luogo). Zero o più di una (ambiguo,
+// es. personaggio.fazione ↔ figure/fondatori) → null: si usa il generico
+// 'connessioni'. Auto-derivato: niente authoring di inverse nello schema.
+function reciprocalField(relazioni, targetCat, sourceCat) {
+  const cands = ((relazioni ?? {})[targetCat] ?? []).filter((s) => s && s.category === sourceCat);
+  return cands.length === 1 ? cands[0] : null;
+}
+
 // Collega la nota attiva a un'altra in modo TIPIZZATO e RECIPROCO:
 // 1) scegli il tipo di relazione (da core.relazioni della categoria, o generico),
 // 2) scegli la nota target (suggester sulle note della categoria giusta),
-// 3) scrive il link tipizzato qui e un link inverso in 'connessioni' del target.
+// 3) scrive il link tipizzato qui e l'INVERSO sul target: tipizzato se la coppia
+//    è univoca (reciprocalField), altrimenti il generico 'connessioni'.
 async function collega(tp, file) {
   const core = await loadCore();
   const fm = app.metadataCache.getFileCache(file)?.frontmatter ?? {};
@@ -64,9 +75,15 @@ async function collega(tp, file) {
     if (rel.multi) pushUnique(f, rel.field, linkTo);
     else f[rel.field] = linkTo;
   });
+  // Inverso: tipizzato se la coppia è univoca, altrimenti generico 'connessioni'.
   const back = `[[${file.basename}]]`;
-  await updateFrontmatter(target, f => pushUnique(f, "connessioni", back));
-  new Notice(`Collegato: ${rel.label} → ${target.basename}`);
+  const targetCat = (app.metadataCache.getFileCache(target)?.frontmatter ?? {}).categoria;
+  const recip = rel.category ? reciprocalField(core.relazioni, targetCat, fm.categoria) : null;
+  await updateFrontmatter(target, f => {
+    if (recip) { if (recip.multi) pushUnique(f, recip.field, back); else f[recip.field] = back; }
+    else pushUnique(f, "connessioni", back);
+  });
+  new Notice(`Collegato: ${rel.label} → ${target.basename}${recip ? ` (↔ ${recip.label})` : ""}`);
   return "";
 }
 
@@ -268,4 +285,5 @@ async function meta_actions(tp, action = "") {
 // Esposto per il test-guardia anti-drift: matchesCond deve dare risultati
 // identici alla copia in views.js (le due non devono divergere).
 meta_actions.matchesCond = matchesCond;
+meta_actions.reciprocalField = reciprocalField;  // esposto per i test
 module.exports = meta_actions;
