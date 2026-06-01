@@ -14,6 +14,64 @@ in [architecture](architecture.md) / [data_model](data_model.md) /
 > `origin/main` (HEAD `c600232`), **164 test verdi**, check 0. *L'esperienza in-app resta in
 > gran parte da confermare (rischio #1, QA deferita su scelta utente — ci si appoggia ai test).*
 
+## 🚦 Verdetto beta — analisi 4 lenti (2026-06-01, HEAD `1b02340`)
+
+Nuova analisi a 4 prospettive indipendenti sullo stato attuale (post: guscio js-engine,
+plugin Folder Notes/Tasks/Calendarium, statblock 5.5e completo, cartella Media). **Verdetto
+convergente: PRONTO-CON-RISERVE per un beta CHIUSO e PICCOLO (3-5 tester, meglio con un minimo
+di confidenza Obsidian); NON-ANCORA per un beta aperto.**
+
+**Il blocco #1 è unanime (Worldbuilder + DM + PM): manca il MONDO-ESEMPIO popolato.** Il vault
+parte dal foglio bianco — `Mondi/` ha solo le note-cartella indice, zero contenuto → tutte le
+dashboard di Home (Fronti/Cronologia/Trame/Note-per-categoria) e gli indici si rendono **vuoti**
+(sembra "spento/rotto"), la profondità dell'ontologia è invisibile, e il **LEGGIMI cita note che
+NON esistono** (`Mondi/Creature/Goblin`, `Mondi/Incontri/Imboscata sulla Strada` — §righe 85-88):
+link morti nel primo passo guidato. Un mini-mondo curato (~8-15 note che attraversano gli strati,
+incluse Goblin + Imboscata) risolve in un colpo: foglio bianco + link morti + dashboard vuote +
+time-to-first-win.
+
+**Il blocco #2 (Architect, + caveat di DM e PM): QA in-app mai fatta** (rischio #1 storico). I
+199 test coprono la *generazione*, non il *runtime* Obsidian: Meta Bind/Dataview/Templater/JS
+Engine/Fantasy Statblocks non confermati in questa build (unico smoke test: caricamento
+`boot.mjs`). Per un non-tecnico un blocco reso come testo grezzo è indistinguibile da "rotto".
+*Bloccato ora: computer-use offline → smoke test rinviato a sessione con Obsidian pilotabile.*
+
+### Checklist pre-beta (prioritizzata)
+**Bloccanti:**
+1. **Mondo-esempio popolato** (sforzo medio, opt-in/cancellabile in `Mondi/Esempio/`): Mondo + 2-3
+   Luoghi (uno con mappa) + 1-2 Fazioni con clock + 2-3 PNG (uno col tema natale) + 1 PG + **Goblin**
+   + **Imboscata sulla Strada** + 1-2 Eventi datati + 1 cosmologia/divinità/culto collegati.
+2. **Riallineare il LEGGIMI**: o l'esempio rende validi i link Goblin/Imboscata, o si tolgono;
+   correggere §2 (chiede di abilitare impostazioni che la build già imposta — Meta Bind enableJs,
+   FS autoParse); rendere il LEGGIMI **in vista** (bookmark + callout in cima a Home).
+3. **Smoke test in-app** dei 12 pannelli `boot.mjs` + 5 path mutativi (collega/scatena/aggiorna/
+   sali_pg/applica_profilo) + reattività live radar — appena Obsidian è pilotabile.
+
+**Quasi-gratis (alto valore/basso sforzo):**
+4. Chiudere i **legami tipizzati mancanti** del grafo (Worldbuilder): `luogo`→{piano,cosmologia,
+   cultura,bioma}; `divinita`→piano; `evento`→{divinita,culto}; `cultura`→specie; `specie`→relazioni.
+5. Correggere la **label difficoltà "Mortale ☠️"** (non-2024) in `views.renderEncounter`.
+6. Blocco **"stai testando una beta"** nel LEGGIMI: cosa è atteso-incompleto (reattività radar,
+   level-up avanzato, FCG non agganciato) + canale di feedback.
+
+**Post-beta / medio sforzo:** tracking risorse combattimento (PF temp/slot spesi/TS morte + riposo
+lungo); spell management inline; assi allo strato cosmico; calendario/tempo strutturato; generazione
+nomi (FCG); `clean()` robusto + cache `core.json` in boot + anti-drift JS (matchesCond duplicato).
+
+### Una riga per lente
+- **🌍 Worldbuilder** — *pronto-con-riserve*. Ontologia profonda e in più punti avanti su
+  Obsidian-TTRPG-Community/FantasyWorld (strato cosmico, tema natale, assi-carattere, guida
+  tassonomica). Riserva: profondità invisibile al primo avvio → mondo-esempio.
+- **🎲 DM 5.5e** — *pronto-con-riserve*. Statblock 2024 fedeli, PG SRD-completo, level-up 2-20,
+  condizioni/budget incontri corretti. Riserve: link-morti onboarding, label "Mortale", manca
+  tracking risorse in combattimento.
+- **🏗️ Architect** — *pronto-con-riserve*. Single-source validata, pipeline idempotente, merge
+  config non distruttivo, guscio JS isolato, test su logica reale. Riserva unica forte: **zero
+  copertura runtime** (i 199 test danno falsa sicurezza) → smoke test in-app.
+- **📣 PM** — *non-ancora per beta aperto; chiuso-con-caveat dopo i 3 bloccanti*. Flusso
+  ZIP+trust-prompt solido, onboarding ben scritto, ma foglio bianco + link morti + LEGGIMI non in
+  vista affossano i primi 10 minuti.
+
 ## Dove siamo (sintesi)
 
 Pipeline matura: sorgenti YAML/Jinja/JS → `render.py` (modulare) → `dist/GDR-vault`.
@@ -308,8 +366,9 @@ le fondamenta saranno rifinite. In ordine di valore:
 
 ## Come ripartire
 
-**199 test verdi**, check 0; HEAD `58b54bf` (statblock 5.5e completo + creatura 2-tab;
-plugin Folder Notes/Tasks/Calendarium a `91b7ef4`; guscio js-engine `42669ed`). Leggi questo file + i
+**199 test verdi**, check 0; HEAD `1b02340` (cartella Media + statblock 5.5e + plugin cablati +
+guscio js-engine). **Vedi ↑ "Verdetto beta — analisi 4 lenti": il blocco #1 è il mondo-esempio.**
+Leggi questo file + i
 docs (`architecture`/`data_model`/`rules_layer`/`play_layer`/`plugin_contracts`) + la memoria
 (`project-northstar`, `vault-due-suite`). **Fasi 1-2 coperte + rifiniture** → prossimi:
 - **Residui Fase 2**: level-up scelte avanzate (quick-ref condizioni ✅).
