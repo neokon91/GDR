@@ -108,10 +108,11 @@ Se qualcosa appare come *testo grezzo*, è quasi sempre un plugin del §1 non ab
   *Combattimento*: il blocco `encounter` si riscrive da solo (gli alleati col flag `ally`).
   Per far comparire i **PG** nel tracker, configurali una volta come **Party** nelle
   impostazioni di *Initiative Tracker* (puntandoli a `Mondi/Personaggi`).
-- **Tabelle casuali** (Dice Roller): crea una nota con un **elenco** (incontri, bottino,
-  meteo, voci) e tira con `dice: [[Nome della nota]]`. Esempio già pronto (solo DM):
-  *Incontri delle Marche*. I tiri `dice:` sono strumenti del DM: **non** finiscono nel
-  sito dei giocatori.
+- **Liste di consultazione** (Dice Roller): crea una nota con un **elenco** (incontri, bottino,
+  meteo, voci) e richiamala dove ti serve con `dice: [[Nome della nota]]` — la mostra inline.
+  Esempio già pronto (solo DM): *Incontri delle Marche*. *(Per il tiro casuale di una singola
+  voce serve il formato tabella di Dice Roller — vedi la sua doc.)* I tiri `dice:` sono
+  strumenti del DM: **non** finiscono nel sito dei giocatori.
 
 ## 4. Creare e collegare
 - **Crea** una nota dai bottoni in Home (o nell'indice di dominio): un wizard chiede

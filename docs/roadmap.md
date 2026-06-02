@@ -84,10 +84,13 @@ Pronto per **beta chiuso**. Per la beta aperta restano i punti PM qui sotto.
 I 246 test coprono la *generazione*, non il *rendering runtime* dei plugin: ogni QA in-app ha
 storicamente trovato bug reali.
 - **Verificato**: dashboard popolate, note (infobox/callout/clock), Esaurimento + Riposo lungo,
-  `renderSpecieTratti`, wizard *Crea PG*, statblock 5.5e/5e, Meta Bind/Dataview/Calendarium/Tasks.
-- **Da spuntare** (blocco recente): tiri Dice Roller col bonus dal **frontmatter** (`mod_<car>`),
-  flag `, ally` di Initiative Tracker, `dice: [[Nota]]` su lista, scheda PG (Dadi Vita/
-  Concentrazione live), reattività live del radar, resa del **sito dei giocatori**.
+  `renderSpecieTratti`, wizard *Crea PG*, statblock 5.5e/5e, Meta Bind/Dataview/Calendarium/Tasks;
+  ✅ (2026-06-02) **tiri Dice Roller col bonus dal frontmatter** (tooltip «1d20 + mod_forza [15] + 3»)
+  e **sito dei giocatori** (Safari: stilizzato, spoiler-free, tabella GM esclusa).
+- **Finding QA**: `dice: [[Nota]]` su una nota-lista **incorpora** l'elenco, non pesca una riga
+  (doc/demo corretti; il single-pick richiede il formato tabella DR — da approfondire).
+- **Da spuntare**: flag `, ally` di Initiative Tracker (serve Party + incontro con alleati),
+  scheda PG (Dadi Vita/Concentrazione live), reattività live del radar.
 
 ## Come ripartire
 

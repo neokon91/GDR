@@ -16,7 +16,7 @@ plugin fittizi). Le impostazioni e i contenuti dell'utente sono preservati.
 | **Metadata Menu** | Un **fileClass** per categoria in `z.classi/` (campi tipizzati: Select per stato/tipo, File/MultiFile per i link, Number/Input per il resto) + `classFilesPath`. | `fileclass_fields()` dal modello |
 | **Fantasy Statblocks** | Union per id dei layout in `obsidian-5e-statblocks/data.json` (NON cambia il default) + `diceRolling: true`. Due layout IT: `statblock.layout` (5.5e fedele, default) e `statblock.layout_5e` (5e classico). `srd_statblock_yaml` mappa i mostri SRD su TUTTI i campi 2024 (initiative/saves/skillsaves/resist./immunità/gear/bonus_actions/reactions/leggendarie+desc/pb). Template creatura: 2 tab (5.5e inline + 5e via `monster:`, dati condivisi); le note creatura hanno `statblock: inline`. | `Dev/Source/statblocks/*.json`, `srd_statblock_yaml`, `creature.md.j2` |
 | **Initiative Tracker** | Blocco ` ```encounter ` (combattimento + iniziativa, legge il bestiario FS); `aggiorna_encounter` riscrive creature **+ alleati** (flag `ally`) dalle relazioni; il pannello *difficoltà* (`renderEncounter`) stima il budget XP 2024. I PG entrano via *Party* nelle impostazioni del plugin. | `encounter.md.j2`, `meta_actions.js`, `views.js` |
-| **Dice Roller** | Macro `tiri()` (d20 Normale/Vant./Svant.) + **scheda PG**: tiri col bonus reale che leggono il frontmatter (`dice: 1d20 + mod_<car>`, TS, abilità, iniziativa, TS-morte); **tabelle casuali** (`dice: [[Nota]]`); più `diceRolling` negli statblock. | `scheda_pg_rules()`, macro `tiri()`, `pg.md.j2` |
+| **Dice Roller** | Macro `tiri()` (d20 Normale/Vant./Svant.) + **scheda PG**: tiri col bonus reale che leggono il frontmatter (`dice: 1d20 + mod_<car>`, TS, abilità, iniziativa, TS-morte) — ✅ verificato in-app; liste di consultazione richiamabili (`dice: [[Nota]]`, incorpora l'elenco — il single-pick richiede il formato tabella DR); più `diceRolling` negli statblock. | `scheda_pg_rules()`, macro `tiri()`, `pg.md.j2` |
 | **Tasks** | Convenzione `#gancio`/`#trama` (fili narrativi) + `#prep` (checklist sessione). Home → *Al tavolo* ha **🧵 Fili narrativi** e **✅ Da fare**; `sessione` ha la checklist *Prep*. | `home.md.j2`, `session.md.j2` |
 | **Calendarium** | Parsing eventi (`write_calendarium`: `autoParse`/`parseDates`/`eventFrontmatter` + `inlineEventsTag: #cronologia`) **+ ponte modello→calendario**: `evento` emette `fc-date` (callout *Calendario*, macro `calendario()`); `epoca` emette `fc-date`+`fc-end` (intervallo, `calendario(range=true)`). Le chiavi `fc-*` sono whitelisted in `validate.INTEROP_FIELDS` (trattino voluto). Il **calendario** (mesi/ere) è contenuto per-mondo: creato in-app dai preset (opt-in). | `write_calendarium()`, macro `calendario()` |
 | **Fantasy Content Generator** | Generazione nomi/spunti in corpo nota (PNG/luogo/fazione, macro `genera_nome()`): **suggester inline** (`inlineCallout: "@"`) + **bottone *Genera*** (azione `command` → modale → clipboard). Generatori configurabili **italianizzati** (monete/locande/bevande, struttura esatta `DEFAULT_SETTINGS`). Niente hook wizard (FCG non espone API). Affiancato dal **generatore homebrew** (`genera.js`, vedi [play_layer](play_layer.md)). | `write_fantasy_content_generator()`, `fcg_it.yaml`, macro `genera_nome()` |
@@ -72,9 +72,12 @@ note con `visibilita: dm` / `pubblico: false`.
 La generazione è validata da `npm test`/`check`, ma il **rendering reale dei
 plugin** (Meta Bind, tabelle, statblock, wizard Templater) va confermato aprendo
 `dist/GDR-vault` in Obsidian dopo un build: l'agente non pilota Obsidian desktop.
-Da spuntare in particolare: i **tiri Dice Roller** della scheda PG che leggono i campi dal
-**frontmatter YAML** (`mod_<car>`/`ts_<car>`/`prof_<id>`/`competenza`); il flag `, ally` di
-Initiative Tracker; la resa di `dice: [[Nota]]` su una lista.
+Verificato in-app (2026-06-02): ✅ i **tiri Dice Roller** della scheda PG leggono i campi dal
+**frontmatter YAML** (tooltip «1d20 + mod_forza [15] + 3»); ✅ rendering note + pannelli +
+Calendarium; ✅ **sito dei giocatori** (Safari: stilizzato, navigabile, tabella GM esclusa).
+Caratterizzato: `dice: [[Nota]]` **incorpora** l'elenco, non pesca una riga (serve formato
+tabella DR). Resta da spuntare: il flag `, ally` di Initiative Tracker (richiede un Party
+configurato + un incontro con alleati).
 
 ## Materiale non ancora sfruttato
 Il confronto della doc **ufficiale** di ogni plugin con il nostro uso (sweep) è in

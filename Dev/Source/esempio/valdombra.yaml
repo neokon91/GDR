@@ -675,13 +675,14 @@ note:
     fm:
       visibilita: dm
     fatti:
-      - ["Tira", "`dice: [[Incontri delle Marche]]`"]
+      - ["Richiama", "`dice: [[Incontri delle Marche]]`"]
       - ["Visibilità", "Solo DM — esclusa dal sito dei giocatori (visibilita: dm)"]
     lore: |-
-      Tabella d'esempio (**Dice Roller**): scrivi `dice: [[Incontri delle Marche]]` in
-      qualunque nota — un *Luogo*, il *Mondo*, una *Sessione* — per pescare un incontro a
-      caso lungo le piste delle Marche. Stessa ricetta per bottino, meteo o voci di taverna:
-      una nota-lista + un `dice: [[…]]`.
+      Lista di consultazione (**Dice Roller**): richiama questo elenco dove ti serve — un
+      *Luogo*, il *Mondo*, una *Sessione* — scrivendo `dice: [[Incontri delle Marche]]`: lo
+      mostra inline al tavolo. Stessa ricetta per bottino, meteo o voci di taverna: una
+      nota-lista + un `dice: [[…]]`. *(Per pescare automaticamente UNA riga a caso serve il
+      formato tabella di Dice Roller — vedi la sua doc.)*
 
       - Una pattuglia della **Mano d'Argento** controlla i lasciapassare.
       - Tre **Corvi Cinerei** scortano un carico di reliquie: trattano, o fuggono.
