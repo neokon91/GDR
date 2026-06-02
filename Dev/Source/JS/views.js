@@ -744,6 +744,44 @@ async function renderSpecieTratti(app, page) {
   return `> [!note]- Tratti di ${sp.label || id}\n${body}`;
 }
 
+// --- Incantesimi del PG (gestione inline, scala 1-20) ------------------------
+// Raggruppa i trucchetti (liv 0) + gli incantesimi noti/preparati del PG per
+// LIVELLO, leggendo il livello di ciascuno dal pool della classe (personaggio.json:
+// classi[c].incantesimi_pool = {livello:[nomi]}, stessi nomi delle note SRD →
+// `[[..]]` risolve). Ogni intestazione di livello mostra gli slot residui
+// (slot_N − slot_uso_N). Sostituisce il vecchio callout inchiodato al "1º livello":
+// per un caster di livello alto vedi l'intero spellbook, non solo il 1º. Non
+// incantatore / nessun incantesimo → "" (niente callout). Pure-ish (usa loadPersonaggio).
+async function renderIncantesimi(app, page) {
+  if (!page) return "*Apri una scheda PG.*";
+  const trucchetti = asArray(page.trucchetti), incantesimi = asArray(page.incantesimi);
+  const data = await loadPersonaggio(app);
+  const classe = (data.classi || {})[text(page.classe)] || {};
+  if (!classe.incantatore && !trucchetti.length && !incantesimi.length) return "";  // non caster
+  // nome → livello, invertendo il pool della classe.
+  const levelOf = new Map();
+  for (const [L, names] of Object.entries(classe.incantesimi_pool || {}))
+    for (const n of names || []) levelOf.set(n, Number(L));
+  const groups = new Map();  // livello → [nomi]
+  const push = (L, n) => { if (!groups.has(L)) groups.set(L, []); groups.get(L).push(n); };
+  for (const t of trucchetti) push(0, text(t));
+  for (const s of incantesimi) { const n = text(s); push(levelOf.has(n) ? levelOf.get(n) : -1, n); }
+  if (!groups.size) return "";
+  const slotInfo = (L) => {
+    const max = Number(page["slot_" + L]);
+    if (!Number.isFinite(max) || max <= 0) return "";
+    const used = Number(page["slot_uso_" + L]) || 0;
+    return ` · slot ${Math.max(0, max - used)}/${max}`;
+  };
+  const out = [];
+  for (const L of [...groups.keys()].sort((a, b) => a - b)) {
+    const titolo = L === 0 ? "Trucchetti" : L === -1 ? "Livello ignoto" : `${L}º livello`;
+    const names = groups.get(L).slice().sort((a, b) => a.localeCompare(b)).map((n) => `[[${n}]]`);
+    out.push(`> **${titolo}**${L > 0 ? slotInfo(L) : ""} (${names.length})\n> ${names.join(" · ")}`);
+  }
+  return "> [!note]- 🪄 Incantesimi\n" + out.join("\n>\n");
+}
+
 module.exports = {
   renderEntityPanel, renderSessionPanel, renderBacklinks,
   renderAxesRadar, renderAxesCompare, radarSvg, clampAxis,
@@ -752,6 +790,7 @@ module.exports = {
   renderEncounter, xpForCreature,
   renderProgressione,
   renderSpecieTratti, sezioniMarkdown,
+  renderIncantesimi,
   renderTimeline, quandoNum, epocaLabel,
   renderCausalita,
   renderMap, renderDintorni,

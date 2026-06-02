@@ -361,6 +361,16 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 ```
 {%- endmacro %}
 
+{# Incantesimi del PG (JS Engine): trucchetti + incantesimi noti/preparati
+   raggruppati per livello (dal pool della classe), con link alle note SRD e slot
+   residui per livello. Scala 1-20 (sostituisce il callout fisso al 1º livello).
+   Vuoto per i non incantatori. Logica in views.renderIncantesimi. #}
+{% macro incantesimi() -%}
+```js-engine
+return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderIncantesimi");
+```
+{%- endmacro %}
+
 {# Tratti di specie del PG (JS Engine): le sezioni SRD strutturate della specie
    (soffio, tabella antenati draconici, resistenza...) in un callout pieghevole,
    così la scheda mostra i dettagli giocabili senza saltare alla nota SRD. Da

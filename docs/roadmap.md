@@ -271,10 +271,19 @@ sopra i sistemi avanzati (vedi backlog).
   - ✅ **Encounter block auto-riscritto**: il bottone *Aggiorna encounter*
     (`meta_actions.aggiorna_encounter`) riscrive il fence `encounter` dalle creature
     collegate (conta per nome, risolve i link, preserva `players`). Niente più copia-incolla.
-  - **Level-up avanzato**: scelte di sottoclasse multiple/feature opzionali oltre il
-    set base; il motore copre il flusso standard.
-- **Azione**: il residuo DM è ora il **level-up avanzato** (sottoclassi multiple/feature
-  opzionali); encounter auto-riscritto ✅ e quick-ref condizioni ✅. Conferma in-app deferita (rischio #1).
+  - ✅ **Gestione incantesimi inline** (`views.renderIncantesimi`): la scheda PG mostra
+    trucchetti + incantesimi noti **raggruppati per livello** (dal pool della classe),
+    linkati alle note SRD, con **slot residui** per livello. Scala 1-20 (sostituisce il
+    callout fisso al "1º livello"). Per i non incantatori non compare.
+  - **Level-up avanzato**: `sali_pg` copre già PF/competenza/slot, sottoclasse, ASI/talento,
+    trucchetti+incantesimi e privilegi. *Residuo fine*: scambio di un incantesimo noto al
+    level-up (2024), feature opzionali oltre il set base.
+- **Azione**: gestione incantesimi inline ✅, encounter auto-riscritto ✅, quick-ref
+  condizioni ✅. Residuo DM fine = scambio incantesimi/feature opzionali al level-up.
+  ⚠️ **Bug wiring corretto**: i pannelli `renderDintorni`/`renderCausalita` (geografia/
+  timeline) erano referenziati dalle macro ma NON registrati in `boot.mjs` PANELS → avrebbero
+  lanciato 'Pannello sconosciuto' in-app; aggiunto `test_panels_registered` (guard di drift
+  macro↔PANELS↔export views.js). Conferma in-app deferita (rischio #1).
 
 ## ✅ Backlog prioritizzato
 

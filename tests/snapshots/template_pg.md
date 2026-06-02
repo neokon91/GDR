@@ -101,12 +101,9 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > [!note]- Inventario
 > `VIEW[{inventario} ?? "—"]`
 
-> [!note]- Incantesimi (1º livello)
-> Incantatore: `VIEW[{incantatore} ?? "—"]` · slot di 1º: `VIEW[{slot_1} ?? "—"]`
->
-> **Trucchetti**: `VIEW[{trucchetti} ?? "—"]`
->
-> **Preparati (1º)**: `VIEW[{incantesimi} ?? "—"]`
+```js-engine
+return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderIncantesimi");
+```
 
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderProgressione");

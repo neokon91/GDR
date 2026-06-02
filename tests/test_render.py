@@ -213,6 +213,25 @@ def test_js_syntax(js):
     assert subprocess.run(["node", "--check", str(js)], capture_output=True).returncode == 0
 
 
+def test_panels_registered():
+    """Guard di drift JS Engine: ogni pannello referenziato in una macro Jinja
+    (`panel(...,"renderX")`) DEVE essere nel registro boot.mjs PANELS, e ogni PANELS
+    deve puntare a una funzione esportata da views.js. Senza questo, una macro che
+    nomina un pannello non registrato passa check/snapshot ma lancia 'Pannello JS
+    Engine sconosciuto' SOLO in-app (i test chiamano le view dirette, bypassando boot)."""
+    import re
+    boot = (render.JS_DIR / "boot.mjs").read_text(encoding="utf-8")
+    panels = set(re.findall(r"(\w+):\s*\{\s*mode:", boot))
+    views = (render.JS_DIR / "views.js").read_text(encoding="utf-8")
+    exported = set(re.findall(r"\b(render\w+)\b", views.split("module.exports", 1)[1]))
+    referenced = set()
+    for j in render.JINJA_DIR.glob("*.j2"):
+        referenced |= set(re.findall(r'panel\([^)]*"(render\w+)"', j.read_text(encoding="utf-8")))
+    assert referenced, "nessun panel(...) trovato nelle macro (regex rotta?)"
+    assert not (referenced - panels), f"pannelli usati nelle macro ma non in boot.mjs PANELS: {sorted(referenced - panels)}"
+    assert not (panels - exported), f"PANELS senza export corrispondente in views.js: {sorted(panels - exported)}"
+
+
 @pytest.mark.skipif(not render.SRD_DIR.is_dir(), reason="SRD non vendorizzata")
 @pytest.mark.parametrize("spec", render.SRD_GEN, ids=[s["dest"] for s in render.SRD_GEN])
 def test_srd_json_loads(spec):
@@ -1123,6 +1142,42 @@ def test_render_causalita(tmp_path):
     assert b.index("[[Frattura]]") < b.index("[[Crollo]]")   # Crollo annidato sotto Frattura
     assert "⬇ Cosa ne è derivato" not in b                   # Patto non ha conseguenze
     assert "[[Vecchio]]" not in a and "[[Vecchio]]" not in b  # archiviato non compare
+
+
+@pytest.mark.skipif(not shutil.which("node"), reason="node assente")
+def test_render_incantesimi(tmp_path):
+    """views.renderIncantesimi: trucchetti (liv 0) + incantesimi noti raggruppati per
+    LIVELLO dal pool della classe, link SRD `[[..]]`, slot residui (max−uso) per livello;
+    un non incantatore (nessuno spell, classe non incantatore) → "" (niente callout)."""
+    harness = tmp_path / "inc.js"
+    harness.write_text(
+        'const fs=require("fs");'
+        f'const src=fs.readFileSync({json.dumps(str(render.JS_DIR / "views.js"))},"utf8");'
+        'const m={exports:{}};new Function("module","exports",src)(m,m.exports);'
+        # personaggio.json: mago incantatore con pool per livello; ladra non incantatore.
+        'const data={classi:{mago:{incantatore:true,incantesimi_pool:{'
+        '"0":["Luce","Mano magica"],"1":["Dardo incantato","Scudo"],"3":["Palla di fuoco"]}},'
+        ' ladra:{incantatore:false,incantesimi_pool:{}}}};'
+        'global.app={vault:{adapter:{read:async()=>JSON.stringify(data)}}};'
+        # PG mago liv 5: 2 trucchetti, 3 incantesimi (1º+3º), slot 3 di 1º (1 usato), 2 di 3º.
+        'const mago={classe:"mago",trucchetti:["Luce","Mano magica"],'
+        ' incantesimi:["Scudo","Dardo incantato","Palla di fuoco"],'
+        ' slot_1:3,slot_uso_1:1,slot_3:2,slot_uso_3:0};'
+        'const ladra={classe:"ladra"};'
+        'Promise.all([m.exports.renderIncantesimi(app,mago),m.exports.renderIncantesimi(app,ladra)])'
+        '.then(([a,b])=>process.stdout.write(JSON.stringify({a,b})));',
+        encoding="utf-8")
+    res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
+    assert res.returncode == 0, res.stderr
+    out = json.loads(res.stdout)
+    a = out["a"]
+    assert "🪄 Incantesimi" in a
+    assert "**Trucchetti** (2)" in a and "[[Luce]]" in a            # liv 0
+    assert "**1º livello** · slot 2/3 (2)" in a                     # max3−uso1=2 residui; 2 spell
+    assert "[[Dardo incantato]]" in a and "[[Scudo]]" in a          # ordinati, linkati SRD
+    assert "**3º livello** · slot 2/2 (1)" in a and "[[Palla di fuoco]]" in a
+    assert a.index("Trucchetti") < a.index("1º livello") < a.index("3º livello")  # per livello
+    assert out["b"] == ""                                           # non incantatore -> niente callout
 
 
 def test_maestrie_catalog():
