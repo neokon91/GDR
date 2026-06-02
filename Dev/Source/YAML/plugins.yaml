@@ -31,7 +31,7 @@ plugins:
   - id: obsidian-excalidraw-plugin
     name: Excalidraw
   - id: zoom-map
-    name: Zoom Map
+    name: "TTRPG Tools - Maps"
   - id: fantasy-content-generator
     name: Fantasy Content Generator
   - id: obsidian42-brat

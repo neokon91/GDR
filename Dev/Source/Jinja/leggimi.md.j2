@@ -138,15 +138,19 @@ Ogni **Luogo** e **Mondo** ha un tab **Mappa** già pronto. Nel campo *Mappa* co
 - un'**immagine** che hai trascinato nel vault, oppure
 - un'altra **nota**.
 La mappa appare subito embeddata nella scheda. Se il campo è vuoto, il tab ti spiega come
-crearne una.
+crearne una. Dentro un disegno **Excalidraw** puoi scrivere `[[Luogo]]` come **etichetta
+cliccabile**: la zona sulla mappa diventa un link alla nota (con anteprima al passaggio del mouse).
 
 **Dove agganciare cosa:** la mappa del continente/regno va sul **Mondo**; la mappa locale
 (città, regione) sul **Luogo** di tipo *regione/insediamento*; la pianta di un dungeon sul
 **Luogo** di tipo *dungeon/struttura*. Collega poi i punti d'interesse con i normali
 `[[link]]` alle note Luogo.
 
-*Per mappe molto grandi, pannabili/zoomabili* (Zoom Map): metti l'immagine nel vault e usa un
-blocco `zoommap` con `imageBases: [{ path: Mappe/continente.png }]`.
+*Per mappe grandi, pannabili/zoomabili con segnaposto* (plugin **TTRPG Tools - Maps**): metti
+l'immagine in *Media* e usa il comando **«Insert new map…»** (o un blocco ` ```zoommap ` con
+`image: Media/Mappe/continente.jpg`). Poi **Shift+clic** sulla mappa per piazzare un **segnaposto**
+e collegarlo a una nota *Luogo*: avrà l'anteprima al passaggio del mouse. Il **righello** misura
+distanze e **tempi di viaggio** sulla scala che imposti.
 
 ## 7. Callout GDR (Callout Manager)
 I callout **Uso al tavolo**, **Gancio** e **Segreto** hanno colore/icona propri

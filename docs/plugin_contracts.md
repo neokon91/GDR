@@ -25,6 +25,19 @@ plugin fittizi). Le impostazioni e i contenuti dell'utente sono preservati.
 | **Bookmarks** (core) | Aggiunge (senza rimuovere) Home + le pagine-indice (`.md` + `.base`) + l'indice SRD. | `pages.yaml` |
 | **community-plugins.json** | Union degli id dei plugin dichiarati. | `plugins.yaml:plugins` |
 
+## Plugin dichiarati, non configurati (uso user-driven)
+
+Alcuni plugin sono solo **dichiarati** (union in `community-plugins.json`): la pipeline non ne
+scrive config — si usano a mano nelle note. Il punto d'aggancio comune è il campo **`mappa`**
+(luogo/mondo), embeddato da `views.renderMap` nel tab *Mappa* (macro `mappa()`).
+
+- **Excalidraw** (`obsidian-excalidraw-plugin`) — disegni `*.excalidraw.md` embeddati col campo
+  `mappa` (`![[…excalidraw]]`): dimensione `|800`, ritaglio regione `#area=…` (export SVG), link
+  interni `[[Luogo]]` cliccabili con hover, annotazione su immagine. → [Reference](../Dev/Reference/excalidraw.md).
+- **TTRPG Tools - Maps** (`zoom-map`) — mappe interattive immagine+pin: blocco ` ```zoommap `
+  (`image:`; marker che linkano note con hover; righello distanze→tempi di viaggio; overlay/layer;
+  `storage` json/note). Via rapida: comando *«Insert new map…»*. → [Reference](../Dev/Reference/zoom-map.md).
+
 ## Workspace chrome (non plugin)
 
 - `snippets/gdr.css` (+ `appearance.json:enabledCssSnippets`) nasconde le cartelle

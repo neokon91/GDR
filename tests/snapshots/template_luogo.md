@@ -165,7 +165,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "luo
 > [!info] Mappa
 > Collega una mappa: `INPUT[mappa][:mappa]`
 >
-> Disegnala con **Excalidraw**, usa **Zoom Map** per immagini grandi, o trascina un'immagine nel vault e collegala.
+> Disegnala con **Excalidraw** (scrivi `[[Luogo]]` per zone cliccabili), oppure usa **TTRPG Tools - Maps** (comando «Insert new map…») per una mappa con **segnaposto** collegati alle note, o trascina un'immagine nel vault e collegala qui.
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderMap");
 ```
