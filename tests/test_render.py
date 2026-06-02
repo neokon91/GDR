@@ -1144,16 +1144,21 @@ def test_famiglia_preset(tmp_path):
     """create_entity.famigliaPreset: la famiglia col campo 'assi' pre-compila i
     valori-assi (cultura/guerriera); famiglia senza preset o inesistente -> {}.
     Gli id-asse dei preset sono validati da validate (shape: famiglie)."""
-    spec = (CORE.get("categories") or {}).get("cultura") or {}
+    cats = CORE.get("categories") or {}
+    spec = cats.get("cultura") or {}
     assert spec.get("famiglie"), "cultura senza famiglie"
     harness = tmp_path / "fam.js"
     harness.write_text(
         f'const crea=require({json.dumps(str(render.JS_DIR / "create_entity.js"))});'
         f'const spec={json.dumps(spec, ensure_ascii=False)};'
+        f'const faz={json.dumps(cats.get("fazione") or {}, ensure_ascii=False)};'
+        f'const div={json.dumps(cats.get("divinita") or {}, ensure_ascii=False)};'
         'process.stdout.write(JSON.stringify({'
         'guer:crea.famigliaPreset(spec,"guerriera"),'
         'nom:crea.famigliaPreset(spec,"nomadica"),'
-        'x:crea.famigliaPreset(spec,"inesistente")}));',
+        'x:crea.famigliaPreset(spec,"inesistente"),'
+        'mil:crea.famigliaPreset(faz,"militare"),'
+        'prim:crea.famigliaPreset(div,"primordiale")}));',
         encoding="utf-8")
     res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
     assert res.returncode == 0, res.stderr
@@ -1161,6 +1166,8 @@ def test_famiglia_preset(tmp_path):
     assert out["guer"] == {"valori_dominanti": 3, "relazione_morte": 2, "ritualizzazione_vita": 4}
     assert out["nom"] == {}      # famiglia senza preset
     assert out["x"] == {}        # famiglia inesistente
+    assert out["mil"] == {"struttura": 5, "etica_conflitto": 4, "coesione": 4}   # preset fazione
+    assert out["prim"] == {"presenza_cosmica": 1, "incarnazione": 1, "volonta": 1}  # preset divinità
 
 
 @pytest.mark.skipif(not shutil.which("node"), reason="node assente")

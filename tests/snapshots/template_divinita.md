@@ -54,7 +54,6 @@
 > **Modalità di Interazione** `INPUT[slider(minValue(1), maxValue(5), addLabels):interazione_divina]` → `VIEW[{interazione_divina} == 5 ? "5 · Totale" : ({interazione_divina} == 4 ? "4 · Esplicita" : ({interazione_divina} == 3 ? "3 · Stratificata" : ({interazione_divina} == 2 ? "2 · Simbolica" : ({interazione_divina} == 1 ? "1 · Ineffabile" : ("—")))))]`
 > **Incarnazione** `INPUT[slider(minValue(1), maxValue(5), addLabels):incarnazione]` → `VIEW[{incarnazione} == 5 ? "5 · Manifesta" : ({incarnazione} == 4 ? "4 · Iconica" : ({incarnazione} == 3 ? "3 · Parziale" : ({incarnazione} == 2 ? "2 · Impalpabile" : ({incarnazione} == 1 ? "1 · Pura" : ("—")))))]`
 > **Polarità Cosmica** `INPUT[slider(minValue(1), maxValue(5), addLabels):polarita_cosmica]` → `VIEW[{polarita_cosmica} == 5 ? "5 · Militante" : ({polarita_cosmica} == 4 ? "4 · Allineata" : ({polarita_cosmica} == 3 ? "3 · Ambivalente" : ({polarita_cosmica} == 2 ? "2 · Equilibratrice" : ({polarita_cosmica} == 1 ? "1 · Neutrale" : ("—")))))]`
-> **Modalità di Interazione** `INPUT[slider(minValue(1), maxValue(5), addLabels):interazione]` → `VIEW[{interazione} == 5 ? "5 · Totale" : ({interazione} == 4 ? "4 · Esplicita" : ({interazione} == 3 ? "3 · Stratificata" : ({interazione} == 2 ? "2 · Simbolica" : ({interazione} == 1 ? "1 · Ineffabile" : ("—")))))]`
 > **Accessibilità Cultuale** `INPUT[slider(minValue(1), maxValue(5), addLabels):accessibilita]` → `VIEW[{accessibilita} == 5 ? "5 · Universale" : ({accessibilita} == 4 ? "4 · Aperta" : ({accessibilita} == 3 ? "3 · Condizionata" : ({accessibilita} == 2 ? "2 · Iniziatica" : ({accessibilita} == 1 ? "1 · Elitaria" : ("—")))))]`
 
 > [!note]- Presenza Cosmica — Determina dove e come la divinità esiste nel cosmo. Unisce la densità ontologica alla distribuzione planare.
@@ -98,13 +97,6 @@
 > **3 · Ambivalente** — La divinità mostra tratti sia di una parte che dell’altra, o cambia posizione in base ai cicli, alle epoche o ai suoi avatar. È complessa, contraddittoria o ciclica.
 > **4 · Allineata** — La divinità sostiene chiaramente una fazione cosmica (es. Luce, Ordine, Caos), pur tollerando l’esistenza dell’opposto. I suoi culti sono schierati ma non fanatici.
 > **5 · Militante** — La divinità combatte attivamente per l’annientamento dell’opposto. Vede la propria parte come assoluta verità e l’altra come errore da distruggere. I suoi culti sono crociati, inquisitori o apocalittici.
-
-> [!note]- Modalità di Interazione — Esprime il modo in cui la divinità comunica, si rivela e si relaziona con il mondo sensibile o spirituale. Unisce i canali comunicativi e la trasparenza simbolica del messaggio divino.
-> **1 · Ineffabile** — Nessuna comunicazione verbale o esplicita. Solo stati mistici, simboli interiori, esperienze estatiche.
-> **2 · Simbolica** — Opera tramite enigmi, sogni, archetipi, oracoli e visioni. Interazione per decodifica iniziatica.
-> **3 · Stratificata** — Parla a più livelli. Parte del messaggio è chiaro, parte è occulto o misterico. Necessita interpretazione.
-> **4 · Esplicita** — Comunica tramite parole, profeti, testi sacri, precetti. Messaggio diretto, ma mediato.
-> **5 · Totale** — Ogni essere percepisce la sua voce. La realtà stessa è linguaggio divino. Interazione continua e universale.
 
 > [!note]- Accessibilità Cultuale — Misura quanto è semplice o complesso stabilire una relazione autentica, efficace e riconosciuta con la divinità. Indica se essa si offre liberamente a chiunque o richiede iniziazioni, lignaggi o stati particolari per essere raggiunta.
 > **1 · Elitaria** — Solo pochi eletti, nati con un dono o parte di lignaggi spirituali, possono accedere alla divinità. Il culto è chiuso, riservato e spesso misterico. Il contatto è un privilegio raro.

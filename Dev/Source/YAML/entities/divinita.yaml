@@ -18,14 +18,16 @@ subtypes:
 - pantheon
 # Classificazione a 2 livelli: la 'famiglia' (natura, seed FW glossario_divinita)
 # affianca il 'tipo' (rango). Select + legenda auto-documentante.
+# Preset assi per famiglia (campo `assi`): il wizard pre-compila gli assi che la
+# natura della divinità implica fortemente. Solo quelli; gli altri al default.
 famiglie:
-- { nome: primordiale, descrizione: "Preesistente alla creazione dei piani e delle leggi strutturate." }
-- { nome: archetipica, descrizione: "Incarna forze universali o concetti eterni." }
-- { nome: elementale,  descrizione: "Collegata a uno degli elementi fondamentali o ai loro derivati." }
-- { nome: culturale,   descrizione: "Creata, immaginata o evocata dai mortali." }
-- { nome: mitica,      descrizione: "Figura simbolica o alchemica, nata dalla convergenza cosmica." }
-- { nome: spirituale,  descrizione: "Legata al ciclo dell'anima, alla morte, alla purificazione o al karma." }
-- { nome: onirica,     descrizione: "Nata dall'inconscio collettivo, dai sogni cosmici o da archetipi inconsci." }
+- { nome: primordiale, descrizione: "Preesistente alla creazione dei piani e delle leggi strutturate.", assi: { presenza_cosmica: 1, incarnazione: 1, volonta: 1 } }
+- { nome: archetipica, descrizione: "Incarna forze universali o concetti eterni.", assi: { presenza_cosmica: 1, polarita_cosmica: 1, incarnazione: 2 } }
+- { nome: elementale,  descrizione: "Collegata a uno degli elementi fondamentali o ai loro derivati.", assi: { incarnazione: 2, presenza_cosmica: 4 } }
+- { nome: culturale,   descrizione: "Creata, immaginata o evocata dai mortali.", assi: { incarnazione: 4, accessibilita: 4, presenza_cosmica: 4 } }
+- { nome: mitica,      descrizione: "Figura simbolica o alchemica, nata dalla convergenza cosmica.", assi: { interazione_divina: 2, incarnazione: 3, polarita_cosmica: 3 } }
+- { nome: spirituale,  descrizione: "Legata al ciclo dell'anima, alla morte, alla purificazione o al karma.", assi: { etica_divina: 4, accessibilita: 2 } }
+- { nome: onirica,     descrizione: "Nata dall'inconscio collettivo, dai sogni cosmici o da archetipi inconsci.", assi: { interazione_divina: 1, incarnazione: 2, presenza_cosmica: 2 } }
 relazioni:
 - field: domini
   label: Domini cosmici

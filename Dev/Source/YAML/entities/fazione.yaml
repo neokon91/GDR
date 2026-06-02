@@ -27,14 +27,17 @@ subtypes:
   - banda
 # Classificazione a 2 livelli: la 'famiglia' (scopo/natura, seed FantasyWorld
 # fazione_cat) affianca il 'tipo' (forma). Select + legenda auto-documentante.
+# Ogni famiglia pre-compila (campo `assi`) gli assi tematici che la definiscono
+# FORTEMENTE — il wizard li propone alla scelta della famiglia (preset, come cultura).
+# Solo gli assi impliciti dalla natura della famiglia; gli altri restano al default.
 famiglie:
-  - { nome: militare,       descrizione: "Strutturata attorno al dominio delle arti belliche: eserciti, ordini armati, caste guerriere." }
-  - { nome: religiosa,      descrizione: "Devota a un'entità, principio o pantheon; si fonda su dogmi, rituali e rivelazioni." }
-  - { nome: arcana,         descrizione: "Dedicata allo studio, controllo o protezione della magia: ordini, gilde, circoli occulti." }
-  - { nome: rivoluzionaria, descrizione: "Mira a sovvertire l'ordine costituito: moti insurrezionali, cellule clandestine." }
-  - { nome: egemonica,      descrizione: "Integrata nel potere vigente: caste, organi ufficiali, bracci di controllo istituzionale." }
-  - { nome: mercantile,     descrizione: "Orientata a risorse, potere economico o controllo logistico: corporazioni, reti commerciali." }
-  - { nome: profetica,      descrizione: "Fondata su visioni, cicli cosmici o profezie; agisce in funzione di un evento atteso." }
+  - { nome: militare,       descrizione: "Strutturata attorno al dominio delle arti belliche: eserciti, ordini armati, caste guerriere.", assi: { struttura: 5, etica_conflitto: 4, coesione: 4 } }
+  - { nome: religiosa,      descrizione: "Devota a un'entità, principio o pantheon; si fonda su dogmi, rituali e rivelazioni.", assi: { struttura: 4, scopo: 2, metodo_operativo: 4 } }
+  - { nome: arcana,         descrizione: "Dedicata allo studio, controllo o protezione della magia: ordini, gilde, circoli occulti.", assi: { struttura: 3, metodo_operativo: 2, scopo: 2 } }
+  - { nome: rivoluzionaria, descrizione: "Mira a sovvertire l'ordine costituito: moti insurrezionali, cellule clandestine.", assi: { legalita: 1, relazione_potere: 2, coesione: 1, scopo: 2 } }
+  - { nome: egemonica,      descrizione: "Integrata nel potere vigente: caste, organi ufficiali, bracci di controllo istituzionale.", assi: { legalita: 5, relazione_potere: 5, struttura: 4, metodo_operativo: 5 } }
+  - { nome: mercantile,     descrizione: "Orientata a risorse, potere economico o controllo logistico: corporazioni, reti commerciali.", assi: { scopo: 5, etica_conflitto: 2, legalita: 4 } }
+  - { nome: profetica,      descrizione: "Fondata su visioni, cicli cosmici o profezie; agisce in funzione di un evento atteso.", assi: { scopo: 1, metodo_operativo: 2, reazione_fallimento: 4 } }
 # Campi specifici della fazione. (I trasversali stanno in core.yaml; 'portata' è
 # condiviso con evento e resta in system.yaml.)
 fields:
