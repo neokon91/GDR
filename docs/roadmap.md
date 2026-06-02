@@ -217,7 +217,8 @@ sopra i sistemi avanzati (vedi backlog).
   - ✅ **Geografia spaziale**: `luogo.confina_con` (adiacenza simmetrica) + tab *Dintorni*
     (`views.renderDintorni`): regione contenitore, luoghi contenuti, confinanti e **distanza
     in confini** calcolata via BFS, più le rotte. Dashboard **Geografia** (contenimento +
-    confini + rotte). *Residuo*: coordinate vere / auto-pin Azgaar→`markers.json` (rinviato).
+    confini + rotte). *Residuo*: **coordinate vere + distanza metrica** e **importer mappe
+    (Azgaar) come substrato** — design concordato sotto (§ Geografia avanzata).
   - ✅ **Economia/risorse**: categoria **risorsa** + relazioni `luogo.{produce,dipende_da,
     rotta_con}` e `fazione.controlla_risorse` + dashboard **Economia** — il mondo diventa
     simulabile (una risorsa contesa alimenta un Fronte).
@@ -339,6 +340,36 @@ le fondamenta saranno rifinite. In ordine di valore:
     estende la progressione PG (#6, già fatta per le classi SRD).
 - *Solo contenuto del suo mondo (NON schema, non riusare)*: `personaggio.json`/`luogo.json`/
   `organizzazioni.json`/`politica.json`/`world_building/divinita|leggi` = istanze del mondo FW.
+
+### 🗺 Geografia avanzata & importer mappe (design concordato 2026-06-02, NON implementato)
+Decisione esplicita utente: **NO import a tappeto** (auto-pin di tutti i burg/marker Azgaar
+intaserebbe il vault e tradirebbe la north-star = profondità curata, non numero di voci).
+L'integrazione va progettata **come sistema worldbuilding completo**, non come dumper.
+
+- **Principio**: la **mappa-immagine è la tela** (già supportata: drag + Zoom Map/Excalidraw);
+  le **note sono lo strato curato** sopra. Azgaar non è solo pin: è un modello di mondo
+  strutturato che combacia con la nostra ontologia.
+- **Mapping ontologico** (Azgaar → nostro): states→`regno`; provinces→`luogo` (regione);
+  burgs→`luogo` (insediamento); cultures→`cultura` (+ `stile_nomi` dal nameBase);
+  religions→`divinita`/`culto`; biomes→`bioma`; markers POI→`luogo`/`insidia`.
+- **Sinergia con la geografia di stamattina**: Azgaar conosce GIÀ il grafo spaziale →
+  seeda le relazioni nuove senza authoring: containment province/burg→`regione`,
+  adiacenza celle/stati→`confina_con`, routes→`rotta_con`, coord burg→`coord`.
+  L'importer non crea solo note: le **cabla** nel grafo geografia/economia.
+- **Anti-bloat per design**: (1) **import a livelli con budget** — di default solo il tier
+  alto (stati, capitali + capoluoghi, province, culture, religioni; soglie regolabili tipo
+  "burg > pop N", "top N per stato"); (2) il **long-tail resta DATO** in un solo artefatto
+  queryabile (`azgaar/<mondo>.json`/nota-registro), NON note; (3) **promozione on-demand**
+  ("Promuovi da mappa": cerca nel registro → crea UNA nota curata che eredita coord/cultura/
+  stato già wirati); (4) **idempotente/reversibile** (namespace riconoscibile, merge per
+  id-Azgaar stabile, non sovrascrive le edit a mano — è il pezzo difficile).
+- **Backbone Azgaar-indipendente (prerequisito)**: campo **`coord`** sul luogo + **scala del
+  mondo** (km/unità) + **distanza metrica** (oggi `renderDintorni` calcola solo hop-distance
+  in confini). Utile anche per mappe a mano (Watabou, disegni); qualsiasi sorgente ci si
+  innesta. **Ordine di dipendenza: coord/distanza metrica → poi importer Azgaar.**
+- **Sorgente**: export JSON "Full" di Azgaar FMG (ha burgs/states/provinces/cultures/
+  religions/routes/markers + coord) o GeoJSON (geometria + props base). NB: coord in
+  pixel-mappa → servono km/pixel per la distanza reale.
 
 ### Trasversale / continuo
 - **QA in-app** su ogni pezzo di fondamenta prima di allargare (rischio #1).
