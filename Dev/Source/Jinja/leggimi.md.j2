@@ -42,8 +42,11 @@ dadi, regole). Non serve essere tecnici: si lavora a **bottoni** e **menù**.
 - **Un personaggio giocante**: **Crea → PG**, scegli classe/specie/background e
   l'aiutante riempie la scheda (punti ferita, tiri salvezza, abilità, incantesimi).
 - **Mappe e linea del tempo**: ogni *Luogo* e *Mondo* ha un tab **Mappa** — colleghi un
-  disegno o un'immagine e la vedi dentro la nota. La pagina **Cronologia** mostra i tuoi
-  **eventi su una linea del tempo**, raggruppati per epoca e ordinati nel tempo.
+  disegno o un'immagine e la vedi dentro la nota; sotto, **Dintorni** mostra regione,
+  confinanti e **distanza in confini** (campo *Confina con*). La pagina **Cronologia** mostra
+  i tuoi **eventi su una linea del tempo**; in un evento il tab **Catena causale** lega cause
+  e conseguenze (*Causato da* / *Conseguenze*). Le dashboard **Geografia** ed **Economia**
+  (in Home) danno la vista d'insieme di spazio e risorse.
 - **Al tavolo**: in Home c'è il riquadro *Al tavolo*; ogni incontro ha i tiri di dado
   cliccabili e il combattimento con l'iniziativa. Nel tab *Combattimento* il bottone
   **Aggiorna encounter** riempie la lista delle creature dalle note che hai collegato.

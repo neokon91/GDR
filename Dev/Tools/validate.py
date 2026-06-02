@@ -230,6 +230,28 @@ def validate_entity_schema(entities: list[dict[str, Any]]) -> list[str]:
     return errors
 
 
+def validate_reciprocals(core: dict[str, Any]) -> list[str]:
+    """Integrità degli inversi ESPLICITI (meta_actions.inverseRelation): se una
+    relazione dichiara `reciprocal`, quel campo deve essere una relazione ESISTENTE
+    sulla categoria target — simmetrica (luogo.confina_con↔confina_con) o direzionale
+    (evento.causato_da↔conseguenze). Un refuso qui farebbe scrivere a Collega un
+    inverso fantasma invece del campo giusto; lo intercettiamo a build."""
+    errors: list[str] = []
+    relazioni = core.get("relazioni", {}) or {}
+    for source_cat, rels in relazioni.items():
+        for rel in rels or []:
+            recip = rel.get("reciprocal")
+            if not recip:
+                continue
+            target = rel.get("category")
+            target_fields = {r.get("field") for r in (relazioni.get(target, []) or [])}
+            if recip not in target_fields:
+                errors.append(
+                    f"relazioni[{source_cat}].{rel.get('field')}: reciprocal '{recip}' "
+                    f"non è una relazione di '{target}'")
+    return errors
+
+
 def validate_aux_yaml() -> list[str]:
     """Shape degli YAML AUSILIARI letti a runtime dai JS/plugin ma non fusi nel
     modello core/system: astrologia (views.renderTemaNatale), generatori (genera.js),
@@ -404,6 +426,7 @@ def check() -> int:
                 errors.append(f"relazioni[{source_cat}].{rel.get('field')}: target '{target}' non dichiarato")
             elif (categories.get(target) or {}).get("folder", target) not in folders:
                 errors.append(f"relazioni[{source_cat}].{rel.get('field')}: cartella di '{target}' non in folders")
+    errors.extend(validate_reciprocals(core))
 
     # Pagine-indice: categoria dichiarata e template index disponibile.
     if load_pages() and not (JINJA_DIR / "index.md.j2").exists():

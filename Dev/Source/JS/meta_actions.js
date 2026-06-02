@@ -44,6 +44,22 @@ function reciprocalField(relazioni, targetCat, sourceCat) {
   return cands.length === 1 ? cands[0] : null;
 }
 
+// Relazione INVERSA da scrivere sul target collegando con `rel`. Tre vie, in ordine:
+//  1) ESPLICITA — `rel.reciprocal` nomina il campo inverso, risolto nello schema del
+//     target per ereditarne 'multi'/'label'. Serve quando l'auto-derivazione è
+//     ambigua: coppie simmetriche (luogo.confina_con↔confina_con) o direzionali
+//     (evento.causato_da↔conseguenze), dove il target ha più relazioni alla sorgente;
+//  2) AUTO-DERIVATA — la coppia è univoca (reciprocalField), per le relazioni
+//     tipizzate senza override esplicito;
+//  3) null — relazione generica o ambigua senza override: il chiamante usa 'connessioni'.
+function inverseRelation(core, rel, sourceCat, targetCat) {
+  if (rel && rel.reciprocal) {
+    const rels = (core.relazioni ?? {})[targetCat] ?? [];
+    return rels.find((r) => r && r.field === rel.reciprocal) ?? { field: rel.reciprocal, multi: !!rel.multi };
+  }
+  return rel && rel.category ? reciprocalField(core.relazioni, targetCat, sourceCat) : null;
+}
+
 // Collega la nota attiva a un'altra in modo TIPIZZATO e RECIPROCO:
 // 1) scegli il tipo di relazione (da core.relazioni della categoria, o generico),
 // 2) scegli la nota target (suggester sulle note della categoria giusta),
@@ -75,15 +91,15 @@ async function collega(tp, file) {
     if (rel.multi) pushUnique(f, rel.field, linkTo);
     else f[rel.field] = linkTo;
   });
-  // Inverso: tipizzato se la coppia è univoca, altrimenti generico 'connessioni'.
+  // Inverso: esplicito (rel.reciprocal) > tipizzato auto (coppia univoca) > generico.
   const back = `[[${file.basename}]]`;
   const targetCat = (app.metadataCache.getFileCache(target)?.frontmatter ?? {}).categoria;
-  const recip = rel.category ? reciprocalField(core.relazioni, targetCat, fm.categoria) : null;
+  const recip = inverseRelation(core, rel, fm.categoria, targetCat);
   await updateFrontmatter(target, f => {
     if (recip) { if (recip.multi) pushUnique(f, recip.field, back); else f[recip.field] = back; }
     else pushUnique(f, "connessioni", back);
   });
-  new Notice(`Collegato: ${rel.label} → ${target.basename}${recip ? ` (↔ ${recip.label})` : ""}`);
+  new Notice(`Collegato: ${rel.label} → ${target.basename}${recip ? ` (↔ ${recip.label ?? recip.field})` : ""}`);
   return "";
 }
 
@@ -329,5 +345,6 @@ async function meta_actions(tp, action = "") {
 // identici alla copia in views.js (le due non devono divergere).
 meta_actions.matchesCond = matchesCond;
 meta_actions.reciprocalField = reciprocalField;  // esposto per i test
+meta_actions.inverseRelation = inverseRelation;  // esposto per i test
 meta_actions.appendTurnoLog = appendTurnoLog;    // esposto per i test
 module.exports = meta_actions;

@@ -54,9 +54,18 @@ relazioni:
 - field: piano
   label: Piano
   category: piano
+# Geografia spaziale: ADIACENZA fisica fra luoghi (confina_con, simmetrica:
+# l'inverso esplicito è sé stessa). È il grafo da cui renderDintorni calcola la
+# distanza in confini (BFS) e che alimenta la dashboard Geografia. Distinta dalle
+# ROTTE (rotta_con, sotto): si può confinare senza commerciare e viceversa.
+- field: confina_con
+  label: Confina con
+  category: luogo
+  multi: true
+  reciprocal: confina_con
 # Economia: cosa il luogo PRODUCE e da cosa DIPENDE (inverso generico 'connessioni'
-# su risorsa); le ROTTE commerciali verso altri luoghi. Alimentano la dashboard
-# Economia e danno stakes materiali a Fronti/clock.
+# su risorsa); le ROTTE commerciali verso altri luoghi (simmetriche → auto-reciproche).
+# Alimentano la dashboard Economia e danno stakes materiali a Fronti/clock.
 - field: produce
   label: Produce
   category: risorsa
@@ -69,6 +78,7 @@ relazioni:
   label: Rotta commerciale con
   category: luogo
   multi: true
+  reciprocal: rotta_con
 creation:
   fields:
   - field: tipo

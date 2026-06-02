@@ -30,6 +30,20 @@ famiglie:
 scheda:
 - portata
 relazioni:
+# Timeline CAUSALE: coppia direzionale evento↔evento. causato_da risale alle cause
+# a monte; conseguenze scende a ciò che l'evento ha innescato. Inverso ESPLICITO
+# reciproco (l'auto-derivazione è ambigua: entrambe puntano a evento). renderCausalita
+# ricostruisce la catena nelle due direzioni.
+- field: causato_da
+  label: Causato da
+  category: evento
+  multi: true
+  reciprocal: conseguenze
+- field: conseguenze
+  label: Conseguenze
+  category: evento
+  multi: true
+  reciprocal: causato_da
 - field: epoca
   label: Epoca
   category: epoca

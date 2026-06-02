@@ -1,0 +1,44 @@
+# 🧭 Geografia & confini
+
+> [!info] A cosa serve
+> La forma **spaziale** del mondo: cosa **contiene** cosa, cosa **confina** con cosa
+> e cosa è collegato da **rotte** di viaggio. Auto-generata e di **sola lettura**.
+> Si popola collegando sui *Luoghi*: **Regione** (l'area che lo contiene), **Confina
+> con** (i luoghi adiacenti) e **Rotta commerciale con** (i collegamenti di viaggio).
+> La *distanza in confini* fra due luoghi si legge nella tab **Dintorni** di ciascun luogo.
+
+## 🗺 Cosa contiene cosa — gerarchia
+> [!tip]- Come leggerla
+> Ogni riga è un luogo e l'area che lo contiene (campo **Regione**). Ordinata per
+> regione: i luoghi di una stessa area stanno vicini.
+```dataview
+table without id file.link as Luogo, regione as "Sta in", tipo as Tipo
+from "Mondi"
+where categoria = "luogo" and regione and stato != "archiviata"
+sort regione asc, file.name asc
+```
+
+## 🧭 Confini — chi è adiacente a chi
+> [!tip]- Come leggerla
+> L'adiacenza fisica fra luoghi (**Confina con**, simmetrica). È il grafo da cui si
+> calcola la distanza in confini: un confine in più = un'area da attraversare.
+```dataview
+table without id file.link as Luogo, confina_con as "Confina con"
+from "Mondi"
+where categoria = "luogo" and confina_con and stato != "archiviata"
+sort file.name asc
+```
+
+## 🛣 Rotte di viaggio — cosa è collegato
+```dataview
+table without id file.link as Luogo, rotta_con as "Rotta con"
+from "Mondi"
+where categoria = "luogo" and rotta_con and stato != "archiviata"
+sort file.name asc
+```
+
+> [!note] Dallo spazio al tavolo
+> Adiacenza e rotte dicono **come ci si muove**: tagliare una rotta isola un luogo (vedi
+> **[[Economia|💰 Economia & rotte]]**), e la distanza in confini stima quanto dista un
+> rinforzo o una minaccia. Apri la tab **Dintorni** di un luogo per vederne la distanza
+> calcolata verso tutti gli altri.

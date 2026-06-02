@@ -13,6 +13,7 @@
 > [[Risorse|📦 Risorse]]
 > [[Cast|🎭 Cast]]
 > [[Cronologia|📜 Cronologia]]
+> [[Geografia|🧭 Geografia & confini]]
 > [[Economia|💰 Economia & rotte]]
 
 > [!example] Crea

@@ -80,6 +80,16 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 
 > [!tip] Scatena
 > Clock pieno? `BUTTON[scatena-conseguenza]` — crea l'evento-conseguenza collegato e azzera il clock.
+--- Catena causale
+
+> [!info] Causa → conseguenza
+> Cosa ha portato a questo evento e cosa ne è scaturito. Collega gli eventi con
+> **Causato da** / **Conseguenze** (tab *Collegamenti*): la catena si ricostruisce
+> nelle due direzioni.
+
+```js-engine
+return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderCausalita");
+```
 --- Cronologia mondo
 
 ```dataview
@@ -92,6 +102,8 @@ sort quando asc
 --- Collegamenti
 
 > [!example] Relazioni
+> **Causato da**: `INPUT[inlineListSuggester(optionQuery("Mondi/Eventi"), useLinks(partial), allowOther):causato_da]`
+> **Conseguenze**: `INPUT[inlineListSuggester(optionQuery("Mondi/Eventi"), useLinks(partial), allowOther):conseguenze]`
 > **Epoca**: `INPUT[suggester(optionQuery("Mondi/Epoche"), useLinks(partial), allowOther):epoca]`
 > **Luogo**: `INPUT[suggester(optionQuery("Mondi/Luoghi"), useLinks(partial), allowOther):luogo]`
 > **Coinvolti**: `INPUT[inlineListSuggester(optionQuery("Mondi/Personaggi"), useLinks(partial), allowOther):coinvolti]`

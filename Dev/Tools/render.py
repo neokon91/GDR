@@ -62,6 +62,7 @@ from validate import (  # noqa: F401 (re-export per i test)
     validate_aux_yaml,
     validate_entities,
     validate_entity_schema,
+    validate_reciprocals,
     validate_split,
 )
 
@@ -635,7 +636,8 @@ def render_notes(env: Environment, core: dict[str, Any], plugins: dict[str, Any]
                              (f"{INDEX_DIR}/Ponte Mondo-Sistema.md", "ponte.md.j2"),
                              (f"{INDEX_DIR}/Fronti.md", "fronti.md.j2"),
                              (f"{INDEX_DIR}/Rete del mondo.md", "rete.md.j2"),
-                             (f"{INDEX_DIR}/Economia.md", "economia.md.j2")):
+                             (f"{INDEX_DIR}/Economia.md", "economia.md.j2"),
+                             (f"{INDEX_DIR}/Geografia.md", "geografia.md.j2")):
         text = env.get_template(jinja_name).render(core=core, plugins=plugins, templates=templates, pages=pages)
         write_text(VAULT / name, text)
         rendered[name] = text

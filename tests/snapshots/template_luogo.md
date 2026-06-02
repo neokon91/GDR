@@ -169,6 +169,10 @@ return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "luo
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderMap");
 ```
+
+```js-engine
+return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderDintorni");
+```
 --- Collegamenti
 
 > [!example] Relazioni
@@ -178,6 +182,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > **Bioma**: `INPUT[suggester(optionQuery("Mondi/Biomi"), useLinks(partial), allowOther):bioma]`
 > **Cultura dominante**: `INPUT[suggester(optionQuery("Mondi/Culture"), useLinks(partial), allowOther):cultura]`
 > **Piano**: `INPUT[suggester(optionQuery("Mondi/Piani"), useLinks(partial), allowOther):piano]`
+> **Confina con**: `INPUT[inlineListSuggester(optionQuery("Mondi/Luoghi"), useLinks(partial), allowOther):confina_con]`
 > **Produce**: `INPUT[inlineListSuggester(optionQuery("Mondi/Risorse"), useLinks(partial), allowOther):produce]`
 > **Dipende da**: `INPUT[inlineListSuggester(optionQuery("Mondi/Risorse"), useLinks(partial), allowOther):dipende_da]`
 > **Rotta commerciale con**: `INPUT[inlineListSuggester(optionQuery("Mondi/Luoghi"), useLinks(partial), allowOther):rotta_con]`

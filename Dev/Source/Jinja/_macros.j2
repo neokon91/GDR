@@ -444,6 +444,25 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 ```
 {%- endmacro %}
 
+{# Dintorni (geografia spaziale, luogo): regione contenitore, luoghi contenuti,
+   confinanti (confina_con) con distanza-in-confini calcolata via BFS, e rotte di
+   viaggio. La vista "dove sono / come ci si muove" senza una mappa disegnata.
+   Logica in views.renderDintorni. #}
+{% macro dintorni() -%}
+```js-engine
+return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderDintorni");
+```
+{%- endmacro %}
+
+{# Catena causale (timeline causale, evento): perché è successo (cause a monte,
+   causato_da) e cosa ne è derivato (conseguenze a valle), ricostruite
+   ricorsivamente nelle due direzioni. Logica in views.renderCausalita. #}
+{% macro causalita() -%}
+```js-engine
+return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderCausalita");
+```
+{%- endmacro %}
+
 {# Progressione PG (JS Engine): privilegi acquisiti al livello + anteprima del
    prossimo (views.renderProgressione, da personaggio.json). Il bottone 'Sali di
    livello' (statico, processato da Meta Bind) applica PF/competenza/slot e guida

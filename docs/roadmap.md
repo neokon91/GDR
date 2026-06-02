@@ -211,6 +211,16 @@ sopra i sistemi avanzati (vedi backlog).
     raggruppati per epoca (callout pieghevoli), ordinati per `quando`. ✅ **Calendario vero
     e proprio**: `evento` emette `fc-date` → compare su **Calendarium** (callout *Calendario*,
     `73041f5`, verificato in-app). Il calendario del mondo si crea in-app dai preset (opt-in).
+    ✅ **Timeline CAUSALE**: coppia direzionale `evento.causato_da ↔ conseguenze` + tab
+    *Catena causale* (`views.renderCausalita`): a monte le cause, a valle ciò che l'evento ha
+    innescato, ricostruite ricorsivamente nelle due direzioni.
+  - ✅ **Geografia spaziale**: `luogo.confina_con` (adiacenza simmetrica) + tab *Dintorni*
+    (`views.renderDintorni`): regione contenitore, luoghi contenuti, confinanti e **distanza
+    in confini** calcolata via BFS, più le rotte. Dashboard **Geografia** (contenimento +
+    confini + rotte). *Residuo*: coordinate vere / auto-pin Azgaar→`markers.json` (rinviato).
+  - ✅ **Economia/risorse**: categoria **risorsa** + relazioni `luogo.{produce,dipende_da,
+    rotta_con}` e `fazione.controlla_risorse` + dashboard **Economia** — il mondo diventa
+    simulabile (una risorsa contesa alimenta un Fronte).
   - ✅ **Mappe**: luogo e mondo hanno una **tab Mappa** (campo `mappa` + embed via
     `views.renderMap`) che mostra un disegno **Excalidraw**, un'immagine o una nota; se
     vuota guida a crearne una (Excalidraw / Zoom Map / immagine trascinata). *Residuo*:
@@ -238,7 +248,9 @@ sopra i sistemi avanzati (vedi backlog).
   ✅ **(c) inverse tipizzati** — *auto-derivati* (niente authoring): `Collega` scrive il reverse
   tipizzato quando la coppia è univoca (`reciprocalField`; ambiguo/assente → generico
   `connessioni`) + **dashboard "Rete del mondo"** (orfani/snodi via Dataview `file.inlinks`)
-  (`51acb45`). **Aperti**: **(b) assi allo strato cosmico** (dominio/entita_primordiale/
+  (`51acb45`). ✅ **inverso ESPLICITO** (`relazioni[].reciprocal` → `inverseRelation`): per le
+  relazioni dove l'auto-derivazione è ambigua — simmetriche (`confina_con`/`rotta_con`) o
+  direzionali (`causato_da↔conseguenze`); validato a build (`validate_reciprocals`). **Aperti**: **(b) assi allo strato cosmico** (dominio/entita_primordiale/
   legge_fondamentale/piano senza assi → Carattere vuoto) + scheda per cosmologia/dominio;
   *residuo*: inverse anche nel wizard-connect (oggi solo `Collega`); CSS feel-wiki; maestrie
   armi + Bastioni 2024.

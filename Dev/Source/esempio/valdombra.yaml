@@ -1,7 +1,7 @@
 # Mondo DIMOSTRATIVO precaricato (Valdombra). render.py lo genera in
 # Mondi/_Esempio — Valdombra/ (namespace riservato, riscritto a ogni build,
 # cancellabile in un clic). Scopo: al primo avvio le dashboard (Atlante/Bestiario/
-# Fazioni/Cast/Cronologia/Fronti/Rete) NON sono vuote e il differenziatore
+# Fazioni/Cast/Cronologia/Fronti/Rete/Geografia/Economia) NON sono vuote e il differenziatore
 # lore→tavolo è visibile. Note READ-ONLY in Markdown/Dataview puro: rendono sempre.
 # Ogni nota: nome, categoria, tipo, fm (frontmatter extra: relazioni/clock/scheda),
 # fatti (righe infobox), lore, uso_al_tavolo, gancio, pressione, prossima_mossa.
@@ -68,12 +68,14 @@ note:
       cultura: "[[I Cenerini]]"
       clima: temperato
       popolazione: "1200"
+      confina_con: ["[[Bosco Sussurrante]]", "[[La Voragine]]"]
       dipende_da: ["[[Sale]]", "[[Mithril delle Marche]]"]
       rotta_con: ["[[Mercato di Sale]]"]
     fatti:
       - ["Tipo", "Insediamento (capoluogo)"]
       - ["Regione", "[[Le Marche di Valdombra]]"]
       - ["Controllata da", "[[La Mano d'Argento]]"]
+      - ["Confina con", "[[Bosco Sussurrante]], [[La Voragine]]"]
     lore: >-
       Un forte imperiale riadattato a città: mura annerite, un mercato nervoso e, nelle
       cantine, l'imbocco sigillato della Voragine.
@@ -88,6 +90,7 @@ note:
     fm:
       regione: "[[Le Marche di Valdombra]]"
       clima: "nessuno (sottoterra)"
+      confina_con: ["[[Forte Cenere]]"]
       clock_dim: 6
       clock: 4
       conseguenza: "Il sigillo cede: ondate di aberrazioni dilagano nelle Marche e Forte Cenere cade nel panico."
@@ -113,11 +116,13 @@ note:
       controllata_da: "[[Il Capitolo di Sale]]"
       clima: temperato
       popolazione: "800"
+      confina_con: ["[[Bosco Sussurrante]]"]
       produce: ["[[Sale]]"]
       rotta_con: ["[[Forte Cenere]]"]
     fatti:
       - ["Tipo", "Insediamento (porto fluviale)"]
       - ["Controllata da", "[[Il Capitolo di Sale]]"]
+      - ["Rotta fluviale", "[[Forte Cenere]] (2 confini per via di terra)"]
     lore: >-
       Banchine, magazzini e contrabbando: tutto ciò che entra nelle Marche passa di qui,
       con o senza dazio.
@@ -133,9 +138,11 @@ note:
       regione: "[[Le Marche di Valdombra]]"
       clima: temperato
       cultura: "[[I Cenerini]]"
+      confina_con: ["[[Forte Cenere]]", "[[Mercato di Sale]]"]
     fatti:
       - ["Tipo", "Landmark naturale"]
       - ["Regione", "[[Le Marche di Valdombra]]"]
+      - ["Confina con", "[[Forte Cenere]], [[Mercato di Sale]]"]
     lore: >-
       Un bosco che i Cenerini non attraversano dopo il tramonto: dicono che ripeta, in
       un sussurro, l'ultima parola dei morti.
@@ -385,9 +392,11 @@ note:
     fm:
       quando: "Era delle Ceneri · anno 0"
       luogo: "[[Le Marche di Valdombra]]"
+      conseguenze: ["[[La Prima Frattura]]"]
     fatti:
       - ["Quando", "anno 0 dell'Era delle Ceneri"]
       - ["Dove", "[[Le Marche di Valdombra]]"]
+      - ["Ha portato a", "[[La Prima Frattura]]"]
     lore: >-
       In una sola notte l'impero d'oriente cadde e Valdombra divenne frontiera. Nessuno
       sa ancora cosa lo fece crollare — ma cominciò sotto Forte Cenere.
@@ -403,9 +412,13 @@ note:
       quando: "12 anni fa"
       luogo: "[[La Voragine]]"
       coinvolti: ["[[Vecchio Toben]]"]
+      causato_da: ["[[Il Crollo dell'Impero]]"]
+      conseguenze: ["[[Il Patto di Sale]]"]
     fatti:
       - ["Quando", "12 anni fa"]
       - ["Dove", "[[La Voragine]]"]
+      - ["Causa", "[[Il Crollo dell'Impero]]"]
+      - ["Ha portato a", "[[Il Patto di Sale]]"]
     lore: >-
       Dodici anni fa il sigillo cedette per la prima volta. Morì mezza guarnigione;
       Toben sopravvisse e da allora non dorme.
@@ -422,9 +435,11 @@ note:
       luogo: "[[Mercato di Sale]]"
       fazioni: ["[[La Mano d'Argento]]", "[[Il Capitolo di Sale]]"]
       coinvolti: ["[[Magistra Ilda Sale]]", "[[Capitano Vera Sabbialesta]]"]
+      causato_da: ["[[La Prima Frattura]]"]
     fatti:
       - ["Quando", "2 anni fa"]
       - ["Patto fra", "[[La Mano d'Argento]] e [[Il Capitolo di Sale]]"]
+      - ["Causa", "[[La Prima Frattura]]"]
     lore: >-
       L'alleanza che tiene in piedi le Marche: la Mano protegge, il Capitolo paga. Regge
       finché conviene a entrambi — e comincia a non convenire più.

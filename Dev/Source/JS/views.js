@@ -597,6 +597,118 @@ async function renderMap(app, dv, page) {
   return `![[${name}]]`;
 }
 
+// --- Dintorni (geografia spaziale) -------------------------------------------
+// Vista locale del luogo: la REGIONE che lo contiene, i luoghi che CONTIENE
+// (inverso di 'regione'), i CONFINANTI (confina_con) e — calcolata via BFS sul
+// grafo di adiacenza — la DISTANZA in confini verso gli altri luoghi, più le
+// ROTTE di viaggio. Dà al GM "dove sono / come ci si muove" senza una mappa.
+// L'adiacenza è non orientata (i link sono già reciproci, ma uniamo le due
+// direzioni per robustezza). Ritorna markdown (i [[link]] si rendono).
+async function renderDintorni(app, dv, page) {
+  if (!dv || !page || !page.file) return "*Apri una scheda luogo.*";
+  const luoghi = dv.pages()
+    .where((p) => p && p.file && text(p.categoria) === "luogo" && text(p.stato) !== "archiviata")
+    .array();
+  const self = page.file.name;
+  // Grafo di adiacenza non orientato da confina_con (unione delle due direzioni).
+  const adj = new Map(luoghi.map((p) => [p.file.name, new Set()]));
+  for (const p of luoghi) {
+    for (const link of asArray(p.confina_con)) {
+      const q = resolve(dv, link);
+      const qn = q && q.file ? q.file.name : null;
+      if (qn && adj.has(qn) && adj.has(p.file.name)) {
+        adj.get(p.file.name).add(qn);
+        adj.get(qn).add(p.file.name);
+      }
+    }
+  }
+  // BFS dei confini dal luogo corrente → distanza in salti (anelli).
+  const dist = new Map([[self, 0]]);
+  let frontier = [self];
+  while (frontier.length) {
+    const next = [];
+    for (const n of frontier) {
+      for (const m of adj.get(n) ?? []) {
+        if (!dist.has(m)) { dist.set(m, dist.get(n) + 1); next.push(m); }
+      }
+    }
+    frontier = next;
+  }
+  const out = [];
+  const regione = resolve(dv, page.regione);
+  if (regione && regione.file) out.push(`**📍 Regione**: ${noteLink(regione)}`);
+  const contiene = luoghi.filter((p) => {
+    const r = resolve(dv, p.regione);
+    return r && r.file && r.file.name === self;
+  });
+  if (contiene.length) out.push(`**🗺 Contiene** (${contiene.length}): ` + contiene.map(noteLink).join(", "));
+  const rings = new Map();
+  for (const [name, d] of dist) {
+    if (d === 0) continue;
+    if (!rings.has(d)) rings.set(d, []);
+    rings.get(d).push(name);
+  }
+  for (const d of [...rings.keys()].sort((a, b) => a - b)) {
+    const names = rings.get(d).sort((a, b) => a.localeCompare(b)).map((n) => `[[${n}]]`);
+    const label = d === 1 ? "🧭 Confina con" : `↔ A ${d} confini`;
+    out.push(`**${label}** (${names.length}): ${names.join(", ")}`);
+  }
+  const rotte = asArray(page.rotta_con).map((l) => resolve(dv, l)).filter((p) => p && p.file);
+  if (rotte.length) out.push(`**🛣 Rotte di viaggio** (${rotte.length}): ` + rotte.map(noteLink).join(", "));
+  if (!out.length) {
+    return "> [!tip] Nessun dintorno\n> Collega questo luogo: imposta **Regione** (l'area che lo contiene), **Confina con** (i luoghi adiacenti) e **Rotta commerciale con** (i collegamenti di viaggio). La *distanza in confini* si calcola da sé via BFS.";
+  }
+  return "> [!abstract] 🧭 Dintorni — *distanza in confini attraversati*\n" + out.map((r) => "> " + r).join("\n>\n");
+}
+
+// --- Catena causale (timeline causale) ---------------------------------------
+// Per un evento ricostruisce PERCHÉ è successo (risalendo causato_da) e COSA NE È
+// DERIVATO (scendendo per conseguenze). Le due direzioni sono complementari: con
+// la macro Collega l'inverso è scritto automaticamente, ma qui le uniamo (causa =
+// causato_da ∪ eventi-che-mi-elencano-in-conseguenze) così la catena si
+// ricostruisce anche se solo un lato è stato compilato a mano. Cicli protetti
+// (visited condiviso). Ritorna markdown (liste annidate, i [[link]] si rendono).
+async function renderCausalita(app, dv, page) {
+  if (!dv || !page || !page.file) return "*Apri una scheda evento.*";
+  const eventi = dv.pages()
+    .where((p) => p && p.file && text(p.categoria) === "evento" && text(p.stato) !== "archiviata")
+    .array();
+  const byName = new Map(eventi.map((p) => [p.file.name, p]));
+  const nameOf = (link) => { const p = resolve(dv, link); return p && p.file ? p.file.name : null; };
+  const causes = new Map(), effects = new Map();
+  const link = (m, k, v) => { if (!m.has(k)) m.set(k, new Set()); if (v) m.get(k).add(v); };
+  for (const e of eventi) {
+    const en = e.file.name;
+    for (const l of asArray(e.causato_da)) { const c = nameOf(l); if (c) { link(causes, en, c); link(effects, c, en); } }
+    for (const l of asArray(e.conseguenze)) { const c = nameOf(l); if (c) { link(effects, en, c); link(causes, c, en); } }
+  }
+  const self = page.file.name;
+  const tree = (map, root) => {
+    const lines = [], seen = new Set([root]);
+    const walk = (name, depth) => {
+      const kids = [...(map.get(name) ?? [])].sort((a, b) =>
+        cmpQuando((byName.get(a) || {}).quando, (byName.get(b) || {}).quando));
+      for (const k of kids) {
+        if (seen.has(k)) continue;
+        seen.add(k);
+        const quando = text((byName.get(k) || {}).quando);
+        lines.push(`${"  ".repeat(depth)}- ${quando ? `**${quando}** ` : ""}[[${k}]]`);
+        walk(k, depth + 1);
+      }
+    };
+    walk(root, 0);
+    return lines;
+  };
+  const su = tree(causes, self), giu = tree(effects, self);
+  if (!su.length && !giu.length) {
+    return "> [!tip] Nessuna catena causale\n> Collega questo evento ad altri con **Causato da** (le cause a monte) o **Conseguenze** (cosa ha innescato). La catena si ricostruisce in entrambe le direzioni da sé.";
+  }
+  const blocks = [];
+  if (su.length) blocks.push("**⬆ Perché è successo** *(cause a monte)*\n" + su.join("\n"));
+  if (giu.length) blocks.push("**⬇ Cosa ne è derivato** *(conseguenze a valle)*\n" + giu.join("\n"));
+  return blocks.join("\n\n");
+}
+
 // --- Tratti di specie (rules-engine): dettagli SRD strutturati nella scheda PG -
 // Dal campo `specie` del PG rende le sezioni SRD della specie (descrizioni +
 // tabelle, es. soffio / antenati draconici) in un callout pieghevole, così la
@@ -641,7 +753,8 @@ module.exports = {
   renderProgressione,
   renderSpecieTratti, sezioniMarkdown,
   renderTimeline, quandoNum, epocaLabel,
-  renderMap,
+  renderCausalita,
+  renderMap, renderDintorni,
   renderCondizioni, condizioniMarkdown,
   renderMaestrie, maestrieMarkdown,
   radarMarkdownFromValues,

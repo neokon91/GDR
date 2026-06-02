@@ -129,7 +129,7 @@ def test_page_snapshot(page):
     assert out == _snapshot(f"page_{page['id']}.md", out)
 
 
-@pytest.mark.parametrize("name", ["home.md.j2", "leggimi.md.j2", "ponte.md.j2", "fronti.md.j2", "rete.md.j2", "economia.md.j2"])
+@pytest.mark.parametrize("name", ["home.md.j2", "leggimi.md.j2", "ponte.md.j2", "fronti.md.j2", "rete.md.j2", "economia.md.j2", "geografia.md.j2"])
 def test_root_note_snapshot(name):
     out = _env().get_template(name).render(core=CORE, plugins=PLUGINS, templates=TEMPLATES, pages=PAGES)
     assert out == _snapshot(f"root_{name}.md", out)
@@ -1004,6 +1004,125 @@ def test_reciprocal_field(tmp_path):
     assert out["cultura"] == "regioni"   # coppia univoca -> inverso tipizzato
     assert out["fazione"] is None        # ambiguo (figure+fondatori) -> generico
     assert out["epoca"] == "eventi"      # univoca
+
+
+@pytest.mark.skipif(not shutil.which("node"), reason="node assente")
+def test_inverse_relation(tmp_path):
+    """meta_actions.inverseRelation: inverso ESPLICITO (rel.reciprocal) quando
+    dichiarato — simmetrico (luogo.confina_con↔confina_con) o direzionale
+    (evento.causato_da↔conseguenze); altrimenti ricade su reciprocalField (auto)
+    o null. L'esplicito è ciò che rende corretto Collega dove l'auto è ambiguo."""
+    rel = CORE.get("relazioni") or {}
+    harness = tmp_path / "ir.js"
+    harness.write_text(
+        'const fs=require("fs");'
+        f'const s=fs.readFileSync({json.dumps(str(render.JS_DIR / "meta_actions.js"))},"utf8");'
+        'const m={exports:{}};new Function("module","exports",s)(m,m.exports);'
+        f'const core={json.dumps({"relazioni": rel}, ensure_ascii=False)};'
+        'const find=(c,f)=>core.relazioni[c].find(r=>r.field===f);'
+        'const ir=m.exports.inverseRelation;'
+        'const r=(rel,sc,tc)=>{const x=ir(core,rel,sc,tc);return x?x.field:null;};'
+        'process.stdout.write(JSON.stringify({'
+        'confina:r(find("luogo","confina_con"),"luogo","luogo"),'        # simmetrico esplicito
+        'causa:r(find("evento","causato_da"),"evento","evento"),'        # direzionale esplicito
+        'conseg:r(find("evento","conseguenze"),"evento","evento"),'      # direzionale esplicito (inverso)
+        'cultura:r(find("luogo","cultura"),"luogo","cultura"),'          # niente reciprocal -> auto
+        'fazione:r(find("personaggio","fazione"),"personaggio","fazione")}));',  # ambiguo -> null
+        encoding="utf-8")
+    res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
+    assert res.returncode == 0, res.stderr
+    out = json.loads(res.stdout)
+    assert out["confina"] == "confina_con"   # esplicito simmetrico (sé stesso)
+    assert out["causa"] == "conseguenze"     # esplicito direzionale
+    assert out["conseg"] == "causato_da"     # esplicito direzionale (lato inverso)
+    assert out["cultura"] == "regioni"       # nessun reciprocal -> auto-derivato
+    assert out["fazione"] is None            # ambiguo, nessun reciprocal -> generico (connessioni)
+
+
+def test_validate_reciprocals():
+    """validate_reciprocals: il modello reale è pulito; un reciprocal che nomina un
+    campo inesistente sul target è intercettato (fail-fast a build, non in-app)."""
+    core = render.load_core()
+    assert render.validate_reciprocals(core) == []
+    broken = {"relazioni": {
+        "luogo": [{"field": "confina_con", "label": "Confina con", "category": "luogo", "reciprocal": "nonesiste"}],
+    }}
+    errs = render.validate_reciprocals(broken)
+    assert errs and "reciprocal 'nonesiste'" in errs[0]
+
+
+@pytest.mark.skipif(not shutil.which("node"), reason="node assente")
+def test_render_dintorni(tmp_path):
+    """views.renderDintorni: regione contenitore, luoghi contenuti (inverso di
+    regione), confinanti (1 salto) e anelli di DISTANZA via BFS su confina_con, più
+    le rotte. Grafo: Voragine—Forte—Bosco—Mercato (catena); rotta Forte↔Mercato."""
+    harness = tmp_path / "dint.js"
+    harness.write_text(
+        'const fs=require("fs");'
+        f'const src=fs.readFileSync({json.dumps(str(render.JS_DIR / "views.js"))},"utf8");'
+        'const m={exports:{}};new Function("module","exports",src)(m,m.exports);'
+        'const L=(n)=>({path:n+".md"});'
+        'const mk=(name,ex)=>Object.assign({file:{name,path:name+".md"},categoria:"luogo",stato:"pronto"},ex);'
+        'const all=[mk("Marche",{tipo:"regione"}),'
+        ' mk("Forte",{regione:L("Marche"),confina_con:[L("Bosco"),L("Voragine")],rotta_con:[L("Mercato")]}),'
+        ' mk("Bosco",{regione:L("Marche"),confina_con:[L("Forte"),L("Mercato")]}),'
+        ' mk("Mercato",{regione:L("Marche"),confina_con:[L("Bosco")],rotta_con:[L("Forte")]}),'
+        ' mk("Voragine",{regione:L("Marche"),confina_con:[L("Forte")]})];'
+        'const dv={pages:()=>({where:(fn)=>({array:()=>all.filter(fn)})}),'
+        ' page:(l)=>{const p=l&&l.path?l.path:l;return all.find(x=>x.file&&(x.file.path===p||x.file.name===p))||null;}};'
+        'const f=(n)=>all.find(x=>x.file.name===n);'
+        'Promise.all([m.exports.renderDintorni({},dv,f("Forte")),m.exports.renderDintorni({},dv,f("Marche"))])'
+        '.then(([a,b])=>process.stdout.write(JSON.stringify({a,b})));',
+        encoding="utf-8")
+    res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
+    assert res.returncode == 0, res.stderr
+    out = json.loads(res.stdout)
+    a = out["a"]                                              # Forte Cenere
+    assert "📍 Regione**: [[Marche]]" in a
+    assert "🧭 Confina con** (2): [[Bosco]], [[Voragine]]" in a
+    assert "↔ A 2 confini** (1): [[Mercato]]" in a           # BFS: Mercato a 2 salti via Bosco
+    assert "🛣 Rotte di viaggio** (1): [[Mercato]]" in a      # rotta diretta ≠ adiacenza
+    assert a.index("Confina con") < a.index("A 2 confini")   # anelli ordinati per distanza
+    b = out["b"]                                              # Marche (regione)
+    assert "🗺 Contiene** (4):" in b and "[[Forte]]" in b and "[[Voragine]]" in b
+    assert "Confina con" not in b                             # la regione non ha confini propri
+
+
+@pytest.mark.skipif(not shutil.which("node"), reason="node assente")
+def test_render_causalita(tmp_path):
+    """views.renderCausalita: catena causale a monte (cause) e a valle (conseguenze),
+    ricostruita ricorsivamente. Unione delle due direzioni: la causa di 'Patto' si
+    deduce da 'Frattura'.conseguenze anche senza causato_da su 'Patto'. Esclude le
+    archiviate; cicli/duplicati protetti."""
+    harness = tmp_path / "caus.js"
+    harness.write_text(
+        'const fs=require("fs");'
+        f'const src=fs.readFileSync({json.dumps(str(render.JS_DIR / "views.js"))},"utf8");'
+        'const m={exports:{}};new Function("module","exports",src)(m,m.exports);'
+        'const L=(n)=>({path:n+".md"});'
+        'const mk=(name,ex)=>Object.assign({file:{name,path:name+".md"},categoria:"evento",stato:"pronto"},ex);'
+        'const all=[mk("Crollo",{quando:"anno 0",conseguenze:[L("Frattura")]}),'      # solo lato discendente
+        ' mk("Frattura",{quando:"anno 300",causato_da:[L("Crollo")],conseguenze:[L("Patto")]}),'
+        ' mk("Patto",{quando:"anno 310"}),'                                          # nessun campo causale: dedotto
+        ' mk("Vecchio",{quando:"anno 1",stato:"archiviata",conseguenze:[L("Patto")]})];'  # archiviato: escluso
+        'const dv={pages:()=>({where:(fn)=>({array:()=>all.filter(fn)})}),'
+        ' page:(l)=>{const p=l&&l.path?l.path:l;return all.find(x=>x.file&&(x.file.path===p||x.file.name===p))||null;}};'
+        'const f=(n)=>all.find(x=>x.file.name===n);'
+        'Promise.all([m.exports.renderCausalita({},dv,f("Frattura")),m.exports.renderCausalita({},dv,f("Patto"))])'
+        '.then(([a,b])=>process.stdout.write(JSON.stringify({a,b})));',
+        encoding="utf-8")
+    res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
+    assert res.returncode == 0, res.stderr
+    out = json.loads(res.stdout)
+    a = out["a"]                                              # Frattura: una causa, una conseguenza
+    assert "⬆ Perché è successo" in a and "[[Crollo]]" in a
+    assert "⬇ Cosa ne è derivato" in a and "[[Patto]]" in a
+    b = out["b"]                                              # Patto: cause risalite per unione
+    assert "⬆ Perché è successo" in b
+    assert "[[Frattura]]" in b and "[[Crollo]]" in b         # Patto<-Frattura<-Crollo (ricorsivo)
+    assert b.index("[[Frattura]]") < b.index("[[Crollo]]")   # Crollo annidato sotto Frattura
+    assert "⬇ Cosa ne è derivato" not in b                   # Patto non ha conseguenze
+    assert "[[Vecchio]]" not in a and "[[Vecchio]]" not in b  # archiviato non compare
 
 
 def test_maestrie_catalog():

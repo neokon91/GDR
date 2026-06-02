@@ -50,7 +50,12 @@ fields:                     # (opzionale) campi esclusivi dell'entità
   motto: { label: Motto, widget: text }
 scheda: [portata, motto, …] # campi mostrati dalla macro scheda()
 relazioni:                  # link tipizzati (macro relazioni())
-  - { field, label, category, multi? }
+  - { field, label, category, multi?, reciprocal? }
+    # reciprocal: nome del campo INVERSO sul target, scritto da Collega
+    # (meta_actions.inverseRelation). Serve quando l'auto-derivazione è ambigua:
+    # simmetrico (luogo.confina_con↔confina_con, rotta_con↔rotta_con) o
+    # direzionale (evento.causato_da↔conseguenze). Senza, l'inverso è auto-derivato
+    # se la coppia è univoca, altrimenti generico (connessioni).
 creation:                   # wizard (letto da create_entity.js / generato)
   fields: [ { field, prompt, from?, category?, link?, required?, optional?, multi? } ]
   body:   [ { field, prompt, heading? | callout?+title?+fold? } ]
@@ -85,7 +90,8 @@ sulle note di quella categoria → link `[[..]]`) · `list`+`options` · default
   Eccezione `INTEROP_FIELDS` = `fc-date`/`fc-end`/`fc-calendar`/`fc-category` (col trattino:
   chiavi-evento richieste da Calendarium; Meta Bind 1.4.x le binda).
 - **shape**: ogni campo ha label+widget; categoria folder risolvibile+subtypes;
-  scheda→fields; relazioni field/label/category; abilità con caratteristica valida;
+  scheda→fields; relazioni field/label/category; **reciprocal** (se dichiarato) nomina
+  una relazione esistente del target (`validate_reciprocals`); abilità con caratteristica valida;
   **archetipi** con id/nome/tag e `quando` che riferisce assi reali; **famiglie** con `assi`
   preset che riferiscono assi reali (1-5); **anti-drift**: opzioni del select `stile_nomi`
   (metabind) == stili di `generatori.yaml`.
