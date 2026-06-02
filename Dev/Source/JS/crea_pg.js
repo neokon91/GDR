@@ -162,18 +162,32 @@ function calcolaCA(armatura, modDes, scudo) {
     return (armatura.ca_base || 10) + cap + (scudo ? 2 : 0);
 }
 
-// Ponte HOMEBREW→motore: incantesimi creati nel vault (categoria incantesimo) per
-// la classe data → {livello:[nomi]}, da fondere col pool SRD. Una nota conta se le
-// sue `classi` citano la classe (per id o label) o sono vuote (= disponibile a
-// tutti). `livello` mancante → 1. Degrada a {} fuori da Obsidian (test: niente
-// getMarkdownFiles). NB: copia gemella in sali_pg.js (script autonomi, niente require).
+// --- Ponte HOMEBREW→motore (note del vault fuse nelle opzioni SRD a runtime) ---
+// NB: helper gemelli anche in sali_pg.js (script autonomi, niente require).
+// Note del vault per categoria → [{f, fm}]. Vuoto fuori da Obsidian (test: niente
+// getMarkdownFiles) → l'homebrew non c'è e il motore resta quello SRD.
+function noteVault(cat) {
+    if (!app.vault || !app.vault.getMarkdownFiles) return [];
+    return app.vault.getMarkdownFiles()
+        .map(f => ({ f, fm: (app.metadataCache.getFileCache(f) || {}).frontmatter || {} }))
+        .filter(e => e.fm.categoria === cat && e.fm.stato !== "archiviata");
+}
+function normTxt(s) {
+    return String(s == null ? "" : s).normalize("NFD").replace(/[̀-ͯ]/g, "").trim().toLowerCase();
+}
+// "Forza, Destrezza" → ["forza","destrezza"] via mappa label→id (tollerante: salta i non riconosciuti).
+function toIds(testo, labelToId) {
+    const raw = Array.isArray(testo) ? testo.join(",") : String(testo || "");
+    return raw.split(/[,;]/).map(x => labelToId[normTxt(x)]).filter(Boolean);
+}
+
+// Incantesimi homebrew per la classe → {livello:[nomi]}, da fondere col pool SRD.
+// Una nota conta se le sue `classi` citano la classe (id o label) o sono vuote (=
+// a tutti). `livello` mancante → 1.
 function incantesimiHomebrew(classeId, classeLabel) {
-    if (!app.vault || !app.vault.getMarkdownFiles) return {};
     const want = [String(classeId || ""), String(classeLabel || "")].map(s => s.toLowerCase()).filter(Boolean);
     const pool = {};
-    for (const f of app.vault.getMarkdownFiles()) {
-        const fm = (app.metadataCache.getFileCache(f) || {}).frontmatter || {};
-        if (fm.categoria !== "incantesimo" || fm.stato === "archiviata") continue;
+    for (const { f, fm } of noteVault("incantesimo")) {
         const classi = (Array.isArray(fm.classi) ? fm.classi.join(",") : String(fm.classi || "")).toLowerCase();
         if (classi && !want.some(w => w && classi.includes(w))) continue;
         const n = Number.parseInt(fm.livello, 10);
@@ -189,6 +203,43 @@ function fondiPool(a, b) {
     for (const src of [a || {}, b || {}])
         for (const [L, nomi] of Object.entries(src))
             out[L] = Array.from(new Set([...(out[L] || []), ...nomi]));
+    return out;
+}
+
+// Background homebrew → opzioni nella forma del motore, mappando le label umane del
+// frontmatter agli id (caratteristiche/abilità). Campi vuoti → liste vuote (bg
+// selezionabile ma "neutro" finché non lo compili nella scheda).
+function backgroundHomebrew(opt) {
+    const statMap = {}; for (const id of opt.caratteristiche || []) statMap[normTxt(id)] = id;
+    const skillMap = {}; for (const [id, s] of Object.entries(opt.abilita || {})) { skillMap[normTxt(s.label)] = id; skillMap[normTxt(id)] = id; }
+    const out = {};
+    for (const { f, fm } of noteVault("background")) {
+        out[f.basename] = {
+            label: f.basename,
+            punteggi_caratteristica: toIds(fm.car_background, statMap),
+            competenze_abilita: toIds(fm.abilita_background, skillMap),
+            talento_origine: String(fm.talento_origine || ""),
+            strumenti: String(fm.strumento || ""),
+        };
+    }
+    return out;
+}
+
+// Specie homebrew → opzioni nella forma del motore (taglia/velocità/scurovisione/
+// tratti). Scurovisione dedotta dal testo dei tratti, come per l'SRD.
+function specieHomebrew() {
+    const out = {};
+    for (const { f, fm } of noteVault("specie")) {
+        const tratti = String(fm.tratti || "");
+        const v = String(fm.velocita == null ? "" : fm.velocita).match(/\d+/);
+        out[f.basename] = {
+            label: f.basename,
+            taglia: String(fm.taglia || ""),
+            velocita: v ? Number(v[0]) : 9,
+            scurovisione: normTxt(tratti).includes("scurovision"),
+            tratti,
+        };
+    }
     return out;
 }
 
@@ -265,13 +316,18 @@ async function crea_pg(tp) {
     const nome = await tp.system.prompt("Nome del personaggio");
     await tp.file.move(`Mondi/Personaggi/${nomeFile(nome)}`);
 
+    // Opzioni SRD fuse con l'homebrew del vault (ponte homebrew→motore): specie e
+    // background homebrew diventano selezionabili accanto a quelli del SRD.
+    const specieOpt = { ...opt.specie, ...specieHomebrew() };
+    const backgroundOpt = { ...opt.background, ...backgroundHomebrew(opt) };
+
     const classeId = await scegliDaMappa(tp, "Classe", opt.classi);
-    const specieId = await scegliDaMappa(tp, "Specie", opt.specie);
-    const backgroundId = await scegliDaMappa(tp, "Background", opt.background);
+    const specieId = await scegliDaMappa(tp, "Specie", specieOpt);
+    const backgroundId = await scegliDaMappa(tp, "Background", backgroundOpt);
 
     const classe = opt.classi[classeId] || {};
-    const specie = opt.specie[specieId] || {};
-    const background = opt.background[backgroundId] || {};
+    const specie = specieOpt[specieId] || {};
+    const background = backgroundOpt[backgroundId] || {};
 
     let caratteristiche = await generaCaratteristiche(tp, opt);
     caratteristiche = await applicaAumentoBackground(tp, caratteristiche, background, opt);
@@ -361,3 +417,5 @@ module.exports.nomeFile = nomeFile;
 // Esposti per i test del ponte homebrew→motore.
 module.exports.incantesimiHomebrew = incantesimiHomebrew;
 module.exports.fondiPool = fondiPool;
+module.exports.backgroundHomebrew = backgroundHomebrew;
+module.exports.specieHomebrew = specieHomebrew;

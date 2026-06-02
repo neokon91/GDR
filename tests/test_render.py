@@ -1077,10 +1077,13 @@ def test_homebrew_bridge(tmp_path):
     raggruppa per livello (mancante→1), esclude archiviate; fondiPool unisce SRD+
     homebrew senza duplicati; talentiHomebrew raccoglie le note categoria=talento.
     Degrada a vuoto senza app.vault.getMarkdownFiles (verificato dai test PG e2e)."""
+    opt = {"caratteristiche": [c["id"] for c in CORE.get("caratteristiche", [])],
+           "abilita": {k: {"label": v.get("label", k)} for k, v in (CORE.get("abilita", {}) or {}).items()}}
     harness = tmp_path / "hb.js"
     harness.write_text(
         f'const crea=require({json.dumps(str(render.JS_DIR / "crea_pg.js"))});'
         f'const sali=require({json.dumps(str(render.JS_DIR / "sali_pg.js"))});'
+        f'const opt={json.dumps(opt, ensure_ascii=False)};'
         'const F=(basename,fm)=>({f:{basename,path:basename+".md"},fm});'
         'const files=[F("Dardo arcano",{categoria:"incantesimo",livello:1,classi:"Mago, Stregone"}),'
         ' F("Tocco gelido",{categoria:"incantesimo",livello:0,classi:"Mago"}),'
@@ -1089,6 +1092,9 @@ def test_homebrew_bridge(tmp_path):
         ' F("Spell vecchio",{categoria:"incantesimo",livello:1,classi:"Mago",stato:"archiviata"}),'  # esclusa
         ' F("Maestro ombre",{categoria:"talento"}),'
         ' F("Talento vecchio",{categoria:"talento",stato:"archiviata"}),'          # esclusa
+        ' F("Cenerino",{categoria:"background",car_background:"Forza, Costituzione, Saggezza",'
+        '   abilita_background:"Atletica, Sopravvivenza",talento_origine:"Robusto",strumento:"Strumenti da fabbro"}),'
+        ' F("Ceneride",{categoria:"specie",taglia:"Media",velocita:"9 m",tratti:"Vedono al buio: scurovisione a 18 m."}),'
         ' F("Un luogo",{categoria:"luogo"})];'                                     # esclusa
         'global.app={vault:{getMarkdownFiles:()=>files.map(x=>x.f)},'
         ' metadataCache:{getFileCache:(f)=>({frontmatter:(files.find(x=>x.f===f)||{}).fm})}};'
@@ -1096,7 +1102,9 @@ def test_homebrew_bridge(tmp_path):
         ' mago:crea.incantesimiHomebrew("mago","Mago"),'
         ' chierico:crea.incantesimiHomebrew("chierico","Chierico"),'
         ' fusione:crea.fondiPool({"1":["Palla di fuoco"]},{"1":["Dardo arcano"],"0":["Tocco gelido"]}),'
-        ' talenti:Object.keys(sali.talentiHomebrew())};'
+        ' talenti:Object.keys(sali.talentiHomebrew()),'
+        ' bg:crea.backgroundHomebrew(opt).Cenerino,'
+        ' sp:crea.specieHomebrew().Ceneride};'
         'process.stdout.write(JSON.stringify(out));',
         encoding="utf-8")
     res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
@@ -1106,6 +1114,12 @@ def test_homebrew_bridge(tmp_path):
     assert out["chierico"] == {"1": ["Cura ferite"], "2": ["Eco senza scuola"]}
     assert out["fusione"]["1"] == ["Palla di fuoco", "Dardo arcano"] and out["fusione"]["0"] == ["Tocco gelido"]
     assert out["talenti"] == ["Maestro ombre"]                                     # talento attivo, no archiviata/luogo
+    # Background homebrew: label umane → id del motore (tollerante).
+    assert out["bg"]["punteggi_caratteristica"] == ["forza", "costituzione", "saggezza"]
+    assert out["bg"]["competenze_abilita"] == ["atletica", "sopravvivenza"]
+    assert out["bg"]["talento_origine"] == "Robusto" and out["bg"]["strumenti"] == "Strumenti da fabbro"
+    # Specie homebrew: taglia/velocità parsate, scurovisione dedotta dai tratti.
+    assert out["sp"]["taglia"] == "Media" and out["sp"]["velocita"] == 9 and out["sp"]["scurovisione"] is True
 
 
 @pytest.mark.skipif(not shutil.which("node"), reason="node assente")

@@ -13,8 +13,13 @@ templates:
   jinja: reference.md.j2
 subtypes:
 - background
+# Competenze in abilità concesse dal background (2024: 2 abilità). Campo-meccanica
+# che il ponte homebrew→motore (crea_pg) legge per renderlo giocabile.
+fields:
+  abilita_background: { label: Competenze in abilità, widget: text }
 scheda:
 - car_background
+- abilita_background
 - strumento
 - talento_origine
 creation:
@@ -23,6 +28,20 @@ creation:
     prompt: Tipo
     from: subtypes
     required: true
+  # Dati che rendono il background GIOCABILE (crea_pg li fonde nelle opzioni PG):
+  # caratteristiche per l'ASI, abilità competenti, talento d'origine, strumenti.
+  - field: car_background
+    prompt: 'Caratteristiche (es. Forza, Costituzione, Saggezza)'
+    optional: true
+  - field: abilita_background
+    prompt: 'Competenze in abilità (es. Atletica, Intimidire)'
+    optional: true
+  - field: talento_origine
+    prompt: "Talento d'origine (es. Robusto)"
+    optional: true
+  - field: strumento
+    prompt: Competenza in strumenti
+    optional: true
   body:
   - field: descrizione
     prompt: Chi era prima dell'avventura

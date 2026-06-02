@@ -48,7 +48,16 @@ creation:
     prompt: Tipo di specie
     from: subtypes
     required: true
+  # Dati che rendono la specie GIOCABILE (crea_pg li fonde nelle opzioni PG):
+  # taglia e velocità. Scurovisione e altri tratti si deducono dal testo Tratti.
+  - field: taglia
+    prompt: 'Taglia (es. Media, Piccola)'
+    optional: true
+  - field: velocita
+    prompt: 'Velocità in metri (es. 9)'
+    from: number
+    optional: true
   body:
   - field: tratti
-    prompt: Tratti di specie
+    prompt: Tratti di specie (scrivi "scurovisione" se la concede)
     heading: Tratti

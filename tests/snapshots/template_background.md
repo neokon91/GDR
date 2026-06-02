@@ -7,6 +7,7 @@
 > | **Tipo** | `VIEW[{tipo} ?? "—"]` |
 > | **Mondo** | `VIEW[{mondo}][text(renderMarkdown)]` |
 > | **Caratteristiche** | `VIEW[{car_background} ?? "—"]` |
+> | **Competenze in abilità** | `VIEW[{abilita_background} ?? "—"]` |
 > | **Competenza in strumenti** | `VIEW[{strumento} ?? "—"]` |
 > | **Talento d'origine** | `VIEW[{talento_origine} ?? "—"]` |
 > | **Stato** | `INPUT[stato][:stato]` |
@@ -16,6 +17,7 @@
 
 > [!abstract] Scheda
 > Caratteristiche: `INPUT[text:car_background]`
+> Competenze in abilità: `INPUT[text:abilita_background]`
 > Competenza in strumenti: `INPUT[text:strumento]`
 > Talento d'origine: `INPUT[text:talento_origine]`
 

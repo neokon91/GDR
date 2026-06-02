@@ -621,3 +621,24 @@ note:
       Esempio di incantesimo HOMEBREW collegato al motore: crea un PG **Mago** o
       **Stregone** con *Crea PG* e «Fiamma Cinerea» comparirà tra gli incantesimi
       selezionabili (livello 1), accanto a quelli del SRD.
+
+  # ------------------------------------------- BACKGROUND (homebrew demo del ponte)
+  - nome: Reduce delle Ceneri
+    categoria: background
+    tipo: background
+    fm:
+      car_background: "Costituzione, Saggezza, Forza"
+      abilita_background: "Sopravvivenza, Atletica"
+      talento_origine: "Robusto"
+      strumento: "Strumenti da erborista"
+    fatti:
+      - ["Caratteristiche", "Costituzione / Saggezza / Forza"]
+      - ["Abilità", "Sopravvivenza, Atletica"]
+      - ["Talento d'origine", "Robusto"]
+      - ["Natura", "Background HOMEBREW"]
+    lore: >-
+      Chi è sopravvissuto a una frattura della Voragine porta la cenere addosso e nei
+      polmoni: temprato, diffidente, abituato a dormire con un occhio aperto.
+    uso_al_tavolo: >-
+      Esempio di background HOMEBREW collegato al motore: comparirà tra i background
+      selezionabili in *Crea PG*, con le sue caratteristiche, abilità e talento applicati.
