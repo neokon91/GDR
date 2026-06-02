@@ -402,17 +402,18 @@ le fondamenta saranno rifinite. In ordine di valore:
 
 ## Come ripartire
 
-**210 test verdi**, check 0; HEAD `6484fde`. **Post-beta (tutto pushato)**: ponte Calendarium
+**212 test verdi**, check 0; HEAD `a9e27aa`. **Post-beta (tutto pushato)**: ponte Calendarium
 `73041f5` + aggancio FCG `e591a5d` (verificati in-app) + generatore homebrew IT `0b6e6ad` +
 FCG italianizzato `53e20b1` + solidità JS `a876bcc` + wire insidia `65b29b0` + wizard
-connetti-alla-creazione `16dc3ab` + connessione (inverse tipizzati in Collega + dashboard Rete
-del mondo) `51acb45` + **CSS feel-wiki** (infobox) `bc8f018` + **quick-ref maestrie armi 2024**
-`6f633f6` + **Bastioni 2024** (schema + ordini) `6484fde`. **Unica vera riserva beta rimasta:
-il mondo-esempio (blocco #1, rinviato).** *Mappe = **Zoom Map** (no Leaflet/Breadcrumbs, scelta
-utente). Residui 5.5e: maestrie mappa-per-arma + scelta in creazione PG (dati 2024 non nel SRD);
-Bastioni catalogo strutture + turno interattivo. Altri residui: (b) assi cosmici; inverse anche
-nel wizard; report gap copertura. **~10 feature post-beta con QA in-app PENDENTE** (computer-use
-disconnesso): tutti i flussi/rese runtime sopra. Tab-extra data-driven valutato e **non fatto**.*
+connetti-alla-creazione `16dc3ab` + connessione (inverse tipizzati + dashboard Rete del mondo)
+`51acb45` + CSS feel-wiki (infobox) `bc8f018` + Bastioni 2024 schema+ordini `6484fde` +
+**maestrie armi 2024** (mappa SRD `padronanza` + scelta in creazione PG; il dato ERA nel SRD)
+`d306d91` + **turno di bastione interattivo** (registro turni) `a9e27aa`. **Unica vera riserva
+beta rimasta: il mondo-esempio (blocco #1, rinviato).** *Mappe = **Zoom Map** (no Leaflet/
+Breadcrumbs, scelta utente). Residui: **catalogo strutture speciali Bastioni** (contenuto DMG,
+NON nel SRD → non fabbricato, serve fonte) + risoluzione automatica ordini; (b) assi cosmici;
+inverse anche nel wizard; report gap copertura. **~12 feature post-beta con QA in-app PENDENTE**
+(computer-use ORA riconnesso → QA eseguibile). Tab-extra data-driven valutato e **non fatto**.*
 Leggi questo file + i
 docs (`architecture`/`data_model`/`rules_layer`/`play_layer`/`plugin_contracts`) + la memoria
 (`project-northstar`, `vault-due-suite`). **Fasi 1-2 coperte + rifiniture** → prossimi:
