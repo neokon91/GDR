@@ -129,6 +129,13 @@ async function ask(tp, question, template, core) {
     }
     case "notes":
       return chooseNotes(tp, question, req);
+    case "number": {
+      // Campo numerico: prompt + coercizione (virgola decimale ammessa). Valore non
+      // numerico -> default se numerico, altrimenti "" (mai una stringa libera).
+      const raw = await tp.system.prompt(question.prompt, String(question.default ?? ""), req);
+      const n = Number(String(raw ?? "").trim().replace(",", "."));
+      return Number.isFinite(n) ? n : (Number.isFinite(Number(question.default)) ? Number(question.default) : "");
+    }
     default: {
       const v = await tp.system.prompt(question.prompt, question.default ?? "", req);
       return String(v ?? "").trim();

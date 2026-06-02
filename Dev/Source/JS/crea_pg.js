@@ -7,9 +7,28 @@
 // ID STABILI (non label). I derivati presentazionali (modificatori) li calcola
 // il template via Meta Bind. Script Templater autonomo: niente require.
 
+// Sentinella di annullamento: un suggester/prompt che torna null a metà wizard la
+// lancia; crea_pg() la cattura e degrada a una bozza valida (niente PG corrotto).
+const CANCEL = "__pg_annullato__";
+
 async function caricaOpzioni() {
-    const raw = await app.vault.adapter.read("z.automazioni/data/personaggio.json");
-    return JSON.parse(raw);
+    let raw;
+    try {
+        raw = await app.vault.adapter.read("z.automazioni/data/personaggio.json");
+    } catch (e) {
+        throw new Error("personaggio.json non trovato — rilancia la build del vault.");
+    }
+    try {
+        return JSON.parse(raw);
+    } catch (e) {
+        throw new Error("personaggio.json illeggibile (JSON non valido).");
+    }
+}
+
+// Frontmatter minimo ma VALIDO per il percorso di annullamento/errore: la nota
+// resta una bozza apribile, non un file con YAML rotto.
+function frontmatterBozza(nome) {
+    return `---\nnome: ${JSON.stringify(String(nome ?? ""))}\ncategoria: personaggio\ntipo: pg\nstato: bozza\n---\n`;
 }
 
 function mod(valore) {
@@ -45,6 +64,7 @@ async function assegnaArray(tp, caratteristiche, valori) {
         const scelta = await tp.system.suggester(
             disponibili.map(String), disponibili, false, `Assegna un valore a ${sigla(stat)}`
         );
+        if (scelta == null) throw new Error(CANCEL);  // Escape → annulla, non corrompere
         stats[stat] = scelta;
         disponibili.splice(disponibili.indexOf(scelta), 1);
     }
@@ -68,6 +88,7 @@ async function pointBuy(tp, caratteristiche, config) {
             opzioni.map(o => `${o.v} — costo ${o.costo} — restano ${punti - spesi - o.costo}`),
             opzioni, false, `Acquisto punti: ${sigla(stat)} (${punti - spesi} rimasti)`
         );
+        if (scelta == null) throw new Error(CANCEL);  // Escape → annulla (evita scelta.v su null)
         stats[stat] = scelta.v;
         spesi += scelta.costo;
     }
@@ -106,6 +127,7 @@ async function applicaAumentoBackground(tp, stats, bg, opt) {
         const stat = await tp.system.suggester(
             disponibili.map(sigla), disponibili, false, `Assegna +${valore}`
         );
+        if (stat == null) throw new Error(CANCEL);  // Escape → annulla, non rimuovere a caso
         stats[stat] = (stats[stat] ?? 10) + valore;
         disponibili.splice(disponibili.indexOf(stat), 1);
     }
@@ -363,12 +385,9 @@ stato: bozza
 `;
 }
 
-async function crea_pg(tp) {
-    const opt = await caricaOpzioni();
-
-    const nome = await tp.system.prompt("Nome del personaggio");
-    await tp.file.move(`Mondi/Personaggi/${nomeFile(nome)}`);
-
+// Costruisce il frontmatter del PG dalle scelte del wizard. Un annullamento a metà
+// (suggester→null) lancia CANCEL, gestito da crea_pg(); qui restano solo le regole.
+async function costruisciPG(tp, opt, nome) {
     // Opzioni SRD fuse con l'homebrew del vault (ponte homebrew→motore): classe,
     // specie e background homebrew diventano selezionabili accanto a quelli SRD.
     const classiOpt = { ...opt.classi, ...classeHomebrew(opt) };
@@ -464,6 +483,29 @@ async function crea_pg(tp) {
         talenti: talentoOrigine ? [talentoOrigine] : [],
         padronanze_armi,
     });
+}
+
+// Wrapper: chiede nome, sposta la nota, poi costruisce il PG. Qualsiasi errore o
+// annullamento → Notice + bozza VALIDA (mai un PG con frontmatter corrotto).
+async function crea_pg(tp) {
+    let opt;
+    try {
+        opt = await caricaOpzioni();
+    } catch (e) {
+        new Notice(String((e && e.message) || e));
+        return frontmatterBozza("");
+    }
+    const nome = await tp.system.prompt("Nome del personaggio");
+    await tp.file.move(`Mondi/Personaggi/${nomeFile(nome)}`);
+    try {
+        return await costruisciPG(tp, opt, nome);
+    } catch (e) {
+        const msg = String((e && e.message) || e);
+        new Notice(msg === CANCEL
+            ? "Creazione PG annullata — completa la scheda a mano o elimina la nota."
+            : `Creazione PG interrotta: ${msg}`);
+        return frontmatterBozza(nome);
+    }
 }
 
 module.exports = crea_pg;

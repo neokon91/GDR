@@ -353,6 +353,35 @@ def test_crea_personaggio_caster_e2e(tmp_path):
 
 
 @pytest.mark.skipif(not shutil.which("node"), reason="node assente")
+def test_crea_pg_annullamento(tmp_path):
+    """crea_pg.js: un Escape (suggester→null) a metà NON crasha né scrive un PG
+    corrotto — degrada a una bozza VALIDA con Notice."""
+    import build_personaggio
+    pj = tmp_path / "personaggio.json"
+    pj.write_text(json.dumps(build_personaggio.build_personaggio_options(CORE), ensure_ascii=False), encoding="utf-8")
+    harness = tmp_path / "annulla.js"
+    harness.write_text(
+        'const fs=require("fs");'
+        f'const data=fs.readFileSync({json.dumps(str(pj))},"utf8");'
+        'let avvisato=false; global.Notice=class{constructor(m){avvisato=true;}};'
+        'global.app={ vault:{ adapter:{ read: async()=>data } } };'
+        # Sceglie array_standard come metodo, poi annulla (null) all'assegnazione valori.
+        'const tp={ system:{ prompt: async()=>"PG Annullato",'
+        ' suggester: async(l,v,_f,title)=> String(title||"").startsWith("Metodo") ? "array_standard" : null },'
+        ' file:{ move: async()=>{} } };'
+        f'require({json.dumps(str(render.JS_DIR / "crea_pg.js"))})(tp)'
+        '.then(fm=>process.stdout.write(JSON.stringify({fm, avvisato})));',
+        encoding="utf-8")
+    res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
+    assert res.returncode == 0, res.stderr  # nessun crash
+    out = json.loads(res.stdout)
+    assert out["avvisato"] is True  # Notice mostrata
+    fm = yaml.safe_load(out["fm"].split("---")[1])  # YAML valido
+    assert fm["categoria"] == "personaggio" and fm["tipo"] == "pg" and fm["stato"] == "bozza"
+    assert "pf" not in fm and "destrezza" not in fm  # nessun dato meccanico corrotto/parziale
+
+
+@pytest.mark.skipif(not shutil.which("node"), reason="node assente")
 def test_profilo_match(tmp_path):
     """views.archetipiMatch: una combinazione di valori-assi attiva l'archetipo
     atteso (teocrazia su 'culto' con struttura/legalità alti), sui dati reali."""
