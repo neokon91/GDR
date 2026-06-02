@@ -7,7 +7,7 @@ la **cronistoria** dettagliata vive nelle memorie di progetto. Qui: dove siamo e
 
 ## Stato (2026-06-02)
 
-`origin/main`, **246 test**, check 0. Pipeline matura: sorgenti YAML/Jinja/JS → `render.py`
+`origin/main`, **247 test**, check 0. Pipeline matura: sorgenti YAML/Jinja/JS → `render.py`
 → vault Obsidian (+ sito giocatori opzionale). Mondo-esempio **Valdombra** popolato.
 
 **Verdetto 4-lenti** (analisi fresca, tarata sui competitor — World Anvil/Kanka/LegendKeeper/
@@ -28,11 +28,11 @@ Pronto per **beta chiuso**. Per la beta aperta restano i punti PM qui sotto.
   **loop di sessione 2024** (Esaurimento, Dadi Vita, riposo breve/lungo, concentrazione 🌀);
   incantesimi inline, condizioni, maestrie armi; **encounter** budget XP 2024 + auto-riscrittura
   + **alleati** (`ally`); clock/Fronti; **ponte homebrew→motore** (incantesimi/talenti/background/
-  specie/classe giocabili); **tiri Dice Roller col bonus reale** sulla scheda PG.
+  specie/classe/**sottoclasse** giocabili); **tiri Dice Roller col bonus reale** sulla scheda PG.
 - **Onboarding & condivisione** — mondo-esempio Valdombra; **on-ramp Home** (6 tipi primari,
   metafisica opt-in); LEGGIMI di distribuzione; **sito dei giocatori** statico spoiler-free
   (`npm run site`, `visibilita: dm`).
-- **Solidità** — 246 test (snapshot + e2e JS + rules-engine), validazione del contratto
+- **Solidità** — 247 test (snapshot + e2e JS + rules-engine), validazione del contratto
   YAML↔wizard, anti-drift byte-equal (`_comparators.js`/`_homebrew_bridge.js`), merge config
   `.obsidian` non distruttivo, mondo-esempio rigenerato a ogni build.
 
@@ -49,8 +49,8 @@ Pronto per **beta chiuso**. Per la beta aperta restano i punti PM qui sotto.
   a tappe con spunti suggeriti (accoglienza che oggi manca rispetto a World Anvil).
 
 ### 5.5e / DM (completare l'esperienza di sessione)
-- **Sottoclasse homebrew** — dichiarabile/giocabile in `sali_pg` + `privilegi_l1` della classe
-  homebrew (si fa modificando `_homebrew_bridge.js` e risincronizzando le copie).
+- ✅ **Sottoclasse homebrew** — `sali_pg` offre le sottoclassi homebrew del vault al
+  `livello_sottoclasse`; `privilegi_l1` della classe homebrew applicati in `crea_pg`. (FATTO)
 - **Override HP/CA inline** negli incontri (`- N: Nome, HP, CA, init`) per boss/gregari ed
   encounter ripetibili — serve una fonte-dato per-creatura nell'incontro.
 - **Maestrie per-arma applicate** ai tiri d'attacco (la mappa arma→proprietà c'è già).
@@ -81,7 +81,7 @@ Pronto per **beta chiuso**. Per la beta aperta restano i punti PM qui sotto.
 
 ## QA in-app (igiene continua, rischio #1)
 
-I 246 test coprono la *generazione*, non il *rendering runtime* dei plugin: ogni QA in-app ha
+I 247 test coprono la *generazione*, non il *rendering runtime* dei plugin: ogni QA in-app ha
 storicamente trovato bug reali.
 - **Verificato**: dashboard popolate, note (infobox/callout/clock), Esaurimento + Riposo lungo,
   `renderSpecieTratti`, wizard *Crea PG*, statblock 5.5e/5e, Meta Bind/Dataview/Calendarium/Tasks;
@@ -96,6 +96,6 @@ storicamente trovato bug reali.
 ## Come ripartire
 
 Leggi questo file + i doc tecnici + le memorie (`audit-2026-competitor`, `geografia-timeline`,
-`project-northstar`). Candidato naturale appena torna computer-use: **QA in-app** del blocco
-recente; poi, a scelta, **sottoclasse homebrew** o un punto **PM** (distribuzione / rivelazione
-progressiva / onboarding guidato).
+`project-northstar`). Il blocco recente è implementato **e** verificato in-app. Candidati
+prossimi, a scelta: un punto **PM** (rivelazione progressiva ai giocatori / onboarding guidato),
+l'**importer Azgaar** (cantiere worldbuilding), o la **memoria-di-campagna AI locale** (frontiera).
