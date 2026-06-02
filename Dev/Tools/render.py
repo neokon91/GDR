@@ -288,9 +288,14 @@ def write_calendarium(obsidian: Path) -> None:
     così quando si attiva un calendario gli eventi datati vi compaiono soli. La
     DEFINIZIONE del calendario (mesi/ere/lune) è contenuto per-mondo: si crea una
     volta in-app dai preset di Calendarium (opt-in), non la cabla la pipeline."""
+    # NB parseDates=False (CRITICO): nel plugin questo flag è "usa il NOME DEL FILE
+    # come data" (main.js: new Parser(cal, getData().parseDates) -> useFilenameForEvents).
+    # Con True, ogni nota SENZA fc-date prova a interpretare il proprio basename come
+    # data -> "valid year: NaN" a raffica (×ogni nota SRD). Off: le note con fc-date
+    # compaiono lo stesso (la data si legge da fc-date), le altre vengono ignorate.
     merge_plugin_config(obsidian, "calendarium", {
         "autoParse": True,
-        "parseDates": True,
+        "parseDates": False,
         "eventFrontmatter": True,
         "inlineEventsTag": "#cronologia",
     })
