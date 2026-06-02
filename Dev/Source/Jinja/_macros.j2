@@ -182,6 +182,8 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 
 {{ profilo() }}
 {% endif %}
+
+{{ coerenza() }}
 {% endif %}
 {%- endmacro %}
 
@@ -196,6 +198,15 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 
 > [!tip] Profilo
 > Assegna i tag coerenti derivati dagli assi: `BUTTON[applica-profilo]`
+{%- endmacro %}
+
+{# Coerenza tematica (JS Engine): confronta gli assi della nota con quelli delle
+   entità collegate (assi con lo stesso id) e fa emergere le tensioni notevoli —
+   contrasti forti, rivali dal profilo identico. Spunti narrativi. renderCoerenza. #}
+{% macro coerenza() -%}
+```js-engine
+return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderCoerenza");
+```
 {%- endmacro %}
 
 {# Scheda di sistema: campi STRUTTURATI per categoria (core.scheda) come callout

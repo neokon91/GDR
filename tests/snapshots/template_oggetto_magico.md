@@ -98,6 +98,10 @@
 return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "oggetto", component);
 ```
 
+```js-engine
+return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderCoerenza");
+```
+
 --- Collegamenti
 
 > [!example] Relazioni

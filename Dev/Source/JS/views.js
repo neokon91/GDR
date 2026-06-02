@@ -310,6 +310,70 @@ async function renderProfilo(app, page) {
   return `> [!abstract] Profilo (derivato dagli assi)\n> ${nomi}\n>\n> ${tags}`;
 }
 
+// --- Coerenza tematica: tensioni fra entità collegate sugli assi condivisi -----
+// Confronta i valori-assi di due entità sugli assi con lo STESSO id presenti in
+// entrambe (stesso tipo → tutti; cross-tipo → quelli che coincidono, es. culto e
+// fazione condividono struttura/legalità). Ritorna, per asse condiviso con valore
+// numerico in entrambe, distanza ed etichette (dalle valori dell'asse sorgente).
+function confrontoAssi(page, target, axesPage, axesTarget) {
+  const idsTarget = new Set((axesTarget || []).map((a) => a.id));
+  const out = [];
+  for (const a of axesPage || []) {
+    if (!idsTarget.has(a.id)) continue;
+    const va = Number(page[a.id]); const vb = Number(target[a.id]);
+    if (!Number.isFinite(va) || !Number.isFinite(vb)) continue;
+    out.push({
+      id: a.id, nome: a.nome, dist: Math.abs(va - vb),
+      etA: ((a.valori || {})[va] || {}).etichetta || String(va),
+      etB: ((a.valori || {})[vb] || {}).etichetta || String(vb),
+    });
+  }
+  return out;
+}
+
+// Note di coerenza (PROMPT, non errori) da un confronto e dal tipo di relazione:
+// - contrasto forte: un asse condiviso a distanza ≥3 = opposizione netta (top 2);
+// - specchio: un `rivali` dal profilo quasi identico (tutti gli assi ≤1). Esposto.
+function coerenzaNote(rel, target, cmp) {
+  if (!cmp.length) return [];
+  const note = [];
+  const forti = cmp.filter((c) => c.dist >= 3).sort((a, b) => b.dist - a.dist).slice(0, 2);
+  for (const c of forti) {
+    const frame = rel.field === "alleati" ? "alleati ma lontani" : "tensione";
+    note.push(`🎭 ${noteLink(target)} — ${c.nome}: ${c.etA} ↔ ${c.etB} *(${frame})*`);
+  }
+  if (rel.field === "rivali" && cmp.every((c) => c.dist <= 1)) {
+    note.push(`🪞 ${noteLink(target)} — rivale dal profilo quasi identico: l'attrito è di potere o territorio, non di natura?`);
+  }
+  return note;
+}
+
+// Pannello "Coerenza tematica": per i collegamenti tipizzati dell'entità, fa
+// emergere le tensioni notevoli sugli assi condivisi (contrasti forti, rivali-
+// specchio). Spunti narrativi, non lint rigido: le tensioni sono il sale del mondo.
+async function renderCoerenza(app, dv, page) {
+  if (!dv || !page || !page.categoria) return "";
+  const core = await loadCoreData(app);
+  const axesPage = axesFor(core, text(page.categoria));
+  if (!axesPage.length) return "";
+  const rels = (core.relazioni || {})[text(page.categoria)] || [];
+  const note = [];
+  const seen = new Set();
+  for (const rel of rels) {
+    for (const link of asArray(page[rel.field])) {
+      const target = resolve(dv, link);
+      if (!target || !target.file || seen.has(target.file.path)) continue;
+      const cmp = confrontoAssi(page, target, axesPage, axesFor(core, text(target.categoria)));
+      const n = coerenzaNote(rel, target, cmp);
+      if (n.length) { seen.add(target.file.path); note.push(...n); }
+    }
+  }
+  if (!note.length) {
+    return "> [!check]- 🎭 Coerenza tematica\n> Nessuna tensione notevole coi collegamenti (profili compatibili o assi non condivisi).";
+  }
+  return "> [!check]- 🎭 Coerenza tematica (spunti, non errori)\n" + note.map((n) => "> - " + n).join("\n");
+}
+
 // --- Clock & conseguenze: orologio a segmenti (progress-clock) ---------------
 // SVG di un orologio a N segmenti, i primi `filled` pieni. Nessuna dipendenza.
 function clockSvg(n, filled) {
@@ -1062,6 +1126,7 @@ module.exports = {
   renderEntityPanel, renderSessionPanel, renderBacklinks,
   renderAxesRadar, renderAxesCompare, radarSvg, clampAxis,
   renderProfilo, archetipiMatch, profiloTags, matchesCond,
+  renderCoerenza, confrontoAssi, coerenzaNote,
   renderClock, clockSvg,
   renderEncounter, xpForCreature,
   renderProgressione,

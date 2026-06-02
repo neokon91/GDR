@@ -21,7 +21,9 @@ Pronto per **beta chiuso**. Per la beta aperta restano i punti PM qui sotto.
 ## Fatto (consolidato)
 
 - **Modello di mondo** — 37 categorie (classificazione `famiglia`+`tipo`), relazioni tipizzate
-  con inversi auto-derivati, assi tematici 1-5 (radar/archetipi), **economia/risorse**,
+  con inversi auto-derivati, assi tematici 1-5 (radar/archetipi, **preset famiglia→assi**,
+  **motore di coerenza** `renderCoerenza` che fa emergere le tensioni tematiche fra entità
+  collegate — contrasti forti, rivali-specchio), **economia/risorse**,
   **geografia** (coord/confini/distanza/viaggio), **timeline causale**, **alberi evolutivi**
   (progressioni lore ramificate), **Fronti reattivi al grafo** (econ/geo **e cosmico**: un
   principio cosmico-Fronte è spinto dai suoi siti di manifestazione in crisi e dai dipendenti

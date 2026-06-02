@@ -1526,6 +1526,33 @@ def test_render_pressioni_cosmico(tmp_path):
 
 
 @pytest.mark.skipif(not shutil.which("node"), reason="node assente")
+def test_coerenza_tematica(tmp_path):
+    """views.confrontoAssi + coerenzaNote: confronto su assi con lo STESSO id e note
+    (contrasto forte ≥3 = tensione; rivale-specchio = tutti gli assi ≤1)."""
+    harness = tmp_path / "coer.js"
+    harness.write_text(
+        'const fs=require("fs");'
+        f'const src=fs.readFileSync({json.dumps(str(render.JS_DIR / "views.js"))},"utf8");'
+        'const m={exports:{}};new Function("module","exports",src)(m,m.exports);'
+        'const axes=[{id:"struttura",nome:"Struttura",valori:{1:{etichetta:"Orizzontale"},5:{etichetta:"Piramidale"}}},'
+        ' {id:"legalita",nome:"Legalita",valori:{4:{etichetta:"Legale"}}}];'
+        'const tg=(n,ex)=>Object.assign({file:{name:n,path:n+".md"}},ex);'
+        'const c1=m.exports.confrontoAssi({struttura:5,legalita:4},tg("Ribelli",{struttura:1,legalita:4}),axes,axes);'
+        'const c2=m.exports.confrontoAssi({struttura:5,legalita:4},tg("Gemello",{struttura:5,legalita:4}),axes,axes);'
+        'process.stdout.write(JSON.stringify({'
+        'c1:c1, tens:m.exports.coerenzaNote({field:"alleati"},tg("Ribelli"),c1),'
+        'mirror:m.exports.coerenzaNote({field:"rivali"},tg("Gemello"),c2)}));',
+        encoding="utf-8")
+    res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
+    assert res.returncode == 0, res.stderr
+    out = json.loads(res.stdout)
+    strutt = next(c for c in out["c1"] if c["id"] == "struttura")
+    assert strutt["dist"] == 4                                       # 5 vs 1 → distanza 4
+    assert any("Struttura" in n and "Piramidale ↔ Orizzontale" in n and "alleati ma lontani" in n for n in out["tens"])
+    assert any("profilo quasi identico" in n for n in out["mirror"])  # rivale-specchio
+
+
+@pytest.mark.skipif(not shutil.which("node"), reason="node assente")
 def test_avanza_fronte(tmp_path):
     """meta_actions.avanza_fronte: clock +1 con cap a clock_dim; senza clock_dim no-op."""
     harness = tmp_path / "av.js"

@@ -175,6 +175,10 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > [!tip] Profilo
 > Assegna i tag coerenti derivati dagli assi: `BUTTON[applica-profilo]`
 
+```js-engine
+return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderCoerenza");
+```
+
 --- Collegamenti
 
 > [!example] Relazioni

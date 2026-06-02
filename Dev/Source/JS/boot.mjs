@@ -67,6 +67,7 @@ const PANELS = {
   renderMaestrie: { mode: "md", args: (a) => [a] },
   renderAttacchi: { mode: "md", args: (a, d) => [a, d.page] },
   renderAlbero: { mode: "md", args: (a, d) => [a, d.page] },
+  renderCoerenza: { mode: "md", args: (a, d) => [a, d.dv, d.page] },
   renderTimeline: { mode: "md", args: (a, d) => [a, d.dv] },
   renderClock: { mode: "dom", args: (a, d, cont) => [cont, a, d.page] },
   renderAxesCompare: { mode: "dom", args: (a, d, cont) => [cont, a, d.dv, d.page] },
