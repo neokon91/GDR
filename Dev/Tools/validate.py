@@ -429,6 +429,24 @@ def check() -> int:
                 elif block != canonical:
                     errors.append(f"{js_name}: matchesCond diverge da _comparators.js (sorgente unica) — risincronizza")
 
+    # JS — anti-drift del PONTE HOMEBREW: le funzioni condivise (note del vault →
+    # opzioni SRD) hanno UNA sorgente canonica (_homebrew_bridge.js); crea_pg.js e
+    # sali_pg.js (autonomi, niente require) ne tengono una COPIA fra i marker
+    # >>>homebrew-bridge/<<<homebrew-bridge. Impongo l'uguaglianza così creazione e
+    # level-up non possono usare regole homebrew divergenti (es. lavorando su sottoclasse).
+    bridge_path = JS_DIR / "_homebrew_bridge.js"
+    if bridge_path.is_file():
+        bridge = marked_block(bridge_path.read_text(encoding="utf-8"), "homebrew-bridge")
+        if bridge is None:
+            errors.append("_homebrew_bridge.js: blocco homebrew-bridge fra i marker mancante")
+        else:
+            for js_name in ("crea_pg.js", "sali_pg.js"):
+                block = marked_block((JS_DIR / js_name).read_text(encoding="utf-8"), "homebrew-bridge")
+                if block is None:
+                    errors.append(f"{js_name}: blocco homebrew-bridge fra i marker // >>>homebrew-bridge/<<<homebrew-bridge mancante")
+                elif block != bridge:
+                    errors.append(f"{js_name}: ponte homebrew diverge da _homebrew_bridge.js (sorgente unica) — risincronizza")
+
     # Ogni field('<id>') usato nei Jinja deve esistere nel registro core.fields.
     # I partial (_*.j2) definiscono le macro, non le usano: vanno esclusi.
     for path in sorted(JINJA_DIR.glob("*.j2")):

@@ -1005,6 +1005,18 @@ def test_comparators_single_source():
         assert block == canonical, f"{name}: matchesCond diverge dalla sorgente canonica _comparators.js"
 
 
+def test_homebrew_bridge_single_source():
+    """Il ponte homebrew ha una sorgente canonica (_homebrew_bridge.js); le copie in
+    crea_pg.js e sali_pg.js coincidono byte-a-byte — così creazione e level-up non
+    possono divergere sulle regole homebrew (anti-drift imposto anche da check())."""
+    import validate as _v
+    canonical = _v.marked_block((render.JS_DIR / "_homebrew_bridge.js").read_text(encoding="utf-8"), "homebrew-bridge")
+    assert canonical, "blocco canonico homebrew-bridge mancante in _homebrew_bridge.js"
+    for name in ("crea_pg.js", "sali_pg.js"):
+        block = _v.marked_block((render.JS_DIR / name).read_text(encoding="utf-8"), "homebrew-bridge")
+        assert block == canonical, f"{name}: ponte homebrew diverge dalla sorgente canonica _homebrew_bridge.js"
+
+
 @pytest.mark.skipif(not shutil.which("node"), reason="node assente")
 def test_famiglia_preset(tmp_path):
     """create_entity.famigliaPreset: la famiglia col campo 'assi' pre-compila i

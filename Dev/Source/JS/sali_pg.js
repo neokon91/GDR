@@ -11,20 +11,34 @@ function mod(v) { const n = Number.parseInt(v, 10); return Math.floor(((Number.i
 function pfPerLivello(dado) { return Math.floor((Number(dado) || 8) / 2) + 1; } // media fissa (PHB)
 function sigla(s) { return String(s).charAt(0).toUpperCase() + String(s).slice(1); }
 
-// --- Ponte HOMEBREW→motore (copie gemelle di crea_pg.js: script autonomi) -----
-// Note del vault per categoria → frontmatter (vuoto fuori da Obsidian: test).
-function vaultByCategoria(cat) {
+// --- Ponte HOMEBREW→motore (note del vault fuse nelle opzioni SRD a runtime) ---
+// Le 8 funzioni nel blocco qui sotto sono una COPIA byte-identica di
+// Dev/Source/JS/_homebrew_bridge.js (sorgente canonica), condivisa con l'altro
+// wizard PG; check() ne impone l'uguaglianza. Le funzioni file-specifiche restano
+// FUORI dal blocco.
+// >>>homebrew-bridge
+// noteVault: note del vault per categoria → [{f, fm}]. Vuoto fuori da Obsidian
+// (test: niente getMarkdownFiles) → l'homebrew non c'è e il motore resta quello SRD.
+function noteVault(cat) {
   if (!app.vault || !app.vault.getMarkdownFiles) return [];
   return app.vault.getMarkdownFiles()
     .map(f => ({ f, fm: (app.metadataCache.getFileCache(f) || {}).frontmatter || {} }))
     .filter(e => e.fm.categoria === cat && e.fm.stato !== "archiviata");
 }
-// Incantesimi homebrew per la classe → {livello:[nomi]} (classi che citano la classe
-// o vuote; livello mancante → 1). Da fondere col pool SRD.
+function normTxt(s) {
+  return String(s == null ? "" : s).normalize("NFD").replace(/[̀-ͯ]/g, "").trim().toLowerCase();
+}
+// "Forza, Destrezza" → ["forza","destrezza"] via mappa label→id (salta i non riconosciuti).
+function toIds(testo, labelToId) {
+  const raw = Array.isArray(testo) ? testo.join(",") : String(testo || "");
+  return raw.split(/[,;]/).map(x => labelToId[normTxt(x)]).filter(Boolean);
+}
+// Incantesimi homebrew per la classe → {livello:[nomi]}. Una nota conta se le sue
+// `classi` citano la classe (id o label) o sono vuote (= a tutti). livello → 1 se assente.
 function incantesimiHomebrew(classeId, classeLabel) {
   const want = [String(classeId || ""), String(classeLabel || "")].map(s => s.toLowerCase()).filter(Boolean);
   const pool = {};
-  for (const { f, fm } of vaultByCategoria("incantesimo")) {
+  for (const { f, fm } of noteVault("incantesimo")) {
     const classi = (Array.isArray(fm.classi) ? fm.classi.join(",") : String(fm.classi || "")).toLowerCase();
     if (classi && !want.some(w => w && classi.includes(w))) continue;
     const n = Number.parseInt(fm.livello, 10);
@@ -33,6 +47,7 @@ function incantesimiHomebrew(classeId, classeLabel) {
   }
   return pool;
 }
+// Fonde due pool {livello:[nomi]} senza duplicati (SRD + homebrew).
 function fondiPool(a, b) {
   const out = {};
   for (const src of [a || {}, b || {}])
@@ -40,37 +55,27 @@ function fondiPool(a, b) {
       out[L] = Array.from(new Set([...(out[L] || []), ...nomi]));
   return out;
 }
-// Talenti homebrew → {nome:{label:nome}}, da fondere con opt.talenti (SRD).
-function talentiHomebrew() {
-  const out = {};
-  for (const { f } of vaultByCategoria("talento")) out[f.basename] = { label: f.basename };
-  return out;
-}
-function normTxt(s) {
-  return String(s == null ? "" : s).normalize("NFD").replace(/[̀-ͯ]/g, "").trim().toLowerCase();
-}
-function toIds(testo, labelToId) {
-  const raw = Array.isArray(testo) ? testo.join(",") : String(testo || "");
-  return raw.split(/[,;]/).map(x => labelToId[normTxt(x)]).filter(Boolean);
-}
+// Categorie d'armatura indossabili dal testo (come build_personaggio._armor_categories).
 function armorCats(prose) {
   const n = normTxt(prose);
   return [["leggera", "legger"], ["media", "medi"], ["pesante", "pesant"], ["scudo", "scud"]]
     .filter(([, k]) => n.includes(k)).map(([c]) => c);
 }
+// "A: ...; oppure B: ..." → {A, B}; senza B → {A: tutto}.
 function parseEquip(prose) {
   const t = String(prose || "").replace(/\s+/g, " ").trim();
   if (!t) return {};
   const m = t.match(/^\s*A\s*:\s*(.*?)\s*(?:;?\s*oppure\s*|;\s*)B\s*:\s*(.*)$/i);
   return m ? { A: m[1].trim(), B: m[2].trim() } : { A: t };
 }
-// Classe homebrew → opzione nella forma del motore (copia gemella di crea_pg.js).
-// sali_pg ne usa dado_vita, tipo_incantatore (slot al level-up dalle tabelle SRD) e
-// incantesimi_pool; competenza/ASI sono derivati standard (niente progressione SRD).
+// Classe homebrew → opzione nella forma del motore. I caster (tipo_incantatore
+// pieno/mezzo) ricevono gli slot dalle tabelle SRD (opt.slot_incantatore) e il pool
+// dagli incantesimi homebrew. crea_pg usa tutto; sali_pg usa dado_vita/tipo_incantatore/
+// incantesimi_pool (competenza/ASI standard, niente progressione SRD).
 function classeHomebrew(opt) {
   const statMap = {}; for (const id of opt.caratteristiche || []) statMap[normTxt(id)] = id;
   const out = {};
-  for (const { f, fm } of vaultByCategoria("classe")) {
+  for (const { f, fm } of noteVault("classe")) {
     const tipoInc = normTxt(fm.tipo_incantatore);
     const caster = tipoInc === "pieno" || tipoInc === "mezzo";
     const tab = (opt.slot_incantatore || {})[tipoInc] || [];
@@ -96,6 +101,14 @@ function classeHomebrew(opt) {
       padronanza_armi: 0,
     };
   }
+  return out;
+}
+// <<<homebrew-bridge
+
+// Talenti homebrew → {nome:{label:nome}}, da fondere con opt.talenti (SRD).
+function talentiHomebrew() {
+  const out = {};
+  for (const { f } of noteVault("talento")) out[f.basename] = { label: f.basename };
   return out;
 }
 
