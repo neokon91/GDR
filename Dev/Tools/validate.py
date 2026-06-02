@@ -199,6 +199,11 @@ def validate_entity_schema(entities: list[dict[str, Any]]) -> list[str]:
         if not cond:
             errors.append(msg)
 
+    # `from` ammessi nei wizard (create_entity.js): allinea YAML↔JS. None = prompt
+    # testo libero (ramo default). Un valore ignoto degraderebbe in silenzio in-app.
+    VALID_FROM = {None, "subtypes", "list", "notes", "number"}
+    entity_ids = {e.get("id") for e in entities}
+
     for entity in entities:
         eid = entity.get("id", "?")
         need(isinstance(entity.get("id"), str), f"entity {eid}: 'id' non è stringa")
@@ -227,6 +232,15 @@ def validate_entity_schema(entities: list[dict[str, Any]]) -> list[str]:
         need(isinstance(creation, dict), f"entity {eid}: 'creation' non è mappa")
         for question in (creation.get("fields", []) or []) + (creation.get("body", []) or []):
             need("field" in question and "prompt" in question, f"entity {eid}: domanda wizard senza field/prompt")
+            fid = question.get("field", "?")
+            frm = question.get("from")
+            need(frm in VALID_FROM, f"entity {eid}: campo '{fid}' usa from '{frm}' non gestito da create_entity.js")
+            need(not (frm == "list" and not question.get("options")),
+                 f"entity {eid}: campo '{fid}' from:list senza 'options'")
+            need(not (frm == "notes" and question.get("category") not in entity_ids),
+                 f"entity {eid}: campo '{fid}' from:notes con category '{question.get('category')}' inesistente")
+            need(not ({"required", "optional"} <= set(question)),
+                 f"entity {eid}: campo '{fid}' dichiara sia 'required' sia 'optional' (ambiguo)")
     return errors
 
 
@@ -279,6 +293,12 @@ def validate_aux_yaml() -> list[str]:
         for e in astro.get("elementi", []) or []:
             if not (isinstance(e, dict) and e.get("nome")):
                 errors.append(f"astrologia: elemento {e} senza nome")
+        # Coerenza: ogni segno.elemento deve esistere fra gli elementi (un refuso
+        # qui rompe il lookup di renderTemaNatale in silenzio, tema natale parziale).
+        elem_names = {e.get("nome") for e in astro.get("elementi", []) or [] if isinstance(e, dict)}
+        for s in astro.get("segni", []) or []:
+            if isinstance(s, dict) and s.get("elemento") and s.get("elemento") not in elem_names:
+                errors.append(f"astrologia: segno '{s.get('nome')}' elemento '{s.get('elemento')}' non fra gli elementi")
         for a in astro.get("arcani", []) or []:
             if not (isinstance(a, dict) and a.get("nome")):
                 errors.append(f"astrologia: arcano {a} senza nome")
@@ -319,13 +339,23 @@ def validate_aux_yaml() -> list[str]:
     # pg_rules.yaml -> build_personaggio (rules-engine PG: metodi car., ASI bg, CA, lingue).
     pg = load("pg_rules.yaml")
     if pg:
-        if not (pg.get("generazione_caratteristiche") or {}).get("metodi"):
+        metodi = (pg.get("generazione_caratteristiche") or {}).get("metodi") or {}
+        if not metodi:
             errors.append("pg_rules: generazione_caratteristiche.metodi assente")
+        # Chiavi aritmetico-critiche lette dai wizard (pointBuy/assegnaArray): un
+        # refuso qui non lancia, dà point-buy "gratis" o array vuoto, in silenzio.
+        pb = metodi.get("point_buy") or {}
+        if pb and not isinstance(pb.get("costi"), dict):
+            errors.append("pg_rules: point_buy.costi assente o non è una mappa")
+        arr = metodi.get("array_standard") or {}
+        if arr and not isinstance(arr.get("valori"), list):
+            errors.append("pg_rules: array_standard.valori assente o non è una lista")
         if not (pg.get("aumento_background") or {}).get("schemi"):
             errors.append("pg_rules: aumento_background.schemi assente")
         for aid, arm in (pg.get("armature") or {}).items():
-            if not (isinstance(arm, dict) and arm.get("label") and arm.get("categoria") and "ca_base" in arm):
-                errors.append(f"pg_rules: armatura '{aid}' senza label/categoria/ca_base")
+            if not (isinstance(arm, dict) and arm.get("label") and arm.get("categoria")
+                    and "ca_base" in arm and "dex_max" in arm):
+                errors.append(f"pg_rules: armatura '{aid}' senza label/categoria/ca_base/dex_max")
         lingue = pg.get("lingue") or {}
         if not (lingue.get("standard") and lingue.get("numero_a_scelta") is not None):
             errors.append("pg_rules: lingue senza standard/numero_a_scelta")
