@@ -539,34 +539,43 @@ function epocaLabel(dv, link) {
   return text(link).replace(/\[\[|\]\]/g, "").split("|")[0].trim();
 }
 
-// Linea del tempo navigabile: tutti gli eventi raggruppati per epoca (callout
-// pieghevole), ordinati per 'quando'; le epoche si ordinano per 'inizio' (poi per
-// primo evento), "Senza epoca" in fondo. Ritorna markdown (i [[link]] si rendono).
-// La pagina Cronologia la mostra in cima, con la tabella sotto come dettaglio.
+// Linea del tempo navigabile: eventi E tappe delle entità durature (📜, il mondo
+// che evolve) raggruppati per epoca (callout pieghevole), ordinati per 'quando';
+// le epoche si ordinano per 'inizio' (poi per primo item), "Senza epoca" in fondo.
+// Ritorna markdown (i [[link]] si rendono). La pagina Cronologia la mostra in cima.
 async function renderTimeline(app, dv, page) {
   if (!dv) return "*Dataview non attivo.*";
-  const eventi = dv.pages()
-    .where((p) => p && text(p.categoria) === "evento" && text(p.stato) !== "archiviata")
-    .array();
-  if (!eventi.length) {
-    return "> [!info] Nessun evento\n> Crea un **Evento** (campo *Quando* + un'*Epoca*) per popolare la linea del tempo.";
-  }
   const eraInfo = {};
   for (const ep of dv.pages().where((p) => p && text(p.categoria) === "epoca").array()) {
     if (ep.file) eraInfo[ep.file.name] = { inizio: ep.inizio, fine: ep.fine };
   }
   const SENZA = "Senza epoca";
   const groups = new Map();
-  for (const e of eventi) {
-    const key = epocaLabel(dv, e.epoca) || SENZA;
-    if (!groups.has(key)) groups.set(key, []);
-    groups.get(key).push(e);
+  const push = (key, item) => { if (!groups.has(key)) groups.set(key, []); groups.get(key).push(item); };
+  // Eventi: ogni evento è un punto, raggruppato per la sua epoca (link).
+  const eventi = dv.pages()
+    .where((p) => p && text(p.categoria) === "evento" && text(p.stato) !== "archiviata").array();
+  for (const e of eventi) push(epocaLabel(dv, e.epoca) || SENZA, e);
+  // Tappe: le linee di vita delle entità durature entrano nella STESSA timeline —
+  // il mondo che evolve accanto agli eventi. Ogni tappa è raggruppata per epoca se
+  // il suo 'quando' nomina un'epoca esistente, altrimenti in fondo (Senza epoca).
+  let nTappe = 0;
+  for (const p of dv.pages().where((q) => q && asArray(q.tappe).length && text(q.stato) !== "archiviata").array()) {
+    for (const riga of asArray(p.tappe)) {
+      const t = parseTappa(riga);
+      const eraName = String(t.quando).replace(/\[\[|\]\]/g, "").split("|")[0].trim();
+      push(eraInfo[eraName] ? eraName : SENZA, { __tappa: true, quando: t.quando, link: noteLink(p), stato: t.stato });
+      nTappe++;
+    }
+  }
+  if (!groups.size) {
+    return "> [!info] Nessun evento\n> Crea un **Evento** (campo *Quando* + un'*Epoca*) o aggiungi le *tappe* a un'entità per popolare la linea del tempo.";
   }
   const sortKey = (name) => {
     if (name === SENZA) return [1, Infinity];
     const ini = quandoNum((eraInfo[name] || {}).inizio);
     if (ini != null) return [0, ini];
-    const first = groups.get(name).map((e) => quandoNum(e.quando)).filter((n) => n != null).sort((a, b) => a - b)[0];
+    const first = groups.get(name).map((it) => quandoNum(it.quando)).filter((n) => n != null).sort((a, b) => a - b)[0];
     return [0, first == null ? Infinity : first];
   };
   const ordered = [...groups.keys()].sort((a, b) => {
@@ -575,19 +584,25 @@ async function renderTimeline(app, dv, page) {
   });
   const blocchi = [];
   for (const name of ordered) {
-    const evs = groups.get(name).slice().sort((a, b) => cmpQuando(a.quando, b.quando));
+    const its = groups.get(name).slice().sort((a, b) => cmpQuando(a.quando, b.quando));
     const info = eraInfo[name] || {};
     const span = [text(info.inizio), text(info.fine)].filter(Boolean).join(" – ");
     const testa = name === SENZA ? `🌫 ${SENZA}` : `🏛 ${name}`;
-    const righe = [`> [!abstract]- ${testa}${span ? ` · ${span}` : ""} (${evs.length})`];
-    for (const e of evs) {
-      const meta = [text(e.portata), text(e.tipo)].filter(Boolean).join(" · ");
-      righe.push(`> - **${text(e.quando) || "—"}** ${noteLink(e)}${meta ? ` · ${meta}` : ""}`);
+    const righe = [`> [!abstract]- ${testa}${span ? ` · ${span}` : ""} (${its.length})`];
+    for (const it of its) {
+      if (it.__tappa) {
+        righe.push(`> - 📜 **${text(it.quando) || "—"}** ${it.link}${it.stato ? ` — ${it.stato}` : ""}`);
+      } else {
+        const meta = [text(it.portata), text(it.tipo)].filter(Boolean).join(" · ");
+        righe.push(`> - **${text(it.quando) || "—"}** ${noteLink(it)}${meta ? ` · ${meta}` : ""}`);
+      }
     }
     blocchi.push(righe.join("\n"));
   }
   const eras = ordered.filter((n) => n !== SENZA).length;
-  return `**${eventi.length} eventi** · ${eras} ${eras === 1 ? "epoca" : "epoche"}\n\n` + blocchi.join("\n\n");
+  const head = `**${eventi.length} eventi**` + (nTappe ? ` · **${nTappe} tappe**` : "")
+    + ` · ${eras} ${eras === 1 ? "epoca" : "epoche"}`;
+  return `${head}\n\n` + blocchi.join("\n\n");
 }
 
 // --- Quick-ref condizioni 5.5e -----------------------------------------------

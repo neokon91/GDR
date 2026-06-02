@@ -64,8 +64,8 @@ pages:
     file: Cronologia
     title: "📜 Cronologia"
     category: evento
-    intro: Gli eventi del mondo in ordine di tempo.
-    # Pannello timeline (views.renderTimeline): eventi per epoca, in cima alla pagina.
+    intro: Il mondo nel tempo — eventi e linee di vita delle entità (📜 le tappe), per epoca.
+    # Pannello timeline (views.renderTimeline): eventi + tappe per epoca, in cima alla pagina.
     panel: timeline
     sort: "quando asc"
     columns:

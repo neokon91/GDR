@@ -1,6 +1,6 @@
 # 📜 Cronologia
 
-*Gli eventi del mondo in ordine di tempo.*
+*Il mondo nel tempo — eventi e linee di vita delle entità (📜 le tappe), per epoca.*
 
 > [!example] Crea
 > `BUTTON[crea-evento]`

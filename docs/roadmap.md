@@ -25,7 +25,8 @@ Pronto per **beta chiuso**. Per la beta aperta restano i punti PM qui sotto.
   **motore di coerenza** `renderCoerenza` che fa emergere le tensioni tematiche fra entità
   collegate — contrasti forti, rivali-specchio), **economia/risorse**,
   **geografia** (coord/confini/distanza/viaggio), **timeline causale**, **cronologia per-entità**
-  (stati epoch-stamped — il mondo *cambia*: fondato→fiorito→caduto, `tappe`/`renderTappe`),
+  (stati epoch-stamped — il mondo *cambia*: fondato→fiorito→caduto, `tappe`/`renderTappe`,
+  **integrate nella timeline globale** accanto agli eventi),
   **alberi evolutivi** (progressioni lore ramificate), **Fronti reattivi al grafo** (econ/geo **e cosmico**: un
   principio cosmico-Fronte è spinto dai suoi siti di manifestazione in crisi e dai dipendenti
   che vacillano → la metafisica preme sul tavolo), tema natale, strato cosmico con assi.

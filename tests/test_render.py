@@ -712,6 +712,36 @@ def test_render_timeline(tmp_path):
 
 
 @pytest.mark.skipif(not shutil.which("node"), reason="node assente")
+def test_render_timeline_tappe(tmp_path):
+    """views.renderTimeline integra le `tappe` delle entità durature nella linea del
+    tempo (📜, il mondo che evolve): raggruppate per epoca se il 'quando' nomina
+    un'epoca esistente, altrimenti in fondo; il conteggio tappe entra nell'intestazione."""
+    harness = tmp_path / "timeline_tappe.js"
+    harness.write_text(
+        'const fs=require("fs");'
+        f'const src=fs.readFileSync({json.dumps(str(render.JS_DIR / "views.js"))},"utf8");'
+        'const m={exports:{}};new Function("module","exports",src)(m,m.exports);'
+        'const era={file:{name:"Prima",path:"ep/Prima.md"},categoria:"epoca",inizio:"anno 0",fine:"anno 500"};'
+        'const all=[era,'
+        ' {file:{name:"Guerra",path:"e/G.md"},categoria:"evento",stato:"pronto",quando:"anno 300",epoca:{path:"ep/Prima.md"},portata:"globale"},'
+        ' {file:{name:"Presagio",path:"e/P.md"},categoria:"evento",stato:"pronto",quando:"anno 50"},'
+        ' {file:{name:"Capitale",path:"l/C.md"},categoria:"luogo",stato:"pronto",'
+        '  tappe:["Prima | Fondata sulle rovine","Era Buia | Caduta nel silenzio"]}];'
+        'const dv={pages:()=>({where:(fn)=>({array:()=>all.filter(fn)})}),'
+        ' page:(l)=>{const p=l&&l.path?l.path:l;return all.find(x=>x.file&&(x.file.path===p||x.file.name===p))||null;}};'
+        'm.exports.renderTimeline({},dv,null).then(out=>process.stdout.write(out));',
+        encoding="utf-8")
+    res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
+    assert res.returncode == 0, res.stderr
+    out = res.stdout
+    assert out.startswith("**2 eventi** · **2 tappe** · 1 epoca")          # conteggio tappe in testa
+    assert "🏛 Prima · anno 0 – anno 500 (2)" in out                       # 1 evento + 1 tappa nell'epoca
+    assert "📜 **Prima** [[Capitale]] — Fondata sulle rovine" in out       # tappa che nomina l'epoca
+    assert "📜 **Era Buia** [[Capitale]] — Caduta nel silenzio" in out     # tappa senza epoca → in fondo
+    assert "🌫 Senza epoca" in out
+
+
+@pytest.mark.skipif(not shutil.which("node"), reason="node assente")
 def test_render_condizioni(tmp_path):
     """views.condizioniMarkdown: callout pieghevole con le condizioni (nome linkato
     alla nota SRD + effetti compatti), e messaggio se la lista è vuota."""
