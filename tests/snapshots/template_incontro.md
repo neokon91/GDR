@@ -62,11 +62,14 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 ```
 
 Avvia il combattimento dal blocco (Initiative Tracker). Aggiungi le creature per
-nome dal bestiario (SRD / Fantasy Statblocks) con `- <numero>: <Nome>`; `players: true`
-include il gruppo.
+nome dal bestiario (SRD / Fantasy Statblocks) con `- <numero>: <Nome>`; un alleato
+(PNG/evocazione) si schiera col gruppo con `- <Nome>, ally`. `players: true` include
+il **gruppo**: i PG vanno configurati una volta come *Party* nelle impostazioni di
+Initiative Tracker (puntandoli alle note in `Mondi/Personaggi`).
 
-> [!tip] Sincronizza dalle creature collegate
-> Riscrive il blocco qui sotto dalle creature in *Collegamenti* (niente copia-incolla): `BUTTON[aggiorna-encounter]`
+> [!tip] Sincronizza da creature e alleati collegati
+> Riscrive il blocco qui sotto dalle *Creature* e dagli *Alleati* in *Collegamenti*
+> (gli alleati col flag `ally`; niente copia-incolla): `BUTTON[aggiorna-encounter]`
 
 ```encounter
 name: <% tp.config.target_file.basename %>
@@ -86,6 +89,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > [!example] Relazioni
 > **Luogo**: `INPUT[suggester(optionQuery("Mondi/Luoghi"), useLinks(partial), allowOther):luogo]`
 > **Creature**: `INPUT[inlineListSuggester(optionQuery("Mondi/Creature"), useLinks(partial), allowOther):creature]`
+> **Alleati (PNG/evocazioni)**: `INPUT[inlineListSuggester(optionQuery("Mondi/Creature"), useLinks(partial), allowOther):alleati]`
 
 > [!example] Collegamenti
 > Mondo: `INPUT[mondo][:mondo]`

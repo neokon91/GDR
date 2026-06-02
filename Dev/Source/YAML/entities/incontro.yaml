@@ -39,6 +39,13 @@ relazioni:
   label: Creature
   category: creatura
   multi: true
+# Combattenti dalla parte del gruppo (PNG alleati, evocazioni): aggiorna_encounter
+# li emette con il flag `, ally` nel blocco encounter (Initiative Tracker li separa
+# dai nemici nel conteggio difficoltà).
+- field: alleati
+  label: Alleati (PNG/evocazioni)
+  category: creatura
+  multi: true
 creation:
   fields:
   - field: tipo
@@ -63,6 +70,13 @@ creation:
     category: creatura
     link: true
     multi: true
+  - field: alleati
+    prompt: Alleati schierati col gruppo (PNG, evocazioni)
+    from: notes
+    category: creatura
+    link: true
+    multi: true
+    optional: true
   - field: pg_livello
     prompt: Livello medio del gruppo (per la difficoltà)
     optional: true

@@ -98,6 +98,8 @@ _FENCE = re.compile(r"^(`{3,}|~{3,})")
 _TEMPLATER = re.compile(r"<%.*?%>", re.DOTALL)
 _METABIND = re.compile(r"`?(?:INPUT|VIEW|BUTTON)\[[^\]]*\][^`\n]*`?")
 _DVINLINE = re.compile(r"`=[^`]*`")
+# Tiri Dice Roller (`dice:`/`dice-mod:`): strumento del DM → fuori dal sito-giocatori.
+_DICE = re.compile(r"`dice(?:-mod)?:[^`]*`")
 # Heading di sole sezioni-meccanismo da non riportare nel sito-giocatori.
 _DROP_HEADINGS = {"collegamenti", "connessioni", "relazioni", "carattere",
                   "vista", "al tavolo", "viaggio", "mappa"}
@@ -139,6 +141,7 @@ def strip_body(body: str) -> str:
     text = "\n".join(out)
     text = _METABIND.sub("", text)
     text = _DVINLINE.sub("", text)
+    text = _DICE.sub("", text)
     return re.sub(r"\n{3,}", "\n\n", text).strip()
 
 

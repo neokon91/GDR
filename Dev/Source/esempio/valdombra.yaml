@@ -667,3 +667,25 @@ note:
       Esempio di classe HOMEBREW giocabile a tutti i livelli: in *Crea PG* scegli
       «Cinerimante» per dado vita, TS, slot da incantatore pieno (derivati dall'SRD) e
       «Fiamma Cinerea» tra gli incantesimi; *Sali di livello* applica competenza/ASI/slot.
+
+  # ---------------------------------------------- TABELLA CASUALE (demo Dice Roller, GM-only)
+  - nome: Incontri delle Marche
+    categoria: nota
+    tipo: appunto
+    fm:
+      visibilita: dm
+    fatti:
+      - ["Tira", "`dice: [[Incontri delle Marche]]`"]
+      - ["Visibilità", "Solo DM — esclusa dal sito dei giocatori (visibilita: dm)"]
+    lore: |-
+      Tabella d'esempio (**Dice Roller**): scrivi `dice: [[Incontri delle Marche]]` in
+      qualunque nota — un *Luogo*, il *Mondo*, una *Sessione* — per pescare un incontro a
+      caso lungo le piste delle Marche. Stessa ricetta per bottino, meteo o voci di taverna:
+      una nota-lista + un `dice: [[…]]`.
+
+      - Una pattuglia della **Mano d'Argento** controlla i lasciapassare.
+      - Tre **Corvi Cinerei** scortano un carico di reliquie: trattano, o fuggono.
+      - Cenere calda nel vento: prova di Costituzione o un livello di affaticamento.
+      - Un pellegrino della **Setta** chiede la via per la Voragine — e non è solo.
+      - Carcassa fresca sulla pista: qualcosa di grosso caccia qui intorno.
+      - Colonna di fumo all'orizzonte: un casale brucia, e qualcuno corre verso di te.

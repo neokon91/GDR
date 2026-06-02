@@ -221,6 +221,10 @@ async function aggiorna_encounter(tp, file) {
     if (nome) counts[nome] = (counts[nome] || 0) + 1;
   }
   const righe = Object.entries(counts).map(([n, q]) => `  - ${q}: ${n}`);
+  // Alleati (PNG/evocazioni schierati col gruppo): flag `, ally` → Initiative Tracker
+  // li separa dai nemici nel conteggio difficoltà. Una riga per occorrenza.
+  const alleati = Array.isArray(fm.alleati) ? fm.alleati : (fm.alleati ? [fm.alleati] : []);
+  const righeAll = alleati.map(l => linkName(l, file.path)).filter(Boolean).map(n => `  - ${n}, ally`);
 
   const data = await app.vault.read(file);
   const re = /```encounter\r?\n[\s\S]*?\r?\n```/;
@@ -228,7 +232,8 @@ async function aggiorna_encounter(tp, file) {
   if (!cur) { new Notice("Nessun blocco ```encounter``` in questa nota."); return ""; }
   const pm = cur[0].match(/^players\s*:\s*(.+)$/m);
   const players = pm ? pm[1].trim() : "true";
-  const lista = righe.length ? righe.join("\n") : "  # Collega le creature (tab Collegamenti) e ripremi.";
+  const tutte = [...righe, ...righeAll];
+  const lista = tutte.length ? tutte.join("\n") : "  # Collega le creature (tab Collegamenti) e ripremi.";
   const blocco = "```encounter\nname: " + file.basename + "\nplayers: " + players + "\ncreatures:\n" + lista + "\n```";
   await app.vault.modify(file, data.replace(re, blocco));
   new Notice(righe.length

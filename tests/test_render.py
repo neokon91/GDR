@@ -482,7 +482,7 @@ def test_aggiorna_encounter_e2e(tmp_path):
         'global.app = {\n'
         '  workspace: { getActiveFile: () => file },\n'
         '  metadataCache: {\n'
-        '    getFileCache: () => ({ frontmatter: { creature: ["[[Goblin]]","[[Goblin]]","[[Orco|Bruto]]"] } }),\n'
+        '    getFileCache: () => ({ frontmatter: { creature: ["[[Goblin]]","[[Goblin]]","[[Orco|Bruto]]"], alleati: ["[[Lupo Addestrato]]"] } }),\n'
         '    getFirstLinkpathDest: (t) => ({ basename: t }),\n'
         '  },\n'
         '  vault: { read: async () => body, modify: async (f, d) => { saved = d; } },\n'
@@ -497,6 +497,7 @@ def test_aggiorna_encounter_e2e(tmp_path):
     assert "players: false" in out           # players preservato
     assert "  - 2: Goblin" in out            # occorrenze ripetute -> quantità
     assert "  - 1: Orco" in out              # link risolto al basename del target
+    assert "  - Lupo Addestrato, ally" in out  # alleato emesso col flag ally (P2)
     assert "Nome Creatura" not in out        # placeholder sostituito
     assert out.count("```encounter") == 1    # un solo blocco, ben formato
     assert out.startswith("# Incontro") and out.rstrip().endswith("fine")  # corpo preservato
@@ -1553,7 +1554,8 @@ def test_build_site_no_spoiler_leak(tmp_path):
         "---\nnome: Cripta\ncategoria: luogo\ntipo: rovina\nmondo: '[[Mondo X]]'\n"
         "uso_al_tavolo: TRAPPOLA_DM\ngancio: AGGANCIO_DM\nprossima_mossa: MOSSA_DM\n"
         "pressione: 8\nsegreto: VERITA_NASCOSTA\nclima: gelido\n---\n\n"
-        "# Cripta\n\nUna cripta antica.\n\n> [!segreto]- Segreto\n> ALTRO_SEGRETO\n",
+        "# Cripta\n\nUna cripta antica. Tira `dice: [[Tabella DM]]` ROLL_DM qui.\n\n"
+        "> [!segreto]- Segreto\n> ALTRO_SEGRETO\n",
         encoding="utf-8")
     (nd / "Privata.md").write_text(
         "---\nnome: Privata\ncategoria: luogo\nvisibilita: dm\nmondo: '[[Mondo X]]'\n---\n\nNON_DEVE_USCIRE\n",
@@ -1565,4 +1567,5 @@ def test_build_site_no_spoiler_leak(tmp_path):
     assert "Una cripta antica." in blob and "gelido" in blob
     for spoiler in ["TRAPPOLA_DM", "AGGANCIO_DM", "MOSSA_DM", "VERITA_NASCOSTA", "ALTRO_SEGRETO", "NON_DEVE_USCIRE"]:
         assert spoiler not in blob, spoiler
+    assert "dice:" not in blob and "Tabella DM" not in blob  # i tiri Dice Roller (DM) non trapelano (P3)
     assert (out / "index.html").is_file() and (out / "site.css").is_file()
