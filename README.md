@@ -114,3 +114,14 @@ schema dei file-entità e i riferimenti Jinja: un refuso si ferma prima del buil
 
 - **Python 3** + `pip install -r requirements-dev.txt` (Jinja2, PyYAML).
 - **Node** (per `node --check` dentro `npm run check`).
+
+## Licenza
+
+- **Codice, template e tooling**: [MIT](LICENSE).
+- **Contenuto SRD** (`Dev/Source/SRD/`): *System Reference Document 5.2.1* di Wizards of the
+  Coast LLC, sotto [CC-BY-4.0](https://creativecommons.org/licenses/by/4.0/) — vedi
+  [`Dev/Source/SRD/LICENSE_SRD`](Dev/Source/SRD/LICENSE_SRD) per la dichiarazione di attribuzione.
+
+> Quest'opera include materiale tratto dal System Reference Document 5.2.1 («SRD 5.2.1») di
+> Wizards of the Coast LLC (https://www.dndbeyond.com/srd), concesso in licenza CC-BY-4.0. È
+> «compatibile con la quinta edizione» (5E). Non affiliata né approvata da Wizards of the Coast.

@@ -2,6 +2,7 @@
   "name": "vault-gdr",
   "version": "0.1.0",
   "private": true,
+  "license": "MIT",
   "description": "Sorgenti minimi YAML/Jinja/JS per vault Obsidian GDR.",
   "scripts": {
     "build": "python3 Dev/Tools/render.py",
