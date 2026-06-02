@@ -884,13 +884,17 @@ async function renderIncantesimi(app, dv, page) {
     for (const n of names || []) levelOf.set(n, Number(L));
   // Homebrew: il livello dalla nota stessa (categoria incantesimo) se non nel pool
   // della classe — così gli incantesimi homebrew si raggruppano bene, non sotto "ignoto".
+  // Stessa passata raccoglie chi richiede CONCENTRAZIONE (durata SRD) → 🌀.
+  const concentra = new Set();
   if (dv) {
     try {
-      for (const sp of dv.pages().where((p) => p && p.file && text(p.categoria) === "incantesimo").array()) {
+      const cat = (p) => p && p.file && (text(p.categoria) === "incantesimo" || text(p.categoria) === "srd-incantesimo");
+      for (const sp of dv.pages().where(cat).array()) {
         const L = Number(sp.livello);
-        if (sp.file && !levelOf.has(sp.file.name) && Number.isFinite(L)) levelOf.set(sp.file.name, L);
+        if (!levelOf.has(sp.file.name) && Number.isFinite(L)) levelOf.set(sp.file.name, L);
+        if (sp.durata && /concentr/i.test(text(sp.durata))) concentra.add(sp.file.name);
       }
-    } catch (e) { /* dv assente o query fallita: gli homebrew finiscono in "ignoto" */ }
+    } catch (e) { /* dv assente o query fallita: niente livelli homebrew né 🌀 */ }
   }
   const groups = new Map();  // livello → [nomi]
   const push = (L, n) => { if (!groups.has(L)) groups.set(L, []); groups.get(L).push(n); };
@@ -906,10 +910,11 @@ async function renderIncantesimi(app, dv, page) {
   const out = [];
   for (const L of [...groups.keys()].sort((a, b) => a - b)) {
     const titolo = L === 0 ? "Trucchetti" : L === -1 ? "Livello ignoto" : `${L}º livello`;
-    const names = groups.get(L).slice().sort((a, b) => a.localeCompare(b)).map((n) => `[[${n}]]`);
+    const names = groups.get(L).slice().sort((a, b) => a.localeCompare(b)).map((n) => `${concentra.has(n) ? "🌀 " : ""}[[${n}]]`);
     out.push(`> **${titolo}**${L > 0 ? slotInfo(L) : ""} (${names.length})\n> ${names.join(" · ")}`);
   }
-  return "> [!note]- 🪄 Incantesimi\n" + out.join("\n>\n");
+  const legenda = concentra.size ? "\n>\n> 🌀 = concentrazione" : "";
+  return "> [!note]- 🪄 Incantesimi\n" + out.join("\n>\n") + legenda;
 }
 
 module.exports = {

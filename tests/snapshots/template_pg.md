@@ -27,7 +27,11 @@
 >
 > **Esaurimento** (Indebolimento 2024) `INPUT[inlineSelect(option(0, "0 —"), option(1, "1"), option(2, "2"), option(3, "3"), option(4, "4"), option(5, "5"), option(6, "6 ☠")):esaurimento]` → −`VIEW[2 * ({esaurimento} ?? 0)]` a OGNI prova d20 · velocità −`VIEW[1.5 * ({esaurimento} ?? 0)]` m
 >
-> Fine giornata: `BUTTON[riposo-lungo]` (PF al massimo, slot e TS morte azzerati, −1 Esaurimento)
+> **Dadi Vita** d`VIEW[{dado_vita} ?? "?"]` · spesi `INPUT[number:dadi_vita_spesi]` / `VIEW[{dadi_vita_max} ?? "—"]` → rimasti `VIEW[({dadi_vita_max} ?? 0) - ({dadi_vita_spesi} ?? 0)]`
+>
+> **🌀 Concentrazione** su `INPUT[text:concentrazione_su]` — quando subisci danni: TS Costituzione (CD 10 o metà danni); finisce a 0 PF o se incapacitato
+>
+> Riposo: `BUTTON[riposo-breve]` (spendi 1 Dado Vita → +tiro+mod COS ai PF) · `BUTTON[riposo-lungo]` (PF al massimo, slot e TS morte azzerati, metà Dadi Vita recuperati, −1 Esaurimento)
 
 > [!note]- Slot incantesimo (caster)
 > | Liv | Max | Spesi | Rimasti |

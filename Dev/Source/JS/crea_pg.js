@@ -339,6 +339,8 @@ scurovisione: ${pg.scurovisione ? "true" : "false"}
 ca: ${pg.ca}
 pf: ${pg.pf}
 pf_max: ${pg.pf}
+dado_vita: ${pg.dado_vita}
+dadi_vita_max: 1
 armatura: ${pg.armatura}
 scudo: ${pg.scudo ? "true" : "false"}
 ${righeCar}
@@ -441,6 +443,7 @@ async function crea_pg(tp) {
         tratti_specie: specie.tratti || "",
         ca,
         pf,
+        dado_vita: classe.dado_vita || 8,
         armatura: armatura.id || "nessuna",
         scudo,
         caratteristiche,

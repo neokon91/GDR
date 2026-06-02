@@ -324,6 +324,7 @@ def test_crea_personaggio_e2e(tmp_path):
     assert fm["classe"] in opt["classi"]
     classe = opt["classi"][fm["classe"]]
     assert fm["pf"] == max(1, classe["dado_vita"] + (fm["costituzione"] - 10) // 2)
+    assert fm["dado_vita"] == classe["dado_vita"] and fm["dadi_vita_max"] == 1  # Dadi Vita 2024
     for stat in classe["tiri_salvezza"]:
         assert fm[f"ts_{stat}"] == 1
     assert sum(1 for k in fm if k.startswith("prof_")) == 18
@@ -508,7 +509,7 @@ def test_riposo_lungo_e2e(tmp_path):
     harness.write_text(
         'global.Notice = class { constructor(m){} };\n'
         'const fm = { pf:5, pf_max:20, pf_temp:4, ts_morte_successi:2, ts_morte_fallimenti:1,'
-        ' slot_uso_1:1, esaurimento:3 };\n'
+        ' slot_uso_1:1, esaurimento:3, concentrazione_su:"Benedizione", dadi_vita_max:4, dadi_vita_spesi:3 };\n'
         'const file = { basename:"Eroe", path:"Personaggi/Eroe.md" };\n'
         'global.app = {\n'
         '  workspace: { getActiveFile: () => file },\n'
@@ -525,6 +526,37 @@ def test_riposo_lungo_e2e(tmp_path):
     assert fm["ts_morte_successi"] == 0 and fm["ts_morte_fallimenti"] == 0
     assert fm["slot_uso_1"] == 0
     assert fm["esaurimento"] == 2   # −1, non azzerato (regola 2024)
+    assert fm["concentrazione_su"] == ""        # concentrazione conclusa
+    assert fm["dadi_vita_spesi"] == 1           # 3 − floor(4/2)=2 recuperati
+
+
+@pytest.mark.skipif(not shutil.which("node"), reason="node assente")
+def test_riposo_breve_e2e(tmp_path):
+    """meta_actions.riposo_breve: spende UN Dado Vita, cura di (tiro+mod COS) entro
+    il range del dado e cappato a pf_max; senza Dadi Vita non cambia nulla."""
+    def run(fm_js):
+        harness = tmp_path / "rb.js"
+        harness.write_text(
+            'global.Notice = class { constructor(m){} };\n'
+            f'const fm = {fm_js};\n'
+            'const file = { basename:"Eroe", path:"Personaggi/Eroe.md" };\n'
+            'global.app = { workspace:{ getActiveFile:()=>file },\n'
+            '  metadataCache:{ getFileCache:()=>({ frontmatter: fm }) },\n'
+            '  fileManager:{ processFrontMatter: async (f, fn) => fn(fm) } };\n'
+            f'const meta = require({json.dumps(str(render.JS_DIR / "meta_actions.js"))});\n'
+            'meta({}, "riposo_breve").then(() => process.stdout.write(JSON.stringify(fm)));\n',
+            encoding="utf-8")
+        res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
+        assert res.returncode == 0, res.stderr
+        return json.loads(res.stdout)
+
+    # COS 14 (+2), d10: cura fra 1+2=3 e 10+2=12, pf 5→[8..17] cappato a 20.
+    fm = run('{ pf:5, pf_max:20, dado_vita:10, costituzione:14, dadi_vita_max:3, dadi_vita_spesi:0 }')
+    assert fm["dadi_vita_spesi"] == 1
+    assert 8 <= fm["pf"] <= 17
+    # Nessun Dado Vita rimasto: invariato.
+    fm2 = run('{ pf:5, pf_max:20, dado_vita:10, costituzione:14, dadi_vita_max:1, dadi_vita_spesi:1 }')
+    assert fm2["dadi_vita_spesi"] == 1 and fm2["pf"] == 5
 
 
 @pytest.mark.skipif(not shutil.which("node"), reason="node assente")
@@ -726,6 +758,7 @@ def test_sali_pg_e2e(tmp_path):
     assert fm["livello"] == 2
     assert fm["pf_max"] == 14  # 8 + (floor(6/2)+1) + mod(COS 14)=+2 = 8+4+2
     assert fm["competenza"] == 2 and fm["slot_1"] == 3
+    assert fm["dadi_vita_max"] == 2  # Dadi Vita = livello del PG
 
 
 @pytest.mark.skipif(not render.SRD_DIR.is_dir(), reason="SRD non vendorizzata")
@@ -1424,3 +1457,69 @@ def test_append_turno_log(tmp_path):
     out = res.stdout
     assert out.count("## Registro dei turni") == 1     # sezione creata una sola volta
     assert out.index("2026-06-08") < out.index("2026-06-01")  # più recente in cima
+
+
+# --- Sito dei giocatori (build_site) ----------------------------------------
+import build_site  # noqa: E402
+
+
+def test_site_markdown_to_html():
+    """Il convertitore Markdown→HTML copre il sottoinsieme delle note lore."""
+    md = ("## Titolo\n\nProsa con **grassetto**, *corsivo* e `codice`.\n\n"
+          "- uno\n- due\n\nVai a [[Forte Cenere|forte]] o [esterno](https://x.io).")
+    links = {"forte cenere": "forte-cenere.html"}
+    html = build_site.markdown_to_html(md, lambda n: links.get(n.lower()))
+    assert "<h2>Titolo</h2>" in html
+    assert "<strong>grassetto</strong>" in html and "<em>corsivo</em>" in html
+    assert "<code>codice</code>" in html
+    assert "<ul><li>uno</li><li>due</li></ul>" in html
+    assert '<a href="forte-cenere.html">forte</a>' in html
+    assert '<a href="https://x.io" rel="noopener">esterno</a>' in html
+
+
+def test_site_strip_body_removes_dynamic_and_callouts():
+    """strip_body toglie blocchi recintati, Templater, Meta Bind, callout (incl.
+    GM) e l'H1, lasciando la sola prosa player-safe."""
+    body = ("# Titolo\n\nProsa visibile.\n\n"
+            "> [!segreto]- Segreto\n> contenuto top secret\n\n"
+            "> [!tavolo] Uso al tavolo\n> mossa del DM\n\n"
+            "```dataview\nlist\n```\n\n"
+            "````tabs\n--- T\n```js-engine\nreturn x\n```\n````\n\n"
+            "`INPUT[text:foo]` `VIEW[{bar}]`\n")
+    out = build_site.strip_body(body)
+    assert "Prosa visibile." in out
+    for leak in ["top secret", "mossa del DM", "dataview", "js-engine", "INPUT[", "VIEW[", "Titolo"]:
+        assert leak not in out, leak
+
+
+def test_site_is_public():
+    assert build_site.is_public({"categoria": "luogo"})
+    assert not build_site.is_public({"categoria": "luogo", "visibilita": "dm"})
+    assert not build_site.is_public({"categoria": "luogo", "pubblico": False})
+    assert not build_site.is_public({"categoria": "sessione"})  # log/strumento DM
+    assert not build_site.is_public({})  # senza categoria
+
+
+def test_build_site_no_spoiler_leak(tmp_path):
+    """Integrazione: il sito generato NON contiene mai campi GM (uso_al_tavolo/
+    gancio/prossima_mossa/pressione/segreto), esclude le note `visibilita: dm`, e
+    scrive index.html + site.css."""
+    nd = tmp_path / "vault" / "Mondi" / "Mondo X"
+    nd.mkdir(parents=True)
+    (nd / "Cripta.md").write_text(
+        "---\nnome: Cripta\ncategoria: luogo\ntipo: rovina\nmondo: '[[Mondo X]]'\n"
+        "uso_al_tavolo: TRAPPOLA_DM\ngancio: AGGANCIO_DM\nprossima_mossa: MOSSA_DM\n"
+        "pressione: 8\nsegreto: VERITA_NASCOSTA\nclima: gelido\n---\n\n"
+        "# Cripta\n\nUna cripta antica.\n\n> [!segreto]- Segreto\n> ALTRO_SEGRETO\n",
+        encoding="utf-8")
+    (nd / "Privata.md").write_text(
+        "---\nnome: Privata\ncategoria: luogo\nvisibilita: dm\nmondo: '[[Mondo X]]'\n---\n\nNON_DEVE_USCIRE\n",
+        encoding="utf-8")
+    out = tmp_path / "site"
+    n = build_site.build_site(CORE, tmp_path / "vault", out)
+    assert n == 1  # Privata (visibilita: dm) esclusa
+    blob = "\n".join(p.read_text(encoding="utf-8") for p in out.glob("*.html"))
+    assert "Una cripta antica." in blob and "gelido" in blob
+    for spoiler in ["TRAPPOLA_DM", "AGGANCIO_DM", "MOSSA_DM", "VERITA_NASCOSTA", "ALTRO_SEGRETO", "NON_DEVE_USCIRE"]:
+        assert spoiler not in blob, spoiler
+    assert (out / "index.html").is_file() and (out / "site.css").is_file()

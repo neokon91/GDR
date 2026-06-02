@@ -160,6 +160,9 @@ buttons:
   - id: riposo-lungo
     label: Riposo lungo
     action: riposo_lungo
+  - id: riposo-breve
+    label: Riposo breve
+    action: riposo_breve
   - id: aggiorna-encounter
     label: Aggiorna encounter
     action: aggiorna_encounter

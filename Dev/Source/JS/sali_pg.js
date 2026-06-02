@@ -142,6 +142,7 @@ async function sali_pg(tp) {
   }
   for (const [n, q] of Object.entries(slotMap)) u["slot_" + n] = q;
   u.livello = nuovo;
+  u.dadi_vita_max = nuovo;  // Dadi Vita = livello del personaggio (2024)
   note.push(`PF +${dpf}`);
 
   // Sottoclasse (l'SRD ne ha una per classe; l'homebrew non la dichiara)

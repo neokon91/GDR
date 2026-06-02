@@ -238,9 +238,9 @@ async function aggiorna_encounter(tp, file) {
 }
 
 // Riposo lungo (PG): PF al massimo, PF temporanei e tiri salvezza contro morte
-// azzerati, slot incantesimo recuperati (azzera gli slot_uso_* esistenti), un
-// livello di Esaurimento (Indebolimento) rimosso (2024: −1 a riposo lungo, NON
-// azzerato). Lo slot breve in 5.5e si gioca coi dadi vita (manuale): no auto-reset.
+// azzerati, slot incantesimo recuperati (azzera gli slot_uso_* esistenti),
+// concentrazione conclusa, metà dei Dadi Vita recuperati (2024: floor(max/2),
+// min 1) e un livello di Esaurimento (Indebolimento) rimosso (−1, NON azzerato).
 async function riposo_lungo(file) {
   let esaur = null;
   await updateFrontmatter(file, fm => {
@@ -248,8 +248,13 @@ async function riposo_lungo(file) {
     fm.pf_temp = 0;
     fm.ts_morte_successi = 0;
     fm.ts_morte_fallimenti = 0;
+    fm.concentrazione_su = "";
     for (let n = 1; n <= 9; n++) {
       if (fm["slot_uso_" + n] != null) fm["slot_uso_" + n] = 0;
+    }
+    if (fm.dadi_vita_max != null) {
+      const rec = Math.max(1, Math.floor((Number(fm.dadi_vita_max) || 0) / 2));
+      fm.dadi_vita_spesi = Math.max(0, (Number(fm.dadi_vita_spesi) || 0) - rec);
     }
     if (fm.esaurimento != null) {
       fm.esaurimento = Math.max(0, (Number(fm.esaurimento) || 0) - 1);
@@ -257,7 +262,28 @@ async function riposo_lungo(file) {
     }
   });
   const coda = esaur != null ? ` Esaurimento → ${esaur}.` : "";
-  new Notice(`Riposo lungo: PF al massimo, slot e tiri salvezza contro morte recuperati.${coda}`);
+  new Notice(`Riposo lungo: PF al massimo, slot/TS-morte/concentrazione e metà Dadi Vita recuperati.${coda}`);
+  return "";
+}
+
+// Riposo breve (PG): spende UN Dado Vita per curarsi (tira il dado vita + mod COS,
+// min 1 PF, fino a pf_max). Incrementa dadi_vita_spesi. 2024: niente reset di slot.
+async function riposo_breve(file) {
+  let msg = "Nessun Dado Vita rimasto.";
+  await updateFrontmatter(file, fm => {
+    const max = Number(fm.dadi_vita_max) || 0;
+    const spesi = Number(fm.dadi_vita_spesi) || 0;
+    if (max - spesi <= 0) return;
+    const die = Number((String(fm.dado_vita).match(/\d+/) || [8])[0]) || 8;
+    const conMod = Math.floor(((Number(fm.costituzione) || 10) - 10) / 2);
+    const roll = Math.floor(Math.random() * die) + 1;
+    const cura = Math.max(1, roll + conMod);
+    const pf = (Number(fm.pf) || 0) + cura;
+    fm.pf = fm.pf_max != null ? Math.min(Number(fm.pf_max) || pf, pf) : pf;
+    fm.dadi_vita_spesi = spesi + 1;
+    msg = `Riposo breve: speso 1 Dado Vita (d${die}: ${roll}${conMod >= 0 ? "+" : ""}${conMod}) → +${cura} PF.`;
+  });
+  new Notice(msg);
   return "";
 }
 
@@ -336,6 +362,10 @@ async function meta_actions(tp, action = "") {
 
   if (action === "riposo_lungo") {
     return await riposo_lungo(file);
+  }
+
+  if (action === "riposo_breve") {
+    return await riposo_breve(file);
   }
 
   if (action === "sali_di_livello") {
