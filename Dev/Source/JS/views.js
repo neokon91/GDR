@@ -818,7 +818,8 @@ async function renderMap(app, dv, page) {
 // Vista locale del luogo, due nozioni complementari di distanza: (1) per CONFINI
 // (BFS su confina_con — quante aree attraversi, "come ci si muove via terra") e
 // (2) IN LINEA D'ARIA (euclidea sulle coord × scala del mondo, in km — "quanto
-// dista davvero"). Più la REGIONE contenitore, i luoghi CONTENUTI e le ROTTE.
+// dista davvero"). Più la REGIONE contenitore e i luoghi CONTENUTI (le rotte di
+// viaggio vivono nel pannello Viaggio, con tempo e rischio — niente doppione).
 // L'adiacenza è non orientata (i link sono già reciproci, ma uniamo le due
 // direzioni per robustezza). Ritorna markdown (i [[link]] si rendono).
 async function renderDintorni(app, dv, page) {
@@ -887,8 +888,8 @@ async function renderDintorni(app, dv, page) {
       .slice(0, 6);
     if (vicini.length) out.push(`**📐 In linea d'aria**: ` + vicini.map((v) => `[[${v.name}]]${fmt(v.d)}`).join(" · "));
   }
-  const rotte = asArray(page.rotta_con).map((l) => resolve(dv, l)).filter((p) => p && p.file);
-  if (rotte.length) out.push(`**🛣 Rotte di viaggio** (${rotte.length}): ` + rotte.map(noteLink).join(", "));
+  // (Le rotte di viaggio non si elencano qui: sono nel pannello Viaggio, con tempo
+  //  e rischio per destinazione — niente doppione sulla stessa tab "Spazio".)
   if (!out.length) {
     return "> [!tip] Nessun dintorno\n> Collega questo luogo: imposta **Regione** (l'area che lo contiene), **Confina con** (i luoghi adiacenti), **Rotta commerciale con** (i viaggi) e **Coordinate** (`x, y`, per la distanza in km). Le distanze si calcolano da sé.";
   }

@@ -97,6 +97,17 @@ tappe_categorie:
   - istituzione
   - culto
 
+# Categorie dove il MOTORE DI COERENZA (views.renderCoerenza) ha senso: hanno
+# relazioni di RIVALITÀ/ALLEANZA same-type (assi condivisi per costruzione), quindi
+# il confronto può davvero scattare. Sulle altre sarebbe sempre vuoto (gli assi con
+# lo stesso id fra tipi diversi quasi non esistono) → niente pannello-fantasma.
+coerenza_categorie:
+  - fazione
+  - culto
+  - divinita
+  - regno
+  - personaggio
+
 # Superficie giocabile (IL differenziatore): ogni nota lore la espone, sempre.
 # Single source renderizzato dalla macro tavolo(); i campi sono in core.fields.
 # 'pressione' e' speciale: la macro aggiunge l'etichetta calcolata e prossima_mossa.

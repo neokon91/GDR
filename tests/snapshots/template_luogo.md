@@ -165,16 +165,12 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "luogo", component);
 ```
 
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderCoerenza");
-```
-
 --- Cronologia
 
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderTappe");
 ```
---- Mappa
+--- Spazio
 
 > [!info] Mappa
 > Collega una mappa: `INPUT[mappa][:mappa]`
@@ -190,7 +186,6 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderDintorni");
 ```
---- Viaggio
 
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderViaggio");

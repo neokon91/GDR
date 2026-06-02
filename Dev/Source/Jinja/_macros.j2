@@ -182,8 +182,10 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 
 {{ profilo() }}
 {% endif %}
+{% if category in core.get('coerenza_categorie', []) %}
 
 {{ coerenza() }}
+{% endif %}
 {% endif %}
 {%- endmacro %}
 

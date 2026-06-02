@@ -15,7 +15,8 @@ subtypes:
 - repubblica
 - città-stato
 - confederazione
-- dominio
+# 'feudo' (non 'dominio'): evita la collisione di nome con la categoria cosmica `dominio`.
+- feudo
 fields:
   governo: { label: Forma di governo, widget: text }
   sovrano: { label: Sovrano,          widget: text }

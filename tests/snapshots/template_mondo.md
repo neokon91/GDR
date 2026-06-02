@@ -131,10 +131,6 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "mondo", component);
 ```
 
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderCoerenza");
-```
-
 --- Cronologia
 
 ```js-engine

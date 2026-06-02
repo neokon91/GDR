@@ -17,7 +17,7 @@
 {% endblock %}
 {% block extra_tabs %}
 {% import '_macros.j2' as m with context %}
---- Mappa
+--- Spazio
 
 {{ m.mappa() }}
 
@@ -25,7 +25,6 @@
 > Coordinate sulla mappa: {{ m.field('coord', label=false) }} — `x, y` (per la distanza in linea d'aria; la scala è sul **Mondo**).
 
 {{ m.dintorni() }}
---- Viaggio
 
 {{ m.viaggio() }}
 {% endblock %}

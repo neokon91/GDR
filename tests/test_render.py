@@ -1412,8 +1412,8 @@ def test_homebrew_bridge(tmp_path):
 @pytest.mark.skipif(not shutil.which("node"), reason="node assente")
 def test_render_dintorni(tmp_path):
     """views.renderDintorni: regione contenitore, luoghi contenuti, distanza per
-    CONFINI (BFS su confina_con) e IN LINEA D'ARIA (euclidea × mondo.scala_mappa, km),
-    più le rotte. Grafo: Voragine—Forte—Bosco—Mercato (catena); rotta Forte↔Mercato.
+    CONFINI (BFS su confina_con) e IN LINEA D'ARIA (euclidea × mondo.scala_mappa, km).
+    Le rotte NON si elencano qui (stanno in Viaggio). Grafo: Voragine—Forte—Bosco—Mercato.
     Coord (scala 2 km/u): Forte(50,50) Voragine(51,50) Bosco(62,50) Mercato(80,49)."""
     harness = tmp_path / "dint.js"
     harness.write_text(
@@ -1441,7 +1441,7 @@ def test_render_dintorni(tmp_path):
     assert "📍 Regione**: [[Marche]]" in a
     assert "🧭 Confina con** (2): [[Bosco]], [[Voragine]]" in a
     assert "↔ A 2 confini** (1): [[Mercato]]" in a           # BFS: Mercato a 2 salti via Bosco
-    assert "🛣 Rotte di viaggio** (1): [[Mercato]]" in a      # rotta diretta ≠ adiacenza
+    assert "Rotte di viaggio" not in a                       # rotte spostate nel pannello Viaggio (no doppione)
     assert a.index("Confina con") < a.index("A 2 confini")   # anelli ordinati per distanza
     # Distanza metrica in km (scala 2): Voragine ~2, Bosco ~24, Mercato ~60.
     air = a.split("In linea d'aria")[1] if "In linea d'aria" in a else ""
