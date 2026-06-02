@@ -43,6 +43,17 @@ wrap: true
     - { path: Media/Mappe/strade.png, name: Strade, visible: true }
   ```
 
+## Importare mappe da Azgaar / Watabou
+zoommap consuma un'**immagine** (PNG/WebP/JPG; l'SVG è gestito e il plugin lo esporta in WebP a
+2k/4k/8k/12k). Quindi l'import dell'immagine è **diretto**; i **pin NON si importano** (si piazzano a mano).
+- **Azgaar's Fantasy Map Generator** → *Export* **SVG** (mappa intera, consigliato per i mondi) o **PNG**
+  (⚠️ solo la porzione visibile) o **tiles** (.zip di chunk PNG per immagini enormi). Drop in `Media/`,
+  poi `image: Media/Mappe/mondo.svg` (o il WebP rasterizzato). `.map`/JSON/GeoJSON di Azgaar **non** sono letti.
+- **Watabou** (città/villaggio/dungeon) → *Export* **PNG hi-res** o **SVG**. Stesso flusso.
+- I marker si aggiungono a mano (Shift+clic) e si collegano ai `[[Luogo]]`. *(L'auto-pin dai dati Azgaar
+  esiste solo via plugin Leaflet/GeoJSON — non scelto in questo vault.)* Un convertitore
+  Azgaar-JSON→`<image>.markers.json` sarebbe scrivibile ma è tooling custom (schema marker di nicchia).
+
 ## Pin che linkano alle note (il cuore worldbuilding)
 - Aggiungi un marker: **Shift+clic** sulla mappa, oppure **tasto destro → «Add marker here»**.
 - Tasto destro su un marker → modifica/elimina.
