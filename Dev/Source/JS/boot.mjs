@@ -65,6 +65,7 @@ const PANELS = {
   renderCausalita: { mode: "md", args: (a, d) => [a, d.dv, d.page] },
   renderCondizioni: { mode: "md", args: (a) => [a] },
   renderMaestrie: { mode: "md", args: (a) => [a] },
+  renderAttacchi: { mode: "md", args: (a, d) => [a, d.page] },
   renderTimeline: { mode: "md", args: (a, d) => [a, d.dv] },
   renderClock: { mode: "dom", args: (a, d, cont) => [cont, a, d.page] },
   renderAxesCompare: { mode: "dom", args: (a, d, cont) => [cont, a, d.dv, d.page] },

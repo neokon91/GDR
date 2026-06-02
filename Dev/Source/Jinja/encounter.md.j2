@@ -26,6 +26,9 @@ Initiative Tracker (puntandoli alle note in `Mondi/Personaggi`).
 > [!tip] Sincronizza da creature e alleati collegati
 > Riscrive il blocco qui sotto dalle *Creature* e dagli *Alleati* in *Collegamenti*
 > (gli alleati col flag `ally`; niente copia-incolla): `BUTTON[aggiorna-encounter]`
+> **Boss/gregari**: aggiungi una proprietà `varianti` al frontmatter, una riga per
+> creatura — es. `[[Salamandra]]: hp 60, ca 12, init 20` (alias `pf`→hp). *Aggiorna*
+> applica gli override; indicare l'HP rende l'incontro **ripetibile** (niente tiro PF).
 
 ```encounter
 name: <% tp.config.target_file.basename %>

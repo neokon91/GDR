@@ -208,10 +208,54 @@ async function avanza_fronte(file) {
   return "";
 }
 
+// Override HP/CA/iniziativa per-creatura: frontmatter `varianti`, una stringa per
+// creatura nella forma "[[Nome]]: hp 60, ca 12, init 20" (alias IT: pf→hp, iniz→init).
+// Mappa nome→{hp,ca,init}. Serve a potenziare un boss o indebolire un gregario senza
+// creare una nota apposta. hp è l'ancora: Initiative Tracker è POSIZIONALE
+// (count: name, hp, ca, init), quindi ca/init valgono solo se preceduti da hp.
+function parseVarianti(varianti, sourcePath) {
+  const list = Array.isArray(varianti) ? varianti : (varianti ? [varianti] : []);
+  const out = {};
+  for (const raw of list) {
+    const s = String(raw ?? "");
+    const i = s.indexOf(":");
+    if (i < 0) continue;
+    const nome = linkName(s.slice(0, i), sourcePath);
+    if (!nome) continue;
+    const spec = {};
+    for (const part of s.slice(i + 1).split(",")) {
+      const m = part.trim().match(/^(pf|hp|ca|init|iniz(?:iativa)?)\s*[:=]?\s*(-?\d+)$/i);
+      if (!m) continue;
+      const k = m[1].toLowerCase();
+      const v = Number(m[2]);
+      if (k === "pf" || k === "hp") spec.hp = v;
+      else if (k === "ca") spec.ca = v;
+      else spec.init = v;
+    }
+    out[nome] = spec;
+  }
+  return out;
+}
+
+// Riga `creatures:` per una creatura. Con override hp emette la sintassi posizionale
+// IT (count: name, hp[, ca[, init]]); ca/init solo se contigui a partire da hp (così
+// indicare l'hp impedisce il tiro casuale → incontro ripetibile).
+function rigaCreatura(nome, q, spec) {
+  if (spec && Number.isFinite(spec.hp)) {
+    const extra = [spec.hp];
+    if (Number.isFinite(spec.ca)) {
+      extra.push(spec.ca);
+      if (Number.isFinite(spec.init)) extra.push(spec.init);
+    }
+    return `  - ${q}: ${nome}, ${extra.join(", ")}`;
+  }
+  return `  - ${q}: ${nome}`;
+}
+
 // Riscrive il blocco ```encounter``` della nota dalle creature collegate
 // (frontmatter 'creature'): rigenera la lista `creatures:` (per nome × quantità,
-// le occorrenze ripetute = più creature, coerente con la difficoltà) e allinea
-// `name:` al titolo della nota; preserva `players:`. Toglie il copia-incolla.
+// le occorrenze ripetute = più creature, coerente con la difficoltà), applica gli
+// override `varianti` e allinea `name:` al titolo della nota; preserva `players:`.
 async function aggiorna_encounter(tp, file) {
   const fm = app.metadataCache.getFileCache(file)?.frontmatter ?? {};
   const creature = Array.isArray(fm.creature) ? fm.creature : (fm.creature ? [fm.creature] : []);
@@ -220,7 +264,8 @@ async function aggiorna_encounter(tp, file) {
     const nome = linkName(l, file.path);
     if (nome) counts[nome] = (counts[nome] || 0) + 1;
   }
-  const righe = Object.entries(counts).map(([n, q]) => `  - ${q}: ${n}`);
+  const varianti = parseVarianti(fm.varianti, file.path);
+  const righe = Object.entries(counts).map(([n, q]) => rigaCreatura(n, q, varianti[n]));
   // Alleati (PNG/evocazioni schierati col gruppo): flag `, ally` → Initiative Tracker
   // li separa dai nemici nel conteggio difficoltà. Una riga per occorrenza.
   const alleati = Array.isArray(fm.alleati) ? fm.alleati : (fm.alleati ? [fm.alleati] : []);

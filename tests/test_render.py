@@ -504,6 +504,68 @@ def test_aggiorna_encounter_e2e(tmp_path):
 
 
 @pytest.mark.skipif(not shutil.which("node"), reason="node assente")
+def test_aggiorna_encounter_varianti(tmp_path):
+    """meta_actions.aggiorna_encounter: il campo `varianti` applica gli override
+    HP/CA/iniziativa con la sintassi POSIZIONALE di Initiative Tracker (boss
+    potenziato / gregario indebolito / incontro ripetibile). hp è l'ancora: una
+    variante con solo ca non emette override (non esprimibile senza hp)."""
+    harness = tmp_path / "enc_var.js"
+    harness.write_text(
+        'const body = "# Incontro\\n\\n```encounter\\nname: X\\n'
+        'players: true\\ncreatures:\\n  - 1: Vecchio\\n```\\n";\n'
+        'let saved = null;\n'
+        'const file = { basename: "Agguato", path: "Incontri/Agguato.md" };\n'
+        'global.Notice = class { constructor(m){} };\n'
+        'global.app = {\n'
+        '  workspace: { getActiveFile: () => file },\n'
+        '  metadataCache: {\n'
+        '    getFileCache: () => ({ frontmatter: {\n'
+        '      creature: ["[[Salamandra]]","[[Salamandra]]","[[Goblin]]","[[Orco]]"],\n'
+        '      varianti: ["[[Salamandra]]: hp 60, ca 12, init 20", "Goblin: pf 5", "[[Orco]]: ca 18"] } }),\n'
+        '    getFirstLinkpathDest: (t) => ({ basename: t }),\n'
+        '  },\n'
+        '  vault: { read: async () => body, modify: async (f, d) => { saved = d; } },\n'
+        '};\n'
+        f'const meta = require({json.dumps(str(render.JS_DIR / "meta_actions.js"))});\n'
+        'meta({}, "aggiorna_encounter").then(() => process.stdout.write(saved));\n',
+        encoding="utf-8")
+    res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
+    assert res.returncode == 0, res.stderr
+    out = res.stdout
+    assert "  - 2: Salamandra, 60, 12, 20" in out  # hp+ca+init posizionali (boss)
+    assert "  - 1: Goblin, 5" in out               # alias pf→hp, solo hp (gregario)
+    assert "  - 1: Orco" in out and "Orco," not in out  # ca senza hp → nessun override
+
+
+@pytest.mark.skipif(not shutil.which("node"), reason="node assente")
+def test_attacco_arma(tmp_path):
+    """views.attaccoArma: caratteristica d'attacco (mischia→Forza, distanza→Destrezza,
+    accurata/finesse→la migliore fra Forza e Destrezza del PG), dado di danno e effetto
+    della padronanza (tiri Dice Roller che leggono mod_<car> + competenza dal frontmatter)."""
+    harness = tmp_path / "att.js"
+    harness.write_text(
+        'const fs=require("fs");'
+        f'const src=fs.readFileSync({json.dumps(str(render.JS_DIR / "views.js"))},"utf8");'
+        'const m={exports:{}};new Function("module","exports",src)(m,m.exports);'
+        'const A=m.exports.attaccoArma;'
+        'const page={mod_forza:1, mod_destrezza:3, competenza:2};'
+        'const mae={vessazione:{effetto:"VEX"}, fiaccare:{effetto:"SAP"}, lentezza:{effetto:"SLOW"}};'
+        'const ascia={nome:"Ascia",danni:"1d6 taglienti",categoria:"Mischia semplice",proprieta:["leggera"],padronanza:"Vessazione"};'
+        'const stocco={nome:"Stocco",danni:"1d8 perforanti",categoria:"Mischia da guerra",proprieta:["accurata"],padronanza:"Fiaccare"};'
+        'const arco={nome:"Arco lungo",danni:"1d8 perforanti",categoria:"Distanza da guerra",proprieta:["munizioni"],padronanza:"Lentezza"};'
+        'process.stdout.write(JSON.stringify({a:A(ascia,page,mae), s:A(stocco,page,mae), r:A(arco,page,mae)}));',
+        encoding="utf-8")
+    res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
+    assert res.returncode == 0, res.stderr
+    out = json.loads(res.stdout)
+    assert out["a"]["colpire"] == "1d20 + mod_forza + competenza"   # mischia → Forza
+    assert out["a"]["danni"] == "1d6 + mod_forza" and out["a"]["effetto"] == "VEX"
+    assert "mod_destrezza" in out["s"]["colpire"]                   # finesse → mod migliore (DES 3 > FOR 1)
+    assert "mod_destrezza" in out["r"]["colpire"]                   # distanza → Destrezza
+    assert out["r"]["effetto"] == "SLOW"
+
+
+@pytest.mark.skipif(not shutil.which("node"), reason="node assente")
 def test_render_specie_tratti(tmp_path):
     """views.renderSpecieTratti: dalle sezioni SRD della specie del PG rende un
     callout pieghevole con descrizioni + tabelle (soffio/antenati draconici), così

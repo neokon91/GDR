@@ -165,6 +165,24 @@ def _weapon_mastery_map() -> dict[str, str]:
     return out
 
 
+def _weapon_catalog() -> dict[str, dict[str, Any]]:
+    """Catalogo armi (dal SRD equipment): nome -> {danni, categoria, proprieta,
+    padronanza}. Lo usa la scheda PG (views.renderAttacchi) per gli attacchi con
+    maestria: caratteristica d'attacco (finesse/distanza), dado di danno ed effetto
+    della padronanza, per ciascuna arma di cui il PG ha padronanza."""
+    out: dict[str, dict[str, Any]] = {}
+    for x in load_srd("srd_5_2_1_equipment.json"):
+        if isinstance(x, dict) and str(x.get("tipo")) == "arma" and x.get("nome"):
+            out[x["nome"]] = {
+                "nome": x["nome"],
+                "danni": x.get("danni", ""),
+                "categoria": x.get("categoria", ""),
+                "proprieta": x.get("proprieta", []) or [],
+                "padronanza": x.get("padronanza", ""),
+            }
+    return out
+
+
 def _weapon_mastery_count(cls: dict[str, Any], privilegi_l1: list[str], fallback: int) -> int:
     """Padronanze d'armi note al L1: dalla colonna di progressione se presente
     (Barbaro 2, Guerriero 3); altrimenti il fallback 2024 se la classe ha il
@@ -293,4 +311,7 @@ def build_personaggio_options(core: dict[str, Any] | None = None) -> dict[str, A
         # Mappa nome-arma -> padronanza (Weapon Mastery 2024): crea_pg la usa per
         # offrire le armi alla scelta delle padronanze e per mostrarne l'effetto.
         "armi_padronanza": _weapon_mastery_map(),
+        # Catalogo armi (danni/categoria/proprietà/padronanza): la scheda PG ne deriva
+        # gli attacchi con maestria (views.renderAttacchi).
+        "armi": _weapon_catalog(),
     }

@@ -51,8 +51,7 @@
 
 {{ m.tavolo() }}
 
-> [!tip]- Padronanze d'arma note
-> `= choice(length(this.padronanze_armi) > 0, join(this.padronanze_armi, "<br>"), "Nessuna (la tua classe non concede padronanza d'armi).")`
+{{ m.attacchi() }}
 
 {{ m.condizioni() }}
 {{ m.maestrie() }}

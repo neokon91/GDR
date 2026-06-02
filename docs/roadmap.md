@@ -51,9 +51,13 @@ Pronto per **beta chiuso**. Per la beta aperta restano i punti PM qui sotto.
 ### 5.5e / DM (completare l'esperienza di sessione)
 - ✅ **Sottoclasse homebrew** — `sali_pg` offre le sottoclassi homebrew del vault al
   `livello_sottoclasse`; `privilegi_l1` della classe homebrew applicati in `crea_pg`. (FATTO)
-- **Override HP/CA inline** negli incontri (`- N: Nome, HP, CA, init`) per boss/gregari ed
-  encounter ripetibili — serve una fonte-dato per-creatura nell'incontro.
-- **Maestrie per-arma applicate** ai tiri d'attacco (la mappa arma→proprietà c'è già).
+- ✅ **Override HP/CA inline** negli incontri (`- N: Nome, HP, CA, init`) per boss/gregari ed
+  encounter ripetibili — il frontmatter `varianti` dell'incontro è la fonte-dato per-creatura;
+  `aggiorna_encounter` la applica (hp è l'ancora posizionale). (FATTO)
+- ✅ **Maestrie per-arma applicate** ai tiri d'attacco — la scheda PG ha un pannello
+  *Attacchi con maestria* (`renderAttacchi`): per ogni arma di cui il PG ha padronanza,
+  tiro per colpire (mod arma + competenza) + danni + effetto della maestria, dal catalogo
+  armi SRD (`build_personaggio._weapon_catalog`). (FATTO)
 - **Bastioni** — catalogo strutture speciali (contenuto DMG, **non** nel SRD → serve fonte) +
   risoluzione automatica degli ordini.
 

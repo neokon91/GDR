@@ -440,6 +440,15 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 ```
 {%- endmacro %}
 
+{# Attacchi con maestria (scheda PG): per ogni arma di cui il PG ha padronanza,
+   tiro per colpire (mod arma + competenza) + danni + effetto della maestria. Le
+   armi vengono dal catalogo di personaggio.json. Logica in views.renderAttacchi. #}
+{% macro attacchi() -%}
+```js-engine
+return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderAttacchi");
+```
+{%- endmacro %}
+
 {# Tema natale (personalità psico-astrale, #9): scelto un segno si deriva
    archetipo/elemento/MBTI/ombra; l'arcano è opzionale; l'allineamento D&D resta
    accanto. Profilo per i personaggi (soprattutto PNG). Logica in views.renderTemaNatale. #}

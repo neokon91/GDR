@@ -520,8 +520,8 @@ async function renderCondizioni(app) {
 }
 
 // Quick-ref delle 8 proprietà di maestria delle armi (2024): callout pieghevole
-// nome + effetto. Da core.maestrie (system.yaml). NB: la mappa arma→proprietà e
-// i conteggi per classe non sono nei dati SRD → qui solo gli effetti.
+// nome + effetto. Da core.maestrie (system.yaml). L'applicazione PER-ARMA (tiro per
+// colpire + danni + effetto, dalle armi di cui il PG ha padronanza) è in renderAttacchi.
 function maestrieMarkdown(maestrie) {
   const lista = maestrie || [];
   if (!lista.length) return "*Maestrie delle armi non disponibili.*";
@@ -532,6 +532,75 @@ function maestrieMarkdown(maestrie) {
 async function renderMaestrie(app) {
   const core = await loadCoreData(app);
   return maestrieMarkdown(core.maestrie);
+}
+
+// --- Attacchi con maestria (scheda PG) --------------------------------------
+// Caratteristica d'attacco di un'arma (2024): a distanza → Destrezza; accurata
+// (finesse) → la migliore fra Forza e Destrezza del PG; mischia → Forza.
+function abilitaArma(arma, page) {
+  const props = ((arma && arma.proprieta) || []).map((p) => String(p).toLowerCase());
+  if (props.some((p) => p.startsWith("accurata"))) {
+    const f = Number(page && page.mod_forza) || 0;
+    const d = Number(page && page.mod_destrezza) || 0;
+    return d > f ? "destrezza" : "forza";
+  }
+  return /distanza/i.test((arma && arma.categoria) || "") ? "destrezza" : "forza";
+}
+
+// Dado di danno dalla stringa SRD "1d6 taglienti" → { dado:"1d6", tipo:"taglienti" }.
+function danniArma(danni) {
+  const s = String(danni || "");
+  const m = s.match(/(\d+d\d+)/i);
+  return { dado: m ? m[1] : "", tipo: s.replace(/\d+d\d+/i, "").trim() };
+}
+
+// Nome-arma da una voce padronanze_armi del PG ("Ascia — Vessazione" → "Ascia").
+function nomeArma(voce) {
+  return String(voce == null ? "" : voce).split("—")[0].trim();
+}
+
+// Riga d'attacco per un'arma con maestria: tiro per colpire (mod arma + competenza,
+// sintassi Dice Roller che legge il frontmatter), danni (dado + mod) ed effetto della
+// padronanza. maestrieByName: mappa nome-padronanza(minuscolo)→voce maestrie. Esposto.
+function attaccoArma(arma, page, maestrieByName) {
+  const abil = abilitaArma(arma, page);
+  const { dado, tipo } = danniArma(arma && arma.danni);
+  const mast = String((arma && arma.padronanza) || "");
+  const eff = ((maestrieByName || {})[mast.toLowerCase()] || {}).effetto || "";
+  return {
+    nome: (arma && arma.nome) || "",
+    sigla: abil.slice(0, 3).toUpperCase(),
+    colpire: `1d20 + mod_${abil} + competenza`,
+    danni: dado ? `${dado} + mod_${abil}` : "",
+    tipo,
+    padronanza: mast,
+    effetto: eff,
+  };
+}
+
+// Pannello "Attacchi con maestria" della scheda PG: per ogni arma di cui il PG ha
+// padronanza (frontmatter padronanze_armi) emette tiro per colpire + danni + effetto
+// della maestria. Le armi vengono dal catalogo di personaggio.json (opt.armi). I
+// `dice:` restano coerenti con la Scheda (Dice Roller legge mod_<car> e competenza).
+async function renderAttacchi(app, page) {
+  if (!page) return "*Apri la scheda PG.*";
+  const scelte = asArray(page.padronanze_armi).map(nomeArma).filter(Boolean);
+  if (!scelte.length) {
+    return "> [!tip]- ⚔️ Attacchi con maestria\n> Nessuna padronanza d'arma: la tua classe non la concede. Le 8 proprietà di maestria sono nel quick-ref sotto.";
+  }
+  const opt = await loadPersonaggio(app);
+  const armi = opt.armi || {};
+  const core = await loadCoreData(app);
+  const maestrieByName = {};
+  for (const mm of core.maestrie || []) maestrieByName[String(mm.nome || "").toLowerCase()] = mm;
+  const righe = scelte.map((nome) => {
+    const arma = armi[nome];
+    if (!arma) return `> **${nome}** — *(non nel catalogo SRD; tira con il d20 della Scheda)*`;
+    const a = attaccoArma(arma, page, maestrieByName);
+    const danni = a.danni ? ` · danni \`dice: ${a.danni}\`${a.tipo ? " " + a.tipo : ""}` : "";
+    return `> **${a.nome}** (${a.sigla}) — colpire \`dice: ${a.colpire}\`${danni}\n>\n> ⚔️ *${a.padronanza}* — ${a.effetto}`;
+  });
+  return `> [!tip]- ⚔️ Attacchi con maestria\n${righe.join("\n>\n")}`;
 }
 
 // --- Tema natale (personalità psico-astrale, recupero #9) --------------------
@@ -932,6 +1001,7 @@ module.exports = {
   renderPressioni,
   renderCondizioni, condizioniMarkdown,
   renderMaestrie, maestrieMarkdown,
+  renderAttacchi, attaccoArma, abilitaArma, danniArma, nomeArma,
   radarMarkdownFromValues,
   renderTemaNatale, temaNataleMarkdown,
   renderConnessioni,
