@@ -44,6 +44,15 @@ creation:
     category: mondo
     link: true
     optional: true
+  # Dati che rendono l'incantesimo GIOCABILE dal motore (crea_pg/sali_pg lo
+  # fondono nel pool selezionabile del PG): livello + classi che lo lanciano.
+  - field: livello
+    prompt: 'Livello (0 = trucchetto, 1-9)'
+    from: number
+    optional: true
+  - field: classi
+    prompt: 'Classi che lo lanciano (es. Mago, Chierico)'
+    optional: true
   body:
   - field: effetto
     prompt: Effetto dell'incantesimo

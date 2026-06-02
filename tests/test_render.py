@@ -1071,6 +1071,44 @@ def test_validate_reciprocals():
 
 
 @pytest.mark.skipif(not shutil.which("node"), reason="node assente")
+def test_homebrew_bridge(tmp_path):
+    """Ponte homebrew→motore (crea_pg/sali_pg): incantesimiHomebrew filtra le note
+    categoria=incantesimo per classe (classi cita la classe, o vuote = tutti),
+    raggruppa per livello (mancante→1), esclude archiviate; fondiPool unisce SRD+
+    homebrew senza duplicati; talentiHomebrew raccoglie le note categoria=talento.
+    Degrada a vuoto senza app.vault.getMarkdownFiles (verificato dai test PG e2e)."""
+    harness = tmp_path / "hb.js"
+    harness.write_text(
+        f'const crea=require({json.dumps(str(render.JS_DIR / "crea_pg.js"))});'
+        f'const sali=require({json.dumps(str(render.JS_DIR / "sali_pg.js"))});'
+        'const F=(basename,fm)=>({f:{basename,path:basename+".md"},fm});'
+        'const files=[F("Dardo arcano",{categoria:"incantesimo",livello:1,classi:"Mago, Stregone"}),'
+        ' F("Tocco gelido",{categoria:"incantesimo",livello:0,classi:"Mago"}),'
+        ' F("Cura ferite",{categoria:"incantesimo",livello:1,classi:"Chierico"}),'
+        ' F("Eco senza scuola",{categoria:"incantesimo",livello:2}),'              # niente classi = a tutti
+        ' F("Spell vecchio",{categoria:"incantesimo",livello:1,classi:"Mago",stato:"archiviata"}),'  # esclusa
+        ' F("Maestro ombre",{categoria:"talento"}),'
+        ' F("Talento vecchio",{categoria:"talento",stato:"archiviata"}),'          # esclusa
+        ' F("Un luogo",{categoria:"luogo"})];'                                     # esclusa
+        'global.app={vault:{getMarkdownFiles:()=>files.map(x=>x.f)},'
+        ' metadataCache:{getFileCache:(f)=>({frontmatter:(files.find(x=>x.f===f)||{}).fm})}};'
+        'const out={'
+        ' mago:crea.incantesimiHomebrew("mago","Mago"),'
+        ' chierico:crea.incantesimiHomebrew("chierico","Chierico"),'
+        ' fusione:crea.fondiPool({"1":["Palla di fuoco"]},{"1":["Dardo arcano"],"0":["Tocco gelido"]}),'
+        ' talenti:Object.keys(sali.talentiHomebrew())};'
+        'process.stdout.write(JSON.stringify(out));',
+        encoding="utf-8")
+    res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
+    assert res.returncode == 0, res.stderr
+    out = json.loads(res.stdout)
+    assert out["mago"] == {"0": ["Tocco gelido"], "1": ["Dardo arcano"], "2": ["Eco senza scuola"]}  # Mago + senza-classi, no Chierico/archiviata
+    assert out["chierico"] == {"1": ["Cura ferite"], "2": ["Eco senza scuola"]}
+    assert out["fusione"]["1"] == ["Palla di fuoco", "Dardo arcano"] and out["fusione"]["0"] == ["Tocco gelido"]
+    assert out["talenti"] == ["Maestro ombre"]                                     # talento attivo, no archiviata/luogo
+
+
+@pytest.mark.skipif(not shutil.which("node"), reason="node assente")
 def test_render_dintorni(tmp_path):
     """views.renderDintorni: regione contenitore, luoghi contenuti, distanza per
     CONFINI (BFS su confina_con) e IN LINEA D'ARIA (euclidea × mondo.scala_mappa, km),
@@ -1213,7 +1251,7 @@ def test_render_incantesimi(tmp_path):
         ' incantesimi:["Scudo","Dardo incantato","Palla di fuoco"],'
         ' slot_1:3,slot_uso_1:1,slot_3:2,slot_uso_3:0};'
         'const ladra={classe:"ladra"};'
-        'Promise.all([m.exports.renderIncantesimi(app,mago),m.exports.renderIncantesimi(app,ladra)])'
+        'Promise.all([m.exports.renderIncantesimi(app,null,mago),m.exports.renderIncantesimi(app,null,ladra)])'
         '.then(([a,b])=>process.stdout.write(JSON.stringify({a,b})));',
         encoding="utf-8")
     res = subprocess.run(["node", str(harness)], capture_output=True, text=True)

@@ -162,11 +162,42 @@ function calcolaCA(armatura, modDes, scudo) {
     return (armatura.ca_base || 10) + cap + (scudo ? 2 : 0);
 }
 
+// Ponte HOMEBREW→motore: incantesimi creati nel vault (categoria incantesimo) per
+// la classe data → {livello:[nomi]}, da fondere col pool SRD. Una nota conta se le
+// sue `classi` citano la classe (per id o label) o sono vuote (= disponibile a
+// tutti). `livello` mancante → 1. Degrada a {} fuori da Obsidian (test: niente
+// getMarkdownFiles). NB: copia gemella in sali_pg.js (script autonomi, niente require).
+function incantesimiHomebrew(classeId, classeLabel) {
+    if (!app.vault || !app.vault.getMarkdownFiles) return {};
+    const want = [String(classeId || ""), String(classeLabel || "")].map(s => s.toLowerCase()).filter(Boolean);
+    const pool = {};
+    for (const f of app.vault.getMarkdownFiles()) {
+        const fm = (app.metadataCache.getFileCache(f) || {}).frontmatter || {};
+        if (fm.categoria !== "incantesimo" || fm.stato === "archiviata") continue;
+        const classi = (Array.isArray(fm.classi) ? fm.classi.join(",") : String(fm.classi || "")).toLowerCase();
+        if (classi && !want.some(w => w && classi.includes(w))) continue;
+        const n = Number.parseInt(fm.livello, 10);
+        const L = String(Number.isFinite(n) && n >= 0 ? n : 1);
+        (pool[L] = pool[L] || []).push(f.basename);
+    }
+    return pool;
+}
+
+// Fonde due pool {livello:[nomi]} senza duplicati (SRD + homebrew).
+function fondiPool(a, b) {
+    const out = {};
+    for (const src of [a || {}, b || {}])
+        for (const [L, nomi] of Object.entries(src))
+            out[L] = Array.from(new Set([...(out[L] || []), ...nomi]));
+    return out;
+}
+
 // Incantesimi a PG di 1º livello: trucchetti (trucchetti_noti) + incantesimi di
-// 1º (incantesimi_preparati) dai pool della classe. Niente per i non-incantatori.
-async function scegliIncantesimi(tp, classe) {
+// 1º (incantesimi_preparati) dai pool della classe FUSI con l'homebrew del vault.
+// Niente per i non-incantatori.
+async function scegliIncantesimi(tp, classe, classeId) {
     if (!classe.incantatore) return { trucchetti: [], preparati: [], slot: classe.slot_l1 || {} };
-    const pool = classe.incantesimi_pool || {};
+    const pool = fondiPool(classe.incantesimi_pool || {}, incantesimiHomebrew(classeId, classe.label));
     const trucchetti = await scegliMulti(tp, "Trucchetto", pool["0"] || [], classe.trucchetti_noti || 0);
     const preparati = await scegliMulti(tp, "Incantesimo di 1º livello", pool["1"] || [], classe.incantesimi_preparati || 0);
     return { trucchetti, preparati, slot: classe.slot_l1 || {} };
@@ -274,8 +305,8 @@ async function crea_pg(tp) {
     const standard = (lingueCfg.standard || []).filter(l => l !== comune);
     const lingue = [comune, ...await scegliMulti(tp, "Lingua", standard, lingueCfg.numero_a_scelta || 0)];
 
-    // Incantesimi di 1º livello (solo incantatori).
-    const magia = await scegliIncantesimi(tp, classe);
+    // Incantesimi di 1º livello (solo incantatori; pool SRD + homebrew del vault).
+    const magia = await scegliIncantesimi(tp, classe, classeId);
 
     const pf = Math.max(1, (classe.dado_vita || 8) + mod(caratteristiche.costituzione));
     const talentoOrigine = background.talento_origine
@@ -327,3 +358,6 @@ async function crea_pg(tp) {
 module.exports = crea_pg;
 // Esposto per il test-guardia del nome vuoto (test_crea_pg_nome_vuoto).
 module.exports.nomeFile = nomeFile;
+// Esposti per i test del ponte homebrew→motore.
+module.exports.incantesimiHomebrew = incantesimiHomebrew;
+module.exports.fondiPool = fondiPool;

@@ -282,6 +282,13 @@ sopra i sistemi avanzati (vedi backlog).
     trucchetti + incantesimi noti **raggruppati per livello** (dal pool della classe),
     linkati alle note SRD, con **slot residui** per livello. Scala 1-20 (sostituisce il
     callout fisso al "1º livello"). Per i non incantatori non compare.
+  - ✅ **Ponte HOMEBREW→motore** (incantesimi + talenti): `crea_pg`/`sali_pg` scansionano il
+    vault a runtime e **fondono** gli incantesimi (categoria `incantesimo`, filtrati per
+    `classi`+`livello`) e i talenti (categoria `talento`) homebrew col pool SRD → diventano
+    **selezionabili** in creazione/level-up; `renderIncantesimi` ne risolve il livello dalla
+    nota. Il wizard incantesimo ora cattura `livello`+`classi` (nasce engine-ready). Degrada
+    fuori da Obsidian (test). Demo: «Fiamma Cinerea» nel mondo-esempio. *Residuo*: classe/
+    specie/background/sottoclasse homebrew (schema più grande) restano solo schede.
   - **Level-up avanzato**: `sali_pg` copre già PF/competenza/slot, sottoclasse, ASI/talento,
     trucchetti+incantesimi e privilegi. *Residuo fine*: scambio di un incantesimo noto al
     level-up (2024), feature opzionali oltre il set base.

@@ -832,16 +832,26 @@ async function renderSpecieTratti(app, page) {
 // (slot_N − slot_uso_N). Sostituisce il vecchio callout inchiodato al "1º livello":
 // per un caster di livello alto vedi l'intero spellbook, non solo il 1º. Non
 // incantatore / nessun incantesimo → "" (niente callout). Pure-ish (usa loadPersonaggio).
-async function renderIncantesimi(app, page) {
+async function renderIncantesimi(app, dv, page) {
   if (!page) return "*Apri una scheda PG.*";
   const trucchetti = asArray(page.trucchetti), incantesimi = asArray(page.incantesimi);
   const data = await loadPersonaggio(app);
   const classe = (data.classi || {})[text(page.classe)] || {};
   if (!classe.incantatore && !trucchetti.length && !incantesimi.length) return "";  // non caster
-  // nome → livello, invertendo il pool della classe.
+  // nome → livello, invertendo il pool della classe (SRD).
   const levelOf = new Map();
   for (const [L, names] of Object.entries(classe.incantesimi_pool || {}))
     for (const n of names || []) levelOf.set(n, Number(L));
+  // Homebrew: il livello dalla nota stessa (categoria incantesimo) se non nel pool
+  // della classe — così gli incantesimi homebrew si raggruppano bene, non sotto "ignoto".
+  if (dv) {
+    try {
+      for (const sp of dv.pages().where((p) => p && p.file && text(p.categoria) === "incantesimo").array()) {
+        const L = Number(sp.livello);
+        if (sp.file && !levelOf.has(sp.file.name) && Number.isFinite(L)) levelOf.set(sp.file.name, L);
+      }
+    } catch (e) { /* dv assente o query fallita: gli homebrew finiscono in "ignoto" */ }
+  }
   const groups = new Map();  // livello → [nomi]
   const push = (L, n) => { if (!groups.has(L)) groups.set(L, []); groups.get(L).push(n); };
   for (const t of trucchetti) push(0, text(t));

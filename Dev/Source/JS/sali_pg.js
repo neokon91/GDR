@@ -11,6 +11,42 @@ function mod(v) { const n = Number.parseInt(v, 10); return Math.floor(((Number.i
 function pfPerLivello(dado) { return Math.floor((Number(dado) || 8) / 2) + 1; } // media fissa (PHB)
 function sigla(s) { return String(s).charAt(0).toUpperCase() + String(s).slice(1); }
 
+// --- Ponte HOMEBREW→motore (copie gemelle di crea_pg.js: script autonomi) -----
+// Note del vault per categoria → frontmatter (vuoto fuori da Obsidian: test).
+function vaultByCategoria(cat) {
+  if (!app.vault || !app.vault.getMarkdownFiles) return [];
+  return app.vault.getMarkdownFiles()
+    .map(f => ({ f, fm: (app.metadataCache.getFileCache(f) || {}).frontmatter || {} }))
+    .filter(e => e.fm.categoria === cat && e.fm.stato !== "archiviata");
+}
+// Incantesimi homebrew per la classe → {livello:[nomi]} (classi che citano la classe
+// o vuote; livello mancante → 1). Da fondere col pool SRD.
+function incantesimiHomebrew(classeId, classeLabel) {
+  const want = [String(classeId || ""), String(classeLabel || "")].map(s => s.toLowerCase()).filter(Boolean);
+  const pool = {};
+  for (const { f, fm } of vaultByCategoria("incantesimo")) {
+    const classi = (Array.isArray(fm.classi) ? fm.classi.join(",") : String(fm.classi || "")).toLowerCase();
+    if (classi && !want.some(w => w && classi.includes(w))) continue;
+    const n = Number.parseInt(fm.livello, 10);
+    const L = String(Number.isFinite(n) && n >= 0 ? n : 1);
+    (pool[L] = pool[L] || []).push(f.basename);
+  }
+  return pool;
+}
+function fondiPool(a, b) {
+  const out = {};
+  for (const src of [a || {}, b || {}])
+    for (const [L, nomi] of Object.entries(src))
+      out[L] = Array.from(new Set([...(out[L] || []), ...nomi]));
+  return out;
+}
+// Talenti homebrew → {nome:{label:nome}}, da fondere con opt.talenti (SRD).
+function talentiHomebrew() {
+  const out = {};
+  for (const { f } of vaultByCategoria("talento")) out[f.basename] = { label: f.basename };
+  return out;
+}
+
 async function scegliMulti(tp, titolo, pool, n) {
   const scelte = [], disp = [...(pool || [])];
   for (let i = 0; i < (n || 0) && disp.length; i++) {
@@ -68,15 +104,17 @@ async function sali_pg(tp) {
         u[c] = (Number(u[c] != null ? u[c] : fm[c]) || 10) + 1; disp.splice(disp.indexOf(c), 1); note.push(`+1 ${sigla(c)}`);
       }
     } else if (scelta === "talento") {
-      const ids = Object.keys(opt.talenti || {});
-      const t = await tp.system.suggester(ids.map(id => (opt.talenti[id].label) || id), ids, false, "Quale talento?");
+      const talenti = { ...(opt.talenti || {}), ...talentiHomebrew() };  // SRD + homebrew
+      const ids = Object.keys(talenti);
+      const t = await tp.system.suggester(ids.map(id => (talenti[id].label) || id), ids, false, "Quale talento?");
       if (t) { const l = Array.isArray(fm.talenti) ? [...fm.talenti] : []; if (!l.includes(t)) l.push(t); u.talenti = l; note.push(`talento ${t}`); }
     }
   }
 
-  // Incantesimi: trucchetti + incantesimi preparati (delta dal pool, fino al max livello)
+  // Incantesimi: trucchetti + incantesimi preparati (delta dal pool, fino al max
+  // livello). Pool SRD FUSO con l'homebrew del vault (ponte homebrew→motore).
   if (classe.incantatore) {
-    const pool = classe.incantesimi_pool || {};
+    const pool = fondiPool(classe.incantesimi_pool || {}, incantesimiHomebrew(fm.classe, classe.label));
     const curTr = Array.isArray(fm.trucchetti) ? fm.trucchetti : [];
     const dTr = (row.trucchetti || 0) - curTr.length;
     if (dTr > 0) {
@@ -109,3 +147,7 @@ async function sali_pg(tp) {
 }
 
 module.exports = sali_pg;
+// Esposti per i test del ponte homebrew→motore.
+module.exports.incantesimiHomebrew = incantesimiHomebrew;
+module.exports.talentiHomebrew = talentiHomebrew;
+module.exports.fondiPool = fondiPool;

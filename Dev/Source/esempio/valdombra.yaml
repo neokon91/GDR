@@ -598,3 +598,26 @@ note:
     gancio: La via del ritorno non c'è più dov'era un attimo fa.
     pressione: 5
     prossima_mossa: Se i personaggi fuggono, l'Orrore li segue fino alle cantine.
+
+  # ----------------------------------------- INCANTESIMO (homebrew demo del ponte)
+  - nome: Fiamma Cinerea
+    categoria: incantesimo
+    tipo: invocazione
+    fm:
+      livello: 1
+      classi: "Mago, Stregone"
+      tempo_lancio: "1 azione"
+      gittata: "18 m"
+      componenti: "V, S, M (un pizzico di cenere)"
+      durata: Istantanea
+    fatti:
+      - ["Livello", "1º · invocazione"]
+      - ["Classi", "Mago, Stregone"]
+      - ["Natura", "Incantesimo HOMEBREW"]
+    lore: >-
+      Un dardo di cenere ardente che esplode in una vampata grigia: la magia delle
+      Marche sa di fuoco spento e di cose sepolte.
+    uso_al_tavolo: >-
+      Esempio di incantesimo HOMEBREW collegato al motore: crea un PG **Mago** o
+      **Stregone** con *Crea PG* e «Fiamma Cinerea» comparirà tra gli incantesimi
+      selezionabili (livello 1), accanto a quelli del SRD.
