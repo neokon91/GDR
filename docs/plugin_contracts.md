@@ -63,3 +63,8 @@ scrive config — si usano a mano nelle note. Il punto d'aggancio comune è il c
 La generazione è validata da `npm test`/`check`, ma il **rendering reale dei
 plugin** (Meta Bind, tabelle, statblock, wizard Templater) va confermato aprendo
 `dist/GDR-vault` in Obsidian dopo un build: l'agente non pilota Obsidian desktop.
+
+## Materiale non ancora sfruttato
+Il confronto della doc **ufficiale** di ogni plugin con il nostro uso (sweep) è in
+[plugin_opportunities](plugin_opportunities.md): backlog prioritizzato delle feature
+disponibili e non cablate. La sintassi verificata di ciascuna sta in `Dev/Reference/<plugin>.md`.
