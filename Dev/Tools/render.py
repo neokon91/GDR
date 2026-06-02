@@ -284,6 +284,17 @@ def write_folder_notes(obsidian: Path) -> None:
     })
 
 
+def write_tab_panels(obsidian: Path) -> None:
+    """Tab Panels: abilita la CACHE così link/heading/tag scritti NEL CORPO di una tab
+    finiscono nell'indice di Obsidian (backlink, Outline, Dataview-su-contenuto). Tutto
+    il corpo nota vive dentro ````tabs: senza cache i [[wikilink]] scritti a mano nella
+    prosa (Lore/Descrizione) sarebbero invisibili al grafo. Le relazioni tipizzate stanno
+    nel frontmatter (già indicizzate); questo recupera i link liberi. NB: per le note GIÀ
+    esistenti serve un 'Rebuild cache' una tantum; le nuove si indicizzano da sole. Merge
+    non distruttivo (solo se il plugin è installato)."""
+    merge_plugin_config(obsidian, "tab-panels", {"enableCaching": True})
+
+
 def write_calendarium(obsidian: Path) -> None:
     """Calendarium ('tempo del mondo'): abilita lo scan automatico degli eventi
     dalle note (frontmatter `fc-date`/`fc-calendar` + tag inline `#cronologia`),
@@ -760,6 +771,7 @@ def write_obsidian_config(obsidian: Path, core: dict[str, Any], plugins: dict[st
     write_callout_manager(obsidian, plugins)
     write_statblock_layouts(obsidian)
     write_folder_notes(obsidian)
+    write_tab_panels(obsidian)
     write_calendarium(obsidian)
     write_fantasy_content_generator(obsidian)
     write_bookmarks(obsidian, pages)
