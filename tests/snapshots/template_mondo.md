@@ -128,7 +128,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > **5 · Rovina** — Dopo un cataclisma; rovine di un'era perduta tra i sopravvissuti.
 
 ```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "mondo", null);
+return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "mondo", component);
 ```
 
 --- Mappa

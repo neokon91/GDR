@@ -135,7 +135,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > **5 · Mediato** — Solo tramite clero, testi sacri, liturgie o artefatti consacrati si può accedere al divino. La fede passa attraverso una struttura di mediazione istituzionale e rituale. Il fedele non può comunicare da sé.
 
 ```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "culto", null);
+return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "culto", component);
 ```
 
 ```js-engine

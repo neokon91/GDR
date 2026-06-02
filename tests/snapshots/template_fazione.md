@@ -165,7 +165,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > **5 · Metamorfosi** — La sconfitta è parte della fede stessa. La fazione muta forma, scopo e persino nome. Ogni crisi è una mutazione sacra. Nessuna identità è fissa. Ideale per fazioni legate al Vuoto, alla Rinascita o all’Inganno.
 
 ```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "fazione", null);
+return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "fazione", component);
 ```
 
 ```js-engine

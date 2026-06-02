@@ -144,7 +144,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > **5 · Illuminazione Totale** — Tutto è chiaro. L’epoca culmina in un’apertura cosmica, in cui il sapere sacro, l’ordine metafisico e l’armonia sono pienamente manifesti. Le tenebre sono dissolte o integrate. L’universo è trasparente all’intelletto divino o mortale.
 
 ```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "epoca", null);
+return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "epoca", component);
 ```
 
 --- Cronologia

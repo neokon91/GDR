@@ -114,7 +114,7 @@
 > **5 · Universale** — Tutti, indipendentemente da cultura, status o preparazione, possono accedere alla divinità. Essa risponde anche a preghiere non rituali. È presente in ogni cuore e ogni luogo.
 
 ```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "divinita", null);
+return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "divinita", component);
 ```
 
 --- Collegamenti

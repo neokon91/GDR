@@ -140,7 +140,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > **5 · Multiplanare** — Ogni parola esiste in più livelli semantici: reale, spirituale, magico, onirico. Serve un’iniziazione per comprenderla pienamente.
 
 ```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "lingua", null);
+return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "lingua", component);
 ```
 
 --- Collegamenti

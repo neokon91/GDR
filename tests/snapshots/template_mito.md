@@ -100,7 +100,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > **5 · Profetico** — Si sta avverando; il mondo si muove sul suo copione.
 
 ```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "mito", null);
+return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "mito", component);
 ```
 
 --- Collegamenti

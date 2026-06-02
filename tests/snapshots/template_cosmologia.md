@@ -125,7 +125,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > **5 · Ignota** — Nessuno la conosce; opera nell'ombra del mondo.
 
 ```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "cosmologia", null);
+return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "cosmologia", component);
 ```
 
 --- Collegamenti

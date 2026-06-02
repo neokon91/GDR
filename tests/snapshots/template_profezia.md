@@ -98,7 +98,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > **5 · Aperta** — Solo una possibilità tra tante; il futuro è libero.
 
 ```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "profezia", null);
+return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "profezia", component);
 ```
 
 --- Collegamenti

@@ -111,7 +111,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > **5 · Onnipresente** — La sua sostanza pervade luoghi e stirpi.
 
 ```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "entita_primordiale", null);
+return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "entita_primordiale", component);
 ```
 
 --- Collegamenti

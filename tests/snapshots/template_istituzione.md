@@ -103,7 +103,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > **5 · Esemplare** — Incorruttibile; incarna il proprio ideale.
 
 ```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "istituzione", null);
+return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "istituzione", component);
 ```
 
 --- Collegamenti

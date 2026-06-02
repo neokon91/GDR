@@ -512,7 +512,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
    muovi lo slider (le etichette-valore degli assi restano comunque reattive via VIEW). #}
 {% macro grafico_assi(category) -%}
 ```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "{{ category }}", null);
+return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "{{ category }}", component);
 ```
 {%- endmacro %}
 

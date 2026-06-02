@@ -113,7 +113,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > **5 · In guerra** — Lacera il cosmo; il suo scontro è cataclisma.
 
 ```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "dominio", null);
+return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "dominio", component);
 ```
 
 --- Collegamenti

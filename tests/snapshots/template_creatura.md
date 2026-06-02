@@ -165,7 +165,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > **5 · Geniale** — Mente superiore o aliena; piani secolari, concetti iperoggettivi.
 
 ```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "creatura", null);
+return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "creatura", component);
 ```
 
 --- Collegamenti

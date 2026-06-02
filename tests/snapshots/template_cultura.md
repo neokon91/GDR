@@ -150,7 +150,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > **5 · Trascendente-sacrale** — L’arte è portale verso altri piani. Ogni opera è un sigillo, un’entità vivente, una soglia ontica. Le forme sono mantram visivi, e la bellezza è rivelazione del divino.
 
 ```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "cultura", null);
+return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "cultura", component);
 ```
 
 --- Collegamenti

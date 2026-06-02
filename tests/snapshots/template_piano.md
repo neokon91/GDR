@@ -106,7 +106,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > **5 · Maligno** — Ostile a ogni vita; male incarnato.
 
 ```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "piano", null);
+return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "piano", component);
 ```
 
 --- Collegamenti

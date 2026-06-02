@@ -162,7 +162,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > **5 · Empatico** — Il luogo ha una volontà psichica attiva. Comunica, seduce, manipola o giudica. Può fondersi con la coscienza, rivelando traumi, desideri o verità.
 
 ```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "luogo", null);
+return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "luogo", component);
 ```
 
 --- Mappa

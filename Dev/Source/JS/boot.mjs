@@ -81,21 +81,30 @@ export async function panel(engine, app, container, name) {
   return engine.markdown.create(out);
 }
 
-// Radar degli assi (js-engine): legge i valori-assi dal frontmatter della nota
-// attiva e disegna il radar (views.radarMarkdownFromValues). Il param `context`
-// resta per compatibilità (variante meta-bind-js-view con context.bound), ma il
-// macro grafico_assi ora passa null → si usa il frontmatter. Si ridisegna alla
-// riapertura/ri-render della nota. Carica core.json (catalogo assi).
-export async function radar(engine, app, category, context) {
+// Radar degli assi (js-engine), REATTIVO: legge i valori-assi dal frontmatter della
+// nota attiva e si RIDISEGNA live quando uno slider Meta Bind cambia il frontmatter,
+// senza riaprire la nota. Meccanismo: engine.reactive (ReactiveComponent) ridisegnato
+// da un listener metadataCache 'changed', registrato sul `component` del blocco
+// (auto-deregistrato all'unload → niente leak / handler duplicati). Se engine.reactive
+// non c'è (versioni vecchie), degrada a un render statico. Carica core.json (catalogo).
+export async function radar(engine, app, category, component) {
   const views = await loadViews(app);
   const core = await loadCore(app);
-  let valori = {};
-  try {
-    valori = context && context.bound ? context.bound : {};
-  } catch (e) {}
-  if (!Object.values(valori).some((x) => x != null)) {
-    const f = app.workspace.getActiveFile();
-    valori = f ? (app.metadataCache.getFileCache(f) || {}).frontmatter || {} : {};
+  const file = app.workspace.getActiveFile();
+  const valoriDi = () => {
+    const f = app.workspace.getActiveFile() || file;
+    return f ? (app.metadataCache.getFileCache(f) || {}).frontmatter || {} : {};
+  };
+  const draw = (valori) =>
+    engine.markdown.create(views.radarMarkdownFromValues(core, category, valori, ""));
+  if (!engine.reactive) return draw(valoriDi()); // fallback statico
+  const reactive = engine.reactive(draw, valoriDi());
+  if (component && file) {
+    component.registerEvent(
+      app.metadataCache.on("changed", (changed) => {
+        if (changed && changed.path === file.path) reactive.refresh(valoriDi());
+      })
+    );
   }
-  return engine.markdown.create(views.radarMarkdownFromValues(core, category, valori, ""));
+  return reactive;
 }

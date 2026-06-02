@@ -95,7 +95,7 @@
 > **5 · Legale** — Impone equilibrio, disciplina, coerenza spirituale o cosmica. Rifiuta l’uso improprio o deviante.
 
 ```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "oggetto", null);
+return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "oggetto", component);
 ```
 
 --- Collegamenti

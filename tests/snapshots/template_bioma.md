@@ -98,7 +98,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > **5 · Inaccessibile** — Quasi irraggiungibile; barriere estreme o magiche.
 
 ```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "bioma", null);
+return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "bioma", component);
 ```
 
 --- Collegamenti

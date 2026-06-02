@@ -92,7 +92,7 @@
 > **5 · Atemporale** — La specie non percepisce il tempo come sequenza. Tutto è simultaneo, simbolico o mitico. Vive nel sogno, nella memoria eterna, nella coscienza collettiva. Il tempo lineare è illusione.
 
 ```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "specie", null);
+return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "specie", component);
 ```
 
 --- Collegamenti
