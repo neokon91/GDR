@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>{{ page.name }} · {{ page.world or "Mondo" }}</title>
+<link rel="stylesheet" href="site.css">
+</head>
+<body>
+<header class="topbar">
+  <a class="home" href="index.html">← Indice</a>
+  <span class="crumb">{{ page.world or "Mondo" }} · {{ page.category_label }}</span>
+</header>
+<main class="note">
+  <h1>{{ page.name }}</h1>
+  {% if page.facts %}
+  <table class="facts">
+    {% for f in page.facts %}<tr><th>{{ f.label }}</th><td>{{ f.value }}</td></tr>{% endfor %}
+  </table>
+  {% endif %}
+
+  {% for s in page.sections %}
+    {% if s.heading %}<h2>{{ s.heading }}</h2>{% endif %}
+    {{ s.html | safe }}
+  {% endfor %}
+
+  {% if page.relations %}
+  <section class="relations">
+    <h2>Collegamenti</h2>
+    <dl>
+      {% for r in page.relations %}
+      <dt>{{ r.label }}</dt>
+      <dd>{% for t in r.targets %}{% if t.href %}<a href="{{ t.href }}">{{ t.name }}</a>{% else %}{{ t.name }}{% endif %}{% if not loop.last %}, {% endif %}{% endfor %}</dd>
+      {% endfor %}
+    </dl>
+  </section>
+  {% endif %}
+</main>
+<footer class="foot">Sito dei giocatori · sola lettura · senza spoiler · generato dal vault</footer>
+</body>
+</html>

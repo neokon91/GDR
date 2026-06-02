@@ -54,6 +54,7 @@ from build_srd import (  # noqa: F401 (re-export per i test)
     srd_statblock_yaml,
 )
 from build_personaggio import build_personaggio_options  # noqa: F401 (re-export)
+from build_site import SITE_OUT, build_site  # noqa: F401 (re-export per i test)
 from validate import (  # noqa: F401 (re-export per i test)
     CORE_ONLY_SECTIONS,
     PARTITIONED_SECTIONS,
@@ -932,6 +933,7 @@ def main() -> int:
     parser = argparse.ArgumentParser(description="Genera il vault Obsidian GDR in dist/GDR-vault da sorgenti YAML/Jinja/JS.")
     parser.add_argument("--clean", action="store_true", help="Rimuove solo gli artefatti generati (non i contenuti/plugin).")
     parser.add_argument("--check", action="store_true", help="Valida YAML/Jinja senza scrivere output.")
+    parser.add_argument("--site", action="store_true", help="Genera il sito statico dei giocatori (spoiler-free, read-only) in dist/GDR-site dal vault.")
     args = parser.parse_args()
 
     if args.clean:
@@ -940,6 +942,13 @@ def main() -> int:
         return 0
     if args.check:
         return check()
+    if args.site:
+        if not (VAULT / "Mondi").is_dir():
+            print("Nessun contenuto in Mondi/: esegui prima `npm run build`.")
+            return 1
+        pages = build_site(load_core(), VAULT, SITE_OUT)
+        print(f"Sito giocatori: {pages} pagine in {SITE_OUT.relative_to(ROOT)}/ — apri index.html o pubblica la cartella.")
+        return 0
 
     clean()
     rendered = build()

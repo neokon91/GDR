@@ -32,10 +32,24 @@ Dev/Source/{YAML,Jinja,JS}  ──►  Dev/Tools/render.py  ──►  dist/GDR-
 |---|---|
 | `npm run check` | Valida YAML/Jinja e `node --check` sui JS. **Non scrive.** |
 | `npm run build` | Genera il vault in `dist/GDR-vault/` (non distruttivo). |
+| `npm run site` | Genera il **sito dei giocatori** (statico, spoiler-free) in `dist/GDR-site/`. |
 | `npm run clean` | Rimuove solo gli artefatti generati (mai `.obsidian`/contenuti). |
 
 Verifica sempre con `npm run check` o un render standalone a stdout; il `build`
 scrive sul vault Obsidian reale.
+
+### Sito dei giocatori (`npm run site`)
+
+Esporta da `dist/GDR-vault/Mondi/` un **sito statico HTML** navigabile, pensato per i
+**giocatori**: una voce per nota di worldbuilding (fatti, prosa, relazioni linkate),
+**senza spoiler** e **read-only**. Aggira il limite di Obsidian Publish (che non rende
+i plugin dinamici Dataview/Meta Bind/JS Engine): qui Dataview/Meta Bind/Templater/
+js-engine, i callout `segreto` e i campi del DM (`uso_al_tavolo`/`gancio`/`pressione`/
+`prossima_mossa`/`conseguenza`) sono **rimossi a monte**. Output in `dist/GDR-site/`
+(`index.html` + una pagina per nota + `site.css`): aprilo in locale o pubblica la
+cartella su GitHub Pages/Netlify. Per **nascondere** una nota intera ai giocatori:
+`visibilita: dm` (o `pubblico: false`) nel frontmatter. Implementazione in
+[`Dev/Tools/build_site.py`](Dev/Tools/build_site.py), template in `Dev/Source/SiteJinja/`.
 
 ## Documentazione
 
@@ -50,9 +64,10 @@ Approfondimenti in [`docs/`](docs/): [architecture](docs/architecture.md) ·
 Dev/Source/YAML/      core.yaml · system.yaml · entities/*.yaml · pg_rules.yaml
                       plugins.yaml · templates.yaml · pages.yaml
 Dev/Source/Jinja/     _macros.j2 · _entity_base.j2 + un template per entità
+Dev/Source/SiteJinja/ page.html.j2 · index.html.j2 · site.css (sito dei giocatori)
 Dev/Source/JS/        create_entity.js · crea_pg.js · meta_actions.js · views.js
 Dev/Source/SRD/       JSON SRD 5.2.1 IT · statblocks/ layout Fantasy Statblocks
-Dev/Tools/            common.py · build_srd.py · build_personaggio.py · validate.py · render.py
+Dev/Tools/            common.py · build_srd.py · build_personaggio.py · build_site.py · validate.py · render.py
 Dev/Reference/        cheat-sheet sintassi dei plugin installati
 docs/                 architecture · data_model · rules_layer · play_layer · plugin_contracts
 ```
