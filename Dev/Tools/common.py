@@ -217,7 +217,7 @@ def generated_note_names() -> list[str]:
     """Note generate: Home/LEGGIMI alla radice + una pagina-indice per voce di
     pages.yaml (in INDEX_DIR/). Cosi' clean() le rimuove senza nomi hard-coded."""
     return [*GENERATED_NOTES, f"{INDEX_DIR}/Ponte Mondo-Sistema.md", f"{INDEX_DIR}/Fronti.md",
-            f"{INDEX_DIR}/Rete del mondo.md", f"{INDEX_DIR}/Economia.md",
+            f"{INDEX_DIR}/Rete del mondo.md", f"{INDEX_DIR}/Economia.md", f"{INDEX_DIR}/Geografia.md",
             *(f"{INDEX_DIR}/{p['file']}.md" for p in load_pages())]
 
 
