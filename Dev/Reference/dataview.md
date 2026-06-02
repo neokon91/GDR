@@ -1,6 +1,7 @@
 # Reference: Dataview (`dataview`)
 
-Doc: https://blacksmithgu.github.io/obsidian-dataview/
+Versione vault: **v0.5.68**. Doc: https://blacksmithgu.github.io/obsidian-dataview/
+Funzioni: https://blacksmithgu.github.io/obsidian-dataview/reference/functions/ (nessuna funzione in uso è deprecata)
 
 ## Query (DQL) — ` ```dataview `
 Tipi: `LIST`, `TABLE`, `TASK`, `CALENDAR`.
@@ -33,3 +34,9 @@ LIMIT n
 - `dv.io.csv(path)`.
 
 Config: `enableDataviewJs: true` (necessario per i blocchi dataviewjs).
+
+## Funzioni utili (oltre alle base)
+- `dateformat(date, "yyyy-MM-dd")` / `dur("2 days")` — formattazione date/durate (Cronologia/timeline).
+- `link(path, display)` interno · `elink(url, display)` esterno (se le note citano fonti web).
+- `length(rows)` dopo `GROUP BY` = conteggio per gruppo (già usato in Home → *Note per categoria*).
+- `file.inlinks` / `length(file.inlinks)` = backlink / grado del nodo (già usato nella *Rete del mondo*).

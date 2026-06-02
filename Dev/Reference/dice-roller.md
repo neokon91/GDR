@@ -1,6 +1,6 @@
 # Reference: Dice Roller (`obsidian-dice-roller`)
 
-Doc: https://plugins.javalent.com/dice
+Versione vault: **v11.4.2**. Doc: https://plugins.javalent.com/dice · Repo: https://github.com/javalent/dice-roller (ex `valentine195`)
 
 ## Inline
 `` `dice: 1d20` `` — tiro base. `` `dice: 1d20+5` ``, `` `dice: 4d6` ``.

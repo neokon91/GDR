@@ -17,6 +17,9 @@ Tipi comuni: `text`, `textArea`, `number`, `toggle`, `slider(...)`, `date`, `dat
 `` `VIEW[{prop}][text(renderMarkdown)]` `` — testo con markdown.
 `` `VIEW[floor(({caratteristiche.forza.stat} - 10) / 2)]` `` — espressione calcolata.
 `` `VIEW[{a} * {b}][math:dest]` `` — calcola e **salva** in `dest`.
+`` `VIEW[{ritratto}][image]` `` — mostra l'immagine puntata dalla proprietà (`[[wikilink]]`/path;
+anche liste). Args: `hidden`, `class`. *(Display nativo per l'infobox, alternativo a renderMap.)*
+`` `VIEW[{mondo}][link]` `` — rende il valore come **link cliccabile** (un solo bindTarget).
 Riferimenti: `{prop}`, annidati `{a.b.c}`, cross-nota `{NoteName#prop}`.
 
 ## BUTTON
@@ -44,6 +47,14 @@ Due modi:
 `insertIntoNote`, `inlineJS`.
 - **templaterCreateNote**: `templateFile` (req), `folderPath?`, `fileName?`, `openNote?`.
 - **runTemplaterFile**: `templateFile` (req).
+- **updateMetadata**: modifica una proprietà **senza** azione-nota Templater — `bindTarget` (req),
+  `evaluate: true` → `value` è JS con `x` = valore corrente e `getMetadata('campo')` per altre
+  proprietà. Es. `value: "x - getMetadata('danno')"`. Richiede `enableJs`. Per i bottoni di **solo
+  reset numerico** (riposo, azzera-clock) elimina la coppia `buttons`+`actions` e il rischio MB_PARSING.
+
+> Input a blocco (non inline) non sfruttati: `progressBar(minValue(0), maxValue(10), addLabels)`
+> (alternativa visiva a `slider` per pressione/clock), `list`/`listSuggester` (riordino via
+> right-click), `editor` (textArea con markdown).
 
 ## Settings (`data.json`)
 - `enableJs: true` — necessario per `inlineJS` e view JS.

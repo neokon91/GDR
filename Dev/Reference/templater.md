@@ -8,15 +8,20 @@ Doc: https://silentvoid13.github.io/Templater/
 - Commento: `<%# ... %>`.
 
 ## Moduli `tp.*`
-- **tp.file**: `create_new(template, filename?, open_new?, folder?)`, `move(new_path)`,
+- **tp.file**: `create_new(template, filename='Untitled', open_new=false, folder?)`, `move(new_path)`,
   `rename(new_name)`, `title`, `path(relative?)`, `folder(relative?)`, `find_tfile(name)`,
-  `exists(path)`, `tags`, `cursor(order?)`.
+  `exists(path)`, `tags`, `cursor(order?)`, **`selection()`** (testo selezionato → "crea entità
+  dalla selezione"), **`cursor_append(content)`** (inserisce dopo il cursore).
 - **tp.system**: `prompt(prompt_text, default?, throw_on_cancel?, multiline?)`,
-  `suggester(text_items, items, throw_on_cancel?, placeholder?, limit?)`, `clipboard()`.
-  (`text_items` può essere `string[]` o `(item)=>string`.)
+  `suggester(text_items, items, throw_on_cancel=false, placeholder="", limit?, default_value?)`,
+  **`multi_suggester(text_items, items, throw_on_cancel=false, title="", limit?, default_values?)`**
+  (selezione MULTIPLA in un modale: migliore del loop suggester + "(fine)" per "collega più note"),
+  `clipboard()`. (`text_items` può essere `string[]` o `(item)=>string`; `default_value` preseleziona.)
 - **tp.date**: `now(format?, offset?, reference?, reference_format?)`, `tomorrow`, `yesterday`.
 - **tp.frontmatter.<campo>** — legge il frontmatter della nota.
 - **tp.user.<script>(...)** — script utente da `user_scripts_folder`.
+- **tp.config.target_file** — la TFile target del template in esecuzione (il pattern che i nostri
+  script usano per il basename reale, vedi statblock/encounter).
 
 ## User scripts (IMPORTANTE per questo progetto)
 Ogni file `.js` in `user_scripts_folder` esporta una funzione: `module.exports = async function(tp, ...) {}`

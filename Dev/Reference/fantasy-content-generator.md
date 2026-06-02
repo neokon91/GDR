@@ -31,9 +31,14 @@ chiamabile da Templater/JS Engine → niente generazione nel wizard.
   (`drinkSettings`). Replica la struttura ESATTA di DEFAULT_SETTINGS (merge shallow →
   servono tutte le chiavi del gruppo) e tutto MASCHILE per la concordanza, dato l'ordine
   fisso di composizione (es. `prefixes + nouns + innType` → "La Taverna del Corvo Nero").
-  *Rinviati* (frasi/branching o ridondanti coi toponimi homebrew, QA in-app): `dungeonSettings`,
-  `groupSettings`, `lootSettings`, `citySettings`. *Non traducibili* (hardcoded): nomi-per-razza
-  ed etichette del menu.
+  *Rinviati* (frasi/branching o ridondanti coi toponimi homebrew, QA in-app), struttura confermata
+  ufficiale: **`lootSettings`** (adjectives + nouns — come `drinkSettings`, zero branching: **candidato
+  #1**); `groupSettings` (adjectives/nouns/pluralNouns/groupTypes/descriptors — concordanza come le
+  locande); `dungeonSettings` (adjectives/nouns/locations/dungeonTypes/**descriptions=frasi**, da curare);
+  `citySettings` (prefixes/suffixes, ridondante coi toponimi homebrew). *Non traducibili* (hardcoded):
+  nomi-per-razza ed etichette del menu.
+  Categorie del trigger inline `@`: nomi-per-razza, `Settlement`, `InnsTaverns`, `Drinks`, `Loot`,
+  `Groups`, `Dungeons`, `Currency`.
 - **Bottone Genera** (Meta Bind `command`): `plugins.yaml:buttons` con campo `command`
   (`genera-contenuto`); `action_buttons()` emette `{type:"command", command:…}` →
   i command-button NON richiedono un'azione-nota Templater. Apre il modale.

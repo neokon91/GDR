@@ -27,7 +27,19 @@ campi della categoria e come le note vi si agganciano. Frontmatter del fileClass
 2. `filesPaths` del fileClass (per cartella), oppure
 3. `tagNames`/`mapWithTag` (per tag).
 
-## Integrazione pipeline (proposta)
-Generare i fileClass da YAML (`render.py`) nella cartella fileClasses del vault: ogni
-categoria di `core.yaml` → un fileClass con i suoi campi tipizzati. Così i campi del
-wizard e quelli del template hanno uno **schema validato** unico.
+## Integrazione pipeline (IMPLEMENTATA)
+`render.py` (`fileclass_note`/`fileclass_fields`) genera **uno fileClass per categoria** in
+`z.classi/` da `core.yaml`; `classFilesPath: z.classi/`. Mapping: stato/tipo/famiglia → Select;
+relazioni/notes → File/MultiFile; pressione/number → Number; resto → Input.
+
+## Chiavi/field non ancora sfruttati (utili)
+- **`extends:`** — un fileClass-base condiviso (`stato`/`mondo`/`connessioni`/`sessioni`) esteso
+  dagli altri ridurrebbe la duplicazione nei `z.classi/*.md` generati.
+- **`savedViews` / `favoriteView`** — preset (filtri/colonne/sort) della *Table View* nativa del
+  fileClass: alternativa editabile in-linea agli hub (oggi coperti da Bases).
+- Aggancio anche via **bookmark-group** (oltre a fileClass/filesPaths/tag).
+- **`Lookup`** — auto-deriva un campo dalle note che linkano questa (opzione `dvQueryString`,
+  sintassi **da confermare in-app**): es. "membri"/"luoghi della regione" sempre aggiornati, vs
+  l'inverso scritto a mano dal nostro *Collega*.
+- **`Formula`** — campo calcolato da altri campi della stessa nota (espressione tipo-Dataview):
+  es. un `minaccia` derivato da `pressione` + clock, tipizzato e interrogabile.

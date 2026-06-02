@@ -17,6 +17,17 @@ path includes Mondi/Sessioni
 sort by due
 ```
 
+## Filtri/output avanzati (utili qui, non sfruttati)
+- `happens before/after/on <date>` — match su start|scheduled|due insieme (per "questa
+  settimana" in Home, più giusto del solo `due`).
+- `filter by function <JS>` (da 4.2.0) — query arbitrarie che **legano i task all'ontologia**, es.
+  `filter by function task.file.property('mondo') === query.file.property('mondo')` (solo i task di
+  quel mondo su una scheda mondo).
+- Placeholder relativi alla nota: `{{query.file.path}}`, `{{query.file.folder}}`,
+  `{{query.file.property('x')}}` — blocchi riusabili senza percorsi hard-coded.
+- `group by function <JS>` / `group by happens|priority|root`; `show tree` (sotto-task annidati,
+  per la checklist `#prep`); `hide edit button`, `hide postpone button` (puliscono i blocchi read-only).
+
 ## Convenzione GDR (fili narrativi + prep)
 Tag per dare senso ai task, interrogati da Home:
 - `#gancio` — un gancio da seminare al tavolo. `#trama` — un filo/trama aperto.

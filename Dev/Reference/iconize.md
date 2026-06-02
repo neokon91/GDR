@@ -2,6 +2,10 @@
 
 Versione vault: **v2.14.7**. Doc: https://github.com/FlorianWoelki/obsidian-icon-folder
 
+> ⚠️ **Upstream DEPRECATO / end-of-maintenance** (avviso nel README ufficiale, 2.14.x):
+> funziona ma non riceve più aggiornamenti. Per il nostro uso (emoji-cartella scritte in
+> `data.json`) resta stabile; a medio termine valutare un successore (es. *Iconic*).
+
 > Usato da: `render.py` (blocco "Iconize") inietta un'icona-emoji per cartella di
 > categoria da `plugins.yaml → folder_icons` in `data.json`.
 
@@ -30,5 +34,19 @@ nativo), preservando il blocco `settings`.
   non deve azzerare `settings`.
 - Solo categorie presenti in `core.folders` ricevono l'icona (le altre sono ignorate
   silenziosamente).
-- Emoji native: nessun download di icon-pack. Per icone Lucide/altre servirebbe altra
-  config (non usata qui).
+- Emoji native: nessun download di icon-pack. **Correzione:** le **icone inline** Lucide
+  funzionano già senza config extra (vedi sotto) — `data.json` ha `iconsInNotesEnabled`/
+  `iconsInLinksEnabled` ON e `iconIdentifier: ":"`. Per le cartelle restiamo sulle emoji
+  (portabilità ZIP).
+
+## Feature native già attive ma non sfruttate (2.14.7)
+- **Icone inline nelle note**: scrivi `:NomeIcona:` (es. `:LiSwords:`) — già abilitato
+  (`iconsInNotesEnabled: true`, `iconIdentifier: ":"`). Le emoji restano la scelta per la
+  portabilità; le inline Lucide sono un'opzione coerente col tema per heading/callout.
+- **Icona da frontmatter** (richiede `iconInFrontmatterEnabled: true`, campo
+  `iconInFrontmatterFieldName: "icon"`): un campo `icon:` per-nota assegna un'icona
+  individuale. Candidato: dare alle **note-cartella** Folder Notes l'icona di categoria via
+  frontmatter (invece della sola emoji nel titolo).
+- **Custom rules** (`rules: []`, oggi vuoto): icona per **nome file/regex**; la regola con
+  input `.` = icona di default per tutto.
+- **`iconInTitleEnabled`** (oggi `false`): icona grande sopra il titolo (estetica infobox).

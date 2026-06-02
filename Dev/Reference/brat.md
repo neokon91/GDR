@@ -10,9 +10,18 @@ Versione vault: **v2.0.4** (TfTHacker). Repo: https://github.com/TfTHacker/obsid
 GitHub** e lo tiene aggiornato, anche se non è nel catalogo community o è in beta.
 
 ## Uso (manuale)
-- Comando *"BRAT: Add a beta plugin for testing"* → incolla l'URL del repo GitHub.
-- *"Check for updates to all beta plugins"* per aggiornare.
+- Comando *"BRAT: Add a beta plugin for testing"* → incolla l'URL/`user/repo` del repo GitHub.
+- *"Check for updates to all beta plugins and UPDATE"* per aggiornare (manuale).
 - I plugin così installati compaiono normalmente in `community-plugins.json`.
+
+## Versioni bloccate (consigliato per i plugin di nicchia)
+Per evitare che un update beta rompa la sintassi documentata nelle altre schede, usare
+**"BRAT: Add a beta plugin with frozen version based on a release tag"**: installa un tag di
+release preciso, **frozen** (non si auto-aggiorna). È la mitigazione diretta del rischio
+"plugin beta meno stabile" e la base per "distribuzione con versioni minime testate".
+- Disattivare l'**auto-update on startup** (tab "Obsidian42-BRAT") sui plugin pinnati.
+- BRAT prende il `manifest.json` dagli **asset di release** (dal v1.1.0+): install/condivisione
+  col path `user/repo` (es. `TfTHacker/obsidian42-brat`) o URL completo. Doc: https://tfthacker.com/brat-quick-guide
 
 ## Perché è nel vault
 Alcuni plugin TTRPG (es. quelli di nicchia o pre-release) si distribuiscono via BRAT.

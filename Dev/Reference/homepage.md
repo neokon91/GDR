@@ -26,3 +26,12 @@ le scelte dell'utente su build successive.
   → installa il plugin e rigira (o configura a mano).
 - `refreshDataview: true` dipende da Dataview installato; con gli indici migrati a
   **Bases** il refresh tocca solo le query Dataview residue (hub/fallback).
+
+## Opzioni ufficiali non usate (utente)
+- **`commands: []`** (campo già presente, vuoto) — esegue comandi all'apertura di Home (es.
+  refresh di altri pannelli/plugin); generalizza `refreshDataview: true`.
+- **`separateMobile: false` → `true`** per una **Home mobile separata** (la dashboard a 2 aree è
+  pensata desktop → una versione snella al tavolo).
+- **`kind`** ufficiali: `File`, `Workspace`, `Canvas`, **`Base`**, Daily/Periodic Note, Random,
+  Graph. Con gli indici migrati a Bases, Home può puntare a un `.base` (`kind: "Base"`).
+- Richiamo a runtime: comando **"Open homepage"** o **ribbon button** per tornare a Home.

@@ -15,6 +15,7 @@ I callout GDR danno identità visiva alla *superficie giocabile* delle note.
 | `tavolo` | 201, 64, 64 | `lucide-swords` | uso al tavolo / pressione |
 | `gancio` | 191, 130, 42 | `lucide-anchor` | gancio narrativo |
 | `segreto` | 138, 74, 173 | `lucide-eye-off` | info riservata al DM |
+| `infobox` | 90, 110, 140 | `lucide-scroll-text` | INFOBOX wiki (macro `identita_card`); stile pesante in `gdr.css` |
 
 Emessi dalla macro `_macros.j2 → tavolo()` come `> [!tavolo] …`, alcuni **foldable**
 (`> [!gancio]-`) e contenenti **campi Meta Bind** (`VIEW`/`INPUT`).
@@ -33,3 +34,12 @@ callout **degradano a box standard** (icona generica) — il vault resta leggibi
 - **Callout collassati**: vedi [obsidian-core](obsidian-core.md#callout) — un callout
   foldable chiuso (`[!tipo]-`) **non renderizza** il contenuto dinamico (Meta Bind/Dataview/
   js-engine) finché non lo apri la prima volta.
+- **Auto-detection**: il plugin rileva anche i callout definiti da snippet/temi — `infobox`
+  (stilizzato pesante in `gdr.css`) è visto comunque.
+
+## API a runtime (non usata)
+Il plugin espone un'API JS — `getApi(owner): CalloutManager<true>` → `getCallouts()`,
+`getColor(callout)`, `getTitle(callout)`, `on/off("change", …)`. Non la usiamo (iniettiamo i
+custom in `data.json` a build-time); citata se mai servisse **validare a runtime** la presenza
+dei callout GDR invece del degrado silenzioso. Fonte:
+https://github.com/eth-p/obsidian-callout-manager/blob/master/api/README.md

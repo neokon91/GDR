@@ -34,6 +34,22 @@ sulla v2.1 prima di generarla dalla pipeline (lo schema è cambiato fra major).
 - *Residuo*: `epoca` potrebbe emettere ere come `fc-date` con `fc-end` (range) per disegnare
   le epoche sul calendario; non fatto (le epoche vivono già nella nostra timeline).
 
+## Chiavi `fc-*` disponibili (v2.1.0, non tutte cablate)
+Oltre a `fc-date`/`fc-end`/`fc-calendar`/`fc-category` (whitelistate in `INTEROP_FIELDS`), il
+parser legge:
+- `fc-start` — sinonimo di apertura range (il parser usa `fc-date ?? fc-start`); noi usiamo `fc-date`.
+- `fc-display-name` — etichetta evento sull'agenda (default = nome file): utile per dare un nome
+  breve senza rinominare la nota.
+- `fc-category` — categoria/colore dell'evento: è nella macro `calendario()` ma **non** nel wizard
+  `evento` (candidato: aggiungerla come `field`, pre-popolata dal `tipo`).
+- `fc-img` — immagine nel popover (candidabile al ritratto/illustrazione in `Media/`).
+- `fc-description` — descrizione nel popover. `fc-ignore: true` — esclude la nota dallo scan.
+- **Ricorrenze**: `fc-date` accetta anche un **oggetto** `{day, month, year}` con campi omessi =
+  "ogni" (es. `{day: 3}` = mensile; `{day: 3, month: 2}` = annuale) → festività del mondo.
+
+Per esporre `fc-category`/`fc-img` nel wizard: aggiungerle a `entities/evento.yaml` e a
+`validate.INTEROP_FIELDS`.
+
 ## ⚠️ Gotcha
 - **Date non-gregoriane**: con calendari custom le date sono stringhe interpretate dal
   plugin, non `YYYY-MM-DD` core → non confondere con la property `date` di Obsidian.
