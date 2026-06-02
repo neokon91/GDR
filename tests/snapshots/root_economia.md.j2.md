@@ -1,0 +1,49 @@
+# 💰 Economia & rotte
+
+> [!info] A cosa serve
+> Il sostrato **materiale** del mondo: chi **produce** cosa, chi **dipende** da cosa
+> (e quindi è vulnerabile), chi **controlla** le risorse, e quali **rotte** le muovono.
+> Auto-generata e di **sola lettura**. Si popola collegando: sui *Luoghi* usa
+> **Produce** / **Dipende da** / **Rotta commerciale con**; sulle *Fazioni* **Controlla
+> le risorse** (tab *Collegamenti*). Una risorsa contesa con `pressione` alta è un
+> **Fronte economico** pronto da giocare.
+
+## ⚒️ Produzione — chi genera cosa
+```dataview
+table without id file.link as Luogo, produce as Produce, controllata_da as "Controllato da"
+from "Mondi"
+where produce and stato != "archiviata"
+sort file.name asc
+```
+
+## ⛓ Dipendenze — chi rischia se manca
+> [!tip]- Cosa significa
+> Chi **dipende** da una risorsa è vulnerabile: bloccare la fornitura è una mossa.
+> Ordinato per pressione — in alto chi è già sotto stress.
+```dataview
+table without id file.link as Chi, dipende_da as "Dipende da", pressione as Pressione
+from "Mondi"
+where dipende_da and stato != "archiviata"
+sort pressione desc, file.name asc
+```
+
+## 💎 Risorse contese — la posta materiale
+```dataview
+table without id file.link as Risorsa, tipo as Tipo, scarsita as Scarsità, controllata_da as "Controllata da", pressione as Pressione
+from "Mondi"
+where categoria = "risorsa" and stato != "archiviata"
+sort pressione desc, scarsita asc
+```
+
+## 🛣 Rotte commerciali — cosa viaggia (e si può tagliare)
+```dataview
+table without id file.link as Luogo, rotta_con as "Rotta con"
+from "Mondi"
+where rotta_con and stato != "archiviata"
+sort file.name asc
+```
+
+> [!note] Dal materiale al tavolo
+> Una **dipendenza** + una **rotta** = un piano: chi vuole piegare un luogo gli taglia
+> la fornitura. Lega una risorsa contesa a un **Fronte** (`pressione`/`clock`) e il suo
+> commercio diventa il motore della crisi — vedi **Fronti**.

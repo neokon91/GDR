@@ -68,6 +68,8 @@ note:
       cultura: "[[I Cenerini]]"
       clima: temperato
       popolazione: "1200"
+      dipende_da: ["[[Sale]]", "[[Mithril delle Marche]]"]
+      rotta_con: ["[[Mercato di Sale]]"]
     fatti:
       - ["Tipo", "Insediamento (capoluogo)"]
       - ["Regione", "[[Le Marche di Valdombra]]"]
@@ -90,6 +92,7 @@ note:
       clock: 4
       conseguenza: "Il sigillo cede: ondate di aberrazioni dilagano nelle Marche e Forte Cenere cade nel panico."
       conseguenza_su: "[[Le Marche di Valdombra]]"
+      produce: ["[[Mithril delle Marche]]", "[[Reliquie della Voragine]]"]
     fatti:
       - ["Tipo", "Dungeon / frattura"]
       - ["Sotto", "[[Forte Cenere]]"]
@@ -110,6 +113,8 @@ note:
       controllata_da: "[[Il Capitolo di Sale]]"
       clima: temperato
       popolazione: "800"
+      produce: ["[[Sale]]"]
+      rotta_con: ["[[Forte Cenere]]"]
     fatti:
       - ["Tipo", "Insediamento (porto fluviale)"]
       - ["Controllata da", "[[Il Capitolo di Sale]]"]
@@ -172,6 +177,7 @@ note:
       alleati: ["[[La Setta della Voragine]]"]
       portata: locale
       motto: "Tutto ha un prezzo, anche il silenzio."
+      controlla_risorse: ["[[Reliquie della Voragine]]"]
     fatti:
       - ["Tipo", "Banda (contrabbando)"]
       - ["Sede", "[[Mercato di Sale]]"]
@@ -193,6 +199,7 @@ note:
       rivali: ["[[I Corvi Cinerei]]"]
       portata: regionale
       motto: "Il sale conserva ogni cosa, anche i debiti."
+      controlla_risorse: ["[[Sale]]"]
     fatti:
       - ["Tipo", "Casata mercantile"]
       - ["Sede", "[[Mercato di Sale]]"]
@@ -465,6 +472,69 @@ note:
     gancio: Chi si avvicina troppo alla Voragine comincia a fare gli stessi sogni.
     pressione: 6
     prossima_mossa: I sogni di Vorth raggiungono un personaggio del gruppo.
+
+  # ----------------------------------------------------------------- RISORSE
+  - nome: Sale
+    categoria: risorsa
+    tipo: materia prima
+    fm:
+      famiglia: vitale
+      scarsita: comune
+      fonte: Saline del Fiume Sale
+      usi: "conservazione del cibo, concia, baratto"
+      controllata_da: "[[Il Capitolo di Sale]]"
+    fatti:
+      - ["Tipo", "Materia prima (vitale)"]
+      - ["Scarsità", "comune"]
+      - ["Controllata da", "[[Il Capitolo di Sale]]"]
+    lore: >-
+      Senza sale la carne marcisce e l'inverno uccide. Chi controlla le saline controlla
+      le Marche: per questo il Capitolo è ricco quanto la Mano è armata.
+    uso_al_tavolo: "La leva economica del Capitolo: tagliare il sale a Forte Cenere è una mossa politica."
+    gancio: Una partita di sale arriva adulterata; qualcuno vuole indebolire la Mano d'Argento.
+    pressione: 4
+    prossima_mossa: Il Capitolo minaccia di dirottare il sale se la Mano non ripaga i debiti.
+
+  - nome: Mithril delle Marche
+    categoria: risorsa
+    tipo: risorsa strategica
+    fm:
+      famiglia: bellica
+      scarsita: rara
+      fonte: Vecchie miniere imperiali sotto le Marche
+      usi: "armi e armature leggere, leghe arcane"
+    fatti:
+      - ["Tipo", "Risorsa strategica (bellica)"]
+      - ["Scarsità", "rara"]
+      - ["Fonte", "miniere imperiali presso [[La Voragine]]"]
+    lore: >-
+      L'impero estraeva mithril dalle gallerie profonde; oggi i filoni migliori sfiorano la
+      Voragine, e ogni vena d'argento costa vite. Chi ne avesse abbastanza riarmerebbe le Marche.
+    uso_al_tavolo: "Il premio strategico: una spedizione mineraria è una scusa perfetta per scendere verso la Voragine."
+    gancio: La Mano d'Argento finanzia una squadra di scavo — proprio dove la Setta non vuole occhi.
+    pressione: 6
+    prossima_mossa: "Un filone nuovo si apre vicino al sigillo: ricchezza e rischio insieme."
+
+  - nome: Reliquie della Voragine
+    categoria: risorsa
+    tipo: risorsa magica
+    fm:
+      famiglia: arcana
+      scarsita: rara
+      fonte: "La Voragine (terzo livello e oltre)"
+      usi: "riti della Setta, magia instabile e proibita"
+      controllata_da: "[[I Corvi Cinerei]]"
+    fatti:
+      - ["Tipo", "Risorsa magica (arcana)"]
+      - ["Scarsità", "rara"]
+      - ["Tratta", "[[I Corvi Cinerei]] → [[La Setta della Voragine]]"]
+    lore: >-
+      Frammenti che la Voragine espelle: caldi al tatto, sbagliati alla vista. I Corvi li
+      contrabbandano, la Setta li paga a peso d'oro — perché ogni reliquia avvicina il rito.
+    uso_al_tavolo: "Il motore della crisi: la tratta delle reliquie è ciò che fa avanzare il clock della Setta. Tagliarla è il modo per fermarla."
+    gancio: "Una cassa di reliquie sparisce dal molo dei Corvi: chi l'ha presa, e per chi?"
+    pressione: 8
+    prossima_mossa: I Corvi aprono una rotta diretta Voragine→Setta; il clock del rito accelera.
 
   # ----------------------------------------------------------------- CREATURA
   - nome: Orrore della Voragine

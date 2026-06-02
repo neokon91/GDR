@@ -129,7 +129,7 @@ def test_page_snapshot(page):
     assert out == _snapshot(f"page_{page['id']}.md", out)
 
 
-@pytest.mark.parametrize("name", ["home.md.j2", "leggimi.md.j2", "ponte.md.j2", "fronti.md.j2", "rete.md.j2"])
+@pytest.mark.parametrize("name", ["home.md.j2", "leggimi.md.j2", "ponte.md.j2", "fronti.md.j2", "rete.md.j2", "economia.md.j2"])
 def test_root_note_snapshot(name):
     out = _env().get_template(name).render(core=CORE, plugins=PLUGINS, templates=TEMPLATES, pages=PAGES)
     assert out == _snapshot(f"root_{name}.md", out)
@@ -853,7 +853,7 @@ def test_example_world():
         cat_line = next(l for l in txt.splitlines() if l.startswith("categoria: "))
         assert cat_line.split(": ", 1)[1] in cats, rel
     joined = "\n".join(t for _, t in notes)
-    for cat in ("mondo", "luogo", "fazione", "personaggio", "evento", "creatura", "incontro"):
+    for cat in ("mondo", "luogo", "fazione", "personaggio", "evento", "creatura", "incontro", "risorsa"):
         assert f"categoria: {cat}" in joined, f"manca una nota di categoria {cat}"
     voragine = next(t for r, t in notes if r.endswith("La Voragine.md"))
     assert "**Clock**: 4/6" in voragine and "[!tavolo]" in voragine and "list from" in voragine

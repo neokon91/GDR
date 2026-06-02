@@ -10,8 +10,10 @@
 > [[Atlante|🗺️ Atlante]]
 > [[Bestiario|🐾 Bestiario]]
 > [[Fazioni|⚔️ Fazioni]]
+> [[Risorse|📦 Risorse]]
 > [[Cast|🎭 Cast]]
 > [[Cronologia|📜 Cronologia]]
+> [[Economia|💰 Economia & rotte]]
 
 > [!example] Crea
 > `BUTTON[crea-mondo]`
@@ -35,6 +37,7 @@
 > [!example]- Altri tipi
 > `BUTTON[crea-cosmologia]`
 > `BUTTON[crea-cultura]`
+> `BUTTON[crea-risorsa]`
 > `BUTTON[crea-lingua]`
 > `BUTTON[crea-insidia]`
 > `BUTTON[crea-classe]`

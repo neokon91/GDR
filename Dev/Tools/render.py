@@ -634,7 +634,8 @@ def render_notes(env: Environment, core: dict[str, Any], plugins: dict[str, Any]
     for name, jinja_name in (("Home.md", "home.md.j2"), ("LEGGIMI.md", "leggimi.md.j2"),
                              (f"{INDEX_DIR}/Ponte Mondo-Sistema.md", "ponte.md.j2"),
                              (f"{INDEX_DIR}/Fronti.md", "fronti.md.j2"),
-                             (f"{INDEX_DIR}/Rete del mondo.md", "rete.md.j2")):
+                             (f"{INDEX_DIR}/Rete del mondo.md", "rete.md.j2"),
+                             (f"{INDEX_DIR}/Economia.md", "economia.md.j2")):
         text = env.get_template(jinja_name).render(core=core, plugins=plugins, templates=templates, pages=pages)
         write_text(VAULT / name, text)
         rendered[name] = text

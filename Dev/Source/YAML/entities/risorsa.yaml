@@ -1,0 +1,44 @@
+# Schema per-entità: RISORSA (lore + economia). Una merce/risorsa del mondo:
+# ciò che si produce, si commercia, si controlla — il sostrato MATERIALE di
+# politica e guerra. Reso giocabile dalle relazioni economiche sulle altre entità
+# (luogo.produce/dipende_da/rotta_con, fazione.controlla_risorse) e dalla
+# dashboard Economia. render.py distribuisce questi blocchi nel modello 'core'.
+id: risorsa
+folder: Mondi/Risorse
+order: 6
+templates:
+  - id: risorsa
+    title: Risorsa
+    default_type: materia prima
+    target: z.modelli/Risorsa.md
+subtypes:
+  - materia prima
+  - bene lavorato
+  - bene di lusso
+  - risorsa magica
+  - risorsa strategica
+# Classificazione a 2 livelli: la 'famiglia' (funzione economica) affianca il
+# 'tipo' (forma). Aiuta a leggere cosa muove il mondo. Legenda auto-documentante.
+famiglie:
+  - { nome: vitale,       descrizione: "Necessaria alla sopravvivenza: cibo, acqua, sale, legname — chi la perde muore o si piega." }
+  - { nome: bellica,      descrizione: "Alimenta la guerra: metalli, cavalli, salnitro, acciaio — chi la controlla detta i conflitti." }
+  - { nome: arcana,       descrizione: "Carburante della magia: reagenti, reliquie, cristalli — rara, instabile, sempre contesa." }
+  - { nome: voluttuaria,  descrizione: "Lusso e status: spezie, gemme, sete — muove ricchezza e desiderio, non necessità." }
+  - { nome: simbolica,    descrizione: "Valore culturale/sacro oltre l'uso: ostie, insegne, materiali rituali — il prezzo è identità." }
+fields:
+  fonte:    { label: Fonte,      widget: text }
+  scarsita: { label: Scarsità,   widget: scarsita }
+  usi:      { label: Usi,        widget: text }
+scheda: [fonte, scarsita, usi]
+relazioni:
+  # Inverso pulito (1:1) di fazione.controlla_risorse → chi la controlla.
+  - { field: controllata_da, label: Controllata da, category: fazione }
+creation:
+  fields:
+    - { field: tipo, prompt: "Tipo di risorsa", from: subtypes, required: true }
+    - { field: mondo, prompt: "Mondo", from: notes, category: mondo, link: true, required: true }
+  body:
+    - { field: produzione, prompt: "Come si ottiene / si produce e dove", heading: "Produzione" }
+    - { field: ruolo_economico, prompt: "Ruolo economico: chi la vuole e perché conta", heading: "Ruolo economico" }
+    - { field: tensione, prompt: "Conflitto attorno alla risorsa (chi se la contende)", heading: "Tensione" }
+    - { field: segreto, prompt: "Segreto della risorsa", callout: segreto, title: "Segreto", fold: true }

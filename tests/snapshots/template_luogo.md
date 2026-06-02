@@ -178,6 +178,9 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > **Bioma**: `INPUT[suggester(optionQuery("Mondi/Biomi"), useLinks(partial), allowOther):bioma]`
 > **Cultura dominante**: `INPUT[suggester(optionQuery("Mondi/Culture"), useLinks(partial), allowOther):cultura]`
 > **Piano**: `INPUT[suggester(optionQuery("Mondi/Piani"), useLinks(partial), allowOther):piano]`
+> **Produce**: `INPUT[inlineListSuggester(optionQuery("Mondi/Risorse"), useLinks(partial), allowOther):produce]`
+> **Dipende da**: `INPUT[inlineListSuggester(optionQuery("Mondi/Risorse"), useLinks(partial), allowOther):dipende_da]`
+> **Rotta commerciale con**: `INPUT[inlineListSuggester(optionQuery("Mondi/Luoghi"), useLinks(partial), allowOther):rotta_con]`
 
 > [!example] Collegamenti
 > Mondo: `INPUT[mondo][:mondo]`

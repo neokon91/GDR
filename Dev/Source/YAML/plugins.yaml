@@ -51,6 +51,7 @@ metabind_inputs:
   rarita: INPUT[inlineSelect(option(comune), option(non comune), option(raro), option(molto raro), option(leggendario), option(artefatto))]
   tier: INPUT[inlineSelect(option(1-4), option(5-10), option(11-16), option(17-20))]
   minaccia: INPUT[inlineSelect(option(moderata), option(pericolosa), option(letale))]
+  scarsita: INPUT[inlineSelect(option(abbondante), option(comune), option(scarsa), option(rara), option(esaurita))]
   dado_vita: INPUT[inlineSelect(option(d6), option(d8), option(d10), option(d12))]
   incantesimi: INPUT[inlineSelect(option(nessuno), option(metà), option(piena), option(patto))]
   taglia: INPUT[inlineSelect(option(minuscola), option(piccola), option(media), option(grande), option(enorme), option(mastodontica))]
@@ -88,6 +89,7 @@ folder_icons:
   luogo: "🗺️"
   cultura: "🎏"
   fazione: "⚔️"
+  risorsa: "📦"
   evento: "📜"
   lingua: "🗣️"
   personaggio: "🎭"

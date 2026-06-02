@@ -54,6 +54,21 @@ relazioni:
 - field: piano
   label: Piano
   category: piano
+# Economia: cosa il luogo PRODUCE e da cosa DIPENDE (inverso generico 'connessioni'
+# su risorsa); le ROTTE commerciali verso altri luoghi. Alimentano la dashboard
+# Economia e danno stakes materiali a Fronti/clock.
+- field: produce
+  label: Produce
+  category: risorsa
+  multi: true
+- field: dipende_da
+  label: Dipende da
+  category: risorsa
+  multi: true
+- field: rotta_con
+  label: Rotta commerciale con
+  category: luogo
+  multi: true
 creation:
   fields:
   - field: tipo

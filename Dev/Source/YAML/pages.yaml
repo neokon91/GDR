@@ -38,6 +38,17 @@ pages:
       - { field: tipo,      label: Tipo }
       - { field: sede,      label: Sede }
       - { field: pressione, label: Pressione }
+  - id: risorse
+    file: Risorse
+    title: "📦 Risorse"
+    category: risorsa
+    intro: "Cosa muove il mondo. Vedi la dashboard [[Economia|💰 Economia & rotte]] per produzione, dipendenze e rotte."
+    sort: "pressione desc"
+    columns:
+      - { field: tipo,      label: Tipo }
+      - { field: scarsita,  label: Scarsità }
+      - { field: controllata_da, label: "Controllata da" }
+      - { field: pressione, label: Pressione }
   - id: cast
     file: Cast
     title: "🎭 Cast"

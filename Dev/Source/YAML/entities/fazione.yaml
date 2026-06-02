@@ -48,6 +48,9 @@ relazioni:
   - { field: figure,    label: Figure chiave, category: personaggio, multi: true }
   - { field: alleati,   label: Alleate,       category: fazione, multi: true }
   - { field: rivali,    label: Rivali,        category: fazione, multi: true }
+  # Economia/potere: le risorse che la fazione CONTROLLA (coppia 1:1 con
+  # risorsa.controllata_da → inverso tipizzato). Il controllo di una risorsa è leva politica.
+  - { field: controlla_risorse, label: Controlla le risorse, category: risorsa, multi: true }
 creation:
   fields:
     - { field: tipo, prompt: "Tipo di fazione", from: subtypes, required: true }
