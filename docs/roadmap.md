@@ -70,8 +70,8 @@ Pronto per **beta chiuso**. Per la beta aperta restano i punti PM qui sotto.
   `confina_con`, routes→`rotta_con`, coord→`coord`). Backbone `coord`/`scala_mappa`/distanza ✅.
 
 ### Runtime / tech
-- **Reattività live** (`engine.reactive`) — radar/infobox che si ridisegnano allo slider senza
-  riaprire la nota (ponte evento Meta Bind↔JS Engine).
+- ✅ **Reattività live** (`engine.reactive`) — il **radar** si ridisegna allo slider senza
+  riaprire la nota (verificato in-app). L'infobox usa già VIEW Meta Bind (reattivo nativo).
 - **Bases `cards`** — galleria ritratti (serve key immagine + asset).
 
 ### Frontiera / esplorazioni
@@ -85,12 +85,13 @@ I 246 test coprono la *generazione*, non il *rendering runtime* dei plugin: ogni
 storicamente trovato bug reali.
 - **Verificato**: dashboard popolate, note (infobox/callout/clock), Esaurimento + Riposo lungo,
   `renderSpecieTratti`, wizard *Crea PG*, statblock 5.5e/5e, Meta Bind/Dataview/Calendarium/Tasks;
-  ✅ (2026-06-02) **tiri Dice Roller col bonus dal frontmatter** (tooltip «1d20 + mod_forza [15] + 3»)
-  e **sito dei giocatori** (Safari: stilizzato, spoiler-free, tabella GM esclusa).
+  ✅ (2026-06-02) **tiri Dice Roller col bonus dal frontmatter** (tooltip «1d20 + mod_forza [15] + 3»),
+  **scheda PG live** (Dadi Vita / Concentrazione / Riposo breve end-to-end), **IT alleati** (`ally`),
+  **radar reattivo** (`engine.reactive`: slider→radar live) e **sito dei giocatori** (Safari: spoiler-free).
 - **Finding QA**: `dice: [[Nota]]` su una nota-lista **incorpora** l'elenco, non pesca una riga
   (doc/demo corretti; il single-pick richiede il formato tabella DR — da approfondire).
-- **Da spuntare**: flag `, ally` di Initiative Tracker (serve Party + incontro con alleati),
-  scheda PG (Dadi Vita/Concentrazione live), reattività live del radar.
+- **Da spuntare**: nulla di critico nel blocco recente (tutto verificato). Aperto solo il
+  *single-pick* tabella DR e il **Party** PG nel tracker (config IT lato utente).
 
 ## Come ripartire
 
