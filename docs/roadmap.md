@@ -402,7 +402,7 @@ le fondamenta saranno rifinite. In ordine di valore:
 
 ## Come ripartire
 
-**212 test verdi**, check 0; HEAD `a9e27aa`. **Post-beta (tutto pushato)**: ponte Calendarium
+**212 test verdi**, check 0; HEAD `a11418c`. **Post-beta (tutto pushato)**: ponte Calendarium
 `73041f5` + aggancio FCG `e591a5d` (verificati in-app) + generatore homebrew IT `0b6e6ad` +
 FCG italianizzato `53e20b1` + solidità JS `a876bcc` + wire insidia `65b29b0` + wizard
 connetti-alla-creazione `16dc3ab` + connessione (inverse tipizzati + dashboard Rete del mondo)
@@ -412,8 +412,12 @@ connetti-alla-creazione `16dc3ab` + connessione (inverse tipizzati + dashboard R
 beta rimasta: il mondo-esempio (blocco #1, rinviato).** *Mappe = **Zoom Map** (no Leaflet/
 Breadcrumbs, scelta utente). Residui: **catalogo strutture speciali Bastioni** (contenuto DMG,
 NON nel SRD → non fabbricato, serve fonte) + risoluzione automatica ordini; (b) assi cosmici;
-inverse anche nel wizard; report gap copertura. **~12 feature post-beta con QA in-app PENDENTE**
-(computer-use ORA riconnesso → QA eseguibile). Tab-extra data-driven valutato e **non fatto**.*
+inverse anche nel wizard; report gap copertura. **QA in-app FATTA (2026-06-02)**: verificati
+infobox CSS, maestrie+condizioni quick-ref, callout padronanze, generatore IT (insert al cursore),
+Collega inverso tipizzato (cultura.regioni), rename Figure, turno di bastione (registro), dashboard
+Rete del mondo — **1 bug trovato e corretto** (callout padronanze fuso con Scatena, `a11418c`).
+Restano QA non critici (stesso meccanismo già visto): FCG italiano, epoca→calendario, prompt
+famiglia/connetti nel wizard. Tab-extra data-driven valutato e **non fatto**.*
 Leggi questo file + i
 docs (`architecture`/`data_model`/`rules_layer`/`play_layer`/`plugin_contracts`) + la memoria
 (`project-northstar`, `vault-due-suite`). **Fasi 1-2 coperte + rifiniture** → prossimi:
