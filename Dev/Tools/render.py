@@ -36,6 +36,7 @@ from common import (  # noqa: F401 (re-export per i test/usi storici)
     load_core,
     load_core_parts,
     load_entities,
+    load_example_manifests,
     load_pages,
     load_templates,
     load_yaml,
@@ -58,6 +59,7 @@ from validate import (  # noqa: F401 (re-export per i test)
     PARTITIONED_SECTIONS,
     SYSTEM_ONLY_SECTIONS,
     check,
+    validate_aux_yaml,
     validate_entities,
     validate_entity_schema,
     validate_split,
@@ -552,8 +554,12 @@ def write_engine_data(core: dict[str, Any], templates: list[dict[str, Any]]) -> 
     # Opzioni del rules-engine PG (SRD + pg_rules.yaml) per crea_personaggio.js.
     write_json(VAULT / "z.automazioni" / "data" / "personaggio.json", build_personaggio_options(core))
     # Gli script Templater (.js CommonJS) e il guscio JS Engine (.mjs ESM) sono
-    # autonomi (niente require/bundling): copia 1:1.
+    # autonomi (niente require/bundling): copia 1:1. I `_*.js` sono sorgenti di
+    # riferimento condivise (es. _comparators.js, sincronizzato via check) — non
+    # runtime: non si copiano nel vault, come i partial Jinja `_*.j2`.
     for source in sorted(JS_DIR.glob("*.js")) + sorted(JS_DIR.glob("*.mjs")):
+        if source.name.startswith("_"):
+            continue
         shutil.copy2(source, VAULT / "z.automazioni" / source.name)
     for template in templates:
         if not (JS_DIR / f"crea_{template['id']}.js").is_file():
@@ -765,6 +771,107 @@ def write_obsidian_config(obsidian: Path, core: dict[str, Any], plugins: dict[st
     write_homepage(obsidian)
 
 
+# --- Mondo-esempio (demo precaricata) ---------------------------------------
+# Cartella riservata del mondo dimostrativo: prefisso fisso, MAI toccato altrove
+# (un utente crea i propri mondi nelle cartelle di categoria, non qui). Il writer
+# la riscrive a ogni build; l'utente la cancella in un clic per partire da vuoto.
+EXAMPLE_FOLDER_PREFIX = "Mondi/_Esempio — "
+
+
+def pressione_label(pressione: Any) -> str:
+    """Etichetta della pressione (come la macro tavolo): Crisi/Tensione/Calma."""
+    try:
+        p = int(pressione)
+    except (TypeError, ValueError):
+        return ""
+    return "🔴 Crisi" if p >= 7 else "🟠 Tensione" if p >= 4 else "🟢 Calma"
+
+
+def example_note_text(note: dict[str, Any], world: str) -> str:
+    """Una nota del mondo-esempio: frontmatter pre-popolato + corpo READ-ONLY in
+    Markdown/Dataview puro (infobox, lore, superficie giocabile, collegamenti).
+    Niente Meta Bind/statblock: rende sempre. Le dashboard la trovano per `categoria`."""
+    fm: dict[str, Any] = {
+        "nome": note["nome"],
+        "categoria": note["categoria"],
+        "tipo": note.get("tipo", ""),
+        "mondo": f"[[{world}]]",
+        "stato": note.get("stato", "pronto"),
+    }
+    fm.update(note.get("fm", {}) or {})
+    for key in ("uso_al_tavolo", "gancio", "prossima_mossa"):
+        if note.get(key):
+            fm[key] = note[key]
+    if note.get("pressione") is not None:
+        fm["pressione"] = note["pressione"]
+    fm["tags"] = ["gdr/esempio"]
+    front = yaml.safe_dump(fm, allow_unicode=True, sort_keys=False)
+
+    lines = [f"---\n{front}---", "", f"# {note['nome']}", ""]
+    # Infobox (callout CSS): tabella-fatti d'identità.
+    lines.append(f"> [!infobox] {note['nome']}")
+    lines.append("> | | |")
+    lines.append("> |:--|:--|")
+    lines.append(f"> | **Mondo** | [[{world}]] |")
+    for label, value in note.get("fatti", []) or []:
+        lines.append(f"> | **{label}** | {value} |")
+    lines.append("")
+    if note.get("lore"):
+        lines += [note["lore"].strip(), ""]
+    # Superficie giocabile (IL differenziatore), come la macro tavolo().
+    if note.get("uso_al_tavolo"):
+        lines += [f"> [!tavolo] Uso al tavolo\n> {note['uso_al_tavolo'].strip()}", ""]
+    if note.get("gancio"):
+        lines += [f"> [!gancio]- Gancio\n> {note['gancio'].strip()}", ""]
+    if note.get("pressione") is not None:
+        etichetta = pressione_label(note["pressione"])
+        blocco = [f"> [!warning] Pressione {note['pressione']} · {etichetta}"]
+        if note.get("prossima_mossa"):
+            blocco.append(f"> **Prossima mossa**: {note['prossima_mossa'].strip()}")
+        clock_dim = (note.get("fm", {}) or {}).get("clock_dim")
+        if clock_dim:
+            clock = (note.get("fm", {}) or {}).get("clock", 0)
+            conseg = (note.get("fm", {}) or {}).get("conseguenza", "")
+            blocco.append(f"> **Clock**: {clock}/{clock_dim} → {conseg}")
+        lines += ["\n".join(blocco), ""]
+    # Collegamenti (Dataview): note del mondo legate a questa, in entrambe le
+    # direzioni del grafo. Scoped a Mondi/ (esclude le 1300+ note SRD).
+    lines += ["## Collegamenti", "```dataview",
+              "list from \"Mondi\"",
+              "where contains(file.outlinks, this.file.link) or contains(this.file.outlinks, file.link)",
+              "```"]
+    return "\n".join(lines)
+
+
+def example_world_notes(manifest: dict[str, Any], core: dict[str, Any]) -> list[tuple[str, str]]:
+    """Le note di un mondo-esempio come [(relpath, testo)]. Salta le note di
+    categoria sconosciuta (robustezza). Tutte sotto un'unica cartella riservata."""
+    world = manifest["mondo"]
+    folder = f"{EXAMPLE_FOLDER_PREFIX}{world}"
+    categories = core.get("categories", {})
+    out: list[tuple[str, str]] = []
+    for note in manifest.get("note", []) or []:
+        if note.get("categoria") not in categories or not note.get("nome"):
+            continue
+        out.append((f"{folder}/{note['nome']}.md", example_note_text(note, world)))
+    return out
+
+
+def write_example_world(core: dict[str, Any]) -> int:
+    """Genera i mondi-esempio (Dev/Source/esempio/*.yaml) in cartelle riservate
+    `Mondi/_Esempio — <Mondo>/`. Riscrittura pulita: azzera SOLO la propria cartella
+    (namespace riservato, mai contenuti utente). Ritorna il n. di note scritte."""
+    written = 0
+    for manifest in load_example_manifests():
+        folder = VAULT / f"{EXAMPLE_FOLDER_PREFIX}{manifest['mondo']}"
+        if folder.is_dir():
+            shutil.rmtree(folder)
+        for rel, text in example_world_notes(manifest, core):
+            write_text(VAULT / rel, text)
+            written += 1
+    return written
+
+
 def scaffold_folders(core: dict[str, Any]) -> None:
     """Scaffolding delle cartelle contenuti (idempotente): mostra la struttura
     senza mai sovrascrivere note esistenti."""
@@ -798,6 +905,11 @@ def build() -> dict[str, str]:
 
     write_obsidian_config(VAULT / ".obsidian", core, plugins, templates, pages)
     scaffold_folders(core)
+    # Mondo-esempio (demo precaricata): al primo avvio le dashboard non sono vuote.
+    # Cartella riservata `Mondi/_Esempio — <Mondo>/`, cancellabile in un clic.
+    example_count = write_example_world(core)
+    if example_count:
+        print(f"Mondo-esempio: {example_count} note generate in Mondi/_Esempio — */.")
     return rendered
 
 
@@ -818,7 +930,7 @@ def main() -> int:
     rendered = build()
 
     rel = VAULT.relative_to(ROOT)
-    js_runtime = len(list(JS_DIR.glob('*.js'))) + len(list(JS_DIR.glob('*.mjs')))
+    js_runtime = len([p for p in JS_DIR.glob('*.js') if not p.name.startswith('_')]) + len(list(JS_DIR.glob('*.mjs')))
     print(f"Build OK: {len(rendered)} note generate, {js_runtime} JS runtime.")
     print(f"Vault: {rel}/  — apri questa cartella in Obsidian.")
     return 0

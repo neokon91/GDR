@@ -54,6 +54,7 @@ const PANELS = {
   renderProfilo: { mode: "md", args: (a, d) => [a, d.page] },
   renderTemaNatale: { mode: "md", args: (a, d) => [a, d.page] },
   renderProgressione: { mode: "md", args: (a, d) => [a, d.page] },
+  renderSpecieTratti: { mode: "md", args: (a, d) => [a, d.page] },
   renderConnessioni: { mode: "md", args: (a, d) => [a, d.dv, d.page] },
   renderEncounter: { mode: "md", args: (a, d) => [a, d.dv, d.page] },
   renderMap: { mode: "md", args: (a, d) => [a, d.dv, d.page] },

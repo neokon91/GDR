@@ -25,7 +25,9 @@
 >
 > **A 0 PF** — TS morte: successi `INPUT[inlineSelect(option(0, "—"), option(1, "1"), option(2, "2"), option(3, "3 ✓")):ts_morte_successi]` · fallimenti `INPUT[inlineSelect(option(0, "—"), option(1, "1"), option(2, "2"), option(3, "3 ☠")):ts_morte_fallimenti]`
 >
-> Fine giornata: `BUTTON[riposo-lungo]` (PF al massimo, slot e TS morte azzerati)
+> **Esaurimento** (Indebolimento 2024) `INPUT[inlineSelect(option(0, "0 —"), option(1, "1"), option(2, "2"), option(3, "3"), option(4, "4"), option(5, "5"), option(6, "6 ☠")):esaurimento]` → −`VIEW[2 * ({esaurimento} ?? 0)]` a OGNI prova d20 · velocità −`VIEW[1.5 * ({esaurimento} ?? 0)]` m
+>
+> Fine giornata: `BUTTON[riposo-lungo]` (PF al massimo, slot e TS morte azzerati, −1 Esaurimento)
 
 > [!note]- Slot incantesimo (caster)
 > | Liv | Max | Spesi | Rimasti |
@@ -93,6 +95,9 @@
 >
 > **Tratti di specie**: `VIEW[{tratti_specie} ?? "—"]`
 
+```js-engine
+return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderSpecieTratti");
+```
 > [!note]- Inventario
 > `VIEW[{inventario} ?? "—"]`
 

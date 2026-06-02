@@ -434,6 +434,63 @@ def test_aggiorna_encounter_e2e(tmp_path):
 
 
 @pytest.mark.skipif(not shutil.which("node"), reason="node assente")
+def test_render_specie_tratti(tmp_path):
+    """views.renderSpecieTratti: dalle sezioni SRD della specie del PG rende un
+    callout pieghevole con descrizioni + tabelle (soffio/antenati draconici), così
+    la scheda mostra i dettagli giocabili senza saltare alla nota SRD."""
+    import build_personaggio
+    data = build_personaggio.build_personaggio_options(CORE)
+    assert (data.get("specie") or {}).get("dragonide", {}).get("sezioni"), "dragonide senza sezioni in personaggio.json"
+    harness = tmp_path / "spt.js"
+    harness.write_text(
+        'const fs=require("fs");'
+        f'const src=fs.readFileSync({json.dumps(str(render.JS_DIR / "views.js"))},"utf8");'
+        'const m={exports:{}};new Function("module","exports",src)(m,m.exports);'
+        f'const data={json.dumps(data, ensure_ascii=False)};'
+        'const app={vault:{adapter:{read:async()=>JSON.stringify(data)}}};'
+        'Promise.all(['
+        '  m.exports.renderSpecieTratti(app,{specie:"dragonide"}),'
+        '  m.exports.renderSpecieTratti(app,{}),'
+        '  m.exports.renderSpecieTratti(app,null),'
+        ']).then(([a,b,c])=>process.stdout.write(JSON.stringify({a,b,c})));',
+        encoding="utf-8")
+    res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
+    assert res.returncode == 0, res.stderr
+    out = json.loads(res.stdout)
+    assert out["a"].startswith("> [!note]- Tratti di Dragonide")
+    assert "Antenati draconici" in out["a"]                  # titolo della tabella
+    assert "| Argento |" in out["a"] and "Freddo" in out["a"]  # riga tabella (antenato/danno)
+    assert out["b"] == "" and out["c"] == ""                  # senza specie / senza page -> niente
+
+
+@pytest.mark.skipif(not shutil.which("node"), reason="node assente")
+def test_riposo_lungo_e2e(tmp_path):
+    """meta_actions.riposo_lungo: PF al massimo, PF temp/TS morte/slot_uso azzerati,
+    e UN livello di Esaurimento rimosso (2024: −1 a riposo lungo, non azzerato)."""
+    harness = tmp_path / "riposo.js"
+    harness.write_text(
+        'global.Notice = class { constructor(m){} };\n'
+        'const fm = { pf:5, pf_max:20, pf_temp:4, ts_morte_successi:2, ts_morte_fallimenti:1,'
+        ' slot_uso_1:1, esaurimento:3 };\n'
+        'const file = { basename:"Eroe", path:"Personaggi/Eroe.md" };\n'
+        'global.app = {\n'
+        '  workspace: { getActiveFile: () => file },\n'
+        '  metadataCache: { getFileCache: () => ({ frontmatter: fm }) },\n'
+        '  fileManager: { processFrontMatter: async (f, fn) => fn(fm) },\n'
+        '};\n'
+        f'const meta = require({json.dumps(str(render.JS_DIR / "meta_actions.js"))});\n'
+        'meta({}, "riposo_lungo").then(() => process.stdout.write(JSON.stringify(fm)));\n',
+        encoding="utf-8")
+    res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
+    assert res.returncode == 0, res.stderr
+    fm = json.loads(res.stdout)
+    assert fm["pf"] == 20 and fm["pf_temp"] == 0
+    assert fm["ts_morte_successi"] == 0 and fm["ts_morte_fallimenti"] == 0
+    assert fm["slot_uso_1"] == 0
+    assert fm["esaurimento"] == 2   # −1, non azzerato (regola 2024)
+
+
+@pytest.mark.skipif(not shutil.which("node"), reason="node assente")
 def test_render_timeline(tmp_path):
     """views.renderTimeline: raggruppa gli eventi per epoca (callout), li ordina
     per 'quando', esclude le archiviate, mette 'Senza epoca' in fondo, risolve i
@@ -756,6 +813,52 @@ def test_fcg_it_settings():
     assert s["currencyTypes"] and all(c.get("name") and c.get("rarity") for c in s["currencyTypes"])
 
 
+def test_validate_aux_yaml_real_files_pass():
+    """Regressione: il validatore degli YAML ausiliari concorda con i file spediti
+    (astrologia/generatori/fcg_it/pg_rules)."""
+    assert render.validate_aux_yaml() == []
+
+
+def test_validate_aux_yaml_catches_breakage(monkeypatch):
+    """Fail-fast: un refuso negli YAML ausiliari è un errore di check(), non solo
+    un crash in-app — qui un segno senza 'archetipo' viene segnalato."""
+    import validate as _v
+    real = _v.load_yaml
+
+    def fake(name):
+        if name == "astrologia.yaml":
+            return {"segni": [{"nome": "Ariete", "elemento": "Fuoco"}],  # manca archetipo
+                    "elementi": [{"nome": "Fuoco"}], "arcani": [{"nome": "Il Matto"}]}
+        if name in ("generatori.yaml", "fcg_it.yaml", "pg_rules.yaml"):
+            raise FileNotFoundError(name)  # opzionali: assenti -> saltati
+        return real(name)
+
+    monkeypatch.setattr(_v, "load_yaml", fake)
+    errors = _v.validate_aux_yaml()
+    assert any("archetipo" in e for e in errors), errors
+
+
+def test_example_world():
+    """Mondo-esempio: ogni nota del manifest si genera con categoria valida sotto la
+    cartella riservata e popola le dashboard chiave; una nota-fronte espone il clock
+    e la superficie giocabile (lore→tavolo)."""
+    manifests = render.load_example_manifests()
+    assert manifests, "nessun manifest mondo-esempio in Dev/Source/esempio/"
+    man = manifests[0]
+    notes = render.example_world_notes(man, CORE)
+    assert len(notes) == len(man["note"]), "qualche nota saltata (categoria sconosciuta?)"
+    cats = set(CORE["categories"])
+    for rel, txt in notes:
+        assert rel.startswith(f"Mondi/_Esempio — {man['mondo']}/"), rel
+        cat_line = next(l for l in txt.splitlines() if l.startswith("categoria: "))
+        assert cat_line.split(": ", 1)[1] in cats, rel
+    joined = "\n".join(t for _, t in notes)
+    for cat in ("mondo", "luogo", "fazione", "personaggio", "evento", "creatura", "incontro"):
+        assert f"categoria: {cat}" in joined, f"manca una nota di categoria {cat}"
+    voragine = next(t for r, t in notes if r.endswith("La Voragine.md"))
+    assert "**Clock**: 4/6" in voragine and "[!tavolo]" in voragine and "list from" in voragine
+
+
 @pytest.mark.skipif(not shutil.which("node"), reason="node assente")
 def test_anti_drift_matchescond(tmp_path):
     """Anti-drift: la logica dei comparatori 'matchesCond' è duplicata in views.js
@@ -789,6 +892,18 @@ def test_anti_drift_matchescond(tmp_path):
     assert out["diff"] == [], f"matchesCond diverge tra views e meta_actions: {out['diff']}"
     assert out["inv"] == [], f"preset non soddisfa matchesCond: {out['inv']}"
     assert archetipi, "nessun archetipo: l'invariante preset↔match non è stata esercitata"
+
+
+def test_comparators_single_source():
+    """matchesCond ha una sorgente canonica (_comparators.js); le copie in views.js
+    e meta_actions.js coincidono byte-a-byte (anti-drift strutturale imposto da
+    check(), oltre al guard runtime di test_anti_drift_matchescond)."""
+    import validate as _v
+    canonical = _v.marked_block((render.JS_DIR / "_comparators.js").read_text(encoding="utf-8"), "matchesCond")
+    assert canonical, "blocco canonico matchesCond mancante in _comparators.js"
+    for name in ("views.js", "meta_actions.js"):
+        block = _v.marked_block((render.JS_DIR / name).read_text(encoding="utf-8"), "matchesCond")
+        assert block == canonical, f"{name}: matchesCond diverge dalla sorgente canonica _comparators.js"
 
 
 @pytest.mark.skipif(not shutil.which("node"), reason="node assente")

@@ -239,6 +239,10 @@ def build_personaggio_options(core: dict[str, Any] | None = None) -> dict[str, A
             "velocita": _speed(sp.get("velocita")),
             "tratti": tratti,
             "scurovisione": "scurovision" in _norm(tratti),
+            # Sezioni SRD strutturate (descrizioni + tabelle: soffio, antenati
+            # draconici...): la scheda PG (views.renderSpecieTratti) ne mostra i
+            # dettagli giocabili senza saltare alla nota SRD.
+            "sezioni": sp.get("sezioni", []) or [],
         }
 
     background: dict[str, Any] = {}

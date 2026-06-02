@@ -1,0 +1,509 @@
+# Mondo DIMOSTRATIVO precaricato (Valdombra). render.py lo genera in
+# Mondi/_Esempio — Valdombra/ (namespace riservato, riscritto a ogni build,
+# cancellabile in un clic). Scopo: al primo avvio le dashboard (Atlante/Bestiario/
+# Fazioni/Cast/Cronologia/Fronti/Rete) NON sono vuote e il differenziatore
+# lore→tavolo è visibile. Note READ-ONLY in Markdown/Dataview puro: rendono sempre.
+# Ogni nota: nome, categoria, tipo, fm (frontmatter extra: relazioni/clock/scheda),
+# fatti (righe infobox), lore, uso_al_tavolo, gancio, pressione, prossima_mossa.
+id: esempio_valdombra
+mondo: Valdombra
+intro: >-
+  Mondo dimostrativo. Esploralo per vedere come si lega il worldbuilding al tavolo,
+  poi cancella la cartella «_Esempio — Valdombra» per partire da un foglio bianco.
+
+note:
+  # ----------------------------------------------------------------- MONDO
+  - nome: Valdombra
+    categoria: mondo
+    tipo: mondo
+    fm:
+      scala: Regione
+      genere: Dark fantasy di frontiera
+      epoca: Era delle Ceneri
+      temi: ["rovina", "avidità", "potere sepolto"]
+    fatti:
+      - ["Scala", "Regione di frontiera"]
+      - ["Genere", "Dark fantasy"]
+      - ["Epoca", "Era delle Ceneri (anno 312)"]
+      - ["Cultura dominante", "[[I Cenerini]]"]
+    lore: >-
+      Un tempo cuore orientale di un impero, Valdombra è oggi una marca dimenticata:
+      villaggi aggrappati alle rovine, tre poteri che si contendono i resti — e, sotto
+      Forte Cenere, **la Voragine**, una ferita nel mondo da cui filtra qualcosa di antico.
+    uso_al_tavolo: >-
+      Sandbox di frontiera: tre fazioni si spartiscono le Marche mentre qualcosa si
+      desta sottoterra. Ottimo per una campagna a bassa magia che vira nel cosmico.
+    gancio: >-
+      I personaggi arrivano a Forte Cenere il giorno in cui la Voragine emette il primo
+      boato in vent'anni.
+    pressione: 5
+    prossima_mossa: La Setta proclama che «il Sepolto si desta» e raduna pellegrini.
+
+  # ----------------------------------------------------------------- LUOGHI
+  - nome: Le Marche di Valdombra
+    categoria: luogo
+    tipo: regione
+    fm:
+      clima: temperato
+      popolazione: "circa 4000 anime sparse"
+      cultura: "[[I Cenerini]]"
+    fatti:
+      - ["Tipo", "Regione"]
+      - ["Clima", "Temperato, inverni lunghi"]
+      - ["Cultura", "[[I Cenerini]]"]
+    lore: >-
+      Brughiere grigie, strade imperiali in disuso e tre insediamenti che si guardano
+      in cagnesco lungo il Fiume Sale.
+    uso_al_tavolo: "La mappa di partenza: tutto ruota attorno a Forte Cenere e alla Voragine."
+    gancio: "Le carovane non arrivano più da est: la strada imperiale è «infestata»."
+    pressione: 4
+    prossima_mossa: Un mercante offre oro a chi scorta il prossimo convoglio.
+
+  - nome: Forte Cenere
+    categoria: luogo
+    tipo: insediamento
+    fm:
+      regione: "[[Le Marche di Valdombra]]"
+      controllata_da: "[[La Mano d'Argento]]"
+      cultura: "[[I Cenerini]]"
+      clima: temperato
+      popolazione: "1200"
+    fatti:
+      - ["Tipo", "Insediamento (capoluogo)"]
+      - ["Regione", "[[Le Marche di Valdombra]]"]
+      - ["Controllata da", "[[La Mano d'Argento]]"]
+    lore: >-
+      Un forte imperiale riadattato a città: mura annerite, un mercato nervoso e, nelle
+      cantine, l'imbocco sigillato della Voragine.
+    uso_al_tavolo: Hub dei personaggi — guarnigione, taverna, archivio, il sigillo nel sottosuolo.
+    gancio: Il Capitano cerca avventurieri «discreti» per scendere sotto il forte.
+    pressione: 5
+    prossima_mossa: La guarnigione raddoppia i turni di guardia sul sigillo.
+
+  - nome: La Voragine
+    categoria: luogo
+    tipo: dungeon
+    fm:
+      regione: "[[Le Marche di Valdombra]]"
+      clima: "nessuno (sottoterra)"
+      clock_dim: 6
+      clock: 4
+      conseguenza: "Il sigillo cede: ondate di aberrazioni dilagano nelle Marche e Forte Cenere cade nel panico."
+      conseguenza_su: "[[Le Marche di Valdombra]]"
+    fatti:
+      - ["Tipo", "Dungeon / frattura"]
+      - ["Sotto", "[[Forte Cenere]]"]
+      - ["Stato", "sigillo che cede (4/6)"]
+    lore: >-
+      Sotto il forte, scale imperiali scendono in gallerie che non seguono più la
+      geometria umana. Più scendi, meno il tempo si comporta bene.
+    uso_al_tavolo: Il dungeon-orologio della campagna — ogni incursione fa avanzare il clock.
+    gancio: Dal terzo livello sale una luce che non proietta ombre.
+    pressione: 7
+    prossima_mossa: Una nuova frattura si apre nel terzo livello; il sigillo perde un altro segmento.
+
+  - nome: Mercato di Sale
+    categoria: luogo
+    tipo: insediamento
+    fm:
+      regione: "[[Le Marche di Valdombra]]"
+      controllata_da: "[[Il Capitolo di Sale]]"
+      clima: temperato
+      popolazione: "800"
+    fatti:
+      - ["Tipo", "Insediamento (porto fluviale)"]
+      - ["Controllata da", "[[Il Capitolo di Sale]]"]
+    lore: >-
+      Banchine, magazzini e contrabbando: tutto ciò che entra nelle Marche passa di qui,
+      con o senza dazio.
+    uso_al_tavolo: Il mercato grigio — informazioni, merci proibite, i Corvi nell'ombra.
+    gancio: Una cassa marcata col sigillo della Setta è arrivata per errore al molo 3.
+    pressione: 3
+    prossima_mossa: Il Capitolo alza i dazi; i Corvi promettono prezzi migliori.
+
+  - nome: Bosco Sussurrante
+    categoria: luogo
+    tipo: landmark naturale
+    fm:
+      regione: "[[Le Marche di Valdombra]]"
+      clima: temperato
+      cultura: "[[I Cenerini]]"
+    fatti:
+      - ["Tipo", "Landmark naturale"]
+      - ["Regione", "[[Le Marche di Valdombra]]"]
+    lore: >-
+      Un bosco che i Cenerini non attraversano dopo il tramonto: dicono che ripeta, in
+      un sussurro, l'ultima parola dei morti.
+    uso_al_tavolo: Tappa selvaggia e inquietante fra gli insediamenti — buona per un'insidia.
+    gancio: Un cacciatore torna muto, e da allora sussurra parole che non sono sue.
+    pressione: 4
+    prossima_mossa: I sussurri ora pronunciano il nome di un personaggio del gruppo.
+
+  # ----------------------------------------------------------------- FAZIONI
+  - nome: La Mano d'Argento
+    categoria: fazione
+    tipo: ordine
+    fm:
+      sede: "[[Forte Cenere]]"
+      figure: ["[[Capitano Vera Sabbialesta]]"]
+      alleati: ["[[Il Capitolo di Sale]]"]
+      rivali: ["[[I Corvi Cinerei]]", "[[La Setta della Voragine]]"]
+      portata: regionale
+      motto: "Nessuna cenere resti fredda."
+    fatti:
+      - ["Tipo", "Ordine (guarnigione)"]
+      - ["Sede", "[[Forte Cenere]]"]
+      - ["Motto", "«Nessuna cenere resti fredda»"]
+    lore: >-
+      I custodi di Forte Cenere: ex soldati imperiali che tengono in piedi l'ordine — e
+      il sigillo — con pochi uomini e molta testardaggine.
+    uso_al_tavolo: I probabili datori di lavoro dei personaggi; legali, sotto pressione, a corto di mani.
+    gancio: Il Capitano offre cittadinanza e paga a chi giura sulla Mano.
+    pressione: 5
+    prossima_mossa: "Richiama le pattuglie esterne per difendere il forte: i villaggi restano scoperti."
+
+  - nome: I Corvi Cinerei
+    categoria: fazione
+    tipo: banda
+    fm:
+      sede: "[[Mercato di Sale]]"
+      figure: ["[[Renzo il Tagliente]]"]
+      rivali: ["[[La Mano d'Argento]]", "[[Il Capitolo di Sale]]"]
+      alleati: ["[[La Setta della Voragine]]"]
+      portata: locale
+      motto: "Tutto ha un prezzo, anche il silenzio."
+    fatti:
+      - ["Tipo", "Banda (contrabbando)"]
+      - ["Sede", "[[Mercato di Sale]]"]
+    lore: >-
+      Contrabbandieri e tagliagole che muovono ciò che gli altri non osano toccare —
+      comprese le reliquie che la Setta paga a peso d'oro.
+    uso_al_tavolo: Il jolly grigio — utili e infidi; possono aiutare o vendere i personaggi.
+    gancio: "Renzo propone un lavoro «facile»: rubare una chiave alla Mano d'Argento."
+    pressione: 6
+    prossima_mossa: I Corvi aprono una rotta di reliquie diretta alla Voragine.
+
+  - nome: Il Capitolo di Sale
+    categoria: fazione
+    tipo: casata
+    fm:
+      sede: "[[Mercato di Sale]]"
+      figure: ["[[Magistra Ilda Sale]]"]
+      alleati: ["[[La Mano d'Argento]]"]
+      rivali: ["[[I Corvi Cinerei]]"]
+      portata: regionale
+      motto: "Il sale conserva ogni cosa, anche i debiti."
+    fatti:
+      - ["Tipo", "Casata mercantile"]
+      - ["Sede", "[[Mercato di Sale]]"]
+    lore: >-
+      La casata che controlla il commercio del sale e, con esso, le Marche: ricca,
+      paziente e disposta a finanziare chiunque le faccia comodo.
+    uso_al_tavolo: I mecenati ambigui — oro e contatti in cambio di favori che pesano.
+    gancio: La Magistra finanzia una spedizione nella Voragine «per ragioni di mercato».
+    pressione: 4
+    prossima_mossa: "Il Capitolo compra i debiti di Forte Cenere: ora la Mano gli deve obbedienza."
+
+  - nome: La Setta della Voragine
+    categoria: fazione
+    tipo: culto
+    fm:
+      sede: "[[La Voragine]]"
+      figure: ["[[Profeta Cael]]"]
+      rivali: ["[[La Mano d'Argento]]"]
+      domini: ["[[Vorth il Sepolto]]"]
+      portata: clandestina
+      motto: "Ciò che dorme, sognando, ci chiama."
+      clock_dim: 4
+      clock: 3
+      conseguenza: "Il rito di risveglio si compie: Vorth parla per bocca dei suoi profeti e la Voragine si apre dall'interno."
+      conseguenza_su: "[[La Voragine]]"
+    fatti:
+      - ["Tipo", "Culto"]
+      - ["Venera", "[[Vorth il Sepolto]]"]
+      - ["Rito di risveglio", "3/4"]
+    lore: >-
+      Un culto cresciuto attorno alla Voragine: pellegrini, transfughi dei Corvi e
+      qualche notabile di Forte Cenere convinti che il Sepolto sia un dio, non una minaccia.
+    uso_al_tavolo: L'antagonista a orologeria — ogni vittoria della Setta avvicina il risveglio.
+    gancio: Un volto noto di Forte Cenere viene visto a un raduno della Setta.
+    pressione: 8
+    prossima_mossa: La Setta rapisce l'Archivista [[Vecchio Toben]] per farsi rivelare il sigillo.
+
+  # ----------------------------------------------------------------- PERSONAGGI
+  - nome: Capitano Vera Sabbialesta
+    categoria: personaggio
+    tipo: png
+    fm:
+      famiglia: alleato
+      fazione: "[[La Mano d'Argento]]"
+      luogo: "[[Forte Cenere]]"
+      titolo: Capitano della guarnigione
+      allineamento: Legale Neutrale
+      pronomi: lei
+      segno: Capricorno
+    fatti:
+      - ["Ruolo", "Capitano della Mano d'Argento"]
+      - ["Dove", "[[Forte Cenere]]"]
+      - ["Allineamento", "Legale Neutrale"]
+    lore: >-
+      Veterana dura e giusta, tiene Forte Cenere con metà degli uomini che servirebbero.
+      Sa che il sigillo cede, e non sa più di chi fidarsi.
+    uso_al_tavolo: Il datore di lavoro di partenza; mette in moto la trama del sigillo.
+    gancio: Convoca i personaggi e affida loro la prima discesa.
+    pressione: 3
+    prossima_mossa: Promuove i personaggi a «mano della Mano» se danno prova di lealtà.
+
+  - nome: Renzo il Tagliente
+    categoria: personaggio
+    tipo: png
+    fm:
+      famiglia: antagonista
+      fazione: "[[I Corvi Cinerei]]"
+      luogo: "[[Mercato di Sale]]"
+      titolo: Capo dei Corvi Cinerei
+      allineamento: Caotico Neutrale
+      pronomi: lui
+      segno: Gemelli
+    fatti:
+      - ["Ruolo", "Capo dei Corvi Cinerei"]
+      - ["Dove", "[[Mercato di Sale]]"]
+    lore: >-
+      Sorridente, rapido di coltello e di parola. Vende a tutti e non appartiene a
+      nessuno — ma ultimamente i suoi affari profumano di Voragine.
+    uso_al_tavolo: "Il contatto grigio: lavori loschi, informazioni, doppi giochi."
+    gancio: Offre ai personaggi un lavoro che li mette contro la Mano d'Argento.
+    pressione: 5
+    prossima_mossa: Tradisce il committente di turno se qualcuno paga di più.
+
+  - nome: Magistra Ilda Sale
+    categoria: personaggio
+    tipo: png
+    fm:
+      famiglia: patrono
+      fazione: "[[Il Capitolo di Sale]]"
+      luogo: "[[Mercato di Sale]]"
+      titolo: Magistra del Capitolo
+      allineamento: Legale Neutrale
+      pronomi: lei
+      segno: Vergine
+    fatti:
+      - ["Ruolo", "Magistra del Capitolo di Sale"]
+      - ["Dove", "[[Mercato di Sale]]"]
+    lore: >-
+      Mente fredda della casata: non alza mai la voce e non perde mai un debito. Vuole
+      la Voragine non per fede, ma per ciò che se ne può estrarre e vendere.
+    uso_al_tavolo: La mecenate ambigua — finanzia i personaggi, poi presenta il conto.
+    gancio: Propone un contratto vantaggioso con una clausola scritta in piccolo.
+    pressione: 3
+    prossima_mossa: Compra l'influenza che le serve a Forte Cenere.
+
+  - nome: Profeta Cael
+    categoria: personaggio
+    tipo: png
+    fm:
+      famiglia: antagonista
+      fazione: "[[La Setta della Voragine]]"
+      luogo: "[[La Voragine]]"
+      titolo: Profeta del Sepolto
+      allineamento: Caotico Malvagio
+      pronomi: lui
+      segno: Scorpione
+      arcano: L'Appeso
+    fatti:
+      - ["Ruolo", "Profeta della Setta"]
+      - ["Dove", "[[La Voragine]]"]
+      - ["Allineamento", "Caotico Malvagio"]
+    lore: >-
+      Era un chierico di Forte Cenere finché la Voragine non gli «parlò». Ora guida la
+      Setta con una calma che spaventa più di qualunque urlo.
+    uso_al_tavolo: Il volto della minaccia a orologeria; ragiona, non ringhia.
+    gancio: Invita un personaggio a «sentire» ciò che dorme sotto il forte.
+    pressione: 7
+    prossima_mossa: Celebra il rito che fa avanzare il clock della Setta.
+
+  - nome: Vecchio Toben
+    categoria: personaggio
+    tipo: png
+    fm:
+      famiglia: mentore
+      luogo: "[[Forte Cenere]]"
+      titolo: Archivista in esilio
+      allineamento: Neutrale Buono
+      pronomi: lui
+      segno: Acquario
+    fatti:
+      - ["Ruolo", "Archivista, custode di segreti"]
+      - ["Dove", "[[Forte Cenere]]"]
+    lore: >-
+      L'unico che ha letto i registri imperiali sul sigillo. Beve troppo e parla poco,
+      ma sa COSA fu sepolto sotto il forte — e perché.
+    uso_al_tavolo: La fonte di lore e degli indizi; chiave per fermare il risveglio.
+    gancio: Ai personaggi sfugge che Toben «sa», e presto lo saprà anche la Setta.
+    pressione: 2
+    prossima_mossa: Viene rapito dalla Setta (vedi [[La Setta della Voragine]]) se nessuno lo protegge.
+
+  - nome: Lyra Ventocupo
+    categoria: personaggio
+    tipo: pg
+    fm:
+      famiglia: alleato
+      fazione: "[[La Mano d'Argento]]"
+      luogo: "[[Forte Cenere]]"
+      titolo: Raminga delle Marche
+      allineamento: Neutrale Buono
+      pronomi: lei
+      segno: Sagittario
+      classe: Ladra
+      specie: Mezzelfa
+      background: Forestiera
+      livello: 3
+    fatti:
+      - ["PG d'esempio", "Ladra mezzelfa, liv. 3"]
+      - ["Background", "Forestiera"]
+      - ["Base", "[[Forte Cenere]]"]
+      - ["Nota", "premi **Crea PG** in Home per una scheda interattiva vera"]
+    lore: >-
+      Cresciuta fra le carovane, conosce le strade imperiali meglio di chiunque. Esempio
+      di come appare un PG nel Cast: per giocarne uno vero usa il pulsante **Crea PG**.
+    uso_al_tavolo: Mostra come un personaggio giocante si lega a luoghi e fazioni del mondo.
+    gancio: Ha visto, da bambina, qualcosa uscire dalla Voragine — e nessuno le crede.
+    pressione: 2
+    prossima_mossa: Riconosce un simbolo della Setta su una merce dei Corvi.
+
+  # ----------------------------------------------------------------- EVENTI
+  - nome: Il Crollo dell'Impero
+    categoria: evento
+    tipo: evento storico
+    fm:
+      quando: "Era delle Ceneri · anno 0"
+      luogo: "[[Le Marche di Valdombra]]"
+    fatti:
+      - ["Quando", "anno 0 dell'Era delle Ceneri"]
+      - ["Dove", "[[Le Marche di Valdombra]]"]
+    lore: >-
+      In una sola notte l'impero d'oriente cadde e Valdombra divenne frontiera. Nessuno
+      sa ancora cosa lo fece crollare — ma cominciò sotto Forte Cenere.
+    uso_al_tavolo: Il «prima» del mondo; la radice del mistero della Voragine.
+    gancio: Un registro imperiale lega il Crollo alla prima apertura del sigillo.
+    pressione: 2
+    prossima_mossa: Un indizio collega il Crollo a ciò che la Setta vuole risvegliare.
+
+  - nome: La Prima Frattura
+    categoria: evento
+    tipo: conflitto
+    fm:
+      quando: "12 anni fa"
+      luogo: "[[La Voragine]]"
+      coinvolti: ["[[Vecchio Toben]]"]
+    fatti:
+      - ["Quando", "12 anni fa"]
+      - ["Dove", "[[La Voragine]]"]
+    lore: >-
+      Dodici anni fa il sigillo cedette per la prima volta. Morì mezza guarnigione;
+      Toben sopravvisse e da allora non dorme.
+    uso_al_tavolo: Il precedente che dice ai personaggi cosa succede se il clock si riempie.
+    gancio: I superstiti della Prima Frattura cominciano a sparire uno a uno.
+    pressione: 4
+    prossima_mossa: Un sopravvissuto si presenta ai personaggi con un avvertimento.
+
+  - nome: Il Patto di Sale
+    categoria: evento
+    tipo: evento di campagna
+    fm:
+      quando: "2 anni fa"
+      luogo: "[[Mercato di Sale]]"
+      fazioni: ["[[La Mano d'Argento]]", "[[Il Capitolo di Sale]]"]
+      coinvolti: ["[[Magistra Ilda Sale]]", "[[Capitano Vera Sabbialesta]]"]
+    fatti:
+      - ["Quando", "2 anni fa"]
+      - ["Patto fra", "[[La Mano d'Argento]] e [[Il Capitolo di Sale]]"]
+    lore: >-
+      L'alleanza che tiene in piedi le Marche: la Mano protegge, il Capitolo paga. Regge
+      finché conviene a entrambi — e comincia a non convenire più.
+    uso_al_tavolo: L'equilibrio politico che i personaggi possono rafforzare o mandare in pezzi.
+    gancio: Qualcuno vuole rompere il Patto, e ci serve un capro espiatorio.
+    pressione: 3
+    prossima_mossa: Il Capitolo minaccia di ritirare i fondi alla Mano.
+
+  # ----------------------------------------------------------------- CULTURA
+  - nome: I Cenerini
+    categoria: cultura
+    tipo: popolo
+    fm:
+      regioni: ["[[Le Marche di Valdombra]]"]
+      stile_nomi: nordico
+      portata: regionale
+    fatti:
+      - ["Tipo", "Popolo di frontiera"]
+      - ["Dove", "[[Le Marche di Valdombra]]"]
+    lore: >-
+      Discendenti dei coloni imperiali rimasti dopo il Crollo: tenaci, superstiziosi,
+      legati al fuoco e alla cenere come a un patto con i morti.
+    uso_al_tavolo: La cultura di sfondo dei PNG locali — riti del fuoco, paura del bosco.
+    gancio: Un rito cenerino richiede una cenere che solo la Voragine può dare.
+    pressione: 2
+    prossima_mossa: Gli anziani interpretano i boati della Voragine come un presagio.
+
+  # ----------------------------------------------------------------- DIVINITÀ
+  - nome: Vorth il Sepolto
+    categoria: divinita
+    tipo: divinità minore
+    fm:
+      culti: ["[[La Setta della Voragine]]"]
+      allineamento: Neutrale Malvagio
+      dominio: Oblio, profondità, ciò-che-dorme
+      simbolo: Una spirale che scende
+    fatti:
+      - ["Tipo", "Divinità minore (sepolta)"]
+      - ["Culto", "[[La Setta della Voragine]]"]
+      - ["Simbolo", "una spirale che scende"]
+    lore: >-
+      Forse un dio, forse una cosa che l'impero credette di poter incatenare. Dorme sotto
+      Forte Cenere e sogna — e i suoi sogni filtrano dalla Voragine.
+    uso_al_tavolo: "La posta cosmica: il «cosa» dietro la minaccia a orologeria."
+    gancio: Chi si avvicina troppo alla Voragine comincia a fare gli stessi sogni.
+    pressione: 6
+    prossima_mossa: I sogni di Vorth raggiungono un personaggio del gruppo.
+
+  # ----------------------------------------------------------------- CREATURA
+  - nome: Orrore della Voragine
+    categoria: creatura
+    tipo: aberrazione
+    fm:
+      taglia: Grande
+      gs: 5
+      habitat: ["[[La Voragine]]"]
+      ruolo_ecologico: predatore d'agguato
+    fatti:
+      - ["Tipo", "Aberrazione"]
+      - ["Taglia / GS", "Grande · GS 5"]
+      - ["Habitat", "[[La Voragine]]"]
+    lore: >-
+      Carne che il sigillo non ha del tutto trattenuto: troppi arti, nessuna simmetria,
+      una fame che precede la forma. Caccia nel buio dove il tempo non aiuta.
+    uso_al_tavolo: Il mostro-firma della Voragine; ottimo come boss di un'incursione.
+    gancio: Trova le sue prede dai loro sogni prima ancora di vederle.
+    pressione: 5
+    prossima_mossa: Risale di un livello verso le cantine di Forte Cenere.
+
+  # ----------------------------------------------------------------- INCONTRO
+  - nome: Agguato alla Voragine
+    categoria: incontro
+    tipo: agguato
+    fm:
+      luogo: "[[La Voragine]]"
+      creature: ["[[Orrore della Voragine]]"]
+      pg_livello: 5
+      pg_numero: 4
+    fatti:
+      - ["Tipo", "Agguato"]
+      - ["Dove", "[[La Voragine]]"]
+      - ["Tarato per", "4 PG di livello 5"]
+    lore: >-
+      Al terzo livello la luce senz'ombra si spegne di colpo: l'[[Orrore della Voragine]]
+      ha aspettato che il gruppo fosse fra due fratture.
+    uso_al_tavolo: Incontro pronto da giocare — collega la creatura e usa il calcolo difficoltà.
+    gancio: La via del ritorno non c'è più dov'era un attimo fa.
+    pressione: 5
+    prossima_mossa: Se i personaggi fuggono, l'Orrore li segue fino alle cantine.

@@ -256,6 +256,9 @@ async function renderAxesCompare(container, app, dv, page) {
 // --- Profilo: tag coerenti derivati dalle combinazioni di valori-assi ---------
 // Un archetipo combacia se TUTTE le sue condizioni `quando` (per-asse) sono vere.
 // Comparatori: ">=N" "<=N" ">N" "<N" "==N"/"N" (uguaglianza) "N-M" (intervallo).
+// Copia della sorgente canonica _comparators.js: check() ne impone l'uguaglianza
+// (anti-drift). Modifica _comparators.js e risincronizza qui (stesso testo).
+// >>>matchesCond
 function matchesCond(value, cond) {
   const v = Number(value);
   if (!Number.isFinite(v)) return false;
@@ -270,6 +273,7 @@ function matchesCond(value, cond) {
   if (/^\d+$/.test(c)) return v === Number(c);
   return false;
 }
+// <<<matchesCond
 
 function archetipiMatch(archetipi, page) {
   return (archetipi || []).filter((a) =>
@@ -593,6 +597,41 @@ async function renderMap(app, dv, page) {
   return `![[${name}]]`;
 }
 
+// --- Tratti di specie (rules-engine): dettagli SRD strutturati nella scheda PG -
+// Dal campo `specie` del PG rende le sezioni SRD della specie (descrizioni +
+// tabelle, es. soffio / antenati draconici) in un callout pieghevole, così la
+// scheda espone i dettagli giocabili senza saltare alla nota SRD. Usa
+// personaggio.json (build_personaggio porta le `sezioni` complete). Vuoto -> "".
+function sezioniMarkdown(sezioni) {
+  const parti = [];
+  for (const sez of sezioni || []) {
+    const titolo = String((sez && sez.titolo) || "").trim();
+    const righe = Array.isArray(sez && sez.righe) ? sez.righe : null;
+    if (righe && righe.length) {
+      const cols = Object.keys(righe[0]);
+      const tabella = [`| ${cols.join(" | ")} |`, `| ${cols.map(() => "---").join(" | ")} |`,
+        ...righe.map((r) => `| ${cols.map((c) => r[c] != null ? r[c] : "").join(" | ")} |`)];
+      parti.push((titolo ? `**${titolo}**\n\n` : "") + tabella.join("\n"));
+    } else if (sez && sez.descrizione) {
+      parti.push((titolo ? `**${titolo}** — ` : "") + String(sez.descrizione).trim());
+    }
+  }
+  return parti;
+}
+
+async function renderSpecieTratti(app, page) {
+  if (!page) return "";
+  const id = String(page.specie != null ? page.specie : "").trim();
+  if (!id) return "";
+  const data = await loadPersonaggio(app);
+  const sp = (data.specie || {})[id];
+  if (!sp) return "";
+  const parti = sezioniMarkdown(sp.sezioni);
+  if (!parti.length) return "";
+  const body = parti.map((p) => "> " + p.replace(/\n/g, "\n> ")).join("\n>\n");
+  return `> [!note]- Tratti di ${sp.label || id}\n${body}`;
+}
+
 module.exports = {
   renderEntityPanel, renderSessionPanel, renderBacklinks,
   renderAxesRadar, renderAxesCompare, radarSvg, clampAxis,
@@ -600,6 +639,7 @@ module.exports = {
   renderClock, clockSvg,
   renderEncounter, xpForCreature,
   renderProgressione,
+  renderSpecieTratti, sezioniMarkdown,
   renderTimeline, quandoNum, epocaLabel,
   renderMap,
   renderCondizioni, condizioniMarkdown,

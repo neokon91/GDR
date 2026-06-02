@@ -88,6 +88,9 @@ async function collega(tp, file) {
 }
 
 // --- Profilo: tag coerenti derivati dalle combinazioni di valori-assi --------
+// Copia della sorgente canonica _comparators.js: check() ne impone l'uguaglianza
+// (anti-drift). Modifica _comparators.js e risincronizza qui (stesso testo).
+// >>>matchesCond
 function matchesCond(value, cond) {
   const v = Number(value);
   if (!Number.isFinite(v)) return false;
@@ -102,6 +105,7 @@ function matchesCond(value, cond) {
   if (/^\d+$/.test(c)) return v === Number(c);
   return false;
 }
+// <<<matchesCond
 
 // Riscrive i tag 'profilo/*' del frontmatter dai valori-assi correnti: RIMUOVE i
 // vecchi profilo/* (niente residui se cambi gli assi) e aggiunge quelli attuali.
@@ -205,9 +209,11 @@ async function aggiorna_encounter(tp, file) {
 }
 
 // Riposo lungo (PG): PF al massimo, PF temporanei e tiri salvezza contro morte
-// azzerati, slot incantesimo recuperati (azzera gli slot_uso_* esistenti). Lo slot
-// breve in 5.5e si gioca coi dadi vita (manuale), quindi non c'è auto-reset.
+// azzerati, slot incantesimo recuperati (azzera gli slot_uso_* esistenti), un
+// livello di Esaurimento (Indebolimento) rimosso (2024: −1 a riposo lungo, NON
+// azzerato). Lo slot breve in 5.5e si gioca coi dadi vita (manuale): no auto-reset.
 async function riposo_lungo(file) {
+  let esaur = null;
   await updateFrontmatter(file, fm => {
     if (fm.pf_max != null) fm.pf = Number(fm.pf_max) || 0;
     fm.pf_temp = 0;
@@ -216,8 +222,13 @@ async function riposo_lungo(file) {
     for (let n = 1; n <= 9; n++) {
       if (fm["slot_uso_" + n] != null) fm["slot_uso_" + n] = 0;
     }
+    if (fm.esaurimento != null) {
+      fm.esaurimento = Math.max(0, (Number(fm.esaurimento) || 0) - 1);
+      esaur = fm.esaurimento;
+    }
   });
-  new Notice("Riposo lungo: PF al massimo, slot e tiri salvezza contro morte recuperati.");
+  const coda = esaur != null ? ` Esaurimento → ${esaur}.` : "";
+  new Notice(`Riposo lungo: PF al massimo, slot e tiri salvezza contro morte recuperati.${coda}`);
   return "";
 }
 

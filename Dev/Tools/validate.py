@@ -11,10 +11,12 @@ from typing import Any
 
 from common import (
     JINJA_DIR,
+    JS_DIR,
     apply_entities,
     deep_merge,
     load_core_parts,
     load_entities,
+    load_example_manifests,
     load_pages,
     load_templates,
     load_yaml,
@@ -25,6 +27,15 @@ FIELD_REF_RE = re.compile(r"""field\(\s*['"]([a-z0-9_]+)['"]""")
 
 # Identificatore che diventa chiave di frontmatter / cartella: snake_case.
 SNAKE_RE = re.compile(r"^[a-z][a-z0-9_]*$")
+
+# Blocco di codice condiviso fra i marker `// >>>nome` / `// <<<nome` in un .js.
+MARKED_BLOCK_RE = r"//\s*>>>{name}\s*\n(.*?)\n\s*//\s*<<<{name}"
+
+
+def marked_block(text: str, name: str) -> str | None:
+    """Estrae il blocco fra `// >>>{name}` e `// <<<{name}` (None se assente)."""
+    m = re.search(MARKED_BLOCK_RE.format(name=re.escape(name)), text, re.S)
+    return m.group(1).strip() if m else None
 
 # Eccezioni di interoperabilità: chiavi-campo NON snake_case perché un plugin
 # terzo le richiede col nome esatto. fc-* = chiavi-evento di Calendarium (ponte
@@ -219,6 +230,87 @@ def validate_entity_schema(entities: list[dict[str, Any]]) -> list[str]:
     return errors
 
 
+def validate_aux_yaml() -> list[str]:
+    """Shape degli YAML AUSILIARI letti a runtime dai JS/plugin ma non fusi nel
+    modello core/system: astrologia (views.renderTemaNatale), generatori (genera.js),
+    fcg_it (write_fantasy_content_generator), pg_rules (build_personaggio). Senza
+    questo un refuso qui passa tutto il resto di check() e rompe SOLO in-app. Ogni
+    file è opzionale (la pipeline degrada se assente): se manca, si salta."""
+    errors: list[str] = []
+
+    def load(name: str) -> Any:
+        try:
+            return load_yaml(name)
+        except Exception:
+            return None
+
+    # astrologia.yaml -> views.renderTemaNatale (segno -> archetipo/elemento/mbti/ombra).
+    astro = load("astrologia.yaml")
+    if astro:
+        for key in ("segni", "elementi", "arcani"):
+            if not isinstance(astro.get(key), list) or not astro.get(key):
+                errors.append(f"astrologia: '{key}' assente o vuoto")
+        for s in astro.get("segni", []) or []:
+            if not (isinstance(s, dict) and s.get("nome") and s.get("elemento") and s.get("archetipo")):
+                nome = s.get("nome", "?") if isinstance(s, dict) else s
+                errors.append(f"astrologia: segno '{nome}' senza nome/elemento/archetipo")
+        for e in astro.get("elementi", []) or []:
+            if not (isinstance(e, dict) and e.get("nome")):
+                errors.append(f"astrologia: elemento {e} senza nome")
+        for a in astro.get("arcani", []) or []:
+            if not (isinstance(a, dict) and a.get("nome")):
+                errors.append(f"astrologia: arcano {a} senza nome")
+
+    # generatori.yaml -> genera.js (l'anti-drift stile_nomi <-> stili è già in check()).
+    gen = load("generatori.yaml")
+    if gen:
+        if not gen.get("stili"):
+            errors.append("generatori: 'stili' assente o vuoto")
+        for sid, spec in (gen.get("stili") or {}).items():
+            persona = (spec or {}).get("persona") or {}
+            if not (spec.get("label") and persona.get("inizi") and persona.get("fini_m") and persona.get("fini_f")):
+                errors.append(f"generatori: stile '{sid}' senza label o persona.{{inizi,fini_m,fini_f}}")
+        top = gen.get("toponimi") or {}
+        if not (top.get("prefissi") and top.get("suffissi")):
+            errors.append("generatori: toponimi senza prefissi/suffissi")
+        faz = gen.get("fazioni") or {}
+        for k in ("forme", "sintagma", "nucleo_pl", "aggettivo"):
+            if not faz.get(k):
+                errors.append(f"generatori: fazioni.{k} assente")
+
+    # fcg_it.yaml -> write_fantasy_content_generator (merge SHALLOW nel plugin: ogni
+    # gruppo override deve avere TUTTE le chiavi che il generatore legge).
+    fcg = load("fcg_it.yaml")
+    if fcg:
+        settings = fcg.get("settings") or {}
+        inn = settings.get("innSettings") or {}
+        for k in ("prefixes", "innType", "nouns", "desc", "rumors"):
+            if not inn.get(k):
+                errors.append(f"fcg_it: innSettings.{k} assente")
+        for k in ("adj", "nouns"):
+            if not (settings.get("drinkSettings") or {}).get(k):
+                errors.append(f"fcg_it: drinkSettings.{k} assente")
+        for c in settings.get("currencyTypes") or []:
+            if not (isinstance(c, dict) and c.get("name") and c.get("rarity")):
+                errors.append(f"fcg_it: currencyType {c} senza name/rarity")
+
+    # pg_rules.yaml -> build_personaggio (rules-engine PG: metodi car., ASI bg, CA, lingue).
+    pg = load("pg_rules.yaml")
+    if pg:
+        if not (pg.get("generazione_caratteristiche") or {}).get("metodi"):
+            errors.append("pg_rules: generazione_caratteristiche.metodi assente")
+        if not (pg.get("aumento_background") or {}).get("schemi"):
+            errors.append("pg_rules: aumento_background.schemi assente")
+        for aid, arm in (pg.get("armature") or {}).items():
+            if not (isinstance(arm, dict) and arm.get("label") and arm.get("categoria") and "ca_base" in arm):
+                errors.append(f"pg_rules: armatura '{aid}' senza label/categoria/ca_base")
+        lingue = pg.get("lingue") or {}
+        if not (lingue.get("standard") and lingue.get("numero_a_scelta") is not None):
+            errors.append("pg_rules: lingue senza standard/numero_a_scelta")
+
+    return errors
+
+
 def check() -> int:
     errors: list[str] = []
     core_raw, system_raw = load_core_parts()
@@ -227,6 +319,7 @@ def check() -> int:
     errors.extend(validate_split(core_raw, system_raw, core))
     errors.extend(validate_entities(core_raw, system_raw, entities, core))
     errors.extend(validate_entity_schema(entities))
+    errors.extend(validate_aux_yaml())
     plugins = load_yaml("plugins.yaml")
     categories = core.get("categories", {})
     folders = core.get("folders", {})
@@ -266,6 +359,24 @@ def check() -> int:
         if opt_ids != gen_stili:
             errors.append(f"stile_nomi: opzioni metabind {sorted(opt_ids)} != stili generatori.yaml {sorted(gen_stili)}")
 
+    # JS — anti-drift strutturale dei comparatori `quando`: la grammatica matchesCond
+    # ha UNA sorgente canonica (_comparators.js); views.js e meta_actions.js (script
+    # autonomi, niente require a runtime) ne tengono una copia fra i marker
+    # >>>matchesCond/<<<matchesCond. Qui impongo che le copie siano identiche alla
+    # canonica: modificarne una sola è un errore di build, non un bug latente.
+    canonical_path = JS_DIR / "_comparators.js"
+    if canonical_path.is_file():
+        canonical = marked_block(canonical_path.read_text(encoding="utf-8"), "matchesCond")
+        if canonical is None:
+            errors.append("_comparators.js: blocco matchesCond fra i marker mancante")
+        else:
+            for js_name in ("views.js", "meta_actions.js"):
+                block = marked_block((JS_DIR / js_name).read_text(encoding="utf-8"), "matchesCond")
+                if block is None:
+                    errors.append(f"{js_name}: blocco matchesCond fra i marker // >>>matchesCond/<<<matchesCond mancante")
+                elif block != canonical:
+                    errors.append(f"{js_name}: matchesCond diverge da _comparators.js (sorgente unica) — risincronizza")
+
     # Ogni field('<id>') usato nei Jinja deve esistere nel registro core.fields.
     # I partial (_*.j2) definiscono le macro, non le usano: vanno esclusi.
     for path in sorted(JINJA_DIR.glob("*.j2")):
@@ -300,6 +411,17 @@ def check() -> int:
     for page in load_pages():
         if page.get("category") not in categories:
             errors.append(f"page {page.get('id')}: categoria non dichiarata ({page.get('category')})")
+
+    # Mondo-esempio (opzionale): ogni nota del manifest deve avere 'nome' e una
+    # categoria DICHIARATA — altrimenti write_example_world la salterebbe in silenzio
+    # (note-demo mancanti senza avviso). Fail-fast coerente col resto della pipeline.
+    for manifest in load_example_manifests():
+        mondo = manifest.get("mondo")
+        for note in manifest.get("note", []) or []:
+            if not note.get("nome"):
+                errors.append(f"esempio[{mondo}]: nota senza 'nome'")
+            elif note.get("categoria") not in categories:
+                errors.append(f"esempio[{mondo}].{note.get('nome')}: categoria '{note.get('categoria')}' non dichiarata")
 
     if errors:
         for error in errors:
