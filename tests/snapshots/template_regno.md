@@ -12,6 +12,7 @@
 > | **Sovrano** | `VIEW[{sovrano} ?? "—"]` |
 > | **Portata** | `VIEW[{portata} ?? "—"]` |
 > | **Popolazione** | `VIEW[{popolazione} ?? "—"]` |
+> | **Simbolo** | `VIEW[{simbolo} ?? "—"]` |
 > | **Stato** | `INPUT[stato][:stato]` |
 
 ````tabs
@@ -22,6 +23,7 @@
 > Sovrano: `INPUT[text:sovrano]`
 > Portata: `INPUT[portata][:portata]`
 > Popolazione: `INPUT[text:popolazione]`
+> Simbolo: `INPUT[text:simbolo]`
 
 > [!note] Storia
 > `INPUT[textArea:storia_regno]`

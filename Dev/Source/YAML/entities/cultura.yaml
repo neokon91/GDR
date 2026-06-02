@@ -39,8 +39,9 @@ famiglie:
   assi: { valori_dominanti: 3, relazione_morte: 2, ritualizzazione_vita: 4 }
 - { nome: nomadica,   descrizione: "Del movimento, dell'adattamento e della non-fissazione." }
 # Diffusione/portata + stile dei nomi (il generatore homebrew genera.js legge
-# stile_nomi per comporre nomi a tema della cultura).
-scheda: [portata, stile_nomi]
+# stile_nomi per comporre nomi a tema della cultura) + simbolo (araldica/emblema
+# identitario, recupero FantasyWorld; si sposa con infobox/ritratto).
+scheda: [portata, stile_nomi, simbolo]
 relazioni:
 - field: regioni
   label: Regioni

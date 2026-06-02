@@ -19,7 +19,8 @@ subtypes:
 fields:
   governo: { label: Forma di governo, widget: text }
   sovrano: { label: Sovrano,          widget: text }
-scheda: [governo, sovrano, portata, popolazione]
+# + simbolo: stemma/insegna del regno (araldica, recupero FantasyWorld).
+scheda: [governo, sovrano, portata, popolazione, simbolo]
 relazioni:
 - field: capitale
   label: Capitale

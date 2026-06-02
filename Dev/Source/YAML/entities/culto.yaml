@@ -33,6 +33,12 @@ relazioni:
 - field: fazione
   label: Braccio politico
   category: fazione
+# Culti rivali (rivalità dottrinale: eresie, scismi, fedi in competizione):
+# alimenta il grafo e genera trame. Non reciproca, come gli altri 'rivali'.
+- field: rivali
+  label: Culti rivali
+  category: culto
+  multi: true
 creation:
   fields:
   - field: tipo

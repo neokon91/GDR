@@ -21,6 +21,9 @@
 > [!note] Metodo
 > `INPUT[textArea:metodo]`
 
+> [!note] Dottrina
+> `INPUT[textArea:dottrina]`
+
 > [!note] Costo
 > `INPUT[textArea:costo]`
 

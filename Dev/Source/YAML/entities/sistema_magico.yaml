@@ -60,6 +60,11 @@ creation:
   - field: metodo
     prompt: 'Metodo: come si pratica (parole, gesti, sangue, patti)'
     heading: Metodo
+  # Dottrina: la visione del mondo che il sistema incarna (recupero FantasyWorld) —
+  # distinta da 'fonte' (da dove viene) e 'metodo' (come si pratica).
+  - field: dottrina
+    prompt: 'Dottrina: la visione del mondo, l''etica o la filosofia che la magia incarna'
+    heading: Dottrina
   - field: costo
     prompt: 'Costo e limiti: cosa esige da chi la usa'
     heading: Costo

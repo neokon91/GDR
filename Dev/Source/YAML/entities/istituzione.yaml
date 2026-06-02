@@ -16,7 +16,8 @@ subtypes:
 - corte
 - tribunale
 - culto di stato
-scheda: [portata]
+# + simbolo: sigillo/insegna dell'istituzione (araldica, recupero FantasyWorld).
+scheda: [portata, simbolo]
 relazioni:
 - field: sede
   label: Sede

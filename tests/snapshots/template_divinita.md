@@ -124,6 +124,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "div
 > **Origine primordiale**: `INPUT[suggester(optionQuery("Mondi/Primordiali"), useLinks(partial), allowOther):origine]`
 > **Culti**: `INPUT[inlineListSuggester(optionQuery("Mondi/Culti"), useLinks(partial), allowOther):culti]`
 > **Piano di dimora**: `INPUT[suggester(optionQuery("Mondi/Piani"), useLinks(partial), allowOther):piano]`
+> **Divinità opposte**: `INPUT[inlineListSuggester(optionQuery("Mondi/Divinita"), useLinks(partial), allowOther):rivali]`
 
 > [!example] Collegamenti
 > Mondo: `INPUT[mondo][:mondo]`

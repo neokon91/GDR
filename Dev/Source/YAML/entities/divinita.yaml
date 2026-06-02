@@ -41,6 +41,12 @@ relazioni:
 - field: piano
   label: Piano di dimora
   category: piano
+# Divinità opposte (rivalità divina: Ordine vs Caos, antagonismi di pantheon):
+# alimenta il grafo e genera trame. Non reciproca, come gli altri 'rivali'.
+- field: rivali
+  label: Divinità opposte
+  category: divinita
+  multi: true
 scheda:
 - dominio
 - allineamento

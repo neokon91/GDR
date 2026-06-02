@@ -9,6 +9,7 @@
 > | **Tipo** | `VIEW[{tipo} ?? "—"]` |
 > | **Mondo** | `VIEW[{mondo}][text(renderMarkdown)]` |
 > | **Portata** | `VIEW[{portata} ?? "—"]` |
+> | **Simbolo** | `VIEW[{simbolo} ?? "—"]` |
 > | **Stato** | `INPUT[stato][:stato]` |
 
 ````tabs
@@ -16,6 +17,7 @@
 
 > [!abstract] Scheda
 > Portata: `INPUT[portata][:portata]`
+> Simbolo: `INPUT[text:simbolo]`
 
 > [!note] Missione
 > `INPUT[textArea:missione]`
