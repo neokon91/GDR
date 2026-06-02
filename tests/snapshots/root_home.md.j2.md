@@ -1,8 +1,9 @@
 # 🏠 GDR — Home
 
 > [!tip] Nuovo qui? Apri il **[[LEGGIMI]]**
-> 3 passi per partire + come si usa. Il vault parte vuoto: i cruscotti qui sotto si
-> riempiono man mano che crei (usa i bottoni **Crea**).
+> 3 passi per partire + come si usa. Il vault arriva con il mondo-esempio **Valdombra**:
+> i cruscotti qui sotto sono **già pieni** — esplorali (parti dall'[[Atlante]]), poi crea il
+> tuo con i bottoni **Crea**. Per ripartire pulito, cancella `Mondi/_Esempio — Valdombra`.
 
 ````tabs
 --- 🌍 Worldbuilding
@@ -23,23 +24,22 @@
 > `BUTTON[crea-fazione]`
 > `BUTTON[crea-evento]`
 > `BUTTON[crea-png]`
-> `BUTTON[crea-creatura]`
-> `BUTTON[crea-oggetto]`
-> `BUTTON[crea-specie]`
-> `BUTTON[crea-divinita]`
-> `BUTTON[crea-regno]`
 
 > [!example]- Altri tipi
 > `BUTTON[crea-cosmologia]`
 > `BUTTON[crea-risorsa]`
 > `BUTTON[crea-lingua]`
+> `BUTTON[crea-creatura]`
+> `BUTTON[crea-oggetto]`
 > `BUTTON[crea-oggetto_magico]`
 > `BUTTON[crea-incantesimo]`
 > `BUTTON[crea-insidia]`
 > `BUTTON[crea-classe]`
 > `BUTTON[crea-sottoclasse]`
+> `BUTTON[crea-specie]`
 > `BUTTON[crea-background]`
 > `BUTTON[crea-talento]`
+> `BUTTON[crea-divinita]`
 > `BUTTON[crea-bastione]`
 > `BUTTON[crea-regola]`
 > `BUTTON[crea-nota_rapida]`
@@ -47,6 +47,7 @@
 > `BUTTON[crea-mito]`
 > `BUTTON[crea-culto]`
 > `BUTTON[crea-profezia]`
+> `BUTTON[crea-regno]`
 > `BUTTON[crea-istituzione]`
 > `BUTTON[crea-bioma]`
 > `BUTTON[crea-ecosistema]`

@@ -13,7 +13,6 @@ templates:
   default_type: bestia
   target: z.modelli/Creatura.md
   jinja: creature.md.j2
-  primary: true
 subtypes:
 - aberrazione
 - bestia

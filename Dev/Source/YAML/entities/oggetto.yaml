@@ -11,7 +11,6 @@ templates:
   default_type: strumento
   target: z.modelli/Oggetto.md
   jinja: reference.md.j2
-  primary: true
 - id: oggetto_magico
   title: Oggetto Magico
   default_type: oggetto magico

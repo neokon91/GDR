@@ -9,7 +9,6 @@ templates:
   title: Regno
   default_type: regno
   target: z.modelli/Regno.md
-  primary: true
 subtypes:
 - regno
 - impero
