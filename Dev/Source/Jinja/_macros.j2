@@ -468,6 +468,15 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 ```
 {%- endmacro %}
 
+{# Cronologia (JS Engine): le tappe dell'entità attraverso le epoche (proprietà
+   `tappe`, righe "quando | stato") rese come linea di vita. Logica in renderTappe.
+   Solo per le entità durature (core.tappe_categorie). #}
+{% macro cronologia() -%}
+```js-engine
+return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderTappe");
+```
+{%- endmacro %}
+
 {# Tema natale (personalità psico-astrale, #9): scelto un segno si deriva
    archetipo/elemento/MBTI/ombra; l'arcano è opzionale; l'allineamento D&D resta
    accanto. Profilo per i personaggi (soprattutto PNG). Logica in views.renderTemaNatale. #}

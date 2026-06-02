@@ -83,6 +83,20 @@ ritratto_categorie:
   - cultura
   - specie
 
+# Entità "durature" che cambiano attraverso le epoche: ricevono la tab Cronologia
+# (proprietà `tappe`, righe "quando | stato" → views.renderTappe). Il mondo NON è
+# statico: un luogo si fonda/fiorisce/cade, un regno sorge e crolla. Le entità
+# astratte/meccaniche/effimere (cosmologia/regole/incontri/eventi) restano fuori:
+# un evento È un punto nel tempo, non un'entità che evolve.
+tappe_categorie:
+  - mondo
+  - luogo
+  - regno
+  - cultura
+  - fazione
+  - istituzione
+  - culto
+
 # Superficie giocabile (IL differenziatore): ogni nota lore la espone, sempre.
 # Single source renderizzato dalla macro tavolo(); i campi sono in core.fields.
 # 'pressione' e' speciale: la macro aggiunge l'etichetta calcolata e prossima_mossa.

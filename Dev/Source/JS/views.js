@@ -489,6 +489,31 @@ async function renderProgressione(app, page) {
   return out;
 }
 
+// --- Cronologia dell'entità: stati epoch-stamped (mondo-che-cambia) ----------
+// Una tappa "quando | stato" → { quando, stato }. Senza '|' tutto è 'quando'. Il
+// 'quando' può essere un'epoca testuale o un [[link]] a una nota epoca/evento.
+function parseTappa(riga) {
+  const s = String(riga == null ? "" : riga);
+  const i = s.indexOf("|");
+  return i < 0
+    ? { quando: s.trim(), stato: "" }
+    : { quando: s.slice(0, i).trim(), stato: s.slice(i + 1).trim() };
+}
+
+// Pannello "Cronologia": il percorso dell'entità attraverso le epoche (proprietà
+// `tappe`), reso in ordine d'autore come una linea di vita (fondazione → ascesa →
+// crisi). Vuoto → guida col formato. Le entità durature cambiano: il mondo non è
+// statico. Esposto parseTappa per i test.
+async function renderTappe(app, page) {
+  if (!page) return "";
+  const tappe = asArray(page.tappe).map(parseTappa).filter((t) => t.quando || t.stato);
+  if (!tappe.length) {
+    return "> [!tip]- 📜 Cronologia\n> Racconta come questa entità cambia nel tempo: aggiungi la proprietà `tappe`, una riga per tappa in ordine cronologico:\n> `quando | stato` — es. `[[Era della Fondazione]] | Fondato dai coloni del nord`.";
+  }
+  const righe = tappe.map((t) => `> - **${t.quando || "—"}**${t.stato ? " — " + t.stato : ""}`);
+  return "> [!abstract]- 📜 Cronologia (come cambia attraverso le epoche)\n" + righe.join("\n");
+}
+
 // --- Timeline / cronologia ---------------------------------------------------
 // Estrae il primo intero da una data del mondo testuale ("anno 1234", "1200 PE")
 // per ordinare; null se non c'è un numero (allora si ordina per stringa).
@@ -1133,6 +1158,7 @@ module.exports = {
   renderSpecieTratti, sezioniMarkdown,
   renderIncantesimi,
   renderTimeline, quandoNum, epocaLabel,
+  renderTappe, parseTappa,
   renderCausalita,
   renderMap, renderDintorni, renderViaggio, parseCoord,
   renderPressioni, cosmicPush,

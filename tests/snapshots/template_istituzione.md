@@ -112,6 +112,11 @@ return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "ist
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderCoerenza");
 ```
 
+--- Cronologia
+
+```js-engine
+return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderTappe");
+```
 --- Collegamenti
 
 > [!example] Relazioni

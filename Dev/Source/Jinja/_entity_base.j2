@@ -34,6 +34,11 @@
 
 {{ m.carattere(template.category) }}
 {% endif %}
+{% if template.category in core.get('tappe_categorie', []) %}
+--- Cronologia
+
+{{ m.cronologia() }}
+{% endif %}
 {% block extra_tabs %}{% endblock %}
 --- Collegamenti
 

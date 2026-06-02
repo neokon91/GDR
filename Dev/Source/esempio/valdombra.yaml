@@ -74,6 +74,12 @@ note:
       confina_con: ["[[Bosco Sussurrante]]", "[[La Voragine]]"]
       dipende_da: ["[[Sale]]", "[[Mithril delle Marche]]"]
       rotta_con: ["[[Mercato di Sale]]"]
+      # Cronologia (mondo-che-cambia): la linea di vita del forte attraverso le epoche.
+      tappe:
+        - "Età Imperiale | Forte di confine, costruito sopra le gallerie del mithril"
+        - "Caduta dell'Impero | Abbandonato quando gli scavi toccarono la Voragine; il sigillo posato in fretta"
+        - "Era della Cenere | Rioccupato dalla [[La Mano d'Argento]]: città-guarnigione sul sigillo"
+        - "Presente | Mura annerite, mercato nervoso, e qualcosa che sogna sotto le cantine"
     fatti:
       - ["Tipo", "Insediamento (capoluogo)"]
       - ["Regione", "[[Le Marche di Valdombra]]"]

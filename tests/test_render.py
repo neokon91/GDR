@@ -1553,6 +1553,27 @@ def test_coerenza_tematica(tmp_path):
 
 
 @pytest.mark.skipif(not shutil.which("node"), reason="node assente")
+def test_parse_tappa(tmp_path):
+    """views.parseTappa (cronologia/mondo-che-cambia): "quando | stato" → struttura;
+    senza '|' tutto è 'quando'."""
+    harness = tmp_path / "tappa.js"
+    harness.write_text(
+        'const fs=require("fs");'
+        f'const src=fs.readFileSync({json.dumps(str(render.JS_DIR / "views.js"))},"utf8");'
+        'const m={exports:{}};new Function("module","exports",src)(m,m.exports);'
+        'const P=m.exports.parseTappa;'
+        'process.stdout.write(JSON.stringify({'
+        'a:P("[[Era della Cenere]] | Caduto a città-stato"),'
+        'b:P("Solo un\'epoca")}));',
+        encoding="utf-8")
+    res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
+    assert res.returncode == 0, res.stderr
+    out = json.loads(res.stdout)
+    assert out["a"] == {"quando": "[[Era della Cenere]]", "stato": "Caduto a città-stato"}
+    assert out["b"] == {"quando": "Solo un'epoca", "stato": ""}     # senza '|' → tutto quando
+
+
+@pytest.mark.skipif(not shutil.which("node"), reason="node assente")
 def test_avanza_fronte(tmp_path):
     """meta_actions.avanza_fronte: clock +1 con cap a clock_dim; senza clock_dim no-op."""
     harness = tmp_path / "av.js"

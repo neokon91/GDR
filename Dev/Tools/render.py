@@ -850,6 +850,15 @@ def example_note_text(note: dict[str, Any], world: str) -> str:
             conseg = (note.get("fm", {}) or {}).get("conseguenza", "")
             blocco.append(f"> **Clock**: {clock}/{clock_dim} → {conseg}")
         lines += ["\n".join(blocco), ""]
+    # Cronologia (mondo-che-cambia): la linea di vita dell'entità attraverso le
+    # epoche, come la macro cronologia()/renderTappe (split sul primo '|').
+    tappe = (note.get("fm", {}) or {}).get("tappe") or []
+    if tappe:
+        crono = ["> [!abstract]- 📜 Cronologia (come cambia attraverso le epoche)"]
+        for riga in tappe:
+            quando, _, stato = str(riga).partition("|")
+            crono.append(f"> - **{quando.strip()}**" + (f" — {stato.strip()}" if stato.strip() else ""))
+        lines += ["\n".join(crono), ""]
     # Collegamenti (Dataview): note del mondo legate a questa, in entrambe le
     # direzioni del grafo. Scoped a Mondi/ (esclude le 1300+ note SRD).
     lines += ["## Collegamenti", "```dataview",
