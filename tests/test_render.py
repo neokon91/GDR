@@ -1467,6 +1467,58 @@ def test_render_pressioni(tmp_path):
 
 
 @pytest.mark.skipif(not shutil.which("node"), reason="node assente")
+def test_cosmic_push(tmp_path):
+    """views.cosmicPush: una spinta cosmica vale se il linkato è caldo (pressione≥5)
+    o un Fronte a metà/oltre; altrimenti null."""
+    harness = tmp_path / "cosmic.js"
+    harness.write_text(
+        'const fs=require("fs");'
+        f'const src=fs.readFileSync({json.dumps(str(render.JS_DIR / "views.js"))},"utf8");'
+        'const m={exports:{}};new Function("module","exports",src)(m,m.exports);'
+        'const C=m.exports.cosmicPush;'
+        'process.stdout.write(JSON.stringify({'
+        'hot:C({file:{name:"Voragine",path:"Voragine.md"},pressione:8},"Si manifesta in"),'
+        'cold:C({file:{name:"Quiete",path:"Q.md"},pressione:2},"X"),'
+        'adv:C({file:{name:"Crepa",path:"C.md"},clock_dim:3,clock:2},"Dipende da te"),'
+        'low:C({file:{name:"Lieve",path:"L.md"},clock_dim:4,clock:1},"X")}));',
+        encoding="utf-8")
+    res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
+    assert res.returncode == 0, res.stderr
+    out = json.loads(res.stdout)
+    assert "[[Voragine]]" in out["hot"] and "Crisi" in out["hot"]   # caldo → spinta
+    assert out["cold"] is None                                      # tiepido, niente clock → null
+    assert "fronte in corsa (2/3)" in out["adv"]                    # fronte a metà → spinta
+    assert out["low"] is None                                       # clock 1/4 (<metà) + tiepido → null
+
+
+@pytest.mark.skipif(not shutil.which("node"), reason="node assente")
+def test_render_pressioni_cosmico(tmp_path):
+    """views.renderPressioni (grafo cosmico): un principio cosmico-Fronte è spinto
+    dai suoi siti di manifestazione in crisi (outlink) e dai dipendenti che vacillano
+    (inlink) — collega lo strato cosmologico alla superficie giocabile."""
+    harness = tmp_path / "press_cosmo.js"
+    harness.write_text(
+        'const fs=require("fs");'
+        f'const src=fs.readFileSync({json.dumps(str(render.JS_DIR / "views.js"))},"utf8");'
+        'const m={exports:{}};new Function("module","exports",src)(m,m.exports);'
+        'const L=(n)=>({path:n+".md"});'
+        'const all=[Object.assign({file:{name:"Voragine",path:"Voragine.md"},categoria:"luogo"},{pressione:8}),'
+        ' Object.assign({file:{name:"Cinerimanzia",path:"Cinerimanzia.md"},categoria:"sistema_magico"},{pressione:7}),'
+        ' Object.assign({file:{name:"Legge del Fuoco",path:"Legge del Fuoco.md",inlinks:[L("Cinerimanzia")]},'
+        '   categoria:"legge_fondamentale"},{clock_dim:6,luoghi:[L("Voragine")]})];'
+        'const dv={page:(l)=>{const p=l&&l.path?l.path:l;return all.find(x=>x.file&&(x.file.path===p||x.file.name===p))||null;}};'
+        'const f=(n)=>all.find(x=>x.file.name===n);'
+        'm.exports.renderPressioni({},dv,f("Legge del Fuoco")).then(a=>process.stdout.write(a));',
+        encoding="utf-8")
+    res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
+    assert res.returncode == 0, res.stderr
+    out = res.stdout
+    assert "Spinte dal grafo" in out
+    assert "Si manifesta in [[Voragine]]" in out          # sito di manifestazione in crisi (outlink)
+    assert "Dipende da te [[Cinerimanzia]]" in out        # sistema magico dipendente in crisi (inlink)
+
+
+@pytest.mark.skipif(not shutil.which("node"), reason="node assente")
 def test_avanza_fronte(tmp_path):
     """meta_actions.avanza_fronte: clock +1 con cap a clock_dim; senza clock_dim no-op."""
     harness = tmp_path / "av.js"

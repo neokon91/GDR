@@ -23,7 +23,9 @@ Pronto per **beta chiuso**. Per la beta aperta restano i punti PM qui sotto.
 - **Modello di mondo** — 37 categorie (classificazione `famiglia`+`tipo`), relazioni tipizzate
   con inversi auto-derivati, assi tematici 1-5 (radar/archetipi), **economia/risorse**,
   **geografia** (coord/confini/distanza/viaggio), **timeline causale**, **alberi evolutivi**
-  (progressioni lore ramificate), **Fronti reattivi al grafo**, tema natale, strato cosmico con assi.
+  (progressioni lore ramificate), **Fronti reattivi al grafo** (econ/geo **e cosmico**: un
+  principio cosmico-Fronte è spinto dai suoi siti di manifestazione in crisi e dai dipendenti
+  che vacillano → la metafisica preme sul tavolo), tema natale, strato cosmico con assi.
 - **Sistema 5.5e / DM** — PG SRD-completo (1º liv) + **level-up 2-20**; statblock 5.5e (+5e);
   **loop di sessione 2024** (Esaurimento, Dadi Vita, riposo breve/lungo, concentrazione 🌀);
   incantesimi inline, condizioni, maestrie armi; **encounter** budget XP 2024 + auto-riscrittura

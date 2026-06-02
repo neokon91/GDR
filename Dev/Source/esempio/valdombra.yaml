@@ -482,6 +482,12 @@ note:
       allineamento: Neutrale Malvagio
       dominio: Oblio, profondità, ciò-che-dorme
       simbolo: Una spirale che scende
+      # Fronte COSMICO (dimostra cosmologia→tavolo): Vorth si desta man mano che il
+      # suo culto avanza. renderPressioni deriva la spinta dal culto-Fronte (La Setta,
+      # clock 3/4) come «🌌 Si manifesta in …». La metafisica preme sul tavolo.
+      clock_dim: 8
+      clock: 3
+      conseguenza: "Vorth si desta: la Voragine erutta sogni e ciò-che-dorme cammina nelle Marche."
     fatti:
       - ["Tipo", "Divinità minore (sepolta)"]
       - ["Culto", "[[La Setta della Voragine]]"]

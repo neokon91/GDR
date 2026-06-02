@@ -848,11 +848,34 @@ async function renderViaggio(app, dv, page) {
 }
 
 // --- Fronti reattivi al grafo ------------------------------------------------
-// Per un FRONTE (entità con clock_dim) deriva dal grafo economico/geografico le
-// SPINTE che giustificano un avanzamento del clock: dipendenze da risorse contese
-// o in mano a terzi (tagliarle stringe), risorse prodotte e contese (chi le vuole
-// preme), rotte verso luoghi in crisi, rivali in ascesa. Rende VISIBILE come il
-// mondo preme sul fronte — il GM avanza poi col bottone (meta_actions.avanza_fronte).
+// Categorie cosmologiche: un principio cosmico può essere un Fronte le cui spinte
+// vengono dal GRAFO COSMICO, non da quello economico (collega lo strato più
+// modellato alla superficie giocabile).
+const COSMO = new Set(["legge_fondamentale", "divinita", "entita_primordiale", "dominio", "piano", "cosmologia", "sistema_magico"]);
+// Campi-manifestazione: outlink di un principio verso il mondo mortale (un loro
+// target "caldo" = il cosmico si fa crisi lì). I dipendenti che POGGIANO sul
+// principio arrivano invece dagli inlink.
+const MANIF_FIELDS = ["luoghi", "luoghi_nodo", "soglie", "culti", "abitanti"];
+
+// Una spinta cosmica da un'entità linkata: vale se è "calda" (pressione ≥ 5) o un
+// Fronte a metà o oltre. `role` = prefisso (es. "Si manifesta in"). Ritorna la
+// riga markdown o null. Esposto per i test.
+function cosmicPush(o, role) {
+  if (!o || !o.file) return null;
+  const p = Number(o.pressione) || 0;
+  const dim = Number(o.clock_dim) || 0;
+  const adv = dim > 0 && (Number(o.clock) || 0) >= Math.ceil(dim / 2);
+  if (p < 5 && !adv) return null;
+  const why = adv ? `fronte in corsa (${Number(o.clock) || 0}/${dim})` : pressureLabel(o.pressione);
+  return `🌌 ${role} ${noteLink(o)} — ${why}`;
+}
+
+// Per un FRONTE (entità con clock_dim) deriva dal grafo le SPINTE che giustificano
+// un avanzamento del clock. Grafo ECONOMICO/GEOGRAFICO: dipendenze da risorse
+// contese o in mano a terzi (tagliarle stringe), risorse prodotte e contese, rotte
+// verso luoghi in crisi, rivali in ascesa. Grafo COSMICO (per i principi): siti di
+// manifestazione in crisi + dipendenti (inlink) che vacillano. Rende VISIBILE come
+// il mondo preme sul fronte — il GM avanza col bottone (meta_actions.avanza_fronte).
 // "" se non è un fronte; tip se nessuna spinta. Ritorna markdown (i [[link]] rendono).
 async function renderPressioni(app, dv, page) {
   if (!dv || !page || !page.file) return "";
@@ -878,6 +901,18 @@ async function renderPressioni(app, dv, page) {
   for (const link of asArray(page.rivali)) {
     const o = resolve(dv, link); if (!o || !o.file) continue;
     if (hot(o) >= 7) out.push(`⚔ Rivale ${noteLink(o)} in ascesa (${pressureLabel(o.pressione)})`);
+  }
+  // Grafo cosmico: un principio cosmico-Fronte è spinto dai suoi siti di
+  // manifestazione in crisi (outlink) e dai dipendenti che vacillano (inlink).
+  if (COSMO.has(text(page.categoria))) {
+    const seen = new Set();
+    const add = (o, role) => {
+      const r = cosmicPush(o, role);
+      if (r && o.file && !seen.has(o.file.path)) { seen.add(o.file.path); out.push(r); }
+    };
+    for (const fld of MANIF_FIELDS)
+      for (const link of asArray(page[fld])) add(resolve(dv, link), "Si manifesta in");
+    for (const link of asArray(page.file.inlinks)) add(resolve(dv, link), "Dipende da te");
   }
   if (!out.length) {
     return "> [!tip] Fronte stabile\n> Nessuna spinta dal grafo per ora: il clock avanza solo per le tue mosse.";
@@ -1035,7 +1070,7 @@ module.exports = {
   renderTimeline, quandoNum, epocaLabel,
   renderCausalita,
   renderMap, renderDintorni, renderViaggio, parseCoord,
-  renderPressioni,
+  renderPressioni, cosmicPush,
   renderCondizioni, condizioniMarkdown,
   renderMaestrie, maestrieMarkdown,
   renderAttacchi, attaccoArma, abilitaArma, danniArma, nomeArma,
