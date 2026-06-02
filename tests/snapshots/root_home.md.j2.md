@@ -27,7 +27,6 @@
 
 > [!example]- Altri tipi
 > `BUTTON[crea-cosmologia]`
-> `BUTTON[crea-risorsa]`
 > `BUTTON[crea-lingua]`
 > `BUTTON[crea-creatura]`
 > `BUTTON[crea-oggetto]`
@@ -52,11 +51,12 @@
 > `BUTTON[crea-bioma]`
 > `BUTTON[crea-ecosistema]`
 > `BUTTON[crea-sistema_magico]`
-> `BUTTON[crea-albero_evolutivo]`
 > `BUTTON[crea-dominio]`
 > `BUTTON[crea-legge_fondamentale]`
 > `BUTTON[crea-entita_primordiale]`
 > `BUTTON[crea-piano]`
+> `BUTTON[crea-risorsa]`
+> `BUTTON[crea-albero_evolutivo]`
 
 ## 🤝 Trame (alleati / rivali)
 ```dataview

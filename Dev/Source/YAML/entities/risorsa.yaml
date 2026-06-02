@@ -5,7 +5,7 @@
 # dashboard Economia. render.py distribuisce questi blocchi nel modello 'core'.
 id: risorsa
 folder: Mondi/Risorse
-order: 6
+order: 37
 templates:
   - id: risorsa
     title: Risorsa
