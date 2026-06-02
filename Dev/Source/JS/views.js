@@ -741,6 +741,46 @@ async function renderViaggio(app, dv, page) {
   return out.join("\n\n");
 }
 
+// --- Fronti reattivi al grafo ------------------------------------------------
+// Per un FRONTE (entità con clock_dim) deriva dal grafo economico/geografico le
+// SPINTE che giustificano un avanzamento del clock: dipendenze da risorse contese
+// o in mano a terzi (tagliarle stringe), risorse prodotte e contese (chi le vuole
+// preme), rotte verso luoghi in crisi, rivali in ascesa. Rende VISIBILE come il
+// mondo preme sul fronte — il GM avanza poi col bottone (meta_actions.avanza_fronte).
+// "" se non è un fronte; tip se nessuna spinta. Ritorna markdown (i [[link]] rendono).
+async function renderPressioni(app, dv, page) {
+  if (!dv || !page || !page.file) return "";
+  if (page.clock_dim == null) return "";
+  const hot = (p) => (Number(p && p.pressione) || 0);
+  const out = [];
+  for (const link of asArray(page.dipende_da)) {
+    const r = resolve(dv, link); if (!r || !r.file) continue;
+    const ctrl = resolve(dv, r.controllata_da);
+    const why = [];
+    if (hot(r) >= 5) why.push(pressureLabel(r.pressione));
+    if (ctrl && ctrl.file) why.push(`in mano a ${noteLink(ctrl)}`);
+    if (why.length) out.push(`⛓ Dipendi da ${noteLink(r)} — ${why.join(", ")}: tagliarla ti stringe`);
+  }
+  for (const link of asArray(page.produce)) {
+    const r = resolve(dv, link); if (!r || !r.file) continue;
+    if (hot(r) >= 5) out.push(`💎 Produci ${noteLink(r)} (${pressureLabel(r.pressione)}): chi la vuole preme qui`);
+  }
+  for (const link of asArray(page.rotta_con)) {
+    const o = resolve(dv, link); if (!o || !o.file) continue;
+    if (hot(o) >= 7) out.push(`🛣 Rotta con ${noteLink(o)} a rischio (${pressureLabel(o.pressione)})`);
+  }
+  for (const link of asArray(page.rivali)) {
+    const o = resolve(dv, link); if (!o || !o.file) continue;
+    if (hot(o) >= 7) out.push(`⚔ Rivale ${noteLink(o)} in ascesa (${pressureLabel(o.pressione)})`);
+  }
+  if (!out.length) {
+    return "> [!tip] Fronte stabile\n> Nessuna spinta dal grafo per ora: il clock avanza solo per le tue mosse.";
+  }
+  return "> [!danger]- ⚡ Spinte dal grafo (il mondo preme su questo fronte)\n"
+    + out.map((r) => "> - " + r).join("\n")
+    + "\n>\n> Una spinta giustifica un segmento: premi **Avanza fronte** o gioca la mossa.";
+}
+
 // --- Catena causale (timeline causale) ---------------------------------------
 // Per un evento ricostruisce PERCHÉ è successo (risalendo causato_da) e COSA NE È
 // DERIVATO (scendendo per conseguenze). Le due direzioni sono complementari: con
@@ -884,6 +924,7 @@ module.exports = {
   renderTimeline, quandoNum, epocaLabel,
   renderCausalita,
   renderMap, renderDintorni, renderViaggio, parseCoord,
+  renderPressioni,
   renderCondizioni, condizioniMarkdown,
   renderMaestrie, maestrieMarkdown,
   radarMarkdownFromValues,

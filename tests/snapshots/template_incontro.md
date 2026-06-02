@@ -40,12 +40,17 @@
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderClock");
 ```
 
+```js-engine
+return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderPressioni");
+```
+
 > [!warning]- Conseguenza (quando il clock è pieno)
 > `INPUT[testo_area][:conseguenza]`
 >
 > Bersaglio: `INPUT[legame][:conseguenza_su]`
 
-> [!tip] Scatena
+> [!tip] Avanza / scatena
+> Una spinta dal grafo o una mossa? `BUTTON[avanza-fronte]` (clock +1).
 > Clock pieno? `BUTTON[scatena-conseguenza]` — crea l'evento-conseguenza collegato e azzera il clock.
 > [!tip]- Tiri
 > Normale `dice: 1d20` · Vantaggio `dice: 2d20kh1` · Svantaggio `dice: 2d20kl1`

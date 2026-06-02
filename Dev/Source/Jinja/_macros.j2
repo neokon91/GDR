@@ -130,12 +130,17 @@
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderClock");
 ```
 
+```js-engine
+return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderPressioni");
+```
+
 > [!warning]- Conseguenza (quando il clock è pieno)
 > {{ field('conseguenza', label=false) }}
 >
 > Bersaglio: {{ field('conseguenza_su', label=false) }}
 
-> [!tip] Scatena
+> [!tip] Avanza / scatena
+> Una spinta dal grafo o una mossa? `BUTTON[avanza-fronte]` (clock +1).
 > Clock pieno? `BUTTON[scatena-conseguenza]` — crea l'evento-conseguenza collegato e azzera il clock.
 {%- endmacro %}
 

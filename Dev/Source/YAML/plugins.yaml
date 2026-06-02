@@ -151,6 +151,9 @@ buttons:
   - id: scatena-conseguenza
     label: Scatena conseguenza
     action: scatena_conseguenza
+  - id: avanza-fronte
+    label: Avanza fronte
+    action: avanza_fronte
   - id: sali-di-livello
     label: Sali di livello
     action: sali_di_livello

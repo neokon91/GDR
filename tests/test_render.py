@@ -1226,6 +1226,71 @@ def test_render_viaggio(tmp_path):
 
 
 @pytest.mark.skipif(not shutil.which("node"), reason="node assente")
+def test_render_pressioni(tmp_path):
+    """views.renderPressioni: per un Fronte (clock_dim) deriva le spinte dal grafo —
+    dipendenza da risorsa contesa/controllata, produzione contesa, rotta a rischio,
+    rivale in ascesa; "" se non è un fronte; tip se nessuna spinta."""
+    harness = tmp_path / "press.js"
+    harness.write_text(
+        'const fs=require("fs");'
+        f'const src=fs.readFileSync({json.dumps(str(render.JS_DIR / "views.js"))},"utf8");'
+        'const m={exports:{}};new Function("module","exports",src)(m,m.exports);'
+        'const L=(n)=>({path:n+".md"});'
+        'const mk=(name,categoria,ex)=>Object.assign({file:{name,path:name+".md"},categoria,stato:"pronto"},ex);'
+        'const all=[mk("Sale","risorsa",{pressione:6,controllata_da:L("Capitolo")}),'
+        ' mk("Capitolo","fazione",{}),'
+        ' mk("Reliquie","risorsa",{pressione:8}),'
+        ' mk("Mercato","luogo",{pressione:8}),'
+        ' mk("Rivale","fazione",{pressione:8}),'
+        ' mk("Forte","luogo",{clock_dim:4,dipende_da:[L("Sale")],produce:[L("Reliquie")],rotta_con:[L("Mercato")],rivali:[L("Rivale")]}),'
+        ' mk("Quieto","luogo",{clock_dim:4}),'                       # fronte senza spinte
+        ' mk("NonFronte","luogo",{})];'                              # niente clock → non è un fronte
+        'const dv={page:(l)=>{const p=l&&l.path?l.path:l;return all.find(x=>x.file&&(x.file.path===p||x.file.name===p))||null;}};'
+        'const f=(n)=>all.find(x=>x.file.name===n);'
+        'Promise.all([m.exports.renderPressioni({},dv,f("Forte")),m.exports.renderPressioni({},dv,f("Quieto")),m.exports.renderPressioni({},dv,f("NonFronte"))])'
+        '.then(([a,b,c])=>process.stdout.write(JSON.stringify({a,b,c})));',
+        encoding="utf-8")
+    res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
+    assert res.returncode == 0, res.stderr
+    out = json.loads(res.stdout)
+    a = out["a"]
+    assert "⚡ Spinte dal grafo" in a
+    assert "Dipendi da [[Sale]]" in a and "in mano a [[Capitolo]]" in a   # risorsa contesa + controllata
+    assert "Produci [[Reliquie]]" in a                                    # produzione contesa
+    assert "Rotta con [[Mercato]] a rischio" in a                         # rotta verso luogo in crisi
+    assert "Rivale [[Rivale]] in ascesa" in a                             # rivale ad alta pressione
+    assert "Fronte stabile" in out["b"]                                   # fronte senza spinte → tip
+    assert out["c"] == ""                                                 # non è un fronte → vuoto
+
+
+@pytest.mark.skipif(not shutil.which("node"), reason="node assente")
+def test_avanza_fronte(tmp_path):
+    """meta_actions.avanza_fronte: clock +1 con cap a clock_dim; senza clock_dim no-op."""
+    harness = tmp_path / "av.js"
+    harness.write_text(
+        'const fs=require("fs");'
+        f'const s=fs.readFileSync({json.dumps(str(render.JS_DIR / "meta_actions.js"))},"utf8");'
+        'const m={exports:{}};new Function("module","exports",s)(m,m.exports);'
+        'global.Notice=function(){};'
+        'const fm={clock_dim:4,clock:2};'
+        'global.app={metadataCache:{getFileCache:()=>({frontmatter:fm})},'
+        ' fileManager:{processFrontMatter:async(f,fn)=>fn(fm)}};'
+        'const file={basename:"Fronte"};'
+        '(async()=>{await m.exports.avanza_fronte(file);const a=fm.clock;'
+        ' await m.exports.avanza_fronte(file);await m.exports.avanza_fronte(file);const b=fm.clock;'
+        ' const fm2={};global.app.metadataCache.getFileCache=()=>({frontmatter:fm2});'
+        ' await m.exports.avanza_fronte(file);'
+        ' process.stdout.write(JSON.stringify({a,b,noclock:fm2.clock??null}));})();',
+        encoding="utf-8")
+    res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
+    assert res.returncode == 0, res.stderr
+    out = json.loads(res.stdout)
+    assert out["a"] == 3                # 2 → 3
+    assert out["b"] == 4                # 3 → 4 → 4 (cap a clock_dim)
+    assert out["noclock"] is None       # niente clock_dim → nessuna mutazione
+
+
+@pytest.mark.skipif(not shutil.which("node"), reason="node assente")
 def test_render_causalita(tmp_path):
     """views.renderCausalita: catena causale a monte (cause) e a valle (conseguenze),
     ricostruita ricorsivamente. Unione delle due direzioni: la causa di 'Patto' si

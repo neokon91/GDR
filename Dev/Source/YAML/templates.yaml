@@ -22,6 +22,9 @@ actions:
   - id: scatena_conseguenza
     title: Scatena conseguenza
     target: z.modelli/azioni/Scatena conseguenza.md
+  - id: avanza_fronte
+    title: Avanza fronte
+    target: z.modelli/azioni/Avanza fronte.md
   - id: sali_di_livello
     title: Sali di livello
     target: z.modelli/azioni/Sali di livello.md

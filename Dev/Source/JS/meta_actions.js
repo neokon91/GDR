@@ -195,6 +195,19 @@ ${conseguenza}
   return "";
 }
 
+// Avanza il clock del fronte di un segmento (cap a clock_dim): una mossa o una
+// SPINTA dal grafo (vedi views.renderPressioni) si traduce in progresso del fronte.
+// A clock pieno suggerisce di scatenare la conseguenza. Niente clock_dim → non è un fronte.
+async function avanza_fronte(file) {
+  const fm = app.metadataCache.getFileCache(file)?.frontmatter ?? {};
+  const dim = Number(fm.clock_dim);
+  if (!Number.isFinite(dim) || dim <= 0) { new Notice("Non è un fronte (manca clock_dim)."); return ""; }
+  let nuovo = 0;
+  await updateFrontmatter(file, f => { nuovo = Math.min(dim, (Number(f.clock) || 0) + 1); f.clock = nuovo; });
+  new Notice(nuovo >= dim ? `Clock pieno (${nuovo}/${dim})! Scatena la conseguenza.` : `Fronte avanzato: ${nuovo}/${dim}.`);
+  return "";
+}
+
 // Riscrive il blocco ```encounter``` della nota dalle creature collegate
 // (frontmatter 'creature'): rigenera la lista `creatures:` (per nome × quantità,
 // le occorrenze ripetute = più creature, coerente con la difficoltà) e allinea
@@ -313,6 +326,10 @@ async function meta_actions(tp, action = "") {
     return await scatena_conseguenza(tp, file);
   }
 
+  if (action === "avanza_fronte") {
+    return await avanza_fronte(file);
+  }
+
   if (action === "aggiorna_encounter") {
     return await aggiorna_encounter(tp, file);
   }
@@ -347,4 +364,5 @@ meta_actions.matchesCond = matchesCond;
 meta_actions.reciprocalField = reciprocalField;  // esposto per i test
 meta_actions.inverseRelation = inverseRelation;  // esposto per i test
 meta_actions.appendTurnoLog = appendTurnoLog;    // esposto per i test
+meta_actions.avanza_fronte = avanza_fronte;      // esposto per i test
 module.exports = meta_actions;

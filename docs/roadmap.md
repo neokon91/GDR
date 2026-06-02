@@ -229,6 +229,11 @@ sopra i sistemi avanzati (vedi backlog).
   - ✅ **Economia/risorse**: categoria **risorsa** + relazioni `luogo.{produce,dipende_da,
     rotta_con}` e `fazione.controlla_risorse` + dashboard **Economia** — il mondo diventa
     simulabile (una risorsa contesa alimenta un Fronte).
+  - ✅ **Fronti reattivi al grafo**: per ogni Fronte (clock_dim) `views.renderPressioni`
+    deriva dal grafo le **spinte** che giustificano un avanzamento (dipendenza da risorsa
+    contesa/in mano a terzi, produzione contesa, rotta verso luogo in crisi, rivale in
+    ascesa) + bottone `avanza-fronte` (clock +1, `meta_actions.avanza_fronte`). Il mondo
+    PREME sul fronte in modo visibile; il GM avanza con un clic (no daemon: scelta onesta).
   - ✅ **Mappe**: luogo e mondo hanno una **tab Mappa** (campo `mappa` + embed via
     `views.renderMap`) che mostra un disegno **Excalidraw**, un'immagine o una nota; se
     vuota guida a crearne una (Excalidraw / Zoom Map / immagine trascinata). *Residuo*:
