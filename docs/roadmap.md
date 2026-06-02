@@ -20,10 +20,10 @@ Pronto per **beta chiuso**. Per la beta aperta restano i punti PM qui sotto.
 
 ## Fatto (consolidato)
 
-- **Modello di mondo** — 36 categorie (classificazione `famiglia`+`tipo`), relazioni tipizzate
+- **Modello di mondo** — 37 categorie (classificazione `famiglia`+`tipo`), relazioni tipizzate
   con inversi auto-derivati, assi tematici 1-5 (radar/archetipi), **economia/risorse**,
-  **geografia** (coord/confini/distanza/viaggio), **timeline causale**, **Fronti reattivi al
-  grafo**, tema natale, strato cosmico con assi.
+  **geografia** (coord/confini/distanza/viaggio), **timeline causale**, **alberi evolutivi**
+  (progressioni lore ramificate), **Fronti reattivi al grafo**, tema natale, strato cosmico con assi.
 - **Sistema 5.5e / DM** — PG SRD-completo (1º liv) + **level-up 2-20**; statblock 5.5e (+5e);
   **loop di sessione 2024** (Esaurimento, Dadi Vita, riposo breve/lungo, concentrazione 🌀);
   incantesimi inline, condizioni, maestrie armi; **encounter** budget XP 2024 + auto-riscrittura
@@ -63,9 +63,13 @@ Pronto per **beta chiuso**. Per la beta aperta restano i punti PM qui sotto.
 
 ### Worldbuilding (profondità)
 - **Legami cosmologia↔culto↔divinità** più ricchi.
-- **Recuperi da FantasyWorld**: alberi evolutivi / skill-tree (`alberi_evolutivi.json`); seed
-  minori come campi/subtypes (rito/dottrina/simbolo/titolo/conflitto/genealogia); categorie
-  astrologiche come entità (opt-in, per i mondi dove l'astrologia conta).
+- **Recuperi da FantasyWorld**: ✅ **alberi evolutivi / skill-tree** — nuova entità
+  `albero_evolutivo` (progressioni *lore* ramificate: tradizione/lignaggio/evoluzione/
+  iniziazione/dottrina; nodi nella proprietà `nodi` = righe `grado | nome | prereq | effetto`,
+  resi a gradi da `renderAlbero`, agganciata al grafo via sistema_magico/specie/culto). ✅ **seed
+  minori mirati** (anti-filler: l'audit ha mostrato che rito/conflitto/titolo/genealogia erano
+  già coperti; aggiunti solo i vuoti veri) — `simbolo`→cultura/regno/istituzione, `rivali`→culto/
+  divinità, `dottrina`→sistema_magico. Resta: categorie astrologiche come entità (opt-in).
 - **Geografia avanzata — importer Azgaar** (design concordato, **non** implementato). Principio:
   la mappa-immagine è la tela, le note sono lo strato curato. **NO import a tappeto**: import a
   livelli con budget (solo il tier alto: stati/capitali/province/culture/religioni), il long-tail

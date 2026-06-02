@@ -582,6 +582,43 @@ function attaccoArma(arma, page, maestrieByName) {
 // padronanza (frontmatter padronanze_armi) emette tiro per colpire + danni + effetto
 // della maestria. Le armi vengono dal catalogo di personaggio.json (opt.armi). I
 // `dice:` restano coerenti con la Scheda (Dice Roller legge mod_<car> e competenza).
+// --- Albero evolutivo (progressione ramificata, lore) -----------------------
+// Parsing di un nodo "grado | nome | prerequisito | effetto" → {grado, nome, prereq,
+// effetto}. Campi mancanti = vuoti; grado non numerico → 0 ("Senza grado"). Esposto.
+function parseNodo(riga) {
+  const parts = String(riga == null ? "" : riga).split("|").map((s) => s.trim());
+  const grado = parseInt(parts[0], 10);
+  return {
+    grado: Number.isFinite(grado) ? grado : 0,
+    nome: parts[1] || "",
+    prereq: parts[2] && parts[2] !== "—" ? parts[2] : "",
+    effetto: parts[3] || "",
+  };
+}
+
+// Pannello "Albero evolutivo": legge page.nodi (lista "grado | nome | prereq |
+// effetto"), raggruppa per grado crescente e rende ogni nodo con prerequisito ed
+// effetto. Vuoto → guida col formato (i nodi si editano nella proprietà `nodi`).
+async function renderAlbero(app, page) {
+  if (!page) return "*Apri una scheda Albero evolutivo.*";
+  const nodi = asArray(page.nodi).map(parseNodo).filter((n) => n.nome);
+  if (!nodi.length) {
+    return "> [!tip]- 🌳 Albero evolutivo\n> Aggiungi i nodi nella proprietà `nodi`, una riga per nodo:\n> `grado | nome | prerequisito | effetto` — es. `1 | Tocco di Cenere | — | +1 danno da fuoco`.";
+  }
+  const perGrado = {};
+  for (const n of nodi) (perGrado[n.grado] = perGrado[n.grado] || []).push(n);
+  const gradi = Object.keys(perGrado).map(Number).sort((a, b) => a - b);
+  const blocchi = gradi.map((g) => {
+    const righe = perGrado[g].map((n) => {
+      const pre = n.prereq ? ` *(richiede ${n.prereq})*` : "";
+      const eff = n.effetto ? ` — ${n.effetto}` : "";
+      return `> - **${n.nome}**${pre}${eff}`;
+    });
+    return `> **${g > 0 ? "Grado " + g : "Senza grado"}**\n${righe.join("\n")}`;
+  });
+  return `> [!tip]- 🌳 Albero evolutivo\n${blocchi.join("\n>\n")}`;
+}
+
 async function renderAttacchi(app, page) {
   if (!page) return "*Apri la scheda PG.*";
   const scelte = asArray(page.padronanze_armi).map(nomeArma).filter(Boolean);
@@ -1002,6 +1039,7 @@ module.exports = {
   renderCondizioni, condizioniMarkdown,
   renderMaestrie, maestrieMarkdown,
   renderAttacchi, attaccoArma, abilitaArma, danniArma, nomeArma,
+  renderAlbero, parseNodo,
   radarMarkdownFromValues,
   renderTemaNatale, temaNataleMarkdown,
   renderConnessioni,

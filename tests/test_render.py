@@ -566,6 +566,29 @@ def test_attacco_arma(tmp_path):
 
 
 @pytest.mark.skipif(not shutil.which("node"), reason="node assente")
+def test_parse_nodo(tmp_path):
+    """views.parseNodo (albero evolutivo): "grado | nome | prerequisito | effetto" →
+    struttura; grado non numerico → 0; prerequisito "—" → vuoto."""
+    harness = tmp_path / "nodo.js"
+    harness.write_text(
+        'const fs=require("fs");'
+        f'const src=fs.readFileSync({json.dumps(str(render.JS_DIR / "views.js"))},"utf8");'
+        'const m={exports:{}};new Function("module","exports",src)(m,m.exports);'
+        'const P=m.exports.parseNodo;'
+        'process.stdout.write(JSON.stringify({'
+        'a:P("2 | Pelle di Brace | Tocco di Cenere | resistenza al fuoco"),'
+        'b:P("1 | Tocco di Cenere | — | +1 danno da fuoco"),'
+        'c:P("| Nodo sciolto")}));',
+        encoding="utf-8")
+    res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
+    assert res.returncode == 0, res.stderr
+    out = json.loads(res.stdout)
+    assert out["a"] == {"grado": 2, "nome": "Pelle di Brace", "prereq": "Tocco di Cenere", "effetto": "resistenza al fuoco"}
+    assert out["b"]["prereq"] == ""                 # "—" → nessun prerequisito
+    assert out["c"]["grado"] == 0 and out["c"]["nome"] == "Nodo sciolto"  # grado mancante → 0
+
+
+@pytest.mark.skipif(not shutil.which("node"), reason="node assente")
 def test_render_specie_tratti(tmp_path):
     """views.renderSpecieTratti: dalle sezioni SRD della specie del PG rende un
     callout pieghevole con descrizioni + tabelle (soffio/antenati draconici), così

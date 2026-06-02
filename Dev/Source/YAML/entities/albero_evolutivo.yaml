@@ -1,0 +1,59 @@
+# Schema per-entità: albero_evolutivo (lore). Recupero FantasyWorld
+# (alberi_evolutivi): una PROGRESSIONE ramificata di tipo lore — non le
+# meccaniche 5.5e (talenti/sottoclassi), ma il percorso di mastery di una
+# tradizione magica, il risveglio di un lignaggio, l'evoluzione di una specie,
+# i gradi iniziatici di un culto. Modello "una nota = un albero": i nodi vivono
+# nella proprietà `nodi` (lista "grado | nome | prerequisito | effetto") e li
+# rende views.renderAlbero, raggruppandoli per grado. Si aggancia al grafo
+# (sistema_magico / specie / culto). Niente assi: è una struttura, non un profilo.
+id: albero_evolutivo
+folder: Mondi/Alberi
+order: 33
+templates:
+- id: albero_evolutivo
+  title: Albero evolutivo
+  default_type: tradizione
+  target: z.modelli/Albero evolutivo.md
+  jinja: albero_evolutivo.md.j2
+subtypes:
+- tradizione      # percorso di mastery (es. una tradizione magica)
+- lignaggio       # risveglio di un sangue / eredità
+- evoluzione      # rami evolutivi di una specie
+- iniziazione     # gradi di un ordine / culto
+- dottrina        # scuola filosofica a tappe
+# Diffusione/portata della progressione (riusa il select condiviso 'portata').
+scheda: [portata]
+relazioni:
+# A cosa appartiene l'albero (di norma uno solo): alimenta il grafo.
+- field: sistema_magico
+  label: Tradizione magica
+  category: sistema_magico
+- field: specie
+  label: Specie
+  category: specie
+- field: culto
+  label: Culto / ordine
+  category: culto
+- field: figure
+  label: Esempi viventi
+  category: personaggio
+  multi: true
+creation:
+  fields:
+  - field: tipo
+    prompt: Tipo di progressione
+    from: subtypes
+    required: true
+  - field: mondo
+    prompt: Mondo
+    from: notes
+    category: mondo
+    link: true
+    required: true
+  body:
+  - field: origine
+    prompt: 'Origine: da dove nasce questa progressione, chi la custodisce'
+    heading: Origine
+  - field: accesso
+    prompt: 'Accesso e avanzamento: come si entra, prove e costi per salire di grado'
+    heading: Accesso e avanzamento

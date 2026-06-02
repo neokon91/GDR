@@ -1,0 +1,11 @@
+{# ALBERO EVOLUTIVO — template per-entità. Estende lo scheletro condiviso e
+   aggiunge la tab "Albero" (i nodi della progressione, resi da renderAlbero).
+   Il resto (lore/tavolo/collegamenti/vista) viene da _entity_base.j2; lo schema
+   è in YAML/entities/albero_evolutivo.yaml. #}
+{% extends '_entity_base.j2' %}
+{% block extra_tabs %}
+{% import '_macros.j2' as m with context %}
+--- Albero
+
+{{ m.albero() }}
+{% endblock %}
