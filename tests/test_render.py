@@ -384,6 +384,36 @@ def test_crea_pg_annullamento(tmp_path):
 
 
 @pytest.mark.skipif(not shutil.which("node"), reason="node assente")
+def test_crea_pg_annullamento_manuale(tmp_path):
+    """crea_pg.js: Escape sull'inserimento MANUALE delle caratteristiche annulla
+    PULITO (bozza valida) — non assegna il default 10 e prosegue."""
+    import build_personaggio
+    pj = tmp_path / "personaggio.json"
+    pj.write_text(json.dumps(build_personaggio.build_personaggio_options(CORE), ensure_ascii=False), encoding="utf-8")
+    harness = tmp_path / "annulla_man.js"
+    harness.write_text(
+        'const fs=require("fs");'
+        f'const data=fs.readFileSync({json.dumps(str(pj))},"utf8");'
+        'let avvisato=false; global.Notice=class{constructor(m){avvisato=true;}};'
+        'global.app={ vault:{ adapter:{ read: async()=>data } } };'
+        # Nome ok; suggester sempre null → metodo=null → inserimentoManuale; il prompt
+        # delle caratteristiche torna null (Escape) → deve annullare, non assegnare 10.
+        'const tp={ system:{ prompt: async(t)=> String(t||"").startsWith("Nome") ? "Manuale Test" : null,'
+        ' suggester: async()=> null },'
+        ' file:{ move: async()=>{} } };'
+        f'require({json.dumps(str(render.JS_DIR / "crea_pg.js"))})(tp)'
+        '.then(fm=>process.stdout.write(JSON.stringify({fm, avvisato})));',
+        encoding="utf-8")
+    res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
+    assert res.returncode == 0, res.stderr
+    out = json.loads(res.stdout)
+    assert out["avvisato"] is True                                   # Notice mostrata
+    fm = yaml.safe_load(out["fm"].split("---")[1])
+    assert fm["categoria"] == "personaggio" and fm["stato"] == "bozza"
+    assert "forza" not in fm and "pf" not in fm                      # niente caratteristica a 10 + proseguito
+
+
+@pytest.mark.skipif(not shutil.which("node"), reason="node assente")
 def test_profilo_match(tmp_path):
     """views.archetipiMatch: una combinazione di valori-assi attiva l'archetipo
     atteso (teocrazia su 'culto' con struttura/legalità alti), sui dati reali."""

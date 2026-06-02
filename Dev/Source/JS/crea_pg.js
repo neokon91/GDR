@@ -114,7 +114,9 @@ async function pointBuy(tp, caratteristiche, config) {
 async function inserimentoManuale(tp, caratteristiche) {
     const stats = {};
     for (const stat of caratteristiche) {
-        stats[stat] = normNum(await tp.system.prompt(sigla(stat)), 10);
+        const raw = await tp.system.prompt(sigla(stat));
+        if (raw == null) throw new Error(CANCEL);  // Escape → annulla (non assegnare 10 e proseguire)
+        stats[stat] = normNum(raw, 10);            // invio vuoto ("") → default 10
     }
     return stats;
 }
