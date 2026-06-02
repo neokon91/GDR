@@ -170,6 +170,9 @@ return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "luo
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderMap");
 ```
 
+> [!info] Posizione
+> Coordinate sulla mappa: `INPUT[text:coord]` — `x, y` (per la distanza in linea d'aria; la scala è sul **Mondo**).
+
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderDintorni");
 ```

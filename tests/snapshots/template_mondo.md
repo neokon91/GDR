@@ -135,6 +135,9 @@ return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "mon
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderMap");
 ```
+
+> [!info] Scala
+> Scala mappa (km per unità): `INPUT[number:scala_mappa]` — km per unità di coordinata. Imposta i `coord` sui **Luoghi**: la tab *Dintorni* mostrerà le distanze in linea d'aria in km.
 --- Collegamenti
 
 > [!example] Relazioni

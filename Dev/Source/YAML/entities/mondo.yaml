@@ -14,6 +14,10 @@ templates:
   primary: true
 subtypes:
 - mondo
+# Scala della mappa: km per unità di coordinata (vedi luogo.coord). Alimenta la
+# distanza metrica in renderDintorni. Assente → le distanze restano in unità "u".
+fields:
+  scala_mappa: { label: "Scala mappa (km per unità)", widget: number }
 relazioni:
 - field: cosmologia
   label: Cosmologia

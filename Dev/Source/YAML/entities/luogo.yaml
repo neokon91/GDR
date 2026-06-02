@@ -31,6 +31,11 @@ famiglie:
 - { nome: onirico,           descrizione: "Luogo tra sogno, memoria e inconscio: sognato, astrale o condiviso psichicamente." }
 - { nome: interdimensionale, descrizione: "Nodo tra piani, crocevia metafisico o intersezione ontologica; instabile o multistrato." }
 - { nome: simbolico,         descrizione: "Non ha senso fisico: rappresenta concetti, leggi o archetipi. Esiste per significato." }
+# Posizione sulla mappa: "x, y" (unità arbitrarie o pixel-mappa). Con mondo.scala_mappa
+# (km/unità) renderDintorni calcola la distanza IN LINEA D'ARIA in km, complementare
+# alla distanza per confini (BFS su confina_con). Editabile nella tab Mappa.
+fields:
+  coord: { label: Coordinate, widget: text }
 scheda:
 - clima
 - popolazione

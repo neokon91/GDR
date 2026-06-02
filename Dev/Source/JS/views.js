@@ -43,6 +43,13 @@ function resolve(dv, link) {
   }
 }
 
+// Coordinata 2D dal campo `coord` ("x, y", anche "x y" o "(x,y)") → {x, y} | null.
+// Primi due numeri trovati; serve alla distanza metrica in renderDintorni.
+function parseCoord(value) {
+  const m = String(value == null ? "" : value).match(/-?\d+(?:\.\d+)?/g);
+  return m && m.length >= 2 ? { x: Number(m[0]), y: Number(m[1]) } : null;
+}
+
 // Reciprocità: chi cita questa nota (i link in frontmatter sono unidirezionali;
 // i backlink danno il senso inverso). Per categoria + pressione: "chi dipende da
 // me e quanto scotta". Ritorna markdown (tabella) o stringa vuota.
@@ -598,10 +605,10 @@ async function renderMap(app, dv, page) {
 }
 
 // --- Dintorni (geografia spaziale) -------------------------------------------
-// Vista locale del luogo: la REGIONE che lo contiene, i luoghi che CONTIENE
-// (inverso di 'regione'), i CONFINANTI (confina_con) e — calcolata via BFS sul
-// grafo di adiacenza — la DISTANZA in confini verso gli altri luoghi, più le
-// ROTTE di viaggio. Dà al GM "dove sono / come ci si muove" senza una mappa.
+// Vista locale del luogo, due nozioni complementari di distanza: (1) per CONFINI
+// (BFS su confina_con — quante aree attraversi, "come ci si muove via terra") e
+// (2) IN LINEA D'ARIA (euclidea sulle coord × scala del mondo, in km — "quanto
+// dista davvero"). Più la REGIONE contenitore, i luoghi CONTENUTI e le ROTTE.
 // L'adiacenza è non orientata (i link sono già reciproci, ma uniamo le due
 // direzioni per robustezza). Ritorna markdown (i [[link]] si rendono).
 async function renderDintorni(app, dv, page) {
@@ -653,12 +660,29 @@ async function renderDintorni(app, dv, page) {
     const label = d === 1 ? "🧭 Confina con" : `↔ A ${d} confini`;
     out.push(`**${label}** (${names.length}): ${names.join(", ")}`);
   }
+  // Distanza IN LINEA D'ARIA (metrica): euclidea sulle coord × scala del mondo
+  // (mondo.scala_mappa = km per unità; assente → unità "u"). I più vicini in cima.
+  const selfCoord = parseCoord(page.coord);
+  if (selfCoord) {
+    const mondo = resolve(dv, page.mondo);
+    const s = mondo ? Number(mondo.scala_mappa) : NaN;
+    const scala = Number.isFinite(s) && s > 0 ? s : null;
+    const unit = scala ? "km" : "u";
+    const fmt = (d) => ` ~${d >= 10 ? Math.round(d) : Math.round(d * 10) / 10} ${unit}`;
+    const vicini = luoghi
+      .map((p) => ({ p, c: parseCoord(p.coord) }))
+      .filter((e) => e.c && e.p.file.name !== self)
+      .map((e) => ({ name: e.p.file.name, d: Math.hypot(e.c.x - selfCoord.x, e.c.y - selfCoord.y) * (scala || 1) }))
+      .sort((a, b) => a.d - b.d)
+      .slice(0, 6);
+    if (vicini.length) out.push(`**📐 In linea d'aria**: ` + vicini.map((v) => `[[${v.name}]]${fmt(v.d)}`).join(" · "));
+  }
   const rotte = asArray(page.rotta_con).map((l) => resolve(dv, l)).filter((p) => p && p.file);
   if (rotte.length) out.push(`**🛣 Rotte di viaggio** (${rotte.length}): ` + rotte.map(noteLink).join(", "));
   if (!out.length) {
-    return "> [!tip] Nessun dintorno\n> Collega questo luogo: imposta **Regione** (l'area che lo contiene), **Confina con** (i luoghi adiacenti) e **Rotta commerciale con** (i collegamenti di viaggio). La *distanza in confini* si calcola da sé via BFS.";
+    return "> [!tip] Nessun dintorno\n> Collega questo luogo: imposta **Regione** (l'area che lo contiene), **Confina con** (i luoghi adiacenti), **Rotta commerciale con** (i viaggi) e **Coordinate** (`x, y`, per la distanza in km). Le distanze si calcolano da sé.";
   }
-  return "> [!abstract] 🧭 Dintorni — *distanza in confini attraversati*\n" + out.map((r) => "> " + r).join("\n>\n");
+  return "> [!abstract] 🧭 Dintorni — *per confini (terra) e in linea d'aria (km)*\n" + out.map((r) => "> " + r).join("\n>\n");
 }
 
 // --- Catena causale (timeline causale) ---------------------------------------

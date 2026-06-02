@@ -1072,21 +1072,23 @@ def test_validate_reciprocals():
 
 @pytest.mark.skipif(not shutil.which("node"), reason="node assente")
 def test_render_dintorni(tmp_path):
-    """views.renderDintorni: regione contenitore, luoghi contenuti (inverso di
-    regione), confinanti (1 salto) e anelli di DISTANZA via BFS su confina_con, più
-    le rotte. Grafo: Voragine—Forte—Bosco—Mercato (catena); rotta Forte↔Mercato."""
+    """views.renderDintorni: regione contenitore, luoghi contenuti, distanza per
+    CONFINI (BFS su confina_con) e IN LINEA D'ARIA (euclidea × mondo.scala_mappa, km),
+    più le rotte. Grafo: Voragine—Forte—Bosco—Mercato (catena); rotta Forte↔Mercato.
+    Coord (scala 2 km/u): Forte(50,50) Voragine(51,50) Bosco(62,50) Mercato(80,49)."""
     harness = tmp_path / "dint.js"
     harness.write_text(
         'const fs=require("fs");'
         f'const src=fs.readFileSync({json.dumps(str(render.JS_DIR / "views.js"))},"utf8");'
         'const m={exports:{}};new Function("module","exports",src)(m,m.exports);'
         'const L=(n)=>({path:n+".md"});'
-        'const mk=(name,ex)=>Object.assign({file:{name,path:name+".md"},categoria:"luogo",stato:"pronto"},ex);'
-        'const all=[mk("Marche",{tipo:"regione"}),'
-        ' mk("Forte",{regione:L("Marche"),confina_con:[L("Bosco"),L("Voragine")],rotta_con:[L("Mercato")]}),'
-        ' mk("Bosco",{regione:L("Marche"),confina_con:[L("Forte"),L("Mercato")]}),'
-        ' mk("Mercato",{regione:L("Marche"),confina_con:[L("Bosco")],rotta_con:[L("Forte")]}),'
-        ' mk("Voragine",{regione:L("Marche"),confina_con:[L("Forte")]})];'
+        'const mk=(name,ex)=>Object.assign({file:{name,path:name+".md"},categoria:"luogo",stato:"pronto",mondo:L("Mondo")},ex);'
+        'const all=[{file:{name:"Mondo",path:"Mondo.md"},categoria:"mondo",scala_mappa:2},'
+        ' mk("Marche",{tipo:"regione"}),'
+        ' mk("Forte",{regione:L("Marche"),coord:"50, 50",confina_con:[L("Bosco"),L("Voragine")],rotta_con:[L("Mercato")]}),'
+        ' mk("Bosco",{regione:L("Marche"),coord:"62, 50",confina_con:[L("Forte"),L("Mercato")]}),'
+        ' mk("Mercato",{regione:L("Marche"),coord:"80, 49",confina_con:[L("Bosco")],rotta_con:[L("Forte")]}),'
+        ' mk("Voragine",{regione:L("Marche"),coord:"51, 50",confina_con:[L("Forte")]})];'
         'const dv={pages:()=>({where:(fn)=>({array:()=>all.filter(fn)})}),'
         ' page:(l)=>{const p=l&&l.path?l.path:l;return all.find(x=>x.file&&(x.file.path===p||x.file.name===p))||null;}};'
         'const f=(n)=>all.find(x=>x.file.name===n);'
@@ -1102,9 +1104,15 @@ def test_render_dintorni(tmp_path):
     assert "↔ A 2 confini** (1): [[Mercato]]" in a           # BFS: Mercato a 2 salti via Bosco
     assert "🛣 Rotte di viaggio** (1): [[Mercato]]" in a      # rotta diretta ≠ adiacenza
     assert a.index("Confina con") < a.index("A 2 confini")   # anelli ordinati per distanza
+    # Distanza metrica in km (scala 2): Voragine ~2, Bosco ~24, Mercato ~60.
+    air = a.split("In linea d'aria")[1] if "In linea d'aria" in a else ""
+    assert air, "sezione metrica assente"
+    assert "[[Voragine]] ~2 km" in air and "[[Bosco]] ~24 km" in air and "[[Mercato]] ~60 km" in air
+    assert air.index("Voragine") < air.index("Bosco") < air.index("Mercato")  # i più vicini in cima
     b = out["b"]                                              # Marche (regione)
     assert "🗺 Contiene** (4):" in b and "[[Forte]]" in b and "[[Voragine]]" in b
     assert "Confina con" not in b                             # la regione non ha confini propri
+    assert "In linea d'aria" not in b                         # la regione non ha coord -> niente metrica
 
 
 @pytest.mark.skipif(not shutil.which("node"), reason="node assente")

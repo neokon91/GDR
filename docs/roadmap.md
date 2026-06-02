@@ -217,8 +217,10 @@ sopra i sistemi avanzati (vedi backlog).
   - ✅ **Geografia spaziale**: `luogo.confina_con` (adiacenza simmetrica) + tab *Dintorni*
     (`views.renderDintorni`): regione contenitore, luoghi contenuti, confinanti e **distanza
     in confini** calcolata via BFS, più le rotte. Dashboard **Geografia** (contenimento +
-    confini + rotte). *Residuo*: **coordinate vere + distanza metrica** e **importer mappe
-    (Azgaar) come substrato** — design concordato sotto (§ Geografia avanzata).
+    confini + rotte). ✅ **Coordinate + distanza metrica**: `luogo.coord` ("x, y") +
+    `mondo.scala_mappa` (km/unità) → `renderDintorni` aggiunge "📐 In linea d'aria" (i più
+    vicini in km, euclidea × scala), complementare alla distanza per confini. *Residuo*:
+    **importer mappe (Azgaar) come substrato** — design sotto (§ Geografia avanzata).
   - ✅ **Economia/risorse**: categoria **risorsa** + relazioni `luogo.{produce,dipende_da,
     rotta_con}` e `fazione.controlla_risorse` + dashboard **Economia** — il mondo diventa
     simulabile (una risorsa contesa alimenta un Fronte).
@@ -372,10 +374,10 @@ L'integrazione va progettata **come sistema worldbuilding completo**, non come d
   ("Promuovi da mappa": cerca nel registro → crea UNA nota curata che eredita coord/cultura/
   stato già wirati); (4) **idempotente/reversibile** (namespace riconoscibile, merge per
   id-Azgaar stabile, non sovrascrive le edit a mano — è il pezzo difficile).
-- **Backbone Azgaar-indipendente (prerequisito)**: campo **`coord`** sul luogo + **scala del
-  mondo** (km/unità) + **distanza metrica** (oggi `renderDintorni` calcola solo hop-distance
-  in confini). Utile anche per mappe a mano (Watabou, disegni); qualsiasi sorgente ci si
-  innesta. **Ordine di dipendenza: coord/distanza metrica → poi importer Azgaar.**
+- ✅ **Backbone Azgaar-indipendente (prerequisito, FATTO)**: campo **`coord`** sul luogo
+  ("x, y") + **`mondo.scala_mappa`** (km/unità) + **distanza metrica** in `renderDintorni`
+  ("📐 In linea d'aria", euclidea × scala). Utile anche per mappe a mano (Watabou, disegni);
+  l'importer Azgaar popolerà `coord` e ci si innesta sopra.
 - **Sorgente**: export JSON "Full" di Azgaar FMG (ha burgs/states/provinces/cultures/
   religions/routes/markers + coord) o GeoJSON (geometria + props base). NB: coord in
   pixel-mappa → servono km/pixel per la distanza reale.

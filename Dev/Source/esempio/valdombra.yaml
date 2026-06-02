@@ -21,6 +21,7 @@ note:
       genere: Dark fantasy di frontiera
       epoca: Era delle Ceneri
       temi: ["rovina", "avidità", "potere sepolto"]
+      scala_mappa: 2
     fatti:
       - ["Scala", "Regione di frontiera"]
       - ["Genere", "Dark fantasy"]
@@ -68,6 +69,7 @@ note:
       cultura: "[[I Cenerini]]"
       clima: temperato
       popolazione: "1200"
+      coord: "50, 50"
       confina_con: ["[[Bosco Sussurrante]]", "[[La Voragine]]"]
       dipende_da: ["[[Sale]]", "[[Mithril delle Marche]]"]
       rotta_con: ["[[Mercato di Sale]]"]
@@ -90,6 +92,7 @@ note:
     fm:
       regione: "[[Le Marche di Valdombra]]"
       clima: "nessuno (sottoterra)"
+      coord: "51, 50"
       confina_con: ["[[Forte Cenere]]"]
       clock_dim: 6
       clock: 4
@@ -116,6 +119,7 @@ note:
       controllata_da: "[[Il Capitolo di Sale]]"
       clima: temperato
       popolazione: "800"
+      coord: "80, 49"
       confina_con: ["[[Bosco Sussurrante]]"]
       produce: ["[[Sale]]"]
       rotta_con: ["[[Forte Cenere]]"]
@@ -138,6 +142,7 @@ note:
       regione: "[[Le Marche di Valdombra]]"
       clima: temperato
       cultura: "[[I Cenerini]]"
+      coord: "62, 50"
       confina_con: ["[[Forte Cenere]]", "[[Mercato di Sale]]"]
     fatti:
       - ["Tipo", "Landmark naturale"]

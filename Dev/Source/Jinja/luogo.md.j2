@@ -21,5 +21,8 @@
 
 {{ m.mappa() }}
 
+> [!info] Posizione
+> Coordinate sulla mappa: {{ m.field('coord', label=false) }} — `x, y` (per la distanza in linea d'aria; la scala è sul **Mondo**).
+
 {{ m.dintorni() }}
 {% endblock %}
