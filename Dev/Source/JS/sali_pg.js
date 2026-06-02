@@ -91,7 +91,8 @@ function classeHomebrew(opt) {
       competenze_armature_cat: armorCats(fm.competenze_armature),
       competenze_strumenti: String(fm.strumento || ""),
       equipaggiamento: parseEquip(fm.equipaggiamento),
-      privilegi_l1: [],
+      privilegi_l1: String(fm.privilegi_l1 || "").split(/[;\n]/).map((s) => s.trim()).filter(Boolean),
+      livello_sottoclasse: Number.parseInt(fm.livello_sottoclasse, 10) || 3,
       incantatore: caster,
       trucchetti_noti: caster ? (tipoInc === "pieno" ? 3 : 2) : 0,
       incantesimi_preparati: caster ? (tipoInc === "pieno" ? 4 : 2) : 0,
@@ -109,6 +110,18 @@ function classeHomebrew(opt) {
 function talentiHomebrew() {
   const out = {};
   for (const { f } of noteVault("talento")) out[f.basename] = { label: f.basename };
+  return out;
+}
+
+// Sottoclassi homebrew del vault legate a una classe (match su id o label del
+// campo `classe` della nota sottoclasse) → {nome:{label}}. Offerte al livello_sottoclasse.
+function sottoclasseHomebrew(classeId, classeLabel) {
+  const want = [String(classeId || ""), String(classeLabel || "")].map((s) => s.toLowerCase()).filter(Boolean);
+  const out = {};
+  for (const { f, fm } of noteVault("sottoclasse")) {
+    const cls = (Array.isArray(fm.classe) ? fm.classe.join(",") : String(fm.classe || "")).toLowerCase();
+    if (cls && want.some((w) => w && cls.includes(w))) out[f.basename] = { label: f.basename };
+  }
   return out;
 }
 
@@ -158,10 +171,16 @@ async function sali_pg(tp) {
   u.dadi_vita_max = nuovo;  // Dadi Vita = livello del personaggio (2024)
   note.push(`PF +${dpf}`);
 
-  // Sottoclasse (l'SRD ne ha una per classe; l'homebrew non la dichiara)
-  if (classe.livello_sottoclasse === nuovo && !fm.sottoclasse && classe.sottoclasse) {
-    u.sottoclasse = classe.sottoclasse;
-    note.push(`sottoclasse ${classe.sottoclasse}`);
+  // Sottoclasse al livello giusto: l'SRD ne ha una per classe (auto); l'homebrew offre
+  // le sottoclassi del vault legate alla classe (scelta). Una sola opzione → auto.
+  if (classe.livello_sottoclasse === nuovo && !fm.sottoclasse) {
+    const opzioni = {};
+    if (classe.sottoclasse) opzioni[classe.sottoclasse] = { label: classe.sottoclasse };
+    Object.assign(opzioni, sottoclasseHomebrew(fm.classe, classe.label));
+    const ids = Object.keys(opzioni);
+    let sc = ids[0];
+    if (ids.length > 1) sc = await tp.system.suggester(ids.map((id) => opzioni[id].label || id), ids, false, `Livello ${nuovo}: scegli la sottoclasse`);
+    if (sc) { u.sottoclasse = sc; note.push(`sottoclasse ${sc}`); }
   }
 
   // ASI / Talento: livelli SRD della classe, o standard 4/8/12/16/19 per l'homebrew.
@@ -234,5 +253,6 @@ module.exports = sali_pg;
 // Esposti per i test del ponte homebrew→motore.
 module.exports.incantesimiHomebrew = incantesimiHomebrew;
 module.exports.talentiHomebrew = talentiHomebrew;
+module.exports.sottoclasseHomebrew = sottoclasseHomebrew;
 module.exports.fondiPool = fondiPool;
 module.exports.classeHomebrew = classeHomebrew;

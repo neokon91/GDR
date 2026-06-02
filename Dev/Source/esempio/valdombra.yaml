@@ -655,10 +655,13 @@ note:
       competenze_armi: "Armi semplici"
       competenze_armature: "Nessuna"
       abilita_numero: 2
+      privilegi_l1: "Tocco di cenere; Lettura delle braci"
+      livello_sottoclasse: 3
     fatti:
       - ["Dado vita", "d6"]
       - ["Incantatore", "pieno (Intelligenza)"]
       - ["TS competenti", "Intelligenza, Saggezza"]
+      - ["Sottoclasse", "al 3º livello"]
       - ["Natura", "Classe HOMEBREW"]
     lore: >-
       Maghi che traggono potere dalla cenere della Voragine: ogni incantesimo lascia
@@ -667,6 +670,24 @@ note:
       Esempio di classe HOMEBREW giocabile a tutti i livelli: in *Crea PG* scegli
       «Cinerimante» per dado vita, TS, slot da incantatore pieno (derivati dall'SRD) e
       «Fiamma Cinerea» tra gli incantesimi; *Sali di livello* applica competenza/ASI/slot.
+
+  # ---------------------------------------------- SOTTOCLASSE (homebrew demo del ponte)
+  - nome: Via della Cenere Viva
+    categoria: sottoclasse
+    tipo: sottoclasse
+    fm:
+      classe: "[[Cinerimante]]"
+    fatti:
+      - ["Classe", "[[Cinerimante]]"]
+      - ["Si sceglie al", "3º livello"]
+      - ["Natura", "Sottoclasse HOMEBREW"]
+    lore: >-
+      Cinerimanti che non spengono il fuoco: lo lasciano vivere sotto la pelle. La cenere
+      risponde, si muove, ricorda. **Privilegi (3/6/10/14)**: Braci erranti, Pelle di tufo,
+      Rinascita dal rogo, Tempesta di cenere.
+    uso_al_tavolo: >-
+      Esempio di SOTTOCLASSE homebrew giocabile: un PG «Cinerimante» al **3º livello**, in
+      *Sali di livello*, la trova tra le sottoclassi selezionabili (accanto alle SRD).
 
   # ---------------------------------------------- TABELLA CASUALE (demo Dice Roller, GM-only)
   - nome: Incontri delle Marche

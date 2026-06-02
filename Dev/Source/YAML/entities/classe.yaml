@@ -64,6 +64,16 @@ creation:
     prompt: 'Abilità a scelta (numero, es. 2)'
     from: number
     optional: true
+  # Privilegi di 1º livello applicati in crea_pg (lista, separata da ";").
+  - field: privilegi_l1
+    prompt: 'Privilegi di 1º livello (separati da ";")'
+    optional: true
+  # Livello in cui si sceglie la sottoclasse (default 3, 2024). sali_pg offre le
+  # sottoclassi homebrew del vault legate a questa classe.
+  - field: livello_sottoclasse
+    prompt: 'Livello della sottoclasse (default 3)'
+    from: number
+    optional: true
   body:
   - field: descrizione
     prompt: Concept della classe

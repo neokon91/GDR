@@ -793,6 +793,40 @@ def test_sali_pg_e2e(tmp_path):
     assert fm["dadi_vita_max"] == 2  # Dadi Vita = livello del PG
 
 
+@pytest.mark.skipif(not shutil.which("node"), reason="node assente")
+def test_sali_pg_sottoclasse_homebrew_e2e(tmp_path):
+    """sali_pg.js: un PG di CLASSE homebrew, al `livello_sottoclasse`, riceve la
+    SOTTOCLASSE homebrew del vault legata alla classe (qui unica → assegnata auto)."""
+    import build_personaggio
+    pj = tmp_path / "personaggio.json"
+    pj.write_text(json.dumps(build_personaggio.build_personaggio_options(CORE), ensure_ascii=False), encoding="utf-8")
+    harness = tmp_path / "salisub.js"
+    harness.write_text(
+        'const fs=require("fs");'
+        f'const data=fs.readFileSync({json.dumps(str(pj))},"utf8");'
+        'global.Notice=class{constructor(m){}};'
+        # PG di classe homebrew "Cinerante", livello 2 → sale a 3 (livello_sottoclasse).
+        'const fm={tipo:"pg",classe:"Cinerante",livello:2,costituzione:12,pf:14,pf_max:14,competenza:2};'
+        'const pgFile={basename:"PG",path:"pg.md"};'
+        'const F=(basename,f)=>({f:{basename,path:basename+".md"},fm:f});'
+        'const vault=[F("Cinerante",{categoria:"classe",dado_vita:"d8",ts_competenze:"Intelligenza, Saggezza",'
+        '   tipo_incantatore:"nessuno",livello_sottoclasse:3}),'
+        ' F("Via della Cenere",{categoria:"sottoclasse",classe:"[[Cinerante]]"})];'
+        'global.app={workspace:{getActiveFile:()=>pgFile},'
+        ' metadataCache:{getFileCache:(file)=>({frontmatter: file===pgFile ? fm : (vault.find(x=>x.f===file)||{}).fm})},'
+        ' vault:{adapter:{read:async()=>data},getMarkdownFiles:()=>vault.map(x=>x.f)},'
+        ' fileManager:{processFrontMatter:async(f,fn)=>fn(fm)}};'
+        'const tp={system:{suggester:async(l,v)=>v[0]}};'
+        f'require({json.dumps(str(render.JS_DIR / "sali_pg.js"))})(tp)'
+        '.then(()=>process.stdout.write(JSON.stringify(fm)));',
+        encoding="utf-8")
+    res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
+    assert res.returncode == 0, res.stderr
+    fm = json.loads(res.stdout)
+    assert fm["livello"] == 3
+    assert fm["sottoclasse"] == "Via della Cenere"  # sottoclasse homebrew assegnata al 3º livello
+
+
 @pytest.mark.skipif(not render.SRD_DIR.is_dir(), reason="SRD non vendorizzata")
 def test_srd_counts_and_statblock():
     """Conteggi attesi + il mostro si mappa su uno statblock Fantasy Statblocks."""
@@ -1176,8 +1210,10 @@ def test_homebrew_bridge(tmp_path):
         '   abilita_background:"Atletica, Sopravvivenza",talento_origine:"Robusto",strumento:"Strumenti da fabbro"}),'
         ' F("Ceneride",{categoria:"specie",taglia:"Media",velocita:"9 m",tratti:"Vedono al buio: scurovisione a 18 m."}),'
         ' F("Lama del Vuoto",{categoria:"classe",dado_vita:"d10",ts_competenze:"Forza, Costituzione",'
-        '   tipo_incantatore:"mezzo",competenze_armature:"Armature leggere e medie; scudi",abilita_numero:2}),'
+        '   tipo_incantatore:"mezzo",competenze_armature:"Armature leggere e medie; scudi",abilita_numero:2,'
+        '   privilegi_l1:"Colpo del vuoto; Lama spettrale",livello_sottoclasse:3}),'
         ' F("Bruto",{categoria:"classe",dado_vita:"d12",ts_competenze:"Forza, Costituzione",tipo_incantatore:"nessuno"}),'
+        ' F("Setta del Nulla",{categoria:"sottoclasse",classe:"[[Lama del Vuoto]]"}),'  # sottoclasse homebrew
         ' F("Un luogo",{categoria:"luogo"})];'                                     # esclusa
         'global.app={vault:{getMarkdownFiles:()=>files.map(x=>x.f)},'
         ' metadataCache:{getFileCache:(f)=>({frontmatter:(files.find(x=>x.f===f)||{}).fm})}};'
@@ -1190,7 +1226,8 @@ def test_homebrew_bridge(tmp_path):
         ' sp:crea.specieHomebrew().Ceneride,'
         ' cl:crea.classeHomebrew(opt)["Lama del Vuoto"],'
         ' clMartial:crea.classeHomebrew(opt).Bruto,'
-        ' clSali:sali.classeHomebrew(opt)["Lama del Vuoto"]};'
+        ' clSali:sali.classeHomebrew(opt)["Lama del Vuoto"],'
+        ' sub:Object.keys(sali.sottoclasseHomebrew("Lama del Vuoto","Lama del Vuoto"))};'
         'process.stdout.write(JSON.stringify(out));',
         encoding="utf-8")
     res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
@@ -1212,8 +1249,12 @@ def test_homebrew_bridge(tmp_path):
     assert cl["incantatore"] is True and cl["tipo_incantatore"] == "mezzo"
     assert cl["competenze_armature_cat"] == ["leggera", "media", "scudo"]
     assert cl["slot_l1"] == {"1": 2} and cl["abilita"]["scelte"] == 2 and len(cl["abilita"]["opzioni"]) == 18
+    # Privilegi di 1º livello (lista, split su ";") + livello sottoclasse (default 3).
+    assert cl["privilegi_l1"] == ["Colpo del vuoto", "Lama spettrale"] and cl["livello_sottoclasse"] == 3
     assert out["clMartial"]["incantatore"] is False and out["clMartial"]["slot_l1"] == {}  # marziale: niente slot
+    assert out["clMartial"]["livello_sottoclasse"] == 3 and out["clMartial"]["privilegi_l1"] == []  # default/vuoto
     assert out["clSali"]["dado_vita"] == 10 and out["clSali"]["tipo_incantatore"] == "mezzo"  # twin crea/sali coerenti
+    assert out["sub"] == ["Setta del Nulla"]  # sottoclasse homebrew legata alla classe (sali_pg)
 
 
 @pytest.mark.skipif(not shutil.which("node"), reason="node assente")
