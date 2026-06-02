@@ -51,6 +51,22 @@ function sigla(stat) {
     return stat.charAt(0).toUpperCase() + stat.slice(1);
 }
 
+// Avanzamento del wizard: decora i titoli dei modali con "· passo N/5". Il PG si
+// crea in 5 macro-fasi (Identità → Caratteristiche → Competenze → Equipaggiamento →
+// Lingue/magia/maestrie); ogni modale porta la fase corrente, così l'utente sa «a
+// che punto sono». SUFFISSO (non prefisso): i mock dei test fanno startsWith(...)
+// sul titolo, che così resta valido. `fase.n` viene alzato man mano in costruisciPG.
+function conPasso(tp, fase) {
+    const dec = t => (fase.n ? `${t == null ? "" : t} · passo ${fase.n}/5` : (t == null ? "" : t));
+    const sys = tp.system;
+    const system = Object.create(sys);
+    system.suggester = (l, v, f, title, ...r) => sys.suggester(l, v, f, dec(title), ...r);
+    system.prompt = (title, ...r) => sys.prompt(dec(title), ...r);
+    const out = Object.create(tp);
+    out.system = system;
+    return out;
+}
+
 // suggester su una mappa { id: { label } } -> ritorna l'id scelto.
 async function scegliDaMappa(tp, titolo, mappa) {
     const ids = Object.keys(mappa || {});
@@ -174,6 +190,9 @@ async function scegliArmatura(tp, classe, opt) {
     const ids = Object.keys(tabella).filter(id =>
         tabella[id].categoria === "nessuna" || consentite.has(tabella[id].categoria));
     if (ids.length === 0) return { id: "nessuna", ca_base: 10, dex_max: null };
+    // Una sola opzione (classe senza competenze d'armatura → solo "nessuna"): niente
+    // modale a scelta unica, la si applica direttamente (meno prompt per i caster).
+    if (ids.length === 1) return { id: ids[0], ...(tabella[ids[0]] || { ca_base: 10, dex_max: null }) };
     const id = await tp.system.suggester(ids.map(i => tabella[i].label || i), ids, false, "Armatura indossata");
     return { id, ...(tabella[id] || { ca_base: 10, dex_max: null }) };
 }
@@ -392,6 +411,10 @@ stato: bozza
 // Costruisce il frontmatter del PG dalle scelte del wizard. Un annullamento a metà
 // (suggester→null) lancia CANCEL, gestito da crea_pg(); qui restano solo le regole.
 async function costruisciPG(tp, opt, nome) {
+    // Avanzamento: il wizard procede in 5 macro-fasi; conPasso aggiunge "· passo N/5"
+    // ai titoli dei modali e fase.n sale a ogni blocco, così l'utente vede quanto manca.
+    const fase = { n: 1 };  // fase 1: Identità (classe/specie/background)
+    tp = conPasso(tp, fase);
     // Opzioni SRD fuse con l'homebrew del vault (ponte homebrew→motore): classe,
     // specie e background homebrew diventano selezionabili accanto a quelli SRD.
     const classiOpt = { ...opt.classi, ...classeHomebrew(opt) };
@@ -406,13 +429,16 @@ async function costruisciPG(tp, opt, nome) {
     const specie = specieOpt[specieId] || {};
     const background = backgroundOpt[backgroundId] || {};
 
+    fase.n = 2;  // fase 2: Caratteristiche (metodo, assegnazioni, aumento background)
     let caratteristiche = await generaCaratteristiche(tp, opt);
     caratteristiche = await applicaAumentoBackground(tp, caratteristiche, background, opt);
 
+    fase.n = 3;  // fase 3: Competenze (abilità di classe)
     const abilitaBackground = background.competenze_abilita || [];
     const abilitaClasse = await scegliAbilitaClasse(tp, classe, abilitaBackground, opt.abilita || {});
     const competenzeAbilita = Array.from(new Set([...abilitaBackground, ...abilitaClasse]));
 
+    fase.n = 4;  // fase 4: Equipaggiamento (equip iniziale, armatura, scudo)
     // Equipaggiamento iniziale (scelta SRD A/B) -> inventario.
     const equip = classe.equipaggiamento || {};
     const equipKeys = Object.keys(equip);
@@ -432,6 +458,7 @@ async function costruisciPG(tp, opt, nome) {
     }
     const ca = calcolaCA(armatura, mod(caratteristiche.destrezza), scudo);
 
+    fase.n = 5;  // fase 5: Lingue, magia e maestrie
     // Lingue (2024): Comune + N a scelta dal background d'origine.
     const lingueCfg = opt.lingue || {};
     const comune = lingueCfg.comune || "Comune";
