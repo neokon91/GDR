@@ -266,6 +266,24 @@ def test_personaggio_options():
     assert opt["classi"]["mago"]["padronanza_armi"] == 0
 
 
+@pytest.mark.skipif(not shutil.which("node"), reason="node assente")
+def test_crea_pg_nome_vuoto(tmp_path):
+    """crea_pg.nomeFile: un nome vuoto o di soli caratteri proibiti NON dà un basename
+    vuoto (eviterebbe la nota orfana '.md') — cade su un default; un nome valido resta."""
+    harness = tmp_path / "nomefile.js"
+    harness.write_text(
+        f'const crea = require({json.dumps(str(render.JS_DIR / "crea_pg.js"))});\n'
+        'const out = ["", "   ", "***", "Eroe di Prova"].map(crea.nomeFile);\n'
+        'process.stdout.write(JSON.stringify(out));\n',
+        encoding="utf-8")
+    res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
+    assert res.returncode == 0, res.stderr
+    out = json.loads(res.stdout)
+    assert all(out), f"basename vuoto prodotto: {out}"
+    assert out[0] == out[1] == out[2] == "Nuovo_PG"   # vuoto/spazi/proibiti -> default
+    assert out[3] == "Eroe_di_Prova"                  # nome valido invariato
+
+
 @pytest.mark.skipif(not shutil.which("node") or not render.SRD_DIR.is_dir(), reason="node/SRD assenti")
 def test_crea_personaggio_padronanze(tmp_path):
     """crea_pg: una classe con padronanza d'armi (Barbaro, 2) sceglie 2 armi in

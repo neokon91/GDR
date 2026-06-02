@@ -23,7 +23,9 @@ function normNum(valore, fallback = 10) {
 }
 
 function nomeFile(nome) {
-    return String(nome ?? "").trim().replace(/[\\/:*?"<>|]/g, "").replace(/\s+/g, "_");
+    // Default se il nome è vuoto o resta vuoto dopo la pulizia (solo spazi o soli
+    // caratteri proibiti): altrimenti tp.file.move produrrebbe una nota orfana ".md".
+    return String(nome ?? "").trim().replace(/[\\/:*?"<>|]/g, "").replace(/\s+/g, "_") || "Nuovo_PG";
 }
 
 function sigla(stat) {
@@ -323,3 +325,5 @@ async function crea_pg(tp) {
 }
 
 module.exports = crea_pg;
+// Esposto per il test-guardia del nome vuoto (test_crea_pg_nome_vuoto).
+module.exports.nomeFile = nomeFile;
