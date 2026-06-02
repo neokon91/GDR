@@ -901,3 +901,24 @@ def test_render_maestrie(tmp_path):
     out = res.stdout
     assert "Maestria delle armi 2024" in out
     assert "**Rovesciamento**" in out and "Prono" in out
+
+
+@pytest.mark.skipif(not shutil.which("node"), reason="node assente")
+def test_append_turno_log(tmp_path):
+    """meta_actions.appendTurnoLog: crea la sezione 'Registro dei turni' se assente
+    e inserisce le voci nuove IN CIMA (più recente prima)."""
+    harness = tmp_path / "tl.js"
+    harness.write_text(
+        'const fs=require("fs");'
+        f'const s=fs.readFileSync({json.dumps(str(render.JS_DIR / "meta_actions.js"))},"utf8");'
+        'const m={exports:{}};new Function("module","exports",s)(m,m.exports);'
+        'const f=m.exports.appendTurnoLog;'
+        'let c=f("# Bastione\\n\\nDesc.\\n","2026-06-01","Fabbricato un anello.");'
+        'c=f(c,"2026-06-08","Commerciato beni.");'
+        'process.stdout.write(c);',
+        encoding="utf-8")
+    res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
+    assert res.returncode == 0, res.stderr
+    out = res.stdout
+    assert out.count("## Registro dei turni") == 1     # sezione creata una sola volta
+    assert out.index("2026-06-08") < out.index("2026-06-01")  # più recente in cima

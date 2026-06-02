@@ -167,3 +167,7 @@ buttons:
   - id: genera-locale
     label: Genera (locale)
     action: genera
+  # Turno di bastione (DMG 2024): registra un turno nel Registro dei turni.
+  - id: turno-bastione
+    label: Turno di bastione
+    action: turno_bastione

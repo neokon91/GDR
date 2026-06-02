@@ -50,6 +50,8 @@
 > **Potenziare** *(Empower)* — dà un beneficio magico temporaneo a chi parte all'avventura.
 >
 > **Mantenere** *(Maintain)* — la struttura rende oro / si autosostiene.
+> [!tip] Turno di bastione
+> Registra un turno (7 giorni) nel *Registro dei turni*: `BUTTON[turno-bastione]`
 --- Collegamenti
 
 > [!example] Relazioni

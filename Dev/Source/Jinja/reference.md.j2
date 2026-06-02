@@ -21,6 +21,8 @@
 {{ m.wizard_body(template.category) }}
 {% if template.category == 'bastione' %}
 {{ m.ordini_bastione() }}
+> [!tip] Turno di bastione
+> Registra un turno (7 giorni) nel *Registro dei turni*: `BUTTON[turno-bastione]`
 {% endif %}
 {% if core.get('assi_tematici', {}).get(template.category) %}
 --- Carattere

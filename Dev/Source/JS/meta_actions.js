@@ -221,6 +221,34 @@ async function riposo_lungo(file) {
   return "";
 }
 
+// Aggiunge un'entrata datata al "Registro dei turni" del bastione (la sezione è
+// creata se assente). Pura/testabile: ritorna il nuovo contenuto. Le voci nuove
+// vanno in cima al registro (più recente prima).
+function appendTurnoLog(content, data, riepilogo) {
+  const voce = `- **${data}** — ${String(riepilogo || "").trim() || "(turno senza note)"}`;
+  const re = /(^|\n)(##+\s*Registro dei turni\s*\n)/;
+  const m = content.match(re);
+  if (m) {
+    const at = m.index + m[0].length;
+    return content.slice(0, at) + voce + "\n" + content.slice(at);
+  }
+  const sep = content.endsWith("\n") ? "" : "\n";
+  return `${content}${sep}\n## Registro dei turni\n${voce}\n`;
+}
+
+// Turno di bastione (DMG 2024): registra un turno (7 giorni) con un riepilogo
+// degli ordini/esiti delle strutture. Append datato al Registro dei turni.
+async function turno_bastione(tp, file) {
+  const riepilogo = await tp.system.prompt(
+    "Turno di bastione: cosa hanno prodotto le strutture (ordini, esiti, eventi)?", "");
+  if (riepilogo == null) return "";
+  const data = tp.date ? tp.date.now("YYYY-MM-DD") : "";
+  const content = await app.vault.read(file);
+  await app.vault.modify(file, appendTurnoLog(content, data, riepilogo));
+  new Notice(`Turno di bastione registrato (${data}).`);
+  return "";
+}
+
 async function meta_actions(tp, action = "") {
   const file = app.workspace.getActiveFile?.() ?? tp.config?.target_file;
   if (!file) {
@@ -278,6 +306,10 @@ async function meta_actions(tp, action = "") {
     new Notice("genera non disponibile."); return "";
   }
 
+  if (action === "turno_bastione") {
+    return await turno_bastione(tp, file);
+  }
+
   new Notice(`Azione non gestita: ${action}`);
   return "";
 }
@@ -286,4 +318,5 @@ async function meta_actions(tp, action = "") {
 // identici alla copia in views.js (le due non devono divergere).
 meta_actions.matchesCond = matchesCond;
 meta_actions.reciprocalField = reciprocalField;  // esposto per i test
+meta_actions.appendTurnoLog = appendTurnoLog;    // esposto per i test
 module.exports = meta_actions;

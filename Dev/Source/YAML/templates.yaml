@@ -34,3 +34,6 @@ actions:
   - id: genera
     title: Genera (locale)
     target: z.modelli/azioni/Genera (locale).md
+  - id: turno_bastione
+    title: Turno di bastione
+    target: z.modelli/azioni/Turno di bastione.md
