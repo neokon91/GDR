@@ -14,10 +14,12 @@ templates:
   primary: true
 subtypes:
 - mondo
-# Scala della mappa: km per unità di coordinata (vedi luogo.coord). Alimenta la
-# distanza metrica in renderDintorni. Assente → le distanze restano in unità "u".
+# Scala mappa (km per unità di coordinata, vedi luogo.coord) e passo di viaggio
+# (km al giorno a piedi, default 30): alimentano la distanza metrica (renderDintorni)
+# e i tempi di viaggio (renderViaggio). Assenti → distanze in unità "u", passo 30.
 fields:
-  scala_mappa: { label: "Scala mappa (km per unità)", widget: number }
+  scala_mappa:   { label: "Scala mappa (km per unità)", widget: number }
+  passo_viaggio: { label: "Passo di viaggio (km/giorno)", widget: number }
 relazioni:
 - field: cosmologia
   label: Cosmologia

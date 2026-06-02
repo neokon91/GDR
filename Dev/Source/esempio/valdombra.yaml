@@ -22,6 +22,7 @@ note:
       epoca: Era delle Ceneri
       temi: ["rovina", "avidità", "potere sepolto"]
       scala_mappa: 2
+      passo_viaggio: 30
     fatti:
       - ["Scala", "Regione di frontiera"]
       - ["Genere", "Dark fantasy"]

@@ -464,6 +464,15 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 ```
 {%- endmacro %}
 
+{# Viaggio (luogo): destinazioni dirette (rotte+confini) con tempo (distanza ÷ passo
+   del mondo) e rischio (pressione), più incontri/insidie del luogo. Sistema di
+   viaggio rotte×tempo×pericolo. Logica in views.renderViaggio. #}
+{% macro viaggio() -%}
+```js-engine
+return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderViaggio");
+```
+{%- endmacro %}
+
 {# Catena causale (timeline causale, evento): perché è successo (cause a monte,
    causato_da) e cosa ne è derivato (conseguenze a valle), ricostruite
    ricorsivamente nelle due direzioni. Logica in views.renderCausalita. #}

@@ -60,6 +60,7 @@ const PANELS = {
   renderEncounter: { mode: "md", args: (a, d) => [a, d.dv, d.page] },
   renderMap: { mode: "md", args: (a, d) => [a, d.dv, d.page] },
   renderDintorni: { mode: "md", args: (a, d) => [a, d.dv, d.page] },
+  renderViaggio: { mode: "md", args: (a, d) => [a, d.dv, d.page] },
   renderCausalita: { mode: "md", args: (a, d) => [a, d.dv, d.page] },
   renderCondizioni: { mode: "md", args: (a) => [a] },
   renderMaestrie: { mode: "md", args: (a) => [a] },

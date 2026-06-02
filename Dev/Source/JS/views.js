@@ -685,6 +685,62 @@ async function renderDintorni(app, dv, page) {
   return "> [!abstract] 🧭 Dintorni — *per confini (terra) e in linea d'aria (km)*\n" + out.map((r) => "> " + r).join("\n>\n");
 }
 
+// --- Viaggio (sistema di viaggio: rotte × tempo × pericolo) -------------------
+// Pianificazione dal luogo corrente: le DESTINAZIONI dirette (rotte 🛣 + confinanti
+// 🧭) con TEMPO stimato (distanza metrica ÷ passo del mondo) e RISCHIO (pressione
+// della destinazione), più COSA PUÒ SUCCEDERE qui (incontri con luogo==qui + insidie
+// che includono qui). Lega geografia (coord/rotte/confini) a bestiario/incontri.
+// Pace e scala dal mondo (passo_viaggio km/g, default 30); senza coord il tempo è
+// "—" ma la tabella resta utile. Ritorna markdown (tabella + callout).
+async function renderViaggio(app, dv, page) {
+  if (!dv || !page || !page.file) return "*Apri una scheda luogo.*";
+  const self = page.file.name;
+  const rn = (l) => { const p = resolve(dv, l); return p && p.file ? p.file.name : null; };
+  const mondo = resolve(dv, page.mondo);
+  const scala = mondo && Number(mondo.scala_mappa) > 0 ? Number(mondo.scala_mappa) : null;
+  const pace = mondo && Number(mondo.passo_viaggio) > 0 ? Number(mondo.passo_viaggio) : 30;
+  const selfC = parseCoord(page.coord);
+  const tempo = (p) => {
+    const c = parseCoord(p.coord);
+    if (!selfC || !c || !scala) return "—";
+    const days = (Math.hypot(c.x - selfC.x, c.y - selfC.y) * scala) / pace;
+    return days >= 1 ? `~${Math.round(days)} g` : `~${Math.max(1, Math.round(days * 8))} h`;
+  };
+  // Destinazioni dirette: rotte (🛣) + confinanti (🧭), dedup per nome con i 'via'.
+  const dests = new Map();
+  const add = (link, via) => {
+    const p = resolve(dv, link);
+    if (p && p.file && p.file.name !== self) {
+      if (!dests.has(p.file.name)) dests.set(p.file.name, { p, via: new Set() });
+      dests.get(p.file.name).via.add(via);
+    }
+  };
+  for (const l of asArray(page.rotta_con)) add(l, "🛣 rotta");
+  for (const l of asArray(page.confina_con)) add(l, "🧭 terra");
+  const out = [];
+  if (dests.size) {
+    const rows = [...dests.values()]
+      .sort((a, b) => a.p.file.name.localeCompare(b.p.file.name))
+      .map(({ p, via }) => `| ${noteLink(p)} | ${[...via].join(", ")} | ${tempo(p)} | ${pressureLabel(p.pressione)} |`);
+    out.push([`**🧳 Partenze da qui** *(a piedi, ${pace} km/g)*`, "",
+      "| Verso | Via | Tempo | Rischio |", "|:--|:--|:--|:--|", ...rows].join("\n"));
+  }
+  // Cosa può succedere qui: incontri (luogo==self) + insidie (self ∈ luoghi).
+  const pericoli = dv.pages()
+    .where((p) => p && p.file && text(p.stato) !== "archiviata"
+      && ((text(p.categoria) === "incontro" && rn(p.luogo) === self)
+        || (text(p.categoria) === "insidia" && asArray(p.luoghi).some((l) => rn(l) === self))))
+    .array();
+  if (pericoli.length) {
+    const righe = pericoli.map((p) => `> - ${noteLink(p)} *(${text(p.categoria)}${p.tipo ? " · " + text(p.tipo) : ""})*`);
+    out.push([`> [!warning]- ⚔ Cosa può succedere qui (${pericoli.length})`, ...righe].join("\n"));
+  }
+  if (!out.length) {
+    return "> [!tip] Nessuna via\n> Collega **Rotte** o **Confina con** per pianificare i viaggi; crea **Incontri**/**Insidie** in questo luogo per popolare i pericoli.";
+  }
+  return out.join("\n\n");
+}
+
 // --- Catena causale (timeline causale) ---------------------------------------
 // Per un evento ricostruisce PERCHÉ è successo (risalendo causato_da) e COSA NE È
 // DERIVATO (scendendo per conseguenze). Le due direzioni sono complementari: con
@@ -817,7 +873,7 @@ module.exports = {
   renderIncantesimi,
   renderTimeline, quandoNum, epocaLabel,
   renderCausalita,
-  renderMap, renderDintorni,
+  renderMap, renderDintorni, renderViaggio, parseCoord,
   renderCondizioni, condizioniMarkdown,
   renderMaestrie, maestrieMarkdown,
   radarMarkdownFromValues,

@@ -1116,6 +1116,47 @@ def test_render_dintorni(tmp_path):
 
 
 @pytest.mark.skipif(not shutil.which("node"), reason="node assente")
+def test_render_viaggio(tmp_path):
+    """views.renderViaggio: destinazioni dirette (rotte 🛣 + confinanti 🧭) con tempo
+    (distanza metrica ÷ passo del mondo) e rischio (pressione), + "cosa può succedere
+    qui" (incontri con luogo==qui + insidie che includono qui). Scala 2, passo 30."""
+    harness = tmp_path / "via.js"
+    harness.write_text(
+        'const fs=require("fs");'
+        f'const src=fs.readFileSync({json.dumps(str(render.JS_DIR / "views.js"))},"utf8");'
+        'const m={exports:{}};new Function("module","exports",src)(m,m.exports);'
+        'const L=(n)=>({path:n+".md"});'
+        'const mk=(name,ex)=>Object.assign({file:{name,path:name+".md"},categoria:"luogo",stato:"pronto",mondo:L("Mondo")},ex);'
+        'const all=[{file:{name:"Mondo",path:"Mondo.md"},categoria:"mondo",scala_mappa:2,passo_viaggio:30},'
+        ' mk("Forte",{coord:"50, 50",rotta_con:[L("Mercato")],confina_con:[L("Bosco"),L("Voragine")]}),'
+        ' mk("Bosco",{coord:"62, 50"}),'
+        ' mk("Mercato",{coord:"80, 49",pressione:3}),'
+        ' mk("Voragine",{coord:"51, 50",confina_con:[L("Forte")]}),'
+        ' {file:{name:"Agguato",path:"Agguato.md"},categoria:"incontro",tipo:"agguato",stato:"pronto",luogo:L("Voragine")},'
+        ' {file:{name:"Trappola",path:"Trappola.md"},categoria:"insidia",stato:"pronto",luoghi:[L("Voragine")]}];'
+        'const dv={pages:()=>({where:(fn)=>({array:()=>all.filter(fn)})}),'
+        ' page:(l)=>{const p=l&&l.path?l.path:l;return all.find(x=>x.file&&(x.file.path===p||x.file.name===p))||null;}};'
+        'const f=(n)=>all.find(x=>x.file.name===n);'
+        'Promise.all([m.exports.renderViaggio({},dv,f("Forte")),m.exports.renderViaggio({},dv,f("Voragine"))])'
+        '.then(([a,b])=>process.stdout.write(JSON.stringify({a,b})));',
+        encoding="utf-8")
+    res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
+    assert res.returncode == 0, res.stderr
+    out = json.loads(res.stdout)
+    a = out["a"]                                              # Forte Cenere
+    assert "🧳 Partenze da qui" in a and "30 km/g" in a
+    assert "| Verso | Via | Tempo | Rischio |" in a
+    assert "[[Mercato]] | 🛣 rotta | ~2 g | 🟢 Calma (3) |" in a   # rotta, 60km/30=2g
+    assert "[[Bosco]] | 🧭 terra |" in a                           # confinante via terra
+    assert "Cosa può succedere" not in a                           # nessun incontro/insidia a Forte
+    b = out["b"]                                              # La Voragine
+    assert "⚔ Cosa può succedere qui (2)" in b
+    assert "[[Agguato]] *(incontro · agguato)*" in b              # incontro con luogo==qui
+    assert "[[Trappola]] *(insidia" in b                          # insidia che include qui
+    assert "[[Forte]] | 🧭 terra |" in b                          # partenza verso Forte
+
+
+@pytest.mark.skipif(not shutil.which("node"), reason="node assente")
 def test_render_causalita(tmp_path):
     """views.renderCausalita: catena causale a monte (cause) e a valle (conseguenze),
     ricostruita ricorsivamente. Unione delle due direzioni: la causa di 'Patto' si

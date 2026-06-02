@@ -221,6 +221,11 @@ sopra i sistemi avanzati (vedi backlog).
     `mondo.scala_mappa` (km/unità) → `renderDintorni` aggiunge "📐 In linea d'aria" (i più
     vicini in km, euclidea × scala), complementare alla distanza per confini. *Residuo*:
     **importer mappe (Azgaar) come substrato** — design sotto (§ Geografia avanzata).
+  - ✅ **Sistema di viaggio** (rotte × tempo × pericolo): tab *Viaggio* del luogo
+    (`views.renderViaggio`) — destinazioni dirette (rotte 🛣 + confinanti 🧭) con **tempo**
+    (distanza metrica ÷ `mondo.passo_viaggio` km/g) e **rischio** (pressione), più **cosa può
+    succedere qui** (incontri con `luogo`==qui + insidie che includono qui). Lega geografia
+    a bestiario/incontri. *Residuo*: pericolo lungo l'INTERA tratta (oggi a destinazione/qui).
   - ✅ **Economia/risorse**: categoria **risorsa** + relazioni `luogo.{produce,dipende_da,
     rotta_con}` e `fazione.controlla_risorse` + dashboard **Economia** — il mondo diventa
     simulabile (una risorsa contesa alimenta un Fronte).

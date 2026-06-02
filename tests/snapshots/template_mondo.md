@@ -136,8 +136,10 @@ return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "mon
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderMap");
 ```
 
-> [!info] Scala
+> [!info] Scala e viaggio
 > Scala mappa (km per unità): `INPUT[number:scala_mappa]` — km per unità di coordinata. Imposta i `coord` sui **Luoghi**: la tab *Dintorni* mostrerà le distanze in linea d'aria in km.
+>
+> Passo di viaggio (km/giorno): `INPUT[number:passo_viaggio]` — km al giorno a piedi (default 30): la tab *Viaggio* dei luoghi stima i tempi.
 --- Collegamenti
 
 > [!example] Relazioni

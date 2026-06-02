@@ -176,6 +176,11 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderDintorni");
 ```
+--- Viaggio
+
+```js-engine
+return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderViaggio");
+```
 --- Collegamenti
 
 > [!example] Relazioni
