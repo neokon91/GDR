@@ -181,6 +181,9 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 
 > [!tip] Scatena
 > Clock pieno? `BUTTON[scatena-conseguenza]` — crea l'evento-conseguenza collegato e azzera il clock.
+> [!tip]- Padronanze d'arma note
+> `= choice(length(this.padronanze_armi) > 0, join(this.padronanze_armi, "<br>"), "Nessuna (la tua classe non concede padronanza d'armi).")`
+
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderCondizioni");
 ```

@@ -220,6 +220,7 @@ incantatore: ${pg.incantatore ? "true" : "false"}
 trucchetti:${listaYamlQ(pg.trucchetti)}
 incantesimi:${listaYamlQ(pg.incantesimi)}
 ${slotRighe ? slotRighe + "\n" : ""}talenti:${listaYaml(pg.talenti)}
+padronanze_armi:${listaYamlQ(pg.padronanze_armi)}
 stato: bozza
 ---
 `;
@@ -281,6 +282,13 @@ async function crea_pg(tp) {
     const strumenti = [classe.competenze_strumenti, background.strumenti]
         .map(s => String(s || "").trim().replace(/\.$/, "")).filter(Boolean).join("; ");
 
+    // Padronanza delle armi (2024): le classi che la ottengono scelgono N armi di
+    // cui conoscono la padronanza (mappa arma->padronanza dal SRD). Offre tutte le
+    // armi con padronanza; l'utente sceglie fra quelle con cui è competente.
+    const armiPad = opt.armi_padronanza || {};
+    const padronanzePool = Object.keys(armiPad).map(a => `${a} — ${armiPad[a]}`);
+    const padronanze_armi = await scegliMulti(tp, "Padronanza d'arma", padronanzePool, classe.padronanza_armi || 0);
+
     return frontmatter({
         nome,
         classe: classeId,
@@ -310,6 +318,7 @@ async function crea_pg(tp) {
         incantesimi: magia.preparati,
         slot: magia.slot,
         talenti: talentoOrigine ? [talentoOrigine] : [],
+        padronanze_armi,
     });
 }
 

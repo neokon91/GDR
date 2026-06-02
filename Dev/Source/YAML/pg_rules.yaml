@@ -27,6 +27,11 @@ generazione_caratteristiche:
 aumento_background:
   schemi: ["+2/+1", "+1/+1/+1"]
 
+# Padronanza delle armi (2024): n. di padronanze note al L1 per le classi che la
+# ottengono ma il cui conteggio NON è nella colonna di progressione del SRD
+# (Ladro/Paladino/Ranger). Barbaro (2) e Guerriero (3) vengono dal SRD. Valore 2024.
+padronanza_armi_fallback: 2
+
 # Armature SRD 5.2.1 (per il calcolo CA). ca_base = CA dell'armatura; dex_max =
 # massimo bonus di Destrezza applicabile (null = nessun limite; 0 = nessun bonus).
 # La scheda calcola: CA = ca_base + min(mod_DES, dex_max) + (2 se scudo). SRD JSON

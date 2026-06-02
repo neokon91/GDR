@@ -255,6 +255,26 @@ def test_personaggio_options():
     for bg in opt["background"].values():
         assert all(s in opt["caratteristiche"] for s in bg["punteggi_caratteristica"])
         assert all(s in skill_ids for s in bg["competenze_abilita"])
+    # Padronanza armi 2024 (dal SRD): mappa arma->padronanza + conteggi per classe.
+    armi = opt["armi_padronanza"]
+    assert len(armi) >= 30 and armi.get("Lancia") == "Fiaccare"
+    assert opt["classi"]["barbaro"]["padronanza_armi"] == 2
+    assert opt["classi"]["guerriero"]["padronanza_armi"] == 3
+    # Ladro/Paladino/Ranger: hanno il privilegio ma non la colonna -> fallback 2.
+    assert opt["classi"]["ladro"]["padronanza_armi"] == 2
+    # I caster puri non ottengono padronanza d'armi.
+    assert opt["classi"]["mago"]["padronanza_armi"] == 0
+
+
+@pytest.mark.skipif(not shutil.which("node") or not render.SRD_DIR.is_dir(), reason="node/SRD assenti")
+def test_crea_personaggio_padronanze(tmp_path):
+    """crea_pg: una classe con padronanza d'armi (Barbaro, 2) sceglie 2 armi in
+    creazione; ogni voce è 'Arma — Padronanza' (dalla mappa SRD)."""
+    opt, fm = _run_crea_pg(tmp_path, classe="Barbaro")
+    assert fm["classe"] == "barbaro"
+    pad = fm.get("padronanze_armi") or []
+    assert len(pad) == 2
+    assert all(" — " in p for p in pad), pad
 
 
 @pytest.mark.skipif(not shutil.which("node") or not render.SRD_DIR.is_dir(), reason="node/SRD assenti")
@@ -859,7 +879,8 @@ def test_maestrie_catalog():
     m = CORE.get("maestrie_armi") or []
     assert len(m) == 8
     nomi = {x["nome"] for x in m}
-    assert {"Fendente", "Ribalta", "Tormenta", "Spinta"} <= nomi
+    # Nomi canonici SRD (combaciano col campo `padronanza` delle armi).
+    assert {"Doppio fendente", "Rovesciamento", "Vessazione", "Spinta"} <= nomi
     assert all(x.get("nome") and x.get("en") and x.get("effetto") for x in m)
 
 
@@ -879,4 +900,4 @@ def test_render_maestrie(tmp_path):
     assert res.returncode == 0, res.stderr
     out = res.stdout
     assert "Maestria delle armi 2024" in out
-    assert "**Ribalta**" in out and "Prono" in out
+    assert "**Rovesciamento**" in out and "Prono" in out

@@ -134,6 +134,47 @@ def parse_class_skills(prose: str, all_skill_ids: list[str], label_to_id: dict[s
     return {"scelte": scelte, "opzioni": opzioni}
 
 
+# --- Padronanza delle armi (Weapon Mastery 2024) ---------------------------
+_MASTERY_RE = re.compile(r"adronanza d['’]armi", re.I)
+
+
+def _weapon_mastery_map() -> dict[str, str]:
+    """Mappa nome-arma -> padronanza (dal SRD equipment, chiave `padronanza`)."""
+    out: dict[str, str] = {}
+    for x in load_srd("srd_5_2_1_equipment.json"):
+        if isinstance(x, dict) and str(x.get("tipo")) == "arma" and x.get("padronanza"):
+            out[x["nome"]] = x["padronanza"]
+    return out
+
+
+def _weapon_mastery_count(cls: dict[str, Any], privilegi_l1: list[str], fallback: int) -> int:
+    """Padronanze d'armi note al L1: dalla colonna di progressione se presente
+    (Barbaro 2, Guerriero 3); altrimenti il fallback 2024 se la classe ha il
+    privilegio L1 'Padronanza d'armi' (Ladro/Paladino/Ranger); altrimenti 0."""
+    def walk(o: Any):
+        if isinstance(o, dict):
+            if str(o.get("Livello")) == "1":
+                for k, v in o.items():
+                    if _MASTERY_RE.search(k):
+                        digits = re.sub(r"\D", "", str(v))
+                        if digits:
+                            return int(digits)
+            for v in o.values():
+                r = walk(v)
+                if r is not None:
+                    return r
+        elif isinstance(o, list):
+            for v in o:
+                r = walk(v)
+                if r is not None:
+                    return r
+        return None
+    n = walk(cls)
+    if n is not None:
+        return n
+    return fallback if any(_MASTERY_RE.search(p) for p in privilegi_l1) else 0
+
+
 def build_personaggio_options(core: dict[str, Any] | None = None) -> dict[str, Any]:
     """Costruisce il dizionario di opzioni PG (da scrivere in personaggio.json).
     SRD assente -> classi/specie/background vuoti (rules-engine degradato)."""
@@ -152,6 +193,7 @@ def build_personaggio_options(core: dict[str, Any] | None = None) -> dict[str, A
     def skills(names: Any) -> list[str]:
         return [label_to_id[_norm(n)] for n in (names or []) if _norm(n) in label_to_id]
 
+    mastery_fallback = int(pg_rules.get("padronanza_armi_fallback", 2))
     classi: dict[str, Any] = {}
     for cls in load_srd("srd_5_2_1_classes.json"):
         comp = cls.get("competenze", {}) or {}
@@ -183,6 +225,9 @@ def build_personaggio_options(core: dict[str, Any] | None = None) -> dict[str, A
             "sottoclasse": sottoclasse_srd.get("nome") if isinstance(sottoclasse_srd, dict) else None,
             "livello_sottoclasse": sub_levels[0] if sub_levels else None,
             "livelli_asi": livelli_asi,
+            # Padronanze d'armi note al L1 (Weapon Mastery 2024): quante l'utente
+            # ne sceglie in creazione (0 per le classi che non la ottengono).
+            "padronanza_armi": _weapon_mastery_count(cls, prog1["privilegi"], mastery_fallback),
         }
 
     specie: dict[str, Any] = {}
@@ -221,4 +266,7 @@ def build_personaggio_options(core: dict[str, Any] | None = None) -> dict[str, A
         "specie": specie,
         "background": background,
         "talenti": talenti,
+        # Mappa nome-arma -> padronanza (Weapon Mastery 2024): crea_pg la usa per
+        # offrire le armi alla scelta delle padronanze e per mostrarne l'effetto.
+        "armi_padronanza": _weapon_mastery_map(),
     }
