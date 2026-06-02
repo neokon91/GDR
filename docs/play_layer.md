@@ -57,13 +57,17 @@ Due vie, in corpo nota su PNG/luogo/fazione (macro `genera_nome()`):
 - **Auto-riscrittura del blocco** (`meta_actions.aggiorna_encounter`, bottone *Aggiorna
   encounter*): riscrive il fence ```` ```encounter ```` dalle creature in *Collegamenti*
   (conta per nome — occorrenze ripetute = quantità — risolve i link al basename, allinea
-  `name:` al titolo, preserva `players:`). Niente più copia-incolla della lista.
+  `name:` al titolo, preserva `players:`) ed emette gli **alleati** collegati (campo
+  `alleati`) col flag `, ally` (Initiative Tracker li separa dai nemici). Niente più
+  copia-incolla. I **PG** entrano nel tracker via `players: true` configurando il **Party**
+  nelle impostazioni di Initiative Tracker (note in `Mondi/Personaggi`).
 
 ## Azioni (`meta_actions.js` + bottoni)
 `collega` (link reciproco), `marca_canonico`, `archivia`, `applica_profilo`,
-`scatena_conseguenza`, `sali_di_livello` (delega a `tp.user.sali_pg`), `aggiorna_encounter`
-(riscrive il blocco `encounter` dalle creature collegate), `genera` (delega a `tp.user.genera`,
-generatore nomi). Esposte come bottoni Meta Bind: `plugins.yaml:buttons` → `templates.yaml:actions`
+`scatena_conseguenza`, `avanza_fronte` (clock +1), `sali_di_livello` (delega a `tp.user.sali_pg`),
+`aggiorna_encounter` (creature + alleati collegati), `riposo_breve`/`riposo_lungo` (loop di
+sessione 2024: Dadi Vita, slot, TS-morte, concentrazione, Esaurimento), `turno_bastione`,
+`genera` (delega a `tp.user.genera`, generatore nomi). Esposte come bottoni Meta Bind: `plugins.yaml:buttons` → `templates.yaml:actions`
 → `action.md.j2` genera il file azione che chiama `tp.user.meta_actions(tp, "<id>")`. *(I bottoni
 `command` — es. *Genera* di FCG — non passano da qui: lanciano un comando di Obsidian direttamente.)*
 
@@ -74,7 +78,11 @@ generatore nomi). Esposte come bottoni Meta Bind: `plugins.yaml:buttons` → `te
 epoca, ordinati per `quando`; pannello in cima alla pagina *Cronologia*, opt-in via
 `pages.yaml:panel: timeline`), `renderMap` (tab *Mappa* su luogo/mondo: embed del campo
 `mappa` — Excalidraw/immagine/nota), `renderCondizioni` (quick-ref delle 15 condizioni
-5.5e da `core.condizioni`/SRD: scheda PG *Al tavolo* + incontro *Combattimento*).
+5.5e da `core.condizioni`/SRD: scheda PG *Al tavolo* + incontro *Combattimento*),
+`renderIncantesimi` (incantesimi per livello + slot residui + link SRD; marca con 🌀 quelli
+a **concentrazione**), `renderMaestrie` (maestrie armi 2024), `renderSpecieTratti` (sezioni
+SRD della specie), `renderDintorni`/`renderViaggio`/`renderPressioni` (geografia: confini e
+distanza, rotte×tempo×pericolo, spinte del grafo econ/geo sui Fronti).
 
 Il corpo nota di ogni pannello è **una riga** che importa il guscio unico
 `z.automazioni/boot.mjs` (modulo ESM via `engine.importJs`) e gli delega il pannello per

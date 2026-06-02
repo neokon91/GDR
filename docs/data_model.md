@@ -62,7 +62,9 @@ creation:                   # wizard (letto da create_entity.js / generato)
 ```
 
 `from`: `subtypes` (suggester sui subtypes) · `notes`+`category`+`link` (suggester
-sulle note di quella categoria → link `[[..]]`) · `list`+`options` · default = testo libero.
+sulle note di quella categoria → link `[[..]]`) · `list`+`options` · `number` (prompt
+numerico, salvato come numero) · default = testo libero. I valori ammessi sono
+enumerati e validati (vedi sotto).
 
 **Assi & archetipi** vivono in `YAML/assi/<id>.yaml` (scorporati, rifusi da `load_entities`):
 `assi:` formato ricco `{id, nome, descrizione, valori:{1..5:{etichetta, descrizione}}}`
@@ -96,3 +98,14 @@ sulle note di quella categoria → link `[[..]]`) · `list`+`options` · default
   preset che riferiscono assi reali (1-5); **anti-drift**: opzioni del select `stile_nomi`
   (metabind) == stili di `generatori.yaml`.
 - **entità**: nessuna collisione id-categoria/campo con core/system; template con id/title/jinja/target.
+- **schema wizard** (`validate_entity_schema`): `from` ∈ {subtypes, list, notes, number};
+  `from:list` deve avere `options`; `from:notes` una `category` esistente; un campo non può
+  dichiarare insieme `required` e `optional`.
+- **YAML ausiliari** (`validate_aux_yaml`): shape di astrologia (e `segno.elemento` ∈ `elementi`),
+  generatori, fcg_it, pg_rules (`point_buy.costi`, `array_standard.valori`, `armatura.dex_max`).
+- **sorgenti `_*.js`**: le copie marcate di `matchesCond` (views/meta_actions) e del ponte
+  homebrew (crea_pg/sali_pg) coincidono byte-a-byte con `_comparators.js` / `_homebrew_bridge.js`.
+
+> **Campi-frontmatter fuori dal modello**: alcune chiavi che l'utente scrive nelle note non
+> entrano in `core` ma sono lette da altri strati — es. `visibilita: dm` / `pubblico: false`
+> escludono la nota dal **sito dei giocatori** (`build_site.is_public`).

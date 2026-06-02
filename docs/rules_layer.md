@@ -50,21 +50,28 @@ SRD-completo**):
   pool + `slot_1`. **Talento** d'origine dal background.
 - **Frontmatter** con ID stabili: `classe`/`specie`/`background` = id; caratteristiche
   *flat*; competenze come **flag 0/1** `ts_<car>`/`prof_<abilita>` (matematica Meta Bind);
-  `nome` quotato.
+  `nome` quotato. **Seed di gioco**: `dado_vita`/`dadi_vita_max: 1` (tracker Dadi Vita) e
+  `mod_<car>` (pre-seedato per i tiri Dice Roller `dice: 1d20 + mod_<car>`).
 - **Preset archetipo** (categorie con `archetipi`): pre-compila i valori-assi + i tag
   `profilo/*` (vedi [play_layer](play_layer.md)).
+- **Resiliente all'annullamento**: un Escape a metà wizard (sentinella `CANCEL`, corpo
+  in `costruisciPG`) degrada a una **bozza valida**, mai un frontmatter corrotto.
 
 ## 3. Presentazione (`scheda_pg_rules()` in `_macros.j2`)
 
 `pg.md.j2` chiama la macro che rende:
 
 - **Caratteristiche** (tabella): Valore (`INPUT[number]`), Mod (`compute_into mod_<car>`),
-  **TS** = `mod + ts_<car> * competenza`, toggle competenza (`inlineSelect` 0/1).
-- **18 Abilità** (tabella): **Bonus** = `mod(car) + prof_<id> * competenza`, toggle
-  competenza/maestria (0/1/2 — `prof=2` ⇒ 2×competenza).
+  **Prova 🎲** e **TS 🎲** = tiri Dice Roller col bonus reale (`dice: 1d20 + mod_<car>`,
+  `+ ts_<car> * competenza`), toggle competenza (`inlineSelect` 0/1).
+- **18 Abilità** (tabella): **Bonus** = `mod(car) + prof_<id> * competenza` + **Tiro 🎲**
+  (`dice: 1d20 + mod_<car> + prof_<id> * competenza`), toggle competenza/maestria (0/1/2).
+- **Risorse al tavolo**: TS contro morte (+ tiro `dice: 1d20`), **Esaurimento** 2024,
+  tracker **Dadi Vita** (`dadi_vita_spesi`/`dadi_vita_max`), **🌀 Concentrazione**
+  (`concentrazione_su`), tabella **slot incantesimo**, bottoni **Riposo breve/lungo**.
 
-I derivati sono **presentazionali** (VIEW/compute_into); le scelte strutturali
-(quali competenze) sono nel frontmatter (flag), interrogabili da Dataview.
+I tiri Dice Roller leggono i campi dal frontmatter (`mod_<car>`/`ts_<car>`/`prof_<id>`/
+`competenza`); le scelte strutturali restano flag interrogabili da Dataview.
 
 ## 4. Sali di livello 2-20 (`sali_pg.js`)
 
@@ -73,7 +80,8 @@ livello* via `meta_actions`). Legge `personaggio.json` + il frontmatter del PG a
 applica il livello successivo dalla `progressione` della classe:
 
 - **Deterministico**: PF += `floor(dado_vita/2)+1 + mod(COS)` (media fissa); `competenza`,
-  `slot_<n>` dalla riga di progressione; `livello`.
+  `slot_<n>` dalla riga di progressione; `livello`; `dadi_vita_max = livello`. Dopo un ASI
+  risincronizza `mod_<car>` nel frontmatter (i tiri Dice Roller della scheda lo usano).
 - **Scelte guidate**: ASI ai `livelli_asi` (`+2` / `+1+1` / talento), `sottoclasse` al
   `livello_sottoclasse` (l'SRD ne ha una per classe), nuovi `trucchetti`/`incantesimi`
   dal pool (fino al max livello castabile) quando i conteggi crescono.

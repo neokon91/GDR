@@ -5,14 +5,21 @@ Worldbuilder, DM 5/5.5e) + backlog prioritizzato. Lo stato tecnico dettagliato �
 in [architecture](architecture.md) / [data_model](data_model.md) /
 [rules_layer](rules_layer.md) / [play_layer](play_layer.md) / [plugin_contracts](plugin_contracts.md).
 
-> Aggiornata a sessione **2026-06-01**. **Fasi 1-2 coperte** + rifiniture di questa sessione:
-> **quick-win architetturali** (3 thin-shell jinja eliminati, `build()` spezzata in helper),
-> **note SRD complete** (creature evocate inline, footer *Vedi anche*, de-dup prose),
-> **auto-riscrittura del blocco encounter**, **timeline navigabile** (pannello *Linea del
-> tempo* sulla pagina Cronologia) e **tab Mappe** su luogo/mondo. Doc plugin **completa**
-> (21 schede). **36 categorie, 20 con assi.** Tutto committato/pushato/buildato su
-> `origin/main` (HEAD `c600232`), **164 test verdi**, check 0. *L'esperienza in-app resta in
-> gran parte da confermare (rischio #1, QA deferita su scelta utente — ci si appoggia ai test).*
+> ⚠️ **Stato aggiornato al 2026-06-02 — `origin/main` HEAD `22c737d`, 246 test verdi, check 0.**
+> Le sezioni di analisi qui sotto sono un'**istantanea precedente** (sessione 2026-06-01),
+> tenuta per contesto storico; lo stato corrente è questo banner + le memorie di progetto.
+>
+> **Chiuso da allora** (vedi [architecture](architecture.md)/[play_layer](play_layer.md)):
+> **mondo-esempio «Valdombra»** popolato in `Mondi/_Esempio — …/` (chiude il *blocco #1*);
+> **QA in-app** dei flussi principali; **on-ramp Home** (6 tipi primari, metafisica opt-in);
+> **loop di sessione 2024** (Dadi Vita, riposo breve, concentrazione); **sito dei giocatori**
+> statico spoiler-free (`npm run site` → `dist/GDR-site`, `visibilita: dm`); **tiri Dice Roller
+> col bonus reale** sulla scheda PG; **Initiative Tracker alleati** (flag `ally`); hardening
+> wizard (`crea_pg` cancel-safe, `from:number`, nuovi guard `validate.py`) e **ponte homebrew
+> a sorgente unica** (`_homebrew_bridge.js`). Nuova analisi 4-lenti (2026-06-02): voti
+> ~**8/8/8/6.5** (PM più basso per distribuzione/condivisione). **Aperti**: distribuzione/scoperta
+> (resta ZIP + free per scelta), override HP/CA inline negli incontri, sottoclasse homebrew,
+> QA in-app del blocco più recente.
 
 ## 🚦 Verdetto beta — analisi 4 lenti (2026-06-01, HEAD `1b02340`)
 
@@ -72,8 +79,9 @@ verificato in-app); ✅ **generatore homebrew IT** (`0b6e6ad`) + **FCG italianiz
 ✅ **solidità JS** — cache `core.json` (views/boot) + **guard anti-drift** `matchesCond`
 (test-guardia, non modulo condiviso) (`a876bcc`); ✅ **famiglie→preset assi** (la famiglia
 pre-compila gli assi, stile archetipi; `75814c1`); ✅ **epoche sul calendario** (intervallo
-`fc-date→fc-end`; `cfbbf13`). Restano: spell management inline; assi allo strato cosmico;
-report gap copertura categorie; plugin/YAML lato UI (Metadata Menu/mappe/Initiative, da QA).
+`fc-date→fc-end`; `cfbbf13`). Già fatti da allora: spell management inline (`renderIncantesimi`),
+assi allo strato cosmico, alleati Initiative Tracker (`ally`). Restano: report gap copertura
+categorie; QA in-app del blocco più recente (tiri Dice Roller, `ally`, tabelle).
 
 ### Una riga per lente
 - **🌍 Worldbuilder** — *pronto-con-riserve*. Ontologia profonda e in più punti avanti su

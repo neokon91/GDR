@@ -15,8 +15,8 @@ plugin fittizi). Le impostazioni e i contenuti dell'utente sono preservati.
 | **Meta Bind** | `enableJs`, `inputFieldTemplates` (da `metabind_inputs`), `buttonTemplates` (un "Crea <X>" per template + le azioni). Le azioni-bottone sono `runTemplaterFile` (richiedono l'azione-nota in `templates.yaml:actions`) **oppure** `command` (lanciano un comando di Obsidian, niente azione-nota: campo `command` su un button in `plugins.yaml`). Le note usano `INPUT[...]`/`VIEW[...]`/`BUTTON[...]`. | `plugins.yaml`, template-entità |
 | **Metadata Menu** | Un **fileClass** per categoria in `z.classi/` (campi tipizzati: Select per stato/tipo, File/MultiFile per i link, Number/Input per il resto) + `classFilesPath`. | `fileclass_fields()` dal modello |
 | **Fantasy Statblocks** | Union per id dei layout in `obsidian-5e-statblocks/data.json` (NON cambia il default) + `diceRolling: true`. Due layout IT: `statblock.layout` (5.5e fedele, default) e `statblock.layout_5e` (5e classico). `srd_statblock_yaml` mappa i mostri SRD su TUTTI i campi 2024 (initiative/saves/skillsaves/resist./immunità/gear/bonus_actions/reactions/leggendarie+desc/pb). Template creatura: 2 tab (5.5e inline + 5e via `monster:`, dati condivisi); le note creatura hanno `statblock: inline`. | `Dev/Source/statblocks/*.json`, `srd_statblock_yaml`, `creature.md.j2` |
-| **Initiative Tracker** | Dichiarato; usato via blocco ` ```encounter ` (combattimento + iniziativa, legge il bestiario FS). Il pannello *difficoltà* (`renderEncounter`) stima il budget XP 2024 e suggerisce la lista creature per il blocco. | `encounter.md.j2`, `views.js` |
-| **Dice Roller** | Macro `tiri()` (d20 Normale/Vantaggio/Svantaggio, ` `dice: …` ` inline) in scheda PG + incontro; più `diceRolling` negli statblock (vedi Fantasy Statblocks). | macro `tiri()`, `encounter.md.j2`, `pg.md.j2` |
+| **Initiative Tracker** | Blocco ` ```encounter ` (combattimento + iniziativa, legge il bestiario FS); `aggiorna_encounter` riscrive creature **+ alleati** (flag `ally`) dalle relazioni; il pannello *difficoltà* (`renderEncounter`) stima il budget XP 2024. I PG entrano via *Party* nelle impostazioni del plugin. | `encounter.md.j2`, `meta_actions.js`, `views.js` |
+| **Dice Roller** | Macro `tiri()` (d20 Normale/Vant./Svant.) + **scheda PG**: tiri col bonus reale che leggono il frontmatter (`dice: 1d20 + mod_<car>`, TS, abilità, iniziativa, TS-morte); **tabelle casuali** (`dice: [[Nota]]`); più `diceRolling` negli statblock. | `scheda_pg_rules()`, macro `tiri()`, `pg.md.j2` |
 | **Tasks** | Convenzione `#gancio`/`#trama` (fili narrativi) + `#prep` (checklist sessione). Home → *Al tavolo* ha **🧵 Fili narrativi** e **✅ Da fare**; `sessione` ha la checklist *Prep*. | `home.md.j2`, `session.md.j2` |
 | **Calendarium** | Parsing eventi (`write_calendarium`: `autoParse`/`parseDates`/`eventFrontmatter` + `inlineEventsTag: #cronologia`) **+ ponte modello→calendario**: `evento` emette `fc-date` (callout *Calendario*, macro `calendario()`); `epoca` emette `fc-date`+`fc-end` (intervallo, `calendario(range=true)`). Le chiavi `fc-*` sono whitelisted in `validate.INTEROP_FIELDS` (trattino voluto). Il **calendario** (mesi/ere) è contenuto per-mondo: creato in-app dai preset (opt-in). | `write_calendarium()`, macro `calendario()` |
 | **Fantasy Content Generator** | Generazione nomi/spunti in corpo nota (PNG/luogo/fazione, macro `genera_nome()`): **suggester inline** (`inlineCallout: "@"`) + **bottone *Genera*** (azione `command` → modale → clipboard). Generatori configurabili **italianizzati** (monete/locande/bevande, struttura esatta `DEFAULT_SETTINGS`). Niente hook wizard (FCG non espone API). Affiancato dal **generatore homebrew** (`genera.js`, vedi [play_layer](play_layer.md)). | `write_fantasy_content_generator()`, `fcg_it.yaml`, macro `genera_nome()` |
@@ -49,6 +49,15 @@ scrive config — si usano a mano nelle note. Il punto d'aggancio comune è il c
   (ritratti/mappe/immagini) e destinazione degli allegati trascinati. Scaffoldata
   (`MEDIA_FOLDER`) + icona Iconize; non è una categoria.
 
+## Sito dei giocatori (output separato)
+
+`render.py --site` (`npm run site`) genera un **sito statico HTML spoiler-free** in
+`dist/GDR-site/` dalle note di `Mondi/` (`build_site.py`). Non è un plugin: è un secondo
+output della pipeline, pubblicabile (GitHub Pages) o apribile in locale. Esclude per
+costruzione i callout `segreto`, i campi del DM (`uso_al_tavolo`/`gancio`/`pressione`/
+`conseguenza`), i blocchi dinamici (Meta Bind/Dataview/JS Engine) e i tiri `dice:`, più le
+note con `visibilita: dm` / `pubblico: false`.
+
 ## Sintassi che i template emettono
 
 - Meta Bind: `INPUT[type(args):prop]` (editabile), `VIEW[expr]` / `VIEW[expr][math:dest]`
@@ -63,6 +72,9 @@ scrive config — si usano a mano nelle note. Il punto d'aggancio comune è il c
 La generazione è validata da `npm test`/`check`, ma il **rendering reale dei
 plugin** (Meta Bind, tabelle, statblock, wizard Templater) va confermato aprendo
 `dist/GDR-vault` in Obsidian dopo un build: l'agente non pilota Obsidian desktop.
+Da spuntare in particolare: i **tiri Dice Roller** della scheda PG che leggono i campi dal
+**frontmatter YAML** (`mod_<car>`/`ts_<car>`/`prof_<id>`/`competenza`); il flag `, ally` di
+Initiative Tracker; la resa di `dice: [[Nota]]` su una lista.
 
 ## Materiale non ancora sfruttato
 Il confronto della doc **ufficiale** di ogni plugin con il nostro uso (sweep) è in

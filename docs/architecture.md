@@ -10,8 +10,9 @@ Dev/Source/                      Dev/Tools/                    dist/GDR-vault/
   Jinja/ (template)       ├─▶  render.py (orchestratore)  ─▶   z.modelli/ (template)
   JS/ (Templater+JSEngine)│      ├─ common.py   (modello+IO)     z.automazioni/ (JS + *.json)
   SRD/ (JSON IT)          │      ├─ build_srd.py                 z.classi/ (fileClass)
-  statblocks/ (FS)       ─┘      ├─ build_personaggio.py         SRD/ (sola lettura)
-                                 └─ validate.py                  Home/LEGGIMI/Indici/
+  statblocks/ (FS)        │      ├─ build_personaggio.py         SRD/ (sola lettura)
+  SiteJinja/ (HTML)      ─┘      ├─ validate.py                  Home/LEGGIMI/Indici/
+                                 └─ build_site.py ─▶ dist/GDR-site/ (sito giocatori)
 ```
 
 ## I due piani + il per-entità
@@ -46,6 +47,13 @@ Il wizard delle entità "uniformi" è **generato**: `render.py` produce un
 lo schema da `core.json`). Le entità bespoke hanno invece un `crea_<id>.js`
 **hand-authored** in `Dev/Source/JS/` che fa da override.
 
+I file `_*.js` (`_comparators.js`, `_homebrew_bridge.js`) sono **sorgenti canoniche
+condivise**: NON copiate nel vault, ma gli script autonomi (niente require a runtime)
+ne tengono una COPIA fra marker (`>>>matchesCond`/`<<<`, `>>>homebrew-bridge`/`<<<`).
+`check()` impone che le copie in views.js/meta_actions.js (`matchesCond`) e in
+crea_pg.js/sali_pg.js (ponte homebrew) siano **byte-identiche** alla canonica: la
+deriva diventa un errore di build, non un bug latente (creazione vs level-up).
+
 Esempio completo (bespoke): il **PG** (`entities/personaggio.yaml` + `pg.md.j2` +
 `crea_pg.js`, + `sali_pg.js` per il level-up), vedi [rules_layer.md](rules_layer.md).
 Le meccaniche al tavolo (clock/conseguenze, archetipi/profilo, difficoltà incontri)
@@ -61,7 +69,8 @@ tutti importano `common`).
 | `common.py` | Percorsi, IO (`load_yaml`/`write_*`/`read_json`), e il **modello**: `deep_merge`, `load_core_parts`, `load_entities`, `apply_entities`, `entity_templates`, `load_core`, `load_templates`, `load_pages`, `template_folder`. |
 | `build_srd.py` | Genera l'albero `SRD/` (sola lettura) dai JSON IT vendorizzati. `srd_note` rende **tutto** il contenuto della voce: infobox per categoria, descrizione/sezioni (tabelle di progressione, blocchi-effetto, liste incantesimi), potenziamento, **creature evocate inline** (callout statblock), e footer **Vedi anche** coi link risolti (`srd_id_index`), de-duplicando le prose ripetute. I mostri diventano statblock Fantasy Statblocks. |
 | `build_personaggio.py` | Converter del rules-engine PG: SRD + `pg_rules.yaml` → `personaggio.json`. |
-| `validate.py` | `check()` + `validate_split`/`validate_entities`: confine core/system, dup-ID, snake_case, shape, template/Jinja. |
+| `build_site.py` | Esporta il **sito dei giocatori** statico (`build_site`, CLI `--site`): dal vault → HTML spoiler-free in `dist/GDR-site/`. Markdown→HTML minimale; esclude callout `segreto`, campi del DM, blocchi dinamici/Meta Bind/`dice:` e le note `visibilita: dm`/`pubblico: false`. Template in `Dev/Source/SiteJinja/`. |
+| `validate.py` | `check()` + `validate_split`/`validate_entities`/`validate_entity_schema`/`validate_reciprocals`/`validate_aux_yaml`: confine core/system, dup-ID, snake_case, shape, schema wizard (`from` ammessi, `options`/`category`), inversi reciproci, YAML ausiliari (astrologia/pg_rules), template/Jinja, e l'uguaglianza byte delle sorgenti `_*.js`. |
 | `render.py` | `build()` orchestratore snello (~25 righe) che delega a helper nominati (`write_engine_data`/`render_notes`/`write_obsidian_config`/…), `clean()`, CLI. Re-esporta i nomi pubblici dei moduli. |
 
 ## Pipeline di build (`render.py build()`)
@@ -75,8 +84,9 @@ monolite): carica il modello e delega.
    (`views.js`, `boot.mjs`, `meta_actions.js`, `create_entity.js`, `sali_pg.js`, `genera.js`),
    genera i wrapper `crea_<id>.js` mancanti. *(I JS cache-ano `core.json` per-modulo.)*
 3. `render_notes(jinja_env(), …)` — rende ogni template Jinja → `z.modelli/`, le azioni,
-   Home/LEGGIMI, le pagine-indice e le dashboard auto **Ponte Mondo↔Sistema** e **Fronti**
-   (`Indici/`). Ritorna `{target: testo}`. Poi `write_bases()` (viste `.base`).
+   Home/LEGGIMI, le pagine-indice e le dashboard auto **Ponte Mondo↔Sistema**, **Fronti**,
+   **Rete del mondo**, **Economia** e **Geografia** (`Indici/`). Ritorna `{target: testo}`.
+   Poi `write_bases()` (viste `.base`).
 4. `build_srd(core)` → albero `SRD/` (prima della config: i bookmark referenziano `SRD/Indice`).
 5. `write_obsidian_config()` — config `.obsidian` **non distruttiva** (merge), un writer
    per plugin: community-plugins, Templater, Dataview, Meta Bind (input+button),
@@ -86,6 +96,11 @@ monolite): carica il modello e delega.
    da `fcg_it.yaml`), `write_bookmarks`, chrome esploratore, default core, homepage.
    Vedi [plugin_contracts.md](plugin_contracts.md).
 6. `scaffold_folders()` — crea le cartelle contenuti mancanti (idempotente).
+7. `write_example_world()` — genera il mondo-esempio (`Dev/Source/esempio/*.yaml`) in
+   `Mondi/_Esempio — <Mondo>/` (namespace riservato, riscritto a ogni build, cancellabile).
+
+Il **sito dei giocatori** è un passo separato e opt-in: `render.py --site` (`npm run site`)
+legge il vault e scrive `dist/GDR-site/` (vedi `build_site.py`).
 
 ## Regole operative
 

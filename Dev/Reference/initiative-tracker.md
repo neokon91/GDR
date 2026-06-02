@@ -3,8 +3,10 @@
 Versione vault: **v13.0.21** (Jeremy Valentine). Doc: https://plugins.javalent.com/initiative-tracker
 Repo: https://github.com/javalent/initiative-tracker  (ex `valentine195/obsidian-initiative-tracker`)
 
-> **Stato: cablato a livello base.** `encounter.md.j2` emette un blocco ` ```encounter `
-> (tab *Combattimento*). Manca l'auto-popolamento e il budget XP (roadmap DM #3).
+> **Stato: cablato.** `encounter.md.j2` emette il blocco ` ```encounter ` (tab *Combattimento*);
+> `aggiorna_encounter` auto-popola **creature + alleati** (flag `ally`) dalle relazioni; la
+> **difficoltà/budget XP 2024** è in `renderEncounter`; quick-ref condizioni in `renderCondizioni`.
+> Residui: override HP/CA inline (a mano); i PG entrano via *Party* nelle impostazioni IT.
 
 ## Cos'è
 Tracker di iniziativa/combattimento 5e: ordina i turni, gestisce HP/condizioni, e
@@ -20,12 +22,13 @@ creatures:
 "Avvia incontro" apre il tracker pre-popolato. I nomi devono combaciare con una creatura
 del **bestiario Fantasy Statblocks** (le 334 note SRD lo alimentano).
 
-## Sintassi creature avanzata (non sfruttata)
-- **Alleato**: `- Scheletro, ally` — schierato dalla parte del gruppo (separato dai nemici
-  nel conteggio difficoltà). Utile per PNG alleati / evocazioni.
-- **Override inline**: `- 3: Salamandra, 60, 12, 20` = count, HP, CA, mod iniziativa →
-  varia al volo una creatura SRD senza creare una nota (boss potenziato, gregario indebolito).
-  Indicando l'HP, la creatura **non tira gli HP** (incontro bilanciato/ripetibile).
+## Sintassi creature avanzata
+- **Alleato** (✅ sfruttato): `- Scheletro, ally` — schierato dalla parte del gruppo (separato
+  dai nemici nel conteggio difficoltà). `aggiorna_encounter` lo emette dal campo `alleati`
+  dell'incontro (PNG alleati / evocazioni).
+- **Override inline** (non ancora sfruttato): `- 3: Salamandra, 60, 12, 20` = count, HP, CA,
+  mod iniziativa → varia al volo una creatura SRD senza creare una nota (boss potenziato,
+  gregario indebolito). Indicando l'HP, la creatura **non tira gli HP** (incontro ripetibile).
 
 ## Ponte con Fantasy Statblocks (già nel layout 5.5e)
 Il layout `5-5e-ita.json` espone due `action` block nello statblock — **"Avvia incontro"**
@@ -39,7 +42,9 @@ creatura in un click (degrada se IT assente).
 - I nomi creatura sono **stringhe**: un typo = creatura non trovata, niente statblock.
 - `players: true` richiede un party configurato nel plugin (non generato dalla pipeline).
 
-## Aggancio previsto (roadmap DM #3)
-Pre-popolare `creatures:` dalle creature **collegate** nell'`incontro` (relazioni
-tipizzate) e mostrare la **difficoltà/budget XP 5e** (il tracker la calcola da CR; serve
-fornire CR/statblock coerenti). Quick-ref condizioni dalle 15 note SRD.
+## Fatto (ex roadmap DM #3)
+Pre-popolamento di `creatures:` (e ora **alleati** col flag `ally`) dalle relazioni
+dell'`incontro` (`aggiorna_encounter`); **difficoltà/budget XP 2024** in `renderEncounter`;
+quick-ref condizioni dalle 15 note SRD (`renderCondizioni`). Resta da fare: gli **override
+HP/CA inline** (serve una fonte-dato per-creatura nell'incontro) e l'auto-iniezione del
+**Party** (è gestito dalle impostazioni del plugin, non dalla pipeline).

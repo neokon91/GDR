@@ -13,5 +13,12 @@ Condizioni/medie: `` `dice: 1d20|avg` ``, `` `dice: 1d20|noform` `` (solo risult
 `` `dice-mod: 1d20` `` — risultato modificabile (ritirabile).
 
 ## Note pipeline
-Plugin installato in dist/GDR-vault → `` `dice:` `` rende. Usato nei template
-incontro/sessione per tiri rapidi al tavolo.
+Plugin installato in dist/GDR-vault → `` `dice:` `` rende. Usi nel vault:
+- **Scheda PG** (`_macros.j2:scheda_pg_rules`): tiri col **bonus reale** che leggono i campi
+  dal frontmatter — prova `` `dice: 1d20 + mod_<car>` ``, TS `` `+ ts_<car> * competenza` ``,
+  abilità `` `+ prof_<id> * competenza` ``, iniziativa, TS contro morte. `crea_pg` seeda
+  `mod_<car>` (⚠️ verifica in-app che DR risolva i campi dal frontmatter YAML).
+- **Incontro/sessione**: macro `tiri()` (d20 normale/vantaggio/svantaggio).
+- **Tabelle casuali per-mondo**: una nota-lista + `` `dice: [[Nota]]` `` (es. «Incontri delle
+  Marche» nel mondo-esempio). I tiri `dice:` sono strumenti del DM: `build_site` li **strippa**
+  dal sito dei giocatori.
