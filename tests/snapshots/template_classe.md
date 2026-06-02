@@ -9,7 +9,10 @@
 > | **Dado vita** | `VIEW[{dado_vita} ?? "—"]` |
 > | **Caratteristica primaria** | `VIEW[{car_primaria} ?? "—"]` |
 > | **TS competenti** | `VIEW[{ts_competenze} ?? "—"]` |
-> | **Incantesimi** | `VIEW[{incantesimi} ?? "—"]` |
+> | **Competenze in armi** | `VIEW[{competenze_armi} ?? "—"]` |
+> | **Competenze in armature** | `VIEW[{competenze_armature} ?? "—"]` |
+> | **Competenza in strumenti** | `VIEW[{strumento} ?? "—"]` |
+> | **Abilità a scelta (numero)** | `VIEW[{abilita_numero} ?? "—"]` |
 > | **Stato** | `INPUT[stato][:stato]` |
 
 ````tabs
@@ -19,12 +22,18 @@
 > Dado vita: `INPUT[dado_vita][:dado_vita]`
 > Caratteristica primaria: `INPUT[text:car_primaria]`
 > TS competenti: `INPUT[text:ts_competenze]`
-> Incantesimi: `INPUT[incantesimi][:incantesimi]`
+> Competenze in armi: `INPUT[text:competenze_armi]`
+> Competenze in armature: `INPUT[text:competenze_armature]`
+> Competenza in strumenti: `INPUT[text:strumento]`
+> Abilità a scelta (numero): `INPUT[number:abilita_numero]`
 
 --- Progressione
 
 > [!note] Concept
 > `INPUT[textArea:descrizione]`
+
+> [!note] Equipaggiamento
+> `INPUT[textArea:equipaggiamento]`
 
 > [!note] Progressione
 > `INPUT[textArea:progressione]`

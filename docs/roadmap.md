@@ -282,13 +282,17 @@ sopra i sistemi avanzati (vedi backlog).
     trucchetti + incantesimi noti **raggruppati per livello** (dal pool della classe),
     linkati alle note SRD, con **slot residui** per livello. Scala 1-20 (sostituisce il
     callout fisso al "1º livello"). Per i non incantatori non compare.
-  - ✅ **Ponte HOMEBREW→motore** (incantesimi + talenti): `crea_pg`/`sali_pg` scansionano il
-    vault a runtime e **fondono** gli incantesimi (categoria `incantesimo`, filtrati per
-    `classi`+`livello`) e i talenti (categoria `talento`) homebrew col pool SRD → diventano
-    **selezionabili** in creazione/level-up; `renderIncantesimi` ne risolve il livello dalla
-    nota. Il wizard incantesimo ora cattura `livello`+`classi` (nasce engine-ready). Degrada
-    fuori da Obsidian (test). Demo: «Fiamma Cinerea» nel mondo-esempio. *Residuo*: classe/
-    specie/background/sottoclasse homebrew (schema più grande) restano solo schede.
+  - ✅ **Ponte HOMEBREW→motore (completo)**: `crea_pg`/`sali_pg` scansionano il vault a
+    runtime e **fondono** col SRD gli **incantesimi** (filtrati per `classi`+`livello`),
+    **talenti**, **background** (caratteristiche/abilità/talento/strumenti, label→id),
+    **specie** (taglia/velocità/scurovisione) e **classi** (dado vita/TS/competenze/abilità;
+    i **caster** `pieno`/`mezzo` ricevono gli **slot dalle tabelle SRD derivate**, in
+    creazione e level-up; competenza/ASI standard derivati) → tutti **selezionabili** in
+    creazione e level-up. I wizard catturano i campi-meccanica (engine-ready). `renderIncantesimi`
+    risolve il livello degli spell homebrew. Degrada fuori da Obsidian (test). Demo nel mondo-
+    esempio: incantesimo «Fiamma Cinerea», background «Reduce delle Ceneri», classe caster
+    «Cinerimante». *Residuo*: sottoclasse homebrew; per i caster homebrew lo +N preparati al
+    level-up è manuale (slot sì, scelta spell a mano); third-caster non derivato.
   - **Level-up avanzato**: `sali_pg` copre già PF/competenza/slot, sottoclasse, ASI/talento,
     trucchetti+incantesimi e privilegi. *Residuo fine*: scambio di un incantesimo noto al
     level-up (2024), feature opzionali oltre il set base.

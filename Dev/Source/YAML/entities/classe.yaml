@@ -16,21 +16,61 @@ subtypes:
 - incantatore
 - mezzo incantatore
 - esperto
+# Campi-meccanica letti dal ponte homebrew→motore (crea_pg/sali_pg) per rendere la
+# classe GIOCABILE: competenze in armi/armature, numero di abilità a scelta.
+fields:
+  competenze_armi:     { label: Competenze in armi,     widget: text }
+  competenze_armature: { label: Competenze in armature, widget: text }
+  abilita_numero:      { label: Abilità a scelta (numero), widget: number }
 scheda:
 - dado_vita
 - car_primaria
 - ts_competenze
-- incantesimi
+- competenze_armi
+- competenze_armature
+- strumento
+- abilita_numero
 creation:
   fields:
   - field: tipo
     prompt: Tipo di classe
     from: subtypes
     required: true
+  # Dati che rendono la classe GIOCABILE (crea_pg la fonde nelle opzioni PG; il
+  # level-up deriva competenza/ASI standard e — per i caster — gli slot dall'SRD).
+  - field: dado_vita
+    prompt: Dado vita
+    from: list
+    options: [d6, d8, d10, d12]
+    optional: true
+  - field: ts_competenze
+    prompt: 'Tiri salvezza competenti (2, es. Forza, Costituzione)'
+    optional: true
+  - field: tipo_incantatore
+    prompt: 'Incantatore?'
+    from: list
+    options: [nessuno, pieno, mezzo]
+    optional: true
+  - field: competenze_armature
+    prompt: 'Competenze in armature (es. Armature leggere e medie; scudi)'
+    optional: true
+  - field: competenze_armi
+    prompt: 'Competenze in armi (es. Armi semplici e da guerra)'
+    optional: true
+  - field: strumento
+    prompt: Competenza in strumenti
+    optional: true
+  - field: abilita_numero
+    prompt: 'Abilità a scelta (numero, es. 2)'
+    from: number
+    optional: true
   body:
   - field: descrizione
     prompt: Concept della classe
     heading: Concept
+  - field: equipaggiamento
+    prompt: 'Equipaggiamento iniziale (es. A: ...; oppure B: ...)'
+    heading: Equipaggiamento
   - field: progressione
     prompt: Privilegi salienti per livello
     heading: Progressione

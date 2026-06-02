@@ -243,6 +243,57 @@ function specieHomebrew() {
     return out;
 }
 
+// Categorie d'armatura indossabili dal testo (come build_personaggio._armor_categories).
+function armorCats(prose) {
+    const n = normTxt(prose);
+    return [["leggera", "legger"], ["media", "medi"], ["pesante", "pesant"], ["scudo", "scud"]]
+        .filter(([, k]) => n.includes(k)).map(([c]) => c);
+}
+// "A: ...; oppure B: ..." → {A, B}; senza B → {A: tutto}.
+function parseEquip(prose) {
+    const t = String(prose || "").replace(/\s+/g, " ").trim();
+    if (!t) return {};
+    const m = t.match(/^\s*A\s*:\s*(.*?)\s*(?:;?\s*oppure\s*|;\s*)B\s*:\s*(.*)$/i);
+    return m ? { A: m[1].trim(), B: m[2].trim() } : { A: t };
+}
+
+// Classe homebrew → opzione nella forma del motore. I caster (tipo_incantatore
+// pieno/mezzo) ricevono gli slot dalle tabelle SRD (opt.slot_incantatore) e il pool
+// dagli incantesimi homebrew della classe. Il level-up (sali_pg) deriva competenza/
+// ASI standard e gli slot dalla stessa tabella (la classe homebrew non ha una
+// progressione SRD). NB: copia gemella in sali_pg.js.
+function classeHomebrew(opt) {
+    const statMap = {}; for (const id of opt.caratteristiche || []) statMap[normTxt(id)] = id;
+    const out = {};
+    for (const { f, fm } of noteVault("classe")) {
+        const tipoInc = normTxt(fm.tipo_incantatore);
+        const caster = tipoInc === "pieno" || tipoInc === "mezzo";
+        const tab = (opt.slot_incantatore || {})[tipoInc] || [];
+        const dado = String(fm.dado_vita == null ? "" : fm.dado_vita).match(/\d+/);
+        out[f.basename] = {
+            label: f.basename,
+            dado_vita: dado ? Number(dado[0]) : 8,
+            tiri_salvezza: toIds(fm.ts_competenze, statMap),
+            caratteristica_primaria: toIds(fm.car_primaria, statMap),
+            abilita: { scelte: Number.parseInt(fm.abilita_numero, 10) || 2, opzioni: Object.keys(opt.abilita || {}) },
+            competenze_armi: String(fm.competenze_armi || ""),
+            competenze_armature: String(fm.competenze_armature || ""),
+            competenze_armature_cat: armorCats(fm.competenze_armature),
+            competenze_strumenti: String(fm.strumento || ""),
+            equipaggiamento: parseEquip(fm.equipaggiamento),
+            privilegi_l1: [],
+            incantatore: caster,
+            trucchetti_noti: caster ? (tipoInc === "pieno" ? 3 : 2) : 0,
+            incantesimi_preparati: caster ? (tipoInc === "pieno" ? 4 : 2) : 0,
+            slot_l1: caster ? (tab[0] || {}) : {},
+            incantesimi_pool: caster ? incantesimiHomebrew(f.basename, f.basename) : {},
+            tipo_incantatore: tipoInc || "nessuno",
+            padronanza_armi: 0,
+        };
+    }
+    return out;
+}
+
 // Incantesimi a PG di 1º livello: trucchetti (trucchetti_noti) + incantesimi di
 // 1º (incantesimi_preparati) dai pool della classe FUSI con l'homebrew del vault.
 // Niente per i non-incantatori.
@@ -316,16 +367,17 @@ async function crea_pg(tp) {
     const nome = await tp.system.prompt("Nome del personaggio");
     await tp.file.move(`Mondi/Personaggi/${nomeFile(nome)}`);
 
-    // Opzioni SRD fuse con l'homebrew del vault (ponte homebrew→motore): specie e
-    // background homebrew diventano selezionabili accanto a quelli del SRD.
+    // Opzioni SRD fuse con l'homebrew del vault (ponte homebrew→motore): classe,
+    // specie e background homebrew diventano selezionabili accanto a quelli SRD.
+    const classiOpt = { ...opt.classi, ...classeHomebrew(opt) };
     const specieOpt = { ...opt.specie, ...specieHomebrew() };
     const backgroundOpt = { ...opt.background, ...backgroundHomebrew(opt) };
 
-    const classeId = await scegliDaMappa(tp, "Classe", opt.classi);
+    const classeId = await scegliDaMappa(tp, "Classe", classiOpt);
     const specieId = await scegliDaMappa(tp, "Specie", specieOpt);
     const backgroundId = await scegliDaMappa(tp, "Background", backgroundOpt);
 
-    const classe = opt.classi[classeId] || {};
+    const classe = classiOpt[classeId] || {};
     const specie = specieOpt[specieId] || {};
     const background = backgroundOpt[backgroundId] || {};
 
@@ -419,3 +471,4 @@ module.exports.incantesimiHomebrew = incantesimiHomebrew;
 module.exports.fondiPool = fondiPool;
 module.exports.backgroundHomebrew = backgroundHomebrew;
 module.exports.specieHomebrew = specieHomebrew;
+module.exports.classeHomebrew = classeHomebrew;

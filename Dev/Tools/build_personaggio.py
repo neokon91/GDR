@@ -115,6 +115,24 @@ def _spell_pool(liste: list[Any]) -> dict[str, list[str]]:
     return {k: sorted(v) for k, v in pool.items()}
 
 
+def _caster_slot_tables(classi: dict[str, Any]) -> dict[str, list[dict[str, int]]]:
+    """Tabelle slot STANDARD per i caster HOMEBREW, derivate dall'SRD (niente
+    hard-code): 'pieno' = una classe che arriva al 9º livello di slot, 'mezzo' = una
+    che si ferma al 5º. Ogni tabella è la lista degli slot per livello PG (1-20).
+    crea_pg/sali_pg le usano per i caster homebrew (tipo_incantatore pieno/mezzo)."""
+    out: dict[str, list[dict[str, int]]] = {}
+    for cid, c in classi.items():
+        prog = c.get("progressione") or []
+        if len(prog) < 20:
+            continue
+        top = max((int(k) for k in (prog[19].get("slot") or {})), default=0)
+        if top >= 9 and "pieno" not in out:
+            out["pieno"] = [r.get("slot", {}) for r in prog]
+        elif top == 5 and "mezzo" not in out:
+            out["mezzo"] = [r.get("slot", {}) for r in prog]
+    return out
+
+
 def parse_class_skills(prose: str, all_skill_ids: list[str], label_to_id: dict[str, str]) -> dict[str, Any]:
     """Da una frase SRD ('Due a scelta tra Atletica, Intimidire o ...') ricava
     {scelte: N, opzioni: [id...]}. Senza elenco esplicito -> tutte le 18 abilità."""
@@ -270,6 +288,8 @@ def build_personaggio_options(core: dict[str, Any] | None = None) -> dict[str, A
         "specie": specie,
         "background": background,
         "talenti": talenti,
+        # Tabelle slot standard (pieno/mezzo) per i caster homebrew, dall'SRD.
+        "slot_incantatore": _caster_slot_tables(classi),
         # Mappa nome-arma -> padronanza (Weapon Mastery 2024): crea_pg la usa per
         # offrire le armi alla scelta delle padronanze e per mostrarne l'effetto.
         "armi_padronanza": _weapon_mastery_map(),

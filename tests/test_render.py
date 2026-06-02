@@ -1077,8 +1077,11 @@ def test_homebrew_bridge(tmp_path):
     raggruppa per livello (mancante→1), esclude archiviate; fondiPool unisce SRD+
     homebrew senza duplicati; talentiHomebrew raccoglie le note categoria=talento.
     Degrada a vuoto senza app.vault.getMarkdownFiles (verificato dai test PG e2e)."""
-    opt = {"caratteristiche": [c["id"] for c in CORE.get("caratteristiche", [])],
-           "abilita": {k: {"label": v.get("label", k)} for k, v in (CORE.get("abilita", {}) or {}).items()}}
+    import build_personaggio
+    full = build_personaggio.build_personaggio_options(CORE)
+    opt = {"caratteristiche": full["caratteristiche"],
+           "abilita": {k: {"label": v.get("label", k)} for k, v in full["abilita"].items()},
+           "slot_incantatore": full["slot_incantatore"]}
     harness = tmp_path / "hb.js"
     harness.write_text(
         f'const crea=require({json.dumps(str(render.JS_DIR / "crea_pg.js"))});'
@@ -1095,6 +1098,9 @@ def test_homebrew_bridge(tmp_path):
         ' F("Cenerino",{categoria:"background",car_background:"Forza, Costituzione, Saggezza",'
         '   abilita_background:"Atletica, Sopravvivenza",talento_origine:"Robusto",strumento:"Strumenti da fabbro"}),'
         ' F("Ceneride",{categoria:"specie",taglia:"Media",velocita:"9 m",tratti:"Vedono al buio: scurovisione a 18 m."}),'
+        ' F("Lama del Vuoto",{categoria:"classe",dado_vita:"d10",ts_competenze:"Forza, Costituzione",'
+        '   tipo_incantatore:"mezzo",competenze_armature:"Armature leggere e medie; scudi",abilita_numero:2}),'
+        ' F("Bruto",{categoria:"classe",dado_vita:"d12",ts_competenze:"Forza, Costituzione",tipo_incantatore:"nessuno"}),'
         ' F("Un luogo",{categoria:"luogo"})];'                                     # esclusa
         'global.app={vault:{getMarkdownFiles:()=>files.map(x=>x.f)},'
         ' metadataCache:{getFileCache:(f)=>({frontmatter:(files.find(x=>x.f===f)||{}).fm})}};'
@@ -1104,7 +1110,10 @@ def test_homebrew_bridge(tmp_path):
         ' fusione:crea.fondiPool({"1":["Palla di fuoco"]},{"1":["Dardo arcano"],"0":["Tocco gelido"]}),'
         ' talenti:Object.keys(sali.talentiHomebrew()),'
         ' bg:crea.backgroundHomebrew(opt).Cenerino,'
-        ' sp:crea.specieHomebrew().Ceneride};'
+        ' sp:crea.specieHomebrew().Ceneride,'
+        ' cl:crea.classeHomebrew(opt)["Lama del Vuoto"],'
+        ' clMartial:crea.classeHomebrew(opt).Bruto,'
+        ' clSali:sali.classeHomebrew(opt)["Lama del Vuoto"]};'
         'process.stdout.write(JSON.stringify(out));',
         encoding="utf-8")
     res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
@@ -1120,6 +1129,14 @@ def test_homebrew_bridge(tmp_path):
     assert out["bg"]["talento_origine"] == "Robusto" and out["bg"]["strumenti"] == "Strumenti da fabbro"
     # Specie homebrew: taglia/velocità parsate, scurovisione dedotta dai tratti.
     assert out["sp"]["taglia"] == "Media" and out["sp"]["velocita"] == 9 and out["sp"]["scurovisione"] is True
+    # Classe homebrew CASTER (mezzo): dado vita, TS→id, categorie armatura, slot L1 dalla tabella SRD.
+    cl = out["cl"]
+    assert cl["dado_vita"] == 10 and cl["tiri_salvezza"] == ["forza", "costituzione"]
+    assert cl["incantatore"] is True and cl["tipo_incantatore"] == "mezzo"
+    assert cl["competenze_armature_cat"] == ["leggera", "media", "scudo"]
+    assert cl["slot_l1"] == {"1": 2} and cl["abilita"]["scelte"] == 2 and len(cl["abilita"]["opzioni"]) == 18
+    assert out["clMartial"]["incantatore"] is False and out["clMartial"]["slot_l1"] == {}  # marziale: niente slot
+    assert out["clSali"]["dado_vita"] == 10 and out["clSali"]["tipo_incantatore"] == "mezzo"  # twin crea/sali coerenti
 
 
 @pytest.mark.skipif(not shutil.which("node"), reason="node assente")

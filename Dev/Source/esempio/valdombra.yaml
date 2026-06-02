@@ -605,7 +605,7 @@ note:
     tipo: invocazione
     fm:
       livello: 1
-      classi: "Mago, Stregone"
+      classi: "Mago, Stregone, Cinerimante"
       tempo_lancio: "1 azione"
       gittata: "18 m"
       componenti: "V, S, M (un pizzico di cenere)"
@@ -642,3 +642,28 @@ note:
     uso_al_tavolo: >-
       Esempio di background HOMEBREW collegato al motore: comparirà tra i background
       selezionabili in *Crea PG*, con le sue caratteristiche, abilità e talento applicati.
+
+  # ---------------------------------------------- CLASSE (homebrew demo del ponte)
+  - nome: Cinerimante
+    categoria: classe
+    tipo: incantatore
+    fm:
+      dado_vita: d6
+      car_primaria: Intelligenza
+      ts_competenze: "Intelligenza, Saggezza"
+      tipo_incantatore: pieno
+      competenze_armi: "Armi semplici"
+      competenze_armature: "Nessuna"
+      abilita_numero: 2
+    fatti:
+      - ["Dado vita", "d6"]
+      - ["Incantatore", "pieno (Intelligenza)"]
+      - ["TS competenti", "Intelligenza, Saggezza"]
+      - ["Natura", "Classe HOMEBREW"]
+    lore: >-
+      Maghi che traggono potere dalla cenere della Voragine: ogni incantesimo lascia
+      un sapore di fuoco spento e un po' di sé sepolto.
+    uso_al_tavolo: >-
+      Esempio di classe HOMEBREW giocabile a tutti i livelli: in *Crea PG* scegli
+      «Cinerimante» per dado vita, TS, slot da incantatore pieno (derivati dall'SRD) e
+      «Fiamma Cinerea» tra gli incantesimi; *Sali di livello* applica competenza/ASI/slot.

@@ -46,6 +46,58 @@ function talentiHomebrew() {
   for (const { f } of vaultByCategoria("talento")) out[f.basename] = { label: f.basename };
   return out;
 }
+function normTxt(s) {
+  return String(s == null ? "" : s).normalize("NFD").replace(/[̀-ͯ]/g, "").trim().toLowerCase();
+}
+function toIds(testo, labelToId) {
+  const raw = Array.isArray(testo) ? testo.join(",") : String(testo || "");
+  return raw.split(/[,;]/).map(x => labelToId[normTxt(x)]).filter(Boolean);
+}
+function armorCats(prose) {
+  const n = normTxt(prose);
+  return [["leggera", "legger"], ["media", "medi"], ["pesante", "pesant"], ["scudo", "scud"]]
+    .filter(([, k]) => n.includes(k)).map(([c]) => c);
+}
+function parseEquip(prose) {
+  const t = String(prose || "").replace(/\s+/g, " ").trim();
+  if (!t) return {};
+  const m = t.match(/^\s*A\s*:\s*(.*?)\s*(?:;?\s*oppure\s*|;\s*)B\s*:\s*(.*)$/i);
+  return m ? { A: m[1].trim(), B: m[2].trim() } : { A: t };
+}
+// Classe homebrew → opzione nella forma del motore (copia gemella di crea_pg.js).
+// sali_pg ne usa dado_vita, tipo_incantatore (slot al level-up dalle tabelle SRD) e
+// incantesimi_pool; competenza/ASI sono derivati standard (niente progressione SRD).
+function classeHomebrew(opt) {
+  const statMap = {}; for (const id of opt.caratteristiche || []) statMap[normTxt(id)] = id;
+  const out = {};
+  for (const { f, fm } of vaultByCategoria("classe")) {
+    const tipoInc = normTxt(fm.tipo_incantatore);
+    const caster = tipoInc === "pieno" || tipoInc === "mezzo";
+    const tab = (opt.slot_incantatore || {})[tipoInc] || [];
+    const dado = String(fm.dado_vita == null ? "" : fm.dado_vita).match(/\d+/);
+    out[f.basename] = {
+      label: f.basename,
+      dado_vita: dado ? Number(dado[0]) : 8,
+      tiri_salvezza: toIds(fm.ts_competenze, statMap),
+      caratteristica_primaria: toIds(fm.car_primaria, statMap),
+      abilita: { scelte: Number.parseInt(fm.abilita_numero, 10) || 2, opzioni: Object.keys(opt.abilita || {}) },
+      competenze_armi: String(fm.competenze_armi || ""),
+      competenze_armature: String(fm.competenze_armature || ""),
+      competenze_armature_cat: armorCats(fm.competenze_armature),
+      competenze_strumenti: String(fm.strumento || ""),
+      equipaggiamento: parseEquip(fm.equipaggiamento),
+      privilegi_l1: [],
+      incantatore: caster,
+      trucchetti_noti: caster ? (tipoInc === "pieno" ? 3 : 2) : 0,
+      incantesimi_preparati: caster ? (tipoInc === "pieno" ? 4 : 2) : 0,
+      slot_l1: caster ? (tab[0] || {}) : {},
+      incantesimi_pool: caster ? incantesimiHomebrew(f.basename, f.basename) : {},
+      tipo_incantatore: tipoInc || "nessuno",
+      padronanza_armi: 0,
+    };
+  }
+  return out;
+}
 
 async function scegliMulti(tp, titolo, pool, n) {
   const scelte = [], disp = [...(pool || [])];
@@ -63,12 +115,17 @@ async function sali_pg(tp) {
   const fm = app.metadataCache.getFileCache(file)?.frontmatter ?? {};
   if (fm.tipo !== "pg" && fm.categoria !== "personaggio") { new Notice("Apri una scheda PG."); return ""; }
   const opt = await loadOpzioni();
-  const classe = (opt.classi || {})[fm.classe];
+  // Classi SRD fuse con l'homebrew del vault (ponte homebrew→motore): un PG di
+  // classe homebrew sale di livello come gli altri.
+  const classi = { ...(opt.classi || {}), ...classeHomebrew(opt) };
+  const classe = classi[fm.classe];
   if (!classe) { new Notice(`Classe sconosciuta: ${fm.classe}`); return ""; }
   const cur = Math.max(1, Number(fm.livello) || 1);
   if (cur >= 20) { new Notice("PG già al 20º livello."); return ""; }
   const nuovo = cur + 1;
   const row = (classe.progressione || [])[nuovo - 1] || {};
+  // Classe HOMEBREW (senza progressione SRD): competenza/ASI/slot derivati standard.
+  const homebrew = !(classe.progressione && classe.progressione.length);
 
   const u = {};        // aggiornamenti frontmatter
   const note = [];     // riepilogo per la Notice
@@ -76,19 +133,26 @@ async function sali_pg(tp) {
   const dpf = Math.max(1, pfPerLivello(classe.dado_vita) + mod(fm.costituzione));
   u.pf_max = (Number(fm.pf_max) || 0) + dpf;
   u.pf = u.pf_max;
-  if (row.competenza) u.competenza = row.competenza;
-  for (const [n, q] of Object.entries(row.slot || {})) u["slot_" + n] = q;
+  // Competenza: dalla riga SRD, o standard (2 + (liv-1)/4) per l'homebrew.
+  u.competenza = row.competenza || (2 + Math.floor((nuovo - 1) / 4));
+  // Slot: dalla riga SRD; per un caster homebrew dalla tabella standard del suo tipo.
+  let slotMap = row.slot || {};
+  if (homebrew && classe.tipo_incantatore && classe.tipo_incantatore !== "nessuno") {
+    slotMap = ((opt.slot_incantatore || {})[classe.tipo_incantatore] || [])[nuovo - 1] || {};
+  }
+  for (const [n, q] of Object.entries(slotMap)) u["slot_" + n] = q;
   u.livello = nuovo;
   note.push(`PF +${dpf}`);
 
-  // Sottoclasse (l'SRD ne ha una per classe)
+  // Sottoclasse (l'SRD ne ha una per classe; l'homebrew non la dichiara)
   if (classe.livello_sottoclasse === nuovo && !fm.sottoclasse && classe.sottoclasse) {
     u.sottoclasse = classe.sottoclasse;
     note.push(`sottoclasse ${classe.sottoclasse}`);
   }
 
-  // ASI / Talento
-  if ((classe.livelli_asi || []).includes(nuovo)) {
+  // ASI / Talento: livelli SRD della classe, o standard 4/8/12/16/19 per l'homebrew.
+  const asiLevels = (classe.livelli_asi && classe.livelli_asi.length) ? classe.livelli_asi : [4, 8, 12, 16, 19];
+  if (asiLevels.includes(nuovo)) {
     const cars = ["forza", "destrezza", "costituzione", "intelligenza", "saggezza", "carisma"];
     const scelta = await tp.system.suggester(
       ["+2 a una caratteristica", "+1 a due caratteristiche", "Talento"],
@@ -151,3 +215,4 @@ module.exports = sali_pg;
 module.exports.incantesimiHomebrew = incantesimiHomebrew;
 module.exports.talentiHomebrew = talentiHomebrew;
 module.exports.fondiPool = fondiPool;
+module.exports.classeHomebrew = classeHomebrew;
