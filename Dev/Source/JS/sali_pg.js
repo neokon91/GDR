@@ -219,6 +219,12 @@ async function sali_pg(tp) {
     note.push(nuoviPriv.join(", "));
   }
 
+  // Risincronizza mod_<car> per le caratteristiche cambiate dall'ASI, così i tiri
+  // Dice Roller `dice: 1d20 + mod_<car>` restano corretti senza riaprire la nota.
+  for (const c of ["forza", "destrezza", "costituzione", "intelligenza", "saggezza", "carisma"]) {
+    if (u[c] != null) u["mod_" + c] = mod(u[c]);
+  }
+
   await app.fileManager.processFrontMatter(file, f => { for (const [k, v] of Object.entries(u)) f[k] = v; });
   new Notice(`Salito al livello ${nuovo}! ${note.join(" · ")}`);
   return "";

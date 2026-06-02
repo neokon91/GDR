@@ -342,6 +342,9 @@ function listaYamlQ(items) {
 function frontmatter(pg) {
     const car = pg.caratteristiche;
     const righeCar = pg.ordine_caratteristiche.map(s => `${s}: ${car[s]}`).join("\n");
+    // mod_<car> seedato qui (oltre a essere ricalcolato live da Meta Bind compute_into):
+    // così i tiri Dice Roller `dice: 1d20 + mod_<car>` hanno il campo già al 1º render.
+    const righeMod = pg.ordine_caratteristiche.map(s => `mod_${s}: ${mod(car[s])}`).join("\n");
     const righeTs = pg.ordine_caratteristiche.map(s => `ts_${s}: ${pg.ts_competenti.includes(s) ? 1 : 0}`).join("\n");
     const righeAb = pg.abilita_ids.map(id => `prof_${id}: ${pg.competenze_abilita.includes(id) ? 1 : 0}`).join("\n");
     const slotRighe = Object.entries(pg.slot || {}).map(([n, q]) => `slot_${n}: ${q}`).join("\n");
@@ -365,6 +368,7 @@ dadi_vita_max: 1
 armatura: ${pg.armatura}
 scudo: ${pg.scudo ? "true" : "false"}
 ${righeCar}
+${righeMod}
 ${righeTs}
 ${righeAb}
 tratti_specie: ${JSON.stringify(String(pg.tratti_specie ?? ""))}

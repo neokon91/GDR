@@ -21,9 +21,9 @@
 > [!info] In gioco
 > CA `INPUT[number:ca]` · PF `INPUT[number:pf]`/`INPUT[number:pf_max]` · PF temp `INPUT[number:pf_temp]` · Velocità `INPUT[number:velocita]` m
 >
-> Competenza +`INPUT[number:competenza]` · Iniziativa `VIEW[floor(({destrezza} - 10) / 2)]`
+> Competenza +`INPUT[number:competenza]` · Iniziativa `VIEW[floor(({destrezza} - 10) / 2)]` → tira `dice: 1d20 + mod_destrezza`
 >
-> **A 0 PF** — TS morte: successi `INPUT[inlineSelect(option(0, "—"), option(1, "1"), option(2, "2"), option(3, "3 ✓")):ts_morte_successi]` · fallimenti `INPUT[inlineSelect(option(0, "—"), option(1, "1"), option(2, "2"), option(3, "3 ☠")):ts_morte_fallimenti]`
+> **A 0 PF** — TS morte (CD 10) `dice: 1d20` · successi `INPUT[inlineSelect(option(0, "—"), option(1, "1"), option(2, "2"), option(3, "3 ✓")):ts_morte_successi]` · fallimenti `INPUT[inlineSelect(option(0, "—"), option(1, "1"), option(2, "2"), option(3, "3 ☠")):ts_morte_fallimenti]`
 >
 > **Esaurimento** (Indebolimento 2024) `INPUT[inlineSelect(option(0, "0 —"), option(1, "1"), option(2, "2"), option(3, "3"), option(4, "4"), option(5, "5"), option(6, "6 ☠")):esaurimento]` → −`VIEW[2 * ({esaurimento} ?? 0)]` a OGNI prova d20 · velocità −`VIEW[1.5 * ({esaurimento} ?? 0)]` m
 >
@@ -48,37 +48,37 @@
 
 **Caratteristiche**
 
-| Car | Valore | Mod | TS | Comp |
-|:--|:-:|:-:|:-:|:-:|
-| **FOR** | `INPUT[number:forza]` | `VIEW[floor(({forza} - 10) / 2)][math:mod_forza]` | `VIEW[floor(({forza} - 10) / 2) + ({ts_forza} * {competenza})]` | `INPUT[inlineSelect(option(0, "—"), option(1, "✓")):ts_forza]` |
-| **DES** | `INPUT[number:destrezza]` | `VIEW[floor(({destrezza} - 10) / 2)][math:mod_destrezza]` | `VIEW[floor(({destrezza} - 10) / 2) + ({ts_destrezza} * {competenza})]` | `INPUT[inlineSelect(option(0, "—"), option(1, "✓")):ts_destrezza]` |
-| **COS** | `INPUT[number:costituzione]` | `VIEW[floor(({costituzione} - 10) / 2)][math:mod_costituzione]` | `VIEW[floor(({costituzione} - 10) / 2) + ({ts_costituzione} * {competenza})]` | `INPUT[inlineSelect(option(0, "—"), option(1, "✓")):ts_costituzione]` |
-| **INT** | `INPUT[number:intelligenza]` | `VIEW[floor(({intelligenza} - 10) / 2)][math:mod_intelligenza]` | `VIEW[floor(({intelligenza} - 10) / 2) + ({ts_intelligenza} * {competenza})]` | `INPUT[inlineSelect(option(0, "—"), option(1, "✓")):ts_intelligenza]` |
-| **SAG** | `INPUT[number:saggezza]` | `VIEW[floor(({saggezza} - 10) / 2)][math:mod_saggezza]` | `VIEW[floor(({saggezza} - 10) / 2) + ({ts_saggezza} * {competenza})]` | `INPUT[inlineSelect(option(0, "—"), option(1, "✓")):ts_saggezza]` |
-| **CAR** | `INPUT[number:carisma]` | `VIEW[floor(({carisma} - 10) / 2)][math:mod_carisma]` | `VIEW[floor(({carisma} - 10) / 2) + ({ts_carisma} * {competenza})]` | `INPUT[inlineSelect(option(0, "—"), option(1, "✓")):ts_carisma]` |
+| Car | Valore | Mod | Prova 🎲 | TS 🎲 | Comp |
+|:--|:-:|:-:|:-:|:-:|:-:|
+| **FOR** | `INPUT[number:forza]` | `VIEW[floor(({forza} - 10) / 2)][math:mod_forza]` | `dice: 1d20 + mod_forza` | `dice: 1d20 + mod_forza + ts_forza * competenza` | `INPUT[inlineSelect(option(0, "—"), option(1, "✓")):ts_forza]` |
+| **DES** | `INPUT[number:destrezza]` | `VIEW[floor(({destrezza} - 10) / 2)][math:mod_destrezza]` | `dice: 1d20 + mod_destrezza` | `dice: 1d20 + mod_destrezza + ts_destrezza * competenza` | `INPUT[inlineSelect(option(0, "—"), option(1, "✓")):ts_destrezza]` |
+| **COS** | `INPUT[number:costituzione]` | `VIEW[floor(({costituzione} - 10) / 2)][math:mod_costituzione]` | `dice: 1d20 + mod_costituzione` | `dice: 1d20 + mod_costituzione + ts_costituzione * competenza` | `INPUT[inlineSelect(option(0, "—"), option(1, "✓")):ts_costituzione]` |
+| **INT** | `INPUT[number:intelligenza]` | `VIEW[floor(({intelligenza} - 10) / 2)][math:mod_intelligenza]` | `dice: 1d20 + mod_intelligenza` | `dice: 1d20 + mod_intelligenza + ts_intelligenza * competenza` | `INPUT[inlineSelect(option(0, "—"), option(1, "✓")):ts_intelligenza]` |
+| **SAG** | `INPUT[number:saggezza]` | `VIEW[floor(({saggezza} - 10) / 2)][math:mod_saggezza]` | `dice: 1d20 + mod_saggezza` | `dice: 1d20 + mod_saggezza + ts_saggezza * competenza` | `INPUT[inlineSelect(option(0, "—"), option(1, "✓")):ts_saggezza]` |
+| **CAR** | `INPUT[number:carisma]` | `VIEW[floor(({carisma} - 10) / 2)][math:mod_carisma]` | `dice: 1d20 + mod_carisma` | `dice: 1d20 + mod_carisma + ts_carisma * competenza` | `INPUT[inlineSelect(option(0, "—"), option(1, "✓")):ts_carisma]` |
 
 **Abilità**
 
-| Abilità | Bonus | Comp |
-|:--|:-:|:-:|
-| Acrobazia (DES) | `VIEW[floor(({destrezza} - 10) / 2) + ({prof_acrobazia} * {competenza})]` | `INPUT[inlineSelect(option(0, "—"), option(1, "✓"), option(2, "✓✓")):prof_acrobazia]` |
-| Addestrare Animali (SAG) | `VIEW[floor(({saggezza} - 10) / 2) + ({prof_addestrare_animali} * {competenza})]` | `INPUT[inlineSelect(option(0, "—"), option(1, "✓"), option(2, "✓✓")):prof_addestrare_animali]` |
-| Arcano (INT) | `VIEW[floor(({intelligenza} - 10) / 2) + ({prof_arcano} * {competenza})]` | `INPUT[inlineSelect(option(0, "—"), option(1, "✓"), option(2, "✓✓")):prof_arcano]` |
-| Atletica (FOR) | `VIEW[floor(({forza} - 10) / 2) + ({prof_atletica} * {competenza})]` | `INPUT[inlineSelect(option(0, "—"), option(1, "✓"), option(2, "✓✓")):prof_atletica]` |
-| Furtività (DES) | `VIEW[floor(({destrezza} - 10) / 2) + ({prof_furtivita} * {competenza})]` | `INPUT[inlineSelect(option(0, "—"), option(1, "✓"), option(2, "✓✓")):prof_furtivita]` |
-| Indagare (INT) | `VIEW[floor(({intelligenza} - 10) / 2) + ({prof_indagare} * {competenza})]` | `INPUT[inlineSelect(option(0, "—"), option(1, "✓"), option(2, "✓✓")):prof_indagare]` |
-| Inganno (CAR) | `VIEW[floor(({carisma} - 10) / 2) + ({prof_inganno} * {competenza})]` | `INPUT[inlineSelect(option(0, "—"), option(1, "✓"), option(2, "✓✓")):prof_inganno]` |
-| Intimidire (CAR) | `VIEW[floor(({carisma} - 10) / 2) + ({prof_intimidire} * {competenza})]` | `INPUT[inlineSelect(option(0, "—"), option(1, "✓"), option(2, "✓✓")):prof_intimidire]` |
-| Intrattenere (CAR) | `VIEW[floor(({carisma} - 10) / 2) + ({prof_intrattenere} * {competenza})]` | `INPUT[inlineSelect(option(0, "—"), option(1, "✓"), option(2, "✓✓")):prof_intrattenere]` |
-| Intuizione (SAG) | `VIEW[floor(({saggezza} - 10) / 2) + ({prof_intuizione} * {competenza})]` | `INPUT[inlineSelect(option(0, "—"), option(1, "✓"), option(2, "✓✓")):prof_intuizione]` |
-| Medicina (SAG) | `VIEW[floor(({saggezza} - 10) / 2) + ({prof_medicina} * {competenza})]` | `INPUT[inlineSelect(option(0, "—"), option(1, "✓"), option(2, "✓✓")):prof_medicina]` |
-| Natura (INT) | `VIEW[floor(({intelligenza} - 10) / 2) + ({prof_natura} * {competenza})]` | `INPUT[inlineSelect(option(0, "—"), option(1, "✓"), option(2, "✓✓")):prof_natura]` |
-| Percezione (SAG) | `VIEW[floor(({saggezza} - 10) / 2) + ({prof_percezione} * {competenza})]` | `INPUT[inlineSelect(option(0, "—"), option(1, "✓"), option(2, "✓✓")):prof_percezione]` |
-| Persuasione (CAR) | `VIEW[floor(({carisma} - 10) / 2) + ({prof_persuasione} * {competenza})]` | `INPUT[inlineSelect(option(0, "—"), option(1, "✓"), option(2, "✓✓")):prof_persuasione]` |
-| Rapidità di Mano (DES) | `VIEW[floor(({destrezza} - 10) / 2) + ({prof_rapidita_di_mano} * {competenza})]` | `INPUT[inlineSelect(option(0, "—"), option(1, "✓"), option(2, "✓✓")):prof_rapidita_di_mano]` |
-| Religione (INT) | `VIEW[floor(({intelligenza} - 10) / 2) + ({prof_religione} * {competenza})]` | `INPUT[inlineSelect(option(0, "—"), option(1, "✓"), option(2, "✓✓")):prof_religione]` |
-| Sopravvivenza (SAG) | `VIEW[floor(({saggezza} - 10) / 2) + ({prof_sopravvivenza} * {competenza})]` | `INPUT[inlineSelect(option(0, "—"), option(1, "✓"), option(2, "✓✓")):prof_sopravvivenza]` |
-| Storia (INT) | `VIEW[floor(({intelligenza} - 10) / 2) + ({prof_storia} * {competenza})]` | `INPUT[inlineSelect(option(0, "—"), option(1, "✓"), option(2, "✓✓")):prof_storia]` |
+| Abilità | Bonus | Tiro 🎲 | Comp |
+|:--|:-:|:-:|:-:|
+| Acrobazia (DES) | `VIEW[floor(({destrezza} - 10) / 2) + ({prof_acrobazia} * {competenza})]` | `dice: 1d20 + mod_destrezza + prof_acrobazia * competenza` | `INPUT[inlineSelect(option(0, "—"), option(1, "✓"), option(2, "✓✓")):prof_acrobazia]` |
+| Addestrare Animali (SAG) | `VIEW[floor(({saggezza} - 10) / 2) + ({prof_addestrare_animali} * {competenza})]` | `dice: 1d20 + mod_saggezza + prof_addestrare_animali * competenza` | `INPUT[inlineSelect(option(0, "—"), option(1, "✓"), option(2, "✓✓")):prof_addestrare_animali]` |
+| Arcano (INT) | `VIEW[floor(({intelligenza} - 10) / 2) + ({prof_arcano} * {competenza})]` | `dice: 1d20 + mod_intelligenza + prof_arcano * competenza` | `INPUT[inlineSelect(option(0, "—"), option(1, "✓"), option(2, "✓✓")):prof_arcano]` |
+| Atletica (FOR) | `VIEW[floor(({forza} - 10) / 2) + ({prof_atletica} * {competenza})]` | `dice: 1d20 + mod_forza + prof_atletica * competenza` | `INPUT[inlineSelect(option(0, "—"), option(1, "✓"), option(2, "✓✓")):prof_atletica]` |
+| Furtività (DES) | `VIEW[floor(({destrezza} - 10) / 2) + ({prof_furtivita} * {competenza})]` | `dice: 1d20 + mod_destrezza + prof_furtivita * competenza` | `INPUT[inlineSelect(option(0, "—"), option(1, "✓"), option(2, "✓✓")):prof_furtivita]` |
+| Indagare (INT) | `VIEW[floor(({intelligenza} - 10) / 2) + ({prof_indagare} * {competenza})]` | `dice: 1d20 + mod_intelligenza + prof_indagare * competenza` | `INPUT[inlineSelect(option(0, "—"), option(1, "✓"), option(2, "✓✓")):prof_indagare]` |
+| Inganno (CAR) | `VIEW[floor(({carisma} - 10) / 2) + ({prof_inganno} * {competenza})]` | `dice: 1d20 + mod_carisma + prof_inganno * competenza` | `INPUT[inlineSelect(option(0, "—"), option(1, "✓"), option(2, "✓✓")):prof_inganno]` |
+| Intimidire (CAR) | `VIEW[floor(({carisma} - 10) / 2) + ({prof_intimidire} * {competenza})]` | `dice: 1d20 + mod_carisma + prof_intimidire * competenza` | `INPUT[inlineSelect(option(0, "—"), option(1, "✓"), option(2, "✓✓")):prof_intimidire]` |
+| Intrattenere (CAR) | `VIEW[floor(({carisma} - 10) / 2) + ({prof_intrattenere} * {competenza})]` | `dice: 1d20 + mod_carisma + prof_intrattenere * competenza` | `INPUT[inlineSelect(option(0, "—"), option(1, "✓"), option(2, "✓✓")):prof_intrattenere]` |
+| Intuizione (SAG) | `VIEW[floor(({saggezza} - 10) / 2) + ({prof_intuizione} * {competenza})]` | `dice: 1d20 + mod_saggezza + prof_intuizione * competenza` | `INPUT[inlineSelect(option(0, "—"), option(1, "✓"), option(2, "✓✓")):prof_intuizione]` |
+| Medicina (SAG) | `VIEW[floor(({saggezza} - 10) / 2) + ({prof_medicina} * {competenza})]` | `dice: 1d20 + mod_saggezza + prof_medicina * competenza` | `INPUT[inlineSelect(option(0, "—"), option(1, "✓"), option(2, "✓✓")):prof_medicina]` |
+| Natura (INT) | `VIEW[floor(({intelligenza} - 10) / 2) + ({prof_natura} * {competenza})]` | `dice: 1d20 + mod_intelligenza + prof_natura * competenza` | `INPUT[inlineSelect(option(0, "—"), option(1, "✓"), option(2, "✓✓")):prof_natura]` |
+| Percezione (SAG) | `VIEW[floor(({saggezza} - 10) / 2) + ({prof_percezione} * {competenza})]` | `dice: 1d20 + mod_saggezza + prof_percezione * competenza` | `INPUT[inlineSelect(option(0, "—"), option(1, "✓"), option(2, "✓✓")):prof_percezione]` |
+| Persuasione (CAR) | `VIEW[floor(({carisma} - 10) / 2) + ({prof_persuasione} * {competenza})]` | `dice: 1d20 + mod_carisma + prof_persuasione * competenza` | `INPUT[inlineSelect(option(0, "—"), option(1, "✓"), option(2, "✓✓")):prof_persuasione]` |
+| Rapidità di Mano (DES) | `VIEW[floor(({destrezza} - 10) / 2) + ({prof_rapidita_di_mano} * {competenza})]` | `dice: 1d20 + mod_destrezza + prof_rapidita_di_mano * competenza` | `INPUT[inlineSelect(option(0, "—"), option(1, "✓"), option(2, "✓✓")):prof_rapidita_di_mano]` |
+| Religione (INT) | `VIEW[floor(({intelligenza} - 10) / 2) + ({prof_religione} * {competenza})]` | `dice: 1d20 + mod_intelligenza + prof_religione * competenza` | `INPUT[inlineSelect(option(0, "—"), option(1, "✓"), option(2, "✓✓")):prof_religione]` |
+| Sopravvivenza (SAG) | `VIEW[floor(({saggezza} - 10) / 2) + ({prof_sopravvivenza} * {competenza})]` | `dice: 1d20 + mod_saggezza + prof_sopravvivenza * competenza` | `INPUT[inlineSelect(option(0, "—"), option(1, "✓"), option(2, "✓✓")):prof_sopravvivenza]` |
+| Storia (INT) | `VIEW[floor(({intelligenza} - 10) / 2) + ({prof_storia} * {competenza})]` | `dice: 1d20 + mod_intelligenza + prof_storia * competenza` | `INPUT[inlineSelect(option(0, "—"), option(1, "✓"), option(2, "✓✓")):prof_storia]` |
 
 > [!tip]- Tiri
 > Normale `dice: 1d20` · Vantaggio `dice: 2d20kh1` · Svantaggio `dice: 2d20kl1`

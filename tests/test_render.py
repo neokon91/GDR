@@ -325,6 +325,8 @@ def test_crea_personaggio_e2e(tmp_path):
     classe = opt["classi"][fm["classe"]]
     assert fm["pf"] == max(1, classe["dado_vita"] + (fm["costituzione"] - 10) // 2)
     assert fm["dado_vita"] == classe["dado_vita"] and fm["dadi_vita_max"] == 1  # Dadi Vita 2024
+    for c in opt["caratteristiche"]:
+        assert fm[f"mod_{c}"] == (fm[c] - 10) // 2  # mod_<car> seedato per i tiri Dice Roller
     for stat in classe["tiri_salvezza"]:
         assert fm[f"ts_{stat}"] == 1
     assert sum(1 for k in fm if k.startswith("prof_")) == 18

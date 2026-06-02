@@ -319,9 +319,9 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > [!info] In gioco
 > CA `INPUT[number:ca]` · PF `INPUT[number:pf]`/`INPUT[number:pf_max]` · PF temp `INPUT[number:pf_temp]` · Velocità `INPUT[number:velocita]` m
 >
-> Competenza +`INPUT[number:competenza]` · Iniziativa {{ computed('floor(({destrezza} - 10) / 2)') }}
+> Competenza +`INPUT[number:competenza]` · Iniziativa {{ computed('floor(({destrezza} - 10) / 2)') }} → tira `dice: 1d20 + mod_destrezza`
 >
-> **A 0 PF** — TS morte: successi `INPUT[inlineSelect(option(0, "—"), option(1, "1"), option(2, "2"), option(3, "3 ✓")):ts_morte_successi]` · fallimenti `INPUT[inlineSelect(option(0, "—"), option(1, "1"), option(2, "2"), option(3, "3 ☠")):ts_morte_fallimenti]`
+> **A 0 PF** — TS morte (CD 10) `dice: 1d20` · successi `INPUT[inlineSelect(option(0, "—"), option(1, "1"), option(2, "2"), option(3, "3 ✓")):ts_morte_successi]` · fallimenti `INPUT[inlineSelect(option(0, "—"), option(1, "1"), option(2, "2"), option(3, "3 ☠")):ts_morte_fallimenti]`
 >
 > **Esaurimento** (Indebolimento 2024) `INPUT[inlineSelect(option(0, "0 —"), option(1, "1"), option(2, "2"), option(3, "3"), option(4, "4"), option(5, "5"), option(6, "6 ☠")):esaurimento]` → −{{ computed('2 * ({esaurimento} ?? 0)') }} a OGNI prova d20 · velocità −{{ computed('1.5 * ({esaurimento} ?? 0)') }} m
 >
@@ -340,18 +340,18 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 
 **Caratteristiche**
 
-| Car | Valore | Mod | TS | Comp |
-|:--|:-:|:-:|:-:|:-:|
+| Car | Valore | Mod | Prova 🎲 | TS 🎲 | Comp |
+|:--|:-:|:-:|:-:|:-:|:-:|
 {% for c in core.caratteristiche %}
-| **{{ c.sigla }}** | `INPUT[number:{{ c.id }}]` | {{ compute_into('floor(({' ~ c.id ~ '} - 10) / 2)', 'mod_' ~ c.id) }} | {{ computed('floor(({' ~ c.id ~ '} - 10) / 2) + ({ts_' ~ c.id ~ '} * {competenza})') }} | `INPUT[inlineSelect(option(0, "—"), option(1, "✓")):ts_{{ c.id }}]` |
+| **{{ c.sigla }}** | `INPUT[number:{{ c.id }}]` | {{ compute_into('floor(({' ~ c.id ~ '} - 10) / 2)', 'mod_' ~ c.id) }} | `dice: 1d20 + mod_{{ c.id }}` | `dice: 1d20 + mod_{{ c.id }} + ts_{{ c.id }} * competenza` | `INPUT[inlineSelect(option(0, "—"), option(1, "✓")):ts_{{ c.id }}]` |
 {% endfor %}
 
 **Abilità**
 
-| Abilità | Bonus | Comp |
-|:--|:-:|:-:|
+| Abilità | Bonus | Tiro 🎲 | Comp |
+|:--|:-:|:-:|:-:|
 {% for aid, a in core.abilita.items() %}
-| {{ a.label }} ({{ a.caratteristica[:3] | upper }}) | {{ computed('floor(({' ~ a.caratteristica ~ '} - 10) / 2) + ({prof_' ~ aid ~ '} * {competenza})') }} | `INPUT[inlineSelect(option(0, "—"), option(1, "✓"), option(2, "✓✓")):prof_{{ aid }}]` |
+| {{ a.label }} ({{ a.caratteristica[:3] | upper }}) | {{ computed('floor(({' ~ a.caratteristica ~ '} - 10) / 2) + ({prof_' ~ aid ~ '} * {competenza})') }} | `dice: 1d20 + mod_{{ a.caratteristica }} + prof_{{ aid }} * competenza` | `INPUT[inlineSelect(option(0, "—"), option(1, "✓"), option(2, "✓✓")):prof_{{ aid }}]` |
 {% endfor %}
 
 {{ tiri() }}
