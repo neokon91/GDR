@@ -11,6 +11,7 @@ templates:
   default_type: divinità maggiore
   target: z.modelli/Divinita.md
   jinja: reference.md.j2
+  primary: true
 subtypes:
 - divinità maggiore
 - divinità minore

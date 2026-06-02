@@ -11,6 +11,7 @@ templates:
   default_type: comune
   target: z.modelli/Specie.md
   jinja: reference.md.j2
+  primary: true
 subtypes:
 - comune
 - esotica

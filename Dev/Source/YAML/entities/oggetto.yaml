@@ -17,7 +17,6 @@ templates:
   default_type: oggetto magico
   target: z.modelli/Oggetto Magico.md
   jinja: reference.md.j2
-  primary: true
 subtypes:
 - arma
 - armatura

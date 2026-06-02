@@ -11,7 +11,6 @@ templates:
   default_type: evocazione
   target: z.modelli/Incantesimo.md
   jinja: spell.md.j2
-  primary: true
 subtypes:
 - abiurazione
 - ammaliamento

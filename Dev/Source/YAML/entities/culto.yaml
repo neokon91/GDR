@@ -10,7 +10,6 @@ templates:
   title: Culto
   default_type: religione
   target: z.modelli/Culto.md
-  primary: true
 subtypes:
 - religione
 - ordine

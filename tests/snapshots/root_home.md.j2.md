@@ -19,42 +19,42 @@
 > [!example] Crea
 > `BUTTON[crea-mondo]`
 > `BUTTON[crea-luogo]`
+> `BUTTON[crea-cultura]`
 > `BUTTON[crea-fazione]`
 > `BUTTON[crea-evento]`
 > `BUTTON[crea-png]`
 > `BUTTON[crea-creatura]`
 > `BUTTON[crea-oggetto]`
+> `BUTTON[crea-specie]`
+> `BUTTON[crea-divinita]`
+> `BUTTON[crea-regno]`
+
+> [!example]- Altri tipi
+> `BUTTON[crea-cosmologia]`
+> `BUTTON[crea-risorsa]`
+> `BUTTON[crea-lingua]`
 > `BUTTON[crea-oggetto_magico]`
 > `BUTTON[crea-incantesimo]`
+> `BUTTON[crea-insidia]`
+> `BUTTON[crea-classe]`
+> `BUTTON[crea-sottoclasse]`
+> `BUTTON[crea-background]`
+> `BUTTON[crea-talento]`
+> `BUTTON[crea-bastione]`
+> `BUTTON[crea-regola]`
+> `BUTTON[crea-nota_rapida]`
 > `BUTTON[crea-epoca]`
+> `BUTTON[crea-mito]`
 > `BUTTON[crea-culto]`
-> `BUTTON[crea-regno]`
+> `BUTTON[crea-profezia]`
+> `BUTTON[crea-istituzione]`
+> `BUTTON[crea-bioma]`
+> `BUTTON[crea-ecosistema]`
 > `BUTTON[crea-sistema_magico]`
 > `BUTTON[crea-dominio]`
 > `BUTTON[crea-legge_fondamentale]`
 > `BUTTON[crea-entita_primordiale]`
 > `BUTTON[crea-piano]`
-
-> [!example]- Altri tipi
-> `BUTTON[crea-cosmologia]`
-> `BUTTON[crea-cultura]`
-> `BUTTON[crea-risorsa]`
-> `BUTTON[crea-lingua]`
-> `BUTTON[crea-insidia]`
-> `BUTTON[crea-classe]`
-> `BUTTON[crea-sottoclasse]`
-> `BUTTON[crea-specie]`
-> `BUTTON[crea-background]`
-> `BUTTON[crea-talento]`
-> `BUTTON[crea-divinita]`
-> `BUTTON[crea-bastione]`
-> `BUTTON[crea-regola]`
-> `BUTTON[crea-nota_rapida]`
-> `BUTTON[crea-mito]`
-> `BUTTON[crea-profezia]`
-> `BUTTON[crea-istituzione]`
-> `BUTTON[crea-bioma]`
-> `BUTTON[crea-ecosistema]`
 
 ## 🤝 Trame (alleati / rivali)
 ```dataview

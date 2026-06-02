@@ -11,7 +11,6 @@ templates:
   title: Sistema magico
   default_type: tradizione arcana
   target: z.modelli/Sistema magico.md
-  primary: true
 subtypes:
 - tradizione arcana
 - disciplina elementale

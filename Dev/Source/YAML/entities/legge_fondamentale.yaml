@@ -10,7 +10,6 @@ templates:
   title: Legge fondamentale
   default_type: polarità
   target: z.modelli/Legge fondamentale.md
-  primary: true
 subtypes:
 - polarità
 - principio assoluto

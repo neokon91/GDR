@@ -10,6 +10,7 @@ templates:
   title: Cultura
   default_type: civilta
   target: z.modelli/Cultura.md
+  primary: true
   # Niente 'jinja' -> usa lo scheletro condiviso _entity_base.j2 (riempito da YAML+macro).
 subtypes:
 - civilta
