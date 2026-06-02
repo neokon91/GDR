@@ -1363,6 +1363,18 @@ def test_render_incantesimi(tmp_path):
     assert out["b"] == ""                                           # non incantatore -> niente callout
 
 
+def test_cosmic_axes():
+    """Lo strato cosmico ha assi tematici (≥3 → radar): guard di regressione del
+    finding 'entità alte mezze-costruite' (Carattere vuoto su dominio/piano/legge/
+    entità primordiale). Gli assi sono in YAML/assi/<id>.yaml, rifusi da load_entities."""
+    ax = CORE.get("assi_tematici", {})
+    for cat in ("dominio", "piano", "legge_fondamentale", "entita_primordiale"):
+        assi = ax.get(cat, [])
+        assert len(assi) >= 3, f"{cat}: assi cosmici mancanti (tab Carattere vuota)"
+        for a in assi:
+            assert a.get("id") and a.get("nome") and len(a.get("valori", {})) == 5
+
+
 def test_maestrie_catalog():
     """system.yaml maestrie_armi: 8 proprietà di maestria 2024 (nome/en/effetto).
     NB: solo gli effetti (la mappa arma→proprietà non è nel SRD 5.2.1)."""

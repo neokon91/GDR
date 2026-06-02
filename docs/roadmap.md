@@ -263,10 +263,16 @@ sopra i sistemi avanzati (vedi backlog).
   `connessioni`) + **dashboard "Rete del mondo"** (orfani/snodi via Dataview `file.inlinks`)
   (`51acb45`). ✅ **inverso ESPLICITO** (`relazioni[].reciprocal` → `inverseRelation`): per le
   relazioni dove l'auto-derivazione è ambigua — simmetriche (`confina_con`/`rotta_con`) o
-  direzionali (`causato_da↔conseguenze`); validato a build (`validate_reciprocals`). **Aperti**: **(b) assi allo strato cosmico** (dominio/entita_primordiale/
-  legge_fondamentale/piano senza assi → Carattere vuoto) + scheda per cosmologia/dominio;
-  *residuo*: inverse anche nel wizard-connect (oggi solo `Collega`); CSS feel-wiki; maestrie
-  armi + Bastioni 2024.
+  direzionali (`causato_da↔conseguenze`); validato a build (`validate_reciprocals`).
+  ✅ **(b) assi allo strato cosmico FATTO**: assi tematici ricchi 1-5 per **dominio**
+  (ampiezza/orientamento/attività/pervasività/tensione), **piano** (materialità/stabilità/
+  ospitalità/risonanza/inclinazione), **legge_fondamentale** (rigidità/equilibrio-poli/
+  portata/stabilità/manifestazione), **entità primordiale** (coscienza/risveglio/potenza/
+  disposizione/tangibilità) in `YAML/assi/<id>.yaml` → tab Carattere + radar non più vuoti
+  (guard `test_cosmic_axes`). *Scheda cosmologia/dominio NON aggiunta di proposito*: la
+  cosmologia ha frontmatter volutamente leggero (entità astratta) e gli assi danno già il
+  carattere — evitato il filler (lezione audit-discernment). *Residuo*: inverse nel
+  wizard-connect (oggi solo `Collega`).
 
 ## 🎲 DM (D&D 5/5.5e)
 

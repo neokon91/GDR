@@ -72,6 +72,54 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > [!tip] Avanza / scatena
 > Una spinta dal grafo o una mossa? `BUTTON[avanza-fronte]` (clock +1).
 > Clock pieno? `BUTTON[scatena-conseguenza]` — crea l'evento-conseguenza collegato e azzera il clock.
+--- Carattere
+
+> [!abstract] Carattere
+> **Rigidità** `INPUT[slider(minValue(1), maxValue(5), addLabels):rigidita]` → `VIEW[{rigidita} == 5 ? "5 · Aggirabile" : ({rigidita} == 4 ? "4 · Negoziabile" : ({rigidita} == 3 ? "3 · Flessibile" : ({rigidita} == 2 ? "2 · Ferrea" : ({rigidita} == 1 ? "1 · Inviolabile" : ("—")))))]`
+> **Equilibrio dei poli** `INPUT[slider(minValue(1), maxValue(5), addLabels):equilibrio]` → `VIEW[{equilibrio} == 5 ? "5 · Secondo polo egemone" : ({equilibrio} == 4 ? "4 · Bilanciata" : ({equilibrio} == 3 ? "3 · In tensione" : ({equilibrio} == 2 ? "2 · Sbilanciata" : ({equilibrio} == 1 ? "1 · Primo polo egemone" : ("—")))))]`
+> **Portata** `INPUT[slider(minValue(1), maxValue(5), addLabels):portata]` → `VIEW[{portata} == 5 ? "5 · Universale" : ({portata} == 4 ? "4 · Cardinale" : ({portata} == 3 ? "3 · Ampia" : ({portata} == 2 ? "2 · Settoriale" : ({portata} == 1 ? "1 · Circoscritta" : ("—")))))]`
+> **Stabilità** `INPUT[slider(minValue(1), maxValue(5), addLabels):stabilita]` → `VIEW[{stabilita} == 5 ? "5 · Morente" : ({stabilita} == 4 ? "4 · Erosa" : ({stabilita} == 3 ? "3 · Vacillante" : ({stabilita} == 2 ? "2 · Salda" : ({stabilita} == 1 ? "1 · Eterna" : ("—")))))]`
+> **Manifestazione** `INPUT[slider(minValue(1), maxValue(5), addLabels):manifestazione]` → `VIEW[{manifestazione} == 5 ? "5 · Incarnata" : ({manifestazione} == 4 ? "4 · Palese" : ({manifestazione} == 3 ? "3 · Segnata" : ({manifestazione} == 2 ? "2 · Inferita" : ({manifestazione} == 1 ? "1 · Astratta" : ("—")))))]`
+
+> [!note]- Rigidità — Quanto la legge è inviolabile o aggirabile.
+> **1 · Inviolabile** — Assoluta; nessuno può infrangerla.
+> **2 · Ferrea** — Cede solo a potenze cosmiche.
+> **3 · Flessibile** — Ammette eccezioni rare e costose.
+> **4 · Negoziabile** — Si piega a patti, riti, prezzi.
+> **5 · Aggirabile** — Chi sa come, la elude.
+
+> [!note]- Equilibrio dei poli — Verso quale dei due poli pende la realtà del mondo.
+> **1 · Primo polo egemone** — Il primo polo schiaccia l'altro.
+> **2 · Sbilanciata** — Un polo prevale nettamente.
+> **3 · In tensione** — I poli si contendono: equilibrio dinamico.
+> **4 · Bilanciata** — I poli si tengono in pareggio stabile.
+> **5 · Secondo polo egemone** — Il secondo polo schiaccia il primo.
+
+> [!note]- Portata — Quanta parte della realtà la legge tiene insieme.
+> **1 · Circoscritta** — Regge un singolo fenomeno.
+> **2 · Settoriale** — Governa un ambito definito.
+> **3 · Ampia** — Tiene insieme un grande dominio del reale.
+> **4 · Cardinale** — Uno dei perni della realtà.
+> **5 · Universale** — Senza di essa il cosmo non sta in piedi.
+
+> [!note]- Stabilità — Quanto la legge è eterna o sta cedendo.
+> **1 · Eterna** — Immutabile da sempre e per sempre.
+> **2 · Salda** — Stabile, con derive lentissime.
+> **3 · Vacillante** — Mostra crepe; può indebolirsi.
+> **4 · Erosa** — Già intaccata; il suo effetto sfuma a tratti.
+> **5 · Morente** — In dissoluzione; cede a un nuovo ordine.
+
+> [!note]- Manifestazione — Quanto la legge è percepibile nel mondo.
+> **1 · Astratta** — Pura legge, impercettibile.
+> **2 · Inferita** — Si deduce dai suoi effetti.
+> **3 · Segnata** — Lascia presagi e fenomeni leggibili.
+> **4 · Palese** — Evidente, innegabile a tutti.
+> **5 · Incarnata** — Ha un volto o una voce nel mondo.
+
+```js-engine
+return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "legge_fondamentale", null);
+```
+
 --- Collegamenti
 
 > [!example] Relazioni

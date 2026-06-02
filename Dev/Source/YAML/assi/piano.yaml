@@ -1,0 +1,49 @@
+# Assi tematici (formato ricco 1-5) per l'entità 'piano' (piano d'esistenza).
+# render.py li rifonde in core.assi_tematici → tab Carattere + radar.
+id: piano
+assi:
+- id: materialita
+  nome: Materialità
+  descrizione: Quanto il piano è sostanza tangibile o puro spirito.
+  valori:
+    1: { etichetta: Immateriale, descrizione: "Puro pensiero o energia, senza sostanza." }
+    2: { etichetta: Eterico,     descrizione: "Tenue, attraversabile, quasi-fisico." }
+    3: { etichetta: Fluido,      descrizione: "Sostanza mutevole, senza forma fissa." }
+    4: { etichetta: Solido,      descrizione: "Tangibile e percorribile come il mondo materiale." }
+    5: { etichetta: Iperreale,   descrizione: "Più denso e «vero» del reale; schiaccia i sensi." }
+- id: stabilita
+  nome: Stabilità
+  descrizione: Quanto le sue leggi sono costanti o mutevoli.
+  valori:
+    1: { etichetta: Caotico,    descrizione: "Leggi fisiche instabili, in continuo mutamento." }
+    2: { etichetta: Mutevole,   descrizione: "Cambia con lentezza o a ondate." }
+    3: { etichetta: Ciclico,    descrizione: "Muta secondo cicli o stagioni cosmiche." }
+    4: { etichetta: Stabile,    descrizione: "Leggi costanti e affidabili." }
+    5: { etichetta: Immutabile, descrizione: "Eterno e identico a sé stesso." }
+- id: ospitalita
+  nome: Ospitalità
+  descrizione: Quanto un mortale può sopravvivervi.
+  valori:
+    1: { etichetta: Letale,      descrizione: "Uccide chi vi entra senza protezione." }
+    2: { etichetta: Ostile,      descrizione: "Sopravvivibile a stento, a caro prezzo." }
+    3: { etichetta: Estraneo,    descrizione: "Vivibile ma profondamente alieno." }
+    4: { etichetta: Vivibile,    descrizione: "Un mortale può dimorarvi." }
+    5: { etichetta: Accogliente, descrizione: "Prospero, persino paradisiaco." }
+- id: risonanza
+  nome: Risonanza
+  descrizione: Quanto il piano tocca e influenza il mondo materiale.
+  valori:
+    1: { etichetta: Sigillato,    descrizione: "Isolato; non tocca il mondo." }
+    2: { etichetta: Remoto,       descrizione: "Influenza rara e debole." }
+    3: { etichetta: Permeabile,   descrizione: "Filtra nel mondo per soglie e riti." }
+    4: { etichetta: Risonante,    descrizione: "La sua impronta si sente nel mondo." }
+    5: { etichetta: Traboccante,  descrizione: "Dilaga nel reale; lo plasma e lo invade." }
+- id: inclinazione
+  nome: Inclinazione
+  descrizione: La tinta morale del piano.
+  valori:
+    1: { etichetta: Luminoso,     descrizione: "Benevolo, redentivo, votato al bene." }
+    2: { etichetta: Sereno,       descrizione: "Pacifico e neutro-positivo." }
+    3: { etichetta: Indifferente, descrizione: "Amorale, oltre il bene e il male." }
+    4: { etichetta: Sinistro,     descrizione: "Inquietante, corruttore, tendente al male." }
+    5: { etichetta: Maligno,      descrizione: "Ostile a ogni vita; male incarnato." }

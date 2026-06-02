@@ -1,0 +1,49 @@
+# Assi tematici (formato ricco 1-5) per l'entità 'dominio' (sfera ontologica del cosmo).
+# render.py li rifonde in core.assi_tematici → tab Carattere + radar.
+id: dominio
+assi:
+- id: ampiezza
+  nome: Ampiezza
+  descrizione: Quanta parte della realtà cade sotto questa sfera.
+  valori:
+    1: { etichetta: Aspetto,   descrizione: "Governa un solo, preciso aspetto della realtà." }
+    2: { etichetta: Settore,   descrizione: "Regge un settore definito dell'esistenza." }
+    3: { etichetta: Sfera,     descrizione: "Abbraccia un'intera sfera dell'essere." }
+    4: { etichetta: Pilastro,  descrizione: "Uno dei grandi pilastri su cui poggia il cosmo." }
+    5: { etichetta: Totalità,  descrizione: "Pervade ogni cosa; nulla gli è estraneo." }
+- id: orientamento
+  nome: Orientamento
+  descrizione: Se il dominio tende a generare o a dissolvere.
+  valori:
+    1: { etichetta: Generativo,    descrizione: "Crea, fa nascere, dà forma e ordine." }
+    2: { etichetta: Nutriente,     descrizione: "Sostiene, conserva, fa durare." }
+    3: { etichetta: Neutro,        descrizione: "Né crea né distrugge; semplicemente è." }
+    4: { etichetta: Trasformativo, descrizione: "Muta, scompone e ricompone senza sosta." }
+    5: { etichetta: Dissolutivo,   descrizione: "Erode, disfa, riconduce al nulla." }
+- id: attivita
+  nome: Attività
+  descrizione: Quanto la sfera agisce sul mondo o resta fondamento inerte.
+  valori:
+    1: { etichetta: Latente,    descrizione: "Principio inerte, fondamento muto." }
+    2: { etichetta: Sottesa,    descrizione: "Opera sotto la superficie, senza volontà." }
+    3: { etichetta: Operante,   descrizione: "Agisce con regolarità sul mondo." }
+    4: { etichetta: Pressante,  descrizione: "Spinge, preme, forza gli eventi." }
+    5: { etichetta: Dominante,  descrizione: "Detta legge; ogni cosa si piega al suo moto." }
+- id: pervasivita
+  nome: Pervasività
+  descrizione: Quanto in profondità permea la trama del reale.
+  valori:
+    1: { etichetta: Periferica,   descrizione: "Tocca la realtà solo ai margini." }
+    2: { etichetta: Diffusa,      descrizione: "Presente ovunque ma tenue." }
+    3: { etichetta: Strutturale,  descrizione: "Parte dell'ossatura del reale." }
+    4: { etichetta: Fondante,     descrizione: "Senza di esso quell'aspetto del cosmo crolla." }
+    5: { etichetta: Assoluta,     descrizione: "È la trama stessa dell'esistenza." }
+- id: tensione
+  nome: Tensione
+  descrizione: Rapporto con i domini opposti o affini.
+  valori:
+    1: { etichetta: "In armonia",   descrizione: "Coopera coi domini affini, nessun conflitto." }
+    2: { etichetta: Equilibrato,    descrizione: "Bilanciato dal suo opposto, stabile." }
+    3: { etichetta: "In attrito",   descrizione: "Frizione costante coi domini rivali." }
+    4: { etichetta: "In lotta",     descrizione: "Conflitto aperto che muove la storia cosmica." }
+    5: { etichetta: "In guerra",    descrizione: "Lacera il cosmo; il suo scontro è cataclisma." }

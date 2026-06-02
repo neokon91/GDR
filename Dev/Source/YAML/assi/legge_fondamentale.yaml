@@ -1,0 +1,49 @@
+# Assi tematici (formato ricco 1-5) per l'entità 'legge_fondamentale' (polarità cosmica).
+# render.py li rifonde in core.assi_tematici → tab Carattere + radar.
+id: legge_fondamentale
+assi:
+- id: rigidita
+  nome: Rigidità
+  descrizione: Quanto la legge è inviolabile o aggirabile.
+  valori:
+    1: { etichetta: Inviolabile,  descrizione: "Assoluta; nessuno può infrangerla." }
+    2: { etichetta: Ferrea,       descrizione: "Cede solo a potenze cosmiche." }
+    3: { etichetta: Flessibile,   descrizione: "Ammette eccezioni rare e costose." }
+    4: { etichetta: Negoziabile,  descrizione: "Si piega a patti, riti, prezzi." }
+    5: { etichetta: Aggirabile,   descrizione: "Chi sa come, la elude." }
+- id: equilibrio
+  nome: Equilibrio dei poli
+  descrizione: Verso quale dei due poli pende la realtà del mondo.
+  valori:
+    1: { etichetta: "Primo polo egemone",  descrizione: "Il primo polo schiaccia l'altro." }
+    2: { etichetta: Sbilanciata,           descrizione: "Un polo prevale nettamente." }
+    3: { etichetta: "In tensione",         descrizione: "I poli si contendono: equilibrio dinamico." }
+    4: { etichetta: Bilanciata,            descrizione: "I poli si tengono in pareggio stabile." }
+    5: { etichetta: "Secondo polo egemone", descrizione: "Il secondo polo schiaccia il primo." }
+- id: portata
+  nome: Portata
+  descrizione: Quanta parte della realtà la legge tiene insieme.
+  valori:
+    1: { etichetta: Circoscritta, descrizione: "Regge un singolo fenomeno." }
+    2: { etichetta: Settoriale,   descrizione: "Governa un ambito definito." }
+    3: { etichetta: Ampia,        descrizione: "Tiene insieme un grande dominio del reale." }
+    4: { etichetta: Cardinale,    descrizione: "Uno dei perni della realtà." }
+    5: { etichetta: Universale,   descrizione: "Senza di essa il cosmo non sta in piedi." }
+- id: stabilita
+  nome: Stabilità
+  descrizione: Quanto la legge è eterna o sta cedendo.
+  valori:
+    1: { etichetta: Eterna,      descrizione: "Immutabile da sempre e per sempre." }
+    2: { etichetta: Salda,       descrizione: "Stabile, con derive lentissime." }
+    3: { etichetta: Vacillante,  descrizione: "Mostra crepe; può indebolirsi." }
+    4: { etichetta: Erosa,       descrizione: "Già intaccata; il suo effetto sfuma a tratti." }
+    5: { etichetta: Morente,     descrizione: "In dissoluzione; cede a un nuovo ordine." }
+- id: manifestazione
+  nome: Manifestazione
+  descrizione: Quanto la legge è percepibile nel mondo.
+  valori:
+    1: { etichetta: Astratta,  descrizione: "Pura legge, impercettibile." }
+    2: { etichetta: Inferita,  descrizione: "Si deduce dai suoi effetti." }
+    3: { etichetta: Segnata,   descrizione: "Lascia presagi e fenomeni leggibili." }
+    4: { etichetta: Palese,    descrizione: "Evidente, innegabile a tutti." }
+    5: { etichetta: Incarnata, descrizione: "Ha un volto o una voce nel mondo." }
