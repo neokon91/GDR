@@ -29,7 +29,9 @@ Pronto per **beta chiuso**. Per la beta aperta restano i punti PM qui sotto.
   **integrate nella timeline globale** accanto agli eventi),
   **alberi evolutivi** (progressioni lore ramificate), **Fronti reattivi al grafo** (econ/geo **e cosmico**: un
   principio cosmico-Fronte è spinto dai suoi siti di manifestazione in crisi e dai dipendenti
-  che vacillano → la metafisica preme sul tavolo), tema natale, strato cosmico con assi.
+  che vacillano → la metafisica preme sul tavolo) + cruscotto **Stato del Mondo** (`renderStatoMondo`,
+  dashboard Fronti) che ordina tutti i Fronti per imminenza = clock + spinte dal grafo, per la prep
+  di sessione, tema natale, strato cosmico con assi.
 - **Sistema 5.5e / DM** — PG SRD-completo (1º liv) + **level-up 2-20**; statblock 5.5e (+5e);
   **loop di sessione 2024** (Esaurimento, Dadi Vita, riposo breve/lungo, concentrazione 🌀);
   incantesimi inline, condizioni, maestrie armi; **encounter** budget XP 2024 + auto-riscrittura

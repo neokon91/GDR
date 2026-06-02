@@ -479,6 +479,15 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 ```
 {%- endmacro %}
 
+{# Stato del Mondo (JS Engine, dashboard Fronti): tutti i Fronti (clock_dim)
+   ordinati per imminenza = clock + spinte dal grafo. Espone la pressione del grafo
+   a colpo d'occhio per la prep di sessione. Logica in views.renderStatoMondo. #}
+{% macro stato_mondo() -%}
+```js-engine
+return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderStatoMondo");
+```
+{%- endmacro %}
+
 {# Tema natale (personalità psico-astrale, #9): scelto un segno si deriva
    archetipo/elemento/MBTI/ombra; l'arcano è opzionale; l'allineamento D&D resta
    accanto. Profilo per i personaggi (soprattutto PNG). Logica in views.renderTemaNatale. #}

@@ -1586,6 +1586,36 @@ def test_render_pressioni_cosmico(tmp_path):
 
 
 @pytest.mark.skipif(not shutil.which("node"), reason="node assente")
+def test_render_stato_mondo(tmp_path):
+    """views.renderStatoMondo (cruscotto Fronti): i Fronti (clock_dim) ordinati per
+    imminenza (clock + spinte dal grafo); intestazione coi conteggi; non-fronti esclusi."""
+    harness = tmp_path / "stato.js"
+    harness.write_text(
+        'const fs=require("fs");'
+        f'const src=fs.readFileSync({json.dumps(str(render.JS_DIR / "views.js"))},"utf8");'
+        'const m={exports:{}};new Function("module","exports",src)(m,m.exports);'
+        'const L=(n)=>({path:n+".md"});'
+        'const mk=(name,categoria,ex)=>Object.assign({file:{name,path:name+".md"},categoria,stato:"pronto"},ex);'
+        'const all=[mk("Sale","risorsa",{pressione:8,controllata_da:L("Capitolo")}),'
+        ' mk("Capitolo","fazione",{}),'
+        ' mk("Forte","luogo",{clock_dim:4,clock:1,dipende_da:[L("Sale")]}),'   # 1 spinta → score 0.375
+        ' mk("Setta","fazione",{clock_dim:4,clock:3}),'                        # 0 spinte, 3/4 → score 0.75
+        ' mk("Quieto","luogo",{})];'                                          # niente clock → non è un fronte
+        'const dv={pages:()=>({where:(fn)=>({array:()=>all.filter(fn)})}),'
+        ' page:(l)=>{const p=l&&l.path?l.path:l;return all.find(x=>x.file&&(x.file.path===p||x.file.name===p))||null;}};'
+        'm.exports.renderStatoMondo({},dv).then(out=>process.stdout.write(out));',
+        encoding="utf-8")
+    res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
+    assert res.returncode == 0, res.stderr
+    out = res.stdout
+    assert "**2 fronti**" in out                             # Forte + Setta (Quieto/Sale/Capitolo non sono fronti)
+    assert out.index("[[Setta]]") < out.index("[[Forte]]")   # Setta (0.75) prima di Forte (0.375)
+    assert "⛓ Dipendi da [[Sale]]" in out                    # la spinta dal grafo di Forte è mostrata
+    assert "3/4" in out and "1/4" in out                     # stato del clock per fronte
+    assert "Quieto" not in out                               # senza clock → escluso
+
+
+@pytest.mark.skipif(not shutil.which("node"), reason="node assente")
 def test_coerenza_tematica(tmp_path):
     """views.confrontoAssi + coerenzaNote: confronto su assi con lo STESSO id e note
     (contrasto forte ≥3 = tensione; rivale-specchio = tutti gli assi ≤1)."""

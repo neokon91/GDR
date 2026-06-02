@@ -982,9 +982,13 @@ function cosmicPush(o, role) {
 // manifestazione in crisi + dipendenti (inlink) che vacillano. Rende VISIBILE come
 // il mondo preme sul fronte — il GM avanza col bottone (meta_actions.avanza_fronte).
 // "" se non è un fronte; tip se nessuna spinta. Ritorna markdown (i [[link]] rendono).
-async function renderPressioni(app, dv, page) {
-  if (!dv || !page || !page.file) return "";
-  if (page.clock_dim == null) return "";
+// Le SPINTE dal grafo su un Fronte (entità con clock_dim): grafo economico/
+// geografico (dipendenze contese, produzione contesa, rotte a rischio, rivali in
+// ascesa) + grafo cosmico (manifestazioni in crisi + dipendenti che vacillano).
+// Ritorna l'array di righe-spinta (vuoto = stabile). Sorgente UNICA, riusata da
+// renderPressioni (callout per-nota) e renderStatoMondo (cruscotto globale).
+async function spinteFronte(app, dv, page) {
+  if (!dv || !page || !page.file || page.clock_dim == null) return [];
   const hot = (p) => (Number(p && p.pressione) || 0);
   const out = [];
   for (const link of asArray(page.dipende_da)) {
@@ -1019,12 +1023,56 @@ async function renderPressioni(app, dv, page) {
       for (const link of asArray(page[fld])) add(resolve(dv, link), "Si manifesta in");
     for (const link of asArray(page.file.inlinks)) add(resolve(dv, link), "Dipende da te");
   }
+  return out;
+}
+
+async function renderPressioni(app, dv, page) {
+  if (!dv || !page || !page.file) return "";
+  if (page.clock_dim == null) return "";
+  const out = await spinteFronte(app, dv, page);
   if (!out.length) {
     return "> [!tip] Fronte stabile\n> Nessuna spinta dal grafo per ora: il clock avanza solo per le tue mosse.";
   }
   return "> [!danger]- ⚡ Spinte dal grafo (il mondo preme su questo fronte)\n"
     + out.map((r) => "> - " + r).join("\n")
     + "\n>\n> Una spinta giustifica un segmento: premi **Avanza fronte** o gioca la mossa.";
+}
+
+// Cruscotto "Stato del Mondo": TUTTI i Fronti (clock_dim) ordinati per IMMINENZA =
+// riempimento del clock + numero di spinte dal grafo che lo premono. Espone il
+// differenziatore (la pressione del grafo) a colpo d'occhio per la prep di sessione,
+// invece di doverla scoprire una-nota-alla-volta. Ritorna markdown.
+async function renderStatoMondo(app, dv) {
+  if (!dv) return "*Dataview non attivo.*";
+  const fronti = dv.pages()
+    .where((p) => p && p.clock_dim != null && Number(p.clock_dim) > 0 && text(p.stato) !== "archiviata")
+    .array();
+  if (!fronti.length) {
+    return "> [!info] Nessun fronte\n> Imposta un **clock** dal tab *Al tavolo* di una nota per accendere un fronte.";
+  }
+  const rows = [];
+  for (const f of fronti) {
+    const dim = Math.max(1, Math.floor(Number(f.clock_dim) || 0));
+    const cur = Math.max(0, Math.min(dim, Math.floor(Number(f.clock) || 0)));
+    const spinte = await spinteFronte(app, dv, f);
+    // Imminenza: riempimento + peso delle spinte (ogni spinta ≈ mezzo segmento).
+    const score = cur / dim + (spinte.length * 0.5) / dim;
+    rows.push({ f, dim, cur, spinte, score });
+  }
+  rows.sort((a, b) => b.score - a.score || b.cur / b.dim - a.cur / a.dim);
+  const blocchi = rows.map(({ f, dim, cur, spinte }) => {
+    const pieno = cur >= dim;
+    const icona = pieno ? "🔴" : (spinte.length || cur >= dim - 1) ? "🟠" : "🟢";
+    const stato = pieno ? "PIENO — scatena la conseguenza" : (spinte.length || cur >= dim - 1) ? "sta per scattare" : "stabile";
+    const next = text(f.prossima_mossa) ? ` · *${text(f.prossima_mossa)}*` : "";
+    let blocco = `> ${icona} **${noteLink(f)}** ${cur}/${dim} — ${stato}${next}`;
+    for (const s of spinte.slice(0, 2)) blocco += `\n> - ${s}`;
+    return blocco;
+  });
+  const attivi = rows.filter((r) => r.spinte.length || r.cur >= r.dim - 1).length;
+  return `> [!warning] ⚡ Stato del Mondo — **${rows.length} fronti** · ${attivi} sotto pressione\n`
+    + "> In ordine di imminenza (clock + spinte dal grafo):\n>\n"
+    + blocchi.join("\n>\n");
 }
 
 // --- Catena causale (timeline causale) ---------------------------------------
@@ -1177,7 +1225,7 @@ module.exports = {
   renderTappe, parseTappa,
   renderCausalita,
   renderMap, renderDintorni, renderViaggio, parseCoord,
-  renderPressioni, cosmicPush,
+  renderPressioni, cosmicPush, spinteFronte, renderStatoMondo,
   renderCondizioni, condizioniMarkdown,
   renderMaestrie, maestrieMarkdown,
   renderAttacchi, attaccoArma, abilitaArma, danniArma, nomeArma,

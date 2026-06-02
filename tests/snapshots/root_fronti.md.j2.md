@@ -5,6 +5,10 @@
 > accadrà. Quando un clock è **pieno**, apri il fronte e premi *Scatena conseguenza*
 > (crea l'evento e azzera il clock). Imposti un clock dal tab *Al tavolo* di una nota.
 
+```js-engine
+return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderStatoMondo");
+```
+
 ## 🔴 Pieni — pronti a scatenare
 ```dataview
 table without id file.link as Fronte, (clock + "/" + clock_dim) as Clock, conseguenza as Conseguenza, conseguenza_su as Bersaglio

@@ -1,12 +1,15 @@
-{# Dashboard "Fronti": tutti gli orologi (clock) attivi a colpo d'occhio + le
-   conseguenze già scatenate (storia). Auto-generata (Dataview), sola lettura.
-   Si rigenera a ogni build; interroga il vault a runtime. #}
+{# Dashboard "Fronti": Stato del Mondo (Fronti ordinati per imminenza = clock +
+   spinte dal grafo, views.renderStatoMondo) in cima, poi le tabelle Dataview di
+   dettaglio + le conseguenze scatenate. Auto-generata, sola lettura. #}
+{% import '_macros.j2' as m with context %}
 # ⏳ Fronti — orologi attivi
 
 > [!info] A cosa serve
 > Tutti i fronti con un **clock** in corso: quanto sono vicini a scatenarsi e cosa
 > accadrà. Quando un clock è **pieno**, apri il fronte e premi *Scatena conseguenza*
 > (crea l'evento e azzera il clock). Imposti un clock dal tab *Al tavolo* di una nota.
+
+{{ m.stato_mondo() }}
 
 ## 🔴 Pieni — pronti a scatenare
 ```dataview
