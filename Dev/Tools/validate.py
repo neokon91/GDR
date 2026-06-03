@@ -319,14 +319,13 @@ def validate_aux_yaml() -> list[str]:
         for k in ("forme", "sintagma", "nucleo_pl", "aggettivo"):
             if not faz.get(k):
                 errors.append(f"generatori: fazioni.{k} assente")
-        # Spunti per il tavolo (png/taverna/gancio): ogni sezione ha `forme`, e ogni
-        # placeholder {chiave} usato (nelle forme o nelle liste) deve avere una lista
-        # omonima — eccetto i terminali {nome}/{luogo}. Cattura i refusi (lista mancante
-        # → output silenziosamente vuoto), nello spirito anti-drift del resto del check.
-        for sec in ("png", "taverna", "gancio"):
-            block = gen.get(sec) or {}
-            if not block.get("forme"):
-                errors.append(f"generatori: {sec}.forme assente")
+        # Spunti per il tavolo: ogni sezione-generatore (dict con `forme`, oltre a
+        # fazioni già validata sopra) — ogni placeholder {chiave} usato (nelle forme o
+        # nelle liste) deve avere una lista omonima nella sezione, eccetto i terminali
+        # {nome}/{luogo}. Cattura i refusi (lista mancante → output silenziosamente
+        # vuoto). Auto-rileva le sezioni: aggiungere un generatore non tocca il check.
+        for sec, block in gen.items():
+            if sec == "fazioni" or not (isinstance(block, dict) and block.get("forme")):
                 continue
             testo = " ".join(str(x) for v in block.values()
                               for x in (v if isinstance(v, list) else [v]))

@@ -1305,7 +1305,8 @@ def test_generatori_catalog():
     assert g["toponimi"]["prefissi"] and g["toponimi"]["suffissi"]
     faz = g["fazioni"]
     assert faz["forme"] and faz["sintagma"] and faz["nucleo_pl"] and faz["aggettivo"]
-    for sec in ("png", "taverna", "gancio"):   # spunti per il tavolo (Stage 1)
+    for sec in ("png", "taverna", "gancio",                          # spunti Stage 1
+                "diceria", "bottino", "insediamento", "oggetto"):    # spunti Stage 2
         assert g[sec]["forme"], f"{sec}.forme assente"
     decl = (render.load_yaml("plugins.yaml").get("metabind_inputs") or {}).get("stile_nomi", "")
     assert set(_re.findall(r"option\(\s*([a-z_]+)", decl)) == set(stili)
@@ -1351,13 +1352,13 @@ def test_genera_spunti_e2e(tmp_path):
         f'const gen={json.dumps(gen, ensure_ascii=False)};'
         'let s=11;const rng=()=>(s=(s*1103515245+12345)&0x7fffffff)/0x7fffffff;'
         'const st=Object.keys(gen.stili)[0];const out={};'
-        'for(const tipo of ["png","taverna","gancio"]){out[tipo]=genera.generaLista(gen,tipo,st,6,rng);}'
+        'for(const tipo of ["png","taverna","gancio","diceria","bottino","insediamento","oggetto"]){out[tipo]=genera.generaLista(gen,tipo,st,6,rng);}'
         'process.stdout.write(JSON.stringify(out));',
         encoding="utf-8")
     res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
     assert res.returncode == 0, res.stderr
     out = json.loads(res.stdout)
-    for tipo in ("png", "taverna", "gancio"):
+    for tipo in ("png", "taverna", "gancio", "diceria", "bottino", "insediamento", "oggetto"):
         lst = out[tipo]
         assert len(lst) >= 4, f"{tipo}: troppe poche opzioni distinte: {lst}"
         for v in lst:

@@ -89,6 +89,10 @@ const GENERATORI = {
   png: { fn: (g, s, r) => generaDaForme(g, "png", s, r), label: "PNG (schizzo)" },
   taverna: { fn: (g, s, r) => generaDaForme(g, "taverna", s, r), label: "Taverna / locanda" },
   gancio: { fn: (g, s, r) => generaDaForme(g, "gancio", s, r), label: "Gancio di trama" },
+  diceria: { fn: (g, s, r) => generaDaForme(g, "diceria", s, r), label: "Diceria / voce" },
+  bottino: { fn: (g, s, r) => generaDaForme(g, "bottino", s, r), label: "Bottino / tesoro" },
+  insediamento: { fn: (g, s, r) => generaDaForme(g, "insediamento", s, r), label: "Insediamento" },
+  oggetto: { fn: (g, s, r) => generaDaForme(g, "oggetto", s, r), label: "Oggetto / curiosità" },
 };
 
 // N opzioni distinte (per quanto possibile) di un tipo, dato lo stile.

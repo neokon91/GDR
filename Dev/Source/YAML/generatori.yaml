@@ -172,3 +172,53 @@ gancio:
   azione: ["firmare un patto che non capisce", "vendere ciò che non gli appartiene", "accusare un innocente per salvarsi", "lasciare la città con tutto il tesoro del tempio"]
   twist: ["il colpevole è qualcuno di cui ti fidi", "è una trappola tesa proprio a voi", "c'entra un culto che si credeva estinto", "la vittima mente su tutto", "la ricompensa promessa non esiste", "chi vi assume è peggio di chi cacciate"]
   posta: ["ne esce ricco — o non ne esce", "si fa un nemico potente", "scopre una verità che pesa", "guadagna un debito di sangue"]
+
+# === Spunti per il tavolo (Stage 2) ========================================
+
+# Diceria: una voce che gira (può essere vera o falsa) — atmosfera e mezzi-ganci.
+diceria:
+  forme:
+    - "Dicono che {soggetto} {fatto}."
+    - "Al mercato sussurrano che {fatto2}."
+    - "{soggetto} giura di aver visto {visione} verso {luogo}."
+    - "C'è chi scommette che {predizione}."
+  soggetto: ["il vecchio mugnaio", "la figlia del borgomastro", "un mercante di passaggio", "il prete", "la banda dei moli", "il barone", "una strega del bosco"]
+  fatto: ["nasconda oro sotto il pavimento", "abbia stretto un patto a mezzanotte", "non sia morto come dicono", "venda merce rubata", "parli con i morti", "stia per fuggire con la cassa"]
+  fatto2: ["le tasse raddoppieranno alla luna nuova", "qualcuno avvelena i pozzi", "i lupi quest'anno non sono lupi", "il ponte crollerà al primo carro pesante", "sparisce gente e nessuno indaga"]
+  visione: ["luci nel cimitero", "una figura incappucciata sui tetti", "occhi nel bosco che non erano d'animale", "una nave senza equipaggio", "fuoco che bruciava verde"]
+  predizione: ["l'inverno arriverà in anticipo", "il signore non vedrà la primavera", "tornerà chi se n'era andato", "il raccolto marcirà nei granai"]
+
+# Bottino: un colpo d'occhio su cosa si trova (monete + oggetto + curiosità). A
+# tema, non legato alle tabelle SRD (quello è uno Stage successivo).
+bottino:
+  forme:
+    - "{monete}; {oggetto_b}"
+    - "{oggetto_b}, e {curiosita}"
+    - "{monete}, e {curiosita}"
+  monete: ["una manciata di rame", "{n} monete d'argento", "una borsa pesante d'oro", "monete straniere fuori corso", "argento annerito dal tempo", "poche monete e molti pagherò"]
+  n: [12, 20, 35, 50, 80, 120]
+  oggetto_b: ["un pugnale dal pomo d'osso", "un anello con un sigillo sconosciuto", "una fiala di liquido ambrato", "una mappa strappata a metà", "un libro mastro cifrato", "una lama intaccata ma ben bilanciata", "uno scrigno chiuso senza chiave", "una collana di denti"]
+  curiosita: ["una lettera mai spedita", "il ritratto di qualcuno che riconosci", "un dente troppo grande per essere umano", "una chiave che non apre nulla di noto", "un dado truccato", "una ciocca di capelli con un nastro nero", "un occhio di vetro"]
+
+# Insediamento: schizzo di un luogo abitato (taglia + economia + tratto + chi
+# comanda + problema). {luogo} = toponimo a tema.
+insediamento:
+  forme:
+    - "{luogo} — {taglia_i}, vive di {economia}; {tratto_i}."
+    - "{luogo}, {taglia_i}: comanda {chi_comanda}, ma {problema_i}."
+  taglia_i: ["un pugno di case", "un villaggio di palafitte", "un borgo murato", "una città di mercanti", "un avamposto di frontiera", "un porto affollato"]
+  economia: ["pesca e sale", "miniere di ferro", "pastorizia", "commercio di passaggio", "legname e pece", "vino e ulivi", "contrabbando, ufficiosamente"]
+  tratto_i: ["le porte si chiudono al tramonto", "ogni casa ha un'edicola votiva", "i forestieri pagano il doppio", "una nebbia non se ne va mai del tutto", "campane a ogni ora", "tutti si conoscono, e si sorvegliano"]
+  chi_comanda: ["un borgomastro avido", "un consiglio di anziani", "una vedova di ferro", "un capitano della corona, assente", "la gilda dei mercanti", "nessuno, ufficialmente"]
+  problema_i: ["le tasse strozzano i contadini", "qualcosa ruba il bestiame di notte", "due famiglie sono in faida", "il pozzo si è guastato", "una setta cresce nell'ombra", "i banditi controllano la strada"]
+
+# Oggetto/curiosità: un oggetto evocativo (materiale + forma + dettaglio/storia).
+# Non è un oggetto magico con statistiche — è un gancio in forma di cosa.
+oggetto:
+  forme:
+    - "{forma_o} {materiale} — {dettaglio_o}."
+    - "{forma_o} {materiale}; {storia_o}."
+  materiale: ["d'ottone annerito", "di legno scuro intagliato", "d'osso levigato", "di ferro freddo", "di vetro affumicato", "d'argento ossidato", "di giada incrinata", "di cuoio consunto"]
+  forma_o: ["un medaglione", "una chiave", "un carillon", "un pugnale cerimoniale", "un anello", "una maschera", "un libricino", "una bambola", "un compasso", "una fiala"]
+  dettaglio_o: ["caldo al tatto senza motivo", "inciso con un nome cancellato", "che ronza vicino alla magia", "con dentro qualcosa che si muove", "che indica sempre la stessa direzione", "freddo come ghiaccio"]
+  storia_o: ["dicono porti sfortuna a chi mente", "apparteneva a un morto famoso", "nessuno ricorda chi l'ha fatto", "vale più di quanto sembri", "lo cercano in molti", "fu rubato a un tempio"]
