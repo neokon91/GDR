@@ -1,7 +1,7 @@
 <% await tp.user.crea_albero_evolutivo(tp) %>
 # `=this.nome`
 
-> [!infobox] Albero evolutivo
+> [!infobox|albero_evolutivo] Albero evolutivo
 > | | |
 > |:--|:--|
 > | **Tipo** | `VIEW[{tipo} ?? "—"]` |
@@ -10,7 +10,7 @@
 > | **Stato** | `INPUT[stato][:stato]` |
 
 ````tabs
---- Lore
+--- 📖 Lore
 
 > [!abstract] Scheda
 > Portata: `INPUT[portata][:portata]`
@@ -22,7 +22,7 @@
 > `INPUT[textArea:accesso]`
 
 
---- Al tavolo
+--- 🎲 Al tavolo
 
 > [!tavolo] Uso al tavolo
 > `INPUT[testo_area][:uso_al_tavolo]`
@@ -52,12 +52,12 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > [!tip] Avanza / scatena
 > Una spinta dal grafo o una mossa? `BUTTON[avanza-fronte]` (clock +1).
 > Clock pieno? `BUTTON[scatena-conseguenza]` — crea l'evento-conseguenza collegato e azzera il clock.
---- Albero
+--- 🌳 Albero
 
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderAlbero");
 ```
---- Collegamenti
+--- 🔗 Collegamenti
 
 > [!example] Relazioni
 > **Tradizione magica**: `INPUT[suggester(optionQuery("Mondi/Magia"), useLinks(partial), allowOther):sistema_magico]`
@@ -78,7 +78,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderConnessioni");
 ```
---- Vista
+--- 👁 Vista
 
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderEntityPanel");

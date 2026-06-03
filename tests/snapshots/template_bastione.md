@@ -1,7 +1,7 @@
 <% await tp.user.crea_bastione(tp) %>
 # `=this.nome`
 
-> [!infobox] 🏰 Bastione
+> [!infobox|bastione] 🏰 Bastione
 > `INPUT[ritratto][:ritratto]`
 >
 > | | |
@@ -13,13 +13,13 @@
 > | **Stato** | `INPUT[stato][:stato]` |
 
 ````tabs
---- Scheda
+--- 📋 Scheda
 
 > [!abstract] Scheda
 > Livello: `INPUT[number:livello]`
 > Difensori: `INPUT[number:difensori]`
 
---- Lore
+--- 📖 Lore
 
 > [!note]- Descrizione
 > Cosa è, com'è, perché conta al tavolo.
@@ -52,7 +52,7 @@
 > **Mantenere** *(Maintain)* — la struttura rende oro / si autosostiene.
 > [!tip] Turno di bastione
 > Registra un turno (7 giorni) nel *Registro dei turni*: `BUTTON[turno-bastione]`
---- Collegamenti
+--- 🔗 Collegamenti
 
 > [!example] Relazioni
 > **Proprietario**: `INPUT[suggester(optionQuery("Mondi/Personaggi"), useLinks(partial), allowOther):proprietario]`
@@ -69,7 +69,7 @@
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderConnessioni");
 ```
---- Vista
+--- 👁 Vista
 
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderEntityPanel");

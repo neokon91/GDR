@@ -1,7 +1,7 @@
 <% await tp.user.crea_sottoclasse(tp) %>
 # `=this.nome`
 
-> [!infobox] 🎓 Sottoclasse
+> [!infobox|sottoclasse] 🎓 Sottoclasse
 > | | |
 > |:--|:--|
 > | **Tipo** | `VIEW[{tipo} ?? "—"]` |
@@ -9,7 +9,7 @@
 > | **Stato** | `INPUT[stato][:stato]` |
 
 ````tabs
---- Privilegi
+--- 🎓 Privilegi
 
 I privilegi di sottoclasse si ottengono ai livelli **3 / 6 / 10 / 14**.
 
@@ -17,7 +17,7 @@ I privilegi di sottoclasse si ottengono ai livelli **3 / 6 / 10 / 14**.
 > `INPUT[textArea:privilegi]`
 
 
---- Collegamenti
+--- 🔗 Collegamenti
 
 > [!example] Relazioni
 > **Classe**: `INPUT[suggester(optionQuery("Mondi/Classi"), useLinks(partial), allowOther):classe]`
@@ -33,7 +33,7 @@ I privilegi di sottoclasse si ottengono ai livelli **3 / 6 / 10 / 14**.
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderConnessioni");
 ```
---- Vista
+--- 👁 Vista
 
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderEntityPanel");

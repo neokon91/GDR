@@ -1,7 +1,7 @@
 <% await tp.user.crea_fazione(tp) %>
 # `=this.nome`
 
-> [!infobox] ⚔️ Fazione
+> [!infobox|fazione] ⚔️ Fazione
 > `INPUT[ritratto][:ritratto]`
 >
 > | | |
@@ -28,7 +28,7 @@
 > **profetica** — Fondata su visioni, cicli cosmici o profezie; agisce in funzione di un evento atteso.
 
 ````tabs
---- Lore
+--- 📖 Lore
 
 > [!abstract] Scheda
 > Portata: `INPUT[portata][:portata]`
@@ -67,7 +67,7 @@
 > `INPUT[textArea:segreto]`
 
 
---- Al tavolo
+--- 🎲 Al tavolo
 
 > [!tavolo] Uso al tavolo
 > `INPUT[testo_area][:uso_al_tavolo]`
@@ -97,7 +97,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > [!tip] Avanza / scatena
 > Una spinta dal grafo o una mossa? `BUTTON[avanza-fronte]` (clock +1).
 > Clock pieno? `BUTTON[scatena-conseguenza]` — crea l'evento-conseguenza collegato e azzera il clock.
---- Carattere
+--- 📊 Carattere
 
 > [!abstract] Carattere
 > **Struttura** `INPUT[slider(minValue(1), maxValue(5), addLabels):struttura]` → `VIEW[{struttura} == 5 ? "5 · Piramidale" : ({struttura} == 4 ? "4 · Gerarchica" : ({struttura} == 3 ? "3 · Semi-gerarchica" : ({struttura} == 2 ? "2 · Consiliare" : ({struttura} == 1 ? "1 · Orizzontale" : ("—")))))]`
@@ -188,12 +188,12 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderCoerenza");
 ```
 
---- Cronologia
+--- 🕰 Cronologia
 
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderTappe");
 ```
---- Collegamenti
+--- 🔗 Collegamenti
 
 > [!example] Relazioni
 > **Sede**: `INPUT[suggester(optionQuery("Mondi/Luoghi"), useLinks(partial), allowOther):sede]`
@@ -217,7 +217,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderConnessioni");
 ```
---- Vista
+--- 👁 Vista
 
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderEntityPanel");

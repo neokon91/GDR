@@ -1,7 +1,7 @@
 <% await tp.user.crea_incantesimo(tp) %>
 # `=this.nome`
 
-> [!infobox] ✨ Incantesimo
+> [!infobox|incantesimo] ✨ Incantesimo
 > | | |
 > |:--|:--|
 > | **Tipo** | `VIEW[{tipo} ?? "—"]` |
@@ -15,7 +15,7 @@
 > | **Stato** | `INPUT[stato][:stato]` |
 
 ````tabs
---- Meccanica
+--- ⚙ Meccanica
 
 > [!abstract] Scheda
 > Livello: `INPUT[number:livello]`
@@ -25,7 +25,7 @@
 > Durata: `INPUT[text:durata]`
 > Classi: `INPUT[text:classi]`
 
---- Effetto
+--- ✨ Effetto
 
 > [!note] Effetto
 > `INPUT[textArea:effetto]`
@@ -34,7 +34,7 @@
 > `INPUT[textArea:a_livello_superiore]`
 
 
---- Collegamenti
+--- 🔗 Collegamenti
 
 > [!example] Relazioni
 > **Sistema magico**: `INPUT[suggester(optionQuery("Mondi/Magia"), useLinks(partial), allowOther):sistema_magico]`
@@ -50,7 +50,7 @@
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderConnessioni");
 ```
---- Vista
+--- 👁 Vista
 
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderEntityPanel");

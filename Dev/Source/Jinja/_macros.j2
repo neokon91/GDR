@@ -63,7 +63,7 @@
 {%- set icon = plugins.get('folder_icons', {}).get(template.category, '') -%}
 {%- set cat = core.get('categories', {}).get(template.category, {}) -%}
 {%- set scheda = core.get('scheda', {}).get(template.category, []) -%}
-> [!infobox] {{ (icon ~ ' ') if icon else '' }}{{ template.title }}
+> [!infobox|{{ template.category }}] {{ (icon ~ ' ') if icon else '' }}{{ template.title }}
 {% if template.category in core.get('ritratto_categorie', []) %}
 > {{ field('ritratto', label=false) }}
 >

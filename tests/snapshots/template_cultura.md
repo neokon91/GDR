@@ -1,7 +1,7 @@
 <% await tp.user.crea_cultura(tp) %>
 # `=this.nome`
 
-> [!infobox] 🎏 Cultura
+> [!infobox|cultura] 🎏 Cultura
 > `INPUT[ritratto][:ritratto]`
 >
 > | | |
@@ -27,7 +27,7 @@
 > **nomadica** — Del movimento, dell'adattamento e della non-fissazione.
 
 ````tabs
---- Lore
+--- 📖 Lore
 
 > [!abstract] Scheda
 > Portata: `INPUT[portata][:portata]`
@@ -53,7 +53,7 @@
 > `INPUT[textArea:tensione]`
 
 
---- Al tavolo
+--- 🎲 Al tavolo
 
 > [!tavolo] Uso al tavolo
 > `INPUT[testo_area][:uso_al_tavolo]`
@@ -83,7 +83,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > [!tip] Avanza / scatena
 > Una spinta dal grafo o una mossa? `BUTTON[avanza-fronte]` (clock +1).
 > Clock pieno? `BUTTON[scatena-conseguenza]` — crea l'evento-conseguenza collegato e azzera il clock.
---- Carattere
+--- 📊 Carattere
 
 > [!abstract] Carattere
 > **Valori Dominanti** `INPUT[slider(minValue(1), maxValue(5), addLabels):valori_dominanti]` → `VIEW[{valori_dominanti} == 5 ? "5 · Potere" : ({valori_dominanti} == 4 ? "4 · Conoscenza" : ({valori_dominanti} == 3 ? "3 · Onore" : ({valori_dominanti} == 2 ? "2 · Armonia" : ({valori_dominanti} == 1 ? "1 · Sopravvivenza" : ("—")))))]`
@@ -155,12 +155,12 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "cultura", component);
 ```
 
---- Cronologia
+--- 🕰 Cronologia
 
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderTappe");
 ```
---- Collegamenti
+--- 🔗 Collegamenti
 
 > [!example] Relazioni
 > **Regioni**: `INPUT[inlineListSuggester(optionQuery("Mondi/Luoghi"), useLinks(partial), allowOther):regioni]`
@@ -181,7 +181,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderConnessioni");
 ```
---- Vista
+--- 👁 Vista
 
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderEntityPanel");

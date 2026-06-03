@@ -1,7 +1,7 @@
 <% await tp.user.crea_culto(tp) %>
 # `=this.nome`
 
-> [!infobox] 🕯️ Culto
+> [!infobox|culto] 🕯️ Culto
 > `INPUT[ritratto][:ritratto]`
 >
 > | | |
@@ -12,7 +12,7 @@
 > | **Stato** | `INPUT[stato][:stato]` |
 
 ````tabs
---- Lore
+--- 📖 Lore
 
 > [!abstract] Scheda
 > Portata: `INPUT[portata][:portata]`
@@ -36,7 +36,7 @@
 > `INPUT[textArea:segreto]`
 
 
---- Al tavolo
+--- 🎲 Al tavolo
 
 > [!tavolo] Uso al tavolo
 > `INPUT[testo_area][:uso_al_tavolo]`
@@ -66,7 +66,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > [!tip] Avanza / scatena
 > Una spinta dal grafo o una mossa? `BUTTON[avanza-fronte]` (clock +1).
 > Clock pieno? `BUTTON[scatena-conseguenza]` — crea l'evento-conseguenza collegato e azzera il clock.
---- Carattere
+--- 📊 Carattere
 
 > [!abstract] Carattere
 > **Struttura** `INPUT[slider(minValue(1), maxValue(5), addLabels):struttura]` → `VIEW[{struttura} == 5 ? "5 · Dogmatico" : ({struttura} == 4 ? "4 · Gerarchico" : ({struttura} == 3 ? "3 · Semi-istituzionale" : ({struttura} == 2 ? "2 · Comunitario" : ({struttura} == 1 ? "1 · Anarchico" : ("—")))))]`
@@ -149,12 +149,12 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderCoerenza");
 ```
 
---- Cronologia
+--- 🕰 Cronologia
 
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderTappe");
 ```
---- Collegamenti
+--- 🔗 Collegamenti
 
 > [!example] Relazioni
 > **Divinità venerate**: `INPUT[inlineListSuggester(optionQuery("Mondi/Divinita"), useLinks(partial), allowOther):divinita]`
@@ -176,7 +176,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderConnessioni");
 ```
---- Vista
+--- 👁 Vista
 
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderEntityPanel");

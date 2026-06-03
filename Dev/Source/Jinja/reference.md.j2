@@ -9,11 +9,11 @@
 {% endif %}
 ````tabs
 {% if core.get('scheda', {}).get(template.category) %}
---- Scheda
+--- 📋 Scheda
 
 {{ m.scheda(template.category) }}
 {% endif %}
---- Lore
+--- 📖 Lore
 
 > [!note]- Descrizione
 > Cosa è, com'è, perché conta al tavolo.
@@ -25,15 +25,15 @@
 > Registra un turno (7 giorni) nel *Registro dei turni*: `BUTTON[turno-bastione]`
 {% endif %}
 {% if core.get('assi_tematici', {}).get(template.category) %}
---- Carattere
+--- 📊 Carattere
 
 {{ m.carattere(template.category) }}
 {% endif %}
---- Collegamenti
+--- 🔗 Collegamenti
 
 {{ m.relazioni(template.category) }}
 {{ m.collegamenti(with_sessioni=false) }}
---- Vista
+--- 👁 Vista
 
 {{ m.vista() }}
 ````

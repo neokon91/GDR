@@ -1,7 +1,7 @@
 <% await tp.user.crea_dominio(tp) %>
 # `=this.nome`
 
-> [!infobox] 🌐 Dominio
+> [!infobox|dominio] 🌐 Dominio
 > | | |
 > |:--|:--|
 > | **Tipo** | `VIEW[{tipo} ?? "—"]` |
@@ -22,7 +22,7 @@
 > **fato** — La sfera del destino, del tempo e degli eventi predeterminati.
 
 ````tabs
---- Lore
+--- 📖 Lore
 
 
 > [!note] Natura
@@ -38,7 +38,7 @@
 > `INPUT[textArea:manifestazioni]`
 
 
---- Al tavolo
+--- 🎲 Al tavolo
 
 > [!tavolo] Uso al tavolo
 > `INPUT[testo_area][:uso_al_tavolo]`
@@ -68,7 +68,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > [!tip] Avanza / scatena
 > Una spinta dal grafo o una mossa? `BUTTON[avanza-fronte]` (clock +1).
 > Clock pieno? `BUTTON[scatena-conseguenza]` — crea l'evento-conseguenza collegato e azzera il clock.
---- Carattere
+--- 📊 Carattere
 
 > [!abstract] Carattere
 > **Ampiezza** `INPUT[slider(minValue(1), maxValue(5), addLabels):ampiezza]` → `VIEW[{ampiezza} == 5 ? "5 · Totalità" : ({ampiezza} == 4 ? "4 · Pilastro" : ({ampiezza} == 3 ? "3 · Sfera" : ({ampiezza} == 2 ? "2 · Settore" : ({ampiezza} == 1 ? "1 · Aspetto" : ("—")))))]`
@@ -116,7 +116,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "dominio", component);
 ```
 
---- Collegamenti
+--- 🔗 Collegamenti
 
 > [!example] Relazioni
 > **Leggi fondamentali**: `INPUT[inlineListSuggester(optionQuery("Mondi/Leggi"), useLinks(partial), allowOther):leggi]`
@@ -138,7 +138,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "dom
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderConnessioni");
 ```
---- Vista
+--- 👁 Vista
 
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderEntityPanel");

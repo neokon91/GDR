@@ -1,7 +1,7 @@
 <% await tp.user.crea_luogo(tp) %>
 # `=this.nome`
 
-> [!infobox] 🗺️ Luogo
+> [!infobox|luogo] 🗺️ Luogo
 > `INPUT[ritratto][:ritratto]`
 >
 > | | |
@@ -26,7 +26,7 @@
 > **simbolico** — Non ha senso fisico: rappresenta concetti, leggi o archetipi. Esiste per significato.
 
 ````tabs
---- Lore
+--- 📖 Lore
 
 > [!abstract] Scheda
 > Clima: `INPUT[clima][:clima]`
@@ -62,7 +62,7 @@
 > `INPUT[textArea:segreto]`
 
 
---- Al tavolo
+--- 🎲 Al tavolo
 
 > [!tavolo] Uso al tavolo
 > `INPUT[testo_area][:uso_al_tavolo]`
@@ -92,7 +92,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > [!tip] Avanza / scatena
 > Una spinta dal grafo o una mossa? `BUTTON[avanza-fronte]` (clock +1).
 > Clock pieno? `BUTTON[scatena-conseguenza]` — crea l'evento-conseguenza collegato e azzera il clock.
---- Carattere
+--- 📊 Carattere
 
 > [!abstract] Carattere
 > **Stabilità Spaziale** `INPUT[slider(minValue(1), maxValue(5), addLabels):stabilita_spaziale]` → `VIEW[{stabilita_spaziale} == 5 ? "5 · Mutante" : ({stabilita_spaziale} == 4 ? "4 · Instabile" : ({stabilita_spaziale} == 3 ? "3 · Anomalo" : ({stabilita_spaziale} == 2 ? "2 · Plastico" : ({stabilita_spaziale} == 1 ? "1 · Solido" : ("—")))))]`
@@ -164,12 +164,12 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "luogo", component);
 ```
 
---- Cronologia
+--- 🕰 Cronologia
 
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderTappe");
 ```
---- Spazio
+--- 🧭 Spazio
 
 > [!info] Mappa
 > Collega una mappa: `INPUT[mappa][:mappa]`
@@ -189,7 +189,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderViaggio");
 ```
---- Collegamenti
+--- 🔗 Collegamenti
 
 > [!example] Relazioni
 > **Regione**: `INPUT[suggester(optionQuery("Mondi/Luoghi"), useLinks(partial), allowOther):regione]`
@@ -216,7 +216,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderConnessioni");
 ```
---- Vista
+--- 👁 Vista
 
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderEntityPanel");

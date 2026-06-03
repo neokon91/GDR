@@ -1,7 +1,7 @@
 <% await tp.user.crea_regola(tp) %>
 # `=this.nome`
 
-> [!infobox] 📕 Regola
+> [!infobox|regola] 📕 Regola
 > | | |
 > |:--|:--|
 > | **Tipo** | `VIEW[{tipo} ?? "—"]` |
@@ -9,7 +9,7 @@
 > | **Stato** | `INPUT[stato][:stato]` |
 
 ````tabs
---- Lore
+--- 📖 Lore
 
 > [!note]- Descrizione
 > Cosa è, com'è, perché conta al tavolo.
@@ -24,7 +24,7 @@
 > `INPUT[textArea:eccezioni]`
 
 
---- Collegamenti
+--- 🔗 Collegamenti
 
 
 > [!example] Collegamenti
@@ -38,7 +38,7 @@
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderConnessioni");
 ```
---- Vista
+--- 👁 Vista
 
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderEntityPanel");

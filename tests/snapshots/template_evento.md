@@ -1,7 +1,7 @@
 <% await tp.user.crea_evento(tp) %>
 # `=this.nome`
 
-> [!infobox] 📜 Evento
+> [!infobox|evento] 📜 Evento
 > | | |
 > |:--|:--|
 > | **Tipo** | `VIEW[{tipo} ?? "—"]` |
@@ -22,7 +22,7 @@
 > **transizionale** — Segna un passaggio tra stati dell'essere, condizioni metafisiche o ordini narrativi.
 
 ````tabs
---- Lore
+--- 📖 Lore
 
 > [!abstract] Cronologia
 > Quando: `INPUT[text:quando]`
@@ -55,7 +55,7 @@
 > `INPUT[textArea:eredita]`
 
 
---- Al tavolo
+--- 🎲 Al tavolo
 
 > [!tavolo] Uso al tavolo
 > `INPUT[testo_area][:uso_al_tavolo]`
@@ -85,7 +85,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > [!tip] Avanza / scatena
 > Una spinta dal grafo o una mossa? `BUTTON[avanza-fronte]` (clock +1).
 > Clock pieno? `BUTTON[scatena-conseguenza]` — crea l'evento-conseguenza collegato e azzera il clock.
---- Catena causale
+--- ⛓ Catena causale
 
 > [!info] Causa → conseguenza
 > Cosa ha portato a questo evento e cosa ne è scaturito. Collega gli eventi con
@@ -95,7 +95,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderCausalita");
 ```
---- Cronologia mondo
+--- 🕰 Cronologia mondo
 
 ```dataview
 table without id file.link as Evento, quando as Quando, mondo as Mondo
@@ -104,7 +104,7 @@ where categoria = "evento"
 sort quando asc
 ```
 
---- Collegamenti
+--- 🔗 Collegamenti
 
 > [!example] Relazioni
 > **Causato da**: `INPUT[inlineListSuggester(optionQuery("Mondi/Eventi"), useLinks(partial), allowOther):causato_da]`
@@ -130,7 +130,7 @@ sort quando asc
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderConnessioni");
 ```
---- Vista
+--- 👁 Vista
 
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderEntityPanel");

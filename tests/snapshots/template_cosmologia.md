@@ -1,7 +1,7 @@
 <% await tp.user.crea_cosmologia(tp) %>
 # `=this.nome`
 
-> [!infobox] 🌌 Cosmologia
+> [!infobox|cosmologia] 🌌 Cosmologia
 > | | |
 > |:--|:--|
 > | **Tipo** | `VIEW[{tipo} ?? "—"]` |
@@ -19,7 +19,7 @@
 > **mistero** — Ciò che resta ignoto o inconoscibile: enigmi e verità nascoste.
 
 ````tabs
---- Lore
+--- 📖 Lore
 
 
 > [!note]- Natura cosmica
@@ -50,7 +50,7 @@
 > `INPUT[textArea:segreto]`
 
 
---- Al tavolo
+--- 🎲 Al tavolo
 
 > [!tavolo] Uso al tavolo
 > `INPUT[testo_area][:uso_al_tavolo]`
@@ -80,7 +80,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > [!tip] Avanza / scatena
 > Una spinta dal grafo o una mossa? `BUTTON[avanza-fronte]` (clock +1).
 > Clock pieno? `BUTTON[scatena-conseguenza]` — crea l'evento-conseguenza collegato e azzera il clock.
---- Carattere
+--- 📊 Carattere
 
 > [!abstract] Carattere
 > **Presenza Cosmica** `INPUT[slider(minValue(1), maxValue(5), addLabels):presenza]` → `VIEW[{presenza} == 5 ? "5 · Immanente" : ({presenza} == 4 ? "4 · Ancorata" : ({presenza} == 3 ? "3 · Focalizzata" : ({presenza} == 2 ? "2 · Diffusa" : ({presenza} == 1 ? "1 · Trascendente" : ("—")))))]`
@@ -128,7 +128,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "cosmologia", component);
 ```
 
---- Collegamenti
+--- 🔗 Collegamenti
 
 > [!example] Relazioni
 > **Domini**: `INPUT[inlineListSuggester(optionQuery("Mondi/Domini"), useLinks(partial), allowOther):domini]`
@@ -151,7 +151,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "cos
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderConnessioni");
 ```
---- Vista
+--- 👁 Vista
 
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderEntityPanel");

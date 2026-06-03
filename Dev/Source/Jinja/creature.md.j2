@@ -5,7 +5,7 @@
 {{ m.identita_card(template) }}
 
 ````tabs
---- Statblock 5.5e
+--- 🐉 Statblock 5.5e
 
 ```statblock
 layout: {{ core.statblock.layout }}
@@ -43,7 +43,7 @@ legendary_actions: []
 > Imposta il **GS** (tab *Lore*) e premi: lo statblock qui sopra si riempie coi valori base dei mostri SRD di pari GS (AC/PF/iniziativa + un attacco col bonus e il danno tipici). Poi rifinisci a mano (multiattacco, tratti, resistenze).
 > `BUTTON[genera-statblock]`
 
---- Statblock 5e
+--- 🐉 Statblock 5e
 
 > Stessa creatura, resa **classica 5e** (cambia solo il layout). I numeri si modificano nel tab *Statblock 5.5e*: questa scheda li rispecchia (richiede `statblock: inline`, già impostato dal wizard).
 ```statblock
@@ -51,10 +51,10 @@ layout: {{ core.statblock.layout_5e }}
 monster: <% tp.config.target_file.basename %>
 ```
 
---- Al tavolo
+--- 🎲 Al tavolo
 
 {{ m.tavolo() }}
---- Lore
+--- 📖 Lore
 
 {{ m.scheda(template.category) }}
 > [!note]- Aspetto e indole
@@ -64,14 +64,14 @@ monster: <% tp.config.target_file.basename %>
 > {{ m.field('player_safe', label=false) }}
 
 {{ m.wizard_body(template.category) }}
---- Carattere
+--- 📊 Carattere
 
 {{ m.carattere(template.category) }}
---- Collegamenti
+--- 🔗 Collegamenti
 
 {{ m.relazioni(template.category) }}
 {{ m.collegamenti() }}
---- Vista
+--- 👁 Vista
 
 {{ m.vista() }}
 ````

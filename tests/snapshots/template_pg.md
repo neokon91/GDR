@@ -1,7 +1,7 @@
 <% await tp.user.crea_pg(tp) %>
 # `=this.nome`
 
-> [!infobox] 🎭 PG
+> [!infobox|personaggio] 🎭 PG
 > `INPUT[ritratto][:ritratto]`
 >
 > | | |
@@ -16,7 +16,7 @@
 > | **Stato** | `INPUT[stato][:stato]` |
 
 ````tabs
---- Scheda
+--- 📋 Scheda
 
 > [!info] In gioco
 > CA `INPUT[number:ca]` · PF `INPUT[number:pf]`/`INPUT[number:pf_max]` · PF temp `INPUT[number:pf_temp]` · Velocità `INPUT[number:velocita]` m
@@ -115,7 +115,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 
 > [!tip] Avanza di livello
 > Applica PF/competenza/slot e guida le scelte (ASI/talento/sottoclasse/incantesimi): `BUTTON[sali-di-livello]`
---- Lore
+--- 📖 Lore
 
 > [!abstract] Scheda
 > Titolo o rango: `INPUT[text:titolo]`
@@ -162,7 +162,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderTemaNatale");
 ```
---- Al tavolo
+--- 🎲 Al tavolo
 
 > [!tavolo] Uso al tavolo
 > `INPUT[testo_area][:uso_al_tavolo]`
@@ -203,7 +203,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderMaestrie");
 ```
---- Carattere
+--- 📊 Carattere
 
 > [!abstract] Carattere
 > **Moralità** `INPUT[slider(minValue(1), maxValue(5), addLabels):moralita]` → `VIEW[{moralita} == 5 ? "5 · Spietato" : ({moralita} == 4 ? "4 · Interessato" : ({moralita} == 3 ? "3 · Pragmatico" : ({moralita} == 2 ? "2 · Generoso" : ({moralita} == 1 ? "1 · Altruista" : ("—")))))]`
@@ -255,7 +255,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "per
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderCoerenza");
 ```
 
---- Collegamenti
+--- 🔗 Collegamenti
 
 > [!example] Relazioni
 > **Affiliazione**: `INPUT[suggester(optionQuery("Mondi/Fazioni"), useLinks(partial), allowOther):fazione]`
@@ -277,7 +277,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderConnessioni");
 ```
---- Vista
+--- 👁 Vista
 
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderEntityPanel");

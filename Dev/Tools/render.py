@@ -215,13 +215,66 @@ HIDE_FOLDERS_SNIPPET = """/* GDR — generato. Snippet del vault (nascondi z.* +
 /* Pannello Vista: lieve feedback hover per dare profondità alle card. */
 .gdr-card { transition: border-left-width 80ms ease; }
 .gdr-card:hover { border-left-width: 5px; }
+
+/* === Layout nota: A=infobox sidebar · B=accento categoria · E=tipografia ===== */
+
+/* B — accento di categoria: l'infobox eredita --gdr-accent (impostato dalle regole
+   per-categoria generate sotto, su [!infobox|<categoria>]); default = bordo neutro. */
+.callout[data-callout="infobox"] {
+  --gdr-accent: var(--background-modifier-border);
+  border-top: 3px solid var(--gdr-accent);
+}
+.callout[data-callout="infobox"] > .callout-title { color: var(--gdr-accent); }
+
+/* A — NB: la sidebar flottante con testo che avvolge NON è affidabile in Obsidian:
+   in lettura il renderer virtualizza i blocchi (ognuno è una `.markdown-preview-section`
+   posizionata), così float/wrap fra blocchi si rompe. L'infobox resta dunque una card
+   a tutta larghezza (pulita, robusta), con l'identità data dall'accento di categoria
+   (B) e dalla cornice; niente layout fragile. */
+
+/* E — titolo nota: più respiro + filetto sottile (aria da voce di wiki). */
+.markdown-rendered h1 { margin-bottom: 0.4rem; padding-bottom: 0.2rem; border-bottom: 1px solid var(--background-modifier-border); }
+/* Header delle tab (Tab Panels): più scandito e leggibile. */
+.block-language-tabs .tabs-header { gap: 0.2em; }
+/* Callout di classificazione (famiglia): discreto, non compete con l'infobox. */
+.callout[data-callout="info"] { font-size: var(--font-ui-small); }
 """
+
+
+# Accento-colore per categoria (B): ogni gruppo tematico → un colore-tema Obsidian
+# (theme-safe, chiaro/scuro). L'infobox di [!infobox|<categoria>] eredita --gdr-accent.
+# Presentazione, non dato: vive qui, non in YAML. Categoria non mappata → bordo neutro.
+CATEGORY_ACCENTS = {
+    "green":  ["luogo", "regno", "bioma", "ecosistema", "risorsa"],          # mondo fisico / natura / economia
+    "red":    ["fazione", "culto"],                                          # potere / fede organizzata
+    "pink":   ["cultura", "lingua"],                                         # società / popoli
+    "orange": ["personaggio", "creatura"],                                   # persone & creature
+    "purple": ["cosmologia", "dominio", "legge_fondamentale",                # metafisica & magia
+               "entita_primordiale", "piano", "divinita", "sistema_magico"],
+    "cyan":   ["epoca", "evento", "mito", "profezia"],                       # tempo / storia / mito
+    "blue":   ["classe", "sottoclasse", "specie", "background", "talento",   # regole & scheda 5e
+               "incantesimo", "regola", "oggetto", "bastione"],
+    "yellow": ["incontro", "insidia", "sessione"],                          # al tavolo / gioco
+}
+
+
+def category_accent_css() -> str:
+    """Regole CSS per-categoria (B): impostano --gdr-accent sull'infobox in base al
+    metadato del callout ([!infobox|<categoria>] → data-callout-metadata)."""
+    lines = ["", "/* B — accento per categoria (generato da CATEGORY_ACCENTS). */"]
+    for color, cats in CATEGORY_ACCENTS.items():
+        for cat in cats:
+            lines.append(
+                f'.callout[data-callout="infobox"][data-callout-metadata="{cat}"]'
+                f' {{ --gdr-accent: var(--color-{color}); }}')
+    return "\n".join(lines) + "\n"
 
 
 def write_workspace_chrome(obsidian: Path) -> None:
     """Pulizia dell'esploratore: snippet CSS che nasconde le z.* + esclusione da
-    ricerca/grafo/suggerimenti (userIgnoreFilters). Tutto non distruttivo."""
-    write_text(obsidian / "snippets" / "gdr.css", HIDE_FOLDERS_SNIPPET)
+    ricerca/grafo/suggerimenti (userIgnoreFilters). Tutto non distruttivo. Il CSS è
+    il base statico + le regole d'accento per-categoria generate (B)."""
+    write_text(obsidian / "snippets" / "gdr.css", HIDE_FOLDERS_SNIPPET + category_accent_css())
     union_list_key(obsidian / "appearance.json", "enabledCssSnippets", ["gdr"])
     union_list_key(obsidian / "app.json", "userIgnoreFilters", [f"{d}/" for d in HIDDEN_DIRS])
 
@@ -827,8 +880,9 @@ def example_note_text(note: dict[str, Any], world: str) -> str:
     front = yaml.safe_dump(fm, allow_unicode=True, sort_keys=False)
 
     lines = [f"---\n{front}---", "", f"# {note['nome']}", ""]
-    # Infobox (callout CSS): tabella-fatti d'identità.
-    lines.append(f"> [!infobox] {note['nome']}")
+    # Infobox (callout CSS): tabella-fatti d'identità. Il metadato = categoria →
+    # accento-colore per categoria (gdr.css), come nelle note da template.
+    lines.append(f"> [!infobox|{note.get('categoria', '')}] {note['nome']}")
     lines.append("> | | |")
     lines.append("> |:--|:--|")
     lines.append(f"> | **Mondo** | [[{world}]] |")

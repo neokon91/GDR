@@ -1,7 +1,7 @@
 <% await tp.user.crea_sistema_magico(tp) %>
 # `=this.nome`
 
-> [!infobox] 🪄 Sistema magico
+> [!infobox|sistema_magico] 🪄 Sistema magico
 > | | |
 > |:--|:--|
 > | **Tipo** | `VIEW[{tipo} ?? "—"]` |
@@ -10,7 +10,7 @@
 > | **Stato** | `INPUT[stato][:stato]` |
 
 ````tabs
---- Lore
+--- 📖 Lore
 
 > [!abstract] Scheda
 > Fonte del potere: `INPUT[fonte_potere][:fonte_potere]`
@@ -37,7 +37,7 @@
 > `INPUT[textArea:segreto]`
 
 
---- Al tavolo
+--- 🎲 Al tavolo
 
 > [!tavolo] Uso al tavolo
 > `INPUT[testo_area][:uso_al_tavolo]`
@@ -67,7 +67,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > [!tip] Avanza / scatena
 > Una spinta dal grafo o una mossa? `BUTTON[avanza-fronte]` (clock +1).
 > Clock pieno? `BUTTON[scatena-conseguenza]` — crea l'evento-conseguenza collegato e azzera il clock.
---- Carattere
+--- 📊 Carattere
 
 > [!abstract] Carattere
 > **Fonte della Magia** `INPUT[slider(minValue(1), maxValue(5), addLabels):fonte_magia]` → `VIEW[{fonte_magia} == 5 ? "5 · Donata" : ({fonte_magia} == 4 ? "4 · Evocata" : ({fonte_magia} == 3 ? "3 · Equilibrata" : ({fonte_magia} == 2 ? "2 · Latente" : ({fonte_magia} == 1 ? "1 · Innata" : ("—")))))]`
@@ -146,7 +146,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > [!tip] Profilo
 > Assegna i tag coerenti derivati dagli assi: `BUTTON[applica-profilo]`
 
---- Collegamenti
+--- 🔗 Collegamenti
 
 > [!example] Relazioni
 > **Leggi su cui poggia**: `INPUT[inlineListSuggester(optionQuery("Mondi/Leggi"), useLinks(partial), allowOther):leggi]`
@@ -168,7 +168,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderConnessioni");
 ```
---- Vista
+--- 👁 Vista
 
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderEntityPanel");

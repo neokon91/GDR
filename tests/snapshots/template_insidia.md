@@ -1,7 +1,7 @@
 <% await tp.user.crea_insidia(tp) %>
 # `=this.nome`
 
-> [!infobox] ⚠️ Insidia
+> [!infobox|insidia] ⚠️ Insidia
 > | | |
 > |:--|:--|
 > | **Tipo** | `VIEW[{tipo} ?? "—"]` |
@@ -23,7 +23,7 @@
 > **ambientale** — Condizione persistente dell'area: oscurità, terreno, clima.
 
 ````tabs
---- Insidia
+--- ⚠ Insidia
 
 > [!abstract] Scheda
 > Livello di gioco: `INPUT[tier][:tier]`
@@ -31,7 +31,7 @@
 > Prova: `INPUT[text:prova]`
 > Danno / Effetto: `INPUT[text:danno]`
 
---- Scena
+--- 🎬 Scena
 
 > [!note] Innesco
 > `INPUT[textArea:innesco]`
@@ -46,7 +46,7 @@
 > [!tip]- Tiri
 > `dice: 1d20`
 
---- Collegamenti
+--- 🔗 Collegamenti
 
 > [!example] Relazioni
 > **Luoghi**: `INPUT[inlineListSuggester(optionQuery("Mondi/Luoghi"), useLinks(partial), allowOther):luoghi]`
@@ -63,7 +63,7 @@
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderConnessioni");
 ```
---- Vista
+--- 👁 Vista
 
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderEntityPanel");

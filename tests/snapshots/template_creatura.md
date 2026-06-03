@@ -1,7 +1,7 @@
 <% await tp.user.crea_creatura(tp) %>
 # `=this.nome`
 
-> [!infobox] 🐾 Creatura
+> [!infobox|creatura] 🐾 Creatura
 > `INPUT[ritratto][:ritratto]`
 >
 > | | |
@@ -15,7 +15,7 @@
 > | **Stato** | `INPUT[stato][:stato]` |
 
 ````tabs
---- Statblock 5.5e
+--- 🐉 Statblock 5.5e
 
 ```statblock
 layout: D&D 5.5 Layout ITA - Compatibile 5e
@@ -53,7 +53,7 @@ legendary_actions: []
 > Imposta il **GS** (tab *Lore*) e premi: lo statblock qui sopra si riempie coi valori base dei mostri SRD di pari GS (AC/PF/iniziativa + un attacco col bonus e il danno tipici). Poi rifinisci a mano (multiattacco, tratti, resistenze).
 > `BUTTON[genera-statblock]`
 
---- Statblock 5e
+--- 🐉 Statblock 5e
 
 > Stessa creatura, resa **classica 5e** (cambia solo il layout). I numeri si modificano nel tab *Statblock 5.5e*: questa scheda li rispecchia (richiede `statblock: inline`, già impostato dal wizard).
 ```statblock
@@ -61,7 +61,7 @@ layout: Basic 5e Layout ITA
 monster: <% tp.config.target_file.basename %>
 ```
 
---- Al tavolo
+--- 🎲 Al tavolo
 
 > [!tavolo] Uso al tavolo
 > `INPUT[testo_area][:uso_al_tavolo]`
@@ -91,7 +91,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > [!tip] Avanza / scatena
 > Una spinta dal grafo o una mossa? `BUTTON[avanza-fronte]` (clock +1).
 > Clock pieno? `BUTTON[scatena-conseguenza]` — crea l'evento-conseguenza collegato e azzera il clock.
---- Lore
+--- 📖 Lore
 
 > [!abstract] Scheda
 > Taglia: `INPUT[taglia][:taglia]`
@@ -124,7 +124,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > `INPUT[textArea:segreto]`
 
 
---- Carattere
+--- 📊 Carattere
 
 > [!abstract] Carattere
 > **Indole** `INPUT[slider(minValue(1), maxValue(5), addLabels):indole]` → `VIEW[{indole} == 5 ? "5 · Feroce" : ({indole} == 4 ? "4 · Aggressiva" : ({indole} == 3 ? "3 · Territoriale" : ({indole} == 2 ? "2 · Schiva" : ({indole} == 1 ? "1 · Docile" : ("—")))))]`
@@ -172,7 +172,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "creatura", component);
 ```
 
---- Collegamenti
+--- 🔗 Collegamenti
 
 > [!example] Relazioni
 > **Habitat**: `INPUT[inlineListSuggester(optionQuery("Mondi/Luoghi"), useLinks(partial), allowOther):habitat]`
@@ -191,7 +191,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "cre
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderConnessioni");
 ```
---- Vista
+--- 👁 Vista
 
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderEntityPanel");

@@ -1,7 +1,7 @@
 <% await tp.user.crea_piano(tp) %>
 # `=this.nome`
 
-> [!infobox] 🌀 Piano d'esistenza
+> [!infobox|piano] 🌀 Piano d'esistenza
 > | | |
 > |:--|:--|
 > | **Tipo** | `VIEW[{tipo} ?? "—"]` |
@@ -10,7 +10,7 @@
 > | **Stato** | `INPUT[stato][:stato]` |
 
 ````tabs
---- Lore
+--- 📖 Lore
 
 > [!abstract] Scheda
 > Accessibilità: `INPUT[accessibilita][:accessibilita]`
@@ -31,7 +31,7 @@
 > `INPUT[textArea:influenza]`
 
 
---- Al tavolo
+--- 🎲 Al tavolo
 
 > [!tavolo] Uso al tavolo
 > `INPUT[testo_area][:uso_al_tavolo]`
@@ -61,7 +61,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > [!tip] Avanza / scatena
 > Una spinta dal grafo o una mossa? `BUTTON[avanza-fronte]` (clock +1).
 > Clock pieno? `BUTTON[scatena-conseguenza]` — crea l'evento-conseguenza collegato e azzera il clock.
---- Carattere
+--- 📊 Carattere
 
 > [!abstract] Carattere
 > **Materialità** `INPUT[slider(minValue(1), maxValue(5), addLabels):materialita]` → `VIEW[{materialita} == 5 ? "5 · Iperreale" : ({materialita} == 4 ? "4 · Solido" : ({materialita} == 3 ? "3 · Fluido" : ({materialita} == 2 ? "2 · Eterico" : ({materialita} == 1 ? "1 · Immateriale" : ("—")))))]`
@@ -109,7 +109,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "piano", component);
 ```
 
---- Collegamenti
+--- 🔗 Collegamenti
 
 > [!example] Relazioni
 > **Leggi che lo governano**: `INPUT[inlineListSuggester(optionQuery("Mondi/Leggi"), useLinks(partial), allowOther):leggi]`
@@ -131,7 +131,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "pia
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderConnessioni");
 ```
---- Vista
+--- 👁 Vista
 
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderEntityPanel");

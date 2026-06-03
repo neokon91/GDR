@@ -1,7 +1,7 @@
 <% await tp.user.crea_profezia(tp) %>
 # `=this.nome`
 
-> [!infobox] 🔮 Profezia
+> [!infobox|profezia] 🔮 Profezia
 > | | |
 > |:--|:--|
 > | **Tipo** | `VIEW[{tipo} ?? "—"]` |
@@ -10,7 +10,7 @@
 > | **Stato** | `INPUT[stato][:stato]` |
 
 ````tabs
---- Lore
+--- 📖 Lore
 
 > [!abstract] Scheda
 > Stato d'avveramento: `INPUT[stato_profezia][:stato_profezia]`
@@ -31,7 +31,7 @@
 > `INPUT[textArea:segreto]`
 
 
---- Al tavolo
+--- 🎲 Al tavolo
 
 > [!tavolo] Uso al tavolo
 > `INPUT[testo_area][:uso_al_tavolo]`
@@ -61,7 +61,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > [!tip] Avanza / scatena
 > Una spinta dal grafo o una mossa? `BUTTON[avanza-fronte]` (clock +1).
 > Clock pieno? `BUTTON[scatena-conseguenza]` — crea l'evento-conseguenza collegato e azzera il clock.
---- Carattere
+--- 📊 Carattere
 
 > [!abstract] Carattere
 > **Chiarezza** `INPUT[slider(minValue(1), maxValue(5), addLabels):chiarezza]` → `VIEW[{chiarezza} == 5 ? "5 · Esplicita" : ({chiarezza} == 4 ? "4 · Chiara" : ({chiarezza} == 3 ? "3 · Allusiva" : ({chiarezza} == 2 ? "2 · Oscura" : ({chiarezza} == 1 ? "1 · Ermetica" : ("—")))))]`
@@ -101,7 +101,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "profezia", component);
 ```
 
---- Collegamenti
+--- 🔗 Collegamenti
 
 > [!example] Relazioni
 > **Chi riguarda**: `INPUT[inlineListSuggester(optionQuery("Mondi/Personaggi"), useLinks(partial), allowOther):riguarda]`
@@ -121,7 +121,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "pro
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderConnessioni");
 ```
---- Vista
+--- 👁 Vista
 
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderEntityPanel");

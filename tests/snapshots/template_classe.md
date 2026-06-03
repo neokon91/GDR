@@ -1,7 +1,7 @@
 <% await tp.user.crea_classe(tp) %>
 # `=this.nome`
 
-> [!infobox] 🛡️ Classe
+> [!infobox|classe] 🛡️ Classe
 > | | |
 > |:--|:--|
 > | **Tipo** | `VIEW[{tipo} ?? "—"]` |
@@ -16,7 +16,7 @@
 > | **Stato** | `INPUT[stato][:stato]` |
 
 ````tabs
---- Classe
+--- 🛡 Classe
 
 > [!abstract] Scheda
 > Dado vita: `INPUT[dado_vita][:dado_vita]`
@@ -27,7 +27,7 @@
 > Competenza in strumenti: `INPUT[text:strumento]`
 > Abilità a scelta (numero): `INPUT[number:abilita_numero]`
 
---- Progressione
+--- 📈 Progressione
 
 > [!note] Concept
 > `INPUT[textArea:descrizione]`
@@ -63,7 +63,7 @@
 > | 19 | | |
 > | 20 | | |
 
---- Sottoclassi
+--- 🎓 Sottoclassi
 
 La sottoclasse si sceglie al **livello 3**.
 ```dataview
@@ -72,7 +72,7 @@ from ""
 where categoria = "sottoclasse" and classe = this.file.link
 ```
 
---- Collegamenti
+--- 🔗 Collegamenti
 
 > [!example] Collegamenti
 > Mondo: `INPUT[mondo][:mondo]`
@@ -85,7 +85,7 @@ where categoria = "sottoclasse" and classe = this.file.link
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderConnessioni");
 ```
---- Vista
+--- 👁 Vista
 
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderEntityPanel");

@@ -1,7 +1,7 @@
 <% await tp.user.crea_bioma(tp) %>
 # `=this.nome`
 
-> [!infobox] 🌲 Bioma
+> [!infobox|bioma] 🌲 Bioma
 > | | |
 > |:--|:--|
 > | **Tipo** | `VIEW[{tipo} ?? "—"]` |
@@ -10,7 +10,7 @@
 > | **Stato** | `INPUT[stato][:stato]` |
 
 ````tabs
---- Lore
+--- 📖 Lore
 
 > [!abstract] Scheda
 > Clima: `INPUT[clima][:clima]`
@@ -31,7 +31,7 @@
 > `INPUT[textArea:segreto]`
 
 
---- Al tavolo
+--- 🎲 Al tavolo
 
 > [!tavolo] Uso al tavolo
 > `INPUT[testo_area][:uso_al_tavolo]`
@@ -61,7 +61,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > [!tip] Avanza / scatena
 > Una spinta dal grafo o una mossa? `BUTTON[avanza-fronte]` (clock +1).
 > Clock pieno? `BUTTON[scatena-conseguenza]` — crea l'evento-conseguenza collegato e azzera il clock.
---- Carattere
+--- 📊 Carattere
 
 > [!abstract] Carattere
 > **Ostilità** `INPUT[slider(minValue(1), maxValue(5), addLabels):ostilita]` → `VIEW[{ostilita} == 5 ? "5 · Letale" : ({ostilita} == 4 ? "4 · Ostile" : ({ostilita} == 3 ? "3 · Aspro" : ({ostilita} == 2 ? "2 · Mite" : ({ostilita} == 1 ? "1 · Ospitale" : ("—")))))]`
@@ -101,7 +101,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "bioma", component);
 ```
 
---- Collegamenti
+--- 🔗 Collegamenti
 
 > [!example] Relazioni
 > **Luoghi**: `INPUT[inlineListSuggester(optionQuery("Mondi/Luoghi"), useLinks(partial), allowOther):luoghi]`
@@ -120,7 +120,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "bio
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderConnessioni");
 ```
---- Vista
+--- 👁 Vista
 
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderEntityPanel");

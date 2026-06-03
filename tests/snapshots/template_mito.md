@@ -1,7 +1,7 @@
 <% await tp.user.crea_mito(tp) %>
 # `=this.nome`
 
-> [!infobox] 📖 Mito
+> [!infobox|mito] 📖 Mito
 > `INPUT[ritratto][:ritratto]`
 >
 > | | |
@@ -12,7 +12,7 @@
 > | **Stato** | `INPUT[stato][:stato]` |
 
 ````tabs
---- Lore
+--- 📖 Lore
 
 > [!abstract] Scheda
 > Veridicità: `INPUT[veridicita][:veridicita]`
@@ -33,7 +33,7 @@
 > `INPUT[textArea:segreto]`
 
 
---- Al tavolo
+--- 🎲 Al tavolo
 
 > [!tavolo] Uso al tavolo
 > `INPUT[testo_area][:uso_al_tavolo]`
@@ -63,7 +63,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > [!tip] Avanza / scatena
 > Una spinta dal grafo o una mossa? `BUTTON[avanza-fronte]` (clock +1).
 > Clock pieno? `BUTTON[scatena-conseguenza]` — crea l'evento-conseguenza collegato e azzera il clock.
---- Carattere
+--- 📊 Carattere
 
 > [!abstract] Carattere
 > **Veridicità** `INPUT[slider(minValue(1), maxValue(5), addLabels):veridicita]` → `VIEW[{veridicita} == 5 ? "5 · Rivelato" : ({veridicita} == 4 ? "4 · Fedele" : ({veridicita} == 3 ? "3 · Romanzato" : ({veridicita} == 2 ? "2 · Distorto" : ({veridicita} == 1 ? "1 · Invenzione" : ("—")))))]`
@@ -103,7 +103,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "mito", component);
 ```
 
---- Collegamenti
+--- 🔗 Collegamenti
 
 > [!example] Relazioni
 > **Epoca raccontata**: `INPUT[suggester(optionQuery("Mondi/Epoche"), useLinks(partial), allowOther):epoca_raccontata]`
@@ -124,7 +124,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "mit
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderConnessioni");
 ```
---- Vista
+--- 👁 Vista
 
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderEntityPanel");

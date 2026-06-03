@@ -1,7 +1,7 @@
 <% await tp.user.crea_legge_fondamentale(tp) %>
 # `=this.nome`
 
-> [!infobox] ⚖️ Legge fondamentale
+> [!infobox|legge_fondamentale] ⚖️ Legge fondamentale
 > | | |
 > |:--|:--|
 > | **Tipo** | `VIEW[{tipo} ?? "—"]` |
@@ -21,7 +21,7 @@
 > **magica** — Regge il flusso dell'energia, il vuoto e i limiti del potere.
 
 ````tabs
---- Lore
+--- 📖 Lore
 
 > [!abstract] Scheda
 > Poli: `INPUT[text:poli]`
@@ -42,7 +42,7 @@
 > `INPUT[textArea:segreto]`
 
 
---- Al tavolo
+--- 🎲 Al tavolo
 
 > [!tavolo] Uso al tavolo
 > `INPUT[testo_area][:uso_al_tavolo]`
@@ -72,7 +72,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > [!tip] Avanza / scatena
 > Una spinta dal grafo o una mossa? `BUTTON[avanza-fronte]` (clock +1).
 > Clock pieno? `BUTTON[scatena-conseguenza]` — crea l'evento-conseguenza collegato e azzera il clock.
---- Carattere
+--- 📊 Carattere
 
 > [!abstract] Carattere
 > **Rigidità** `INPUT[slider(minValue(1), maxValue(5), addLabels):rigidita]` → `VIEW[{rigidita} == 5 ? "5 · Aggirabile" : ({rigidita} == 4 ? "4 · Negoziabile" : ({rigidita} == 3 ? "3 · Flessibile" : ({rigidita} == 2 ? "2 · Ferrea" : ({rigidita} == 1 ? "1 · Inviolabile" : ("—")))))]`
@@ -120,7 +120,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "legge_fondamentale", component);
 ```
 
---- Collegamenti
+--- 🔗 Collegamenti
 
 > [!example] Relazioni
 > **Dominio che la esprime**: `INPUT[suggester(optionQuery("Mondi/Domini"), useLinks(partial), allowOther):dominio]`
@@ -141,7 +141,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "leg
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderConnessioni");
 ```
---- Vista
+--- 👁 Vista
 
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderEntityPanel");

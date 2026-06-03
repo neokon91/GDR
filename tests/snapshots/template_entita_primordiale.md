@@ -1,7 +1,7 @@
 <% await tp.user.crea_entita_primordiale(tp) %>
 # `=this.nome`
 
-> [!infobox] 🌑 Entità primordiale
+> [!infobox|entita_primordiale] 🌑 Entità primordiale
 > | | |
 > |:--|:--|
 > | **Tipo** | `VIEW[{tipo} ?? "—"]` |
@@ -11,7 +11,7 @@
 > | **Stato** | `INPUT[stato][:stato]` |
 
 ````tabs
---- Lore
+--- 📖 Lore
 
 > [!abstract] Scheda
 > Stato: `INPUT[stato_cosmico][:stato_cosmico]`
@@ -36,7 +36,7 @@
 > `INPUT[textArea:segreto]`
 
 
---- Al tavolo
+--- 🎲 Al tavolo
 
 > [!tavolo] Uso al tavolo
 > `INPUT[testo_area][:uso_al_tavolo]`
@@ -66,7 +66,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > [!tip] Avanza / scatena
 > Una spinta dal grafo o una mossa? `BUTTON[avanza-fronte]` (clock +1).
 > Clock pieno? `BUTTON[scatena-conseguenza]` — crea l'evento-conseguenza collegato e azzera il clock.
---- Carattere
+--- 📊 Carattere
 
 > [!abstract] Carattere
 > **Coscienza** `INPUT[slider(minValue(1), maxValue(5), addLabels):coscienza]` → `VIEW[{coscienza} == 5 ? "5 · Sovrana" : ({coscienza} == 4 ? "4 · Volitiva" : ({coscienza} == 3 ? "3 · Senziente" : ({coscienza} == 2 ? "2 · Istintiva" : ({coscienza} == 1 ? "1 · Cieca" : ("—")))))]`
@@ -114,7 +114,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "entita_primordiale", component);
 ```
 
---- Collegamenti
+--- 🔗 Collegamenti
 
 > [!example] Relazioni
 > **Legge incarnata**: `INPUT[suggester(optionQuery("Mondi/Leggi"), useLinks(partial), allowOther):legge]`
@@ -136,7 +136,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "ent
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderConnessioni");
 ```
---- Vista
+--- 👁 Vista
 
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderEntityPanel");

@@ -2,7 +2,7 @@
 # `=this.nome`
 
 ````tabs
---- Prepara
+--- ✅ Prepara
 
 > [!tip] Obiettivo
 > `INPUT[text:obiettivo]`
@@ -22,7 +22,7 @@
 > - [ ] Clock e fronti aggiornati #prep
 > - [ ] Un gancio nuovo da seminare #gancio
 
---- Tavolo
+--- 🎲 Tavolo
 
 > [!info] Live
 > Scena corrente: `INPUT[text:scena_corrente]`
@@ -35,7 +35,7 @@
 > path includes Mondi/Sessioni
 > ```
 
---- Collegamenti
+--- 🔗 Collegamenti
 
 > [!example] Collegamenti
 > Mondo: `INPUT[mondo][:mondo]`
@@ -48,7 +48,7 @@
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderConnessioni");
 ```
---- Vista
+--- 👁 Vista
 
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderSessionPanel");

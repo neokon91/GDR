@@ -5,10 +5,10 @@
 {{ m.identita_card(template) }}
 
 ````tabs
---- Classe
+--- 🛡 Classe
 
 {{ m.scheda(template.category) }}
---- Progressione
+--- 📈 Progressione
 
 {{ m.wizard_body(template.category) }}
 > [!example]- Tabella dei livelli
@@ -18,7 +18,7 @@
 > | {{ n }} | | |
 {% endfor %}
 
---- Sottoclassi
+--- 🎓 Sottoclassi
 
 La sottoclasse si sceglie al **livello 3**.
 ```dataview
@@ -27,10 +27,10 @@ from ""
 where categoria = "sottoclasse" and classe = this.file.link
 ```
 
---- Collegamenti
+--- 🔗 Collegamenti
 
 {{ m.collegamenti(with_sessioni=false) }}
---- Vista
+--- 👁 Vista
 
 {{ m.vista() }}
 ````

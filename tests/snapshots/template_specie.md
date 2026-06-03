@@ -1,7 +1,7 @@
 <% await tp.user.crea_specie(tp) %>
 # `=this.nome`
 
-> [!infobox] 🧬 Specie
+> [!infobox|specie] 🧬 Specie
 > `INPUT[ritratto][:ritratto]`
 >
 > | | |
@@ -29,7 +29,7 @@
 > **sintetica** — Creata artificialmente tramite magia, alchimia o tecnologia.
 
 ````tabs
---- Scheda
+--- 📋 Scheda
 
 > [!abstract] Scheda
 > Taglia: `INPUT[taglia][:taglia]`
@@ -38,7 +38,7 @@
 > Lignaggio: `INPUT[text:lignaggio]`
 > Stile dei nomi: `INPUT[stile_nomi][:stile_nomi]`
 
---- Lore
+--- 📖 Lore
 
 > [!note]- Descrizione
 > Cosa è, com'è, perché conta al tavolo.
@@ -47,7 +47,7 @@
 > `INPUT[textArea:tratti]`
 
 
---- Carattere
+--- 📊 Carattere
 
 > [!abstract] Carattere
 > **Socialità** `INPUT[slider(minValue(1), maxValue(5), addLabels):socialita]` → `VIEW[{socialita} == 5 ? "5 · Ipercollettiva" : ({socialita} == 4 ? "4 · Comunitaria" : ({socialita} == 3 ? "3 · Aggregativa" : ({socialita} == 2 ? "2 · Individualista" : ({socialita} == 1 ? "1 · Solitaria" : ("—")))))]`
@@ -95,7 +95,7 @@
 return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "specie", component);
 ```
 
---- Collegamenti
+--- 🔗 Collegamenti
 
 > [!example] Relazioni
 > **Regione d'origine**: `INPUT[inlineListSuggester(optionQuery("Mondi/Luoghi"), useLinks(partial), allowOther):origine]`
@@ -112,7 +112,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "spe
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderConnessioni");
 ```
---- Vista
+--- 👁 Vista
 
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderEntityPanel");

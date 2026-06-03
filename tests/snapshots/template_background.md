@@ -1,7 +1,7 @@
 <% await tp.user.crea_background(tp) %>
 # `=this.nome`
 
-> [!infobox] 📖 Background
+> [!infobox|background] 📖 Background
 > | | |
 > |:--|:--|
 > | **Tipo** | `VIEW[{tipo} ?? "—"]` |
@@ -13,7 +13,7 @@
 > | **Stato** | `INPUT[stato][:stato]` |
 
 ````tabs
---- Scheda
+--- 📋 Scheda
 
 > [!abstract] Scheda
 > Caratteristiche: `INPUT[text:car_background]`
@@ -21,7 +21,7 @@
 > Competenza in strumenti: `INPUT[text:strumento]`
 > Talento d'origine: `INPUT[text:talento_origine]`
 
---- Lore
+--- 📖 Lore
 
 > [!note]- Descrizione
 > Cosa è, com'è, perché conta al tavolo.
@@ -33,7 +33,7 @@
 > `INPUT[textArea:equipaggiamento]`
 
 
---- Collegamenti
+--- 🔗 Collegamenti
 
 
 > [!example] Collegamenti
@@ -47,7 +47,7 @@
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderConnessioni");
 ```
---- Vista
+--- 👁 Vista
 
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderEntityPanel");

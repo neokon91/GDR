@@ -1,7 +1,7 @@
 <% await tp.user.crea_talento(tp) %>
 # `=this.nome`
 
-> [!infobox] ⭐ Talento
+> [!infobox|talento] ⭐ Talento
 > | | |
 > |:--|:--|
 > | **Tipo** | `VIEW[{tipo} ?? "—"]` |
@@ -11,13 +11,13 @@
 > | **Stato** | `INPUT[stato][:stato]` |
 
 ````tabs
---- Scheda
+--- 📋 Scheda
 
 > [!abstract] Scheda
 > Prerequisito: `INPUT[text:prerequisito]`
 > Ripetibile: `INPUT[text:ripetibile]`
 
---- Lore
+--- 📖 Lore
 
 > [!note]- Descrizione
 > Cosa è, com'è, perché conta al tavolo.
@@ -26,7 +26,7 @@
 > `INPUT[textArea:benefici]`
 
 
---- Collegamenti
+--- 🔗 Collegamenti
 
 
 > [!example] Collegamenti
@@ -40,7 +40,7 @@
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderConnessioni");
 ```
---- Vista
+--- 👁 Vista
 
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderEntityPanel");

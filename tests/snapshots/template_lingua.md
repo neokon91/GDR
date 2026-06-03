@@ -1,7 +1,7 @@
 <% await tp.user.crea_lingua(tp) %>
 # `=this.nome`
 
-> [!infobox] 🗣️ Lingua
+> [!infobox|lingua] 🗣️ Lingua
 > | | |
 > |:--|:--|
 > | **Tipo** | `VIEW[{tipo} ?? "—"]` |
@@ -23,7 +23,7 @@
 > **segreta** — Codici cifrati e idiomi criptici di sette, ladri, spie o ordini iniziatici.
 
 ````tabs
---- Lore
+--- 📖 Lore
 
 > [!abstract] Scheda
 > Vitalità: `INPUT[vitalita][:vitalita]`
@@ -41,7 +41,7 @@
 > `INPUT[textArea:lessico]`
 
 
---- Al tavolo
+--- 🎲 Al tavolo
 
 > [!tavolo] Uso al tavolo
 > `INPUT[testo_area][:uso_al_tavolo]`
@@ -71,7 +71,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > [!tip] Avanza / scatena
 > Una spinta dal grafo o una mossa? `BUTTON[avanza-fronte]` (clock +1).
 > Clock pieno? `BUTTON[scatena-conseguenza]` — crea l'evento-conseguenza collegato e azzera il clock.
---- Carattere
+--- 📊 Carattere
 
 > [!abstract] Carattere
 > **Complessità** `INPUT[slider(minValue(1), maxValue(5), addLabels):complessita]` → `VIEW[{complessita} == 5 ? "5 · Ipersistemica" : ({complessita} == 4 ? "4 · Complessa" : ({complessita} == 3 ? "3 · Bilanciata" : ({complessita} == 2 ? "2 · Ridotta" : ({complessita} == 1 ? "1 · Semplice" : ("—")))))]`
@@ -143,7 +143,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "lingua", component);
 ```
 
---- Collegamenti
+--- 🔗 Collegamenti
 
 > [!example] Relazioni
 > **Parlata in**: `INPUT[inlineListSuggester(optionQuery("Mondi/Luoghi"), useLinks(partial), allowOther):parlata_in]`
@@ -162,7 +162,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "lin
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderConnessioni");
 ```
---- Vista
+--- 👁 Vista
 
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderEntityPanel");

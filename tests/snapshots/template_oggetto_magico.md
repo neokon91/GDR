@@ -1,7 +1,7 @@
 <% await tp.user.crea_oggetto_magico(tp) %>
 # `=this.nome`
 
-> [!infobox] 🎒 Oggetto Magico
+> [!infobox|oggetto] 🎒 Oggetto Magico
 > `INPUT[ritratto][:ritratto]`
 >
 > | | |
@@ -13,13 +13,13 @@
 > | **Stato** | `INPUT[stato][:stato]` |
 
 ````tabs
---- Scheda
+--- 📋 Scheda
 
 > [!abstract] Scheda
 > Rarità: `INPUT[rarita][:rarita]`
 > Sintonia: `INPUT[text:sintonia]`
 
---- Lore
+--- 📖 Lore
 
 > [!note]- Descrizione
 > Cosa è, com'è, perché conta al tavolo.
@@ -34,7 +34,7 @@
 > `INPUT[textArea:provenienza]`
 
 
---- Carattere
+--- 📊 Carattere
 
 > [!abstract] Carattere
 > **Natura Materiale** `INPUT[slider(minValue(1), maxValue(5), addLabels):natura_materiale]` → `VIEW[{natura_materiale} == 5 ? "5 · Perfetta" : ({natura_materiale} == 4 ? "4 · Avanzata" : ({natura_materiale} == 3 ? "3 · Fine" : ({natura_materiale} == 2 ? "2 · Forgiata" : ({natura_materiale} == 1 ? "1 · Grezza" : ("—")))))]`
@@ -98,7 +98,7 @@
 return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "oggetto", component);
 ```
 
---- Collegamenti
+--- 🔗 Collegamenti
 
 > [!example] Relazioni
 > **Proprietario**: `INPUT[suggester(optionQuery("Mondi/Personaggi"), useLinks(partial), allowOther):proprietario]`
@@ -115,7 +115,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "ogg
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderConnessioni");
 ```
---- Vista
+--- 👁 Vista
 
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderEntityPanel");

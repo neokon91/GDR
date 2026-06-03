@@ -1,7 +1,7 @@
 <% await tp.user.crea_regno(tp) %>
 # `=this.nome`
 
-> [!infobox] 👑 Regno
+> [!infobox|regno] 👑 Regno
 > `INPUT[ritratto][:ritratto]`
 >
 > | | |
@@ -16,7 +16,7 @@
 > | **Stato** | `INPUT[stato][:stato]` |
 
 ````tabs
---- Lore
+--- 📖 Lore
 
 > [!abstract] Scheda
 > Forma di governo: `INPUT[text:governo]`
@@ -47,7 +47,7 @@
 > `INPUT[textArea:segreto]`
 
 
---- Al tavolo
+--- 🎲 Al tavolo
 
 > [!tavolo] Uso al tavolo
 > `INPUT[testo_area][:uso_al_tavolo]`
@@ -77,7 +77,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > [!tip] Avanza / scatena
 > Una spinta dal grafo o una mossa? `BUTTON[avanza-fronte]` (clock +1).
 > Clock pieno? `BUTTON[scatena-conseguenza]` — crea l'evento-conseguenza collegato e azzera il clock.
---- Carattere
+--- 📊 Carattere
 
 > [!abstract] Carattere
 > **Coesione Politica** `INPUT[slider(minValue(1), maxValue(5), addLabels):coesione_politica]` → `VIEW[{coesione_politica} == 5 ? "5 · Monolitica" : ({coesione_politica} == 4 ? "4 · Centralizzata" : ({coesione_politica} == 3 ? "3 · Policentrica" : ({coesione_politica} == 2 ? "2 · Confederale" : ({coesione_politica} == 1 ? "1 · Tribale" : ("—")))))]`
@@ -121,12 +121,12 @@ return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "reg
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderCoerenza");
 ```
 
---- Cronologia
+--- 🕰 Cronologia
 
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderTappe");
 ```
---- Collegamenti
+--- 🔗 Collegamenti
 
 > [!example] Relazioni
 > **Capitale**: `INPUT[suggester(optionQuery("Mondi/Luoghi"), useLinks(partial), allowOther):capitale]`
@@ -150,7 +150,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderConnessioni");
 ```
---- Vista
+--- 👁 Vista
 
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderEntityPanel");

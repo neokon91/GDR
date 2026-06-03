@@ -1,7 +1,7 @@
 <% await tp.user.crea_mondo(tp) %>
 # `=this.nome`
 
-> [!infobox] 🌍 Mondo
+> [!infobox|mondo] 🌍 Mondo
 > `INPUT[ritratto][:ritratto]`
 >
 > | | |
@@ -14,7 +14,7 @@
 > | **Stato** | `INPUT[stato][:stato]` |
 
 ````tabs
---- Lore
+--- 📖 Lore
 
 > [!abstract] Scheda
 > Scala: `INPUT[scala][:scala]`
@@ -53,7 +53,7 @@
 > `INPUT[textArea:verita_nascosta]`
 
 
---- Al tavolo
+--- 🎲 Al tavolo
 
 > [!tavolo] Uso al tavolo
 > `INPUT[testo_area][:uso_al_tavolo]`
@@ -83,7 +83,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > [!tip] Avanza / scatena
 > Una spinta dal grafo o una mossa? `BUTTON[avanza-fronte]` (clock +1).
 > Clock pieno? `BUTTON[scatena-conseguenza]` — crea l'evento-conseguenza collegato e azzera il clock.
---- Carattere
+--- 📊 Carattere
 
 > [!abstract] Carattere
 > **Diffusione della Magia** `INPUT[slider(minValue(1), maxValue(5), addLabels):diffusione_magia]` → `VIEW[{diffusione_magia} == 5 ? "5 · Onnipresente" : ({diffusione_magia} == 4 ? "4 · Diffusa" : ({diffusione_magia} == 3 ? "3 · Presente" : ({diffusione_magia} == 2 ? "2 · Rara" : ({diffusione_magia} == 1 ? "1 · Assente" : ("—")))))]`
@@ -131,12 +131,12 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "mondo", component);
 ```
 
---- Cronologia
+--- 🕰 Cronologia
 
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderTappe");
 ```
---- Mappa
+--- 🗺 Mappa
 
 > [!info] Mappa
 > Collega una mappa: `INPUT[mappa][:mappa]`
@@ -150,7 +150,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > Scala mappa (km per unità): `INPUT[number:scala_mappa]` — km per unità di coordinata. Imposta i `coord` sui **Luoghi**: la tab *Dintorni* mostrerà le distanze in linea d'aria in km.
 >
 > Passo di viaggio (km/giorno): `INPUT[number:passo_viaggio]` — km al giorno a piedi (default 30): la tab *Viaggio* dei luoghi stima i tempi.
---- Collegamenti
+--- 🔗 Collegamenti
 
 > [!example] Relazioni
 > **Cosmologia**: `INPUT[suggester(optionQuery("Mondi/Cosmologia"), useLinks(partial), allowOther):cosmologia]`
@@ -169,7 +169,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderConnessioni");
 ```
---- Vista
+--- 👁 Vista
 
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderEntityPanel");

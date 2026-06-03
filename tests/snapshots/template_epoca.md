@@ -1,7 +1,7 @@
 <% await tp.user.crea_epoca(tp) %>
 # `=this.nome`
 
-> [!infobox] ⏳ Epoca
+> [!infobox|epoca] ⏳ Epoca
 > | | |
 > |:--|:--|
 > | **Tipo** | `VIEW[{tipo} ?? "—"]` |
@@ -23,7 +23,7 @@
 > **liminale** — Esiste tra due stati dell'essere: confini, piani e identità incerti.
 
 ````tabs
---- Lore
+--- 📖 Lore
 
 > [!abstract] Scheda
 > Inizio: `INPUT[text:inizio]`
@@ -45,7 +45,7 @@
 > `INPUT[textArea:segreto]`
 
 
---- Al tavolo
+--- 🎲 Al tavolo
 
 > [!tavolo] Uso al tavolo
 > `INPUT[testo_area][:uso_al_tavolo]`
@@ -75,7 +75,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > [!tip] Avanza / scatena
 > Una spinta dal grafo o una mossa? `BUTTON[avanza-fronte]` (clock +1).
 > Clock pieno? `BUTTON[scatena-conseguenza]` — crea l'evento-conseguenza collegato e azzera il clock.
---- Carattere
+--- 📊 Carattere
 
 > [!abstract] Carattere
 > **Presenza Divina** `INPUT[slider(minValue(1), maxValue(5), addLabels):presenza_divina]` → `VIEW[{presenza_divina} == 5 ? "5 · Immanente" : ({presenza_divina} == 4 ? "4 · Attiva" : ({presenza_divina} == 3 ? "3 · Intermittente" : ({presenza_divina} == 2 ? "2 · Remota" : ({presenza_divina} == 1 ? "1 · Assente" : ("—")))))]`
@@ -147,7 +147,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "epoca", component);
 ```
 
---- Cronologia
+--- 🕰 Cronologia
 
 > [!abstract]- Calendario
 > Inizio: `INPUT[text:fc-date]` — nel formato del calendario attivo (Gregorian: AAAA-MM-GG).
@@ -157,7 +157,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "epo
 > Calendario: `INPUT[text:fc-calendar]` · Categoria: `INPUT[text:fc-category]`
 >
 > Compila *Inizio (e Fine)* per far comparire l'epoca sul calendario. Lascia vuoti calendario/categoria per il calendario di default.
---- Collegamenti
+--- 🔗 Collegamenti
 
 > [!example] Relazioni
 > **Eventi principali**: `INPUT[inlineListSuggester(optionQuery("Mondi/Eventi"), useLinks(partial), allowOther):eventi]`
@@ -176,7 +176,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "epo
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderConnessioni");
 ```
---- Vista
+--- 👁 Vista
 
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderEntityPanel");

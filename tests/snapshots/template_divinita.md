@@ -1,7 +1,7 @@
 <% await tp.user.crea_divinita(tp) %>
 # `=this.nome`
 
-> [!infobox] ☀️ Divinità
+> [!infobox|divinita] ☀️ Divinità
 > `INPUT[ritratto][:ritratto]`
 >
 > | | |
@@ -26,14 +26,14 @@
 > **onirica** — Nata dall'inconscio collettivo, dai sogni cosmici o da archetipi inconsci.
 
 ````tabs
---- Scheda
+--- 📋 Scheda
 
 > [!abstract] Scheda
 > Dominio: `INPUT[text:dominio]`
 > Allineamento: `INPUT[allineamento][:allineamento]`
 > Simbolo: `INPUT[text:simbolo]`
 
---- Lore
+--- 📖 Lore
 
 > [!note]- Descrizione
 > Cosa è, com'è, perché conta al tavolo.
@@ -45,7 +45,7 @@
 > `INPUT[textArea:culto]`
 
 
---- Carattere
+--- 📊 Carattere
 
 > [!abstract] Carattere
 > **Presenza Cosmica** `INPUT[slider(minValue(1), maxValue(5), addLabels):presenza_cosmica]` → `VIEW[{presenza_cosmica} == 5 ? "5 · Immanente" : ({presenza_cosmica} == 4 ? "4 · Ancorata" : ({presenza_cosmica} == 3 ? "3 · Focalizzata" : ({presenza_cosmica} == 2 ? "2 · Diffusa" : ({presenza_cosmica} == 1 ? "1 · Trascendente" : ("—")))))]`
@@ -113,7 +113,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "div
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderCoerenza");
 ```
 
---- Collegamenti
+--- 🔗 Collegamenti
 
 > [!example] Relazioni
 > **Domini cosmici**: `INPUT[inlineListSuggester(optionQuery("Mondi/Domini"), useLinks(partial), allowOther):domini]`
@@ -133,7 +133,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderConnessioni");
 ```
---- Vista
+--- 👁 Vista
 
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderEntityPanel");

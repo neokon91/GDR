@@ -15,7 +15,7 @@
 {{ m.classificazione(template.category) }}
 {% endif %}
 ````tabs
---- Lore
+--- 📖 Lore
 
 {% block lore %}
 {{ m.scheda(template.category) }}
@@ -26,25 +26,25 @@
 {% endif %}
 {{ m.wizard_body(template.category) }}
 {% endblock %}
---- Al tavolo
+--- 🎲 Al tavolo
 
 {{ m.tavolo() }}
 {% if core.get('assi_tematici', {}).get(template.category) %}
---- Carattere
+--- 📊 Carattere
 
 {{ m.carattere(template.category) }}
 {% endif %}
 {% if template.category in core.get('tappe_categorie', []) %}
---- Cronologia
+--- 🕰 Cronologia
 
 {{ m.cronologia() }}
 {% endif %}
 {% block extra_tabs %}{% endblock %}
---- Collegamenti
+--- 🔗 Collegamenti
 
 {{ m.relazioni(template.category) }}
 {{ m.collegamenti(with_mondo=(template.category != "mondo")) }}
---- Vista
+--- 👁 Vista
 
 {{ m.vista() }}
 
