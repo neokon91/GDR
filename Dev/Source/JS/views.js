@@ -727,6 +727,28 @@ async function renderAlbero(app, page) {
   return `> [!tip]- 🌳 Albero evolutivo\n${blocchi.join("\n>\n")}`;
 }
 
+// Armi HOMEBREW dal vault (note `oggetto` con tipo=arma): stesso shape del catalogo
+// SRD {nome:{nome,danni,proprieta,categoria,padronanza}}, grazie alla parità di campi
+// (system.yaml usa gli stessi nomi dell'equip SRD). Così un'arma homebrew, se il PG
+// ne ha padronanza, è giocabile in renderAttacchi come quelle ufficiali. Best-effort:
+// se l'app non espone il vault (test headless), torna {} e si usa solo il catalogo SRD.
+function armiHomebrew(app) {
+  const out = {};
+  try {
+    for (const f of app.vault.getMarkdownFiles()) {
+      const fm = app.metadataCache.getFileCache(f) && app.metadataCache.getFileCache(f).frontmatter;
+      if (!fm || fm.categoria !== "oggetto" || String(fm.tipo || "").toLowerCase() !== "arma") continue;
+      const nome = (fm.nome || f.basename || "").toString();
+      if (!nome) continue;
+      const proprieta = Array.isArray(fm.proprieta)
+        ? fm.proprieta
+        : String(fm.proprieta || "").split(",").map((s) => s.trim()).filter(Boolean);
+      out[nome] = { nome, danni: fm.danni || "", proprieta, categoria: fm.categoria_arma || "", padronanza: fm.padronanza || "" };
+    }
+  } catch (e) { /* vault non disponibile (headless): solo catalogo SRD */ }
+  return out;
+}
+
 async function renderAttacchi(app, page) {
   if (!page) return "*Apri la scheda PG.*";
   const scelte = asArray(page.padronanze_armi).map(nomeArma).filter(Boolean);
@@ -734,7 +756,8 @@ async function renderAttacchi(app, page) {
     return "> [!tip]- ⚔️ Attacchi con maestria\n> Nessuna padronanza d'arma: la tua classe non la concede. Le 8 proprietà di maestria sono nel quick-ref sotto.";
   }
   const opt = await loadPersonaggio(app);
-  const armi = opt.armi || {};
+  // Catalogo SRD + armi homebrew dal vault (parità di campi → stesse colonne).
+  const armi = { ...armiHomebrew(app), ...(opt.armi || {}) };
   const core = await loadCoreData(app);
   const maestrieByName = {};
   for (const mm of core.maestrie || []) maestrieByName[String(mm.nome || "").toLowerCase()] = mm;
@@ -1242,7 +1265,7 @@ module.exports = {
   renderPressioni, cosmicPush, spinteFronte, renderStatoMondo,
   renderCondizioni, condizioniMarkdown,
   renderMaestrie, maestrieMarkdown,
-  renderAttacchi, attaccoArma, abilitaArma, danniArma, nomeArma,
+  renderAttacchi, attaccoArma, abilitaArma, danniArma, nomeArma, armiHomebrew,
   renderAlbero, parseNodo,
   radarMarkdownFromValues,
   renderTemaNatale, temaNataleMarkdown,

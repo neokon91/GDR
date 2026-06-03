@@ -57,6 +57,11 @@ creation:
     prompt: 'Velocità in metri (es. 9)'
     from: number
     optional: true
+  # Parità SRD (le specie ufficiali hanno tipo_creatura; già nella scheda, ora dal
+  # wizard). Opzionale.
+  - field: tipo_creatura
+    prompt: 'Tipo di creatura (es. Umanoide, Costrutto)'
+    optional: true
   body:
   - field: tratti
     prompt: Tratti di specie (scrivi "scurovisione" se la concede)

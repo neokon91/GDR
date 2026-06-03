@@ -52,6 +52,20 @@ creation:
   - field: classi
     prompt: 'Classi che lo lanciano (es. Mago, Chierico)'
     optional: true
+  # Stat-line di lancio (parità SRD: stessi campi degli incantesimi ufficiali; già
+  # mostrati nella scheda, ora catturati anche dal wizard). Opzionali.
+  - field: tempo_lancio
+    prompt: 'Tempo di lancio (es. 1 azione, 1 azione bonus, 1 minuto)'
+    optional: true
+  - field: gittata
+    prompt: 'Gittata (es. 9 metri, Contatto, Personale)'
+    optional: true
+  - field: componenti
+    prompt: 'Componenti (es. V, S, M (un fiore))'
+    optional: true
+  - field: durata
+    prompt: 'Durata (es. Istantanea, Concentrazione fino a 1 minuto)'
+    optional: true
   body:
   - field: effetto
     prompt: Effetto dell'incantesimo

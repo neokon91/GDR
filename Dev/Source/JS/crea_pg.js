@@ -337,6 +337,18 @@ function specieHomebrew() {
     return out;
 }
 
+// Armi homebrew con padronanza → {nome: padronanza}: offerte nel picker delle
+// padronanze d'arma accanto a quelle SRD (parità di campi → l'arma homebrew è
+// scegliibile e renderAttacchi la rende). Solo le note `oggetto` con tipo=arma.
+function armiPadronanzaHomebrew() {
+    const out = {};
+    for (const { f, fm } of noteVault("oggetto")) {
+        if (String(fm.tipo || "").toLowerCase() !== "arma" || !fm.padronanza) continue;
+        out[String(fm.nome || f.basename)] = String(fm.padronanza);
+    }
+    return out;
+}
+
 // Incantesimi a PG di 1º livello: trucchetti (trucchetti_noti) + incantesimi di
 // 1º (incantesimi_preparati) dai pool della classe FUSI con l'homebrew del vault.
 // Niente per i non-incantatori.
@@ -478,9 +490,9 @@ async function costruisciPG(tp, opt, nome) {
         .map(s => String(s || "").trim().replace(/\.$/, "")).filter(Boolean).join("; ");
 
     // Padronanza delle armi (2024): le classi che la ottengono scelgono N armi di
-    // cui conoscono la padronanza (mappa arma->padronanza dal SRD). Offre tutte le
-    // armi con padronanza; l'utente sceglie fra quelle con cui è competente.
-    const armiPad = opt.armi_padronanza || {};
+    // cui conoscono la padronanza (mappa arma->padronanza dal SRD + armi homebrew del
+    // vault). Offre tutte le armi con padronanza; l'utente sceglie fra le competenti.
+    const armiPad = { ...armiPadronanzaHomebrew(), ...(opt.armi_padronanza || {}) };
     const padronanzePool = Object.keys(armiPad).map(a => `${a} — ${armiPad[a]}`);
     const padronanze_armi = await scegliMulti(tp, "Padronanza d'arma", padronanzePool, classe.padronanza_armi || 0);
 
@@ -550,3 +562,4 @@ module.exports.fondiPool = fondiPool;
 module.exports.backgroundHomebrew = backgroundHomebrew;
 module.exports.specieHomebrew = specieHomebrew;
 module.exports.classeHomebrew = classeHomebrew;
+module.exports.armiPadronanzaHomebrew = armiPadronanzaHomebrew;

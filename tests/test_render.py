@@ -653,6 +653,39 @@ def test_attacco_arma(tmp_path):
 
 
 @pytest.mark.skipif(not shutil.which("node"), reason="node assente")
+def test_armi_homebrew(tmp_path):
+    """views.armiHomebrew: legge le note `oggetto` con tipo=arma dal vault e le porta
+    nello stesso shape del catalogo SRD (parità di campi) → un'arma homebrew gioca in
+    attaccoArma come quelle ufficiali (qui: accurata → mod migliore, danni, maestria).
+    Le note non-arma (pozione) sono escluse. App headless senza vault → {} (no crash)."""
+    harness = tmp_path / "hw.js"
+    harness.write_text(
+        'const fs=require("fs");'
+        f'const src=fs.readFileSync({json.dumps(str(render.JS_DIR / "views.js"))},"utf8");'
+        'const m={exports:{}};new Function("module","exports",src)(m,m.exports);'
+        'const {armiHomebrew,attaccoArma}=m.exports;'
+        'const fmOf={Fiammacupa:{categoria:"oggetto",tipo:"arma",danni:"1d8 taglienti",proprieta:"accurata, leggera",padronanza:"Affondo"},'
+        '  Pozione:{categoria:"oggetto",tipo:"oggetto magico"}};'
+        'const app={vault:{getMarkdownFiles:()=>[{basename:"Fiammacupa"},{basename:"Pozione"}]},'
+        '  metadataCache:{getFileCache:(f)=>({frontmatter:fmOf[f.basename]})}};'
+        'const H=armiHomebrew(app);'
+        'const att=H.Fiammacupa?attaccoArma(H.Fiammacupa,{mod_forza:1,mod_destrezza:3},{affondo:{effetto:"LUNGE"}}):null;'
+        'const safe=armiHomebrew({});'  # app senza vault → {} (try/catch)
+        'process.stdout.write(JSON.stringify({H,att,safeKeys:Object.keys(safe).length}));',
+        encoding="utf-8")
+    res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
+    assert res.returncode == 0, res.stderr
+    out = json.loads(res.stdout)
+    assert "Fiammacupa" in out["H"] and "Pozione" not in out["H"]          # solo le armi
+    arma = out["H"]["Fiammacupa"]
+    assert arma["danni"] == "1d8 taglienti" and arma["padronanza"] == "Affondo"
+    assert arma["proprieta"] == ["accurata", "leggera"]                     # text → lista
+    assert "mod_destrezza" in out["att"]["colpire"]                         # accurata: DES 3 > FOR 1
+    assert out["att"]["danni"] == "1d8 + mod_destrezza" and out["att"]["effetto"] == "LUNGE"
+    assert out["safeKeys"] == 0                                             # headless → {} senza crash
+
+
+@pytest.mark.skipif(not shutil.which("node"), reason="node assente")
 def test_parse_nodo(tmp_path):
     """views.parseNodo (albero evolutivo): "grado | nome | prerequisito | effetto" →
     struttura; grado non numerico → 0; prerequisito "—" → vuoto."""

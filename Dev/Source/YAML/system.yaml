@@ -14,6 +14,15 @@ fields:
   # Oggetti magici
   rarita:         { label: Rarità,               widget: rarita }
   sintonia:       { label: Sintonia,             widget: text }
+  # Armi / equipaggiamento — STESSI nomi-campo dell'SRD (srd_..._equipment.json):
+  # una nota oggetto homebrew porta gli stessi dati dell'equip ufficiale → arma
+  # giocabile in renderAttacchi (tiro+danni+maestria), come le armi SRD.
+  danni:          { label: Danni,                widget: text }
+  proprieta:      { label: Proprietà,            widget: text }
+  padronanza:     { label: Padronanza,           widget: text }
+  costo:          { label: Costo,                widget: text }
+  peso:           { label: Peso,                 widget: text }
+  classe_armatura: { label: Classe armatura,     widget: text }
   # Bastione (2024): numero di difensori del bastione (livello = PG min, 5+).
   difensori:      { label: Difensori,            widget: number }
   # Incantesimi

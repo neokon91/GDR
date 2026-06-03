@@ -25,6 +25,14 @@ creation:
     prompt: Categoria del talento
     from: subtypes
     required: true
+  # Parità SRD (talenti ufficiali hanno prerequisito + ripetibile; già nella scheda,
+  # ora catturati anche dal wizard). Opzionali.
+  - field: prerequisito
+    prompt: 'Prerequisito (es. Forza 13, livello 4)'
+    optional: true
+  - field: ripetibile
+    prompt: 'Ripetibile? (es. sì / no)'
+    optional: true
   body:
   - field: benefici
     prompt: Benefici del talento

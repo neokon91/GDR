@@ -62,6 +62,27 @@ creation:
   - field: sintonia
     prompt: Sintonia richiesta? (es. sì, da un druido)
     optional: true
+  # Meccaniche arma/armatura (parità SRD): per i subtype arma/armatura/scudo. STESSI
+  # nomi-campo dell'equip ufficiale → l'arma homebrew è giocabile in renderAttacchi.
+  # Opzionali (dietro il gate "campi facoltativi": niente attrito per pozioni/anelli).
+  - field: danni
+    prompt: 'Danni (armi, es. 1d8 taglienti)'
+    optional: true
+  - field: proprieta
+    prompt: 'Proprietà (armi, es. versatile (1d10), accurata)'
+    optional: true
+  - field: padronanza
+    prompt: 'Padronanza arma 2024 (es. Affondo, Vessazione, Fendente)'
+    optional: true
+  - field: costo
+    prompt: 'Costo (es. 15 mo)'
+    optional: true
+  - field: peso
+    prompt: 'Peso (es. 1 kg)'
+    optional: true
+  - field: classe_armatura
+    prompt: 'Classe armatura (armature, es. 14 + Des (max 2))'
+    optional: true
   body:
   - field: descrizione_oggetto
     prompt: Aspetto e fattura
