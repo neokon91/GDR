@@ -1337,6 +1337,23 @@ def test_example_world():
     assert "**Clock**: 4/6" in voragine and "[!tavolo]" in voragine and "list from" in voragine
 
 
+def test_onboarding_note():
+    """UX-1: la nota guidata "Inizia da qui" rende il wedge — referenzia un luogo-fronte
+    reale, il cruscotto [[Fronti]], il bottone crea-luogo, ed è fuori dal sito giocatori."""
+    man = render.load_example_manifests()[0]
+    txt = render.onboarding_note_text(man)
+    assert "# 👋 Inizia da qui" in txt
+    assert "BUTTON[crea-luogo]" in txt            # passo 3: provalo tu (Meta Bind, non Templater)
+    assert "[[Fronti]]" in txt                    # passo 2: il cruscotto calcolato dal grafo
+    assert "si calcola" in txt                    # il messaggio-wedge
+    assert "visibilita: dm" in txt                # escluso dal sito dei giocatori
+    cand = [n for n in man["note"] if n.get("categoria") == "luogo"
+            and n.get("pressione") is not None and n.get("prossima_mossa")]
+    rep = max(cand, key=lambda n: int(n.get("pressione") or 0)) if cand else None
+    if rep:                                        # referenzia il luogo che preme di più (es. Forte Cenere)
+        assert f"[[{rep['nome']}]]" in txt
+
+
 @pytest.mark.skipif(not shutil.which("node"), reason="node assente")
 def test_anti_drift_matchescond(tmp_path):
     """Anti-drift: la logica dei comparatori 'matchesCond' è duplicata in views.js

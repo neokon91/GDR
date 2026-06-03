@@ -38,8 +38,11 @@ Pronto per **beta chiuso**. Per la beta aperta restano i punti PM qui sotto.
   incantesimi inline, condizioni, maestrie armi; **encounter** budget XP 2024 + auto-riscrittura
   + **alleati** (`ally`); clock/Fronti; **ponte homebrew→motore** (incantesimi/talenti/background/
   specie/classe/**sottoclasse** giocabili); **tiri Dice Roller col bonus reale** sulla scheda PG.
-- **Onboarding & condivisione** — mondo-esempio Valdombra; **on-ramp Home** (6 tipi primari,
-  metafisica opt-in); LEGGIMI di distribuzione; **sito dei giocatori** statico spoiler-free
+- **Onboarding & condivisione** — mondo-esempio Valdombra + **nota guidata «Inizia da qui»**
+  (UX-1, momento-aha: in 3 passi mostra lore→superficie giocabile calcolata, col bottone
+  `crea-luogo` e il link al cruscotto Fronti; read-only, `visibilita: dm`, vive/muore con
+  l'esempio); **on-ramp Home** (6 tipi primari, metafisica opt-in; il tip apre «Inizia da qui»);
+  LEGGIMI di distribuzione; **sito dei giocatori** statico spoiler-free
   (`npm run site`, `visibilita: dm`).
 - **Solidità** — 262 test (snapshot + e2e/headless JS + rules-engine), validazione del contratto
   YAML↔wizard, anti-drift byte-equal (`_comparators.js`/`_homebrew_bridge.js`), merge config
@@ -59,8 +62,9 @@ Pronto per **beta chiuso**. Per la beta aperta restano i punti PM qui sotto.
 - **Condivisione ai giocatori — evoluzione** — il sito esiste; approfondire con **rivelazione
   progressiva / livelli di visibilità** (estende `visibilita`, modello Kanka): una vista
   "occhi del giocatore" che svela per gradi.
-- **Onboarding guidato** — tour "crea il tuo primo mondo in 10 minuti" + wizard di worldbuilding
-  a tappe con spunti suggeriti (accoglienza che oggi manca rispetto a World Anvil).
+- **Onboarding guidato** — ✅ il **momento-aha** è coperto dalla nota «Inizia da qui» (UX-1).
+  Resta il *tour interattivo* più profondo: wizard di worldbuilding a tappe con spunti
+  suggeriti (accoglienza alla World Anvil) — opzionale, dopo il primo segnale dagli utenti.
 
 ### 5.5e / DM (completare l'esperienza di sessione)
 - ✅ **Sottoclasse homebrew** — `sali_pg` offre le sottoclassi homebrew del vault al

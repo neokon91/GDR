@@ -892,6 +892,60 @@ def example_world_notes(manifest: dict[str, Any], core: dict[str, Any]) -> list[
     return out
 
 
+def onboarding_note_text(manifest: dict[str, Any]) -> str:
+    """Nota guidata "Inizia da qui" (UX-1, momento-aha): in 3 passi mostra IL WEDGE —
+    scrivi lore (pressione/prossima mossa) su una nota → la superficie giocabile (il
+    cruscotto Fronti) si popola da sé. Read-only; il BUTTON è Meta Bind (rende in
+    Lettura), non Templater. `visibilita: dm` → fuori dal sito dei giocatori."""
+    world = manifest["mondo"]
+    # Luogo rappresentativo: quello che PREME di più (pressione max fra i luoghi con
+    # pressione E prossima mossa) — il miglior esempio di "la lore accende la superficie
+    # giocabile". Fallback robusto se nessuno qualifica.
+    candidati = [n for n in manifest.get("note", []) or []
+                 if n.get("categoria") == "luogo" and n.get("pressione") is not None
+                 and n.get("prossima_mossa")]
+    rep = max(candidati, key=lambda n: int(n.get("pressione") or 0)) if candidati else None
+    if rep:
+        passo1 = (f"Apri **[[{rep['nome']}]]**. Oltre alla prosa ha dei campi *da tavolo*: "
+                  f"una **Pressione {rep['pressione']}** e una **Prossima mossa**. Non sono "
+                  f"decorazione — dicono che questo luogo *preme* sulla storia.")
+    else:
+        passo1 = ("Apri una nota di luogo del mondo-esempio: ha campi *da tavolo* "
+                  "(Pressione, Prossima mossa) oltre alla prosa.")
+    fm = {"nome": "Inizia da qui", "visibilita": "dm", "tags": ["gdr/esempio"]}
+    front = yaml.safe_dump(fm, allow_unicode=True, sort_keys=False)
+    lines = [
+        f"---\n{front}---", "",
+        f"# 👋 Inizia da qui — {world}", "",
+        "> [!tip] 3 minuti per capire cos'ha di speciale questo vault",
+        "> Non è uno schedario di lore: è un **mondo che si calcola**. Quando scrivi la lore di",
+        "> una nota, la *superficie giocabile* (cosa preme al tavolo) si accende **da sola**.",
+        "> Seguiamolo in 3 passi, sul mondo-esempio già pronto.", "",
+        "## 1 · Guarda una nota di mondo",
+        passo1, "",
+        "## 2 · Guarda dove quel segnale riemerge **da solo**",
+        "Apri il cruscotto **[[Fronti]]** (callout *⚡ Stato del Mondo* in cima). Non l'hai",
+        "compilato tu: è **calcolato dal grafo**. Il luogo di prima — e gli altri fronti —",
+        "compaiono lì **ordinati per imminenza** (riempimento del clock + spinte dalle note",
+        "collegate). Hai scritto lore in *una* nota → il cruscotto di prep-sessione si è",
+        "popolato da sé. **Questo è il punto: il mondo si calcola.**", "",
+        "## 3 · Provalo tu (30 secondi)",
+        "> [!example] Crea il tuo primo luogo",
+        "> `BUTTON[crea-luogo]`",
+        ">",
+        "> Nel wizard scegli un **mondo**, poi compila **Pressione** (prova 6-7) e una",
+        "> **Prossima mossa**. Riapri **[[Fronti]]**: il tuo luogo è ora fra i fronti, in",
+        "> classifica. Niente database da gestire — la tua lore *è* il motore.", "",
+        "---",
+        "> [!info] E poi?",
+        "> - Esplora gli indici dalla **[[Home]]**: 🗺️ [[Atlante]], ⏳ [[Fronti]], 💰 [[Economia]], 🧭 [[Geografia]].",
+        "> - Crea fazioni, divinità, eventi: ognuno aggiunge spinte al grafo (alleati/rivali, rotte, clock).",
+        f"> - Per partire da un mondo **vuoto**, cancella la cartella `_Esempio — {world}`.",
+        "> - Guida completa: **[[LEGGIMI]]**.",
+    ]
+    return "\n".join(lines)
+
+
 def write_example_world(core: dict[str, Any]) -> int:
     """Genera i mondi-esempio (Dev/Source/esempio/*.yaml) in cartelle riservate
     `Mondi/_Esempio — <Mondo>/`. Riscrittura pulita: azzera SOLO la propria cartella
@@ -904,6 +958,10 @@ def write_example_world(core: dict[str, Any]) -> int:
         for rel, text in example_world_notes(manifest, core):
             write_text(VAULT / rel, text)
             written += 1
+        # Nota guidata "Inizia da qui" (UX-1): vive e muore con l'esempio; rende il
+        # wedge nei primi minuti (lore → superficie giocabile calcolata).
+        write_text(folder / "Inizia da qui.md", onboarding_note_text(manifest))
+        written += 1
     return written
 
 
