@@ -5,10 +5,18 @@ Il **come** sta nei doc tecnici ([architecture](architecture.md) · [data_model]
 [rules_layer](rules_layer.md) · [play_layer](play_layer.md) · [plugin_contracts](plugin_contracts.md));
 la **cronistoria** dettagliata vive nelle memorie di progetto. Qui: dove siamo e cosa manca.
 
-## Stato (2026-06-02)
+## Stato (2026-06-03)
 
-`origin/main`, **265 test**, check 0. Pipeline matura: sorgenti YAML/Jinja/JS → `render.py`
-→ vault Obsidian (+ sito giocatori opzionale). Mondo-esempio **Valdombra** popolato.
+`origin/main` (`84bca8e`), **269 test**, check 0. Pipeline matura: sorgenti YAML/Jinja/JS →
+`render.py` → vault Obsidian (+ sito giocatori opzionale). Mondo-esempio **Valdombra** popolato.
+
+**Ultima sessione** (2026-06-03): consolidamento ontologia (principio di inclusione + merge
+`istituzione→fazione`); irrobustimento (harness + copertura pannelli/radar, **cap a scala** dei
+cruscotti); onboarding «Inizia da qui»; **fix Tab Panels↔Meta Bind** (crash `onCacheChanged` risolto:
+`enableCaching:false`); **scaffolder mostri GS→statblock** (boss homebrew giocabili, base da mediane
+SRD); **inversi reciproci nel wizard** (`_relations.js` canonico); **generatori in-casa Stage 1+2**
+(10 tipi: nomi + PNG/taverna/gancio/diceria/bottino/insediamento/oggetto — alternativa a FCG, *con*
+API). Pubblicazione decisa: **no-ZIP**, repo + sito statico condivisibile, licenze verificate (pulite).
 
 **Verdetto 4-lenti** (analisi fresca, tarata sui competitor — World Anvil/Kanka/LegendKeeper/
 Foundry/D&D Beyond): Architetto **8** · World-builder **8** · Game-designer 5.5e **8** · PM **6.5**.
@@ -139,7 +147,10 @@ non testabile headless → ogni QA in-app ha storicamente trovato bug reali.
 
 ## Come ripartire
 
-Leggi questo file + i doc tecnici + le memorie (`audit-2026-competitor`, `geografia-timeline`,
-`project-northstar`). Il blocco recente è implementato **e** verificato in-app. Candidati
-prossimi, a scelta: un punto **PM** (rivelazione progressiva ai giocatori / onboarding guidato),
-l'**importer Azgaar** (cantiere worldbuilding), o la **memoria-di-campagna AI locale** (frontiera).
+Leggi questo file + i doc tecnici + le memorie. Stato pulito, tutto su `origin/main`.
+**Prima cosa, idealmente**: la **pubblicazione** (rendere il repo accessibile + 3-5 DM reali → il
+template «🎲 Feedback beta» è già live) per il primo segnale esterno; **oppure** la **QA in-app del
+blocco recente** (inverse-nel-wizard, i 10 generatori, merge `istituzione→fazione`,
+`renderAxesCompare`/`renderSessionPanel`) — da fare quando computer-use è di nuovo disponibile.
+Candidati build: **generatori Stage 3** (verso la parità FCG), **importer Azgaar** (cantiere
+worldbuilding), rivelazione progressiva ai giocatori, memoria-di-campagna AI locale (frontiera).
