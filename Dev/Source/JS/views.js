@@ -371,7 +371,11 @@ async function renderCoerenza(app, dv, page) {
   if (!note.length) {
     return "> [!check]- 🎭 Coerenza tematica\n> Nessuna tensione notevole coi collegamenti (profili compatibili o assi non condivisi).";
   }
-  return "> [!check]- 🎭 Coerenza tematica (spunti, non errori)\n" + note.map((n) => "> - " + n).join("\n");
+  const MAX = 8;                                   // cap anti-rumore (SYS-3)
+  const extra = note.length - MAX;
+  const righe = note.slice(0, MAX).map((n) => "> - " + n);
+  if (extra > 0) righe.push(`> - *…e altri ${extra} spunti dai collegamenti.*`);
+  return "> [!check]- 🎭 Coerenza tematica (spunti, non errori)\n" + righe.join("\n");
 }
 
 // --- Clock & conseguenze: orologio a segmenti (progress-clock) ---------------
@@ -1033,8 +1037,12 @@ async function renderPressioni(app, dv, page) {
   if (!out.length) {
     return "> [!tip] Fronte stabile\n> Nessuna spinta dal grafo per ora: il clock avanza solo per le tue mosse.";
   }
+  const MAX = 8;                                   // cap anti-muro (SYS-3)
+  const extra = out.length - MAX;
+  const righe = out.slice(0, MAX).map((r) => "> - " + r);
+  if (extra > 0) righe.push(`> - *…e altre ${extra} spinte dal grafo.*`);
   return "> [!danger]- ⚡ Spinte dal grafo (il mondo preme su questo fronte)\n"
-    + out.map((r) => "> - " + r).join("\n")
+    + righe.join("\n")
     + "\n>\n> Una spinta giustifica un segmento: premi **Avanza fronte** o gioca la mossa.";
 }
 
@@ -1060,7 +1068,12 @@ async function renderStatoMondo(app, dv) {
     rows.push({ f, dim, cur, spinte, score });
   }
   rows.sort((a, b) => b.score - a.score || b.cur / b.dim - a.cur / a.dim);
-  const blocchi = rows.map(({ f, dim, cur, spinte }) => {
+  // Cap anti-muro (SYS-3): a scala il cruscotto rendeva un blocco per OGNI fronte
+  // (decine di fronti = muro illegibile). Mostra solo i più imminenti; il totale
+  // resta visibile nell'intestazione (no silent cap). Per la prep di sessione
+  // contano i fronti caldi in cima, non l'elenco esaustivo.
+  const TOP = 12;
+  const blocchi = rows.slice(0, TOP).map(({ f, dim, cur, spinte }) => {
     const pieno = cur >= dim;
     const icona = pieno ? "🔴" : (spinte.length || cur >= dim - 1) ? "🟠" : "🟢";
     const stato = pieno ? "PIENO — scatena la conseguenza" : (spinte.length || cur >= dim - 1) ? "sta per scattare" : "stabile";
@@ -1070,7 +1083,8 @@ async function renderStatoMondo(app, dv) {
     return blocco;
   });
   const attivi = rows.filter((r) => r.spinte.length || r.cur >= r.dim - 1).length;
-  return `> [!warning] ⚡ Stato del Mondo — **${rows.length} fronti** · ${attivi} sotto pressione\n`
+  const piuDi = rows.length > TOP ? ` · mostro i ${TOP} più imminenti` : "";
+  return `> [!warning] ⚡ Stato del Mondo — **${rows.length} fronti** · ${attivi} sotto pressione${piuDi}\n`
     + "> In ordine di imminenza (clock + spinte dal grafo):\n>\n"
     + blocchi.join("\n>\n");
 }

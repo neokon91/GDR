@@ -233,15 +233,25 @@ def write_workspace_chrome(obsidian: Path) -> None:
 # qui invece di sparpagliarla. Non è una categoria: scaffoldata a parte + icona.
 MEDIA_FOLDER = "Media"
 MEDIA_ICON = "🖼️"
-APP_SETTINGS = {"propertiesInDocument": "hidden", "attachmentFolderPath": MEDIA_FOLDER}
+# defaultViewMode "preview": le note si aprono in Lettura, dove il contenuto
+# dinamico (tabs/Dataview/Meta Bind/dice) RENDE e gli INPUT/BUTTON sono già
+# interattivi — così la prima impressione non è un muro di ```fence grezze. Si
+# passa alla scrittura con Ctrl/Cmd-E. (Merge non distruttivo: l'utente può
+# cambiarlo; un rebuild esplicito lo ripristina.)
+APP_SETTINGS = {
+    "propertiesInDocument": "hidden",
+    "attachmentFolderPath": MEDIA_FOLDER,
+    "defaultViewMode": "preview",
+}
 # Plugin core usati dalla pipeline: bookmarks legge il bookmarks.json generato;
 # bases rende le viste-indice native (.base) generate in INDEX_DIR/.
 CORE_PLUGINS = ("bookmarks", "bases")
 
 
 def write_core_settings(obsidian: Path) -> None:
-    """Default core consigliati: nasconde le Proprietà nelle note e abilita i
-    plugin core usati. Non distruttivo (merge; preserva il resto della config)."""
+    """Default core consigliati: nasconde le Proprietà nelle note, apre le note in
+    Lettura (contenuto dinamico già reso) e abilita i plugin core usati.
+    Non distruttivo (merge; preserva il resto della config)."""
     merge_json(obsidian / "app.json", APP_SETTINGS)
     core_plugins = read_json(obsidian / "core-plugins.json")
     if isinstance(core_plugins, dict):

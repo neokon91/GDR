@@ -7,7 +7,7 @@ la **cronistoria** dettagliata vive nelle memorie di progetto. Qui: dove siamo e
 
 ## Stato (2026-06-02)
 
-`origin/main`, **247 test**, check 0. Pipeline matura: sorgenti YAML/Jinja/JS → `render.py`
+`origin/main`, **262 test**, check 0. Pipeline matura: sorgenti YAML/Jinja/JS → `render.py`
 → vault Obsidian (+ sito giocatori opzionale). Mondo-esempio **Valdombra** popolato.
 
 **Verdetto 4-lenti** (analisi fresca, tarata sui competitor — World Anvil/Kanka/LegendKeeper/
@@ -20,7 +20,8 @@ Pronto per **beta chiuso**. Per la beta aperta restano i punti PM qui sotto.
 
 ## Fatto (consolidato)
 
-- **Modello di mondo** — 37 categorie (classificazione `famiglia`+`tipo`), relazioni tipizzate
+- **Modello di mondo** — 36 categorie (classificazione `famiglia`+`tipo`; `istituzione` assorbita
+  in `fazione` col merge SYS-2 — vedi [data_model §Principio di inclusione](data_model.md)), relazioni tipizzate
   con inversi auto-derivati, assi tematici 1-5 (radar/archetipi, **preset famiglia→assi**,
   **motore di coerenza** `renderCoerenza` che fa emergere le tensioni tematiche fra entità
   collegate — contrasti forti, rivali-specchio), **economia/risorse**,
@@ -40,9 +41,14 @@ Pronto per **beta chiuso**. Per la beta aperta restano i punti PM qui sotto.
 - **Onboarding & condivisione** — mondo-esempio Valdombra; **on-ramp Home** (6 tipi primari,
   metafisica opt-in); LEGGIMI di distribuzione; **sito dei giocatori** statico spoiler-free
   (`npm run site`, `visibilita: dm`).
-- **Solidità** — 247 test (snapshot + e2e JS + rules-engine), validazione del contratto
+- **Solidità** — 262 test (snapshot + e2e/headless JS + rules-engine), validazione del contratto
   YAML↔wizard, anti-drift byte-equal (`_comparators.js`/`_homebrew_bridge.js`), merge config
-  `.obsidian` non distruttivo, mondo-esempio rigenerato a ogni build.
+  `.obsidian` non distruttivo, mondo-esempio rigenerato a ogni build. Copertura headless dei
+  pannelli (`renderEntityPanel`/`renderSessionPanel`) e dell'injection-DOM dei radar
+  (`renderAxesRadar`/`renderAxesCompare`). **Stress-test a scala (SYS-3)**: un grafo grande e
+  sporco (84 fronti, link pendenti, dati mancanti) verifica robustezza e tempi — emerso che
+  `renderStatoMondo`/`renderCoerenza`/`renderPressioni` erano *senza cap* (muro a scala) →
+  aggiunti **top-N + dichiarazione del totale** (no silent cap); performance già lineare.
 
 ## Aperti — prioritizzati
 
@@ -76,7 +82,7 @@ Pronto per **beta chiuso**. Per la beta aperta restano i punti PM qui sotto.
   iniziazione/dottrina; nodi nella proprietà `nodi` = righe `grado | nome | prereq | effetto`,
   resi a gradi da `renderAlbero`, agganciata al grafo via sistema_magico/specie/culto). ✅ **seed
   minori mirati** (anti-filler: l'audit ha mostrato che rito/conflitto/titolo/genealogia erano
-  già coperti; aggiunti solo i vuoti veri) — `simbolo`→cultura/regno/istituzione, `rivali`→culto/
+  già coperti; aggiunti solo i vuoti veri) — `simbolo`→cultura/regno/fazione, `rivali`→culto/
   divinità, `dottrina`→sistema_magico. Resta: categorie astrologiche come entità (opt-in).
 - **Geografia avanzata — importer Azgaar** (design concordato, **non** implementato). Principio:
   la mappa-immagine è la tela, le note sono lo strato curato. **NO import a tappeto**: import a
@@ -97,8 +103,12 @@ Pronto per **beta chiuso**. Per la beta aperta restano i punti PM qui sotto.
 
 ## QA in-app (igiene continua, rischio #1)
 
-I 247 test coprono la *generazione*, non il *rendering runtime* dei plugin: ogni QA in-app ha
-storicamente trovato bug reali.
+Distinzione utile: i test coprono la *generazione* **e** la *logica delle funzioni di rendering*
+(`views.js` eseguito headless in Node con mock `dv`/`app`/`container` — ~30 test, incl. il
+percorso di injection DOM dei radar `renderAxesRadar`/`renderAxesCompare` e i pannelli
+`renderEntityPanel`/`renderSessionPanel`). Quello che **resta** scoperto è l'*integrazione
+plugin* vera (Meta Bind che binda, Dataview che indicizza, reattività live nel DOM Obsidian):
+non testabile headless → ogni QA in-app ha storicamente trovato bug reali.
 - **Verificato**: dashboard popolate, note (infobox/callout/clock), Esaurimento + Riposo lungo,
   `renderSpecieTratti`, wizard *Crea PG*, statblock 5.5e/5e, Meta Bind/Dataview/Calendarium/Tasks;
   ✅ (2026-06-02) **tiri Dice Roller col bonus dal frontmatter** (tooltip «1d20 + mod_forza [15] + 3»),

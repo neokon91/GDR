@@ -52,7 +52,9 @@ relazioni:
   category: lingua
 - field: istituzioni
   label: Istituzioni
-  category: istituzione
+  # ex-categoria `istituzione` assorbita in `fazione` (merge SYS-2): le istituzioni
+  # sono fazioni di subtype accademia/corte/tribunale.
+  category: fazione
   multi: true
 - field: specie
   label: Specie

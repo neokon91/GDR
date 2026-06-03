@@ -47,7 +47,6 @@
 > `BUTTON[crea-culto]`
 > `BUTTON[crea-profezia]`
 > `BUTTON[crea-regno]`
-> `BUTTON[crea-istituzione]`
 > `BUTTON[crea-bioma]`
 > `BUTTON[crea-ecosistema]`
 > `BUTTON[crea-sistema_magico]`

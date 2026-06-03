@@ -77,7 +77,6 @@ ritratto_categorie:
   - regno
   - divinita
   - culto
-  - istituzione
   - bastione
   - mito
   - cultura
@@ -94,7 +93,6 @@ tappe_categorie:
   - regno
   - cultura
   - fazione
-  - istituzione
   - culto
 
 # Categorie dove il MOTORE DI COERENZA (views.renderCoerenza) ha senso: hanno

@@ -71,6 +71,42 @@ enumerati e validati (vedi sotto).
 (macro `carattere()` + radar); `archetipi:` `{id, nome, quando:{asse: comparatore}, tag}`
 (tag-da-assi + preset in creazione, vedi [play_layer](play_layer.md)).
 
+## Principio di inclusione — cosa diventa un'entità
+
+Il modello *tende a crescere*: ogni concetto di lore "vorrebbe" una categoria propria.
+Questa regola è l'**arbitro**, per non oscillare fra «aggiungi tutto» e «pota tutto»
+(le due facce della stessa mancanza — vedi la lezione *audit-discernment* nelle memorie).
+
+> **Una cosa diventa una `entità` (un file in `entities/`) *se e solo se* ha entrambe:**
+> 1. **relazioni tipizzate proprie** — altri tipi la linkano in modo *specifico* (non solo «vedi anche»); **e**
+> 2. **superficie giocabile propria** — espone al tavolo qualcosa di *suo* (`uso_al_tavolo`/`gancio`/`pressione`/`statblock`/…).
+
+Altrimenti **non** è un'entità:
+
+| Ha (1) relazioni proprie? | Ha (2) superficie giocabile? | → È un… |
+|:--|:--|:--|
+| sì | sì | **entità** (categoria in `entities/`) |
+| sì | no | **campo / relazione** su un'entità esistente |
+| no | sì | **subtype** o **tag** di un'entità esistente |
+| no | no | **prosa** dentro una nota (heading/callout) — non un nodo del grafo |
+
+Esempi: `luogo` e `culto` superano (1)+(2) → entità ✓. «rito» descrive un culto e non ha
+superficie propria → heading nel culto. «titolo nobiliare» → tag/campo su personaggio.
+
+**Cluster politico-organizzativo — dirimuto con questa regola (SYS-2).** Applicato il test a
+`fazione`/`istituzione`/`regno`/`dominio`/`culto`:
+- `fazione` ✓ (hub), `regno` ✓ (territoriale: `capitale`/`territori`, distinto dall'organizzativo),
+  `culto` ✓ (gancio cosmologico: `divinita`/`luogo_sacro`), `dominio` ✓ (cosmico — la collisione
+  di nome col "dominio politico" era già risolta: rinominato `feudo`, subtype di `regno`).
+- `istituzione` ✗ → **collassata in `fazione`**: era una fazione con un legame al `regno`
+  (subtypes `accademia`/`corte`/`tribunale`; l'asse `integrità` e il legame `regno`/`simbolo`
+  migrati su fazione). `fazione` aveva già l'archetipo "Corpo ufficiale".
+- igiene: rimosso `culto` dai subtypes di `fazione` (è entità a sé; il braccio politico è il
+  link `culto.fazione`).
+
+Lato simmetrico: la profondità che *supera* (1)+(2) **non** è bloat. La regola taglia
+ciò che non li supera, non ciò che il mondo richiede davvero.
+
 ## Overlay e altri file
 
 | File | Ruolo |

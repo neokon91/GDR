@@ -13,6 +13,7 @@
 > | **Motto** | `VIEW[{motto} ?? "—"]` |
 > | **Forma di governo** | `VIEW[{forma_governo} ?? "—"]` |
 > | **Epoca di fondazione** | `VIEW[{fondazione} ?? "—"]` |
+> | **Simbolo** | `VIEW[{simbolo} ?? "—"]` |
 > | **Stato** | `INPUT[stato][:stato]` |
 
 > [!info] Famiglia: `INPUT[inlineSelect(option(militare), option(religiosa), option(arcana), option(rivoluzionaria), option(egemonica), option(mercantile), option(profetica)):famiglia]`
@@ -34,6 +35,7 @@
 > Motto: `INPUT[text:motto]`
 > Forma di governo: `INPUT[text:forma_governo]`
 > Epoca di fondazione: `INPUT[text:fondazione]`
+> Simbolo: `INPUT[text:simbolo]`
 
 > [!tip]- Genera nome/spunto
 > **Locale** (italiano, a tema): `BUTTON[genera-locale]` — nome di persona/luogo/fazione dallo *stile* della cultura/specie collegata (o scelto). Inserisce al cursore.
@@ -107,6 +109,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > **Relazione col Potere** `INPUT[slider(minValue(1), maxValue(5), addLabels):relazione_potere]` → `VIEW[{relazione_potere} == 5 ? "5 · Strumentale" : ({relazione_potere} == 4 ? "4 · Collaborativa tattica" : ({relazione_potere} == 3 ? "3 · Ambigua" : ({relazione_potere} == 2 ? "2 · Ostile selettiva" : ({relazione_potere} == 1 ? "1 · Indipendente assoluta" : ("—")))))]`
 > **Coesione** `INPUT[slider(minValue(1), maxValue(5), addLabels):coesione]` → `VIEW[{coesione} == 5 ? "5 · Organico" : ({coesione} == 4 ? "4 · Coordinata centralmente" : ({coesione} == 3 ? "3 · Modulata" : ({coesione} == 2 ? "2 · Decentrata" : ({coesione} == 1 ? "1 · Cellulare" : ("—")))))]`
 > **Reazione al Fallimento** `INPUT[slider(minValue(1), maxValue(5), addLabels):reazione_fallimento]` → `VIEW[{reazione_fallimento} == 5 ? "5 · Metamorfosi" : ({reazione_fallimento} == 4 ? "4 · Rinnovamento" : ({reazione_fallimento} == 3 ? "3 · Elaborazione" : ({reazione_fallimento} == 2 ? "2 · Rigidità" : ({reazione_fallimento} == 1 ? "1 · Negazione" : ("—")))))]`
+> **Integrità** `INPUT[slider(minValue(1), maxValue(5), addLabels):integrita]` → `VIEW[{integrita} == 5 ? "5 · Esemplare" : ({integrita} == 4 ? "4 · Retta" : ({integrita} == 3 ? "3 · Pragmatica" : ({integrita} == 2 ? "2 · Compromessa" : ({integrita} == 1 ? "1 · Corrotta" : ("—")))))]`
 
 > [!note]- Struttura — Grado di organizzazione interna e rigidità della catena di comando.
 > **1 · Orizzontale** — Nessuna struttura fissa; decisioni collettive. Cellule, bande, reti informali.
@@ -164,6 +167,13 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > **4 · Rinnovamento** — La crisi è accolta come occasione. Il culto rifonda sé stesso, cambia dottrina, simboli o leadership. Il passato resta, ma è rifuso in un nuovo inizio. Spesso si genera un “secondo culto”.
 > **5 · Metamorfosi** — La sconfitta è parte della fede stessa. La fazione muta forma, scopo e persino nome. Ogni crisi è una mutazione sacra. Nessuna identità è fissa. Ideale per fazioni legate al Vuoto, alla Rinascita o all’Inganno.
 
+> [!note]- Integrità — Quanto è fedele alla propria missione o ne è corrotta. Dimensione recuperata da `istituzione` nel merge SYS-2: vale per ogni fazione, non solo per le istituzioni formali.
+> **1 · Corrotta** — Serve interessi privati; la missione dichiarata è una facciata.
+> **2 · Compromessa** — Clientele e favori ne piegano l'operato.
+> **3 · Pragmatica** — Scende a patti quando serve, ma tiene la barra.
+> **4 · Retta** — Fedele alla missione; gli abusi sono rari e puniti.
+> **5 · Esemplare** — Incorruttibile; incarna il proprio ideale.
+
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "fazione", component);
 ```
@@ -193,6 +203,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > **Alleate**: `INPUT[inlineListSuggester(optionQuery("Mondi/Fazioni"), useLinks(partial), allowOther):alleati]`
 > **Rivali**: `INPUT[inlineListSuggester(optionQuery("Mondi/Fazioni"), useLinks(partial), allowOther):rivali]`
 > **Controlla le risorse**: `INPUT[inlineListSuggester(optionQuery("Mondi/Risorse"), useLinks(partial), allowOther):controlla_risorse]`
+> **Regno / Stato**: `INPUT[suggester(optionQuery("Mondi/Regni"), useLinks(partial), allowOther):regno]`
 
 > [!example] Collegamenti
 > Mondo: `INPUT[mondo][:mondo]`

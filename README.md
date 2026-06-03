@@ -103,7 +103,9 @@ estende (`{% block lore %}`/`{% block extra_tabs %}`); le pagine `home`/`index`/
 
 - **Campo editabile**: voce in `core.fields` (o `entities/<id>.fields`) → usalo con
   `field('id')`; se il widget non è `text`/`number`, dichiaralo in `plugins.yaml:metabind_inputs`.
-- **Entità**: un file `entities/<id>.yaml` (`folder`/`order`/`templates`/`subtypes` +
+- **Entità**: *prima* applica il [principio di inclusione](docs/data_model.md#principio-di-inclusione--cosa-diventa-unentità)
+  (relazioni proprie **e** superficie giocabile propria — altrimenti è campo/subtype/tag).
+  Se è davvero un'entità: un file `entities/<id>.yaml` (`folder`/`order`/`templates`/`subtypes` +
   opz. `fields`/`scheda`/`assi`/`relazioni`/`creation`) + il template `Jinja/<id>.md.j2`.
 - **Pagina-indice**: voce in `pages.yaml` (file/title/category/columns/sort).
 

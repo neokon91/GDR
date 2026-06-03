@@ -138,6 +138,25 @@ assi:
     3: { etichetta: "Elaborazione", descrizione: "La fazione analizza la sconfitta, ne discute le cause, e cerca un equilibrio tra ciò che deve essere conservato e ciò che può essere riformato. L’identità si adatta senza perdersi." }
     4: { etichetta: "Rinnovamento", descrizione: "La crisi è accolta come occasione. Il culto rifonda sé stesso, cambia dottrina, simboli o leadership. Il passato resta, ma è rifuso in un nuovo inizio. Spesso si genera un “secondo culto”." }
     5: { etichetta: "Metamorfosi", descrizione: "La sconfitta è parte della fede stessa. La fazione muta forma, scopo e persino nome. Ogni crisi è una mutazione sacra. Nessuna identità è fissa. Ideale per fazioni legate al Vuoto, alla Rinascita o all’Inganno." }
+- id: integrita
+  nome: Integrità
+  descrizione: "Quanto è fedele alla propria missione o ne è corrotta. Dimensione recuperata da `istituzione` nel merge SYS-2: vale per ogni fazione, non solo per le istituzioni formali."
+  valori:
+    1:
+      etichetta: Corrotta
+      descrizione: "Serve interessi privati; la missione dichiarata è una facciata."
+    2:
+      etichetta: Compromessa
+      descrizione: "Clientele e favori ne piegano l'operato."
+    3:
+      etichetta: Pragmatica
+      descrizione: "Scende a patti quando serve, ma tiene la barra."
+    4:
+      etichetta: Retta
+      descrizione: "Fedele alla missione; gli abusi sono rari e puniti."
+    5:
+      etichetta: Esemplare
+      descrizione: "Incorruttibile; incarna il proprio ideale."
 archetipi:
 - { id: gilda,        nome: "Gilda pragmatica",       quando: { scopo: ">=4", legalita: ">=4" },              tag: [gilda, lecita] }
 - { id: cospirazione, nome: "Cospirazione occulta",   quando: { metodo_operativo: "<=2", legalita: "<=2" },   tag: [cospirazione, occulta] }

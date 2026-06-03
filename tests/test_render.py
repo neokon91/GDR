@@ -846,6 +846,203 @@ def test_radar_markdown_from_values(tmp_path):
     assert "Servono almeno 3 assi" in out["few"]
 
 
+@pytest.mark.skipif(not shutil.which("node"), reason="node assente")
+def test_render_entity_panel(tmp_path):
+    """views.renderEntityPanel: griglia stato-tavolo (uso/gancio/pressione/mossa) con
+    classe ready/missing + backlinks risolti (renderBacklinks). Vuoto se page null."""
+    harness = tmp_path / "entitypanel.js"
+    harness.write_text(
+        'const fs=require("fs");'
+        f'const src=fs.readFileSync({json.dumps(str(render.JS_DIR / "views.js"))},"utf8");'
+        'const m={exports:{}};new Function("module","exports",src)(m,m.exports);'
+        'const citante={file:{name:"Forte Cenere"},categoria:"luogo",pressione:5};'
+        'const dv={page:(l)=>((((l&&l.path)?l.path:l)==="[[Forte Cenere]]")?citante:null)};'
+        'const page={uso_al_tavolo:"Hub dei PG",gancio:"",pressione:7,'
+        'prossima_mossa:"Raddoppia le guardie",file:{inlinks:["[[Forte Cenere]]"]}};'
+        'process.stdout.write(JSON.stringify({'
+        'full:m.exports.renderEntityPanel(dv,page),'
+        'empty:m.exports.renderEntityPanel(dv,null)}));',
+        encoding="utf-8")
+    res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
+    assert res.returncode == 0, res.stderr
+    out = json.loads(res.stdout)
+    assert "Uso al tavolo" in out["full"] and "Prossima mossa" in out["full"]
+    assert "gdr-card missing" in out["full"]          # gancio vuoto -> card "missing"
+    assert "Crisi (7)" in out["full"]                  # pressione 7 etichettata
+    assert "Citato da:" in out["full"] and "[[Forte Cenere]]" in out["full"]  # backlink risolto
+    assert "Apri la nota" in out["empty"]
+
+
+@pytest.mark.skipif(not shutil.which("node"), reason="node assente")
+def test_render_session_panel(tmp_path):
+    """views.renderSessionPanel: card obiettivo/scena + tabella 'Fronti collegati' coi
+    fronti (pressione + prossima mossa) delle note in `connessioni`. Vuoto se page null."""
+    harness = tmp_path / "sessionpanel.js"
+    harness.write_text(
+        'const fs=require("fs");'
+        f'const src=fs.readFileSync({json.dumps(str(render.JS_DIR / "views.js"))},"utf8");'
+        'const m={exports:{}};new Function("module","exports",src)(m,m.exports);'
+        'const front={file:{name:"La Setta"},pressione:8,prossima_mossa:"Apre la Voragine"};'
+        'const dv={page:(l)=>((((l&&l.path)?l.path:l)==="[[La Setta]]")?front:null)};'
+        'const page={obiettivo:"Fermare la Setta",scena_corrente:"Forte Cenere",'
+        'connessioni:["[[La Setta]]"]};'
+        'process.stdout.write(JSON.stringify({'
+        'full:m.exports.renderSessionPanel(dv,page),'
+        'empty:m.exports.renderSessionPanel(dv,null)}));',
+        encoding="utf-8")
+    res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
+    assert res.returncode == 0, res.stderr
+    out = json.loads(res.stdout)
+    assert "Obiettivo" in out["full"] and "Fronti collegati" in out["full"]
+    assert "Apre la Voragine" in out["full"] and "Crisi (8)" in out["full"]
+    assert "Apri la sessione" in out["empty"]
+
+
+# Mock minimale dell'elemento Obsidian (createEl) per testare il percorso di
+# INJECTION nel DOM dei radar — la classe di bug che si è rotta in-app (il radar
+# non disegnava). snap() riassume i figli iniettati: classe, presenza di <svg>, testo.
+_DOM_HARNESS = (
+    'function makeEl(){const el={children:[],innerHTML:"",text:""};'
+    'el.createEl=(tag,o)=>{o=o||{};const c=makeEl();c.tag=tag;c.cls=o.cls;'
+    'if(o.text!=null)c.text=o.text;el.children.push(c);return c;};return el;}'
+    'function snap(el){return el.children.map(c=>'
+    '({cls:c.cls,svg:String(c.innerHTML).includes("<svg"),text:c.text}));}'
+)
+
+
+@pytest.mark.skipif(not shutil.which("node"), reason="node assente")
+def test_render_axes_radar(tmp_path):
+    """views.renderAxesRadar: percorso di injection nel DOM. ≥3 assi -> .gdr-radar con
+    <svg>; <3 assi o page null -> .gdr-radar-empty col messaggio guida."""
+    harness = tmp_path / "axesradar.js"
+    harness.write_text(
+        'const fs=require("fs");'
+        f'const src=fs.readFileSync({json.dumps(str(render.JS_DIR / "views.js"))},"utf8");'
+        'const m={exports:{}};new Function("module","exports",src)(m,m.exports);'
+        + _DOM_HARNESS +
+        'const v5={1:{},2:{},3:{},4:{},5:{}};const ax=(id)=>({id,nome:id,valori:v5});'
+        'const core={assi_tematici:{culto:[ax("a"),ax("b"),ax("c")],poche:[ax("a"),ax("b")]}};'
+        'const app={vault:{adapter:{read:async()=>JSON.stringify(core)}}};'
+        'const c1=makeEl(),c2=makeEl(),c3=makeEl();'
+        'Promise.all(['
+        '  m.exports.renderAxesRadar(c1,app,{categoria:"culto",a:4,b:2,c:5,nome:"X"}),'
+        '  m.exports.renderAxesRadar(c2,app,{categoria:"poche",a:3,b:1,nome:"Y"}),'
+        '  m.exports.renderAxesRadar(c3,app,null),'
+        ']).then(()=>process.stdout.write(JSON.stringify('
+        '{full:snap(c1),few:snap(c2),empty:snap(c3)})));',
+        encoding="utf-8")
+    res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
+    assert res.returncode == 0, res.stderr
+    out = json.loads(res.stdout)
+    assert out["full"][0]["cls"] == "gdr-radar" and out["full"][0]["svg"] is True
+    assert out["few"][0]["cls"] == "gdr-radar-empty"     # <3 assi -> messaggio, niente svg
+    assert out["empty"][0]["cls"] == "gdr-radar-empty"   # page null -> guida
+
+
+@pytest.mark.skipif(not shutil.which("node"), reason="node assente")
+def test_render_axes_compare(tmp_path):
+    """views.renderAxesCompare: sovrappone gli assi delle note in `confronta` (≥3 assi,
+    ≥1 entità della categoria) -> .gdr-radar con <svg>; guida se manca `confronta`."""
+    harness = tmp_path / "axescompare.js"
+    harness.write_text(
+        'const fs=require("fs");'
+        f'const src=fs.readFileSync({json.dumps(str(render.JS_DIR / "views.js"))},"utf8");'
+        'const m={exports:{}};new Function("module","exports",src)(m,m.exports);'
+        + _DOM_HARNESS +
+        'const v5={1:{},2:{},3:{},4:{},5:{}};const ax=(id)=>({id,nome:id,valori:v5});'
+        'const core={assi_tematici:{culto:[ax("a"),ax("b"),ax("c")]}};'
+        'const app={vault:{adapter:{read:async()=>JSON.stringify(core)}}};'
+        'const A={file:{name:"A"},categoria:"culto",a:5,b:1,c:3};'
+        'const B={file:{name:"B"},categoria:"culto",a:2,b:4,c:5};'
+        'const dv={page:(l)=>{const p=((l&&l.path)?l.path:l);'
+        'return p==="[[A]]"?A:(p==="[[B]]"?B:null);}};'
+        'const c1=makeEl(),c2=makeEl();'
+        'Promise.all(['
+        '  m.exports.renderAxesCompare(c1,app,dv,{confronta:["[[A]]","[[B]]"]}),'
+        '  m.exports.renderAxesCompare(c2,app,dv,{}),'
+        ']).then(()=>process.stdout.write(JSON.stringify('
+        '{full:snap(c1),none:snap(c2)})));',
+        encoding="utf-8")
+    res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
+    assert res.returncode == 0, res.stderr
+    out = json.loads(res.stdout)
+    assert out["full"][0]["cls"] == "gdr-radar" and out["full"][0]["svg"] is True
+    assert out["none"][0]["cls"] == "gdr-radar-empty"        # niente confronta -> guida
+    assert "confronta" in (out["none"][0]["text"] or "")     # messaggio col formato
+
+
+@pytest.mark.skipif(not shutil.which("node"), reason="node assente")
+def test_emergenza_scala(tmp_path):
+    """SYS-3 — stress-test dell'emergenza a scala: un grafo grande e SPORCO (84 fronti,
+    link pendenti, pressione mancante, principi cosmici con molti inlink). Le funzioni
+    emergenti NON devono crashare (robustezza) e l'output del cruscotto deve restare
+    LIMITATO (niente muro illimitato di fronti). Emette anche dimensione/tempo."""
+    harness = tmp_path / "scala.js"
+    harness.write_text(
+        'const fs=require("fs");'
+        f'const src=fs.readFileSync({json.dumps(str(render.JS_DIR / "views.js"))},"utf8");'
+        'const m={exports:{}};new Function("module","exports",src)(m,m.exports);'
+        # core minimale: assi + relazioni per fazione (per renderCoerenza)
+        'const ax=(id)=>({id,nome:id,valori:{1:{etichetta:"a"},2:{},3:{},4:{},5:{etichetta:"e"}}});'
+        'const core={assi_tematici:{fazione:[ax("struttura"),ax("scopo"),ax("legalita")]},'
+        'relazioni:{fazione:[{field:"alleati",label:"Alleati"},{field:"rivali",label:"Rivali"}]}};'
+        'const app={vault:{adapter:{read:async()=>JSON.stringify(core)}}};'
+        # generatore di grafo sintetico
+        'const pages=[];const byPath=new Map();'
+        'function mk(name,fm){const p=Object.assign({file:{name,path:name+".md",inlinks:[]},categoria:"luogo"},fm||{});'
+        'pages.push(p);byPath.set("[["+name+"]]",p);byPath.set(name+".md",p);return p;}'
+        'const dv={page:(l)=>{const k=(l&&l.path)?l.path:l;return byPath.get(k)||null;},'
+        'pages:()=>({where:(fn)=>({array:()=>pages.filter(fn)})})};'
+        # 60 risorse: pressione variabile (alcune hot, alcune ASSENTI = dati sporchi)
+        'for(let i=0;i<60;i++){mk("R"+i,{categoria:"risorsa",'
+        'pressione:i%3===0?8:(i%5===0?undefined:2),'
+        'controllata_da:i%4===0?"[[Casata"+i+"]]":undefined});}'
+        # 80 fronti con link al pool + un link PENDENTE per campo (GHOST = non risolve)
+        'const F=80;for(let i=0;i<F;i++){const dim=4+(i%5);'
+        'mk("Fronte"+i,{categoria:i%2?"fazione":"luogo",clock_dim:dim,clock:i%(dim+1),'
+        'prossima_mossa:i%3?"mossa "+i:undefined,'
+        'dipende_da:["[[R"+(i%60)+"]]","[[GHOST"+i+"]]"],'
+        'produce:["[[R"+((i*7)%60)+"]]"],rotta_con:["[[R"+((i*3)%60)+"]]"],'
+        'rivali:["[[Fronte"+((i+1)%F)+"]]","[[GHOSTR"+i+"]]"]});}'
+        # 4 principi cosmici (dominio) come fronti, con MOLTI inlink (stress loop cosmico)
+        'for(let c=0;c<4;c++){const cosm=mk("Principio"+c,{categoria:"dominio",clock_dim:6,clock:3,'
+        'luoghi:["[[R"+c+"]]","[[R"+(c+3)+"]]"]});'
+        'for(let k=0;k<40;k++){cosm.file.inlinks.push({path:"R"+((c*5+k)%60)+".md"});}}'
+        # una fazione molto collegata per renderCoerenza (assi + 30 rivali, 1 pendente)
+        'const faz=mk("Egemone",{categoria:"fazione",struttura:5,scopo:1,legalita:5,rivali:[]});'
+        'for(let i=0;i<30;i++){mk("Riv"+i,{categoria:"fazione",struttura:i%5+1,scopo:(i*2)%5+1,legalita:(i*3)%5+1});'
+        'faz.rivali.push("[[Riv"+i+"]]");}faz.rivali.push("[[GHOSTFAZ]]");'
+        # run + metriche
+        '(async()=>{'
+        'const t0=Date.now();'
+        'const sm=await m.exports.renderStatoMondo(app,dv);'
+        'const t1=Date.now();'
+        'const co=await m.exports.renderCoerenza(app,dv,faz);'
+        'const sf=await m.exports.spinteFronte(app,dv,byPath.get("[[Principio0]]"));'
+        'const blocks=(sm.match(/\\*\\*\\[\\[/g)||[]).length;'
+        'const tot=(sm.match(/(\\d+) fronti/)||[])[1];'
+        'process.stdout.write(JSON.stringify({ok:true,smLen:sm.length,blocks,'
+        'totFronti:tot?Number(tot):null,coOk:co.includes("Coerenza"),'
+        'coLines:(co.match(/> - /g)||[]).length,sfLen:sf.length,ms:t1-t0}));'
+        '})().catch(e=>process.stdout.write(JSON.stringify({ok:false,err:String((e&&e.stack)||e)})));',
+        encoding="utf-8")
+    res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
+    assert res.returncode == 0, res.stderr
+    out = json.loads(res.stdout)
+    assert out["ok"], out.get("err")                 # ROBUSTEZZA: niente crash su grafo sporco
+    assert out["totFronti"] == 84                    # conta TUTTI i fronti (80 + 4 cosmici)
+    assert out["coOk"]                               # coerenza gira su nota molto collegata
+    # CAP anti-muro (SYS-3): il cruscotto tronca ai 12 più imminenti pur dichiarando il
+    # totale (84); la coerenza tronca a 8 spunti + 1 riga di overflow.
+    assert out["blocks"] <= 12, f"renderStatoMondo non limitato: {out['blocks']} blocchi"
+    assert out["coLines"] <= 9, f"renderCoerenza non limitato: {out['coLines']} righe"
+    # METRICA osservata (non assert flaky sul tempo): stampata per la diagnosi SYS-3.
+    import sys as _sys
+    print(f"\n[SYS-3] fronti={out['totFronti']} blocchi_resi={out['blocks']} "
+          f"len={out['smLen']} coLines={out['coLines']} sfLen={out['sfLen']} ms={out['ms']}",
+          file=_sys.stderr)
+
+
 def test_astrologia_catalog():
     """Catalogo tema natale (astrologia.yaml): 12 segni (con archetipo/elemento/
     mbti), 22 arcani, 4 elementi — recupero #9."""
