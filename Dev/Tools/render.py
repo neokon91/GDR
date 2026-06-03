@@ -297,14 +297,16 @@ def write_folder_notes(obsidian: Path) -> None:
 
 
 def write_tab_panels(obsidian: Path) -> None:
-    """Tab Panels: abilita la CACHE così link/heading/tag scritti NEL CORPO di una tab
-    finiscono nell'indice di Obsidian (backlink, Outline, Dataview-su-contenuto). Tutto
-    il corpo nota vive dentro ````tabs: senza cache i [[wikilink]] scritti a mano nella
-    prosa (Lore/Descrizione) sarebbero invisibili al grafo. Le relazioni tipizzate stanno
-    nel frontmatter (già indicizzate); questo recupera i link liberi. NB: per le note GIÀ
-    esistenti serve un 'Rebuild cache' una tantum; le nuove si indicizzano da sole. Merge
-    non distruttivo (solo se il plugin è installato)."""
-    merge_plugin_config(obsidian, "tab-panels", {"enableCaching": True})
+    """Tab Panels: la CACHE è DISABILITATA — è incompatibile con Meta Bind. Il suo
+    layer di caching (IndexedDB) scatena eventi `metadataCache.changed` con una cache
+    transitoriamente `undefined`: i gestori `onCacheChanged` di Meta Bind e del core di
+    Obsidian crashano leggendo `.frontmatter` (TypeError ripetuto in console). Dato che
+    OGNI nota-entità ha input Meta Bind DENTRO le tab, il conflitto è strutturale →
+    teniamo la cache off. Costo: i [[wikilink]] scritti a mano nel CORPO di una tab non
+    finiscono in backlink/Outline (ma le relazioni tipizzate stanno nel frontmatter, già
+    indicizzate; e in Lettura i link restano cliccabili). Set esplicito a False per
+    sovrascrivere config precedenti che l'avevano abilitata. Merge non distruttivo."""
+    merge_plugin_config(obsidian, "tab-panels", {"enableCaching": False})
 
 
 def write_calendarium(obsidian: Path) -> None:

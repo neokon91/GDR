@@ -17,8 +17,10 @@ spedite con fiducia.
   falso corretto; callout `infobox` in tabella; repo IT → `javalent`; `tp.file.title` →
   `tp.config.target_file.basename`; Metadata Menu "proposta" → "implementata"; comando BRAT;
   firma `suggester`; versioni vendorizzate aggiunte.
-- **Cablato**: **Tab Panels `enableCaching`** — i `[[wikilink]]`/heading scritti a mano nel
-  corpo di una tab tornano indicizzati (backlink/Outline/Dataview).
+- **Tab Panels `enableCaching`** — provato e **disattivato**: incompatibile con Meta Bind (il
+  caching IndexedDB scatena `metadataCache.changed` con cache `undefined` → crash di
+  `onCacheChanged` in Meta Bind/core, su ogni nota con tab + input Meta Bind). I link liberi nel
+  corpo delle tab restano non-indicizzati; le relazioni tipizzate (frontmatter) sono indicizzate.
 
 ## Candidati (prioritizzati)
 
