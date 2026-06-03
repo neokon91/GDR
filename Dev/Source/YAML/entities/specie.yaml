@@ -51,7 +51,9 @@ creation:
   # Dati che rendono la specie GIOCABILE (crea_pg li fonde nelle opzioni PG):
   # taglia e velocità. Scurovisione e altri tratti si deducono dal testo Tratti.
   - field: taglia
-    prompt: 'Taglia (es. Media, Piccola)'
+    prompt: Taglia
+    from: list
+    options: [Minuscola, Piccola, Media, Grande, Enorme, Mastodontica]
     optional: true
   - field: velocita
     prompt: 'Velocità in metri (es. 9)'
@@ -60,7 +62,9 @@ creation:
   # Parità SRD (le specie ufficiali hanno tipo_creatura; già nella scheda, ora dal
   # wizard). Opzionale.
   - field: tipo_creatura
-    prompt: 'Tipo di creatura (es. Umanoide, Costrutto)'
+    prompt: Tipo di creatura
+    from: list
+    options: [Umanoide, Costrutto, Fata, Immondo, Celestiale, Non morto, Elementale, Aberrazione, Bestia, Drago, Gigante, Mostruosità, Melma, Vegetale]
     optional: true
   body:
   - field: tratti

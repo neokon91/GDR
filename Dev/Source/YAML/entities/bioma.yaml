@@ -43,6 +43,8 @@ creation:
     required: true
   - field: clima
     prompt: Clima
+    from: list
+    options: [temperato, arido, tropicale, artico, montano, costiero, sotterraneo]
     optional: true
   body:
   - field: geografia

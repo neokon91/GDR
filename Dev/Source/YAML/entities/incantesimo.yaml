@@ -55,16 +55,24 @@ creation:
   # Stat-line di lancio (parità SRD: stessi campi degli incantesimi ufficiali; già
   # mostrati nella scheda, ora catturati anche dal wizard). Opzionali.
   - field: tempo_lancio
-    prompt: 'Tempo di lancio (es. 1 azione, 1 azione bonus, 1 minuto)'
+    prompt: Tempo di lancio
+    from: list
+    options: ["1 azione", "1 azione bonus", "1 reazione", "1 minuto", "10 minuti", "1 ora", "8 ore", "24 ore"]
     optional: true
   - field: gittata
-    prompt: 'Gittata (es. 9 metri, Contatto, Personale)'
+    prompt: Gittata
+    from: list
+    options: [Personale, Contatto, "1,5 metri", "3 metri", "9 metri", "18 metri", "30 metri", "45 metri", "90 metri", "150 metri", "300 metri", Vista, Illimitata]
     optional: true
   - field: componenti
-    prompt: 'Componenti (es. V, S, M (un fiore))'
+    prompt: Componenti
+    from: list
+    options: [V, S, M, "V, S", "V, M", "S, M", "V, S, M"]
     optional: true
   - field: durata
-    prompt: 'Durata (es. Istantanea, Concentrazione fino a 1 minuto)'
+    prompt: Durata
+    from: list
+    options: [Istantanea, "1 round", "Concentrazione, fino a 1 minuto", "Concentrazione, fino a 10 minuti", "Concentrazione, fino a 1 ora", "1 minuto", "10 minuti", "1 ora", "8 ore", "24 ore", "Finché non viene dissolto"]
     optional: true
   body:
   - field: effetto

@@ -31,7 +31,9 @@ creation:
     prompt: 'Prerequisito (es. Forza 13, livello 4)'
     optional: true
   - field: ripetibile
-    prompt: 'Ripetibile? (es. sì / no)'
+    prompt: Ripetibile?
+    from: list
+    options: [No, Sì]
     optional: true
   body:
   - field: benefici

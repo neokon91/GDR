@@ -79,9 +79,11 @@ creation:
     optional: true
   - field: pg_livello
     prompt: Livello medio del gruppo (per la difficoltà)
+    from: number
     optional: true
   - field: pg_numero
     prompt: Numero di personaggi
+    from: number
     optional: true
   body:
   - field: obiettivo

@@ -72,7 +72,17 @@ creation:
     prompt: 'Proprietà (armi, es. versatile (1d10), accurata)'
     optional: true
   - field: padronanza
-    prompt: 'Padronanza arma 2024 (es. Affondo, Vessazione, Fendente)'
+    prompt: Padronanza arma (2024)
+    from: list
+    options:
+    - Doppio fendente
+    - Graffio
+    - Colpo di striscio
+    - Spinta
+    - Fiaccare
+    - Lentezza
+    - Rovesciamento
+    - Vessazione
     optional: true
   - field: costo
     prompt: 'Costo (es. 15 mo)'
