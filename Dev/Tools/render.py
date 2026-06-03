@@ -48,6 +48,7 @@ from common import (  # noqa: F401 (re-export per i test/usi storici)
 from build_srd import (  # noqa: F401 (re-export per i test)
     SRD_GEN,
     build_srd,
+    gs_baselines,
     load_srd,
     srd_condizioni,
     srd_note,
@@ -565,6 +566,10 @@ def write_engine_data(core: dict[str, Any], templates: list[dict[str, Any]]) -> 
         # maestrie: le 8 proprietà di maestria delle armi 2024 (quick-ref al tavolo,
         # views.renderMaestrie). Da system.yaml (il SRD 5.2.1 non le mappa per-arma).
         "maestrie": core.get("maestrie_armi", []),
+        # gs_baseline: statistiche-base per GS (mediane dei mostri SRD di pari GS),
+        # per lo scaffolder di statblock delle creature homebrew
+        # (meta_actions.scaffold_statblock): un boss con solo `gs` diventa giocabile.
+        "gs_baseline": gs_baselines(),
         # astrologia: catalogo tema natale (segni/arcani/elementi) per views.renderTemaNatale
         # (profilo personalità dei personaggi, soprattutto PNG). Da astrologia.yaml (opzionale).
         "astrologia": load_yaml("astrologia.yaml") if (SOURCE / "YAML" / "astrologia.yaml").is_file() else {},

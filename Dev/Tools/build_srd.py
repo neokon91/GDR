@@ -369,6 +369,93 @@ def srd_statblock_yaml(monster: dict[str, Any], layout: str, core: dict[str, Any
     return yaml.safe_dump(sb, allow_unicode=True, sort_keys=False)
 
 
+def _gs_key(valore: Any) -> str | None:
+    """Valore CR del SRD -> chiave-stringa del campo `gs` (widget): frazioni <1
+    come '1/8'/'1/4'/'1/2', interi come '5'. None se non mappabile."""
+    if valore is None:
+        return None
+    frac = {"0.125": "1/8", "0.25": "1/4", "0.5": "1/2", "1/8": "1/8", "1/4": "1/4", "1/2": "1/2"}
+    s = str(valore).strip()
+    if s in frac:
+        return frac[s]
+    try:
+        v = float(s)
+    except ValueError:
+        return None
+    if v in (0.125, 0.25, 0.5):
+        return {0.125: "1/8", 0.25: "1/4", 0.5: "1/2"}[v]
+    return str(int(v)) if v == int(v) else None
+
+
+def _median(xs: list[float]) -> float | None:
+    s = sorted(xs)
+    n = len(s)
+    if not n:
+        return None
+    return s[n // 2] if n % 2 else (s[n // 2 - 1] + s[n // 2]) / 2
+
+
+def gs_baselines() -> dict[str, dict[str, Any]]:
+    """Tabella GS -> statistiche base, dalle MEDIANE dei mostri SRD di pari GS:
+    AC, PF, bonus di competenza, iniziativa, bonus d'attacco, danno medio + formula
+    rappresentativa, CD salvezza. **Sorgente SRD** (non la tabella DMG) -> nessun
+    vincolo di licenza. Alimenta lo scaffolder di statblock per le creature homebrew
+    (meta_actions.scaffold_statblock): un boss con solo `gs` diventa subito giocabile."""
+    groups: dict[str, dict[str, list[float]]] = {}
+    formulas: dict[str, list[tuple[float, str, str]]] = {}
+    for mon in load_srd("srd_5_2_1_monsters.json"):
+        if not isinstance(mon, dict):
+            continue
+        cr = mon.get("grado_sfida") or {}
+        key = _gs_key(cr.get("valore") if isinstance(cr, dict) else cr)
+        if key is None:
+            continue
+        g = groups.setdefault(key, {"ac": [], "hp": [], "pb": [], "init": [], "atk": [], "dmg": [], "cd": []})
+        ac = mon.get("classe_armatura")
+        if isinstance(ac, (int, float)):
+            g["ac"].append(ac)
+        hp = mon.get("punti_ferita") or {}
+        if isinstance(hp, dict) and isinstance(hp.get("media"), (int, float)):
+            g["hp"].append(hp["media"])
+        if isinstance(mon.get("bonus_competenza"), (int, float)):
+            g["pb"].append(mon["bonus_competenza"])
+        ini = mon.get("iniziativa") or {}
+        if isinstance(ini, dict) and isinstance(ini.get("bonus"), (int, float)):
+            g["init"].append(ini["bonus"])
+        for az in mon.get("azioni") or []:
+            for tiro in (az.get("tiri") or []) if isinstance(az, dict) else []:
+                if not isinstance(tiro, dict):
+                    continue
+                if tiro.get("tipo") == "attacco":
+                    if isinstance(tiro.get("bonus"), (int, float)):
+                        g["atk"].append(tiro["bonus"])
+                    danni = tiro.get("danni") or []
+                    tot = sum(d.get("media", 0) for d in danni if isinstance(d, dict) and isinstance(d.get("media"), (int, float)))
+                    if tot:
+                        g["dmg"].append(tot)
+                        d0 = next((d for d in danni if isinstance(d, dict) and d.get("formula")), None)
+                        if d0:
+                            formulas.setdefault(key, []).append((tot, str(d0["formula"]), str(d0.get("tipo", ""))))
+                elif tiro.get("tipo") == "salvezza" and isinstance(tiro.get("cd"), (int, float)):
+                    g["cd"].append(tiro["cd"])
+    out: dict[str, dict[str, Any]] = {}
+    for key, g in groups.items():
+        rec: dict[str, Any] = {}
+        for src, dst in (("ac", "ac"), ("hp", "hp"), ("pb", "pb"), ("init", "init"), ("atk", "attacco"), ("cd", "cd")):
+            m = _median(g[src])
+            if m is not None:
+                rec[dst] = round(m)
+        if g["dmg"]:
+            dmed = _median(g["dmg"])
+            rec["danno"] = round(dmed)
+            fl = formulas.get(key) or []
+            if fl:
+                best = min(fl, key=lambda t: abs(t[0] - dmed))
+                rec["danno_formula"], rec["danno_tipo"] = best[1], best[2]
+        out[key] = rec
+    return out
+
+
 def build_srd(core: dict[str, Any]) -> int:
     """Genera l'albero SRD/ (sola lettura) dai JSON IT vendorizzati. Ritorna il
     numero di note scritte. Cartella sorgente assente -> 0 (SRD opzionale)."""

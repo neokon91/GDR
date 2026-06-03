@@ -7,7 +7,7 @@ la **cronistoria** dettagliata vive nelle memorie di progetto. Qui: dove siamo e
 
 ## Stato (2026-06-02)
 
-`origin/main`, **262 test**, check 0. Pipeline matura: sorgenti YAML/Jinja/JS → `render.py`
+`origin/main`, **265 test**, check 0. Pipeline matura: sorgenti YAML/Jinja/JS → `render.py`
 → vault Obsidian (+ sito giocatori opzionale). Mondo-esempio **Valdombra** popolato.
 
 **Verdetto 4-lenti** (analisi fresca, tarata sui competitor — World Anvil/Kanka/LegendKeeper/
@@ -44,7 +44,7 @@ Pronto per **beta chiuso**. Per la beta aperta restano i punti PM qui sotto.
   l'esempio); **on-ramp Home** (6 tipi primari, metafisica opt-in; il tip apre «Inizia da qui»);
   LEGGIMI di distribuzione; **sito dei giocatori** statico spoiler-free
   (`npm run site`, `visibilita: dm`).
-- **Solidità** — 262 test (snapshot + e2e/headless JS + rules-engine), validazione del contratto
+- **Solidità** — 265 test (snapshot + e2e/headless JS + rules-engine), validazione del contratto
   YAML↔wizard, anti-drift byte-equal (`_comparators.js`/`_homebrew_bridge.js`), merge config
   `.obsidian` non distruttivo, mondo-esempio rigenerato a ogni build. Copertura headless dei
   pannelli (`renderEntityPanel`/`renderSessionPanel`) e dell'injection-DOM dei radar
@@ -76,6 +76,12 @@ Pronto per **beta chiuso**. Per la beta aperta restano i punti PM qui sotto.
   *Attacchi con maestria* (`renderAttacchi`): per ogni arma di cui il PG ha padronanza,
   tiro per colpire (mod arma + competenza) + danni + effetto della maestria, dal catalogo
   armi SRD (`build_personaggio._weapon_catalog`). (FATTO)
+- ✅ **Scaffolder mostri GS→statblock** — un boss homebrew con solo `gs` diventa giocabile: il
+  bottone *Genera statblock dal GS* (`meta_actions.scaffold_statblock`) riempie il blocco
+  ` ```statblock ` coi valori-base derivati dalle **mediane dei mostri SRD di pari GS**
+  (`build_srd.gs_baselines` → `core.json:gs_baseline`): AC/PF/BC/iniziativa + un'azione d'attacco
+  col bonus e il danno tipici (+ azione-salvezza). **Fonte SRD, non DMG** → niente vincolo di
+  licenza; fallback al GS più vicino. (FATTO)
 - **Bastioni** — catalogo strutture speciali (contenuto DMG, **non** nel SRD → serve fonte) +
   risoluzione automatica degli ordini.
 

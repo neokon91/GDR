@@ -533,6 +533,63 @@ def test_aggiorna_encounter_e2e(tmp_path):
     assert out.startswith("# Incontro") and out.rstrip().endswith("fine")  # corpo preservato
 
 
+@pytest.mark.skipif(not render.SRD_DIR.is_dir(), reason="SRD assente")
+def test_gs_baselines():
+    """gs_baselines: tabella GS→statistiche base dai mostri SRD (mediane). Copre i GS
+    chiave con AC/PF/attacco; i PF crescono col GS; mappa anche i GS frazionari."""
+    t = render.gs_baselines()
+    assert t, "tabella GS vuota (mostri SRD assenti?)"
+    for gs in ("1", "5", "10"):
+        assert gs in t and {"ac", "hp", "attacco"} <= set(t[gs]), f"GS {gs} incompleto: {t.get(gs)}"
+    assert t["1"]["hp"] < t["5"]["hp"] < t["10"]["hp"]   # PF crescono col GS
+    assert "1/2" in t                                     # GS frazionario mappato a stringa
+    assert t["5"].get("danno_formula")                    # formula di danno rappresentativa
+
+
+@pytest.mark.skipif(not shutil.which("node"), reason="node assente")
+def test_scaffold_statblock_e2e(tmp_path):
+    """meta_actions.scaffold_statblock: riempie il blocco ```statblock``` di una creatura
+    dai valori-base del suo GS (core.json gs_baseline) — un boss con solo `gs` diventa
+    giocabile (AC/PF + azione d'attacco col bonus/danno + azione-salvezza). Preserva il
+    layout, rimpiazza il placeholder, lascia intatto il resto del corpo."""
+    base = {"ac": 15, "hp": 104, "pb": 3, "init": 2, "attacco": 7,
+            "danno": 14, "danno_formula": "2d10 + 3", "danno_tipo": "taglienti", "cd": 14}
+    core = {"gs_baseline": {"5": base}}
+    harness = tmp_path / "scaffold.js"
+    harness.write_text(
+        'const body = "# Orrore\\n\\n```statblock\\nlayout: 5-5e-ita\\nname: x\\n'
+        'ac: 10\\nhp: 10\\nstats: [10, 10, 10, 10, 10, 10]\\ncr: 1\\nactions: []\\n```\\n\\nfine";\n'
+        'let saved = null;\n'
+        'const file = { basename: "Orrore della Voragine", path: "Mondi/Creature/Orrore.md" };\n'
+        'global.Notice = class { constructor(m){} };\n'
+        f'const core = {json.dumps(core, ensure_ascii=False)};\n'
+        'global.app = {\n'
+        '  workspace: { getActiveFile: () => file },\n'
+        '  metadataCache: { getFileCache: () => ({ frontmatter: { gs: "5", taglia: "Grande", tipo: "aberrazione" } }) },\n'
+        '  vault: {\n'
+        '    read: async () => body,\n'
+        '    modify: async (f, d) => { saved = d; },\n'
+        '    adapter: { read: async () => JSON.stringify(core) },\n'
+        '  },\n'
+        '};\n'
+        f'const meta = require({json.dumps(str(render.JS_DIR / "meta_actions.js"))});\n'
+        'meta({}, "scaffold_statblock").then(() => process.stdout.write(saved));\n',
+        encoding="utf-8")
+    res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
+    assert res.returncode == 0, res.stderr
+    out = res.stdout
+    assert "ac: 15" in out and "hp: 104" in out                    # valori-base dal GS
+    assert "name: Orrore della Voragine" in out                    # name = basename
+    assert "size: Grande" in out and "type: aberrazione" in out    # da frontmatter
+    assert 'cr: "5"' in out and 'pb: "+3"' in out
+    assert "*Tiro per colpire:* +7" in out and "2d10 + 3" in out   # azione d'attacco reale
+    assert "CD 14" in out                                          # azione-salvezza dal GS
+    assert "actions: []" not in out                                # placeholder sostituito
+    assert "layout: 5-5e-ita" in out                               # layout preservato
+    assert out.count("```statblock") == 1                          # un solo blocco
+    assert out.startswith("# Orrore") and out.rstrip().endswith("fine")  # corpo preservato
+
+
 @pytest.mark.skipif(not shutil.which("node"), reason="node assente")
 def test_aggiorna_encounter_varianti(tmp_path):
     """meta_actions.aggiorna_encounter: il campo `varianti` applica gli override

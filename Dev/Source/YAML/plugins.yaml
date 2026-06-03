@@ -165,6 +165,9 @@ buttons:
   - id: aggiorna-encounter
     label: Aggiorna encounter
     action: aggiorna_encounter
+  - id: genera-statblock
+    label: Genera statblock dal GS
+    action: scaffold_statblock
   # Command-button: lancia un comando di Obsidian (niente azione-nota Templater).
   # Genera apre il modale del Fantasy Content Generator (nomi/spunti → clipboard).
   - id: genera-contenuto

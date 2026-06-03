@@ -37,6 +37,9 @@ actions:
   - id: aggiorna_encounter
     title: Aggiorna encounter
     target: z.modelli/azioni/Aggiorna encounter.md
+  - id: scaffold_statblock
+    title: Genera statblock dal GS
+    target: z.modelli/azioni/Genera statblock dal GS.md
   - id: genera
     title: Genera (locale)
     target: z.modelli/azioni/Genera (locale).md
