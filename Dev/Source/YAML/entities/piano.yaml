@@ -38,6 +38,12 @@ relazioni:
   label: Soglie / accessi
   category: luogo
   multi: true
+# Inverso tipizzato di divinita.piano: un piano elenca le divinità che vi dimorano
+# (coppia univoca → auto-derivata da Collega; prima l'inverso ricadeva su 'connessioni').
+- field: divinita
+  label: Divinità che vi dimorano
+  category: divinita
+  multi: true
 creation:
   fields:
   - field: tipo

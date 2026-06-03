@@ -116,6 +116,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "pia
 > **Dominio cosmico**: `INPUT[suggester(optionQuery("Mondi/Domini"), useLinks(partial), allowOther):dominio]`
 > **Abitanti**: `INPUT[inlineListSuggester(optionQuery("Mondi/Creature"), useLinks(partial), allowOther):abitanti]`
 > **Soglie / accessi**: `INPUT[inlineListSuggester(optionQuery("Mondi/Luoghi"), useLinks(partial), allowOther):soglie]`
+> **Divinità che vi dimorano**: `INPUT[inlineListSuggester(optionQuery("Mondi/Divinita"), useLinks(partial), allowOther):divinita]`
 
 > [!example] Collegamenti
 > Mondo: `INPUT[mondo][:mondo]`

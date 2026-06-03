@@ -126,6 +126,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "leg
 > **Dominio che la esprime**: `INPUT[suggester(optionQuery("Mondi/Domini"), useLinks(partial), allowOther):dominio]`
 > **Incarnata da**: `INPUT[inlineListSuggester(optionQuery("Mondi/Primordiali"), useLinks(partial), allowOther):incarnata_da]`
 > **Piani che la riflettono**: `INPUT[inlineListSuggester(optionQuery("Mondi/Piani"), useLinks(partial), allowOther):piani]`
+> **Sistemi magici che vi poggiano**: `INPUT[inlineListSuggester(optionQuery("Mondi/Magia"), useLinks(partial), allowOther):sistemi_magici]`
 
 > [!example] Collegamenti
 > Mondo: `INPUT[mondo][:mondo]`

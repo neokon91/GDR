@@ -39,6 +39,11 @@ relazioni:
   label: Piani che la riflettono
   category: piano
   multi: true
+# Inverso tipizzato di sistema_magico.leggi: una legge elenca i sistemi che vi poggiano.
+- field: sistemi_magici
+  label: Sistemi magici che vi poggiano
+  category: sistema_magico
+  multi: true
 creation:
   fields:
   - field: tipo

@@ -121,6 +121,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "ent
 > **Dominio**: `INPUT[suggester(optionQuery("Mondi/Domini"), useLinks(partial), allowOther):dominio]`
 > **Divinità discese**: `INPUT[inlineListSuggester(optionQuery("Mondi/Divinita"), useLinks(partial), allowOther):divinita]`
 > **Luoghi (prigioni, santuari)**: `INPUT[inlineListSuggester(optionQuery("Mondi/Luoghi"), useLinks(partial), allowOther):luoghi]`
+> **Sistemi magici che vi attingono**: `INPUT[inlineListSuggester(optionQuery("Mondi/Magia"), useLinks(partial), allowOther):sistemi_magici]`
 
 > [!example] Collegamenti
 > Mondo: `INPUT[mondo][:mondo]`

@@ -36,6 +36,11 @@ relazioni:
   label: Luoghi (prigioni, santuari)
   category: luogo
   multi: true
+# Inverso tipizzato di sistema_magico.fonti: un primordiale elenca i sistemi che vi attingono.
+- field: sistemi_magici
+  label: Sistemi magici che vi attingono
+  category: sistema_magico
+  multi: true
 creation:
   fields:
   - field: tipo
