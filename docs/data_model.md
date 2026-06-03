@@ -51,8 +51,8 @@ fields:                     # (opzionale) campi esclusivi dell'entità
 scheda: [portata, motto, …] # campi mostrati dalla macro scheda()
 relazioni:                  # link tipizzati (macro relazioni())
   - { field, label, category, multi?, reciprocal? }
-    # reciprocal: nome del campo INVERSO sul target, scritto da Collega
-    # (meta_actions.inverseRelation). Serve quando l'auto-derivazione è ambigua:
+    # reciprocal: nome del campo INVERSO sul target, scritto da Collega E dal wizard di
+    # creazione (logica condivisa _relations.js: inverseRelation). Serve quando l'auto-derivazione è ambigua:
     # simmetrico (luogo.confina_con↔confina_con, rotta_con↔rotta_con) o
     # direzionale (evento.causato_da↔conseguenze). Senza, l'inverso è auto-derivato
     # se la coppia è univoca, altrimenti generico (connessioni).
@@ -139,8 +139,10 @@ ciò che non li supera, non ciò che il mondo richiede davvero.
   dichiarare insieme `required` e `optional`.
 - **YAML ausiliari** (`validate_aux_yaml`): shape di astrologia (e `segno.elemento` ∈ `elementi`),
   generatori, fcg_it, pg_rules (`point_buy.costi`, `array_standard.valori`, `armatura.dex_max`).
-- **sorgenti `_*.js`**: le copie marcate di `matchesCond` (views/meta_actions) e del ponte
-  homebrew (crea_pg/sali_pg) coincidono byte-a-byte con `_comparators.js` / `_homebrew_bridge.js`.
+- **sorgenti `_*.js`**: le copie marcate di `matchesCond` (views/meta_actions), del ponte
+  homebrew (crea_pg/sali_pg) e della derivazione inversi `reciprocalField`/`inverseRelation`
+  (meta_actions/create_entity) coincidono byte-a-byte con `_comparators.js` /
+  `_homebrew_bridge.js` / `_relations.js`.
 
 > **Campi-frontmatter fuori dal modello**: alcune chiavi che l'utente scrive nelle note non
 > entrano in `core` ma sono lette da altri strati — es. `visibilita: dm` / `pubblico: false`

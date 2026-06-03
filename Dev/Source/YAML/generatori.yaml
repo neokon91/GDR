@@ -99,3 +99,76 @@ fazioni:
     - "delle Tre Lune"
   nucleo_pl: [Corvi, Lupi, Sussurri, Aspidi, Veggenti, Cinque, Senzavolto, Raminghi, Custodi, Erranti]
   aggettivo: [Rossa, Nera, Spezzata, Eterna, Cinerea, Velata, Argentea, Silente, Cremisi, Infranta]
+
+# === Spunti per il tavolo (Stage 1) ========================================
+# Stessa meccanica delle fazioni: forme templatizzate, {chiave} pesca da una lista
+# omonima di questa sezione; {nome} = nome di persona dello stile, {luogo} =
+# toponimo dello stile (così PNG/taverne/ganci "suonano" come il mondo collegato).
+
+# PNG: schizzo di personaggio non-giocante in una riga (nome + ruolo + aspetto +
+# tratto + manierismo + cosa vuole / segreto). Forme con campi distinti.
+png:
+  forme:
+    - "{nome}, {ruolo} — {aspetto}; {tratto}. Vuole {vuole}."
+    - "{nome} — {tratto}, {manierismo}. {aspetto}."
+    - "{nome}, {ruolo}: sembra {tratto}, ma {segreto}."
+    - "{nome} — {aspetto}; {manierismo}. In segreto {segreto}."
+  ruolo: [mercante, guardia cittadina, locandiere, ladro di strada, chierico errante, mendicante, scriba, cacciatore di taglie, contrabbandiere, nobile decaduto, fabbro, erborista, menestrello, becchino, capitano di ventura]
+  aspetto: ["una cicatrice che taglia il sopracciglio", "mani enormi e callose", "voce roca da troppo fumo", "un occhio lattiginoso", "vestiti buoni ma logori", "magro fino a sembrare spettrale", "una risata troppo forte", "tatuaggi sbiaditi sulle nocche", "sempre infreddolito", "un sorriso a cui manca un dente", "addosso un odore d'incenso", "movimenti lenti e misurati"]
+  tratto: [diffidente, gioviale ma calcolatore, collerico, ossequioso, cinico, fervente, codardo sotto la spavalderia, leale fino all'osso, avido, malinconico, curioso di tutto, paranoico]
+  manierismo: ["gioca di continuo con un anello", "non guarda mai negli occhi", "ripete l'ultima parola di chi gli parla", "tamburella le dita sul tavolo", "benedice ogni frase", "conta le monete senza accorgersene", "ride alle proprie battute", "annusa l'aria prima di parlare", "stringe sempre un amuleto"]
+  vuole: ["ripagare un vecchio debito", "vendetta su un nobile", "fuggire dalla città prima dell'alba", "proteggere un parente fragile", "un passaggio sicuro verso nord", "che il passato resti sepolto", "denaro, e in fretta", "il rispetto che gli viene negato", "ritrovare qualcuno che ha perso"]
+  segreto: ["è una spia al soldo di un'altra fazione", "ha ucciso un uomo per errore", "deve denaro a un culto", "non è chi dice di essere", "nasconde un oggetto rubato", "è malato e non ha più molto tempo", "tradirà al primo segno di pericolo", "ha visto qualcosa che non doveva"]
+
+# Taverna/locanda: insegna (nome curato, concordanza italiana corretta) + un
+# dettaglio che la rende viva.
+taverna:
+  forme:
+    - "{insegna} — {dettaglio}"
+  insegna:
+    - "Il Cinghiale Rosso"
+    - "La Sirena Ubriaca"
+    - "Il Drago Dormiente"
+    - "Le Tre Lanterne"
+    - "Al Boccale Spaccato"
+    - "La Rosa Nera"
+    - "Il Corvo Storto"
+    - "L'Ancora Arrugginita"
+    - "La Lepre Zoppa"
+    - "Il Gatto e la Candela"
+    - "La Forca Allegra"
+    - "La Quercia Cava"
+    - "Il Pellegrino Stanco"
+    - "Le Due Lune"
+    - "La Spada nel Fango"
+    - "Il Grifone Spennato"
+    - "La Botte Senza Fondo"
+  dettaglio:
+    - "famosa per lo stufato di {ingrediente}"
+    - "dove nel retro si gioca d'azzardo fino all'alba"
+    - "frequentata soprattutto da {avventore}"
+    - "il vino è acido, ma le stanze sono pulite"
+    - "il locandiere sa tutto di tutti, a un prezzo"
+    - "puzza di {ingrediente} e di segreti"
+    - "qui le risse finiscono in canzoni"
+    - "stanze a buon mercato, pareti sottili"
+    - "nessuno ti chiede il nome, e va bene così"
+    - "un tempo era una cappella: si vede ancora l'altare"
+  ingrediente: [cinghiale, anguilla, funghi, montone, cavolo, aringa, lepre, castagne]
+  avventore: [carovanieri, marinai, disertori, pellegrini, contrabbandieri, minatori, mercenari sfaccendati, vedove allegre]
+
+# Gancio: spunto di trama in una-due frasi. È l'anima del vault — ogni gancio è un
+# invito a giocare. {luogo}/{nome} contestualizzano col mondo.
+gancio:
+  forme:
+    - "{chi} offre una ricompensa: {cosa}. Ma {twist}."
+    - "{cosa_capita} a {luogo}; chi indaga scopre che {twist}."
+    - "Gira voce che {voce}. Chi arriva primo {posta}."
+    - "{chi} sta per {azione} — e nessuno sa che {twist}."
+  chi: ["Un mercante nervoso", "Una vedova in lutto", "Il capitano della guardia", "Un chierico pallido", "Un nobile in disgrazia", "Una vecchia del mercato", "Un bambino lasciato solo", "Un rivale di vecchia data"]
+  cosa: ["la figlia è sparita tre notti fa", "un carico è stato rubato lungo la strada", "qualcuno profana le tombe di famiglia", "un debito va riscosso a {luogo}", "serve una scorta che non faccia domande", "un nome va cancellato dai registri"]
+  cosa_capita: ["Il bestiame muore senza una ferita", "Le campane suonano da sole di notte", "I pozzi danno acqua salmastra", "Un incendio non lascia cenere", "La gente sogna lo stesso volto", "Spariscono solo i primogeniti"]
+  voce: ["sotto {luogo} ci sia una porta che non andrebbe aperta", "un tesoro aspetti chi risolve l'enigma giusto", "{nome} sia tornato dai morti", "il vecchio ponte regga ancora un segreto", "qualcuno paghi in oro antico, troppo antico"]
+  azione: ["firmare un patto che non capisce", "vendere ciò che non gli appartiene", "accusare un innocente per salvarsi", "lasciare la città con tutto il tesoro del tempio"]
+  twist: ["il colpevole è qualcuno di cui ti fidi", "è una trappola tesa proprio a voi", "c'entra un culto che si credeva estinto", "la vittima mente su tutto", "la ricompensa promessa non esiste", "chi vi assume è peggio di chi cacciate"]
+  posta: ["ne esce ricco — o non ne esce", "si fa un nemico potente", "scopre una verità che pesa", "guadagna un debito di sangue"]

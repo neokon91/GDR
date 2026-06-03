@@ -65,10 +65,30 @@ function generaFazione(gen, stileId, rng) {
   return resolve(pick(f.forme, rng), 0).replace(/\s+/g, " ").trim();
 }
 
+// Generatore generico "da forme": risolve una forma templatizzata della sezione
+// gen[sectionKey] ({chiave} -> pesca da section[chiave], ricorsivo). {nome} = nome di
+// persona dello stile, {luogo} = toponimo: così PNG/taverne/ganci riusano i nomi a
+// tema. Stessa meccanica di generaFazione, parametrica sulla sezione (estendibile:
+// aggiungi una sezione con `forme` in generatori.yaml e una voce nel registro).
+function generaDaForme(gen, sectionKey, stileId, rng) {
+  const section = gen[sectionKey] || {};
+  const resolve = (str, depth) => String(str).replace(/\{(\w+)\}/g, (_, key) => {
+    if (depth > 5) return "";
+    if (key === "nome") return nomePersona(gen, stileId, rng);
+    if (key === "luogo") return generaToponimo(gen, stileId, rng);
+    const list = section[key];
+    return list ? resolve(pick(list, rng), depth + 1) : "";
+  });
+  return resolve(pick(section.forme, rng), 0).replace(/\s+/g, " ").trim();
+}
+
 const GENERATORI = {
   persona: { fn: generaPersona, label: "Nome di persona" },
   toponimo: { fn: generaToponimo, label: "Toponimo / luogo" },
   fazione: { fn: generaFazione, label: "Nome di fazione" },
+  png: { fn: (g, s, r) => generaDaForme(g, "png", s, r), label: "PNG (schizzo)" },
+  taverna: { fn: (g, s, r) => generaDaForme(g, "taverna", s, r), label: "Taverna / locanda" },
+  gancio: { fn: (g, s, r) => generaDaForme(g, "gancio", s, r), label: "Gancio di trama" },
 };
 
 // N opzioni distinte (per quanto possibile) di un tipo, dato lo stile.
@@ -137,14 +157,15 @@ async function genera(tp) {
   const file = app.workspace.getActiveFile?.() ?? tp.config?.target_file;
   const cat = fmOf(file).categoria;
 
-  // Tipo: dedotto dalla categoria della nota; altrimenti lo si chiede.
-  let tipo = cat === "luogo" ? "toponimo" : cat === "fazione" ? "fazione"
+  // Tipo: si sceglie sempre (così sono raggiungibili TUTTI i generatori, non solo i
+  // nomi), col tipo suggerito dalla categoria in cima (★) — un tap per il caso comune.
+  const suggerito = cat === "luogo" ? "toponimo" : cat === "fazione" ? "fazione"
     : cat === "personaggio" ? "persona" : null;
-  if (!tipo) {
-    const tipi = Object.keys(GENERATORI);
-    tipo = await tp.system.suggester(tipi.map((t) => GENERATORI[t].label), tipi, false, "Cosa generare?");
-    if (!tipo) return "";
-  }
+  const tipi = Object.keys(GENERATORI);
+  const ord = suggerito ? [suggerito, ...tipi.filter((t) => t !== suggerito)] : tipi;
+  const tipo = await tp.system.suggester(
+    ord.map((t) => (t === suggerito ? "★ " : "") + GENERATORI[t].label), ord, false, "Cosa generare?");
+  if (!tipo) return "";
 
   // Stile: candidati dall'ontologia in cima, poi tutti gli altri.
   const cand = candidatiStile(gen, file);
@@ -177,4 +198,5 @@ genera.generaPersona = generaPersona;
 genera.generaToponimo = generaToponimo;
 genera.generaFazione = generaFazione;
 genera.generaLista = generaLista;
+genera.generaDaForme = generaDaForme;
 module.exports = genera;

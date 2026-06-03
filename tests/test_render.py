@@ -1305,6 +1305,8 @@ def test_generatori_catalog():
     assert g["toponimi"]["prefissi"] and g["toponimi"]["suffissi"]
     faz = g["fazioni"]
     assert faz["forme"] and faz["sintagma"] and faz["nucleo_pl"] and faz["aggettivo"]
+    for sec in ("png", "taverna", "gancio"):   # spunti per il tavolo (Stage 1)
+        assert g[sec]["forme"], f"{sec}.forme assente"
     decl = (render.load_yaml("plugins.yaml").get("metabind_inputs") or {}).get("stile_nomi", "")
     assert set(_re.findall(r"option\(\s*([a-z_]+)", decl)) == set(stili)
 
@@ -1335,6 +1337,31 @@ def test_genera_e2e(tmp_path):
         assert "{" not in out[st]["f"], f"placeholder non risolto ({st}): {out[st]['f']}"
         assert out[st]["f"][0].isupper()
     assert len(set(out["__lista"])) >= 6   # generaLista: opzioni distinte
+
+
+@pytest.mark.skipif(not shutil.which("node"), reason="node assente")
+def test_genera_spunti_e2e(tmp_path):
+    """genera.js: i generatori-spunto (png/taverna/gancio, via generaDaForme) producono
+    opzioni distinte, non vuote e con TUTTI i placeholder risolti (nessun {..} residuo)."""
+    gen = render.load_yaml("generatori.yaml")
+    harness = tmp_path / "gs.js"
+    harness.write_text(
+        'const fs=require("fs");'
+        f'const genera=require({json.dumps(str(render.JS_DIR / "genera.js"))});'
+        f'const gen={json.dumps(gen, ensure_ascii=False)};'
+        'let s=11;const rng=()=>(s=(s*1103515245+12345)&0x7fffffff)/0x7fffffff;'
+        'const st=Object.keys(gen.stili)[0];const out={};'
+        'for(const tipo of ["png","taverna","gancio"]){out[tipo]=genera.generaLista(gen,tipo,st,6,rng);}'
+        'process.stdout.write(JSON.stringify(out));',
+        encoding="utf-8")
+    res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
+    assert res.returncode == 0, res.stderr
+    out = json.loads(res.stdout)
+    for tipo in ("png", "taverna", "gancio"):
+        lst = out[tipo]
+        assert len(lst) >= 4, f"{tipo}: troppe poche opzioni distinte: {lst}"
+        for v in lst:
+            assert v and "{" not in v, f"{tipo}: placeholder non risolto o vuoto: {v!r}"
 
 
 def test_fcg_it_settings():
@@ -1468,6 +1495,51 @@ def test_homebrew_bridge_single_source():
     for name in ("crea_pg.js", "sali_pg.js"):
         block = _v.marked_block((render.JS_DIR / name).read_text(encoding="utf-8"), "homebrew-bridge")
         assert block == canonical, f"{name}: ponte homebrew diverge dalla sorgente canonica _homebrew_bridge.js"
+
+
+def test_relations_single_source():
+    """reciprocalField/inverseRelation hanno una sorgente canonica (_relations.js); le copie
+    in meta_actions.js (Collega) e create_entity.js (inversi nel wizard) coincidono byte-a-byte
+    — così l'inverso a creazione e quello di Collega non possono divergere."""
+    import validate as _v
+    canonical = _v.marked_block((render.JS_DIR / "_relations.js").read_text(encoding="utf-8"), "relations")
+    assert canonical, "blocco canonico relations mancante in _relations.js"
+    for name in ("meta_actions.js", "create_entity.js"):
+        block = _v.marked_block((render.JS_DIR / name).read_text(encoding="utf-8"), "relations")
+        assert block == canonical, f"{name}: inverseRelation diverge dalla sorgente canonica _relations.js"
+
+
+@pytest.mark.skipif(not shutil.which("node"), reason="node assente")
+def test_wizard_writes_inverse(tmp_path):
+    """create_entity.writeInverses: il wizard scrive l'inverso reciproco sul target (come
+    Collega, ma ALLA CREAZIONE). `personaggio.fazione=[[Corvi]]` → sul target Corvi compare
+    `figure: [[Mira]]` (coppia univoca, multi)."""
+    core = {"relazioni": {
+        "personaggio": [{"field": "fazione", "label": "Fazione", "category": "fazione"}],
+        "fazione": [{"field": "figure", "label": "Figure", "category": "personaggio", "multi": True}],
+    }}
+    harness = tmp_path / "wizinv.js"
+    harness.write_text(
+        'const fs=require("fs");'
+        f'const src=fs.readFileSync({json.dumps(str(render.JS_DIR / "create_entity.js"))},"utf8");'
+        'const m={exports:{}};new Function("module","exports","require",src)(m,m.exports,require);'
+        f'const core={json.dumps(core, ensure_ascii=False)};'
+        'let saved=null;'
+        'const target={path:"Mondi/Fazioni/Corvi.md", basename:"Corvi"};'
+        'global.app={'
+        '  metadataCache:{'
+        '    getFirstLinkpathDest:(n)=>(n==="Corvi"?target:null),'
+        '    getFileCache:()=>({frontmatter:{categoria:"fazione"}}),'
+        '  },'
+        '  fileManager:{processFrontMatter:async(f,fn)=>{const fm={};fn(fm);saved=fm;}},'
+        '};'
+        'm.exports.writeInverses(core,"personaggio","Mira",{fazione:"[[Corvi]]"})'
+        '.then(()=>process.stdout.write(JSON.stringify(saved)));',
+        encoding="utf-8")
+    res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
+    assert res.returncode == 0, res.stderr
+    out = json.loads(res.stdout)
+    assert out == {"figure": ["[[Mira]]"]}   # inverso tipizzato scritto sul target (coppia univoca, multi)
 
 
 @pytest.mark.skipif(not shutil.which("node"), reason="node assente")

@@ -38,7 +38,7 @@
 > Simbolo: `INPUT[text:simbolo]`
 
 > [!tip]- Genera nome/spunto
-> **Locale** (italiano, a tema): `BUTTON[genera-locale]` — nome di persona/luogo/fazione dallo *stile* della cultura/specie collegata (o scelto). Inserisce al cursore.
+> **Locale** (italiano, a tema): `BUTTON[genera-locale]` — scegli cosa generare (nome di persona/luogo/fazione, **PNG**, **taverna**, **gancio**) dallo *stile* della cultura/specie collegata. Inserisce al cursore.
 > **FCG** (rapido, EN): in modifica `@` + categoria (es. `@HumanFemale`, `@Settlement`) → popup · oppure il generatore completo `BUTTON[genera-contenuto]` (→ appunti).
 > [!note]- Identità
 > Cosa rappresenta la fazione, simboli, reputazione e percezione pubblica.

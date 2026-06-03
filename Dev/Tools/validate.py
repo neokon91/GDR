@@ -319,6 +319,20 @@ def validate_aux_yaml() -> list[str]:
         for k in ("forme", "sintagma", "nucleo_pl", "aggettivo"):
             if not faz.get(k):
                 errors.append(f"generatori: fazioni.{k} assente")
+        # Spunti per il tavolo (png/taverna/gancio): ogni sezione ha `forme`, e ogni
+        # placeholder {chiave} usato (nelle forme o nelle liste) deve avere una lista
+        # omonima — eccetto i terminali {nome}/{luogo}. Cattura i refusi (lista mancante
+        # → output silenziosamente vuoto), nello spirito anti-drift del resto del check.
+        for sec in ("png", "taverna", "gancio"):
+            block = gen.get(sec) or {}
+            if not block.get("forme"):
+                errors.append(f"generatori: {sec}.forme assente")
+                continue
+            testo = " ".join(str(x) for v in block.values()
+                              for x in (v if isinstance(v, list) else [v]))
+            missing = (set(re.findall(r"\{(\w+)\}", testo)) - {"nome", "luogo"}) - set(block)
+            if missing:
+                errors.append(f"generatori: {sec} usa placeholder senza lista: {sorted(missing)}")
 
     # fcg_it.yaml -> write_fantasy_content_generator (merge SHALLOW nel plugin: ogni
     # gruppo override deve avere TUTTE le chiavi che il generatore legge).
@@ -446,6 +460,24 @@ def check() -> int:
                     errors.append(f"{js_name}: blocco homebrew-bridge fra i marker // >>>homebrew-bridge/<<<homebrew-bridge mancante")
                 elif block != bridge:
                     errors.append(f"{js_name}: ponte homebrew diverge da _homebrew_bridge.js (sorgente unica) — risincronizza")
+
+    # JS — anti-drift della DERIVAZIONE DEGLI INVERSI: reciprocalField/inverseRelation
+    # hanno UNA sorgente canonica (_relations.js); meta_actions.js (Collega) e
+    # create_entity.js (inversi nel wizard di creazione) ne tengono una COPIA fra i
+    # marker >>>relations/<<<relations. Così l'inverso scritto alla creazione e quello
+    # scritto da Collega non possono divergere.
+    relations_path = JS_DIR / "_relations.js"
+    if relations_path.is_file():
+        canonical_rel = marked_block(relations_path.read_text(encoding="utf-8"), "relations")
+        if canonical_rel is None:
+            errors.append("_relations.js: blocco relations fra i marker mancante")
+        else:
+            for js_name in ("meta_actions.js", "create_entity.js"):
+                block = marked_block((JS_DIR / js_name).read_text(encoding="utf-8"), "relations")
+                if block is None:
+                    errors.append(f"{js_name}: blocco relations fra i marker // >>>relations/<<<relations mancante")
+                elif block != canonical_rel:
+                    errors.append(f"{js_name}: inverseRelation/reciprocalField diverge da _relations.js (sorgente unica) — risincronizza")
 
     # Ogni field('<id>') usato nei Jinja deve esistere nel registro core.fields.
     # I partial (_*.j2) definiscono le macro, non le usano: vanno esclusi.

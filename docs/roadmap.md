@@ -86,6 +86,13 @@ Pronto per **beta chiuso**. Per la beta aperta restano i punti PM qui sotto.
   risoluzione automatica degli ordini.
 
 ### Worldbuilding (profondità)
+- **Generatore homebrew → parità FCG** — alternativa *in casa* a Fantasy Content Generator
+  (che non espone API JS): `generatori.yaml`+`genera.js`, italiano, a tema (riusa lo `stile_nomi`
+  della cultura/specie collegata) e **con API** → agganciabile. ✅ **Stage 1**: nomi
+  persona/toponimo/fazione + **PNG**, **taverna**, **gancio** (registro `GENERATORI` estendibile:
+  sezione `forme` in YAML + voce nel registro; `generaDaForme` generico). **Stage 2** verso la
+  parità FCG: diceria/rumor, bottino (legabile SRD), insediamento, oggetto-curiosità, … — poi
+  si può **ritirare la dipendenza FCG** (ZIP/licenza più puliti).
 - **Legami cosmologia↔culto↔divinità** più ricchi.
 - **Recuperi da FantasyWorld**: ✅ **alberi evolutivi / skill-tree** — nuova entità
   `albero_evolutivo` (progressioni *lore* ramificate: tradizione/lignaggio/evoluzione/

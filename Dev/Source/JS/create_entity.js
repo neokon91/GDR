@@ -189,6 +189,63 @@ function presetValori(arch) {
   return out;
 }
 
+// Copia della sorgente canonica _relations.js: check() ne impone l'uguaglianza
+// (anti-drift con meta_actions). Modifica _relations.js e risincronizza qui.
+// >>>relations
+function reciprocalField(relazioni, targetCat, sourceCat) {
+  const cands = ((relazioni ?? {})[targetCat] ?? []).filter((s) => s && s.category === sourceCat);
+  return cands.length === 1 ? cands[0] : null;
+}
+
+// Relazione INVERSA da scrivere sul target collegando con `rel`. Tre vie, in ordine:
+//  1) ESPLICITA — `rel.reciprocal` nomina il campo inverso, risolto nello schema del
+//     target per ereditarne 'multi'/'label'. Serve quando l'auto-derivazione è
+//     ambigua: coppie simmetriche (luogo.confina_con↔confina_con) o direzionali
+//     (evento.causato_da↔conseguenze), dove il target ha più relazioni alla sorgente;
+//  2) AUTO-DERIVATA — la coppia è univoca (reciprocalField), per le relazioni
+//     tipizzate senza override esplicito;
+//  3) null — relazione generica o ambigua senza override: il chiamante usa 'connessioni'.
+function inverseRelation(core, rel, sourceCat, targetCat) {
+  if (rel && rel.reciprocal) {
+    const rels = (core.relazioni ?? {})[targetCat] ?? [];
+    return rels.find((r) => r && r.field === rel.reciprocal) ?? { field: rel.reciprocal, multi: !!rel.multi };
+  }
+  return rel && rel.category ? reciprocalField(core.relazioni, targetCat, sourceCat) : null;
+}
+// <<<relations
+
+// Scrive l'inverso reciproco sui target collegati — come "Collega", ma ALLA CREAZIONE.
+// Per ogni relazione tipizzata compilata (creation.fields o passo "collega ora"), aggiunge
+// sul target il campo inverso (inverseRelation) che punta alla nuova nota: l'entità nasce
+// agganciata al grafo in ENTRAMBE le direzioni, non solo forward. Inverso generico
+// 'connessioni' se la coppia non è univoca. Salta i link che non risolvono.
+async function writeInverses(core, category, name, captured) {
+  const back = `[[${name}]]`;
+  const add = (f, field, multi) => {
+    if (multi) {
+      const cur = Array.isArray(f[field]) ? f[field] : (f[field] ? [f[field]] : []);
+      if (!cur.includes(back)) f[field] = [...cur, back];
+    } else {
+      f[field] = back;
+    }
+  };
+  for (const rel of (core.relazioni ?? {})[category] ?? []) {
+    const val = captured[rel.field];
+    const links = Array.isArray(val) ? val : (val ? [val] : []);
+    for (const link of links) {
+      const targetName = String(link).replace(/^\[\[|\]\]$/g, "").split("|")[0].split("#")[0].trim();
+      const tfile = app.metadataCache.getFirstLinkpathDest?.(targetName, "");
+      if (!tfile || !app.fileManager?.processFrontMatter) continue;
+      const targetCat = (app.metadataCache.getFileCache(tfile)?.frontmatter ?? {}).categoria;
+      const recip = inverseRelation(core, rel, category, targetCat);
+      await app.fileManager.processFrontMatter(tfile, (f) => {
+        if (recip) add(f, recip.field, recip.multi);
+        else add(f, "connessioni", true);
+      });
+    }
+  }
+}
+
 async function runWizard(tp, template, core) {
   const category = template.category;
   const categorySpec = core.categories[category] ?? {};
@@ -276,6 +333,9 @@ async function runWizard(tp, template, core) {
   const folder = core.folders[folderKey] ?? core.folders[category] ?? "Inbox";
   await ensureFolder(folder);
   await tp.file.move(`${folder}/${name}`);
+  // Inverso reciproco sui target (link bidirezionale alla creazione, come Collega):
+  // l'entità nasce agganciata al grafo in entrambe le direzioni.
+  await writeInverses(core, category, name, captured);
 
   const session = activeSession();
   const data = {
@@ -317,4 +377,6 @@ async function create_entity(tp, templateId = "") {
 create_entity.presetValori = presetValori;      // esposto per i test
 create_entity.famigliaPreset = famigliaPreset;  // esposto per i test
 create_entity.relationsToAsk = relationsToAsk;  // esposto per i test
+create_entity.writeInverses = writeInverses;    // esposto per i test
+create_entity.inverseRelation = inverseRelation; // esposto per i test
 module.exports = create_entity;

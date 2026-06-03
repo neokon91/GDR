@@ -39,6 +39,9 @@ function pushUnique(fm, key, value) {
 // luogo.cultura → cultura ha solo 'regioni'→luogo). Zero o più di una (ambiguo,
 // es. personaggio.fazione ↔ figure/fondatori) → null: si usa il generico
 // 'connessioni'. Auto-derivato: niente authoring di inverse nello schema.
+// Copia della sorgente canonica _relations.js: check() ne impone l'uguaglianza
+// (anti-drift con create_entity). Modifica _relations.js e risincronizza qui.
+// >>>relations
 function reciprocalField(relazioni, targetCat, sourceCat) {
   const cands = ((relazioni ?? {})[targetCat] ?? []).filter((s) => s && s.category === sourceCat);
   return cands.length === 1 ? cands[0] : null;
@@ -59,6 +62,7 @@ function inverseRelation(core, rel, sourceCat, targetCat) {
   }
   return rel && rel.category ? reciprocalField(core.relazioni, targetCat, sourceCat) : null;
 }
+// <<<relations
 
 // Collega la nota attiva a un'altra in modo TIPIZZATO e RECIPROCO:
 // 1) scegli il tipo di relazione (da core.relazioni della categoria, o generico),

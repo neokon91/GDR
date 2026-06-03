@@ -47,12 +47,15 @@ Il wizard delle entità "uniformi" è **generato**: `render.py` produce un
 lo schema da `core.json`). Le entità bespoke hanno invece un `crea_<id>.js`
 **hand-authored** in `Dev/Source/JS/` che fa da override.
 
-I file `_*.js` (`_comparators.js`, `_homebrew_bridge.js`) sono **sorgenti canoniche
-condivise**: NON copiate nel vault, ma gli script autonomi (niente require a runtime)
-ne tengono una COPIA fra marker (`>>>matchesCond`/`<<<`, `>>>homebrew-bridge`/`<<<`).
-`check()` impone che le copie in views.js/meta_actions.js (`matchesCond`) e in
-crea_pg.js/sali_pg.js (ponte homebrew) siano **byte-identiche** alla canonica: la
-deriva diventa un errore di build, non un bug latente (creazione vs level-up).
+I file `_*.js` (`_comparators.js`, `_homebrew_bridge.js`, `_relations.js`) sono **sorgenti
+canoniche condivise**: NON copiate nel vault, ma gli script autonomi (niente require a runtime)
+ne tengono una COPIA fra marker (`>>>matchesCond`/`<<<`, `>>>homebrew-bridge`/`<<<`,
+`>>>relations`/`<<<`). `check()` impone che le copie siano **byte-identiche** alla canonica: la
+deriva diventa un errore di build, non un bug latente. Casi: `matchesCond` (views.js/
+meta_actions.js), ponte homebrew (crea_pg.js/sali_pg.js — creazione vs level-up), derivazione
+degli **inversi** `reciprocalField`/`inverseRelation` (meta_actions.js *Collega* vs
+create_entity.js *inversi nel wizard* — il link reciproco scritto a creazione e quello scritto
+da Collega non possono divergere).
 
 Esempio completo (bespoke): il **PG** (`entities/personaggio.yaml` + `pg.md.j2` +
 `crea_pg.js`, + `sali_pg.js` per il level-up), vedi [rules_layer.md](rules_layer.md).
