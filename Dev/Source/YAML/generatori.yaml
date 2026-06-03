@@ -222,3 +222,72 @@ oggetto:
   forma_o: ["un medaglione", "una chiave", "un carillon", "un pugnale cerimoniale", "un anello", "una maschera", "un libricino", "una bambola", "un compasso", "una fiala"]
   dettaglio_o: ["caldo al tatto senza motivo", "inciso con un nome cancellato", "che ronza vicino alla magia", "con dentro qualcosa che si muove", "che indica sempre la stessa direzione", "freddo come ghiaccio"]
   storia_o: ["dicono porti sfortuna a chi mente", "apparteneva a un morto famoso", "nessuno ricorda chi l'ha fatto", "vale più di quanto sembri", "lo cercano in molti", "fu rubato a un tempio"]
+
+# === Spunti per il tavolo (Stage 3) ========================================
+
+# Meteo/presagio: il tempo che fa + un presagio atmosferico (superstizione di
+# popolo, mezzo-gancio). {luogo} = toponimo a tema dove ambientarlo.
+meteo:
+  forme:
+    - "{cielo}, {vento}: {presagio}."
+    - "{cielo}; {dettaglio_m} — {presagio}."
+    - "{fenomeno} verso {luogo}: {presagio}."
+    - "{cielo}, {vento}; {dettaglio_m}."
+    - "{fenomeno}; {dettaglio_m}, e {presagio}."
+  cielo: ["Cielo terso e tagliente di freddo", "Nuvole basse color piombo", "Una caligine che non si alza", "Sole pallido dietro un velo", "Cielo livido di temporale imminente", "Nubi rosse al tramonto", "Cielo coperto, luce piatta senza ombre", "Prime stelle e un'aria immobile", "Foschia che mangia gli orizzonti", "Squarci di sereno fra nubi in corsa"]
+  vento: ["vento del nord che gela le ossa", "non un alito d'aria", "raffiche che strappano le insegne", "una brezza umida di pioggia in arrivo", "vento che porta odore di mare", "tramontana secca e insistente", "folate improvvise e dispettose", "aria ferma che pesa sul petto"]
+  dettaglio_m: ["la prima neve imbianca i tetti", "una pioggia sottile non smette da ore", "la nebbia ingoia il sentiero a dieci passi", "il ghiaccio rende infide le strade", "l'afa schiaccia ogni rumore", "grandine improvvisa picchia sulle tegole", "i tuoni rotolano lontani fra i monti", "la rugiada gela sulle foglie", "il fango risucchia gli stivali a ogni passo", "un arcobaleno doppio scavalca la valle"]
+  fenomeno: ["Una tempesta nera monta dall'orizzonte", "Cala una nebbia fitta come latte", "Un vento caldo fuori stagione scende dai valichi", "Il cielo si oscura a mezzogiorno", "Una pioggia di cenere imbianca tutto", "Fulmini senza tuono guizzano fra le nubi", "Un gelo improvviso spacca le pozze", "La prima vera bufera dell'inverno"]
+  presagio: ["i vecchi si segnano e chiudono le imposte", "dicono che porti sventura a chi viaggia", "qualcuno giura che è opera di una strega", "gli animali sono nervosi senza motivo", "i pescatori non escono, e hanno ragione", "le campane suonano da sole, dicono", "è lo stesso tempo della notte del disastro", "i bambini sognano tutti la stessa cosa", "il prete parla di castigo, l'oste di buon affare", "chi sa leggere il cielo prepara le scorte"]
+
+# Stanza di dungeon: cosa c'è in un ambiente sotterraneo (contenuto + dettaglio
+# + pericolo/tesoro/uscita). Per popolare al volo una mappa o improvvisare.
+dungeon_stanza:
+  forme:
+    - "{stanza}: {contenuto}; {dettaglio_d}."
+    - "{stanza} — {contenuto}, ma {complicazione}."
+    - "{stanza}: {contenuto}; {esito}."
+    - "{stanza}: {dettaglio_d}, e {esito}."
+    - "{stanza} — {contenuto}; {complicazione}, e {esito}."
+  stanza: ["Una cripta a volta", "Un corridoio mezzo allagato", "Una sala con colonne spezzate", "Una cella angusta", "Un'antica biblioteca in rovina", "Una fucina spenta", "Una caverna naturale", "Un refettorio crollato", "Un pozzo profondo", "Una cappella profanata", "Una galleria mineraria", "Una sala del trono vuota", "Un magazzino polveroso", "Una scalinata a chiocciola"]
+  contenuto: ["sarcofagi aperti e ossa sparse", "una statua che guarda l'ingresso", "casse marce e barili sfondati", "un altare macchiato di scuro", "ragnatele spesse come tende", "una pozza d'acqua nera e immobile", "armi arrugginite appese alle pareti", "affreschi sbiaditi che raccontano una storia", "un braciere ancora tiepido", "scaffali crollati e pergamene ammuffite", "un mucchio di macerie da scavalcare", "gabbie vuote, le sbarre divelte dall'interno"]
+  dettaglio_d: ["c'è puzza di marcio e di vecchio", "un gocciolio scandisce il silenzio", "le impronte nella polvere sono fresche", "qualcosa si muove appena la luce entra", "il pavimento è inclinato e infido", "un'iscrizione in una lingua morta corre sul muro", "fa molto più freddo che nel corridoio", "le torce faticano a restare accese", "si sente un canto sommesso da chissà dove", "il soffitto scricchiola sotto un peso invisibile"]
+  complicazione: ["il pavimento cede a metà stanza", "una trappola a dardi scatta dall'arco", "il rumore richiama qualcosa dal buio", "la porta sul fondo si chiude di colpo", "il gas dalle fessure annebbia la mente", "le ossa sul pavimento iniziano a muoversi", "una lastra a pressione arma una lama oscillante", "l'acqua sale veloce dalle grate", "il ponte di pietra è marcio e traballa"]
+  esito: ["dietro le macerie luccica qualcosa", "una scala scende ancora più giù", "un passaggio segreto si apre nella parete", "l'unica uscita è sbarrata dall'altra parte", "uno scrigno aspetta, troppo in vista per essere onesto", "una corrente d'aria tradisce un cunicolo nascosto", "c'è una via di fuga, ma stretta", "il bottino c'è, ma qualcuno è morto per averlo cercato", "una mappa graffiata sul muro indica la via"]
+
+# === Tesoro legato all'SRD (Stage 3) =======================================
+# Bottino MECCANICO: monete a fascia + un oggetto/equip REALE dell'SRD 5.2.1
+# (CC-BY-4.0). I NOMI degli oggetti NON stanno qui: render.py li inietta da
+# Dev/Source/SRD/*.json in `tesoro._srd` (per fascia/rarità), così il bottino
+# cita item veri e licenziabili. Qui restano editabili solo le parti italiane di
+# atmosfera (monete, importi, connettori). NESSUNA chiave `forme`: il generatore
+# `tesoro` è una funzione dedicata (genera.js: generaTesoro), non generaDaForme —
+# perciò il validatore degli spunti lo salta apposta. Vedi il `bottino` (sopra)
+# per il colpo d'occhio puramente atmosferico, slegato dalle regole.
+tesoro:
+  # Fasce in ordine crescente di valore; `pesi` = probabilità relativa (i tesori
+  # comuni capitano più spesso). `mondano` = equipaggiamento non magico; le altre
+  # = oggetti magici per rarità.
+  fasce: [mondano, "non comune", rara, "molto rara", leggendaria]
+  pesi:  [40, 30, 18, 9, 3]
+  fascia_mondana: mondano
+  # Frase delle monete per fascia; {n} = importo pescato da `importi`.
+  monete:
+    mondano:      ["una manciata di monete di rame", "{n} monete d'argento", "{n} pezzi d'argento e qualche spicciolo", "una borsa logora con {n} monete miste"]
+    "non comune": ["{n} monete d'oro", "una borsa pesante: {n} mo", "{n} pezzi d'oro e un paio di gemme dozzinali"]
+    rara:         ["{n} monete d'oro", "{n} mo e una gemma che vale quasi altrettanto", "uno scrigno con {n} pezzi d'oro"]
+    "molto rara": ["uno scrigno serrato con {n} monete d'oro", "{n} mo in lingotti marchiati", "{n} pezzi d'oro e gioielli d'antiquariato"]
+    leggendaria:  ["un tesoro regale: {n} pezzi d'oro", "{n} monete d'oro e gemme da capogiro", "un forziere reale: {n} mo e un diadema"]
+  # Importi possibili per fascia (povero → ricco). Coerenti coi tesori 2024.
+  importi:
+    mondano:      [8, 15, 25, 40, 60]
+    "non comune": [80, 150, 250, 400]
+    rara:         [500, 900, 1500, 2500]
+    "molto rara": [3000, 5000, 8000, 12000]
+    leggendaria:  [15000, 25000, 40000, 60000]
+  # Come legare monete + oggetto in una riga sola.
+  connettori:
+    - "{monete}; e {oggetto}"
+    - "{oggetto}, insieme a {monete}"
+    - "{monete}, più {oggetto}"
+    - "{oggetto} e {monete}"

@@ -51,6 +51,7 @@ from build_srd import (  # noqa: F401 (re-export per i test)
     gs_baselines,
     load_srd,
     srd_condizioni,
+    srd_loot_pool,
     srd_note,
     srd_statblock_yaml,
 )
@@ -545,6 +546,12 @@ def write_engine_data(core: dict[str, Any], templates: list[dict[str, Any]]) -> 
     (modello distillato per views.js), le opzioni del rules-engine PG, gli script
     Templater (copia 1:1) e un wizard di creazione per-template (wrapper sul
     motore create_entity.js, salvo override hand-authored crea_<id>.js in JS/)."""
+    # generatori homebrew: catalogo da generatori.yaml + iniezione dei nomi-oggetto
+    # REALI dell'SRD nel generatore `tesoro` (per fascia/rarità). Vivono qui, non in
+    # YAML, così il bottino cita item veri/CC-BY senza ricopiarli a mano.
+    generatori = load_yaml("generatori.yaml") if (SOURCE / "YAML" / "generatori.yaml").is_file() else {}
+    if isinstance(generatori.get("tesoro"), dict):
+        generatori["tesoro"]["_srd"] = srd_loot_pool()
     payload = {
         "folders": core.get("folders", {}),
         "fields": core.get("fields", {}),
@@ -574,8 +581,9 @@ def write_engine_data(core: dict[str, Any], templates: list[dict[str, Any]]) -> 
         # (profilo personalità dei personaggi, soprattutto PNG). Da astrologia.yaml (opzionale).
         "astrologia": load_yaml("astrologia.yaml") if (SOURCE / "YAML" / "astrologia.yaml").is_file() else {},
         # generatori: catalogo stili/affissi per il generatore homebrew di nomi/spunti
-        # (genera.js: nomi persona/toponimi/fazioni in italiano, a tema). Da generatori.yaml.
-        "generatori": load_yaml("generatori.yaml") if (SOURCE / "YAML" / "generatori.yaml").is_file() else {},
+        # (genera.js: nomi persona/toponimi/fazioni in italiano, a tema). Da generatori.yaml,
+        # con i nomi-oggetto SRD iniettati in tesoro._srd (vedi sopra).
+        "generatori": generatori,
         "creation": core.get("creation", {}),
         "templates": templates,
     }

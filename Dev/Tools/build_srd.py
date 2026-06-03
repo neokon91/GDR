@@ -52,6 +52,39 @@ def load_srd(name: str) -> list[dict[str, Any]]:
     return data if isinstance(data, list) else []
 
 
+# Rarità SRD -> fascia canonica del generatore `tesoro`. Il JSON mescola genere
+# (rara/raro, leggendaria/leggendario) e rarità composte/variabili ("non comune
+# (+1)…", "rarità variabile", "manufatto", None) che NON mappiamo: restano fuori
+# dal bottino per non confondere il colpo d'occhio al tavolo.
+_LOOT_RARITY = {
+    "non comune": "non comune",
+    "rara": "rara", "raro": "rara",
+    "molto rara": "molto rara", "molto raro": "molto rara",
+    "leggendaria": "leggendaria", "leggendario": "leggendaria",
+}
+# Tipi di equipaggiamento che hanno senso come bottino non magico (gli altri —
+# vitto/alloggio, servizi, cavalcature, veicoli, monete — non sono "tesoro").
+_LOOT_MUNDANE_TIPI = {"equipaggiamento_avventura", "arma", "armatura", "scudo", "strumento"}
+
+
+def srd_loot_pool() -> dict[str, list[str]]:
+    """Nomi di oggetti REALI dell'SRD raggruppati per fascia, per il generatore
+    `tesoro` (genera.js: generaTesoro). `mondano` = equipaggiamento non magico;
+    le altre fasce = oggetti magici per rarità normalizzata. Iniettato in core.json
+    sotto generatori.tesoro._srd così il bottino cita item veri e CC-BY (mai DMG)."""
+    pool: dict[str, list[str]] = {"mondano": [], "non comune": [], "rara": [], "molto rara": [], "leggendaria": []}
+    for x in load_srd("srd_5_2_1_equipment.json"):
+        if isinstance(x, dict) and x.get("nome") and str(x.get("tipo")) in _LOOT_MUNDANE_TIPI:
+            pool["mondano"].append(x["nome"])
+    for x in load_srd("srd_5_2_1_magic_items.json"):
+        if not (isinstance(x, dict) and x.get("nome")):
+            continue
+        fascia = _LOOT_RARITY.get(str(x.get("rarita") or "").strip().lower())
+        if fascia:
+            pool[fascia].append(x["nome"])
+    return {k: sorted(set(v)) for k, v in pool.items() if v}
+
+
 def _join(value: Any) -> str:
     return ", ".join(str(v) for v in value) if isinstance(value, list) else str(value or "")
 

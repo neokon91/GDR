@@ -10,6 +10,18 @@ function pick(arr, rng) {
   return list[Math.floor((rng ? rng() : Math.random()) * list.length)];
 }
 
+// Scelta pesata: items[i] esce con probabilità pesi[i]/somma. Se i pesi mancano
+// o non combaciano, ripiega su pick() uniforme.
+function pickWeighted(items, pesi, rng) {
+  const list = Array.isArray(items) && items.length ? items : [""];
+  if (!Array.isArray(pesi) || pesi.length !== list.length) return pick(list, rng);
+  const tot = pesi.reduce((a, b) => a + (Number(b) || 0), 0);
+  if (tot <= 0) return pick(list, rng);
+  let r = (rng ? rng() : Math.random()) * tot;
+  for (let i = 0; i < list.length; i++) { r -= Number(pesi[i]) || 0; if (r < 0) return list[i]; }
+  return list[list.length - 1];
+}
+
 function cap(s) {
   s = String(s || "");
   return s ? s[0].toUpperCase() + s.slice(1) : s;
@@ -82,6 +94,27 @@ function generaDaForme(gen, sectionKey, stileId, rng) {
   return resolve(pick(section.forme, rng), 0).replace(/\s+/g, " ").trim();
 }
 
+// Tesoro legato all'SRD: monete a fascia + un oggetto/equip REALE dell'SRD 5.2.1,
+// scelto per rarità. NON usa generaDaForme: i nomi-oggetto non stanno in YAML ma
+// in gen.tesoro._srd (per fascia), iniettato da render.py dai JSON SRD. La fascia
+// si pesca pesata (i tesori comuni capitano più spesso); l'oggetto magico riporta
+// la rarità in coda, quello mondano resta nudo. {luogo}/{nome} non servono qui.
+function generaTesoro(gen, stileId, rng) {
+  const t = (gen && gen.tesoro) || {};
+  const fasce = Array.isArray(t.fasce) ? t.fasce : [];
+  if (!fasce.length) return "";
+  const srd = t._srd || {};
+  const fascia = pickWeighted(fasce, t.pesi, rng);
+  const pool = Array.isArray(srd[fascia]) ? srd[fascia] : [];
+  let oggetto = pool.length ? pick(pool, rng) : "cianfrusaglie senza valore";
+  if (fascia !== (t.fascia_mondana || "mondano")) oggetto = `${oggetto} (rarità ${fascia})`;
+  const importi = (t.importi || {})[fascia] || [10];
+  const n = pick(importi, rng);
+  const monete = String(pick((t.monete || {})[fascia] || ["{n} monete"], rng)).replace("{n}", n);
+  const conn = pick(t.connettori && t.connettori.length ? t.connettori : ["{monete}; e {oggetto}"], rng);
+  return conn.replace("{monete}", monete).replace("{oggetto}", oggetto).replace(/\s+/g, " ").trim();
+}
+
 const GENERATORI = {
   persona: { fn: generaPersona, label: "Nome di persona" },
   toponimo: { fn: generaToponimo, label: "Toponimo / luogo" },
@@ -93,6 +126,9 @@ const GENERATORI = {
   bottino: { fn: (g, s, r) => generaDaForme(g, "bottino", s, r), label: "Bottino / tesoro" },
   insediamento: { fn: (g, s, r) => generaDaForme(g, "insediamento", s, r), label: "Insediamento" },
   oggetto: { fn: (g, s, r) => generaDaForme(g, "oggetto", s, r), label: "Oggetto / curiosità" },
+  meteo: { fn: (g, s, r) => generaDaForme(g, "meteo", s, r), label: "Meteo / presagio" },
+  dungeon_stanza: { fn: (g, s, r) => generaDaForme(g, "dungeon_stanza", s, r), label: "Stanza di dungeon" },
+  tesoro: { fn: generaTesoro, label: "Tesoro (SRD)" },
 };
 
 // N opzioni distinte (per quanto possibile) di un tipo, dato lo stile.
@@ -203,4 +239,5 @@ genera.generaToponimo = generaToponimo;
 genera.generaFazione = generaFazione;
 genera.generaLista = generaLista;
 genera.generaDaForme = generaDaForme;
+genera.generaTesoro = generaTesoro;
 module.exports = genera;

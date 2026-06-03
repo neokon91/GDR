@@ -1306,8 +1306,15 @@ def test_generatori_catalog():
     faz = g["fazioni"]
     assert faz["forme"] and faz["sintagma"] and faz["nucleo_pl"] and faz["aggettivo"]
     for sec in ("png", "taverna", "gancio",                          # spunti Stage 1
-                "diceria", "bottino", "insediamento", "oggetto"):    # spunti Stage 2
+                "diceria", "bottino", "insediamento", "oggetto",     # spunti Stage 2
+                "meteo", "dungeon_stanza"):                          # spunti Stage 3
         assert g[sec]["forme"], f"{sec}.forme assente"
+    # tesoro (SRD): generatore dedicato (niente `forme`, lo salta il validatore) —
+    # le sue parti italiane vivono in YAML, i nomi-oggetto li inietta render.py.
+    tes = g["tesoro"]
+    assert tes["fasce"] and tes["monete"] and tes["importi"], "tesoro: scaffolding incompleto"
+    assert set(tes["fasce"]) <= set(tes["monete"]) and set(tes["fasce"]) <= set(tes["importi"]), \
+        "tesoro: ogni fascia deve avere monete e importi"
     decl = (render.load_yaml("plugins.yaml").get("metabind_inputs") or {}).get("stile_nomi", "")
     assert set(_re.findall(r"option\(\s*([a-z_]+)", decl)) == set(stili)
 
@@ -1352,17 +1359,51 @@ def test_genera_spunti_e2e(tmp_path):
         f'const gen={json.dumps(gen, ensure_ascii=False)};'
         'let s=11;const rng=()=>(s=(s*1103515245+12345)&0x7fffffff)/0x7fffffff;'
         'const st=Object.keys(gen.stili)[0];const out={};'
-        'for(const tipo of ["png","taverna","gancio","diceria","bottino","insediamento","oggetto"]){out[tipo]=genera.generaLista(gen,tipo,st,6,rng);}'
+        'for(const tipo of ["png","taverna","gancio","diceria","bottino","insediamento","oggetto","meteo","dungeon_stanza"]){out[tipo]=genera.generaLista(gen,tipo,st,6,rng);}'
         'process.stdout.write(JSON.stringify(out));',
         encoding="utf-8")
     res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
     assert res.returncode == 0, res.stderr
     out = json.loads(res.stdout)
-    for tipo in ("png", "taverna", "gancio", "diceria", "bottino", "insediamento", "oggetto"):
+    for tipo in ("png", "taverna", "gancio", "diceria", "bottino", "insediamento", "oggetto",
+                 "meteo", "dungeon_stanza"):
         lst = out[tipo]
         assert len(lst) >= 4, f"{tipo}: troppe poche opzioni distinte: {lst}"
         for v in lst:
             assert v and "{" not in v, f"{tipo}: placeholder non risolto o vuoto: {v!r}"
+
+
+@pytest.mark.skipif(not shutil.which("node"), reason="node assente")
+def test_genera_tesoro_e2e(tmp_path):
+    """genera.js: il tesoro SRD (generaTesoro) lega monete a fascia + un oggetto/equip
+    REALE dell'SRD. Verifica che render inietti i nomi, che ogni opzione citi un item
+    vero, riporti le monete, e che gli oggetti magici (non mondani) portino la rarità."""
+    gen = render.load_yaml("generatori.yaml")
+    pool = render.srd_loot_pool()
+    assert pool.get("mondano") and pool.get("rara"), "loot pool SRD vuoto o incompleto"
+    gen["tesoro"]["_srd"] = pool                                      # iniezione (come in core.json)
+    all_names = {n for names in pool.values() for n in names}
+    mondani = set(pool["mondano"])
+    harness = tmp_path / "gt.js"
+    harness.write_text(
+        f'const genera=require({json.dumps(str(render.JS_DIR / "genera.js"))});'
+        f'const gen={json.dumps(gen, ensure_ascii=False)};'
+        'let s=3;const rng=()=>(s=(s*1103515245+12345)&0x7fffffff)/0x7fffffff;'
+        'const st=Object.keys(gen.stili)[0];'
+        'process.stdout.write(JSON.stringify(genera.generaLista(gen,"tesoro",st,8,rng)));',
+        encoding="utf-8")
+    res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
+    assert res.returncode == 0, res.stderr
+    lst = json.loads(res.stdout)
+    assert len(lst) >= 4, f"tesoro: troppe poche opzioni distinte: {lst}"
+    for v in lst:
+        assert v and "{" not in v, f"tesoro: vuoto o placeholder residuo: {v!r}"
+        cited = [n for n in all_names if n in v]
+        assert cited, f"tesoro: nessun oggetto SRD reale citato: {v!r}"     # NON è item-soup
+        assert any(c.isdigit() for c in v) or "rame" in v, f"tesoro: monete assenti: {v!r}"
+        # Oggetto magico -> riporta la rarità; oggetto mondano -> niente tag.
+        if "(rarità " in v:
+            assert any(n in v and n not in mondani for n in cited), f"tesoro: tag rarità su item mondano: {v!r}"
 
 
 def test_fcg_it_settings():
