@@ -95,8 +95,7 @@ monolite): carica il modello e delega.
    per plugin: community-plugins, Templater, Dataview, Meta Bind (input+button),
    `write_metadata_menu` (fileClass), `write_iconize`, `write_callout_manager`,
    `write_statblock_layouts` (layout + dice), `write_folder_notes`, `write_calendarium`
-   (parsing + ponte `fc-*`), `write_fantasy_content_generator` (trigger inline + liste IT
-   da `fcg_it.yaml`), `write_bookmarks`, chrome esploratore, default core, homepage.
+   (parsing + ponte `fc-*`), `write_bookmarks`, chrome esploratore, default core, homepage.
    Vedi [plugin_contracts.md](plugin_contracts.md).
 6. `scaffold_folders()` — crea le cartelle contenuti mancanti (idempotente).
 7. `write_example_world()` — genera il mondo-esempio (`Dev/Source/esempio/*.yaml`) in

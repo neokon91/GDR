@@ -32,8 +32,6 @@ plugins:
     name: Excalidraw
   - id: zoom-map
     name: "TTRPG Tools - Maps"
-  - id: fantasy-content-generator
-    name: Fantasy Content Generator
   - id: obsidian42-brat
     name: BRAT
   - id: homepage
@@ -168,11 +166,6 @@ buttons:
   - id: genera-statblock
     label: Genera statblock dal GS
     action: scaffold_statblock
-  # Command-button: lancia un comando di Obsidian (niente azione-nota Templater).
-  # Genera apre il modale del Fantasy Content Generator (nomi/spunti → clipboard).
-  - id: genera-contenuto
-    label: Genera
-    command: fantasy-content-generator:open-fantasy-generator
   # Generatore homebrew (italiano, a tema): bottone Templater -> tp.user.genera.
   - id: genera-locale
     label: Genera (locale)

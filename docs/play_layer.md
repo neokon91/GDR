@@ -38,14 +38,15 @@ calcolata (Calma/Tensione/Crisi). È il differenziatore: lore già pronta a esse
   l'archetipo lo rifinisce (precedenza). `validate` controlla che gli id-asse siano reali (1-5).
 
 ## Generazione nomi/spunti
-Due vie, in corpo nota su PNG/luogo/fazione (macro `genera_nome()`):
-- **Generatore homebrew** (`generatori.yaml` → `core.json`; `genera.js`): nomi di **persona/
-  toponimi/fazioni in italiano, a tema**, legati all'ontologia. Bottone *Genera (locale)*
-  (`meta_actions` → `tp.user.genera`): deduce il tipo dalla categoria, risolve lo **stile**
-  (`stile_nomi` di cultura/specie, anche luogo→cultura; ★ candidati in cima), genera N opzioni,
-  inserisce al cursore. Logica pura testabile (`generaPersona/Toponimo/Fazione`, `rng` iniettabile).
-- **Fantasy Content Generator** (spunti rapidi): suggester inline `@` + bottone *Genera* (modale);
-  generatori configurabili italianizzati (`fcg_it.yaml`). Vedi [plugin_contracts](plugin_contracts.md).
+**Generatore homebrew** in corpo nota su PNG/luogo/fazione (macro `genera_nome()`,
+`generatori.yaml` → `core.json`; `genera.js`): nomi di **persona/toponimi/fazioni in italiano,
+a tema** + spunti al tavolo (PNG, taverne, bevande, ganci, dicerie, insediamenti, oggetti,
+meteo, stanze di dungeon) e **tesori legati all'SRD** (monete a fascia + un oggetto/equip reale
+per rarità, da `tesoro._srd` iniettato dai JSON SRD). Bottone *Genera (locale)*
+(`meta_actions` → `tp.user.genera`): deduce il tipo dalla categoria, risolve lo **stile**
+(`stile_nomi` di cultura/specie, anche luogo→cultura; ★ candidati in cima), genera N opzioni,
+inserisce al cursore. Logica pura testabile (`generaPersona/Toponimo/Fazione/DaForme/Tesoro`,
+`rng` iniettabile).
 
 ## Difficoltà incontri (DMG 2024)
 - **Dati**: tabelle `cr_xp` (GS→PE) + `budget_2024` (Bassa/Moderata/Alta per personaggio)
@@ -69,7 +70,7 @@ Due vie, in corpo nota su PNG/luogo/fazione (macro `genera_nome()`):
 sessione 2024: Dadi Vita, slot, TS-morte, concentrazione, Esaurimento), `turno_bastione`,
 `genera` (delega a `tp.user.genera`, generatore nomi). Esposte come bottoni Meta Bind: `plugins.yaml:buttons` → `templates.yaml:actions`
 → `action.md.j2` genera il file azione che chiama `tp.user.meta_actions(tp, "<id>")`. *(I bottoni
-`command` — es. *Genera* di FCG — non passano da qui: lanciano un comando di Obsidian direttamente.)*
+`command` non passano da qui: lanciano un comando di Obsidian direttamente.)*
 
 ## Pannelli JS Engine (`views.js`)
 `renderEntityPanel` (Vista: "pronto al tavolo?" + Citato da), `renderSessionPanel`,

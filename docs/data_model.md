@@ -116,8 +116,7 @@ ciò che non li supera, non ciò che il mondo richiede davvero.
 | `pages.yaml` | Pagine-indice (hub per dominio) → `index.md.j2`. |
 | `plugins.yaml` | `plugins`, `metabind_inputs`, `buttons` (`action` o `command`), `folder_icons`, `callouts`. |
 | `astrologia.yaml` | Catalogo tema natale (segni/arcani/elementi) → `core.json` (`views.renderTemaNatale`). |
-| `generatori.yaml` | Generatore homebrew di nomi (stili/affissi/forme) → `core.json` (`genera.js`). |
-| `fcg_it.yaml` | Liste italiane per i generatori configurabili di Fantasy Content Generator (iniettate nel suo `data.json`). |
+| `generatori.yaml` | Generatore homebrew di nomi/spunti (stili/affissi/forme + tesoro SRD) → `core.json` (`genera.js`). |
 
 ## Confine validato (`validate.py`)
 
@@ -138,7 +137,7 @@ ciò che non li supera, non ciò che il mondo richiede davvero.
   `from:list` deve avere `options`; `from:notes` una `category` esistente; un campo non può
   dichiarare insieme `required` e `optional`.
 - **YAML ausiliari** (`validate_aux_yaml`): shape di astrologia (e `segno.elemento` ∈ `elementi`),
-  generatori, fcg_it, pg_rules (`point_buy.costi`, `array_standard.valori`, `armatura.dex_max`).
+  generatori, pg_rules (`point_buy.costi`, `array_standard.valori`, `armatura.dex_max`).
 - **sorgenti `_*.js`**: le copie marcate di `matchesCond` (views/meta_actions), del ponte
   homebrew (crea_pg/sali_pg) e della derivazione inversi `reciprocalField`/`inverseRelation`
   (meta_actions/create_entity) coincidono byte-a-byte con `_comparators.js` /

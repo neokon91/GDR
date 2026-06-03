@@ -14,9 +14,10 @@ la **cronistoria** dettagliata vive nelle memorie di progetto. Qui: dove siamo e
 `istituzione→fazione`); irrobustimento (harness + copertura pannelli/radar, **cap a scala** dei
 cruscotti); onboarding «Inizia da qui»; **fix Tab Panels↔Meta Bind** (crash `onCacheChanged` risolto:
 `enableCaching:false`); **scaffolder mostri GS→statblock** (boss homebrew giocabili, base da mediane
-SRD); **inversi reciproci nel wizard** (`_relations.js` canonico); **generatori in-casa Stage 1+2**
-(10 tipi: nomi + PNG/taverna/gancio/diceria/bottino/insediamento/oggetto — alternativa a FCG, *con*
-API). Pubblicazione decisa: **no-ZIP**, repo + sito statico condivisibile, licenze verificate (pulite).
+SRD); **inversi reciproci nel wizard** (`_relations.js` canonico); **generatori in-casa Stage 1→3**
+(14 tipi: nomi + PNG/taverna/bevanda/gancio/diceria/bottino/insediamento/oggetto/meteo/dungeon +
+**tesoro legato all'SRD** — parità FCG raggiunta → **dipendenza FCG ritirata**). Pubblicazione
+decisa: **no-ZIP**, repo + sito statico condivisibile, licenze verificate (pulite).
 
 **Verdetto 4-lenti** (analisi fresca, tarata sui competitor — World Anvil/Kanka/LegendKeeper/
 Foundry/D&D Beyond): Architetto **8** · World-builder **8** · Game-designer 5.5e **8** · PM **6.5**.
@@ -94,14 +95,16 @@ Pronto per **beta chiuso**. Per la beta aperta restano i punti PM qui sotto.
   risoluzione automatica degli ordini.
 
 ### Worldbuilding (profondità)
-- **Generatore homebrew → parità FCG** — alternativa *in casa* a Fantasy Content Generator
-  (che non espone API JS): `generatori.yaml`+`genera.js`, italiano, a tema (riusa lo `stile_nomi`
-  della cultura/specie collegata) e **con API** → agganciabile. **10 tipi** nel registro
-  `GENERATORI` (estendibile: sezione `forme` in YAML + una riga; `generaDaForme` generico;
-  validazione placeholder auto-rilevata). ✅ **Stage 1**: nomi persona/toponimo/fazione +
-  PNG/taverna/gancio. ✅ **Stage 2**: diceria, bottino, insediamento, oggetto-curiosità.
-  **Stage 3** verso la parità FCG: bottino *legato all'SRD* (monete/oggetti da tabella), meteo/
-  presagio, dungeon-stanza, … — poi si può **ritirare la dipendenza FCG** (ZIP/licenza più puliti).
+- ✅ **Generatore homebrew → parità FCG raggiunta, dipendenza FCG ritirata.** Alternativa
+  *in casa* (italiano, a tema, riusa lo `stile_nomi` della cultura/specie; **con API** →
+  agganciabile): `generatori.yaml`+`genera.js`, **14 tipi** nel registro `GENERATORI`
+  (estendibile: sezione `forme` in YAML + una riga; `generaDaForme` generico; validazione
+  placeholder auto-rilevata). **Stage 1**: persona/toponimo/fazione + PNG/taverna/gancio.
+  **Stage 2**: diceria, bottino, insediamento, oggetto. **Stage 3**: meteo/presagio,
+  dungeon-stanza, bevanda + **tesoro legato all'SRD** (monete a fascia + un oggetto/equip
+  reale per rarità, dai JSON SRD via `srd_loot_pool()` → `tesoro._srd`, funzione dedicata
+  `generaTesoro`). Coperte tutte le categorie FCG (in IT/a tema) → **FCG rimosso** (un plugin
+  di terzi in meno: ZIP/licenza più puliti).
 - **Legami cosmologia↔culto↔divinità** più ricchi.
 - **Recuperi da FantasyWorld**: ✅ **alberi evolutivi / skill-tree** — nuova entità
   `albero_evolutivo` (progressioni *lore* ramificate: tradizione/lignaggio/evoluzione/
@@ -150,7 +153,7 @@ non testabile headless → ogni QA in-app ha storicamente trovato bug reali.
 Leggi questo file + i doc tecnici + le memorie. Stato pulito, tutto su `origin/main`.
 **Prima cosa, idealmente**: la **pubblicazione** (rendere il repo accessibile + 3-5 DM reali → il
 template «🎲 Feedback beta» è già live) per il primo segnale esterno; **oppure** la **QA in-app del
-blocco recente** (inverse-nel-wizard, i 10 generatori, merge `istituzione→fazione`,
-`renderAxesCompare`/`renderSessionPanel`) — da fare quando computer-use è di nuovo disponibile.
-Candidati build: **generatori Stage 3** (verso la parità FCG), **importer Azgaar** (cantiere
-worldbuilding), rivelazione progressiva ai giocatori, memoria-di-campagna AI locale (frontiera).
+blocco recente** (inverse-nel-wizard, i 14 generatori incl. tesoro SRD + bevanda, merge
+`istituzione→fazione`, `renderAxesCompare`/`renderSessionPanel`) — da fare quando computer-use è
+di nuovo disponibile. Candidati build: **importer Azgaar** (cantiere worldbuilding), rivelazione
+progressiva ai giocatori, memoria-di-campagna AI locale (frontiera).

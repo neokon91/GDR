@@ -1307,7 +1307,7 @@ def test_generatori_catalog():
     assert faz["forme"] and faz["sintagma"] and faz["nucleo_pl"] and faz["aggettivo"]
     for sec in ("png", "taverna", "gancio",                          # spunti Stage 1
                 "diceria", "bottino", "insediamento", "oggetto",     # spunti Stage 2
-                "meteo", "dungeon_stanza"):                          # spunti Stage 3
+                "meteo", "dungeon_stanza", "bevanda"):               # spunti Stage 3
         assert g[sec]["forme"], f"{sec}.forme assente"
     # tesoro (SRD): generatore dedicato (niente `forme`, lo salta il validatore) —
     # le sue parti italiane vivono in YAML, i nomi-oggetto li inietta render.py.
@@ -1359,14 +1359,14 @@ def test_genera_spunti_e2e(tmp_path):
         f'const gen={json.dumps(gen, ensure_ascii=False)};'
         'let s=11;const rng=()=>(s=(s*1103515245+12345)&0x7fffffff)/0x7fffffff;'
         'const st=Object.keys(gen.stili)[0];const out={};'
-        'for(const tipo of ["png","taverna","gancio","diceria","bottino","insediamento","oggetto","meteo","dungeon_stanza"]){out[tipo]=genera.generaLista(gen,tipo,st,6,rng);}'
+        'for(const tipo of ["png","taverna","gancio","diceria","bottino","insediamento","oggetto","meteo","dungeon_stanza","bevanda"]){out[tipo]=genera.generaLista(gen,tipo,st,6,rng);}'
         'process.stdout.write(JSON.stringify(out));',
         encoding="utf-8")
     res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
     assert res.returncode == 0, res.stderr
     out = json.loads(res.stdout)
     for tipo in ("png", "taverna", "gancio", "diceria", "bottino", "insediamento", "oggetto",
-                 "meteo", "dungeon_stanza"):
+                 "meteo", "dungeon_stanza", "bevanda"):
         lst = out[tipo]
         assert len(lst) >= 4, f"{tipo}: troppe poche opzioni distinte: {lst}"
         for v in lst:
@@ -1406,20 +1406,9 @@ def test_genera_tesoro_e2e(tmp_path):
             assert any(n in v and n not in mondani for n in cited), f"tesoro: tag rarità su item mondano: {v!r}"
 
 
-def test_fcg_it_settings():
-    """fcg_it.yaml: i gruppi override hanno TUTTE le chiavi che il generatore FCG
-    legge (il merge del plugin è shallow → una chiave mancante romperebbe quel
-    generatore). Struttura dal reverse di DEFAULT_SETTINGS."""
-    s = render.load_yaml("fcg_it.yaml")["settings"]
-    inn = s["innSettings"]
-    assert all(inn.get(k) for k in ("prefixes", "innType", "nouns", "desc", "rumors")), "innSettings incompleto"
-    assert all(s["drinkSettings"].get(k) for k in ("adj", "nouns")), "drinkSettings incompleto"
-    assert s["currencyTypes"] and all(c.get("name") and c.get("rarity") for c in s["currencyTypes"])
-
-
 def test_validate_aux_yaml_real_files_pass():
     """Regressione: il validatore degli YAML ausiliari concorda con i file spediti
-    (astrologia/generatori/fcg_it/pg_rules)."""
+    (astrologia/generatori/pg_rules)."""
     assert render.validate_aux_yaml() == []
 
 
@@ -1433,7 +1422,7 @@ def test_validate_aux_yaml_catches_breakage(monkeypatch):
         if name == "astrologia.yaml":
             return {"segni": [{"nome": "Ariete", "elemento": "Fuoco"}],  # manca archetipo
                     "elementi": [{"nome": "Fuoco"}], "arcani": [{"nome": "Il Matto"}]}
-        if name in ("generatori.yaml", "fcg_it.yaml", "pg_rules.yaml"):
+        if name in ("generatori.yaml", "pg_rules.yaml"):
             raise FileNotFoundError(name)  # opzionali: assenti -> saltati
         return real(name)
 

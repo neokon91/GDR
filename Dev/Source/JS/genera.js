@@ -3,7 +3,8 @@
 // La LOGICA è pura e testabile (rng iniettabile, default Math.random); il wrapper
 // tp.user.genera(tp) risolve lo stile dai link della nota, genera N opzioni e le
 // offre in un suggester (inserisce al cursore o copia). Lo schema dati è in
-// Dev/Source/YAML/generatori.yaml. Vedi Dev/Reference/fantasy-content-generator.md.
+// Dev/Source/YAML/generatori.yaml. Il `tesoro` SRD legge tesoro._srd (iniettato
+// da render.py: srd_loot_pool). Vedi docs/play_layer.md § Generazione nomi/spunti.
 
 function pick(arr, rng) {
   const list = Array.isArray(arr) && arr.length ? arr : [""];
@@ -128,6 +129,7 @@ const GENERATORI = {
   oggetto: { fn: (g, s, r) => generaDaForme(g, "oggetto", s, r), label: "Oggetto / curiosità" },
   meteo: { fn: (g, s, r) => generaDaForme(g, "meteo", s, r), label: "Meteo / presagio" },
   dungeon_stanza: { fn: (g, s, r) => generaDaForme(g, "dungeon_stanza", s, r), label: "Stanza di dungeon" },
+  bevanda: { fn: (g, s, r) => generaDaForme(g, "bevanda", s, r), label: "Bevanda" },
   tesoro: { fn: generaTesoro, label: "Tesoro (SRD)" },
 };
 

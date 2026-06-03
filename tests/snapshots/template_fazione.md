@@ -38,8 +38,7 @@
 > Simbolo: `INPUT[text:simbolo]`
 
 > [!tip]- Genera nome/spunto
-> **Locale** (italiano, a tema): `BUTTON[genera-locale]` — scegli **cosa generare** — nomi (persona/luogo/fazione), PNG, taverne, ganci, dicerie, tesori, insediamenti, oggetti… — dallo *stile* della cultura/specie collegata. Inserisce al cursore.
-> **FCG** (rapido, EN): in modifica `@` + categoria (es. `@HumanFemale`, `@Settlement`) → popup · oppure il generatore completo `BUTTON[genera-contenuto]` (→ appunti).
+> `BUTTON[genera-locale]` (italiano, a tema) — scegli **cosa generare**: nomi (persona/luogo/fazione), PNG, taverne, bevande, ganci, dicerie, tesori (SRD), insediamenti, oggetti, meteo, stanze di dungeon… — dallo *stile* della cultura/specie collegata. Inserisce al cursore.
 > [!note]- Identità
 > Cosa rappresenta la fazione, simboli, reputazione e percezione pubblica.
 

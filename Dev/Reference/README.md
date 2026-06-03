@@ -30,7 +30,6 @@ Ogni file cita la doc ufficiale; le parti critiche sono verificate dal sorgente.
 | [calendarium](calendarium.md) | Calendarium | timeline/cronologia (epoca/evento) — roadmap #4 |
 | [excalidraw](excalidraw.md) | Excalidraw | mappe/diagrammi disegnati — roadmap #4 |
 | [zoom-map](zoom-map.md) | TTRPG Tools - Maps | mappe interattive con pin — roadmap #4 |
-| [fantasy-content-generator](fantasy-content-generator.md) | Fantasy Content Generator | nomi/spunti nel wizard — roadmap #8 |
 | [brat](brat.md) | BRAT | manutenzione: install plugin beta da GitHub |
 
 Architettura invariata: **YAML** sorgente → `render.py` genera **JSON** (per i JS) e rende

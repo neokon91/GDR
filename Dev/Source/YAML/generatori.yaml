@@ -255,6 +255,19 @@ dungeon_stanza:
   complicazione: ["il pavimento cede a metà stanza", "una trappola a dardi scatta dall'arco", "il rumore richiama qualcosa dal buio", "la porta sul fondo si chiude di colpo", "il gas dalle fessure annebbia la mente", "le ossa sul pavimento iniziano a muoversi", "una lastra a pressione arma una lama oscillante", "l'acqua sale veloce dalle grate", "il ponte di pietra è marcio e traballa"]
   esito: ["dietro le macerie luccica qualcosa", "una scala scende ancora più giù", "un passaggio segreto si apre nella parete", "l'unica uscita è sbarrata dall'altra parte", "uno scrigno aspetta, troppo in vista per essere onesto", "una corrente d'aria tradisce un cunicolo nascosto", "c'è una via di fuga, ma stretta", "il bottino c'è, ma qualcuno è morto per averlo cercato", "una mappa graffiata sul muro indica la via"]
 
+# Bevanda: cosa versano al bancone (nome già concordato + dettaglio o provenienza).
+# Le bevande sono ITALIANE e concordate dentro `bevanda_n` (niente agg. separato,
+# così "una birra scura" e "un vino dorato" restano corretti). {luogo} a tema.
+bevanda:
+  forme:
+    - "{bevanda_n} — {dettaglio_b}"
+    - "{bevanda_n}, {origine}"
+    - "{bevanda_n}: {dettaglio_b}"
+    - "{bevanda_n} — {origine}; {dettaglio_b}"
+  bevanda_n: ["un vino speziato color rubino", "una birra scura densa come pane", "un idromele dorato dei monaci", "un sidro aspro di mele selvatiche", "una grappa che sa di resina", "un liquore d'erbe amarissimo", "un distillato chiaro e infuocato", "un vino bianco quasi acido", "una birra rossa schiumosa", "un infuso caldo di bacche scure", "un nettare ambrato troppo dolce", "un'acquavite che toglie il fiato", "un brodo corretto con qualcosa di forte", "un vino torbido di contrabbando"]
+  dettaglio_b: ["lo bevono solo i veterani, e ridendo", "due boccali e scordi la strada di casa", "la casa lo offre, ma nessuno sa di cosa sia fatto", "costa quanto una settimana di lavoro", "dicono curi il mal di mare e altri mali", "ha un retrogusto che non sai se ti piace", "va giù come acqua, e questo è il problema", "serve a dimenticare, e funziona", "lo tengono sotto il bancone, per pochi", "scalda fino alle ossa in pieno inverno", "il primo sorso fa tossire, gli altri no"]
+  origine: ["ricetta di {luogo}, gelosamente custodita", "arriva con le carovane, raro e caro", "lo fanno i monaci sopra {luogo}", "distillato di nascosto oltre il confine", "tradizione di queste valli da generazioni", "bottino di una nave naufragata, dicono", "lo si beve solo alle feste di {luogo}"]
+
 # === Tesoro legato all'SRD (Stage 3) =======================================
 # Bottino MECCANICO: monete a fascia + un oggetto/equip REALE dell'SRD 5.2.1
 # (CC-BY-4.0). I NOMI degli oggetti NON stanno qui: render.py li inietta da

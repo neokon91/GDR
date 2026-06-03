@@ -269,9 +269,9 @@ def validate_reciprocals(core: dict[str, Any]) -> list[str]:
 def validate_aux_yaml() -> list[str]:
     """Shape degli YAML AUSILIARI letti a runtime dai JS/plugin ma non fusi nel
     modello core/system: astrologia (views.renderTemaNatale), generatori (genera.js),
-    fcg_it (write_fantasy_content_generator), pg_rules (build_personaggio). Senza
-    questo un refuso qui passa tutto il resto di check() e rompe SOLO in-app. Ogni
-    file è opzionale (la pipeline degrada se assente): se manca, si salta."""
+    pg_rules (build_personaggio). Senza questo un refuso qui passa tutto il resto di
+    check() e rompe SOLO in-app. Ogni file è opzionale (la pipeline degrada se
+    assente): se manca, si salta."""
     errors: list[str] = []
 
     def load(name: str) -> Any:
@@ -332,22 +332,6 @@ def validate_aux_yaml() -> list[str]:
             missing = (set(re.findall(r"\{(\w+)\}", testo)) - {"nome", "luogo"}) - set(block)
             if missing:
                 errors.append(f"generatori: {sec} usa placeholder senza lista: {sorted(missing)}")
-
-    # fcg_it.yaml -> write_fantasy_content_generator (merge SHALLOW nel plugin: ogni
-    # gruppo override deve avere TUTTE le chiavi che il generatore legge).
-    fcg = load("fcg_it.yaml")
-    if fcg:
-        settings = fcg.get("settings") or {}
-        inn = settings.get("innSettings") or {}
-        for k in ("prefixes", "innType", "nouns", "desc", "rumors"):
-            if not inn.get(k):
-                errors.append(f"fcg_it: innSettings.{k} assente")
-        for k in ("adj", "nouns"):
-            if not (settings.get("drinkSettings") or {}).get(k):
-                errors.append(f"fcg_it: drinkSettings.{k} assente")
-        for c in settings.get("currencyTypes") or []:
-            if not (isinstance(c, dict) and c.get("name") and c.get("rarity")):
-                errors.append(f"fcg_it: currencyType {c} senza name/rarity")
 
     # pg_rules.yaml -> build_personaggio (rules-engine PG: metodi car., ASI bg, CA, lingue).
     pg = load("pg_rules.yaml")

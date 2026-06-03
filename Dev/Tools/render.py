@@ -330,26 +330,6 @@ def write_calendarium(obsidian: Path) -> None:
     })
 
 
-def write_fantasy_content_generator(obsidian: Path) -> None:
-    """Fantasy Content Generator (generazione nomi/spunti): pinna il trigger del
-    suggester INLINE. Digitando il trigger + una categoria nell'editor (es. @Orc)
-    compare un popup che inserisce il nome generato IN LINEA — niente clipboard.
-    Merge non distruttivo (il plugin riempie il resto da DEFAULT_SETTINGS). Il
-    bottone 'Genera' apre invece il MODALE completo (azione command, vedi
-    action_buttons): genera → clipboard → incolli. FCG non espone un'API di
-    generazione richiamabile, quindi niente aggancio nel wizard (scelta utente).
-
-    Inietta inoltre le liste ITALIANE per i generatori configurabili (fcg_it.yaml:
-    monete/locande/bevande): replica la struttura esatta di DEFAULT_SETTINGS e ne
-    cambia solo i valori (il merge del plugin è shallow → ogni gruppo override
-    deve avere tutte le sue chiavi). I generatori non configurabili (nomi per
-    razza) ed etichette restano in inglese."""
-    config = {"inlineCallout": "@"}
-    if (SOURCE / "YAML" / "fcg_it.yaml").is_file():
-        config.update(load_yaml("fcg_it.yaml").get("settings", {}))
-    merge_plugin_config(obsidian, "fantasy-content-generator", config)
-
-
 def crea_wrapper_js(template: dict[str, Any]) -> str:
     """Wizard di creazione per-template generato: `tp.user.crea_<id>` delega al
     motore condiviso create_entity.js. Le entità bespoke hanno un crea_<id>.js
@@ -396,9 +376,8 @@ def creation_buttons(core: dict[str, Any], templates: list[dict[str, Any]]) -> l
 
 def action_buttons(plugins: dict[str, Any]) -> list[dict[str, Any]]:
     """Bottoni-azione: o eseguono un file Templater (marca canonico, archivia, ...)
-    o lanciano un comando di Obsidian (button con 'command', es. aprire il modale
-    del Fantasy Content Generator). I command-button NON richiedono un'azione-nota
-    in templates.yaml (nessun runTemplaterFile da risolvere)."""
+    o lanciano un comando di Obsidian (button con 'command'). I command-button NON
+    richiedono un'azione-nota in templates.yaml (nessun runTemplaterFile da risolvere)."""
     buttons = []
     for button in plugins.get("buttons", []):
         if button.get("command"):
@@ -802,7 +781,6 @@ def write_obsidian_config(obsidian: Path, core: dict[str, Any], plugins: dict[st
     write_folder_notes(obsidian)
     write_tab_panels(obsidian)
     write_calendarium(obsidian)
-    write_fantasy_content_generator(obsidian)
     write_bookmarks(obsidian, pages)
     # Pulizia esploratore: nasconde le cartelle z.* + le esclude da ricerca/grafo.
     write_workspace_chrome(obsidian)
