@@ -165,6 +165,15 @@ HIDE_FOLDERS_SNIPPET = """/* GDR — generato. Snippet del vault (nascondi z.* +
 .gdr-radar-svg { width: 100%; max-width: 300px; height: auto; }
 .gdr-radar-empty { color: var(--text-muted); font-size: var(--font-ui-small); }
 
+/* Barre risorse PG (views.js: renderRisorsePG). Max variabile calcolato a runtime
+   nel JS Engine: il progressBar Meta Bind accetta solo max letterali. */
+.gdr-bars { display: grid; gap: 4px; margin: 6px 0; }
+.gdr-bar { display: grid; grid-template-columns: 5.5em 1fr auto; align-items: center; gap: 8px; font-size: var(--font-ui-small); }
+.gdr-bar-label { color: var(--text-muted); }
+.gdr-bar-track { height: 10px; border-radius: 5px; background: var(--background-modifier-border); overflow: hidden; }
+.gdr-bar-fill { display: block; height: 100%; border-radius: 5px; }
+.gdr-bar-val { font-variant-numeric: tabular-nums; white-space: nowrap; }
+
 /* === Feel wiki (rifinitura) — tutto su variabili del tema (chiaro/scuro). === */
 
 /* Infobox (macro identita_card): scheda d'identità in cima alla nota. Box

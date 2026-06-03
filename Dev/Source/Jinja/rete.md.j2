@@ -31,6 +31,21 @@ sort length(file.inlinks) desc
 limit 20
 ```
 
+## 🔗 Mappa dei legami — chi cita chi
+> [!tip]- Cosa significa
+> Una riga per ogni collegamento **uscente** verso un'altra nota del mondo: l'elenco
+> degli **archi** del grafo, non solo il *conteggio* dei backlink. Da qui vedi *chi*
+> punta *a chi* — il tessuto delle relazioni reso esplicito (relazioni tipizzate,
+> `connessioni` e link nel corpo). Filtrato alle note dentro la radice del mondo.
+```dataview
+table without id file.link as Da, rel as "→ collega"
+from "{{ core.folders['mondo'] }}"
+flatten file.outlinks as rel
+where categoria and stato != "archiviata" and contains(string(meta(rel).path), "{{ core.folders['mondo'] }}")
+sort file.name asc
+limit 100
+```
+
 > [!note] Come migliorare la connessione
 > Le **relazioni tipizzate** (tab *Collegamenti*) sono il tessuto del mondo: il
 > bottone **Collega** scrive il legame e il suo inverso (tipizzato se la coppia è

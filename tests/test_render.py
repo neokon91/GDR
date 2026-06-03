@@ -41,7 +41,7 @@ const tp = { system: {
         }
         return v[0];
     } },
-    file: { move: async () => {} } };
+    file: { move: async () => {}, exists: async () => false } };
 require(process.argv[3])(tp).then(fm => process.stdout.write(fm));
 """
 
@@ -414,6 +414,31 @@ def test_crea_pg_annullamento_manuale(tmp_path):
 
 
 @pytest.mark.skipif(not shutil.which("node"), reason="node assente")
+def test_crea_pg_nome_clash(tmp_path):
+    """crea_pg.js: se esiste già un PG omonimo, tp.file.exists fa disambiguare il
+    nome-file (Test_PG → Test_PG_2) invece di sovrascrivere la nota esistente."""
+    import build_personaggio
+    pj = tmp_path / "personaggio.json"
+    pj.write_text(json.dumps(build_personaggio.build_personaggio_options(CORE), ensure_ascii=False), encoding="utf-8")
+    harness = tmp_path / "clash.js"
+    harness.write_text(
+        'const fs=require("fs");'
+        f'const data=fs.readFileSync({json.dumps(str(pj))},"utf8");'
+        'global.Notice=class{constructor(m){}};'
+        'global.app={vault:{adapter:{read:async()=>data}}};'
+        'let moved=null;'
+        'const taken=new Set(["Mondi/Personaggi/Test_PG.md"]);'  # un PG omonimo esiste già
+        'const tp={system:{prompt:async()=>"Test PG", suggester:async(l,v)=>v[0]},'
+        ' file:{ move:async(p)=>{moved=p;}, exists:async(p)=>taken.has(p) }};'
+        f'require({json.dumps(str(render.JS_DIR / "crea_pg.js"))})(tp)'
+        '.then(()=>process.stdout.write(JSON.stringify({moved})));',
+        encoding="utf-8")
+    res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
+    assert res.returncode == 0, res.stderr
+    assert json.loads(res.stdout)["moved"] == "Mondi/Personaggi/Test_PG_2"
+
+
+@pytest.mark.skipif(not shutil.which("node"), reason="node assente")
 def test_profilo_match(tmp_path):
     """views.archetipiMatch: una combinazione di valori-assi attiva l'archetipo
     atteso (teocrazia su 'culto' con struttura/legalità alti), sui dati reali."""
@@ -736,6 +761,35 @@ def test_render_specie_tratti(tmp_path):
     assert "Antenati draconici" in out["a"]                  # titolo della tabella
     assert "| Argento |" in out["a"] and "Freddo" in out["a"]  # riga tabella (antenato/danno)
     assert out["b"] == "" and out["c"] == ""                  # senza specie / senza page -> niente
+
+
+@pytest.mark.skipif(not shutil.which("node"), reason="node assente")
+def test_render_risorse_pg(tmp_path):
+    """views.renderRisorsePG: barre proporzionali (PF, Dadi Vita, Esaurimento) dal
+    frontmatter, max VARIABILE calcolato a runtime (progressBar Meta Bind non lo
+    permette). Stringa vuota se la nota non è una scheda PG compilata."""
+    harness = tmp_path / "risorse.js"
+    harness.write_text(
+        'const fs=require("fs");'
+        f'const src=fs.readFileSync({json.dumps(str(render.JS_DIR / "views.js"))},"utf8");'
+        'const m={exports:{}};new Function("module","exports",src)(m,m.exports);'
+        'const pg={pf:10,pf_max:20,pf_temp:3,esaurimento:3,dadi_vita_max:4,dadi_vita_spesi:1};'
+        'Promise.all(['
+        '  m.exports.renderRisorsePG(pg),'
+        '  m.exports.renderRisorsePG({}),'
+        '  m.exports.renderRisorsePG(null),'
+        ']).then(([a,b,c])=>process.stdout.write(JSON.stringify({a,b,c,pct:m.exports.barPct(3,6)})));',
+        encoding="utf-8")
+    res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
+    assert res.returncode == 0, res.stderr
+    out = json.loads(res.stdout)
+    assert "gdr-bars" in out["a"]
+    assert "width:50%" in out["a"]                 # PF 10/20 (ed Esaurimento 3/6)
+    assert "width:75%" in out["a"]                 # Dadi Vita rimasti 3/4
+    assert "(+3 temp)" in out["a"]                 # PF temporanei annotati
+    assert out["b"] == ""                          # scheda non compilata -> niente
+    assert out["c"] == "*Apri la scheda PG.*"      # senza page -> guida
+    assert out["pct"] == 50
 
 
 @pytest.mark.skipif(not shutil.which("node"), reason="node assente")
@@ -1604,6 +1658,29 @@ def test_wizard_writes_inverse(tmp_path):
     assert res.returncode == 0, res.stderr
     out = json.loads(res.stdout)
     assert out == {"figure": ["[[Mira]]"]}   # inverso tipizzato scritto sul target (coppia univoca, multi)
+
+
+@pytest.mark.skipif(not shutil.which("node"), reason="node assente")
+def test_pick_multi(tmp_path):
+    """create_entity.pickMulti: usa tp.system.multi_suggester (Templater >= 2.16) in un
+    solo modale quando c'è; fallback al suggester ripetuto con "(fine)" quando manca."""
+    harness = tmp_path / "pm.js"
+    harness.write_text(
+        f'const crea=require({json.dumps(str(render.JS_DIR / "create_entity.js"))});'
+        'const items=["a","b","c"];'
+        # con multi_suggester: ritorna direttamente il sottoinsieme scelto
+        'const tpA={system:{multi_suggester:async(lf,its)=>its.slice(0,2)}};'
+        # senza multi_suggester: suggester ripetuto, [null,...pool] -> vals[1]=primo del pool; null=(fine)
+        'let calls=0;'
+        'const tpB={system:{suggester:async(labels,vals)=>{calls++; return calls<=2?vals[1]:null;}}};'
+        'Promise.all([crea.pickMulti(tpA,"L",items),crea.pickMulti(tpB,"L",[...items])])'
+        '.then(([a,b])=>process.stdout.write(JSON.stringify({a,b})));',
+        encoding="utf-8")
+    res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
+    assert res.returncode == 0, res.stderr
+    out = json.loads(res.stdout)
+    assert out["a"] == ["a", "b"]   # multi_suggester: sottoinsieme in un colpo
+    assert out["b"] == ["a", "b"]   # fallback: due scelte poi "(fine)"
 
 
 @pytest.mark.skipif(not shutil.which("node"), reason="node assente")

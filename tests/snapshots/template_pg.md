@@ -33,6 +33,10 @@
 >
 > Riposo: `BUTTON[riposo-breve]` (spendi 1 Dado Vita → +tiro+mod COS ai PF) · `BUTTON[riposo-lungo]` (PF al massimo, slot e TS morte azzerati, metà Dadi Vita recuperati, −1 Esaurimento)
 
+```js-engine
+return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderRisorsePG");
+```
+
 > [!note]- Slot incantesimo (caster)
 > | Liv | Max | Spesi | Rimasti |
 > |:-:|:-:|:-:|:-:|

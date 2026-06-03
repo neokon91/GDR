@@ -540,8 +540,27 @@ async function crea_pg(tp) {
         new Notice(String((e && e.message) || e));
         return frontmatterBozza("");
     }
-    const nome = await tp.system.prompt("Nome del personaggio");
-    await tp.file.move(`Mondi/Personaggi/${nomeFile(nome)}`);
+    // Nome OBBLIGATORIO e non vuoto: invio vuoto → lo richiede (fino a 3 volte);
+    // Escape (prompt → null) annulla in modo pulito. Senza il guard un nome vuoto
+    // cadeva sul default "Nuovo_PG" (nomeFile) creando un PG mal-nominato. Poi
+    // exists() evita di SOVRASCRIVERE un PG omonimo già esistente (tp.file.move
+    // clobbererebbe la nota): disambigua con un suffisso _2, _3, …
+    let nome = "";
+    for (let i = 0; i < 3 && !nome; i++) {
+        const raw = await tp.system.prompt(i ? "Nome del personaggio — obbligatorio" : "Nome del personaggio", "");
+        if (raw == null) break;  // Escape → annulla
+        nome = String(raw).trim();
+    }
+    if (!nome) {
+        new Notice("Creazione PG annullata — serve un nome.");
+        return frontmatterBozza("");
+    }
+    const base = nomeFile(nome);
+    let dest = base;
+    for (let n = 2; typeof tp.file.exists === "function" && await tp.file.exists(`Mondi/Personaggi/${dest}.md`); n++) {
+        dest = `${base}_${n}`;
+    }
+    await tp.file.move(`Mondi/Personaggi/${dest}`);
     try {
         return await costruisciPG(tp, opt, nome);
     } catch (e) {

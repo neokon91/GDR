@@ -74,21 +74,33 @@ function notesByCategory(category) {
     .sort((a, b) => a.basename.localeCompare(b.basename));
 }
 
+// Selezione MULTIPLA in un solo modale: tp.system.multi_suggester (Templater >= 2.16,
+// uno solo modale invece del loop "(fine)"); fallback al suggester ripetuto sui
+// Templater più vecchi. `labelFn` etichetta gli item; ritorna l'array scelto (mai null).
+async function pickMulti(tp, label, items, labelFn) {
+  const lf = labelFn || ((x) => String(x));
+  if (typeof tp.system.multi_suggester === "function") {
+    return (await tp.system.multi_suggester(lf, items, false, label)) || [];
+  }
+  const picked = [];
+  const pool = [...items];
+  while (pool.length) {
+    const title = `${label}${picked.length ? ` — scelti ${picked.length}` : ""}`;
+    const choice = await tp.system.suggester(["(fine)", ...pool.map(lf)], [null, ...pool], false, title);
+    if (!choice) break;
+    picked.push(choice);
+    pool.splice(pool.indexOf(choice), 1);
+  }
+  return picked;
+}
+
 // req = obbligatorio: throw_on_cancel=true, premere X (Escape) lancia un'eccezione
 // che ferma il wizard. Per i facoltativi (req=false) X salta solo quel campo.
 async function chooseNotes(tp, question, req) {
   const files = notesByCategory(question.category);
   if (question.multi) {
-    const picked = [];
-    const pool = [...files];
-    while (pool.length) {
-      const label = `${question.prompt}${picked.length ? ` — scelti ${picked.length}` : ""}`;
-      const choice = await tp.system.suggester(["(fine)", ...pool.map(f => f.basename)], [null, ...pool], false, label);
-      if (!choice) break;
-      picked.push(`[[${choice.basename}]]`);
-      pool.splice(pool.indexOf(choice), 1);
-    }
-    return picked;
+    const picked = await pickMulti(tp, question.prompt, files, (f) => f.basename);
+    return picked.map((f) => `[[${f.basename}]]`);
   }
   if (!files.length) {
     const typed = await tp.system.prompt(`${question.prompt} (digita il nome)`, "", req);
@@ -111,18 +123,9 @@ async function ask(tp, question, template, core) {
     }
     case "list": {
       const opts = question.options ?? [];
-      // multi: scelte ripetute finché l'utente sceglie "(fine)" -> array.
+      // multi: una sola scelta multipla (multi_suggester) -> array.
       if (question.multi) {
-        const picked = [];
-        const pool = [...opts];
-        while (pool.length) {
-          const label = `${question.prompt}${picked.length ? ` — scelti ${picked.length}` : ""}`;
-          const choice = await tp.system.suggester(["(fine)", ...pool], [null, ...pool], false, label);
-          if (!choice) break;
-          picked.push(choice);
-          pool.splice(pool.indexOf(choice), 1);
-        }
-        return picked;
+        return await pickMulti(tp, question.prompt, opts);
       }
       const v = await tp.system.suggester(opts, opts, req, question.prompt);
       return String(v ?? "");
@@ -137,7 +140,9 @@ async function ask(tp, question, template, core) {
       return Number.isFinite(n) ? n : (Number.isFinite(Number(question.default)) ? Number(question.default) : "");
     }
     default: {
-      const v = await tp.system.prompt(question.prompt, question.default ?? "", req);
+      // I campi del corpo (body) sono prosa lunga (descrizione/atmosfera/storia…):
+      // multiline → textarea nel prompt invece della riga singola.
+      const v = await tp.system.prompt(question.prompt, question.default ?? "", req, !!question.multiline);
       return String(v ?? "").trim();
     }
   }
@@ -260,7 +265,11 @@ async function runWizard(tp, template, core) {
   }
   if (!name) throw new Error("Nome vuoto");
 
-  const questions = [...(wizard.fields ?? []), ...(wizard.body ?? [])];
+  // I campi del corpo (body) sono prosa: marcali multiline (textarea nel prompt).
+  const questions = [
+    ...(wizard.fields ?? []),
+    ...(wizard.body ?? []).map((q) => ({ ...q, multiline: true })),
+  ];
   const captured = {};
 
   // Campi obbligatori: X annulla l'intero wizard.
@@ -379,4 +388,5 @@ create_entity.famigliaPreset = famigliaPreset;  // esposto per i test
 create_entity.relationsToAsk = relationsToAsk;  // esposto per i test
 create_entity.writeInverses = writeInverses;    // esposto per i test
 create_entity.inverseRelation = inverseRelation; // esposto per i test
+create_entity.pickMulti = pickMulti;             // esposto per i test
 module.exports = create_entity;
