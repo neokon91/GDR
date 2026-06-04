@@ -2653,3 +2653,53 @@ def test_occhi_giocatore_dashboard():
     assert 'visibilita and contains(list("dm", "gm", "master", "privato", "segreto")' in out
     assert 'where !contains(list("sessione", "incontro", "insidia"), categoria)' in out
     assert "--reveal" in out                                       # rimanda al build
+
+
+# --- Rivelazione PER-SEZIONE (callout [!rivela|tier]) ------------------------
+def test_strip_body_reveal_callout():
+    """Un callout `[!rivela|tier]` è svelato (contenuto → prosa) se il suo tier <=
+    reveal_level; sotto resta celato. Gli altri callout sono sempre rimossi."""
+    body = ("Prosa pubblica.\n\n"
+            "> [!rivela|segreto]- Verità\n> IL SEGRETO.\n\n"
+            "> [!rivela|incontrato] Scoperta\n> COSA SI SCOPRE.\n\n"
+            "> [!nota] Normale\n> callout qualsiasi (sempre fuori).\n")
+    # livello pubblico (0): nessun rivela svelato.
+    s0 = build_site.strip_body(body, 0)
+    assert "Prosa pubblica." in s0
+    assert "IL SEGRETO." not in s0 and "COSA SI SCOPRE." not in s0
+    # livello incontrato (1): solo l'incontrato.
+    s1 = build_site.strip_body(body, 1)
+    assert "COSA SI SCOPRE." in s1 and "IL SEGRETO." not in s1
+    assert "### Scoperta" in s1                       # il titolo del callout → heading
+    # livello segreto (2): entrambi.
+    s2 = build_site.strip_body(body, 2)
+    assert "IL SEGRETO." in s2 and "COSA SI SCOPRE." in s2
+    # i callout non-rivela non trapelano mai.
+    for s in (s0, s1, s2):
+        assert "callout qualsiasi" not in s
+
+
+def test_site_section_reveal_integration(tmp_path):
+    """Una nota PUBBLICA con un callout `[!rivela|segreto]`: la pagina esce sempre,
+    ma il segreto compare solo a --reveal segreto."""
+    nd = tmp_path / "vault" / "Mondi" / "Mondo S"
+    nd.mkdir(parents=True)
+    (nd / "Rocca.md").write_text(
+        "---\nnome: Rocca\ncategoria: luogo\nmondo: '[[Mondo S]]'\n---\n\n"
+        "# Rocca\n\nUna rocca sul fiume.\n\n> [!rivela|segreto]- Sotto\n> CRIPTA_NASCOSTA.\n",
+        encoding="utf-8")
+    out = tmp_path / "site"
+    build_site.build_site(CORE, tmp_path / "vault", out, reveal="pubblico")
+    assert (out / "rocca.html").is_file()
+    assert "CRIPTA_NASCOSTA" not in (out / "rocca.html").read_text(encoding="utf-8")
+    build_site.build_site(CORE, tmp_path / "vault", out, reveal="segreto")
+    assert "CRIPTA_NASCOSTA" in (out / "rocca.html").read_text(encoding="utf-8")
+
+
+def test_example_world_section_reveal():
+    """Il mondo-esempio dimostra il per-sezione: Forte Cenere (pubblica) ha un
+    callout `[!rivela|segreto]` con la verità sotto le cantine."""
+    man = render.load_example_manifests()[0]
+    notes = dict(render.example_world_notes(man, CORE))
+    forte = next(t for r, t in notes.items() if r.endswith("Forte Cenere.md"))
+    assert "[!rivela|segreto]" in forte and "sogna sotto le cantine" in forte

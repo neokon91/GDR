@@ -985,6 +985,17 @@ def example_note_text(note: dict[str, Any], world: str, core: dict[str, Any]) ->
     lines.append("")
     if note.get("lore"):
         lines += [note["lore"].strip(), ""]
+    # Rivelazione PER-SEZIONE: callout `[!rivela|tier]` — verità che emergono col
+    # procedere della campagna. Player-facing ma gated dal build del sito (compare
+    # al `--reveal` >= tier); in Obsidian è un callout pieghevole. Dalla lista `rivela`.
+    for r in note.get("rivela", []) or []:
+        tier = r.get("tier", "incontrato")
+        titolo = str(r.get("titolo", "")).strip()
+        testo = str(r.get("testo", "") or "").strip()
+        lines.append(f"> [!rivela|{tier}]-" + (f" {titolo}" if titolo else ""))
+        if testo:
+            lines.append(f"> {testo}")
+        lines.append("")
     # Mappa (campo `mappa`): embed dell'immagine collegata, come views.renderMap
     # (`![[..]]` rende SEMPRE, senza plugin). L'asset vive in Media/ (copiato a build
     # da copy_example_media). Sul sito-giocatori l'embed diventa `<img>` (zoommap è

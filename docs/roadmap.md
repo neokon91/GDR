@@ -75,8 +75,11 @@ Pronto per **beta chiuso**. Per la beta aperta restano i punti PM qui sotto.
   ≤ livello → il portale «svela per gradi» man mano che la campagna procede (modello Kanka).
   Selettore 👁 *Condivisione* nel tab *Al tavolo*; l'indice mostra il livello e quante voci
   restano. Demo: Valdombra (La Voragine=incontrato, Vorth=segreto). (FATTO)
-  *Resta*: rivelazione **per-sezione** (oltre il callout `segreto` binario) e una
-  **anteprima «occhi del giocatore» in-vault** (oggi l'anteprima è il sito stesso).
+  ✅ **Rivelazione per-sezione**: callout `[!rivela|<tier>]` (player-facing, gated dal
+  build) → una nota pubblica può celare una verità che emerge a un livello più alto
+  (demo: Forte Cenere «cosa sogna sotto le cantine» a `--reveal segreto`). (FATTO)
+  ✅ **Anteprima «occhi del giocatore» in-vault**: dashboard Dataview che mostra cosa
+  vedono i giocatori per tier, senza buildare il sito (in Home). (FATTO)
 - **Onboarding guidato** — ✅ il **momento-aha** è coperto dalla nota «Inizia da qui» (UX-1).
   Resta il *tour interattivo* più profondo: wizard di worldbuilding a tappe con spunti
   suggeriti (accoglienza alla World Anvil) — opzionale, dopo il primo segnale dagli utenti.

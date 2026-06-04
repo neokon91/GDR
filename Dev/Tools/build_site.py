@@ -124,14 +124,19 @@ _DICE = re.compile(r"`dice(?:-mod)?:[^`]*`")
 # Heading di sole sezioni-meccanismo da non riportare nel sito-giocatori.
 _DROP_HEADINGS = {"collegamenti", "connessioni", "relazioni", "carattere",
                   "vista", "al tavolo", "viaggio", "mappa"}
+# Rivelazione PER-SEZIONE: un callout `> [!rivela|<tier>] Titolo` è l'unico callout
+# player-facing — compare nel sito se il suo tier <= livello del build (default
+# tier = incontrato). Gli altri callout restano fuori. Header del blocco-callout.
+_RIVELA = re.compile(r"^>\s*\[!rivela(?:\|([a-z]+))?\]-?\s*(.*)$", re.IGNORECASE)
 
 
-def strip_body(body: str) -> str:
+def strip_body(body: str, reveal_level: int = 0) -> str:
     """Rimuove dal corpo tutto ciò che non è prosa player-safe: blocchi recintati
     (dataview/tasks/statblock/encounter/js-engine/tabs…), Templater, Meta Bind,
     Dataview inline, l'H1 del titolo, i callout (incl. infobox/tavolo/gancio/
     segreto) e gli heading di sole sezioni-meccanismo. Lascia paragrafi, liste,
-    heading di contenuto."""
+    heading di contenuto. I callout `[!rivela|<tier>]` col tier <= `reveal_level`
+    vengono SVELATI (contenuto emesso come prosa); gli altri tier restano celati."""
     body = _TEMPLATER.sub("", body)
     out: list[str] = []
     lines = body.splitlines()
@@ -147,8 +152,23 @@ def strip_body(body: str) -> str:
             i += 1
             continue
         stripped = line.strip()
-        if stripped.startswith(">"):  # callout / blockquote: scartato per intero
-            i += 1
+        if stripped.startswith(">"):  # callout / blockquote
+            block, j = [], i
+            while j < len(lines) and lines[j].strip().startswith(">"):
+                block.append(lines[j])
+                j += 1
+            i = j
+            riv = _RIVELA.match(block[0].strip())
+            if riv:  # callout di rivelazione: svela se il suo tier è già raggiunto
+                tier = REVEAL_RANK.get((riv.group(1) or "incontrato").lower(), 1)
+                if tier <= reveal_level:
+                    if riv.group(2).strip():
+                        out.append(f"### {riv.group(2).strip()}")
+                    for bl in block[1:]:
+                        content = re.sub(r"^\s*>\s?", "", bl).rstrip()
+                        if content:
+                            out.append(content)
+            # callout non-rivela (o non ancora svelato): scartato per intero
             continue
         if stripped.startswith("# "):  # H1 = titolo della nota (lo rigeneriamo)
             i += 1
@@ -297,8 +317,10 @@ def slugify(name: str) -> str:
 
 def page_model(core: dict[str, Any], fm: dict[str, Any], body: str,
                name: str, link: Callable[[str], str | None],
-               image: Callable[[str], str | None] | None = None) -> dict[str, Any]:
-    """Costruisce il modello di pagina player-safe da frontmatter + corpo."""
+               image: Callable[[str], str | None] | None = None,
+               reveal_level: int = 0) -> dict[str, Any]:
+    """Costruisce il modello di pagina player-safe da frontmatter + corpo, allo
+    `reveal_level` del build (gate dei callout `[!rivela]` e dei campi con tier)."""
     cat = fm.get("categoria", "")
     fields = core.get("fields", {})
     img = image or (lambda _name: None)
@@ -327,13 +349,16 @@ def page_model(core: dict[str, Any], fm: dict[str, Any], body: str,
     for entry in ((core.get("creation", {}).get(cat) or {}).get("body") or []):
         if entry.get("callout"):  # es. segreto → DM-only
             continue
+        riv = entry.get("rivelazione")  # campo a rivelazione progressiva (per-sezione)
+        if riv and REVEAL_RANK.get(str(riv).strip().lower(), 0) > reveal_level:
+            continue
         fid = entry.get("field")
         val = fm.get(fid)
         if entry.get("heading") and val:
             sections.append({"heading": entry["heading"], "html": markdown_to_html(str(val), link, img)})
 
     # Prosa dal corpo (note-esempio): aggiunta come sezione introduttiva.
-    body_html = markdown_to_html(strip_body(body), link, img)
+    body_html = markdown_to_html(strip_body(body, reveal_level), link, img)
     if body_html:
         sections.insert(0, {"heading": "", "html": body_html})
 
@@ -467,7 +492,7 @@ def build_site(core: dict[str, Any], vault_dir: Path, out_dir: Path,
 
     rendered: list[dict[str, Any]] = []
     for p in pages:
-        model = page_model(core, p["fm"], p["body"], p["name"], link, image)
+        model = page_model(core, p["fm"], p["body"], p["name"], link, image, level)
         model["slug"] = p["slug"]
         rendered.append(model)
         (out_dir / f"{p['slug']}.html").write_text(

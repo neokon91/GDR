@@ -263,3 +263,15 @@ Costruisci il sito al **livello a cui è arrivata la campagna** (`--reveal`): un
 nel portale solo se il suo tier è ≤ il livello scelto. Man mano che i giocatori scoprono il
 mondo, alzi il livello e rigeneri. Per non condividere **mai** una nota (appunti, meta),
 usa `visibilita: dm`.
+
+**Rivelazione per-sezione** — vuoi una nota *pubblica* con dentro una verità nascosta? Scrivi
+nel corpo un callout `> [!rivela|<tier>] Titolo`: compare nel portale solo a quel livello.
+```
+> [!rivela|segreto] Cosa c'è davvero sotto la rocca
+> Una cripta sigillata, e ciò che vi dorme conosce il tuo nome.
+```
+Esempio già pronto: *Forte Cenere* mostra a tutti il forte, ma rivela «cosa sogna sotto le
+cantine» solo a `--reveal segreto`.
+
+**Anteprima** — la dashboard **[[Occhi del giocatore]]** (in Home) ti mostra, dentro Obsidian,
+cosa vedono i giocatori a ogni livello, senza dover generare il sito.

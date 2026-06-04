@@ -88,6 +88,14 @@ note:
     lore: >-
       Un forte imperiale riadattato a città: mura annerite, un mercato nervoso e, nelle
       cantine, l'imbocco sigillato della Voragine.
+    # Rivelazione per-sezione: la nota è pubblica, ma questa verità compare nel
+    # portale solo a `--reveal segreto` (in Obsidian è un callout pieghevole).
+    rivela:
+      - tier: segreto
+        titolo: Cosa sogna sotto le cantine
+        testo: >-
+          Le cantine più profonde non sono cantine: sono la soglia superiore della
+          Voragine — e ciò che vi dorme conosce il nome di chi comanda il forte.
     uso_al_tavolo: Hub dei personaggi — guarnigione, taverna, archivio, il sigillo nel sottosuolo.
     gancio: Il Capitano cerca avventurieri «discreti» per scendere sotto il forte.
     pressione: 5
