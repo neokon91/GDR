@@ -11,13 +11,15 @@ templates:
   title: Ecosistema
   default_type: naturale
   target: z.modelli/Ecosistema.md
+# SOTTOTIPI: la NATURA della rete vivente. Profilo leggero (descrizione + evolve nel
+# tempo): la profondità sta negli ASSI (equilibrio/diversità/naturalezza).
 subtypes:
-- naturale
-- magico
-- sacro
-- mutato
-- instabile
-- artificiale
+- { nome: naturale,    descrizione: "Catena alimentare ordinaria: predatori, prede, piante, cicli stagionali.", evoluzione: true }
+- { nome: magico,      descrizione: "La magia ambientale plasma la rete: specie arcane, flora senziente, fenomeni innaturali.", evoluzione: true }
+- { nome: sacro,       descrizione: "Legato a una divinità o a un luogo santo: creature-totem, equilibri protetti da tabù.", evoluzione: true }
+- { nome: mutato,      descrizione: "Alterato da magia, veleno o cataclisma: ibridi, aberrazioni, catene spezzate.", evoluzione: true }
+- { nome: instabile,   descrizione: "Sull'orlo del collasso o in piena fioritura esplosiva: equilibrio che non regge.", evoluzione: true }
+- { nome: artificiale, descrizione: "Costruito o coltivato da civiltà: campi, allevamenti, giardini, ecosistemi pianificati.", evoluzione: true }
 # La "salute" della rete vive come ASSE `equilibrio` (assi/ecosistema.yaml,
 # autopoietico→collassante): niente campo-scheda doppione sulla stessa dimensione.
 relazioni:

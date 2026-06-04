@@ -32,7 +32,7 @@ subtypes:
   evoluzione: true
 - nome: insediamento
   descrizione: "Luogo abitato, dal villaggio alla metropoli: qui i PG comprano, pregano, riposano, reclutano, indagano."
-  campi: [taglia_insediamento, popolazione, governo_locale, servizi]
+  campi: [taglia_insediamento, popolazione, governo_locale, prosperita, pericolosita, servizi, quartieri]
   wizard: ["Economia: di cosa vive", "Difese: mura, guardia, milizia"]
   clock: false
   evoluzione: true
@@ -90,6 +90,9 @@ fields:
   taglia_insediamento: { label: Taglia,                 widget: taglia_insediamento }
   governo_locale:      { label: Governo locale,         widget: governo_locale }
   servizi:             { label: Servizi & edifici,      widget: servizi }
+  quartieri:           { label: Quartieri / distretti,  widget: text }
+  prosperita:          { label: Prosperità,             widget: prosperita }
+  pericolosita:        { label: Pericolosità,           widget: pericolosita }
   livelli:             { label: Livelli / aree,         widget: number }
   occupante:           { label: Occupante,              widget: legame }
   ricompensa:          { label: Ricompensa chiave,      widget: text }

@@ -12,12 +12,15 @@ templates:
     title: Risorsa
     default_type: materia prima
     target: z.modelli/Risorsa.md
+# SOTTOTIPI: la FORMA economica della risorsa (profilo leggero, descrizione). La
+# profondità sta in scarsità/fonte/usi + famiglia (funzione economica) + il grafo
+# produce/dipende_da/controllata_da.
 subtypes:
-  - materia prima
-  - bene lavorato
-  - bene di lusso
-  - risorsa magica
-  - risorsa strategica
+  - { nome: materia prima,       descrizione: "Estratta o raccolta grezza: minerali, legname, grano, pelli. La base di tutto il resto." }
+  - { nome: bene lavorato,       descrizione: "Prodotto dalla manodopera: armi, tessuti, utensili, vetro. Vale più della materia da cui nasce." }
+  - { nome: bene di lusso,       descrizione: "Voluttuario e di prestigio: spezie, gemme, sete, vini. Muove ricchezza e status." }
+  - { nome: risorsa magica,      descrizione: "Sostanza o reagente arcano: cristalli di mana, essenze, componenti rari. Alimenta la magia." }
+  - { nome: risorsa strategica,  descrizione: "Decide guerre e potere: acciaio, cavalli, polvere, un materiale-chiave introvabile altrove." }
 # Classificazione a 2 livelli: la 'famiglia' (funzione economica) affianca il
 # 'tipo' (forma). Aiuta a leggere cosa muove il mondo. Legenda auto-documentante.
 famiglie:

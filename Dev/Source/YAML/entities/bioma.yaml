@@ -10,16 +10,19 @@ templates:
   title: Bioma
   default_type: foresta
   target: z.modelli/Bioma.md
+# SOTTOTIPI: il terreno-base del bioma. La profondità vera sta negli ASSI
+# (ostilità/fertilità/magia ambientale/accessibilità), non in campi per-tipo: il profilo
+# dà solo una descrizione d'orientamento. I biomi sono stabili (niente clock/evoluzione).
 subtypes:
-- foresta
-- deserto
-- tundra
-- oceano
-- montagna
-- pianura
-- palude
-- sotterraneo
-- planare
+- { nome: foresta,     descrizione: "Distese alberate: boschi, giungle, foreste pluviali o stregate. Coperture, predatori, vie nascoste." }
+- { nome: deserto,     descrizione: "Aride distese di sabbia, roccia o sale: scarsità d'acqua, escursioni termiche, miraggi." }
+- { nome: tundra,      descrizione: "Lande fredde e spoglie: gelo, vento, suolo perennemente ghiacciato." }
+- { nome: oceano,      descrizione: "Acque aperte e profondità: mari, abissi, scogliere, e ciò che si cela sotto." }
+- { nome: montagna,    descrizione: "Rilievi e altipiani: passi, vette, valichi, l'aria rarefatta dell'altura." }
+- { nome: pianura,     descrizione: "Distese aperte: praterie, steppe, campi; poco riparo, lunghi orizzonti." }
+- { nome: palude,      descrizione: "Terre acquitrinose: fango, nebbie, malattie, e ciò che striscia nel marcio." }
+- { nome: sotterraneo, descrizione: "Il mondo di sotto: caverne, cripte, il Sottosuolo; buio, eco, pressione." }
+- { nome: planare,     descrizione: "Ambiente di un altro piano: leggi fisiche aliene, sostanza instabile, ostile ai mortali." }
 scheda: [clima]
 relazioni:
 - field: luoghi
