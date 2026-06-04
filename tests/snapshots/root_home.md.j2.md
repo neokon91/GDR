@@ -30,6 +30,7 @@
 
 > [!example]- 🕰 Tempo & storia
 > `BUTTON[crea-evento]`
+> `BUTTON[crea-calamita]`
 > `BUTTON[crea-epoca]`
 > `BUTTON[crea-mito]`
 > `BUTTON[crea-profezia]`
@@ -43,6 +44,7 @@
 > `BUTTON[crea-culto]`
 > `BUTTON[crea-regno]`
 > `BUTTON[crea-esercito]`
+> `BUTTON[crea-editto]`
 
 > [!example]- 🌌 Cosmo & metafisica
 > `BUTTON[crea-cosmologia]`

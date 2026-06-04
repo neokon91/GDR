@@ -137,6 +137,7 @@ fronte_categorie:
   - entita_primordiale
   - sistema_magico
   - esercito   # una forza armata in campagna è un Fronte: il clock marcia verso la battaglia
+  - calamita   # una sciagura che si diffonde è un Fronte: il clock è l'avanzata dell'epidemia/disastro
 
 # GRUPPI di entità: la mappa concettuale del worldbuilding. Ogni entità dichiara il
 # suo `gruppo` (entities/<x>.yaml); render.py lo porta in core.categories[cat].gruppo

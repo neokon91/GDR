@@ -1,0 +1,44 @@
+# Schema per-entità: calamità (tempo). Una sciagura CHE SI DIFFONDE: peste, carestia,
+# cataclisma, maledizione. A differenza di un `evento` (un punto nel tempo), una calamità
+# DURA e si propaga → è un FRONTE (clock = la diffusione che avanza finché non la si ferma).
+# [Modellata come entità a sé, non sottotipo di evento, proprio per avere il clock reale:
+# la macchina del Fronte è gated per categoria.] Resa da _entity_base.
+id: calamita
+folder: Mondi/Calamita
+order: 7
+gruppo: tempo
+templates:
+- id: calamita
+  title: Calamità
+  default_type: pestilenza
+  target: z.modelli/Calamita.md
+# SOTTOTIPI con PROFILO: la NATURA della sciagura. Tutte sono Fronti che avanzano (clock);
+# alcune evolvono in fasi.
+subtypes:
+- { nome: pestilenza,  descrizione: "Malattia che si propaga: sintomi, contagio, morti; il clock è il dilagare dell'epidemia.", campi: [diffusione, rimedio, gravita], clock: true, evoluzione: true }
+- { nome: carestia,    descrizione: "Fame diffusa: raccolti perduti, scorte esaurite; il clock è la spirale verso la fame nera.", campi: [causa, rimedio, gravita], clock: true, evoluzione: true }
+- { nome: cataclisma,  descrizione: "Disastro naturale o magico in corso: terremoto, eruzione, tempesta arcana, marea che sale.", campi: [causa, gravita], clock: true, evoluzione: true }
+- { nome: maledizione, descrizione: "Sciagura soprannaturale su una terra o una stirpe: sterilità, follia, non-morte che cresce.", campi: [causa, rimedio, gravita], clock: true, evoluzione: true }
+- { nome: anomalia,    descrizione: "Squarcio o distorsione che si allarga: una zona morta, un varco, una realtà che si sfalda.", campi: [causa, diffusione, gravita], clock: true, evoluzione: true }
+fields:
+  causa:      { label: Causa / origine, widget: text }
+  diffusione: { label: Come si diffonde, widget: text }
+  rimedio:    { label: Rimedio / come finisce, widget: text }
+  gravita:    { label: Gravità,          widget: gravita }
+scheda: [gravita]
+relazioni:
+- { field: luoghi,     label: Dove colpisce,  category: luogo, multi: true }
+- { field: epoca,      label: Epoca,          category: epoca }
+- { field: causato_da, label: Scatenata da,   category: evento }
+- { field: fazioni,    label: Chi reagisce,   category: fazione, multi: true }
+creation:
+  fields:
+  - { field: tipo, prompt: Tipo di calamità, from: subtypes, required: true }
+  - { field: mondo, prompt: Mondo, from: notes, category: mondo, link: true, required: true }
+  body:
+  - { field: cosa_accade, prompt: 'Cosa accade, e a chi',                       heading: Cosa accade }
+  - { field: avanzata,    prompt: 'Come avanza se nessuno interviene (la posta del clock)', heading: Avanzata }
+  - { field: fine,        prompt: 'Cosa la ferma o la spegne',                  heading: Come finisce }
+guida:
+  scopo: "Una calamità è una sciagura che DURA e si diffonde (peste, carestia, cataclisma, maledizione): un Fronte il cui clock avanza finché qualcuno non la ferma."
+  campi_chiave: "**Tipo** (pestilenza/carestia/…) e **Gravità**; imposta un **clock** = la diffusione; **Come si diffonde** e **Rimedio** dicono come accelera e come si spegne; collega **Dove colpisce**."

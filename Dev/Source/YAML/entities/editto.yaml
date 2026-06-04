@@ -1,0 +1,43 @@
+# Schema per-entità: editto (società). Una norma DEL MONDO — un decreto, una legge, un
+# trattato che un potere proclama e fa valere. Distinto da `regola` (che è una house-rule
+# del TAVOLO, meta) e da `legge_fondamentale` (legge COSMICA). Reso da _entity_base.
+id: editto
+folder: Mondi/Editti
+order: 30
+gruppo: societa
+templates:
+- id: editto
+  title: Editto
+  default_type: editto
+  target: z.modelli/Editto.md
+# SOTTOTIPI con PROFILO: la FORMA dell'atto normativo. Non è un Fronte (è in vigore o
+# abrogato, non scorre un clock): clock/evoluzione false.
+subtypes:
+- { nome: editto,     descrizione: "Decreto immediato di un'autorità: ordina o vieta qualcosa con effetto subito.",        campi: [emanato_da, pena], clock: false, evoluzione: false }
+- { nome: legge,      descrizione: "Norma stabile del codice: regola un ambito della vita con sanzioni previste.",         campi: [emanato_da, pena, ambito], clock: false, evoluzione: false }
+- { nome: divieto,    descrizione: "Proibizione esplicita: cosa non si può fare, e cosa rischia chi lo fa.",               campi: [emanato_da, pena], clock: false, evoluzione: false }
+- { nome: privilegio, descrizione: "Concessione o carta: un diritto, un'esenzione o un monopolio dato a qualcuno.",       campi: [emanato_da, beneficiario], clock: false, evoluzione: false }
+- { nome: trattato,   descrizione: "Patto fra poteri: pace, alleanza, confini, commercio; vincola i firmatari.",          campi: [firmatari, ambito], clock: false, evoluzione: false }
+fields:
+  emanato_da:   { label: Emanato da,    widget: legame }
+  pena:         { label: Pena / sanzione, widget: text }
+  ambito:       { label: Ambito / giurisdizione, widget: text }
+  beneficiario: { label: Beneficiario,  widget: legame }
+  firmatari:    { label: Firmatari,     widget: text }
+scheda: [emanato_da, pena]
+relazioni:
+- { field: regno,    label: Regno / potere, category: regno }
+- { field: luoghi,   label: Dove vale,      category: luogo, multi: true }
+- { field: fazioni,  label: Fazioni toccate, category: fazione, multi: true }
+creation:
+  fields:
+  - { field: tipo, prompt: Tipo di norma, from: subtypes, required: true }
+  - { field: mondo, prompt: Mondo, from: notes, category: mondo, link: true, required: true }
+  - { field: emanato_da, prompt: Chi la emana (opz.), from: notes, category: regno, link: true, optional: true }
+  body:
+  - { field: contenuto,   prompt: 'Cosa stabilisce, nei fatti',                       heading: Contenuto }
+  - { field: motivo,      prompt: 'Perché è stata emanata (chi ci guadagna)',          heading: Movente }
+  - { field: applicazione, prompt: 'Come viene fatta rispettare — e chi la aggira',    heading: Applicazione }
+guida:
+  scopo: "Un editto è una norma del mondo — un decreto, una legge, un trattato che un potere proclama. Dà attrito e poste in gioco (≠ regola, che è una regola del tavolo)."
+  campi_chiave: "**Tipo** (editto/legge/divieto/privilegio/trattato), chi l'ha **Emanata** e la **Pena** per chi la viola; collega **Dove vale** e le **Fazioni** che tocca."

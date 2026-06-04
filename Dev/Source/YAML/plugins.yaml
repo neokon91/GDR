@@ -116,6 +116,8 @@ metabind_inputs:
   morale: INPUT[inlineSelect(option(in rotta), option(incerto), option(saldo), option(fanatico))]
   # Missione (stato d'avanzamento dell'incarico).
   stato_missione: INPUT[inlineSelect(option(proposta), option(in corso), option(completata), option(fallita), option(abbandonata))]
+  # Calamità (gravità della sciagura).
+  gravita: INPUT[inlineSelect(option(contenuta), option(seria), option(grave), option(catastrofica))]
   rivelazione: INPUT[inlineSelect(option(pubblico), option(incontrato), option(segreto))]
   mondo: INPUT[suggester(optionQuery("Mondi"), useLinks(partial), allowOther)]
   connessioni: INPUT[inlineListSuggester(optionQuery("Mondi"), useLinks(partial), allowOther)]
@@ -156,6 +158,8 @@ folder_icons:
   mondo: "🌍"
   esercito: "🪖"
   missione: "🎯"
+  editto: "⚖️"
+  calamita: "☣️"
   cosmologia: "🌌"
   luogo: "🗺️"
   cultura: "🎏"
