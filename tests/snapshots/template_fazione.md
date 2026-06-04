@@ -11,7 +11,6 @@
 > | **Famiglia** | `VIEW[{famiglia} ?? "—"]` |
 > | **Portata** | `VIEW[{portata} ?? "—"]` |
 > | **Motto** | `VIEW[{motto} ?? "—"]` |
-> | **Forma di governo** | `VIEW[{forma_governo} ?? "—"]` |
 > | **Epoca di fondazione** | `VIEW[{fondazione} ?? "—"]` |
 > | **Simbolo** | `VIEW[{simbolo} ?? "—"]` |
 > | **Stato** | `INPUT[stato][:stato]` |
@@ -41,10 +40,12 @@
 ````tabs
 --- 📖 Lore
 
+```js-engine
+return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderTipoProfilo");
+```
 > [!abstract] Scheda
 > Portata: `INPUT[portata][:portata]`
 > Motto: `INPUT[text:motto]`
-> Forma di governo: `INPUT[text:forma_governo]`
 > Epoca di fondazione: `INPUT[text:fondazione]`
 > Simbolo: `INPUT[text:simbolo]`
 

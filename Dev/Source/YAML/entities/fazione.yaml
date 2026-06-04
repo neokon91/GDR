@@ -19,18 +19,18 @@ templates:
     target: z.modelli/Fazione.md
     jinja: fazione.md.j2
     primary: true
+# SOTTOTIPI con PROFILO: il `tipo` È la FORMA dell'organizzazione, ognuna con i suoi
+# campi (una gilda non è un ordine non è una banda). Tutte sono Fronti (agenda → clock)
+# che evolvono. NB: ex-entità `istituzione` assorbita qui (SYS-2); `culto` è entità a sé.
 subtypes:
-  - gilda
-  - ordine
-  - casata
-  - fazione politica
-  - banda
-  # Forme organizzate formali/statali: ex-entità `istituzione`, assorbita nel merge
-  # SYS-2 (era una fazione con un legame al regno — vedi data_model §Principio di
-  # inclusione). `culto` NON è più un subtype: è entità a sé (ha legami a divinità).
-  - accademia
-  - corte
-  - tribunale
+  - { nome: gilda,            descrizione: "Corporazione di mestiere che controlla un'arte o un commercio: accesso, prezzi, segreti del lavoro.",       campi: [mestiere], clock: true, evoluzione: true }
+  - { nome: ordine,           descrizione: "Fratellanza votata a un credo: cavalieri, monaci, custodi; voti, riti d'iniziazione, gerarchia.",         campi: [credo], clock: true, evoluzione: true }
+  - { nome: casata,           descrizione: "Famiglia di potere legata da sangue e alleanze: stirpe, eredità, onore e faide.",                         campi: [stirpe], clock: true, evoluzione: true }
+  - { nome: fazione politica, descrizione: "Movimento che vuole orientare il potere: partito, corrente, lobby; un'ideologia e una base di consenso.", campi: [ideologia, base_potere], clock: true, evoluzione: true }
+  - { nome: banda,            descrizione: "Gruppo fuorilegge che vive di un territorio: ladri, contrabbandieri, predoni; racket e codice d'onore.",  campi: [territorio, racket], clock: true, evoluzione: true }
+  - { nome: accademia,        descrizione: "Istituzione del sapere: scuola, biblioteca, circolo arcano; custodisce e tramanda una disciplina.",       campi: [disciplina], clock: true, evoluzione: true }
+  - { nome: corte,            descrizione: "Entourage di potere attorno a un sovrano: nobili, cortigiani, consiglieri; vive di favori e intrighi.",    campi: [sovrano_servito], clock: true, evoluzione: true }
+  - { nome: tribunale,        descrizione: "Organo che amministra una giustizia, legale o parallela: giudici, inquisitori; una giurisdizione e un codice.", campi: [giurisdizione], clock: true, evoluzione: true }
 # Classificazione a 2 livelli: la 'famiglia' (scopo/natura, seed FantasyWorld
 # fazione_cat) affianca il 'tipo' (forma). Select + legenda auto-documentante.
 # Ogni famiglia pre-compila (campo `assi`) gli assi tematici che la definiscono
@@ -48,9 +48,21 @@ famiglie:
 # condiviso con evento e resta in system.yaml.)
 fields:
   motto:         { label: Motto,                widget: text }
-  forma_governo: { label: Forma di governo,     widget: text }
   fondazione:    { label: Epoca di fondazione,  widget: text }
-scheda: [portata, motto, forma_governo, fondazione, simbolo]
+  # Campi dei profili-sottotipo (renderTipoProfilo li mostra secondo la FORMA):
+  mestiere:        { label: Mestiere / arte,     widget: text }
+  credo:           { label: Credo / voti,        widget: text }
+  stirpe:          { label: Stirpe,              widget: text }
+  ideologia:       { label: Ideologia,           widget: text }
+  base_potere:     { label: Base di potere,      widget: text }
+  territorio:      { label: Territorio,          widget: text }
+  racket:          { label: Racket / traffici,   widget: text }
+  disciplina:      { label: Disciplina,          widget: text }
+  sovrano_servito: { label: Sovrano servito,     widget: legame }
+  giurisdizione:   { label: Giurisdizione,       widget: text }
+# `forma_governo` rimosso: ridondante col tipo (la FORMA è il sottotipo) e con l'asse
+# `struttura`; non aveva senso su una banda. `sede`/`controlla_risorse` restano relazioni.
+scheda: [portata, motto, fondazione, simbolo]
 relazioni:
   - { field: sede,      label: Sede,          category: luogo }
   - { field: fondatori, label: Fondatori,     category: personaggio, multi: true }
