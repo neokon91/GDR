@@ -28,7 +28,34 @@ Lo stato locale (workspace, cache, `.DS_Store`) è escluso, così lo zip è puli
    gh release create v<ver> dist/GDR-vault-v<ver>.zip dist/GDR-site-v<ver>.zip \
      --title "GDR v<ver>" --notes-file CHANGELOG.md
    ```
-   In alternativa, pagina **itch.io** (vetrina + *name-your-price*): carica gli stessi zip.
+   In alternativa, o in parallelo, **itch.io** (vetrina + *name-your-price*) — sotto.
+
+## itch.io (via butler)
+
+itch è il canale di **scoperta** per i Game Master (GitHub resta la sorgente + le issue).
+Il caricamento è automatizzato con **butler**, la CLI ufficiale di itch.
+
+**Una-tantum**
+1. **Installa butler** — https://itch.io/docs/butler/ (scaricalo, mettilo nel PATH).
+2. **`butler login`** — apre il browser, autentica col tuo account itch (la sessione resta
+   locale; nessuna credenziale nel repo).
+3. **Crea il progetto** su itch.io: tipo **«Downloadable»**, prezzo **free / name-your-price**.
+   Annota lo slug «utente/gioco» (es. `tuonome/gdr`).
+4. **Imposta il target**: `config.itch` in `package.json` (`"itch": "tuonome/gdr"`) **oppure**
+   l'env `ITCH_TARGET=tuonome/gdr`.
+5. **Pagina**: incolla titolo, tagline, descrizione e tag da [`docs/itch-page.md`](itch-page.md).
+
+**Ogni release**
+```
+npm run publish:itch
+```
+Fa build+zip e poi `butler push` dei due artefatti su due canali:
+`…:vault` (il vault Obsidian pronto) e `…:site` (il sito dei giocatori), versionati con la
+`version` di package.json. itch tiene lo storico dei build per canale.
+
+> **Turnkey vs lite**: il vault include i plugin (vedi Note). Per una release pubblica
+> turnkey va bene (licenze verificate); la variante *lite* (senza `.obsidian/plugins/`) è
+> opzionale se vuoi azzerare ogni dubbio sulle licenze altrui.
 
 ## Note
 

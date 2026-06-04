@@ -2799,3 +2799,18 @@ def test_world_board_canvas():
     assert edges and all(e["fromNode"] in ids and e["toNode"] in ids for e in edges)
     assert all(e.get("label") for e in edges)                      # archi = relazioni etichettate
     assert render.world_board_canvas(man, CORE) == board           # deterministico
+
+
+# --- Pubblicazione itch (publish_itch.py) -----------------------------------
+import publish_itch  # noqa: E402
+
+
+def test_publish_itch_helpers(monkeypatch):
+    """resolve_target(): env ITCH_TARGET ha precedenza; version() da package.json."""
+    monkeypatch.setenv("ITCH_TARGET", "tizio/gdr")
+    assert publish_itch.resolve_target() == "tizio/gdr"
+    import json as _json
+    pkg = _json.loads((render.ROOT / "package.json").read_text(encoding="utf-8"))
+    assert publish_itch.version() == pkg["version"]
+    # canali attesi (vault + sito)
+    assert {c for c, _ in publish_itch.CHANNELS} == {"vault", "site"}
