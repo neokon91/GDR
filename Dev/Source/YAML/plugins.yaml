@@ -106,6 +106,8 @@ metabind_inputs:
   servizi: INPUT[inlineListSuggester(option(mercato), option(tempio), option(porto), option(locanda), option(caserma), option(biblioteca), option(gilda), option(fucina), option(mura), option(molo), option(palazzo), option(prigione), option(arena), option(accademia), option(ospizio), option(banco dei pegni))]
   funzione_struttura: INPUT[inlineSelect(option(tempio), option(fortezza), option(ponte), option(faro), option(torre), option(mulino), option(diga), option(monumento), option(accademia), option(prigione))]
   stato_struttura: INPUT[inlineSelect(option(intatta), option(danneggiata), option(in rovina), option(abbandonata))]
+  # Forma di successione (sottotipi di regno).
+  successione: INPUT[inlineSelect(option(ereditaria), option(elettiva), option(per conquista), option(divina), option(nessuna))]
   rivelazione: INPUT[inlineSelect(option(pubblico), option(incontrato), option(segreto))]
   mondo: INPUT[suggester(optionQuery("Mondi"), useLinks(partial), allowOther)]
   connessioni: INPUT[inlineListSuggester(optionQuery("Mondi"), useLinks(partial), allowOther)]

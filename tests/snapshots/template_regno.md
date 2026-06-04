@@ -8,8 +8,7 @@
 > |:--|:--|
 > | **Tipo** | `VIEW[{tipo} ?? "—"]` |
 > | **Mondo** | `VIEW[{mondo}][text(renderMarkdown)]` |
-> | **Forma di governo** | `VIEW[{governo} ?? "—"]` |
-> | **Sovrano** | `VIEW[{sovrano} ?? "—"]` |
+> | **Sovrano / capo** | `VIEW[{sovrano} ?? "—"]` |
 > | **Portata** | `VIEW[{portata} ?? "—"]` |
 > | **Popolazione** | `VIEW[{popolazione} ?? "—"]` |
 > | **Simbolo** | `VIEW[{simbolo} ?? "—"]` |
@@ -17,22 +16,24 @@
 
 > [!opzioni]- ⚙️ Opzioni
 > **Stato**: `INPUT[stato][:stato]`
-> **Tipo**: `INPUT[inlineSelect(option(regno), option(impero), option(repubblica), option(città-stato), option(confederazione), option(feudo)):tipo]`
+> **Tipo**: `INPUT[inlineSelect(option(monarchia), option(impero), option(repubblica), option(teocrazia), option(oligarchia), option(magocrazia), option(città-stato), option(confederazione), option(feudo), option(despotismo)):tipo]`
 > **Canonico**: `INPUT[toggle:canonico]`
 > **Visibilità** *(dm = solo DM, fuori dal sito giocatori)*: `INPUT[inlineSelect(option(normale), option(dm)):visibilita]`
 > **Rivelazione**: `INPUT[rivelazione][:rivelazione]`
 
 > [!info]- ℹ️ Guida — Regno
 > **Cos'è** · Il regno è il potere organizzato sopra luoghi e fazioni: chi governa, quanto è saldo il trono e con chi è in pace o in guerra.
-> **Campi chiave** · **Forma di governo** e **Sovrano** dicono chi comanda; **Capitale**, **Alleati** e **Rivali** lo legano alla mappa politica; sul Carattere **Stabilità**.
+> **Campi chiave** · Il **Tipo** È la forma di governo (monarchia, impero, repubblica, teocrazia, magocrazia…) e porta i suoi campi; **Sovrano**, **Capitale**, **Alleati**/**Rivali** lo legano alla mappa politica; sul Carattere **Stabilità**.
 > **Spunti** · Chi siede sul trono, e quanto è saldo? Qual è la minaccia che potrebbe farlo cadere? Da cosa trae ricchezza e potere?
 
 ````tabs
 --- 📖 Lore
 
+```js-engine
+return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderTipoProfilo");
+```
 > [!abstract] Scheda
-> Forma di governo: `INPUT[text:governo]`
-> Sovrano: `INPUT[text:sovrano]`
+> Sovrano / capo: `INPUT[text:sovrano]`
 > Portata: `INPUT[portata][:portata]`
 > Popolazione: `INPUT[text:popolazione]`
 > Simbolo: `INPUT[text:simbolo]`
@@ -48,9 +49,6 @@
 
 > [!note] Forza
 > `INPUT[textArea:forza]`
-
-> [!note] Relazioni estere
-> `INPUT[textArea:relazioni_estere]`
 
 > [!note] Tensione
 > `INPUT[textArea:tensione]`

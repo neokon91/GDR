@@ -8,21 +8,38 @@ gruppo: societa
 templates:
 - id: regno
   title: Regno
-  default_type: regno
+  default_type: monarchia
   target: z.modelli/Regno.md
+# SOTTOTIPI con PROFILO: il `tipo` È la FORMA DI GOVERNO (chi detiene il potere e come),
+# con i campi che ogni forma implica. Niente più campo-scheda `governo`: era il doppione
+# in prosa del tipo. `sovrano` resta universale (in scheda). Tutte le forme sono Fronti
+# (clock) che evolvono tra le epoche. NB: `feudo` (non `dominio`) evita la collisione col
+# `dominio` cosmico.
 subtypes:
-- regno
-- impero
-- repubblica
-- città-stato
-- confederazione
-# 'feudo' (non 'dominio'): evita la collisione di nome con la categoria cosmica `dominio`.
-- feudo
+- { nome: monarchia,      descrizione: "Un sovrano regna a vita, di norma per linea dinastica.",                       campi: [legge_successione], clock: true, evoluzione: true }
+- { nome: impero,         descrizione: "Potere espansionista che governa molte province e popoli sotto un imperatore.", campi: [province, motore_espansione], clock: true, evoluzione: true }
+- { nome: repubblica,     descrizione: "Il potere è eletto e a tempo: senato, consoli, magistrature.",                 campi: [organo_governo, durata_carica], clock: true, evoluzione: true }
+- { nome: teocrazia,      descrizione: "Governa il clero in nome di una divinità: la legge è dottrina.",               campi: [divinita_di_stato], clock: true, evoluzione: true }
+- { nome: oligarchia,     descrizione: "Poche casate, gilde o famiglie detengono il potere reale.",                    campi: [organo_governo], clock: true, evoluzione: true }
+- { nome: magocrazia,     descrizione: "Governano gli incantatori: l'accesso al potere passa dalla magia.",            campi: [organo_governo, sistema_magico_stato], clock: true, evoluzione: true }
+- { nome: città-stato,    descrizione: "Una sola città sovrana col suo contado, retta da consiglio o signore.",       campi: [organo_governo], clock: true, evoluzione: true }
+- { nome: confederazione, descrizione: "Stati o tribù alleati sotto un patto, con sovranità condivisa.",              campi: [membri, organo_governo], clock: true, evoluzione: true }
+- { nome: feudo,          descrizione: "Un signore governa la terra in cambio di fedeltà a un sovrano superiore.",     campi: [sovrano_feudale], clock: true, evoluzione: true }
+- { nome: despotismo,     descrizione: "Un tiranno detiene il potere assoluto, spesso preso con la forza.",           campi: [presa_potere], clock: true, evoluzione: true }
 fields:
-  governo: { label: Forma di governo, widget: text }
-  sovrano: { label: Sovrano,          widget: text }
+  sovrano:              { label: Sovrano / capo,          widget: text }
+  legge_successione:    { label: Legge di successione,    widget: successione }
+  province:             { label: Province / domini,       widget: text }
+  motore_espansione:    { label: Spinta all'espansione,   widget: text }
+  organo_governo:       { label: Organo di governo,       widget: text }
+  durata_carica:        { label: Durata delle cariche,    widget: text }
+  divinita_di_stato:    { label: Divinità di stato,       widget: legame }
+  sistema_magico_stato: { label: Magia di stato,          widget: legame }
+  membri:               { label: Membri / firmatari,      widget: text }
+  sovrano_feudale:      { label: Fedeltà a,               widget: legame }
+  presa_potere:         { label: Come ha preso il potere, widget: text }
 # + simbolo: stemma/insegna del regno (araldica, recupero FantasyWorld).
-scheda: [governo, sovrano, portata, popolazione, simbolo]
+scheda: [sovrano, portata, popolazione, simbolo]
 relazioni:
 - field: capitale
   label: Capitale
@@ -81,9 +98,6 @@ creation:
   - field: forza
     prompt: 'Forza: esercito, magia, alleanze'
     heading: Forza
-  - field: relazioni_estere
-    prompt: Rapporti con altri regni (alleati, rivali)
-    heading: Relazioni estere
   - field: tensione
     prompt: Tensione presente (cosa minaccia il regno)
     heading: Tensione
@@ -95,4 +109,4 @@ creation:
 
 guida:
   scopo: 'Il regno è il potere organizzato sopra luoghi e fazioni: chi governa, quanto è saldo il trono e con chi è in pace o in guerra.'
-  campi_chiave: '**Forma di governo** e **Sovrano** dicono chi comanda; **Capitale**, **Alleati** e **Rivali** lo legano alla mappa politica; sul Carattere **Stabilità**.'
+  campi_chiave: 'Il **Tipo** È la forma di governo (monarchia, impero, repubblica, teocrazia, magocrazia…) e porta i suoi campi; **Sovrano**, **Capitale**, **Alleati**/**Rivali** lo legano alla mappa politica; sul Carattere **Stabilità**.'
