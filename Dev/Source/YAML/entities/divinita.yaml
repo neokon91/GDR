@@ -15,11 +15,16 @@ templates:
   # tavolo (Fronte: clock di risveglio/desiderio — vedi grafo teologico) come le altre
   # entità cosmiche (piano/dominio/legge_fondamentale). La lean reference.md.j2 le negava
   # la tab «Al tavolo»; il default le dà superficie giocabile + Cronologia (tappe_categorie).
+# SOTTOTIPI con PROFILO: il RANGO della divinità (la natura sta nella famiglia + assi).
+# Tutte premono sul tavolo come Fronti (clock) ed evolvono tra le epoche. Profilo
+# leggero: la profondità cosmica è negli assi e nelle relazioni (domini/culti/piano).
 subtypes:
-- divinità maggiore
-- divinità minore
-- semidio
-- pantheon
+- { nome: divinità maggiore, descrizione: "Potenza di prima grandezza: domini ampi, culti diffusi, presenza che pesa sul mondo intero.", campi: [], clock: true, evoluzione: true }
+- { nome: divinità minore,   descrizione: "Divinità di portata ristretta: un dominio, una regione, un popolo o un mestiere.",            campi: [], clock: true, evoluzione: true }
+- { nome: semidio,           descrizione: "Nato dall'unione di divino e mortale, o asceso da mortale: potere divino ma origine terrena.", campi: [origine_mortale], clock: true, evoluzione: true }
+- { nome: pantheon,          descrizione: "Non una singola divinità ma un INSIEME di dèi imparentati che agiscono come un corpo.",       campi: [], clock: true, evoluzione: true }
+fields:
+  origine_mortale: { label: Origine mortale, widget: text }
 # Classificazione a 2 livelli: la 'famiglia' (natura, seed FW glossario_divinita)
 # affianca il 'tipo' (rango). Select + legenda auto-documentante.
 # Preset assi per famiglia (campo `assi`): il wizard pre-compila gli assi che la

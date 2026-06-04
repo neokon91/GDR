@@ -13,7 +13,7 @@
 
 > [!opzioni]- ⚙️ Opzioni
 > **Stato**: `INPUT[stato][:stato]`
-> **Tipo**: `INPUT[inlineSelect(option(religione), option(ordine), option(setta), option(culto misterico), option(fede popolare)):tipo]`
+> **Tipo**: `INPUT[inlineSelect(option(religione), option(ordine monastico), option(setta), option(culto misterico), option(fede popolare)):tipo]`
 > **Canonico**: `INPUT[toggle:canonico]`
 > **Visibilità** *(dm = solo DM, fuori dal sito giocatori)*: `INPUT[inlineSelect(option(normale), option(dm)):visibilita]`
 > **Rivelazione**: `INPUT[rivelazione][:rivelazione]`
@@ -26,6 +26,9 @@
 ````tabs
 --- 📖 Lore
 
+```js-engine
+return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderTipoProfilo");
+```
 > [!abstract] Scheda
 > Portata: `INPUT[portata][:portata]`
 

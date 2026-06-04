@@ -11,12 +11,22 @@ templates:
   title: Culto
   default_type: religione
   target: z.modelli/Culto.md
+# SOTTOTIPI con PROFILO: la FORMA del culto. Tutti sono Fronti (la fede genera trame →
+# clock) che evolvono tra le epoche. NB: 'ordine monastico' (non 'ordine') per non
+# confondersi con l'asse «Ordine» (cosmico) e col sottotipo 'ordine' di fazione.
 subtypes:
-- religione
-- ordine
-- setta
-- culto misterico
-- fede popolare
+- { nome: religione,        descrizione: "Fede organizzata e diffusa, con clero, dottrina e luoghi di culto pubblici.",                  campi: [dogma], clock: true, evoluzione: true }
+- { nome: ordine monastico, descrizione: "Fratellanza chiusa votata a una regola: monaci, asceti, custodi; voti e disciplina.",         campi: [regola_monastica, voti], clock: true, evoluzione: true }
+- { nome: setta,            descrizione: "Scissione eretica o segreta dal culto madre: dottrina deviante, riti nascosti, segni di riconoscimento.", campi: [eresia], clock: true, evoluzione: true }
+- { nome: culto misterico,  descrizione: "Religione iniziatica a gradi: rivelazioni progressive riservate agli adepti.",                campi: [gradi_iniziazione], clock: true, evoluzione: true }
+- { nome: fede popolare,    descrizione: "Devozione diffusa e decentrata: santi locali, superstizioni, pratiche quotidiane senza clero forte.", campi: [pratiche], clock: true, evoluzione: true }
+fields:
+  dogma:             { label: Dogma centrale,        widget: text }
+  regola_monastica:  { label: Regola,                widget: text }
+  voti:              { label: Voti,                  widget: text }
+  eresia:            { label: Eresia / deviazione,   widget: text }
+  gradi_iniziazione: { label: Gradi d'iniziazione,   widget: text }
+  pratiche:          { label: Pratiche popolari,     widget: text }
 # Portata/diffusione del culto (riusa il campo select condiviso 'portata').
 scheda: [portata]
 relazioni:

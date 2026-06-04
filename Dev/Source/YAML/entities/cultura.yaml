@@ -13,11 +13,15 @@ templates:
   target: z.modelli/Cultura.md
   primary: true
   # Niente 'jinja' -> usa lo scheletro condiviso _entity_base.j2 (riempito da YAML+macro).
+# SOTTOTIPI: lo SCOPO/scala della cultura (profilo leggero: la profondità è negli 8 assi
+# + nella famiglia-indole coi suoi preset). Le culture evolvono e possono premere sul
+# tavolo (clock) quando in fermento. NB: 'religione' qui = cultura-visione-del-mondo
+# condivisa (≠ `culto`, che è il culto ORGANIZZATO di una divinità).
 subtypes:
-- civilta
-- popolo
-- tradizione
-- religione
+- { nome: civilta,    descrizione: "Una civiltà compiuta: città, scrittura, istituzioni, un'identità che si sa tale.", clock: true, evoluzione: true }
+- { nome: popolo,     descrizione: "Un'etnia o gente con lingua, costumi e radici comuni, non necessariamente uno stato.", clock: true, evoluzione: true }
+- { nome: tradizione, descrizione: "Un filone culturale o pratica (una scuola, un'arte, un'usanza), non un intero popolo.", clock: true, evoluzione: true }
+- { nome: religione,  descrizione: "Una cultura come visione del mondo condivisa e sacralizzata: valori, tabù e riti che la definiscono.", clock: true, evoluzione: true }
 # Classificazione a 2 livelli: la 'famiglia' (indole, seed FW glossario_cultura)
 # affianca il 'tipo'. Select + legenda auto-documentante.
 # La famiglia può pre-compilare gli assi tematici (campo opzionale 'assi':

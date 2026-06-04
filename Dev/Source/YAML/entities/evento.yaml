@@ -13,11 +13,19 @@ templates:
   target: z.modelli/Evento.md
   jinja: evento.md.j2
   primary: true
+# SOTTOTIPI con PROFILO: la NATURA dell'evento. Un evento è un PUNTO nel tempo (non un
+# Fronte, non evolve): clock/evoluzione restano false; la catena causale vive nelle
+# relazioni causato_da/conseguenze + renderCausalita.
 subtypes:
-- evento storico
-- evento di campagna
-- conflitto
-- conseguenza
+- { nome: evento storico,      descrizione: "Un fatto accaduto nel passato del mondo, che pesa ancora sul presente.", campi: [], clock: false, evoluzione: false }
+- { nome: evento di campagna,  descrizione: "Accade DURANTE il gioco, mosso dai PG o dal mondo: la giocata che fa storia.", campi: [], clock: false, evoluzione: false }
+- { nome: conflitto,           descrizione: "Guerra, battaglia o scontro: chi combatte, perché, e come finisce.", campi: [belligeranti, casus_belli, esito], clock: false, evoluzione: false }
+- { nome: conseguenza,         descrizione: "L'esito scatenato da un Fronte col clock pieno: l'evento che il worldbuilding ha prodotto.", campi: [scatenato_da], clock: false, evoluzione: false }
+fields:
+  belligeranti: { label: Belligeranti,      widget: text }
+  casus_belli:  { label: Casus belli,       widget: text }
+  esito:        { label: Esito,             widget: text }
+  scatenato_da: { label: Scatenato dal Fronte, widget: legame }
 # Classificazione a 2 livelli: la 'famiglia' (registro cosmico, seed FW evento_cat)
 # affianca il 'tipo'. Select + legenda auto-documentante.
 famiglie:

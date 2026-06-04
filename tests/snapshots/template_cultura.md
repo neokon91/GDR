@@ -40,6 +40,9 @@
 ````tabs
 --- 📖 Lore
 
+```js-engine
+return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderTipoProfilo");
+```
 > [!abstract] Scheda
 > Portata: `INPUT[portata][:portata]`
 > Stile dei nomi: `INPUT[stile_nomi][:stile_nomi]`
