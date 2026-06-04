@@ -9,6 +9,14 @@
 > | **Famiglia** | `VIEW[{famiglia} ?? "—"]` |
 > | **Stato** | `INPUT[stato][:stato]` |
 
+> [!opzioni]- ⚙️ Opzioni
+> **Stato**: `INPUT[stato][:stato]`
+> **Tipo**: `INPUT[inlineSelect(option(quadro cosmico), option(concetto cosmico), option(mistero cosmico)):tipo]`
+> **Famiglia**: `INPUT[inlineSelect(option(origine), option(struttura), option(forze), option(destino), option(mistero)):famiglia]`
+> **Canonico**: `INPUT[toggle:canonico]`
+> **Visibilità** *(dm = solo DM, fuori dal sito giocatori)*: `INPUT[inlineSelect(option(normale), option(dm)):visibilita]`
+> **Rivelazione**: `INPUT[rivelazione][:rivelazione]`
+
 > [!info] Famiglia: `INPUT[inlineSelect(option(origine), option(struttura), option(forze), option(destino), option(mistero)):famiglia]`
 
 > [!note]- Cosa significa ogni famiglia

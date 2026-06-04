@@ -10,6 +10,14 @@
 > | **Vitalità** | `VIEW[{vitalita} ?? "—"]` |
 > | **Stato** | `INPUT[stato][:stato]` |
 
+> [!opzioni]- ⚙️ Opzioni
+> **Stato**: `INPUT[stato][:stato]`
+> **Tipo**: `INPUT[inlineSelect(option(lingua), option(dialetto), option(codice o gergo)):tipo]`
+> **Famiglia**: `INPUT[inlineSelect(option(primordiale), option(divina), option(planare), option(elementale), option(ancestrale), option(rituale), option(arcana), option(segreta)):famiglia]`
+> **Canonico**: `INPUT[toggle:canonico]`
+> **Visibilità** *(dm = solo DM, fuori dal sito giocatori)*: `INPUT[inlineSelect(option(normale), option(dm)):visibilita]`
+> **Rivelazione**: `INPUT[rivelazione][:rivelazione]`
+
 > [!info] Famiglia: `INPUT[inlineSelect(option(primordiale), option(divina), option(planare), option(elementale), option(ancestrale), option(rituale), option(arcana), option(segreta)):famiglia]`
 
 > [!note]- Cosa significa ogni famiglia

@@ -14,6 +14,14 @@
 > | **Simbolo** | `VIEW[{simbolo} ?? "—"]` |
 > | **Stato** | `INPUT[stato][:stato]` |
 
+> [!opzioni]- ⚙️ Opzioni
+> **Stato**: `INPUT[stato][:stato]`
+> **Tipo**: `INPUT[inlineSelect(option(civilta), option(popolo), option(tradizione), option(religione)):tipo]`
+> **Famiglia**: `INPUT[inlineSelect(option(ancestrale), option(sciamanica), option(iniziatica), option(dogmatica), option(fluida), option(sincretica), option(guerriera), option(nomadica)):famiglia]`
+> **Canonico**: `INPUT[toggle:canonico]`
+> **Visibilità** *(dm = solo DM, fuori dal sito giocatori)*: `INPUT[inlineSelect(option(normale), option(dm)):visibilita]`
+> **Rivelazione**: `INPUT[rivelazione][:rivelazione]`
+
 > [!info] Famiglia: `INPUT[inlineSelect(option(ancestrale), option(sciamanica), option(iniziatica), option(dogmatica), option(fluida), option(sincretica), option(guerriera), option(nomadica)):famiglia]`
 
 > [!note]- Cosa significa ogni famiglia

@@ -15,6 +15,14 @@
 > | **Età** | `VIEW[{eta} ?? "—"]` |
 > | **Stato** | `INPUT[stato][:stato]` |
 
+> [!opzioni]- ⚙️ Opzioni
+> **Stato**: `INPUT[stato][:stato]`
+> **Tipo**: `INPUT[inlineSelect(option(pg), option(png)):tipo]`
+> **Ruolo narrativo**: `INPUT[inlineSelect(option(alleato), option(antagonista), option(mentore), option(patrono), option(rivale), option(mercante), option(contatto), option(gregario)):famiglia]`
+> **Canonico**: `INPUT[toggle:canonico]`
+> **Visibilità** *(dm = solo DM, fuori dal sito giocatori)*: `INPUT[inlineSelect(option(normale), option(dm)):visibilita]`
+> **Rivelazione**: `INPUT[rivelazione][:rivelazione]`
+
 ````tabs
 --- 📋 Scheda
 

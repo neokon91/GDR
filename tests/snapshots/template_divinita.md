@@ -14,6 +14,14 @@
 > | **Simbolo** | `VIEW[{simbolo} ?? "—"]` |
 > | **Stato** | `INPUT[stato][:stato]` |
 
+> [!opzioni]- ⚙️ Opzioni
+> **Stato**: `INPUT[stato][:stato]`
+> **Tipo**: `INPUT[inlineSelect(option(divinità maggiore), option(divinità minore), option(semidio), option(pantheon)):tipo]`
+> **Famiglia**: `INPUT[inlineSelect(option(primordiale), option(archetipica), option(elementale), option(culturale), option(mitica), option(spirituale), option(onirica)):famiglia]`
+> **Canonico**: `INPUT[toggle:canonico]`
+> **Visibilità** *(dm = solo DM, fuori dal sito giocatori)*: `INPUT[inlineSelect(option(normale), option(dm)):visibilita]`
+> **Rivelazione**: `INPUT[rivelazione][:rivelazione]`
+
 > [!info] Famiglia: `INPUT[inlineSelect(option(primordiale), option(archetipica), option(elementale), option(culturale), option(mitica), option(spirituale), option(onirica)):famiglia]`
 
 > [!note]- Cosa significa ogni famiglia

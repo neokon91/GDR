@@ -7,11 +7,16 @@
 > | | |
 > |:--|:--|
 > | **Tipo** | `VIEW[{tipo} ?? "—"]` |
-> | **Scala** | `VIEW[{scala} ?? "—"]` |
 > | **Genere** | `VIEW[{genere} ?? "—"]` |
-> | **Epoca** | `VIEW[{epoca} ?? "—"]` |
 > | **Temi** | `VIEW[{temi} ?? "—"]` |
 > | **Stato** | `INPUT[stato][:stato]` |
+
+> [!opzioni]- ⚙️ Opzioni
+> **Stato**: `INPUT[stato][:stato]`
+> **Tipo**: `INPUT[inlineSelect(option(mondo)):tipo]`
+> **Canonico**: `INPUT[toggle:canonico]`
+> **Visibilità** *(dm = solo DM, fuori dal sito giocatori)*: `INPUT[inlineSelect(option(normale), option(dm)):visibilita]`
+> **Rivelazione**: `INPUT[rivelazione][:rivelazione]`
 
 ````tabs
 --- 📖 Lore
@@ -22,9 +27,7 @@
 > - Genere e tono in una frase (dark fantasy di frontiera, eroico, weird…).
 
 > [!abstract] Scheda
-> Scala: `INPUT[scala][:scala]`
 > Genere: `INPUT[genere][:genere]`
-> Epoca: `INPUT[text:epoca]`
 > Temi: `INPUT[temi][:temi]`
 
 > [!note]- Premessa
@@ -33,26 +36,8 @@
 > [!quote]- Versione player-safe
 > `INPUT[text:player_safe]`
 
-> [!note] Tono
-> `INPUT[textArea:tono]`
-
 > [!note] Conflitto centrale
 > `INPUT[textArea:conflitto]`
-
-> [!note] Geografia
-> `INPUT[textArea:geografia]`
-
-> [!note] Popoli
-> `INPUT[textArea:popoli]`
-
-> [!note] Magia
-> `INPUT[textArea:magia]`
-
-> [!note] Poteri
-> `INPUT[textArea:poteri]`
-
-> [!note] Storia
-> `INPUT[textArea:storia]`
 
 > [!segreto]- Verità nascosta
 > `INPUT[textArea:verita_nascosta]`
@@ -145,6 +130,26 @@ return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "mon
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderTappe");
 ```
+--- 🧩 Componenti
+
+> [!tip] Un mondo è fatto dei suoi pezzi — costruiscili qui
+> Non descrivere la geografia/i popoli/la magia a parole: **creali come componenti veri**.
+> Nel wizard scegli **questo mondo** e si agganciano da soli al grafo.
+>
+> **Cosmo & sacro**: `BUTTON[crea-cosmologia]` `BUTTON[crea-sistema_magico]` `BUTTON[crea-divinita]`
+>
+> **Geografia & poteri**: `BUTTON[crea-regno]` `BUTTON[crea-luogo]` `BUTTON[crea-fazione]`
+>
+> **Popoli & tempo**: `BUTTON[crea-cultura]` `BUTTON[crea-specie]` `BUTTON[crea-epoca]`
+
+**I componenti di questo mondo** *(si popolano man mano che li crei)*
+```dataview
+table rows.file.link as "Voci"
+from "Mondi"
+where mondo = this.file.link
+group by categoria as "Tipo"
+```
+
 --- 🗺 Mappa
 
 > [!info] Mappa

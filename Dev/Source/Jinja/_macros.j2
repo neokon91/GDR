@@ -95,6 +95,29 @@
 > | **{{ core.fields[fid].label }}** | {{ view(fid) }} |
 {% endfor %}
 > | **Stato** | {{ field('stato', label=false) }} |
+
+{{ opzioni(template) }}
+{%- endmacro %}
+
+{# Callout «⚙️ Opzioni»: le IMPOSTAZIONI editabili della nota (Meta Bind) in un posto
+   solo — stato, tipo (select dai subtypes), famiglia, canonico, visibilità (dm/meta =
+   escludi dal sito giocatori), rivelazione. Pieghevole; appeso a identita_card → compare
+   su OGNI nota. tipo/famiglia generati come inlineSelect dai valori validi (niente typo). #}
+{% macro opzioni(template) -%}
+{%- set cat = core.get('categories', {}).get(template.category, {}) -%}
+{%- set subs = cat.get('subtypes', []) -%}
+{%- set fams = cat.get('famiglie', []) -%}
+> [!opzioni]- ⚙️ Opzioni
+> **Stato**: {{ field('stato', label=false) }}
+{% if subs %}
+> **Tipo**: `INPUT[inlineSelect({% for s in subs %}option({{ s }}){{ ', ' if not loop.last }}{% endfor %}):tipo]`
+{% endif %}
+{% if fams %}
+> **{{ cat.get('famiglia_label', 'Famiglia') }}**: `INPUT[inlineSelect({% for f in fams %}option({{ f.nome }}){{ ', ' if not loop.last }}{% endfor %}):famiglia]`
+{% endif %}
+> **Canonico**: `INPUT[toggle:canonico]`
+> **Visibilità** *(dm = solo DM, fuori dal sito giocatori)*: `INPUT[inlineSelect(option(normale), option(dm)):visibilita]`
+> **Rivelazione**: {{ field('rivelazione', label=false) }}
 {%- endmacro %}
 
 {# Classificazione a 2 livelli (famiglia + tipo): se la categoria ha 'famiglie',

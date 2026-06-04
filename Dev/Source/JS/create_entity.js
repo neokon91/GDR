@@ -265,11 +265,11 @@ async function runWizard(tp, template, core) {
   }
   if (!name) throw new Error("Nome vuoto");
 
-  // I campi del corpo (body) sono prosa: marcali multiline (textarea nel prompt).
-  const questions = [
-    ...(wizard.fields ?? []),
-    ...(wizard.body ?? []).map((q) => ({ ...q, multiline: true })),
-  ];
+  // Nel wizard si chiedono SOLO i campi strutturati (creation.fields: tipo, liste,
+  // link). La PROSA (creation.body: descrizione/tono/storia…) NON si digita nel modale:
+  // rende come callout editabili nella nota (wizard_body), dove si scrive con calma e
+  // si rilegge. Creazione veloce = scaffold + scelte; il testo lungo vive nella nota.
+  const questions = [...(wizard.fields ?? [])];
   const captured = {};
 
   // Campi obbligatori: X annulla l'intero wizard.
@@ -295,7 +295,11 @@ async function runWizard(tp, template, core) {
   // i legami erano solo un passo manuale post-creazione: macro Collegamenti /
   // bottone Collega). Opzionali e skippabili; salta quelli già chiesti come
   // creation.fields (es. personaggio.fazione/luogo). Scrive solo i non vuoti.
-  const relsToAsk = relationsToAsk((core.relazioni ?? {})[category], questions.map((q) => q.field));
+  // Offri SOLO le relazioni con target ESISTENTI: alla PRIMA creazione (es. il mondo,
+  // creato per primo) non c'è ancora nulla da collegare → niente prompt "collega ora" a
+  // vuoto. I legami mancanti si fanno dopo col bottone Collega, quando i target esistono.
+  const relsToAsk = relationsToAsk((core.relazioni ?? {})[category], questions.map((q) => q.field))
+    .filter((r) => notesByCategory(r.category).length > 0);
   if (relsToAsk.length) {
     const connect = await tp.system.suggester(
       ["Sì, collega ora", "No, collego dopo (tab Collegamenti / Collega)"],

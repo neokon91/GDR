@@ -16,6 +16,26 @@
 {% endblock %}
 {% block extra_tabs %}
 {% import '_macros.j2' as m with context %}
+--- 🧩 Componenti
+
+> [!tip] Un mondo è fatto dei suoi pezzi — costruiscili qui
+> Non descrivere la geografia/i popoli/la magia a parole: **creali come componenti veri**.
+> Nel wizard scegli **questo mondo** e si agganciano da soli al grafo.
+>
+> **Cosmo & sacro**: `BUTTON[crea-cosmologia]` `BUTTON[crea-sistema_magico]` `BUTTON[crea-divinita]`
+>
+> **Geografia & poteri**: `BUTTON[crea-regno]` `BUTTON[crea-luogo]` `BUTTON[crea-fazione]`
+>
+> **Popoli & tempo**: `BUTTON[crea-cultura]` `BUTTON[crea-specie]` `BUTTON[crea-epoca]`
+
+**I componenti di questo mondo** *(si popolano man mano che li crei)*
+```dataview
+table rows.file.link as "Voci"
+from "Mondi"
+where mondo = this.file.link
+group by categoria as "Tipo"
+```
+
 --- 🗺 Mappa
 
 {{ m.mappa() }}

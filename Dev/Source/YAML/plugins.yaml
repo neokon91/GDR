@@ -185,6 +185,8 @@ folder_icons:
 callouts:
   - { id: tavolo,  color: "201, 64, 64",   icon: swords }
   - { id: gancio,  color: "191, 130, 42",  icon: anchor }
+  # Impostazioni della nota (Meta Bind): stato/tipo/famiglia/canonico/visibilità/rivelazione.
+  - { id: opzioni, color: "120, 120, 130", icon: sliders-horizontal }
   - { id: segreto, color: "138, 74, 173",  icon: eye-off }
   # Rivelazione per-sezione (player-facing, gated dal sito): una verità che si
   # svela col procedere della campagna. `[!rivela|<tier>]` (vedi build_site).

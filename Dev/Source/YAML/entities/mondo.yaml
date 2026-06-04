@@ -36,10 +36,13 @@ relazioni:
   label: Culture
   category: cultura
   multi: true
+# Un MONDO non si definisce con etichette astratte: si definisce coi suoi COMPONENTI
+# (cosmologia, regni, luoghi, culture, specie, divinità, sistemi magici, epoche, fazioni
+# — entità vere che crei e che si agganciano qui). Lo scheda resta il "sapore" della
+# campagna (genere + temi); NON `scala` (era un mix assurdo di entità e sottotipi-luogo)
+# né `epoca` (è un'entità, non un valore). I "pezzi" si gestiscono nel tab Componenti.
 scheda:
-- scala
 - genere
-- epoca
 - temi
 creation:
   fields:
@@ -57,28 +60,15 @@ creation:
     - redenzione
     multi: true
     optional: true
+  # Solo l'ANIMA della campagna (niente equivalente fra i componenti). Geografia/popoli/
+  # magia/poteri/storia NON sono prosa qui: sono Luoghi/Regni, Culture/Specie, Sistemi
+  # magici, Fazioni, Epoche — li crei nel tab Componenti.
+  # NB: 'tono' NON è qui — è un ASSE del Carattere (slider Luminoso→Grimdark); metterlo
+  # anche come campo-body creava una collisione (due input sullo stesso `tono`).
   body:
-  - field: tono
-    prompt: Tono e atmosfera del mondo
-    heading: Tono
   - field: conflitto
-    prompt: Conflitto centrale
+    prompt: Conflitto centrale della campagna
     heading: Conflitto centrale
-  - field: geografia
-    prompt: 'Geografia: continenti, regioni, luoghi-chiave'
-    heading: Geografia
-  - field: popoli
-    prompt: Popoli e culture che lo abitano
-    heading: Popoli
-  - field: magia
-    prompt: Ruolo della magia nel mondo
-    heading: Magia
-  - field: poteri
-    prompt: Chi detiene il potere (fazioni, troni, poteri occulti)
-    heading: Poteri
-  - field: storia
-    prompt: 'Storia: ere passate, eventi che pesano sul presente'
-    heading: Storia
   - field: verita_nascosta
     prompt: La verità nascosta del mondo
     callout: segreto

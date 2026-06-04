@@ -14,6 +14,13 @@
 > | **Dieta** | `VIEW[{dieta} ?? "—"]` |
 > | **Stato** | `INPUT[stato][:stato]` |
 
+> [!opzioni]- ⚙️ Opzioni
+> **Stato**: `INPUT[stato][:stato]`
+> **Tipo**: `INPUT[inlineSelect(option(aberrazione), option(bestia), option(celestiale), option(costrutto), option(drago), option(elementale), option(fata), option(gigante), option(immondo), option(melma), option(mostruosita), option(non-morto), option(umanoide), option(vegetale)):tipo]`
+> **Canonico**: `INPUT[toggle:canonico]`
+> **Visibilità** *(dm = solo DM, fuori dal sito giocatori)*: `INPUT[inlineSelect(option(normale), option(dm)):visibilita]`
+> **Rivelazione**: `INPUT[rivelazione][:rivelazione]`
+
 ````tabs
 --- 🐉 Statblock 5.5e
 

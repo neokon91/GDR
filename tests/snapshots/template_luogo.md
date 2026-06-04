@@ -13,6 +13,14 @@
 > | **Popolazione** | `VIEW[{popolazione} ?? "—"]` |
 > | **Stato** | `INPUT[stato][:stato]` |
 
+> [!opzioni]- ⚙️ Opzioni
+> **Stato**: `INPUT[stato][:stato]`
+> **Tipo**: `INPUT[inlineSelect(option(regione), option(insediamento), option(sito di interesse), option(struttura), option(dungeon), option(rovina), option(landmark naturale)):tipo]`
+> **Famiglia**: `INPUT[inlineSelect(option(insediamento), option(rovina), option(santuario), option(confine), option(selvaggio), option(onirico), option(interdimensionale), option(simbolico)):famiglia]`
+> **Canonico**: `INPUT[toggle:canonico]`
+> **Visibilità** *(dm = solo DM, fuori dal sito giocatori)*: `INPUT[inlineSelect(option(normale), option(dm)):visibilita]`
+> **Rivelazione**: `INPUT[rivelazione][:rivelazione]`
+
 > [!info] Famiglia: `INPUT[inlineSelect(option(insediamento), option(rovina), option(santuario), option(confine), option(selvaggio), option(onirico), option(interdimensionale), option(simbolico)):famiglia]`
 
 > [!note]- Cosa significa ogni famiglia

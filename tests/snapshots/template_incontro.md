@@ -11,6 +11,14 @@
 > | **Numero di PG** | `VIEW[{pg_numero} ?? "—"]` |
 > | **Stato** | `INPUT[stato][:stato]` |
 
+> [!opzioni]- ⚙️ Opzioni
+> **Stato**: `INPUT[stato][:stato]`
+> **Tipo**: `INPUT[inlineSelect(option(incontro), option(agguato), option(inseguimento)):tipo]`
+> **Famiglia**: `INPUT[inlineSelect(option(combattimento), option(sociale), option(esplorazione), option(enigma), option(inseguimento), option(ambientale)):famiglia]`
+> **Canonico**: `INPUT[toggle:canonico]`
+> **Visibilità** *(dm = solo DM, fuori dal sito giocatori)*: `INPUT[inlineSelect(option(normale), option(dm)):visibilita]`
+> **Rivelazione**: `INPUT[rivelazione][:rivelazione]`
+
 > [!info] Famiglia: `INPUT[inlineSelect(option(combattimento), option(sociale), option(esplorazione), option(enigma), option(inseguimento), option(ambientale)):famiglia]`
 
 > [!note]- Cosa significa ogni famiglia

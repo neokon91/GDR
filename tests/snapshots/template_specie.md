@@ -16,6 +16,14 @@
 > | **Stile dei nomi** | `VIEW[{stile_nomi} ?? "—"]` |
 > | **Stato** | `INPUT[stato][:stato]` |
 
+> [!opzioni]- ⚙️ Opzioni
+> **Stato**: `INPUT[stato][:stato]`
+> **Tipo**: `INPUT[inlineSelect(option(comune), option(esotica), option(mostruosa)):tipo]`
+> **Famiglia**: `INPUT[inlineSelect(option(ancestrale), option(spirituale), option(cosmica), option(mortale), option(corrompibile), option(onirica), option(elementale), option(sintetica)):famiglia]`
+> **Canonico**: `INPUT[toggle:canonico]`
+> **Visibilità** *(dm = solo DM, fuori dal sito giocatori)*: `INPUT[inlineSelect(option(normale), option(dm)):visibilita]`
+> **Rivelazione**: `INPUT[rivelazione][:rivelazione]`
+
 > [!info] Famiglia: `INPUT[inlineSelect(option(ancestrale), option(spirituale), option(cosmica), option(mortale), option(corrompibile), option(onirica), option(elementale), option(sintetica)):famiglia]`
 
 > [!note]- Cosa significa ogni famiglia
