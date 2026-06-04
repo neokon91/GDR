@@ -61,6 +61,9 @@ monster: <% tp.config.target_file.basename %>
 {{ m.tavolo(template.category) }}
 --- 📖 Lore
 
+{% if core.get('categories', {}).get(template.category, {}).get('subtype_profiles') %}
+{{ m.tipo_profilo() }}
+{% endif %}
 {{ m.scheda(template.category) }}
 > [!note]- Aspetto e indole
 > Com'è fatta, come si muove, che impressione dà. I numeri 5e sono nel tab Statblock.

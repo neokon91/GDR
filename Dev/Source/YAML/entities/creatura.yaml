@@ -14,21 +14,24 @@ templates:
   default_type: bestia
   target: z.modelli/Creatura.md
   jinja: creature.md.j2
+# SOTTOTIPI: i 13 TIPI di creatura 5.5e (orientamento + ganci di gioco). I dati di
+# combattimento vivono nel blocco ```statblock``` e in `gs`/`taglia`: il profilo qui è
+# descrittivo, non li tocca.
 subtypes:
-- aberrazione
-- bestia
-- celestiale
-- costrutto
-- drago
-- elementale
-- fata
-- gigante
-- immondo
-- melma
-- mostruosita
-- non-morto
-- umanoide
-- vegetale
+- { nome: aberrazione, descrizione: "Orrore alieno e innaturale: menti contorte, anatomie impossibili, spesso dal profondo o da altri piani." }
+- { nome: bestia,      descrizione: "Animale naturale, comune o preistorico: nessuna magia, solo istinto e biologia." }
+- { nome: celestiale,  descrizione: "Essere dei piani superiori: angeli, spiriti del bene, servitori delle divinità benevole." }
+- { nome: costrutto,   descrizione: "Creato e animato: golem, automi, oggetti animati; non vivo, spesso immune a molto." }
+- { nome: drago,       descrizione: "Rettile magico antico e potente: draghi veri, draghetti, parenti draconici." }
+- { nome: elementale,  descrizione: "Incarnazione di un elemento: fuoco, acqua, aria, terra, o energie pure dei piani elementali." }
+- { nome: fata,        descrizione: "Creatura del Reame Fatato: capricciosa, legata a patti e regole, tra meraviglia e crudeltà." }
+- { nome: gigante,     descrizione: "Umanoide enorme: giganti, troll, ogre; forza devastante, culture proprie." }
+- { nome: immondo,     descrizione: "Essere dei piani inferiori: demoni del caos, diavoli legalisti, servitori del male." }
+- { nome: melma,       descrizione: "Massa amorfa: gelatine, cubi, fanghiglie che divorano e si dividono." }
+- { nome: mostruosita, descrizione: "Mostro innaturale ma non aberrante: chimere, manticore, creature da incubo terreno." }
+- { nome: non-morto,   descrizione: "Tornato dalla morte: zombi, scheletri, spettri, vampiri, lich; sfida il ciclo naturale." }
+- { nome: umanoide,    descrizione: "Popolo civile o tribale: umani, orchi, goblin e affini; cultura, lingua, società." }
+- { nome: vegetale,    descrizione: "Pianta animata o fungo senziente: treant, germogli, spore e flora mostruosa." }
 # Campi specifici della creatura (i trasversali stanno in core.yaml; 'taglia' è
 # condiviso con specie e resta in system.yaml). Pensati per query future
 # (dieta/ruolo come filtri nel bestiario Bases/Dataview).

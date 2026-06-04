@@ -14,7 +14,7 @@
 > [!opzioni]- ⚙️ Opzioni
 > **Stato**: `INPUT[stato][:stato]`
 > **Tipo**: `INPUT[inlineSelect(option(incontro), option(agguato), option(inseguimento)):tipo]`
-> **Famiglia**: `INPUT[inlineSelect(option(combattimento), option(sociale), option(esplorazione), option(enigma), option(inseguimento), option(ambientale)):famiglia]`
+> **Famiglia**: `INPUT[inlineSelect(option(combattimento), option(sociale), option(esplorazione), option(enigma), option(ambientale)):famiglia]`
 > **Canonico**: `INPUT[toggle:canonico]`
 > **Visibilità** *(dm = solo DM, fuori dal sito giocatori)*: `INPUT[inlineSelect(option(normale), option(dm)):visibilita]`
 > **Rivelazione**: `INPUT[rivelazione][:rivelazione]`
@@ -24,7 +24,6 @@
 > **sociale** — Interazione: persuadere, negoziare, ingannare, intimidire.
 > **esplorazione** — Scoperta: attraversare, cercare, orientarsi nell'ignoto.
 > **enigma** — Rompicapo: risolvere un puzzle, un indovinello, un meccanismo.
-> **inseguimento** — Movimento: rincorrere o fuggire, con poste e ostacoli.
 > **ambientale** — Sopravvivenza: l'ambiente stesso è la minaccia.
 
 > [!info]- ℹ️ Guida — Incontro
@@ -35,6 +34,9 @@
 ````tabs
 --- 🎬 Scena
 
+```js-engine
+return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderTipoProfilo");
+```
 > [!tavolo] Uso al tavolo
 > `INPUT[testo_area][:uso_al_tavolo]`
 

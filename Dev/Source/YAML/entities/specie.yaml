@@ -12,10 +12,13 @@ templates:
   default_type: comune
   target: z.modelli/Specie.md
   jinja: reference.md.j2
+# SOTTOTIPI: la RARITÀ/posizione della specie nel mondo (profilo solo descrittivo: i
+# dati GIOCABILI — taglia, velocità, tipo creatura, tratti — restano in scheda/Tratti e
+# li legge crea_pg; qui niente campi meccanici, solo orientamento).
 subtypes:
-- comune
-- esotica
-- mostruosa
+- { nome: comune,    descrizione: "Diffusa e familiare: si incontra ovunque nel mondo, integrata o quantomeno accettata." }
+- { nome: esotica,   descrizione: "Rara o straniera: vive ai margini, in terre lontane o in pochi enclavi; desta curiosità o diffidenza." }
+- { nome: mostruosa, descrizione: "Temuta o aberrante: vista come minaccia o predatrice, spesso fuori dal consesso civile." }
 # Classificazione a 2 livelli: la 'famiglia' (origine, seed FW glossario_razza)
 # affianca il 'tipo' (rarità). Select + legenda auto-documentante.
 famiglie:

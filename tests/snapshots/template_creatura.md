@@ -91,6 +91,9 @@ monster: <% tp.config.target_file.basename %>
 > *pubblico* = noto da subito · *incontrato* = quando i PG lo scoprono · *segreto* = colpo di scena. Per non condividerla **mai**, imposta `visibilita: dm`.
 --- 📖 Lore
 
+```js-engine
+return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderTipoProfilo");
+```
 > [!abstract] Scheda
 > Taglia: `INPUT[taglia][:taglia]`
 > Grado di sfida: `INPUT[gs][:gs]`

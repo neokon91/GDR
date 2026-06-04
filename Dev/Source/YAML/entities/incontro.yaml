@@ -14,23 +14,29 @@ templates:
   jinja: encounter.md.j2
   area: gioco
   primary: true
+# SOTTOTIPI con PROFILO: il `tipo` è la SITUAZIONE D'INGAGGIO (come parte la scena),
+# ortogonale alla 'famiglia' (il contenuto/scopo: combattimento, sociale…). I dati di
+# difficoltà (pg_livello/pg_numero/creature) restano per renderEncounter.
 subtypes:
-- incontro
-- agguato
-- inseguimento
-# Classificazione a 2 livelli: la 'famiglia' (scopo della scena) affianca il 'tipo'
-# (forma). Aiuta a variare il ritmo al tavolo. Select + legenda auto-documentante.
+- { nome: incontro,      descrizione: "Scena standard: le parti si incontrano e la situazione si sviluppa, con iniziativa normale.", campi: [] }
+- { nome: agguato,       descrizione: "Una parte sorprende l'altra: Furtività vs Percezione, sorpresa al primo round.",            campi: [chi_sorprende] }
+- { nome: inseguimento,  descrizione: "Una caccia: chi fugge e chi insegue, con ostacoli e una distanza che cambia ogni round.",   campi: [preda, distanza_iniziale] }
+# Classificazione a 2 livelli: la 'famiglia' (scopo/CONTENUTO della scena) affianca il
+# 'tipo' (situazione d'ingaggio). NB: niente 'inseguimento' qui — è un tipo (la caccia
+# è una situazione, non un contenuto).
 famiglie:
 - { nome: combattimento, descrizione: "Scontro: l'obiettivo è prevalere sul nemico." }
 - { nome: sociale,       descrizione: "Interazione: persuadere, negoziare, ingannare, intimidire." }
 - { nome: esplorazione,  descrizione: "Scoperta: attraversare, cercare, orientarsi nell'ignoto." }
 - { nome: enigma,        descrizione: "Rompicapo: risolvere un puzzle, un indovinello, un meccanismo." }
-- { nome: inseguimento,  descrizione: "Movimento: rincorrere o fuggire, con poste e ostacoli." }
 - { nome: ambientale,    descrizione: "Sopravvivenza: l'ambiente stesso è la minaccia." }
 # Gruppo di riferimento per il calcolo della difficoltà (views.renderEncounter).
 fields:
   pg_livello: { label: Livello del gruppo, widget: number }
   pg_numero:  { label: Numero di PG,       widget: number }
+  chi_sorprende:     { label: Chi sorprende,        widget: text }
+  preda:             { label: Preda / chi fugge,    widget: text }
+  distanza_iniziale: { label: Distanza iniziale,    widget: text }
 scheda: [pg_livello, pg_numero]
 relazioni:
 - field: luogo

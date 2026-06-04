@@ -17,16 +17,19 @@ templates:
   default_type: oggetto magico
   target: z.modelli/Oggetto Magico.md
   jinja: reference.md.j2
+# SOTTOTIPI con PROFILO: il `tipo` instrada i campi MECCANICI giusti (già esistenti,
+# letti da renderAttacchi/crea_pg) verso l'item giusto — un'arma mostra danni/padronanza,
+# un'armatura la CA. Non ridefinisce nulla: i `campi` puntano a campi registrati.
 subtypes:
-- arma
-- armatura
-- scudo
-- oggetto meraviglioso
-- strumento
-- oggetto magico
-- veleno
-- tesoro
-- veicolo o cavalcatura
+- { nome: arma,                  descrizione: "Da mischia o a distanza: ciò con cui si combatte. Diventa giocabile in crea_pg.", campi: [danni, proprieta, padronanza, costo, peso] }
+- { nome: armatura,              descrizione: "Protezione indossata: dà Classe Armatura, a volte con requisiti o svantaggi.", campi: [classe_armatura, proprieta, costo, peso] }
+- { nome: scudo,                 descrizione: "Difesa impugnata: bonus alla CA.", campi: [classe_armatura, costo, peso] }
+- { nome: oggetto meraviglioso,  descrizione: "Oggetto magico non-arma/armatura: anelli, mantelli, bacchette, amuleti.", campi: [rarita, sintonia, cariche, ricarica] }
+- { nome: strumento,             descrizione: "Attrezzo da competenza: arnesi da scasso, kit, strumenti musicali o d'artigiano.", campi: [costo, peso] }
+- { nome: oggetto magico,        descrizione: "Manufatto intriso di magia: porta rarità, sintonia ed eventuali cariche.", campi: [rarita, sintonia, cariche, ricarica] }
+- { nome: veleno,                descrizione: "Sostanza nociva: per contatto, ingestione, inalazione o sulla lama.", campi: [costo] }
+- { nome: tesoro,                descrizione: "Ricchezza in sé: monete, gemme, oggetti d'arte, bottino.", campi: [costo, peso] }
+- { nome: veicolo o cavalcatura, descrizione: "Mezzo di trasporto: cavallo, carro, nave, costrutto da viaggio.", campi: [costo, peso] }
 fields:
   cariche: { label: Cariche, widget: text }
   ricarica: { label: Ricarica, widget: text }

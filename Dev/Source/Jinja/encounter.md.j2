@@ -11,6 +11,9 @@
 ````tabs
 --- 🎬 Scena
 
+{% if core.get('categories', {}).get(template.category, {}).get('subtype_profiles') %}
+{{ m.tipo_profilo() }}
+{% endif %}
 {{ m.tavolo(template.category) }}
 {{ m.tiri() }}
 
