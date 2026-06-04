@@ -26,13 +26,6 @@
 > **onirica** — Nata dall'inconscio collettivo, dai sogni cosmici o da archetipi inconsci.
 
 ````tabs
---- 📋 Scheda
-
-> [!abstract] Scheda
-> Dominio: `INPUT[text:dominio]`
-> Allineamento: `INPUT[allineamento][:allineamento]`
-> Simbolo: `INPUT[text:simbolo]`
-
 --- 📖 Lore
 
 > [!question]- 💡 Spunti per definirlo
@@ -40,8 +33,10 @@
 > - Come si manifesta nel mondo? (miracoli, segni, silenzi)
 > - Chi la odia, e perché?
 
-> [!note]- Descrizione
-> Cosa è, com'è, perché conta al tavolo.
+> [!abstract] Scheda
+> Dominio: `INPUT[text:dominio]`
+> Allineamento: `INPUT[allineamento][:allineamento]`
+> Simbolo: `INPUT[text:simbolo]`
 
 > [!note] Dogmi
 > `INPUT[textArea:dogmi]`
@@ -50,6 +45,40 @@
 > `INPUT[textArea:culto]`
 
 
+--- 🎲 Al tavolo
+
+> [!tavolo] Uso al tavolo
+> `INPUT[testo_area][:uso_al_tavolo]`
+
+> [!gancio]- Gancio
+> `INPUT[testo_area][:gancio]`
+
+> [!warning] Pressione — `VIEW[{pressione} >= 7 ? "🔴 Crisi" : ({pressione} >= 4 ? "🟠 Tensione" : "🟢 Calma")]`
+> Pressione: `INPUT[pressione][:pressione]`
+>
+> Prossima mossa: `INPUT[text:prossima_mossa]`
+
+**⏳ Fronte** — clock `INPUT[number:clock]` / `INPUT[clock_dim][:clock_dim]` segmenti
+```js-engine
+return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderClock");
+```
+
+```js-engine
+return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderPressioni");
+```
+
+> [!warning]- Conseguenza (quando il clock è pieno)
+> `INPUT[testo_area][:conseguenza]`
+>
+> Bersaglio: `INPUT[legame][:conseguenza_su]`
+
+> [!tip] Avanza / scatena
+> Una spinta dal grafo o una mossa? `BUTTON[avanza-fronte]` (clock +1).
+> Clock pieno? `BUTTON[scatena-conseguenza]` — crea l'evento-conseguenza collegato e azzera il clock.
+> [!info]- 👁 Condivisione coi giocatori
+> Quando questa nota entra nel **sito dei giocatori** (`npm run site -- --reveal <livello>`): `INPUT[rivelazione][:rivelazione]`
+>
+> *pubblico* = noto da subito · *incontrato* = quando i PG lo scoprono · *segreto* = colpo di scena. Per non condividerla **mai**, imposta `visibilita: dm`.
 --- 📊 Carattere
 
 > [!abstract] Carattere
@@ -118,6 +147,11 @@ return (await engine.importJs("z.automazioni/boot.mjs")).radar(engine, app, "div
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderCoerenza");
 ```
 
+--- 🕰 Cronologia
+
+```js-engine
+return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderTappe");
+```
 --- 🔗 Collegamenti
 
 > [!example] Relazioni
@@ -131,6 +165,8 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > Mondo: `INPUT[mondo][:mondo]`
 >
 > Connessioni: `INPUT[connessioni][:connessioni]`
+>
+> Sessioni: `INPUT[sessioni][:sessioni]`
 
 > [!tip] Collega
 > Aggiungi una relazione (anche dopo la creazione): `BUTTON[collega-nota]`
@@ -143,4 +179,9 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderEntityPanel");
 ```
+
+> [!tip] Azioni
+> `BUTTON[marca-canonico]`
+>
+> `BUTTON[archivia-nota]`
 ````

@@ -99,6 +99,7 @@ tappe_categorie:
   - cultura
   - fazione
   - culto
+  - divinita   # una divinità evolve attraverso le epoche (venerata, dimenticata, sepolta, risvegliata)
 
 # Categorie dove il MOTORE DI COERENZA (views.renderCoerenza) ha senso: hanno
 # relazioni di RIVALITÀ/ALLEANZA same-type (assi condivisi per costruzione), quindi

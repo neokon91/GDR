@@ -10,7 +10,10 @@ templates:
   title: Divinità
   default_type: divinità maggiore
   target: z.modelli/Divinita.md
-  jinja: reference.md.j2
+  # Template di default (_entity_base): una divinità è un attore cosmico che PREME sul
+  # tavolo (Fronte: clock di risveglio/desiderio — vedi grafo teologico) come le altre
+  # entità cosmiche (piano/dominio/legge_fondamentale). La lean reference.md.j2 le negava
+  # la tab «Al tavolo»; il default le dà superficie giocabile + Cronologia (tappe_categorie).
 subtypes:
 - divinità maggiore
 - divinità minore

@@ -184,6 +184,42 @@ HIDE_FOLDERS_SNIPPET = """/* GDR — generato. Snippet del vault (nascondi z.* +
 .block-language-tabs .tabs-header { gap: 0.2em; }
 /* Callout di classificazione (famiglia): discreto, non compete con l'infobox. */
 .callout[data-callout="info"] { font-size: var(--font-ui-small); }
+
+/* === Ritocchi vetrina: callout differenzianti + tabelle dashboard ============ */
+
+/* «Uso al tavolo» (la superficie giocabile = IL differenziatore): look da
+   scheda-azione — sfondo + bordo-sinistro accentato, salta all'occhio. */
+.callout[data-callout="tavolo"] {
+  background: var(--background-secondary);
+  border-left: 4px solid var(--callout-color, var(--color-red));
+  border-radius: 6px;
+}
+
+/* Segreti (lettura DM): bordo tratteggiato = "non spoilerare". */
+.callout[data-callout="segreto"] {
+  border-left: 4px dashed var(--callout-color, var(--color-purple));
+  background: var(--background-secondary);
+}
+
+/* Rivelazioni progressive (verità che emergono): bordo-sinistro accentato. */
+.callout[data-callout="rivela"] {
+  border-left: 4px solid var(--callout-color, var(--color-cyan));
+}
+
+/* Tabelle delle dashboard (Dataview/standalone): header marcato + zebra leggera +
+   numeri tabulari → leggibili a colpo d'occhio (sono ciò che si vede di più all'inizio). */
+.markdown-rendered table { font-variant-numeric: tabular-nums; }
+.markdown-rendered table thead th {
+  background: var(--background-secondary-alt);
+  font-weight: 600;
+}
+.markdown-rendered .table-view-table tbody tr:nth-child(2n),
+.block-language-dataview tbody tr:nth-child(2n) {
+  background: var(--background-secondary);
+}
+/* L'infobox resta una scheda-fatti pulita (niente header/zebra): reset locale. */
+.callout[data-callout="infobox"] thead th { background: none; font-weight: inherit; }
+.callout[data-callout="infobox"] tbody tr { background: none; }
 """
 
 
