@@ -19,6 +19,7 @@ La cornice che tiene tutto: genere, tono, e la tensione di fondo.
 > - Qual è la tensione centrale che muove tutto? (chi vuole cosa, e perché proprio ora)
 > - Cosa rende questo mondo diverso da una terra qualunque?
 > - Genere e tono in una frase (dark fantasy di frontiera, eroico, weird…).
+
 > [!example] Crea
 > `BUTTON[crea-mondo]`
 
@@ -28,6 +29,7 @@ Il primo posto che i personaggi vedranno: dagli un problema, non solo un nome.
 > - Cosa c'è di sbagliato o di teso qui, proprio adesso?
 > - Chi lo controlla — e chi vorrebbe strapparglielo?
 > - Cosa sta per succedere? (la pressione, la prossima mossa)
+
 > [!example] Crea
 > `BUTTON[crea-luogo]`
 
@@ -37,6 +39,7 @@ Un mondo si muove quando qualcuno vuole qualcosa che non può avere senza scontr
 > - Cosa vuole davvero, e cosa è disposta a fare per averlo?
 > - Chi le si oppone? Con chi è alleata per pura convenienza?
 > - Qual è la sua debolezza, o il segreto che non deve uscire?
+
 > [!example] Crea
 > `BUTTON[crea-fazione]`
 

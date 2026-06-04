@@ -22,6 +22,7 @@ La cornice che tiene tutto: genere, tono, e la tensione di fondo.
 > [!question] Spunti
 {% for s in core.get('spunti', {}).get('mondo', []) %}> - {{ s }}
 {% endfor %}
+
 > [!example] Crea
 > `BUTTON[crea-mondo]`
 
@@ -30,6 +31,7 @@ Il primo posto che i personaggi vedranno: dagli un problema, non solo un nome.
 > [!question] Spunti
 {% for s in core.get('spunti', {}).get('luogo', []) %}> - {{ s }}
 {% endfor %}
+
 > [!example] Crea
 > `BUTTON[crea-luogo]`
 
@@ -38,6 +40,7 @@ Un mondo si muove quando qualcuno vuole qualcosa che non può avere senza scontr
 > [!question] Spunti
 {% for s in core.get('spunti', {}).get('fazione', []) %}> - {{ s }}
 {% endfor %}
+
 > [!example] Crea
 > `BUTTON[crea-fazione]`
 
