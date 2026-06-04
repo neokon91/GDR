@@ -52,7 +52,8 @@ Pronto per **beta chiuso**. Per la beta aperta restano i punti PM qui sotto.
   `crea-luogo` e il link al cruscotto Fronti; read-only, `visibilita: dm`, vive/muore con
   l'esempio); **on-ramp Home** (6 tipi primari, metafisica opt-in; il tip apre «Inizia da qui»);
   LEGGIMI di distribuzione; **sito dei giocatori** statico spoiler-free
-  (`npm run site`, `visibilita: dm`).
+  (`npm run site`, `visibilita: dm`) con **rivelazione progressiva** (`rivelazione`
+  pubblico/incontrato/segreto + `--reveal`): il portale svela per gradi.
 - **Solidità** — 265 test (snapshot + e2e/headless JS + rules-engine), validazione del contratto
   YAML↔wizard, anti-drift byte-equal (`_comparators.js`/`_homebrew_bridge.js`), merge config
   `.obsidian` non distruttivo, mondo-esempio rigenerato a ogni build. Copertura headless dei
@@ -68,9 +69,14 @@ Pronto per **beta chiuso**. Per la beta aperta restano i punti PM qui sotto.
 - **Distribuzione & scoperta** — GitHub release (versioning + issue per feedback) e/o itch.io
   (vetrina + name-your-price). *Scelta utente: per ora resta **free + ZIP manuale** finché si
   sviluppa.* Posizionamento/pricing da definire quando si apre.
-- **Condivisione ai giocatori — evoluzione** — il sito esiste; approfondire con **rivelazione
-  progressiva / livelli di visibilità** (estende `visibilita`, modello Kanka): una vista
-  "occhi del giocatore" che svela per gradi.
+- ✅ **Condivisione ai giocatori — rivelazione progressiva** — campo `rivelazione`
+  (pubblico<incontrato<segreto), ortogonale a `visibilita` (il «mai»); il build del sito
+  sceglie il livello (`npm run site -- --reveal <tier>`) e include una nota se il suo tier
+  ≤ livello → il portale «svela per gradi» man mano che la campagna procede (modello Kanka).
+  Selettore 👁 *Condivisione* nel tab *Al tavolo*; l'indice mostra il livello e quante voci
+  restano. Demo: Valdombra (La Voragine=incontrato, Vorth=segreto). (FATTO)
+  *Resta*: rivelazione **per-sezione** (oltre il callout `segreto` binario) e una
+  **anteprima «occhi del giocatore» in-vault** (oggi l'anteprima è il sito stesso).
 - **Onboarding guidato** — ✅ il **momento-aha** è coperto dalla nota «Inizia da qui» (UX-1).
   Resta il *tour interattivo* più profondo: wizard di worldbuilding a tappe con spunti
   suggeriti (accoglienza alla World Anvil) — opzionale, dopo il primo segnale dagli utenti.

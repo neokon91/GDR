@@ -11,6 +11,7 @@
 <main class="index">
   <h1>Guida dei giocatori</h1>
   <p class="lede">Cosa i personaggi possono sapere del mondo. {{ total }} voci · sola lettura · senza spoiler.</p>
+  {% if reveal %}<p class="reveal">Rivelazione: <strong>{{ reveal }}</strong>{% if da_rivelare %} · {{ da_rivelare }} {{ "voce ancora da rivelare" if da_rivelare == 1 else "voci ancora da rivelare" }}{% endif %}.</p>{% endif %}
   {% if not worlds %}
   <p class="empty">Nessuna voce pubblica ancora. Crea note di worldbuilding nel vault e rilancia l'esportazione.</p>
   {% endif %}
@@ -26,6 +27,6 @@
   </section>
   {% endfor %}
 </main>
-<footer class="foot">Generato dal vault · i contenuti col tag «segreto» e gli strumenti del DM restano esclusi</footer>
+<footer class="foot">Generato dal vault · segreti e strumenti del DM esclusi · le voci si svelano via via che la campagna procede</footer>
 </body>
 </html>

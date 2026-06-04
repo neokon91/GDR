@@ -2488,3 +2488,151 @@ def test_build_site_no_spoiler_leak(tmp_path):
         assert spoiler not in blob, spoiler
     assert "dice:" not in blob and "Tabella DM" not in blob  # i tiri Dice Roller (DM) non trapelano (P3)
     assert (out / "index.html").is_file() and (out / "site.css").is_file()
+
+
+# --- Mappa mondo-esempio + asset sito ---------------------------------------
+def test_example_world_map_embed():
+    """Il nodo «Mercato di Sale» espone la mappa: campo `mappa` in frontmatter
+    (engine-faithful, lo legge views.renderMap) ed embed `![[..]]` nel corpo
+    (rende sempre, senza plugin)."""
+    man = render.load_example_manifests()[0]
+    notes = render.example_world_notes(man, CORE)
+    txt = next(t for r, t in notes if r.endswith("Mercato di Sale.md"))
+    assert "mappa: '[[mercato_di_sale.svg]]'" in txt
+    assert "## Mappa" in txt and "![[mercato_di_sale.svg]]" in txt
+
+
+def test_example_media_assets_exist():
+    """Anti-link-morti: ogni asset-immagine referenziato dai manifest (mappa/
+    ritratto/banner) esiste davvero sotto Dev/Source/esempio/Media/."""
+    media_dir = render.ESEMPIO_DIR / "Media"
+    missing = []
+    for man in render.load_example_manifests():
+        for note in man.get("note", []) or []:
+            for key in ("mappa", "ritratto", "banner"):
+                val = (note.get("fm", {}) or {}).get(key)
+                if not val:
+                    continue
+                name = str(val).strip().lstrip("[").rstrip("]").split("|")[0].strip()
+                if Path(name).suffix.lower() in build_site._IMG_EXT:
+                    if not (media_dir / Path(name).name).is_file():
+                        missing.append((man["mondo"], note.get("nome"), name))
+    assert not missing, f"asset mancanti in {media_dir}: {missing}"
+
+
+def test_site_image_embed_preserves_underscores():
+    """L'embed-immagine diventa `<img>` con la src INTATTA (regressione: il filtro
+    corsivo mangiava gli `_` dentro src/alt). Gli embed di NOTE restano inerti."""
+    resolved = {}
+
+    def image(name):
+        if Path(name).suffix.lower() in build_site._IMG_EXT:
+            resolved[name] = f"media/{Path(name).name}"
+            return resolved[name]
+        return None
+
+    md = "Vedi ![[mappa_del_sale.svg|Mappa]] e ![[Una Nota]] qui."
+    html = build_site.markdown_to_html(md, lambda n: None, image)
+    assert '<img src="media/mappa_del_sale.svg" alt="Mappa" loading="lazy">' in html
+    assert "<em>" not in html and "media/mappa<em>" not in html  # underscore intatti
+    assert "Una Nota" not in html  # embed di nota: inerte, sparisce
+    assert resolved == {"mappa_del_sale.svg": "media/mappa_del_sale.svg"}
+
+
+def test_build_site_copies_referenced_assets(tmp_path):
+    """Integrazione: mappa embeddata nel corpo e ritratto in frontmatter →
+    <img src="media/..."> nelle pagine e i file copiati in <out>/media/."""
+    vault = tmp_path / "vault"
+    media = vault / "Media"
+    media.mkdir(parents=True)
+    (media / "mappa_del_borgo.png").write_bytes(b"\x89PNG\r\n\x1a\n" + b"0" * 16)
+    (media / "sigillo.png").write_bytes(b"\x89PNG\r\n\x1a\n" + b"0" * 16)
+    nd = vault / "Mondi" / "Mondo Y"
+    nd.mkdir(parents=True)
+    (nd / "Borgo.md").write_text(
+        "---\nnome: Borgo\ncategoria: luogo\ntipo: insediamento\nmondo: '[[Mondo Y]]'\n"
+        "ritratto: '[[sigillo.png]]'\n---\n\n# Borgo\n\nUn borgo fluviale.\n\n"
+        "## Mappa\n\n![[mappa_del_borgo.png]]\n", encoding="utf-8")
+    out = tmp_path / "site"
+    n = build_site.build_site(CORE, vault, out)
+    assert n == 1
+    html = (out / "borgo.html").read_text(encoding="utf-8")
+    assert '<img src="media/mappa_del_borgo.png"' in html      # mappa dal corpo
+    assert 'class="portrait" src="media/sigillo.png"' in html  # ritratto da frontmatter
+    assert (out / "media" / "mappa_del_borgo.png").is_file()
+    assert (out / "media" / "sigillo.png").is_file()
+
+
+def test_example_world_carattere_radar():
+    """Le fazioni del mondo-esempio espongono il «Carattere»: callout read-only con
+    `valore · etichetta` per asse (dalle etichette di core.assi_tematici) + il radar
+    js-engine. Sul sito-giocatori il blocco intero (callout + fence) viene rimosso."""
+    man = render.load_example_manifests()[0]
+    notes = render.example_world_notes(man, CORE)
+    txt = next(t for r, t in notes if r.endswith("La Setta della Voragine.md"))
+    assert "> [!abstract] Carattere" in txt
+    assert "**Coesione** — 5 · Organico" in txt        # etichetta fedele alla lore
+    assert '.radar(engine, app, "fazione", component)' in txt
+    assert "```js-engine" in txt
+    # Sul sito: callout GM + fence dinamico spariscono (niente assi/etichette/radar).
+    _, body = build_site.parse_note(txt)
+    stripped = build_site.strip_body(body)
+    for leak in ["Carattere", "Organico", "js-engine", "radar(", "Esemplare"]:
+        assert leak not in stripped, leak
+
+
+def test_example_carattere_block_skips_thin_categories():
+    """Il blocco Carattere esce solo con >=3 assi valorizzati: una categoria senza
+    assi (o con <3) non emette callout né radar (no filler sui luoghi ecc.)."""
+    assert render.example_carattere_block({}, "luogo", CORE) == []
+    assert render.example_carattere_block({"struttura": 4, "scopo": 5}, "fazione", CORE) == []
+    block = render.example_carattere_block(
+        {"struttura": 4, "scopo": 5, "legalita": 1}, "fazione", CORE)
+    assert block and any("```js-engine" in line for line in block)
+
+
+# --- Rivelazione progressiva (sito-giocatori v2) ----------------------------
+def test_reveal_rank_helpers():
+    """Tier ordinati: nota senza/ignoto → pubblico(0); build `tutto` → max."""
+    assert build_site.note_reveal_rank({}) == 0
+    assert build_site.note_reveal_rank({"rivelazione": "segreto"}) == 2
+    assert build_site.note_reveal_rank({"rivelazione": "boh"}) == 0   # ignoto → pubblico
+    assert build_site.build_reveal_rank("pubblico") == 0
+    assert build_site.build_reveal_rank("incontrato") == 1
+    assert build_site.build_reveal_rank("tutto") == 2
+    assert build_site.build_reveal_rank(None) == 0
+
+
+def test_site_reveal_gating(tmp_path):
+    """Il gate progressivo include una nota se il suo tier <= livello del build;
+    le note non taggate (pubblico) escono sempre (retro-compatibile)."""
+    nd = tmp_path / "vault" / "Mondi" / "Mondo Z"
+    nd.mkdir(parents=True)
+    notes = {"Piazza": "", "Cripta": "incontrato", "Verita": "segreto"}
+    for nome, tier in notes.items():
+        riv = f"rivelazione: {tier}\n" if tier else ""
+        (nd / f"{nome}.md").write_text(
+            f"---\nnome: {nome}\ncategoria: luogo\nmondo: '[[Mondo Z]]'\n{riv}---\n\nProsa di {nome}.\n",
+            encoding="utf-8")
+    out = tmp_path / "site"
+    # pubblico (default): solo Piazza; 2 da rivelare.
+    assert build_site.build_site(CORE, tmp_path / "vault", out, reveal="pubblico") == 1
+    assert "2 voci ancora da rivelare" in (out / "index.html").read_text(encoding="utf-8")
+    assert (out / "piazza.html").is_file() and not (out / "cripta.html").is_file()
+    # incontrato: Piazza + Cripta; Verita ancora no.
+    assert build_site.build_site(CORE, tmp_path / "vault", out, reveal="incontrato") == 2
+    assert (out / "cripta.html").is_file() and not (out / "verita.html").is_file()
+    # tutto: tutte e tre.
+    assert build_site.build_site(CORE, tmp_path / "vault", out, reveal="tutto") == 3
+    assert (out / "verita.html").is_file()
+
+
+def test_example_world_reveal_tiers():
+    """Il mondo-esempio dimostra i tier: Vorth (verità nascosta) = segreto, La
+    Voragine (scoperta scendendo) = incontrato — i campi sono nel frontmatter."""
+    man = render.load_example_manifests()[0]
+    notes = dict(render.example_world_notes(man, CORE))
+    vorth = next(t for r, t in notes.items() if r.endswith("Vorth il Sepolto.md"))
+    voragine = next(t for r, t in notes.items() if r.endswith("La Voragine.md"))
+    assert "rivelazione: segreto" in vorth
+    assert "rivelazione: incontrato" in voragine

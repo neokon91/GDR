@@ -30,6 +30,11 @@ fields:
   uso_al_tavolo:  { label: Uso al tavolo,        widget: testo_area }
   gancio:         { label: Gancio,               widget: testo_area }
   player_safe:    { label: Versione player-safe, widget: text }
+  # Rivelazione progressiva (sito-giocatori): QUANDO la nota entra nel portale dei
+  # giocatori. Asse temporale, ortogonale a `visibilita` (che è il «mai»: dm/meta).
+  # pubblico < incontrato < segreto; il build del sito sceglie il livello (`--reveal`)
+  # e include una nota se il suo tier <= livello. Default (assente) = pubblico.
+  rivelazione:    { label: Rivelazione, widget: rivelazione }
   obiettivo:      { label: Obiettivo,            widget: text }
   apertura:       { label: Apertura,             widget: text }
   scena_corrente: { label: Scena corrente,       widget: text }

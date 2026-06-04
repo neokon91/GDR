@@ -198,6 +198,10 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > [!tip] Avanza / scatena
 > Una spinta dal grafo o una mossa? `BUTTON[avanza-fronte]` (clock +1).
 > Clock pieno? `BUTTON[scatena-conseguenza]` — crea l'evento-conseguenza collegato e azzera il clock.
+> [!info]- 👁 Condivisione coi giocatori
+> Quando questa nota entra nel **sito dei giocatori** (`npm run site -- --reveal <livello>`): `INPUT[rivelazione][:rivelazione]`
+>
+> *pubblico* = noto da subito · *incontrato* = quando i PG lo scoprono · *segreto* = colpo di scena. Per non condividerla **mai**, imposta `visibilita: dm`.
 
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderAttacchi");

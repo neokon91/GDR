@@ -42,6 +42,7 @@ plugins:
     name: Folder Notes
 metabind_inputs:
   stato: INPUT[inlineSelect(option(bozza), option(pronto), option(in gioco), option(giocata), option(archiviata))]
+  rivelazione: INPUT[inlineSelect(option(pubblico), option(incontrato), option(segreto))]
   mondo: INPUT[suggester(optionQuery("Mondi"), useLinks(partial), allowOther)]
   connessioni: INPUT[inlineListSuggester(optionQuery("Mondi"), useLinks(partial), allowOther)]
   sessioni: INPUT[inlineListSuggester(optionQuery("Mondi/Sessioni"), useLinks(partial), allowOther)]

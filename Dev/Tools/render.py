@@ -18,6 +18,7 @@ import yaml
 from jinja2 import Environment, FileSystemLoader, StrictUndefined
 
 from common import (  # noqa: F401 (re-export per i test/usi storici)
+    ESEMPIO_DIR,
     GENERATED_DIRS,
     GENERATED_NOTES,
     HIDDEN_DIRS,
@@ -919,10 +920,42 @@ def pressione_label(pressione: Any) -> str:
     return "🔴 Crisi" if p >= 7 else "🟠 Tensione" if p >= 4 else "🟢 Calma"
 
 
-def example_note_text(note: dict[str, Any], world: str) -> str:
+def example_carattere_block(fm: dict[str, Any], category: str, core: dict[str, Any]) -> list[str]:
+    """Blocco «Carattere» degli assi tematici per una nota-esempio: un callout
+    read-only con `valore · etichetta` per ogni asse valorizzato nel frontmatter
+    (dalle etichette in core.assi_tematici) + il radar (js-engine, come la macro
+    grafico_assi: rende dal frontmatter con JS Engine). Vuoto se la categoria non
+    ha assi o ne ha <3 valorizzati. Sul sito-giocatori callout e fence js-engine
+    sono rimossi (il Carattere è lettura da DM)."""
+    assi = (core.get("assi_tematici", {}) or {}).get(category) or []
+    righe: list[str] = []
+    for a in assi:
+        val = fm.get(a["id"])
+        if val is None:
+            continue
+        valori = a.get("valori", {}) or {}
+        voce = valori.get(val)
+        if voce is None:
+            try:
+                voce = valori.get(int(val))
+            except (TypeError, ValueError):
+                voce = None
+        etichetta = (voce or {}).get("etichetta", "")
+        righe.append(f"> **{a.get('nome', a['id'])}** — {val} · {etichetta}")
+    if len(righe) < 3:
+        return []
+    return ["## Carattere", "", "> [!abstract] Carattere", *righe, "",
+            "```js-engine",
+            f'return (await engine.importJs("z.automazioni/boot.mjs"))'
+            f'.radar(engine, app, "{category}", component);',
+            "```", ""]
+
+
+def example_note_text(note: dict[str, Any], world: str, core: dict[str, Any]) -> str:
     """Una nota del mondo-esempio: frontmatter pre-popolato + corpo READ-ONLY in
     Markdown/Dataview puro (infobox, lore, superficie giocabile, collegamenti).
-    Niente Meta Bind/statblock: rende sempre. Le dashboard la trovano per `categoria`."""
+    Assi tematici → callout Carattere + radar (js-engine). Le dashboard la trovano
+    per `categoria`."""
     fm: dict[str, Any] = {
         "nome": note["nome"],
         "categoria": note["categoria"],
@@ -951,6 +984,21 @@ def example_note_text(note: dict[str, Any], world: str) -> str:
     lines.append("")
     if note.get("lore"):
         lines += [note["lore"].strip(), ""]
+    # Mappa (campo `mappa`): embed dell'immagine collegata, come views.renderMap
+    # (`![[..]]` rende SEMPRE, senza plugin). L'asset vive in Media/ (copiato a build
+    # da copy_example_media). Sul sito-giocatori l'embed diventa `<img>` (zoommap è
+    # solo-Obsidian). Target derivato dal wikilink del campo.
+    mappa = fm.get("mappa")
+    if mappa:
+        target = str(mappa).strip()
+        if target.startswith("[["):
+            target = target[2:].split("]]", 1)[0]
+        target = target.split("|", 1)[0].strip()
+        if target:
+            lines += ["## Mappa", "", f"![[{target}]]", ""]
+    # Carattere (assi tematici): callout read-only + radar (js-engine), come la
+    # macro carattere/grafico_assi. Solo per le categorie con assi valorizzati.
+    lines += example_carattere_block(fm, note.get("categoria", ""), core)
     # Superficie giocabile (IL differenziatore), come la macro tavolo().
     if note.get("uso_al_tavolo"):
         lines += [f"> [!tavolo] Uso al tavolo\n> {note['uso_al_tavolo'].strip()}", ""]
@@ -995,7 +1043,7 @@ def example_world_notes(manifest: dict[str, Any], core: dict[str, Any]) -> list[
     for note in manifest.get("note", []) or []:
         if note.get("categoria") not in categories or not note.get("nome"):
             continue
-        out.append((f"{folder}/{note['nome']}.md", example_note_text(note, world)))
+        out.append((f"{folder}/{note['nome']}.md", example_note_text(note, world, core)))
     return out
 
 
@@ -1053,6 +1101,23 @@ def onboarding_note_text(manifest: dict[str, Any]) -> str:
     return "\n".join(lines)
 
 
+def copy_example_media() -> int:
+    """Copia gli asset (mappe/immagini) dei mondi-esempio da Dev/Source/esempio/Media/
+    nella cartella allegati del vault (`Media/`). Gli embed `![[file]]` delle note
+    li risolvono per nome. Ritorna il n. di file copiati."""
+    src_dir = ESEMPIO_DIR / "Media"
+    if not src_dir.is_dir():
+        return 0
+    dest_dir = VAULT / MEDIA_FOLDER
+    dest_dir.mkdir(parents=True, exist_ok=True)
+    copied = 0
+    for f in sorted(src_dir.iterdir()):
+        if f.is_file() and not f.name.startswith("."):
+            shutil.copy2(f, dest_dir / f.name)
+            copied += 1
+    return copied
+
+
 def write_example_world(core: dict[str, Any]) -> int:
     """Genera i mondi-esempio (Dev/Source/esempio/*.yaml) in cartelle riservate
     `Mondi/_Esempio — <Mondo>/`. Riscrittura pulita: azzera SOLO la propria cartella
@@ -1069,6 +1134,10 @@ def write_example_world(core: dict[str, Any]) -> int:
         # wedge nei primi minuti (lore → superficie giocabile calcolata).
         write_text(folder / "Inizia da qui.md", onboarding_note_text(manifest))
         written += 1
+    # Asset condivisi (mappe/immagini) delle note-esempio nella cartella allegati.
+    media = copy_example_media()
+    if media:
+        print(f"Mondo-esempio: {media} asset copiati in {MEDIA_FOLDER}/.")
     return written
 
 
@@ -1118,6 +1187,9 @@ def main() -> int:
     parser.add_argument("--clean", action="store_true", help="Rimuove solo gli artefatti generati (non i contenuti/plugin).")
     parser.add_argument("--check", action="store_true", help="Valida YAML/Jinja senza scrivere output.")
     parser.add_argument("--site", action="store_true", help="Genera il sito statico dei giocatori (spoiler-free, read-only) in dist/GDR-site dal vault.")
+    parser.add_argument("--reveal", choices=["pubblico", "incontrato", "segreto", "tutto"],
+                        default="pubblico",
+                        help="Livello di rivelazione del sito-giocatori: include le note col campo `rivelazione` fino a quel tier (default: pubblico).")
     args = parser.parse_args()
 
     if args.clean:
@@ -1130,8 +1202,9 @@ def main() -> int:
         if not (VAULT / "Mondi").is_dir():
             print("Nessun contenuto in Mondi/: esegui prima `npm run build`.")
             return 1
-        pages = build_site(load_core(), VAULT, SITE_OUT)
-        print(f"Sito giocatori: {pages} pagine in {SITE_OUT.relative_to(ROOT)}/ — apri index.html o pubblica la cartella.")
+        pages = build_site(load_core(), VAULT, SITE_OUT, reveal=args.reveal)
+        print(f"Sito giocatori: {pages} pagine in {SITE_OUT.relative_to(ROOT)}/ "
+              f"(rivelazione: {args.reveal}) — apri index.html o pubblica la cartella.")
         return 0
 
     clean()

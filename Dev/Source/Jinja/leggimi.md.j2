@@ -242,3 +242,24 @@ usare, queste sono le distinzioni che contano:
 
 Tutte le categorie hanno il tab *Collegamenti* con relazioni *tipizzate*: usalo per
 intrecciarle (es. un Regno → le sue Istituzioni e Fazioni; una Divinità → i suoi Culti).
+
+## 12. Condividere col gruppo — il sito dei giocatori
+Genera un **sito statico, in sola lettura e senza spoiler** da dare ai giocatori:
+```
+npm run site                      # solo ciò che è noto da subito
+npm run site -- --reveal incontrato   # + ciò che i PG hanno scoperto
+npm run site -- --reveal segreto      # + i colpi di scena già svelati
+```
+Il sito esce in `dist/GDR-site/` (apri `index.html` o pubblica la cartella). Restano
+**sempre fuori**: le note `visibilita: dm`, gli strumenti del DM (incontri, tiri `dice:`)
+e i callout *Segreto*.
+
+**Rivelazione progressiva** — ogni nota ha, nel tab *Al tavolo*, un selettore 👁 *Condivisione*:
+- **pubblico** — noto ai personaggi da subito (default);
+- **incontrato** — compare quando i PG lo scoprono;
+- **segreto** — un colpo di scena, da svelare al momento giusto.
+
+Costruisci il sito al **livello a cui è arrivata la campagna** (`--reveal`): una nota entra
+nel portale solo se il suo tier è ≤ il livello scelto. Man mano che i giocatori scoprono il
+mondo, alzi il livello e rigeneri. Per non condividere **mai** una nota (appunti, meta),
+usa `visibilita: dm`.

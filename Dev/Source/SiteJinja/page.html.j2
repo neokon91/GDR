@@ -14,6 +14,7 @@
 </header>
 <main class="note">
   <h1>{{ page.name }}</h1>
+  {% if page.portrait %}<img class="portrait" src="{{ page.portrait }}" alt="{{ page.name }}" loading="lazy">{% endif %}
   {% if page.facts %}
   <table class="facts">
     {% for f in page.facts %}<tr><th>{{ f.label }}</th><td>{{ f.value }}</td></tr>{% endfor %}

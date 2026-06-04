@@ -97,6 +97,8 @@ note:
     categoria: luogo
     tipo: dungeon
     fm:
+      # Rivelazione progressiva: i giocatori la scoprono scendendo sotto Forte Cenere.
+      rivelazione: incontrato
       regione: "[[Le Marche di Valdombra]]"
       clima: "nessuno (sottoterra)"
       coord: "51, 50"
@@ -127,6 +129,7 @@ note:
       clima: temperato
       popolazione: "800"
       coord: "80, 49"
+      mappa: "[[mercato_di_sale.svg]]"
       confina_con: ["[[Bosco Sussurrante]]"]
       produce: ["[[Sale]]"]
       rotta_con: ["[[Forte Cenere]]"]
@@ -174,6 +177,16 @@ note:
       rivali: ["[[I Corvi Cinerei]]", "[[La Setta della Voragine]]"]
       portata: regionale
       motto: "Nessuna cenere resti fredda."
+      # Assi tematici (radar Carattere): custodi legali, difensivi, testardi.
+      struttura: 4
+      scopo: 3
+      metodo_operativo: 5
+      legalita: 4
+      etica_conflitto: 2
+      relazione_potere: 3
+      coesione: 4
+      reazione_fallimento: 2
+      integrita: 4
     fatti:
       - ["Tipo", "Ordine (guarnigione)"]
       - ["Sede", "[[Forte Cenere]]"]
@@ -197,6 +210,16 @@ note:
       portata: locale
       motto: "Tutto ha un prezzo, anche il silenzio."
       controlla_risorse: ["[[Reliquie della Voragine]]"]
+      # Assi tematici (radar Carattere): banda venale, illegale, opportunista.
+      struttura: 2
+      scopo: 5
+      metodo_operativo: 2
+      legalita: 1
+      etica_conflitto: 3
+      relazione_potere: 2
+      coesione: 2
+      reazione_fallimento: 3
+      integrita: 1
     fatti:
       - ["Tipo", "Banda (contrabbando)"]
       - ["Sede", "[[Mercato di Sale]]"]
@@ -219,6 +242,16 @@ note:
       portata: regionale
       motto: "Il sale conserva ogni cosa, anche i debiti."
       controlla_risorse: ["[[Sale]]"]
+      # Assi tematici (radar Carattere): casata mercantile, legale, manovriera.
+      struttura: 4
+      scopo: 5
+      metodo_operativo: 3
+      legalita: 4
+      etica_conflitto: 1
+      relazione_potere: 4
+      coesione: 4
+      reazione_fallimento: 3
+      integrita: 2
     fatti:
       - ["Tipo", "Casata mercantile"]
       - ["Sede", "[[Mercato di Sale]]"]
@@ -240,6 +273,16 @@ note:
       domini: ["[[Vorth il Sepolto]]"]
       portata: clandestina
       motto: "Ciò che dorme, sognando, ci chiama."
+      # Assi tematici (radar Carattere): culto fanatico, occulto, mutaforma.
+      struttura: 3
+      scopo: 1
+      metodo_operativo: 1
+      legalita: 1
+      etica_conflitto: 4
+      relazione_potere: 2
+      coesione: 5
+      reazione_fallimento: 5
+      integrita: 5
       clock_dim: 4
       clock: 3
       conseguenza: "Il rito di risveglio si compie: Vorth parla per bocca dei suoi profeti e la Voragine si apre dall'interno."
@@ -484,6 +527,8 @@ note:
     categoria: divinita
     tipo: divinità minore
     fm:
+      # Rivelazione progressiva: la verità nascosta della campagna — colpo di scena.
+      rivelazione: segreto
       culti: ["[[La Setta della Voragine]]"]
       allineamento: Neutrale Malvagio
       dominio: Oblio, profondità, ciò-che-dorme
