@@ -2814,3 +2814,16 @@ def test_publish_itch_helpers(monkeypatch):
     assert publish_itch.version() == pkg["version"]
     # canali attesi (vault + sito)
     assert {c for c, _ in publish_itch.CHANNELS} == {"vault", "site"}
+
+
+def test_callout_appearance_css_bare_icons():
+    """Aspetto callout in gdr.css: --callout-icon col nome Lucide NUDO (senza
+    'lucide-'), l'unico formato accettato dalla variabile CSS nativa (verificato
+    in-app). L'infobox: solo icona (il colore viene dall'accento-categoria)."""
+    css = render.callout_appearance_css(PLUGINS)
+    assert '.callout[data-callout="tavolo"] {' in css
+    assert "--callout-icon: swords;" in css
+    assert "lucide-" not in css                          # mai il prefisso nella CSS var
+    assert "--callout-color: 201, 64, 64;" in css
+    assert "--callout-icon: scroll-text;" in css         # infobox
+    assert '--callout-color' not in css.split('data-callout="infobox"')[1].split('}')[0]

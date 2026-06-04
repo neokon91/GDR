@@ -179,16 +179,19 @@ folder_icons:
 # Callout GDR custom (Callout Manager): identità visiva delle note. render.py li
 # inietta in callout-manager (callouts.custom). color = "R, G, B"; icon = id lucide.
 # Degradano a callout standard se il plugin non è attivo.
+# icon = nome Lucide SENZA prefisso `lucide-`: è il formato che vuole la variabile
+# CSS nativa `--callout-icon` (verificato in-app). render.py la usa per gdr.css e
+# riaggiunge `lucide-` per Callout Manager (che passa per setIcon).
 callouts:
-  - { id: tavolo,  color: "201, 64, 64",   icon: lucide-swords }
-  - { id: gancio,  color: "191, 130, 42",  icon: lucide-anchor }
-  - { id: segreto, color: "138, 74, 173",  icon: lucide-eye-off }
+  - { id: tavolo,  color: "201, 64, 64",   icon: swords }
+  - { id: gancio,  color: "191, 130, 42",  icon: anchor }
+  - { id: segreto, color: "138, 74, 173",  icon: eye-off }
   # Rivelazione per-sezione (player-facing, gated dal sito): una verità che si
   # svela col procedere della campagna. `[!rivela|<tier>]` (vedi build_site).
-  - { id: rivela,  color: "56, 142, 142",  icon: lucide-eye }
+  - { id: rivela,  color: "56, 142, 142",  icon: eye }
   # Infobox stile wiki (macro identita_card): intestazione d'identità in cima alla
   # nota. Stile pesante in gdr.css; qui solo colore/icona (degrada a callout base).
-  - { id: infobox, color: "90, 110, 140",  icon: lucide-scroll-text }
+  - { id: infobox, color: "90, 110, 140",  icon: scroll-text }
 # Bottoni-azione: 'action' esegue un file Templater su z.modelli/azioni/ (serve
 # anche l'entry in templates.yaml:actions); 'command' lancia un comando di
 # Obsidian (nessuna azione-nota). I bottoni "Crea <Titolo>" sono generati da

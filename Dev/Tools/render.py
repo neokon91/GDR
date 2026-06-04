@@ -281,11 +281,26 @@ def category_accent_css() -> str:
     return "\n".join(lines) + "\n"
 
 
-def write_workspace_chrome(obsidian: Path) -> None:
+def callout_appearance_css(plugins: dict[str, Any]) -> str:
+    """Aspetto dei callout GDR via CSS NATIVO Obsidian: `--callout-icon` (nome Lucide
+    SENZA prefisso, l'unico formato che la variabile accetta) e `--callout-color`.
+    Theme-safe, applicato al render, senza dipendere da Callout Manager. L'infobox
+    prende il colore dall'accento-categoria (--gdr-accent), qui solo l'icona."""
+    lines = ["", "/* Callout GDR: icona + colore nativi (da plugins.yaml:callouts). */"]
+    for c in plugins.get("callouts", []) or []:
+        decls = [f"--callout-icon: {c['icon']};"]
+        if c["id"] != "infobox":
+            decls.append(f"--callout-color: {c['color']};")
+        lines.append(f'.callout[data-callout="{c["id"]}"] {{ {" ".join(decls)} }}')
+    return "\n".join(lines) + "\n"
+
+
+def write_workspace_chrome(obsidian: Path, plugins: dict[str, Any]) -> None:
     """Pulizia dell'esploratore: snippet CSS che nasconde le z.* + esclusione da
     ricerca/grafo/suggerimenti (userIgnoreFilters). Tutto non distruttivo. Il CSS è
-    il base statico + le regole d'accento per-categoria generate (B)."""
-    write_text(obsidian / "snippets" / "gdr.css", HIDE_FOLDERS_SNIPPET + category_accent_css())
+    il base statico + accento per-categoria (B) + aspetto dei callout GDR."""
+    write_text(obsidian / "snippets" / "gdr.css",
+               HIDE_FOLDERS_SNIPPET + category_accent_css() + callout_appearance_css(plugins))
     union_list_key(obsidian / "appearance.json", "enabledCssSnippets", ["gdr"])
     union_list_key(obsidian / "app.json", "userIgnoreFilters", [f"{d}/" for d in HIDDEN_DIRS])
 
@@ -763,7 +778,10 @@ def write_callout_manager(obsidian: Path, plugins: dict[str, Any]) -> None:
         changed = False
         for callout in plugins["callouts"]:
             if callout["id"] not in known:
-                custom.append({"id": callout["id"], "color": callout["color"], "icon": callout["icon"]})
+                # Callout Manager passa l'icona a setIcon → vuole il prefisso `lucide-`
+                # (l'opposto della variabile CSS nativa). Riaggiungilo qui.
+                custom.append({"id": callout["id"], "color": callout["color"],
+                               "icon": f"lucide-{callout['icon']}"})
                 changed = True
         if changed:
             callouts_cfg["custom"] = custom
@@ -901,7 +919,7 @@ def write_obsidian_config(obsidian: Path, core: dict[str, Any], plugins: dict[st
     write_calendarium(obsidian)
     write_bookmarks(obsidian, pages)
     # Pulizia esploratore: nasconde le cartelle z.* + le esclude da ricerca/grafo.
-    write_workspace_chrome(obsidian)
+    write_workspace_chrome(obsidian, plugins)
     # Default core consigliati (proprietà nascoste, plugin core) — config riproducibile.
     write_core_settings(obsidian)
     # Homepage: apre Home all'avvio (solo se non già configurato).
