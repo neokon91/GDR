@@ -17,6 +17,7 @@
 > [[Cronologia|📜 Cronologia]]
 > [[Geografia|🧭 Geografia & confini]]
 > [[Economia|💰 Economia & rotte]]
+> [[Occhi del giocatore|👁 Occhi del giocatore]]
 
 > [!example] Crea
 > `BUTTON[crea-mondo]`

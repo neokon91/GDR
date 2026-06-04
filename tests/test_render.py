@@ -156,7 +156,7 @@ def test_page_snapshot(page):
     assert out == _snapshot(f"page_{page['id']}.md", out)
 
 
-@pytest.mark.parametrize("name", ["home.md.j2", "leggimi.md.j2", "ponte.md.j2", "fronti.md.j2", "rete.md.j2", "economia.md.j2", "geografia.md.j2", "guida_combattimento.md.j2"])
+@pytest.mark.parametrize("name", ["home.md.j2", "leggimi.md.j2", "ponte.md.j2", "fronti.md.j2", "rete.md.j2", "economia.md.j2", "geografia.md.j2", "occhi_giocatore.md.j2", "guida_combattimento.md.j2"])
 def test_root_note_snapshot(name):
     out = _env().get_template(name).render(core=CORE, plugins=PLUGINS, templates=TEMPLATES, pages=PAGES)
     assert out == _snapshot(f"root_{name}.md", out)
@@ -2636,3 +2636,20 @@ def test_example_world_reveal_tiers():
     voragine = next(t for r, t in notes.items() if r.endswith("La Voragine.md"))
     assert "rivelazione: segreto" in vorth
     assert "rivelazione: incontrato" in voragine
+
+
+def test_occhi_giocatore_dashboard():
+    """La dashboard «Occhi del giocatore» raggruppa per tier di rivelazione e
+    rispecchia la logica di build_site (esclude visibilita-DM dai tier condivisi,
+    isola il solo-DM, esclude le categorie-strumento)."""
+    out = _env().get_template("occhi_giocatore.md.j2").render(
+        core=CORE, plugins=PLUGINS, templates=TEMPLATES, pages=PAGES)
+    for header in ("Noto da subito", "Da scoprire", "Colpi di scena", "Solo DM"):
+        assert header in out, header
+    assert 'rivelazione = "incontrato"' in out and 'rivelazione = "segreto"' in out
+    assert '!rivelazione or rivelazione = "pubblico"' in out      # untagged = pubblico
+    # i tier condivisi escludono il solo-DM; il gruppo DM lo isola.
+    assert '!visibilita or !contains(list("dm", "gm", "master", "privato", "segreto")' in out
+    assert 'visibilita and contains(list("dm", "gm", "master", "privato", "segreto")' in out
+    assert 'where !contains(list("sessione", "incontro", "insidia"), categoria)' in out
+    assert "--reveal" in out                                       # rimanda al build
