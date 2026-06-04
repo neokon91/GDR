@@ -9,6 +9,7 @@
 id: albero_evolutivo
 folder: Mondi/Alberi
 order: 38
+gruppo: regole
 templates:
 - id: albero_evolutivo
   title: Albero evolutivo

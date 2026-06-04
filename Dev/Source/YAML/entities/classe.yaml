@@ -5,6 +5,7 @@
 id: classe
 folder: Mondi/Classi
 order: 14
+gruppo: regole
 templates:
 - id: classe
   title: Classe

@@ -5,6 +5,7 @@
 id: specie
 folder: Mondi/Specie
 order: 16
+gruppo: societa
 templates:
 - id: specie
   title: Specie

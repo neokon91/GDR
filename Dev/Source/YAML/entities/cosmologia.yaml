@@ -8,6 +8,7 @@
 id: cosmologia
 folder: Mondi/Cosmologia
 order: 2
+gruppo: cosmo
 templates:
 - id: cosmologia
   title: Cosmologia

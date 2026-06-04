@@ -5,6 +5,7 @@
 id: insidia
 folder: Mondi/Insidie
 order: 13
+gruppo: regole
 templates:
 - id: insidia
   title: Insidia

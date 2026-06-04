@@ -19,17 +19,40 @@
 > [[Economia|💰 Economia & rotte]]
 > [[Occhi del giocatore|👁 Occhi del giocatore]]
 
-> [!example] Crea
+> [!example] 🌍 La cornice
 > `BUTTON[crea-mondo]`
+
+> [!example] 🗺 Geografia & luoghi
 > `BUTTON[crea-luogo]`
+> `BUTTON[crea-bioma]`
+> `BUTTON[crea-ecosistema]`
+> `BUTTON[crea-risorsa]`
+
+> [!example]- 🕰 Tempo & storia
+> `BUTTON[crea-evento]`
+> `BUTTON[crea-epoca]`
+> `BUTTON[crea-mito]`
+> `BUTTON[crea-profezia]`
+
+> [!example] 👥 Popoli & poteri
 > `BUTTON[crea-cultura]`
 > `BUTTON[crea-fazione]`
-> `BUTTON[crea-evento]`
-> `BUTTON[crea-png]`
-
-> [!example]- Altri tipi
-> `BUTTON[crea-cosmologia]`
 > `BUTTON[crea-lingua]`
+> `BUTTON[crea-png]`
+> `BUTTON[crea-specie]`
+> `BUTTON[crea-culto]`
+> `BUTTON[crea-regno]`
+
+> [!example]- 🌌 Cosmo & metafisica
+> `BUTTON[crea-cosmologia]`
+> `BUTTON[crea-divinita]`
+> `BUTTON[crea-sistema_magico]`
+> `BUTTON[crea-dominio]`
+> `BUTTON[crea-legge_fondamentale]`
+> `BUTTON[crea-entita_primordiale]`
+> `BUTTON[crea-piano]`
+
+> [!example]- ⚔ Regole 5.5e
 > `BUTTON[crea-creatura]`
 > `BUTTON[crea-oggetto]`
 > `BUTTON[crea-oggetto_magico]`
@@ -37,27 +60,12 @@
 > `BUTTON[crea-insidia]`
 > `BUTTON[crea-classe]`
 > `BUTTON[crea-sottoclasse]`
-> `BUTTON[crea-specie]`
 > `BUTTON[crea-background]`
 > `BUTTON[crea-talento]`
-> `BUTTON[crea-divinita]`
 > `BUTTON[crea-bastione]`
 > `BUTTON[crea-regola]`
-> `BUTTON[crea-nota_rapida]`
-> `BUTTON[crea-epoca]`
-> `BUTTON[crea-mito]`
-> `BUTTON[crea-culto]`
-> `BUTTON[crea-profezia]`
-> `BUTTON[crea-regno]`
-> `BUTTON[crea-bioma]`
-> `BUTTON[crea-ecosistema]`
-> `BUTTON[crea-sistema_magico]`
-> `BUTTON[crea-dominio]`
-> `BUTTON[crea-legge_fondamentale]`
-> `BUTTON[crea-entita_primordiale]`
-> `BUTTON[crea-piano]`
-> `BUTTON[crea-risorsa]`
 > `BUTTON[crea-albero_evolutivo]`
+
 
 ## 🤝 Trame (alleati / rivali)
 ```dataview

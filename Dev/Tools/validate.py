@@ -403,6 +403,15 @@ def check() -> int:
             if cat not in categories:
                 errors.append(f"{key}: categoria non dichiarata ({cat})")
 
+    # Gruppi: ogni entità dichiara un `gruppo` che deve esistere in core.gruppi.
+    gruppi_ids = {g.get("id") for g in core.get("gruppi", []) or []}
+    for cid, cat in categories.items():
+        grp = (cat or {}).get("gruppo")
+        if grp is None:
+            errors.append(f"{cid}: manca il campo 'gruppo' (entities/{cid}.yaml)")
+        elif grp not in gruppi_ids:
+            errors.append(f"{cid}: gruppo '{grp}' non dichiarato in core.gruppi")
+
     # Anti-drift: le opzioni del select 'stile_nomi' (plugins.metabind_inputs)
     # devono combaciare con gli stili di generatori.yaml, che genera.js legge a
     # runtime. Così aggiungere uno stile in un solo posto è un errore esplicito.

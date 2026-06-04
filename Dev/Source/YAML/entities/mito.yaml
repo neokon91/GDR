@@ -4,6 +4,7 @@
 id: mito
 folder: Mondi/Miti
 order: 25
+gruppo: tempo
 templates:
 - id: mito
   title: Mito

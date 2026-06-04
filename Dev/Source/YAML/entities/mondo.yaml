@@ -5,6 +5,7 @@
 id: mondo
 folder: Mondi
 order: 1
+gruppo: mondo
 templates:
 - id: mondo
   title: Mondo

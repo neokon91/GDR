@@ -5,6 +5,7 @@
 id: cultura
 folder: Mondi/Culture
 order: 4
+gruppo: societa
 templates:
 - id: cultura
   title: Cultura

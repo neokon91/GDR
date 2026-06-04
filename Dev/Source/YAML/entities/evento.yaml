@@ -5,6 +5,7 @@
 id: evento
 folder: Mondi/Eventi
 order: 6
+gruppo: tempo
 templates:
 - id: evento
   title: Evento

@@ -18,15 +18,22 @@
 > [[Occhi del giocatore|👁 Occhi del giocatore]]
 {% endif %}
 
-> [!example] Crea
-{% for t in templates if t.get('area') != 'gioco' and t.get('primary') -%}
+{# Crea, organizzato per GRUPPO (core.gruppi): la cornice + i gruppi narrativi
+   espansi, i tecnici (tempo/cosmo/regole) pieghevoli. Il gruppo 'tavolo' vive
+   nella tab Al tavolo. #}
+{% for g in core.gruppi if g.id != 'tavolo' -%}
+{%- set members = [] -%}
+{%- for t in templates if t.get('area') != 'gioco' and core.categories.get(t.category, {}).get('gruppo') == g.id -%}
+{%- set _ = members.append(t) -%}
+{%- endfor -%}
+{% if members %}
+> [!example]{{ '' if g.id in ['mondo', 'geografia', 'societa'] else '-' }} {{ g.icona }} {{ g.label }}
+{% for t in members -%}
 > `BUTTON[crea-{{ t.id }}]`
 {% endfor %}
 
-> [!example]- Altri tipi
-{% for t in templates if t.get('area') != 'gioco' and not t.get('primary') -%}
-> `BUTTON[crea-{{ t.id }}]`
-{% endfor %}
+{% endif %}
+{%- endfor %}
 
 ## 🤝 Trame (alleati / rivali)
 ```dataview

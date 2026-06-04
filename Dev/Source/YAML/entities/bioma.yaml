@@ -4,6 +4,7 @@
 id: bioma
 folder: Mondi/Biomi
 order: 30
+gruppo: geografia
 templates:
 - id: bioma
   title: Bioma

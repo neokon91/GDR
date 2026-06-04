@@ -5,6 +5,7 @@
 id: epoca
 folder: Mondi/Epoche
 order: 24
+gruppo: tempo
 templates:
 - id: epoca
   title: Epoca

@@ -5,6 +5,7 @@
 id: nota
 folder: Inbox
 order: 23
+gruppo: tavolo
 templates:
 - id: nota_rapida
   title: Nota Rapida

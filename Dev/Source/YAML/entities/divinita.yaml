@@ -5,6 +5,7 @@
 id: divinita
 folder: Mondi/Divinita
 order: 19
+gruppo: cosmo
 templates:
 - id: divinita
   title: Divinità

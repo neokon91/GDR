@@ -6,6 +6,7 @@
 id: piano
 folder: Mondi/Piani
 order: 36
+gruppo: cosmo
 templates:
 - id: piano
   title: Piano d'esistenza

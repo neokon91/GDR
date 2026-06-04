@@ -137,6 +137,21 @@ fronte_categorie:
   - entita_primordiale
   - sistema_magico
 
+# GRUPPI di entità: la mappa concettuale del worldbuilding. Ogni entità dichiara il
+# suo `gruppo` (entities/<x>.yaml); render.py lo porta in core.categories[cat].gruppo
+# e qui sta l'ordine + le etichette. Guida Home/indici (navigazione per gruppo) ed è
+# il primo strato della tassonomia (sopra famiglia+tipo). NB: `mondo` è la CORNICE che
+# contiene tutto il resto, non un pari di luogo; `regno` è POLITICO (popoli&poteri),
+# non geografico. Validato da check() (ogni gruppo-entità deve esistere qui).
+gruppi:
+  - { id: mondo,     label: "La cornice",         icona: "🌍", descrizione: "Il mondo che racchiude e collega tutto il resto." }
+  - { id: geografia, label: "Geografia & luoghi", icona: "🗺", descrizione: "Lo spazio: luoghi (dal continente al dungeon), biomi, ecosistemi, risorse." }
+  - { id: tempo,     label: "Tempo & storia",     icona: "🕰", descrizione: "Il divenire: epoche, eventi, miti, profezie." }
+  - { id: societa,   label: "Popoli & poteri",    icona: "👥", descrizione: "Chi agisce: regni, fazioni, culture, specie, personaggi, culti, lingue." }
+  - { id: cosmo,     label: "Cosmo & metafisica", icona: "🌌", descrizione: "Il sacro e l'ontologia: cosmologia, divinità, piani, leggi, primordiali, magia." }
+  - { id: regole,    label: "Regole 5.5e",        icona: "⚔", descrizione: "Il sistema: classi, incantesimi, creature, oggetti, talenti, bastioni…" }
+  - { id: tavolo,    label: "Al tavolo",          icona: "🎲", descrizione: "La giocata: incontri, sessioni, appunti." }
+
 # Superficie giocabile (IL differenziatore): ogni nota lore la espone, sempre.
 # Single source renderizzato dalla macro tavolo(); i campi sono in core.fields.
 # 'pressione' e' speciale: la macro aggiunge l'etichetta calcolata e prossima_mossa.

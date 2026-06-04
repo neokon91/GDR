@@ -5,6 +5,7 @@
 id: sottoclasse
 folder: Mondi/Sottoclassi
 order: 15
+gruppo: regole
 templates:
 - id: sottoclasse
   title: Sottoclasse

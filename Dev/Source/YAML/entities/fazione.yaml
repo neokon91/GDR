@@ -11,6 +11,7 @@
 id: fazione
 folder: Mondi/Fazioni
 order: 5
+gruppo: societa
 templates:
   - id: fazione
     title: Fazione

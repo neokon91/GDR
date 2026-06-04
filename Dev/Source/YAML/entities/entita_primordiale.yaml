@@ -6,6 +6,7 @@
 id: entita_primordiale
 folder: Mondi/Primordiali
 order: 35
+gruppo: cosmo
 templates:
 - id: entita_primordiale
   title: Entità primordiale

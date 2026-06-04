@@ -4,6 +4,7 @@
 id: profezia
 folder: Mondi/Profezie
 order: 27
+gruppo: tempo
 templates:
 - id: profezia
   title: Profezia

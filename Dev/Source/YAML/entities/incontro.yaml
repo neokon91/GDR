@@ -5,6 +5,7 @@
 id: incontro
 folder: Mondi/Incontri
 order: 10
+gruppo: tavolo
 templates:
 - id: incontro
   title: Incontro

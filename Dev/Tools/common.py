@@ -149,6 +149,8 @@ def apply_entities(core: dict[str, Any], entities: list[dict[str, Any]]) -> dict
         eid = entity["id"]
         merged["folders"][eid] = entity["folder"]
         cat = {"folder": eid, "subtypes": entity.get("subtypes", []) or []}
+        if entity.get("gruppo"):
+            cat["gruppo"] = entity["gruppo"]
         # Classificazione a 2 livelli (opzionale): le 'famiglie' (con descrizione)
         # affiancano i subtypes come dimensione tematica curata; 'famiglia_label'
         # personalizza l'etichetta (es. "Ruolo" per personaggio).

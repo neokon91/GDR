@@ -6,6 +6,7 @@
 id: sistema_magico
 folder: Mondi/Magia
 order: 32
+gruppo: cosmo
 templates:
 - id: sistema_magico
   title: Sistema magico

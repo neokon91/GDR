@@ -6,6 +6,7 @@
 id: dominio
 folder: Mondi/Domini
 order: 33
+gruppo: cosmo
 templates:
 - id: dominio
   title: Dominio

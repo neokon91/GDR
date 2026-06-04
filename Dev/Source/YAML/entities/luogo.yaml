@@ -5,6 +5,7 @@
 id: luogo
 folder: Mondi/Luoghi
 order: 3
+gruppo: geografia
 templates:
 - id: luogo
   title: Luogo

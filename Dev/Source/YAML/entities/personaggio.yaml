@@ -5,6 +5,7 @@
 id: personaggio
 folder: Mondi/Personaggi
 order: 8
+gruppo: societa
 templates:
 - id: pg
   title: PG

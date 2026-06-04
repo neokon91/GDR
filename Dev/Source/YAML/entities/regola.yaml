@@ -5,6 +5,7 @@
 id: regola
 folder: Mondi/Regole
 order: 21
+gruppo: regole
 templates:
 - id: regola
   title: Regola

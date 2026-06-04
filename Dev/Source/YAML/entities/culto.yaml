@@ -5,6 +5,7 @@
 id: culto
 folder: Mondi/Culti
 order: 26
+gruppo: societa
 templates:
 - id: culto
   title: Culto

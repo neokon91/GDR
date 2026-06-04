@@ -5,6 +5,7 @@
 id: background
 folder: Mondi/Background
 order: 17
+gruppo: regole
 templates:
 - id: background
   title: Background

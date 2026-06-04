@@ -5,6 +5,7 @@
 id: bastione
 folder: Mondi/Bastioni
 order: 20
+gruppo: regole
 templates:
 - id: bastione
   title: Bastione

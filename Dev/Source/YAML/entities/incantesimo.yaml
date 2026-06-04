@@ -5,6 +5,7 @@
 id: incantesimo
 folder: Mondi/Incantesimi
 order: 12
+gruppo: regole
 templates:
 - id: incantesimo
   title: Incantesimo

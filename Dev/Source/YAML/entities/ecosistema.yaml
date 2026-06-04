@@ -5,6 +5,7 @@
 id: ecosistema
 folder: Mondi/Ecosistemi
 order: 31
+gruppo: geografia
 templates:
 - id: ecosistema
   title: Ecosistema

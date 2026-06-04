@@ -4,6 +4,7 @@
 id: regno
 folder: Mondi/Regni
 order: 28
+gruppo: societa
 templates:
 - id: regno
   title: Regno

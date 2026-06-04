@@ -5,6 +5,7 @@
 id: talento
 folder: Mondi/Talenti
 order: 18
+gruppo: regole
 templates:
 - id: talento
   title: Talento

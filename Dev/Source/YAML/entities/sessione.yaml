@@ -5,6 +5,7 @@
 id: sessione
 folder: Mondi/Sessioni
 order: 22
+gruppo: tavolo
 templates:
 - id: sessione
   title: Sessione

@@ -5,6 +5,7 @@
 id: oggetto
 folder: Mondi/Oggetti
 order: 11
+gruppo: regole
 templates:
 - id: oggetto
   title: Oggetto

@@ -5,6 +5,7 @@
 id: legge_fondamentale
 folder: Mondi/Leggi
 order: 34
+gruppo: cosmo
 templates:
 - id: legge_fondamentale
   title: Legge fondamentale

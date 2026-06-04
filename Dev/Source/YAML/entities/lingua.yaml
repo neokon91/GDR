@@ -5,6 +5,7 @@
 id: lingua
 folder: Mondi/Lingue
 order: 7
+gruppo: societa
 templates:
 - id: lingua
   title: Lingua

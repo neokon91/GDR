@@ -6,6 +6,7 @@
 id: risorsa
 folder: Mondi/Risorse
 order: 37
+gruppo: geografia
 templates:
   - id: risorsa
     title: Risorsa
