@@ -2703,3 +2703,36 @@ def test_example_world_section_reveal():
     notes = dict(render.example_world_notes(man, CORE))
     forte = next(t for r, t in notes.items() if r.endswith("Forte Cenere.md"))
     assert "[!rivela|segreto]" in forte and "sogna sotto le cantine" in forte
+
+
+# --- Release / distribuzione (release.py) ------------------------------------
+import release  # noqa: E402
+
+
+def test_release_version_matches_package():
+    """release.version() legge la versione da package.json (single source)."""
+    import json
+    pkg = json.loads((render.ROOT / "package.json").read_text(encoding="utf-8"))
+    assert release.version() == pkg["version"]
+
+
+def test_release_zip_tree_excludes_local_state(tmp_path):
+    """zip_tree mette tutto sotto un'unica cartella-radice ed esclude lo stato
+    locale (workspace/.DS_Store/.trash) → zip pulito e riproducibile."""
+    import zipfile
+    src = tmp_path / "vault"
+    (src / ".obsidian").mkdir(parents=True)
+    (src / ".trash").mkdir()
+    (src / "nota.md").write_text("x", encoding="utf-8")
+    (src / ".obsidian" / "app.json").write_text("{}", encoding="utf-8")
+    (src / ".obsidian" / "workspace.json").write_text("{}", encoding="utf-8")
+    (src / ".DS_Store").write_text("", encoding="utf-8")
+    (src / ".trash" / "vecchia.md").write_text("y", encoding="utf-8")
+    zpath = tmp_path / "out.zip"
+    n = release.zip_tree(src, zpath, "GDR-vault")
+    names = zipfile.ZipFile(zpath).namelist()
+    assert "GDR-vault/nota.md" in names and "GDR-vault/.obsidian/app.json" in names
+    assert all(name.startswith("GDR-vault/") for name in names)        # radice unica
+    for excl in ("workspace.json", ".DS_Store", ".trash"):
+        assert not any(excl in name for name in names), excl
+    assert n == 2                                                      # nota + app.json

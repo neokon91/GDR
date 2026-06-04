@@ -9,6 +9,7 @@
     "site": "python3 Dev/Tools/render.py --site",
     "check": "python3 Dev/Tools/render.py --check && find Dev/Source/JS \\( -name '*.js' -o -name '*.mjs' \\) -print0 | xargs -0 -n1 node --check",
     "test": "python3 -m pytest -q",
+    "dist": "python3 Dev/Tools/release.py",
     "clean": "python3 Dev/Tools/render.py --clean"
   }
 }

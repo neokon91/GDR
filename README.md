@@ -7,6 +7,25 @@ D&D 5.5e. Il differenziatore: ogni nota lore espone una **superficie giocabile**
 Le **sorgenti** in `Dev/` sono l'unica verità; il vault Obsidian è un **artefatto
 ricostruibile** generato in `dist/GDR-vault/` (gitignorato).
 
+## Per i Game Master — usarlo (niente sviluppo)
+
+Scarica l'ultimo **vault pronto** dalle [Releases](../../releases) (`GDR-vault-v*.zip`),
+scompattalo e in Obsidian fai **«Apri cartella come vault»** (i plugin sono inclusi). Dentro:
+
+- un **mondo-esempio** giocabile (*Valdombra*) e la nota **«Inizia da qui»** che in 3 passi
+  mostra il cuore del sistema: la lore accende la **superficie giocabile**;
+- worldbuilding profondo *connesso* al tavolo **D&D 5.5e** — schede PG, statblock, incontri
+  (budget 2024), condizioni, dadi — **locale e gratis**, i tuoi dati restano tuoi;
+- un **sito dei giocatori** statico e *senza spoiler* che generi tu (`npm run site`), con
+  **rivelazione progressiva**: sveli il mondo man mano che la campagna procede.
+
+Cancella la cartella `_Esempio — Valdombra` per partire da un foglio bianco. La guida completa
+è nel **LEGGIMI** dentro il vault.
+
+---
+
+> Il resto di questo README è per chi vuole **costruire da sorgente** o contribuire.
+
 ## Come funziona
 
 ```
@@ -33,6 +52,7 @@ Dev/Source/{YAML,Jinja,JS}  ──►  Dev/Tools/render.py  ──►  dist/GDR-
 | `npm run check` | Valida YAML/Jinja e `node --check` sui JS. **Non scrive.** |
 | `npm run build` | Genera il vault in `dist/GDR-vault/` (non distruttivo). |
 | `npm run site` | Genera il **sito dei giocatori** (statico, spoiler-free) in `dist/GDR-site/`. |
+| `npm run dist` | Confeziona gli **zip di release** (vault turnkey + sito) in `dist/`. Vedi [releasing](docs/releasing.md). |
 | `npm run clean` | Rimuove solo gli artefatti generati (mai `.obsidian`/contenuti). |
 
 Verifica sempre con `npm run check` o un render standalone a stdout; il `build`
@@ -56,7 +76,7 @@ cartella su GitHub Pages/Netlify. Per **nascondere** una nota intera ai giocator
 Approfondimenti in [`docs/`](docs/): [architecture](docs/architecture.md) ·
 [data_model](docs/data_model.md) · [plugin_contracts](docs/plugin_contracts.md) ·
 [rules_layer](docs/rules_layer.md) · [play_layer](docs/play_layer.md) ·
-**[roadmap & analisi](docs/roadmap.md)**.
+[releasing](docs/releasing.md) · **[roadmap & analisi](docs/roadmap.md)**.
 
 ## Struttura
 

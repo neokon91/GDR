@@ -66,9 +66,12 @@ Pronto per **beta chiuso**. Per la beta aperta restano i punti PM qui sotto.
 ## Aperti — prioritizzati
 
 ### PM / crescita (il gap del verdetto)
-- **Distribuzione & scoperta** — GitHub release (versioning + issue per feedback) e/o itch.io
-  (vetrina + name-your-price). *Scelta utente: per ora resta **free + ZIP manuale** finché si
-  sviluppa.* Posizionamento/pricing da definire quando si apre.
+- **Distribuzione & scoperta** — ✅ *tooling pronto*: `npm run dist` (`release.py`) confeziona
+  il **vault turnkey** (plugin inclusi) + il **sito** in zip versionati; README con sezione
+  «Per i Game Master», `CHANGELOG.md`, [docs/releasing.md](releasing.md) coi passi `gh release`.
+  *Resta l'atto di pubblicare* (GitHub release e/o itch.io vetrina/name-your-price) — scelta
+  utente su quando aprire; posizionamento/pricing da definire allora. Verificare le licenze
+  dei plugin bundlati prima del pubblico (o release `--no-plugins` + BRAT, da valutare).
 - ✅ **Condivisione ai giocatori — rivelazione progressiva** — campo `rivelazione`
   (pubblico<incontrato<segreto), ortogonale a `visibilita` (il «mai»); il build del sito
   sceglie il livello (`npm run site -- --reveal <tier>`) e include una nota se il suo tier
