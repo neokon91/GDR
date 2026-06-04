@@ -26,11 +26,17 @@ Il vault separa nettamente due piani, poi specializza per entità:
 - **B) Sistema 5.5e** (`system.yaml`): `statblock`, `caratteristiche`, `abilita`,
   campi di sistema.
 - **Per-entità** (`entities/*.yaml`): un file per categoria con tutto ciò che è
-  specifico (tassonomia, scheda, assi, relazioni, wizard, wiring del template).
+  specifico — tassonomia a **3 strati** (`gruppo` → `tipo`/sottotipo → `famiglia`),
+  scheda, assi, relazioni, wizard, e il callout **ℹ️ Guida** (onboarding: `scopo` +
+  `campi_chiave`). I sottotipi possono essere **profili** ricchi (campi/clock/evoluzione
+  dedicati, resi da `views.renderTipoProfilo` reattivo al `tipo`). Vedi [data_model.md](data_model.md).
 
 `render.py` **fonde** core.yaml + system.yaml + entities/\*.yaml in un unico
 dizionario `core` (vedi [data_model.md](data_model.md)); template, JS (`core.json`)
-e test consumano il modello unificato senza sapere dello split.
+e test consumano il modello unificato senza sapere dello split. **Aggiungere un'entità,
+un gruppo o un sottotipo è un'operazione di DATI** (YAML), non di codice: le macro
+condivise e `renderTipoProfilo` rendono il nuovo senza casi speciali — è il cardine
+della modularità per espansione.
 
 ## La "trinità" per-entità
 

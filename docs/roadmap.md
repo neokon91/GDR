@@ -5,11 +5,18 @@ Il **come** sta nei doc tecnici ([architecture](architecture.md) · [data_model]
 [rules_layer](rules_layer.md) · [play_layer](play_layer.md) · [plugin_contracts](plugin_contracts.md));
 la **cronistoria** dettagliata vive nelle memorie di progetto. Qui: dove siamo e cosa manca.
 
-## Stato (2026-06-03)
+## Stato (2026-06-04)
 
-`origin/main` (`84bca8e`), **269 test**, check 0. Pipeline matura: sorgenti YAML/Jinja/JS →
-`render.py` → vault Obsidian (+ sito giocatori opzionale). Vault parte vuoto: onboarding via
-wizard + callout **ℹ️ Guida** per-entità (il mondo-esempio Valdombra è stato rimosso).
+Pipeline matura: sorgenti YAML/Jinja/JS → `render.py` → vault Obsidian (+ sito giocatori
+opzionale). Vault parte vuoto: onboarding via wizard + callout **ℹ️ Guida** per-entità (il
+mondo-esempio Valdombra è stato rimosso).
+
+In corso sul branch `refactor/entita-gruppi-sottotipi` (**317 test, check 0**, da mergere
+su main): **refactor a GRUPPI + profili-sottotipo**. Tassonomia a 3 strati (gruppo → tipo →
+famiglia); i sottotipi portano campi/clock/evoluzione dedicati (`renderTipoProfilo`); **42
+entità** (5 nuove: esercito/missione/editto/calamità/rotta). La direzione di lungo periodo è
+la **modularizzazione del modello** per espansione/evoluzione: aggiungere entità/gruppi/
+sottotipi resta un'operazione di DATI (YAML), non di codice.
 
 **Ultima sessione** (2026-06-03): consolidamento ontologia (principio di inclusione + merge
 `istituzione→fazione`); irrobustimento (harness + copertura pannelli/radar, **cap a scala** dei

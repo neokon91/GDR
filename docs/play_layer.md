@@ -14,7 +14,11 @@ calcolata (Calma/Tensione/Crisi). È il differenziatore: lore già pronta a esse
 - **Modello**: un fronte traccia un orologio a segmenti — `clock_dim` (4/6/8) + `clock`
   (pieni) — più `conseguenza` (cosa accade a clock pieno) e `conseguenza_su` (link
   all'entità colpita). Campi in `core.yaml`; macro `clock()` nel tab *Al tavolo* (opt-in:
-  senza `clock_dim` mostra solo un suggerimento).
+  senza `clock_dim` mostra solo un suggerimento). La macchina del Fronte appare **solo
+  sulle categorie in `core.fronte_categorie`** (attori/cosmici: fazione, culto, divinità,
+  regno, luogo, esercito, calamità, …); sulle altre l'*Al tavolo* tiene Uso al tavolo/
+  Gancio/Condivisione senza il clock. I profili-sottotipo possono segnalare `clock: true`
+  per guidare (vedi [data_model](data_model.md) §Gruppi e profili-sottotipo).
 - **Visual**: `views.renderClock`/`clockSvg` disegnano l'orologio SVG (segmenti pieni).
 - **Ponte**: il bottone *Scatena conseguenza* (`meta_actions.scatena_conseguenza`) crea un
   **evento collegato** (`tipo: conseguenza`), azzera il clock e linka tutto → la giocata
