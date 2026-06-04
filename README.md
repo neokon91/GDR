@@ -22,6 +22,15 @@ scompattalo e in Obsidian fai **«Apri cartella come vault»** (i plugin sono in
 Cancella la cartella `_Esempio — Valdombra` per partire da un foglio bianco. La guida completa
 è nel **LEGGIMI** dentro il vault.
 
+## Screenshot
+
+|  |  |
+|---|---|
+| ![Nota di worldbuilding con infobox e mappa](docs/images/nota-con-mappa.png) | ![Radar del «Carattere» (assi tematici)](docs/images/radar-carattere.png) |
+| *Una nota lore: infobox, prosa e mappa.* | *Il radar del Carattere dal grafo.* |
+| ![World Board su Obsidian Canvas](docs/images/world-board.png) | ![Sito dei giocatori (spoiler-free)](docs/images/sito-giocatori.png) |
+| *Il mondo a colpo d'occhio (Canvas).* | *Il sito dei giocatori, senza spoiler.* |
+
 ---
 
 > Il resto di questo README è per chi vuole **costruire da sorgente** o contribuire.
