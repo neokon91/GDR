@@ -128,12 +128,27 @@ Pronto per **beta chiuso**. Per la beta aperta restano i punti PM qui sotto.
   minori mirati** (anti-filler: l'audit ha mostrato che rito/conflitto/titolo/genealogia erano
   già coperti; aggiunti solo i vuoti veri) — `simbolo`→cultura/regno/fazione, `rivali`→culto/
   divinità, `dottrina`→sistema_magico. Resta: categorie astrologiche come entità (opt-in).
-- **Geografia avanzata — importer Azgaar** (design concordato, **non** implementato). Principio:
-  la mappa-immagine è la tela, le note sono lo strato curato. **NO import a tappeto**: import a
-  livelli con budget (solo il tier alto: stati/capitali/province/culture/religioni), il long-tail
-  resta **dato** queryabile (`azgaar/<mondo>.json`), promozione on-demand di singole note,
-  idempotente/reversibile. L'importer **cabla** nel grafo (containment→regione, adiacenza→
-  `confina_con`, routes→`rotta_con`, coord→`coord`). Backbone `coord`/`scala_mappa`/distanza ✅.
+- ✅ **World Board (Obsidian Canvas)** — `world_board_canvas()` genera dal grafo del
+  mondo-esempio un `.canvas` (card-file per entità in colonne per categoria + archi delle
+  relazioni tipizzate): vista visiva «a colpo d'occhio», alternativa alla dashboard Rete.
+  Spunto realizzato dal competitor **vvd**. *Estensione possibile*: azione JS per generare
+  il board su un mondo dell'utente (oggi solo l'esempio, build-time).
+- **Mappe — pin manuale (filone CHIUSO con conclusione)**: zoom-map (*TTRPG Tools - Maps*)
+  memorizza i marker in `<immagine>.markers.json` (o inline con `storage: note`); piazzamento
+  **solo via GUI**, nessun data-binding nativo. **Conclusione onesta**: NON si può auto-piazzare
+  pin da `coord` *astratte* su un'immagine caricata (le coord non sono calibrate sui pixel di
+  *quella* figura; nemmeno vvd lo fa — pinni trascinando). La posizione in-immagine ha solo due
+  sorgenti: (1) qualcuno la segna sull'immagine (manuale), (2) l'immagine nasce coi dati (Azgaar).
+  Due strade reali, **rimandate**: **(a)** manuale + *sync pin→coord* (un'azione legge `markers.json`
+  e riscrive i `coord` → la mappa diventa fonte di geografia; non elimina il primo clic);
+  **(b) importer Azgaar** = vero auto-pin (immagine+coord nello stesso spazio).
+- **Geografia avanzata — importer Azgaar** (design concordato, **non** implementato; è la via
+  (b) qui sopra). Principio: la mappa-immagine è la tela, le note sono lo strato curato. **NO
+  import a tappeto**: import a livelli con budget (solo il tier alto: stati/capitali/province/
+  culture/religioni), il long-tail resta **dato** queryabile (`azgaar/<mondo>.json`), promozione
+  on-demand di singole note, idempotente/reversibile. L'importer **cabla** nel grafo
+  (containment→regione, adiacenza→`confina_con`, routes→`rotta_con`, coord→`coord`). Backbone
+  `coord`/`scala_mappa`/distanza ✅.
 
 ### Runtime / tech
 - ✅ **Reattività live** (`engine.reactive`) — il **radar** si ridisegna allo slider senza
