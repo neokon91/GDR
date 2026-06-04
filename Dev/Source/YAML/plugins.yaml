@@ -111,6 +111,11 @@ metabind_inputs:
   pericolosita: INPUT[inlineSelect(option(sicura), option(sorvegliata), option(malfamata), option(pericolosa), option(senza legge))]
   # Forma di successione (sottotipi di regno).
   successione: INPUT[inlineSelect(option(ereditaria), option(elettiva), option(per conquista), option(divina), option(nessuna))]
+  # Esercito (consistenza = scala della forza; morale = tenuta in battaglia).
+  consistenza: INPUT[inlineSelect(option(drappello), option(compagnia), option(reggimento), option(esercito), option(orda))]
+  morale: INPUT[inlineSelect(option(in rotta), option(incerto), option(saldo), option(fanatico))]
+  # Missione (stato d'avanzamento dell'incarico).
+  stato_missione: INPUT[inlineSelect(option(proposta), option(in corso), option(completata), option(fallita), option(abbandonata))]
   rivelazione: INPUT[inlineSelect(option(pubblico), option(incontrato), option(segreto))]
   mondo: INPUT[suggester(optionQuery("Mondi"), useLinks(partial), allowOther)]
   connessioni: INPUT[inlineListSuggester(optionQuery("Mondi"), useLinks(partial), allowOther)]
@@ -149,6 +154,8 @@ metabind_inputs:
 # render.py le mappa sul percorso reale e le inietta in obsidian-icon-folder.
 folder_icons:
   mondo: "🌍"
+  esercito: "🪖"
+  missione: "🎯"
   cosmologia: "🌌"
   luogo: "🗺️"
   cultura: "🎏"

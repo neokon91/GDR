@@ -1,0 +1,44 @@
+# Schema per-entità: missione (al tavolo). Un incarico per i PG — committente,
+# obiettivo, ricompensa, stato — per tracciare un arco di gioco oltre i task
+# #gancio/#trama della Home. Reso dallo scheletro condiviso _entity_base.
+id: missione
+folder: Mondi/Missioni
+order: 41
+gruppo: tavolo
+templates:
+- id: missione
+  title: Missione
+  default_type: incarico
+  target: z.modelli/Missione.md
+# SOTTOTIPI con PROFILO: la NATURA dell'incarico (cosa devono fare i PG). Una missione
+# non è un Fronte (è seguita dallo `stato`, non da un clock): clock/evoluzione false.
+subtypes:
+- { nome: incarico,     descrizione: "Un lavoro su commissione: fai X, ricevi Y. Il pane dell'avventuriero.",          campi: [committente, ricompensa], clock: false, evoluzione: false }
+- { nome: caccia,       descrizione: "Dai la caccia a una creatura o a un ricercato: traccia, stana, cattura o uccidi.", campi: [bersaglio, ricompensa], clock: false, evoluzione: false }
+- { nome: recupero,     descrizione: "Recupera un oggetto o una persona da un luogo pericoloso.",                       campi: [da_recuperare, ricompensa], clock: false, evoluzione: false }
+- { nome: scorta,       descrizione: "Proteggi qualcuno o qualcosa lungo un tragitto pericoloso.",                      campi: [committente, ricompensa], clock: false, evoluzione: false }
+- { nome: indagine,     descrizione: "Scopri la verità: chi, come, perché — indizi, testimoni, depistaggi.",           campi: [committente], clock: false, evoluzione: false }
+- { nome: eliminazione, descrizione: "Elimina un bersaglio: un colpo, una bonifica, un assassinio.",                    campi: [bersaglio, ricompensa], clock: false, evoluzione: false }
+fields:
+  committente:    { label: Committente,   widget: legame }
+  bersaglio:      { label: Bersaglio,      widget: legame }
+  da_recuperare:  { label: Da recuperare,  widget: text }
+  ricompensa:     { label: Ricompensa,     widget: text }
+  stato_missione: { label: Stato,          widget: stato_missione }
+scheda: [stato_missione, ricompensa]
+relazioni:
+- { field: luogo,   label: Dove,           category: luogo }
+- { field: png,     label: PNG coinvolti,  category: personaggio, multi: true }
+- { field: fazione, label: Fazione dietro, category: fazione }
+creation:
+  fields:
+  - { field: tipo, prompt: Tipo di missione, from: subtypes, required: true }
+  - { field: mondo, prompt: Mondo, from: notes, category: mondo, link: true, required: true }
+  - { field: committente, prompt: Committente (opz.), from: notes, category: personaggio, link: true, optional: true }
+  body:
+  - { field: obiettivo,     prompt: 'Obiettivo: cosa devono ottenere i PG',               heading: Obiettivo }
+  - { field: complicazione, prompt: 'Complicazione: cosa va storto o si nasconde',          heading: Complicazione }
+  - { field: posta,         prompt: 'Posta in gioco: cosa succede a successo / fallimento', heading: Posta in gioco }
+guida:
+  scopo: "Una missione è un incarico per i PG: chi la dà, cosa chiede, cosa offre — il filo che traccia un arco di gioco oltre i task #gancio/#trama."
+  campi_chiave: "**Tipo** (incarico, caccia, recupero…) e **Committente**; **Ricompensa** e **Stato** (proposta→in corso→completata/fallita) per seguirla; collega **Dove** e i **PNG**."

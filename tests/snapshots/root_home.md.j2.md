@@ -42,6 +42,7 @@
 > `BUTTON[crea-specie]`
 > `BUTTON[crea-culto]`
 > `BUTTON[crea-regno]`
+> `BUTTON[crea-esercito]`
 
 > [!example]- 🌌 Cosmo & metafisica
 > `BUTTON[crea-cosmologia]`
@@ -108,6 +109,8 @@ limit 20
 > `BUTTON[crea-pg]`
 > `BUTTON[crea-incontro]`
 > `BUTTON[crea-sessione]`
+> `BUTTON[crea-nota_rapida]`
+> `BUTTON[crea-missione]`
 
 ## Sessione attiva
 ```dataview

@@ -1,0 +1,47 @@
+# Schema per-entità: esercito (società, militare). Una forza armata organizzata — il
+# braccio bellico di un regno o di una fazione. Riempie il buco war-gaming: prima la
+# forza militare di un regno viveva solo come prosa nel campo "Forza". Marcia come
+# FRONTE (clock verso la battaglia/conquista). Reso dallo scheletro condiviso _entity_base.
+id: esercito
+folder: Mondi/Eserciti
+order: 29
+gruppo: societa
+templates:
+- id: esercito
+  title: Esercito
+  default_type: esercito regolare
+  target: z.modelli/Esercito.md
+# SOTTOTIPI con PROFILO: la FORMA della forza armata. Tutte possono essere Fronti (una
+# forza in campagna ha un clock); i campi variano per natura della truppa.
+subtypes:
+- { nome: esercito regolare, descrizione: "Forza permanente e addestrata di uno stato: soldati di leva o di carriera, disciplina e ranghi.", campi: [consistenza, dottrina, morale], clock: true, evoluzione: false }
+- { nome: milizia,           descrizione: "Leva temporanea di civili in armi: numerosa ma poco addestrata, si scioglie in tempo di pace.",   campi: [consistenza, morale], clock: true, evoluzione: false }
+- { nome: mercenari,         descrizione: "Compagnia di ventura al soldo: combatte per denaro, fedele fino all'ultimo pagamento.",            campi: [consistenza, ingaggio, morale], clock: true, evoluzione: false }
+- { nome: orda,              descrizione: "Massa tribale o mostruosa: travolge col numero e il terrore, poca tattica.",                        campi: [consistenza, morale], clock: true, evoluzione: false }
+- { nome: flotta,            descrizione: "Forza navale: navi da guerra, da sbarco o corsare; domina rotte e coste.",                          campi: [consistenza, navi, morale], clock: true, evoluzione: false }
+- { nome: guardia,           descrizione: "Corpo scelto di protezione: guardia cittadina, pretoriana o personale di un signore.",             campi: [consistenza, dottrina, morale], clock: true, evoluzione: false }
+fields:
+  consistenza: { label: Consistenza,     widget: consistenza }
+  dottrina:    { label: Dottrina / arma, widget: text }
+  ingaggio:    { label: Ingaggio / paga,  widget: text }
+  navi:        { label: Navi,             widget: text }
+  morale:      { label: Morale,           widget: morale }
+scheda: [consistenza, morale]
+relazioni:
+- { field: regno,        label: Stato / regno,   category: regno }
+- { field: comandante,   label: Comandante,      category: personaggio }
+- { field: fazione,      label: Fazione,         category: fazione }
+- { field: schierato_in, label: Schierato in,    category: luogo }
+- { field: nemici,       label: Nemici in campo, category: esercito, multi: true }
+creation:
+  fields:
+  - { field: tipo, prompt: Tipo di forza armata, from: subtypes, required: true }
+  - { field: mondo, prompt: Mondo, from: notes, category: mondo, link: true, required: true }
+  - { field: regno, prompt: Stato/regno (opz.), from: notes, category: regno, link: true, optional: true }
+  body:
+  - { field: composizione, prompt: 'Composizione: fanteria, cavalleria, arcieri, bestie, macchine', heading: Composizione }
+  - { field: tattica,      prompt: 'Tattica e punti di forza / debolezza',                          heading: Tattica }
+  - { field: obiettivo_militare, prompt: 'Obiettivo: cosa marcia a fare (la posta del clock)',       heading: Obiettivo }
+guida:
+  scopo: "Un esercito è una forza armata organizzata: il braccio bellico di un regno o di una fazione, che può marciare come Fronte verso una battaglia o una conquista."
+  campi_chiave: "**Tipo** (forma: regolare, mercenari, flotta…) e **Comandante**; **Consistenza** e **Morale** dicono quanto è grosso e quanto regge; con un **clock** marcia verso il suo obiettivo."
