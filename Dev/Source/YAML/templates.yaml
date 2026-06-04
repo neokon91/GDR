@@ -46,3 +46,9 @@ actions:
   - id: turno_bastione
     title: Turno di bastione
     target: z.modelli/azioni/Turno di bastione.md
+  - id: world_board
+    title: Genera World Board
+    target: z.modelli/azioni/Genera World Board.md
+  - id: inizia_incontro
+    title: Prepara il gruppo (IT)
+    target: z.modelli/azioni/Prepara il gruppo (IT).md

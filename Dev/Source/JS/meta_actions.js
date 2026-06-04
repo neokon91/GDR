@@ -356,16 +356,79 @@ function appendTurnoLog(content, data, riepilogo) {
   return `${content}${sep}\n## Registro dei turni\n${voce}\n`;
 }
 
-// Turno di bastione (DMG 2024): registra un turno (7 giorni) con un riepilogo
-// degli ordini/esiti delle strutture. Append datato al Registro dei turni.
+// Tira inline i dadi dentro un testo-esito: sostituisce il PRIMO gettone NdM
+// (con ×K/*K e ±B opzionali) col risultato, lasciando il resto come etichetta.
+// "1d6 lingotti" → "4 lingotti"; "1d4×10 mo" → "30 mo"; "2d6+1 difensori" → "9 difensori".
+// rng()∈[0,1) iniettabile (test deterministici). Niente dado → testo invariato.
+function rollInline(text, rng) {
+  const r = rng || Math.random;
+  const re = /(\d*)d(\d+)(?:\s*[×x*]\s*(\d+))?(?:\s*([+-])\s*(\d+))?/i;
+  return String(text ?? "").replace(re, (_m, count, faces, mult, sign, mod) => {
+    const n = Math.max(1, parseInt(count || "1", 10));
+    const f = parseInt(faces, 10);
+    let tot = 0;
+    for (let i = 0; i < n; i++) tot += Math.floor(r() * f) + 1;
+    if (mult) tot *= parseInt(mult, 10);
+    if (sign) tot += (sign === "-" ? -1 : 1) * parseInt(mod, 10);
+    return String(tot);
+  });
+}
+
+// Una riga-ordine "Struttura | Ordine | esito" → {struttura, ordine, esito}.
+function parseOrdine(line) {
+  const parts = String(line ?? "").split("|").map((p) => p.trim());
+  return { struttura: parts[0] || "", ordine: parts[1] || "", esito: parts.slice(2).join(" | ") || "" };
+}
+
+// Normalizza il campo `ordini` (lista YAML o stringa multilinea) in righe non vuote.
+function ordiniLines(ordini) {
+  const arr = Array.isArray(ordini) ? ordini : String(ordini ?? "").split(/\r?\n/);
+  return arr.map((x) => String(x ?? "").trim()).filter(Boolean);
+}
+
+// Risolve un turno di bastione dalle strutture dichiarate: per ciascuna, tira i
+// dadi dell'esito. Ritorna [{struttura, ordine, esito}]. License-safe: gli ordini
+// e gli esiti sono AUTORIALI (nessuna tabella DMG riprodotta) — l'azione tira e logga.
+function resolveTurno(ordini, rng) {
+  return ordiniLines(ordini).map((line) => {
+    const o = parseOrdine(line);
+    return { ...o, esito: rollInline(o.esito, rng) };
+  });
+}
+
+// Una voce-esito risolta → riga di log markdown ("    - **Struttura** → *Ordine*: esito").
+function rigaTurno(o) {
+  let s = `    - **${o.struttura || "Struttura"}**`;
+  if (o.ordine) s += ` → *${o.ordine}*`;
+  if (o.esito) s += `: ${o.esito}`;
+  return s;
+}
+
+// Turno di bastione (2024): se la scheda dichiara le `ordini` (lista "Struttura |
+// Ordine | esito", esito con dadi opzionali), RISOLVE il turno (tira i dadi, conta
+// il turno, scrive un blocco datato nel Registro dei turni e aggiorna `turni`).
+// Senza strutture dichiarate, ricade nel prompt libero (compat). I dadi sono tirati,
+// non simulati: il GM autora ordini/esiti, l'azione fa i conti.
 async function turno_bastione(tp, file) {
-  const riepilogo = await tp.system.prompt(
-    "Turno di bastione: cosa hanno prodotto le strutture (ordini, esiti, eventi)?", "");
-  if (riepilogo == null) return "";
   const data = tp.date ? tp.date.now("YYYY-MM-DD") : "";
+  const fm = app.metadataCache.getFileCache(file)?.frontmatter ?? {};
+  const righe = ordiniLines(fm.ordini);
+  let riepilogo;
+  if (righe.length) {
+    const turno = (Number(fm.turni) || 0) + 1;
+    const esiti = resolveTurno(fm.ordini, Math.random);
+    riepilogo = `**Turno ${turno}**\n` + esiti.map(rigaTurno).join("\n");
+    await updateFrontmatter(file, (f) => { f.turni = turno; f.ultimo_turno = data; });
+  } else {
+    riepilogo = await tp.system.prompt(
+      "Nessuna struttura in `ordini`. Turno di bastione: cosa hanno prodotto le strutture?", "");
+    if (riepilogo == null) return "";
+  }
   const content = await app.vault.read(file);
   await app.vault.modify(file, appendTurnoLog(content, data, riepilogo));
-  new Notice(`Turno di bastione registrato (${data}).`);
+  new Notice(righe.length
+    ? `Turno di bastione risolto: ${righe.length} strutture (${data}).`
+    : `Turno di bastione registrato (${data}).`);
   return "";
 }
 
@@ -459,6 +522,69 @@ async function scaffold_statblock(file) {
   return "";
 }
 
+// --- Ponte Initiative Tracker: schiera il gruppo (DM) ------------------------
+// Un PG (nota personaggio, tipo pg) → oggetto-player Initiative Tracker: nome, PF
+// (pf_max), CA (ca), modificatore d'iniziativa (mod DES da `destrezza`), livello.
+// `je.from(t)` di IT accetta questi campi (player:true lo marca come giocatore).
+// Esposto per i test.
+function playerFromPg(file, fm) {
+  const dex = Number(fm.destrezza);
+  return {
+    name: String(fm.nome || file.basename),
+    player: true,
+    hp: Number(fm.pf_max) || Number(fm.pf) || undefined,
+    ac: Number(fm.ca) || undefined,
+    modifier: Number.isFinite(dex) ? Math.floor((dex - 10) / 2) : 0,
+    level: Number(fm.livello) || 1,
+  };
+}
+
+// «Prepara il gruppo (IT)»: auto-inietta il PARTY di Initiative Tracker dai PG del
+// vault (note personaggio · tipo pg), così il blocco `players: true` risolve senza
+// configurazione manuale — chiude il residuo documentato del ponte IT. NON duplica
+// IT (il tracker resta il motore del combattimento): aggiunge solo i PG mancanti al
+// roster (`savePlayer`, non distruttivo) e li unisce al party di default. I mostri
+// li risolve già il blocco encounter al «Avvia incontro». Best-effort + graceful se
+// IT assente o l'API interna cambia.
+async function inizia_incontro(tp) {
+  const it = app.plugins?.plugins?.["initiative-tracker"];
+  if (!it || !it.data) {
+    new Notice("Initiative Tracker non è installato (o non attivo): installalo per schierare il gruppo.");
+    return "";
+  }
+  const pgs = app.vault.getMarkdownFiles()
+    .map((f) => ({ f, fm: app.metadataCache.getFileCache(f)?.frontmatter || {} }))
+    .filter((e) => e.fm.categoria === "personaggio" && String(e.fm.tipo).toLowerCase() === "pg")
+    .map((e) => playerFromPg(e.f, e.fm))
+    .sort((a, b) => a.name.localeCompare(b.name));
+  if (!pgs.length) {
+    new Notice("Nessun PG nel vault (nota personaggio · tipo pg). Crea i PG col bottone «Crea PG».");
+    return "";
+  }
+  // Roster IT: aggiungi solo i PG mancanti (non distruttivo: preserva i player utente).
+  const existing = new Set((it.data.players || []).map((p) => p && p.name));
+  for (const pg of pgs) {
+    if (existing.has(pg.name)) continue;
+    try { await it.savePlayer(pg); } catch (e) { /* best-effort */ }
+  }
+  // Party di default: crealo se assente e unisci i PG (non distruttivo).
+  try {
+    const pname = it.data.defaultParty || "Gruppo";
+    if (!Array.isArray(it.data.parties)) it.data.parties = [];
+    let party = it.data.parties.find((p) => p && p.name === pname);
+    if (!party) { party = { name: pname, players: [] }; it.data.parties.push(party); }
+    const names = new Set(party.players || []);
+    for (const pg of pgs) names.add(pg.name);
+    party.players = [...names];
+    if (!it.data.defaultParty) it.data.defaultParty = pname;
+    await (it.saveSettings ? it.saveSettings() : Promise.resolve());
+  } catch (e) { /* best-effort */ }
+  const nomi = pgs.map((p) => p.name);
+  new Notice(`Gruppo IT pronto: ${pgs.length} PG nel party (${nomi.slice(0, 4).join(", ")}${nomi.length > 4 ? "…" : ""}). Ora «Avvia incontro» sul blocco include il gruppo.`);
+  try { app.commands?.executeCommandById?.("initiative-tracker:open"); } catch (e) { /* opzionale */ }
+  return "";
+}
+
 async function meta_actions(tp, action = "") {
   const file = app.workspace.getActiveFile?.() ?? tp.config?.target_file;
   if (!file) {
@@ -532,6 +658,17 @@ async function meta_actions(tp, action = "") {
     return await turno_bastione(tp, file);
   }
 
+  if (action === "world_board") {
+    // Genera il World Board (Obsidian Canvas) di un mondo dell'utente (script autonomo).
+    if (tp.user && tp.user.world_board) return await tp.user.world_board(tp);
+    new Notice("world_board non disponibile."); return "";
+  }
+
+  if (action === "inizia_incontro") {
+    // Schiera il gruppo: auto-inietta il Party di Initiative Tracker dai PG (non serve file attivo).
+    return await inizia_incontro(tp);
+  }
+
   new Notice(`Azione non gestita: ${action}`);
   return "";
 }
@@ -542,6 +679,10 @@ meta_actions.matchesCond = matchesCond;
 meta_actions.reciprocalField = reciprocalField;  // esposto per i test
 meta_actions.inverseRelation = inverseRelation;  // esposto per i test
 meta_actions.appendTurnoLog = appendTurnoLog;    // esposto per i test
+meta_actions.rollInline = rollInline;            // esposto per i test
+meta_actions.resolveTurno = resolveTurno;        // esposto per i test
+meta_actions.playerFromPg = playerFromPg;        // esposto per i test
+meta_actions.inizia_incontro = inizia_incontro;  // esposto per i test
 meta_actions.avanza_fronte = avanza_fronte;      // esposto per i test
 meta_actions.scaffold_statblock = scaffold_statblock;  // esposto per i test
 module.exports = meta_actions;

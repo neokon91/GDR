@@ -20,8 +20,13 @@
 Avvia il combattimento dal blocco (Initiative Tracker). Aggiungi le creature per
 nome dal bestiario (SRD / Fantasy Statblocks) con `- <numero>: <Nome>`; un alleato
 (PNG/evocazione) si schiera col gruppo con `- <Nome>, ally`. `players: true` include
-il **gruppo**: i PG vanno configurati una volta come *Party* nelle impostazioni di
-Initiative Tracker (puntandoli alle note in `Mondi/Personaggi`).
+il **gruppo**.
+
+> [!tip] Schiera il gruppo (una volta sola)
+> Niente config manuale del Party: `BUTTON[prepara-gruppo]` auto-popola il **Party di
+> Initiative Tracker** dai tuoi **PG** del vault (note *personaggio · pg*: nome, PF, CA,
+> iniziativa). Dopo, `players: true` qui sotto risolve e **Avvia incontro** include il
+> gruppo. Ripremi quando aggiungi un PG o sali di livello.
 
 > [!tip] Sincronizza da creature e alleati collegati
 > Riscrive il blocco qui sotto dalle *Creature* e dagli *Alleati* in *Collegamenti*

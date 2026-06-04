@@ -2182,6 +2182,40 @@ def test_render_pressioni_cosmico(tmp_path):
 
 
 @pytest.mark.skipif(not shutil.which("node"), reason="node assente")
+def test_spinte_teologiche(tmp_path):
+    """views.spinteFronte (grafo TEOLOGICO): un Fronte religioso (culto / tipo culto)
+    è spinto dalla metafisica — il dio/dominio cosmico che venera che freme o si desta,
+    un culto rivale in ascesa, una profezia che lo riguarda che matura. I culti-rivali
+    NON sono duplicati dal grafo economico generico (li possiede il teologico)."""
+    harness = tmp_path / "teo.js"
+    harness.write_text(
+        'const fs=require("fs");'
+        f'const src=fs.readFileSync({json.dumps(str(render.JS_DIR / "views.js"))},"utf8");'
+        'const m={exports:{}};new Function("module","exports",src)(m,m.exports);'
+        'const L=(n)=>({path:n+".md"});'
+        'const all=[\n'
+        '  {file:{name:"Setta",path:"Setta.md",inlinks:[L("Profezia")]}, categoria:"fazione", tipo:"culto",'
+        '   clock_dim:4, clock:2, domini:[L("Vorth")], rivali:[L("CultoB")]},\n'
+        '  {file:{name:"Vorth",path:"Vorth.md"}, categoria:"divinita", pressione:6},\n'
+        '  {file:{name:"CultoB",path:"CultoB.md"}, categoria:"culto", pressione:7},\n'
+        '  {file:{name:"Profezia",path:"Profezia.md"}, categoria:"profezia", clock_dim:6, clock:4},\n'
+        '];\n'
+        'const dv={page:(l)=>{const p=l&&l.path?l.path:l;return all.find(x=>x.file&&(x.file.path===p||x.file.name===p))||null;}};\n'
+        'const f=(n)=>all.find(x=>x.file.name===n);\n'
+        'm.exports.spinteFronte({},dv,f("Setta")).then(a=>process.stdout.write(JSON.stringify(a)));',
+        encoding="utf-8")
+    res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
+    assert res.returncode == 0, res.stderr
+    out = json.loads(res.stdout)
+    joined = "\n".join(out)
+    assert "🙏 [[Vorth]] che veneri freme" in joined        # il dio cosmico venerato freme (caldo)
+    assert "☦ Culto rivale [[CultoB]] in ascesa" in joined  # culto rivale in ascesa
+    assert "📜 La profezia [[Profezia]] matura (4/6)" in joined  # profezia che matura (inlink che avanza)
+    assert sum("CultoB" in r for r in out) == 1            # NON duplicato dal grafo economico generico
+    assert not any(r.startswith("⚔ Rivale [[CultoB]]") for r in out)  # il generico ha ceduto il culto-rivale
+
+
+@pytest.mark.skipif(not shutil.which("node"), reason="node assente")
 def test_render_stato_mondo(tmp_path):
     """views.renderStatoMondo (cruscotto Fronti): i Fronti (clock_dim) ordinati per
     imminenza (clock + spinte dal grafo); intestazione coi conteggi; non-fronti esclusi."""
@@ -2799,6 +2833,215 @@ def test_world_board_canvas():
     assert edges and all(e["fromNode"] in ids and e["toNode"] in ids for e in edges)
     assert all(e.get("label") for e in edges)                      # archi = relazioni etichettate
     assert render.world_board_canvas(man, CORE) == board           # deterministico
+
+
+def test_example_board_source_override(tmp_path, monkeypatch):
+    """example_board_text: senza sorgente auto-genera un canvas valido; con una
+    versione SORGENTE disposta a mano (Dev/Source/esempio/<Mondo> — Board.canvas) la
+    usa VERBATIM → la vetrina curata a mano è preservata dai rebuild."""
+    import example_world
+    monkeypatch.setattr(example_world, "ESEMPIO_DIR", tmp_path)
+    man = {"mondo": "MondoTest"}
+    auto = example_world.example_board_text(man, CORE)         # nessuna sorgente → auto
+    j = json.loads(auto)
+    assert "nodes" in j and "edges" in j
+    (tmp_path / "MondoTest — Board.canvas").write_text("CANVAS-A-MANO", encoding="utf-8")
+    assert example_world.example_board_text(man, CORE) == "CANVAS-A-MANO"  # sorgente verbatim
+
+
+@pytest.mark.skipif(not shutil.which("node"), reason="node assente")
+def test_world_board_parita_js(tmp_path):
+    """world_board.buildCanvas (azione runtime sui mondi dell'utente) e
+    world_board_canvas (build-time, mondo-esempio) producono il MEDESIMO canvas sui
+    medesimi dati: stesso algoritmo, stesse costanti, stessi colori (core.canvas_colors).
+    Anti-drift fra il gemello JS e il sorgente Python."""
+    man = render.load_example_manifests()[0]
+    py_board = render.world_board_canvas(man, CORE)
+    folder = f"{render.EXAMPLE_FOLDER_PREFIX}{man['mondo']}"
+    notes = [{"nome": n["nome"], "categoria": n.get("categoria"),
+              "fm": n.get("fm", {}), "path": f"{folder}/{n['nome']}.md"}
+             for n in man["note"]]
+    opts = {"categories": CORE["categories"], "relazioni": CORE["relazioni"],
+            "colors": render.canvas_colors(), "world": man["mondo"]}
+    harness = tmp_path / "board.js"
+    harness.write_text(
+        'const fs=require("fs");'
+        f'const src=fs.readFileSync({json.dumps(str(render.JS_DIR / "world_board.js"))},"utf8");'
+        'const m={exports:{}};new Function("module","exports",src)(m,m.exports);'
+        f'const notes={json.dumps(notes, ensure_ascii=False)};'
+        f'const opts={json.dumps(opts, ensure_ascii=False)};'
+        'process.stdout.write(JSON.stringify(m.exports.buildCanvas(notes, opts)));',
+        encoding="utf-8")
+    res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
+    assert res.returncode == 0, res.stderr
+    assert json.loads(res.stdout) == py_board       # parità JS ↔ Python
+
+
+@pytest.mark.skipif(not shutil.which("node"), reason="node assente")
+def test_world_board_runtime_e2e(tmp_path):
+    """world_board (azione runtime, mock Obsidian): enumera le note del mondo scelto
+    (la nota-mondo + ogni nota col suo `mondo`), costruisce il canvas e lo SCRIVE
+    accanto alla nota-mondo. Con un solo mondo non serve il suggester. Verifica
+    card-per-nota, archi tipizzati e percorso del file."""
+    core = {
+        "categories": {"mondo": {}, "luogo": {}, "fazione": {}},
+        "relazioni": {"luogo": [{"field": "controllata_da", "label": "Controllata da", "category": "fazione"}]},
+        "canvas_colors": {"luogo": "4", "fazione": "1"},
+    }
+    harness = tmp_path / "wb_rt.js"
+    harness.write_text(
+        f'const CORE={json.dumps(core, ensure_ascii=False)};\n'
+        'const files=[\n'
+        '  {basename:"Eldoria", path:"Mondi/Eldoria/Eldoria.md", parent:{path:"Mondi/Eldoria"}},\n'
+        '  {basename:"Capitale", path:"Mondi/Eldoria/Capitale.md", parent:{path:"Mondi/Eldoria"}},\n'
+        '  {basename:"Gilda", path:"Mondi/Eldoria/Gilda.md", parent:{path:"Mondi/Eldoria"}},\n'
+        '  {basename:"Estraneo", path:"Mondi/Altro/Estraneo.md", parent:{path:"Mondi/Altro"}},\n'
+        '];\n'
+        'const fmByPath={\n'
+        '  "Mondi/Eldoria/Eldoria.md":{categoria:"mondo"},\n'
+        '  "Mondi/Eldoria/Capitale.md":{categoria:"luogo", mondo:"[[Eldoria]]", controllata_da:"[[Gilda]]"},\n'
+        '  "Mondi/Eldoria/Gilda.md":{categoria:"fazione", mondo:"[[Eldoria]]"},\n'
+        '  "Mondi/Altro/Estraneo.md":{categoria:"luogo", mondo:"[[Altro]]"},\n'
+        '};\n'
+        'let saved=null, savedPath=null;\n'
+        'global.Notice=class{constructor(m){}};\n'
+        'global.app={\n'
+        '  vault:{\n'
+        '    getMarkdownFiles:()=>files,\n'
+        '    adapter:{read:async()=>JSON.stringify(CORE)},\n'
+        '    getAbstractFileByPath:()=>null,\n'
+        '    create:async(p,t)=>{savedPath=p; saved=t; return {path:p};},\n'
+        '    modify:async()=>{},\n'
+        '  },\n'
+        '  metadataCache:{\n'
+        '    getFileCache:(f)=>({frontmatter:fmByPath[f.path]||{}}),\n'
+        '    getFirstLinkpathDest:(name)=>({basename:String(name).split("/").pop()}),\n'
+        '  },\n'
+        '  workspace:{getActiveFile:()=>null, getLeaf:()=>({openFile:async()=>{}})},\n'
+        '};\n'
+        f'const wb=require({json.dumps(str(render.JS_DIR / "world_board.js"))});\n'
+        'wb({config:{}}).then(()=>process.stdout.write(JSON.stringify({path:savedPath, board:JSON.parse(saved)})));\n',
+        encoding="utf-8")
+    res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
+    assert res.returncode == 0, res.stderr
+    out = json.loads(res.stdout)
+    assert out["path"] == "Mondi/Eldoria/Eldoria — Board.canvas"   # accanto alla nota-mondo
+    files_nodes = [n for n in out["board"]["nodes"] if n["type"] == "file"]
+    names = {n["file"].split("/")[-1] for n in files_nodes}
+    assert names == {"Eldoria.md", "Capitale.md", "Gilda.md"}      # mondo + sue note, NON l'estraneo
+    edges = out["board"]["edges"]
+    assert len(edges) == 1 and edges[0]["label"] == "Controllata da"  # relazione tipizzata
+
+
+@pytest.mark.skipif(not shutil.which("node"), reason="node assente")
+def test_bastione_resolver_puro(tmp_path):
+    """meta_actions.rollInline tira i dadi inline (NdM, ×K, ±B) lasciando l'etichetta;
+    resolveTurno parsa «Struttura | Ordine | esito» e risolve gli esiti. RNG iniettato
+    → deterministico. License-safe: ordini/esiti sono autoriali, l'azione fa i conti."""
+    harness = tmp_path / "bast.js"
+    harness.write_text(
+        f'const meta=require({json.dumps(str(render.JS_DIR / "meta_actions.js"))});\n'
+        'const zero=()=>0, hi=()=>0.99;\n'
+        'const out={\n'
+        '  min:meta.rollInline("1d6 lingotti", zero),\n'           # 1 -> "1 lingotti"
+        '  mult:meta.rollInline("1d4×10 mo", hi),\n'               # (3+1)*10 -> "40 mo"
+        '  modd:meta.rollInline("2d6+1 difensori", zero),\n'       # (1+1)+1 -> "3 difensori"
+        '  nodice:meta.rollInline("un appunto sul nemico", zero),\n'
+        '  turno:meta.resolveTurno(["Fucina | Fabbricare | 1d6 lingotti","Biblioteca | Ricercare | appunto"], zero),\n'
+        '};\n'
+        'process.stdout.write(JSON.stringify(out));\n',
+        encoding="utf-8")
+    res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
+    assert res.returncode == 0, res.stderr
+    out = json.loads(res.stdout)
+    assert out["min"] == "1 lingotti"
+    assert out["mult"] == "40 mo"
+    assert out["modd"] == "3 difensori"
+    assert out["nodice"] == "un appunto sul nemico"          # nessun dado -> invariato
+    assert out["turno"] == [
+        {"struttura": "Fucina", "ordine": "Fabbricare", "esito": "1 lingotti"},
+        {"struttura": "Biblioteca", "ordine": "Ricercare", "esito": "appunto"}]
+
+
+@pytest.mark.skipif(not shutil.which("node"), reason="node assente")
+def test_bastione_turno_e2e(tmp_path):
+    """meta_actions.turno_bastione risolve un turno dalle `ordini` dichiarate (mock
+    Obsidian): numera il turno (turni+1), tira gli esiti e scrive un blocco datato
+    nel *Registro dei turni*, aggiornando il frontmatter `turni`/`ultimo_turno`."""
+    harness = tmp_path / "turno.js"
+    harness.write_text(
+        'const body="# Forte Cenere\\n\\n## Registro dei turni\\n";\n'
+        'const fm={categoria:"bastione", turni:2, ordini:["Fucina | Fabbricare | 1d6 lingotti","Caserma | Reclutare | 1d4 difensori"]};\n'
+        'let saved=null;\n'
+        'global.Notice=class{constructor(m){}};\n'
+        'const file={basename:"Forte Cenere", path:"Mondi/Bastioni/Forte Cenere.md"};\n'
+        'global.app={\n'
+        '  workspace:{getActiveFile:()=>file},\n'
+        '  metadataCache:{getFileCache:()=>({frontmatter:fm})},\n'
+        '  vault:{read:async()=>body, modify:async(f,d)=>{saved=d;}},\n'
+        '  fileManager:{processFrontMatter:async(f,fn)=>{fn(fm);}},\n'
+        '};\n'
+        'const tp={date:{now:()=>"2026-06-04"}};\n'
+        f'const meta=require({json.dumps(str(render.JS_DIR / "meta_actions.js"))});\n'
+        'meta(tp,"turno_bastione").then(()=>process.stdout.write(JSON.stringify({saved, turni:fm.turni, ultimo:fm.ultimo_turno})));\n',
+        encoding="utf-8")
+    res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
+    assert res.returncode == 0, res.stderr
+    out = json.loads(res.stdout)
+    assert out["turni"] == 3 and out["ultimo"] == "2026-06-04"   # turno numerato + datato
+    saved = out["saved"]
+    assert "**Turno 3**" in saved
+    assert "**Fucina** → *Fabbricare*" in saved
+    assert "**Caserma** → *Reclutare*" in saved
+    assert "- **2026-06-04** — **Turno 3**" in saved            # voce datata nel Registro
+    assert saved.count("## Registro dei turni") == 1            # niente heading duplicato
+
+
+@pytest.mark.skipif(not shutil.which("node"), reason="node assente")
+def test_inizia_incontro_e2e(tmp_path):
+    """meta_actions.inizia_incontro (ponte Initiative Tracker, mock plugin): auto-popola
+    il Party IT dai PG (personaggio · tipo pg) — `playerFromPg` mappa nome/PF/CA/init-mod;
+    aggiunge solo i PG MANCANTI al roster (`savePlayer`), unisce i nomi al party di
+    default e persiste (`saveSettings`); i non-PG e i PG già presenti sono esclusi."""
+    harness = tmp_path / "it.js"
+    harness.write_text(
+        'const saved=[];\n'
+        'const it={data:{players:[{name:"Esistente"}], parties:[{name:"Gruppo",players:["Esistente"]}], defaultParty:"Gruppo"},\n'
+        '  savePlayer:async function(p){this.data.players.push(p); saved.push(p.name);},\n'
+        '  saveSettings:async function(){this.data._saved=(this.data._saved||0)+1;}};\n'
+        'const files=[\n'
+        '  {basename:"Vera", path:"Mondi/Personaggi/Vera.md"},\n'
+        '  {basename:"Renzo", path:"Mondi/Personaggi/Renzo.md"},\n'
+        '  {basename:"Goblin", path:"x/Goblin.md"},\n'
+        '  {basename:"Esistente", path:"Mondi/Personaggi/Esistente.md"},\n'
+        '];\n'
+        'const fmByPath={\n'
+        '  "Mondi/Personaggi/Vera.md":{categoria:"personaggio", tipo:"pg", nome:"Vera Sabbialesta", pf_max:25, ca:16, destrezza:14, livello:3},\n'
+        '  "Mondi/Personaggi/Renzo.md":{categoria:"personaggio", tipo:"pg", nome:"Renzo", pf_max:18, ca:14, destrezza:16, livello:2},\n'
+        '  "x/Goblin.md":{categoria:"creatura", tipo:"mostro"},\n'
+        '  "Mondi/Personaggi/Esistente.md":{categoria:"personaggio", tipo:"pg", nome:"Esistente", pf_max:10, ca:12},\n'
+        '};\n'
+        'global.Notice=class{constructor(m){}};\n'
+        'global.app={\n'
+        '  vault:{getMarkdownFiles:()=>files},\n'
+        '  metadataCache:{getFileCache:(f)=>({frontmatter:fmByPath[f.path]||{}})},\n'
+        '  plugins:{plugins:{"initiative-tracker":it}},\n'
+        '  commands:{executeCommandById:()=>{}},\n'
+        '};\n'
+        f'const meta=require({json.dumps(str(render.JS_DIR / "meta_actions.js"))});\n'
+        'const pf=meta.playerFromPg({basename:"Vera"},fmByPath["Mondi/Personaggi/Vera.md"]);\n'
+        'meta.inizia_incontro({}).then(()=>process.stdout.write(JSON.stringify({\n'
+        '  pf, saved, party: it.data.parties.find(p=>p.name==="Gruppo").players,\n'
+        '  roster: it.data.players.map(p=>p.name), savedCount: it.data._saved})));\n',
+        encoding="utf-8")
+    res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
+    assert res.returncode == 0, res.stderr
+    out = json.loads(res.stdout)
+    assert out["pf"] == {"name": "Vera Sabbialesta", "player": True, "hp": 25, "ac": 16, "modifier": 2, "level": 3}
+    assert out["saved"] == ["Renzo", "Vera Sabbialesta"]        # solo i PG MANCANTI (Esistente già nel roster)
+    assert set(out["party"]) == {"Esistente", "Renzo", "Vera Sabbialesta"}  # union col party esistente
+    assert "Goblin" not in out["party"]                          # i non-PG esclusi
+    assert out["savedCount"] >= 1                                # persistito (saveSettings)
 
 
 # --- Pubblicazione itch (publish_itch.py) -----------------------------------

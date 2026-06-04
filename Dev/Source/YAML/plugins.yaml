@@ -238,3 +238,11 @@ buttons:
   - id: turno-bastione
     label: Turno di bastione
     action: turno_bastione
+  # World Board: genera/aggiorna il Canvas «a colpo d'occhio» del mondo dell'utente.
+  - id: world-board
+    label: Genera World Board
+    action: world_board
+  # Ponte Initiative Tracker: auto-popola il Party dai PG (così players: true risolve).
+  - id: prepara-gruppo
+    label: Prepara il gruppo (IT)
+    action: inizia_incontro

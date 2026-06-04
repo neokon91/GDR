@@ -155,6 +155,10 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderMap");
 ```
 
+> [!tip] World Board — il mondo a colpo d'occhio
+> Genera un **Canvas** di questo mondo: una card per ogni nota, una linea per ogni relazione tipizzata. Vista visiva alternativa alla *Rete del mondo*. `BUTTON[world-board]`
+> Ripremi per **aggiornarlo** dopo aver creato note o collegamenti.
+
 > [!info] Scala e viaggio
 > Scala mappa (km per unità): `INPUT[number:scala_mappa]` — km per unità di coordinata. Imposta i `coord` sui **Luoghi**: la tab *Dintorni* mostrerà le distanze in linea d'aria in km.
 >

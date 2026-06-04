@@ -559,6 +559,33 @@ note:
     pressione: 6
     prossima_mossa: I sogni di Vorth raggiungono un personaggio del gruppo.
 
+  # ----------------------------------------------------------------- PROFEZIE
+  - nome: La Profezia del Risveglio
+    categoria: profezia
+    tipo: di rinascita
+    fm:
+      # Custodita dalla Setta (inlink) + clock-profezia che AVANZA: renderPressioni
+      # della Setta la legge come «📜 ... matura» (grafo teologico). La metafisica
+      # preme sulla fede come l'economia preme sulle fazioni.
+      culti: ["[[La Setta della Voragine]]"]
+      riguarda: ["[[Profeta Cael]]"]
+      stato_profezia: in corso
+      rivelazione: incontrato
+      clock_dim: 6
+      clock: 4
+    fatti:
+      - ["Stato", "In corso (4/6)"]
+      - ["Custodita da", "[[La Setta della Voragine]]"]
+      - ["Riguarda", "[[Profeta Cael]]"]
+    lore: >-
+      «Quando il sale piangerà e l'argento tacerà, il Sepolto aprirà gli occhi sotto la
+      pietra, e chi sognò per primo parlerà per ultimo.» I Corvi la sussurrano, la Setta
+      la recita: i suoi segni — i boati della Voragine, i sogni condivisi — si moltiplicano.
+    uso_al_tavolo: "L'orologio narrativo della posta cosmica: ogni segno che si avvera la fa salire e infiamma la Setta."
+    gancio: Un eremita mostra ai personaggi un verso della profezia che credono di aver già visto avverarsi.
+    pressione: 6
+    prossima_mossa: Un nuovo segno si compie — i sogni di Vorth raggiungono qualcuno fuori dalla Setta.
+
   # ----------------------------------------------------------------- RISORSE
   - nome: Sale
     categoria: risorsa

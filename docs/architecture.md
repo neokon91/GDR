@@ -11,7 +11,9 @@ Dev/Source/                      Dev/Tools/                    dist/GDR-vault/
   JS/ (Templater+JSEngine)│      ├─ common.py   (modello+IO)     z.automazioni/ (JS + *.json)
   SRD/ (JSON IT)          │      ├─ build_srd.py                 z.classi/ (fileClass)
   statblocks/ (FS)        │      ├─ build_personaggio.py         SRD/ (sola lettura)
-  SiteJinja/ (HTML)      ─┘      ├─ validate.py                  Home/LEGGIMI/Indici/
+  esempio/ (mondi-demo)   │      ├─ render_config.py (.obsidian) Home/LEGGIMI/Indici/
+  SiteJinja/ (HTML)      ─┘      ├─ example_world.py (demo)      Mondi/_Esempio — */
+                                 ├─ validate.py
                                  └─ build_site.py ─▶ dist/GDR-site/ (sito giocatori)
 ```
 
@@ -74,7 +76,9 @@ tutti importano `common`).
 | `build_personaggio.py` | Converter del rules-engine PG: SRD + `pg_rules.yaml` → `personaggio.json`. |
 | `build_site.py` | Esporta il **sito dei giocatori** statico (`build_site`, CLI `--site`): dal vault → HTML spoiler-free in `dist/GDR-site/`. Markdown→HTML minimale; esclude callout `segreto`, campi del DM, blocchi dinamici/Meta Bind/`dice:` e le note `visibilita: dm`/`pubblico: false`. Template in `Dev/Source/SiteJinja/`. |
 | `validate.py` | `check()` + `validate_split`/`validate_entities`/`validate_entity_schema`/`validate_reciprocals`/`validate_aux_yaml`: confine core/system, dup-ID, snake_case, shape, schema wizard (`from` ammessi, `options`/`category`), inversi reciproci, YAML ausiliari (astrologia/pg_rules), template/Jinja, e l'uguaglianza byte delle sorgenti `_*.js`. |
-| `render.py` | `build()` orchestratore snello (~25 righe) che delega a helper nominati (`write_engine_data`/`render_notes`/`write_obsidian_config`/…), `clean()`, CLI. Re-esporta i nomi pubblici dei moduli. |
+| `render_config.py` | Scrittura della config `.obsidian` (merge NON distruttivo, un writer per plugin: Templater/Meta Bind/Metadata Menu/Iconize/Callout Manager/Fantasy Statblocks/Initiative Tracker/Folder Notes/Tab Panels/Calendarium/Bookmarks/Homepage/core), i bottoni e fileClass derivati dal modello (`creation_buttons`/`action_buttons`/`fileclass_fields`/`meta_bind_config`), le viste **Bases** (`bases_doc`/`write_bases`) e la **presentazione** colore-categoria (`CATEGORY_ACCENTS` → CSS `gdr.css` + preset Canvas `canvas_colors`). |
+| `example_world.py` | Mondo-esempio (demo precaricata, note READ-ONLY Markdown/Dataview) + nota guidata «Inizia da qui» + **World Board** build-time (`world_board_canvas` → `.canvas`). `write_example_world` riscrive solo `Mondi/_Esempio — <X>/` (namespace riservato). Dipende da `render_config` (colori) + `common`. |
+| `render.py` | Orchestratore (~400 righe): `build()` delega a helper nominati (`write_engine_data`/`render_notes`/`write_bases`/`write_obsidian_config`/`write_example_world`/…), `clean()`, `scaffold_folders()`, CLI. Re-esporta i nomi pubblici dei moduli per i test. |
 
 ## Pipeline di build (`render.py build()`)
 

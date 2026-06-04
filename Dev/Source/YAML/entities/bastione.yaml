@@ -48,8 +48,5 @@ creation:
     prompt: "Cos'è il bastione: aspetto, storia, ruolo"
     heading: Descrizione
   - field: strutture
-    prompt: "Strutture (base e speciali) e l'ordine che ciascuna emette al turno"
+    prompt: "Strutture (base e speciali): cosa sono, aspetto, ruolo (la descrizione narrativa)"
     heading: Strutture
-  - field: turno
-    prompt: "Turno di bastione (ogni 7 giorni): ordini dati, esiti, eventi"
-    heading: Turno di bastione

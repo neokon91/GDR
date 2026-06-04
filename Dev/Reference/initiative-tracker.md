@@ -7,7 +7,8 @@ Repo: https://github.com/javalent/initiative-tracker  (ex `valentine195/obsidian
 > `aggiorna_encounter` auto-popola **creature + alleati** (flag `ally`) dalle relazioni e
 > applica gli **override HP/CA/init** dal campo `varianti`; la **difficoltà/budget XP 2024** è in
 > `renderEncounter`; quick-ref condizioni in `renderCondizioni`.
-> Residuo: i PG entrano via *Party* nelle impostazioni IT (non dalla pipeline).
+> ✅ **Party auto-iniettato**: `inizia_incontro` (bottone *Prepara il gruppo (IT)*) popola il
+> Party IT dai **PG** del vault (personaggio · tipo pg) via `savePlayer`, così `players: true` risolve.
 
 ## Cos'è
 Tracker di iniziativa/combattimento 5e: ordina i turni, gestisce HP/condizioni, e
@@ -44,11 +45,13 @@ creatura in un click (degrada se IT assente).
 - **Render pigro nei tab**: il blocco vive dentro ` ````tabs ` → renderizza solo quando il
   tab *Combattimento* è attivo (come per i callout collassati, vedi [obsidian-core](obsidian-core.md#callout)).
 - I nomi creatura sono **stringhe**: un typo = creatura non trovata, niente statblock.
-- `players: true` richiede un party configurato nel plugin (non generato dalla pipeline).
+- `players: true` richiede un party configurato nel plugin — ora **auto-iniettato** da
+  `inizia_incontro` (meta_action) dai PG del vault; nessuna config manuale.
 
 ## Fatto (ex roadmap DM #3)
 Pre-popolamento di `creatures:` (e **alleati** col flag `ally`) dalle relazioni
 dell'`incontro` (`aggiorna_encounter`); **override HP/CA/init** dal campo `varianti`
 (boss/gregari, incontri ripetibili); **difficoltà/budget XP 2024** in `renderEncounter`;
-quick-ref condizioni dalle 15 note SRD (`renderCondizioni`). Resta da fare: l'auto-iniezione
-del **Party** (è gestito dalle impostazioni del plugin, non dalla pipeline).
+quick-ref condizioni dalle 15 note SRD (`renderCondizioni`). ✅ **Auto-iniezione del Party**:
+`inizia_incontro` schiera i PG del vault nel Party IT (runtime, via `savePlayer`/`saveSettings`),
+non-distruttivo (aggiunge solo i mancanti) — il ponte è completo, IT resta il motore del combattimento.

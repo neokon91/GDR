@@ -30,9 +30,6 @@
 > [!note] Strutture
 > `INPUT[textArea:strutture]`
 
-> [!note] Turno di bastione
-> `INPUT[textArea:turno]`
-
 
 > [!quote]- 🏰 Ordini di bastione 2024 (quick-ref)
 > Ogni **struttura speciale** emette un ordine al **turno di bastione** (ogni 7 giorni):
@@ -50,8 +47,17 @@
 > **Potenziare** *(Empower)* — dà un beneficio magico temporaneo a chi parte all'avventura.
 >
 > **Mantenere** *(Maintain)* — la struttura rende oro / si autosostiene.
+
+> [!example] Strutture & ordini del turno
+> Una riga per struttura: **`Struttura | Ordine | esito`**. L'esito può contenere dadi — `1d6`, `1d4×10`, `2d6+1` — che il **turno** tira per te.
+>
+> `INPUT[list:ordini]`
+>
+> *Esempi:* `Fucina | Fabbricare | 1d6 lingotti` · `Mercato | Commerciare | 1d4×10 mo` · `Caserma | Reclutare | 1d4 difensori` · `Biblioteca | Ricercare | un appunto sul nemico`
+
 > [!tip] Turno di bastione
-> Registra un turno (7 giorni) nel *Registro dei turni*: `BUTTON[turno-bastione]`
+> Risolvi il turno (7 giorni): tira gli esiti delle strutture qui sopra, li numera e li data nel *Registro dei turni*. `BUTTON[turno-bastione]`
+> *(Senza strutture in `ordini`, chiede un riepilogo libero.)*
 --- 🔗 Collegamenti
 
 > [!example] Relazioni

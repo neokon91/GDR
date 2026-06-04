@@ -1052,6 +1052,9 @@ async function spinteFronte(app, dv, page) {
   if (!dv || !page || !page.file || page.clock_dim == null) return [];
   const hot = (p) => (Number(p && p.pressione) || 0);
   const out = [];
+  // Un Fronte è "religioso" (categoria culto o tipo culto): i suoi rivali-culto e
+  // il sacro che serve li tratta il GRAFO TEOLOGICO sotto, non quello economico.
+  const religioso = text(page.categoria) === "culto" || text(page.tipo) === "culto";
   for (const link of asArray(page.dipende_da)) {
     const r = resolve(dv, link); if (!r || !r.file) continue;
     const ctrl = resolve(dv, r.controllata_da);
@@ -1070,6 +1073,8 @@ async function spinteFronte(app, dv, page) {
   }
   for (const link of asArray(page.rivali)) {
     const o = resolve(dv, link); if (!o || !o.file) continue;
+    // I culti-rivali di un Fronte religioso li tratta il grafo teologico (sotto).
+    if (religioso && (text(o.categoria) === "culto" || text(o.tipo) === "culto")) continue;
     if (hot(o) >= 7) out.push(`⚔ Rivale ${noteLink(o)} in ascesa (${pressureLabel(o.pressione)})`);
   }
   // Grafo cosmico: un principio cosmico-Fronte è spinto dai suoi siti di
@@ -1083,6 +1088,38 @@ async function spinteFronte(app, dv, page) {
     for (const fld of MANIF_FIELDS)
       for (const link of asArray(page[fld])) add(resolve(dv, link), "Si manifesta in");
     for (const link of asArray(page.file.inlinks)) add(resolve(dv, link), "Dipende da te");
+  }
+  // Grafo TEOLOGICO: un Fronte religioso è spinto dalla metafisica — il dio/dominio
+  // cosmico che venera si desta o freme, un culto rivale sale, una profezia che lo
+  // riguarda matura. La fede genera trame come l'economia genera tensioni materiali
+  // (il wedge: cosmologia → tavolo, dal lato dei mortali che la servono).
+  if (religioso) {
+    const cdim = (o) => Number(o && o.clock_dim) || 0;
+    const adv = (o) => cdim(o) > 0 && (Number(o.clock) || 0) >= Math.ceil(cdim(o) / 2);
+    const seenT = new Set();
+    const push = (o, line) => { if (o && o.file && !seenT.has(o.file.path)) { seenT.add(o.file.path); out.push(line); } };
+    // 1) Il dio / dominio cosmico che servi (divinita, domini) si desta o freme.
+    for (const fld of ["divinita", "domini"])
+      for (const link of asArray(page[fld])) {
+        const o = resolve(dv, link); if (!o || !o.file) continue;
+        if (!COSMO.has(text(o.categoria)) || (hot(o) < 5 && !adv(o))) continue;
+        const stato = adv(o) ? `si desta (${Number(o.clock) || 0}/${cdim(o)})` : `freme (${pressureLabel(o.pressione)})`;
+        push(o, `🙏 ${noteLink(o)} che veneri ${stato}: la posta cosmica matura, la fede si infiamma`);
+      }
+    // 2) Un culto rivale in ascesa (caldo o fronte a metà): la fede è contesa.
+    for (const link of asArray(page.rivali)) {
+      const o = resolve(dv, link); if (!o || !o.file) continue;
+      if ((text(o.categoria) !== "culto" && text(o.tipo) !== "culto") || (hot(o) < 5 && !adv(o))) continue;
+      const why = adv(o) ? `fronte in corsa (${Number(o.clock) || 0}/${cdim(o)})` : pressureLabel(o.pressione);
+      push(o, `☦ Culto rivale ${noteLink(o)} in ascesa (${why}): la fede è contesa`);
+    }
+    // 3) Una profezia / un mito che ti riguarda matura (inlink che avanza).
+    for (const link of asArray(page.file.inlinks)) {
+      const o = resolve(dv, link); if (!o || !o.file) continue;
+      const c = text(o.categoria);
+      if ((c === "profezia" || c === "mito") && adv(o))
+        push(o, `📜 ${c === "profezia" ? "La profezia" : "Il mito"} ${noteLink(o)} matura (${Number(o.clock) || 0}/${cdim(o)}): la sua ora si avvicina`);
+    }
   }
   return out;
 }
