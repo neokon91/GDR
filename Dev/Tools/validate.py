@@ -411,6 +411,12 @@ def check() -> int:
             errors.append(f"{cid}: manca il campo 'gruppo' (entities/{cid}.yaml)")
         elif grp not in gruppi_ids:
             errors.append(f"{cid}: gruppo '{grp}' non dichiarato in core.gruppi")
+        # Profili-sottotipo: i `campi` dichiarati devono essere campi registrati
+        # (renderTipoProfilo ne legge la label da core.fields).
+        for sub, prof in ((cat or {}).get("subtype_profiles") or {}).items():
+            for fid in (prof or {}).get("campi", []) or []:
+                if fid not in fields:
+                    errors.append(f"{cid}/{sub}: campo-profilo '{fid}' non in core.fields")
 
     # Anti-drift: le opzioni del select 'stile_nomi' (plugins.metabind_inputs)
     # devono combaciare con gli stili di generatori.yaml, che genera.js legge a

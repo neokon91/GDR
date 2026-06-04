@@ -524,6 +524,37 @@ function parseTappa(riga) {
     : { quando: s.slice(0, i).trim(), stato: s.slice(i + 1).trim() };
 }
 
+// Pannello "🧩 Dettagli del tipo": il PROFILO del sottotipo scelto (`tipo`) —
+// descrizione + i suoi campi (valore dal frontmatter) + se è un Fronte (clock) / se
+// evolve. Reattivo: cambia se cambi `tipo`. I campi si editano dal pannello Proprietà
+// (sono chiavi di frontmatter). "" se il sottotipo non ha un profilo dedicato.
+async function renderTipoProfilo(app, page) {
+  if (!page) return "";
+  const cat = text(page.categoria), tipo = text(page.tipo);
+  if (!cat || !tipo) return "";
+  const core = await loadCoreData(app);
+  const prof = (((core.categories || {})[cat] || {}).subtype_profiles || {})[tipo];
+  if (!prof) return "";
+  const fields = core.fields || {};
+  const fmt = (v) => {
+    if (Array.isArray(v)) return v.length ? v.join(", ") : "—";
+    return (v == null || v === "") ? "—" : String(v);
+  };
+  const out = ["> [!note]- 🧩 " + tipo + " — dettagli del tipo"];
+  if (prof.descrizione) out.push("> " + prof.descrizione);
+  const campi = asArray(prof.campi);
+  if (campi.length) {
+    out.push(">");
+    for (const id of campi) out.push("> **" + ((fields[id] || {}).label || id) + "**: " + fmt(page[id]));
+  }
+  const tags = [];
+  if (prof.clock) tags.push("⏳ è un **Fronte** — usa il clock nell'*Al tavolo*");
+  if (prof.evoluzione) tags.push("🕰 **evolve** tra le epoche — vedi *Cronologia*");
+  if (tags.length) { out.push(">"); out.push("> " + tags.join(" · ")); }
+  out.push(">", "> *I campi del tipo si modificano dal pannello **Proprietà**.*");
+  return out.join("\n");
+}
+
 // Pannello "Cronologia": il percorso dell'entità attraverso le epoche (proprietà
 // `tappe`), reso in ordine d'autore come una linea di vita (fondazione → ascesa →
 // crisi). Vuoto → guida col formato. Le entità durature cambiano: il mondo non è
@@ -1425,6 +1456,7 @@ module.exports = {
   renderIncantesimi,
   renderTimeline, quandoNum, epocaLabel,
   renderTappe, parseTappa,
+  renderTipoProfilo,
   renderCausalita,
   renderMap, renderDintorni, renderViaggio, parseCoord,
   renderPressioni, cosmicPush, spinteFronte, renderStatoMondo,

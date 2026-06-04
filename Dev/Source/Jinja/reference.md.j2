@@ -16,6 +16,9 @@
 {% endif %}
 --- 📖 Lore
 
+{% if core.get('categories', {}).get(template.category, {}).get('subtype_profiles') %}
+{{ m.tipo_profilo() }}
+{% endif %}
 > [!note]- Descrizione
 > Cosa è, com'è, perché conta al tavolo.
 

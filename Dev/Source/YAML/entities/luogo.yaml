@@ -13,19 +13,64 @@ templates:
   target: z.modelli/Luogo.md
   jinja: luogo.md.j2
   primary: true
+# SOTTOTIPI con PROFILO: il 'tipo' è la SCALA/FORMA spaziale, dal continente al
+# dungeon — una GERARCHIA di contenimento (continente ⊃ regione ⊃ insediamento/sito).
+# Ogni profilo porta i SUOI campi (renderTipoProfilo li mostra in base al tipo), i suoi
+# prompt-wizard, e i flag clock (è un Fronte?) ed evoluzione (cambia tra le epoche?).
 subtypes:
-- regione
-- insediamento
-- sito di interesse
-- struttura
-- dungeon
-- rovina
-- landmark naturale
-# Classificazione a 2 livelli: la 'famiglia' (natura del luogo, seed FantasyWorld
-# luogo_cat) affianca il 'tipo' (forma/scala). Select + legenda auto-documentante.
+- nome: continente
+  descrizione: "Grande massa di terra che raccoglie regioni e mari: il livello più alto della geografia."
+  campi: [estensione, terreno_dominante]
+  wizard: ["Geografia d'insieme: rilievi, mari, clima dominante", "Cosa lo distingue dagli altri continenti"]
+  clock: false
+  evoluzione: true
+- nome: regione
+  descrizione: "Area che contiene insediamenti e siti: provincia, marca, valle, arcipelago, ducato geografico."
+  campi: [capoluogo, estensione, terreno_dominante]
+  wizard: ["Confini naturali e cosa la rende un'unità", "Quali popoli e poteri la abitano"]
+  clock: false
+  evoluzione: true
+- nome: insediamento
+  descrizione: "Luogo abitato, dal villaggio alla metropoli: qui i PG comprano, pregano, riposano, reclutano, indagano."
+  campi: [taglia_insediamento, popolazione, governo_locale, servizi]
+  wizard: ["Economia: di cosa vive", "Difese: mura, guardia, milizia"]
+  clock: false
+  evoluzione: true
+- nome: sito di interesse
+  descrizione: "Un punto notevole singolo: una sorgente sacra, un cerchio di pietre, un campo di battaglia."
+  campi: [perche_notevole]
+  wizard: ["Cosa ci si trova, e perché qualcuno ci verrebbe"]
+  clock: false
+  evoluzione: false
+- nome: struttura
+  descrizione: "Un'opera singola costruita: tempio, fortezza, ponte, faro, torre, mulino."
+  campi: [funzione_struttura, stato_struttura, occupante]
+  wizard: ["Chi l'ha costruita e quando"]
+  clock: false
+  evoluzione: false
+- nome: dungeon
+  descrizione: "Complesso esplorabile pieno di pericoli e ricompense: cripta, caverna, dedalo, rovina abitata."
+  campi: [livelli, occupante, ricompensa]
+  wizard: ["Origine: chi l'ha scavato/costruito e perché", "Il guardiano o il pericolo principale"]
+  clock: true
+  evoluzione: false
+- nome: rovina
+  descrizione: "Resto di un luogo caduto: custodisce eco di ciò che fu e, a volte, di chi vi dorme ancora."
+  campi: [epoca_caduta, cosa_resta]
+  wizard: ["Cos'era prima della caduta", "Perché è caduta — e cosa l'ha sostituita"]
+  clock: false
+  evoluzione: true
+- nome: landmark naturale
+  descrizione: "Una caratteristica naturale notevole: fiume, catena montuosa, foresta, vulcano, voragine."
+  campi: [fenomeno, terreno_dominante]
+  wizard: ["Il fenomeno o pericolo naturale che lo definisce"]
+  clock: false
+  evoluzione: false
+# Classificazione a 2 livelli: la 'famiglia' è la NATURA (mitica/ontologica) del luogo,
+# ortogonale alla scala-tipo. Niente più 'insediamento'/'rovina' qui (erano forme = tipo):
+# restano le nature vere (mondano vs sacro/liminale/selvaggio/onirico/planare/simbolico).
 famiglie:
-- { nome: insediamento,      descrizione: "Luogo stabilmente abitato o urbanizzato, con strutture create da civiltà intelligenti." }
-- { nome: rovina,            descrizione: "Resto di un luogo distrutto, dimenticato o caduto; custodisce eco di civiltà passate o cataclismi." }
+- { nome: mondano,           descrizione: "Luogo ordinario del mondo materiale: abitato, coltivato o di passaggio, senza carica metafisica particolare." }
 - { nome: santuario,         descrizione: "Spazio con forte carica spirituale, usato per riti, culti o contatto con entità superiori." }
 - { nome: confine,           descrizione: "Punto di transizione tra realtà, epoche o stati dell'essere: soglia, varco, non-luogo." }
 - { nome: selvaggio,         descrizione: "Spazio non civilizzato, primordiale, vivo: natura pura o ambiente magico incontaminato." }
@@ -37,6 +82,23 @@ famiglie:
 # alla distanza per confini (BFS su confina_con). Editabile nella tab Mappa.
 fields:
   coord: { label: Coordinate, widget: text }
+  # Campi dei profili-sottotipo: renderTipoProfilo li mostra secondo il `tipo` scelto;
+  # si modificano dal pannello Proprietà di Obsidian (sono chiavi di frontmatter).
+  estensione:          { label: Estensione,             widget: text }
+  terreno_dominante:   { label: Terreno dominante,      widget: terreno }
+  capoluogo:           { label: Capoluogo,              widget: legame }
+  taglia_insediamento: { label: Taglia,                 widget: taglia_insediamento }
+  governo_locale:      { label: Governo locale,         widget: governo_locale }
+  servizi:             { label: Servizi & edifici,      widget: servizi }
+  livelli:             { label: Livelli / aree,         widget: number }
+  occupante:           { label: Occupante,              widget: legame }
+  ricompensa:          { label: Ricompensa chiave,      widget: text }
+  perche_notevole:     { label: Perché è notevole,      widget: text }
+  funzione_struttura:  { label: Funzione,               widget: funzione_struttura }
+  stato_struttura:     { label: Stato dell'opera,       widget: stato_struttura }
+  epoca_caduta:        { label: Epoca della caduta,     widget: text }
+  cosa_resta:          { label: Cosa resta,             widget: text }
+  fenomeno:            { label: Fenomeno naturale,      widget: text }
 scheda:
 - clima
 - popolazione

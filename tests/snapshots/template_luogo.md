@@ -15,15 +15,14 @@
 
 > [!opzioni]- ⚙️ Opzioni
 > **Stato**: `INPUT[stato][:stato]`
-> **Tipo**: `INPUT[inlineSelect(option(regione), option(insediamento), option(sito di interesse), option(struttura), option(dungeon), option(rovina), option(landmark naturale)):tipo]`
-> **Famiglia**: `INPUT[inlineSelect(option(insediamento), option(rovina), option(santuario), option(confine), option(selvaggio), option(onirico), option(interdimensionale), option(simbolico)):famiglia]`
+> **Tipo**: `INPUT[inlineSelect(option(continente), option(regione), option(insediamento), option(sito di interesse), option(struttura), option(dungeon), option(rovina), option(landmark naturale)):tipo]`
+> **Famiglia**: `INPUT[inlineSelect(option(mondano), option(santuario), option(confine), option(selvaggio), option(onirico), option(interdimensionale), option(simbolico)):famiglia]`
 > **Canonico**: `INPUT[toggle:canonico]`
 > **Visibilità** *(dm = solo DM, fuori dal sito giocatori)*: `INPUT[inlineSelect(option(normale), option(dm)):visibilita]`
 > **Rivelazione**: `INPUT[rivelazione][:rivelazione]`
 
 > [!note]- Cosa significa ogni famiglia
-> **insediamento** — Luogo stabilmente abitato o urbanizzato, con strutture create da civiltà intelligenti.
-> **rovina** — Resto di un luogo distrutto, dimenticato o caduto; custodisce eco di civiltà passate o cataclismi.
+> **mondano** — Luogo ordinario del mondo materiale: abitato, coltivato o di passaggio, senza carica metafisica particolare.
 > **santuario** — Spazio con forte carica spirituale, usato per riti, culti o contatto con entità superiori.
 > **confine** — Punto di transizione tra realtà, epoche o stati dell'essere: soglia, varco, non-luogo.
 > **selvaggio** — Spazio non civilizzato, primordiale, vivo: natura pura o ambiente magico incontaminato.
@@ -39,6 +38,9 @@
 ````tabs
 --- 📖 Lore
 
+```js-engine
+return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderTipoProfilo");
+```
 > [!abstract] Scheda
 > Clima: `INPUT[clima][:clima]`
 > Popolazione: `INPUT[text:popolazione]`

@@ -71,6 +71,7 @@ const PANELS = {
   renderAlbero: { mode: "md", args: (a, d) => [a, d.page] },
   renderCoerenza: { mode: "md", args: (a, d) => [a, d.dv, d.page] },
   renderTappe: { mode: "md", args: (a, d) => [a, d.page] },
+  renderTipoProfilo: { mode: "md", args: (a, d) => [a, d.page] },
   renderStatoMondo: { mode: "md", args: (a, d) => [a, d.dv] },
   renderTimeline: { mode: "md", args: (a, d) => [a, d.dv] },
   renderClock: { mode: "dom", args: (a, d, cont) => [cont, a, d.page] },

@@ -148,7 +148,18 @@ def apply_entities(core: dict[str, Any], entities: list[dict[str, Any]]) -> dict
     for entity in entities:
         eid = entity["id"]
         merged["folders"][eid] = entity["folder"]
-        cat = {"folder": eid, "subtypes": entity.get("subtypes", []) or []}
+        # Sottotipi: una voce può essere una stringa (solo nome) o un oggetto con
+        # PROFILO {nome, descrizione, campi, wizard, clock, evoluzione}. Normalizziamo
+        # in `subtypes` = lista di NOMI (back-compat: select/fileClass/wizard la usano)
+        # + `subtype_profiles` = mappa nome→profilo (il nuovo strato, letto da
+        # views.renderTipoProfilo e dal wizard subtype-aware).
+        raw_subs = entity.get("subtypes", []) or []
+        sub_names = [s if isinstance(s, str) else s.get("nome") for s in raw_subs]
+        cat = {"folder": eid, "subtypes": sub_names}
+        profiles = {s["nome"]: {k: v for k, v in s.items() if k != "nome"}
+                    for s in raw_subs if isinstance(s, dict) and s.get("nome")}
+        if profiles:
+            cat["subtype_profiles"] = profiles
         if entity.get("gruppo"):
             cat["gruppo"] = entity["gruppo"]
         # Classificazione a 2 livelli (opzionale): le 'famiglie' (con descrizione)

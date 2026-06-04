@@ -2163,6 +2163,34 @@ def test_coerenza_tematica(tmp_path):
 
 
 @pytest.mark.skipif(not shutil.which("node"), reason="node assente")
+def test_render_tipo_profilo(tmp_path):
+    """views.renderTipoProfilo: dal `tipo` della nota mostra il PROFILO del sottotipo
+    (descrizione + campi dal frontmatter + flag clock/evoluzione). "" se il sottotipo
+    non ha un profilo dedicato."""
+    harness = tmp_path / "tp.js"
+    harness.write_text(
+        'const fs=require("fs");'
+        f'const src=fs.readFileSync({json.dumps(str(render.JS_DIR / "views.js"))},"utf8");'
+        'const m={exports:{}};new Function("module","exports",src)(m,m.exports);'
+        'const core={categories:{luogo:{subtype_profiles:{dungeon:{descrizione:"Complesso esplorabile.",'
+        ' campi:["livelli","occupante"],clock:true,evoluzione:false}}}},'
+        ' fields:{livelli:{label:"Livelli / aree"},occupante:{label:"Occupante"}}};'
+        'const app={vault:{adapter:{read:async()=>JSON.stringify(core)}}};'
+        'const dung={categoria:"luogo",tipo:"dungeon",livelli:3,occupante:"[[Corvi]]"};'
+        'const altro={categoria:"luogo",tipo:"regione"};'
+        'Promise.all([m.exports.renderTipoProfilo(app,dung),m.exports.renderTipoProfilo(app,altro)])'
+        '.then(([a,b])=>process.stdout.write(JSON.stringify({a,b})));',
+        encoding="utf-8")
+    res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
+    assert res.returncode == 0, res.stderr
+    out = json.loads(res.stdout)
+    assert "🧩 dungeon" in out["a"] and "Complesso esplorabile" in out["a"]
+    assert "**Livelli / aree**: 3" in out["a"] and "[[Corvi]]" in out["a"]
+    assert "è un **Fronte**" in out["a"]                 # clock:true
+    assert out["b"] == ""                                # sottotipo senza profilo → vuoto
+
+
+@pytest.mark.skipif(not shutil.which("node"), reason="node assente")
 def test_parse_tappa(tmp_path):
     """views.parseTappa (cronologia/mondo-che-cambia): "quando | stato" → struttura;
     senza '|' tutto è 'quando'."""

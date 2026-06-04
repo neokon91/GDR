@@ -99,6 +99,13 @@ plugins:
     license: AGPL-3.0
 metabind_inputs:
   stato: INPUT[inlineSelect(option(bozza), option(pronto), option(in gioco), option(giocata), option(archiviata))]
+  # Campi dei profili-sottotipo del luogo (gerarchia spaziale + edifici dell'insediamento).
+  terreno: INPUT[inlineSelect(option(pianura), option(collina), option(montagna), option(foresta), option(deserto), option(costa), option(palude), option(tundra), option(sotterraneo), option(vulcanico), option(arcipelago))]
+  taglia_insediamento: INPUT[inlineSelect(option(frazione), option(villaggio), option(cittadina), option(città), option(metropoli))]
+  governo_locale: INPUT[inlineSelect(option(consiglio), option(signore), option(sindaco), option(teocratico), option(gilda), option(militare), option(anarchia))]
+  servizi: INPUT[inlineListSuggester(option(mercato), option(tempio), option(porto), option(locanda), option(caserma), option(biblioteca), option(gilda), option(fucina), option(mura), option(molo), option(palazzo), option(prigione), option(arena), option(accademia), option(ospizio), option(banco dei pegni))]
+  funzione_struttura: INPUT[inlineSelect(option(tempio), option(fortezza), option(ponte), option(faro), option(torre), option(mulino), option(diga), option(monumento), option(accademia), option(prigione))]
+  stato_struttura: INPUT[inlineSelect(option(intatta), option(danneggiata), option(in rovina), option(abbandonata))]
   rivelazione: INPUT[inlineSelect(option(pubblico), option(incontrato), option(segreto))]
   mondo: INPUT[suggester(optionQuery("Mondi"), useLinks(partial), allowOther)]
   connessioni: INPUT[inlineListSuggester(optionQuery("Mondi"), useLinks(partial), allowOther)]

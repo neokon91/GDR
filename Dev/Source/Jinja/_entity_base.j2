@@ -18,6 +18,9 @@
 ````tabs
 --- 📖 Lore
 
+{% if core.get('categories', {}).get(template.category, {}).get('subtype_profiles') %}
+{{ m.tipo_profilo() }}
+{% endif %}
 {% block lore %}
 {{ m.scheda(template.category) }}
 {% if not core.get('creation', {}).get(template.category, {}).get('body') %}

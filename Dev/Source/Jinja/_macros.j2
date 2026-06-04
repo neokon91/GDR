@@ -535,6 +535,15 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 ```
 {%- endmacro %}
 
+{# Profilo del sottotipo (JS Engine): i campi/clock/evoluzione DEDICATI al `tipo`
+   scelto (core.categories[cat].subtype_profiles), reattivi al tipo. Logica in
+   views.renderTipoProfilo. Vuoto se il sottotipo non ha profilo. #}
+{% macro tipo_profilo() -%}
+```js-engine
+return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderTipoProfilo");
+```
+{%- endmacro %}
+
 {# Cronologia (JS Engine): le tappe dell'entità attraverso le epoche (proprietà
    `tappe`, righe "quando | stato") rese come linea di vita. Logica in renderTappe.
    Solo per le entità durature (core.tappe_categorie). #}
