@@ -2778,3 +2778,24 @@ def test_tour_crea_il_tuo_mondo():
         assert link in tour, link
     for step in ("1 ·", "2 ·", "3 ·", "4 ·", "5 ·"):
         assert step in tour, step
+
+
+# --- World Board (Obsidian Canvas) ------------------------------------------
+def test_world_board_canvas():
+    """Il World Board del mondo-esempio: una card-file per entità, gruppi per
+    categoria, archi dalle relazioni tipizzate; JSON Canvas valido e deterministico."""
+    man = render.load_example_manifests()[0]
+    board = render.world_board_canvas(man, CORE)
+    nodes, edges = board["nodes"], board["edges"]
+    ids = {n["id"] for n in nodes}
+    assert len(ids) == len(nodes)                                  # ID unici
+    files = [n for n in nodes if n["type"] == "file"]
+    entities = [n for n in man["note"] if n.get("categoria") in CORE["categories"] and n.get("nome")]
+    assert len(files) == len(entities) and files                   # una card per entità
+    folder = f"Mondi/_Esempio — {man['mondo']}/"
+    assert all(n["file"].startswith(folder) and n["file"].endswith(".md") for n in files)
+    for n in nodes:                                                 # campi obbligatori (spec 1.0)
+        assert all(k in n for k in ("id", "type", "x", "y", "width", "height"))
+    assert edges and all(e["fromNode"] in ids and e["toNode"] in ids for e in edges)
+    assert all(e.get("label") for e in edges)                      # archi = relazioni etichettate
+    assert render.world_board_canvas(man, CORE) == board           # deterministico

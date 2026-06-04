@@ -10,6 +10,7 @@ continuare a riferirli come render.<nome>."""
 from __future__ import annotations
 
 import argparse
+import json
 import shutil
 from pathlib import Path
 from typing import Any
@@ -1108,6 +1109,7 @@ def onboarding_note_text(manifest: dict[str, Any]) -> str:
         "---",
         "> [!info] E poi?",
         "> - Esplora gli indici dalla **[[Home]]**: 🗺️ [[Atlante]], ⏳ [[Fronti]], 💰 [[Economia]], 🧭 [[Geografia]].",
+        f"> - Vedi il mondo **a colpo d'occhio**: apri il **[[{world} — Board.canvas|🗺 World Board]]** (Obsidian Canvas) — ogni card una nota, ogni linea una relazione.",
         "> - Crea fazioni, divinità, eventi: ognuno aggiunge spinte al grafo (alleati/rivali, rotte, clock).",
         f"> - Per partire da un mondo **vuoto**, cancella la cartella `_Esempio — {world}`.",
         "> - Guida completa: **[[LEGGIMI]]**.",
@@ -1132,6 +1134,109 @@ def copy_example_media() -> int:
     return copied
 
 
+# Colore-categoria → preset JSON Canvas (1 rosso, 2 arancio, 3 giallo, 4 verde,
+# 5 ciano, 6 viola). Riusa i gruppi tematici di CATEGORY_ACCENTS (presentazione).
+_CANVAS_PRESET = {"green": "4", "red": "1", "pink": "6", "orange": "2",
+                  "purple": "6", "cyan": "5", "blue": "5", "yellow": "3"}
+
+
+def _canvas_color(category: str) -> str:
+    for color, cats in CATEGORY_ACCENTS.items():
+        if category in cats:
+            return _CANVAS_PRESET.get(color, "")
+    return ""
+
+
+def _link_names(value: Any) -> list[str]:
+    """Nomi-nota estratti da un valore-relazione (wikilink, lista, stringa)."""
+    names: list[str] = []
+    for item in (value if isinstance(value, list) else [value]):
+        if not item:
+            continue
+        s = str(item).strip()
+        if s.startswith("[[") and s.endswith("]]"):
+            inner = s[2:-2].split("|")[0].strip()
+            if inner:
+                names.append(inner)
+        elif "[[" not in s:
+            names.append(s)
+    return names
+
+
+def world_board_canvas(manifest: dict[str, Any], core: dict[str, Any]) -> dict[str, Any]:
+    """«World Board» (Obsidian Canvas) di un mondo-esempio: una card per entità,
+    in colonne raggruppate per categoria, e gli archi delle relazioni tipizzate
+    (dedotti dal grafo). Vista a colpo d'occhio del mondo — alternativa visiva alla
+    dashboard Rete. Ritorna il dict JSON Canvas 1.0."""
+    world = manifest["mondo"]
+    folder = f"{EXAMPLE_FOLDER_PREFIX}{world}"
+    categories = core.get("categories", {})
+    relazioni = core.get("relazioni", {})
+    notes = [n for n in manifest.get("note", []) or []
+             if n.get("categoria") in categories and n.get("nome")]
+
+    # Raggruppa per categoria, in un ordine di lettura stabile (ordine di prima
+    # apparizione nel manifest → deterministico per i test).
+    cats_in_order: list[str] = []
+    by_cat: dict[str, list[dict[str, Any]]] = {}
+    for n in notes:
+        c = n["categoria"]
+        if c not in by_cat:
+            by_cat[c] = []
+            cats_in_order.append(c)
+        by_cat[c].append(n)
+
+    NODE_W, NODE_H, COL_GAP, ROW_GAP, TOP = 280, 90, 150, 50, 40
+    nodes: list[dict[str, Any]] = []
+    edges: list[dict[str, Any]] = []
+    node_by_name: dict[str, str] = {}
+
+    # Header (text node) in alto a sinistra.
+    nodes.append({"id": "header", "type": "text", "x": -20, "y": -150,
+                  "width": NODE_W + 40, "height": 80,
+                  "text": f"# 🗺 {world} — World Board\nIl mondo a colpo d'occhio: ogni card è una nota, ogni linea una relazione."})
+
+    for col, cat in enumerate(cats_in_order):
+        items = by_cat[cat]
+        col_x = col * (NODE_W + COL_GAP)
+        # Gruppo (sfondo) della colonna-categoria.
+        nodes.append({"id": f"grp-{cat}", "type": "group", "label": cat.capitalize(),
+                      "x": col_x - 20, "y": TOP - 60,
+                      "width": NODE_W + 40,
+                      "height": len(items) * (NODE_H + ROW_GAP) + 70})
+        for i, n in enumerate(items):
+            nid = f"n{len(node_by_name)}"
+            node_by_name[n["nome"]] = nid
+            node: dict[str, Any] = {
+                "id": nid, "type": "file",
+                "file": f"{folder}/{n['nome']}.md",
+                "x": col_x, "y": TOP + i * (NODE_H + ROW_GAP),
+                "width": NODE_W, "height": NODE_H,
+            }
+            color = _canvas_color(cat)
+            if color:
+                node["color"] = color
+            nodes.append(node)
+
+    # Archi: relazioni tipizzate fra entità del mondo (una per coppia non orientata).
+    seen_pairs: set[frozenset] = set()
+    for n in notes:
+        src = node_by_name[n["nome"]]
+        fm = n.get("fm", {}) or {}
+        for rel in relazioni.get(n["categoria"], []) or []:
+            for target in _link_names(fm.get(rel.get("field"))):
+                tgt = node_by_name.get(target)
+                if not tgt or tgt == src:
+                    continue
+                pair = frozenset((src, tgt))
+                if pair in seen_pairs:
+                    continue
+                seen_pairs.add(pair)
+                edges.append({"id": f"e{len(edges)}", "fromNode": src,
+                              "toNode": tgt, "label": rel.get("label", rel.get("field", ""))})
+    return {"nodes": nodes, "edges": edges}
+
+
 def write_example_world(core: dict[str, Any]) -> int:
     """Genera i mondi-esempio (Dev/Source/esempio/*.yaml) in cartelle riservate
     `Mondi/_Esempio — <Mondo>/`. Riscrittura pulita: azzera SOLO la propria cartella
@@ -1148,6 +1253,11 @@ def write_example_world(core: dict[str, Any]) -> int:
         # wedge nei primi minuti (lore → superficie giocabile calcolata).
         write_text(folder / "Inizia da qui.md", onboarding_note_text(manifest))
         written += 1
+        # World Board (Obsidian Canvas): il mondo a colpo d'occhio (card per nota +
+        # archi delle relazioni). Vista visiva alternativa alla dashboard Rete.
+        board = world_board_canvas(manifest, core)
+        write_text(folder / f"{manifest['mondo']} — Board.canvas",
+                   json.dumps(board, ensure_ascii=False, indent=2))
     # Asset condivisi (mappe/immagini) delle note-esempio nella cartella allegati.
     media = copy_example_media()
     if media:
