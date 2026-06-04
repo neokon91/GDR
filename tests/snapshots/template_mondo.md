@@ -16,6 +16,11 @@
 ````tabs
 --- 📖 Lore
 
+> [!question]- 💡 Spunti per definirlo
+> - Qual è la tensione centrale che muove tutto? (chi vuole cosa, e perché proprio ora)
+> - Cosa rende questo mondo diverso da una terra qualunque?
+> - Genere e tono in una frase (dark fantasy di frontiera, eroico, weird…).
+
 > [!abstract] Scheda
 > Scala: `INPUT[scala][:scala]`
 > Genere: `INPUT[genere][:genere]`

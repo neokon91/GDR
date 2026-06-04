@@ -702,6 +702,7 @@ def render_notes(env: Environment, core: dict[str, Any], plugins: dict[str, Any]
 
     for name, jinja_name in (("Home.md", "home.md.j2"), ("LEGGIMI.md", "leggimi.md.j2"),
                              ("THIRD-PARTY-LICENSES.md", "third_party_licenses.md.j2"),
+                             ("Crea il tuo mondo.md", "crea_il_tuo_mondo.md.j2"),
                              (f"{INDEX_DIR}/Ponte Mondo-Sistema.md", "ponte.md.j2"),
                              (f"{INDEX_DIR}/Fronti.md", "fronti.md.j2"),
                              (f"{INDEX_DIR}/Rete del mondo.md", "rete.md.j2"),

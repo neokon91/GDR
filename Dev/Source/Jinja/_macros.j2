@@ -9,6 +9,20 @@
 {%- else -%}`INPUT[{{ f.widget }}][:{{ id }}]`{%- endif -%}
 {%- endmacro %}
 
+{# 💡 Spunti per definire la nota: domande-stimolo da core.spunti[categoria]
+   (accoglienza per il foglio bianco). Pieghevole: aiuta chi parte, non ingombra
+   chi sa già cosa scrivere. Vuoto se la categoria non ha spunti. #}
+{% macro spunti(category) -%}
+{% set righe = core.get('spunti', {}).get(category, []) %}
+{% if righe %}
+> [!question]- 💡 Spunti per definirlo
+{% for s in righe %}
+> - {{ s }}
+{% endfor %}
+
+{% endif %}
+{%- endmacro %}
+
 {# Rende i campi 'body' del wizard (core.creation[categoria]) come callout
    editabili (pre-compilati dal wizard nel frontmatter). #}
 {% macro wizard_body(category) -%}

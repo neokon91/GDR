@@ -29,6 +29,11 @@
 ````tabs
 --- 📖 Lore
 
+> [!question]- 💡 Spunti per definirlo
+> - Cosa venera o teme questo popolo? Qual è il suo valore supremo?
+> - Un costume o un rito che a un forestiero sembra assurdo.
+> - Come tratta gli stranieri, i morti, il potere?
+
 > [!abstract] Scheda
 > Portata: `INPUT[portata][:portata]`
 > Stile dei nomi: `INPUT[stile_nomi][:stile_nomi]`

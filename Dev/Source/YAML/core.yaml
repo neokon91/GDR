@@ -126,3 +126,45 @@ states:
   - in gioco
   - giocata
   - archiviata
+
+# Spunti di worldbuilding: domande per accendere l'idea davanti al foglio bianco
+# (accoglienza stile World Anvil). Per categoria. Li pescano il tour «Crea il tuo
+# mondo» e il callout 💡 Spunti nel tab Lore (macro spunti(), solo per le categorie
+# qui elencate). Bastano poche frasi: il resto cresce giocando.
+spunti:
+  mondo:
+    - "Qual è la tensione centrale che muove tutto? (chi vuole cosa, e perché proprio ora)"
+    - Cosa rende questo mondo diverso da una terra qualunque?
+    - "Genere e tono in una frase (dark fantasy di frontiera, eroico, weird…)."
+  luogo:
+    - Cosa c'è di sbagliato o di teso qui, proprio adesso?
+    - Chi lo controlla — e chi vorrebbe strapparglielo?
+    - "Cosa sta per succedere? (la pressione, la prossima mossa)"
+  fazione:
+    - Cosa vuole davvero, e cosa è disposta a fare per averlo?
+    - Chi le si oppone? Con chi è alleata per pura convenienza?
+    - Qual è la sua debolezza, o il segreto che non deve uscire?
+  cultura:
+    - Cosa venera o teme questo popolo? Qual è il suo valore supremo?
+    - Un costume o un rito che a un forestiero sembra assurdo.
+    - Come tratta gli stranieri, i morti, il potere?
+  divinita:
+    - Di cosa è dio/dea — e cosa chiede ai suoi fedeli?
+    - "Come si manifesta nel mondo? (miracoli, segni, silenzi)"
+    - Chi la odia, e perché?
+  regno:
+    - Chi siede sul trono, e quanto è saldo?
+    - Qual è la minaccia che potrebbe farlo cadere?
+    - Da cosa trae ricchezza e potere?
+  specie:
+    - Cosa la rende davvero ALIENA o memorabile (non «umani con le orecchie a punta»)?
+    - Qual è il suo rapporto con le altre genti?
+    - Un dono e una maledizione della sua natura.
+  evento:
+    - Cosa è successo, e perché conta ancora oggi?
+    - Chi ne è uscito vincitore, e chi distrutto?
+    - Quale ferita, o quale leggenda, ha lasciato?
+  personaggio:
+    - Cosa vuole, e cosa lo ferma?
+    - Un segreto, una paura, una contraddizione.
+    - Come può intrecciarsi con i personaggi giocanti?

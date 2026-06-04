@@ -18,6 +18,11 @@
 ````tabs
 --- 📖 Lore
 
+> [!question]- 💡 Spunti per definirlo
+> - Chi siede sul trono, e quanto è saldo?
+> - Qual è la minaccia che potrebbe farlo cadere?
+> - Da cosa trae ricchezza e potere?
+
 > [!abstract] Scheda
 > Forma di governo: `INPUT[text:governo]`
 > Sovrano: `INPUT[text:sovrano]`

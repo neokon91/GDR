@@ -156,7 +156,7 @@ def test_page_snapshot(page):
     assert out == _snapshot(f"page_{page['id']}.md", out)
 
 
-@pytest.mark.parametrize("name", ["home.md.j2", "leggimi.md.j2", "third_party_licenses.md.j2", "ponte.md.j2", "fronti.md.j2", "rete.md.j2", "economia.md.j2", "geografia.md.j2", "occhi_giocatore.md.j2", "guida_combattimento.md.j2"])
+@pytest.mark.parametrize("name", ["home.md.j2", "leggimi.md.j2", "third_party_licenses.md.j2", "crea_il_tuo_mondo.md.j2", "ponte.md.j2", "fronti.md.j2", "rete.md.j2", "economia.md.j2", "geografia.md.j2", "occhi_giocatore.md.j2", "guida_combattimento.md.j2"])
 def test_root_note_snapshot(name):
     out = _env().get_template(name).render(core=CORE, plugins=PLUGINS, templates=TEMPLATES, pages=PAGES)
     assert out == _snapshot(f"root_{name}.md", out)
@@ -2754,3 +2754,27 @@ def test_third_party_licenses_complete():
     assert "mera aggregazione" in out                         # base legale dichiarata
     for lic in ("MIT", "GPL-3.0", "AGPL-3.0"):
         assert lic in out, lic
+
+
+# --- Onboarding tour «Crea il tuo mondo» + libreria spunti ------------------
+def test_spunti_library():
+    """La libreria spunti (core.spunti) copre le categorie d'avvio, ognuna con
+    almeno 3 domande-stimolo."""
+    spunti = CORE.get("spunti", {})
+    for cat in ("mondo", "luogo", "fazione", "cultura", "divinita", "regno",
+                "specie", "evento", "personaggio"):
+        assert spunti.get(cat) and len(spunti[cat]) >= 3, cat
+
+
+def test_tour_crea_il_tuo_mondo():
+    """Il tour «Crea il tuo mondo»: 5 tappe, bottoni Crea, spunti reali pescati
+    da core.spunti, e i link ai cruscotti (lore→tavolo)."""
+    tour = _env().get_template("crea_il_tuo_mondo.md.j2").render(
+        core=CORE, plugins=PLUGINS, templates=TEMPLATES, pages=PAGES)
+    for b in ("crea-mondo", "crea-luogo", "crea-fazione"):
+        assert f"BUTTON[{b}]" in tour, b
+    assert CORE["spunti"]["mondo"][0] in tour          # pesca davvero gli spunti
+    for link in ("[[Fronti]]", "[[Rete del mondo]]", "[[Occhi del giocatore]]"):
+        assert link in tour, link
+    for step in ("1 ·", "2 ·", "3 ·", "4 ·", "5 ·"):
+        assert step in tour, step

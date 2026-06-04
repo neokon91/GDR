@@ -15,6 +15,7 @@
 {% endif %}
 --- 📖 Lore
 
+{% if core.get('spunti', {}).get(template.category) %}{{ m.spunti(template.category) }}{% endif %}
 > [!note]- Descrizione
 > Cosa è, com'è, perché conta al tavolo.
 

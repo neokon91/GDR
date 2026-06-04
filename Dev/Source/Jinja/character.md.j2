@@ -11,6 +11,7 @@
 {{ m.scheda_pg() }}
 --- 📖 Lore
 
+{% if core.get('spunti', {}).get(template.category) %}{{ m.spunti(template.category) }}{% endif %}
 {{ m.scheda(template.category) }}
 {{ m.genera_nome() }}
 > [!note]- Chi è

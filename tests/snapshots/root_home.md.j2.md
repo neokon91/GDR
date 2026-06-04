@@ -5,6 +5,8 @@
 > la superficie giocabile si calcola da sé*. I cruscotti qui sotto sono **già pieni** —
 > esplorali (es. [[Atlante]], [[Fronti]]), poi crea i tuoi coi bottoni **Crea**. Guida
 > completa nel **[[LEGGIMI]]**. Per ripartire pulito, cancella `Mondi/_Esempio — Valdombra`.
+>
+> **Pronto a costruire il TUO mondo?** Segui il tour **[[Crea il tuo mondo]]** — 5 tappe, con spunti.
 
 ````tabs
 --- 🌍 Worldbuilding

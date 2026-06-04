@@ -30,6 +30,11 @@
 ````tabs
 --- 📖 Lore
 
+> [!question]- 💡 Spunti per definirlo
+> - Cosa vuole davvero, e cosa è disposta a fare per averlo?
+> - Chi le si oppone? Con chi è alleata per pura convenienza?
+> - Qual è la sua debolezza, o il segreto che non deve uscire?
+
 > [!abstract] Scheda
 > Portata: `INPUT[portata][:portata]`
 > Motto: `INPUT[text:motto]`

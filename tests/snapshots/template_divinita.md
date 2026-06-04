@@ -35,6 +35,11 @@
 
 --- 📖 Lore
 
+> [!question]- 💡 Spunti per definirlo
+> - Di cosa è dio/dea — e cosa chiede ai suoi fedeli?
+> - Come si manifesta nel mondo? (miracoli, segni, silenzi)
+> - Chi la odia, e perché?
+
 > [!note]- Descrizione
 > Cosa è, com'è, perché conta al tavolo.
 

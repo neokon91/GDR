@@ -28,6 +28,11 @@
 ````tabs
 --- 📖 Lore
 
+> [!question]- 💡 Spunti per definirlo
+> - Cosa c'è di sbagliato o di teso qui, proprio adesso?
+> - Chi lo controlla — e chi vorrebbe strapparglielo?
+> - Cosa sta per succedere? (la pressione, la prossima mossa)
+
 > [!abstract] Scheda
 > Clima: `INPUT[clima][:clima]`
 > Popolazione: `INPUT[text:popolazione]`

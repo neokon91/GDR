@@ -45,6 +45,11 @@
 
 --- 📖 Lore
 
+> [!question]- 💡 Spunti per definirlo
+> - Cosa vuole, e cosa lo ferma?
+> - Un segreto, una paura, una contraddizione.
+> - Come può intrecciarsi con i personaggi giocanti?
+
 > [!abstract] Scheda
 > Titolo o rango: `INPUT[text:titolo]`
 > Allineamento: `INPUT[allineamento][:allineamento]`

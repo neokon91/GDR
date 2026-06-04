@@ -17,6 +17,7 @@
 ````tabs
 --- 📖 Lore
 
+{% if core.get('spunti', {}).get(template.category) %}{{ m.spunti(template.category) }}{% endif %}
 {% block lore %}
 {{ m.scheda(template.category) }}
 {% if not core.get('creation', {}).get(template.category, {}).get('body') %}

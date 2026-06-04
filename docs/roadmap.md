@@ -84,8 +84,11 @@ Pronto per **beta chiuso**. Per la beta aperta restano i punti PM qui sotto.
   ✅ **Anteprima «occhi del giocatore» in-vault**: dashboard Dataview che mostra cosa
   vedono i giocatori per tier, senza buildare il sito (in Home). (FATTO)
 - **Onboarding guidato** — ✅ il **momento-aha** è coperto dalla nota «Inizia da qui» (UX-1).
-  Resta il *tour interattivo* più profondo: wizard di worldbuilding a tappe con spunti
-  suggeriti (accoglienza alla World Anvil) — opzionale, dopo il primo segnale dagli utenti.
+  ✅ **Tour «Crea il tuo mondo»** (nota generata persistente): 5 tappe dal foglio bianco
+  (Mondo→Luogo→Fazione→Collega→Accendi la superficie giocabile) con bottoni Crea, link ai
+  cruscotti e **spunti** (domande-stimolo). ✅ **Spunti anche nelle note**: callout 💡
+  pieghevole nel tab Lore (macro `spunti()` da `core.spunti`, 9 categorie d'avvio) →
+  l'accoglienza stile World Anvil è dove il GM scrive davvero. Linkato da Home.
 
 ### 5.5e / DM (completare l'esperienza di sessione)
 - ✅ **Sottoclasse homebrew** — `sali_pg` offre le sottoclassi homebrew del vault al

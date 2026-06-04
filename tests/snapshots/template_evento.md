@@ -24,6 +24,11 @@
 ````tabs
 --- 📖 Lore
 
+> [!question]- 💡 Spunti per definirlo
+> - Cosa è successo, e perché conta ancora oggi?
+> - Chi ne è uscito vincitore, e chi distrutto?
+> - Quale ferita, o quale leggenda, ha lasciato?
+
 > [!abstract] Cronologia
 > Quando: `INPUT[text:quando]`
 >

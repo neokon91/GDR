@@ -40,6 +40,11 @@
 
 --- 📖 Lore
 
+> [!question]- 💡 Spunti per definirlo
+> - Cosa la rende davvero ALIENA o memorabile (non «umani con le orecchie a punta»)?
+> - Qual è il suo rapporto con le altre genti?
+> - Un dono e una maledizione della sua natura.
+
 > [!note]- Descrizione
 > Cosa è, com'è, perché conta al tavolo.
 

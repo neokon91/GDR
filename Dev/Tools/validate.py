@@ -46,7 +46,7 @@ INTEROP_FIELDS = {"fc-date", "fc-end", "fc-calendar", "fc-category"}
 # Sezioni "di piano": devono restare nel rispettivo file. tavolo/assi_tematici/
 # states (il differenziatore worldbuilding) solo in core.yaml; scheda/statblock/
 # caratteristiche (i meccanismi 5.5e) solo in system.yaml.
-CORE_ONLY_SECTIONS = ("tavolo", "assi_tematici", "states")
+CORE_ONLY_SECTIONS = ("tavolo", "assi_tematici", "states", "spunti")
 SYSTEM_ONLY_SECTIONS = ("scheda", "statblock", "caratteristiche", "abilita")
 
 # Sezioni-mappa (id -> definizione) partizionate fra i due file: gli stessi id
