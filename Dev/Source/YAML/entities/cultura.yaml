@@ -46,7 +46,11 @@ famiglie:
 # Diffusione/portata + stile dei nomi (il generatore homebrew genera.js legge
 # stile_nomi per comporre nomi a tema della cultura) + simbolo (araldica/emblema
 # identitario, recupero FantasyWorld; si sposa con infobox/ritratto).
-scheda: [portata, stile_nomi, simbolo]
+# `festivita`: le ricorrenze del popolo (nome — quando/perché); compilale e, se vuoi
+# che compaiano sul calendario, crea un Evento con la data (fc-date) per ciascuna.
+fields:
+  festivita: { label: Festività & ricorrenze, widget: testo_area }
+scheda: [portata, stile_nomi, simbolo, festivita]
 relazioni:
 - field: regioni
   label: Regioni

@@ -118,6 +118,8 @@ metabind_inputs:
   stato_missione: INPUT[inlineSelect(option(proposta), option(in corso), option(completata), option(fallita), option(abbandonata))]
   # Calamità (gravità della sciagura).
   gravita: INPUT[inlineSelect(option(contenuta), option(seria), option(grave), option(catastrofica))]
+  # Rango nobiliare/sociale del personaggio.
+  rango: INPUT[inlineSelect(option(popolano), option(borghese), option(cavaliere), option(barone), option(visconte), option(conte), option(marchese), option(duca), option(principe), option(re), option(imperatore))]
   rivelazione: INPUT[inlineSelect(option(pubblico), option(incontrato), option(segreto))]
   mondo: INPUT[suggester(optionQuery("Mondi"), useLinks(partial), allowOther)]
   connessioni: INPUT[inlineListSuggester(optionQuery("Mondi"), useLinks(partial), allowOther)]
@@ -160,6 +162,7 @@ folder_icons:
   missione: "🎯"
   editto: "⚖️"
   calamita: "☣️"
+  rotta: "🛣️"
   cosmologia: "🌌"
   luogo: "🗺️"
   cultura: "🎏"

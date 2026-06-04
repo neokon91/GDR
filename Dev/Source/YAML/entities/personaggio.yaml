@@ -38,9 +38,13 @@ famiglie:
 - { nome: gregario,    descrizione: "Comparsa ricorrente o seguace: dà colore e continuità alla scena." }
 # Titolo/rango del personaggio (re, arcimago, gran sacerdote...): seed FantasyWorld.
 fields:
-  titolo: { label: Titolo o rango, widget: text }
+  titolo: { label: Titolo, widget: text }
+  # Rango nobiliare/sociale: vocabolario di ranghi (il `titolo` resta libero per cariche
+  # e appellativi specifici — «Arcimago», «Capitano della Guardia»).
+  rango:  { label: Rango,  widget: rango }
 scheda:
 - titolo
+- rango
 - allineamento
 - pronomi
 - eta

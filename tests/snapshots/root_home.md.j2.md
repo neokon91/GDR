@@ -24,6 +24,7 @@
 
 > [!example] 🗺 Geografia & luoghi
 > `BUTTON[crea-luogo]`
+> `BUTTON[crea-rotta]`
 > `BUTTON[crea-bioma]`
 > `BUTTON[crea-ecosistema]`
 > `BUTTON[crea-risorsa]`

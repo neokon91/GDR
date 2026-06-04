@@ -1,0 +1,41 @@
+# Schema per-entità: rotta (geografia, economia). Una via di traffico fra luoghi —
+# merci, pericoli, chi la controlla. Prima esisteva solo come relazione `rotta_con` fra
+# luoghi; come entità diventa giocabile (un colpo a una rotta = stakes). Resa da _entity_base.
+id: rotta
+folder: Mondi/Rotte
+order: 4
+gruppo: geografia
+templates:
+- id: rotta
+  title: Rotta
+  default_type: terrestre
+  target: z.modelli/Rotta.md
+# SOTTOTIPI con PROFILO: il MEZZO/natura della via. Una rotta è stabile (non un Fronte),
+# ma può chiudersi: la sua crisi alimenta i Fronti economici via il grafo.
+subtypes:
+- { nome: terrestre,    descrizione: "Strada o sentiero su terra: carri, viandanti, posti di blocco e pedaggi.",        campi: [merci, pericoli], clock: false, evoluzione: false }
+- { nome: marittima,    descrizione: "Rotta di mare aperto: navi mercantili, venti, pirati, secche.",                   campi: [merci, pericoli], clock: false, evoluzione: false }
+- { nome: fluviale,     descrizione: "Via d'acqua interna: chiatte e battelli lungo un fiume o un canale.",             campi: [merci, pericoli], clock: false, evoluzione: false }
+- { nome: carovaniera,  descrizione: "Lunga pista fra oasi o tappe: carovane, deserti o passi, soste obbligate.",       campi: [merci, pericoli, tappe_rotta], clock: false, evoluzione: false }
+- { nome: contrabbando, descrizione: "Via clandestina: aggira dazi e divieti, controllata da chi vive nell'ombra.",     campi: [merci, pericoli], clock: false, evoluzione: false }
+fields:
+  merci:       { label: Merci trasportate, widget: text }
+  pericoli:    { label: Pericoli,          widget: text }
+  tappe_rotta: { label: Tappe / soste,     widget: text }
+scheda: [merci, pericoli]
+relazioni:
+- { field: estremi,       label: Collega (estremi), category: luogo, multi: true }
+- { field: tappe_luoghi,  label: Tappe intermedie,  category: luogo, multi: true }
+- { field: controllata_da, label: Controllata da,   category: fazione }
+- { field: risorse,       label: Risorse in transito, category: risorsa, multi: true }
+creation:
+  fields:
+  - { field: tipo, prompt: Tipo di rotta, from: subtypes, required: true }
+  - { field: mondo, prompt: Mondo, from: notes, category: mondo, link: true, required: true }
+  body:
+  - { field: percorso, prompt: 'Percorso: da dove a dove, attraverso cosa',     heading: Percorso }
+  - { field: traffico, prompt: 'Traffico: chi la usa, cosa vi passa, quanto vale', heading: Traffico }
+  - { field: rischi,   prompt: 'Rischi: chi la minaccia, cosa succede se si chiude', heading: Rischi }
+guida:
+  scopo: "Una rotta è una via di traffico fra luoghi: cosa vi passa, chi la controlla, cosa la minaccia. Tagliarla è una mossa che muove l'economia e i Fronti."
+  campi_chiave: "**Tipo** (terrestre/marittima/…) e gli estremi che **Collega**; **Merci** e **Pericoli** la qualificano; **Controllata da** la lega alla fazione che la domina."

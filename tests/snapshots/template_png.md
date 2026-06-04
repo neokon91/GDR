@@ -9,7 +9,8 @@
 > | **Tipo** | `VIEW[{tipo} ?? "—"]` |
 > | **Mondo** | `VIEW[{mondo}][text(renderMarkdown)]` |
 > | **Ruolo narrativo** | `VIEW[{famiglia} ?? "—"]` |
-> | **Titolo o rango** | `VIEW[{titolo} ?? "—"]` |
+> | **Titolo** | `VIEW[{titolo} ?? "—"]` |
+> | **Rango** | `VIEW[{rango} ?? "—"]` |
 > | **Allineamento** | `VIEW[{allineamento} ?? "—"]` |
 > | **Pronomi** | `VIEW[{pronomi} ?? "—"]` |
 > | **Età** | `VIEW[{eta} ?? "—"]` |
@@ -57,7 +58,8 @@
 --- 📖 Lore
 
 > [!abstract] Scheda
-> Titolo o rango: `INPUT[text:titolo]`
+> Titolo: `INPUT[text:titolo]`
+> Rango: `INPUT[rango][:rango]`
 > Allineamento: `INPUT[allineamento][:allineamento]`
 > Pronomi: `INPUT[text:pronomi]`
 > Età: `INPUT[text:eta]`

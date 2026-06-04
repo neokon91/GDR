@@ -12,6 +12,7 @@
 > | **Portata** | `VIEW[{portata} ?? "—"]` |
 > | **Stile dei nomi** | `VIEW[{stile_nomi} ?? "—"]` |
 > | **Simbolo** | `VIEW[{simbolo} ?? "—"]` |
+> | **Festività & ricorrenze** | `VIEW[{festivita} ?? "—"]` |
 > | **Stato** | `INPUT[stato][:stato]` |
 
 > [!opzioni]- ⚙️ Opzioni
@@ -47,6 +48,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > Portata: `INPUT[portata][:portata]`
 > Stile dei nomi: `INPUT[stile_nomi][:stile_nomi]`
 > Simbolo: `INPUT[text:simbolo]`
+> Festività & ricorrenze: `INPUT[testo_area][:festivita]`
 
 > [!note] Valori
 > `INPUT[textArea:valori]`
