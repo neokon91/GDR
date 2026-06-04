@@ -98,6 +98,22 @@ def test_entity_schema():
     assert render.validate_entity_schema(render.load_entities()) == []
 
 
+def test_initiative_statuses():
+    """render.initiative_statuses: le condizioni 5.5e (core.condizioni) diventano status
+    di Initiative Tracker {name, id, description}, con gli effetti uniti nella descrizione;
+    id = nome (convenzione IT); le voci senza nome sono scartate; descrizione mai vuota."""
+    core = {"condizioni": [
+        {"nome": "Accecato", "descrizione": "Non vede.", "effetti": [{"descrizione": "Fallisce le prove a vista."}]},
+        {"nome": "Avvelenato", "descrizione": "", "effetti": []},
+        {"nome": "", "descrizione": "x"},
+    ]}
+    st = render.initiative_statuses(core)
+    assert len(st) == 2                                     # la voce senza nome è scartata
+    a = next(s for s in st if s["name"] == "Accecato")
+    assert a["id"] == "Accecato" and "Fallisce le prove a vista" in a["description"]
+    assert all(s["description"] for s in st)               # mai vuota (fallback al nome)
+
+
 def test_background_2024_legale():
     """Un background homebrew 2024-legale DEVE concedere ASI (3 caratteristiche), 2
     abilità, 1 strumento e un Talento d'Origine: il wizard rende OBBLIGATORI questi
@@ -140,7 +156,7 @@ def test_page_snapshot(page):
     assert out == _snapshot(f"page_{page['id']}.md", out)
 
 
-@pytest.mark.parametrize("name", ["home.md.j2", "leggimi.md.j2", "ponte.md.j2", "fronti.md.j2", "rete.md.j2", "economia.md.j2", "geografia.md.j2"])
+@pytest.mark.parametrize("name", ["home.md.j2", "leggimi.md.j2", "ponte.md.j2", "fronti.md.j2", "rete.md.j2", "economia.md.j2", "geografia.md.j2", "guida_combattimento.md.j2"])
 def test_root_note_snapshot(name):
     out = _env().get_template(name).render(core=CORE, plugins=PLUGINS, templates=TEMPLATES, pages=PAGES)
     assert out == _snapshot(f"root_{name}.md", out)
@@ -620,6 +636,7 @@ def test_scaffold_statblock_e2e(tmp_path):
     assert 'cr: "5"' in out and 'pb: "+3"' in out
     assert "*Tiro per colpire:* +7" in out and "2d10 + 3" in out   # azione d'attacco reale
     assert "Multiattacco" in out and "effettua 2 attacchi" in out  # GS 5 -> multiattacco x2
+    assert "saves:" in out and "FOR:" in out                       # TS competenti rollabili
     assert "CD 14" in out                                          # azione-salvezza dal GS
     assert "actions: []" not in out                                # placeholder sostituito
     assert "layout: 5-5e-ita" in out                               # layout preservato

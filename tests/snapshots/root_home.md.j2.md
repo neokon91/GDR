@@ -93,6 +93,8 @@ limit 20
 ```
 
 --- 🎲 Al tavolo
+> [!tip] Come si gioca uno scontro? **[[Guida al combattimento]]** — iniziativa, PF, condizioni e dadi coi plugin (Initiative Tracker + Statblocks + Dice Roller).
+
 > [!example] Crea
 > `BUTTON[crea-pg]`
 > `BUTTON[crea-incontro]`

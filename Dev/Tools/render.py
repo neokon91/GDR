@@ -704,7 +704,8 @@ def render_notes(env: Environment, core: dict[str, Any], plugins: dict[str, Any]
                              (f"{INDEX_DIR}/Fronti.md", "fronti.md.j2"),
                              (f"{INDEX_DIR}/Rete del mondo.md", "rete.md.j2"),
                              (f"{INDEX_DIR}/Economia.md", "economia.md.j2"),
-                             (f"{INDEX_DIR}/Geografia.md", "geografia.md.j2")):
+                             (f"{INDEX_DIR}/Geografia.md", "geografia.md.j2"),
+                             (f"{INDEX_DIR}/Guida al combattimento.md", "guida_combattimento.md.j2")):
         text = env.get_template(jinja_name).render(core=core, plugins=plugins, templates=templates, pages=pages)
         write_text(VAULT / name, text)
         rendered[name] = text
@@ -779,10 +780,12 @@ def write_statblock_layouts(obsidian: Path) -> None:
             known = {l.get("id") for l in layouts if isinstance(l, dict)}
             changed = False
             # Dice Roller: rende cliccabili attacchi/danni negli statblock (mostri
-            # SRD + creature). Default consigliato, non distruttivo (solo se off).
-            if fs_data.get("diceRolling") is not True:
-                fs_data["diceRolling"] = True
-                changed = True
+            # SRD + creature). La chiave reale di Fantasy Statblocks è `useDice`
+            # (default true); `diceRolling` è legacy/no-op ma la teniamo per sicurezza.
+            for key in ("useDice", "diceRolling"):
+                if fs_data.get(key) is not True:
+                    fs_data[key] = True
+                    changed = True
             # autoParse ("Parse Frontmatter in Notes"): registra nel bestiario le
             # note con `statblock: inline` (mostri SRD + creature) → i riferimenti
             # `monster:` risolvono (tab 5e del template creatura, blocchi encounter).
@@ -797,6 +800,53 @@ def write_statblock_layouts(obsidian: Path) -> None:
             if changed:
                 fs_data["layouts"] = layouts
                 write_json(fs_dir / "data.json", fs_data)
+
+
+def initiative_statuses(core: dict[str, Any]) -> list[dict[str, Any]]:
+    """Le 15 condizioni 5.5e (core.condizioni) nel formato status di Initiative
+    Tracker: {name, id, description}. Così sono APPLICABILI in combattimento dal
+    tracker (non solo quick-ref). id = nome (convenzione di IT)."""
+    out: list[dict[str, Any]] = []
+    for c in core.get("condizioni", []) or []:
+        nome = str(c.get("nome", "")).strip()
+        if not nome:
+            continue
+        eff = "; ".join(
+            str(e.get("descrizione", "")).strip()
+            for e in (c.get("effetti") or []) if isinstance(e, dict) and e.get("descrizione"))
+        desc = str(c.get("descrizione", "")).strip()
+        full = (desc + (" — " + eff if eff else "")).strip() or nome
+        out.append({"name": nome, "id": nome, "description": full})
+    return out
+
+
+def write_initiative_tracker(obsidian: Path, core: dict[str, Any]) -> None:
+    """Initiative Tracker: inietta le condizioni 5.5e come STATUS (applicabili in
+    combattimento) e un PARTY di default 'Gruppo' (vuoto: aggiungi i tuoi PG una
+    volta) così `players: true`/party risolve. Non distruttivo: riempie solo le
+    chiavi assenti, preservando statuses/party personalizzati dall'utente."""
+    it_dir = obsidian / "plugins" / "initiative-tracker"
+    if not it_dir.is_dir():
+        return
+    cur = read_json(it_dir / "data.json")
+    cur = cur if isinstance(cur, dict) else {}
+    updates: dict[str, Any] = {}
+    if not cur.get("statuses"):
+        statuses = initiative_statuses(core)
+        if statuses:
+            # + i due status specifici del tracker (non sono condizioni SRD): la
+            # concentrazione e la reazione-usata (azzerata a ogni round).
+            updates["statuses"] = statuses + [
+                {"name": "Concentrazione", "id": "Concentrazione",
+                 "description": "Mantiene un incantesimo a concentrazione: TS Costituzione (CD 10 o metà danni) quando subisce danni, o lo perde."},
+                {"name": "Reazione usata", "id": "Reazione usata", "resetOnRound": True,
+                 "description": "Ha già usato la reazione in questo round."},
+            ]
+    if not cur.get("parties"):
+        updates["parties"] = [{"name": "Gruppo", "players": []}]
+        updates["defaultParty"] = "Gruppo"
+    if updates:
+        merge_plugin_config(obsidian, "initiative-tracker", updates)
 
 
 def write_bookmarks(obsidian: Path, pages: list[dict[str, Any]]) -> None:
@@ -840,6 +890,7 @@ def write_obsidian_config(obsidian: Path, core: dict[str, Any], plugins: dict[st
     write_iconize(obsidian, core, plugins)
     write_callout_manager(obsidian, plugins)
     write_statblock_layouts(obsidian)
+    write_initiative_tracker(obsidian, core)
     write_folder_notes(obsidian)
     write_tab_panels(obsidian)
     write_calendarium(obsidian)

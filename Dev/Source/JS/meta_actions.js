@@ -444,6 +444,9 @@ async function scaffold_statblock(file) {
     `stats: [${forza}, 12, ${cos}, 10, 12, 10]`,
     `cr: "${gs}"`,
     `pb: "${_sign(pb)}"`,
+    // TS competenti sulle caratteristiche potenziate (FOR/COS): rollabili, e danno
+    // alla creatura una difesa coerente col GS. Il DM rifinisce le altre a mano.
+    `saves: [{FOR: ${mod + pb}}, {COS: ${Math.round(mod / 2) + pb}}]`,
     "traits:",
     `  - name: Generato dal GS ${gs}`,
     `    desc: "Valori base = mediane dei mostri SRD di pari GS${hit.gs !== gs ? ` (≈ GS ${hit.gs})` : ""}. Rifinisci a mano: multiattacco, tratti, resistenze, leggendarie."`,
