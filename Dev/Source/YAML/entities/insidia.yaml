@@ -61,3 +61,7 @@ creation:
   - field: contromisure
     prompt: 'Contromisure: individuare / disinnescare'
     heading: Contromisure
+
+guida:
+  scopo: Una trappola o pericolo ambientale pronto da piazzare in una scena, con prova per individuarlo e danno/effetto.
+  campi_chiave: '**Livello di gioco** + **Prova** (CD per individuare/disinnescare) + **Danno/Effetto**; **Innesco** e **Contromisure** dicono come scatta e come scamparla.'

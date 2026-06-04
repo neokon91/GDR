@@ -16,6 +16,11 @@
 > **Visibilità** *(dm = solo DM, fuori dal sito giocatori)*: `INPUT[inlineSelect(option(normale), option(dm)):visibilita]`
 > **Rivelazione**: `INPUT[rivelazione][:rivelazione]`
 
+> [!info]- ℹ️ Guida — Piano d'esistenza
+> **Cos'è** · Un piano è un livello di realtà a sé — elementale, astrale, onirico, un aldilà — con leggi, abitanti e accessi propri, distinto da un luogo materiale.
+> **Campi chiave** · **Tipo** di piano + **Accessibilità** (come vi si entra); poi le relazioni a **Leggi** che lo governano e **Dominio**.
+> **Spunti** · Che sostanza e che leggi fisiche ha — e cosa vi uccide un mortale? Come si entra e si esce: soglia, rito, morte, sogno? Come si fa sentire la sua presenza nel mondo materiale?
+
 ````tabs
 --- 📖 Lore
 
@@ -68,6 +73,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > [!tip] Avanza / scatena
 > Una spinta dal grafo o una mossa? `BUTTON[avanza-fronte]` (clock +1).
 > Clock pieno? `BUTTON[scatena-conseguenza]` — crea l'evento-conseguenza collegato e azzera il clock.
+
 > [!info]- 👁 Condivisione coi giocatori
 > Quando questa nota entra nel **sito dei giocatori** (`npm run site -- --reveal <livello>`): `INPUT[rivelazione][:rivelazione]`
 >

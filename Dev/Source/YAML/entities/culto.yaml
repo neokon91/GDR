@@ -72,3 +72,7 @@ creation:
     callout: segreto
     title: Segreto
     fold: true
+
+guida:
+  scopo: Una religione organizzata (dottrina, clero, riti, fedeli) — distinta dalla divinità che venera e dalla fazione politica.
+  campi_chiave: '**Tipo** (setta, misterico, popolare…); **Divinità** venerate; **Portata** (diffusione); sul Carattere **Legalità** ne fissa il rapporto col potere.'

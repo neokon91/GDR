@@ -23,8 +23,6 @@
 > **Visibilità** *(dm = solo DM, fuori dal sito giocatori)*: `INPUT[inlineSelect(option(normale), option(dm)):visibilita]`
 > **Rivelazione**: `INPUT[rivelazione][:rivelazione]`
 
-> [!info] Ruolo narrativo: `INPUT[inlineSelect(option(alleato), option(antagonista), option(mentore), option(patrono), option(rivale), option(mercante), option(contatto), option(gregario)):famiglia]`
-
 > [!note]- Cosa significa ogni ruolo narrativo
 > **alleato** — Sta dalla parte del gruppo: aiuta, copre, combatte al loro fianco.
 > **antagonista** — Si oppone attivamente al gruppo o ne ostacola gli obiettivi; non per forza un nemico.
@@ -34,6 +32,11 @@
 > **mercante** — Fornisce beni, servizi o informazioni in cambio di qualcosa.
 > **contatto** — Nodo di informazioni o accesso: introduce, fa da ponte, apre porte.
 > **gregario** — Comparsa ricorrente o seguace: dà colore e continuità alla scena.
+
+> [!info]- ℹ️ Guida — PNG
+> **Cos'è** · Una persona del mondo — PG giocabile o PNG da interpretare (lo stesso tipo serve entrambi).
+> **Campi chiave** · **Tipo** (pg/png); per i PNG il **Ruolo narrativo** (alleato, mentore, rivale…) e l'**Affiliazione** (fazione); **Allineamento** per la bussola morale.
+> **Spunti** · Cosa vuole, e cosa lo ferma? Un segreto, una paura, una contraddizione. Come può intrecciarsi con i personaggi giocanti?
 
 ````tabs
 --- 📋 Scheda
@@ -52,11 +55,6 @@
 > **CAR** `INPUT[number:carisma]` · mod `VIEW[floor(({carisma} - 10) / 2)][math:mod_carisma]`
 
 --- 📖 Lore
-
-> [!question]- 💡 Spunti per definirlo
-> - Cosa vuole, e cosa lo ferma?
-> - Un segreto, una paura, una contraddizione.
-> - Come può intrecciarsi con i personaggi giocanti?
 
 > [!abstract] Scheda
 > Titolo o rango: `INPUT[text:titolo]`
@@ -135,6 +133,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > [!tip] Avanza / scatena
 > Una spinta dal grafo o una mossa? `BUTTON[avanza-fronte]` (clock +1).
 > Clock pieno? `BUTTON[scatena-conseguenza]` — crea l'evento-conseguenza collegato e azzera il clock.
+
 > [!info]- 👁 Condivisione coi giocatori
 > Quando questa nota entra nel **sito dei giocatori** (`npm run site -- --reveal <livello>`): `INPUT[rivelazione][:rivelazione]`
 >

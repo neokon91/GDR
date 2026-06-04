@@ -6,7 +6,6 @@
 > |:--|:--|
 > | **Tipo** | `VIEW[{tipo} ?? "—"]` |
 > | **Mondo** | `VIEW[{mondo}][text(renderMarkdown)]` |
-> | **Salute** | `VIEW[{salute} ?? "—"]` |
 > | **Stato** | `INPUT[stato][:stato]` |
 
 > [!opzioni]- ⚙️ Opzioni
@@ -16,11 +15,14 @@
 > **Visibilità** *(dm = solo DM, fuori dal sito giocatori)*: `INPUT[inlineSelect(option(normale), option(dm)):visibilita]`
 > **Rivelazione**: `INPUT[rivelazione][:rivelazione]`
 
+> [!info]- ℹ️ Guida — Ecosistema
+> **Cos'è** · L'ecosistema è la rete vivente dentro un bioma: chi mangia chi, quali cicli lo reggono e cosa lo sta spezzando.
+> **Campi chiave** · **Tipo** e la relazione **Bioma**; sul Carattere **Equilibrio** (autopoietico→collassante) ne misura la stabilità — l'asse che alimenta i Fronti ecologici.
+> **Spunti** · Qual è l'anello debole della catena — la specie che, se sparisce, fa crollare tutto? Cosa lo sta spezzando proprio ora, e chi se ne accorgerà per primo? Cosa accade al mondo intorno se questo equilibrio salta?
+
 ````tabs
 --- 📖 Lore
 
-> [!abstract] Scheda
-> Salute: `INPUT[salute][:salute]`
 
 > [!note] Composizione
 > `INPUT[textArea:composizione]`
@@ -46,28 +48,6 @@
 > [!gancio]- Gancio
 > `INPUT[testo_area][:gancio]`
 
-> [!warning] Pressione — `VIEW[{pressione} >= 7 ? "🔴 Crisi" : ({pressione} >= 4 ? "🟠 Tensione" : "🟢 Calma")]`
-> Pressione: `INPUT[pressione][:pressione]`
->
-> Prossima mossa: `INPUT[text:prossima_mossa]`
-
-**⏳ Fronte** — clock `INPUT[number:clock]` / `INPUT[clock_dim][:clock_dim]` segmenti
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderClock");
-```
-
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderPressioni");
-```
-
-> [!warning]- Conseguenza (quando il clock è pieno)
-> `INPUT[testo_area][:conseguenza]`
->
-> Bersaglio: `INPUT[legame][:conseguenza_su]`
-
-> [!tip] Avanza / scatena
-> Una spinta dal grafo o una mossa? `BUTTON[avanza-fronte]` (clock +1).
-> Clock pieno? `BUTTON[scatena-conseguenza]` — crea l'evento-conseguenza collegato e azzera il clock.
 > [!info]- 👁 Condivisione coi giocatori
 > Quando questa nota entra nel **sito dei giocatori** (`npm run site -- --reveal <livello>`): `INPUT[rivelazione][:rivelazione]`
 >

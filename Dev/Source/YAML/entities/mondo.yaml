@@ -74,3 +74,7 @@ creation:
     callout: segreto
     title: Verità nascosta
     fold: true
+
+guida:
+  scopo: 'Il mondo è il contenitore-radice della campagna: ne fissa genere, tono e conflitto, e da qui agganci tutti i componenti (regni, culture, cosmologia…).'
+  campi_chiave: '**Genere** e **Temi** danno il sapore; sul Carattere imposta **Tono** e **Diffusione della magia** — definiscono atmosfera e quanto conta l''arcano.'

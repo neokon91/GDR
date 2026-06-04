@@ -19,6 +19,11 @@
 > **Visibilità** *(dm = solo DM, fuori dal sito giocatori)*: `INPUT[inlineSelect(option(normale), option(dm)):visibilita]`
 > **Rivelazione**: `INPUT[rivelazione][:rivelazione]`
 
+> [!info]- ℹ️ Guida — Bastione
+> **Cos'è** · La roccaforte di un PG (regole Bastioni 2024): emette ordini ogni turno di 7 giorni e ospita strutture speciali.
+> **Campi chiave** · **Livello** (PG minimo, 5+) e **Difensori** ne governano le regole; collega il **Proprietario** (PG) e la **Posizione** (luogo).
+
+
 ````tabs
 --- 📋 Scheda
 

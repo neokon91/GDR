@@ -24,8 +24,6 @@
 > **Visibilità** *(dm = solo DM, fuori dal sito giocatori)*: `INPUT[inlineSelect(option(normale), option(dm)):visibilita]`
 > **Rivelazione**: `INPUT[rivelazione][:rivelazione]`
 
-> [!info] Famiglia: `INPUT[inlineSelect(option(ancestrale), option(spirituale), option(cosmica), option(mortale), option(corrompibile), option(onirica), option(elementale), option(sintetica)):famiglia]`
-
 > [!note]- Cosa significa ogni famiglia
 > **ancestrale** — Antichissima, nata nei primordi del cosmo o da eventi mitici.
 > **spirituale** — Legata al ciclo delle anime, al karma o a piani spirituali.
@@ -35,6 +33,11 @@
 > **onirica** — Nata nei sogni cosmici, nell'inconscio collettivo o nei piani onirici.
 > **elementale** — Composta o generata dagli elementi primari (fuoco, acqua, aria, terra, etere).
 > **sintetica** — Creata artificialmente tramite magia, alchimia o tecnologia.
+
+> [!info]- ℹ️ Guida — Specie
+> **Cos'è** · Una specie è un popolo giocabile: ne fissi i tratti meccanici (taglia, velocità) perché crea_pg li offra, e la sua natura aliena.
+> **Campi chiave** · **Tipo** (rarità) + **famiglia** (origine); **Taglia** e **Velocità** la rendono giocabile in crea_pg; scrivi i **Tratti** (includi "scurovisione" se la concede).
+> **Spunti** · Cosa la rende davvero ALIENA o memorabile (non «umani con le orecchie a punta»)? Qual è il suo rapporto con le altre genti? Un dono e una maledizione della sua natura.
 
 ````tabs
 --- 📋 Scheda
@@ -47,11 +50,6 @@
 > Stile dei nomi: `INPUT[stile_nomi][:stile_nomi]`
 
 --- 📖 Lore
-
-> [!question]- 💡 Spunti per definirlo
-> - Cosa la rende davvero ALIENA o memorabile (non «umani con le orecchie a punta»)?
-> - Qual è il suo rapporto con le altre genti?
-> - Un dono e una maledizione della sua natura.
 
 > [!note]- Descrizione
 > Cosa è, com'è, perché conta al tavolo.

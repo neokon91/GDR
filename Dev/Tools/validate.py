@@ -16,7 +16,6 @@ from common import (
     deep_merge,
     load_core_parts,
     load_entities,
-    load_example_manifests,
     load_pages,
     load_templates,
     load_yaml,
@@ -396,6 +395,14 @@ def check() -> int:
         if widget and widget not in ("text", "number") and widget not in metabind:
             errors.append(f"campo {field_id}: widget '{widget}' assente da metabind_inputs")
 
+    # Anti-drift: gli elenchi-di-categorie di core.yaml (chi riceve il Fronte/clock,
+    # le tappe, il motore di coerenza, il ritratto) devono nominare SOLO categorie
+    # dichiarate. Un typo qui scollerebbe in silenzio una feature dalle sue entità.
+    for key in ("fronte_categorie", "tappe_categorie", "coerenza_categorie", "ritratto_categorie"):
+        for cat in core.get(key, []) or []:
+            if cat not in categories:
+                errors.append(f"{key}: categoria non dichiarata ({cat})")
+
     # Anti-drift: le opzioni del select 'stile_nomi' (plugins.metabind_inputs)
     # devono combaciare con gli stili di generatori.yaml, che genera.js legge a
     # runtime. Così aggiungere uno stile in un solo posto è un errore esplicito.
@@ -497,17 +504,6 @@ def check() -> int:
     for page in load_pages():
         if page.get("category") not in categories:
             errors.append(f"page {page.get('id')}: categoria non dichiarata ({page.get('category')})")
-
-    # Mondo-esempio (opzionale): ogni nota del manifest deve avere 'nome' e una
-    # categoria DICHIARATA — altrimenti write_example_world la salterebbe in silenzio
-    # (note-demo mancanti senza avviso). Fail-fast coerente col resto della pipeline.
-    for manifest in load_example_manifests():
-        mondo = manifest.get("mondo")
-        for note in manifest.get("note", []) or []:
-            if not note.get("nome"):
-                errors.append(f"esempio[{mondo}]: nota senza 'nome'")
-            elif note.get("categoria") not in categories:
-                errors.append(f"esempio[{mondo}].{note.get('nome')}: categoria '{note.get('categoria')}' non dichiarata")
 
     if errors:
         for error in errors:

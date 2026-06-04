@@ -1,12 +1,10 @@
 # 🏠 GDR — Home
 
-> [!tip] Nuovo qui? Parti da **[[Inizia da qui]]** (3 minuti)
-> Una mini-guida sul mondo-esempio **Valdombra** ti mostra il punto del vault: *scrivi lore →
-> la superficie giocabile si calcola da sé*. I cruscotti qui sotto sono **già pieni** —
-> esplorali (es. [[Atlante]], [[Fronti]]), poi crea i tuoi coi bottoni **Crea**. Guida
-> completa nel **[[LEGGIMI]]**. Per ripartire pulito, cancella `Mondi/_Esempio — Valdombra`.
->
-> **Pronto a costruire il TUO mondo?** Segui il tour **[[Crea il tuo mondo]]** — 5 tappe, con spunti.
+> [!tip] Nuovo qui? Parti dal **[[LEGGIMI]]** o dal tour **[[Crea il tuo mondo]]** (5 tappe)
+> Il vault parte **vuoto**: i cruscotti qui sotto si popolano man mano che crei. Premi un
+> bottone **Crea** per la tua prima nota — ognuna ha in cima un callout **ℹ️ Guida** (cos'è,
+> come compilare i campi principali, spunti). Il principio del vault: *scrivi lore → la
+> superficie giocabile si calcola da sé*.
 
 ````tabs
 --- 🌍 Worldbuilding

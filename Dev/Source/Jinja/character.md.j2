@@ -5,13 +5,13 @@
 {{ m.identita_card(template) }}
 
 {{ m.classificazione(template.category) }}
+{{ m.guida(template.category, template.title) }}
 ````tabs
 --- 📋 Scheda
 
 {{ m.scheda_pg() }}
 --- 📖 Lore
 
-{% if core.get('spunti', {}).get(template.category) %}{{ m.spunti(template.category) }}{% endif %}
 {{ m.scheda(template.category) }}
 {{ m.genera_nome() }}
 > [!note]- Chi è
@@ -24,7 +24,7 @@
 {{ m.tema_natale() }}
 --- 🎲 Al tavolo
 
-{{ m.tavolo() }}
+{{ m.tavolo(template.category) }}
 --- 📊 Carattere
 
 {{ m.carattere(template.category) }}

@@ -16,6 +16,11 @@
 > **Visibilità** *(dm = solo DM, fuori dal sito giocatori)*: `INPUT[inlineSelect(option(normale), option(dm)):visibilita]`
 > **Rivelazione**: `INPUT[rivelazione][:rivelazione]`
 
+> [!info]- ℹ️ Guida — Profezia
+> **Cos'è** · Una predizione con condizioni d'avveramento — un gancio narrativo forte che il DM fa maturare nel tempo.
+> **Campi chiave** · **Tipo**; **Stato d'avveramento** (campo filtrabile: in corso/compiuta) per ritrovarla; sul Carattere **Malleabilità** dice se le scelte dei PG possono deviarla.
+> **Spunti** · Chi crede a questa profezia e chi la teme? Cosa deve accadere perché si compia — e chi lavora per impedirlo? E se l'interpretazione comune fosse sbagliata?
+
 ````tabs
 --- 📖 Lore
 
@@ -68,6 +73,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > [!tip] Avanza / scatena
 > Una spinta dal grafo o una mossa? `BUTTON[avanza-fronte]` (clock +1).
 > Clock pieno? `BUTTON[scatena-conseguenza]` — crea l'evento-conseguenza collegato e azzera il clock.
+
 > [!info]- 👁 Condivisione coi giocatori
 > Quando questa nota entra nel **sito dei giocatori** (`npm run site -- --reveal <livello>`): `INPUT[rivelazione][:rivelazione]`
 >

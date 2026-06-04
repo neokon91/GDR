@@ -92,3 +92,7 @@ creation:
   - field: a_livello_superiore
     prompt: Ai livelli superiori
     heading: Ai livelli superiori
+
+guida:
+  scopo: Un incantesimo che i giocatori possono memorizzare e lanciare, reso nella scheda PG con slot e link.
+  campi_chiave: '**Livello** (0 = trucchetto) + **Classi che lo lanciano** per renderlo selezionabile; **Tempo di lancio**/**Durata** (concentrazione) governano l''uso in combattimento.'

@@ -21,8 +21,6 @@
 > **Visibilità** *(dm = solo DM, fuori dal sito giocatori)*: `INPUT[inlineSelect(option(normale), option(dm)):visibilita]`
 > **Rivelazione**: `INPUT[rivelazione][:rivelazione]`
 
-> [!info] Famiglia: `INPUT[inlineSelect(option(insediamento), option(rovina), option(santuario), option(confine), option(selvaggio), option(onirico), option(interdimensionale), option(simbolico)):famiglia]`
-
 > [!note]- Cosa significa ogni famiglia
 > **insediamento** — Luogo stabilmente abitato o urbanizzato, con strutture create da civiltà intelligenti.
 > **rovina** — Resto di un luogo distrutto, dimenticato o caduto; custodisce eco di civiltà passate o cataclismi.
@@ -33,13 +31,13 @@
 > **interdimensionale** — Nodo tra piani, crocevia metafisico o intersezione ontologica; instabile o multistrato.
 > **simbolico** — Non ha senso fisico: rappresenta concetti, leggi o archetipi. Esiste per significato.
 
+> [!info]- ℹ️ Guida — Luogo
+> **Cos'è** · Un luogo è dove succede qualcosa: lo collochi nel mondo, lo leghi a chi lo controlla e ai luoghi confinanti, e gli dai una tensione presente.
+> **Campi chiave** · **Tipo** (forma) e **Mondo** per primi; poi **Controllata da** e **Confina con** per inserirlo nel grafo; **Clima**/**Popolazione** per il colore.
+> **Spunti** · Cosa c'è di sbagliato o di teso qui, proprio adesso? Chi lo controlla — e chi vorrebbe strapparglielo? Cosa sta per succedere? (la pressione, la prossima mossa)
+
 ````tabs
 --- 📖 Lore
-
-> [!question]- 💡 Spunti per definirlo
-> - Cosa c'è di sbagliato o di teso qui, proprio adesso?
-> - Chi lo controlla — e chi vorrebbe strapparglielo?
-> - Cosa sta per succedere? (la pressione, la prossima mossa)
 
 > [!abstract] Scheda
 > Clima: `INPUT[clima][:clima]`
@@ -105,6 +103,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > [!tip] Avanza / scatena
 > Una spinta dal grafo o una mossa? `BUTTON[avanza-fronte]` (clock +1).
 > Clock pieno? `BUTTON[scatena-conseguenza]` — crea l'evento-conseguenza collegato e azzera il clock.
+
 > [!info]- 👁 Condivisione coi giocatori
 > Quando questa nota entra nel **sito dei giocatori** (`npm run site -- --reveal <livello>`): `INPUT[rivelazione][:rivelazione]`
 >

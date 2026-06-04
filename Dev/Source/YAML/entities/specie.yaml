@@ -70,3 +70,7 @@ creation:
   - field: tratti
     prompt: Tratti di specie (scrivi "scurovisione" se la concede)
     heading: Tratti
+
+guida:
+  scopo: 'Una specie è un popolo giocabile: ne fissi i tratti meccanici (taglia, velocità) perché crea_pg li offra, e la sua natura aliena.'
+  campi_chiave: '**Tipo** (rarità) + **famiglia** (origine); **Taglia** e **Velocità** la rendono giocabile in crea_pg; scrivi i **Tratti** (includi "scurovisione" se la concede).'

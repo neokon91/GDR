@@ -17,8 +17,6 @@
 > **Visibilità** *(dm = solo DM, fuori dal sito giocatori)*: `INPUT[inlineSelect(option(normale), option(dm)):visibilita]`
 > **Rivelazione**: `INPUT[rivelazione][:rivelazione]`
 
-> [!info] Famiglia: `INPUT[inlineSelect(option(ordine), option(caos), option(vita), option(morte), option(natura), option(conoscenza), option(energia), option(fato)):famiglia]`
-
 > [!note]- Cosa significa ogni famiglia
 > **ordine** — La sfera della struttura, della legge e della stabilità.
 > **caos** — La sfera del mutamento, dell'imprevedibile e della distruzione.
@@ -28,6 +26,11 @@
 > **conoscenza** — La sfera del sapere, della mente e della verità.
 > **energia** — La sfera del potere grezzo, della magia e delle forze primarie.
 > **fato** — La sfera del destino, del tempo e degli eventi predeterminati.
+
+> [!info]- ℹ️ Guida — Dominio
+> **Cos'è** · Un dominio è una sfera ontologica della realtà (la Morte, il Tempo, l'Identità): l'hub che lega leggi, magie, piani ed entità affini.
+> **Campi chiave** · **Famiglia** (ordine, caos, vita, morte…) dice di quale ambito è sfera; le relazioni a Leggi/Piani/Primordiali ne costruiscono il nodo nel grafo.
+> **Spunti** · Di quale aspetto della realtà è la sfera — e cosa mette in moto? Con quale dominio opposto è in tensione, e chi vince adesso? Quali divinità o primordiali lo incarnano nel mondo?
 
 ````tabs
 --- 📖 Lore
@@ -76,6 +79,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > [!tip] Avanza / scatena
 > Una spinta dal grafo o una mossa? `BUTTON[avanza-fronte]` (clock +1).
 > Clock pieno? `BUTTON[scatena-conseguenza]` — crea l'evento-conseguenza collegato e azzera il clock.
+
 > [!info]- 👁 Condivisione coi giocatori
 > Quando questa nota entra nel **sito dei giocatori** (`npm run site -- --reveal <livello>`): `INPUT[rivelazione][:rivelazione]`
 >

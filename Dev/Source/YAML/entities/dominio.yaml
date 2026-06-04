@@ -72,3 +72,7 @@ creation:
   - field: manifestazioni
     prompt: 'Manifestazioni: segni del dominio nel mondo mortale'
     heading: Manifestazioni
+
+guida:
+  scopo: 'Un dominio è una sfera ontologica della realtà (la Morte, il Tempo, l''Identità): l''hub che lega leggi, magie, piani ed entità affini.'
+  campi_chiave: '**Famiglia** (ordine, caos, vita, morte…) dice di quale ambito è sfera; le relazioni a Leggi/Piani/Primordiali ne costruiscono il nodo nel grafo.'

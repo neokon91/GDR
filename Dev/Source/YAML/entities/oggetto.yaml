@@ -115,3 +115,7 @@ creation:
   - field: provenienza
     prompt: Costo, come si ottiene
     heading: Provenienza
+
+guida:
+  scopo: Un oggetto del mondo — da equipaggiamento mondano ad artefatto senziente; armi/armature homebrew diventano giocabili.
+  campi_chiave: '**Tipo** (arma/armatura/oggetto magico…); per gli oggetti magici **Rarità** e **Sintonia**; per armi/armature i campi meccanici (**Danni**, **CA**, **Padronanza**) che li rendono usabili.'

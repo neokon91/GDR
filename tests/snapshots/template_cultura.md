@@ -22,8 +22,6 @@
 > **Visibilità** *(dm = solo DM, fuori dal sito giocatori)*: `INPUT[inlineSelect(option(normale), option(dm)):visibilita]`
 > **Rivelazione**: `INPUT[rivelazione][:rivelazione]`
 
-> [!info] Famiglia: `INPUT[inlineSelect(option(ancestrale), option(sciamanica), option(iniziatica), option(dogmatica), option(fluida), option(sincretica), option(guerriera), option(nomadica)):famiglia]`
-
 > [!note]- Cosa significa ogni famiglia
 > **ancestrale** — Radicata nelle origini mitiche, nella trasmissione orale e nei cicli naturali.
 > **sciamanica** — Integra visibile e invisibile: pratiche spirituali, viaggi dell'anima, dialogo con l'Altrove.
@@ -34,13 +32,13 @@
 > **guerriera** — Fondata sul conflitto, sulla prova e sulla conquista.
 > **nomadica** — Del movimento, dell'adattamento e della non-fissazione.
 
+> [!info]- ℹ️ Guida — Cultura
+> **Cos'è** · Una cultura è un popolo coi suoi valori, riti e tabù: dà identità a luoghi e personaggi e attriti con le culture vicine.
+> **Campi chiave** · Scegli la **famiglia** (indole): pre-compila gli assi. Poi **Stile dei nomi** (alimenta il generatore) e **Portata**; sul Carattere **Valori dominanti**.
+> **Spunti** · Cosa venera o teme questo popolo? Qual è il suo valore supremo? Un costume o un rito che a un forestiero sembra assurdo. Come tratta gli stranieri, i morti, il potere?
+
 ````tabs
 --- 📖 Lore
-
-> [!question]- 💡 Spunti per definirlo
-> - Cosa venera o teme questo popolo? Qual è il suo valore supremo?
-> - Un costume o un rito che a un forestiero sembra assurdo.
-> - Come tratta gli stranieri, i morti, il potere?
 
 > [!abstract] Scheda
 > Portata: `INPUT[portata][:portata]`
@@ -96,6 +94,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > [!tip] Avanza / scatena
 > Una spinta dal grafo o una mossa? `BUTTON[avanza-fronte]` (clock +1).
 > Clock pieno? `BUTTON[scatena-conseguenza]` — crea l'evento-conseguenza collegato e azzera il clock.
+
 > [!info]- 👁 Condivisione coi giocatori
 > Quando questa nota entra nel **sito dei giocatori** (`npm run site -- --reveal <livello>`): `INPUT[rivelazione][:rivelazione]`
 >

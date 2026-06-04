@@ -19,8 +19,6 @@
 > **Visibilità** *(dm = solo DM, fuori dal sito giocatori)*: `INPUT[inlineSelect(option(normale), option(dm)):visibilita]`
 > **Rivelazione**: `INPUT[rivelazione][:rivelazione]`
 
-> [!info] Famiglia: `INPUT[inlineSelect(option(combattimento), option(sociale), option(esplorazione), option(enigma), option(inseguimento), option(ambientale)):famiglia]`
-
 > [!note]- Cosa significa ogni famiglia
 > **combattimento** — Scontro: l'obiettivo è prevalere sul nemico.
 > **sociale** — Interazione: persuadere, negoziare, ingannare, intimidire.
@@ -28,6 +26,11 @@
 > **enigma** — Rompicapo: risolvere un puzzle, un indovinello, un meccanismo.
 > **inseguimento** — Movimento: rincorrere o fuggire, con poste e ostacoli.
 > **ambientale** — Sopravvivenza: l'ambiente stesso è la minaccia.
+
+> [!info]- ℹ️ Guida — Incontro
+> **Cos'è** · Una scena pronta da giocare — scontro, agguato o inseguimento — col budget di difficoltà 2024 calcolato in automatico.
+> **Campi chiave** · **Creature** + **Livello del gruppo** + **Numero di PG** alimentano il calcolo difficoltà; la **Famiglia** (combattimento/sociale…) varia il ritmo.
+> **Spunti** · Qual è l'obiettivo della scena e la posta se va male? Cosa nell'ambiente complica lo scontro? Cosa vogliono davvero gli avversari — si può evitare il sangue?
 
 ````tabs
 --- 🎬 Scena
@@ -38,28 +41,6 @@
 > [!gancio]- Gancio
 > `INPUT[testo_area][:gancio]`
 
-> [!warning] Pressione — `VIEW[{pressione} >= 7 ? "🔴 Crisi" : ({pressione} >= 4 ? "🟠 Tensione" : "🟢 Calma")]`
-> Pressione: `INPUT[pressione][:pressione]`
->
-> Prossima mossa: `INPUT[text:prossima_mossa]`
-
-**⏳ Fronte** — clock `INPUT[number:clock]` / `INPUT[clock_dim][:clock_dim]` segmenti
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderClock");
-```
-
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderPressioni");
-```
-
-> [!warning]- Conseguenza (quando il clock è pieno)
-> `INPUT[testo_area][:conseguenza]`
->
-> Bersaglio: `INPUT[legame][:conseguenza_su]`
-
-> [!tip] Avanza / scatena
-> Una spinta dal grafo o una mossa? `BUTTON[avanza-fronte]` (clock +1).
-> Clock pieno? `BUTTON[scatena-conseguenza]` — crea l'evento-conseguenza collegato e azzera il clock.
 > [!info]- 👁 Condivisione coi giocatori
 > Quando questa nota entra nel **sito dei giocatori** (`npm run site -- --reveal <livello>`): `INPUT[rivelazione][:rivelazione]`
 >

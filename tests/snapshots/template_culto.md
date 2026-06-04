@@ -18,6 +18,11 @@
 > **Visibilità** *(dm = solo DM, fuori dal sito giocatori)*: `INPUT[inlineSelect(option(normale), option(dm)):visibilita]`
 > **Rivelazione**: `INPUT[rivelazione][:rivelazione]`
 
+> [!info]- ℹ️ Guida — Culto
+> **Cos'è** · Una religione organizzata (dottrina, clero, riti, fedeli) — distinta dalla divinità che venera e dalla fazione politica.
+> **Campi chiave** · **Tipo** (setta, misterico, popolare…); **Divinità** venerate; **Portata** (diffusione); sul Carattere **Legalità** ne fissa il rapporto col potere.
+> **Spunti** · Cosa promette ai fedeli, e cosa pretende in cambio? C'è un'eresia o uno scisma che lo minaccia dall'interno? Qual è la verità che solo gli iniziati conoscono?
+
 ````tabs
 --- 📖 Lore
 
@@ -73,6 +78,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > [!tip] Avanza / scatena
 > Una spinta dal grafo o una mossa? `BUTTON[avanza-fronte]` (clock +1).
 > Clock pieno? `BUTTON[scatena-conseguenza]` — crea l'evento-conseguenza collegato e azzera il clock.
+
 > [!info]- 👁 Condivisione coi giocatori
 > Quando questa nota entra nel **sito dei giocatori** (`npm run site -- --reveal <livello>`): `INPUT[rivelazione][:rivelazione]`
 >

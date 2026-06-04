@@ -29,3 +29,7 @@ creation:
   - field: apertura
     prompt: Scena d'apertura
     optional: true
+
+guida:
+  scopo: 'Il foglio di una singola sessione: obiettivo, scena d''apertura e la checklist di prep (Tasks) per condurre il tavolo.'
+  campi_chiave: '**Mondo** + **Obiettivo** (cosa deve accadere) + **Scena d''apertura**; usa i tag #prep/#gancio per far comparire la sessione nei fili narrativi della Home.'

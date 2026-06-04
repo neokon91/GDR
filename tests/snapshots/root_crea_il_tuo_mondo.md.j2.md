@@ -3,8 +3,8 @@
 > [!info] A cosa serve
 > Parti da un foglio bianco? **Cinque tappe** per dare vita al tuo mondo — ognuna con
 > qualche spunto per accendere l'idea. Non serve compilare tutto: bastano poche frasi
-> per partire, il resto cresce giocando. *(Non hai ancora visto «Inizia da qui» nel
-> mondo-esempio? Aprila prima: mostra dove si vuole arrivare.)*
+> per partire, il resto cresce giocando. *(Ogni nota che crei ha in cima un callout
+> **ℹ️ Guida**: spiega cos'è e come compilarne i campi principali.)*
 
 > [!todo] Le 5 tappe
 > - [ ] 1 · Il **Mondo** — la cornice

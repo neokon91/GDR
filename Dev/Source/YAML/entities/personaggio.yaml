@@ -117,3 +117,7 @@ creation:
     callout: segreto
     title: Segreto
     fold: true
+
+guida:
+  scopo: Una persona del mondo — PG giocabile o PNG da interpretare (lo stesso tipo serve entrambi).
+  campi_chiave: '**Tipo** (pg/png); per i PNG il **Ruolo narrativo** (alleato, mentore, rivale…) e l''**Affiliazione** (fazione); **Allineamento** per la bussola morale.'

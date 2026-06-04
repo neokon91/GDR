@@ -64,3 +64,7 @@ creation:
   - field: lessico
     prompt: Parole/frasi chiave usabili al tavolo
     heading: Lessico
+
+guida:
+  scopo: 'Una lingua dà texture al mondo: chi la parla, come suona e — se arcana o rituale — cosa può fare quando viene pronunciata.'
+  campi_chiave: '**Famiglia** (registro: divina, arcana, segreta…) e **Tipo**; **Vitalità** (viva→morta) per le query; sul Carattere **Effetto magico** e **Rischio** se le parole hanno potere.'

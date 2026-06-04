@@ -84,3 +84,7 @@ creation:
   - field: progressione
     prompt: Privilegi salienti per livello
     heading: Progressione
+
+guida:
+  scopo: La classe homebrew che i tuoi giocatori potranno scegliere in creazione e far salire di livello come una ufficiale.
+  campi_chiave: '**Tipo** + **Dado vita** + **Caratteristica primaria** + **Incantatore?** (pieno/mezzo): da questi il motore deriva slot, competenza e ASI.'

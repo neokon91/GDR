@@ -29,3 +29,7 @@ creation:
   - field: privilegi
     prompt: Privilegi (livelli 3/6/10/14)
     heading: Privilegi
+
+guida:
+  scopo: Una specializzazione di una tua classe homebrew, coi privilegi che si sbloccano salendo di livello.
+  campi_chiave: Collega la **Classe** (la lega al level-up); scrivi i **Privilegi** ai livelli canonici 3/6/10/14.

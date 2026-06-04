@@ -60,9 +60,8 @@ creation:
   - field: volonta
     prompt: 'Volontà: cosa vuole, cosa muove la sua azione'
     heading: Volontà
-  - field: stato
-    prompt: 'Stato attuale: attivo, dormiente, sigillato, disperso'
-    heading: Stato
+  # «Stato attuale» NON è un body in prosa: è il campo-scheda `stato_cosmico`
+  # (query-abile) + l'asse `risveglio` (Sigillata→Scatenata). Niente tripla cattura.
   - field: eredita
     prompt: 'Eredità: cosa ha lasciato (divinità, stirpi, luoghi, leggi)'
     heading: Eredità
@@ -74,3 +73,7 @@ creation:
     callout: segreto
     title: Segreto
     fold: true
+
+guida:
+  scopo: Un'entità primordiale è un essere pre-divino che incarna una legge e appartiene a un dominio; da essa discendono le divinità.
+  campi_chiave: '**Stato** (sigillata/dormiente/desta, query-abile) e **Allineamento**; poi le relazioni **Legge incarnata** e **Dominio**; sul Carattere **Risveglio**.'

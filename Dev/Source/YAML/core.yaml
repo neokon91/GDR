@@ -51,7 +51,6 @@ fields:
   allineamento:   { label: Allineamento,         widget: allineamento }
   # Campi strutturati di lore (mostrati da scheda(), tipizzati in fileClass)
   epoca:          { label: Epoca,                widget: text }
-  scala:          { label: Scala,                widget: scala }
   genere:         { label: Genere,               widget: genere }
   temi:           { label: Temi,                 widget: temi }
   clima:          { label: Clima,                widget: clima }
@@ -112,6 +111,32 @@ coerenza_categorie:
   - regno
   - personaggio
 
+# Categorie che possono essere un FRONTE: attori con agenda/momento (sociale,
+# politico, religioso) o principi cosmici che premono sul tavolo. Solo qui la
+# superficie giocabile espone la macchina del clock (pressione + clock_dim +
+# conseguenza + Avanza/Scatena + pannelli renderClock/renderPressioni). Sulle
+# altre (bioma, lingua, mito, ecosistema, epoca, evento…) un orologio non ha
+# senso: l'Al tavolo resta — Uso al tavolo, Gancio, Condivisione sono universali —
+# ma senza il Fronte. NB: deve contenere il set COSMO di views.js (i principi che
+# il grafo cosmico tratta già da Fronti), altrimenti il clock e le sue spinte si
+# scollerebbero. Validato da check() (le categorie devono esistere).
+fronte_categorie:
+  - mondo
+  - fazione
+  - culto
+  - divinita
+  - regno
+  - luogo
+  - cultura
+  - profezia
+  - personaggio   # un PNG con un piano (o un PG sotto un clock personale: maledizione/corruzione) è un Fronte
+  - cosmologia
+  - dominio
+  - piano
+  - legge_fondamentale
+  - entita_primordiale
+  - sistema_magico
+
 # Superficie giocabile (IL differenziatore): ogni nota lore la espone, sempre.
 # Single source renderizzato dalla macro tavolo(); i campi sono in core.fields.
 # 'pressione' e' speciale: la macro aggiunge l'etichetta calcolata e prossima_mossa.
@@ -169,3 +194,79 @@ spunti:
     - Cosa vuole, e cosa lo ferma?
     - Un segreto, una paura, una contraddizione.
     - Come può intrecciarsi con i personaggi giocanti?
+  bioma:
+    - "Cosa rende questo bioma diverso dal solito? (un fenomeno, una creatura, una regola che cambia)"
+    - "Cosa vi attira gli avventurieri — e cosa li fa pentire di esserci entrati?"
+    - "Quale risorsa o pericolo nasconde sotto la superficie?"
+  ecosistema:
+    - "Qual è l'anello debole della catena — la specie che, se sparisce, fa crollare tutto?"
+    - "Cosa lo sta spezzando proprio ora, e chi se ne accorgerà per primo?"
+    - "Cosa accade al mondo intorno se questo equilibrio salta?"
+  lingua:
+    - "Chi la parla — e chi NON deve mai sentirla o pronunciarla?"
+    - "Una parola o frase usabile al tavolo: cosa significa, e cosa fa?"
+    - "È viva o sta morendo? Chi la tiene in vita, e perché?"
+  risorsa:
+    - "Chi la controlla oggi — e chi la vuole abbastanza da uccidere per averla?"
+    - "Cosa succede al mondo se sparisce, o se qualcuno ne ottiene il monopolio?"
+    - "Da dove viene davvero, e cosa nasconde la sua filiera?"
+  epoca:
+    - "Cosa rese quest'era diversa da quella prima e quella dopo?"
+    - "Quale evento la apre e quale la chiude?"
+    - "Cosa di lei sopravvive nel presente?"
+  mito:
+    - "Chi lo racconta, e a chi conviene che ci si creda?"
+    - "C'è un nocciolo di verità sotto la leggenda?"
+    - "Cosa succede se qualcuno scopre che è falso — o che è vero?"
+  profezia:
+    - "Chi crede a questa profezia e chi la teme?"
+    - "Cosa deve accadere perché si compia — e chi lavora per impedirlo?"
+    - "E se l'interpretazione comune fosse sbagliata?"
+  culto:
+    - "Cosa promette ai fedeli, e cosa pretende in cambio?"
+    - "C'è un'eresia o uno scisma che lo minaccia dall'interno?"
+    - "Qual è la verità che solo gli iniziati conoscono?"
+  oggetto:
+    - "A cosa serve davvero, e chi lo vuole?"
+    - "Ha un costo nascosto o una volontà propria?"
+    - "Da dove viene — e perché è finito qui?"
+  cosmologia:
+    - "Qual è il principio primo da cui tutto discende — e cosa c'era prima?"
+    - "Verso dove tende il cosmo: ciclo eterno, fine annunciata, rinascita?"
+    - "Cosa di questo quadro è ignoto persino ai sapienti?"
+  dominio:
+    - "Di quale aspetto della realtà è la sfera — e cosa mette in moto?"
+    - "Con quale dominio opposto è in tensione, e chi vince adesso?"
+    - "Quali divinità o primordiali lo incarnano nel mondo?"
+  piano:
+    - "Che sostanza e che leggi fisiche ha — e cosa vi uccide un mortale?"
+    - "Come si entra e si esce: soglia, rito, morte, sogno?"
+    - "Come si fa sentire la sua presenza nel mondo materiale?"
+  legge_fondamentale:
+    - "Quali sono i due poli, e verso quale pende oggi la realtà?"
+    - "Cosa accade — nel mondo, non in astratto — se la legge si spezza?"
+    - "Chi o cosa la incarna, e chi sogna di infrangerla?"
+  entita_primordiale:
+    - "Quale legge incarna — ed è mente cosciente o forza cieca?"
+    - "Dorme, è sigillata o desta? E cosa basterebbe a risvegliarla?"
+    - "Cosa ha lasciato dietro di sé: stirpi, divinità, una ferita nel mondo?"
+  sistema_magico:
+    - "Da dove viene il potere — e che prezzo esige da chi lo usa?"
+    - "Come si pratica: parole, sangue, patti, sigilli? E cosa va storto?"
+    - "Chi può impararla, e chi è escluso o la teme?"
+  regola:
+    - "Quale frustrazione del regolamento standard risolve?"
+    - "Rende qualcosa più rischioso o più fluido?"
+    - "Vale per tutti o solo in certe scene?"
+  creatura:
+    - "Cosa la rende pericolosa al di là dei numeri?"
+    - "Come caccia o si difende?"
+    - "Che leggenda raccontano di lei i popoli vicini?"
+  incontro:
+    - "Qual è l'obiettivo della scena e la posta se va male?"
+    - "Cosa nell'ambiente complica lo scontro?"
+    - "Cosa vogliono davvero gli avversari — si può evitare il sangue?"
+  albero_evolutivo:
+    - "Cosa custodisce l'accesso al primo grado?"
+    - "Che prova o costo separa un grado dal successivo?"
+    - "Chi sono gli esempi viventi all'apice?"

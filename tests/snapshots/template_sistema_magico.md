@@ -16,6 +16,11 @@
 > **Visibilità** *(dm = solo DM, fuori dal sito giocatori)*: `INPUT[inlineSelect(option(normale), option(dm)):visibilita]`
 > **Rivelazione**: `INPUT[rivelazione][:rivelazione]`
 
+> [!info]- ℹ️ Guida — Sistema magico
+> **Cos'è** · Un sistema magico descrive come funziona la magia nel mondo — da dove viene, come si pratica, cosa costa, cosa rischia — distinto dal singolo incantesimo.
+> **Campi chiave** · **Fonte del potere** e **Tipo**; sul Carattere gli assi **Fonte/Metodo/Costo/Rischio**, che insieme generano l'archetipo (dono, patto, selvaggia, accademica…).
+> **Spunti** · Da dove viene il potere — e che prezzo esige da chi lo usa? Come si pratica: parole, sangue, patti, sigilli? E cosa va storto? Chi può impararla, e chi è escluso o la teme?
+
 ````tabs
 --- 📖 Lore
 
@@ -74,6 +79,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > [!tip] Avanza / scatena
 > Una spinta dal grafo o una mossa? `BUTTON[avanza-fronte]` (clock +1).
 > Clock pieno? `BUTTON[scatena-conseguenza]` — crea l'evento-conseguenza collegato e azzera il clock.
+
 > [!info]- 👁 Condivisione coi giocatori
 > Quando questa nota entra nel **sito dei giocatori** (`npm run site -- --reveal <livello>`): `INPUT[rivelazione][:rivelazione]`
 >

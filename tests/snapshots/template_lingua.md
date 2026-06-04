@@ -18,8 +18,6 @@
 > **Visibilità** *(dm = solo DM, fuori dal sito giocatori)*: `INPUT[inlineSelect(option(normale), option(dm)):visibilita]`
 > **Rivelazione**: `INPUT[rivelazione][:rivelazione]`
 
-> [!info] Famiglia: `INPUT[inlineSelect(option(primordiale), option(divina), option(planare), option(elementale), option(ancestrale), option(rituale), option(arcana), option(segreta)):famiglia]`
-
 > [!note]- Cosa significa ogni famiglia
 > **primordiale** — Linguaggi originari, emanazioni cosmiche o divine anteriori alla realtà ordinata.
 > **divina** — Idiomi delle entità divine o delle sfere celesti, spesso incomprensibili ai mortali.
@@ -29,6 +27,11 @@
 > **rituale** — Usati per scopi cerimoniali, religiosi o liturgici.
 > **arcana** — Linguaggi specialistici per incantesimi, formule, sigilli e grimori.
 > **segreta** — Codici cifrati e idiomi criptici di sette, ladri, spie o ordini iniziatici.
+
+> [!info]- ℹ️ Guida — Lingua
+> **Cos'è** · Una lingua dà texture al mondo: chi la parla, come suona e — se arcana o rituale — cosa può fare quando viene pronunciata.
+> **Campi chiave** · **Famiglia** (registro: divina, arcana, segreta…) e **Tipo**; **Vitalità** (viva→morta) per le query; sul Carattere **Effetto magico** e **Rischio** se le parole hanno potere.
+> **Spunti** · Chi la parla — e chi NON deve mai sentirla o pronunciarla? Una parola o frase usabile al tavolo: cosa significa, e cosa fa? È viva o sta morendo? Chi la tiene in vita, e perché?
 
 ````tabs
 --- 📖 Lore
@@ -57,28 +60,6 @@
 > [!gancio]- Gancio
 > `INPUT[testo_area][:gancio]`
 
-> [!warning] Pressione — `VIEW[{pressione} >= 7 ? "🔴 Crisi" : ({pressione} >= 4 ? "🟠 Tensione" : "🟢 Calma")]`
-> Pressione: `INPUT[pressione][:pressione]`
->
-> Prossima mossa: `INPUT[text:prossima_mossa]`
-
-**⏳ Fronte** — clock `INPUT[number:clock]` / `INPUT[clock_dim][:clock_dim]` segmenti
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderClock");
-```
-
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderPressioni");
-```
-
-> [!warning]- Conseguenza (quando il clock è pieno)
-> `INPUT[testo_area][:conseguenza]`
->
-> Bersaglio: `INPUT[legame][:conseguenza_su]`
-
-> [!tip] Avanza / scatena
-> Una spinta dal grafo o una mossa? `BUTTON[avanza-fronte]` (clock +1).
-> Clock pieno? `BUTTON[scatena-conseguenza]` — crea l'evento-conseguenza collegato e azzera il clock.
 > [!info]- 👁 Condivisione coi giocatori
 > Quando questa nota entra nel **sito dei giocatori** (`npm run site -- --reveal <livello>`): `INPUT[rivelazione][:rivelazione]`
 >

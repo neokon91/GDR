@@ -209,20 +209,6 @@ function injectSvg(container, svg, emptyMsg) {
   wrap.innerHTML = svg;
 }
 
-// Radar della SOLA nota corrente (usato dal tab Carattere via la macro grafico_assi).
-async function renderAxesRadar(container, app, page) {
-  if (!page) {
-    container.createEl("p", { text: "Apri la nota per vedere il radar.", cls: "gdr-radar-empty" });
-    return;
-  }
-  const core = await loadCoreData(app);
-  const axes = axesFor(core, page.categoria);
-  const values = axes.map((a) => page[a.id]);
-  const name = page.nome || (page.file && page.file.name) || "—";
-  injectSvg(container, radarSvg(axes, [{ name, values, color: RADAR_PALETTE[0] }]),
-    "Servono almeno 3 assi tematici per il radar.");
-}
-
 // Radar come MARKDOWN (SVG inline) dai valori-assi passati, per il pannello
 // REATTIVO meta-bind-js-view: i valori arrivano dai binding Meta Bind e si
 // aggiornano live mentre muovi gli slider. 'valori' = {asseId: valore}.
@@ -1427,7 +1413,7 @@ async function renderVerificaGS(app, page) {
 
 module.exports = {
   renderEntityPanel, renderSessionPanel, renderBacklinks,
-  renderAxesRadar, renderAxesCompare, radarSvg, clampAxis,
+  renderAxesCompare, radarSvg, clampAxis,
   renderProfilo, archetipiMatch, profiloTags, matchesCond,
   renderCoerenza, confrontoAssi, coerenzaNote,
   renderClock, clockSvg,

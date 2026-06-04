@@ -20,14 +20,17 @@
 > **Visibilità** *(dm = solo DM, fuori dal sito giocatori)*: `INPUT[inlineSelect(option(normale), option(dm)):visibilita]`
 > **Rivelazione**: `INPUT[rivelazione][:rivelazione]`
 
-> [!info] Famiglia: `INPUT[inlineSelect(option(vitale), option(bellica), option(arcana), option(voluttuaria), option(simbolica)):famiglia]`
-
 > [!note]- Cosa significa ogni famiglia
 > **vitale** — Necessaria alla sopravvivenza: cibo, acqua, sale, legname — chi la perde muore o si piega.
 > **bellica** — Alimenta la guerra: metalli, cavalli, salnitro, acciaio — chi la controlla detta i conflitti.
 > **arcana** — Carburante della magia: reagenti, reliquie, cristalli — rara, instabile, sempre contesa.
 > **voluttuaria** — Lusso e status: spezie, gemme, sete — muove ricchezza e desiderio, non necessità.
 > **simbolica** — Valore culturale/sacro oltre l'uso: ostie, insegne, materiali rituali — il prezzo è identità.
+
+> [!info]- ℹ️ Guida — Risorsa
+> **Cos'è** · Una risorsa è ciò che il mondo produce, commercia e si contende: il sostrato materiale che dà stakes concreti a Fronti e guerre.
+> **Campi chiave** · **Tipo** + **famiglia** (vitale, bellica, arcana…); **Scarsità** e **Fonte** la rendono interrogabile; **Controllata da** la lega alla fazione che la domina.
+> **Spunti** · Chi la controlla oggi — e chi la vuole abbastanza da uccidere per averla? Cosa succede al mondo se sparisce, o se qualcuno ne ottiene il monopolio? Da dove viene davvero, e cosa nasconde la sua filiera?
 
 ````tabs
 --- 📖 Lore
@@ -58,28 +61,6 @@
 > [!gancio]- Gancio
 > `INPUT[testo_area][:gancio]`
 
-> [!warning] Pressione — `VIEW[{pressione} >= 7 ? "🔴 Crisi" : ({pressione} >= 4 ? "🟠 Tensione" : "🟢 Calma")]`
-> Pressione: `INPUT[pressione][:pressione]`
->
-> Prossima mossa: `INPUT[text:prossima_mossa]`
-
-**⏳ Fronte** — clock `INPUT[number:clock]` / `INPUT[clock_dim][:clock_dim]` segmenti
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderClock");
-```
-
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderPressioni");
-```
-
-> [!warning]- Conseguenza (quando il clock è pieno)
-> `INPUT[testo_area][:conseguenza]`
->
-> Bersaglio: `INPUT[legame][:conseguenza_su]`
-
-> [!tip] Avanza / scatena
-> Una spinta dal grafo o una mossa? `BUTTON[avanza-fronte]` (clock +1).
-> Clock pieno? `BUTTON[scatena-conseguenza]` — crea l'evento-conseguenza collegato e azzera il clock.
 > [!info]- 👁 Condivisione coi giocatori
 > Quando questa nota entra nel **sito dei giocatori** (`npm run site -- --reveal <livello>`): `INPUT[rivelazione][:rivelazione]`
 >

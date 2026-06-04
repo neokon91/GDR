@@ -18,13 +18,13 @@
 > **Visibilità** *(dm = solo DM, fuori dal sito giocatori)*: `INPUT[inlineSelect(option(normale), option(dm)):visibilita]`
 > **Rivelazione**: `INPUT[rivelazione][:rivelazione]`
 
+> [!info]- ℹ️ Guida — Mondo
+> **Cos'è** · Il mondo è il contenitore-radice della campagna: ne fissa genere, tono e conflitto, e da qui agganci tutti i componenti (regni, culture, cosmologia…).
+> **Campi chiave** · **Genere** e **Temi** danno il sapore; sul Carattere imposta **Tono** e **Diffusione della magia** — definiscono atmosfera e quanto conta l'arcano.
+> **Spunti** · Qual è la tensione centrale che muove tutto? (chi vuole cosa, e perché proprio ora) Cosa rende questo mondo diverso da una terra qualunque? Genere e tono in una frase (dark fantasy di frontiera, eroico, weird…).
+
 ````tabs
 --- 📖 Lore
-
-> [!question]- 💡 Spunti per definirlo
-> - Qual è la tensione centrale che muove tutto? (chi vuole cosa, e perché proprio ora)
-> - Cosa rende questo mondo diverso da una terra qualunque?
-> - Genere e tono in una frase (dark fantasy di frontiera, eroico, weird…).
 
 > [!abstract] Scheda
 > Genere: `INPUT[genere][:genere]`
@@ -73,6 +73,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > [!tip] Avanza / scatena
 > Una spinta dal grafo o una mossa? `BUTTON[avanza-fronte]` (clock +1).
 > Clock pieno? `BUTTON[scatena-conseguenza]` — crea l'evento-conseguenza collegato e azzera il clock.
+
 > [!info]- 👁 Condivisione coi giocatori
 > Quando questa nota entra nel **sito dei giocatori** (`npm run site -- --reveal <livello>`): `INPUT[rivelazione][:rivelazione]`
 >

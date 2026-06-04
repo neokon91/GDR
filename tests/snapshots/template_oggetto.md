@@ -21,6 +21,11 @@
 > **Visibilità** *(dm = solo DM, fuori dal sito giocatori)*: `INPUT[inlineSelect(option(normale), option(dm)):visibilita]`
 > **Rivelazione**: `INPUT[rivelazione][:rivelazione]`
 
+> [!info]- ℹ️ Guida — Oggetto
+> **Cos'è** · Un oggetto del mondo — da equipaggiamento mondano ad artefatto senziente; armi/armature homebrew diventano giocabili.
+> **Campi chiave** · **Tipo** (arma/armatura/oggetto magico…); per gli oggetti magici **Rarità** e **Sintonia**; per armi/armature i campi meccanici (**Danni**, **CA**, **Padronanza**) che li rendono usabili.
+> **Spunti** · A cosa serve davvero, e chi lo vuole? Ha un costo nascosto o una volontà propria? Da dove viene — e perché è finito qui?
+
 ````tabs
 --- 📋 Scheda
 

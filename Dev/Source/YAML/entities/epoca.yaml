@@ -82,3 +82,7 @@ creation:
     callout: segreto
     title: Segreto
     fold: true
+
+guida:
+  scopo: Un grande periodo del mondo che raccoglie eventi e archi e fa da spina dorsale alla timeline.
+  campi_chiave: '**Tipo** + **Inizio**/**Fine** (date del mondo); **Famiglia** (fondativa, degenerativa…) e gli assi danno il sapore dell''era.'

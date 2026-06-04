@@ -52,8 +52,9 @@ relazioni:
   label: Divinità opposte
   category: divinita
   multi: true
+# NB: "di cosa è dio/dea" vive nella relazione tipizzata `domini`→dominio (link),
+# non in un campo-scheda `dominio` di testo libero che la duplicherebbe.
 scheda:
-- dominio
 - allineamento
 - simbolo
 creation:
@@ -75,3 +76,7 @@ creation:
   - field: culto
     prompt: 'Culto: fedeli, riti, templi'
     heading: Culto
+
+guida:
+  scopo: L'entità venerata — un attore cosmico che, via culti e profezie, può premere sul tavolo come Fronte.
+  campi_chiave: '**Rango** (maggiore/minore/semidio); **Famiglia** (→ preimposta gli assi cosmici); **Domini cosmici** e **Allineamento** per la sua identità.'

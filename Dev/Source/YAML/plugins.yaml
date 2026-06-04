@@ -112,7 +112,6 @@ metabind_inputs:
   incantesimi: INPUT[inlineSelect(option(nessuno), option(metà), option(piena), option(patto))]
   taglia: INPUT[inlineSelect(option(minuscola), option(piccola), option(media), option(grande), option(enorme), option(mastodontica))]
   dieta: INPUT[inlineSelect(option(carnivoro), option(erbivoro), option(onnivoro), option(spazzino), option(si nutre di magia), option(non si nutre))]
-  scala: INPUT[inlineSelect(option(mondo), option(continente), option(regno), option(regione), option(insediamento))]
   genere: INPUT[inlineSelect(option(high fantasy), option(dark fantasy), option(sword & sorcery), option(grimdark), option(eroico), option(weird))]
   temi: INPUT[inlineListSuggester(option(politico), option(guerra), option(mistero), option(sopravvivenza), option(esplorazione), option(horror), option(intrigo), option(redenzione))]
   clima: INPUT[inlineSelect(option(temperato), option(arido), option(tropicale), option(artico), option(montano), option(costiero), option(sotterraneo))]
@@ -122,9 +121,7 @@ metabind_inputs:
   fonte_potere: INPUT[inlineSelect(option(arcana), option(divina), option(primordiale), option(patto), option(innata), option(elementale))]
   accessibilita: INPUT[inlineSelect(option(aperto), option(soglie), option(rituale), option(sigillato))]
   stato_profezia: INPUT[inlineSelect(option(latente), option(in corso), option(avverata), option(scongiurata), option(fallita))]
-  veridicita: INPUT[inlineSelect(option(vero), option(parziale), option(falso), option(ignoto))]
   vitalita: INPUT[inlineSelect(option(viva), option(liturgica), option(franca), option(morta), option(segreta))]
-  salute: INPUT[inlineSelect(option(stabile), option(fragile), option(in collasso), option(rigenerante))]
   clock_dim: INPUT[inlineSelect(option(4), option(6), option(8))]
   gs: INPUT[inlineSelect(option(0), option(1/8), option(1/4), option(1/2), option(1), option(2), option(3), option(4), option(5), option(6), option(7), option(8), option(9), option(10), option(11), option(12), option(13), option(14), option(15), option(16), option(17), option(18), option(19), option(20))]
   legame: INPUT[suggester(optionQuery("Mondi"), useLinks(partial), allowOther)]
@@ -135,7 +132,6 @@ metabind_inputs:
   # Stili del generatore homebrew (genera.js): le opzioni DEVONO combaciare con
   # le chiavi di generatori.yaml:stili (validate lo impone, anti-drift).
   stile_nomi: INPUT[inlineSelect(option(romanzo, "Romanzo latino"), option(nordico, "Nordico"), option(silvano, "Silvano elfico"), option(montano, "Montano nanico"), option(tribale, "Tribale orchesco"), option(esotico, "Esotico arcano"))]
-  testo: INPUT[text]
   testo_area: INPUT[textArea]
 # Icone cartella (Iconize): chiave = chiave di core.folders, valore = emoji.
 # render.py le mappa sul percorso reale e le inietta in obsidian-icon-folder.

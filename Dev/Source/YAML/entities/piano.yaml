@@ -72,3 +72,7 @@ creation:
   - field: influenza
     prompt: 'Influenza: come tocca il mondo materiale'
     heading: Influenza
+
+guida:
+  scopo: Un piano è un livello di realtà a sé — elementale, astrale, onirico, un aldilà — con leggi, abitanti e accessi propri, distinto da un luogo materiale.
+  campi_chiave: '**Tipo** di piano + **Accessibilità** (come vi si entra); poi le relazioni a **Leggi** che lo governano e **Dominio**.'

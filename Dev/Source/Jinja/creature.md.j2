@@ -4,6 +4,7 @@
 
 {{ m.identita_card(template) }}
 
+{{ m.guida(template.category, template.title) }}
 ````tabs
 --- 🐉 Statblock 5.5e
 
@@ -57,7 +58,7 @@ monster: <% tp.config.target_file.basename %>
 
 --- 🎲 Al tavolo
 
-{{ m.tavolo() }}
+{{ m.tavolo(template.category) }}
 --- 📖 Lore
 
 {{ m.scheda(template.category) }}

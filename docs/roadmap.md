@@ -8,7 +8,8 @@ la **cronistoria** dettagliata vive nelle memorie di progetto. Qui: dove siamo e
 ## Stato (2026-06-03)
 
 `origin/main` (`84bca8e`), **269 test**, check 0. Pipeline matura: sorgenti YAML/Jinja/JS →
-`render.py` → vault Obsidian (+ sito giocatori opzionale). Mondo-esempio **Valdombra** popolato.
+`render.py` → vault Obsidian (+ sito giocatori opzionale). Vault parte vuoto: onboarding via
+wizard + callout **ℹ️ Guida** per-entità (il mondo-esempio Valdombra è stato rimosso).
 
 **Ultima sessione** (2026-06-03): consolidamento ontologia (principio di inclusione + merge
 `istituzione→fazione`); irrobustimento (harness + copertura pannelli/radar, **cap a scala** dei

@@ -22,13 +22,13 @@
 > **Visibilità** *(dm = solo DM, fuori dal sito giocatori)*: `INPUT[inlineSelect(option(normale), option(dm)):visibilita]`
 > **Rivelazione**: `INPUT[rivelazione][:rivelazione]`
 
+> [!info]- ℹ️ Guida — Regno
+> **Cos'è** · Il regno è il potere organizzato sopra luoghi e fazioni: chi governa, quanto è saldo il trono e con chi è in pace o in guerra.
+> **Campi chiave** · **Forma di governo** e **Sovrano** dicono chi comanda; **Capitale**, **Alleati** e **Rivali** lo legano alla mappa politica; sul Carattere **Stabilità**.
+> **Spunti** · Chi siede sul trono, e quanto è saldo? Qual è la minaccia che potrebbe farlo cadere? Da cosa trae ricchezza e potere?
+
 ````tabs
 --- 📖 Lore
-
-> [!question]- 💡 Spunti per definirlo
-> - Chi siede sul trono, e quanto è saldo?
-> - Qual è la minaccia che potrebbe farlo cadere?
-> - Da cosa trae ricchezza e potere?
 
 > [!abstract] Scheda
 > Forma di governo: `INPUT[text:governo]`
@@ -89,6 +89,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > [!tip] Avanza / scatena
 > Una spinta dal grafo o una mossa? `BUTTON[avanza-fronte]` (clock +1).
 > Clock pieno? `BUTTON[scatena-conseguenza]` — crea l'evento-conseguenza collegato e azzera il clock.
+
 > [!info]- 👁 Condivisione coi giocatori
 > Quando questa nota entra nel **sito dei giocatori** (`npm run site -- --reveal <livello>`): `INPUT[rivelazione][:rivelazione]`
 >

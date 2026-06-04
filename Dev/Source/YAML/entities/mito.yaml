@@ -15,10 +15,9 @@ subtypes:
 - diceria
 - dottrina
 - sogno profetico
-# Campo query-abile per il DM: quanto il mito corrisponde alla verità del mondo.
-fields:
-  veridicita: { label: Veridicità, widget: veridicita }
-scheda: [veridicita]
+# La «veridicità» del mito (quanto corrisponde alla verità del mondo) vive come ASSE
+# tematico (assi/mito.yaml): slider 1-5 con legenda + radar, non un campo-scheda
+# doppione che colliderebbe sulla stessa chiave di frontmatter.
 relazioni:
 - field: epoca_raccontata
   label: Epoca raccontata
@@ -64,3 +63,7 @@ creation:
     callout: segreto
     title: Segreto
     fold: true
+
+guida:
+  scopo: Un racconto tramandato (vero, falso o distorto) che dà senso e mistero al mondo — distinto dall'evento, che è fatto.
+  campi_chiave: '**Tipo** (leggenda, diceria, dottrina…); sul Carattere **Veridicità** (quanto è vero) e **Vitalità** (quanto agisce ancora) ne fissano la presa al tavolo.'

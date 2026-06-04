@@ -18,7 +18,6 @@ JINJA_DIR = SOURCE / "Jinja"
 JS_DIR = SOURCE / "JS"
 SRD_DIR = SOURCE / "SRD"  # SRD 5.2.1 vendorizzata (JSON IT, CC-BY-4.0)
 STATBLOCKS_DIR = SOURCE / "statblocks"  # layout Fantasy Statblocks (uno per file)
-ESEMPIO_DIR = SOURCE / "esempio"  # manifest del/i mondo/i dimostrativo/i (opzionale)
 
 # Unico target di output: il vault Obsidian vivo. Si apre questa cartella in
 # Obsidian e si rilancia `build` per vedere i cambiamenti dal vivo. Il repo di
@@ -136,7 +135,7 @@ def load_entities() -> list[dict[str, Any]]:
 # Sezioni-mappa che un file-entità contribuisce a 'core', keyate per id-entità.
 _ENTITY_SECTIONS = (("scheda", "scheda"), ("assi", "assi_tematici"),
                     ("relazioni", "relazioni"), ("creation", "creation"),
-                    ("archetipi", "archetipi"))
+                    ("archetipi", "archetipi"), ("guida", "guida"))
 
 
 def apply_entities(core: dict[str, Any], entities: list[dict[str, Any]]) -> dict[str, Any]:
@@ -144,7 +143,7 @@ def apply_entities(core: dict[str, Any], entities: list[dict[str, Any]]) -> dict
     categories (folder+subtypes), fields, scheda, assi_tematici, relazioni,
     creation. Ritorna un nuovo dict (non muta l'input)."""
     merged = dict(core)
-    for section in ("folders", "fields", "categories", "scheda", "assi_tematici", "relazioni", "creation", "archetipi"):
+    for section in ("folders", "fields", "categories", "scheda", "assi_tematici", "relazioni", "creation", "archetipi", "guida"):
         merged[section] = dict(merged.get(section, {}) or {})
     for entity in entities:
         eid = entity["id"]
@@ -189,20 +188,6 @@ def load_templates() -> list[dict[str, Any]]:
     """Tutti i template: quelli di templates.yaml + quelli dei file-entità."""
     base = load_yaml("templates.yaml").get("templates", []) or []
     return base + entity_templates(load_entities())
-
-
-def load_example_manifests() -> list[dict[str, Any]]:
-    """Manifest dei mondi dimostrativi (Dev/Source/esempio/*.yaml). Cartella assente
-    o nessun file -> lista vuota (il mondo-esempio è opzionale). Ognuno deve avere
-    'mondo' (nome) e 'note' (lista di note da generare)."""
-    if not ESEMPIO_DIR.is_dir():
-        return []
-    out = []
-    for path in sorted(ESEMPIO_DIR.glob("*.yaml")):
-        data = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
-        if isinstance(data, dict) and data.get("mondo") and data.get("note"):
-            out.append(data)
-    return out
 
 
 def load_pages() -> list[dict[str, Any]]:

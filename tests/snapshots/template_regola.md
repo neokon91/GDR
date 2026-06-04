@@ -15,6 +15,11 @@
 > **Visibilità** *(dm = solo DM, fuori dal sito giocatori)*: `INPUT[inlineSelect(option(normale), option(dm)):visibilita]`
 > **Rivelazione**: `INPUT[rivelazione][:rivelazione]`
 
+> [!info]- ℹ️ Guida — Regola
+> **Cos'è** · Una regola della casa o variante che modifica il regolamento al tuo tavolo, scritta per non doverla ricordare a memoria.
+> **Campi chiave** · **Cosa** regola, **Come** funziona in pratica e le **Eccezioni**; lega al **Mondo** se vale solo per una campagna.
+> **Spunti** · Quale frustrazione del regolamento standard risolve? Rende qualcosa più rischioso o più fluido? Vale per tutti o solo in certe scene?
+
 ````tabs
 --- 📖 Lore
 

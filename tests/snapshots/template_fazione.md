@@ -24,8 +24,6 @@
 > **Visibilità** *(dm = solo DM, fuori dal sito giocatori)*: `INPUT[inlineSelect(option(normale), option(dm)):visibilita]`
 > **Rivelazione**: `INPUT[rivelazione][:rivelazione]`
 
-> [!info] Famiglia: `INPUT[inlineSelect(option(militare), option(religiosa), option(arcana), option(rivoluzionaria), option(egemonica), option(mercantile), option(profetica)):famiglia]`
-
 > [!note]- Cosa significa ogni famiglia
 > **militare** — Strutturata attorno al dominio delle arti belliche: eserciti, ordini armati, caste guerriere.
 > **religiosa** — Devota a un'entità, principio o pantheon; si fonda su dogmi, rituali e rivelazioni.
@@ -35,13 +33,13 @@
 > **mercantile** — Orientata a risorse, potere economico o controllo logistico: corporazioni, reti commerciali.
 > **profetica** — Fondata su visioni, cicli cosmici o profezie; agisce in funzione di un evento atteso.
 
+> [!info]- ℹ️ Guida — Fazione
+> **Cos'è** · Un gruppo organizzato con un'agenda comune che agisce sul mondo — e può diventare un Fronte al tavolo.
+> **Campi chiave** · **Tipo** (forma: gilda, ordine…) e **Famiglia** (natura: militare, mercantile… → preimposta gli assi); poi **Rivali**/**Alleate** per innescare il grafo delle trame.
+> **Spunti** · Cosa vuole davvero, e cosa è disposta a fare per averlo? Chi le si oppone? Con chi è alleata per pura convenienza? Qual è la sua debolezza, o il segreto che non deve uscire?
+
 ````tabs
 --- 📖 Lore
-
-> [!question]- 💡 Spunti per definirlo
-> - Cosa vuole davvero, e cosa è disposta a fare per averlo?
-> - Chi le si oppone? Con chi è alleata per pura convenienza?
-> - Qual è la sua debolezza, o il segreto che non deve uscire?
 
 > [!abstract] Scheda
 > Portata: `INPUT[portata][:portata]`
@@ -110,6 +108,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > [!tip] Avanza / scatena
 > Una spinta dal grafo o una mossa? `BUTTON[avanza-fronte]` (clock +1).
 > Clock pieno? `BUTTON[scatena-conseguenza]` — crea l'evento-conseguenza collegato e azzera il clock.
+
 > [!info]- 👁 Condivisione coi giocatori
 > Quando questa nota entra nel **sito dei giocatori** (`npm run site -- --reveal <livello>`): `INPUT[rivelazione][:rivelazione]`
 >

@@ -1,13 +1,13 @@
 # 👋 Benvenuto — il tuo mondo e il tuo tavolo
 
 > [!warning] 🧪 Stai testando una **beta**
-> Grazie per provarlo! Il vault arriva con un **mondo dimostrativo** già pronto — *Valdombra*:
-> le dashboard di *Home* e gli *Indici* sono **già popolate**, così vedi subito come worldbuilding
-> e tavolo si legano. Quando vuoi partire dal tuo, **cancella la cartella `Mondi/_Esempio — Valdombra`**
-> (un clic, tasto destro → *Elimina*) e resti con un vault pulito. Cose ancora **acerbe/da rifinire**:
-> il radar del *Carattere* si ridisegna riaprendo la nota (non mentre muovi lo slider); il *Sali di
-> livello* copre le scelte SRD di base. **Segnala** intoppi, cose poco chiare o impressioni a chi ti
-> ha condiviso il vault — è esattamente ciò che serve in questa fase.
+> Grazie per provarlo! Il vault parte **vuoto**: il mondo lo costruisci tu. Ogni nota che crei
+> ha in alto un callout **ℹ️ Guida** (cos'è, come compilare i campi principali, spunti): aprilo
+> quando non sai da dove iniziare. Le dashboard di *Home* e gli *Indici* sono vuote all'avvio e si
+> popolano man mano che crei. Cose ancora **acerbe/da rifinire**: il radar del *Carattere* si
+> ridisegna riaprendo la nota (non mentre muovi lo slider); il *Sali di livello* copre le scelte
+> SRD di base. **Segnala** intoppi, cose poco chiare o impressioni a chi ti ha condiviso il vault —
+> è esattamente ciò che serve in questa fase.
 
 Questo è il tuo **vault di gioco di ruolo**: un posto solo per *costruire un mondo*
 (luoghi, popoli, divinità, segreti) e *giocarci* a D&D 5.5e (personaggi, incontri,
@@ -23,12 +23,12 @@ dadi, regole). Non serve essere tecnici: si lavora a **bottoni** e **menù**.
    Obsidian chiede di **fidarti dell'autore e abilitare i plugin**: clicca
    **«Trust author and enable plugins»**. I plugin sono già inclusi nel vault — non
    devi installare niente. *(Se una scheda appare come testo grezzo: §1 qui sotto.)*
-2. **Apri `Home`**: è la tua plancia. Da lì crei tutto e raggiungi gli indici. Le
-   dashboard sono già piene del mondo d'esempio: **esplora *Valdombra*** (parti da
-   [[Forte Cenere]] o dall'[[Atlante]]) per capire come si intreccia tutto.
+2. **Apri `Home`**: è la tua plancia. Da lì crei tutto e raggiungi gli indici.
+   All'inizio le dashboard e gli indici sono **vuoti**: è normale, si riempiono man
+   mano che crei.
 3. **Crea il tuo primo mondo**: in Home premi **Crea → Mondo**, rispondi a poche
-   domande e parti. Poi popolalo (luoghi, personaggi, fazioni…) sempre da Home.
-   Quando vuoi, **cancella `Mondi/_Esempio — Valdombra`** per restare col solo tuo.
+   domande e parti. Poi popolalo (luoghi, personaggi, fazioni…) sempre da Home: ogni
+   *Crea* apre un aiutante, e ogni nota ti guida col callout **ℹ️ Guida** in cima.
 
 ## 🧭 Come si usa, in breve
 - **Creare**: ogni bottone **Crea** apre un *aiutante* che ti fa qualche domanda (il
@@ -274,8 +274,8 @@ nel corpo un callout `> [!rivela|<tier>] Titolo`: compare nel portale solo a que
 > [!rivela|segreto] Cosa c'è davvero sotto la rocca
 > Una cripta sigillata, e ciò che vi dorme conosce il tuo nome.
 ```
-Esempio già pronto: *Forte Cenere* mostra a tutti il forte, ma rivela «cosa sogna sotto le
-cantine» solo a `--reveal segreto`.
+Così una nota pubblica (es. un forte che i giocatori conoscono) può comunque nascondere una
+sezione — «cosa dorme sotto le cantine» — svelata solo a `--reveal segreto`.
 
 **Anteprima** — la dashboard **[[Occhi del giocatore]]** (in Home) ti mostra, dentro Obsidian,
 cosa vedono i giocatori a ogni livello, senza dover generare il sito.

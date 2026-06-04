@@ -44,9 +44,9 @@ contendono le risorse; gli eventi muovono i Fronti.
 - **gratis** e aperto; i plugin community sono inclusi (apri e usa).
 
 ### Come si parte
-Scarica il vault, scompattalo e in Obsidian fai **«Apri cartella come vault»**. Dentro c'è un
-**mondo-esempio** giocabile (*Valdombra*) e una guida in 3 passi. Cancella la cartella esempio
-per partire dal tuo foglio bianco — c'è un tour «Crea il tuo mondo» che ti accompagna.
+Scarica il vault, scompattalo e in Obsidian fai **«Apri cartella come vault»**. Parti da un
+**foglio bianco**: un tour **«Crea il tuo mondo»** ti accompagna e ogni nota ha in cima un
+callout **ℹ️ Guida** che spiega cos'è e come compilarla.
 
 > Include materiale dal **SRD 5.2.1** (CC-BY-4.0) di Wizards of the Coast. Non affiliato né
 > approvato da WotC.

@@ -61,3 +61,7 @@ creation:
     callout: segreto
     title: Segreto
     fold: true
+
+guida:
+  scopo: Una predizione con condizioni d'avveramento — un gancio narrativo forte che il DM fa maturare nel tempo.
+  campi_chiave: '**Tipo**; **Stato d''avveramento** (campo filtrabile: in corso/compiuta) per ritrovarla; sul Carattere **Malleabilità** dice se le scelte dei PG possono deviarla.'

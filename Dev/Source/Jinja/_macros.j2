@@ -9,18 +9,22 @@
 {%- else -%}`INPUT[{{ f.widget }}][:{{ id }}]`{%- endif -%}
 {%- endmacro %}
 
-{# 💡 Spunti per definire la nota: domande-stimolo da core.spunti[categoria]
-   (accoglienza per il foglio bianco). Pieghevole: aiuta chi parte, non ingombra
-   chi sa già cosa scrivere. Vuoto se la categoria non ha spunti. #}
-{% macro spunti(category) -%}
-{% set righe = core.get('spunti', {}).get(category, []) %}
-{% if righe %}
-> [!question]- 💡 Spunti per definirlo
-{% for s in righe %}
-> - {{ s }}
-{% endfor %}
-
+{# ℹ️ Guida all'entità (onboarding, stile World Anvil): in UN callout pieghevole —
+   cos'è/a cosa serve (scopo), come impostare i campi principali (campi_chiave) e gli
+   spunti creativi. Single source: core.guida[categoria] (da entities/<x>.yaml) +
+   core.spunti[categoria]. Sta in cima alla nota; aiuta chi parte, non ingombra chi sa
+   già. Vuoto se l'entità non ha né guida né spunti (es. la nota generica). #}
+{% macro guida(category, title='') -%}
+{%- set g = core.get('guida', {}).get(category) -%}
+{%- set sp = core.get('spunti', {}).get(category, []) -%}
+{%- if g or sp -%}
+> [!info]- ℹ️ Guida{{ (" — " ~ title) if title else "" }}
+{% if g and g.get('scopo') %}> **Cos'è** · {{ g.scopo }}
+{% endif %}{% if g and g.get('campi_chiave') %}> **Campi chiave** · {{ g.campi_chiave }}
+{% endif %}{% if sp %}> **Spunti** · {% for s in sp %}{{ s }}{{ " " if not loop.last }}{% endfor %}
 {% endif %}
+
+{% endif -%}
 {%- endmacro %}
 
 {# Rende i campi 'body' del wizard (core.creation[categoria]) come callout
@@ -47,6 +51,15 @@
 {# view_md('mondo') -> rende il markdown del valore (link [[..]], grassetto...). #}
 {% macro view_md(path) -%}
 `VIEW[{{ "{" ~ path ~ "}" }}][text(renderMarkdown)]`
+{%- endmacro %}
+
+{# dvview('classe') -> `= default(this.classe, "—")` — Dataview inline (sola lettura).
+   Alternativa LEGGERA a view() per i valori STATICI (scritti una volta dal wizard,
+   non rieditati a mano nella nota): non richiede Meta Bind e Dataview rende già
+   link [[..]]/markdown. NON usarlo per i campi reattivi/in tabella-callout
+   (infobox) — lì serve la reattività di Meta Bind VIEW. #}
+{% macro dvview(path) -%}
+`= default(this.{{ path }}, "—")`
 {%- endmacro %}
 
 {# Campo calcolato sola-lettura da un'espressione Meta Bind.
@@ -121,16 +134,14 @@
 {%- endmacro %}
 
 {# Classificazione a 2 livelli (famiglia + tipo): se la categoria ha 'famiglie',
-   un select Meta Bind editabile per la famiglia + una legenda PIEGHEVOLE
-   auto-documentante (cosa significa ogni famiglia). Vuoto se niente famiglie:
-   resta il solo 'tipo' (subtypes) come prima. #}
+   una legenda PIEGHEVOLE auto-documentante (cosa significa ogni famiglia). Il
+   SELECT editabile della famiglia vive ora nel callout «⚙️ Opzioni» (opzioni()):
+   qui resta solo la legenda, per non duplicarlo. Vuoto se niente famiglie. #}
 {% macro classificazione(category) -%}
 {%- set meta = core.get('categories', {}).get(category, {}) -%}
 {%- set fam = meta.get('famiglie', []) -%}
 {%- if fam -%}
 {%- set label = meta.get('famiglia_label', 'Famiglia') %}
-> [!info] {{ label }}: `INPUT[inlineSelect({% for f in fam %}option({{ f.nome }}){{ ', ' if not loop.last }}{% endfor %}):famiglia]`
-
 > [!note]- Cosa significa ogni {{ label | lower }}
 {% for f in fam %}
 > **{{ f.nome }}** — {{ f.get('descrizione', '') }}
@@ -138,22 +149,33 @@
 {% endif -%}
 {%- endmacro %}
 
-{# Superficie giocabile UNIVERSALE (il differenziatore). Single source: core.tavolo.
-   'pressione' mostra l'etichetta di rischio calcolata (computed) + prossima_mossa. #}
-{% macro tavolo() -%}
+{# Superficie giocabile (il differenziatore). Single source: core.tavolo.
+   'Uso al tavolo', 'Gancio' e 'Condivisione' sono UNIVERSALI (ogni nota lore).
+   La macchina del FRONTE — Pressione (etichetta calcolata + prossima_mossa) e il
+   clock() — compare SOLO per le categorie in core.fronte_categorie: un orologio
+   su un bioma/una lingua non ha senso. `category=none` -> mostra tutto (chiamata
+   senza contesto). #}
+{% macro tavolo(category=none) -%}
+{%- set is_fronte = (category is none) or (category in core.get('fronte_categorie', [])) -%}
 {% for t in core.tavolo %}
 {% if t.field == 'pressione' %}
+{% if is_fronte %}
 > [!{{ t.callout }}] {{ t.title }} — {{ computed('{pressione} >= 7 ? "🔴 Crisi" : ({pressione} >= 4 ? "🟠 Tensione" : "🟢 Calma")') }}
 > {{ field('pressione') }}
 >
 > {{ field('prossima_mossa') }}
+
+{% endif %}
 {% else %}
 > [!{{ t.callout }}]{{ '-' if t.get('fold') else '' }} {{ t.title }}
 > {{ field(t.field, label=false) }}
-{% endif %}
 
+{% endif %}
 {% endfor %}
+{% if is_fronte %}
 {{ clock() }}
+
+{% endif %}
 > [!info]- 👁 Condivisione coi giocatori
 > Quando questa nota entra nel **sito dei giocatori** (`npm run site -- --reveal <livello>`): {{ field('rivelazione', label=false) }}
 >

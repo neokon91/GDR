@@ -64,3 +64,7 @@ creation:
     callout: segreto
     title: Segreto
     fold: true
+
+guida:
+  scopo: 'Il bioma è l''ambiente di un luogo: clima, flora/fauna e fenomeni, e arricchisce di ecologia i luoghi che lo contengono.'
+  campi_chiave: '**Tipo** e **Clima** lo inquadrano; sul Carattere **Ostilità** e **Fertilità** dicono quanto è pericoloso e quanta vita sostiene.'

@@ -16,6 +16,11 @@
 > **Visibilità** *(dm = solo DM, fuori dal sito giocatori)*: `INPUT[inlineSelect(option(normale), option(dm)):visibilita]`
 > **Rivelazione**: `INPUT[rivelazione][:rivelazione]`
 
+> [!info]- ℹ️ Guida — Bioma
+> **Cos'è** · Il bioma è l'ambiente di un luogo: clima, flora/fauna e fenomeni, e arricchisce di ecologia i luoghi che lo contengono.
+> **Campi chiave** · **Tipo** e **Clima** lo inquadrano; sul Carattere **Ostilità** e **Fertilità** dicono quanto è pericoloso e quanta vita sostiene.
+> **Spunti** · Cosa rende questo bioma diverso dal solito? (un fenomeno, una creatura, una regola che cambia) Cosa vi attira gli avventurieri — e cosa li fa pentire di esserci entrati? Quale risorsa o pericolo nasconde sotto la superficie?
+
 ````tabs
 --- 📖 Lore
 
@@ -46,28 +51,6 @@
 > [!gancio]- Gancio
 > `INPUT[testo_area][:gancio]`
 
-> [!warning] Pressione — `VIEW[{pressione} >= 7 ? "🔴 Crisi" : ({pressione} >= 4 ? "🟠 Tensione" : "🟢 Calma")]`
-> Pressione: `INPUT[pressione][:pressione]`
->
-> Prossima mossa: `INPUT[text:prossima_mossa]`
-
-**⏳ Fronte** — clock `INPUT[number:clock]` / `INPUT[clock_dim][:clock_dim]` segmenti
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderClock");
-```
-
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderPressioni");
-```
-
-> [!warning]- Conseguenza (quando il clock è pieno)
-> `INPUT[testo_area][:conseguenza]`
->
-> Bersaglio: `INPUT[legame][:conseguenza_su]`
-
-> [!tip] Avanza / scatena
-> Una spinta dal grafo o una mossa? `BUTTON[avanza-fronte]` (clock +1).
-> Clock pieno? `BUTTON[scatena-conseguenza]` — crea l'evento-conseguenza collegato e azzera il clock.
 > [!info]- 👁 Condivisione coi giocatori
 > Quando questa nota entra nel **sito dei giocatori** (`npm run site -- --reveal <livello>`): `INPUT[rivelazione][:rivelazione]`
 >

@@ -79,3 +79,7 @@ creation:
     callout: segreto
     title: Segreto
     fold: true
+
+guida:
+  scopo: Un sistema magico descrive come funziona la magia nel mondo — da dove viene, come si pratica, cosa costa, cosa rischia — distinto dal singolo incantesimo.
+  campi_chiave: '**Fonte del potere** e **Tipo**; sul Carattere gli assi **Fonte/Metodo/Costo/Rischio**, che insieme generano l''archetipo (dono, patto, selvaggia, accademica…).'

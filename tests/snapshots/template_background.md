@@ -19,6 +19,11 @@
 > **Visibilità** *(dm = solo DM, fuori dal sito giocatori)*: `INPUT[inlineSelect(option(normale), option(dm)):visibilita]`
 > **Rivelazione**: `INPUT[rivelazione][:rivelazione]`
 
+> [!info]- ℹ️ Guida — Background
+> **Cos'è** · Il background che, nel 2024, dà al PG le competenze d'origine e il primo talento — scegliendolo in creazione il motore lo applica.
+> **Campi chiave** · Tutti obbligatori per essere 2024-legale: **Caratteristiche** (3), **Abilità** (2), **Talento d'origine** (1) e **Strumento** (1).
+
+
 ````tabs
 --- 📋 Scheda
 

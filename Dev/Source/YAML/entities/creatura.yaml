@@ -77,3 +77,7 @@ creation:
     callout: segreto
     title: Segreto
     fold: true
+
+guida:
+  scopo: 'Una creatura giocabile: il lore (ecologia, mito, tattiche) sopra e lo statblock 5.5e nel blocco dati per iniziativa e attacchi.'
+  campi_chiave: '**Tipo** + **GS** (pesa la difficoltà degli incontri) + lo **statblock** che la rende combattibile; **Habitat**/**Specie** la agganciano al mondo.'

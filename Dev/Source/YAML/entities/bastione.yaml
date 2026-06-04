@@ -50,3 +50,7 @@ creation:
   - field: strutture
     prompt: "Strutture (base e speciali): cosa sono, aspetto, ruolo (la descrizione narrativa)"
     heading: Strutture
+
+guida:
+  scopo: 'La roccaforte di un PG (regole Bastioni 2024): emette ordini ogni turno di 7 giorni e ospita strutture speciali.'
+  campi_chiave: '**Livello** (PG minimo, 5+) e **Difensori** ne governano le regole; collega il **Proprietario** (PG) e la **Posizione** (luogo).'

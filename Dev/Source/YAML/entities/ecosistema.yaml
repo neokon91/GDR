@@ -17,10 +17,8 @@ subtypes:
 - mutato
 - instabile
 - artificiale
-# Campo query-abile: salute della rete ecologica ("ecosistemi in collasso").
-fields:
-  salute: { label: Salute, widget: salute }
-scheda: [salute]
+# La "salute" della rete vive come ASSE `equilibrio` (assi/ecosistema.yaml,
+# autopoietico→collassante): niente campo-scheda doppione sulla stessa dimensione.
 relazioni:
 - field: bioma
   label: Bioma
@@ -62,3 +60,7 @@ creation:
     callout: segreto
     title: Segreto
     fold: true
+
+guida:
+  scopo: 'L''ecosistema è la rete vivente dentro un bioma: chi mangia chi, quali cicli lo reggono e cosa lo sta spezzando.'
+  campi_chiave: '**Tipo** e la relazione **Bioma**; sul Carattere **Equilibrio** (autopoietico→collassante) ne misura la stabilità — l''asse che alimenta i Fronti ecologici.'

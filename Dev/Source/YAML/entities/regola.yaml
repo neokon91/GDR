@@ -36,3 +36,7 @@ creation:
   - field: eccezioni
     prompt: Eccezioni e casi limite
     heading: Eccezioni
+
+guida:
+  scopo: Una regola della casa o variante che modifica il regolamento al tuo tavolo, scritta per non doverla ricordare a memoria.
+  campi_chiave: '**Cosa** regola, **Come** funziona in pratica e le **Eccezioni**; lega al **Mondo** se vale solo per una campagna.'

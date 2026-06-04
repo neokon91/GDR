@@ -42,13 +42,6 @@ async function prompt(tp, message, fallback = "") {
   return String(value ?? fallback ?? "").trim();
 }
 
-async function choose(tp, values, message, fallback = "") {
-  const items = values?.length ? values : [fallback].filter(Boolean);
-  if (!items.length) return "";
-  const selected = await tp.system.suggester(items, items, false, message);
-  return String(selected ?? fallback ?? "").trim();
-}
-
 async function ensureFolder(path) {
   let current = "";
   for (const part of String(path ?? "").split("/").filter(Boolean)) {

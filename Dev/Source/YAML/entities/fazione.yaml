@@ -74,3 +74,7 @@ creation:
     - { field: presente, prompt: "Stato attuale, tracce nel mondo, segreti rivelati", heading: "Nel presente" }
     - { field: tensione, prompt: "Conflitto o rivalita'", heading: "Tensione" }
     - { field: segreto, prompt: "Segreto della fazione", callout: segreto, title: "Segreto", fold: true }
+
+guida:
+  scopo: Un gruppo organizzato con un'agenda comune che agisce sul mondo — e può diventare un Fronte al tavolo.
+  campi_chiave: '**Tipo** (forma: gilda, ordine…) e **Famiglia** (natura: militare, mercantile… → preimposta gli assi); poi **Rivali**/**Alleate** per innescare il grafo delle trame.'

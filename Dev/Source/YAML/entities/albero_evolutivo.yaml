@@ -57,3 +57,7 @@ creation:
   - field: accesso
     prompt: 'Accesso e avanzamento: come si entra, prove e costi per salire di grado'
     heading: Accesso e avanzamento
+
+guida:
+  scopo: Una progressione a tappe narrativa — i gradi di una tradizione, di un lignaggio o di un'iniziazione — resa a grado nella nota.
+  campi_chiave: 'Imposta la proprietà **nodi** (grado | nome | prerequisito | effetto): è il cuore reso nella nota; aggancia a **Tradizione magica**/**Specie**/**Culto**.'

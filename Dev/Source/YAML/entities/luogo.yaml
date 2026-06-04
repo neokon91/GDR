@@ -120,3 +120,7 @@ creation:
     callout: segreto
     title: Segreto
     fold: true
+
+guida:
+  scopo: 'Un luogo è dove succede qualcosa: lo collochi nel mondo, lo leghi a chi lo controlla e ai luoghi confinanti, e gli dai una tensione presente.'
+  campi_chiave: '**Tipo** (forma) e **Mondo** per primi; poi **Controllata da** e **Confina con** per inserirlo nel grafo; **Clima**/**Popolazione** per il colore.'

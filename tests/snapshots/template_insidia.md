@@ -21,8 +21,6 @@
 > **Visibilità** *(dm = solo DM, fuori dal sito giocatori)*: `INPUT[inlineSelect(option(normale), option(dm)):visibilita]`
 > **Rivelazione**: `INPUT[rivelazione][:rivelazione]`
 
-> [!info] Famiglia: `INPUT[inlineSelect(option(meccanica), option(magica), option(naturale), option(biologica), option(ambientale)):famiglia]`
-
 > [!note]- Cosa significa ogni famiglia
 > **meccanica** — Trappola fisica: lame, fosse, pressione, congegni.
 > **magica** — Trappola arcana: glifi, maledizioni, effetti incantati.

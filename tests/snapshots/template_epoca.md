@@ -19,8 +19,6 @@
 > **Visibilità** *(dm = solo DM, fuori dal sito giocatori)*: `INPUT[inlineSelect(option(normale), option(dm)):visibilita]`
 > **Rivelazione**: `INPUT[rivelazione][:rivelazione]`
 
-> [!info] Famiglia: `INPUT[inlineSelect(option(fondativa), option(transizionale), option(stabilizzante), option(degenerativa), option(ciclica), option(apocrifa), option(liminale)):famiglia]`
-
 > [!note]- Cosa significa ogni famiglia
 > **fondativa** — Dà origine a strutture cosmiche fondamentali: leggi, piani, razze, civiltà, entità primordiali.
 > **transizionale** — Periodo di passaggio, mutazione o riformulazione ontologica.
@@ -29,6 +27,11 @@
 > **ciclica** — Epoca destinata a ripetersi o riemergere.
 > **apocrifa** — Epoca dimenticata, rimossa o occultata.
 > **liminale** — Esiste tra due stati dell'essere: confini, piani e identità incerti.
+
+> [!info]- ℹ️ Guida — Epoca
+> **Cos'è** · Un grande periodo del mondo che raccoglie eventi e archi e fa da spina dorsale alla timeline.
+> **Campi chiave** · **Tipo** + **Inizio**/**Fine** (date del mondo); **Famiglia** (fondativa, degenerativa…) e gli assi danno il sapore dell'era.
+> **Spunti** · Cosa rese quest'era diversa da quella prima e quella dopo? Quale evento la apre e quale la chiude? Cosa di lei sopravvive nel presente?
 
 ````tabs
 --- 📖 Lore
@@ -61,28 +64,6 @@
 > [!gancio]- Gancio
 > `INPUT[testo_area][:gancio]`
 
-> [!warning] Pressione — `VIEW[{pressione} >= 7 ? "🔴 Crisi" : ({pressione} >= 4 ? "🟠 Tensione" : "🟢 Calma")]`
-> Pressione: `INPUT[pressione][:pressione]`
->
-> Prossima mossa: `INPUT[text:prossima_mossa]`
-
-**⏳ Fronte** — clock `INPUT[number:clock]` / `INPUT[clock_dim][:clock_dim]` segmenti
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderClock");
-```
-
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderPressioni");
-```
-
-> [!warning]- Conseguenza (quando il clock è pieno)
-> `INPUT[testo_area][:conseguenza]`
->
-> Bersaglio: `INPUT[legame][:conseguenza_su]`
-
-> [!tip] Avanza / scatena
-> Una spinta dal grafo o una mossa? `BUTTON[avanza-fronte]` (clock +1).
-> Clock pieno? `BUTTON[scatena-conseguenza]` — crea l'evento-conseguenza collegato e azzera il clock.
 > [!info]- 👁 Condivisione coi giocatori
 > Quando questa nota entra nel **sito dei giocatori** (`npm run site -- --reveal <livello>`): `INPUT[rivelazione][:rivelazione]`
 >

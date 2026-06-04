@@ -8,30 +8,31 @@
 
 {{ m.identita_card(template) }}
 
+{{ m.guida(template.category, template.title) }}
 ````tabs
 --- 📋 Scheda
 
 {{ m.scheda_pg_rules() }}
 > [!abstract] Sistema
-> **Classe**: {{ m.view('classe') }} · **Specie**: {{ m.view('specie') }} · **Background**: {{ m.view('background') }}
+> **Classe**: {{ m.dvview('classe') }} · **Specie**: {{ m.dvview('specie') }} · **Background**: {{ m.dvview('background') }}
 >
-> **Taglia**: {{ m.view('taglia') }} · **Velocità**: {{ m.view('velocita') }} m · **Scurovisione**: {{ m.view('scurovisione') }}
+> **Taglia**: {{ m.dvview('taglia') }} · **Velocità**: {{ m.dvview('velocita') }} m · **Scurovisione**: {{ m.dvview('scurovisione') }}
 >
-> **Armatura**: {{ m.view('armatura') }} · **Scudo**: {{ m.view('scudo') }}
+> **Armatura**: {{ m.dvview('armatura') }} · **Scudo**: {{ m.dvview('scudo') }}
 >
-> **TS competenti**: {{ m.view('ts_competenti') }} · **Competenze (abilità)**: {{ m.view('competenze_abilita') }}
+> **TS competenti**: {{ m.dvview('ts_competenti') }} · **Competenze (abilità)**: {{ m.dvview('competenze_abilita') }}
 >
-> **Armi**: {{ m.view('competenze_armi') }} · **Armature**: {{ m.view('competenze_armature') }} · **Strumenti**: {{ m.view('competenze_strumenti') }}
+> **Armi**: {{ m.dvview('competenze_armi') }} · **Armature**: {{ m.dvview('competenze_armature') }} · **Strumenti**: {{ m.dvview('competenze_strumenti') }}
 >
-> **Lingue**: {{ m.view('lingue') }}
+> **Lingue**: {{ m.dvview('lingue') }}
 >
-> **Privilegi di classe**: {{ m.view('privilegi_classe') }} · **Talenti**: {{ m.view('talenti') }}
+> **Privilegi di classe**: {{ m.dvview('privilegi_classe') }} · **Talenti**: {{ m.dvview('talenti') }}
 >
-> **Tratti di specie**: {{ m.view('tratti_specie') }}
+> **Tratti di specie**: {{ m.dvview('tratti_specie') }}
 
 {{ m.tratti_specie_panel() }}
 > [!note]- Inventario
-> {{ m.view('inventario') }}
+> {{ m.dvview('inventario') }}
 
 {{ m.incantesimi() }}
 
@@ -49,7 +50,7 @@
 {{ m.tema_natale() }}
 --- 🎲 Al tavolo
 
-{{ m.tavolo() }}
+{{ m.tavolo(template.category) }}
 
 {{ m.attacchi() }}
 

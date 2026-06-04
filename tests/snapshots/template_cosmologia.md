@@ -17,14 +17,17 @@
 > **Visibilità** *(dm = solo DM, fuori dal sito giocatori)*: `INPUT[inlineSelect(option(normale), option(dm)):visibilita]`
 > **Rivelazione**: `INPUT[rivelazione][:rivelazione]`
 
-> [!info] Famiglia: `INPUT[inlineSelect(option(origine), option(struttura), option(forze), option(destino), option(mistero)):famiglia]`
-
 > [!note]- Cosa significa ogni famiglia
 > **origine** — Come e da cosa nasce la realtà: principi e atti primigeni.
 > **struttura** — Come è ordinato il cosmo: piani, leggi, gerarchie dell'essere.
 > **forze** — Le energie e i poteri che muovono e reggono il mondo.
 > **destino** — Dove tende la realtà: cicli, fine, rinascita, scopo ultimo.
 > **mistero** — Ciò che resta ignoto o inconoscibile: enigmi e verità nascoste.
+
+> [!info]- ℹ️ Guida — Cosmologia
+> **Cos'è** · La cosmologia è il quadro d'insieme di come funziona la realtà del mondo: lega in un nodo origini, leggi, piani, forze primordiali e magie.
+> **Campi chiave** · **Tipo** e **famiglia** (origine, struttura, forze, destino, mistero) inquadrano la questione; le relazioni la collegano a Leggi, Piani e Primordiali che la incarnano.
+> **Spunti** · Qual è il principio primo da cui tutto discende — e cosa c'era prima? Verso dove tende il cosmo: ciclo eterno, fine annunciata, rinascita? Cosa di questo quadro è ignoto persino ai sapienti?
 
 ````tabs
 --- 📖 Lore
@@ -88,6 +91,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > [!tip] Avanza / scatena
 > Una spinta dal grafo o una mossa? `BUTTON[avanza-fronte]` (clock +1).
 > Clock pieno? `BUTTON[scatena-conseguenza]` — crea l'evento-conseguenza collegato e azzera il clock.
+
 > [!info]- 👁 Condivisione coi giocatori
 > Quando questa nota entra nel **sito dei giocatori** (`npm run site -- --reveal <livello>`): `INPUT[rivelazione][:rivelazione]`
 >

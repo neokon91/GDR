@@ -7,10 +7,11 @@
 {% if core.get('categories', {}).get(template.category, {}).get('famiglie') %}
 {{ m.classificazione(template.category) }}
 {% endif %}
+{{ m.guida(template.category, template.title) }}
 ````tabs
 --- 🎬 Scena
 
-{{ m.tavolo() }}
+{{ m.tavolo(template.category) }}
 {{ m.tiri() }}
 
 --- ⚔ Combattimento

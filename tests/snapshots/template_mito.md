@@ -8,7 +8,6 @@
 > |:--|:--|
 > | **Tipo** | `VIEW[{tipo} ?? "—"]` |
 > | **Mondo** | `VIEW[{mondo}][text(renderMarkdown)]` |
-> | **Veridicità** | `VIEW[{veridicita} ?? "—"]` |
 > | **Stato** | `INPUT[stato][:stato]` |
 
 > [!opzioni]- ⚙️ Opzioni
@@ -18,11 +17,14 @@
 > **Visibilità** *(dm = solo DM, fuori dal sito giocatori)*: `INPUT[inlineSelect(option(normale), option(dm)):visibilita]`
 > **Rivelazione**: `INPUT[rivelazione][:rivelazione]`
 
+> [!info]- ℹ️ Guida — Mito
+> **Cos'è** · Un racconto tramandato (vero, falso o distorto) che dà senso e mistero al mondo — distinto dall'evento, che è fatto.
+> **Campi chiave** · **Tipo** (leggenda, diceria, dottrina…); sul Carattere **Veridicità** (quanto è vero) e **Vitalità** (quanto agisce ancora) ne fissano la presa al tavolo.
+> **Spunti** · Chi lo racconta, e a chi conviene che ci si creda? C'è un nocciolo di verità sotto la leggenda? Cosa succede se qualcuno scopre che è falso — o che è vero?
+
 ````tabs
 --- 📖 Lore
 
-> [!abstract] Scheda
-> Veridicità: `INPUT[veridicita][:veridicita]`
 
 > [!note] Narrazione
 > `INPUT[textArea:narrazione]`
@@ -48,28 +50,6 @@
 > [!gancio]- Gancio
 > `INPUT[testo_area][:gancio]`
 
-> [!warning] Pressione — `VIEW[{pressione} >= 7 ? "🔴 Crisi" : ({pressione} >= 4 ? "🟠 Tensione" : "🟢 Calma")]`
-> Pressione: `INPUT[pressione][:pressione]`
->
-> Prossima mossa: `INPUT[text:prossima_mossa]`
-
-**⏳ Fronte** — clock `INPUT[number:clock]` / `INPUT[clock_dim][:clock_dim]` segmenti
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderClock");
-```
-
-```js-engine
-return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderPressioni");
-```
-
-> [!warning]- Conseguenza (quando il clock è pieno)
-> `INPUT[testo_area][:conseguenza]`
->
-> Bersaglio: `INPUT[legame][:conseguenza_su]`
-
-> [!tip] Avanza / scatena
-> Una spinta dal grafo o una mossa? `BUTTON[avanza-fronte]` (clock +1).
-> Clock pieno? `BUTTON[scatena-conseguenza]` — crea l'evento-conseguenza collegato e azzera il clock.
 > [!info]- 👁 Condivisione coi giocatori
 > Quando questa nota entra nel **sito dei giocatori** (`npm run site -- --reveal <livello>`): `INPUT[rivelazione][:rivelazione]`
 >

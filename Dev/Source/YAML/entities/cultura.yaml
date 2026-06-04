@@ -91,3 +91,7 @@ creation:
   - field: tensione
     prompt: Attrito con altre culture
     heading: Tensione
+
+guida:
+  scopo: 'Una cultura è un popolo coi suoi valori, riti e tabù: dà identità a luoghi e personaggi e attriti con le culture vicine.'
+  campi_chiave: 'Scegli la **famiglia** (indole): pre-compila gli assi. Poi **Stile dei nomi** (alimenta il generatore) e **Portata**; sul Carattere **Valori dominanti**.'

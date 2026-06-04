@@ -9,7 +9,6 @@
 > | **Tipo** | `VIEW[{tipo} ?? "—"]` |
 > | **Mondo** | `VIEW[{mondo}][text(renderMarkdown)]` |
 > | **Famiglia** | `VIEW[{famiglia} ?? "—"]` |
-> | **Dominio** | `VIEW[{dominio} ?? "—"]` |
 > | **Allineamento** | `VIEW[{allineamento} ?? "—"]` |
 > | **Simbolo** | `VIEW[{simbolo} ?? "—"]` |
 > | **Stato** | `INPUT[stato][:stato]` |
@@ -22,8 +21,6 @@
 > **Visibilità** *(dm = solo DM, fuori dal sito giocatori)*: `INPUT[inlineSelect(option(normale), option(dm)):visibilita]`
 > **Rivelazione**: `INPUT[rivelazione][:rivelazione]`
 
-> [!info] Famiglia: `INPUT[inlineSelect(option(primordiale), option(archetipica), option(elementale), option(culturale), option(mitica), option(spirituale), option(onirica)):famiglia]`
-
 > [!note]- Cosa significa ogni famiglia
 > **primordiale** — Preesistente alla creazione dei piani e delle leggi strutturate.
 > **archetipica** — Incarna forze universali o concetti eterni.
@@ -33,16 +30,15 @@
 > **spirituale** — Legata al ciclo dell'anima, alla morte, alla purificazione o al karma.
 > **onirica** — Nata dall'inconscio collettivo, dai sogni cosmici o da archetipi inconsci.
 
+> [!info]- ℹ️ Guida — Divinità
+> **Cos'è** · L'entità venerata — un attore cosmico che, via culti e profezie, può premere sul tavolo come Fronte.
+> **Campi chiave** · **Rango** (maggiore/minore/semidio); **Famiglia** (→ preimposta gli assi cosmici); **Domini cosmici** e **Allineamento** per la sua identità.
+> **Spunti** · Di cosa è dio/dea — e cosa chiede ai suoi fedeli? Come si manifesta nel mondo? (miracoli, segni, silenzi) Chi la odia, e perché?
+
 ````tabs
 --- 📖 Lore
 
-> [!question]- 💡 Spunti per definirlo
-> - Di cosa è dio/dea — e cosa chiede ai suoi fedeli?
-> - Come si manifesta nel mondo? (miracoli, segni, silenzi)
-> - Chi la odia, e perché?
-
 > [!abstract] Scheda
-> Dominio: `INPUT[text:dominio]`
 > Allineamento: `INPUT[allineamento][:allineamento]`
 > Simbolo: `INPUT[text:simbolo]`
 
@@ -83,6 +79,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > [!tip] Avanza / scatena
 > Una spinta dal grafo o una mossa? `BUTTON[avanza-fronte]` (clock +1).
 > Clock pieno? `BUTTON[scatena-conseguenza]` — crea l'evento-conseguenza collegato e azzera il clock.
+
 > [!info]- 👁 Condivisione coi giocatori
 > Quando questa nota entra nel **sito dei giocatori** (`npm run site -- --reveal <livello>`): `INPUT[rivelazione][:rivelazione]`
 >

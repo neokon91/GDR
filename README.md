@@ -12,15 +12,15 @@ ricostruibile** generato in `dist/GDR-vault/` (gitignorato).
 Scarica l'ultimo **vault pronto** dalle [Releases](../../releases) (`GDR-vault-v*.zip`),
 scompattalo e in Obsidian fai **«Apri cartella come vault»** (i plugin sono inclusi). Dentro:
 
-- un **mondo-esempio** giocabile (*Valdombra*) e la nota **«Inizia da qui»** che in 3 passi
-  mostra il cuore del sistema: la lore accende la **superficie giocabile**;
 - worldbuilding profondo *connesso* al tavolo **D&D 5.5e** — schede PG, statblock, incontri
   (budget 2024), condizioni, dadi — **locale e gratis**, i tuoi dati restano tuoi;
+- ogni nota che crei ha in cima un callout **ℹ️ Guida** (cos'è, come compilare i campi
+  principali, spunti) e i bottoni **Crea** aprono un aiutante passo-passo;
 - un **sito dei giocatori** statico e *senza spoiler* che generi tu (`npm run site`), con
   **rivelazione progressiva**: sveli il mondo man mano che la campagna procede.
 
-Cancella la cartella `_Esempio — Valdombra` per partire da un foglio bianco. La guida completa
-è nel **LEGGIMI** dentro il vault.
+Il vault parte da un **foglio bianco**: un tour **«Crea il tuo mondo»** ti accompagna. La guida
+completa è nel **LEGGIMI** dentro il vault.
 
 ## Screenshot
 

@@ -91,3 +91,7 @@ creation:
     callout: segreto
     title: Segreto
     fold: true
+
+guida:
+  scopo: 'Il regno è il potere organizzato sopra luoghi e fazioni: chi governa, quanto è saldo il trono e con chi è in pace o in guerra.'
+  campi_chiave: '**Forma di governo** e **Sovrano** dicono chi comanda; **Capitale**, **Alleati** e **Rivali** lo legano alla mappa politica; sul Carattere **Stabilità**.'

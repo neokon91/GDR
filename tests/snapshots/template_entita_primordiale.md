@@ -17,6 +17,11 @@
 > **Visibilità** *(dm = solo DM, fuori dal sito giocatori)*: `INPUT[inlineSelect(option(normale), option(dm)):visibilita]`
 > **Rivelazione**: `INPUT[rivelazione][:rivelazione]`
 
+> [!info]- ℹ️ Guida — Entità primordiale
+> **Cos'è** · Un'entità primordiale è un essere pre-divino che incarna una legge e appartiene a un dominio; da essa discendono le divinità.
+> **Campi chiave** · **Stato** (sigillata/dormiente/desta, query-abile) e **Allineamento**; poi le relazioni **Legge incarnata** e **Dominio**; sul Carattere **Risveglio**.
+> **Spunti** · Quale legge incarna — ed è mente cosciente o forza cieca? Dorme, è sigillata o desta? E cosa basterebbe a risvegliarla? Cosa ha lasciato dietro di sé: stirpi, divinità, una ferita nel mondo?
+
 ````tabs
 --- 📖 Lore
 
@@ -29,9 +34,6 @@
 
 > [!note] Volontà
 > `INPUT[textArea:volonta]`
-
-> [!note] Stato
-> `INPUT[textArea:stato]`
 
 > [!note] Eredità
 > `INPUT[textArea:eredita]`
@@ -73,6 +75,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > [!tip] Avanza / scatena
 > Una spinta dal grafo o una mossa? `BUTTON[avanza-fronte]` (clock +1).
 > Clock pieno? `BUTTON[scatena-conseguenza]` — crea l'evento-conseguenza collegato e azzera il clock.
+
 > [!info]- 👁 Condivisione coi giocatori
 > Quando questa nota entra nel **sito dei giocatori** (`npm run site -- --reveal <livello>`): `INPUT[rivelazione][:rivelazione]`
 >

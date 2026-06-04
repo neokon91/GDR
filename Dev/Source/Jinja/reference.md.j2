@@ -7,6 +7,7 @@
 {% if core.get('categories', {}).get(template.category, {}).get('famiglie') %}
 {{ m.classificazione(template.category) }}
 {% endif %}
+{{ m.guida(template.category, template.title) }}
 ````tabs
 {% if core.get('scheda', {}).get(template.category) %}
 --- 📋 Scheda
@@ -15,7 +16,6 @@
 {% endif %}
 --- 📖 Lore
 
-{% if core.get('spunti', {}).get(template.category) %}{{ m.spunti(template.category) }}{% endif %}
 > [!note]- Descrizione
 > Cosa è, com'è, perché conta al tavolo.
 

@@ -42,3 +42,7 @@ creation:
     - { field: ruolo_economico, prompt: "Ruolo economico: chi la vuole e perché conta", heading: "Ruolo economico" }
     - { field: tensione, prompt: "Conflitto attorno alla risorsa (chi se la contende)", heading: "Tensione" }
     - { field: segreto, prompt: "Segreto della risorsa", callout: segreto, title: "Segreto", fold: true }
+
+guida:
+  scopo: 'Una risorsa è ciò che il mondo produce, commercia e si contende: il sostrato materiale che dà stakes concreti a Fronti e guerre.'
+  campi_chiave: '**Tipo** + **famiglia** (vitale, bellica, arcana…); **Scarsità** e **Fonte** la rendono interrogabile; **Controllata da** la lega alla fazione che la domina.'

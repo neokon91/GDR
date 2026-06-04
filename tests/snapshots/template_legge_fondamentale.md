@@ -18,8 +18,6 @@
 > **Visibilità** *(dm = solo DM, fuori dal sito giocatori)*: `INPUT[inlineSelect(option(normale), option(dm)):visibilita]`
 > **Rivelazione**: `INPUT[rivelazione][:rivelazione]`
 
-> [!info] Famiglia: `INPUT[inlineSelect(option(esistenziale), option(morale), option(causale), option(formale), option(temporale), option(magica)):famiglia]`
-
 > [!note]- Cosa significa ogni famiglia
 > **esistenziale** — Regge l'essere e il non-essere: vita, morte, presenza.
 > **morale** — Regge bene e male, luce e ombra, colpa e redenzione.
@@ -27,6 +25,11 @@
 > **formale** — Regge forma e dissoluzione, ordine ed entropia, identità.
 > **temporale** — Regge tempo, durata, eternità e ciclicità.
 > **magica** — Regge il flusso dell'energia, il vuoto e i limiti del potere.
+
+> [!info]- ℹ️ Guida — Legge fondamentale
+> **Cos'è** · Una legge fondamentale è un principio cosmico assoluto, spesso una polarità (Vita↔Morte): la tensione fra i due poli regge un aspetto della realtà.
+> **Campi chiave** · **Poli** (i due estremi) e **Famiglia** (esistenziale, morale, causale…); sul Carattere **Equilibrio** dice verso quale polo pende il mondo ora.
+> **Spunti** · Quali sono i due poli, e verso quale pende oggi la realtà? Cosa accade — nel mondo, non in astratto — se la legge si spezza? Chi o cosa la incarna, e chi sogna di infrangerla?
 
 ````tabs
 --- 📖 Lore
@@ -80,6 +83,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > [!tip] Avanza / scatena
 > Una spinta dal grafo o una mossa? `BUTTON[avanza-fronte]` (clock +1).
 > Clock pieno? `BUTTON[scatena-conseguenza]` — crea l'evento-conseguenza collegato e azzera il clock.
+
 > [!info]- 👁 Condivisione coi giocatori
 > Quando questa nota entra nel **sito dei giocatori** (`npm run site -- --reveal <livello>`): `INPUT[rivelazione][:rivelazione]`
 >

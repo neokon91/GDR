@@ -1146,35 +1146,6 @@ _DOM_HARNESS = (
 
 
 @pytest.mark.skipif(not shutil.which("node"), reason="node assente")
-def test_render_axes_radar(tmp_path):
-    """views.renderAxesRadar: percorso di injection nel DOM. ≥3 assi -> .gdr-radar con
-    <svg>; <3 assi o page null -> .gdr-radar-empty col messaggio guida."""
-    harness = tmp_path / "axesradar.js"
-    harness.write_text(
-        'const fs=require("fs");'
-        f'const src=fs.readFileSync({json.dumps(str(render.JS_DIR / "views.js"))},"utf8");'
-        'const m={exports:{}};new Function("module","exports",src)(m,m.exports);'
-        + _DOM_HARNESS +
-        'const v5={1:{},2:{},3:{},4:{},5:{}};const ax=(id)=>({id,nome:id,valori:v5});'
-        'const core={assi_tematici:{culto:[ax("a"),ax("b"),ax("c")],poche:[ax("a"),ax("b")]}};'
-        'const app={vault:{adapter:{read:async()=>JSON.stringify(core)}}};'
-        'const c1=makeEl(),c2=makeEl(),c3=makeEl();'
-        'Promise.all(['
-        '  m.exports.renderAxesRadar(c1,app,{categoria:"culto",a:4,b:2,c:5,nome:"X"}),'
-        '  m.exports.renderAxesRadar(c2,app,{categoria:"poche",a:3,b:1,nome:"Y"}),'
-        '  m.exports.renderAxesRadar(c3,app,null),'
-        ']).then(()=>process.stdout.write(JSON.stringify('
-        '{full:snap(c1),few:snap(c2),empty:snap(c3)})));',
-        encoding="utf-8")
-    res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
-    assert res.returncode == 0, res.stderr
-    out = json.loads(res.stdout)
-    assert out["full"][0]["cls"] == "gdr-radar" and out["full"][0]["svg"] is True
-    assert out["few"][0]["cls"] == "gdr-radar-empty"     # <3 assi -> messaggio, niente svg
-    assert out["empty"][0]["cls"] == "gdr-radar-empty"   # page null -> guida
-
-
-@pytest.mark.skipif(not shutil.which("node"), reason="node assente")
 def test_render_axes_compare(tmp_path):
     """views.renderAxesCompare: sovrappone gli assi delle note in `confronta` (≥3 assi,
     ≥1 entità della categoria) -> .gdr-radar con <svg>; guida se manca `confronta`."""
@@ -1630,113 +1601,32 @@ def test_validate_aux_yaml_catches_breakage(monkeypatch):
     assert any("archetipo" in e for e in errors), errors
 
 
-def test_example_world():
-    """Mondo-esempio: ogni nota del manifest si genera con categoria valida sotto la
-    cartella riservata e popola le dashboard chiave; una nota-fronte espone il clock
-    e la superficie giocabile (lore→tavolo)."""
-    manifests = render.load_example_manifests()
-    assert manifests, "nessun manifest mondo-esempio in Dev/Source/esempio/"
-    man = manifests[0]
-    notes = render.example_world_notes(man, CORE)
-    assert len(notes) == len(man["note"]), "qualche nota saltata (categoria sconosciuta?)"
-    cats = set(CORE["categories"])
-    for rel, txt in notes:
-        assert rel.startswith(f"Mondi/_Esempio — {man['mondo']}/"), rel
-        cat_line = next(l for l in txt.splitlines() if l.startswith("categoria: "))
-        assert cat_line.split(": ", 1)[1] in cats, rel
-    joined = "\n".join(t for _, t in notes)
-    for cat in ("mondo", "luogo", "fazione", "personaggio", "evento", "creatura", "incontro", "risorsa"):
-        assert f"categoria: {cat}" in joined, f"manca una nota di categoria {cat}"
-    voragine = next(t for r, t in notes if r.endswith("La Voragine.md"))
-    assert "**Clock**: 4/6" in voragine and "[!tavolo]" in voragine and "list from" in voragine
-
-
-def test_onboarding_note():
-    """UX-1: la nota guidata "Inizia da qui" rende il wedge — referenzia un luogo-fronte
-    reale, il cruscotto [[Fronti]], il bottone crea-luogo, ed è fuori dal sito giocatori."""
-    man = render.load_example_manifests()[0]
-    txt = render.onboarding_note_text(man)
-    assert "# 👋 Inizia da qui" in txt
-    assert "BUTTON[crea-luogo]" in txt            # passo 3: provalo tu (Meta Bind, non Templater)
-    assert "[[Fronti]]" in txt                    # passo 2: il cruscotto calcolato dal grafo
-    assert "si calcola" in txt                    # il messaggio-wedge
-    assert "visibilita: dm" in txt                # escluso dal sito dei giocatori
-    cand = [n for n in man["note"] if n.get("categoria") == "luogo"
-            and n.get("pressione") is not None and n.get("prossima_mossa")]
-    rep = max(cand, key=lambda n: int(n.get("pressione") or 0)) if cand else None
-    if rep:                                        # referenzia il luogo che preme di più (es. Forte Cenere)
-        assert f"[[{rep['nome']}]]" in txt
-
-
 @pytest.mark.skipif(not shutil.which("node"), reason="node assente")
-def test_anti_drift_matchescond(tmp_path):
-    """Anti-drift: la logica dei comparatori 'matchesCond' è duplicata in views.js
-    e meta_actions.js (script autonomi, niente modulo condiviso). Questo guard
-    verifica che (1) le due copie diano risultati IDENTICI sugli stessi input, e
-    (2) l'invariante preset↔match regga: per ogni archetipo reale i valori-assi
-    derivati da create_entity.presetValori soddisfano matchesCond sul 'quando'."""
-    vectors = [(5, ">=4"), (3, ">=4"), (2, "<=2"), (5, ">3"), (3, "<3"), (4, "4"),
-               (4, "==4"), (3, "2-4"), (5, "2-4"), (1, "3"), ("x", ">=2"), (None, "4")]
+def test_preset_satisfies_matchescond(tmp_path):
+    """Invariante preset↔match: per ogni archetipo reale i valori-assi derivati da
+    create_entity.presetValori soddisfano matchesCond sul suo 'quando'. (La parità
+    BYTE di matchesCond fra views.js/meta_actions.js, sorgente unica _comparators.js,
+    è imposta da check()/test_check_passes — qui resta solo l'invariante semantica.)"""
     archetipi = [a for lst in (CORE.get("archetipi") or {}).values() for a in lst]
-    harness = tmp_path / "drift.js"
+    harness = tmp_path / "preset.js"
     harness.write_text(
         'const fs=require("fs");'
         'function load(p){const s=fs.readFileSync(p,"utf8");const m={exports:{}};'
         'new Function("module","exports",s)(m,m.exports);return m.exports;}'
         f'const views=load({json.dumps(str(render.JS_DIR / "views.js"))});'
-        f'const meta=load({json.dumps(str(render.JS_DIR / "meta_actions.js"))});'
         f'const crea=require({json.dumps(str(render.JS_DIR / "create_entity.js"))});'
-        f'const vec={json.dumps(vectors)};'
         f'const archs={json.dumps(archetipi, ensure_ascii=False)};'
-        'const diff=vec.filter(([v,c])=>Boolean(views.matchesCond(v,c))!==Boolean(meta.matchesCond(v,c)));'
         'const inv=[];'
         'for(const a of archs){const vals=crea.presetValori(a);'
         'for(const [ax,cond] of Object.entries(a.quando||{})){'
         'if((ax in vals)&&!views.matchesCond(vals[ax],cond)) inv.push((a.nome||"?")+":"+ax);}}'
-        'process.stdout.write(JSON.stringify({diff, inv}));',
+        'process.stdout.write(JSON.stringify({inv}));',
         encoding="utf-8")
     res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
     assert res.returncode == 0, res.stderr
     out = json.loads(res.stdout)
-    assert out["diff"] == [], f"matchesCond diverge tra views e meta_actions: {out['diff']}"
     assert out["inv"] == [], f"preset non soddisfa matchesCond: {out['inv']}"
     assert archetipi, "nessun archetipo: l'invariante preset↔match non è stata esercitata"
-
-
-def test_comparators_single_source():
-    """matchesCond ha una sorgente canonica (_comparators.js); le copie in views.js
-    e meta_actions.js coincidono byte-a-byte (anti-drift strutturale imposto da
-    check(), oltre al guard runtime di test_anti_drift_matchescond)."""
-    import validate as _v
-    canonical = _v.marked_block((render.JS_DIR / "_comparators.js").read_text(encoding="utf-8"), "matchesCond")
-    assert canonical, "blocco canonico matchesCond mancante in _comparators.js"
-    for name in ("views.js", "meta_actions.js"):
-        block = _v.marked_block((render.JS_DIR / name).read_text(encoding="utf-8"), "matchesCond")
-        assert block == canonical, f"{name}: matchesCond diverge dalla sorgente canonica _comparators.js"
-
-
-def test_homebrew_bridge_single_source():
-    """Il ponte homebrew ha una sorgente canonica (_homebrew_bridge.js); le copie in
-    crea_pg.js e sali_pg.js coincidono byte-a-byte — così creazione e level-up non
-    possono divergere sulle regole homebrew (anti-drift imposto anche da check())."""
-    import validate as _v
-    canonical = _v.marked_block((render.JS_DIR / "_homebrew_bridge.js").read_text(encoding="utf-8"), "homebrew-bridge")
-    assert canonical, "blocco canonico homebrew-bridge mancante in _homebrew_bridge.js"
-    for name in ("crea_pg.js", "sali_pg.js"):
-        block = _v.marked_block((render.JS_DIR / name).read_text(encoding="utf-8"), "homebrew-bridge")
-        assert block == canonical, f"{name}: ponte homebrew diverge dalla sorgente canonica _homebrew_bridge.js"
-
-
-def test_relations_single_source():
-    """reciprocalField/inverseRelation hanno una sorgente canonica (_relations.js); le copie
-    in meta_actions.js (Collega) e create_entity.js (inversi nel wizard) coincidono byte-a-byte
-    — così l'inverso a creazione e quello di Collega non possono divergere."""
-    import validate as _v
-    canonical = _v.marked_block((render.JS_DIR / "_relations.js").read_text(encoding="utf-8"), "relations")
-    assert canonical, "blocco canonico relations mancante in _relations.js"
-    for name in ("meta_actions.js", "create_entity.js"):
-        block = _v.marked_block((render.JS_DIR / name).read_text(encoding="utf-8"), "relations")
-        assert block == canonical, f"{name}: inverseRelation diverge dalla sorgente canonica _relations.js"
 
 
 @pytest.mark.skipif(not shutil.which("node"), reason="node assente")
@@ -2525,35 +2415,6 @@ def test_build_site_no_spoiler_leak(tmp_path):
 
 
 # --- Mappa mondo-esempio + asset sito ---------------------------------------
-def test_example_world_map_embed():
-    """Il nodo «Mercato di Sale» espone la mappa: campo `mappa` in frontmatter
-    (engine-faithful, lo legge views.renderMap) ed embed `![[..]]` nel corpo
-    (rende sempre, senza plugin)."""
-    man = render.load_example_manifests()[0]
-    notes = render.example_world_notes(man, CORE)
-    txt = next(t for r, t in notes if r.endswith("Mercato di Sale.md"))
-    assert "mappa: '[[mercato_di_sale.svg]]'" in txt
-    assert "## Mappa" in txt and "![[mercato_di_sale.svg]]" in txt
-
-
-def test_example_media_assets_exist():
-    """Anti-link-morti: ogni asset-immagine referenziato dai manifest (mappa/
-    ritratto/banner) esiste davvero sotto Dev/Source/esempio/Media/."""
-    media_dir = render.ESEMPIO_DIR / "Media"
-    missing = []
-    for man in render.load_example_manifests():
-        for note in man.get("note", []) or []:
-            for key in ("mappa", "ritratto", "banner"):
-                val = (note.get("fm", {}) or {}).get(key)
-                if not val:
-                    continue
-                name = str(val).strip().lstrip("[").rstrip("]").split("|")[0].strip()
-                if Path(name).suffix.lower() in build_site._IMG_EXT:
-                    if not (media_dir / Path(name).name).is_file():
-                        missing.append((man["mondo"], note.get("nome"), name))
-    assert not missing, f"asset mancanti in {media_dir}: {missing}"
-
-
 def test_site_image_embed_preserves_underscores():
     """L'embed-immagine diventa `<img>` con la src INTATTA (regressione: il filtro
     corsivo mangiava gli `_` dentro src/alt). Gli embed di NOTE restano inerti."""
@@ -2597,34 +2458,6 @@ def test_build_site_copies_referenced_assets(tmp_path):
     assert (out / "media" / "sigillo.png").is_file()
 
 
-def test_example_world_carattere_radar():
-    """Le fazioni del mondo-esempio espongono il «Carattere»: callout read-only con
-    `valore · etichetta` per asse (dalle etichette di core.assi_tematici) + il radar
-    js-engine. Sul sito-giocatori il blocco intero (callout + fence) viene rimosso."""
-    man = render.load_example_manifests()[0]
-    notes = render.example_world_notes(man, CORE)
-    txt = next(t for r, t in notes if r.endswith("La Setta della Voragine.md"))
-    assert "> [!abstract] Carattere" in txt
-    assert "**Coesione** — 5 · Organico" in txt        # etichetta fedele alla lore
-    assert '.radar(engine, app, "fazione", component)' in txt
-    assert "```js-engine" in txt
-    # Sul sito: callout GM + fence dinamico spariscono (niente assi/etichette/radar).
-    _, body = build_site.parse_note(txt)
-    stripped = build_site.strip_body(body)
-    for leak in ["Carattere", "Organico", "js-engine", "radar(", "Esemplare"]:
-        assert leak not in stripped, leak
-
-
-def test_example_carattere_block_skips_thin_categories():
-    """Il blocco Carattere esce solo con >=3 assi valorizzati: una categoria senza
-    assi (o con <3) non emette callout né radar (no filler sui luoghi ecc.)."""
-    assert render.example_carattere_block({}, "luogo", CORE) == []
-    assert render.example_carattere_block({"struttura": 4, "scopo": 5}, "fazione", CORE) == []
-    block = render.example_carattere_block(
-        {"struttura": 4, "scopo": 5, "legalita": 1}, "fazione", CORE)
-    assert block and any("```js-engine" in line for line in block)
-
-
 # --- Rivelazione progressiva (sito-giocatori v2) ----------------------------
 def test_reveal_rank_helpers():
     """Tier ordinati: nota senza/ignoto → pubblico(0); build `tutto` → max."""
@@ -2659,17 +2492,6 @@ def test_site_reveal_gating(tmp_path):
     # tutto: tutte e tre.
     assert build_site.build_site(CORE, tmp_path / "vault", out, reveal="tutto") == 3
     assert (out / "verita.html").is_file()
-
-
-def test_example_world_reveal_tiers():
-    """Il mondo-esempio dimostra i tier: Vorth (verità nascosta) = segreto, La
-    Voragine (scoperta scendendo) = incontrato — i campi sono nel frontmatter."""
-    man = render.load_example_manifests()[0]
-    notes = dict(render.example_world_notes(man, CORE))
-    vorth = next(t for r, t in notes.items() if r.endswith("Vorth il Sepolto.md"))
-    voragine = next(t for r, t in notes.items() if r.endswith("La Voragine.md"))
-    assert "rivelazione: segreto" in vorth
-    assert "rivelazione: incontrato" in voragine
 
 
 def test_occhi_giocatore_dashboard():
@@ -2728,15 +2550,6 @@ def test_site_section_reveal_integration(tmp_path):
     assert "CRIPTA_NASCOSTA" not in (out / "rocca.html").read_text(encoding="utf-8")
     build_site.build_site(CORE, tmp_path / "vault", out, reveal="segreto")
     assert "CRIPTA_NASCOSTA" in (out / "rocca.html").read_text(encoding="utf-8")
-
-
-def test_example_world_section_reveal():
-    """Il mondo-esempio dimostra il per-sezione: Forte Cenere (pubblica) ha un
-    callout `[!rivela|segreto]` con la verità sotto le cantine."""
-    man = render.load_example_manifests()[0]
-    notes = dict(render.example_world_notes(man, CORE))
-    forte = next(t for r, t in notes.items() if r.endswith("Forte Cenere.md"))
-    assert "[!rivela|segreto]" in forte and "sogna sotto le cantine" in forte
 
 
 # --- Release / distribuzione (release.py) ------------------------------------
@@ -2815,68 +2628,6 @@ def test_tour_crea_il_tuo_mondo():
 
 
 # --- World Board (Obsidian Canvas) ------------------------------------------
-def test_world_board_canvas():
-    """Il World Board del mondo-esempio: una card-file per entità, gruppi per
-    categoria, archi dalle relazioni tipizzate; JSON Canvas valido e deterministico."""
-    man = render.load_example_manifests()[0]
-    board = render.world_board_canvas(man, CORE)
-    nodes, edges = board["nodes"], board["edges"]
-    ids = {n["id"] for n in nodes}
-    assert len(ids) == len(nodes)                                  # ID unici
-    files = [n for n in nodes if n["type"] == "file"]
-    entities = [n for n in man["note"] if n.get("categoria") in CORE["categories"] and n.get("nome")]
-    assert len(files) == len(entities) and files                   # una card per entità
-    folder = f"Mondi/_Esempio — {man['mondo']}/"
-    assert all(n["file"].startswith(folder) and n["file"].endswith(".md") for n in files)
-    for n in nodes:                                                 # campi obbligatori (spec 1.0)
-        assert all(k in n for k in ("id", "type", "x", "y", "width", "height"))
-    assert edges and all(e["fromNode"] in ids and e["toNode"] in ids for e in edges)
-    assert all(e.get("label") for e in edges)                      # archi = relazioni etichettate
-    assert render.world_board_canvas(man, CORE) == board           # deterministico
-
-
-def test_example_board_source_override(tmp_path, monkeypatch):
-    """example_board_text: senza sorgente auto-genera un canvas valido; con una
-    versione SORGENTE disposta a mano (Dev/Source/esempio/<Mondo> — Board.canvas) la
-    usa VERBATIM → la vetrina curata a mano è preservata dai rebuild."""
-    import example_world
-    monkeypatch.setattr(example_world, "ESEMPIO_DIR", tmp_path)
-    man = {"mondo": "MondoTest"}
-    auto = example_world.example_board_text(man, CORE)         # nessuna sorgente → auto
-    j = json.loads(auto)
-    assert "nodes" in j and "edges" in j
-    (tmp_path / "MondoTest — Board.canvas").write_text("CANVAS-A-MANO", encoding="utf-8")
-    assert example_world.example_board_text(man, CORE) == "CANVAS-A-MANO"  # sorgente verbatim
-
-
-@pytest.mark.skipif(not shutil.which("node"), reason="node assente")
-def test_world_board_parita_js(tmp_path):
-    """world_board.buildCanvas (azione runtime sui mondi dell'utente) e
-    world_board_canvas (build-time, mondo-esempio) producono il MEDESIMO canvas sui
-    medesimi dati: stesso algoritmo, stesse costanti, stessi colori (core.canvas_colors).
-    Anti-drift fra il gemello JS e il sorgente Python."""
-    man = render.load_example_manifests()[0]
-    py_board = render.world_board_canvas(man, CORE)
-    folder = f"{render.EXAMPLE_FOLDER_PREFIX}{man['mondo']}"
-    notes = [{"nome": n["nome"], "categoria": n.get("categoria"),
-              "fm": n.get("fm", {}), "path": f"{folder}/{n['nome']}.md"}
-             for n in man["note"]]
-    opts = {"categories": CORE["categories"], "relazioni": CORE["relazioni"],
-            "colors": render.canvas_colors(), "world": man["mondo"]}
-    harness = tmp_path / "board.js"
-    harness.write_text(
-        'const fs=require("fs");'
-        f'const src=fs.readFileSync({json.dumps(str(render.JS_DIR / "world_board.js"))},"utf8");'
-        'const m={exports:{}};new Function("module","exports",src)(m,m.exports);'
-        f'const notes={json.dumps(notes, ensure_ascii=False)};'
-        f'const opts={json.dumps(opts, ensure_ascii=False)};'
-        'process.stdout.write(JSON.stringify(m.exports.buildCanvas(notes, opts)));',
-        encoding="utf-8")
-    res = subprocess.run(["node", str(harness)], capture_output=True, text=True)
-    assert res.returncode == 0, res.stderr
-    assert json.loads(res.stdout) == py_board       # parità JS ↔ Python
-
-
 @pytest.mark.skipif(not shutil.which("node"), reason="node assente")
 def test_world_board_runtime_e2e(tmp_path):
     """world_board (azione runtime, mock Obsidian): enumera le note del mondo scelto

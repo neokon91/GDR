@@ -17,6 +17,11 @@
 > **Visibilità** *(dm = solo DM, fuori dal sito giocatori)*: `INPUT[inlineSelect(option(normale), option(dm)):visibilita]`
 > **Rivelazione**: `INPUT[rivelazione][:rivelazione]`
 
+> [!info]- ℹ️ Guida — Talento
+> **Cos'è** · Un talento che un PG può prendere a creazione o salendo di livello, coi suoi benefici meccanici.
+> **Campi chiave** · **Categoria** (Origine dal background; Generale richiede liv. 4+) e **Prerequisito**; segna **Ripetibile** se cumulabile.
+
+
 ````tabs
 --- 📋 Scheda
 

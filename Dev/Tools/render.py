@@ -1,10 +1,9 @@
 #!/usr/bin/env python3
 """Orchestratore della pipeline GDR: genera il vault Obsidian in dist/GDR-vault
 dalle sorgenti YAML/Jinja/JS. Il modello dati e l'IO stanno in common.py, la
-generazione SRD in build_srd.py, la validazione in validate.py, la config
-.obsidian/presentazione in render_config.py e il mondo-esempio/World Board in
-example_world.py; qui restano la build()/render_notes (render template + dati JS
-Engine), clean()/scaffold() e la CLI.
+generazione SRD in build_srd.py, la validazione in validate.py e la config
+.obsidian/presentazione in render_config.py; qui restano la build()/render_notes
+(render template + dati JS Engine), clean()/scaffold() e la CLI.
 
 Re-esporta i nomi pubblici dei moduli così i test (e gli usi storici) possono
 continuare a riferirli come render.<nome>."""
@@ -21,7 +20,6 @@ import yaml
 from jinja2 import Environment, FileSystemLoader, StrictUndefined
 
 from common import (  # noqa: F401 (re-export per i test/usi storici)
-    ESEMPIO_DIR,
     GENERATED_DIRS,
     GENERATED_NOTES,
     HIDDEN_DIRS,
@@ -40,7 +38,6 @@ from common import (  # noqa: F401 (re-export per i test/usi storici)
     load_core,
     load_core_parts,
     load_entities,
-    load_example_manifests,
     load_pages,
     load_templates,
     load_yaml,
@@ -110,18 +107,6 @@ from render_config import (  # noqa: F401 (re-export per i test/usi storici)
     write_statblock_layouts,
     write_tab_panels,
     write_workspace_chrome,
-)
-from example_world import (  # noqa: F401 (re-export per i test/usi storici)
-    EXAMPLE_FOLDER_PREFIX,
-    copy_example_media,
-    example_board_text,
-    example_carattere_block,
-    example_note_text,
-    example_world_notes,
-    onboarding_note_text,
-    pressione_label,
-    world_board_canvas,
-    write_example_world,
 )
 
 
@@ -354,11 +339,6 @@ def build() -> dict[str, str]:
 
     write_obsidian_config(VAULT / ".obsidian", core, plugins, templates, pages)
     scaffold_folders(core)
-    # Mondo-esempio (demo precaricata): al primo avvio le dashboard non sono vuote.
-    # Cartella riservata `Mondi/_Esempio — <Mondo>/`, cancellabile in un clic.
-    example_count = write_example_world(core)
-    if example_count:
-        print(f"Mondo-esempio: {example_count} note generate in Mondi/_Esempio — */.")
     return rendered
 
 

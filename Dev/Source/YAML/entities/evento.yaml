@@ -99,3 +99,7 @@ creation:
   - field: eredita
     prompt: Cosa ne resta oggi (ganci vivi)
     heading: Eredità
+
+guida:
+  scopo: Un fatto realmente accaduto nel mondo, nodo della timeline causale (a differenza del mito, che è racconto).
+  campi_chiave: '**Tipo** + **Quando** (data del mondo); **Causato da** / **Conseguenze** per agganciare la catena causale che muove la cronologia.'

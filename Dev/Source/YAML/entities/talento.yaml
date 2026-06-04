@@ -39,3 +39,7 @@ creation:
   - field: benefici
     prompt: Benefici del talento
     heading: Benefici
+
+guida:
+  scopo: Un talento che un PG può prendere a creazione o salendo di livello, coi suoi benefici meccanici.
+  campi_chiave: '**Categoria** (Origine dal background; Generale richiede liv. 4+) e **Prerequisito**; segna **Ripetibile** se cumulabile.'

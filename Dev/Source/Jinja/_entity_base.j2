@@ -14,10 +14,10 @@
 {% if core.get('categories', {}).get(template.category, {}).get('famiglie') %}
 {{ m.classificazione(template.category) }}
 {% endif %}
+{{ m.guida(template.category, template.title) }}
 ````tabs
 --- 📖 Lore
 
-{% if core.get('spunti', {}).get(template.category) %}{{ m.spunti(template.category) }}{% endif %}
 {% block lore %}
 {{ m.scheda(template.category) }}
 {% if not core.get('creation', {}).get(template.category, {}).get('body') %}
@@ -29,7 +29,7 @@
 {% endblock %}
 --- 🎲 Al tavolo
 
-{{ m.tavolo() }}
+{{ m.tavolo(template.category) }}
 {% if core.get('assi_tematici', {}).get(template.category) %}
 --- 📊 Carattere
 

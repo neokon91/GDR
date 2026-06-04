@@ -23,6 +23,11 @@
 > **Visibilità** *(dm = solo DM, fuori dal sito giocatori)*: `INPUT[inlineSelect(option(normale), option(dm)):visibilita]`
 > **Rivelazione**: `INPUT[rivelazione][:rivelazione]`
 
+> [!info]- ℹ️ Guida — PG
+> **Cos'è** · Una persona del mondo — PG giocabile o PNG da interpretare (lo stesso tipo serve entrambi).
+> **Campi chiave** · **Tipo** (pg/png); per i PNG il **Ruolo narrativo** (alleato, mentore, rivale…) e l'**Affiliazione** (fazione); **Allineamento** per la bussola morale.
+> **Spunti** · Cosa vuole, e cosa lo ferma? Un segreto, una paura, una contraddizione. Come può intrecciarsi con i personaggi giocanti?
+
 ````tabs
 --- 📋 Scheda
 
@@ -97,27 +102,27 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > [!tip]- Tiri
 > Normale `dice: 1d20` · Vantaggio `dice: 2d20kh1` · Svantaggio `dice: 2d20kl1`
 > [!abstract] Sistema
-> **Classe**: `VIEW[{classe} ?? "—"]` · **Specie**: `VIEW[{specie} ?? "—"]` · **Background**: `VIEW[{background} ?? "—"]`
+> **Classe**: `= default(this.classe, "—")` · **Specie**: `= default(this.specie, "—")` · **Background**: `= default(this.background, "—")`
 >
-> **Taglia**: `VIEW[{taglia} ?? "—"]` · **Velocità**: `VIEW[{velocita} ?? "—"]` m · **Scurovisione**: `VIEW[{scurovisione} ?? "—"]`
+> **Taglia**: `= default(this.taglia, "—")` · **Velocità**: `= default(this.velocita, "—")` m · **Scurovisione**: `= default(this.scurovisione, "—")`
 >
-> **Armatura**: `VIEW[{armatura} ?? "—"]` · **Scudo**: `VIEW[{scudo} ?? "—"]`
+> **Armatura**: `= default(this.armatura, "—")` · **Scudo**: `= default(this.scudo, "—")`
 >
-> **TS competenti**: `VIEW[{ts_competenti} ?? "—"]` · **Competenze (abilità)**: `VIEW[{competenze_abilita} ?? "—"]`
+> **TS competenti**: `= default(this.ts_competenti, "—")` · **Competenze (abilità)**: `= default(this.competenze_abilita, "—")`
 >
-> **Armi**: `VIEW[{competenze_armi} ?? "—"]` · **Armature**: `VIEW[{competenze_armature} ?? "—"]` · **Strumenti**: `VIEW[{competenze_strumenti} ?? "—"]`
+> **Armi**: `= default(this.competenze_armi, "—")` · **Armature**: `= default(this.competenze_armature, "—")` · **Strumenti**: `= default(this.competenze_strumenti, "—")`
 >
-> **Lingue**: `VIEW[{lingue} ?? "—"]`
+> **Lingue**: `= default(this.lingue, "—")`
 >
-> **Privilegi di classe**: `VIEW[{privilegi_classe} ?? "—"]` · **Talenti**: `VIEW[{talenti} ?? "—"]`
+> **Privilegi di classe**: `= default(this.privilegi_classe, "—")` · **Talenti**: `= default(this.talenti, "—")`
 >
-> **Tratti di specie**: `VIEW[{tratti_specie} ?? "—"]`
+> **Tratti di specie**: `= default(this.tratti_specie, "—")`
 
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderSpecieTratti");
 ```
 > [!note]- Inventario
-> `VIEW[{inventario} ?? "—"]`
+> `= default(this.inventario, "—")`
 
 ```js-engine
 return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, container, "renderIncantesimi");
@@ -206,6 +211,7 @@ return (await engine.importJs("z.automazioni/boot.mjs")).panel(engine, app, cont
 > [!tip] Avanza / scatena
 > Una spinta dal grafo o una mossa? `BUTTON[avanza-fronte]` (clock +1).
 > Clock pieno? `BUTTON[scatena-conseguenza]` — crea l'evento-conseguenza collegato e azzera il clock.
+
 > [!info]- 👁 Condivisione coi giocatori
 > Quando questa nota entra nel **sito dei giocatori** (`npm run site -- --reveal <livello>`): `INPUT[rivelazione][:rivelazione]`
 >
